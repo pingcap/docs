@@ -1,11 +1,13 @@
 ---
 title: TLS Connections to Dedicated Tier
-summary: Introduce TLS connection in TiDB Dedicated Tier.
+summary: Introduce TLS connections in TiDB Dedicated Tier.
 ---
 
 # TLS Connections to Dedicated Tier
 
-On TiDB Cloud, TLS connections are one of the basic security practices for connecting to Dedicated Tier clusters. We support you to configure multiple TLS connections from client, application and development tools to protect your data transmission security. Dedicated Tier cluster only supports TLS 1.2 and TLS 1.3, and does not support TLS 1.0 and TLS 1.1 versions.
+On TiDB Cloud, establishing TLS connections is one of the basic security practices for connecting to Dedicated Tier clusters. You can configure multiple TLS connections from your client, application, and development tools to your Dedicated Tier cluster to protect data transmission security. 
+
+For security reasons, TiDB Cloud Dedicated Tier only supports TLS 1.2 and TLS 1.3, and does not support TLS 1.0 and TLS 1.1 versions.
 
 For each Dedicated Tier cluster, the server TLS certificate is hosted on [AWS Certificate Manager (ACM)](https://aws.amazon.com/certificate-manager/). ACM Private CA keys are stored securely in AWS-managed hardware security modules (HSMs) that meet [FIPS 140-2 Level 3](https://csrc.nist.gov/projects/cryptographic-module-validation-program/Certificate/3139) security standards to protect your TLS private keys when Dedicated Tier requests AWS ACM to create it.
 
@@ -23,7 +25,7 @@ In the [TiDB Cloud console](https://tidbcloud.com/), you can get examples of dif
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, and then click the name of your Dedicated Tier cluster to go to its overview page.
 
-2. Click **Connect** in the upper-right corner.  A dialog is displayed.
+2. Click **Connect** in the upper-right corner. A dialog is displayed.
 
 3. On the **Standard Connection** tab of this dialog, follow the three steps to set up the TLS connctions.
    - Step 1：Create traffic filter
@@ -32,7 +34,12 @@ In the [TiDB Cloud console](https://tidbcloud.com/), you can get examples of dif
 
 4. Under **Step 1：Create traffic filter** in the dialog, configure the IP addresses that are allowed to access your cluster. For more information, see [Configure an IP access list in standard connection](/tidb-cloud/configure-ip-access-list.md#configure-an-ip-access-list-in-standard-connection).
 
-5. Under **Step 2: Download TiDB cluster CA**, click **Download TiDB Cluster CA** to download it locally for client TLS configuration. Verifying the TiDB cluster CA can ensure the TLS connection is secure and reliable.
+5. Under **Step 2: Download TiDB cluster CA**, click **Download TiDB cluster CA** to download it locally for client TLS configuration. Verifying the TiDB cluster CA can ensure the TLS connection is secure and reliable.
+
+    > **Note:**
+    > 
+    > After downloading your Dedicated Tier cluster CA, you can store it in the default storage path of your operating system, or specify another storage path. Make sure that you need to replace the CA path in the code example with your own cluster CA path in the subsequent steps. 
+
 
 6. Under **Step 3: Connect with an SQL client** in the dialog, click the tab of your preferred connection method, and then refer to the connection string and sample code on the tab to connect to your cluster.
 
@@ -50,7 +57,7 @@ mysql --connect-timeout 15 --ssl-mode=VERIFY_IDENTITY --ssl-ca=ca.pem --tls-vers
 Parameter description：
 
 - With `--ssl-mode=VERIFY_IDENTITY`, MySQL CLI client forces to enable TLS and validate TiDB Dedicated Tier clusters.
-- Use `--ssl-ca=<CA_root_path>` to set the CA root path on your system.
+- Update `ca.pem` in `--ssl-ca=ca.pem` to your local path of the downloaded TiDB cluster CA.
 - Use `--tls-version=TLSv1.2` to restrict the versions of TLS protocol.
 
 </div>
@@ -65,7 +72,7 @@ mycli --ssl-ca=ca.pem --ssl-verify-server-cert -u root -h tidb.eqlfbdgthh8.clust
 
 Parameter description：
 
-- Use `--ssl-ca=<CA_root_path>` to set the CA root path on your system.
+- Update `ca.pem` in `--ssl-ca=ca.pem` to your local path of the downloaded TiDB cluster CA.
 - With `--ssl-verify-server-cert` to validate TiDB Dedicated Tier clusters.
 
 </div>
@@ -74,7 +81,7 @@ Parameter description：
 
 [MySQL Connector/J](https://dev.mysql.com/doc/connector-j/8.0/en/)'s TLS connection configurations are used here as an example.
 
-After downloaded TiDB cluster CA,if you want to import it into your operating system,Please refer to the command **keytool -importcert -alias TiDBCACert -file ca.pem -keystore <your_custom_truststore_path> -storepass <your_truststore_password>** 
+After downloading TiDB cluster CA, if you want to import it into your operating system, you can use the `keytool -importcert -alias TiDBCACert -file ca.pem -keystore <your_custom_truststore_path> -storepass <your_truststore_password>` command.
 
 ```shell
 /* Be sure to replace the parameters in the following connection string. */
@@ -142,7 +149,7 @@ with connection:
 Parameter description：
 
 - Set `ssl_mode="VERIFY_IDENTITY"` to enable TLS and validate TiDB Dedicated Tier clusters.
-- Set `ssl={"ca": "<CA_root_path>"}` to set the CA root path on your system.
+- Update `ca.pem` in `ssl={"ca": "ca.pem"}` to your local path of the downloaded TiDB cluster CA.
 
 </div>
 
@@ -222,7 +229,7 @@ Parameter description：
 
 <div label="Node.js">
 
-[Mysql](https://www.npmjs.com/package/mysql2)'s TLS connection configurations are used here as an example.
+[Mysql2](https://www.npmjs.com/package/mysql2)'s TLS connection configurations are used here as an example.
 
 ```
 var connection = mysql.createConnection({
@@ -279,19 +286,11 @@ Parameter description：
 </div>
 </SimpleTab>
 
-## Create and Reset Dedicated database password
-
-When you connect to your cluster for the first time, you should click **Security Setting** to automatically generate a root password with a length of 16 characters, including numbers, uppercase and lowercase characters, and special characters. 
-
 ## Root Digital certificate management of Dedicated Tier 
 
 ### Root Digital certificate‘s issuance and validity  
 
-TiDB Dedicated Tier uses certificates from [AWS Certificate Manager (ACM)](https://aws.amazon.com/certificate-manager/) as a Certificate Authority (CA) for TLS connection between clients and TiDB Dedicated Tier clusters. Usually, the root certificate of ACM are stored securely in AWS managed hardware security modules (HSMs) that adhere to [FIPS 140-2 Level 3](https://csrc.nist.gov/projects/cryptographic-module-validation-program/Certificate/3139) security standards. 
-
-> **Note:**
->
-After you download your Dedicated Tier cluster CA to the local operating system, you can store it in the system default storage directory, or customize the TiDB Cluster CA storage directory. It should be noted that you need to add your local real TiDB Cluster CA path to the code example.
+TiDB Dedicated Tier uses certificates from [AWS Certificate Manager (ACM)](https://aws.amazon.com/certificate-manager/) as a Certificate Authority (CA) for TLS connections between clients and TiDB Dedicated Tier clusters. Usually, the root certificates of ACM are stored securely in AWS-managed hardware security modules (HSMs) that meet [FIPS 140-2 Level 3](https://csrc.nist.gov/projects/cryptographic-module-validation-program/Certificate/3139) security standards. 
 
 ## FAQs
 
