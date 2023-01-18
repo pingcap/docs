@@ -33,10 +33,7 @@ In this document, you can migrate data following this procedure:
 Before getting started, see the following documents to prepare for the migration task.
 
 - [Deploy a DM Cluster Using TiUP](/dm/deploy-a-dm-cluster-using-tiup.md)
-- [Use TiUP to Deploy Dumpling and Lightning](/migration-tools.md)
 - [Privileges required by DM-worker](/dm/dm-worker-intro.md)
-- [Upstream Permissions for Lightning](/tidb-lightning/tidb-lightning-faq.md#what-are-the-privilege-requirements-for-the-target-database)
-- [Downstream Permissions for Dumpling](/dumpling-overview.md#export-data-from-tidbmysql)
 
 ### Resource requirements
 

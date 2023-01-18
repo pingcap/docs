@@ -176,7 +176,7 @@ To restore data from an older version, you can use one of the following methods:
 
 <CustomContent platform="tidb">
 
-- Use [Dumpling](/dumpling-overview.md#export-historical-data-snapshot-of-tidb) to export a historical snapshot. Dumpling performs well in exporting larger sets of data.
+- Use [Dumpling](/dumpling-overview.md#export-historical-data-snapshots-of-tidb) to export a historical snapshot. Dumpling performs well in exporting larger sets of data.
 
 </CustomContent>
 
