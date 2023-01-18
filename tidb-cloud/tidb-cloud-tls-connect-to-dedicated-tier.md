@@ -9,7 +9,7 @@ On TiDB Cloud, establishing TLS connections is one of the basic security practic
 
 For security reasons, TiDB Cloud Dedicated Tier only supports TLS 1.2 and TLS 1.3, and does not support TLS 1.0 and TLS 1.1 versions.
 
-For each Dedicated Tier cluster, the server TLS certificate is hosted on [AWS Certificate Manager (ACM)](https://aws.amazon.com/certificate-manager/). ACM Private CA keys are stored securely in AWS-managed hardware security modules (HSMs) that meet [FIPS 140-2 Level 3](https://csrc.nist.gov/projects/cryptographic-module-validation-program/Certificate/3139) security standards to protect your TLS private keys when Dedicated Tier requests AWS ACM to create it.
+For each Dedicated Tier cluster,  TiDB cluster CA is hosted on [AWS Certificate Manager (ACM)](https://aws.amazon.com/certificate-manager/).  TiDB cluster Private keys are stored securely in AWS-managed hardware security modules (HSMs) that meet [FIPS 140-2 Level 3](https://csrc.nist.gov/projects/cryptographic-module-validation-program/Certificate/3139) security standards to protect your private keys.
 
 ## Prerequisites
 
@@ -57,8 +57,8 @@ mysql --connect-timeout 15 --ssl-mode=VERIFY_IDENTITY --ssl-ca=ca.pem --tls-vers
 Parameter description：
 
 - With `--ssl-mode=VERIFY_IDENTITY`, MySQL CLI client forces to enable TLS and validate TiDB Dedicated Tier clusters.
-- Update `ca.pem` in `--ssl-ca=ca.pem` to your local path of the downloaded TiDB cluster CA.
-- Use `--tls-version=TLSv1.2` to restrict the versions of TLS protocol.
+- Update `ca.pem` in `--ssl-ca=<CA_path>` to your local path of the downloaded TiDB cluster ca.pem.
+- Use `--tls-version=TLSv1.2` to restrict the versions of TLS protocol，if you want to use TLS 1.3, just set the TLS-version to TLS1.3.
 
 </div>
 
@@ -72,7 +72,7 @@ mycli --ssl-ca=ca.pem --ssl-verify-server-cert -u root -h tidb.eqlfbdgthh8.clust
 
 Parameter description：
 
-- Update `ca.pem` in `--ssl-ca=ca.pem` to your local path of the downloaded TiDB cluster CA.
+- Update `ca.pem` in `--ssl-ca=<CA_path>` to your local path of the downloaded TiDB cluster ca.pem.
 - With `--ssl-verify-server-cert` to validate TiDB Dedicated Tier clusters.
 
 </div>
@@ -118,7 +118,7 @@ class Main {
 Parameter description：
 
 - Set `sslMode=VERIFY_IDENTITY` to enable TLS and validate TiDB Dedicated Tier clusters.
-- Set `enabledTLSProtocols=TLSv1.2` to restrict the versions of TLS protocol.
+- Set `enabledTLSProtocols=TLSv1.2` to restrict the versions of TLS protocol,if you want to use TLS 1.3, just set the TLS-version to TLS1.3.
 - Set `trustCertificateKeyStoreUrl` to your custom truststore path.
 - Set `trustCertificateKeyStorePassword` to your truststore password.
 
@@ -149,7 +149,7 @@ with connection:
 Parameter description：
 
 - Set `ssl_mode="VERIFY_IDENTITY"` to enable TLS and validate TiDB Dedicated Tier clusters.
-- Update `ca.pem` in `ssl={"ca": "ca.pem"}` to your local path of the downloaded TiDB cluster CA.
+- Update `ca.pem` in `ssl={"ca": "<CA_path>"}` via your local CA path of the downloaded TiDB cluster ca.pem.
 
 </div>
 
@@ -220,7 +220,7 @@ func main() {
 
 Parameter description：
 
-- Register `tls.Config` in connection to enable TLS and validate TiDB Dedicated Tier clusters. 
+- Register `tls.Config` in TLS connection configuration to enable TLS and validate TiDB Dedicated Tier clusters. 
 - Set `MinVersion: tls.VersionTLS12` to restrict the versions of TLS protocol.
 - Set `ServerName: "<host>"` to verify TiDB Dedicated Tier's hostname.
 - If you do not want to register a new TLS configuration, you can just set `tls=true` in the connection string.
@@ -279,8 +279,8 @@ connection.connect(function(err) {
 
 Parameter description：
 
-- Set `ssl: {minVersion: 'TLSv1.2'}` to restrict the versions of TLS protocol.
-- Set `ssl: {ca: fs.readFileSync('ca.pem')}` to read the special path ca.pem.
+- Set `ssl: {minVersion: 'TLSv1.2'}` to restrict the versions of TLS protocol,if you want to use TLS 1.3, just set the TLS-version to TLS1.3.
+- Set `ssl: {ca: fs.readFileSync('<CA_path>')}` to read your local CA path of the downloaded TiDB cluster ca.pem.
 
 
 </div>
