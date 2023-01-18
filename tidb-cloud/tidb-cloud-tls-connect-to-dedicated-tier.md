@@ -280,7 +280,7 @@ connection.connect(function(err) {
 Parameter description：
 
 - Set `ssl: {minVersion: 'TLSv1.2'}` to restrict the versions of TLS protocol.
-- Set `ssl: {ca: fs.readFileSync('ca.pem')}` to read the special path ca.pem.
+- Set `ssl: {ca: fs.readFileSync('<CA_root_path>')}` to read the content of cert.
 
 
 </div>
