@@ -17,7 +17,7 @@ For Serverless Tier clusters, you can connect to your cluster via standard conne
 
     Serverless Tier only [supports TLS connections](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md), which ensures the security of data transmission from your applications to TiDB clusters.
 
-- Connect via [Chat2Query (beta)](/tidb-cloud/explore-data-with-chat2query.md)
+- [Connect via Chat2Query (beta)](/tidb-cloud/explore-data-with-chat2query.md)
 
     TiDB Cloud is powered by artificial intelligence (AI). You can use Chat2Query (beta), an AI-powered SQL editor in the [TiDB Cloud console](https://tidbcloud.com/), to maximize your data value.
 
