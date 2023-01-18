@@ -304,9 +304,3 @@ For security reasons, TiDB Cloud Dedicated Tier only supports TLS 1.2 and TLS 1.
 No.
 
 TiDB Cloud Dedicated Tier only supports one-way TLS authentication, which means your client uses the public key to verify the signature of your TiDB Cloud cluster certificate's private key while the cluster does not validate the client.
-
-### Does TiDB Dedicated Tier need to configure TLS to establish a secure TLS connection?
-
-Yes.
-
-TiDB Dedicated Tier allows TLS connections between client and server. The reason is that SSL/TLS is one of the most basic security measures for you to connect to the TiDB Dedicated Tier cluster via internet and intranet, so as to reduce the risk of data exposure to internet and intranet.
