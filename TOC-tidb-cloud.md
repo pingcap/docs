@@ -464,8 +464,26 @@
     - cluster 
       - [create](/tidb-cloud/cli/ticloud_cluster_create.md)
       - [delete](/tidb-cloud/cli/ticloud_cluster_delete.md)
-      - [list](/tidb-cloud/cli/ticloud_cluster_list.md)
       - [describe](/tidb-cloud/cli/ticloud_cluster_describe.md)
+      - [list](/tidb-cloud/cli/ticloud_cluster_list.md)
+    - config
+      - [create](/tidb-cloud/cli/ticloud_config_create.md)
+      - [delete](/tidb-cloud/cli/ticloud_config_delete.md)
+      - [describe](/tidb-cloud/cli/ticloud_config_describe.md)
+      - [edit](/tidb-cloud/cli/ticloud_config_edit.md)
+      - [list](/tidb-cloud/cli/ticloud_config_list.md)
+      - [set](/tidb-cloud/cli/ticloud_config_set.md)
+      - [use](/tidb-cloud/cli/ticloud_config_use.md)
+    - import
+      - [cancel](/tidb-cloud/cli/ticloud_import_cancel.md) 
+      - [describe](/tidb-cloud/cli/ticloud_import_describe.md)
+      - [list](/tidb-cloud/cli/ticloud_import_list.md)
+      - start
+        - [local](/tidb-cloud/cli/ticloud_import_start_local.md)
+        - [s3](/tidb-cloud/cli/ticloud_import_start_s3.md)
+    - project
+      - [list](/tidb-cloud/cli/ticloud_project_list.md)
+    - [update](/tidb-cloud/cli/ticloud_update.md)
   - [Dumpling](/dumpling-overview.md)
   - [Table Filter](/table-filter.md)
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
