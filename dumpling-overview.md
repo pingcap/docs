@@ -7,9 +7,27 @@ summary: Use the Dumpling tool to export data from TiDB.
 
 This document introduces the data export tool - [Dumpling](https://github.com/pingcap/dumpling). Dumpling exports data stored in TiDB/MySQL as SQL or CSV data files and can be used to make a logical full backup or export. Dumpling also supports exporting data to Amazon S3.
 
+<CustomContent platform="tidb">
+
 You can get Dumpling using [TiUP](/tiup/tiup-overview.md) by running `tiup install dumpling`. Afterwards, you can use `tiup dumpling ...` to run Dumpling.
 
-Dumpling is also included in the tidb-toolkit installation package and can be [download here](/download-ecosystem-tools.md#dumpling).
+The Dumpling installation package is included in the TiDB Toolkit. To download the TiDB Toolkit, see [Download TiDB Tools](/download-ecosystem-tools.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+You can install Dumpling using the following commands:
+
+```bash
+curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
+source ~/.bash_profile
+tiup install dumpling
+```
+
+In the above commands, you need to modify `~/.bash_profile` to the path of your profile file.
+
+</CustomContent>
 
 For detailed usage of Dumpling, use the `--help` option or refer to [Option list of Dumpling](#option-list-of-dumpling).
 
