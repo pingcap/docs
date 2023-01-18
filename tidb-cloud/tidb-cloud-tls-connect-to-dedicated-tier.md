@@ -7,7 +7,7 @@ summary: Introduce TLS connections in TiDB Dedicated Tier.
 
 On TiDB Cloud, establishing TLS connections is one of the basic security practices for connecting to Dedicated Tier clusters. You can configure multiple TLS connections from your client, application, and development tools to your Dedicated Tier cluster to protect data transmission security. For security reasons, TiDB Cloud Dedicated Tier only supports TLS 1.2 and TLS 1.3, and does not support TLS 1.0 and TLS 1.1 versions.
 
-TiDB cluster CA in your Dedicated Tier cluster is hosted on [AWS Certificate Manager (ACM)](https://aws.amazon.com/certificate-manager/) . TiDB cluster Private keys are stored securely in AWS-managed hardware security modules (HSMs) that meet [FIPS 140-2 Level 3](https://csrc.nist.gov/projects/cryptographic-module-validation-program/Certificate/3139) security standards to protect your private keys.
+To ensure data security, TiDB cluster CA for your Dedicated Tier cluster is hosted on [AWS Certificate Manager (ACM)](https://aws.amazon.com/certificate-manager/), and TiDB cluster private keys are stored in AWS-managed hardware security modules (HSMs) that meet [FIPS 140-2 Level 3](https://csrc.nist.gov/projects/cryptographic-module-validation-program/Certificate/3139) security standards.
 
 ## Prerequisites
 
@@ -55,8 +55,8 @@ mysql --connect-timeout 15 --ssl-mode=VERIFY_IDENTITY --ssl-ca=ca.pem --tls-vers
 Parameter description：
 
 - With `--ssl-mode=VERIFY_IDENTITY`, MySQL CLI client forces to enable TLS and validate TiDB Dedicated Tier clusters.
-- Update `ca.pem` in `--ssl-ca=<CA_path>` to your local path of the downloaded TiDB cluster ca.pem.
-- Use `--tls-version=TLSv1.2` to restrict the versions of TLS protocol, if you want to use TLS 1.3, just set the TLS-version to TLSv1.3.
+- Use `--ssl-ca=<CA_path>` to specify your local path of the downloaded TiDB cluster `ca.pem`.
+- Use `--tls-version=TLSv1.2` to restrict the versions of the TLS protocol. If you want to use TLS 1.3, you can set the version to `TLSv1.3`.
 
 </div>
 
@@ -70,7 +70,7 @@ mycli --ssl-ca=ca.pem --ssl-verify-server-cert -u root -h tidb.eqlfbdgthh8.clust
 
 Parameter description：
 
-- Update `ca.pem` in `--ssl-ca=<CA_path>` to your local path of the downloaded TiDB cluster ca.pem.
+- Use `--ssl-ca=<CA_path>` to specify your local path of the downloaded TiDB cluster `ca.pem`.
 - With `--ssl-verify-server-cert` to validate TiDB Dedicated Tier clusters.
 
 </div>
@@ -116,7 +116,7 @@ class Main {
 Parameter description：
 
 - Set `sslMode=VERIFY_IDENTITY` to enable TLS and validate TiDB Dedicated Tier clusters.
-- Set `enabledTLSProtocols=TLSv1.2` to restrict the versions of TLS protocol, if you want to use TLS 1.3, just set the TLS-version to TLSv1.3.
+- Set `enabledTLSProtocols=TLSv1.2` to restrict the versions of the TLS protocol. If you want to use TLS 1.3, you can set the version to `TLSv1.3`.
 - Set `trustCertificateKeyStoreUrl` to your custom truststore path.
 - Set `trustCertificateKeyStorePassword` to your truststore password.
 
@@ -147,7 +147,7 @@ with connection:
 Parameter description：
 
 - Set `ssl_mode="VERIFY_IDENTITY"` to enable TLS and validate TiDB Dedicated Tier clusters.
-- Update `ca.pem` in `ssl={"ca": "<CA_path>"}` via your local CA path of the downloaded TiDB cluster ca.pem.
+- Use `ssl={"ca": "<CA_path>"}` to specify your local path of the downloaded TiDB cluster `ca.pem`.
 
 </div>
 
@@ -277,8 +277,8 @@ connection.connect(function(err) {
 
 Parameter description：
 
-- Set `ssl: {minVersion: 'TLSv1.2'}` to restrict the versions of TLS protocol, if you want to use TLS 1.3, just set the TLS-version to TLSv1.3.
-- Set `ssl: {ca: fs.readFileSync('<CA_path>')}` to read your local CA path of the downloaded TiDB cluster ca.pem.
+- Set `ssl: {minVersion: 'TLSv1.2'}` to restrict the versions of the TLS protocol. If you want to use TLS 1.3, you can set the version to `TLSv1.3`.
+- Set `ssl: {ca: fs.readFileSync('<CA_path>')}` to read your local CA path of the downloaded TiDB cluster `ca.pem`.
 
 
 </div>
