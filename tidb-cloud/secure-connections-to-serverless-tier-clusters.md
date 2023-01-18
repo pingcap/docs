@@ -1,9 +1,9 @@
 ---
-title: TLS Connection to Serverless Tier
+title: TLS Connections to Serverless Tier
 summary: Introduce TLS connection in TiDB Serverless Tier.
 ---
 
-# TLS Connection to Serverless Tier
+# TLS Connections to Serverless Tier
 
 Establishing a secure TLS connection between your client and your TiDB Cloud Serverless Tier cluster is one of the basic security practices for connecting to your databases. The server certificate for Serverless Tier is issued by an independent third-party certificate provider. You can easily connect to your Serverless Tier cluster without downloading a server-side digital certificate.
 
