@@ -548,6 +548,37 @@
     - [Storage](/tidb-storage.md)
     - [Computing](/tidb-computing.md)
     - [Scheduling](/tidb-scheduling.md)
+  - Storage Engine - TiKV
+    - [TiKV Overview](/tikv-overview.md)
+    - [RocksDB Overview](/storage-engine/rocksdb-overview.md)
+    - [Titan Overview](/storage-engine/titan-overview.md)
+    - [Titan Configuration](/storage-engine/titan-configuration.md)
+  - Storage Engine - TiFlash
+    - [Overview](/tiflash/tiflash-overview.md)
+    - [Create TiFlash Replicas](/tiflash/create-tiflash-replicas.md)
+    - [Use TiDB to Read TiFlash Replicas](/tiflash/use-tidb-to-read-tiflash.md)
+    - [Use TiSpark to Read TiFlash Replicas](/tiflash/use-tispark-to-read-tiflash.md)
+    - [Use MPP Mode](/tiflash/use-tiflash-mpp-mode.md)
+    - [Supported Push-down Calculations](/tiflash/tiflash-supported-pushdown-calculations.md)
+    - [TiFlash Query Result Materialization](/tiflash/tiflash-results-materialization.md)
+    - [Data Validation](/tiflash/tiflash-data-validation.md)
+    - [Compatibility](/tiflash/tiflash-compatibility.md)
+  - [System Variables](/system-variables.md)
+  - Configuration File Parameters
+    - [tidb-server](/tidb-configuration-file.md)
+    - [tikv-server](/tikv-configuration-file.md)
+    - [tiflash-server](/tiflash/tiflash-configuration.md)
+    - [pd-server](/pd-configuration-file.md)
+  - CLI
+    - [tikv-ctl](/tikv-control.md)
+    - [pd-ctl](/pd-control.md)
+    - [tidb-ctl](/tidb-control.md)
+    - [pd-recover](/pd-recover.md)
+  - Command Line Flags
+    - [tidb-server](/command-line-flags-for-tidb-configuration.md)
+    - [tikv-server](/command-line-flags-for-tikv-configuration.md)
+    - [tiflash-server](/tiflash/tiflash-command-line-flags.md)
+    - [pd-server](/command-line-flags-for-pd-configuration.md)
   - Key Monitoring Metrics
     - [Overview](/grafana-overview-dashboard.md)
     - [Performance Overview](/grafana-performance-overview-dashboard.md)
@@ -847,6 +878,7 @@
         - [Share Session](/dashboard/dashboard-session-share.md)
         - [Configure SSO](/dashboard/dashboard-session-sso.md)
       - [FAQ](/dashboard/dashboard-faq.md)
+<<<<<<< HEAD
   - CLI
     - [tikv-ctl](/tikv-control.md)
     - [pd-ctl](/pd-control.md)
@@ -878,6 +910,8 @@
       - [Supported Push-down Calculations](/tiflash/tiflash-supported-pushdown-calculations.md)
       - [Data Validation](/tiflash/tiflash-data-validation.md)
       - [Compatibility](/tiflash/tiflash-compatibility.md)
+=======
+>>>>>>> af9b5a4df (adjust the order of titles under Reference in TOC (#12108))
   - [Telemetry](/telemetry.md)
   - [Errors Codes](/error-codes.md)
   - [Table Filter](/table-filter.md)
