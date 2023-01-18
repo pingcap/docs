@@ -31,6 +31,10 @@ Currently, TiDB Cloud supports the majority of MySQL 5.7 syntax with the excepti
 
 You can use any language supported by the MySQL client or driver.
 
+## Is there an API for TiDB Cloud?
+
+Yes. TiDB Cloud provides a RESTful API for you to manage TiDB Cloud resources such as clusters automatically and efficiently. For more information, see [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta).
+
 ### Where can I run TiDB Cloud?
 
 TiDB Cloud is currently available on Amazon Web Services and Google Cloud.
