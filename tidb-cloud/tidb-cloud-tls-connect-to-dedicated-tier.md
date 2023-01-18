@@ -30,7 +30,7 @@ In the [TiDB Cloud console](https://tidbcloud.com/), you can get examples of dif
    - Step 2：Download TiDB cluster CA
    - Step 3：Connect with an SQL client
 
-4. Under **Step 1：Create traffic filter** in the dialog, configure the IP addresses that are allowed to access your cluster. For more information, see [Configure an IP access list in standard connection](/tidb-cloud/configure-ip-access-list.md#configure-an-ip-access-list-in-standard-connection).
+4. Under **Step 1: Create traffic filter** in the dialog, configure the IP addresses that are allowed to access your cluster. For more information, see [Configure an IP access list in standard connection](/tidb-cloud/configure-ip-access-list.md#configure-an-ip-access-list-in-standard-connection).
 
 5. Under **Step 2: Download TiDB cluster CA**, click **Download TiDB cluster CA** to download it locally for client TLS configuration. Verifying the TiDB cluster CA can ensure the TLS connection is secure and reliable.
 
@@ -41,7 +41,7 @@ In the [TiDB Cloud console](https://tidbcloud.com/), you can get examples of dif
 
 6. Under **Step 3: Connect with an SQL client** in the dialog, click the tab of your preferred connection method, and then refer to the connection string and sample code on the tab to connect to your cluster.
 
-The following examples show the connection strings in MySQL, MyCLI , JDBC, Python, Go, and Node.js:
+The following examples show the connection strings in MySQL, MyCLI, JDBC, Python, Go, and Node.js:
 
 <SimpleTab>
 <div label="MySQL CLI">
@@ -56,7 +56,7 @@ Parameter description：
 
 - With `--ssl-mode=VERIFY_IDENTITY`, MySQL CLI client forces to enable TLS and validate TiDB Dedicated Tier clusters.
 - Update `ca.pem` in `--ssl-ca=<CA_path>` to your local path of the downloaded TiDB cluster ca.pem.
-- Use `--tls-version=TLSv1.2` to restrict the versions of TLS protocol，if you want to use TLS 1.3, just set the TLS-version to TLS1.3.
+- Use `--tls-version=TLSv1.2` to restrict the versions of TLS protocol, if you want to use TLS 1.3, just set the TLS-version to TLSv1.3.
 
 </div>
 
@@ -116,7 +116,7 @@ class Main {
 Parameter description：
 
 - Set `sslMode=VERIFY_IDENTITY` to enable TLS and validate TiDB Dedicated Tier clusters.
-- Set `enabledTLSProtocols=TLSv1.2` to restrict the versions of TLS protocol,if you want to use TLS 1.3, just set the TLS-version to TLS1.3.
+- Set `enabledTLSProtocols=TLSv1.2` to restrict the versions of TLS protocol, if you want to use TLS 1.3, just set the TLS-version to TLSv1.3.
 - Set `trustCertificateKeyStoreUrl` to your custom truststore path.
 - Set `trustCertificateKeyStorePassword` to your truststore password.
 
@@ -277,7 +277,7 @@ connection.connect(function(err) {
 
 Parameter description：
 
-- Set `ssl: {minVersion: 'TLSv1.2'}` to restrict the versions of TLS protocol,if you want to use TLS 1.3, just set the TLS-version to TLS1.3.
+- Set `ssl: {minVersion: 'TLSv1.2'}` to restrict the versions of TLS protocol, if you want to use TLS 1.3, just set the TLS-version to TLSv1.3.
 - Set `ssl: {ca: fs.readFileSync('<CA_path>')}` to read your local CA path of the downloaded TiDB cluster ca.pem.
 
 
