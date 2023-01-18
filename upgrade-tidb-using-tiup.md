@@ -153,8 +153,8 @@ After the command is executed, the "Region status" check result will be output.
 
 To avoid undefined behaviors or other unexpected problems during the upgrade, it is recommended to check the following items before the upgrade.
 
-- Cluster DDLs: It is recommended to execute the [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md) command to check whether there is an ongoing DDL job. If yes, wait for its execution or cancel it by running the [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md) command before performing an upgrade.
-- Cluster backup: It is recommended to run the [`SHOW [BACKUPS|RESTORES]`](/sql-statements/sql-statement-show-backups.md) command to check whether there is an ongoing backup or restore task in the cluster. If yes, wait for its completion before performing an upgrade.
+- Cluster DDLs: It is recommended to execute the [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md) statement to check whether there is an ongoing DDL job. If yes, wait for its execution or cancel it by executing the [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md) statement before performing an upgrade.
+- Cluster backup: It is recommended to execute the [`SHOW [BACKUPS|RESTORES]`](/sql-statements/sql-statement-show-backups.md) statement to check whether there is an ongoing backup or restore task in the cluster. If yes, wait for its completion before performing an upgrade.
 
 ## Upgrade the TiDB cluster
 
