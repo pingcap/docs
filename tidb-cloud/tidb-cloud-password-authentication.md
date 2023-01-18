@@ -9,10 +9,10 @@ This document describes how to manage passwords and enable multi-factor authenti
 
 ## Sign up
 
-You can either [sign up](https://tidbcloud.com/free-trial) for TiDB Cloud with email and password, or choose your Google Workspace or GitHub account for single sign-on (SSO) to TiDB Cloud.
+You can either [sign up](https://tidbcloud.com/free-trial) for TiDB Cloud with email and password, or choose your Google, GitHub, or Microsoft account for single sign-on (SSO) to TiDB Cloud.
 
 - If you sign up for TiDB Cloud with email and password, you can manage your password according to this document.
-- If you choose Google SSO or GitHub SSO to TiDB Cloud, your password is managed by Google or GitHub and you cannot change it using the TiDB Cloud console.
+- If you choose Google, GitHub, or Microsoft SSO to TiDB Cloud, your password is managed by your chosen platform and you cannot change it using the TiDB Cloud console.
 
 To sign up for a TiDB Cloud account with email and password, take the following steps:
 
@@ -82,7 +82,7 @@ If you forget your password, you can reset it by email as follows:
 
 > **Note:**
 >
-> This section applies only when you [sign up](https://tidbcloud.com/free-trial) for TiDB Cloud with emails and passwords. If you sign up for TiDB Cloud with Google SSO or GitHub SSO, you can enable MFA on your identity management platform, such as GitHub or Google Workspace.
+> This section applies only when you [sign up](https://tidbcloud.com/free-trial) for TiDB Cloud with emails and passwords. If you sign up for TiDB Cloud with Google, GitHub, or Microsoft SSO, you can enable MFA on your chosen identity management platform.
 
 After logging in to TiDB Cloud, you can enable MFA in accordance with laws and regulations.
 
