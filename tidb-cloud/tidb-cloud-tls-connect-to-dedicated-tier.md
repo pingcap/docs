@@ -25,14 +25,14 @@ In the [TiDB Cloud console](https://tidbcloud.com/), you can get examples of dif
 
 2. Click **Connect** in the upper-right corner. A dialog is displayed.
 
-3. On the **Standard Connection** tab of this dialog, follow the three steps to set up the TLS connction.
+3. On the **Standard Connection** tab of this dialog, follow the three steps to set up the TLS connection.
    - Step 1：Create traffic filter
    - Step 2：Download TiDB cluster CA
    - Step 3：Connect with an SQL client
 
 4. Under **Step 1: Create traffic filter** in the dialog, configure the IP addresses that are allowed to access your cluster. For more information, see [Configure an IP access list in standard connection](/tidb-cloud/configure-ip-access-list.md#configure-an-ip-access-list-in-standard-connection).
 
-5. Under **Step 2: Download TiDB cluster CA**, click **Download TiDB cluster CA** to download it locally for client TLS configuration. Verify the TiDB cluster CA to ensure that the TLS connection is secure and reliable.
+5. Under **Step 2: Download TiDB cluster CA**, click **Download TiDB cluster CA** to download it locally for client TLS configuration. The TiDB cluster CA ensures that the TLS connection is secure and reliable.
 
     > **Note:**
     > 
@@ -299,4 +299,4 @@ For security reasons, TiDB Cloud Dedicated Tier only supports TLS 1.2 and TLS 1.
 
 No.
 
-TiDB Cloud Dedicated Tier only supports one-way TLS authentication, TiDB Cloud Dedicated Tier only supports one-way TLS authentication, and does not support two-way MTLS authentication currently. If you have needs, could you please contact TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+TiDB Cloud Dedicated Tier only supports one-way TLS authentication, TiDB Cloud Dedicated Tier only supports one-way TLS authentication, and does not support two-way MTLS authentication currently. If you have needs, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
