@@ -1360,11 +1360,12 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 
 ### `max-bytes-for-level-base`
 
-+ The maximum number of bytes at base level (L1). Generally, it is set to 4 times the size of a memtable.
++ The maximum number of bytes at base level (L1). Generally, it is set to 4 times the size of a memtable. When the data size of L1 reaches the value of `max-bytes-for-level-base`, it triggers a compaction between the SST file of L1 and the SST file with overlap in L2.
 + Default value for `defaultcf` and `writecf`: `"512MB"`
 + Default value for `lockcf`: `"128MB"`
 + Minimum value: `0`
 + Unit: KB|MB|GB
++ It is recommended that the value of `max-bytes-for-level-base` is set approximately equal to the amount of data in L0 to reduce unnecessary compaction. If the compression method is "no:no:lz4:lz4:lz4:lz4:lz4", the value of `max-bytes-for-level-base` should be `write-buffer-size * 4`, because L0 and L1 have no compression and the condition for L0 to trigger compaction is that the number of SST files reaches 4 (the default value). When L0 and L1 both have compaction, you need to analyze the RocksDB log to understand the size of the SST file compressed from a memtable. If the file size is 32 MB, it is recommended to set the value of `max-bytes-for-level-base` to 128 MB (32 MB * 4).
 
 ### `target-file-size-base`
 
