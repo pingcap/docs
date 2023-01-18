@@ -38,7 +38,6 @@ In the [TiDB Cloud console](https://tidbcloud.com/), you can get examples of dif
     > 
     > After downloading your Dedicated Tier cluster CA, you can store it in the default storage path of your operating system, or specify another storage path. You need to replace the CA path in the code example with your own cluster CA path in the subsequent steps. 
 
-
 6. Under **Step 3: Connect with an SQL client** in the dialog, click the tab of your preferred connection method, and then refer to the connection string and sample code on the tab to connect to your cluster.
 
 The following examples show the connection strings in MySQL, MyCLI, JDBC, Python, Go, and Node.js:
@@ -280,7 +279,6 @@ Parameter descriptions：
 
 - Set `ssl: {minVersion: 'TLSv1.2'}` to restrict the versions of the TLS protocol. If you want to use TLS 1.3, you can set the version to `TLSv1.3`.
 - Set `ssl: {ca: fs.readFileSync('<CA_path>')}` to read your local CA path of the downloaded TiDB cluster `ca.pem`.
-
 
 </div>
 </SimpleTab>
