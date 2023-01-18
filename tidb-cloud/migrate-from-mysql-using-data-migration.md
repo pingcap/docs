@@ -283,7 +283,7 @@ This section describes the precheck warnings and corresponding solutions.
 
 - Amazon Aurora MySQL: `binlog_row_image` is not configurable.
 - Amazon RDS: the process is similar to setting the `binlog_format`. The only difference is that the parameter you change is `binlog_row_image` instead of `binlog_format`. See [Configuring MySQL binary logging](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.MySQL.BinaryFormat.html).
-- MySQL:'set global binlog_row_image = FULL;'. See [Binary Logging Options and Variables](https://dev.mysql.com/doc/refman/5.7/en/replication-options-binary-log.html#sysvar_binlog_row_image).
+- MySQL: 'set global binlog_row_image = FULL;'. See [Binary Logging Options and Variables](https://dev.mysql.com/doc/refman/5.7/en/replication-options-binary-log.html#sysvar_binlog_row_image).
 
 ### Check whether migrated dbs are in binlog_do_db/binlog_ignore_db
 
