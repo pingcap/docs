@@ -1,3 +1,8 @@
+---
+title: ticloud cluster describe
+Summary: The reference of `ticloud cluster describe`.
+---
+
 # ticloud cluster describe
 
 Describe a cluster
@@ -45,5 +50,4 @@ ticloud cluster describe --project-id <project-id> --cluster-id <cluster-id>
 
 ## Feedback
 
-If you have any questions or suggestions, please [file an issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose).
-Also, we welcome any contributions.
+If you have any questions or suggestions, please [file an issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose). Also, we welcome any contributions.

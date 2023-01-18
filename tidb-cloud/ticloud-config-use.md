@@ -1,3 +1,8 @@
+---
+title: ticloud config use
+Summary: The reference of `ticloud config use`.
+---
+
 # ticloud config use
 
 Use the specified profile as the active profile
@@ -29,5 +34,4 @@ ticloud config use test
 
 ## Feedback
 
-If you have any questions or suggestions, please [file an issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose).
-Also, we welcome any contributions.
+If you have any questions or suggestions, please [file an issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose). Also, we welcome any contributions.

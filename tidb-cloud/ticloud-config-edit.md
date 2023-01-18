@@ -1,3 +1,8 @@
+---
+title: ticloud config edit
+Summary: The reference of `ticloud config edit`.
+---
+
 # ticloud config edit
 
 Open the config file with the default text editor
@@ -29,5 +34,4 @@ ticloud config edit
 
 ## Feedback
 
-If you have any questions or suggestions, please [file an issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose).
-Also, we welcome any contributions.
+If you have any questions or suggestions, please [file an issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose). Also, we welcome any contributions.

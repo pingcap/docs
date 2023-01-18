@@ -1,3 +1,8 @@
+---
+title: ticloud config create
+Summary: The reference of `ticloud config create`.
+---
+
 # ticloud config create
 
 Configure a user profile to store settings
@@ -40,5 +45,4 @@ ticloud config create --profile-name <profile-name> --public-key <public-key> --
 
 ## Feedback
 
-If you have any questions or suggestions, please [file an issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose).
-Also, we welcome any contributions.
+If you have any questions or suggestions, please [file an issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose). Also, we welcome any contributions.

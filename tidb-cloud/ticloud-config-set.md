@@ -1,11 +1,15 @@
+---
+title: ticloud config set
+Summary: The reference of `ticloud config set`.
+---
+
 # ticloud config set
 
 Configure specific properties of the active profile
 
 ## Synopsis
 
-Configure specific properties of the active profile.
-Available properties : [public-key private-key api-url].
+Configure specific properties of the active profile. Available properties : [public-key private-key api-url].
 
 | Property    | Description                                                     |
 |-------------|-----------------------------------------------------------------|
@@ -13,8 +17,7 @@ Available properties : [public-key private-key api-url].
 | private-key | the private key of the TiDB Cloud API                           |
 | api-url     | the host of TiDB Cloud API, default `https://api.tidbcloud.com` |
 
-If using -P flag, the config in the specific profile will be set.
-If not, the config in the active profile will be set
+If using -P flag, the config in the specific profile will be set. If not, the config in the active profile will be set
 
 ```shell
 ticloud config set <property-name> <value> [flags]
@@ -57,5 +60,4 @@ ticloud config set api-url https://api.tidbcloud.com
 
 ## Feedback
 
-If you have any questions or suggestions, please [file an issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose).
-Also, we welcome any contributions.
+If you have any questions or suggestions, please [file an issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose). Also, we welcome any contributions.

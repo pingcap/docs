@@ -1,3 +1,8 @@
+---
+title: ticloud project list
+Summary: The reference of `ticloud project list`.
+---
+
 # ticloud project list
 
 List all accessible projects
@@ -44,5 +49,4 @@ ticloud project list -o json
 
 ## Feedback
 
-If you have any questions or suggestions, please [file an issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose).
-Also, we welcome any contributions.
+If you have any questions or suggestions, please [file an issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose). Also, we welcome any contributions.

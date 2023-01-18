@@ -1,3 +1,8 @@
+---
+title: ticloud cluster delete
+Summary: The reference of `ticloud cluster delete`.
+---
+
 # ticloud cluster delete
 
 Delete a cluster from your project
@@ -46,5 +51,4 @@ ticloud cluster delete --project-id <project-id> --cluster-id <cluster-id>
 
 ## Feedback
 
-If you have any questions or suggestions, please [file an issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose).
-Also, we welcome any contributions.
+If you have any questions or suggestions, please [file an issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose). Also, we welcome any contributions.

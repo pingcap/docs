@@ -1,3 +1,8 @@
+---
+title: ticloud config describe
+Summary: The reference of `ticloud config describe`.
+---
+
 # ticloud config describe
 
 Describe a specific profile
@@ -35,5 +40,4 @@ ticloud config describe <profile-name>
 
 ## Feedback
 
-If you have any questions or suggestions, please [file an issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose).
-Also, we welcome any contributions.
+If you have any questions or suggestions, please [file an issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose). Also, we welcome any contributions.

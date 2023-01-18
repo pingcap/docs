@@ -1,3 +1,8 @@
+---
+title: ticloud import list
+Summary: The reference of `ticloud import list`.
+---
+
 # ticloud import list
 
 List data import tasks
@@ -52,5 +57,4 @@ ticloud import list --project-id <project-id> --cluster-id <cluster-id> --output
 
 ## Feedback
 
-If you have any questions or suggestions, please [file an issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose).
-Also, we welcome any contributions.
+If you have any questions or suggestions, please [file an issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose). Also, we welcome any contributions.

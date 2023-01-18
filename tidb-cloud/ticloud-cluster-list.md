@@ -1,3 +1,8 @@
+---
+title: ticloud cluster list
+Summary: The reference of `ticloud cluster list`.
+---
+
 # ticloud cluster list
 
 List all clusters in a project
@@ -50,5 +55,4 @@ ticloud cluster list <project-id> -o json
 
 ## Feedback
 
-If you have any questions or suggestions, please [file an issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose).
-Also, we welcome any contributions.
+If you have any questions or suggestions, please [file an issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose). Also, we welcome any contributions.

@@ -1,3 +1,8 @@
+---
+title: ticloud import start local
+Summary: The reference of `ticloud import start local`.
+---
+
 # ticloud import start local
 
 Import a local file to TiDB Cloud
@@ -52,5 +57,4 @@ ticloud import start local <file-path> --project-id <project-id> --cluster-id <c
 
 ## Feedback
 
-If you have any questions or suggestions, please [file an issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose).
-Also, we welcome any contributions.
+If you have any questions or suggestions, please [file an issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose). Also, we welcome any contributions.

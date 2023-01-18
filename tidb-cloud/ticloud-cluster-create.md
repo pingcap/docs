@@ -1,3 +1,8 @@
+---
+title: ticloud cluster create
+Summary: The reference of `ticloud cluster create`.
+---
+
 # ticloud cluster create
 
 Create one cluster in the specified project
@@ -43,5 +48,4 @@ ticloud cluster create --project-id <project-id> --cluster-name <cluster-name> -
 
 ## Feedback
 
-If you have any questions or suggestions, please [file an issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose).
-Also, we welcome any contributions.
+If you have any questions or suggestions, please [file an issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose). Also, we welcome any contributions.

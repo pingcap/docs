@@ -1,3 +1,8 @@
+---
+title: ticloud config list
+Summary: The reference of `ticloud config list`.
+---
+
 # ticloud config list
 
 List all profiles
@@ -35,5 +40,4 @@ ticloud config list
 
 ## Feedback
 
-If you have any questions or suggestions, please [file an issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose).
-Also, we welcome any contributions.
+If you have any questions or suggestions, please [file an issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose). Also, we welcome any contributions.

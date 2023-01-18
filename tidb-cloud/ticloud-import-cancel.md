@@ -1,3 +1,8 @@
+---
+title: ticloud import cancel
+Summary: The reference of `ticloud import cancel`.
+---
+
 # ticloud import cancel
 
 Cancel a data import task
@@ -41,5 +46,4 @@ ticloud import cancel --project-id <project-id> --cluster-id <cluster-id> --impo
 
 ## Feedback
 
-If you have any questions or suggestions, please [file an issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose).
-Also, we welcome any contributions.
+If you have any questions or suggestions, please [file an issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose). Also, we welcome any contributions.

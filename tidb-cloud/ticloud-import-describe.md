@@ -1,3 +1,8 @@
+---
+title: ticloud import describe
+Summary: The reference of `ticloud import describe`.
+---
+
 # ticloud import describe
 
 Describe a data import task
@@ -46,5 +51,4 @@ ticloud import describe --project-id <project-id> --cluster-id <cluster-id> --im
 
 ## Feedback
 
-If you have any questions or suggestions, please [file an issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose).
-Also, we welcome any contributions.
+If you have any questions or suggestions, please [file an issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose). Also, we welcome any contributions.

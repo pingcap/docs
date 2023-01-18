@@ -1,3 +1,8 @@
+---
+title: ticloud update
+Summary: The reference of `ticloud update`.
+---
+
 # ticloud update
 
 Update the CLI to the latest version
@@ -29,5 +34,4 @@ ticloud update
 
 ## Feedback
 
-If you have any questions or suggestions, please [file an issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose).
-Also, we welcome any contributions.
+If you have any questions or suggestions, please [file an issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose). Also, we welcome any contributions.
