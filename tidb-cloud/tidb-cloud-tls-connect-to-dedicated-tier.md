@@ -283,7 +283,7 @@ Parameter descriptions：
 </div>
 </SimpleTab>
 
-## Root certificate management of Dedicated Tier 
+## Manage root certificates for Dedicated Tier 
 
 TiDB Dedicated Tier uses certificates from [AWS Certificate Manager (ACM)](https://aws.amazon.com/certificate-manager/) as a Certificate Authority (CA) for TLS connections between clients and TiDB Dedicated Tier clusters. Usually, the root certificates of ACM are stored securely in AWS-managed hardware security modules (HSMs) that meet [FIPS 140-2 Level 3](https://csrc.nist.gov/projects/cryptographic-module-validation-program/Certificate/3139) security standards. 
 
@@ -297,4 +297,4 @@ For security reasons, TiDB Cloud Dedicated Tier only supports TLS 1.2 and TLS 1.
 
 No.
 
-TiDB Cloud Dedicated Tier only supports one-way TLS authentication, and does not support two-way mTLS authentication currently. If you need two-way mTLS authentication, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+TiDB Cloud Dedicated Tier only supports one-way TLS authentication, and does not support two-way mTLS authentication currently. If you need two-way TLS authentication, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
