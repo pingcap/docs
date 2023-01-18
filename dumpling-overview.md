@@ -5,38 +5,7 @@ summary: Use the Dumpling tool to export data from TiDB.
 
 # Use Dumpling to Export Data
 
-<<<<<<< HEAD
-This document introduces the data export tool - [Dumpling](https://github.com/pingcap/dumpling). Dumpling exports data stored in TiDB/MySQL as SQL or CSV data files and can be used to make a logical full backup or export.
-
-For backups of SST files (key-value pairs) or backups of incremental data that are not sensitive to latency, refer to [BR](/br/backup-and-restore-tool.md). For real-time backups of incremental data, refer to [TiCDC](/ticdc/ticdc-overview.md).
-
-> **Note:**
->
-> PingCAP previously maintained a fork of the [mydumper project](https://github.com/maxbube/mydumper) with enhancements specific to TiDB. This fork has since been replaced by [Dumpling](/dumpling-overview.md), which has been rewritten in Go, and supports more optimizations that are specific to TiDB. It is strongly recommended that you use Dumpling instead of mydumper.
->
-> For the overview of Mydumper, refer to [v4.0 Mydumper documentation](https://docs.pingcap.com/tidb/v4.0/mydumper-overview).
-
-## Improvements of Dumpling compared with Mydumper
-
-1. Support exporting data in multiple formats, including SQL and CSV
-2. Support the [table-filter](https://github.com/pingcap/tidb-tools/blob/master/pkg/table-filter/README.md) feature, which makes it easier to filter data
-3. Support exporting data to Amazon S3 cloud storage.
-4. More optimizations are made for TiDB:
-    - Support configuring the memory limit of a single TiDB SQL statement
-    - Support automatic adjustment of TiDB GC time for TiDB v4.0.0 and above
-    - Use TiDB's hidden column `_tidb_rowid` to optimize the performance of concurrent data export from a single table
-    - For TiDB, you can set the value of [`tidb_snapshot`](/read-historical-data.md#how-tidb-reads-data-from-history-versions) to specify the time point of the data backup. This ensures the consistency of the backup, instead of using `FLUSH TABLES WITH READ LOCK` to ensure the consistency.
-
-## Dumpling introduction
-
-Dumpling is written in Go. The Github project is [pingcap/dumpling](https://github.com/pingcap/dumpling).
-
-For detailed usage of Dumpling, use the `--help` option or refer to [Option list of Dumpling](#option-list-of-dumpling).
-
-When using Dumpling, you need to execute the export command on a running cluster. This document assumes that there is a TiDB instance on the `127.0.0.1:4000` host and that this TiDB instance has a root user without a password.
-=======
 This document introduces the data export tool - [Dumpling](https://github.com/pingcap/dumpling). Dumpling exports data stored in TiDB/MySQL as SQL or CSV data files and can be used to make a logical full backup or export. Dumpling also supports exporting data to Amazon S3.
->>>>>>> f0737bd07 (dumpling: refined as per cn doc (#12064))
 
 You can get Dumpling using [TiUP](/tiup/tiup-overview.md) by running `tiup install dumpling`. Afterwards, you can use `tiup dumpling ...` to run Dumpling.
 
@@ -50,7 +19,7 @@ When using Dumpling, you need to execute the export command on a running cluster
 
 TiDB also provides other tools that you can choose to use as needed.
 
-- For backups of SST files (key-value pairs) or backups of incremental data that are not sensitive to latency, refer to [BR](/br/backup-and-restore-overview.md). 
+- For backups of SST files (key-value pairs) or backups of incremental data that are not sensitive to latency, refer to [BR](/br/backup-and-restore-tool.md). 
 - For real-time backups of incremental data, refer to [TiCDC](/ticdc/ticdc-overview.md).
 - All exported data can be imported back to TiDB using [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md).
 
@@ -297,11 +266,7 @@ With the above options specified, Dumpling can have a quicker speed of data expo
 
 > **Note:**
 >
-<<<<<<< HEAD
-> In most scenarios, you do not need to adjust the default data consistency options of Dumpling.
-=======
 > The default value is `auto` for the data consistency option. In most scenarios, you do not need to adjust the default data consistency options of Dumpling.
->>>>>>> f0737bd07 (dumpling: refined as per cn doc (#12064))
 
 Dumpling uses the `--consistency <consistency level>` option to control the way in which data is exported for "consistency assurance". For TiDB, data consistency is guaranteed by getting a snapshot of a certain timestamp by default (namely, `--consistency snapshot`). When using snapshot for consistency, you can use the `--snapshot` option to specify the timestamp to be backed up. You can also use the following levels of consistency:
 
@@ -353,11 +318,7 @@ When Dumpling is exporting a large single table from TiDB, Out of Memory (OOM) m
 + Reduce the value of `--tidb-mem-quota-query` to `8589934592` (8 GB) or lower. `--tidb-mem-quota-query` controls the memory usage of a single query statement in TiDB.
 + Adjust the `--params "tidb_distsql_scan_concurrency=5"` parameter. [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency) is a session variable which controls the concurrency of the scan operations in TiDB.
 
-<<<<<<< HEAD
-### TiDB GC settings when exporting a large volume of data
-=======
 ### Set TiDB GC when exporting a large volume of data (more than 1 TB)
->>>>>>> f0737bd07 (dumpling: refined as per cn doc (#12064))
 
 When exporting data from TiDB, if the TiDB version is greater than or equal to v4.0.0 and Dumpling can access the PD address of the TiDB cluster, Dumpling automatically extends the GC time without affecting the original cluster.
 
@@ -377,11 +338,6 @@ After your operation is completed, set the GC time back (the default value is `1
 SET GLOBAL tidb_gc_life_time = '10m';
 ```
 
-<<<<<<< HEAD
-Finally, all the exported data can be imported back to TiDB using [TiDB Lightning](/tidb-lightning/tidb-lightning-backends.md).
-
-=======
->>>>>>> f0737bd07 (dumpling: refined as per cn doc (#12064))
 ## Option list of Dumpling
 
 | Options                      | Usage                                                                                                                                                                                                                                                                                                                              | Default value                              |
