@@ -1,6 +1,6 @@
 ---
 title: TLS Connections to Serverless Tier
-summary: Introduce TLS connection in TiDB Serverless Tier.
+summary: Introduce TLS connections in TiDB Serverless Tier.
 ---
 
 # TLS Connections to Serverless Tier
