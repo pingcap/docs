@@ -138,7 +138,6 @@
   - Analyze Performance
     - [Use the Diagnosis Tab](/tidb-cloud/tune-performance.md)
     - [Use Statement Summary Tables](/statement-summary-tables.md)
-    - [Latency Breakdown](/latency-breakdown.md)
   - SQL Tuning
     - [Overview](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)
     - Understanding the Query Execution Plan
