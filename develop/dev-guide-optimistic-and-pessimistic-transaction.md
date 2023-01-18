@@ -17,7 +17,7 @@ summary: Learn about optimistic and pessimistic transactions in TiDB.
 
 1.  在庫数を更新する
 2.  注文を作成する
-3.  支払いをする
+3.  支払いを行う
 
 これらの操作は、すべて成功するか、すべて失敗する必要があります。同時トランザクションの場合に過剰販売が発生しないようにする必要があります。
 
@@ -38,8 +38,6 @@ summary: Learn about optimistic and pessimistic transactions in TiDB.
 Golangの`sql.DB`は同時実行セーフであるため、サードパーティのパッケージをインポートする必要はありません。
 
 TiDB トランザクションを適応させるには、次のコードに従ってツールキット[ユーティリティ](https://github.com/pingcap-inc/tidb-example-golang/tree/main/util)を作成します。
-
-{{< copyable "" >}}
 
 ```go
 package util
@@ -104,8 +102,6 @@ func (tx *TiDBSqlTx) Rollback() error {
 **Configuration / コンフィグレーションファイル**
 
 パッケージの管理に Maven を使用する場合は、 `<dependencies>`ノードの`pom.xml`で、以下の依存関係を import `HikariCP`に追加し、パッケージング ターゲットと、JAR パッケージ起動のメイン クラスを設定します。以下は`pom.xml`の例です。
-
-{{< copyable "" >}}
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -184,8 +180,6 @@ func (tx *TiDBSqlTx) Rollback() error {
 **コーディング**
 
 次に、コードを記述します。
-
-{{< copyable "" >}}
 
 ```java
 package com.pingcap.txn;
@@ -335,8 +329,6 @@ public class TxnExample {
 <div label="Golang" value="golang">
 
 必要なデータベース操作を含む`helper.go`のファイルを作成します。
-
-{{< copyable "" >}}
 
 ```go
 package main
@@ -586,8 +578,6 @@ func createUser(txn *util.TiDBSqlTx, id int, nickname string, balance decimal.De
 
 次に、 `main`関数で`txn.go`を書き込んで`helper.go`を呼び出し、着信コマンド ライン引数を処理します。
 
-{{< copyable "" >}}
-
 ```go
 package main
 
@@ -666,8 +656,6 @@ Golangの例には、楽観的トランザクションが既に含まれてい�
 
 <div label="Java" value="java">
 
-{{< copyable "" >}}
-
 ```shell
 mvn clean package
 java -jar target/plain-java-txn-0.0.1-jar-with-dependencies.jar ALICE_NUM=4 BOB_NUM=6
@@ -676,8 +664,6 @@ java -jar target/plain-java-txn-0.0.1-jar-with-dependencies.jar ALICE_NUM=4 BOB_
 </div>
 
 <div label="Golang" value="golang">
-
-{{< copyable "" >}}
 
 ```shell
 go build -o bin/txn
@@ -689,8 +675,6 @@ go build -o bin/txn
 </SimpleTab>
 
 SQL ログ:
-
-{{< copyable "" >}}
 
 ```sql
 /* txn 1 */ BEGIN PESSIMISTIC
@@ -747,8 +731,6 @@ mysql> SELECT * FROM users;
 
 <div label="Java" value="java">
 
-{{< copyable "" >}}
-
 ```shell
 mvn clean package
 java -jar target/plain-java-txn-0.0.1-jar-with-dependencies.jar ALICE_NUM=4 BOB_NUM=7
@@ -758,8 +740,6 @@ java -jar target/plain-java-txn-0.0.1-jar-with-dependencies.jar ALICE_NUM=4 BOB_
 
 <div label="Golang" value="golang">
 
-{{< copyable "" >}}
-
 ```shell
 go build -o bin/txn
 ./bin/txn -a 4 -b 7
@@ -768,8 +748,6 @@ go build -o bin/txn
 </div>
 
 </SimpleTab>
-
-{{< copyable "" >}}
 
 ```sql
 /* txn 1 */ BEGIN PESSIMISTIC
@@ -826,8 +804,6 @@ mysql> SELECT * FROM users;
 <div label="Java" value="java">
 
 **コーディング**
-
-{{< copyable "" >}}
 
 ```java
 package com.pingcap.txn.optimistic;
@@ -989,15 +965,11 @@ public class TxnExample {
 
 `pom.xml`のスタートアップ クラスを変更します。
 
-{{< copyable "" >}}
-
 ```xml
 <mainClass>com.pingcap.txn.TxnExample</mainClass>
 ```
 
 楽観的トランザクションの例を指すように、次のように変更します。
-
-{{< copyable "" >}}
 
 ```xml
 <mainClass>com.pingcap.txn.optimistic.TxnExample</mainClass>
@@ -1021,8 +993,6 @@ public class TxnExample {
 
 <div label="Java" value="java">
 
-{{< copyable "" >}}
-
 ```shell
 mvn clean package
 java -jar target/plain-java-txn-0.0.1-jar-with-dependencies.jar ALICE_NUM=4 BOB_NUM=6
@@ -1031,8 +1001,6 @@ java -jar target/plain-java-txn-0.0.1-jar-with-dependencies.jar ALICE_NUM=4 BOB_
 </div>
 
 <div label="Golang" value="golang">
-
-{{< copyable "" >}}
 
 ```shell
 go build -o bin/txn
@@ -1044,8 +1012,6 @@ go build -o bin/txn
 </SimpleTab>
 
 SQL ステートメントの実行プロセス:
-
-{{< copyable "" >}}
 
 ```sql
     /* txn 2 */ BEGIN OPTIMISTIC
@@ -1110,8 +1076,6 @@ mysql> SELECT * FROM users;
 
 <div label="Java" value="java">
 
-{{< copyable "" >}}
-
 ```shell
 mvn clean package
 java -jar target/plain-java-txn-0.0.1-jar-with-dependencies.jar ALICE_NUM=4 BOB_NUM=7
@@ -1121,8 +1085,6 @@ java -jar target/plain-java-txn-0.0.1-jar-with-dependencies.jar ALICE_NUM=4 BOB_
 
 <div label="Golang" value="golang">
 
-{{< copyable "" >}}
-
 ```shell
 go build -o bin/txn
 ./bin/txn -a 4 -b 7 -o true
@@ -1131,8 +1093,6 @@ go build -o bin/txn
 </div>
 
 </SimpleTab>
-
-{{< copyable "" >}}
 
 ```sql
 /* txn 1 */ BEGIN OPTIMISTIC

@@ -105,7 +105,7 @@ EXPLAIN SELECT * FROM t1 WHERE intkey >= 99 AND intkey <= 103;
 -   `├─IndexRangeScan_8(Build)`演算子は`intkey`インデックスで範囲スキャンを実行し、内部`RowID`の値 (このテーブルでは主キー) を取得します。
 -   `└─TableRowIDScan_9(Probe)`演算子は、テーブル データから行全体を取得します。
 
-`IndexLookup`つのタスクには 2 つのステップが必要なため、多数の行が一致するシナリオでは、SQL オプティマイザーは[統計](/statistics.md)に基づいて`TableFullScan`演算子を選択する場合があります。次の例では、多数の行が`intkey > 100`の条件に一致し、 `TableFullScan`が選択されています。
+`IndexLookup`つのタスクには 2 つのステップが必要なため、多数の行が一致するシナリオでは、SQL オプティマイザーは[統計学](/statistics.md)に基づいて`TableFullScan`演算子を選択する場合があります。次の例では、多数の行が`intkey > 100`の条件に一致し、 `TableFullScan`が選択されています。
 
 {{< copyable "" >}}
 

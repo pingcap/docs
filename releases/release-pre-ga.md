@@ -27,7 +27,7 @@ title: Pre-GA release notes
 
 -   専用の Rocksdb インスタンスを使用してRaftログを保存する
 -   `DeleteRange`を使用して、レプリカの削除を高速化します
--   Coprocessorは、より多くのプッシュダウン演算子をサポートするようになりました
+-   コプロセッサーは、より多くのプッシュダウン演算子をサポートするようになりました
 -   パフォーマンスと安定性の向上
 
 ## TiDB Connector for Spark Beta リリース {#tidb-connector-for-spark-beta-release}

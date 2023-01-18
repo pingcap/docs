@@ -7,15 +7,13 @@ summary: Learn how to build a simple Python application using TiDB and Django.
 
 > **ノート：**
 >
-> このドキュメントはアーカイブされています。これは、このドキュメントがその後更新されないことを示しています。詳細は[開発者ガイドの概要](/develop/dev-guide-overview.md)を参照してください。
+> このレガシー ドキュメントは古く、その後更新されません。詳細は[開発者ガイドの概要](/develop/dev-guide-overview.md)を参照してください。
 
 このチュートリアルでは、TiDB と Django に基づいて単純な Python アプリケーションを構築する方法を示します。ここで構築するサンプル アプリケーションは、顧客情報と注文情報を追加、クエリ、および更新できるシンプルな CRM ツールです。
 
 ## ステップ 1. TiDB クラスターを開始する {#step-1-start-a-tidb-cluster}
 
 ローカル ストレージで疑似 TiDB クラスターを開始します。
-
-{{< copyable "" >}}
 
 ```bash
 docker run -p 127.0.0.1:$LOCAL_PORT:4000 pingcap/tidb:v5.1.0
@@ -25,7 +23,7 @@ docker run -p 127.0.0.1:$LOCAL_PORT:4000 pingcap/tidb:v5.1.0
 
 > **ノート：**
 >
-> 実稼働用に「実際の」TiDB クラスターをデプロイするには、次のガイドを参照してください。
+> 実本番用の「実際の」TiDB クラスターをデプロイするには、次のガイドを参照してください。
 >
 > -   [TiUP for On-Premises を使用して TiDB をデプロイ](https://docs.pingcap.com/tidb/v5.1/production-deployment-using-tiup)
 > -   [TiDB を Kubernetes にデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/stable)
@@ -232,8 +230,6 @@ docker run -p 127.0.0.1:$LOCAL_PORT:4000 pingcap/tidb:v5.1.0
 
 `tidb_example`上のディレクトリで、 [`manage.py`](https://docs.djangoproject.com/en/3.1/ref/django-admin/)スクリプトを使用して、アプリケーションのデータベースを初期化する[Django の移行](https://docs.djangoproject.com/en/3.1/topics/migrations/)を作成します。
 
-{{< copyable "" >}}
-
 ```bash
 python manage.py makemigrations tidb_example
 python manage.py migrate tidb_example
@@ -242,15 +238,11 @@ python manage.py migrate
 
 次に、アプリケーションを開始します。
 
-{{< copyable "" >}}
-
 ```python
 python3 manage.py runserver 0.0.0.0:8000
 ```
 
 サンプル データを挿入してアプリケーションをテストするには、次のコマンドを実行します。
-
-{{< copyable "" >}}
 
 ```bash
 curl --request POST '127.0.0.1:8000/order/' \
@@ -266,8 +258,6 @@ curl --request GET '127.0.0.1:8000/order/' --data-raw '{ "oid": 1 }'
 
 データの挿入が成功したかどうかを確認するには、SQL シェルでターミナルを開いて確認します。
 
-{{< copyable "" >}}
-
 ```sql
 MySQL root@127.0.0.1:(none)> select * from django.tidb_example_orders;
 +-----+-----+-------+
@@ -280,8 +270,6 @@ Time: 0.008s
 ```
 
 上記の結果は、データの挿入が成功したことを示しています。次に、挿入されたデータを削除できます。
-
-{{< copyable "" >}}
 
 ```bash
 curl --request DELETE '127.0.0.1:8000/order/' --data-raw '{ "oid": 1 }'

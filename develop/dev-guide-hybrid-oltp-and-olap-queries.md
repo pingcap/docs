@@ -15,8 +15,6 @@ TiDB は、オンライン トランザクション処理 (OLTP) 用に行ベー
 
 開始する前に、さらにサンプル データをインポートできます[`tiup demo`コマンド経由](/develop/dev-guide-bookshop-schema-design.md#method-1-via-tiup-demo) 。例えば：
 
-{{< copyable "" >}}
-
 ```shell
 tiup demo bookshop prepare --users=200000 --books=500000 --authors=100000 --ratings=1000000 --orders=1000000 --host 127.0.0.1 --port 4000 --drop-tables
 ```
@@ -43,8 +41,6 @@ FROM
 ### <code>ORDER BY</code>句 {#code-order-by-code-clause}
 
 集計ウィンドウ関数`sum()`を使用すると、特定の書籍の注文金額の過去の傾向を分析できます。例えば：
-
-{{< copyable "" >}}
 
 ```sql
 WITH orders_group_by_month AS (
@@ -90,8 +86,6 @@ ORDER BY month ASC;
 さまざまな種類の書籍の過去の注文傾向を分析し、それを複数の系列を持つ同じ折れ線グラフで視覚化するとします。
 
 `PARTITION BY`句を使用して、書籍をタイプ別にグループ化し、各タイプの履歴順序を個別にカウントできます。
-
-{{< copyable "" >}}
 
 ```sql
 WITH orders_group_by_month AS (
@@ -154,16 +148,12 @@ TiDB は、より多くの分析ステートメントのために、いくつか
 
 TiDB は、デフォルトで行ベースのストレージ エンジン TiKV を使用します。カラムナ ストレージ エンジンTiFlashを使用するには、 [HTAP 機能を有効にする](/develop/dev-guide-create-table.md#use-htap-capabilities)を参照してください。 TiFlashを介してデータをクエリする前に、次のステートメントを使用して、 `books`および`orders`のテーブルのTiFlashレプリカを作成する必要があります。
 
-{{< copyable "" >}}
-
 ```sql
 ALTER TABLE books SET TIFLASH REPLICA 1;
 ALTER TABLE orders SET TIFLASH REPLICA 1;
 ```
 
 次のステートメントを使用して、 TiFlashレプリカの進行状況を確認できます。
-
-{{< copyable "" >}}
 
 ```sql
 SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = 'bookshop' and TABLE_NAME = 'books';
@@ -227,8 +217,6 @@ TiDB は Cost Based Optimizer (CBO) を使用して、コストの見積もり�
 >
 > -   テーブルにエイリアスがある場合は、ヒントでテーブル名の代わりにエイリアスを使用します。そうでない場合、ヒントは機能しません。
 > -   `read_from_storage`ヒントは[共通テーブル式](/develop/dev-guide-use-common-table-expression.md)では機能しません。
-
-{{< copyable "" >}}
 
 ```sql
 WITH orders_group_by_month AS (

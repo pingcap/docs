@@ -13,7 +13,7 @@ summary: Learn how to handle failed DDL statements when you're using the TiDB Da
 
 次の状況では、このコマンドを使用しないでください。
 
--   失敗した DDL ステートメントが下流の TiDB でスキップされることは、実際の運用環境では受け入れられません。
+-   失敗した DDL ステートメントが下流の TiDB でスキップされることは、実際の本番環境では受け入れられません。
 -   失敗した DDL ステートメントを他の DDL ステートメントに置き換えることはできません。
 -   他の DDL ステートメントを下流の TiDB に挿入してはなりません。
 
@@ -148,7 +148,7 @@ ALTER TABLE db1.tbl1 CHANGE c2 c2 DECIMAL (10, 3);
 ERROR 8200 (HY000): Unsupported modify column: can't change decimal column precision
 ```
 
-実際の運用環境では、この DDL ステートメントが下流の TiDB で実行されないこと (つまり、元のテーブル スキーマが保持されること) が許容されると仮定します。その後、 `binlog skip <task-name>`を使用してこの DDL ステートメントをスキップし、移行を再開できます。手順は次のとおりです。
+実際の本番環境では、この DDL ステートメントが下流の TiDB で実行されないこと (つまり、元のテーブル スキーマが保持されること) が許容されると仮定します。その後、 `binlog skip <task-name>`を使用してこの DDL ステートメントをスキップし、移行を再開できます。手順は次のとおりです。
 
 1.  `binlog skip <task-name>`を実行して、現在失敗している DDL ステートメントをスキップします。
 
@@ -280,7 +280,7 @@ ALTER TABLE `shard_db_*`.`shard_table_*` CHARACTER SET LATIN1 COLLATE LATIN1_DAN
 }
 ```
 
-実際の運用環境では、この DDL ステートメントが下流の TiDB で実行されないこと (つまり、元のテーブル スキーマが保持されること) が許容されると仮定します。その後、 `binlog skip <task-name>`を使用してこの DDL ステートメントをスキップし、移行を再開できます。手順は次のとおりです。
+実際の本番環境では、この DDL ステートメントが下流の TiDB で実行されないこと (つまり、元のテーブル スキーマが保持されること) が許容されると仮定します。その後、 `binlog skip <task-name>`を使用してこの DDL ステートメントをスキップし、移行を再開できます。手順は次のとおりです。
 
 1.  `binlog skip <task-name>`を実行して、MySQL インスタンス 1 および 2 で現在失敗している DDL ステートメントをスキップします。
 

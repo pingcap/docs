@@ -7,15 +7,13 @@ summary: Learn how to build a simple Python application based on TiDB and SQLAlc
 
 > **ノート：**
 >
-> このドキュメントはアーカイブされました。これは、このドキュメントがその後更新されないことを示しています。詳細は[開発者ガイドの概要](/develop/dev-guide-overview.md)を参照してください。
+> このレガシー ドキュメントは古く、その後更新されません。詳細は[開発者ガイドの概要](/develop/dev-guide-overview.md)を参照してください。
 
 このチュートリアルでは、TiDB と SQLAlchemy に基づいて単純な Python アプリケーションを構築する方法を示します。ここで構築するサンプル アプリケーションは、顧客情報と注文情報を追加、クエリ、および更新できるシンプルな CRM ツールです。
 
 ## ステップ 1. TiDB クラスターを開始する {#step-1-start-a-tidb-cluster}
 
 ローカル ストレージで疑似 TiDB クラスターを開始します。
-
-{{< copyable "" >}}
 
 ```bash
 docker run -p 127.0.0.1:$LOCAL_PORT:4000 pingcap/tidb:v5.1.0
@@ -25,7 +23,7 @@ docker run -p 127.0.0.1:$LOCAL_PORT:4000 pingcap/tidb:v5.1.0
 
 > **ノート：**
 >
-> 実稼働用に「実際の」TiDB クラスターをデプロイするには、次のガイドを参照してください。
+> 実本番用の「実際の」TiDB クラスターをデプロイするには、次のガイドを参照してください。
 >
 > -   [TiUP for On-Premises を使用して TiDB をデプロイ](https://docs.pingcap.com/tidb/v5.1/production-deployment-using-tiup)
 > -   [TiDB を Kubernetes にデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/stable)
@@ -94,8 +92,6 @@ docker run -p 127.0.0.1:$LOCAL_PORT:4000 pingcap/tidb:v5.1.0
 4.  `orders`つずつ`oid`更新します。
 5.  `users`と`orders`のテーブルをテーブル結合します。
 6.  同じ`uid`を使用して`users`および`orders`テーブルをクエリします。
-
-{{< copyable "" >}}
 
 ```python
 from sqlalchemy import Column, Integer, String, Float, ForeignKey, create_engine, Enum
@@ -193,8 +189,6 @@ print(
 
 上記の`main.py`ファイルで、 `create_engine()`に渡された文字列を、データベースの作成時に取得した接続文字列に置き換えます。
 
-{{< copyable "" >}}
-
 ```python
 engine = create_engine(
     'tidb://{username}:{password}@{hostname}:{port}/test_sqlalchemy?charset=utf8mb4',
@@ -202,8 +196,6 @@ engine = create_engine(
 ```
 
 デフォルトでは、次のように文字列を設定できます。
-
-{{< copyable "" >}}
 
 ```python
 engine = create_engine(
@@ -214,8 +206,6 @@ engine = create_engine(
 ### ステップ 2. アプリケーション コードを実行する {#step-2-run-the-application-code}
 
 接続文字列が正しく設定されたら、アプリケーション コードを実行します。
-
-{{< copyable "" >}}
 
 ```bash
 python3 main.py

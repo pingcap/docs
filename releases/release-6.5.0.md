@@ -1,5 +1,6 @@
 ---
 title: TiDB 6.5.0 Release Notes
+summary: Learn about the new features, compatibility changes, improvements, and bug fixes in TiDB 6.5.0.
 ---
 
 # TiDB 6.5.0 リリースノート {#tidb-6-5-0-release-notes}
@@ -23,7 +24,7 @@ TiDB 6.5.0 は長期サポート リリース (LTS) です。
 -   パスワード コンプライアンスの監査要件を満たす[パスワード管理](/password-management.md)のポリシーをサポートします。
 -   TiDB LightningおよびDumplingは、 [インポート](/tidb-lightning/tidb-lightning-data-source.md)および[エクスポート](/dumpling-overview.md#improve-export-efficiency-through-concurrency)の圧縮された SQL および CSV ファイルをサポートします。
 -   TiDB データ移行 (DM) [継続的なデータ検証](/dm/dm-continuous-data-validation.md)が GA になります。
--   TiDB Backup &amp; Restore は、スナップショット チェックポイント バックアップをサポートし、 [PITR](/br/br-pitr-guide.md#run-pitr)の復元パフォーマンスを 50% 向上させ、RPO を 5 分まで短縮します。
+-   TiDB Backup &amp; Restore は、スナップショット チェックポイント バックアップをサポートし、 [PITR](/br/br-pitr-guide.md#run-pitr)の復元パフォーマンスを 50% 向上させ、一般的なシナリオで RPO を 5 分まで短縮します。
 -   [データを Kafka に複製する](/replicate-data-to-kafka.md)の TiCDC スループットを 4000 行/秒から 35000 行/秒に改善し、レプリケーションレイテンシーを 2 秒に短縮します。
 -   データのライフサイクルを管理する行レベル[生存時間 (TTL)](/time-to-live.md)を提供します (実験的)。
 -   TiCDC は、Amazon S3、Azure Blob Storage、NFS (実験的) などの[変更されたログをオブジェクト ストレージに複製する](/ticdc/ticdc-sink-to-cloud-storage.md)つをサポートします。
@@ -34,7 +35,7 @@ TiDB 6.5.0 は長期サポート リリース (LTS) です。
 
 -   インデックスを追加するTiDBのパフォーマンスは約10倍向上します（GA） [#35983](https://github.com/pingcap/tidb/issues/35983) @ [ベンジャミン2037](https://github.com/benjamin2037) @ [接線](https://github.com/tangenta)
 
-    TiDB v6.3.0 では、インデックス作成時のバックフィル速度を向上させるための実験的機能として[インデックス アクセラレーションを追加する](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)が導入されています。 v6.5.0 では、この機能が GA になり、デフォルトで有効になり、大規模なテーブルでのパフォーマンスが約 10 倍高速になると予想されます。アクセラレーション機能は、単一の SQL ステートメントがインデックスを連続して追加するシナリオに適しています。複数の SQL ステートメントが並行してインデックスを追加する場合、SQL ステートメントの 1 つだけが高速化されます。
+    TiDB v6.3.0 では、インデックス作成時のバックフィル速度を向上させるための実験的機能として[インデックス アクセラレーションを追加する](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)が導入されています。 v6.5.0 では、この機能が GA になり、デフォルトで有効になり、大きなテーブルでのパフォーマンスは v6.1.0 の約 10 倍になると予想されます。アクセラレーション機能は、単一の SQL ステートメントがインデックスを連続して追加するシナリオに適しています。複数の SQL ステートメントが並行してインデックスを追加する場合、SQL ステートメントの 1 つだけが高速化されます。
 
 -   DDL 変更中の DML 成功率を向上させるために、軽量のメタデータ ロックを提供します (GA) [#37275](https://github.com/pingcap/tidb/issues/37275) @ [wjhuang2016](https://github.com/wjhuang2016)
 
@@ -44,13 +45,13 @@ TiDB 6.5.0 は長期サポート リリース (LTS) です。
 
 -   `FLASHBACK CLUSTER TO TIMESTAMP` (GA) [#37197](https://github.com/pingcap/tidb/issues/37197) [#13303](https://github.com/tikv/tikv/issues/13303) @ [定義済み2014](https://github.com/Defined2014) @ [bb7133](https://github.com/bb7133) @ [Jmポテト](https://github.com/JmPotato) @ [コナー1996](https://github.com/Connor1996) @ [ヒューシャープ](https://github.com/HuSharp) @ [カルバンネオ](https://github.com/CalvinNeo)を使用した特定の時点へのクラスターの復元をサポート
 
-    TiDB v6.4.0 では、実験的機能として[`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md)ステートメントが導入されています。このステートメントを使用して、ガベージ コレクション (GC) の有効期間内の特定の時点にクラスターを復元できます。 v6.5.0 では、この機能は TiCDC および PITR と互換性があり、GA になりました。この機能は、DML の誤操作を簡単に元に戻し、元のクラスターを数分で復元し、さまざまな時点でデータをロールバックして、データが変更された正確な時刻を特定するのに役立ちます。
+    v6.4.0 以降、TiDB は[`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md)ステートメントを実験的機能として導入しました。このステートメントを使用して、ガベージ コレクション (GC) の有効期間内の特定の時点にクラスターを復元できます。 v6.5.0 では、この機能は TiCDC および PITR と互換性があり、GA になりました。この機能は、DML の誤操作を簡単に元に戻し、元のクラスターを数分で復元し、さまざまな時点でデータをロールバックして、データが変更された正確な時刻を特定するのに役立ちます。
 
     詳細については、 [ドキュメンテーション](/sql-statements/sql-statement-flashback-to-timestamp.md)を参照してください。
 
 -   `INSERT` 、 `REPLACE` 、 `UPDATE` 、および`DELETE` [#33485](https://github.com/pingcap/tidb/issues/33485) @ [エキキシウム](https://github.com/ekexium)を含む非トランザクション DML ステートメントを完全にサポート
 
-    大規模なデータ処理のシナリオでは、大規模なトランザクションを含む単一の SQL ステートメントがクラスターの安定性とパフォーマンスに悪影響を及ぼす可能性があります。非トランザクション DML ステートメントは、内部実行用に複数の SQL ステートメントに分割された DML ステートメントです。 split ステートメントは、トランザクションの原子性と分離性を損ないますが、クラスターの安定性を大幅に向上させます。 TiDB は、v6.1.0 以降、非トランザクション`DELETE`ステートメントをサポートし、v6.5.0 以降、非トランザクション`INSERT` 、 `REPLACE` 、および`UPDATE`ステートメントをサポートします。
+    大規模なデータ処理のシナリオでは、大規模なトランザクションを含む単一の SQL ステートメントがクラスターの安定性とパフォーマンスに悪影響を及ぼす可能性があります。非トランザクション DML ステートメントは、内部実行用に複数の SQL ステートメントに分割された DML ステートメントです。 split ステートメントは、トランザクションの原子性と分離性を損ないますが、クラスターの安定性を大幅に向上させます。 TiDB は、v6.1.0 以降、非トランザクション`DELETE`ステートメントをサポートしており、v6.5.0 以降、非トランザクション`INSERT` 、 `REPLACE` 、および`UPDATE`ステートメントをサポートしています。
 
     詳細については、 [非トランザクション DML ステートメント](/non-transactional-dml.md)および[`BATCH`構文](/sql-statements/sql-statement-batch.md)を参照してください。
 
@@ -141,7 +142,7 @@ TiDB 6.5.0 は長期サポート リリース (LTS) です。
 
 -   [インデックスマージ](/glossary.md#index-merge)は、 `AND` [#39333](https://github.com/pingcap/tidb/issues/39333) @ [グオシャオゲ](https://github.com/guo-shaoge) @ [時間と運命](https://github.com/time-and-fate) @ [ハイランフー](https://github.com/hailanwhu)で接続された式をサポートします
 
-    v6.5.0 より前の TiDB は、 `OR`で接続されたフィルター条件に対してインデックス マージの使用のみをサポートしていました。 v6.5.0 から、TiDB は`WHERE`句の`AND`で接続されたフィルター条件に対してインデックス マージの使用をサポートしました。このように、TiDB のインデックス マージは、クエリ フィルター条件のより一般的な組み合わせをカバーできるようになり、ユニオン ( `OR` ) 関係に限定されなくなりました。現在の v6.5.0 バージョンは、オプティマイザーによって自動的に選択される`OR`の条件でのインデックス マージのみをサポートします。 `AND`条件のインデックス マージを有効にするには、 [`USE_INDEX_MERGE`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-)ヒントを使用する必要があります。
+    v6.5.0 より前の TiDB は、 `OR`で接続されたフィルター条件に対してインデックス マージの使用のみをサポートしていました。 v6.5.0 から、TiDB は`WHERE`句の`AND`で接続されたフィルター条件に対してインデックス マージの使用をサポートしています。このように、TiDB のインデックス マージは、クエリ フィルター条件のより一般的な組み合わせをカバーできるようになり、ユニオン ( `OR` ) 関係に限定されなくなりました。現在の v6.5.0 バージョンは、オプティマイザーによって自動的に選択される`OR`の条件でのインデックス マージのみをサポートします。 `AND`条件のインデックス マージを有効にするには、 [`USE_INDEX_MERGE`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-)ヒントを使用する必要があります。
 
     インデックス マージの詳細については、 [v5.4.0 リリースノート](/releases/release-5.4.0.md#performance)および[インデックス マージについて説明する](/explain-index-merge.md)を参照してください。
 
@@ -161,7 +162,7 @@ TiDB 6.5.0 は長期サポート リリース (LTS) です。
 
 -   [ビュー](/views.md) [#37887](https://github.com/pingcap/tidb/issues/37887) @ [思い出す](https://github.com/Reminiscent)で実行計画の生成を妨害するグローバル オプティマイザ ヒントをサポートします。
 
-    一部のビュー アクセス シナリオでは、オプティマイザー ヒントを使用してビュー内のクエリの実行プランに干渉し、最高のパフォーマンスを実現する必要があります。 v6.5.0 以降、TiDB はビュー内のクエリ ブロックのグローバル ヒントの追加をサポートしているため、クエリで定義されたヒントがビューで有効になる可能性があります。この機能は、ネストされたビューを含む複雑な SQL ステートメントにヒントを挿入する方法を提供し、実行計画の制御を強化し、複雑なステートメントのパフォーマンスを安定させます。グローバル ヒントを使用するには、 [クエリ ブロックに名前を付ける](/optimizer-hints.md#step-1-define-the-query-block-name-of-the-view-using-the-qb_name-hint)と[ヒント参照を指定する](/optimizer-hints.md#step-2-add-the-target-hints)が必要です。
+    一部のビュー アクセス シナリオでは、オプティマイザー ヒントを使用して、ビュー内のクエリの実行プランに干渉し、最適なパフォーマンスを実現する必要があります。 v6.5.0 以降、TiDB はビュー内のクエリ ブロックへのグローバル ヒントの追加をサポートし、クエリで定義されたヒントをビューで有効にします。この機能は、ネストされたビューを含む複雑な SQL ステートメントにヒントを挿入する方法を提供し、実行計画の制御を強化し、複雑なステートメントのパフォーマンスを安定させます。グローバル ヒントを使用するには、 [クエリ ブロックに名前を付ける](/optimizer-hints.md#step-1-define-the-query-block-name-of-the-view-using-the-qb_name-hint)と[ヒント参照を指定する](/optimizer-hints.md#step-2-add-the-target-hints)が必要です。
 
     詳細については、 [ドキュメンテーション](/optimizer-hints.md#hints-that-take-effect-globally)を参照してください。
 
@@ -185,7 +186,7 @@ TiDB 6.5.0 は長期サポート リリース (LTS) です。
 
 -   グローバル メモリ コントロール機能は GA [#37816](https://github.com/pingcap/tidb/issues/37816) @ [wshwsh12](https://github.com/wshwsh12)になりました
 
-    TiDB v6.4.0 では、実験的機能としてグローバル メモリ コントロールが導入されています。 v6.5.0 以降、グローバル メモリ コントロール機能が GA になり、TiDB でのメイン メモリの消費を追跡できるようになりました。グローバルメモリ消費量が[`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)で定義されたしきい値に達すると、TiDB は安定性を確保するために、GC または SQL 操作のキャンセルによってメモリ使用量を制限しようとします。
+    v6.4.0 以降、TiDB はグローバル メモリ コントロールを実験的機能として導入しました。 v6.5.0 では GA になり、メイン メモリの消費量を追跡できます。グローバルメモリ消費量が[`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)で定義されたしきい値に達すると、TiDB は安定性を確保するために、GC または SQL 操作のキャンセルによってメモリ使用量を制限しようとします。
 
     セッション内のトランザクションによって消費されるメモリー (最大[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)は以前は構成項目によって設定されていました[`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit) ) がメモリー管理モジュールによって追跡されるようになったことに注意してください。 、システム変数[`tidb_mem_oom_action`](/system-variables.md#tidb_mem_oom_action-new-in-v610)によって定義された動作がトリガーされます (デフォルトは`CANCEL` 、つまり操作のキャンセルです)。前方互換性を確保するために、 [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit)がデフォルト以外の値として設定されている場合でも、TiDB はトランザクションが`txn-total-size-limit`によって設定されたメモリを使用できることを保証します。
 
@@ -211,7 +212,7 @@ TiDB 6.5.0 は長期サポート リリース (LTS) です。
 
 -   高パフォーマンスでグローバルに単調な`AUTO_INCREMENT`列属性 (GA) [#38442](https://github.com/pingcap/tidb/issues/38442) @ [ティアンカイマオ](https://github.com/tiancaiamao)をサポート
 
-    TiDB v6.4.0 では、実験的機能として`AUTO_INCREMENT` MySQL 互換モードが導入されています。このモードでは、すべての TiDB インスタンスで ID が単調に増加することを保証する集中自動インクリメント ID 割り当てサービスが導入されます。この機能により、クエリ結果を自動インクリメント ID で簡単に並べ替えることができます。 v6.5.0 では、この機能は GA になります。この機能を使用したテーブルの挿入 TPS は 20,000 を超えると予想され、この機能は柔軟なスケーリングをサポートして、単一のテーブルとクラスター全体の書き込みスループットを向上させます。 MySQL 互換モードを使用するには、テーブル作成時に`AUTO_ID_CACHE` ～ `1`を設定する必要があります。次に例を示します。
+    v6.4.0 以降、TiDB は実験的機能として`AUTO_INCREMENT` MySQL 互換モードを導入しました。このモードでは、すべての TiDB インスタンスで ID が単調に増加することを保証する集中自動インクリメント ID 割り当てサービスが導入されます。この機能により、クエリ結果を自動インクリメント ID で簡単に並べ替えることができます。 v6.5.0 では、この機能は GA になります。この機能を使用したテーブルの挿入 TPS は 20,000 を超えると予想され、この機能は柔軟なスケーリングをサポートして、単一のテーブルとクラスター全体の書き込みスループットを向上させます。 MySQL 互換モードを使用するには、テーブル作成時に`AUTO_ID_CACHE` ～ `1`を設定する必要があります。次に例を示します。
 
     ```sql
     CREATE TABLE t(a int AUTO_INCREMENT key) AUTO_ID_CACHE 1;
@@ -336,20 +337,20 @@ TiDB 6.5.0 は長期サポート リリース (LTS) です。
 
 ### Configuration / コンフィグレーションファイルのパラメーター {#configuration-file-parameters}
 
-| Configuration / コンフィグレーションファイル | Configuration / コンフィグレーションパラメーター                                                                           | タイプを変更 | 説明                                                                                                                                                 |
-| ------------------------------ | ---------------------------------------------------------------------------------------------------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| TiDB                           | [`server-memory-quota`](/tidb-configuration-file.md#server-memory-quota-new-in-v409)                       | 非推奨    | v6.5.0 以降、この構成アイテムは廃止されました。代わりに、システム変数[`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)を使用してメモリをグローバルに管理します。 |
-| TiDB                           | [`disconnect-on-expired-password`](/tidb-configuration-file.md#disconnect-on-expired-password-new-in-v650) | 新規追加   | パスワードの有効期限が切れたときに TiDB がクライアント接続を切断するかどうかを決定します。デフォルト値は`true`です。これは、パスワードの有効期限が切れるとクライアント接続が切断されることを意味します。                                         |
-| TiKV                           | `raw-min-ts-outlier-threshold`                                                                             | 削除しました | v6.4.0 以降、この構成アイテムは廃止されました。 v6.5.0 以降、この構成アイテムは削除されました。                                                                                            |
-| TiKV                           | [`cdc.min-ts-interval`](/tikv-configuration-file.md#min-ts-interval)                                       | 修正済み   | CDCレイテンシーを短縮するために、デフォルト値が`1s`から`200ms`に変更されました。                                                                                                    |
-| TiKV                           | [`memory-use-ratio`](/tikv-configuration-file.md#memory-use-ratio-new-in-v650)                             | 新規追加   | PITR ログ リカバリで使用可能なメモリと合計システム メモリの比率を示します。                                                                                                          |
-| TiCDC                          | [`sink.terminator`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)                 | 新規追加   | 2 つのデータ変更イベントを区切るために使用される行ターミネータを示します。デフォルトでは値は空です。つまり、 `\r\n`が使用されます。                                                                             |
-| TiCDC                          | [`sink.date-separator`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)             | 新規追加   | ファイル ディレクトリの日付区切りの種類を示します。値のオプションは`none` 、 `year` 、 `month` 、および`day`です。 `none`はデフォルト値で、日付が区切られていないことを意味します。                                       |
-| TiCDC                          | [`sink.enable-partition-separator`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters) | 新規追加   | 区切り文字列としてパーティションを使用するかどうかを指定します。デフォルト値は`false`です。これは、テーブル内のパーティションが別々のディレクトリに格納されないことを意味します。                                                       |
-| TiCDC                          | [`sink.csv.delimiter`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)              | 新規追加   | フィールド間の区切り文字を示します。値は ASCII 文字でなければならず、デフォルトは`,`です。                                                                                                 |
-| TiCDC                          | [`sink.csv.quote`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)                  | 新規追加   | フィールドを囲む引用.デフォルト値は`"`です。値が空の場合、引用符は使用されません。                                                                                                        |
-| TiCDC                          | [`sink.csv.null`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)                   | 新規追加   | CSV 列が null の場合に表示される文字を指定します。デフォルト値は`\N`です。                                                                                                       |
-| TiCDC                          | [`sink.csv.include-commit-ts`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)      | 新規追加   | commit-ts を CSV 行に含めるかどうかを指定します。デフォルト値は`false`です。                                                                                                  |
+| Configuration / コンフィグレーションファイル | Configuration / コンフィグレーションパラメーター                                                                           | タイプを変更 | 説明                                                                                                                                                   |
+| ------------------------------ | ---------------------------------------------------------------------------------------------------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| TiDB                           | [`server-memory-quota`](/tidb-configuration-file.md#server-memory-quota-new-in-v409)                       | 非推奨    | v6.5.0 以降、この構成アイテムは非推奨になりました。代わりに、システム変数[`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)を使用してメモリをグローバルに管理します。 |
+| TiDB                           | [`disconnect-on-expired-password`](/tidb-configuration-file.md#disconnect-on-expired-password-new-in-v650) | 新規追加   | パスワードの有効期限が切れたときに TiDB がクライアント接続を切断するかどうかを決定します。デフォルト値は`true`です。これは、パスワードの有効期限が切れるとクライアント接続が切断されることを意味します。                                           |
+| TiKV                           | `raw-min-ts-outlier-threshold`                                                                             | 削除しました | この構成アイテムは v6.4.0 で廃止され、v6.5.0 で削除されました。                                                                                                              |
+| TiKV                           | [`cdc.min-ts-interval`](/tikv-configuration-file.md#min-ts-interval)                                       | 修正済み   | CDCレイテンシーを短縮するために、デフォルト値が`1s`から`200ms`に変更されました。                                                                                                      |
+| TiKV                           | [`memory-use-ratio`](/tikv-configuration-file.md#memory-use-ratio-new-in-v650)                             | 新規追加   | PITR ログ リカバリで使用可能なメモリと合計システム メモリの比率を示します。                                                                                                            |
+| TiCDC                          | [`sink.terminator`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)                 | 新規追加   | 2 つのデータ変更イベントを区切るために使用される行ターミネータを示します。デフォルトでは値は空です。つまり、 `\r\n`が使用されます。                                                                               |
+| TiCDC                          | [`sink.date-separator`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)             | 新規追加   | ファイル ディレクトリの日付区切りの種類を示します。値のオプションは`none` 、 `year` 、 `month` 、および`day`です。 `none`はデフォルト値で、日付が区切られていないことを意味します。                                         |
+| TiCDC                          | [`sink.enable-partition-separator`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters) | 新規追加   | 区切り文字列としてパーティションを使用するかどうかを指定します。デフォルト値は`false`です。これは、テーブル内のパーティションが別々のディレクトリに格納されないことを意味します。                                                         |
+| TiCDC                          | [`sink.csv.delimiter`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)              | 新規追加   | フィールド間の区切り文字を示します。値は ASCII 文字でなければならず、デフォルトは`,`です。                                                                                                   |
+| TiCDC                          | [`sink.csv.quote`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)                  | 新規追加   | フィールドを囲む引用.デフォルト値は`"`です。値が空の場合、引用符は使用されません。                                                                                                          |
+| TiCDC                          | [`sink.csv.null`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)                   | 新規追加   | CSV 列が null の場合に表示される文字を指定します。デフォルト値は`\N`です。                                                                                                         |
+| TiCDC                          | [`sink.csv.include-commit-ts`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)      | 新規追加   | commit-ts を CSV 行に含めるかどうかを指定します。デフォルト値は`false`です。                                                                                                    |
 
 ### その他 {#others}
 
@@ -378,7 +379,7 @@ v6.5.0 以降、v4.0.7 で導入された[`AMEND TRANSACTION`](/system-variables
     -   専用スレッドで CheckLeader を実行して、TiCDC レプリケーションのレイテンシーを短縮します[#13774](https://github.com/tikv/tikv/issues/13774) @ [大静脈](https://github.com/overvenus)
     -   チェックポイント[#13824](https://github.com/tikv/tikv/issues/13824) @ [ユジュンセン](https://github.com/YuJuncen)のプル モデルをサポート
     -   crossbeam-channel [#13815](https://github.com/tikv/tikv/issues/13815) @ [スティックナーフ](https://github.com/sticnarf)を更新することにより、送信側でのスピンの問題を回避します
-    -   TiKV [#13849](https://github.com/tikv/tikv/issues/13849) @ [cfzjywxk](https://github.com/cfzjywxk)でバッチCoprocessorタスク処理をサポート
+    -   TiKV [#13849](https://github.com/tikv/tikv/issues/13849) @ [cfzjywxk](https://github.com/cfzjywxk)でバッチコプロセッサータスク処理をサポート
     -   TiKV にリージョン[#13648](https://github.com/tikv/tikv/issues/13648) @ [Lykxサシネーター](https://github.com/LykxSassinator)をウェイクアップするように通知することで、障害回復の待ち時間を短縮します
     -   コードの最適化[#13827](https://github.com/tikv/tikv/issues/13827) @ [ビジージェイ](https://github.com/BusyJay)により、要求されたメモリ使用量のサイズを減らします
     -   Raft拡張機能を導入してコードの拡張性を向上させる[#13827](https://github.com/tikv/tikv/issues/13827) @ [ビジージェイ](https://github.com/BusyJay)
@@ -388,7 +389,7 @@ v6.5.0 以降、v4.0.7 で導入された[`AMEND TRANSACTION`](/system-variables
 -   PD
 
     -   ロックの粒度を最適化して、ロックの競合を減らし、高い並行性の下でのハートビートの処理能力を向上させます[#5586](https://github.com/tikv/pd/issues/5586) @ [ルルング](https://github.com/rleungx)
-    -   大規模クラスタ向けにスケジューラのパフォーマンスを最適化し、スケジューリング ポリシーの生成を高速化[#5473](https://github.com/tikv/pd/issues/5473) @ [バタフライ](https://github.com/bufferflies)
+    -   大規模クラスタ向けにスケジューラのパフォーマンスを最適化し、スケジューリング ポリシーの本番を高速化[#5473](https://github.com/tikv/pd/issues/5473) @ [バタフライ](https://github.com/bufferflies)
     -   Regions [#5606](https://github.com/tikv/pd/issues/5606) @ [ルルング](https://github.com/rleungx)のロード速度を改善
     -   リージョンハートビート[#5648](https://github.com/tikv/pd/issues/5648) @ [ルルング](https://github.com/rleungx)の最適化された処理により、不要なオーバーヘッドを削減
     -   自動ガベージコレクションの機能を追加する墓石ストア[#5348](https://github.com/tikv/pd/issues/5348) @ [ノルーチ](https://github.com/nolouch)

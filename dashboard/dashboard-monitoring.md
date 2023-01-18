@@ -109,7 +109,7 @@ Performance Overview ダッシュボードは、TiDB、PD、および TiKV の�
 
 -   avg by type: すべての TiDB インスタンスですべてのリクエストを実行する平均時間。タイプ別に収集: `SELECT` 、 `INSERT` 、および`UPDATE`
 
-### 接続アイドル時間 {#connection-idle-duration}
+### 接続アイドル期間 {#connection-idle-duration}
 
 Connection Idle Duration は、接続がアイドル状態である期間を示します。
 

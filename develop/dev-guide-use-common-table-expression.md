@@ -23,8 +23,6 @@ TiDB v5.1 以降、TiDB は ANSI SQL99 標準の CTE と再帰をサポートし
 
 非再帰 CTE は、次の構文を使用して定義できます。
 
-{{< copyable "" >}}
-
 ```sql
 WITH <query_name> AS (
     <query_definition>
@@ -38,8 +36,6 @@ SELECT ... FROM <query_name>;
 <div label="SQL" value="sql">
 
 [一時テーブル](/develop/dev-guide-use-temporary-tables.md)のステートメントを次のように変更します。
-
-{{< copyable "" >}}
 
 ```sql
 WITH top_50_eldest_authors_cte AS (
@@ -75,8 +71,6 @@ GROUP BY ta.id;
 
 </div>
 <div label="Java" value = "java">
-
-{{< copyable "" >}}
 
 ```java
 public List<Author> getTop50EldestAuthorInfoByCTE() throws SQLException {
@@ -116,8 +110,6 @@ public List<Author> getTop50EldestAuthorInfoByCTE() throws SQLException {
 </SimpleTab>
 
 著者「Ray Macejkovic」が 4 冊の本を書いたことがわかります。 CTE クエリを使用すると、次のように、これら 4 冊の書籍の注文と評価の情報をさらに取得できます。
-
-{{< copyable "" >}}
 
 ```sql
 WITH books_authored_by_rm AS (
@@ -188,8 +180,6 @@ SELECT ... FROM <query_name>;
 ```
 
 古典的な例は、再帰的な CTE を使用して[フィボナッチ数](https://en.wikipedia.org/wiki/Fibonacci_number)のセットを生成することです。
-
-{{< copyable "" >}}
 
 ```sql
 WITH RECURSIVE fibonacci (n, fib_n, next_fib_n) AS

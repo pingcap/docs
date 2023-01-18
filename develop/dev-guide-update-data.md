@@ -14,7 +14,7 @@ summary: Learn about how to update data and batch update data.
 
 このドキュメントを読む前に、次の準備が必要です。
 
--   [TiDB Cloud(サーバーレス層) で TiDBクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md) .
+-   [TiDB Cloud(Serverless Tier) で TiDBクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md) .
 -   [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md) 、 [データベースを作成する](/develop/dev-guide-create-database.md) 、 [テーブルを作成する](/develop/dev-guide-create-table.md) 、および[セカンダリ インデックスの作成](/develop/dev-guide-create-secondary-indexes.md)を読んでください。
 -   データを`UPDATE`つにしたい場合は、まず[データを挿入する](/develop/dev-guide-insert-data.md)にする必要があります。
 
@@ -29,8 +29,6 @@ summary: Learn about how to update data and batch update data.
 ### <code>UPDATE</code> SQL 構文 {#code-update-code-sql-syntax}
 
 SQL では、 `UPDATE`ステートメントは通常、次の形式になります。
-
-{{< copyable "" >}}
 
 ```sql
 UPDATE {table} SET {update_column} = {update_value} WHERE {filter_column} = {filter_value}
@@ -71,8 +69,6 @@ UPDATE {table} SET {update_column} = {update_value} WHERE {filter_column} = {fil
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
 
-{{< copyable "" >}}
-
 ```sql
 UPDATE `authors` SET `name` = "Helen Haruki" WHERE `id` = 1;
 ```
@@ -80,8 +76,6 @@ UPDATE `authors` SET `name` = "Helen Haruki" WHERE `id` = 1;
 </div>
 
 <div label="Java" value="java">
-
-{{< copyable "" >}}
 
 ```java
 // ds is an entity of com.mysql.cj.jdbc.MysqlDataSource
@@ -105,8 +99,6 @@ try (Connection connection = ds.getConnection()) {
 ### <code>INSERT ON DUPLICATE KEY UPDATE</code> SQL 構文 {#code-insert-on-duplicate-key-update-code-sql-syntax}
 
 SQL では、 `INSERT ... ON DUPLICATE KEY UPDATE ...`ステートメントは通常、次の形式になります。
-
-{{< copyable "" >}}
 
 ```sql
 INSERT INTO {table} ({columns}) VALUES ({values})
@@ -135,8 +127,6 @@ INSERT INTO {table} ({columns}) VALUES ({values})
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
 
-{{< copyable "" >}}
-
 ```sql
 INSERT INTO `ratings`
     (`book_id`, `user_id`, `score`, `rated_at`)
@@ -148,8 +138,6 @@ ON DUPLICATE KEY UPDATE `score` = 5, `rated_at` = NOW();
 </div>
 
 <div label="Java" value="java">
-
-{{< copyable "" >}}
 
 ```java
 // ds is an entity of com.mysql.cj.jdbc.MysqlDataSource
@@ -199,8 +187,6 @@ VALUES (?, ?, ?, NOW()) ON DUPLICATE KEY UPDATE `score` = ?, `rated_at` = NOW()"
 前の 5 ポイント スケールの`ratings`テーブルのデータに`2`を掛け、評価テーブルに新しい列を追加して、行が更新されたかどうかを示す必要があります。この列を使用すると、 `SELECT`で更新された行をフィルターで除外できます。これにより、スクリプトがクラッシュして複数回行を更新し、不合理なデータが生成されるのを防ぐことができます。
 
 たとえば、10 ポイント スケールかどうかの識別子としてデータ型[ブール](/data-type-numeric.md#boolean-type)を使用して、 `ten_point`という名前の列を作成します。
-
-{{< copyable "" >}}
 
 ```sql
 ALTER TABLE `bookshop`.`ratings` ADD COLUMN `ten_point` BOOL NOT NULL DEFAULT FALSE;
@@ -298,8 +284,6 @@ func placeHolder(n int) string {
 Java (JDBC) では、一括更新アプリケーションは次のようになります。
 
 **コード：**
-
-{{< copyable "" >}}
 
 ```java
 package com.pingcap.bulkUpdate;
@@ -432,8 +416,6 @@ public class BatchUpdateExample {
 ```
 
 -   `hibernate.cfg.xml`構成:
-
-{{< copyable "" >}}
 
 ```xml
 <?xml version='1.0' encoding='utf-8'?>

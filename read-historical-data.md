@@ -174,4 +174,4 @@ SET GLOBAL tidb_gc_life_time="60m";
 
 -   単純なケースでは、変数`tidb_snapshot`を設定した後に`SELECT`を使用して出力をコピー アンド ペーストするか、 `SELECT ... INTO LOCAL OUTFLE`を使用して`LOAD DATA`を使用して後でデータをインポートします。
 
--   履歴スナップショットをエクスポートするには、 [Dumpling](/dumpling-overview.md#export-historical-data-snapshot-of-tidb)を使用します。 Dumplingは、より大きなデータ セットのエクスポートに適しています。
+-   履歴スナップショットをエクスポートするには、 [Dumpling](/dumpling-overview.md#export-historical-data-snapshots-of-tidb)を使用します。 Dumplingは、より大きなデータ セットのエクスポートに適しています。

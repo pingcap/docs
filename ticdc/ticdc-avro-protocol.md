@@ -16,7 +16,7 @@ Message Queue (MQ) をダウンストリーム シンクとして使用する場
 {{< copyable "" >}}
 
 ```shell
-cdc cli changefeed create --pd=http://127.0.0.1:2379 --changefeed-id="kafka-avro" --sink-uri="kafka://127.0.0.1:9092/topic-name?protocol=avro" --schema-registry=http://127.0.0.1:8081 --config changefeed_config.toml
+cdc cli changefeed create --server=http://127.0.0.1:8300 --changefeed-id="kafka-avro" --sink-uri="kafka://127.0.0.1:9092/topic-name?protocol=avro" --schema-registry=http://127.0.0.1:8081 --config changefeed_config.toml
 ```
 
 ```shell
@@ -41,7 +41,7 @@ dispatchers = [
 {{< copyable "" >}}
 
 ```shell
-cdc cli changefeed create --pd=http://127.0.0.1:2379 --changefeed-id="kafka-avro-enable-extension" --sink-uri="kafka://127.0.0.1:9092/topic-name?protocol=avro&enable-tidb-extension=true" --schema-registry=http://127.0.0.1:8081 --config changefeed_config.toml
+cdc cli changefeed create --server=http://127.0.0.1:8300 --changefeed-id="kafka-avro-enable-extension" --sink-uri="kafka://127.0.0.1:9092/topic-name?protocol=avro&enable-tidb-extension=true" --schema-registry=http://127.0.0.1:8081 --config changefeed_config.toml
 ```
 
 ```shell
@@ -155,7 +155,7 @@ TiCDC は DML イベントを Kafka イベントに変換し、イベントの�
 
 -   `{{ColumnName}}`は列名を示します。
 -   `{{TIDB_TYPE}}`は、TiDB の型を示します。これは、SQL 型との 1 対 1 のマッピングではありません。
--   `{{AVRO_TYPE}}`は[アブロスペック](https://avro.apache.org/docs/current/spec.html)のタイプを示します。
+-   `{{AVRO_TYPE}}`は[アブロ仕様](https://avro.apache.org/docs/current/spec.html)のタイプを示します。
 
 | SQL タイプ   | TIDB_TYPE | AVRO_TYPE | 説明                                                                                                       |
 | --------- | --------- | --------- | -------------------------------------------------------------------------------------------------------- |
@@ -187,7 +187,7 @@ TiCDC は DML イベントを Kafka イベントに変換し、イベントの�
 | 少し        | 少し        | バイト       | <li></li>                                                                                                |
 | JSON      | JSON      | ストリング     | <li></li>                                                                                                |
 | 列挙型       | 列挙型       | ストリング     | <li></li>                                                                                                |
-| セットする     | セットする     | ストリング     | <li></li>                                                                                                |
+| 設定        | 設定        | ストリング     | <li></li>                                                                                                |
 | 小数        | 小数        | バイト       | `avro-decimal-handling-mode`が文字列の場合、AVRO_TYPE は文字列です。                                                    |
 
 Avro プロトコルでは、他の 2 つの`sink-uri`パラメーター ( `avro-decimal-handling-mode`および`avro-bigint-unsigned-handling-mode` ) もカラムデータ形式に影響を与える可能性があります。
@@ -207,7 +207,7 @@ Avro プロトコルでは、他の 2 つの`sink-uri`パラメーター ( `avro
 {{< copyable "" >}}
 
 ```shell
-cdc cli changefeed create --pd=http://127.0.0.1:2379 --changefeed-id="kafka-avro-string-option" --sink-uri="kafka://127.0.0.1:9092/topic-name?protocol=avro&avro-decimal-handling-mode=string&avro-bigint-unsigned-handling-mode=string" --schema-registry=http://127.0.0.1:8081 --config changefeed_config.toml
+cdc cli changefeed create --server=http://127.0.0.1:8300 --changefeed-id="kafka-avro-string-option" --sink-uri="kafka://127.0.0.1:9092/topic-name?protocol=avro&avro-decimal-handling-mode=string&avro-bigint-unsigned-handling-mode=string" --schema-registry=http://127.0.0.1:8081 --config changefeed_config.toml
 ```
 
 ```shell

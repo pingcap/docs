@@ -17,15 +17,18 @@ TiDB クラスターに関するメトリック データを[データドッグ]
 
 ## 制限 {#limitation}
 
-[サーバーレス階層クラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier)で Datadog 統合を使用することはできません。
+[Serverless Tierクラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)で Datadog 統合を使用することはできません。
 
 ## 手順 {#steps}
 
 ### ステップ 1. Datadog API キーと統合する {#step-1-integrate-with-your-datadog-api-key}
 
-1.  TiDB Cloudコンソールで、Datadog 統合のターゲット プロジェクトを選択し、[**プロジェクト設定**] タブをクリックします。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)にログインします。
 
-2.  左ペインで [**統合**] をクリックします。
+2.  [**クラスター**](https://tidbcloud.com/console/clusters)ページの左側のナビゲーション ペインで、次のいずれかを実行します。
+
+    -   複数のプロジェクトがある場合は、ターゲット プロジェクトに切り替えてから、[**管理**] &gt; [<strong>統合</strong>] をクリックします。
+    -   プロジェクトが 1 つしかない場合は、[**管理**] &gt; [<strong>統合</strong>] をクリックします。
 
 3.  **Datadog への統合 を**クリックします。
 

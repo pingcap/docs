@@ -153,7 +153,7 @@ TiDB クラスターで TLS を有効にする必要がある場合は、 [TiDB 
 
 > **ノート：**
 >
-> インポートが成功したかどうかに関係なく、ログの最後の行に`tidb lightning exit`が表示されます。これは、 TiDB Lightningが正常に終了したことを意味しますが、必ずしもインポートが成功したことを意味するものではありません。
+> インポートが成功したかどうかに関係なく、ログの最後の行に`tidb lightning exit`が表示されます。これは、 TiDB Lightningが正常に終了したことを意味しますが、必ずしもインポートが成功したことを意味するわけではありません。
 
 インポート中に問題が発生した場合は、トラブルシューティングについて[TiDB LightningFAQ](/tidb-lightning/tidb-lightning-faq.md)を参照してください。
 
@@ -294,7 +294,7 @@ TiUP を使用して DM をデプロイしたときに Prometheus、Alertmanager
 
 DM が実行されている場合、DM-worker、DM-master、および dmctl は関連情報をログに出力します。これらのコンポーネントのログ ディレクトリは次のとおりです。
 
--   DM-master: DM-master プロセス パラメータ`--log-file`によって指定されます。 TiUPを使用して DM をデプロイする場合、ログ ディレクトリはデフォルトで`/dm-deploy/dm-master-8261/log/`です。
+-   DM-master: DM-master プロセス パラメータ`--log-file`によって指定されます。 TiUPを使用して DM を展開する場合、ログ ディレクトリはデフォルトで`/dm-deploy/dm-master-8261/log/`です。
 -   DM-worker: DM-worker プロセス パラメータ`--log-file`によって指定されます。 TiUPを使用して DM を展開する場合、ログ ディレクトリはデフォルトで`/dm-deploy/dm-worker-8262/log/`です。
 
 ## 次は何ですか {#what-s-next}

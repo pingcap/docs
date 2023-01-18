@@ -42,7 +42,7 @@ TiCDC の Changefeed と Task は、2 つの論理的な概念です。具体的
 例えば：
 
 ```
-cdc cli changefeed create --pd=http://10.0.10.25:2379 --sink-uri="kafka://127.0.0.1:9092/cdc-test?kafka-version=2.4.0&partition-num=6&max-message-bytes=67108864&replication-factor=1"
+cdc cli changefeed create --server="http://127.0.0.1:8300" --sink-uri="kafka://127.0.0.1:9092/cdc-test?kafka-version=2.4.0&partition-num=6&max-message-bytes=67108864&replication-factor=1"
 cat changefeed.toml
 ......
 [sink]
@@ -52,7 +52,7 @@ dispatchers = [
 ]
 ```
 
-上記の`cdc cli changefeed create`コマンドのパラメーターの詳細な説明については、 [TiCDC ChangefeedConfiguration / コンフィグレーションパラメーター](/ticdc/ticdc-changefeed-config.md)を参照してください。
+上記の`cdc cli changefeed create`コマンドのパラメーターの詳細な説明については、 [TiCDC ChangefeedConfiguration / コンフィグレーションパラメータ](/ticdc/ticdc-changefeed-config.md)を参照してください。
 
 上記の`cdc cli changefeed create`コマンドは、 `test1.tab1` 、 `test1.tab2` 、 `test3.tab3` 、および`test4.tab4`を Kafka クラスターにレプリケートする changefeed タスクを作成します。 TiCDC がこのコマンドを受信した後の処理の流れは次のとおりです。
 
@@ -139,16 +139,18 @@ table ResolvedTS >= global ResolvedTS >= table CheckpointTS >= global Checkpoint
 
 #### バリアTS {#barrier-ts}
 
-バリア TS は、DDL ステートメントが実行されたとき、または同期点が使用されたときに生成されます。
+バリア TS は、DDL 変更イベントがあるか、同期点が使用されている場合に生成されます。
 
--   このタイムスタンプにより、この DDL ステートメントの前のすべての変更がダウンストリームに複製されます。この DDL ステートメントが実行されてレプリケートされた後、TiCDC は他のデータ変更のレプリケートを開始します。 DDL ステートメントは Capture Owner によって処理されるため、DDL ステートメントに対応する Barrier TS は所有者ノードの Processor スレッドによってのみ生成されます。
--   Syncpoint Barrier TS もタイムスタンプです。 TiCDC の同期点機能を有効にすると、指定した`sync-point-interval`に従って、TiCDC によってバリア TS が生成されます。この Barrier TS がレプリケートされる前にすべてのテーブルの変更が行われると、TiCDC はグローバル チェックポイントをダウンストリームに記録し、そこから次回のデータ レプリケーションが続行されます。
+-   DDL 変更イベント: Barrier TS は、DDL ステートメントの前のすべての変更がダウンストリームに複製されることを保証します。この DDL ステートメントが実行されてレプリケートされた後、TiCDC は他のデータ変更のレプリケートを開始します。 DDL ステートメントは Capture Owner によって処理されるため、DDL ステートメントに対応する Barrier TS は所有者ノードによってのみ生成されます。
+-   同期点: TiCDC の同期点機能を有効にすると、指定した`sync-point-interval`に従って、TiCDC によってバリア TS が生成されます。この Barrier TS がレプリケートされる前にすべてのテーブルが変更されると、TiCDC は現在のグローバル CheckpointTS をプライマリ TS としてダウンストリームの tsMap を記録するテーブルに挿入します。その後、TiCDC はデータのレプリケーションを続行します。
 
-バリア TS が生成された後、TiCDC は、このバリア TS の前に発生したデータ変更のみをダウンストリームに複製します。次に、TiCDC は、グローバル CheckpointTS と Barrier TS を比較して、すべてのターゲット データが複製されているかどうかを確認します。グローバル CheckpointTS が Barrier TS と等しい場合、TiCDC は、指定された操作 (DDL ステートメントの実行やグローバル CheckpointTS ダウンストリームの記録など) を実行した後、レプリケーションを続行します。それ以外の場合、TiCDC は、Barrier TS がダウンストリームに複製される前に発生するすべてのデータ変更を待機します。
+バリア TS が生成された後、TiCDC は、このバリア TS の前に発生したデータ変更のみがダウンストリームに複製されることを保証します。これらのデータ変更がダウンストリームにレプリケートされる前に、レプリケーション タスクは続行されません。所有者の TiCDC は、グローバル CheckpointTS と Barrier TS を継続的に比較することにより、すべてのターゲット データが複製されたかどうかを確認します。グローバル CheckpointTS が Barrier TS と等しい場合、TiCDC は、指定された操作 (DDL ステートメントの実行やグローバル CheckpointTS ダウンストリームの記録など) を実行した後、レプリケーションを続行します。それ以外の場合、TiCDC は、バリア TS がダウンストリームに複製される前に発生するすべてのデータ変更を待機します。
 
 ## 主な工程 {#major-processes}
 
 このセクションでは、TiCDC の主要なプロセスについて説明し、その動作原理をよりよく理解できるようにします。
+
+次のプロセスは TiCDC 内でのみ発生し、ユーザーに対して透過的であることに注意してください。したがって、起動する TiCDC ノードを気にする必要はありません。
 
 ### TiCDCを開始 {#start-ticdc}
 

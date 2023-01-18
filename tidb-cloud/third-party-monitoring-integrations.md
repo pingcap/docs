@@ -9,7 +9,7 @@ TiDB Cloudをサードパーティの監視サービスと統合して、 TiDB C
 
 > **ノート：**
 >
-> [サーバーレス階層クラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier)については、サードパーティの監視統合はサポートされていません。
+> [Serverless Tierクラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)については、サードパーティの監視統合はサポートされていません。
 
 ## 必要なアクセス {#required-access}
 
@@ -17,8 +17,13 @@ TiDB Cloudをサードパーティの監視サービスと統合して、 TiDB C
 
 ## サードパーティの統合をビューまたは変更する {#view-or-modify-third-party-integrations}
 
-1.  TiDB Cloudコンソールで、表示または変更するターゲット プロジェクトを選択し、[**プロジェクト設定**] タブをクリックします。
-2.  左ペインで [**統合**] をクリックします。利用可能なサードパーティ統合が表示されます。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)にログインします。
+2.  [**クラスター**](https://tidbcloud.com/console/clusters)ページの左側のナビゲーション ペインで、次のいずれかを実行します。
+
+    -   複数のプロジェクトがある場合は、ターゲット プロジェクトに切り替えてから、[**管理**] &gt; [<strong>統合</strong>] をクリックします。
+    -   プロジェクトが 1 つしかない場合は、[**管理**] &gt; [<strong>統合</strong>] をクリックします。
+
+利用可能なサードパーティ統合が表示されます。
 
 ## 利用可能な統合 {#available-integrations}
 

@@ -9,11 +9,11 @@ aliases: ['/tidbcloud/beta/tidb-cloud-quickstart']
 
 *推定完了時間: 20 分*
 
-このチュートリアルでは、 TiDB Cloudを使い始める簡単な方法について説明します。このコンテンツには、クラスターを作成する方法、プレイグラウンドを試す方法、データをロードする方法、およびクラスターに接続する方法が含まれています。
+このチュートリアルでは、 TiDB Cloudを使い始める簡単な方法について説明します。
 
 ## ステップ 1. TiDB クラスターを作成する {#step-1-create-a-tidb-cluster}
 
-TiDB Cloud [サーバーレス層](/tidb-cloud/select-cluster-tier.md#serverless-tier)は、 TiDB Cloudを使い始めるための最良の方法です。無料の Serverless Tier クラスターを作成するには、次の手順を実行します。
+TiDB Cloud [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) (ベータ) は、 TiDB Cloudを使い始めるための最良の方法です。無料のServerless Tierクラスターを作成するには、次の手順を実行します。
 
 1.  TiDB Cloudアカウントを持っていない場合は、 [ここ](https://tidbcloud.com/free-trial)をクリックしてアカウントにサインアップします。
 
@@ -21,43 +21,79 @@ TiDB Cloud [サーバーレス層](/tidb-cloud/select-cluster-tier.md#serverless
 
 2.  [ログイン](https://tidbcloud.com/)をTiDB Cloudアカウントに追加します。
 
-    デフォルトではプラン選択ページが表示されます。
+    デフォルトでは[**クラスター**](https://tidbcloud.com/console/clusters)リスト ページが表示されます。
 
-3.  プラン選択ページで、 **Serverless Tier**プランの [ <strong>Get Started for Free</strong> ] をクリックします。
+3.  新しいサインアップ ユーザーの場合、 TiDB CloudはデフォルトのServerless Tierクラスター`Cluster0`を自動的に作成します。
 
-4.  [**クラスタの作成**] ページでは、<strong>サーバーレス層</strong>がデフォルトで選択されています。必要に応じてデフォルトのクラスター名を更新し、クラスターを作成するリージョンを選択します。
+    -   このデフォルトのクラスターでTiDB Cloudの機能をすぐに試すには、 [ステップ 2. AI を活用した Chat2Query (ベータ版) を試す](#step-2-try-ai-powered-chat2query-beta)に進みます。
+    -   自分で新しいServerless Tierクラスターを作成するには、次の操作を行います。
 
-5.  [**作成]**をクリックします。
+        1.  [**クラスタの作成]**をクリックします。
+        2.  [**クラスタの作成**] ページでは、<strong>Serverless Tier</strong>がデフォルトで選択されています。必要に応じてデフォルトのクラスター名を更新し、クラスターのターゲット リージョンを選択して、 [<strong>作成</strong>] をクリックします。 Serverless Tierクラスタは約 30 秒で作成されます。
 
-    TiDB Cloudクラスターは数分で作成されます。
+## ステップ 2. AI を活用した Chat2Query (ベータ版) を試す {#step-2-try-ai-powered-chat2query-beta}
 
-6.  作成プロセス中に、クラスターのセキュリティ設定を実行します。
+TiDB Cloudは AI によって強化されています。 TiDB Cloudコンソールで AI を利用した SQL エディターである Chat2Query (ベータ版) を使用して、データの価値を最大化できます。
 
-    1.  クラスター領域の右上隅にある [**セキュリティ設定]**をクリックします。
-    2.  [**セキュリティ設定**] ダイアログ ボックスで、クラスターに接続するためのルート パスワードを設定し、 [<strong>適用</strong>] をクリックします。 root パスワードを設定しないと、クラスターに接続できません。
+Chat2Query では、単に`--`を入力してから命令を入力し、AI に SQL クエリを自動的に生成させるか、SQL クエリを手動で記述してから、ターミナルを使用せずにデータベースに対して SQL クエリを実行することができます。
 
-## ステップ 2. Playground を試す {#step-2-try-playground}
+1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページでクラスター名をクリックしてその概要ページに移動し、<mdsvgicon name="icon-left-sql-editor">左側のナビゲーション ペインの**Chat2Query** 。</mdsvgicon>
 
-TiDB Cloudクラスターが作成されたら、TiDB TiDB Cloudにプリロードされたサンプル データを使用して、TiDB の実験をすぐに開始できます。
+2.  TiDB Cloud AI 容量を試すには、画面上の指示に従って、PingCAP と OpenAI がコード スニペットを使用してサービスを調査および改善できるようにし、[**保存して開始**] をクリックします。
 
-[**クラスター**] ページで [<strong>プレイグラウンド</strong>] をクリックして、 TiDB Cloudでクエリを即座に実行します。
+3.  エディターでは、単に`--`を入力してから命令を入力し、AI に SQL クエリを自動的に生成させるか、SQL クエリを手動で作成することができます。
 
-## 手順 3. サンプル データを読み込む {#step-3-load-sample-data}
+    > **ノート：**
+    >
+    > AI によって生成された SQL クエリは 100% 正確ではなく、さらに調整が必要になる場合があります。
+
+4.  SQL クエリを実行します。
+
+    <SimpleTab>
+     <div label="macOS">
+
+    macOS の場合:
+
+    -   エディターにクエリが 1 つしかない場合、それを実行するには、 **⌘ + Enter**を押すか、 <svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.70001 20.7756C6.01949 20.3926 6.00029 19.5259 6.00034 19.0422L6.00034 12.1205L6 5.33028C6 4.75247 6.00052 3.92317 6.38613 3.44138C6.83044 2.88625 7.62614 2.98501 7.95335 3.05489C8.05144 3.07584 8.14194 3.12086 8.22438 3.17798L19.2865 10.8426C19.2955 10.8489 19.304 10.8549 19.3126 10.8617C19.4069 10.9362 20 11.4314 20 12.1205C20 12.7913 19.438 13.2784 19.3212 13.3725C19.307 13.3839 19.2983 13.3902 19.2831 13.4002C18.8096 13.7133 8.57995 20.4771 8.10002 20.7756C7.60871 21.0812 7.22013 21.0683 6.70001 20.7756Z" fill="currentColor"></path></svg><strong>実行します</strong>。
+
+    -   エディターに複数のクエリがある場合、そのうちの 1 つまたは複数を順番に実行するには、カーソルでターゲット クエリの行を選択し、 **⌘ + Enter**を押すか、 [<strong>実行</strong>] をクリックします。
+
+    -   エディターですべてのクエリを順番に実行するには、 **⇧ + ⌘ + Enter**を押すか、カーソルですべてのクエリの行を選択して [<strong>実行</strong>] をクリックします。
+
+    </div>
+
+    <div label="Windows/Linux">
+
+    Windows または Linux の場合:
+
+    -   エディターにクエリが 1 つしかない場合、それを実行するには、 **Ctrl + Enter**を押すか、 <svg width="1rem" height="1rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.70001 20.7756C6.01949 20.3926 6.00029 19.5259 6.00034 19.0422L6.00034 12.1205L6 5.33028C6 4.75247 6.00052 3.92317 6.38613 3.44138C6.83044 2.88625 7.62614 2.98501 7.95335 3.05489C8.05144 3.07584 8.14194 3.12086 8.22438 3.17798L19.2865 10.8426C19.2955 10.8489 19.304 10.8549 19.3126 10.8617C19.4069 10.9362 20 11.4314 20 12.1205C20 12.7913 19.438 13.2784 19.3212 13.3725C19.307 13.3839 19.2983 13.3902 19.2831 13.4002C18.8096 13.7133 8.57995 20.4771 8.10002 20.7756C7.60871 21.0812 7.22013 21.0683 6.70001 20.7756Z" fill="currentColor"></path></svg><strong>実行します</strong>。
+
+    -   エディターに複数のクエリがある場合、それらの 1 つまたは複数を順番に実行するには、カーソルでターゲット クエリの行を選択し、 **Ctrl + Enter**を押すか、 [<strong>実行</strong>] をクリックします。
+
+    -   エディターですべてのクエリを順番に実行するには、 **Shift + Ctrl + Enter**を押すか、カーソルですべてのクエリの行を選択して [<strong>実行</strong>] をクリックします。
+
+    </div>
+     </SimpleTab>
+
+クエリを実行すると、ページの下部にクエリ ログと結果がすぐに表示されます。
+
+## ステップ 3. Playground を試す {#step-3-try-playground}
+
+TiDB Cloudクラスターが作成されたら、 TiDB Cloud Playground に事前にロードされたサンプル データを使用して、TiDB の実験をすぐに開始することもできます。
+
+[**クラスター**](https://tidbcloud.com/console/clusters)ページで、新しく作成したクラスターの名前をクリックしてその概要ページに移動し、左側のナビゲーション ペインで [ **Playground** ] をクリックします。
+
+## 手順 4. サンプル データを読み込む {#step-4-load-sample-data}
 
 **Plaground**を試した後、サンプル データをTiDB Cloudクラスターにロードできます。データを簡単にインポートしてサンプル クエリを実行できるように、Capital Bikeshare のサンプル データを提供しています。
 
-1.  [**クラスター]**ページに移動します。
+1.  クラスターの概要ページで、左側のナビゲーション ペインにある [**インポート**] をクリックします。
 
-2.  新しく作成したクラスターの領域で、右上隅の [ **...** ] をクリックし、[<strong>データのインポート</strong>] を選択します。 [<strong>データのインポート]</strong>ページが表示されます。
-
-    > **ヒント：**
-    >
-    > または、[**クラスター**] ページで新しく作成したクラスターの名前をクリックし、[インポート] 領域で [<strong>データ</strong>の<strong>インポート</strong>] をクリックすることもできます。
+2.  [**インポート**] ページで、右上隅にある [<strong>データのインポート</strong>] をクリックし、 [ <strong>S3 から</strong>] を選択します。
 
 3.  インポート パラメータを入力します。
 
-    -   **データ形式**: <strong>SQL ファイル</strong>を選択
-    -   **場所**: `AWS`
+    -   **データ形式**： <strong>SQLファイル</strong>を選択
     -   **バケット URI** : `s3://tidbcloud-samples/data-ingestion/`
     -   **ロールARN** ： `arn:aws:iam::385595570414:role/import-sample-access`
 
@@ -69,82 +105,9 @@ TiDB Cloudクラスターが作成されたら、TiDB TiDB Cloudにプリロー�
 
 データのインポート プロセスには数分かかります。データ インポートの進行状況が**Finished**と表示されたら、サンプル データとデータベース スキーマがTiDB Cloudのデータベースに正常にインポートされました。
 
-## ステップ 4. TiDB クラスターに接続する {#step-4-connect-to-your-tidb-cluster}
+## 次は何ですか {#what-s-next}
 
-クラスターにデータをロードしたら、コマンドラインまたはプログラミング言語からクラスターに接続できます。
-
-1.  [**クラスター]**ページに移動します。
-
-2.  新しく作成したクラスターの領域で、右上隅にある [**接続**] をクリックします。接続ダイアログが表示されます。
-
-3.  ダイアログの指示に従って、TiDB クラスターに接続します。
-
-    1.  接続用のトラフィック フィルターを作成します。
-
-    2.  SQL クライアントを使用してクラスターに接続します。希望する接続方法のタブをクリックし、接続文字列を使用してクラスターに接続します。
-
-    > **ヒント：**
-    >
-    > TiDB Cloudは MySQL と互換性があるため、任意の MySQL クライアント ツールを使用してクラスターに接続できます。 [mysql — MySQL コマンドライン クライアント](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)または[mysql — MariaDB の MySQL コマンドライン クライアント](https://mariadb.com/kb/en/mysql-command-line-client/)を使用することをお勧めします。
-
-4.  TiDB クラスターにログインした後、次の SQL ステートメントを使用して接続を検証できます。
-
-    {{< copyable "" >}}
-
-    ```sql
-    SELECT TiDB_version();
-    ```
-
-    リリース バージョン情報が表示されたら、TiDB クラスターを使用する準備ができています。
-
-## ステップ 4. データのクエリ {#step-4-query-data}
-
-TiDB クラスターに接続したら、ターミナルでいくつかのクエリを実行できます。
-
-1.  `bikeshare`のデータベースとテーブルを使用します。
-
-    {{< copyable "" >}}
-
-    ```sql
-    USE bikeshare;
-    SHOW tables;
-    ```
-
-2.  `trip`テーブルの構造を確認します。
-
-    {{< copyable "" >}}
-
-    ```sql
-    DESCRIBE trips;
-    ```
-
-3.  `trips`のテーブルにいくつのレコードが存在するかを確認します。
-
-    {{< copyable "" >}}
-
-    ```sql
-    SELECT COUNT(*) FROM trips;
-    ```
-
-4.  出発駅が「8th &amp; D St NW」であるすべての旅行履歴を確認します。
-
-    {{< copyable "" >}}
-
-    ```sql
-    SELECT * FROM trips WHERE start_station_name = '8th & D St NW';
-    ```
-
-5.  受け取りに人気の自転車ステーションを 10 個以上表示する:
-
-    {{< copyable "" >}}
-
-    ```sql
-    SELECT start_station_name, COUNT(ride_id) as count from `trips`
-    GROUP BY start_station_name
-    ORDER BY count ASC
-    LIMIT 10;
-    ```
-
-TiDB SQLの使用法の詳細については、 [TiDB で SQL を調べる](/basic-sql-operations.md)を参照してください。
-
-クロスゾーンの高可用性、水平スケーリング、および[HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)の利点を備えた本番環境での使用については、 [TiDBクラスタを作成する](/tidb-cloud/create-tidb-cluster.md)を参照してDedicated Tierクラスターを作成してください。
+-   さまざまな方法でクラスターに接続する方法については、 [TiDB クラスターに接続する](/tidb-cloud/connect-to-tidb-cluster.md)を参照してください。
+-   Chat2Query を使用してデータを探索する方法の詳細については、 [Chat2Query](/tidb-cloud/explore-data-with-chat2query.md)を参照してください。
+-   TiDB SQLの使用法については、 [TiDB で SQL を調べる](/basic-sql-operations.md)を参照してください。
+-   クロスゾーンの高可用性、水平スケーリング、および[HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)の利点を備えた本番環境での使用については、 [TiDB クラスターを作成する](/tidb-cloud/create-tidb-cluster.md)を参照してDedicated Tierクラスターを作成してください。

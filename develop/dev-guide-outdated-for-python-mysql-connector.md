@@ -7,15 +7,13 @@ summary: Learn how to build a simple Python application based on TiDB and mysql-
 
 > **ノート：**
 >
-> このドキュメントはアーカイブされています。これは、このドキュメントがその後更新されないことを示しています。詳細は[開発者ガイドの概要](/develop/dev-guide-overview.md)を参照してください。
+> このレガシー ドキュメントは古く、その後更新されません。詳細は[開発者ガイドの概要](/develop/dev-guide-overview.md)を参照してください。
 
 このチュートリアルでは、TiDB と mysql-connector-python に基づいて単純な Python アプリケーションを構築する方法を示します。ここで構築するサンプル アプリケーションは、顧客情報と注文情報を追加、クエリ、および更新できるシンプルな CRM ツールです。
 
 ## ステップ 1. TiDB クラスターを開始する {#step-1-start-a-tidb-cluster}
 
 ローカル ストレージで疑似 TiDB クラスターを開始します。
-
-{{< copyable "" >}}
 
 ```bash
 docker run -p 127.0.0.1:$LOCAL_PORT:4000 pingcap/tidb:v5.1.0
@@ -25,7 +23,7 @@ docker run -p 127.0.0.1:$LOCAL_PORT:4000 pingcap/tidb:v5.1.0
 
 > **ノート：**
 >
-> 実稼働用に「実際の」TiDB クラスターをデプロイするには、次のガイドを参照してください。
+> 実本番用の「実際の」TiDB クラスターをデプロイするには、次のガイドを参照してください。
 >
 > -   [TiUP for On-Premises を使用して TiDB をデプロイ](https://docs.pingcap.com/tidb/v5.1/production-deployment-using-tiup)
 > -   [TiDB を Kubernetes にデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/stable)
@@ -85,8 +83,6 @@ docker run -p 127.0.0.1:$LOCAL_PORT:4000 pingcap/tidb:v5.1.0
 ## ステップ 4. アプリケーション コードを取得して実行する {#step-4-get-and-run-the-application-code}
 
 このチュートリアルのサンプル アプリケーション コード ( `main.py` ) では、mysql-connector-python を使用して、コード コメントで説明されている SQL 操作に Python メソッドをマップします。サンプル アプリケーション コードは、ローカル マシンに`main.py`という名前の Python ファイルとして保存できます。
-
-{{< copyable "" >}}
 
 ```python
 import mysql.connector
@@ -162,8 +158,6 @@ mydb.close()
 
 `mysql.connector.connect()`に渡された文字列を、データベースの作成時に取得した接続文字列に置き換えます。
 
-{{< copyable "" >}}
-
 ```python
 mydb = mysql.connector.connect(
   host="localhost",
@@ -177,8 +171,6 @@ mydb = mysql.connector.connect(
 ### ステップ 2. アプリケーション コードを実行する {#step-2-run-the-application-code}
 
 次のコマンドを実行して、 `main.py`のコードを実行します。
-
-{{< copyable "" >}}
 
 ```python
 python3 main.py

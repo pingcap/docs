@@ -5,7 +5,7 @@ summary: This document introduces the `online-ddl/online-ddl-scheme` feature of 
 
 # GH-ost/PT-osc を使用するデータベースからの移行 {#migrate-from-databases-that-use-gh-ost-pt-osc}
 
-運用シナリオでは、DDL 実行中にテーブルをロックすると、データベースからの読み取りまたはデータベースへの書き込みがある程度ブロックされる可能性があります。そのため、オンライン DDL ツールを使用して DDL を実行し、読み取りと書き込みへの影響を最小限に抑えることがよくあります。一般的な DDL ツールは[おばけ](https://github.com/github/gh-ost)と[pt-osc](https://www.percona.com/doc/percona-toolkit/3.0/pt-online-schema-change.html)です。
+本番シナリオでは、DDL 実行中にテーブルをロックすると、データベースからの読み取りまたはデータベースへの書き込みがある程度ブロックされる可能性があります。そのため、オンライン DDL ツールを使用して DDL を実行し、読み取りと書き込みへの影響を最小限に抑えることがよくあります。一般的な DDL ツールは[おばけ](https://github.com/github/gh-ost)と[pt-osc](https://www.percona.com/doc/percona-toolkit/3.0/pt-online-schema-change.html)です。
 
 DM を使用して MySQL から TiDB にデータを移行する場合、online-ddl を有効にして、DM と gh-ost または pt-osc のコラボレーションを許可できます。 online-ddl を有効にする方法と、このオプションを有効にした後のワークフローの詳細については、 [gh-ost または pt-osc による連続レプリケーション](/migrate-with-pt-ghost.md)を参照してください。このドキュメントでは、DM とオンライン DDL ツールのコラボレーションの詳細に焦点を当てています。
 

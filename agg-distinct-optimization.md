@@ -29,17 +29,17 @@ mysql> explain SELECT DISTINCT a from t;
 
 <CustomContent platform="tidb">
 
-TiDB の[`tidb_opt_distinct_agg_push_down`](/system-variables.md#tidb_opt_distinct_agg_push_down)システム変数または[`distinct-agg-push-down`](/tidb-configuration-file.md#distinct-agg-push-down)構成項目は、個別の集計クエリを書き換えて、それらを TiKV またはTiFlash Coprocessorにプッシュするかどうかを制御します。
+TiDB の[`tidb_opt_distinct_agg_push_down`](/system-variables.md#tidb_opt_distinct_agg_push_down)システム変数または[`distinct-agg-push-down`](/tidb-configuration-file.md#distinct-agg-push-down)構成項目は、個別の集計クエリを書き換えて、それらを TiKV またはTiFlash コプロセッサーにプッシュするかどうかを制御します。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-TiDB の[`tidb_opt_distinct_agg_push_down`](/system-variables.md#tidb_opt_distinct_agg_push_down)システム変数は、個別の集計クエリを書き換えて、それらを TiKV またはTiFlash Coprocessorにプッシュするかどうかを制御します。
+TiDB の[`tidb_opt_distinct_agg_push_down`](/system-variables.md#tidb_opt_distinct_agg_push_down)システム変数は、個別の集計クエリを書き換えて、それらを TiKV またはTiFlash コプロセッサーにプッシュするかどうかを制御します。
 
 </CustomContent>
 
-この最適化の例として、次のクエリを取り上げます。 `tidb_opt_distinct_agg_push_down`はデフォルトで無効になっています。これは、集計関数が TiDBレイヤーで実行されることを意味します。値を`1`に設定してこの最適化を有効にした後、 `count(distinct a)`の`distinct a`の部分が TiKV またはTiFlash Coprocessorにプッシュされます。TiKV Coprocessorの列 a の重複した値を削除する HashAgg_5 があります。これにより、TiDBレイヤーで`HashAgg_8`の計算オーバーヘッドが削減される可能性があります。
+この最適化の例として、次のクエリを取り上げます。 `tidb_opt_distinct_agg_push_down`はデフォルトで無効になっています。これは、集計関数が TiDBレイヤーで実行されることを意味します。値を`1`に設定してこの最適化を有効にした後、 `count(distinct a)`の`distinct a`の部分が TiKV またはTiFlash コプロセッサーにプッシュされます。TiKV コプロセッサーの列 a の重複した値を削除する HashAgg_5 があります。これにより、TiDBレイヤーで`HashAgg_8`の計算オーバーヘッドが削減される可能性があります。
 
 ```sql
 mysql> desc select count(distinct a) from test.t;

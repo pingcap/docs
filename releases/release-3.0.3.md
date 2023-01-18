@@ -50,7 +50,7 @@ TiDB アンシブル バージョン: 3.0.3
 -   コンテキストが重複しているため、 ReadIndexが要求に応答しない場合がある問題を修正します[#5256](https://github.com/tikv/tikv/pull/5256)
 -   時期尚早によって引き起こされる可能性のあるスケジューリング ジッタを修正します`PutStore` [#5277](https://github.com/tikv/tikv/pull/5277)
 -   リージョンハートビートから報告された誤ったタイムスタンプを修正します[#5296](https://github.com/tikv/tikv/pull/5296)
--   コア ダンプから共有ブロック キャッシュを除外して、コア ダンプのサイズを縮小します[#5322](https://github.com/tikv/tikv/pull/5322)
+-   コア ダンプから共有ブロックキャッシュを除外して、コア ダンプのサイズを縮小します[#5322](https://github.com/tikv/tikv/pull/5322)
 -   リージョンのマージ中の潜在的な TiKV パニックを修正[#5291](https://github.com/tikv/tikv/pull/5291)
 -   デッドロック検出器[#5317](https://github.com/tikv/tikv/pull/5317)のリーダー変更チェックの高速化
 -   `grpc env`を使用したデッドロック クライアントの作成のサポート[#5346](https://github.com/tikv/tikv/pull/5346)

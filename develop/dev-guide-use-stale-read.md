@@ -15,8 +15,6 @@ TiDB は、ステートメント レベル、トランザクション レベル�
 
 [書店](/develop/dev-guide-bookshop-schema-design.md)のアプリケーションでは、次の SQL ステートメントを使用して、最新の出版済み書籍とその価格を照会できます。
 
-{{< copyable "" >}}
-
 ```sql
 SELECT id, title, type, price FROM books ORDER BY published_at DESC LIMIT 5;
 ```
@@ -39,8 +37,6 @@ SELECT id, title, type, price FROM books ORDER BY published_at DESC LIMIT 5;
 現時点 (2022-04-20 15:20:00) のリストでは、 *The Story of Droolius Caesar の*価格は 100.0 です。
 
 同時に、売り手はその本が非常に人気があることを知り、次の SQL ステートメントを使用して本の価格を 150.0 に引き上げました。
-
-{{< copyable "" >}}
 
 ```sql
 UPDATE books SET price = 150 WHERE id = 3181093216;
@@ -78,8 +74,6 @@ Bookshop アプリケーションでは、書籍のリアルタイム価格は�
 <div label="SQL" value="sql">
 
 特定の時間の前に書籍の価格を照会するには、上記のクエリ ステートメントに`AS OF TIMESTAMP <datetime>`句を追加します。
-
-{{< copyable "" >}}
 
 ```sql
 SELECT id, title, type, price FROM books AS OF TIMESTAMP '2022-04-20 15:20:00' ORDER BY published_at DESC LIMIT 5;
@@ -122,8 +116,6 @@ ERROR 9006 (HY000): cannot set read timestamp to a future time.
 
 </div>
 <div label="Java" value="java">
-
-{{< copyable "" >}}
 
 ```java
 public class BookDAO {
@@ -193,8 +185,6 @@ public class BookDAO {
 }
 ```
 
-{{< copyable "" >}}
-
 ```java
 List<Book> top5LatestBooks = bookDAO.getTop5LatestBooks();
 
@@ -241,15 +231,11 @@ WARN: GC life time is shorter than transaction duration.
 
 例えば：
 
-{{< copyable "" >}}
-
 ```sql
 START TRANSACTION READ ONLY AS OF TIMESTAMP NOW() - INTERVAL 5 SECOND;
 ```
 
 書籍の最新の価格を照会すると、 *The Story of Droolius Caesar*の価格がまだ更新前の値である 100.0 であることがわかります。
-
-{{< copyable "" >}}
 
 ```sql
 SELECT id, title, type, price FROM books ORDER BY published_at DESC LIMIT 5;
@@ -290,8 +276,6 @@ SELECT id, title, type, price FROM books ORDER BY published_at DESC LIMIT 5;
 
 ヘルパー メソッドとしてトランザクション レベルでステイル読み取りを有効にするコマンドをカプセル化する、トランザクションのヘルパー クラスを定義できます。
 
-{{< copyable "" >}}
-
 ```java
 public static class StaleReadHelper {
 
@@ -308,8 +292,6 @@ public static class StaleReadHelper {
 ```
 
 次に、 `BookDAO`クラスのトランザクションを通じてステイル読み取り機能を有効にするメソッドを定義します。クエリ ステートメントに`AS OF TIMESTAMP`を追加する代わりに、 メソッドを使用してクエリを実行します。
-
-{{< copyable "" >}}
 
 ```java
 public class BookDAO {
@@ -350,8 +332,6 @@ public class BookDAO {
     }
 }
 ```
-
-{{< copyable "" >}}
 
 ```java
 List<Book> top5LatestBooks = bookDAO.getTop5LatestBooks();
@@ -403,8 +383,6 @@ SET TRANSACTION READ ONLY AS OF TIMESTAMP NOW() - INTERVAL 5 SECOND;
 
 ヘルパー メソッドとしてトランザクション レベルでステイル読み取りを有効にするコマンドをカプセル化する、トランザクションのヘルパー クラスを定義できます。
 
-{{< copyable "" >}}
-
 ```java
 public static class TxnHelper {
 
@@ -420,8 +398,6 @@ public static class TxnHelper {
 ```
 
 次に、 `BookDAO`クラスのトランザクションを通じてステイル読み取り機能を有効にするメソッドを定義します。クエリ ステートメントに`AS OF TIMESTAMP`を追加する代わりに、 メソッドを使用してクエリを実行します。
-
-{{< copyable "" >}}
 
 ```java
 public class BookDAO {
@@ -477,8 +453,6 @@ public class BookDAO {
 
 セッションでステイル読み取りを有効にします。
 
-{{< copyable "" >}}
-
 ```sql
 SET @@tidb_read_staleness="-5";
 ```
@@ -487,16 +461,12 @@ SET @@tidb_read_staleness="-5";
 
 セッションでステイル読み取りを無効にします。
 
-{{< copyable "" >}}
-
 ```sql
 set @@tidb_read_staleness="";
 ```
 
 </div>
 <div label="Java" value="java">
-
-{{< copyable "" >}}
 
 ```java
 public static class StaleReadHelper{

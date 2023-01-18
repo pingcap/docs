@@ -73,7 +73,7 @@ summary: Learn about the basic features of TiDB.
 | ------------------------------------------------------ | :-: | :-: | :-: | :-: | :-: | :-: | ------------ | :----------: | :----------: | :----------: | :----------: | :----------: |
 | [プリペアド ステートメント キャッシュ](/sql-prepared-plan-cache.md)     |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  | Y            |       Y      | Experimental | Experimental | Experimental | Experimental |
 | [SQL 計画管理 (SPM)](/sql-plan-management.md)              |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  | Y            |       Y      |       Y      |       Y      |       Y      |       Y      |
-| [Coprocessor・キャッシュ](/coprocessor-cache.md)             |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  | Y            |       Y      |       Y      |       Y      |       Y      | Experimental |
+| [コプロセッサー・キャッシュ](/coprocessor-cache.md)                 |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  | Y            |       Y      |       Y      |       Y      |       Y      | Experimental |
 | [ステイル読み取り](/stale-read.md)                             |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  | Y            |       Y      |       Y      |       Y      |       N      |       N      |
 | [Followerが読む](/follower-read.md)                       |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  | Y            |       Y      |       Y      |       Y      |       Y      |       Y      |
 | [履歴データの読み取り (tidb_snapshot)](/read-historical-data.md) |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  | Y            |       Y      |       Y      |       Y      |       Y      |       Y      |
@@ -198,7 +198,7 @@ summary: Learn about the basic features of TiDB.
 
 [^1]: TiDB は、latin1 を utf8 のサブセットとして誤って扱います。詳細については、 [TiDB #18955](https://github.com/pingcap/tidb/issues/18955)を参照してください。
 
-[^2]: v6.5.0 以降、 [`tidb_allow_function_for_expression_index`](/system-variables.md#tidb_allow_function_for_expression_index-new-in-v520)システム変数によってリストされた関数で作成された式インデックスがテストされ、運用環境で使用できます。今後のリリースでは、より多くの関数がサポートされる予定です。この変数によってリストされていない関数については、対応する式インデックスを本番環境で使用することはお勧めしません。詳細は[式インデックス](/sql-statements/sql-statement-create-index.md#expression-index)を参照してください。
+[^2]: v6.5.0 以降、 [`tidb_allow_function_for_expression_index`](/system-variables.md#tidb_allow_function_for_expression_index-new-in-v520)システム変数によってリストされた関数で作成された式インデックスがテストされ、本番環境で使用できます。今後のリリースでは、より多くの関数がサポートされる予定です。この変数によってリストされていない関数については、対応する式インデックスを本番環境で使用することはお勧めしません。詳細は[式インデックス](/sql-statements/sql-statement-create-index.md#expression-index)を参照してください。
 
 [^3]: サポートされている SQL ステートメントの完全なリストについては、 [ステートメント リファレンス](/sql-statements/sql-statement-select.md)を参照してください。
 

@@ -21,7 +21,7 @@ TiDB バージョン: 4.0.11
 
 -   TiFlash
 
-    -   Coprocessor・スレッド・プールを追加して、実行のためにCoprocessor要求をキューに入れ、場合によってはメモリー不足 (OOM) を回避し、 `cop_pool_size`と`batch_cop_pool_size`の構成項目をデフォルト値の`NumOfPhysicalCores * 2`で追加します。
+    -   コプロセッサー・スレッド・プールを追加して、実行のためにコプロセッサー要求をキューに入れ、場合によってはメモリー不足 (OOM) を回避し、 `cop_pool_size`と`batch_cop_pool_size`の構成項目をデフォルト値の`NumOfPhysicalCores * 2`で追加します。
 
 ## 改良点 {#improvements}
 
@@ -38,7 +38,7 @@ TiDB バージョン: 4.0.11
     -   DBaaS [#9591](https://github.com/tikv/tikv/pull/9591)のサーバー情報のメトリクスを追加
     -   Grafana ダッシュボードで複数のクラスターをサポートする[#9572](https://github.com/tikv/tikv/pull/9572)
     -   RocksDB メトリクスを TiDB [#9316](https://github.com/tikv/tikv/pull/9316)に報告する
-    -   Coprocessor・タスクの中断時間を記録します[#9277](https://github.com/tikv/tikv/pull/9277)
+    -   コプロセッサー・タスクの中断時間を記録します[#9277](https://github.com/tikv/tikv/pull/9277)
     -   Load Base Split [#9354](https://github.com/tikv/tikv/pull/9354)のキー数とキー サイズのしきい値を追加します。
     -   データのインポート前にファイルが存在するかどうかを確認する[#9544](https://github.com/tikv/tikv/pull/9544)
     -   Fast Tune パネルの改善[#9180](https://github.com/tikv/tikv/pull/9180)
@@ -51,7 +51,7 @@ TiDB バージョン: 4.0.11
 
     -   `date_format`関数のパフォーマンスを最適化する
     -   取り込み SST 処理のメモリ消費を最適化する
-    -   Batch Coprocessorの再試行ロジックを最適化して、リージョンエラーの可能性を減らします
+    -   Batch コプロセッサーの再試行ロジックを最適化して、リージョンエラーの可能性を減らします
 
 -   ツール
 
@@ -138,7 +138,7 @@ TiDB バージョン: 4.0.11
     -   10進数`max`で`min`の結果が間違っている不具合を修正
     -   データ読み込み時にTiFlashがクラッシュすることがある不具合を修正
     -   DDL 操作後に書き込まれた一部のデータが、データの圧縮後に失われる可能性がある問題を修正します
-    -   CoprocessorでTiFlashが 10 進定数を正しく処理しない問題を修正します。
+    -   コプロセッサーでTiFlashが 10 進定数を正しく処理しない問題を修正します。
     -   学習者の読み取りプロセス中に発生する可能性のあるクラッシュを修正
     -   TiDB とTiFlashの間の`0`または`NULL`による除算の一貫性のない動作を修正します。
 

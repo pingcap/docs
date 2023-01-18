@@ -23,7 +23,7 @@ summary: Learn how to use Dumpling and TiDB Lightning to back up and restore ful
     tiup install tidb lightning && tiup tidb lightning
     ```
 
--   [Dumplingに必要なソース データベース権限を付与する](/dumpling-overview.md#export-data-from-tidbmysql)
+-   [Dumplingに必要なソース データベース権限を付与する](/dumpling-overview.md#export-data-from-tidb-or-mysql)
 
 -   [TiDB Lightningに必要なターゲット データベース権限を付与する](/tidb-lightning/tidb-lightning-requirements.md#privileges-of-the-target-database)
 

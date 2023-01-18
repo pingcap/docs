@@ -158,7 +158,7 @@ TiDB バージョン: 4.0.0-rc.2
     -   無効な日付が格納されている場合に SQL ステートメントの実行に失敗する問題を修正します[#7268](https://github.com/tikv/tikv/pull/7268)
     -   GCS [#7739](https://github.com/tikv/tikv/pull/7739)からバックアップ データを復元できない問題を修正
     -   保管時の暗号化中に KMS キー ID が検証されない問題を修正します[#7719](https://github.com/tikv/tikv/pull/7719)
-    -   異なるアーキテクチャのコンパイラーにおけるCoprocessorの根本的な正確性の問題を修正します[#7714](https://github.com/tikv/tikv/pull/7714) [#7730](https://github.com/tikv/tikv/pull/7730)
+    -   異なるアーキテクチャのコンパイラーにおけるコプロセッサーの根本的な正確性の問題を修正します[#7714](https://github.com/tikv/tikv/pull/7714) [#7730](https://github.com/tikv/tikv/pull/7730)
     -   暗号化が有効な場合の`snapshot ingestion`のエラーを修正[#7815](https://github.com/tikv/tikv/pull/7815)
     -   `Invalid cross-device link`設定ファイル書き換え時のエラーを修正[#7817](https://github.com/tikv/tikv/pull/7817)
     -   構成ファイルを空のファイルに書き込むときの間違った toml 形式の問題を修正します[#7817](https://github.com/tikv/tikv/pull/7817)

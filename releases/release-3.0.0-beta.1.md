@@ -84,7 +84,7 @@ TiDB アンシブル バージョン: 3.0.0-beta.1
 
 ## TiKV {#tikv}
 
--   Coprocessor計算実行フレームワークを最適化し、TableScan セクションを実装すると、Single TableScan のパフォーマンスが 5% ~ 30% 向上します。
+-   コプロセッサー計算実行フレームワークを最適化し、TableScan セクションを実装すると、Single TableScan のパフォーマンスが 5% ~ 30% 向上します。
     -   `BatchRows`行`BatchColumn`列[#3660](https://github.com/tikv/tikv/pull/3660)の定義を実装する
     -   `VectorLike`を実装して、同じ方法でエンコードされたデータとデコードされたデータへのアクセスをサポートする[#4242](https://github.com/tikv/tikv/pull/4242)
     -   インターフェイスに`BatchExecutor`を定義し、リクエストを`BatchExecutor` [#4243](https://github.com/tikv/tikv/pull/4243)に変換する方法を実装する

@@ -31,6 +31,6 @@ PD がレプリカを 1 つの TiKV ノードから別のノードに移動す�
 
 TiKV は分散トランザクションをサポートしています。ユーザー (または TiDB) は、同じリージョンに属しているかどうかを気にすることなく、複数のキーと値のペアを書き込むことができます。 TiKV は 2 フェーズ コミットを使用してACID制約を実現します。詳細は[TiDB 楽観的トランザクション モデル](/optimistic-transaction.md)を参照してください。
 
-## TiKVCoprocessor {#tikv-coprocessor}
+## TiKVコプロセッサー {#tikv-coprocessor}
 
-TiDB は、一部のデータ計算ロジックを TiKV Coprocessorにプッシュします。 TiKV Coprocessorは、各リージョンの計算を処理します。 TiKV Coprocessorに送信される各リクエストには、1 つのリージョンのデータのみが含まれます。
+TiDB は、一部のデータ計算ロジックを TiKV コプロセッサーにプッシュします。 TiKV コプロセッサーは、各リージョンの計算を処理します。 TiKV コプロセッサーに送信される各リクエストには、1 つのリージョンのデータのみが含まれます。

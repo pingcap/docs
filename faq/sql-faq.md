@@ -289,7 +289,7 @@ DML ステートメントの実行時に、TiDB が DDL リース (デフォル�
 -   同時性を改善します。デフォルト値は 10 です。50 に改善して試してみることができます。ただし、通常、改善はデフォルト値の 2 ～ 4 倍です。
 -   大量のデータの場合は`count`をテストします。
 -   TiKV 構成を最適化します。 [TiKV スレッドのパフォーマンスを調整する](/tune-tikv-thread-performance.md)と[TiKV メモリ パフォーマンスの調整](/tune-tikv-memory-performance.md)を参照してください。
--   [Coprocessorキャッシュ](/coprocessor-cache.md)を有効にします。
+-   [コプロセッサーキャッシュ](/coprocessor-cache.md)を有効にします。
 
 ### 現在の DDL ジョブの進行状況を表示する方法は? {#how-to-view-the-progress-of-the-current-ddl-job}
 
@@ -347,7 +347,7 @@ RUNNING_JOBS: ID:121, Type:add index, State:running, SchemaState:write reorganiz
 
 -   [`SHARD_ROW_ID_BITS`](/troubleshoot-hot-spot-issues.md#use-shard_row_id_bits-to-process-hotspots)属性。この属性を設定すると、行 ID が分散されて複数のリージョンに書き込まれるため、書き込みホットスポットの問題を軽減できます。
 -   自動インクリメント主キーによってもたらされるホットスポットを解決するのに役立つ[`AUTO_RANDOM`](/troubleshoot-hot-spot-issues.md#handle-auto-increment-primary-key-hotspot-tables-using-auto_random)属性。
--   [Coprocessorキャッシュ](/coprocessor-cache.md) 、小さなテーブルの読み取りホットスポット用。
+-   [コプロセッサーキャッシュ](/coprocessor-cache.md) 、小さなテーブルの読み取りホットスポット用。
 -   [ロードベーススプリット](/configure-load-base-split.md) 、小さなテーブルのフル テーブル スキャンなど、リージョン間の不均衡なアクセスによって発生するホットスポットの場合。
 -   [キャッシュされたテーブル](/cached-tables.md) 、頻繁にアクセスされるがほとんど更新されない小さなホットスポット テーブル用。
 

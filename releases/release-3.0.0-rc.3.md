@@ -35,10 +35,10 @@ TiDB アンシブル バージョン: 3.0.0-rc.3
     -   `split table region`のステートメントを追加して、テーブルリージョンを手動で分割し、ホットスポットの問題を軽減します[#10765](https://github.com/pingcap/tidb/pull/10765)
     -   `split index region`ステートメントを追加して、インデックスリージョンを手動で分割し、ホットスポットの問題を軽減します[#10764](https://github.com/pingcap/tidb/pull/10764)
     -   `create user` 、 `grant` 、または`revoke`などの複数のステートメントを連続して実行すると、正しく実行されない問題を修正します[#10737](https://github.com/pingcap/tidb/pull/10737)
-    -   Coprocessor[#10791](https://github.com/pingcap/tidb/pull/10791)への式のプッシュ ダウンを禁止するブロックリストを追加します。
+    -   コプロセッサー[#10791](https://github.com/pingcap/tidb/pull/10791)への式のプッシュ ダウンを禁止するブロックリストを追加します。
     -   クエリがメモリ構成の制限を超えたときに`expensive query`ログを出力する機能を追加します[#10849](https://github.com/pingcap/tidb/pull/10849)
     -   `bind-info-lease`の構成項目を追加して、変更されたバインディング実行プランの更新時間を制御します[#10727](https://github.com/pingcap/tidb/pull/10727)
-    -   `execdetails.ExecDetails`ポインター[#10832](https://github.com/pingcap/tidb/pull/10832)が原因で、Coprocessorリソースを迅速に解放できなかったことが原因で発生した同時実行の多いシナリオでの OOM の問題を修正します。
+    -   `execdetails.ExecDetails`ポインター[#10832](https://github.com/pingcap/tidb/pull/10832)が原因で、コプロセッサーリソースを迅速に解放できなかったことが原因で発生した同時実行の多いシナリオでの OOM の問題を修正します。
     -   場合によっては`kill`ステートメントによって引き起こされるpanicの問題を修正します[#10876](https://github.com/pingcap/tidb/pull/10876)
 
 -   サーバ
@@ -83,7 +83,7 @@ TiDB アンシブル バージョン: 3.0.0-rc.3
     -   コマンドが長時間保留になる可能性がある問題を修正します[#4810](https://github.com/tikv/tikv/pull/4810)
     -   スナップショットファイルのディスクへの同期の遅延が原因で、停電後にファイルが破損する問題を修正します[#4807](https://github.com/tikv/tikv/pull/4807) 、 [#4850](https://github.com/tikv/tikv/pull/4850)
 
--   Coprocessor
+-   コプロセッサー
     -   ベクトル計算でトップ N をサポート[#4827](https://github.com/tikv/tikv/pull/4827)
     -   ベクトル計算で`Stream`集計をサポート[#4786](https://github.com/tikv/tikv/pull/4786)
     -   ベクトル計算で`AVG`集計関数をサポート[#4777](https://github.com/tikv/tikv/pull/4777)

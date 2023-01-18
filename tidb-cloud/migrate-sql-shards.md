@@ -13,7 +13,7 @@ summary: Learn how to migrate and merge MySQL shards of large datasets to TiDB C
 
 このセクションでは、例で使用される上流クラスター、DM、および下流クラスターの基本情報について説明します。
 
-### アップストリーム クラスタ {#upstream-cluster}
+### アップストリーム クラスター {#upstream-cluster}
 
 上流クラスタの環境情報は以下の通りです。
 
@@ -38,7 +38,7 @@ summary: Learn how to migrate and merge MySQL shards of large datasets to TiDB C
 
 ### DM {#dm}
 
-DM のバージョンは v5.3.0 です。 TiDB DM を手動でデプロイする必要があります。詳細な手順については、 [TiUPを使用して DMクラスタをデプロイする](https://docs.pingcap.com/tidb/stable/deploy-a-dm-cluster-using-tiup)を参照してください。
+DM のバージョンは v5.3.0 です。 TiDB DM を手動で展開する必要があります。詳細な手順については、 [TiUPを使用して DMクラスタをデプロイする](https://docs.pingcap.com/tidb/stable/deploy-a-dm-cluster-using-tiup)を参照してください。
 
 ### 外部記憶装置 {#external-storage}
 
@@ -68,7 +68,7 @@ Amazon S3 バケットに第 1 レベルのディレクトリ`store` (データ�
 
 ### ステップ 2. Dumplingを使用してデータを Amazon S3 にエクスポートする {#step-2-use-dumpling-to-export-data-to-amazon-s3}
 
-Dumplingのインストール方法については、 [Dumpling紹介](/dumpling-overview.md#dumpling-introduction)を参照してください。
+Dumplingのインストール方法については、 [Dumpling紹介](/dumpling-overview.md)を参照してください。
 
 Dumplingを使用してデータを Amazon S3 にエクスポートする場合は、次の点に注意してください。
 
@@ -175,17 +175,23 @@ Query OK, 0 rows affected (0.17 sec)
 
 Amazon S3 アクセスを設定したら、次のようにTiDB Cloudコンソールでデータ インポート タスクを実行できます。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/console/clusters)にログインします。プロジェクトの [**クラスター]**ページに移動します。
+1.  ターゲット クラスターの [**インポート]**ページを開きます。
 
-2.  ターゲット クラスターを見つけて、クラスター領域の右上隅にある [ **...** ] をクリックし、 [<strong>データのインポート</strong>] を選択します。 [<strong>データのインポート]</strong>ページが表示されます。
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
-3.  [**データのインポート**] ページで、次の情報を入力します。
+        > **ヒント：**
+        >
+        > 複数のプロジェクトがある場合は、[**クラスター]**ページの左側のナビゲーション ペインでターゲット プロジェクトに切り替えることができます。
+
+    2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで [**インポート**] をクリックします。
+
+2.  [**インポート**] ページで、右上隅にある [<strong>データのインポート</strong>] をクリックし、 [ <strong>S3 から</strong>] を選択します。
+
+3.  [ **S3 からインポート**] ページで、次の情報を入力します。
 
     -   **データ形式**: <strong>CSV</strong>を選択します。
-    -   **場所**: `AWS`
     -   **バケット URI** : ソース データのバケット URI を入力します。テーブルに対応する第 2 レベルのディレクトリ (この例では`s3://dumpling-s3/store/sales` ) を使用して、 TiDB Cloudがすべての MySQL インスタンスのデータを一度にインポートして`store.sales`つにマージできるようにします。
     -   **Role ARN** : 取得した Role-ARN を入力します。
-    -   **ターゲットクラスタ**: クラスター名とリージョン名が表示されます。
 
     バケットの場所がクラスターと異なる場合は、クロス リージョンのコンプライアンスを確認します。 [**次へ**] をクリックします。
 
@@ -214,7 +220,7 @@ Amazon S3 アクセスを設定したら、次のようにTiDB Cloudコンソー
 
 5.  [**次へ**] をクリックします。
 
-6.  **プレビュー**ページでは、データのプレビューを表示できます。プレビューされたデータが期待どおりでない場合は、<strong>ここをクリックして csv 構成を編集する</strong>リンクをクリックして、区切り記号、区切り記号、ヘッダー、非 null、null、バックスラッシュ エスケープ、trim-last-separator などの CSV 固有の構成を更新します。 .
+6.  **プレビュー**ページでは、データのプレビューを表示できます。プレビューされたデータが期待どおりでない場合は、[<strong>ここをクリックして csv 構成を編集し</strong>ます] リンクをクリックして、区切り記号、区切り記号、ヘッダー、 `backslash escape` 、および`trim last separator`を含む CSV 固有の構成を更新します。
 
     > **ノート：**
     >
@@ -286,7 +292,7 @@ TiDB Cloudコンソールは、増分データ複製に関する機能をまだ�
     ```shell
     tiup is checking updates for component dmctl ...
 
-    Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl --master-addr 192.168.11.110:9261 operate-source create dm-source1.yaml
+    Starting component `dmctl`: /root/.tiup/components/dmctl/${tidb_version}/dmctl/dmctl /root/.tiup/components/dmctl/${tidb_version}/dmctl/dmctl --master-addr 192.168.11.110:9261 operate-source create dm-source1.yaml
 
     {
        "result": true,
@@ -314,7 +320,7 @@ TiDB Cloudコンソールは、増分データ複製に関する機能をまだ�
     ```shell
     tiup is checking updates for component dmctl ...
 
-    Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl --master-addr 192.168.11.110:9261 operate-source create dm-source2.yaml
+    Starting component `dmctl`: /root/.tiup/components/dmctl/${tidb_version}/dmctl/dmctl /root/.tiup/components/dmctl/${tidb_version}/dmctl/dmctl --master-addr 192.168.11.110:9261 operate-source create dm-source2.yaml
 
     {
        "result": true,
@@ -443,7 +449,7 @@ TiDB Cloudコンソールは、増分データ複製に関する機能をまだ�
 ```shell
 tiup is checking updates for component dmctl ...
 
-Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl --master-addr 192.168.11.110:9261 check-task dm-task.yaml
+Starting component `dmctl`: /root/.tiup/components/dmctl/${tidb_version}/dmctl/dmctl /root/.tiup/components/dmctl/${tidb_version}/dmctl/dmctl --master-addr 192.168.11.110:9261 check-task dm-task.yaml
 
 {
    "result": true,
@@ -471,7 +477,7 @@ Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /roo
 ```shell
 tiup is checking updates for component dmctl ...
 
-Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl --master-addr 192.168.11.110:9261 start-task dm-task.yaml
+Starting component `dmctl`: /root/.tiup/components/dmctl/${tidb_version}/dmctl/dmctl /root/.tiup/components/dmctl/${tidb_version}/dmctl/dmctl --master-addr 192.168.11.110:9261 start-task dm-task.yaml
 
 {
    "result": true,

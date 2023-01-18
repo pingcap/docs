@@ -28,7 +28,7 @@ title: TiDB 1.0.8 Release Notes
 ## TiKV {#tikv}
 
 -   [`DeleteFilesInRanges`を使用して古いデータを消去し、TiKV の開始速度を向上させます](https://github.com/pingcap/tikv/pull/2740)
--   [Coprocessor合計での`Decimal`の使用](https://github.com/pingcap/tikv/pull/2754)
+-   [コプロセッサー合計での`Decimal`の使用](https://github.com/pingcap/tikv/pull/2754)
 -   [安全性を確保するために、受信したスナップショットのメタデータを強制的に同期します](https://github.com/pingcap/tikv/pull/2758)
 
 1.0.7 から 1.0.8 にアップグレードするには、PD -&gt; TiKV -&gt; TiDB のローリング アップグレードの順序に従ってください。

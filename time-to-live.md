@@ -1,6 +1,6 @@
 ---
-title: Periodically Delete Data Using Time to Live
-summary: Use Time to Live to automatically expire and delete old data.
+title: Periodically Delete Data Using TTL (Time to Live)
+summary: Time to live (TTL) is a feature that allows you to manage TiDB data lifetime at the row level. In this document, you can learn how to use TTL to automatically expire and delete old data.
 ---
 
 # TTL (Time to Live) を使用して期限切れのデータを定期的に削除する {#periodically-delete-expired-data-using-ttl-time-to-live}
@@ -17,7 +17,7 @@ TTL は、ユーザーがオンラインの読み取りおよび書き込みワ�
 
 > **警告：**
 >
-> これは実験的機能です。本番環境で使用することはお勧めしません。 [TiDB Cloudサーバーレス層](https://docs.pingcap.com/tidbcloud/select-cluster-tier#serverless-tier-beta)は TTL を使用できません。
+> これは実験的機能です。本番環境で使用することはお勧めしません。 [TiDB CloudServerless Tier](https://docs.pingcap.com/tidbcloud/select-cluster-tier#serverless-tier-beta)は TTL を使用できません。
 
 ## 構文 {#syntax}
 
@@ -153,7 +153,7 @@ SET @@global.tidb_ttl_job_schedule_window_end_time = '05:00 +0000';
 
 上記のステートメントでは、TTL ジョブを UTC の 1:00 から 5:00 の間でのみスケジュールできます。デフォルトでは、時間枠は`00:00 +0000`から`23:59 +0000`に設定されており、ジョブをいつでもスケジュールできます。
 
-## 指標とグラフの監視 {#monitoring-metrics-and-charts}
+## 指標とグラフのモニタリング {#monitoring-metrics-and-charts}
 
 <CustomContent platform="tidb-cloud">
 

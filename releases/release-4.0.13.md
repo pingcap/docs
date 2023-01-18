@@ -95,7 +95,7 @@ TiDB バージョン: 4.0.13
     -   問題を修正: 以前のバージョンのクラスターでは、変数`tidb_enable_table_partition`が`false`に設定されている場合、パーティションを含むテーブルは非パーティション テーブルとして処理されます。このテーブルで`batch point get`のクエリを実行すると、クラスターが新しいバージョンにアップグレードされると、接続panicが発生します。 [#23682](https://github.com/pingcap/tidb/pull/23682)
     -   TiDB が TCP および UNIX ソケットでリッスンするように構成されている場合、TCP 接続を介したリモート ホストが接続[#23513](https://github.com/pingcap/tidb/pull/23513)に対して正しく検証されないという問題を修正します。
     -   デフォルト以外の照合順序が間違ったクエリ結果を引き起こすバグを修正します[#22923](https://github.com/pingcap/tidb/pull/22923)
-    -   Grafana の**Coprocessor Cache**パネルが動作しない不具合を修正[#22617](https://github.com/pingcap/tidb/pull/22617)
+    -   Grafana の**コプロセッサー Cache**パネルが動作しない不具合を修正[#22617](https://github.com/pingcap/tidb/pull/22617)
     -   オプティマイザーが統計キャッシュにアクセスするときに発生するエラーを修正します[#22565](https://github.com/pingcap/tidb/pull/22565)
 
 -   TiKV

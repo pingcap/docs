@@ -18,6 +18,7 @@ SQL の配置ルールは、SQL インターフェイスを使用して TiKV ク
 -   新しいデータを NVMe ストレージに保存し、古いデータを SSD に保存して、データのアーカイブとストレージのコストを削減します
 -   ホットスポット データのリーダーを高性能 TiKV インスタンスにスケジュールする
 -   コールド データを低コストのストレージ メディアに分離して、コスト効率を向上させる
+-   異なるユーザー間のコンピューティング リソースの物理的な分離をサポートします。これにより、クラスター内の異なるユーザーの分離要件と、異なる混合負荷を持つ CPU、I/O、メモリ、およびその他のリソースの分離要件が満たされます。
 
 ## 配置ルールを指定する {#specify-placement-rules}
 
@@ -51,7 +52,7 @@ DROP PLACEMENT POLICY myplacementpolicy;
 
 ## 現在の配置ルールをビュー {#view-current-placement-rules}
 
-テーブルに配置ルールがアタッチされている場合、 [`SHOW CREATE TABLE`](/sql-statements/sql-statement-show-create-table.md)の出力で配置ルールを確認できます。利用可能なポリシーの定義を表示するには、 [`SHOW CREATE PLACEMENT POLICY`](/sql-statements/sql-statement-show-create-placement-policy.md)を実行します。
+テーブルに配置ルールがアタッチされている場合、 [`SHOW CREATE TABLE`](/sql-statements/sql-statement-show-create-table.md)の出力で配置ルールを表示できます。利用可能なポリシーの定義を表示するには、 [`SHOW CREATE PLACEMENT POLICY`](/sql-statements/sql-statement-show-create-placement-policy.md)を実行します。
 
 ```sql
 tidb> SHOW CREATE TABLE t1\G

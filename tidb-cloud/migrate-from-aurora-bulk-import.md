@@ -7,23 +7,27 @@ summary: Learn how to migrate data from Amazon Aurora MySQL to TiDB Cloud in bul
 
 このドキュメントでは、 TiDB Cloudコンソールのインポート ツールを使用して、Amazon Aurora MySQL からTiDB Cloudにデータを一括移行する方法について説明します。
 
-## TiDB Cloudコンソールでインポート タスクを作成する方法を学ぶ {#learn-how-to-create-an-import-task-on-the-tidb-cloud-console}
+## TiDB Cloudコンソールでインポート タスクを作成する方法を学ぶ {#learn-how-to-create-an-import-task-in-the-tidb-cloud-console}
 
 データをインポートするには、次の手順を実行します。
 
-1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[ **Clusters** ] ページに移動します。
+1.  ターゲット クラスターの [**インポート]**ページを開きます。
 
-2.  ターゲット クラスターを見つけて、クラスター領域の右上隅にある [ **...** ] をクリックし、 [<strong>データのインポート</strong>] を選択します。 [<strong>データのインポート]</strong>ページが表示されます。
+    1.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
-    > **ヒント：**
-    >
-    > または、[**クラスター**] ページでターゲット クラスターの名前をクリックし、[インポート] 領域で [<strong>データ</strong>の<strong>インポート</strong>] をクリックすることもできます。
+        > **ヒント：**
+        >
+        > 複数のプロジェクトがある場合は、[**クラスター]**ページの左側のナビゲーション ペインでターゲット プロジェクトに切り替えることができます。
 
-3.  [Amazon S3 バケットを作成し、ソース データ ファイルを準備する方法を学びます](#learn-how-to-create-an-amazon-s3-bucket-and-prepare-source-data-files)に従ってソース データを準備します。データの準備部分で、さまざまな**データ形式**の長所と短所を確認できます。
+    2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで [**インポート**] をクリックします。
 
-4.  ソースデータの仕様に従って、 **Data Format** 、 <strong>Location</strong> 、 <strong>Bucket URI</strong> 、および<strong>Role ARN</strong>フィールドを選択または入力します。クロスアカウント アクセス用のバケット ポリシーとロールを作成する方法の詳細については、 [Amazon S3 アクセスを構成する](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access)を参照してください。
+2.  [**インポート**] ページで、右上隅にある [<strong>データのインポート</strong>] をクリックし、 [ <strong>S3 から</strong>] を選択します。
 
-5.  **ターゲットクラスタ**のクラスタ名とリージョン名を確認します。 [<strong>次へ</strong>] をクリックします。
+3.  [Amazon S3 バケットを作成し、ソース データ ファイルを準備する方法を学びます](#learn-how-to-create-an-amazon-s3-bucket-and-prepare-source-data-files)に従ってソース データを準備します。ソース データ ファイルの準備部分で、さまざまなデータ形式の長所と短所を確認できます。
+
+4.  ソースデータの仕様に従って、 **Data format** 、 <strong>Bucket URI</strong> 、および<strong>Role ARN</strong>フィールドを選択または入力します。クロスアカウント アクセス用のバケット ポリシーとロールを作成する方法の詳細については、 [Amazon S3 アクセスを構成する](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access)を参照してください。
+
+5.  **ターゲット データベース**のクラスター名とリージョン名を確認します。 [<strong>次へ</strong>] をクリックします。
 
     TiDB Cloudは、指定されたバケット URI でデータにアクセスできるかどうかの検証を開始します。検証後、 TiDB Cloudはデフォルトのファイル命名パターンを使用してデータ ソース内のすべてのファイルをスキャンしようとし、次のページの左側にスキャンの概要結果を返します。 `AccessDenied`エラーが発生した場合は、 [S3 からのデータ インポート中のアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)を参照してください。
 
@@ -147,7 +151,7 @@ TiDB が文字セットまたは照合順序をサポートしていない場合
     -F 256MiB
     ```
 
-4.  TiDB Cloudのデータ インポート タスク パネルで、[**データ形式]**として<strong>[SQL ファイル</strong>] を選択します。
+4.  クラスターの [**インポート**] ページで、右上隅の [<strong>データのインポート</strong>] をクリックし、 [ <strong>S3 から</strong>] を選択してから、データ形式として<strong>[SQL ファイル</strong>] を選択します。
 
 ### オプション 2: Amazon Auroraスナップショットを使用してソース データ ファイルを準備する {#option-2-prepare-source-data-files-using-amazon-aurora-snapshots}
 
@@ -187,7 +191,7 @@ Auroraからデータを移行するには、データベースのスキーマ�
     mysql -u ${dest_username} -h ${dest_endpoint} -P ${dest_port_number} -p -D${dest_database}<db.sql
     ```
 
-4.  TiDB Cloudの [**データのインポート**] ページで、[<strong>データ形式]</strong>として [ <strong>Auroraスナップショット</strong>] を選択します。
+4.  クラスターの [**インポート**] ページで、右上隅にある [<strong>データのインポート</strong>] をクリックし、 [ <strong>S3 から</strong>] を選択してから、データ形式として [ <strong>Auroraスナップショット</strong>] を選択します。
 
 #### スナップショットを作成して S3 にエクスポートする {#take-a-snapshot-and-export-it-to-s3}
 
@@ -216,6 +220,10 @@ Auroraからデータを移行するには、データベースのスキーマ�
 TiDB Cloudクラスターと S3 バケットは、別の AWS アカウントにあります。 TiDB Cloudクラスターが S3 バケット内のソース データ ファイルにアクセスできるようにするには、Amazon S3 へのクロスアカウント アクセスを構成する必要があります。詳細については、 [Amazon S3 アクセスの構成](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access)を参照してください。
 
 完了すると、クロスアカウントのポリシーとロールが作成されます。その後、 TiDB Cloudのデータ インポート タスク パネルで構成を続行できます。
+
+> **ノート：**
+>
+> データの一貫性を確保するために、 TiDB Cloudでは CSV ファイルを空のテーブルにのみインポートできます。既にデータが含まれている既存のテーブルにデータをインポートするには、このドキュメントに従って、 TiDB Cloudを使用してデータを一時的な空のテーブルにインポートし、 `INSERT SELECT`ステートメントを使用してデータをターゲットの既存のテーブルにコピーします。
 
 ## フィルター ルールの設定方法を確認する {#learn-how-to-set-up-filter-rules}
 

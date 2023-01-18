@@ -40,6 +40,12 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 -   最大値 (64 ビット プラットフォーム): `18446744073709551615`
 -   最大値 (32 ビット プラットフォーム): `4294967295`
 
+### <code>temp-dir</code> <span class="version-mark">v6.3.0 の新機能</span> {#code-temp-dir-code-span-class-version-mark-new-in-v6-3-0-span}
+
+-   TiDB が一時データを格納するために使用するファイル システムの場所。機能が TiDB ノードのローカル ストレージを必要とする場合、TiDB は対応する一時データをこの場所に保存します。
+-   インデックスの作成時に[`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)が有効になっている場合、新しく作成されたインデックスのためにバックフィルが必要なデータは、最初に TiDB ローカルの一時ディレクトリに保存され、次にバッチで TiKV にインポートされるため、インデックスの作成が高速化されます。
+-   デフォルト値: `"/tmp/tidb"`
+
 ### <code>oom-use-tmp-storage</code> {#code-oom-use-tmp-storage-code}
 
 > **警告：**
@@ -492,7 +498,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 
 > **警告：**
 >
-> 現在、統計の同期読み込みは実験的機能です。実稼働環境で使用することはお勧めしません。
+> 現在、統計の同期読み込みは実験的機能です。本番環境で使用することはお勧めしません。
 
 -   TiDB 同期ロード統計機能が同時に処理できる列の最大数。
 -   デフォルト値: `5`
@@ -502,7 +508,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 
 > **警告：**
 >
-> 現在、統計の同期読み込みは実験的機能です。実稼働環境で使用することはお勧めしません。
+> 現在、統計の同期読み込みは実験的機能です。本番環境で使用することはお勧めしません。
 
 -   TiDB 同期読み込み統計機能がキャッシュできる列リクエストの最大数。
 -   デフォルト値: `1000`
@@ -635,11 +641,11 @@ opentracing.reporter に関するConfiguration / コンフィグレーション�
 
 ## tikv-client.copr-cache v4.0.0 の<span class="version-mark">新機能</span> {#tikv-client-copr-cache-span-class-version-mark-new-in-v4-0-0-span}
 
-このセクションでは、Coprocessorキャッシュ機能に関連する設定項目を紹介します。
+このセクションでは、コプロセッサーキャッシュ機能に関連する設定項目を紹介します。
 
 ### <code>capacity-mb</code> {#code-capacity-mb-code}
 
--   キャッシュされたデータの合計サイズ。キャッシュ スペースがいっぱいになると、古いキャッシュ エントリが削除されます。値が`0.0`の場合、Coprocessor・キャッシュ機能は無効になります。
+-   キャッシュされたデータの合計サイズ。キャッシュ スペースがいっぱいになると、古いキャッシュ エントリが削除されます。値が`0.0`の場合、コプロセッサー・キャッシュ機能は無効になります。
 -   デフォルト値: `1000.0`
 -   単位：MB
 -   タイプ: フロート
@@ -689,7 +695,7 @@ TiDB Binlogに関連する構成。
 -   バイナリログをエクスポートするときのPump選択の戦略。現在、 `hash`と`range`の方法のみがサポートされています。
 -   デフォルト値: `range`
 
-## 状態 {#status}
+## スターテス {#status}
 
 TiDB サービスのステータスに関するConfiguration / コンフィグレーション。
 
@@ -752,14 +758,14 @@ TiDB サービスのステータスに関するConfiguration / コンフィグ�
 
 -   この構成は、各オペレーターの実行情報をスロー クエリ ログに記録するかどうかを制御します。
 -   デフォルト値: `true`
--   v6.1.0 より前では、この構成は`enable-collect-execution-info`で設定されます。
+-   v6.1.0 より前では、この構成は`enable-collect-execution-info`で設定されています。
 
 ### <code>tidb_enable_slow_log</code> {#code-tidb-enable-slow-log-code}
 
 -   この構成は、スロー ログ機能を有効にするかどうかを制御するために使用されます。
 -   デフォルト値: `true`
 -   値のオプション: `true`または`false`
--   v6.1.0 より前では、この構成は`enable-slow-log`で設定されます。
+-   v6.1.0 より前では、この構成は`enable-slow-log`で設定されています。
 
 ### <code>tidb_slow_log_threshold</code> {#code-tidb-slow-log-threshold-code}
 
@@ -775,14 +781,14 @@ TiDB サービスのステータスに関するConfiguration / コンフィグ�
 -   デフォルト値: `1`
 -   値のオプション: `1` (有効、デフォルト) または`0` (無効)。
 -   この構成の値は、システム変数[`tidb_record_plan_in_slow_log`](/system-variables.md#tidb_record_plan_in_slow_log)の値を初期化します
--   v6.1.0 より前では、この構成は`record-plan-in-slow-log`で設定されます。
+-   v6.1.0 より前では、この構成は`record-plan-in-slow-log`で設定されています。
 
 ### <code>tidb_force_priority</code> {#code-tidb-force-priority-code}
 
 -   この構成は、TiDBサーバーで実行されるステートメントのデフォルトの優先順位を変更するために使用されます。
 -   デフォルト値: `NO_PRIORITY`
 -   デフォルト値`NO_PRIORITY`は、ステートメントの優先度が強制的に変更されないことを意味します。その他のオプションは、昇順で`LOW_PRIORITY` 、 `DELAYED` 、および`HIGH_PRIORITY`です。
--   v6.1.0 より前では、この構成は`force-priority`で設定されています。
+-   v6.1.0 より前では、この構成は`force-priority`で設定されます。
 
 ### <code>max_connections</code> {#code-max-connections-code}
 
@@ -815,12 +821,6 @@ PROXY プロトコルに関するConfiguration / コンフィグレーション�
 > **警告：**
 >
 > `*`を使用すると、任意の IP アドレスのクライアントがその IP アドレスを報告できるようになり、セキュリティ上のリスクが生じる可能性があるため、注意して使用してください。さらに、 `*`を使用すると、TiDB に直接接続する内部コンポーネント(TiDB ダッシュボードなど) が使用できなくなる可能性もあります。
-
-### <code>temp-dir</code> <span class="version-mark">v6.3.0 の新機能</span> {#code-temp-dir-code-span-class-version-mark-new-in-v6-3-0-span}
-
--   TiDB が一時データを格納するために使用するファイル システムの場所。機能が TiDB ノードのローカル ストレージを必要とする場合、TiDB は対応する一時データをこの場所に格納します。
--   インデックスの作成時に[`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)が有効になっている場合、新しく作成されたインデックスのためにバックフィルが必要なデータは、最初に TiDB ローカルの一時ディレクトリに保存され、次にバッチで TiKV にインポートされるため、インデックスの作成が高速化されます。
--   デフォルト値: `"/tmp/tidb"`
 
 ## 実験的 {#experimental}
 

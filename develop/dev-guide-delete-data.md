@@ -11,15 +11,13 @@ summary: Learn about the SQL syntax, best practices, and examples for deleting d
 
 このドキュメントを読む前に、次の準備が必要です。
 
--   [TiDB Cloud(サーバーレス層) で TiDBクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md)
+-   [TiDB Cloud(Serverless Tier) で TiDBクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md)
 -   [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md) 、 [データベースを作成する](/develop/dev-guide-create-database.md) 、 [テーブルを作成する](/develop/dev-guide-create-table.md) 、および[セカンダリ インデックスの作成](/develop/dev-guide-create-secondary-indexes.md)を読み取る
 -   [データの挿入](/develop/dev-guide-insert-data.md)
 
 ## SQL 構文 {#sql-syntax}
 
 `DELETE`ステートメントは通常、次の形式です。
-
-{{< copyable "" >}}
 
 ```sql
 DELETE FROM {table} WHERE {filter}
@@ -57,8 +55,6 @@ DELETE FROM {table} WHERE {filter}
 ## 例 {#example}
 
 特定の期間内にアプリケーション エラーが見つかり、この期間内の[評価](/develop/dev-guide-bookshop-schema-design.md#ratings-table)のすべてのデータ (たとえば、 `2022-04-15 00:00:00`から`2022-04-15 00:15:00`まで) を削除する必要があるとします。この場合、 `SELECT`ステートメントを使用して、削除するレコードの数を確認できます。
-
-{{< copyable "" >}}
 
 ```sql
 SELECT COUNT(*) FROM `ratings` WHERE `rated_at` >= "2022-04-15 00:00:00" AND `rated_at` <= "2022-04-15 00:15:00";
@@ -208,8 +204,6 @@ TiDB は[統計情報](/statistics.md)を使用してインデックスの選択
 
 Javaでは、一括削除の例は次のとおりです。
 
-{{< copyable "" >}}
-
 ```java
 package com.pingcap.bulkDelete;
 
@@ -269,8 +263,6 @@ public class BatchDeleteExample
 <div label="Golang" value="golang">
 
 Golangでは、一括削除の例は次のとおりです。
-
-{{< copyable "" >}}
 
 ```go
 package main

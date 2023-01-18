@@ -160,7 +160,7 @@ TiDB バージョン: 4.0.9
 
 -   TiKV
 
-    -   列数が 255 を超えると、 Coprocessorが間違った結果を返すことがある問題を修正します[#9131](https://github.com/tikv/tikv/pull/9131)
+    -   列数が 255 を超えると、 コプロセッサーが間違った結果を返すことがある問題を修正します[#9131](https://github.com/tikv/tikv/pull/9131)
     -   リージョンマージがネットワーク パーティション[#9108](https://github.com/tikv/tikv/pull/9108)中にデータ損失を引き起こす可能性がある問題を修正します
     -   `latin1`文字セット[#9082](https://github.com/tikv/tikv/pull/9082)を使用すると、 `ANALYZE`ステートメントでpanicが発生する可能性がある問題を修正します。
     -   数値型を時間型に変換するときに返される間違った結果を修正します[#9031](https://github.com/tikv/tikv/pull/9031)

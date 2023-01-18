@@ -211,11 +211,11 @@ title: TiDB 2.1 GA Release Notes
 
 ## TiKV {#tikv}
 
--   Coprocessor
+-   コプロセッサー
 
     -   組み込み関数をさらに追加する
 
-    -   [Coprocessor`ReadPool`を追加して、リクエストを処理する際の同時実行性を向上させます](https://github.com/tikv/rfcs/blob/master/text/0010-read-pool.md)
+    -   [コプロセッサー`ReadPool`を追加して、リクエストを処理する際の同時実行性を向上させます](https://github.com/tikv/rfcs/blob/master/text/0010-read-pool.md)
 
     -   時間関数の解析の問題とタイム ゾーン関連の問題を修正します。
 

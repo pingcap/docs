@@ -36,8 +36,6 @@ TiDB クラスターが[TiUP](https://docs.pingcap.com/tidb/stable/tiup-referenc
 
 </CustomContent>
 
-{{< copyable "" >}}
-
 ```shell
 tiup demo bookshop prepare
 ```
@@ -169,7 +167,7 @@ WHERE table_schema LIKE 'bookshop';
 | ID           | bigint(20)   | 書籍の一意の ID           |
 | 題名           | varchar(100) | 本のタイトル              |
 | タイプ          | 列挙           | 書籍の種類 (雑誌、アニメ、教材など) |
-| 株式           | bigint(20)   | ストック                |
+| 株式           | bigint(20)   | 株式                  |
 | 価格           | 10 進数 (15,2) | 価格                  |
 | published_at | 日付時刻         | 発行日                 |
 

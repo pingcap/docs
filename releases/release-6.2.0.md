@@ -270,7 +270,7 @@ v6.2.0-DMR の主な新機能と改善点は次のとおりです。
 | TiKV                           | [サーバー.simplify-metrics](/tikv-configuration-file.md#simplify-metrics-new-in-v620)                                         | 新規追加   | この構成は、返されたモニタリング メトリックを単純化するかどうかを指定します。                                                                     |
 | TiKV                           | [quota.background-cpu-time](/tikv-configuration-file.md#background-cpu-time-new-in-v620)                                  | 新規追加   | この構成は、TiKV バックグラウンドが読み取りおよび書き込み要求を処理するために使用する CPU リソースのソフト制限を指定します。                                         |
 | TiKV                           | [quota.background-write-bandwidth](/tikv-configuration-file.md#background-write-bandwidth-new-in-v620)                    | 新規追加   | この構成は、バックグラウンド トランザクションがデータを書き込む帯域幅のソフト リミットを指定します (現在は有効ではありません)。                                          |
-| TiKV                           | [quota.background-read-bandwidth](/tikv-configuration-file.md#background-read-bandwidth-new-in-v620)                      | 新規追加   | この構成は、バックグラウンド トランザクションとCoprocessorがデータを読み取る帯域幅のソフト リミットを指定します (現在は有効ではありません)。                              |
+| TiKV                           | [quota.background-read-bandwidth](/tikv-configuration-file.md#background-read-bandwidth-new-in-v620)                      | 新規追加   | この構成は、バックグラウンド トランザクションとコプロセッサーがデータを読み取る帯域幅のソフト リミットを指定します (現在は有効ではありません)。                                  |
 | TiKV                           | [quota.enable-auto-tune](/tikv-configuration-file.md#enable-auto-tune-new-in-v620)                                        | 新規追加   | この構成では、クォータの自動調整を有効にするかどうかを指定します。この構成項目が有効になっている場合、TiKV は、TiKV インスタンスの負荷に基づいて、バックグラウンド リクエストのクォータを動的に調整します。 |
 | TiKV                           | rocksdb.enable-pipelined-commit                                                                                           | 削除しました | この構成は有効ではなくなりました。                                                                                           |
 | TiKV                           | gc-マージ-リライト                                                                                                               | 削除しました | この構成は有効ではなくなりました。                                                                                           |
@@ -325,7 +325,7 @@ TiDB v6.2.0 以降、 BRを使用した RawKV のバックアップと復元は�
 
     -   一部のシステム変数の検証チェックを追加[#35048](https://github.com/pingcap/tidb/issues/35048) @ [モルゴ](https://github.com/morgo)
 
-    -   一部の型変換のエラー メッセージを最適化する[#32447](https://github.com/pingcap/tidb/issues/32744) @ [ファンレンホー](https://github.com/fanrenhoo)
+    -   一部の型変換のエラー メッセージを最適化する[#32447](https://github.com/pingcap/tidb/issues/32744) @ [ファンレンフー](https://github.com/fanrenhoo)
 
     -   `KILL`コマンドが DDL 操作[#24144](https://github.com/pingcap/tidb/issues/24144) @ [モルゴ](https://github.com/morgo)をサポートするようになりました
 
@@ -337,7 +337,7 @@ TiDB v6.2.0 以降、 BRを使用した RawKV のバックアップと復元は�
 
     -   一部のログ出力を簡略化[#36011](https://github.com/pingcap/tidb/issues/36011) @ [ドヴィーデン](https://github.com/dveeden)
 
-    -   Coprocessor通信プロトコルを最適化します。これにより、データを読み取るときの TiDB プロセスのメモリ消費を大幅に削減でき、テーブルをスキャンしてDumplingによってデータをエクスポートするシナリオでの OOM の問題をさらに軽減できます。この通信プロトコルを (SESSION または GLOBAL のスコープで) 有効にするかどうかを制御するために、システム変数`tidb_enable_paging`が導入されました。このプロトコルはデフォルトで無効になっています。有効にするには、変数値を`true` [#35633](https://github.com/pingcap/tidb/issues/35633) @ [ティアンカイアマ](https://github.com/tiancaiamao) @ [wshwsh12](https://github.com/wshwsh12)に設定します。
+    -   コプロセッサー通信プロトコルを最適化します。これにより、データを読み取るときの TiDB プロセスのメモリ消費を大幅に削減でき、テーブルをスキャンしてDumplingによってデータをエクスポートするシナリオでの OOM の問題をさらに軽減できます。この通信プロトコルを (SESSION または GLOBAL のスコープで) 有効にするかどうかを制御するために、システム変数`tidb_enable_paging`が導入されました。このプロトコルはデフォルトで無効になっています。有効にするには、変数値を`true` [#35633](https://github.com/pingcap/tidb/issues/35633) @ [ティアンカイアマ](https://github.com/tiancaiamao) @ [wshwsh12](https://github.com/wshwsh12)に設定します。
 
     -   一部の演算子 (HashJoin、HashAgg、Update、Delete) のメモリ追跡の精度を最適化 ( [#35634](https://github.com/pingcap/tidb/issues/35634) 、 [#35631](https://github.com/pingcap/tidb/issues/35631) 、 [#35635](https://github.com/pingcap/tidb/issues/35635) @ [wshwsh12](https://github.com/wshwsh12) ) ( [#34096](https://github.com/pingcap/tidb/issues/34096) @ [エキキシウム](https://github.com/ekexium) )
 
@@ -376,7 +376,7 @@ TiDB v6.2.0 以降、 BRを使用した RawKV のバックアップと復元は�
 
     -   TiDB Lightning
 
-        -   EOF、Read index not ready、 Coprocessor timeout [#36674](https://github.com/pingcap/tidb/issues/36674) 、 [#36566](https://github.com/pingcap/tidb/issues/36566) @ [D3ハンター](https://github.com/D3Hunter)などの再試行可能なエラーを追加します。
+        -   EOF、Read index not ready、 コプロセッサー timeout [#36674](https://github.com/pingcap/tidb/issues/36674) 、 [#36566](https://github.com/pingcap/tidb/issues/36566) @ [D3ハンター](https://github.com/D3Hunter)などの再試行可能なエラーを追加します。
 
     -   TiUP
 
@@ -454,7 +454,7 @@ TiDB コミュニティの次の貢献者に感謝します。
 -   [GoGim1](https://github.com/GoGim1)
 -   [レンバオシュオ](https://github.com/renbaoshuo)
 -   [ゼアオリ](https://github.com/Zheaoli)
--   [ファンレンフー](https://github.com/fanrenhoo)
+-   [ファンレンホー](https://github.com/fanrenhoo)
 -   [ニューウェルキン](https://github.com/njuwelkin)
 -   [ワイヤービーバー](https://github.com/wirybeaver)
 -   [ヘイコン](https://github.com/hey-kong)

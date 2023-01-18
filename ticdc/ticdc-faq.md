@@ -9,7 +9,7 @@ summary: Learn the FAQs you might encounter when you use TiCDC.
 
 > **ノート：**
 >
-> このドキュメントでは、 `cdc cli`コマンドで指定される PD アドレスは`--pd=http://10.0.10.25:2379`です。コマンドを使用するときは、アドレスを実際の PD アドレスに置き換えます。
+> このドキュメントでは、 `cdc cli`コマンドで指定されたサーバーアドレスは`--server=http://127.0.0.1:8300`です。コマンドを使用するときは、アドレスを実際の PD アドレスに置き換えます。
 
 ## TiCDC でタスクを作成するときに<code>start-ts</code>を選択するにはどうすればよいですか? {#how-do-i-choose-code-start-ts-code-when-creating-a-task-in-ticdc}
 
@@ -31,7 +31,7 @@ TiCDC レプリケーション タスクのステータスを表示するには�
 {{< copyable "" >}}
 
 ```shell
-cdc cli changefeed list --pd=http://10.0.10.25:2379
+cdc cli changefeed list --server=http://127.0.0.1:8300
 ```
 
 予想される出力は次のとおりです。
@@ -113,7 +113,7 @@ TiCDC がサービス GC セーフポイントに設定する Time-To-Live (TTL)
 {{< copyable "" >}}
 
 ```shell
-cdc cli changefeed create --pd=http://10.0.10.25:2379 --sink-uri="kafka://127.0.0.1:9092/cdc-test?kafka-version=2.4.0&protocol=canal" --config changefeed.toml
+cdc cli changefeed create --server=http://127.0.0.1:8300 --sink-uri="kafka://127.0.0.1:9092/cdc-test?kafka-version=2.4.0&protocol=canal" --config changefeed.toml
 ```
 
 > **ノート：**

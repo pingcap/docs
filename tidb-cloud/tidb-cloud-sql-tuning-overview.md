@@ -23,7 +23,7 @@ TiDB Cloudは、クラスター上の低速クエリを分析するのに役立�
 
 ### [診断] タブでステートメントを使用する {#use-statement-on-the-diagnosis-tab}
 
-TiDB Cloudコンソールには、[**診断**] タブに [<strong><a href="/tidb-cloud/tune-performance.md#statement-analysis">ステートメント</a></strong>] サブタブがあります。クラスター上のすべてのデータベースの SQL ステートメントの実行統計を収集します。これを使用して、合計または 1 回の実行で長い時間を消費する SQL ステートメントを特定して分析できます。
+TiDB Cloudコンソールは、 **SQL 診断**タブに<strong><a href="/tidb-cloud/tune-performance.md#statement-analysis">SQL ステートメント</a></strong>サブタブを提供します。クラスター上のすべてのデータベースの SQL ステートメントの実行統計を収集します。これを使用して、合計または 1 回の実行で長い時間を消費する SQL ステートメントを特定して分析できます。
 
 このサブタブでは、(クエリ パラメータが一致しない場合でも) 同じ構造を持つ SQL クエリが同じ SQL ステートメントにグループ化されることに注意してください。たとえば、 `SELECT * FROM employee WHERE id IN (1, 2, 3)`と`select * from EMPLOYEE where ID in (4, 5)`はどちらも同じ SQL ステートメント`select * from employee where id in (...)`の一部です。
 

@@ -24,7 +24,7 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
 -   メモリ: TiKV インスタンスごとのメモリ使用量
 -   IO 使用率: TiKV インスタンスごとの I/O 使用率
 -   MBps: 各 TiKV インスタンスでの読み取りと書き込みの合計バイト数
--   QPS: 各 TiKV インスタンスのコマンドごとの QPS
+-   QPS: 各 TiKV インスタンスのコマンドあたりの QPS
 -   Errps: gRPC メッセージの失敗率
 -   リーダー: TiKV インスタンスごとのリーダーの数
 -   リージョン: TiKV インスタンスあたりのリージョン数
@@ -39,7 +39,7 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
 -   サーバー レポートの失敗:サーバーによって報告されたエラー メッセージの数。通常は`0`のはずです。
 -   Raftstore エラー: 各 TiKV インスタンスのタイプごとの Raftstore エラーの数
 -   スケジューラ エラー: 各 TiKV インスタンスのタイプごとのスケジューラ エラーの数
--   Coprocessor・エラー: 各 TiKV インスタンスのタイプごとのコプロセッサー・エラーの数
+-   コプロセッサー・エラー: 各 TiKV インスタンスのタイプごとのコプロセッサー・エラーの数
 -   gRPC メッセージ エラー: 各 TiKV インスタンスのタイプごとの gRPC メッセージ エラーの数
 -   Leaderドロップ: TiKV インスタンスごとにドロップされたリーダーの数
 -   欠落しているLeader: TiKV インスタンスごとの欠落しているリーダーの数
@@ -77,7 +77,7 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
 -   gRPC poll CPU: `gRPC`スレッドの CPU 使用率。通常、CPU 使用率は 80% * `server.grpc-concurrency`未満である必要があります。
 -   統合読み取りプール CPU: `unified read pool`のスレッドの CPU 使用率
 -   Storage ReadPool CPU: `storage read pool`スレッドの CPU 使用率
--   CoprocessorCPU: `coprocessor`スレッドの CPU 使用率
+-   コプロセッサーCPU: `coprocessor`スレッドの CPU 使用率
 -   RocksDB CPU: RocksDB スレッドの CPU 使用率
 -   GC ワーカー CPU: `GC worker`スレッドの CPU 使用率
 -   バックグラウンド ワーカー CPU: `background worker`スレッドの CPU 使用率
@@ -162,7 +162,7 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
 -   レベル 0 の可能性: 統合読み取りプール内のレベル 0 タスクの割合
 -   実行中のタスク: 統合読み取りプールで同時に実行されているタスクの数
 
-### ストレージ {#storage}
+### 保管所 {#storage}
 
 -   Storage command total: 1 秒あたりの種類別の受信コマンド数
 -   ストレージ非同期要求エラー: 1 秒あたりのエンジン非同期要求エラーの数
@@ -259,18 +259,18 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
 -   FuturePool で処理されたタスク: 1 秒あたりの Future プールによって処理されたタスクの数
 -   FuturePool の保留中のタスク: 1 秒あたりの将来のプールの保留中および実行中のタスクの現在の数
 
-### Coprocessorの概要 {#coprocessor-overview}
+### コプロセッサーの概要 {#coprocessor-overview}
 
 -   リクエスト期間: コプロセッサーのリクエストを受信してからリクエストの処理が完了するまでの合計期間
 -   Total Requests: 1 秒あたりのタイプ別のリクエスト数
 -   処理時間: コプロセッサー要求の 1 分あたりの処理に実際に費やされた時間のヒストグラム
--   Total Request Errors:Coprocessorの 1 秒あたりの要求エラー数。短時間に多くのエラーが発生してはなりません。
+-   Total Request Errors:コプロセッサーの 1 秒あたりの要求エラー数。短時間に多くのエラーが発生してはなりません。
 -   Total KV Cursor Operations: `select` 、 `index` 、 `analyze_table` 、 `analyze_index` 、 `checksum_table` 、 `checksum_index`など、タイプ別の 1 秒あたりの KV カーソル操作の総数。
 -   KV カーソル操作: 1 秒あたりのタイプ別の KV カーソル操作のヒストグラム
 -   Total RocksDB Perf 統計: RocksDB パフォーマンスの統計
 -   Total Response Size: コプロセッサー応答の合計サイズ
 
-### Coprocessorの詳細 {#coprocessor-detail}
+### コプロセッサーの詳細 {#coprocessor-detail}
 
 -   処理時間: コプロセッサー要求の 1 分あたりの処理に実際に費やされた時間のヒストグラム
 -   ストアごとの 95% 処理時間: 1 秒あたりの TiKV インスタンスごとのコプロセッサ要求の処理にかかった時間 (P95)
@@ -307,10 +307,10 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
 -   書き込みストール期間: 書き込みストール期間。通常は`0`のはずです。
 -   Memtable サイズ: 各カラムファミリーの memtable サイズ
 -   Memtable hit: memtable のヒット率
--   ブロック キャッシュ サイズ: ブロック キャッシュ サイズ。共有ブロック キャッシュが無効になっている場合は、カラムファミリーごとに分類されます。
--   ブロックキャッシュヒット：ブロックキャッシュのヒット率
--   ブロック キャッシュ フロー: タイプごとのブロック キャッシュ操作のフロー率
--   ブロック キャッシュ操作: タイプごとのブロック キャッシュ操作の数
+-   ブロック キャッシュ サイズ:ブロックキャッシュサイズ。共有ブロックキャッシュが無効になっている場合は、カラムファミリーごとに分類されます。
+-   ブロックキャッシュヒット：ブロックキャッシュキャッシュのヒット率
+-   ブロック キャッシュ フロー: タイプごとのブロックキャッシュ操作のフロー率
+-   ブロック キャッシュ操作: タイプごとのブロックキャッシュ操作の数
 -   キー フロー: タイプごとのキー操作のフロー レート
 -   合計キー: 各カラムファミリーのキーの数
 -   読み取りフロー: タイプごとの読み取り操作の流量
@@ -332,7 +332,7 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
 -   BLOB ファイル数: Titan BLOB ファイルの数
 -   Blob file size: Titan blob ファイルの合計サイズ
 -   ライブ BLOB サイズ: 有効な BLOB レコードの合計サイズ
--   Blob キャッシュ ヒット: Titan ブロック キャッシュのヒット率
+-   Blob キャッシュ ヒット: Titanブロックキャッシュのヒット率
 -   Iter touched blob file count: 1 つの反復子に含まれる BLOB ファイルの数
 -   Blobファイル破棄可能率分布：blobファイルのblob記録失敗率分布
 -   BLOB キーのサイズ: Titan Blob キーのサイズ
@@ -341,7 +341,7 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
 -   Blob get duration: Titan blob で get 操作を実行するときにかかった時間
 -   Blob iter 操作: Titan blob で iter 操作を実行するときにかかった時間
 -   BLOB のシーク時間: Titan BLOB でシーク操作を実行するときにかかった時間
--   Blob next duration: Titan blob で次の操作を実行するときに消費される時間
+-   Blob next duration: Titan blob で次の操作を実行するときにかかった時間
 -   Blob prev duration: Titan blob で前の操作を実行するときにかかった時間
 -   BLOB キー フロー: Titan BLOB キーの操作のフロー レート
 -   Blob バイト フロー: Titan blob キーのバイト フロー レート

@@ -35,7 +35,7 @@ TiFlashには、TiFlash **TiFlash** 、 <strong>TiFlash-Proxy-Summary</strong> �
 >
 > ストア サイズ、FSync OPS、File Open OPS、および Opened File Count は現在、 TiFlashストレージレイヤーの監視情報のみをカバーし、 TiFlash-Proxy ではカバーしていません。
 
-## Coprocessor {#coprocessor}
+## コプロセッサー {#coprocessor}
 
 -   リクエスト QPS: すべてのTiFlashインスタンスによって受信されたコプロセッサ リクエストの数。 `batch`はバッチ リクエストの数です。 `batch_cop`は、バッチ リクエスト内のコプロセッサ リクエストの数です。 `cop`は、コプロセッサー・インターフェースを介して直接送信されるコプロセッサー要求の数です。 `cop_dag`は、すべてのコプロセッサー要求における DAG 要求の数です。 `super_batch`は、スーパー バッチ機能を有効にするための要求の数です。
 -   エグゼキュータ QPS: すべてのTiFlashインスタンスによって受信されたリクエスト内の各タイプの DAG エグゼキュータの数。 `table_scan`は、テーブル スキャン エグゼキュータです。 `selection`は選択エグゼキュータです。 `aggregation`は集計エグゼキュータです。 `top_n`は`TopN`のエグゼキュータです。 `limit`は制限実行者です。
@@ -66,7 +66,7 @@ TiFlashには、TiFlash **TiFlash** 、 <strong>TiFlash-Proxy-Summary</strong> �
 -   Schema Internal DDL OPM: すべてのTiFlashインスタンスで 1 分あたりに実行された特定の DDL 操作の数。
 -   Schema Apply Duration: すべてのTiFlashインスタンスで`apply schema`の操作に費やされた時間。
 
-## ストレージ {#storage}
+## 保管所 {#storage}
 
 -   書き込みコマンド OPS: すべてのTiFlashインスタンスのストレージレイヤーによって受信された 1 秒あたりの書き込み要求の数。
 -   書き込み増幅: 各TiFlashインスタンスの書き込み増幅 (ディスク書き込みの実際のバイト数を論理データの書き込みバイト数で割ったもの)。 `total`はこの開始以降の書き込み増幅、 `5min`は過去 5 分間の書き込み増幅です。

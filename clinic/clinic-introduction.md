@@ -72,7 +72,7 @@ PingCAPクリニックは、クラスタの問題を診断するために次の 
 | データサイズ        | 3GB/パッケージ  |
 | データ再構築環境の保存期間 | 3日         |
 
-## 次の一歩 {#next-step}
+## 次のステップ {#next-step}
 
 -   オンプレミス環境でPingCAPクリニックを使用する
     -   [PingCAPクリニックのクイック スタート](/clinic/quick-start-with-clinic.md)

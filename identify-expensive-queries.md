@@ -36,18 +36,18 @@ TiDB を使用すると、SQL 実行中にコストのかかるクエリを特�
 -   `conn_id` : 接続 ID (セッション ID)。たとえば、キーワード`con:60026`を使用して、セッション ID が`60026`のログを検索できます。
 -   `database` : ステートメントが実行されるデータベース。
 
-TiKVCoprocessorのタスク関連フィールド:
+TiKVコプロセッサーのタスク関連フィールド:
 
--   `wait_time` : TiKV のステートメントのすべてのCoprocessor要求の合計待ち時間。 TiKV のCoprocessorは限られた数のスレッドを実行するため、Coprocessorプロセッサのすべてのスレッドが動作しているときにリクエストがキューに入ることがあります。キュー内のリクエストの処理に時間がかかると、後続のリクエストの待ち時間が長くなります。
--   `request_count` : ステートメントが送信するCoprocessor要求の数。
--   `total_keys` :Coprocessorがスキャンしたキーの数。
--   `processed_keys` :Coprocessorが処理したキーの数。 `total_keys`と比較して、 `processed_keys`には古いバージョンの MVCC が含まれていません。 `processed_keys`と`total_keys`の大きな違いは、多くの古いバージョンが存在することを示しています。
--   `num_cop_tasks` : ステートメントが送信するCoprocessor要求の数。
--   `process_avg_time` :Coprocessor・タスクの平均実行時間。
--   `process_p90_time` :Coprocessorタスクの P90 実行時間。
--   `process_max_time` :Coprocessor・タスクの最大実行時間。
--   `process_max_addr` : 実行時間が最も長いCoprocessor・タスクのアドレス。
--   `wait_avg_time` :Coprocessor・タスクの平均待ち時間。
--   `wait_p90_time` :Coprocessorタスクの P90 待ち時間。
--   `wait_max_time` :Coprocessor・タスクの最大待ち時間。
--   `wait_max_addr` : 待ち時間が最も長いCoprocessor・タスクのアドレス。
+-   `wait_time` : TiKV のステートメントのすべてのコプロセッサー要求の合計待ち時間。 TiKV のコプロセッサーは限られた数のスレッドを実行するため、コプロセッサープロセッサのすべてのスレッドが動作しているときにリクエストがキューに入ることがあります。キュー内のリクエストの処理に時間がかかると、後続のリクエストの待ち時間が長くなります。
+-   `request_count` : ステートメントが送信するコプロセッサー要求の数。
+-   `total_keys` :コプロセッサーがスキャンしたキーの数。
+-   `processed_keys` :コプロセッサーが処理したキーの数。 `total_keys`と比較して、 `processed_keys`には古いバージョンの MVCC が含まれていません。 `processed_keys`と`total_keys`の大きな違いは、多くの古いバージョンが存在することを示しています。
+-   `num_cop_tasks` : ステートメントが送信するコプロセッサー要求の数。
+-   `process_avg_time` :コプロセッサー・タスクの平均実行時間。
+-   `process_p90_time` :コプロセッサータスクの P90 実行時間。
+-   `process_max_time` :コプロセッサー・タスクの最大実行時間。
+-   `process_max_addr` : 実行時間が最も長いコプロセッサー・タスクのアドレス。
+-   `wait_avg_time` :コプロセッサー・タスクの平均待ち時間。
+-   `wait_p90_time` :コプロセッサータスクの P90 待ち時間。
+-   `wait_max_time` :コプロセッサー・タスクの最大待ち時間。
+-   `wait_max_addr` : 待ち時間が最も長いコプロセッサー・タスクのアドレス。

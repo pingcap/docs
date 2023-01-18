@@ -9,7 +9,7 @@ summary: A brief introduction to TiDB's CURD SQL.
 
 ## 始める前に {#before-you-start}
 
-TiDB クラスターに接続していることを確認してください。そうでない場合は、 [TiDB Cloud(サーバーレス層) で TiDBクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照して Serverless Tier クラスターを作成してください。
+TiDB クラスターに接続していることを確認してください。そうでない場合は、 [TiDB Cloud(Serverless Tier) で TiDBクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してServerless Tierクラスターを作成してください。
 
 ## TiDB で SQL を調べる {#explore-sql-with-tidb}
 
@@ -43,15 +43,11 @@ SQL は、その関数によって次の 4 つのタイプに分けられます�
 
 テーブルにデータを挿入するには、次の`INSERT`ステートメントを使用します。
 
-{{< copyable "" >}}
-
 ```sql
 INSERT INTO person VALUES(1,'tom','20170912');
 ```
 
 いくつかのフィールドのデータを含むレコードをテーブルに挿入するには、 `INSERT`ステートメントを使用します。
-
-{{< copyable "" >}}
 
 ```sql
 INSERT INTO person(id,name) VALUES('2','bob');
@@ -59,15 +55,11 @@ INSERT INTO person(id,name) VALUES('2','bob');
 
 テーブル内のレコードの一部のフィールドを更新するには、 `UPDATE`ステートメントを使用します。
 
-{{< copyable "" >}}
-
 ```sql
 UPDATE person SET birthday='20180808' WHERE id=2;
 ```
 
 テーブル内のデータを削除するには、次の`DELETE`ステートメントを使用します。
-
-{{< copyable "" >}}
 
 ```sql
 DELETE FROM person WHERE id=2;
@@ -83,15 +75,11 @@ DQL は、テーブルまたは複数のテーブルから目的のデータ行�
 
 テーブル内のデータを表示するには、 `SELECT`ステートメントを使用します。
 
-{{< copyable "" >}}
-
 ```sql
 SELECT * FROM person;
 ```
 
 特定の列を照会するには、 `SELECT`キーワードの後に列名を追加します。
-
-{{< copyable "" >}}
 
 ```sql
 SELECT name FROM person;
@@ -109,8 +97,6 @@ SELECT name FROM person;
 ```
 
 `WHERE`句を使用して、条件に一致するすべてのレコードをフィルタリングし、結果を返します。
-
-{{< copyable "" >}}
 
 ```sql
 SELECT * FROM person WHERE id < 5;

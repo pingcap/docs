@@ -59,7 +59,13 @@ TiDB は MySQL プロトコルおよび MySQL 構文と互換性があるため�
 
 -   [クイックスタート](/develop/dev-guide-build-cluster-in-cloud.md)
 -   [Driverまたは ORM を選択](/develop/dev-guide-choose-driver-or-orm.md)
+
+<CustomContent platform="tidb">
+
 -   [TiDB に接続する](/develop/dev-guide-connect-to-tidb.md)
+
+</CustomContent>
+
 -   [データベース スキーマの設計](/develop/dev-guide-schema-design-overview.md)
 -   [書き込みデータ](/develop/dev-guide-insert-data.md)
 -   [データの読み取り](/develop/dev-guide-get-data-from-single-table.md)

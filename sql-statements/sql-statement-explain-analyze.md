@@ -127,7 +127,7 @@ cop_task: {num: 6, max: 1.07587ms, min: 844.312µs, avg: 919.601µs, p95: 1.0758
     -   `max` 、 `min` 、 `avg` 、 `p95` : cop タスクの実行にかかった実行時間の最大値、最小値、平均値、および P95 値。
     -   `max_proc_keys`および`p95_proc_keys` : すべての警官タスクで TiKV によってスキャンされた最大および P95 キー値。最大値と P95 値の差が大きい場合、データ分布が偏っている可能性があります。
     -   `rpc_num` , `rpc_time` : TiKV に送信された`Cop`の RPC リクエストの合計数と合計時間。
-    -   `copr_cache_hit_ratio` : `cop`タスク要求に対するCoprocessorキャッシュのヒット率。
+    -   `copr_cache_hit_ratio` : `cop`タスク要求に対するコプロセッサーキャッシュのヒット率。
 -   `backoff` : さまざまなタイプのバックオフとバックオフの合計待機時間が含まれます。
 
 ### 入れる {#insert}
@@ -280,11 +280,11 @@ commit_txn: {prewrite:48.564544ms, wait_prewrite_binlog:47.821579, get_commit_ts
 
 ### その他共通実行情報 {#other-common-execution-information}
 
-通常、 Coprocessorオペレーターには、実行時間情報の 2 つの部分 ( `cop_task`と`tikv_task` ) が含まれています。 `cop_task`は TiDB によって記録された時間であり、リクエストがサーバーに送信された瞬間から応答が受信される瞬間までです。 `tikv_task`は TiKV Coprocessor自体によって記録された時間です。この 2 つに大きな違いがある場合は、応答の待機に費やされた時間が長すぎるか、gRPC またはネットワークに費やされた時間が長すぎることを示している可能性があります。
+通常、 コプロセッサーオペレーターには、実行時間情報の 2 つの部分 ( `cop_task`と`tikv_task` ) が含まれています。 `cop_task`は TiDB によって記録された時間であり、リクエストがサーバーに送信された瞬間から応答が受信される瞬間までです。 `tikv_task`は TiKV コプロセッサー自体によって記録された時間です。この 2 つに大きな違いがある場合は、応答の待機に費やされた時間が長すぎるか、gRPC またはネットワークに費やされた時間が長すぎることを示している可能性があります。
 
 ## MySQL の互換性 {#mysql-compatibility}
 
-`EXPLAIN ANALYZE`は MySQL 8.0 の機能ですが、出力形式と TiDB の潜在的な実行プランの両方が MySQL とは大幅に異なります。
+`EXPLAIN ANALYZE`は MySQL 8.0 の機能ですが、出力形式と TiDB の潜在的な実行計画の両方が MySQL とは大幅に異なります。
 
 ## こちらもご覧ください {#see-also}
 

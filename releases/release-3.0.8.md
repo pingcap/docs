@@ -74,8 +74,8 @@ TiDB アンシブル バージョン: 3.0.8
 
 ## TiKV {#tikv}
 
--   Coprocessor
-    -   Coprocessor[#6051](https://github.com/tikv/tikv/pull/6051)でエラーが発生した場合の出力ログのレベルを`error`から`warn`に変更します
+-   コプロセッサー
+    -   コプロセッサー[#6051](https://github.com/tikv/tikv/pull/6051)でエラーが発生した場合の出力ログのレベルを`error`から`warn`に変更します
     -   tidb-server [#6069](https://github.com/tikv/tikv/pull/6096)の更新動作との一貫性を保つために、統計サンプリング データの更新動作を、行を直接更新するから、挿入する前に削除するように変更します。
 -   ラフトストア
     -   `destroy`メッセージを`peerfsm`と`peerfsm`に繰り返し送信することによって引き起こされるpanicが複数回破壊される問題を修正します[#6297](https://github.com/tikv/tikv/pull/6297)

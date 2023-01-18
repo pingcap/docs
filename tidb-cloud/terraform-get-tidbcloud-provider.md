@@ -48,7 +48,7 @@ TiDB Cloud API は HTTP ダイジェスト認証を使用します。秘密鍵�
       required_providers {
         tidbcloud = {
           source = "tidbcloud/tidbcloud"
-          version = "~> 0.0.1"
+          version = "~> 0.1.0"
         }
       }
       required_version = ">= 1.0.0"
@@ -68,7 +68,7 @@ TiDB Cloud API は HTTP ダイジェスト認証を使用します。秘密鍵�
 
     Initializing provider plugins...
     - Reusing previous version of tidbcloud/tidbcloud from the dependency lock file
-    - Using previously-installed tidbcloud/tidbcloud v0.0.1
+    - Using previously-installed tidbcloud/tidbcloud v0.1.0
 
     Terraform has been successfully initialized!
 
@@ -90,7 +90,7 @@ terraform {
   required_providers {
     tidbcloud = {
       source = "tidbcloud/tidbcloud"
-      version = "~> 0.0.1"
+      version = "~> 0.1.0"
     }
   }
   required_version = ">= 1.0.0"
@@ -111,6 +111,6 @@ export TIDBCLOUD_PRIVATE_KEY = ${private_key}
 
 これで、 TiDB Cloud Terraform プロバイダーを使用できるようになりました。
 
-## 次の一歩 {#next-step}
+## 次のステップ {#next-step}
 
 [クラスタ リソース](/tidb-cloud/terraform-use-cluster-resource.md)でクラスターを管理することから始めます。

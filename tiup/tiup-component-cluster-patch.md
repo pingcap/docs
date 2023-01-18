@@ -64,7 +64,7 @@ tiup cluster patch <cluster-name> <package-path> [flags]
 
 ### -R, --role {#r-role}
 
--   置き換える役割を指定します。このオプションの値は、ノードの役割のコンマ区切りリストです。 `tiup cluster display`コマンドで返される[クラスタ ステータス テーブル](/tiup/tiup-component-cluster-display.md)の 2 列目から、ノードにデプロイされているロールを取得できます。
+-   置き換えるロールを指定します。このオプションの値は、ノードの役割のコンマ区切りリストです。 `tiup cluster display`コマンドで返される[クラスタ ステータス テーブル](/tiup/tiup-component-cluster-display.md)の 2 列目から、ノードにデプロイされているロールを取得できます。
 -   データ型: `STRINGS`
 -   このオプションが指定されていない場合、 TiUPはデフォルトで置き換えるロールを選択しません。
 

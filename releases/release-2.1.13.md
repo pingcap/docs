@@ -14,7 +14,7 @@ TiDB アンシブル バージョン: 2.1.13
 
 -   ホットスポットの問題を軽減するために、列に`AUTO_INCREMENT`属性が含まれている場合に`SHARD_ROW_ID_BITS`を使用して行 ID を分散させる機能を追加します[#10788](https://github.com/pingcap/tidb/pull/10788)
 -   無効な DDL メタデータの有効期間を最適化して、TiDB クラスターのアップグレード後に DDL 操作の通常の実行を回復する速度を上げます[#10789](https://github.com/pingcap/tidb/pull/10789)
--   `execdetails.ExecDetails`ポインター[#10833](https://github.com/pingcap/tidb/pull/10833)が原因で、Coprocessorリソースを迅速に解放できなかったことが原因で発生した同時実行の多いシナリオでの OOM の問題を修正します。
+-   `execdetails.ExecDetails`ポインター[#10833](https://github.com/pingcap/tidb/pull/10833)が原因で、コプロセッサーリソースを迅速に解放できなかったことが原因で発生した同時実行の多いシナリオでの OOM の問題を修正します。
 -   統計を更新するかどうかを制御する`update-stats`の構成項目を追加します[#10772](https://github.com/pingcap/tidb/pull/10772)
 -   次の TiDB 固有の構文を追加して、リージョンの事前分割をサポートし、ホットスポットの問題を解決します。
 -   `PRE_SPLIT_REGIONS`テーブル オプション[#10863](https://github.com/pingcap/tidb/pull/10863)を追加します。

@@ -85,7 +85,7 @@ TiDB バージョン: 5.2.2
     -   `resolved_ts` [#10965](https://github.com/tikv/tikv/issues/10965)で一部のコルーチンがリークする問題を修正
     -   応答のサイズが 4 GiB を超えるとコプロセッサーに発生するpanicの問題を修正します[#9012](https://github.com/tikv/tikv/issues/9012)
     -   スナップショット ファイルをガベージ コレクションできない場合に、スナップショット ガベージ コレクション (GC) で GC スナップショット ファイルが失われる問題を修正し[#10813](https://github.com/tikv/tikv/issues/10813) 。
-    -   Coprocessor要求を処理する際のタイムアウトによって引き起こされるpanicの問題を修正します[#10852](https://github.com/tikv/tikv/issues/10852)
+    -   コプロセッサー要求を処理する際のタイムアウトによって引き起こされるpanicの問題を修正します[#10852](https://github.com/tikv/tikv/issues/10852)
 
 -   PD
 

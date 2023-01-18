@@ -18,7 +18,7 @@ summary: Learn how to migrate MySQL of large datasets to TiDB.
 -   [DumplingとTiDB Lightningをインストールする](/migration-tools.md) .
 -   [DM に必要なソース データベースとターゲット データベースの権限を付与する](/dm/dm-worker-intro.md) .
 -   [TiDB Lightningに必要なターゲット データベース権限を付与する](/tidb-lightning/tidb-lightning-faq.md#what-are-the-privilege-requirements-for-the-target-database) .
--   [Dumplingに必要なソース データベース権限を付与する](/dumpling-overview.md#export-data-from-tidbmysql) .
+-   [Dumplingに必要なソース データベース権限を付与する](/dumpling-overview.md#export-data-from-tidb-or-mysql) .
 
 ## リソース要件 {#resource-requirements}
 

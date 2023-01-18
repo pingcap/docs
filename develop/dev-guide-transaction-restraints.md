@@ -37,8 +37,6 @@ TiDB の SI 分離レベルでは、**書き込みスキュー**例外を回避�
 
 <div label="Java" value="java">
 
-{{< copyable "" >}}
-
 ```java
 package com.pingcap.txn.write.skew;
 
@@ -164,8 +162,6 @@ public class EffectWriteSkew {
 
 TiDB トランザクションを適応させるには、次のコードに従って[ユーティリティ](https://github.com/pingcap-inc/tidb-example-golang/tree/main/util)を書き込みます。
 
-{{< copyable "" >}}
-
 ```go
 package main
 
@@ -334,8 +330,6 @@ func createDoctor(db *sql.DB, id int, name string, onCall bool, shiftID int) err
 
 SQL ログ:
 
-{{< copyable "" >}}
-
 ```sql
 /* txn 1 */ BEGIN
     /* txn 2 */ BEGIN
@@ -348,8 +342,6 @@ SQL ログ:
 ```
 
 実行結果:
-
-{{< copyable "" >}}
 
 ```sql
 mysql> SELECT * FROM doctors;
@@ -371,8 +363,6 @@ mysql> SELECT * FROM doctors;
 <SimpleTab groupId="language">
 
 <div label="Java" value="java">
-
-{{< copyable "" >}}
 
 ```java
 package com.pingcap.txn.write.skew;
@@ -497,8 +487,6 @@ public class EffectWriteSkew {
 
 <div label="Golang" value="golang">
 
-{{< copyable "" >}}
-
 ```go
 package main
 
@@ -667,8 +655,6 @@ func createDoctor(db *sql.DB, id int, name string, onCall bool, shiftID int) err
 
 SQL ログ:
 
-{{< copyable "" >}}
-
 ```sql
 /* txn 1 */ BEGIN
     /* txn 2 */ BEGIN
@@ -681,8 +667,6 @@ At least one doctor is on call
 ```
 
 実行結果:
-
-{{< copyable "" >}}
 
 ```sql
 mysql> SELECT * FROM doctors;
@@ -700,8 +684,6 @@ mysql> SELECT * FROM doctors;
 **Spring**がサポートする`PROPAGATION_NESTED`の伝搬動作は、ネストされたトランザクションをトリガーします。これは、現在のトランザクションとは独立して開始される子トランザクションです。ネストされたトランザクションが開始されると、 `savepoint`が記録されます。ネストされたトランザクションが失敗した場合、トランザクションは`savepoint`状態にロールバックします。ネストされたトランザクションは外部トランザクションの一部であり、外部トランザクションとともにコミットされます。
 
 次の例は、 `savepoint`メカニズムを示しています。
-
-{{< copyable "" >}}
 
 ```sql
 mysql> BEGIN;

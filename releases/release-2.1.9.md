@@ -33,7 +33,7 @@ TiDB アンシブル バージョン: 2.1.9
     -   同様の SQL を区別するために`SQL Digest`を追加します[#10093](https://github.com/pingcap/tidb/pull/10093)
     -   スロー クエリ ステートメントで使用される統計のバージョン情報を追加します[#10220](https://github.com/pingcap/tidb/pull/10220)
     -   スロー クエリ ログ[#10246](https://github.com/pingcap/tidb/pull/10246)でステートメントのメモリ消費量を表示する
-    -   pt-query-digest [#10300](https://github.com/pingcap/tidb/pull/10300)で解析できるように、Coprocessor関連情報の出力形式を調整します。
+    -   pt-query-digest [#10300](https://github.com/pingcap/tidb/pull/10300)で解析できるように、コプロセッサー関連情報の出力形式を調整します。
     -   遅いクエリ ステートメントでの`#`文字の問題を修正します[#10275](https://github.com/pingcap/tidb/pull/10275)
     -   低速クエリ ステートメントのメモリ テーブルにいくつかの情報列を追加します[#10317](https://github.com/pingcap/tidb/pull/10317)
     -   スロー クエリ ログ[#10310](https://github.com/pingcap/tidb/pull/10310)にトランザクション コミット時間を追加します。

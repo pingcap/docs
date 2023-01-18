@@ -11,7 +11,7 @@ summary: Learn the definitions, rules, and guidelines in table creation.
 
 このドキュメントを読む前に、次のタスクが完了していることを確認してください。
 
--   [TiDB Cloud(サーバーレス層) で TiDBクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md) .
+-   [TiDB Cloud(Serverless Tier) で TiDBクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md) .
 -   [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md)を読んでください。
 -   [データベースを作成する](/develop/dev-guide-create-database.md) .
 
@@ -25,8 +25,6 @@ summary: Learn the definitions, rules, and guidelines in table creation.
 
 `CREATE TABLE`ステートメントは通常、次の形式を取ります。
 
-{{< copyable "" >}}
-
 ```sql
 CREATE TABLE {table_name} ( {elements} );
 ```
@@ -39,8 +37,6 @@ CREATE TABLE {table_name} ( {elements} );
 `bookshop`データベースにユーザー情報を格納するためのテーブルを作成する必要があるとします。
 
 列が 1 つも追加されていないため、次の SQL ステートメントはまだ実行できないことに注意してください。
-
-{{< copyable "" >}}
 
 ```sql
 CREATE TABLE `bookshop`.`users` (
@@ -65,8 +61,6 @@ CREATE TABLE `bookshop`.`users` (
 
 一意の識別子`id` 、 `balance` 、および`nickname`など、いくつかの列を`users`テーブルに追加できます。
 
-{{< copyable "" >}}
-
 ```sql
 CREATE TABLE `bookshop`.`users` (
   `id` bigint,
@@ -84,8 +78,6 @@ CREATE TABLE `bookshop`.`users` (
 TiDB は、 [整数型](/data-type-numeric.md#integer-types) 、 [浮動小数点型](/data-type-numeric.md#floating-point-types) 、 [固定小数点型](/data-type-numeric.md#fixed-point-types) 、 [日付と時刻の種類](/data-type-date-and-time.md) 、および[列挙型](/data-type-string.md#enum-type)を含む、他の多くの列データ型をサポートしています。サポートされている列[データ型](/data-type-overview.md)を参照して、データベースに保存するデータに一致する**データ型**を使用できます。
 
 もう少し複雑にするために、 `bookshop`のデータのコアとなる`books`のテーブルを定義できます。 `books`テーブルには、書籍の ID、タイトル、種類 (雑誌、小説、人生、芸術など)、在庫、価格、出版日のフィールドが含まれています。
-
-{{< copyable "" >}}
 
 ```sql
 CREATE TABLE `bookshop`.`books` (
@@ -130,8 +122,6 @@ CREATE TABLE `bookshop`.`books` (
 
 [主キーを選択するためのガイドライン](#guidelines-to-follow-when-selecting-primary-key)に続いて、次の例は`AUTO_RANDOM`主キーが`users`テーブルでどのように定義されるかを示しています。
 
-{{< copyable "" >}}
-
 ```sql
 CREATE TABLE `bookshop`.`users` (
   `id` bigint AUTO_RANDOM,
@@ -163,8 +153,6 @@ TiDB は v5.0 以降、 [クラスター化インデックス](/clustered-indexe
 
 [クラスタ化インデックスを選択するためのガイドライン](#guidelines-to-follow-when-selecting-clustered-index)に続いて、次の例では、 `books`と`users`の間の関連付けを持つテーブルを作成します。これは、 `book` x `users`の`ratings`を表します。この例では、テーブルを作成し、 `book_id`と`user_id`を使用して複合主キーを作成し、その**主キー**に<strong>クラスター化インデックス</strong>を作成します。
 
-{{< copyable "" >}}
-
 ```sql
 CREATE TABLE `bookshop`.`ratings` (
   `book_id` bigint,
@@ -185,8 +173,6 @@ CREATE TABLE `bookshop`.`ratings` (
 
 `DEFAULT`と[サポートされている SQL関数](/functions-and-operators/functions-and-operators-overview.md)を一緒に使用して、デフォルトの計算をアプリケーションレイヤーの外に移動し、アプリケーションレイヤーのリソースを節約できます。計算によって消費されたリソースは消えず、TiDB クラスターに移動されます。通常、デフォルトの時間でデータを挿入できます。以下は、 `ratings`テーブルにデフォルト値を設定する例です。
 
-{{< copyable "" >}}
-
 ```sql
 CREATE TABLE `bookshop`.`ratings` (
   `book_id` bigint,
@@ -198,8 +184,6 @@ CREATE TABLE `bookshop`.`ratings` (
 ```
 
 さらに、データの更新時にデフォルトで現在時刻も入力される場合は、次のステートメントを使用できます (ただし、 `ON UPDATE`の後に入力できるのは[現在時刻関連のステートメント](https://pingcap.github.io/sqlgram/#NowSymOptionFraction)のみであり、 `DEFAULT`の後には[より多くのオプション](https://pingcap.github.io/sqlgram/#DefaultValueExpr)がサポートされています)。
-
-{{< copyable "" >}}
 
 ```sql
 CREATE TABLE `bookshop`.`ratings` (
@@ -217,8 +201,6 @@ CREATE TABLE `bookshop`.`ratings` (
 
 たとえば、ユーザーのニックネームが一意であることを確認するには、次のように`users`テーブルのテーブル作成 SQL ステートメントを書き直すことができます。
 
-{{< copyable "" >}}
-
 ```sql
 CREATE TABLE `bookshop`.`users` (
   `id` bigint AUTO_RANDOM,
@@ -235,8 +217,6 @@ CREATE TABLE `bookshop`.`users` (
 列の null 値を防ぐ必要がある場合は、 `NOT NULL`制約を使用できます。
 
 例として、ユーザーのニックネームを取り上げます。ニックネームが固有であるだけでなく、ヌルでもないことを確認するには、 `users`表を作成するための SQL ステートメントを次のように書き直すことができます。
-
-{{< copyable "" >}}
 
 ```sql
 CREATE TABLE `bookshop`.`users` (
@@ -289,8 +269,6 @@ TiDB HTAP機能の詳細については、 [TiDB CloudHTAP クイック スタ�
 
 TiFlashは、展開後にデータを自動的に複製しません。したがって、レプリケートするテーブルを手動で指定する必要があります。
 
-{{< copyable "" >}}
-
 ```sql
 ALTER TABLE {table_name} SET TIFLASH REPLICA {count};
 ```
@@ -306,27 +284,21 @@ ALTER TABLE {table_name} SET TIFLASH REPLICA {count};
 
 `ratings`のテーブルは、 TiFlashの`1`のレプリカを開きます。
 
-{{< copyable "" >}}
-
 ```sql
 ALTER TABLE `bookshop`.`ratings` SET TIFLASH REPLICA 1;
 ```
 
 > **ノート：**
 >
-> クラスターに**TiFlash**ノードが含まれていない場合、この SQL ステートメントはエラーを報告します: `1105 - the tiflash replica count: 1 should be less than the total tiflash server count: 0` 。 [TiDB Cloud(サーバーレス層) で TiDBクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を使用して、 <strong>TiFlash</strong>を含むサーバーレス層クラスターを作成できます。
+> クラスターに**TiFlash**ノードが含まれていない場合、この SQL ステートメントはエラーを報告します: `1105 - the tiflash replica count: 1 should be less than the total tiflash server count: 0` 。 [TiDB Cloud(Serverless Tier) で TiDBクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を使用して、 <strong>TiFlash</strong>を含むServerless Tierクラスターを作成できます。
 
 次に、次のクエリを実行できます。
-
-{{< copyable "" >}}
 
 ```sql
 SELECT HOUR(`rated_at`), AVG(`score`) FROM `bookshop`.`ratings` GROUP BY HOUR(`rated_at`);
 ```
 
 [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)ステートメントを実行して、このステートメントが**TiFlash**を使用しているかどうかを確認することもできます。
-
-{{< copyable "" >}}
 
 ```sql
 EXPLAIN ANALYZE SELECT HOUR(`rated_at`), AVG(`score`) FROM `bookshop`.`ratings` GROUP BY HOUR(`rated_at`);
@@ -354,8 +326,6 @@ EXPLAIN ANALYZE SELECT HOUR(`rated_at`), AVG(`score`) FROM `bookshop`.`ratings` 
 
 データベース初期化スクリプトに`init.sql`という名前を付けて保存するには、次のステートメントを実行してデータベースを初期化します。
 
-{{< copyable "" >}}
-
 ```shell
 mysql
     -u root \
@@ -366,8 +336,6 @@ mysql
 ```
 
 `bookshop`データベースの下にあるすべてのテーブルを表示するには、 [`SHOW TABLES`](/sql-statements/sql-statement-show-tables.md#show-full-tables)ステートメントを使用します。
-
-{{< copyable "" >}}
 
 ```sql
 SHOW TABLES IN `bookshop`;

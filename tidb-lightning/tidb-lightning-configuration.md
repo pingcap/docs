@@ -386,7 +386,7 @@ log-progress = "5m"
 | --fetch-mode                        | すべての TiKV ストアの現在のモードを出力します                      |
 | -- インポートエンジン*uuid*                  | 閉じたエンジン ファイルを TiKV インポーターから TiKV クラスターにインポートします |
 | --cleanup-engine *uuid*             | エンジン ファイルを TiKV Importer から削除します                |
-| --checkpoint-dump*フォルダ*             | 現在のチェックポイントを CSV としてフォルダーにダンプします                |
+| --checkpoint-dump*フォルダー*            | 現在のチェックポイントを CSV としてフォルダーにダンプします                |
 | *--checkpoint* -error-destroy テーブル名 | チェックポイントを削除し、エラーが発生した場合はテーブルを削除します              |
 | *--checkpoint* -error-ignore テーブル名  | 指定されたテーブルに関連するチェックポイントに記録されたエラーを無視します           |
 | *--checkpoint* -remove テーブル名        | テーブルのチェックポイントを無条件に削除します                         |

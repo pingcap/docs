@@ -11,7 +11,7 @@ summary: Learn how to save the query results of TiFlash in a transaction.
 
 このドキュメントでは、 TiFlashクエリの結果を指定された TiDB テーブルに`INSERT INTO SELECT`のトランザクションで保存する方法を紹介します。
 
-v6.5.0 以降、TiDB はTiFlashクエリ結果のテーブルへの保存、つまりTiFlashクエリ結果の実体化をサポートします。 `INSERT INTO SELECT`ステートメントの実行中に、TiDB が`SELECT`サブクエリをTiFlashにプッシュ ダウンすると、 TiFlashクエリの結果を`INSERT INTO`句で指定された TiDB テーブルに保存できます。 v6.5.0 より前のバージョンの TiDB では、 TiFlashクエリの結果は読み取り専用であるため、 TiFlashクエリの結果を保存する場合は、アプリケーション レベルから取得し、別のトランザクションまたはプロセスで保存する必要があります。
+v6.5.0 以降、TiDB はTiFlashクエリ結果のテーブルへの保存、つまりTiFlashクエリ結果の実体化をサポートしています。 `INSERT INTO SELECT`ステートメントの実行中に、TiDB が`SELECT`サブクエリをTiFlashにプッシュ ダウンすると、 TiFlashクエリの結果を`INSERT INTO`句で指定された TiDB テーブルに保存できます。 v6.5.0 より前のバージョンの TiDB では、 TiFlashクエリの結果は読み取り専用であるため、 TiFlashクエリの結果を保存する場合は、アプリケーション レベルから取得し、別のトランザクションまたはプロセスで保存する必要があります。
 
 > **ノート：**
 >
@@ -79,3 +79,48 @@ SELECT app_name, country FROM t1;
     -   「書き込みトランザクション」が 1 GiB に近いなど、大きい場合は、同時実行数を 10 以下に制御することをお勧めします。
     -   「書き込みトランザクション」が 100 MiB 未満などの小さい場合は、同時実行数を 30 以下に制御することをお勧めします。
     -   テスト結果と特定の状況に基づいて同時実行数を決定します。
+
+## 例 {#example}
+
+データ定義:
+
+```sql
+CREATE TABLE detail_data (
+    ts DATETIME,                -- Fee generation time
+    customer_id VARCHAR(20),    -- Customer ID
+    detail_fee DECIMAL(20,2));  -- Amount of fee
+
+CREATE TABLE daily_data (
+    rec_date DATE,              -- Date when data is collected
+    customer_id VARCHAR(20),    -- Customer ID
+    daily_fee DECIMAL(20,2));   -- Amount of fee for per day
+
+ALTER TABLE detail_data SET TIFLASH REPLICA 1;
+ALTER TABLE daily_data SET TIFLASH REPLICA 1;
+
+-- ... (detail_data table continues updating)
+INSERT INTO detail_data(ts,customer_id,detail_fee) VALUES
+('2023-1-1 12:2:3', 'cus001', 200.86),
+('2023-1-2 12:2:3', 'cus002', 100.86),
+('2023-1-3 12:2:3', 'cus002', 2200.86),
+('2023-1-4 12:2:3', 'cus003', 2020.86),
+('2023-1-5 12:2:3', 'cus003', 1200.86),
+('2023-1-6 12:2:3', 'cus002', 20.86);
+```
+
+毎日の分析結果を保存:
+
+```sql
+SET @@tidb_enable_tiflash_read_for_write_stmt=ON;
+
+INSERT INTO daily_data (rec_date, customer_id, daily_fee)
+SELECT DATE(ts), customer_id, sum(detail_fee) FROM detail_data WHERE DATE(ts) = CURRENT_DATE() GROUP BY DATE(ts), customer_id;
+```
+
+毎日の分析データに基づいて毎月のデータを分析します。
+
+```sql
+SELECT MONTH(rec_date), customer_id, sum(daily_fee) FROM daily_data GROUP BY MONTH(rec_date), customer_id;
+```
+
+上記の例では、日次分析結果を具体化し、日次結果表に保存します。これに基づいて、月次データ分析が高速化され、データ分析効率が向上します。

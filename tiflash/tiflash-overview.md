@@ -27,7 +27,7 @@ TiFlashは、TiKV での書き込みをブロックしない低コストで、Ti
 
 TiFlashは TiDB と TiSpark の両方と互換性があるため、これら 2 つのコンピューティング エンジンを自由に選択できます。
 
-ワークロードの分離を確実にするために、TiKV とは異なるノードにTiFlashをデプロイすることをお勧めします。ビジネスの分離が必要ない場合は、 TiFlashと TiKV を同じノードに展開することもできます。
+ワークロードの分離を確実にするために、TiKV とは異なるノードにTiFlashを展開することをお勧めします。ビジネスの分離が必要ない場合は、 TiFlashと TiKV を同じノードに展開することもできます。
 
 現在、データを直接TiFlashに書き込むことはできません。 TiDB クラスターにLearnerロールとして接続するため、TiKV にデータを書き込んでからTiFlashに複製する必要があります。 TiFlashはテーブル単位でのデータ レプリケーションをサポートしますが、デプロイ後のデフォルトではデータはレプリケートされません。指定したテーブルのデータをレプリケートするには、 [テーブルのTiFlashレプリカを作成する](/tiflash/create-tiflash-replicas.md#create-tiflash-replicas-for-tables)を参照してください。
 
@@ -46,7 +46,7 @@ TiFlashには次の主要な機能があります。
 
 ### 非同期レプリケーション {#asynchronous-replication}
 
-TiFlashのレプリカは、特別なロールRaft Learnerとして非同期的に複製されます。これは、 TiFlashノードがダウンしたり、ネットワークレイテンシーが発生したりした場合でも、TiKV のアプリケーションは正常に続行できることを意味します。
+TiFlashのレプリカは、特別なロールRaft Learnerとして非同期に複製されます。これは、 TiFlashノードがダウンしたり、ネットワークレイテンシーが発生したりした場合でも、TiKV のアプリケーションは正常に続行できることを意味します。
 
 このレプリケーション メカニズムは、自動負荷分散と高可用性という TiKV の 2 つの利点を継承しています。
 
@@ -72,7 +72,7 @@ TiFlashは、次の 2 つの方法で TiDB のコンピューティングを高�
 -   カラムナ ストレージ エンジンは、読み取り操作の実行においてより効率的です。
 -   TiFlashは、TiDB のコンピューティング ワークロードの一部を共有します。
 
-TiFlashは、TiKVCoprocessorと同じ方法でコンピューティング ワークロードを共有します。TiDB は、ストレージレイヤーで完了できるコンピューティングをプッシュ ダウンします。コンピューティングを押し下げることができるかどうかは、 TiFlashのサポートに依存します。詳細については、 [サポートされているプッシュダウン計算](/tiflash/tiflash-supported-pushdown-calculations.md)を参照してください。
+TiFlashは、TiKVコプロセッサーと同じ方法でコンピューティング ワークロードを共有します。TiDB は、ストレージレイヤーで完了できるコンピューティングをプッシュ ダウンします。コンピューティングを押し下げることができるかどうかは、 TiFlashのサポートに依存します。詳細については、 [サポートされているプッシュダウン計算](/tiflash/tiflash-supported-pushdown-calculations.md)を参照してください。
 
 ## TiFlashを使用する {#use-tiflash}
 
@@ -105,7 +105,7 @@ TiDB を使用して中規模の分析処理用のTiFlashレプリカを読み�
 -   デプロイされたクラスターにTiFlashノードを追加するには、 [TiFlashクラスターをスケールアウトする](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster)を参照してください。
 -   [TiFlashクラスターを管理する](/tiflash/maintain-tiflash.md) .
 -   [TiFlashのパフォーマンスを調整する](/tiflash/tune-tiflash-performance.md) .
--   [TiFlash の設定](/tiflash/tiflash-configuration.md) .
+-   [TiFlash の構成](/tiflash/tiflash-configuration.md) .
 -   [TiFlashクラスターを監視する](/tiflash/monitor-tiflash.md) .
 -   学ぶ[TiFlashアラート ルール](/tiflash/tiflash-alert-rules.md) 。
 -   [TiFlashクラスターのトラブルシューティング](/tiflash/troubleshoot-tiflash.md) .

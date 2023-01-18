@@ -14,9 +14,9 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
 >
 > -   TiDB、 TiUP 、および TiDB ダッシュボードは、使用状況の詳細を PingCAP と共有して、製品の改善方法を理解するのに役立ちます。共有される内容と共有を無効にする方法の詳細については、 [テレメトリー](/telemetry.md)を参照してください。
 >
-> -   このガイドで提供されている展開方法は、**本番**用ではなく、クイック スタート<strong>専用</strong>です。
+> -   このガイドで提供されている**デプロイ**方法は、本番用ではなく、クイック スタート<strong>専用</strong>です。
 >
->     -   オンプレミスの本番クラスターをデプロイするには、 [プロダクション インストール ガイド](/production-deployment-using-tiup.md)を参照してください。
+>     -   オンプレミスの本番クラスターをデプロイするには、 [本番インストール ガイド](/production-deployment-using-tiup.md)を参照してください。
 >     -   TiDB を Kubernetes にデプロイするには、 [Kubernetes で TiDB を使い始める](https://docs.pingcap.com/tidb-in-kubernetes/stable/get-started)を参照してください。
 >     -   クラウドで TiDB を管理するには、 [TiDB Cloudクイック スタート](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart)を参照してください。
 
@@ -268,7 +268,7 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
 
 ## 1 台のマシンで本番環境のデプロイをシミュレートする {#simulate-production-deployment-on-a-single-machine}
 
--   シナリオ: 完全なトポロジーを備えた最小の TiDB クラスターを体験し、単一の Linuxサーバーで運用環境の展開手順をシミュレートします。
+-   シナリオ: 完全なトポロジーを備えた最小の TiDB クラスターを体験し、単一の Linuxサーバーで本番環境の展開手順をシミュレートします。
 
 このセクションでは、 TiUPで最小のトポロジの YAML ファイルを使用して TiDB クラスターをデプロイする方法について説明します。
 

@@ -24,8 +24,6 @@ summary: This document describes how to use multi-table join queries.
 
 次の SQL ステートメントでは、キーワード`JOIN`を使用して、左のテーブル`authors`と右のテーブル`book_authors`の行を結合条件`a.id = ba.author_id`で内部結合として結合することを宣言します。結果セットには、結合条件を満たす行のみが含まれます。著者が本を書いていない場合、テーブル`authors`のレコードは結合条件を満たさないため、結果セットには表示されません。
 
-{{< copyable "" >}}
-
 ```sql
 SELECT ANY_VALUE(a.id) AS author_id, ANY_VALUE(a.name) AS author_name, COUNT(ba.book_id) AS books
 FROM authors a
@@ -57,8 +55,6 @@ LIMIT 10;
 
 </div>
 <div label="Java" value="java">
-
-{{< copyable "" >}}
 
 ```java
 public List<Author> getTop10AuthorsOrderByBooks() throws SQLException {
@@ -103,8 +99,6 @@ public List<Author> getTop10AuthorsOrderByBooks() throws SQLException {
 
 次の SQL ステートメントでは、 `LEFT JOIN`キーワードを使用して、左側のテーブル`books`が右側のテーブル`ratings`に左外部結合で結合されることを宣言し、テーブル`books`のすべての行が確実に返されるようにします。
 
-{{< copyable "" >}}
-
 ```sql
 SELECT b.id AS book_id, ANY_VALUE(b.title) AS book_title, AVG(r.score) AS average_score
 FROM books b
@@ -136,8 +130,6 @@ LIMIT 10;
 
 最近出版された本はすでに多くの評価を得ているようです。上記の方法を確認するために、次の SQL ステートメントを使用して*The Documentary of lion*という書籍のすべての評価を削除してみましょう。
 
-{{< copyable "" >}}
-
 ```sql
 DELETE FROM ratings WHERE book_id = 3438991610;
 ```
@@ -166,8 +158,6 @@ DELETE FROM ratings WHERE book_id = 3438991610;
 
 </div>
 <div label="Java" value="java">
-
-{{< copyable "" >}}
 
 ```java
 public List<Book> getLatestBooksWithAverageScore() throws SQLException {
@@ -229,8 +219,6 @@ TiDB のオプティマイザが最適な結合アルゴリズムに従って実
 
 たとえば、上記の左結合クエリの例が、オプティマイザによって選択されないハッシュ結合アルゴリズムを使用して高速に実行されると仮定すると、 `SELECT`キーワードの後にヒント`/*+ HASH_JOIN(b, r) */`を追加できます。テーブルにエイリアスがある場合は、ヒントでエイリアスを使用することに注意してください。
 
-{{< copyable "" >}}
-
 ```sql
 EXPLAIN SELECT /*+ HASH_JOIN(b, r) */ b.id AS book_id, ANY_VALUE(b.title) AS book_title, AVG(r.score) AS average_score
 FROM books b
@@ -252,8 +240,6 @@ LIMIT 10;
 実際のビジネス シナリオでは、複数のテーブルの結合ステートメントは非常に一般的です。ジョインの実行効率は、ジョイン内の各テーブルの順序に関係しています。 TiDB は結合したテーブルの再配置 Reorder アルゴリズムを使用して、複数のテーブルを結合する順序を決定します。
 
 オプティマイザによって選択された結合順序が期待どおりに最適でない場合は、 `STRAIGHT_JOIN`を使用して、 `FROM`節で使用されるテーブルの順序でクエリを結合するように TiDB を強制できます。
-
-{{< copyable "" >}}
 
 ```sql
 EXPLAIN SELECT *

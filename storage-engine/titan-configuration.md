@@ -30,7 +30,7 @@ Titan は RocksDB と互換性があるため、RocksDB を使用する既存の
 
     詳細なコマンドについては、 [TiUPを使用して構成を変更する](/maintain-tidb-using-tiup.md#modify-the-configuration)を参照してください。
 
--   方法 2: TiKV 構成ファイルを直接編集して Titan を有効にします (実稼働環境にはお勧めし**ません**)。
+-   方法 2: TiKV 構成ファイルを直接編集して Titan を有効にします (本番環境にはお勧めし**ません**)。
 
     {{< copyable "" >}}
 
@@ -80,7 +80,7 @@ TiUPを使用して Titan 関連のパラメータを調整するには、 [構�
 
 -   Titan の値キャッシュのサイズ。
 
-    キャッシュ サイズが大きいほど、Titan の読み取りパフォーマンスが高くなります。ただし、キャッシュ サイズが大きすぎると、メモリ不足 (OOM) が発生します。データベースが安定して実行されている場合は、ストア サイズから BLOB ファイル サイズを引いた値を`storage.block-cache.capacity`に設定し、監視メトリックに従って`blob-cache-size` ～ `memory size * 50% - block cache size`を設定することをお勧めします。これにより、ブロック キャッシュが RocksDB エンジン全体に対して十分な大きさである場合に、ブロブ キャッシュのサイズが最大化されます。
+    キャッシュ サイズが大きいほど、Titan の読み取りパフォーマンスが高くなります。ただし、キャッシュ サイズが大きすぎると、メモリ不足 (OOM) が発生します。データベースが安定して実行されている場合は、ストア サイズから BLOB ファイル サイズを引いた値を`storage.block-cache.capacity`に設定し、監視メトリックに従って`blob-cache-size` ～ `memory size * 50% - block cache size`を設定することをお勧めします。これにより、ブロックキャッシュが RocksDB エンジン全体に対して十分な大きさである場合に、ブロブ キャッシュのサイズが最大化されます。
 
     ```toml
     [rocksdb.defaultcf.titan]

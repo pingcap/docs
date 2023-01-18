@@ -35,8 +35,6 @@ subquery を比較演算子 ( `>` 、 `>=` 、 `<` 、 `<=` 、 `=` 、または
 
 たとえば、平均年齢よりも年齢が高い`authors`テーブルの著者をクエリするには、サブクエリを比較演算子のオペランドとして使用できます。
 
-{{< copyable "" >}}
-
 ```sql
 SELECT * FROM authors a1 WHERE (IFNULL(a1.death_year, YEAR(NOW())) - a1.birth_year) > (
     SELECT
@@ -48,15 +46,11 @@ SELECT * FROM authors a1 WHERE (IFNULL(a1.death_year, YEAR(NOW())) - a1.birth_ye
 
 内部サブクエリは、TiDB が上記のクエリを実行する前に実行されます。
 
-{{< copyable "" >}}
-
 ```sql
 SELECT AVG(IFNULL(a2.death_year, YEAR(NOW())) - a2.birth_year) AS average_age FROM authors a2;
 ```
 
 クエリの結果が 34 歳、つまり平均年齢が 34 歳で、元のサブクエリを置き換える定数として 34 が使用されるとします。
-
-{{< copyable "" >}}
 
 ```sql
 SELECT * FROM authors a1
@@ -95,8 +89,6 @@ Existential Test や Quantified Comparison などの自己完結型のサブク�
 
 次のステートメントは、同性の他の著者の平均年齢よりも年上の著者を照会するためのものです。
 
-{{< copyable "" >}}
-
 ```sql
 SELECT * FROM authors a1 WHERE (IFNULL(a1.death_year, YEAR(NOW())) - a1.birth_year) > (
     SELECT
@@ -110,8 +102,6 @@ SELECT * FROM authors a1 WHERE (IFNULL(a1.death_year, YEAR(NOW())) - a1.birth_ye
 ```
 
 TiDB はそれを同等の`join`クエリに書き換えます。
-
-{{< copyable "" >}}
 
 ```sql
 SELECT *

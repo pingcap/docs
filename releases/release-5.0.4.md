@@ -128,7 +128,7 @@ TiDB バージョン: 5.0.4
     -   射影演算子[#24264](https://github.com/pingcap/tidb/issues/24264)を実行すると TiDB がパニックになる問題を修正
     -   統計がクエリのpanicを引き起こす可能性がある問題を修正します[#24061](https://github.com/pingcap/tidb/pull/24061)
     -   `BIT`列で`approx_percentile`関数を使用するとpanic[#23662](https://github.com/pingcap/tidb/issues/23662)が発生する可能性がある問題を修正します。
-    -   Grafana の**Coprocessor Cache**パネルのメトリックが間違っている問題を修正します[#26338](https://github.com/pingcap/tidb/issues/26338)
+    -   Grafana の**コプロセッサー Cache**パネルのメトリックが間違っている問題を修正します[#26338](https://github.com/pingcap/tidb/issues/26338)
     -   同じパーティションを同時に切り捨てると DDL ステートメントがスタックする問題を修正します[#26229](https://github.com/pingcap/tidb/issues/26229)
     -   `GROUP BY`項目[#27106](https://github.com/pingcap/tidb/issues/27106)にセッション変数を使用した場合に発生する、誤ったクエリ結果の問題を修正します。
     -   テーブルを結合するときの`VARCHAR`とタイムスタンプの間の間違った暗黙的な変換を修正します[#25902](https://github.com/pingcap/tidb/issues/25902)

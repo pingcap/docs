@@ -98,7 +98,7 @@ mysql> SELECT _tidb_rowid, id FROM t;
 
 > **ノート：**
 >
-> `AUTO_INCREMENT`属性は、実稼働環境でホットスポットを引き起こす可能性があります。詳細は[ホットスポットの問題のトラブルシューティング](/troubleshoot-hot-spot-issues.md)を参照してください。代わりに[`AUTO_RANDOM`](/auto-random.md)を使用することをお勧めします。
+> `AUTO_INCREMENT`属性は、本番環境でホットスポットを引き起こす可能性があります。詳細は[ホットスポットの問題のトラブルシューティング](/troubleshoot-hot-spot-issues.md)を参照してください。代わりに[`AUTO_RANDOM`](/auto-random.md)を使用することをお勧めします。
 
 </CustomContent>
 
@@ -106,7 +106,7 @@ mysql> SELECT _tidb_rowid, id FROM t;
 
 > **ノート：**
 >
-> `AUTO_INCREMENT`属性は、実稼働環境でホットスポットを引き起こす可能性があります。詳細は[ホットスポットの問題のトラブルシューティング](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues#handle-auto-increment-primary-key-hotspot-tables-using-auto_random)を参照してください。代わりに[`AUTO_RANDOM`](/auto-random.md)を使用することをお勧めします。
+> `AUTO_INCREMENT`属性は、本番環境でホットスポットを引き起こす可能性があります。詳細は[ホットスポットの問題のトラブルシューティング](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues#handle-auto-increment-primary-key-hotspot-tables-using-auto_random)を参照してください。代わりに[`AUTO_RANDOM`](/auto-random.md)を使用することをお勧めします。
 
 </CustomContent>
 
@@ -124,7 +124,7 @@ TiDB Cloudでパフォーマンス メトリックを確認するには、 TiDB 
 
 </CustomContent>
 
-### クエリ実行プラン {#query-execution-plan}
+### クエリ実行計画 {#query-execution-plan}
 
 `EXPLAIN FOR`の Query Execution Plan ( `EXPLAIN` ) の出力形式、出力内容、権限設定は、MySQL と大きく異なります。
 
@@ -231,9 +231,9 @@ TiDB はほとんどの[SQL モード](/sql-mode.md)をサポートしていま�
 -   デフォルト値`lower_case_table_names` :
     -   TiDB のデフォルト値は`2`で、現在 TiDB は`2`のみをサポートしています。
     -   MySQL のデフォルト値:
-        -   Linux の場合: `0`
-        -   Windows の場合: `1`
-        -   macOS の場合: `2`
+        -   Linux の場合: `0` .これは、テーブル名とデータベース名が`CREATE TABLE`または`CREATE DATABASE`ステートメントで指定された大文字と小文字を使用してディスクに格納されることを意味します。名前の比較では大文字と小文字が区別されます。
+        -   Windows の場合: `1` .これは、テーブル名がディスクに小文字で保存され、名前の比較で大文字と小文字が区別されないことを意味します。 MySQL は、ストレージとルックアップですべてのテーブル名を小文字に変換します。この動作は、データベース名とテーブルのエイリアスにも適用されます。
+        -   macOS の場合: `2` .これは、テーブル名とデータベース名が`CREATE TABLE`または`CREATE DATABASE`ステートメントで指定された大文字を使用してディスクに格納されることを意味しますが、MySQL は検索時にそれらを小文字に変換します。名前の比較では、大文字と小文字が区別されません。
 -   デフォルト値`explicit_defaults_for_timestamp` :
     -   TiDB のデフォルト値は`ON`で、現在 TiDB は`ON`のみをサポートしています。
     -   MySQL のデフォルト値:

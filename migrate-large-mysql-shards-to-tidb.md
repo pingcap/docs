@@ -30,7 +30,7 @@ MySQL シャードのデータ サイズが 1 TiB 未満の場合は、 [小さ�
 
 -   [TiUPを使用して DMクラスタをデプロイする](/dm/deploy-a-dm-cluster-using-tiup.md)
 -   [TiUPを使用してDumplingと Lightning をデプロイ](/migration-tools.md)
--   [Dumplingのダウンストリーム権限要件](/dumpling-overview.md#export-data-from-tidbmysql)
+-   [Dumplingのダウンストリーム権限要件](/dumpling-overview.md#export-data-from-tidb-or-mysql)
 -   [TiDB Lightningのダウンストリーム権限要件](/tidb-lightning/tidb-lightning-requirements.md)
 -   [TiDB Lightningのダウンストリーム ストレージ スペース](/tidb-lightning/tidb-lightning-requirements.md)
 -   [DM-worker に必要な権限](/dm/dm-worker-intro.md)
@@ -94,7 +94,7 @@ tiup dumpling -h ${ip} -P 3306 -u root -t 16 -r 200000 -F 256MB -B my_db1 -f 'my
 | `-p`または`--port`     | 使用するポートを指定します。                                                                                                           |
 | `-h`または`--host`     | データ ソースの IP アドレスを指定します。                                                                                                  |
 | `-t`または`--thread`   | エクスポートのスレッド数を指定します。スレッド数を増やすと、 Dumplingの同時実行性とエクスポート速度が向上し、データベースのメモリ消費量が増加します。そのため、あまり大きな数値を設定することはお勧めしません。通常は 64 未満です。 |
-| `-o`または`--output`   | ローカル ファイル パスまたは[外部ストレージの URL](/br/backup-and-restore-storages.md)をサポートするストレージのエクスポート ディレクトリを指定します。                       |
+| `-o`または`--output`   | ローカル ファイル パスまたは[外部ストレージのURL](/br/backup-and-restore-storages.md)をサポートするストレージのエクスポート ディレクトリを指定します。                        |
 | `-r`または`--row`      | 1 つのファイル内の最大行数を指定します。このパラメータを使用すると、 Dumplingはテーブル内の同時実行性を有効にして、エクスポートを高速化し、メモリ使用量を削減します。                                 |
 | `-F`                | 1 つのファイルの最大サイズを指定します。単位は`MiB`です。値を 256 MiB に維持することをお勧めします。                                                               |
 | `-B`または`--database` | エクスポートするデータベースを指定します。                                                                                                    |

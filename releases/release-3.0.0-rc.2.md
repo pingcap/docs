@@ -82,7 +82,7 @@ TiDB アンシブル バージョン: 3.0.0-rc.2
     -   場合によってはダーティ リードの問題を修正します[#4688](https://github.com/tikv/tikv/pull/4688)
     -   場合によってはスナップショットが適用されたデータを失う可能性がある問題を修正します[#4716](https://github.com/tikv/tikv/pull/4716)
 
--   Coprocessor
+-   コプロセッサー
     -   RPN関数を追加
         -   `LogicalOr` [#4691](https://github.com/tikv/tikv/pull/4601)
         -   `LTReal` [#4602](https://github.com/tikv/tikv/pull/4602)

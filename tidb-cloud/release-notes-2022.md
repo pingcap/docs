@@ -1,22 +1,181 @@
 ---
 title: TiDB Cloud Release Notes in 2022
 summary: Learn about the release notes of TiDB Cloud in 2022.
-aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 ---
 
 # 2022 年のTiDB Cloudリリース ノート {#tidb-cloud-release-notes-in-2022}
 
 このページでは、2022 年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリース ノートを一覧表示します。
 
+## 2022 年 12 月 28 日 {#december-28-2022}
+
+**一般的な変更**
+
+-   現在、すべての[Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)クラスターのデフォルトの TiDB バージョンを[v6.3.0](https://docs.pingcap.com/tidb/v6.3/release-6.3.0)から[v6.4.0](https://docs.pingcap.com/tidb/v6.4/release-6.4.0)にアップグレードした後、特定の状況でコールド スタートが遅くなります。そのため、すべてのServerless Tierクラスターのデフォルトの TiDB バージョンを v6.4.0 から v6.3.0 にロールバックし、できるだけ早く問題を修正し、後で再度アップグレードします。
+
+## 2022 年 12 月 27 日 {#december-27-2022}
+
+**一般的な変更**
+
+-   すべての[Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)クラスターのデフォルトの TiDB バージョンを[v6.3.0](https://docs.pingcap.com/tidb/v6.3/release-6.3.0)から[v6.4.0](https://docs.pingcap.com/tidb/v6.4/release-6.4.0)にアップグレードします。
+
+-   Dedicated Tierクラスターのポイント イン タイム リカバリ (PITR) が一般提供 (GA) になりました。
+
+    PITR は、任意の時点のデータを新しいクラスターに復元することをサポートしています。 PITR 機能を使用するには、TiDB クラスターのバージョンが少なくとも v6.4.0 であり、TiKV ノードのサイズが少なくとも 8 vCPU および 16 GiB であることを確認してください。
+
+    [TiDB Cloudコンソール](https://tidbcloud.com)の**バックアップ設定**で PITR 機能を有効または無効にできます。
+
+    詳細については、 [TiDB クラスター データのバックアップと復元](/tidb-cloud/backup-and-restore.md)を参照してください。
+
+-   複数の変更フィードの管理と既存の変更フィードの編集をサポートします。
+
+    -   さまざまなデータ レプリケーション タスクを管理するために必要な数の変更フィードを作成できるようになりました。現在、各クラスターは最大 10 個の変更フィードを持つことができます。詳細については、 [チェンジフィードの概要](/tidb-cloud/changefeed-overview.md)を参照してください。
+    -   一時停止状態の既存の変更フィードの構成を編集できます。詳細については、 [チェンジフィードを編集する](/tidb-cloud/changefeed-overview.md#edit-a-changefeed)を参照してください。
+
+-   Amazon Aurora MySQL、Amazon Relational Database Service (RDS) MySQL、または自己ホスト型の MySQL 互換データベースからTiDB Cloudオンラインへのデータの直接移行をサポートします。この機能は現在一般提供されています。
+
+    -   次の 6 つのリージョンでサービスを提供します。
+        -   AWS オレゴン (us-west-2)
+        -   AWS 北バージニア (us-east-1)
+        -   AWS ムンバイ (ap-south-1)
+        -   AWS シンガポール (ap-southeast-1)
+        -   AWS 東京 (ap-northeast-1)
+        -   AWS フランクフルト (eu-central-1)
+    -   複数の仕様をサポートします。必要なパフォーマンスに応じて適切な仕様を選択して、最適なデータ移行エクスペリエンスを実現できます。
+
+    TiDB Cloudへのデータの移行方法については、 [ユーザー文書](/tidb-cloud/migrate-from-mysql-using-data-migration.md)を参照してください。請求の詳細については、 [データ移行の請求](/tidb-cloud/tidb-cloud-billing-dm.md)を参照してください。
+
+-   TiDB Cloudへのローカル CSV ファイルのインポートをサポートします。
+
+    数回クリックするだけでタスクの構成が完了し、ローカルの CSV データを TiDB クラスターにすばやくインポートできます。この方法を使用する場合、クラウド ストレージ バケット パスとロール ARN を指定する必要はありません。インポートプロセス全体が迅速かつスムーズです。
+
+    詳細については、 [ローカル ファイルをTiDB Cloudにインポートする](/tidb-cloud/tidb-cloud-import-local-files.md)を参照してください。
+
+## 2022 年 12 月 20 日 {#december-20-2022}
+
+**一般的な変更**
+
+-   ラベル`project name`をフィルターとして[データドッグ](/tidb-cloud/monitor-datadog-integration.md)ダッシュボードに追加して、プロジェクト情報を提供します。
+
+    フィルター`project name`を使用して、必要なクラスターをすばやく見つけることができます。
+
+## 2022 年 12 月 13 日 {#december-13-2022}
+
+**一般的な変更**
+
+-   Serverless Tier向けのTiDB Cloud SQL Editor (ベータ) を導入します。
+
+    これは、Serverless Tierのデータベースに対して SQL クエリを直接編集および実行できる Web ベースの SQL エディターです。 Serverless Tierクラスターの左側のナビゲーション バーで簡単に見つけることができます。
+
+    Serverless Tierの場合、Web SQL シェルは SQL エディターに置き換えられます。
+
+-   Dedicated Tierのデータをストリーミングするために[チェンジフィード](/tidb-cloud/changefeed-overview.md)を使用することをサポートします。
+
+    -   サポート[MySQL へのデータ変更ログのストリーミング](/tidb-cloud/changefeed-sink-to-mysql.md) 。
+
+        MySQL/ Auroraから TiDB にデータを移行する場合、予期しないデータ移行の問題を防ぐために、多くの場合、MySQL をスタンバイ データベースとして使用する必要があります。この場合、MySQL シンクを使用して、TiDB から MySQL にデータをストリーミングできます。
+
+    -   サポート[Apache Kafka へのデータ変更ログのストリーミング](/tidb-cloud/changefeed-sink-to-apache-kafka.md) (ベータ)。
+
+        TiDB データをメッセージ キューにストリーミングすることは、データ統合シナリオの非常に一般的な要件です。 Kafka シンクを使用して、他のデータ処理システム (Snowflake など) との統合を実現したり、ビジネス消費をサポートしたりできます。
+
+    詳細については、 [チェンジフィードの概要](/tidb-cloud/changefeed-overview.md)を参照してください。
+
+-   組織の所有者は、組織の**設定**で組織の名前を編集できます。
+
+**コンソールの変更**
+
+-   [TiDB Cloudコンソール](https://tidbcloud.com)のナビゲーション レイアウトを最適化して、ユーザーに新しいナビゲーション エクスペリエンスを提供します。
+
+    新しいレイアウトには、次の変更が含まれています。
+
+    -   画面の使用効率を最大化するために、左側のナビゲーション バーを導入します。
+    -   よりフラットなナビゲーション階層を採用します。
+
+-   Serverless Tierユーザーの[**接続**](/tidb-cloud/connect-to-tidb-cluster.md)エクスペリエンスを向上させます。
+
+    開発者は、コンテキストを切り替えることなく、数回クリックするだけで、SQL エディターまたは好みのツールに接続できるようになりました。
+
+## 2022 年 12 月 6 日 {#december-6-2022}
+
+**一般的な変更**
+
+-   新しい[Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier)クラスターのデフォルトの TiDB バージョンを[v6.1.2](https://docs.pingcap.com/tidb/stable/release-6.1.2)から[v6.1.3](https://docs.pingcap.com/tidb/stable/release-6.1.3)にアップグレードします。
+
+## 2022 年 11 月 29 日 {#november-29-2022}
+
+**一般的な変更**
+
+-   AWS Marketplace と Google Cloud Marketplace のユーザー エクスペリエンスを向上させます。
+
+    TiDB Cloudを初めて使用する場合でも、既にTiDB Cloudアカウントを持っている場合でも、AWS または GCP の請求先アカウントとリンクできるようになりました。これにより、AWS または GCP Marketplace のサブスクリプションを簡単に完了することができます。
+
+    リンクの作成方法については、 [AWS Marketplace または Google Cloud Marketplace からの請求](/tidb-cloud/tidb-cloud-billing.md#billing-from-aws-marketplace-or-google-cloud-marketplace)を参照してください。
+
+## 2022 年 11 月 22 日 {#november-22-2022}
+
+**一般的な変更**
+
+-   Amazon Aurora MySQL、Amazon Relational Database Service (RDS) MySQL、または自己ホスト型の MySQL 互換データベースからTiDB Cloudオンライン (ベータ版) へのデータの直接移行をサポートします。
+
+    以前は、ビジネスを一時停止してオフラインでデータをインポートするか、サードパーティ ツールを使用してデータをTiDB Cloudに移行する必要があり、これは複雑でした。現在、**データ移行**機能を使用すると、 TiDB Cloudコンソールで操作を実行するだけで済み、最小限のダウンタイムでTiDB Cloudにデータを安全に移行できます。
+
+    さらに、データ移行は、既存のデータと進行中の変更の両方をデータ ソースからTiDB Cloudに移行するための完全かつ増分的なデータ移行機能を提供します。
+
+    現在、データ移行機能はまだ**ベータ版**です。 [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier)のクラスターでのみ使用でき、AWS オレゴン (us-west-2) および AWS シンガポール (ap-southeast-1) リージョンでのみ使用できます。組織ごとに 1 つの移行ジョブを無料で作成できます。 1 つの組織に対して複数の移行ジョブを作成するには、 [チケットを提出する](/tidb-cloud/tidb-cloud-support.md) .
+
+    詳細については、 [データ移行を使用して MySQL 互換データベースをTiDB Cloudに移行する](/tidb-cloud/migrate-from-mysql-using-data-migration.md)を参照してください。
+
+## 2022 年 11 月 15 日 {#november-15-2022}
+
+**一般的な変更**
+
+-   [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier)クラスター (ベータ) のポイントインタイム リカバリ (PITR) をサポートします。
+
+    PITR は、任意の時点のデータを新しいクラスターに復元することをサポートしています。次の目的で使用できます。
+
+    -   ディザスタ リカバリの RPO を削減します。
+    -   エラー イベントの前のポイント イン タイムを復元することにより、データ書き込みエラーを解決します。
+    -   ビジネスの履歴データを監査します。
+
+    PITR 機能を使用するには、TiDB クラスターのバージョンが少なくとも v6.3.0 であり、TiKV ノードのサイズが少なくとも 8 vCPU および 16 GiB であることを確認してください。
+
+    デフォルトでは、バックアップ データは、クラスターが作成されたのと同じリージョンに保存されます。日本では、PITR が有効になっている GCP でホストされている TiDB クラスターの場合、バックアップ データを 1 つまたは 2 つのリージョン (東京および/または大阪) に保存することを選択できます。代替リージョンからデータを復元すると、より高いレベルのデータの安全性が提供され、リージョンの障害に耐えることができます。
+
+    詳細については、 [TiDBクラスタデータのバックアップと復元](/tidb-cloud/backup-and-restore.md)を参照してください。
+
+    この機能はまだベータ版であり、リクエストがあった場合にのみ利用できます:
+
+    -   TiDB Cloudコンソールの右下隅にある [**ヘルプ**] をクリックします。
+    -   ダイアログの [**説明**] フィールドに「PITR に申し込む」と入力し、[<strong>送信</strong>] をクリックします。
+
+-   データベース監査ログ機能が GA になりました。
+
+    データベース監査ログを使用して、ユーザー アクセスの詳細 (実行された SQL ステートメントなど) の履歴をログに記録し、データベース監査ログを定期的に分析して、データベースを安全に保つことができます。
+
+    詳細については、 [データベース監査ログ](/tidb-cloud/tidb-cloud-auditing.md)を参照してください。
+
+## 2022 年 11 月 8 日 {#november-8-2022}
+
+**一般的な変更**
+
+-   ユーザー フィードバック チャネルを改善します。
+
+    TiDB Cloudコンソールの [**サポート**] &gt; [<strong>フィードバック</strong>を送信] で、デモまたはクレジットをリクエストできるようになりました。これは、 TiDB Cloudについて詳しく知りたい場合に役立ちます。
+
+    リクエストを受け取った後、できるだけ早くサポートを提供するためにご連絡いたします。
+
 ## 2022 年 10 月 28 日 {#october-28-2022}
 
--   Developer Tierは[サーバーレス層](/tidb-cloud/select-cluster-tier.md#serverless-tier)にアップグレードされます。 TiDB の完全マネージド型の自動スケーリング デプロイメントであるサーバーレス層が利用可能になりました。まだベータ版であり、無料で使用できます。
+**一般的な変更**
 
-    -   Serverless Tier クラスターには、 Dedicated Tierクラスターとして完全に機能する HTAP 機能が引き続き含まれています。
-    -   Serverless Tier は、クラスターの作成時間と瞬時のコールド スタート時間を短縮します。 Developer Tierと比較すると、作成時間が数分から数秒に短縮されます。
-    -   展開トポロジについて心配する必要はありません。 Serverless Tier は、リクエストに応じて自動的に調整されます。
-    -   サーバーレス ティア[セキュリティのためにクラスタへの TLS 接続を強制します](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md) .
-    -   既存のDeveloper Tierクラスターは、今後数か月で Serverless Tier に自動的に移行されます。クラスターを使用する能力に影響はなく、ベータ版の Serverless Tier クラスターの使用に対して課金されることはありません。
+-   Developer Tierは[Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)にアップグレードされます。 Serverless Tierの完全マネージド型の自動スケーリング デプロイメントである Serverless Tier が利用可能になりました。まだベータ版であり、無料で使用できます。
+
+    -   Serverless Tierクラスターには、 Dedicated Tierクラスターとして完全に機能する HTAP 機能が引き続き含まれています。
+    -   Serverless Tierは、クラスターの作成時間と瞬時のコールド スタート時間を短縮します。 Developer Tierと比較すると、作成時間が数分から数秒に短縮されます。
+    -   展開トポロジについて心配する必要はありません。 Serverless Tierは、リクエストに応じて自動的に調整されます。
+    -   Serverless Tier[セキュリティのためにクラスタへの TLS 接続を強制します](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md) .
+    -   既存のDeveloper Tierクラスターは、今後数か月でServerless Tierに自動的に移行されます。クラスターを使用する能力に影響はなく、ベータ版のServerless Tierクラスターの使用に対して課金されることはありません。
 
     始めましょう[ここ](/tidb-cloud/tidb-cloud-quickstart.md) .
 
@@ -88,7 +247,7 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 **一般的な変更**
 
--   新しい[Developer Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier)クラスターのデフォルトの TiDB バージョンを[v6.2.0](https://docs.pingcap.com/tidb/v6.2/release-6.2.0)から[v6.3.0](https://docs.pingcap.com/tidb/v6.3/release-6.3.0)にアップグレードします。
+-   新しい[Developer Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)クラスターのデフォルトの TiDB バージョンを[v6.2.0](https://docs.pingcap.com/tidb/v6.2/release-6.2.0)から[v6.3.0](https://docs.pingcap.com/tidb/v6.3/release-6.3.0)にアップグレードします。
 
 **コンソールの変更**
 
@@ -111,7 +270,7 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   アカウントのパスワードをリセットすると、 TiDB Cloudは新しいパスワードの入力を最近の 4 つのパスワードと照合してチェックし、それらのいずれも使用しないように通知します。 4 つの使用済みパスワードのいずれも許可されません。
 
-    詳細については、 [ユーザーのパスワードを管理する](/tidb-cloud/manage-user-access.md#manage-user-passwords)を参照してください。
+    詳細については、 [パスワード認証](/tidb-cloud/tidb-cloud-password-authentication.md)を参照してください。
 
 ## 2022 年 9 月 20 日 {#september-20-2022}
 
@@ -141,7 +300,7 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   TLS を介したTiDB Cloud [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier)クラスターへの接続をサポートします。
 
-    Dedicated Tierクラスターの場合、 [接続](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection)ダイアログの [**標準接続**] タブに、TiDB クラスター CA をダウンロードするためのリンクが表示され、TLS 接続の接続文字列とサンプル コードも表示されるようになりました。サードパーティの MySQL クライアント、MyCLI、および JDBC、Python、Go、Node.js などのアプリケーション用の複数の接続方法を使用でき[TLS 経由でDedicated Tierクラスターに接続する](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection) 。この機能により、アプリケーションから TiDB クラスターへのデータ転送のセキュリティが確保されます。
+    Dedicated Tierクラスターの場合、 [接続](/tidb-cloud/connect-via-standard-connection.md)ダイアログの [**標準接続**] タブに、TiDB クラスター CA をダウンロードするためのリンクが表示され、TLS 接続の接続文字列とサンプル コードも表示されるようになりました。サードパーティの MySQL クライアント、MyCLI、および JDBC、Python、Go、Node.js などのアプリケーション用の複数の接続方法を使用でき[TLS 経由でDedicated Tierクラスターに接続する](/tidb-cloud/connect-via-standard-connection.md) 。この機能により、アプリケーションから TiDB クラスターへのデータ転送のセキュリティが確保されます。
 
 ## 2022 年 9 月 14 日 {#september-14-2022}
 
@@ -151,7 +310,7 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
     新しいデザインでは、 Dedicated Tierへのアップグレード、クラスター接続、およびデータ インポートの入り口が強調されています。
 
--   [Developer Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier)クラスタの Playground を導入します。
+-   [Developer Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)クラスタの Playground を導入します。
 
     Playground には、事前にロードされた GitHub イベントのデータセットが含まれています。これにより、データをインポートしたり、クライアントに接続したりすることなく、クエリを即座に実行してTiDB Cloudを開始できます。
 
@@ -215,7 +374,7 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 **一般的な変更**
 
--   新しい[Developer Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier)クラスターのデフォルトの TiDB バージョンを[v6.1.0](https://docs.pingcap.com/tidb/stable/release-6.1.0)から[v6.2.0](https://docs.pingcap.com/tidb/v6.2/release-6.2.0)にアップグレードします。
+-   新しい[Developer Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)クラスターのデフォルトの TiDB バージョンを[v6.1.0](https://docs.pingcap.com/tidb/stable/release-6.1.0)から[v6.2.0](https://docs.pingcap.com/tidb/v6.2/release-6.2.0)にアップグレードします。
 
 **API の変更**
 
@@ -282,19 +441,19 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 ## 2022 年 7 月 26 日 {#july-26-2022}
 
--   新しい[Developer Tierのクラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier)の自動ハイバネーションと再開をサポートします。
+-   新しい[Developer Tierのクラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)の自動ハイバネーションと再開をサポートします。
 
     Developer Tierクラスターは、7 日間非アクティブになった後も削除されないため、1 年間の無料試用期間が終了するまでいつでも使用できます。非アクティブ状態が 24 時間続くと、 Developer Tierクラスターは自動的に休止状態になります。クラスターを再開するには、クラスターに新しい接続を送信するか、 TiDB Cloudコンソールの [**再開**] ボタンをクリックします。クラスターは 50 秒以内に再開され、自動的にサービスに戻ります。
 
--   new [Developer Tierのクラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier)のユーザー名プレフィックス制限を追加します。
+-   new [Developer Tierのクラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)のユーザー名プレフィックス制限を追加します。
 
     データベース ユーザー名を使用または設定するときは常に、クラスターのプレフィックスをユーザー名に含める必要があります。詳細については、 [ユーザー名のプレフィックス](/tidb-cloud/select-cluster-tier.md#user-name-prefix)を参照してください。
 
--   [Developer Tierのクラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier)のバックアップおよび復元機能を無効にします。
+-   [Developer Tierのクラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)のバックアップおよび復元機能を無効にします。
 
     Developer Tierクラスターでは、バックアップと復元の機能 (自動バックアップと手動バックアップの両方を含む) が無効になっています。 [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)を使用して、データをバックアップとしてエクスポートできます。
 
--   [Developer Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier)クラスターのストレージ サイズを 500 MiB から 1 GiB に増やします。
+-   [Developer Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)クラスターのストレージ サイズを 500 MiB から 1 GiB に増やします。
 
 -   パンくずリストをTiDB Cloudコンソールに追加して、ナビゲーション エクスペリエンスを向上させます。
 
@@ -305,7 +464,7 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 ## 2022 年 7 月 19 日 {#july-19-2022}
 
 -   [TiKV ノードサイズ](/tidb-cloud/size-your-cluster.md#tikv-node-size) : `8 vCPU, 32 GiB`の新しいオプションを提供します。 8 vCPU TiKV ノードの場合は、 `8 vCPU, 32 GiB`または`8 vCPU, 64 GiB`のいずれかを選択できます。
--   [**TiDB に接続する**](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection)ダイアログで提供されるサンプル コードで構文の強調表示をサポートし、コードの読みやすさを向上させます。サンプル コードで置き換える必要のあるパラメーターを簡単に特定できます。
+-   [**TiDB に接続する**](/tidb-cloud/connect-via-standard-connection.md)ダイアログで提供されるサンプル コードで構文の強調表示をサポートし、コードの読みやすさを向上させます。サンプル コードで置き換える必要のあるパラメーターを簡単に特定できます。
 -   [**データ インポート タスク**](/tidb-cloud/import-sample-data.md)ページでインポート タスクを確認した後、 TiDB Cloudがソース データにアクセスできるかどうかの自動検証をサポートします。
 -   TiDB Cloudコンソールのテーマの色を変更して、 [PingCAP ウェブサイト](https://en.pingcap.com/)の色と一致させます。
 
@@ -341,8 +500,8 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 ## 2022 年 6 月 21 日 {#june-21-2022}
 
 -   GCP リージョン`Taiwan` for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier)クラスタ作成のサポートを追加します。
--   TiDB Cloudコンソールでサポート[ユーザー プロファイルの更新](/tidb-cloud/manage-user-access.md#manage-user-profiles) (名、最終時間、会社名、国、電話番号を含む)。
--   [**TiDB に接続する**](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection)ダイアログで MySQL、MyCLI、JDBC、Python、Go、および Node.js の接続文字列を指定して、TiDB クラスターに簡単に接続できるようにします。
+-   TiDB Cloudコンソールで[ユーザー プロファイルの更新](/tidb-cloud/manage-user-access.md#manage-user-profiles)をサポートします。これには、名、最終時間、会社名、国、電話番号が含まれます。
+-   [**TiDB に接続する**](/tidb-cloud/connect-via-standard-connection.md)ダイアログで MySQL、MyCLI、JDBC、Python、Go、および Node.js の接続文字列を指定して、TiDB クラスターに簡単に接続できるようにします。
 -   データのインポート中にバケット URI からバケット領域を自動的に取得することをサポートして、そのような情報を入力する手間を省きます。
 
 ## 2022 年 6 月 16 日 {#june-16-2022}
@@ -363,7 +522,7 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   [無料で試す](https://tidbcloud.com/free-trial)登録ページを追加して、 TiDB Cloudにすばやくサインアップします。
 -   プラン選択ページから**概念実証プラン**オプションを削除します。 14日間の無料PoCトライアルを申し込む場合は、 [PoCに申し込む](https://en.pingcap.com/apply-for-poc/)ページへ。詳細については、 [TiDB Cloudで概念実証 (PoC) を実行する](/tidb-cloud/tidb-cloud-poc.md)を参照してください。
--   電子メールとパスワードを使用してTiDB Cloudにサインアップするユーザーに、90 日ごとにパスワードをリセットするよう求めることで、システムのセキュリティを向上させます。詳細については、 [ユーザーのパスワードを管理する](/tidb-cloud/manage-user-access.md#manage-user-passwords)を参照してください。
+-   電子メールとパスワードを使用してTiDB Cloudにサインアップするユーザーに、90 日ごとにパスワードをリセットするよう求めることで、システムのセキュリティを向上させます。詳細については、 [パスワード認証](/tidb-cloud/tidb-cloud-password-authentication.md)を参照してください。
 
 ## 2022 年 5 月 24 日 {#may-24-2022}
 
@@ -371,7 +530,7 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 ## 2022 年 5 月 19 日 {#may-19-2022}
 
--   AWS リージョン`Frankfurt` for [Developer Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier)クラスター作成のサポートを追加します。
+-   AWS リージョン`Frankfurt` for [Developer Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)クラスター作成のサポートを追加します。
 
 ## 2022 年 5 月 18 日 {#may-18-2022}
 
@@ -395,7 +554,7 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 TiDB Cloudは一般提供になりました。次のいずれかのオプションを選択でき[サインアップ](https://tidbcloud.com/signup) 。
 
--   [Developer Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier)から無料で始めましょう。
+-   [Developer Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)から無料で始めましょう。
 -   [14 日間の無料 PoC トライアル](https://en.pingcap.com/apply-for-poc/)に申し込む。
 -   [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier)でフル アクセスを取得します。
 
@@ -445,7 +604,7 @@ TiDB Cloudは一般提供になりました。次のいずれかのオプショ�
 
 改善：
 
--   [CSV ファイル](/tidb-cloud/import-csv-files.md)または[Apache 寄木細工のファイル](/tidb-cloud/import-parquet-files.md)をTiDB Cloudにインポートする際のカスタム ファイル名の使用をサポートします。
+-   [CSVファイル](/tidb-cloud/import-csv-files.md)または[Apache 寄木細工のファイル](/tidb-cloud/import-parquet-files.md)をTiDB Cloudにインポートする際のカスタム ファイル名の使用をサポートします。
 
 ## 2022 年 1 月 11 日 {#january-11-2022}
 
@@ -455,7 +614,7 @@ TiDB Cloudは一般提供になりました。次のいずれかのオプショ�
 
 改善：
 
--   [**接続**](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection)ページで、提案されたオプション`--connect-timeout 15`を MySQL クライアントに追加します。
+-   [**接続**](/tidb-cloud/connect-via-standard-connection.md)ページで、提案されたオプション`--connect-timeout 15`を MySQL クライアントに追加します。
 
 バグの修正：
 

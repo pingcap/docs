@@ -562,13 +562,13 @@ summary: Learn the alert rules in a TiDB cluster.
 
 -   説明：
 
-    この値が比較的大きい場合は、Coprocessorワーカーへのプレッシャーが高いことを意味します。Coprocessor・スレッドをスタックさせる遅いタスクがある可能性があります。
+    この値が比較的大きい場合は、コプロセッサーワーカーへのプレッシャーが高いことを意味します。コプロセッサー・スレッドをスタックさせる遅いタスクがある可能性があります。
 
 -   解決：
 
     1.  TiDB ログからスロー クエリ ログをビューして、インデックスまたはフル テーブル スキャンがクエリで使用されているかどうか、または分析に必要かどうかを確認します。
     2.  ホット スポットがあるかどうかを確認します。
-    3.  Coprocessorモニタをビューし、 `total`と`process` in `coprocessor table/index scan`が一致するかどうかを確認します。大きく異なる場合は、無効なクエリが多すぎることを示しています。 `over seek bound`があるかどうかがわかります。その場合、GC が時間内に処理できないバージョンが多すぎます。次に、並列 GC スレッドの数を増やす必要があります。
+    3.  コプロセッサーモニタをビューし、 `total`と`process` in `coprocessor table/index scan`が一致するかどうかを確認します。大きく異なる場合は、無効なクエリが多すぎることを示しています。 `over seek bound`があるかどうかがわかります。その場合、GC が時間内に処理できないバージョンが多すぎます。次に、並列 GC スレッドの数を増やす必要があります。
 
 #### <code>TiKV_raftstore_thread_cpu_seconds_total</code> {#code-tikv-raftstore-thread-cpu-seconds-total-code}
 
@@ -708,7 +708,7 @@ summary: Learn the alert rules in a TiDB cluster.
 
 -   説明：
 
-    Coprocessorによる期限切れの要求の待機時間。この値が大きい場合、 Coprocessorに大きな負荷がかかっていることを意味します。
+    コプロセッサーによる期限切れの要求の待機時間。この値が大きい場合、 コプロセッサーに大きな負荷がかかっていることを意味します。
 
 -   解決：
 
@@ -722,7 +722,7 @@ summary: Learn the alert rules in a TiDB cluster.
 
 -   説明：
 
-    Coprocessorのキューイング要求。
+    コプロセッサーのキューイング要求。
 
 -   解決：
 
@@ -736,7 +736,7 @@ summary: Learn the alert rules in a TiDB cluster.
 
 -   説明：
 
-    TiKV マシンのCoprocessorCPU 使用率が 90% を超えています。
+    TiKV マシンのコプロセッサーCPU 使用率が 90% を超えています。
 
 #### <code>TiKV_pending_task</code> {#code-tikv-pending-task-code}
 
@@ -750,7 +750,7 @@ summary: Learn the alert rules in a TiDB cluster.
 
 -   解決：
 
-    どの種類のタスクがより高い値を持っているかを確認します。通常、Coprocessorへのソリューションを見つけて、他のメトリックからワーカー タスクを適用できます。
+    どの種類のタスクがより高い値を持っているかを確認します。通常、コプロセッサーへのソリューションを見つけて、他のメトリックからワーカー タスクを適用できます。
 
 #### <code>TiKV_low_space</code> {#code-tikv-low-space-code}
 

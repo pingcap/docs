@@ -28,7 +28,18 @@ summary: This document describes how to query data from a single table in a data
 </CustomContent>
 
 2.  [Bookshop アプリケーションのテーブル スキーマとサンプル データをインポートする](/develop/dev-guide-bookshop-schema-design.md#import-table-structures-and-data) .
+
+<CustomContent platform="tidb">
+
 3.  [TiDB に接続する](/develop/dev-guide-connect-to-tidb.md) .
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+3.  [TiDB に接続する](/tidb-cloud/connect-to-tidb-cluster.md) .
+
+</CustomContent>
 
 ## 簡単なクエリを実行する {#execute-a-simple-query}
 
@@ -111,7 +122,18 @@ public class AuthorDAO {
 }
 ```
 
+<CustomContent platform="tidb">
+
 -   [JDBC ドライバーを使用して TiDB に接続する](/develop/dev-guide-connect-to-tidb.md#jdbc)の後、 `conn.createStatus()`で`Statement`オブジェクトを作成できます。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+-   [JDBC ドライバーを使用して TiDB に接続する](/develop/dev-guide-choose-driver-or-orm.md#java-drivers)の後、 `conn.createStatus()`で`Statement`オブジェクトを作成できます。
+
+</CustomContent>
+
 -   次に`stmt.executeQuery("query_sql")`を呼び出して、TiDB へのデータベース クエリ要求を開始します。
 -   クエリ結果は`ResultSet`のオブジェクトに格納されます。 `ResultSet`をトラバースすることで、返された結果を`Author`オブジェクトにマップできます。
 

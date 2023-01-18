@@ -11,7 +11,7 @@ summary: Learn steps, rules, and examples to create a database.
 
 データベースを作成する前に、次のことを行います。
 
--   [TiDB Cloud(サーバーレス層) で TiDBクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md) .
+-   [TiDB Cloud(Serverless Tier) で TiDBクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md) .
 -   [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md)を読んでください。
 
 ## データベースとは {#what-is-database}
@@ -24,8 +24,6 @@ TiDB の[データベース](/develop/dev-guide-schema-design-overview.md)個の
 
 たとえば、存在しない場合に`bookshop`という名前のデータベースを作成するには、次のステートメントを使用します。
 
-{{< copyable "" >}}
-
 ```sql
 CREATE DATABASE IF NOT EXISTS `bookshop`;
 ```
@@ -33,8 +31,6 @@ CREATE DATABASE IF NOT EXISTS `bookshop`;
 `CREATE DATABASE`ステートメントの詳細と例については、 [`CREATE DATABASE`](/sql-statements/sql-statement-create-database.md)ドキュメントを参照してください。
 
 `root`人のユーザーとしてライブラリ ビルド ステートメントを実行するには、次のコマンドを実行します。
-
-{{< copyable "" >}}
 
 ```shell
 mysql
@@ -50,8 +46,6 @@ mysql
 クラスター内のデータベースを表示するには、 [`SHOW DATABASES`](/sql-statements/sql-statement-show-databases.md)ステートメントを使用します。
 
 例えば：
-
-{{< copyable "" >}}
 
 ```shell
 mysql
@@ -83,6 +77,6 @@ mysql
 -   `root`ユーザーを使用して、データベース、ロール、およびユーザーなどのオブジェクトを作成します。ロールとユーザーには必要な権限のみを付与してください。
 -   ベスト プラクティスとして、ドライバーや ORM の代わりに**MySQL コマンドライン クライアント**または<strong>MySQL GUI クライアント</strong>を使用してデータベース スキーマの変更を実行することをお勧めします。
 
-## 次の一歩 {#next-step}
+## 次のステップ {#next-step}
 
 データベースを作成したら、それに**テーブル**を追加できます。詳細については、 [テーブルを作成する](/develop/dev-guide-create-table.md)を参照してください。

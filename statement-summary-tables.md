@@ -99,7 +99,7 @@ select * from employee where id in (...) and salary between ? and ?;
 
 `statements_summary` 、および`statements_summary_history`の表は、単一の`statements_summary_evicted`サーバーのステートメントの要約のみを示しています。クラスター全体のデータをクエリするには、 `cluster_statements_summary` 、 `cluster_statements_summary_history` 、または`cluster_statements_summary_evicted`テーブルをクエリする必要があります。
 
-`cluster_statements_summary`は、各 TiDBサーバーの`statements_summary`のデータを表示します。 `cluster_statements_summary_history`は、各 TiDBサーバーの`statements_summary_history`のデータを表示します。 `cluster_statements_summary_evicted`は、各 TiDBサーバーの`statements_summary_evicted`のデータを表示します。これらのテーブルは、 `INSTANCE`フィールドを使用して TiDBサーバーのアドレスを表します。その他のフィールドは`statements_summary`と同じです。
+`cluster_statements_summary`は、各 TiDBサーバーの`statements_summary`のデータを表示します。 `cluster_statements_summary_history`は、各 TiDBサーバーの`statements_summary_history`のデータを表示します。 `cluster_statements_summary_evicted`は、各 TiDBサーバーの`statements_summary_evicted`のデータを表示します。これらのテーブルは、 `INSTANCE`フィールドを使用して TiDBサーバーのアドレスを表します。他のフィールドは`statements_summary`と同じです。
 
 ## パラメータ構成 {#parameter-configuration}
 
@@ -257,7 +257,7 @@ SELECT sum_latency, avg_latency, exec_count, query_sample_text
 -   `QUERY_SAMPLE_TEXT` : SQL カテゴリの元の SQL ステートメント。元のステートメントは 1 つだけ取得されます。
 -   `TABLE_NAMES` : SQL ステートメントに含まれるすべてのテーブル。複数のテーブルがある場合は、それぞれをカンマで区切ります。
 -   `INDEX_NAMES` : SQL ステートメントで使用されるすべての SQL インデックス。複数のインデックスがある場合は、それぞれをカンマで区切ります。
--   `SAMPLE_USER` : このカテゴリの SQL ステートメントを実行するユーザー。 1 人のユーザーのみが取得されます。
+-   `SAMPLE_USER` : このカテゴリの SQL ステートメントを実行するユーザー。 1 人のユーザーのみが使用されます。
 -   `PLAN_DIGEST` : 実行計画のダイジェスト。
 -   `PLAN` : 元の実行計画。複数のステートメントがある場合は、1 つのステートメントのみのプランが採用されます。
 -   `BINARY_PLAN` : バイナリ形式でエンコードされた元の実行計画。複数のステートメントがある場合は、1 つのステートメントのみのプランが採用されます。 `SELECT tidb_decode_binary_plan('xxx...')`ステートメントを実行して、特定の実行計画を解析します。
@@ -289,23 +289,23 @@ TiDBサーバーに関連するフィールド:
 -   `AVG_DISK` : 使用された平均ディスク容量 (バイト)。
 -   `MAX_DISK` : 使用されている最大ディスク容量 (バイト)。
 
-TiKVCoprocessorタスクに関連するフィールド:
+TiKVコプロセッサータスクに関連するフィールド:
 
--   `SUM_COP_TASK_NUM` : 送信されたCoprocessor要求の総数。
--   `MAX_COP_PROCESS_TIME` :Coprocessor・タスクの最大実行時間。
--   `MAX_COP_PROCESS_ADDRESS` : 実行時間が最大のCoprocessor・タスクのアドレス。
--   `MAX_COP_WAIT_TIME` :Coprocessor・タスクの最大待ち時間。
--   `MAX_COP_WAIT_ADDRESS` : 待ち時間が最大のCoprocessor・タスクのアドレス。
+-   `SUM_COP_TASK_NUM` : 送信されたコプロセッサー要求の総数。
+-   `MAX_COP_PROCESS_TIME` :コプロセッサー・タスクの最大実行時間。
+-   `MAX_COP_PROCESS_ADDRESS` : 実行時間が最大のコプロセッサー・タスクのアドレス。
+-   `MAX_COP_WAIT_TIME` :コプロセッサー・タスクの最大待ち時間。
+-   `MAX_COP_WAIT_ADDRESS` : 待ち時間が最大のコプロセッサー・タスクのアドレス。
 -   `AVG_PROCESS_TIME` : TiKV での SQL ステートメントの平均処理時間。
 -   `MAX_PROCESS_TIME` : TiKV での SQL ステートメントの最大処理時間。
 -   `AVG_WAIT_TIME` : TiKV での SQL ステートメントの平均待機時間。
 -   `MAX_WAIT_TIME` : TiKV での SQL ステートメントの最大待機時間。
 -   `AVG_BACKOFF_TIME` : SQL ステートメントで再試行が必要なエラーが発生した場合の再試行までの平均待機時間。
 -   `MAX_BACKOFF_TIME` : SQL ステートメントで再試行が必要なエラーが発生した場合の再試行までの最大待機時間。
--   `AVG_TOTAL_KEYS` :Coprocessorがスキャンしたキーの平均数。
--   `MAX_TOTAL_KEYS` :Coprocessorがスキャンしたキーの最大数。
--   `AVG_PROCESSED_KEYS` :Coprocessorが処理したキーの平均数。 `avg_total_keys`と比較して、 `avg_processed_keys`には古いバージョンの MVCC が含まれていません。 `avg_total_keys`と`avg_processed_keys`の大きな違いは、多くの古いバージョンが存在することを示しています。
--   `MAX_PROCESSED_KEYS` :Coprocessorが処理したキーの最大数。
+-   `AVG_TOTAL_KEYS` :コプロセッサーがスキャンしたキーの平均数。
+-   `MAX_TOTAL_KEYS` :コプロセッサーがスキャンしたキーの最大数。
+-   `AVG_PROCESSED_KEYS` :コプロセッサーが処理したキーの平均数。 `avg_total_keys`と比較して、 `avg_processed_keys`には古いバージョンの MVCC が含まれていません。 `avg_total_keys`と`avg_processed_keys`の大きな違いは、多くの古いバージョンが存在することを示しています。
+-   `MAX_PROCESSED_KEYS` :コプロセッサーが処理したキーの最大数。
 
 トランザクション関連のフィールド:
 

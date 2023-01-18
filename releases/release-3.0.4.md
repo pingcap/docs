@@ -96,7 +96,7 @@ TiDB アンシブル バージョン: 3.0.4
     -   grpcio を v0.4.5 にアップグレード[#5523](https://github.com/tikv/tikv/pull/5523)
     -   gRPC コアダンプの問題を修正し、共有メモリをサポートして OOM [#5524](https://github.com/tikv/tikv/pull/5524)を回避します
     -   プロセスが長時間実行されている場合、アイドル状態のクラスターでのファイル記述子のリークにより、TiKV プロセスが異常終了する可能性があるという[#5567](https://github.com/tikv/tikv/pull/5567)の問題を修正します。
--   ストレージ
+-   保管所
     -   `txn_heart_beat` TiDB の悲観的ロックを MySQL の悲観的ロックと可能な限り一致させる API をサポートします[#5507](https://github.com/tikv/tikv/pull/5507)
     -   一部の状況でポイント クエリのパフォーマンスが低下する問題を修正します。 [#5495](https://github.com/tikv/tikv/pull/5495) [#5463](https://github.com/tikv/tikv/pull/5463)
 

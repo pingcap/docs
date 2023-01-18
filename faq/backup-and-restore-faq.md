@@ -1,11 +1,12 @@
 ---
 title: Backup & Restore FAQs
 summary: Learn about Frequently Asked Questions (FAQs) and the solutions of backup and restore.
+aliases: ['/tidb/stable/pitr-troubleshoot/','/tidb/stable/pitr-known-issues/']
 ---
 
 # バックアップと復元に関するよくある質問 {#backup-x26-restore-faqs}
 
-このドキュメントでは、よく寄せられる質問 (FAQ) と、TiDB のバックアップと復元 (BR) の解決策を示します。
+このドキュメントでは、よく寄せられる質問 (FAQ) と TiDB のバックアップと復元 (BR) の解決策を示します。
 
 ## バックアップと復元のパフォーマンスの問題 {#performance-issues-of-backup-and-restore}
 

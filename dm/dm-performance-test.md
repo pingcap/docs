@@ -5,7 +5,7 @@ summary: Learn how to test the performance of DM clusters.
 
 # DMクラスタのパフォーマンス テスト {#dm-cluster-performance-test}
 
-このドキュメントでは、データ移行に関する速度テストとレイテンシーテストを含む、DM クラスターでパフォーマンス テストを行うためのテスト シナリオを構築する方法について説明します。
+このドキュメントでは、DM クラスターでパフォーマンス テストを実行するためのテスト シナリオを構築する方法について説明します。これには、データ移行に関する速度テストとレイテンシーテストが含まれます。
 
 ## 移行データ フロー {#migration-data-flow}
 
@@ -17,7 +17,7 @@ MySQL -&gt; DM -&gt; TiDB という単純な移行データ フローを使用�
 -   MySQL サービスをデプロイします。 binlog の`ROW`モードを有効にし、他の構成項目には既定の構成を使用します。
 -   DM-worker と DM-master を使用して DM クラスターをデプロイします。
 
-## 性能テスト {#performance-test}
+## 性能試験 {#performance-test}
 
 ### テーブル スキーマ {#table-schema}
 
@@ -50,7 +50,7 @@ sysbench --test=oltp_insert --tables=4 --mysql-host=172.16.4.40 --mysql-port=330
 
 #### データ移行タスクを作成する {#create-a-data-migration-task}
 
-1.  アップストリーム MySQL ソースを作成し、 `source-id`から`source-1`を設定します。詳細については、 [データ ソース構成の読み込み](/dm/dm-manage-source.md#operate-data-source)を参照してください。
+1.  アップストリームの MySQL ソースを作成し、 `source-id`から`source-1`を設定します。詳細については、 [データ ソース構成の読み込み](/dm/dm-manage-source.md#operate-data-source)を参照してください。
 
 2.  移行タスクを作成します ( `full`モード)。以下は、タスク構成テンプレートです。
 
@@ -109,7 +109,7 @@ DM-worker ログを観察します。 `all data files have been finished`が表�
 
 #### データ移行タスクを作成する {#create-a-data-migration-task}
 
-1.  アップストリーム MySQL のソースを作成します。 `source-id` ～ `source-1`を設定します（ [全輸入ベンチマークケース](#full-import-benchmark-case)でソースを作成した場合は、再度作成する必要はありません）。詳細については、 [データ ソース構成のロード](/dm/dm-manage-source.md#operate-data-source)を参照してください。
+1.  アップストリーム MySQL のソースを作成します。 `source-id` ～ `source-1`を設定します（ [全輸入ベンチマークケース](#full-import-benchmark-case)でソースを作成した場合は、再度作成する必要はありません）。詳細については、 [データ ソース構成の読み込み](/dm/dm-manage-source.md#operate-data-source)を参照してください。
 
 2.  DM 移行タスクを作成します ( `all`モードで)。以下は、タスク構成ファイルの例です。
 

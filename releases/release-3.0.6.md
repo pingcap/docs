@@ -22,7 +22,7 @@ TiDB アンシブル バージョン: 3.0.6
     -   ポイント クエリのサポート`_tidb_rowid` [#13416](https://github.com/pingcap/tidb/pull/13416)
     -   パーティションテーブル統計の不適切な使用が原因で、生成されたクエリ実行プランが正しくない問題を修正します[#13628](https://github.com/pingcap/tidb/pull/13628)
 -   SQL 実行エンジン
-    -   年型[#12745](https://github.com/pingcap/tidb/pull/12745)の無効な値を処理する場合、TiDB が MySQL と互換性がない問題を修正します。
+    -   年型[#12745](https://github.com/pingcap/tidb/pull/12745)の無効な値を処理するときに、TiDB が MySQL と互換性がない問題を修正します。
     -   `INSERT ON DUPLICATE UPDATE`ステートメントで`Chunk`を再利用して、メモリ オーバーヘッドを削減します[#12998](https://github.com/pingcap/tidb/pull/12998)
     -   `JSON_VALID`組み込み関数のサポートを追加します[#13133](https://github.com/pingcap/tidb/pull/13133)
     -   分割されたテーブルでの実行をサポート`ADMIN CHECK TABLE` [#13140](https://github.com/pingcap/tidb/pull/13140)

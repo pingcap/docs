@@ -21,6 +21,8 @@ TiDB はデフォルトでスロークエリログを有効にします。シス
 # Parse_time: 0.000054933
 # Compile_time: 0.000129729
 # Rewrite_time: 0.000000003 Preproc_subqueries: 2 Preproc_subqueries_time: 0.000000002
+# Optimize_time: 0.00000001
+# Wait_TS: 0.00001078
 # Process_time: 0.07 Request_count: 1 Total_keys: 131073 Process_keys: 131072 Prewrite_time: 0.335415029 Commit_time: 0.032175429 Get_commit_ts_time: 0.000177098 Local_latch_wait_time: 0.106869448 Write_keys: 131072 Write_size: 3538944 Prewrite_region: 1
 # DB: test
 # Is_internal: false
@@ -54,22 +56,33 @@ insert into t select * from t;
 -   `Query_time` : ステートメントの実行時間。
 -   `Parse_time` : ステートメントの解析時間。
 -   `Compile_time` : クエリの最適化の期間。
+-   `Optimize_time` : 実行計画の最適化にかかった時間。
+-   `Wait_TS` : トランザクションのタイムスタンプを取得するためのステートメントの待機時間。
 -   `Query` : SQL ステートメント。 `Query`はスロー ログには出力されませんが、スロー ログがメモリ テーブルにマップされた後、対応するフィールドは`Query`と呼ばれます。
 -   `Digest` : SQL ステートメントのフィンガープリント。
 -   `Txn_start_ts` : トランザクションの開始タイムスタンプと一意の ID。この値を使用して、トランザクション関連のログを検索できます。
 -   `Is_internal` : SQL ステートメントが TiDB 内部であるかどうか。 `true`は SQL ステートメントが TiDB 内部で実行されることを示し、 `false`は SQL ステートメントがユーザーによって実行されることを示します。
--   `Index_ids` : ステートメントに含まれるインデックスの ID。
+-   `Index_names` : ステートメントで使用されるインデックス名。
+-   `Stats` : 関連するテーブルの正常性状態。 `pseudo`は、状態が異常であることを示します。
 -   `Succ` : ステートメントが正常に実行されたかどうか。
 -   `Backoff_time` : 文で再試行が必要なエラーが発生した場合の再試行までの待機時間。一般的なエラーには、 `lock occurs` 、 `Region split` 、および`tikv server is busy`が含まれます。
 -   `Plan` : ステートメントの実行計画。 `SELECT tidb_decode_plan('xxx...')`ステートメントを実行して、特定の実行計画を解析します。
 -   `Binary_plan` : バイナリ エンコードされたステートメントの実行計画。 `SELECT tidb_decode_binary_plan('xxx...')`ステートメントを実行して、特定の実行計画を解析します。 `Plan`フィールドと`Binary_plan`フィールドには同じ情報が含まれます。ただし、2 つのフィールドから解析される実行計画の形式は異なります。
 -   `Prepared` : このステートメントが`Prepare`または`Execute`の要求であるかどうか。
 -   `Plan_from_cache` : このステートメントが実行プランのキャッシュにヒットするかどうか。
+-   `Plan_from_binding` : このステートメントがバインドされた実行計画を使用するかどうか。
+-   `Has_more_results` : このステートメントに、ユーザーがフェッチする結果がさらにあるかどうか。
 -   `Rewrite_time` : このステートメントのクエリを書き換えるのにかかった時間。
 -   `Preproc_subqueries` : 事前に実行される (ステートメント内の) サブクエリの数。たとえば、 `where id in (select if from t)`番目のサブクエリが事前に実行される場合があります。
 -   `Preproc_subqueries_time` : このステートメントのサブクエリを事前に実行するのにかかった時間。
 -   `Exec_retry_count` : このステートメントの再試行回数。このフィールドは通常、ロックが失敗したときにステートメントが再試行される悲観的トランザクション用です。
 -   `Exec_retry_time` : このステートメントの実行再試行期間。たとえば、ステートメントが合計 3 回実行された場合 (最初の 2 回は失敗)、 `Exec_retry_time`は最初の 2 回の実行の合計期間を意味します。最後の実行の期間は`Query_time` - `Exec_retry_time`です。
+-   `KV_total` : このステートメントが TiKV またはTiFlashですべての RPC 要求に費やした時間。
+-   `PD_total` : このステートメントによって PD ですべての RPC 要求に費やされた時間。
+-   `Backoff_total` : このステートメントの実行中にすべてのバックオフに費やされた時間。
+-   `Write_sql_response_total` : このステートメントによってクライアントに結果を返すのにかかった時間。
+-   `Result_rows` : クエリ結果の行数。
+-   `IsExplicitTxn` : このステートメントが明示的なトランザクション内にあるかどうか。値が`false`の場合、トランザクションは`autocommit=1`であり、ステートメントは実行後に自動的にコミットされます。
 
 次のフィールドは、トランザクションの実行に関連しています。
 
@@ -92,16 +105,18 @@ insert into t select * from t;
 ユーザー フィールド:
 
 -   `User` : このステートメントを実行するユーザーの名前。
+-   `Host` : このステートメントのホスト名。
 -   `Conn_ID` : 接続 ID (セッション ID)。たとえば、キーワード`con:3`を使用して、セッション ID が`3`のログを検索できます。
 -   `DB` : 現在のデータベース。
 
-TiKVCoprocessorタスク フィールド:
+TiKVコプロセッサータスク フィールド:
 
--   `Request_count` : ステートメントが送信するCoprocessor要求の数。
--   `Total_keys` :Coprocessorがスキャンしたキーの数。
+-   `Request_count` : ステートメントが送信するコプロセッサー要求の数。
+-   `Total_keys` :コプロセッサーがスキャンしたキーの数。
 -   `Process_time` : TiKV での SQL ステートメントの合計処理時間。データは TiKV に同時に送信されるため、この値は`Query_time`を超える可能性があります。
--   `Wait_time` : TiKV でのステートメントの合計待機時間。 TiKV のCoprocessorは限られた数のスレッドを実行するため、Coprocessorプロセッサのすべてのスレッドが動作しているときにリクエストがキューに入ることがあります。キュー内のリクエストの処理に時間がかかると、後続のリクエストの待ち時間が長くなります。
--   `Process_keys` :Coprocessorが処理したキーの数。 `total_keys`と比較して、 `processed_keys`には古いバージョンの MVCC が含まれていません。 `processed_keys`と`total_keys`の大きな違いは、多くの古いバージョンが存在することを示しています。
+-   `Wait_time` : TiKV でのステートメントの合計待機時間。 TiKV のコプロセッサーは限られた数のスレッドを実行するため、コプロセッサープロセッサのすべてのスレッドが動作しているときにリクエストがキューに入ることがあります。キュー内のリクエストの処理に時間がかかると、後続のリクエストの待ち時間が長くなります。
+-   `Process_keys` :コプロセッサーが処理したキーの数。 `total_keys`と比較して、 `processed_keys`には古いバージョンの MVCC が含まれていません。 `processed_keys`と`total_keys`の大きな違いは、多くの古いバージョンが存在することを示しています。
+-   `Num_cop_tasks` : このステートメントによって送信されたコプロセッサー・タスクの数。
 -   `Cop_proc_avg` : RocksDB のミューテックスなど、カウントできない待機時間を含む、警官タスクの平均実行時間。
 -   `Cop_proc_p90` : 警官タスクの P90 実行時間。
 -   `Cop_proc_max` : 警官タスクの最大実行時間。
@@ -521,7 +536,7 @@ pt-query-digest --report tidb-slow.log
 
 `SLOW_QUERY`ステートメントのすべてに問題があるわけではありません。 `process_time`が非常に大きいものだけが、クラスター全体への圧力を高めます。
 
-`wait_time`が非常に大きく、 `process_time`が非常に小さいステートメントは、通常は問題になりません。これは、実際に問題のあるステートメントによってステートメントがブロックされ、実行キューで待機する必要があり、応答時間が大幅に長くなるためです。
+`wait_time`が非常に大きく、 `process_time`が非常に小さいステートメントは、通常は問題になりません。これは、問題のある実際のステートメントによってステートメントがブロックされ、実行キューで待機する必要があり、応答時間が大幅に長くなるためです。
 
 ### <code>ADMIN SHOW SLOW</code>コマンド {#code-admin-show-slow-code-command}
 

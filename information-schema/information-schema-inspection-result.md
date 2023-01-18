@@ -249,7 +249,7 @@ SEVERITY  | critical
 DETAILS   | the cluster has 2 different tidb versions, execute the sql to see more detail: SELECT * FROM information_schema.cluster_info WHERE type='tidb'
 ```
 
-### <code>critical-error</code>診断規則 {#code-critical-error-code-diagnostic-rule}
+### <code>critical-error</code>診断ルール {#code-critical-error-code-diagnostic-rule}
 
 `critical-error`つの診断ルールで、次の 2 つの診断ルールが実行されます。
 
@@ -261,7 +261,7 @@ DETAILS   | the cluster has 2 different tidb versions, execute the sql to see mo
     | TiDB | binlog エラー              | tidb_binlog_error_total_count        | TiDB が binlog を書き込むときにエラーが発生します。             |
     | TiKV | クリティカル・エラー              | tikv_critical_error_total_coun       | TiKVの致命的なエラー。                                |
     | TiKV | スケジューラーはビジーです           | tikv_scheduler_is_busy_total_count   | TiKV スケジューラがビジー状態であるため、TiKV が一時的に利用できなくなります。 |
-    | TiKV | コプロセッサがビジーです            | tikv_coprocessor_is_busy_total_count | TiKVCoprocessorがビジー状態です。                     |
+    | TiKV | コプロセッサがビジーです            | tikv_coprocessor_is_busy_total_count | TiKVコプロセッサーがビジー状態です。                         |
     | TiKV | チャネルがいっぱいです             | tikv_channel_full_total_count        | TiKVで「チャンネルフル」エラーが発生。                        |
     | TiKV | tikv_engine_write_stall | tikv_engine_write_stall              | TiKV で「ストール」エラーが発生します。                       |
 
@@ -285,7 +285,7 @@ DETAILS   | the cluster has 2 different tidb versions, execute the sql to see mo
 | TiKV | rocksdb-シーク期間               | tikv_engine_max_seek_duration       | &lt; 50ms  | 実行する TiKV RocksDB のレイテンシー`seek` .                                                                                    |
 | TiKV | scheduler-pending-cmd-count | tikv_scheduler_pending_commands     | &lt; 1000  | TiKV で停止したコマンドの数。                                                                                                    |
 | TiKV | インデックス ブロック キャッシュ ヒット       | tikv_block_index_cache_hit          | 0.95       | TiKVのインデックスブロックキャッシュのヒット率。                                                                                           |
-| TiKV | フィルター ブロック キャッシュ ヒット        | tikv_block_filter_cache_hit         | 0.95       | TiKV のフィルタ ブロック キャッシュのヒット率。                                                                                          |
+| TiKV | フィルター ブロック キャッシュ ヒット        | tikv_block_filter_cache_hit         | 0.95       | TiKV のフィルタブロックキャッシュのヒット率。                                                                                            |
 | TiKV | データ ブロック キャッシュ ヒット          | tikv_block_data_cache_hit           | 0.80       | TiKVのデータブロックキャッシュのヒット率。                                                                                              |
 | TiKV | リーダースコアバランス                 | pd_scheduler_store_status           | &lt; 0.05  | 各 TiKV インスタンスのリーダー スコアが均衡しているかどうかを確認します。インスタンス間の予想差は 5% 未満です。                                                        |
 | TiKV | 地域スコアバランス                   | pd_scheduler_store_status           | &lt; 0.05  | 各 TiKV インスタンスのリージョンスコアが均衡しているかどうかを確認します。インスタンス間の予想差は 5% 未満です。                                                        |

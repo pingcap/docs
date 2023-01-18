@@ -23,7 +23,7 @@ TiDB アンシブル バージョン: 2.1.14
 -   `load data`ステートメントが失敗したときの最後のトランザクションの自動ロールバック機能を追加します[#10862](https://github.com/pingcap/tidb/pull/10862)
 -   `OOMAction`構成項目が`Cancel` [#11016](https://github.com/pingcap/tidb/pull/11016)に設定されている場合、TiDB が間違った結果を返すことがある問題を修正します。
 -   TiDBpanicの問題[#11039](https://github.com/pingcap/tidb/pull/11039)を回避するために`TRACE`ステートメントを無効にします。
--   特定の関数をプッシュダウンすることを動的に有効/無効にする`mysql.expr_pushdown_blacklist`のシステム テーブルをCoprocessor[#10998](https://github.com/pingcap/tidb/pull/10998)に追加します。
+-   特定の関数をプッシュダウンすることを動的に有効/無効にする`mysql.expr_pushdown_blacklist`のシステム テーブルをコプロセッサー[#10998](https://github.com/pingcap/tidb/pull/10998)に追加します。
 -   `ONLY_FULL_GROUP_BY`モード[#10994](https://github.com/pingcap/tidb/pull/10994)で`ANY_VALUE`機能が動作しない問題を修正
 -   文字列型[#11043](https://github.com/pingcap/tidb/pull/11043)のユーザー変数を評価するときに、ディープ コピーを実行しないことによって引き起こされる誤った評価を修正します。
 

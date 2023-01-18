@@ -112,4 +112,4 @@ TiDB バージョン: 4.0.0
     -   TiCDC
         -   データ競合によるシステムパニックの修正[#565](https://github.com/pingcap/tiflow/pull/565) [#566](https://github.com/pingcap/tiflow/pull/566)
         -   不適切な処理ロジックによるリソース リークまたはシステムのブロックを修正する[#574](https://github.com/pingcap/tiflow/pull/574) [#586](https://github.com/pingcap/tiflow/pull/586)
-        -   CLI が PD [#579](https://github.com/pingcap/tiflow/pull/579)に接続できないためにコマンド ラインがスタックする問題を修正します。
+        -   CLI が PD [#579](https://github.com/pingcap/tiflow/pull/579)に接続できないためにコマンド ラインが停止する問題を修正します。

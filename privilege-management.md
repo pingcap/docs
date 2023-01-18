@@ -307,7 +307,7 @@ mysql> SELECT * FROM INFORMATION_SCHEMA.USER_PRIVILEGES WHERE grantee = "'root'@
 
 テーブルに対する`INSERT`および`SELECT`の権限が必要です。
 
-### 公演 {#show}
+### 見せる {#show}
 
 `SHOW CREATE TABLE`には、テーブルに対する単一の特権が必要です。
 

@@ -181,10 +181,10 @@ ORDER BY ratio DESC LIMIT 10;
 上記のクエリ結果から、次の情報を取得できます。
 
 -   期間 t2 の`tib_slow_query_cop_process_total_time` (TiDB スロー クエリの消費時間`cop process` ) は、期間 t1 の 5,865 倍です。
--   期間 t2 の`tidb_distsql_partial_scan_key_total_num` (TiDB のスキャンするキーの数`distsql` ) は、期間 t1 の 3,648 倍です。期間 t2 では、 `tidb_slow_query_cop_wait_total_time` ( Coprocessorが TiDB スロー クエリでキューに登録することを要求する待ち時間) は、期間 t1 の 267 倍になります。
--   期間 t2 の`tikv_cop_total_response_size` (TiKVCoprocessor要求結果のサイズ) は、期間 t1 の 192 倍です。
--   期間 t2 (TiKV Coprocessorによって要求されたスキャン) の`tikv_cop_scan_details`は、期間 t1 の 105 倍です。
+-   期間 t2 の`tidb_distsql_partial_scan_key_total_num` (TiDB のスキャンするキーの数`distsql` ) は、期間 t1 の 3,648 倍です。期間 t2 では、 `tidb_slow_query_cop_wait_total_time` ( コプロセッサーが TiDB スロー クエリでキューに登録することを要求する待ち時間) は、期間 t1 の 267 倍になります。
+-   期間 t2 の`tikv_cop_total_response_size` (TiKVコプロセッサー要求結果のサイズ) は、期間 t1 の 192 倍です。
+-   期間 t2 (TiKV コプロセッサーによって要求されたスキャン) の`tikv_cop_scan_details`は、期間 t1 の 105 倍です。
 
-上記の結果から、期間 t2 のCoprocessor要求は、期間 t1 の要求よりもはるかに多いことがわかります。これにより、TiKVCoprocessorが過負荷になり、 `cop task`は待機する必要があります。期間 t2 にいくつかの大きなクエリが表示され、より多くの負荷がかかる可能性があります。
+上記の結果から、期間 t2 のコプロセッサー要求は、期間 t1 の要求よりもはるかに多いことがわかります。これにより、TiKVコプロセッサーが過負荷になり、 `cop task`は待機する必要があります。期間 t2 にいくつかの大きなクエリが表示され、より多くの負荷がかかる可能性があります。
 
-実際、t1 から t2 までの期間全体で、 `go-ycsb`番目の圧力テストが実行されています。次に、期間 t2 の間に 20 `tpch`のクエリが実行されます。したがって、多くのCoprocessor要求を引き起こすのは`tpch`の照会です。
+実際、t1 から t2 までの期間全体で、 `go-ycsb`番目の圧力テストが実行されています。次に、期間 t2 の間に 20 `tpch`のクエリが実行されます。したがって、多くのコプロセッサー要求を引き起こすのは`tpch`の照会です。

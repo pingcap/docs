@@ -11,17 +11,19 @@ summary: Learn how to configure Amazon Simple Storage Service (Amazon S3) access
 
 TiDB Cloudが Amazon S3 バケットのソース データにアクセスできるようにするには、次の手順TiDB Cloudのバケット アクセスを設定し、Role-ARN を取得します。
 
-1.  TiDB Cloudコンソールで、ターゲット TiDB クラスターのTiDB Cloudアカウント ID と外部 ID を取得します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)で、ターゲットの TiDB クラスターのTiDB Cloudアカウント ID と外部 ID を取得します。
 
-    1.  TiDB Cloudコンソールで、ターゲット プロジェクトを選択し、[**クラスター**] ページに移動します。
-
-    2.  ターゲット クラスターを見つけて、クラスター領域の右上隅にある [ **...** ] をクリックし、 [<strong>データのインポート</strong>] を選択します。 [<strong>データのインポート]</strong>ページが表示されます。
+    1.  プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
         > **ヒント：**
         >
-        > または、[**クラスター**] ページでクラスターの名前をクリックし、[インポート] 領域で [<strong>データ</strong>の<strong>インポート</strong>] をクリックすることもできます。
+        > 複数のプロジェクトがある場合は、[**クラスター]**ページの左側のナビゲーション ペインでターゲット プロジェクトに切り替えることができます。
 
-    3.  [**データのインポート**] ページで、[<strong>必要な Role-ARN を取得するためのガイド</strong>] をクリックして、 TiDB Cloudアカウント ID とTiDB Cloud外部 ID を取得します。後で使用するために、これらの ID をメモしておいてください。
+    2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで [**インポート**] をクリックします。
+
+    3.  [**インポート**] ページで、右上隅にある [<strong>データのインポート</strong>] をクリックし、 [ <strong>S3 から</strong>] を選択します。
+
+    4.  [ **S3 からのインポート**] ページで、[<strong>必要なロール ARN を取得するためのガイド</strong>] をクリックして、 TiDB Cloudアカウント ID とTiDB Cloud外部 ID を取得します。後で使用するために、これらの ID をメモしておいてください。
 
 2.  AWS マネジメント コンソールで、Amazon S3 バケットの管理ポリシーを作成します。
 
@@ -107,15 +109,15 @@ TiDB Cloudが GCS バケット内のソース データにアクセスできる�
 
 1.  TiDB Cloudコンソールで、ターゲット TiDB クラスターの Google Cloud サービス アカウント ID を取得します。
 
-    1.  TiDB Cloudコンソールで、ターゲット プロジェクトを選択し、[**クラスター**] ページに移動します。
-
-    2.  ターゲット クラスターを見つけて、クラスター領域の右上隅にある [ **...** ] をクリックし、 [<strong>データのインポート</strong>] を選択します。 [<strong>データのインポート]</strong>ページが表示されます。
+    1.  プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
         > **ヒント：**
         >
-        > または、[**クラスター**] ページでクラスターの名前をクリックし、[インポート] 領域で [<strong>データ</strong>の<strong>インポート</strong>] をクリックすることもできます。
+        > 複数のプロジェクトがある場合は、[**クラスター]**ページの左側のナビゲーション ペインでターゲット プロジェクトに切り替えることができます。
 
-    3.  [**データのインポート**] ページで、[ <strong>Google Cloud サービス アカウント ID を表示</strong>] をクリックし、後で使用できるようにサービス アカウント ID をコピーします。
+    2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで [**インポート**] をクリックします。
+
+    3.  右上隅の [**データのインポート**] をクリックし、[ <strong>Google Cloud サービス アカウント ID を表示</strong>] をクリックして、後で使用できるようにサービス アカウント ID をコピーします。
 
 2.  Google Cloud Platform (GCP) 管理コンソールで、GCS バケットのIAMロールを作成します。
 
@@ -155,12 +157,16 @@ TiDB Cloudが GCS バケット内のソース データにアクセスできる�
     >
     > TiDB Cloudへのアクセスを削除するには、付与したアクセスを削除するだけです。
 
-6.  [**バケットの詳細**] ページで [<strong>構成</strong>] タブをクリックし、 <strong>gsutil URI</strong>フィールドから GCS バケット URI をコピーします。
+6.  **バケットの詳細**ページで、[<strong>オブジェクト</strong>] タブをクリックします。
 
-    ![Get bucket URI](/media/tidb-cloud/gcp-bucket-url.png)
+    ファイルの gsutil URI をコピーする場合は、ファイルを選択し、[**オブジェクト オーバーフロー メニューを開く**] をクリックし、[ <strong>gsutil URI をコピー</strong>] をクリックします。
 
-7.  TiDB Cloudコンソールで、Google Cloud サービス アカウント ID を取得する**データ インポート**ページに移動し、GCS バケット URI を<strong>バケット URI</strong>フィールドに貼り付けます。 URI の末尾に`/`を追加する必要があることに注意してください。
+    ![Get bucket URI](/media/tidb-cloud/gcp-bucket-uri01.png)
 
-    たとえば、バケット URI が`gs://tidb-cloud-source-data`の場合、 `gs://tidb-cloud-source-data/`を入力する必要があります。
+    フォルダの gsutil URI を使用する場合は、フォルダを開き、フォルダ名に続く [コピー] ボタンをクリックしてフォルダ名をコピーします。その後、フォルダの正しい URI を取得するために、名前の先頭に`gs://`を、末尾に`/`を追加する必要があります。
 
-    ![Fill in bucket URI in the TiDB Cloud console](/media/tidb-cloud/gcp-bucket-url-field.png)
+    たとえば、フォルダー名が`tidb-cloud-source-data`の場合、URI として`gs://tidb-cloud-source-data/`を使用する必要があります。
+
+    ![Get bucket URI](/media/tidb-cloud/gcp-bucket-uri02.png)
+
+7.  TiDB Cloudコンソールで、Google Cloud サービス アカウント ID を取得する**データ インポート**ページに移動し、GCS バケット gsutil URI を<strong>バケット gsutil URI</strong>フィールドに貼り付けます。たとえば、 `gs://tidb-cloud-source-data/`を貼り付けます。

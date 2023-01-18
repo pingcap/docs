@@ -68,7 +68,7 @@ tiup cluster [command] [flags]
 -   [リスト](/tiup/tiup-component-cluster-list.md) : デプロイされたクラスターのリストを照会します
 -   [画面](/tiup/tiup-component-cluster-display.md) : 指定したクラスターのステータスを表示します
 -   [始める](/tiup/tiup-component-cluster-start.md) : 指定されたクラスターを開始します
--   [止まる](/tiup/tiup-component-cluster-stop.md) : 指定したクラスターを停止します
+-   [ストップ](/tiup/tiup-component-cluster-stop.md) : 指定したクラスターを停止します
 -   [再起動](/tiup/tiup-component-cluster-restart.md) : 指定したクラスターを再起動します
 -   [スケールイン](/tiup/tiup-component-cluster-scale-in.md) : 指定されたクラスターでスケーリングします
 -   [規格外](/tiup/tiup-component-cluster-scale-out.md) : 指定されたクラスターをスケールアウトします

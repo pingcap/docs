@@ -102,7 +102,7 @@ summary: Learn how to replicate data from a primary cluster to a secondary clust
 
 > **ノート：**
 >
-> -   実稼働クラスターでは、GC を無効にしてバックアップを実行すると、クラスターのパフォーマンスに影響を与える可能性があります。オフピーク時にデータをバックアップし、パフォーマンスの低下を避けるために RATE_LIMIT を適切な値に設定することをお勧めします。
+> -   本番クラスターでは、GC を無効にしてバックアップを実行すると、クラスターのパフォーマンスに影響を与える可能性があります。オフピーク時にデータをバックアップし、パフォーマンスの低下を避けるために RATE_LIMIT を適切な値に設定することをお勧めします。
 >
 > -   上流と下流のクラスターのバージョンが異なる場合は、 [BR互換性](/br/backup-and-restore-overview.md#some-tips)を確認する必要があります。このドキュメントでは、アップストリーム クラスタとダウンストリーム クラスタは同じバージョンであると想定しています。
 
@@ -232,12 +232,12 @@ summary: Learn how to replicate data from a primary cluster to a secondary clust
     アップストリーム クラスターで、次のコマンドを実行して、アップストリーム クラスターからダウンストリーム クラスターへの変更フィードを作成します。
 
     ```shell
-    tiup cdc cli changefeed create --pd=http://172.16.6.122:2379 --sink-uri="mysql://root:@172.16.6.125:4000" --changefeed-id="primary-to-secondary" --start-ts="431434047157698561"
+    tiup cdc cli changefeed create --server=http://172.16.6.122:8300 --sink-uri="mysql://root:@172.16.6.125:4000" --changefeed-id="primary-to-secondary" --start-ts="431434047157698561"
     ```
 
     このコマンドでは、パラメーターは次のとおりです。
 
-    -   `--pd` : アップストリーム クラスタの PD アドレス
+    -   `--server` : TiCDC クラスター内の任意のノードの IP アドレス
     -   `--sink-uri` : ダウンストリーム クラスターの URI
     -   `--start-ts` : 変更フィードの開始タイムスタンプ。バックアップ時刻 (または[ステップ 2. 完全なデータを移行する](#step-2-migrate-full-data)で説明した BackupTS) である必要があります。
 
@@ -290,7 +290,7 @@ tiup cdc redo apply --storage "s3://redo?access-key=minio&secret-access-key=mini
 
 ## ステップ 6. 主クラスターとそのサービスをリカバリーする {#step-6-recover-the-primary-cluster-and-its-services}
 
-前のステップの後、ダウンストリーム (セカンダリ) クラスターには、特定の時点でアップストリーム (プライマリ) クラスターと一致するデータがあります。データの信頼性を確保するために、新しいプライマリ クラスタとセカンダリ クラスタをセットアップする必要があります。
+前のステップの後、ダウンストリーム (セカンダリ) クラスターには、特定の時点でアップストリーム (プライマリ) クラスターと一致するデータがあります。データの信頼性を確保するために、新しいプライマリ クラスタとセカンダリ クラスタを設定する必要があります。
 
 1.  ノード A に新しい TiDB クラスターを新しい主クラスターとしてデプロイします。
 
@@ -311,5 +311,5 @@ tiup cdc redo apply --storage "s3://redo?access-key=minio&secret-access-key=mini
 
     ```shell
     # Create a changefeed
-    tiup cdc cli changefeed create --pd=http://172.16.6.122:2379 --sink-uri="mysql://root:@172.16.6.125:4000" --changefeed-id="primary-to-secondary"
+    tiup cdc cli changefeed create --server=http://172.16.6.122:8300 --sink-uri="mysql://root:@172.16.6.125:4000" --changefeed-id="primary-to-secondary"
     ```

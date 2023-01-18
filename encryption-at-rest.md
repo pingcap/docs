@@ -58,7 +58,7 @@ TiKV は現在、 CTRモードで AES128、AES192、AES256、または SM4 (v6.3
 -   マスターキー。マスター キーはユーザーによって提供され、TiKV が生成するデータ キーを暗号化するために使用されます。マスター キーの管理は TiKV の外部にあります。
 -   データキー。データキーは TiKV によって生成され、データの暗号化に実際に使用されるキーです。
 
-同じマスター キーを TiKV の複数のインスタンスで共有できます。本番環境でマスター キーを提供する推奨される方法は、AWS KMS を使用することです。 AWS KMS を使用してカスタマー マスター キー (CMK) を作成し、設定ファイルで CMK キー ID を TiKV に提供します。 TiKV プロセスは、実行中に KMS CMK にアクセスする必要があります。これは、 [IAMロール](https://aws.amazon.com/iam/)を使用して行うことができます。 TiKV が KMS CMK へのアクセスに失敗すると、開始または再起動に失敗します。 [KMS](https://docs.aws.amazon.com/kms/index.html)と[IAMは](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html)の使用方法については、AWS のドキュメントを参照してください。
+同じマスター キーを TiKV の複数のインスタンスで共有できます。本番環境でマスター キーを提供する推奨される方法は、AWS KMS を使用することです。 AWS KMS を使用してカスタマー マスター キー (CMK) を作成し、設定ファイルで CMK キー ID を TiKV に提供します。 TiKV プロセスは、実行中に KMS CMK にアクセスする必要があります。これは、 [IAMロール](https://aws.amazon.com/iam/)を使用して行うことができます。 TiKV が KMS CMK へのアクセスに失敗すると、開始または再起動に失敗します。 [KMS](https://docs.aws.amazon.com/kms/index.html)と[IAM](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html)の使用方法については、AWS のドキュメントを参照してください。
 
 または、カスタム キーを使用する必要がある場合は、ファイル経由でマスター キーを提供することもできます。ファイルには、16 進文字列としてエンコードされた 256 ビット (または 32 バイト) のキーが含まれ、改行 (つまり`\n` ) で終わり、他に何も含まれていない必要があります。ただし、キーをディスクに永続化するとキーがリークするため、キー ファイルは RAM 内の`tempfs`に保存する場合にのみ適しています。
 
@@ -177,7 +177,7 @@ BRを使用して S3 にバックアップするときに S3 サーバー側の�
 ./br backup full --pd <pd-address> --storage "s3://<bucket>/<prefix>" --s3.sse aws:kms
 ```
 
-作成して所有したカスタム AWS KMS CMK を使用するには、さらに`--s3.sse-kms-key-id`を渡します。この場合、クラスター内のBRプロセスとすべての TiKV ノードの両方が KMS CMK に (たとえば AWS IAM経由で) アクセスする必要があり、KMS CMK は S3 バケットが使用されていたのと同じ AWS リージョンにある必要があります。バックアップを保存します。 KMS CMK へのアクセス権をBRプロセスおよび TiKV ノードに AWS IAM経由で付与することをお勧めします。 [IAMは](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html)の使用方法については、AWS のドキュメントを参照してください。例えば：
+作成して所有したカスタム AWS KMS CMK を使用するには、さらに`--s3.sse-kms-key-id`を渡します。この場合、クラスター内のBRプロセスとすべての TiKV ノードの両方が KMS CMK に (たとえば AWS IAM経由で) アクセスする必要があり、KMS CMK は S3 バケットが使用されていたのと同じ AWS リージョンにある必要があります。バックアップを保存します。 AWS IAMを介して KMS CMK to BRプロセスおよび TiKV ノードへのアクセスを許可することをお勧めします。 [IAM](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html)の使用方法については、AWS のドキュメントを参照してください。例えば：
 
 ```
 ./br backup full --pd <pd-address> --storage "s3://<bucket>/<prefix>" --s3.sse aws:kms --s3.sse-kms-key-id 0987dcba-09fe-87dc-65ba-ab0987654321

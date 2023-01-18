@@ -21,9 +21,9 @@ summary: Learn an example of how to build a TiDB application using Spring Boot.
 
 以下にTiDBクラスターの起動方法を紹介します。
 
-**TiDB Cloud Tier クラスターを使用する**
+**TiDB Cloud Serverless Tierクラスターを使用する**
 
-詳細な手順については、 [サーバーレス層クラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
+詳細な手順については、 [Serverless Tierクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
 
 **ローカル クラスターを使用する**
 
@@ -33,7 +33,7 @@ summary: Learn an example of how to build a TiDB application using Spring Boot.
 
 <CustomContent platform="tidb-cloud">
 
-[サーバーレス層クラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
+[Serverless Tierクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
 
 </CustomContent>
 
@@ -103,7 +103,7 @@ summary: Learn an example of how to build a TiDB application using Spring Boot.
 
 **スプリングブーツ**
 
--   3.0.0-M2
+-   3.0.1
 
 **プロジェクトのメタデータ**
 
@@ -188,9 +188,7 @@ summary: Learn an example of how to build a TiDB application using Spring Boot.
 
 ### ステップ 5.1 パラメータの変更 {#step-5-1-change-parameters}
 
-TiDB Cloud Tier クラスターを使用している場合は、 `application.yml` ( `src/main/resources`にあります) の`spring.datasource.url` 、 `spring.datasource.username` 、 `spring.datasource.password`パラメーターを変更します。
-
-{{< copyable "" >}}
+TiDB Cloud Serverless Tierクラスターを使用している場合は、 `application.yml` ( `src/main/resources`にあります) の`spring.datasource.url` 、 `spring.datasource.username` 、 `spring.datasource.password`パラメーターを変更します。
 
 ```yaml
 spring:
@@ -214,8 +212,6 @@ spring:
 
 したがって、パラメータは次のように設定する必要があります。
 
-{{< copyable "" >}}
-
 ```yaml
 spring:
   datasource:
@@ -234,15 +230,11 @@ spring:
 
 ターミナル セッションを開き、 `spring-jpa-hibernate`ディレクトリにいることを確認します。このディレクトリにまだ移動していない場合は、次のコマンドを使用してディレクトリに移動します。
 
-{{< copyable "" >}}
-
 ```shell
 cd <path>/tidb-example-java/spring-jpa-hibernate
 ```
 
 #### Make でビルドして実行する (推奨) {#build-and-run-with-make-recommended}
-
-{{< copyable "" >}}
 
 ```shell
 make
@@ -279,35 +271,33 @@ make
  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
   '  |____| .__|_| |_|_| |_\__, | / / / /
  =========|_|==============|___/=/_/_/_/
- :: Spring Boot ::             (v3.0.0-M1)
+ :: Spring Boot ::                (v3.0.1)
 
-2022-03-28 18:46:01.429  INFO 14923 --- [           main] com.pingcap.App                          : Starting App v0.0.1 using Java 17.0.2 on CheesedeMacBook-Pro.local with PID 14923 (/path/code/tidb-example-java/spring-jpa-hibernate/target/spring-jpa-hibernate-0.0.1.jar started by cheese in /path/code/tidb-example-java/spring-jpa-hibernate)
-2022-03-28 18:46:01.430  INFO 14923 --- [           main] com.pingcap.App                          : No active profile set, falling back to default profiles: default
-2022-03-28 18:46:01.709  INFO 14923 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2022-03-28 18:46:01.733  INFO 14923 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 20 ms. Found 1 JPA repository interfaces.
-2022-03-28 18:46:02.010  INFO 14923 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
-2022-03-28 18:46:02.016  INFO 14923 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2022-03-28 18:46:02.016  INFO 14923 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/10.0.16]
-2022-03-28 18:46:02.050  INFO 14923 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2022-03-28 18:46:02.051  INFO 14923 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 598 ms
-2022-03-28 18:46:02.143  INFO 14923 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2022-03-28 18:46:02.173  INFO 14923 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.0.0.CR2
-2022-03-28 18:46:02.262  WARN 14923 --- [           main] org.hibernate.orm.deprecation            : HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
-2022-03-28 18:46:02.324  INFO 14923 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2022-03-28 18:46:02.415  INFO 14923 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2575f671
-2022-03-28 18:46:02.416  INFO 14923 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2022-03-28 18:46:02.443  INFO 14923 --- [           main] SQL dialect                              : HHH000400: Using dialect: org.hibernate.dialect.TiDBDialect
+2023-01-05T14:06:54.427+08:00  INFO 22005 --- [           main] com.pingcap.App                          : Starting App using Java 17.0.2 with PID 22005 (/Users/cheese/IdeaProjects/tidb-example-java/spring-jpa-hibernate/target/classes started by cheese in /Users/cheese/IdeaProjects/tidb-example-java)
+2023-01-05T14:06:54.428+08:00  INFO 22005 --- [           main] com.pingcap.App                          : No active profile set, falling back to 1 default profile: "default"
+2023-01-05T14:06:54.642+08:00  INFO 22005 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-01-05T14:06:54.662+08:00  INFO 22005 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 17 ms. Found 1 JPA repository interfaces.
+2023-01-05T14:06:54.830+08:00  INFO 22005 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-01-05T14:06:54.833+08:00  INFO 22005 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-01-05T14:06:54.833+08:00  INFO 22005 --- [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.4]
+2023-01-05T14:06:54.865+08:00  INFO 22005 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-01-05T14:06:54.865+08:00  INFO 22005 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 421 ms
+2023-01-05T14:06:54.916+08:00  INFO 22005 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-01-05T14:06:54.929+08:00  INFO 22005 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.1.6.Final
+2023-01-05T14:06:54.969+08:00  WARN 22005 --- [           main] org.hibernate.orm.deprecation            : HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+2023-01-05T14:06:55.005+08:00  INFO 22005 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-01-05T14:06:55.074+08:00  INFO 22005 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5e905f2c
+2023-01-05T14:06:55.075+08:00  INFO 22005 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-01-05T14:06:55.089+08:00  INFO 22005 --- [           main] SQL dialect                              : HHH000400: Using dialect: org.hibernate.dialect.TiDBDialect
 Hibernate: drop table if exists player_jpa
 Hibernate: drop sequence player_jpa_id_seq
 Hibernate: create sequence player_jpa_id_seq start with 1 increment by 1
 Hibernate: create table player_jpa (id bigint not null, coins integer, goods integer, primary key (id)) engine=InnoDB
-2022-03-28 18:46:02.883  INFO 14923 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2022-03-28 18:46:02.888  INFO 14923 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2022-03-28 18:46:03.125  WARN 14923 --- [           main] org.hibernate.orm.deprecation            : HHH90000021: Encountered deprecated setting [javax.persistence.lock.timeout], use [jakarta.persistence.lock.timeout] instead
-2022-03-28 18:46:03.132  WARN 14923 --- [           main] org.hibernate.orm.deprecation            : HHH90000021: Encountered deprecated setting [javax.persistence.lock.timeout], use [jakarta.persistence.lock.timeout] instead
-2022-03-28 18:46:03.168  WARN 14923 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2022-03-28 18:46:03.307  INFO 14923 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
-2022-03-28 18:46:03.311  INFO 14923 --- [           main] com.pingcap.App                          : Started App in 2.072 seconds (JVM running for 2.272)
+2023-01-05T14:06:55.332+08:00  INFO 22005 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-01-05T14:06:55.335+08:00  INFO 22005 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-01-05T14:06:55.579+08:00  WARN 22005 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-01-05T14:06:55.710+08:00  INFO 22005 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-01-05T14:06:55.714+08:00  INFO 22005 --- [           main] com.pingcap.App                          : Started App in 1.432 seconds (process running for 1.654)
 ```
 
 出力ログは、起動中のアプリケーションの動作を示します。この例では、アプリケーションは[トムキャット](https://tomcat.apache.org/)を使用して**サーブレット**を開始し、ORM として Hibernate を使用し、データベース接続プールの実装として[HikariCP](https://github.com/brettwooldridge/HikariCP)を使用し、データベースの方言として`org.hibernate.dialect.TiDBDialect`を使用します。起動後、Hibernate は`player_jpa`テーブルと`player_jpa_id_seq`シーケンスを削除して再作成します。起動の最後に、アプリケーションはポート`8080`でリッスンし、HTTP サービスを外部に提供します。
@@ -370,8 +360,6 @@ curl を使用して直接リクエストを行うこともできます。
 
 プレーヤーを作成するには、 **POST**リクエストを`/player`エンドポイントに送信します。例えば：
 
-{{< copyable "" >}}
-
 ```shell
 curl --location --request POST 'http://localhost:8080/player/' --header 'Content-Type: application/json' --data-raw '[{"coins":100,"goods":20}]'
 ```
@@ -385,8 +373,6 @@ curl --location --request POST 'http://localhost:8080/player/' --header 'Content
 #### IDでプレイヤー情報を取得する {#get-player-information-by-id}
 
 プレイヤー情報を取得するには、 **GET**リクエストを`/player`エンドポイントに送信します。次のように、パス パラメーターでプレーヤーの`id`を指定する必要があります: `/player/{id}` 。次の例は、 `id` 1 のプレーヤーの情報を取得する方法を示しています。
-
-{{< copyable "" >}}
 
 ```shell
 curl --location --request GET 'http://localhost:8080/player/1'
@@ -405,8 +391,6 @@ curl --location --request GET 'http://localhost:8080/player/1'
 #### 制限付きでプレイヤー情報を一括取得 {#get-player-information-in-bulk-by-limit}
 
 プレイヤー情報を一括で取得するには、 **GET**リクエストを`/player/limit`エンドポイントに送信します。次のように、パス パラメーターでプレイヤーの総数を指定する必要があります: `/player/limit/{limit}` 。次の例は、最大 3 人のプレーヤーの情報を取得する方法を示しています。
-
-{{< copyable "" >}}
 
 ```shell
 curl --location --request GET 'http://localhost:8080/player/limit/3'
@@ -437,8 +421,6 @@ curl --location --request GET 'http://localhost:8080/player/limit/3'
 #### ページごとにプレイヤー情報を取得する {#get-player-information-by-page}
 
 ページ分割されたプレイヤー情報を取得するには、 **GET**リクエストを`/player/page`エンドポイントに送信します。追加のパラメーターを指定するには、URL パラメーターを使用する必要があります。次の例は、 `index`が 0 のページから情報を取得する方法を示しています。各ページには最大`size`人のプレイヤーが 2 人います。
-
-{{< copyable "" >}}
 
 ```shell
 curl --location --request GET 'http://localhost:8080/player/page?index=0&size=2'
@@ -492,8 +474,6 @@ curl --location --request GET 'http://localhost:8080/player/page?index=0&size=2'
 
 プレーヤーの数を取得するには、 **GET**リクエストを`/player/count`エンドポイントに送信します。
 
-{{< copyable "" >}}
-
 ```shell
 curl --location --request GET 'http://localhost:8080/player/count'
 ```
@@ -507,8 +487,6 @@ curl --location --request GET 'http://localhost:8080/player/count'
 #### プレイヤーの取引 {#player-trading}
 
 プレイヤー間のトランザクションを開始するには、 **PUT**リクエストを`/player/trade`エンドポイントに送信します。例えば：
-
-{{< copyable "" >}}
 
 ```shell
 curl --location --request PUT 'http://localhost:8080/player/trade' \
@@ -607,97 +585,62 @@ false
 
 `pom.xml`のファイルは、プロジェクトの Maven 依存関係、パッケージ化方法、およびパッケージ化情報を宣言する Maven 構成ファイルです。この構成ファイルを生成するプロセスを[同じ依存関係を持つ空のアプリケーションを作成する](#create-a-blank-application-with-the-same-dependency-optional)複製するか、プロジェクトに直接コピーすることができます。
 
-{{< copyable "" >}}
-
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-   <modelVersion>4.0.0</modelVersion>
-   <parent>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-parent</artifactId>
-      <version>3.0.0-M1</version>
-      <relativePath/> <!-- lookup parent from repository -->
-   </parent>
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.0.1</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
 
-   <groupId>com.pingcap</groupId>
-   <artifactId>spring-jpa-hibernate</artifactId>
-   <version>0.0.1</version>
-   <name>spring-jpa-hibernate</name>
-   <description>an example for spring boot, jpa, hibernate and TiDB</description>
+    <groupId>com.pingcap</groupId>
+    <artifactId>spring-jpa-hibernate</artifactId>
+    <version>0.0.1</version>
+    <name>spring-jpa-hibernate</name>
+    <description>an example for spring boot, jpa, hibernate and TiDB</description>
 
-   <properties>
-      <java.version>17</java.version>
-      <maven.compiler.source>17</maven.compiler.source>
-      <maven.compiler.target>17</maven.compiler.target>
-   </properties>
+    <properties>
+        <java.version>17</java.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+    </properties>
 
-   <dependencies>
-      <dependency>
-         <groupId>org.springframework.boot</groupId>
-         <artifactId>spring-boot-starter-data-jpa</artifactId>
-         <exclusions>
-            <exclusion>
-               <groupId>org.hibernate</groupId>
-               <artifactId>hibernate-core-jakarta</artifactId>
-            </exclusion>
-         </exclusions>
-      </dependency>
-
-      <dependency>
-         <groupId>org.springframework.boot</groupId>
-         <artifactId>spring-boot-starter-web</artifactId>
-      </dependency>
-
-      <dependency>
-         <groupId>mysql</groupId>
-         <artifactId>mysql-connector-java</artifactId>
-         <scope>runtime</scope>
-      </dependency>
-
-      <dependency>
-         <groupId>org.springframework.boot</groupId>
-         <artifactId>spring-boot-starter-test</artifactId>
-         <scope>test</scope>
-      </dependency>
-
-      <dependency>
-         <groupId>org.hibernate.orm</groupId>
-         <artifactId>hibernate-core</artifactId>
-         <version>6.0.0.CR2</version>
-      </dependency>
-   </dependencies>
-
-   <build>
-      <plugins>
-         <plugin>
+    <dependencies>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-maven-plugin</artifactId>
-         </plugin>
-      </plugins>
-   </build>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
 
-   <repositories>
-      <repository>
-         <id>spring-milestones</id>
-         <name>Spring Milestones</name>
-         <url>https://repo.spring.io/milestone</url>
-         <snapshots>
-            <enabled>false</enabled>
-         </snapshots>
-      </repository>
-   </repositories>
-   <pluginRepositories>
-      <pluginRepository>
-         <id>spring-milestones</id>
-         <name>Spring Milestones</name>
-         <url>https://repo.spring.io/milestone</url>
-         <snapshots>
-            <enabled>false</enabled>
-         </snapshots>
-      </pluginRepository>
-   </pluginRepositories>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 </project>
 ```
 
@@ -723,7 +666,7 @@ spring:
 
 -   `spring.datasource.url` : データベース接続の URL。
 -   `spring.datasource.username` : データベースのユーザー名。
--   `spring.datasource.password` : データベースのパスワード。空。このフィールドをコメントアウトするか削除する必要があります。
+-   `spring.datasource.password` : データベースのパスワード。空の。このフィールドをコメントアウトするか削除する必要があります。
 -   `spring.datasource.driver-class-name` : データベース ドライバー。 TiDB は MySQL と互換性があるため、mysql-connector-java ドライバー クラス`com.mysql.cj.jdbc`を使用します。
 -   `jpa.show-sql` : このフィールドが`true`に設定されている場合、JPA によって実行される SQL ステートメントが出力されます。
 -   `jpa.database-platform` : 選択されたデータベースの方言。アプリケーションは TiDB に接続するため、 **TiDB 方言**を選択します。このダイアレクトは Hibernate `6.0.0.Beta2`以降のバージョンでのみ使用できることに注意してください。そのため、該当する依存バージョンを選択してください。
@@ -732,8 +675,6 @@ spring:
 ### エントリーポイント {#entry-point}
 
 `App.java`ファイルはエントリ ポイントです。
-
-{{< copyable "" >}}
 
 ```java
 package com.pingcap;
@@ -761,8 +702,6 @@ public class App {
 #### エンティティ オブジェクト {#entity-objects}
 
 `PlayerBean.java`のファイルは、データベース内のテーブルに対応するエンティティ オブジェクトです。
-
-{{< copyable "" >}}
 
 ```java
 package com.pingcap.dao;
@@ -835,8 +774,6 @@ public class PlayerBean {
 
 データベースレイヤーを抽象化するために、Spring アプリケーションは[`Repository`](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories)インターフェース、または`Repository`のサブインターフェースを使用します。このインターフェイスは、テーブルなどのデータベース オブジェクトにマップされます。 JPA は、primay キーを使用して[`INSERT`](/sql-statements/sql-statement-insert.md)や[`SELECT`](/sql-statements/sql-statement-select.md)などのいくつかの事前構築済みメソッドを実装します。
 
-{{< copyable "" >}}
-
 ```java
 package com.pingcap.dao;
 
@@ -890,8 +827,6 @@ public interface PlayerRepository extends JpaRepository<PlayerBean, Long> {
 
 `getPlayerAndLock`では、注釈[`@Lock`](https://docs.spring.io/spring-data/jpa/docs/current/api/org/springframework/data/jpa/repository/Lock.html)を使用して悲観的ロックが適用されることを宣言します。その他のロック方法については、 [エンティティのロック](https://openjpa.apache.org/builds/2.2.2/apache-openjpa/docs/jpa_overview_em_locking.html)を参照してください。 `@Lock`注釈は`HQL`と共に使用する必要があります。そうしないと、エラーが発生します。ロックに SQL を直接使用する場合は、コメントの注釈を使用できます。
 
-{{< copyable "" >}}
-
 ```java
 @Query(value = "SELECT * FROM player_jpa WHERE id = :id FOR UPDATE", nativeQuery = true)
 ```
@@ -905,8 +840,6 @@ public interface PlayerRepository extends JpaRepository<PlayerBean, Long> {
 #### インターフェース {#interface}
 
 `PlayerService.java`ファイルは、クラスを直接記述するのではなく、論理インターフェイスを定義し、インターフェイスを実装します。これは、例をできるだけ実際の使用に近づけ、設計の[開閉原理](https://en.wikipedia.org/wiki/Open%E2%80%93closed_principle)を反映するためです。このインターフェースを省略して、実装クラスを依存関係クラスに直接注入することもできますが、この方法はお勧めしません。
-
-{{< copyable "" >}}
 
 ```java
 package com.pingcap.service;
@@ -971,8 +904,6 @@ public interface PlayerService {
 #### 実装 (重要) {#implementation-important}
 
 `PlayerService.java`ファイルは、すべてのデータ処理ロジックを含む`PlayerService`インターフェイスを実装します。
-
-{{< copyable "" >}}
 
 ```java
 package com.pingcap.service.impl;
@@ -1065,8 +996,6 @@ public class PlayerServiceImpl implements PlayerService {
 ### 外部 HTTP インターフェイス {#external-http-interface}
 
 `controller`パッケージは、HTTP インターフェイスを外部に公開し、 [残りの API](https://www.redhat.com/en/topics/api/what-is-a-rest-api#)経由でサービスにアクセスできるようにします。
-
-{{< copyable "" >}}
 
 ```java
 package com.pingcap.controller;

@@ -100,7 +100,7 @@ TiDB バージョン: 5.1.2
     -   破損したスナップショット ファイルが原因で発生する可能性のあるディスクがいっぱいになる問題を修正します[#10813](https://github.com/tikv/tikv/issues/10813)
     -   TiKV コプロセッサーのスローログを、リクエストの処理に費やされた時間のみを考慮するようにします[#10841](https://github.com/tikv/tikv/issues/10841)
     -   slogger スレッドが過負荷になり、キューがいっぱいになったときに、スレッドをブロックする代わりにログを削除します[#10841](https://github.com/tikv/tikv/issues/10841)
-    -   Coprocessor要求の処理がタイムアウトしたときに発生するpanicの問題を修正します[#10852](https://github.com/tikv/tikv/issues/10852)
+    -   コプロセッサー要求の処理がタイムアウトしたときに発生するpanicの問題を修正します[#10852](https://github.com/tikv/tikv/issues/10852)
     -   Titan を有効にして 5.0 より前のバージョンからアップグレードするときに発生する[#10842](https://github.com/tikv/tikv/pull/10842)panicの問題を修正します。
     -   新しいバージョンの TiKV が v5.0.x にロールバックできない問題を修正[#10842](https://github.com/tikv/tikv/pull/10842)
     -   TiKV が RocksDB にデータを取り込む前にファイルを削除する可能性がある問題を修正します[#10438](https://github.com/tikv/tikv/issues/10438)

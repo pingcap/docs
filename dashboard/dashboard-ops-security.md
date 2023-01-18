@@ -25,7 +25,7 @@ TiDB ダッシュボードにアクセスしてサインインするには、最
 
 > **ノート：**
 >
-> TiDB v6.5.0 (およびそれ以降) およびTiDB Operator v1.4.0 (およびそれ以降) は、TiDB ダッシュボードを Kubernetes 上の独立した Pod としてデプロイすることをサポートしています。 TiDB Operatorを使用して、この Pod の IP アドレスにアクセスし、TiDB ダッシュボードを起動できます。このポートは、PD の他の特権インターフェイスと通信しないため、外部から提供された場合、追加のファイアウォールは必要ありません。詳細については、 [TiDB Operatorで TiDB ダッシュボードを個別にデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/dev/get-started#deploy-tidb-dashboard-independently)を参照してください。
+> TiDB v6.5.0 (およびそれ以降) およびTiDB Operator v1.4.0 (およびそれ以降) は、TiDB ダッシュボードを Kubernetes 上の独立した Pod としてデプロイすることをサポートします。 TiDB Operatorを使用して、この Pod の IP アドレスにアクセスし、TiDB ダッシュボードを起動できます。このポートは、PD の他の特権インターフェイスと通信しないため、外部から提供された場合、追加のファイアウォールは必要ありません。詳細については、 [TiDB Operatorで TiDB ダッシュボードを個別にデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/dev/get-started#deploy-tidb-dashboard-independently)を参照してください。
 
 TiDB ダッシュボードは、デフォルトで[http://IP:2379/ダッシュボード/](http://IP:2379/dashboard/)に設定されている PD クライアント ポートを介してサービスを提供します。 TiDB ダッシュボードには ID 認証が必要ですが、PD クライアント ポートで実行される PD の他の特権インターフェイス ( [http://IP:2379/pd/api/v1/members](http://IP:2379/pd/api/v1/members)など) は ID 認証を必要とせず、特権操作を実行できます。したがって、PD クライアント ポートを外部ネットワークに直接公開することは非常に危険です。
 

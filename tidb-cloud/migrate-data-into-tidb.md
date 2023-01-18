@@ -5,6 +5,10 @@ summary: Learn how to migrate data from MySQL-compatible databases to TiDB Cloud
 
 # MySQL 互換データベースからデータを移行する {#migrate-data-from-mysql-compatible-databases}
 
+> **ノート：**
+>
+> データ移行機能を使用して、MySQL 互換データベースを移行することをお勧めします。 [データ移行を使用して MySQL 互換データベースをTiDB Cloudに移行する](/tidb-cloud/migrate-from-mysql-using-data-migration.md)を参照してください。
+
 TiDB は MySQL との互換性が高いです。データが自己ホスト型の MySQL インスタンスからのものであろうと、パブリック クラウドによって提供される RDS サービスからのものであろうと、MySQL 互換データベースから TiDB にデータをスムーズに移行できます。
 
 このドキュメントでは、 [Dumpling](/dumpling-overview.md)を使用して MySQL 互換データベースからデータをエクスポートする方法と、 [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview)論理インポート モードを使用してデータをTiDB Cloudにインポートする方法について説明します。
@@ -92,7 +96,16 @@ TiUPは TiDB エコシステムのパッケージ マネージャーであり、
 -   ソース データが Amazon S3 クラウド ストレージにある場合は、次の手順を実行します。
 
     1.  Amazon S3 アクセスを構成して、TiDB クラウドが Amazon S3 バケット内のソース データにアクセスできるようにします。詳細については、 [Amazon S3 アクセスを構成する](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access)を参照してください。
-    2.  [TiDB Cloudコンソール](https://tidbcloud.com/)から [**クラスター**] ページに移動し、ターゲット クラスターの名前をクリックして、独自の概要ページに移動します。 [<strong>データのインポート]</strong>をクリックし、[<strong>データのインポート]</strong>ページでインポート関連の情報を入力します。
+
+    2.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
+
+        > **ヒント：**
+        >
+        > 複数のプロジェクトがある場合は、[**クラスター]**ページの左側のナビゲーション ペインでターゲット プロジェクトに切り替えることができます。
+
+    3.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで [**インポート**] をクリックします。
+
+    4.  [**インポート**] ページで、右上隅の [<strong>データのインポート</strong>] をクリックし、 [ <strong>S3 から</strong>] を選択して、インポート関連の情報を入力します。
 
 -   ソース データがローカル ファイルにある場合は、次のいずれかを実行します。
 

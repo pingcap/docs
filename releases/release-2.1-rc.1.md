@@ -37,7 +37,7 @@ title: TiDB 2.1 RC1 Release Notes
     -   根本的な問題を回避するために分離レベル`Read Committed`を禁止する[#7211](https://github.com/pingcap/tidb/pull/7211)
     -   場合によっては`LTRIM` / `RTRIM` / `TRIM`の間違った結果を修正[#7291](https://github.com/pingcap/tidb/pull/7291)
     -   返される結果が 1 行を超えないことを`MaxOneRow`演算子が保証できない問題を修正し[#7375](https://github.com/pingcap/tidb/pull/7375) 。
-    -   範囲が多すぎるCoprocessor要求を分割します[#7454](https://github.com/pingcap/tidb/pull/7454)
+    -   範囲が多すぎるコプロセッサー要求を分割します[#7454](https://github.com/pingcap/tidb/pull/7454)
 -   統計
     -   統計の動的収集のメカニズムを最適化する[#6796](https://github.com/pingcap/tidb/pull/6796)
     -   `Auto Analyze`データ更新頻度が高いと動作しない問題を修正[#7022](https://github.com/pingcap/tidb/pull/7022)

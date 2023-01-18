@@ -19,7 +19,7 @@ TiDB アンシブル バージョン: 4.0.0-beta.1
     -   PD [#14750](https://github.com/pingcap/tidb/pull/14750) [#14303](https://github.com/pingcap/tidb/pull/14303) [#14830](https://github.com/pingcap/tidb/pull/14830)から読み取った構成アイテムの動的な変更または更新をサポート
 
 -   TiKV
-    -   `readpool.unify-read-pool`の構成項目 (デフォルトでは`True` ) を追加して、ポイント クエリがCoprocessorと同じスレッドを使用するかどうかを制御します[#6375](https://github.com/tikv/tikv/pull/6375) [#6401](https://github.com/tikv/tikv/pull/6401) [#6534](https://github.com/tikv/tikv/pull/6534) [#6582](https://github.com/tikv/tikv/pull/6582) [#6585](https://github.com/tikv/tikv/pull/6585) [#6593](https://github.com/tikv/tikv/pull/6593) [#6597](https://github.com/tikv/tikv/pull/6597) [#6677](https://github.com/tikv/tikv/pull/6677)
+    -   `readpool.unify-read-pool`の構成項目 (デフォルトでは`True` ) を追加して、ポイント クエリがコプロセッサーと同じスレッドを使用するかどうかを制御します[#6375](https://github.com/tikv/tikv/pull/6375) [#6401](https://github.com/tikv/tikv/pull/6401) [#6534](https://github.com/tikv/tikv/pull/6534) [#6582](https://github.com/tikv/tikv/pull/6582) [#6585](https://github.com/tikv/tikv/pull/6585) [#6593](https://github.com/tikv/tikv/pull/6593) [#6597](https://github.com/tikv/tikv/pull/6597) [#6677](https://github.com/tikv/tikv/pull/6677)
 
 -   PD
     -   HTTP API を最適化して構成マネージャーと互換性を持たせる[#2080](https://github.com/pingcap/pd/pull/2080)
@@ -55,7 +55,7 @@ TiDB アンシブル バージョン: 4.0.0-beta.1
 
 -   TiKV
     -   HTTP API [#6480](https://github.com/tikv/tikv/pull/6480)を介したステータス ポートからの構成アイテムの取得をサポート
-    -   Coprocessor[#6341](https://github.com/tikv/tikv/pull/6341)で`Chunk Encoder`のパフォーマンスを最適化する
+    -   コプロセッサー[#6341](https://github.com/tikv/tikv/pull/6341)で`Chunk Encoder`のパフォーマンスを最適化する
 
 -   PD
     -   ダッシュボード UI [#2086](https://github.com/pingcap/pd/pull/2086)を介したクラスター内のホットスポットの分布へのアクセスのサポート

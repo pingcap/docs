@@ -54,7 +54,7 @@ tiup dm patch <cluster-name> <package-path> [flags]
 
 ### -R, --role {#r-role}
 
--   置き換えるロールを指定します。このオプションの値は、ノードの役割のコンマ区切りリストです。ノードの役割は、 `[tiup dm display](/tiup/tiup-component-dm-display.md)`コマンドで返されるクラスター ステータス テーブルの 2 番目の列から取得できます。
+-   置き換える役割を指定します。このオプションの値は、ノードの役割のコンマ区切りリストです。ノードの役割は、 `[tiup dm display](/tiup/tiup-component-dm-display.md)`コマンドで返されるクラスター ステータス テーブルの 2 番目の列から取得できます。
 -   データ型: `STRING`
 -   このオプションが指定されていない場合、 TiUPはデフォルトで置換するすべてのロールを選択します。
 

@@ -9,7 +9,7 @@ summary: This page has instructions for exporting data from your TiDB cluster in
 
 TiDB はデータをロックしません。 TiDB から他のデータ プラットフォームにデータを移行できるようにしたい場合があります。 TiDB は MySQL との互換性が高いため、MySQL に適したエクスポート ツールはすべて TiDB にも使用できます。
 
-ツール[Dumpling](https://github.com/pingcap/dumpling)を使用してデータをエクスポートできます。
+ツール[Dumpling](/dumpling-overview.md)を使用してデータをエクスポートできます。
 
 1.  TiUPをダウンロードしてインストールします。
 
@@ -36,18 +36,43 @@ TiDB はデータをロックしません。 TiDB から他のデータ プラ�
     {{< copyable "" >}}
 
     ```shell
-    tiup install dumpling
+    tiup install dumpling:v6.5.0
     ```
 
 4.  TiDB からDumplingを使用してデータをエクスポートします。
 
-    {{< copyable "" >}}
+    [**接続**](/tidb-cloud/connect-via-standard-connection.md)ダイアログの接続文字列から、次の接続パラメーター`${tidb_endpoint}` 、 `${port}` 、および`${user}`を取得できます。
+
+    <SimpleTab>
+
+    <div label="Serverless Tier">
 
     ```shell
-    tiup dumpling -h ${tidb-endpoint} -P 3306 -u ${user} -F 67108864 -t 4 -o /path/to/export/dir
+    tiup dumpling:v6.5.0 -h ${tidb_endpoint} -P 4000 -u ${user} -p ${password} --ca=${ca_path} -F 67108864MiB -t 4 -o ${export_dir} --filetype sql
     ```
 
-    指定したデータベースのみをエクスポートする場合は、 `-B`を使用してデータベース名のコンマ区切りリストを指定します。
+    </div>
+     <div label="Dedicated Tier">
+
+    ```shell
+    tiup dumpling:v6.5.0 -h ${tidb_endpoint} -P ${port} -u ${user} -p ${password} -F 67108864MiB -t 4 -o ${export_dir} --filetype sql
+    ```
+
+    </div>
+     </SimpleTab>
+
+    オプションの説明は次のとおりです。
+
+    -   `-h` : TiDB クラスターのエンドポイント。
+    -   `-P` : TiDB クラスターのポート。
+    -   `-u` : TiDB クラスター ユーザー。
+    -   `-p` : TiDB クラスターのパスワード。
+    -   `-F` : 1 つのファイルの最大サイズ。
+    -   `--ca` : CA ルート パス。 [Serverless Tierへの TLS 接続](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md#root-certificate-default-path)を参照してください。
+    -   `-o` : エクスポート ディレクトリ。
+    -   `--filetype` : エクスポートされたファイルの種類。デフォルト値は`sql`です。 `sql`と`csv`から選択できます。
+
+    Dumplingオプションの詳細については、 [Dumplingのオプション一覧](/dumpling-overview.md#option-list-of-dumpling)を参照してください。
 
     最低限必要な権限は次のとおりです。
 
@@ -56,4 +81,4 @@ TiDB はデータをロックしません。 TiDB から他のデータ プラ�
     -   `LOCK TABLES`
     -   `REPLICATION CLIENT`
 
-    現在、 Dumplingは Mydumper 形式の出力のみをサポートしており、これは[TiDB Lightning](https://github.com/pingcap/tidb-lightning)を使用して MySQL 互換データベースに簡単に復元できます。
+Dumplingを使用してデータをエクスポートした後、 [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview)を使用して MySQL 互換データベースにデータをインポートできます。

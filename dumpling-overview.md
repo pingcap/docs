@@ -3,40 +3,9 @@ title: Dumpling Overview
 summary: Use the Dumpling tool to export data from TiDB.
 ---
 
-# Dumplingの概要 {#dumpling-overview}
+# Dumplingを使用してデータをエクスポートする {#use-dumpling-to-export-data}
 
-このドキュメントでは、データ エクスポート ツール - [Dumpling](https://github.com/pingcap/dumpling)を紹介します。 Dumplingは、TiDB/MySQL に保存されているデータを SQL または CSV データ ファイルとしてエクスポートし、論理的なフル バックアップまたはエクスポートの作成に使用できます。
-
-<CustomContent platform="tidb">
-
-レイテンシーの影響を受けない SST ファイル (キーと値のペア) のバックアップまたは増分データのバックアップについては、 [BR](/br/backup-and-restore-overview.md)を参照してください。増分データのリアルタイム バックアップについては、 [TiCDC](/ticdc/ticdc-overview.md)を参照してください。
-
-</CustomContent>
-
-> **ノート：**
->
-> PingCAP は以前、TiDB に固有の拡張機能を備えた[mydumper プロジェクト](https://github.com/maxbube/mydumper)のフォークを維持していました。このフォークはその後、Go で書き直された[Dumpling](/dumpling-overview.md)に置き換えられ、TiDB に固有のより多くの最適化をサポートしています。 mydumper の代わりにDumplingを使用することを強くお勧めします。
->
-> Mydumperの概要については、 [v4.0 Mydumper ドキュメント](https://docs.pingcap.com/tidb/v4.0/backup-and-restore-using-mydumper-lightning)を参照してください。
-
-## Mydumper と比較したDumplingの改善点 {#improvements-of-dumpling-compared-with-mydumper}
-
-1.  SQL や CSV など、複数の形式でのデータのエクスポートをサポート
-2.  データのフィルタリングを容易にする[テーブルフィルター](https://github.com/pingcap/tidb-tools/blob/master/pkg/table-filter/README.md)つの機能をサポート
-3.  Amazon S3 クラウド ストレージへのデータのエクスポートをサポートします。
-4.  TiDB に対してさらに最適化が行われます。
-    -   単一のTiDB SQLステートメントのメモリ制限の構成をサポート
-    -   TiDB v4.0.0 以降の TiDB GC 時間の自動調整をサポート
-    -   TiDB の隠し列`_tidb_rowid`を使用して、単一のテーブルからの同時データ エクスポートのパフォーマンスを最適化する
-    -   TiDB の場合、値[`tidb_snapshot`](/read-historical-data.md#how-tidb-reads-data-from-history-versions)を設定して、データ バックアップの時点を指定できます。これにより、一貫性を確保するために`FLUSH TABLES WITH READ LOCK`を使用する代わりに、バックアップの一貫性が確保されます。
-
-## Dumpling紹介 {#dumpling-introduction}
-
-Dumplingは Go で書かれています。 Github プロジェクトは[ピンキャップ/餃子](https://github.com/pingcap/dumpling)です。
-
-Dumplingの詳細な使用方法については、 `--help`オプションを使用するか、 [Dumplingのオプション一覧](#option-list-of-dumpling)を参照してください。
-
-Dumplingを使用する場合は、実行中のクラスターで export コマンドを実行する必要があります。このドキュメントでは、 `127.0.0.1:4000`のホストに TiDB インスタンスがあり、この TiDB インスタンスにはパスワードのない root ユーザーがいると想定しています。
+このドキュメントでは、データ エクスポート ツール - [Dumpling](https://github.com/pingcap/dumpling)を紹介します。 Dumplingは、TiDB/MySQL に保存されているデータを SQL または CSV データ ファイルとしてエクスポートし、論理的なフル バックアップまたはエクスポートの作成に使用できます。 Dumplingは、Amazon S3 へのデータのエクスポートもサポートしています。
 
 <CustomContent platform="tidb">
 
@@ -60,7 +29,38 @@ tiup install dumpling
 
 </CustomContent>
 
-## TiDB/MySQL からのデータのエクスポート {#export-data-from-tidb-mysql}
+Dumplingの詳細な使用方法については、 `--help`オプションを使用するか、 [Dumplingのオプション一覧](#option-list-of-dumpling)を参照してください。
+
+Dumplingを使用する場合は、実行中のクラスターで export コマンドを実行する必要があります。
+
+<CustomContent platform="tidb">
+
+TiDB は、必要に応じて選択して使用できる他のツールも提供します。
+
+-   レイテンシーの影響を受けない SST ファイル (キーと値のペア) のバックアップまたは増分データのバックアップについては、 [BR](/br/backup-and-restore-overview.md)を参照してください。
+-   増分データのリアルタイム バックアップについては、 [TiCDC](/ticdc/ticdc-overview.md)を参照してください。
+-   エクスポートされたすべてのデータは、 [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用して TiDB にインポートして戻すことができます。
+
+</CustomContent>
+
+> **ノート：**
+>
+> PingCAP は以前、TiDB に固有の拡張機能を備えた[mydumper プロジェクト](https://github.com/maxbube/mydumper)のフォークを維持していました。このフォークはその後、Go で書き直された[Dumpling](/dumpling-overview.md)に置き換えられ、TiDB に固有のより多くの最適化をサポートしています。 mydumper の代わりにDumplingを使用することを強くお勧めします。
+>
+> Mydumper の詳細については、 [v4.0 Mydumper ドキュメント](https://docs.pingcap.com/tidb/v4.0/backup-and-restore-using-mydumper-lightning)を参照してください。
+
+Mydumper と比較して、 Dumplingには次の改善点があります。
+
+-   SQL や CSV など、複数の形式でのデータのエクスポートをサポートします。
+-   データのフィルタリングを容易にする[テーブルフィルター](https://github.com/pingcap/tidb-tools/blob/master/pkg/table-filter/README.md)機能をサポートします。
+-   Amazon S3 クラウド ストレージへのデータのエクスポートをサポートします。
+-   TiDB に対してさらに最適化が行われます。
+    -   単一のTiDB SQLステートメントのメモリ制限の構成をサポートします。
+    -   TiDB v4.0.0 以降のバージョンの TiDB GC 時間の自動調整をサポートします。
+    -   TiDB の隠し列`_tidb_rowid`を使用して、単一のテーブルからの同時データ エクスポートのパフォーマンスを最適化します。
+    -   TiDB の場合、値[`tidb_snapshot`](/read-historical-data.md#how-tidb-reads-data-from-history-versions)を設定して、データ バックアップの時点を指定できます。これにより、一貫性を確保するために`FLUSH TABLES WITH READ LOCK`を使用する代わりに、バックアップの一貫性が確保されます。
+
+## TiDB または MySQL からデータをエクスポートする {#export-data-from-tidb-or-mysql}
 
 ### 必要な権限 {#required-privileges}
 
@@ -71,6 +71,8 @@ tiup install dumpling
 -   処理する
 
 ### SQL ファイルへのエクスポート {#export-to-sql-files}
+
+このドキュメントでは、127.0.0.1:4000 ホストに TiDB インスタンスがあり、この TiDB インスタンスにはパスワードのない root ユーザーがいると想定しています。
 
 Dumplingは、デフォルトでデータを SQL ファイルにエクスポートします。 `--filetype sql`フラグを追加して、データを SQL ファイルにエクスポートすることもできます。
 
@@ -100,7 +102,7 @@ dumpling \
 
 <CustomContent platform="tidb-cloud">
 
--   `-o`オプションは、ローカル ファイル パスまたは[外部ストレージの URL](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages)をサポートするストレージのエクスポート ディレクトリを指定します。
+-   `-o`オプションは、ローカル ファイル パスまたは[外部ストレージのURL](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages)をサポートするストレージのエクスポート ディレクトリを指定します。
 
 </CustomContent>
 
@@ -224,11 +226,11 @@ dumpling \
 
 ### データを Amazon S3 クラウド ストレージにエクスポートする {#export-data-to-amazon-s3-cloud-storage}
 
-v4.0.8 以降、 Dumplingはクラウド ストレージへのデータのエクスポートをサポートしています。データを Amazon の S3 バックエンド ストレージにバックアップする必要がある場合は、 `-o`パラメーターで S3 ストレージ パスを指定する必要があります。
+v4.0.8 以降、 Dumplingはクラウド ストレージへのデータのエクスポートをサポートします。データを Amazon S3 にバックアップする必要がある場合は、 `-o`パラメータで Amazon S3 ストレージ パスを指定する必要があります。
 
-指定されたリージョンに S3 バケットを作成する必要があります ( [Amazon ドキュメント - S3 バケットを作成する方法](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html)を参照)。バケットにフォルダーも作成する必要がある場合は、 [Amazon ドキュメント - フォルダーの作成](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-folder.html)を参照してください。
+指定されたリージョンに Amazon S3 バケットを作成する必要があります ( [Amazon ドキュメント - S3 バケットを作成する方法](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html)を参照)。バケットにフォルダーも作成する必要がある場合は、 [Amazon ドキュメント - フォルダーの作成](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-folder.html)を参照してください。
 
-S3 バックエンド ストレージへのアクセス権限を持つアカウントの`SecretKey`と`AccessKey`を環境変数としてDumplingノードに渡します。
+Amazon S3 バックエンド ストレージへのアクセス権限を持つアカウントの`SecretKey`と`AccessKey`を環境変数としてDumplingノードに渡します。
 
 {{< copyable "" >}}
 
@@ -326,7 +328,7 @@ Dumplingは、オプション`-B`を使用して特定のデータベースを�
 
 > **ノート：**
 >
-> ほとんどのシナリオでは、Dumplingの既定のデータ整合性オプションを調整する必要はありません (既定値は`auto`です)。
+> データ整合性オプションのデフォルト値は`auto`です。ほとんどのシナリオでは、 Dumplingの既定のデータ整合性オプションを調整する必要はありません。
 
 Dumplingは`--consistency <consistency level>`オプションを使用して、「一貫性保証」のためにデータをエクスポートする方法を制御します。一貫性のためにスナップショットを使用する場合、 `--snapshot`オプションを使用して、バックアップするタイムスタンプを指定できます。次のレベルの一貫性を使用することもできます。
 
@@ -355,7 +357,7 @@ ls -lh /tmp/test | awk '{print $5 "\t" $9}'
 190K  test.sbtest3.0.sql
 ```
 
-### TiDB の履歴データのスナップショットをエクスポートする {#export-historical-data-snapshot-of-tidb}
+### TiDB の履歴データのスナップショットをエクスポートする {#export-historical-data-snapshots-of-tidb}
 
 Dumplingは`--snapshot`オプション指定で特定の[tidb_snapshot](/read-historical-data.md#how-tidb-reads-data-from-history-versions)のデータをエクスポートできます。
 
@@ -378,7 +380,7 @@ Dumplingが TiDB から大きな単一テーブルをエクスポートしてい
 -   `--tidb-mem-quota-query`の値を`8589934592` (8 GB) 以下に減らします。 `--tidb-mem-quota-query`は、TiDB での単一のクエリ ステートメントのメモリ使用量を制御します。
 -   `--params "tidb_distsql_scan_concurrency=5"`パラメータを調整します。 [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency)は、TiDB でのスキャン操作の同時実行性を制御するセッション変数です。
 
-### 大容量データ（1TB以上）エクスポート時のTiDB GC設定 {#tidb-gc-settings-when-exporting-a-large-volume-of-data-more-than-1-tb}
+### 大量のデータ（1 TBを超える）をエクスポートする場合は、TiDB GCを設定します {#set-tidb-gc-when-exporting-a-large-volume-of-data-more-than-1-tb}
 
 TiDB からデータをエクスポートする (1 TB を超える) 場合、TiDB のバージョンが v4.0.0 以降で、かつDumplingが TiDB クラスターの PD アドレスにアクセスできる場合、 Dumplingは元のクラスターに影響を与えずに GC 時間を自動的に延長します。
 
@@ -397,18 +399,6 @@ SET GLOBAL tidb_gc_life_time = '720h';
 ```sql
 SET GLOBAL tidb_gc_life_time = '10m';
 ```
-
-<CustomContent platform="tidb">
-
-最後に、エクスポートされたすべてのデータは、 [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用して TiDB にインポートして戻すことができます。
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-最後に、エクスポートされたすべてのデータを TiDB にインポートして戻すことができます。
-
-</CustomContent>
 
 ## Dumplingのオプション一覧 {#option-list-of-dumpling}
 

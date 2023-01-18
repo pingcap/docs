@@ -34,7 +34,7 @@ TiDB バージョン: 4.0.2
     -   `REGEXP()`関数[#17581](https://github.com/pingcap/tidb/pull/17581)の照合順序をサポート
     -   `sql_select_limit`セッションとグローバル変数[#17604](https://github.com/pingcap/tidb/pull/17604)をサポート
     -   デフォルトで新しく追加されたパーティションのリージョン分割をサポート[#17665](https://github.com/pingcap/tidb/pull/17665)
-    -   `IF()` / `BITXOR()` / `BITNEG()` / `JSON_LENGTH()`関数のTiFlashCoprocessorへのプッシュをサポート[#17651](https://github.com/pingcap/tidb/pull/17651) [#17592](https://github.com/pingcap/tidb/pull/17592)
+    -   `IF()` / `BITXOR()` / `BITNEG()` / `JSON_LENGTH()`関数のTiFlashコプロセッサーへのプッシュをサポート[#17651](https://github.com/pingcap/tidb/pull/17651) [#17592](https://github.com/pingcap/tidb/pull/17592)
     -   `COUNT(DISTINCT)` [#18120](https://github.com/pingcap/tidb/pull/18120)のおおよその結果を計算する新しい集約関数`APPROX_COUNT_DISTINCT()`をサポートします
     -   TiFlashでの照合順序をサポートし、照合関連の関数をTiFlash [#17705](https://github.com/pingcap/tidb/pull/17705)にプッシュ
     -   `INFORMATION_SCHEMA.INSPECTION_RESULT`テーブルに`STATUS_ADDRESS`列を追加して、サーバー[#17695](https://github.com/pingcap/tidb/pull/17695)のステータス アドレスを示します。
@@ -57,10 +57,10 @@ TiDB バージョン: 4.0.2
 
 -   TiFlash
 
-    -   Coprocessorでの新しい集計機能`APPROX_COUNT_DISTINCT`のサポート
+    -   コプロセッサーでの新しい集計機能`APPROX_COUNT_DISTINCT`のサポート
     -   デフォルトで`rough set filter`機能を有効にする
     -   TiFlashを ARMアーキテクチャで実行できるようにする
-    -   Coprocessorでの`JSON_LENGTH`の関数のプッシュダウンをサポート
+    -   コプロセッサーでの`JSON_LENGTH`の関数のプッシュダウンをサポート
 
 -   ツール
 
@@ -76,7 +76,7 @@ TiDB バージョン: 4.0.2
 
     -   CM-Sketch が大量のメモリを消費する場合に、 Golangのメモリ割り当てによって引き起こされるクエリのレイテンシーを削減します[#17545](https://github.com/pingcap/tidb/pull/17545)
     -   TiKVサーバーが障害回復プロセスにある場合、クラスターの QPS 回復期間を短縮します[#17681](https://github.com/pingcap/tidb/pull/17681)
-    -   パーティション テーブル上の TiKV/ TiFlashCoprocessorへの集約関数のプッシュをサポート[#17655](https://github.com/pingcap/tidb/pull/17655)
+    -   パーティション テーブル上の TiKV/ TiFlashコプロセッサーへの集約関数のプッシュをサポート[#17655](https://github.com/pingcap/tidb/pull/17655)
     -   インデックスが等しい条件の行数推定の精度を向上させる[#17611](https://github.com/pingcap/tidb/pull/17611)
 
 -   TiKV

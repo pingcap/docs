@@ -25,7 +25,7 @@ tiup [flags] <component> [args...]      # Runs a component
 -   このオプションを有効にすると、指定したバイナリ ファイル パスが出力されます。
 
     -   `tiup --binary <component>`を実行すると、インストールされた最新の安定した`<component>`コンポーネントのパスが表示されます。 `<component>`がインストールされていない場合は、エラーが返されます。
-    -   `tiup --binary <component>:<version>`を実行すると、インストールされた`<component>`コンポーネントの`<version>`のパスが表示されます。この`<version>`が出力されない場合、エラーが返されます。
+    -   `tiup --binary <component>:<version>`を実行すると、インストールされた`<component>`コンポーネントの`<version>`のパスが出力されます。この`<version>`が出力されない場合、エラーが返されます。
 
 -   データ型: `BOOLEAN`
 
@@ -65,7 +65,7 @@ TiUPには複数のコマンドがあり、これらのコマンドには複数�
 -   [リスト](/tiup/tiup-command-list.md) :コンポーネントリストを表示します。
 -   [アンインストール](/tiup/tiup-command-uninstall.md) :コンポーネントをアンインストールします。
 -   [アップデート](/tiup/tiup-command-update.md) : インストールされたコンポーネントを更新します。
--   [状態](/tiup/tiup-command-status.md) :コンポーネントの実行ステータスを示します。
+-   [スターテス](/tiup/tiup-command-status.md) :コンポーネントの実行ステータスを示します。
 -   [綺麗](/tiup/tiup-command-clean.md) :コンポーネントのデータ ディレクトリを消去します。
 -   [鏡](/tiup/tiup-command-mirror.md) : ミラーを管理します。
 -   [テレメトリー](/tiup/tiup-command-telemetry.md) : テレメトリを有効または無効にします。
@@ -75,5 +75,5 @@ TiUPには複数のコマンドがあり、これらのコマンドには複数�
 
 ## コンポーネントリスト {#component-list}
 
--   [集まる](/tiup/tiup-component-cluster.md) : 本番環境で TiDB クラスターを管理します。
--   [dm](/tiup/tiup-component-dm.md) : 実稼働環境で TiDB データ移行 (DM) クラスターを管理します。
+-   [集まる](/tiup/tiup-component-cluster.md) :本番環境で TiDB クラスターを管理します。
+-   [dm](/tiup/tiup-component-dm.md) :本番環境で TiDB データ移行 (DM) クラスターを管理します。

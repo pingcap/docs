@@ -21,7 +21,7 @@ TiDB Cloudを使用すると、開発者と DBA は、トレーニングをほ�
 
 TiDB はオープンソース データベースであり、TiDB を自社のデータ センター、セルフマネージド クラウド環境、または 2 つのハイブリッド環境でオンプレミスで実行したい組織にとって最適なオプションです。
 
-TiDB Cloudは、TiDB のサービスとしての完全に管理されたクラウド データベースです。使いやすい Web ベースの管理コンソールを備えており、ミッション クリティカルな運用環境の TiDB クラスターを管理できます。
+TiDB Cloudは、TiDB のサービスとしての完全に管理されたクラウド データベースです。使いやすい Web ベースの管理コンソールを備えており、ミッション クリティカルな本番環境の TiDB クラスターを管理できます。
 
 ### TiDB Cloudは MySQL と互換性がありますか? {#is-tidb-cloud-compatible-with-mysql}
 
@@ -41,7 +41,7 @@ TiDB Cloudは現在、Amazon Web Services と Google Cloud で利用できます
 
 ### TiDB Cloudでサポートされている TiDB のバージョンは何ですか? {#what-versions-of-tidb-are-supported-on-tidb-cloud}
 
-現在サポートされている TiDB のバージョンについては、 [TiDB Cloudリリースノート](/tidb-cloud/release-notes-2022.md)を参照してください。
+現在サポートされている TiDB のバージョンについては、 [TiDB Cloudリリースノート](/tidb-cloud/tidb-cloud-release-notes.md)を参照してください。
 
 ### TiDB またはTiDB Cloudを本番環境で使用している企業は? {#what-companies-are-using-tidb-or-tidb-cloud-in-production}
 
@@ -61,15 +61,15 @@ TiDB Cloudについて学ぶ最善の方法は、ステップバイステップ�
 
 ## アーキテクチャに関するよくある質問 {#architecture-faqs}
 
-### TiDB クラスターにはさまざまなコンポーネントがあります。 PD、TiDB、TiKV、 TiFlashノードとは何ですか? {#there-are-different-components-in-my-tidb-cluster-what-are-pd-tidb-tikv-and-tiflash-nodes}
-
-PD、配置Driverは、TiDB クラスター全体の「頭脳」であり、クラスターのメタデータを格納します。 TiKV ノードからリアルタイムで報告されるデータ配信状態に従って、特定の TiKV ノードにデータ スケジューリング コマンドを送信します。
+### TiDB クラスターにはさまざまなコンポーネントがあります。 TiDB、TiKV、およびTiFlashノードとは何ですか? {#there-are-different-components-in-my-tidb-cluster-what-are-tidb-tikv-and-tiflash-nodes}
 
 TiDB は、TiKV またはTiFlashストアから返されたクエリからのデータを集約する SQL コンピューティングレイヤーです。 TiDB は水平方向にスケーラブルです。 TiDB ノードの数を増やすと、クラスターが処理できる同時クエリの数が増えます。
 
 TiKV は、OLTP データの保存に使用されるトランザクション ストアです。 TiKV のすべてのデータは、複数のレプリカ (デフォルトでは 3 つのレプリカ) で自動的に維持されるため、TiKV はネイティブの高可用性を備え、自動フェイルオーバーをサポートします。 TiKV は水平方向にスケーラブルです。トランザクション ストアの数を増やすと、OLTP スループットが向上します。
 
 TiFlashは、トランザクション ストア (TiKV) からリアルタイムでデータをレプリケートし、リアルタイム OLAP ワークロードをサポートする分析ストレージです。 TiKV とは異なり、 TiFlashはデータを列に格納して分析処理を高速化します。 TiFlashは水平方向にもスケーラブルです。 TiFlashノードを増やすと、OLAP ストレージとコンピューティング容量が増加します。
+
+PD、配置Driverは、TiDB クラスター全体の「頭脳」であり、クラスターのメタデータを格納します。 TiKV ノードからリアルタイムで報告されるデータ配信状態に従って、特定の TiKV ノードにデータ スケジューリング コマンドを送信します。 TiDB Cloudでは各クラスタの PD は PingCAP で管理されており、見ることも維持することもできません。
 
 ### TiDB は TiKV ノード間でデータをどのように複製しますか? {#how-does-tidb-replicate-data-between-the-tikv-nodes}
 
@@ -93,6 +93,12 @@ Software as a Service (SaaS) プロバイダーとして、当社はデータ �
 
 TiDB は MySQL との互換性が高いです。データが自己ホスト型の MySQL インスタンスからのものであろうと、パブリック クラウドによって提供される RDS サービスからのものであろうと、MySQL 互換データベースから TiDB にデータをスムーズに移行できます。詳細については、 [MySQL 互換データベースからデータを移行する](/tidb-cloud/migrate-data-into-tidb.md)を参照してください。
 
+## バックアップと復元FAQ {#backup-and-restore-faq}
+
+### TiDB Cloudは増分バックアップをサポートしていますか? {#does-tidb-cloud-support-incremental-backups}
+
+いいえ。クラスターのバックアップ保持期間内の任意の時点にデータを復元する必要がある場合は、次のことができ[PITR (ポイントインタイム リカバリ) を使用する](/tidb-cloud/backup-and-restore.md#automatic-backup) 。
+
 ## HTAP に関するよくある質問 {#htap-faqs}
 
 ### TiDB Cloud の HTAP 機能を利用するにはどうすればよいですか? {#how-do-i-make-use-of-tidb-cloud-s-htap-capabilities}
@@ -113,13 +119,65 @@ TiDB は MySQL との互換性が高いです。データが自己ホスト型�
 
 ## セキュリティに関するよくある質問 {#security-faqs}
 
-### TiDB はどのようにしてデータのプライバシーを保護し、セキュリティを確保しますか? {#how-does-tidb-protect-data-privacy-and-ensure-security}
+### TiDB Cloudは安全ですか? {#is-tidb-cloud-secure}
 
-Transport Layer Security (TLS) と透過的データ暗号化 (TDE) は、保存時の暗号化のために含まれています。 2 つの異なるネットワーク プレーンがあります。TiDBサーバーへのアプリケーションとデータ通信用のプレーンです。証明書の検証用のサブジェクト代替名と内部通信用の TLS コンテキストを比較するための拡張構文が含まれています。
+TiDB Cloudでは、保管中のすべてのデータが暗号化され、すべてのネットワーク トラフィックが Transport Layer Security (TLS) を使用して暗号化されます。
 
-### VPC でTiDB Cloudを実行できますか? {#can-tidb-cloud-run-in-our-vpc}
+-   保管中のデータの暗号化は、暗号化されたストレージ ボリュームを使用して自動化されます。
+-   クライアントとクラスター間で転送中のデータの暗号化は、 TiDB Cloud WebサーバーTLS と TiDB クラスター TLS を使用して自動化されます。
 
-いいえTiDB Cloudは PingCAP VPC で実行されますが、データとトラフィックはデフォルトで暗号化されます。したがって、データのプライバシーの問題について心配する必要はありません。
+### TiDB Cloudはどのように私のビジネス データを暗号化しますか? {#how-does-tidb-cloud-encrypt-my-business-data}
+
+TiDB Cloudは、データベース データやバックアップ データを含む保存中のビジネス データに対して、デフォルトでストレージ ボリューム暗号化を使用します。 TiDB Cloudでは、転送中のデータに TLS 暗号化が必要であり、TiDB、PD、TiKV、およびTiFlash間のデータベース クラスター内のデータにもコンポーネント レベルの TLS 暗号化が必要です。
+
+TiDB Cloudでのビジネス データの暗号化に関するより具体的な情報については、 [TiDB Cloudのサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
+
+### TiDB Cloudはどのバージョンの TLS をサポートしていますか? {#what-versions-of-tls-does-tidb-cloud-support}
+
+TiDB Cloudは TLS 1.2 または TLS 1.3 をサポートしています。
+
+### VPC でTiDB Cloudを実行できますか? {#can-i-run-tidb-cloud-in-my-vpc}
+
+いいえTiDB Cloudは Database-as-a-Service (DBaaS) であり、 TiDB Cloud VPC でのみ実行されます。クラウド コンピューティングのマネージド サービスであるTiDB Cloudは、物理ハードウェアのセットアップやソフトウェアのインストールを必要とせずに、データベースへのアクセスを提供します。
+
+### 私の TiDB クラスターは安全ですか? {#is-my-tidb-cluster-secure}
+
+TiDB Cloudでは、必要に応じてDedicated TierクラスターまたはServerless Tier Tier クラスターのいずれかを使用できます。
+
+Dedicated Tierクラスターの場合、 TiDB Cloudは次の手段でクラスターのセキュリティを確保します。
+
+-   クラスターごとに独立したサブアカウントと VPC を作成します。
+-   外部接続を分離するためのファイアウォール ルールを設定します。
+-   転送中のクラスター データを暗号化するために、クラスターごとにサーバー側の TLS 証明書とコンポーネント レベルの TLS 証明書を作成します。
+-   各クラスターに IP アクセス ルールを提供して、許可されたソース IP アドレスのみがクラスターにアクセスできるようにします。
+
+Serverless Tierクラスターの場合、 TiDB Cloudは次の手段でクラスターのセキュリティを確保します。
+
+-   クラスタごとに独立したサブアカウントを作成します。
+-   外部接続を分離するためのファイアウォール ルールを設定します。
+-   転送中のクラスター データを暗号化するためのクラスターサーバーTLS 証明書を提供します。
+
+### TiDB クラスター内のデータベースに接続するにはどうすればよいですか? {#how-do-i-connect-to-my-database-in-a-tidb-cluster}
+
+Dedicated Tierクラスターの場合、クラスターに接続する手順は次のように簡略化されます。
+
+1.  ネットワークを承認します。
+2.  データベース ユーザーとログイン資格情報を設定します。
+3.  クラスターサーバーの TLS をダウンロードして構成します。
+4.  SQL クライアントを選択し、 TiDB Cloud UI に表示される自動生成された接続文字列を取得してから、その文字列を使用して SQL クライアントを介してクラスターに接続します。
+
+Serverless Tierクラスターの場合、クラスターに接続する手順は次のように簡略化されます。
+
+1.  データベース ユーザーとログイン資格情報を設定します。
+2.  SQL クライアントを選択し、 TiDB Cloud UI に表示される自動生成された接続文字列を取得してから、その文字列を使用して SQL クライアントを介してクラスターに接続します。
+
+詳細については、 [TiDBクラスタに接続する](/tidb-cloud/connect-to-tidb-cluster.md)を参照してください。
+
+### データベース クラスタのビジネス データにアクセスできるのは誰ですか? {#who-has-access-to-my-business-data-of-a-database-cluster}
+
+自分の TiDB クラスター内のテーブル データにアクセスできるのは自分だけです。 TiDB Cloudサポートは、TiDB クラスター内のデータに直接アクセスすることはできません。唯一の例外は、製品を改善し、クラスター操作の問題を解決する必要がある場合、 TiDB Cloudサポートは、内部の一時的な承認を提供した後、クラスター操作データにアクセスできることです。すべての承認とアクセスの記録は、PCI-DSS、SOC2、ISO27701 などのサードパーティの監査機関によって毎年監査されます。
+
+TiDB Cloudの運用データは[TiDB Cloudのプライバシー ポリシー](https://www.pingcap.com/privacy-policy/)と[TiDB Cloudデータ処理契約](https://www.pingcap.com/legal/data-processing-agreement-for-tidb-cloud-services/)に記載されています。
 
 ## サポートFAQ {#support-faq}
 

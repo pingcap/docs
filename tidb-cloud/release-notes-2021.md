@@ -40,7 +40,7 @@ summary: Learn about the release notes of TiDB Cloud in 2021.
 
 ## 2021 年 11 月 8 日 {#november-8-2021}
 
--   Launch [Developer Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier) TiDB Cloudの 1 年間の無料トライアルを提供します。
+-   Launch [Developer Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) TiDB Cloudの 1 年間の無料トライアルを提供します。
 
     各Developer Tierクラスターはフル機能の TiDB クラスターであり、以下が付属しています。
 

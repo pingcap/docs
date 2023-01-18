@@ -1,134 +1,45 @@
 ---
 title: Connect to Your TiDB Cluster
-summary: Connect to your TiDB cluster via a SQL client or SQL shell.
+summary: Learn how to connect to your TiDB cluster via different methods.
 ---
 
 # TiDBクラスタに接続する {#connect-to-your-tidb-cluster}
 
-TiDB クラスターがTiDB Cloudに作成されたら、次のいずれかの方法を使用して TiDB クラスターに接続できます。 SQL クライアントを介して、またはTiDB Cloudコンソールの SQL シェルを介してすばやくクラスターにアクセスできます。
+TiDB クラスターがTiDB Cloudに作成されたら、TiDB クラスターに接続できます。 Serverless TierクラスターまたはDedicated Tierクラスターのどちらを使用しているかに応じて、次のように使用可能な接続方法を見つけることができます。
 
--   SQL クライアント経由で接続する
+## Serverless Tier {#serverless-tier}
 
-    -   [標準接続で接続](#connect-via-standard-connection) : 標準接続では、トラフィック フィルターを使用してパブリック エンドポイントが公開されるため、ラップトップから TiDB クラスターに接続できます。 TLS を使用して TiDB クラスターに接続できます。これにより、アプリケーションから TiDB クラスターへのデータ転送のセキュリティが保証されます。
-    -   [プライベート エンドポイント経由で接続する](#connect-via-private-endpoint-recommended) : プライベート エンドポイント接続は、VPC 内のクライアントが AWS PrivateLink を介してサービスに安全にアクセスできるようにするプライベート エンドポイントを提供します。これにより、ネットワーク管理が簡素化されたデータベース サービスへの高度に安全な一方向アクセスが提供されます。プライベート エンドポイントを使用して[サーバーレス階層クラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier)に接続することはできないことに注意してください。
-    -   [VPC ピアリング経由で接続する](#connect-via-vpc-peering) :レイテンシーを短縮してセキュリティを強化したい場合は、VPC ピアリングをセットアップし、クラウド アカウントの対応するクラウド プロバイダーの VM インスタンスを使用してプライベート エンドポイント経由で接続します。 VPC ピアリングを使用して[サーバーレス階層クラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier)に接続することはできません。
+Serverless Tierクラスターの場合、標準接続またはTiDB Cloudコンソールの Chat2Query (ベータ) を介してクラスターに接続できます。
 
-<!---->
+-   [標準接続で接続](/tidb-cloud/connect-via-standard-connection.md#serverless-tier)
 
--   [SQL シェル経由で接続する](#connect-via-sql-shell) : TiDB SQLを試して、TiDB と MySQL との互換性をすばやくテストするか、ユーザー権限を管理します
+    標準接続は、トラフィック フィルターを使用してパブリック エンドポイントを公開するため、ラップトップから SQL クライアント経由で TiDB クラスターに接続できます。
 
-> **ヒント：**
->
-> 本番環境では、 [プライベート エンドポイント](#connect-via-private-endpoint-recommended)接続を使用することをお勧めします。
+    Serverless Tierのみ[TLS 接続をサポート](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md) 。アプリケーションから TiDB クラスターへのデータ転送のセキュリティを確保します。
 
-## 標準接続で接続 {#connect-via-standard-connection}
+-   [Chat2Query (ベータ版) 経由で接続する](/tidb-cloud/explore-data-with-chat2query.md)
 
-<SimpleTab>
-<div label="Serverless Tier">
+    TiDB Cloudは人工知能 (AI) を利用しています。 [TiDB Cloudコンソール](https://tidbcloud.com/)の AI 搭載 SQL エディターである Chat2Query (ベータ版) を使用して、データの価値を最大化できます。
 
-標準接続を介して Serverless Tier クラスターに接続するには、次の手順を実行します。
+    Chat2Query では、単に`--`を入力してから命令を入力し、AI に SQL クエリを自動的に生成させるか、SQL クエリを手動で記述してから、ターミナルを使用せずにデータベースに対して SQL クエリを実行することができます。クエリ結果をテーブルで直感的に検索し、クエリ ログを簡単に確認できます。
 
-1.  [**クラスター]**ページに移動します。
+## Dedicated Tier {#dedicated-tier}
 
-2.  クラスターを見つけて、クラスター領域の右上隅にある [**接続**] をクリックします。接続ダイアログボックスが表示されます。
+Dedicated Tierクラスターの場合、次のいずれかの方法でクラスターに接続できます。
 
-3.  ダイアログの [ **SQL クライアントと接続**] で、希望する接続方法のタブをクリックし、接続文字列を使用してクラスターに接続します。
+-   [標準接続で接続](/tidb-cloud/connect-via-standard-connection.md#dedicated-tier)
 
-    > **ノート：**
-    >
-    > -   Serverless Tier クラスターに接続するときは、ユーザー名にクラスターのプレフィックスを含め、名前を引用符で囲む必要があります。詳細については、 [ユーザー名のプレフィックス](/tidb-cloud/select-cluster-tier.md#user-name-prefix)を参照してください。
-    > -   Serverless Tier クラスターは TLS 接続のみをサポートします。詳細については、 [サーバーレス層クラスターへのセキュリティ接続](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md)を参照してください。
+    標準接続は、トラフィック フィルターを使用してパブリック エンドポイントを公開するため、ラップトップから SQL クライアント経由で TiDB クラスターに接続できます。 TLS を使用して TiDB クラスターに接続できます。これにより、アプリケーションから TiDB クラスターへのデータ転送のセキュリティが保証されます。
 
-</div>
+-   [プライベート エンドポイント経由で接続する](/tidb-cloud/set-up-private-endpoint-connections.md) (推奨)
 
-<div label="Dedicated Tier">
+    プライベート エンドポイント接続は、VPC 内の SQL クライアントが AWS PrivateLink を介してサービスに安全にアクセスできるようにするプライベート エンドポイントを提供します。これにより、ネットワーク管理が簡素化されたデータベース サービスへの高度に安全な一方向アクセスが提供されます。
 
-標準接続を介してDedicated Tierクラスターに接続するには、次の手順を実行します。
+-   [VPC ピアリング経由で接続する](/tidb-cloud/set-up-vpc-peering-connections.md)
 
-1.  [**クラスター]**ページに移動します。
+    レイテンシーを下げてセキュリティを強化したい場合は、VPC ピアリングをセットアップし、クラウド アカウントの対応するクラウド プロバイダーの VM インスタンスを使用して、プライベート エンドポイント経由で接続します。
 
-2.  クラスターを見つけて、クラスター領域の右上隅にある [**接続**] をクリックします。接続ダイアログボックスが表示されます。
-
-3.  クラスターのトラフィック フィルターを作成します。トラフィック フィルターは、SQL クライアント経由でTiDB Cloudにアクセスできる IP と CIDR アドレスのリストです。
-
-    トラフィック フィルタがすでに設定されている場合は、次のサブステップをスキップしてください。トラフィック フィルタが空の場合は、次のサブステップに従って追加します。
-
-    1.  ボタンの 1 つをクリックして、いくつかのルールをすばやく追加します。
-
-        -   **現在の IP アドレスを追加**
-        -   **どこからでもアクセスを許可**
-
-    2.  新しく追加された IP アドレスまたは CIDR 範囲のオプションの説明を入力します。
-
-    3.  [**フィルターの作成]**をクリックして、変更を確認します。
-
-4.  ダイアログの [**ステップ 2: TiDB クラスター CA**をダウンロードする] で、[TiDB クラスターへの TLS 接続用に<strong>TiDB クラスター CA をダウンロード</strong>する] をクリックします。 TiDB クラスター CA は、デフォルトで TLS 1.2 バージョンをサポートします。
-
-    > **ノート：**
-    >
-    > -   TiDB クラスター CA は、 Dedicated Tierクラスターでのみ使用できます。
-    > -   現在、 TiDB Cloudは、MySQL、MyCLI、JDBC、Python、Go、および Node.js の接続方法の接続文字列とサンプル コードのみを提供しています。
-
-5.  ダイアログの [**ステップ 3: SQL クライアントに接続**する] で、希望する接続方法のタブをクリックし、タブの接続文字列とサンプル コードを参照してクラスターに接続します。
-
-    接続文字列の`--ssl-ca`オプションの引数として、ダウンロードした CA ファイルのパスを使用する必要があることに注意してください。
-
-</div>
-</SimpleTab>
-
-## プライベート エンドポイント経由で接続する (推奨) {#connect-via-private-endpoint-recommended}
-
-> **ノート：**
->
-> プライベート エンドポイントを使用して[サーバーレス階層クラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier)に接続できないため、この方法はサーバーレス層クラスターでは機能しません。
-
-プライベート エンドポイント経由で TiDB クラスターに接続するには、次の手順を実行します。
-
-1.  TiDB Cloudコンソールで、[**クラスター**] ページに移動します。
-
-2.  クラスターを見つけて、クラスター領域の右上隅にある [**接続**] をクリックします。接続ダイアログボックスが表示されます。
-
-3.  [**プライベート エンドポイント**] タブを選択します。
-
-4.  プライベート エンドポイントを設定します。 [プライベート エンドポイント接続のセットアップ](/tidb-cloud/set-up-private-endpoint-connections.md#set-up-a-private-endpoint-with-aws)を参照してください。
-
-    プライベート エンドポイントを作成した場合は、 **[ Step 1: Create Private Endpoint ]**の下に表示されます。
-
-5.  [**ステップ 2: アプリケーションを接続する**] で、希望する接続方法のタブをクリックし、接続文字列を使用してクラスターに接続します。接続文字列のプレースホルダー`<cluster_endpoint_name>:<port>`は、実際の値に自動的に置き換えられます。
-
-> **ヒント：**
->
-> クラスターに接続できない場合、AWS の VPC エンドポイントのセキュリティ グループが正しく設定されていない可能性があります。解決策については、 [このFAQ](/tidb-cloud/set-up-private-endpoint-connections.md#troubleshooting)を参照してください。
-
-## VPC ピアリング経由で接続する {#connect-via-vpc-peering}
-
-> **ノート：**
->
-> VPC ピアリングを使用して[サーバーレス階層クラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier)に接続できないため、この方法は Serverless Tier クラスターでは機能しません。
-
-VPC ピアリング経由で TiDB クラスターに接続するには、次の手順を実行します。
-
-1.  [**クラスター]**ページに移動します。
-
-2.  クラスターを見つけ、クラスター領域の右上隅にある [**接続**] をクリックし、接続ダイアログで [ <strong>VPC ピアリング</strong>] タブを選択します。
-
-3.  VPC ピアリングをセットアップします。詳細は[VPC ピアリングを設定する](/tidb-cloud/set-up-vpc-peering-connections.md)を参照してください。
-
-4.  [**エンドポイントを取得]**をクリックして、数分間待ちます。次に、接続コマンドがダイアログに表示されます。
-
-5.  ダイアログ ボックスの [**ステップ 2: SQL クライアントに接続**する] で、希望する接続方法のタブをクリックし、接続文字列を使用してクラスターに接続します。
-
-## SQL シェル経由で接続 {#connect-via-sql-shell}
-
-SQL シェルを使用して TiDB クラスターに接続するには、次の手順を実行します。
-
-1.  [**クラスター]**ページに移動します。
-
-2.  クラスターを見つけて、クラスター領域の右上隅にある [**接続**] をクリックし、接続ダイアログで [ <strong>Web SQL シェル</strong>] タブを選択します。
-
-3.  [ **SQL シェルを開く]**をクリックします。
-
-4.  プロンプトが表示された**TiDB パスワード**行で、現在のクラスターのルート パスワードを入力します。次に、アプリケーションが TiDB クラスターに接続されます。
+-   [SQL シェル経由で接続](/tidb-cloud/connect-via-sql-shell.md) : TiDB SQLを試して、TiDB と MySQL との互換性をすばやくテストするか、ユーザー権限を管理します。
 
 ## 次は何ですか {#what-s-next}
 

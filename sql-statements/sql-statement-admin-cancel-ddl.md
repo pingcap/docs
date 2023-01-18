@@ -42,4 +42,4 @@ ADMIN CANCEL DDL JOBS job_id [, job_id] ...;
 
 ## こちらもご覧ください {#see-also}
 
--   [`ADMIN SHOW DDL [JOBS|QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)
+-   [`ADMIN SHOW DDL [JOBS|JOB QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)

@@ -26,7 +26,7 @@ Gitpod は、コードを直接作成する開発環境向けのオープンソ�
 
 [クイックスタート](#quick-start)のステップを完了した後、Gitpod がワークスペースをセットアップするのにしばらく時間がかかります。
 
-例として[スプリング ブート Web](/develop/dev-guide-sample-application-spring-boot.md)のアプリケーションを取り上げます。 `https://gitpod.io/#targetFile=spring-jpa-hibernate_Makefile,targetMode=spring-jpa-hibernate/https://github.com/pingcap-inc/tidb-example-java` URL で新しいワークスペースを作成できます。
+例として[スプリング ブート ウェブ](/develop/dev-guide-sample-application-spring-boot.md)のアプリケーションを取り上げます。 `https://gitpod.io/#targetFile=spring-jpa-hibernate_Makefile,targetMode=spring-jpa-hibernate/https://github.com/pingcap-inc/tidb-example-java` URL で新しいワークスペースを作成できます。
 
 その後、次のようなページが表示されます。
 

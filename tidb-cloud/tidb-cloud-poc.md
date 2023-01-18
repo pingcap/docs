@@ -13,7 +13,7 @@ TiDB Cloudは、サービスとしてのデータベース (DBaaS) 製品であ�
 
 PoC に興味がある場合は、始める前に<a href="mailto:tidbcloud-support@pingcap.com">PingCAP</a>にお気軽にお問い合わせください。サポート チームは、テスト計画の作成を支援し、PoC 手順をスムーズに進めることができます。
 
-または、簡単な評価のためにTiDB Cloudに慣れる[サーバーレス層を作成する](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster)こともできます。サーバーレス層には[特別利用規約](/tidb-cloud/select-cluster-tier.md#serverless-tier-special-terms-and-conditions)があることに注意してください。
+または、簡単な評価のためにTiDB Cloudに慣れる[Serverless Tierを作成する](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster)こともできます。Serverless Tierには[特別利用規約](/tidb-cloud/select-cluster-tier.md#serverless-tier-special-terms-and-conditions)があることに注意してください。
 
 ## PoC手順の概要 {#overview-of-the-poc-procedures}
 
@@ -62,8 +62,8 @@ PoC 用の専用クラスターを作成するには、次の手順を実行し�
 
 1.  次のいずれかを実行して、PoC アプリケーション フォームに入力します。
 
-    -   PingCAP Web サイトの[PoCに申し込む](https://pingcap.com/apply-for-poc/)ページに移動して、PoC 申請フォームに記入します。
-    -   [TiDB Cloudコンソール](https://tidbcloud.com/)で、右上隅にある [ **Apply for PoC** ] をクリックして、PoC アプリケーション フォームに入力します。
+    -   PingCAP の Web サイトで、 [PoCに申し込む](https://pingcap.com/apply-for-poc/)ページに移動して、アプリケーション フォームに入力します。
+    -   [TiDB Cloudコンソール](https://tidbcloud.com/)で、<mdsvgicon name="icon-top-contact-us">右上隅にある [お**問い合わせ]**を選択し、[ <strong>PoC</strong>に申し込む] を選択して申し込みフォームに入力します。</mdsvgicon>
 
     フォームを送信すると、 TiDB Cloudサポート チームがアプリケーションを確認して連絡し、アプリケーションが承認されたらアカウントにクレジットを転送します。 PingCAP サポート エンジニアに連絡して、PoC 手順をサポートし、PoC が可能な限りスムーズに実行されるようにすることもできます。
 
@@ -80,14 +80,14 @@ PoC 用の専用クラスターを作成するには、次の手順を実行し�
 
 新しく作成されたクラスターの場合、次の構成に注意してください。
 
--   デフォルトのタイム ゾーン (ダッシュボードの [**作成時間**] 列) は UTC です。 [ローカル タイム ゾーンの設定](/tidb-cloud/manage-user-access.md#set-the-local-time-zone)に従って、ローカル タイム ゾーンに変更できます。
+-   デフォルトのタイム ゾーン (ダッシュボードの [**作成時間**] 列) は UTC です。 [ローカル タイム ゾーンの設定](/tidb-cloud/manage-user-access.md#set-the-time-zone-for-your-organization)に従って、ローカル タイム ゾーンに変更できます。
 -   新しいクラスターのデフォルトのバックアップ設定は、毎日の完全なデータベース バックアップです。希望するバックアップ時間を指定するか、データを手動でバックアップできます。デフォルトのバックアップ時間と詳細については、 [TiDBクラスタデータのバックアップと復元](/tidb-cloud/backup-and-restore.md#backup)を参照してください。
 
 ## ステップ 4. スキーマと SQL を適応させる {#step-4-adapt-your-schemas-and-sql}
 
 次に、テーブルとインデックスを含むデータベース スキーマを TiDB クラスターにロードできます。
 
-PoC クレジットは数に限りがあるため、クレジットの価値を最大化するために、 TiDB Cloudでの互換性テストおよび事前分析用に[サーバーレス階層クラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier) (1 年間の無料トライアル) を作成することをお勧めします。
+PoC クレジットは数に限りがあるため、クレジットの価値を最大化するために、 TiDB Cloudでの互換性テストおよび事前分析用に[Serverless Tierクラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) (1 年間の無料トライアル) を作成することをお勧めします。
 
 TiDB CloudはMySQL 5.7と高い互換性があります。 MySQL と互換性がある場合、または MySQL と互換性があるように調整できる場合は、TiDB にデータを直接インポートできます。
 
@@ -212,11 +212,11 @@ TiDB Cloudは、自動バックアップと手動バックアップの 2 種類�
 
 PoC の申請が承認されると、アカウントにクレジットが付与されます。通常、クレジットは 14 日間の PoC に十分です。クレジットは、ノードのタイプとノードの数によって、時間単位で課金されます。詳細については、 [TiDB Cloud請求](/tidb-cloud/tidb-cloud-billing.md#credits)を参照してください。
 
-PoC に残っているクレジットを確認するには、次のスクリーンショットに示すように、[**クラスター]**ページに移動します。
+PoC に残っているクレジットを確認するには、次のスクリーンショットに示すように、ターゲット プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
 ![TiDB Cloud PoC Credits](/media/tidb-cloud/poc-points.png)
 
-または、 TiDB Cloudコンソールの右上隅にあるアカウント名をクリックし、[**請求**] をクリックし、[<strong>クレジット</strong>] をクリックして、クレジットの詳細ページを表示することもできます。
+をクリックすることもできます。<mdsvgicon name="icon-top-account-settings"> TiDB Cloudコンソールの右上隅にある [**アカウント]**をクリックし、[<strong>請求</strong>] をクリックし、[<strong>クレジット</strong>] をクリックして、クレジットの詳細ページを表示します。</mdsvgicon>
 
 クレジットを節約するには、使用していないクラスターを削除します。現在、クラスターを停止することはできません。クラスターを削除する前に、バックアップが最新であることを確認する必要があります。これにより、後で PoC を再開するときにクラスターを復元できます。
 

@@ -91,7 +91,7 @@ TiDB アンシブル バージョン: 3.0.0-rc.1
 -   ラフトストア
     -   設定可能なサポート`properties index distance` [#4517](https://github.com/tikv/tikv/pull/4517)
 
--   Coprocessor
+-   コプロセッサー
     -   バッチ インデックス スキャン エグゼキューター[#4419](https://github.com/tikv/tikv/pull/4419)の追加
     -   ベクトル化された評価フレームワーク[#4322](https://github.com/tikv/tikv/pull/4322)を追加
     -   バッチ executor [#4433](https://github.com/tikv/tikv/pull/4433)の実行概要フレームワークを追加します。

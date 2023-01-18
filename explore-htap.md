@@ -39,7 +39,7 @@ TiDB では、オンライン トランザクション処理 (OLTP) 用の行ベ
 
 ## 環境の準備 {#environment-preparation}
 
-TiDB HTAPの機能を調べる前に、データ量に応じて TiDB と対応するストレージ エンジンを展開する必要があります。データ量が大きい場合 (たとえば 100 T) は、 TiFlash Massively Parallel Processing (MPP) を主なソリューションとして使用し、TiSpark を補助的なソリューションとして使用することをお勧めします。
+TiDB HTAPの機能を調べる前に、データ量に応じて TiDB と対応するストレージ エンジンをデプロイする必要があります。データ量が大きい場合 (たとえば 100 T) は、 TiFlash Massively Parallel Processing (MPP) を主なソリューションとして使用し、TiSpark を補助的なソリューションとして使用することをお勧めします。
 
 -   TiFlash
 

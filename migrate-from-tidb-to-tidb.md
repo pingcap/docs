@@ -103,7 +103,7 @@ summary: Learn how to migrate data from one TiDB cluster to another TiDB cluster
 
 > **ノート：**
 >
-> 実稼働クラスターでは、GC を無効にしてバックアップを実行すると、クラスターのパフォーマンスに影響を与える可能性があります。オフピーク時にデータをバックアップし、パフォーマンスの低下を避けるために`RATE_LIMIT`を適切な値に設定することをお勧めします。
+> 本番クラスターでは、GC を無効にしてバックアップを実行すると、クラスターのパフォーマンスに影響を与える可能性があります。オフピーク時にデータをバックアップし、パフォーマンスの低下を避けるために`RATE_LIMIT`を適切な値に設定することをお勧めします。
 >
 > 上流と下流のクラスターのバージョンが異なる場合は、 [BR互換性](/br/backup-and-restore-overview.md#before-you-use)を確認する必要があります。このドキュメントでは、アップストリーム クラスタとダウンストリーム クラスタは同じバージョンであると想定しています。
 
@@ -219,12 +219,12 @@ summary: Learn how to migrate data from one TiDB cluster to another TiDB cluster
     {{< copyable "" >}}
 
     ```shell
-    tiup cdc cli changefeed create --pd=http://172.16.6.122:2379 --sink-uri="mysql://root:@172.16.6.125:4000" --changefeed-id="upstream-to-downstream" --start-ts="431434047157698561"
+    tiup cdc cli changefeed create --server=http://172.16.6.122:8300 --sink-uri="mysql://root:@172.16.6.125:4000" --changefeed-id="upstream-to-downstream" --start-ts="431434047157698561"
     ```
 
     このコマンドでは、パラメーターは次のとおりです。
 
-    -   `--pd` : アップストリーム クラスタの PD アドレス
+    -   `--server` : TiCDC クラスター内の任意のノードの IP アドレス
     -   `--sink-uri` : ダウンストリーム クラスターの URI
     -   `--changefeed-id` : 変更フィード ID。正規表現 ^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$ の形式にする必要があります。
     -   `--start-ts` : 変更フィードの開始タイムスタンプ。バックアップ時間 (または[ステップ 2. 完全なデータを移行する](#step-2-migrate-full-data)の「データのバックアップ」セクションの BackupTS) である必要があります。
@@ -268,7 +268,7 @@ summary: Learn how to migrate data from one TiDB cluster to another TiDB cluster
 
     ```shell
     # Stop the changefeed from the upstream cluster to the downstream cluster
-    tiup cdc cli changefeed pause -c "upstream-to-downstream" --pd=http://172.16.6.122:2379
+    tiup cdc cli changefeed pause -c "upstream-to-downstream" --server=http://172.16.6.122:8300
 
     # View the changefeed status
     tiup cdc cli changefeed list
@@ -291,7 +291,7 @@ summary: Learn how to migrate data from one TiDB cluster to another TiDB cluster
 2.  下流から上流への変更フィードを作成します。 `start-ts`を指定せずにデフォルト設定を使用できます。これは、アップストリーム データとダウンストリーム データに一貫性があり、クラスターに書き込まれる新しいデータがないためです。
 
     ```shell
-    tiup cdc cli changefeed create --pd=http://172.16.6.125:2379 --sink-uri="mysql://root:@172.16.6.122:4000" --changefeed-id="downstream -to-upstream"
+    tiup cdc cli changefeed create --server=http://172.16.6.125:8300 --sink-uri="mysql://root:@172.16.6.122:4000" --changefeed-id="downstream -to-upstream"
     ```
 
 3.  書き込みサービスをダウンストリーム クラスターに移行した後、しばらく観察します。ダウンストリーム クラスターが安定している場合は、アップストリーム クラスターを破棄できます。

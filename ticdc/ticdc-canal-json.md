@@ -22,7 +22,7 @@ Message Queue (MQ) をダウンストリーム Sink として使用する場合�
 {{< copyable "" >}}
 
 ```shell
-cdc cli changefeed create --pd=http://127.0.0.1:2379 --changefeed-id="kafka-canal-json" --sink-uri="kafka://127.0.0.1:9092/topic-name?kafka-version=2.4.0&protocol=canal-json"
+cdc cli changefeed create --server=http://127.0.0.1:8300 --changefeed-id="kafka-canal-json" --sink-uri="kafka://127.0.0.1:9092/topic-name?kafka-version=2.4.0&protocol=canal-json"
 ```
 
 ## TiDB 拡張フィールド {#tidb-extension-field}
@@ -37,7 +37,7 @@ Canal-JSON プロトコルは、もともと MySQL 用に設計されました�
 {{< copyable "" >}}
 
 ```shell
-cdc cli changefeed create --pd=http://127.0.0.1:2379 --changefeed-id="kafka-canal-json-enable-tidb-extension" --sink-uri="kafka://127.0.0.1:9092/topic-name?kafka-version=2.4.0&protocol=canal-json&enable-tidb-extension=true"
+cdc cli changefeed create --server=http://127.0.0.1:8300 --changefeed-id="kafka-canal-json-enable-tidb-extension" --sink-uri="kafka://127.0.0.1:9092/topic-name?kafka-version=2.4.0&protocol=canal-json&enable-tidb-extension=true"
 ```
 
 ## メッセージ形式の定義 {#definitions-of-message-formats}
@@ -210,7 +210,7 @@ Canal-JSON 形式では、対応するデータ型が`mysqlType`フィールド�
 | 時間        | 92               |
 | 年         | 12               |
 | 列挙型       | 4                |
-| セットする     | -7               |
+| 設定        | -7               |
 | 少し        | -7               |
 | JSON      | 12               |
 

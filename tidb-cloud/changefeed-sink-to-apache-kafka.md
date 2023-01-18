@@ -9,7 +9,9 @@ Summary: Learn how to create a changefeed to stream data from TiDB Cloud to Apac
 
 > **ノート：**
 >
-> [サーバーレス階層クラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier)の場合、changefeed 機能は使用できません。
+> 現在、Kafka シンクは**ベータ版**です。 Changefeed 機能を使用するには、TiDB クラスターのバージョンが v6.4.0 以降であり、TiKV ノードのサイズが少なくとも 8 vCPU および 16 GiB であることを確認してください。
+>
+> [Serverless Tierクラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)の場合、changefeed 機能は使用できません。
 
 ## 前提条件 {#prerequisites}
 
@@ -48,10 +50,8 @@ TiDB Cloud changefeeds がデータを Apache Kafka にストリーミングし�
 
 ## ステップ 1. Apache Kafka の changefeed ページを開く {#step-1-open-the-changefeed-page-for-apache-kafka}
 
-1.  TiDB Cloudコンソールで、プロジェクトの [**クラスター**] ページに移動します。
-2.  変更フィードを作成するクラスターの名前をクリックします。
-3.  [**変更フィード**] タブをクリックします。
-4.  [ **Sink to Apache Kafka] を**クリックします。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、ターゲット TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで [ **Changefeed** ] をクリックします。
+2.  **Create Changefeed**をクリックし、 <strong>Kafka</strong>を<strong>Target Type</strong>として選択します。
 
 ## ステップ 2. changefeed ターゲットを構成する {#step-2-configure-the-changefeed-target}
 
@@ -72,21 +72,27 @@ TiDB Cloud changefeeds がデータを Apache Kafka にストリーミングし�
 
 ## ステップ 3. changefeed を設定する {#step-3-set-the-changefeed}
 
-1.  [**データ形式]**領域で、目的の Kafka メッセージの形式を選択します。
+1.  **テーブル フィルタ**をカスタマイズして、複製するテーブルをフィルタリングします。ルールの構文については、 [テーブル フィルター規則](/table-filter.md)を参照してください。
+
+    -   **フィルター ルールの追加**: この列でフィルター ルールを設定できます。デフォルトでは、すべてのテーブルをレプリケートすることを表すルール`*.*`があります。新しいルールを追加すると、 TiDB Cloudは TiDB 内のすべてのテーブルに対してクエリを実行し、<strong>複製されるテーブル</strong>列のルールに一致するテーブルのみを表示します。
+    -   **レプリケートされる**テーブル: この列は、レプリケートされるテーブルを示します。ただし、将来レプリケートされる新しいテーブルや、完全にレプリケートされるスキーマは表示されません。
+    -   **有効なキーのない**テーブル : この列には、一意キーと主キーのないテーブルが表示されます。これらのテーブルでは、重複イベントを処理するためにダウンストリーム システムで一意の識別子を使用できないため、レプリケーション中にデータの一貫性が失われる可能性があります。このような問題を回避するには、レプリケーションの前にこれらのテーブルに一意のキーまたは主キーを追加するか、これらのテーブルを除外するフィルター ルールを設定することをお勧めします。たとえば、「!test.tbl1」を使用してテーブル`test.tbl1`を除外できます。
+
+2.  [**データ形式]**領域で、目的の Kafka メッセージの形式を選択します。
 
     -   Avro は、豊富なデータ構造を備えたコンパクトで高速なバイナリ データ形式であり、さまざまなフロー システムで広く使用されています。詳細については、 [Avro データ形式](https://docs.pingcap.com/tidb/stable/ticdc-avro-protocol)を参照してください。
     -   Canal-JSON はプレーンな JSON テキスト形式で、解析が容易です。詳細については、 [Canal-JSON データ形式](https://docs.pingcap.com/tidb/stable/ticdc-canal-json)を参照してください。
 
-2.  Kafka メッセージ本文に TiDB 拡張フィールドを追加する場合は、 **TiDB 拡張**オプションを有効にします。
+3.  Kafka メッセージ本文に TiDB 拡張フィールドを追加する場合は、 **TiDB 拡張**オプションを有効にします。
 
     TiDB 拡張フィールドの詳細については、 [Avro データ形式の TiDB 拡張フィールド](https://docs.pingcap.com/tidb/stable/ticdc-avro-protocol#tidb-extension-fields)および[Canal-JSON データ形式の TiDB 拡張フィールド](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#tidb-extension-field)を参照してください。
 
-3.  **Avro**をデータ形式として選択すると、Avro 固有の設定がページに表示されます。これらの構成は次のように入力できます。
+4.  **Avro**をデータ形式として選択すると、Avro 固有の設定がページに表示されます。これらの構成は次のように入力できます。
 
     -   **Decimal**および<strong>Unsigned</strong> BigInt 構成で、 TiDB Cloudが Kafka メッセージの decimal および unsigned bigint データ型を処理する方法を指定します。
     -   [**スキーマ レジストリ]**領域で、スキーマ レジストリ エンドポイントを入力します。 <strong>HTTP 認証</strong>を有効にすると、ユーザー名とパスワードのフィールドが表示され、TiDB クラスターのエンドポイントとパスワードが自動的に入力されます。
 
-4.  [**トピックの配布]**領域で、配布モードを選択し、モードに従ってトピック名の構成を入力します。
+5.  [**トピックの配布]**領域で、配布モードを選択し、モードに従ってトピック名の構成を入力します。
 
     データ形式として**Avro**を選択した場合は、[<strong>配布モード]</strong>ドロップダウン リストで [<strong>テーブルごとに変更ログを Kafka トピック</strong>に配布する] モードのみを選択できます。
 
@@ -108,7 +114,7 @@ TiDB Cloud changefeeds がデータを Apache Kafka にストリーミングし�
 
         変更フィードですべての変更ログに対して 1 つの Kafka トピックを作成する場合は、このモードを選択します。次に、変更フィード内のすべての Kafka メッセージが 1 つの Kafka トピックに送信されます。 [トピック名] フィールドで**トピック名**を定義できます。
 
-5.  [**パーティション配布**] 領域で、Kafka メッセージが送信されるパーティションを決定できます。
+6.  [**パーティション配布**] 領域で、Kafka メッセージが送信されるパーティションを決定できます。
 
     -   **インデックス値ごとに変更ログを Kafka パーティションに配布する**
 
@@ -118,12 +124,12 @@ TiDB Cloud changefeeds がデータを Apache Kafka にストリーミングし�
 
         変更フィードでテーブルの Kafka メッセージを 1 つの Kafka パーティションに送信する場合は、この分散方法を選択します。行変更ログのテーブル名によって、変更ログが送信されるパーティションが決まります。この分散方法では、テーブルの順序が確保されますが、不均衡なパーティションが発生する可能性があります。
 
-6.  [**トピックのConfiguration / コンフィグレーション]**領域で、次の番号を構成します。 changefeed は、番号に従って Kafka トピックを自動的に作成します。
+7.  [**トピックのConfiguration / コンフィグレーション]**領域で、次の番号を構成します。 changefeed は、番号に従って Kafka トピックを自動的に作成します。
 
     -   **Replication Factor** : 各 Kafka メッセージが複製される Kafka サーバーの数を制御します。
     -   **パーティション番号**: トピックに存在するパーティションの数を制御します。
 
-7.  [**次へ**] をクリックして、設定した構成を確認し、次のページに進みます。
+8.  [**次へ**] をクリックして、設定した構成を確認し、次のページに進みます。
 
 ## ステップ 4.構成を確認する {#step-4-review-the-configurations}
 
@@ -131,18 +137,8 @@ TiDB Cloud changefeeds がデータを Apache Kafka にストリーミングし�
 
 エラーが見つかった場合は、戻ってエラーを修正できます。エラーがない場合は、下部にあるチェック ボックスをクリックし、[**作成**] をクリックして変更フィードを作成できます。
 
-## チェンジフィードを管理する {#manage-the-changefeed}
-
-変更フィードが作成されたら、 **TiDB**クラスターの [変更フィード] タブに移動し、[ <strong>Sink to Apache Kafka</strong> ] をクリックして [変更フィードの<strong>詳細</strong>] ダイアログを開くことができます。
-
-**変更フィードの詳細**ダイアログでは、次のように変更フィードを管理できます。
-
--   changefeed の実行状態を確認します。
--   [削除] をクリックして、変更フィードを**削除**します。
--   [一時停止] または [再開] をクリックして、変更フィードを**一時停止**または<strong>再開</strong>します。
-
 ## 制限 {#restrictions}
 
--   TiDB Cloudクラスターごとに、Kafka チェンジフィードを 1 つだけ作成できます。
+-   TiDB Cloudクラスターごとに、最大 10 個の変更フィードを作成できます。
 -   現在、 TiDB Cloudは、Kafka ブローカーに接続するための自己署名 TLS 証明書のアップロードをサポートしていません。
 -   TiDB Cloudは TiCDC を使用して変更フィードを確立するため、同じ[TiCDCとしての制限](https://docs.pingcap.com/tidb/stable/ticdc-overview#restrictions)を持ちます。

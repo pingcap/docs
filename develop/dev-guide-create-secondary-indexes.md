@@ -11,7 +11,7 @@ summary: Learn steps, rules, and examples to create a secondary index.
 
 セカンダリ インデックスを作成する前に、次の操作を行います。
 
--   [TiDB Cloud(サーバーレス層) で TiDBクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md) .
+-   [TiDB Cloud(Serverless Tier) で TiDBクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md) .
 -   [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md)を読んでください。
 -   [データベースを作成する](/develop/dev-guide-create-database.md) .
 -   [テーブルを作成する](/develop/dev-guide-create-table.md) .
@@ -38,8 +38,6 @@ TiDB では、 [セカンダリ インデックスを既存のテーブルに追
 
 セカンダリ インデックスを既存のテーブルに追加するには、次のように[インデックスを作成](/sql-statements/sql-statement-create-index.md)ステートメントを使用できます。
 
-{{< copyable "" >}}
-
 ```sql
 CREATE INDEX {index_name} ON {table_name} ({column_names});
 ```
@@ -53,8 +51,6 @@ CREATE INDEX {index_name} ON {table_name} ({column_names});
 ## 新しいテーブルを作成するときにセカンダリ インデックスを作成する {#create-a-secondary-index-when-creating-a-new-table}
 
 テーブルの作成と同時にセカンダリ インデックスを作成するには、 `KEY`キーワードを含む句を[テーブルを作成](/sql-statements/sql-statement-create-table.md)ステートメントの最後に追加します。
-
-{{< copyable "" >}}
 
 ```sql
 KEY `{index_name}` (`{column_names}`)
@@ -80,13 +76,11 @@ KEY `{index_name}` (`{column_names}`)
 | ID           | bigint(20)   | 書籍の一意の ID           |
 | 題名           | varchar(100) | 書名                  |
 | タイプ          | 列挙           | 書籍の種類 (雑誌、アニメ、教材など) |
-| 株式           | bigint(20)   | ストック                |
+| 株式           | bigint(20)   | 株式                  |
 | 価格           | 10 進数 (15,2) | 価格                  |
 | published_at | 日付時刻         | 発行日                 |
 
 `books`テーブルは、次の SQL ステートメントを使用して作成されます。
-
-{{< copyable "" >}}
 
 ```sql
 CREATE TABLE `bookshop`.`books` (
@@ -102,15 +96,11 @@ CREATE TABLE `bookshop`.`books` (
 
 年による検索機能をサポートする**には、特定の年に発行されたすべての書籍を検索**する SQL ステートメントを作成する必要があります。 2022 年を例にとると、次のように SQL ステートメントを記述します。
 
-{{< copyable "" >}}
-
 ```sql
 SELECT * FROM `bookshop`.`books` WHERE `published_at` >= '2022-01-01 00:00:00' AND `published_at` < '2023-01-01 00:00:00';
 ```
 
 SQL ステートメントの実行計画を確認するには、 [`EXPLAIN`](/sql-statements/sql-statement-explain.md)ステートメントを使用できます。
-
-{{< copyable "" >}}
 
 ```sql
 EXPLAIN SELECT * FROM `bookshop`.`books` WHERE `published_at` >= '2022-01-01 00:00:00' AND `published_at` < '2023-01-01 00:00:00';
@@ -132,8 +122,6 @@ EXPLAIN SELECT * FROM `bookshop`.`books` WHERE `published_at` >= '2022-01-01 00:
 出力例では、 **TableFullScan**が`id`列に表示されています。これは、TiDB がこのクエリの`books`テーブルでフル テーブル スキャンを実行する準備ができていることを意味します。ただし、大量のデータの場合、全表スキャンは非常に遅くなり、致命的な影響を与える可能性があります。
 
 このような影響を避けるために、次のように`published_at`列のインデックスを`books`テーブルに追加できます。
-
-{{< copyable "" >}}
 
 ```sql
 CREATE INDEX `idx_book_published_at` ON `bookshop`.`books` (`bookshop`.`books`.`published_at`);
@@ -176,8 +164,6 @@ CREATE INDEX `idx_book_published_at` ON `bookshop`.`books` (`bookshop`.`books`.`
 
 テーブルのインデックスをクエリするには、次の[インデックスを表示](/sql-statements/sql-statement-show-indexes.md)ステートメントを使用できます。
 
-{{< copyable "" >}}
-
 ```sql
 SHOW INDEXES FROM `bookshop`.`books`;
 ```
@@ -194,6 +180,6 @@ SHOW INDEXES FROM `bookshop`.`books`;
 2 rows in set (1.63 sec)
 ```
 
-## 次の一歩 {#next-step}
+## 次のステップ {#next-step}
 
 データベースを作成し、それにテーブルとセカンダリ インデックスを追加したら、データ[書きます](/develop/dev-guide-insert-data.md)と[読む](/develop/dev-guide-get-data-from-single-table.md)の機能をアプリケーションに追加することができます。

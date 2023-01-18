@@ -39,7 +39,7 @@ perf は Linux カーネルが提供する重要なパフォーマンス分析�
 
 ### BCC/bpftrace {#bcc-bpftrace}
 
-CentOS 7.6 以降、Linux カーネルは Berkeley Packet Filter (BPF) をサポートしています。したがって、適切なツールを選択して、 [60秒で](#in-60-seconds)の結果に基づいて詳細な分析を行うことができます。 perf/ftrace と比較して、BPF はプログラマビリティを提供し、パフォーマンスのオーバーヘッドを小さくします。 kprobe と比較して、BPF はより高いセキュリティを提供し、実稼働環境により適しています。 BCC ツールキットの詳細な使用方法については、 [BPF コンパイラ コレクション (BCC)](https://github.com/iovisor/bcc/blob/master/README.md)を参照してください。
+CentOS 7.6 以降、Linux カーネルは Berkeley Packet Filter (BPF) をサポートしています。したがって、適切なツールを選択して、 [60秒で](#in-60-seconds)の結果に基づいて詳細な分析を行うことができます。 perf/ftrace と比較して、BPF はプログラマビリティを提供し、パフォーマンスのオーバーヘッドを小さくします。 kprobe と比較して、BPF はより高いセキュリティを提供し、本番環境により適しています。 BCC ツールキットの詳細な使用方法については、 [BPF コンパイラ コレクション (BCC)](https://github.com/iovisor/bcc/blob/master/README.md)を参照してください。
 
 ## 性能調整 {#performance-tuning}
 

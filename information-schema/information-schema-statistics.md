@@ -3,7 +3,7 @@ title: STATISTICS
 summary: Learn the `STATISTICS` information_schema table.
 ---
 
-# 統計 {#statistics}
+# 統計学 {#statistics}
 
 `STATISTICS`テーブルは、テーブル インデックスに関する情報を提供します。
 

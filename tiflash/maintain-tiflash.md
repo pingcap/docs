@@ -31,13 +31,13 @@ TiFlashのバージョンを確認するには、次の 2 つの方法があり�
 
 ## TiFlash の重要なログ {#tiflash-critical-logs}
 
-| ログ情報                                                                                                                                 | ログの説明                                                        |
-| ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------ |
-| `[INFO] [<unknown>] ["KVStore: Start to persist [region 47, applied: term 6 index 10]"] [thread_id=23]`                              | データの複製が開始されます (ログの先頭にある角括弧内の数字はスレッド ID を示します)                |
-| `[DEBUG] [<unknown>] ["CoprocessorHandler: grpc::Status DB::CoprocessorHandler::execute(): Handling DAG request"] [thread_id=30]`    | DAG リクエストの処理、つまり、 TiFlashがCoprocessorリクエストの処理を開始します。         |
-| `[DEBUG] [<unknown>] ["CoprocessorHandler: grpc::Status DB::CoprocessorHandler::execute(): Handle DAG request done"] [thread_id=30]` | DAG リクエストの処理が完了しました。つまり、 TiFlashがCoprocessorリクエストの処理を終了しました。 |
+| ログ情報                                                                                                                                 | ログの説明                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------- |
+| `[INFO] [<unknown>] ["KVStore: Start to persist [region 47, applied: term 6 index 10]"] [thread_id=23]`                              | データの複製が開始されます (ログの先頭にある角括弧内の数字はスレッド ID を示します)            |
+| `[DEBUG] [<unknown>] ["CoprocessorHandler: grpc::Status DB::CoprocessorHandler::execute(): Handling DAG request"] [thread_id=30]`    | DAG リクエストの処理、つまり、 TiFlashがコプロセッサーリクエストの処理を開始します。         |
+| `[DEBUG] [<unknown>] ["CoprocessorHandler: grpc::Status DB::CoprocessorHandler::execute(): Handle DAG request done"] [thread_id=30]` | DAG リクエストの処理が完了しました。つまり、 TiFlashがコプロセッサーリクエストの処理を終了しました。 |
 
-Coprocessor要求の開始または終了を見つけ、ログの開始時に出力されたスレッド ID を使用して、Coprocessor要求の関連ログを見つけることができます。
+コプロセッサー要求の開始または終了を見つけ、ログの開始時に出力されたスレッド ID を使用して、コプロセッサー要求の関連ログを見つけることができます。
 
 ## TiFlashシステム表 {#tiflash-system-table}
 

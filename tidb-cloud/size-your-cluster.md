@@ -9,7 +9,7 @@ summary: Learn how to determine the size of your TiDB Cloud cluster.
 
 > **ノート：**
 >
-> [サーバーレス層](/tidb-cloud/select-cluster-tier.md#serverless-tier)クラスターのサイズは変更できません。
+> [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)クラスターのサイズは変更できません。
 
 ## サイズ TiDB {#size-tidb}
 
@@ -118,7 +118,7 @@ TiDB または TiKV の vCPU サイズが**2 vCPU、8 GiB (ベータ)**または
 
 ### TiFlashノード数 {#tiflash-node-quantity}
 
-TiDB Cloudは、リージョン内の異なるアベイラビリティ ゾーンにTiFlashノードを均等にデプロイします。各TiDB Cloudクラスターで少なくとも 2 つのTiFlashノードを構成し、実稼働環境での高可用性のためにデータの少なくとも 2 つのレプリカを作成することをお勧めします。
+TiDB Cloudは、リージョン内の異なるアベイラビリティ ゾーンにTiFlashノードを均等にデプロイします。各TiDB Cloudクラスターで少なくとも 2 つのTiFlashノードを構成し、本番環境での高可用性のためにデータの少なくとも 2 つのレプリカを作成することをお勧めします。
 
 TiFlashノードの最小数は、特定のテーブルのTiFlashレプリカ数によって異なります。
 

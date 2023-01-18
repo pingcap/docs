@@ -34,7 +34,7 @@ tiup telemetry <command>
 
 ## コマンド {#commands}
 
-### 状態 {#status}
+### スターテス {#status}
 
 `tiup telemetry status`コマンドは、現在のテレメトリ設定を表示し、次の情報を出力するために使用されます。
 

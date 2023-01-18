@@ -19,7 +19,7 @@ summary: View the execution details of a single SQL statement in TiDB Dashboard.
 
 -   SQL サンプル: 計画に対応して実際に実行される特定の SQL ステートメントのテキスト。時間範囲内に実行された SQL ステートメントは、SQL サンプルとして使用される場合があります。
 -   実行計画: グラフとテキストで表示される実行計画に関する完全な情報。実行計画の詳細については、 [クエリ実行計画を理解する](/explain-overview.md)を参照してください。複数の実行計画が選択されている場合は、そのうちの 1 つ (いずれか) のみが表示されます。
--   SQL ステートメントの基本情報、実行時間、Coprocessor読み取り、トランザクション、およびスロー クエリについては、対応するタブ タイトルをクリックして、さまざまな情報に切り替えることができます。
+-   SQL ステートメントの基本情報、実行時間、コプロセッサー読み取り、トランザクション、およびスロー クエリについては、対応するタブ タイトルをクリックして、さまざまな情報に切り替えることができます。
 
 ![Execution details of plans](/media/dashboard/dashboard-statement-plans-detail.png)
 
@@ -39,9 +39,9 @@ SQL 実行の基本情報には、テーブル名、インデックス名、実�
 
 ![Execution time](/media/dashboard/dashboard-statement-plans-time.png)
 
-### Coprocessor読み取りタブ {#coprocessor-read-tab}
+### コプロセッサー読み取りタブ {#coprocessor-read-tab}
 
-**Coprocessor Read**タブをクリックすると、 Coprocessor read に関する情報が表示されます。
+**コプロセッサー Read**タブをクリックすると、 コプロセッサー read に関する情報が表示されます。
 
 ![Coprocessor read](/media/dashboard/dashboard-statement-plans-cop-read.png)
 

@@ -13,7 +13,7 @@ summary: Learn about how to insert data.
 
 このドキュメントを読む前に、次の準備が必要です。
 
--   [TiDB Cloud(サーバーレス層) で TiDBクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md) .
+-   [TiDB Cloud(Serverless Tier) で TiDBクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md) .
 -   [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md) 、 [データベースを作成する](/develop/dev-guide-create-database.md) 、 [テーブルを作成する](/develop/dev-guide-create-table.md) 、および[セカンダリ インデックスの作成](/develop/dev-guide-create-secondary-indexes.md)を読み取る
 
 ## 行を挿入する {#insert-rows}
@@ -43,8 +43,6 @@ summary: Learn about how to insert data.
 <SimpleTab>
 <div label="SQL">
 
-{{< copyable "" >}}
-
 ```sql
 CREATE TABLE `player` (`id` INT, `coins` INT, `goods` INT);
 INSERT INTO `player` (`id`, `coins`, `goods`) VALUES (1, 1000, 1), (2, 230, 2);
@@ -55,8 +53,6 @@ INSERT INTO `player` (`id`, `coins`, `goods`) VALUES (1, 1000, 1), (2, 230, 2);
 </div>
 
 <div label="Java">
-
-{{< copyable "" >}}
 
 ```java
 // ds is an entity of com.mysql.cj.jdbc.MysqlDataSource
@@ -86,7 +82,7 @@ try (Connection connection = ds.getConnection()) {
 
 デフォルトの MySQL JDBCDriver設定により、一括挿入のパフォーマンスを向上させるには、いくつかのパラメーターを変更する必要があります。
 
-|            パラメータ           |                 手段                 |                                                                   推奨シナリオ                                                                  |  推奨Configuration / コンフィグレーション |
+|            パラメータ           |                 意味                 |                                                                   推奨シナリオ                                                                  |  推奨Configuration / コンフィグレーション |
 | :------------------------: | :--------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------: |
 |    `useServerPrepStmts`    |   サーバー側を使用して準備済みステートメントを有効にするかどうか  |                                                        プリペアドステートメントを複数回使用する必要がある場合                                                        |             `true`            |
 |      `cachePrepStmts`      |   クライアントが準備済みステートメントをキャッシュするかどうか   |                                                         `useServerPrepStmts=true`時                                                        |             `true`            |
@@ -96,8 +92,6 @@ try (Connection connection = ds.getConnection()) {
 |     `allowMultiQueries`    |             バッチ操作を開始する             | [クライアントのバグ](https://bugs.mysql.com/bug.php?id=96623)は、 `rewriteBatchedStatements = true`と`useServerPrepStmts = true`のときにこれを設定する必要があるためです。 |             `true`            |
 
 MySQL JDBCDriverは、統合された構成も提供し`useConfigs` 。 `maxPerformance`で構成されている場合は、一連の構成を構成することと同じです。 `mysql:mysql-connector-java:8.0.28`を例にとると、 `useConfigs=maxPerformance`には以下が含まれます。
-
-{{< copyable "" >}}
 
 ```properties
 cachePrepStmts=true
@@ -114,8 +108,6 @@ useInformationSchema=true
 `mysql-connector-java-{version}.jar!/com/mysql/cj/configurations/maxPerformance.properties`をチェックして、対応するバージョンの MySQL JDBC Driverの`useConfigs=maxPerformance`に含まれる構成を取得できます。
 
 以下は、JDBC 接続文字列構成の一般的なシナリオです。この例では、ホスト: `127.0.0.1` 、ポート: `4000` 、ユーザー名: `root` 、パスワード: null、デフォルト データベース: `test` :
-
-{{< copyable "" >}}
 
 ```
 jdbc:mysql://127.0.0.1:4000/test?user=root&useConfigs=maxPerformance&useServerPrepStmts=true&prepStmtCacheSqlLimit=2048&prepStmtCacheSize=256&rewriteBatchedStatements=true&allowMultiQueries=true
@@ -245,8 +237,6 @@ Golangでの完全な例については、以下を参照してください。
 挿入するテーブルの主キーが`AUTO_RANDOM`属性の場合、デフォルトでは主キーを指定できません。たとえば、 [`bookshop`](/develop/dev-guide-bookshop-schema-design.md)データベースでは、 [`users`テーブル](/develop/dev-guide-bookshop-schema-design.md#users-table)の`id`フィールドに`AUTO_RANDOM`属性が含まれていることがわかります。
 
 この場合、次のような SQL を使用して挿入する**ことはできません**。
-
-{{< copyable "" >}}
 
 ```sql
 INSERT INTO `bookshop`.`users` (`id`, `balance`, `nickname`) VALUES (1, 0.00, 'nicky');

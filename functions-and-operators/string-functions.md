@@ -74,6 +74,7 @@ Oracle と TiDB の関数と構文の比較については、 [Oracle と TiDB �
 | [`UCASE()`](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_ucase)                                                     | `UPPER()`の同義語                                                                                                                          |
 | [`UNHEX()`](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_unhex)                                                     | 数値の 16 進表現を含む文字列を返します                                                                                                                  |
 | [`UPPER()`](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_upper)                                                     | 大文字に変換                                                                                                                                 |
+| [`WEIGHT_STRING()`](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_weight-string)                                     | 入力文字列の重み文字列を返します                                                                                                                       |
 
 ## サポートされていない関数 {#unsupported-functions}
 
@@ -81,7 +82,6 @@ Oracle と TiDB の関数と構文の比較については、 [Oracle と TiDB �
 -   `MATCH`
 -   `SOUNDEX()`
 -   `SOUNDS LIKE`
--   `WEIGHT_STRING()`
 
 ## MySQL との正規表現の互換性 {#regular-expression-compatibility-with-mysql}
 

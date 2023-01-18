@@ -29,7 +29,7 @@ TiDB バージョン: 4.0.8
 -   TiDB
 
     -   `Selectivity()` [#20154](https://github.com/pingcap/tidb/pull/20154)の貪欲な検索手順で選択性の低いインデックスを優先する
-    -   Coprocessorのランタイム統計[#19264](https://github.com/pingcap/tidb/pull/19264)に、より多くの RPC ランタイム情報を記録します。
+    -   コプロセッサーのランタイム統計[#19264](https://github.com/pingcap/tidb/pull/19264)に、より多くの RPC ランタイム情報を記録します。
     -   遅いログの解析を高速化して、クエリのパフォーマンスを向上させる[#20556](https://github.com/pingcap/tidb/pull/20556)
     -   SQL オプティマイザが潜在的な新しい計画を検証しているときに、より多くのデバッグ情報を記録するために、計画のバインド段階でタイムアウト実行計画を待ちます[#20530](https://github.com/pingcap/tidb/pull/20530)
     -   スロー ログの実行リトライ時間とスロー クエリの結果を加算します。 [#20495](https://github.com/pingcap/tidb/pull/20495) [#20494](https://github.com/pingcap/tidb/pull/20494)
@@ -37,7 +37,7 @@ TiDB バージョン: 4.0.8
     -   `INSERT` / `UPDATE` / `REPLACE`ステートメントの RPC ランタイム統計情報を追加します[#20430](https://github.com/pingcap/tidb/pull/20430)
     -   `EXPLAIN FOR CONNECTION` [#20384](https://github.com/pingcap/tidb/pull/20384)の結果にオペレーター情報を追加します
     -   TiDB エラー ログを、クライアントの接続/切断アクティビティのレベル`DEBUG`に調整します[#20321](https://github.com/pingcap/tidb/pull/20321)
-    -   Coprocessor・キャッシュ[#20293](https://github.com/pingcap/tidb/pull/20293)のモニター・メトリックを追加します
+    -   コプロセッサー・キャッシュ[#20293](https://github.com/pingcap/tidb/pull/20293)のモニター・メトリックを追加します
     -   悲観的ロックキーのランタイム情報を追加[#20199](https://github.com/pingcap/tidb/pull/20199)
     -   ランタイム情報に時間消費情報のセクションを 2 つ追加し、スパン[#20187](https://github.com/pingcap/tidb/pull/20187)を`trace`つ追加します。
     -   トランザクション コミットのランタイム情報をスロー ログ[#20185](https://github.com/pingcap/tidb/pull/20185)に追加します。

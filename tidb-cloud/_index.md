@@ -91,17 +91,17 @@ hide_commit: true
 
 </LearningPath>
 
-<LearningPath label="Manage Access" icon="users">
+<LearningPath label="Security" icon="users">
 
-[パスワードの管理](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-user-passwords)
+[パスワード認証](https://docs.pingcap.com/tidbcloud/tidb-cloud-password-authentication)
 
-[プロファイルの管理](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-user-profiles)
+[ユーザー プロファイルの管理](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-user-profiles)
 
-[組織とプロジェクトをビュー](https://docs.pingcap.com/tidbcloud/manage-user-access#view-the-organization-and-project)
+[組織のアクセスを管理する](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-organization-access)
 
-[メンバーを招待する](https://docs.pingcap.com/tidbcloud/manage-user-access#invite-an-organization-member)
+[プロジェクト アクセスの管理](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-project-access)
 
-[役割の構成](https://docs.pingcap.com/tidbcloud/manage-user-access#configure-member-roles)
+[役割の構成](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-role-access)
 
 [セキュリティ設定の構成](https://docs.pingcap.com/tidbcloud/configure-security-settings)
 
@@ -119,13 +119,29 @@ hide_commit: true
 
 <LearningPath label="Integrations" icon="cloud4">
 
+[エアバイト](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-airbyte)
+
+[Amazon AppFlow](https://docs.pingcap.com/tidbcloud/dev-guide-aws-appflow-integration)
+
+[クラウドフレア](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-cloudflare)
+
 [データドッグ](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration)
 
+[dbt](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-dbt)
+
+[n8n](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-n8n)
+
+[ネットリファイ](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-netlify)
+
 [プロメテウスとグラファナ](https://docs.pingcap.com/tidbcloud/monitor-prometheus-and-grafana-integration)
+
+[プロキシSQL](https://docs.pingcap.com/tidbcloud/dev-guide-proxysql-integration)
 
 [テラフォーム](https://docs.pingcap.com/tidbcloud/terraform-tidbcloud-provider-overview)
 
 [ヴェルセル](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-vercel)
+
+[ザピア](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-zapier)
 
 </LearningPath>
 
@@ -133,7 +149,7 @@ hide_commit: true
 
 [システム変数](https://docs.pingcap.com/tidbcloud/system-variables)
 
-[リリースノート](https://docs.pingcap.com/tidbcloud/release-notes-2022)
+[リリースノート](https://docs.pingcap.com/tidbcloud/tidb-cloud-release-notes)
 
 [SQL リファレンス](https://docs.pingcap.com/tidbcloud/basic-sql-operations)
 

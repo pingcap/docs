@@ -33,13 +33,13 @@ title: TiDB 2.0 RC5 Release Notes
 -   `tikv-ctl`の`compact`で指定されたリージョンをサポート
 -   RawKVClient でバッチ プット、バッチ ゲット、バッチ削除、バッチ スキャンをサポート
 -   スナップショットが多すぎるために発生する OOM の問題を修正
--   Coprocessorでより詳細なエラー情報を返す
+-   コプロセッサーでより詳細なエラー情報を返す
 -   TiKV の`block-cache-size`から`tikv-ctl`までの動的な変更をサポート
 -   さらに改善する`importer`
 -   `ImportSST::Upload`インターフェースを簡素化
 -   gRPC の`keepalive`のプロパティを構成する
 -   独立したバイナリとして TiKV から`tikv-importer`を分割します。
--   Coprocessorの各`scan range`によってスキャンされた行数に関する統計を提供します
+-   コプロセッサーの各`scan range`によってスキャンされた行数に関する統計を提供します
 -   macOS システムでのコンパイルの問題を修正
 -   RocksDB メトリクスの誤用の問題を修正
--   Coprocessorで`overflow as warning`のオプションをサポート
+-   コプロセッサーで`overflow as warning`のオプションをサポート

@@ -7,17 +7,17 @@ summary: Learn how to use the cluster resource to create and modify a TiDB Cloud
 
 このドキュメントの`tidbcloud_cluster`のリソースを使用して、 TiDB Cloudクラスターを作成および変更する方法を学習できます。
 
-さらに、 `tidbcloud_project`と`tidbcloud_cluster_spec`のデータ ソースを使用して必要な情報を取得する方法についても学習します。
+さらに、 `tidbcloud_projects`と`tidbcloud_cluster_specs`のデータ ソースを使用して必要な情報を取得する方法についても学習します。
 
 ## 前提条件 {#prerequisites}
 
 -   [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) .
 
-## プロジェクト データ ソースを使用してプロジェクト ID を取得する {#get-project-ids-using-the-project-data-source}
+## <code>tidbcloud_projects</code>データ ソースを使用してプロジェクト ID を取得する {#get-project-ids-using-the-code-tidbcloud-projects-code-data-source}
 
 各 TiDB クラスターはプロジェクト内にあります。 TiDB クラスターを作成する前に、クラスターを作成するプロジェクトの ID を取得する必要があります。
 
-利用可能なすべてのプロジェクトの情報を表示するには、次のように`tidbcloud_project`のデータ ソースを使用できます。
+利用可能なすべてのプロジェクトの情報を表示するには、次のように`tidbcloud_projects`のデータ ソースを使用できます。
 
 1.  [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md)のときに作成される`main.tf`ファイルに、次のように`data`および`output`ブロックを追加します。
 
@@ -26,7 +26,7 @@ summary: Learn how to use the cluster resource to create and modify a TiDB Cloud
       required_providers {
         tidbcloud = {
           source = "tidbcloud/tidbcloud"
-          version = "~> 0.0.1"
+          version = "~> 0.1.0"
         }
       }
       required_version = ">= 1.0.0"
@@ -37,21 +37,21 @@ summary: Learn how to use the cluster resource to create and modify a TiDB Cloud
       private_key = "fake_private_key"
     }
 
-    data "tidbcloud_project" "example_project" {
+    data "tidbcloud_projects" "example_project" {
       page      = 1
       page_size = 10
     }
 
     output "projects" {
-      value = data.tidbcloud_project.example_project.items
+      value = data.tidbcloud_projects.example_project.items
     }
     ```
 
     -   `data`ブロックを使用して、データ ソース タイプとデータ ソース名を含むTiDB Cloudのデータ ソースを定義します。
 
-        -   プロジェクト データ ソースを使用するには、データ ソース タイプを`tidbcloud_project`に設定します。
+        -   プロジェクト データ ソースを使用するには、データ ソース タイプを`tidbcloud_projects`に設定します。
         -   データ ソース名については、必要に応じて定義できます。たとえば、「example_project」です。
-        -   プロジェクト データ ソースの場合、 `page`および`page_size`属性を使用して、チェックするプロジェクトの最大数を制限できます。
+        -   `tidbcloud_projects`データ ソースの場合、 `page`および`page_size`属性を使用して、チェックするプロジェクトの最大数を制限できます。
 
     -   `output`ブロックを使用して、出力に表示されるデータ ソース情報を定義し、他の Terraform 構成で使用する情報を公開します。
 
@@ -65,8 +65,6 @@ summary: Learn how to use the cluster resource to create and modify a TiDB Cloud
 
     ```
     $ terraform apply --auto-approve
-    data.tidbcloud_project.example_project: Reading...
-    data.tidbcloud_project.example_project: Read complete after 1s [id=just for test]
 
     Changes to Outputs:
       + projects = [
@@ -116,11 +114,11 @@ summary: Learn how to use the cluster resource to create and modify a TiDB Cloud
 
 これで、出力から利用可能なすべてのプロジェクトを取得できます。必要なプロジェクト ID の 1 つをコピーします。
 
-## cluster-spec データ ソースを使用してクラスター仕様情報を取得する {#get-cluster-specification-information-using-the-cluster-spec-data-source}
+## <code>tidbcloud_cluster_specs</code>データ ソースを使用してクラスター仕様情報を取得する {#get-cluster-specification-information-using-the-code-tidbcloud-cluster-specs-code-data-source}
 
 クラスターを作成する前に、使用可能なすべての構成値 (サポートされているクラウド プロバイダー、リージョン、ノード サイズなど) を含むクラスター仕様情報を取得する必要があります。
 
-クラスターの仕様情報を取得するには、次のように`tidbcloud_cluster_spec`データ ソースを使用できます。
+クラスターの仕様情報を取得するには、次のように`tidbcloud_cluster_specs`データ ソースを使用できます。
 
 1.  `main.tf`ファイルを次のように編集します。
 
@@ -129,7 +127,7 @@ summary: Learn how to use the cluster resource to create and modify a TiDB Cloud
       required_providers {
         tidbcloud = {
           source = "tidbcloud/tidbcloud"
-          version = "~> 0.0.1"
+          version = "~> 0.1.0"
         }
       }
       required_version = ">= 1.0.0"
@@ -138,10 +136,10 @@ summary: Learn how to use the cluster resource to create and modify a TiDB Cloud
       public_key = "fake_public_key"
       private_key = "fake_private_key"
     }
-    data "tidbcloud_cluster_spec" "example_cluster_spec" {
+    data "tidbcloud_cluster_specs" "example_cluster_spec" {
     }
     output "cluster_spec" {
-      value = data.tidbcloud_cluster_spec.example_cluster_spec.items
+      value = data.tidbcloud_cluster_specs.example_cluster_spec.items
     }
     ```
 
@@ -299,7 +297,7 @@ summary: Learn how to use the cluster resource to create and modify a TiDB Cloud
      required_providers {
        tidbcloud = {
          source = "tidbcloud/tidbcloud"
-         version = "~> 0.0.1"
+         version = "~> 0.1.0"
        }
      }
      required_version = ">= 1.0.0"
@@ -344,11 +342,6 @@ summary: Learn how to use the cluster resource to create and modify a TiDB Cloud
 
     ```shell
     $ terraform apply
-    data.tidbcloud_project.example_project: Reading...
-    data.tidbcloud_project.example_project: Read complete after 1s [id=just for test]
-
-    Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
-      + create
 
     Terraform will perform the following actions:
 
@@ -628,7 +621,7 @@ Dedicated Tierクラスターの場合、Terraform を使用してクラスタ�
 
 1.  [クラスターを作成する](#create-a-cluster-using-the-cluster-resource)で使用する`cluster.tf`ファイルで、 `components`の構成を編集します。
 
-    たとえば、TiDB 用にもう 1 つのノードを追加するには、TiKV 用にさらに 3 つのノードを追加します (TiKV ノードの数は、そのステップが 3 であるために 3 の倍数である必要があります[クラスタ仕様からこの情報を取得します](#get-cluster-specification-information-using-the-cluster-spec-data-source)を追加できます)、およびTiFlash用にもう 1 つのノードを編集できます。構成は次のとおりです。
+    たとえば、TiDB 用にもう 1 つのノードを追加するには、TiKV 用にさらに 3 つのノードを追加します (TiKV ノードの数は、そのステップが 3 であるために 3 の倍数である必要があります[クラスタ仕様からこの情報を取得します](#get-cluster-specification-information-using-the-tidbcloud_cluster_specs-data-source)を追加できます)、およびTiFlash用にもう 1 つのノードを編集できます。構成は次のとおりです。
 
     ```
         components = {
@@ -866,7 +859,7 @@ Terraform で管理されていない TiDB クラスターの場合は、Terrafo
      required_providers {
        tidbcloud = {
          source = "tidbcloud/tidbcloud"
-         version = "~> 0.0.1"
+         version = "~> 0.1.0"
        }
      }
      required_version = ">= 1.0.0"

@@ -9,7 +9,7 @@ summary: Learn the environment check operations before deploying TiDB.
 
 ## TiKV を展開するターゲット マシンに、オプションを使用してデータ ディスク ext4 ファイルシステムをマウントします。 {#mount-the-data-disk-ext4-filesystem-with-options-on-the-target-machines-that-deploy-tikv}
 
-実稼働環境では、EXT4 ファイルシステムの NVMe SSD を使用して TiKV データを保存することをお勧めします。この構成はベスト プラクティスであり、その信頼性、セキュリティ、および安定性は多数のオンライン シナリオで証明されています。
+実本番環境では、EXT4 ファイルシステムの NVMe SSD を使用して TiKV データを保存することをお勧めします。この構成はベスト プラクティスであり、その信頼性、セキュリティ、および安定性は多数のオンライン シナリオで証明されています。
 
 `root`ユーザー アカウントを使用してターゲット マシンにログインします。
 

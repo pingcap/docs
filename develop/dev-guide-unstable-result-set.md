@@ -18,8 +18,6 @@ summary: Learn how to handle the error of an unstable result set.
 
 次に、次のような SQL クエリ ステートメントを記述できます。
 
-{{< copyable "" >}}
-
 ```sql
 SELECT
     `a`.`class`,
@@ -52,8 +50,6 @@ ORDER BY
 `a` 。 `class`および`a` 。 `stuname`のフィールドが`GROUP BY`ステートメントで指定され、選択された列は`a`です。 `class` `a` `stuname`と`b` 。 `courscore` . `GROUP BY`条件にない唯一の列`b` 。 `courscore`も`max()`関数を使用して一意の値で指定されます。この SQL ステートメントをあいまいさなく満たす結果は 1 つ***しか***ありません。これを`FULL GROUP BY`構文と呼びます。
 
 反例は`NON-FULL GROUP BY`構文です。たとえば、これら 2 つのテーブルで、次の SQL クエリを記述します (delete `a` . `stuname` in `GROUP BY` )。
-
-{{< copyable "" >}}
 
 ```sql
 SELECT
@@ -98,8 +94,6 @@ ORDER BY
 
 MySQL は、 `FULL GROUP BY`構文をチェックするかどうかを制御する`sql_mode`スイッチ`ONLY_FULL_GROUP_BY`を提供します。 TiDB もこの`sql_mode`スイッチと互換性があります。
 
-{{< copyable "" >}}
-
 ```sql
 mysql> select a.class, a.stuname, max(b.courscore) from stu_info a join stu_score b on a.stuno=b.stuno group by a.class order by a.class, a.stuname;
 +------------+--------------+------------------+
@@ -126,8 +120,6 @@ SQL セマンティクスでは、 `ORDER BY`構文が使用されている場�
 分散データベースとして、TiDB は複数のサーバーにデータを保存します。さらに、TiDBレイヤーはデータ ページをキャッシュしないため、 `ORDER BY`のない SQL ステートメントの結果セットの順序は不安定であると認識されがちです。シーケンシャルな結果セットを出力するには、順序フィールドを`ORDER BY`句に明示的に追加する必要があります。これは、SQL セマンティクスに準拠しています。
 
 次の例では、1 つのフィールドのみが`ORDER BY`句に追加され、TiDB はその 1 つのフィールドのみで結果を並べ替えます。
-
-{{< copyable "" >}}
 
 ```sql
 mysql> select a.class, a.stuname, b.course, b.courscore from stu_info a join stu_score b on a.stuno=b.stuno order by a.class;

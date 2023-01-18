@@ -60,7 +60,7 @@ TiDB バージョン: 4.0.16
     -   楽観的トランザクションの競合により、トランザクションが相互にブロックされる可能性があるという問題を修正します[#11148](https://github.com/tikv/tikv/issues/11148)
     -   `auto analyze`結果[#29188](https://github.com/pingcap/tidb/issues/29188)の不完全なログ情報の問題を修正
     -   `SQL_MODE`が &#39;NO_ZERO_IN_DATE&#39; [#26766](https://github.com/pingcap/tidb/issues/26766)の場合、無効なデフォルト日付を使用してもエラーが報告されない問題を修正します。
-    -   Grafana のCoprocessor Cache パネルにメトリックが表示されない問題を修正します。これで、Grafana は`hits` / `miss` / `evict` [#26338](https://github.com/pingcap/tidb/issues/26338)の数を表示します
+    -   Grafana のコプロセッサー Cache パネルにメトリックが表示されない問題を修正します。これで、Grafana は`hits` / `miss` / `evict` [#26338](https://github.com/pingcap/tidb/issues/26338)の数を表示します
     -   同じパーティションを同時に切り捨てると DDL ステートメントがスタックする問題を修正します[#26229](https://github.com/pingcap/tidb/issues/26229)
     -   `Decimal`を`String` [#29417](https://github.com/pingcap/tidb/issues/29417)に変換するときに長さ情報が間違っている問題を修正
     -   `NATURAL JOIN`を使用して複数のテーブルを結合する場合に、クエリ結果に余分な列が含まれる問題を修正します[#29481](https://github.com/pingcap/tidb/issues/29481)

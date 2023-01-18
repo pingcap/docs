@@ -57,9 +57,9 @@ TiDB Cloudは、概念実証 (PoC) ユーザーに一定数のクレジットを
 
 ### 遊び場 {#playground}
 
-Playground には、事前に読み込まれた GitHub イベントのデータセットが含まれています。これにより、サーバーレス層のユーザーは、データをインポートしたり、クライアントに接続したりすることなく、即座にクエリを実行してTiDB Cloudを使い始めることができます。
+Playground には、事前に読み込まれた GitHub イベントのデータセットが含まれています。これにより、Serverless Tierのユーザーは、データをインポートしたり、クライアントに接続したりすることなく、即座にクエリを実行してTiDB Cloudを使い始めることができます。
 
-[サーバーレス層クラスターの作成](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster)の後に Playground にアクセスできます。
+[Serverless Tierクラスターの作成](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster)の後に Playground にアクセスできます。
 
 ### ポリシー {#policy}
 
@@ -92,6 +92,10 @@ Playground には、事前に読み込まれた GitHub イベントのデータ�
 ### レプリカ {#replica}
 
 同じまたは異なるリージョンに配置でき、同じデータを含む別のデータベース。レプリカは、多くの場合、災害復旧やパフォーマンスの向上のために使用されます。
+
+### レプリケーション キャパシティ ユニット {#replication-capacity-unit}
+
+changefeed のレプリケーションは、TiCDC のレプリケーション容量単位であるコンピューティング リソースに応じて課金されます。
 
 ## T {#t}
 

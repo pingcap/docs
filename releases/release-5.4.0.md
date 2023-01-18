@@ -307,12 +307,12 @@ v5.4 の主な新機能または改善点は次のとおりです。
 
 -   TiKV
 
-    -   Coprocessorは、ストリームのような方法で要求を処理するページング API をサポートします[#11448](https://github.com/tikv/tikv/issues/11448)
+    -   コプロセッサーは、ストリームのような方法で要求を処理するページング API をサポートします[#11448](https://github.com/tikv/tikv/issues/11448)
     -   `read-through-lock`をサポートして、読み取り操作が 2 次ロックの解決を待つ必要がないようにする[#11402](https://github.com/tikv/tikv/issues/11402)
     -   ディスク領域の枯渇によるpanicを回避するために、ディスク保護メカニズムを追加します[#10537](https://github.com/tikv/tikv/issues/10537)
     -   ログのアーカイブとローテーションのサポート[#11651](https://github.com/tikv/tikv/issues/11651)
     -   Raftクライアントによるシステム コールを減らし、CPU 効率を高める[#11309](https://github.com/tikv/tikv/issues/11309)
-    -   Coprocessorは部分文字列の TiKV [#11495](https://github.com/tikv/tikv/issues/11495)へのプッシュダウンをサポート
+    -   コプロセッサーは部分文字列の TiKV [#11495](https://github.com/tikv/tikv/issues/11495)へのプッシュダウンをサポート
     -   Read Committed 分離レベル[#11485](https://github.com/tikv/tikv/issues/11485)で読み取りロックをスキップすることにより、スキャンのパフォーマンスを向上させます。
     -   バックアップ操作で使用されるデフォルトのスレッド プール サイズを減らし、負荷が高い場合にスレッド プールの使用を制限する[#11000](https://github.com/tikv/tikv/issues/11000)
     -   Apply スレッド プールと Store スレッド プールのサイズを動的に調整するサポート[#11159](https://github.com/tikv/tikv/issues/11159)

@@ -81,7 +81,7 @@ mv tidb-latest-linux-amd64/bin/tidb-server ./
 
 > **警告：**
 >
-> このドキュメントの TiDB の展開方法は、運用環境または開発環境に**は適用されません**。
+> このドキュメントの TiDB の展開方法は、本番環境または開発環境に**は適用されません**。
 
 ## MySQL データ ソースを構成する {#configure-the-mysql-data-source}
 

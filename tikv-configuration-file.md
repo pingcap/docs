@@ -211,7 +211,7 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 
 ### <code>end-point-recursion-limit</code> {#code-end-point-recursion-limit-code}
 
--   TiKV がCoprocessorDAG 式をデコードするときに許可される再帰レベルの最大数
+-   TiKV がコプロセッサーDAG 式をデコードするときに許可される再帰レベルの最大数
 -   デフォルト値: `1000`
 -   最小値: `1`
 
@@ -355,7 +355,7 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 
 ## <code>readpool.coprocessor</code> {#code-readpool-coprocessor-code}
 
-Coprocessorスレッド プールに関連するConfiguration / コンフィグレーション項目。
+コプロセッサースレッド プールに関連するConfiguration / コンフィグレーション項目。
 
 ### <code>use-unified-pool</code> {#code-use-unified-pool-code}
 
@@ -364,19 +364,19 @@ Coprocessorスレッド プールに関連するConfiguration / コンフィグ�
 
 ### <code>high-concurrency</code> {#code-high-concurrency-code}
 
--   チェックポイントなどの優先度の高いCoprocessor要求を処理する同時スレッドの許容数
+-   チェックポイントなどの優先度の高いコプロセッサー要求を処理する同時スレッドの許容数
 -   デフォルト値: `CPU * 0.8`
 -   最小値: `1`
 
 ### <code>normal-concurrency</code> {#code-normal-concurrency-code}
 
--   通常優先度のCoprocessor要求を処理する同時スレッドの許容数
+-   通常優先度のコプロセッサー要求を処理する同時スレッドの許容数
 -   デフォルト値: `CPU * 0.8`
 -   最小値: `1`
 
 ### <code>low-concurrency</code> {#code-low-concurrency-code}
 
--   テーブルスキャンなどの優先度の低いCoprocessor要求を処理する同時スレッドの許容数
+-   テーブルスキャンなどの優先度の低いコプロセッサー要求を処理する同時スレッドの許容数
 -   デフォルト値: `CPU * 0.8`
 -   最小値: `1`
 
@@ -400,14 +400,14 @@ Coprocessorスレッド プールに関連するConfiguration / コンフィグ�
 
 ### <code>stack-size</code> {#code-stack-size-code}
 
--   Coprocessor・スレッド・プール内のスレッドのスタック・サイズ
+-   コプロセッサー・スレッド・プール内のスレッドのスタック・サイズ
 -   タイプ: 整数 + 単位
 -   デフォルト値: `"10MB"`
 -   単位: KB|MB|GB
 -   最小値: `"2MB"`
 -   最大値：システムで実行された`ulimit -sH`コマンドの結果として出力される K バイト数。
 
-## ストレージ {#storage}
+## 保管所 {#storage}
 
 ストレージに関するConfiguration / コンフィグレーション項目。
 
@@ -491,16 +491,16 @@ Coprocessorスレッド プールに関連するConfiguration / コンフィグ�
 
 ## storage.block-cache {#storage-block-cache}
 
-複数の RocksDBカラムファミリー (CF) 間でのブロック キャッシュの共有に関連するConfiguration / コンフィグレーション項目。これらの構成項目を有効にすると、カラムファミリーごとに個別に構成されたブロック キャッシュが無効になります。
+複数の RocksDBカラムファミリー (CF) 間でのブロックキャッシュの共有に関連するConfiguration / コンフィグレーション項目。これらの構成項目を有効にすると、カラムファミリーごとに個別に構成されたブロックキャッシュが無効になります。
 
 ### <code>shared</code> {#code-shared-code}
 
--   ブロック キャッシュの共有を有効または無効にします。
+-   ブロックキャッシュの共有を有効または無効にします。
 -   デフォルト値: `true`
 
 ### <code>capacity</code> {#code-capacity-code}
 
--   共有ブロック キャッシュのサイズ。
+-   共有ブロックキャッシュのサイズ。
 -   デフォルト値: 合計システム メモリのサイズの 45%
 -   単位: KB|MB|GB
 
@@ -865,7 +865,7 @@ Raftstore に関連するConfiguration / コンフィグレーション項目。
 
 > **警告：**
 >
-> クラスターのパフォーマンスに影響し、TiDB のガベージコレクションと互換性がないため、運用環境で整合性チェックを有効にすることはお勧めし**ません**。
+> クラスターのパフォーマンスに影響し、TiDB のガベージコレクションと互換性がないため、本番環境で整合性チェックを有効にすることはお勧めし**ません**。
 
 -   整合性チェックがトリガーされる時間間隔。 `0`は、この機能が無効であることを意味します。
 -   デフォルト値: `"0s"`
@@ -969,9 +969,9 @@ Raftstore に関連するConfiguration / コンフィグレーション項目。
 -   デフォルト値: `1MB`
 -   最小値: `0`
 
-## Coprocessor {#coprocessor}
+## コプロセッサー {#coprocessor}
 
-Coprocessorに関連するConfiguration / コンフィグレーション項目。
+コプロセッサーに関連するConfiguration / コンフィグレーション項目。
 
 ### <code>split-region-on-table</code> {#code-split-region-on-table-code}
 
@@ -1027,7 +1027,7 @@ Coprocessorに関連するConfiguration / コンフィグレーション項目�
 
 > **警告：**
 >
-> -   `enable-region-bucket`は、TiDB v6.1.0 で導入された実験的機能です。実稼働環境で使用することはお勧めしません。
+> -   `enable-region-bucket`は、TiDB v6.1.0 で導入された実験的機能です。本番環境で使用することはお勧めしません。
 > -   この構成は、 `region-split-size`が`region-bucket-size`の 2 倍以上の場合にのみ意味があります。それ以外の場合、バケットは実際には生成されません。
 > -   `region-split-size`をより大きな値に調整すると、パフォーマンスが低下し、スケジューリングが遅くなる可能性があります。
 
@@ -1038,13 +1038,13 @@ Coprocessorに関連するConfiguration / コンフィグレーション項目�
 
 > **警告：**
 >
-> `region-bucket-size`は、TiDB v6.1.0 で導入された実験的機能です。実稼働環境で使用することはお勧めしません。
+> `region-bucket-size`は、TiDB v6.1.0 で導入された実験的機能です。本番環境で使用することはお勧めしません。
 
 ### <code>report-region-buckets-tick-interval</code> <span class="version-mark">v6.1.0 の新機能</span> {#code-report-region-buckets-tick-interval-code-span-class-version-mark-new-in-v6-1-0-span}
 
 > **警告：**
 >
-> `report-region-buckets-tick-interval`は、TiDB v6.1.0 で導入された実験的機能です。実稼働環境で使用することはお勧めしません。
+> `report-region-buckets-tick-interval`は、TiDB v6.1.0 で導入された実験的機能です。本番環境で使用することはお勧めしません。
 
 -   `enable-region-bucket`が true の場合、TiKV がバケット情報を PD に報告する間隔。
 -   デフォルト値: `10s`
@@ -1368,7 +1368,7 @@ Titan関連のConfiguration / コンフィグレーション項目。
 
 ### <code>target-file-size-base</code> {#code-target-file-size-base-code}
 
--   ベース レベルでのターゲット ファイルのサイズ。 `enable-compaction-guard`の値が`true`の場合、この値は`compaction-guard-max-output-file-size`でオーバーライドされます。
+-   ベース レベルでのターゲット ファイルのサイズ。 `enable-compaction-guard`の値が`true`の場合、この値は`compaction-guard-max-output-file-size`で上書きされます。
 -   デフォルト値: `"8MB"`
 -   最小値: `0`
 -   単位: KB|MB|GB
@@ -2078,7 +2078,7 @@ TiKV がデプロイされているマシンのリソースが限られている
 
 #### <code>foreground-read-bandwidth</code> <span class="version-mark">v6.0.0 の新機能</span> {#code-foreground-read-bandwidth-code-span-class-version-mark-new-in-v6-0-0-span}
 
--   トランザクションとCoprocessorがデータを読み取る帯域幅のソフト制限。
+-   トランザクションとコプロセッサーがデータを読み取る帯域幅のソフト制限。
 -   デフォルト値: `0KB` (制限なし)
 -   推奨される設定: `foreground-cpu-time`の設定が読み取り帯域幅を制限するのに十分でない場合を除き、ほとんどの場合、既定値の`0`を使用します。このような例外のため、コア数が 4 以下のインスタンスでは`20MB`より小さい値を設定することをお勧めします。
 
@@ -2090,7 +2090,7 @@ TiKV がデプロイされているマシンのリソースが限られている
 
 > **警告：**
 >
-> -   バックグラウンド クォータ リミッターは、TiDB v6.2.0 で導入された実験的機能であり、運用環境で使用することはお勧めし**ません**。
+> -   バックグラウンド クォータ リミッターは、TiDB v6.2.0 で導入された実験的機能であり、本番環境で使用することはお勧めし**ません**。
 > -   この機能は、TiKV がこれらの環境で安定して実行できるように、リソースが限られている環境にのみ適しています。リソースが豊富な環境でこの機能を有効にすると、リクエスト量がピークに達したときにパフォーマンスが低下する可能性があります。
 
 #### <code>background-cpu-time</code> <span class="version-mark">v6.2.0 の新機能</span> {#code-background-cpu-time-code-span-class-version-mark-new-in-v6-2-0-span}
@@ -2114,7 +2114,7 @@ TiKV がデプロイされているマシンのリソースが限られている
 >
 > この構成アイテムは`SHOW CONFIG`の結果で返されますが、現在設定しても効果はありません。
 
--   バックグラウンド トランザクションとCoprocessorがデータを読み取る帯域幅のソフト リミット。
+-   バックグラウンド トランザクションとコプロセッサーがデータを読み取る帯域幅のソフト リミット。
 -   デフォルト値: `0KB` (制限なし)
 
 #### <code>enable-auto-tune</code> <span class="version-mark">v6.2.0 の新機能</span> {#code-enable-auto-tune-code-span-class-version-mark-new-in-v6-2-0-span}
@@ -2150,7 +2150,7 @@ TiKV API V2 が有効な場合のタイムスタンプの取得に関連するCo
 ### <code>renew-batch-min-size</code> {#code-renew-batch-min-size-code}
 
 -   タイムスタンプ要求の TSO の最小数。
--   TiKV は、前の期間のタイムスタンプの消費に応じて、キャッシュされたタイムスタンプの数を調整します。少数の TSO のみが必要な場合、TiKV は、数が`renew-batch-min-size`に達するまで、要求された TSO を減らします。アプリケーションで大量のバースト書き込みトラフィックが頻繁に発生する場合は、必要に応じてこのパラメーターをより大きな値に設定できます。このパラメーターは、単一の tikv サーバーのキャッシュ サイズであることに注意してください。パラメーターを大きすぎる値に設定し、クラスターに多くの tikv サーバーが含まれている場合、TSO の消費が速すぎます。
+-   TiKV は、前の期間のタイムスタンプの消費に応じて、キャッシュされたタイムスタンプの数を調整します。少数の TSO のみが必要な場合、TiKV は、数が`renew-batch-min-size`に達するまで、要求された TSO を削減します。アプリケーションで大量のバースト書き込みトラフィックが頻繁に発生する場合は、必要に応じてこのパラメーターをより大きな値に設定できます。このパラメーターは、単一の tikv サーバーのキャッシュ サイズであることに注意してください。パラメーターを大きすぎる値に設定し、クラスターに多くの tikv サーバーが含まれている場合、TSO の消費が速すぎます。
 -   Grafana の**TiKV-RAW** &gt; <strong>Causal timestamp</strong>パネルでは、 <strong>TSO バッチ サイズ</strong>は、アプリケーションのワークロードに従って動的に調整された、ローカルにキャッシュされたタイムスタンプの数です。このメトリックを参照して調整できます`renew-batch-min-size` 。
 -   デフォルト値: `100`
 

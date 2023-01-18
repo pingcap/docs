@@ -17,7 +17,7 @@ TiDB Cloudは[プロメテウス](https://prometheus.io/)の API エンドポイ
 
 ## 制限 {#limitation}
 
-[サーバーレス層](/tidb-cloud/select-cluster-tier.md#serverless-tier)で Prometheus と Grafana の統合を使用することはできません。
+[Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)で Prometheus と Grafana の統合を使用することはできません。
 
 ## 手順 {#steps}
 
@@ -27,9 +27,12 @@ Prometheus サービスを構成してTiDB CloudでScrape_config YAML ファイ�
 
 Prometheus の Scrape_config ファイルを取得するには、次の手順を実行します。
 
-1.  TiDB Cloudコンソールで、Prometheus 統合のターゲット プロジェクトを選択し、[**プロジェクト設定**] タブをクリックします。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)にログインします。
 
-2.  左ペインで [**統合**] をクリックします。
+2.  [**クラスター**](https://tidbcloud.com/console/clusters)ページの左側のナビゲーション ペインで、次のいずれかを実行します。
+
+    -   複数のプロジェクトがある場合は、ターゲット プロジェクトに切り替えてから、[**管理**] &gt; [<strong>統合</strong>] をクリックします。
+    -   プロジェクトが 1 つしかない場合は、[**管理**] &gt; [<strong>統合</strong>] をクリックします。
 
 3.  **Integration to Prometheus を**クリックします。
 
@@ -53,7 +56,11 @@ Prometheus の Scrape_config ファイルを取得するには、次の手順を
 
 ### ステップ 3.Grafana GUI ダッシュボードを使用してメトリックを視覚化する {#step-3-use-grafana-gui-dashboards-to-visualize-the-metrics}
 
-Prometheus サービスがTiDB Cloudからメトリックを読み取った後、Grafana GUI ダッシュボードを使用してメトリックを視覚化できます。
+Prometheus サービスがTiDB Cloudからメトリックを読み取った後、Grafana GUI ダッシュボードを使用して、次のようにメトリックを視覚化できます。
+
+1.  TiDB Cloud [ここ](https://github.com/pingcap/docs/blob/release-6.1/tidb-cloud/monitor-prometheus-and-grafana-integration-grafana-dashboard-UI.json)の Grafana ダッシュボード JSON をダウンロードします。
+2.  メトリクスを視覚化する場合は[この JSON を独自の Grafana GUI にインポートします](https://grafana.com/docs/grafana/v8.5/dashboards/export-import/#import-dashboard) 。
+3.  (オプション) パネルを追加または削除したり、データ ソースを変更したり、表示オプションを変更したりして、必要に応じてダッシュボードをカスタマイズします。
 
 Grafana の使用方法について詳しくは、 [グラファナのドキュメント](https://grafana.com/docs/grafana/latest/getting-started/getting-started-prometheus/)を参照してください。
 

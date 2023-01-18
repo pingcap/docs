@@ -15,8 +15,6 @@ summary: Introduces the best practices for tuning TiDB performance.
 
 テーブルの複数の行を変更する必要がある場合は、複数行のステートメントを使用することをお勧めします。
 
-{{< copyable "" >}}
-
 ```sql
 INSERT INTO t VALUES (1, 'a'), (2, 'b'), (3, 'c');
 
@@ -24,8 +22,6 @@ DELETE FROM t WHERE id IN (1, 2, 3);
 ```
 
 複数の単一行ステートメントを使用することはお勧めしません。
-
-{{< copyable "" >}}
 
 ```sql
 INSERT INTO t VALUES (1, 'a');
@@ -43,8 +39,6 @@ SQL ステートメントを複数回実行する必要がある場合は、SQL 
 
 <SimpleTab>
 <div label="Golang">
-
-{{< copyable "" >}}
 
 ```go
 func BatchInsert(db *sql.DB) error {
@@ -66,8 +60,6 @@ func BatchInsert(db *sql.DB) error {
 </div>
 
 <div label="Java">
-
-{{< copyable "" >}}
 
 ```java
 public void batchInsert(Connection connection) throws SQLException {
@@ -92,15 +84,11 @@ public void batchInsert(Connection connection) throws SQLException {
 
 すべての列のデータが必要ない場合は、 `SELECT *`を使用してすべての列のデータを返さないでください。次のクエリは非効率的です。
 
-{{< copyable "" >}}
-
 ```sql
 SELECT * FROM books WHERE title = 'Marian Yost';
 ```
 
 必要な列のみをクエリする必要があります。例えば：
-
-{{< copyable "" >}}
 
 ```sql
 SELECT title, price FROM books WHERE title = 'Marian Yost';
@@ -118,15 +106,11 @@ SELECT title, price FROM books WHERE title = 'Marian Yost';
 
 テーブルからすべてのデータを削除する必要がある場合は、次の`TRUNCATE`ステートメントを使用することをお勧めします。
 
-{{< copyable "" >}}
-
 ```sql
 TRUNCATE TABLE t;
 ```
 
 完全なテーブル データに`DELETE`を使用することはお勧めしません。
-
-{{< copyable "" >}}
 
 ```sql
 DELETE FROM t;
@@ -153,16 +137,12 @@ TiDB は、オンラインのインデックス追加操作をサポートして
 
 オンライン アプリケーションへの影響を軽減するために、インデックスの追加操作の既定の速度は低速です。インデックスの追加操作のターゲット列が読み取り負荷のみを含むか、オンライン ワークロードに直接関係しない場合、上記の変数の値を適切に増やして、インデックスの追加操作を高速化できます。
 
-{{< copyable "" >}}
-
 ```sql
 SET @@global.tidb_ddl_reorg_worker_cnt = 16;
 SET @@global.tidb_ddl_reorg_batch_size = 4096;
 ```
 
 インデックスの追加操作のターゲット列が頻繁に更新される場合 ( `UPDATE` 、 `INSERT` 、および`DELETE`を含む)、上記の変数を増やすと、より多くの書き込み競合が発生し、オンライン ワークロードに影響します。したがって、インデックスの追加操作は、一定の再試行により完了するまでに長い時間がかかる場合があります。この場合、上記の変数の値を減らして、オンライン アプリケーションとの書き込み競合を回避することをお勧めします。
-
-{{< copyable "" >}}
 
 ```sql
 SET @@global.tidb_ddl_reorg_worker_cnt = 4;

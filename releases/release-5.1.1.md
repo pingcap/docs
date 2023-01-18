@@ -90,7 +90,7 @@ TiDB バージョン: 5.1.1
     -   悲観的トランザクションのインデックス キーが繰り返しコミットされる可能性があるバグを修正します[#26359](https://github.com/pingcap/tidb/issues/26359)
     -   オプティマイザがパーティションを検索するときの整数オーバーフローのリスクを修正します[#26227](https://github.com/pingcap/tidb/issues/26227)
     -   タイムスタンプ[#26292](https://github.com/pingcap/tidb/issues/26292)に`DATE`をキャストすると、無効な値が書き込まれる可能性がある問題を修正します。
-    -   Coprocessor Cache メトリックが Grafana [#26338](https://github.com/pingcap/tidb/issues/26338)で表示されない問題を修正します。
+    -   コプロセッサー Cache メトリックが Grafana [#26338](https://github.com/pingcap/tidb/issues/26338)で表示されない問題を修正します。
     -   テレメトリによって発生する迷惑なログの問題を修正する[#25760](https://github.com/pingcap/tidb/issues/25760) [#25785](https://github.com/pingcap/tidb/issues/25785)
     -   プレフィックス インデックス[#26029](https://github.com/pingcap/tidb/issues/26029)のクエリ範囲のバグを修正
     -   同じパーティションを同時に切り捨てると DDL の実行がハングする問題を修正します[#26229](https://github.com/pingcap/tidb/issues/26229)

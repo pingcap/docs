@@ -26,7 +26,7 @@ CSV ファイルはスキーマレスです。それらを TiDB にインポー�
 
 ## Configuration / コンフィグレーション {#configuration}
 
-CSV 形式は、 `[mydumper.csv]`セクションの`tidb-lightning.toml`で構成できます。ほとんどの設定には、MySQL [`LOAD DATA`]ステートメントに対応するオプションがあります。
+CSV 形式は、 `[mydumper.csv]`セクションの`tidb-lightning.toml`で設定できます。ほとんどの設定には、MySQL [`LOAD DATA`]ステートメントに対応するオプションがあります。
 
 ```toml
 [mydumper.csv]

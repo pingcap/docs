@@ -15,9 +15,9 @@ TiDB と ProxySQL について詳しく知りたい場合は、次のような�
 
 ## ProxySQL とは何ですか? {#what-is-proxysql}
 
-[プロキシSQL](https://proxysql.com/)は、高パフォーマンスのオープン ソース SQL プロキシです。柔軟なアーキテクチャを備えており、さまざまな方法で展開できるため、さまざまなユース ケースに最適です。たとえば、ProxySQL を使用して、頻繁にアクセスされるデータをキャッシュすることでパフォーマンスを向上させることができます。
+[ProxySQL](https://proxysql.com/)は、高パフォーマンスのオープン ソース SQL プロキシです。柔軟なアーキテクチャを備えており、さまざまな方法で展開できるため、さまざまなユース ケースに最適です。たとえば、ProxySQL を使用して、頻繁にアクセスされるデータをキャッシュすることでパフォーマンスを向上させることができます。
 
-ProxySQL は、高速で効率的で使いやすいようにゼロから設計されています。 MySQL と完全に互換性があり、高品質の SQL プロキシに期待されるすべての機能をサポートしています。さらに、ProxySQL には多数の独自の機能が備わっているため、幅広いアプリケーションにとって理想的な選択肢となります。
+ProxySQL は、高速で効率的で使いやすいようにゼロから設計されています。 MySQL と完全に互換性があり、高品質の SQL プロキシに期待されるすべての機能をサポートしています。さらに、ProxySQL には、さまざまなアプリケーションにとって理想的な選択肢となる多数の独自の機能が備わっています。
 
 ## ProxySQL 統合の理由 {#why-proxysql-integration}
 
@@ -119,11 +119,11 @@ systemctl start docker
 
 ### オプション 1: TiDB Cloudを ProxySQL と統合する {#option-1-integrate-tidb-cloud-with-proxysql}
 
-この統合では、TiDB Serverless Tier クラスターと共に[ProxySQL Docker イメージ](https://hub.docker.com/r/proxysql/proxysql)を使用します。次の手順では、ポート`16033`で ProxySQL をセットアップするため、このポートが使用可能であることを確認してください。
+この統合では、TiDB Serverless Serverless Tierクラスターと共に[ProxySQL Docker イメージ](https://hub.docker.com/r/proxysql/proxysql)を使用します。次の手順では、ポート`16033`で ProxySQL をセットアップするため、このポートが使用可能であることを確認してください。
 
-#### ステップ 1. TiDB Cloud Tier クラスターを作成する {#step-1-create-a-tidb-cloud-serverless-tier-cluster}
+#### ステップ 1. TiDB Cloud Serverless Tierクラスターを作成する {#step-1-create-a-tidb-cloud-serverless-tier-cluster}
 
-1.  [無料の TiDB Serverless Tier クラスターを作成する](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-tidb-cluster) .クラスターに設定した root パスワードを覚えておいてください。
+1.  [無料の TiDB Serverless Serverless Tierクラスターを作成する](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-tidb-cluster) .クラスターに設定した root パスワードを覚えておいてください。
 2.  後で使用するために、クラスターのホスト名、ポート、およびユーザー名を取得します。
 
     1.  [クラスター](https://tidbcloud.com/console/clusters)ページで、クラスター名をクリックして、クラスターの概要ページに移動します。
@@ -327,12 +327,12 @@ systemctl start docker
     >
     > 1.  クラスターのユーザー名とパスワードを使用してユーザーを追加します。
     > 2.  ユーザーを監視アカウントに割り当てます。
-    > 3.  ホストのリストに TiDB サーバーレス層クラスターを追加します。
-    > 4.  ProxySQL と TiDB Serverless Tier クラスター間の安全な接続を有効にします。
+    > 3.  ホストのリストに TiDBServerless Tierクラスターを追加します。
+    > 4.  ProxySQL と TiDB Serverless Serverless Tierクラスター間の安全な接続を有効にします。
     >
     > よりよく理解するために、 `proxysql-prepare.sql`のファイルを確認することを強くお勧めします。 ProxySQL 構成の詳細については、 [ProxySQL ドキュメント](https://proxysql.com/documentation/proxysql-configuration/)を参照してください。
 
-    以下は出力例です。クラスターのホスト名が出力に表示されていることがわかります。これは、ProxySQL と TiDB Serverless Tier クラスター間の接続が確立されていることを意味します。
+    以下は出力例です。クラスターのホスト名が出力に表示されていることがわかります。これは、ProxySQL と TiDB Serverless Serverless Tierクラスター間の接続が確立されていることを意味します。
 
     ```
     *************************** 1. row ***************************
@@ -388,7 +388,7 @@ systemctl start docker
     SELECT VERSION();
     ```
 
-    TiDB のバージョンが表示されている場合は、ProxySQL を介して TiDB Serverless Tier クラスターに正常に接続されています。いつでも MySQL クライアントを終了するには、 `quit`を入力して<kbd>Enter</kbd>を押します。
+    TiDB のバージョンが表示されている場合は、ProxySQL を介して TiDB Serverless Serverless Tierクラスターに正常に接続されています。いつでも MySQL クライアントを終了するには、 `quit`を入力して<kbd>Enter</kbd>を押します。
 
     > **ノート：**
     >
@@ -624,7 +624,7 @@ systemctl start docker
 
 ## 本番環境 {#production-environment}
 
-運用環境では、フル マネージド エクスペリエンスのために[TiDB Cloud](https://en.pingcap.com/tidb-cloud/)を直接使用することをお勧めします。
+本番環境では、フル マネージド エクスペリエンスのために[TiDB Cloud](https://en.pingcap.com/tidb-cloud/)を直接使用することをお勧めします。
 
 ### 前提条件 {#prerequisite}
 
@@ -787,7 +787,7 @@ ProxySQL を TiDB のプロキシとして使用するには、ProxySQL を構�
 
 > **警告：**
 >
-> 本番環境では、デフォルトの認証情報で ProxySQL を実行しないでください。 `proxysql`サービスを開始する前に、 `admin_credentials`変数を変更して`/etc/proxysql.cnf`ファイルのデフォルトを変更できます。
+> 本番環境でデフォルトの認証情報を使用して ProxySQL を実行しないでください。 `proxysql`サービスを開始する前に、 `admin_credentials`変数を変更して`/etc/proxysql.cnf`ファイルのデフォルトを変更できます。
 
 ## 典型的なシナリオ {#typical-scenario}
 

@@ -20,7 +20,7 @@
 -   発展させる
     -   [概要](/develop/dev-guide-overview.md)
     -   クイックスタート
-        -   [TiDB Cloud(サーバーレス層) で TiDBクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md)
+        -   [TiDB Cloud(Serverless Tier) で TiDBクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md)
         -   [TiDB の CRUD SQL](/develop/dev-guide-tidb-crud-sql.md)
     -   応用例
         -   [Java](/develop/dev-guide-sample-application-java.md)
@@ -71,12 +71,12 @@
         -   [SQL またはトランザクションの問題](/develop/dev-guide-troubleshoot-overview.md)
         -   [不安定な結果セット](/develop/dev-guide-unstable-result-set.md)
         -   [タイムアウト](/develop/dev-guide-timeouts-in-tidb.md)
-    -   リファレンス
+    -   参照
         -   [書店のサンプル アプリケーション](/develop/dev-guide-bookshop-schema-design.md)
         -   ガイドライン
             -   [オブジェクト命名規則](/develop/dev-guide-object-naming-guidelines.md)
             -   [SQL開発仕様](/develop/dev-guide-sql-development-specification.md)
-        -   アーカイブされたドキュメント
+        -   以前のドキュメント
             -   [ジャンゴの場合](/develop/dev-guide-outdated-for-django.md)
             -   [SQLAlchemy の場合](/develop/dev-guide-outdated-for-sqlalchemy.md)
             -   [mysql-connector-python の場合](/develop/dev-guide-outdated-for-python-mysql-connector.md)
@@ -213,7 +213,7 @@
         -   [TiKV Follower Readの調整](/follower-read.md)
         -   [リージョンのパフォーマンスを調整する](/tune-region-performance.md)
         -   [TiFlashパフォーマンスの調整](/tiflash/tune-tiflash-performance.md)
-        -   [Coprocessorキャッシュ](/coprocessor-cache.md)
+        -   [コプロセッサーキャッシュ](/coprocessor-cache.md)
         -   ガベージ コレクション (GC)
             -   [概要](/garbage-collection-overview.md)
             -   [Configuration / コンフィグレーション](/garbage-collection-configuration.md)
@@ -320,6 +320,7 @@
             -   TiUPクラスタコマンド
                 -   [概要](/tiup/tiup-component-cluster.md)
                 -   [tiup cluster audit](/tiup/tiup-component-cluster-audit.md)
+                -   [tiup cluster auditのクリーンアップ](/tiup/tiup-component-cluster-audit-cleanup.md)
                 -   [tiup cluster check](/tiup/tiup-component-cluster-check.md)
                 -   [tiup cluster clean](/tiup/tiup-component-cluster-clean.md)
                 -   [tiup cluster deploy](/tiup/tiup-component-cluster-deploy.md)
@@ -409,7 +410,7 @@
             -   [ウェブインターフェース](/tidb-lightning/tidb-lightning-web-interface.md)
         -   [デプロイ](/tidb-lightning/deploy-tidb-lightning.md)
         -   [トラブルシューティング](/tidb-lightning/troubleshoot-tidb-lightning.md)
-        -   リファレンス
+        -   参照
             -   [Configuration / コンフィグレーションファイル](/tidb-lightning/tidb-lightning-configuration.md)
             -   [コマンド ライン フラグ](/tidb-lightning/tidb-lightning-command-line-full.md)
             -   [モニター](/tidb-lightning/monitor-tidb-lightning.md)
@@ -432,7 +433,7 @@
             -   [タスクの構成](/dm/dm-task-configuration-guide.md)
             -   [テーブル ルーティング](/dm/dm-key-features.md)
             -   [ブロックリストと許可リスト](/dm/dm-key-features.md#block-and-allow-table-lists)
-            -   [Binlogイベント フィルター](/dm/dm-key-features.md#binlog-event-filter)
+            -   [Binlogイベント フィルタ](/dm/dm-key-features.md#binlog-event-filter)
             -   [SQL 式を使用した DML のフィルタリング](/dm/feature-expression-filter.md)
             -   データ移行タスクの管理
                 -   [タスクの事前チェック](/dm/dm-precheck.md)
@@ -470,7 +471,7 @@
             -   [クラスターのデータ ソースとタスク構成のエクスポートとインポート](/dm/dm-export-import-config.md)
             -   [アラートの処理](/dm/dm-handle-alerts.md)
             -   [毎日のチェック](/dm/dm-daily-check.md)
-        -   リファレンス
+        -   参照
             -   アーキテクチャ
                 -   [DMワーカー](/dm/dm-worker-intro.md)
                 -   [中継ログ](/dm/relay-log.md)
@@ -489,7 +490,7 @@
                 -   [DM 接続の TLS を有効にする](/dm/dm-enable-tls.md)
                 -   [自己署名証明書の生成](/dm/dm-generate-self-signed-certificates.md)
             -   モニタリングとアラート
-                -   [指標のモニタリング](/dm/monitor-a-dm-cluster.md)
+                -   [指標の監視](/dm/monitor-a-dm-cluster.md)
                 -   [アラート ルール](/dm/dm-alert-rules.md)
             -   [エラーコード](/dm/dm-error-handling.md#handle-common-errors)
             -   [用語集](/dm/dm-glossary.md)
@@ -516,7 +517,7 @@
         -   監視と警告
             -   [指標のモニタリング](/ticdc/monitor-ticdc.md)
             -   [アラート ルール](/ticdc/ticdc-alert-rules.md)
-        -   リファレンス
+        -   参照
             -   [アーキテクチャ](/ticdc/ticdc-architecture.md)
             -   [TiCDC サーバー構成](/ticdc/ticdc-server-config.md)
             -   [TiCDC Changefeed構成](/ticdc/ticdc-changefeed-config.md)
@@ -559,10 +560,10 @@
         -   [DM レプリケーション シナリオでのデータ チェック](/sync-diff-inspector/dm-diff.md)
     -   ティスパーク
         -   [ユーザーガイド](/tispark-overview.md)
--   リファレンス
+-   参照
     -   クラスタアーキテクチャ
         -   [概要](/tidb-architecture.md)
-        -   [ストレージ](/tidb-storage.md)
+        -   [保管所](/tidb-storage.md)
         -   [コンピューティング](/tidb-computing.md)
         -   [スケジューリング](/tidb-scheduling.md)
     -   主な監視指標
@@ -606,7 +607,7 @@
             -   [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)
             -   [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)
             -   [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md)
-            -   [`ADMIN SHOW DDL [JOBS|QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)
+            -   [`ADMIN SHOW DDL [JOBS|JOB QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)
             -   [`ADMIN SHOW TELEMETRY`](/sql-statements/sql-statement-admin-show-telemetry.md)
             -   [`ALTER DATABASE`](/sql-statements/sql-statement-alter-database.md)
             -   [`ALTER INDEX`](/sql-statements/sql-statement-alter-index.md)
@@ -833,6 +834,8 @@
                 -   [`TIDB_SERVERS_INFO`](/information-schema/information-schema-tidb-servers-info.md)
                 -   [`TIDB_TRX`](/information-schema/information-schema-tidb-trx.md)
                 -   [`TIFLASH_REPLICA`](/information-schema/information-schema-tiflash-replica.md)
+                -   [`TIFLASH_SEGMENTS`](/information-schema/information-schema-tiflash-segments.md)
+                -   [`TIFLASH_TABLES`](/information-schema/information-schema-tiflash-tables.md)
                 -   [`TIKV_REGION_PEERS`](/information-schema/information-schema-tikv-region-peers.md)
                 -   [`TIKV_REGION_STATUS`](/information-schema/information-schema-tikv-region-status.md)
                 -   [`TIKV_STORE_STATUS`](/information-schema/information-schema-tikv-store-status.md)

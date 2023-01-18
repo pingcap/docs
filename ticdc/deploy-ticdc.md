@@ -113,7 +113,7 @@ TiCDC クラスターをアップグレードするときは、次の点に注�
 
 ## TiUP を使用してTiUPクラスター構成を変更する {#modify-ticdc-cluster-configurations-using-tiup}
 
-このセクションでは、 [`tiup cluster edit-config`](/tiup/tiup-component-cluster-edit-config.md)コマンドを使用して TiCDC の構成を変更する方法について説明します。次の例では、デフォルト値の`gc-ttl`を`86400`から`3600` (1 時間) に変更する必要があると想定しています。
+このセクションでは、 [`tiup cluster edit-config`](/tiup/tiup-component-cluster-edit-config.md)コマンドを使用して TiCDC の構成を変更する方法について説明します。次の例では、デフォルト値の`gc-ttl`を`86400`から`172800` (48 時間) に変更する必要があると想定しています。
 
 1.  `tiup cluster edit-config`コマンドを実行します。 `<cluster-name>`を実際のクラスター名に置き換えます。
 
@@ -133,8 +133,10 @@ TiCDC クラスターをアップグレードするときは、次の点に注�
       pump: {}
       drainer: {}
       cdc:
-        gc-ttl: 3600
+        gc-ttl: 172800
     ```
+
+    上記のコマンドでは、 `gc-ttl`は 48 時間に設定されています。
 
 3.  `tiup cluster reload -R cdc`コマンドを実行して構成をリロードします。
 
@@ -163,12 +165,14 @@ tiup ctl:<version> cdc capture list --server=http://10.0.10.25:8300
   {
     "id": "806e3a1b-0e31-477f-9dd6-f3f2c570abdd",
     "is-owner": true,
-    "address": "127.0.0.1:8300"
+    "address": "127.0.0.1:8300",
+    "cluster-id": "default"
   },
   {
     "id": "ea2a4203-56fe-43a6-b442-7b295f458ebc",
     "is-owner": false,
-    "address": "127.0.0.1:8301"
+    "address": "127.0.0.1:8301",
+    "cluster-id": "default"
   }
 ]
 ```
@@ -176,3 +180,4 @@ tiup ctl:<version> cdc capture list --server=http://10.0.10.25:8300
 -   `id` : サービスプロセスのIDを示します。
 -   `is-owner` : サービスプロセスがオーナーノードかどうかを示します。
 -   `address` : サービスプロセスが外部とのインタフェースを提供するアドレスを示します。
+-   `cluster-id` : TiCDC クラスターの ID を示します。デフォルト値は`default`です。

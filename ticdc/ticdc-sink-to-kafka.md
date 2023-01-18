@@ -28,7 +28,7 @@ Info: {"sink-uri":"kafka://127.0.0.1:9092/topic-name?protocol=canal-json&kafka-v
 -   `--sink-uri` : レプリケーション タスクのダウンストリーム アドレス。詳細については、 [`kafka`でシンク URI を構成する](#configure-sink-uri-for-kafka)を参照してください。
 -   `--start-ts` : 変更フィードの開始 TSO を指定します。この TSO から、TiCDC クラスターはデータのプルを開始します。デフォルト値は現在の時刻です。
 -   `--target-ts` : changefeed の終了 TSO を指定します。この TSO に対して、TiCDC クラスターはデータのプルを停止します。デフォルト値は空です。これは、TiCDC がデータのプルを自動的に停止しないことを意味します。
--   `--config` : changefeed 構成ファイルを指定します。詳細については、 [TiCDC ChangefeedConfiguration / コンフィグレーションパラメータ](/ticdc/ticdc-changefeed-config.md)を参照してください。
+-   `--config` : changefeed 構成ファイルを指定します。詳細については、 [TiCDC ChangefeedConfiguration / コンフィグレーションパラメーター](/ticdc/ticdc-changefeed-config.md)を参照してください。
 
 ## Kafka のシンク URI を構成する {#configure-sink-uri-for-kafka}
 
@@ -56,6 +56,7 @@ Info: {"sink-uri":"kafka://127.0.0.1:9092/topic-name?protocol=canal-json&kafka-v
 | `partition-num`                      | ダウンストリーム Kafka パーティションの数 (オプション。値は実際のパーティション数を**超えてはなりません**。そうでない場合、レプリケーション タスクは正常に作成されません。デフォルトでは`3` )。                                                                                                                                                                    |
 | `max-message-bytes`                  | 毎回 Kafka ブローカーに送信されるデータの最大サイズ (オプション、デフォルトでは`10MB` )。 v5.0.6 および v4.0.6 から、デフォルト値が`64MB`および`256MB`から`10MB`に変更されました。                                                                                                                                                          |
 | `replication-factor`                 | 保存できる Kafka メッセージ レプリカの数 (オプション、既定では`1` )。                                                                                                                                                                                                                                   |
+| `compression`                        | メッセージの送信時に使用される圧縮アルゴリズム (値のオプションは`none` 、 `lz4` 、 `gzip` 、 `snappy` 、および`zstd`で、デフォルトでは`none`です)。                                                                                                                                                                            |
 | `protocol`                           | メッセージが Kafka に出力されるプロトコル。値のオプションは`canal-json` 、 `open-protocol` 、 `canal` 、 `avro` 、および`maxwell`です。                                                                                                                                                                          |
 | `auto-create-topic`                  | 渡された`topic-name`が Kafka クラスターに存在しない場合に、TiCDC が自動的にトピックを作成するかどうかを決定します (オプション、デフォルトでは`true` )。                                                                                                                                                                                |
 | `enable-tidb-extension`              | オプション。デフォルトでは`false`です。出力プロトコルが`canal-json`の場合、値が`true`の場合、TiCDC は Resolved イベントを送信し、TiDB 拡張フィールドを Kafka メッセージに追加します。 v6.1.0 から、このパラメーターは`avro`プロトコルにも適用されます。値が`true`の場合、TiCDC は Kafka メッセージに[3 つの TiDB 拡張フィールド](/ticdc/ticdc-avro-protocol.md#tidb-extension-fields)を追加します。 |
@@ -164,7 +165,7 @@ dispatchers = [
 -   どのマッチャー ルールにも一致しないテーブルの場合、対応するデータ変更イベントが`--sink-uri`で指定されたデフォルト トピックに送信されます。たとえば、 `test10.aa`テーブルはデフォルト トピックに送信されます。
 -   マッチャー ルールに一致するが、トピック ディスパッチャーが指定されていないテーブルの場合、対応するデータ変更は`--sink-uri`で指定されたデフォルト トピックに送信されます。たとえば、 `test6.aa`テーブルはデフォルト トピックに送信されます。
 
-### トピック ディスパッチャ {#topic-dispatchers}
+### トピック ディスパッチャー {#topic-dispatchers}
 
 topic = &quot;xxx&quot; を使用してトピック ディスパッチャを指定し、トピック式を使用して柔軟なトピック ディスパッチ ポリシーを実装できます。トピックの総数は 1000 未満にすることをお勧めします。
 

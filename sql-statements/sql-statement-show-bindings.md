@@ -40,7 +40,7 @@ SHOW [GLOBAL | SESSION] BINDINGS [ShowLikeOrWhereOpt];
 | original_sql | パラメータ化後の元の SQL ステートメント                                                                                                                            |
 | bind_sql     | ヒント付きのバインドされた SQL ステートメント                                                                                                                         |
 | default_db   | デフォルトのデータベース                                                                                                                                      |
-| 状態           | 「使用中」、「削除済み」、「無効」、「拒否済み」、「確認待ち」などのステータス                                                                                                           |
+| スターテス        | 「使用中」、「削除済み」、「無効」、「拒否済み」、「確認待ち」などのステータス                                                                                                           |
 | create_time  | 作成時間                                                                                                                                              |
 | update_time  | 更新時間                                                                                                                                              |
 | 文字コード        | キャラクターセット                                                                                                                                         |

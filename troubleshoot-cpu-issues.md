@@ -78,7 +78,7 @@ PD TSO の`wait duration`メトリックの異常な増加があります。こ�
 
 -   TiKV再始動のため再選。
     -   TiKV がパニックした後、 `systemd`でプルアップされ、正常に実行されます。panicが発生したかどうかは、TiKV ログを表示することで確認できます。この問題は予期しないものであるため、発生した場合は[バグを報告](https://github.com/tikv/tikv/issues/new?template=bug-report.md) 。
-    -   TiKV は第三者によって停止または強制終了され、その後`systemd`によって引き上げられます。 `dmesg`と TiKV ログを参照して原因を確認してください。
+    -   TiKV は第三者によって停止または強制終了され、その後`systemd`によって引き上げられました。 `dmesg`と TiKV ログを参照して原因を確認してください。
     -   TiKV は OOM であり、再起動を引き起こします。
     -   `THP` (Transparent Hugepage) を動的に調整するため、TiKV がハングします。
 
@@ -88,7 +88,7 @@ PD TSO の`wait duration`メトリックの異常な増加があります。こ�
 
 -   `block-cache`の構成が大きすぎると、TiKV OOM が発生する可能性があります。問題の原因を確認するには、モニター**Grafana** -&gt; <strong>TiKV-details</strong>で該当するインスタンスを選択して、RocksDB の`block cache size`を確認します。その間、パラメータ`[storage.block-cache] capacity = # "1GB"`が正しく設定されているかどうかを確認します。デフォルトでは、TiKV の`block-cache`は、マシンの合計メモリの`45%`に設定されています。 TiKV はコンテナーのメモリ制限を超える可能性がある物理マシンのメモリを取得するため、コンテナーに TiKV をデプロイするときに、このパラメーターを明示的に指定する必要があります。
 
--   Coprocessorは多数の大きなクエリを受け取り、大量のデータを返します。 gRPC は、コプロセッサがデータを返すのと同じ速さでデータを送信できず、OOM が発生します。原因を確認するには、モニター**Grafana** -&gt; <strong>TiKV-details</strong> -&gt; <strong>coprocessor overview</strong>を表示して、 `response size`が`network outbound`のトラフィックを超えているかどうかを確認できます。
+-   コプロセッサーは多数の大きなクエリを受け取り、大量のデータを返します。 gRPC は、コプロセッサがデータを返すのと同じ速さでデータを送信できず、OOM が発生します。原因を確認するには、モニター**Grafana** -&gt; <strong>TiKV-details</strong> -&gt; <strong>coprocessor overview</strong>を表示して、 `response size`が`network outbound`のトラフィックを超えているかどうかを確認できます。
 
 ### シングル TiKV スレッドのボトルネック {#bottleneck-of-a-single-tikv-thread}
 

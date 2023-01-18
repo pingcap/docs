@@ -13,15 +13,14 @@ TiDB Cloudでは、常に稼働していないクラスターを簡単に一時�
 
 > **ノート：**
 >
-> [サーバーレス階層クラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier)を一時停止することはできません。
+> [Serverless Tierクラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)を一時停止することはできません。
 
 ## 制限事項 {#limitations}
 
 -   クラスターが**AVAILABLE**状態の場合にのみ一時停止できます。クラスターが<strong>MODIFYING</strong>などの他の状態にある場合は、クラスターを一時停止する前に、現在の操作が完了するまで待機する必要があります。
 -   データ インポート タスクの実行中は、クラスターを一時停止できません。インポート タスクが完了するのを待つか、インポート タスクをキャンセルすることができます。
 -   バックアップ ジョブの実行中は、クラスターを一時停止できません。現在のバックアップ ジョブが完了するまで待つか、または[実行中のバックアップ ジョブを削除する](/tidb-cloud/backup-and-restore.md#delete-a-running-backup-job) .
-
-<!--- - You cannot pause your cluster if it has any [Changefeeds](/tidb-cloud/changefeed-overview.md). You need to delete the existing Changefeeds ([Delete Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md#delete-a-sink) or [Delete Sink to MySQL](/tidb-cloud/changefeed-sink-to-mysql.md#delete-a-sink)) before pausing the cluster. --->
+-   クラスターに[チェンジフィード](/tidb-cloud/changefeed-overview.md)がある場合、クラスターを一時停止することはできません。クラスターを一時停止する前に[既存の変更フィードを削除します](/tidb-cloud/changefeed-overview.md#delete-a-changefeed)が必要です。
 
 ## TiDB クラスターを一時停止する {#pause-a-tidb-cluster}
 
@@ -42,9 +41,9 @@ TiDB Cloudでは、常に稼働していないクラスターを簡単に一時�
 
 クラスターを一時停止するには、次の手順を実行します。
 
-1.  TiDB Cloudコンソールで、プロジェクトの [**クラスター**] ページに移動します。
+1.  TiDB Cloudコンソールで、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
-2.  一時停止するクラスターについて、クラスター領域の右上隅にある [ **...** ] をクリックします。
+2.  一時停止するクラスターの行で、[ **...** ] をクリックします。
 
     > **ヒント：**
     >
@@ -68,7 +67,7 @@ TiDB Cloud API を使用してクラスターを一時停止することもで�
 
 一時停止したクラスターを再開するには、次の手順を実行します。
 
-1.  TiDB Cloudコンソールで、プロジェクトの [**クラスター**] ページに移動します。
+1.  TiDB Cloudコンソールで、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
 2.  再開するクラスターの [ **Resume** ] をクリックします。
 

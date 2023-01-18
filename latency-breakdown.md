@@ -140,7 +140,7 @@ read value duration(from disk) =
     sum(rate(tikv_storage_rocksdb_perf{metric="block_read_time",req="get/batch_get_command"})) / sum(rate(tikv_storage_rocksdb_perf{metric="block_read_count",req="get/batch_get_command"}))
 ```
 
-TiKV は RocksDB をストレージ エンジンとして使用します。必要な値がブロック キャッシュにない場合、TiKV はディスクから値をロードする必要があります。 `tikv_storage_rocksdb_perf`の場合、get リクエストは`get`または`batch_get_command`のいずれかになります。
+TiKV は RocksDB をストレージ エンジンとして使用します。必要な値がブロックキャッシュにない場合、TiKV はディスクから値を読み込む必要があります。 `tikv_storage_rocksdb_perf`の場合、get リクエストは`get`または`batch_get_command`のいずれかになります。
 
 ### バッチポイント取得 {#batch-point-get}
 

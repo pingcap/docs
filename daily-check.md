@@ -52,7 +52,7 @@ CPU、メモリ、およびディスクの使用状況を表示できます。�
 
 TiKV での KV 要求期間 99。継続時間が長いノードが見つかった場合は、ホット スポットがあるかどうか、またはパフォーマンスの低いノードがあるかどうかを確認します。
 
-### PD TSO 待機期間 {#pd-tso-wait-duration}
+### PD TSO 待機時間 {#pd-tso-wait-duration}
 
 ![TiDB TSO Wait Duration](/media/pd-duration-panel.png)
 

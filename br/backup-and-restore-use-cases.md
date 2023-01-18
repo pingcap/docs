@@ -1,13 +1,14 @@
 ---
 title: TiDB Backup and Restore Use Cases
 summary: Learn the use cases of backing up and restoring data using br command-line tool.
+aliases: ['/tidb/stable/backup-and-restore-use-cases-for-maintain/']
 ---
 
 # TiDB のバックアップと復元の使用例 {#tidb-backup-and-restore-use-cases}
 
 [TiDB スナップショットのバックアップと復元ガイド](/br/br-snapshot-guide.md)と[TiDB ログのバックアップと PITR ガイド](/br/br-pitr-guide.md)は、TiDB が提供するバックアップと復元のソリューション、つまり、スナップショット (完全) バックアップと復元、ログ バックアップ、およびポイント イン タイム リカバリ (PITR) を紹介します。このドキュメントは、特定のユース ケースで TiDB のバックアップおよび復元ソリューションをすばやく開始するのに役立ちます。
 
-AWS に TiDB 本番クラスターをデプロイし、ビジネス チームが次の要件を要求したとします。
+AWS に TiDB本番クラスターをデプロイし、ビジネス チームが次の要件を要求したとします。
 
 -   データの変更をタイムリーにバックアップします。データベースに障害が発生した場合、最小限のデータ損失でアプリケーションを迅速に復旧できます (数分間のデータ損失のみが許容されます)。
 -   毎月特定の時間にビジネス監査を実行します。監査要求を受け取ったら、要求に応じて過去 1 か月の特定の時点でデータをクエリするためのデータベースを提供する必要があります。

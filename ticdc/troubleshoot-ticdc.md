@@ -9,7 +9,7 @@ summary: Learn how to troubleshoot issues you might encounter when you use TiCDC
 
 > **ノート：**
 >
-> このドキュメントでは、 `cdc cli`コマンドで指定される PD アドレスは`--pd=http://10.0.10.25:2379`です。コマンドを使用するときは、アドレスを実際の PD アドレスに置き換えます。
+> このドキュメントでは、 `cdc cli`コマンドで指定されたサーバーアドレスは`server=http://127.0.0.1:8300`です。コマンドを使用するときは、アドレスを実際の PD アドレスに置き換えます。
 
 ## TiCDC レプリケーションの中断 {#ticdc-replication-interruptions}
 
@@ -27,7 +27,7 @@ summary: Learn how to troubleshoot issues you might encounter when you use TiCDC
 {{< copyable "" >}}
 
 ```shell
-cdc cli changefeed query --pd=http://10.0.10.25:2379 --changefeed-id 28c43ffc-2316-4f4f-a70b-d1a7c59ba79f
+cdc cli changefeed query --server=http://127.0.0.1:8300 --changefeed-id 28c43ffc-2316-4f4f-a70b-d1a7c59ba79f
 ```
 
 上記のコマンドの出力で、 `admin-job-type`はこのレプリケーション タスクの状態を示しています。
@@ -110,7 +110,7 @@ Warning: Unable to load '/usr/share/zoneinfo/zone1970.tab' as time zone. Skippin
     {{< copyable "" >}}
 
     ```shell
-    cdc cli changefeed create --sink-uri="mysql://root@127.0.0.1:3306/?time-zone=CST" --pd=http://10.0.10.25:2379
+    cdc cli changefeed create --sink-uri="mysql://root@127.0.0.1:3306/?time-zone=CST" --server=http://127.0.0.1:8300
     ```
 
     > **ノート：**
@@ -153,7 +153,7 @@ v4.0.8 以降、変更フィードの出力に`canal-json` 、 `canal`または`
     {{< copyable "" >}}
 
     ```shell
-    cdc cli changefeed pause -c test-cf --pd=http://10.0.10.25:2379
+    cdc cli changefeed pause -c test-cf --server=http://127.0.0.1:8300
     ```
 
 3.  `cdc cli changefeed update`を実行して、元の changefeed 構成を更新します。
@@ -161,7 +161,7 @@ v4.0.8 以降、変更フィードの出力に`canal-json` 、 `canal`または`
     {{< copyable "" >}}
 
     ```shell
-    cdc cli changefeed update -c test-cf --pd=http://10.0.10.25:2379 --sink-uri="mysql://127.0.0.1:3306/?max-txn-row=20&worker-number=8" --config=changefeed.toml
+    cdc cli changefeed update -c test-cf --server=http://127.0.0.1:8300 --sink-uri="mysql://127.0.0.1:3306/?max-txn-row=20&worker-number=8" --config=changefeed.toml
     ```
 
 4.  `cdc cli changfeed resume`を実行して、レプリケーション タスクを再開します。
@@ -169,7 +169,7 @@ v4.0.8 以降、変更フィードの出力に`canal-json` 、 `canal`または`
     {{< copyable "" >}}
 
     ```shell
-    cdc cli changefeed resume -c test-cf --pd=http://10.0.10.25:2379
+    cdc cli changefeed resume -c test-cf --server=http://127.0.0.1:8300
     ```
 
 ## <code>[tikv:9006]GC life time is shorter than transaction duration, transaction starts at xx, GC safe point is yy</code>あるというエラーが、TiCDC を使用して変更フィードを作成すると報告されます。私は何をすべきか？ {#the-code-tikv-9006-gc-life-time-is-shorter-than-transaction-duration-transaction-starts-at-xx-gc-safe-point-is-yy-code-error-is-reported-when-i-use-ticdc-to-create-a-changefeed-what-should-i-do}
@@ -201,7 +201,7 @@ DDL ステートメントの実行に失敗した場合、レプリケーショ�
 {{< copyable "" >}}
 
 ```shell
-cdc cli changefeed resume -c test-cf --pd=http://10.0.10.25:2379
+cdc cli changefeed resume -c test-cf --server=http://127.0.0.1:8300
 ```
 
 この失敗した DDL ステートメントをスキップする場合は、changefeed の start-ts を checkpoint-ts (DDL ステートメントが失敗したタイムスタンプ) に 1 を加えた値に設定し、 `cdc cli changefeed create`コマンドを実行して新しい changefeed を作成します。タスク。たとえば、DDL ステートメントが失敗する checkpoint-ts が`415241823337054209`の場合、次のコマンドを実行してこの DDL ステートメントをスキップします。
@@ -209,6 +209,6 @@ cdc cli changefeed resume -c test-cf --pd=http://10.0.10.25:2379
 {{< copyable "" >}}
 
 ```shell
-cdc cli changefeed remove --pd=http://10.0.10.25:2379 --changefeed-id simple-replication-task
-cdc cli changefeed create --pd=http://10.0.10.25:2379 --sink-uri="mysql://root:123456@127.0.0.1:3306/" --changefeed-id="simple-replication-task" --sort-engine="unified" --start-ts 415241823337054210
+cdc cli changefeed remove --server=http://127.0.0.1:8300 --changefeed-id simple-replication-task
+cdc cli changefeed create --server=http://127.0.0.1:8300 --sink-uri="mysql://root:123456@127.0.0.1:3306/" --changefeed-id="simple-replication-task" --sort-engine="unified" --start-ts 415241823337054210
 ```

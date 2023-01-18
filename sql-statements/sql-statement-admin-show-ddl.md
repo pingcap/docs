@@ -1,11 +1,11 @@
 ---
-title: ADMIN SHOW DDL [JOBS|QUERIES] | TiDB SQL Statement Reference
+title: ADMIN SHOW DDL [JOBS|JOB QUERIES] | TiDB SQL Statement Reference
 summary: An overview of the usage of ADMIN for the TiDB database.
 ---
 
-# ADMIN SHOW DDL [ジョブ|クエリ] {#admin-show-ddl-jobs-queries}
+# ADMIN SHOW DDL [JOBS|JOB QUERIES] {#admin-show-ddl-jobs-job-queries}
 
-`ADMIN SHOW DDL [JOBS|QUERIES]`ステートメントは、実行中および最近完了した DDL ジョブに関する情報を示します。
+`ADMIN SHOW DDL [JOBS|JOB QUERIES]`ステートメントは、実行中および最近完了した DDL ジョブに関する情報を示します。
 
 ## あらすじ {#synopsis}
 

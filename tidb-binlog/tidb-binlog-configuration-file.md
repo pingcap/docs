@@ -85,7 +85,7 @@ summary: Learn the configuration items of TiDB Binlog.
 -   PEM 形式でエンコードされた X509 キー ファイルのパスを指定します。たとえば、 `/path/to/pump-key.pem`です。
 -   デフォルト値: &quot;&quot;
 
-### ストレージ {#storage}
+### 保管所 {#storage}
 
 ストレージに関する設定項目を紹介します。
 

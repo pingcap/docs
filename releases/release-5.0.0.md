@@ -261,13 +261,13 @@ Async Commit 機能が有効になっている場合、1 つのネットワー�
 
 -   直接のダウングレードはサポートされていません。
 
-### デフォルトでCoprocessorのキャッシュ機能を有効にする {#enable-the-coprocessor-cache-feature-by-default}
+### デフォルトでコプロセッサーのキャッシュ機能を有効にする {#enable-the-coprocessor-cache-feature-by-default}
 
 [ユーザー文書](/tidb-configuration-file.md#tikv-clientcopr-cache-new-in-v400) 、 [#18028](https://github.com/pingcap/tidb/issues/18028)
 
-5.0 GA では、Coprocessorのキャッシュ機能がデフォルトで有効になっています。この機能を有効にすると、データ読み取りのレイテンシーを短縮するために、TiDB は tikv-server にプッシュされたオペレーターの計算結果を tidb-server にキャッシュします。
+5.0 GA では、コプロセッサーのキャッシュ機能がデフォルトで有効になっています。この機能を有効にすると、データ読み取りのレイテンシーを短縮するために、TiDB は tikv-server にプッシュされたオペレーターの計算結果を tidb-server にキャッシュします。
 
-Coprocessorのキャッシュ機能を無効にするには、 `tikv-client.copr-cache`から`0.0`の`capacity-mb`の構成項目を変更します。
+コプロセッサーのキャッシュ機能を無効にするには、 `tikv-client.copr-cache`から`0.0`の`capacity-mb`の構成項目を変更します。
 
 ### <code>delete from table where id &lt;? Limit ?</code>の実行パフォーマンスを改善<code>delete from table where id &lt;? Limit ?</code>声明 {#improve-the-execution-performance-of-code-delete-from-table-where-id-x3c-limit-code-statement}
 
@@ -293,7 +293,7 @@ TiDB スケジューリング プロセスは、I/O、ネットワーク、CPU�
 
 ノード容量がシステムで設定されたウォーターラインに常に近い場合、または`store-limit`が大きすぎて容量負荷のバランスを取る場合、システムは頻繁にリージョンを他のノードにスケジュールしたり、リージョンを元のノードに戻したりします。スケジューリングは I/O、ネットワーク、CPU、メモリなどのリソースを占有し、パフォーマンスのジッターを引き起こすため、このタイプのスケジューリングは必要ありません。
 
-この問題を軽減するために、PD は新しい一連の既定のスケジュール計算式を導入します。 `region-score-formula-version = v1`を構成することで、古い式に戻すことができます。
+この問題を軽減するために、PD は新しい一連の既定のスケジュール計算式を導入しています。 `region-score-formula-version = v1`を構成することで、古い式に戻すことができます。
 
 #### デフォルトでクロステーブルのリージョン結合機能を有効にする {#enable-the-cross-table-region-merge-feature-by-default}
 
@@ -420,7 +420,7 @@ TiDB v5.0 では、パフォーマンスの問題をより効率的にトラブ�
 
 ## 展開とメンテナンス {#deployment-and-maintenance}
 
-### クラスター展開操作のロジックを最適化して、DBA が一連の標準的な TiDB 運用クラスターをより迅速に展開できるようにします。 {#optimize-the-logic-of-cluster-deployment-operations-to-help-dbas-deploy-a-set-of-standard-tidb-production-cluster-faster}
+### クラスター展開操作のロジックを最適化して、DBA が一連の標準的な TiDB本番クラスターをより迅速に展開できるようにします。 {#optimize-the-logic-of-cluster-deployment-operations-to-help-dbas-deploy-a-set-of-standard-tidb-production-cluster-faster}
 
 [ユーザードキュメント](/production-deployment-using-tiup.md)
 

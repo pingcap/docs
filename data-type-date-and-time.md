@@ -13,7 +13,7 @@ TiDB は、一時的な値を格納するすべての MySQL の日付と時刻�
 
 -   TiDB はさまざまな形式を解釈しようとしますが、日付部分は、月-日-年または日-月-年ではなく、年-月-日 (たとえば、&#39;1998-09-04&#39;) の形式にする必要があります。
 
--   日付の年部分が 2 桁で指定されている場合、TiDB は[特定の規則](#two-digit-year-portion-contained-in-the-date)に基づいて変換します。
+-   日付の年部分が 2 桁で指定されている場合、TiDB は[特定のルール](#two-digit-year-portion-contained-in-the-date)に基づいて変換します。
 
 -   コンテキストで数値が必要な場合、TiDB は自動的に日付または時刻の値を数値型に変換します。例えば：
 
@@ -175,7 +175,7 @@ CREATE TABLE t1 (
 
 ## 時間値の小数部分 {#decimal-part-of-time-value}
 
-`DATETIME`および`TIMESTAMP`の値には、最大 6 桁の小数部分を含めることができます。これはミリ秒単位の精度です。 `DATETIME`種類または`TIMESTAMP`種類のいずれかの列で、端数部分は破棄されずに格納されます。小数部分の場合、値は「YYYY-MM-DD HH:MM:SS[.fraction]」の形式で、小数の範囲は 000000 ～ 999999 です。休み。
+`DATETIME`および`TIMESTAMP`の値には、最大 6 桁の小数部分を含めることができます。これはミリ秒単位の精度です。 `DATETIME`種類または`TIMESTAMP`種類のいずれかの列で、端数部分は破棄されずに格納されます。小数部分の場合、値は「YYYY-MM-DD HH:MM:SS[.fraction]」の形式で、小数の範囲は 000000 ～ 999999 です。残り。
 
 -   `type_name(fsp)`を使用して、小数精度をサポートする列を定義します`type_name`は`TIME` 、 `DATETIME`または`TIMESTAMP`です。例えば、
 

@@ -46,8 +46,6 @@ TiDB クラスターが複数の地区またはデータ センターにデプ�
 
 Follower Readを有効にするには、変数`tidb_replica_read` (デフォルト値は`leader` ) を`follower` 、 `leader-and-follower` 、 `closest-replicas` 、または`closest-adaptive`に設定します。
 
-{{< copyable "" >}}
-
 ```sql
 SET [GLOBAL] tidb_replica_read = 'follower';
 ```
@@ -58,8 +56,6 @@ SET [GLOBAL] tidb_replica_read = 'follower';
 <div label="Java" value="java">
 
 JavaでFollower Readを有効にするには、 `FollowerReadHelper`クラスを定義します。
-
-{{< copyable "" >}}
 
 ```java
 public enum FollowReadMode {
@@ -104,8 +100,6 @@ public class FollowerReadHelper {
 ```
 
 Followerノードからデータを読み取る場合は、 `setSessionReplicaRead(conn, FollowReadMode.LEADER_AND_FOLLOWER)`メソッドを使用してFollower Read機能を有効にします。これにより、現在のセッションでLeaderノードとFollowerノード間の負荷を分散できます。接続が切断されると、元のモードに戻ります。
-
-{{< copyable "" >}}
 
 ```java
 public static class AuthorDAO {

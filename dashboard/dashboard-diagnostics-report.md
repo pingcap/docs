@@ -179,9 +179,9 @@ TiDB には、自動診断結果が組み込まれています。各フィール
 
 上記パーツのうち、 `tikv_grpc_message`回の消費には以下のパーツが含まれます。
 
--   COP タイプの要求の処理を参照する、Coprocessorの要求時間の消費。この時間消費には、次の部分が含まれます。
+-   COP タイプの要求の処理を参照する、コプロセッサーの要求時間の消費。この時間消費には、次の部分が含まれます。
     -   `tikv_cop_wait` : リクエスト キューで消費された時間。
-    -   `Coprocessor handle` :Coprocessor要求の処理にかかった時間。
+    -   `Coprocessor handle` :コプロセッサー要求の処理にかかった時間。
 
 -   `tikv_scheduler_command`時間の消費。これには次の部分が含まれます。
     -   `tikv_scheduler_processing_read` : 読み取り要求の処理にかかった時間。
@@ -278,7 +278,7 @@ TiKV モジュールの監視情報に関連するテーブルは次のとおり
 -   `Time Consumed by RocksDB` : TiKV で RocksDB が消費した時間。
 -   `TiKV Error` : TiKV の各モジュールに関するエラー情報。
 -   `TiKV Engine Size` : TiKV の各ノードに格納されている列ファミリーのデータのサイズ。
--   `Coprocessor Info` : TiKV のCoprocessorモジュールに関する情報を監視します。
+-   `Coprocessor Info` : TiKV のコプロセッサーモジュールに関する情報を監視します。
 -   `Raft Info` : TiKV のRaftモジュールの監視情報。
 -   `Snapshot Info` : TiKV のスナップショット関連の監視情報。
 -   `GC Info` : TiKV のガベージ コレクション (GC) 関連の監視情報。
@@ -354,7 +354,7 @@ TiKV モジュールの監視情報に関連するテーブルは次のとおり
 
 たとえば、上記の表では、 `t2`の`tidb`ノードの平均 CPU 使用率は`t1`のそれより 2.02 倍高く、 `2.02` = `1240/410-1`です。
 
-### 最大異項目テーブル {#maximum-different-item-table}
+### 最大異項目表 {#maximum-different-item-table}
 
 `Maximum Different Item`の表は、2 つの時間範囲のモニタリング メトリックを比較し、モニタリング メトリックの違いに従って並べ替えます。この表を使用すると、2 つの時間範囲でどのモニタリング メトリックに最大の違いがあるかをすばやく見つけることができます。次の例を参照してください。
 
@@ -365,4 +365,4 @@ TiKV モジュールの監視情報に関連するテーブルは次のとおり
 -   `LABEL` : モニタリング メトリックに対応するラベル。たとえば、モニタリング メトリック`TiKV Coprocessor scan`には`instance` 、 `req` 、 `tag` 、 `sql_type`という 2 つのラベルがあり、TiKV アドレス、リクエスト タイプ、操作タイプ、および操作カラムファミリーです。
 -   `MAX_DIFF` : `t1.VALUE`と`t2.VALUE`の`DIFF_RATIO`の計算である差分値。
 
-上の表から、時間範囲`t2`は時間範囲`t1`よりもはるかに多くのCoprocessorリクエストを持っており、時間範囲`t2`の TiDB の SQL 解析時間ははるかに長いことがわかります。
+上の表から、時間範囲`t2`は時間範囲`t1`よりもはるかに多くのコプロセッサーリクエストを持っており、時間範囲`t2`の TiDB の SQL 解析時間ははるかに長いことがわかります。

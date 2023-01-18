@@ -38,7 +38,7 @@ explain select * from t order by a limit 10;
 4 rows in set (0.00 sec)
 ```
 
-このクエリでは、データ フィルタリングのために TopN オペレータ ノードが TiKV にプッシュ ダウンされ、各Coprocessorは 10 レコードのみを TiDB に返します。 TiDB がデータを集約した後、最終的なフィルタリングが実行されます。
+このクエリでは、データ フィルタリングのために TopN オペレータ ノードが TiKV にプッシュ ダウンされ、各コプロセッサーは 10 レコードのみを TiDB に返します。 TiDB がデータを集約した後、最終的なフィルタリングが実行されます。
 
 ### 例 2: TopN を Join にプッシュ ダウンできます (並べ替えルールは、外部テーブルの列にのみ依存します) {#example-2-topn-can-be-pushed-down-into-join-the-sorting-rule-only-depends-on-the-columns-in-the-outer-table}
 

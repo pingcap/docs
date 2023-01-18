@@ -13,8 +13,6 @@ summary: Learn some best practices for creating and using indexes in TiDB.
 
 このセクションでは、例として[書店](/develop/dev-guide-bookshop-schema-design.md)データベースの`books`テーブルを取り上げます。
 
-{{< copyable "" >}}
-
 ```sql
 CREATE TABLE `books` (
   `id` bigint(20) AUTO_RANDOM NOT NULL,
@@ -154,4 +152,4 @@ CREATE TABLE `books` (
     SELECT * FROM t USE INDEX(id_idx) WHERE id = 1 and title = 'database';
     ```
 
--   クエリ条件で`IN`式を使用する場合、その後に一致する値の数が 300 を超えないようにすることをお勧めします。そうしないと、実行効率が低下します。
+-   クエリ条件で`IN`式を使用する場合、その後に一致する値の数が 300 を超えないようにすることをお勧めします。これを超えると、実行効率が低下します。

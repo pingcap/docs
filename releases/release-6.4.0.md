@@ -331,8 +331,8 @@ v6.4.0-DMR の主な新機能と改善点は次のとおりです。
 -   TiKV
 
     -   新しい構成項目`apply-yield-write-size`を追加して、1 回のポーリングで適用スレッドが 1 つの有限状態マシンに書き込むことができる最大バイト数を制御し、適用スレッドが大量のデータを書き込むときの Raftstore の輻輳を緩和します[#13313](https://github.com/tikv/tikv/issues/13313) @ [栄光](https://github.com/glorv)
-    -   リーダー転送プロセス中の QPS ジッターを回避するために、リージョンのリーダーを移行する前にエントリ キャッシュをウォームアップします[#13060](https://github.com/tikv/tikv/issues/13060) @ [コスベン](https://github.com/cosven)
-    -   `json_constains`オペレーターのCoprocessor[#13592](https://github.com/tikv/tikv/issues/13592) @ [立振歓](https://github.com/lizhenhuan)へのプッシュダウンをサポート
+    -   リーダー転送プロセス中の QPS ジッターを回避するために、リージョンのリーダーを移行する前にエントリ キャッシュをウォームアップします[#13060](https://github.com/tikv/tikv/issues/13060) @ [コスヴェン](https://github.com/cosven)
+    -   `json_constains`オペレーターのコプロセッサー[#13592](https://github.com/tikv/tikv/issues/13592) @ [立振歓](https://github.com/lizhenhuan)へのプッシュダウンをサポート
     -   `CausalTsProvider`の非同期関数を追加して、いくつかのシナリオでフラッシュのパフォーマンスを向上させます[#13428](https://github.com/tikv/tikv/issues/13428) @ [ゼミン州](https://github.com/zeminzhou)
 
 -   PD

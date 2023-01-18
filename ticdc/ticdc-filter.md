@@ -72,7 +72,7 @@ ignore-update-new-value-expr = "gender = 'male' and age > 18" # Ignore update DM
 | テーブルを切り捨てる        | DDL |             | `truncate table`のイベントに一致                                                         |
 | 他の机               | DDL |             | `alter table` 、 `create index` 、および`drop index`のすべての節を含む`alter table`のイベントに一致します |
 | テーブルパーティションを追加    | DDL |             | `add table partition`のイベントに一致                                                    |
-| テーブル パーティションの削除   | DDL |             | `drop table partition`のイベントに一致                                                   |
+| テーブル パーティションのドロップ | DDL |             | `drop table partition`のイベントに一致                                                   |
 | テーブル パーティションの切り捨て | DDL |             | `truncate table partition`のイベントに一致                                               |
 | ビューを作成            | DDL |             | `create view`のイベントに一致                                                            |
 | ビューをドロップ          | DDL |             | `drop view`のイベントに一致                                                              |

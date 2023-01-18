@@ -25,7 +25,7 @@ summary: Create, manage, and update your TiDB Cloud resources through Terraform.
 
 ## サポートされているリソースとデータ ソース {#supported-resources-and-data-sources}
 
-[資力](https://www.terraform.io/language/resources)と[データソース](https://www.terraform.io/language/data-sources)は、Terraform 言語で最も重要な 2 つの要素です。
+[資力](https://www.terraform.io/language/resources)と[データ ソース](https://www.terraform.io/language/data-sources)は、Terraform 言語で最も重要な 2 つの要素です。
 
 TiDB Cloudは、次のリソースとデータ ソースをサポートしています。
 
@@ -35,16 +35,17 @@ TiDB Cloudは、次のリソースとデータ ソースをサポートしてい
     -   `tidbcloud_backup` (更新はサポートされていません)
     -   `tidbcloud_restore` (更新と削除はサポートされていません)
 
--   データソース
+-   データ ソース
 
-    -   `tidbcloud_project`
-    -   `tidbcloud_cluster_spec`
-    -   `tidbcloud_restore`
-    -   `tidbcloud_backup`
+    -   `tidbcloud_projects`
+    -   `tidbcloud_cluster_specs`
+    -   `tidbcloud_clusters`
+    -   `tidbcloud_restores`
+    -   `tidbcloud_backups`
 
 リソースとデータ ソースで使用可能なすべての構成を取得するには、この[構成ドキュメント](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs)を参照してください。
 
-## 次の一歩 {#next-step}
+## 次のステップ {#next-step}
 
 -   [Terraform の詳細](https://www.terraform.io/docs)
 -   [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md)

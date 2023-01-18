@@ -239,7 +239,7 @@ v5.3 の主な新機能または改善点は次のとおりです。
 
 -   **TiCDC は、TiCDC タスクを管理するための HTTP プロトコル OpenAPI をサポートしています。**
 
-    TiDB v5.3.0 以降、TiCDC OpenAPI は一般提供 (GA) 機能になります。実稼働環境で OpenAPI を使用して、TiCDC クラスターのクエリと操作を行うことができます。
+    TiDB v5.3.0 以降、TiCDC OpenAPI は一般提供 (GA) 機能になります。実本番環境で OpenAPI を使用して、TiCDC クラスターのクエリと操作を行うことができます。
 
 ### 展開とメンテナンス {#deployment-and-maintenance}
 
@@ -384,7 +384,7 @@ TiCDC v5.3.0 から、TiDB クラスター間の循環レプリケーション�
     -   `resolved_ts` [#10965](https://github.com/tikv/tikv/issues/10965)で一部のコルーチンがリークする問題を修正
     -   応答のサイズが 4 GiB を超えるとコプロセッサーに発生するpanicの問題を修正します[#9012](https://github.com/tikv/tikv/issues/9012)
     -   スナップショット ファイルをガベージ コレクションできない場合に、スナップショット ガベージ コレクション (GC) で GC スナップショット ファイルが失われる問題を修正し[#10813](https://github.com/tikv/tikv/issues/10813) 。
-    -   Coprocessor要求を処理する際のタイムアウトによって引き起こされるpanicの問題を修正します[#10852](https://github.com/tikv/tikv/issues/10852)
+    -   コプロセッサー要求を処理する際のタイムアウトによって引き起こされるpanicの問題を修正します[#10852](https://github.com/tikv/tikv/issues/10852)
     -   統計スレッド[#11195](https://github.com/tikv/tikv/issues/11195)のデータを監視することによって引き起こされるメモリ リークを修正します。
     -   一部のプラットフォームから cgroup 情報を取得することによって引き起こされるpanicの問題を修正します[#10980](https://github.com/tikv/tikv/pull/10980)
     -   MVCC 削除バージョンが圧縮フィルター GC [#11248](https://github.com/tikv/tikv/pull/11248)によってドロップされないため、スキャン パフォーマンスが低下する問題を修正します。

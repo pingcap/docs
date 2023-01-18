@@ -28,7 +28,7 @@ Info: {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":
 -   `--sink-uri` : レプリケーション タスクのダウンストリーム アドレス。詳細については、 [`mysql` / <code>tidb</code>でシンク URI を構成する](#configure-sink-uri-for-mysql-or-tidb)を参照してください。
 -   `--start-ts` : 変更フィードの開始 TSO を指定します。この TSO から、TiCDC クラスターはデータのプルを開始します。デフォルト値は現在の時刻です。
 -   `--target-ts` : changefeed の終了 TSO を指定します。この TSO に対して、TiCDC クラスターはデータのプルを停止します。デフォルト値は空です。これは、TiCDC がデータのプルを自動的に停止しないことを意味します。
--   `--config` : changefeed 構成ファイルを指定します。詳細については、 [TiCDC ChangefeedConfiguration / コンフィグレーションパラメータ](/ticdc/ticdc-changefeed-config.md)を参照してください。
+-   `--config` : changefeed 構成ファイルを指定します。詳細については、 [TiCDC ChangefeedConfiguration / コンフィグレーションパラメーター](/ticdc/ticdc-changefeed-config.md)を参照してください。
 
 ## MySQL または TiDB のシンク URI を構成する {#configure-sink-uri-for-mysql-or-tidb}
 
@@ -41,7 +41,7 @@ Info: {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":
 MySQL の設定例:
 
 ```shell
---sink-uri="mysql://root:123456@127.0.0.1:3306/?worker-count=16&max-txn-row=5000&transaction-atomicity=table"
+--sink-uri="mysql://root:123456@127.0.0.1:3306"
 ```
 
 以下は、MySQL または TiDB 用に構成できるシンク URI パラメーターとパラメーター値の説明です。
@@ -78,7 +78,7 @@ MTIzNDU2
 
 ## 災害シナリオにおける結果整合性レプリケーション {#eventually-consistent-replication-in-disaster-scenarios}
 
-v6.1.1 以降、この機能は GA になります。 v5.3.0 以降、TiCDC はアップストリームの TiDB クラスターから S3 ストレージまたはダウンストリーム クラスターの NFS ファイル システムへの増分データのバックアップをサポートします。アップストリーム クラスターが災害に遭遇して利用できなくなった場合、TiCDC はダウンストリーム データを最新の結果整合性のある状態に復元できます。これは、TiCDC が提供する結果整合性のあるレプリケーション機能です。この機能を使用すると、アプリケーションをダウンストリーム クラスターにすばやく切り替えて、長時間のダウンタイムを回避し、サービスの継続性を向上させることができます。
+v6.1.1 以降、この機能は GA になります。 v5.3.0 以降、TiCDC はアップストリーム TiDB クラスターから Amazon S3 ストレージまたはダウンストリーム クラスターの NFS ファイル システムへの増分データのバックアップをサポートします。アップストリーム クラスターが災害に遭遇して利用できなくなった場合、TiCDC はダウンストリーム データを最新の結果整合性のある状態に復元できます。これは、TiCDC が提供する結果整合性のあるレプリケーション機能です。この機能を使用すると、アプリケーションをダウンストリーム クラスターにすばやく切り替えて、長時間のダウンタイムを回避し、サービスの継続性を向上させることができます。
 
 現在、TiCDC は、TiDB クラスターから別の TiDB クラスターまたは MySQL 互換データベース システム ( Aurora、MySQL、および MariaDB を含む) に増分データを複製できます。アップストリーム クラスターがクラッシュした場合、災害前の TiCDC のレプリケーション ステータスが正常であり、レプリケーション ラグが小さいという条件を考えると、TiCDC は 5 分以内にダウンストリーム クラスターのデータを復元できます。最大で 10 秒のデータ損失が許容されます。つまり、RTO &lt;= 5 分、および P95 RPO &lt;= 10 秒です。
 
@@ -105,10 +105,10 @@ level = "eventual"
 # Individual redo log file size, in MiB. By default, it's 64. It is recommended to be no more than 128.
 max-log-size = 64
 
-# The interval for flushing or uploading redo logs to S3, in milliseconds. By default, it's 1000. The recommended range is 500-2000.
-flush-interval = 1000
+# The interval for flushing or uploading redo logs to Amazon S3, in milliseconds. It is recommended that this configuration be equal to or greater than 2000.
+flush-interval = 2000
 
-# Form of storing redo log, including nfs (NFS directory) and S3 (uploading to S3).
+# Form of storing redo log, including nfs (NFS directory) and Amazon S3 (uploading to S3).
 storage = "s3://logbucket/test-changefeed?endpoint=http://$S3_ENDPOINT/"
 ```
 

@@ -58,8 +58,8 @@ TiDB バージョン: 4.0.0-rc.1
 
 -   TiDB
 
-    -   Coprocessor要求のバッチでのTiFlashへの送信をサポート[#16226](https://github.com/pingcap/tidb/pull/16226)
-    -   デフォルトでCoprocessorのキャッシュ機能を有効にする[#16710](https://github.com/pingcap/tidb/pull/16710)
+    -   コプロセッサー要求のバッチでのTiFlashへの送信をサポート[#16226](https://github.com/pingcap/tidb/pull/16226)
+    -   デフォルトでコプロセッサーのキャッシュ機能を有効にする[#16710](https://github.com/pingcap/tidb/pull/16710)
     -   SQL ステートメントの特別なコメント内のステートメントの登録されたセクションのみを解析します[#16157](https://github.com/pingcap/tidb/pull/16157)
     -   PD および TiKV インスタンスの構成を示す`SHOW CONFIG`構文を使用したサポート[#16475](https://github.com/pingcap/tidb/pull/16475)
 
@@ -145,7 +145,7 @@ TiDB バージョン: 4.0.0-rc.1
 
     -   ストレージ エンジンの粗粒度インデックス最適化を無効にする
     -   リージョンのロックを解決するときに例外がスローされ、一部のロックをスキップする必要があるというバグを修正します
-    -   Coprocessorの統計を収集するときのヌルポインター例外 (NPE) を修正します。
+    -   コプロセッサーの統計を収集するときのヌルポインター例外 (NPE) を修正します。
     -   リージョンメタのチェックを修正して、リージョンスプリット/リージョンマージのプロセスが正しいことを確認します
-    -   Coprocessor応答のサイズが推定されないため、メッセージ サイズが gRPC の制限を超える問題を修正します。
+    -   コプロセッサー応答のサイズが推定されないため、メッセージ サイズが gRPC の制限を超える問題を修正します。
     -   TiFlashの`AdminCmdType::Split`コマンドの処理を修正

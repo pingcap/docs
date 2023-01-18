@@ -13,7 +13,7 @@ summary: List of special terms used in TiDB Lightning.
 
 ### 分析する {#analyze}
 
-[`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)ステートメントを実行している TiDB テーブルの[統計](/statistics.md)情報を再構築する操作。
+[`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)ステートメントを実行している TiDB テーブルの[統計学](/statistics.md)情報を再構築する操作。
 
 TiDB Lightningは TiDB を介さずにデータをインポートするため、統計情報は自動的に更新されません。したがって、 TiDB Lightningはインポート後にすべてのテーブルを明示的に分析します。 `post-restore.analyze`構成を`false`に設定すると、このステップを省略できます。
 

@@ -13,7 +13,7 @@ TiDB は、以下を含むすべての MySQL 数値型をサポートしてい�
 
 ## 整数型 {#integer-types}
 
-TiDB は、 `INTEGER` / `INT` 、 `TINYINT` 、 `SMALLINT` 、 `MEDIUMINT` 、および`BIGINT`を含むすべての MySQL 整数型をサポートしています。詳細については、 [MySQL の整数データ型の構文](https://dev.mysql.com/doc/refman/5.7/en/integer-types.html)を参照してください。
+TiDB は、 `INTEGER` / `INT` 、 `TINYINT` 、 `SMALLINT` 、 `MEDIUMINT` 、および`BIGINT`を含むすべての MySQL 整数型をサポートします。詳細については、 [MySQL の整数データ型の構文](https://dev.mysql.com/doc/refman/5.7/en/integer-types.html)を参照してください。
 
 次の表は、フィールドの説明をまとめたものです。
 

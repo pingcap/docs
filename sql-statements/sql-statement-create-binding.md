@@ -135,7 +135,7 @@ mysql> EXPLAIN ANALYZE SELECT * FROM t1 WHERE b = 123;
 3 rows in set (0.01 sec)
 ```
 
-次の例は、履歴実行計画に従ってバインドを作成する方法を示しています。
+次の例は、履歴実行計画に従ってバインディングを作成する方法を示しています。
 
 ```sql
 mysql> CREATE TABLE t(id INT PRIMARY KEY , a INT, KEY(a));

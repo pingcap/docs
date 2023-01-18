@@ -9,7 +9,7 @@ summary: Learn how to tune TiKV thread pools for optimal performance.
 
 ## スレッドプールの紹介 {#thread-pool-introduction}
 
-TiKV スレッド プールは、主に gRPC、Scheduler、UnifyReadPool、Raftstore、StoreWriter、Apply、RocksDB、および CPU をあまり消費しないいくつかのスケジュールされたタスクと検出コンポーネントで構成されています。このドキュメントでは、読み取りおよび書き込み要求のパフォーマンスに影響を与える、CPU を集中的に使用するいくつかのスレッド プールを主に紹介します。
+TiKV スレッド プールは、主に gRPC、Scheduler、UnifyReadPool、Raftstore、StoreWriter、Apply、RocksDB、および CPU をあまり消費しないいくつかのスケジュールされたタスクと検出コンポーネントで構成されます。このドキュメントでは、読み取りおよび書き込み要求のパフォーマンスに影響を与える、CPU を集中的に使用するいくつかのスレッド プールを主に紹介します。
 
 -   gRPC スレッド プール: すべてのネットワーク リクエストを処理し、さまざまなタスク タイプのリクエストをさまざまなスレッド プールに転送します。
 
@@ -27,14 +27,14 @@ TiKV スレッド プールは、主に gRPC、Scheduler、UnifyReadPool、Rafts
 
 -   RocksDB スレッド プール: RocksDB がタスクを圧縮およびフラッシュするためのスレッド プールです。 RocksDB のアーキテクチャと`Compact`操作については、 [RocksDB: フラッシュおよび RAM ストレージ用の永続的な Key-Value ストア](https://github.com/facebook/rocksdb)を参照してください。
 
--   UnifyReadPool スレッド プール:Coprocessorスレッド プールとストレージ読み取りプールの組み合わせです。 kv get、kv batch get、raw kv get、コプロセッサーなどのすべての読み取り要求は、このスレッド プールで実行されます。
+-   UnifyReadPool スレッド プール:コプロセッサースレッド プールとストレージ読み取りプールの組み合わせです。 kv get、kv batch get、raw kv get、コプロセッサーなどのすべての読み取り要求は、このスレッド プールで実行されます。
 
 ## TiKV 読み取り専用リクエスト {#tikv-read-only-requests}
 
 TiKV の読み取りリクエストは、次のタイプに分類されます。
 
 -   ストレージ読み取りプールで実行される、特定の行または複数の行を指定する単純なクエリ。
--   Coprocessor読み取りプールで実行される複雑な集計計算および範囲照会。
+-   コプロセッサー読み取りプールで実行される複雑な集計計算および範囲照会。
 
 TiKV v5.0 以降、すべての読み取りリクエストはデフォルトでクエリに統合スレッド プールを使用します。 TiKV クラスターが TiKV v4.0 からアップグレードされ、アップグレード前に`readpool.storage`の`use-unified-pool`構成が`false`に設定されていた場合、すべての読み取り要求は、アップグレード後も異なるスレッド プールを使用して続行されます。このシナリオでは、すべての読み取り要求がクエリに統合スレッド プールを使用するようにするには、値を`readpool.storage.use-unified-pool`から`true`に設定します。
 

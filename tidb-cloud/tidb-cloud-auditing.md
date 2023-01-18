@@ -17,8 +17,8 @@ TiDB Cloudは、ユーザー アクセスの詳細 (実行された SQL ステ�
 
 ## 前提条件 {#prerequisites}
 
--   TiDB Cloud Dedicated Tierクラスターを使用しています。監査ログは、 TiDB Cloud Tier クラスターでは使用できません。
--   あなたはTiDB Cloudの組織の監査管理者です。そうしないと、 TiDB Cloudコンソールに監査関連のオプションが表示されません。詳細については、 [メンバーの役割を構成する](/tidb-cloud/manage-user-access.md#configure-member-roles)を参照してください。
+-   TiDB Cloud Dedicated Tierクラスターを使用しています。監査ログは、 TiDB Cloud Serverless Tierクラスターでは使用できません。
+-   あなたはTiDB Cloudの組織の監査管理者です。そうしないと、 TiDB Cloudコンソールに監査関連のオプションが表示されません。詳細については、 [ロール アクセスの管理](/tidb-cloud/manage-user-access.md#manage-role-access)を参照してください。
 
 ## AWS または GCP の監査ログを有効にする {#enable-audit-logging-for-aws-or-gcp}
 

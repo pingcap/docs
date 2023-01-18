@@ -36,7 +36,7 @@ summary: Learn the experimental features of TiDB.
 -   [TiFlashクエリ結果の実体化](/tiflash/tiflash-results-materialization.md) (v6.5.0 で導入)
 -   [過去の実行計画に従ってバインディングを作成する](/sql-plan-management.md#create-a-binding-according-to-a-historical-execution-plan) (v6.5.0 で導入)
 
-## ストレージ {#storage}
+## 保管所 {#storage}
 
 -   [タイタン レベル マージ](/storage-engine/titan-configuration.md#level-merge-experimental) (v4.0 で導入)
 -   分割 リージョンはバケットに分割されます。 [バケットは同時クエリの単位として使用されます](/tune-region-performance.md#use-bucket-to-increase-concurrency)スキャンの同時実行性を向上させます。 (v6.1.0 で導入)

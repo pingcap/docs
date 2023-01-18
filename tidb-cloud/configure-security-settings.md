@@ -5,15 +5,21 @@ summary: Learn how to configure the root password and allowed IP addresses to co
 
 # クラスタセキュリティ設定の構成 {#configure-cluster-security-settings}
 
-クラスターを作成すると、 TiDB Cloudコンソールは、クラスターに接続するための root パスワードと許可された IP アドレスを構成するように自動的に案内します。
+Dedicated Tierクラスターの場合、root パスワードと許可された IP アドレスを構成して、クラスターに接続できます。
 
-その時点で root パスワードまたは許可された IP アドレスを構成しない場合、またはクラスターのセキュリティ設定を変更する場合は、次の手順を実行します。
+> **ノート：**
+>
+> Serverless Tierクラスターの場合、このドキュメントは適用されず、代わりに[Serverless Tierへの TLS 接続](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md)を参照できます。
 
-1.  TiDB Cloudコンソールで、プロジェクトの [**クラスター**] ページに移動します。
+1.  TiDB Cloudコンソールで、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
-2.  クラスターを見つけて、クラスター領域の右上隅にある [**セキュリティ設定]**をクリックします。<strong>セキュリティ設定</strong>ダイアログが表示されます。
+    > **ヒント：**
+    >
+    > 複数のプロジェクトがある場合は、[**クラスター]**ページの左側のナビゲーション ペインでターゲット プロジェクトに切り替えることができます。
 
-3.  ダイアログで、ルート パスワードと許可された IP アドレスを設定します。
+2.  ターゲット クラスタの行で、[ **...** ] をクリックして [ <strong>Security Settings]</strong>を選択します。
+
+3.  [**セキュリティ設定**] ダイアログで、ルート パスワードと許可された IP アドレスを構成します。
 
     任意の IP アドレスからクラスターにアクセスできるようにするには、[**どこからでもアクセスを許可する]**をクリックします。
 

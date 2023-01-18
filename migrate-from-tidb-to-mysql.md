@@ -52,7 +52,7 @@ summary: Learn how to migrate data from TiDB to MySQL-compatible databases.
 
 > **ノート：**
 >
-> 実稼働クラスターでは、GC を無効にしてバックアップを実行すると、クラスターのパフォーマンスに影響を与える可能性があります。この手順は、オフピーク時に完了することをお勧めします。
+> 本番クラスターでは、GC を無効にしてバックアップを実行すると、クラスターのパフォーマンスに影響を与える可能性があります。この手順は、オフピーク時に完了することをお勧めします。
 
 1.  ガベージ コレクション (GC) を無効にします。
 
@@ -158,12 +158,12 @@ summary: Learn how to migrate data from TiDB to MySQL-compatible databases.
     アップストリーム クラスターで、次のコマンドを実行して、アップストリーム クラスターからダウンストリーム クラスターへの変更フィードを作成します。
 
     ```shell
-    tiup ctl:<cluster-version> cdc changefeed create --pd=http://127.0.0.1:2379 --sink-uri="mysql://root:@127.0.0.1:3306" --changefeed-id="upstream-to-downstream" --start-ts="434217889191428107"
+    tiup ctl:<cluster-version> cdc changefeed create --server=http://127.0.0.1:8300 --sink-uri="mysql://root:@127.0.0.1:3306" --changefeed-id="upstream-to-downstream" --start-ts="434217889191428107"
     ```
 
     このコマンドでは、パラメーターは次のとおりです。
 
-    -   `--pd` : アップストリーム クラスタの PD アドレス
+    -   `--server` : TiCDC クラスター内の任意のノードの IP アドレス
     -   `--sink-uri` : ダウンストリーム クラスターの URI
     -   `--changefeed-id` : 変更フィード ID。正規表現の形式にする必要があります`^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$`
     -   `--start-ts` : 変更フィードの開始タイムスタンプ。バックアップ時間 (または[ステップ 2. 完全なデータを移行する](#step-2-migrate-full-data)の「データのバックアップ」セクションの BackupTS) である必要があります。

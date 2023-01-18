@@ -70,8 +70,8 @@ EXPLAIN SELECT * FROM t1 WHERE id IN (SELECT t1_id FROM t2);
 上記のクエリ結果から、TiDB がインデックス結合操作`| IndexJoin_14`を使用してサブクエリを結合および変換していることがわかります。実行計画では、実行プロセスは次のとおりです。
 
 1.  TiKV 側のインデックススキャンオペレータ`└─IndexFullScan_31`は、 `t2.t1_id`列の値を読み取ります。
-2.  `└─StreamAgg_39`オペレーターの一部のタスクは、TiKV の`t1_id`の値を重複排除します。
-3.  `├─StreamAgg_49(Build)`オペレーターのいくつかのタスクは、TiDB で`t1_id`の値を重複除去します。重複排除は集約機能`firstrow(test.t2.t1_id)`によって行われる。
+2.  `└─StreamAgg_39`オペレーターの一部のタスクは、TiKV の`t1_id`の値を重複除去します。
+3.  `├─StreamAgg_49(Build)`オペレーターのいくつかのタスクは、TiDB で`t1_id`の値を重複排除します。重複排除は集約機能`firstrow(test.t2.t1_id)`によって行われる。
 4.  演算結果は`t1`テーブルの主キーに結合されます。結合条件は`eq(test.t1.id, test.t2.t1_id)`です。
 
 ## 内部結合 (一意のサブクエリ) {#inner-join-unique-subquery}

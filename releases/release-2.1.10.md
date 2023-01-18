@@ -42,7 +42,7 @@ TiDB アンシブル バージョン: 2.1.10
 ## TiKV {#tikv}
 
 -   転送の失敗を避けるために、最近構成が変更されたリージョンでリーダーの転送を拒否する[#4684](https://github.com/tikv/tikv/pull/4684)
--   Coprocessorメトリック[#4643](https://github.com/tikv/tikv/pull/4643)の優先順位ラベルを追加します。
+-   コプロセッサーメトリック[#4643](https://github.com/tikv/tikv/pull/4643)の優先順位ラベルを追加します。
 -   リーダー[#4724](https://github.com/tikv/tikv/pull/4724)の転送中に発生する可能性のあるダーティ リードの問題を修正します。
 -   `CommitMerge`の再起動に失敗する場合がある問題を修正[#4615](https://github.com/tikv/tikv/pull/4615) .
 -   不明なログの修正[#4730](https://github.com/tikv/tikv/pull/4730)
