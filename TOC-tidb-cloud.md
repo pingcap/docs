@@ -12,7 +12,7 @@
   - [Try Out TiDB Cloud](/tidb-cloud/tidb-cloud-quickstart.md)
   - [Try Out HTAP](/tidb-cloud/tidb-cloud-htap-quickstart.md)
   - [Perform a PoC](/tidb-cloud/tidb-cloud-poc.md)
-  - [Try Out TiDB Cloud CLI](/tidb-cloud/cli-overview.md)
+  - [Try Out TiDB Cloud CLI](/tidb-cloud/get-started-with-cli.md)
 - Develop Applications
   - [Overview](/develop/dev-guide-overview.md)
   - Quick Start
@@ -460,7 +460,8 @@
         - [RocksDB Overview](/storage-engine/rocksdb-overview.md)
     - TiFlash
       - [TiFlash Overview](/tiflash/tiflash-overview.md)
-  - [CLI](/tidb-cloud/cli-reference.md)
+  - [CLI]
+    - [overview](/tidb-cloud/cli-reference.md)
     - cluster
       - [create](/tidb-cloud/ticloud-cluster-create.md)
       - [delete](/tidb-cloud/ticloud-cluster-delete.md)
