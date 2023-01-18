@@ -25,18 +25,18 @@ In the [TiDB Cloud console](https://tidbcloud.com/), you can get examples of dif
 
 2. Click **Connect** in the upper-right corner. A dialog is displayed.
 
-3. On the **Standard Connection** tab of this dialog, follow the three steps to set up the TLS connctions.
+3. On the **Standard Connection** tab of this dialog, follow the three steps to set up the TLS connction.
    - Step 1：Create traffic filter
    - Step 2：Download TiDB cluster CA
    - Step 3：Connect with an SQL client
 
 4. Under **Step 1: Create traffic filter** in the dialog, configure the IP addresses that are allowed to access your cluster. For more information, see [Configure an IP access list in standard connection](/tidb-cloud/configure-ip-access-list.md#configure-an-ip-access-list-in-standard-connection).
 
-5. Under **Step 2: Download TiDB cluster CA**, click **Download TiDB cluster CA** to download it locally for client TLS configuration. Verifying the TiDB cluster CA can ensure the TLS connection is secure and reliable.
+5. Under **Step 2: Download TiDB cluster CA**, click **Download TiDB cluster CA** to download it locally for client TLS configuration. Verify the TiDB cluster CA to ensure that the TLS connection is secure and reliable.
 
     > **Note:**
     > 
-    > After downloading your Dedicated Tier cluster CA, you can store it in the default storage path of your operating system, or specify another storage path. Make sure that you need to replace the CA path in the code example with your own cluster CA path in the subsequent steps. 
+    > After downloading your Dedicated Tier cluster CA, you can store it in the default storage path of your operating system, or specify another storage path. You need to replace the CA path in the code example with your own cluster CA path in the subsequent steps. 
 
 
 6. Under **Step 3: Connect with an SQL client** in the dialog, click the tab of your preferred connection method, and then refer to the connection string and sample code on the tab to connect to your cluster.
@@ -46,7 +46,7 @@ The following examples show the connection strings in MySQL, MyCLI, JDBC, Python
 <SimpleTab>
 <div label="MySQL CLI">
 
-MySQL CLI client attempts to establish a TLS connection by default. When you connect to Dedicated Tier clusters, you should set `ssl-mode` and `ssl-ca`.
+MySQL CLI client attempts to establish a TLS connection by default. When you connect to Dedicated Tier clusters, you need to set `ssl-mode` and `ssl-ca`.
 
 ```shell
 mysql --connect-timeout 15 --ssl-mode=VERIFY_IDENTITY --ssl-ca=ca.pem --tls-version="TLSv1.2" -u root -h tidb.eqlfbdgthh8.clusters.staging.tidb-cloud.com -P 4000 -D test -p
@@ -68,7 +68,7 @@ Parameter description：
 mycli --ssl-ca=ca.pem --ssl-verify-server-cert -u root -h tidb.eqlfbdgthh8.clusters.staging.tidb-cloud.com -P 4000 -D test
 ```
 
-Parameter description：
+Parameter descriptions：
 
 - Use `--ssl-ca=<CA_path>` to specify your local path of the downloaded TiDB cluster `ca.pem`.
 - With `--ssl-verify-server-cert` to validate TiDB Dedicated Tier clusters.
@@ -145,7 +145,7 @@ with connection:
         print(m[0])
 ```
 
-Parameter description：
+Parameter descriptions：
 
 - Set `ssl_mode="VERIFY_IDENTITY"` to enable TLS and validate TiDB Dedicated Tier clusters.
 - Use `ssl={"ca": "<CA_path>"}` to specify your local path of the downloaded TiDB cluster `ca.pem`.
@@ -217,9 +217,9 @@ func main() {
 }
 ```
 
-Parameter description：
+Parameter descriptions：
 
-- Register `tls.Config` in TLS connection configuration to enable TLS and validate TiDB Dedicated Tier clusters. 
+- Register `tls.Config` in the TLS connection configuration to enable TLS and validate TiDB Dedicated Tier clusters. 
 - Set `MinVersion: tls.VersionTLS12` to restrict the versions of TLS protocol.
 - Set `ServerName: "<host>"` to verify TiDB Dedicated Tier's hostname.
 - If you do not want to register a new TLS configuration, you can just set `tls=true` in the connection string.
@@ -276,7 +276,7 @@ connection.connect(function(err) {
 });
 ```
 
-Parameter description：
+Parameter descriptions：
 
 - Set `ssl: {minVersion: 'TLSv1.2'}` to restrict the versions of the TLS protocol. If you want to use TLS 1.3, you can set the version to `TLSv1.3`.
 - Set `ssl: {ca: fs.readFileSync('<CA_path>')}` to read your local CA path of the downloaded TiDB cluster `ca.pem`.
