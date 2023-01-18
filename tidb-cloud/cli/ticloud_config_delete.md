@@ -2,8 +2,6 @@
 
 Delete a profile
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 ticloud config delete <profileName> [flags]
 ```
@@ -11,8 +9,6 @@ ticloud config delete <profileName> [flags]
 ## Examples
 
 Delete a profile configuration:
-
-{{< copyable "shell-regular" >}}
 
 ```shell
 ticloud config delete <profileName>

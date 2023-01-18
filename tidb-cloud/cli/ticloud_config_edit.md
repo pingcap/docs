@@ -2,8 +2,6 @@
 
 Open the config file with the default text editor
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 ticloud config edit [flags]
 ```
@@ -11,8 +9,6 @@ ticloud config edit [flags]
 ## Examples
 
 To open the config
-
-{{< copyable "shell-regular" >}}
 
 ```shell
 ticloud config edit

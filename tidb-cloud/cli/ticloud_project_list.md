@@ -2,8 +2,6 @@
 
 List all accessible projects
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 ticloud project list [flags]
 ```
@@ -12,15 +10,11 @@ ticloud project list [flags]
 
 List the projects:
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 ticloud project list
 ```
 
 List the projects with json format:
-
-{{< copyable "shell-regular" >}}
 
 ```shell
 ticloud project list -o json

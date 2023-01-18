@@ -2,8 +2,6 @@
 
 Describe a specific profile
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 ticloud config describe <profileName> [flags]
 ```
@@ -11,8 +9,6 @@ ticloud config describe <profileName> [flags]
 ## Examples
 
 Describe the profile configuration:
-
-{{< copyable "shell-regular" >}}
 
 ```shell
 ticloud config describe <profileName>

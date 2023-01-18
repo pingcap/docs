@@ -60,23 +60,17 @@ TiDB Cloud provides a command-line interface (CLI) [`ticloud`](https://github.co
 
 See all available commands by running:
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 ticloud --help
 ```
 
 Verify that you're using the latest version:
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 ticloud version
 ```
 
 If not, update to the latest version:
-
-{{< copyable "shell-regular" >}}
 
 ```shell
 ticloud update
@@ -88,23 +82,17 @@ The TiDB Cloud CLI is also available through [TiUP](https://tiup.io/). It's call
 
 See all available commands by running:
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 tiup cloud --help
 ```
 
 Run commands with the `tiup cloud <command>`, for example:
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 tiup cloud cluster create
 ```
 
 Update to the latest version by TiUP:
-
-{{< copyable "shell-regular" >}}
 
 ```shell
 tiup update cloud
@@ -118,8 +106,6 @@ Here give a quick example on how wo create a cluster with TiDB Cloud CLI.
 
 Configure a user profile with your TiDB Cloud API Key.
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 ticloud config create
 ```
@@ -127,8 +113,6 @@ ticloud config create
 <Warning> The config name **MUST NOT** contain '.'</Warning>
 
 ### Create a cluster
-
-{{< copyable "shell-regular" >}}
 
 ```shell
 ticloud cluster create

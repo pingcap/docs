@@ -2,8 +2,6 @@
 
 Delete a cluster from your project
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 ticloud cluster delete [flags]
 ```
@@ -12,16 +10,12 @@ ticloud cluster delete [flags]
 
 Delete a cluster in interactive mode:
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 ticloud cluster delete
 ```
 
 Delete a cluster in non-interactive mode:
     
-{{< copyable "shell-regular" >}}
-
 ```shell
 ticloud cluster delete --project-id <project-id> --cluster-id <cluster-id>
 ```

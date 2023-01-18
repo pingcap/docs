@@ -10,8 +10,6 @@ ticloud update [flags]
 
 Update to the latest version:
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 ticloud update
 ```

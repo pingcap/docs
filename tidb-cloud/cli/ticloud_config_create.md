@@ -2,8 +2,6 @@
 
 Configure a user profile to store settings
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 ticloud config create [flags]
 ```
@@ -12,15 +10,11 @@ ticloud config create [flags]
 
 To configure a new user profile in interactive mode:
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 ticloud config create
 ```
 
 To configure a new user profile in non-interactive mode:
-
-{{< copyable "shell-regular" >}}
 
 ```shell
 ticloud config create --profile-name <profile-name> --public-key <public-key> --private-key <private-key>

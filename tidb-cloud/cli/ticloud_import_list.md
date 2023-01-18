@@ -2,8 +2,6 @@
 
 List data import tasks
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 ticloud import list [flags]
 ```
@@ -12,15 +10,11 @@ ticloud import list [flags]
 
 List import tasks in interactive mode:
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 ticloud import list
 ```
 
 List import tasks in non-interactive mode:
-
-{{< copyable "shell-regular" >}}
 
 ```shell
 ticloud import list --project-id <project-id> --cluster-id <cluster-id>
@@ -28,9 +22,7 @@ ticloud import list --project-id <project-id> --cluster-id <cluster-id>
 
 List the clusters in the project with json format:
 
-{{< copyable "shell-regular" >}}
-
-``` 
+```shell 
 ticloud import list --project-id <project-id> --cluster-id <cluster-id> --output json
 ```
 

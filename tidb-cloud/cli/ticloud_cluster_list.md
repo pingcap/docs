@@ -2,8 +2,6 @@
 
 List all clusters in a project
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 ticloud cluster list <project-id> [flags]
 ```
@@ -12,23 +10,17 @@ ticloud cluster list <project-id> [flags]
 
 List all clusters in the project(interactive mode):
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 ticloud cluster list
 ```
 
 List the clusters in the project(non-interactive mode):
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 ticloud cluster list <project-id> 
 ```
 
 List the clusters in the project with json format:
-
-{{< copyable "shell-regular" >}}
 
 ```shell
 ticloud cluster list <project-id> -o json

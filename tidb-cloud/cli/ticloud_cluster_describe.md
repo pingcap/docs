@@ -2,8 +2,6 @@
 
 Describe a cluster
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 ticloud cluster describe [flags]
 ```
@@ -12,15 +10,11 @@ ticloud cluster describe [flags]
 
 Get the cluster info in interactive mode:
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 ticloud cluster describe
 ```
 
 Get the cluster info in non-interactive mode:
-
-{{< copyable "shell-regular" >}}
 
 ```shell
 ticloud cluster describe --project-id <project-id> --cluster-id <cluster-id>

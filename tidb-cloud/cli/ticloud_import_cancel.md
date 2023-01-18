@@ -2,8 +2,6 @@
 
 Cancel a data import task
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 ticloud import cancel [flags]
 ```
@@ -12,15 +10,11 @@ ticloud import cancel [flags]
 
 Cancel an import task in interactive mode:
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 ticloud import cancel
 ```
 
 Cancel an import task in non-interactive mode:
-
-{{< copyable "shell-regular" >}}
 
 ```shell
 ticloud import cancel --project-id <project-id> --cluster-id <cluster-id> --import-id <import-id>

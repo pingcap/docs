@@ -16,8 +16,6 @@ Available properties : [public-key private-key api-url].
 If using -P flag, the config in the specific profile will be set.
 If not, the config in the active profile will be set
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 ticloud config set <propertyName> <value> [flags]
 ```
@@ -26,23 +24,17 @@ ticloud config set <propertyName> <value> [flags]
 
 Set the value of the public-key in active profile:
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 ticloud config set public-key <public-key>
 ```
 
 Set the value of the public-key in the specific profile "test":
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 ticloud config set public-key <public-key> -P test
 ```
 
 Set the API host:
-
-{{< copyable "shell-regular" >}}
 
 ```shell
 ticloud config set api-url https://api.tidbcloud.com

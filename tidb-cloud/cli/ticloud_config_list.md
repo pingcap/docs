@@ -2,8 +2,6 @@
 
 List all profiles
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 ticloud config list [flags]
 ```
@@ -11,8 +9,6 @@ ticloud config list [flags]
 ## Examples
 
 List all available profiles:
-
-{{< copyable "shell-regular" >}}
 
 ```shell
 ticloud config list

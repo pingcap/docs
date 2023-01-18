@@ -2,8 +2,6 @@
 
 Use the specified profile as the active profile
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 ticloud config use <profileName> [flags]
 ```
@@ -11,8 +9,6 @@ ticloud config use <profileName> [flags]
 ## Examples
 
 Use the "test" profile as the active profile:
-
-{{< copyable "shell-regular" >}}
 
 ```shell
 ticloud config use test

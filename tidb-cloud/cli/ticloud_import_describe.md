@@ -2,8 +2,6 @@
 
 Describe a data import task
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 ticloud import describe [flags]
 ```
@@ -12,15 +10,11 @@ ticloud import describe [flags]
 
 Describe an import task in interactive mode:
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 ticloud import describe
 ```
 
 Describe an import task in non-interactive mode:
-
-{{< copyable "shell-regular" >}}
 
 ```shell
 ticloud import describe --project-id <project-id> --cluster-id <cluster-id> --import-id <import-id>

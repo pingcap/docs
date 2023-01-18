@@ -2,8 +2,6 @@
 
 Import files from Amazon S3 into TiDB Cloud
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 ticloud import start s3 [flags]
 ```
@@ -12,23 +10,17 @@ ticloud import start s3 [flags]
 
 Start an import task in interactive mode:
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 ticloud import start s3
 ```
 
 Start an import task in non-interactive mode:
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 ticloud import start s3 --project-id <project-id> --cluster-id <cluster-id> --aws-role-arn <aws-role-arn> --data-format <data-format> --source-url <source-url>
 ```
 
 Start an impor task with custom CSV format:
-
-{{< copyable "shell-regular" >}}
 
 ```shell
 ticloud import start s3 --project-id <project-id> --cluster-id <cluster-id> --aws-role-arn <aws-role-arn> --data-format CSV --source-url <source-url> --separator \" --delimiter \' --backslash-escape=false --trim-last-separator=true

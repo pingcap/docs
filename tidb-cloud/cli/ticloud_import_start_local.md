@@ -2,8 +2,6 @@
 
 Import a local file to TiDB Cloud
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 ticloud import start local <filePath> [flags]
 ```
@@ -12,15 +10,11 @@ ticloud import start local <filePath> [flags]
 
 Start an import task in interactive mode:
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 ticloud import start local <filePath>
 ```
 
 Start an import task in non-interactive mode:
-
-{{< copyable "shell-regular" >}}
 
 ```shell
 ticloud import start local <filePath> --project-id <project-id> --cluster-id <cluster-id> --data-format <data-format> --target-database <target-database> --target-table <target-table>
@@ -28,9 +22,7 @@ ticloud import start local <filePath> --project-id <project-id> --cluster-id <cl
 
 Start an impor task with custom CSV format:
 
-{{< copyable "shell-regular" >}}
-
-```
+```shell
 ticloud import start local <filePath> --project-id <project-id> --cluster-id <cluster-id> --data-format CSV --target-database <target-database> --target-table <target-table> --separator \" --delimiter \' --backslash-escape=false --trim-last-separator=true
 ```
 

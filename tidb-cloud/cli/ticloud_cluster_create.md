@@ -2,8 +2,6 @@
 
 Create one cluster in the specified project
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 ticloud cluster create [flags]
 ```
@@ -12,15 +10,11 @@ ticloud cluster create [flags]
 
 Create a cluster in interactive mode:
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 ticloud cluster create
 ```
 
 Create a cluster in non-interactive mode:
-
-{{< copyable "shell-regular" >}}
 
 ```shell
 ticloud cluster create --project-id <project-id> --cluster-name <cluster-name> --cloud-provider <cloud-provider> -r <region> --root-password <password> --cluster-type <cluster-type>
