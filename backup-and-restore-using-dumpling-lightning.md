@@ -25,12 +25,7 @@ Use the following tools for data backup and restoration:
 
 ## Best practices for full backup and restoration using Dumpling/TiDB Lightning
 
-<<<<<<< HEAD
 To quickly backup and restore data (especially large amounts of data), refer to the following recommendations:
-=======
-- [Grant the source database privileges required for Dumpling](/dumpling-overview.md#export-data-from-tidb-or-mysql)
-- [Grant the target database privileges required for TiDB Lightning](/tidb-lightning/tidb-lightning-requirements.md#privileges-of-the-target-database)
->>>>>>> f0737bd07 (dumpling: refined as per cn doc (#12064))
 
 * Keep the exported data file as small as possible. It is recommended to use the `-F` option of Dumpling to set the file size. If you use TiDB Lightning to restore data, it is recommended that you set the value of `-F` to `256m`.
 * If some of the exported tables have many rows, you can enable concurrency in the table by setting the `-r` option.
