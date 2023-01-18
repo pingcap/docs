@@ -174,7 +174,6 @@ To restore data from an older version, you can use one of the following methods:
 
 - For simple cases, use `SELECT` after setting the `tidb_snapshot` variable and copy-paste the output, or use `SELECT ... INTO LOCAL OUTFLE` and use `LOAD DATA` to import the data later on.
 
-<<<<<<< HEAD
 <CustomContent platform="tidb">
 
 - Use [Dumpling](/dumpling-overview.md#export-historical-data-snapshot-of-tidb) to export a historical snapshot. Dumpling performs well in exporting larger sets of data.
@@ -186,6 +185,3 @@ To restore data from an older version, you can use one of the following methods:
 - Use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export a historical snapshot. Dumpling performs well in exporting larger sets of data.
 
 </CustomContent>
-=======
-- Use [Dumpling](/dumpling-overview.md#export-historical-data-snapshots-of-tidb) to export a historical snapshot. Dumpling performs well in exporting larger sets of data.
->>>>>>> f0737bd07 (dumpling: refined as per cn doc (#12064))
