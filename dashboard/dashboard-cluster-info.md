@@ -77,7 +77,7 @@ Click **Disks** to view the list of disks:
 
 ![Disk list](/media/dashboard/dashboard-cluster-info-disks-v650.png)
 
-This disk list shows the running status of disks that correspond to all instances of TiDB, TiKV, PD, and TiFlash components in the cluster.
+This disk list shows the status of disks on which the TiDB, TiKV, PD, and TiFlash instances run.
 
 The list includes the following information:
 
