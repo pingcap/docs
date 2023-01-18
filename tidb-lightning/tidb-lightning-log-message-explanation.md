@@ -9,7 +9,7 @@ Based on a successful test data import, this document explains log messages of *
 
 To read this document, you are expected to be already familiar with TiDB Lightning and have prior knowledge of its high-level workflow described in [TiDB Lightning Overview](/tidb-lightning/tidb-lightning-overview.md). If you encounter unfamiliar terminology, you can refer to the [glossary](/tidb-lightning/tidb-lightning-glossary.md).
 
-You could use this doc to quickly navigate within Lightning source code to better understand how it works internally and what exactly the log message means for.
+You could use this doc to quickly navigate within TiDB Lightning source code and better understand how it works internally and what exactly the log message means.
 
 Note that some trivial logs are ignored. Only important logs are included in the following doc.
 
