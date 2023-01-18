@@ -3,7 +3,7 @@ title: TiDB Lightning Log Message Explanation
 summary: Provide detailed explanation of log messages generated during the importing process using TiDB Lightning.
 ---
 
-# Introduction
+# TiDB Lightning Log Message Explanation
 
 Based on a successful test data import, this document explains log messages of **v5.4 TiDB Lightning** with **Local Backend mode**, and dive deep to understand where the log comes from and what it actually represents. Users of TiDB Lightning can refer to this doc to have a better understanding of TiDB Lightning logs. We will continue working on other TiDB versions and improving the log messages.
 
