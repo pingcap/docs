@@ -17,7 +17,7 @@ ticloud cluster create
 Create a cluster in non-interactive mode:
 
 ```shell
-ticloud cluster create --project-id <project-id> --cluster-name <cluster-name> --cloud-provider <cloud-provider> -r <region> --root-password <password> --cluster-type <cluster-type>
+ticloud cluster create --project-id <project-id> --cluster-name <cluster-name> --cloud-provider <cloud-provider> --region <region> --root-password <password> --cluster-type <cluster-type>
 ```
 
 ## Flags

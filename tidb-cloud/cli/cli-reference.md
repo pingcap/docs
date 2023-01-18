@@ -13,7 +13,7 @@ Make sure to first [set up your TiDB Cloud CLI environment](/tidb-cloud/cli/cli-
 
 ## Available Commands
 
-Use `ticloud [command] [command]` to start up the `ticloud` CLI in your terminal. For users using TiUP, use `tiup cloud [command] [command]` instead.
+Use `ticloud [command] [subcommand]` to start up the `ticloud` CLI in your terminal. For users using TiUP, use `tiup cloud [command] [subcommand]` instead.
 
 | Command    | Subcommands                                                | Description                                                                                              |
 |------------|------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
