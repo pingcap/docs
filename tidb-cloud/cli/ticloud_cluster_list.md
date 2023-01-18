@@ -8,13 +8,13 @@ ticloud cluster list <project-id> [flags]
 
 ## Examples
 
-List all clusters in the project(interactive mode):
+List all clusters in the project (interactive mode):
 
 ```shell
 ticloud cluster list
 ```
 
-List the clusters in the project(non-interactive mode):
+List the clusters in the project (non-interactive mode):
 
 ```shell
 ticloud cluster list <project-id> 

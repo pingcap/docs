@@ -21,7 +21,7 @@ TiDB Cloud provides a command-line interface (CLI) [`ticloud`](https://github.co
 <SimpleTab>
 <div label="macOS/linux">
 
-- Install via script(recommended)
+- Install via script (recommended)
 
     ```shell
     curl https://raw.githubusercontent.com/tidbcloud/tidbcloud-cli/main/install.sh | sh
