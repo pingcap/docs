@@ -39,7 +39,7 @@ ticloud project list -o json
 
 | Flag                 | Description                                  | Required | Extra                                                                                                             |
 |----------------------|----------------------------------------------|----------|-------------------------------------------------------------------------------------------------------------------|
-| --no-color           | Disable color output                         | false    | Only work in non-interactive mode. In interactive mode, Disable color output may not work with some UI components |
+| --no-color           | Disable color output                         | false    | Only work in non-interactive mode. In interactive mode, disable color output may not work with some UI components |
 | -P, --profile string | Profile to use from your configuration file. | false    | Work in both modes                                                                                                |
 
 ## Feedback
