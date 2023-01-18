@@ -20,7 +20,7 @@ Start an import task in non-interactive mode:
 ticloud import start local <file-path> --project-id <project-id> --cluster-id <cluster-id> --data-format <data-format> --target-database <target-database> --target-table <target-table>
 ```
 
-Start an impor task with custom CSV format:
+Start an import task with custom CSV format:
 
 ```shell
 ticloud import start local <file-path> --project-id <project-id> --cluster-id <cluster-id> --data-format CSV --target-database <target-database> --target-table <target-table> --separator \" --delimiter \' --backslash-escape=false --trim-last-separator=true

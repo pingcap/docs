@@ -24,7 +24,7 @@ ticloud config list
 
 | Flag       | Description   |
 |------------|---------------|
-| -h, --help | help for edit |
+| -h, --help | help for list |
 
 ## Inherited flags
 

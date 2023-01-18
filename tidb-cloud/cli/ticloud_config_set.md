@@ -46,7 +46,7 @@ ticloud config set api-url https://api.tidbcloud.com
 
 | Flag       | Description   |
 |------------|---------------|
-| -h, --help | help for edit |
+| -h, --help | help for set |
 
 ## Inherited flags
 

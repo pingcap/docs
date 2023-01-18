@@ -18,7 +18,7 @@ ticloud config use test
 
 | Flag       | Description   |
 |------------|---------------|
-| -h, --help | help for edit |
+| -h, --help | help for use |
 
 ## Inherited flags
 
