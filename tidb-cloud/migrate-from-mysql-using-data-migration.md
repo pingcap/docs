@@ -246,17 +246,7 @@ You can subscribe alerts to be informed in time when an alert occurs. TiDB Cloud
 - A migration job fails or hangs for more than 20 minutes.
 - A TiCDC Changefeed task fails or hangs for more than 10 minutes.
 
-To subscribe an alert, do the following:
-
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
-2. In the left navigation pane of the [**Clusters**](https://tidbcloud.com/console/clusters) page, do one of the following:
-
-    - If you have multiple projects, switch to the target project, and then click **Admin** > **Alerts**.
-    - If you only have one project, click **Admin** > **Alerts**.
-
-3. Enter your email address, and then click **Subscribe**.
-
-For more information about alerts, see [TiDB Cloud Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md).
+For more information about how to subscribe an alert, see [TiDB Cloud Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md).
 
 ## Precheck warnings and solutions
 
