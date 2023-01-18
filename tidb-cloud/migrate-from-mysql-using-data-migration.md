@@ -277,7 +277,7 @@ This section describes the precheck warnings and corresponding solutions.
 
 - Amazon Aurora MySQL: see [How do I turn on binary logging for my Amazon Aurora MySQL-Compatible cluster?](https://aws.amazon.com/premiumsupport/knowledge-center/enable-binary-logging-aurora/?nc1=h_ls).
 - Amazon RDS: see [Configuring MySQL binary logging](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.MySQL.BinaryFormat.html).
-- MySQL: execute 'set global binlog_format=ROW;'. See [Setting The Binary Log Format](https://dev.mysql.com/doc/refman/5.7/en/binary-log-setting.html)
+- MySQL: execute 'set global binlog_format=ROW;'. See [Setting The Binary Log Format](https://dev.mysql.com/doc/refman/5.7/en/binary-log-setting.html).
 
 ### Check whether mysql binlog_row_image is FULL
 
@@ -296,7 +296,7 @@ Make sure that binlog has been enabled in the upstream database. Then resolve th
 
 If the error occurs in the upstream MySQL database:
 
-- Amazon Aurora MySQL: similar to configuring `binlog_format`. See [How do I turn on binary logging for my Amazon Aurora MySQL-Compatible cluster?](https://aws.amazon.com/premiumsupport/knowledge-center/enable-binary-logging-aurora/?nc1=h_ls)
+- Amazon Aurora MySQL: similar to configuring `binlog_format`. See [How do I turn on binary logging for my Amazon Aurora MySQL-Compatible cluster?](https://aws.amazon.com/premiumsupport/knowledge-center/enable-binary-logging-aurora/?nc1=h_ls).
 - Amazon RDS: similar to configuring `binlog_format`. See [Configuring MySQL binary logging](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.MySQL.BinaryFormat.html).
 - MySQL: configure `max_connections` following the document [max_connections](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_max_connections).
 
