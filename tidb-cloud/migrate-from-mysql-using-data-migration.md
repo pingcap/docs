@@ -294,7 +294,11 @@ Make sure that binlog has been enabled in the upstream database. Then resolve th
 
 ### Check if connetion concurrency exceeds database's maximum connection limit
 
-If the error occurs in the upstream MySQL database, configure `max_connections` following the document [max_connections](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_max_connections).
+If the error occurs in the upstream MySQL database:
+
+- Amazon Aurora MySQL: similar to configuring `binlog_format`. See [How do I turn on binary logging for my Amazon Aurora MySQL-Compatible cluster?](https://aws.amazon.com/premiumsupport/knowledge-center/enable-binary-logging-aurora/?nc1=h_ls)
+- Amazon RDS: similar to configuring `binlog_format`. See [Configuring MySQL binary logging](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.MySQL.BinaryFormat.html).
+- MySQL: configure `max_connections` following the document [max_connections](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_max_connections).
 
 If the error occurs in the TiDB Cloud cluster, configure `max_connections` following the document [max_connections](https://docs.pingcap.com/tidb/stable/system-variables#max_connections).
 
