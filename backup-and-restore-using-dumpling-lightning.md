@@ -24,7 +24,7 @@ If you need to back up a small amount of data (for example, less than 50 GB) and
     ```
 
 - [Grant the source database privileges required for Dumpling](/dumpling-overview.md#export-data-from-tidb-or-mysql)
-- [Grant the target database privileges required for TiDB Lightning](/tidb-lightning/tidb-lightning-requirements.md#privileges-of-the-target-database)
+- [Grant the target database privileges required for TiDB Lightning](/tidb-lightning/tidb-lightning-requirements.md#downstream-privilege-requirements)
 
 ## Resource requirements
 
