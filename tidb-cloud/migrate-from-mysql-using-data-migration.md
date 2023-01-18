@@ -107,9 +107,7 @@ Before creating a migration job, set up the network connection according to your
 <details>
 <summary> Set up VPC Peering</summary>
 
-Make sure that your TiDB Cluster can connect to the MySQL service.
-
-If your MySQL service is in an AWS VPC that has no public internet access, take the following steps:
+If your MySQL service is in an AWS VPC, take the following steps:
 
 1. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of the MySQL service and your TiDB cluster.
 2. Modify the inbound rules of the security group that the MySQL service is associated with. 
@@ -121,7 +119,7 @@ If your MySQL service is in an AWS VPC that has no public internet access, take 
     1. Follow the steps in [Enable DNS resolution for a VPC peering connection](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html#vpc-peering-dns).
     2. Enable the **Accepter DNS resolution** option.
 
-If your MySQL service is in a GCP VPC that has no public internet access, take the following steps:
+If your MySQL service is in a GCP VPC, take the following steps:
 
 1. If your MySQL service is Google Cloud SQL, you must expose a MySQL endpoint in the associated VPC of the Google Cloud SQL instance. You may need to use the [**Cloud SQL Auth proxy**](https://cloud.google.com/sql/docs/mysql/sql-proxy) which is developed by Google.
 2. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of the MySQL service and your TiDB cluster. 
@@ -244,7 +242,6 @@ You can delete a migration job in any status.
 You can subscribe alerts to be informed in time when an alert occurs. TiDB Cloud sends an email to the subscribers in the following scenarios: 
 
 - A migration job fails or hangs for more than 20 minutes.
-- A TiCDC Changefeed task fails or hangs for more than 10 minutes.
 
 For more information about how to subscribe an alert, see [TiDB Cloud Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md).
 
@@ -271,7 +268,7 @@ This section describes the precheck warnings and corresponding solutions.
 
 ### Check whether mysql binlog_row_image is FULL
 
-- Amazon Aurora MySQL: `binlog_row_image` is not configurable.
+- Amazon Aurora MySQL: `binlog_row_image` is not configurable. This precheck item should fail for it.
 - Amazon RDS: the process is similar to setting the `binlog_format`. The only difference is that the parameter you change is `binlog_row_image` instead of `binlog_format`. See [Configuring MySQL binary logging](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.MySQL.BinaryFormat.html).
 - MySQL: 'set global binlog_row_image = FULL;'. See [Binary Logging Options and Variables](https://dev.mysql.com/doc/refman/5.7/en/replication-options-binary-log.html#sysvar_binlog_row_image).
 
@@ -282,12 +279,14 @@ Make sure that binlog has been enabled in the upstream database. Then resolve th
 - If the message is similar to `These dbs xxx are not in binlog_do_db xxx`, make sure all the databases that you want to migrate are in the list. See [--binlog-do-db=db_name](https://dev.mysql.com/doc/refman/5.7/en/replication-options-binary-log.html#option_mysqld_binlog-do-db).
 - If the message is similar to `these dbs xxx are in binlog_ignore_db xxx`, make sure all the databases that you want to migrate are not in the ignore list. See [--binlog-ignore-db=db_name](https://dev.mysql.com/doc/refman/5.7/en/replication-options-binary-log.html#option_mysqld_binlog-ignore-db).
 
+For Amazon RDS, you need change the following parameters: `replicate-do-db`, `replicate-do-table`, `replicate-ignore-db`, and `replicate-ignore-table`. See [Configuring MySQL binary logging](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.MySQL.BinaryFormat.html).
+
 ### Check if connetion concurrency exceeds database's maximum connection limit
 
 If the error occurs in the upstream MySQL database:
 
-- Amazon Aurora MySQL: similar to configuring `binlog_format`. See [How do I turn on binary logging for my Amazon Aurora MySQL-Compatible cluster?](https://aws.amazon.com/premiumsupport/knowledge-center/enable-binary-logging-aurora/?nc1=h_ls).
-- Amazon RDS: similar to configuring `binlog_format`. See [Configuring MySQL binary logging](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.MySQL.BinaryFormat.html).
+- Amazon Aurora MySQL: the process is similar to setting the `binlog_format`. The only difference is that the parameter you change is `max_connections` instead of `binlog_format`. See [How do I turn on binary logging for my Amazon Aurora MySQL-Compatible cluster?](https://aws.amazon.com/premiumsupport/knowledge-center/enable-binary-logging-aurora/?nc1=h_ls).
+- Amazon RDS: the process is similar to setting the `binlog_format`. The only difference is that the parameter you change is `max_connections` instead of `binlog_format`.  See [Configuring MySQL binary logging](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.MySQL.BinaryFormat.html).
 - MySQL: configure `max_connections` following the document [max_connections](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_max_connections).
 
 If the error occurs in the TiDB Cloud cluster, configure `max_connections` following the document [max_connections](https://docs.pingcap.com/tidb/stable/system-variables#max_connections).
