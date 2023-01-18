@@ -285,7 +285,7 @@ Parameter descriptions：
 </div>
 </SimpleTab>
 
-## Root Digital certificate management of Dedicated Tier 
+## Root certificate management of Dedicated Tier 
 
 TiDB Dedicated Tier uses certificates from [AWS Certificate Manager (ACM)](https://aws.amazon.com/certificate-manager/) as a Certificate Authority (CA) for TLS connections between clients and TiDB Dedicated Tier clusters. Usually, the root certificates of ACM are stored securely in AWS-managed hardware security modules (HSMs) that meet [FIPS 140-2 Level 3](https://csrc.nist.gov/projects/cryptographic-module-validation-program/Certificate/3139) security standards. 
 
