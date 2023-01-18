@@ -6,6 +6,12 @@ Describe a cluster
 ticloud cluster describe [flags]
 ```
 
+Or use alias
+
+```shell
+ticloud cluster get [flags]
+```
+
 ## Examples
 
 Get the cluster info in interactive mode:

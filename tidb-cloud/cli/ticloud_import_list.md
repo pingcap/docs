@@ -6,6 +6,12 @@ List data import tasks
 ticloud import list [flags]
 ```
 
+Or use alias
+
+```shell
+ticloud import ls [flags]
+```
+
 ## Examples
 
 List import tasks in interactive mode:

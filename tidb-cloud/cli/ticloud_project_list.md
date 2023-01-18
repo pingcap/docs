@@ -6,6 +6,12 @@ List all accessible projects
 ticloud project list [flags]
 ```
 
+Or use alias
+
+```shell
+ticloud project ls [flags]
+```
+
 ## Examples
 
 List the projects:

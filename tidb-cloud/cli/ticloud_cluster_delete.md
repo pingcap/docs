@@ -6,6 +6,12 @@ Delete a cluster from your project
 ticloud cluster delete [flags]
 ```
 
+Or use alias
+
+```shell
+ticloud cluster rm [flags]
+```
+
 ## Examples
 
 Delete a cluster in interactive mode:

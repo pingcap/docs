@@ -6,6 +6,12 @@ List all clusters in a project
 ticloud cluster list <project-id> [flags]
 ```
 
+Or use alias
+
+```shell
+ticloud cluster ls <project-id> [flags]
+```
+
 ## Examples
 
 List all clusters in the project (interactive mode):

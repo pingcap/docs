@@ -6,6 +6,12 @@ Describe a data import task
 ticloud import describe [flags]
 ```
 
+Or use alias
+
+```shell
+ticloud import get [flags]
+```
+
 ## Examples
 
 Describe an import task in interactive mode:

@@ -6,6 +6,12 @@ List all profiles
 ticloud config list [flags]
 ```
 
+Or use alias
+
+```shell
+ticloud config ls [flags]
+```
+
 ## Examples
 
 List all available profiles:

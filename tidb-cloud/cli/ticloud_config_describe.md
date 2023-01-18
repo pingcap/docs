@@ -6,6 +6,12 @@ Describe a specific profile
 ticloud config describe <profileName> [flags]
 ```
 
+Or use alias
+
+```shell
+ticloud config get <profileName> [flags]
+```
+
 ## Examples
 
 Describe the profile configuration:

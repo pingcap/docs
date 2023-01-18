@@ -6,6 +6,12 @@ Delete a profile
 ticloud config delete <profileName> [flags]
 ```
 
+Or use alias
+
+```shell
+ticloud config rm <profileName> [flags]
+```
+
 ## Examples
 
 Delete a profile configuration:
