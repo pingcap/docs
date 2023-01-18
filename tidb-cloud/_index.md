@@ -25,8 +25,6 @@ hide_commit: true
 
 [Proof of Concept](https://docs.pingcap.com/tidbcloud/tidb-cloud-poc)
 
-[Try Out TiDB Cloud CLI](https://docs.pingcap.com/tidbcloud/cli-overview)
-
 </LearningPath>
 
 <LearningPath label="Develop" icon="doc8">
@@ -154,8 +152,6 @@ hide_commit: true
 [Release Notes](https://docs.pingcap.com/tidbcloud/tidb-cloud-release-notes)
 
 [SQL Reference](https://docs.pingcap.com/tidbcloud/basic-sql-operations)
-
-[CLI Reference](https://docs.pingcap.com/tidbcloud/cli-reference)
 
 </LearningPath>
 
