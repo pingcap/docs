@@ -86,6 +86,7 @@ After downloading TiDB cluster CA, if you want to import it into your operating 
 /* version >= 8.0.28 */
 jdbc:mysql://tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com:4000/test?user=root&password=<your_password>&sslMode=VERIFY_IDENTITY&tlsVersions=TLSv1.2&trustCertificateKeyStoreUrl=file:<your_custom_truststore_path>&trustCertificateKeyStorePassword=<your_truststore_password>
 ```
+
 You can click **show example usage** to view detailed code examples.
 
 ```
