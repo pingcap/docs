@@ -25,6 +25,13 @@ Use `ticloud [command] [subcommand]` to start up the `ticloud` CLI in your termi
 | project    | list                                                       | Manage projects                                                                                          | 
 | update     |                                                            | Update the CLI to the latest version                                                                     | 
 
+## Command mode
+
+The TiDB Cloud CLI supports two modes with some commands for easy use: interactive mode and non-interactive mode.
+
+- In interactive mode, the CLI prompts you for input when you run a command. Such as `ticloud config create`.
+- In non-interactive mode, you must provide all the required args and flags when running a command. Such as `ticloud config create --profile-name <profile-name> --public-key <public-key> --private-key <private-key>`
+
 ## Global Flags
 
 | Flag                 | Description                                  | Required | Extra                                                                                                             |
