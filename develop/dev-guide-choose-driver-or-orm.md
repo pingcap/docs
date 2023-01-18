@@ -45,7 +45,11 @@ You can follow the [MySQL documentation](https://dev.mysql.com/doc/connector-j/5
 
 > **Note:**
 >
+<<<<<<< HEAD
 > It is strongly recommended to use version 5.1.49, which is the latest version of JDBC 5.1. Since there is an [unresolved bug](https://bugs.mysql.com/bug.php?id=106252) in the current version 8.0.29, which might cause threads to hang when using TiDB. It is recommended that you do not upgrade to version 8.0 until MySQL JDBC 8.0 merges this fix.
+=======
+> There is a [bug](https://bugs.mysql.com/bug.php?id=106252) in the Connector/J 8.0 versions before 8.0.32, which might cause threads to hang when using TiDB versions earlier than v6.3.0. To avoid this issue, it is recommended that you use either MySQL Connector/J 8.0.32 or a later version, or the TiDB JDBC (see the *TiDB-JDBC* tab).
+>>>>>>> d304b1f7b (Update JDBC information (#11916))
 
 For an example of how to build a complete application, see [Build a Simple CRUD App with TiDB and JDBC](/develop/dev-guide-sample-application-java.md).
 
@@ -247,9 +251,12 @@ go get -u gorm.io/driver/mysql
 ```
 
 For an example of using GORM to build a TiDB application, see [Build a Simple CRUD App with TiDB and Golang](/develop/dev-guide-sample-application-golang.md).
+<<<<<<< HEAD
 
 <CustomContent platform="tidb-cloud">
 
 After you have determined the driver or ORM, you can [connect to your TiDB cluster](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster).
 
 </CustomContent>
+=======
+>>>>>>> d304b1f7b (Update JDBC information (#11916))
