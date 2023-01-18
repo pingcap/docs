@@ -299,4 +299,4 @@ For security reasons, TiDB Cloud Dedicated Tier only supports TLS 1.2 and TLS 1.
 
 No.
 
-TiDB Cloud Dedicated Tier only supports one-way TLS authentication, TiDB Cloud Dedicated Tier only supports one-way TLS authentication, and does not support two-way mTLS authentication currently. If you need two-way mTLS authentication, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+TiDB Cloud Dedicated Tier only supports one-way TLS authentication, and does not support two-way mTLS authentication currently. If you need two-way mTLS authentication, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
