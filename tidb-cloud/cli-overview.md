@@ -114,7 +114,7 @@ ticloud config create
 ticloud cluster create
 ```
 
-Now you are done. Check out our [CLI reference](/tidb-cloud/cli/cli-reference.md) to explore all that's possible with TiDB Cloud CLI.
+Now you are done. Check out our [CLI reference](/tidb-cloud/cli-reference.md) to explore all that's possible with TiDB Cloud CLI.
 
 ## Feedback
 
