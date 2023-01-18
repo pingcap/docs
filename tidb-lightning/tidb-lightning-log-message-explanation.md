@@ -13,7 +13,8 @@ You could use this doc to quickly navigate within Lightning source code to bette
 
 Note that some trivial logs are ignored. Only important logs are included in the following doc.
 
-## Log Message Explanation 
+## Log message explanation 
+
 ```
 [INFO] [info.go:49] ["Welcome to TiDB-Lightning"] [release-version=v5.4.0] [git-hash=55f3b24c1c9f506bd652ef1d162283541e428872] [git-branch=HEAD] [go-version=go1.16.6] [utc-build-time="2022-04-21 02:07:55"] [race-enabled=false]
 ```
