@@ -100,9 +100,36 @@ Before creating a migration job, set up the network connection according to your
 
 - If you use public IP (this is, standard connection) for network connection, make sure that the upstream database can be connected through the public network.
 
-- If you use VPC Peering, set it up according to [Add VPC peering requests](/tidb-cloud/set-up-vpc-peering-connections.md#step-1-add-vpc-peering-requests).
-
 - If you use AWS PrivateLink, set it up according to [Set Up Private Endpoint Connections](/tidb-cloud/set-up-private-endpoint-connections.md).
+
+- If you use VPC Peering, see the following instructions to configure the network.
+
+<details>
+<summary> Set up VPC Peering</summary>
+
+Make sure that your TiDB Cluster can connect to the MySQL service.
+
+If your MySQL service is in an AWS VPC that has no public internet access, take the following steps:
+
+1. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of the MySQL service and your TiDB cluster.
+2. Modify the inbound rules of the security group that the MySQL service is associated with. 
+
+    You must add [the CIDR of the region where your TiDB Cloud cluster is located](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr) to the inbound rules. Doing so allows the traffic to flow from your TiDB Cluster to the MySQL instance.
+
+3. If the MySQL URL contains a hostname, you need to allow TiDB Cloud to be able to resolve the DNS hostname of the MySQL service. 
+
+    1. Follow the steps in [Enable DNS resolution for a VPC peering connection](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html#vpc-peering-dns).
+    2. Enable the **Accepter DNS resolution** option.
+
+If your MySQL service is in a GCP VPC that has no public internet access, take the following steps:
+
+1. If your MySQL service is Google Cloud SQL, you must expose a MySQL endpoint in the associated VPC of the Google Cloud SQL instance. You may need to use the [**Cloud SQL Auth proxy**](https://cloud.google.com/sql/docs/mysql/sql-proxy) which is developed by Google.
+2. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of the MySQL service and your TiDB cluster. 
+3. Modify the ingress firewall rules of the VPC where MySQL is located.
+
+    You must add [the CIDR of the region where your TiDB Cloud cluster is located](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr) to the ingress firewall rules. Doing so allows the traffic to flow from your TiDB Cluster to the MySQL endpoint. 
+
+</details>
 
 ### Enable binlogs
 
@@ -190,6 +217,8 @@ On the **Precheck** page, you can view the precheck results. If the precheck fai
 
 If there are only warnings on some check items, you can evaluate the risk and consider whether to ignore the warnings. If all warnings are ignored, the migration job will automatically go on to the next step.
 
+For more information about warning and solutions, see [Precheck warnings and solutions](#precheck-warnings-and-solutions).
+
 For more information about precheck items, see [Migration Task Precheck](https://docs.pingcap.com/tidb/stable/dm-precheck).
 
 If all check items show **Pass**, click **Next**.
@@ -209,6 +238,65 @@ You can pause or delete a migration job when it is running.
 If a migration job has failed, you can restart it after solving the problem.
 
 You can delete a migration job in any status.
+
+## Subscribe alerts
+
+You can subscribe alerts to be informed in time when an alert occurs. TiDB Cloud sends an email to the subscribers in the following scenarios: 
+
+- A migration job fails or hangs for more than 20 minutes.
+- A TiCDC Changefeed task fails or hangs for more than 10 minutes.
+
+To subscribe an alert, do the following:
+
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
+2. In the left navigation pane of the [**Clusters**](https://tidbcloud.com/console/clusters) page, do one of the following:
+
+    - If you have multiple projects, switch to the target project, and then click **Admin** > **Alerts**.
+    - If you only have one project, click **Admin** > **Alerts**.
+
+3. Enter your email address, and then click **Subscribe**.
+
+For more information about alerts, see [TiDB Cloud Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md).
+
+## Precheck warnings and solutions
+
+This section describes the precheck warnings and corresponding solutions.
+
+### Check whether mysql server_id has been greater than 0
+
+- Amazon Aurora MySQL or Amazon RDS: `server_id` is configured by default. You do not need to configure it.
+- MySQL: to configure `server_id` for MySQL, see [Setting the Replication Source Configuration](https://dev.mysql.com/doc/refman/5.7/en/replication-howto-masterbaseconfig.html).
+
+### Check whether mysql binlog is enabled
+
+- Amazon Aurora MySQL: see [How do I turn on binary logging for my Amazon Aurora MySQL-Compatible cluster?](https://aws.amazon.com/premiumsupport/knowledge-center/enable-binary-logging-aurora/?nc1=h_ls).
+- Amazon RDS: see [Configuring MySQL binary logging](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.MySQL.BinaryFormat.html).
+- MySQL: see [Setting the Replication Source Configuration](https://dev.mysql.com/doc/refman/5.7/en/replication-howto-masterbaseconfig.html).
+
+### Check whether mysql binlog_format is ROW
+
+- Amazon Aurora MySQL: see [How do I turn on binary logging for my Amazon Aurora MySQL-Compatible cluster?](https://aws.amazon.com/premiumsupport/knowledge-center/enable-binary-logging-aurora/?nc1=h_ls).
+- Amazon RDS: see [Configuring MySQL binary logging](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.MySQL.BinaryFormat.html).
+- MySQL: execute 'set global binlog_format=ROW;'. See [Setting The Binary Log Format](https://dev.mysql.com/doc/refman/5.7/en/binary-log-setting.html)
+
+### Check whether mysql binlog_row_image is FULL
+
+- Amazon Aurora MySQL: `binlog_row_image` is not configurable.
+- Amazon RDS: the process is similar to setting the `binlog_format`. The only difference is that the parameter you change is `binlog_row_image` instead of `binlog_format`. See [Configuring MySQL binary logging](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.MySQL.BinaryFormat.html).
+- MySQL:'set global binlog_row_image = FULL;'. See [Binary Logging Options and Variables](https://dev.mysql.com/doc/refman/5.7/en/replication-options-binary-log.html#sysvar_binlog_row_image).
+
+### Check whether migrated dbs are in binlog_do_db/binlog_ignore_db
+
+Make sure that binlog has been enabled in the upstream database. Then resolve the issue according to the messages:
+
+- If the message is similar to `These dbs xxx are not in binlog_do_db xxx`, make sure all the databases that you want to migrate are in the list. See [--binlog-do-db=db_name](https://dev.mysql.com/doc/refman/5.7/en/replication-options-binary-log.html#option_mysqld_binlog-do-db).
+- If the message is similar to `these dbs xxx are in binlog_ignore_db xxx`, make sure all the databases that you want to migrate are not in the ignore list. See [--binlog-ignore-db=db_name](https://dev.mysql.com/doc/refman/5.7/en/replication-options-binary-log.html#option_mysqld_binlog-ignore-db).
+
+### Check if connetion concurrency exceeds database's maximum connection limit
+
+If the error occurs in the upstream MySQL database, configure `max_connections` following the document [max_connections](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_max_connections).
+
+If the error occurs in the TiDB Cloud cluster, configure `max_connections` following the document [max_connections](https://docs.pingcap.com/tidb/stable/system-variables#max_connections).
 
 ## Troubleshooting
 
