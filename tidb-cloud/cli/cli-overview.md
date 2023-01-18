@@ -23,15 +23,11 @@ TiDB Cloud provides a command-line interface (CLI) [`ticloud`](https://github.co
 
 - Install via script(recommended)
 
-  {{< copyable "shell-regular" >}}
-
     ```shell
     curl https://raw.githubusercontent.com/tidbcloud/tidbcloud-cli/main/install.sh | sh
     ```
 
 - Install via [TiUP](https://tiup.io/)
-
-  {{< copyable "shell-regular" >}}
 
     ```shell
     tiup install cloud
