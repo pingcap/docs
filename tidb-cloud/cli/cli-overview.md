@@ -96,7 +96,7 @@ tiup update cloud
 
 ## Quick Start
 
-Here give a quick example on how wo create a cluster with TiDB Cloud CLI.
+Here give a quick example on how we create a cluster with TiDB Cloud CLI.
 
 ### Configure a user profile
 
