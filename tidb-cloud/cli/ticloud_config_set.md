@@ -2,7 +2,7 @@
 
 Configure specific properties of the active profile
 
-### Synopsis
+## Synopsis
 
 Configure specific properties of the active profile.
 Available properties : [public-key private-key api-url].
@@ -11,7 +11,7 @@ Available properties : [public-key private-key api-url].
 |-------------|-----------------------------------------------------------------|
 | public-key  | the public key of the TiDB Cloud API                            |
 | private-key | the private key of the TiDB Cloud API                           |
-| api-url     | the host of TiDB Cloud API, default "https://api.tidbcloud.com" |
+| api-url     | the host of TiDB Cloud API, default `https://api.tidbcloud.com` |
 
 If using -P flag, the config in the specific profile will be set.
 If not, the config in the active profile will be set

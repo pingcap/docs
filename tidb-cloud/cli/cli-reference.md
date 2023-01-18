@@ -9,13 +9,11 @@ Use the TiDB Cloud CLI to manage your TiDB Cloud clusters, import data to your c
 
 ## Getting Started
 
-Make sure to first [set up your TiDB Cloud CLI environment](/tidb-cloud/cli/cli-overview.md). Once you installed the `ticloud`
-CLI, you can use it to manage your TiDB Cloud clusters from the command line.
+Make sure to first [set up your TiDB Cloud CLI environment](/tidb-cloud/cli/cli-overview.md). Once you installed the `ticloud` CLI, you can use it to manage your TiDB Cloud clusters from the command line.
 
 ## Available Commands
 
-Use `ticloud [command] [command]` to start up the `ticloud` CLI in your terminal.
-For users using TiUP, use `tiup cloud [command] [command]` instead.
+Use `ticloud [command] [command]` to start up the `ticloud` CLI in your terminal. For users using TiUP, use `tiup cloud [command] [command]` instead.
 
 | Command    | Subcommands                                                | Description                                                                                              |
 |------------|------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
@@ -36,5 +34,4 @@ For users using TiUP, use `tiup cloud [command] [command]` instead.
 
 ## Feedback
 
-If you have any questions or suggestions, please [file an issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose).
-Also, we are welcome to any contributions.
+If you have any questions or suggestions, please [file an issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose). Also, we are welcome to any contributions.

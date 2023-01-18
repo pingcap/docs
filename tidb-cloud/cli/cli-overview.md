@@ -5,20 +5,16 @@ Summary: Learn how to manage TiDB Cloud resources through the TiDB Cloud CLI.
 
 # TiDB Cloud CLI Overview
 
-TiDB Cloud provides a command-line interface (CLI) [`ticloud`](https://github.com/tidbcloud/tidbcloud-cli) to bring
-deploy cluster requests, import data, and other TiDB Cloud concepts to your fingertips.
-To interact with TiDB Cloud, you can use the `ticloud` to do the following:
+TiDB Cloud provides a command-line interface (CLI) [`ticloud`](https://github.com/tidbcloud/tidbcloud-cli) to bring deploy cluster requests, import data, and other TiDB Cloud concepts to your fingertips. To interact with TiDB Cloud, you can use the `ticloud` to do the following:
 
 - Create, delete and list your clusters.
 - Import data from S3 or local files to your clusters.
-- ...and more!
+- ...and more.
 
 ## Prerequisites
 
-- Have a TiDB Cloud account. If you don't have
-  one, [sign up for a free trial](https://pingcap.com/products/tidbcloud/trial/).
-- Create a TiDB API Key, follow
-  the [instruction](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management).
+- Have a TiDB Cloud account. If you don't have one, [sign up for a free trial](https://tidbcloud.com/free-trial).
+- Create a TiDB API Key, follow the [instruction](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management).
 
 ## Installation
 
@@ -42,24 +38,20 @@ To interact with TiDB Cloud, you can use the `ticloud` to do the following:
     ```
 
 - Install Manually
-    - Download the pre-compiled binaries from the [releases](https://github.com/tidbcloud/tidbcloud-cli/releases/latest)
-      page and copy to the desired location.
+    - Download the pre-compiled binaries from the [releases](https://github.com/tidbcloud/tidbcloud-cli/releases/latest) page and copy to the desired location.
 
 - Install in GitHub action
-    - To set up `ticloud` in GitHub Action,
-      use [`setup-tidbcloud-cli`](https://github.com/tidbcloud/setup-tidbcloud-cli).
+    - To set up `ticloud` in GitHub Action, use [`setup-tidbcloud-cli`](https://github.com/tidbcloud/setup-tidbcloud-cli).
 
 </div>
 
 <div label="Windows">
 
 - Install Manually
-    - Download the pre-compiled binaries from the [releases](https://github.com/tidbcloud/tidbcloud-cli/releases/latest)
-      page and copy to the desired location.
+    - Download the pre-compiled binaries from the [releases](https://github.com/tidbcloud/tidbcloud-cli/releases/latest) page and copy to the desired location.
 
 - Install in GitHub action
-    - To set up `ticloud` in GitHub Action,
-      use [`setup-tidbcloud-cli`](https://github.com/tidbcloud/setup-tidbcloud-cli).
+    - To set up `ticloud` in GitHub Action, use [`setup-tidbcloud-cli`](https://github.com/tidbcloud/setup-tidbcloud-cli).
 
 </div>
 </SimpleTab>
@@ -142,11 +134,8 @@ ticloud config create
 ticloud cluster create
 ```
 
-Now you are done! Check out our [CLI reference](/tidb-cloud/cli/cli-reference.md) to explore all that's possible with
-TiDB Cloud CLI.
+Now you are done. Check out our [CLI reference](/tidb-cloud/cli/cli-reference.md) to explore all that's possible with TiDB Cloud CLI.
 
 ## Feedback
 
-If you have any questions or suggestions,
-please [file an issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose).
-Also, we are welcome to any contributions.
+If you have any questions or suggestions, please [file an issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose). Also, we are welcome to any contributions.
