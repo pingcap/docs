@@ -5,7 +5,7 @@ summary: Provide detailed explanation of log messages generated during the impor
 
 # TiDB Lightning Log Message Explanation
 
-Based on a successful test data import, this document explains log messages of **v5.4 TiDB Lightning** with **Local Backend mode**, and dive deep to understand where the log comes from and what it actually represents. Users of TiDB Lightning can refer to this doc to have a better understanding of TiDB Lightning logs. We will continue working on other TiDB versions and improving the log messages.
+Based on a successful test data import, this document explains log messages of **TiDB Lightning v5.4** with **Local Backend mode**, and dives deep to understand where the log comes from and what it actually represents. You can refer to this doc to better understand TiDB Lightning logs.
 
 We expect you are already familiar with TiDB Lightning, and read through the high level Lightning workflow doc in the [previous section](https://docs.pingcap.com/tidb/v5.4/tidb-lightning-overview). You can also refer to [glossary](https://docs.pingcap.com/tidb/v5.4/tidb-lightning-glossary) when you encounter an unfamiliar concept later in this doc.
 
