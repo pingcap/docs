@@ -37,7 +37,7 @@ When using Dumpling, you need to execute the export command on a running cluster
 
 TiDB also provides other tools that you can choose to use as needed.
 
-- For backups of SST files (key-value pairs) or backups of incremental data that are not sensitive to latency, refer to [BR](/br/backup-and-restore-overview.md). 
+- For backups of SST files (key-value pairs) or backups of incremental data that are not sensitive to latency, refer to [BR](/br/backup-and-restore-tool.md). 
 - For real-time backups of incremental data, refer to [TiCDC](/ticdc/ticdc-overview.md).
 - All exported data can be imported back to TiDB using [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md).
 
