@@ -65,9 +65,9 @@ When the telemetry collection feature is enabled for TiSpark, the Spark module w
 
 - A randomly generated telemetry ID.
 - Some configuration information of TiSpark, such as the read engine and whether streaming read is enabled.
-- Cluster deployment characteristics, such as the machine hardware information, OS information, and component version number of the node where TiSpark is located.
+- Cluster deployment information, such as the machine hardware information, OS information, and component version number of the node where TiSpark is located.
 
-You can view TiSpark usage information that is collected through Spark logs. You can set the Spark log level to INFO or lower, for example:
+You can view TiSpark usage information that is collected in Spark logs. You can set the Spark log level to INFO or lower, for example:
 
 ```shell
 cat {spark.log} | grep Telemetry report | tail -n 1
