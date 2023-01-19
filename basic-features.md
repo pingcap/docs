@@ -8,9 +8,11 @@ aliases: ['/docs/dev/basic-features/','/tidb/dev/experimental-features-4.0/']
 
 This document lists the features supported in each TiDB version.
 
-> **Warning:**
+> **Note:**
 >
-> For the experimental features listed in this document, be aware of the usage limitations. Experimental features are subject to change or removal without prior notice. The syntax and implementation might change before the general availability. If you find any issue, file a [GitHub issue](https://github.com/pingcap/tidb/issues).
+> - Y: the feature is in general availability (GA) and can be used in production environments.
+> - N: the feature is not supported.
+> - Experimental: the feature is not GA yet and you need to be aware of the usage limitations. Experimental features are subject to change or removal without prior notice. The syntax and implementation might change before the general availability. If you find any issue, file a [GitHub issue](https://github.com/pingcap/tidb/issues).
 
 ## Data types, functions, and operators
 
