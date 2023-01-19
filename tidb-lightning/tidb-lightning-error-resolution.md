@@ -136,7 +136,7 @@ CREATE TABLE conflict_error_v1 (
 | Column       | Syntax | Type | Conflict | Description                                                                                                                         |
 | ------------ | ------ | ---- | -------- | ----------------------------------------------------------------------------------------------------------------------------------- |
 | task_id      | ✓      | ✓    | ✓        | The TiDB Lightning task ID that generates this error                                                                                    |
-| create_table | ✓      | ✓    | ✓        | The time at which the error is recorded                                                                                                         |
+| create_time | ✓      | ✓    | ✓        | The time at which the error is recorded                                                                                                         |
 | table_name   | ✓      | ✓    | ✓        | The name of the table that contains the error, in the form of ``'`db`.`tbl`'``                                                                |
 | path         | ✓      | ✓    |          | The path of the file that contains the error                                                                                               |
 | offset       | ✓      | ✓    |          | The byte position in the file where the error is found                                                                                  |
@@ -198,7 +198,7 @@ In this example, a data source is prepared with some known errors.
         (54, 'fifty-four'),     -- conflicts with the other 'fifty-four' below
         (77, 'seventy-seven'),  -- the string is longer than 12 characters
         (600, 'six hundred'),   -- the number overflows TINYINT
-        (40, 'fourty'),         -- conflicts with the other 40 above
+        (40, 'forty'),         -- conflicts with the other 40 above
         (42, 'fifty-four');     -- conflicts with the other 'fifty-four' above
 
     EOF
@@ -307,7 +307,7 @@ In this example, a data source is prepared with some known errors.
      table_name: `example`.`t`
      index_name: PRIMARY
        key_data: 40
-       row_data: (40, "fourty")
+       row_data: (40, "forty")
         raw_key: 0x7480000000000000C15F728000000000000028
       raw_value: 0x800001000000020600666F75727479
      raw_handle: 0x7480000000000000C15F728000000000000028

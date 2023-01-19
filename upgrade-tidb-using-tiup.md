@@ -36,6 +36,7 @@ This document is targeted for the following upgrade paths:
     3. Update the 3.0 version to 4.0 according to [Upgrade TiDB Using TiUP (v4.0)](https://docs.pingcap.com/tidb/v4.0/upgrade-tidb-using-tiup#import-tidb-ansible-and-the-inventoryini-configuration-to-tiup).
     4. Upgrade the cluster to v6.5.0 according to this document.
 - Support upgrading the versions of TiDB Binlog, TiCDC, TiFlash, and other components.
+- When upgrading TiFlash deployed under the Linux AMD64 architecture from versions earlier than v6.3.0 to v6.3.0 and later versions, ensure that the CPU supports AVX2 instruction sets. For details, see the description in [v6.3.0 Release Notes](/releases/release-6.3.0.md#others).
 - For detailed compatibility changes of different versions, see the [Release Notes](/releases/release-notes.md) of each version. Modify your cluster configuration according to the "Compatibility Changes" section of the corresponding release notes.
 - For clusters that upgrade from versions earlier than v5.3 to v5.3 or later versions, the default deployed Prometheus will upgrade from v2.8.1 to v2.27.1. Prometheus v2.27.1 provides more features and fixes a security issue. Compared with v2.8.1, alert time representation in v2.27.1 is changed. For more details, see [Prometheus commit](https://github.com/prometheus/prometheus/commit/7646cbca328278585be15fa615e22f2a50b47d06) for more details.
 
@@ -148,6 +149,13 @@ After the command is executed, the "Region status" check result will be output.
 
 + If the result is "All Regions are healthy", all Regions in the current cluster are healthy and you can continue the upgrade.
 + If the result is "Regions are not fully healthy: m miss-peer, n pending-peer" with the "Please fix unhealthy regions before other operations." prompt, some Regions in the current cluster are abnormal. You need to troubleshoot the anomalies until the check result becomes "All Regions are healthy". Then you can continue the upgrade.
+
+### Step 4: Check the DDL and backup status of the cluster
+
+To avoid undefined behaviors or other unexpected problems during the upgrade, it is recommended to check the following items before the upgrade.
+
+- Cluster DDLs: It is recommended to execute the [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md) statement to check whether there is an ongoing DDL job. If yes, wait for its execution or cancel it by executing the [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md) statement before performing an upgrade.
+- Cluster backup: It is recommended to execute the [`SHOW [BACKUPS|RESTORES]`](/sql-statements/sql-statement-show-backups.md) statement to check whether there is an ongoing backup or restore task in the cluster. If yes, wait for its completion before performing an upgrade.
 
 ## Upgrade the TiDB cluster
 

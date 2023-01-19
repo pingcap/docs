@@ -17,19 +17,19 @@ TiDB Cloud [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-
 
 1. If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/free-trial) to sign up for an account.
 
-    For Google or GitHub users, you can also sign up with your Google or GitHub account. Your email address and password will be managed by Google or GitHub and cannot be changed using the TiDB Cloud console.
+    You can either sign up with email and password so that you can manage your password using TiDB Cloud, or choose your Google, GitHub, or Microsoft account for single sign-on (SSO) to TiDB Cloud.
 
 2. [Log in](https://tidbcloud.com/) to your TiDB Cloud account.
 
-    The plan selection page is displayed by default.
+    The [**Clusters**](https://tidbcloud.com/console/clusters) page is displayed by default.
 
-3. On the plan selection page, click **Get Started for Free** in the **Serverless Tier** plan.
+3. For new sign-up users, TiDB Cloud creates a default Serverless Tier cluster `Cluster0` for you automatically.
 
-4. On the **Create Cluster** page, **Serverless Tier** is selected by default. Update the default cluster name if necessary, and then select the region where you want to create your cluster.
+    - To try out TiDB Cloud features instantly with this default cluster, go to [Step 2. Try AI-powered Chat2Query (beta)](#step-2-try-ai-powered-chat2query-beta).
+    - To try creating a new Serverless Tier cluster on your own, take the following operations:
 
-5. Click **Create**.
-
-    The cluster creation process starts and your Serverless Tier cluster will be created in approximately 30 seconds.
+        1. Click **Create Cluster**.
+        2. On the **Create Cluster** page, **Serverless Tier** is selected by default. Update the default cluster name if necessary, select a target region of your cluster, and then click **Create**. Your Serverless Tier cluster will be created in approximately 30 seconds.
 
 ## Step 2. Try AI-powered Chat2Query (beta)
 
@@ -37,7 +37,7 @@ TiDB Cloud is powered by AI. You can use Chat2Query (beta), an AI-powered SQL ed
 
 In Chat2Query, you can either simply type `--` followed by your instructions to let AI generate SQL queries automatically or write SQL queries manually, and then run SQL queries against databases without a terminal.
 
-1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click your cluster name, and then click <MDSvgIcon name="icon-left-sql-editor" /> **Chat2Query** in the left navigation pane.
+1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click a cluster name to go to its overview page, and then click <MDSvgIcon name="icon-left-sql-editor" /> **Chat2Query** in the left navigation pane.
 
 2. To try TiDB Cloud AI capacity, follow the on-screen instructions to allow PingCAP and OpenAI to use your code snippets to research and improve the services, and then click **Save and Get Started**.
 
