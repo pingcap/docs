@@ -1,11 +1,7 @@
 ---
 title: TiDB Features
-<<<<<<< HEAD
-summary: Learn about the basic features of TiDB.
-=======
 summary: Learn about the feature overview of TiDB.
-aliases: ['/docs/dev/basic-features/','/tidb/dev/experimental-features-4.0/']
->>>>>>> c17d0830a (*: merge experimental-feature.md to basic-features.md (#12186))
+aliases: ['/tidb/v6.5/experimental-features','/tidb/stable/experimental-features']
 ---
 
 # TiDB Features
