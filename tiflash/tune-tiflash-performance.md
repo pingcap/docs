@@ -34,7 +34,7 @@ The variable [`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v
 set @@tidb_enforce_mpp = ON;
 ```
 
-The following example shows the performance optimization after `tidb_enforce_mpp` is enabled. Before this option is enabled, TiDB needs to read data from TiKV and execute `Join` and `Aggregation` in TiDB. After `tidb_enforce_mpp` is enabled, `Join` and `Aggregation` are pushed down to TiFlash. In addition, because the optimizer does not necessarily generate MPP execution plans, by enabling `tidb_enforce_mpp`, you can force the optimizer to generate `MPP` execution plans.
+The following example shows the performance of TiFlash before and after `tidb_enforce_mpp` is enabled. Before this option is enabled, TiDB needs to read data from TiKV and execute `Join` and `Aggregation` in TiDB. After `tidb_enforce_mpp` is enabled, `Join` and `Aggregation` are pushed down to TiFlash. In addition, because the optimizer does not necessarily generate MPP execution plans, by enabling `tidb_enforce_mpp`, you can force the optimizer to generate `MPP` execution plans.
 
 Before MPP mode is enabled:
 
@@ -104,7 +104,7 @@ The variable [`tidb_opt_agg_push_down`](/system-variables.md#tidb_opt_agg_push_d
 set @@tidb_opt_agg_push_down = ON;
 ```
 
-The following example shows the performance optimization by enabling the `tidb_opt_agg_push_down` variable. Before this variable is enabled, the `HashAgg_58` operation is executed following the `HashJoin_41` operation. After this variable is enabled, newly generated `HashAgg_21` and `HashAgg_32` operations are executed before the `HashJoin_76` operation. This significantly reduces the data to be processed by the `Join` operation.
+The following example shows the performance optimization after the `tidb_opt_agg_push_down` variable is enabled. Before this variable is enabled, the `HashAgg_58` operation is executed following the `HashJoin_41` operation. After this variable is enabled, newly generated `HashAgg_21` and `HashAgg_32` operations are executed before the `HashJoin_76` operation. This significantly reduces the data to be processed by the `Join` operation.
 
 Before `tidb_opt_agg_push_down` is enabled:
 
@@ -176,9 +176,9 @@ If the aggregate function with the `distinct` operation is slow in a query, you 
 set @@tidb_opt_distinct_agg_push_down = ON;
 ```
 
-在以下示例中，`tidb_opt_distinct_agg_push_down` 开启前，TiDB 需要从 TiFlash 读取所有数据，并在 TiDB 侧执行 `distinct`。`tidb_opt_distinct_agg_push_down` 开启后，`distinct a` 被下推到了 TiFlash，在 `HashAgg_6` 里新增里一个 `group by` 列 `test.t.a`。这边查询结果里面的两个 warnings 是警告聚合函数不能完全下推。
+The following example shows the performance of TiFlash before and after the `tidb_opt_distinct_agg_push_down` variable is enabled. Before this variable is enabled, TiDB needs to read all data from TiFlash and execute `distinct` in TiDB. After this variable is enabled, `distinct a` is pushed down to TiFlash, and a new `group by` column `test.t.a` is added in `HashAgg_6`. The two warnings in the query result indicate that the aggregate function cannot be fully pushed down to TiFlash.
 
-`tidb_opt_distinct_agg_push_down` 开启前：
+Before `tidb_opt_distinct_agg_push_down` is enabled:
 
 ```sql
 mysql> explain analyze select count(distinct a) from test.t;
@@ -193,14 +193,14 @@ mysql> explain analyze select count(distinct a) from test.t;
 4 rows in set, 2 warnings (2 min 23.21 sec)
 ```
 
-开启 `tidb_opt_distinct_agg_push_down`：
+Enable `tidb_opt_distinct_agg_push_down`:
 
 ```sql
 mysql> set @@tidb_opt_distinct_agg_push_down = ON;
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-`tidb_opt_distinct_agg_push_down` 开启后：
+After `tidb_opt_distinct_agg_push_down` is enabled:
 
 ```sql
 mysql> explain analyze select count(distinct a) from test.t;
@@ -244,9 +244,9 @@ For `Join` operations with small tables, the Broadcast Hash Join algorithm can a
     set @@tidb_broadcast_join_threshold_count = 100000;
     ```
 
-在以下示例中，`tidb_broadcast_join_threshold_size` 设置前，`ExchangeSender_29` 的 `ExchangeType` 是 `HashPartition`。`tidb_broadcast_join_threshold_size` 设置后，`ExchangeSender_29` 的 `ExchangeType` 改变为 `Broadcast`。
+The following example shows the performance of TiFlash before and after `tidb_broadcast_join_threshold_size` is configured. Before this variable is configured, the `ExchangeType` of `ExchangeSender_29` is `HashPartition`. After this variable is configured, the `ExchangeType` of `ExchangeSender_29` changes to `Broadcast`.
 
-`tidb_broadcast_join_threshold_size` 设置前：
+`tidb_broadcast_join_threshold_size` is not configured:
 
 ```sql
 mysql> explain analyze select max(l_shipdate), max(l_commitdate), max(l_receiptdate) from supplier,lineitem where s_suppkey = l_suppkey;
@@ -268,14 +268,14 @@ mysql> explain analyze select max(l_shipdate), max(l_commitdate), max(l_receiptd
 11 rows in set (3.83 sec)
 ```
 
-设置 `tidb_broadcast_join_threshold_size`：
+`tidb_broadcast_join_threshold_size` is set to `10000000`：
 
 ```sql
 mysql> set @@tidb_broadcast_join_threshold_size = 10000000;
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-`tidb_broadcast_join_threshold_size` 设置后：
+After `tidb_broadcast_join_threshold_size` is set to `10000000`:
 
 ```sql
 mysql> explain analyze select max(l_shipdate), max(l_commitdate), max(l_receiptdate) from supplier,lineitem where s_suppkey = l_suppkey;
@@ -305,9 +305,9 @@ The [`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-n
 set @@tidb_max_tiflash_threads = 20;
 ```
 
-在以下示例中，`tidb_max_tiflash_threads` 设置前，所有 TiFlash 的算子的执行线程数为 24。`tidb_max_tiflash_threads` 设置后，所有 TiFlash 的算子的执行线程数为 60。
+The following example shows the performance of TiFlash before and after `tidb_max_tiflash_threads` is configured. Before this variable is configured, the execution concurrency of all TiFlash operators is 24. After this variable is configured, the concurrency becomes 60.
 
-`tidb_max_tiflash_threads` 设置前：
+`tidb_max_tiflash_threads` is not configured:
 
 ```sql
 mysql> explain analyze select a, count(*) from t group by a;
@@ -327,14 +327,14 @@ mysql> explain analyze select a, count(*) from t group by a;
 9 rows in set (0.67 sec)
 ```
 
-设置 `tidb_max_tiflash_threads`：
+`tidb_max_tiflash_threads` is set to `20`:
 
 ```sql
 mysql> set @@tidb_max_tiflash_threads = 20;
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-`tidb_max_tiflash_threads` 设置后：
+After `tidb_max_tiflash_threads` is set to `20`:
 
 ```sql
 mysql> explain analyze select a, count(*) from t group by a;
@@ -364,9 +364,9 @@ When a window function is pushed down to TiFlash for execution, you can use this
 set @@tiflash_fine_grained_shuffle_stream_count = 20;
 ```
 
-在以下示例中，`tiflash_fine_grained_shuffle_stream_count` 设置前，`[ExchangeSender_11, ExchangeReceiver_12, Sort_13, Window_22]` 的 `stream_count` 是 8。`tiflash_fine_grained_shuffle_stream_count` 设置后，`[ExchangeSender_11, ExchangeReceiver_12, Sort_13, Window_22]` 的 `stream_count` 是 20。
+The following example shows the performance of TiFlash before and after the `tiflash_fine_grained_shuffle_stream_count` variable is configured. Before this variable is configured, the `stream_count` of `[ExchangeSender_11, ExchangeReceiver_12, Sort_13, Window_22]` is 8. After this variable is configured, the `stream_count` becomes 20.
 
-`tiflash_fine_grained_shuffle_stream_count` 设置前：
+`tiflash_fine_grained_shuffle_stream_count` is not configured:
 
 ```sql
 mysql> explain analyze select *, row_number() over (partition by a) from t;
@@ -384,14 +384,14 @@ mysql> explain analyze select *, row_number() over (partition by a) from t;
 7 rows in set (4 min 30.59 sec)
 ```
 
-设置 `tiflash_fine_grained_shuffle_stream_count`：
+`tiflash_fine_grained_shuffle_stream_count` is set to `20`:
 
 ```sql
 mysql> set @@tiflash_fine_grained_shuffle_stream_count = 20;
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-`tiflash_fine_grained_shuffle_stream_count` 设置后：
+After `tiflash_fine_grained_shuffle_stream_count` is set to `20`:
 
 ```sql
 mysql> explain analyze select *, row_number() over (partition by a) from t;
