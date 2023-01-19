@@ -476,6 +476,8 @@
       - Architecture
         - [DM-worker](/dm/dm-worker-intro.md)
         - [Relay Log](/dm/relay-log.md)
+      - Mechanism
+        - [DML Replication Mechanism](/dm/dm-replication-logic.md)
       - Command Line
         - [DM-master & DM-worker](/dm/dm-command-line-flags.md)
       - Configuration Files
