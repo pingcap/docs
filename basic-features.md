@@ -12,7 +12,7 @@ This document lists the features supported in each TiDB version.
 >
 > - Y: the feature is generally available (GA) and can be used in production environments.
 > - N: the feature is not supported.
-> - Experimental: the feature is not GA yet and you need to be aware of the usage limitations. Experimental features are subject to change or removal without prior notice. The syntax and implementation might be modified before the general availability. If you find any issue, file a [GitHub issue](https://github.com/pingcap/tidb/issues).
+> - Experimental: the feature is not GA yet and you need to be aware of the usage limitations. Experimental features are subject to change or removal without prior notice. The syntax and implementation might be modified before the general availability. If you encounter any problems, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 ## Data types, functions, and operators
 
