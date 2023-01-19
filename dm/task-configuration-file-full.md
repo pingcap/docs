@@ -57,6 +57,19 @@ routes:
     table-pattern: "t_*"        # The pattern of the upstream table name, wildcard characters (*?) are supported.
     target-schema: "test"       # The name of the downstream schema.
     target-table: "t"           # The name of the downstream table.
+<<<<<<< HEAD
+=======
+    # Optional. Used for extracting the source information of sharded schemas and tables and writing the information to the user-defined columns in the downstream. If these options are configured, you need to manually create a merged table in the downstream. For details, see description of table routing in <https://docs.pingcap.com/tidb/dev/dm-table-routing>.
+    # extract-table:                                        # Extracts and writes the table name suffix without the t_ part to the c-table column of the merged table. For example, 01 is extracted and written to the c-table column for the sharded table t_01.
+    #   table-regexp: "t_(.*)"
+    #   target-column: "c_table"
+    # extract-schema:                                       # Extracts and writes the schema name suffix without the test_ part to the c_schema column of the merged table. For example, 02 is extracted and written to the c_schema column for the sharded schema test_02.
+    #   schema-regexp: "test_(.*)"
+    #   target-column: "c_schema"
+    # extract-source:                                       # Extracts and writes the source instance information to the c_source column of the merged table. For example, mysql-replica-01 is extracted and written to the c_source column for the data source mysql-replica-01.
+    #   source-regexp: "(.*)"
+    #   target-column: "c_source"
+>>>>>>> f53ca10fb (dm: split dm features into several docs (#12078))
   route-rule-2:
     schema-pattern: "test_*"
     target-schema: "test"
@@ -187,9 +200,9 @@ Arguments in each feature configuration set are explained in the comments in the
 
 | Parameter        | Description                                    |
 | :------------ | :--------------------------------------- |
-| `routes` | The routing mapping rule set between the upstream and downstream tables. If the names of the upstream and downstream schemas and tables are the same, this item does not need to be configured. See [Table Routing](/dm/dm-key-features.md#table-routing) for usage scenarios and sample configurations. |
-| `filters` | The binlog event filter rule set of the matched table of the upstream database instance. If binlog filtering is not required, this item does not need to be configured. See [Binlog Event Filter](/dm/dm-key-features.md#binlog-event-filter) for usage scenarios and sample configurations. |
-| `block-allow-list` | The filter rule set of the block allow list of the matched table of the upstream database instance. It is recommended to specify the schemas and tables that need to be migrated through this item, otherwise all schemas and tables are migrated. See [Binlog Event Filter](/dm/dm-key-features.md#binlog-event-filter) and [Block & Allow Lists](/dm/dm-key-features.md#block-and-allow-table-lists) for usage scenarios and sample configurations. |
+| `routes` | The routing mapping rule set between the upstream and downstream tables. If the names of the upstream and downstream schemas and tables are the same, this item does not need to be configured. See [Table Routing](/dm/dm-table-routing.md) for usage scenarios and sample configurations. |
+| `filters` | The binlog event filter rule set of the matched table of the upstream database instance. If binlog filtering is not required, this item does not need to be configured. See [Binlog Event Filter](/dm/dm-binlog-event-filter.md) for usage scenarios and sample configurations. |
+| `block-allow-list` | The filter rule set of the block allow list of the matched table of the upstream database instance. It is recommended to specify the schemas and tables that need to be migrated through this item, otherwise all schemas and tables are migrated. See [Binlog Event Filter](/dm/dm-binlog-event-filter.md) and [Block & Allow Lists](/dm/dm-block-allow-table-lists.md) for usage scenarios and sample configurations. |
 | `mydumpers` | Configuration arguments of dump processing unit. If the default configuration is sufficient for your needs, this item does not need to be configured. Or you can configure `thread` only using `mydumper-thread`. |
 | `loaders` | Configuration arguments of load processing unit. If the default configuration is sufficient for your needs, this item does not need to be configured. Or you can configure `pool-size` only using `loader-thread`. |
 | `syncers` | Configuration arguments of sync processing unit. If the default configuration is sufficient for your needs, this item does not need to be configured. Or you can configure `worker-count` only using `syncer-thread`. |
