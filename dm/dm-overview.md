@@ -1,11 +1,7 @@
 ---
 title: TiDB Data Migration Overview
 summary: Learn about the Data Migration tool, the architecture, the key components, and features.
-<<<<<<< HEAD
-aliases: ['/tidb-data-migration/']
-=======
-aliases: ['/docs/tidb-data-migration/dev/overview/','/docs/tidb-data-migration/dev/feature-overview/','/tidb/dev/dm-key-features']
->>>>>>> f53ca10fb (dm: split dm features into several docs (#12078))
+aliases: ['/tidb-data-migration/','/tidb/v6.1/dm-key-features']
 ---
 
 <!-- markdownlint-disable MD007 -->
