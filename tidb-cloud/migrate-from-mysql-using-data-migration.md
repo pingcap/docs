@@ -241,7 +241,7 @@ You can delete a migration job in any status.
 
 You can subscribe alerts to be informed in time when an alert occurs. TiDB Cloud sends an email to the subscribers in the following scenarios: 
 
-- A migration job fails or hangs for more than 20 minutes.
+- A migration job fails or hangs for more than 10 minutes.
 
 For more information about how to subscribe an alert, see [TiDB Cloud Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md).
 
@@ -268,7 +268,7 @@ This section describes the precheck warnings and corresponding solutions.
 
 ### Check whether mysql binlog_row_image is FULL
 
-- Amazon Aurora MySQL: `binlog_row_image` is not configurable. This precheck item should fail for it.
+- Amazon Aurora MySQL: `binlog_row_image` is not configurable. This precheck item should not fail for it.
 - Amazon RDS: the process is similar to setting the `binlog_format`. The only difference is that the parameter you change is `binlog_row_image` instead of `binlog_format`. See [Configuring MySQL binary logging](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.MySQL.BinaryFormat.html).
 - MySQL: 'set global binlog_row_image = FULL;'. See [Binary Logging Options and Variables](https://dev.mysql.com/doc/refman/5.7/en/replication-options-binary-log.html#sysvar_binlog_row_image).
 
