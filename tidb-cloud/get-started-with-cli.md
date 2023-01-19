@@ -108,7 +108,7 @@ ticloud config create
 
 <Warning> The config name **MUST NOT** contain '.'</Warning>
 
-### Create a cluster
+### Create a serverless cluster
 
 ```shell
 ticloud cluster create
