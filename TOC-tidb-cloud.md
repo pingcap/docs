@@ -192,7 +192,8 @@
     - [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md)
     - [Connect via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections.md)
     - [Connect via VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md)
-    - [TLS Connection to Serverless Tier](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md)
+    - [TLS Connections to Serverless Tier](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md)
+    - [TLS Connections to Dedicated Tier](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated-tier.md)
   - Database Access Control
     - [Configure Cluster Security Settings](/tidb-cloud/configure-security-settings.md)
   - Audit Management
