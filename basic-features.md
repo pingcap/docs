@@ -10,9 +10,9 @@ This document lists the features supported in each TiDB version.
 
 > **Note:**
 >
-> - Y: the feature is in general availability (GA) and can be used in production environments.
+> - Y: the feature is generally available (GA) and can be used in production environments.
 > - N: the feature is not supported.
-> - Experimental: the feature is not GA yet and you need to be aware of the usage limitations. Experimental features are subject to change or removal without prior notice. The syntax and implementation might change before the general availability. If you find any issue, file a [GitHub issue](https://github.com/pingcap/tidb/issues).
+> - Experimental: the feature is not GA yet and you need to be aware of the usage limitations. Experimental features are subject to change or removal without prior notice. The syntax and implementation might be modified before the general availability. If you find any issue, file a [GitHub issue](https://github.com/pingcap/tidb/issues).
 
 ## Data types, functions, and operators
 
@@ -85,7 +85,7 @@ This document lists the features supported in each TiDB version.
 | ------------------------------------------------------------ | :--: | :--: | :--: | :--: | :--: | :--: | ------------ | :----------: | :----------: | :----------: | :----------: | :----------: |
 | [Prepared statement cache](/sql-prepared-plan-cache.md)       | Y | Y | Y | Y | Y | Y | Y            |      Y       | Experimental | Experimental | Experimental | Experimental |
 | [SQL plan management (SPM)](/sql-plan-management.md)         | Y | Y | Y | Y | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Create binding according to historical execution plan](/sql-plan-management.md#create-a-binding-according-to-a-historical-execution-plan) | Experimental | N | N | N | N | N | N | N | N | N | N | N |
+| [Create bindings according to historical execution plans](/sql-plan-management.md#create-a-binding-according-to-a-historical-execution-plan) | Experimental | N | N | N | N | N | N | N | N | N | N | N |
 | [Coprocessor cache](/coprocessor-cache.md)                   | Y | Y | Y | Y | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       | Experimental |
 | [Stale Read](/stale-read.md)                                 | Y | Y | Y | Y | Y | Y | Y            |      Y       |      Y       |      Y       |      N       |      N       |
 | [Follower reads](/follower-read.md)                          | Y | Y | Y | Y | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
