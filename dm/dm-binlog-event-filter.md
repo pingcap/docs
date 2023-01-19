@@ -29,7 +29,7 @@ In simple scenarios, it is recommended that you use the wildcard for matching sc
 
 - For DM versions earlier than v1.0.5, the binlog event filter supports the wildcard but does not support the `[...]` and `[!...]` expressions.
 
-## Parameter description
+## Parameter descriptions
 
 - [`schema-pattern`/`table-pattern`](/dm/table-selector.md): the binlog events or DDL SQL statements of upstream MySQL or MariaDB instance tables that match `schema-pattern`/`table-pattern` are filtered by the rules below.
 

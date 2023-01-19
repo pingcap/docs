@@ -40,7 +40,7 @@ In simple scenarios, it is recommended that you use the wildcard for matching sc
 
 - For DM versions earlier than v1.0.5, the block and allow lists only support regular expression matching.
 
-## Parameter description
+## Parameter descriptions
 
 - `do-dbs`: allow lists of the schemas to be migrated, similar to [`replicate-do-db`](https://dev.mysql.com/doc/refman/5.7/en/replication-options-replica.html#option_mysqld_replicate-do-db) in MySQL.
 - `ignore-dbs`: block lists of the schemas to be migrated, similar to [`replicate-ignore-db`](https://dev.mysql.com/doc/refman/5.7/en/replication-options-replica.html#option_mysqld_replicate-ignore-db) in MySQL.

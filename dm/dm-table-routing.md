@@ -44,7 +44,7 @@ In simple scenarios, it is recommended that you use the wildcard for matching sc
 
 - For DM versions earlier than v1.0.5, the table routing supports the wildcard but does not support the `[...]` and `[!...]` expressions.
 
-## Parameter description
+## Parameter descriptions
 
 - DM migrates the upstream MySQL or MariaDB instance tables that match the [`schema-pattern`/`table-pattern` rule provided by Table selector](/dm/table-selector.md) to the downstream `target-schema`/`target-table`.
 - For sharded tables that match the `schema-pattern`/`table-pattern` rules, DM extracts the table name by using the `extract-table`.`table-regexp` regular expression, the schema name by using the `extract-schema`.`schema-regexp` regular expression, and source information by using the `extract-source`.`source-regexp` regular expression. Then DM writes the extracted information to the corresponding `target-column` in the merged table in the downstream.
