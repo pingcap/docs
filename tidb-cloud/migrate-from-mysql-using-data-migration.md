@@ -120,14 +120,6 @@ If your MySQL service is in an AWS VPC, take the following steps:
     1. Follow the steps in [Enable DNS resolution for a VPC peering connection](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html#vpc-peering-dns).
     2. Enable the **Accepter DNS resolution** option.
 
-If your MySQL service is in a GCP VPC, take the following steps:
-
-1. If your MySQL service is Google Cloud SQL, you must expose a MySQL endpoint in the associated VPC of the Google Cloud SQL instance. You may need to use the [**Cloud SQL Auth proxy**](https://cloud.google.com/sql/docs/mysql/sql-proxy) which is developed by Google.
-2. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of the MySQL service and your TiDB cluster. 
-3. Modify the ingress firewall rules of the VPC where MySQL is located.
-
-    You must add [the CIDR of the region where your TiDB Cloud cluster is located](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr) to the ingress firewall rules. Doing so allows the traffic to flow from your TiDB Cluster to the MySQL endpoint. 
-
 </details>
 
 ### Enable binlogs
@@ -240,4 +232,4 @@ You can delete a migration job in any status.
 
 ## Troubleshooting
 
-If you encounter any problems during the migration, see [Troubleshooting](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#troubleshooting).
+If you encounter any problems during the migration, see [Troubleshooting](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#troubleshooting-data-migration-errors).
