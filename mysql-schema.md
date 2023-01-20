@@ -20,7 +20,7 @@ These system tables contain grant information about user accounts and their priv
 - `default_roles`: the default roles for a user
 - `global_grants`: dynamic privileges
 - `global_priv`: the authentication information based on certificates
-- `role_edges` : the relationship between roles
+- `role_edges`: the relationship between roles
 
 ## Server-side help system tables
 
@@ -47,7 +47,7 @@ Currently, the `help_topic` is NULL.
 
 ## GC worker system tables
 
-- `gc_delete_range`: to record the data to be deleted
+- `gc_delete_range`: the KV range to be deleted
 - `gc_delete_range_done`: the deleted KV range
 
 ## System tables related to cached tables
