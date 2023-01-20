@@ -1,15 +1,15 @@
 ---
-title: Precheck Warnings, Troubleshooting, and Alerts for Data Migration
-summary: Learn how to troubleshoot precheck warnings and other errors when using Data Migration.
+title: Precheck Errors, Troubleshooting, and Alerts for Data Migration
+summary: Learn how to resolve precheck errors and alerts when using Data Migration.
 ---
 
-# Precheck Warnings, Troubleshooting, and Alerts for Data Migration
+# Precheck Errors, Troubleshooting, and Alerts for Data Migration
 
-This document describes how to resolve precheck warnings, troubleshoot errors, and subscribe alerts when you use Data Migration to migrate data. 
+This document describes how to resolve precheck errors, troubleshoot migration errors, and subscribe alerts when you use Data Migration to migrate data. 
 
-## Precheck warnings and solutions
+## Precheck errors and solutions
 
-This section describes the precheck warnings and corresponding solutions during data migration. These warning are shown on the **Precheck** page when you migrate data using Data Migration.
+This section describes the precheck errors and corresponding solutions during data migration. These errors are shown on the **Precheck** page when you migrate data using Data Migration.
 
 ### Check whether mysql server_id has been greater than 0
 
@@ -55,7 +55,7 @@ If the error occurs in the TiDB Cloud cluster, configure `max_connections` follo
 
 ## Troubleshooting Data Migration errors
 
-If you encounter any problems during the migration, you can refer to the following solutions.
+This section describes the problems and solutions you might encounter during the migration.
 
 ### Error message: "The required binary log for migration no longer exists on the source database. Please make sure binary log files are kept for long enough time for migration to succeed."
 
