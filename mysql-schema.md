@@ -15,14 +15,10 @@ These system tables contain grant information about user accounts and their priv
 - `db`: database-level privileges
 - `tables_priv`: table-level privileges
 - `columns_priv`: column-level privileges
-<<<<<<< HEAD
-=======
-- `password_history`: password change history
 - `default_roles`: the default roles for a user
 - `global_grants`: dynamic privileges
 - `global_priv`: the authentication information based on certificates
 - `role_edges`: the relationship between roles
->>>>>>> 8486c1250 (mysql-schema.md: update system tables (#11913))
 
 ## Server-side help system tables
 
