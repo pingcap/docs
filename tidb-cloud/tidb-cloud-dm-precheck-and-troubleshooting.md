@@ -1,9 +1,9 @@
 ---
-title: Precheck Errors, Troubleshooting, and Alerts for Data Migration
-summary: Learn how to resolve precheck errors and alerts when using Data Migration.
+title: Precheck Errors, Migration Errors, and Alerts for Data Migration
+summary: Learn how to resolve precheck errors, migration errors and alerts when using Data Migration.
 ---
 
-# Precheck Errors, Troubleshooting, and Alerts for Data Migration
+# Precheck Errors, Migration Errors, and Alerts for Data Migration
 
 This document describes how to resolve precheck errors, troubleshoot migration errors, and subscribe alerts when you use Data Migration to migrate data. 
 
@@ -53,9 +53,9 @@ If the error occurs in the upstream MySQL database:
 
 If the error occurs in the TiDB Cloud cluster, configure `max_connections` following the document [max_connections](https://docs.pingcap.com/tidb/stable/system-variables#max_connections).
 
-## Troubleshooting Data Migration errors
+## Migration errors and solutions
 
-This section describes the problems and solutions you might encounter during the migration.
+This section describes the problems and solutions you might encounter during the migration. These error messages are shown on the **Migration Job Details** page.
 
 ### Error message: "The required binary log for migration no longer exists on the source database. Please make sure binary log files are kept for long enough time for migration to succeed."
 

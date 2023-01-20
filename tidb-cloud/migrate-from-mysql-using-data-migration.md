@@ -230,6 +230,4 @@ If a migration job has failed, you can restart it after solving the problem.
 
 You can delete a migration job in any status.
 
-## Troubleshooting
-
-If you encounter any problems during the migration, see [Troubleshooting](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#troubleshooting-data-migration-errors).
+If you encounter any problems during the migration, see [Troubleshooting](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions).
