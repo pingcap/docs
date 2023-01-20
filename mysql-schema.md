@@ -15,6 +15,14 @@ These system tables contain grant information about user accounts and their priv
 - `db`: database-level privileges
 - `tables_priv`: table-level privileges
 - `columns_priv`: column-level privileges
+<<<<<<< HEAD
+=======
+- `password_history`: password change history
+- `default_roles`: the default roles for a user
+- `global_grants`: dynamic privileges
+- `global_priv`: the authentication information based on certificates
+- `role_edges`: the relationship between roles
+>>>>>>> 8486c1250 (mysql-schema.md: update system tables (#11913))
 
 ## Server-side help system tables
 
@@ -24,12 +32,36 @@ Currently, the `help_topic` is NULL.
 
 - `stats_buckets`: the buckets of statistics
 - `stats_histograms`: the histograms of statistics
+- `stats_top_n`: the TopN of statistics
 - `stats_meta`: the meta information of tables, such as the total number of rows and updated rows
+<<<<<<< HEAD
+=======
+- `stats_extended`: extended statistics, such as the order correlation between columns
+- `stats_feedback`: the query feedback of statistics
+- `stats_fm_sketch`: the FMSketch distribution of the histogram of the statistics column
+- `analyze_options`: the default `analyze` options for each table
+- `column_stats_usage`: the usage of column statistics
+- `schema_index_usage`: the usage of indexes
+- `analyze_jobs`: the ongoing statistics collection tasks and the history task records within the last 7 days
+>>>>>>> 8486c1250 (mysql-schema.md: update system tables (#11913))
+
+## Execution plan-related system tables
+
+- `bind_info`: the binding information of execution plans
+- `capture_plan_baselines_blacklist`: the blocklist for the automatic binding of the execution plan
 
 ## GC worker system tables
 
-- `gc_delete_range`: to record the data to be deleted
+- `gc_delete_range`: the KV range to be deleted
+- `gc_delete_range_done`: the deleted KV range
 
+<<<<<<< HEAD
+=======
+## System tables related to cached tables
+
+- `table_cache_meta` stores the metadata of cached tables.
+
+>>>>>>> 8486c1250 (mysql-schema.md: update system tables (#11913))
 ## Miscellaneous system tables
 
 - `GLOBAL_VARIABLES`: global system variable table
@@ -37,5 +69,8 @@ Currently, the `help_topic` is NULL.
 <CustomContent platform="tidb">
 
 - `tidb`: to record the version information when TiDB executes `bootstrap`
+- `expr_pushdown_blacklist`: the blocklist for expression pushdown
+- `opt_rule_blacklist`: the blocklist for logical optimization rules
+- `table_cache_meta`: the metadata of cached tables
 
 </CustomContent>
