@@ -238,14 +238,6 @@ If a migration job has failed, you can restart it after solving the problem.
 
 You can delete a migration job in any status.
 
-## Subscribe alerts
-
-You can subscribe alerts to be informed in time when an alert occurs. TiDB Cloud sends an email to the subscribers in the following scenarios: 
-
-- A migration job fails or hangs for more than 10 minutes.
-
-For more information about how to subscribe an alert, see [TiDB Cloud Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md).
-
 ## Troubleshooting
 
 If you encounter any problems during the migration, see [Troubleshooting](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#troubleshooting).

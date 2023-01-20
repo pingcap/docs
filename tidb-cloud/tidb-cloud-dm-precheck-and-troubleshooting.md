@@ -1,11 +1,11 @@
 ---
-title: Precheck Warnings and Troubleshooting for Data Migration
+title: Precheck Warnings, Troubleshooting, and Alerts for Data Migration
 summary: Learn how to troubleshoot precheck warnings and other errors when using Data Migration.
 ---
 
-# Precheck Warnings and Troubleshooting for Data Migration
+# Precheck Warnings, Troubleshooting, and Alerts for Data Migration
 
-This document describes how to resolve prechecks and troubleshoot issues when you use Data Migration to migrate data. 
+This document describes how to resolve precheck warnings, troubleshoot errors, and subscribe alerts when you use Data Migration to migrate data. 
 
 ## Precheck warnings and solutions
 
@@ -82,6 +82,22 @@ The TiDB cluster storage is running low. It is recommended to [increase the TiKV
 ### Error message: "Failed to connect to the source database. Please check whether the database is available or the maximum connections have been reached."
 
 Failed to connect to the source database. It is recommended to check whether the source database is started, the number of database connections has not reached the upper limit, and you can connect using the parameters specified by the job. After confirming that the source database is available, you can try to resume the job by clicking **Restart**.
+
+## Alerts
+
+You can subscribe alerts to be informed in time when an alert occurs. TiDB Cloud sends an email to the subscribers when an alert occurs. 
+
+The following are alerts about Data Migration: 
+
+- “Data migration job met error during data export”    
+- “Data migration job met error during data import”    
+- “Data migration job met error during incremental data migration”    
+- “Data migration job has been paused for more than 6 hours during incremental migration” (If this alert occurs, you can resume the data migration job or ignore this alert directly.)      
+- “Replication lag is larger than 10 minutes and stilling increasing for more than 20 minutes”
+
+If you need help to address these alerts, contact the [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for consultation.
+
+For more information about how to subscribe an alert, see [TiDB Cloud Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md).
 
 ## See also
 
