@@ -214,12 +214,12 @@ TiDB stores passwords in the `mysql.user` system database. Operations that assig
 
     > **Note:**
     >
-    > After setting `skip-grant-table`, starting the TiDB process will perform the operating system user check, and only the `root` user of the operating system can start the TiDB process.
+    > If you set `skip-grant-table` before starting the TiDB process, a check on the operating system user will be initiated. Only the `root` user of the operating system can start the TiDB process.
 
     1. Enter the `scripts` directory under the TiDB node deployment directory.
     2. Switch to the `root` account of the operating system.
     3. Run the `run_tidb.sh` script in the directory in the foreground.
-    4. login as `root` in a new terminal window and change the password.
+    4. Log in as `root` in a new terminal window and change the password.
 
         ```bash
         mysql -h 127.0.0.1 -P 4000 -u root
