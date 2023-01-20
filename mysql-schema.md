@@ -15,14 +15,10 @@ These system tables contain grant information about user accounts and their priv
 - `db`: database-level privileges
 - `tables_priv`: table-level privileges
 - `columns_priv`: column-level privileges
-<<<<<<< HEAD
-=======
-- `password_history`: password change history
 - `default_roles`: the default roles for a user
 - `global_grants`: dynamic privileges
 - `global_priv`: the authentication information based on certificates
 - `role_edges`: the relationship between roles
->>>>>>> 8486c1250 (mysql-schema.md: update system tables (#11913))
 
 ## Server-side help system tables
 
@@ -34,16 +30,12 @@ Currently, the `help_topic` is NULL.
 - `stats_histograms`: the histograms of statistics
 - `stats_top_n`: the TopN of statistics
 - `stats_meta`: the meta information of tables, such as the total number of rows and updated rows
-<<<<<<< HEAD
-=======
 - `stats_extended`: extended statistics, such as the order correlation between columns
 - `stats_feedback`: the query feedback of statistics
 - `stats_fm_sketch`: the FMSketch distribution of the histogram of the statistics column
 - `analyze_options`: the default `analyze` options for each table
 - `column_stats_usage`: the usage of column statistics
 - `schema_index_usage`: the usage of indexes
-- `analyze_jobs`: the ongoing statistics collection tasks and the history task records within the last 7 days
->>>>>>> 8486c1250 (mysql-schema.md: update system tables (#11913))
 
 ## Execution plan-related system tables
 
@@ -55,13 +47,6 @@ Currently, the `help_topic` is NULL.
 - `gc_delete_range`: the KV range to be deleted
 - `gc_delete_range_done`: the deleted KV range
 
-<<<<<<< HEAD
-=======
-## System tables related to cached tables
-
-- `table_cache_meta` stores the metadata of cached tables.
-
->>>>>>> 8486c1250 (mysql-schema.md: update system tables (#11913))
 ## Miscellaneous system tables
 
 - `GLOBAL_VARIABLES`: global system variable table
