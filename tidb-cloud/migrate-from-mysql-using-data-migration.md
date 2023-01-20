@@ -208,7 +208,7 @@ On the **Precheck** page, you can view the precheck results. If the precheck fai
 
 If there are only warnings on some check items, you can evaluate the risk and consider whether to ignore the warnings. If all warnings are ignored, the migration job will automatically go on to the next step.
 
-For more information about warning and solutions, see [Precheck warnings and solutions](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#precheck-warnings-and-solutions).
+For more information about warning and solutions, see [Precheck warnings and solutions](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#precheck-errors-and-solutions).
 
 For more information about precheck items, see [Migration Task Precheck](https://docs.pingcap.com/tidb/stable/dm-precheck).
 
