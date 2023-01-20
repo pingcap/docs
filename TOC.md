@@ -114,7 +114,7 @@
             -   [TiKV メモリの調整](/tune-tikv-memory-performance.md)
             -   [TiKV Follower Readの調整](/follower-read.md)
             -   [TiFlashチューニング](/tiflash/tune-tiflash-performance.md)
-        -   [Coprocessorキャッシュ](/coprocessor-cache.md)
+        -   [コプロセッサーキャッシュ](/coprocessor-cache.md)
     -   SQL チューニング
         -   [概要](/sql-tuning-overview.md)
         -   クエリ実行プランについて
@@ -427,6 +427,30 @@
         -   [保管所](/tidb-storage.md)
         -   [コンピューティング](/tidb-computing.md)
         -   [スケジューリング](/tidb-scheduling.md)
+    -   ストレージエンジン - TiKV
+        -   [TiKVの概要](/tikv-overview.md)
+        -   [RocksDB の概要](/storage-engine/rocksdb-overview.md)
+        -   [タイタンの概要](/storage-engine/titan-overview.md)
+        -   [タイタンのConfiguration / コンフィグレーション](/storage-engine/titan-configuration.md)
+    -   ストレージ エンジン - TiFlash
+        -   [概要](/tiflash/tiflash-overview.md)
+        -   [TiFlashを使用する](/tiflash/use-tiflash.md)
+    -   [システム変数](/system-variables.md)
+    -   Configuration / コンフィグレーションファイルのパラメーター
+        -   [tidb サーバー](/tidb-configuration-file.md)
+        -   [tikv サーバー](/tikv-configuration-file.md)
+        -   [tiflash サーバー](/tiflash/tiflash-configuration.md)
+        -   [pd サーバー](/pd-configuration-file.md)
+    -   CLI
+        -   [tikv-ctl](/tikv-control.md)
+        -   [pd-ctl](/pd-control.md)
+        -   [tidb-ctl](/tidb-control.md)
+        -   [pd-回復](/pd-recover.md)
+    -   コマンド ライン フラグ
+        -   [tidb サーバー](/command-line-flags-for-tidb-configuration.md)
+        -   [tikv サーバー](/command-line-flags-for-tikv-configuration.md)
+        -   [tiflash サーバー](/tiflash/tiflash-command-line-flags.md)
+        -   [pd サーバー](/command-line-flags-for-pd-configuration.md)
     -   主な監視指標
         -   [概要](/grafana-overview-dashboard.md)
         -   [TiDB](/grafana-tidb-dashboard.md)
@@ -718,31 +742,6 @@
                 -   [セッションを共有](/dashboard/dashboard-session-share.md)
                 -   [SSO の構成](/dashboard/dashboard-session-sso.md)
             -   [FAQ](/dashboard/dashboard-faq.md)
-    -   CLI
-        -   [tikv-ctl](/tikv-control.md)
-        -   [pd-ctl](/pd-control.md)
-        -   [tidb-ctl](/tidb-control.md)
-        -   [pd-回復](/pd-recover.md)
-    -   コマンド ライン フラグ
-        -   [tidb サーバー](/command-line-flags-for-tidb-configuration.md)
-        -   [tikv サーバー](/command-line-flags-for-tikv-configuration.md)
-        -   [tiflash サーバー](/tiflash/tiflash-command-line-flags.md)
-        -   [pd サーバー](/command-line-flags-for-pd-configuration.md)
-    -   Configuration / コンフィグレーションファイルのパラメーター
-        -   [tidb サーバー](/tidb-configuration-file.md)
-        -   [tikv サーバー](/tikv-configuration-file.md)
-        -   [tiflash サーバー](/tiflash/tiflash-configuration.md)
-        -   [pd サーバー](/pd-configuration-file.md)
-    -   [システム変数](/system-variables.md)
-    -   ストレージ エンジン
-        -   TiKV
-            -   [TiKVの概要](/tikv-overview.md)
-            -   [RocksDB の概要](/storage-engine/rocksdb-overview.md)
-            -   [タイタンの概要](/storage-engine/titan-overview.md)
-            -   [タイタンのConfiguration / コンフィグレーション](/storage-engine/titan-configuration.md)
-        -   TiFlash
-            -   [概要](/tiflash/tiflash-overview.md)
-            -   [TiFlashを使用する](/tiflash/use-tiflash.md)
     -   [テレメトリー](/telemetry.md)
     -   [エラーコード](/error-codes.md)
     -   [テーブル フィルター](/table-filter.md)

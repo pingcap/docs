@@ -5,14 +5,14 @@ summary: Learn how to use PLAN REPLAYER to save and restore the on-site informat
 
 # PLAN REPLAYER を使用してクラスタのオンサイト情報を保存および復元する {#use-plan-replayer-to-save-and-restore-the-on-site-information-of-a-cluster}
 
-TiDB クラスターの問題を特定してトラブルシューティングする場合、多くの場合、システムと実行計画に関する情報を提供する必要があります。より便利で効率的な方法で情報を取得し、クラスターの問題をトラブルシューティングするのに役立つように、TiDB v5.3.0 で`PLAN REPLAYER`コマンドが導入されました。このコマンドを使用すると、クラスターのオンサイト情報を簡単に保存および復元でき、トラブルシューティングの効率が向上し、管理のために問題をより簡単にアーカイブできます。
+TiDB クラスターの問題を特定してトラブルシューティングする場合、多くの場合、システムと実行計画に関する情報を提供する必要があります。より便利で効率的な方法で情報を取得し、クラスターの問題をトラブルシューティングするのに役立つように、TiDB v5.3.0 で`PLAN REPLAYER`コマンドが導入されました。このコマンドを使用すると、クラスタのオンサイト情報を簡単に保存および復元でき、トラブルシューティングの効率が向上し、管理のために問題をより簡単にアーカイブできます。
 
 `PLAN REPLAYER`の特徴は以下の通りです。
 
 -   オンサイト トラブルシューティングでの TiDB クラスターの情報を保存用の ZIP 形式のファイルにエクスポートします。
 -   別の TiDB クラスターからエクスポートされた ZIP 形式のファイルをクラスターにインポートします。このファイルには、オンサイト トラブルシューティングでの後者の TiDB クラスターの情報が含まれています。
 
-## <code>PLAN REPLAER</code>を使用してクラスター情報をエクスポートする {#use-code-plan-replaer-code-to-export-cluster-information}
+## <code>PLAN REPLAYER</code>を使用してクラスター情報をエクスポートする {#use-code-plan-replayer-code-to-export-cluster-information}
 
 `PLAN REPLAYER`を使用して、TiDB クラスターのオンサイト情報を保存できます。エクスポート インターフェイスは次のとおりです。
 
@@ -87,7 +87,7 @@ curl http://127.0.0.1:10080/plan_replayer/dump/replayer_single_JOGvpu4t7dssySqJf
 >
 > TiDB クラスターのオンサイト情報を別のクラスターにインポートすると、後者のクラスターの TiDB セッション変数、SQL バインディング、テーブル スキーマ、および統計が変更されます。
 
-`PLAN REPLAYER`を使用してエクスポートされた既存の`ZIP`ファイルを使用して、 `PLAN REPLAYER`インポート インターフェイスを使用して、クラスターのオンサイト情報を他の TiDB クラスターに復元できます。構文は次のとおりです。
+`PLAN REPLAYER`を使用してエクスポートされた既存の`ZIP`ファイルを使用すると、 `PLAN REPLAYER`インポート インターフェイスを使用して、クラスターのオンサイト情報を他の TiDB クラスターに復元できます。構文は次のとおりです。
 
 {{< copyable "" >}}
 
@@ -105,7 +105,7 @@ PLAN REPLAYER LOAD 'file_name';
 PLAN REPLAYER LOAD 'plan_replayer.zip';
 ```
 
-クラスター情報がインポートされた後、実行計画の構築に影響する必要なテーブル スキーマ、統計情報、およびその他の情報が TiDB クラスターに読み込まれます。次の方法で、実行計画を表示し、統計を確認できます。
+クラスター情報がインポートされると、必要なテーブル スキーマ、統計情報、および実行計画の構築に影響するその他の情報が TiDB クラスターに読み込まれます。次の方法で、実行計画を表示し、統計を確認できます。
 
 ```sql
 mysql> desc t;
