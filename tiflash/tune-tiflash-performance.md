@@ -34,7 +34,7 @@ The variable [`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v
 set @@tidb_enforce_mpp = ON;
 ```
 
-The following example shows the query result before and after `tidb_enforce_mpp` is enabled. Before this option is enabled, TiDB needs to read data from TiKV and execute `Join` and `Aggregation` in TiDB. After `tidb_enforce_mpp` is enabled, `Join` and `Aggregation` are pushed down to TiFlash. In addition, because the optimizer does not necessarily generate MPP execution plans, by enabling `tidb_enforce_mpp`, you can force the optimizer to generate `MPP` execution plans.
+The following example shows the query result before and after `tidb_enforce_mpp` is enabled. Before this variable is enabled, TiDB needs to read data from TiKV and execute `Join` and `Aggregation` in TiDB. After `tidb_enforce_mpp` is enabled, `Join` and `Aggregation` are pushed down to TiFlash. In addition, because the optimizer does not necessarily generate MPP execution plans, by enabling `tidb_enforce_mpp`, you can force the optimizer to generate MPP execution plans.
 
 Before MPP mode is enabled:
 
@@ -176,7 +176,7 @@ If the aggregate function with the `distinct` operation is slow in a query, you 
 set @@tidb_opt_distinct_agg_push_down = ON;
 ```
 
-The following example shows the query result before and after the `tidb_opt_distinct_agg_push_down` variable is enabled. Before this variable is enabled, TiDB needs to read all data from TiFlash and execute `distinct` in TiDB. After this variable is enabled, `distinct a` is pushed down to TiFlash, and a new `group by` column `test.t.a` is added in `HashAgg_6`. The two warnings in the query results indicate that the aggregate function cannot be fully pushed down to TiFlash.
+The following example shows the query result before and after the `tidb_opt_distinct_agg_push_down` variable is enabled. Before this variable is enabled, TiDB needs to read all data from TiFlash and execute `distinct` in TiDB. After this variable is enabled, `distinct a` is pushed down to TiFlash, and a new `group by` column `test.t.a` is added in `HashAgg_6`. The two warnings in the query result indicate that the aggregate function cannot be fully pushed down to TiFlash.
 
 Before `tidb_opt_distinct_agg_push_down` is enabled:
 
