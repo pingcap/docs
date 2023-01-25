@@ -380,6 +380,8 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 >
 > Unlike in MySQL, the `max_execution_time` system variable currently works on all kinds of statements in TiDB, not only restricted to the `SELECT` statement. The precision of the timeout value is roughly 100ms. This means the statement might not be terminated in accurate milliseconds as you specify.
 
+This setting can be overridden on a per query basis with the [`MAX_EXECUTION_TIME`](/optimizer-hints.md#max_execution_timen) hint. It can also be used together with SQL bindings as described [in the SQL FAQ](/faq/sql-faq.md#how-to-prevent-the-execution-of-a-particular-sql-statement).
+
 ### max_prepared_stmt_count
 
 - Scope: GLOBAL
