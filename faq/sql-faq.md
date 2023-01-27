@@ -221,7 +221,7 @@ You can combine the above two parameters with the DML of TiDB to use them. For e
     REPLACE HIGH_PRIORITY | LOW_PRIORITY | DELAYED INTO table_name;
     ```
 
-2. The full table scan statement automatically adjusts itself to a low priority. `analyze` has a low priority by default.
+2. The full table scan statement automatically adjusts itself to a low priority. [`ANALYZE`](/sql-statements/sql-statement-analyze-table.md) has a low priority by default.
 
 ## What's the trigger strategy for `auto analyze` in TiDB?
 
