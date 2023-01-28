@@ -1,19 +1,20 @@
 ---
 title: TiDB Cloud CLI Reference
-Summary: The reference of the TiDB Cloud CLI.
+Summary: Provides an overview of TiDB Cloud CLI.
 ---
 
 # TiDB Cloud CLI Reference
 
-Use the TiDB Cloud CLI to manage your TiDB Cloud clusters, import data to your clusters, and more from your terminal.
+TiDB Cloud CLI is a command line interface, which allows you to operate TiDB Cloud from your terminal with a few lines of commands. In TiDB Cloud CLI, you can easily manage your TiDB Cloud clusters, import data to your clusters, and perform more operations. 
 
-## Getting Started
+## Before you begin
 
-Make sure to first [set up your TiDB Cloud CLI environment](/tidb-cloud/get-started-with-cli.md). Once you installed the `ticloud` CLI, you can use it to manage your TiDB Cloud clusters from the command line.
+Make sure to first [set up your TiDB Cloud CLI environment](/tidb-cloud/get-started-with-cli.md). Once you installed the `ticloud` CLI, you can use it to manage your TiDB Cloud clusters from the command lines.
 
-## Available Commands
+## Available commands
 
-Use `ticloud [command] [subcommand]` to start up the `ticloud` CLI in your terminal. For users using TiUP, use `tiup cloud [command] [subcommand]` instead.
+The following table lists the available commands for the TiDB Cloud CLI. 
+To start up the `ticloud` CLI in your terminal, you can use `ticloud [command] [subcommand]`. For users using [TiUP](https://docs.pingcap.com/tidb/stable/tiup-overview), use `tiup cloud [command] [subcommand]` instead.
 
 | Command    | Subcommands                                                | Description                                                                                              |
 |------------|------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
@@ -25,20 +26,22 @@ Use `ticloud [command] [subcommand]` to start up the `ticloud` CLI in your termi
 | project    | list                                                       | Manage projects                                                                                          | 
 | update     |                                                            | Update the CLI to the latest version                                                                     | 
 
-## Command mode
+## Command modes
 
-The TiDB Cloud CLI supports two modes with some commands for easy use: interactive mode and non-interactive mode.
+The TiDB Cloud CLI provides two modes for some commands for easy use: interactive mode and non-interactive mode.
 
-- In interactive mode, the CLI prompts you for input when you run a command. Such as `ticloud config create`.
-- In non-interactive mode, you must provide all the required args and flags when running a command. Such as `ticloud config create --profile-name <profile-name> --public-key <public-key> --private-key <private-key>`
+- In the interactive mode, the CLI prompts you for input when you run a command, such as `ticloud config create`.
+- In the non-interactive mode, you must provide all the required arguments and flags when running a command, such as `ticloud config create --profile-name <profile-name> --public-key <public-key> --private-key <private-key>`
 
-## Global Flags
+## Global flags
+
+The following table lists the global flags for the TiDB Cloud CLI. 
 
 | Flag                 | Description                                  | Required | Extra                                                                                                             |
 |----------------------|----------------------------------------------|----------|-------------------------------------------------------------------------------------------------------------------|
-| --no-color           | Disable color output                         | false    | Only work in non-interactive mode. In interactive mode, disable color output may not work with some UI components |
-| -P, --profile string | Profile to use from your configuration file. | false    | Work in both modes                                                                                                |
+| --no-color           | Disable color in output.                         | false    | Only works in the non-interactive mode. In the interactive mode, disabling color might not work with some UI components. |
+| -P, --profile string | Profile to use from your configuration file. | false    | Work in both non-interactive and interactive modes.                                                                                                |
 
 ## Feedback
 
-If you have any questions or suggestions, please [file an issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose). Also, we welcome any contributions.
+If you have any questions or suggestions on the TiDB Cloud CLI, feel free to create an [issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose). Also, we welcome any contributions.

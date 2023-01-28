@@ -476,8 +476,8 @@
         - [RocksDB Overview](/storage-engine/rocksdb-overview.md)
     - TiFlash
       - [TiFlash Overview](/tiflash/tiflash-overview.md)
-  - [CLI]
-    - [overview](/tidb-cloud/cli-reference.md)
+  - CLI
+    - [Overview](/tidb-cloud/cli-reference.md)
     - cluster
       - [create](/tidb-cloud/ticloud-cluster-create.md)
       - [delete](/tidb-cloud/ticloud-cluster-delete.md)

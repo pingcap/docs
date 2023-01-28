@@ -1,20 +1,19 @@
 ---
-title: TiDB Cloud CLI Overview
+title: TiDB Cloud CLI Quick Start
 Summary: Learn how to manage TiDB Cloud resources through the TiDB Cloud CLI.
 ---
 
-# TiDB Cloud CLI Overview
+# TiDB Cloud CLI Quick Start
 
-TiDB Cloud provides a command-line interface (CLI) [`ticloud`](https://github.com/tidbcloud/tidbcloud-cli) to bring deploy cluster requests, import data, and other TiDB Cloud concepts to your fingertips. To interact with TiDB Cloud, you can use the `ticloud` to do the following:
+TiDB Cloud provides a command-line interface (CLI) [`ticloud`](https://github.com/tidbcloud/tidbcloud-cli) for you to interact with TiDB Cloud from your terminal with a few lines of commands. For example, you can easily perform the following operations using `ticloud`:
 
 - Create, delete and list your clusters.
 - Import data from S3 or local files to your clusters.
-- ...and more.
 
 ## Prerequisites
 
 - Have a TiDB Cloud account. If you don't have one, [sign up for a free trial](https://tidbcloud.com/free-trial).
-- Create a TiDB API Key, follow the [instruction](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management).
+- [Create a TiDB API Key](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management).
 
 ## Installation
 
