@@ -7,9 +7,9 @@ summary: Learn how to upgrade TiDB using TiUP.
 
 This document is targeted for the following upgrade paths:
 
-- Upgrade from TiDB 4.0 versions to TiDB 6.0.
-- Upgrade from TiDB 5.0-5.4 versions to TiDB 6.0.
-- Upgrade from TiDB 6.0 to TiDB 6.1.0 or its patch versions.
+- Upgrade from TiDB 4.0 versions to TiDB 6.1 versions.
+- Upgrade from TiDB 5.0-5.4 versions to TiDB 6.1 versions.
+- Upgrade from TiDB 6.0 to TiDB 6.1 versions.
 
 > **Warning:**
 >
