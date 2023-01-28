@@ -44,11 +44,11 @@ ticloud import describe --project-id <project-id> --cluster-id <cluster-id> --im
 
 ## Inherited flags
 
-| Flag                 | Description                                  | Required | Extra                                                                                                             |
-|----------------------|----------------------------------------------|----------|-------------------------------------------------------------------------------------------------------------------|
-| --no-color           | Disable color output                         | false    | Only work in non-interactive mode. In interactive mode, disable color output may not work with some UI components |
-| -P, --profile string | Profile to use from your configuration file. | false    | Work in both modes                                                                                                |
+| Flag                 | Description                                  | Required | Extra                                                                                                                    |
+|----------------------|----------------------------------------------|----------|--------------------------------------------------------------------------------------------------------------------------|
+| --no-color           | Disable color in output.                     | false    | Only works in the non-interactive mode. In the interactive mode, disabling color might not work with some UI components. |
+| -P, --profile string | Profile to use from your configuration file. | false    | Work in both non-interactive and interactive modes.                                                                      |
 
 ## Feedback
 
-If you have any questions or suggestions, please [file an issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose). Also, we welcome any contributions.
+If you have any questions or suggestions on the TiDB Cloud CLI, feel free to create an [issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose). Also, we welcome any contributions.
