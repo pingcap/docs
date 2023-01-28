@@ -196,6 +196,49 @@ br backup full\
 
 BR supports server-side encryption (SSE) when backing up data to S3. In this scenario, you can use AWS KMS keys you have created to encrypt data. For details, see [BR S3 server-side encryption](/encryption-at-rest.md#br-s3-server-side-encryption).
 
+## Validate backup data
+
+After you back up data using BR, you can validate the backup data, including checking its integrity and viewing the metadata (such as TSO) by decoding `backupmeta`.
+
+### Check the integrity of backup data
+
+To check the integrity of backup data, you can run the `tiup br debug checksum` command to calculate the checksum of the backup data.
+
+Example: Calculate the checksum of the backup data in the `${prefix}` directory in the `backup-data` bucket of Amazon S3.
+
+```shell
+br debug checksum \
+    --storage 's3://backup-data/${prefix}' \
+    --s3.endpoint '${S3-endpoint-URL}' \
+    --log-file checksum.log
+```
+
+### Decode `backupmeta` to a readable json file
+
+After backup is complete, you can run the `tiup br debug decode` command to decode the `backupmeta` file into a readable json file, through which you can view the metadata (such as TSO) of the snapshot.
+
+Example: Decode the `backupmeta` file in the `${prefix}` directory in the `backup-data` bucket of Amazon S3 into a json file `backupmeta.json`. The decoded file is stored in `s3://backup-data/${prefix}/backupmeta.json`.
+
+```shell
+br debug decode \
+    --storage 's3://backup-data/${prefix}' \
+    --s3.endpoint '${S3-endpoint-URL}' \
+    --log-file decode-backupmeta.log
+```
+
+Open the `backupmeta.json` file and search for `end_version` to view the TSO of the snapshot.
+
+If necessary, you can also encode the json format `backupmeta` file back to the original state. Specifically, run the `tiup br debug encode` command to generate the file named `backupmeta_from_json`.
+
+Example: Encode the `backupmeta.json` file in the `${prefix}` directory in the `backup-data` bucket of Amazon S3 into a `backupmeta` file. The encoded file is stored in `s3://backup-data/${prefix}/backupmeta_from_json`.
+
+```shell
+br debug encode \
+    --storage 's3://backup-data/${prefix}' \
+    --s3.endpoint '${S3-endpoint-URL}' \
+    --log-file encode-backupmeta.log
+```
+
 ## Backup performance and impact
 
 The backup feature has some impact on cluster performance (transaction latency and QPS). However, you can mitigate the impact by adjusting the number of backup threads [`backup.num-threads`](/tikv-configuration-file.md#num-threads-1) or by adding more clusters.
