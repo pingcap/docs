@@ -142,6 +142,14 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 - Data type: `BOOLEAN`
 - This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
 
+> **Note:**
+>
+> tiup-cluster also supports fix the scale-out yaml file for a deployed cluster with the following command format:
+>
+>```shell
+> tiup cluster check <cluster-name> scale-out.yaml --cluster --apply --user root [-p] [-i /home/root/.ssh/gcp_rsa]
+>```
+
 ### --cluster
 
 - Indicates that the check is for the deployed clusters.
@@ -157,6 +165,12 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 > ```
 > 
 > If the `tiup cluster check <cluster-name>` command is used, you must add the `--cluster` option: `tiup cluster check <cluster-name> --cluster`.
+>
+> tiup-cluster also supports check the scale-out yaml file for a deployed cluster with the following command format:
+>
+>```shell
+> tiup cluster check <cluster-name> scale-out.yaml --cluster --user root [-p] [-i /home/root/.ssh/gcp_rsa]
+>```
 
 ### -N, --node
 
