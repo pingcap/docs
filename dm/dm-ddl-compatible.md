@@ -1,11 +1,11 @@
 ---
-title: Data Migration DDL Special Handling
+title: Special Handling of DM DDLs
 summary: Learn how DM parses and handles DDL statements according to the statement types.
 ---
 
-# Data Migration DDL Special Handling
+# Special Handling of DM DDLs
 
-When DM migrates data, it parses the DDL statement and handles it according to the statement type and the current migration stage.
+When TiDB Data Migration (DM) migrates data, it parses the DDL statements and handles them according to the statement type and the current migration stage.
 
 ## Skip DDL statements
 
@@ -136,7 +136,7 @@ The following statements are rewritten before being replicated to the downstream
 
 ## Shard merge migration tasks
 
-When using the pessimistic mode and optimistic mode for shard merge migration, the behavior of DDL replication is different. For details, refer to [Pessimistic Mode](/dm/feature-shard-merge-pessimistic.md) and [Optimistic Mode](/dm/feature-shard-merge-optimistic.md).
+When DM merges and migrates tables in pessimistic or optimistic mode, the behavior of DDL replication is different from that in other scenarios. For details, refer to [Pessimistic Mode](/dm/feature-shard-merge-pessimistic.md) and [Optimistic Mode](/dm/feature-shard-merge-optimistic.md).
 
 ## Online DDL
 
