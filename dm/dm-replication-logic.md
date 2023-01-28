@@ -1,6 +1,6 @@
 ---
 title: DML Replication Mechanism in Data Migration
-summary: Learn how the core processing unit Sync in DM processes DML statements.
+summary: Learn how the core processing unit Sync in DM replicates DML statements.
 ---
 
 # DML Replication Mechanism in Data Migration
@@ -14,15 +14,15 @@ The Sync unit processes DML statements as follows:
 1. Read the binlog event from the MySQL, MariaDB, or relay log.
 2. Transform the binlog event read from the data source:
 
-    1. [Binlog filter](dm/dm-binlog-event-filter.md): Filter binlog events according to binlog expressions, configured by `filters`.
-    2. [Table routing](dm/dm-table-routing.md): Transform the "database/table" name according to the "database/table" routing rule, configured by `routes`.
-    3. [Expression filter](/filter-dml-event.md): Filter binlog events according to SQL expressions, configured by `expression-filter`.
+    1. [Binlog filter](dm/dm-binlog-event-filter.md): filter binlog events according to binlog expressions, configured by `filters`.
+    2. [Table routing](dm/dm-table-routing.md): transform the "database/table" name according to the "database/table" routing rule, configured by `routes`.
+    3. [Expression filter](/filter-dml-event.md): filter binlog events according to SQL expressions, configured by `expression-filter`.
 
 3. Optimize the DML execution plan:
 
-    1. [Compactor](#compactor): Merge multiple operations on the same record (with the same primary key) into one operation. This feature is enabled by `syncer.compact`.
-    2. [Causality](#causality): Perform conflict detection on different records (with different primary keys) to improve the concurrency of replication.
-    3. [Merger](#merger): Merge multiple binlog events into one DML statement, enabled by `syncer.multiple-rows`.
+    1. [Compactor](#compactor): merge multiple operations on the same record (with the same primary key) into one operation. This feature is enabled by `syncer.compact`.
+    2. [Causality](#causality): perform conflict detection on different records (with different primary keys) to improve the concurrency of replication.
+    3. [Merger](#merger): merge multiple binlog events into one DML statement, enabled by `syncer.multiple-rows`.
 
 4. Execute the DML to the downstream.
 5. Periodically save the binlog position or GTID to the checkpoint.
@@ -56,7 +56,7 @@ syncers:                            # The configuration parameters of the sync p
 
 ### Causality
 
-The sequential synchronization model of MySQL binlog requires that binlog events be synchronized in the order of binlog. This synchronization model cannot meet the requirements of high QPS and low synchronization latency. In addition, because not all operations involved in binlog have conflicts, sequential synchronization is not necessary in those cases.
+The sequential replication model of MySQL binlog requires that binlog events be replicated in the order of binlog. This replication model cannot meet the requirements of high QPS and low replication latency. In addition, because not all operations involved in binlog have conflicts, sequential replication is not necessary in those cases.
 
 DM recognizes the binlog that needs to be executed sequentially through conflict detection, and ensures that these binlog are executed sequentially while maximizing the concurrency of other binlog. This helps improve the performance of binlog replication.
 
@@ -84,7 +84,7 @@ The Merger feature is disabled by default. To enable it, you can set `syncer.mul
 syncers:                            # The configuration parameters of the sync processing unit
   global:                           # Configuration name
     ...                              # Other configurations are omitted
-    multiple-rows: false
+    multiple-rows: true
 ```
 
 ## DML execution logic
@@ -105,9 +105,9 @@ The logic of generating DML is as follows:
     * When starting an incremental task, because MySQL binlog does not record the table structure information, Sync uses the **table structure of the corresponding table in the downstream** as the initial table structure of the upstream.
 2. The user's upstream and downstream table structures might be inconsistent, for example, the downstream might have additional columns than the upstream, or the upstream and downstream primary keys are inconsistent. Therefore, to ensure the correctness of data replication, DM records the **primary key and unique key information of the corresponding table in the downstream**.
 3. DM generates DML:
-    * Use the **the table structure recorded in the schema tracker** to generate the column names of the DML statement.
+    * Use the **the upstream table structure recorded in the schema tracker** to generate the column names of the DML statement.
     * Use the **column values recorded in the binlog** to generate the column values of the DML statement.
-    * Use the **primary key or unique key recorded in the schema tracker** to generate the `WHERE` condition of the DML statement. When the table structure has no unique key, DM uses all the column values recorded in the binlog as the `WHERE` condition.
+    * Use the **downstream primary key or unique key recorded in the schema tracker** to generate the `WHERE` condition of the DML statement. When the table structure has no unique key, DM uses all the column values recorded in the binlog as the `WHERE` condition.
 
 ### Worker count
 
@@ -117,7 +117,7 @@ You can modify the number of threads that concurrently migrate DML by modifying 
 
 ### Batch
 
-DM batches multiple DMLs into a single transaction and executes them to the downstream. When a DML worker receives a DML, it adds the DML to the cache. When the number of DMLs in the cache reaches the preset threshold, or the DML worker does not receive DML for a long time, the DML worker executes the DMLs in the cache to the downstream.
+DM batches multiple DMLs into a single transaction and executes it to the downstream. When a DML worker receives a DML, it adds the DML to the cache. When the number of DMLs in the cache reaches the preset threshold, or the DML worker does not receive DML for a long time, the DML worker executes the DMLs in the cache to the downstream.
 
 You can modify the number of DMLs contained in a transaction by modifying the [`syncer.batch` configuration item](/dm/dm-tune-configuration.md#batch).
 
@@ -133,7 +133,7 @@ In DM, checkpoint is updated every 30 seconds by default. Because there are mult
 
 ### Transaction consistency
 
-DM replicates data at the row level and does not guarantee transaction consistency. In DM, an upstream transaction is split into multiple rows and distributed to different DML workers for concurrent execution. Therefore, when the DM replication task reports an error and pauses, or when the user manually pauses the task, the downstream might be in an intermediate state. That is, the DML statements in an upstream transaction might be partially replicated to the downstream and partially not replicated, which might cause the downstream to be in an inconsistent state.
+DM replicates data at the row level and does not guarantee transaction consistency. In DM, an upstream transaction is split into multiple rows and distributed to different DML workers for concurrent execution. Therefore, when the DM replication task reports an error and pauses, or when the user manually pauses the task, the downstream might be in an intermediate state. That is, the DML statements in an upstream transaction might be partially replicated to the downstream, which might cause the downstream to be in an inconsistent state.
 
 To ensure that the downstream is in a consistent state when the task is paused as much as possible, starting from DM v5.3.0, DM waits for 10 seconds before pausing the task to ensure that all transactions from the upstream are replicated to the downstream. However, if a transaction is not replicated to the downstream within 10 seconds, the downstream might still be in an inconsistent state.
 
