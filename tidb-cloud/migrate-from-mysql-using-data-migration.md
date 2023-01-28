@@ -111,6 +111,7 @@ Before creating a migration job, set up the network connection according to your
 If your MySQL service is in an AWS VPC, take the following steps:
 
 1. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of the MySQL service and your TiDB cluster.
+
 2. Modify the inbound rules of the security group that the MySQL service is associated with. 
 
     You must add [the CIDR of the region where your TiDB Cloud cluster is located](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr) to the inbound rules. Doing so allows the traffic to flow from your TiDB Cluster to the MySQL instance.
@@ -230,4 +231,4 @@ If a migration job has failed, you can restart it after solving the problem.
 
 You can delete a migration job in any status.
 
-If you encounter any problems during the migration, see [Troubleshooting](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions).
+If you encounter any problems during the migration, see [Migration errors and solutions](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions).
