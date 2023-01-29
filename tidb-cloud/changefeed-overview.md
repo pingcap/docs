@@ -63,3 +63,7 @@ To create a changefeed, refer to the tutorials:
 ## Changefeed billing
 
 To learn the billing for changefeeds in TiDB Cloud, see [Changefeed billing](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md).
+
+## Changefeed states
+
+To learn the changefeed states in TiDB Cloud, see [Changefeed States](/tidb-cloud/tidb-cloud-changefeed-states.md).
