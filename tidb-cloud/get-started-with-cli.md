@@ -105,7 +105,9 @@ Configure a user profile with your TiDB Cloud API Key.
 ticloud config create
 ```
 
-<Warning> The config name **MUST NOT** contain '.'</Warning>
+> **Warning:**
+> 
+> The config name **MUST NOT** contain '.'
 
 ### Create a serverless cluster
 

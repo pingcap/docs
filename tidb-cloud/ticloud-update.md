@@ -21,16 +21,16 @@ ticloud update
 
 ## Flags
 
-| Flag       | Description     |
-|------------|-----------------|
- | -h, --help | help for update |
+| Flag       | Description              |
+|------------|--------------------------|
+ | -h, --help | Get the help information |
 
 ## Inherited flags
 
-| Flag                 | Description                                  | Required | Extra                                                                                                                    |
-|----------------------|----------------------------------------------|----------|--------------------------------------------------------------------------------------------------------------------------|
-| --no-color           | Disable color in output.                     | false    | Only works in the non-interactive mode. In the interactive mode, disabling color might not work with some UI components. |
-| -P, --profile string | Profile to use from your configuration file. | false    | Work in both non-interactive and interactive modes.                                                                      |
+| Flag                 | Description                                                                               | Required | Notes                                                                                                                    |
+|----------------------|-------------------------------------------------------------------------------------------|----------|--------------------------------------------------------------------------------------------------------------------------|
+| --no-color           | Disable color in output.                                                                  | No       | Only works in the non-interactive mode. In the interactive mode, disabling color might not work with some UI components. |
+| -P, --profile string | The active [user profile](tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Work in both non-interactive and interactive modes.                                                                      |
 
 ## Feedback
 

@@ -33,27 +33,27 @@ ticloud import start local <file-path> --project-id <project-id> --cluster-id <c
 
 ## Flags
 
-| Flag                     | Description                          | Required | Extra                             |
-|--------------------------|--------------------------------------|----------|-----------------------------------|
- | -c, --cluster-id string  | Cluster ID                           | true     | Only work in non-interactive mode |
- | --data-format string     | Data format, one of [CSV]            | true     | Only work in non-interactive mode |
- | -h, --help               | help for local                       |          |                                   |
- | -p, --project-id string  | Project ID                           | true     | Only work in non-interactive mode |
- | --target-database string | Target database to which import data | true     | Only work in non-interactive mode |
- | --target-table string    | Target table to which import data    | true     | Only work in non-interactive mode |
+In non-interactive mode, you need to manually enter required flags. In interactive mode, you can just follow CLI prompts to fill in them.
 
-<Note> For flags required in non-interactive mode, fill them according to the prompt in interactive mode. </Note>
+| Flag                     | Description                          | Required | Notes                             |
+|--------------------------|--------------------------------------|----------|-----------------------------------|
+ | -c, --cluster-id string  | Cluster ID                           | Yes      | Only work in non-interactive mode |
+ | --data-format string     | Data format, one of [CSV]            | Yes      | Only work in non-interactive mode |
+ | -h, --help               | Get the help information             | No       |                                   |
+ | -p, --project-id string  | Project ID                           | Yes      | Only work in non-interactive mode |
+ | --target-database string | Target database to which import data | Yes      | Only work in non-interactive mode |
+ | --target-table string    | Target table to which import data    | Yes      | Only work in non-interactive mode |
 
 ## Inherited flags
 
-| Flag                  | Description                                                                                    | Required | Extra                                                                                                             |
+| Flag                  | Description                                                                                    | Required | Notes                                                                                                             |
 |-----------------------|------------------------------------------------------------------------------------------------|----------|-------------------------------------------------------------------------------------------------------------------|
-| --backslash-escape    | In CSV file whether to parse backslash inside fields as escape characters (default true)       | false    | Only work in non-interactive mode and "--data-format CSV"                                                         |
-| --delimiter string    | The delimiter used for quoting of CSV file (default "\"")                                      | false    | Only work in non-interactive mode and "--data-format CSV"                                                         |
-| --no-color            | Disable color output                                                                           | false    | Only work in non-interactive mode. In interactive mode, disable color output may not work with some UI components |
-| -P, --profile string  | Profile to use from your configuration file.                                                   | false    | Work in both non-interactive and interactive modes.                                                               |
-| --separator string    | The field separator of CSV file (default ",")                                                  | false    | Only work in non-interactive mode and "--data-format CSV"                                                         |
-| --trim-last-separator | In CSV file whether to treat Separator as the line terminator and trim all trailing separators | false    | Only work in non-interactive mode and "--data-format CSV"                                                         |
+| --backslash-escape    | In CSV file whether to parse backslash inside fields as escape characters (default true)       | No       | Only work in non-interactive mode and "--data-format CSV"                                                         |
+| --delimiter string    | The delimiter used for quoting of CSV file (default "\"")                                      | No       | Only work in non-interactive mode and "--data-format CSV"                                                         |
+| --no-color            | Disable color output                                                                           | No       | Only work in non-interactive mode. In interactive mode, disable color output may not work with some UI components |
+| -P, --profile string  | The active [user profile](tidb-cloud/cli-reference.md#user-profile) used in this command.      | No       | Work in both non-interactive and interactive modes.                                                               |
+| --separator string    | The field separator of CSV file (default ",")                                                  | No       | Only work in non-interactive mode and "--data-format CSV"                                                         |
+| --trim-last-separator | In CSV file whether to treat Separator as the line terminator and trim all trailing separators | No       | Only work in non-interactive mode and "--data-format CSV"                                                         |
 
 ## Feedback
 

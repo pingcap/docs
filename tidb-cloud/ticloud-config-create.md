@@ -5,7 +5,7 @@ Summary: The reference of `ticloud config create`.
 
 # ticloud config create
 
-Configure a user profile to store settings
+Configure a [user profile](tidb-cloud/cli-reference.md#user-profile) to store settings
 
 ```shell
 ticloud config create [flags]
@@ -27,21 +27,21 @@ ticloud config create --profile-name <profile-name> --public-key <public-key> --
 
 ## Flags
 
-| Flag                  | Description                                   | Required | Extra                             |
-|-----------------------|-----------------------------------------------|----------|-----------------------------------|
-| -h, --help            | help for create                               |          |                                   |
-| --private-key string  | the private key of the TiDB Cloud API         | true     | Only work in non-interactive mode |
-| --profile-name string | the name of the profile, must not contain '.' | true     | Only work in non-interactive mode |
-| --public-key string   | the public key of the TiDB Cloud API          | true     | Only work in non-interactive mode |
+In non-interactive mode, you need to manually enter required flags. In interactive mode, you can just follow CLI prompts to fill in them.
 
-<Note> For flags required in non-interactive mode, fill them according to the prompt in interactive mode. </Note>
+| Flag                  | Description                                   | Required | Notes                             |
+|-----------------------|-----------------------------------------------|----------|-----------------------------------|
+| -h, --help            | Get the help information                      | No       |                                   |
+| --private-key string  | The private key of the TiDB Cloud API         | Yes      | Only work in non-interactive mode |
+| --profile-name string | The name of the profile, must not contain '.' | Yes      | Only work in non-interactive mode |
+| --public-key string   | The public key of the TiDB Cloud API          | Yes      | Only work in non-interactive mode |
 
 ## Inherited flags
 
-| Flag                 | Description                                  | Required | Extra                                                                                                                    |
+| Flag                 | Description                                  | Required | Notes                                                                                                                    |
 |----------------------|----------------------------------------------|----------|--------------------------------------------------------------------------------------------------------------------------|
-| --no-color           | Disable color in output.                     | false    | Only works in the non-interactive mode. In the interactive mode, disabling color might not work with some UI components. |
-| -P, --profile string | Profile to use from your configuration file. | false    | Work in both non-interactive and interactive modes.                                                                      |
+| --no-color           | Disable color in output.                     | No       | Only works in the non-interactive mode. In the interactive mode, disabling color might not work with some UI components. |
+| -P, --profile string | The active user profile used in this command. | No       | Work in both non-interactive and interactive modes.                                                                      |
 
 ## Feedback
 

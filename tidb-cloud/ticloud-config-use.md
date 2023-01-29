@@ -5,7 +5,7 @@ Summary: The reference of `ticloud config use`.
 
 # ticloud config use
 
-Use the specified profile as the active profile
+Use the specified profile as the active [user profile](tidb-cloud/cli-reference.md#user-profile)
 
 ```shell
 ticloud config use <profile-name> [flags]
@@ -13,7 +13,7 @@ ticloud config use <profile-name> [flags]
 
 ## Examples
 
-Use the "test" profile as the active profile:
+Use the "test" profile as the active user profile:
 
 ```shell
 ticloud config use test
@@ -21,16 +21,16 @@ ticloud config use test
 
 ## Flags
 
-| Flag       | Description  |
-|------------|--------------|
-| -h, --help | help for use |
+| Flag       | Description              |
+|------------|--------------------------|
+| -h, --help | Get the help information |
 
 ## Inherited flags
 
-| Flag                 | Description                                  | Required | Extra                                                                                                                    |
-|----------------------|----------------------------------------------|----------|--------------------------------------------------------------------------------------------------------------------------|
-| --no-color           | Disable color in output.                     | false    | Only works in the non-interactive mode. In the interactive mode, disabling color might not work with some UI components. |
-| -P, --profile string | Profile to use from your configuration file. | false    | Work in both non-interactive and interactive modes.                                                                      |
+| Flag                 | Description                                   | Required | Notes                                                                                                                    |
+|----------------------|-----------------------------------------------|----------|--------------------------------------------------------------------------------------------------------------------------|
+| --no-color           | Disable color in output.                      | No       | Only works in the non-interactive mode. In the interactive mode, disabling color might not work with some UI components. |
+| -P, --profile string | The active user profile used in this command. | No       | Work in both non-interactive and interactive modes.                                                                      |
 
 ## Feedback
 

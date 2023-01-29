@@ -5,13 +5,13 @@ Summary: The reference of `ticloud config delete`.
 
 # ticloud config delete
 
-Delete a profile
+Delete a [user profile](tidb-cloud/cli-reference.md#user-profile)
 
 ```shell
 ticloud config delete <profile-name> [flags]
 ```
 
-Or use alias
+Or use the following alias command
 
 ```shell
 ticloud config rm <profile-name> [flags]
@@ -19,7 +19,7 @@ ticloud config rm <profile-name> [flags]
 
 ## Examples
 
-Delete a profile configuration:
+Delete a user profile:
 
 ```shell
 ticloud config delete <profile-name>
@@ -30,14 +30,14 @@ ticloud config delete <profile-name>
 | Flag       | Description                           |
 |------------|---------------------------------------|
 | --force    | Delete a profile without confirmation |
-| -h, --help | help for delete                       |
+| -h, --help | Get the help information              |
 
 ## Inherited flags
 
-| Flag                 | Description                                  | Required | Extra                                                                                                                    |
-|----------------------|----------------------------------------------|----------|--------------------------------------------------------------------------------------------------------------------------|
-| --no-color           | Disable color in output.                     | false    | Only works in the non-interactive mode. In the interactive mode, disabling color might not work with some UI components. |
-| -P, --profile string | Profile to use from your configuration file. | false    | Work in both non-interactive and interactive modes.                                                                      |
+| Flag                 | Description                                   | Required | Notes                                                                                                                    |
+|----------------------|-----------------------------------------------|----------|--------------------------------------------------------------------------------------------------------------------------|
+| --no-color           | Disable color in output.                      | No       | Only works in the non-interactive mode. In the interactive mode, disabling color might not work with some UI components. |
+| -P, --profile string | The active user profile used in this command. | No       | Work in both non-interactive and interactive modes.                                                                      |
 
 ## Feedback
 

@@ -11,7 +11,7 @@ List data import tasks
 ticloud import list [flags]
 ```
 
-Or use alias
+Or use the following alias command
 
 ```shell
 ticloud import ls [flags]
@@ -39,21 +39,21 @@ ticloud import list --project-id <project-id> --cluster-id <cluster-id> --output
 
 ## Flags
 
-| Flag                    | Description                                                                                            | Required | Extra                                               |
-|-------------------------|--------------------------------------------------------------------------------------------------------|----------|-----------------------------------------------------|
-| -c, --cluster-id string | Cluster ID                                                                                             | true     | Only work in non-interactive mode                   |
-| -h, --help              | help for list                                                                                          |          |                                                     |
-| -o, --output string     | Output format. One of: human, json. For the complete result, please use json format. (default "human") | false    | Work in both non-interactive and interactive modes. |
-| -p, --project-id string | Project ID                                                                                             | true     | Only work in non-interactive mode                   |
+In non-interactive mode, you need to manually enter required flags. In interactive mode, you can just follow CLI prompts to fill in them.
 
-<Note> For flags required in non-interactive mode, fill them according to the prompt in interactive mode. </Note>
+| Flag                    | Description                                                                                            | Required | Notes                                               |
+|-------------------------|--------------------------------------------------------------------------------------------------------|----------|-----------------------------------------------------|
+| -c, --cluster-id string | Cluster ID                                                                                             | Yes      | Only work in non-interactive mode                   |
+| -h, --help              | Get the help information                                                                               | No       |                                                     |
+| -o, --output string     | Output format. One of: human, json. For the complete result, please use json format. (default "human") | No       | Work in both non-interactive and interactive modes. |
+| -p, --project-id string | Project ID                                                                                             | Yes      | Only work in non-interactive mode                   |
 
 ## Inherited flags
 
-| Flag                 | Description                                  | Required | Extra                                                                                                                    |
-|----------------------|----------------------------------------------|----------|--------------------------------------------------------------------------------------------------------------------------|
-| --no-color           | Disable color in output.                     | false    | Only works in the non-interactive mode. In the interactive mode, disabling color might not work with some UI components. |
-| -P, --profile string | Profile to use from your configuration file. | false    | Work in both non-interactive and interactive modes.                                                                      |
+| Flag                 | Description                                                                               | Required | Notes                                                                                                                    |
+|----------------------|-------------------------------------------------------------------------------------------|----------|--------------------------------------------------------------------------------------------------------------------------|
+| --no-color           | Disable color in output.                                                                  | No       | Only works in the non-interactive mode. In the interactive mode, disabling color might not work with some UI components. |
+| -P, --profile string | The active [user profile](tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Work in both non-interactive and interactive modes.                                                                      |
 
 ## Feedback
 
