@@ -5,37 +5,57 @@ summary: Learn about the TiDB system tables.
 
 # <code>mysql</code>スキーマ {#code-mysql-code-schema}
 
-`mysql`スキーマには、TiDBシステムテーブルが含まれています。デザインはMySQLの`mysql`スキーマに似ており、 `mysql.user`などのテーブルを直接編集できます。また、MySQLの拡張機能であるいくつかのテーブルも含まれています。
+`mysql`スキーマには、TiDB システム テーブルが含まれています。設計は MySQL の`mysql`スキーマに似ており、 `mysql.user`などのテーブルを直接編集できます。また、MySQL の拡張機能である多数のテーブルも含まれています。
 
-## システムテーブルを付与する {#grant-system-tables}
+## システム テーブルの付与 {#grant-system-tables}
 
-これらのシステムテーブルには、ユーザーアカウントとその特権に関する付与情報が含まれています。
+これらのシステム テーブルには、ユーザー アカウントとその権限に関する付与情報が含まれています。
 
--   `user` ：ユーザーアカウント、グローバル特権、およびその他の非特権列
--   `db` ：データベースレベルの権限
--   `tables_priv` ：テーブルレベルの権限
--   `columns_priv` ：列レベルの特権
+-   `user` : ユーザー アカウント、グローバル権限、およびその他の権限以外の列
+-   `db` : データベース レベルの権限
+-   `tables_priv` : テーブルレベルの権限
+-   `columns_priv` : 列レベルの権限
+-   `default_roles` : ユーザーのデフォルトのロール
+-   `global_grants` : 動的権限
+-   `global_priv` : 証明書に基づく認証情報
+-   `role_edges` : ロール間の関係
 
-## サーバー側のヘルプシステムテーブル {#server-side-help-system-tables}
+## サーバー側のヘルプ システム テーブル {#server-side-help-system-tables}
 
-現在、 `help_topic`はNULLです。
+現在、 `help_topic`は NULL です。
 
-## 統計システムテーブル {#statistics-system-tables}
+## 統計システム テーブル {#statistics-system-tables}
 
--   `stats_buckets` ：統計のバケット
--   `stats_histograms` ：統計のヒストグラム
--   `stats_meta` ：行の総数や更新された行などのテーブルのメタ情報
+-   `stats_buckets` : 統計のバケット
+-   `stats_histograms` : 統計のヒストグラム
+-   `stats_top_n` : 統計の上位 N
+-   `stats_meta` : 行の総数や更新された行など、テーブルのメタ情報
+-   `stats_extended` : 列間の順序相関などの拡張統計
+-   `stats_feedback` : 統計のクエリ フィードバック
+-   `stats_fm_sketch` : 統計列のヒストグラムの FMSketch 分布
+-   `analyze_options` : 各テーブルのデフォルトの`analyze`のオプション
+-   `column_stats_usage` : 列統計の使用
+-   `schema_index_usage` : インデックスの使用
 
-## GCワーカーシステムテーブル {#gc-worker-system-tables}
+## 実行計画関連のシステム テーブル {#execution-plan-related-system-tables}
 
--   `gc_delete_range` ：削除するデータを記録します
+-   `bind_info` : 実行計画のバインディング情報
+-   `capture_plan_baselines_blacklist` : 実行計画の自動バインディングのブロックリスト
 
-## その他のシステムテーブル {#miscellaneous-system-tables}
+## GC ワーカー システム テーブル {#gc-worker-system-tables}
 
--   `GLOBAL_VARIABLES` ：グローバルシステム変数テーブル
+-   `gc_delete_range` : 削除する KV 範囲
+-   `gc_delete_range_done` : 削除された KV 範囲
+
+## その他のシステム テーブル {#miscellaneous-system-tables}
+
+-   `GLOBAL_VARIABLES` : グローバル システム変数テーブル
 
 <CustomContent platform="tidb">
 
--   `tidb` ：TiDB実行時のバージョン情報を記録します`bootstrap`
+-   `tidb` : TiDB 実行時のバージョン情報を記録する`bootstrap`
+-   `expr_pushdown_blacklist` : 式プッシュダウンのブロックリスト
+-   `opt_rule_blacklist` : 論理最適化ルールのブロックリスト
+-   `table_cache_meta` : キャッシュされたテーブルのメタデータ
 
 </CustomContent>

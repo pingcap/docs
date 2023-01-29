@@ -22,6 +22,13 @@ TiDB は統計を使用して決定します[どのインデックスを選択�
 >     ```sql
 >     SELECT DISTINCT(CONCAT('DROP STATS ', table_schema, '.', table_name, ';')) FROM information_schema.tables, mysql.stats_histograms WHERE stats_ver = 2 AND table_id = tidb_table_id;
 >     ```
+>
+> -   前のステートメントの結果が長すぎてコピー アンド ペーストできない場合は、結果を一時テキスト ファイルにエクスポートし、次のようにファイルから実行できます。
+>
+>     ```sql
+>     SELECT DISTINCT ... INTO OUTFILE '/tmp/sql.txt';
+>     mysql -h XXX -u user -P 4000 ... < '/tmp/sql.txt';
+>     ```
 
 これら 2 つのバージョンには、TiDB に異なる情報が含まれています。
 
@@ -147,7 +154,7 @@ v5.3.0 より前の TiDB は、リザーバー サンプリング メソッド�
 
     > **警告：**
     >
-    > 現在、 `PREDICATE COLUMNS`に関する統計の収集は実験的機能です。実稼働環境で使用することはお勧めしません。
+    > 現在、 `PREDICATE COLUMNS`に関する統計の収集は実験的機能です。本番環境で使用することはお勧めしません。
 
     1.  [`tidb_enable_column_tracking`](/system-variables.md#tidb_enable_column_tracking-new-in-v540)システム変数の値を`ON`に設定して、TiDB が`PREDICATE COLUMNS`を収集できるようにします。
 
@@ -288,7 +295,7 @@ ANALYZE TABLE TableName INDEX [IndexNameList] [WITH NUM BUCKETS|TOPN|CMSKETCH DE
 
     > **警告：**
     >
-    > 現在、 `PREDICATE COLUMNS`に関する統計の収集は実験的機能です。実稼働環境で使用することはお勧めしません。
+    > 現在、 `PREDICATE COLUMNS`に関する統計の収集は実験的機能です。本番環境で使用することはお勧めしません。
 
     {{< copyable "" >}}
 
@@ -335,7 +342,7 @@ ANALYZE TABLE TableName INDEX [IndexNameList] [WITH NUM BUCKETS|TOPN|CMSKETCH DE
 | `tidb_auto_analyze_start_time` | `00:00 +0000` | TiDBが自動更新できる1日の開始時刻 |
 | `tidb_auto_analyze_end_time`   | `23:59 +0000` | TiDBが自動更新できる1日の終了時刻 |
 
-テーブル内の`tbl`の行の総数に対する変更された行の数の比率が`tidb_auto_analyze_ratio`よりも大きく、現在の時刻が`tidb_auto_analyze_start_time`から`tidb_auto_analyze_end_time`の間である場合、TiDB はバックグラウンドで`ANALYZE TABLE tbl`ステートメントを実行して、この統計を自動的に更新します。テーブル。
+テーブル内の`tbl`の行の総数に対する変更された行の数の比率が`tidb_auto_analyze_ratio`よりも大きく、現在の時刻が`tidb_auto_analyze_start_time`から`tidb_auto_analyze_end_time`の間にある場合、TiDB はバックグラウンドで`ANALYZE TABLE tbl`ステートメントを実行して、この統計を自動的に更新します。テーブル。
 
 小さなテーブルで少量のデータを変更すると自動更新が頻繁にトリガーされるという状況を回避するために、テーブルの行数が 1000 未満の場合、そのようなデータ変更は TiDB で自動更新をトリガーしません。 `SHOW STATS_META`ステートメントを使用して、テーブル内の行数を表示できます。
 
@@ -587,16 +594,16 @@ DROP STATS TableName
 
 デフォルトでは、列統計のサイズに応じて、TiDB は次のように異なる方法で統計をロードします。
 
--   少量のメモリを消費する統計 (count、distinctCount、nullCount など) の場合、列データが更新されている限り、TiDB は対応する統計を自動的にメモリにロードして、SQL 最適化段階で使用します。
--   大量のメモリを消費する統計 (ヒストグラム、TopN、Count-Min Sketch など) の場合、SQL 実行のパフォーマンスを確保するために、TiDB は必要に応じて統計を非同期にロードします。ヒストグラムを例に取ります。 TiDB は、オプティマイザがその列のヒストグラム統計を使用する場合にのみ、列のヒストグラム統計をメモリにロードします。オンデマンドの非同期統計ロードは、SQL 実行のパフォーマンスには影響しませんが、SQL 最適化の不完全な統計を提供する場合があります。
+-   少量のメモリを消費する統計 (count、distinctCount、nullCount など) の場合、列データが更新されている限り、TiDB は対応する統計をメモリに自動的にロードして、SQL 最適化段階で使用します。
+-   大量のメモリを消費する統計 (ヒストグラム、TopN、Count-Min Sketch など) の場合、SQL 実行のパフォーマンスを確保するために、TiDB はオンデマンドで非同期に統計を読み込みます。ヒストグラムを例に取ります。 TiDB は、オプティマイザがその列のヒストグラム統計を使用する場合にのみ、列のヒストグラム統計をメモリにロードします。オンデマンドの非同期統計ロードは、SQL 実行のパフォーマンスには影響しませんが、SQL 最適化のための不完全な統計を提供する可能性があります。
 
 v5.4.0 以降、TiDB は同期読み込み統計機能を導入しています。この機能により、TiDB は、SQL ステートメントの実行時に大規模な統計 (ヒストグラム、TopN、Count-Min Sketch 統計など) をメモリに同期的にロードできるようになり、SQL 最適化のための統計の完全性が向上します。
 
 > **警告：**
 >
-> 現在、統計の同期読み込みは実験的機能です。実稼働環境で使用することはお勧めしません。
+> 現在、統計の同期読み込みは実験的機能です。本番環境で使用することはお勧めしません。
 
-統計の同期読み込み機能は、デフォルトでは無効になっています。この機能を有効にするには、システム変数[`tidb_stats_load_sync_wait`](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540)の値をタイムアウト (ミリ秒単位) に設定します。これは、SQL 最適化が完全な列統計を同期的にロードするまで最大で待機できる時間です。この変数のデフォルト値は`0`で、機能が無効になっていることを示します。
+統計の同期読み込み機能は、デフォルトで無効になっています。この機能を有効にするには、システム変数[`tidb_stats_load_sync_wait`](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540)の値をタイムアウト (ミリ秒単位) に設定します。これは、SQL 最適化が完全な列統計を同期的にロードするまで最大で待機できる時間です。この変数のデフォルト値は`0`で、機能が無効になっていることを示します。
 
 <CustomContent platform="tidb">
 
