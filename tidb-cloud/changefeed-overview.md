@@ -68,7 +68,7 @@ To learn the billing for changefeeds in TiDB Cloud, see [Changefeed billing](/ti
 
 The state of a replication task represents the running state of the replication task. During the running of TiCDC, replication tasks might fail with errors, be manually paused, resumed, or reach the specified `TargetTs`. These behaviors can lead to the change of the replication task state. 
 
-This section describes the states of TiCDC replication tasks and the transfer relationships between states. The states are described as follows:
+This section describes the states of changefeed replication tasks. The states are described as follows:
 
 - `CREATING`: the replication task is being created.
 - `RUNNING`：the replication task runs normally and the checkpoint-ts proceeds normally.
