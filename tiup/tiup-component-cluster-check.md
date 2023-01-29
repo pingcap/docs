@@ -153,25 +153,23 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 
 ### --cluster
 
-- Indicates that the check is for the deployed clusters.
+- Indicates that the check is for clusters.
 - Data type: `BOOLEAN`
 - This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
+- Command format (for both deployed and un-deployed clusters):
+
+    ```shell
+    tiup cluster check <topology.yml | cluster-name> [flags]
+    ```
 
 > **Note:**
 >
-> tiup-cluster supports checking both un-deployed clusters and deployed clusters with the following command format:
-> 
-> ```shell
-> tiup cluster check <topology.yml | cluster-name> [flags]
-> ```
-> 
-> If the `tiup cluster check <cluster-name>` command is used, you must add the `--cluster` option: `tiup cluster check <cluster-name> --cluster`.
+> - If the `tiup cluster check <cluster-name>` command is used, you must add the `--cluster` option: `tiup cluster check <cluster-name> --cluster`.
+> - tiup-cluster also supports checking the `scale-out yaml` file for a deployed cluster with the following command format:
 >
-> tiup-cluster also supports checking the `scale-out yaml` file for a deployed cluster with the following command format:
->
->```shell
-> tiup cluster check <cluster-name> scale-out.yaml --cluster --user root [-p] [-i /home/root/.ssh/gcp_rsa]
->```
+>   ```shell
+>   tiup cluster check <cluster-name> scale-out.yaml --cluster --user root [-p] [-i /home/root/.ssh/gcp_rsa]
+>   ```
 
 ### -N, --node
 
