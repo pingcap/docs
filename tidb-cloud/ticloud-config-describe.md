@@ -5,13 +5,13 @@ Summary: The reference of `ticloud config describe`.
 
 # ticloud config describe
 
-Describe a specific profile
+You can use the `ticloud config describe` to get the private and public keys for a specific profile:
 
 ```shell
 ticloud config describe <profile-name> [flags]
 ```
 
-Or use alias
+Or use the following alias command:
 
 ```shell
 ticloud config get <profile-name> [flags]

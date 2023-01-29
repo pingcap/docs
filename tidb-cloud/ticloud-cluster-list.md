@@ -5,13 +5,13 @@ Summary: The reference of `ticloud cluster list`.
 
 # ticloud cluster list
 
-List all clusters in a project
+You can use `ticloud cluster list` to list all clusters in a project:
 
 ```shell
 ticloud cluster list <project-id> [flags]
 ```
 
-Or use alias
+Or use the following alias command:
 
 ```shell
 ticloud cluster ls <project-id> [flags]

@@ -30,9 +30,9 @@ ticloud cluster create --project-id <project-id> --cluster-name <cluster-name> -
 | Flag                    | Description                                                 | Required | Extra                             |
 |-------------------------|-------------------------------------------------------------|----------|-----------------------------------|
 | --cloud-provider string | Cloud provider, one of [AWS]                                | Yes      | Only work in non-interactive mode |
-| --cluster-name string   | Name of the cluster to de created                           | Yes      | Only work in non-interactive mode | 
-| --cluster-type string   | Cluster type, only support "SERVERLESS" now                 | Yes      | Only work in non-interactive mode | 
-| -h, --help              | help for create                                             |          |                                   |
+| --cluster-name string   | Name of the cluster to be created                           | Yes      | Only work in non-interactive mode | 
+| --cluster-type string   | Cluster type. Currently, only "SERVERLESS" is supported.     | Yes      | Only work in non-interactive mode | 
+| -h, --help              | Get the help information                |   No  |     Work in both non-interactive and interactive modes.     |                                   |
 | -p, --project-id string | The ID of the project, in which the cluster will be created | Yes      | Only work in non-interactive mode | 
 | -r, --region string     | Cloud region                                                | Yes      | Only work in non-interactive mode | 
 | --root-password string  | The root password of the cluster                            | Yes      | Only work in non-interactive mode | 

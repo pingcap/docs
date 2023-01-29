@@ -5,13 +5,13 @@ Summary: The reference of `ticloud cluster describe`.
 
 # ticloud cluster describe
 
-Describe a cluster
+You can use `ticloud cluster describe` to get information about a cluster, such as the cloud provider, cluster type, cluster configurations, and cluster status.
 
 ```shell
 ticloud cluster describe [flags]
 ```
 
-Or use alias
+Or use the following alias command:
 
 ```shell
 ticloud cluster get [flags]
