@@ -105,23 +105,23 @@ Before creating a migration job, set up the network connection according to your
 
 - If you use VPC Peering, see the following instructions to configure the network.
 
-<details>
-<summary> Set up VPC Peering</summary>
+    <details>
+    <summary> Set up VPC Peering</summary>
 
-If your MySQL service is in an AWS VPC, take the following steps:
+    If your MySQL service is in an AWS VPC, take the following steps:
 
-1. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of the MySQL service and your TiDB cluster.
+    1. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of the MySQL service and your TiDB cluster.
 
-2. Modify the inbound rules of the security group that the MySQL service is associated with. 
+    2. Modify the inbound rules of the security group that the MySQL service is associated with. 
 
-    You must add [the CIDR of the region where your TiDB Cloud cluster is located](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr) to the inbound rules. Doing so allows the traffic to flow from your TiDB cluster to the MySQL instance.
+        You must add [the CIDR of the region where your TiDB Cloud cluster is located](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr) to the inbound rules. Doing so allows the traffic to flow from your TiDB cluster to the MySQL instance.
 
-3. If the MySQL URL contains a DNS hostname, you need to allow TiDB Cloud to be able to resolve the hostname of the MySQL service. 
+    3. If the MySQL URL contains a DNS hostname, you need to allow TiDB Cloud to be able to resolve the hostname of the MySQL service. 
 
-    1. Follow the steps in [Enable DNS resolution for a VPC peering connection](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html#vpc-peering-dns).
-    2. Enable the **Accepter DNS resolution** option.
+        1. Follow the steps in [Enable DNS resolution for a VPC peering connection](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html#vpc-peering-dns).
+        2. Enable the **Accepter DNS resolution** option.
 
-</details>
+    </details>
 
 ### Enable binlogs
 
