@@ -197,8 +197,6 @@ When you locate the execution plan of TiDB in some scenarios, the target SQL sta
 
 ### Use `PLAN REPLAYER CAPTURE`
 
-你可以通过以下方式向 TiDB 集群注册目标 SQL 语句和计划的 Digest:
-
 You can register the digest of the target SQL statement and execution plan in the TiDB cluster using the following statement:
 
 ```sql
