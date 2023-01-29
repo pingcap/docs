@@ -123,7 +123,7 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 
 - If a cluster is not deployed yet, you need to pass the [topology.yml](/tiup/tiup-cluster-topology-reference.md) file that is used to deploy the cluster. According to the content in this file, tiup-cluster connects to the corresponding machine to perform the check.
 - If a cluster is already deployed, you can use the `<cluster-name>` as the check object.
-- If you want to check the expansion yaml for a deployed cluster, you can use both `<scale-out.yml>` and `<cluster-name>` as the check object.
+- If you want to check the scale-out yaml for a deployed cluster, you can use both `<scale-out.yml>` and `<cluster-name>` as the check object.
 
 > **Note:**
 >
