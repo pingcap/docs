@@ -9,7 +9,7 @@ A [changefeed](/tidb-cloud/changefeed-overview.md) is a replication task in TiCD
 
 The state of a replication task represents the running status of the replication task. During the running of TiCDC, replication tasks might fail with errors, be manually paused, resumed, or reach the specified `TargetTs`. These behaviors can lead to the change of the replication task state. This document describes the states of TiCDC replication tasks and the transfer relationships between states.
 
-The states in the preceding state transfer diagram are described as follows:
+The states are described as follows:
 
 - `RUNNING`：the replication task runs normally and the checkpoint-ts proceeds normally.
 - `FAILED`: the replication task fails. Due to some unrecoverable errors, the replication task cannot resume and cannot be recovered. The changefeed in this state does not block GC operations.
