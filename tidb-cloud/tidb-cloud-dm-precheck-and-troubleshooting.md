@@ -5,7 +5,7 @@ summary: Learn how to resolve precheck errors, migration errors and alerts when 
 
 # Precheck Errors, Migration Errors, and Alerts for Data Migration
 
-This document describes how to resolve precheck errors, troubleshoot migration errors, and subscribe alerts when you use Data Migration to migrate data. 
+This document describes how to resolve precheck errors, troubleshoot migration errors, and subscribe to alerts when you [use Data Migration to migrate data](/tidb-cloud/migrate-from-mysql-using-data-migration.md). 
 
 ## Precheck errors and solutions
 
@@ -20,13 +20,13 @@ The solutions vary depending on the upstream database.
 
 ### Error message: Check whether mysql binlog is enabled
 
-- Amazon Aurora MySQL: see [How do I turn on binary logging for my Amazon Aurora MySQL-Compatible cluster?](https://aws.amazon.com/premiumsupport/knowledge-center/enable-binary-logging-aurora/?nc1=h_ls).
+- Amazon Aurora MySQL: see [How do I turn on binary logging for my Amazon Aurora MySQL-Compatible cluster](https://aws.amazon.com/premiumsupport/knowledge-center/enable-binary-logging-aurora/?nc1=h_ls).
 - Amazon RDS: see [Configuring MySQL binary logging](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.MySQL.BinaryFormat.html).
 - MySQL: see [Setting the Replication Source Configuration](https://dev.mysql.com/doc/refman/5.7/en/replication-howto-masterbaseconfig.html).
 
 ### Error message: Check whether mysql binlog_format is ROW
 
-- Amazon Aurora MySQL: see [How do I turn on binary logging for my Amazon Aurora MySQL-Compatible cluster?](https://aws.amazon.com/premiumsupport/knowledge-center/enable-binary-logging-aurora/?nc1=h_ls).
+- Amazon Aurora MySQL: see [How do I turn on binary logging for my Amazon Aurora MySQL-Compatible cluster](https://aws.amazon.com/premiumsupport/knowledge-center/enable-binary-logging-aurora/?nc1=h_ls).
 - Amazon RDS: see [Configuring MySQL binary logging](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.MySQL.BinaryFormat.html).
 - MySQL: execute `set global binlog_format=ROW;`. See [Setting The Binary Log Format](https://dev.mysql.com/doc/refman/5.7/en/binary-log-setting.html).
 
@@ -34,22 +34,22 @@ The solutions vary depending on the upstream database.
 
 - Amazon Aurora MySQL: `binlog_row_image` is not configurable. This precheck item does not fail for it.
 - Amazon RDS: the process is similar to setting the `binlog_format` parameter. The only difference is that the parameter you need to change is `binlog_row_image` instead of `binlog_format`. See [Configuring MySQL binary logging](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.MySQL.BinaryFormat.html).
-- MySQL: 'set global binlog_row_image = FULL;'. See [Binary Logging Options and Variables](https://dev.mysql.com/doc/refman/5.7/en/replication-options-binary-log.html#sysvar_binlog_row_image).
+- MySQL: `set global binlog_row_image = FULL;`. See [Binary Logging Options and Variables](https://dev.mysql.com/doc/refman/5.7/en/replication-options-binary-log.html#sysvar_binlog_row_image).
 
 ### Error message: Check whether migrated dbs are in binlog_do_db/binlog_ignore_db
 
-Make sure that binlog has been enabled in the upstream database. See [Check whether mysql binlog is enabled](#check-whether-mysql-binlog-is-enabled). After that, resolve the issue according to the messages:
+Make sure that binlog has been enabled in the upstream database. See [Check whether mysql binlog is enabled](#error-message-check-whether-mysql-binlog-is-enabled). After that, resolve the issue according to the message you get:
 
 - If the message is similar to `These dbs xxx are not in binlog_do_db xxx`, make sure all the databases that you want to migrate are in the list. See [--binlog-do-db=db_name](https://dev.mysql.com/doc/refman/5.7/en/replication-options-binary-log.html#option_mysqld_binlog-do-db).
-- If the message is similar to `these dbs xxx are in binlog_ignore_db xxx`, make sure all the databases that you want to migrate are not in the ignore list. See [--binlog-ignore-db=db_name](https://dev.mysql.com/doc/refman/5.7/en/replication-options-binary-log.html#option_mysqld_binlog-ignore-db).
+- If the message is similar to `These dbs xxx are in binlog_ignore_db xxx`, make sure all the databases that you want to migrate are not in the ignore list. See [--binlog-ignore-db=db_name](https://dev.mysql.com/doc/refman/5.7/en/replication-options-binary-log.html#option_mysqld_binlog-ignore-db).
 
 For Amazon RDS, you need to change the following parameters: `replicate-do-db`, `replicate-do-table`, `replicate-ignore-db`, and `replicate-ignore-table`. See [Configuring MySQL binary logging](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.MySQL.BinaryFormat.html).
 
 ### Error message: Check if connection concurrency exceeds database's maximum connection limit
 
-If the error occurs in the upstream MySQL database:
+If the error occurs in the upstream database, set `max_connections` as follows:
 
-- Amazon Aurora MySQL: the process is similar to setting the `binlog_format`. The only difference is that the parameter you change is `max_connections` instead of `binlog_format`. See [How do I turn on binary logging for my Amazon Aurora MySQL-Compatible cluster?](https://aws.amazon.com/premiumsupport/knowledge-center/enable-binary-logging-aurora/?nc1=h_ls).
+- Amazon Aurora MySQL: the process is similar to setting the `binlog_format`. The only difference is that the parameter you change is `max_connections` instead of `binlog_format`. See [How do I turn on binary logging for my Amazon Aurora MySQL-Compatible cluster](https://aws.amazon.com/premiumsupport/knowledge-center/enable-binary-logging-aurora/?nc1=h_ls).
 - Amazon RDS: the process is similar to setting the `binlog_format`. The only difference is that the parameter you change is `max_connections` instead of `binlog_format`.  See [Configuring MySQL binary logging](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.MySQL.BinaryFormat.html).
 - MySQL: configure `max_connections` following the document [max_connections](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_max_connections).
 
@@ -61,7 +61,7 @@ This section describes the problems and solutions you might encounter during the
 
 ### Error message: "The required binary log for migration no longer exists on the source database. Please make sure binary log files are kept for long enough time for migration to succeed."
 
-This error means that the binlogs to be migrated has been cleaned up and can only be restored by creating a new task.
+This error means that the binlogs to be migrated have been cleaned up and can only be restored by creating a new task.
 
 Ensure that the binlogs required for incremental migration exist. It is recommended to configure `expire_logs_days` to extend the duration of binlogs. Do not use `purge binary log` to clean up binlogs if it's needed by some migration job.
 
@@ -87,7 +87,7 @@ Failed to connect to the source database. It is recommended to check whether the
 
 ## Alerts
 
-You can subscribe alerts to be informed in time when an alert occurs. TiDB Cloud sends an email to the subscribers when an alert occurs. 
+You can subscribe to TiDB Cloud alert emails to be informed in time when an alert occurs.
 
 The following are alerts about Data Migration: 
 
@@ -97,9 +97,9 @@ The following are alerts about Data Migration:
 - “Data migration job has been paused for more than 6 hours during incremental migration” (If this alert occurs, you can resume the data migration job or ignore this alert directly.)      
 - “Replication lag is larger than 10 minutes and stilling increasing for more than 20 minutes”
 
-If you need help to address these alerts, contact the [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for consultation.
+If you need help to address these alerts, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for consultation.
 
-For more information about how to subscribe an alert, see [TiDB Cloud Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md).
+For more information about how to subscribe to alert emails, see [TiDB Cloud Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md).
 
 ## See also
 
