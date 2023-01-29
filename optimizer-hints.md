@@ -201,6 +201,30 @@ EXPLAIN SELECT * FROM t WHERE EXISTS (SELECT /*+ SEMI_JOIN_REWRITE() */ 1 FROM t
 
 From the preceding example, you can see that when using the `SEMI_JOIN_REWRITE()` hint, TiDB can select the execution method of IndexJoin based on the driving table `t1`.
 
+### SHUFFLE_JOIN(t1_name [, tl_name ...])
+
+The `SHUFFLE_JOIN(t1_name [, tl_name ...])` hint tells the optimizer to use the Shuffle Join algorithm for the specified table. This hint only takes effect in the MPP mode. For example:
+
+```sql
+SELECT /*+ SHUFFLE_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
+```
+
+> **Note:**
+>
+> Before using this hint, make sure that the current TiDB cluster supports the TiFlash MPP mode in the query. For details, see [Use the TiFlash MPP mode](/tiflash/use-tiflash-mpp-mode.md).
+
+### BROADCAST_JOIN(t1_name [, tl_name ...])
+
+The `BROADCAST_JOIN(t1_name [, tl_name ...])` hint tells the optimizer to use the Broadcast Join algorithm for the specified table. This hint only takes effect in the MPP mode. For example:
+
+```sql
+SELECT /*+ BROADCAST_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
+```
+
+> **Note:**
+>
+> Before using this hint, make sure that the current TiDB cluster supports the TiFlash MPP mode in the query. For details, see [Use the TiFlash MPP mode](/tiflash/use-tiflash-mpp-mode.md).
+
 ### NO_DECORRELATE()
 
 The `NO_DECORRELATE()` hint tells the optimizer not to try to perform decorrelation for the correlated subquery in the specified query block. This hint is applicable to the `EXISTS`, `IN`, `ANY`, `ALL`, `SOME` subqueries and scalar subqueries that contain correlated columns (that is, correlated subqueries).
@@ -287,6 +311,30 @@ The `STREAM_AGG()` hint tells the optimizer to use the stream aggregation algori
 select /*+ STREAM_AGG() */ count(*) from t1, t2 where t1.a > 10 group by t1.id;
 ```
 
+### MPP_1PHASE_AGG()
+
+The `MPP_1PHASE_AGG()` hint tells the optimizer to use the one-phase aggregation algorithm in all the aggregate functions in the specified query block. This algorithm is used in the MPP mode. For example:
+
+```sql
+SELECT /*+ MPP_1PHASE_AGG() */ count(*) FROM t1, t2 WHERE t1.a > 10 GROUP BY t1.id;
+```
+
+> **Note:**
+>
+> Before using this hint, make sure that the current TiDB cluster supports the TiFlash MPP mode in the query. For details, see [Use the TiFlash MPP mode](/tiflash/use-tiflash-mpp-mode.md).
+
+### MPP_2PHASE_AGG()
+
+The `MPP_2PHASE_AGG()` hint tells the optimizer to use the two-phase aggregation algorithm in all the aggregate functions in the specified query block. This algorithm is used in the MPP mode. For example:
+
+```sql
+SELECT /*+ MPP_2PHASE_AGG() */ count(*) FROM t1, t2 WHERE t1.a > 10 GROUP BY t1.id;
+```
+
+> **Note:**
+>
+> Before using this hint, make sure that the current TiDB cluster supports the TiFlash MPP mode in the query. For details, see [Use the TiFlash MPP mode](/tiflash/use-tiflash-mpp-mode.md).
+
 ### USE_INDEX(t1_name, idx1_name [, idx2_name ...])
 
 The `USE_INDEX(t1_name, idx1_name [, idx2_name ...])` hint tells the optimizer to use only the given index(es) for a specified `t1_name` table. For example, applying the following hint has the same effect as executing the `select * from t t1 use index(idx1, idx2);` statement.
@@ -327,6 +375,64 @@ The `IGNORE_INDEX(t1_name, idx1_name [, idx2_name ...])` hint tells the optimize
 ```sql
 select /*+ IGNORE_INDEX(t1, idx1, idx2) */ * from t t1;
 ```
+
+### KEEP_ORDER(t1_name, idx1_name [, idx2_name ...])
+
+The `KEEP_ORDER(t1_name, idx1_name [, idx2_name ...])` hint tells the optimizer to use only the given index(es) for a specified table and read the specified index(es) in order.
+
+> **Warning:**
+>
+> This hint might cause SQL statements to fail. It is recommended to test it first. If an error occurs during the test, remove the hint. If the test runs normally, you can continue using it.
+
+This hint is usually applied in the following scenario:
+
+```sql
+CREATE TABLE t(a INT, b INT, key(a), key(b));
+EXPLAIN SELECT /*+ KEEP_ORDER(t, a) */ a FROM t ORDER BY a LIMIT 10;
+```
+
+```sql
++----------------------------+---------+-----------+---------------------+-------------------------------+
+| id                         | estRows | task      | access object       | operator info                 |
++----------------------------+---------+-----------+---------------------+-------------------------------+
+| Limit_10                   | 10.00   | root      |                     | offset:0, count:10            |
+| └─IndexReader_14           | 10.00   | root      |                     | index:Limit_13                |
+|   └─Limit_13               | 10.00   | cop[tikv] |                     | offset:0, count:10            |
+|     └─IndexFullScan_12     | 10.00   | cop[tikv] | table:t, index:a(a) | keep order:true, stats:pseudo |
++----------------------------+---------+-----------+---------------------+-------------------------------+
+```
+
+The optimizer generates two types of plan for this query: `Limit + IndexScan(keep order: true)` and `TopN + IndexScan(keep order: false)`. When the `KEEP_ORDER` hint is used, the optimizer chooses the first plan that reads the index in order.
+
+> **Note:**
+>
+> - If the query itself does not need to read the index in order (that is, without a hint, the optimizer does not generate a plan that reads the index in order in any situation), when the `KEEP_ORDER` hint is used, the error `Can't find a proper physical plan for this query` occurs. In this case, you need to remove the corresponding `KEEP_ORDER` hint.
+> - The index on a partitioned table cannot be read in order, so do not use the `KEEP_ORDER` hint on the partitioned table and its related indexes.
+
+### NO_KEEP_ORDER(t1_name, idx1_name [, idx2_name ...])
+
+The `NO_KEEP_ORDER(t1_name, idx1_name [, idx2_name ...])` hint tells the optimizer to use only the given index(es) for a specified table and not read the specified index(es) in order. This hint is usually applied in the following scenario.
+
+The following example shows that the effect of the query statement is equivalent to `SELECT * FROM t t1 use index(idx1, idx2);`:
+
+```sql
+CREATE TABLE t(a INT, b INT, key(a), key(b));
+EXPLAIN SELECT /*+ NO_KEEP_ORDER(t, a) */ a FROM t ORDER BY a LIMIT 10;
+```
+
+```sql
++----------------------------+----------+-----------+---------------------+--------------------------------+
+| id                         | estRows  | task      | access object       | operator info                  |
++----------------------------+----------+-----------+---------------------+--------------------------------+
+| TopN_7                     | 10.00    | root      |                     | test.t.a, offset:0, count:10   |
+| └─IndexReader_14           | 10.00    | root      |                     | index:TopN_13                  |
+|   └─TopN_13                | 10.00    | cop[tikv] |                     | test.t.a, offset:0, count:10   |
+|     └─IndexFullScan_12     | 10000.00 | cop[tikv] | table:t, index:a(a) | keep order:false, stats:pseudo |
++----------------------------+----------+-----------+---------------------+--------------------------------+
+```
+
+和 `KEEP_ORDER` Hint 的示例相同，优化器对该查询会生成两类计划：`Limit + IndexScan(keep order: true)` 和 `TopN + IndexScan(keep order: false)`，当使用了 `NO_KEEP_ORDER` Hint，优化器会选择后一种不按照顺序读取索引的计划。
+The same as the example of `KEEP_ORDER` hint, the optimizer generates two types of plans for this query: `Limit + IndexScan(keep order: true)` and `TopN + IndexScan(keep order: false)`. When the `NO_KEEP_ORDER` hint is used, the optimizer will choose the latter plan to read the index out of order.
 
 ### AGG_TO_COP()
 
