@@ -145,7 +145,7 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 
 > **Note:**
 >
-> tiup-cluster also supports fixing the `scale-out yaml` file for a deployed cluster with the following command format:
+> tiup-cluster also supports repairing the `scale-out yaml` file for a deployed cluster with the following command format:
 >
 >```shell
 > tiup cluster check <cluster-name> scale-out.yaml --cluster --apply --user root [-p] [-i /home/root/.ssh/gcp_rsa]
