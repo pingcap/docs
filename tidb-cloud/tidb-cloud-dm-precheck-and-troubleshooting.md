@@ -11,6 +11,8 @@ This document describes how to resolve precheck errors, troubleshoot migration e
 
 This section describes the precheck errors and corresponding solutions during data migration. These errors are shown on the **Precheck** page when you [migrate data using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md).
 
+The solutions vary depending on the upstream database.
+
 ### Error message: Check whether mysql server_id has been greater than 0
 
 - Amazon Aurora MySQL or Amazon RDS: `server_id` is configured by default. You do not need to configure it.
