@@ -11,13 +11,13 @@ The state of a replication task represents the running status of the replication
 
 The states are described as follows:
 
-- `RUNNING`：the replication task runs normally and the checkpoint-ts proceeds normally.
-- `FAILED`: the replication task fails. Due to some unrecoverable errors, the replication task cannot resume and cannot be recovered. The changefeed in this state does not block GC operations.
 - `CREATING`: the replication task is being created.
-- `RESUMING`: the replication task is being resumed.
+- `RUNNING`：the replication task runs normally and the checkpoint-ts proceeds normally.
+- `EDITING`: the replication task is being edited.
 - `PAUSING`: the replication task is being paused.
 - `PAUSED`: the replication task is paused.
+- `RESUMING`: the replication task is being resumed.
 - `DELETING`: the replication task is being deleted.
 - `DELETED`: the replication task is deleted.
-- `EDITING`: the replication task is being edited.
 - `WARNING`: the replication task returns an error. The replication cannot continue due to some recoverable errors. The changefeed in this state keeps trying to resume until the state transfers to `Normal`. The changefeed in this state blocks GC operations.
+- `FAILED`: the replication task fails. Due to some unrecoverable errors, the replication task cannot resume and cannot be recovered. The changefeed in this state does not block GC operations.
