@@ -123,7 +123,7 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 
 - If a cluster is not deployed yet, you need to pass the [topology.yml](/tiup/tiup-cluster-topology-reference.md) file that is used to deploy the cluster. According to the content in this file, tiup-cluster connects to the corresponding machine to perform the check.
 - If a cluster is already deployed, you can use the `<cluster-name>` as the check object.
-- If you want to check the scale-out yaml for a deployed cluster, you can use both `<scale-out.yml>` and `<cluster-name>` as the check objects.
+- If you want to check the scale-out YAML file for an existing cluster, you can use both `<scale-out.yml>` and `<cluster-name>` as the check objects.
 
 > **Note:**
 >
@@ -145,7 +145,7 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 
 > **Note:**
 >
-> tiup-cluster also supports repairing the `scale-out yaml` file for a deployed cluster with the following command format:
+> `tiup-cluster check` also supports repairing the `scale-out.yaml` file for an existing cluster with the following command format:
 >
 >```shell
 > tiup cluster check <cluster-name> scale-out.yaml --cluster --apply --user root [-p] [-i /home/root/.ssh/gcp_rsa]
@@ -165,7 +165,7 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 > **Note:**
 >
 > - If the `tiup cluster check <cluster-name>` command is used, you must add the `--cluster` option: `tiup cluster check <cluster-name> --cluster`.
-> - tiup-cluster also supports checking the `scale-out yaml` file for a deployed cluster with the following command format:
+> - `tiup cluster check` also supports checking the `scale-out.yaml` file for an existing cluster with the following command format:
 >
 >   ```shell
 >   tiup cluster check <cluster-name> scale-out.yaml --cluster --user root [-p] [-i /home/root/.ssh/gcp_rsa]
