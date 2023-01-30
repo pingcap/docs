@@ -19,15 +19,13 @@ Note that some trivial logs are ignored. Only important logs are included in the
 [INFO] [info.go:49] ["Welcome to TiDB-Lightning"] [release-version=v5.4.0] [git-hash=55f3b24c1c9f506bd652ef1d162283541e428872] [git-branch=HEAD] [go-version=go1.16.6] [utc-build-time="2022-04-21 02:07:55"] [race-enabled=false]
 ```
 
-[info.go:49](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/version/build/info.go#L49):
-Print TiDB Lightning version information.
+[info.go:49](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/version/build/info.go#L49): Print TiDB Lightning version information.
 
 ```
 [INFO] [lightning.go:233] [cfg] [cfg="{\"id\":1650510440481957437,\"lightning\":{\"table-concurrency\":6,\"index-concurrency\":2,\"region-concurrency\":8,\"io-concurrency\":5,\"check-requirements\":true,\"meta-schema-name\":\"lightning_metadata\", ...
 ```
 
-[lightning.go:233](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/lightning.go#L233):
-Print TiDB Lightning config information.
+[lightning.go:233](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/lightning.go#L233): Print TiDB Lightning config information.
 
 ```
 [INFO] [lightning.go:312] ["load data source start"] 
@@ -39,8 +37,7 @@ Print TiDB Lightning config information.
 [INFO] [loader.go:289] ["[loader] file is filtered by file router"] [path=metadata]
 ```
 
-[loader.go:289](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/mydump/loader.go#L289): 
-Print data source files skipped based on [file router rules](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/mydump/loader.go#L139) defined in Ligthning [mydumper files config field](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/config/config.go#L452) or internal [default file router rules](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/mydump/router.go#L105) if [file rules are not defined](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/config/config.go#L847).
+[loader.go:289](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/mydump/loader.go#L289): Print data source files skipped based on [file router rules](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/mydump/loader.go#L139) defined in Ligthning [mydumper files config field](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/config/config.go#L452) or internal [default file router rules](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/mydump/router.go#L105) if [file rules are not defined](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/config/config.go#L847).
 
 ```
 [INFO] [lightning.go:315] ["load data source completed"] [takeTime=273.964µs] []
@@ -52,15 +49,13 @@ Print data source files skipped based on [file router rules](https://github.com/
 [INFO] [checkpoints.go:977] ["open checkpoint file failed, going to create a new one"] [path=/tmp/tidb_lightning_checkpoint.pb] [error="open /tmp/tidb_lightning_checkpoint.pb: no such file or directory"]
 ```
 
-[checkpoints.go:977](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/checkpoints/checkpoints.go#L977):
-If Lightning uses files to store checkpoints, and can't find any local checkpoint file, Lightning will create a new checkpoint.
+[checkpoints.go:977](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/checkpoints/checkpoints.go#L977): If Lightning uses files to store checkpoints, and can't find any local checkpoint file, Lightning will create a new checkpoint.
 
 ```
 [INFO] [restore.go:444] ["the whole procedure start"]
 ```
 
-[restore.go:444](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/restore/restore.go#L444):
-Start to import procedure.
+[restore.go:444](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/restore/restore.go#L444): Start to import procedure.
 
 ```
 [INFO] [restore.go:748] ["restore all schema start"]
@@ -78,23 +73,20 @@ Start to import procedure.
 [INFO] [check_info.go:680] ["datafile to check"] [db=sysbench] [table=sbtest1] [path=sysbench.sbtest1.000000000.sql]
 ```
 
-[check_info.go:680](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/restore/check_info.go#L680):
-As part of precheck, Lightning uses the first data file of each table to check if source data file and target cluster table schema are matched.
+[check_info.go:680](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/restore/check_info.go#L680): As part of precheck, Lightning uses the first data file of each table to check if source data file and target cluster table schema are matched.
 
 ```
 [INFO] [version.go:360] ["detect server version"] [type=TiDB] [version=5.4.0]
 ```
 
-[version.go:360](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/version/version.go#L360):
-Detect and print the current TiDB server version. To import data in local backend mode, TiDB with version higher than 4.0 is required.
-
-We also need to check server version for [detecting data confilcts](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/version/version.go#L224).
+[version.go:360](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/version/version.go#L360): Detect and print the current TiDB server version. To import data in local backend mode, TiDB with version higher than 4.0 is required. We also need to check server version for [detecting data confilcts](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/version/version.go#L224).
 
 ```
 [INFO] [check_info.go:995] ["sample file start"] [table=sbtest1]
 ```
 
-[check_info.go:995](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/restore/check_info.go#L995): As part of precheck, it estimates source data size to determine: 
+[check_info.go:995](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/restore/check_info.go#L995): As part of precheck, it estimates source data size to determine:
+
 - [the local disk has enough space if Lighting is in local backend mode](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/restore/check_info.go#L462); 
 - [the target cluster has enough space to store transformed kv pairs](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/restore/check_info.go#L102). 
 
@@ -117,15 +109,13 @@ It calculates the file size vs. kv pairs size ratio by sampling the first source
 [INFO] [restore.go:1683] ["switch to import mode"]
 ```
 
-[restore.go:1683](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/restore/restore.go#L1683):
-In local backend mode, it turns each TiKV node into import mode to speed up import process, but sacrifices its storage space. If it uses tidb backend mode, it does not need to switch TiKV to [import mode](https://docs.pingcap.com/tidb/stable/tidb-lightning-glossary#import-mode).
+[restore.go:1683](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/restore/restore.go#L1683): In local backend mode, it turns each TiKV node into import mode to speed up import process, but sacrifices its storage space. If it uses tidb backend mode, it does not need to switch TiKV to [import mode](https://docs.pingcap.com/tidb/stable/tidb-lightning-glossary#import-mode).
 
 ```
 [INFO] [restore.go:1462] ["restore table start"] [table=`sysbench`.`sbtest1`]
 ```
 
-[restore.go:1462](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/restore/restore.go#L1462):
-Start to restore table `sysbench`.`sbtest1`.  it concurrently restores multiple tables based on [index-concurrency](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/restore/restore.go#L1459) config. For each table, it concurrently restores data files in the table based on [region-concurrency](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/mydump/region.go#L157) config.
+[restore.go:1462](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/restore/restore.go#L1462): Start to restore table `sysbench`.`sbtest1`.  it concurrently restores multiple tables based on [index-concurrency](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/restore/restore.go#L1459) config. For each table, it concurrently restores data files in the table based on [region-concurrency](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/mydump/region.go#L157) config.
 
 ```
 [INFO] [table_restore.go:91] ["load engines and files start"] [table=`sysbench`.`sbtest1`]  
@@ -179,8 +169,8 @@ Start to restore table `sysbench`.`sbtest1`.  it concurrently restores multiple 
 [INFO] [restore.go:2482] ["restore file start"] [table=`sysbench`.`sbtest1`] [engineNumber=0] [fileIndex=0] [path=sysbench.sbtest1.000000000.sql:0] 
 ```
 
-[restore.go:2482](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/restore/restore.go#L2482): 
-This log may appear multiple times based on the importing table data size. Each log in this form indicates the start of restoring a chunk/table region. It concurrently [restores chunks](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/restore/table_restore.go#L386) based on internal [region workers](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/restore/table_restore.go#L532) defined by [region concurrency](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/restore/restore.go#L402). For each chunk, the restoring process is as follows:
+[restore.go:2482](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/restore/restore.go#L2482):  This log may appear multiple times based on the importing table data size. Each log in this form indicates the start of restoring a chunk/table region. It concurrently [restores chunks](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/restore/table_restore.go#L386) based on internal [region workers](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/restore/table_restore.go#L532) defined by [region concurrency](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/restore/restore.go#L402). For each chunk, the restoring process is as follows:
+
 1. [encodes sql into kv pairs](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/restore/restore.go#L2389)
 2. [writes kv pairs into data engine and index engine](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/restore/restore.go#L2179)
 
