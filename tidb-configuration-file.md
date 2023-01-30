@@ -190,7 +190,7 @@ The TiDB configuration file supports more options than command-line parameters. 
 + Specifies the SQL script to be executed when the TiDB cluster is started for the first time.
 + Default value: ""
 + All SQL statements in this script are executed with the highest privilege without any privilege check. If the specified SQL script fails to execute, the TiDB cluster might fail to start.
-+ This configuration item is used to perform such operations as modifying the value of a system variable, creating a user, or granting permissions.
++ This configuration item is used to perform such operations as modifying the value of a system variable, creating a user, or granting privileges.
 
 ### `enable-forwarding` <span class="version-mark">New in v5.0.0</span>
 
