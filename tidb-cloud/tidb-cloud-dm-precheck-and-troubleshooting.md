@@ -1,6 +1,6 @@
 ---
 title: Precheck Errors, Migration Errors, and Alerts for Data Migration
-summary: Learn how to resolve precheck errors, migration errors and alerts when using Data Migration.
+summary: Learn how to resolve precheck errors, migration errors, and alerts when using Data Migration.
 ---
 
 # Precheck Errors, Migration Errors, and Alerts for Data Migration
@@ -11,7 +11,7 @@ This document describes how to resolve precheck errors, troubleshoot migration e
 
 This section describes the precheck errors and corresponding solutions during data migration. These errors are shown on the **Precheck** page when you [migrate data using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md).
 
-The solutions vary depending on the upstream database.
+The solutions vary depending on your upstream database.
 
 ### Error message: Check whether mysql server_id has been greater than 0
 
@@ -77,7 +77,7 @@ This error means that the connection to the downstream TiDB cluster failed. Chec
 
 ### Error message: "Failed to connect to the TiDB cluster using the given user and password. Please make sure TiDB Cluster is up and can be connected to using the given user and password."
 
-Failed to connect to TiDB cluster. It is recommended to check whether the TiDB cluster is in a normal state (including `Available` and `Modifying`). You can connect with the username and password specified by the job. After confirming that the TiDB cluster is available, you can try to resume the task by clicking **Restart**.
+Failed to connect to the TiDB cluster. It is recommended to check whether the TiDB cluster is in a normal state (including `Available` and `Modifying`). You can connect with the username and password specified by the job. After confirming that the TiDB cluster is available, you can try to resume the task by clicking **Restart**.
 
 ### Error message: "TiDB cluster storage is not enough. Please increase the node storage of TiKV."
 
