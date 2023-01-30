@@ -75,7 +75,7 @@ This error means that the connection to the downstream TiDB cluster failed. Chec
 
 ### Error message: "Failed to connect to the TiDB cluster using the given user and password. Please make sure TiDB Cluster is up and can be connected to using the given user and password."
 
-Failed to connect to TiDB cluster. It is recommended to check whether the TiDB cluster is in `normal` state and you can connect with the username and password specified by the job. After confirming that the TiDB cluster is available, you can try to resume the task by clicking **Restart**.
+Failed to connect to TiDB cluster. It is recommended to check whether the TiDB cluster is in a normal state (including `Available` and `Modifying`). You can connect with the username and password specified by the job. After confirming that the TiDB cluster is available, you can try to resume the task by clicking **Restart**.
 
 ### Error message: "TiDB cluster storage is not enough. Please increase the node storage of TiKV."
 
