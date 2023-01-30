@@ -232,6 +232,119 @@ Therefore, when the query performance outweighs the insert and update performanc
 
 Expression indexes have the same syntax and limitations as in MySQL. They are implemented by creating indexes on generated virtual columns that are invisible, so the supported expressions inherit all [limitations of virtual generated columns](/generated-columns.md#limitations).
 
+## Multi-valued index
+
+> **Warning:**
+>
+> For the current version, this feature is still experimental and not recommended for production environments.
+
+Multi-valued index is a kind of secondary index defined on an array column. In an ordinary index, one index record corresponds to one data record (1:1). In a multi-valued index, multiple index records correspond to one data record (N:1). Multi-valued indexes are used to index JSON arrays. For example, a multi-valued index defined on the `zipcode` field will generate one index record for each element in the `zipcode` array.
+
+```json
+{
+    "user":"Bob",
+    "user_id":31,
+    "zipcode":[94477,94536]
+}
+```
+
+### Create a multi-valued index
+
+You can create a multi-valued index by using the `CAST(... AS ... ARRAY)` expression in the index definition, as creating an expression index.
+
+```sql
+CREATE TABLE customers (
+    id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name CHAR(10),
+    custinfo JSON,
+    INDEX zips((CAST(custinfo->'$.zipcode' AS UNSIGNED ARRAY)))
+);
+```
+
+You can define a multi-valued index as a unique index.
+
+```sql
+CREATE TABLE customers (
+    id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name CHAR(10),
+    custinfo JSON,
+    UNIQUE INDEX zips( (CAST(custinfo->'$.zipcode' AS UNSIGNED ARRAY)))
+);
+```
+
+When a multi-valued index is defined as a unique index, an error is reported if you try to insert duplicate data.
+
+```sql
+mysql> INSERT INTO customers VALUES (1, 'pingcap', '{"zipcode": [1,2]}');
+Query OK, 1 row affected (0.01 sec)
+mysql> INSERT INTO customers VALUES (1, 'pingcap', '{"zipcode": [2,3]}');
+ERROR 1062 (23000): Duplicate entry '2' for key 'customers.zips'
+```
+
+The same record can have duplicate values, but when different records have duplicate values, an error is reported.
+
+```sql
+-- Insert successfully
+INSERT INTO t1 VALUES('[1,1,2]');
+INSERT INTO t1 VALUES('[3,3,3,4,4,4]');
+
+-- Insert failed
+INSERT INTO t1 VALUES('[1,2]');
+INSERT INTO t1 VALUES('[2,3]');
+```
+
+You can also define a multi-valued index as a compound index:
+
+```sql
+CREATE TABLE customers (
+    id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name CHAR(10),
+    custinfo JSON,
+    INDEX zips(name, (CAST(custinfo->'$.zipcode' AS UNSIGNED ARRAY)))
+);
+```
+
+When a multi-valued index is defined as a composite index, the multi-valued part can appear in any position, but only once.
+
+```sql
+CREATE TABLE customers (
+    id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name CHAR(10),
+    custinfo JSON,
+    INDEX zips(name, (CAST(custinfo->'$.zipcode' AS UNSIGNED ARRAY)), (CAST(custinfo->'$.zipcode' AS UNSIGNED ARRAY)))
+);
+ERROR 1235 (42000): This version of TiDB doesn't yet support 'more than one multi-valued key part per index'.
+```
+
+The written data must match the type defined by the multi-valued index; otherwise, the data write fails:
+
+```sql
+-- All elements in the zipcode field must be the UNSIGNED type.
+mysql> INSERT INTO customers VALUES (1, 'pingcap', '{"zipcode": [-1]}');
+ERROR 3752 (HY000): Value is out of range for expression index 'zips' at row 1
+
+mysql> INSERT INTO customers VALUES (1, 'pingcap', '{"zipcode": ["1"]}'); -- Incompatible with MySQL
+ERROR 3903 (HY000): Invalid JSON value for CAST for expression index 'zips'
+
+mysql> INSERT INTO customers VALUES (1, 'pingcap', '{"zipcode": [1]}');
+Query OK, 1 row affected (0.00 sec)
+```
+
+### Use a multi-valued index
+
+See [Index Selection - Use multi-valued indexes](/choose-index.md#use-a-multi-valued-index) for more details.
+
+### 特性与限制
+
+- 如果是空 JSON 数组，则不会有对应的索引记录。
+- `CAST(... AS ... ARRAY)` 中的目标类型不能是 `BINARY`，`JSON`，`YEAR`，`FLOAT`，`DOUBLE`，`DECIMAL`。其中源类型必须是 JSON。
+- 无法使用多值索引进行排序。
+- 只允许在 JSON 数组上建立多值索引。
+- 多值索引不可以为主键或外键。
+- 多值索引使用额外的存储空间为：平均每行数组元素个数 * 普通二级索引使用空间。
+- 相比于普通索引， DML 会对多值索引产生更多的索引记录的修改，因此多值索引会带来比普通索引更大的性能影响。
+- 由于多值索引是一种特殊的表达式索引，因为具有表达式索引的限制。
+
 ## Invisible index
 
 Invisible indexes are indexes that are ignored by the query optimizer:
@@ -254,6 +367,7 @@ The system variables associated with the `CREATE INDEX` statement are `tidb_ddl_
 * Adding the primary key of the `CLUSTERED` type to a table is not supported. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
 * Expression indexes are incompatible with views. When a query is executed using a view, the expression index cannot be used at the same time.
 * Expression indexes have compatibility issues with bindings. When the expression of an expression index has a constant, the binding created for the corresponding query expands its scope. For example, suppose that the expression in the expression index is `a+1`, and the corresponding query condition is `a+1 > 2`. In this case, the created binding is `a+? > ?`, which means that the query with the condition such as `a+2 > 2` is also forced to use the expression index and results in a poor execution plan. In addition, this also affects the baseline capturing and baseline evolution in SQL Plan Management (SPM).
+* 多值索引写入的数据必须与定义类型完全匹配，否则数据写入失败。详见[创建多值索引](/sql-statements/sql-statement-create-index.md#创建多值索引)。
 
 ## See also
 
