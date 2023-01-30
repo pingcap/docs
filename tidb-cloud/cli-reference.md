@@ -89,9 +89,9 @@ An example output is as follows:
 Current profile has been changed to default
 ```
 
-### Open profile config file with editor
+### Edit the config file
 
-Use [`ticloud config use`](tidb-cloud/ticloud-config-edit.md) to open config file with editor.
+Use [`ticloud config edit`](tidb-cloud/ticloud-config-edit.md) to open the config file for editing.
 
 ### Delete a user profile
 

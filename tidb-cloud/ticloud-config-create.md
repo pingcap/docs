@@ -5,7 +5,7 @@ Summary: The reference of `ticloud config create`.
 
 # ticloud config create
 
-Create a [user profile](/tidb-cloud/cli-reference.md#user-profile) to store TiDB Cloud API Key settings:
+Create a [user profile](/tidb-cloud/cli-reference.md#user-profile) to store user profile settings:
 
 ```shell
 ticloud config create [flags]
