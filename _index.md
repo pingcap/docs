@@ -135,7 +135,7 @@ hide_commit: true
 
 [TiDB Command-line Flags](https://docs.pingcap.com/tidb/dev/command-line-flags-for-tidb-configuration)
 
-[TiDB Control](https://docs.pingcap.com/tidb/dev/tidb-control)
+[TiDB Control](https://docs.pingcap.com/tidb/dev/tidb-control) 
 
 [System Variables](https://docs.pingcap.com/tidb/dev/system-variables)
 
