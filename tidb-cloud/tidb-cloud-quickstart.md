@@ -17,11 +17,11 @@ TiDB Cloud [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-
 
 1. If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/free-trial) to sign up for an account.
 
-    For Google or GitHub users, you can also sign up with your Google or GitHub account. Your email address and password will be managed by Google or GitHub and cannot be changed using the TiDB Cloud console.
+    You can either sign up with email and password so that you can manage your password using TiDB Cloud, or choose your Google, GitHub, or Microsoft account for single sign-on (SSO) to TiDB Cloud.
 
 2. [Log in](https://tidbcloud.com/) to your TiDB Cloud account.
 
-    The [**Clusters**](https://tidbcloud.com/console/clusters) list page is displayed by default.
+    The [**Clusters**](https://tidbcloud.com/console/clusters) page is displayed by default.
 
 3. For new sign-up users, TiDB Cloud creates a default Serverless Tier cluster `Cluster0` for you automatically.
 

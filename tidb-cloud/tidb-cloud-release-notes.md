@@ -8,6 +8,12 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2023.
 
+## January 18, 2023
+
+**General changes**
+
+* Support [signing up](https://tidbcloud.com/free-trial) TiDB Cloud with a Microsoft account.
+
 ## January 17, 2023
 
 **General changes**
