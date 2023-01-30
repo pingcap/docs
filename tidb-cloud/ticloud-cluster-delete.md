@@ -42,7 +42,6 @@ In non-interactive mode, you need to manually enter required flags. In interacti
 | -h, --help              | Gets the help information for this command                   | No       | Works in both non-interactive and interactive modes. |
 | -p, --project-id string | The project ID of the cluster to be deleted | Yes      | Only works in non-interactive mode.                   |
 
-
 ## Inherited flags
 
 | Flag                 | Description                                                                               | Required | Note                                                                                                                    |
