@@ -63,3 +63,20 @@ To create a changefeed, refer to the tutorials:
 ## Changefeed billing
 
 To learn the billing for changefeeds in TiDB Cloud, see [Changefeed billing](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md).
+
+## Changefeed states
+
+The state of a replication task represents the running state of the replication task. During the running process, replication tasks might fail with errors, be manually paused, resumed, or reach the specified `TargetTs`. These behaviors can lead to changes of the replication task state. 
+
+The states are described as follows: 
+
+- `CREATING`: the replication task is being created.
+- `RUNNING`: the replication task runs normally and the checkpoint-ts proceeds normally.
+- `EDITING`: the replication task is being edited.
+- `PAUSING`: the replication task is being paused.
+- `PAUSED`: the replication task is paused.
+- `RESUMING`: the replication task is being resumed.
+- `DELETING`: the replication task is being deleted.
+- `DELETED`: the replication task is deleted.
+- `WARNING`: the replication task returns a warning. The replication cannot continue due to some recoverable errors. The changefeed in this state keeps trying to resume until the state transfers to `RUNNING`. The changefeed in this state blocks GC operations.
+- `FAILED`: the replication task fails. Due to some unrecoverable errors, the replication task cannot resume and cannot be recovered. The changefeed in this state does not block GC operations.
