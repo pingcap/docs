@@ -22,6 +22,7 @@ This feature helps you migrate your database and its ongoing changes to TiDB Clo
     - AWS Tokyo (ap-northeast-1)
     - AWS Frankfurt (eu-central-1)
     - AWS Seoul (ap-northeast-2)
+
 - You can create up to 200 migration jobs for each organization. To create more migration jobs, you need to [file a support ticket](/tidb-cloud/tidb-cloud-support.md).
 
 - The system databases will be filtered out and not migrated to TiDB Cloud even if you select all of the databases to migrate. That is, `mysql`, `information_schema`, `information_schema`, and `sys` will not be migrated using this feature.
@@ -100,9 +101,27 @@ Before creating a migration job, set up the network connection according to your
 
 - If you use public IP (this is, standard connection) for network connection, make sure that the upstream database can be connected through the public network.
 
-- If you use VPC Peering, set it up according to [Add VPC peering requests](/tidb-cloud/set-up-vpc-peering-connections.md#step-1-add-vpc-peering-requests).
-
 - If you use AWS PrivateLink, set it up according to [Set Up Private Endpoint Connections](/tidb-cloud/set-up-private-endpoint-connections.md).
+
+- If you use VPC Peering, see the following instructions to configure the network.
+
+    <details>
+    <summary> Set up VPC Peering</summary>
+
+    If your MySQL service is in an AWS VPC, take the following steps:
+
+    1. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of the MySQL service and your TiDB cluster.
+
+    2. Modify the inbound rules of the security group that the MySQL service is associated with. 
+
+        You must add [the CIDR of the region where your TiDB Cloud cluster is located](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr) to the inbound rules. Doing so allows the traffic to flow from your TiDB cluster to the MySQL instance.
+
+    3. If the MySQL URL contains a DNS hostname, you need to allow TiDB Cloud to be able to resolve the hostname of the MySQL service. 
+
+        1. Follow the steps in [Enable DNS resolution for a VPC peering connection](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html#vpc-peering-dns).
+        2. Enable the **Accepter DNS resolution** option.
+
+    </details>
 
 ### Enable binlogs
 
@@ -190,6 +209,8 @@ On the **Precheck** page, you can view the precheck results. If the precheck fai
 
 If there are only warnings on some check items, you can evaluate the risk and consider whether to ignore the warnings. If all warnings are ignored, the migration job will automatically go on to the next step.
 
+For more information about errors and solutions, see [Precheck errors and solutions](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#precheck-errors-and-solutions).
+
 For more information about precheck items, see [Migration Task Precheck](https://docs.pingcap.com/tidb/stable/dm-precheck).
 
 If all check items show **Pass**, click **Next**.
@@ -210,32 +231,4 @@ If a migration job has failed, you can restart it after solving the problem.
 
 You can delete a migration job in any status.
 
-## Troubleshooting
-
-If you encounter any problems during the migration, you can refer to the following solutions.
-
-- Error message: "The required binary log for migration no longer exists on the source database. Please make sure binary log files are kept for long enough time for migration to succeed."
-
-    This error means that the binlogs to be migrated has been cleaned up and can only be restored by creating a new task.
-
-    Ensure that the binlogs required for incremental migration exist. It is recommended to configure `expire_logs_days` to extend the duration of binlogs. Do not use `purge binary log` to clean up binlogs if it's needed by some migration job.
-
-- Error message: "Failed to connect to the source database using given parameters. Please make sure the source database is up and can be connected using the given parameters."
-
-    This error means that the connection to the source database failed. Check whether the source database is started and can be connected to using the specified parameters. After confirming that the source database is available, you can try to recover the task by clicking **Restart**.
-
-- The migration task is interrupted and contains the error "driver: bad connection" or "invalid connection"
-
-    This error means that the connection to the downstream TiDB cluster failed. Check whether the downstream TiDB cluster is in `normal` state and can be connected with the username and password specified by the job. After confirming that the downstream TiDB cluster is available, you can try to resume the task by clicking **Restart**.
-
-- Error message: "Failed to connect to the TiDB cluster using the given user and password. Please make sure TiDB Cluster is up and can be connected to using the given user and password."
-
-    Failed to connect to TiDB cluster. It is recommended to check whether the TiDB cluster is in `normal` state and you can connect with the username and password specified by the job. After confirming that the TiDB cluster is available, you can try to resume the task by clicking **Restart**.
-
-- Error message: "TiDB cluster storage is not enough. Please increase the node storage of TiKV."
-
-    The TiDB cluster storage is running low. It is recommended to [increase the TiKV node storage](/tidb-cloud/scale-tidb-cluster.md#increase-node-storage) and then resume the task by clicking **Restart**.
-
-- Error message: "Failed to connect to the source database. Please check whether the database is available or the maximum connections have been reached."
-
-    Failed to connect to the source database. It is recommended to check whether the source database is started, the number of database connections has not reached the upper limit, and you can connect using the parameters specified by the job. After confirming that the source database is available, you can try to resume the job by clicking **Restart**.
+If you encounter any problems during the migration, see [Migration errors and solutions](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions).
