@@ -5,7 +5,7 @@ hide_sidebar: true
 hide_commit: true
 ---
 
-<LearningPathContainer platform="tidb-cloud" title="TiDB クラウド" subTitle="TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings everything great about TiDB to your cloud. Find the guide, samples, and references you need to use TiDB Cloud.">
+<LearningPathContainer platform="tidb-cloud" title="TiDB Cloud" subTitle="TiDB Cloudは、完全に管理された Database-as-a-Service (DBaaS) であり、TiDB のすべての優れた機能をクラウドにもたらします。 TiDB Cloudを使用するために必要なガイド、サンプル、リファレンスを見つけてください。">
 
 <LearningPath label="Learn" icon="cloud1">
 
