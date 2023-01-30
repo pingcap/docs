@@ -140,7 +140,7 @@
                 -   [パーティションのプルーニング](/partition-pruning.md)
                 -   [TopN とリミット プッシュ ダウン](/topn-limit-push-down.md)
                 -   [結合したテーブルの再配置](/join-reorder.md)
-            -   物理的な最適化
+            -   物理的最適化
                 -   [概要](/sql-physical-optimization.md)
                 -   [インデックスの選択](/choose-index.md)
                 -   [統計](/statistics.md)
@@ -379,6 +379,7 @@
                 -   [DMアーキテクチャの概要](/dm/dm-overview.md)
                 -   [DMワーカー](/dm/dm-worker-intro.md)
                 -   [中継ログ](/dm/relay-log.md)
+                -   [DDL 処理](/dm/dm-ddl-compatible.md)
             -   [コマンドライン フラグ](/dm/dm-command-line-flags.md)
             -   Configuration / コンフィグレーション
                 -   [概要](/dm/dm-config-overview.md)
@@ -391,7 +392,7 @@
         -   セキュリティ
             -   [DM 接続の TLS を有効にする](/dm/dm-enable-tls.md)
             -   [自己署名証明書の生成](/dm/dm-generate-self-signed-certificates.md)
-        -   [指標のモニタリング](/dm/monitor-a-dm-cluster.md)
+        -   [指標の監視](/dm/monitor-a-dm-cluster.md)
         -   [アラート ルール](/dm/dm-alert-rules.md)
         -   [エラーコード](/dm/dm-error-handling.md#handle-common-errors)
         -   [FAQ](/dm/dm-faq.md)
