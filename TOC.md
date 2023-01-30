@@ -378,6 +378,7 @@
         - [DM Architecture Overview](/dm/dm-overview.md)
         - [DM-worker](/dm/dm-worker-intro.md)
         - [Relay Log](/dm/relay-log.md)
+        - [DDL Handling](/dm/dm-ddl-compatible.md)
       - [Command-line Flags](/dm/dm-command-line-flags.md)
       - Configuration
         - [Overview](/dm/dm-config-overview.md)
