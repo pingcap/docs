@@ -5,13 +5,13 @@ Summary: The reference of `ticloud config delete`.
 
 # ticloud config delete
 
-Delete a [user profile](tidb-cloud/cli-reference.md#user-profile)
+Delete a [user profile](tidb-cloud/cli-reference.md#user-profile):
 
 ```shell
 ticloud config delete <profile-name> [flags]
 ```
 
-Or use the following alias command
+Or use the following alias command:
 
 ```shell
 ticloud config rm <profile-name> [flags]
@@ -29,15 +29,15 @@ ticloud config delete <profile-name>
 
 | Flag       | Description                           |
 |------------|---------------------------------------|
-| --force    | Delete a profile without confirmation |
-| -h, --help | Get the help information              |
+| --force    | Deletes a profile without confirmation |
+| -h, --help | Gets the help information for this command             |
 
 ## Inherited flags
 
-| Flag                 | Description                                   | Required | Notes                                                                                                                    |
+| Flag                 | Description                                   | Required | Note                                                                                                                    |
 |----------------------|-----------------------------------------------|----------|--------------------------------------------------------------------------------------------------------------------------|
-| --no-color           | Disable color in output.                      | No       | Only works in the non-interactive mode. In the interactive mode, disabling color might not work with some UI components. |
-| -P, --profile string | The active user profile used in this command. | No       | Work in both non-interactive and interactive modes.                                                                      |
+| --no-color           | Disables color in output.                      | No       | Only works in the non-interactive mode. In the interactive mode, disabling color might not work with some UI components. |
+| -P, --profile string | Specifies the active [user profile](tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Works in both non-interactive and interactive modes.                                                                      |
 
 ## Feedback
 

@@ -9,7 +9,7 @@ When creating a private cloud, usually, you need to use an isolated network envi
 
 ## TiUP `mirror` overview
 
-Execute the following command to get the help information of the `mirror` command:
+Execute the following command to Gets the help information for this commandof the `mirror` command:
 
 {{< copyable "shell-regular" >}}
 

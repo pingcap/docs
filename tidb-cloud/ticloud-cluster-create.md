@@ -5,11 +5,15 @@ Summary: The reference of `ticloud cluster create`.
 
 # ticloud cluster create
 
-Create one cluster in the specified project
+Create a cluster:
 
 ```shell
 ticloud cluster create [flags]
 ```
+
+> **Note:**
+>
+> Currently, you can only create a [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) cluster using the preceding command.
 
 ## Examples
 
@@ -29,22 +33,22 @@ ticloud cluster create --project-id <project-id> --cluster-name <cluster-name> -
 
 In non-interactive mode, you need to manually enter required flags. In interactive mode, you can just follow CLI prompts to fill in them.
 
-| Flag                    | Description                                                 | Required | Notes                             |
+| Flag                    | Description                                                 | Required | Note                             |
 |-------------------------|-------------------------------------------------------------|----------|-----------------------------------|
-| --cloud-provider string | Cloud provider, one of [AWS]                                | Yes      | Only work in non-interactive mode |
-| --cluster-name string   | Name of the cluster to be created                           | Yes      | Only work in non-interactive mode | 
-| --cluster-type string   | Cluster type. Currently, only "SERVERLESS" is supported.    | Yes      | Only work in non-interactive mode | 
-| -h, --help              | Get the help information                                    | No       |                                   |
-| -p, --project-id string | The ID of the project, in which the cluster will be created | Yes      | Only work in non-interactive mode | 
-| -r, --region string     | Cloud region                                                | Yes      | Only work in non-interactive mode | 
-| --root-password string  | The root password of the cluster                            | Yes      | Only work in non-interactive mode | 
+| --cloud-provider string | Cloud provider (Currently, only `AWS` is supported)                                | Yes      | Only works in non-interactive mode. |
+| --cluster-name string   | Name of the cluster to be created                           | Yes      | Only works in non-interactive mode. |
+| --cluster-type string   | Cluster type (Currently, only `SERVERLESS` is supported)    | Yes      | Only works in non-interactive mode. |
+| -h, --help              | Get help information for this command   | No       | Works in both non-interactive and interactive modes     |
+| -p, --project-id string | The ID of the project, in which the cluster will be created | Yes      | Only works in non-interactive mode. |
+| -r, --region string     | Cloud region                                                | Yes      | Only works in non-interactive mode. |
+| --root-password string  | The root password of the cluster                            | Yes      | Only works in non-interactive mode. |
 
 ## Inherited flags
 
-| Flag                 | Description                                                                               | Required | Notes                                                                                                                    |
+| Flag                 | Description                                                                               | Required | Note                                                                                                                    |
 |----------------------|-------------------------------------------------------------------------------------------|----------|--------------------------------------------------------------------------------------------------------------------------|
-| --no-color           | Disable color in output.                                                                  | No       | Only works in the non-interactive mode. In the interactive mode, disabling color might not work with some UI components. |
-| -P, --profile string | The active [user profile](tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Work in both non-interactive and interactive modes.                                                                      |
+| --no-color           | Disables color in output.                                                                  | No       | Only works in the non-interactive mode. In the interactive mode, disabling color might not work with some UI components. |
+| -P, --profile string | Specifies the active [user profile](tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Works in both non-interactive and interactive modes.                                                                      |
 
 ## Feedback
 

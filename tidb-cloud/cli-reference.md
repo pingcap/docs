@@ -5,58 +5,68 @@ Summary: Provides an overview of TiDB Cloud CLI.
 
 # TiDB Cloud CLI Reference
 
-TiDB Cloud CLI is a command line interface, which allows you to operate TiDB Cloud from your terminal with a few lines of commands. In TiDB Cloud CLI, you can easily manage your TiDB Cloud clusters, import data to your clusters, and perform more operations. 
+TiDB Cloud CLI is a command line interface, which allows you to operate TiDB Cloud from your terminal with a few lines of commands. In the TiDB Cloud CLI, you can easily manage your TiDB Cloud clusters, import data to your clusters, and perform more operations.
 
 ## Before you begin
 
-Make sure to first [set up your TiDB Cloud CLI environment](/tidb-cloud/get-started-with-cli.md). Once you installed the `ticloud` CLI, you can use it to manage your TiDB Cloud clusters from the command lines.
+Make sure to first [set up your TiDB Cloud CLI environment](/tidb-cloud/get-started-with-cli.md). Once you have installed the `ticloud` CLI, you can use it to manage your TiDB Cloud clusters from the command lines.
 
 ## Available commands
 
-The following table lists the available commands for the TiDB Cloud CLI. 
-To start up the `ticloud` CLI in your terminal, you can use `ticloud [command] [subcommand]`. For users using [TiUP](https://docs.pingcap.com/tidb/stable/tiup-overview), use `tiup cloud [command] [subcommand]` instead.
+The following table lists the available commands for the TiDB Cloud CLI.
+
+To use the `ticloud` CLI in your terminal, you can use `ticloud [command] [subcommand]`. For users using [TiUP](https://docs.pingcap.com/tidb/stable/tiup-overview), use `tiup cloud [command] [subcommand]` instead.
 
 | Command    | Subcommands                                                | Description                                                                                              |
 |------------|------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
-| cluster    | create, delete, describe, list                             | Manage clusters                                                                                          | 
-| completion | bash, fish, powershell, zsh                                | Generate completion script for specified shell                                                           | 
-| config     | create, delete, describe, edit, list, set, use             | Configure settings in a user profile.                                                                    | 
-| help       | cluster, completion, config, help, import, project, update | View help for any command                                                                                | 
+| cluster    | create, delete, describe, list                             | Manage clusters                                                                                          |
+| completion | bash, fish, powershell, zsh                                | Generate completion script for specified shell                                                           |
+| config     | create, delete, describe, edit, list, set, use             | Configure user profiles.                                                                    |
+| help       | cluster, completion, config, help, import, project, update | View help for any command                                                                                |
 | import     | cancel, describe, list, start                              | Manage [import](/tidb-cloud/tidb-cloud-migration-overview.md#import-data-from-files-to-tidb-cloud) tasks |
-| project    | list                                                       | Manage projects                                                                                          | 
-| update     |                                                            | Update the CLI to the latest version                                                                     | 
+| project    | list                                                       | Manage projects                                                                                          |
+| update     |                                                            | Update the CLI to the latest version                                                                     |
 
 ## Command modes
 
-The TiDB Cloud CLI provides two modes for some commands for easy use: interactive mode and non-interactive mode.
+The TiDB Cloud CLI provides the following two modes for some commands for easy use:
 
-- In the interactive mode, the CLI prompts you for input when you run a command, such as `ticloud config create`.
-- In the non-interactive mode, you must provide all the required arguments and flags when running a command, such as `ticloud config create --profile-name <profile-name> --public-key <public-key> --private-key <private-key>`
+- Interactive mode
+
+    In this mode, you can run a command without flags (such as `ticloud config create`), and the CLI prompts you for input.
+
+- Non-interactive mode
+
+    In this mode, you must provide all the required arguments and flags when running a command, such as `ticloud config create --profile-name <profile-name> --public-key <public-key> --private-key <private-key>`
 
 ## User profile
 
-A user profile is a collection of properties associated with a user. In order to execute commands, you must configure one user profile first.
+For the TiDB Cloud CLI, a user profile is a collection of properties associated with a user, including the profile name, public key, and private key. To use TiDB Cloud CLI, you must create a user profile first.
 
-### Create a user profile 
+### Create a user profile
 
-Use [`ticloud config create`](tidb-cloud/ticloud-config-create.md) to create a new user profile.
+Use [`ticloud config create`](tidb-cloud/ticloud-config-create.md) to create a user profile.
 
 ### List all user profiles
 
-Use [`ticloud config list`](tidb-cloud/ticloud-config-list.md) to list all user profiles. The output is as follows:
+Use [`ticloud config list`](tidb-cloud/ticloud-config-list.md) to list all user profiles.
+
+An example output is as follows:
 
 ```
 Profile Name
 default (active)
-dev     
+dev
 staging
 ```
 
-The user profile `defalut` is currently active.
+In this example output, the user profile `defalut` is currently active.
 
-### Describe one user profile
+### Describe a user profile
 
-If you want to get the properties in one user profile, use [`ticloud config describe`](tidb-cloud/ticloud-config-describe.md)
+Use [`ticloud config describe`](tidb-cloud/ticloud-config-describe.md) to get the properties of a user profile.
+
+An example output is as follows:
 
 ```json
 {
@@ -65,34 +75,36 @@ If you want to get the properties in one user profile, use [`ticloud config desc
 }
 ```
 
-### Set properties in user profile
+### Set properties in a user profile
 
-Use [`ticloud config set`](tidb-cloud/ticloud-config-set.md) to set properties in the user profile.
+Use [`ticloud config set`](tidb-cloud/ticloud-config-set.md) to set properties in a user profile.
 
 ### Switch to another user profile
 
-Use [`ticloud config use`](tidb-cloud/ticloud-config-use.md) to switch to another user profile. The output is as follows:
+Use [`ticloud config use`](tidb-cloud/ticloud-config-use.md) to switch to another user profile.
+
+An example output is as follows:
 
 ```
 Current profile has been changed to default
 ```
 
-### Open config file with editor
+### Open profile config file with editor
 
-Use [`ticloud config use`](tidb-cloud/ticloud-config-edit.md) to open config file with editor. 
+Use [`ticloud config use`](tidb-cloud/ticloud-config-edit.md) to open config file with editor.
 
-### Delete one user profile
+### Delete a user profile
 
-Use [`ticloud config delete`](tidb-cloud/ticloud-config-delete.md) to delete the user profile.
+Use [`ticloud config delete`](tidb-cloud/ticloud-config-delete.md) to delete a user profile.
 
 ## Global flags
 
-The following table lists the global flags for the TiDB Cloud CLI. 
+The following table lists the global flags for the TiDB Cloud CLI.
 
-| Flag                 | Description                                   | Required | Extra                                                                                                                    |
+| Flag                 | Description                                   | Required | Note                                                                                                                    |
 |----------------------|-----------------------------------------------|----------|--------------------------------------------------------------------------------------------------------------------------|
-| --no-color           | Disable color in output.                      | No       | Only works in the non-interactive mode. In the interactive mode, disabling color might not work with some UI components. |
-| -P, --profile string | The active user profile used in this command. | No       | Work in both non-interactive and interactive modes.                                                                      |
+| --no-color           | Disables color in output.                      | No       | Only works in the non-interactive mode. In the interactive mode, disabling color might not work with some UI components. |
+| -P, --profile string | Specifies the active user profile used in this command. | No       | Works in both non-interactive and interactive modes.                                                                      |
 
 ## Feedback
 

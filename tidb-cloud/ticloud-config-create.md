@@ -5,21 +5,25 @@ Summary: The reference of `ticloud config create`.
 
 # ticloud config create
 
-Configure a [user profile](tidb-cloud/cli-reference.md#user-profile) to store settings
+Create a [user profile](/tidb-cloud/cli-reference.md#user-profile) to store TiDB Cloud API Key settings:
 
 ```shell
 ticloud config create [flags]
 ```
 
+> **Note:**
+>
+> Before creating a user profile, you need to [create a TiDB Cloud API Key](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management).
+
 ## Examples
 
-To configure a new user profile in interactive mode:
+Create a user profile in interactive mode:
 
 ```shell
 ticloud config create
 ```
 
-To configure a new user profile in non-interactive mode:
+Create a user profile in non-interactive mode:
 
 ```shell
 ticloud config create --profile-name <profile-name> --public-key <public-key> --private-key <private-key>
@@ -29,19 +33,19 @@ ticloud config create --profile-name <profile-name> --public-key <public-key> --
 
 In non-interactive mode, you need to manually enter required flags. In interactive mode, you can just follow CLI prompts to fill in them.
 
-| Flag                  | Description                                   | Required | Notes                             |
+| Flag                  | Description                                   | Required | Note                             |
 |-----------------------|-----------------------------------------------|----------|-----------------------------------|
-| -h, --help            | Get the help information                      | No       |                                   |
-| --private-key string  | The private key of the TiDB Cloud API         | Yes      | Only work in non-interactive mode |
-| --profile-name string | The name of the profile, must not contain '.' | Yes      | Only work in non-interactive mode |
-| --public-key string   | The public key of the TiDB Cloud API          | Yes      | Only work in non-interactive mode |
+| -h, --help            | Gets the help information for this command                     | No       | Works in both non-interactive and interactive modes. |
+| --private-key string  | The private key of the TiDB Cloud API         | Yes      | Only works in non-interactive mode. |
+| --profile-name string | The name of the profile, which must not contain `.` | Yes      | Only works in non-interactive mode. |
+| --public-key string   | The public key of the TiDB Cloud API          | Yes      | Only works in non-interactive mode. |
 
 ## Inherited flags
 
-| Flag                 | Description                                  | Required | Notes                                                                                                                    |
+| Flag                 | Description                                  | Required | Note                                                                                                                    |
 |----------------------|----------------------------------------------|----------|--------------------------------------------------------------------------------------------------------------------------|
-| --no-color           | Disable color in output.                     | No       | Only works in the non-interactive mode. In the interactive mode, disabling color might not work with some UI components. |
-| -P, --profile string | The active user profile used in this command. | No       | Work in both non-interactive and interactive modes.                                                                      |
+| --no-color           | Disables color in output.                     | No       | Only works in the non-interactive mode. In the interactive mode, disabling color might not work with some UI components. |
+| -P, --profile string | Specifies the active [user profile](tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Works in both non-interactive and interactive modes.                                                                      |
 
 ## Feedback
 

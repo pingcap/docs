@@ -5,7 +5,7 @@ Summary: The reference of `ticloud update`.
 
 # ticloud update
 
-Update the CLI to the latest version
+Update the TiDB Cloud CLI to the latest version:
 
 ```shell
 ticloud update [flags]
@@ -13,7 +13,7 @@ ticloud update [flags]
 
 ## Examples
 
-Update to the latest version:
+Update the TiDB Cloud CLI to the latest version:
 
 ```shell
 ticloud update
@@ -23,14 +23,14 @@ ticloud update
 
 | Flag       | Description              |
 |------------|--------------------------|
- | -h, --help | Get the help information |
+ | -h, --help | Gets the help information for this command |
 
 ## Inherited flags
 
-| Flag                 | Description                                                                               | Required | Notes                                                                                                                    |
+| Flag                 | Description                                                                               | Required | Note                                                                                                                    |
 |----------------------|-------------------------------------------------------------------------------------------|----------|--------------------------------------------------------------------------------------------------------------------------|
-| --no-color           | Disable color in output.                                                                  | No       | Only works in the non-interactive mode. In the interactive mode, disabling color might not work with some UI components. |
-| -P, --profile string | The active [user profile](tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Work in both non-interactive and interactive modes.                                                                      |
+| --no-color           | Disables color in output.                                                                  | No       | Only works in the non-interactive mode. In the interactive mode, disabling color might not work with some UI components. |
+| -P, --profile string | Specifies the active [user profile](tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Works in both non-interactive and interactive modes.                                                                      |
 
 ## Feedback
 

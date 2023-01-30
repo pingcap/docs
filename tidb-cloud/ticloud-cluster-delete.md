@@ -5,13 +5,13 @@ Summary: The reference of `ticloud cluster delete`.
 
 # ticloud cluster delete
 
-Delete a cluster from your project
+Delete a cluster from your project:
 
 ```shell
 ticloud cluster delete [flags]
 ```
 
-Or use the following alias command
+Or use the following alias command:
 
 ```shell
 ticloud cluster rm [flags]
@@ -26,7 +26,7 @@ ticloud cluster delete
 ```
 
 Delete a cluster in non-interactive mode:
-    
+
 ```shell
 ticloud cluster delete --project-id <project-id> --cluster-id <cluster-id>
 ```
@@ -35,20 +35,20 @@ ticloud cluster delete --project-id <project-id> --cluster-id <cluster-id>
 
 In non-interactive mode, you need to manually enter required flags. In interactive mode, you can just follow CLI prompts to fill in them.
 
-| Flag                    | Description                                 | Required | Notes                                               |
+| Flag                    | Description                                 | Required | Note                                               |
 |-------------------------|---------------------------------------------|----------|-----------------------------------------------------|
-| -c, --cluster-id string | The ID of the cluster to be deleted         | Yes      | Only work in non-interactive mode                   |
-| --force                 | Delete a cluster without confirmation       | No       | Work in both non-interactive and interactive modes. |
-| -h, --help              | Get the help information                    | No       |                                                     |
-| -p, --project-id string | The project ID of the cluster to be deleted | Yes      | Only work in non-interactive mode                   |
+| -c, --cluster-id string | The ID of the cluster to be deleted         | Yes      | Only works in non-interactive mode.                   |
+| --force                 | Deletes a cluster without confirmation       | No       | Works in both non-interactive and interactive modes. |
+| -h, --help              | Gets the help information for this command                   | No       | Works in both non-interactive and interactive modes. |
+| -p, --project-id string | The project ID of the cluster to be deleted | Yes      | Only works in non-interactive mode.                   |
 
 
 ## Inherited flags
 
-| Flag                 | Description                                                                               | Required | Notes                                                                                                                    |
+| Flag                 | Description                                                                               | Required | Note                                                                                                                    |
 |----------------------|-------------------------------------------------------------------------------------------|----------|--------------------------------------------------------------------------------------------------------------------------|
-| --no-color           | Disable color in output.                                                                  | No       | Only works in the non-interactive mode. In the interactive mode, disabling color might not work with some UI components. |
-| -P, --profile string | The active [user profile](tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Work in both non-interactive and interactive modes.                                                                      |
+| --no-color           | Disables color in output.                                                                  | No       | Only works in the non-interactive mode. In the interactive mode, disabling color might not work with some UI components. |
+| -P, --profile string | The active [user profile](tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Works in both non-interactive and interactive modes.                                                                      |
 
 ## Feedback
 

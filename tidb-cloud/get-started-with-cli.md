@@ -7,18 +7,20 @@ Summary: Learn how to manage TiDB Cloud resources through the TiDB Cloud CLI.
 
 TiDB Cloud provides a command-line interface (CLI) [`ticloud`](https://github.com/tidbcloud/tidbcloud-cli) for you to interact with TiDB Cloud from your terminal with a few lines of commands. For example, you can easily perform the following operations using `ticloud`:
 
-- Create, delete and list your clusters.
+- Create, delete, and list your clusters.
 - Import data from S3 or local files to your clusters.
 
-## Prerequisites
+## Before you begin
 
-- Have a TiDB Cloud account. If you don't have one, [sign up for a free trial](https://tidbcloud.com/free-trial).
-- [Create a TiDB API Key](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management).
+- Have a TiDB Cloud account. If you do not have one, [sign up for a free trial](https://tidbcloud.com/free-trial).
+- [Create a TiDB Cloud API Key](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management).
 
 ## Installation
 
 <SimpleTab>
-<div label="macOS/linux">
+<div label="macOS/Linux">
+
+For macOS or Linux, you can install `ticloud` using any of the following methods:
 
 - Install via script (recommended)
 
@@ -32,34 +34,40 @@ TiDB Cloud provides a command-line interface (CLI) [`ticloud`](https://github.co
     tiup install cloud
     ```
 
-- Install Manually
-    - Download the pre-compiled binaries from the [releases](https://github.com/tidbcloud/tidbcloud-cli/releases/latest) page and copy to the desired location.
+- Install manually
 
-- Install in GitHub action
-    - To set up `ticloud` in GitHub Action, use [`setup-tidbcloud-cli`](https://github.com/tidbcloud/setup-tidbcloud-cli).
+    Download the pre-compiled binaries from the [releases](https://github.com/tidbcloud/tidbcloud-cli/releases/latest) page and copy to your desired location for installation.
+
+- Install in GitHub Actions
+
+    To set up `ticloud` in GitHub Action, use [`setup-tidbcloud-cli`](https://github.com/tidbcloud/setup-tidbcloud-cli).
 
 </div>
 
 <div label="Windows">
 
-- Install Manually
-    - Download the pre-compiled binaries from the [releases](https://github.com/tidbcloud/tidbcloud-cli/releases/latest) page and copy to the desired location.
+For Windows, you can install `ticloud` using either of the following methods:
 
-- Install in GitHub action
-    - To set up `ticloud` in GitHub Action, use [`setup-tidbcloud-cli`](https://github.com/tidbcloud/setup-tidbcloud-cli).
+- Install manually
+
+    Download the pre-compiled binaries from the [releases](https://github.com/tidbcloud/tidbcloud-cli/releases/latest) page and copy to the desired location for installation.
+
+- Install in GitHub Actions
+
+    To set up `ticloud` in GitHub Actions, use [`setup-tidbcloud-cli`](https://github.com/tidbcloud/setup-tidbcloud-cli).
 
 </div>
 </SimpleTab>
 
 ## Using the TiDB Cloud CLI
 
-See all available commands by running:
+View all available commands:
 
 ```shell
 ticloud --help
 ```
 
-Verify that you're using the latest version:
+Verify that you are using the latest version:
 
 ```shell
 ticloud version
@@ -73,15 +81,15 @@ ticloud update
 
 ### Using the TiDB Cloud CLI through TiUP
 
-The TiDB Cloud CLI is also available through [TiUP](https://tiup.io/). It's called `cloud` as a component in TiUP.
+The TiDB Cloud CLI is also available through [TiUP](https://tiup.io/), with the component name as `cloud`.
 
-See all available commands by running:
+View all available commands:
 
 ```shell
 tiup cloud --help
 ```
 
-Run commands with the `tiup cloud <command>`, for example:
+Run commands with `tiup cloud <command>`. For example:
 
 ```shell
 tiup cloud cluster create
@@ -93,29 +101,33 @@ Update to the latest version by TiUP:
 tiup update cloud
 ```
 
-## Quick Start
+## Quick start
 
-Here give a quick example on how we create a cluster with TiDB Cloud CLI.
+TiDB Cloud [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) (Beta) is the best way to get started with TiDB Cloud. In this section, you will learn how to create a Serverless Tier cluster with TiDB Cloud CLI.
 
-### Configure a user profile
+### Create a user profile
 
-Configure a user profile with your TiDB Cloud API Key.
+Before creating a cluster, you need to create a user profile with your TiDB Cloud API Key:
 
 ```shell
 ticloud config create
 ```
 
 > **Warning:**
-> 
-> The config name **MUST NOT** contain '.'
+>
+> The profile name **MUST NOT** contain `.`.
 
-### Create a serverless cluster
+### Create a Serverless Tier cluster
+
+To create a Serverless Tier cluster, enter the following command, and then follow the CLI prompts to provide the required information:
 
 ```shell
 ticloud cluster create
 ```
 
-Now you are done. Check out our [CLI reference](/tidb-cloud/cli-reference.md) to explore all that's possible with TiDB Cloud CLI.
+## What's next
+
+Check out [CLI reference](/tidb-cloud/cli-reference.md) to explore more features of TiDB Cloud CLI.
 
 ## Feedback
 

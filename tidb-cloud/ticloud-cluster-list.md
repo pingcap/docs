@@ -5,13 +5,13 @@ Summary: The reference of `ticloud cluster list`.
 
 # ticloud cluster list
 
-You can use `ticloud cluster list` to list all clusters in a project:
+List all clusters in a project:
 
 ```shell
 ticloud cluster list <project-id> [flags]
 ```
 
-Or use the following alias command
+Or use the following alias command:
 
 ```shell
 ticloud cluster ls <project-id> [flags]
@@ -19,19 +19,19 @@ ticloud cluster ls <project-id> [flags]
 
 ## Examples
 
-List all clusters in the project (interactive mode):
+List all clusters in a project (interactive mode):
 
 ```shell
 ticloud cluster list
 ```
 
-List the clusters in the project (non-interactive mode):
+List all clusters in a specified project (non-interactive mode):
 
 ```shell
-ticloud cluster list <project-id> 
+ticloud cluster list <project-id>
 ```
 
-List the clusters in the project with json format:
+List all clusters in a specified project in the JSON format:
 
 ```shell
 ticloud cluster list <project-id> -o json
@@ -41,17 +41,17 @@ ticloud cluster list <project-id> -o json
 
 In non-interactive mode, you need to manually enter required flags. In interactive mode, you can just follow CLI prompts to fill in them.
 
-| Flag                | Description                                                                                            | Required | Notes                                               |
+| Flag                | Description                                                                                            | Required | Note                                               |
 |---------------------|--------------------------------------------------------------------------------------------------------|----------|-----------------------------------------------------|
-| -h, --help          | Get the help information                                                                               | No       |                                                     |
-| -o, --output string | Output format. One of: human, json. For the complete result, please use json format. (default "human") | No       | Work in both non-interactive and interactive modes. |
+| -h, --help          | Gets the help information for this command                                                                              | No       | Works in both non-interactive and interactive modes. |
+| -o, --output string | Output format (`human` by default). Valid values are `human` or `json`. To get a complete result, use the `json` format. | No       | Works in both non-interactive and interactive modes. |
 
 ## Inherited flags
 
-| Flag                 | Description                                                                               | Required | Notes                                                                                                                    |
+| Flag                 | Description                                                                               | Required | Note                                                                                                                    |
 |----------------------|-------------------------------------------------------------------------------------------|----------|--------------------------------------------------------------------------------------------------------------------------|
-| --no-color           | Disable color in output.                                                                  | No       | Only works in the non-interactive mode. In the interactive mode, disabling color might not work with some UI components. |
-| -P, --profile string | The active [user profile](tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Work in both non-interactive and interactive modes.                                                                      |
+| --no-color           | Disables color in output.                                                                  | No       | Only works in the non-interactive mode. In the interactive mode, disabling color might not work with some UI components. |
+| -P, --profile string | Specifies the active [user profile](tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Works in both non-interactive and interactive modes.                                                                      |
 
 ## Feedback
 
