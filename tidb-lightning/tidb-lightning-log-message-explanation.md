@@ -87,7 +87,7 @@ Note that some trivial logs are ignored. Only important logs are included in the
 
 [check_info.go:995](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/restore/check_info.go#L995): As part of precheck, it estimates source data size to determine:
 
-- [the local disk has enough space if Lighting is in local backend mode](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/restore/check_info.go#L462); 
+- [the local disk has enough space if Lightning is in local backend mode](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/restore/check_info.go#L462); 
 - [the target cluster has enough space to store transformed kv pairs](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/restore/check_info.go#L102). 
 
 It calculates the file size vs. kv pairs size ratio by sampling the first source data file of each table, and using the ratio times source data file size to estimate the size of transformed kv pairs.
@@ -127,7 +127,7 @@ It calculates the file size vs. kv pairs size ratio by sampling the first source
 [INFO] [region.go:241] [makeTableRegions] [filesCount=8] [MaxRegionSize=268435456] [RegionsCount=8] [BatchSize=107374182400] [cost=53.207µs]
 ```
 
-[region.go:241](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/mydump/region.go#L241): Prints how many table data files(`filesCount`) have been processed, and the largest chunk size(`MaxRegionSize`) of CSV file, the number of generated table regions/chunks (`RegionsCount`), and the batchSize that we use to assign different engines to process data files.
+[region.go:241](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/mydump/region.go#L241): Prints the amount of table data files(`filesCount`) have been processed, and the largest chunk size(`MaxRegionSize`) of CSV file, the number of generated table regions/chunks (`RegionsCount`), and the batchSize that we use to assign different engines to process data files.
 
 ```
 [INFO] [table_restore.go:129] ["load engines and files completed"] [table=`sysbench`.`sbtest1`] [enginesCnt=2] [ime=75.563µs] []
@@ -217,7 +217,7 @@ It calculates the file size vs. kv pairs size ratio by sampling the first source
 [INFO] [local.go:1023] ["split engine key ranges"] [engine=d173bb2e-b753-5da9-b72e-13a49a46f5d7] [totalSize=2159933993] [totalCount=10000000] [firstKey=74800000000000003F5F728000000000000001] [lastKey=74800000000000003F5F728000000000989680] [ranges=22]
 ```
 
-[local.go:1023](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/backend/local/local.go#L1023): Before [import engine](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/backend/local/local.go#L1331) procedure, it logically splits engine data into many ranges based on [TikvImporter.RegionSplitSize](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/restore/table_restore.go#L927) config.
+[local.go:1023](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/backend/local/local.go#L1023): Before [import engine](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/backend/local/local.go#L1331) procedure, it logically splits engine data into smaller ranges based on [RegionSplitSize](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/restore/table_restore.go#L927) config.
 
 ```
 [INFO] [local.go:1336] ["start import engine"] [uuid=d173bb2e-b753-5da9-b72e-13a49a46f5d7] [ranges=22] [count=10000000] [size=2159933993]
