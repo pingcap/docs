@@ -59,7 +59,7 @@ For Windows, you can install `ticloud` using either of the following methods:
 </div>
 </SimpleTab>
 
-## Using the TiDB Cloud CLI
+## Use the TiDB Cloud CLI
 
 View all available commands:
 
@@ -79,7 +79,7 @@ If not, update to the latest version:
 ticloud update
 ```
 
-### Using the TiDB Cloud CLI through TiUP
+### Use the TiDB Cloud CLI through TiUP
 
 The TiDB Cloud CLI is also available through [TiUP](https://tiup.io/), with the component name as `cloud`.
 
