@@ -11,8 +11,8 @@
 - Get Started
   - [Try Out TiDB Cloud](/tidb-cloud/tidb-cloud-quickstart.md)
   - [Try Out HTAP](/tidb-cloud/tidb-cloud-htap-quickstart.md)
-  - [Perform a PoC](/tidb-cloud/tidb-cloud-poc.md)
   - [Try Out TiDB Cloud CLI](/tidb-cloud/get-started-with-cli.md)
+  - [Perform a PoC](/tidb-cloud/tidb-cloud-poc.md)
 - Develop Applications
   - [Overview](/develop/dev-guide-overview.md)
   - Quick Start

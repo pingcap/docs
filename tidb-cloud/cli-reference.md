@@ -7,10 +7,6 @@ Summary: Provides an overview of TiDB Cloud CLI.
 
 TiDB Cloud CLI is a command line interface, which allows you to operate TiDB Cloud from your terminal with a few lines of commands. In the TiDB Cloud CLI, you can easily manage your TiDB Cloud clusters, import data to your clusters, and perform more operations.
 
-> **Note:**
->
-> Currently, TiDB Cloud CLI is only applicable to [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters.
-
 ## Before you begin
 
 Make sure to first [set up your TiDB Cloud CLI environment](/tidb-cloud/get-started-with-cli.md). Once you have installed the `ticloud` CLI, you can use it to manage your TiDB Cloud clusters from the command lines.
@@ -49,11 +45,11 @@ For the TiDB Cloud CLI, a user profile is a collection of properties associated 
 
 ### Create a user profile
 
-Use [`ticloud config create`](tidb-cloud/ticloud-config-create.md) to create a user profile.
+Use [`ticloud config create`](/tidb-cloud/ticloud-config-create.md) to create a user profile.
 
 ### List all user profiles
 
-Use [`ticloud config list`](tidb-cloud/ticloud-config-list.md) to list all user profiles.
+Use [`ticloud config list`](/tidb-cloud/ticloud-config-list.md) to list all user profiles.
 
 An example output is as follows:
 
@@ -68,7 +64,7 @@ In this example output, the user profile `defalut` is currently active.
 
 ### Describe a user profile
 
-Use [`ticloud config describe`](tidb-cloud/ticloud-config-describe.md) to get the properties of a user profile.
+Use [`ticloud config describe`](/tidb-cloud/ticloud-config-describe.md) to get the properties of a user profile.
 
 An example output is as follows:
 
@@ -81,11 +77,11 @@ An example output is as follows:
 
 ### Set properties in a user profile
 
-Use [`ticloud config set`](tidb-cloud/ticloud-config-set.md) to set properties in a user profile.
+Use [`ticloud config set`](/tidb-cloud/ticloud-config-set.md) to set properties in a user profile.
 
 ### Switch to another user profile
 
-Use [`ticloud config use`](tidb-cloud/ticloud-config-use.md) to switch to another user profile.
+Use [`ticloud config use`](/tidb-cloud/ticloud-config-use.md) to switch to another user profile.
 
 An example output is as follows:
 
@@ -95,11 +91,11 @@ Current profile has been changed to default
 
 ### Edit the config file
 
-Use [`ticloud config edit`](tidb-cloud/ticloud-config-edit.md) to open the config file for editing.
+Use [`ticloud config edit`](/tidb-cloud/ticloud-config-edit.md) to open the config file for editing.
 
 ### Delete a user profile
 
-Use [`ticloud config delete`](tidb-cloud/ticloud-config-delete.md) to delete a user profile.
+Use [`ticloud config delete`](/tidb-cloud/ticloud-config-delete.md) to delete a user profile.
 
 ## Global flags
 

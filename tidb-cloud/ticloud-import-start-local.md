@@ -5,7 +5,7 @@ Summary: The reference of `ticloud import start local`.
 
 # ticloud import start local
 
-Import a local file to TiDB Cloud:
+Import a local file to a TiDB Cloud [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) cluster:
 
 ```shell
 ticloud import start local <file-path> [flags]
@@ -55,7 +55,7 @@ In non-interactive mode, you need to manually enter required flags. In interacti
 | --backslash-escape    | Parses backslashes inside fields as escape characters (`true` by default) for CSV files       | No       | Only works in non-interactive mode when `--data-format CSV` is specified.                                                         |
 | --delimiter string    | Specifies the delimiter used for quoting (`"` by default) for CSV files                                      | No       | Only works in non-interactive mode when `--data-format CSV` is specified.                                                         |
 | --no-color            | Disables color in output                                                                           | No       | Only works in non-interactive mode. In interactive mode, disable color output may not work with some UI components |
-| -P, --profile string  | Specifies the active [user profile](tidb-cloud/cli-reference.md#user-profile) used in this command.      | No       | Works in both non-interactive and interactive modes.                                                               |
+| -P, --profile string  | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command.      | No       | Works in both non-interactive and interactive modes.                                                               |
 | --separator string    | Specifies the field separator of CSV files (`,` by default)    | No       | Only works in non-interactive mode when `--data-format CSV` is specified.                                                         |
 | --trim-last-separator | Treats separators as the line terminators and trims all trailing separators for CSV files | No       | Only works in non-interactive mode when `--data-format CSV` is specified.                                                         |
 
