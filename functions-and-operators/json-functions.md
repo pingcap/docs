@@ -138,3 +138,7 @@ TiDB supports most of the JSON functions that shipped with the GA release of MyS
 [json_storage_free]: https://dev.mysql.com/doc/refman/8.0/en/json-utility-functions.html#function_json-storage-free
 
 [json_storage_size]: https://dev.mysql.com/doc/refman/5.7/en/json-utility-functions.html#function_json-storage-size
+
+[MEMBER_OF]: https://dev.mysql.com/doc/refman/8.0/en/json-search-functions.html#operator_member-of
+
+[json_overlaps]: https://dev.mysql.com/doc/refman/8.0/en/json-search-functions.html#function_json-overlaps

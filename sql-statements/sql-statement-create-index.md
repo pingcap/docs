@@ -334,16 +334,16 @@ Query OK, 1 row affected (0.00 sec)
 
 See [Index Selection - Use multi-valued indexes](/choose-index.md#use-a-multi-valued-index) for more details.
 
-### 特性与限制
+### Limitations
 
-- 如果是空 JSON 数组，则不会有对应的索引记录。
-- `CAST(... AS ... ARRAY)` 中的目标类型不能是 `BINARY`，`JSON`，`YEAR`，`FLOAT`，`DOUBLE`，`DECIMAL`。其中源类型必须是 JSON。
-- 无法使用多值索引进行排序。
-- 只允许在 JSON 数组上建立多值索引。
-- 多值索引不可以为主键或外键。
-- 多值索引使用额外的存储空间为：平均每行数组元素个数 * 普通二级索引使用空间。
-- 相比于普通索引， DML 会对多值索引产生更多的索引记录的修改，因此多值索引会带来比普通索引更大的性能影响。
-- 由于多值索引是一种特殊的表达式索引，因为具有表达式索引的限制。
+- For an empty JSON array, no corresponding index record is generated.
+- The target type in `CAST(... AS ... ARRAY)` cannot be any of `BINARY`, `JSON`, `YEAR`, `FLOAT`, `DOUBLE`, and `DECIMAL`. The source type must be JSON.
+- You cannot use a multi-valued index for sorting.
+- You can only create a multi-valued index on a JSON array.
+- A multi-valued index cannot be a primary key or a foreign key.
+- The extra storage space used by a multi-valued index = the average number of array elements per row * the space used by an ordinary secondary index.
+- Compared with ordinary indexes, DML operations will more frequently modify the index record for multi-valued indexes, so multi-valued indexes will have a greater performance impact than ordinary indexes.
+- Because multi-valued indexes are a special type of expression index, they are subject to the same limitations as expression indexes.
 
 ## Invisible index
 
