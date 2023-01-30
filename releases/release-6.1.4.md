@@ -77,7 +77,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-
 + TiFlash
 
     - Avoid tiflash global locks with small probability of long term blocking. [#6418](https://github.com/pingcap/tiflash/issues/6418) @[SeaRise](https://github.com/SeaRise)
-    - Fix an issue that causes OOM with high throughput write [#6407](https://github.com/pingcap/tiflash/issues/6407) @[hehechen](https://github.com/hehechen)
+    - Fix an issue that causes OOM with high throughput write [#6407](https://github.com/pingcap/tiflash/issues/6407) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - Reduce memory usage under heavy write pressure. [#6431](https://github.com/pingcap/tiflash/issues/6431) @[SeaRise](https://github.com/SeaRise)
 
 + Tools
