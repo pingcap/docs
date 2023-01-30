@@ -194,7 +194,14 @@ delta_index_cache_size = 0
     enable_elastic_threadpool = true
     # Compression algorithm of the TiFlash storage engine. The value can be LZ4, zstd, or LZ4HC, and is case-insensitive. By default, LZ4 is used.
     dt_compression_method = "LZ4"
+<<<<<<< HEAD
     # Compression level of the TiFlash storage engine. The default value is 1. It is recommended that you set this value to 1 if dt_compression_method is LZ4, -1 (smaller compression rate, but better read performance) or 1 if dt_compression_method is zstd, and 9 if dt_compression_method is LZ4HC.
+=======
+    ## Compression level of the TiFlash storage engine. The default value is 1.
+    ## It is recommended that you set this value to 1 if dt_compression_method is LZ4.
+    ## It is recommended that you set this value to -1 (smaller compression rate, but better read performance) or 1 if dt_compression_method is zstd.
+    ## It is recommended that you set this value to 9 if dt_compression_method is LZ4HC.
+>>>>>>> 2595c3040 (tiflash: polish the format of dt_compression_level (#12254))
     dt_compression_level = 1
 
 ## Security settings take effect starting from v4.0.5.
