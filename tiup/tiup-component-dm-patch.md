@@ -75,7 +75,7 @@ You need to pack the binary package required for this command in advance accordi
 
 ## Example
 
-The following example shows how to apply `v5.4.0-hotfix` to the `v5.4.0` cluster deployed using TiUP. The operations might vary if you deploy the cluster using other methods.
+The following example shows how to apply `v5.3.0-hotfix` to the `v5.3.0` cluster deployed using TiUP. The operations might vary if you deploy the cluster using other methods.
 
 > **Note:**
 >
