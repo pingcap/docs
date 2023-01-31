@@ -156,10 +156,10 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 - Indicates that the check is for clusters.
 - Data type: `BOOLEAN`
 - This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
-- Command format (for both deployed and un-deployed clusters):
+- Command format (for both deployed and needing expansion clusters):
 
     ```shell
-    tiup cluster check <topology.yml | cluster-name> [flags]
+    tiup cluster check <topology.yml | cluster-name> --cluster [flags]
     ```
 
 > **Note:**
