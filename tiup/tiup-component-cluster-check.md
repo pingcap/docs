@@ -145,7 +145,7 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 
 > **Note:**
 >
-> `tiup-cluster check` also supports repairing the `scale-out.yaml` file for an existing cluster with the following command format:
+> `tiup cluster check` also supports repairing the `scale-out.yaml` file for an existing cluster with the following command format:
 >
 >```shell
 > tiup cluster check <cluster-name> scale-out.yaml --cluster --apply --user root [-p] [-i /home/root/.ssh/gcp_rsa]
@@ -153,7 +153,7 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 
 ### --cluster
 
-- Indicates that the check is for clusters that have been deployed.
+- Indicates that the check is for a cluster that has been deployed.
 - Data type: `BOOLEAN`
 - This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
 - Command format:
