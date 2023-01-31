@@ -259,6 +259,6 @@ You can mitigate impact on cluster performance by reducing the number of backup 
 
 > **Note:**
 >
-> The impact and speed of backup depends much on cluser configuration, deployment, and running services. The preceding test conclusions, based on simulation tests in many scenarios and verified in some customer sites, are worthy of reference. However, the exact impact and performance cap may vary depending on the scenarios. Therefore, you should always run the test and verify the test results.
+> The impact and speed of backup depends much on cluster configuration, deployment, and running services. The preceding test conclusions, based on simulation tests in many scenarios and verified in some customer sites, are worthy of reference. However, the exact impact and performance cap may vary depending on the scenarios. Therefore, you should always run the test and verify the test results.
 
  Since v5.3.0, BR introduces the auto tunning feature (enabled by default) to adjust the number of backup threads. It can maintain the CPU utilization of the cluster below 80% during backup tasks. For details, see [BR Auto-Tune](/br/br-auto-tune.md).
