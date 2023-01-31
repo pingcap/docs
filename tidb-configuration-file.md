@@ -807,7 +807,7 @@ Configuration items related to read isolation.
 - The value of this configuration will initialize the value of the system variable [`tidb_enable_ddl`](/system-variables.md#tidb_enable_ddl)
 - Before v6.3.0, this configuration is set by `run-ddl`.
 
-### `tidb_stmt_summary_enable_persistent` <span class="version-mark">New in v6.6.0 </span>
+### `tidb_stmt_summary_enable_persistent` <span class="version-mark">New in v6.6.0</span>
 
 > **Warning:**
 >
