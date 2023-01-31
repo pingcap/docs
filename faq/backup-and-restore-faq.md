@@ -8,7 +8,7 @@ aliases: ['/tidb/v6.4/pitr-troubleshoot/','/tidb/v6.4/pitr-known-issues/']
 
 This document lists the frequently asked questions (FAQs) and the solutions of TiDB Backup & Restore (BR).
 
-## Performance issues of backup and restore
+## Backup and restore issues
 
 ### What should I do to quickly recover data after mistakenly deleting or updating data?
 
