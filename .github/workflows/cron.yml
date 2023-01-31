@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  ja:
+  ja-5-4:
     runs-on: ubuntu-latest
 
     steps:
@@ -63,7 +63,7 @@ jobs:
           git commit -m "update translated files"
           git push
 
-  ja-6-1:
+  ja-6-5:
     runs-on: ubuntu-latest
 
     steps:
@@ -75,7 +75,7 @@ jobs:
       - uses: actions/checkout@v3
         name: Download docs repo and specified branch
         with:
-          ref: "i18n-ja-release-6.1"
+          ref: "i18n-ja-release-6.5"
           path: "docs"
       - uses: actions/setup-node@v3
         name: Setup node 16
