@@ -75,7 +75,7 @@ You need to pack the binary package required for this command in advance accordi
 
 ## Example
 
-The following example shows how to apply `v6.5.0-hotfix` to the `v6.5.0` cluster deployed using TiUP. The operations might vary if you deploy the cluster using other methods.
+The following example shows how to apply `v5.4.0-hotfix` to the `v5.4.0` cluster deployed using TiUP. The operations might vary if you deploy the cluster using other methods.
 
 > **Note:**
 >
@@ -92,7 +92,7 @@ Before applying a hotfix, prepare the hotfix package `dm-linux-amd64.tar.gz` and
 Output:
 
 ```
-Release Version: v6.5.0
+Release Version: v5.3.0
 
 Git Commit Hash: 20626babf21fc381d4364646c40dd84598533d66
 Git Branch: heads/refs/tags/v5.3.0
