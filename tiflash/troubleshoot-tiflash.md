@@ -207,13 +207,9 @@ If data replication on TiFlash starts normally but then all or some data fails t
 
 The causes may vary. You can address the problem by performing the following steps.
 
-1. Adjust the value of the scheduling parameters.
+1. Increase [`store limit`](/configure-store-limit.md#usage) to accelerate replication.
 
-    - Increase [`store limit`](/configure-store-limit.md#usage) to accelerate replication.
-    - Decrease [`config set patrol-region-interval 10ms`](/pd-control.md#command) to make checker scan on Regions more frequent in TiKV.
-    - Increase [`region merge`](/pd-control.md#command) to reduce the number of Regions, which means fewer scans and higher check frequencies.
-
-2. Adjust the load on TiFlsh.
+2. Adjust the load on TiFlash.
 
     Excessively high load on TiFlash can also result in slow replication. You can check the load of TiFlash indicators on the **TiFlash-Summary** panel on Grafana:
 
