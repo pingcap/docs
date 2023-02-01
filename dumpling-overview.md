@@ -248,8 +248,7 @@ Dumpling also supports reading credential files from `~/.aws/credentials`. For m
 
 <CustomContent platform="tidb-cloud">
 
-Dumpling also supports reading credential files from `~/.aws/credentials`.
-Parameters for exporting data to Amazon S3 using Dumpling are the same as those for BR. For more parameter descriptions, see [External storages - URL format](/br/backup-and-restore-storages.md#url-format).
+Dumpling also supports reading credential files from `~/.aws/credentials`. Parameters for exporting data to Amazon S3 using Dumpling are the same as those for BR. For more parameter descriptions, see [external storage URL](/br/backup-and-restore-storages.md#url-format).
 
 </CustomContent>
 
