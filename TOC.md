@@ -661,6 +661,7 @@
       - [`CREATE DATABASE`](/sql-statements/sql-statement-create-database.md)
       - [`CREATE INDEX`](/sql-statements/sql-statement-create-index.md)
       - [`CREATE PLACEMENT POLICY`](/sql-statements/sql-statement-create-placement-policy.md)
+      - [`CREATE RESOURCE GROUP`](/sql-statements/sql-statement-create-resource-group.md)
       - [`CREATE ROLE`](/sql-statements/sql-statement-create-role.md)
       - [`CREATE SEQUENCE`](/sql-statements/sql-statement-create-sequence.md)
       - [`CREATE TABLE LIKE`](/sql-statements/sql-statement-create-table-like.md)
