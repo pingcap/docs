@@ -211,7 +211,7 @@ SELECT /*+ SHUFFLE_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 
 > **Note:**
 >
-> Before using this hint, make sure that the current TiDB cluster supports the TiFlash MPP mode in the query. For details, see [Use the TiFlash MPP mode](/tiflash/use-tiflash-mpp-mode.md).
+> Before using this hint, make sure that the current TiDB cluster supports the TiFlash MPP mode for the query. For details, see [Use the TiFlash MPP mode](/tiflash/use-tiflash-mpp-mode.md).
 
 ### BROADCAST_JOIN(t1_name [, tl_name ...])
 
@@ -223,7 +223,7 @@ SELECT /*+ BROADCAST_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 
 > **Note:**
 >
-> Before using this hint, make sure that the current TiDB cluster supports the TiFlash MPP mode in the query. For details, see [Use the TiFlash MPP mode](/tiflash/use-tiflash-mpp-mode.md).
+> Before using this hint, make sure that the current TiDB cluster supports the TiFlash MPP mode for the query. For details, see [Use the TiFlash MPP mode](/tiflash/use-tiflash-mpp-mode.md).
 
 ### NO_DECORRELATE()
 
@@ -321,7 +321,7 @@ SELECT /*+ MPP_1PHASE_AGG() */ count(*) FROM t1, t2 WHERE t1.a > 10 GROUP BY t1.
 
 > **Note:**
 >
-> Before using this hint, make sure that the current TiDB cluster supports the TiFlash MPP mode in the query. For details, see [Use the TiFlash MPP mode](/tiflash/use-tiflash-mpp-mode.md).
+> Before using this hint, make sure that the current TiDB cluster supports the TiFlash MPP mode for the query. For details, see [Use the TiFlash MPP mode](/tiflash/use-tiflash-mpp-mode.md).
 
 ### MPP_2PHASE_AGG()
 
@@ -333,7 +333,7 @@ SELECT /*+ MPP_2PHASE_AGG() */ count(*) FROM t1, t2 WHERE t1.a > 10 GROUP BY t1.
 
 > **Note:**
 >
-> Before using this hint, make sure that the current TiDB cluster supports the TiFlash MPP mode in the query. For details, see [Use the TiFlash MPP mode](/tiflash/use-tiflash-mpp-mode.md).
+> Before using this hint, make sure that the current TiDB cluster supports the TiFlash MPP mode for the query. For details, see [Use the TiFlash MPP mode](/tiflash/use-tiflash-mpp-mode.md).
 
 ### USE_INDEX(t1_name, idx1_name [, idx2_name ...])
 
@@ -378,7 +378,7 @@ select /*+ IGNORE_INDEX(t1, idx1, idx2) */ * from t t1;
 
 ### KEEP_ORDER(t1_name, idx1_name [, idx2_name ...])
 
-The `KEEP_ORDER(t1_name, idx1_name [, idx2_name ...])` hint tells the optimizer to use only the given index(es) for a specified table and read the specified index(es) in order.
+The `KEEP_ORDER(t1_name, idx1_name [, idx2_name ...])` hint tells the optimizer to use only the given index for a specified table and read the specified index in order.
 
 > **Warning:**
 >
@@ -411,7 +411,7 @@ The optimizer generates two types of plan for this query: `Limit + IndexScan(kee
 
 ### NO_KEEP_ORDER(t1_name, idx1_name [, idx2_name ...])
 
-The `NO_KEEP_ORDER(t1_name, idx1_name [, idx2_name ...])` hint tells the optimizer to use only the given index(es) for a specified table and not read the specified index(es) in order. This hint is usually applied in the following scenario.
+The `NO_KEEP_ORDER(t1_name, idx1_name [, idx2_name ...])` hint tells the optimizer to use only the given index for a specified table and not to read the specified index in order. This hint is usually applied in the following scenario.
 
 The following example shows that the effect of the query statement is equivalent to `SELECT * FROM t t1 use index(idx1, idx2);`:
 
@@ -431,7 +431,6 @@ EXPLAIN SELECT /*+ NO_KEEP_ORDER(t, a) */ a FROM t ORDER BY a LIMIT 10;
 +----------------------------+----------+-----------+---------------------+--------------------------------+
 ```
 
-和 `KEEP_ORDER` Hint 的示例相同，优化器对该查询会生成两类计划：`Limit + IndexScan(keep order: true)` 和 `TopN + IndexScan(keep order: false)`，当使用了 `NO_KEEP_ORDER` Hint，优化器会选择后一种不按照顺序读取索引的计划。
 The same as the example of `KEEP_ORDER` hint, the optimizer generates two types of plans for this query: `Limit + IndexScan(keep order: true)` and `TopN + IndexScan(keep order: false)`. When the `NO_KEEP_ORDER` hint is used, the optimizer will choose the latter plan to read the index out of order.
 
 ### AGG_TO_COP()
