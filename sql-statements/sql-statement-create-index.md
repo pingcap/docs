@@ -253,7 +253,7 @@ Multi-valued index is a kind of secondary index defined on an array column. In a
 You can create a multi-valued index by using the `CAST(... AS ... ARRAY)` expression in the index definition, as creating an expression index.
 
 ```sql
-CREATE TABLE customers (
+mysql> CREATE TABLE customers (
     id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name CHAR(10),
     custinfo JSON,
@@ -264,7 +264,7 @@ CREATE TABLE customers (
 You can define a multi-valued index as a unique index.
 
 ```sql
-CREATE TABLE customers (
+mysql> CREATE TABLE customers (
     id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name CHAR(10),
     custinfo JSON,
@@ -277,6 +277,7 @@ When a multi-valued index is defined as a unique index, an error is reported if 
 ```sql
 mysql> INSERT INTO customers VALUES (1, 'pingcap', '{"zipcode": [1,2]}');
 Query OK, 1 row affected (0.01 sec)
+
 mysql> INSERT INTO customers VALUES (1, 'pingcap', '{"zipcode": [2,3]}');
 ERROR 1062 (23000): Duplicate entry '2' for key 'customers.zips'
 ```
@@ -285,18 +286,18 @@ The same record can have duplicate values, but when different records have dupli
 
 ```sql
 -- Insert successfully
-INSERT INTO t1 VALUES('[1,1,2]');
-INSERT INTO t1 VALUES('[3,3,3,4,4,4]');
+mysql> INSERT INTO t1 VALUES('[1,1,2]');
+mysql> INSERT INTO t1 VALUES('[3,3,3,4,4,4]');
 
 -- Insert failed
-INSERT INTO t1 VALUES('[1,2]');
-INSERT INTO t1 VALUES('[2,3]');
+mysql> INSERT INTO t1 VALUES('[1,2]');
+mysql> INSERT INTO t1 VALUES('[2,3]');
 ```
 
 You can also define a multi-valued index as a composite index:
 
 ```sql
-CREATE TABLE customers (
+mysql> CREATE TABLE customers (
     id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name CHAR(10),
     custinfo JSON,
@@ -307,7 +308,7 @@ CREATE TABLE customers (
 When a multi-valued index is defined as a composite index, the multi-valued part can appear in any position, but only once.
 
 ```sql
-CREATE TABLE customers (
+mysql> CREATE TABLE customers (
     id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name CHAR(10),
     custinfo JSON,
@@ -316,7 +317,7 @@ CREATE TABLE customers (
 ERROR 1235 (42000): This version of TiDB doesn't yet support 'more than one multi-valued key part per index'.
 ```
 
-The written data must match the type defined by the multi-valued index; otherwise, the data write fails:
+The written data must exactly match the type defined by the multi-valued index; otherwise, the data write fails:
 
 ```sql
 -- All elements in the zipcode field must be the UNSIGNED type.
