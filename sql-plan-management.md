@@ -315,7 +315,7 @@ In addition to changing the binding status according to a SQL statement, you can
 SET BINDING [ENABLED | DISABLED] FOR SQL DIGEST 'sql_digest';
 ```
 
-The binding status that can be changed by `sql_digest` and the effect are the same as those changed [according to a SQL statement](#change-binding-status-according-to-a-sql-statement). If no binding is available for status changes, a warning message `can't find any binding for 'sql_digest'` is returned.
+The binding status that can be changed by `sql_digest` and the effect is the same as those changed [according to a SQL statement](#change-binding-status-according-to-a-sql-statement). If no binding is available for status changes, a warning message `can't find any binding for 'sql_digest'` is returned.
 
 ### View bindings
 
