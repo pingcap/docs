@@ -111,7 +111,7 @@ If the data source is stored in external storage such as Amazon S3 or GCS, you n
     -d 's3://my-bucket/sql-backup'
 ```
 
-For more parameter settings, see [external storage URL](/br/backup-and-restore-storages.md#url-format).
+For more parameter descriptions, see [external storage URL](/br/backup-and-restore-storages.md#url-format).
 
 ### Step 3: Start TiDB Lightning to import data
 
