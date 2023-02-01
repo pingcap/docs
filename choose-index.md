@@ -145,7 +145,7 @@ The index selection can be controlled by a single query through [Optimizer Hints
 
 > **Warning:**
 >
-> For the current version, this feature is still experimental and it is not recommended to use it in a production environment. 
+> For the current version, this feature is still experimental and it is not recommended to use it in a production environment.
 
 [Multi-value indexes](/sql-statements/sql-statement-create-index.md#multi-valued-index) are different from ordinary indexes. TiDB currently only uses [IndexMerge](/explain-index-merge.md) to access multi-valued indexes. Therefore, to use multi-valued indexes for data access, make sure that the value of the sytem variable `tidb_enable_index_merge` is set to `ON`.
 
@@ -259,7 +259,7 @@ The following are some scenarios that are not yet supported.
 mysql> CREATE TABLE t4 (j JSON, INDEX idx((CAST(j AS SIGNED ARRAY))));
 Query OK, 0 rows affected (0.04 sec)
 
--- OR condition composed of multiple json_contains expressions
+-- If a query contains the OR condition composed of multiple json_contains expressions, the index cannot be accessed using IndexMerge.
 mysql> EXPLAIN SELECT /*+ use_index_merge(t3, idx) */ * FROM t3 WHERE (json_contains(j, '[1, 2]')) OR (json_contains(j, '[3, 4]'));
 +-------------------------+----------+-----------+---------------+------------------------------------------------------------------------------------------------------------------+
 | id                      | estRows  | task      | access object | operator info                                                                                                    |
@@ -288,7 +288,24 @@ mysql> EXPLAIN SELECT /*+ use_index_merge(t3, idx) */ * FROM t3 WHERE (json_cont
 +-------------------------+----------+-----------+---------------+------------------------------------------------------------------------------------------------------------------+
 3 rows in set, 1 warning (0.01 sec)
 
--- The more complex expression formed by multi-layer OR/AND nesting
+-- If a query contains the more complex expression formed by multi-layer OR/AND nesting, the index cannot be accessed using IndexMerge.
+mysql> EXPLAIN SELECT /*+ use_index_merge(t3, idx) */ * FROM t3 WHERE ((1 member of (j)) AND (2 member of (j))) OR ((3 member of (j)) AND (4 member of (j)));
++-------------------------+----------+-----------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| id                      | estRows  | task      | access object | operator info                                                                                                                                                                                                |
++-------------------------+----------+-----------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Selection_5             | 8000.00  | root      |               | or(and(json_memberof(cast(1, json BINARY), test.t3.j), json_memberof(cast(2, json BINARY), test.t3.j)), and(json_memberof(cast(3, json BINARY), test.t3.j), json_memberof(cast(4, json BINARY), test.t3.j))) |
+| └─TableReader_7         | 10000.00 | root      |               | data:TableFullScan_6                                                                                                                                                                                         |
+|   └─TableFullScan_6     | 10000.00 | cop[tikv] | table:t3      | keep order:false, stats:pseudo                                                                                                                                                                               |
++-------------------------+----------+-----------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+3 rows in set, 2 warnings (0.00 sec)
+```
+
+Limited by the current implementation of multi-valued index, using [`use_index`](/optimizer-hints.md#use_indext1_name-idx1_name--idx2_name-) might return the `Can't find a proper physical plan for this query` error while using [`use_index_merge`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-) will not return such an error. Therefore, it is recommended to use `use_index_merge` if you want to use the multi-valued index.
+
+```sql
+mysql> EXPLAIN SELECT /*+ use_index(t3, idx) */ * FROM t3 WHERE ((1 member of (j)) AND (2 member of (j))) OR ((3 member of (j)) AND (4 member of (j)));
+ERROR 1815 (HY000): Internal : Cant find a proper physical plan for this query
+
 mysql> EXPLAIN SELECT /*+ use_index_merge(t3, idx) */ * FROM t3 WHERE ((1 member of (j)) AND (2 member of (j))) OR ((3 member of (j)) AND (4 member of (j)));
 +-------------------------+----------+-----------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | id                      | estRows  | task      | access object | operator info                                                                                                                                                                                                |

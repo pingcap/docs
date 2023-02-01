@@ -343,7 +343,7 @@ See [Index Selection - Use multi-valued indexes](/choose-index.md#use-a-multi-va
 - A multi-valued index cannot be a primary key or a foreign key.
 - The extra storage space used by a multi-valued index = the average number of array elements per row * the space used by an ordinary secondary index.
 - Compared with ordinary indexes, DML operations will more frequently modify the index record for multi-valued indexes, so multi-valued indexes will have a greater performance impact than ordinary indexes.
-- Because multi-valued indexes are a special type of expression index, they are subject to the same limitations as expression indexes.
+- Because multi-valued indexes are a special type of expression index, they are the limitations of expression indexes.
 
 ## Invisible index
 
