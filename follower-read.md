@@ -35,7 +35,7 @@ This variable is used to set the expected data read mode.
 - When the value of `tidb_replica_read` is set to `leader` or an empty string, TiDB maintains its default behavior and sends all read operations to the leader replica to perform.
 - When the value of `tidb_replica_read` is set to `follower`, TiDB selects a follower replica of the Region to perform all read operations.
 - When the value of `tidb_replica_read` is set to `leader-and-follower`, TiDB can select any replicas to perform read operations. In this mode, read requests are load balanced between the leader and follower.
-- When the value of `tidb_replica_read` is set to `prefer-leader`, TiDB selects the leader replica as priority to perform read operations. Only when the leader replica is unavailable, will read requests be redirected to any available follower replicas.
+- When the value of `tidb_replica_read` is set to `prefer-leader`, TiDB selects the leader replica as priority to perform read operations. And if the leader replica is obviously slow on processing such as by Disk / Net performance jitter, TiDB will select other available follower replicas to perform.
 - When the value of `tidb_replica_read` is set to `closest-replicas`, TiDB prefers to select a replica in the same availability zone to perform read operations, which can be a leader or a follower. If there is no replica in the same availability zone, TiDB reads from the leader replica.
 - When the value of `tidb_replica_read` is set to `closest-adaptive`:
 
