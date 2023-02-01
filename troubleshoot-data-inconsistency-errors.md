@@ -7,7 +7,7 @@ summary: Learn how to deal with errors reported by the consistency check between
 
 TiDB checks consistency between data and indexes when it executes transactions or the [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) statement. If the check finds that a record key-value and the corresponding index key-value are inconsistent, that is, a key-value pair storing row data and the corresponding key-value pair storing its index are inconsistent (for example, more indexes or missing indexes), TiDB reports a data inconsistency error and prints the related errors in error logs.
 
-This document describes the meanings of data inconsistency errors and provides some methods to bypass the consistency check. If a data consistency error occurs, you can go to [Ask PingCAP](https://ask.pingcap.com/) and discuss with the community. If you are subscribed to PingCAP support, you can also [create a ticket](https://support.pingcap.com/hc/en-us).
+This document describes the meanings of data inconsistency errors and provides some methods to bypass the consistency check. If a data consistency error occurs, you can go to [TiDB forum](https://ask.pingcap.com/) and discuss with the community. If you are subscribed to PingCAP support, you can also [create a ticket](https://support.pingcap.com/hc/en-us).
 
 ## Error explanation
 
