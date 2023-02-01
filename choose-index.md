@@ -149,13 +149,13 @@ The index selection can be controlled by a single query through [Optimizer Hints
 
 [Multi-value indexes](/sql-statements/sql-statement-create-index.md#multi-valued-index) are different from ordinary indexes. TiDB currently only uses [IndexMerge](/explain-index-merge.md) to access multi-valued indexes. Therefore, to use multi-valued indexes for data access, make sure that the value of the sytem variable `tidb_enable_index_merge` is set to `ON`.
 
-Currently, TiDB supports accessing multi-valued indexes using IndexMerge that is automatically converted from `json_member_of`, `json_contains`, and `json_overlaps` conditions. You can either rely on the optimizer to automatically select IndexMerge based on cost, or specify the selection of multi-valued indexes through the optimizer hints [`use_index`](/optimizer-hints.md#use_indext1_name-idx1_name--idx2_name-) or [`use_index_merge`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-). See the following examples:
+Currently, TiDB supports accessing multi-valued indexes using IndexMerge that is automatically converted from `json_member_of`, `json_contains`, and `json_overlaps` conditions. You can either rely on the optimizer to automatically select IndexMerge based on cost, or specify the selection of multi-valued indexes through the optimizer hint [`use_index_merge`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-) or [`use_index`](/optimizer-hints.md#use_indext1_name-idx1_name--idx2_name-). See the following examples:
 
 ```sql
 mysql> CREATE TABLE t1 (j JSON, INDEX idx((CAST(j->'$.path' AS SIGNED ARRAY)))); -- Uses '$.path' as the path to create a multi-valued index
 Query OK, 0 rows affected (0.04 sec)
 
-mysql> EXPLAIN SELECT /*+ use_index(t1, idx) */ * FROM t1 WHERE (1 MEMBER OF (j->'$.path'));
+mysql> EXPLAIN SELECT /*+ use_index_merge(t1, idx) */ * FROM t1 WHERE (1 MEMBER OF (j->'$.path'));
 +---------------------------------+---------+-----------+-----------------------------------------------------------------------------+------------------------------------------------------------------------+
 | id                              | estRows | task      | access object                                                               | operator info                                                          |
 +---------------------------------+---------+-----------+-----------------------------------------------------------------------------+------------------------------------------------------------------------+
@@ -166,7 +166,7 @@ mysql> EXPLAIN SELECT /*+ use_index(t1, idx) */ * FROM t1 WHERE (1 MEMBER OF (j-
 +---------------------------------+---------+-----------+-----------------------------------------------------------------------------+------------------------------------------------------------------------+
 4 rows in set, 1 warning (0.00 sec)
 
-mysql> EXPLAIN SELECT /*+ use_index(t1, idx) */ * FROM t1 WHERE JSON_CONTAINS((j->'$.path'), '[1, 2, 3]');
+mysql> EXPLAIN SELECT /*+ use_index_merge(t1, idx) */ * FROM t1 WHERE JSON_CONTAINS((j->'$.path'), '[1, 2, 3]');
 +-------------------------------+---------+-----------+-----------------------------------------------------------------------------+---------------------------------------------+
 | id                            | estRows | task      | access object                                                               | operator info                               |
 +-------------------------------+---------+-----------+-----------------------------------------------------------------------------+---------------------------------------------+
@@ -178,7 +178,7 @@ mysql> EXPLAIN SELECT /*+ use_index(t1, idx) */ * FROM t1 WHERE JSON_CONTAINS((j
 +-------------------------------+---------+-----------+-----------------------------------------------------------------------------+---------------------------------------------+
 5 rows in set (0.00 sec)
 
-mysql> EXPLAIN SELECT * FROM t1 use index(idx) WHERE JSON_OVERLAPS((j->'$.path'), '[1, 2, 3]');
+mysql> EXPLAIN SELECT /*+ use_index_merge(t1, idx) */ * FROM t1 WHERE JSON_OVERLAPS((j->'$.path'), '[1, 2, 3]');
 +---------------------------------+---------+-----------+-----------------------------------------------------------------------------+----------------------------------------------------------------------------------+
 | id                              | estRows | task      | access object                                                               | operator info                                                                    |
 +---------------------------------+---------+-----------+-----------------------------------------------------------------------------+----------------------------------------------------------------------------------+
@@ -198,7 +198,7 @@ The composite multi-valued index can also be accessed through IndexMerge:
 mysql> CREATE TABLE t2 (a INT, j JSON, b INT, INDEX idx(a, (CAST(j->'$.path' AS SIGNED ARRAY)), b));
 Query OK, 0 rows affected (0.04 sec)
 
-mysql> EXPLAIN SELECT /*+ use_index(t2, idx) */ * FROM t2 WHERE a=1 AND (1 MEMBER OF (j->'$.path')) AND b=2;
+mysql> EXPLAIN SELECT /*+ use_index_merge(t2, idx) */ * FROM t2 WHERE a=1 AND (1 MEMBER OF (j->'$.path')) AND b=2;
 +---------------------------------+---------+-----------+-----------------------------------------------------------------------------------+------------------------------------------------------------------------+
 | id                              | estRows | task      | access object                                                                     | operator info                                                          |
 +---------------------------------+---------+-----------+-----------------------------------------------------------------------------------+------------------------------------------------------------------------+
@@ -209,7 +209,7 @@ mysql> EXPLAIN SELECT /*+ use_index(t2, idx) */ * FROM t2 WHERE a=1 AND (1 MEMBE
 +---------------------------------+---------+-----------+-----------------------------------------------------------------------------------+------------------------------------------------------------------------+
 4 rows in set, 1 warning (0.00 sec)
 
-mysql> EXPLAIN SELECT /*+ use_index(t2, idx) */ * FROM t2 WHERE a=1 AND JSON_CONTAINS((j->'$.path'), '[1, 2, 3]');
+mysql> EXPLAIN SELECT /*+ use_index_merge(t2, idx) */ * FROM t2 WHERE a=1 AND JSON_CONTAINS((j->'$.path'), '[1, 2, 3]');
 +-------------------------------+---------+-----------+-----------------------------------------------------------------------------------+-------------------------------------------------+
 | id                            | estRows | task      | access object                                                                     | operator info                                   |
 +-------------------------------+---------+-----------+-----------------------------------------------------------------------------------+-------------------------------------------------+
@@ -221,7 +221,7 @@ mysql> EXPLAIN SELECT /*+ use_index(t2, idx) */ * FROM t2 WHERE a=1 AND JSON_CON
 +-------------------------------+---------+-----------+-----------------------------------------------------------------------------------+-------------------------------------------------+
 5 rows in set (0.00 sec)
 
-mysql> EXPLAIN SELECT * FROM t2 use index(idx) WHERE a=1 AND JSON_OVERLAPS((j->'$.path'), '[1, 2, 3]');
+mysql> EXPLAIN SELECT /*+ use_index_merge(t2, idx) */ * FROM t2 WHERE a=1 AND JSON_OVERLAPS((j->'$.path'), '[1, 2, 3]');
 +---------------------------------+---------+-----------+-----------------------------------------------------------------------------------+----------------------------------------------------------------------------------+
 | id                              | estRows | task      | access object                                                                     | operator info                                                                    |
 +---------------------------------+---------+-----------+-----------------------------------------------------------------------------------+----------------------------------------------------------------------------------+
@@ -241,7 +241,7 @@ For `OR` conditions composed of multiple `member of` expressions, IndexMerge can
 mysql> CREATE TABLE t3 (a INT, j JSON, INDEX idx(a, (CAST(j AS SIGNED ARRAY))));
 Query OK, 0 rows affected (0.04 sec)
 
-mysql> EXPLAIN SELECT /*+ use_index(t3, idx) */ * FROM t3 WHERE ((a=1 AND (1 member of (j)))) OR ((a=2 AND (2 member of (j))));
+mysql> EXPLAIN SELECT /*+ use_index_merge(t3, idx) */ * FROM t3 WHERE ((a=1 AND (1 member of (j)))) OR ((a=2 AND (2 member of (j))));
 +---------------------------------+---------+-----------+---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
 | id                              | estRows | task      | access object                                     | operator info                                                                                                                                    |
 +---------------------------------+---------+-----------+---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -253,7 +253,7 @@ mysql> EXPLAIN SELECT /*+ use_index(t3, idx) */ * FROM t3 WHERE ((a=1 AND (1 mem
 +---------------------------------+---------+-----------+---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
 ```
 
-The following are some scenarios that are not yet supported. In these scenarios, using the `use_index_merge` hint does not take effect and returns the corresponding warning. Using the `use_index` hint can make the optimizer forcibly use the index, but will cause `FullScan`, and the filter conditions cannot be used directly for index access. It is not recommended to use `use_index_merge` or `use_index` in the following scenarios:
+The following are some scenarios that are not yet supported.
 
 ```sql
 mysql> CREATE TABLE t4 (j JSON, INDEX idx((CAST(j AS SIGNED ARRAY))));
@@ -278,16 +278,15 @@ mysql> SHOW WARNINGS;
 +---------+------+----------------------------+
 1 row in set (0.00 sec)
 
-mysql> EXPLAIN SELECT /*+ use_index(t3, idx) */ * FROM t3 WHERE (json_contains(j, '[1, 2]')) OR (json_contains(j, '[3, 4]'));
-+------------------------------+----------+-----------+---------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
-| id                           | estRows  | task      | access object                                     | operator info                                                                                                    |
-+------------------------------+----------+-----------+---------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
-| IndexMerge_8                 | 9600.00  | root      |                                                   | type: union                                                                                                      |
-| ├─IndexFullScan_5(Build)     | 10000.00 | cop[tikv] | table:t3, index:idx(a, cast(`j` as signed array)) | keep order:false, stats:pseudo                                                                                   |
-| └─Selection_7(Probe)         | 9600.00  | cop[tikv] |                                                   | or(json_contains(test.t3.j, cast("[1, 2]", json BINARY)), json_contains(test.t3.j, cast("[3, 4]", json BINARY))) |
-|   └─TableRowIDScan_6         | 10000.00 | cop[tikv] | table:t3                                          | keep order:false, stats:pseudo                                                                                   |
-+------------------------------+----------+-----------+---------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
-4 rows in set (0.00 sec)
+mysql> EXPLAIN SELECT /*+ use_index_merge(t3, idx) */ * FROM t3 WHERE (json_contains(j, '[1, 2]')) OR (json_contains(j, '[3, 4]'));
++-------------------------+----------+-----------+---------------+------------------------------------------------------------------------------------------------------------------+
+| id                      | estRows  | task      | access object | operator info                                                                                                    |
++-------------------------+----------+-----------+---------------+------------------------------------------------------------------------------------------------------------------+
+| TableReader_7           | 9600.00  | root      |               | data:Selection_6                                                                                                 |
+| └─Selection_6           | 9600.00  | cop[tikv] |               | or(json_contains(test.t3.j, cast("[1, 2]", json BINARY)), json_contains(test.t3.j, cast("[3, 4]", json BINARY))) |
+|   └─TableFullScan_5     | 10000.00 | cop[tikv] | table:t3      | keep order:false, stats:pseudo                                                                                   |
++-------------------------+----------+-----------+---------------+------------------------------------------------------------------------------------------------------------------+
+3 rows in set, 1 warning (0.01 sec)
 
 -- The more complex expression formed by multi-layer OR/AND nesting
 mysql> EXPLAIN SELECT /*+ use_index_merge(t3, idx) */ * FROM t3 WHERE ((1 member of (j)) AND (2 member of (j))) OR ((3 member of (j)) AND (4 member of (j)));
