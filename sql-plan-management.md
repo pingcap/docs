@@ -200,11 +200,7 @@ This statement outputs the execution plan bindings at the GLOBAL or SESSION leve
 | original_sql  |  Original SQL statement after parameterization |
 | bind_sql | Bound SQL statement with hints |
 | default_db | Default database |
-<<<<<<< HEAD
-| status | Status including Using, Deleted, Invalid, Rejected, and Pending verification|
-=======
-| status | Status including `enabled` (replacing the `using` status from v6.0), `disabled`, `deleted`, `invalid`, `rejected`, and `pending verify`|
->>>>>>> c03865a5c (Fix plan binding status (#12315))
+| status | Status including `using`, `disabled`, `deleted`, `invalid`, `rejected`, and `pending verify`|
 | create_time | Creating time |
 | update_time | Updating time |
 | charset | Character set |
