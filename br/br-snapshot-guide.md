@@ -17,6 +17,11 @@ Besides basic backup and restore, snapshot backup and restore also provides the 
 
 ## Back up cluster snapshots
 
+> **Note:**
+>
+> - The following examples assume that access key and secret key are used to authorize permissions. If IAM Role is used, you need to set `--send-credentials-to-tikv` to `false`.
+> - If other storage systems or authorization methods are used, adjust the parameter settings according to [Backup Storages](/br/backup-and-restore-storages.md).
+
 You can back up a TiDB cluster snapshot by running the `br backup full` command. Run `br backup full --help` to see the help information:
 
 ```shell

@@ -8,6 +8,22 @@ aliases: ['/docs/dev/br/backup-and-restore-storages/','/tidb/dev/backup-storage-
 
 TiDB supports storing backup data to Amazon S3, Google Cloud Storage (GCS), Azure Blob Storage, and NFS. Specifically, you can specify the URL of backup storage in the `--storage` or `-s` parameter of `br` commands. This document introduces the [URL format](#url-format) and [authentication](#authentication) of different external storage services, and [server-side encryption](#server-side-encryption).
 
+## Send credentials to TiKV
+
+By default, BR sends a credential to each TiKV node when using Amazon S3, GCS, or Azure Blob Storage as the storage system. This behavior simplifies the configuration and is controlled by the parameter `--send-credentials-to-tikv`. The default value is `true`.
+
+Note that this operation is not suitable for cloud environments. If you use IAM Role authorization, each node has its own role and permissions. In this case, you need to configure `--send-credentials-to-tikv=false` (or `-c=0` in short) to disable sending credentials:
+
+```bash
+./br backup full -c=0 -u pd-service:2379 --storage 's3://bucket-name/prefix'
+```
+
+If you backup or restore data using the [`BACKUP`](/sql-statements/sql-statement-backup.md) and [`RESTORE`](/sql-statements/sql-statement-restore.md) statements, you can add the `SEND_CREDENTIALS_TO_TIKV = FALSE` option:
+
+```sql
+BACKUP DATABASE * TO 's3://bucket-name/prefix' SEND_CREDENTIALS_TO_TIKV = FALSE;
+```
+
 ## URL format
 
 ### URL format description
