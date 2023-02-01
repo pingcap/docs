@@ -5,7 +5,7 @@ summary: Learn the usage of CREATE RESOURCE GROUP in TiDB.
 
 # CREATE RESOURCE GROUP
 
-You can run the `CREATE RESOURCE GROUP` statement to create a resource group in the currently selected database.
+You can use the `CREATE RESOURCE GROUP` statement to create a resource group in the currently selected database.
 
 ## Synopsis
 
