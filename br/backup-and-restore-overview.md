@@ -17,11 +17,9 @@ BR satisfies the following requirements:
 
 ## Before you use
 
-This section describes the prerequisites for using TiDB backup and restore, including the usage tips and compatibility issues.
+This section describes the prerequisites for using TiDB backup and restore, including restrictions, usage tips and compatibility issues.
 
 ### Restrictions
-
-PITR:
 
 - PITR only supports restoring data to **an empty cluster**.
 - PITR only supports cluster-level restore and does not support database-level or table-level restore.
@@ -32,16 +30,16 @@ PITR:
 Snapshot backup:
 
 - It is recommended that you perform the backup operation during off-peak hours to minimize the impact on applications.
-- It is recommended that you execute multiple backup or restore operations one by one. Running backup operations in parallel leads to low performance. Worse still, lack of collaboration between multiple tasks might result in task failures and affect cluster performance.
+- It is recommended that you execute multiple backup or restore tasks one by one. Running multiple backup tasks in parallel leads to low performance. Worse still, a lack of collaboration between multiple tasks might result in task failures and affect cluster performance.
 
 Snapshot restore:
 
-- BR uses resources of the target cluster as much as possible. Therefore, it is recommended that you restore data to a new cluster or an offline cluster. Avoid restoring data to a production cluster. Otherwise, your application might be affected.
+- BR uses resources of the target cluster as much as possible. Therefore, it is recommended that you restore data to a new cluster or an offline cluster. Avoid restoring data to a production cluster. Otherwise, your application will be affected inevitably.
 
 Backup storage and network configuration:
 
 - It is recommended that you store backup data to a storage system that is compatible with Amazon S3, GCS, or Azure Blob Storage.
-- You need to ensure that BR, TiKV, and the backup storage system have enough network bandwidth, and the storage system can provide sufficient read and write performance (IOPS). Otherwise, they might become a performance bottleneck during backup and restore.
+- You need to ensure that BR, TiKV, and the backup storage system have enough network bandwidth, and that the backup storage system can provide sufficient read and write performance (IOPS). Otherwise, they might become a performance bottleneck during backup and restore.
 
 ## Use backup and restore
 
