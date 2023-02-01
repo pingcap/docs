@@ -128,7 +128,7 @@ MySQL [test]> select @@last_plan_from_cache;
 Some queries or plans cannot be cached. You can use the `SHOW WARNINGS` statement to check whether the query or plan is cached. If it is not cached, you can check the reason for the failure in the result. For example:
 
 ```sql
-mysql> prepare st from 'select * from t where a > (select max(a) from t)';  -- The query contains a subquery and cannot be cached。
+mysql> PREPARE st FROM 'SELECT * FROM t WHERE a > (SELECT MAX(a) FROM t)';  -- The query contains a subquery and cannot be cached.
 
 Query OK, 0 rows affected, 1 warning (0.01 sec)
 
