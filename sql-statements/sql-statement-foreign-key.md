@@ -33,11 +33,11 @@ The naming of a foreign key follows the following rules:
 
 When creating a foreign key, the following conditions must be met:
 
-- Neither the parent table nor the child table can be a temporary table.
-- The user must have the `REFERENCES` privilege on the parent table.
-- The columns referenced by the foreign key in the parent table and the child table must be of the same data type and have the same size, precision, length, character set, and collation.
+- Neither the parent table nor the child table is a temporary table.
+- The user has the `REFERENCES` privilege on the parent table.
+- The columns referenced by the foreign key in the parent table and the child table are of the same data type and have the same size, precision, length, character set, and collation.
 - The columns in the foreign key cannot reference themselves.
-- The columns in the foreign key and the columns in the referenced parent table must have corresponding indexes, and the order of the columns in the index must match the order of columns in the foreign key. This is to use the index to avoid full table scans when performing foreign key constraint checks.
+- The columns in the foreign key and the columns in the referenced parent table have corresponding indexes, and the order of the columns in the index matches that in the foreign key. This is to use the index to avoid full table scans when performing foreign key constraint checks.
 
     - If there is no corresponding foreign key index in the parent table, an error `ERROR 1822: Failed to add the foreign key constraint. Missing index for constraint 'fk' in the referenced table 't'` is reported.
     - If there is no corresponding foreign key index in the child table, an index is automatically created with the same name as the foreign key.
@@ -48,7 +48,7 @@ When creating a foreign key, the following conditions must be met:
 
 ## Reference operations
 
-If the `UPDATE` or `DELETE` operation affects a foreign key value in the parent table, the corresponding foreign key value in the child table is determined by the reference operation defined by the `ON UPDATE` or `ON DELETE` clause in the foreign key definition. The reference operations include the following:
+If an `UPDATE` or `DELETE` operation affects a foreign key value in the parent table, the corresponding foreign key value in the child table is determined by the reference operation defined by the `ON UPDATE` or `ON DELETE` clause in the foreign key definition. The reference operations include the following:
 
 - `CASCADE`: automatically updates or deletes the matching rows in the child table when the `UPDATE` or `DELETE` operation affects the parent table. The cascade operation is performed in a depth-first manner.
 - `SET NULL`: automatically sets the matching foreign key columns in the child table to `NULL` when the `UPDATE` or `DELETE` operation affects the parent table.
@@ -155,18 +155,18 @@ Whether to enable the foreign key constraint check is controlled by the system v
 
 The effect of disabling [`foreign_key_checks`](/system-variables.md#foreign_key_checks) is as follows:
 
-- When deleting a parent table referenced by a foreign key, the deletion can succeed only when the foreign key constraint check is disabled.
-- When importing data to a database, the order of creating tables might be different from the foreign key dependency order, which might cause the creation of tables to fail. Only when the foreign key constraint check is disabled can the tables be created successfully. In addition, when importing data, disabling the foreign key constraint check can also speed up data import.
-- When importing data to a database, if the data of the child table is imported first, an error will be reported. Only when the foreign key constraint check is disabled can the data of the child table be imported successfully.
-- When executing `ALTER TABLE` operations related to foreign keys, the foreign key constraint check must be enabled to execute successfully.
+- When you delete a parent table referenced by a foreign key, the deletion can succeed only when the foreign key constraint check is disabled.
+- When you import data to a database, the order of creating tables might be different from the foreign key dependency order, which might cause the creation of tables to fail. Only when the foreign key constraint check is disabled can the tables be created successfully. In addition, disabling the foreign key constraint check can speed up data import.
+- When you import data to a database, if the data of the child table is imported first, an error will be reported. Only when the foreign key constraint check is disabled can the data of the child table be imported successfully.
+- If an `ALTER TABLE` operation to be executed involves change of the foreign key, this operation succeeds only when the foreign key constraint check is disabled.
 
 When the foreign key constraint check is disabled, the foreign key constraint check and reference operation are not executed, except for the following scenarios:
 
 - When executing `ALTER TABLE`, if the definition of the foreign key is incorrect, an error is still reported.
-- When deleting the index required by the foreign key, the foreign key must be deleted first. Otherwise, an error is reported when deleting the foreign key.
-- When creating a foreign key, if it does not meet the conditions or restrictions of the foreign key, an error is reported.
+- When deleting the index required by the foreign key, you should delete the foreign key first. Otherwise, an error is reported.
+- When you create a foreign key but it does not meet related conditions or restrictions, an error is reported.
 
-## Lock
+## Locking
 
 When `INSERT` or `UPDATE` a child table, the foreign key constraint checks whether the corresponding foreign key value exists in the parent table, and locks the row in the parent table to avoid the foreign key value being deleted by other operations violating the foreign key constraint. The locking behavior is equivalent to performing a `SELECT FOR UPDATE` operation on the row where the foreign key value is located in the parent table. Because TiDB currently does not support `LOCK IN SHARE MODE`, if there are a lot of concurrent writes to the child table and most of the referenced foreign key values are the same, there might be serious lock conflicts. It is recommended to disable [`foreign_key_checks`](/system-variables.md#foreign_key_checks) when writing a large number of child table data.
 
@@ -186,7 +186,7 @@ Create Table: CREATE TABLE `child` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
 ```
 
-You can get information about foreign keys from the `INFORMATION_SCHEMA.KEY_COLUMN_USAGE` system table. The following is an example query:
+You can get information about foreign keys from the [`INFORMATION_SCHEMA.KEY_COLUMN_USAGE`](/information-schema/information-schema-key-column-usage.md) system table. The following is an example query:
 
 ```sql
 mysql> SELECT TABLE_SCHEMA, TABLE_NAME, COLUMN_NAME, CONSTRAINT_NAME FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE REFERENCED_TABLE_SCHEMA IS NOT NULL;
@@ -200,9 +200,9 @@ mysql> SELECT TABLE_SCHEMA, TABLE_NAME, COLUMN_NAME, CONSTRAINT_NAME FROM INFORM
 +--------------+---------------+------------------+-----------------+
 ```
 
-## View the execution plan with foreign keys
+## View execution plans with foreign keys
 
-You can use the `EXPLAIN` statement to view the execution plan. The `Foreign_Key_Check` operator is the operator that performs the foreign key constraint check when executing DML statements.
+You can use the `EXPLAIN` statement to view execution plans. The `Foreign_Key_Check` operator performs the foreign key constraint check on DML statements that are executed.
 
 ```sql
 mysql> explain insert into child values (1,1);
@@ -214,7 +214,7 @@ mysql> explain insert into child values (1,1);
 +-----------------------+---------+------+---------------+-------------------------------+
 ```
 
-You can use the `EXPLAIN ANALYZE` statement to view the execution of the foreign key reference behavior. The `Foreign_Key_Cascade` operator is the operator that performs the foreign key reference behavior when executing DML statements.
+You can use the `EXPLAIN ANALYZE` statement to view the execution of the foreign key reference behavior. The `Foreign_Key_Cascade` operator performs foreign key referencing for DML statements that are executed.
 
 ```sql
 mysql> explain analyze delete from parent where id = 1;
@@ -235,7 +235,7 @@ mysql> explain analyze delete from parent where id = 1;
 
 ### Compatibility between TiDB versions
 
-Before v6.6.0, TiDB supported the syntax of creating foreign keys, but the created foreign keys are ineffective. If you upgrade a TiDB cluster created before v6.6.0 to v6.6.0 or later, the foreign keys created before the upgrade are still ineffective. Only the foreign keys created in v6.6.0 or later versions are effective. You can use the `SHOW CREATE TABLE` statement to check whether the foreign keys are effective. The invalid foreign key has a `/* FOREIGN KEY INVALID */` comment.
+Before v6.6.0, TiDB supports the syntax of creating foreign keys, but the created foreign keys are ineffective. If you upgrade a TiDB cluster created before v6.6.0 to v6.6.0 or later, the foreign keys created before the upgrade are still ineffective. Only the foreign keys created in v6.6.0 or later versions are effective. You can use the `SHOW CREATE TABLE` statement to check whether the foreign keys are effective. The invalid foreign key has a `/* FOREIGN KEY INVALID */` comment.
 
 ```sql
 mysql> SHOW CREATE TABLE child\G

@@ -271,7 +271,7 @@ For more possible values of this variable, see [Authentication plugin status](/s
 - Persists to cluster: Yes
 - Type: Boolean
 - Default value: `ON`
-- Indicates whether foreign key constraint checking is enabled.
+- This variable controls whether to enable foreign key constraint checking.
 
 ### group_concat_max_len
 
