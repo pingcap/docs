@@ -16,8 +16,8 @@ Before you back up or restore data using the br command-line tool (hereinafter r
 
 > **Note:**
 >
-> - The following examples assume that access key and secret key are used to authorize permissions. If IAM Role is used, you need to set `--send-credentials-to-tikv` to `false`.
-> - If other storage systems or authorization methods are used, adjust the parameter settings according to [Backup Storages](/br/backup-and-restore-storages.md).
+> - The following examples assume that Amazon S3 access keys and secret keys are used to authorize permissions. If IAM roles are used to authorize permissions, you need to set `--send-credentials-to-tikv` to `false`.
+> - If other storage systems or authorization methods are used to authorize permissions, adjust the parameter settings according to [Backup Storages](/br/backup-and-restore-storages.md).
 
 To start a log backup, run `br log start`. A cluster can only run one log backup task each time.
 
