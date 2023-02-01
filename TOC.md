@@ -159,6 +159,7 @@
       - [Back up and Restore Data Using Dumpling and TiDB Lightning](/backup-and-restore-using-dumpling-lightning.md)
       - [Back Up and Restore RawKV](/br/rawkv-backup-and-restore.md)
       - [Incremental Backup and Restore](/br/br-incremental-guide.md)
+  - [Resource Control](/tidb-resource-control.md)
   - [Configure Time Zone](/configure-time-zone.md)
   - [Daily Checklist](/daily-check.md)
   - [Maintain TiFlash](/tiflash/maintain-tiflash.md)
