@@ -293,7 +293,7 @@ INSERT INTO t1 VALUES('[1,2]');
 INSERT INTO t1 VALUES('[2,3]');
 ```
 
-You can also define a multi-valued index as a compound index:
+You can also define a multi-valued index as a composite index:
 
 ```sql
 CREATE TABLE customers (
