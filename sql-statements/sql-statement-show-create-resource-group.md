@@ -19,7 +19,7 @@ ResourceGroupName ::=
 
 ## Examples
 
-View the current definition of the resource group `rg1` and recreate it in another TiDB cluster.
+View the current definition of the resource group `rg1`.
 
 ```sql
 CREATE RESOURCE GROUP rg1 RRU_PER_SEC=100 WRU_PER_SEC=200;
