@@ -12,7 +12,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **CLI changes**
 
-- Introduce the TiDB Cloud CLI client [`ticloud`](tidb-cloud/cli-reference.md).
+- Introduce the TiDB Cloud CLI client [`ticloud`](/tidb-cloud/cli-reference.md).
 
     Using `ticloud`, you can easily manage your TiDB Cloud resources from a terminal or other automatic workflows with a few lines of commands. Especially for GitHub Actions, we have provided [`setup-tidbcloud-cli`](https://github.com/marketplace/actions/set-up-tidbcloud-cli) for you to easily set up `ticloud`.
 
