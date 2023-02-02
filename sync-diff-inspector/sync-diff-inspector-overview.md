@@ -260,7 +260,7 @@ Average Speed: 113.277149MB/s
 - `TABLE`: The corresponding database and table names
 - `RESULT`: Whether the check is completed. If you have configured `skip-non-existing-table = true`, the value of this column is `skipped` for tables that do not exist in the upstream or downstream
 - `STRUCTURE EQUALITY`: Checks whether the table structure is the same
-- `DATA DIFF ROWS`: `rowAdd` / `rowDelete`. Indicates the number of rows that need to be added/deleted to fix the table
+- `DATA DIFF ROWS`: `rowAdd`/`rowDelete`. Indicates the number of rows that need to be added/deleted to fix the table
 
 ### SQL statements to fix inconsistent data
 
