@@ -33,11 +33,11 @@ BurstableOption ::=
 
 ```
 
-The `ResourceGroupName` of a resource group is globally unique and cannot be duplicated.
+The resource group name parameter (`ResourceGroupName`) is globally unique and cannot be duplicated.
 
 TiDB supports the following `DirectResourceGroupOption`, where [RU (Resource Unit)](/tidb-RU.md) is TiDB's unified abstraction unit for CPU, IO, and other system resources.
 
-| Parameter     | Description                         | Example                |
+| Option     | Description                         | Example                |
 |---------------|-------------------------------------|------------------------|
 |`RRU_PER_SEC`  | Quota of RU read per second         |`RRU_PER_SEC = 500`     |
 |`WRU_PER_SEC`  | Quota of RU write per second        |`WRU_PER_SEC = 300`     |
