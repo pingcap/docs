@@ -238,7 +238,7 @@ Expression indexes have the same syntax and limitations as in MySQL. They are im
 >
 > For the current version, this feature is still experimental and not recommended for production environments.
 
-Multi-valued index is a kind of secondary index defined on an array column. In an ordinary index, one index record corresponds to one data record (1:1). In a multi-valued index, multiple index records correspond to one data record (N:1). Multi-valued indexes are used to index JSON arrays. For example, a multi-valued index defined on the `zipcode` field will generate one index record for each element in the `zipcode` array.
+Multi-valued index is a kind of secondary index defined on an array column. In a normal index, one index record corresponds to one data record (1:1). In a multi-valued index, multiple index records correspond to one data record (N:1). Multi-valued indexes are used to index JSON arrays. For example, a multi-valued index defined on the `zipcode` field will generate one index record for each element in the `zipcode` array.
 
 ```json
 {
@@ -342,8 +342,8 @@ See [Index Selection - Use multi-valued indexes](/choose-index.md#use-a-multi-va
 - You cannot use a multi-valued index for sorting.
 - You can only create a multi-valued index on a JSON array.
 - A multi-valued index cannot be a primary key or a foreign key.
-- The extra storage space used by a multi-valued index = the average number of array elements per row * the space used by an ordinary secondary index.
-- Compared with ordinary indexes, DML operations will modify more index records for multi-valued indexes, so multi-valued indexes will have a greater performance impact than ordinary indexes.
+- The extra storage space used by a multi-valued index = the average number of array elements per row * the space used by a normal secondary index.
+- Compared with normal indexes, DML operations will modify more index records for multi-valued indexes, so multi-valued indexes will have a greater performance impact than normal indexes.
 - Because multi-valued indexes are a special type of expression index, they are the limitations of expression indexes.
 
 ## Invisible index
