@@ -36,7 +36,7 @@ For macOS or Linux, you can install `ticloud` using any of the following methods
 
 - Install manually
 
-    Download the pre-compiled binaries from the [releases](https://github.com/tidbcloud/tidbcloud-cli/releases/latest) page and copy to your desired location for installation.
+    Download the pre-compiled binaries from the [releases](https://github.com/tidbcloud/tidbcloud-cli/releases/latest) page and copy them to your desired location for installation.
 
 - Install in GitHub Actions
 
@@ -50,7 +50,7 @@ For Windows, you can install `ticloud` using either of the following methods:
 
 - Install manually
 
-    Download the pre-compiled binaries from the [releases](https://github.com/tidbcloud/tidbcloud-cli/releases/latest) page and copy to the desired location for installation.
+    Download the pre-compiled binaries from the [releases](https://github.com/tidbcloud/tidbcloud-cli/releases/latest) page and copy them to the desired location for installation.
 
 - Install in GitHub Actions
 

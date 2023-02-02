@@ -60,7 +60,7 @@ dev
 staging
 ```
 
-In this example output, the user profile `defalut` is currently active.
+In this example output, the user profile `default` is currently active.
 
 ### Describe a user profile
 
