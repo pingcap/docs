@@ -13,19 +13,19 @@ Make sure to first [set up your TiDB Cloud CLI environment](/tidb-cloud/get-star
 
 ## Commands available
 
-The following table lists the available commands for the TiDB Cloud CLI.
+The following table lists the commands available for the TiDB Cloud CLI.
 
 To use the `ticloud` CLI in your terminal, run `ticloud [command] [subcommand]`. If you are using [TiUP](https://docs.pingcap.com/tidb/stable/tiup-overview), use `tiup cloud [command] [subcommand]` instead.
 
-| Command    | Subcommand                                                | Description                                                                                              |
+| Command    | Subcommand                                                 | Description                                                                                              |
 |------------|------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
 | cluster    | create, delete, describe, list                             | Manage clusters                                                                                          |
 | completion | bash, fish, powershell, zsh                                | Generate completion script for specified shell                                                           |
-| config     | create, delete, describe, edit, list, set, use             | Configure user profiles.                                                                    |
+| config     | create, delete, describe, edit, list, set, use             | Configure user profiles                                                                                  |
 | help       | cluster, completion, config, help, import, project, update | View help for any command                                                                                |
 | import     | cancel, describe, list, start                              | Manage [import](/tidb-cloud/tidb-cloud-migration-overview.md#import-data-from-files-to-tidb-cloud) tasks |
 | project    | list                                                       | Manage projects                                                                                          |
-| update     |                                                            | Update the CLI to the latest version                                                                     |
+| update     | -                                                          | Update the CLI to the latest version                                                                     |
 
 ## Command modes
 
