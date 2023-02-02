@@ -21,7 +21,7 @@ TiDB バージョン: 4.0.11
 
 -   TiFlash
 
-    -   コプロセッサー・スレッド・プールを追加して、実行のためにコプロセッサー要求をキューに入れ、場合によってはメモリー不足 (OOM) を回避し、 `cop_pool_size`と`batch_cop_pool_size`の構成項目をデフォルト値の`NumOfPhysicalCores * 2`で追加します。
+    -   コプロセッサー・スレッド・プールを追加して、実行のためにコプロセッサー要求をキューに入れ、場合によってはメモリ(OOM) を回避し、 `cop_pool_size`と`batch_cop_pool_size`の構成項目をデフォルト値の`NumOfPhysicalCores * 2`で追加します。
 
 ## 改良点 {#improvements}
 

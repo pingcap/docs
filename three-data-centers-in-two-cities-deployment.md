@@ -3,7 +3,7 @@ title: Three Data Centers in Two Cities Deployment
 summary: Learn the deployment solution to three data centers in two cities.
 ---
 
-# 2 つの都市に配置された 3 つのデータ センター {#three-data-centers-in-two-cities-deployment}
+# 2 つの地域に配置された 3 つのデータ センター {#three-data-centers-in-two-cities-deployment}
 
 このドキュメントでは、2 つの都市に配置された 3 つのデータ センター (DC) のアーキテクチャと構成について説明します。
 
@@ -52,7 +52,7 @@ summary: Learn the deployment solution to three data centers in two cities.
 -   TiDBサーバー、制御マシン、および監視サーバーは RAC3 上にあります。 TiDBサーバーは、定期的なメンテナンスとバックアップのためにデプロイされます。 Prometheus、Grafana、および復元ツールは、制御マシンと監視マシンにデプロイされます。
 -   Drainerをデプロイするために、別のバックアップサーバーを追加できます。 Drainerは、増分バックアップを実現するために、ファイルを出力することによって binlog データを指定された場所に保存します。
 
-## Configuration / コンフィグレーション {#configuration}
+## コンフィグレーション {#configuration}
 
 ### 例 {#example}
 

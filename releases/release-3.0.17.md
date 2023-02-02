@@ -41,7 +41,7 @@ TiDB バージョン: 3.0.17
 -   TiKV
 
     -   リージョンのマージ中に古いデータを読み取る可能性があるバグを修正します[#8111](https://github.com/tikv/tikv/pull/8111)
-    -   スケジューリング プロセス中のメモリ リークの問題を修正します[#8355](https://github.com/tikv/tikv/pull/8355)
+    -   スケジューリング プロセス中のメモリリークの問題を修正します[#8355](https://github.com/tikv/tikv/pull/8355)
 
 -   ツール
 

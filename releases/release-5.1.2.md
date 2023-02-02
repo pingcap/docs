@@ -143,7 +143,7 @@ TiDB バージョン: 5.1.2
 
         -   `string`または`[]byte`の文字列型の値を処理するときに、JSON エンコーディングがpanicを引き起こす可能性があるというバグを修正し[#2758](https://github.com/pingcap/tiflow/issues/2758) 。
         -   OOM [#2673](https://github.com/pingcap/tiflow/issues/2673)を回避するために gRPC ウィンドウ サイズを小さくする
-        -   高いメモリ プレッシャ下での gRPC `keepalive`エラーを修正します[#2202](https://github.com/pingcap/tiflow/issues/2202)
+        -   高いメモリプレッシャ下での gRPC `keepalive`エラーを修正します[#2202](https://github.com/pingcap/tiflow/issues/2202)
         -   署名されていない`tinyint`が TiCDC をpanic[#2648](https://github.com/pingcap/tiflow/issues/2648)にするバグを修正
         -   TiCDC Open Protocol の空の値の問題を修正します。 1 つのトランザクションで変更がない場合、空の値が出力されなくなりました。 [#2612](https://github.com/pingcap/tiflow/issues/2612)
         -   手動再起動中の DDL 処理のバグを修正します[#2603](https://github.com/pingcap/tiflow/issues/2603)

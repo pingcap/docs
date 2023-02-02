@@ -45,7 +45,7 @@ SQL 実行の基本情報には、テーブル名、インデックス名、実�
 
 ![Coprocessor read](/media/dashboard/dashboard-statement-plans-cop-read.png)
 
-### 取引タブ {#transaction-tab}
+### トランザクションタブ {#transaction-tab}
 
 [**トランザクション**] タブをクリックすると、平均書き込みキー数や最大書き込みキー数など、実行計画やトランザクションに関する情報が表示されます。
 

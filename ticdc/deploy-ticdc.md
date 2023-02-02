@@ -101,7 +101,7 @@ tiup cluster upgrade <cluster-name> <cluster-version> --transfer-timeout 600
 
 TiCDC クラスターをアップグレードするときは、次の点に注意する必要があります。
 
--   TiCDC v4.0.2 再構成`changefeed` .詳細については、 [Configuration / コンフィグレーションファイルの互換性に関する注意事項](/ticdc/ticdc-compatibility.md#cli-and-configuration-file-compatibility)を参照してください。
+-   TiCDC v4.0.2 再構成`changefeed` .詳細については、 [コンフィグレーションファイルの互換性に関する注意事項](/ticdc/ticdc-compatibility.md#cli-and-configuration-file-compatibility)を参照してください。
 
 -   アップグレード中に問題が発生した場合は、解決策について[アップグレードに関するよくある質問](/upgrade-tidb-using-tiup.md#faq)を参照できます。
 

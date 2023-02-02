@@ -175,7 +175,7 @@ EXPLAIN ANALYZE SELECT * FROM t1 INNER JOIN t2 ON t1.id = t2.t1_id WHERE t1.int_
 
 ヒント[`INL_JOIN`](/optimizer-hints.md#inl_joint1_name--tl_name-)を使用したインデックス結合操作は、外部テーブルで結合する前に、中間結果のハッシュ テーブルを作成します。 TiDB は、ヒント[`INL_HASH_JOIN`](/optimizer-hints.md#inl_hash_join)を使用して外側のテーブルにハッシュ テーブルを作成することもサポートしています。これらのインデックス結合の各バリエーションは、SQL オプティマイザーによって自動的に選択されます。
 
-### Configuration / コンフィグレーション {#configuration}
+### コンフィグレーション {#configuration}
 
 インデックス結合のパフォーマンスは、次のシステム変数の影響を受けます。
 
@@ -253,11 +253,11 @@ Query OK, 0 rows affected (0.00 sec)
 5 rows in set (0.98 sec)
 ```
 
-### Configuration / コンフィグレーション {#configuration}
+### コンフィグレーション {#configuration}
 
 ハッシュ結合のパフォーマンスは、次のシステム変数の影響を受けます。
 
--   [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) (デフォルト値: 1GB) - クエリのメモリ クォータを超えた場合、TiDB はハッシュ結合の`Build`演算子をディスクにスピルしてメモリを節約しようとします。
+-   [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) (デフォルト値: 1GB) - クエリのメモリクォータを超えた場合、TiDB はハッシュ結合の`Build`演算子をディスクにスピルしてメモリを節約しようとします。
 -   [`tidb_hash_join_concurrency`](/system-variables.md#tidb_hash_join_concurrency) (デフォルト値: `5` ) - 同時ハッシュ結合タスクの数。
 
 ## マージ ジョイン {#merge-join}
@@ -287,6 +287,6 @@ EXPLAIN SELECT /*+ MERGE_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 
 マージ結合演算子の実行プロセスでは、TiDB は次の操作を実行します。
 
-1.  Join Group の全データを`Build`側からメモリに読み込みます。
+1.  Join Group のすべてのデータを`Build`側からメモリに読み込みます。
 2.  `Probe`面のデータを読み込みます。
 3.  `Probe`側のデータの各行が`Build`側の完全な結合グループと一致するかどうかを比較します。同等の条件とは別に、同等でない条件があります。ここでの「一致」とは、主に、同等でない条件が満たされているかどうかを確認することを指します。結合グループとは、すべての結合キーの中で同じ値を持つデータを指します。

@@ -11,7 +11,7 @@ TiDB v3.0.8 より前では、TiDB はデフォルトで楽観的トランザク
 
 ## 書き込み競合の理由 {#the-reason-of-write-conflicts}
 
-TiDB は、 [パーコレーター](https://www.usenix.org/legacy/event/osdi10/tech/full_papers/Peng.pdf)トランザクション モデルを使用してトランザクションを実装します。 `percolator`は一般に 2PC の実装です。詳細な 2PC プロセスについては、 [TiDB 楽観的トランザクション モデル](/optimistic-transaction.md)を参照してください。
+TiDB は、 [パーコレーター](https://www.usenix.org/legacy/event/osdi10/tech/full_papers/Peng.pdf)トランザクション モデルを使用してトランザクションを実装します。 `percolator`は一般に 2PC の実装です。詳細な 2PC プロセスについては、 [TiDB 楽観的トランザクションモデル](/optimistic-transaction.md)を参照してください。
 
 クライアントが`COMMIT`要求を TiDB に送信した後、TiDB は 2PC プロセスを開始します。
 

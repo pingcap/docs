@@ -13,7 +13,7 @@ Key Visualizer ページにアクセスするには、次の 2 つの方法の�
 
 -   TiDB ダッシュボードにログインした後、左側のナビゲーション メニューで**Key Visualizer**をクリックします。
 
-![Access Key Visualizer](/media/dashboard/dashboard-keyviz-access.png)
+    ![Access Key Visualizer](/media/dashboard/dashboard-keyviz-access-v650.png)
 
 -   ブラウザで[http://127.0.0.1:2379/dashboard/#/keyviz](http://127.0.0.1:2379/dashboard/#/keyviz)にアクセスします。 `127.0.0.1:2379`を実際の PD インスタンスのアドレスとポートに置き換えます。
 
@@ -23,11 +23,11 @@ Key Visualizer ページにアクセスするには、次の 2 つの方法の�
 
 ![Key Visualizer page](/media/dashboard/dashboard-keyviz-overview.png)
 
-上記のインターフェイスから、次のオブジェクトを確認できます。
+前述のインターフェイスから、次のオブジェクトを確認できます。
 
 -   時間の経過に伴う全体的なトラフィックの変化を示す大きなヒートマップ。
 -   ある座標点の詳細情報。
--   テーブル、インデックスなどの情報 (ヒートマップの左側)。
+-   テーブルとインデックスの情報 (ヒートマップの左側)。
 
 ## 基本概念 {#basic-concepts}
 
@@ -94,7 +94,7 @@ Key Visualizer を開くと、デフォルトで最近 6 時間のデータベ�
     ![Selection box](/media/dashboard/dashboard-keyviz-select-zoom.gif)
 
     -   [**リセット**] ボタンをクリックして、リージョン範囲をデータベース全体にリセットします。
-    -   **時間選択ボックス**(上のインターフェイスの`6 hours`の位置) をクリックして、観測期間を再度選択します。
+    -   **時間選択ボックス**(前のインターフェイスの`6 hour`の位置) をクリックし、観測期間を再度選択します。
 
     ![Select time](/media/dashboard/dashboard-keyviz-select-time.png)
 

@@ -73,7 +73,7 @@ TiDB バージョン: 4.0.14
         -   PD エンドポイントで証明書が見つからない場合に返されるエラー メッセージを改善します[#1973](https://github.com/pingcap/tiflow/issues/1973)
         -   ソーターの I/O エラーをより使いやすくする[#1976](https://github.com/pingcap/tiflow/pull/1976)
         -   KV クライアントのリージョン増分スキャンに同時実行制限を追加して、TiKV [#1926](https://github.com/pingcap/tiflow/pull/1926)のプレッシャーを軽減します
-        -   テーブル メモリ消費量のメトリックを追加します[#1884](https://github.com/pingcap/tiflow/pull/1884)
+        -   テーブルメモリ消費量のメトリックを追加します[#1884](https://github.com/pingcap/tiflow/pull/1884)
         -   TiCDCサーバー構成に`capture-session-ttl`を追加します[#2169](https://github.com/pingcap/tiflow/pull/2169)
 
 ## バグの修正 {#bug-fixes}
@@ -88,7 +88,7 @@ TiDB バージョン: 4.0.14
     -   結合操作で`SELECT ... FOR UPDATE`が機能し、結合でパーティションテーブルが使用されている場合に発生するpanicの問題を修正します[#20028](https://github.com/pingcap/tidb/issues/20028)
     -   キャッシュされた`prepared`プランが`point get` [#24741](https://github.com/pingcap/tidb/issues/24741)に誤って使用される問題を修正
     -   `LOAD DATA`ステートメントが非 utf8 データを異常にインポートできる問題を修正[#25979](https://github.com/pingcap/tidb/issues/25979)
-    -   HTTP API [#24650](https://github.com/pingcap/tidb/pull/24650)経由で統計にアクセスするときに発生する潜在的なメモリ リークの問題を修正します。
+    -   HTTP API [#24650](https://github.com/pingcap/tidb/pull/24650)経由で統計にアクセスするときに発生する潜在的なメモリリークの問題を修正します。
     -   `ALTER USER`ステートメント[#25225](https://github.com/pingcap/tidb/issues/25225)の実行時に発生するセキュリティの問題を修正します。
     -   `TIKV_REGION_PEERS`テーブルが`DOWN`ステータス[#24879](https://github.com/pingcap/tidb/issues/24879)を正しく処理できないバグを修正
     -   `DateTime` [#22231](https://github.com/pingcap/tidb/issues/22231)の解析時に無効な文字列が切り捨てられない問題を修正

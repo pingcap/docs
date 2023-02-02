@@ -13,7 +13,7 @@ summary: Learn the hybrid deployment topology of TiDB clusters.
 
 ## トポロジ情報 {#topology-information}
 
-| 実例         | カウント | 物理マシン構成                    | 知財                                   | Configuration / コンフィグレーション                                                                                                                                                      |
+| 実例         | カウント | 物理マシン構成                    | 知財                                   | コンフィグレーション                                                                                                                                                                      |
 | :--------- | :--- | :------------------------- | :----------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | TiDB       | 6    | 32 仮想コア 64GB               | 10.0.1.1<br/> 10.0.1.2<br/> 10.0.1.3 | CPU コアをバインドするように NUMA を構成する                                                                                                                                                     |
 | PD         | 3    | 16 仮想コア 32 GB              | 10.0.1.4<br/> 10.0.1.5<br/> 10.0.1.6 | `location_labels`パラメータを設定する                                                                                                                                                     |
@@ -25,7 +25,7 @@ summary: Learn the hybrid deployment topology of TiDB clusters.
 -   [ハイブリッド展開用のシンプルなテンプレート](https://github.com/pingcap/docs-cn/blob/master/config-templates/simple-multi-instance.yaml)
 -   [ハイブリッド展開の複雑なテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/complex-multi-instance.yaml)
 
-上記の TiDB クラスター トポロジ ファイルの構成項目の詳細な説明については、 [TiUP を使用してTiUPをデプロイするためのトポロジConfiguration / コンフィグレーションファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
+上記の TiDB クラスター トポロジ ファイルの構成項目の詳細な説明については、 [TiUP を使用してTiUPをデプロイするためのトポロジコンフィグレーションファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
 
 ### 主なパラメータ {#key-parameters}
 
@@ -48,7 +48,7 @@ summary: Learn the hybrid deployment topology of TiDB clusters.
             readpool.unified.max-thread-count = cores * 0.8 / the number of TiKV instances
             ```
 
-    -   ストレージ CF (すべての RocksDB 列ファミリー) をメモリに自己適応するように構成します。 `storage.block-cache.capacity`パラメータを設定することで、CF がメモリ使用量を自動的に調整することができます。
+    -   ストレージ CF (すべての RocksDB 列ファミリー) をメモリに自己適応するように構成するには。 `storage.block-cache.capacity`パラメータを設定することで、CF がメモリ使用量を自動的に調整することができます。
 
         -   `storage.block-cache`は、デフォルトで CF 自己適応を有効にします。変更する必要はありません。
 

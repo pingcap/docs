@@ -17,7 +17,7 @@ TiDB ダッシュボードのクラスター診断機能は、指定された時
 
 -   TiDB ダッシュボードにログインした後、左側のナビゲーション メニューで [ **クラスタ Diagnostics** ] をクリックします。
 
-    ![Access Cluster Diagnostics page](/media/dashboard/dashboard-diagnostics-access.png)
+    ![Access Cluster Diagnostics page](/media/dashboard/dashboard-diagnostics-access-v650.png)
 
 -   ブラウザで`http://127.0.0.1:2379/dashboard/#/diagnose`にアクセスします。 `127.0.0.1:2379`を実際の PD アドレスとポート番号に置き換えます。
 
@@ -25,36 +25,36 @@ TiDB ダッシュボードのクラスター診断機能は、指定された時
 
 指定された時間範囲内でクラスターを診断し、クラスターの負荷を確認するには、次の手順を実行して診断レポートを生成できます。
 
-1.  **Range Start Time**を`2020-05-21 14:40:00`などに設定します。
+1.  **Range Start Time**を`2022-05-21 14:40:00`などに設定します。
 2.  **Range Duration**を`10 min`などに設定します。
 3.  [**開始] を**クリックします。
 
-![Generate diagnostic report](/media/dashboard/dashboard-diagnostics-gen-report.png)
+![Generate diagnostic report](/media/dashboard/dashboard-diagnostics-gen-report-v650.png)
 
 > **ノート：**
 >
 > レポートの [ **Range Duration]**は 1 ～ 60 分にすることをお勧めします。この<strong>範囲期間</strong>は 60 分を超えることはできません。
 
-上記の手順により、 `2020-05-21 14:40:00`から`2020-05-21 14:50:00`までの時間範囲の診断レポートが生成されます。 [**開始**] をクリックすると、以下のインターフェイスが表示されます。 <strong>Progress</strong>は、診断レポートの進行状況バーです。レポートが生成されたら、[ <strong>ビュー Full Report</strong> ] をクリックします。
+上記の手順により、 `2022-05-21 14:40:00`から`2022-05-21 14:50:00`までの時間範囲の診断レポートが生成されます。 [**開始**] をクリックすると、以下のインターフェイスが表示されます。 <strong>Progress</strong>は、診断レポートの進行状況バーです。レポートが生成されたら、[ <strong>ビュー Full Report</strong> ] をクリックします。
 
-![Report progress](/media/dashboard/dashboard-diagnostics-gen-process.png)
+![Report progress](/media/dashboard/dashboard-diagnostics-gen-process-v650.png)
 
 ## 比較レポートの生成 {#generate-comparison-report}
 
 特定の時点でシステム例外が発生した場合 (たとえば、QPS ジッターや高いレイテンシー)、診断レポートを生成できます。特に、このレポートでは、異常な時間帯のシステムと正常な時間帯のシステムを比較します。例えば：
 
--   異常時間範囲: `2020-05-21 14:40:00` - `2020-05-21 14:45:00` .この時間範囲内では、システムは異常です。
--   通常の時間範囲: `2020-05-21 14:30:00` - `2020-05-21 14:35:00` .この時間範囲内では、システムは正常です。
+-   異常時間範囲: `2022-05-21 14:40:00` - `2022-05-21 14:45:00` .この時間範囲内では、システムは異常です。
+-   通常の時間範囲: `2022-05-21 14:30:00` - `2022-05-21 14:35:00` .この時間範囲内では、システムは正常です。
 
-次の手順を実行して、上記の 2 つの時間範囲の比較レポートを生成できます。
+次の手順を実行して、前の 2 つの時間範囲の比較レポートを生成できます。
 
-1.  `2020-05-21 14:40:00`など、システムが異常になる範囲の開始時間である**Range Start Time**を設定します。
+1.  `2022-05-21 14:40:00`など、システムが異常になる範囲の開始時間である**Range Start Time**を設定します。
 2.  **範囲期間**を設定します。通常、この期間は、5 分間などのシステム異常の期間です。
-3.  **ベースラインによる比較 を**有効にします。
-4.  システムが正常である (比較される) 範囲の**開始時間であるベースライン範囲**の開始時間 ( `2020-05-21 14:30:00`など) を設定します。
+3.  **ベースラインによる比較を**有効にします。
+4.  システムが正常である (比較される) 範囲の**開始時間であるベースライン範囲**の開始時間 ( `2022-05-21 14:30:00`など) を設定します。
 5.  [**開始] を**クリックします。
 
-![Generate comparison report](/media/dashboard/dashboard-diagnostics-gen-compare-report.png)
+![Generate comparison report](/media/dashboard/dashboard-diagnostics-gen-compare-report-v650.png)
 
 次に、レポートが生成されるのを待ち、[ **ビュー Full Report** ] をクリックします。
 

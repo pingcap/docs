@@ -3,7 +3,7 @@ title: TiDB Environment and System Configuration Check
 summary: Learn the environment check operations before deploying TiDB.
 ---
 
-# TiDB 環境とシステムConfiguration / コンフィグレーションのチェック {#tidb-environment-and-system-configuration-check}
+# TiDB 環境とシステムコンフィグレーションのチェック {#tidb-environment-and-system-configuration-check}
 
 このドキュメントでは、TiDB をデプロイする前の環境チェック操作について説明します。次の手順は、優先度順に並べられています。
 
@@ -304,7 +304,7 @@ sudo systemctl enable ntpd.service
 
 本番環境の TiDB では、次の方法でオペレーティング システムの構成を最適化することをお勧めします。
 
-1.  THP (Transparent Huge Pages) を無効にします。データベースのメモリ アクセス パターンは、連続的ではなく疎になる傾向があります。高レベルのメモリ断片化が深刻な場合、THP ページが割り当てられると、より高いレイテンシーが発生します。
+1.  THP (Transparent Huge Pages) を無効にします。データベースのメモリアクセス パターンは、連続的ではなく疎になる傾向があります。高レベルのメモリ断片化が深刻な場合、THP ページが割り当てられると、より高いレイテンシーが発生します。
 2.  ストレージ メディアの I/O スケジューラを`noop`に設定します。高速 SSD ストレージ メディアの場合、カーネルの I/O スケジューリング操作によってパフォーマンスが低下する可能性があります。 Scheduler を`noop`に設定すると、カーネルが I/O 要求を他の操作なしでハードウェアに直接送信するため、パフォーマンスが向上します。また、noop スケジューラの方が適しています。
 3.  CPU 周波数を制御する cpufrequ モジュールには`performance`モードを選択します。動的な調整を行わずに、サポートされている最高の動作周波数に CPU 周波数を固定すると、パフォーマンスが最大化されます。
 

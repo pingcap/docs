@@ -50,7 +50,7 @@ br restore full \
 
 -   クラスタ構成:
 
-    -   15 個の TiKV インスタンス。各 TiKV インスタンスには、16 個の CPU コア、80 GB のメモリ、および RPC 要求を処理するための 16 個のスレッドが装備されています ( [`import.num-threads`](/tikv-configuration-file.md#num-threads) = 16)。
+    -   15 個の TiKV インスタンス。各 TiKV インスタンスには、16 個の CPU コア、80 GB のメモリ、および RPC 要求を処理するための 16 個のスレッド ( [`import.num-threads`](/tikv-configuration-file.md#num-threads) = 16) が装備されています。
     -   3 つの TiDB インスタンス。各 TiDB インスタンスには、16 個の CPU コア、32 GB のメモリが搭載されています。
     -   3 つの PD インスタンス。各 PD インスタンスには、16 個の CPU コア、32 GB のメモリが搭載されています。
 

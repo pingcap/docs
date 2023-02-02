@@ -23,7 +23,7 @@ TiDB アンシブル バージョン: 2.1.19
 -   SQL 実行エンジン
     -   `ConvertJSONToInt` [#13036](https://github.com/pingcap/tidb/pull/13036)の`unit64`の中間結果として`int64`を使用する場合の精度オーバーフローを修正します。
     -   `SLEEP`関数がクエリ内にある場合 (たとえば、 `select 1 from (select sleep(1)) t;)` )、列のプルーニングによってクエリ内の`sleep(1)`が無効になるという問題を修正します[#13039](https://github.com/pingcap/tidb/pull/13039)
-    -   `INSERT ON DUPLICATE UPDATE`ステートメント[#12999](https://github.com/pingcap/tidb/pull/12999)で`Chunk`を再利用することにより、メモリ オーバーヘッドを削減します。
+    -   `INSERT ON DUPLICATE UPDATE`ステートメント[#12999](https://github.com/pingcap/tidb/pull/12999)で`Chunk`を再利用することにより、メモリオーバーヘッドを削減します。
     -   `slow_query`テーブル[#13129](https://github.com/pingcap/tidb/pull/13129)にトランザクション関連のフィールドを追加します。
         -   `Prewrite_time`
         -   `Commit_time`

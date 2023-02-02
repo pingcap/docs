@@ -2,7 +2,7 @@
 title: tiup completion
 ---
 
-# ティアップ完了 {#tiup-completion}
+# tiup completion {#tiup-completion}
 
 ユーザーのコストを削減するために、 TiUPは、自動コマンド ライン補完用の構成ファイルを生成する`tiup completion`のコマンドを提供します。現在、 TiUPは`bash`つと`zsh`のコマンドの完了をサポートしています。
 

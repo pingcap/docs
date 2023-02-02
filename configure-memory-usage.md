@@ -5,12 +5,12 @@ summary: Learn how to configure the memory quota of a query and avoid OOM (out o
 
 # TiDB メモリ制御 {#tidb-memory-control}
 
-現在、TiDB は単一の SQL クエリのメモリ クォータを追跡し、メモリ使用量が特定のしきい値を超えた場合に OOM (メモリ不足) を防止したり、OOM のトラブルシューティングを行ったりするためのアクションを実行できます。システム変数[`tidb_mem_oom_action`](/system-variables.md#tidb_mem_oom_action-new-in-v610)は、クエリがメモリ制限に達したときに実行するアクションを指定します。
+現在、TiDB は単一の SQL クエリのメモリクォータを追跡し、メモリ使用量が特定のしきい値を超えた場合に OOM (メモリ) を防止したり、OOM のトラブルシューティングを行ったりするためのアクションを実行できます。システム変数[`tidb_mem_oom_action`](/system-variables.md#tidb_mem_oom_action-new-in-v610)は、クエリがメモリ制限に達したときに実行するアクションを指定します。
 
 -   `LOG`の値は、 [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)の制限に達したときにクエリが引き続き実行されることを意味しますが、TiDB はログにエントリを出力します。
 -   値`CANCEL`は、TiDB が[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)制限に達した直後に SQL クエリの実行を停止し、クライアントにエラーを返すことを意味します。エラー情報には、SQL 実行プロセスでメモリを消費する各物理実行演算子のメモリ使用量が明確に示されます。
 
-## クエリのメモリ クォータを構成する {#configure-the-memory-quota-of-a-query}
+## クエリのメモリクォータを構成する {#configure-the-memory-quota-of-a-query}
 
 システム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)は、クエリの制限をバイト単位で設定します。いくつかの使用例:
 
@@ -55,11 +55,11 @@ SET GLOBAL tidb_server_memory_limit = "32GB";
 
 > **警告：**
 >
-> -   起動プロセス中、TiDB は[`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)制限が適用されることを保証しません。オペレーティング システムの空きメモリが不十分な場合でも、TiDB で OOM が発生する可能性があります。 TiDB インスタンスに十分な使用可能なメモリがあることを確認する必要があります。
+> -   起動プロセス中、TiDB は[`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)制限が適用されることを保証しません。オペレーティング システムの空きメモリが不十分な場合でも、TiDB で OOM が発生する可能性があります。 TiDB インスタンスに十分な利用可能なメモリがあることを確認する必要があります。
 > -   メモリ制御の過程で、TiDB の合計メモリ使用量が`tidb_server_memory_limit`で設定された制限をわずかに超える場合があります。
 > -   v6.5.0 以降、設定項目`server-memory-quota`は廃止されました。互換性を確保するために、クラスターを v6.5.0 以降のバージョンにアップグレードした後、 `tidb_server_memory_limit`は`server-memory-quota`の値を継承します。アップグレード前に`server-memory-quota`を設定していない場合、デフォルト値の`tidb_server_memory_limit`が使用されます。これは`80%`です。
 
-tidb-server インスタンスのメモリ使用量が総メモリの特定の割合に達すると (割合はシステム変数[`tidb_server_memory_limit_gc_trigger`](/system-variables.md#tidb_server_memory_limit_gc_trigger-new-in-v640)によって制御されます)、tidb-server はGolang GC をトリガーしてメモリ ストレスを軽減しようとします。インスタンスのメモリがしきい値付近で変動するためにパフォーマンスの問題を引き起こす頻繁な GC を回避するために、この GC メソッドは GC を最大でも 1 分に 1 回トリガーします。
+tidb-server インスタンスのメモリ使用量が総メモリの特定の割合に達すると (割合はシステム変数[`tidb_server_memory_limit_gc_trigger`](/system-variables.md#tidb_server_memory_limit_gc_trigger-new-in-v640)によって制御されます)、tidb-server はGolang GC をトリガーしてメモリストレスを軽減しようとします。インスタンスのメモリがしきい値付近で変動するためにパフォーマンスの問題を引き起こす頻繁な GC を回避するために、この GC メソッドは GC を最大でも 1 分に 1 回トリガーします。
 
 ## INFORMATION_SCHEMA システム テーブルを使用して、現在の tidb-server インスタンスのメモリ使用量をビューします。 {#view-the-memory-usage-of-the-current-tidb-server-instance-using-the-information-schema-system-table}
 
@@ -73,7 +73,7 @@ tidb-server インスタンスのメモリ使用量がメモリのしきい値 (
 
 -   メモリ使用量がメモリのしきい値を超えるのは初めてです。
 -   メモリ使用量がメモリのしきい値を超えており、最後のアラームから 60 秒以上経過しています。
--   メモリー使用量がメモリーしきい値および`(Current memory usage - Memory usage at the last alarm) / Total memory > 10%`を超えています。
+-   メモリ使用量がメモリしきい値および`(Current memory usage - Memory usage at the last alarm) / Total memory > 10%`を超えています。
 
 システム変数[`tidb_memory_usage_alarm_ratio`](/system-variables.md#tidb_memory_usage_alarm_ratio)を介してメモリ使用率を変更することにより、アラームをトリガーするメモリしきい値を制御できます。
 
@@ -109,7 +109,7 @@ tidb-server インスタンスのメモリ使用量がメモリのしきい値 (
 
 3.  `select * from t t1 join t t2 join t t3 order by t1.a`を実行します。この SQL ステートメントは 10 億件のレコードを出力します。これは大量のメモリを消費するため、アラームがトリガーされます。
 
-4.  合計システム メモリ、現在のシステム メモリ使用量、tidb-server インスタンスのメモリ使用量、およびステータス ファイルのディレクトリを記録する`tidb.log`のファイルを確認します。
+4.  合計システムメモリ、現在のシステムメモリ使用量、tidb-server インスタンスのメモリ使用量、およびステータス ファイルのディレクトリを記録する`tidb.log`のファイルを確認します。
 
     ```
     [2022/10/11 16:39:02.281 +08:00] [WARN] [memoryusagealarm.go:212] ["tidb-server has the risk of OOM because of memory usage exceeds alarm ratio. Running SQLs and heap profile will be recorded in record path"] ["is tidb_server_memory_limit set"=false] ["system memory total"=33682427904] ["system memory usage"=22120655360] ["tidb-server memory usage"=21468556992] [memory-usage-alarm-ratio=0.85] ["record path"=/tiup/deploy/tidb-4000/log/oom_record]
@@ -119,18 +119,18 @@ tidb-server インスタンスのメモリ使用量がメモリのしきい値 (
 
     -   `is tidb_server_memory_limit set`は[`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)が設定されているかどうかを示します。
     -   `system memory total`は、現在のシステムの合計メモリを示します。
-    -   `system memory usage`は、現在のシステム メモリ使用量を示します。
+    -   `system memory usage`は、現在のシステムメモリ使用量を示します。
     -   `tidb-server memory usage`は、tidb-server インスタンスのメモリ使用量を示します。
     -   `memory-usage-alarm-ratio`は、システム変数[`tidb_memory_usage_alarm_ratio`](/system-variables.md#tidb_memory_usage_alarm_ratio)の値を示します。
     -   `record path`は、ステータス ファイルのディレクトリを示します。
 
-5.  ステータス ファイルのディレクトリを確認すると (前の例では、ディレクトリは`/tiup/deploy/tidb-4000/log/oom_record`です)、対応するタイムスタンプ (たとえば、 `record2022-10-09T17:18:38+08:00` ) を持つレコード ディレクトリを確認できます。レコード ディレクトリには、 `goroutinue` 、 `heap` 、および`running_sql`の 3 つのファイルが含まれます。これら 3 つのファイルの末尾には、ステータス ファイルがログに記録された時刻が付けられます。それぞれ、ゴルーチンのスタック情報、ヒープメモリの使用状況、アラーム発生時の実行中のSQL情報を記録します。 `running_sql`の内容は[`expensive-queries`](/identify-expensive-queries.md)を参照。
+5.  ステータス ファイルのディレクトリを確認すると (前の例では、ディレクトリは`/tiup/deploy/tidb-4000/log/oom_record`です)、対応するタイムスタンプ (たとえば、 `record2022-10-09T17:18:38+08:00` ) を持つレコード ディレクトリを確認できます。レコード ディレクトリには、 `goroutinue` 、 `heap` 、および`running_sql`の 3 つのファイルが含まれます。これら 3 つのファイルの末尾には、ステータス ファイルがログに記録された時刻が付けられます。これらは、アラームがトリガーされたときに、ゴルーチン スタック情報、ヒープメモリの使用状況、および実行中の SQL 情報をそれぞれ記録します。 `running_sql`の内容は[`expensive-queries`](/identify-expensive-queries.md)を参照。
 
 ## tidb-server のその他のメモリ制御動作 {#other-memory-control-behaviors-of-tidb-server}
 
 ### フロー制御 {#flow-control}
 
--   TiDB は、データを読み取るオペレーターの動的メモリー制御をサポートしています。デフォルトでは、このオペレーターは、データの読み取りを許可するスレッドの最大数を使用し[`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency) 。 1 回の SQL 実行のメモリー使用量が毎回[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)を超えると、データを読み取るオペレーターは 1 つのスレッドを停止します。
+-   TiDB は、データを読み取るオペレーターの動的メモリ制御をサポートしています。デフォルトでは、このオペレーターは、データの読み取りを許可するスレッドの最大数を使用し[`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency) 。 1 回の SQL 実行のメモリ使用量が毎回[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)を超えると、データを読み取るオペレーターは 1 つのスレッドを停止します。
 
 -   このフロー制御動作は、システム変数[`tidb_enable_rate_limit_action`](/system-variables.md#tidb_enable_rate_limit_action)によって制御されます。
 
@@ -138,7 +138,7 @@ tidb-server インスタンスのメモリ使用量がメモリのしきい値 (
 
 ### ディスクこぼれ {#disk-spill}
 
-TiDB は、実行オペレーターのディスクスピルをサポートしています。 SQL 実行のメモリ使用量がメモリ クォータを超えると、tidb-server は実行オペレータの中間データをディスクにスピルして、メモリの負荷を軽減することができます。ディスク スピルをサポートする演算子には、Sort、MergeJoin、HashJoin、HashAgg などがあります。
+TiDB は、実行オペレーターのディスクスピルをサポートしています。 SQL 実行のメモリ使用量がメモリクォータを超えると、tidb-server は実行オペレータの中間データをディスクにスピルして、メモリの負荷を軽減することができます。ディスク スピルをサポートする演算子には、Sort、MergeJoin、HashJoin、HashAgg などがあります。
 
 -   ディスク スピルの動作は、パラメータ[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) 、 [`tidb_enable_tmp_storage_on_oom`](/system-variables.md#tidb_enable_tmp_storage_on_oom) 、 [`tmp-storage-path`](/tidb-configuration-file.md#tmp-storage-path) 、および[`tmp-storage-quota`](/tidb-configuration-file.md#tmp-storage-quota)によって共同で制御されます。
 -   ディスク スピルがトリガーされると、TiDB はキーワード`memory exceeds quota, spill to disk now`または`memory exceeds quota, set aggregate mode to spill-mode`を含むログを出力します。
@@ -147,11 +147,11 @@ TiDB は、実行オペレーターのディスクスピルをサポートして
 
 > **ノート：**
 >
-> HashAgg のディスク スピルは、 `DISTINCT`の集計関数を含む SQL 実行をサポートしていません。 `DISTINCT`の集計関数を含む SQL 実行でメモリが大量に使用される場合、ディスク スピルは適用されません。
+> HashAgg のディスク スピルは、 `DISTINCT`の集計関数を含む SQL 実行をサポートしていません。 `DISTINCT`の集計関数を含む SQL の実行で大量のメモリが使用される場合、ディスク スピルは適用されません。
 
 次の例では、メモリを消費する SQL ステートメントを使用して、HashAgg のディスク スピル機能を示します。
 
-1.  SQL ステートメントのメモリ クォータを 1 GB (既定では 1 GB) に構成します。
+1.  SQL ステートメントのメモリクォータを 1 GB (既定では 1 GB) に構成します。
 
     {{< copyable "" >}}
 
@@ -169,13 +169,13 @@ TiDB は、実行オペレーターのディスクスピルをサポートして
     [tidb]> explain analyze select /*+ HASH_AGG() */ count(*) from t t1 join t t2 join t t3 group by t1.a, t2.a, t3.a;
     ```
 
-    この SQL ステートメントを実行すると大量のメモリが占有されるため、次の「メモリ クォータが不足しています」というエラー メッセージが返されます。
+    この SQL ステートメントを実行すると大量のメモリが占有されるため、次の「メモリクォータが不足しています」というエラー メッセージが返されます。
 
     ```sql
     ERROR 1105 (HY000): Out Of Memory Quota![conn_id=3]
     ```
 
-4.  システム変数を`tidb_executor_concurrency`対 1 で構成します。この構成では、メモリが不足すると、HashAgg は自動的にディスク スピルをトリガーしようとします。
+4.  システム変数を`tidb_executor_concurrency`から 1 に構成します。この構成では、メモリになると、HashAgg は自動的にディスク スピルをトリガーしようとします。
 
     {{< copyable "" >}}
 
@@ -220,7 +220,7 @@ v6.1.3 &lt;= TiDB &lt; v6.5.0 の場合、手動で`GOMEMLIMIT`を設定する�
 
 `GOMEMLIMIT`のパフォーマンスを検証するために、特定のメモリ使用量を構成ありと構成なしで比較するテストが実行され`GOMEMLIMIT` 。
 
--   TiDB v6.1.2 では、シミュレートされたワークロードが数分間実行された後、TiDBサーバーで OOM (システム メモリ: 約 48 GiB) が発生します。
+-   TiDB v6.1.2 では、シミュレートされたワークロードが数分間実行された後、TiDBサーバーで OOM (システムメモリ: 約 48 GiB) が発生します。
 
     ![v6.1.2 workload oom](/media/configure-memory-usage-612-oom.png)
 

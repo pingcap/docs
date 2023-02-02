@@ -11,7 +11,7 @@ summary: Learn how to use the Stale Read feature to read local data under three 
 
 ## 3 つのデータ センターの TiDB クラスターをデプロイする {#deploy-a-tidb-cluster-of-three-data-centers}
 
-3 データセンターの配置方法については、 [1 つの都市に展開された複数のデータ センター](/multi-data-centers-in-one-city-deployment.md)を参照してください。
+3 データセンターの配置方法については、 [1 つの地域展開における複数のデータセンター](/multi-data-centers-in-one-city-deployment.md)を参照してください。
 
 TiKV ノードと TiDB ノードの両方に構成項目`labels`が構成されている場合、同じデータ センター内の TiKV ノードと TiDB ノードの`zone`ラベルの値は同じでなければならないことに注意してください。たとえば、TiKV ノードと TiDB ノードの両方がデータセンターにある場合`dc-1` 、次のラベルを使用して 2 つのノードを構成する必要があります。
 

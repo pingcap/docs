@@ -56,7 +56,7 @@ TiDB バージョン: 4.0.0-rc.2
     -   コミット前に 1 つのリージョン内のデータ ボリュームの事前チェックをサポートし、データ ボリュームがしきい値[#16959](https://github.com/pingcap/tidb/pull/16959)を超えた場合にリージョンを事前に分割します
     -   `Session`スコープを持つ新しい`LAST_PLAN_FROM_CACHE`変数を追加して、最後に実行されたステートメントがプラン キャッシュ[#16830](https://github.com/pingcap/tidb/pull/16830)にヒットするかどうかを示します
     -   スローログと`SLOW_LOG`テーブル[#16904](https://github.com/pingcap/tidb/pull/16904)に`Cop_time`情報の記録をサポート
-    -   Go ランタイム[#16928](https://github.com/pingcap/tidb/pull/16928)のメモリ ステータスを監視するメトリックを Grafana に追加します。
+    -   Go ランタイム[#16928](https://github.com/pingcap/tidb/pull/16928)のメモリステータスを監視するメトリックを Grafana に追加します。
     -   一般ログ[#16946](https://github.com/pingcap/tidb/pull/16946)での分離レベル`forUpdateTS`および`Read Consistency`情報の出力をサポート
     -   TiKVリージョン[#16925](https://github.com/pingcap/tidb/pull/16925)でのロック解決の重複リクエストの折りたたみをサポート
     -   PD/TiKV ノードの構成を変更する`SET CONFIG`ステートメントを使用したサポート[#16853](https://github.com/pingcap/tidb/pull/16853)
@@ -134,7 +134,7 @@ TiDB バージョン: 4.0.0-rc.2
     -   `WHERE`節[#16559](https://github.com/pingcap/tidb/pull/16559)の誤った値`string_value`を修正します。
     -   `GROUP BY`ウィンドウ関数のエラー メッセージが MySQL [#16165](https://github.com/pingcap/tidb/pull/16165)のエラー メッセージと一致しない問題を修正
     -   データベース名に大文字の[#17167](https://github.com/pingcap/tidb/pull/17167)が含まれている場合、 `FLASH TABLE`ステートメントの実行に失敗する問題を修正します。
-    -   Projection executor [#17118](https://github.com/pingcap/tidb/pull/17118)の不正確なメモリ トレースを修正します。
+    -   Projection executor [#17118](https://github.com/pingcap/tidb/pull/17118)の不正確なメモリトレースを修正します。
     -   異なるタイム ゾーンでの`SLOW_QUERY`テーブルの不適切な時間フィルタリングの問題を修正します[#17164](https://github.com/pingcap/tidb/pull/17164)
     -   仮想生成列[#17126](https://github.com/pingcap/tidb/pull/17126)で`IndexMerge`を使用すると発生するpanicの問題を修正します。
     -   `INSTR`および`LOCATE`関数の大文字化の問題を修正[#17068](https://github.com/pingcap/tidb/pull/17068)

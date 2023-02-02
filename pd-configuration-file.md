@@ -3,7 +3,7 @@ title: PD Configuration File
 summary: Learn the PD configuration file.
 ---
 
-# PDConfiguration / コンフィグレーションファイル {#pd-configuration-file}
+# PDコンフィグレーションファイル {#pd-configuration-file}
 
 <!-- markdownlint-disable MD001 -->
 
@@ -107,7 +107,7 @@ PD 構成ファイルは、コマンドライン パラメーターよりも多�
 
 ## 安全 {#security}
 
-セキュリティに関するConfiguration / コンフィグレーション項目
+セキュリティに関するコンフィグレーション項目
 
 ### <code>cacert-path</code> {#code-cacert-path-code}
 
@@ -132,7 +132,7 @@ PD 構成ファイルは、コマンドライン パラメーターよりも多�
 
 ## <code>log</code> {#code-log-code}
 
-ログに関するConfiguration / コンフィグレーション項目
+ログに関するコンフィグレーション項目
 
 ### <code>level</code> {#code-level-code}
 
@@ -153,11 +153,11 @@ PD 構成ファイルは、コマンドライン パラメーターよりも多�
 
 ## <code>log.file</code> {#code-log-file-code}
 
-ログファイルに関するConfiguration / コンフィグレーション項目
+ログファイルに関するコンフィグレーション項目
 
 ### <code>max-size</code> {#code-max-size-code}
 
--   1 つのログ ファイルの最大サイズ。この値を超えると、システムは自動的にログを複数のファイルに分割します。
+-   1 つのログ ファイルの最大サイズ。この値を超えると、システムは自動的にログをいくつかのファイルに分割します。
 -   デフォルト値: `300`
 -   単位：MiB
 -   最小値: `1`
@@ -176,7 +176,7 @@ PD 構成ファイルは、コマンドライン パラメーターよりも多�
 
 ## <code>metric</code> {#code-metric-code}
 
-監視に関するConfiguration / コンフィグレーション項目
+監視に関するコンフィグレーション項目
 
 ### <code>interval</code> {#code-interval-code}
 
@@ -185,7 +185,7 @@ PD 構成ファイルは、コマンドライン パラメーターよりも多�
 
 ## <code>schedule</code> {#code-schedule-code}
 
-スケジューリングに関するConfiguration / コンフィグレーション項目
+スケジューリングに関するコンフィグレーション項目
 
 ### <code>max-merge-region-size</code> {#code-max-merge-region-size-code}
 
@@ -319,7 +319,7 @@ PD 構成ファイルは、コマンドライン パラメーターよりも多�
 
 ## <code>replication</code> {#code-replication-code}
 
-レプリカに関するConfiguration / コンフィグレーション項目
+レプリカに関するコンフィグレーション項目
 
 ### <code>max-replicas</code> {#code-max-replicas-code}
 
@@ -360,7 +360,7 @@ PD 構成ファイルは、コマンドライン パラメーターよりも多�
 
 ## <code>label-property</code> {#code-label-property-code}
 
-ラベルに関するConfiguration / コンフィグレーション項目
+ラベルに関するコンフィグレーション項目
 
 ### <code>key</code> {#code-key-code}
 
@@ -374,7 +374,7 @@ PD 構成ファイルは、コマンドライン パラメーターよりも多�
 
 ## <code>dashboard</code> {#code-dashboard-code}
 
-[TiDB ダッシュボード](/dashboard/dashboard-intro.md)内蔵 PD に関するConfiguration / コンフィグレーション項目。
+[TiDB ダッシュボード](/dashboard/dashboard-intro.md)内蔵 PD に関するコンフィグレーション項目。
 
 ### <code>tidb-cacert-path</code> {#code-tidb-cacert-path-code}
 
@@ -405,4 +405,4 @@ PD 構成ファイルは、コマンドライン パラメーターよりも多�
 
 ## <code>replication-mode</code> {#code-replication-mode-code}
 
-すべてのリージョンのレプリケーション モードに関連するConfiguration / コンフィグレーションアイテム。詳細は[DR 自動同期モードを有効にする](/two-data-centers-in-one-city-deployment.md#enable-the-dr-auto-sync-mode)を参照してください。
+すべてのリージョンのレプリケーション モードに関連するコンフィグレーションアイテム。詳細は[DR 自動同期モードを有効にする](/two-data-centers-in-one-city-deployment.md#enable-the-dr-auto-sync-mode)を参照してください。

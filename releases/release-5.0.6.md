@@ -96,11 +96,11 @@ TiDB バージョン: 5.0.6
     -   TiKV ノードがダウンしていると、解決されたタイムスタンプが[#11351](https://github.com/tikv/tikv/issues/11351)遅れる問題を修正します。
     -   Raftクライアント実装[#9714](https://github.com/tikv/tikv/issues/9714)でバッチ メッセージが大きすぎる問題を修正
     -   極端な状況でリージョンのマージ、ConfChange、およびスナップショットが同時に発生したときに発生するpanicの問題を修正します[#11475](https://github.com/tikv/tikv/issues/11475)
-    -   TiKV がリバース テーブル スキャンを実行すると、TiKV がメモリ ロックを検出できない問題を修正します[#11440](https://github.com/tikv/tikv/issues/11440)
+    -   TiKV がリバース テーブル スキャンを実行すると、TiKV がメモリロックを検出できない問題を修正します[#11440](https://github.com/tikv/tikv/issues/11440)
     -   10 進数の除算結果がゼロ[#29586](https://github.com/pingcap/tidb/issues/29586)の場合の負号の問題を修正
-    -   GC タスクの蓄積により、TiKV が OOM (メモリ不足) になる可能性がある問題を修正します[#11410](https://github.com/tikv/tikv/issues/11410)
+    -   GC タスクの蓄積により、TiKV が OOM (メモリ) になる可能性がある問題を修正します[#11410](https://github.com/tikv/tikv/issues/11410)
     -   インスタンスごとの gRPC リクエストの平均レイテンシーが TiKV メトリクスで不正確である問題を修正します[#11299](https://github.com/tikv/tikv/issues/11299)
-    -   統計スレッド[#11195](https://github.com/tikv/tikv/issues/11195)のデータを監視することによって引き起こされるメモリ リークを修正します。
+    -   統計スレッド[#11195](https://github.com/tikv/tikv/issues/11195)のデータを監視することによって引き起こされるメモリリークを修正します。
     -   ダウンストリーム データベースが見つからない場合に発生する TiCDCpanicの問題を修正します[#11123](https://github.com/tikv/tikv/issues/11123)
     -   Congest エラー[#11082](https://github.com/tikv/tikv/issues/11082)により、TiCDC がスキャンの再試行を頻繁に追加する問題を修正します。
     -   チャネルがいっぱいになるとRaft接続が切断される問題を修正します[#11047](https://github.com/tikv/tikv/issues/11047)
@@ -149,7 +149,7 @@ TiDB バージョン: 5.0.6
         -   MySQL シンクのデッドロック[#2706](https://github.com/pingcap/tiflow/issues/2706)が原因で頻繁に警告が表示される問題を修正
         -   Avro シンクが JSON 型の列の解析をサポートしていない問題を修正します[#3624](https://github.com/pingcap/tiflow/issues/3624)
         -   TiKV 所有者が再起動すると、TiCDC が TiKV から誤ったスキーマ スナップショットを読み取るバグを修正します[#2603](https://github.com/pingcap/tiflow/issues/2603)
-        -   DDL [#3174](https://github.com/pingcap/ticdc/issues/3174)の処理後のメモリ リークの問題を修正します。
+        -   DDL [#3174](https://github.com/pingcap/ticdc/issues/3174)の処理後のメモリリークの問題を修正します。
         -   Canal および Maxwell プロトコル[#3676](https://github.com/pingcap/tiflow/issues/3676)で`enable-old-value`構成項目が自動的に`true`に設定されないバグを修正
         -   一部の Red Hat Enterprise Linux リリース (6.8 や[#3584](https://github.com/pingcap/tiflow/issues/3584)など) でコマンドを実行するときに発生するタイムゾーン エラーを修正し`cdc server` 。
         -   Kafka シンク[#3431](https://github.com/pingcap/tiflow/issues/3431)の不正確な`txn_batch_size`モニタリング メトリックの問題を修正します

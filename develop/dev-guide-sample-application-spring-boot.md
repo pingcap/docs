@@ -577,7 +577,7 @@ false
 -   `service`は、プロジェクトのインターフェイスとロジックを実装するパッケージです。
 -   `dao`は、データベースへの接続とデータの永続性を実装するパッケージです。
 
-### Configuration / コンフィグレーション {#configuration}
+### コンフィグレーション {#configuration}
 
 この部分では、 `pom.xml`ファイルの Maven 構成と`application.yml`ファイルのユーザー構成について簡単に説明します。
 
@@ -989,7 +989,7 @@ public class PlayerServiceImpl implements PlayerService {
 -   関数が戻ると、 `transaction.commit()`を呼び出してトランザクションをコミットします。
 -   実行時エラーが発生すると、エージェントは`transaction.rollback()`を呼び出してロールバックします。
 
-取引の詳細については[データベース トランザクション](/develop/dev-guide-transaction-overview.md)を参照するか、 `Spring` Web サイトの[Spring Framework の宣言型トランザクションの実装を理解する](https://docs.spring.io/spring-framework/docs/current/reference/html/data-access.html#tx-decl-explained)を参照してください。
+取引の詳細については[データベース トランザクション](/develop/dev-guide-transaction-overview.md)を参照するか、 `Spring` Web サイトの[Spring Framework の宣言トランザクションの実装を理解する](https://docs.spring.io/spring-framework/docs/current/reference/html/data-access.html#tx-decl-explained)を参照してください。
 
 すべての実装クラスで、 `buyGoods`の機能に注意が必要です。関数が非論理的な操作に遭遇すると、例外をスローし、Hibernate にトランザクションのロールバックを実行して不正なデータを防ぐように指示します。
 

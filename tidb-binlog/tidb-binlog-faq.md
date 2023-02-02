@@ -30,6 +30,7 @@ TiDB Binlogレプリケーションのレイテンシーは秒単位で測定さ
 -   実行する
 -   索引
 -   選択する
+-   ビューを作成
 
 ## Pumpディスクがほぼいっぱいになった場合、どうすればよいですか? {#what-can-i-do-if-the-pump-disk-is-almost-full}
 

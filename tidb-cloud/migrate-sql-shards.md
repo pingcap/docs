@@ -13,7 +13,7 @@ summary: Learn how to migrate and merge MySQL shards of large datasets to TiDB C
 
 このセクションでは、例で使用される上流クラスター、DM、および下流クラスターの基本情報について説明します。
 
-### アップストリーム クラスター {#upstream-cluster}
+### アップストリーム クラスタ {#upstream-cluster}
 
 上流クラスタの環境情報は以下の通りです。
 

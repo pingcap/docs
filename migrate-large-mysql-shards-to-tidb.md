@@ -94,7 +94,7 @@ tiup dumpling -h ${ip} -P 3306 -u root -t 16 -r 200000 -F 256MB -B my_db1 -f 'my
 | `-p`または`--port`     | 使用するポートを指定します。                                                                                                           |
 | `-h`または`--host`     | データ ソースの IP アドレスを指定します。                                                                                                  |
 | `-t`または`--thread`   | エクスポートのスレッド数を指定します。スレッド数を増やすと、 Dumplingの同時実行性とエクスポート速度が向上し、データベースのメモリ消費量が増加します。そのため、あまり大きな数値を設定することはお勧めしません。通常は 64 未満です。 |
-| `-o`または`--output`   | ローカル ファイル パスまたは[外部ストレージのURL](/br/backup-and-restore-storages.md)をサポートするストレージのエクスポート ディレクトリを指定します。                        |
+| `-o`または`--output`   | ローカル ファイル パスまたは[外部ストレージの URL](/br/backup-and-restore-storages.md)をサポートするストレージのエクスポート ディレクトリを指定します。                       |
 | `-r`または`--row`      | 1 つのファイル内の最大行数を指定します。このパラメータを使用すると、 Dumplingはテーブル内の同時実行性を有効にして、エクスポートを高速化し、メモリ使用量を削減します。                                 |
 | `-F`                | 1 つのファイルの最大サイズを指定します。単位は`MiB`です。値を 256 MiB に維持することをお勧めします。                                                               |
 | `-B`または`--database` | エクスポートするデータベースを指定します。                                                                                                    |
@@ -339,7 +339,7 @@ mysql-instances:
 #    safe-mode: true
 ```
 
-その他の構成については、 [DM 拡張タスクConfiguration / コンフィグレーションファイル](/dm/task-configuration-file-full.md)を参照してください。
+その他の構成については、 [DM 拡張タスクコンフィグレーションファイル](/dm/task-configuration-file-full.md)を参照してください。
 
 データ移行タスクを開始する前に、 `check-task`サブコマンド in `tiup dmctl`を使用して、構成が DM 構成要件を満たしているかどうかを確認することをお勧めします。
 
@@ -401,6 +401,6 @@ Grafana またはログを使用して、移行タスクの履歴と内部運用
 -   [データ移行タスクの一時停止](/dm/dm-pause-task.md)
 -   [データ移行タスクの再開](/dm/dm-resume-task.md)
 -   [データ移行タスクを停止する](/dm/dm-stop-task.md)
--   [データ ソースのエクスポートとインポート、およびクラスターのタスクConfiguration / コンフィグレーション](/dm/dm-export-import-config.md)
+-   [データ ソースのエクスポートとインポート、およびクラスターのタスクコンフィグレーション](/dm/dm-export-import-config.md)
 -   [失敗した DDL ステートメントの処理](/dm/handle-failed-ddl-statements.md)
 -   [エラー処理](/dm/dm-error-handling.md)

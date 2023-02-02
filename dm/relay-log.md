@@ -7,7 +7,7 @@ summary: Learn the directory structure, initial migration rules and data purge o
 
 データ移行 (DM) リレー ログは、データベースの変更を説明するイベントを含む番号付きファイルのいくつかのセットと、使用されたすべてのリレー ログ ファイルの名前を含むインデックス ファイルで構成されます。
 
-リレー ログを有効にすると、DM-worker はアップストリームの binlog をローカル構成ディレクトリに自動的に移行します (DM がTiUPを使用してデプロイされている場合、デフォルトの移行ディレクトリは`<deploy_dir>/<relay_log>`です)。 `<relay_log>`のデフォルト値は`relay-dir`で、 [アップストリーム データベースConfiguration / コンフィグレーションファイル](/dm/dm-source-configuration-file.md)で変更できます。 v5.4.0 以降、 [DM-worker 構成ファイル](/dm/dm-worker-configuration-file.md)の`relay-dir`までローカル構成ディレクトリを構成できます。これは、アップストリーム データベースの構成ファイルよりも優先されます。
+リレー ログを有効にすると、DM-worker はアップストリームの binlog をローカル構成ディレクトリに自動的に移行します (DM がTiUPを使用してデプロイされている場合、デフォルトの移行ディレクトリは`<deploy_dir>/<relay_log>`です)。 `<relay_log>`のデフォルト値は`relay-dir`で、 [アップストリーム データベースコンフィグレーションファイル](/dm/dm-source-configuration-file.md)で変更できます。 v5.4.0 以降、 [DM-worker 構成ファイル](/dm/dm-worker-configuration-file.md)の`relay-dir`までローカル構成ディレクトリを構成できます。これは、アップストリーム データベースの構成ファイルよりも優先されます。
 
 > **警告：**
 >
@@ -96,7 +96,7 @@ DM-worker が実行されている場合、上流の binlog をリアルタイ�
 
 v5.4.0 以降のバージョンでは、 `enable-relay` ～ `true`を設定することでリレー ログを有効にできます。 v5.4.0 以降、アップストリーム データ ソースをバインドするときに、DM-worker はデータ ソースの構成の`enable-relay`項目をチェックします。 `enable-relay`が`true`の場合、このデータ ソースに対してリレー ログ機能が有効になります。
 
-詳細な設定方法については、 [アップストリーム データベースConfiguration / コンフィグレーションファイル](/dm/dm-source-configuration-file.md)を参照してください。
+詳細な設定方法については、 [アップストリーム データベースコンフィグレーションファイル](/dm/dm-source-configuration-file.md)を参照してください。
 
 さらに、 `start-relay`または`stop-relay`コマンドを使用してデータ ソースの`enable-relay`構成を動的に調整し、リレー ログ イン タイムを有効または無効にすることもできます。
 
@@ -163,7 +163,7 @@ v5.4.0 以降のバージョンでは、 `enable-relay` ～ `true`を設定す�
 
 v2.0.2 より前の DM バージョン (v2.0.2 を除く) では、DM ワーカーをアップストリーム データ ソースにバインドするときに、DM はソース構成ファイルの構成項目`enable-relay`をチェックします。 `enable-relay`が`true`に設定されている場合、DM はデータ ソースのリレー ログ機能を有効にします。
 
-設定項目`enable-relay`の設定方法は[アップストリーム データベースConfiguration / コンフィグレーションファイル](/dm/dm-source-configuration-file.md)を参照してください。
+設定項目`enable-relay`の設定方法は[アップストリーム データベースコンフィグレーションファイル](/dm/dm-source-configuration-file.md)を参照してください。
 
 </div>
 </SimpleTab>

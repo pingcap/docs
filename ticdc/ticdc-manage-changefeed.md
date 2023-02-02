@@ -204,7 +204,7 @@ cdc cli changefeed resume -c test-cf --server=http://10.0.10.25:8300
 現在、次の構成項目を変更できます。
 
 -   変更フィードの`sink-uri` 。
--   changefeed 構成ファイルと、ファイル内のすべての構成アイテム。
+-   changefeed 構成ファイルと、ファイル内のすべての構成項目。
 -   ファイルの並べ替え機能と並べ替えディレクトリを使用するかどうか。
 -   チェンジフィードの`target-ts` 。
 

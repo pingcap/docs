@@ -17,15 +17,15 @@ TiDB は、 MySQL 5.7の GA リリースに同梱された JSON関数のほと�
 
 ## JSON 値を検索する関数 {#functions-that-search-json-values}
 
-| 関数名                                                                                     | 説明                                                                                       |
-| --------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| [JSON\_CONTAINS(target, candidate\[, path\])][json_contains]                            | 指定された候補 JSON ドキュメントがターゲット JSON ドキュメント内に含まれているかどうかを 1 または 0 を返すことによって示します                 |
-| [JSON\_CONTAINS\_PATH(json\_doc, one\_or\_all, path\[, path\] ...)][json_contains_path] | JSON ドキュメントに特定のパスにデータが含まれているかどうかを示すために、0 または 1 を返します。                                    |
-| [JSON\_EXTRACT(json\_doc, path\[, path\] ...)][json_extract]                            | `path`の引数に一致するドキュメントの部分から選択された JSON ドキュメントからデータを返します                                     |
-| [->][json_short_extract]                                                                | 評価パスの後に JSON 列から値を返します。 `JSON_EXTRACT(doc, path_literal)`の別名                             |
-| [->>][json_short_extract_unquote]                                                       | パスを評価し、結果の引用符を外した後、JSON 列から値を返します。 `JSON_UNQUOTE(JSON_EXTRACT(doc, path_literal))`のエイリアス |
-| [JSON\_KEYS(json\_doc\[, path\])][json_keys]                                            | JSON オブジェクトの最上位の値からキーを JSON 配列として返すか、パス引数が指定されている場合は、選択したパスから最上位のキーを返します                 |
-| [JSON\_SEARCH(json\_doc, one\_or\_all, search\_string)][json_search]                    | 文字列の 1 つまたはすべての一致について JSON ドキュメントを検索します                                                  |
+| 関数名                                                                                     | 説明                                                                                    |
+| --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| [JSON\_CONTAINS(target, candidate\[, path\])][json_contains]                            | 指定された候補 JSON ドキュメントがターゲット JSON ドキュメント内に含まれているかどうかを 1 または 0 を返すことによって示します              |
+| [JSON\_CONTAINS\_PATH(json\_doc, one\_or\_all, path\[, path\] ...)][json_contains_path] | JSON ドキュメントに特定のパスにデータが含まれているかどうかを示すために、0 または 1 を返します。                                 |
+| [JSON\_EXTRACT(json\_doc, path\[, path\] ...)][json_extract]                            | `path`の引数に一致するドキュメントの部分から選択された JSON ドキュメントからデータを返します                                  |
+| [->][json_short_extract]                                                                | 評価パスの後に JSON 列から値を返します。 `JSON_EXTRACT(doc, path_literal)`の別名                          |
+| [->>][json_short_extract_unquote]                                                       | パスを評価し、結果の引用符を外した後、JSON 列から値を返します。 `JSON_UNQUOTE(JSON_EXTRACT(doc, path_literal))`の別名 |
+| [JSON\_KEYS(json\_doc\[, path\])][json_keys]                                            | JSON オブジェクトの最上位の値からキーを JSON 配列として返すか、パス引数が指定されている場合は、選択したパスから最上位のキーを返します              |
+| [JSON\_SEARCH(json\_doc, one\_or\_all, search\_string)][json_search]                    | 文字列の 1 つまたはすべての一致について JSON ドキュメントを検索します                                               |
 
 ## JSON 値を変更する関数 {#functions-that-modify-json-values}
 

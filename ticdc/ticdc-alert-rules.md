@@ -193,7 +193,7 @@ summary: Learn about TiCDC alert rules and how to handle the alerts.
 
 -   説明：
 
-    TiCDC ヒープ メモリの使用量が 10 GiB を超えています。
+    TiCDC ヒープメモリの使用量が 10 GiB を超えています。
 
 -   解決：
 

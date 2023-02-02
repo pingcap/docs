@@ -35,7 +35,7 @@ TiDB アンシブル バージョン: 3.0.0-rc.1
 
 -   サーバ
     -   TiDB の起動時に DDL 所有者のみがブートストラップを実行できるようにする[#10029](https://github.com/pingcap/tidb/pull/10029)
-    -   変数`tidb_skip_isolation_level_check`を追加して、トランザクション分離レベルを SERIALIZABLE [#10065](https://github.com/pingcap/tidb/pull/10065)に設定するときに TiDB がエラーを報告しないようにします。
+    -   変数`tidb_skip_isolation_level_check`を追加して、トランザクション分離レベルをSERIALIZABLE [#10065](https://github.com/pingcap/tidb/pull/10065)に設定するときに TiDB がエラーを報告しないようにします。
     -   暗黙的なコミット時間とスロー ログ[#10294](https://github.com/pingcap/tidb/pull/10294)の SQL 実行時間をマージします。
         -   SQL ロールのサポート (RBAC権限管理)
         -   サポート`SHOW GRANT` [#10016](https://github.com/pingcap/tidb/pull/10016)
@@ -104,7 +104,7 @@ TiDB アンシブル バージョン: 3.0.0-rc.1
     -   RPN機能追加`LogicalAnd` [#4575](https://github.com/tikv/tikv/pull/4575)
 
 -   その他
-    -   メモリ アロケータとして`tcmalloc`をサポート[#4370](https://github.com/tikv/tikv/pull/4370)
+    -   メモリアロケータとして`tcmalloc`をサポート[#4370](https://github.com/tikv/tikv/pull/4370)
 
 ## ツール {#tools}
 

@@ -25,7 +25,7 @@ HAProxy は 2000 年に Linux カーネルの中心的貢献者である Willy T
 -   [負荷分散](http://cbonte.github.io/haproxy-dconv/2.6/configuration.html#4.2-balance) : 2 つの主要なプロキシ モードがサポートされています。レイヤー4 とも呼ばれる TCP と、レイヤー7 とも呼ばれる HTTP です。roundrobin、leastconn、random など、9 つ以上の負荷分散アルゴリズムがサポートされています。
 -   [健康診断](http://cbonte.github.io/haproxy-dconv/2.6/configuration.html#5.2-check) : HAProxy はサーバーの HTTP または TCP モードのステータスを定期的にチェックします。
 -   [スティッキー セッション](http://cbonte.github.io/haproxy-dconv/2.6/intro.html#3.3.6) : HAProxy は、アプリケーションがスティッキー セッションをサポートしていない間、クライアントを特定のサーバーに固定できます。
--   [SSL](http://cbonte.github.io/haproxy-dconv/2.6/intro.html#3.3.2) : HTTPS 通信と解決がサポートされます。
+-   [SSL](http://cbonte.github.io/haproxy-dconv/2.6/intro.html#3.3.2) : HTTPS 通信と解決がサポートされています。
 -   [モニタリングと統計](http://cbonte.github.io/haproxy-dconv/2.6/intro.html#3.3.3) : Web ページを通じて、サービスの状態とトラフィック フローをリアルタイムで監視できます。
 
 ## あなたが始める前に {#before-you-begin}
@@ -140,7 +140,7 @@ haproxy --help
 | `-vv`                           | バージョン、ビルド オプション、ライブラリ バージョン、使用可能なポーラーを表示します。                                                                                                                    |
 | `-d`                            | デバッグ モードを有効にします。                                                                                                                                                |
 | `-db`                           | バックグラウンド モードとマルチプロセス モードを無効にします。                                                                                                                                |
-| `-dM [<byte>]`                  | メモリ ポイズニングを強制します。つまり、malloc() または pool_alloc2() で割り当てられたすべてのメモリ領域が、呼び出し元に渡される前に`<byte>`で埋められます。                                                                 |
+| `-dM [<byte>]`                  | メモリポイズニングを強制します。つまり、malloc() または pool_alloc2() で割り当てられたすべてのメモリ領域が、呼び出し元に渡される前に`<byte>`で埋められます。                                                                  |
 | `-V`                            | verbose モードを有効にします (quiet モードを無効にします)。                                                                                                                          |
 | `-D`                            | デーモンとして起動します。                                                                                                                                                   |
 | `-C <dir>`                      | 構成ファイルをロードする前にディレクトリ`<dir>`に変更します。                                                                                                                              |

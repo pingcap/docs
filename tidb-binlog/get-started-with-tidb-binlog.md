@@ -27,7 +27,7 @@ TiDB Binlogは、MySQL または MariaDB から TiDB にデータを移行する
 
 ## アーキテクチャ {#architecture}
 
-TiDB Binlogは、 **Pump**と<strong>Drainer</strong>の 2 つのコンポーネントで構成されています。複数のPumpノードがポンプ クラスタを構成します。各Pumpノードは TiDB サーバー インスタンスに接続し、クラスター内の各 TiDB サーバー インスタンスに対して行われた更新を受け取ります。 DrainerはPumpクラスターに接続し、受信した更新を特定のダウンストリーム宛先 (Kafka、別の TiDBクラスタ、または MySQL/MariaDBサーバーなど) の正しい形式に変換します。
+TiDB Binlogは、 **Pump**と<strong>Drainer</strong>の 2 つのコンポーネントで構成されています。複数のPumpノードがポンプ クラスタを構成します。各Pumpノードは TiDB サーバー インスタンスに接続し、クラスター内の各 TiDB サーバー インスタンスに対して行われた更新を受信します。 DrainerはPumpクラスターに接続し、受信した更新を特定のダウンストリーム宛先 (Kafka、別の TiDBクラスタ、または MySQL/MariaDBサーバーなど) の正しい形式に変換します。
 
 ![TiDB-Binlog architecture](/media/tidb-binlog-cluster-architecture.png)
 
@@ -57,7 +57,7 @@ cd tidb-latest-linux-amd64
 [kolbe@localhost tidb-latest-linux-amd64]$
 ```
 
-## Configuration / コンフィグレーション {#configuration}
+## コンフィグレーション {#configuration}
 
 ここで、 `pd-server` 、 `tikv-server` 、および`tidb-server`のそれぞれに対して 1 つのインスタンスを持つ単純な TiDB クラスターを開始します。
 

@@ -3,7 +3,7 @@ title: Transaction Restraints
 summary: Learn about transaction restraints in TiDB.
 ---
 
-# 取引制限 {#transaction-restraints}
+# トランザクション制限 {#transaction-restraints}
 
 このドキュメントでは、TiDB におけるトランザクションの制限について簡単に紹介します。
 
@@ -19,7 +19,7 @@ TiDB の分離レベル`SI`は**Phantom Reads**を回避できますが、ANSI/I
 
 次の 2 つの例は、**ファントム読み取り**とは何かを示しています。
 
--   例 1:**トランザクション A**はクエリに従って最初に`n`行を取得し、次に<strong>トランザクション B</strong>はこれらの`n`行以外の`m`行を変更するか、<strong>トランザクション A</strong>のクエリに一致する`m`行を追加します。<strong>トランザクション A</strong>がクエリを再度実行すると、条件に一致する行が`n+m`行あることがわかります。幻のようなものなので<strong>幻読</strong>と呼ぶ。
+-   例 1:**トランザクションA**はクエリに従って最初に`n`行を取得し、次に<strong>トランザクションB</strong>はこれらの`n`行以外の`m`行を変更するか、<strong>トランザクションA</strong>のクエリに一致する`m`行を追加します。<strong>トランザクションA</strong>がクエリを再度実行すると、条件に一致する行が`n+m`行あることがわかります。幻のようなものなので<strong>幻読</strong>と呼ぶ。
 
 -   例 2:**管理者 A**は、データベース内のすべての学生の成績を特定のスコアから ABCDE の成績に変更しますが、<strong>管理者 B</strong>はこの時点で特定のスコアを持つレコードを挿入します。<strong>管理者 A</strong>が変更を完了し、まだ変更されていないレコード (<strong>管理者 B</strong>によって挿入されたもの) がまだあることに気付いた場合。それは<strong>ファントムリード</strong>です。
 

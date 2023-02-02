@@ -68,7 +68,7 @@ TiDB バージョン: 4.0.0
 
     -   TiDB を無効にしてバッチ コマンドをTiFlash [#17307](https://github.com/pingcap/tidb/pull/17307)に送信することにより、メッセージの送受信時に予期しないタイムアウトが発生する問題を修正します。
     -   パーティションのプルーニング中に符号付き整数と符号なし整数を誤って区別する問題を修正し、パフォーマンスを向上させます[#17230](https://github.com/pingcap/tidb/pull/17230)
-    -   互換性がないため v3.1.1 から v4.0 へのアップグレードが失敗する問題を修正します`mysql.user`テーブル[#17300](https://github.com/pingcap/tidb/pull/17300)
+    -   互換性がないため v3.1.1 から v4.0 へのアップグレードが失敗する問題を修正します`mysql.user`表[#17300](https://github.com/pingcap/tidb/pull/17300)
     -   `update`ステートメント[#17305](https://github.com/pingcap/tidb/pull/17305)のパーティションの選択が正しくない問題を修正します。
     -   TiKV [#17380](https://github.com/pingcap/tidb/pull/17380)から不明なエラー メッセージを受信したときのシステム パニックを修正
     -   `key`パーティション分割されたテーブルを作成するときに、不適切な処理ロジックによって引き起こされるシステム パニックを修正します[#17242](https://github.com/pingcap/tidb/pull/17242)

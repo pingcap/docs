@@ -109,7 +109,7 @@ TiDB [TiUPの使用](/production-deployment-using-tiup.md)または[TiDB Operato
 
 ### Percolator が分散ロックを使用し、クラッシュしたクライアントがロックを保持している場合、ロックは解放されませんか? {#if-percolator-uses-distributed-locks-and-the-crash-client-keeps-the-lock-will-the-lock-not-be-released}
 
-詳細については、中国語の[Percolator と TiDB トランザクション アルゴリズム](https://pingcap.com/blog-cn/percolator-and-txn/)を参照してください。
+詳細については、中国語の[Percolator と TiDBトランザクションアルゴリズム](https://pingcap.com/blog-cn/percolator-and-txn/)を参照してください。
 
 ### TiDB が Thrift ではなく gRPC を使用するのはなぜですか? Googleが使用しているからですか？ {#why-does-tidb-use-grpc-instead-of-thrift-is-it-because-google-uses-it}
 
@@ -328,7 +328,7 @@ TiKV は、RocksDB のカラムファミリー (CF) 機能を実装します。�
 -   書き込み CF は、データ バージョン情報 (MVCC) とインデックス関連のデータを格納し、対応するパラメーターは`[rocksdb.writecf]`です。
 -   ロック CF はロック情報を保管し、システムはデフォルトのパラメーターを使用します。
 -   Raft RocksDB インスタンスはRaftログを保存します。デフォルトの CF は主にRaftログを格納し、対応するパラメーターは`[raftdb.defaultcf]`です。
--   すべての CF には、データ ブロックをキャッシュし、RocksDB の読み取り速度を向上させるための共有ブロック キャッシュがあります。ブロック キャッシュのサイズは、 `block-cache-size`パラメータによって制御されます。パラメータの値が大きいほど、キャッシュできるホット データが多くなり、読み取り操作に適していることを意味します。同時に、より多くのシステム メモリを消費します。
+-   すべての CF には、データ ブロックをキャッシュし、RocksDB の読み取り速度を向上させるための共有ブロック キャッシュがあります。ブロック キャッシュのサイズは、 `block-cache-size`パラメータによって制御されます。パラメータの値が大きいほど、キャッシュできるホット データが多くなり、読み取り操作に適していることを意味します。同時に、より多くのシステムメモリを消費します。
 -   各 CF には個別の書き込みバッファーがあり、サイズは`write-buffer-size`パラメーターによって制御されます。
 
 ### TiKV チャンネルがいっぱいなのはなぜですか? {#why-is-the-tikv-channel-full}
@@ -407,7 +407,7 @@ TiKV は、インターフェースの個別呼び出しをサポートしてい
 
 ### TiKVでOOM(Out of Memory)エラーが多発するのはなぜですか? {#why-does-the-oom-out-of-memory-error-occur-frequently-in-tikv}
 
-TiKV のメモリ使用量は主に RocksDB のブロック キャッシュによるもので、デフォルトではシステム メモリ サイズの 40% です。 TiKV で OOM エラーが多発する場合は、 `block-cache-size`の値を大きくしすぎていないか確認してください。さらに、複数の TiKV インスタンスが 1 台のマシンにデプロイされている場合は、複数のインスタンスがシステム メモリを使いすぎて OOM エラーが発生しないように、パラメーターを明示的に構成する必要があります。
+TiKV のメモリ使用量は主に RocksDB のブロック キャッシュによるもので、デフォルトではシステムメモリサイズの 40% です。 TiKV で OOM エラーが多発する場合は、 `block-cache-size`の値を大きくしすぎていないか確認してください。さらに、複数の TiKV インスタンスが 1 台のマシンにデプロイされている場合は、複数のインスタンスがシステムメモリを使いすぎて OOM エラーが発生しないように、パラメーターを明示的に構成する必要があります。
 
 ### TiDB データと RawKV データの両方を同じ TiKV クラスターに保存できますか? {#can-both-tidb-data-and-rawkv-data-be-stored-in-the-same-tikv-cluster}
 

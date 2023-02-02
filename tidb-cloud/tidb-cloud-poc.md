@@ -63,7 +63,7 @@ PoC 用の専用クラスターを作成するには、次の手順を実行し�
 1.  次のいずれかを実行して、PoC アプリケーション フォームに入力します。
 
     -   PingCAP の Web サイトで、 [PoCに申し込む](https://pingcap.com/apply-for-poc/)ページに移動して、アプリケーション フォームに入力します。
-    -   [TiDB Cloudコンソール](https://tidbcloud.com/)で、<mdsvgicon name="icon-top-contact-us">右上隅にある [お**問い合わせ]**を選択し、[ <strong>PoC</strong>に申し込む] を選択して申し込みフォームに入力します。</mdsvgicon>
+    -   [TiDB Cloudコンソール](https://tidbcloud.com/)で、<mdsvgicon name="icon-top-contact-us">右上隅にある [お**問い合わせ]**を選択し、[ <strong>PoC</strong>に申し込む] を選択してアプリケーション フォームに入力します。</mdsvgicon>
 
     フォームを送信すると、 TiDB Cloudサポート チームがアプリケーションを確認して連絡し、アプリケーションが承認されたらアカウントにクレジットを転送します。 PingCAP サポート エンジニアに連絡して、PoC 手順をサポートし、PoC が可能な限りスムーズに実行されるようにすることもできます。
 

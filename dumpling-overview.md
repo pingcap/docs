@@ -102,7 +102,7 @@ dumpling \
 
 <CustomContent platform="tidb-cloud">
 
--   `-o`オプションは、ローカル ファイル パスまたは[外部ストレージのURL](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages)をサポートするストレージのエクスポート ディレクトリを指定します。
+-   `-o`オプションは、ローカル ファイル パスまたは[外部ストレージの URL](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages)をサポートするストレージのエクスポート ディレクトリを指定します。
 
 </CustomContent>
 
@@ -226,7 +226,7 @@ dumpling \
 
 ### データを Amazon S3 クラウド ストレージにエクスポートする {#export-data-to-amazon-s3-cloud-storage}
 
-v4.0.8 以降、 Dumplingはクラウド ストレージへのデータのエクスポートをサポートします。データを Amazon S3 にバックアップする必要がある場合は、 `-o`パラメータで Amazon S3 ストレージ パスを指定する必要があります。
+v4.0.8 以降、 Dumplingはクラウド ストレージへのデータのエクスポートをサポートしています。データを Amazon S3 にバックアップする必要がある場合は、 `-o`パラメータで Amazon S3 ストレージ パスを指定する必要があります。
 
 指定されたリージョンに Amazon S3 バケットを作成する必要があります ( [Amazon ドキュメント - S3 バケットを作成する方法](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html)を参照)。バケットにフォルダーも作成する必要がある場合は、 [Amazon ドキュメント - フォルダーの作成](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-folder.html)を参照してください。
 
@@ -376,7 +376,7 @@ TSO が`417773951312461825`で時刻が`2020-07-02 17:12:45`のときの TiDB �
 
 Dumplingが TiDB から大きな単一テーブルをエクスポートしている場合、エクスポートされたデータのサイズが大きすぎるためにメモリ不足 (OOM) が発生し、接続が中止され、エクスポートが失敗することがあります。次のパラメータを使用して、TiDB のメモリ使用量を削減できます。
 
--   エクスポートするデータをチャンクに分割するには、 `-r`を設定します。これにより、TiDB のデータ スキャンのメモリ オーバーヘッドが削減され、同時テーブル データ ダンプが可能になり、エクスポートの効率が向上します。アップストリーム データベースが TiDB v3.0 以降のバージョンの場合、このパラメーターの値が 0 より大きい場合、TiDB リージョン情報が分割に使用され、ここで指定した値が無効になることを示します。
+-   エクスポートするデータをチャンクに分割するには、 `-r`を設定します。これにより、TiDB のデータ スキャンのメモリオーバーヘッドが削減され、同時テーブル データ ダンプが可能になり、エクスポートの効率が向上します。アップストリーム データベースが TiDB v3.0 以降のバージョンの場合、このパラメーターの値が 0 より大きい場合、TiDB リージョン情報が分割に使用され、ここで指定した値が無効になることを示します。
 -   `--tidb-mem-quota-query`の値を`8589934592` (8 GB) 以下に減らします。 `--tidb-mem-quota-query`は、TiDB での単一のクエリ ステートメントのメモリ使用量を制御します。
 -   `--params "tidb_distsql_scan_concurrency=5"`パラメータを調整します。 [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency)は、TiDB でのスキャン操作の同時実行性を制御するセッション変数です。
 

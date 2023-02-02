@@ -30,7 +30,7 @@ TiDB アンシブル バージョン: 2.1.10
 -   `PERIOD_ADD` [#10430](https://github.com/pingcap/tidb/pull/10430)のパラメーターの妥当性をチェックする
 -   TiDB の無効な`YEAR`文字列の動作が MySQL [#10493](https://github.com/pingcap/tidb/pull/10493)と互換性がない問題を修正
 -   `ALTER DATABASE`構文[#10503](https://github.com/pingcap/tidb/pull/10503)をサポート
--   スロー クエリ ステートメント[#10536](https://github.com/pingcap/tidb/pull/10536)に`;`が存在しない場合、 `SLOW_QUERY`メモリ エンジンがエラーを報告する問題を修正します。
+-   スロー クエリ ステートメント[#10536](https://github.com/pingcap/tidb/pull/10536)に`;`が存在しない場合、 `SLOW_QUERY`メモリエンジンがエラーを報告する問題を修正します。
 -   分割されたテーブルで`Add index`操作をキャンセルできない場合がある問題を修正[#10533](https://github.com/pingcap/tidb/pull/10533)
 -   場合によっては OOMpanicが回復できない問題を修正[#10545](https://github.com/pingcap/tidb/pull/10545)
 -   テーブル メタデータを書き換える DDL 操作のセキュリティを向上させる[#10547](https://github.com/pingcap/tidb/pull/10547)

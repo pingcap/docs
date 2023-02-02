@@ -118,7 +118,7 @@ TiDB スナップショットのバックアップと復元のアーキテクチ
 
 ### SST ファイルの保存形式 {#storage-format-of-sst-files}
 
--   SST ファイルの保存形式の詳細については、 [RocksDB BlockBasedTable 形式](https://github.com/facebook/rocksdb/wiki/Rocksdb-BlockBasedTable-Format)を参照してください。
+-   SST ファイルの保存形式の詳細については、 [RocksDB BlockBasedTable フォーマット](https://github.com/facebook/rocksdb/wiki/Rocksdb-BlockBasedTable-Format)を参照してください。
 -   SST ファイルのバックアップ データのエンコード形式の詳細については、 [テーブル データの Key-Value へのマッピング](/tidb-computing.md#mapping-table-data-to-key-value)を参照してください。
 
 ### バックアップファイルの構造 {#structure-of-backup-files}

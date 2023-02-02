@@ -43,7 +43,7 @@ summary: Learn about common performance issues that might exist in DM and how to
 
 ### binlog データのデコードと検証 {#binlog-data-decoding-and-verification}
 
-Binlog イベントを DM メモリに読み取った後、DM のリレー処理ユニットはデータをデコードして検証します。これは通常、パフォーマンスのボトルネックにはなりません。したがって、デフォルトでは、監視ダッシュボードに関連するパフォーマンス メトリックはありません。このメトリクスを表示する必要がある場合は、Grafana で監視項目を手動で追加できます。この監視項目は、Prometheus のメトリックである`dm_relay_read_transform_duration`に対応します。
+Binlog イベントを DMメモリに読み取った後、DM のリレー処理ユニットはデータをデコードして検証します。これは通常、パフォーマンスのボトルネックにはなりません。したがって、デフォルトでは、監視ダッシュボードに関連するパフォーマンス メトリックはありません。このメトリクスを表示する必要がある場合は、Grafana で監視項目を手動で追加できます。この監視項目は、Prometheus のメトリックである`dm_relay_read_transform_duration`に対応します。
 
 ### リレーログファイルの書き込み {#write-relay-log-files}
 
@@ -72,7 +72,7 @@ Binlogレプリケーション ユニットは、バイナリ ログ イベン�
 
 ### binlog イベント変換 {#binlog-event-conversion}
 
-Binlogレプリケーション ユニットは、DML を構築し、DDL を解析し、binlog イベント データから[テーブルルーター](/dm/dm-key-features.md#table-routing)の変換を実行します。関連するメトリックは`transform binlog event duration`です。
+Binlogレプリケーション ユニットは、DML を構築し、DDL を解析し、binlog イベント データから[テーブルルーター](/dm/dm-table-routing.md)の変換を実行します。関連するメトリックは`transform binlog event duration`です。
 
 期間は、主にアップストリームの書き込み操作の影響を受けます。 `INSERT INTO`ステートメントを例にとると、単一の`VALUES`を変換するのにかかる時間は、大量の`VALUES`を変換するのとは大きく異なります。消費される時間は、数十マイクロ秒から数百マイクロ秒の範囲です。ただし、通常、これはシステムのボトルネックではありません。
 

@@ -61,7 +61,7 @@ KEY `{index_name}` (`{column_names}`)
 -   `{index_name}` : セカンダリ インデックスの名前。
 -   `{column_names}` : セミコロンのコンマで区切られた、索引付けされる列の名前。
 
-## 副次索引作成のルール {#rules-in-secondary-index-creation}
+## 副次索引作成の規則 {#rules-in-secondary-index-creation}
 
 [インデックス作成のベスト プラクティス](/develop/dev-guide-index-best-practice.md)を参照してください。
 

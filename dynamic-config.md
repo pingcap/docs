@@ -3,7 +3,7 @@ title: Modify Configuration Dynamically
 summary: Learn how to dynamically modify the cluster configuration.
 ---
 
-# Configuration / コンフィグレーションを動的に変更する {#modify-configuration-dynamically}
+# コンフィグレーションを動的に変更する {#modify-configuration-dynamically}
 
 このドキュメントでは、クラスター構成を動的に変更する方法について説明します。
 
@@ -119,7 +119,7 @@ show warnings;
 
 次の TiKV 構成アイテムは、動的に変更できます。
 
-| Configuration / コンフィグレーション項目                              | 説明                                                                                                                                                       |
+| コンフィグレーション項目                                              | 説明                                                                                                                                                       |
 | :-------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | ログレベル                                                     | ログレベル。                                                                                                                                                   |
 | `raftstore.raft-max-inflight-msgs`                        | 確認するRaftログの数。この数を超えると、 Raftステート マシンはログの送信を遅くします。                                                                                                         |
@@ -205,7 +205,7 @@ show warnings;
 | `{db-name}.{cf-name}.soft-pending-compaction-bytes-limit` | 保留中の圧縮バイトのソフト制限                                                                                                                                          |
 | `{db-name}.{cf-name}.hard-pending-compaction-bytes-limit` | 保留中の圧縮バイトのハード制限                                                                                                                                          |
 | `{db-name}.{cf-name}.titan.blob-run-mode`                 | BLOB ファイルの処理モード                                                                                                                                          |
-| `server.grpc-memory-pool-quota`                           | gRPC で使用できるメモリ サイズを制限します                                                                                                                                 |
+| `server.grpc-memory-pool-quota`                           | gRPC で使用できるメモリサイズを制限します                                                                                                                                  |
 | `server.max-grpc-send-msg-len`                            | 送信できる gRPC メッセージの最大長を設定します                                                                                                                               |
 | `server.raft-msg-max-batch-size`                          | 単一の gRPC メッセージに含まれるRaftメッセージの最大数を設定します                                                                                                                   |
 | `server.simplify-metrics`                                 | サンプリング モニタリング メトリックを単純化するかどうかを制御します                                                                                                                      |
@@ -228,7 +228,7 @@ show warnings;
 -   `db-name`が`rocksdb`の場合、オプションの`cf-name`の値は`defaultcf` 、 `writecf` `lockcf` `raftcf` 。
 -   `db-name`が`raftdb`の場合、 `cf-name`の値は`defaultcf`になります。
 
-詳細なパラメーターの説明については、 [TiKVConfiguration / コンフィグレーションファイル](/tikv-configuration-file.md)を参照してください。
+詳細なパラメーターの説明については、 [TiKVコンフィグレーションファイル](/tikv-configuration-file.md)を参照してください。
 
 ### PD 構成を動的に変更する {#modify-pd-configuration-dynamically}
 
@@ -252,7 +252,7 @@ Query OK, 0 rows affected (0.01 sec)
 
 次の PD 構成アイテムは、動的に変更できます。
 
-| Configuration / コンフィグレーション項目               | 説明                                       |
+| コンフィグレーション項目                               | 説明                                       |
 | :----------------------------------------- | :--------------------------------------- |
 | `log.level`                                | ログレベル                                    |
 | `cluster-version`                          | クラスターのバージョン                              |
@@ -291,7 +291,7 @@ Query OK, 0 rows affected (0.01 sec)
 | `pd-server.dashboard-address`              | ダッシュボードのアドレスを設定します                       |
 | `replication-mode.replication-mode`        | バックアップモードを設定します                          |
 
-詳細なパラメーターの説明については、 [PDConfiguration / コンフィグレーションファイル](/pd-configuration-file.md)を参照してください。
+詳細なパラメーターの説明については、 [PDコンフィグレーションファイル](/pd-configuration-file.md)を参照してください。
 
 ### TiDB 構成を動的に変更する {#modify-tidb-configuration-dynamically}
 
@@ -328,7 +328,7 @@ select @@tidb_slow_log_threshold;
 
 次の TiDB 構成項目は動的に変更できます。
 
-| |Configuration / コンフィグレーション項目 | SQL 変数 |説明 | | | :--- | :--- | | | `log.enable-slow-log` | `tidb_enable_slow_log` |スローログを有効にするかどうか | | | `log.slow-threshold` | `tidb_slow_log_threshold` |遅いログのしきい値 | | | `log.expensive-threshold` | `tidb_expensive_query_time_threshold` |高価なクエリのしきい値 |
+| |コンフィグレーション項目 | SQL 変数 |説明 | | | :--- | :--- | | | `log.enable-slow-log` | `tidb_enable_slow_log` |スローログを有効にするかどうか | | | `log.slow-threshold` | `tidb_slow_log_threshold` |遅いログのしきい値 | | | `log.expensive-threshold` | `tidb_expensive_query_time_threshold` |高価なクエリのしきい値 |
 
 ### TiFlash構成を動的に変更する {#modify-tiflash-configuration-dynamically}
 

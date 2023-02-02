@@ -28,7 +28,7 @@ tiup cluster patch <cluster-name> <package-path> [flags]
 -   置き換えるコンポーネントの名前`${component}` (tidb、tikv、pd...)、コンポーネントの`${version}` (v4.0.0、v4.0.1 ...)、およびオペレーティング システム`${os}` ( `linux` ) とプラットフォーム`${arch}`を特定します。コンポーネントが実行される場所。
 -   コマンド`wget https://tiup-mirrors.pingcap.com/${component}-${version}-${os}-${arch}.tar.gz -O /tmp/${component}-${version}-${os}-${arch}.tar.gz`を使用して、現在のコンポーネントパッケージをダウンロードします。
 -   `mkdir -p /tmp/package && cd /tmp/package`を実行して、ファイルをパックするための一時ディレクトリを作成します。
--   `tar xf /tmp/${component}-${version}-${os}-${arch}.tar.gz`を実行して、元のバイナリ パッケージを解凍します。
+-   `tar xf /tmp/${component}-${version}-${os}-${arch}.tar.gz`を実行して、元のバイナリ パッケージを展開します。
 -   `find .`を実行して、一時パッケージ ディレクトリのファイル構造を表示します。
 -   バイナリ ファイルまたは構成ファイルを、一時ディレクトリ内の対応する場所にコピーします。
 -   `tar czf /tmp/${component}-hotfix-${os}-${arch}.tar.gz *`を実行して、ファイルを一時ディレクトリにパックします。

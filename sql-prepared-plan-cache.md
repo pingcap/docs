@@ -126,11 +126,11 @@ MySQL [test]> select @@last_plan_from_cache;
 
 <CustomContent platform="tidb">
 
-プリペアドプランキャッシュを使用すると、メモリ オーバーヘッドが発生します。各 TiDB インスタンスのすべてのセッションのキャッシュされた実行プランによる合計メモリ消費量を表示するには、Grafana で[**Plan Cache Memory Usage**監視パネル](/grafana-tidb-dashboard.md)を使用できます。
+プリペアドプランキャッシュを使用すると、メモリオーバーヘッドが発生します。各 TiDB インスタンスのすべてのセッションのキャッシュされた実行プランによる合計メモリ消費量を表示するには、Grafana で[**Plan Cache Memory Usage**監視パネル](/grafana-tidb-dashboard.md)を使用できます。
 
 > **ノート：**
 >
-> Golangのメモリ再利用メカニズムといくつかのカウントされないメモリ構造のため、Grafana に表示されるメモリは実際のヒープ メモリ使用量と等しくありません。 Grafana で表示されるメモリと実際のヒープメモリ使用量との間に±20% 程度の偏差があることがテストされています。
+> Golangのメモリ再利用メカニズムといくつかのカウントされないメモリ構造のため、Grafana に表示されるメモリは実際のヒープメモリ使用量と等しくありません。 Grafana で表示されるメモリと実際のヒープメモリ使用量との間に±20% 程度の偏差があることがテストされています。
 
 各 TiDB インスタンスにキャッシュされた実行プランの総数を表示するには、Grafana で[**Plan Cache Plan Num**パネル](/grafana-tidb-dashboard.md)を使用できます。
 
@@ -141,9 +141,10 @@ MySQL [test]> select @@last_plan_from_cache;
 システム変数`tidb_prepared_plan_cache_size`を構成することにより、各セッションでキャッシュできるプランの最大数を制御できます。さまざまな環境での推奨値は次のとおりであり、監視パネルに従って調整できます。
 
 </CustomContent>
+
 <CustomContent platform="tidb-cloud">
 
-プリペアドプランキャッシュを使用すると、メモリ オーバーヘッドが発生します。内部テストでは、キャッシュされた各プランは平均 100 KiB のメモリを消費します。 Plan Cache は現在`SESSION`レベルであるため、合計メモリ消費量は約`the number of sessions * the average number of cached plans in a session * 100 KiB`です。
+プリペアドプランキャッシュを使用すると、メモリオーバーヘッドが発生します。内部テストでは、キャッシュされた各プランは平均 100 KiB のメモリを消費します。 Plan Cache は現在`SESSION`レベルであるため、合計メモリ消費量は約`the number of sessions * the average number of cached plans in a session * 100 KiB`です。
 
 たとえば、現在の TiDB インスタンスには 50 の同時実行セッションがあり、各セッションには約 100 のキャッシュされたプランがあります。合計メモリ消費量は約`50 * 100 * 100 KiB` = `512 MB`です。
 
@@ -286,12 +287,18 @@ mysql> select @@last_plan_from_cache;       -- Reuse the last plan
 1 row in set (0.00 sec)
 ```
 
-<CustomContent platform="tidb">
-
 ### モニタリング {#monitoring}
+
+<CustomContent platform="tidb">
 
 **Executor**セクションの TiDB ページの[Grafana ダッシュボード](/grafana-tidb-dashboard.md)には、「プラン キャッシュ OPS を使用したクエリ」と「プラン キャッシュ ミス OPS」のグラフがあります。これらのグラフを使用して、TiDB とアプリケーションの両方が正しく構成され、SQL Plan Cache が正しく機能するかどうかを確認できます。同じページの<strong>サーバー</strong>セクションには、「Prepared Statement Count」グラフが表示されます。アプリケーションがプリペアド ステートメントを使用している場合、このグラフはゼロ以外の値を示します。これは、SQL プラン キャッシュが正しく機能するために必要です。
 
 ![sql\_plan\_cache](/media/performance/sql_plan_cache.png)
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+[TiDB Cloudコンソール](https://tidbcloud.com/)の[**モニタリング**](/tidb-cloud/built-in-monitoring.md)ページで、 `Queries Using Plan Cache OPS`メトリクスをチェックして、すべての TiDB インスタンスで 1 秒あたりのプラン キャッシュを使用または欠落しているクエリの数を取得できます。
 
 </CustomContent>

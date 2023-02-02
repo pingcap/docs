@@ -34,7 +34,7 @@ AWS PrivateLink を利用したエンドポイント接続は安全でプライ�
 -   TiCDC クラスターを使用してダウンストリーム クラスター (Amazon Aurora、MySQL、Kafka など) にデータをレプリケートしていますが、エンドポイント サービスを自分で維持することはできません。
 -   PD または TiKV ノードに直接接続しています。
 
-## AWS でプライベート エンドポイントを設定する {#set-up-a-private-endpoint-with-aws}
+## AWS でプライベート エンドポイントをセットアップする {#set-up-a-private-endpoint-with-aws}
 
 このセクションでは、AWS PrivateLink を使用してプライベート エンドポイントを設定する方法について説明します。
 

@@ -35,7 +35,7 @@ TiDB アンシブル バージョン: 3.0.9
 
 -   ラフトストア
     -   構成変更を高速化して、リージョン分散を高速化します[#6421](https://github.com/tikv/tikv/pull/6421)
--   取引
+-   トランザクション
     -   `tikv_lock_manager_waiter_lifetime_duration` 、 `tikv_lock_manager_detect_duration` 、および`tikv_lock_manager_detect_duration`のモニタリング メトリックを追加して、 `waiter`の有効期間、デッドロックを検出するための時間コスト、および`Wait`表[#6392](https://github.com/tikv/tikv/pull/6392)のステータスをモニタリングします。
     -   次の構成項目を最適化して、極端な状況でリージョンリーダーまたはデッドロック ディテクターのリーダーを変更することによって引き起こされるトランザクション実行レイテンシーを削減します[#6429](https://github.com/tikv/tikv/pull/6429)
         -   デフォルト値の`wait-for-lock-time`を`3s`から`1s`に変更します

@@ -20,7 +20,7 @@ title: TiDB 2.1 RC3 Release Notes
     -   一部のエグゼキュータでChunkメモリを割り当てるコストを最適化します[#7540](https://github.com/pingcap/tidb/pull/7540)
     -   ポイントクエリがすべて NULL 値を取得する列によって引き起こされる「範囲外のインデックス」panicを修正します[#7790](https://github.com/pingcap/tidb/pull/7790)
 -   サーバ
-    -   構成ファイルのメモリ クォータが有効にならない問題を修正します[#7729](https://github.com/pingcap/tidb/pull/7729)
+    -   構成ファイルのメモリクォータが有効にならない問題を修正します[#7729](https://github.com/pingcap/tidb/pull/7729)
     -   `tidb_force_priority`システム変数を追加して、各ステートメントの実行優先度を設定します[#7694](https://github.com/pingcap/tidb/pull/7694)
     -   `admin show slow`ステートメントを使用したスロー クエリ ログの取得のサポート[#7785](https://github.com/pingcap/tidb/pull/7785)
 -   互換性

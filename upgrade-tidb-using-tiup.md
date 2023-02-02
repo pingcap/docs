@@ -36,6 +36,7 @@ summary: Learn how to upgrade TiDB using TiUP.
     3.  [TiUP (v4.0) を使用して TiDB をアップグレードする](https://docs.pingcap.com/tidb/v4.0/upgrade-tidb-using-tiup#import-tidb-ansible-and-the-inventoryini-configuration-to-tiup)に従って、バージョン 3.0 を 4.0 に更新します。
     4.  このドキュメントに従って、クラスターを v6.5.0 にアップグレードします。
 -   TiDB Binlog、TiCDC、 TiFlash、およびその他のコンポーネントのバージョンのアップグレードをサポートします。
+-   Linux AMD64アーキテクチャに展開されたTiFlashを v6.3.0 より前のバージョンから v6.3.0 以降のバージョンにアップグレードする場合は、CPU が AVX2 命令セットをサポートしていることを確認してください。詳細については、 [v6.3.0 リリースノート](/releases/release-6.3.0.md#others)の説明を参照してください。
 -   異なるバージョンの詳細な互換性の変更については、各バージョンの[リリースノート](/releases/release-notes.md)を参照してください。対応するリリース ノートの「互換性の変更」セクションに従って、クラスター構成を変更します。
 -   v5.3 より前のバージョンから v5.3 以降のバージョンにアップグレードするクラスターの場合、デフォルトでデプロイされた Prometheus は v2.8.1 から v2.27.1 にアップグレードされます。 Prometheus v2.27.1 は、より多くの機能を提供し、セキュリティの問題を修正します。 v2.8.1 と比較して、v2.27.1 のアラート時間の表現が変更されました。詳細については、 [プロメテウスコミット](https://github.com/prometheus/prometheus/commit/7646cbca328278585be15fa615e22f2a50b47d06)を参照してください。
 
@@ -132,7 +133,7 @@ tiup update cluster
 
 > **ノート：**
 >
-> クラスターを v6.5.0 にアップグレードする前に、v4.0 で変更したパラメーターが v6.5.0 で互換性があることを確認してください。詳細については、 [TiKVConfiguration / コンフィグレーションファイル](/tikv-configuration-file.md)を参照してください。
+> クラスターを v6.5.0 にアップグレードする前に、v4.0 で変更したパラメーターが v6.5.0 で互換性があることを確認してください。詳細については、 [TiKVコンフィグレーションファイル](/tikv-configuration-file.md)を参照してください。
 
 ### ステップ 3: 現在のクラスターのヘルス ステータスを確認する {#step-3-check-the-health-status-of-the-current-cluster}
 
@@ -148,6 +149,13 @@ tiup cluster check <cluster-name> --cluster
 
 -   結果が「すべてのリージョンが正常」である場合、現在のクラスター内のすべてのリージョンは正常であり、アップグレードを続行できます。
 -   結果が「リージョンが完全に正常ではありません: m miss-peer、n pending-peer」の場合、「他の操作の前に異常なリージョンを修正してください」。現在のクラスターの一部のリージョンが異常です。チェック結果が「すべてのリージョンが正常」になるまで、異常をトラブルシューティングする必要があります。その後、アップグレードを続行できます。
+
+### 手順 4: クラスターの DDL とバックアップの状態を確認する {#step-4-check-the-ddl-and-backup-status-of-the-cluster}
+
+アップグレード中の未定義の動作やその他の予期しない問題を回避するために、アップグレードの前に次の項目を確認することをお勧めします。
+
+-   クラスタDDL: [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md)ステートメントを実行して、進行中の DDL ジョブがあるかどうかを確認することをお勧めします。はいの場合は、その実行を待つか、アップグレードを実行する前に[`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)ステートメントを実行してキャンセルします。
+-   クラスタバックアップ: [`SHOW [BACKUPS|RESTORES]`](/sql-statements/sql-statement-show-backups.md)ステートメントを実行して、クラスタ内で進行中のバックアップまたは復元タスクがあるかどうかを確認することをお勧めします。 「はい」の場合は、アップグレードが完了するまで待ってからアップグレードを実行してください。
 
 ## TiDB クラスターをアップグレードする {#upgrade-the-tidb-cluster}
 

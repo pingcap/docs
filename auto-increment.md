@@ -235,7 +235,7 @@ mysql> SELECT * FROM t ORDER BY b;
 5 rows in set (0.00 sec)
 ```
 
-`AUTO_INCREMENT`キャッシュは、TiDBサーバーの再起動後は保持されません。最初の TiDBサーバーが再起動された後、次の`INSERT`のステートメントが実行されます。
+`AUTO_INCREMENT`キャッシュは、TiDBサーバーの再起動後は維持されません。最初の TiDBサーバーが再起動された後、次の`INSERT`のステートメントが実行されます。
 
 ```sql
 mysql> INSERT INTO t (a) VALUES (NULL);

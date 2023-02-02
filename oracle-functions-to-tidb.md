@@ -94,7 +94,7 @@ TiDB では、複数のテーブルを更新する場合、特定のフィール
 UPDATE test1,test2 SET test1.name=test2.name,test1.age=test2.age WHERE test1.id=test2.id
 ```
 
-### 派生テーブルの別名 {#derived-table-alias}
+### 派生テーブルのエイリアス {#derived-table-alias}
 
 Oracle では、複数のテーブルをクエリする場合、派生テーブルにエイリアスを追加する必要はありません。例えば：
 

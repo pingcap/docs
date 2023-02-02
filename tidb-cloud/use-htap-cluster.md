@@ -59,7 +59,7 @@ explain analyze select count(*) from test.t;
 
 ### エンジンの分離 {#engine-isolation}
 
-エンジンの分離は、 `tidb_isolation_read_engines`変数を構成することによって、すべてのクエリが指定されたエンジンのレプリカを使用することを指定することです。オプションのエンジンは、「tikv」、「tidb」(一部の TiDB システム テーブルを格納し、ユーザーが積極的に使用できない TiDB の内部メモリ テーブル領域を示します)、および「tiflash」です。
+エンジンの分離は、 `tidb_isolation_read_engines`変数を構成することによって、すべてのクエリが指定されたエンジンのレプリカを使用することを指定することです。オプションのエンジンは、「tikv」、「tidb」(一部の TiDB システム テーブルを格納し、ユーザーが積極的に使用できない TiDB の内部メモリテーブル領域を示します)、および「tiflash」です。
 
 {{< copyable "" >}}
 

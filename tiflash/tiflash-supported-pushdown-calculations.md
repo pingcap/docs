@@ -24,7 +24,7 @@ TiFlashは、次の演算子のプッシュダウンをサポートしていま�
     -   上記の結合は、等結合と非等結合 (デカルト結合) の両方をサポートしています。 Cartesian Join を計算する場合、Shuffle Hash Join アルゴリズムの代わりに Broadcast アルゴリズムが使用されます。
 -   ウィンドウ関数: 現在、 TiFlashは row_number()、rank()、dense_rank()、lead()、および lag() をサポートしています。
 
-TiDB では、オペレーターはツリー構造で編成されています。オペレータがTiFlashにプッシュされるには、次のすべての前提条件を満たす必要があります。
+TiDB では、オペレーターはツリー構造で編成されます。オペレータがTiFlashにプッシュされるには、次のすべての前提条件を満たす必要があります。
 
 -   その子演算子はすべてTiFlashにプッシュできます。
 -   演算子に式が含まれる場合 (ほとんどの演算子には式が含まれます)、演算子のすべての式をTiFlashにプッシュできます。
@@ -37,7 +37,7 @@ TiFlashは、次のプッシュダウン式をサポートしています。
 -   論理関数: `and, or, not, case when, if, ifnull, isnull, in, like, coalesce, is`
 -   ビット演算: `bitand, bitor, bigneg, bitxor`
 -   文字列関数: `substr, char_length, replace, concat, concat_ws, left, right, ascii, length, trim, ltrim, rtrim, position, format, lower, ucase, upper, substring_index, lpad, rpad, strcmp, regexp, regexp_like, regexp_instr, regexp_substr`
--   日付関数： `date_format, timestampdiff, from_unixtime, unix_timestamp(int), unix_timestamp(decimal), str_to_date(date), str_to_date(datetime), datediff, year, month, day, extract(datetime), date, hour, microsecond, minute, second, sysdate, date_add, date_sub, adddate, subdate, quarter, dayname, dayofmonth, dayofweek, dayofyear, last_day, monthname, to_seconds, to_days, from_days, weekofyear`
+-   日付関数： `date_format, timestampdiff, from_unixtime, unix_timestamp(int), unix_timestamp(decimal), str_to_date(date), str_to_date(datetime), datediff, year, month, day, extract(datetime), date, hour, microsecond, minute, second, sysdate, date_add/adddate(datetime, int), date_add/adddate(string, int), date_add/adddate(string, real), date_sub/subdate(datetime, int), date_sub/subdate(string, int), date_sub/subdate(string, real), quarter, dayname, dayofmonth, dayofweek, dayofyear, last_day, monthname, to_seconds, to_days, from_days, weekofyear`
 -   JSON 関数: `json_length, ->, ->>, json_extract`
 -   変換関数： `cast(int as double), cast(int as decimal), cast(int as string), cast(int as time), cast(double as int), cast(double as decimal), cast(double as string), cast(double as time), cast(string as int), cast(string as double), cast(string as decimal), cast(string as time), cast(decimal as int), cast(decimal as string), cast(decimal as time), cast(time as int), cast(time as decimal), cast(time as string), cast(time as real)`
 -   集計関数: `min, max, sum, count, avg, approx_count_distinct, group_concat`

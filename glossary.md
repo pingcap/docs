@@ -108,7 +108,7 @@ TiCDC が出力する増分変更ログの「元の値」。 TiCDC が出力す�
 
 ### クォータリミッター {#quota-limiter}
 
-Quota Limiter は、TiDB v6.0.0 で導入された実験的機能です。 TiKV が展開されているマシンのリソースが限られている場合 (たとえば、4v CPU と 16 G メモリのみ)、TiKV のフォアグラウンドで処理される読み取りおよび書き込み要求が多すぎると、バックグラウンドで使用される CPU リソースがそのような処理を支援するために占有されます。これは、TiKV のパフォーマンスの安定性に影響します。この状況を回避するには、 [クォータ関連の構成アイテム](/tikv-configuration-file.md#quota)を設定して、フォアグラウンドで使用される CPU リソースを制限します。
+Quota Limiter は、TiDB v6.0.0 で導入された実験的機能です。 TiKV が展開されているマシンのリソースが限られている場合 (たとえば、4v CPU と 16 Gメモリのみ)、TiKV のフォアグラウンドで処理される読み取りおよび書き込み要求が多すぎると、バックグラウンドで使用される CPU リソースがそのような処理を支援するために占有されます。これは、TiKV のパフォーマンスの安定性に影響します。この状況を回避するには、 [クォータ関連の構成アイテム](/tikv-configuration-file.md#quota)を設定して、フォアグラウンドで使用される CPU リソースを制限します。
 
 ## R {#r}
 
@@ -153,7 +153,7 @@ Top SQLは、指定された時間範囲で TiDB または TiKV ノードの高�
 
 ### TSO {#tso}
 
-TiKV は分散ストレージ システムであるため、単調に増加するタイムスタンプを割り当てるには、グローバル タイミング サービスである Timestamp Oracle (TSO) が必要です。 TiKV ではそのような機能は PD によって提供され、Google [スパナ](http://static.googleusercontent.com/media/research.google.com/en//archive/spanner-osdi2012.pdf)ではこの機能は複数の原子時計と GPS によって提供されます。
+TiKV は分散ストレージ システムであるため、単調に増加するタイムスタンプを割り当てるには、グローバル タイミング サービスである Timestamp Oracle (TSO) が必要です。 TiKV ではそのような機能は PD によって提供され、Google [スパナ](http://static.googleusercontent.com/media/research.google.com/en//archive/spanner-osdi2012.pdf)ではこの機能は複数のアトミック時計と GPS によって提供されます。
 
 ### TTL {#ttl}
 

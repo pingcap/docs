@@ -22,4 +22,4 @@ TiDB アンシブル バージョン: 3.0.7
 ## TiKV {#tikv}
 
 -   デッドロック ディテクターが有効なリージョンのみを監視するようにして、デッドロック マネージャーが有効なリージョン[#6110](https://github.com/tikv/tikv/pull/6110)にあることを確認します。
--   潜在的なメモリ リークの問題を修正する[#6128](https://github.com/tikv/tikv/pull/6128)
+-   潜在的なメモリリークの問題を修正する[#6128](https://github.com/tikv/tikv/pull/6128)

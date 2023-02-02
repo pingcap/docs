@@ -92,7 +92,7 @@ TiDB バージョン: 4.0.10
 
     -   Dumpling
 
-        -   デフォルトの動作を[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) [#233](https://github.com/pingcap/dumpling/pull/233)に設定して、TiDB のメモリ不足 (OOM) を回避します。
+        -   デフォルトの動作を[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) [#233](https://github.com/pingcap/dumpling/pull/233)に設定して、TiDB のメモリ(OOM) を回避します。
 
     -   バックアップと復元 (BR)
 

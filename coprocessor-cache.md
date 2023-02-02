@@ -7,11 +7,11 @@ summary: Learn the features of Coprocessor Cache.
 
 v4.0 以降、TiDB インスタンスは、TiKV (コプロセッサーキャッシュ機能) にプッシュされる計算結果のキャッシュをサポートしており、一部のシナリオでは計算プロセスを高速化できます。
 
-## Configuration / コンフィグレーション {#configuration}
+## コンフィグレーション {#configuration}
 
 <CustomContent platform="tidb">
 
-コプロセッサー Cache は、TiDB 構成ファイルの`tikv-client.copr-cache`構成項目を介して構成できます。コプロセッサー・キャッシュを有効にして構成する方法の詳細については、 [TiDBConfiguration / コンフィグレーションファイル](/tidb-configuration-file.md#tikv-clientcopr-cache-new-in-v400)を参照してください。
+コプロセッサー Cache は、TiDB 構成ファイルの`tikv-client.copr-cache`構成項目を介して構成できます。コプロセッサー・キャッシュを有効にして構成する方法の詳細については、 [TiDBコンフィグレーションファイル](/tidb-configuration-file.md#tikv-clientcopr-cache-new-in-v400)を参照してください。
 
 </CustomContent>
 

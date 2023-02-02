@@ -50,7 +50,7 @@ gh-ost で主に使用される SQL ステートメントと、対応する DM �
     Create /* gh-ost */ table `test`.`_test4_gho` like `test`.`test4` ;
     ```
 
-    DM は`_test4_gho`テーブルを作成しません。 DM は、 `server_id` `ghost_schema` `ghost_table` `dm_worker`の`dm_meta.{task_name}_onlineddl`レコードを削除し、メモリ内の関連情報をクリアします。
+    DM は`_test4_gho`テーブルを作成しません。 DM は、 `server_id` `ghost_schema` `ghost_table` `dm_worker`の`dm_meta.{task_name}_onlineddl`レコードを削除し、メモリの関連情報をクリアします。
 
     ```
     DELETE FROM dm_meta.{task_name}_onlineddl WHERE id = {server_id} and ghost_schema = {ghost_schema} and ghost_table = {ghost_table};
@@ -62,7 +62,7 @@ gh-ost で主に使用される SQL ステートメントと、対応する DM �
     Alter /* gh-ost */ table `test`.`_test4_gho` add column cl1 varchar(20) not null ;
     ```
 
-    DM は`_test4_gho`の DDL 操作を実行しません。このDDLを`dm_meta.{task_name}_onlineddl` 、メモリに記録します。
+    DM は`_test4_gho`の DDL 操作を実行しません。この DDL を`dm_meta.{task_name}_onlineddl`とメモリに記録します。
 
     ```sql
     REPLACE INTO dm_meta.{task_name}_onlineddl (id, ghost_schema , ghost_table , ddls) VALUES (......);
@@ -134,7 +134,7 @@ pt-osc が online-schema-change を実装すると、2 種類のテーブルが�
     date date DEFAULT NULL, account_id bigint(20) DEFAULT NULL, conversion_price decimal(20,3) DEFAULT NULL, ocpc_matched_conversions bigint(20) DEFAULT NULL, ad_cost decimal(20,3) DEFAULT NULL,cl2 varchar(20) COLLATE utf8mb4_bin NOT NULL,cl1 varchar(20) COLLATE utf8mb4_bin NOT NULL,PRIMARY KEY (id) ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ;
     ```
 
-    DM は`_test4_new`テーブルを作成しません。 DM は、 `server_id` `ghost_schema` `ghost_table` `dm_worker`の`dm_meta.{task_name}_onlineddl`レコードを削除し、メモリ内の関連情報をクリアします。
+    DM は`_test4_new`テーブルを作成しません。 DM は、 `server_id` `ghost_schema` `ghost_table` `dm_worker`の`dm_meta.{task_name}_onlineddl`レコードを削除し、メモリの関連情報をクリアします。
 
     ```sql
     DELETE FROM dm_meta.{task_name}_onlineddl WHERE id = {server_id} and ghost_schema = {ghost_schema} and ghost_table = {ghost_table};
@@ -146,7 +146,7 @@ pt-osc が online-schema-change を実装すると、2 種類のテーブルが�
     ALTER TABLE `test`.`_test4_new` add column c3 int;
     ```
 
-    DM は`_test4_new`の DDL 操作を実行しません。代わりに、この DDL を`dm_meta.{task_name}_onlineddl`およびメモリに記録します。
+    DM は`_test4_new`の DDL 操作を実行しません。代わりに、この DDL を`dm_meta.{task_name}_onlineddl`とメモリに記録します。
 
     ```sql
     REPLACE INTO dm_meta.{task_name}_onlineddl (id, ghost_schema , ghost_table , ddls) VALUES (......);

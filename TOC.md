@@ -6,8 +6,7 @@
 -   TiDBについて
     -   [TiDB の紹介](/overview.md)
     -   [TiDB 6.5 リリースノート](/releases/release-6.5.0.md)
-    -   [基本的な機能](/basic-features.md)
-    -   [Experimental機能](/experimental-features.md)
+    -   [特徴](/basic-features.md)
     -   [MySQL の互換性](/mysql-compatibility.md)
     -   [TiDB の制限事項](/tidb-limitations.md)
     -   [クレジット](/credits.md)
@@ -54,11 +53,11 @@
             -   [ステイル読み取り](/develop/dev-guide-use-stale-read.md)
         -   [HTAP クエリ](/develop/dev-guide-hybrid-oltp-and-olap-queries.md)
         -   [ファストスキャン](/develop/dev-guide-use-fastscan.md)
-    -   取引
+    -   トランザクション
         -   [概要](/develop/dev-guide-transaction-overview.md)
         -   [楽観的および悲観的なトランザクション](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)
-        -   [取引制限](/develop/dev-guide-transaction-restraints.md)
-        -   [トランザクション エラーの処理](/develop/dev-guide-transaction-troubleshoot.md)
+        -   [トランザクション制限](/develop/dev-guide-transaction-restraints.md)
+        -   [トランザクションエラーの処理](/develop/dev-guide-transaction-troubleshoot.md)
     -   最適化
         -   [概要](/develop/dev-guide-optimize-sql-overview.md)
         -   [SQL性能チューニング](/develop/dev-guide-optimize-sql.md)
@@ -89,7 +88,7 @@
         -   [Amazon AppFlow 統合ガイド](/develop/dev-guide-aws-appflow-integration.md)
 -   デプロイ
     -   [ソフトウェアとハードウェアの要件](/hardware-and-software-requirements.md)
-    -   [環境Configuration / コンフィグレーションチェックリスト](/check-before-deployment.md)
+    -   [環境コンフィグレーションチェックリスト](/check-before-deployment.md)
     -   クラスタトポロジの計画
         -   [最小限のトポロジ](/minimal-deployment-topology.md)
         -   [TiFlashトポロジー](/tiflash-deployment-topology.md)
@@ -165,7 +164,7 @@
     -   [毎日のチェックリスト](/daily-check.md)
     -   [TiFlashの管理](/tiflash/maintain-tiflash.md)
     -   [TiUP を使用してTiUPを管理する](/maintain-tidb-using-tiup.md)
-    -   [Configuration / コンフィグレーションを動的に変更する](/dynamic-config.md)
+    -   [コンフィグレーションを動的に変更する](/dynamic-config.md)
     -   [オンラインの安全でない回復](/online-unsafe-recovery.md)
     -   [プライマリ クラスタとセカンダリ クラスタの間でデータをレプリケートする](/replicate-between-primary-and-secondary-clusters.md)
 -   監視と警告
@@ -205,7 +204,7 @@
         -   [パフォーマンス分析とチューニング](/performance-tuning-methods.md)
         -   [OLTP シナリオの性能チューニングプラクティス](/performance-tuning-practices.md)
         -   [レイテンシの内訳](/latency-breakdown.md)
-    -   Configuration / コンフィグレーションのチューニング
+    -   コンフィグレーションのチューニング
         -   [オペレーティング システムのパフォーマンスを調整する](/tune-operating-system.md)
         -   [TiDB メモリのチューニング](/configure-memory-usage.md)
         -   [TiKV スレッドの調整](/tune-tikv-thread-performance.md)
@@ -216,7 +215,7 @@
         -   [コプロセッサーキャッシュ](/coprocessor-cache.md)
         -   ガベージ コレクション (GC)
             -   [概要](/garbage-collection-overview.md)
-            -   [Configuration / コンフィグレーション](/garbage-collection-configuration.md)
+            -   [コンフィグレーション](/garbage-collection-configuration.md)
     -   SQL チューニング
         -   [概要](/sql-tuning-overview.md)
         -   クエリ実行プランについて
@@ -242,7 +241,7 @@
                 -   [パーティションのプルーニング](/partition-pruning.md)
                 -   [TopN とリミット プッシュ ダウン](/topn-limit-push-down.md)
                 -   [結合したテーブルの再配置](/join-reorder.md)
-            -   物理的な最適化
+            -   物理的最適化
                 -   [概要](/sql-physical-optimization.md)
                 -   [インデックスの選択](/choose-index.md)
                 -   [統計](/statistics.md)
@@ -257,9 +256,9 @@
             -   [SQL計画管理](/sql-plan-management.md)
             -   [最適化ルールのブロックリストと式のプッシュダウン](/blocklist-control-plan.md)
 -   チュートリアル
-    -   [1 つの都市に展開された複数のデータ センター](/multi-data-centers-in-one-city-deployment.md)
-    -   [2 つの都市に配置された 3 つのデータ センター](/three-data-centers-in-two-cities-deployment.md)
-    -   [1 つの都市に展開された 2 つのデータ センター](/two-data-centers-in-one-city-deployment.md)
+    -   [1 つの地域展開における複数のデータセンター](/multi-data-centers-in-one-city-deployment.md)
+    -   [2 つの地域に配置された 3 つのデータ センター](/three-data-centers-in-two-cities-deployment.md)
+    -   [1 つの地域に展開された 2 つのデータ センター](/two-data-centers-in-one-city-deployment.md)
     -   履歴データの読み取り
         -   ステイル読み取りを使用する (推奨)
             -   [ステイル読み取りの使用シナリオ](/stale-read.md)
@@ -296,7 +295,7 @@
             -   [概要](/tiup/tiup-reference.md)
             -   TiUPコマンド
                 -   [ティアップクリーン](/tiup/tiup-command-clean.md)
-                -   [ティアップ完了](/tiup/tiup-command-completion.md)
+                -   [tiup completion](/tiup/tiup-command-completion.md)
                 -   [tiup環境](/tiup/tiup-command-env.md)
                 -   [tiup help](/tiup/tiup-command-help.md)
                 -   [tiup install](/tiup/tiup-command-install.md)
@@ -411,7 +410,7 @@
         -   [デプロイ](/tidb-lightning/deploy-tidb-lightning.md)
         -   [トラブルシューティング](/tidb-lightning/troubleshoot-tidb-lightning.md)
         -   参照
-            -   [Configuration / コンフィグレーションファイル](/tidb-lightning/tidb-lightning-configuration.md)
+            -   [コンフィグレーションファイル](/tidb-lightning/tidb-lightning-configuration.md)
             -   [コマンド ライン フラグ](/tidb-lightning/tidb-lightning-command-line-full.md)
             -   [モニター](/tidb-lightning/monitor-tidb-lightning.md)
             -   [FAQ](/tidb-lightning/tidb-lightning-faq.md)
@@ -431,10 +430,12 @@
             -   [データ ソースを作成する](/dm/quick-start-create-source.md)
             -   [データ ソースの管理](/dm/dm-manage-source.md)
             -   [タスクの構成](/dm/dm-task-configuration-guide.md)
-            -   [テーブル ルーティング](/dm/dm-key-features.md)
-            -   [ブロックリストと許可リスト](/dm/dm-key-features.md#block-and-allow-table-lists)
-            -   [Binlogイベント フィルタ](/dm/dm-key-features.md#binlog-event-filter)
+            -   [シャードマージ](/dm/dm-shard-merge.md)
+            -   [テーブル ルーティング](/dm/dm-table-routing.md)
+            -   [ブロックリストと許可リスト](/dm/dm-block-allow-table-lists.md)
+            -   [Binlogイベント フィルタ](/dm/dm-binlog-event-filter.md)
             -   [SQL 式を使用した DML のフィルタリング](/dm/feature-expression-filter.md)
+            -   [オンライン DDL ツールのサポート](/dm/dm-online-ddl-tool-support.md)
             -   データ移行タスクの管理
                 -   [タスクの事前チェック](/dm/dm-precheck.md)
                 -   [タスクを作成する](/dm/dm-create-task.md)
@@ -475,14 +476,15 @@
             -   アーキテクチャ
                 -   [DMワーカー](/dm/dm-worker-intro.md)
                 -   [中継ログ](/dm/relay-log.md)
+                -   [DDL 処理](/dm/dm-ddl-compatible.md)
             -   コマンドライン
                 -   [DMマスターとDMワーカー](/dm/dm-command-line-flags.md)
-            -   Configuration / コンフィグレーションファイル
+            -   コンフィグレーションファイル
                 -   [概要](/dm/dm-config-overview.md)
                 -   [アップストリーム データベースの構成](/dm/dm-source-configuration-file.md)
                 -   [タスク構成](/dm/task-configuration-file-full.md)
-                -   [DMマスターConfiguration / コンフィグレーション](/dm/dm-master-configuration-file.md)
-                -   [DM ワーカーのConfiguration / コンフィグレーション](/dm/dm-worker-configuration-file.md)
+                -   [DMマスターコンフィグレーション](/dm/dm-master-configuration-file.md)
+                -   [DM ワーカーのコンフィグレーション](/dm/dm-worker-configuration-file.md)
                 -   [テーブルセレクター](/dm/table-selector.md)
             -   [OpenAPI](/dm/dm-open-api.md)
             -   [互換性カタログ](/dm/dm-compatibility-catalog.md)
@@ -566,6 +568,37 @@
         -   [保管所](/tidb-storage.md)
         -   [コンピューティング](/tidb-computing.md)
         -   [スケジューリング](/tidb-scheduling.md)
+    -   ストレージエンジン - TiKV
+        -   [TiKVの概要](/tikv-overview.md)
+        -   [RocksDB の概要](/storage-engine/rocksdb-overview.md)
+        -   [タイタンの概要](/storage-engine/titan-overview.md)
+        -   [タイタンのコンフィグレーション](/storage-engine/titan-configuration.md)
+    -   ストレージ エンジン - TiFlash
+        -   [概要](/tiflash/tiflash-overview.md)
+        -   [TiFlashレプリカの作成](/tiflash/create-tiflash-replicas.md)
+        -   [TiDB を使用してTiFlashレプリカを読み取る](/tiflash/use-tidb-to-read-tiflash.md)
+        -   [TiSpark を使用してTiFlashレプリカを読み取る](/tiflash/use-tispark-to-read-tiflash.md)
+        -   [MPP モードを使用する](/tiflash/use-tiflash-mpp-mode.md)
+        -   [サポートされているプッシュダウン計算](/tiflash/tiflash-supported-pushdown-calculations.md)
+        -   [TiFlashクエリ結果の実体化](/tiflash/tiflash-results-materialization.md)
+        -   [データ検証](/tiflash/tiflash-data-validation.md)
+        -   [互換性](/tiflash/tiflash-compatibility.md)
+    -   [システム変数](/system-variables.md)
+    -   コンフィグレーションファイルのパラメーター
+        -   [tidb サーバー](/tidb-configuration-file.md)
+        -   [tikv サーバー](/tikv-configuration-file.md)
+        -   [tiflash サーバー](/tiflash/tiflash-configuration.md)
+        -   [pd サーバー](/pd-configuration-file.md)
+    -   CLI
+        -   [tikv-ctl](/tikv-control.md)
+        -   [pd-ctl](/pd-control.md)
+        -   [tidb-ctl](/tidb-control.md)
+        -   [pd-回復](/pd-recover.md)
+    -   コマンド ライン フラグ
+        -   [tidb サーバー](/command-line-flags-for-tidb-configuration.md)
+        -   [tikv サーバー](/command-line-flags-for-tikv-configuration.md)
+        -   [tiflash サーバー](/tiflash/tiflash-command-line-flags.md)
+        -   [pd サーバー](/command-line-flags-for-pd-configuration.md)
     -   主な監視指標
         -   [概要](/grafana-overview-dashboard.md)
         -   [パフォーマンスの概要](/grafana-performance-overview-dashboard.md)
@@ -872,42 +905,10 @@
             -   インスタンスのプロファイリング
                 -   [手動プロファイリング](/dashboard/dashboard-profiling.md)
                 -   [継続的なプロファイリング](/dashboard/continuous-profiling.md)
-            -   セッションの管理とConfiguration / コンフィグレーション
+            -   セッションの管理とコンフィグレーション
                 -   [セッションを共有](/dashboard/dashboard-session-share.md)
                 -   [SSO の構成](/dashboard/dashboard-session-sso.md)
             -   [FAQ](/dashboard/dashboard-faq.md)
-    -   CLI
-        -   [tikv-ctl](/tikv-control.md)
-        -   [pd-ctl](/pd-control.md)
-        -   [tidb-ctl](/tidb-control.md)
-        -   [pd-回復](/pd-recover.md)
-    -   コマンド ライン フラグ
-        -   [tidb サーバー](/command-line-flags-for-tidb-configuration.md)
-        -   [tikv サーバー](/command-line-flags-for-tikv-configuration.md)
-        -   [tiflash サーバー](/tiflash/tiflash-command-line-flags.md)
-        -   [pd サーバー](/command-line-flags-for-pd-configuration.md)
-    -   Configuration / コンフィグレーションファイルのパラメーター
-        -   [tidb サーバー](/tidb-configuration-file.md)
-        -   [tikv サーバー](/tikv-configuration-file.md)
-        -   [tiflash サーバー](/tiflash/tiflash-configuration.md)
-        -   [pd サーバー](/pd-configuration-file.md)
-    -   [システム変数](/system-variables.md)
-    -   ストレージ エンジン
-        -   TiKV
-            -   [TiKVの概要](/tikv-overview.md)
-            -   [RocksDB の概要](/storage-engine/rocksdb-overview.md)
-            -   [タイタンの概要](/storage-engine/titan-overview.md)
-            -   [タイタンのConfiguration / コンフィグレーション](/storage-engine/titan-configuration.md)
-        -   TiFlash
-            -   [概要](/tiflash/tiflash-overview.md)
-            -   [TiFlashレプリカの作成](/tiflash/create-tiflash-replicas.md)
-            -   [TiDB を使用してTiFlashレプリカを読み取る](/tiflash/use-tidb-to-read-tiflash.md)
-            -   [TiSpark を使用してTiFlashレプリカを読み取る](/tiflash/use-tispark-to-read-tiflash.md)
-            -   [MPP モードを使用する](/tiflash/use-tiflash-mpp-mode.md)
-            -   [サポートされているプッシュダウン計算](/tiflash/tiflash-supported-pushdown-calculations.md)
-            -   [TiFlashクエリ結果の実体化](/tiflash/tiflash-results-materialization.md)
-            -   [データ検証](/tiflash/tiflash-data-validation.md)
-            -   [互換性](/tiflash/tiflash-compatibility.md)
     -   [テレメトリー](/telemetry.md)
     -   [エラーコード](/error-codes.md)
     -   [テーブル フィルター](/table-filter.md)

@@ -128,6 +128,12 @@ hide_commit: true
 
 <LearningPath label="Reference" icon="cloud-dev">
 
+[TiDBコンフィグレーションファイルのパラメーター](https://docs.pingcap.com/tidb/v6.5/tidb-configuration-file)
+
+[TiDB コマンドライン フラグ](https://docs.pingcap.com/tidb/v6.5/command-line-flags-for-tidb-configuration)
+
+[TiDB コントロール](https://docs.pingcap.com/tidb/v6.5/tidb-control)
+
 [システム変数](https://docs.pingcap.com/tidb/v6.5/system-variables)
 
 [リリースノート](https://docs.pingcap.com/tidb/v6.5/release-notes)

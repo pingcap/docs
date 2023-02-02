@@ -93,7 +93,7 @@ title: TiDB 2.1 RC2 Release Notes
 -   改良点
     -   ダウン ストアの処理プロセスを最適化して、できるだけ早くレプリカを作成する[#1222](https://github.com/pingcap/pd/pull/1222)
     -   Coordinator の起動を最適化して、PD [#1225](https://github.com/pingcap/pd/pull/1225)の再起動によって発生する不要なスケジューリングを減らします
-    -   メモリー使用量を最適化して、ハートビートによるオーバーヘッドを削減します[#1195](https://github.com/pingcap/pd/pull/1195)
+    -   メモリ使用量を最適化して、ハートビートによるオーバーヘッドを削減します[#1195](https://github.com/pingcap/pd/pull/1195)
     -   エラー処理を最適化し、ログ情報を改善する[#1227](https://github.com/pingcap/pd/pull/1227)
     -   pd-ctl [#1231](https://github.com/pingcap/pd/pull/1231)で特定のストアのリージョン情報のクエリをサポート
     -   pd-ctl [#1233](https://github.com/pingcap/pd/pull/1233)のバージョン比較に基づく topNリージョン情報のクエリをサポート

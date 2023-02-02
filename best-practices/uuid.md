@@ -21,13 +21,35 @@ Universally Unique Identifier (UUID) を`AUTO_INCREMENT`の整数値の代わり
 
 ### UUID 形式のバイナリ順序とクラスター化された PK {#uuid-format-binary-order-and-a-clustered-pk}
 
-`UUID_TO_BIN()`関数は、1 つの引数、UUID、または 2 番目の引数が`swap_flag`である 2 つの引数と共に使用できます。 [ホットスポット](/best-practices/high-concurrency-best-practices.md)を避けるために、TiDB で`swap_flag`を設定しないことをお勧めします。
+`UUID_TO_BIN()`関数は、1 つの引数、UUID、または 2 番目の引数が`swap_flag`である 2 つの引数と共に使用できます。
+
+<CustomContent platform="tidb">
+
+[ホットスポット](/best-practices/high-concurrency-best-practices.md)を回避するために、TiDB で`swap_flag`を設定しないことをお勧めします。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+ホットスポットを避けるために、TiDB で`swap_flag`を設定しないことをお勧めします。
+
+</CustomContent>
 
 ホットスポットを回避するために、UUID ベースの主キーに明示的に[`CLUSTERED`オプション](/clustered-indexes.md)を設定することもできます。
 
 `swap_flag`の効果を示すために、同じ構造を持つ 2 つのテーブルを次に示します。違いは、 `uuid_demo_1`に挿入されたデータが`UUID_TO_BIN(?, 0)`を使用し、 `uuid_demo_2`が`UUID_TO_BIN(?, 1)`を使用することです。
 
+<CustomContent platform="tidb">
+
 以下の[キー ビジュアライザー](/dashboard/dashboard-key-visualizer.md)のスクリーンショットでは、バイナリ形式でフィールドの順序が入れ替わっている`uuid_demo_2`テーブルの 1 つの領域に書き込みが集中していることがわかります。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+以下の[キー ビジュアライザー](/tidb-cloud/tune-performance.md#key-visualizer)のスクリーンショットでは、バイナリ形式でフィールドの順序が入れ替わっている`uuid_demo_2`テーブルの 1 つの領域に書き込みが集中していることがわかります。
+
+</CustomContent>
 
 ![Key Visualizer](/media/best-practices/uuid_keyviz.png)
 

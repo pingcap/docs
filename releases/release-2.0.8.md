@@ -16,7 +16,7 @@ title: TiDB 2.0.8 Release Notes
     -   `duplicate key update`一部の条件で値が正しく挿入されない問題を修正[#7685](https://github.com/pingcap/tidb/pull/7685)
     -   `UnionScan`の述語条件が押されない問題を修正[#7726](https://github.com/pingcap/tidb/pull/7726)
     -   `TIMESTAMP`インデックス[#7812](https://github.com/pingcap/tidb/pull/7812)を追加すると、タイム ゾーンが正しく処理されない問題を修正します。
-    -   一部の条件で統計モジュールが原因で発生するメモリ リークの問題を修正します[#7864](https://github.com/pingcap/tidb/pull/7864)
+    -   一部の条件で統計モジュールが原因で発生するメモリリークの問題を修正します[#7864](https://github.com/pingcap/tidb/pull/7864)
     -   一部の異常状態で`ANALYZE`の結果が得られない問題を修正[#7871](https://github.com/pingcap/tidb/pull/7871)
     -   返される結果が正しいことを確認するために、関数を[#7894](https://github.com/pingcap/tidb/pull/7894)ないでください`SYSDATE` 。
     -   一部の条件での`substring_index`panicの問題を修正[#7896](https://github.com/pingcap/tidb/pull/7896)

@@ -60,7 +60,7 @@ TiDB アンシブル バージョン: 3.0.0-beta.1
     -   遅い SQL ステートメントを簡単に追跡できるように、SQL テキストへの HASH フィンガープリントの追加をサポート[#9662](https://github.com/pingcap/tidb/pull/9662)
     -   `log_bin`のシステム変数 (デフォルトでは「0」) を追加して、binlog の有効化状態を制御します。現在の状態の確認のみをサポート[#9343](https://github.com/pingcap/tidb/pull/9343)
     -   構成ファイル[#9864](https://github.com/pingcap/tidb/pull/9864)を使用した送信 binlog 戦略の管理のサポート
-    -   `INFORMATION_SCHEMA.SLOW_QUERY`メモリ テーブルを使用したスロー ログのクエリのサポート[#9290](https://github.com/pingcap/tidb/pull/9290)
+    -   `INFORMATION_SCHEMA.SLOW_QUERY`メモリテーブルを使用したスロー ログのクエリのサポート[#9290](https://github.com/pingcap/tidb/pull/9290)
     -   TiDB に表示される MySQL のバージョンを 5.7.10 から 5.7.25 に変更する[#9553](https://github.com/pingcap/tidb/pull/9553)
     -   ツールによる簡単な収集と分析のために[ログ形式](https://github.com/tikv/rfcs/blob/master/text/0018-unified-log-format.md)を統合する
     -   実際のデータ量と統計に基づく推定データ量の差を記録する監視項目を`high_error_rate_feedback_total`追加[#9209](https://github.com/pingcap/tidb/pull/9209)

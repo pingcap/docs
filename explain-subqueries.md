@@ -71,7 +71,7 @@ EXPLAIN SELECT * FROM t1 WHERE id IN (SELECT t1_id FROM t2);
 
 1.  TiKV 側のインデックススキャンオペレータ`└─IndexFullScan_31`は、 `t2.t1_id`列の値を読み取ります。
 2.  `└─StreamAgg_39`オペレーターの一部のタスクは、TiKV の`t1_id`の値を重複除去します。
-3.  `├─StreamAgg_49(Build)`オペレーターのいくつかのタスクは、TiDB で`t1_id`の値を重複排除します。重複排除は集約機能`firstrow(test.t2.t1_id)`によって行われる。
+3.  `├─StreamAgg_49(Build)`オペレーターのいくつかのタスクは、TiDB で`t1_id`の値を重複除去します。重複排除は集約機能`firstrow(test.t2.t1_id)`によって行われる。
 4.  演算結果は`t1`テーブルの主キーに結合されます。結合条件は`eq(test.t1.id, test.t2.t1_id)`です。
 
 ## 内部結合 (一意のサブクエリ) {#inner-join-unique-subquery}
@@ -267,9 +267,4 @@ tidb> EXPLAIN SELECT * FROM t WHERE (a, b) NOT IN (SELECT * FROM s);
 -   [集計を使用するステートメントの説明](/explain-aggregation.md)
 -   [ビューを使用してステートメントを説明する](/explain-views.md)
 -   [パーティションを使用した Explain ステートメント](/explain-partitions.md)
-
-<CustomContent platform="tidb">
-
 -   [インデックス マージを使用したステートメントの説明](/explain-index-merge.md)
-
-</CustomContent>

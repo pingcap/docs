@@ -2,7 +2,7 @@
 title: DM Advanced Task Configuration File
 ---
 
-# DM 拡張タスクConfiguration / コンフィグレーションファイル {#dm-advanced-task-configuration-file}
+# DM 拡張タスクコンフィグレーションファイル {#dm-advanced-task-configuration-file}
 
 このドキュメントでは、データ マイグレーション (DM) の高度なタスク構成ファイルを[グローバル構成](#global-configuration)と[インスタンス構成](#instance-configuration)を含めて紹介します。
 
@@ -57,7 +57,7 @@ routes:
     table-pattern: "t_*"        # The pattern of the upstream table name, wildcard characters (*?) are supported.
     target-schema: "test"       # The name of the downstream schema.
     target-table: "t"           # The name of the downstream table.
-    # Optional. Used for extracting the source information of sharded schemas and tables and writing the information to the user-defined columns in the downstream. If these options are configured, you need to manually create a merged table in the downstream. For details, see description of table routing in <https://docs.pingcap.com/tidb/dev/dm-key-features#table-routing>.
+    # Optional. Used for extracting the source information of sharded schemas and tables and writing the information to the user-defined columns in the downstream. If these options are configured, you need to manually create a merged table in the downstream. For details, see description of table routing in <https://docs.pingcap.com/tidb/dev/dm-table-routing>.
     # extract-table:                                        # Extracts and writes the table name suffix without the t_ part to the c-table column of the merged table. For example, 01 is extracted and written to the c-table column for the sharded table t_01.
     #   table-regexp: "t_(.*)"
     #   target-column: "c_table"
@@ -193,7 +193,7 @@ mysql-instances:
     syncer-thread: 16                               # The number of threads that the sync processing unit uses for replicating incremental data. `syncer-thread` corresponds to the `worker-count` configuration item of the syncers configuration. `syncer-thread` has overriding priority when the two items are both configured. When multiple instances are migrating data to TiDB at the same time, reduce the value according to the load.
 ```
 
-## Configuration / コンフィグレーション順序 {#configuration-order}
+## コンフィグレーション順序 {#configuration-order}
 
 1.  [グローバル構成](#global-configuration)を編集します。
 2.  グローバル構成に基づいて[インスタンス構成](#instance-configuration)を編集します。
@@ -214,14 +214,14 @@ mysql-instances:
 
 各機能構成セットの引数については、 [テンプレート](#task-configuration-file-template-advanced)のコメントで説明されています。
 
-| パラメータ              | 説明                                                                                                                                                                                                                                                                                                  |
-| :----------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `routes`           | アップストリーム テーブルとダウンストリーム テーブルの間に設定されたルーティング マッピング ルール。上流と下流のスキーマとテーブルの名前が同じ場合、この項目を設定する必要はありません。使用シナリオとサンプル構成については、 [テーブル ルーティング](/dm/dm-key-features.md#table-routing)を参照してください。                                                                                                                     |
-| `filters`          | アップストリーム データベース インスタンスの一致したテーブルの binlog イベント フィルター ルール セット。 binlog フィルタリングが不要な場合、この項目を設定する必要はありません。使用シナリオとサンプル構成については、 [Binlogイベント フィルタ](/dm/dm-key-features.md#binlog-event-filter)を参照してください。                                                                                                      |
-| `block-allow-list` | アップストリーム データベース インスタンスの一致したテーブルのブロック許可リストのフィルター ルール セット。このアイテムを使用して移行する必要があるスキーマとテーブルを指定することをお勧めします。そうしないと、すべてのスキーマとテーブルが移行されます。使用シナリオとサンプル構成については、 [Binlogイベント フィルター](/dm/dm-key-features.md#binlog-event-filter)と[ブロック &amp; 許可リスト](/dm/dm-key-features.md#block-and-allow-table-lists)を参照してください。 |
-| `mydumpers`        | ダンプ処理単位のConfiguration / コンフィグレーション引数。既定の構成で十分な場合は、この項目を構成する必要はありません。または、 `mydumper-thread`を使用して`thread`のみを構成できます。                                                                                                                                                                                   |
-| `loaders`          | ロード処理ユニットのConfiguration / コンフィグレーション引数。既定の構成で十分な場合は、この項目を構成する必要はありません。または、 `loader-thread`を使用して`pool-size`のみを構成できます。                                                                                                                                                                                |
-| `syncers`          | 同期処理ユニットのConfiguration / コンフィグレーション引数。既定の構成で十分な場合は、この項目を構成する必要はありません。または、 `syncer-thread`を使用して`worker-count`のみを構成できます。                                                                                                                                                                              |
+| パラメータ              | 説明                                                                                                                                                                                                                                                                   |
+| :----------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `routes`           | アップストリーム テーブルとダウンストリーム テーブルの間に設定されたルーティング マッピング ルール。上流と下流のスキーマとテーブルの名前が同じ場合、この項目を設定する必要はありません。使用シナリオとサンプル構成については、 [テーブル ルーティング](/dm/dm-table-routing.md)を参照してください。                                                                                                   |
+| `filters`          | アップストリーム データベース インスタンスの一致したテーブルの binlog イベント フィルター ルール セット。 binlog フィルタリングが不要な場合、この項目を構成する必要はありません。使用シナリオとサンプル構成については、 [Binlogイベント フィルタ](/dm/dm-binlog-event-filter.md)を参照してください。                                                                                    |
+| `block-allow-list` | アップストリーム データベース インスタンスの一致したテーブルのブロック許可リストのフィルター ルール セット。このアイテムを使用して移行する必要があるスキーマとテーブルを指定することをお勧めします。そうしないと、すべてのスキーマとテーブルが移行されます。使用シナリオとサンプル構成については、 [Binlogイベント フィルタ](/dm/dm-binlog-event-filter.md)と[ブロック &amp; 許可リスト](/dm/dm-block-allow-table-lists.md)を参照してください。 |
+| `mydumpers`        | ダンプ処理単位のコンフィグレーション引数。既定の構成で十分な場合は、この項目を構成する必要はありません。または、 `mydumper-thread`を使用して`thread`のみを構成できます。                                                                                                                                                                    |
+| `loaders`          | ロード処理ユニットのコンフィグレーション引数。既定の構成で十分な場合は、この項目を構成する必要はありません。または、 `loader-thread`を使用して`pool-size`のみを構成できます。                                                                                                                                                                 |
+| `syncers`          | 同期処理ユニットのコンフィグレーション引数。既定の構成で十分な場合は、この項目を構成する必要はありません。または、 `syncer-thread`を使用して`worker-count`のみを構成できます。                                                                                                                                                               |
 
 ## インスタンス構成 {#instance-configuration}
 

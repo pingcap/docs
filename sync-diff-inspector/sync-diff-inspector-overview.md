@@ -48,7 +48,7 @@ sync-diff-inspector は、テーブル スキーマの情報を取得し、デ�
     -   `SHOW_DATABASES` (ビュー データベース名)
     -   `RELOAD` (ビュー テーブル スキーマ)
 
-## Configuration / コンフィグレーションファイルの説明 {#configuration-file-description}
+## コンフィグレーションファイルの説明 {#configuration-file-description}
 
 sync-diff-inspector の構成は、次の部分で構成されます。
 

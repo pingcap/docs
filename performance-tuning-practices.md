@@ -191,7 +191,7 @@ TiDB の平均 CPU 使用率は 874% から 936% に増加します。
 -   QPS の減少の分析: **CPS By Type**ペインから、シナリオ 2 には 1 つの CPS By Type コマンド タイプ ( `Query` ) しかないのに対し、シナリオ 3 にはさらに 3 つのコマンド タイプ ( `StmtPrepare` 、 `StmtExecute` 、 `StmtClose` ) があることがわかります。 `StmtPrepare`と`StmtClose`は、QPS でカウントされない非従来型のコマンドであるため、QPS が減少します。異例のコマンド`StmtPrepare`と`StmtClose`は`general`の SQL タイプにカウントされるため、シナリオ 3 のデータベース概要では`general`時間が表示され、データベース時間の 4 分の 1 以上を占めます。
 -   平均クエリ所要時間の大幅な減少の分析: シナリオ 3 で新たに追加された`StmtPrepare`および`StmtClose`のコマンド タイプについて、それらのクエリ所要時間は TiDB 内部処理で個別に計算されます。 TiDB はこれら 2 種類のコマンドを非常に高速に実行するため、クエリの平均所要時間は大幅に短縮されます。
 
-シナリオ 3 では Prepared Statement インターフェイスを使用していますが、多くのアプリケーション フレームワークはメモリ リークを防ぐために`StmtExecute`の後に`StmtClose`メソッドを呼び出すため、実行プラン キャッシュはヒットしません。 v6.0.0 以降、グローバル変数`tidb_ignore_prepared_cache_close_stmt=on;`を設定できます。その後、アプリケーションが`StmtClose`メソッドを呼び出しても、TiDB はキャッシュされた実行計画をクリアしないため、次の SQL 実行では既存の実行計画を再利用でき、実行計画を繰り返しコンパイルする必要がなくなります。
+シナリオ 3 では Prepared Statement インターフェイスを使用していますが、多くのアプリケーション フレームワークはメモリリークを防ぐために`StmtExecute`の後に`StmtClose`メソッドを呼び出すため、実行プラン キャッシュはヒットしません。 v6.0.0 以降、グローバル変数`tidb_ignore_prepared_cache_close_stmt=on;`を設定できます。その後、アプリケーションが`StmtClose`メソッドを呼び出しても、TiDB はキャッシュされた実行計画をクリアしないため、次の SQL 実行では既存の実行計画を再利用でき、実行計画を繰り返しコンパイルする必要がなくなります。
 
 ## シナリオ 4. Prepared Statement インターフェイスを使用し、実行計画のキャッシュを有効にする {#scenario-4-use-the-prepared-statement-interface-and-enable-execution-plan-caching}
 

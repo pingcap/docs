@@ -44,12 +44,7 @@ Empty set (0.01 sec)
 
 ## こちらもご覧ください {#see-also}
 
-<CustomContent platform="tidb">
-
 -   [セーブポイント](/sql-statements/sql-statement-savepoint.md)
-
-</CustomContent>
-
 -   [専念](/sql-statements/sql-statement-commit.md)
 -   [始める](/sql-statements/sql-statement-begin.md)
 -   [取引開始](/sql-statements/sql-statement-start-transaction.md)

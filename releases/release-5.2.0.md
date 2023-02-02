@@ -18,7 +18,7 @@ v5.2 の主な新機能と改善点は次のとおりです。
 -   オプティマイザーのカーディナリティ推定の精度を向上させて、最適な実行計画を選択できるようにします
 -   トランザクション ロック イベントを監視し、デッドロックの問題をトラブルシューティングするための Lock ビュー機能の一般提供 (GA) を発表
 -   TiFlashの I/O トラフィック制限機能を追加して、 TiFlashの読み取りと書き込みの安定性を向上させます
--   TiKV は、以前の RocksDB 書き込みストール メカニズムを置き換える新しいフロー制御メカニズムを導入し、TiKV フロー制御の安定性を向上させます。
+-   TiKV は、以前の RocksDB 書き込みストール メカニズムを置き換える新しいフロー制御メカニズムを導入して、TiKV フロー制御の安定性を向上させます。
 -   データ移行 (DM) の運用と保守を簡素化し、管理コストを削減します。
 -   TiCDC は、HTTP プロトコル OpenAPI をサポートして、TiCDC タスクを管理します。 Kubernetes とオンプレミス環境の両方で、よりユーザー フレンドリーな操作方法を提供します。 (Experimental機能)
 
@@ -39,23 +39,23 @@ v5.2 の主な新機能と改善点は次のとおりです。
 | [`tidb_stmt_summary_max_stmt_count`](/system-variables.md#tidb_stmt_summary_max_stmt_count-new-in-v40)    | 修正済み   | ステートメント サマリー テーブルがメモリに格納するステートメントの最大数を設定します。デフォルト値が`200`から`3000`に変更されました。  |
 | `tidb_enable_streaming`                                                                                   | 非推奨    | システム変数`enable-streaming`は非推奨であり、今後使用することはお勧めしません。                          |
 
-### Configuration / コンフィグレーションファイルのパラメーター {#configuration-file-parameters}
+### コンフィグレーションファイルのパラメーター {#configuration-file-parameters}
 
-| Configuration / コンフィグレーションファイル | Configuration / コンフィグレーション項目                                                                                                  | タイプを変更 | 説明                                                                                                                                |
-| :----------------------------- | :---------------------------------------------------------------------------------------------------------------------------- | :----- | :-------------------------------------------------------------------------------------------------------------------------------- |
-| TiDB 構成ファイル                    | [`pessimistic-txn.deadlock-history-collect-retryable`](/tidb-configuration-file.md#deadlock-history-collect-retryable)        | 新規追加   | [`INFORMATION\_SCHEMA.DEADLOCKS`](/information-schema/information-schema-deadlocks.md)テーブルが再試行可能なデッドロック エラー メッセージを収集するかどうかを制御します。 |
-| TiDB 構成ファイル                    | [`security.auto-tls`](/tidb-configuration-file.md#auto-tls)                                                                   | 新規追加   | 起動時に TLS 証明書を自動的に生成するかどうかを決定します。デフォルト値は`false`です。                                                                                 |
-| TiDB 構成ファイル                    | `stmt-summary.max-stmt-count`                                                                                                 | 修正済み   | ステートメント要約テーブルに保管できる SQL カテゴリーの最大数を示します。デフォルト値が`200`から`3000`に変更されました。                                                              |
-| TiDB 構成ファイル                    | `experimental.allow-expression-index`                                                                                         | 非推奨    | TiDB 構成ファイルの`allow-expression-index`構成は非推奨です。                                                                                     |
-| TiKV 構成ファイル                    | [`raftstore.cmd-batch`](/tikv-configuration-file.md#cmd-batch)                                                                | 新規追加   | リクエストのバッチ処理を有効にするかどうかを制御します。有効にすると、書き込みパフォーマンスが大幅に向上します。デフォルト値は`true`です。                                                          |
-| TiKV 構成ファイル                    | [`raftstore.inspect-interval`](/tikv-configuration-file.md#inspect-interval)                                                  | 新規追加   | 一定の間隔で、TiKV は Raftstoreコンポーネントのレイテンシーを検査します。この構成項目は、検査の間隔を指定します。レイテンシーがこの値を超えると、この検査はタイムアウトとしてマークされます。デフォルト値は`500ms`です。           |
-| TiKV 構成ファイル                    | [`raftstore.max-peer-down-duration`](/tikv-configuration-file.md#max-peer-down-duration)                                      | 修正済み   | ピアに許可される最長の非アクティブ期間を示します。タイムアウトのあるピアは`down`としてマークされ、PD は後でそれを削除しようとします。デフォルト値が`5m`から`10m`に変更されました。                                |
-| TiKV 構成ファイル                    | [`server.raft-client-queue-size`](/tikv-configuration-file.md#raft-client-queue-size)                                         | 新規追加   | TiKV のRaftメッセージのキュー サイズを指定します。デフォルト値は`8192`です。                                                                                    |
-| TiKV 構成ファイル                    | [`storage.flow-control.enable`](/tikv-configuration-file.md#enable)                                                           | 新規追加   | フロー制御メカニズムを有効にするかどうかを決定します。デフォルト値は`true`です。                                                                                       |
-| TiKV 構成ファイル                    | [`storage.flow-control.memtables-threshold`](/tikv-configuration-file.md#memtables-threshold)                                 | 新規追加   | kvDB memtables の数がこのしきい値に達すると、フロー制御メカニズムが機能し始めます。デフォルト値は`5`です。                                                                    |
-| TiKV 構成ファイル                    | [`storage.flow-control.l0-files-threshold`](/tikv-configuration-file.md#l0-files-threshold)                                   | 新規追加   | kvDB L0 ファイルの数がこのしきい値に達すると、フロー制御メカニズムが機能し始めます。デフォルト値は`9`です。                                                                       |
-| TiKV 構成ファイル                    | [`storage.flow-control.soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit) | 新規追加   | KvDB の保留中の圧縮バイトがこのしきい値に達すると、フロー制御メカニズムは一部の書き込み要求を拒否し始め、 `ServerIsBusy`エラーを報告します。初期値は「192GB」です。                                    |
-| TiKV 構成ファイル                    | [`storage.flow-control.hard-pending-compaction-bytes-limit`](/tikv-configuration-file.md#hard-pending-compaction-bytes-limit) | 新規追加   | KvDB の保留中の圧縮バイトがこのしきい値に達すると、フロー制御メカニズムはすべての書き込み要求を拒否し、 `ServerIsBusy`エラーを報告します。デフォルト値は「1024GB」です。                                 |
+| コンフィグレーションファイル | コンフィグレーション項目                                                                                                                  | タイプを変更 | 説明                                                                                                                                |
+| :------------- | :---------------------------------------------------------------------------------------------------------------------------- | :----- | :-------------------------------------------------------------------------------------------------------------------------------- |
+| TiDB 構成ファイル    | [`pessimistic-txn.deadlock-history-collect-retryable`](/tidb-configuration-file.md#deadlock-history-collect-retryable)        | 新規追加   | [`INFORMATION\_SCHEMA.DEADLOCKS`](/information-schema/information-schema-deadlocks.md)テーブルが再試行可能なデッドロック エラー メッセージを収集するかどうかを制御します。 |
+| TiDB 構成ファイル    | [`security.auto-tls`](/tidb-configuration-file.md#auto-tls)                                                                   | 新規追加   | 起動時に TLS 証明書を自動的に生成するかどうかを決定します。デフォルト値は`false`です。                                                                                 |
+| TiDB 構成ファイル    | `stmt-summary.max-stmt-count`                                                                                                 | 修正済み   | ステートメント要約テーブルに保管できる SQL カテゴリーの最大数を示します。デフォルト値が`200`から`3000`に変更されました。                                                              |
+| TiDB 構成ファイル    | `experimental.allow-expression-index`                                                                                         | 非推奨    | TiDB 構成ファイルの`allow-expression-index`構成は非推奨です。                                                                                     |
+| TiKV 構成ファイル    | [`raftstore.cmd-batch`](/tikv-configuration-file.md#cmd-batch)                                                                | 新規追加   | リクエストのバッチ処理を有効にするかどうかを制御します。有効にすると、書き込みパフォーマンスが大幅に向上します。デフォルト値は`true`です。                                                          |
+| TiKV 構成ファイル    | [`raftstore.inspect-interval`](/tikv-configuration-file.md#inspect-interval)                                                  | 新規追加   | 一定の間隔で、TiKV は Raftstoreコンポーネントのレイテンシーを検査します。この構成項目は、検査の間隔を指定します。レイテンシーがこの値を超えると、この検査はタイムアウトとしてマークされます。デフォルト値は`500ms`です。           |
+| TiKV 構成ファイル    | [`raftstore.max-peer-down-duration`](/tikv-configuration-file.md#max-peer-down-duration)                                      | 修正済み   | ピアに許可される最長の非アクティブ期間を示します。タイムアウトのあるピアは`down`としてマークされ、PD は後でそれを削除しようとします。デフォルト値が`5m`から`10m`に変更されました。                                |
+| TiKV 構成ファイル    | [`server.raft-client-queue-size`](/tikv-configuration-file.md#raft-client-queue-size)                                         | 新規追加   | TiKV のRaftメッセージのキュー サイズを指定します。デフォルト値は`8192`です。                                                                                    |
+| TiKV 構成ファイル    | [`storage.flow-control.enable`](/tikv-configuration-file.md#enable)                                                           | 新規追加   | フロー制御メカニズムを有効にするかどうかを決定します。デフォルト値は`true`です。                                                                                       |
+| TiKV 構成ファイル    | [`storage.flow-control.memtables-threshold`](/tikv-configuration-file.md#memtables-threshold)                                 | 新規追加   | kvDB memtables の数がこのしきい値に達すると、フロー制御メカニズムが機能し始めます。デフォルト値は`5`です。                                                                    |
+| TiKV 構成ファイル    | [`storage.flow-control.l0-files-threshold`](/tikv-configuration-file.md#l0-files-threshold)                                   | 新規追加   | kvDB L0 ファイルの数がこのしきい値に達すると、フロー制御メカニズムが機能し始めます。デフォルト値は`9`です。                                                                       |
+| TiKV 構成ファイル    | [`storage.flow-control.soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit) | 新規追加   | KvDB の保留中の圧縮バイトがこのしきい値に達すると、フロー制御メカニズムは一部の書き込み要求を拒否し始め、 `ServerIsBusy`エラーを報告します。初期値は「192GB」です。                                    |
+| TiKV 構成ファイル    | [`storage.flow-control.hard-pending-compaction-bytes-limit`](/tikv-configuration-file.md#hard-pending-compaction-bytes-limit) | 新規追加   | KvDB の保留中の圧縮バイトがこのしきい値に達すると、フロー制御メカニズムはすべての書き込み要求を拒否し、 `ServerIsBusy`エラーを報告します。デフォルト値は「1024GB」です。                                 |
 
 ### その他 {#others}
 
@@ -84,7 +84,7 @@ v5.2 の主な新機能と改善点は次のとおりです。
 
 -   **スピル HashAgg のサポート**
 
-    ディスクへの HashAgg のスピルをサポートします。 HashAgg 演算子を含む SQL ステートメントによってメモリ不足 (OOM) が発生した場合、この演算子の同時実行数を`1`に設定して、ディスク スピルをトリガーすることを試みることができます。これにより、メモリ ストレスが軽減されます。
+    ディスクへの HashAgg のスピルをサポートします。 HashAgg 演算子を含む SQL ステートメントによってメモリ(OOM) が発生した場合、この演算子の同時実行数を`1`に設定して、ディスク スピルをトリガーすることを試みることができます。これにより、メモリストレスが緩和されます。
 
     [ユーザー文書](/configure-memory-usage.md#other-memory-control-behaviors-of-tidb-server) 、 [#25882](https://github.com/pingcap/tidb/issues/25882)
 
@@ -102,7 +102,7 @@ v5.2 の主な新機能と改善点は次のとおりです。
 
     [ユーザー文書](/choose-index.md)
 
-### 取引 {#transaction}
+### トランザクション {#transaction}
 
 -   **Lock ビューの一般提供 (GA)**
 
@@ -242,7 +242,7 @@ Apple M1 チップを搭載した Mac コンピュータでの`tiup playground`�
 
     -   Dumpling
 
-        -   TiDB v3.x テーブルを常に`tidb_rowid`で分割して TiDB メモリを節約することをサポート[#301](https://github.com/pingcap/dumpling/pull/301)
+        -   TiDB v3.x テーブルを常に`tidb_rowid`で分割して TiDBメモリを節約することをサポート[#301](https://github.com/pingcap/dumpling/pull/301)
         -   Dumplingのアクセスを`information_schema`に減らして安定性を向上させる[#305](https://github.com/pingcap/dumpling/pull/305)
 
 ## バグの修正 {#bug-fixes}

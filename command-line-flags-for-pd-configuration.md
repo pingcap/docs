@@ -3,7 +3,7 @@ title: PD Configuration Flags
 summary: Learn some configuration flags of PD.
 ---
 
-# PDConfiguration / コンフィグレーションフラグ {#pd-configuration-flags}
+# PDコンフィグレーションフラグ {#pd-configuration-flags}
 
 PD は、コマンドライン フラグと環境変数を使用して構成できます。
 

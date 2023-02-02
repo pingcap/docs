@@ -40,9 +40,9 @@ S3 バケットとTiDB Cloudクラスターを同じリージョンに配置す�
 Dumplingをデプロイする前に、次の点に注意してください。
 
 -   TiDB Cloudの TiDB クラスターと同じ VPC 内の新しい EC2 インスタンスにDumplingをデプロイすることをお勧めします。
--   推奨される EC2 インスタンス タイプは**c6g.4xlarge** (16 vCPU および 32 GiB メモリ) です。必要に応じて、他の EC2 インスタンス タイプを選択できます。 Amazon マシン イメージ (AMI) には、Amazon Linux、Ubuntu、または Red Hat を使用できます。
+-   推奨される EC2 インスタンス タイプは**c6g.4xlarge** (16 vCPU および 32 GiBメモリ) です。必要に応じて、他の EC2 インスタンス タイプを選択できます。 Amazon マシン イメージ (AMI) には、Amazon Linux、Ubuntu、または Red Hat を使用できます。
 
-Dumplingは、 TiUPまたはインストール パッケージを使用してデプロイできます。
+Dumplingは、 TiUPまたはインストール パッケージを使用して展開できます。
 
 #### TiUPを使用してDumplingをデプロイ {#deploy-dumpling-using-tiup}
 
@@ -307,7 +307,7 @@ OP TiDB クラスターから Amazon S3 にデータをエクスポートした�
 
     -   `--start-ts` : 変更フィードの開始 TSO を指定します。この TSO から、TiCDC クラスターはデータのプルを開始します。デフォルト値は現在の時刻です。
 
-    詳細については、 [TiCDC Changefeeds の CLI およびConfiguration / コンフィグレーションパラメーター](https://docs.pingcap.com/tidb/dev/ticdc-changefeed-config)を参照してください。
+    詳細については、 [TiCDC Changefeeds の CLI およびコンフィグレーションパラメーター](https://docs.pingcap.com/tidb/dev/ticdc-changefeed-config)を参照してください。
 
 5.  アップストリーム クラスタで GC メカニズムを再度有効にします。増分レプリケーションでエラーや遅延が見つからない場合は、GC メカニズムを有効にしてクラスターのガベージコレクションを再開します。
 

@@ -155,7 +155,7 @@ TiDB バージョン: 5.0.4
 -   TiFlash
 
     -   テーブル スキャン タスクの実行時に発生する潜在的なpanicの問題を修正します。
-    -   MPP タスクの実行時に発生する潜在的なメモリ リークの問題を修正します。
+    -   MPP タスクの実行時に発生する潜在的なメモリリークの問題を修正します。
     -   DAQ リクエストの処理時にTiFlashが`duplicated region`エラーを発生させるバグを修正
     -   集計関数`COUNT`または`COUNT DISTINCT`を実行したときに予期しない結果が生じる問題を修正
     -   MPP タスクの実行時に発生する潜在的なpanicの問題を修正します
@@ -181,7 +181,7 @@ TiDB バージョン: 5.0.4
         -   `mysql.TypeString, mysql.TypeVarString, mysql.TypeVarchar`などのデータ型を JSON にエンコードする際にプロセスpanicが発生する問題を修正[#2758](https://github.com/pingcap/tiflow/issues/2758)
         -   このテーブルが再スケジュールされているときに、複数のプロセッサが同じテーブルにデータを書き込む可能性があるために発生するデータの不整合の問題を修正します[#2417](https://github.com/pingcap/tiflow/pull/2417)
         -   TiCDC がキャプチャするリージョンが多すぎる場合に発生する OOM を回避するために、 [#2724](https://github.com/pingcap/tiflow/pull/2724)ウィンドウ サイズを小さくします。
-        -   メモリ プレッシャが高い場合に gRPC 接続が頻繁に切断されるエラーを修正します[#2202](https://github.com/pingcap/tiflow/issues/2202)
+        -   メモリプレッシャが高い場合に gRPC 接続が頻繁に切断されるエラーを修正します[#2202](https://github.com/pingcap/tiflow/issues/2202)
         -   unsigned `TINYINT` type [#2648](https://github.com/pingcap/tiflow/issues/2648)で TiCDC がpanicになるバグを修正
         -   アップストリーム[#2612](https://github.com/pingcap/tiflow/issues/2612)でトランザクションを挿入し、同じ行のデータを削除すると、TiCDC Open Protocol が空の値を出力する問題を修正します。
         -   スキーマ変更[#2603](https://github.com/pingcap/tiflow/issues/2603)の終了 TS で変更フィードが開始されると、DDL 処理が失敗するバグを修正します。

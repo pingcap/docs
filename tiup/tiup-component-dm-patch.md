@@ -28,7 +28,7 @@ tiup dm patch <cluster-name> <package-path> [flags]
 -   置き換えるコンポーネントの名前`${component}` (dm-master、dm-worker ...)、コンポーネントの名前`${version}` (v2.0.0、v2.0.1 ...)、オペレーティング システム`${os}`およびプラットフォーム`${arch}`を特定します。コンポーネントが実行するもの。
 -   コマンド`wget https://tiup-mirrors.pingcap.com/${component}-${version}-${os}-${arch}.tar.gz -O /tmp/${component}-${version}-${os}-${arch}.tar.gz`を使用して、現在のコンポーネントパッケージをダウンロードします。
 -   `mkdir -p /tmp/package && cd /tmp/package`を実行して、ファイルをパックするための一時ディレクトリを作成します。
--   `tar xf /tmp/${component}-${version}-${os}-${arch}.tar.gz`を実行して、元のバイナリ パッケージを解凍します。
+-   `tar xf /tmp/${component}-${version}-${os}-${arch}.tar.gz`を実行して、元のバイナリ パッケージを展開します。
 -   `find .`を実行して、一時パッケージ ディレクトリのファイル構造を表示します。
 -   バイナリ ファイルまたは構成ファイルを、一時ディレクトリ内の対応する場所にコピーします。
 -   `tar czf /tmp/${component}-hotfix-${os}-${arch}.tar.gz *`を実行して、ファイルを一時ディレクトリにパックします。
@@ -54,7 +54,7 @@ tiup dm patch <cluster-name> <package-path> [flags]
 
 ### -R, --role {#r-role}
 
--   置き換える役割を指定します。このオプションの値は、ノードの役割のコンマ区切りリストです。ノードの役割は、 `[tiup dm display](/tiup/tiup-component-dm-display.md)`コマンドで返されるクラスター ステータス テーブルの 2 番目の列から取得できます。
+-   置き換えるロールを指定します。このオプションの値は、ノードの役割のコンマ区切りリストです。ノードの役割は、 `[tiup dm display](/tiup/tiup-component-dm-display.md)`コマンドで返されるクラスター ステータス テーブルの 2 番目の列から取得できます。
 -   データ型: `STRING`
 -   このオプションが指定されていない場合、 TiUPはデフォルトで置換するすべてのロールを選択します。
 

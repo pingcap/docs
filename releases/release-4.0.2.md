@@ -108,8 +108,8 @@ TiDB バージョン: 4.0.2
     -   同じデータベースで`DROP DATABASE`ステートメントと他の DDL ステートメントを同時に実行することによって発生するランタイム エラーを修正します[#17659](https://github.com/pingcap/tidb/pull/17659)
     -   ユーザー変数[#17890](https://github.com/pingcap/tidb/pull/17890)に対する`COERCIBILITY()`関数の誤った結果を修正します。
     -   `IndexMergeJoin`エグゼキュータが時々スタックする問題を修正[#18091](https://github.com/pingcap/tidb/pull/18091)
-    -   メモリ クォータが不足し、クエリのキャンセルがトリガーされた場合の`IndexMergeJoin` executor のハングの問題を修正します[#17654](https://github.com/pingcap/tidb/pull/17654)
-    -   `Insert`および`Replace` executor の過剰なカウント メモリ使用量を修正します[#18062](https://github.com/pingcap/tidb/pull/18062)
+    -   メモリクォータが不足し、クエリのキャンセルがトリガーされた場合の`IndexMergeJoin` executor のハングの問題を修正します[#17654](https://github.com/pingcap/tidb/pull/17654)
+    -   `Insert`および`Replace` executor の過剰なカウントメモリ使用量を修正します[#18062](https://github.com/pingcap/tidb/pull/18062)
     -   `DROP DATABASE`と`DROP TABLE`を同一データベースで同時に実行すると、 TiFlashストレージへのデータ複製が停止する問題を修正[#17901](https://github.com/pingcap/tidb/pull/17901)
     -   [#17844](https://github.com/pingcap/tidb/pull/17844)とオブジェクト ストレージ サービス間の`BACKUP`の障害を修正`RESTORE`
     -   アクセスが拒否された場合の権限チェック失敗の誤ったエラー メッセージを修正します[#17724](https://github.com/pingcap/tidb/pull/17724)

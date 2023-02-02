@@ -16,7 +16,7 @@ summary: Learn about the physical import mode in TiDB Lightning.
     -   TiDB クラスター &gt;= v6.1.0 およびTiDB Lightning &gt;= v6.2.0 の場合、 TiDB Lightningは、ターゲット テーブル データを格納するリージョンのスケジューリングを一時停止します。インポートが完了すると、 TiDB Lightningはスケジューリングを回復します。
     -   TiDB クラスター &lt; v6.1.0 またはTiDB Lightning &lt; v6.2.0 の場合、 TiDB Lightningはグローバル スケジューリングを一時停止します。
 
-2.  TiDB Lightningは、ターゲット データベースにテーブル スキーマを作成し、メタデータを取得します。
+2.  TiDB Lightningは、ターゲット データベースにテーブル スキーマを作成し、メタデータをフェッチします。
 
 3.  各テーブルは複数の連続した**ブロック**に分割されているため、 TiDB Lightningは大きなテーブル (200 GB を超える) からデータを並行してインポートできます。
 
@@ -46,7 +46,7 @@ summary: Learn about the physical import mode in TiDB Lightning.
 
 > **ノート：**
 >
-> 大量のデータをインポートする場合、1 回の同時インポートで約 2 GiB のメモリが消費される場合があります。合計メモリ使用量は`region-concurrency * 2 GiB`です。 `region-concurrency`は、デフォルトで論理 CPU の数と同じです。メモリ サイズ (GiB) が CPU の 2 倍未満であるか、インポート中に OOM が発生した場合は、 `region-concurrency`を減らして OOM を回避できます。
+> 大量のデータをインポートする場合、1 回の同時インポートで約 2 GiB のメモリが消費される場合があります。合計メモリ使用量は`region-concurrency * 2 GiB`です。 `region-concurrency`は、デフォルトで論理 CPU の数と同じです。メモリサイズ (GiB) が CPU の 2 倍未満であるか、インポート中に OOM が発生した場合は、 `region-concurrency`を減らして OOM を回避できます。
 
 **Storage** : `sorted-kv-dir`構成項目は、ソートされたキー値ファイルの一時ストレージ ディレクトリを指定します。ディレクトリは空である必要があり、ストレージ スペースはインポートするデータセットのサイズより大きくなければなりません。インポートのパフォーマンスを向上させるには、 `data-source-dir`以外のディレクトリを使用し、そのディレクトリにフラッシュ ストレージと排他的 I/O を使用することをお勧めします。
 

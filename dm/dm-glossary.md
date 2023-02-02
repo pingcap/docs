@@ -19,7 +19,7 @@ Binlogイベントは、MySQL または MariaDBサーバーインスタンスに
 
 ### Binlogイベント フィルター {#binlog-event-filter}
 
-[Binlogイベント フィルター](/dm/dm-key-features.md#binlog-event-filter)は、ブロックおよび許可リストのフィルタリング ルールよりもきめ細かいフィルタリング機能です。詳細は[binlog イベント フィルター](/dm/dm-key-features.md#binlog-event-filter)を参照してください。
+[Binlogイベント フィルター](/dm/dm-binlog-event-filter.md)は、ブロックおよび許可リストのフィルタリング ルールよりもきめ細かいフィルタリング機能です。詳細は[binlog イベント フィルタ](/dm/dm-binlog-event-filter.md)を参照してください。
 
 ### Binlogの位置 {#binlog-position}
 
@@ -31,7 +31,7 @@ Binlogレプリケーション処理ユニットは、上流のバイナリ ロ�
 
 ### ブロック &amp; 許可テーブル リスト {#block-x26-allow-table-list}
 
-ブロック &amp; 許可テーブル リストは、一部のデータベースまたは一部のテーブルのすべての操作をフィルタリングまたは移行する機能です。詳細は[ブロック &amp; 許可テーブル リスト](/dm/dm-key-features.md#block-and-allow-table-lists)を参照してください。この機能は[MySQL レプリケーション フィルタリング](https://dev.mysql.com/doc/refman/5.6/en/replication-rules.html)および[MariaDB レプリケーション フィルター](https://mariadb.com/kb/en/replication-filters/)に似ています。
+ブロック &amp; 許可テーブル リストは、一部のデータベースまたは一部のテーブルのすべての操作をフィルタリングまたは移行する機能です。詳細は[ブロック &amp; 許可テーブル リスト](/dm/dm-block-allow-table-lists.md)を参照してください。この機能は[MySQL レプリケーション フィルタリング](https://dev.mysql.com/doc/refman/5.6/en/replication-rules.html)および[MariaDB レプリケーション フィルター](https://mariadb.com/kb/en/replication-filters/)に似ています。
 
 ## ハ {#c}
 
@@ -54,7 +54,7 @@ Binlogレプリケーション処理ユニットは、上流のバイナリ ロ�
 
 ### GTID {#gtid}
 
-GTID は、MySQL または MariaDB のグローバル トランザクション ID です。この機能を有効にすると、GTID 情報が binlog ファイルに記録されます。複数の GTID が GTID セットを形成します。詳細は[MySQL GTID のフォーマットとストレージ](https://dev.mysql.com/doc/refman/5.7/en/replication-gtids-concepts.html)と[MariaDB グローバル トランザクション ID](https://mariadb.com/kb/en/library/gtid/)を参照してください。
+GTID は、MySQL または MariaDB のグローバル トランザクション ID です。この機能を有効にすると、GTID 情報が binlog ファイルに記録されます。複数の GTID が GTID セットを形成します。詳細は[MySQL GTID のフォーマットとストレージ](https://dev.mysql.com/doc/refman/5.7/en/replication-gtids-concepts.html)と[MariaDB グローバルトランザクションID](https://mariadb.com/kb/en/library/gtid/)を参照してください。
 
 ## L {#l}
 
@@ -96,7 +96,7 @@ TiDB データ移行ツールを使用して、アップストリーム デー�
 
 このモードは、次のいずれかの状況で有効になります。
 
--   タスク構成ファイルの`safe-mode`パラメーターが`true`に設定されている場合、セーフ モードは有効なままです。
+-   タスク構成ファイルの`safe-mode`パラメーターが`true`に設定されている場合、セーフ モードは有効なままになります。
 -   シャード マージのシナリオでは、DDL ステートメントがすべてのシャード テーブルで複製される前に、セーフ モードが有効なままになります。
 -   引数`--consistency none`がフル マイグレーション タスクのダンプ処理単位に設定されている場合、エクスポートの開始時の binlog の変更がエクスポートされたデータに影響するかどうかを判断できません。したがって、これらのバイナリログの変更の増分レプリケーションでは、セーフ モードが有効なままになります。
 -   タスクがエラーによって一時停止され、再開された場合、一部のデータに対する操作が 2 回実行される可能性があります。
@@ -125,7 +125,7 @@ TiDB データ移行ツールを使用して、アップストリーム デー�
 
 ### テーブル ルーティング {#table-routing}
 
-テーブル ルーティング機能により、DM はアップストリームの MySQL または MariaDB インスタンスの特定のテーブルを、シャード テーブルのマージと移行に使用できるダウンストリームの指定されたテーブルに移行できます。詳細は[テーブル ルーティング](/dm/dm-key-features.md#table-routing)を参照してください。
+テーブル ルーティング機能により、DM はアップストリームの MySQL または MariaDB インスタンスの特定のテーブルを、シャード テーブルのマージと移行に使用できるダウンストリームの指定されたテーブルに移行できます。詳細は[テーブル ルーティング](/dm/dm-table-routing.md)を参照してください。
 
 ### タスク {#task}
 

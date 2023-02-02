@@ -9,7 +9,7 @@ summary: Use the Data Migration tool to migrate the full data and the incrementa
 
 ## ステップ 1: DM クラスターをデプロイ {#step-1-deploy-the-dm-cluster}
 
-[TiUPを使用して DM クラスターを展開する](/dm/deploy-a-dm-cluster-using-tiup.md)におすすめです。トライアルまたはテスト用に[バイナリを使用して DM クラスターをデプロイする](/dm/deploy-a-dm-cluster-using-binary.md)を使用することもできます。
+[TiUPを使用して DM クラスターをデプロイする](/dm/deploy-a-dm-cluster-using-tiup.md)におすすめです。トライアルまたはテスト用に[バイナリを使用して DM クラスターをデプロイする](/dm/deploy-a-dm-cluster-using-binary.md)を使用することもできます。
 
 > **ノート：**
 >

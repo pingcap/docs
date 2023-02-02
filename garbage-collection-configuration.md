@@ -3,7 +3,7 @@ title: Garbage Collection Configuration
 summary: Learn about GC configuration parameters.
 ---
 
-# ガベージ コレクションのConfiguration / コンフィグレーション {#garbage-collection-configuration}
+# ガベージ コレクションのコンフィグレーション {#garbage-collection-configuration}
 
 ガベージ コレクションは、次のシステム変数を介して構成されます。
 

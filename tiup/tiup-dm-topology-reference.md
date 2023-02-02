@@ -2,7 +2,7 @@
 title: Topology Configuration File for DM Cluster Deployment Using TiUP
 ---
 
-# TiUPを使用した DMクラスタ展開用のトポロジConfiguration / コンフィグレーションファイル {#topology-configuration-file-for-dm-cluster-deployment-using-tiup}
+# TiUPを使用した DMクラスタ展開用のトポロジコンフィグレーションファイル {#topology-configuration-file-for-dm-cluster-deployment-using-tiup}
 
 TiDB Data Migration (DM) クラスターをデプロイまたはスケーリングするには、クラスター トポロジーを記述するトポロジー ファイル ( [サンプル](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml) ) を提供する必要があります。
 
@@ -64,8 +64,8 @@ global:
 
 `server_configs`は、サービスを構成し、各コンポーネントの構成ファイルを生成するために使用されます。 `global`セクションと同様に、 `server_configs`セクションの構成は、インスタンス内の同じキーを持つ構成によって上書きできます。 `server_configs`には、主に次のフィールドが含まれます。
 
--   `master` : DM-master サービスに関連する構成。サポートされているすべての構成アイテムについては、 [DMマスターConfiguration / コンフィグレーションファイル](/dm/dm-master-configuration-file.md)を参照してください。
--   `worker` : DM-worker サービスに関連する構成。サポートされているすべての構成項目については、 [DM-workerConfiguration / コンフィグレーションファイル](/dm/dm-worker-configuration-file.md)を参照してください。
+-   `master` : DM-master サービスに関連する構成。サポートされているすべての構成アイテムについては、 [DMマスターコンフィグレーションファイル](/dm/dm-master-configuration-file.md)を参照してください。
+-   `worker` : DM-worker サービスに関連する構成。サポートされているすべての構成項目については、 [DM-workerコンフィグレーションファイル](/dm/dm-worker-configuration-file.md)を参照してください。
 
 `server_configs`の構成例は次のとおりです。
 

@@ -8,6 +8,12 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 このページでは、2023 年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリース ノートを一覧表示します。
 
+## 2023 年 1 月 18 日 {#january-18-2023}
+
+**一般的な変更**
+
+-   Microsoft アカウントで[サインアップ](https://tidbcloud.com/free-trial)つのTiDB Cloudをサポートします。
+
 ## 2023 年 1 月 17 日 {#january-17-2023}
 
 **一般的な変更**

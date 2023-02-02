@@ -3,13 +3,13 @@ title: TiDB Binlog Configuration File
 summary: Learn the configuration items of TiDB Binlog.
 ---
 
-# TiDB BinlogConfiguration / コンフィグレーションファイル {#tidb-binlog-configuration-file}
+# TiDB Binlogコンフィグレーションファイル {#tidb-binlog-configuration-file}
 
 このドキュメントでは、TiDB Binlogの構成項目を紹介します。
 
 ## Pump {#pump}
 
-このセクションでは、 Pumpの設定項目を紹介します。完全なPump構成ファイルの例については、 [PumpConfiguration / コンフィグレーション](https://github.com/pingcap/tidb-binlog/blob/master/cmd/pump/pump.toml)を参照してください。
+このセクションでは、 Pumpの設定項目を紹介します。完全なPump構成ファイルの例については、 [Pumpコンフィグレーション](https://github.com/pingcap/tidb-binlog/blob/master/cmd/pump/pump.toml)を参照してください。
 
 ### アドレス {#addr}
 
@@ -128,7 +128,7 @@ summary: Learn the configuration items of TiDB Binlog.
 
 ## Drainer {#drainer}
 
-Drainerの設定項目を紹介します。完全なDrainer構成ファイルの例については、 [DrainerConfiguration / コンフィグレーション](https://github.com/pingcap/tidb-binlog/blob/master/cmd/drainer/drainer.toml)を参照してください。
+Drainerの設定項目を紹介します。完全なDrainer構成ファイルの例については、 [Drainerコンフィグレーション](https://github.com/pingcap/tidb-binlog/blob/master/cmd/drainer/drainer.toml)を参照してください。
 
 ### アドレス {#addr}
 

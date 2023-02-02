@@ -45,7 +45,7 @@ TiDB バージョン: 5.0.2
 
     -   TiCDC
 
-        -   テーブル メモリ消費量のモニタリング メトリックを追加します[#1885](https://github.com/pingcap/tiflow/pull/1885)
+        -   テーブルメモリ消費量のモニタリング メトリックを追加します[#1885](https://github.com/pingcap/tiflow/pull/1885)
         -   並べ替えステージ[#1863](https://github.com/pingcap/tiflow/pull/1863)でメモリと CPU の使用を最適化する
         -   ユーザーの混乱を招く可能性のある不要なログ情報を削除します[#1759](https://github.com/pingcap/tiflow/pull/1759)
 
@@ -114,7 +114,7 @@ TiDB バージョン: 5.0.2
         -   多くの古いリージョンが存在する場合に発生する KV クライアントのデッドロック バグを修正します[#1599](https://github.com/pingcap/tiflow/issues/1599)
         -   `--cert-allowed-cn`フラグ[#1697](https://github.com/pingcap/tiflow/pull/1697)の間違ったヘルプ情報を修正
         -   データを MySQL [#1750](https://github.com/pingcap/tiflow/pull/1750)に複製するときに`SUPER`特権を必要とする`explicit_defaults_for_timestamp`の更新を元に戻します
-        -   シンク フロー制御をサポートして、メモリ オーバーフローのリスクを軽減します[#1840](https://github.com/pingcap/tiflow/pull/1840)
+        -   シンク フロー制御をサポートして、メモリオーバーフローのリスクを軽減します[#1840](https://github.com/pingcap/tiflow/pull/1840)
         -   テーブル移動時にレプリケーションタスクが停止することがある不具合を修正[#1828](https://github.com/pingcap/tiflow/pull/1828)
         -   TiCDC changefeed チェックポイント[#1759](https://github.com/pingcap/tiflow/pull/1759)の停滞により、TiKV GC セーフポイントがブロックされる問題を修正
 

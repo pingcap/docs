@@ -210,6 +210,6 @@ Connection Idle Duration は、接続がアイドル状態である期間を示�
 -   Mounter output events/s: TiCDC ノードの Mounter モジュールが 1 秒あたりに Sink モジュールに送信する行数。
 -   テーブル シンク出力イベント/秒: TiCDC ノードのテーブル ソーター モジュールが 1 秒あたりにシンク モジュールに送信する行数。
 -   SinkV2 - シンク フラッシュ行/秒: TiCDC ノードのシンク モジュールがダウンストリームに送信する 1 秒あたりの行数。
--   Transaction Sink Full Flush Duration: TiCDC ノードの MySQL Sink によるダウンストリーム トランザクションの書き込みの平均レイテンシーと p999レイテンシー。
+-   トランザクション Sink Full Flush Duration: TiCDC ノードの MySQL Sink によるダウンストリーム トランザクションの書き込みの平均レイテンシーと p999レイテンシー。
 -   MQ Worker Send Message Duration Percentile: ダウンストリームが Kafka の場合の MQ Worker によるメッセージ送信のレイテンシー。
 -   Kafka Outgoing Bytes: MQ ワークロードでダウンストリーム トランザクションを書き込むトラフィック。

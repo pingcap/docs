@@ -222,7 +222,7 @@ WARN: GC life time is shorter than transaction duration.
 </div>
 </SimpleTab>
 
-## 取引レベル {#transaction-level}
+## トランザクションレベル {#transaction-level}
 
 `START TRANSACTION READ ONLY AS OF TIMESTAMP`ステートメントを使用すると、履歴時間に基づいて読み取り専用トランザクションを開始できます。これにより、指定された履歴タイムスタンプから履歴データが読み取られます。
 

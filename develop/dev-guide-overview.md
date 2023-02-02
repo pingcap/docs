@@ -25,7 +25,7 @@ summary: Introduce the overview of the developer guide.
 
 TiDB を使い始める前に、TiDB がどのように機能するかのいくつかの重要なメカニズムを理解する必要があります。
 
--   [TiDB トランザクションの概要](/transaction-overview.md)を読んで TiDB でのトランザクションの仕組みを理解するか、 [アプリケーション開発者向けの取引メモ](/develop/dev-guide-transaction-overview.md)を調べてアプリケーション開発に必要なトランザクションの知識を学んでください。
+-   [TiDBトランザクションの概要](/transaction-overview.md)を読んで TiDB でのトランザクションの仕組みを理解するか、 [アプリケーション開発者向けのトランザクションメモ](/develop/dev-guide-transaction-overview.md)を調べてアプリケーション開発に必要なトランザクションの知識を学んでください。
 -   理解する[アプリケーションが TiDB と対話する方法](#the-way-applications-interact-with-tidb) ．
 -   分散データベース TiDB およびTiDB Cloudを構築するためのコア コンポーネントと概念については、無料のオンライン コース[TiDBアーキテクチャの基本](https://freeclasses.edu.pingcap.com/catalog/info/id:203/?utm_source=docs-dev-guide)を参照してください。
 
@@ -69,6 +69,6 @@ TiDB は MySQL プロトコルおよび MySQL 構文と互換性があるため�
 -   [データベース スキーマの設計](/develop/dev-guide-schema-design-overview.md)
 -   [書き込みデータ](/develop/dev-guide-insert-data.md)
 -   [データの読み取り](/develop/dev-guide-get-data-from-single-table.md)
--   [取引](/develop/dev-guide-transaction-overview.md)
+-   [トランザクション](/develop/dev-guide-transaction-overview.md)
 -   [最適化](/develop/dev-guide-optimize-sql-overview.md)
 -   [応用例](/develop/dev-guide-sample-application-spring-boot.md)

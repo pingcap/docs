@@ -222,10 +222,10 @@ select * from information_schema.inspection_rules where type='inspection';
 
 -   以下の構成項目の値が期待どおりかどうかを確認します。
 
-    | 成分   | Configuration / コンフィグレーション項目 | 期待値      |
-    | ---- | ---------------------------- | -------- |
-    | TiDB | log.slow-しきい値                | `0`より大きい |
-    | TiKV | raftstore.sync-log           | `true`   |
+    | 成分   | コンフィグレーション項目       | 期待値      |
+    | ---- | ------------------ | -------- |
+    | TiDB | log.slow-しきい値      | `0`より大きい |
+    | TiKV | raftstore.sync-log | `true`   |
 
 ### <code>version</code>診断ルール {#code-version-code-diagnostic-rule}
 

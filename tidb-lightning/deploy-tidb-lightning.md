@@ -111,7 +111,7 @@ chmod +x tidb-lightning
     pd-addr = "172.16.31.4:2379"
     ```
 
-    上記は重要な設定のみを示しています。設定の完全なリストについては、セクション[Configuration / コンフィグレーション](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-global)を参照してください。
+    上記は重要な設定のみを示しています。設定の完全なリストについては、セクション[コンフィグレーション](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-global)を参照してください。
 
 4.  `tidb-lightning`を実行します。
 

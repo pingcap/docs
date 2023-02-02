@@ -46,7 +46,7 @@ TiDB バージョン: 4.0.13
 
     -   TiCDC
 
-        -   プロセッサ フロー制御を実装して、メモリ オーバーフロー (OOM) を回避します[#1751](https://github.com/pingcap/tiflow/pull/1751)
+        -   プロセッサ フロー制御を実装して、メモリオーバーフロー (OOM) を回避します[#1751](https://github.com/pingcap/tiflow/pull/1751)
         -   Unified Sorter の古い一時ファイルのクリーンアップをサポートし、複数の`cdc server`インスタンスが同じディレクトリを共有するのを防ぎます`sort-dir` [#1741](https://github.com/pingcap/tiflow/pull/1741)
         -   フェイルポイント[#1732](https://github.com/pingcap/tiflow/pull/1732)の HTTP ハンドラーを追加します。
 
@@ -117,7 +117,7 @@ TiDB バージョン: 4.0.13
     -   `TIME`型を`INTEGER`型にキャストしたときの結果が正しくない問題を修正
     -   `bitwise`オペレータの挙動がTiDBと異なる不具合を修正
     -   `STRING`型を`INTEGER`型にキャストしたときの結果が正しくない問題を修正
-    -   連続した高速書き込みによってTiFlashがメモリ不足になる問題を修正
+    -   連続した高速書き込みによってTiFlashがメモリになる問題を修正
     -   テーブル GC 中に null ポインターの例外が発生する可能性がある潜在的な問題を修正します。
     -   削除されたテーブルにデータを書き込むときに発生するTiFlashpanicの問題を修正します
     -   BR復元中に発生するTiFlashpanicの問題を修正

@@ -3,11 +3,11 @@ title: TiDB Lightning Configuration
 summary: Learn about the CLI usage and sample configuration in TiDB Lightning.
 ---
 
-# TiDB LightningConfiguration / コンフィグレーション {#tidb-lightning-configuration}
+# TiDB Lightningコンフィグレーション {#tidb-lightning-configuration}
 
 このドキュメントでは、グローバル構成とタスク構成のサンプルを提供し、コマンドライン パラメータの使用法について説明します。
 
-## Configuration / コンフィグレーションファイル {#configuration-files}
+## コンフィグレーションファイル {#configuration-files}
 
 TiDB Lightningには「global」と「task」の 2 つの構成クラスがあり、それらは互換性のある構造を持っています。それらの区別は、 [サーバーモード](/tidb-lightning/tidb-lightning-web-interface.md)が有効になっている場合にのみ発生します。サーバーモードが無効になっている場合 (デフォルト)、 TiDB Lightningは 1 つのタスクのみを実行し、同じ構成ファイルがグローバル構成とタスク構成の両方に使用されます。
 
@@ -124,7 +124,7 @@ driver = "file"
 
 # The listening address of tikv-importer when backend is "importer". Change it to the actual address.
 addr = "172.16.31.10:8287"
-# Action to do when trying to insert a duplicated entry in the logical import mode.
+# Action to do when trying to insert a conflicting record in the logical import mode. For more information on the conflict detection, see the document: https://docs.pingcap.com/tidb/dev/tidb-lightning-logical-import-mode-usage#conflict-detection
 #  - replace: use new entry to replace the existing entry
 #  - ignore: keep the existing entry, and ignore the new entry
 #  - error: report error and quit the program
@@ -386,7 +386,7 @@ log-progress = "5m"
 | --fetch-mode                        | すべての TiKV ストアの現在のモードを出力します                      |
 | -- インポートエンジン*uuid*                  | 閉じたエンジン ファイルを TiKV インポーターから TiKV クラスターにインポートします |
 | --cleanup-engine *uuid*             | エンジン ファイルを TiKV Importer から削除します                |
-| --checkpoint-dump*フォルダー*            | 現在のチェックポイントを CSV としてフォルダーにダンプします                |
+| --checkpoint-dump*フォルダ*             | 現在のチェックポイントを CSV としてフォルダーにダンプします                |
 | *--checkpoint* -error-destroy テーブル名 | チェックポイントを削除し、エラーが発生した場合はテーブルを削除します              |
 | *--checkpoint* -error-ignore テーブル名  | 指定されたテーブルに関連するチェックポイントに記録されたエラーを無視します           |
 | *--checkpoint* -remove テーブル名        | テーブルのチェックポイントを無条件に削除します                         |

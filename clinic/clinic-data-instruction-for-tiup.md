@@ -27,22 +27,22 @@ PingCAPクリニックによって収集された診断データは、クラス�
 
 ### TiDB 診断データ {#tidb-diagnostic-data}
 
-| データ・タイプ                        | エクスポートされたファイル         | PingCAPクリニックによるデータ収集のパラメータ |
-| :----------------------------- | :-------------------- | :------------------------- |
-| ログ                             | `tidb.log`            | `--include=log`            |
-| エラーログ                          | `tidb_stderr.log`     | `--include=log`            |
-| スローログ                          | `tidb_slow_query.log` | `--include=log`            |
-| Configuration / コンフィグレーションファイル | `tidb.toml`           | `--include=config`         |
-| リアルタイム構成                       | `config.json`         | `--include=config`         |
+| データ・タイプ        | エクスポートされたファイル         | PingCAPクリニックによるデータ収集のパラメータ |
+| :------------- | :-------------------- | :------------------------- |
+| ログ             | `tidb.log`            | `--include=log`            |
+| エラーログ          | `tidb_stderr.log`     | `--include=log`            |
+| スローログ          | `tidb_slow_query.log` | `--include=log`            |
+| コンフィグレーションファイル | `tidb.toml`           | `--include=config`         |
+| リアルタイム構成       | `config.json`         | `--include=config`         |
 
 ### TiKV診断データ {#tikv-diagnostic-data}
 
-| データ・タイプ                        | エクスポートされたファイル     | PingCAPクリニックによるデータ収集のパラメータ |
-| :----------------------------- | :---------------- | :------------------------- |
-| ログ                             | `tikv.log`        | `--include=log`            |
-| エラーログ                          | `tikv_stderr.log` | `--include=log`            |
-| Configuration / コンフィグレーションファイル | `tikv.toml`       | `--include=config`         |
-| リアルタイム構成                       | `config.json`     | `--include=config`         |
+| データ・タイプ        | エクスポートされたファイル     | PingCAPクリニックによるデータ収集のパラメータ |
+| :------------- | :---------------- | :------------------------- |
+| ログ             | `tikv.log`        | `--include=log`            |
+| エラーログ          | `tikv_stderr.log` | `--include=log`            |
+| コンフィグレーションファイル | `tikv.toml`       | `--include=config`         |
+| リアルタイム構成       | `config.json`     | `--include=config`         |
 
 ### PD診断データ {#pd-diagnostic-data}
 
@@ -50,28 +50,28 @@ PingCAPクリニックによって収集された診断データは、クラス�
 | :-------------------------------------------------------------------------------------------- | :-------------------- | :------------------------- |
 | ログ                                                                                            | `pd.log`              | `--include=log`            |
 | エラーログ                                                                                         | `pd_stderr.log`       | `--include=log`            |
-| Configuration / コンフィグレーションファイル                                                                | `pd.toml`             | `--include=config`         |
+| コンフィグレーションファイル                                                                                | `pd.toml`             | `--include=config`         |
 | リアルタイム構成                                                                                      | `config.json`         | `--include=config`         |
 | コマンド`tiup ctl:<cluster-version> pd -u http://${pd IP}:${PORT} store`の出力                       | `store.json`          | `--include=config`         |
 | コマンド`tiup ctl:<cluster-version> pd -u http://${pd IP}:${PORT} config placement-rules show`の出力 | `placement-rule.json` | `--include=config`         |
 
 ### TiFlash診断データ {#tiflash-diagnostic-data}
 
-| データ・タイプ                        | エクスポートされたファイル                                                         | PingCAPクリニックによるデータ収集のパラメータ |
-| :----------------------------- | :-------------------------------------------------------------------- | :------------------------- |
-| ログ                             | `tiflash.log`                                                         | `--include=log`            |
-| エラーログ                          | `tiflash_stderr.log`                                                  | `--include=log`            |
-| Configuration / コンフィグレーションファイル | `tiflash-learner.toml` 、 `tiflash-preprocessed.toml` 、 `tiflash.toml` | `--include=config`         |
-| リアルタイム構成                       | `config.json`                                                         | `--include=config`         |
+| データ・タイプ        | エクスポートされたファイル                                                         | PingCAPクリニックによるデータ収集のパラメータ |
+| :------------- | :-------------------------------------------------------------------- | :------------------------- |
+| ログ             | `tiflash.log`                                                         | `--include=log`            |
+| エラーログ          | `tiflash_stderr.log`                                                  | `--include=log`            |
+| コンフィグレーションファイル | `tiflash-learner.toml` 、 `tiflash-preprocessed.toml` 、 `tiflash.toml` | `--include=config`         |
+| リアルタイム構成       | `config.json`                                                         | `--include=config`         |
 
 ### TiCDC 診断データ {#ticdc-diagnostic-data}
 
-| データ・タイプ                        | エクスポートされたファイル                                                                     | PingCAPクリニックによるデータ収集のパラメータ                      |
-| :----------------------------- | :-------------------------------------------------------------------------------- | :---------------------------------------------- |
-| ログ                             | `ticdc.log`                                                                       | `--include=log`                                 |
-| エラーログ                          | `ticdc_stderr.log`                                                                | `--include=log`                                 |
-| Configuration / コンフィグレーションファイル | `ticdc.toml`                                                                      | `--include=config`                              |
-| デバッグデータ                        | `info.txt` 、 `status.txt` 、 `changefeeds.txt` 、 `captures.txt` 、 `processors.txt` | `--include=debug` (デフォルトでは、Diag はこのデータ型を収集しません) |
+| データ・タイプ        | エクスポートされたファイル                                                                     | PingCAPクリニックによるデータ収集のパラメータ                      |
+| :------------- | :-------------------------------------------------------------------------------- | :---------------------------------------------- |
+| ログ             | `ticdc.log`                                                                       | `--include=log`                                 |
+| エラーログ          | `ticdc_stderr.log`                                                                | `--include=log`                                 |
+| コンフィグレーションファイル | `ticdc.toml`                                                                      | `--include=config`                              |
+| デバッグデータ        | `info.txt` 、 `status.txt` 、 `changefeeds.txt` 、 `captures.txt` 、 `processors.txt` | `--include=debug` (デフォルトでは、Diag はこのデータ型を収集しません) |
 
 ### プロメテウス監視データ {#prometheus-monitoring-data}
 
@@ -110,19 +110,19 @@ PingCAPクリニックによって収集された診断データは、クラス�
 
 ### dm-master 診断データ {#dm-master-diagnostic-data}
 
-| データ・タイプ                        | エクスポートされたファイル          | PingCAPクリニックによるデータ収集のパラメータ |
-| :----------------------------- | :--------------------- | :------------------------- |
-| ログ                             | `m-master.log`         | `--include=log`            |
-| エラーログ                          | `dm-master_stderr.log` | `--include=log`            |
-| Configuration / コンフィグレーションファイル | `dm-master.toml`       | `--include=config`         |
+| データ・タイプ        | エクスポートされたファイル          | PingCAPクリニックによるデータ収集のパラメータ |
+| :------------- | :--------------------- | :------------------------- |
+| ログ             | `m-master.log`         | `--include=log`            |
+| エラーログ          | `dm-master_stderr.log` | `--include=log`            |
+| コンフィグレーションファイル | `dm-master.toml`       | `--include=config`         |
 
 ### dm-worker 診断データ {#dm-worker-diagnostic-data}
 
-| データ・タイプ                        | エクスポートされたファイル          | PingCAPクリニックによるデータ収集のパラメータ |
-| :----------------------------- | :--------------------- | :------------------------- |
-| ログ                             | `dm-worker.log`        | `--include=log`            |
-| エラーログ                          | `dm-worker_stderr.log` | `--include=log`            |
-| Configuration / コンフィグレーションファイル | `dm-work.toml`         | `--include=config`         |
+| データ・タイプ        | エクスポートされたファイル          | PingCAPクリニックによるデータ収集のパラメータ |
+| :------------- | :--------------------- | :------------------------- |
+| ログ             | `dm-worker.log`        | `--include=log`            |
+| エラーログ          | `dm-worker_stderr.log` | `--include=log`            |
+| コンフィグレーションファイル | `dm-work.toml`         | `--include=config`         |
 
 ### プロメテウス監視データ {#prometheus-monitoring-data}
 

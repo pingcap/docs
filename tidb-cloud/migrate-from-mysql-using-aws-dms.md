@@ -23,7 +23,7 @@ AWS DMS は、リレーショナル データベース、データ ウェアハ�
 -   AWS DMS のパブリックおよびプライベート ネットワーク IP アドレスを、ソース データベースとターゲット データベースの両方の IP アクセス リストに追加します。そうしないと、一部のシナリオでネットワーク接続が失敗する可能性があります。
 -   [VPC ピアリング](/tidb-cloud/set-up-vpc-peering-connections.md#set-up-vpc-peering-on-aws)または[プライベート エンドポイント接続](/tidb-cloud/set-up-private-endpoint-connections.md)を使用して、AWS DMS と TiDB クラスターを接続します。
 -   データ書き込みのパフォーマンスを向上させるために、AWS DMS と TiDB クラスターに同じリージョンを使用することをお勧めします。
--   AWS DMS `dms.t3.large` (2 つの vCPU と 8 GiB メモリ) またはそれ以上のインスタンス クラスを使用することをお勧めします。小さなインスタンス クラスは、メモリ不足 (OOM) エラーを引き起こす可能性があります。
+-   AWS DMS `dms.t3.large` (2 つの vCPU と 8 GiBメモリ) 以上のインスタンス クラスを使用することをお勧めします。小さなインスタンス クラスは、メモリ(OOM) エラーを引き起こす可能性があります。
 -   AWS DMS は、ターゲット データベースに`awsdms_control`のデータベースを自動的に作成します。
 
 ## 制限 {#limitation}
@@ -105,7 +105,7 @@ AWS DMS はレプリケートをサポートしていません`DROP TABLE` 。
 
 5.  ダイアログの [ **VPC ピアリング**] タブをクリックし、[<strong>ステップ 1: VPC のセットアップ</strong>] の下の [<strong>追加</strong>] をクリックして、TiDB クラスターと AWS DMS の VPC ピアリング接続を作成します。
 
-6.  対応する情報を設定します。 [VPC ピアリング接続のセットアップ](/tidb-cloud/set-up-vpc-peering-connections.md)を参照してください。
+6.  対応する情報を設定します。 [VPC ピアリング接続の設定](/tidb-cloud/set-up-vpc-peering-connections.md)を参照してください。
 
 7.  TiDB クラスターのターゲット エンドポイントを構成します。
 

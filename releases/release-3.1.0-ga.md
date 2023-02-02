@@ -62,7 +62,7 @@ TiDB Ansible バージョン: 3.1.0 GA
     -   監視セッションの再試行エラーの不正確なカウントの問題を修正します[#16120](https://github.com/pingcap/tidb/pull/16120)
     -   `ALLOW_INVALID_DATES`モード[#16171](https://github.com/pingcap/tidb/pull/16171)で`weekday`の結果が間違っていた問題を修正
     -   クラスターにTiFlashノードがある場合、ガベージ コレクション (GC) が正常に機能しない場合がある問題を修正し[#15761](https://github.com/pingcap/tidb/pull/15761) 。
-    -   ユーザーがハッシュパーティションテーブルを作成するときに大きなパーティション数を設定すると、TiDB がメモリ不足 (OOM) になる問題を修正します[#16219](https://github.com/pingcap/tidb/pull/16219)
+    -   ユーザーがハッシュパーティションテーブルを作成するときに大きなパーティション数を設定すると、TiDB がメモリ(OOM) になる問題を修正します[#16219](https://github.com/pingcap/tidb/pull/16219)
     -   警告がエラーと誤認される問題を修正し、 `UNION`ステートメントを`SELECT`ステートメントと同じ動作にする[#16138](https://github.com/pingcap/tidb/pull/16138)
     -   mocktikv [#16200](https://github.com/pingcap/tidb/pull/16200)に`TopN`をpushした時の実行エラーを修正
     -   `runtime.growslice` [#16142](https://github.com/pingcap/tidb/pull/16142)の不要なオーバーヘッドを回避するために、初期の長さ`chunk.column.nullBitMap`を増やします。

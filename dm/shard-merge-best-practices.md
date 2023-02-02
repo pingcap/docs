@@ -119,7 +119,7 @@ CREATE TABLE `tbl_multi_pk` (
 
 ## アップストリーム RDS にシャード テーブルが含まれている場合の特別な処理 {#special-processing-when-the-upstream-rds-contains-sharded-tables}
 
-アップストリーム データ ソースが RDS であり、シャード テーブルが含まれている場合、SQL クライアントに接続するときに、MySQL binlog のテーブル名が表示されないことがあります。たとえば、アップストリームが UCloud 分散データベースである場合、binlog のテーブル名には追加のプレフィックス`_0001`が含まれる場合があります。したがって、SQL クライアントのテーブル名ではなく、binlog のテーブル名に基づいて[テーブル ルーティング](/dm/dm-key-features.md#table-routing)を構成する必要があります。
+アップストリーム データ ソースが RDS であり、シャード テーブルが含まれている場合、SQL クライアントに接続するときに、MySQL binlog のテーブル名が表示されないことがあります。たとえば、アップストリームが UCloud 分散データベースである場合、binlog のテーブル名には追加のプレフィックス`_0001`が含まれる場合があります。したがって、SQL クライアントのテーブル名ではなく、binlog のテーブル名に基づいて[テーブル ルーティング](/dm/dm-table-routing.md)を構成する必要があります。
 
 ## アップストリームでのテーブルの作成/削除 {#create-drop-tables-in-the-upstream}
 

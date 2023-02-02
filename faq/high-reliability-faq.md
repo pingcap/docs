@@ -27,7 +27,7 @@ summary: Learn about the FAQs related to high reliability of TiDB.
 
 ## TiDB はどの認証プロトコルをサポートしていますか?プロセスは何ですか？ {#what-authentication-protocols-does-tidb-support-what-s-the-process}
 
-MySQL と同様に、TiDB はユーザー ログイン認証とパスワード処理のために SASL プロトコルをサポートしています。
+MySQL と同様に、TiDB はユーザー ログイン認証とパスワード処理のために SASL プロトコルをサポートします。
 
 クライアントが TiDB に接続すると、チャレンジ/レスポンス認証モードが開始されます。プロセスは次のとおりです。
 

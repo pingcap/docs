@@ -3,7 +3,7 @@ title: TiKV Configuration File
 summary: Learn the TiKV configuration file.
 ---
 
-# TiKVConfiguration / コンフィグレーションファイル {#tikv-configuration-file}
+# TiKVコンフィグレーションファイル {#tikv-configuration-file}
 
 <!-- markdownlint-disable MD001 -->
 
@@ -38,9 +38,9 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 ### <code>memory-usage-limit</code> {#code-memory-usage-limit-code}
 
 -   TiKV インスタンスのメモリ使用量の制限。 TiKV のメモリ使用量がこのしきい値にほぼ達すると、内部キャッシュが削除されてメモリが解放されます。
--   ほとんどの場合、TiKV インスタンスは使用可能なシステム メモリの合計の 75% を使用するように設定されているため、この構成項目を明示的に指定する必要はありません。メモリの残りの 25% は、OS ページ キャッシュ用に予約されています。詳細は[`storage.block-cache.capacity`](#capacity)を参照してください。
+-   ほとんどの場合、TiKV インスタンスは利用可能なシステムメモリの合計の 75% を使用するように設定されているため、この構成項目を明示的に指定する必要はありません。メモリの残りの 25% は、OS ページ キャッシュ用に予約されています。詳細は[`storage.block-cache.capacity`](#capacity)を参照してください。
 -   1 台の物理マシンに複数の TiKV ノードをデプロイする場合でも、この構成項目を設定する必要はありません。この場合、TiKV インスタンスは`5/3 * block-cache.capacity`のメモリを使用します。
--   異なるシステム メモリ容量のデフォルト値は次のとおりです。
+-   異なるシステムメモリ容量のデフォルト値は次のとおりです。
 
     -   system=8G block-cache=3.6G memory-usage-limit=6G page-cache=2G
     -   system=16G block-cache=7.2G memory-usage-limit=12G page-cache=4G
@@ -48,7 +48,7 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 
 ## ログ<span class="version-mark">v5.4.0 の新機能</span> {#log-span-class-version-mark-new-in-v5-4-0-span}
 
--   ログに関するConfiguration / コンフィグレーション項目です。
+-   ログに関するコンフィグレーション項目です。
 
 -   v5.4.0 から、TiKV と TiDB のログ構成項目を一致させるために、TiKV は以前の構成項目`log-rotation-timespan`を廃止し、 `log-level` 、 `log-format` 、 `log-file` 、 `log-rotation-size`を次のように変更します。古い構成アイテムのみを設定し、それらの値がデフォルト以外の値に設定されている場合、古いアイテムは新しいアイテムと互換性があります。新旧両方の構成項目が設定されている場合、新しい項目が有効になります。
 
@@ -72,7 +72,7 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 
 ## log.file v5.4.0<span class="version-mark">の新機能</span> {#log-file-span-class-version-mark-new-in-v5-4-0-span}
 
--   ログファイルに関するConfiguration / コンフィグレーション項目です。
+-   ログファイルに関するコンフィグレーション項目です。
 
 ### <code>filename</code> <span class="version-mark">v5.4.0 の新機能</span> {#code-filename-code-span-class-version-mark-new-in-v5-4-0-span}
 
@@ -109,7 +109,7 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 
 ## サーバー {#server}
 
--   サーバーに関連するConfiguration / コンフィグレーション項目。
+-   サーバーに関連するコンフィグレーション項目。
 
 ### <code>addr</code> {#code-addr-code}
 
@@ -161,7 +161,7 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 
 ### <code>grpc-memory-pool-quota</code> {#code-grpc-memory-pool-quota-code}
 
--   gRPC で使用できるメモリ サイズを制限します
+-   gRPC で使用できるメモリサイズを制限します
 -   デフォルト値: 制限なし
 -   OOM が観察された場合に備えてメモリを制限します。使用を制限すると、潜在的な失速につながる可能性があることに注意してください
 
@@ -266,7 +266,7 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 
 ## readpool.unified {#readpool-unified}
 
-読み取り要求を処理する単一のスレッド プールに関連するConfiguration / コンフィグレーション項目。このスレッド プールは、4.0 バージョン以降、元のストレージ スレッド プールとコプロセッサ スレッド プールに取って代わります。
+読み取り要求を処理する単一のスレッド プールに関連するコンフィグレーション項目。このスレッド プールは、4.0 バージョン以降、元のストレージ スレッド プールとコプロセッサ スレッド プールに取って代わります。
 
 ### <code>min-thread-count</code> {#code-min-thread-count-code}
 
@@ -301,7 +301,7 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 
 ## readpool.storage {#readpool-storage}
 
-ストレージ スレッド プールに関連するConfiguration / コンフィグレーションアイテム。
+ストレージ スレッド プールに関連するコンフィグレーションアイテム。
 
 ### <code>use-unified-pool</code> {#code-use-unified-pool-code}
 
@@ -355,7 +355,7 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 
 ## <code>readpool.coprocessor</code> {#code-readpool-coprocessor-code}
 
-コプロセッサースレッド プールに関連するConfiguration / コンフィグレーション項目。
+コプロセッサースレッド プールに関連するコンフィグレーション項目。
 
 ### <code>use-unified-pool</code> {#code-use-unified-pool-code}
 
@@ -409,7 +409,7 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 
 ## 保管所 {#storage}
 
-ストレージに関するConfiguration / コンフィグレーション項目。
+ストレージに関するコンフィグレーション項目。
 
 ### <code>data-dir</code> {#code-data-dir-code}
 
@@ -418,7 +418,7 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 
 ### <code>scheduler-concurrency</code> {#code-scheduler-concurrency-code}
 
--   キーの同時操作を防止する内蔵メモリーロック機構。各キーには、異なるスロットにハッシュがあります。
+-   キーの同時操作を防止する内蔵メモリロック機構。各キーには、異なるスロットにハッシュがあります。
 -   デフォルト値: `524288`
 -   最小値: `1`
 
@@ -491,7 +491,7 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 
 ## storage.block-cache {#storage-block-cache}
 
-複数の RocksDBカラムファミリー (CF) 間でのブロックキャッシュの共有に関連するConfiguration / コンフィグレーション項目。これらの構成項目を有効にすると、カラムファミリーごとに個別に構成されたブロックキャッシュが無効になります。
+複数の RocksDBカラムファミリー (CF) 間でのブロックキャッシュの共有に関連するコンフィグレーション項目。これらの構成項目を有効にすると、カラムファミリーごとに個別に構成されたブロックキャッシュが無効になります。
 
 ### <code>shared</code> {#code-shared-code}
 
@@ -501,12 +501,12 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 ### <code>capacity</code> {#code-capacity-code}
 
 -   共有ブロックキャッシュのサイズ。
--   デフォルト値: 合計システム メモリのサイズの 45%
+-   デフォルト値: 合計システムメモリのサイズの 45%
 -   単位: KB|MB|GB
 
 ## storage.flow-control {#storage-flow-control}
 
-TiKVにおけるフロー制御機構に関するConfiguration / コンフィグレーション項目です。このメカニズムは、RocksDB の書き込みストール メカニズムに取って代わり、スケジューラレイヤーでフローを制御します。
+TiKVにおけるフロー制御機構に関するコンフィグレーション項目です。このメカニズムは、RocksDB の書き込みストール メカニズムに取って代わり、スケジューラレイヤーでフローを制御します。
 
 ### <code>enable</code> {#code-enable-code}
 
@@ -535,7 +535,7 @@ TiKVにおけるフロー制御機構に関するConfiguration / コンフィグ
 
 ## storage.io-rate-limit {#storage-io-rate-limit}
 
-I/Oレートリミッターに関するConfiguration / コンフィグレーション項目です。
+I/Oレートリミッターに関するコンフィグレーション項目です。
 
 ### <code>max-bytes-per-sec</code> {#code-max-bytes-per-sec-code}
 
@@ -574,7 +574,7 @@ I/Oレートリミッターに関するConfiguration / コンフィグレーシ�
 
 ## いかだ屋 {#raftstore}
 
-Raftstore に関連するConfiguration / コンフィグレーション項目。
+Raftstore に関連するコンフィグレーション項目。
 
 ### <code>prevote</code> {#code-prevote-code}
 
@@ -856,7 +856,7 @@ Raftstore に関連するConfiguration / コンフィグレーション項目。
 
 ### <code>snap-apply-batch-size</code> {#code-snap-apply-batch-size-code}
 
--   インポートされたスナップショット ファイルがディスクに書き込まれるときに必要なメモリ キャッシュ サイズ
+-   インポートされたスナップショット ファイルがディスクに書き込まれるときに必要なメモリキャッシュ サイズ
 -   デフォルト値: `"10MB"`
 -   最小値: `0`
 -   単位：MB
@@ -971,7 +971,7 @@ Raftstore に関連するConfiguration / コンフィグレーション項目。
 
 ## コプロセッサー {#coprocessor}
 
-コプロセッサーに関連するConfiguration / コンフィグレーション項目。
+コプロセッサーに関連するコンフィグレーション項目。
 
 ### <code>split-region-on-table</code> {#code-split-region-on-table-code}
 
@@ -1051,7 +1051,7 @@ Raftstore に関連するConfiguration / コンフィグレーション項目。
 
 ## RocksDB {#rocksdb}
 
-RocksDBに関するConfiguration / コンフィグレーション項目
+RocksDBに関するコンフィグレーション項目
 
 ### <code>max-background-jobs</code> {#code-max-background-jobs-code}
 
@@ -1230,7 +1230,7 @@ RocksDBに関するConfiguration / コンフィグレーション項目
 
 ## rocksdb.titan {#rocksdb-titan}
 
-Titan関連のConfiguration / コンフィグレーション項目。
+Titan関連のコンフィグレーション項目。
 
 ### <code>enabled</code> {#code-enabled-code}
 
@@ -1255,7 +1255,7 @@ Titan関連のConfiguration / コンフィグレーション項目。
 
 ## rocksdb.defaultcf | rocksdb.writecf | rocksdb.lockcf {#rocksdb-defaultcf-rocksdb-writecf-rocksdb-lockcf}
 
-`rocksdb.defaultcf`に`rocksdb.lockcf`するConfiguration / コンフィグレーション項目`rocksdb.writecf` 。
+`rocksdb.defaultcf`に`rocksdb.lockcf`するコンフィグレーション項目`rocksdb.writecf` 。
 
 ### <code>block-size</code> {#code-block-size-code}
 
@@ -1360,11 +1360,12 @@ Titan関連のConfiguration / コンフィグレーション項目。
 
 ### <code>max-bytes-for-level-base</code> {#code-max-bytes-for-level-base-code}
 
--   ベース レベル (L1) での最大バイト数。通常、memtable の 4 倍のサイズに設定されます。
+-   ベース レベル (レベル 1) の最大バイト数。通常、memtable の 4 倍のサイズに設定されます。レベル 1 のデータ サイズが制限値の`max-bytes-for-level-base`に達すると、レベル 1 の SST ファイルとそれらに重なるレベル 2 の SST ファイルが圧縮されます。
 -   `defaultcf`および`writecf`のデフォルト値: `"512MB"`
 -   `lockcf`のデフォルト値: `"128MB"`
 -   最小値: `0`
 -   単位: KB|MB|GB
+-   不必要な圧縮を減らすために、値`max-bytes-for-level-base`を L0 のデータ量とほぼ同じに設定することをお勧めします。たとえば、圧縮方法が「no:no:lz4:lz4:lz4: `write-buffer-size * 4` : `max-bytes-for-level-base` 」の場合、L0 と L1 の圧縮がなく、L0 の圧縮のトリガー条件がSST ファイルの数が 4 (デフォルト値) に達することを確認します。 L0 と L1 の両方が圧縮を採用する場合、Memtable から圧縮された SST ファイルのサイズを理解するために RocksDB ログを分析する必要があります。たとえば、ファイル サイズが 32 MB の場合、 `max-bytes-for-level-base` ～ 128 MB の値を設定することをお勧めします ( `32 MB * 4` )。
 
 ### <code>target-file-size-base</code> {#code-target-file-size-base-code}
 
@@ -1464,7 +1465,7 @@ Titan関連のConfiguration / コンフィグレーション項目。
 
 ## rocksdb.defaultcf.titan {#rocksdb-defaultcf-titan}
 
-に関連するConfiguration / コンフィグレーション項目`rocksdb.defaultcf.titan` ．
+に関連するコンフィグレーション項目`rocksdb.defaultcf.titan` ．
 
 ### <code>min-blob-size</code> {#code-min-blob-size-code}
 
@@ -1537,7 +1538,7 @@ Titan関連のConfiguration / コンフィグレーション項目。
 
 ## raftdb {#raftdb}
 
-`raftdb`に関するConfiguration / コンフィグレーション項目
+`raftdb`に関するコンフィグレーション項目
 
 ### <code>max-background-jobs</code> {#code-max-background-jobs-code}
 
@@ -1679,7 +1680,7 @@ Titan関連のConfiguration / コンフィグレーション項目。
 
 ## いかだエンジン {#raft-engine}
 
-Raft Engineに関連するConfiguration / コンフィグレーション項目。
+Raft Engineに関連するコンフィグレーション項目。
 
 > **ノート：**
 >
@@ -1741,7 +1742,7 @@ Raft Engineに関連するConfiguration / コンフィグレーション項目�
 ### <code>memory-limit</code> {#code-memory-limit-code}
 
 -   Raft Engineのメモリ使用量の制限を指定します。
--   この構成値が設定されていない場合、使用可能なシステム メモリの 15% が使用されます。
+-   この構成値が設定されていない場合、使用可能なシステムメモリの 15% が使用されます。
 -   デフォルト値: `Total machine memory * 15%`
 
 ### <code>format-version</code> <span class="version-mark">v6.3.0 の新機能</span> {#code-format-version-code-span-class-version-mark-new-in-v6-3-0-span}
@@ -1771,7 +1772,7 @@ Raft Engineに関連するConfiguration / コンフィグレーション項目�
 
 ## 安全 {#security}
 
-セキュリティに関するConfiguration / コンフィグレーション項目です。
+セキュリティに関するコンフィグレーション項目です。
 
 ### <code>ca-path</code> {#code-ca-path-code}
 
@@ -1800,7 +1801,7 @@ Raft Engineに関連するConfiguration / コンフィグレーション項目�
 
 ## セキュリティ暗号化 {#security-encryption}
 
-[保存時の暗号化](/encryption-at-rest.md) （TDE）に関するConfiguration / コンフィグレーション項目。
+[保存時の暗号化](/encryption-at-rest.md) （TDE）に関するコンフィグレーション項目。
 
 ### <code>data-encryption-method</code> {#code-data-encryption-method-code}
 
@@ -1830,7 +1831,7 @@ Raft Engineに関連するConfiguration / コンフィグレーション項目�
 
 ## <code>import</code> {#code-import-code}
 
-TiDB LightningのインポートとBRの復元に関するConfiguration / コンフィグレーション項目です。
+TiDB LightningのインポートとBRの復元に関するコンフィグレーション項目です。
 
 ### <code>num-threads</code> {#code-num-threads-code}
 
@@ -1847,7 +1848,7 @@ TiDB LightningのインポートとBRの復元に関するConfiguration / コン
 
 -   v6.5.0 以降、PITR はメモリ内のバックアップ ログ ファイルへの直接アクセスとデータの復元をサポートします。この構成項目は、TIKV の合計メモリに対する PITR で使用可能なメモリの比率を指定します。
 -   値の範囲: [0.0, 0.5]
--   デフォルト値: `0.3` 。これは、システム メモリの 30% が PITR に使用できることを意味します。値が`0.0`の場合、PITR はログ ファイルをローカル ディレクトリにダウンロードすることによって実行されます。
+-   デフォルト値: `0.3` 。これは、システムメモリの 30% が PITR に使用できることを意味します。値が`0.0`の場合、PITR はログ ファイルをローカル ディレクトリにダウンロードすることによって実行されます。
 
 > **ノート：**
 >
@@ -1878,7 +1879,7 @@ TiDB LightningのインポートとBRの復元に関するConfiguration / コン
 
 ## バックアップ {#backup}
 
-BRバックアップに関するConfiguration / コンフィグレーション項目です。
+BRバックアップに関するコンフィグレーション項目です。
 
 ### <code>num-threads</code> {#code-num-threads-code}
 
@@ -1928,7 +1929,7 @@ BRバックアップに関するConfiguration / コンフィグレーション�
 
 ## ログバックアップ {#log-backup}
 
-ログバックアップに関するConfiguration / コンフィグレーション項目です。
+ログバックアップに関するコンフィグレーション項目です。
 
 ### <code>enable</code><span class="version-mark">の新機能</span> {#code-enable-code-span-class-version-mark-new-in-v6-2-0-span}
 
@@ -1969,7 +1970,7 @@ BRバックアップに関するConfiguration / コンフィグレーション�
 
 ## CDC {#cdc}
 
-TiCDC に関連するConfiguration / コンフィグレーション項目。
+TiCDC に関連するコンフィグレーション項目。
 
 ### <code>min-ts-interval</code> {#code-min-ts-interval-code}
 
@@ -2004,7 +2005,7 @@ TiCDC に関連するConfiguration / コンフィグレーション項目。
 
 ## 解決済み-TS {#resolved-ts}
 
-ステイル読み取り要求を処理するための解決済み TS の維持に関連するConfiguration / コンフィグレーション項目。
+ステイル読み取り要求を処理するための解決済み TS の維持に関連するコンフィグレーション項目。
 
 ### <code>enable</code> {#code-enable-code}
 
@@ -2023,7 +2024,7 @@ TiCDC に関連するConfiguration / コンフィグレーション項目。
 
 ## 悲観的-txn {#pessimistic-txn}
 
-悲観的トランザクションの使用法については、 [TiDB ペシミスティック トランザクション モード](/pessimistic-transaction.md)を参照してください。
+悲観的トランザクションの使用法については、 [TiDB ペシミスティックトランザクションモード](/pessimistic-transaction.md)を参照してください。
 
 ### <code>wait-for-lock-timeout</code> {#code-wait-for-lock-timeout-code}
 
@@ -2041,27 +2042,27 @@ TiCDC に関連するConfiguration / コンフィグレーション項目。
 -   この構成アイテムは、悲観的ロックを追加するパイプライン プロセスを有効にします。この機能を有効にすると、データをロックできることを検出した後、TiKV は直ちに TiDB に通知して後続のリクエストを実行し、悲観的ロックを非同期で書き込みます。これにより、ほとんどのレイテンシーが短縮され、悲観的トランザクションのパフォーマンスが大幅に向上します。しかし、悲観的ロックの非同期書き込みが失敗する可能性はまだ低く、悲観的トランザクション コミットの失敗を引き起こす可能性があります。
 -   デフォルト値: `true`
 
-### <code>in-memory</code> (v6.0.0 の新機能) {#code-in-memory-code-new-in-v6-0-0}
+### <code>in-memory</code><span class="version-mark">新機能</span> {#code-in-memory-code-span-class-version-mark-new-in-v6-0-0-span}
 
--   インメモリの悲観的ロック機能を有効にします。この機能を有効にすると、悲観的トランザクションは、ロックをディスクに書き込んだり、ロックを他のレプリカに複製したりする代わりに、ロックをメモリに格納しようとします。これにより、悲観的トランザクションのパフォーマンスが向上します。ただし、悲観的ロックが失われ、悲観的トランザクションのコミットが失敗する可能性はまだ低いです。
+-   インメモリの悲観的ロック機能を有効にします。この機能を有効にすると、悲観的トランザクションは、ロックをディスクに書き込んだり、ロックを他のレプリカに複製したりする代わりに、ロックをメモリに保存しようとします。これにより、悲観的トランザクションのパフォーマンスが向上します。ただし、悲観的ロックが失われ、悲観的トランザクションのコミットが失敗する可能性はまだ低いです。
 -   デフォルト値: `true`
 -   `in-memory`は`pipelined`の値が`true`の場合にのみ有効であることに注意してください。
 
 ## クォータ {#quota}
 
-Quota Limiter に関連するConfiguration / コンフィグレーション項目。
+Quota Limiter に関連するコンフィグレーション項目。
 
 ### <code>max-delay-duration</code> <span class="version-mark">v6.0.0 の新機能</span> {#code-max-delay-duration-code-span-class-version-mark-new-in-v6-0-0-span}
 
 -   単一の読み取りまたは書き込み要求が、フォアグラウンドで処理されるまで強制的に待機される最大時間。
 -   デフォルト値: `500ms`
--   推奨設定: ほとんどの場合、デフォルト値を使用することをお勧めします。インスタンスでメモリ不足 (OOM) または激しいパフォーマンス ジッターが発生した場合、値を 1S に設定して、リクエストの待機時間を 1 秒未満にすることができます。
+-   推奨設定: ほとんどの場合、デフォルト値を使用することをお勧めします。インスタンスでメモリ(OOM) または激しいパフォーマンス ジッターが発生した場合、値を 1S に設定して、リクエストの待機時間を 1 秒未満にすることができます。
 
 ### フォアグラウンド クォータ リミッター {#foreground-quota-limiter}
 
-フォアグラウンド Quota Limiter に関連するConfiguration / コンフィグレーション項目。
+フォアグラウンド Quota Limiter に関連するコンフィグレーション項目。
 
-TiKV がデプロイされているマシンのリソースが限られているとします (たとえば、4v CPU と 16 G メモリのみ)。この状況では、TiKV のフォアグラウンドが処理する読み取りおよび書き込み要求が多すぎるため、バックグラウンドで使用される CPU リソースがそのような要求の処理を支援するために占有され、TiKV のパフォーマンスの安定性に影響を与える可能性があります。この状況を回避するには、フォアグラウンド クォータ関連の構成項目を使用して、フォアグラウンドで使用される CPU リソースを制限します。リクエストが Quota Limiter をトリガーすると、リクエストは TiKV が CPU リソースを解放するまでしばらく待機する必要があります。正確な待機時間はリクエストの数によって異なり、最大待機時間は[`max-delay-duration`](#max-delay-duration-new-in-v600)の値を超えません。
+TiKV がデプロイされているマシンのリソースが限られているとします (たとえば、4v CPU と 16 Gメモリのみ)。この状況では、TiKV のフォアグラウンドが処理する読み取りおよび書き込み要求が多すぎるため、バックグラウンドで使用される CPU リソースがそのような要求の処理を支援するために占有され、TiKV のパフォーマンスの安定性に影響を与える可能性があります。この状況を回避するには、フォアグラウンド クォータ関連の構成項目を使用して、フォアグラウンドで使用される CPU リソースを制限します。リクエストが Quota Limiter をトリガーすると、リクエストは TiKV が CPU リソースを解放するまでしばらく待機する必要があります。正確な待機時間はリクエストの数によって異なり、最大待機時間は[`max-delay-duration`](#max-delay-duration-new-in-v600)の値を超えません。
 
 #### <code>foreground-cpu-time</code> <span class="version-mark">v6.0.0 の新機能</span> {#code-foreground-cpu-time-code-span-class-version-mark-new-in-v6-0-0-span}
 
@@ -2084,9 +2085,9 @@ TiKV がデプロイされているマシンのリソースが限られている
 
 ### バックグラウンド クォータ リミッター {#background-quota-limiter}
 
-バックグラウンド Quota Limiter に関連するConfiguration / コンフィグレーション項目。
+バックグラウンド Quota Limiter に関連するコンフィグレーション項目。
 
-TiKV がデプロイされているマシンのリソースが限られているとします (たとえば、4v CPU と 16 G メモリのみ)。この状況では、TiKV のバックグラウンドが処理する計算や読み取り/書き込み要求が多すぎる可能性があり、フォアグラウンドで使用される CPU リソースがそのような要求の処理を支援するために占有され、TiKV のパフォーマンスの安定性に影響を与えます。この状況を回避するには、バックグラウンド クォータ関連の構成アイテムを使用して、バックグラウンドで使用される CPU リソースを制限します。リクエストが Quota Limiter をトリガーすると、リクエストは TiKV が CPU リソースを解放するまでしばらく待機する必要があります。正確な待機時間はリクエストの数によって異なり、最大待機時間は[`max-delay-duration`](#max-delay-duration-new-in-v600)の値を超えません。
+TiKV がデプロイされているマシンのリソースが限られているとします (たとえば、4v CPU と 16 Gメモリのみ)。この状況では、TiKV のバックグラウンドが処理する計算や読み取り/書き込み要求が多すぎる可能性があり、フォアグラウンドで使用される CPU リソースがそのような要求の処理を支援するために占有され、TiKV のパフォーマンスの安定性に影響を与えます。この状況を回避するには、バックグラウンド クォータ関連の構成アイテムを使用して、バックグラウンドで使用される CPU リソースを制限します。リクエストが Quota Limiter をトリガーすると、リクエストは TiKV が CPU リソースを解放するまでしばらく待機する必要があります。正確な待機時間はリクエストの数によって異なり、最大待機時間は[`max-delay-duration`](#max-delay-duration-new-in-v600)の値を超えません。
 
 > **警告：**
 >
@@ -2124,7 +2125,7 @@ TiKV がデプロイされているマシンのリソースが限られている
 
 ## causal-ts <span class="version-mark">v6.1.0 の新機能</span> {#causal-ts-span-class-version-mark-new-in-v6-1-0-span}
 
-TiKV API V2 が有効な場合のタイムスタンプの取得に関連するConfiguration / コンフィグレーション項目 ( `storage.api-version = 2` )。
+TiKV API V2 が有効な場合のタイムスタンプの取得に関連するコンフィグレーション項目 ( `storage.api-version = 2` )。
 
 書き込みレイテンシーを短縮するために、TiKV は定期的にタイムスタンプのバッチをローカルにフェッチしてキャッシュします。キャッシュされたタイムスタンプは、PD への頻繁なアクセスを回避し、短期間の TSO サービス障害を許容するのに役立ちます。
 
@@ -2133,7 +2134,7 @@ TiKV API V2 が有効な場合のタイムスタンプの取得に関連するCo
 -   事前に割り当てられた TSO キャッシュ サイズ (期間)。
 -   この構成項目で指定された期間に基づいて、TiKV が TSO キャッシュを事前に割り当てることを示します。 TiKV は、前の期間に基づいて TSO の使用量を推定し、 `alloc-ahead-buffer`を満たす TSO をローカルに要求してキャッシュします。
 -   この構成項目は、TiKV API V2 が有効になっている場合に PD 障害の許容度を高めるためによく使用されます ( `storage.api-version = 2` )。
--   この構成項目の値を大きくすると、TSO の消費量と TiKV のメモリ オーバーヘッドが増える可能性があります。十分な TSO を取得するには、PD の構成項目を[`tso-update-physical-interval`](/pd-configuration-file.md#tso-update-physical-interval)減らすことをお勧めします。
+-   この構成項目の値を大きくすると、TSO の消費量と TiKV のメモリオーバーヘッドが増える可能性があります。十分な TSO を取得するには、PD の構成項目を[`tso-update-physical-interval`](/pd-configuration-file.md#tso-update-physical-interval)減らすことをお勧めします。
 -   テストによると、 `alloc-ahead-buffer`がデフォルト値であり、PD リーダーに障害が発生して別のノードに切り替わると、書き込み要求でレイテンシーが短期間増加し、QPS が減少します (約 15%)。
 -   ビジネスへの影響を避けるために、PD で`tso-update-physical-interval = "1ms"`を構成し、TiKV で次の構成項目を構成できます。
     -   `causal-ts.alloc-ahead-buffer = "6s"`
@@ -2150,7 +2151,7 @@ TiKV API V2 が有効な場合のタイムスタンプの取得に関連するCo
 ### <code>renew-batch-min-size</code> {#code-renew-batch-min-size-code}
 
 -   タイムスタンプ要求の TSO の最小数。
--   TiKV は、前の期間のタイムスタンプの消費に応じて、キャッシュされたタイムスタンプの数を調整します。少数の TSO のみが必要な場合、TiKV は、数が`renew-batch-min-size`に達するまで、要求された TSO を削減します。アプリケーションで大量のバースト書き込みトラフィックが頻繁に発生する場合は、必要に応じてこのパラメーターをより大きな値に設定できます。このパラメーターは、単一の tikv サーバーのキャッシュ サイズであることに注意してください。パラメーターを大きすぎる値に設定し、クラスターに多くの tikv サーバーが含まれている場合、TSO の消費が速すぎます。
+-   TiKV は、前の期間のタイムスタンプの消費に応じて、キャッシュされたタイムスタンプの数を調整します。少数の TSO のみが必要な場合、TiKV は、数が`renew-batch-min-size`に達するまで、要求された TSO を減らします。アプリケーションで大量のバースト書き込みトラフィックが頻繁に発生する場合は、必要に応じてこのパラメーターをより大きな値に設定できます。このパラメーターは、単一の tikv サーバーのキャッシュ サイズであることに注意してください。パラメーターを大きすぎる値に設定し、クラスターに多くの tikv サーバーが含まれている場合、TSO の消費が速すぎます。
 -   Grafana の**TiKV-RAW** &gt; <strong>Causal timestamp</strong>パネルでは、 <strong>TSO バッチ サイズ</strong>は、アプリケーションのワークロードに従って動的に調整された、ローカルにキャッシュされたタイムスタンプの数です。このメトリックを参照して調整できます`renew-batch-min-size` 。
 -   デフォルト値: `100`
 

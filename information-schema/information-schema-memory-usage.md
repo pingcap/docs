@@ -55,7 +55,7 @@ SELECT * FROM information_schema.memory_usage;
 -   CURRENT_OPS: &quot;縮小&quot; |ヌル。 「縮小」とは、TiDB がメモリ使用量を縮小する操作を実行していることを意味します。
 -   SESSION_KILL_LAST: セッションが最後に終了したときのタイムスタンプ。
 -   SESSION_KILL_TOTAL: TiDB が開始されてから現在までにセッションが終了した回数。
--   GC_LAST: メモリ使用量によって最後にGolang GC がトリガーされたときのタイムスタンプ。
+-   GC_LAST:メモリ使用量によって最後にGolang GC がトリガーされたときのタイムスタンプ。
 -   GC_TOTAL: TiDB が開始されてから現在までに、メモリ使用量によってGolang GC がトリガーされた回数。
 -   DISK_USAGE: 現在のデータ スピル操作のディスク使用量 (バイト単位)。
 -   QUERY_FORCE_DISK: TiDB が開始されてから現在の時刻までに、データがディスクにスピルされた回数。

@@ -108,7 +108,7 @@ br backup full \
 >
 > これは実験的機能です。本番環境で使用することはお勧めしません。
 
-BRは、バックアップ側でのバックアップ データの暗号化をサポートしてい[Amazon S3にバックアップする際のストレージ側](/br/backup-and-restore-storages.md#amazon-s3-server-side-encryption) 。必要に応じて、いずれかの暗号化方法を選択できます。
+BRは、バックアップ側でのバックアップ データの暗号化をサポートしてい[Amazon S3にバックアップする際のストレージ側](/br/backup-and-restore-storages.md#amazon-s3-server-side-encryption) 。必要に応じて、いずれかの暗号化方式を選択できます。
 
 TiDB v5.3.0 以降、次のパラメータを設定することでバックアップ データを暗号化できます。
 

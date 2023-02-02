@@ -47,7 +47,7 @@ TiDB アンシブル バージョン: 3.0.8
     -   `GRANT ALL`構文に`WITH GRANT OPTION` [#13943](https://github.com/pingcap/tidb/pull/13943)が含まれていない場合、ターゲット ユーザーに誤って`GrantPriv`が付与される問題を修正します。
     -   `LoadDataInfo`が`addRecord` [#13980](https://github.com/pingcap/tidb/pull/13980)の呼び出しに失敗した場合に、 `LOAD DATA`ステートメントの間違った動作の原因がエラー メッセージに含まれていない問題を修正します。
     -   クエリ内の複数の SQL ステートメントが同じ`StartTime` [#13898](https://github.com/pingcap/tidb/pull/13898)を共有するため、間違ったスロークエリ情報が出力される問題を修正します。
-    -   `batchClient`大規模なトランザクションを処理するとメモリ リークが発生する可能性がある問題を修正します[#14032](https://github.com/pingcap/tidb/pull/14032)
+    -   `batchClient`大規模なトランザクションを処理するとメモリリークが発生する可能性がある問題を修正します[#14032](https://github.com/pingcap/tidb/pull/14032)
     -   `system_time_zone`が常に`CST`と表示され、TiDB の`system_time_zone`が`mysql.tidb`テーブル[#14086](https://github.com/pingcap/tidb/pull/14086)の`systemTZ`から取得される問題を修正
     -   `GRANT ALL`構文がユーザー[#14092](https://github.com/pingcap/tidb/pull/14092)にすべての権限を付与しないという問題を修正します。
     -   `Priv_create_user`権限が`CREATE ROLE`と`DROP ROLE` [#14088](https://github.com/pingcap/tidb/pull/14088)で無効になる問題を修正
@@ -61,7 +61,7 @@ TiDB アンシブル バージョン: 3.0.8
     -   新しい権限が追加されたときに、新しく追加された権限が対応するユーザーに正しく付与されないため、ユーザー権限が失われたり、誤って追加されたりする可能性がある問題を修正します[#14178](https://github.com/pingcap/tidb/pull/14178)
     -   TiKVサーバーが切断されたときに`rpcClient`が閉じないため、 `CheckStreamTimeoutLoop`ゴルーチンがリークする可能性がある問題を修正[#14227](https://github.com/pingcap/tidb/pull/14227)
     -   証明書ベースの認証をサポート ( [ユーザー文書](/certificate-authentication.md) ) [#13955](https://github.com/pingcap/tidb/pull/13955)
--   取引
+-   トランザクション
     -   新しいクラスターが作成されるときに、 `tidb_txn_mode`変数のデフォルト値を`""`から`"pessimistic"`に更新します[#14171](https://github.com/pingcap/tidb/pull/14171)
     -   トランザクションの再試行時に単一ステートメントのロック待機時間がリセットされないため、悲観的トランザクションのロック待機時間が長すぎる問題を修正し[#13990](https://github.com/pingcap/tidb/pull/13990) 。
     -   悲観的トランザクションモード[#14050](https://github.com/pingcap/tidb/pull/14050)で変更されていないデータがロック解除されているため、間違ったデータが読み取られる可能性がある問題を修正します。
@@ -82,7 +82,7 @@ TiDB アンシブル バージョン: 3.0.8
     -   デフォルト値`split-region-on-table`を`true`から`false`に更新して、デフォルトでテーブルごとのリージョンの分割を無効にします[#6253](https://github.com/tikv/tikv/pull/6253)
 -   エンジン
     -   RocksDB イテレータ エラーが極端な状況で正しく処理されないため、空のデータが返される可能性がある問題を修正します[#6326](https://github.com/tikv/tikv/pull/6326)
--   取引
+-   トランザクション
     -   悲観的ロックが誤ってクリーンアップされるため、TiKV がキーにデータを書き込むことができず、GC がブロックされる問題を修正します[#6354](https://github.com/tikv/tikv/pull/6354)
     -   悲観的ロック待機メカニズムを最適化して、ロックの競合が深刻なシナリオでのパフォーマンスを向上させます[#6296](https://github.com/tikv/tikv/pull/6296)
 -   デフォルト値の`tikv_alloc`を`tikv_alloc/default`から`jemalloc` [#6206](https://github.com/tikv/tikv/pull/6206)に更新します。

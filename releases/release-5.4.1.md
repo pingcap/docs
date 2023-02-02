@@ -72,7 +72,7 @@ TiDB v5.4.1 では、製品設計に互換性の変更は導入されていま�
     -   識別できないテーブル属性をスキップして`INFORMATION_SCHEMA.ATTRIBUTES`テーブルから読み取るときに発生するエラーを修正します[#33665](https://github.com/pingcap/tidb/issues/33665)
     -   `@@tidb_enable_parallel_apply`が設定されていても、 `order`プロパティが存在する場合に`Apply`演算子が並列化されないバグを修正[#34237](https://github.com/pingcap/tidb/issues/34237)
     -   `sql_mode`を`NO_ZERO_DATE` [#34099](https://github.com/pingcap/tidb/issues/34099)に設定すると`datetime`列に`'0000-00-00 00:00:00'`を挿入できるバグを修正
-    -   `INFORMATION_SCHEMA.CLUSTER_SLOW_QUERY`テーブルをクエリすると、TiDBサーバーがメモリ不足になることがある問題を修正します。この問題は、Grafana ダッシュボードでスロー クエリを確認すると発生する可能性があります[#33893](https://github.com/pingcap/tidb/issues/33893)
+    -   `INFORMATION_SCHEMA.CLUSTER_SLOW_QUERY`テーブルをクエリすると、TiDBサーバーがメモリになることがある問題を修正します。この問題は、Grafana ダッシュボードでスロー クエリを確認すると発生する可能性があります[#33893](https://github.com/pingcap/tidb/issues/33893)
     -   `NOWAIT`ステートメントで、実行中のトランザクションがロックに遭遇したときにすぐに戻らないというバグを修正します[#32754](https://github.com/pingcap/tidb/issues/32754)
     -   `GBK`文字セットで`gbk_bin`照合順序[#31308](https://github.com/pingcap/tidb/issues/31308)のテーブルを作成すると失敗するバグを修正
     -   `enable-new-charset`が`on`の場合、照合順序を使用して`GBK`文字セットのテーブルを作成すると、「不明な文字セット」エラー[#31297](https://github.com/pingcap/tidb/issues/31297)で失敗するバグを修正します
@@ -81,7 +81,7 @@ TiDB v5.4.1 では、製品設計に互換性の変更は導入されていま�
 
     -   マージする対象のリージョンが無効であるため、TiKV が予期せずパニックになり、ピアを破棄する問題を修正します[#12232](https://github.com/tikv/tikv/issues/12232)
     -   古いメッセージが原因で TiKV がpanicになるバグを修正[#12023](https://github.com/tikv/tikv/issues/12023)
-    -   メモリ メトリック[#12160](https://github.com/tikv/tikv/issues/12160)のオーバーフローが原因で発生する断続的なパケット損失とメモリ不足 (OOM) の問題を修正します。
+    -   メモリメトリック[#12160](https://github.com/tikv/tikv/issues/12160)のオーバーフローが原因で発生する断続的なパケット損失とメモリ(OOM) の問題を修正します。
     -   [#9765](https://github.com/tikv/tikv/issues/9765)が Ubuntu 18.04 でプロファイリングを実行するときに発生する潜在的なpanicの問題を修正します。
     -   レプリカの読み取りが線形化可能性に違反する可能性があるバグを修正します[#12109](https://github.com/tikv/tikv/issues/12109)
     -   リージョン[#12048](https://github.com/tikv/tikv/issues/12048)のマージ時にターゲット ピアが初期化されずに破棄されたピアに置き換えられると発生する TiKVpanicの問題を修正します。
@@ -110,7 +110,7 @@ TiDB v5.4.1 では、製品設計に互換性の変更は導入されていま�
     -   `FLOAT`から`DECIMAL` [#3998](https://github.com/pingcap/tiflash/issues/3998)へのキャスト時に発生するオーバーフローを修正
     -   期限切れのデータがゆっくりとリサイクルされる問題を修正します[#4146](https://github.com/pingcap/tiflash/issues/4146)
     -   ローカル トンネルが有効になっている場合、MPP クエリをキャンセルすると、タスクが永久にハングする可能性があるというバグを修正し[#4229](https://github.com/pingcap/tiflash/issues/4229) 。
-    -   クエリがキャンセルされたときに発生するメモリ リークの問題を修正します。 [#4098](https://github.com/pingcap/tiflash/issues/4098)
+    -   クエリがキャンセルされたときに発生するメモリリークの問題を修正します。 [#4098](https://github.com/pingcap/tiflash/issues/4098)
     -   `DATETIME`から`DECIMAL` [#4151](https://github.com/pingcap/tiflash/issues/4151)をキャストしたときに発生する誤った結果を修正します
     -   `Snapshot`が複数の DDL 操作と同時に適用された場合のTiFlashpanicの潜在的な問題を修正します[#4072](https://github.com/pingcap/tiflash/issues/4072)
     -   無効なストレージ ディレクトリ構成が予期しない動作を引き起こすバグを修正します[#4093](https://github.com/pingcap/tiflash/issues/4093)

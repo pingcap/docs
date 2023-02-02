@@ -34,6 +34,13 @@ TiDB Cloudの場合、この変数のデフォルト値は`1`です。
 >     ```sql
 >     SELECT DISTINCT(CONCAT('DROP STATS ', table_schema, '.', table_name, ';')) FROM information_schema.tables, mysql.stats_histograms WHERE stats_ver = 2 AND table_id = tidb_table_id;
 >     ```
+>
+> -   前のステートメントの結果が長すぎてコピー アンド ペーストできない場合は、結果を一時テキスト ファイルにエクスポートし、次のようにファイルから実行できます。
+>
+>     ```sql
+>     SELECT DISTINCT ... INTO OUTFILE '/tmp/sql.txt';
+>     mysql -h XXX -u user -P 4000 ... < '/tmp/sql.txt';
+>     ```
 
 これら 2 つのバージョンには、TiDB に異なる情報が含まれています。
 
@@ -63,7 +70,7 @@ TiDB Cloudの場合、この変数のデフォルト値は`1`です。
 
 ![Equal-depth Histogram Example](/media/statistics-1.png)
 
-ヒストグラムのバケット数の上限を決めるパラメータについては、 [手動収集](#manual-collection)を参照してください。バケットの数が多いほど、ヒストグラムの精度は高くなります。ただし、精度を高くすると、メモリ リソースの使用量が犠牲になります。この数は、実際のシナリオに従って適切に調整できます。
+ヒストグラムのバケット数の上限を決めるパラメータについては、 [手動収集](#manual-collection)を参照してください。バケットの数が多いほど、ヒストグラムの精度は高くなります。ただし、精度を高くすると、メモリリソースの使用量が犠牲になります。この数は、実際のシナリオに従って適切に調整できます。
 
 ## カウントミンスケッチ {#count-min-sketch}
 
@@ -467,13 +474,13 @@ v5.4.0 以降、 `ANALYZE`は一部の構成の永続化をサポートしてい
 >
 > `ANALYZE`構成の永続化機能を再度有効にしたときに、以前に記録された永続化構成が最新のデータに適用できなくなった場合は、 `ANALYZE`ステートメントを手動で実行し、新しい永続化構成を指定する必要があります。
 
-### 統計を収集するためのメモリ クォータ {#the-memory-quota-for-collecting-statistics}
+### 統計を収集するためのメモリクォータ {#the-memory-quota-for-collecting-statistics}
 
 > **警告：**
 >
-> 現在、 `ANALYZE`メモリ クォータは実験的機能であり、本番環境ではメモリ統計が不正確になる可能性があります。
+> 現在、 `ANALYZE`メモリクォータは実験的機能であり、本番環境ではメモリ統計が不正確になる可能性があります。
 
-TiDB v6.1.0 以降、システム変数[`tidb_mem_quota_analyze`](/system-variables.md#tidb_mem_quota_analyze-new-in-v610)を使用して、TiDB で統計を収集するためのメモリ クォータを制御できます。
+TiDB v6.1.0 以降、システム変数[`tidb_mem_quota_analyze`](/system-variables.md#tidb_mem_quota_analyze-new-in-v610)を使用して、TiDB で統計を収集するためのメモリクォータを制御できます。
 
 適切な値`tidb_mem_quota_analyze`を設定するには、クラスターのデータ サイズを考慮してください。デフォルトのサンプリング レートを使用する場合、主な考慮事項は、列の数、列の値のサイズ、および TiDB のメモリ構成です。最大値と最小値を構成するときは、次の提案を考慮してください。
 
@@ -867,14 +874,9 @@ mysql> show warnings;
 
 -   [ロード統計](/sql-statements/sql-statement-load-stats.md)
 -   [ドロップ統計](/sql-statements/sql-statement-drop-stats.md)
+
+</CustomContent>
+
 -   [ロック統計](/sql-statements/sql-statement-lock-stats.md)
 -   [統計のロックを解除](/sql-statements/sql-statement-unlock-stats.md)
 -   [SHOW STATS_LOCKED](/sql-statements/sql-statement-show-stats-locked.md)
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
--   [SQL 準備実行計画キャッシュ](/sql-prepared-plan-cache.md)
-
-</CustomContent>

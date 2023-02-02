@@ -88,7 +88,7 @@ User Response time = Service time + Queuing delay + Coherency delay
 
 -   CPU、IO、ネットワークなどのリソースを含むリソース使用率
 
--   アプリケーション構成、データベース構成、オペレーティング システム構成などのConfiguration / コンフィグレーション情報
+-   アプリケーション構成、データベース構成、オペレーティング システム構成などのコンフィグレーション情報
 
 ### ステップ 3. ユーザー応答時間のボトルネックを特定する {#step-3-identify-bottlenecks-in-user-response-time}
 

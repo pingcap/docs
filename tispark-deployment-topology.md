@@ -17,7 +17,7 @@ TiSparkアーキテクチャとその使用方法の詳細については、 [Ti
 
 ## トポロジ情報 {#topology-information}
 
-| 実例         | カウント | 物理マシン構成                         | 知財                                                           | Configuration / コンフィグレーション    |
+| 実例         | カウント | 物理マシン構成                         | 知財                                                           | コンフィグレーション                    |
 | :--------- | :--- | :------------------------------ | :----------------------------------------------------------- | :---------------------------- |
 | TiDB       | 3    | 16 仮想コア 32GB * 1                | 10.0.1.1<br/> 10.0.1.2<br/> 10.0.1.3                         | デフォルトのポート<br/>グローバル ディレクトリの構成 |
 | PD         | 3    | 4 Vコア 8GB * 1                   | 10.0.1.4<br/> 10.0.1.5<br/> 10.0.1.6                         | デフォルトのポート<br/>グローバル ディレクトリの構成 |
@@ -30,7 +30,7 @@ TiSparkアーキテクチャとその使用方法の詳細については、 [Ti
 -   [シンプルな TiSpark トポロジ テンプレート](https://github.com/pingcap/docs/blob/master/config-templates/simple-tispark.yaml)
 -   [複雑な TiSpark トポロジ テンプレート](https://github.com/pingcap/docs/blob/master/config-templates/complex-tispark.yaml)
 
-上記の TiDB クラスター トポロジ ファイルの構成項目の詳細な説明については、 [TiUP を使用してTiUPをデプロイするためのトポロジConfiguration / コンフィグレーションファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
+上記の TiDB クラスター トポロジ ファイルの構成項目の詳細な説明については、 [TiUP を使用してTiUPをデプロイするためのトポロジコンフィグレーションファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
 
 > **ノート：**
 >

@@ -3,7 +3,7 @@ title: Titan Configuration
 summary: Learn how to configure Titan.
 ---
 
-# タイタンのConfiguration / コンフィグレーション {#titan-configuration}
+# タイタンのコンフィグレーション {#titan-configuration}
 
 このドキュメントでは、対応する構成アイテムを使用して[巨人](/storage-engine/titan-overview.md)を有効または無効にする方法、および関連するパラメーターとレベル マージ機能を紹介します。
 

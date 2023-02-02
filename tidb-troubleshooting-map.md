@@ -117,13 +117,13 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
 -   3.2.2 OOM の原因となっている SQL ステートメントを見つけます。 (現在、TiDB のすべてのバージョンで SQL を正確に特定することはできません。OOM が SQL ステートメントを特定した後に原因であるかどうかを分析する必要があります。)
 
-    -   バージョン &gt;= v3.0.0 の場合、 grep &quot;expensive_query&quot; in `tidb.log` .このログ メッセージには、タイムアウトしたかメモリ クォータを超えた SQL クエリが記録されます。
+    -   バージョン &gt;= v3.0.0 の場合、 grep &quot;expensive_query&quot; in `tidb.log` .このログ メッセージには、タイムアウトしたかメモリクォータを超えた SQL クエリが記録されます。
 
-    -   v3.0.0 より前のバージョンでは、 `tidb.log`で grep &quot;memory exceeded quota&quot; を実行して、メモリ クォータを超えている SQL クエリを見つけます。
+    -   v3.0.0 より前のバージョンの場合、 `tidb.log`で grep &quot;メモリ exceeded quota&quot; を実行して、メモリクォータを超えている SQL クエリを見つけます。
 
     > **ノート：**
     >
-    > 単一の SQL メモリ使用量のデフォルトのしきい値は`1GB`です。このパラメータは、システム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)を構成することで設定できます。
+    > 単一の SQLメモリ使用量のデフォルトのしきい値は`1GB`です。このパラメータは、システム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)を構成することで設定できます。
 
 -   3.2.3 OOM の問題を軽減する
 
@@ -195,9 +195,9 @@ TiDB は、ホットスポットのトラブルシューティング、解決、
 
 CPU のボトルネックとトランザクションの競合によるボトルネックのトラブルシューティングを行った後、TiDB の応答が遅くなった場合は、現在のシステムのボトルネックを特定するために I/O メトリックを確認する必要があります。 TiDB で I/O 使用率が高い問題を特定して処理する方法については、 [高いディスク I/O 使用率のトラブルシューティング](/troubleshoot-high-disk-io.md)を参照してください。
 
-### 3.8 ロックの競合 {#3-8-lock-conflicts}
+### 3.8 ロックの衝突 {#3-8-lock-conflicts}
 
-TiDB は完全な分散トランザクションをサポートします。 v3.0 以降、TiDB は楽観的トランザクション モードと悲観的的トランザクション モードを提供します。ロック関連の問題をトラブルシューティングする方法、および楽観的および悲観的ロックの競合を処理する方法については、 [ロック競合のトラブルシューティング](/troubleshoot-lock-conflicts.md)を参照してください。
+TiDB は完全な分散トランザクションをサポートしています。 v3.0 以降、TiDB は楽観的トランザクション モードと悲観的的トランザクション モードを提供します。ロック関連の問題をトラブルシューティングする方法、および楽観的および悲観的ロックの競合を処理する方法については、 [ロック競合のトラブルシューティング](/troubleshoot-lock-conflicts.md)を参照してください。
 
 ### 3.9 データと索引の不一致 {#3-9-inconsistency-between-data-and-indexes}
 
@@ -231,7 +231,7 @@ TiDB は、トランザクションまたは[`ADMIN CHECK [TABLE|INDEX]`](/sql-s
 
     原因を確認するには、モニター**Grafana** -&gt; <strong>TiKV-details</strong> -&gt; <strong>coprocessor overview</strong>を表示して、 `response size`が`network outbound`のトラフィックを超えているかどうかを確認できます。
 
--   4.2.3 他のコンポーネントがメモリを占有しすぎています。
+-   4.2.3 他のコンポーネントがメモリを占有しすぎている。
 
     この問題は予想外です。 [バグを報告](https://github.com/tikv/tikv/issues/new?template=bug-report.md) .
 
@@ -436,7 +436,7 @@ TiDB は、トランザクションまたは[`ADMIN CHECK [TABLE|INDEX]`](/sql-s
 
     -   その他の状況については、 [バグを報告](https://github.com/pingcap/tidb-binlog/issues/new?labels=bug&#x26;template=bug-report.md) .
 
--   6.1.6 遅い複製
+-   6.1.6 遅いレプリケーション
 
     -   ダウンストリームは TiDB/MySQL であり、アップストリームは頻繁な DDL 操作を実行します。中国語で[ケース-1023](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case1023.md)を参照してください。
 

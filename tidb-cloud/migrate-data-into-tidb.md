@@ -166,7 +166,7 @@ TiUPは TiDB エコシステムのパッケージ マネージャーであり、
         no-schema = false
         ```
 
-        ターゲット TiDB クラスターで TLS を構成する場合、またはさらに構成を行う場合は、 [TiDB LightningConfiguration / コンフィグレーション](https://docs.pingcap.com/tidb/stable/tidb-lightning-configuration)を参照してください。
+        ターゲット TiDB クラスターで TLS を構成する場合、またはさらに構成を行う場合は、 [TiDB Lightningコンフィグレーション](https://docs.pingcap.com/tidb/stable/tidb-lightning-configuration)を参照してください。
 
 3.  TiDB Lightningを使用して TiDB にデータをインポートします。
 

@@ -176,12 +176,12 @@ block-allow-list:           # filter or only migrate all operations of some data
     do-dbs: ["store_*"]     # The allow list of the schemas to be migrated, similar to replicate-do-db in MySQL.
 ```
 
-上記の例は、移行タスクを実行するための最小構成です。詳細については、 [DM 拡張タスクConfiguration / コンフィグレーションファイル](/dm/task-configuration-file-full.md)を参照してください。
+上記の例は、移行タスクを実行するための最小構成です。詳細については、 [DM 拡張タスクコンフィグレーションファイル](/dm/task-configuration-file-full.md)を参照してください。
 
 `routes` 、 `filters` 、およびタスク ファイル内のその他の構成の詳細については、次のドキュメントを参照してください。
 
--   [テーブル ルーティング](/dm/dm-key-features.md#table-routing)
--   [ブロック &amp; 許可テーブル リスト](/dm/dm-key-features.md#block-and-allow-table-lists)
+-   [テーブル ルーティング](/dm/dm-table-routing.md)
+-   [ブロック &amp; 許可テーブル リスト](/dm/dm-block-allow-table-lists.md)
 -   [Binlogイベント フィルター](/filter-binlog-event.md)
 -   [SQL 式を使用して特定の行の変更をフィルター処理する](/filter-dml-event.md)
 

@@ -19,7 +19,7 @@ title: TiDB 2.1 RC4 Release Notes
     -   場合によっては`AddDate` / `SubDate`ステートメントの実行プロセス中のpanicの問題を修正します[#8009](https://github.com/pingcap/tidb/pull/8009)
 -   統計
     -   総合指数のヒストグラム下限の接頭辞が範囲[#7856](https://github.com/pingcap/tidb/pull/7856)外と判定される問題を修正
-    -   統計収集[#7873](https://github.com/pingcap/tidb/pull/7873)によって引き起こされるメモリ リークの問題を修正します。
+    -   統計収集[#7873](https://github.com/pingcap/tidb/pull/7873)によって引き起こされるメモリリークの問題を修正します。
     -   ヒストグラムが空の場合のpanicの問題を修正します[#7928](https://github.com/pingcap/tidb/pull/7928)
     -   統計のアップロード時にヒストグラム バウンドが範囲外になる問題を修正します[#7944](https://github.com/pingcap/tidb/pull/7944)
     -   統計サンプリング プロセスで値の最大長を制限する[#7982](https://github.com/pingcap/tidb/pull/7982)

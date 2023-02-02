@@ -28,7 +28,7 @@ Info: {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":
 -   `--sink-uri` : レプリケーション タスクのダウンストリーム アドレス。詳細については、 [`mysql` / <code>tidb</code>でシンク URI を構成する](#configure-sink-uri-for-mysql-or-tidb)を参照してください。
 -   `--start-ts` : 変更フィードの開始 TSO を指定します。この TSO から、TiCDC クラスターはデータのプルを開始します。デフォルト値は現在の時刻です。
 -   `--target-ts` : changefeed の終了 TSO を指定します。この TSO に対して、TiCDC クラスターはデータのプルを停止します。デフォルト値は空です。これは、TiCDC がデータのプルを自動的に停止しないことを意味します。
--   `--config` : changefeed 構成ファイルを指定します。詳細については、 [TiCDC ChangefeedConfiguration / コンフィグレーションパラメーター](/ticdc/ticdc-changefeed-config.md)を参照してください。
+-   `--config` : changefeed 構成ファイルを指定します。詳細については、 [TiCDC Changefeedコンフィグレーションパラメーター](/ticdc/ticdc-changefeed-config.md)を参照してください。
 
 ## MySQL または TiDB のシンク URI を構成する {#configure-sink-uri-for-mysql-or-tidb}
 

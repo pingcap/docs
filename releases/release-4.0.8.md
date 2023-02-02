@@ -50,7 +50,7 @@ TiDB バージョン: 4.0.8
     -   ログ[#8746](https://github.com/tikv/tikv/pull/8746)からユーザー データをリダクションする`security.redact-info-log`の構成項目を追加します。
     -   エラー コード[#8877](https://github.com/tikv/tikv/pull/8877)のメタファイルを再フォーマットします。
     -   `pessimistic-txn.pipelined`構成の動的変更を有効にする[#8853](https://github.com/tikv/tikv/pull/8853)
-    -   デフォルトでメモリ プロファイリング機能を有効にする[#8801](https://github.com/tikv/tikv/pull/8801)
+    -   デフォルトでメモリプロファイリング機能を有効にする[#8801](https://github.com/tikv/tikv/pull/8801)
 
 -   PD
 

@@ -35,7 +35,7 @@ TiDB でのデータ処理には、Spark エコシステムのツールを使用
 
 ## 要件 {#requirements}
 
--   TiSpark は Spark &gt;= 2.3 をサポートします。
+-   TiSpark は Spark &gt;= 2.3 をサポートしています。
 -   TiSpark には JDK 1.8 と Scala 2.11/2.12 が必要です。
 -   TiSpark は、 `YARN` 、 `Mesos` 、および`Standalone`などの任意の Spark モードで実行されます。
 
@@ -340,7 +340,7 @@ spark.tispark.jdbc.client_cert_password                        jdbc_clientstore_
 ```
 
 -   TiDB TLS を開く方法の詳細については、 [TiDB クライアントとサーバー間の TLS を有効にする](/enable-tls-between-clients-and-servers.md)を参照してください。
--   JAVA キー ストアの生成方法の詳細については、 [SSL を使用して安全に接続する](https://dev.mysql.com/doc/connector-j/5.1/en/connector-j-reference-using-ssl.html)を参照してください。
+-   JAVA キー ストアの生成方法の詳細については、 [SSL を使用して安全に接続する](https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-reference-using-ssl.html)を参照してください。
 
 ### Log4j 構成 {#log4j-configuration}
 

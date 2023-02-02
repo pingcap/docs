@@ -48,11 +48,12 @@
             -   [Follower Read](/develop/dev-guide-use-follower-read.md)
             -   [ステイル読み取り](/develop/dev-guide-use-stale-read.md)
         -   [HTAP クエリ](/develop/dev-guide-hybrid-oltp-and-olap-queries.md)
-    -   取引
+        -   [ファストスキャン](/develop/dev-guide-use-fastscan.md)
+    -   トランザクション
         -   [概要](/develop/dev-guide-transaction-overview.md)
         -   [楽観的および悲観的なトランザクション](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)
-        -   [取引制限](/develop/dev-guide-transaction-restraints.md)
-        -   [トランザクション エラーの処理](/develop/dev-guide-transaction-troubleshoot.md)
+        -   [トランザクション制限](/develop/dev-guide-transaction-restraints.md)
+        -   [トランザクションエラーの処理](/develop/dev-guide-transaction-troubleshoot.md)
     -   最適化
         -   [概要](/develop/dev-guide-optimize-sql-overview.md)
         -   [SQL性能チューニング](/develop/dev-guide-optimize-sql.md)
@@ -118,6 +119,7 @@
         -   [データ インポートの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)
         -   [データをインポートするための CSV 構成](/tidb-cloud/csv-config-for-import-data.md)
         -   [Amazon S3 からのデータ インポート中のアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)
+        -   [データ移行の事前チェック エラー、移行エラー、アラート](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md)
 -   データを調べる
     -   [Chat2Query (ベータ)](/tidb-cloud/explore-data-with-chat2query.md)
 -   ストリーム データ
@@ -150,6 +152,7 @@
             -   [集計](/explain-aggregation.md)
             -   [ビュー](/explain-views.md)
             -   [パーティション](/explain-partitions.md)
+            -   [インデックス マージ](/explain-index-merge.md)
         -   SQL 最適化プロセス
             -   [概要](/sql-optimization-concepts.md)
             -   ロジックの最適化
@@ -166,6 +169,7 @@
                 -   [概要](/sql-physical-optimization.md)
                 -   [インデックスの選択](/choose-index.md)
                 -   [統計](/statistics.md)
+                -   [拡張統計](/extended-statistics.md)
                 -   [インデックス問題の解決方法](/wrong-index-solution.md)
                 -   [クエリの最適化](/agg-distinct-optimization.md)
                 -   [コストモデル](/cost-model.md)
@@ -179,7 +183,7 @@
     -   [コプロセッサーキャッシュ](/coprocessor-cache.md)
     -   ガベージ コレクション (GC)
         -   [概要](/garbage-collection-overview.md)
-        -   [Configuration / コンフィグレーション](/garbage-collection-configuration.md)
+        -   [コンフィグレーション](/garbage-collection-configuration.md)
     -   [TiFlashパフォーマンスの調整](/tiflash/tune-tiflash-performance.md)
 -   安全
     -   ID アクセス制御
@@ -191,6 +195,7 @@
         -   [プライベート エンドポイント経由で接続する](/tidb-cloud/set-up-private-endpoint-connections.md)
         -   [VPC ピアリング経由で接続](/tidb-cloud/set-up-vpc-peering-connections.md)
         -   [Serverless Tierへの TLS 接続](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md)
+        -   [Dedicated Tierへの TLS 接続](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated-tier.md)
     -   データベースのアクセス制御
         -   [クラスタセキュリティ設定の構成](/tidb-cloud/configure-security-settings.md)
     -   監査管理
@@ -292,6 +297,8 @@
             -   [`EXECUTE`](/sql-statements/sql-statement-execute.md)
             -   [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)
             -   [`EXPLAIN`](/sql-statements/sql-statement-explain.md)
+            -   [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md)
+            -   [`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md)
             -   [`FLASHBACK TABLE`](/sql-statements/sql-statement-flashback-table.md)
             -   [`FLUSH PRIVILEGES`](/sql-statements/sql-statement-flush-privileges.md)
             -   [`FLUSH STATUS`](/sql-statements/sql-statement-flush-status.md)
@@ -300,11 +307,13 @@
             -   [`GRANT &#x3C;role>`](/sql-statements/sql-statement-grant-role.md)
             -   [`INSERT`](/sql-statements/sql-statement-insert.md)
             -   [`KILL [TIDB]`](/sql-statements/sql-statement-kill.md)
+            -   [`LOCK STATS`](/sql-statements/sql-statement-lock-stats.md)
             -   [`MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md)
             -   [`PREPARE`](/sql-statements/sql-statement-prepare.md)
             -   [`RECOVER TABLE`](/sql-statements/sql-statement-recover-table.md)
             -   [`RENAME INDEX`](/sql-statements/sql-statement-rename-index.md)
             -   [`RENAME TABLE`](/sql-statements/sql-statement-rename-table.md)
+            -   [`RENAME USER`](/sql-statements/sql-statement-rename-user.md)
             -   [`REPLACE`](/sql-statements/sql-statement-replace.md)
             -   [`REVOKE &#x3C;privileges>`](/sql-statements/sql-statement-revoke-privileges.md)
             -   [`REVOKE &#x3C;role>`](/sql-statements/sql-statement-revoke-role.md)
@@ -323,6 +332,7 @@
             -   [`SHOW CHARACTER SET`](/sql-statements/sql-statement-show-character-set.md)
             -   [`SHOW COLLATION`](/sql-statements/sql-statement-show-collation.md)
             -   [`SHOW [FULL] COLUMNS FROM`](/sql-statements/sql-statement-show-columns-from.md)
+            -   [`SHOW CREATE DATABASE`](/sql-statements/sql-statement-show-create-database.md)
             -   [`SHOW CREATE SEQUENCE`](/sql-statements/sql-statement-show-create-sequence.md)
             -   [`SHOW CREATE TABLE`](/sql-statements/sql-statement-show-create-table.md)
             -   [`SHOW CREATE USER`](/sql-statements/sql-statement-show-create-user.md)
@@ -344,6 +354,7 @@
             -   [`SHOW SCHEMAS`](/sql-statements/sql-statement-show-schemas.md)
             -   [`SHOW STATS_HEALTHY`](/sql-statements/sql-statement-show-stats-healthy.md)
             -   [`SHOW STATS_HISTOGRAMS`](/sql-statements/sql-statement-show-histograms.md)
+            -   [`SHOW STATS_LOCKED`](/sql-statements/sql-statement-show-stats-locked.md)
             -   [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md)
             -   [`SHOW STATUS`](/sql-statements/sql-statement-show-status.md)
             -   [`SHOW TABLE NEXT_ROW_ID`](/sql-statements/sql-statement-show-table-next-rowid.md)
@@ -358,6 +369,7 @@
             -   [`TABLE`](/sql-statements/sql-statement-table.md)
             -   [`TRACE`](/sql-statements/sql-statement-trace.md)
             -   [`TRUNCATE`](/sql-statements/sql-statement-truncate.md)
+            -   [`UNLOCK STATS`](/sql-statements/sql-statement-unlock-stats.md)
             -   [`UPDATE`](/sql-statements/sql-statement-update.md)
             -   [`USE`](/sql-statements/sql-statement-use.md)
             -   [`WITH`](/sql-statements/sql-statement-with.md)
@@ -412,6 +424,7 @@
                 -   [ステイル読み取りの使用シナリオ](/stale-read.md)
                 -   [`As OF TIMESTAMP`を使用してステイル読み取りを実行する](/as-of-timestamp.md)
                 -   [`tidb_read_staleness`を使用して古いステイル読み取りを実行する](/tidb-read-staleness.md)
+                -   [`tidb_external_ts`を使用して古いステイル読み取りを実行する](/tidb-external-ts.md)
             -   [`tidb_snapshot`システム変数を使用する](/read-historical-data.md)
         -   システム テーブル
             -   [`mysql`](/mysql-schema.md)
@@ -431,6 +444,8 @@
                 -   [`DEADLOCKS`](/information-schema/information-schema-deadlocks.md)
                 -   [`ENGINES`](/information-schema/information-schema-engines.md)
                 -   [`KEY_COLUMN_USAGE`](/information-schema/information-schema-key-column-usage.md)
+                -   [`MEMORY_USAGE`](/information-schema/information-schema-memory-usage.md)
+                -   [`MEMORY_USAGE_OPS_HISTORY`](/information-schema/information-schema-memory-usage-ops-history.md)
                 -   [`PARTITIONS`](/information-schema/information-schema-partitions.md)
                 -   [`PROCESSLIST`](/information-schema/information-schema-processlist.md)
                 -   [`REFERENTIAL_CONSTRAINTS`](/information-schema/information-schema-referential-constraints.md)
@@ -450,9 +465,12 @@
                 -   [`TIKV_REGION_PEERS`](/information-schema/information-schema-tikv-region-peers.md)
                 -   [`TIKV_REGION_STATUS`](/information-schema/information-schema-tikv-region-status.md)
                 -   [`TIKV_STORE_STATUS`](/information-schema/information-schema-tikv-store-status.md)
+                -   [`USER_ATTRIBUTES`](/information-schema/information-schema-user-attributes.md)
                 -   [`USER_PRIVILEGES`](/information-schema/information-schema-user-privileges.md)
+                -   [`VARIABLES_INFO`](/information-schema/information-schema-variables-info.md)
                 -   [`VIEWS`](/information-schema/information-schema-views.md)
         -   [メタデータ ロック](/metadata-lock.md)
+        -   [UUID を使用する](/best-practices/uuid.md)
     -   [システム変数](/system-variables.md)
     -   ストレージ エンジン
         -   TiKV

@@ -30,8 +30,8 @@ summary: Learn how to import sample data into TiDB Cloud via UI.
     次のパラメーターを入力します。
 
     -   **データ形式**: <strong>SQL ファイル</strong>を選択します。
-    -   **バケット URI** : サンプル データ URI を入力します`s3://tidbcloud-samples/data-ingestion/`
-    -   **ロール ARN** : `arn:aws:iam::385595570414:role/import-sample-access`を入力
+    -   **バケット URI** : サンプル データ URI を入力します`s3://tidbcloud-sample-data/data-ingestion/`
+    -   **ロール ARN** : `arn:aws:iam::801626783489:role/import-sample-access`を入力
 
     バケットのリージョンがクラスターと異なる場合は、クロス リージョンのコンプライアンスを確認します。 [**次へ**] をクリックします。
 
@@ -53,7 +53,7 @@ summary: Learn how to import sample data into TiDB Cloud via UI.
 
 4.  [**プレビュー**] ページでインポートするデータを確認し、[<strong>インポートの開始</strong>] をクリックします。
 
-データのインポート プロセスには 5 ～ 10 分かかります。データ インポートの進行状況が**Finished**と表示されたら、サンプル データとデータベース スキーマがTiDB Cloudのデータベースに正常にインポートされています。
+データのインポート プロセスには 5 ～ 10 分かかります。データ インポートの進行状況が**Finished**と表示されたら、サンプル データとデータベース スキーマがTiDB Cloudのデータベースに正常にインポートされました。
 
 クラスターがデータのインポート プロセスを完了すると、データベースにサンプル データが取得されます。
 

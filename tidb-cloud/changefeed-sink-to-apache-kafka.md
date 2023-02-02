@@ -55,7 +55,7 @@ TiDB Cloud changefeeds がデータを Apache Kafka にストリーミングし�
 
 ## ステップ 2. changefeed ターゲットを構成する {#step-2-configure-the-changefeed-target}
 
-1.  **Brokers Configuration / コンフィグレーション**の下で、Kafka ブローカーのエンドポイントを入力します。コンマ`,`を使用して、複数のエンドポイントを区切ることができます。
+1.  **Brokers コンフィグレーション**の下で、Kafka ブローカーのエンドポイントを入力します。コンマ`,`を使用して、複数のエンドポイントを区切ることができます。
 
 2.  Kafka のバージョンを選択します。それがわからない場合は、Kafka V2 を使用してください。
 
@@ -81,7 +81,7 @@ TiDB Cloud changefeeds がデータを Apache Kafka にストリーミングし�
 2.  [**データ形式]**領域で、目的の Kafka メッセージの形式を選択します。
 
     -   Avro は、豊富なデータ構造を備えたコンパクトで高速なバイナリ データ形式であり、さまざまなフロー システムで広く使用されています。詳細については、 [Avro データ形式](https://docs.pingcap.com/tidb/stable/ticdc-avro-protocol)を参照してください。
-    -   Canal-JSON はプレーンな JSON テキスト形式で、解析が容易です。詳細については、 [Canal-JSON データ形式](https://docs.pingcap.com/tidb/stable/ticdc-canal-json)を参照してください。
+    -   Canal-JSON はプレーンな JSON テキスト形式で、解析が簡単です。詳細については、 [Canal-JSON データ形式](https://docs.pingcap.com/tidb/stable/ticdc-canal-json)を参照してください。
 
 3.  Kafka メッセージ本文に TiDB 拡張フィールドを追加する場合は、 **TiDB 拡張**オプションを有効にします。
 
@@ -124,7 +124,7 @@ TiDB Cloud changefeeds がデータを Apache Kafka にストリーミングし�
 
         変更フィードでテーブルの Kafka メッセージを 1 つの Kafka パーティションに送信する場合は、この分散方法を選択します。行変更ログのテーブル名によって、変更ログが送信されるパーティションが決まります。この分散方法では、テーブルの順序が確保されますが、不均衡なパーティションが発生する可能性があります。
 
-7.  [**トピックのConfiguration / コンフィグレーション]**領域で、次の番号を構成します。 changefeed は、番号に従って Kafka トピックを自動的に作成します。
+7.  [**トピックのコンフィグレーション]**領域で、次の番号を構成します。 changefeed は、番号に従って Kafka トピックを自動的に作成します。
 
     -   **Replication Factor** : 各 Kafka メッセージが複製される Kafka サーバーの数を制御します。
     -   **パーティション番号**: トピックに存在するパーティションの数を制御します。

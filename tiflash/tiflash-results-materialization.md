@@ -11,7 +11,7 @@ summary: Learn how to save the query results of TiFlash in a transaction.
 
 このドキュメントでは、 TiFlashクエリの結果を指定された TiDB テーブルに`INSERT INTO SELECT`のトランザクションで保存する方法を紹介します。
 
-v6.5.0 以降、TiDB はTiFlashクエリ結果のテーブルへの保存、つまりTiFlashクエリ結果の実体化をサポートしています。 `INSERT INTO SELECT`ステートメントの実行中に、TiDB が`SELECT`サブクエリをTiFlashにプッシュ ダウンすると、 TiFlashクエリの結果を`INSERT INTO`句で指定された TiDB テーブルに保存できます。 v6.5.0 より前のバージョンの TiDB では、 TiFlashクエリの結果は読み取り専用であるため、 TiFlashクエリの結果を保存する場合は、アプリケーション レベルから取得し、別のトランザクションまたはプロセスで保存する必要があります。
+v6.5.0 以降、TiDB はTiFlashクエリ結果のテーブルへの保存、つまりTiFlashクエリ結果の実体化をサポートします。 `INSERT INTO SELECT`ステートメントの実行中に、TiDB が`SELECT`サブクエリをTiFlashにプッシュ ダウンすると、 TiFlashクエリの結果を`INSERT INTO`句で指定された TiDB テーブルに保存できます。 v6.5.0 より前のバージョンの TiDB では、 TiFlashクエリの結果は読み取り専用であるため、 TiFlashクエリの結果を保存する場合は、アプリケーション レベルから取得し、別のトランザクションまたはプロセスで保存する必要があります。
 
 > **ノート：**
 >
@@ -60,17 +60,17 @@ SELECT app_name, country FROM t1;
 
 <CustomContent platform="tidb">
 
--   `INSERT INTO SELECT`ステートメントの TiDB メモリ制限は、システム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)を使用して調整できます。 v6.5.0 以降では、 [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit)を使用してトランザクション メモリ サイズを制御することはお勧めしません。
+-   `INSERT INTO SELECT`ステートメントの TiDBメモリ制限は、システム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)を使用して調整できます。 v6.5.0 以降では、 [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit)を使用してトランザクションメモリサイズを制御することはお勧めしません。
 
-    詳細については、 [TiDB メモリ制御](/configure-memory-usage.md)を参照してください。
+    詳細については、 [TiDBメモリ制御](/configure-memory-usage.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
--   `INSERT INTO SELECT`ステートメントの TiDB メモリ制限は、システム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)を使用して調整できます。 v6.5.0 以降では、 [`txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit)を使用してトランザクション メモリ サイズを制御することはお勧めしません。
+-   `INSERT INTO SELECT`ステートメントの TiDBメモリ制限は、システム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)を使用して調整できます。 v6.5.0 以降では、 [`txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit)を使用してトランザクションメモリサイズを制御することはお勧めしません。
 
-    詳細については、 [TiDB メモリ制御](https://docs.pingcap.com/tidb/stable/configure-memory-usage)を参照してください。
+    詳細については、 [TiDBメモリ制御](https://docs.pingcap.com/tidb/stable/configure-memory-usage)を参照してください。
 
 </CustomContent>
 

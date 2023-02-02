@@ -35,7 +35,7 @@ ADMIN SHOW TELEMETRY;
 
 ### TiDB ダッシュボード {#tidb-dashboard}
 
-TiDB ダッシュボードでテレメトリ収集機能が有効になっている場合、TiDB ダッシュボード Web UI の使用情報が共有されます。
+TiDB ダッシュボードでテレメトリ収集機能が有効になっている場合、TiDB ダッシュボード Web UI の使用状況の詳細が共有されます。
 
 -   ランダムに生成されたテレメトリ ID。
 -   ユーザーがアクセスした TiDB ダッシュボード Web ページの名前などのユーザー操作情報。
@@ -45,7 +45,7 @@ PingCAP に共有される使用情報の全内容を表示するには、 [Chro
 
 ### TiUP {#tiup}
 
-TiUPでテレメトリ収集機能が有効になっている場合、 TiUPでのユーザー操作が共有されます。
+TiUPでテレメトリ収集機能が有効になっている場合、 TiUPの使用状況の詳細が共有されます (ただし、これらに限定されません)。
 
 -   ランダムに生成されたテレメトリ ID。
 -   実行が成功したかどうか、実行期間など、 TiUPコマンドの実行ステータス。
@@ -57,6 +57,20 @@ PingCAP に共有されている使用情報のすべての内容を表示する
 
 ```shell
 TIUP_CLUSTER_DEBUG=enable tiup cluster list
+```
+
+### ティスパーク {#tispark}
+
+TiSpark のテレメトリ収集機能が有効になっている場合、Spark モジュールは TiSpark の使用状況の詳細を共有します。
+
+-   ランダムに生成されたテレメトリ ID。
+-   読み取りエンジンやストリーミング読み取りが有効かどうかなど、TiSpark の一部の構成情報。
+-   マシンのハードウェア情報、OS 情報、TiSpark が配置されているノードのコンポーネントバージョン番号などのクラスタ展開情報。
+
+Spark ログで収集された TiSpark の使用情報を表示できます。 Spark ログ レベルを INFO 以下に設定できます。次に例を示します。
+
+```shell
+cat {spark.log} | grep Telemetry report | tail -n 1
 ```
 
 ## テレメトリを無効にする {#disable-telemetry}
@@ -79,7 +93,7 @@ enable-telemetry = false
 
 上記の設定ファイルを有効にするには、TiDB の起動時に`--config=tidb_config.toml`コマンドライン パラメータを指定します。
 
-詳細については、 [TiDBConfiguration / コンフィグレーションオプション](/command-line-flags-for-tidb-configuration.md#--config)と[TiDBConfiguration / コンフィグレーションファイル](/tidb-configuration-file.md#enable-telemetry-new-in-v402)を参照してください。
+詳細については、 [TiDBコンフィグレーションオプション](/command-line-flags-for-tidb-configuration.md#--config)と[TiDBコンフィグレーションファイル](/tidb-configuration-file.md#enable-telemetry-new-in-v402)を参照してください。
 
 </details>
 
@@ -164,7 +178,7 @@ enable-telemetry = false
 
 PD を有効にするには、起動時に`--config=pd_config.toml`コマンドライン パラメータを指定します。
 
-詳細については、 [PDConfiguration / コンフィグレーションフラグ](/command-line-flags-for-pd-configuration.md#--config)と[PDConfiguration / コンフィグレーションファイル](/pd-configuration-file.md#enable-telemetry)を参照してください。
+詳細については、 [PDコンフィグレーションフラグ](/command-line-flags-for-pd-configuration.md#--config)と[PDコンフィグレーションファイル](/pd-configuration-file.md#enable-telemetry)を参照してください。
 
 </details>
 

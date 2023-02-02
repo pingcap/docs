@@ -151,7 +151,7 @@ TiDB バージョン: 4.0.3
 
     -   TiCDC
 
-        -   場合によっては TiCDC でメモリ リークが発生する問題を修正[#704](https://github.com/pingcap/tiflow/pull/704)
+        -   場合によっては TiCDC でメモリリークが発生する問題を修正[#704](https://github.com/pingcap/tiflow/pull/704)
         -   引用符で囲まれていないテーブル名が原因で SQL 構文エラー[#676](https://github.com/pingcap/tiflow/pull/676)が発生する問題を修正します
         -   `p.stop`が[#693](https://github.com/pingcap/tiflow/pull/693)と呼ばれた後、プロセッサが完全に終了しないという問題を修正します。
 

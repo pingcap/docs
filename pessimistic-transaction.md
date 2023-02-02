@@ -3,7 +3,7 @@ title: TiDB Pessimistic Transaction Mode
 summary: Learn the pessimistic transaction mode in TiDB.
 ---
 
-# TiDB ペシミスティック トランザクション モード {#tidb-pessimistic-transaction-mode}
+# TiDB ペシミスティックトランザクションモード {#tidb-pessimistic-transaction-mode}
 
 TiDB の使用を従来のデータベースに近づけ、移行のコストを削減するために、v3.0 以降、TiDB は楽観的トランザクション モデルに加えて悲観的トランザクション モードをサポートします。このドキュメントでは、TiDB の悲観的トランザクション モードの機能について説明します。
 

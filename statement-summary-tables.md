@@ -91,7 +91,7 @@ select * from employee where id in (...) and salary between ? and ?;
 
 ## <code>statements_summary_evicted</code> {#code-statements-summary-evicted-code}
 
-`tidb_stmt_summary_max_stmt_count`変数は、 `statement_summary`テーブルがメモリに格納するステートメントの最大数を制御します。 `statement_summary`テーブルは LRU アルゴリズムを使用します。 SQL ステートメントの数が`tidb_stmt_summary_max_stmt_count`の値を超えると、最長の未使用レコードがテーブルから削除されます。各期間中に排除された SQL ステートメントの数は、 `statements_summary_evicted`テーブルに記録されます。
+変数`tidb_stmt_summary_max_stmt_count`は、テーブル`statement_summary`がメモリに格納するステートメントの最大数を制御します。 `statement_summary`テーブルは LRU アルゴリズムを使用します。 SQL ステートメントの数が`tidb_stmt_summary_max_stmt_count`の値を超えると、最長の未使用レコードがテーブルから削除されます。各期間中に排除された SQL ステートメントの数は、 `statements_summary_evicted`テーブルに記録されます。
 
 `statements_summary_evicted`テーブルは、SQL レコードが`statement_summary`テーブルから削除された場合にのみ更新されます。 `statements_summary_evicted`は、エビクションが発生した期間と、エビクトされた SQL ステートメントの数のみを記録します。
 
@@ -182,7 +182,7 @@ select * from information_schema.statements_summary_evicted;
 
 ステートメント要約テーブルには、次の制限があります。
 
-上記のステートメント要約テーブルのすべてのデータは、TiDBサーバーを再起動すると失われます。これは、ステートメント サマリー テーブルがすべてメモリ テーブルであり、データがストレージに永続化されるのではなく、メモリにキャッシュされるためです。
+上記のステートメント要約テーブルのすべてのデータは、TiDBサーバーを再起動すると失われます。これは、ステートメント サマリー テーブルがすべてメモリテーブルであり、データがストレージに永続化されるのではなく、メモリにキャッシュされるためです。
 
 ## トラブルシューティングの例 {#troubleshooting-examples}
 
@@ -284,8 +284,8 @@ TiDBサーバーに関連するフィールド:
 -   `MAX_PARSE_LATENCY` : パーサーの最大レイテンシー。
 -   `AVG_COMPILE_LATENCY` : コンパイラの平均レイテンシー。
 -   `MAX_COMPILE_LATENCY` : コンパイラの最大レイテンシー。
--   `AVG_MEM` : 使用された平均メモリ (バイト)。
--   `MAX_MEM` : 使用される最大メモリ (バイト)。
+-   `AVG_MEM` : 使用された平均メモリ(バイト)。
+-   `MAX_MEM` : 使用される最大メモリ(バイト)。
 -   `AVG_DISK` : 使用された平均ディスク容量 (バイト)。
 -   `MAX_DISK` : 使用されている最大ディスク容量 (バイト)。
 

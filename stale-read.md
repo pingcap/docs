@@ -35,8 +35,4 @@ TiDB は、次のように、ステートメント レベル、セッション �
 -   セッションレベル
     -   時間範囲の指定: セッションで、分離レベルに違反することなく、後続のクエリで時間範囲内で TiDB が可能な限り新しいデータを読み取る必要がある場合は、 `tidb_read_staleness`システム変数を設定して時間範囲を指定できます。詳しい使い方は[`tidb_read_staleness`](/tidb-read-staleness.md)を参照してください。
 
-<CustomContent platform="tidb">
-
 さらに、TiDB は、セッションまたはグローバル レベルで[`tidb_external_ts`](/system-variables.md#tidb_external_ts-new-in-v640)システム変数を設定することにより、正確な時点を指定する方法を提供します。詳しい使い方は[`tidb_external_ts`を使用して古いステイル読み取りを実行する](/tidb-external-ts.md)を参照してください。
-
-</CustomContent>

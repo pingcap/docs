@@ -52,7 +52,7 @@ TiDB バージョン: 6.1.2
     -   リージョン[#13553](https://github.com/tikv/tikv/issues/13553) @ [スペード・ア・タン](https://github.com/SpadeA-Tang)にまたがるバッチ スナップショットが原因で、スナップショット データが不完全になる可能性がある問題を修正します。
     -   フロー制御が有効で、 `level0_slowdown_trigger`が明示的に[#11424](https://github.com/tikv/tikv/issues/11424) @ [コナー1996](https://github.com/Connor1996)に設定されている場合の QPS ドロップの問題を修正します。
     -   TiKV が Web ID プロバイダーからエラーを取得し、デフォルト プロバイダー[#13122](https://github.com/tikv/tikv/issues/13122) @ [3ポインター](https://github.com/3pointer)にフェールバックすると、アクセス許可が拒否されたというエラーが発生する問題を修正します。
-    -   TiKV インスタンスが隔離されたネットワーク環境にある場合、数分間 TiKV サービスが利用できない問題を修正します[#12966](https://github.com/tikv/tikv/issues/12966) @ [コスベン](https://github.com/cosven)
+    -   TiKV インスタンスが隔離されたネットワーク環境にある場合、数分間 TiKV サービスが利用できない問題を修正します[#12966](https://github.com/tikv/tikv/issues/12966) @ [コスヴェン](https://github.com/cosven)
 
 -   PD
 

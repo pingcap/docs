@@ -22,7 +22,7 @@ TiDB は、 MySQL 5.7プロトコルおよびMySQL 5.7 5.7 の一般的な機能
 
 > **ノート：**
 >
-> このページでは、MySQL と TiDB の一般的な違いについて説明します。 [安全](/security-compatibility-with-mysql.md)と[ペシミスティック トランザクション モード](/pessimistic-transaction.md#difference-with-mysql-innodb)の互換性については、専用ページを参照してください。
+> このページでは、MySQL と TiDB の一般的な違いについて説明します。 [安全](/security-compatibility-with-mysql.md)と[ペシミスティックトランザクションモード](/pessimistic-transaction.md#difference-with-mysql-innodb)の互換性については、専用ページを参照してください。
 
 </CustomContent>
 
@@ -30,7 +30,7 @@ TiDB は、 MySQL 5.7プロトコルおよびMySQL 5.7 5.7 の一般的な機能
 
 > **ノート：**
 >
-> MySQL と TiDB のトランザクションの違いについては、 [ペシミスティック トランザクション モード](/pessimistic-transaction.md#difference-with-mysql-innodb)を参照してください。
+> MySQL と TiDB のトランザクションの違いについては、 [ペシミスティックトランザクションモード](/pessimistic-transaction.md#difference-with-mysql-innodb)を参照してください。
 
 </CustomContent>
 
@@ -124,7 +124,7 @@ TiDB Cloudでパフォーマンス メトリックを確認するには、 TiDB 
 
 </CustomContent>
 
-### クエリ実行計画 {#query-execution-plan}
+### クエリ実行プラン {#query-execution-plan}
 
 `EXPLAIN FOR`の Query Execution Plan ( `EXPLAIN` ) の出力形式、出力内容、権限設定は、MySQL と大きく異なります。
 

@@ -17,11 +17,11 @@ TiDB Cloud [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-
 
 1.  TiDB Cloudアカウントを持っていない場合は、 [ここ](https://tidbcloud.com/free-trial)をクリックしてアカウントにサインアップします。
 
-    Google または GitHub ユーザーの場合は、Google または GitHub アカウントでサインアップすることもできます。メールアドレスとパスワードは Google または GitHub によって管理され、 TiDB Cloudコンソールを使用して変更することはできません。
+    TiDB Cloudを使用してパスワードを管理できるように電子メールとパスワードでサインアップするか、TiDB TiDB Cloudへのシングル サインオン (SSO) 用に Google、GitHub、または Microsoft アカウントを選択できます。
 
 2.  [ログイン](https://tidbcloud.com/)をTiDB Cloudアカウントに追加します。
 
-    デフォルトでは[**クラスター**](https://tidbcloud.com/console/clusters)リスト ページが表示されます。
+    デフォルトでは[**クラスター**](https://tidbcloud.com/console/clusters)ページが表示されます。
 
 3.  新しいサインアップ ユーザーの場合、 TiDB CloudはデフォルトのServerless Tierクラスター`Cluster0`を自動的に作成します。
 
@@ -94,8 +94,8 @@ TiDB Cloudクラスターが作成されたら、 TiDB Cloud Playground に事�
 3.  インポート パラメータを入力します。
 
     -   **データ形式**： <strong>SQLファイル</strong>を選択
-    -   **バケット URI** : `s3://tidbcloud-samples/data-ingestion/`
-    -   **ロールARN** ： `arn:aws:iam::385595570414:role/import-sample-access`
+    -   **バケット URI** : `s3://tidbcloud-sample-data/data-ingestion/`
+    -   **ロールARN** ： `arn:aws:iam::801626783489:role/import-sample-access`
 
     バケットのリージョンがクラスターと異なる場合は、クロス リージョンのコンプライアンスを確認します。 [**次へ**] をクリックします。
 
@@ -103,7 +103,7 @@ TiDB Cloudクラスターが作成されたら、 TiDB Cloud Playground に事�
 
 5.  [**プレビュー**] ページでインポートするデータを確認し、[<strong>インポートの開始</strong>] をクリックします。
 
-データのインポート プロセスには数分かかります。データ インポートの進行状況が**Finished**と表示されたら、サンプル データとデータベース スキーマがTiDB Cloudのデータベースに正常にインポートされました。
+データのインポート プロセスには数分かかります。データ インポートの進行状況が**Finished**と表示されたら、サンプル データとデータベース スキーマがTiDB Cloudのデータベースに正常にインポートされています。
 
 ## 次は何ですか {#what-s-next}
 

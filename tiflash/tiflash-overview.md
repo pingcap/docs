@@ -25,6 +25,8 @@ TiFlashは、ClickHouse によって効率的に実装されたコプロセッ�
 
 TiFlashは、TiKV での書き込みをブロックしない低コストで、TiKV ノード内のデータのリアルタイム レプリケーションを実行します。一方、TiKV と同じ読み取り一貫性を提供し、最新のデータが読み取られるようにします。 TiFlash のリージョンレプリカは、 TiFlashのリージョン レプリカと論理的に同一であり、TiKV のLeaderレプリカと同時に分割およびマージされます。
 
+Linux AMD64アーキテクチャでTiFlashを展開するには、CPU が AVX2 命令セットをサポートしている必要があります。 `cat /proc/cpuinfo | grep avx2`を使用して、出力があることを確認します。このような CPU 命令セットを使用することで、TiFlash のベクトル化エンジンはパフォーマンスを向上させることができます。
+
 TiFlashは TiDB と TiSpark の両方と互換性があるため、これら 2 つのコンピューティング エンジンを自由に選択できます。
 
 ワークロードの分離を確実にするために、TiKV とは異なるノードにTiFlashを展開することをお勧めします。ビジネスの分離が必要ない場合は、 TiFlashと TiKV を同じノードに展開することもできます。
@@ -107,7 +109,7 @@ TiDB を使用して中規模の分析処理用のTiFlashレプリカを読み�
 -   [TiFlashのパフォーマンスを調整する](/tiflash/tune-tiflash-performance.md) .
 -   [TiFlash の構成](/tiflash/tiflash-configuration.md) .
 -   [TiFlashクラスターを監視する](/tiflash/monitor-tiflash.md) .
--   学ぶ[TiFlashアラート ルール](/tiflash/tiflash-alert-rules.md) 。
+-   学ぶ[TiFlashアラート ルール](/tiflash/tiflash-alert-rules.md) ．
 -   [TiFlashクラスターのトラブルシューティング](/tiflash/troubleshoot-tiflash.md) .
 -   [TiFlashでサポートされているプッシュダウン計算](/tiflash/tiflash-supported-pushdown-calculations.md)
 -   [TiFlashでのデータ検証](/tiflash/tiflash-data-validation.md)

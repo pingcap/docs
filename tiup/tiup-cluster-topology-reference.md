@@ -2,7 +2,7 @@
 title: Topology Configuration File for TiDB Deployment Using TiUP
 ---
 
-# TiUP を使用したTiUP展開用のトポロジConfiguration / コンフィグレーションファイル {#topology-configuration-file-for-tidb-deployment-using-tiup}
+# TiUP を使用したTiUP展開用のトポロジコンフィグレーションファイル {#topology-configuration-file-for-tidb-deployment-using-tiup}
 
 TiUP を使用してTiUPをデプロイまたはスケーリングするには、クラスター トポロジーを記述するトポロジー ファイル ( [サンプル](https://github.com/pingcap/tiup/blob/master/embed/examples/cluster/topology.example.yaml) ) を提供する必要があります。
 
@@ -13,7 +13,7 @@ TiUP を使用してTiUPをデプロイまたはスケーリングするには�
 TiUPを使用した TiDB 展開のトポロジ構成ファイルには、次のセクションが含まれる場合があります。
 
 -   [グローバル](#global) : クラスターのグローバル構成。一部の構成項目はデフォルト値を使用しており、インスタンスごとに個別に構成できます。
--   [監視対象](#monitored) : 監視サービス、つまり blackbox_exporter および`node_exporter`のConfiguration / コンフィグレーション。各マシンには、 `node_exporter`と`blackbox_exporter`が展開されています。
+-   [監視対象](#monitored) : 監視サービス、つまり blackbox_exporter および`node_exporter`のコンフィグレーション。各マシンには、 `node_exporter`と`blackbox_exporter`が展開されています。
 -   [サーバー構成](#server_configs) : コンポーネントのグローバル構成。各コンポーネントを個別に構成できます。インスタンスに同じ名前の構成アイテムがある場合、インスタンスの構成アイテムが有効になります。
 -   [pd_servers](#pd_servers) : PD インスタンスの構成。この構成は、PDコンポーネントがデプロイされるマシンを指定します。
 -   [tidb_servers](#tidb_servers) : TiDB インスタンスの構成。この構成は、TiDBコンポーネントがデプロイされるマシンを指定します。
@@ -72,7 +72,7 @@ TiUPを使用した TiDB 展開のトポロジ構成ファイルには、次の�
 
 -   `resource_control` : ランタイム リソース制御。このフィールドのすべての構成は、systemd のサービス ファイルに書き込まれます。デフォルトでは制限はありません。制御できるリソースは次のとおりです。
 
-    -   `memory_limit` : 最大ランタイム メモリを制限します。たとえば、「2G」は、最大 2 GB のメモリを使用できることを意味します。
+    -   `memory_limit` : 最大ランタイムメモリを制限します。たとえば、「2G」は、最大 2 GB のメモリを使用できることを意味します。
 
     -   `cpu_quota` : 実行時の最大 CPU 使用率を制限します。たとえば、「200%」です。
 

@@ -9,10 +9,10 @@ summary: Learn how to manage passwords and enable multi-factor authentication (M
 
 ## サインアップ {#sign-up}
 
-メールとパスワードを使用してTiDB Cloudを[サインアップ](https://tidbcloud.com/free-trial)にするか、TiDB TiDB Cloudへのシングル サインオン (SSO) 用に Google Workspace または GitHub アカウントを選択できます。
+電子メールとパスワードを使用してTiDB Cloudを[サインアップ](https://tidbcloud.com/free-trial)にするか、TiDB TiDB Cloudへのシングル サインオン (SSO) 用に Google、GitHub、または Microsoft アカウントを選択できます。
 
 -   電子メールとパスワードでTiDB Cloudにサインアップすると、このドキュメントに従ってパスワードを管理できます。
--   TiDB Cloudへの Google SSO または GitHub SSO を選択した場合、パスワードは Google または GitHub によって管理され、 TiDB Cloudコンソールを使用して変更することはできません。
+-   Google、GitHub、または Microsoft SSO to TiDB Cloudを選択した場合、パスワードは選択したプラットフォームによって管理され、 TiDB Cloudコンソールを使用してパスワードを変更することはできません。
 
 電子メールとパスワードを使用してTiDB Cloudアカウントにサインアップするには、次の手順を実行します。
 
@@ -82,7 +82,7 @@ TiDB Cloudは、登録ユーザーのデフォルトのパスワード ポリシ
 
 > **ノート：**
 >
-> このセクションは、電子メールとパスワードを使用して[サインアップ](https://tidbcloud.com/free-trial) TiDB Cloudを使用する場合にのみ適用されます。 Google SSO または GitHub SSO を使用してTiDB Cloudにサインアップすると、GitHub や Google Workspace などの ID 管理プラットフォームで MFA を有効にできます。
+> このセクションは、電子メールとパスワードを使用して[サインアップ](https://tidbcloud.com/free-trial) TiDB Cloudを使用する場合にのみ適用されます。 Google、GitHub、または Microsoft SSO を使用してTiDB Cloudにサインアップすると、選択した ID 管理プラットフォームで MFA を有効にできます。
 
 TiDB Cloudにログインした後、法規制に従って MFA を有効にすることができます。
 

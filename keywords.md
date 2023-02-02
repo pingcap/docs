@@ -110,7 +110,7 @@ Query OK, 0 rows affected (0.08 sec)
 -   BY (R)
 -   バイト
 
-<a id="C" class="letter" href="#C">C</a>
+<a id="C" class="letter" href="#C">ハ</a>
 
 -   キャッシュ
 -   キャンセル (R)
@@ -525,7 +525,7 @@ Query OK, 0 rows affected (0.08 sec)
 -   セパレーター
 -   順序
 -   シリアル
--   シリアライズ可能
+-   SERIALIZABLE
 -   セッション
 -   セット(R)
 -   セットヴァル

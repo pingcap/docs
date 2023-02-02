@@ -1,11 +1,18 @@
 ---
 title: TiDB Features
-summary: Learn about the basic features of TiDB.
+summary: Learn about the feature overview of TiDB.
+aliases: ['/tidb/v6.5/experimental-features','/tidb/stable/experimental-features']
 ---
 
 # TiDB の機能 {#tidb-features}
 
-このドキュメントでは、TiDB の各バージョンでサポートされている機能を一覧表示しています。実験的機能のサポートは、最終リリースの前に変更される可能性があることに注意してください。
+このドキュメントでは、TiDB の各バージョンでサポートされている機能を一覧表示しています。
+
+> **ノート：**
+>
+> -   Y: この機能は一般提供 (GA) されており、本番環境で使用できます。
+> -   N: この機能はサポートされていません。
+> -   Experimental: この機能はまだ GA ではないため、使用制限に注意する必要があります。Experimentalな機能は、予告なしに変更または削除される場合があります。構文と実装は、一般提供前に変更される可能性があります。問題が発生した場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告できます。
 
 ## データ型、関数、および演算子 {#data-types-functions-and-operators}
 
@@ -33,17 +40,20 @@ summary: Learn about the basic features of TiDB.
 
 ## 索引付けと制約 {#indexing-and-constraints}
 
-| 索引付けと制約                                                                         | 6.5 |      6.4     |      6.3     |      6.2     |      6.1     |      6.0     | 5.4          |      5.3     |      5.2     |      5.1     |      5.0     | 4.0 |
-| ------------------------------------------------------------------------------- | :-: | :----------: | :----------: | :----------: | :----------: | :----------: | ------------ | :----------: | :----------: | :----------: | :----------: | :-: |
-| [発現インデックス](/sql-statements/sql-statement-create-index.md#expression-index) [^2] |  Y  | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |     |
-| [カラム型ストレージ (TiFlash)](/tiflash/tiflash-overview.md)                             |  Y  |       Y      |       Y      |       Y      |       Y      |       Y      | Y            |       Y      |       Y      |       Y      |       Y      |  Y  |
-| [RocksDB エンジン](/storage-engine/rocksdb-overview.md)                             |  Y  |       Y      |       Y      |       Y      |       Y      |       Y      | Y            |       Y      |       Y      |       Y      |       Y      |  Y  |
-| [タイタンプラグイン](/storage-engine/titan-overview.md)                                  |  Y  |       Y      |       Y      |       Y      |       Y      |       Y      | Y            |       Y      |       Y      |       Y      |       Y      |  Y  |
-| [見えないインデックス](/sql-statements/sql-statement-add-index.md)                        |  Y  |       Y      |       Y      |       Y      |       Y      |       Y      | Y            |       Y      |       Y      |       Y      |       Y      |  N  |
-| [複合`PRIMARY KEY`](/constraints.md)                                              |  Y  |       Y      |       Y      |       Y      |       Y      |       Y      | Y            |       Y      |       Y      |       Y      |       Y      |  Y  |
-| [一意のインデックス](/constraints.md)                                                    |  Y  |       Y      |       Y      |       Y      |       Y      |       Y      | Y            |       Y      |       Y      |       Y      |       Y      |  Y  |
-| [整数`PRIMARY KEY`のクラスター化インデックス](/constraints.md)                                 |  Y  |       Y      |       Y      |       Y      |       Y      |       Y      | Y            |       Y      |       Y      |       Y      |       Y      |  Y  |
-| [複合キーまたは非整数キーのクラスター化インデックス](/constraints.md)                                    |  Y  |       Y      |       Y      |       Y      |       Y      |       Y      | Y            |       Y      |       Y      |       Y      |       Y      |  N  |
+| 索引付けと制約                                                                                     |      6.5     |      6.4     |      6.3     |      6.2     |      6.1     |      6.0     | 5.4          |      5.3     |      5.2     |      5.1     |      5.0     |      4.0     |
+| ------------------------------------------------------------------------------------------- | :----------: | :----------: | :----------: | :----------: | :----------: | :----------: | ------------ | :----------: | :----------: | :----------: | :----------: | :----------: |
+| [発現インデックス](/sql-statements/sql-statement-create-index.md#expression-index) [^2]             |       Y      | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |              |
+| [カラム型ストレージ (TiFlash)](/tiflash/tiflash-overview.md)                                         |       Y      |       Y      |       Y      |       Y      |       Y      |       Y      | Y            |       Y      |       Y      |       Y      |       Y      |       Y      |
+| [FastScan を使用して OLAP シナリオでクエリを高速化する](/develop/dev-guide-use-fastscan.md)                    | Experimental | Experimental | Experimental | Experimental |       N      |       N      | N            |       N      |       N      |       N      |       N      |       N      |
+| [RocksDB エンジン](/storage-engine/rocksdb-overview.md)                                         |       Y      |       Y      |       Y      |       Y      |       Y      |       Y      | Y            |       Y      |       Y      |       Y      |       Y      |       Y      |
+| [タイタンプラグイン](/storage-engine/titan-overview.md)                                              |       Y      |       Y      |       Y      |       Y      |       Y      |       Y      | Y            |       Y      |       Y      |       Y      |       Y      |       Y      |
+| [タイタン レベル マージ](/storage-engine/titan-configuration.md#level-merge-experimental)             | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
+| [バケットを使用してスキャンの同時実行性を向上させる](/tune-region-performance.md#use-bucket-to-increase-concurrency) | Experimental | Experimental | Experimental | Experimental | Experimental |       N      | N            |       N      |       N      |       N      |       N      |       N      |
+| [見えないインデックス](/sql-statements/sql-statement-add-index.md)                                    |       Y      |       Y      |       Y      |       Y      |       Y      |       Y      | Y            |       Y      |       Y      |       Y      |       Y      |       N      |
+| [複合`PRIMARY KEY`](/constraints.md)                                                          |       Y      |       Y      |       Y      |       Y      |       Y      |       Y      | Y            |       Y      |       Y      |       Y      |       Y      |       Y      |
+| [一意のインデックス](/constraints.md)                                                                |       Y      |       Y      |       Y      |       Y      |       Y      |       Y      | Y            |       Y      |       Y      |       Y      |       Y      |       Y      |
+| [整数`PRIMARY KEY`のクラスター化インデックス](/constraints.md)                                             |       Y      |       Y      |       Y      |       Y      |       Y      |       Y      | Y            |       Y      |       Y      |       Y      |       Y      |       Y      |
+| [複合キーまたは非整数キーのクラスター化インデックス](/constraints.md)                                                |       Y      |       Y      |       Y      |       Y      |       Y      |       Y      | Y            |       Y      |       Y      |       Y      |       Y      |       N      |
 
 ## SQL ステートメント {#sql-statements}
 
@@ -66,21 +76,25 @@ summary: Learn about the basic features of TiDB.
 | [`BATCH [ON COLUMN] LIMIT INTEGER DELETE`](/sql-statements/sql-statement-batch.md)                |       Y      |       Y      |       Y      |       Y      |       Y      |       N      |       N      |       N      |       N      |       N      |       N      |       N      |
 | [`BATCH [ON COLUMN] LIMIT INTEGER INSERT/UPDATE/REPLACE`](/sql-statements/sql-statement-batch.md) |       Y      |       N      |       N      |       N      |       N      |       N      |       N      |       N      |       N      |       N      |       N      |       N      |
 | [`ALTER TABLE ... COMPACT`](/sql-statements/sql-statement-alter-table-compact.md)                 |       Y      |       Y      |       Y      |       Y      | Experimental |       N      |       N      |       N      |       N      |       N      |       N      |       N      |
+| [テーブルロック](/tidb-configuration-file.md#enable-table-lock-new-in-v400)                              | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
+| [TiFlashクエリ結果の実体化](/tiflash/tiflash-results-materialization.md)                                   | Experimental |       N      |       N      |       N      |       N      |       N      |       N      |       N      |       N      |       N      |       N      |       N      |
 
 ## 高度な SQL 機能 {#advanced-sql-features}
 
-| 高度な SQL 機能                                             | 6.5 | 6.4 | 6.3 | 6.2 | 6.1 | 6.0 | 5.4          |      5.3     |      5.2     |      5.1     |      5.0     |      4.0     |
-| ------------------------------------------------------ | :-: | :-: | :-: | :-: | :-: | :-: | ------------ | :----------: | :----------: | :----------: | :----------: | :----------: |
-| [プリペアド ステートメント キャッシュ](/sql-prepared-plan-cache.md)     |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  | Y            |       Y      | Experimental | Experimental | Experimental | Experimental |
-| [SQL 計画管理 (SPM)](/sql-plan-management.md)              |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  | Y            |       Y      |       Y      |       Y      |       Y      |       Y      |
-| [コプロセッサー・キャッシュ](/coprocessor-cache.md)                 |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  | Y            |       Y      |       Y      |       Y      |       Y      | Experimental |
-| [ステイル読み取り](/stale-read.md)                             |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  | Y            |       Y      |       Y      |       Y      |       N      |       N      |
-| [Followerが読む](/follower-read.md)                       |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  | Y            |       Y      |       Y      |       Y      |       Y      |       Y      |
-| [履歴データの読み取り (tidb_snapshot)](/read-historical-data.md) |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  | Y            |       Y      |       Y      |       Y      |       Y      |       Y      |
-| [オプティマイザーのヒント](/optimizer-hints.md)                    |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  | Y            |       Y      |       Y      |       Y      |       Y      |       Y      |
-| [MPP 実行エンジン](/explain-mpp.md)                          |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  | Y            |       Y      |       Y      |       Y      |       Y      |       N      |
-| [インデックス マージ](/explain-index-merge.md)                  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  | Y            | Experimental | Experimental | Experimental | Experimental | Experimental |
-| [SQL の配置規則](/placement-rules-in-sql.md)                |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  | Experimental | Experimental |       N      |       N      |       N      |       N      |
+| 高度な SQL 機能                                                                                                   |      6.5     |      6.4     |      6.3     |      6.2     |      6.1     |      6.0     | 5.4          |      5.3     |      5.2     |      5.1     |      5.0     |      4.0     |
+| ------------------------------------------------------------------------------------------------------------ | :----------: | :----------: | :----------: | :----------: | :----------: | :----------: | ------------ | :----------: | :----------: | :----------: | :----------: | :----------: |
+| [プリペアド ステートメント キャッシュ](/sql-prepared-plan-cache.md)                                                           |       Y      |       Y      |       Y      |       Y      |       Y      |       Y      | Y            |       Y      | Experimental | Experimental | Experimental | Experimental |
+| [SQL 計画管理 (SPM)](/sql-plan-management.md)                                                                    |       Y      |       Y      |       Y      |       Y      |       Y      |       Y      | Y            |       Y      |       Y      |       Y      |       Y      |       Y      |
+| [過去の実行計画に従ってバインディングを作成する](/sql-plan-management.md#create-a-binding-according-to-a-historical-execution-plan) | Experimental |       N      |       N      |       N      |       N      |       N      | N            |       N      |       N      |       N      |       N      |       N      |
+| [コプロセッサー・キャッシュ](/coprocessor-cache.md)                                                                       |       Y      |       Y      |       Y      |       Y      |       Y      |       Y      | Y            |       Y      |       Y      |       Y      |       Y      | Experimental |
+| [ステイル読み取り](/stale-read.md)                                                                                   |       Y      |       Y      |       Y      |       Y      |       Y      |       Y      | Y            |       Y      |       Y      |       Y      |       N      |       N      |
+| [Followerが読む](/follower-read.md)                                                                             |       Y      |       Y      |       Y      |       Y      |       Y      |       Y      | Y            |       Y      |       Y      |       Y      |       Y      |       Y      |
+| [履歴データの読み取り (tidb_snapshot)](/read-historical-data.md)                                                       |       Y      |       Y      |       Y      |       Y      |       Y      |       Y      | Y            |       Y      |       Y      |       Y      |       Y      |       Y      |
+| [オプティマイザーのヒント](/optimizer-hints.md)                                                                          |       Y      |       Y      |       Y      |       Y      |       Y      |       Y      | Y            |       Y      |       Y      |       Y      |       Y      |       Y      |
+| [MPP 実行エンジン](/explain-mpp.md)                                                                                |       Y      |       Y      |       Y      |       Y      |       Y      |       Y      | Y            |       Y      |       Y      |       Y      |       Y      |       N      |
+| [インデックス マージ](/explain-index-merge.md)                                                                        |       Y      |       Y      |       Y      |       Y      |       Y      |       Y      | Y            | Experimental | Experimental | Experimental | Experimental | Experimental |
+| [SQL の配置規則](/placement-rules-in-sql.md)                                                                      |       Y      |       Y      |       Y      |       Y      |       Y      |       Y      | Experimental | Experimental |       N      |       N      |       N      |       N      |
+| [カスケード プランナー](/system-variables.md#tidb_enable_cascades_planner)                                             | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
 
 ## データ定義言語 (DDL) {#data-definition-language-ddl}
 
@@ -129,15 +143,19 @@ summary: Learn about the basic features of TiDB.
 
 ## 統計 {#statistics}
 
-| 統計                                                    |      6.5     |      6.4     |      6.3     |      6.2     |      6.1     |      6.0     | 5.4          |      5.3     |      5.2     |      5.1     |      5.0     |      4.0     |
-| ----------------------------------------------------- | :----------: | :----------: | :----------: | :----------: | :----------: | :----------: | ------------ | :----------: | :----------: | :----------: | :----------: | :----------: |
-| [CMSketch](/statistics.md)                            |   デフォルトで無効   |   デフォルトで無効   |   デフォルトで無効   |   デフォルトで無効   |   デフォルトで無効   |   デフォルトで無効   | デフォルトで無効     |   デフォルトで無効   |       Y      |       Y      |       Y      |       Y      |
-| [ヒストグラム](/statistics.md)                              |       Y      |       Y      |       Y      |       Y      |       Y      |       Y      | Y            |       Y      |       Y      |       Y      |       Y      |       Y      |
-| [拡張統計](/extended-statistics.md)                       | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |       N      |
-| 統計フィードバック                                             |       N      |       N      |       N      |       N      |      非推奨     |      非推奨     | 非推奨          | Experimental | Experimental | Experimental | Experimental | Experimental |
-| [統計を自動的に更新する](/statistics.md#automatic-update)        |       Y      |       Y      |       Y      |       Y      |       Y      |       Y      | Y            |       Y      |       Y      |       Y      |       Y      |       Y      |
-| [高速分析](/system-variables.md#tidb_enable_fast_analyze) | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
-| [動的剪定](/partitioned-table.md#dynamic-pruning-mode)    |       Y      |       Y      |       Y      |       Y      |       Y      | Experimental | Experimental | Experimental | Experimental | Experimental |       N      |       N      |
+| 統計                                                                                           |      6.5     |      6.4     |      6.3     |      6.2     |      6.1     |      6.0     | 5.4          |      5.3     |      5.2     |      5.1     |      5.0     |      4.0     |
+| -------------------------------------------------------------------------------------------- | :----------: | :----------: | :----------: | :----------: | :----------: | :----------: | ------------ | :----------: | :----------: | :----------: | :----------: | :----------: |
+| [CMSketch](/statistics.md)                                                                   |   デフォルトで無効   |   デフォルトで無効   |   デフォルトで無効   |   デフォルトで無効   |   デフォルトで無効   |   デフォルトで無効   | デフォルトで無効     |   デフォルトで無効   |       Y      |       Y      |       Y      |       Y      |
+| [ヒストグラム](/statistics.md)                                                                     |       Y      |       Y      |       Y      |       Y      |       Y      |       Y      | Y            |       Y      |       Y      |       Y      |       Y      |       Y      |
+| [拡張統計](/extended-statistics.md)                                                              | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |       N      |
+| 統計フィードバック                                                                                    |       N      |       N      |       N      |       N      |      非推奨     |      非推奨     | 非推奨          | Experimental | Experimental | Experimental | Experimental | Experimental |
+| [統計を自動的に更新する](/statistics.md#automatic-update)                                               |       Y      |       Y      |       Y      |       Y      |       Y      |       Y      | Y            |       Y      |       Y      |       Y      |       Y      |       Y      |
+| [高速分析](/system-variables.md#tidb_enable_fast_analyze)                                        | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
+| [動的剪定](/partitioned-table.md#dynamic-pruning-mode)                                           |       Y      |       Y      |       Y      |       Y      |       Y      | Experimental | Experimental | Experimental | Experimental | Experimental |       N      |       N      |
+| [`PREDICATE COLUMNS`の統計を収集する](/statistics.md#collect-statistics-on-some-columns)             | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |       N      |       N      |       N      |       N      |       N      |
+| [統計を収集するためのメモリクォータを制御する](/statistics.md#the-memory-quota-for-collecting-statistics)          | Experimental | Experimental | Experimental | Experimental | Experimental |       N      | N            |       N      |       N      |       N      |       N      |       N      |
+| [統計をすばやく作成するために、約 10000 行のデータをランダムにサンプリングします](/system-variables.md#tidb_enable_fast_analyze) | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
+| [ロック統計](/statistics.md#lock-statistics)                                                      | Experimental |       N      |       N      |       N      |       N      |       N      | N            |       N      |       N      |       N      |       N      |       N      |
 
 ## 安全 {#security}
 
@@ -179,6 +197,7 @@ summary: Learn about the basic features of TiDB.
 | [TiDB ダッシュボードTop SQL](/dashboard/top-sql.md)                                                                  |       Y      |       Y      |       Y      |       Y      |       Y      |       Y      | Experimental |       N      |       N      |       N      |       N      |       N      |
 | [TiDB ダッシュボード SQL 診断](/information-schema/information-schema-sql-diagnostics.md)                              |       Y      |       Y      | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
 | [TiDB ダッシュボードクラスタ診断](/dashboard/dashboard-diagnostics-access.md)                                              |       Y      |       Y      | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
+| [TiKV-FastTune ダッシュボード](/grafana-tikv-dashboard.md#tikv-fasttune-dashboard)                                   | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
 | [情報スキーマ](/information-schema/information-schema.md)                                                           |       Y      |       Y      |       Y      |       Y      |       Y      |       Y      | Y            |       Y      |       Y      |       Y      |       Y      |       Y      |
 | [指標スキーマ](/metrics-schema.md)                                                                                  |       Y      |       Y      |       Y      |       Y      |       Y      |       Y      | Y            |       Y      |       Y      |       Y      |       Y      |       Y      |
 | [ステートメント要約表](/statement-summary-tables.md)                                                                    |       Y      |       Y      |       Y      |       Y      |       Y      |       Y      | Y            |       Y      |       Y      |       Y      |       Y      |       Y      |
@@ -192,9 +211,12 @@ summary: Learn about the basic features of TiDB.
 | [`SET CONFIG`](/dynamic-config.md)                                                                            |       Y      |       Y      |       Y      |       Y      |       Y      | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
 | [DM WebUI](/dm/dm-webui-guide.md)                                                                             | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | N            |       N      |       N      |       N      |       N      |       N      |
 | [フォアグラウンド クォータ リミッター](/tikv-configuration-file.md#foreground-quota-limiter)                                   |       Y      |       Y      |       Y      |       Y      | Experimental | Experimental | N            |       N      |       N      |       N      |       N      |       N      |
+| [バックグラウンド クォータ リミッター](/tikv-configuration-file.md#background-quota-limiter)                                   | Experimental | Experimental | Experimental | Experimental |       N      |       N      | N            |       N      |       N      |       N      |       N      |       N      |
 | [EBS ボリュームのスナップショットのバックアップと復元](https://docs.pingcap.com/tidb-in-kubernetes/v1.4/backup-to-aws-s3-by-snapshot) |       Y      |       Y      |       N      |       N      |       N      |       N      | N            |       N      |       N      |       N      |       N      |       N      |
 | [PITR](/br/backup-and-restore-overview.md)                                                                    |       Y      |       Y      |       Y      |       Y      |       N      |       N      | N            |       N      |       N      |       N      |       N      |       N      |
 | [グローバルメモリ制御](/configure-memory-usage.md#configure-the-memory-usage-threshold-of-a-tidb-server-instance)       |       Y      | Experimental |       N      |       N      |       N      |       N      | N            |       N      |       N      |       N      |       N      |       N      |
+| [クラスタ間の RawKV レプリケーション](/tikv-configuration-file.md#api-version-new-in-v610)                                  | Experimental | Experimental | Experimental | Experimental |       N      |       N      | N            |       N      |       N      |       N      |       N      |       N      |
+| [グリーンGC](/system-variables.md#tidb_gc_scan_lock_mode-new-in-v50)                                              | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |       N      |
 
 [^1]: TiDB は、latin1 を utf8 のサブセットとして誤って扱います。詳細については、 [TiDB #18955](https://github.com/pingcap/tidb/issues/18955)を参照してください。
 

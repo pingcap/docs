@@ -3,7 +3,7 @@ title: Two Data Centers in One City Deployment
 summary: Learn the deployment solution of two data centers in one city.
 ---
 
-# 1 つの都市に展開された 2 つのデータ センター {#two-data-centers-in-one-city-deployment}
+# 1 つの地域に展開された 2 つのデータ センター {#two-data-centers-in-one-city-deployment}
 
 このドキュメントでは、アーキテクチャ、構成、この展開モードを有効にする方法、およびこのモードでレプリカを使用する方法など、1 つの都市にある 2 つのデータ センター (DC) の展開モードを紹介します。
 
@@ -29,7 +29,7 @@ summary: Learn the deployment solution of two data centers in one city.
 -   **async** : 非同期レプリケーション モード。このモードでは、DR データ センターはプライマリ データ センターと完全には同期されません。 Raftアルゴリズムは多数決プロトコルに従ってログを複製します。
 -   **sync-recover** : 同期回復モード。このモードでは、DR データ センターはプライマリ データ センターと完全には同期されません。 Raftは徐々にラベル複製モードに切り替え、ラベル情報を PD に報告します。
 
-## Configuration / コンフィグレーション {#configuration}
+## コンフィグレーション {#configuration}
 
 ### 例 {#example}
 

@@ -18,7 +18,7 @@ summary: Learn the overview page of TiDB Dashboard.
 
 TiDB ダッシュボードにログインすると、デフォルトで概要ページが表示されます。または、左側のナビゲーション メニューで [**概要**] をクリックしてこのページに入ることができます。
 
-![Enter overview page](/media/dashboard/dashboard-overview-access.png)
+![Enter overview page](/media/dashboard/dashboard-overview-access-v650.png)
 
 ## QPS {#qps}
 
@@ -72,7 +72,7 @@ TiDB ダッシュボードにログインすると、デフォルトで概要ペ
 
 ![Instances](/media/dashboard/dashboard-overview-instances.png)
 
-上の画像のステータスは、次のように説明されています。
+前の図のステータスは、次のように説明されています。
 
 -   Up: インスタンスは正常に動作しています (オフライン ストレージ インスタンスを含む)。
 -   Down: ネットワークの切断やプロセスのクラッシュなど、インスタンスが異常に動作しています。

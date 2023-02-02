@@ -3,7 +3,7 @@ title: Configuration Options
 summary: Learn the configuration options in TiDB.
 ---
 
-# Configuration / コンフィグレーションオプション {#configuration-options}
+# コンフィグレーションオプション {#configuration-options}
 
 TiDB クラスターを起動すると、コマンドライン オプションまたは環境変数を使用して構成できます。このドキュメントでは、TiDB のコマンド オプションを紹介します。デフォルトの TiDB ポートは、クライアント リクエスト用に`4000` 、ステータス レポート用に`10080`です。
 
@@ -17,7 +17,7 @@ TiDB クラスターを起動すると、コマンドライン オプション�
 
 -   構成ファイル
 -   デフォルト: `""`
--   構成ファイルを指定した場合、TiDB は構成ファイルを読み取ります。対応する構成がコマンド ライン オプションにも存在する場合、TiDB はコマンド ライン オプションの構成を使用して、構成ファイル内の構成を上書きします。詳細な構成情報については、 [TiDBConfiguration / コンフィグレーションファイルの説明](/tidb-configuration-file.md)を参照してください。
+-   構成ファイルを指定した場合、TiDB は構成ファイルを読み取ります。対応する構成がコマンド ライン オプションにも存在する場合、TiDB はコマンド ライン オプションの構成を使用して、構成ファイル内の構成を上書きします。詳細な構成情報については、 [TiDBコンフィグレーションファイルの説明](/tidb-configuration-file.md)を参照してください。
 
 ## <code>--config-check</code> {#code-config-check-code}
 

@@ -15,7 +15,7 @@ Javaアプリケーションで TiDB データベースと対話する一般的�
 -   JDBC API および JDBC ドライバー: Javaアプリケーションは通常、標準[JDBC (Javaデータベース接続)](https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/) API を使用してデータベースにアクセスします。 TiDB に接続するには、JDBC API を介して MySQL プロトコルを実装する JDBC ドライバーを使用できます。このような MySQL 用の一般的な JDBC ドライバーには、 [MySQL コネクタ/J](https://github.com/mysql/mysql-connector-j)および[MariaDB コネクタ/J](https://mariadb.com/kb/en/library/about-mariadb-connector-j/#about-mariadb-connectorj)が含まれます。
 -   データベース接続プール: 要求されるたびに接続を作成するオーバーヘッドを削減するために、アプリケーションは通常、接続プールを使用して接続をキャッシュし、再利用します。 JDBC [情報元](https://docs.oracle.com/javase/8/docs/api/javax/sql/DataSource.html)は接続プール API を定義します。必要に応じて、さまざまなオープンソース接続プールの実装から選択できます。
 -   データ アクセス フレームワーク: 通常、アプリケーションは[マイバティス](https://mybatis.org/mybatis-3/index.html)や[休止状態](https://hibernate.org/)などのデータ アクセス フレームワークを使用して、データベース アクセス操作をさらに簡素化し、管理します。
--   アプリケーションの実装: アプリケーション ロジックは、どのコマンドをいつデータベースに送信するかを制御します。一部のアプリケーションは、 [春の取引](https://docs.spring.io/spring/docs/4.2.x/spring-framework-reference/html/transaction.html)の側面を使用して、トランザクションの開始およびコミット ロジックを管理します。
+-   アプリケーションの実装: アプリケーション ロジックは、どのコマンドをいつデータベースに送信するかを制御します。一部のアプリケーションは、 [春のトランザクション](https://docs.spring.io/spring/docs/4.2.x/spring-framework-reference/html/transaction.html)の側面を使用して、トランザクションの開始およびコミット ロジックを管理します。
 
 ![Java application components](/media/best-practices/java-practice-1.png)
 
@@ -24,7 +24,7 @@ Javaアプリケーションで TiDB データベースと対話する一般的�
 -   JDBC API を介して MySQL プロトコルを実装し、TiDB と対話します。
 -   接続プールから永続的な接続を取得します。
 -   MyBatis などのデータ アクセス フレームワークを使用して、SQL ステートメントを生成および実行します。
--   Spring Transaction を使用して、トランザクションを自動的に開始または停止します。
+-   Spring トランザクションを使用して、トランザクションを自動的に開始または停止します。
 
 このドキュメントの残りの部分では、上記のコンポーネントを使用してJavaアプリケーションを開発する際の問題とその解決策について説明します。
 
@@ -59,11 +59,11 @@ OLTP (オンライン トランザクション処理) シナリオの場合、�
 
 #### <code>StreamingResult</code>を使用して実行結果を取得する {#use-code-streamingresult-code-to-get-the-execution-result}
 
-ほとんどのシナリオでは、実行効率を向上させるために、JDBC はクエリ結果を事前に取得し、デフォルトでクライアント メモリに保存します。しかし、クエリが非常に大きな結果セットを返す場合、クライアントはデータベースサーバーに一度に返されるレコードの数を減らすことを要求し、クライアントのメモリの準備が整い、次のバッチを要求するまで待ちます。
+ほとんどのシナリオでは、実行効率を向上させるために、JDBC はクエリ結果を事前に取得し、デフォルトでクライアントメモリに保存します。しかし、クエリが非常に大きな結果セットを返す場合、クライアントはデータベースサーバーに一度に返されるレコードの数を減らすことを要求し、クライアントのメモリの準備が整い、次のバッチを要求するまで待ちます。
 
 通常、JDBC には 2 種類の処理方法があります。
 
--   [`FetchSize`を<code>Integer.MIN_VALUE</code>に設定します](https://dev.mysql.com/doc/connector-j/5.1/en/connector-j-reference-implementation-notes.html#ResultSet)を指定すると、クライアントはキャッシュされません。クライアントは`StreamingResult`を介してネットワーク接続から実行結果を読み取ります。
+-   [`FetchSize`を<code>Integer.MIN_VALUE</code>に設定します](https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-reference-implementation-notes.html#ResultSet)を指定すると、クライアントはキャッシュされません。クライアントは`StreamingResult`を介してネットワーク接続から実行結果を読み取ります。
 
     クライアントがストリーミング読み取りメソッドを使用する場合、ステートメントを使用してクエリを作成し続ける前に、読み取りを終了するか、 `resultset`を閉じる必要があります。それ以外の場合は、エラー`No statements may be issued when any streaming result sets are open and in use on a given connection. Ensure that you have called .close() on any active streaming result sets before attempting more queries.`が返されます。
 
@@ -75,7 +75,7 @@ TiDB は両方の方法をサポートしていますが、最初の方法を使
 
 ### MySQL JDBC パラメータ {#mysql-jdbc-parameters}
 
-JDBC は通常、JDBC URL パラメータの形式で実装関連の構成を提供します。このセクションでは[MySQL Connector/J のパラメータ設定](https://dev.mysql.com/doc/connector-j/5.1/en/connector-j-reference-configuration-properties.html)を紹介します (MariaDB を使用する場合は[MariaDB のパラメーター構成](https://mariadb.com/kb/en/library/about-mariadb-connector-j/#optional-url-parameters)を参照してください)。このドキュメントではすべての構成項目を取り上げることはできないため、主にパフォーマンスに影響を与える可能性があるいくつかのパラメーターに焦点を当てています。
+JDBC は通常、JDBC URL パラメータの形式で実装関連の構成を提供します。このセクションでは[MySQL Connector/J のパラメータ設定](https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-reference-configuration-properties.html)を紹介します (MariaDB を使用する場合は[MariaDB のパラメーター構成](https://mariadb.com/kb/en/library/about-mariadb-connector-j/#optional-url-parameters)を参照してください)。このドキュメントではすべての構成項目を取り上げることはできないため、主にパフォーマンスに影響を与える可能性があるいくつかのパラメーターに焦点を当てています。
 
 #### 準備関連パラメータ {#prepare-related-parameters}
 
@@ -195,7 +195,7 @@ update t set a = 10 where id = 1; update t set a = 11 where id = 2; update t set
 
 監視を通じて、アプリケーションが TiDB クラスターに対して`INSERT`の操作しか実行しないにもかかわらず、冗長な`SELECT`のステートメントが多数あることに気付く場合があります。通常、これは、JDBC が`select @@session.transaction_read_only`などの設定をクエリするためにいくつかの SQL ステートメントを送信するために発生します。これらの SQL ステートメントは TiDB には役に立たないため、余分なオーバーヘッドを避けるために`useConfigs=maxPerformance`を構成することをお勧めします。
 
-`useConfigs=maxPerformance`には、構成のグループが含まれます。 MySQL JDBC 8.0 と MySQL JDBC 5.1 の詳細な構成を取得するには、それぞれ[mysql-connector-j 8.0](https://github.com/mysql/mysql-connector-j/blob/release/8.0/src/main/resources/com/mysql/cj/configurations/maxPerformance.properties)と[mysql-connector-j 5.1](https://github.com/mysql/mysql-connector-j/blob/release/5.1/src/com/mysql/jdbc/configs/maxPerformance.properties)を参照してください。
+`useConfigs=maxPerformance`には、構成のグループが含まれます。 MySQL Connector/J 8.0 および MySQL Connector/J 5.1 の詳細な構成を取得するには、それぞれ[mysql-connector-j 8.0](https://github.com/mysql/mysql-connector-j/blob/release/8.0/src/main/resources/com/mysql/cj/configurations/maxPerformance.properties)および[mysql-connector-j 5.1](https://github.com/mysql/mysql-connector-j/blob/release/5.1/src/com/mysql/jdbc/configs/maxPerformance.properties)を参照してください。
 
 構成後、モニタリングを確認して、 `SELECT`ステートメントの数が減少していることを確認できます。
 
@@ -315,9 +315,9 @@ Cursor<Post> queryAllPost();
 
 通常、デフォルト値の`ExecutorType`は`Simple`です。 `openSession`を呼び出すときに`ExecutorType`を変更する必要があります。バッチ実行の場合、トランザクションで`UPDATE` ～ `INSERT`個のステートメントがかなり高速に実行されることに気付くかもしれませんが、データの読み取り時またはトランザクションのコミット時は遅くなります。これは実際には正常な動作であるため、遅い SQL クエリのトラブルシューティングを行う際には、この点に注意する必要があります。
 
-## 春の取引 {#spring-transaction}
+## 春のトランザクション {#spring-transaction}
 
-現実の世界では、アプリケーションは[春の取引](https://docs.spring.io/spring/docs/4.2.x/spring-framework-reference/html/transaction.html)および AOP アスペクトを使用してトランザクションを開始および停止する場合があります。
+現実の世界では、アプリケーションは[春のトランザクション](https://docs.spring.io/spring/docs/4.2.x/spring-framework-reference/html/transaction.html)および AOP アスペクトを使用してトランザクションを開始および停止する場合があります。
 
 メソッド定義に`@Transactional`アノテーションを追加することで、AOP はメソッドが呼び出される前にトランザクションを開始し、メソッドが結果を返す前にトランザクションをコミットします。アプリケーションに同様のニーズがある場合は、コード内に`@Transactional`を見つけて、トランザクションがいつ開始および終了されるかを判断できます。
 
@@ -346,7 +346,7 @@ jstack を複数回使用することで、スタックした問題 (たとえ�
 
 #### jmap &amp; マット {#jmap-x26-mat}
 
-Go の pprof/heap とは異なり、 [jmap](https://docs.oracle.com/javase/7/docs/technotes/tools/share/jmap.html)プロセス全体のメモリ スナップショットをダンプし (Go では、ディストリビューターのサンプリング)、スナップショットを別のツールで分析できます[マット](https://www.eclipse.org/mat/) 。
+Go の pprof/heap とは異なり、 [jmap](https://docs.oracle.com/javase/7/docs/technotes/tools/share/jmap.html)プロセス全体のメモリスナップショットをダンプし (Go では、ディストリビューターのサンプリング)、スナップショットを別のツールで分析できます[マット](https://www.eclipse.org/mat/) 。
 
 マットを介して、プロセス内のすべてのオブジェクトの関連情報と属性を確認でき、スレッドの実行ステータスも観察できます。たとえば、mat を使用して、現在のアプリケーションに存在する MySQL 接続オブジェクトの数、および各接続オブジェクトのアドレスとステータス情報を確認できます。
 

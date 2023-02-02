@@ -35,7 +35,7 @@ TiDB Cloudは、次のリソースとデータ ソースをサポートしてい
     -   `tidbcloud_backup` (更新はサポートされていません)
     -   `tidbcloud_restore` (更新と削除はサポートされていません)
 
--   データ ソース
+-   データソース
 
     -   `tidbcloud_projects`
     -   `tidbcloud_cluster_specs`

@@ -95,7 +95,7 @@ TiDB アンシブル バージョン: 3.0.0-rc.3
     -   ベクトル計算で`BitAnd` / `BitOr` / `BitXor`式をサポート[#4724](https://github.com/tikv/tikv/pull/4724)
     -   ベクトル計算[#4808](https://github.com/tikv/tikv/pull/4808)で`UnaryNot`式をサポート
 
--   取引
+-   トランザクション
     -   悲観的なトランザクションで非悲観的的なロック競合が原因でエラーが発生する問題を修正[#4801](https://github.com/tikv/tikv/pull/4801) 、 [#4883](https://github.com/tikv/tikv/pull/4883)
     -   悲観的なトランザクションを有効にした後、楽観的トランザクションの不要な計算を減らしてパフォーマンスを向上させます[#4813](https://github.com/tikv/tikv/pull/4813)
     -   単一ステートメントのロールバックの機能を追加して、デッドロック状況でトランザクション全体がロールバック操作を必要としないようにします[#4848](https://github.com/tikv/tikv/pull/4848)

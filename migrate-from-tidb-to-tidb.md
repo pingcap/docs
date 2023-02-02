@@ -180,7 +180,7 @@ summary: Learn how to migrate data from one TiDB cluster to another TiDB cluster
     sync_diff_inspector -C ./config.yaml
     ```
 
-    sync-diff-inspector の構成方法の詳細については、 [Configuration / コンフィグレーションファイルの説明](/sync-diff-inspector/sync-diff-inspector-overview.md#configuration-file-description)を参照してください。このドキュメントでは、構成は次のとおりです。
+    sync-diff-inspector の構成方法の詳細については、 [コンフィグレーションファイルの説明](/sync-diff-inspector/sync-diff-inspector-overview.md#configuration-file-description)を参照してください。このドキュメントでは、構成は次のとおりです。
 
     ```shell
     # Diff Configuration.

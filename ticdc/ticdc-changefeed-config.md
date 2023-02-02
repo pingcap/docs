@@ -3,7 +3,7 @@ title: CLI and Configuration Parameters of TiCDC Changefeeds
 summary: Learn the definitions of CLI and configuration parameters of TiCDC changefeeds.
 ---
 
-# TiCDC Changefeeds の CLI およびConfiguration / コンフィグレーションパラメーター {#cli-and-configuration-parameters-of-ticdc-changefeeds}
+# TiCDC Changefeeds の CLI およびコンフィグレーションパラメーター {#cli-and-configuration-parameters-of-ticdc-changefeeds}
 
 ## Changefeed CLI パラメータ {#changefeed-cli-parameters}
 

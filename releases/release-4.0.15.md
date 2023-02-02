@@ -139,7 +139,7 @@ TiDB バージョン: 4.0.15
         -   TiCDC がキャプチャするリージョンが多すぎる場合に発生する OOM を回避するために、 [#2202](https://github.com/pingcap/tiflow/issues/2202)ウィンドウ サイズを小さくします。
         -   TiCDC がキャプチャするリージョンが多すぎる場合に発生する OOM の問題を修正します[#2673](https://github.com/pingcap/tiflow/issues/2673)
         -   `mysql.TypeString, mysql.TypeVarString, mysql.TypeVarchar`などのデータ型を JSON にエンコードする際にプロセスpanicが発生する問題を修正[#2758](https://github.com/pingcap/tiflow/issues/2758)
-        -   新しい変更フィード[#2389](https://github.com/pingcap/tiflow/issues/2389)を作成するときに発生する可能性があるメモリ リークの問題を修正します。
+        -   新しい変更フィード[#2389](https://github.com/pingcap/tiflow/issues/2389)を作成するときに発生する可能性があるメモリリークの問題を修正します。
         -   スキーマ変更[#2603](https://github.com/pingcap/tiflow/issues/2603)の終了 TS で変更フィードが開始されると、DDL 処理が失敗するバグを修正します。
         -   DDL ステートメントの実行時に所有者がクラッシュすると、DDL が失われる可能性がある問題を修正します[#1260](https://github.com/pingcap/tiflow/issues/1260)
         -   `SinkManager` [#2298](https://github.com/pingcap/tiflow/pull/2298)でマップへの安全でない同時アクセスの問題を修正

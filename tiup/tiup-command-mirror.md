@@ -30,7 +30,7 @@ tiup mirror <command> [flags]
 -   [初期化](/tiup/tiup-command-mirror-init.md) : 空のミラーを開始します
 -   [設定](/tiup/tiup-command-mirror-set.md) : 現在のミラーを設定します
 -   [許す](/tiup/tiup-command-mirror-grant.md) : 現在のミラーの新しいコンポーネント所有者を付与します
--   [公開](/tiup/tiup-command-mirror-publish.md) : 新しいコンポーネントを現在のミラーに公開します
+-   [公開](/tiup/tiup-command-mirror-publish.md) : 新しいコンポーネントを現在のミラーに発行します
 -   [変更](/tiup/tiup-command-mirror-modify.md) : 現在のミラー内のコンポーネントの属性を変更します
 -   [回転する](/tiup/tiup-command-mirror-rotate.md) : 現在のミラーのルート証明書を更新します
 -   [クローン](/tiup/tiup-command-mirror-clone.md) : 既存のミラーから新しいミラーを複製します

@@ -19,7 +19,12 @@ Serverless TierとDedicated Tierの間の機能のギャップを常に埋めて
     -   コンピューティング リソースは、1 つの vCPU と 1 GiB RAM に制限されています。
     -   **注**: 今後数か月以内に、無料のスターター プランの提供を継続しながら、リソースの追加とパフォーマンスの向上のために使用量ベースの課金プランを提供する予定です。今後のリリースでは、無料のServerless Tierの制限が変更される可能性があります。
 
-## 取引 {#transaction}
+## SQL {#sql}
+
+-   現在、 Serverless Tierクラスターでは[生存時間 (TTL)](/time-to-live.md)を使用できません。
+-   [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md)構文は、 TiDB Cloud [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)クラスターには適用されません。
+
+## トランザクション {#transaction}
 
 -   ベータ フェーズ中のServerless Tierでは、1 つのトランザクションの合計サイズが 10 MB を超えないように設定されています。
 

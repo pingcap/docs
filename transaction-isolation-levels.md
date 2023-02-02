@@ -3,7 +3,7 @@ title: TiDB Transaction Isolation Levels
 summary: Learn about the transaction isolation levels in TiDB.
 ---
 
-# TiDB トランザクション分離レベル {#tidb-transaction-isolation-levels}
+# TiDBトランザクション分離レベル {#tidb-transaction-isolation-levels}
 
 <CustomContent platform="tidb">
 
@@ -19,12 +19,12 @@ summary: Learn about the transaction isolation levels in TiDB.
 
 SQL-92 標準では、4 つのレベルのトランザクション分離が定義されています。Read Uncommitted、Read Committed、Repeatable Read、Serializable です。詳細については、次の表を参照してください。
 
-| 分離レベル          | ダーティーライト | ダーティリード | あいまい読み取り | ファントム |
-| :------------- | :------- | :------ | :------- | :---- |
-| コミットされていない読み取り | ありえない    | 可能      | 可能       | 可能    |
-| コミットされた読み取り    | ありえない    | ありえない   | 可能       | 可能    |
-| 反復可能な読み取り      | ありえない    | ありえない   | ありえない    | 可能    |
-| シリアライズ可能       | ありえない    | ありえない   | ありえない    | ありえない |
+| 分離レベル            | ダーティーライト | ダーティリード | ファジーリード | ファントム |
+| :--------------- | :------- | :------ | :------ | :---- |
+| READ UNCOMMITTED | ありえない    | 可能      | 可能      | 可能    |
+| READ COMMITTED   | ありえない    | ありえない   | 可能      | 可能    |
+| REPEATABLE READ  | ありえない    | ありえない   | ありえない   | 可能    |
+| SERIALIZABLE     | ありえない    | ありえない   | ありえない   | ありえない |
 
 TiDB は Snapshot Isolation (SI) 整合性を実装しており、MySQL との互換性のために`REPEATABLE-READ`として宣伝しています。これは[ANSI Repeatable Read 分離レベル](#difference-between-tidb-and-ansi-repeatable-read)および[MySQL 反復可能読み取りレベル](#difference-between-tidb-and-mysql-repeatable-read)とは異なります。
 

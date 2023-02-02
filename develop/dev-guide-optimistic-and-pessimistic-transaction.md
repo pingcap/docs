@@ -99,7 +99,7 @@ func (tx *TiDBSqlTx) Rollback() error {
 
 <div label="Java" value="java">
 
-**Configuration / コンフィグレーションファイル**
+**コンフィグレーションファイル**
 
 パッケージの管理に Maven を使用する場合は、 `<dependencies>`ノードの`pom.xml`で、以下の依存関係を import `HikariCP`に追加し、パッケージング ターゲットと、JAR パッケージ起動のメイン クラスを設定します。以下は`pom.xml`の例です。
 
@@ -961,7 +961,7 @@ public class TxnExample {
 }
 ```
 
-**Configuration / コンフィグレーションの変更**
+**コンフィグレーションの変更**
 
 `pom.xml`のスタートアップ クラスを変更します。
 

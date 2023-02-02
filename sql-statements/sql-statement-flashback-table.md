@@ -3,7 +3,7 @@ title: FLASHBACK TABLE
 summary: Learn how to recover tables using the `FLASHBACK TABLE` statement.
 ---
 
-# フラッシュバック表 {#flashback-table}
+# フラッシュバック テーブル {#flashback-table}
 
 `FLASHBACK TABLE`構文は TiDB 4.0 以降で導入されました。 `FLASHBACK TABLE`ステートメントを使用して、ガベージ コレクション (GC) の有効期間内に`DROP`または`TRUNCATE`操作によって削除されたテーブルとデータを復元できます。
 

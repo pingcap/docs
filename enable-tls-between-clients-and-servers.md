@@ -67,7 +67,7 @@ MySQL 8.0 クライアントには、このパラメーターに加えて 2 つ�
 -   `--ssl-mode=VERIFY_CA` : `--ssl-ca`を必要とする CA に対して、サーバーからの証明書を検証します。
 -   `--ssl-mode=VERIFY_IDENTITY` : `VERIFY_CA`と同じですが、接続先のホスト名が証明書と一致するかどうかも検証します。
 
-詳細については、MySQL の[暗号化された接続のクライアント側のConfiguration / コンフィグレーション](https://dev.mysql.com/doc/refman/5.7/en/using-encrypted-connections.html#using-encrypted-connections-client-side-configuration)を参照してください。
+詳細については、MySQL の[暗号化された接続のクライアント側のコンフィグレーション](https://dev.mysql.com/doc/refman/5.7/en/using-encrypted-connections.html#using-encrypted-connections-client-side-configuration)を参照してください。
 
 ## 認証を有効にする {#enable-authentication}
 

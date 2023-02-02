@@ -67,7 +67,7 @@ Global Flags:
 operate-source create ./source.yaml
 ```
 
-`source.yaml`の構成については、 [アップストリーム データベースConfiguration / コンフィグレーションファイルの概要](/dm/dm-source-configuration-file.md)を参照してください。
+`source.yaml`の構成については、 [アップストリーム データベースコンフィグレーションファイルの概要](/dm/dm-source-configuration-file.md)を参照してください。
 
 返される結果の例を次に示します。
 

@@ -412,7 +412,7 @@ mysql> SELECT User,Host,Select_priv,Insert_priv FROM mysql.user LIMIT 1;
 
 `db`テーブルでは、空のユーザーが匿名ユーザー名と一致します。 `User`列目にワイルドカードは使用できません。 `Host`列と`Db`列の値には、パターン マッチングを使用できる`%`と`_`を使用できます。
 
-`user`番目と`db`番目のテーブルのデータも、メモリに読み込まれるときに並べ替えられます。
+`user`と`db`のテーブルのデータも、メモリにロードされるときに並べ替えられます。
 
 `tables_priv`と`columns_priv`での`%`の使用は似ていますが、 `Db` 、 `Table_name` 、および`Column_name`の列の値に`%`を含めることはできません。ロード時のソートも同様です。
 

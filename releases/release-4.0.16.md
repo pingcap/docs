@@ -98,7 +98,7 @@ TiDB バージョン: 4.0.16
         -   changefeed チェックポイントラグ[#3010](https://github.com/pingcap/tiflow/issues/3010)の負の値のエラーを修正します。
         -   コンテナ環境で OOM を修正する[#1798](https://github.com/pingcap/tiflow/issues/1798)
         -   複数の TiKV がクラッシュしたとき、または強制再起動中に TiCDC レプリケーションが中断する問題を修正します[#3288](https://github.com/pingcap/tiflow/issues/3288)
-        -   DDL [#3174](https://github.com/pingcap/tiflow/issues/3174)の処理後のメモリ リークの問題を修正します。
+        -   DDL [#3174](https://github.com/pingcap/tiflow/issues/3174)の処理後のメモリリークの問題を修正します。
         -   ErrGCTTLExceeded エラーが発生したときに changefeed が十分な速さで失敗しないという問題を修正します[#3111](https://github.com/pingcap/tiflow/issues/3111)
         -   アップストリームの TiDB インスタンスが予期せず終了すると、TiCDC レプリケーション タスクが終了する可能性がある問題を修正します[#3061](https://github.com/pingcap/tiflow/issues/3061)
         -   TiKV が同じリージョン[#2386](https://github.com/pingcap/tiflow/issues/2386)に重複したリクエストを送信すると、TiCDC プロセスがpanicになる可能性がある問題を修正します。
@@ -106,7 +106,7 @@ TiDB バージョン: 4.0.16
         -   `tikv_cdc_min_resolved_ts_no_change_for_1m`変更フィードがないときにアラートが鳴り続ける問題を修正[#11017](https://github.com/tikv/tikv/issues/11017)
         -   Kafka メッセージの書き込み中にエラーが発生すると、TiCDC 同期タスクが一時停止することがある問題を修正します[#2978](https://github.com/pingcap/tiflow/issues/2978)
         -   `force-replicate`が有効な場合、有効なインデックスのない一部のパーティション テーブルが無視される可能性があるという問題を修正します[#2834](https://github.com/pingcap/tiflow/issues/2834)
-        -   新しい変更フィード[#2389](https://github.com/pingcap/tiflow/issues/2389)を作成するときのメモリ リークの問題を修正します。
+        -   新しい変更フィード[#2389](https://github.com/pingcap/tiflow/issues/2389)を作成するときのメモリリークの問題を修正します。
         -   シンク コンポーネントが解決済みの ts を早期に進めることにより、データの不整合が発生する可能性がある問題を修正します[#3503](https://github.com/pingcap/tiflow/issues/3503)
         -   株式データのスキャンに時間がかかりすぎると、 [#2470](https://github.com/pingcap/tiflow/issues/2470)が GC を実行するために株式データのスキャンが失敗する可能性がある問題を修正します。
         -   changefeed update コマンドがグローバル コマンド ライン パラメーターを認識しない問題を修正します[#2803](https://github.com/pingcap/tiflow/issues/2803)

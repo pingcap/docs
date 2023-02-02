@@ -15,7 +15,7 @@ aliases: ['/tidbcloud/beta/scale-tidb-cluter']
 
 -   TiDB、TiKV、 TiFlashのノード番号
 -   TiKVとTiFlashのノードストレージ
--   TiDB、TiKV、 TiFlashのノード サイズ (vCPU とメモリを含む)
+-   TiDB、TiKV、およびTiFlashのノード サイズ (vCPU とメモリを含む)
 
 TiDB クラスターのサイズを決定する方法については、 [TiDB のサイズを決定する](/tidb-cloud/size-your-cluster.md)を参照してください。
 

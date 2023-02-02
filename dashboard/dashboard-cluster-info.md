@@ -13,7 +13,7 @@ summary: View the running status of TiDB, TiKV, PD, TiFlash components in the en
 
 -   TiDB ダッシュボードにログインした後、左側のナビゲーション メニューで [**クラスタ情報**] をクリックします。
 
-    ![Access cluster information page](/media/dashboard/dashboard-cluster-info-access.png)
+    ![Access cluster information page](/media/dashboard/dashboard-cluster-info-access-v650.png)
 
 -   ブラウザで[http://127.0.0.1:2379/dashboard/#/cluster_info/instance](http://127.0.0.1:2379/dashboard/#/cluster_info/instance)にアクセスします。 `127.0.0.1:2379`を実際の PD インスタンスのアドレスとポートに置き換えます。
 
@@ -21,7 +21,7 @@ summary: View the running status of TiDB, TiKV, PD, TiFlash components in the en
 
 **インスタンス**をクリックして、インスタンスのリストを表示します。
 
-![Instance list](/media/dashboard/dashboard-cluster-info-instances.png)
+![Instance list](/media/dashboard/dashboard-cluster-info-instances-v650.png)
 
 このインスタンス リストには、クラスター内の TiDB、TiKV、PD、およびTiFlashコンポーネントのすべてのインスタンスの概要情報が表示されます。
 
@@ -31,8 +31,8 @@ summary: View the running status of TiDB, TiKV, PD, TiFlash components in the en
 -   ステータス: インスタンスの実行ステータス。
 -   稼働時間: インスタンスの開始時間。
 -   バージョン: インスタンスのバージョン番号。
--   デプロイ ディレクトリ: インスタンス バイナリ ファイルが配置されているディレクトリ。
 -   Git ハッシュ: インスタンスのバイナリ ファイルに対応する Git ハッシュ値。
+-   デプロイ ディレクトリ: インスタンス バイナリ ファイルが配置されているディレクトリ。
 
 ### インスタンスのステータス {#instance-status}
 
@@ -55,20 +55,35 @@ summary: View the running status of TiDB, TiKV, PD, TiFlash components in the en
 
 [**ホスト**] をクリックして、ホストのリストを表示します。
 
-![Host list](/media/dashboard/dashboard-cluster-info-hosts.png)
+![Host list](/media/dashboard/dashboard-cluster-info-hosts-v650.png)
 
 このホスト リストには、クラスター内の TiDB、TiKV、PD、およびTiFlashコンポーネントのすべてのインスタンスに対応するホストの実行ステータスが表示されます。
 
 リストには次の情報が含まれます。
 
--   アドレス: ホスト IP アドレス。
+-   ホスト アドレス: ホスト IP アドレス。
 -   CPU: ホスト CPU の論理コア数。
 -   CPU 使用率: 現在の 1 秒間のユーザー モードおよびカーネル モードの CPU 使用率。
--   メモリ: ホストの合計物理メモリ サイズ。
+-   メモリ: ホストの合計物理メモリサイズ。
 -   メモリ使用量: ホストの現在のメモリ使用量。
--   ディスク: インスタンスが実行されているホスト上のディスクのファイル システムと、このディスクのマウント パス。
--   ディスク使用量: インスタンスが実行されているホスト上のディスクのスペース使用量。
 
 > **ノート：**
 >
 > ホスト一覧情報はインスタンスプロセスごとに提供されるため、ホスト上のすべてのインスタンスがダウンしている場合、ホスト情報は表示されません。
+
+## ディスク一覧 {#disk-list}
+
+[**ディスク**] をクリックして、ディスクのリストを表示します。
+
+![Disk list](/media/dashboard/dashboard-cluster-info-disks-v650.png)
+
+このディスク リストには、TiDB、TiKV、PD、およびTiFlashインスタンスが実行されているディスクのステータスが表示されます。
+
+リストには次の情報が含まれます。
+
+-   ホスト アドレス: ホスト IP アドレス。
+-   マウント ディレクトリ: インスタンスが実行されているホスト上のこのディスクのマウント パス。
+-   ファイル システム: インスタンスが実行されているホスト上のこのディスクのファイル システム タイプ。
+-   ディスク容量: インスタンスが実行されているホスト上のディスクの合計容量。
+-   ディスク使用量: インスタンスが実行されているホスト上のディスクのスペース使用量。
+-   インスタンス: このホストで実行されているインスタンス。

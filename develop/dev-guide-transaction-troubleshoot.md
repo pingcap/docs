@@ -3,7 +3,7 @@ title: Handle Transaction Errors
 summary: Learn about how to handle transaction errors, such as deadlocks and application retry errors.
 ---
 
-# トランザクション エラーの処理 {#handle-transaction-errors}
+# トランザクションエラーの処理 {#handle-transaction-errors}
 
 このドキュメントでは、デッドロックやアプリケーションの再試行エラーなどのトランザクション エラーを処理する方法を紹介します。
 

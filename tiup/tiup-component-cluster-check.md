@@ -97,7 +97,7 @@ ext4 パーティションのマウント オプションを確認します。�
 
 ### メモリー容量 {#memory-size}
 
-ターゲット マシンのメモリ サイズを確認します。本番クラスターの場合、合計メモリー容量は 32GB 以上にすることをお勧めします。
+ターゲット マシンのメモリサイズを確認します。本番クラスターの場合、合計メモリ容量は 32GB 以上にすることをお勧めします。
 
 > **ノート：**
 >
@@ -123,6 +123,7 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 
 -   クラスターがまだデプロイされていない場合は、クラスターのデプロイに使用される[トポロジ.yml](/tiup/tiup-cluster-topology-reference.md)のファイルを渡す必要があります。このファイルの内容に従って、 tiup-clusterは該当するマシンに接続してチェックを実行します。
 -   クラスタがすでにデプロイされている場合は、 `<cluster-name>`をチェック オブジェクトとして使用できます。
+-   既存のクラスターのスケールアウト YAML ファイルをチェックする場合は、チェック オブジェクトとして`<scale-out.yml>`と`<cluster-name>`の両方を使用できます。
 
 > **ノート：**
 >
@@ -142,21 +143,33 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 -   データ型: `BOOLEAN`
 -   このオプションはデフォルトで無効になっており、値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加し、値`true`を渡すか、値を何も渡さないでください。
 
+> **ノート：**
+>
+> `tiup cluster check`は、次のコマンド形式を使用して既存のクラスターの`scale-out.yaml`ファイルを修復することもサポートしています。
+>
+> ```shell
+> tiup cluster check <cluster-name> scale-out.yaml --cluster --apply --user root [-p] [-i /home/root/.ssh/gcp_rsa]
+> ```
+
 ### - 集まる {#cluster}
 
--   チェックがデプロイされたクラスターに対するものであることを示します。
+-   チェックがデプロイ済みのクラスターに対するものであることを示します。
 -   データ型: `BOOLEAN`
 -   このオプションはデフォルトで無効になっており、値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加し、値`true`を渡すか、値を何も渡さないでください。
+-   コマンド形式:
+
+    ```shell
+    tiup cluster check <topology.yml | cluster-name> --cluster [flags]
+    ```
 
 > **ノート：**
 >
-> tiup-clusterは、次のコマンド形式を使用して、デプロイされていないクラスターとデプロイされたクラスターの両方のチェックをサポートしています。
+> -   `tiup cluster check <cluster-name>`コマンドを使用する場合は、オプション`--cluster`を追加する必要があります: `tiup cluster check <cluster-name> --cluster` 。
+> -   `tiup cluster check`は、次のコマンド形式で既存のクラスターの`scale-out.yaml`ファイルを確認することもサポートしています。
 >
-> ```shell
-> tiup cluster check <topology.yml | cluster-name> [flags]
-> ```
->
-> `tiup cluster check <cluster-name>`コマンドを使用する場合は、オプション`--cluster`を追加する必要があります: `tiup cluster check <cluster-name> --cluster` 。
+>     ```shell
+>     tiup cluster check <cluster-name> scale-out.yaml --cluster --user root [-p] [-i /home/root/.ssh/gcp_rsa]
+>     ```
 
 ### -N, --ノード {#n-node}
 
@@ -170,7 +183,7 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 
 ### -R, --role {#r-role}
 
--   チェックするロールを指定します。このオプションの値は、ノード ロールのコンマ区切りリストです。 [`tiup cluster display`](/tiup/tiup-component-cluster-display.md)コマンドで返されるクラスター ステータス テーブルの 2 列目から、ノードの役割を取得できます。
+-   チェックする役割を指定します。このオプションの値は、ノード ロールのコンマ区切りリストです。 [`tiup cluster display`](/tiup/tiup-component-cluster-display.md)コマンドで返されるクラスター ステータス テーブルの 2 列目から、ノードの役割を取得できます。
 -   データ型: `STRINGS`
 -   このオプションがコマンドで指定されていない場合、デフォルトですべてのロールがチェックされます。
 
@@ -192,7 +205,7 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 
 ### --enable-mem {#enable-mem}
 
--   メモリ サイズ チェックを有効にします。
+-   メモリサイズ チェックを有効にします。
 -   データ型: `BOOLEAN`
 -   このオプションはデフォルトで無効になっており、値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加し、値`true`を渡すか、値を何も渡さないでください。
 

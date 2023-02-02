@@ -51,7 +51,7 @@ TiDB アンシブル バージョン: 3.0.1
 ## TiKV {#tikv}
 
 -   統計情報[#5060](https://github.com/tikv/tikv/pull/5060)に BLOB ファイルのサイズの統計を追加します。
--   プロセスの終了時にメモリ リソースが正しく消去されないために発生するコア ダンプの問題を修正し[#5053](https://github.com/tikv/tikv/pull/5053) 。
+-   プロセスの終了時にメモリリソースが正しく消去されないために発生するコア ダンプの問題を修正し[#5053](https://github.com/tikv/tikv/pull/5053) 。
 -   Titan エンジンに関連するすべてのモニタリング メトリックを追加します[#4772](https://github.com/tikv/tikv/pull/4772) 、 [#4836](https://github.com/tikv/tikv/pull/4836)
 -   ファイル ハンドルの統計が不正確なためにファイル ハンドルが使用できないという問題を回避するために、開いているファイル ハンドルの数をカウントするときに、Titan の開いているファイル ハンドルの数を追加し[#5026](https://github.com/tikv/tikv/pull/5026) 。
 -   特定の CF [#4991](https://github.com/tikv/tikv/pull/4991)で Titan エンジンを有効にするかどうかを決定するには、 `blob_run_mode`を設定します。

@@ -3,7 +3,7 @@ title: TiDB Optimistic Transaction Model
 summary: Learn the optimistic transaction model in TiDB.
 ---
 
-# TiDB 楽観的トランザクション モデル {#tidb-optimistic-transaction-model}
+# TiDB 楽観的トランザクションモデル {#tidb-optimistic-transaction-model}
 
 楽観的トランザクションでは、競合する変更がトランザクション コミットの一部として検出されます。これは、行ロックを取得するプロセスをスキップできるため、並行トランザクションが同じ行を頻繁に変更しない場合のパフォーマンスを向上させるのに役立ちます。並行トランザクションが同じ行を頻繁に変更する (競合) 場合、楽観的トランザクションは[悲観的な取引](/pessimistic-transaction.md)よりもパフォーマンスが低下する可能性があります。
 
@@ -30,7 +30,7 @@ summary: Learn the optimistic transaction model in TiDB.
 
 3.  クライアントが書き込み要求を発行します。
 
-    TiDB は、書き込まれたデータが制約を満たしているかどうかをチェックします (データ型が正しいことを確認するために、NOT NULL 制約が満たされています)。**有効なデータは、TiDB のこのトランザクションのプライベート メモリに格納されます**。
+    TiDB は、書き込まれたデータが制約を満たしているかどうかをチェックします (データ型が正しいことを確認するために、NOT NULL 制約が満たされています)。**有効なデータは、TiDB のこのトランザクションのプライベートメモリに格納されます**。
 
 4.  クライアントがコミット要求を発行します。
 
@@ -60,7 +60,7 @@ summary: Learn the optimistic transaction model in TiDB.
 
 -   2PC によるトランザクションレイテンシー
 -   一元化されたタイムスタンプ割り当てサービスが必要
--   大量のデータがメモリに書き込まれるときの OOM (メモリ不足)
+-   大量のデータがメモリに書き込まれるときの OOM (メモリ)
 
 ## トランザクションの再試行 {#transaction-retries}
 

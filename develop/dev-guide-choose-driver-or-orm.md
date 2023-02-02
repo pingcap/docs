@@ -14,21 +14,7 @@ summary: Learn how to choose a driver or ORM framework to connect to TiDB.
 >
 > 詳細については、 [TiDB がサポートするサードパーティ ツール](/develop/dev-guide-third-party-support.md)を参照してください。
 
-TiDB は MySQL プロトコルと高い互換性がありますが、一部の機能は MySQL と互換性がありません。
-
-例えば：
-
--   TiDB でサポートされていない機能:
-
-    -   ストアド プロシージャと関数
-    -   トリガー
-    -   `FOREIGN KEY`制約
-
--   MySQL とは異なる機能:
-
-    -   自動インクリメント ID: 自動インクリメント列は、TiDB 内でグローバルに一意です。それらは単一の TiDBサーバー上では増分ですが***、必ずしも***複数の TiDB サーバー間で増分されたり、順次割り当てられるとは限りません。
-
-互換性の相違点の完全なリストについては、 [MySQL の互換性](/mysql-compatibility.md)を参照してください。
+TiDB は MySQL プロトコルと高い互換性がありますが、一部の機能は MySQL と互換性がありません。互換性の相違点の完全なリストについては、 [MySQL の互換性](/mysql-compatibility.md)を参照してください。
 
 ## Java {#java}
 
@@ -45,7 +31,7 @@ TiDB は MySQL プロトコルと高い互換性がありますが、一部の�
 
 > **ヒント：**
 >
-> 現在のバージョン 8.0.30 には[未解決のバグ](https://bugs.mysql.com/bug.php?id=106252)があるため、v6.3.0 より前のバージョンの TiDB を使用すると、スレッドがハングする可能性があります。 TiDB v6.3.0 以降のバージョンをまだ使用していない場合は、MySQL Connector/J 8.0 でこのバグが修正されるまでバージョン 8.0 にアップグレードしないか、これに対処する MySQL Connector/J の TiDB バージョンを使用することをお勧めします。バグ ( *TiDB-JDBC*タブを参照)。
+> 8.0.32 より前の Connector/J 8.0 バージョンには[バグ](https://bugs.mysql.com/bug.php?id=106252)があり、v6.3.0 より前の TiDB バージョンを使用するとスレッドがハングする可能性があります。この問題を回避するには、MySQL Connector/J 8.0.32 以降のバージョン、または TiDB JDBC を使用することをお勧めします (「 *TiDB-JDBC* 」タブを参照)。
 
 完全なアプリケーションを構築する方法の例については、 [TiDB と JDBC を使用して単純な CRUD アプリを構築する](/develop/dev-guide-sample-application-java.md)を参照してください。
 
@@ -247,3 +233,9 @@ go get -u gorm.io/driver/mysql
 ```
 
 GORM を使用して TiDB アプリケーションを構築する例については、 [TiDB とGolangを使用して単純な CRUD アプリを構築する](/develop/dev-guide-sample-application-golang.md)を参照してください。
+
+<CustomContent platform="tidb-cloud">
+
+ドライバーまたは ORM を決定したら、次のことができ[TiDB クラスターに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster) 。
+
+</CustomContent>

@@ -28,7 +28,7 @@ Info: {"sink-uri":"kafka://127.0.0.1:9092/topic-name?protocol=canal-json&kafka-v
 -   `--sink-uri` : レプリケーション タスクのダウンストリーム アドレス。詳細については、 [`kafka`でシンク URI を構成する](#configure-sink-uri-for-kafka)を参照してください。
 -   `--start-ts` : 変更フィードの開始 TSO を指定します。この TSO から、TiCDC クラスターはデータのプルを開始します。デフォルト値は現在の時刻です。
 -   `--target-ts` : changefeed の終了 TSO を指定します。この TSO に対して、TiCDC クラスターはデータのプルを停止します。デフォルト値は空です。これは、TiCDC がデータのプルを自動的に停止しないことを意味します。
--   `--config` : changefeed 構成ファイルを指定します。詳細については、 [TiCDC ChangefeedConfiguration / コンフィグレーションパラメーター](/ticdc/ticdc-changefeed-config.md)を参照してください。
+-   `--config` : changefeed 構成ファイルを指定します。詳細については、 [TiCDC Changefeedコンフィグレーションパラメーター](/ticdc/ticdc-changefeed-config.md)を参照してください。
 
 ## Kafka のシンク URI を構成する {#configure-sink-uri-for-kafka}
 
@@ -165,7 +165,7 @@ dispatchers = [
 -   どのマッチャー ルールにも一致しないテーブルの場合、対応するデータ変更イベントが`--sink-uri`で指定されたデフォルト トピックに送信されます。たとえば、 `test10.aa`テーブルはデフォルト トピックに送信されます。
 -   マッチャー ルールに一致するが、トピック ディスパッチャーが指定されていないテーブルの場合、対応するデータ変更は`--sink-uri`で指定されたデフォルト トピックに送信されます。たとえば、 `test6.aa`テーブルはデフォルト トピックに送信されます。
 
-### トピック ディスパッチャー {#topic-dispatchers}
+### トピック ディスパッチャ {#topic-dispatchers}
 
 topic = &quot;xxx&quot; を使用してトピック ディスパッチャを指定し、トピック式を使用して柔軟なトピック ディスパッチ ポリシーを実装できます。トピックの総数は 1000 未満にすることをお勧めします。
 

@@ -1,9 +1,9 @@
 ---
-title: TLS Connection to Serverless Tier
-summary: Introduce TLS connection in TiDB Serverless Tier.
+title: TLS Connections to Serverless Tier
+summary: Introduce TLS connections in TiDB Serverless Tier.
 ---
 
-# Serverless Tierへの TLS 接続 {#tls-connection-to-serverless-tier}
+# Serverless Tierへの TLS 接続 {#tls-connections-to-serverless-tier}
 
 クライアントとTiDB Cloud Serverless Tierクラスターの間に安全な TLS 接続を確立することは、データベースに接続するための基本的なセキュリティ プラクティスの 1 つです。 Serverless Tierのサーバー証明書は、独立したサードパーティの証明書プロバイダーによって発行されます。サーバー側のデジタル証明書をダウンロードしなくても、サーバーServerless Tierクラスターに簡単に接続できます。
 

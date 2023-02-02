@@ -1,11 +1,12 @@
 ---
-title: Data Migration Overview
+title: TiDB Data Migration Overview
 summary: Learn about the Data Migration tool, the architecture, the key components, and features.
+aliases: ['/tidb/stable/dm-key-features']
 ---
 
 <!-- markdownlint-disable MD007 -->
 
-# データ移行の概要 {#data-migration-overview}
+# TiDB データ移行の概要 {#tidb-data-migration-overview}
 
 <!--
 ![star](https://img.shields.io/github/stars/pingcap/tiflow?style=for-the-badge&logo=github) ![license](https://img.shields.io/github/license/pingcap/tiflow?style=for-the-badge) ![forks](https://img.shields.io/github/forks/pingcap/tiflow?style=for-the-badge)
@@ -20,7 +21,7 @@ summary: Learn about the Data Migration tool, the architecture, the key componen
 -   **MySQL シャードの移行とマージ。** DM は、アップストリームの複数の MySQL データベース インスタンスをダウンストリームの 1 つの TiDB データベースに移行およびマージすることをサポートします。さまざまな移行シナリオのレプリケーション ルールのカスタマイズをサポートしています。アップストリームの MySQL シャードの DDL 変更を自動的に検出して処理できるため、運用コストが大幅に削減されます。
 -   **各種フィルター。**イベント タイプ、正規表現、および SQL 式を事前に定義して、データ移行プロセス中に MySQL バイナリ ログ イベントを除外できます。
 -   **集中管理。** DM は、クラスター内の数千のノードをサポートします。多数のデータ移行タスクを同時に実行および管理できます。
--   **サードパーティのオンライン スキーマ変更プロセスの最適化。** MySQL エコシステムでは、gh-ost や pt-osc などのツールが広く使用されています。 DM は変更プロセスを最適化して、中間データの不要な移行を回避します。詳細については、 [オンライン ddl](/dm/dm-key-features.md#online-ddl-tools)を参照してください。
+-   **サードパーティのオンライン スキーマ変更プロセスの最適化。** MySQL エコシステムでは、gh-ost や pt-osc などのツールが広く使用されています。 DM は変更プロセスを最適化して、中間データの不要な移行を回避します。詳細については、 [オンライン ddl](/dm/dm-online-ddl-tool-support.md)を参照してください。
 -   **高可用性。** DM は、さまざまなノードで自由にスケジュールされるデータ移行タスクをサポートしています。少数のノードがクラッシュしても、実行中のタスクは影響を受けません。
 
 ## クイックインストール {#quick-installation}

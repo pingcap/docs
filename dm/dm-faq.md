@@ -55,9 +55,9 @@ TiDB でサポートされていない DDL ステートメントに遭遇した�
 
 上記のエラーは、次の理由で発生する可能性があります。
 
-最後の`rename ghost_table to origin table`ステップで、DM はメモリ内の DDL 情報を読み取り、元のテーブルの DDL に復元します。
+最後の`rename ghost_table to origin table`ステップで、DM はメモリの DDL 情報を読み取り、元のテーブルの DDL に復元します。
 
-ただし、メモリー内の DDL 情報は、次の 2 つの方法のいずれかで取得されます。
+ただし、メモリの DDL 情報は、次の 2 つの方法のいずれかで取得されます。
 
 -   DM [`alter ghost_table`操作中に gh-ost テーブルを処理します](/dm/feature-online-ddl.md#online-schema-change-gh-ost)および`ghost_table`の DDL 情報を記録します。
 -   DM-worker を再起動してタスクを開始すると、DM は DDL を`dm_meta.{task_name}_onlineddl`から読み取ります。
@@ -121,7 +121,7 @@ MySQL はエクスポート用のスナップショットを指定できない�
 以下のパラメーターをデフォルトの 67108864 (64M) より大きい値に設定します。
 
 -   TiDBサーバーのグローバル変数: `max_allowed_packet` 。
--   タスク構成ファイル内の構成項目: `target-database.max-allowed-packet` .詳細は[DM 拡張タスクConfiguration / コンフィグレーションファイル](/dm/task-configuration-file-full.md)を参照してください。
+-   タスク構成ファイル内の構成項目: `target-database.max-allowed-packet` .詳細は[DM 拡張タスクコンフィグレーションファイル](/dm/task-configuration-file-full.md)を参照してください。
 
 ## DM 1.0 クラスターの既存の DM 移行タスクが DM 2.0 以降のクラスターで実行されているときに発生するエラー<code>Error 1054: Unknown column &#39;binlog_gtid&#39; in &#39;field list&#39;</code>処理方法を教えてください。 {#how-to-handle-the-error-code-error-1054-unknown-column-binlog-gtid-in-field-list-code-that-occurs-when-existing-dm-migration-tasks-of-an-dm-1-0-cluster-are-running-on-a-dm-2-0-or-newer-cluster}
 
@@ -185,7 +185,7 @@ curl -X POST -d "tidb_general_log=0" http://{TiDBIP}:10080/settings
 if the DDL is not needed, you can use a filter rule with \"*\" schema-pattern to ignore it.\n\t : parse statement: line 1 column 11 near \"EVENT `event_del_big_table` \r\nDISABLE\" %!!(MISSING)(EXTRA string=ALTER EVENT `event_del_big_table` \r\nDISABLE
 ```
 
-このタイプのエラーの理由は、TiDB パーサーがアップストリームから送信された DDL ステートメント ( `ALTER EVENT`など) を解析できないため、 `sql-skip`が期待どおりに機能しないためです。構成ファイルに[binlog イベント フィルタ](/dm/dm-key-features.md#binlog-event-filter)を追加して、これらのステートメントをフィルタリングし、 `schema-pattern: "*"`を設定できます。 DM v2.0.1 以降、DM は`EVENT`に関連するステートメントを事前にフィルター処理します。
+このタイプのエラーの理由は、TiDB パーサーがアップストリームから送信された DDL ステートメント ( `ALTER EVENT`など) を解析できないため、 `sql-skip`が期待どおりに機能しないためです。構成ファイルに[binlog イベント フィルター](/dm/dm-binlog-event-filter.md)を追加して、これらのステートメントをフィルタリングし、 `schema-pattern: "*"`を設定できます。 DM v2.0.1 以降、DM は`EVENT`に関連するステートメントを事前にフィルター処理します。
 
 DM v6.0 以降、 `binlog`は`sql-skip`と`handle-error`を置き換えます。この問題を回避するには、代わりに`binlog`コマンドを使用できます。
 

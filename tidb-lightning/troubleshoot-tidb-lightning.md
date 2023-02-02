@@ -124,7 +124,7 @@ tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=
 
 **ソリューション**:
 
-1.  `tikv-importer.toml`の`max-open-engines`の設定値を大きくします。この値は通常、使用可能なメモリによって決まります。これは、次を使用して計算できます。
+1.  `tikv-importer.toml`の`max-open-engines`の設定値を大きくします。この値は通常、使用可能なメモリによって決定されます。これは、次を使用して計算できます。
 
     最大メモリ使用量 ≈ `max-open-engines` × `write-buffer-size` × `max-write-buffer-number`
 

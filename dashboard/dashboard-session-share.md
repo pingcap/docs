@@ -15,7 +15,7 @@ TiDB ダッシュボードの現在のセッションを他のユーザーと共
 
 3.  [**現在のセッションを共有]**をクリックします。
 
-    ![Sample Step](/media/dashboard/dashboard-session-share-settings-1.png)
+    ![Sample Step](/media/dashboard/dashboard-session-share-settings-1-v650.png)
 
     > **ノート：**
     >
@@ -29,11 +29,11 @@ TiDB ダッシュボードの現在のセッションを他のユーザーと共
 
 5.  [**認証コードの生成] を**クリックします。
 
-    ![Sample Step](/media/dashboard/dashboard-session-share-settings-2.png)
+    ![Sample Step](/media/dashboard/dashboard-session-share-settings-2-v650.png)
 
 6.  生成された**認証コード**を、セッションを共有するユーザーに提供します。
 
-    ![Sample Step](/media/dashboard/dashboard-session-share-settings-3.png)
+    ![Sample Step](/media/dashboard/dashboard-session-share-settings-3-v650.png)
 
     > **警告：**
     >
@@ -43,14 +43,14 @@ TiDB ダッシュボードの現在のセッションを他のユーザーと共
 
 1.  TiDB ダッシュボードのサインイン ページで、[ **Use Alternative Authentication** ] をクリックします。
 
-    ![Sample Step](/media/dashboard/dashboard-session-share-signin-1.png)
+    ![Sample Step](/media/dashboard/dashboard-session-share-signin-1-v650.png)
 
 2.  [ **Authorization Code]**をクリックして、サインインに使用します。
 
-    ![Sample Step](/media/dashboard/dashboard-session-share-signin-2.png)
+    ![Sample Step](/media/dashboard/dashboard-session-share-signin-2-v650.png)
 
 3.  招待者から受け取った認証コードを入力します。
 
 4.  [**サインイン]**をクリックします。
 
-    ![Sample Step](/media/dashboard/dashboard-session-share-signin-3.png)
+    ![Sample Step](/media/dashboard/dashboard-session-share-signin-3-v650.png)

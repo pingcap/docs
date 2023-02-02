@@ -11,9 +11,9 @@ TiDB ダッシュボード メトリック関係グラフは、v4.0.7 で導入�
 
 TiDB ダッシュボードにログインし、左側のナビゲーション メニューで [ **クラスタ Diagnostics** ] をクリックすると、メトリック関係グラフを生成するページが表示されます。
 
-![Metrics relation graph homepage](/media/dashboard/dashboard-metrics-relation-home.png)
+![Metrics relation graph homepage](/media/dashboard/dashboard-metrics-relation-home-v650.png)
 
-**Range Start Time**と<strong>Range Duration</strong>を設定した後、 <strong>Generate Metrics Relation</strong>ボタンをクリックすると、Metrics Relationship Graph のページに入ります。
+**Range Start Time**と<strong>Range Duration</strong>を設定した後、 <strong>Generate Metrics Relation</strong>をクリックすると、メトリック関係グラフのページに入ります。
 
 ## グラフを理解する {#understand-graph}
 

@@ -9,7 +9,7 @@ summary: Learn how deploy Cloudflare Workers with TiDB Cloud.
 
 ただし、Cloudflare Workers は直接 TCP 接続を確立できない V8 エンジンで実行されるため、Cloudflare Workers からTiDB Cloudに接続するのが難しい場合があります。
 
-幸いなことに、Prisma は[データ プロキシ](https://www.prisma.io/docs/data-platform/data-proxy)をサポートします。 Cloudflare ワーカーを使用して、TCP 接続を介して送信されるデータを処理および操作するのに役立ちます。
+幸いなことに、Prisma は[データ プロキシ](https://www.prisma.io/docs/data-platform/data-proxy)をサポートしています。 Cloudflare ワーカーを使用して、TCP 接続を介して送信されるデータを処理および操作するのに役立ちます。
 
 このドキュメントでは、 TiDB Cloudと Prisma Data Proxy を使用して Cloudflare ワーカーをデプロイする方法を段階的に示します。
 

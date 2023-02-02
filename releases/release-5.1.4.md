@@ -61,7 +61,7 @@ TiDB バージョン: 5.1.4
 
 -   TiDB
 
-    -   システム変数`tidb_analyze_version`が`2` [#32499](https://github.com/pingcap/tidb/issues/32499)に設定されている場合に発生するメモリ リークのバグを修正します。
+    -   システム変数`tidb_analyze_version`が`2` [#32499](https://github.com/pingcap/tidb/issues/32499)に設定されている場合に発生するメモリリークのバグを修正します。
     -   スローログ[#25716](https://github.com/pingcap/tidb/issues/25716)で`MaxDays`と`MaxBackups`の構成が有効にならない問題を修正
     -   `INSERT ... SELECT ... ON DUPLICATE KEY UPDATE`ステートメントを実行するとpanic[#28078](https://github.com/pingcap/tidb/issues/28078)が発生する問題を修正します。
     -   `JOIN` on `ENUM`型の列[#27831](https://github.com/pingcap/tidb/issues/27831)を実行したときに発生する可能性のある間違った結果を修正します。
@@ -89,7 +89,7 @@ TiDB バージョン: 5.1.4
     -   初期化されていないレプリカを削除すると、古いレプリカが再作成される可能性があるという問題を修正します[#10533](https://github.com/tikv/tikv/issues/10533)
     -   新しい選択が終了した後に`Prepare Merge`がトリガーされたが、隔離されたピアに通知されていない場合のメタデータの破損の問題を修正します[#11526](https://github.com/tikv/tikv/issues/11526)
     -   コルーチンの実行速度が速すぎる場合に時々発生するデッドロックの問題を修正します[#11549](https://github.com/tikv/tikv/issues/11549)
-    -   フレーム グラフをプロファイリングする際の潜在的なデッドロックとメモリ リークの問題を修正します[#11108](https://github.com/tikv/tikv/issues/11108)
+    -   フレーム グラフをプロファイリングする際の潜在的なデッドロックとメモリリークの問題を修正します[#11108](https://github.com/tikv/tikv/issues/11108)
     -   悲観的トランザクションで事前書き込み要求を再試行するときにまれに発生するデータの不整合の問題を修正します[#11187](https://github.com/tikv/tikv/issues/11187)
     -   設定`resource-metering.enabled`が動かない不具合を修正[#11235](https://github.com/tikv/tikv/issues/11235)
     -   `resolved_ts` [#10965](https://github.com/tikv/tikv/issues/10965)で一部のコルーチンがリークする問題を修正
@@ -97,9 +97,9 @@ TiDB バージョン: 5.1.4
     -   tikv-ctl が正しいリージョン関連の情報を返せないバグを修正[#11393](https://github.com/tikv/tikv/issues/11393)
     -   TiKV ノードがダウンしていると、解決されたタイムスタンプが[#11351](https://github.com/tikv/tikv/issues/11351)遅れる問題を修正します。
     -   極端な状況でリージョンのマージ、ConfChange、およびスナップショットが同時に発生したときに発生するpanicの問題を修正します[#11475](https://github.com/tikv/tikv/issues/11475)
-    -   TiKV がリバース テーブル スキャンを実行すると、TiKV がメモリ ロックを検出できない問題を修正します[#11440](https://github.com/tikv/tikv/issues/11440)
+    -   TiKV がリバース テーブル スキャンを実行すると、TiKV がメモリロックを検出できない問題を修正します[#11440](https://github.com/tikv/tikv/issues/11440)
     -   10 進数の除算結果がゼロ[#29586](https://github.com/pingcap/tidb/issues/29586)の場合の負号の問題を修正
-    -   統計スレッド[#11195](https://github.com/tikv/tikv/issues/11195)の監視データによって引き起こされるメモリ リークを修正します。
+    -   統計スレッド[#11195](https://github.com/tikv/tikv/issues/11195)の監視データによって引き起こされるメモリリークを修正します。
     -   ダウンストリーム データベースが見つからない場合に発生する TiCDCpanicの問題を修正します[#11123](https://github.com/tikv/tikv/issues/11123)
     -   Congest エラー[#11082](https://github.com/tikv/tikv/issues/11082)により、TiCDC がスキャンの再試行を頻繁に追加する問題を修正します。
     -   Raftクライアント実装[#9714](https://github.com/tikv/tikv/issues/9714)でバッチ メッセージが大きすぎる問題を修正
@@ -157,7 +157,7 @@ TiDB バージョン: 5.1.4
         -   changefeed チェックポイントラグ[#3010](https://github.com/pingcap/ticdc/issues/3010)の負の値のエラーを修正します。
         -   コンテナー環境での OOM の問題を修正する[#1798](https://github.com/pingcap/tiflow/issues/1798)
         -   複数の TiKV がクラッシュしたとき、または強制再起動中に TiCDC レプリケーションが中断する問題を修正します[#3288](https://github.com/pingcap/ticdc/issues/3288)
-        -   DDL [#3174](https://github.com/pingcap/ticdc/issues/3174)の処理後のメモリ リークの問題を修正します。
+        -   DDL [#3174](https://github.com/pingcap/ticdc/issues/3174)の処理後のメモリリークの問題を修正します。
         -   ErrGCTTLExceeded エラーが発生したときに changefeed が十分な速さで失敗しないという問題を修正します[#3111](https://github.com/pingcap/ticdc/issues/3111)
         -   アップストリームの TiDB インスタンスが予期せず終了すると、TiCDC レプリケーション タスクが終了する可能性がある問題を修正します[#3061](https://github.com/pingcap/tiflow/issues/3061)
         -   TiKV が同じリージョン[#2386](https://github.com/pingcap/tiflow/issues/2386)に重複したリクエストを送信すると、TiCDC プロセスがpanicになる可能性がある問題を修正します。

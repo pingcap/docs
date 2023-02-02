@@ -12,7 +12,7 @@ TiDB クラスターの問題を特定してトラブルシューティングす
 -   オンサイト トラブルシューティングでの TiDB クラスターの情報を保存用の ZIP 形式のファイルにエクスポートします。
 -   別の TiDB クラスターからエクスポートされた ZIP 形式のファイルをクラスターにインポートします。このファイルには、オンサイト トラブルシューティングでの後者の TiDB クラスターの情報が含まれています。
 
-## <code>PLAN REPLAER</code>を使用してクラスター情報をエクスポートする {#use-code-plan-replaer-code-to-export-cluster-information}
+## <code>PLAN REPLAYER</code>を使用してクラスター情報をエクスポートする {#use-code-plan-replayer-code-to-export-cluster-information}
 
 `PLAN REPLAYER`を使用して、TiDB クラスターのオンサイト情報を保存できます。エクスポート インターフェイスは次のとおりです。
 

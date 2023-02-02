@@ -17,7 +17,7 @@ TiDB クラスターがない場合は、無料で約 30 秒で作成できる[S
 
 -   [JDK](https://openjdk.org/install/) 11以上
 
--   [メイヴン](https://maven.apache.org/install.html) 3.8以上
+-   [メイヴン](https://maven.apache.org/install.html) 3.8 以上
 
 -   [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)バージョン 2
 

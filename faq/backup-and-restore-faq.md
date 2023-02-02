@@ -6,7 +6,7 @@ aliases: ['/tidb/stable/pitr-troubleshoot/','/tidb/stable/pitr-known-issues/']
 
 # バックアップと復元に関するよくある質問 {#backup-x26-restore-faqs}
 
-このドキュメントでは、よく寄せられる質問 (FAQ) と TiDB のバックアップと復元 (BR) の解決策を示します。
+このドキュメントでは、よく寄せられる質問 (FAQ) と、TiDB のバックアップと復元 (BR) の解決策を示します。
 
 ## バックアップと復元のパフォーマンスの問題 {#performance-issues-of-backup-and-restore}
 
@@ -26,6 +26,12 @@ TiKV は[動的構成](/tikv-control.md#modify-the-tikv-configuration-dynamicall
 オフライン クラスターでバックアップ タスクを実行する場合、バックアップを高速化するために、 `tikv-ctl`を使用して`backup.num-threads`の値をより大きな数値に変更できます。
 
 ## PITR の問題 {#pitr-issues}
+
+### <a href="/br/br-pitr-guide.md">PITR</a>と<a href="/sql-statements/sql-statement-flashback-to-timestamp.md">クラスター フラッシュバック</a>の違いは何ですか? {#what-is-the-difference-between-a-href-br-br-pitr-guide-md-pitr-a-and-a-href-sql-statements-sql-statement-flashback-to-timestamp-md-cluster-flashback-a}
+
+ユースケースの観点から、PITR は通常、クラスターが完全にサービスを停止している場合、またはデータが破損しており、他のソリューションを使用して回復できない場合に、クラスターのデータを指定された時点に復元するために使用されます。 PITR を使用するには、データ リカバリ用の新しいクラスターが必要です。クラスターのフラッシュバック機能は、ユーザーの誤操作やその他の要因によって引き起こされるデータ エラーのシナリオ向けに特別に設計されており、データ エラーが発生する前の最新のタイムスタンプにクラスターのデータをインプレースで復元できます。
+
+ほとんどの場合、フラッシュバックは RPO (ゼロに近い) と RTO がはるかに短いため、人的ミスによるデータ エラーの場合、PITR よりも優れた復旧ソリューションです。ただし、現時点ではフラッシュバックを実行できないため、クラスターが完全に使用できない場合、PITR はクラスターを回復する唯一のソリューションです。したがって、PITR は、RPO (最大 5 分) と RTO がフラッシュバックよりも長くなりますが、データベースの災害復旧戦略を策定する際には常に必須のソリューションです。
 
 ### アップストリーム データベースが物理インポート モードでTiDB Lightningを使用してデータをインポートすると、ログ バックアップ機能が使用できなくなります。なんで？ {#when-the-upstream-database-imports-data-using-tidb-lightning-in-the-physical-import-mode-the-log-backup-feature-becomes-unavailable-why}
 

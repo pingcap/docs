@@ -242,5 +242,5 @@ EXPLAIN SELECT * FROM books WHERE id = 896;
 
 ### こちらもご覧ください {#see-also}
 
--   [EXPLAIN コマンド / EXPLAIN機能](/explain-walkthrough.md)
+-   [EXPLAIN コマンド](/explain-walkthrough.md)
 -   [インデックスを使用するステートメントの説明](/explain-indexes.md)

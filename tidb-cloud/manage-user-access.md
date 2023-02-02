@@ -7,7 +7,7 @@ summary: Learn how to manage identity access in TiDB Cloud.
 
 このドキュメントでは、 TiDB Cloudで組織、プロジェクト、役割、およびユーザー プロファイルへのアクセスを管理する方法について説明します。
 
-TiDB クラウドにアクセスする前に、 [TiDB クラウド アカウントを作成する](https://tidbcloud.com/free-trial) .電子メールとパスワードでサインアップして[TiDB Cloudを使用してパスワードを管理する](/tidb-cloud/tidb-cloud-password-authentication.md)できるようにするか、Google Workspace または GitHub アカウントを選択してTiDB Cloudへのシングル サインオン (SSO) を行うことができます。
+TiDB クラウドにアクセスする前に、 [TiDB クラウド アカウントを作成する](https://tidbcloud.com/free-trial) .電子メールとパスワードでサインアップして[TiDB Cloudを使用してパスワードを管理する](/tidb-cloud/tidb-cloud-password-authentication.md)できるようにするか、Google、GitHub、または Microsoft アカウントを選択してTiDB Cloudへのシングル サインオン (SSO) を行うことができます。
 
 ## 組織とプロジェクト {#organizations-and-projects}
 
@@ -15,7 +15,7 @@ TiDB Cloudは、TiDB クラスターの管理を容易にするために、組�
 
 組織の下にあるプロジェクトのクラスターにアクセスするには、ユーザーは組織とプロジェクトの両方のメンバーである必要があります。組織の所有者は、プロジェクトに参加するようユーザーを招待して、プロジェクト内のクラスターを作成および管理できます。
 
-この構造の下で：
+この構造の下で:
 
 -   課金は組織レベルで行われますが、各プロジェクトとクラスターでの使用状況の可視性は維持されます。
 

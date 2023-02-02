@@ -39,7 +39,7 @@ TiFlashのバージョンを確認するには、次の 2 つの方法があり�
 
 コプロセッサー要求の開始または終了を見つけ、ログの開始時に出力されたスレッド ID を使用して、コプロセッサー要求の関連ログを見つけることができます。
 
-## TiFlashシステム表 {#tiflash-system-table}
+## TiFlashシステム テーブル {#tiflash-system-table}
 
 `information_schema.tiflash_replica`システム テーブルの列名とその説明は次のとおりです。
 

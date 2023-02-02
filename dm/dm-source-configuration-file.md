@@ -3,11 +3,11 @@ title: Upstream Database Configuration File of TiDB Data Migration
 summary: Learn the configuration file of the upstream database
 ---
 
-# TiDB データ移行のアップストリーム データベースConfiguration / コンフィグレーションファイル {#upstream-database-configuration-file-of-tidb-data-migration}
+# TiDB データ移行のアップストリーム データベースコンフィグレーションファイル {#upstream-database-configuration-file-of-tidb-data-migration}
 
 このドキュメントでは、構成ファイル テンプレートと、このファイル内の各構成パラメーターの説明を含む、アップストリーム データベースの構成ファイルを紹介します。
 
-## Configuration / コンフィグレーションファイルのテンプレート {#configuration-file-template}
+## コンフィグレーションファイルのテンプレート {#configuration-file-template}
 
 以下は、アップストリーム データベースの構成ファイル テンプレートです。
 
@@ -59,7 +59,7 @@ from:
 >
 > DM v2.0.1 では、 `enable-gtid`と`enable-relay` ～ `true`を同時に設定しないでください。そうしないと、増分データが失われる可能性があります。
 
-## Configuration / コンフィグレーションパラメータ {#configuration-parameters}
+## コンフィグレーションパラメータ {#configuration-parameters}
 
 このセクションでは、構成ファイル内の各構成パラメーターについて説明します。
 
@@ -107,7 +107,7 @@ DM は、現在のタスクのステータスとエラー メッセージを定�
 
 DM v2.0.2 以降では、ソース構成ファイルで binlog イベント フィルターを構成できます。
 
-| パラメータ            | 説明                                                                                                                          |
-| :--------------- | :-------------------------------------------------------------------------------------------------------------------------- |
-| `case-sensitive` | フィルタリング ルールで大文字と小文字を区別するかどうかを決定します。デフォルト値は`false`です。                                                                        |
-| `filters`        | binlog イベントのフィルタリング ルールを設定します。詳細については、 [Binlogイベント フィルタ パラメータの説明](/dm/dm-key-features.md#parameter-explanation-2)を参照してください。 |
+| パラメータ            | 説明                                                                                                                                |
+| :--------------- | :-------------------------------------------------------------------------------------------------------------------------------- |
+| `case-sensitive` | フィルタリング ルールで大文字と小文字を区別するかどうかを決定します。デフォルト値は`false`です。                                                                              |
+| `filters`        | binlog イベントのフィルタリング ルールを設定します。詳細については、 [Binlogイベント フィルタ パラメータの説明](/dm/dm-binlog-event-filter.md#parameter-descriptions)を参照してください。 |

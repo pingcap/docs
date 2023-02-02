@@ -11,7 +11,7 @@ TiDB Binlogは、増分データを複製するために広く使用されてい
 
 ## トポロジ情報 {#topology-information}
 
-| 実例      | カウント | 物理マシン構成       | 知財                                   | Configuration / コンフィグレーション                                                                                     |
+| 実例      | カウント | 物理マシン構成       | 知財                                   | コンフィグレーション                                                                                                     |
 | :------ | :--- | :------------ | :----------------------------------- | :------------------------------------------------------------------------------------------------------------- |
 | TiDB    | 3    | 16 仮想コア 32 GB | 10.0.1.1<br/> 10.0.1.2<br/> 10.0.1.3 | デフォルトのポート構成。<br/> `enable_binlog`を有効にします。<br/> `ignore-error`を有効にする                                            |
 | PD      | 3    | 4 仮想コア 8 GB   | 10.0.1.4<br/> 10.0.1.5<br/> 10.0.1.6 | デフォルトのポート構成                                                                                                    |
@@ -25,7 +25,7 @@ TiDB Binlogは、増分データを複製するために広く使用されてい
 -   [TiDB Binlogトポロジの単純なテンプレート (ダウンストリーム タイプとして`file`を使用)](https://github.com/pingcap/docs/blob/master/config-templates/simple-file-binlog.yaml)
 -   [TiDB Binlogトポロジの複雑なテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/complex-tidb-binlog.yaml)
 
-上記の TiDB クラスター トポロジ ファイルの構成項目の詳細な説明については、 [TiUP を使用してTiUPをデプロイするためのトポロジConfiguration / コンフィグレーションファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
+上記の TiDB クラスター トポロジ ファイルの構成項目の詳細な説明については、 [TiUP を使用してTiUPをデプロイするためのトポロジコンフィグレーションファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
 
 ### 主なパラメータ {#key-parameters}
 
@@ -48,7 +48,7 @@ TiDB Binlogは、増分データを複製するために広く使用されてい
 
 -   `drainer_servers.config.syncer.to`
 
-    TiDB Binlogのダウンストリーム構成。異なる`db-type`に応じて、この構成アイテムを使用して、ダウンストリーム データベースの接続パラメーター、Kafka の接続パラメーター、およびファイル保存パスを構成できます。詳細は[TiDB BinlogConfiguration / コンフィグレーションファイル](/tidb-binlog/tidb-binlog-configuration-file.md#syncerto)を参照してください。
+    TiDB Binlogのダウンストリーム構成。異なる`db-type`に応じて、この構成アイテムを使用して、ダウンストリーム データベースの接続パラメーター、Kafka の接続パラメーター、およびファイル保存パスを構成できます。詳細は[TiDB Binlogコンフィグレーションファイル](/tidb-binlog/tidb-binlog-configuration-file.md#syncerto)を参照してください。
 
 > **ノート：**
 >

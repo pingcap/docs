@@ -7,7 +7,7 @@ summary: Learn how to use CSV configurations for the Import Data service on TiDB
 
 このドキュメントでは、 TiDB Cloud上のデータのインポート サービスの CSV 構成を紹介します。
 
-以下は、 TiDB Cloudの Import Data サービスを使用して CSV ファイルをインポートする場合の CSVConfiguration / コンフィグレーションウィンドウです。詳細については、 [Amazon S3 または GCS からTiDB Cloudに CSV ファイルをインポートする](/tidb-cloud/import-csv-files.md)を参照してください。
+以下は、 TiDB Cloudの Import Data サービスを使用して CSV ファイルをインポートする場合の CSVコンフィグレーションウィンドウです。詳細については、 [Amazon S3 または GCS からTiDB Cloudに CSV ファイルをインポートする](/tidb-cloud/import-csv-files.md)を参照してください。
 
 ![CSV Configurations](/media/tidb-cloud/import-data-csv-config.png)
 

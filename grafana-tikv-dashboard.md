@@ -341,7 +341,7 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
 -   Blob get duration: Titan blob で get 操作を実行するときにかかった時間
 -   Blob iter 操作: Titan blob で iter 操作を実行するときにかかった時間
 -   BLOB のシーク時間: Titan BLOB でシーク操作を実行するときにかかった時間
--   Blob next duration: Titan blob で次の操作を実行するときにかかった時間
+-   Blob next duration: Titan blob で次の操作を実行するときに消費される時間
 -   Blob prev duration: Titan blob で前の操作を実行するときにかかった時間
 -   BLOB キー フロー: Titan BLOB キーの操作のフロー レート
 -   Blob バイト フロー: Titan blob キーのバイト フロー レート
@@ -366,12 +366,12 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
 -   デッドロック検出時間: デッドロックの検出にかかった時間
 -   エラーの検出: デッドロックの数を含む、デッドロックの検出時に発生したエラーの数
 -   デッドロック検出リーダー: デッドロック検出リーダーが配置されているノードの情報
--   悲観的ロックの合計メモリ サイズ: メモリ内の悲観的ロックが占有するメモリ サイズ
+-   悲観的ロックの合計メモリサイズ: メモリ内の悲観的ロックが占有するメモリサイズ
 -   インメモリの悲観的ロックの結果:悲観的ロックのみをメモリに保存した結果。 `full`は、メモリ制限を超えたために悲観的ロックがメモリに保存されなかった回数を意味します。
 
 ### メモリー {#memory}
 
--   Allocator Stats: メモリ アロケータの統計
+-   Allocator Stats:メモリアロケータの統計
 
 ### バックアップ {#backup}
 

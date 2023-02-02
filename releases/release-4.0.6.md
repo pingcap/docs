@@ -177,7 +177,7 @@ TiDB バージョン: 4.0.6
 
     -   TiCDC
 
-        -   場合によっては TiCDC でメモリ リークが発生する問題を修正[#942](https://github.com/pingcap/tiflow/pull/942)
+        -   場合によっては TiCDC でメモリリークが発生する問題を修正[#942](https://github.com/pingcap/tiflow/pull/942)
         -   Kafka シンク[#912](https://github.com/pingcap/tiflow/pull/912)で TiCDC がpanicになる可能性がある問題を修正します。
         -   puller [#927](https://github.com/pingcap/tiflow/pull/927)で CommitTs または ResolvedTs (CRT) が`resolvedTs`未満になる可能性がある問題を修正します。
         -   `changefeed`が MySQL ドライバー[#936](https://github.com/pingcap/tiflow/pull/936)によってブロックされる可能性がある問題を修正します。

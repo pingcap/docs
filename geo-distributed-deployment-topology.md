@@ -9,7 +9,7 @@ summary: Learn the geo-distributed deployment topology of TiDB.
 
 ## トポロジ情報 {#topology-information}
 
-| 実例         | カウント | 物理マシン構成                         | BJ IP                                                  | 船         | Configuration / コンフィグレーション    |
+| 実例         | カウント | 物理マシン構成                         | BJ IP                                                  | 船         | コンフィグレーション                    |
 | :--------- | :--- | :------------------------------ | :----------------------------------------------------- | :-------- | :---------------------------- |
 | TiDB       | 5    | 16 仮想コア 32GB * 1                | 10.0.1.1<br/> 10.0.1.2<br/> 10.0.1.3<br/> 10.0.1.4     | 10.0.1.5  | デフォルトのポート<br/>グローバル ディレクトリの構成 |
 | PD         | 5    | 4 Vコア 8GB * 1                   | 10.0.1.6<br/> 10.0.1.7<br/> 10.0.1.8<br/> 10.0.1.9     | 10.0.1.10 | デフォルトのポート<br/>グローバル ディレクトリの構成 |
@@ -20,7 +20,7 @@ summary: Learn the geo-distributed deployment topology of TiDB.
 
 -   [地理的に分散したトポロジ テンプレート](https://github.com/pingcap/docs/blob/master/config-templates/geo-redundancy-deployment.yaml)
 
-上記の TiDB クラスター トポロジ ファイルの構成項目の詳細な説明については、 [TiUP を使用してTiUPをデプロイするためのトポロジConfiguration / コンフィグレーションファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
+上記の TiDB クラスター トポロジ ファイルの構成項目の詳細な説明については、 [TiUP を使用してTiUPをデプロイするためのトポロジコンフィグレーションファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
 
 ### 主なパラメータ {#key-parameters}
 

@@ -27,7 +27,7 @@ TiKV 自動的に[シャード最下層データ](/best-practices/tidb-best-prac
 
 リージョンサイズを調整するには、 [`coprocessor.region-split-size`](/tikv-configuration-file.md#region-split-size)構成アイテムを使用できます。推奨されるサイズは、96 MiB、128 MiB、または 256 MiB です。 `region-split-size`の値が大きいほど、パフォーマンスがより不安定になります。リージョンサイズを 1 GiB より大きく設定することはお勧めしません。サイズを 10 GiB より大きく設定しないでください。 TiFlashを使用する場合、リージョンサイズは 256 MiB を超えてはなりません。
 
-Dumplingツールを使用する場合、リージョンサイズは 1 GiB を超えてはなりません。この場合、リージョンサイズを増やした後で同時実行数を減らす必要があります。そうしないと、TiDB がメモリ不足になる可能性があります。
+Dumplingツールを使用する場合、リージョンサイズは 1 GiB を超えてはなりません。この場合、リージョンサイズを増やした後で同時実行数を減らす必要があります。そうしないと、TiDB のメモリが不足する可能性があります。
 
 ## バケットを使用して同時実行数を増やす {#use-bucket-to-increase-concurrency}
 

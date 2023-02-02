@@ -54,7 +54,7 @@ MySQL [test]> select * from tbl;
 2 rows in set (0.001 sec)
 ```
 
-## Configuration / コンフィグレーションパラメータと説明 {#configuration-parameters-and-description}
+## コンフィグレーションパラメータと説明 {#configuration-parameters-and-description}
 
 -   `schema` : 一致するアップストリーム スキーマの名前。ワイルドカード マッチングまたは通常のマッチングはサポートされていません。
 -   `table` : 照合するアップストリーム テーブルの名前。ワイルドカード マッチングまたは通常のマッチングはサポートされていません。

@@ -49,9 +49,9 @@ TiDB バージョン: 4.0.5
     -   `EXPLAIN` [#18817](https://github.com/pingcap/tidb/pull/18817)の結果で`PointGet`演算子の詳細なランタイム情報を表示します
     -   `remove()` [#18395](https://github.com/pingcap/tidb/pull/18395)分の`Consume`の潜在的なデッドロックを警告する
     -   `StrToInt`と`StrToFloat`の動作を改良し、JSON を`date` 、 `time` 、および`timestamp`型に変換することをサポートします[#18159](https://github.com/pingcap/tidb/pull/18159)
-    -   `TableReader`オペレーター[#18392](https://github.com/pingcap/tidb/pull/18392)のメモリー使用量の制限をサポート
+    -   `TableReader`オペレーター[#18392](https://github.com/pingcap/tidb/pull/18392)のメモリ使用量の制限をサポート
     -   `batch cop`リクエスト[#18999](https://github.com/pingcap/tidb/pull/18999)を再試行するときにバックオフが何度も発生しないようにする
-    -   `ALTER TABLE`アルゴリズムの互換性を改善[#19270](https://github.com/pingcap/tidb/pull/19270)
+    -   `ALTER TABLE`アルゴリズムの互換性を向上[#19270](https://github.com/pingcap/tidb/pull/19270)
     -   内側にシングルパーティションテーブルサポート`IndexJoin`を作成する[#19151](https://github.com/pingcap/tidb/pull/19151)
     -   ログに無効な行が含まれている場合でも、ログ ファイルの検索をサポート[#18579](https://github.com/pingcap/tidb/pull/18579)
 
@@ -137,7 +137,7 @@ TiDB バージョン: 4.0.5
 -   TiKV
 
     -   Hibernate リージョンが有効な場合にリーダー選出を高速化する[#8292](https://github.com/tikv/tikv/pull/8292)
-    -   スケジュール[#8357](https://github.com/tikv/tikv/pull/8357)中のメモリ リークの問題を修正します。
+    -   スケジュール[#8357](https://github.com/tikv/tikv/pull/8357)中のメモリリークの問題を修正します。
     -   リーダーがあまりにも早く休止状態になるのを防ぐために、 `hibernate-timeout`の構成項目を追加します[#8208](https://github.com/tikv/tikv/pull/8208)
 
 -   PD

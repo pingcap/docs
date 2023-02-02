@@ -15,7 +15,7 @@ title: TiDB 1.0 release notes
 -   内部データ形式を最適化して中間データ サイズを縮小する
 -   MySQL の互換性を強化する
 -   `NO_SQL_CACHE`構文をサポートし、ストレージ エンジンでのキャッシュの使用を制限します
--   Hash Aggregator オペレーターをリファクタリングしてメモリー使用量を削減する
+-   Hash Aggregator オペレーターをリファクタリングしてメモリ使用量を削減する
 -   Stream Aggregator オペレーターのサポート
 
 ## PD {#pd}
@@ -67,7 +67,7 @@ title: TiDB 1.0 release notes
 
 -   8cbx
 -   須田章宏
--   アリクス
+-   アリックス
 -   アルストン111111
 -   アンデルフ
 -   アンディ・リブリアン

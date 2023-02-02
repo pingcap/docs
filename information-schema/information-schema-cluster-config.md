@@ -32,7 +32,7 @@ DESC cluster_config;
 -   `KEY` : 構成アイテム名。
 -   `VALUE` : 構成アイテムの値。
 
-次の例は、 `CLUSTER_CONFIG`テーブルを使用して TiKV インスタンスの`coprocessor`構成を照会する方法を示しています。
+次の例は、 `CLUSTER_CONFIG`テーブルを使用して TiKV インスタンスの`coprocessor`構成をクエリする方法を示しています。
 
 {{< copyable "" >}}
 

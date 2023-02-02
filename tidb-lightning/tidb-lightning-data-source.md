@@ -36,7 +36,7 @@ CSV ファイルはスキーマレスです。 CSV ファイルを TiDB にイ�
 -   DDL ステートメントを含む`${db_name}.${table_name}-schema.sql`および`${db_name}-schema-create.sql`という名前のファイルを作成します。
 -   TiDB でテーブル スキーマを手動で作成します。
 
-### Configuration / コンフィグレーション {#configuration}
+### コンフィグレーション {#configuration}
 
 `tidb-lightning.toml`ファイルの`[mydumper.csv]`セクションで CSV 形式を設定できます。ほとんどの設定には、MySQL の[`LOAD DATA`](https://dev.mysql.com/doc/refman/8.0/en/load-data.html)ステートメントに対応するオプションがあります。
 

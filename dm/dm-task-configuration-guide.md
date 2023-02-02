@@ -3,7 +3,7 @@ title: Data Migration Task Configuration Guide
 summary: Learn how to configure a data migration task in Data Migration (DM).
 ---
 
-# データ移行タスクConfiguration / コンフィグレーションガイド {#data-migration-task-configuration-guide}
+# データ移行タスクコンフィグレーションガイド {#data-migration-task-configuration-guide}
 
 このドキュメントでは、Data Migration (DM) でデータ移行タスクを構成する方法を紹介します。
 
@@ -78,7 +78,7 @@ target-database:       # Configuration of target TiDB database.
           tbl-name: "log"
     ```
 
-    詳細な構成規則については、 [テーブル リストのブロックと許可](/dm/dm-key-features.md#block-and-allow-table-lists)を参照してください。
+    詳細な構成規則については、 [テーブル リストのブロックと許可](/dm/dm-block-allow-table-lists.md)を参照してください。
 
 2.  データ ソース構成でブロックおよび許可リスト ルールを参照して、移行するテーブルをフィルター処理します。
 
@@ -113,7 +113,7 @@ target-database:       # Configuration of target TiDB database.
         action: Do
     ```
 
-    詳細な構成規則については、 [Binlogイベント フィルター](/dm/dm-key-features.md#binlog-event-filter)を参照してください。
+    詳細な構成規則については、 [Binlogイベント フィルター](/dm/dm-binlog-event-filter.md)を参照してください。
 
 2.  データ ソース構成で binlog イベント フィルタリング ルールを参照して、データ ソース内の指定されたテーブルまたはスキーマの指定された binlog イベントをフィルター処理します。
 
@@ -151,7 +151,7 @@ target-database:       # Configuration of target TiDB database.
         target-schema: "test"
     ```
 
-    詳細な構成規則については、 [テーブル ルーティング](/dm/dm-key-features.md#table-routing)を参照してください。
+    詳細な構成規則については、 [テーブル ルーティング](/dm/dm-table-routing.md)を参照してください。
 
 2.  データ ソース構成でルーティング マッピング ルールを参照して、移行するテーブルをフィルター処理します。
 
@@ -186,7 +186,7 @@ shard-mode: "pessimistic"       # The shard merge mode. Optional modes are ""/"p
 
 ## その他の構成 {#other-configurations}
 
-以下は、本書全体のタスク構成例です。完全なタスク構成テンプレートは[DM タスク構成ファイルの完全な紹介](/dm/task-configuration-file-full.md)にあります。その他の設定項目の使用方法と設定については、 [データ移行の特長](/dm/dm-key-features.md)を参照してください。
+以下は、本書全体のタスク構成例です。完全なタスク構成テンプレートは[DM タスク構成ファイルの完全な紹介](/dm/task-configuration-file-full.md)にあります。
 
 ```yaml
 ---

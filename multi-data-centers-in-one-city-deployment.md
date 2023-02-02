@@ -3,7 +3,7 @@ title: Multiple Data Centers in One City Deployment
 summary: Learn the deployment solution to multi-data centers in one city.
 ---
 
-# 1 つの都市に展開された複数のデータ センター {#multiple-data-centers-in-one-city-deployment}
+# 1 つの地域展開における複数のデータセンター {#multiple-data-centers-in-one-city-deployment}
 
 <!-- Localization note for TiDB:
 

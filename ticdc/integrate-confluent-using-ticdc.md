@@ -185,7 +185,7 @@ Snowflake は、クラウド ネイティブのデータ ウェアハウスで�
 
     ![Configuration](/media/integrate/configuration.png)
 
-5.  [**Configuration / コンフィグレーション]**ページで、[<strong>入力 Kafka レコードの値の形式]</strong>と [<strong>入力 Kafka レコードのキー形式]</strong>の両方で`AVRO`を選択します。次に [<strong>続行</strong>] をクリックします。コネクタが作成され、ステータスが<strong>Running</strong>になるまで待ちます。これには数分かかる場合があります。
+5.  [**コンフィグレーション]**ページで、[<strong>入力 Kafka レコードの値の形式]</strong>と [<strong>入力 Kafka レコードのキー形式]</strong>の両方で`AVRO`を選択します。次に [<strong>続行</strong>] をクリックします。コネクタが作成され、ステータスが<strong>Running</strong>になるまで待ちます。これには数分かかる場合があります。
 
     ![Data preview](/media/integrate/data-preview.png)
 
@@ -372,7 +372,7 @@ Microsoft SQL Server は、Microsoft が開発したリレーショナル デー
 
 4.  接続および認証情報を入力します。次に、次のページに進みます。
 
-5.  [**Configuration / コンフィグレーション**] ページで、次のフィールドを構成し、[<strong>続行</strong>] をクリックします。
+5.  [**コンフィグレーション**] ページで、次のフィールドを構成し、[<strong>続行</strong>] をクリックします。
 
     | 分野                 | 価値         |
     | :----------------- | :--------- |

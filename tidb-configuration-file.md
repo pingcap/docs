@@ -7,7 +7,7 @@ summary: Learn the TiDB configuration file options that are not involved in comm
 
 <!-- markdownlint-disable MD024 -->
 
-# TiDBConfiguration / コンフィグレーションファイル {#tidb-configuration-file}
+# TiDBコンフィグレーションファイル {#tidb-configuration-file}
 
 TiDB 構成ファイルは、コマンドライン パラメーターよりも多くのオプションをサポートしています。デフォルトの構成ファイル[`config.toml.example`](https://github.com/pingcap/tidb/blob/master/config/config.toml.example)をダウンロードして、名前を`config.toml`に変更できます。このドキュメントでは、 [コマンド ライン オプション](/command-line-flags-for-tidb-configuration.md)に含まれないオプションのみを説明します。
 
@@ -52,12 +52,12 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 >
 > v6.3.0 以降、この構成項目は廃止され、システム変数[`tidb_enable_tmp_storage_on_oom`](/system-variables.md#tidb_enable_tmp_storage_on_oom)に置き換えられました。 TiDB クラスターが v6.3.0 以降のバージョンにアップグレードされると、変数が`oom-use-tmp-storage`の値で自動的に初期化されます。その後、 `oom-use-tmp-storage`の値を変更しても有効になり**ませ**ん。
 
--   1 つの SQL ステートメントがシステム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)で指定されたメモリ クォータを超えた場合に、一部の演算子の一時ストレージを有効にするかどうかを制御します。
+-   1 つの SQL ステートメントがシステム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)で指定されたメモリクォータを超えた場合に、一部の演算子の一時ストレージを有効にするかどうかを制御します。
 -   デフォルト値: `true`
 
 ### <code>tmp-storage-path</code> {#code-tmp-storage-path-code}
 
--   1 つの SQL ステートメントがシステム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)で指定されたメモリ クォータを超える場合に、一部の演算子の一時ストレージ パスを指定します。
+-   1 つの SQL ステートメントがシステム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)で指定されたメモリクォータを超える場合に、一部の演算子の一時ストレージ パスを指定します。
 -   デフォルト値: `<temporary directory of OS>/<OS user ID>_tidb/MC4wLjAuMDo0MDAwLzAuMC4wLjA6MTAwODA=/tmp-storage` 。 `MC4wLjAuMDo0MDAwLzAuMC4wLjA6MTAwODA=`は`<host>:<port>/<statusHost>:<statusPort>`の`Base64`エンコード結果です。
 -   この構成は、システム変数[`tidb_enable_tmp_storage_on_oom`](/system-variables.md#tidb_enable_tmp_storage_on_oom)が`ON`の場合にのみ有効です。
 
@@ -204,7 +204,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 
 ## ログ {#log}
 
-ログに関するConfiguration / コンフィグレーション項目です。
+ログに関するコンフィグレーション項目です。
 
 ### <code>level</code> {#code-level-code}
 
@@ -266,7 +266,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 
 ## ログファイル {#log-file}
 
-ログファイルに関するConfiguration / コンフィグレーション項目です。
+ログファイルに関するコンフィグレーション項目です。
 
 #### <code>filename</code> {#code-filename-code}
 
@@ -295,7 +295,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 
 ## 安全 {#security}
 
-セキュリティに関するConfiguration / コンフィグレーション項目です。
+セキュリティに関するコンフィグレーション項目です。
 
 ### <code>enable-sem</code> {#code-enable-sem-code}
 
@@ -382,7 +382,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 
 ## パフォーマンス {#performance}
 
-性能に関するConfiguration / コンフィグレーション項目です。
+性能に関するコンフィグレーション項目です。
 
 ### <code>max-procs</code> {#code-max-procs-code}
 
@@ -426,9 +426,9 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 -   TiDB での単一トランザクションのサイズ制限。
 -   デフォルト値: `104857600` (バイト単位)
 -   1 回のトランザクションで、キー値レコードの合計サイズがこの値を超えることはできません。このパラメーターの最大値は`1099511627776` (1 TB) です。 binlog を使用してダウンストリーム コンシューマー Kafka ( `arbiter`クラスターなど) にサービスを提供している場合、このパラメーターの値は`1073741824` (1 GB) を超えてはならないことに注意してください。これは、Kafka が処理できる単一のメッセージ サイズの上限が 1 GB であるためです。それ以外の場合、この制限を超えるとエラーが返されます。
--   TiDB v6.5.0 以降のバージョンでは、この構成は推奨されなくなりました。トランザクションのメモリ サイズはセッションのメモリ使用量に累積され、セッション メモリのしきい値を超えると[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)変数が有効になります。以前のバージョンとの互換性を保つために、以前のバージョンから TiDB v6.5.0 以降にアップグレードする場合、この構成は次のように機能します。
-    -   この構成が設定されていないか、デフォルト値 ( `104857600` ) に設定されている場合、アップグレード後に、トランザクションのメモリ サイズがセッションのメモリ使用量に累積され、変数`tidb_mem_quota_query`が有効になります。
-    -   この構成がデフォルト ( `104857600` ) に設定されていない場合でも有効であり、単一のトランザクションのサイズを制御する動作は、アップグレードの前後で変更されません。これは、トランザクションのメモリ サイズが`tidb_mem_quota_query`変数によって制御されないことを意味します。
+-   TiDB v6.5.0 以降のバージョンでは、この構成は推奨されなくなりました。トランザクションのメモリサイズはセッションのメモリ使用量に累積され、セッションメモリのしきい値を超えると[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)変数が有効になります。以前のバージョンとの互換性を保つために、以前のバージョンから TiDB v6.5.0 以降にアップグレードする場合、この構成は次のように機能します。
+    -   この構成が設定されていないか、デフォルト値 ( `104857600` ) に設定されている場合、アップグレード後に、トランザクションのメモリサイズがセッションのメモリ使用量に累積され、変数`tidb_mem_quota_query`が有効になります。
+    -   この構成がデフォルト ( `104857600` ) に設定されていない場合でも有効であり、単一のトランザクションのサイズを制御する動作は、アップグレードの前後で変更されません。これは、トランザクションのメモリサイズが`tidb_mem_quota_query`変数によって制御されないことを意味します。
 
 ### <code>tcp-keep-alive</code> {#code-tcp-keep-alive-code}
 
@@ -491,7 +491,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 >
 > この変数は実験的機能です。本番環境で使用することはお勧めしません。
 
--   統計キャッシュのメモリ クォータを有効にするかどうかを制御します。
+-   統計キャッシュのメモリクォータを有効にするかどうかを制御します。
 -   デフォルト値: `false`
 
 ### <code>stats-load-concurrency</code> <span class="version-mark">v5.4.0 の新機能</span> {#code-stats-load-concurrency-code-span-class-version-mark-new-in-v5-4-0-span}
@@ -516,7 +516,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 
 ## オープントレース {#opentracing}
 
-opentracing に関連するConfiguration / コンフィグレーション項目。
+opentracing に関連するコンフィグレーション項目。
 
 ### <code>enable</code> {#code-enable-code}
 
@@ -530,7 +530,7 @@ opentracing に関連するConfiguration / コンフィグレーション項目�
 
 ## opentracing.sampler {#opentracing-sampler}
 
-opentracing.sampler に関するConfiguration / コンフィグレーション項目です。
+opentracing.sampler に関するコンフィグレーション項目です。
 
 ### <code>type</code> {#code-type-code}
 
@@ -564,16 +564,16 @@ opentracing.sampler に関するConfiguration / コンフィグレーション�
 
 ## opentracing.reporter {#opentracing-reporter}
 
-opentracing.reporter に関するConfiguration / コンフィグレーション項目です。
+opentracing.reporter に関するコンフィグレーション項目です。
 
 ### <code>queue-size</code> {#code-queue-size-code}
 
--   レポーター レコードがメモリ内にまたがるキュー サイズ。
+-   レポーター レコードがメモリにまたがるキュー サイズ。
 -   デフォルト値: `0`
 
 ### <code>buffer-flush-interval</code> {#code-buffer-flush-interval-code}
 
--   レポーターがメモリ内のスパンをストレージにフラッシュする間隔。
+-   レポーターがメモリのスパンをストレージにフラッシュする間隔。
 -   デフォルト値: `0`
 
 ### <code>log-spans</code> {#code-log-spans-code}
@@ -652,11 +652,11 @@ opentracing.reporter に関するConfiguration / コンフィグレーション�
 
 ## txn ローカル ラッチ {#txn-local-latches}
 
-トランザクション ラッチに関するConfiguration / コンフィグレーション。多くのローカル トランザクションの競合が発生する場合は、有効にすることをお勧めします。
+トランザクション ラッチに関するコンフィグレーション。多くのローカル トランザクションの競合が発生する場合は、有効にすることをお勧めします。
 
 ### <code>enabled</code> {#code-enabled-code}
 
--   トランザクションのメモリ ロックを有効にするかどうかを決定します。
+-   トランザクションのメモリロックを有効にするかどうかを決定します。
 -   デフォルト値: `false`
 
 ### <code>capacity</code> {#code-capacity-code}
@@ -697,7 +697,7 @@ TiDB Binlogに関連する構成。
 
 ## スターテス {#status}
 
-TiDB サービスのステータスに関するConfiguration / コンフィグレーション。
+TiDB サービスのステータスに関するコンフィグレーション。
 
 ### <code>report-status</code> {#code-report-status-code}
 
@@ -711,7 +711,7 @@ TiDB サービスのステータスに関するConfiguration / コンフィグ�
 
 ## 悲観的-txn {#pessimistic-txn}
 
-悲観的トランザクションの使用法については、 [TiDB ペシミスティック トランザクション モード](/pessimistic-transaction.md)を参照してください。
+悲観的トランザクションの使用法については、 [TiDB ペシミスティックトランザクションモード](/pessimistic-transaction.md)を参照してください。
 
 ### 最大再試行回数 {#max-retry-count}
 
@@ -744,7 +744,7 @@ TiDB サービスのステータスに関するConfiguration / コンフィグ�
 
 ## 分離読み取り {#isolation-read}
 
-読み取り分離に関連するConfiguration / コンフィグレーション項目。
+読み取り分離に関連するコンフィグレーション項目。
 
 ### <code>engines</code> {#code-engines-code}
 
@@ -758,14 +758,14 @@ TiDB サービスのステータスに関するConfiguration / コンフィグ�
 
 -   この構成は、各オペレーターの実行情報をスロー クエリ ログに記録するかどうかを制御します。
 -   デフォルト値: `true`
--   v6.1.0 より前では、この構成は`enable-collect-execution-info`で設定されています。
+-   v6.1.0 より前では、この構成は`enable-collect-execution-info`で設定されます。
 
 ### <code>tidb_enable_slow_log</code> {#code-tidb-enable-slow-log-code}
 
 -   この構成は、スロー ログ機能を有効にするかどうかを制御するために使用されます。
 -   デフォルト値: `true`
 -   値のオプション: `true`または`false`
--   v6.1.0 より前では、この構成は`enable-slow-log`で設定されています。
+-   v6.1.0 より前では、この構成は`enable-slow-log`で設定されます。
 
 ### <code>tidb_slow_log_threshold</code> {#code-tidb-slow-log-threshold-code}
 
@@ -781,14 +781,14 @@ TiDB サービスのステータスに関するConfiguration / コンフィグ�
 -   デフォルト値: `1`
 -   値のオプション: `1` (有効、デフォルト) または`0` (無効)。
 -   この構成の値は、システム変数[`tidb_record_plan_in_slow_log`](/system-variables.md#tidb_record_plan_in_slow_log)の値を初期化します
--   v6.1.0 より前では、この構成は`record-plan-in-slow-log`で設定されています。
+-   v6.1.0 より前では、この構成は`record-plan-in-slow-log`で設定されます。
 
 ### <code>tidb_force_priority</code> {#code-tidb-force-priority-code}
 
 -   この構成は、TiDBサーバーで実行されるステートメントのデフォルトの優先順位を変更するために使用されます。
 -   デフォルト値: `NO_PRIORITY`
 -   デフォルト値`NO_PRIORITY`は、ステートメントの優先度が強制的に変更されないことを意味します。その他のオプションは、昇順で`LOW_PRIORITY` 、 `DELAYED` 、および`HIGH_PRIORITY`です。
--   v6.1.0 より前では、この構成は`force-priority`で設定されます。
+-   v6.1.0 より前では、この構成は`force-priority`で設定されています。
 
 ### <code>max_connections</code> {#code-max-connections-code}
 
@@ -809,7 +809,7 @@ TiDB サービスのステータスに関するConfiguration / コンフィグ�
 
 ## プロキシプロトコル {#proxy-protocol}
 
-PROXY プロトコルに関するConfiguration / コンフィグレーション項目です。
+PROXY プロトコルに関するコンフィグレーション項目です。
 
 ### <code>networks</code> {#code-networks-code}
 

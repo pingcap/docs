@@ -18,7 +18,7 @@ TiDB アンシブル バージョン: 3.1.0-beta.2
 
 -   ツール
     -   TiDB Lightning
-        -   構成ファイルで構成されていない特定の項目については、 [TiDB LightningConfiguration / コンフィグレーション](/tidb-lightning/tidb-lightning-configuration.md)で指定されたデフォルト構成を使用し[#255](https://github.com/pingcap/tidb-lightning/pull/255) 。
+        -   構成ファイルで構成されていない特定の項目については、 [TiDB Lightningコンフィグレーション](/tidb-lightning/tidb-lightning-configuration.md)で指定されたデフォルト構成を使用し[#255](https://github.com/pingcap/tidb-lightning/pull/255) 。
         -   `--tidb-password` CLI パラメータを追加して、TiDB パスワードを設定します[#253](https://github.com/pingcap/tidb-lightning/pull/253)
 
 ## 新機能 {#new-features}
@@ -36,7 +36,7 @@ TiDB アンシブル バージョン: 3.1.0-beta.2
 -   PD クライアント
     -   PD [#6605](https://github.com/tikv/tikv/pull/6605)へのローカル スレッドの統計レポートのサポート
 -   バックアップ
-    -   `RocksIOLimiter`のフロー制御ライブラリを Rust の`async-speed-limit`のフロー制御ライブラリに置き換えて、ファイルのバックアップ時に余分なメモリ コピーを排除します[#6462](https://github.com/tikv/tikv/pull/6462)
+    -   `RocksIOLimiter`のフロー制御ライブラリを Rust の`async-speed-limit`のフロー制御ライブラリに置き換えて、ファイルのバックアップ時に余分なメモリコピーを排除します[#6462](https://github.com/tikv/tikv/pull/6462)
 -   PD
     -   ロケーション ラベル名でバックスラッシュを許容する[#2084](https://github.com/pingcap/pd/pull/2084)
 -   TiFlash

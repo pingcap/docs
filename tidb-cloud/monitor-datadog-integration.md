@@ -45,7 +45,7 @@ TiDB クラスターに関するメトリック データを[データドッグ]
 
 1.  [データドッグ](https://app.datadoghq.com)にログインします。
 2.  Datadog の**TiDB Cloud統合**ページ ( [https://app.datadoghq.com/account/settings#integrations/tidb-cloud](https://app.datadoghq.com/account/settings#integrations/tidb-cloud) ) に移動します。
-3.  [**Configuration / コンフィグレーション**] タブで、 [<strong>統合のインストール</strong>] をクリックします。 [**TiDBCloudクラスタの概要**](https://app.datadoghq.com/dash/integration/30586/tidbcloud-cluster-overview)ダッシュボードが[**ダッシュボード一覧**](https://app.datadoghq.com/dashboard/lists)に表示されます。
+3.  [**コンフィグレーション**] タブで、 [<strong>統合のインストール</strong>] をクリックします。 [**TiDBCloudクラスタの概要**](https://app.datadoghq.com/dash/integration/30586/tidbcloud-cluster-overview)ダッシュボードが[**ダッシュボード一覧**](https://app.datadoghq.com/dashboard/lists)に表示されます。
 
 ## 事前構築済みのダッシュボード {#pre-built-dashboard}
 
@@ -71,5 +71,5 @@ Datadog は、TiDB クラスターの次のメトリクス データを追跡し
 | tidb_cloud.node_storage_capacity_bytes     | ゲージ   | クラスタ名: `<cluster name>`<br/>インスタンス: tikv-0|tikv-1…|tiflash-0|tiflash-1…<br/>コンポーネント: tikv|tiflash                | TiKV/ TiFlashノードのディスク容量 (バイト単位)。                                                                    |
 | tidb_cloud.node_cpu_seconds_total          | カウント  | クラスタ名: `<cluster name>`<br/>インスタンス: tidb-0|tidb-1…|tikv-0…|tiflash-0…<br/>コンポーネント: tidb|tikv|tiflash             | TiDB/TiKV/ TiFlashノードの CPU 使用率。                                                                     |
 | tidb_cloud.node_cpu_capacity_cores         | ゲージ   | クラスタ名: `<cluster name>`<br/>インスタンス: tidb-0|tidb-1…|tikv-0…|tiflash-0…<br/>コンポーネント: tidb|tikv|tiflash             | TiDB/TiKV/ TiFlashノードの CPU コアの制限。                                                                   |
-| tidb_cloud.node_memory_used_bytes          | ゲージ   | クラスタ名: `<cluster name>`<br/>インスタンス: tidb-0|tidb-1…|tikv-0…|tiflash-0…<br/>コンポーネント: tidb|tikv|tiflash             | TiDB/TiKV/ TiFlashノードの使用メモリ (バイト単位)。                                                                |
+| tidb_cloud.node_memory_used_bytes          | ゲージ   | クラスタ名: `<cluster name>`<br/>インスタンス: tidb-0|tidb-1…|tikv-0…|tiflash-0…<br/>コンポーネント: tidb|tikv|tiflash             | TiDB/TiKV/ TiFlashノードの使用メモリ(バイト単位)。                                                                 |
 | tidb_cloud.node_memory_capacity_bytes      | ゲージ   | クラスタ名: `<cluster name>`<br/>インスタンス: tidb-0|tidb-1…|tikv-0…|tiflash-0…<br/>コンポーネント: tidb|tikv|tiflash             | TiDB/TiKV/ TiFlashノードのメモリ容量 (バイト単位)。                                                                |
