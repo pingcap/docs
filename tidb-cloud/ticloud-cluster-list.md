@@ -1,6 +1,6 @@
 ---
 title: ticloud cluster list
-Summary: The reference of `ticloud cluster list`.
+summary: The reference of `ticloud cluster list`.
 ---
 
 # ticloud cluster list

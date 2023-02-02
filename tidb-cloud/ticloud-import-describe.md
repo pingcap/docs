@@ -1,6 +1,6 @@
 ---
 title: ticloud import describe
-Summary: The reference of `ticloud import describe`.
+summary: The reference of `ticloud import describe`.
 ---
 
 # ticloud import describe

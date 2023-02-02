@@ -1,6 +1,6 @@
 ---
 title: ticloud cluster create
-Summary: The reference of `ticloud cluster create`.
+summary: The reference of `ticloud cluster create`.
 ---
 
 # ticloud cluster create

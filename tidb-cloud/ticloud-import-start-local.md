@@ -1,6 +1,6 @@
 ---
 title: ticloud import start local
-Summary: The reference of `ticloud import start local`.
+summary: The reference of `ticloud import start local`.
 ---
 
 # ticloud import start local

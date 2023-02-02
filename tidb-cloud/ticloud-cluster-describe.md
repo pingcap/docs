@@ -1,6 +1,6 @@
 ---
 title: ticloud cluster describe
-Summary: The reference of `ticloud cluster describe`.
+summary: The reference of `ticloud cluster describe`.
 ---
 
 # ticloud cluster describe

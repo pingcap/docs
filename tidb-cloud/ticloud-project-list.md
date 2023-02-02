@@ -1,6 +1,6 @@
 ---
 title: ticloud project list
-Summary: The reference of `ticloud project list`.
+summary: The reference of `ticloud project list`.
 ---
 
 # ticloud project list

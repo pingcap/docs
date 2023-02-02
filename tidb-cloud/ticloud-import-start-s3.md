@@ -1,6 +1,6 @@
 ---
 title: ticloud import start s3
-Summary: The reference of `ticloud import start s3`.
+summary: The reference of `ticloud import start s3`.
 ---
 
 # ticloud import start s3

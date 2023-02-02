@@ -1,6 +1,6 @@
 ---
 title: ticloud import cancel
-Summary: The reference of `ticloud import cancel`.
+summary: The reference of `ticloud import cancel`.
 ---
 
 # ticloud import cancel

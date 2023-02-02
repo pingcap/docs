@@ -1,6 +1,6 @@
 ---
 title: ticloud config describe
-Summary: The reference of `ticloud config describe`.
+summary: The reference of `ticloud config describe`.
 ---
 
 # ticloud config describe

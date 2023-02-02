@@ -1,6 +1,6 @@
 ---
 title: ticloud update
-Summary: The reference of `ticloud update`.
+summary: The reference of `ticloud update`.
 ---
 
 # ticloud update

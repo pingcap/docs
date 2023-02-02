@@ -1,6 +1,6 @@
 ---
 title: ticloud import list
-Summary: The reference of `ticloud import list`.
+summary: The reference of `ticloud import list`.
 ---
 
 # ticloud import list

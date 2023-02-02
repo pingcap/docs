@@ -1,6 +1,6 @@
 ---
 title: ticloud config create
-Summary: The reference of `ticloud config create`.
+summary: The reference of `ticloud config create`.
 ---
 
 # ticloud config create

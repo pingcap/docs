@@ -1,6 +1,6 @@
 ---
 title: TiDB Cloud CLI Quick Start
-Summary: Learn how to manage TiDB Cloud resources through the TiDB Cloud CLI.
+summary: Learn how to manage TiDB Cloud resources through the TiDB Cloud CLI.
 ---
 
 # TiDB Cloud CLI Quick Start

@@ -1,6 +1,6 @@
 ---
 title: ticloud config edit
-Summary: The reference of `ticloud config edit`.
+summary: The reference of `ticloud config edit`.
 ---
 
 # ticloud config edit

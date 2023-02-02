@@ -1,6 +1,6 @@
 ---
 title: ticloud config delete
-Summary: The reference of `ticloud config delete`.
+summary: The reference of `ticloud config delete`.
 ---
 
 # ticloud config delete

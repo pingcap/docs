@@ -1,6 +1,6 @@
 ---
 title: ticloud config use
-Summary: The reference of `ticloud config use`.
+summary: The reference of `ticloud config use`.
 ---
 
 # ticloud config use

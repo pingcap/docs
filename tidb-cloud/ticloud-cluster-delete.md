@@ -1,6 +1,6 @@
 ---
 title: ticloud cluster delete
-Summary: The reference of `ticloud cluster delete`.
+summary: The reference of `ticloud cluster delete`.
 ---
 
 # ticloud cluster delete
