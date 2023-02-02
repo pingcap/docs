@@ -43,7 +43,7 @@ In non-interactive mode, you need to manually enter required flags. In interacti
 |--------------------------|--------------------------------------|----------|-----------------------------------|
  | -c, --cluster-id string  | Cluster ID                           | Yes      | Only works in non-interactive mode. |
  | --data-format string     | Data format (Currently, only `CSV` is supported)            | Yes      | Only works in non-interactive mode. |
- | -h, --help               | Gets the help information for this command            | No       | Works in both non-interactive and interactive modes. |
+ | -h, --help               | Help information for this command            | No       | Works in both non-interactive and interactive modes. |
  | -p, --project-id string  | Project ID                           | Yes      | Only works in non-interactive mode. |
  | --target-database string | Target database to import data to | Yes      | Only works in non-interactive mode. |
  | --target-table string    | Target table to import data to    | Yes      | Only works in non-interactive mode. |
@@ -54,7 +54,7 @@ In non-interactive mode, you need to manually enter required flags. In interacti
 |-----------------------|------------------------------------------------------------------------------------------------|----------|-------------------------------------------------------------------------------------------------------------------|
 | --backslash-escape    | Parses backslashes inside fields as escape characters (`true` by default) for CSV files       | No       | Only works in non-interactive mode when `--data-format CSV` is specified.                                                         |
 | --delimiter string    | Specifies the delimiter used for quoting (`"` by default) for CSV files                                      | No       | Only works in non-interactive mode when `--data-format CSV` is specified.                                                         |
-| --no-color            | Disables color in output                                                                           | No       | Only works in non-interactive mode. In interactive mode, disable color output may not work with some UI components |
+| --no-color            | Disables color in output                                                                           | No       | Only works in non-interactive mode. In interactive mode, disable color output might not work with some UI components |
 | -P, --profile string  | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command.      | No       | Works in both non-interactive and interactive modes.                                                               |
 | --separator string    | Specifies the field separator of CSV files (`,` by default)    | No       | Only works in non-interactive mode when `--data-format CSV` is specified.                                                         |
 | --trim-last-separator | Treats separators as the line terminators and trims all trailing separators for CSV files | No       | Only works in non-interactive mode when `--data-format CSV` is specified.                                                         |

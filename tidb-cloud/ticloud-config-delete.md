@@ -30,7 +30,7 @@ ticloud config delete <profile-name>
 | Flag       | Description                           |
 |------------|---------------------------------------|
 | --force    | Deletes a profile without confirmation |
-| -h, --help | Gets the help information for this command             |
+| -h, --help | Help information for this command             |
 
 ## Inherited flags
 

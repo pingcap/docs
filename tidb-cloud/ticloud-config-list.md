@@ -19,7 +19,7 @@ ticloud config ls [flags]
 
 ## Examples
 
-List all available user profiles:
+List all user profiles available:
 
 ```shell
 ticloud config list
@@ -29,7 +29,7 @@ ticloud config list
 
 | Flag       | Description              |
 |------------|--------------------------|
-| -h, --help | Gets the help information for this command |
+| -h, --help | Help information for this command |
 
 ## Inherited flags
 

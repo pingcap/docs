@@ -8,7 +8,7 @@ Summary: Learn how to manage TiDB Cloud resources through the TiDB Cloud CLI.
 TiDB Cloud provides a command-line interface (CLI) [`ticloud`](https://github.com/tidbcloud/tidbcloud-cli) for you to interact with TiDB Cloud from your terminal with a few lines of commands. For example, you can easily perform the following operations using `ticloud`:
 
 - Create, delete, and list your clusters.
-- Import data from S3 or local files to your clusters.
+- Import data from Amazon S3 or local files to your clusters.
 
 ## Before you begin
 
@@ -61,7 +61,7 @@ For Windows, you can install `ticloud` using either of the following methods:
 
 ## Use the TiDB Cloud CLI
 
-View all available commands:
+View all commands available:
 
 ```shell
 ticloud --help
@@ -83,7 +83,7 @@ ticloud update
 
 The TiDB Cloud CLI is also available through [TiUP](https://tiup.io/), with the component name as `cloud`.
 
-View all available commands:
+View all commands available:
 
 ```shell
 tiup cloud --help

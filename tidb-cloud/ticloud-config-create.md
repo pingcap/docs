@@ -35,7 +35,7 @@ In non-interactive mode, you need to manually enter required flags. In interacti
 
 | Flag                  | Description                                   | Required | Note                             |
 |-----------------------|-----------------------------------------------|----------|-----------------------------------|
-| -h, --help            | Gets the help information for this command                     | No       | Works in both non-interactive and interactive modes. |
+| -h, --help            | Help information for this command                     | No       | Works in both non-interactive and interactive modes. |
 | --private-key string  | The private key of the TiDB Cloud API         | Yes      | Only works in non-interactive mode. |
 | --profile-name string | The name of the profile, which must not contain `.` | Yes      | Only works in non-interactive mode. |
 | --public-key string   | The public key of the TiDB Cloud API          | Yes      | Only works in non-interactive mode. |

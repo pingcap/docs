@@ -11,13 +11,13 @@ TiDB Cloud CLI is a command line interface, which allows you to operate TiDB Clo
 
 Make sure to first [set up your TiDB Cloud CLI environment](/tidb-cloud/get-started-with-cli.md). Once you have installed the `ticloud` CLI, you can use it to manage your TiDB Cloud clusters from the command lines.
 
-## Available commands
+## Commands available
 
 The following table lists the available commands for the TiDB Cloud CLI.
 
-To use the `ticloud` CLI in your terminal, you can use `ticloud [command] [subcommand]`. For users using [TiUP](https://docs.pingcap.com/tidb/stable/tiup-overview), use `tiup cloud [command] [subcommand]` instead.
+To use the `ticloud` CLI in your terminal, run `ticloud [command] [subcommand]`. If you are using [TiUP](https://docs.pingcap.com/tidb/stable/tiup-overview), use `tiup cloud [command] [subcommand]` instead.
 
-| Command    | Subcommands                                                | Description                                                                                              |
+| Command    | Subcommand                                                | Description                                                                                              |
 |------------|------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
 | cluster    | create, delete, describe, list                             | Manage clusters                                                                                          |
 | completion | bash, fish, powershell, zsh                                | Generate completion script for specified shell                                                           |
@@ -29,15 +29,15 @@ To use the `ticloud` CLI in your terminal, you can use `ticloud [command] [subco
 
 ## Command modes
 
-The TiDB Cloud CLI provides the following two modes for some commands for easy use:
+The TiDB Cloud CLI provides two modes for some commands for easy use:
 
 - Interactive mode
 
-    In this mode, you can run a command without flags (such as `ticloud config create`), and the CLI prompts you for input.
+    You can run a command without flags (such as `ticloud config create`), and the CLI prompts you for input.
 
 - Non-interactive mode
 
-    In this mode, you must provide all the required arguments and flags when running a command, such as `ticloud config create --profile-name <profile-name> --public-key <public-key> --private-key <private-key>`
+    You must provide all arguments and flags that are required when running a command, such as `ticloud config create --profile-name <profile-name> --public-key <public-key> --private-key <private-key>`.
 
 ## User profile
 
@@ -91,7 +91,7 @@ Current profile has been changed to default
 
 ### Edit the config file
 
-Use [`ticloud config edit`](/tidb-cloud/ticloud-config-edit.md) to open the config file for editing.
+Use [`ticloud config edit`](/tidb-cloud/ticloud-config-edit.md) to open the configuration file for editing.
 
 ### Delete a user profile
 

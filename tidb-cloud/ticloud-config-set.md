@@ -5,13 +5,13 @@ Summary: The reference of `ticloud config set`.
 
 # ticloud config set
 
-You can use `ticloud config set` to configure the properties for the active [user profile](/tidb-cloud/cli-reference.md#user-profile) as follows:
+Configure the properties for the active [user profile](/tidb-cloud/cli-reference.md#user-profile):
 
 ```shell
 ticloud config set <property-name> <value> [flags]
 ```
 
-The property names that can be configured include `public-key`, `private-key`, and `api-url`.
+The properties that can be configured include `public-key`, `private-key`, and `api-url`.
 
 | Properties  | Description                                                        | Required |
 |-------------|--------------------------------------------------------------------|----------|
@@ -51,7 +51,7 @@ ticloud config set api-url https://api.tidbcloud.com
 
 | Flag       | Description              |
 |------------|--------------------------|
-| -h, --help | Gets the help information for this command |
+| -h, --help | Help information for this command |
 
 ## Inherited flags
 

@@ -37,7 +37,7 @@ In non-interactive mode, you need to manually enter required flags. In interacti
 
 | Flag                | Description                                                                                            | Required | Note                                               |
 |---------------------|--------------------------------------------------------------------------------------------------------|----------|-----------------------------------------------------|
-| -h, --help          | Gets the help information for this command                                                                              | No       | Works in both non-interactive and interactive modes.      |
+| -h, --help          | Help information for this command                                                                              | No       | Works in both non-interactive and interactive modes.      |
 | -o, --output string | Output format (`human` by default). Valid values are `human` or `json`. To get a complete result, use the `json` format.  | No       | Works in both non-interactive and interactive modes. |
 
 ## Inherited flags
