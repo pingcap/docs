@@ -242,8 +242,6 @@ br debug encode \
     --s3.endpoint '${S3-endpoint-URL}' \
     --log-file encode-backupmeta.log
 ```
-
-
 ## Backup performance and impact
 
 The backup feature has some impact on cluster performance (transaction latency and QPS). However, you can mitigate the impact by adjusting the number of backup threads [`backup.num-threads`](/tikv-configuration-file.md#num-threads-1) or by adding more clusters.
