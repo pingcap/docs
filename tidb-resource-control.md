@@ -9,7 +9,7 @@ summary: Learn how to use resource management to control and schedule applicatio
 >
 > This feature is experimental and its form and usage may change in subsequent versions.
 
-Using the resource control feature, as a cluster administrator, you can define resource groups and limit the read and write quotas by resource groups. After you bind users to a resource group, the TiDB layer will perform flow control on the user's read and write requests according to the read and write quotas set by the bound resource group. Meanwile, the TiKV layer will schedule the requests according to the priority of the read and write quota mapping. Through flow control and scheduling, you can achieve resource isolation of your applications and meet the quality of service (QoS) requirements.
+Using the resource control feature, as a cluster administrator, you can define resource groups and limit the read and write quotas by resource groups. After you bind users to a resource group, the TiDB layer will perform flow control on the user's read and write requests according to the read and write quotas set by the bound resource group. Meanwhile, the TiKV layer will schedule the requests according to the priority of the read and write quota mapping. Through flow control and scheduling, you can achieve resource isolation of your applications and meet the quality of service (QoS) requirements.
 
 The introduction of the resource control feature is a milestone for TiDB. It can divide a distributed database cluster into multiple logical units. Even if an individual unit overuses resources, it does not crowd out the resources needed by other units. 
 
