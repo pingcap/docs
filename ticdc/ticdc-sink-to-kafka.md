@@ -235,9 +235,9 @@ You can use `partition = "xxx"` to specify a partition dispatcher. It supports f
 
 ## Scale out the load of a single large table to multiple TiCDC nodes
 
-This feature splits a single large table into multiple data ranges based on the number of Regions, and distributes these data ranges to multiple TiCDC nodes so that multiple TiCDC nodes can synchronize the large single table at the same time. This feature can solve the following two problems:
+This feature splits a single large table into multiple data ranges based on the number of Regions, and distributes these data ranges to multiple TiCDC nodes so that multiple TiCDC nodes can replicate the large single table at the same time. This feature can solve the following two problems:
 
-- A single TiCDC node cannot synchronize a large single table in time.
+- A single TiCDC node cannot replicate a large single table in time.
 - The resources (such as CPU and memory) consumed by TiCDC nodes are not evenly distributed.
 
 > **Note:**
