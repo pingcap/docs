@@ -35,10 +35,10 @@ BurstableOption ::=
 
 TiDB supports the following `DirectResourceGroupOption`, where [RU (Resource Unit)](/tidb-RU.md) is TiDB's unified abstraction unit for CPU, IO, and other system resources.
 
-| Parameter     | Description                         | Example                |
+| Option     | Description                         | Example                |
 |---------------|-------------------------------------|------------------------|
-|`RRU_PER_SEC`  | Quota of RU read per second         |`RRU_PER_SEC = 500`     |
-|`WRU_PER_SEC`  | Quota of RU write per second        |`WRU_PER_SEC = 300`     |
+|`RRU_PER_SEC`  | Quota of read RU per second         |`RRU_PER_SEC = 500`     |
+|`WRU_PER_SEC`  | Quota of write RU per second        |`WRU_PER_SEC = 300`     |
 
 If the `BURSTABLE` attribute is set, the corresponding resource group allows the system resources to be used exceeding the quota if the system resources are sufficient.
 

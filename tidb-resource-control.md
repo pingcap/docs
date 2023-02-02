@@ -16,7 +16,7 @@ The introduction of the resource control feature is a milestone for TiDB. It can
 This feature applies to the following scenarios:
 
 - You can combine multiple small and medium-sized applications from different systems into one TiDB cluster. If the load of an individual application grows larger, it does not affect the normal operation of other businesses. When the system load is low, busy applications can still be allocated the required system resources even if they exceed the set read and write quotas, so as to achieve the maximum utilization of resources.
-- You can choose to combine all test environments into a single cluster, or group the batch tasks that consume more resources into a single resource group. It can improve hardware utilization and reduce operating costs while ensuring that critical applications receive the necessary resources.
+- You can choose to combine all test environments into a single cluster, or group the batch tasks that consume more resources into a single resource group. It can improve hardware utilization and reduce operating costs while ensuring that critical applications can still get the necessary resources.
 
 In addition, the rational use of the resource control feature can reduce the number of clusters, ease the difficulty of operation and maintenance, and save management costs.
 
@@ -43,7 +43,7 @@ The resource control feature introduces two new global variables.
 
 </CustomContent>
 
-The results of the combination of these two parameters are shown in the following table.
+The results of the combinations of these two parameters are shown in the following table.
 
 | `resource_control.enabled`  | `tidb_enable_resource_control`= ON   | `tidb_enable_resource_control`= OFF  |
 |:----------------------------|:-------------------------------------|:-------------------------------------|
@@ -54,18 +54,18 @@ The results of the combination of these two parameters are shown in the followin
 
 For an existing resource group, you can modify the read and write quota of the resource group by using [`ALTER RESOURCE GROUP`](/sql-statements/sql-statement-alter-resource-group.md). The quota changes to the resource group take effect immediately.
 
-You can delete a resource group by using [`DROP RESOURCE GROUP`](/sql-statements/sql-statement-drop-resource-group.md). The user bound by the deleted resource group will use the `default` resource group for resource isolation.
+You can delete a resource group by using [`DROP RESOURCE GROUP`](/sql-statements/sql-statement-drop-resource-group.md). The user bound to the deleted resource group will use the `default` resource group for resource isolation.
 
 > **Note:**
 > 
-> - When you bind a user resource group with `CREATE USER` or `ALTER USER`, it will not take effect for the user's existing sessions, but only for the user's new sessions.
-> - The `default` resource group does not have quota restrictions for bound user applications. It is recommended to create the `default` resource group by using [`CREATE RESOURCE GROUP`](/sql-statements/sql-statement-create-resource-group.md), or modify the quota for the `default` resource group by using [`ALTER RESOURCE GROUP`](/sql-statements/sql-statement-alter-resource-group.md) to control the quota for the `default` resource group.
+> - When you bind a user to a resource group by using `CREATE USER` or `ALTER USER`, it will not take effect for the user's existing sessions, but only for the user's new sessions.
+> - The `default` resource group does not have quota restrictions for the user's applications. It is recommended to create the `default` resource group by using [`CREATE RESOURCE GROUP`](/sql-statements/sql-statement-create-resource-group.md), or modify the quota for the `default` resource group by using [`ALTER RESOURCE GROUP`](/sql-statements/sql-statement-alter-resource-group.md) to control the quota for the `default` resource group.
 
 ### Prerequisites
 
 To create, modify, or delete a resource group, you need to have the `SUPER` or `RESOURCE_GROUP_ADMIN` privilege.
 
-You can create a resource group in the cluster with [`CREATE RESOURCE GROUP`](/sql-statements/sql-statement-create-resource-group.md), and then bind the users to a specific resource group by using [`CREATE USER`](/sql-statements/ sql-statement-create-user.md) or [`ALTER USER`](/sql-statements/sql-statement-alter-user.md).
+You can create a resource group in the cluster by using [`CREATE RESOURCE GROUP`](/sql-statements/sql-statement-create-resource-group.md), and then bind the users to a specific resource group by using [`CREATE USER`](/sql-statements/ sql-statement-create-user.md) or [`ALTER USER`](/sql-statements/sql-statement-alter-user.md).
 
 ### Step 1. Enable the resource control feature
 
@@ -75,9 +75,14 @@ Enable flow control for the resource group.
 SET GLOBAL tidb_enable_resource_control = 'ON';
 ```
 
+
+<CustomContent platform="tidb-cloud">
+
 In TiKV, set the parameter `resource_control.enabled` to `true`. The parameter `resource_control.enabled` is disabled by default. You need to contact the [PingCAP support team](/tidb-cloud/tidb-cloud-support.md) to enable it.
 
-### Step 2. Create a resource group, and bind users to it
+</CustomContent> 
+
+### Step 2. Create a resource group, and then bind users to it
 
 Resource group quotas are expressed as [RU (Resource Unit)](/tidb-RU.md), which is TiDB's unified abstraction of CPU, IO, and other system resources.
 
@@ -112,7 +117,7 @@ The following is an example of how to create a resource group and bind users to 
     ALTER USER usr2 RESOURCE GROUP rg2;
     ```
 
-After you complete the preceeding operations, the resource consumption by newly created sessions is controlled by the specified quota. Read requests are limited by the quota of the read RU, and write requests are limited by the quota of the write RU. If the system load is relatively high and there is no spare capacity, the resource consumption rate of both users will be strictly controlled not to exceed the quota. Meanwhile, the consumption ratio of RU metrics for both users' read and write requests is basically proportional to the specified quota. When system resources are abundant, the resource consumption rate of `usr1` is allowed to exceed the quota because it has set `BURSTABLE`.
+After you complete the preceeding operations, the resource consumption by newly created sessions is controlled by the specified quota. Read requests are limited by the read RU quota, and write requests are limited by the write RU quota. If the system load is relatively high and there is no spare capacity, the resource consumption rate of both users will be strictly controlled not to exceed the quota. Meanwhile, the consumption ratio of RU metrics for both users' read and write requests is basically proportional to the specified quota. When system resources are abundant, the resource consumption rate of `usr1` is allowed to exceed the quota because it has set `BURSTABLE`, while `usr2` is not allowed.
 
 ## Monitoring and charts
 
@@ -127,7 +132,7 @@ The resource control feature is not compatible with data export/import and repli
 Currently, the resource control feature has the following limitations:
 
 * This feature only supports restriction and scheduling of read and write requests initiated by frontend clients. It does not support restriction and scheduling of background tasks such as `DDL` and `Auto Analyze`. 
-* Resource control will incur additional scheduling overhead. Therefore, there might be a slight performance degradation when this feature is enabled.
+* Resource control incurs additional scheduling overhead. Therefore, there might be a slight performance degradation when this feature is enabled.
 
 ## See also
 

@@ -3,7 +3,7 @@ title: RESOURCE_GROUPS
 summary: Learn the `RESOURCE_GROUPS` information_schema table.
 ---
 
-The `RESOURCE_GROUPS` table shows information about all resource groups. See [Resource Conctrol in TiDB](/tidb-resource-control.md).
+The `RESOURCE_GROUPS` table shows information about all resource groups. See [Use Resource Control to Achieve Resource Isolation](/tidb-resource-control.md).
 
 ```sql
 USE information_schema;
