@@ -1,11 +1,7 @@
 ---
 title: Backup Storages
 summary: Describes the storage URL format used in TiDB backup and restore.
-<<<<<<< HEAD
-aliases: ['/tidb/v6.4/backup-storage-S3/','/tidb/v6.4/backup-storage-azblob/','/tidb/v6.4/backup-storage-gcs/']
-=======
-aliases: ['/docs/dev/br/backup-and-restore-storages/','/tidb/dev/backup-storage-S3/','/tidb/dev/backup-storage-azblob/','/tidb/dev/backup-storage-gcs/','/tidb/dev/external-storage/']
->>>>>>> 3d78c8449 (*: move external storage to dumpling and lightning docs (#12354))
+aliases: ['/tidb/v6.4/backup-storage-S3/','/tidb/v6.4/backup-storage-azblob/','/tidb/v6.4/backup-storage-gcs/','/tidb/v6.4/external-storage/']
 ---
 
 # Backup Storages
