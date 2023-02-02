@@ -10,6 +10,16 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 ## January 18, 2023
 
+**CLI changes**
+
+- Introduce the TiDB Cloud CLI client [`ticloud`](tidb-cloud/cli-reference.md).
+
+    Using `ticloud`, you can easily manage your TiDB Cloud resources from terminal or other automatic workflows using a few lines of commands. Especially for GitHub Actions, we have provided [`setup-tidbcloud-cli`](https://github.com/marketplace/actions/set-up-tidbcloud-cli) for you to easily set up `ticloud`.
+
+    For more information, see [TiDB Cloud CLI Quick Start](/tidb-cloud/get-started-with-cli.md) and [TiDB Cloud CLI Reference](/tidb-cloud/cli-reference.md).
+
+## January 18, 2023
+
 **General changes**
 
 * Support [signing up](https://tidbcloud.com/free-trial) TiDB Cloud with a Microsoft account.
