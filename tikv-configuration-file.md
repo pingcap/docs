@@ -2155,3 +2155,12 @@ To reduce write latency, TiKV periodically fetches and caches a batch of timesta
 + The maximum number of TSOs in a timestamp request.
 + In a default TSO physical time update interval (`50ms`), PD provides at most 262144 TSOs. When requested TSOs exceed this number, PD provides no more TSOs. This configuration item is used to avoid exhausting TSOs and the reverse impact of TSO exhaustion on other businesses. If you increase the value of this configuration item to improve high availability, you need to decrease the value of [`tso-update-physical-interval`](/pd-configuration-file.md#tso-update-physical-interval) at the same time to get enough TSOs.
 + Default value: `8192`
+
+## resource_control
+
+Configuration items related to resource control.
+
+### `enabled` <span class="version-mark">New in v6.6.0</span>
+
++ Control whether to use read/write request scheduling based on resource group quotas. 
++ Default value: `false`, which means to disable scheduling based on resource group quotas.

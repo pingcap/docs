@@ -5,7 +5,7 @@ summary: Learn the usage of SHOW CREATE RESOURCE GROUP in TiDB.
 
 # SHOW CREATE RESOURCE GROUP
 
-You can use the `SHOW CREATE RESOURCE GROUP` statement to view the current definition of a resource group, and recreate it in another TiDB cluster.
+You can use the `SHOW CREATE RESOURCE GROUP` statement to view the current definition of a resource group.
 
 ## Synopsis
 
