@@ -117,7 +117,7 @@ The following is an example of how to create a resource group and bind users to 
     ALTER USER usr2 RESOURCE GROUP rg2;
     ```
 
-After you complete the preceeding operations, the resource consumption by newly created sessions is controlled by the specified quota. Read requests are limited by the read RU quota, and write requests are limited by the write RU quota. If the system load is relatively high and there is no spare capacity, the resource consumption rate of both users will be strictly controlled not to exceed the quota. Meanwhile, the consumption ratio of RU metrics for both users' read and write requests is basically proportional to the specified quota. When system resources are abundant, the resource consumption rate of `usr1` is allowed to exceed the quota because it has set `BURSTABLE`, while `usr2` is not allowed.
+After you complete the preceding operations, the resource consumption by newly created sessions is controlled by the specified quota. Read requests are limited by the read RU quota, and write requests are limited by the write RU quota. If the system load is relatively high and there is no spare capacity, the resource consumption rate of both users will be strictly controlled not to exceed the quota. Meanwhile, the consumption ratio of RU metrics for both users' read and write requests is basically proportional to the specified quota. When system resources are abundant, the resource consumption rate of `usr1` is allowed to exceed the quota because it has set `BURSTABLE`, while `usr2` is not allowed.
 
 ## Monitoring and charts
 
