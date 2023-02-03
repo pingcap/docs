@@ -28,12 +28,30 @@ In addition, the rational use of the resource control feature can reduce the num
 
 </CustomContent>
 
+## What is Request Unit (RU)
+
+Request Unit (RU) is TiDB's unified abstraction unit for CPU, IO and other system resources, which currently includes CPU, IOPS and IO bandwidth metrics. The consumption of these three metrics is represented by the RU unit according to a certain ratio.
+
+The following table shows the consumption of TiKV storage layer CPU and IO resources by user requests and the corresponding RU weights.
+
+| Resource       | RU Weight |
+|:----------|:------|
+| CPU       | 1 RU / Milliseconds |
+| Read IO       | 1 RU / MiB |
+| Write IO      | 5 RU / MiB |
+| Basic overhead of a read request   | 1 RU  |
+| Basic overhead of a write request   | 3 RU  |
+
+Based on the above table, assuming that the TiKV time consumed by a resource group is `c` milliseconds, `r1` requests that read `r2` MiB data, and `w1` write requests that write `w2` MiB data, then the formula for the total RUs consumed by the resource group is as follows:
+
+c + (r1 + r2) + (3 * w1 + 5 * w2)
+
 ## Parameters for resource control
 
 The resource control feature introduces two new global variables.
 
-* TiDB: you can use the system variable [`tidb_enable_resource_control`](/system-variables.md#tidb-tidb_enable_resource_control) to control whether to enable flow control for a resource group. 
-* TiKV: you can use the parameter [`resource_control.enabled`](/tikv-configuration-file.md#resource_control) to control whether to use request scheduling based on resource group quotas. 
+* TiDB: you can use the system variable [`tidb_enable_resource_control`](/system-variables.md#tidb-tidb_enable_resource_control) to control whether to enable flow control for a resource group.
+* TiKV: you can use the parameter [`resource_control.enabled`](/tikv-configuration-file.md#resource_control) to control whether to use request scheduling based on resource group quotas.
 
 <CustomContent platform="tidb-cloud">
 
@@ -52,20 +70,18 @@ The results of the combinations of these two parameters are shown in the followi
 
 ## How to use resource control
 
+To create, modify, or delete a resource group, you need to have the `SUPER` or `RESOURCE_GROUP_ADMIN` privilege.
+
+You can create a resource group in the cluster by using [`CREATE RESOURCE GROUP`](/sql-statements/sql-statement-create-resource-group.md), and then bind the users to a specific resource group by using [`CREATE USER`](/sql-statements/ sql-statement-create-user.md) or [`ALTER USER`](/sql-statements/sql-statement-alter-user.md).
+
 For an existing resource group, you can modify the read and write quota of the resource group by using [`ALTER RESOURCE GROUP`](/sql-statements/sql-statement-alter-resource-group.md). The quota changes to the resource group take effect immediately.
 
-You can delete a resource group by using [`DROP RESOURCE GROUP`](/sql-statements/sql-statement-drop-resource-group.md). The user bound to the deleted resource group will use the `default` resource group for resource isolation.
+You can delete a resource group by using [`DROP RESOURCE GROUP`](/sql-statements/sql-statement-drop-resource-group.md).
 
 > **Note:**
 > 
 > - When you bind a user to a resource group by using `CREATE USER` or `ALTER USER`, it will not take effect for the user's existing sessions, but only for the user's new sessions.
-> - The `default` resource group does not have quota restrictions for the user's applications. It is recommended to create the `default` resource group by using [`CREATE RESOURCE GROUP`](/sql-statements/sql-statement-create-resource-group.md), or modify the quota for the `default` resource group by using [`ALTER RESOURCE GROUP`](/sql-statements/sql-statement-alter-resource-group.md) to control the quota for the `default` resource group.
-
-### Prerequisites
-
-To create, modify, or delete a resource group, you need to have the `SUPER` or `RESOURCE_GROUP_ADMIN` privilege.
-
-You can create a resource group in the cluster by using [`CREATE RESOURCE GROUP`](/sql-statements/sql-statement-create-resource-group.md), and then bind the users to a specific resource group by using [`CREATE USER`](/sql-statements/ sql-statement-create-user.md) or [`ALTER USER`](/sql-statements/sql-statement-alter-user.md).
+> - If a user is not bound to a resource group or is bound to a `default` resource group, the user's requests are not subject to TiDB's flow control restrictions. The `default` resource group is currently not visible to the user and cannot be created or modified.
 
 ### Step 1. Enable the resource control feature
 
@@ -83,27 +99,20 @@ In TiKV, set the parameter `resource_control.enabled` to `true`. The parameter `
 
 ### Step 2. Create a resource group, and then bind users to it
 
-Resource group quotas are expressed as [RU (Resource Unit)](/tidb-RU.md), which is TiDB's unified abstraction of CPU, IO, and other system resources.
+Resource group quotas are expressed as [RU (Request Unit)](/tidb-RU.md), which is TiDB's unified abstraction of CPU, IO, and other system resources.
 
 The following is an example of how to create a resource group and bind users to it.
 
-1. Create a resource group `rg1` with a quota of 500 RU per second for read requests and 300 RU per second for write requests, and allow applications in this resource group to use excessive resources when system resources are available.
+1. Create a resource group `rg1`. The RU backfill rate is 500 RU per second and allows applications in this resource group to overrun resources.
 
     ```sql
-    CREATE RESOURCE GROUP IF NOT EXISTS rg1
-    RRU_PER_SEC = 500
-    WRU_PER_SEC = 300
-    BURSTABLE
-    ;
+    CREATE RESOURCE GROUP IF NOT EXISTS rg1 RU_PER_SEC = 500 BURSTABLE;
     ```
 
-2. Create a resource group `rg2` with a quota of 600 RU per second for read requests and 400 RU per second for write requests, and do not allow applications in this resource group to use excessive resources even when system resources are available.
+2. Create a resource group `rg2`. The RU backfill rate is 500 RU per second and does not allow applications in this resource group to overrun resources.
 
     ```sql
-    CREATE RESOURCE GROUP IF NOT EXISTS rg2
-    RRU_PER_SEC = 600
-    WRU_PER_SEC = 400
-    ;
+    CREATE RESOURCE GROUP IF NOT EXISTS rg2 RU_PER_SEC = 600;
     ```
 
 3. Bind users `usr1` and `usr2` to resource groups `rg1` and `rg2` respectively.
@@ -116,7 +125,9 @@ The following is an example of how to create a resource group and bind users to 
     ALTER USER usr2 RESOURCE GROUP rg2;
     ```
 
-After you complete the preceding operations, the resource consumption by newly created sessions is controlled by the specified quota. Read requests are limited by the read RU quota, and write requests are limited by the write RU quota. If the system load is relatively high and there is no spare capacity, the resource consumption rate of both users will be strictly controlled not to exceed the quota. Meanwhile, the consumption ratio of RU metrics for both users' read and write requests is basically proportional to the specified quota. When system resources are abundant, the resource consumption rate of `usr1` is allowed to exceed the quota because it has set `BURSTABLE`, while `usr2` is not allowed.
+After you complete the above operations of creating resource groups and binding users, the resource consumption of newly created sessions will be controlled by the specified quota. If the system load is relatively high and there is no spare capacity, the resource consumption rate of `usr2` will be strictly controlled not to exceed the quota. Because `usr1` bound by `rg1` is configured with `BURSTABLE`, the consumption rate of `usr1` is allowed to exceed the quota.
+
+If the resource group corresponds to a request with insufficient quota, the client's request will wait. If the wait time is too long, the request will report an error.
 
 ## Monitoring and charts
 

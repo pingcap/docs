@@ -33,14 +33,13 @@ BurstableOption ::=
 
 ```
 
-TiDB supports the following `DirectResourceGroupOption`, where [RU (Resource Unit)](/tidb-RU.md) is TiDB's unified abstraction unit for CPU, IO, and other system resources.
+TiDB supports the following `DirectResourceGroupOption`, where [RU (Request Unit)](/tidb-RU.md) is TiDB's unified abstraction unit for CPU, IO, and other system resources.
 
 | Option     | Description                         | Example                |
 |---------------|-------------------------------------|------------------------|
-|`RRU_PER_SEC`  | Quota of read RU per second         |`RRU_PER_SEC = 500`     |
-|`WRU_PER_SEC`  | Quota of write RU per second        |`WRU_PER_SEC = 300`     |
+|`RU_PER_SEC` | Rate of RU filling per second |`RU_PER_SEC = 500` indicates that this resource group is backfilled with 500 RU per second |
 
-If the `BURSTABLE` attribute is set, the corresponding resource group allows the system resources to be used exceeding the quota if the system resources are sufficient.
+If the `BURSTABLE` attribute is set, the corresponding resource group allows the system resources to be used exceeding the quota.
 
 > **Note:**
 > 
@@ -54,31 +53,26 @@ Create a resource group named `rg1` and modify its properties.
 mysql> DROP RESOURCE GROUP IF EXISTS rg1;
 Query OK, 0 rows affected (0.22 sec)
 mysql> CREATE RESOURCE GROUP IF NOT EXISTS rg1
-    ->  RRU_PER_SEC = 500
-    ->  WRU_PER_SEC = 300
-    ->  BURSTABLE
-    -> ;
+    ->  RU_PER_SEC = 100
+    ->  BURSTABLE;
 Query OK, 0 rows affected (0.08 sec)
 mysql> SELECT * FROM information_schema.resource_groups WHERE NAME ='rg1';
-+------+--------------+---------------------------------------------------------------+
-| Name | Plan_type    | Directive | 
-+------+--------------+---------------------------------------------------------------+
-| rg1  |   tenancy    | {"RRU_PER_SEC": 500, "WRU_PER_SEC": 300, "BURSTABLE": true} |
-+------+--------------+---------------------------------------------------------------+
-1 row in set (0.00 sec)
-
-mysql> ALTER RESOURCE GROUP IF NOT EXISTS rg1
-    ->  RRU_PER_SEC = 600
-    ->  WRU_PER_SEC = 400
-    -> ;
-Query OK, 0 rows affected (0.09 sec)
++------+-------------+-----------+-----------+
+| NAME | RU_PER_SEC  | RU_TOKENS | BURSTABLE |
++------+-------------+-----------+-----------+
+| rg1  |         100 |    165135 | YES       |
++------+-------------+-----------+-----------+
+1 rows in set (1.30 sec)
+mysql> ALTER RESOURCE GROUP rg1
+    ->  RU_PER_SEC = 200;
+Query OK, 0 rows affected (0.08 sec)
 mysql> SELECT * FROM information_schema.resource_groups WHERE NAME ='rg1';
-+------+--------------+---------------------------------------------------------------+
-| Name | Plan_type    | Directive | 
-+------+--------------+---------------------------------------------------------------+
-| rg1  |   tenancy    | {"RRU_PER_SEC": 600, "WRU_PER_SEC": 400, "BURSTABLE": false} |
-+------+--------------+---------------------------------------------------------------+
-1 row in set (0.00 sec)
++------+-------------+-----------+-----------+
+| NAME | RU_PER_SEC  | RU_TOKENS | BURSTABLE |
++------+-------------+-----------+-----------+
+| rg1  |         200 |    257158 | NO        |
++------+-------------+-----------+-----------+
+1 rows in set (1.30 sec)
 ```
 
 ## MySQL compatibility
