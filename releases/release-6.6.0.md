@@ -65,21 +65,22 @@ TiDB 版本：6.6.0
 
     更多信息，请参考[用户文档](/partitioned-table.md#重组分区)
 
-* [Placement Rules in SQL](https://docs.pingcap.com/zh/tidb/dev/placement-rules-in-sql) 支持指定 `SURVIVAL_PREFERENCE` [#38605](https://github.com/pingcap/tidb/issues/38605) @nolouch[https://github.com/nolouch] **tw@qiancai**
+* Support configuring `SURVIVAL_PREFERENCE` for [placement rules in SQL](/placement-rules-in-sql.md) [#38605](https://github.com/pingcap/tidb/issues/38605) @nolouch[https://github.com/nolouch] **tw@qiancai**
 
-    通过指定 `SURVIVAL_PREFERENCE`，用户可以：
-        1. 跨区域部署的 TiDB 集群，用户可以控制指定数据库或表在某个区域故障时，也能在另一个区域提供服务。
-        2. 单区域部署的 TiDB 集群，用户可以控制指定数据库或表在某个可用区故障时，也能在另一个可用区提供服务。
+    `SURVIVAL_PREFERENCES` provides data survival preference settings to increase the disaster survivability of data. By specifying `SURVIVAL_PREFERENCE`, you can control the following:
 
-     更多信息，请参考[用户文档](/placement-rules-in-sql.md#生存偏好)
+    - For TiDB clusters deployed across regions, when a region with the specified databases or tables fails, another region can provide the service.
+    - For TiDB clusters deployed in a single region, when an availability zone with the specified databases or tables fails, another availability zone can provide the service.
 
-### 安全
+     For more information，see [documentation](/placement-rules-in-sql.md#survival-preference)。
 
-* TiFlash 支持 TLS certificate hot reload @[ywqzzy](https://github.com/ywqzzy) **tw@qiancai**
+### Security
 
-    TiFlash TLS 证书自动轮换指在开启组件间加密传输的 TiDB Cluster 上，当 TiFlash 的 TLS 证书过期，重新签发一个新 TLS 证书给 TiFlash 时，可以不用重启 TiDB Cluster，自动加载新 TiFlash TLS 证书。TiDB Cluster 内部组件之间 TLS 过期轮换不影响 TiDB Cluster 的正常使用，保障了 TiDB 集群高可用性。
+* TiFlash supports automatic rotations of TLS certificates [#5503](https://github.com/pingcap/tiflash/issues/5503) @[ywqzzy](https://github.com/ywqzzy) **tw@qiancai**
 
-    更多信息，请参考：https://docs.pingcap.com/tidb/stable/enable-tls-between-components
+    For a TiDB cluster with encrypted data transmission between components enabled, when a TLS certificate of TiFlash expires and needs to be reissued with a new one, the new TiFlash TLS certificate can be automatically loaded without restarting the TiDB cluster. The rotation of a TLS certificate between componets within a TiDB cluster does not affect the normal use of the TiDB cluster, which ensures the cluster high availability.
+
+    For more information, see [documentation](/enable-tls-between-components.md).
 
 ### 可观测性
 
@@ -146,15 +147,15 @@ TiDB 版本：6.6.0
 
     更多信息，请参考[用户文档](/use-witness-to-save-costs.md)。
 
-* TiFlash 引擎支持 Stale Read 功能 [#4483](https://github.com/pingcap/tiflash/issues/4483) @[hehechen](https://github.com/hehechen) **tw@qiancai**
+* TiFlash supports the Stale Read feature [#4483](https://github.com/pingcap/tiflash/issues/4483) @[hehechen](https://github.com/hehechen) **tw@qiancai**
 
-    在 v5.1.1 中，TiDB 正式发布了 Stale Read 功能，TiDB 可以读取指定的时间点或时间范围内的历史数据。Stale Read 允许引擎直接读取本地副本数据，降低读取延迟，提升查询性能。但是，只有 TiKV 引擎支持 Stale Read 功能，TiFlash 引擎并不支持 Stale Read 功能，即使查询的表包含 TiFlash 副本，TiDB 也只能使用 TiKV 副本进行指定时间点或时间范围内的历史数据查询。在 v6.6.0 中，TiFlash 引擎实现了对 Stale Read 功能的支持。使用语法 `AS OF TIMESTAMP` 或系统变量 `tidb_read_staleness` 等方式进行指定时间点或时间范围内的历史数据查询时，如果查询的表包含 TiFlash 副本，优化器可以选择 TiFlash 引擎读取指定的时间点或时间范围内的历史数据。
+   The Stale Read feature has been generally available (GA) since v5.1.1, which allows you to read historical data at a specific timestamp or within a specified time range. Stale read can reduce read latency and improve query performance by reading data from local TiKV replicas directly. Before v6.6.0, TiFlash does not support Stale Read. Even if a table has TiFlash replicas, Stale Read can only read its TiKV replicas.
 
-    更多信息，请参考[用户文档](/stale-read.md)。
+   Staring from v6.6.0, TiFlash supports the Stale Read feature. When you query historical data of a table using the `AS OF TIMESTAMP` syntax or the `tidb_read_staleness` system variable, if the table has a TiFlash replica, the optimizer now can choose to read the corresponding data from the TiFlash replica, thus further improving query performance.
 
-* 新增支持下推以下字符串函数至 TiFlash [#6115](https://github.com/pingcap/tiflash/issues/6115) @[xzhangxian1008](https://github.com/xzhangxian1008) **tw@shichun-0415**
+    For more information, see [documentation](/stale-read.md).
 
-    * `regexp_replace`
+* Support pushing down the `regexp_replace` string function to TiFlash [#6115](https://github.com/pingcap/tiflash/issues/6115) @[xzhangxian1008](https://github.com/xzhangxian1008) **tw@qiancai**
 
 * TiFlash 引擎支持独立的 MVCC 位图过滤器 [#6296](https://github.com/pingcap/tiflash/issues/6296) @[JinheLin](https://github.com/JinheLin) **tw@qiancai**
 
@@ -312,7 +313,7 @@ TiDB 版本：6.6.0
 
 + TiFlash
 
-    - note [#issue](链接) @[贡献者 GitHub ID](链接)
+    - Support an independent MVCC bitmap filter that decouples the MVCC filtering operations in the TiFlash data scanning process, which provides a foundation for subsequent optimization of the data scanning process [#6296](https://github.com/pingcap/tiflash/issues/6296) @[JinheLin] **tw@qiancai**
     - note [#issue](链接) @[贡献者 GitHub ID](链接)
 
 + Tools
