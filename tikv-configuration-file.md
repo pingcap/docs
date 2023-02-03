@@ -2158,9 +2158,10 @@ To reduce write latency, TiKV periodically fetches and caches a batch of timesta
 
 ## resource_control
 
-Configuration items related to resource control.
+Configuration items related to resource control related to the TiKV storage layer.
 
 ### `enabled` <span class="version-mark">New in v6.6.0</span>
 
-+ Control whether to use read/write request scheduling based on resource group quotas. 
++ Whether to support prioritized scheduling for user foreground read/write requests according to the corresponding resource group quota. For information about TiDB resource groups and resource control, see [TiDB resource control](/tidb-resource-control.md)
++ It is only meaningful to enable this configuration item if [`tidb_enable_resource_control](/system-variables.md#tidb_enable_resource_control-new-in-v660) is enabled on TiDB side. When it is enabled, TiKV will use the priority queue to schedule the queued requests for user foreground read/write requests. The priority of scheduling is inversely related to the amount of resources already consumed by the resource group where the request is located, and positively related to the quota of the corresponding resource group.
 + Default value: `false`, which means to disable scheduling based on resource group quotas.
