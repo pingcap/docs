@@ -75,7 +75,6 @@ Enable flow control for the resource group.
 SET GLOBAL tidb_enable_resource_control = 'ON';
 ```
 
-
 <CustomContent platform="tidb-cloud">
 
 In TiKV, set the parameter `resource_control.enabled` to `true`. The parameter `resource_control.enabled` is disabled by default. You need to contact the [PingCAP support team](/tidb-cloud/tidb-cloud-support.md) to enable it.
