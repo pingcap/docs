@@ -208,9 +208,9 @@ To verify component caller's identity, you need to mark the certificate user ide
 
 ## Reload certificates
 
-- If your TiDB cluster is deployed in a local data center, to reload the certificates and keys, TiDB, PD, TiKV, TiFlash, and all kinds of clients reread the current certificates and key files each time a new connection is created, without restarting the TiDB cluster.
+- If your TiDB cluster is deployed in a local data center, to reload the certificates and keys, TiDB, PD, TiKV, TiFlash, TiCDC, and all kinds of clients reread the current certificates and key files each time a new connection is created, without restarting the TiDB cluster.
 
-- If your TiDB cluster is deployed on your own managed cloud, make sure that the issuance of TLS certificates is integrated with the certificate management service of the cloud provider. The TLS certificates of the TiDB, PD, TiKV, TiCDC, and TiFlash components can be automatically rotated without restarting the TiDB cluster.
+- If your TiDB cluster is deployed on your own managed cloud, make sure that the issuance of TLS certificates is integrated with the certificate management service of the cloud provider. The TLS certificates of the TiDB, PD, TiKV, TiFlash, and TiCDC components can be automatically rotated without restarting the TiDB cluster.
 
 ## Certificate validity
 
