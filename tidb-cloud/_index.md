@@ -121,27 +121,15 @@ hide_commit: true
 
 [Airbyte](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-airbyte)
 
-[Amazon AppFlow](https://docs.pingcap.com/tidbcloud/dev-guide-aws-appflow-integration)
-
-[Cloudflare](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-cloudflare)
-
 [Datadog](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration)
 
-[dbt](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-dbt)
-
-[n8n](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-n8n)
-
-[Netlify](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-netlify)
-
-[Prometheus and Grafana](https://docs.pingcap.com/tidbcloud/monitor-prometheus-and-grafana-integration)
-
-[ProxySQL](https://docs.pingcap.com/tidbcloud/dev-guide-proxysql-integration)
-
-[Terraform](https://docs.pingcap.com/tidbcloud/terraform-tidbcloud-provider-overview)
+[Zapier](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-zapier)
 
 [Vercel](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-vercel)
 
-[Zapier](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-zapier)
+[Terraform](https://docs.pingcap.com/tidbcloud/terraform-tidbcloud-provider-overview)
+
+[Amazon AppFlow](https://docs.pingcap.com/tidbcloud/dev-guide-aws-appflow-integration)
 
 </LearningPath>
 
