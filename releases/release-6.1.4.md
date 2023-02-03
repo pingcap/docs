@@ -24,7 +24,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-
 
     - Lightning
 
-        - Change severity of precheck items `clusterResourceCheckItem` and `emptyRegionCheckItem` from `Critical` to `Warning` [#37654](https://github.com/pingcap/tidb/issues/37654) @[lance6716](https://github.com/lance6716)
+        - Change severity of the precheck items `clusterResourceCheckItem` and `emptyRegionCheckItem` from `Critical` to `Warn` [#37654](https://github.com/pingcap/tidb/issues/37654) @[lance6716](https://github.com/lance6716)
 
 ## Bug fixes
 
