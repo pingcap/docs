@@ -59,12 +59,6 @@ TiDB 版本：6.6.0
 
     更多信息，请参考[用户文档](/sql-plan-management.md#根据历史执行计划创建绑定)。
 
-* 支持 `ALTER TABLE…REORGANIZE PARTITION` [#15000](https://github.com/pingcap/tidb/issues/15000) @[mjonss](https://github.com/mjonss) **tw@qiancai**
-
-    TiDB 支持 `ALTER TABLE…REORGANIZE PARTITION` 语法。此语法用于对表的部分分区、全部分区重新组织分区结构，并且不丢失数据。
-
-    更多信息，请参考[用户文档](/partitioned-table.md#重组分区)
-
 * Support configuring `SURVIVAL_PREFERENCE` for [placement rules in SQL](/placement-rules-in-sql.md) [#38605](https://github.com/pingcap/tidb/issues/38605) @nolouch[https://github.com/nolouch] **tw@qiancai**
 
     `SURVIVAL_PREFERENCES` provides data survival preference settings to increase the disaster survivability of data. By specifying `SURVIVAL_PREFERENCE`, you can control the following:
@@ -72,13 +66,13 @@ TiDB 版本：6.6.0
     - For TiDB clusters deployed across regions, when a region with the specified databases or tables fails, another region can provide the service.
     - For TiDB clusters deployed in a single region, when an availability zone with the specified databases or tables fails, another availability zone can provide the service.
 
-     For more information，see [documentation](/placement-rules-in-sql.md#survival-preference)。
+     For more information, see [documentation](/placement-rules-in-sql.md#survival-preference).
 
 ### Security
 
 * TiFlash supports automatic rotations of TLS certificates [#5503](https://github.com/pingcap/tiflash/issues/5503) @[ywqzzy](https://github.com/ywqzzy) **tw@qiancai**
 
-    For a TiDB cluster with encrypted data transmission between components enabled, when a TLS certificate of TiFlash expires and needs to be reissued with a new one, the new TiFlash TLS certificate can be automatically loaded without restarting the TiDB cluster. The rotation of a TLS certificate between componets within a TiDB cluster does not affect the normal use of the TiDB cluster, which ensures the cluster high availability.
+    For a TiDB cluster with encrypted data transmission between components enabled, when a TLS certificate of TiFlash expires and needs to be reissued with a new one, the new TiFlash TLS certificate can be automatically loaded without restarting the TiDB cluster. The rotation of a TLS certificate between components within a TiDB cluster does not affect the use of the TiDB cluster, which ensures the cluster high availability.
 
     For more information, see [documentation](/enable-tls-between-components.md).
 
@@ -151,7 +145,7 @@ TiDB 版本：6.6.0
 
    The Stale Read feature has been generally available (GA) since v5.1.1, which allows you to read historical data at a specific timestamp or within a specified time range. Stale read can reduce read latency and improve query performance by reading data from local TiKV replicas directly. Before v6.6.0, TiFlash does not support Stale Read. Even if a table has TiFlash replicas, Stale Read can only read its TiKV replicas.
 
-   Staring from v6.6.0, TiFlash supports the Stale Read feature. When you query historical data of a table using the `AS OF TIMESTAMP` syntax or the `tidb_read_staleness` system variable, if the table has a TiFlash replica, the optimizer now can choose to read the corresponding data from the TiFlash replica, thus further improving query performance.
+   Starting from v6.6.0, TiFlash supports the Stale Read feature. When you query the historical data of a table using the `AS OF TIMESTAMP` syntax or the `tidb_read_staleness` system variable, if the table has a TiFlash replica, the optimizer now can choose to read the corresponding data from the TiFlash replica, thus further improving query performance.
 
     For more information, see [documentation](/stale-read.md).
 
