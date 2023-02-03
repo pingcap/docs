@@ -8,9 +8,9 @@ aliases: ['/docs/dev/enable-tls-between-components/','/docs/dev/how-to/secure/en
 
 This document describes how to enable encrypted data transmission between components within a TiDB cluster. Once enabled, encrypted transmission is used between the following components:
 
-- Communication between TiKV, PD, TiDB, and TiFlash
+- Communication between TiDB, TiKV, PD, and TiFlash
 - TiDB Control and TiDB; TiKV Control and TiKV; PD Control and PD
-- Internal communication within each TiKV, PD, TiDB, and TiFlash cluster
+- Internal communication within each TiDB, TiKV, PD, and TiFlash cluster
 
 Currently, it is not supported to only enable encrypted transmission of some specific components.
 
