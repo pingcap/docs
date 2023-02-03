@@ -15,7 +15,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-
 
 - TiDB
 
-    - Block modify column of partitioned table, even if it was not changing data when put into the DDL queue. [#40620](https://github.com/pingcap/tidb/issues/40620) @[mjonss](https://github.com/mjonss)
+    - No longer support modifying column types on partitioned tables because of potential correctness issues [#40620](https://github.com/pingcap/tidb/issues/40620) @[mjonss](https://github.com/mjonss)
 
 ## Improvements
 
@@ -39,16 +39,16 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-
 + TiDB
 
     - Fix the issue that when you create a table, the default value and the type of a column are not consistent and are not automatically corrected [#34881](https://github.com/pingcap/tidb/issues/34881) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger) @[mjonss](https://github.com/mjonss)
-    - Fix data race in the LazyTxn.LockKeys [#40355](https://github.com/pingcap/tidb/issues/40355) @[HuSharp](https://github.com/HuSharp)
-    - Fix the case that INSERT/REPLACE might panic in a long session connection [#40351](https://github.com/pingcap/tidb/issues/40351) @[fanrenhoo](https://github.com/fanrenhoo)
-    - Fix the issue that cursor read being canceled by GC [#39447](https://github.com/pingcap/tidb/issues/39447)@[zyguan](https://github.com/zyguan)
-    - Fix the issue that the pessimistic autocommit configuration does not work for point get plans [#39928](https://github.com/pingcap/tidb/issues/39928)@[zyguan](https://github.com/zyguan)
-    - Fix the issue that querying `INFORMATION_SCHEMA.TIKV_REGION_STATUS` returns an incorrect result @[zimulala](https://github.com/zimulala))
+    - Fix the data race issue in the `LazyTxn.LockKeys` function [#40355](https://github.com/pingcap/tidb/issues/40355) @[HuSharp](https://github.com/HuSharp)
+    - Fix the issue that the `INSERT` or `REPLACE` statements might panic in long session connections [#40351](https://github.com/pingcap/tidb/issues/40351) @[fanrenhoo](https://github.com/fanrenhoo)
+    - Fix the issue that reading data using the "cursor read" method might return error because of GC [#39447](https://github.com/pingcap/tidb/issues/39447)@[zyguan](https://github.com/zyguan)
+    - Fix the issue that the [`pessimistic-auto-commit`](/tidb-configuration-file.md#pessimistic-auto-commit) configuration item does not take effect for point-get queries [#39928](https://github.com/pingcap/tidb/issues/39928)@[zyguan](https://github.com/zyguan)
+    - Fix the issue that querying the `INFORMATION_SCHEMA.TIKV_REGION_STATUS` table returns an incorrect result @[zimulala](https://github.com/zimulala))
     - Fix the issue that the `IN` and `NOT IN` subqueries in some patterns report the `Can't find column` error [#37032](https://github.com/pingcap/tidb/issues/37032) @[AilinKid](https://github.com/AilinKid) @[lance6716](https://github.com/lance6716)
 
 - PD
 
-    - Fix the issue that PD might repeatedly add Learner to a Region. [#5786](https://github.com/tikv/pd/issues/5786) @[HunDunDM](https://github.com/HunDunDM)
+    - Fix the issue that PD might unexpectedly add multiple Learners to a Region [#5786](https://github.com/tikv/pd/issues/5786) @[HunDunDM](https://github.com/HunDunDM)
 
 + TiKV
 
