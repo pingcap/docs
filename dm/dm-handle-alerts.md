@@ -74,7 +74,7 @@ This document introduces how to deal with the alert information in DM.
 
 - Description:
 
-    When the relay log processing unit encounters a non-autorecoverable error (for example, binlog file not found), or when it encounters multiple recoverable errors in a short period of time (for example, network problems), this alert is triggered immediately.
+    When the relay log processing unit encounters a non-autorecoverable error (for example, binlog file not found), or when it encounters multiple recoverable errors (for example, network problems) in a short period of time (for example, more than 3 times in 2 minutes), this alert is triggered immediately.
 
 - Solution:
 
@@ -140,7 +140,7 @@ This document introduces how to deal with the alert information in DM.
 
 - Description:
 
-    When the Dump processing unit encounters a non-autorecoverable error (for example, binlog file not found), or when it encounters multiple recoverable errors in a short period of time (for example, network problems), this alert is triggered immediately.
+    When the Dump processing unit encounters a non-autorecoverable error (for example, binlog file not found), or when it encounters multiple recoverable errors (for example, network problems) in a short period of time (for example, more than 3 times in 2 minutes), this alert is triggered immediately.
 
 - Solution:
 
@@ -150,7 +150,7 @@ This document introduces how to deal with the alert information in DM.
 
 - Description:
 
-    When the Load processing unit encounters a non-autorecoverable error (for example, binlog file not found), or when it encounters multiple recoverable errors in a short period of time (for example, network problems), this alert is triggered immediately.
+    When the Load processing unit encounters a non-autorecoverable error (for example, binlog file not found), or when it encounters multiple recoverable errors (for example, network problems) in a short period of time (for example, more than 3 times in 2 minutes), this alert is triggered immediately.
 
 - Solution:
 
@@ -162,7 +162,7 @@ This document introduces how to deal with the alert information in DM.
 
 - Description:
 
-    When the binlog replication processing unit encounters a non-autorecoverable error (for example, binlog file not found), or when it encounters multiple recoverable errors in a short period of time (for example, network problems), this alert is triggered immediately.
+    When the binlog replication processing unit encounters a non-autorecoverable error (for example, binlog file not found), or when it encounters multiple recoverable errors (for example, network problems) in a short period of time (for example, more than 3 times in 2 minutes), this alert is triggered immediately.
 
 - Solution:
 
