@@ -23,9 +23,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-
 
         - Add the dml batch operation mode to improve the throughput in scenarios of running batches [#7653](https://github.com/pingcap/tiflow/issues/7653) @[asddongmen](https://github.com/asddongmen)
 
-    - Lightning
+    - TiDB Lightning
 
-        - Change severity of the precheck items `clusterResourceCheckItem` and `emptyRegionCheckItem` from `Critical` to `Warn` [#37654](https://github.com/pingcap/tidb/issues/37654) @[lance6716](https://github.com/lance6716)
+        - Change severity of the precheck items `clusterResourceCheckItem` and `emptyRegionCheckItem` from `Critical` to `Warn` [#37654](https://github.com/pingcap/tidb/issues/37654) @[niubell](https://github.com/niubell)
 
 ## Bug fixes
 
@@ -82,3 +82,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-
         - Fix the issue that DM fails to run when only "ssl-ca" is configured [#7941](https://github.com/pingcap/tiflow/issues/7941) @[liumengya94]
         - Fix a bug that when both "update" and "non-update" type expression filters are used in one table, all UPDATE row changes are skipped [#7831](https://github.com/pingcap/tiflow/issues/7831) @[lance6716]
         - Fix a bug when only one of `update-old-value-expr` or `update-new-value-expr` is set for a table, it does not take effect or panic [#7774](https://github.com/pingcap/tiflow/issues/7774) @[lance6716]
+
+    + TiDB Lightning
+
+        - Fix memory leak on Large Source Files [#39331](https://github.com/pingcap/tidb/issues/39331) @[dsdashun](https://github.com/dsdashun)
+        - Fix Table Empty Check cannot find imported dirty data on previous failed imports [#39477](https://github.com/pingcap/tidb/issues/39477) @[dsdashun](https://github.com/dsdashun)
