@@ -39,7 +39,7 @@ Besides, TiDB provides a way to specify an exact point in time by setting the [`
 
 ## Restrictions
 
-When a Stale Read query for a table is pushed down to TiFlash, the query will return an error if this table has newer DDL operations executed after the read timestamp specified by the Stale Read query. This is because TiFlash only supports reading data from the tables with latest schemas.
+When a Stale Read query for a table is pushed down to TiFlash, the query will return an error if this table has newer DDL operations executed after the read timestamp specified by the query. This is because TiFlash only supports reading data from the tables with the latest schemas.
 
 Take the following table as an example:
 
