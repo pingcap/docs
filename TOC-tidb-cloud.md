@@ -11,6 +11,7 @@
 - Get Started
   - [Try Out TiDB Cloud](/tidb-cloud/tidb-cloud-quickstart.md)
   - [Try Out HTAP](/tidb-cloud/tidb-cloud-htap-quickstart.md)
+  - [Try Out TiDB Cloud CLI](/tidb-cloud/get-started-with-cli.md)
   - [Perform a PoC](/tidb-cloud/tidb-cloud-poc.md)
 - Develop Applications
   - [Overview](/develop/dev-guide-overview.md)
@@ -476,7 +477,32 @@
         - [TiKV Overview](/tikv-overview.md)
         - [RocksDB Overview](/storage-engine/rocksdb-overview.md)
     - TiFlash
-        - [TiFlash Overview](/tiflash/tiflash-overview.md)
+      - [TiFlash Overview](/tiflash/tiflash-overview.md)
+  - CLI
+    - [Overview](/tidb-cloud/cli-reference.md)
+    - cluster
+      - [create](/tidb-cloud/ticloud-cluster-create.md)
+      - [delete](/tidb-cloud/ticloud-cluster-delete.md)
+      - [describe](/tidb-cloud/ticloud-cluster-describe.md)
+      - [list](/tidb-cloud/ticloud-cluster-list.md)
+    - config
+      - [create](/tidb-cloud/ticloud-config-create.md)
+      - [delete](/tidb-cloud/ticloud-config-delete.md)
+      - [describe](/tidb-cloud/ticloud-config-describe.md)
+      - [edit](/tidb-cloud/ticloud-config-edit.md)
+      - [list](/tidb-cloud/ticloud-config-list.md)
+      - [set](/tidb-cloud/ticloud-config-set.md)
+      - [use](/tidb-cloud/ticloud-config-use.md)
+    - import
+      - [cancel](/tidb-cloud/ticloud-import-cancel.md)
+      - [describe](/tidb-cloud/ticloud-import-describe.md)
+      - [list](/tidb-cloud/ticloud-import-list.md)
+      - start
+        - [local](/tidb-cloud/ticloud-import-start-local.md)
+        - [s3](/tidb-cloud/ticloud-import-start-s3.md)
+    - project
+      - [list](/tidb-cloud/ticloud-project-list.md)
+    - [update](/tidb-cloud/ticloud-update.md)
   - [Dumpling](/dumpling-overview.md)
   - [Table Filter](/table-filter.md)
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
