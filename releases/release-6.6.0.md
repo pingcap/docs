@@ -128,11 +128,12 @@ TiDB 版本：6.6.0
 
     更多信息，请参考[用户文档](/sql-plan-replayer.md#使用-plan-replayer-capture-抓取目标计划)。
 
-* Statements Summary 持久化（实验特性） [#40812](https://github.com/pingcap/tidb/issues/40812) @[mornyx](https://github.com/mornyx) **tw@shichun-0415**
+* Support persisting statements summary (experimental) [#40812](https://github.com/pingcap/tidb/issues/40812) @[mornyx](https://github.com/mornyx) **tw@shichun-0415**
 
-    Statements Summary 过去只在内存中维护，一旦 TiDB 发生重启数据便会全部丢失。开启持久化配置后历史数据将会定期被写入磁盘，相关系统表的查询数据源也将由内存变为磁盘，TiDB 发生重启后历史数据将依然保持存在。
+    Before v6.6.0, statements summary data is maintained in memory. Once the TiDB server restarts, all the statements summary data gets lost. Starting from v6.6.0, TiDB supports enabling statements summary persistence, which allows historical data to be written to disks on a regular basis. In the meantime, the result of queries on system tables will derive from disks, instead of memory. After TiDB restarts, all historical data is still available.
 
-    更多信息，请参考[用户文档](/statement-summary-tables.md#持久化-statements-summary)。
+    For more information, see [documentation](/statement-summary-tables.md#persist-statements-summary).
+
 ### 性能
 
 * 使用 Witness 节约成本  [#12876](https://github.com/tikv/tikv/issues/12876) [@Connor1996](https://github.com/Connor1996) [@ethercflow](https://github.com/ethercflow) **tw@Oreoxmt**
@@ -170,11 +171,11 @@ TiDB 版本：6.6.0
 
     优化器 Hint 的持续引入，为用户提供了更多的干预手段，有助于 SQL 性能问题的解决，并提升了整体性能的稳定性。
 
-* 解除执行计划缓存对 `LIMIT` 子句的限制 [#40219](https://github.com/pingcap/tidb/issues/40219) @[fzzf678](https://github.com/fzzf678) **tw@shichun-0415**
+* Remove the limit on `LIMIT` statements [#40219](https://github.com/pingcap/tidb/issues/40219) @[fzzf678](https://github.com/fzzf678) **tw@shichun-0415**
 
-    TiDB 移除了执行计划缓存的限制，`LIMIT` 后带有变量的子句可进入执行计划缓存， 如 `Limit ?` 或者 `Limit 10, ?`。这使得更多的 SQL 能够从计划缓存中获益，提升执行效率。
+    Starting from v6.6.0, TiDB plan cache supports caching queries containing `?` after `Limit`, such as `Limit ?` or `Limit 10, ?`. This feature allows more SQL statements to benefit from plan cache, thus improving execution efficiency.
 
-    更多信息，请参考[用户文档](/sql-prepared-plan-cache.md)。
+    For more information, see [documentation](/sql-prepared-plan-cache.md).
 
 * 悲观锁队列的稳定唤醒模型 [#13298](https://github.com/tikv/tikv/issues/13298) @[MyonKeminta](https://github.com/MyonKeminta) **tw@TomShawn**
 
@@ -210,17 +211,17 @@ TiDB 版本：6.6.0
 
 ### 易用性
 
-* 支持动态修改参数 store-io-pool-size [#13964](https://github.com/tikv/tikv/issues/13964) @[LykxSassinator](https://github.com/LykxSassinator) **tw@shichun-0415**
+* Support dynamically modifying `store-io-pool-size` [#13964](https://github.com/tikv/tikv/issues/13964) @[LykxSassinator](https://github.com/LykxSassinator) **tw@shichun-0415**
 
-    TiKV 中的 raftstore.store-io-pool-size 参数用于设定处理 Raft I/O 任务的线程池中线程的数量，需要在 TiKV 性能调优时进行修改调整。在 v6.6.0 版本之前，这个参数无法动态修改。v6.6.0 支持对该参数的动态修改功能，提高了 TiKV 性能调优的灵活性。
+    The TiKV configuration item [`raftstore.store-io-pool-size`](/tikv-configuration-file.md#store-io-pool-size-new-in-v530) specifies the allowable number of threads that process Raft I/O tasks, which can be adjusted when tuning TiKV performance. Before v6.6.0, this configuration item cannot be modified dynamically. Starting from v6.6.0, you can modify this configuration without restarting the server, which means more flexible performance tuning.
 
-    更多信息，请参考[用户文档](/dynamic-config.md)。
+    For more information, see [documentation](/dynamic-config.md).
 
-* 可通过命令行参数或者配置项在 TiDB 集群初次启动时指定执行的初始化 SQL 脚本 [#35625](https://github.com/pingcap/tidb/pull/35625) @[morgo](https://github.com/morgo) **tw@TomShawn**
+* Support specifying the SQL script executed upon TiDB cluster intialization [#35624](https://github.com/pingcap/tidb/issues/35624) @[morgo](https://github.com/morgo) **tw@shichun-0415**
 
-    命令行参数 `--initialize-sql-file` 用于指定 TiDB 集群初次启动时执行的 SQL 脚本，可用于修改系统变量的值，或者创建用户、分配权限等。
+    When you start a TiDB cluster for the first time, you can specify the SQL script to be executed by configuring the CLI parameter `--initialize-sql-file`. You can use this feature when you need to perform such operations as modifying the value of a system variable, creating a user, or granting privileges.
 
-    更多信息，请参考[配置项 `initialize-sql-file`](/tidb-configuration-file.md#initialize-sql-file-从-v660-版本开始引入)。
+    For more information, see the [configuration item `initialize-sql-file`](/tidb-configuration-file.md#initialize-sql-file-new-in-v660).
 
 ### MySQL 兼容性
 
@@ -330,7 +331,6 @@ TiDB 版本：6.6.0
         - note [#issue](链接) @[贡献者 GitHub ID](链接)
 
     + TiDB Lightning
-- 修复了一个在部分场景下 TiDB 重启导致 Lightning timeout 卡主的 bug。[33714](https://github.com/pingcap/tidb/issues/33714) @[lichunzhu](https://github.com/lichunzhu) **tw@shichun-0415**
         - note [#issue](链接) @[贡献者 GitHub ID](链接)
         - note [#issue](链接) @[贡献者 GitHub ID](链接)
 
@@ -341,7 +341,7 @@ TiDB 版本：6.6.0
 
     + Sync-diff-inspector
 
-        - 新增一个参数，当下游数据库的表在上游不存在时，可配置该参数跳过对上下游数据库表数量不一致场景的校验，而不是任务中断退出。 @[lichunzhu](https://github.com/lichunzhu) @[liumengya94](https://github.com/liumengya9) **tw@shichun-0415**
+        - Add a new parameter `skip-non-existing-table` to skip checking upstream and downstream data consistency when tables in the downstream do not exist in the upstream [#692](https://github.com/pingcap/tidb-tools/issues/692) @[lichunzhu](https://github.com/lichunzhu) @[liumengya94](https://github.com/liumengya9) **tw@shichun-0415**
         - note [#issue](链接) @[贡献者 GitHub ID](链接)
 
 ## 错误修复
@@ -385,6 +385,7 @@ TiDB 版本：6.6.0
 
     + TiDB Lightning
 
+        - Fix the issue that TiDB Lightning timeout hangs due to TiDB restart in some scenarios [#33714](https://github.com/pingcap/tidb/issues/33714) @[lichunzhu](https://github.com/lichunzhu) **tw@shichun-0415**
         - note [#issue](链接) @[贡献者 GitHub ID](链接)
         - note [#issue](链接) @[贡献者 GitHub ID](链接)
 
