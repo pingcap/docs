@@ -143,7 +143,7 @@ loaders:
     #   table. In this configuration file, the conflicting data is recorded in the
     #   `dm_meta_test.conflict_error_v1` table. When the full import phase is completed, the
     #   tasks is paused and you are prompted to query this table and manually resolve the
-    #   conflicts. You need to resume the task and enter the incremental phase using the #   `resume-task` command.
+    #   conflicts. You need to resume the task and enter the incremental phase using the `resume-task` command.
     on-duplicate-physical: "none"
     # The directory of local KV sorting in the physical import mode. The default value of this
     # configuration is the same as the `dir` configuration. For details, refer to TiDB Lightning document: https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode#environment-requirements
