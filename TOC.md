@@ -5,8 +5,7 @@
 - About TiDB
   - [TiDB Introduction](/overview.md)
   - [TiDB 6.5 Release Notes](/releases/release-6.5.0.md)
-  - [Basic Features](/basic-features.md)
-  - [Experimental Features](/experimental-features.md)
+  - [Features](/basic-features.md)
   - [MySQL Compatibility](/mysql-compatibility.md)
   - [TiDB Limitations](/tidb-limitations.md)
   - [Credits](/credits.md)
@@ -476,8 +475,9 @@
       - Architecture
         - [DM-worker](/dm/dm-worker-intro.md)
         - [Relay Log](/dm/relay-log.md)
+        - [DDL Handling](/dm/dm-ddl-compatible.md)
       - Mechanism
-        - [DML Replication Mechanism](/dm/dm-replication-logic.md)
+        - [DML Replication Mechanism](/dm/dm-replication-logic.md)        
       - Command Line
         - [DM-master & DM-worker](/dm/dm-command-line-flags.md)
       - Configuration Files
