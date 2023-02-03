@@ -815,7 +815,7 @@ Configuration items related to read isolation.
 
 + Controls whether to enable statements summary persistence.
 + Default value: `false`
-+ For more details, see [Persist statements summary](/statement-summary-tables.md#persistent-statements-summary).
++ For more details, see [Persist statements summary](/statement-summary-tables.md#persist-statements-summary).
 
 ### `tidb_stmt_summary_filename` <span class="version-mark">New in v6.6.0</span>
 
