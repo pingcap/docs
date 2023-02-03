@@ -811,50 +811,50 @@ Configuration items related to read isolation.
 
 > **Warning:**
 >
-> Persistent statements summary is an experimental feature. It is not recommended that you use it in the production environment.
+> Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment.
 
-+ The switch used to control whether to enable statements summary persistence.
++ Controls whether to enable statements summary persistence.
 + Default value: `false`
-+ Refer to [Persistent Statements Summary](/statement-summary-tables.md#persistent-statements-summary)
++ For more details, see [Persist statements summary](/statement-summary-tables.md#persistent-statements-summary).
 
 ### `tidb_stmt_summary_filename` <span class="version-mark">New in v6.6.0</span>
 
 > **Warning:**
 >
-> Persistent statements summary is an experimental feature. It is not recommended that you use it in the production environment.
+> Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment.
 
-+ When statements summary persistence is enabled, this configuration is used to specify the file to which the persistent data is written.
++ When statements summary persistence is enabled, this configuration specifies the file to which persistent data is written.
 + Default value: `tidb-statements.log`
 
 ### `tidb_stmt_summary_file_max_days` <span class="version-mark">New in v6.6.0</span>
 
 > **Warning:**
 >
-> Persistent statements summary is an experimental feature. It is not recommended that you use it in the production environment.
+> Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment.
 
-+ When statements summary persistence is enabled, this configuration is used to specify the maximum number of days to keep the persistent data files.
++ When statements summary persistence is enabled, this configuration specifies the maximum number of days to keep persistent data files.
 + Default value: `3`
-+ It can be adjusted in combination with data retention requirements and disk space usage.
++ You can adjust the value based on the data retention requirements and disk space usage.
 
 ### `tidb_stmt_summary_file_max_size` <span class="version-mark">New in v6.6.0</span>
 
 > **Warning:**
 >
-> Persistent statements summary is an experimental feature. It is not recommended that you use it in the production environment.
+> Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment.
 
-+ When statements summary persistence is enabled, this configuration is used to limit the maximum size of a single file of persistent data (in MB).
++ When statements summary persistence is enabled, this configuration specifies the maximum size of a persistent data file (in MiB).
 + Default value: `64`
-+ It can be adjusted in combination with data retention requirements and disk space usage.
++ You can adjust the value based on the data retention requirements and disk space usage.
 
 ### `tidb_stmt_summary_file_max_backups` <span class="version-mark">New in v6.6.0</span>
 
 > **Warning:**
 >
-> Persistent statements summary is an experimental feature. It is not recommended that you use it in the production environment.
+> Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment.
 
-+ When statements summary persistence is enabled, this configuration is used to limit the maximum number of persistent data files, `0` means no limit.
++ When statements summary persistence is enabled, this configuration specifies the maximum number of data files that can be persisted. `0` means no limit on the number of files.
 + Default value: `0`
-+ It can be adjusted in combination with data retention requirements and disk space usage.
++ You can adjust the value based on the data retention requirements and disk space usage.
 
 ## proxy-protocol
 
