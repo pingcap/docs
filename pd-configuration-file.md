@@ -3,7 +3,7 @@ title: PD Configuration File
 summary: Learn the PD configuration file.
 ---
 
-# PDConfiguration / コンフィグレーションファイル {#pd-configuration-file}
+# PDコンフィグレーションファイル {#pd-configuration-file}
 
 <!-- markdownlint-disable MD001 -->
 
@@ -72,7 +72,7 @@ PD 構成ファイルは、コマンドライン パラメーターよりも多�
 
 ### <code>lease</code> {#code-lease-code}
 
--   PD リーダー キー リースのタイムアウト。タイムアウト後、システムはリーダーを再選出します。
+-   PDLeaderキー リースのタイムアウト。タイムアウト後、システムはLeaderを再選出します。
 -   デフォルト値: `3`
 -   単位：秒
 
@@ -97,9 +97,22 @@ PD 構成ファイルは、コマンドライン パラメーターよりも多�
 -   PD を新しいクラスターとして強制的に開始し、 Raftメンバーの数を`1`に変更するかどうかを決定します。
 -   デフォルト値: `false`
 
+## pd サーバー {#pd-server}
+
+pd-serverに関するコンフィグレーション項目
+
+### <code>flow-round-by-digit</code> <span class="version-mark">5.1 の新機能</span> {#code-flow-round-by-digit-code-span-class-version-mark-new-in-tidb-5-1-span}
+
+-   デフォルト値: 3
+-   PD は、フロー番号の最下位桁を四捨五入します。これにより、リージョンフロー情報の変更によって引き起こされる統計の更新が減少します。この構成項目は、リージョンフロー情報を丸める最小桁数を指定するために使用されます。たとえば、デフォルト値が`3`であるため、フロー`100512`は`101000`に丸められます。この構成は`trace-region-flow`を置き換えます。
+
+> **ノート：**
+>
+> クラスターを TiDB 4.0 バージョンから現在のバージョンにアップグレードした場合、アップグレード後の`flow-round-by-digit`の動作とアップグレード前の`trace-region-flow`の動作はデフォルトで一貫しています。これは、アップグレード前に`trace-region-flow`の値が false の場合、アップグレード後の`flow-round-by-digit`の値は 127 であることを意味します。アップグレード前の`trace-region-flow`の値が`true`の場合、アップグレード後の`flow-round-by-digit`の値は`3`です。
+
 ## 安全 {#security}
 
-セキュリティに関するConfiguration / コンフィグレーション項目
+セキュリティに関するコンフィグレーション項目
 
 ### <code>cacert-path</code> {#code-cacert-path-code}
 
@@ -124,7 +137,7 @@ PD 構成ファイルは、コマンドライン パラメーターよりも多�
 
 ## <code>log</code> {#code-log-code}
 
-ログに関するConfiguration / コンフィグレーション項目
+ログに関するコンフィグレーション項目
 
 ### <code>level</code> {#code-level-code}
 
@@ -145,7 +158,7 @@ PD 構成ファイルは、コマンドライン パラメーターよりも多�
 
 ## <code>log.file</code> {#code-log-file-code}
 
-ログファイルに関するConfiguration / コンフィグレーション項目
+ログファイルに関するコンフィグレーション項目
 
 ### <code>max-size</code> {#code-max-size-code}
 
@@ -168,7 +181,7 @@ PD 構成ファイルは、コマンドライン パラメーターよりも多�
 
 ## <code>metric</code> {#code-metric-code}
 
-監視に関するConfiguration / コンフィグレーション項目
+監視に関するコンフィグレーション項目
 
 ### <code>interval</code> {#code-interval-code}
 
@@ -177,7 +190,7 @@ PD 構成ファイルは、コマンドライン パラメーターよりも多�
 
 ## <code>schedule</code> {#code-schedule-code}
 
-スケジューリングに関するConfiguration / コンフィグレーション項目
+スケジューリングに関するコンフィグレーション項目
 
 ### <code>max-merge-region-size</code> {#code-max-merge-region-size-code}
 
@@ -217,7 +230,7 @@ PD 構成ファイルは、コマンドライン パラメーターよりも多�
 
 ### <code>leader-schedule-limit</code> {#code-leader-schedule-limit-code}
 
--   同時に実行されるリーダー スケジューリング タスクの数
+-   同時に実行されるLeaderスケジューリング タスクの数
 -   デフォルト値: `4`
 
 ### <code>region-schedule-limit</code> {#code-region-schedule-limit-code}
@@ -274,7 +287,7 @@ PD 構成ファイルは、コマンドライン パラメーターよりも多�
 
 -   リージョンスコア式のバージョンを制御します
 -   デフォルト値: `v2`
--   オプションの値: `v1`および`v2` 。 v1 と比較して、v2 の変化はよりスムーズであり、スペースの再利用によって引き起こされるスケジューリングのジッターが改善されています。
+-   オプションの値: `v1`および`v2` 。 v1 と比較して、v2 の変化はよりスムーズであり、スペースの再利用によって引き起こされるスケジューリングのジッターが改善されます。
 
 > **ノート：**
 >
@@ -301,7 +314,7 @@ PD 構成ファイルは、コマンドライン パラメーターよりも多�
 
 ## <code>replication</code> {#code-replication-code}
 
-レプリカに関するConfiguration / コンフィグレーション項目
+レプリカに関するコンフィグレーション項目
 
 ### <code>max-replicas</code> {#code-max-replicas-code}
 
@@ -331,32 +344,23 @@ PD 構成ファイルは、コマンドライン パラメーターよりも多�
 -   デフォルト値: `true`
 -   [配置ルール](/configure-placement-rules.md)を参照してください。
 
-### <code>flow-round-by-digit</code> <span class="version-mark">5.1 の新機能</span> {#code-flow-round-by-digit-code-span-class-version-mark-new-in-tidb-5-1-span}
-
--   デフォルト値: 3
--   PD は、フロー番号の最下位桁を四捨五入します。これにより、リージョンフロー情報の変更によって引き起こされる統計の更新が減少します。この構成項目は、リージョンフロー情報を丸める最小桁数を指定するために使用されます。たとえば、デフォルト値が`3`であるため、フロー`100512`は`101000`に丸められます。この構成は`trace-region-flow`を置き換えます。
-
-> **ノート：**
->
-> クラスターを TiDB 4.0 バージョンから現在のバージョンにアップグレードした場合、アップグレード後の`flow-round-by-digit`の動作とアップグレード前の`trace-region-flow`の動作はデフォルトで一貫しています。これは、アップグレード前に`trace-region-flow`の値が false の場合、アップグレード後の`flow-round-by-digit`の値は 127 であることを意味します。アップグレード前の`trace-region-flow`の値が`true`の場合、アップグレード後の`flow-round-by-digit`の値は`3`です。
-
 ## <code>label-property</code> {#code-label-property-code}
 
-ラベルに関するConfiguration / コンフィグレーション項目
+ラベルに関するコンフィグレーション項目
 
 ### <code>key</code> {#code-key-code}
 
--   リーダーを拒否したストアのラベル キー
+-   Leaderを拒否したストアのラベル キー
 -   デフォルト値: `""`
 
 ### <code>value</code> {#code-value-code}
 
--   リーダーを拒否したストアのラベル値
+-   Leaderを拒否したストアのラベル値
 -   デフォルト値: `""`
 
 ## <code>dashboard</code> {#code-dashboard-code}
 
-[TiDB ダッシュボード](/dashboard/dashboard-intro.md)内蔵 PD に関するConfiguration / コンフィグレーション項目。
+[TiDB ダッシュボード](/dashboard/dashboard-intro.md)内蔵 PD に関するコンフィグレーション項目。
 
 ### <code>tidb-cacert-path</code> {#code-tidb-cacert-path-code}
 
@@ -377,7 +381,7 @@ PD 構成ファイルは、コマンドライン パラメーターよりも多�
 
 -   TiDB ダッシュボードがリバース プロキシの背後でアクセスされる場合、この項目はすべての Web リソースのパブリック URL パス プレフィックスを設定します。
 -   デフォルト値: `/dashboard`
--   TiDB ダッシュボードがリバース プロキシの背後ではなくアクセスされている場合は、この構成項目を変更し**ない**でください。そうしないと、アクセスの問題が発生する可能性があります。詳細は[リバース プロキシの背後で TiDB ダッシュボードを使用する](/dashboard/dashboard-ops-reverse-proxy.md)を参照してください。
+-   TiDB ダッシュボードがリバース プロキシの背後でアクセスされていない場合は、この構成項目を変更し**ない**でください。そうしないと、アクセスの問題が発生する可能性があります。詳細は[リバース プロキシの背後で TiDB ダッシュボードを使用する](/dashboard/dashboard-ops-reverse-proxy.md)を参照してください。
 
 ### <code>enable-telemetry</code> {#code-enable-telemetry-code}
 
@@ -387,4 +391,4 @@ PD 構成ファイルは、コマンドライン パラメーターよりも多�
 
 ## <code>replication-mode</code> {#code-replication-mode-code}
 
-すべてのリージョンのレプリケーション モードに関連するConfiguration / コンフィグレーションアイテム。詳細は[DR 自動同期モードを有効にする](/two-data-centers-in-one-city-deployment.md#enable-the-dr-auto-sync-mode)を参照してください。
+すべてのリージョンのレプリケーション モードに関連するコンフィグレーションアイテム。詳細は[DR 自動同期モードを有効にする](/two-data-centers-in-one-city-deployment.md#enable-the-dr-auto-sync-mode)を参照してください。
