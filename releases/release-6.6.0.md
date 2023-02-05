@@ -267,6 +267,7 @@ TiDB 版本：6.6.0
 
 | 变量名  | 修改类型（包括新增/修改/删除）    | 描述 |
 |--------|------------------------------|------|
+| [`tidb_enable_plan_cache_for_param_limit`](/system-variables.md#tidb_enable_plan_cache_for_param_limit--new-in-v660) | New | Controls whether Prepared Plan Cache caches execution plans that contain `count` after `Limit`. The default value is `ON`, which means Prepared Plan Cache supports caching such execution plans. Note that Prepared Plan Cache does not support caching execution plans with a `count` that is greater than 10000. |
 | [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-%E4%BB%8E-v660-%E7%89%88%E6%9C%AC%E5%BC%80%E5%A7%8B%E5%BC%95%E5%85%A5) | 新增  | 该变量是资源管控特性的开关。该变量设置为 `ON` 后，集群支持应用按照资源组做资源隔离。 |
 | [`tidb_store_batch_size`](/system-variables.md#tidb_store_batch_size) | 修改 | 此变量可用于生产环境。 设置 `IndexLookUp` 算子回表时多个 Coprocessor Task 的 batch 大小。`0` 代表不使用 batch。当 `IndexLookUp` 算子的回表 Task 数量特别多，出现极长的慢查询时，可以适当调大该参数以加速查询。 |
 | [`tidb_pessimistic_txn_aggressive_locking`](/system-variables.md#tidb_pessimistic_txn_aggressive_locking-从-v660-版本开始引入) | 新增 | 是否对悲观锁启用加强的悲观锁唤醒模型。 |
@@ -277,11 +278,21 @@ TiDB 版本：6.6.0
 | 配置文件 | 配置项 | 修改类型 | 描述 |
 | -------- | -------- | -------- | -------- |
 | TiKV | [`resource_control.enabled`](/tikv-configuration-file.md#tidb_enable_resource_control-%E4%BB%8E-v660-%E7%89%88%E6%9C%AC%E5%BC%80%E5%A7%8B%E5%BC%95%E5%85%A5) | 新增 | 是否支持按照资源组配额调度。 默认 `false` ，即关闭按照资源组配额调度。 |
-|          |          |          |          |
-|          |          |          |          |
+| TiFlash |  [`profile.default.max_memory_usage_for_all_queries`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)  |  Modified  |  Specifies the memory usage limit for the generated intermediate data in all queries. Starting from v6.6.0, the default value changes from 0 to 0.8, which means the limit is 80% of the total memory.|
+| TiCDC  | [`consistent.storage`](/ticdc/ticdc-sink-to-mysql.md#prerequisites)  |  Modified  | Added to value options: GCS and Azure.  |
+| TiDB  | [`initialize-sql-file`](/tidb-configuration-file.md#initialize-sql-file-new-in-v660)  | New | Specifies the SQL script to be executed when the TiDB cluster is started for the first time. The default value is empty.  |
+| TiDB  | [`tidb_stmt_summary_enable_persistent`](/tidb-configuration-file.md#tidb_stmt_summary_enable_persistent-new-in-v660)  |  New  |  Controls whether to enable statements summary persistence. The default value is `false`, which means this feature is not enabled by default.  |
+| TiDB | [`tidb_stmt_summary_filename`](/tidb-configuration-file.md#tidb_stmt_summary_filename-new-in-v660) | New | When statements summary persistence is enabled, this configuration specifies the file to which persistent data is written. |
+| TiDB | [`tidb_stmt_summary_file_max_days`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_days-new-in-v660) | New | When statements summary persistence is enabled, this configuration specifies the maximum number of days to keep persistent data files. |
+| TiDB | [`tidb_stmt_summary_file_max_size`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_size-new-in-v660) | New | When statements summary persistence is enabled, this configuration specifies the maximum size of a persistent data file (in MiB). |
+| TiDB | [`tidb_stmt_summary_file_max_backups`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_backups-new-in-v660) | New | When statements summary persistence is enabled, this configuration specifies the maximum number of data files that can be persisted. `0` means no limit on the number of files. |
+| sync-diff-inspector | [`skip-non-existing-table`](/sync-diff-inspector/sync-diff-inspector-overview.md#configuration-file-description) | New | Controls whether to skip checking upstream and downstream data consistency when tables in the downstream do not exist in the upstream.  |
 |          |          |          |          |
 
-### 其他
+### Others
+
+- Support dynamically modifying `store-io-pool-size`. This facilitate more flexible TiKV performance tuning.
+- Remove the limit on `LIMIT` statements, thus improving the execution performance.
 
 ## 废弃功能
 
