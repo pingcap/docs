@@ -27,11 +27,11 @@ TiDB 版本：6.6.0
 
     更多信息，请参考[用户文档](链接)。
 
-* 支持 MySQL 语法兼容的外键约束 （实验特性）[#18209](https://github.com/pingcap/tidb/issues/18209) @[crazycs520](https://github.com/crazycs520) **tw@Oreoxmt**
+* Support the foreign key constraint that is compatible with MySQL (experimental) [#18209](https://github.com/pingcap/tidb/issues/18209) @[crazycs520](https://github.com/crazycs520) **tw@Oreoxmt**
 
-    TiDB 在 v6.6.0 引入了 MySQL 语法兼容的外键约束特性，支持表内，表间的数据关联和约束校验能力，支持集联操作。该特性有助于保持数据一致性，提升数据质量，也方便客户进行数据建模。
+    TiDB v6.6.0 introduces the foreign key constraint feature compatible with MySQL. This feature supports data correlation in a table or between tables, constraint validation, and supports cascade operations. This feature helps to maintain data consistency, improve data quality, and facilitate data modeling.
 
-    更多信息，请参考[用户文档](/sql-statements/sql-statement-foreign-key.md)。
+    For more information, see [documentation](/sql-statements/sql-statement-foreign-key.md).
 
 * 支持通过`FLASHBACK CLUSTER TO TIMESTAMP` 命令闪回 DDL 操作 [#14088](https://github.com/tikv/tikv/pull/14088) @[Defined2014](https://github.com/Defined2014) @[JmPotato](https://github.com/JmPotato) **tw@ran-huang**
 
@@ -112,13 +112,11 @@ TiDB 版本：6.6.0
 
     更多信息，请参考[用户文档](/sql-prepared-plan-cache.md#prepared-plan-cache-诊断)。
 
-* 在慢查询中增加告警字段 [#39893](https://github.com/pingcap/tidb/issues/39893) @[time-and-fate](https://github.com/time-and-fate) **tw@Oreoxmt**
+* Add the `Warnings` field to the slow query log [#39893](https://github.com/pingcap/tidb/issues/39893) @[time-and-fate](https://github.com/time-and-fate) **tw@Oreoxmt**
 
-    向慢查询日志中增加一个新的字段 `Warning` ，以 JSON 格式记录该慢查询语句在执行过程中产生的警告，用来协助查询性能问题的诊断。
+    The `Warnings` field is added to the slow query log in JSON format to record the warnings generated during the execution of the slow query to help diagnose performance issues. You can also view this in the slow query page of TiDB Dashboard.
 
-    用户也可以在 TiDB Dashboard 中的慢查询页面中查看。
-
-    更多信息，请参考[用户文档](/identify-slow-queries.md)。
+    For more information, see [documentation](/identify-slow-queries.md).
 
 * 自动捕获执行计划的生成 [#38779](https://github.com/pingcap/tidb/issues/38779) @[Yisaer](https://github.com/Yisaer) **tw@ran-huang**
 
@@ -136,11 +134,11 @@ TiDB 版本：6.6.0
 
 ### 性能
 
-* 使用 Witness 节约成本  [#12876](https://github.com/tikv/tikv/issues/12876) [@Connor1996](https://github.com/Connor1996) [@ethercflow](https://github.com/ethercflow) **tw@Oreoxmt**
+* Use Witness to Save Costs in a highly reliable storage environment [#12876](https://github.com/tikv/tikv/issues/12876) @[Connor1996](https://github.com/Connor1996) @[ethercflow](https://github.com/ethercflow) **tw@Oreoxmt**
 
-    在云环境中，当 TiKV 使用如 AWS EBS 或 GCP 的 Persistent Disk 作为单节点存储时，它们提供的持久性相比物理磁盘更高。此时，TiKV 使用 3 个 Raft 副本虽然可行，但并不必要。为了降低成本，TiKV 引入了 Witness 功能，即 2 Replicas With 1 Log Only 机制。其中 1 Log Only 副本仅存储 Raft 日志但不进行数据 apply，依然可以通过 Raft 协议保证数据一致性。与标准的 3 副本架构相比，Witness 可以节省存储资源及 CPU 使用率。
+    In cloud environments, it is recommended to use Amazon Elastic Block Store or Persistent Disk of Google Cloud Platform as the storage of each TiKV node. In this case, it is not necessary to use three Raft replicas. To reduce costs, TiKV introduces the Witness feature, which is the "2 Replicas With 1 Log Only" mechanism. The 1 Log Only replica only stores Raft logs but does not apply data, and data consistency is still guaranteed through the Raft protocol. Compared with the standard three replica architecture, Witness can save storage resources and CPU usage.
 
-    更多信息，请参考[用户文档](/use-witness-to-save-costs.md)。
+    For more information, see [documentation](/use-witness-to-save-costs.md).
 
 * TiFlash supports the Stale Read feature [#4483](https://github.com/pingcap/tiflash/issues/4483) @[hehechen](https://github.com/hehechen) **tw@qiancai**
 
@@ -203,11 +201,17 @@ TiDB 版本：6.6.0
 
     更多信息，请参考[用户文档](/tidb-resource-control.md)。
 
-* 使用临时 Witness 副本来加速副本恢复 [#12876](https://github.com/tikv/tikv/issues/12876) [@Connor1996](https://github.com/Connor1996) [@ethercflow](https://github.com/ethercflow) **tw@Orexmt**
+* Use a temporary Witness replica to spped up failover [#12876](https://github.com/tikv/tikv/issues/12876) @[Connor1996](https://github.com/Connor1996) @[ethercflow](https://github.com/ethercflow) **tw@Oreoxmt**
 
-    Witness 功能可用于快速恢复 failover，以提高系统可用性。例如在 3 缺 1 的情况下，虽然满足多数派要求，但是系统很脆弱，而完整恢复一个新成员的时间通常很长（需要先拷贝 snapshot 然后 apply 最新的日志），特别是 Region snapshot 比较大的情况。而且拷贝副本的过程可能会对不健康的副本造成更多的压力。因此，先添加一个 Witness 可以快速下掉不健康的节点，保证恢复数据的过程中日志的安全性，后续再由 PD 的 rule checker 将 Witness 副本变为普通的 Voter。
+    The Witness feature can be used to quickly recover a failover to improve system availability and data durability. For example, in a 3-out-of-4 scenario, although it meets the majority requirement, the system is fragile and the time to completely recover a new member is often long (requires copying the snapshot first and then applying the latest log), especially when the Region snapshot is relatively large. In addition, the process of copying replicas might cause more pressure on unhealthy Group members. Therefore, adding a Witness can quickly bring down an unhealthy node and enmsure the security of logs during recovery.
 
-    更多信息，请参考[用户文档](/use-witness-to-speed-up-failover.md)。
+    For more information, see [documentation](/use-witness-to-speed-up-failover.md)。
+
+* Support configuring read-only storage nodes for resource-consuming tasks [#issue号](链接) @[v01dstar](https://github.com/v01dstar) **tw@Oreoxmt**
+
+    In production environments, some read-only operations might consume a large amount of resources regularly, which might affect the performance of the entire cluster, such as backups and large-scale data analysis. TiDB v6.6.0 supports configuring read-only storage nodes to execute resource-consuming read-only tasks to reduce the impact on the online application. You can configure read-only storage nodes according to [steps](/readonly-nodes.md#操作步骤) and specify where to read data through a system variable or client parameter to ensure the stability of cluster performance.
+
+    For more information, see [documentation](/best-practices/readonly-nodes.md).
 
 ### 易用性
 
@@ -241,17 +245,17 @@ TiDB 版本：6.6.0
 
 ### 数据共享与订阅
 
-* TiKV-CDC 工具 GA，支持 RawKV 的 Change Data Capture [#48](https://github.com/tikv/migration/issues/48) @[zeminzhou](https://github.com/zeminzhou) @[haojinming](https://github.com/haojinming) @[pingyu](https://github.com/pingyu) **tw@Oreoxmt**
+* The TiKV-CDC tool is now GA and supports subscribing to data changes of RawKV [#48](https://github.com/tikv/migration/issues/48) @[zeminzhou](https://github.com/zeminzhou) @[haojinming](https://github.com/haojinming) @[pingyu](https://github.com/pingyu) **tw@Oreoxmt**
 
-    TiKV-CDC 是一个 TiKV 集群的 CDC (Change Data Capture) 工具。TiKV 可以独立于 TiDB，与 PD 构成 KV 数据库，此时的产品形态为 RawKV。TiKV-CDC 支持订阅 RawKV 的数据变更，并实时同步到下游 TiKV 集群，从而实现 RawKV 的跨集群复制能力。
+    TiKV-CDC is a CDC (Change Data Capture) tool for TiKV clusters. TiKV can operate independently of TiDB and form a KV database with PD. In this case, the product is called RawKV. TiKV-CDC supports subscribing to data changes of RawKV and replicating them to a downstream TiKV cluster in real time, thus enabling cross-cluster replication of RawKV.
 
-    更多信息，请参考[用户文档](https://tikv.org/docs/latest/concepts/explore-tikv-features/cdc/cdc-cn/)。
+    For more information, see [documentation](https://tikv.org/docs/latest/concepts/explore-tikv-features/cdc/cdc-cn/).
 
-* 同步到下游 Kafka 的 Changefeed 可将上游单表的同步任务下发到多个 TiCDC Nodes 执行，实现单表同步性能的水平扩展 [#7720](https://github.com/pingcap/tiflow/issues/7720) @[overvenus](https://github.com/overvenus) **tw@Oreoxmt**
+* TiCDC supports scaling out a single table on Kafka changefeeds and distributing the changefeed to multiple TiCDC nodes [#7720](https://github.com/pingcap/tiflow/issues/7720) @[overvenus](https://github.com/overvenus) **tw@Oreoxmt**
 
-    功能描述：下游为 Kafka 的 Changefeed 可将上游单表的复制任务调度到多个 TiCDC Nodes 执行，实现单张表同步性能的水平扩展。在这个功能发布之前，上游单表写入数据量较大时，无法水平扩展单表的复制能力，导致同步延迟增加。该功能发布后，就可以通过水平扩展，解决单表同步性能的问题。
+    Before v6.6.0, when the write throughput of the upstream table is large, the replication capability of a single table could not be scaled out, resulting in an increase in replication latency. Starting from TiCDC v6.6.0. the changefeed of a upstream table can be distributed to multiple TiCDC nodes in a Kafka sink, which enables scaling out the replication capability of a single table.
 
-    更多信息，请参考[用户文档](https://github.com/pingcap/docs-cn/pull/12693)。
+    For more information, see [documentation](/ticdc/ticdc-sink-to-kafka.md#scale-out-the-load-of-a-single-large-table-to-multiple-ticdc-nodes).
 
 ### 部署及运维
 
