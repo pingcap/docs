@@ -11,10 +11,10 @@ The `ALTER RESOURCE GROUP` statement is used to modify the resource group in a d
 
 ```ebnf+diagram
 AlterResourceGroupStmt:
-   "ALTER" "RESOURCE" "GROUP" IfNotExists ResourceGroupName ResourceGroupOptionList BurstableOption
+   "ALTER" "RESOURCE" "GROUP" IfNotExists ResourceGroupName ResourceGroupOptionList
 
 IfNotExists ::=
-    ('IF' 'NOT' 'EXISTS')?
+    ('IF' 'EXISTS')?
 
 ResourceGroupName:
    Identifier
@@ -25,11 +25,8 @@ ResourceGroupOptionList:
 |   ResourceGroupOptionList ',' DirectResourceGroupOption
 
 DirectResourceGroupOption:
-    "RRU_PER_SEC" EqOpt stringLit
-|   "WRU_PER_SEC" EqOpt stringLit
-
-BurstableOption ::=
-    ("BURSTABLE")?
+    "RU_PER_SEC" EqOpt stringLit
+|   "BURSTABLE"
 
 ```
 
@@ -39,7 +36,7 @@ TiDB supports the following `DirectResourceGroupOption`, where [Request Unit (RU
 |---------------|-------------------------------------|------------------------|
 |`RU_PER_SEC` | Rate of RU filling per second |`RU_PER_SEC = 500` indicates that this resource group is backfilled with 500 RU per second |
 
-If the `BURSTABLE` attribute is set, the corresponding resource group allows the system resources to be used exceeding the quota.
+If the `BURSTABLE` attribute is set, the corresponding resource group allows the available system resources to be used exceeding the quota.
 
 > **Note:**
 > 
