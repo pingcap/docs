@@ -1,6 +1,6 @@
 ---
 title: Use Import Resource
-summary: Learn how to create an import task on a TiDB Cloud cluster using the import resource.
+summary: Learn how to manage the import task using the import resource.
 ---
 
 # Import Resource
@@ -11,7 +11,7 @@ Import resource supports:
 - LOCAL and S3 import type.
 - Cancel import tasks.
 
-You can learn how to create an import task on a TiDB Cloud cluster with the `tidbcloud_import` resource in this document.
+You can learn how to manage an import task with the `tidbcloud_import` resource in this document.
 
 ## Before you start
 
@@ -32,7 +32,7 @@ Here is an example on how to manage a LOCAL import task with import resource.
    2;Bob;30
    ```
 
-2. Create an `import.tf` file. For example:
+2. Create an `import` directory then create a `main.tf` inside it. For example:
 
     ```
     terraform {
@@ -66,7 +66,6 @@ Here is an example on how to manage a LOCAL import task with import resource.
     ```
 
    Replace resource values (such as project ID and cluster ID) in the file with your own. And you can find the details of `csv_format` in [CSV Configurations for Importing Data](/tidb-cloud/csv-config-for-import-data.md).
-
 
 3. Run the `terraform apply` command and type `yes` to confirm the creation:
 
@@ -235,6 +234,3 @@ Destroy complete! Resources: 1 destroyed.
 ## Configurations
 
 See [configuration documentation](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/import) to get all the available configurations for import resource.
-
-
-
