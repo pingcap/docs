@@ -83,13 +83,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-
 
     + TiDB Data Migration (DM)
 
-        - Fix a bug that DM might raise an error during precheck when the downstream database name in `SHOW GRANTS` contains a wildcard ("*") [#7645](https://github.com/pingcap/tiflow/issues/7645) @[lance6716]
-        - Fix the issue that DM prints too many logs caused by "COMMIT" in binlog query events [#7525](https://github.com/pingcap/tiflow/issues/7525) @[liumengya94]
-        - Fix the issue that the DM task fails to start when only `ssl-ca` is configured for SSL [#7941](https://github.com/pingcap/tiflow/issues/7941) @[liumengya94]
-        - Fix a bug that when the expression filters of both "update" and "non-update" types are specified in one table, all `UPDATE` row changes are skipped [#7831](https://github.com/pingcap/tiflow/issues/7831) @[lance6716]
-        - Fix a bug that when only one of `update-old-value-expr` or `update-new-value-expr` is set for a table, the filter does not take effect or DM panics [#7774](https://github.com/pingcap/tiflow/issues/7774) @[lance6716]
+        - Fix a bug that DM might raise an error during precheck when the downstream database name in `SHOW GRANTS` contains a wildcard ("*") [#7645](https://github.com/pingcap/tiflow/issues/7645) @[lance6716](https://github.com/lance6716)
+        - Fix the issue that DM prints too many logs caused by "COMMIT" in binlog query events [#7525](https://github.com/pingcap/tiflow/issues/7525) @[liumengya94](https://github.com/liumengya94)
+        - Fix the issue that the DM task fails to start when only `ssl-ca` is configured for SSL [#7941](https://github.com/pingcap/tiflow/issues/7941) @[liumengya94](https://github.com/liumengya94)
+        - Fix a bug that when the expression filters of both "update" and "non-update" types are specified in one table, all `UPDATE` statements are skipped [#7831](https://github.com/pingcap/tiflow/issues/7831) @[lance6716](https://github.com/lance6716)
+        - Fix a bug that when only one of `update-old-value-expr` or `update-new-value-expr` is set for a table, the filter rule does not take effect or DM panics [#7774](https://github.com/pingcap/tiflow/issues/7774) @[lance6716](https://github.com/lance6716)
 
     + TiDB Lightning
 
         - Fix the memory leakage issue when TiDB Lightning imports a huge source data file [#39331](https://github.com/pingcap/tidb/issues/39331) @[dsdashun](https://github.com/dsdashun)
-        - Fix the issue that TiDB Lightning precheck cannot find dirty data left by previously failed imports [#39477](https://github.com/pingcap/tidb/issues/39477) @[dsdashun](https://github.com/dsdashun)
+        - Fix the issue that TiDB Lightning prechecks cannot find dirty data left by previously failed imports [#39477](https://github.com/pingcap/tidb/issues/39477) @[dsdashun](https://github.com/dsdashun)
