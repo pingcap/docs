@@ -191,15 +191,22 @@ TiDB 版本：6.6.0
 
 ### 稳定性
 
-* 基于资源组的资源管控 (实验特性) #[38825](https://github.com/pingcap/tidb/issues/38825) @[nolouch](https://github.com/nolouch) @[BornChanger](https://github.com/BornChanger) @[glorv](https://github.com/glorv) @[tiancaiamao](https://github.com/tiancaiamao) @[Connor1996](https://github.com/Connor1996) @[JmPotato](https://github.com/JmPotato) @[hnes](https://github.com/hnes) @[CabinfeverB](https://github.com/CabinfeverB) @[HuSharp](https://github.com/HuSharp) **tw@hfxsd**
+* Resource control based on resource groups (experimental) #[38825](https://github.com/pingcap/tidb/issues/38825) @[nolouch](https://github.com/nolouch) @[BornChanger](https://github.com/BornChanger) @[glorv](https://github.com/glorv) @[tiancaiamao](https://github.com/tiancaiamao) @[Connor1996](https://github.com/Connor1996) @[JmPotato](https://github.com/JmPotato) @[hnes](https://github.com/hnes) @[CabinfeverB](https://github.com/CabinfeverB) @[HuSharp](https://github.com/HuSharp) **tw@hfxsd**
 
-    TiDB 集群支持创建资源组，将不用的数据库用户映射到对应的资源组中，根据实际需要设置每个资源组的配额。当集群资源紧张时，来自同一个资源组的会话所使用的全部资源将被限制在配额内，避免其中一个资源组过度消耗从而抑制其他资源组中的会话正常运行。系统内置视图会对资源的实际使用情况进行反馈和展示，协助用户更合理地配置资源。
+    TiDB clusters support creating resource groups, binding different database users to corresponding resource groups, and setting quotas for each resource group according to actual needs. When the cluster resources are limited, all resources used by sessions from the same resource group will be limited to the quota, so that one resource group will not be over-consumed and affect the normal operation of sessions in other resource groups. The built-in view of the system will display the actual usage of resources, assisting you to allocate resources more rationally.
 
-    资源管控技术的引入对 TiDB 具有里程碑的意义，它能够将一个分布式数据库集群中划分成多个逻辑单元，即使个别单元对资源过度使用，也不会完全挤占其他单元所需的资源。利用这个技术，你可以将数个来自不同系统的中小型应用合入一个 TiDB 集群中，个别应用的负载提升，不会影响其他业务的正常运行；而在系统负载较低的时候，繁忙的应用即使超过限额，也仍旧可以被分配到所需的系统资源，达到资源的最大化利用。 同样的，你可以选择将所有测试环境合入一个集群，或者将消耗较大的批量任务编入一个单独的资源组，在保证重要应用获得必要资源的同时，提升硬件利用率，降低运行成本。另外，合理利用资源管控技术可以减少集群数量，降低运维难度及管理成本。
+    The introduction of the resource control feature is a milestone for TiDB. It can divide a distributed database cluster into multiple logical units. Even if an individual unit overuses resources, it does not crowd out the resources needed by other units. 
 
-    在 v6.6 中， 启用资源管控技术需要同时打开 TiDB 的全局变量 [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-%E4%BB%8E-v660-%E7%89%88%E6%9C%AC%E5%BC%80%E5%A7%8B%E5%BC%95%E5%85%A5) 及 TiKV 的配置项 [`resource_control.enabled`](/tikv-configuration-file.md#tidb_enable_resource_control-%E4%BB%8E-v660-%E7%89%88%E6%9C%AC%E5%BC%80%E5%A7%8B%E5%BC%95%E5%85%A5)。 当前支持的限额方式是基于"[用量](/tidb-RU.md)" (即 Request Unit 或 RU )，RU 是 TiDB 对 CPU、IO 等系统资源的统一抽象单位。
+    With this feature, you can:
 
-    更多信息，请参考[用户文档](/tidb-resource-control.md)。
+    - Combine multiple small and medium-sized applications from different systems into one TiDB cluster. If the load of an individual application grows larger, it does not affect the normal operation of other businesses. When the system load is low, busy applications can still be allocated the required system resources even if they exceed the set read and write quotas, so as to achieve the maximum utilization of resources.
+    - Choose to combine all test environments into a single cluster, or group the batch tasks that consume more resources into a single resource group. It can improve hardware utilization and reduce operating costs while ensuring that critical applications can still get the necessary resources.
+
+    In addition, the rational use of the resource control feature can reduce the number of clusters, ease the difficulty of operation and maintenance, and save management costs.
+
+    In v6.6, you need to enable both TiDB's global variable [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660) and the TiKV configuration item [`resource_control.enabled`](/tikv-configuration-file.md#resource_control) to enable resource control. The currently supported quota method is based on "[Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru)". RU is TiDB's unified abstraction unit for system resources such as CPU and IO.
+
+    For more information, see [documentation](/tidb-resource-control.md).
 
 * Use a temporary Witness replica to spped up failover [#12876](https://github.com/tikv/tikv/issues/12876) @[Connor1996](https://github.com/Connor1996) @[ethercflow](https://github.com/ethercflow) **tw@Oreoxmt**
 
