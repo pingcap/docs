@@ -25,7 +25,7 @@ TiFlash provides the columnar storage, with a layer of coprocessors efficiently 
 
 TiFlash conducts real-time replication of data in the TiKV nodes at a low cost that does not block writes in TiKV. Meanwhile, it provides the same read consistency as in TiKV and ensures that the latest data is read. The Region replica in TiFlash is logically identical to those in TiKV, and is split and merged along with the Leader replica in TiKV at the same time.
 
-To deploy TiFlash under the Linux AMD64 architecture, the CPU must support AVX2 instruction sets. Use `cat /proc/cpuinfo | grep avx2` to confirm that there is output. By using such CPU instruction sets, TiFlash's vectorization engine can deliver better performance.
+To deploy TiFlash under the Linux AMD64 architecture, the CPU must support AVX2 instruction sets. Use `cat /proc/cpuinfo | grep avx2` to confirm that there is output. To deploy TiFlash under the Linux ARM64 architecture, the CPU must support ARMv8 instruction sets. Use `cat /proc/cpuinfo | grep 'crc32' | grep 'asimd'` to confirm that there is output. By using such CPU instruction sets, TiFlash's vectorization engine can deliver better performance.
 
 <CustomContent platform="tidb">
 
