@@ -1,23 +1,28 @@
 ---
-title: FOREIGN KEY
-summary: An overview of the usage of FOREIGN KEY for the TiDB database.
+title: FOREIGN KEY Constraints
+summary: An overview of the usage of FOREIGN KEY Constraints for the TiDB database.
 ---
 
-# FOREIGN KEY
+# FOREIGN KEY Constraints
 
 Starting from v6.6.0, TiDB supports the foreign key feature, which allows cross-table referencing of related data, and foreign key constraints to maintain data consistency.
 
 The foreign key is defined in the child table. The syntax is as follows:
 
-```sql
-[CONSTRAINT identifier] FOREIGN KEY
-    [identifier] (col_name, ...)
-    REFERENCES tbl_name (col_name,...)
-    [ON DELETE reference_option]
-    [ON UPDATE reference_option]
+```ebnf+diagram
+ForeignKeyDef
+         ::= ( 'CONSTRAINT' Identifier )? 'FOREIGN' 'KEY'
+             Identifier? '(' ColumnName ( ',' ColumnName )* ')'
+             'REFERENCES' TableName '(' ColumnName ( ',' ColumnName )* ')'
+             ( 'ON' 'DELETE' ReferenceOption )?
+             ( 'ON' 'UPDATE' ReferenceOption )?
 
-reference_option:
-    RESTRICT | CASCADE | SET NULL | NO ACTION | SET DEFAULT
+ReferenceOption
+         ::= 'RESTRICT'
+           | 'CASCADE'
+           | 'SET' 'NULL'
+           | 'SET' 'DEFAULT'
+           | 'NO' 'ACTION'
 ```
 
 ## Naming
@@ -37,7 +42,7 @@ When creating a foreign key, the following conditions must be met:
 - The user has the `REFERENCES` privilege on the parent table.
 - The columns referenced by the foreign key in the parent table and the child table are of the same data type and have the same size, precision, length, character set, and collation.
 - The columns in the foreign key cannot reference themselves.
-- The columns in the foreign key and the columns in the referenced parent table have corresponding indexes, and the order of the columns in the index matches that in the foreign key. This is to use the index to avoid full table scans when performing foreign key constraint checks.
+- The columns in the foreign key and the columns in the referenced parent table have the same index, and the order of the columns in the index matches that in the foreign key. This is to use the index to avoid full table scans when performing foreign key constraint checks.
 
     - If there is no corresponding foreign key index in the parent table, an error `ERROR 1822: Failed to add the foreign key constraint. Missing index for constraint 'fk' in the referenced table 't'` is reported.
     - If there is no corresponding foreign key index in the child table, an index is automatically created with the same name as the foreign key.
@@ -151,24 +156,26 @@ Create Table: CREATE TABLE `child` (
 
 ## Foreign key constraint check
 
-Whether to enable the foreign key constraint check is controlled by the system variable [`foreign_key_checks`](/system-variables.md#foreign_key_checks). By default, this variable value is set to `ON`, meaning that the foreign key constraint check is enabled. This variable has two scopes: `GLOBAL` and `SESSION`. Keeping this variable enabled can ensure the integrity of foreign key reference relationships.
+Whether to enable the foreign key constraint check is controlled by the system variable [`foreign_key_checks`](/system-variables.md#foreign_key_checks). By default, this variable is set to `ON`, meaning that the foreign key constraint check is enabled. This variable has two scopes: `GLOBAL` and `SESSION`. Keeping this variable enabled can ensure the integrity of foreign key reference relationships.
 
 The effect of disabling [`foreign_key_checks`](/system-variables.md#foreign_key_checks) is as follows:
 
 - When you delete a parent table referenced by a foreign key, the deletion can succeed only when the foreign key constraint check is disabled.
 - When you import data to a database, the order of creating tables might be different from the foreign key dependency order, which might cause the creation of tables to fail. Only when the foreign key constraint check is disabled can the tables be created successfully. In addition, disabling the foreign key constraint check can speed up data import.
 - When you import data to a database, if the data of the child table is imported first, an error will be reported. Only when the foreign key constraint check is disabled can the data of the child table be imported successfully.
-- If an `ALTER TABLE` operation to be executed involves change of the foreign key, this operation succeeds only when the foreign key constraint check is disabled.
+- If an `ALTER TABLE` operation to be executed involves a change of the foreign key, this operation succeeds only when the foreign key constraint check is disabled.
 
 When the foreign key constraint check is disabled, the foreign key constraint check and reference operation are not executed, except for the following scenarios:
 
-- When executing `ALTER TABLE`, if the definition of the foreign key is incorrect, an error is still reported.
+- If the execution of `ALTER TABLE` might result in wrong definition of the foreign key, an error is still reported during the execution.
 - When deleting the index required by the foreign key, you should delete the foreign key first. Otherwise, an error is reported.
 - When you create a foreign key but it does not meet related conditions or restrictions, an error is reported.
 
 ## Locking
 
-When `INSERT` or `UPDATE` a child table, the foreign key constraint checks whether the corresponding foreign key value exists in the parent table, and locks the row in the parent table to avoid the foreign key value being deleted by other operations violating the foreign key constraint. The locking behavior is equivalent to performing a `SELECT FOR UPDATE` operation on the row where the foreign key value is located in the parent table. Because TiDB currently does not support `LOCK IN SHARE MODE`, if there are a lot of concurrent writes to the child table and most of the referenced foreign key values are the same, there might be serious lock conflicts. It is recommended to disable [`foreign_key_checks`](/system-variables.md#foreign_key_checks) when writing a large number of child table data.
+When `INSERT` or `UPDATE` a child table, the foreign key constraint checks whether the corresponding foreign key value exists in the parent table, and locks the row in the parent table to avoid the foreign key value being deleted by other operations violating the foreign key constraint. The locking behavior is equivalent to performing a `SELECT FOR UPDATE` operation on the row where the foreign key value is located in the parent table.
+
+Because TiDB currently does not support `LOCK IN SHARE MODE`, if there are a lot of concurrent writes to the child table and most of the referenced foreign key values are the same, there might be serious locking conflicts. It is recommended to disable [`foreign_key_checks`](/system-variables.md#foreign_key_checks) when writing a large number of child table data.
 
 ## Definition and metadata of foreign keys
 
@@ -186,7 +193,7 @@ Create Table: CREATE TABLE `child` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
 ```
 
-You can get information about foreign keys from the [`INFORMATION_SCHEMA.KEY_COLUMN_USAGE`](/information-schema/information-schema-key-column-usage.md) system table. The following is an example query:
+You can get information about foreign keys from the [`INFORMATION_SCHEMA.KEY_COLUMN_USAGE`](/information-schema/information-schema-key-column-usage.md) system table. The following is an example:
 
 ```sql
 mysql> SELECT TABLE_SCHEMA, TABLE_NAME, COLUMN_NAME, CONSTRAINT_NAME FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE REFERENCED_TABLE_SCHEMA IS NOT NULL;
@@ -198,6 +205,37 @@ mysql> SELECT TABLE_SCHEMA, TABLE_NAME, COLUMN_NAME, CONSTRAINT_NAME FROM INFORM
 | test         | product_order | product_id       | fk_1            |
 | test         | product_order | customer_id      | fk_2            |
 +--------------+---------------+------------------+-----------------+
+```
+
+You can get information about foreign keys from the [`INFORMATION_SCHEMA.TABLE_CONSTRAINTS`](/information-schema/information-schema-table-constraints.md) system table. The following is an example:
+
+```sql
+mysql> SELECT * FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE CONSTRAINT_TYPE='FOREIGN KEY'\G
+***************************[ 1. row ]***************************
+CONSTRAINT_CATALOG | def
+CONSTRAINT_SCHEMA  | test
+CONSTRAINT_NAME    | fk_1
+TABLE_SCHEMA       | test
+TABLE_NAME         | child
+CONSTRAINT_TYPE    | FOREIGN KEY
+```
+
+You can get information about foreign keys from the [`INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS`](/information-schema/information-schema-referential-constraints.md) system table. The following is an example:
+
+```sql
+mysql> SELECT * FROM INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS\G
+***************************[ 1. row ]***************************
+CONSTRAINT_CATALOG        | def
+CONSTRAINT_SCHEMA         | test
+CONSTRAINT_NAME           | fk_1
+UNIQUE_CONSTRAINT_CATALOG | def
+UNIQUE_CONSTRAINT_SCHEMA  | test
+UNIQUE_CONSTRAINT_NAME    | PRIMARY
+MATCH_OPTION              | NONE
+UPDATE_RULE               | NO ACTION
+DELETE_RULE               | CASCADE
+TABLE_NAME                | child
+REFERENCED_TABLE_NAME     | parent
 ```
 
 ## View execution plans with foreign keys
@@ -249,7 +287,16 @@ Create Table | CREATE TABLE `child` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
 ```
 
-### Compatibility with MySQL
+### Compatibility with TiDB tools
 
 - [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) does not support foreign keys.
-- When you create a foreign key without specifying a name, the name generated by TiDB is different from that generated by MySQL. For example, the foreign key name generated by TiDB is `fk_1`, `fk_2`, and `fk_3`, while the foreign key name generated by MySQL is `table_name_ibfk_1`, `table_name_ibfk_2`, and `table_name_ibfk_3`.
+- [DM](/dm/dm-overview.md) v6.6.0 disables the [`foreign_key_checks`](/system-variables.md#foreign_key_checks) of the downstream TiDB when replicating data to TiDB. Therefore, the cascading operations caused by foreign keys are not replicated from the upstream to the downstream, which might cause inconsistent data. Because TiDB does not support foreign keys, this behavior is consistent with the previous DM versions.
+- [TiCDC](/ticdc/ticdc-overview.md) v6.6.0 is compatible with foreign keys. The previous versions of TiCDC might report an error when replicating tables with foreign keys. It is recommended to disable the `foreign_key_checks` of the downstream TiDB cluster when using a TiCDC version earlier than v6.6.0.
+- [br](/br/backup-and-restore-overview.md) v6.6.0 is compatible with foreign keys. The previous versions of br might report an error when restoring tables with foreign keys to a v6.6.0 or later cluster. It is recommended to disable the `foreign_key_checks` of the downstream TiDB cluster before restoring the cluster when using a br version earlier than v6.6.0.
+- When you use [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md), it is recommended to disable the `foreign_key_checks` of the downstream TiDB cluster before importing data.
+- [Dumpling](/dumpling-overview.md) is compatible with foreign keys.
+- When you use [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md) to compare data between the upstream and downstream databases, if the database versions are different and there is [an invalid foreign key in the downstream TiDB](#compatibility-between-tidb-versions), sync-diff-inspector might report a table schema inconsistent error. This is because TiDB v6.6.0 adds a `/* FOREIGN KEY INVALID */` comment for the invalid foreign key.
+
+### Compatibility with MySQL
+
+When you create a foreign key without specifying a name, the name generated by TiDB is different from that generated by MySQL. For example, the foreign key name generated by TiDB is `fk_1`, `fk_2`, and `fk_3`, while the foreign key name generated by MySQL is `table_name_ibfk_1`, `table_name_ibfk_2`, and `table_name_ibfk_3`.

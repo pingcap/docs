@@ -270,7 +270,7 @@ For more possible values of this variable, see [Authentication plugin status](/s
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
-- Default value: `ON`
+- Default value: Before v6.6.0, the default value is `OFF`. Starting from v6.6.0, the default value is `ON`.
 - This variable controls whether to enable foreign key constraint checking.
 
 ### group_concat_max_len
@@ -1503,7 +1503,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
-- Default value: `ON`
+- Default value: Before v6.6.0, the default value is `OFF`. Starting from v6.6.0, the default value is `ON`.
 - This variable controls whether to enable the `FOREIGN KEY` feature.
 
 ### tidb_enable_gc_aware_memory_track
