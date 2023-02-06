@@ -9,7 +9,7 @@ summary: Learn how to use resource management to control and schedule applicatio
 >
 > This feature is experimental and its form and usage may change in subsequent versions.
 
-Using the resource control feature, as a cluster administrator, you can define resource groups and limit the read and write quotas by resource groups. After you bind users to a resource group, the TiDB layer will perform flow control on the user's read and write requests according to the read and write quotas set by the bound resource group. Meanwhile, the TiKV layer will schedule the requests according to the priority of the read and write quota mapping. Through flow control and scheduling, you can achieve resource isolation of your applications and meet the quality of service (QoS) requirements.
+Using the resource control feature, as a cluster administrator, you can define resource groups and limit the read and write quotas of resource groups. After you bind users to a resource group, the TiDB layer will perform flow control on the user's read and write requests according to the read and write quotas set by the bound resource group. Meanwhile, the TiKV layer will schedule the requests according to the priority of the read and write quota mapping. Through flow control and scheduling, you can achieve resource isolation of your applications and meet the quality of service (QoS) requirements.
 
 The TiDB resource control feature provides two layers of resource management capabilities: flow control capabilities at the TiDB layer and priority scheduling capabilities at the TiKV layer. The two capabilities are orthogonal and can be enabled separately or simultaneously. See the [Parameters for resource control](#parameters-for-resource-control) for details.
 
@@ -31,7 +31,7 @@ In addition, the rational use of the resource control feature can reduce the num
 
 > **Note:**
 >
-> This feature does not support [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta).
+> This feature is not available on [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta).
 
 </CustomContent>
 
@@ -64,7 +64,7 @@ The resource control feature introduces two new global variables.
 
 > **Note:**
 >
-> The parameter `resource_control.enabled` is disabled by default. It does not support dynamic modification. You need to contact the [PingCAP support team](/tidb-cloud/tidb-cloud-support.md) to enable it. You need to restart the TiKV instance for the modification to take effect.
+> The parameter `resource_control.enabled` is disabled by default. It does not support dynamic modification. You need to contact the [PingCAP support](/tidb-cloud/tidb-cloud-support.md) to enable it. You need to restart the TiKV instance for the modification to take effect.
 
 </CustomContent>
 

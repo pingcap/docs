@@ -38,7 +38,7 @@ DESC processlist;
 | MEM                 | bigint(21) unsigned | YES  |      | NULL    |       |
 | DISK                | bigint(21) unsigned | YES  |      | NULL    |       |
 | TxnStart            | varchar(64)         | NO   |      |         |       |
-| RESOURCE_GROUP | varchar(32)         | NO   |      |         |       |
+| RESOURCE_GROUP      | varchar(32)         | NO   |      |         |       |
 +---------------------+---------------------+------+------+---------+-------+
 13 rows in set (0.00 sec)
 ```
