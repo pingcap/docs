@@ -11,7 +11,7 @@ You can use the `CREATE RESOURCE GROUP` statement to create a resource group in 
 
 ```ebnf+diagram
 CreateResourceGroupStmt:
-   "CREATE" "RESOURCE" "GROUP" IfNotExists ResourceGroupName ResourceGroupOptionList BurstableOption
+   "CREATE" "RESOURCE" "GROUP" IfNotExists ResourceGroupName ResourceGroupOptionList
 
 IfNotExists ::=
     ('IF' 'NOT' 'EXISTS')?
@@ -26,9 +26,7 @@ ResourceGroupOptionList:
 
 DirectResourceGroupOption:
     "RU_PER_SEC" EqOpt stringLit
-
-BurstableOption ::=
-    ("BURSTABLE")?
+|   "BURSTABLE"
 
 ```
 
@@ -59,7 +57,6 @@ mysql> CREATE RESOURCE GROUP IF NOT EXISTS rg1
 Query OK, 0 rows affected (0.08 sec)
 mysql> CREATE RESOURCE GROUP IF NOT EXISTS rg2
     ->  RU_PER_SEC = 200
-    ->  BURSTABLE;
 Query OK, 0 rows affected (0.08 sec)
 mysql> SELECT * FROM information_schema.resource_groups WHERE NAME ='rg1' or NAME = 'rg2';
 +------+-------------+-----------+-----------+

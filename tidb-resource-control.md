@@ -11,7 +11,14 @@ summary: Learn how to use resource management to control and schedule applicatio
 
 Using the resource control feature, as a cluster administrator, you can define resource groups and limit the read and write quotas by resource groups. After you bind users to a resource group, the TiDB layer will perform flow control on the user's read and write requests according to the read and write quotas set by the bound resource group. Meanwhile, the TiKV layer will schedule the requests according to the priority of the read and write quota mapping. Through flow control and scheduling, you can achieve resource isolation of your applications and meet the quality of service (QoS) requirements.
 
-The introduction of the resource control feature is a milestone for TiDB. It can divide a distributed database cluster into multiple logical units. Even if an individual unit overuses resources, it does not crowd out the resources needed by other units. 
+The TiDB resource control feature provides two layers of resource management capabilities: flow control capabilities at the TiDB layer and priority scheduling capabilities at the TiKV layer. The two capabilities are orthogonal and can be enabled separately or simultaneously. See the [Parameters for resource control](#parameters-for-resource-control) for details.
+
+- TiDB flow control: TiDB flow control uses the token bucket algorithm. The number of tokens consumed by read and write requests cannot exceed the number of tokens accumulated in the corresponding resource group bucket. If there are not enough tokens in the bucket, and the resource group does not specify the `BURSTABLE` option, the requests to the resource group will wait for the token bucket to backfill the tokens and retry. The retry may fail due to timeout.
+- TiKV scheduling: If this feature is enabled, TiKV uses the value of `RU_PER_SEC` of each resource group to map the read and write requests of each resource group to their own priorities. Based on their own priorities, the storage layer uses the priority queue to schedule and process requests.
+
+The introduction of the resource control feature is a milestone for TiDB. It can divide a distributed database cluster into multiple logical units. Even if an individual unit overuses resources, it does not crowd out the resources needed by other units.
+
+## Scenarios for resource control
 
 This feature applies to the following scenarios:
 
