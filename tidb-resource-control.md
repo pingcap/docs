@@ -79,7 +79,7 @@ For an existing resource group, you can modify the read and write quota of the r
 You can delete a resource group by using [`DROP RESOURCE GROUP`](/sql-statements/sql-statement-drop-resource-group.md).
 
 > **Note:**
-> 
+>
 > - When you bind a user to a resource group by using `CREATE USER` or `ALTER USER`, it will not take effect for the user's existing sessions, but only for the user's new sessions.
 > - If a user is not bound to a resource group or is bound to a `default` resource group, the user's requests are not subject to TiDB's flow control restrictions. The `default` resource group is currently not visible to the user and cannot be created or modified.
 
@@ -98,8 +98,6 @@ In TiKV, set the parameter `resource_control.enabled` to `true`. The parameter `
 </CustomContent> 
 
 ### Step 2. Create a resource group, and then bind users to it
-
-Resource group quotas are expressed as [Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru), which is TiDB's unified abstraction of CPU, IO, and other system resources.
 
 The following is an example of how to create a resource group and bind users to it.
 
@@ -150,4 +148,3 @@ Currently, the resource control feature has the following limitations:
 * [ALTER RESOURCE GROUP](/sql-statements/sql-statement-alter-resource-group.md)
 * [DROP RESOURCE GROUP](/sql-statements/sql-statement-drop-resource-group.md)
 * [RESOURCE GROUP RFC](https://docs.google.com/document/d/1sV5EVv8Cdpc6aBCDihc2akpE0iuantPf/)
-* [Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru)
