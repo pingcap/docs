@@ -27,9 +27,9 @@ TiDB 版本：6.6.0
 
     更多信息，请参考[用户文档](链接)。
 
-* Support the foreign key constraint that is compatible with MySQL (experimental) [#18209](https://github.com/pingcap/tidb/issues/18209) @[crazycs520](https://github.com/crazycs520) **tw@Oreoxmt**
+* Support the MySQL-compatible foreign key constraint [#18209](https://github.com/pingcap/tidb/issues/18209) @[crazycs520](https://github.com/crazycs520) **tw@Oreoxmt**
 
-    TiDB v6.6.0 introduces the foreign key constraint feature compatible with MySQL. This feature supports data correlation in a table or between tables, constraint validation, and supports cascade operations. This feature helps to maintain data consistency, improve data quality, and facilitate data modeling.
+    TiDB v6.6.0 introduces the foreign key constraint feature, which is compatible with MySQL. This feature supports data correlation in a table or between tables, constraint validation, and cascade operations. This feature helps to maintain data consistency, improve data quality, and facilitate data modeling.
 
     For more information, see [documentation](/sql-statements/sql-statement-foreign-key.md).
 
@@ -114,7 +114,7 @@ TiDB 版本：6.6.0
 
 * Add the `Warnings` field to the slow query log [#39893](https://github.com/pingcap/tidb/issues/39893) @[time-and-fate](https://github.com/time-and-fate) **tw@Oreoxmt**
 
-    The `Warnings` field is added to the slow query log in JSON format to record the warnings generated during the execution of the slow query to help diagnose performance issues. You can also view this in the slow query page of TiDB Dashboard.
+    The `Warnings` field is added to the slow query log in JSON format to record the warnings generated during the execution of the slow query to help diagnose performance issues. You can also view this on the slow query page of TiDB Dashboard.
 
     For more information, see [documentation](/identify-slow-queries.md).
 
@@ -214,13 +214,13 @@ TiDB 版本：6.6.0
 
 * Use a temporary Witness replica to spped up failover [#12876](https://github.com/tikv/tikv/issues/12876) @[Connor1996](https://github.com/Connor1996) @[ethercflow](https://github.com/ethercflow) **tw@Oreoxmt**
 
-    The Witness feature can be used to quickly recover a failover to improve system availability and data durability. For example, in a 3-out-of-4 scenario, although it meets the majority requirement, the system is fragile and the time to completely recover a new member is often long (requires copying the snapshot first and then applying the latest log), especially when the Region snapshot is relatively large. In addition, the process of copying replicas might cause more pressure on unhealthy Group members. Therefore, adding a Witness can quickly bring down an unhealthy node and enmsure the security of logs during recovery.
+    The Witness feature can be used to quickly recover a failover to improve system availability and data durability. For example, in a 3-out-of-4 scenario, although it meets the majority requirement, the system is fragile and the time to completely recover a new member is often long (requires copying the snapshot first and then applying the latest log), especially when the Region snapshot is relatively large. In addition, the process of copying replicas might cause more pressure on unhealthy Group members. Therefore, adding a Witness can quickly bring down an unhealthy node and ensure the security of logs during recovery.
 
     For more information, see [documentation](/use-witness-to-speed-up-failover.md)。
 
 * Support configuring read-only storage nodes for resource-consuming tasks [#issue号](链接) @[v01dstar](https://github.com/v01dstar) **tw@Oreoxmt**
 
-    In production environments, some read-only operations might consume a large amount of resources regularly, which might affect the performance of the entire cluster, such as backups and large-scale data analysis. TiDB v6.6.0 supports configuring read-only storage nodes to execute resource-consuming read-only tasks to reduce the impact on the online application. You can configure read-only storage nodes according to [steps](/readonly-nodes.md#操作步骤) and specify where to read data through a system variable or client parameter to ensure the stability of cluster performance.
+    In production environments, some read-only operations might consume a large number of resources regularly, which might affect the performance of the entire cluster, such as backups and large-scale data analysis. TiDB v6.6.0 supports configuring read-only storage nodes to execute resource-consuming read-only tasks to reduce the impact on the online application. You can configure read-only storage nodes according to [steps](/readonly-nodes.md#steps) and specify where to read data through a system variable or client parameter to ensure the stability of cluster performance.
 
     For more information, see [documentation](/best-practices/readonly-nodes.md).
 
@@ -240,11 +240,9 @@ TiDB 版本：6.6.0
 
 ### MySQL 兼容性
 
-* 功能标题 [#issue号](链接) @[贡献者 GitHub ID](链接)
+* Support the MySQL-compatible foreign key constraint [#18209](https://github.com/pingcap/tidb/issues/18209) @[crazycs520](https://github.com/crazycs520) **tw@Oreoxmt**
 
-    功能描述（需要包含这个功能是什么、在什么场景下对用户有什么价值、怎么用）
-
-    更多信息，请参考[用户文档](链接)。
+    For more information, see the [SQL](#sql) section in v6.6.0 Release Notes and [documentation](/sql-statements/sql-statement-foreign-key.md).
 
 ### 数据迁移
 
@@ -266,7 +264,7 @@ TiDB 版本：6.6.0
 
 * TiCDC supports scaling out a single table on Kafka changefeeds and distributing the changefeed to multiple TiCDC nodes [#7720](https://github.com/pingcap/tiflow/issues/7720) @[overvenus](https://github.com/overvenus) **tw@Oreoxmt**
 
-    Before v6.6.0, when the write throughput of the upstream table is large, the replication capability of a single table could not be scaled out, resulting in an increase in replication latency. Starting from TiCDC v6.6.0. the changefeed of a upstream table can be distributed to multiple TiCDC nodes in a Kafka sink, which enables scaling out the replication capability of a single table.
+    Before v6.6.0, when the write throughput of the upstream table is large, the replication capability of a single table could not be scaled out, resulting in an increase in replication latency. Starting from TiCDC v6.6.0. the changefeed of an upstream table can be distributed to multiple TiCDC nodes in a Kafka sink, which enables scaling out the replication capability of a single table.
 
     For more information, see [documentation](/ticdc/ticdc-sink-to-kafka.md#scale-out-the-load-of-a-single-large-table-to-multiple-ticdc-nodes).
 
