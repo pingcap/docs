@@ -12,9 +12,9 @@ TiDB supports storing backup data to Amazon S3, Google Cloud Storage (GCS), Azur
 
 | CLI parameter | Description | Default value
 |:----------|:-------|:-------|
-| `--send-credentials-to-tikv` | Controls whether to send credentials obtained by BR to TiKV | `true`|
+| `--send-credentials-to-tikv` | Controls whether to send credentials obtained by BR to TiKV. | `true`|
 
-By default, BR sends a credential to each TiKV node when using Amazon S3, GCS, or Azure Blob Storage as the storage system. This behavior simplifies the configuration and is controlled by the parameter `--send-credentials-to-tikv`.
+By default, BR sends a credential to each TiKV node when using Amazon S3, GCS, or Azure Blob Storage as the storage system. This behavior simplifies the configuration and is controlled by the parameter `--send-credentials-to-tikv`(or `-c` in short).
 
 Note that this operation is not applicable to cloud environments. If you use IAM Role authorization, each node has its own role and permissions. In this case, you need to configure `--send-credentials-to-tikv=false` (or `-c=0` in short) to disable sending credentials:
 
