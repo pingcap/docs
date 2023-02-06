@@ -181,11 +181,11 @@ After the scene is loaded and restored, you can diagnose and improve the executi
 
 ## Use `PLAN REPLAYER CAPTURE` to capture target plans
 
-When you locate the execution plan of TiDB in some scenarios, the target SQL statement and the target execution plan may only appear occasionally in the query, so you cannot directly capture it using `PLAN REPLAYER`. In such cases, you can use `PLAN REPLAYER CAPTURE` to help you capture the optimizer information of the target SQL statement and the target plan.
+When you locate the execution plan of TiDB in some scenarios, the target SQL statement and the target execution plan might only appear occasionally in the query, so you cannot directly capture the statement and the plan using `PLAN REPLAYER`. In such cases, you can use `PLAN REPLAYER CAPTURE` to help you capture the optimizer information of the target SQL statement and the target plan.
 
 `PLAN REPLAYER CAPTURE` has the following main features:
 
-- Registers the target SQL statement and the target execution plan in the TiDB cluster in advance, and starts matching the target query.
+- Registers the target SQL statement and the digest of the target execution plan in the TiDB cluster in advance, and starts matching the target query.
 - When the target query is matched successfully, directly captures its optimizer-related information and exports it as a ZIP file.
 - For each matched SQL and execution plan, the information is only captured once.
 - Displays the ongoing matching tasks and generated files through the system table.
@@ -207,7 +207,6 @@ If the target SQL statement has multiple execution plans and you want to capture
 
 ```sql
 PLAN REPLAYER CAPTURE 'sql_digest' '*';
-
 ```
 
 ### View the capture tasks
@@ -217,6 +216,7 @@ You can view the ongoing capture tasks of `PLAN REPLAYER CAPTURE` in the TiDB cl
 ```sql
 mysql> PLAN PLAYER CAPTURE 'example_sql' 'example_plan';
 Query OK, 1 row affected (0.01 sec)
+
 mysql> SELECT * FROM mysql.plan_replayer_task;
 +-------------+--------------+---------------------+
 | sql_digest  | plan_digest  | update_time         |
