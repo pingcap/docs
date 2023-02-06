@@ -690,7 +690,6 @@
       - [`FLUSH PRIVILEGES`](/sql-statements/sql-statement-flush-privileges.md)
       - [`FLUSH STATUS`](/sql-statements/sql-statement-flush-status.md)
       - [`FLUSH TABLES`](/sql-statements/sql-statement-flush-tables.md)
-      - [`FOREIGN KEY Constraints`](/sql-statements/sql-statement-foreign-key.md)
       - [`GRANT <privileges>`](/sql-statements/sql-statement-grant-privileges.md)
       - [`GRANT <role>`](/sql-statements/sql-statement-grant-role.md)
       - [`INSERT`](/sql-statements/sql-statement-insert.md)
@@ -814,6 +813,7 @@
     - [Partitioning](/partitioned-table.md)
     - [Temporary Tables](/temporary-tables.md)
     - [Cached Tables](/cached-tables.md)
+    - [FOREIGN KEY Constraints](/foreign-key.md)
     - Character Set and Collation
       - [Overview](/character-set-and-collation.md)
       - [GBK](/character-set-gbk.md)

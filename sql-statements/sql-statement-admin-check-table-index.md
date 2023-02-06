@@ -6,7 +6,7 @@ category: reference
 
 # ADMIN CHECK [TABLE|INDEX]
 
-The `ADMIN CHECK [TABLE|INDEX]` statement checks for data consistency of tables and indexes. It does not support checking [foreign key constraints](/sql-statements/sql-statement-foreign-key.md).
+The `ADMIN CHECK [TABLE|INDEX]` statement checks for data consistency of tables and indexes. It does not support checking [FOREIGN KEY constraints](/foreign-key.md).
 
 ## Synopsis
 
