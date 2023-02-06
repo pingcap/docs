@@ -189,7 +189,7 @@ All data of the statement summary tables above will be lost when the TiDB server
 
 > **Warning:**
 >
-> Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment.
+> Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or deleted, and its syntax and implementation be changed before GA without prior notice. If you find any bug, please [file an issue on GitHub](https://github.com/pingcap/tidb/issues).
 
 As described in the [Limitation](#limitation) section, statements summary tables are maintained in memory by default. Once the TiDB server restarts, all the statements summary data will be lost. Starting from v6.6.0, TiDB experimentally provides [the configuration item `tidb_stmt_summary_enable_persistent`](/tidb-configuration-file.md#tidb_stmt_summary_enable_persistent-new-in-v660) to allow users to enable or disable statements summary persistence.
 
@@ -205,7 +205,7 @@ tidb_stmt_summary_enable_persistent = true
 # tidb_stmt_summary_file_max_backups = 0
 ```
 
-After statements summary persistence is enabled, the memory keeps only the current real-time data and no historical data. Once the real-time data is refreshed as historical data, the historical data is written to the disk file (at an interval indicated by `tidb_stmt_summary_refresh_interval` described in [Parameter configuration](#parameter-configuration)). Queries on the `statements_summary_history` or `cluster_statements_summary_history` table will return results combining both in-memory and on-disk data.
+After statements summary persistence is enabled, the memory keeps only the current real-time data and no historical data. Once the real-time data is refreshed as historical data, the historical data is written to the disk file at an interval indicated by `tidb_stmt_summary_refresh_interval` described in [Parameter configuration](#parameter-configuration). Queries on the `statements_summary_history` or `cluster_statements_summary_history` table will return results combining both in-memory and on-disk data.
 
 > **Note:**
 >

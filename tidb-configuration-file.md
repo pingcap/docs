@@ -811,7 +811,7 @@ Configuration items related to read isolation.
 
 > **Warning:**
 >
-> Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment.
+> Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or deleted, and its syntax and implementation be changed before GA without prior notice. If you find any bug, please [file an issue on GitHub](https://github.com/pingcap/tidb/issues).
 
 + Controls whether to enable statements summary persistence.
 + Default value: `false`
@@ -821,7 +821,7 @@ Configuration items related to read isolation.
 
 > **Warning:**
 >
-> Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment.
+> Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or deleted, and its syntax and implementation be changed before GA without prior notice. If you find any bug, please [file an issue on GitHub](https://github.com/pingcap/tidb/issues).
 
 + When statements summary persistence is enabled, this configuration specifies the file to which persistent data is written.
 + Default value: `tidb-statements.log`
@@ -830,27 +830,29 @@ Configuration items related to read isolation.
 
 > **Warning:**
 >
-> Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment.
+> Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or deleted, and its syntax and implementation be changed before GA without prior notice. If you find any bug, please [file an issue on GitHub](https://github.com/pingcap/tidb/issues).
 
 + When statements summary persistence is enabled, this configuration specifies the maximum number of days to keep persistent data files.
 + Default value: `3`
++ Unit: day
 + You can adjust the value based on the data retention requirements and disk space usage.
 
 ### `tidb_stmt_summary_file_max_size` <span class="version-mark">New in v6.6.0</span>
 
 > **Warning:**
 >
-> Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment.
+> Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or deleted, and its syntax and implementation be changed before GA without prior notice. If you find any bug, please [file an issue on GitHub](https://github.com/pingcap/tidb/issues).
 
-+ When statements summary persistence is enabled, this configuration specifies the maximum size of a persistent data file (in MiB).
++ When statements summary persistence is enabled, this configuration specifies the maximum size of a persistent data file.
 + Default value: `64`
++ Unit: MiB
 + You can adjust the value based on the data retention requirements and disk space usage.
 
 ### `tidb_stmt_summary_file_max_backups` <span class="version-mark">New in v6.6.0</span>
 
 > **Warning:**
 >
-> Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment.
+> Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or deleted, and its syntax and implementation be changed before GA without prior notice. If you find any bug, please [file an issue on GitHub](https://github.com/pingcap/tidb/issues).
 
 + When statements summary persistence is enabled, this configuration specifies the maximum number of data files that can be persisted. `0` means no limit on the number of files.
 + Default value: `0`
