@@ -32,7 +32,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-
 
     - TiDB Lightning
 
-        - Change severity of the precheck items `clusterResourceCheckItem` and `emptyRegionCheckItem` from `Critical` to `Warning` [#37654](https://github.com/pingcap/tidb/issues/37654) @[niubell](https://github.com/niubell)
+        - Change the severity of the precheck items `clusterResourceCheckItem` and `emptyRegionCheckItem` from `Critical` to `Warning` [#37654](https://github.com/pingcap/tidb/issues/37654) @[niubell](https://github.com/niubell)
 
 ## Bug fixes
 
@@ -41,7 +41,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-
     - Fix the issue that when you create a table, the default value and the type of a column are not consistent and are not automatically corrected [#34881](https://github.com/pingcap/tidb/issues/34881) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger) @[mjonss](https://github.com/mjonss)
     - Fix the data race issue in the `LazyTxn.LockKeys` function [#40355](https://github.com/pingcap/tidb/issues/40355) @[HuSharp](https://github.com/HuSharp)
     - Fix the issue that the `INSERT` or `REPLACE` statements might panic in long session connections [#40351](https://github.com/pingcap/tidb/issues/40351) @[fanrenhoo](https://github.com/fanrenhoo)
-    - Fix the issue that reading data using the "cursor read" method might return error because of GC [#39447](https://github.com/pingcap/tidb/issues/39447)@[zyguan](https://github.com/zyguan)
+    - Fix the issue that reading data using the "cursor read" method might return an error because of GC [#39447](https://github.com/pingcap/tidb/issues/39447)@[zyguan](https://github.com/zyguan)
     - Fix the issue that the [`pessimistic-auto-commit`](/tidb-configuration-file.md#pessimistic-auto-commit) configuration item does not take effect for point-get queries [#39928](https://github.com/pingcap/tidb/issues/39928)@[zyguan](https://github.com/zyguan)
     - Fix the issue that querying the `INFORMATION_SCHEMA.TIKV_REGION_STATUS` table returns an incorrect result @[zimulala](https://github.com/zimulala))
     - Fix the issue that the `IN` and `NOT IN` subqueries in some patterns report the `Can't find column` error [#37032](https://github.com/pingcap/tidb/issues/37032) @[AilinKid](https://github.com/AilinKid) @[lance6716](https://github.com/lance6716)
@@ -83,13 +83,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-
 
     + TiDB Data Migration (DM)
 
-        - Fix a bug that DM might raise an error during prechecking when the downstream database name in `SHOW GRANTS` contains a wildcard [#7645](https://github.com/pingcap/tiflow/issues/7645) @[lance6716]
+        - Fix a bug that DM might raise an error during precheck when the downstream database name in `SHOW GRANTS` contains a wildcard ("*") [#7645](https://github.com/pingcap/tiflow/issues/7645) @[lance6716]
         - Fix the issue that DM prints too many logs caused by "COMMIT" in binlog query events [#7525](https://github.com/pingcap/tiflow/issues/7525) @[liumengya94]
-        - Fix the issue that DM fails to run when only "ssl-ca" is configured [#7941](https://github.com/pingcap/tiflow/issues/7941) @[liumengya94]
-        - Fix a bug that when both "update" and "non-update" type expression filters are used in one table, all UPDATE row changes are skipped [#7831](https://github.com/pingcap/tiflow/issues/7831) @[lance6716]
-        - Fix a bug when only one of `update-old-value-expr` or `update-new-value-expr` is set for a table, it does not take effect or panic [#7774](https://github.com/pingcap/tiflow/issues/7774) @[lance6716]
+        - Fix the issue that the DM task fails to start when only `ssl-ca` is configured for SSL [#7941](https://github.com/pingcap/tiflow/issues/7941) @[liumengya94]
+        - Fix a bug that when the expression filters of both "update" and "non-update" types are specified in one table, all `UPDATE` row changes are skipped [#7831](https://github.com/pingcap/tiflow/issues/7831) @[lance6716]
+        - Fix a bug that when only one of `update-old-value-expr` or `update-new-value-expr` is set for a table, the filter does not take effect or DM panics [#7774](https://github.com/pingcap/tiflow/issues/7774) @[lance6716]
 
     + TiDB Lightning
 
         - Fix the memory leak issue on Large Source Files [#39331](https://github.com/pingcap/tidb/issues/39331) @[dsdashun](https://github.com/dsdashun)
-        - Fix the issue that Table Empty Check cannot find imported dirty data on previous failed imports [#39477](https://github.com/pingcap/tidb/issues/39477) @[dsdashun](https://github.com/dsdashun)
+        - Fix the issue that TiDB Lightning precheck cannot find dirty data left by previously failed imports [#39477](https://github.com/pingcap/tidb/issues/39477) @[dsdashun](https://github.com/dsdashun)
