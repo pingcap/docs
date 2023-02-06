@@ -289,13 +289,23 @@ Create Table | CREATE TABLE `child` (
 
 ### Compatibility with TiDB tools
 
+<CustomContent platform="tidb">
+
 - [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) does not support foreign keys.
 - [DM](/dm/dm-overview.md) v6.6.0 disables the [`foreign_key_checks`](/system-variables.md#foreign_key_checks) of the downstream TiDB when replicating data to TiDB. Therefore, the cascading operations caused by foreign keys are not replicated from the upstream to the downstream, which might cause inconsistent data. Because TiDB does not support foreign keys, this behavior is consistent with the previous DM versions.
 - [TiCDC](/ticdc/ticdc-overview.md) v6.6.0 is compatible with foreign keys. The previous versions of TiCDC might report an error when replicating tables with foreign keys. It is recommended to disable the `foreign_key_checks` of the downstream TiDB cluster when using a TiCDC version earlier than v6.6.0.
 - [br](/br/backup-and-restore-overview.md) v6.6.0 is compatible with foreign keys. The previous versions of br might report an error when restoring tables with foreign keys to a v6.6.0 or later cluster. It is recommended to disable the `foreign_key_checks` of the downstream TiDB cluster before restoring the cluster when using a br version earlier than v6.6.0.
 - When you use [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md), it is recommended to disable the `foreign_key_checks` of the downstream TiDB cluster before importing data.
+
+</CustomContent>
+
 - [Dumpling](/dumpling-overview.md) is compatible with foreign keys.
+
+<CustomContent platform="tidb">
+
 - When you use [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md) to compare data between the upstream and downstream databases, if the database versions are different and there is [an invalid foreign key in the downstream TiDB](#compatibility-between-tidb-versions), sync-diff-inspector might report a table schema inconsistent error. This is because TiDB v6.6.0 adds a `/* FOREIGN KEY INVALID */` comment for the invalid foreign key.
+
+</CustomContent>
 
 ### Compatibility with MySQL
 
