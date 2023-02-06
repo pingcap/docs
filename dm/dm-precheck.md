@@ -102,13 +102,13 @@ If you set `import-mode: "physical"` in the task configuration, the following ch
 
     - Checks the number of Regions in different TiKV nodes. If the node with the least number of Regions has a number of Regions that is 75% of the node with the most number of Regions, the precheck returns a warning. You can adjust related PD parameters to speed up the scheduling of Regions and wait for the number of Regions to change. See [PD Scheduling Best Practices - Leader/Region distribution is not balanced](/best-practices/pd-scheduling-best-practices.md#leadersregions-are-not-evenly-distributed).
 
-* The version of TiDB, PD, and TiKV in the downstream database
+* The versions of TiDB, PD, and TiKV in the downstream database
 
-    - Physical import must call the interfaces of TiDB, PD, and TiKV. If the version is not compatible, the precheck returns an error.
+    - Physical import must call the interfaces of TiDB, PD, and TiKV. If the versions are not compatible, the precheck returns an error.
 
 * The free space of the downstream database
 
-    - Estimates the sum of the sizes of all tables in the allow list in the upstream database (`source_size`). If the free space of the downstream database is less than `source_size`, the precheck returns an error. If the free space of the downstream database is less than the number of TiKV replicas \* `source_size` \* 2, the precheck returns a warning.
+    - Estimates the total sizes of all tables in the allow list in the upstream database (`source_size`). If the free space of the downstream database is less than `source_size`, the precheck returns an error. If the free space of the downstream database is less than the number of TiKV replicas \* `source_size` \* 2, the precheck returns a warning.
 
 * Whether the downstream database is running tasks that are incompatible with physical import
 
@@ -156,7 +156,7 @@ Prechecks can find potential risks in your environments. It is not recommended t
 | `auto_increment_ID`     | Checks whether the auto-increment primary key conflicts in the upstream MySQL multi-instance shards. |
 | `empty_region` | Checks the number of empty Regions in the downstream database for physical import. |
 | `region_distribution` | Checks the distribution of Regions in the downstream database for physical import. |
-| `downstream_version` | Checks the version of TiDB, PD, and TiKV in the downstream database. |
+| `downstream_version` | Checks the versions of TiDB, PD, and TiKV in the downstream database. |
 | `free_space` | Checks the free space of the downstream database. |
 | `downstream_mutex_features` | Checks whether the downstream database is running tasks that are incompatible with physical import. |
 

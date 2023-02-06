@@ -122,8 +122,8 @@ loaders:
     dir: "./dumped_data"
 
     # The import mode during the full import phase. The following modes are supported:
-    # - "logical" (default). Use TiDB Lightning's logical import mode to import data. Document: https://docs.pingcap.com/tidb/stable/tidb-lightning-logical-import-mode
-    # - "physical". Use TiDB Lightning's physical import mode to import data. Document: https://docs.pingcap.com/zh/tidb/stable/tidb-lightning-physical-import-mode
+    # - "logical" (default). Uses TiDB Lightning's logical import mode to import data. Document: https://docs.pingcap.com/tidb/stable/tidb-lightning-logical-import-mode
+    # - "physical". Uses TiDB Lightning's physical import mode to import data. Document: https://docs.pingcap.com/zh/tidb/stable/tidb-lightning-physical-import-mode
     import-mode: "logical"
     #  Methods to resolve conflicts in logical import.
     # - "replace" (default). Uses the new data to replace the existing data.
@@ -145,7 +145,7 @@ loaders:
     #   tasks is paused and you are prompted to query this table and manually resolve the
     #   conflicts. You need to resume the task and enter the incremental phase using the `resume-task` command.
     on-duplicate-physical: "none"
-    # The directory of local KV sorting in the physical import mode. The default value of this
+    # The directory used for local KV sorting in the physical import mode. The default value of this
     # configuration is the same as the `dir` configuration. For details, refer to TiDB Lightning document: https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode#environment-requirements
     sorting-dir-physical: "./dumped_data"
     # Disk quota. Corresponds to the disk-quota configuration of TiDB Lightning. For details, refer to TiDB Lightning document: https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode-usage#configure-disk-quota-new-in-v620
