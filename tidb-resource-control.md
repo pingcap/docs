@@ -99,7 +99,7 @@ In TiKV, set the parameter `resource_control.enabled` to `true`. The parameter `
 
 ### Step 2. Create a resource group, and then bind users to it
 
-Resource group quotas are expressed as [RU (Request Unit)](/tidb-RU.md), which is TiDB's unified abstraction of CPU, IO, and other system resources.
+Resource group quotas are expressed as [Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru), which is TiDB's unified abstraction of CPU, IO, and other system resources.
 
 The following is an example of how to create a resource group and bind users to it.
 
@@ -150,4 +150,4 @@ Currently, the resource control feature has the following limitations:
 * [ALTER RESOURCE GROUP](/sql-statements/sql-statement-alter-resource-group.md)
 * [DROP RESOURCE GROUP](/sql-statements/sql-statement-drop-resource-group.md)
 * [RESOURCE GROUP RFC](https://docs.google.com/document/d/1sV5EVv8Cdpc6aBCDihc2akpE0iuantPf/)
-* [RU](/tidb-RU.md)
+* [Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru)
