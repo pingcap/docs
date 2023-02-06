@@ -4,20 +4,20 @@ title: TiDB 6.6.0 Release Notes
 
 # TiDB 6.6.0 Release Notes
 
-发版日期：2023 年 x 月 x 日
+Release date: xx, 2023
 
-TiDB 版本：6.6.0
+TiDB version: 6.6.0-DMR
 
-试用链接：[快速体验](https://docs.pingcap.com/zh/tidb/v6.6/quick-start-with-tidb) | [下载离线包](https://cn.pingcap.com/product-community/)
+Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.6/quick-start-with-tidb) | [Installation package](https://cn.pingcap.com/product-community/)
 
-在 6.6.0 版本中，你可以获得以下关键特性：
+In v6.6.0-DMR, the key new features and improvements are as follows:
 
 - MySQL 8.0 兼容的多值索引 (Multi-Valued Index) (实验特性)
 - 基于资源组的资源管控 (实验特性)
 - 悲观锁队列的稳定唤醒模型
 - 数据请求的批量聚合
 
-## 新功能
+## New features
 
 ### SQL
 
@@ -76,7 +76,7 @@ TiDB 版本：6.6.0
 
     For more information, see [documentation](/enable-tls-between-components.md).
 
-### 可观测性
+### Observability
 
 * Support quickly creating SQL binding on TiDB Dashboard [#781](https://github.com/pingcap/tidb-dashboard/issues/781) @[YiniXu9506](https://github.com/YiniXu9506) **tw@ran-huang**
 
@@ -134,7 +134,7 @@ TiDB 版本：6.6.0
 
     For more information, see [documentation](/statement-summary-tables.md#persist-statements-summary).
 
-### 性能
+### Performance
 
 * Use Witness to Save Costs in a highly reliable storage environment [#12876](https://github.com/tikv/tikv/issues/12876) @[Connor1996](https://github.com/Connor1996) @[ethercflow](https://github.com/ethercflow) **tw@Oreoxmt**
 
@@ -185,15 +185,7 @@ TiDB 版本：6.6.0
 
     For details, see [documentation]().
 
-### 事务
-
-* 功能标题 [#issue号](链接) @[贡献者 GitHub ID](链接)
-
-    功能描述（需要包含这个功能是什么、在什么场景下对用户有什么价值、怎么用）
-
-    更多信息，请参考[用户文档](链接)。
-
-### 稳定性
+### Stability
 
 * Resource control based on resource groups (experimental) #[38825](https://github.com/pingcap/tidb/issues/38825) @[nolouch](https://github.com/nolouch) @[BornChanger](https://github.com/BornChanger) @[glorv](https://github.com/glorv) @[tiancaiamao](https://github.com/tiancaiamao) @[Connor1996](https://github.com/Connor1996) @[JmPotato](https://github.com/JmPotato) @[hnes](https://github.com/hnes) @[CabinfeverB](https://github.com/CabinfeverB) @[HuSharp](https://github.com/HuSharp) **tw@hfxsd**
 
@@ -224,7 +216,7 @@ TiDB 版本：6.6.0
 
     For more information, see [documentation](/best-practices/readonly-nodes.md).
 
-### 易用性
+### Ease of use
 
 * Support dynamically modifying `store-io-pool-size` [#13964](https://github.com/tikv/tikv/issues/13964) @[LykxSassinator](https://github.com/LykxSassinator) **tw@shichun-0415**
 
@@ -238,13 +230,13 @@ TiDB 版本：6.6.0
 
     For more information, see the [configuration item `initialize-sql-file`](/tidb-configuration-file.md#initialize-sql-file-new-in-v660).
 
-### MySQL 兼容性
+### MySQL compatibility
 
 * Support the MySQL-compatible foreign key constraint [#18209](https://github.com/pingcap/tidb/issues/18209) @[crazycs520](https://github.com/crazycs520) **tw@Oreoxmt**
 
     For more information, see the [SQL](#sql) section in v6.6.0 Release Notes and [documentation](/sql-statements/sql-statement-foreign-key.md).
 
-### 数据迁移
+### Data migration
 
 * TiDB Data Migration (DM) integrates with TiDB Lightning's physical import mode for up to a 10x performance boost for full migration @[lance6716](https://github.com/lance6716) **tw@ran-huang**
 
@@ -254,13 +246,13 @@ TiDB 版本：6.6.0
 
     For more information, see [documentation]/dm/dm-precheck.md#physical-import-check-items).
 
-### 数据共享与订阅
+### TiDB data share subscription
 
 * The TiKV-CDC tool is now GA and supports subscribing to data changes of RawKV [#48](https://github.com/tikv/migration/issues/48) @[zeminzhou](https://github.com/zeminzhou) @[haojinming](https://github.com/haojinming) @[pingyu](https://github.com/pingyu) **tw@Oreoxmt**
 
     TiKV-CDC is a CDC (Change Data Capture) tool for TiKV clusters. TiKV can operate independently of TiDB and form a KV database with PD. In this case, the product is called RawKV. TiKV-CDC supports subscribing to data changes of RawKV and replicating them to a downstream TiKV cluster in real time, thus enabling cross-cluster replication of RawKV.
 
-    For more information, see [documentation](https://tikv.org/docs/latest/concepts/explore-tikv-features/cdc/cdc-cn/).
+    For more information, see [documentation](https://tikv.org/docs/latest/concepts/explore-tikv-features/cdc/cdc/).
 
 * TiCDC supports scaling out a single table on Kafka changefeeds and distributing the changefeed to multiple TiCDC nodes [#7720](https://github.com/pingcap/tiflow/issues/7720) @[overvenus](https://github.com/overvenus) **tw@Oreoxmt**
 
@@ -268,19 +260,11 @@ TiDB 版本：6.6.0
 
     For more information, see [documentation](/ticdc/ticdc-sink-to-kafka.md#scale-out-the-load-of-a-single-large-table-to-multiple-ticdc-nodes).
 
-### 部署及运维
+## Compatibility changes
 
-* 功能标题 [#issue号](链接) @[贡献者 GitHub ID](链接)
+### System variables
 
-    功能描述（需要包含这个功能是什么、在什么场景下对用户有什么价值、怎么用）
-
-    更多信息，请参考[用户文档](链接)。
-
-## 兼容性变更
-
-### 系统变量
-
-| 变量名  | 修改类型（包括新增/修改/删除）    | 描述 |
+| Variable name  | Change type    | Description |
 |--------|------------------------------|------|
 | [`tidb_enable_plan_cache_for_param_limit`](/system-variables.md#tidb_enable_plan_cache_for_param_limit--new-in-v660) | New | Controls whether Prepared Plan Cache caches execution plans that contain `count` after `Limit`. The default value is `ON`, which means Prepared Plan Cache supports caching such execution plans. Note that Prepared Plan Cache does not support caching execution plans with a `count` that is greater than 10000. |
 | [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-%E4%BB%8E-v660-%E7%89%88%E6%9C%AC%E5%BC%80%E5%A7%8B%E5%BC%95%E5%85%A5) | 新增  | 该变量是资源管控特性的开关。该变量设置为 `ON` 后，集群支持应用按照资源组做资源隔离。 |
@@ -288,7 +272,7 @@ TiDB 版本：6.6.0
 | [`tidb_pessimistic_txn_aggressive_locking`](/system-variables.md#tidb_pessimistic_txn_aggressive_locking-从-v660-版本开始引入) | 新增 | 是否对悲观锁启用加强的悲观锁唤醒模型。 |
 | [`tidb_enable_plan_replayer_capture`](/system-variables.md#tidb_enable_plan_replayer_capture) | 新增 | 这个变量用来控制是否开启 [`PLAN REPLAYER CAPTURE`](/sql-plan-replayer.md#使用-plan-replayer-capture-抓取目标计划)。默认值 `OFF`， 代表关闭 `PLAN REPLAYER CAPTURE`。 |
 
-### 配置文件参数
+### Configuration file parameters
 
 | 配置文件 | 配置项 | 修改类型 | 描述 |
 | -------- | -------- | -------- | -------- |
@@ -309,9 +293,9 @@ TiDB 版本：6.6.0
 - Support dynamically modifying `store-io-pool-size`. This facilitate more flexible TiKV performance tuning.
 - Remove the limit on `LIMIT` statements, thus improving the execution performance.
 
-## 废弃功能
+## Deprecated feature
 
-## 改进提升
+## Improvements
 
 + TiDB
 
@@ -348,9 +332,9 @@ TiDB 版本：6.6.0
     + TiDB Data Migration (DM)
 
          Optimize DM alert rules and content. [7376](https://github.com/pingcap/tiflow/issues/7376) @[D3Hunter](https://github.com/D3Hunter) **tw@hfxsd**
-        
+
          Previously, alerts similar to "DM_XXX_process_exits_with_error" were raised whenever an error occured. But some alerts are actually caused by idle database connections, which can be recovered after reconnecting. To reduce this kind of alerts, the alerts are divided into two types: automatically recoverable errors and unrecoverable errors.
-        
+
         - For errors that are automatically recoverable, report the alert only if the error occurs more than 3 times within 2 minutes.
         - For errors that are not automatically recoverable, maintain the original behavior and report the alert immediately.
 
@@ -371,7 +355,7 @@ TiDB 版本：6.6.0
         - Add a new parameter `skip-non-existing-table` to skip checking upstream and downstream data consistency when tables in the downstream do not exist in the upstream [#692](https://github.com/pingcap/tidb-tools/issues/692) @[lichunzhu](https://github.com/lichunzhu) @[liumengya94](https://github.com/liumengya9) **tw@shichun-0415**
         - note [#issue](链接) @[贡献者 GitHub ID](链接)
 
-## 错误修复
+## Bug fixes
 
 + TiDB
 
@@ -421,7 +405,7 @@ TiDB 版本：6.6.0
         - note [#issue](链接) @[贡献者 GitHub ID](链接)
         - note [#issue](链接) @[贡献者 GitHub ID](链接)
 
-## 贡献者
+## Contributors
 
 感谢来自 TiDB 社区的贡献者们：
 
