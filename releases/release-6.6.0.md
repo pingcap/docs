@@ -343,11 +343,12 @@ TiDB 版本：6.6.0
 
     + TiDB Data Migration (DM)
 
-        - 优化了 DM 的告警规则和内容。
-  之前 DM_XXX_process_exits_with_error 类告警是遇到错误就报警，有些告警实际是由于 db conn 长时间 idle 导致，重连后即可恢复，为了降低这类 false alerm，现在细分为可自动恢复错误和不可恢复错误
-          对不可自动恢复错误，维持旧的行为，立即 alert
-          对可自动回复错误，只有在 2m 内发生超过 3 次时才报警
-   [7376](https://github.com/pingcap/tiflow/issues/7376) @[D3Hunter](https://github.com/D3Hunter) **tw@hfxsd**
+         Optimize DM alert rules and content. [7376](https://github.com/pingcap/tiflow/issues/7376) @[D3Hunter](https://github.com/D3Hunter) **tw@hfxsd**
+        
+         Previously, alerts similar to "DM_XXX_process_exits_with_error" were raised whenever an error occured. But some alerts are actually caused by idle database connections, which can be recovered after reconnecting. To reduce this kind of alerts, the alerts are divided into two types: automatically recoverable errors and unrecoverable errors.
+        
+        - For errors that are automatically recoverable, report the alert only if the error occurs more than 3 times within 2 minutes.
+        - For errors that are not automatically recoverable, maintain the original behavior and report the alert immediately.
 
         - note [#issue](链接) @[贡献者 GitHub ID](链接)
         - note [#issue](链接) @[贡献者 GitHub ID](链接)
