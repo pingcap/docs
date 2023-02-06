@@ -13,9 +13,9 @@ You can get an overview of the resource control status from the PD dashboard, wh
 
 The following is the description of Resource Control Dashboard metrics items.
 
-## Resource Unit
+## Request Unit
 
-- RU: the [Resource Unit](/tidb-RU.md) consumption information of each Resource Group is calculated in real time. `total` is the sum of the Request Units consumed by all Resource Groups. The Request Unit consumption of each Resource Group should be equal to the sum of its read consumption (Read Request Unit) and write consumption (Write Request Unit).
+- RU: the [Request Unit](/tidb-RU.md) consumption information of each Resource Group is calculated in real time. `total` is the sum of the Request Units consumed by all Resource Groups. The Request Unit consumption of each Resource Group should be equal to the sum of its read consumption (Read Request Unit) and write consumption (Write Request Unit).
 - RU Per Query: the average number of Request Units consumed by each SQL statement per second is obtained by dividing the above Request Unit by the number of SQL statements executed per second.
 - RRU: the Read Request Unit consumption information of each Resource Group is calculated in real time. `total` is the sum of the Read Request Units consumed by all Resource Groups.
 - RRU Per Query: the average number of Read Request Units consumed by each SQL statement per second is obtained by dividing the above Read Request Unit by the number of SQL statements executed per second.
