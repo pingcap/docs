@@ -205,7 +205,7 @@ tidb_stmt_summary_enable_persistent = true
 # tidb_stmt_summary_file_max_backups = 0
 ```
 
-After statements summary persistence is enabled, the memory keeps only the current real-time data and no historical data. Once the real-time data is refreshed as historical data, the historical data is written to the disk file at an interval indicated by `tidb_stmt_summary_refresh_interval` described in [Parameter configuration](#parameter-configuration). Queries on the `statements_summary_history` or `cluster_statements_summary_history` table will return results combining both in-memory and on-disk data.
+After statements summary persistence is enabled, the memory keeps only the current real-time data and no historical data. Once the real-time data is refreshed as historical data, the historical data is written to the disk file at an interval of `tidb_stmt_summary_refresh_interval` described in [Parameter configuration](#parameter-configuration). Queries on the `statements_summary_history` or `cluster_statements_summary_history` table will return results combining both in-memory and on-disk data.
 
 > **Note:**
 >
