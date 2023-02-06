@@ -33,7 +33,7 @@ BurstableOption ::=
 
 ```
 
-TiDB supports the following `DirectResourceGroupOption`, where [RU (Request Unit)](/tidb-RU.md) is TiDB's unified abstraction unit for CPU, IO, and other system resources.
+TiDB supports the following `DirectResourceGroupOption`, where [Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru) is TiDB's unified abstraction unit for CPU, IO, and other system resources.
 
 | Option     | Description                         | Example                |
 |---------------|-------------------------------------|------------------------|
@@ -83,4 +83,4 @@ MySQL also supports [ALTER RESOURCE GROUP](https://dev.mysql.com/doc/refman/8.0/
 
 * [DROP RESOURCE GROUP](/sql-statements/sql-statement-drop-resource-group.md)
 * [CREATE RESOURCE GROUP](/sql-statements/sql-statement-create-resource-group.md)
-* [RU](/tidb-RU.md)
+* [Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru)
