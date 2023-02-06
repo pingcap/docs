@@ -29,7 +29,6 @@ To view the information of all available projects, you can use the `tidbcloud_pr
          version = "~> 0.1.0"
        }
      }
-     required_version = ">= 1.0.0"
    }
 
    provider "tidbcloud" {
@@ -130,7 +129,6 @@ To get the cluster specification information, you can use the `tidbcloud_cluster
           version = "~> 0.1.0"
         }
       }
-      required_version = ">= 1.0.0"
     }
     provider "tidbcloud" {
       public_key = "fake_public_key"
@@ -301,7 +299,6 @@ The following example shows how to create a Dedicated Tier cluster.
          version = "~> 0.1.0"
        }
      }
-     required_version = ">= 1.0.0"
    }
 
    provider "tidbcloud" {
@@ -863,7 +860,6 @@ For example, you can import a cluster that is not created by Terraform or import
          version = "~> 0.1.0"
        }
      }
-     required_version = ">= 1.0.0"
    }
     resource "tidbcloud_cluster" "import_cluster" {}
     ```

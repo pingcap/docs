@@ -34,7 +34,6 @@ After creating a backup of a cluster, you can restore the cluster by creating a 
          version = "~> 0.1.0"
        }
      }
-     required_version = ">= 1.0.0"
    }
 
    provider "tidbcloud" {
@@ -180,6 +179,10 @@ After creating a backup of a cluster, you can restore the cluster by creating a 
 6. After the cluster status changes to `AVAILABLE`, the restore task will be `RUNNING` and turn to `SUCCESS` at last.
 
 Note that the restored cluster is not managed by Terraform. You can manage the restored cluster by [importing it](/tidb-cloud/terraform-use-cluster-resource.md#import-a-cluster).
+
+## Update a restore task
+
+Restore tasks cannot be updated.
 
 ## Delete a restore task
 
