@@ -199,7 +199,7 @@ TiDB 版本：6.6.0
 
     TiDB clusters support creating resource groups, binding different database users to corresponding resource groups, and setting quotas for each resource group according to actual needs. When the cluster resources are limited, all resources used by sessions from the same resource group will be limited to the quota, so that one resource group will not be over-consumed and affect the normal operation of sessions in other resource groups. The built-in view of the system will display the actual usage of resources, assisting you to allocate resources more rationally.
 
-    The introduction of the resource control feature is a milestone for TiDB. It can divide a distributed database cluster into multiple logical units. Even if an individual unit overuses resources, it does not crowd out the resources needed by other units. 
+    The introduction of the resource control feature is a milestone for TiDB. It can divide a distributed database cluster into multiple logical units. Even if an individual unit overuses resources, it does not crowd out the resources needed by other units.
 
     With this feature, you can:
 
@@ -248,7 +248,7 @@ TiDB 版本：6.6.0
 
 * TiDB Data Migration (DM) integrates with TiDB Lightning's physical import mode for up to a 10x performance boost for full migration @[lance6716](https://github.com/lance6716) **tw@ran-huang**
 
-    In v6.6.0, DM's full migration capability integrates with TiDB Lightning's physical import mode, which enables DM to improve the performance of full data migration by up to 10 times, greatly reducing the migration time in large data volume scenarios. 
+    In v6.6.0, DM's full migration capability integrates with TiDB Lightning's physical import mode, which enables DM to improve the performance of full data migration by up to 10 times, greatly reducing the migration time in large data volume scenarios.
 
     Prior to v6.6.0, for high data volume scenarios, you were required to configure TiDB Lightning's physical import task separately for fast full data migration, and then use DM for incremental data migration, which was a complex configuration. Starting from v6.6.0, you can migrate large data volumes without the need to configure TiDB Lightning's tasks; one DM task can accomplish the migration.
 
@@ -294,7 +294,7 @@ TiDB 版本：6.6.0
 | -------- | -------- | -------- | -------- |
 | TiKV | [`resource_control.enabled`](/tikv-configuration-file.md#tidb_enable_resource_control-%E4%BB%8E-v660-%E7%89%88%E6%9C%AC%E5%BC%80%E5%A7%8B%E5%BC%95%E5%85%A5) | 新增 | 是否支持按照资源组配额调度。 默认 `false` ，即关闭按照资源组配额调度。 |
 | TiFlash |  [`profile.default.max_memory_usage_for_all_queries`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)  |  Modified  |  Specifies the memory usage limit for the generated intermediate data in all queries. Starting from v6.6.0, the default value changes from 0 to 0.8, which means the limit is 80% of the total memory.|
-| TiCDC  | [`consistent.storage`](/ticdc/ticdc-sink-to-mysql.md#prerequisites)  |  Modified  | Added to value options: GCS and Azure.  |
+| TiCDC  | [`consistent.storage`](/ticdc/ticdc-sink-to-mysql.md#prerequisites)  |  Modified  | The path under which redo log backup is stored. Two more value options are added for `scheme`, GCS and Azure.  |
 | TiDB  | [`initialize-sql-file`](/tidb-configuration-file.md#initialize-sql-file-new-in-v660)  | New | Specifies the SQL script to be executed when the TiDB cluster is started for the first time. The default value is empty.  |
 | TiDB  | [`tidb_stmt_summary_enable_persistent`](/tidb-configuration-file.md#tidb_stmt_summary_enable_persistent-new-in-v660)  |  New  |  Controls whether to enable statements summary persistence. The default value is `false`, which means this feature is not enabled by default.  |
 | TiDB | [`tidb_stmt_summary_filename`](/tidb-configuration-file.md#tidb_stmt_summary_filename-new-in-v660) | New | When statements summary persistence is enabled, this configuration specifies the file to which persistent data is written. |
