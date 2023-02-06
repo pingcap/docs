@@ -16,8 +16,6 @@ Click any item in the list to enter the detail page of the SQL statement to view
 
 ## Fast plan binding
 
-自 v6.6.0 起，TiDB 引入了快速绑定执行计划的功能。你可以在 TiDB Dashboard 中，快速完成 SQL 语句与特定计划的绑定。
-
 Starting from v6.6.0, TiDB introduces the fast plan binding feature. You can quickly bind a SQL statement to a specific execution plan in TiDB Dashboard.
 
 ### Usage
