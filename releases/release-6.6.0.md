@@ -70,7 +70,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
 * TiFlash supports automatic rotations of TLS certificates [#5503](https://github.com/pingcap/tiflash/issues/5503) @[ywqzzy](https://github.com/ywqzzy) **tw@qiancai**
 
-    For a TiDB cluster with encrypted data transmission between components enabled, when a TLS certificate of TiFlash expires and needs to be reissued with a new one, the new TiFlash TLS certificate can be automatically loaded without restarting the TiDB cluster. The rotation of a TLS certificate between components within a TiDB cluster does not affect the use of the TiDB cluster, which ensures high availability of the cluster.
+    In v6.6.0, TiDB supports automatic rotations of TiFlash TLS certificates. For a TiDB cluster with encrypted data transmission between components enabled, when a TLS certificate of TiFlash expires and needs to be reissued with a new one, the new TiFlash TLS certificate can be automatically loaded without restarting the TiDB cluster. In addition, the rotation of a TLS certificate between components within a TiDB cluster does not affect the use of the TiDB cluster, which ensures high availability of the cluster.
 
     For more information, see [documentation](/enable-tls-between-components.md).
 
@@ -144,7 +144,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
    The Stale Read feature has been generally available (GA) since v5.1.1, which allows you to read historical data at a specific timestamp or within a specified time range. Stale read can reduce read latency and improve query performance by reading data from local TiKV replicas directly. Before v6.6.0, TiFlash does not support Stale Read. Even if a table has TiFlash replicas, Stale Read can only read its TiKV replicas.
 
-   Starting from v6.6.0, TiFlash supports the Stale Read feature. When you query the historical data of a table using the `AS OF TIMESTAMP` syntax or the `tidb_read_staleness` system variable, if the table has a TiFlash replica, the optimizer now can choose to read the corresponding data from the TiFlash replica, thus further improving query performance.
+   Starting from v6.6.0, TiFlash supports the Stale Read feature. When you query the historical data of a table using the [`AS OF TIMESTAMP`](/as-of-timestamp.md) syntax or the [`tidb_read_staleness`](/tidb-read-staleness.md) system variable, if the table has a TiFlash replica, the optimizer now can choose to read the corresponding data from the TiFlash replica, thus further improving query performance.
 
     For more information, see [documentation](/stale-read.md).
 
@@ -320,7 +320,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
 + TiFlash
 
-    - Support an independent MVCC bitmap filter that decouples the MVCC filtering operations in the TiFlash data scanning process, which provides a foundation for subsequent optimization of the data scanning process [#6296](https://github.com/pingcap/tiflash/issues/6296) @[JinheLin] **tw@qiancai**
+    - Support an independent MVCC bitmap filter that decouples the MVCC filtering operations in the TiFlash data scanning process, which provides the foundation for future optimization of the data scanning process [#6296](https://github.com/pingcap/tiflash/issues/6296) @[JinheLin] **tw@qiancai**
     - note [#issue](链接) @[贡献者 GitHub ID](链接)
 
 + Tools
