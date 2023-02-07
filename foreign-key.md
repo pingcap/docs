@@ -1,6 +1,6 @@
 ---
 title: FOREIGN KEY Constraints
-summary: An overview of the usage of FOREIGN KEY Constraints for the TiDB database.
+summary: An overview of the usage of FOREIGN KEY constraints for the TiDB database.
 ---
 
 # FOREIGN KEY Constraints
@@ -140,7 +140,7 @@ To delete a foreign key constraint, you can use the following `ALTER TABLE` stat
 ALTER TABLE table_name DROP FOREIGN KEY fk_identifier;
 ```
 
-If the foreign key constraint is named when it is created, you can reference the name to delete the foreign key constraint. Otherwise, you have to use the constraint name automatically generated to delete the contraint. You can use `SHOW CREATE TABLE` to view the foreign key name:
+If the foreign key constraint is named when it is created, you can reference the name to delete the foreign key constraint. Otherwise, you have to use the constraint name automatically generated to delete the constraint. You can use `SHOW CREATE TABLE` to view the foreign key name:
 
 ```sql
 mysql> SHOW CREATE TABLE child\G
@@ -158,7 +158,7 @@ Create Table: CREATE TABLE `child` (
 
 TiDB supports foreign key constraint check, which is controlled by the system variable [`foreign_key_checks`](/system-variables.md#foreign_key_checks). By default, this variable is set to `ON`, meaning that the foreign key constraint check is enabled. This variable has two scopes: `GLOBAL` and `SESSION`. Keeping this variable enabled can ensure the integrity of foreign key reference relationships.
 
-The effect of disabling foreign key contraint check is as follows:
+The effect of disabling foreign key constraint check is as follows:
 
 - When you delete a parent table referenced by a foreign key, the deletion can succeed only when the foreign key constraint check is disabled.
 - When you import data to a database, the order of creating tables might be different from the foreign key dependency order, which might cause the creation of tables to fail. Only when the foreign key constraint check is disabled can the tables be created successfully. In addition, disabling the foreign key constraint check can speed up data import.
@@ -193,7 +193,7 @@ Create Table: CREATE TABLE `child` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
 ```
 
-You can also get information about foreign keys using either of the following system table:
+You can also get information about foreign keys using either of the following system tables:
 
 - [`INFORMATION_SCHEMA.KEY_COLUMN_USAGE`](/information-schema/information-schema-key-column-usage.md)
 - [`INFORMATION_SCHEMA.TABLE_CONSTRAINTS`](/information-schema/information-schema-table-constraints.md)
