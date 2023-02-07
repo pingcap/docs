@@ -29,7 +29,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
 * Support the MySQL-compatible foreign key constraints [#18209](https://github.com/pingcap/tidb/issues/18209) @[crazycs520](https://github.com/crazycs520) **tw@Oreoxmt**
 
-    TiDB v6.6.0 introduces the foreign key constraints feature, which is compatible with MySQL. This feature supports data association in a table or between tables, constraints validation, and cascade operations. This feature helps to maintain data consistency, improve data quality, and facilitate data modeling.
+    TiDB v6.6.0 introduces the foreign key constraints feature, which is compatible with MySQL. This feature supports referencing within a table or between tables, constraints validation, and cascade operations. This feature helps to maintain data consistency, improve data quality, and facilitate data modeling.
 
     For more information, see [documentation](/foreign-key.md).
 
@@ -112,7 +112,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
 * Add a `Warnings` field to the slow query log [#39893](https://github.com/pingcap/tidb/issues/39893) @[time-and-fate](https://github.com/time-and-fate) **tw@Oreoxmt**
 
-    TiDB v6.6.0 adds a `Warnings` field to the slow query log to help diagnose performance issues. The field records warnings generated during the execution of the slow query. You can also view this on the slow query page of TiDB Dashboard.
+    TiDB v6.6.0 adds a `Warnings` field to the slow query log to help diagnose performance issues. This field records warnings generated during the execution of a slow query. You can also view the warnings on the slow query page of TiDB Dashboard.
 
     For more information, see [documentation](/identify-slow-queries.md).
 
@@ -136,7 +136,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
 * Use a Witness replica to save costs in a highly reliable storage environment [#12876](https://github.com/tikv/tikv/issues/12876) @[Connor1996](https://github.com/Connor1996) @[ethercflow](https://github.com/ethercflow) **tw@Oreoxmt**
 
-    In cloud environments, when you use the Amazon Elastic Block Store or Persistent Disk of Google Cloud Platform as the storage of each TiKV node, the durability is higher than that of physical disks. In this case, using three Raft replicas with TiKV is possible but not necessary. To reduce costs, TiKV introduces the Witness feature, which is the "2 Replicas With 1 Log Only" mechanism. The 1 Log Only replica only stores Raft logs but does not apply data, and still ensures data consistency through the Raft protocol. Compared with the standard three replica architecture, Witness can save storage resources and CPU usage.
+    In cloud environments, when you use the Amazon Elastic Block Store or Persistent Disk of Google Cloud Platform as the storage of each TiKV node, the durability is higher than that of physical disks. In this case, using three Raft replicas with TiKV is possible but not necessary. To reduce costs, TiKV introduces the Witness feature, which is the "2 Replicas With 1 Log Only" mechanism. The 1 Log Only replica only stores Raft logs and does not apply data, and still ensures data consistency through the Raft protocol. Compared with the standard three replica architecture, Witness can save storage resources and CPU usage.
 
     For more information, see [documentation](/use-witness-to-save-costs.md).
 
@@ -204,9 +204,9 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
 * Use a temporary Witness replica to speed up failover [#12876](https://github.com/tikv/tikv/issues/12876) @[Connor1996](https://github.com/Connor1996) @[ethercflow](https://github.com/ethercflow) **tw@Oreoxmt**
 
-    The Witness feature can be used to quickly recover from a failover to improve system availability and data durability. For example, in a Raft group of three replicas, if one replica fails, the system is fragile although it meets the majority requirement. It takes a long time to recover a new member (the process requires copying the snapshot first and then applying the latest logs), especially when the Region snapshot is large. In addition, the process of copying replicas might cause more pressure on unhealthy Group members. Therefore, adding a Witness replica can quickly remove the unhealthy node, reduce the risk of the Raft group being unavailable due to another node failure during recovering a new member (the Learner replica cannot participate in the election and submission), and ensure the security of logs during recovery.
+    The Witness feature can be used to quickly recover from any failure to improve system availability and data durability. For example, in a Raft group of three replicas, if one replica fails, the system is fragile although it meets the majority requirement. It takes a long time to recover a new member (the process requires copying the snapshot first and then applying the latest logs), especially when the Region snapshot is large. In addition, the process of copying replicas might cause more pressure on unhealthy Group members. Therefore, adding a Witness replica can quickly remove the unhealthy node, reduce the risk of the Raft group being unavailable due to another node failure when recovering a new member (the Learner replica cannot participate in the election and submission), and ensure the security of logs during recovery.
 
-    For more information, see [documentation](/use-witness-to-speed-up-failover.md)。
+    For more information, see [documentation](/use-witness-to-speed-up-failover.md).
 
 * Support configuring read-only storage nodes for resource-consuming tasks [#issue号](链接) @[v01dstar](https://github.com/v01dstar) **tw@Oreoxmt**
 
@@ -248,13 +248,13 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
 * The TiKV-CDC tool is now GA and supports subscribing to data changes of RawKV [#48](https://github.com/tikv/migration/issues/48) @[zeminzhou](https://github.com/zeminzhou) @[haojinming](https://github.com/haojinming) @[pingyu](https://github.com/pingyu) **tw@Oreoxmt**
 
-    TiKV-CDC is a CDC (Change Data Capture) tool for TiKV clusters. TiKV can operate independently of TiDB and form a KV database with PD. In this case, the product is called RawKV. TiKV-CDC supports subscribing to data changes of RawKV and replicating them to a downstream TiKV cluster in real time, thus enabling cross-cluster replication of RawKV.
+    TiKV-CDC is a CDC (Change Data Capture) tool for TiKV clusters. TiKV and PD can constitute a KV database when used without TiDB, which is called RawKV. TiKV-CDC supports subscribing to data changes of RawKV and replicating them to a downstream TiKV cluster in real time, thus enabling cross-cluster replication of RawKV.
 
     For more information, see [documentation](https://tikv.org/docs/latest/concepts/explore-tikv-features/cdc/cdc/).
 
 * TiCDC supports scaling out a single table on Kafka changefeeds and distributing the changefeed to multiple TiCDC nodes [#7720](https://github.com/pingcap/tiflow/issues/7720) @[overvenus](https://github.com/overvenus) **tw@Oreoxmt**
 
-    Before v6.6.0, when the write throughput of the upstream table is large, the replication capability of a single table could not be scaled out, resulting in an increase in replication latency. Starting from TiCDC v6.6.0. the changefeed of an upstream table can be distributed to multiple TiCDC nodes in a Kafka sink, which enables scaling out the replication capability of a single table.
+    Before v6.6.0, when a table in the upstream accepts a large amount of writes, the replication capability of this table cannot be scaled out, resulting in an increase in the replication latency. Starting from TiCDC v6.6.0. the changefeed of an upstream table can be distributed to multiple TiCDC nodes in a Kafka sink, which means the replication capability of a single table is scaled out.
 
     For more information, see [documentation](/ticdc/ticdc-sink-to-kafka.md#scale-out-the-load-of-a-single-large-table-to-multiple-ticdc-nodes).
 
