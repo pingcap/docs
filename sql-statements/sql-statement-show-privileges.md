@@ -16,7 +16,7 @@ This statement shows a list of assignable privileges in TiDB. It is a static lis
 
 ## Examples
 
-```
+```sql
 mysql> show privileges;
 +---------------------------------+---------------------------------------+-------------------------------------------------------+
 | Privilege                       | Context                               | Comment                                               |
