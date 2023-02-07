@@ -70,7 +70,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
 * TiFlash supports automatic rotations of TLS certificates [#5503](https://github.com/pingcap/tiflash/issues/5503) @[ywqzzy](https://github.com/ywqzzy) **tw@qiancai**
 
-    For a TiDB cluster with encrypted data transmission between components enabled, when a TLS certificate of TiFlash expires and needs to be reissued with a new one, the new TiFlash TLS certificate can be automatically loaded without restarting the TiDB cluster. The rotation of a TLS certificate between components within a TiDB cluster does not affect the use of the TiDB cluster, which ensures the cluster high availability.
+    For a TiDB cluster with encrypted data transmission between components enabled, when a TLS certificate of TiFlash expires and needs to be reissued with a new one, the new TiFlash TLS certificate can be automatically loaded without restarting the TiDB cluster. The rotation of a TLS certificate between components within a TiDB cluster does not affect the use of the TiDB cluster, which ensures high availability of the cluster.
 
     For more information, see [documentation](/enable-tls-between-components.md).
 
