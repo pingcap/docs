@@ -100,7 +100,7 @@ If you set `import-mode: "physical"` in the task configuration, the following ch
 
 * Region distribution in the downstream database
 
-    - Checks the number of Regions in different TiKV nodes. If the node with the least number of Regions has a number of Regions that is 75% of the node with the most number of Regions, the precheck returns a warning. You can adjust related PD parameters to speed up the scheduling of Regions and wait for the number of Regions to change. See [PD Scheduling Best Practices - Leader/Region distribution is not balanced](/best-practices/pd-scheduling-best-practices.md#leadersregions-are-not-evenly-distributed).
+    - Checks the number of Regions on different TiKV nodes. Assuming that the TiKV node with the lowest Region count has `a` Regions and the TiKV node with the highest Region count has `b` Regions, if `a / b` is less than 0.75, the precheck returns a warning. You can adjust related PD parameters to speed up the scheduling of Regions and wait for the number of Regions to change. See [PD Scheduling Best Practices - Leader/Region distribution is not balanced](/best-practices/pd-scheduling-best-practices.md#leadersregions-are-not-evenly-distributed).
 
 * The versions of TiDB, PD, and TiKV in the downstream database
 
