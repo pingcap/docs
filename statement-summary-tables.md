@@ -191,14 +191,14 @@ All data of the statement summary tables above will be lost when the TiDB server
 >
 > Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
-As described in the [Limitation](#limitation) section, statements summary tables are maintained in memory by default. Once the TiDB server restarts, all the statements summary data will be lost. Starting from v6.6.0, TiDB experimentally provides [the configuration item `tidb_stmt_summary_enable_persistent`](/tidb-configuration-file.md#tidb_stmt_summary_enable_persistent-new-in-v660) to allow users to enable or disable statements summary persistence.
+As described in the [Limitation](#limitation) section, statements summary tables are cached in memory by default. Once a TiDB server restarts, all the statements summary will be lost. Starting from v6.6.0, TiDB experimentally provides the configuration item [`tidb_stmt_summary_enable_persistent`](/tidb-configuration-file.md#tidb_stmt_summary_enable_persistent-new-in-v660) to allow users to enable or disable statements summary persistence.
 
 To enable statements summary persistence, you can add the following configuration items to the TiDB configuration file:
 
 ```toml
 [instance]
 tidb_stmt_summary_enable_persistent = true
-# The following entries use the default values, which can be modified as needed:
+# The following entries use the default values, which can be modified as needed.
 # tidb_stmt_summary_filename = "tidb-statements.log"
 # tidb_stmt_summary_file_max_days = 3
 # tidb_stmt_summary_file_max_size = 64 # MiB
