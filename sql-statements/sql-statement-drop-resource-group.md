@@ -5,7 +5,7 @@ summary: Learn the usage of DROP RESOURCE GROUP in TiDB.
 
 # DROP RESOURCE GROUP
 
-You can use the `DROP RESOURCE GROUP` statement to drop a resource group in the currently selected database.
+You can use the `DROP RESOURCE GROUP` statement to drop a resource group.
 
 ## Synopsis
 

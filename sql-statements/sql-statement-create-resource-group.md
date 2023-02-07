@@ -5,7 +5,7 @@ summary: Learn the usage of CREATE RESOURCE GROUP in TiDB.
 
 # CREATE RESOURCE GROUP
 
-You can use the `CREATE RESOURCE GROUP` statement to create a resource group in the currently selected database.
+You can use the `CREATE RESOURCE GROUP` statement to create a resource group.
 
 ## Synopsis
 
@@ -56,7 +56,7 @@ mysql> CREATE RESOURCE GROUP IF NOT EXISTS rg1
     ->  BURSTABLE;
 Query OK, 0 rows affected (0.08 sec)
 mysql> CREATE RESOURCE GROUP IF NOT EXISTS rg2
-    ->  RU_PER_SEC = 200
+    ->  RU_PER_SEC = 200;
 Query OK, 0 rows affected (0.08 sec)
 mysql> SELECT * FROM information_schema.resource_groups WHERE NAME ='rg1' or NAME = 'rg2';
 +------+-------------+-----------+-----------+
