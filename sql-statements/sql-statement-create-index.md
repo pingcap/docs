@@ -285,7 +285,7 @@ ERROR 1062 (23000): Duplicate entry '2' for key 'customers.zips'
 The same record can have duplicate values, but when different records have duplicate values, an error is reported.
 
 ```sql
--- Insert successfully
+-- Insert succeeded
 mysql> INSERT INTO t1 VALUES('[1,1,2]');
 mysql> INSERT INTO t1 VALUES('[3,3,3,4,4,4]');
 
@@ -344,7 +344,7 @@ See [Index Selection - Use multi-valued indexes](/choose-index.md#use-a-multi-va
 - A multi-valued index cannot be a primary key or a foreign key.
 - The extra storage space used by a multi-valued index = the average number of array elements per row * the space used by a normal secondary index.
 - Compared with normal indexes, DML operations will modify more index records for multi-valued indexes, so multi-valued indexes will have a greater performance impact than normal indexes.
-- Because multi-valued indexes are a special type of expression index, they are the limitations of expression indexes.
+- Because multi-valued indexes are a special type of expression index, multi-valued indexes have the same limitations as expression indexes.
 
 ## Invisible index
 
