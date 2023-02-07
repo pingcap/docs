@@ -1,6 +1,6 @@
 ---
 title: Use Resource Control to Achieve Resource Isolation
-summary: Learn how to use resource management to control and schedule application resource consumption.
+summary: Learn how to use the resource control feature to control and schedule application resources.
 ---
 
 # Use Resource Control to Achieve Resource Isolation
@@ -11,12 +11,20 @@ summary: Learn how to use resource management to control and schedule applicatio
 
 Using the resource control feature, as a cluster administrator, you can define resource groups and limit the read and write quotas of resource groups. After you bind users to a resource group, the TiDB layer will perform flow control on the user's read and write requests according to the read and write quotas set by the bound resource group. Meanwhile, the TiKV layer will schedule the requests according to the priority of the read and write quota mapping. Through flow control and scheduling, you can achieve resource isolation of your applications and meet the quality of service (QoS) requirements.
 
-The TiDB resource control feature provides two layers of resource management capabilities: flow control capabilities at the TiDB layer and priority scheduling capabilities at the TiKV layer. The two capabilities are orthogonal and can be enabled separately or simultaneously. See the [Parameters for resource control](#parameters-for-resource-control) for details.
+The TiDB resource control feature provides two layers of resource management capabilities: the flow control capability at the TiDB layer and the priority scheduling capability at the TiKV layer. The two capabilities are orthogonal and can be enabled separately or simultaneously. See the [Parameters for resource control](#parameters-for-resource-control) for details.
 
-- TiDB flow control: TiDB flow control uses the token bucket algorithm. The number of tokens consumed by read and write requests cannot exceed the number of tokens accumulated in the corresponding resource group bucket. If there are not enough tokens in the bucket, and the resource group does not specify the `BURSTABLE` option, the requests to the resource group will wait for the token bucket to backfill the tokens and retry. The retry may fail due to timeout.
-- TiKV scheduling: If this feature is enabled, TiKV uses the value of `RU_PER_SEC` of each resource group to map the read and write requests of each resource group to their own priorities. Based on their own priorities, the storage layer uses the priority queue to schedule and process requests.
+- TiDB flow control: TiDB flow control uses the token bucket algorithm (`RU_TOKENS`). The number of tokens consumed by read and write requests cannot exceed the number of tokens accumulated in the corresponding resource group bucket. If there are not enough tokens in the bucket, and the resource group does not specify the `BURSTABLE` option, the requests to the resource group will wait for the token bucket to backfill the tokens and retry. The retry may fail due to timeout.
+- TiKV scheduling: If [`resource_control.enabled`](/tikv-configuration-file.md#resource_control) is enabled, TiKV uses the value of `RU_PER_SEC` of each resource group to map the read and write requests of each resource group to their own priorities. Based on their own priorities, the storage layer uses the priority queue to schedule and process requests.
 
 The introduction of the resource control feature is a milestone for TiDB. It can divide a distributed database cluster into multiple logical units. Even if an individual unit overuses resources, it does not crowd out the resources needed by other units.
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> This feature is not available on [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta).
+
+</CustomContent>
 
 ## Scenarios for resource control
 
@@ -27,31 +35,23 @@ This feature applies to the following scenarios:
 
 In addition, the rational use of the resource control feature can reduce the number of clusters, ease the difficulty of operation and maintenance, and save management costs.
 
-<CustomContent platform="tidb-cloud">
-
-> **Note:**
->
-> This feature is not available on [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta).
-
-</CustomContent>
-
 ## What is Request Unit (RU)
 
-Request Unit (RU) is TiDB's unified abstraction unit for CPU, IO and other system resources, which currently includes CPU, IOPS and IO bandwidth metrics. The consumption of these three metrics is represented by the RU unit according to a certain ratio.
+Request Unit (RU) is TiDB's unified abstraction unit for system resources, which currently includes CPU, IOPS and IO bandwidth metrics. The consumption of these three metrics is represented by RU according to a certain ratio.
 
 The following table shows the consumption of TiKV storage layer CPU and IO resources by user requests and the corresponding RU weights.
 
-| Resource       | RU Weight |
-|:----------|:------|
-| CPU       | 1 RU / Milliseconds |
-| Read IO       | 1 RU / MiB |
-| Write IO      | 5 RU / MiB |
-| Basic overhead of a read request   | 1 RU  |
-| Basic overhead of a write request   | 3 RU  |
+| Resource        | RU Weight        |
+|:----------------|:-----------------|
+| CPU             | 1 RU/millisecond |
+| Read IO         | 1/64 RU/KB       |
+| Write IO        | 1 RU/KB          |
+| Basic overhead of a read request   | 0.25 RU  |
+| Basic overhead of a write request  | 1.5 RU   |
 
-Based on the above table, assuming that the TiKV time consumed by a resource group is `c` milliseconds, `r1` requests that read `r2` MiB data, and `w1` write requests that write `w2` MiB data, then the formula for the total RUs consumed by the resource group is as follows:
+Based on the above table, assuming that the TiKV time consumed by a resource group is `c` milliseconds, `r1` requests that read `r2` KB data, and `w1` write requests that write `w2` KB data, then the formula for the total RUs consumed by the resource group is as follows:
 
-c + (r1 + r2) + (3 * w1 + 5 * w2)
+`c` + (`r1` \* 0.25 + `r2`/64) + (1.5 * `w1` + `w2`)
 
 ## Parameters for resource control
 
@@ -64,7 +64,7 @@ The resource control feature introduces two new global variables.
 
 > **Note:**
 >
-> The parameter `resource_control.enabled` is disabled by default. It does not support dynamic modification. You need to contact the [PingCAP support](/tidb-cloud/tidb-cloud-support.md) to enable it. You need to restart the TiKV instance for the modification to take effect.
+> The parameter `resource_control.enabled` is disabled by default. It does not support dynamic modification. You need to contact the [PingCAP support team](/tidb-cloud/tidb-cloud-support.md) to enable it.
 
 </CustomContent>
 
@@ -92,29 +92,35 @@ You can delete a resource group by using [`DROP RESOURCE GROUP`](/sql-statements
 
 ### Step 1. Enable the resource control feature
 
-Enable flow control for the resource group.
+Enable the resource control feature.
 
 ```sql
 SET GLOBAL tidb_enable_resource_control = 'ON';
 ```
 
+<CustomContent platform="tidb">
+
+In TiKV, set the parameter [`resource_control.enabled`](/tikv-configuration-file.md#resource_control) to `true`.
+
+</CustomContent>
+
 <CustomContent platform="tidb-cloud">
 
-In TiKV, set the parameter `resource_control.enabled` to `true`. The parameter `resource_control.enabled` is disabled by default. You need to contact the [PingCAP support team](/tidb-cloud/tidb-cloud-support.md) to enable it.
+In TiKV, set the parameter [`resource_control.enabled`](https://docs.pingcap.com/tidb/stable/tikv-configuration-file#resource_control) to `true`. The parameter `resource_control.enabled` is disabled by default. You need to contact the [PingCAP support team](/tidb-cloud/tidb-cloud-support.md) to enable it.
 
-</CustomContent> 
+</CustomContent>
 
 ### Step 2. Create a resource group, and then bind users to it
 
 The following is an example of how to create a resource group and bind users to it.
 
-1. Create a resource group `rg1`. The RU backfill rate is 500 RU per second and allows applications in this resource group to overrun resources.
+1. Create a resource group `rg1`. The RU backfill rate is 500 RUs per second and allows applications in this resource group to overrun resources.
 
     ```sql
     CREATE RESOURCE GROUP IF NOT EXISTS rg1 RU_PER_SEC = 500 BURSTABLE;
     ```
 
-2. Create a resource group `rg2`. The RU backfill rate is 500 RU per second and does not allow applications in this resource group to overrun resources.
+2. Create a resource group `rg2`. The RU backfill rate is 500 RUs per second and does not allow applications in this resource group to overrun resources.
 
     ```sql
     CREATE RESOURCE GROUP IF NOT EXISTS rg2 RU_PER_SEC = 600;

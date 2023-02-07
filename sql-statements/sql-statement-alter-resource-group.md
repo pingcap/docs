@@ -34,7 +34,7 @@ TiDB supports the following `DirectResourceGroupOption`, where [Request Unit (RU
 
 | Option     | Description                         | Example                |
 |---------------|-------------------------------------|------------------------|
-|`RU_PER_SEC` | Rate of RU filling per second |`RU_PER_SEC = 500` indicates that this resource group is backfilled with 500 RU per second |
+|`RU_PER_SEC` | Rate of RU filling per second |`RU_PER_SEC = 500` indicates that this resource group is backfilled with 500 RUs per second |
 
 If the `BURSTABLE` attribute is set, the corresponding resource group allows the available system resources to be used exceeding the quota.
 
