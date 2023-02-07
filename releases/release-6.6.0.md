@@ -128,7 +128,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
 * Support persisting statements summary (experimental) [#40812](https://github.com/pingcap/tidb/issues/40812) @[mornyx](https://github.com/mornyx) **tw@shichun-0415**
 
-    Before v6.6.0, statements summary data is maintained in memory. Once the TiDB server restarts, all the statements summary data gets lost. Starting from v6.6.0, TiDB supports enabling statements summary persistence, which allows historical data to be written to disks on a regular basis. In the meantime, the result of queries on system tables will derive from disks, instead of memory. After TiDB restarts, all historical data is still available.
+    Before v6.6.0, statements summary data is kept in memory and would be lost upon a TiDB server restart. Starting from v6.6.0, TiDB supports enabling statements summary persistence, which allows historical data to be written to disks on a regular basis. In the meantime, the result of queries on system tables will derive from disks, instead of memory. After TiDB restarts, all historical data remains available.
 
     For more information, see [documentation](/statement-summary-tables.md#persist-statements-summary).
 
@@ -165,7 +165,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
     Continuously introducing optimizer hints provides users with more intervention methods, helps solve SQL performance issues, and improves the stability of overall performance.
 
-* Remove the limit on `LIMIT` statements [#40219](https://github.com/pingcap/tidb/issues/40219) @[fzzf678](https://github.com/fzzf678) **tw@shichun-0415**
+* Remove the limit on `LIMIT` clauses [#40219](https://github.com/pingcap/tidb/issues/40219) @[fzzf678](https://github.com/fzzf678) **tw@shichun-0415**
 
     Starting from v6.6.0, TiDB plan cache supports caching queries containing `?` after `Limit`, such as `Limit ?` or `Limit 10, ?`. This feature allows more SQL statements to benefit from plan cache, thus improving execution efficiency.
 
@@ -224,9 +224,9 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
 * Support specifying the SQL script executed upon TiDB cluster intialization [#35624](https://github.com/pingcap/tidb/issues/35624) @[morgo](https://github.com/morgo) **tw@shichun-0415**
 
-    When you start a TiDB cluster for the first time, you can specify the SQL script to be executed by configuring the CLI parameter `--initialize-sql-file`. You can use this feature when you need to perform such operations as modifying the value of a system variable, creating a user, or granting privileges.
+    When you start a TiDB cluster for the first time, you can specify the SQL script to be executed by configuring the command line parameter `--initialize-sql-file`. You can use this feature when you need to perform such operations as modifying the value of a system variable, creating a user, or granting privileges.
 
-    For more information, see the [configuration item `initialize-sql-file`](/tidb-configuration-file.md#initialize-sql-file-new-in-v660).
+    For more information, see [documentation](/tidb-configuration-file.md#initialize-sql-file-new-in-v660).
 
 ### MySQL compatibility
 
@@ -350,7 +350,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
     + Sync-diff-inspector
 
-        - Add a new parameter `skip-non-existing-table` to skip checking upstream and downstream data consistency when tables in the downstream do not exist in the upstream [#692](https://github.com/pingcap/tidb-tools/issues/692) @[lichunzhu](https://github.com/lichunzhu) @[liumengya94](https://github.com/liumengya9) **tw@shichun-0415**
+        - Add a new parameter `skip-non-existing-table` to control whether to skip checking upstream and downstream data consistency when tables in the downstream do not exist in the upstream [#692](https://github.com/pingcap/tidb-tools/issues/692) @[lichunzhu](https://github.com/lichunzhu) @[liumengya94](https://github.com/liumengya94) **tw@shichun-0415**
         - note [#issue](链接) @[贡献者 GitHub ID](链接)
 
 ## Bug fixes
