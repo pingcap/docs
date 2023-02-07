@@ -64,7 +64,7 @@ The resource control feature introduces two new global variables.
 
 > **Note:**
 >
-> The parameter `resource_control.enabled` is disabled by default. It does not support dynamic modification. You need to contact the [PingCAP support team](/tidb-cloud/tidb-cloud-support.md) to enable it for TiDB Cloud Dedicated Tier clusters.
+> The parameter `resource-control.enabled` is disabled by default. It does not support dynamic modification. You need to contact the [PingCAP support team](/tidb-cloud/tidb-cloud-support.md) to enable it for TiDB Cloud Dedicated Tier clusters.
 
 </CustomContent>
 
@@ -106,7 +106,7 @@ In TiKV, set the parameter [`resource-control.enabled`](/tikv-configuration-file
 
 <CustomContent platform="tidb-cloud">
 
-In TiKV, set the parameter [`resource_control.enabled`](https://docs.pingcap.com/tidb/stable/tikv-configuration-file#resource_control) to `true`. The parameter `resource-control.enabled` is disabled by default. You need to contact the [PingCAP support team](/tidb-cloud/tidb-cloud-support.md) to enable it.
+In TiKV, set the parameter [`resource-control.enabled`](https://docs.pingcap.com/tidb/stable/tikv-configuration-file#resource_control) to `true`. The parameter `resource-control.enabled` is disabled by default. You need to contact the [PingCAP support team](/tidb-cloud/tidb-cloud-support.md) to enable it.
 
 </CustomContent>
 
