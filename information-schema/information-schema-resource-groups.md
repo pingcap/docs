@@ -48,6 +48,7 @@ mysql> SELECT * FROM information_schema.resource_groups WHERE NAME = 'rg1';
 +------+------------+-----------+-----------+
 | rg1  |       1000 |    100000 | NO        |
 +------+------------+-----------+-----------+
+```
 
 The descriptions of the columns in the `RESOURCE_GROUPS` table are as follows:
 
