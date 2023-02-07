@@ -62,7 +62,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
     `SURVIVAL_PREFERENCES` provides data survival preference settings to increase the disaster survivability of data. By specifying `SURVIVAL_PREFERENCE`, you can control the following:
 
     - For TiDB clusters deployed across cloud regions, when a cloud region fails, the specified databases or tables can survive in another cloud region.
-    - For TiDB clusters deployed in a single cloud region, when an availability fails, the specified databases or tables can survive in another availability zone.
+    - For TiDB clusters deployed in a single cloud region, when an availability zone fails, the specified databases or tables can survive in another availability zone.
 
      For more information, see [documentation](/placement-rules-in-sql.md#survival-preference).
 
