@@ -1145,7 +1145,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 > **Warning:**
 >
-> - This feature is still in the experimental stage.
+> - This feature is still in the experimental stage. It is not recommended to enable this feature in production environments.
 > - When this feature is enabled, TiDB only performs simple retries when an exception occurs during the DDL reorg phase. There is currently no retry method that is compatible with DDL operations. That is, you cannot control the number of retries using [`tidb_ddl_error_count_limit`](#tidb_ddl_error_count_limit).
 
 - Scope: GLOBAL
