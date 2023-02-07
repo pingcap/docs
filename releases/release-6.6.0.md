@@ -33,17 +33,15 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
     For more information, see [documentation](/foreign-key.md).
 
-* Support rolling back DDL operations via the `FLASHBACK CLUSTER TO TIMESTAMP` statement  [#14088](https://github.com/tikv/tikv/pull/14088) @[Defined2014](https://github.com/Defined2014) @[JmPotato](https://github.com/JmPotato) **tw@ran-huang**
+* Support rolling back DDL operations via the `FLASHBACK CLUSTER TO TIMESTAMP` statement [#14088](https://github.com/tikv/tikv/pull/14088) @[Defined2014](https://github.com/Defined2014) @[JmPotato](https://github.com/JmPotato) **tw@ran-huang**
 
-    The [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md) statement supports restoring the entire cluster to a specified point in time within the Garbage Collection (GC) lifetime. In TiDB v6.6.0, this feature adds support for rolling back DDL operations. This can be used to quickly undo a DML or DDL misoperation on a cluster, fall back a cluster within minutes, and fall back a cluster multiple times on the timeline to determine when specific data changes occurred.
+    The [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md) statement supports restoring the entire cluster to a specified point in time within the Garbage Collection (GC) lifetime. In TiDB v6.6.0, this feature adds support for rolling back DDL operations. This can be used to quickly undo a DML or DDL misoperation on a cluster, roll back a cluster within minutes, and roll back a cluster multiple times on the timeline to determine when specific data changes occurred.
 
     For more information, see [documentation](/sql-statements/sql-statement-flashback-to-timestamp.md).
 
-* Support the distributed parallel execution framework for DDL (experimental) [#issue](https://github.com/pingcap/tidb/issues/37125) @[zimulala](https://github.com/zimulala) **tw@ran-huang**
+* Support the distributed parallel execution framework for DDL operations (experimental) [#issue](https://github.com/pingcap/tidb/issues/37125) @[zimulala](https://github.com/zimulala) **tw@ran-huang**
 
     In previous versions, only one TiDB instance in the entire TiDB cluster was allowed to handle schema change tasks as a DDL owner. To further improve DDL concurrency, TiDB v6.6.0 introduces the distributed parallel execution framework for DDL, through which all TiDB instances in the cluster can concurrently execute the `StateWriteReorganization` phase of the same task to speed up DDL execution. This feature is controlled by the system variable [`tidb_ddl_distribute_reorg`](/system-variables.md#tidb_ddl_distribute_reorg-new-in-v660) and is currently only supported for `Add Index` operations.
-
-    For more information, see [documentation](/system-variables.md#tidb_ddl_distribute_reorg-new-in-v660).
 
 * Support the MySQL-compatible multi-valued index (experimental) [#39592](https://github.com/pingcap/tidb/issues/39592) @[xiongjiwei](https://github.com/xiongjiwei) @[qw4990](https://github.com/qw4990) **tw@TomShawn**
 
@@ -80,7 +78,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
 * Support quickly creating SQL binding on TiDB Dashboard [#781](https://github.com/pingcap/tidb-dashboard/issues/781) @[YiniXu9506](https://github.com/YiniXu9506) **tw@ran-huang**
 
-    TiDB v6.6.0 supports creating SQL binding from statement history, which allows you to bind a SQL statement to a specific plan on TiDB Dashboard within a minute.
+    TiDB v6.6.0 supports creating SQL binding from statement history, which allows you to quickly bind a SQL statement to a specific plan on TiDB Dashboard.
 
     By providing a user-friendly interface, this feature simplifies the process of binding plans in TiDB, reduces the operation complexity, and improves the efficiency and user experience of the plan binding process.
 
@@ -242,7 +240,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
     In v6.6.0, DM's full migration capability integrates with TiDB Lightning's physical import mode, which enables DM to improve the performance of full data migration by up to 10 times, greatly reducing the migration time in large data volume scenarios.
 
-    Prior to v6.6.0, for high data volume scenarios, you were required to configure TiDB Lightning's physical import task separately for fast full data migration, and then use DM for incremental data migration, which was a complex configuration. Starting from v6.6.0, you can migrate large data volumes without the need to configure TiDB Lightning's tasks; one DM task can accomplish the migration.
+    Before v6.6.0, for high data volume scenarios, you were required to configure TiDB Lightning's physical import task separately for fast full data migration, and then use DM for incremental data migration, which was a complex configuration. Starting from v6.6.0, you can migrate large data volumes without the need to configure TiDB Lightning's tasks; one DM task can accomplish the migration.
 
     For more information, see [documentation]/dm/dm-precheck.md#physical-import-check-items).
 
