@@ -165,6 +165,8 @@
   - [Maintain TiDB Using TiUP](/maintain-tidb-using-tiup.md)
   - [Modify Configuration Dynamically](/dynamic-config.md)
   - [Online Unsafe Recovery](/online-unsafe-recovery.md)
+  - [Use Witness Replicas to Save Costs](/use-witness-to-save-costs.md)
+  - [Use Witness Replicas to Speed Up Failover](/use-witness-to-speed-up-failover.md)
   - [Replicate Data Between Primary and Secondary Clusters](/replicate-between-primary-and-secondary-clusters.md)
 - Monitor and Alert
   - [Monitoring Framework Overview](/tidb-monitoring-framework.md)

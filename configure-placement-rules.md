@@ -12,7 +12,7 @@ aliases: ['/docs/dev/configure-placement-rules/','/docs/dev/how-to/configure/pla
 
 Placement Rules, introduced in v5.0, is a replica rule system that guides PD to generate corresponding schedules for different types of data. By combining different scheduling rules, you can finely control the attributes of any continuous data range, such as the number of replicas, the storage location, the host type, whether to participate in Raft election, and whether to act as the Raft leader.
 
-The Placement Rules feature is enabled by default in v5.0 and later versions of TiDB. To disable it, refer to [Disable Placement Rules](#disable-placement-rules). 
+The Placement Rules feature is enabled by default in v5.0 and later versions of TiDB. To disable it, refer to [Disable Placement Rules](#disable-placement-rules).
 
 ## Rule system
 
@@ -37,6 +37,7 @@ The following table shows the meaning of each field in a rule:
 | `StartKey`        | `string`, in hexadecimal form                |  Applies to the starting key of a range.                |
 | `EndKey`          | `string`, in hexadecimal form                |  Applies to the ending key of a range.                |
 | `Role`            | `string` | Replica roles, including voter/leader/follower/learner.                           |
+| `IsWitness`      | `true`/`false`                     | Whether it is a [Witness](/glossary.md#witness) replica or not. |
 | `Count`           | `int`, positive integer                     |  The number of replicas.                            |
 | `LabelConstraint` | `[]Constraint`                    |  Filters nodes based on the label.               |
 | `LocationLabels`  | `[]string`                        |  Used for physical isolation.                       |
@@ -485,4 +486,33 @@ The rule group:
   "index": 1024,
   "override": true,
 }
+```
+
+### Scenario 6: Configure Witness replicas in a highly reliable storage environment
+
+The following rule shows how to configure `IsWitness` and uses Amazon EBS as an example to save costs by configuring [Witness](/glossary.md#witness) replicas.
+
+The rule is as follows:
+
+```json
+[
+    {
+        "group_id": "pd",
+        "id": "default",
+        "start_key": "",
+        "end_key": "",
+        "role": "voter",
+        "is_witness": false,
+        "count": 2
+    },
+    {
+        "group_id": "pd",
+        "id": "witness",
+        "start_key": "",
+        "end_key": "",
+        "role": "voter",
+        "is_witness": true,
+        "count": 1
+    }
+]
 ```

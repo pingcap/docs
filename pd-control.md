@@ -140,6 +140,7 @@ Usage:
   },
   "schedule": {
     "enable-cross-table-merge": "true",
+    "enable-witness": "true",
     "high-space-ratio": 0.7,
     "hot-region-cache-hits-threshold": 3,
     "hot-region-schedule-limit": 4,
@@ -1087,6 +1088,17 @@ unsafe remove-failed-stores show
   "Stores that have not reported to PD: 11, 12",
 ]
 ```
+
+To enable the [Witness replica](/glossary.md#witness) feature, run the following command:
+
+```bash
+config set enable-witness true
+```
+
+The scenarios for using a Witness replica are as follows:
+
+- Save costs in a highly reliable storage environment. For more details, see [Use Witness replicas to save costs](/use-witness-to-save-costs.md).
+- Quickly recover from any failure to improve system availability. For more details, see [Use Witness replicas to speed up failover](/use-witness-to-speed-up-failover.md).
 
 ## Jq formatted JSON output usage
 

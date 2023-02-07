@@ -159,3 +159,12 @@ Because TiKV is a distributed storage system, it requires a global timing servic
 ### TTL
 
 [Time to live (TTL)](/time-to-live.md) is a feature that allows you to manage TiDB data lifetime at the row level. For a table with the TTL attribute, TiDB automatically checks data lifetime and deletes expired data at the row level.
+
+## W
+
+### Witness
+
+A Witness replica only stores the most recent Raft logs for majority confirmation, but does not store data. The scenarios for using a Witness replica are as follows:
+
+- Save costs in a highly reliable storage environment. For more details, see [Use Witness replicas to save costs](/use-witness-to-save-costs.md).
+- Quickly recover from any failure to improve system availability. For more details, see [Use Witness replicas to speed up failover](/use-witness-to-speed-up-failover.md).
