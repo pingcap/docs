@@ -14,7 +14,7 @@ Using the resource control feature, as a cluster administrator, you can define r
 The TiDB resource control feature provides two layers of resource management capabilities: the flow control capability at the TiDB layer and the priority scheduling capability at the TiKV layer. The two capabilities are orthogonal and can be enabled separately or simultaneously. See the [Parameters for resource control](#parameters-for-resource-control) for details.
 
 - TiDB flow control: TiDB flow control uses the token bucket algorithm (`RU_TOKENS`). The number of tokens consumed by read and write requests cannot exceed the number of tokens accumulated in the corresponding resource group bucket. If there are not enough tokens in the bucket, and the resource group does not specify the `BURSTABLE` option, the requests to the resource group will wait for the token bucket to backfill the tokens and retry. The retry may fail due to timeout.
-- TiKV scheduling: If [`resource-control.enabled`](/tikv-configuration-file.md#resource_control) is enabled, TiKV uses the value of `RU_PER_SEC` of each resource group to map the read and write requests of each resource group to their own priorities. Based on their own priorities, the storage layer uses the priority queue to schedule and process requests.
+- TiKV scheduling: If [`resource-control.enabled`](/tikv-configuration-file.md#resource-control) is enabled, TiKV uses the value of `RU_PER_SEC` of each resource group to map the read and write requests of each resource group to their own priorities. Based on their own priorities, the storage layer uses the priority queue to schedule and process requests.
 
 The introduction of the resource control feature is a milestone for TiDB. It can divide a distributed database cluster into multiple logical units. Even if an individual unit overuses resources, it does not crowd out the resources needed by other units.
 
@@ -58,7 +58,7 @@ Based on the above table, assuming that the TiKV time consumed by a resource gro
 The resource control feature introduces two new global variables.
 
 * TiDB: you can use the system variable [`tidb_enable_resource_control`](/system-variables.md#tidb-tidb_enable_resource_control-new-in-v660) to control whether to enable flow control for a resource group.
-* TiKV: you can use the parameter [`resource-control.enabled`](/tikv-configuration-file.md#resource_control) to control whether to use request scheduling based on resource group quotas.
+* TiKV: you can use the parameter [`resource-control.enabled`](/tikv-configuration-file.md#resource-control) to control whether to use request scheduling based on resource group quotas.
 
 <CustomContent platform="tidb-cloud">
 
@@ -100,7 +100,7 @@ SET GLOBAL tidb_enable_resource_control = 'ON';
 
 <CustomContent platform="tidb">
 
-In TiKV, set the parameter [`resource-control.enabled`](/tikv-configuration-file.md#resource_control) to `true`.
+In TiKV, set the parameter [`resource-control.enabled`](/tikv-configuration-file.md#resource-control) to `true`.
 
 </CustomContent>
 
