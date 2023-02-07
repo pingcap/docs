@@ -315,6 +315,8 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
     - note [#issue](链接) @[贡献者 GitHub ID](链接)
     - note [#issue](链接) @[贡献者 GitHub ID](链接)
+    - Support limiting the global memory to alleviate the OOM problem [#5827](https://github.com/tikv/pd/issues/5827) @[hnes](https://github.com/hnes)
+    - Add the GC Tuner to alleviate the GC pressure [#5827](https://github.com/tikv/pd/issues/5827) @[hnes](https://github.com/hnes)
 
 + TiFlash
 
