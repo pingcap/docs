@@ -609,6 +609,7 @@
     - [TiKV](/grafana-tikv-dashboard.md)
     - [TiFlash](/tiflash/monitor-tiflash.md)
     - [TiCDC](/ticdc/monitor-ticdc.md)
+    - [Resource Control](/grafana-resource-control-dashboard.md)
   - Secure
     - [Enable TLS Between TiDB Clients and Servers](/enable-tls-between-clients-and-servers.md)
     - [Enable TLS Between TiDB Components](/enable-tls-between-components.md)
