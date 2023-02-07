@@ -27,11 +27,11 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
     更多信息，请参考[用户文档](链接)。
 
-* Support the MySQL-compatible foreign key constraint [#18209](https://github.com/pingcap/tidb/issues/18209) @[crazycs520](https://github.com/crazycs520) **tw@Oreoxmt**
+* Support the MySQL-compatible foreign key constraints [#18209](https://github.com/pingcap/tidb/issues/18209) @[crazycs520](https://github.com/crazycs520) **tw@Oreoxmt**
 
-    TiDB v6.6.0 introduces the foreign key constraint feature, which is compatible with MySQL. This feature supports data correlation in a table or between tables, constraint validation, and cascade operations. This feature helps to maintain data consistency, improve data quality, and facilitate data modeling.
+    TiDB v6.6.0 introduces the foreign key constraints feature, which is compatible with MySQL. This feature supports data association in a table or between tables, constraints validation, and cascade operations. This feature helps to maintain data consistency, improve data quality, and facilitate data modeling.
 
-    For more information, see [documentation](/sql-statements/sql-statement-foreign-key.md).
+    For more information, see [documentation](/foreign-key.md).
 
 * Support rolling back DDL operations via the `FLASHBACK CLUSTER TO TIMESTAMP` statement  [#14088](https://github.com/tikv/tikv/pull/14088) @[Defined2014](https://github.com/Defined2014) @[JmPotato](https://github.com/JmPotato) **tw@ran-huang**
 
@@ -112,9 +112,9 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
     For more information, see [documentation](/sql-prepared-plan-cache.md#diagnostics-of-prepared-plan-cache).
 
-* Add the `Warnings` field to the slow query log [#39893](https://github.com/pingcap/tidb/issues/39893) @[time-and-fate](https://github.com/time-and-fate) **tw@Oreoxmt**
+* Add a `Warnings` field to the slow query log [#39893](https://github.com/pingcap/tidb/issues/39893) @[time-and-fate](https://github.com/time-and-fate) **tw@Oreoxmt**
 
-    The `Warnings` field is added to the slow query log in JSON format to record the warnings generated during the execution of the slow query to help diagnose performance issues. You can also view this on the slow query page of TiDB Dashboard.
+    TiDB v6.6.0 adds a `Warnings` field to the slow query log to help diagnose performance issues. The field records warnings generated during the execution of the slow query. You can also view this on the slow query page of TiDB Dashboard.
 
     For more information, see [documentation](/identify-slow-queries.md).
 
@@ -136,9 +136,9 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
 ### Performance
 
-* Use Witness to Save Costs in a highly reliable storage environment [#12876](https://github.com/tikv/tikv/issues/12876) @[Connor1996](https://github.com/Connor1996) @[ethercflow](https://github.com/ethercflow) **tw@Oreoxmt**
+* Use a Witness replica to save costs in a highly reliable storage environment [#12876](https://github.com/tikv/tikv/issues/12876) @[Connor1996](https://github.com/Connor1996) @[ethercflow](https://github.com/ethercflow) **tw@Oreoxmt**
 
-    In cloud environments, it is recommended to use Amazon Elastic Block Store or Persistent Disk of Google Cloud Platform as the storage of each TiKV node. In this case, it is not necessary to use three Raft replicas. To reduce costs, TiKV introduces the Witness feature, which is the "2 Replicas With 1 Log Only" mechanism. The 1 Log Only replica only stores Raft logs but does not apply data, and data consistency is still guaranteed through the Raft protocol. Compared with the standard three replica architecture, Witness can save storage resources and CPU usage.
+    In cloud environments, when you use the Amazon Elastic Block Store or Persistent Disk of Google Cloud Platform as the storage of each TiKV node, the durability is higher than that of physical disks. In this case, using three Raft replicas with TiKV is possible but not necessary. To reduce costs, TiKV introduces the Witness feature, which is the "2 Replicas With 1 Log Only" mechanism. The 1 Log Only replica only stores Raft logs but does not apply data, and still ensures data consistency through the Raft protocol. Compared with the standard three replica architecture, Witness can save storage resources and CPU usage.
 
     For more information, see [documentation](/use-witness-to-save-costs.md).
 
@@ -204,15 +204,15 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
     For more information, see [documentation](/tidb-resource-control.md).
 
-* Use a temporary Witness replica to spped up failover [#12876](https://github.com/tikv/tikv/issues/12876) @[Connor1996](https://github.com/Connor1996) @[ethercflow](https://github.com/ethercflow) **tw@Oreoxmt**
+* Use a temporary Witness replica to speed up failover [#12876](https://github.com/tikv/tikv/issues/12876) @[Connor1996](https://github.com/Connor1996) @[ethercflow](https://github.com/ethercflow) **tw@Oreoxmt**
 
-    The Witness feature can be used to quickly recover a failover to improve system availability and data durability. For example, in a 3-out-of-4 scenario, although it meets the majority requirement, the system is fragile and the time to completely recover a new member is often long (requires copying the snapshot first and then applying the latest log), especially when the Region snapshot is relatively large. In addition, the process of copying replicas might cause more pressure on unhealthy Group members. Therefore, adding a Witness can quickly bring down an unhealthy node and ensure the security of logs during recovery.
+    The Witness feature can be used to quickly recover from a failover to improve system availability and data durability. For example, in a Raft group of three replicas, if one replica fails, the system is fragile although it meets the majority requirement. It takes a long time to recover a new member (the process requires copying the snapshot first and then applying the latest logs), especially when the Region snapshot is large. In addition, the process of copying replicas might cause more pressure on unhealthy Group members. Therefore, adding a Witness replica can quickly remove the unhealthy node, reduce the risk of the Raft group being unavailable due to another node failure during recovering a new member (the Learner replica cannot participate in the election and submission), and ensure the security of logs during recovery.
 
     For more information, see [documentation](/use-witness-to-speed-up-failover.md)。
 
 * Support configuring read-only storage nodes for resource-consuming tasks [#issue号](链接) @[v01dstar](https://github.com/v01dstar) **tw@Oreoxmt**
 
-    In production environments, some read-only operations might consume a large number of resources regularly, which might affect the performance of the entire cluster, such as backups and large-scale data analysis. TiDB v6.6.0 supports configuring read-only storage nodes to execute resource-consuming read-only tasks to reduce the impact on the online application. You can configure read-only storage nodes according to [steps](/readonly-nodes.md#steps) and specify where to read data through a system variable or client parameter to ensure the stability of cluster performance.
+    In production environments, some read-only operations might consume a large number of resources regularly and affect the performance of the entire cluster, such as backups and large-scale data reading and analysis. TiDB v6.6.0 supports configuring read-only storage nodes for resource-consuming read-only tasks to reduce the impact on the online application. Currently, TiDB, TiSpark, and BR support reading data from read-only storage nodes. You can configure read-only storage nodes according to [steps](/readonly-nodes.md#steps) and specify where data is read through the system variable `tidb_replica_read`, the TiSpark configuration item `spark.tispark.replica_read`, or the br command line argument `--read-only`, to ensure the stability of cluster performance.
 
     For more information, see [documentation](/best-practices/readonly-nodes.md).
 
