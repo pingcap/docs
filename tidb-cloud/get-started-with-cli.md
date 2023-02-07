@@ -125,6 +125,14 @@ To create a Serverless Tier cluster, enter the following command, and then follo
 ticloud cluster create
 ```
 
+### Connect to the cluster
+
+After the cluster is created, you can connect to the cluster using the following command:
+
+```shell
+ticloud cluster connect
+```
+
 ## What's next
 
 Check out [CLI reference](/tidb-cloud/cli-reference.md) to explore more features of TiDB Cloud CLI.

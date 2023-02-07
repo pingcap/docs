@@ -22,6 +22,7 @@ To use the `ticloud` CLI in your terminal, run `ticloud [command] [subcommand]`.
 | cluster    | create, delete, describe, list                             | Manage clusters                                                                                          |
 | completion | bash, fish, powershell, zsh                                | Generate completion script for specified shell                                                           |
 | config     | create, delete, describe, edit, list, set, use             | Configure user profiles                                                                                  |
+| connect    | -                                                          | Connect to a TiDB cluster                                                                                |
 | help       | cluster, completion, config, help, import, project, update | View help for any command                                                                                |
 | import     | cancel, describe, list, start                              | Manage [import](/tidb-cloud/tidb-cloud-migration-overview.md#import-data-from-files-to-tidb-cloud) tasks |
 | project    | list                                                       | Manage projects                                                                                          |
