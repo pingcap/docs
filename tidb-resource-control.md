@@ -9,11 +9,11 @@ summary: Learn how to use the resource control feature to control and schedule a
 >
 > This feature is experimental and its form and usage may change in subsequent versions.
 
-Using the resource control feature, as a cluster administrator, you can define resource groups and limit the read and write quotas of resource groups. After you bind users to a resource group, the TiDB layer will perform flow control on the user's read and write requests according to the read and write quotas set by the bound resource group. Meanwhile, the TiKV layer will schedule the requests according to the priority of the read and write quota mapping. Through flow control and scheduling, you can achieve resource isolation of your applications and meet the quality of service (QoS) requirements.
+As a cluster administrator, you can use the resource control feature to set read and write quotas for resource groups, and bind users to those groups. This allows the TiDB layer to control the flow of user read and write requests based on the quotas set for the resource group, while the TiKV layer schedules the requests based on the priority of the read and write quota mapping. By doing this, you can ensure resource isolation for your applications and meet quality of service (QoS) requirements.
 
 The TiDB resource control feature provides two layers of resource management capabilities: the flow control capability at the TiDB layer and the priority scheduling capability at the TiKV layer. The two capabilities are orthogonal and can be enabled separately or simultaneously. See the [Parameters for resource control](#parameters-for-resource-control) for details.
 
-- TiDB flow control: TiDB flow control uses the token bucket algorithm (`RU_TOKENS`). The number of tokens consumed by read and write requests cannot exceed the number of tokens accumulated in the corresponding resource group bucket. If there are not enough tokens in the bucket, and the resource group does not specify the `BURSTABLE` option, the requests to the resource group will wait for the token bucket to backfill the tokens and retry. The retry may fail due to timeout.
+- TiDB flow control:  TiDB flow control uses the [token bucket algorithm](https://en.wikipedia.org/wiki/Token_bucket). If there are not enough tokens in the bucket, and the resource group does not specify the `BURSTABLE` option, the requests to the resource group will wait for the token bucket to backfill the tokens and retry. The retry might fail due to timeout.
 - TiKV scheduling: If [`resource-control.enabled`](/tikv-configuration-file.md#resource-control) is enabled, TiKV uses the value of `RU_PER_SEC` of each resource group to map the read and write requests of each resource group to their own priorities. Based on their own priorities, the storage layer uses the priority queue to schedule and process requests.
 
 The introduction of the resource control feature is a milestone for TiDB. It can divide a distributed database cluster into multiple logical units. Even if an individual unit overuses resources, it does not crowd out the resources needed by other units.
@@ -156,7 +156,7 @@ TiDB regularly collects runtime information about resource control and provides 
 
 ## Tool Compatibility
 
-The resource control feature is not compatible with data export/import and replication tools including BR, TiDB Lightning, and TiCDC. These tools simply ignore the metadata information of the resource groups in the cluster.
+The resource control feature is still in its experimental stage and does not impact the regular usage of data import, export, and other replication tools. BR, TiDB Lightning, and TiCDC do not currently support resource control related DDL processing, and their resource consumption is not limited by resource control.
 
 ## Limitations
 
