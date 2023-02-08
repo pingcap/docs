@@ -198,10 +198,6 @@ BR supports server-side encryption (SSE) when backing up data to S3. In this sce
 
 ## Validate backup data
 
-> **Warning:**
->
-> This feature has a known issue [#40878](https://github.com/pingcap/tidb/issues/40878). Therefore, avoid using this feature for now.
-
 After you back up data using BR, you can validate the backup data, including checking its integrity and viewing the metadata (such as TSO) by decoding `backupmeta`.
 
 ### Check the integrity of backup data
