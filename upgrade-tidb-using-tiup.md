@@ -45,7 +45,7 @@ This section introduces the preparation works needed before upgrading your TiDB 
 
 ### Step 1: Review compatibility changes
 
-Review [the compatibility changes](/releases/release-6.5.0.md#compatibility-changes) and [deprecated features](/releases/release-6.5.0.md#deprecated-feature) in TiDB v6.5.0 release notes. If any changes affect your upgrade, take actions accordingly.
+Review [the compatibility changes](/releases/release-6.4.0.md#compatibility-changes) in TiDB v6.4.0 release notes. If any changes affect your upgrade, take actions accordingly.
 
 ### Step 2: Upgrade TiUP or TiUP offline mirror
 
@@ -153,16 +153,6 @@ After the command is executed, the "Region status" check result will be output.
 + If the result is "All Regions are healthy", all Regions in the current cluster are healthy and you can continue the upgrade.
 + If the result is "Regions are not fully healthy: m miss-peer, n pending-peer" with the "Please fix unhealthy regions before other operations." prompt, some Regions in the current cluster are abnormal. You need to troubleshoot the anomalies until the check result becomes "All Regions are healthy". Then you can continue the upgrade.
 
-<<<<<<< HEAD
-=======
-### Step 5: Check the DDL and backup status of the cluster
-
-To avoid undefined behaviors or other unexpected problems during the upgrade, it is recommended to check the following items before the upgrade.
-
-- Cluster DDLs: It is recommended to execute the [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md) statement to check whether there is an ongoing DDL job. If yes, wait for its execution or cancel it by executing the [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md) statement before performing an upgrade.
-- Cluster backup: It is recommended to execute the [`SHOW [BACKUPS|RESTORES]`](/sql-statements/sql-statement-show-backups.md) statement to check whether there is an ongoing backup or restore task in the cluster. If yes, wait for its completion before performing an upgrade.
-
->>>>>>> f63701c23 (deploy: move compatibility changes to a more noticeable position in upgrade guide (#12408))
 ## Upgrade the TiDB cluster
 
 This section describes how to upgrade the TiDB cluster and verify the version after the upgrade.
@@ -297,11 +287,3 @@ You can upgrade the tool version by using TiUP to install the `ctl` component of
 ```shell
 tiup install ctl:v6.4.0
 ```
-<<<<<<< HEAD
-
-## TiDB 6.4.0 compatibility changes
-
-- See TiDB 6.4.0 Release Notes for the compatibility changes.
-- Try to avoid creating a new clustered index table when you apply rolling updates to the clusters using TiDB Binlog.
-=======
->>>>>>> f63701c23 (deploy: move compatibility changes to a more noticeable position in upgrade guide (#12408))
