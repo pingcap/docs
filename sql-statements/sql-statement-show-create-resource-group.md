@@ -19,19 +19,24 @@ ResourceGroupName ::=
 
 ## Examples
 
-View the current definition of the resource group `rg1`.
+Create a resource group `rg1`.
 
 ```sql
 CREATE RESOURCE GROUP rg1 RU_PER_SEC=100;
 Query OK, 0 rows affected (0.10 sec)
 ```
 
+View the definition of `rg1`.
+
 ```sql
 SHOW CREATE RESOURCE GROUP rg1;
 ***************************[ 1. row ]***************************
-Resource_Group        | rg1
-Create Resource Group | CREATE RESOURCE GROUP `rg1` RU_PER_SEC=100
-1 row in set (0.00 sec)
++----------------+--------------------------------------------+
+| Resource_Group | Create Resource Group                      |
++----------------+--------------------------------------------+
+| rg1            | CREATE RESOURCE GROUP `rg1` RU_PER_SEC=100 |
++----------------+--------------------------------------------+
+1 row in set (0.01 sec)
 ```
 
 ## MySQL compatibility
