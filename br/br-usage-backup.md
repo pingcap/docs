@@ -198,13 +198,13 @@ BR supports server-side encryption (SSE) when backing up data to S3. In this sce
 
 ## Validate backup data
 
-After you back up data using BR, you can validate the backup data, including checking its integrity and viewing the metadata (such as TSO) by decoding `backupmeta`.
+After you back up data using BR, you can validate the backup data, including checking its integrity and viewing the metadata (such as TSO) by decoding the `backupmeta` file.
 
 ### Check the integrity of backup data
 
 To check the integrity of backup data, you can run the `tiup br debug checksum` command to calculate the checksum of the backup data.
 
-Example: Calculate the checksum of the backup data in the `${prefix}` directory in the `backup-data` bucket of Amazon S3.
+Example: Calculate the checksum of the backup data in the `${prefix}` directory in the `backup-data` bucket on Amazon S3.
 
 ```shell
 br debug checksum \
@@ -213,11 +213,11 @@ br debug checksum \
     --log-file checksum.log
 ```
 
-### Decode `backupmeta` to a readable json file
+### Decode `backupmeta` to a readable JSON file
 
-After backup is complete, you can run the `tiup br debug decode` command to decode the `backupmeta` file into a readable json file, through which you can view the metadata (such as TSO) of the snapshot.
+After a backup is complete, you can run the `tiup br debug decode` command to decode the `backupmeta` file into a readable JSON file, through which you can view the metadata (such as TSO) of the snapshot.
 
-Example: Decode the `backupmeta` file in the `${prefix}` directory in the `backup-data` bucket of Amazon S3 into a json file `backupmeta.json`. The decoded file is stored in `s3://backup-data/${prefix}/backupmeta.json`.
+Example: Decode the `backupmeta` file in the `${prefix}` directory in the `backup-data` bucket on Amazon S3 into a JSON file `backupmeta.json`. The decoded file is stored in `s3://backup-data/${prefix}/backupmeta.json`.
 
 ```shell
 br debug decode \
@@ -228,9 +228,9 @@ br debug decode \
 
 Open the `backupmeta.json` file and search for `end_version` to view the TSO of the snapshot.
 
-If necessary, you can also encode the json format `backupmeta` file back to the original state. Specifically, run the `tiup br debug encode` command to generate the file named `backupmeta_from_json`.
+If necessary, you can also encode the JSON format `backupmeta` file back to the original state. Specifically, run the `tiup br debug encode` command to generate the file named `backupmeta_from_json`.
 
-Example: Encode the `backupmeta.json` file in the `${prefix}` directory in the `backup-data` bucket of Amazon S3 into a `backupmeta` file. The encoded file is stored in `s3://backup-data/${prefix}/backupmeta_from_json`.
+Example: Encode the `backupmeta.json` file in the `${prefix}` directory in the `backup-data` bucket on Amazon S3 into a `backupmeta` file. The encoded file is stored in `s3://backup-data/${prefix}/backupmeta_from_json`.
 
 ```shell
 br debug encode \
