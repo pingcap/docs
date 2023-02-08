@@ -242,7 +242,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
     Before v6.6.0, for high data volume scenarios, you were required to configure TiDB Lightning's physical import task separately for fast full data migration, and then use DM for incremental data migration, which was a complex configuration. Starting from v6.6.0, you can migrate large data volumes without the need to configure TiDB Lightning's tasks; one DM task can accomplish the migration.
 
-    For more information, see [documentation]/dm/dm-precheck.md#physical-import-check-items).
+    For more information, see [documentation](/dm/dm-precheck.md#physical-import-check-items).
 
 ### TiDB data share subscription
 
