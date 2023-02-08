@@ -135,6 +135,7 @@ In addition to the placement options above, you can also use the advance configu
 | `FOLLOWER_CONSTRAINTS`     | A list of constraints that only apply to followers.                                   |
 | `LEARNER_CONSTRAINTS`      | A list of constraints that only apply to learners.                                     |
 | `LEARNERS`                 | The number of learners. |
+| `SURVIVAL_PREFERENCE`      | The replica placement priority according to the label of the disaster tolerance level. For example, `SURVIVAL_PREFERENCE="[region, zone, host]"`. |
 
 ## Examples
 
@@ -247,6 +248,25 @@ In dictionary format, constraints also indicate a number of instances that apply
 > **Note:**
 >
 > Dictionary and list formats are based on the YAML parser, but the YAML syntax might be incorrectly parsed. For example, `"{+disk=ssd:1,+disk=nvme:2}"` is incorrectly parsed as `'{"+disk=ssd:1": null, "+disk=nvme:1": null}'`. But `"{+disk=ssd: 1,+disk=nvme: 1}"` is correctly parsed as `'{"+disk=ssd": 1, "+disk=nvme": 1}'`.
+
+### Survival Preferences
+
+For some important data, you might want to have multiple replicas across availability zones to get high disaster survivability, such as survivability at the cloud region level. To achieve that, you can set `SURVIVAL_PREFERENCES` for your data.
+
+For example, you can set the `SURVIVAL_PREFERENCES` as follows to require the data to meet the configured survival preferences as much as possible:
+
+``` sql
+CREATE PLACEMENT POLICY multiregion
+    follower=4
+    PRIMARY_REGION="region1"
+    SURVIVAL_PREFERENCES="[region, zone]";
+```
+
+Then, for tables with this policy, data will first meet the survival objectives of data isolation across regions, and then ensure the survival objectives of data isolation across availability zones.
+
+> **Note:**
+>
+> `SURVIVAL_PREFERENCES` is equivalent to `LOCATION_LABELS` in PD. For more information, see [Schedule replicas by topology labels](/schedule-replicas-by-topology-labels.md).
 
 ## Compatibility with tools
 
