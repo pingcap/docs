@@ -13,8 +13,7 @@ ticloud connect [flags]
 
 > **Note:**
 >
-> The connection forces the ANSI SQL mode for the session.
-You can get more information about the ANSI SQL mode from [ANSI SQL mode](https://dev.mysql.com/doc/refman/8.0/en/sql-mode.html#sqlmode_ansi)
+> The connection forces the [ANSI SQL mode](https://dev.mysql.com/doc/refman/8.0/en/sql-mode.html#sqlmode_ansi) mode for the session.
 
 ## Examples
 
@@ -45,7 +44,7 @@ In non-interactive mode, you need to manually enter required flags. In interacti
 | -c, --cluster-id string | Cluster ID                                       | Yes      | Only works in non-interactive mode.                  |
 | -h, --help              | Help information for this command                | No       | Works in both non-interactive and interactive modes. |
 | -p, --project-id string | Project ID                                       | Yes      | Only works in non-interactive mode.                  |
-| -u, --user string       | The user for login if not using the default user | No       | Only works in non-interactive mode.                  |
+| -u, --user string       | A specific user for login | No       | Only works in non-interactive mode.                  |
 
 ## Inherited flags
 

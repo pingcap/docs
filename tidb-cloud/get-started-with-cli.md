@@ -127,7 +127,7 @@ ticloud cluster create
 
 ### Connect to the cluster
 
-After the cluster is created, you can connect to the cluster using the following command:
+After the cluster is created, you can connect to the cluster:
 
 ```shell
 ticloud cluster connect
