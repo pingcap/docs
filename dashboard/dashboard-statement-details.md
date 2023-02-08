@@ -22,7 +22,7 @@ Starting from v6.6.0, TiDB introduces the fast plan binding feature. You can qui
 
 #### Bind an execution plan
 
-1. Click the **Plan Binding** button. The **Plan Binding** dialog box is displayed.
+1. Click **Plan Binding**. The **Plan Binding** dialog box is displayed.
 
     ![Fast plan binding - not bound - entry](/media/dashboard/dashboard-quick-binding-entry-notbound.png)
 
@@ -51,7 +51,7 @@ Starting from v6.6.0, TiDB introduces the fast plan binding feature. You can qui
 ### Limitation
 
 Currently, the fast plan binding feature does not support the following types of SQL statements:
-
+- Statements that are not `SELECT`, `DELETE`, `UPDATE`, `INSERT`, or `REPLACE`
 - Queries with subqueries
 - Queries that access TiFlash
 - Queries that join three or more tables
