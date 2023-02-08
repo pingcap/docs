@@ -265,7 +265,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 | Variable name  | Change type    | Description |
 |--------|------------------------------|------|
 | [`tidb_enable_plan_cache_for_param_limit`](/system-variables.md#tidb_enable_plan_cache_for_param_limit--new-in-v660) | New | Controls whether Prepared Plan Cache caches execution plans that contain `count` after `Limit`. The default value is `ON`, which means Prepared Plan Cache supports caching such execution plans. Note that Prepared Plan Cache does not support caching execution plans with a `count` that is greater than 10000. |
-| [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-%E4%BB%8E-v660-%E7%89%88%E6%9C%AC%E5%BC%80%E5%A7%8B%E5%BC%95%E5%85%A5) | 新增  | 该变量是资源管控特性的开关。该变量设置为 `ON` 后，集群支持应用按照资源组做资源隔离。 |
+| [`tidb_enable_resource_control`](/system-variables.md#tidb-tidb_enable_resource_control-new-in-v660 | New  | Controls whether to enable the resource control feature. The default value is `OFF`. When this variable is set to `ON`, the TiDB cluster supports resource isolation of applications based on resource groups. |
 | [`tidb_store_batch_size`](/system-variables.md#tidb_store_batch_size) | 修改 | 此变量可用于生产环境。 设置 `IndexLookUp` 算子回表时多个 Coprocessor Task 的 batch 大小。`0` 代表不使用 batch。当 `IndexLookUp` 算子的回表 Task 数量特别多，出现极长的慢查询时，可以适当调大该参数以加速查询。 |
 | [`tidb_pessimistic_txn_aggressive_locking`](/system-variables.md#tidb_pessimistic_txn_aggressive_locking-从-v660-版本开始引入) | 新增 | 是否对悲观锁启用加强的悲观锁唤醒模型。 |
 | [`tidb_enable_plan_replayer_capture`](/system-variables.md#tidb_enable_plan_replayer_capture) | 新增 | 这个变量用来控制是否开启 [`PLAN REPLAYER CAPTURE`](/sql-plan-replayer.md#使用-plan-replayer-capture-抓取目标计划)。默认值 `OFF`， 代表关闭 `PLAN REPLAYER CAPTURE`。 |
@@ -274,7 +274,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
 | 配置文件 | 配置项 | 修改类型 | 描述 |
 | -------- | -------- | -------- | -------- |
-| TiKV | [`resource_control.enabled`](/tikv-configuration-file.md#tidb_enable_resource_control-%E4%BB%8E-v660-%E7%89%88%E6%9C%AC%E5%BC%80%E5%A7%8B%E5%BC%95%E5%85%A5) | 新增 | 是否支持按照资源组配额调度。 默认 `false` ，即关闭按照资源组配额调度。 |
+| TiKV | [`resource-control.enabled`](/tikv-configuration-file.md#resource-control) | New | Whether to enable scheduling for user foreground read/write requests according to the Request Unit (RU) of the corresponding resource groups. The default value is `false`, which means to disable scheduling according to the RU of the corresponding resource groups.|
 | TiFlash |  [`profile.default.max_memory_usage_for_all_queries`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)  |  Modified  |  Specifies the memory usage limit for the generated intermediate data in all queries. Starting from v6.6.0, the default value changes from 0 to 0.8, which means the limit is 80% of the total memory.|
 | TiCDC  | [`consistent.storage`](/ticdc/ticdc-sink-to-mysql.md#prerequisites)  |  Modified  | The path under which redo log backup is stored. Two more value options are added for `scheme`, GCS and Azure.  |
 | TiDB  | [`initialize-sql-file`](/tidb-configuration-file.md#initialize-sql-file-new-in-v660)  | New | Specifies the SQL script to be executed when the TiDB cluster is started for the first time. The default value is empty.  |
@@ -337,12 +337,12 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
     + TiDB Data Migration (DM)
 
-         Optimize DM alert rules and content. [7376](https://github.com/pingcap/tiflow/issues/7376) @[D3Hunter](https://github.com/D3Hunter) **tw@hfxsd**
+         - Optimize DM alert rules and content [#7376](https://github.com/pingcap/tiflow/issues/7376) @[D3Hunter](https://github.com/D3Hunter) **tw@hfxsd**
 
-         Previously, alerts similar to "DM_XXX_process_exits_with_error" were raised whenever an error occured. But some alerts are actually caused by idle database connections, which can be recovered after reconnecting. To reduce this kind of alerts, the alerts are divided into two types: automatically recoverable errors and unrecoverable errors.
+         Previously, alerts similar to "DM_XXX_process_exits_with_error" were raised whenever a related error occured. But some alerts are caused by idle database connections, which can be recovered after reconnecting. To reduce this kind of alerts, DM divides errors into two types: automatically recoverable errors and unrecoverable errors:
 
-        - For errors that are automatically recoverable, report the alert only if the error occurs more than 3 times within 2 minutes.
-        - For errors that are not automatically recoverable, maintain the original behavior and report the alert immediately.
+        - For an error that is automatically recoverable, DM reports the alert only if the error occurs more than 3 times within 2 minutes.
+        - For an error that is not automatically recoverable, DM maintains the original behavior and reports the alert immediately.
 
         - note [#issue](链接) @[贡献者 GitHub ID](链接)
         - note [#issue](链接) @[贡献者 GitHub ID](链接)
