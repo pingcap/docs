@@ -28,10 +28,12 @@ The introduction of the resource control feature is a milestone for TiDB. It can
 
 ## Scenarios for resource control
 
-This feature applies to the following scenarios:
+    With this feature, you can:
 
-- You can combine multiple small and medium-sized applications from different systems into one TiDB cluster. If the load of an individual application grows larger, it does not affect the normal operation of other businesses. When the system load is low, busy applications can still be allocated the required system resources even if they exceed the set read and write quotas, so as to achieve the maximum utilization of resources.
-- You can choose to combine all test environments into a single cluster, or group the batch tasks that consume more resources into a single resource group. It can improve hardware utilization and reduce operating costs while ensuring that critical applications can still get the necessary resources.
+    - Combine multiple small and medium-sized applications from different systems into a single TiDB cluster. When the workload of an application grows larger, it does not affect the normal operation of other applications. When the system workload is low, busy applications can still be allocated the required system resources even if they exceed the set read and write quotas, so as to achieve the maximum utilization of resources.
+    - Choose to combine all test environments into a single TiDB cluster, or group the batch tasks that consume more resources into a single resource group. It can improve hardware utilization and reduce operating costs while ensuring that critical applications can always get the necessary resources.
+
+    In addition, the rational use of the resource control feature can reduce the number of clusters, ease the difficulty of operation and maintenance, and save management costs.
 
 In addition, the rational use of the resource control feature can reduce the number of clusters, ease the difficulty of operation and maintenance, and save management costs.
 
