@@ -22,7 +22,7 @@ ResourceGroupName:
 
 > **Note:**
 >
-> The `DROP RESOURCE GROUP` statement can only be executed when the global variable [`tidb_enable_resource_group`](/system-variables.md#tidb_enable_resource_control-new-in-v660) is set to `ON`.
+> The `DROP RESOURCE GROUP` statement can only be executed when the global variable [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660) is set to `ON`.
 
 ## Examples
 
@@ -34,11 +34,11 @@ Query OK, 0 rows affected (0.22 sec)
 mysql> CREATE RESOURCE GROUP IF NOT EXISTS rg1 RU_PER_SEC = 500 BURSTABLE;
 Query OK, 0 rows affected (0.08 sec)
 mysql> SELECT * FROM information_schema.resource_groups WHERE NAME ='rg1';
-+------+------------+-----------+-----------+
-| NAME | RU_PER_SEC | RU_TOKENS | BURSTABLE |
-+------+------------+-----------+-----------+
-| rg1  |        500 |         0 | YES       |
-+------+------------+-----------+-----------+
++------+------------+-----------+
+| NAME | RU_PER_SEC | BURSTABLE |
++------+------------+-----------+
+| rg1  |        500 | YES       |
++------+------------+-----------+
 1 row in set (0.01 sec)
 
 mysql> DROP RESOURCE GROUP IF EXISTS rg1 ;

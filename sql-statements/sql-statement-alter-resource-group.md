@@ -40,7 +40,7 @@ If the `BURSTABLE` attribute is set, the corresponding resource group allows the
 
 > **Note:**
 > 
-> The `ALTER RESOURCE GROUP` statement can only be executed when the global variable [`tidb_enable_resource_group`](/system-variables.md#tidb_enable_resource_control-new-in-v660) is set to `ON`.
+> The `ALTER RESOURCE GROUP` statement can only be executed when the global variable [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660) is set to `ON`.
 
 ## Examples
 
@@ -54,21 +54,21 @@ mysql> CREATE RESOURCE GROUP IF NOT EXISTS rg1
     ->  BURSTABLE;
 Query OK, 0 rows affected (0.08 sec)
 mysql> SELECT * FROM information_schema.resource_groups WHERE NAME ='rg1';
-+------+-------------+-----------+-----------+
-| NAME | RU_PER_SEC  | RU_TOKENS | BURSTABLE |
-+------+-------------+-----------+-----------+
-| rg1  |         100 |    165135 | YES       |
-+------+-------------+-----------+-----------+
++------+-------------+-----------+
+| NAME | RU_PER_SEC  | BURSTABLE |
++------+-------------+-----------+
+| rg1  |         100 |  YES       |
++------+-------------+-----------+
 1 rows in set (1.30 sec)
 mysql> ALTER RESOURCE GROUP rg1
     ->  RU_PER_SEC = 200;
 Query OK, 0 rows affected (0.08 sec)
 mysql> SELECT * FROM information_schema.resource_groups WHERE NAME ='rg1';
-+------+-------------+-----------+-----------+
-| NAME | RU_PER_SEC  | RU_TOKENS | BURSTABLE |
-+------+-------------+-----------+-----------+
-| rg1  |         200 |    257158 | NO        |
-+------+-------------+-----------+-----------+
++------+-------------+-----------+
+| NAME | RU_PER_SEC  |  BURSTABLE |
++------+-------------+-----------+
+| rg1  |         200 | NO        |
++------+-------------+-----------+
 1 rows in set (1.30 sec)
 ```
 

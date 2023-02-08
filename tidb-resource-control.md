@@ -28,12 +28,12 @@ The introduction of the resource control feature is a milestone for TiDB. It can
 
 ## Scenarios for resource control
 
-    With this feature, you can:
+With this feature, you can:
 
-    - Combine multiple small and medium-sized applications from different systems into a single TiDB cluster. When the workload of an application grows larger, it does not affect the normal operation of other applications. When the system workload is low, busy applications can still be allocated the required system resources even if they exceed the set read and write quotas, so as to achieve the maximum utilization of resources.
-    - Choose to combine all test environments into a single TiDB cluster, or group the batch tasks that consume more resources into a single resource group. It can improve hardware utilization and reduce operating costs while ensuring that critical applications can always get the necessary resources.
+- Combine multiple small and medium-sized applications from different systems into a single TiDB cluster. When the workload of an application grows larger, it does not affect the normal operation of other applications. When the system workload is low, busy applications can still be allocated the required system resources even if they exceed the set read and write quotas, so as to achieve the maximum utilization of resources.
+- Choose to combine all test environments into a single TiDB cluster, or group the batch tasks that consume more resources into a single resource group. It can improve hardware utilization and reduce operating costs while ensuring that critical applications can always get the necessary resources.
 
-    In addition, the rational use of the resource control feature can reduce the number of clusters, ease the difficulty of operation and maintenance, and save management costs.
+In addition, the rational use of the resource control feature can reduce the number of clusters, ease the difficulty of operation and maintenance, and save management costs.
 
 In addition, the rational use of the resource control feature can reduce the number of clusters, ease the difficulty of operation and maintenance, and save management costs.
 
@@ -45,7 +45,7 @@ The following table shows the consumption of TiKV storage layer CPU and IO resou
 
 | Resource        | RU Weight        |
 |:----------------|:-----------------|
-| CPU             | 1 RU/millisecond |
+| CPU             | (1/3) RU/millisecond |
 | Read IO         | (1/64) RU/KB       |
 | Write IO        | 1 RU/KB          |
 | Basic overhead of a read request   | 0.25 RU  |
@@ -53,7 +53,7 @@ The following table shows the consumption of TiKV storage layer CPU and IO resou
 
 Based on the above table, assuming that the TiKV time consumed by a resource group is `c` milliseconds, `r1` requests that read `r2` KB data, and `w1` write requests that write `w2` KB data, then the formula for the total RUs consumed by the resource group is as follows:
 
-`c` + (`r1` \* 0.25 + `r2`/64) + (1.5 * `w1` + `w2`)
+`c`/3 + (`r1` \* 0.25 + `r2`/64) + (1.5 * `w1` + `w2`)
 
 ## Parameters for resource control
 
@@ -156,7 +156,7 @@ TiDB regularly collects runtime information about resource control and provides 
 
 ## Tool Compatibility
 
-The resource control feature is not compatible with data export/import and replication tools including BR, TiDB Lightning, and TiCDC.
+The resource control feature is not compatible with data export/import and replication tools including BR, TiDB Lightning, and TiCDC. These tools simply ignore the metadata information of the resource groups in the cluster.
 
 ## Limitations
 
