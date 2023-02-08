@@ -411,7 +411,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
     + Backup & Restore (BR)
 
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+        - Fix the issue that when restoring log backup, hot Regions cause the restore to fail [#37207](https://github.com/pingcap/tidb/issues/37207) @[Leavrth](https://github.com/Leavrth)
         - note [#issue](链接) @[贡献者 GitHub ID](链接)
 
     + TiCDC
