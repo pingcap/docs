@@ -156,7 +156,7 @@ SET @@global.tidb_ttl_job_schedule_window_end_time = '05:00 +0000';
 
 The preceding statement allows TTL jobs to be scheduled only between 1:00 and 5:00 UTC. By default, the time window is set to `00:00 +0000` to `23:59 +0000`, which allows the jobs to be scheduled at any time.
 
-## Monitoring metrics and charts
+## Observability
 
 <CustomContent platform="tidb-cloud">
 
@@ -173,6 +173,12 @@ TiDB collects runtime information about TTL periodically and provides visualized
 For details of the metrics, see the TTL section in [TiDB Monitoring Metrics](/grafana-tidb-dashboard.md).
 
 </CustomContent>
+
+At the same time, TiDB provides three tables to obtain more information about TTL jobs:
+
++ The `mysql.tidb_ttl_table_status` table contains information about the last execution and the current execution of TTL jobs for all TTL tables.
++ The `mysql.tidb_ttl_task` table contains information about the current execution of TTL subtasks. A TTL job is split into many subtasks, and this table records the subtasks that are currently being executed.
++ The `mysql.tidb_ttl_job_history` table contains information about the TTL jobs that have been executed. The record of TTL job history is kept for 90 days.
 
 ## Compatibility with TiDB tools
 
