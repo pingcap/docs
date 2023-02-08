@@ -112,9 +112,9 @@ Configuration items related to pd-server
 
 ### `server-memory-limit`
 
-+ The memory limit for a PD instance.
++ The memory limit for a PD instance. The `0` value means no memory limit.
 + Default value: `0.8`
-+ Minimum value: `0.01`
++ Minimum value: `0`
 + Maximum value: `0.99`
 
 ### `server-memory-limit-gc-trigger`
