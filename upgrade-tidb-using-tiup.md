@@ -140,7 +140,7 @@ Now, the offline mirror has been upgraded successfully. If an error occurs durin
 >
 > Before you upgrade the cluster to v6.5.0, make sure that the parameters you have modified in v4.0 are compatible in v6.5.0. For details, see [TiKV Configuration File](/tikv-configuration-file.md).
 
-### Step 5: Check the health status of the current cluster
+### Step 4: Check the health status of the current cluster
 
 To avoid the undefined behaviors or other issues during the upgrade, it is recommended to check the health status of Regions of the current cluster before the upgrade. To do that, you can use the `check` sub-command.
 
@@ -155,7 +155,7 @@ After the command is executed, the "Region status" check result will be output.
 + If the result is "All Regions are healthy", all Regions in the current cluster are healthy and you can continue the upgrade.
 + If the result is "Regions are not fully healthy: m miss-peer, n pending-peer" with the "Please fix unhealthy regions before other operations." prompt, some Regions in the current cluster are abnormal. You need to troubleshoot the anomalies until the check result becomes "All Regions are healthy". Then you can continue the upgrade.
 
-### Step 4: Check the DDL and backup status of the cluster
+### Step 5: Check the DDL and backup status of the cluster
 
 To avoid undefined behaviors or other unexpected problems during the upgrade, it is recommended to check the following items before the upgrade.
 
