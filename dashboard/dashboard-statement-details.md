@@ -12,7 +12,7 @@ Click any item in the list to enter the detail page of the SQL statement to view
 - The execution plan list: If a SQL statement has multiple execution plans, this list is displayed. Besides text information of execution plans, TiDB v6.2.0 introduces visual execution plans, through which you can learn each operator of a statement and detailed information more intuitively. You can select different execution plans, and the details of the selected plans are displayed below the list (area 2 in the following figure).
 - Execution detail of plans, which displays the detailed information of the selected execution plans. See [Execution plan in details](#execution-details-of-plans) (area 3 in the following figure).
 
-![Details](/media/dashboard/dashboard-statement-detail-v620.png)
+![Details](/media/dashboard/dashboard-statement-detail-v660.png)
 
 ## Fast plan binding
 
