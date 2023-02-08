@@ -1095,7 +1095,7 @@ To enable the [Witness replica](/glossary.md#witness) feature, run the following
 config set enable-witness true
 ```
 
-The scenarios for using a Witness replica are as follows:
+Witness replicas are applicable to the following scenarios:
 
 - Save costs in a highly reliable storage environment. For more details, see [Use Witness replicas to save costs](/use-witness-to-save-costs.md).
 - Quickly recover from any failure to improve system availability. For more details, see [Use Witness replicas to speed up failover](/use-witness-to-speed-up-failover.md).

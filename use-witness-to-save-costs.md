@@ -29,11 +29,11 @@ To enable Witness, use PD Control to run the `config set enable-witness true` co
 pd-ctl config set enable-witness true
 ```
 
-If the command returns `Success`, the Witness replica feature is enabled. If you have not configured Witness replicas using Placement Rules, no Witness replicas will be created by default. Only when a TiKV node is down, a Witness replica will be added immediately and will be promoted to a normal Voter by the system later.
+If the command returns `Success`, the Witness replica feature is enabled. If you have not configured Witness replicas using Placement Rules, no Witness replicas will be created by default. Only when a TiKV node is down, a Witness replica will be added immediately and will be promoted to a normal Voter later.
 
 ### Step 2: Configure Witness replicas
 
-As an example of three replicas, modify `rule.json` to the configuration in [Scenario 6: Configure Witness replicas in a highly reliable storage environment](/configure-placement-rules.md#scenario-6-configure-witness-replicas-in-a-highly-reliable-storage-environment).
+Assume that three replicas are present. Modify `rule.json` to the configuration in [Scenario 6: Configure Witness replicas in a highly reliable storage environment](/configure-placement-rules.md#scenario-6-configure-witness-replicas-in-a-highly-reliable-storage-environment).
 
 After editing the file, use the following command to save the configuration to the PD server:
 
@@ -43,6 +43,6 @@ pd-ctl config placement-rules save --in=rule.json
 
 ## Notes
 
-- It is recommended to configure Witness replicas only in a highly reliable storage environment, such as using Amazon EBS with 99.8%~99.9% durability or Persistent Disk of GCP with 99.99%~99.999% durability to store TiKV nodes.
+- It is recommended to configure Witness replicas only in a highly reliable storage environment, such as Amazon EBS with 99.8%~99.9% durability and Persistent Disk of GCP with 99.99%~99.999% durability to store TiKV nodes.
 - Since a Witness replica does not apply Raft logs, it cannot provide read and write services. When the Leader is down and the remaining Voters do not have the latest Raft logs, Raft elects the Witness replica as a Leader. After the Witness replica is elected, it sends Raft logs to Voters and transfers the leader to a Voter. If the Witness replica cannot transfer the leader in time, the application might receive an `IsWitness` error after the Backoff timeout.
 - When there is a pending Voter in the system, to prevent the Witness replica from accumulating too many Raft logs and occupying the entire disk space, the system will promote the Witness replica to a normal Voter.

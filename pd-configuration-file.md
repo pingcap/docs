@@ -224,7 +224,7 @@ Configuration items related to scheduling
 
 ### `switch-witness-interval` <span class="version-mark">New in v6.6.0</span>
 
-+ Controls the time interval between the switch to [Witness](/glossary.md#witness) and the switch to non-Witness operations on the same Region. That means a newly switched to non-Witness Region will not be switched to Witness for a while.
++ Controls the time interval in switching between [Witness](/glossary.md#witness) and non-Witness operations on the same Region. That means a Region newly switched to non-Witness cannot be switched to Witness for a while.
 + Default value: `1h`
 
 ### `max-snapshot-count`
@@ -292,7 +292,7 @@ Configuration items related to scheduling
 ### `enable-witness` <span class="version-mark">New in v6.6.0</span>
 
 + Controls whether to enable the Witness replica feature.
-+ The scenarios for using a Witness replica are as follows:
++ Witness replicas are applicable to the following scenarios:
     - Save costs in a highly reliable storage environment. For more details, see [Use Witness replicas to save costs](/use-witness-to-save-costs.md).
     - Quickly recover from any failure to improve system availability. For more details, see [Use Witness replicas to speed up failover](/use-witness-to-speed-up-failover.md).
 + Default value: `false`

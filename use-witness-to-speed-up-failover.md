@@ -27,4 +27,4 @@ To enable Witness, use PD Control to run the `config set enable-witness true` co
 pd-ctl config set enable-witness true
 ```
 
-If the command returns `Success`, the Witness replica feature is enabled. If you have not configured Witness replicas according to [Use Witness replicas to save costs](/use-witness-to-save-costs.md), no Witness replicas will be created by default. Only when a TiKV node is down, a Witness replica will be added immediately and will be promoted to a normal Voter by the system later.
+If the command returns `Success`, the Witness replica feature is enabled. If you have not configured Witness replicas according to [Use Witness replicas to save costs](/use-witness-to-save-costs.md), no Witness replicas will be created by default. Only when a TiKV node is down, a Witness replica will be added immediately and will be promoted to a normal Voter later.
