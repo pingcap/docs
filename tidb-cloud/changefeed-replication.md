@@ -117,11 +117,11 @@ To monitor lag concerning the RPO, do the following:
 
 ## Why the "cloud_cdc_admin" account is required
 
-When you use TiCDC to replicate data from the primary cluster to the secondary cluster, the secondary cluster will automatically create a database account named "cloud_cdc_admin" for TiCDC during the initialization of the secondary cluster. This account has DDL, DML, and RESTRICTED_REPLICA_WRITER_ADMIN permissions for the secondary cluster, granted through the "cloud_cdc_role" built-in role.
+When you use TiCDC to replicate data from the primary cluster to the secondary cluster, the secondary cluster will automatically create a database account named "cloud_cdc_admin" for TiCDC during it initialization. This account has been granted DDL, DML, and RESTRICTED_REPLICA_WRITER_ADMIN permissions through the "cloud_cdc_role" role, allowing it to perform necessary data replication tasks.
 
-This account is necessary because the secondary cluster must be set to ReadOnly mode before data replication. In this mode, regular users cannot write data. TiCDC needs to use the "cloud_cdc_admin" account to replicate data from the primary cluster to the secondary cluster. This prevents data inconsistency issues between the primary and secondary clusters in case users write data during data replication.
+This account is necessary because the secondary cluster must be set to ReadOnly mode before data replication. In this mode, regular users cannot write data. TiCDC needs to use the "cloud_cdc_admin" account to replicate data. This prevents data inconsistency issues between the primary and secondary clusters in case users write data during data replication.
 
 > **Note:**
 >
 > * This account is visible to users in the secondary cluster. Do not modify or delete this account, as this might cause data replication disruptions in the primary and secondary clusters.
-> * This account is only used by the TiCDC service when you replicate data from the primary to the secondary clusters. It is automatically deleted when the primary and secondary clusters are detached.
+> * The purpose of this account is limited to data replication and is automatically deleted when the primary and secondary clusters are detached.
