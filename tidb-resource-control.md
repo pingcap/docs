@@ -35,8 +35,6 @@ With this feature, you can:
 
 In addition, the rational use of the resource control feature can reduce the number of clusters, ease the difficulty of operation and maintenance, and save management costs.
 
-In addition, the rational use of the resource control feature can reduce the number of clusters, ease the difficulty of operation and maintenance, and save management costs.
-
 ## What is Request Unit (RU)
 
 Request Unit (RU) is TiDB's unified abstraction unit for system resources, which currently includes CPU, IOPS and IO bandwidth metrics. The consumption of these three metrics is represented by RU according to a certain ratio.
