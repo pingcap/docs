@@ -21,7 +21,7 @@ You can enable the console audit log function.
 2. Click **Console Audit Log**. The Console Audit Log management page is displayed by default.
 3. Click **Enable console audit log**. Or click **Setting** in the upper-right corner and enable Console audit log in the pop-up window
 
-## Disable console audit log
+## Disable console audit logging
 
 You can disable the console audit log function.
 
