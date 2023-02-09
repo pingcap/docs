@@ -15,7 +15,7 @@ TiDB Cloud provides the console audit logging feature to help you track various 
 
 ## Enable console audit logging
 
-You can enable the console audit log function.
+To enable console audit logging, take the following steps:
 
 1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
 2. Click **Console Audit Log**. The Console Audit Log management page is displayed by default.
