@@ -164,5 +164,5 @@ For the console audit log, each event record needs to be clear and complete to e
 | cluster_id | uint64 | Cluster ID to which the event belongs |
 | cluster_name | string | Cluster name to which the event belongs |
 | trace_id | string | Trace ID of the request initiated by the operator |
-| result | enum | Event result: success, failure |
+| result | enum | Event result: `success` or `failure` |
 | details | json | Detailed description of the event |
