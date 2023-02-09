@@ -17,7 +17,7 @@ summary: Learn about the key features and usage scenarios of TiDB.
 
 The following video introduces key features of TiDB.
 
-<iframe width="600" height="450" src="https://www.youtube.com/embed/aWBNNPm21zg" title="Why TiDB?" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" enablejsapi="true" allowfullscreen></iframe>
+<iframe width="600" height="450" src="https://www.youtube.com/embed/aWBNNPm21zg?enablejsapi=1" title="Why TiDB?" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Key features
 
