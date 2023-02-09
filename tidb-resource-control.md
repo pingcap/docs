@@ -51,7 +51,7 @@ The following table shows the consumption of TiKV storage layer CPU and IO resou
 | Basic overhead of a read request   | 0.25 RU  |
 | Basic overhead of a write request  | 1.5 RU   |
 
-Based on the above table, assuming that the TiKV time consumed by a resource group is `c` milliseconds, `r1` requests that read `r2` KB data, `w1` write requests that write `w2` KB data, and the number of non-witness TiKV nodes in the cluster is `n` , then the formula for the total RUs consumed by the resource group is as follows:
+Based on the above table, assuming that the TiKV time consumed by a resource group is `c` milliseconds, `r1` requests that read `r2` KB data, `w1` write requests that write `w2` KB data, and the number of non-witness TiKV nodes in the cluster is `n`, then the formula for the total RUs consumed by the resource group is as follows:
 
 `c`\* 1/3 + (`r1` \* 0.25 + `r2` \* 1/64) + (1.5 \* `w1` + `w2` \* 1 \* `n`)
 
