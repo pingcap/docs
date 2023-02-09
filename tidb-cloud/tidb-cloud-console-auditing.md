@@ -41,7 +41,7 @@ To export the console audit logs of your organization, take the following step:
 
 1. In the upper-right corner of the [TiDB Cloud console](https://tidbcloud.com/), click <MDSvgIcon name="icon-top-organization" /> **Organization** > **Console Audit Logging**.
 3. If you need to export a specific part of console audit logs, you can filter through various conditions. Otherwise, skip this step.
-4. Click **Export** tab. You can choose to download the selected console audit log information in JSON or CSV format.
+4. Click **Export** and select the desired export format in JSON or CSV. 
 
 ## Console audit log storage policy
 
