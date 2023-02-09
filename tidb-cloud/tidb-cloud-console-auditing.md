@@ -95,7 +95,7 @@ The console audit logs can record various user activities on the TiDB Cloud cons
 | DeleteAWSVPCPeering | Delete an AWS VPC Peering |
 | CreateGCPVPCPeering | Create a GCP VPC Peering |
 | DeleteGCPVPCPeering | Delete a GCP VPC Peering |
-| CreateAWSPrivateEndPoint | Create AWS private endpoint |
+| CreateAWSPrivateEndPoint | Create an AWS private endpoint |
 | EditAWSPrivateEndPoint | Edit AWS private endpoint |
 | DeleteAWSPrivateEndPoint | Delete AWS private endpoint |
 | SubscribeAlerts | Subscribe alerts |
