@@ -33,9 +33,7 @@ You can only view the console audit log information of your organization.
 
 1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
 2. Click **Console Audit Log**. The Console Audit Log management page is displayed by default. You can view the latest console audit log information of your organization.
-3. Click **Type** tab. You can filter the console audit log information you need to view according to the event type.
-4. Click **Result** tab. You can filter the console audit log information you need to view according to the event result.
-5. Click **All time** tab. You can filter the console audit log information you need to view according to the time period when the event occurred.
+2. Filter the event type, operation status, and time range according to your need. 
 6. Click **Advanced filter**  tab. You can filter the console audit log information you need to view according to other fields.
 
 ## Export console audit logs
