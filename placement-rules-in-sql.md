@@ -135,7 +135,7 @@ In addition to the placement options above, you can also use the advance configu
 | `FOLLOWER_CONSTRAINTS`     | A list of constraints that only apply to followers.                                   |
 | `LEARNER_CONSTRAINTS`      | A list of constraints that only apply to learners.                                     |
 | `LEARNERS`                 | The number of learners. |
-| `SURVIVAL_PREFERENCE`      | The replica placement priority according to the label of the disaster tolerance level. For example, `SURVIVAL_PREFERENCE="[region, zone, host]"`. |
+| `SURVIVAL_PREFERENCE`      | Specifies the replica placement priority according to the disaster tolerance level of the labels. For example, `SURVIVAL_PREFERENCE="[region, zone, host]"`. |
 
 ## Examples
 
@@ -251,9 +251,9 @@ In dictionary format, constraints also indicate a number of instances that apply
 
 ### Survival Preferences
 
-For some important data, you might want to have multiple replicas across availability zones to get high disaster survivability, such as survivability at the cloud region level. To achieve that, you can set `SURVIVAL_PREFERENCES` for your data.
+For some important data, you might want to store multiple replicas across availability zones to get high disaster survivability, such as survivability at the cloud region level. When you create or modify a placement policy, you can use `SURVIVAL_PREFERENCES` to set the preferred survivability for your data.
 
-For example, you can set the `SURVIVAL_PREFERENCES` as follows to require the data to meet the configured survival preferences as much as possible:
+For example, when creating a placement policy, you can set the `SURVIVAL_PREFERENCES` as follows to require the data to meet the configured survival preferences as much as possible:
 
 ``` sql
 CREATE PLACEMENT POLICY multiregion
@@ -262,7 +262,7 @@ CREATE PLACEMENT POLICY multiregion
     SURVIVAL_PREFERENCES="[region, zone]";
 ```
 
-Then, for tables with this policy, data will first meet the survival objectives of data isolation across regions, and then ensure the survival objectives of data isolation across availability zones.
+Then, for tables attached with this policy, data will first meet the survival objectives of data isolation across regions, and then meet the survival objectives of data isolation across availability zones.
 
 > **Note:**
 >
