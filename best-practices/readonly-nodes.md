@@ -101,7 +101,7 @@ tikv_servers:
 
 > **Note:**
 >
-> - If you perform the preceding operations on a cluster with a large number of data, the entire cluster might need some time to completely replicate data to read-only nodes. During this period, the read-only nodes might not be able to provide services.
+> - If you perform the preceding operations on a cluster with a large dataset, the entire cluster might need some time to completely replicate data to read-only nodes. During this period, the read-only nodes might not be able to provide services.
 > - Because of the special implementation of backup, the learner number of each label cannot exceed 1. Otherwise, it will generate duplicate data during backup.
 
 ### 3. Use Follower Read to read data from read-only nodes
@@ -124,8 +124,8 @@ spark.tispark.replica_read learner
 
 #### 3.3 Use Follower Read when backing up cluster data
 
-To read data from read-only nodes when backing up cluster data, you can specify the `--backup-replica-read-label` option in the br command line. Note that when running the following command in shell, you need to use single quotes to wrap the label to prevent `$` from being parsed.
+To read data from read-only nodes when backing up cluster data, you can specify the `--replica-read-label` option in the br command line. Note that when running the following command in shell, you need to use single quotes to wrap the label to prevent `$` from being parsed.
 
 ```shell
-br backup full ... --backup-replica-read-label '$mode:readonly'
+br backup full ... --replica-read-label '$mode:readonly'
 ```
