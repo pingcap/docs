@@ -119,7 +119,7 @@ The console audit logs can record various user activities on the TiDB Cloud cons
 | SetAutoBackup | Set the automatic backup mechanism of TiDB cluster |
 | DoManualBackup | Do manual backup of TiDB cluster |
 | DeleteBackupTask | Delete backup task |
-| DeleteBackup | delete backup file |
+| DeleteBackup | Delete a backup file |
 | RestoreFromBackup | Restore to TiDB cluster based on the backup file |
 | RestoreFromTrash | Restore to TiDB cluster based on the backup files in the trash |
 | ImportDataFromAWS | Import data from AWS |
