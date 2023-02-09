@@ -130,8 +130,8 @@ The console audit logs can record various user activities on the TiDB Cloud cons
 | DeleteMigrationJob | Delete a migration job |
 | ShowDiagnose | Show diagnosis information |
 | DBAuditLogAction | Set the activity of database audit logging |
-| AddDBAuditFilter | Add database audit log filter |
-| DeleteDBAuditFilter | Delete database audit log filter |
+| AddDBAuditFilter | Add a database audit log filter |
+| DeleteDBAuditFilter | Delete a database audit log filter |
 | EditProject | Edit a project's information |
 | DeleteProject | Delete a project |
 | BindSupportPlan | Bind support plan |
