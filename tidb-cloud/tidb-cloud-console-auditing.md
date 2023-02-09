@@ -55,7 +55,7 @@ The storage time is 90 days, after which the console audit logs will be automati
 
 ## Console audit event types
 
-Various user activities on the TiDB Cloud console are recorded in the console audit log. The console audit log covers the following event types:
+The console audit logs can record various user activities on the TiDB Cloud console through the following event types:
 
 | Console audit event type | Description |
 |---|---|
