@@ -232,6 +232,10 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
     For more information, see the [SQL](#sql) section in v6.6.0 Release Notes and [documentation](/sql-statements/sql-statement-foreign-key.md).
 
+* Support the MySQL-compatible multi-valued index [#39592](https://github.com/pingcap/tidb/issues/39592) @[xiongjiwei](https://github.com/xiongjiwei) @[qw4990](https://github.com/qw4990) **tw@TomShawn**
+
+    For more information, see the [SQL](#sql) section in v6.6.0 Release Notes and [documentation](/sql-statements/sql-statement-create-index.md#multi-valued-index).
+
 ### Data migration
 
 * TiDB Data Migration (DM) integrates with TiDB Lightning's physical import mode for up to a 10x performance boost for full migration (experimental) @[lance6716](https://github.com/lance6716) **tw@ran-huang**
