@@ -22,7 +22,7 @@ To enable console audit logging, take the following steps:
 
 ## Disable console audit logging
 
-You can disable the console audit log function.
+To disable console audit logging, take the following steps:
 
 1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
 2. Click **Console Audit Log**. The Console Audit Log management page is displayed by default.
