@@ -116,8 +116,8 @@ The console audit logs can record various user activities on the TiDB Cloud cons
 | SetRootPassword | Set the root password of TiDB cluster |
 | UpdateIPAccessList | Update the IP access list of TiDB cluster |
 | DeleteAccessList | Delete the IP access list of TiDB cluster |
-| SetAutoBackup | Set the automatic backup mechanism of TiDB cluster |
-| DoManualBackup | Do manual backup of TiDB cluster |
+| SetAutoBackup | Set the automatic backup mechanism of a TiDB cluster |
+| DoManualBackup | Perform a manual backup of TiDB cluster |
 | DeleteBackupTask | Delete a backup task |
 | DeleteBackup | Delete a backup file |
 | RestoreFromBackup | Restore to a TiDB cluster based on the backup files |
