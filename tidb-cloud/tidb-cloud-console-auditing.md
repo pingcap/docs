@@ -124,10 +124,10 @@ The console audit logs can record various user activities on the TiDB Cloud cons
 | RestoreFromTrash | Restore to a TiDB cluster based on the backup files in the trash |
 | ImportDataFromAWS | Import data from AWS |
 | ImportDataFromGCP | Import data from GCP |
-| CreateMigrationJob | Create migration job |
-| SuspendMigrationJob | Suspend migration job |
-| ResumeMigrationJob | Resume migration job |
-| DeleteMigrationJob | Delete migration job |
+| CreateMigrationJob | Create a migration job |
+| SuspendMigrationJob | Suspend a migration job |
+| ResumeMigrationJob | Resume a migration job |
+| DeleteMigrationJob | Delete a migration job |
 | ShowDiagnose | Show diagnose information |
 | DBAuditLogAction | Set the activity of database audit log |
 | AddDBAuditFilter | Add database audit log filter |
