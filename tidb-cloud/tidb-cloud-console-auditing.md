@@ -62,7 +62,7 @@ The console audit logs can record various user activities on the TiDB Cloud cons
 | CreateOrganization | Create an organization |
 | LoginOrganization | User logs into organization |
 | SwitchOrganization | Switch from the current organization to another organization |
-| LogoutOrganization | User logs out from organization |
+| LogoutOrganization | Log out from an organization |
 | InviteUserToOrganization | Invite a user to join the organization |
 | DeleteInvitationToOrganization | Delete a user's invitation to join the organization |
 | ResendInvitationToOrganization | Resend the invitation to join the organization for a user |
