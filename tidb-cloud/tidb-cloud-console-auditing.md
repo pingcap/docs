@@ -138,7 +138,7 @@ The console audit logs can record various user activities on the TiDB Cloud cons
 | CreatePrivateEndpointService | Create private endpoint service |
 | DeletePrivateEndpointService | Delete private endpoint service |
 
-## Console audit log field description
+## Console audit log fields
 
 For the console audit log, each event record needs to be clear and complete to ensure that the information is sufficient to track user activities. TiDB Cloud provides the following fields:
 
