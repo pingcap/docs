@@ -83,7 +83,7 @@ The console audit logs can record various user activities on the TiDB Cloud cons
 | EditBillingProfile | Edit billing profile information |
 | ContractAction | Organize contract-related activities |
 | EnableConsoleAuditLog | Enable console audit logging |
-| ShowConsoleAuditLog | Show console audit log |
+| ShowConsoleAuditLog | Show console audit logs |
 | InviteUserToProject | Invite a user to join the project |
 | DeleteInvitationToProject | Delete a user's invitation to join the project |
 | ResendInvitationToProject | Resend the invitation to join the project for a user |
