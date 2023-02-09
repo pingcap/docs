@@ -111,8 +111,8 @@ The console audit logs can record various user activities on the TiDB Cloud cons
 | ScaleCluster | Scale a cluster |
 | DownloadTiDBClusterCA | Download TiDB cluster CA certificate |
 | OpenWebSQLConsole | Connect to a TiDB cluster through Web SQL |
-| SetRootPassword | Set the root password of TiDB cluster |
-| UpdateIPAccessList | Update the IP access list of TiDB cluster |
+| SetRootPassword | Set the root password of a TiDB cluster |
+| UpdateIPAccessList | Update the IP access list of a TiDB cluster |
 | DeleteAccessList | Delete the IP access list of TiDB cluster |
 | SetAutoBackup | Set the automatic backup mechanism of a TiDB cluster |
 | DoManualBackup | Perform a manual backup of TiDB cluster |
