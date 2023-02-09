@@ -104,8 +104,8 @@ The console audit logs can record various user activities on the TiDB Cloud cons
 | DeleteDatadogIntegration | Delete datadog integration |
 | CreateVercelIntegration | Create vercel integration |
 | DeleteVercelIntegration | Delete vercel integration |
-| CreatePrometheusIntegration | Create prometheus integration |
-| DeletePrometheusIntegration | Delete prometheus integration |
+| CreatePrometheusIntegration | Create Prometheus integration |
+| DeletePrometheusIntegration | Delete Prometheus integration |
 | CreateCluster | Create a cluster |
 | DeleteCluster | Delete a cluster |
 | PauseCluster | Pause a cluster |
