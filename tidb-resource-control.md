@@ -53,7 +53,7 @@ The following table shows the consumption of TiKV storage layer CPU and IO resou
 
 Based on the above table, assuming that the TiKV time consumed by a resource group is `c` milliseconds, `r1` requests that read `r2` KB data, and `w1` write requests that write `w2` KB data, then the formula for the total RUs consumed by the resource group is as follows:
 
-`c`/3 + (`r1` \* 0.25 + `r2`/64) + (1.5 * `w1` + `w2`)
+`c`\* 1/3 + (`r1` \* 0.25 + `r2` \* 1/64) + (1.5 \* `w1` + `w2` \* 1 \* `n`)
 
 ## Parameters for resource control
 
@@ -75,7 +75,7 @@ The results of the combinations of these two parameters are shown in the followi
 | `resource-control.enabled`  | `tidb_enable_resource_control`= ON   | `tidb_enable_resource_control`= OFF  |
 |:----------------------------|:-------------------------------------|:-------------------------------------|
 | `resource-control.enabled`= true  |  Flow control and scheduling (recommended) | Invalid combination      |  
-| `resource-control.enabled`= false |  Only flow control                         | The feature is disabled. |
+| `resource-control.enabled`= false |  Only flow control (not recommended)                 | The feature is disabled. |
 
 ## How to use resource control
 
