@@ -475,6 +475,7 @@
   - [Dumpling](/dumpling-overview.md)
   - [Table Filter](/table-filter.md)
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
+  - [Save and Restore the On-Site Information of a Cluster](/sql-plan-replayer.md)
   - [Serverless Tier Limitations](/tidb-cloud/serverless-tier-limitations.md)
 - FAQs
   - [TiDB Cloud FAQs](/tidb-cloud/tidb-cloud-faq.md)
