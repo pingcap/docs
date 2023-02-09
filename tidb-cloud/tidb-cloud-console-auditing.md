@@ -72,7 +72,7 @@ The console audit logs can record various user activities on the TiDB Cloud cons
 | CreateAPIKey | Create an API Key |
 | EditAPIKey | Edit an API Key |
 | DeleteAPIKey | Delete an API Key |
-| UpdateTimezone | Update your organization's time zone |
+| UpdateTimezone | Update the time zone of your organization |
 | ShowBill | Show organization bill  |
 | DownloadBill | Download organization bill |
 | ShowCredits | Show organization credits |
