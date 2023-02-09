@@ -110,7 +110,7 @@ The console audit logs can record various user activities on the TiDB Cloud cons
 | ResumeCluster | Resume a cluster |
 | ScaleCluster | Scale a cluster |
 | DownloadTiDBClusterCA | Download TiDB cluster CA certificate |
-| OpenWebSQLConsole | Connect to TiDB Cluster through Web SQL |
+| OpenWebSQLConsole | Connect to a TiDB cluster through Web SQL |
 | SetRootPassword | Set the root password of TiDB cluster |
 | UpdateIPAccessList | Update the IP access list of TiDB cluster |
 | DeleteAccessList | Delete the IP access list of TiDB cluster |
