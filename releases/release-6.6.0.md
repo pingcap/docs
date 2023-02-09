@@ -133,12 +133,6 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
 ### Performance
 
-* Use a Witness replica to save costs in a highly reliable storage environment [#12876](https://github.com/tikv/tikv/issues/12876) @[Connor1996](https://github.com/Connor1996) @[ethercflow](https://github.com/ethercflow) **tw@Oreoxmt**
-
-    In cloud environments, when you use the Amazon Elastic Block Store or Persistent Disk of Google Cloud Platform as the storage of each TiKV node, the durability is higher than that of physical disks. In this case, using three Raft replicas with TiKV is possible but not necessary. To reduce costs, TiKV introduces the Witness feature, which is the "2 Replicas With 1 Log Only" mechanism. The 1 Log Only replica only stores Raft logs and does not apply data, and still ensures data consistency through the Raft protocol. Compared with the standard three replica architecture, Witness can save storage resources and CPU usage.
-
-    For more information, see [documentation](/use-witness-to-save-costs.md).
-
 * TiFlash supports the Stale Read feature [#4483](https://github.com/pingcap/tiflash/issues/4483) @[hehechen](https://github.com/hehechen) **tw@qiancai**
 
    The Stale Read feature has been generally available (GA) since v5.1.1, which allows you to read historical data at a specific timestamp or within a specified time range. Stale read can reduce read latency and improve query performance by reading data from local TiKV replicas directly. Before v6.6.0, TiFlash does not support Stale Read. Even if a table has TiFlash replicas, Stale Read can only read its TiKV replicas.
@@ -200,19 +194,6 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
     In v6.6, you need to enable both TiDB's global variable [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660) and the TiKV configuration item [`resource-control.enabled`](/tikv-configuration-file.md#resource_control) to enable resource control. Currently, the supported quota method is based on "[Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru)". RU is TiDB's unified abstraction unit for system resources such as CPU and IO.
 
     For more information, see [documentation](/tidb-resource-control.md).
-
-* Use a temporary Witness replica to speed up failover [#12876](https://github.com/tikv/tikv/issues/12876) @[Connor1996](https://github.com/Connor1996) @[ethercflow](https://github.com/ethercflow) **tw@Oreoxmt**
-
-    The Witness feature can be used to quickly recover from any failure to improve system availability and data durability. For example, in a Raft group of three replicas, if one replica fails, the following issues might occur:
-
-    - The system is fragile although it meets the majority requirement.
-    - It takes a long time to recover a new member because the process requires copying the snapshot first and then applying the latest logs.
-    - It takes more time especially when the Region snapshot is large.
-    - The process of copying replicas might cause more pressure on unhealthy Group members.
-
-    Therefore, adding a Witness replica can quickly remove the unhealthy node, reduce the risk of the Raft group being unavailable due to another node failure when recovering a new member (the Learner replica cannot participate in the election and submission), and ensure the security of logs during recovery.
-
-    For more information, see [documentation](/use-witness-to-speed-up-failover.md).
 
 * Support configuring read-only storage nodes for resource-consuming tasks @[v01dstar](https://github.com/v01dstar) **tw@Oreoxmt**
 
@@ -324,9 +305,6 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 | PD  |  [`pd-server.server-memory-limit-gc-trigger`](/pd-configuration-file.md#server-memory-limit-gc-trigger-new-in-v660) | New | The threshold ratio at which PD tries to trigger GC. The default value is `0.7`. |
 | PD  | [`pd-server.enable-gogc-tuner`](/pd-configuration-file.md#enable-gogc-tuner-new-in-v660) | New | Controls whether to enable the GOGC tuner, which is disabled by default. |
 | PD  | [`pd-server.gc-tuner-threshold`](/pd-configuration-file.md#gc-tuner-threshold-new-in-v660) | New | The maximum memory threshold ratio for tuning GOGC. The default value is `0.6`. |
-| PD  |  [`schedule.enable-witness`](/pd-configuration-file.md#enable-witness-new-in-v660) | New | Controls whether to enable the Witness replica feature, which is disabled by default.  |
-| PD   | [`schedule.switch-witness-interval`](/pd-configuration-file.md#switch-witness-interval-new-in-v660)    |   New       | Controls the time interval in switching between [Witness](/glossary.md#witness) and non-Witness operations on the same Region. That means a Region newly switched to non-Witness cannot be switched to Witness for a while. The default value is  1 hour.         |
-| PD   | [`schedule.witness-schedule-limit`](/pd-configuration-file.md#witness-schedule-limit-new-in-v660)    |   New       | Controls the concurrency of Witness scheduling tasks, which defaults to `4`.         |
 | TiCDC | [`scheduler.region-per-span`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameter) | New | Splits a table into multiple replication ranges based on the number of Regions, and these ranges can be replicated by multiple TiCDC nodes. The default value is `50000`. |
 | DM | Modified | [`import-mode`](/dm/task-configuration-file-full.md) | The possible values of this configuration item are changed from `"sql"` and `"loader"` to `"logical"` and `"physical"`. The default value is `"logical"`, which means using TiDB Lightning's logical import mode to import data. |
 | DM | Deleted | `on-duplicate` | This configuration item controls the methods to resolve conflicts during the full import phase. In v6.6.0, new configuration items `on-duplicate-logical` and `on-duplicate-physical` are introduced to replace `on-duplicate`. |
