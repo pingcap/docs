@@ -152,7 +152,7 @@ For the console audit log, each event record needs to be clear and complete to e
 | operator_id | uint64 | Operator ID |
 | operator_name | string | Operator name |
 | operator_ip | string | Operator's IP address |
-| operator_login_method | enum | Operator's login method: google, github, email, api_key |
+| operator_login_method | enum | Operator's login method: `google`, `github`, `email`, or `api_key` |
 | org_id | uint64 | Organization ID to which the event belongs |
 | org_name | string | Organization name to which the event belongs |
 | project_id | uint64 | Project ID to which the event belongs |
