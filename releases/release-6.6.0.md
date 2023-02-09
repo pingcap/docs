@@ -14,6 +14,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
 - MySQL 8.0 兼容的多值索引 (Multi-Valued Index) (实验特性)
 - 基于资源组的资源管控 (实验特性)
+- Support the MySQL-compatible foreign key constraints
 - 悲观锁队列的稳定唤醒模型
 - 数据请求的批量聚合
 
@@ -27,7 +28,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
 * Support the MySQL-compatible foreign key constraints [#18209](https://github.com/pingcap/tidb/issues/18209) @[crazycs520](https://github.com/crazycs520) **tw@Oreoxmt**
 
-    TiDB v6.6.0 introduces the foreign key constraints feature, which is compatible with MySQL. This feature supports referencing within a table or between tables, constraints validation, and cascade operations. This feature helps to maintain data consistency, improve data quality, and facilitate data modeling.
+    TiDB v6.6.0 introduces the foreign key constraints feature, which is compatible with MySQL. This feature supports referencing within a table or between tables, constraints validation, and cascade operations. This feature helps to migrate applications to TiDB, maintain data consistency, improve data quality, and facilitate data modeling.
 
     For more information, see [documentation](/foreign-key.md).
 
