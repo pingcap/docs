@@ -249,7 +249,7 @@ In dictionary format, constraints also indicate a number of instances that apply
 >
 > Dictionary and list formats are based on the YAML parser, but the YAML syntax might be incorrectly parsed. For example, `"{+disk=ssd:1,+disk=nvme:2}"` is incorrectly parsed as `'{"+disk=ssd:1": null, "+disk=nvme:1": null}'`. But `"{+disk=ssd: 1,+disk=nvme: 1}"` is correctly parsed as `'{"+disk=ssd": 1, "+disk=nvme": 1}'`.
 
-### Survival Preferences
+### Survival preferences
 
 For some important data, you might want to store multiple replicas across availability zones to get high disaster survivability, such as survivability at the cloud region level. When you create or modify a placement policy, you can use `SURVIVAL_PREFERENCES` to set the preferred survivability for your data.
 
