@@ -203,7 +203,14 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
 * Use a temporary Witness replica to speed up failover [#12876](https://github.com/tikv/tikv/issues/12876) @[Connor1996](https://github.com/Connor1996) @[ethercflow](https://github.com/ethercflow) **tw@Oreoxmt**
 
-    The Witness feature can be used to quickly recover from any failure to improve system availability and data durability. For example, in a Raft group of three replicas, if one replica fails, the system is fragile although it meets the majority requirement. It takes a long time to recover a new member (the process requires copying the snapshot first and then applying the latest logs), especially when the Region snapshot is large. In addition, the process of copying replicas might cause more pressure on unhealthy Group members. Therefore, adding a Witness replica can quickly remove the unhealthy node, reduce the risk of the Raft group being unavailable due to another node failure when recovering a new member (the Learner replica cannot participate in the election and submission), and ensure the security of logs during recovery.
+    The Witness feature can be used to quickly recover from any failure to improve system availability and data durability. For example, in a Raft group of three replicas, if one replica fails, the following issues might occur:
+
+    - The system is fragile although it meets the majority requirement.
+    - It takes a long time to recover a new member because the process requires copying the snapshot first and then applying the latest logs.
+    - It takes more time especially when the Region snapshot is large.
+    - The process of copying replicas might cause more pressure on unhealthy Group members.
+
+    Therefore, adding a Witness replica can quickly remove the unhealthy node, reduce the risk of the Raft group being unavailable due to another node failure when recovering a new member (the Learner replica cannot participate in the election and submission), and ensure the security of logs during recovery.
 
     For more information, see [documentation](/use-witness-to-speed-up-failover.md).
 
