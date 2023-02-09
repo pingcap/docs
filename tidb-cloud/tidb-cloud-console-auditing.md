@@ -140,7 +140,7 @@ The console audit logs can record various user activities on the TiDB Cloud cons
 
 ## Console audit log fields
 
-For the console audit log, each event record needs to be clear and complete to ensure that the information is sufficient to track user activities. TiDB Cloud provides the following fields:
+To help you track user activities, TiDB Cloud provides the following fields for each console audit log:
 
 | Field name | Data type | Description |
 |---|---|---|
