@@ -196,7 +196,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
     In addition, the rational use of the resource control feature can reduce the number of clusters, ease the difficulty of operation and maintenance, and save management costs.
 
-    In v6.6, you need to enable both TiDB's global variable [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660) and the TiKV configuration item [`resource_control.enabled`](/tikv-configuration-file.md#resource_control) to enable resource control. Currently, the supported quota method is based on "[Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru)". RU is TiDB's unified abstraction unit for system resources such as CPU and IO.
+    In v6.6, you need to enable both TiDB's global variable [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660) and the TiKV configuration item [`resource-control.enabled`](/tikv-configuration-file.md#resource_control) to enable resource control. Currently, the supported quota method is based on "[Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru)". RU is TiDB's unified abstraction unit for system resources such as CPU and IO.
 
     For more information, see [documentation](/tidb-resource-control.md).
 
@@ -234,7 +234,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
 ### Data migration
 
-* TiDB Data Migration (DM) integrates with TiDB Lightning's physical import mode for up to a 10x performance boost for full migration @[lance6716](https://github.com/lance6716) **tw@ran-huang**
+* TiDB Data Migration (DM) integrates with TiDB Lightning's physical import mode for up to a 10x performance boost for full migration (experimental) @[lance6716](https://github.com/lance6716) **tw@ran-huang**
 
     In v6.6.0, DM's full migration capability integrates with TiDB Lightning's physical import mode, which enables DM to improve the performance of full data migration by up to 10 times, greatly reducing the migration time in large data volume scenarios.
 
@@ -262,7 +262,6 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
 | Variable name  | Change type    | Description |
 |--------|------------------------------|------|
-|--------|------------------------------|------|
 | `tidb_enable_amend_pessimistic_txn` | Deleted  | Starting from v6.5.0, this variable is deprecated. Starting from v6.6.0, this feature and the `AMEND TRANSACTION` feature are deleted. TiDB will use the [meta lock](/metadata-lock.md) mechanism to resolve the `Information schema is changed` error.  |
 | `tidb_enable_concurrent_ddl` | Deleted | This variable controls whether to allow TiDB to use concurrent DDL statements. When this variable is disabled, TiDB uses the old DDL execution framework, which provides limited support for concurrent DDL execution. Starting from v6.6.0, this variable is deleted and TiDB no longer supports the old DDL execution framework.  |
 | `tidb_ttl_job_run_interval` | Deleted | This variable is used to control the scheduling interval of TTL jobs in the background. Starting from v6.6.0, this variable is deleted, because TiDB provides the `TTL_JOB_INTERVAL` attribute for every table to control the TTL runtime, which is more flexible than `tidb_ttl_job_run_interval`.  |
@@ -276,7 +275,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 | [`tidb_ddl_distribute_reorg`](/system-variables.md#tidb_ddl_distribute_reorg-new-in-v660) | New | This variable is used to control whether to enable distributed execution of the DDL reorg phase to improve the speed of this phase. The default value `OFF` means not to enable enable distributed execution of the DDL reorg phase by default. Currently, this variable takes effect only for `ADD INDEX`. |
 | [`tidb_enable_plan_cache_for_param_limit`](/system-variables.md#tidb_enable_plan_cache_for_param_limit--new-in-v660) | New | Controls whether Prepared Plan Cache caches execution plans that contain `COUNT` after `Limit`. The default value is `ON`, which means Prepared Plan Cache supports caching such execution plans. Note that Prepared Plan Cache does not support caching execution plans with a `COUNT` condition that counts a number greater than 10000. |
 | [`tidb_enable_plan_replayer_capture`](/system-variables.md#tidb_enable_plan_replayer_capture) | New | This variable controls whether to enable the [`PLAN REPLAYER CAPTURE` feature](/sql-plan-replayer.md#use-plan-replayer-capture-to-capture-target-plans). The default value `OFF` means to disable the `PLAN REPLAYER CAPTURE` feature. |
-| [`tidb_enable_resource_control`](/system-variables.md#tidb-tidb_enable_resource_control-new-in-v660 | New  | Controls whether to enable the resource control feature. The default value is `OFF`. When this variable is set to `ON`, the TiDB cluster supports resource isolation of applications based on resource groups. |
+| [`tidb_enable_resource_control`](/system-variables.md#tidb-tidb_enable_resource_control-new-in-v660) | New  | Controls whether to enable the resource control feature. The default value is `OFF`. When this variable is set to `ON`, the TiDB cluster supports resource isolation of applications based on resource groups. |
 | [`tidb_pessimistic_txn_aggressive_locking`](/system-variables.md#tidb_pessimistic_txn_aggressive_locking-new-in-v660) | New | Determines whether to use enhanced pessimistic locking wake-up model for pessimistic transactions. The default value `OFF` means not to use such a wake-up model for for pessimistic transactions by default. |
 
 ### Configuration file parameters
@@ -319,7 +318,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 - Support dynamically modifying `store-io-pool-size`. This facilitate more flexible TiKV performance tuning.
 - Remove the limit on `LIMIT` statements, thus improving the execution performance.
 
-## Deprecated feature
+## Deprecated features
 
 ## Improvements
 
