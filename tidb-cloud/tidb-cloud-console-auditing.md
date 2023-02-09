@@ -146,7 +146,7 @@ To help you track user activities, TiDB Cloud provides the following fields for 
 |---|---|---|
 | type | string | Event type |
 | ends_at | timestamp | Event time |
-| operator_type | enum | Operator type: user, api_key |
+| operator_type | enum | Operator type: `user` or `api_key` |
 | operator_id | uint64 | Operator ID |
 | operator_name | string | Operator name |
 | operator_ip | string | Operator's IP address |
