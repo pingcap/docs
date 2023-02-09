@@ -45,7 +45,7 @@ To export the console audit logs of your organization, take the following step:
 
 ## Console audit log storage policy
 
-The storage time is 90 days, after which the console audit logs will be automatically cleaned up.
+The storage time of console audit logs is 90 days, after which the logs will be automatically cleaned up.
 
 > **Note:**
 >
