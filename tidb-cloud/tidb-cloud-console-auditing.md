@@ -134,8 +134,8 @@ The console audit logs can record various user activities on the TiDB Cloud cons
 | DeleteDBAuditFilter | Delete a database audit log filter |
 | EditProject | Edit the information of a project |
 | DeleteProject | Delete a project |
-| BindSupportPlan | Bind support plan |
-| CancelSupportPlan | Cancel support plan |
+| BindSupportPlan | Bind a support plan |
+| CancelSupportPlan | Cancel a support plan |
 | UpdateOrganizationName | Update organization name |
 | CreatePrivateEndpointService | Create private endpoint service |
 | DeletePrivateEndpointService | Delete private endpoint service |
