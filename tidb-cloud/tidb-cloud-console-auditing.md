@@ -37,7 +37,7 @@ You can only view the console audit log information of your organization.
 
 ## Export console audit logs
 
-You can export the console audit log information of your organization. 
+To export the console audit logs of your organization, take the following step:
 
 1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
 2. Click **Console Audit Log**. The Console Audit Log management page is displayed by default.
