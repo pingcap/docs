@@ -51,6 +51,7 @@ Starting from v6.6.0, TiDB introduces the fast plan binding feature. You can qui
 ### Limitation
 
 Currently, the fast plan binding feature does not support the following types of SQL statements:
+
 - Statements that are not `SELECT`, `DELETE`, `UPDATE`, `INSERT`, or `REPLACE`
 - Queries with subqueries
 - Queries that access TiFlash
