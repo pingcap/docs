@@ -51,7 +51,7 @@ The storage time is 90 days, after which the console audit logs will be automati
 
 > **Note:**
 >
-> Console audit log temporarily does not support users to set the storage location of logs.
+> Currently, you cannot specify the storage location of console audit logs in TiDB Cloud.
 
 ## Console audit event type description
 
