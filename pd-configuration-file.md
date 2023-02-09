@@ -112,12 +112,20 @@ Configuration items related to pd-server
 
 ### `server-memory-limit` <span class="version-mark">New in v6.6.0</span>
 
+> **Warning:**
+>
+> This configuration is an experimental feature. It is not recommended to use it in production environments.
+
 + The memory limit ratio for a PD instance. The value `0` means no memory limit.
 + Default value: `0`
 + Minimum value: `0`
 + Maximum value: `0.99`
 
 ### `server-memory-limit-gc-trigger` <span class="version-mark">New in v6.6.0</span>
+
+> **Warning:**
+>
+> This configuration is an experimental feature. It is not recommended to use it in production environments.
 
 + The threshold ratio at which PD tries to trigger GC. When the memory usage of PD reaches the value of `server-memory-limit` * `server-memory-limit-gc-trigger`, PD triggers a Golang GC. Only one GC is triggered in one minute.
 + Default value: `0.7`
@@ -126,10 +134,18 @@ Configuration items related to pd-server
 
 ### `enable-gogc-tuner` <span class="version-mark">New in v6.6.0</span>
 
+> **Warning:**
+>
+> This configuration is an experimental feature. It is not recommended to use it in production environments.
+
 + Controls whether to enable the GOGC Tuner.
 + Default value: `false`
 
 ### `gc-tuner-threshold` <span class="version-mark">New in v6.6.0</span>
+
+> **Warning:**
+>
+> This configuration is an experimental feature. It is not recommended to use it in production environments.
 
 + The maximum memory threshold ratio for tuning GOGC. When the memory exceeds this threshold, i.e. the value of `server-memory-limit` * `gc-tuner-threshold`, GOGC Tuner stops working.
 + Default value: `0.6`
