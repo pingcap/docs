@@ -113,7 +113,7 @@ Configuration items related to pd-server
 ### `server-memory-limit`
 
 + The memory limit for a PD instance. The `0` value means no memory limit.
-+ Default value: `0.8`
++ Default value: `0`
 + Minimum value: `0`
 + Maximum value: `0.99`
 
@@ -127,7 +127,7 @@ Configuration items related to pd-server
 ### `enable-gogc-tuner`
 
 + Whether to enable the GOGC Tuner.
-+ Default value: `true`
++ Default value: `false`
 
 ### `gc-tuner-threshold`
 
