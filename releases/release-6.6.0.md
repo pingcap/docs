@@ -237,7 +237,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
 * TiDB Lightning adds a new configuration parameter "header-schema-match" to address the issue of mismatched column names between the source file and the target table @[dsdashun](https://github.com/dsdashun)
 
-    In v6.6.0, TiDB Lightning adds a new profile parameter `header-schema-match`. The default value is `true`, which means the first row of the source CSV file is treated as the column name, and consistent with that in the target table. The value of `false` means the headers do not match. In previous versions, this scenario caused import errors. In v6.6.0, when you set this parameter to `false`, if the column order of the source file is the same as that of the target table, TiDB Lightning will ignore the column names in the source file and import the data directly in the order of the columns in the target table.
+    In v6.6.0, TiDB Lightning adds a new profile parameter `header-schema-match`. The default value is `true`, which means the first row of the source CSV file is treated as the column name, and consistent with that in the target table. If the field name in the CSV table header does not match the column name of the target table, you can set this configuration to `false`. TiDB Lightning will ignore the error and continue to import the data in the order of the columns in the target table.
 
    For more information, see [TiDB Lightning (Task)](tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task).
 
