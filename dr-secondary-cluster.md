@@ -282,16 +282,16 @@ Currently, TiDB DR Dashboard is unavailable. You can check the status of TiDB pr
 - [TiDB Key Metrics](/grafana-overview-dashboard.md)
 - [Changefeed Metrics](/ticdc/monitor-ticdc.md#changefeed)
 
-### Perform DR Switchovers
+### Perform DR switchover
 
-This section describes planned DR switchovers, unplanned DR switchovers upon disasters, and the steps to rebuild a secondary cluster.
+This section describes planned DR switchover, DR switchover upon disasters, and the steps to rebuild a secondary cluster.
 
 #### Planned primary and secondary switchover
 
-定期对非常重要的业务系统进行容灾演练，检验系统的可靠性是非常有必要的。下面是容灾演练推荐的操作步骤，因为没有考虑演练中业务写入是否为模拟、业务访问数据库是否使用 proxy 服务等，与实际的演练场景会有出入，请根据你的实际情况进行修改。
+It's important to conduct regular DR drills for critical business systems to test their reliability. The following are the recommended steps for DR drills. Note that simulated business writes and usage of proxy services to access databases are not considered, and therefore the steps might differ from actual application scenarios. You can modify the configurations as required.
 
-1. 停止主集群上的业务写入。
-2. 业务写入完全停止后，查询 TiDB 集群当前最新的 TSO: {Position}：
+1. Stop business writes on the primary cluster.
+2. After there are no more writes, query the latest `TSO: {Position}` of the TiDB cluster":
 
     ```sql
     mysql> show master status;
@@ -303,36 +303,38 @@ This section describes planned DR switchovers, unplanned DR switchovers upon dis
     1 row in set (0.33 sec)
     ```
 
-3. 轮询 Changefeed (dr-primary-to-secondary) 的同步位置时间点 {TSO}，一直到满足 {TSO} >= {Position}。
+3. Poll the replication time point `{TSO}` of the changefeed `dr-primary-to-secondary` until `{TSO}` is equal to or greater than `{Position}`.
+
+    ```shell
 
     ```shell
     tiup cdc cli changefeed query -s --server=http://10.1.1.9:8300 --changefeed-id="dr-primary-to-secondary"
 
     {
         "state": "normal",
-        "tso": 438224029039198209,  # Changefeed 已经同步到的时间点
-        "checkpoint": "2022-12-22 14:53:25.307", # TSO 对应的物理时间点
+        "tso": 438224029039198209,  # The TSO to which the changefeed has been replicated
+        "checkpoint": "2022-12-22 14:53:25.307", # The physical time corresponding to the TSO
         "error": null
     }
     ```
 
-4. 停止 Changefeed (dr-primary-to-secondary)。通过删除 changefeed 的方式，暂停 Changefeed (dr-primary-to-secondary)：
+4. Stop the changefeed `dr-primary-to-secondary`. You can pause the changefeed by removing it:
 
     ```shell
     tiup cdc cli changefeed remove --server=http://10.1.1.9:8300 --changefeed-id="dr-primary-to-secondary"
     ```
 
-5. 创建 Changefeed (dr-secondary-to-primary)。不需要指定 Changefeed `start-ts` 参数，Changefeed 从当前时间开始同步即可。
-6. 修改业务应用的数据库访问配置，并重启业务应用，使得业务访问备用集群。
-7. 检查业务状态是否正常。
+5. Create a changefeed `dr-secondary-to-primary` without specifying the `start-ts` parameter. The changefeed starts replicating data from the current time.
+6. Modify the database access configurations of business applications. Restart the business applications so that they can access the secondary cluster.
+7. Check whether the business applications are running normally.
 
-容灾演练后，再重复一遍以上步骤，即可恢复原有的系统主备配置。
+You can restore the previous primary and secondary cluster configurations by repeating the preceding steps.
 
-#### 真正灾难中主备切换
+#### Primary and secondary switchover upon disasters
 
-当发生真正的灾难，比如主集群所在区域停电，主备集群的同步链路可能会突然中断，从而导致备用集群数据处于事务不一致的状态。
+When a disaster occurs, for example, power outage in the region where the primary cluster locates, the replication between the primary and secondary clusters might be interrupted suddenly. As a result, the data in the secondary cluster is inconsistent with the primary cluster.
 
-1. 恢复备用集群到事务一致的状态。在 Region 2 的任意 TiCDC 节点执行以下命令，以向备用集群重放 redo log，使下游达到最终一致性状态：
+1. Restore the secondary cluster to a transaction-consistent state. Specifically, run the following command on any TiCDC node in Region 2 to apply the redo log to the secondary cluster:
 
     ```shell
     tiup cdc redo apply --storage "s3://redo?access-key=minio&secret-access-key=miniostorage&endpoint=http://10.0.1.10:6060&force-path-style=true" --tmp-dir /tmp/redo --sink-uri "mysql://{username}:{password}@10.1.1.4:4000"
@@ -340,34 +342,34 @@ This section describes planned DR switchovers, unplanned DR switchovers upon dis
 
     其中
 
-    - `--storage`：指定 redo log 所在的 S3 位置
-    - `--tmp-dir`：为从 S3 下载 redo log 的缓存目录
-    - `--sink-uri`：指定下游集群的地址
+    - `--storage`: The path where redo logs are stored in Amazon S3
+    - `--tmp-dir`: The cache directory for downloading redo logs from Amazon S3
+    - `--sink-uri`: The address of the secondary cluster
 
-2. 修改业务应用的数据库访问配置，并重启业务应用，使得业务访问备用集群。
-3. 检查业务状态是否正常。
+2. Modify the database access configurations of business applications. Restart the business applications so that they can access the secondary cluster.
+3. Check whether the business applications are running normally.
 
-#### 灾难后重建主备集群
+#### Rebuild the primary and secondary clusters
 
-当 TiDB 主集群所遭遇的灾难解决后，或者主集群暂时不能恢复，此时 TiDB 集群是脆弱的，只有一个备用集群临时作为新的主集群提供服务。为了维持系统的可靠性，需要重建灾备集群保护系统的可靠性。
+After the TiDB primary cluster recovers form a disaster or the primary cluster cannot be recovered temporarily, the TiDB cluster is fragile because only the secondary cluster is in service as the primary cluster. To maintain the reliability of the system, you need to rebuild the DR cluster.
 
-目前，重建 TiDB 主备集群，通用的方案是重新部署一个新的集群，组成新的容灾主备机群。操作请参考：
+To rebuild the TiDB primary and secondary clusters, you can deploy a new cluster to form a new DR system. For details, see the following documents:
 
-- [搭建主备集群](#搭建主备集群)。
-- [从主集群复制数据到备用集群](#从主集群复制数据到备用集群)。
-- 完成以上操作步骤后，如果你希望新集群成为主集群，那么请参考[主从切换](#容灾演练中主备切换)。
+- [Set up primary and secondary clusters](#set-up-primary-and-secondary-clusters-based-on-ticdc)
+- [Replicate data from the primary cluster to the secondary cluster](#replicate-data-from-the-primary-cluster-to-the-secondary-cluster)
+- After the preceding steps are completed, to make the new cluster the primary cluster, see [Primary and secondary switchover](#primary-and-secondary-switchover).
 
-> **注意：**
+> **Note:**
 >
-> 如果在业务上能够修正灾难发生后主集群和备用集群的数据不一致的问题，那么也可以使用修正后的集群重建主备集群，而不需要重建新集群。
+> If the data inconsistency between the primary and secondary clusters can be resolved, you can use the repaired cluster to rebuild the DR system without building a new cluster.
 
-### 在备用集群上进行业务查询
+### Query business data on the secondary cluster
 
-在主备集群容灾场景中，将备用集群作为只读集群来运行一些延迟不敏感的查询是常见的需求，TiDB 主备集群容灾方案也提供了这种功能。
+In a primary-secondary DR scenario, it is common that the secondary cluster is used as a read-only cluster to run some latency-insensitive queries. TiDB also provides this feature by its primary-secondary DR solution.
 
-创建 changefeed 时候，你只需要在配置文件开启 Syncpoint 功能，Changefeed 就会定期 (`sync-point-interval`) 在备用集群中通过执行 `SET GLOBAL tidb_external_ts = @@tidb_current_ts` 设置已复制完成的一致性快照点。
+When creating the changefeed, enable the Syncpoint feature in the configuration file. Then the changefeed periodically (at `sync-point-interval`) sets the consistent snapshot point that has been replicated to the secondary cluster by executing `SET GLOBAL tidb_external_ts = @@tidb_current_ts` on the secondary cluster.
 
-当业务需要从备用集群查询数据的时候，在业务应用中设置 `SET GLOBAL|SESSION tidb_enable_external_ts_read = ON;` 就可以在备用集群上获得事务状态完成的数据。
+To query data from the secondary cluster, configure `SET GLOBAL|SESSION tidb_enable_external_ts_read = ON;` in the business application. Then you can get the data that is transactionally consistent with the primary cluster.
 
 ```toml
 # Starting from v6.4.0, only the changefeed with the SYSTEM_VARIABLES_ADMIN or SUPER privilege can use the TiCDC Syncpoint feature.
@@ -392,20 +394,20 @@ flush-interval = 2000
 storage = "s3://redo?access-key=minio&secret-access-key=miniostorage&endpoint=http://10.0.1.10:6060&force-path-style=true"
 ```
 
-> **注意：**
+> **Note:**
 >
-> 在主备集群容灾架构中，每个备用集群只能被一个 changefeed 同步数据，否则就无法保证备用集群的数据事务完整性。
+> In a primary-secondary DR architecture, a secondary cluster can only replicate data from one changefeed. Otherwise, the data transaction integrity of the secondary cluster cannot be guaranteed.
 
-### 在主备集群之间进行双向复制
+### Perform bidirectional replication between the primary and secondary clusters
 
-在主备集群容灾场景中，部分用户希望让两个区域的 TiDB 集群互为灾备集群：用户的业务流量按其区域属性写入对应的 TiDB 集群，同时两套 TiDB 集群备份对方集群的数据。
+In this DR scenario, the TiDB clusters in two regions can be each other's disaster recovery clusters: the business traffic is written to the corresponding TiDB cluster based on the region configuration, and the two TiDB clusters back up each other's data.
 
 ![TiCDC bidirectional replication](/media/dr/dr-ticdc.png)
 
-在双向复制容灾集群方案中，两个区域的 TiDB 集群互相备份对方的数据，使得它们可以在故障发生时互为灾备集群。这种方案既能满足安全性和可靠性的需求，同时也能保证数据库的写入性能。在计划中的主备切换场景中，不需要停止正在运行的 changefeed 和启动新的 changefeed 等操作，在运维上也更加简单。
+With the bidirectional replication feature, the TiDB clusters in two regions can be each other's disaster recovery clusters. This DR solution guarantees data security and reliability, and also ensures the write performance of the database. In a planned DR switchover, you do not need to stop the running changefeed and then start a new changefeed, which simplifies the operation and maintenance.
 
-搭建双向容灾复制集群的步骤，请参考教程 [TiCDC 双向复制](/ticdc/ticdc-bidirectional-replication.md)。
+To build a bidirectional DR cluster, see [TiCDC bidirectional replication](/ticdc/ticdc-bidirectional-replication.md).
 
-## 常见问题处理
+## Troubleshooting
 
-以上任何步骤遇到问题，可以先通过 [TiDB FAQ](/faq/faq-overview.md) 查找问题的处理方法。如果问题仍不能解决，请在 TiDB 项目中中提出 [issue](https://github.com/pingcap/tidb/issues/new/choose)，我们会尽快帮你解决。
+If you encounter any problem in the preceding steps, you can first find the solution to the problem in [TiDB FAQs](/faq/faq-overview.md). If the problem is not resolved, please report an [issue](https://github.com/pingcap/tidb/issues/new/choose) and we will reach you as soon as possible.
