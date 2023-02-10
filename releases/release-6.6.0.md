@@ -12,37 +12,61 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.6/quick-start-with-
 
 In v6.6.0-DMR, the key new features and improvements are as follows:
 
-- MySQL 8.0 兼容的多值索引 (Multi-Valued Index) (实验特性)
-- 基于资源组的资源管控 (实验特性)
-- Support the MySQL-compatible foreign key constraints
-- 悲观锁队列的稳定唤醒模型
-- 数据请求的批量聚合
+<table>
+<thead>
+  <tr>
+    <th>Category</th>
+    <th>Feature</th>
+    <th>Description</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td rowspan="2">SQL<br /><br />SEAMLESS to use</td>
+    <td><a href="#foreign-key">Foreign Key</a></td>
+    <td>Support MySQL-compatible foreign key constraints to maintain data consistency and improve data quality.</td>
+  </tr>
+  <tr>
+    <td><a href="#multi-valued-index">Multi-valued index (experimental)</a></td>
+    <td>Introduce MySQL-compatible multi-valued indexes and enhance the JSON type to improve TiDB's compatibility with MySQL 8.0.</td>
+  </tr>
+  <tr>
+    <td>DB Operations<br /><br />SMOOTH to use</td>
+    <td><a href="#resource-group">Resource group (experimental)</a></td>
+    <td>Support resource management based on resource groups, mapping database users to the corresponding resource groups and setting quotas for each resource group based on actual needs.</td>
+  </tr>
+  <tr>
+    <td>Stability<br /><br />RELIABLE to use</td>
+    <td>Historical SQL binding</td>
+    <td>Support binding historical execution plans and quickly binding execution plans on TiDB Dashboard.</td>
+  </tr>
+  <tr>
+    <td rowspan="3">Performance<br /><br />POWERFUL to use</td>
+    <td>TiFlash supports compression exchange</td>
+    <td>TiFlash supports data compression to improve the efficiency of parallel data exchange.</td>
+  </tr>
+  <tr>
+    <td>TiFlash supports stale read</td>
+    <td>TiFlash supports the Stale Read feature, which can improve query performance in scenarios where real-time requirements are not restricted.</td>
+  </tr>
+  <tr>
+    <td>DM support physical import (experimental)</td>
+    <td>TiDB Data Migration (DM) integrates TiDB Lightning's Physical Import mode to improve the performance of full data migration, with performance being up to 10 times faster.</td>
+  </tr>
+</tbody>
+</table>
 
 ## New features
 
 ### SQL
 
-* Support dynamically managing the resource usage of DDL operations (experimental) [#38025](https://github.com/pingcap/tidb/issues/38025)  @[hawkingrei](https://github.com/hawkingrei) **tw@ran-huang**
-
-    TiDB v6.6.0 introduces resource management for DDL operations to reduce the impact of DDL changes on online applications by automatically controlling the CPU usage of these operations. This feature is effective only after the [DDL distributed parallel execution framework](/system-variables.md#tidb_ddl_distribute_reorg-new-in-v660) is enabled.
-
-* Support the MySQL-compatible foreign key constraints [#18209](https://github.com/pingcap/tidb/issues/18209) @[crazycs520](https://github.com/crazycs520) **tw@Oreoxmt**
+* <a name="foreign-key" style="text-decoration:none; color:inherit; cursor:default;">Support the MySQL-compatible foreign key constraints</a> [#18209](https://github.com/pingcap/tidb/issues/18209) @[crazycs520](https://github.com/crazycs520) **tw@Oreoxmt**
 
     TiDB v6.6.0 introduces the foreign key constraints feature, which is compatible with MySQL. This feature supports referencing within a table or between tables, constraints validation, and cascade operations. This feature helps to migrate applications to TiDB, maintain data consistency, improve data quality, and facilitate data modeling.
 
     For more information, see [documentation](/foreign-key.md).
 
-* Support rolling back DDL operations via the `FLASHBACK CLUSTER TO TIMESTAMP` statement [#14088](https://github.com/tikv/tikv/pull/14088) @[Defined2014](https://github.com/Defined2014) @[JmPotato](https://github.com/JmPotato) **tw@ran-huang**
-
-    The [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md) statement supports restoring the entire cluster to a specified point in time within the Garbage Collection (GC) lifetime. In TiDB v6.6.0, this feature adds support for rolling back DDL operations. This can be used to quickly undo a DML or DDL misoperation on a cluster, roll back a cluster within minutes, and roll back a cluster multiple times on the timeline to determine when specific data changes occurred.
-
-    For more information, see [documentation](/sql-statements/sql-statement-flashback-to-timestamp.md).
-
-* Support the distributed parallel execution framework for DDL operations (experimental) [#37125](https://github.com/pingcap/tidb/issues/37125) @[zimulala](https://github.com/zimulala) **tw@ran-huang**
-
-    In previous versions, only one TiDB instance in the entire TiDB cluster was allowed to handle schema change tasks as a DDL owner. To further improve DDL concurrency, TiDB v6.6.0 introduces the distributed parallel execution framework for DDL, through which all TiDB instances in the cluster can concurrently execute the `StateWriteReorganization` phase of the same task to speed up DDL execution. This feature is controlled by the system variable [`tidb_ddl_distribute_reorg`](/system-variables.md#tidb_ddl_distribute_reorg-new-in-v660) and is currently only supported for `Add Index` operations.
-
-* Support the MySQL-compatible multi-valued index (experimental) [#39592](https://github.com/pingcap/tidb/issues/39592) @[xiongjiwei](https://github.com/xiongjiwei) @[qw4990](https://github.com/qw4990) **tw@TomShawn**
+* <a name="multi-valued-index" style="text-decoration:none; color:inherit; cursor:default;">Support the MySQL-compatible multi-valued index (experimental)</a> [#39592](https://github.com/pingcap/tidb/issues/39592) @[xiongjiwei](https://github.com/xiongjiwei) @[qw4990](https://github.com/qw4990) **tw@TomShawn**
 
     TiDB introduces the MySQL-compatible multi-valued index in v6.6.0. Filtering the values of an array in a JSON column is a common operation, but normal indexes cannot help speed up such an operation. Creating a multi-valued index on an array can greatly improve filtering performance. If an array in the JSON column has a multi-valued index, you can use the multi-value index to filter the retrieval conditions with `MEMBER OF()`, `JSON_CONTAINS()`, `JSON_OVERLAPS()` functions, thereby reducing much I/O consumption and improving operation speed.
 
@@ -50,11 +74,76 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
     For details, see [documentation]((/sql-statements/sql-statement-create-index.md#multi-valued-index)
 
-* Binding historical execution plans is GA [#39199](https://github.com/pingcap/tidb/issues/39199) @[fzzf678](https://github.com/fzzf678) **tw@TomShawn**
+* Support rolling back DDL operations via the `FLASHBACK CLUSTER TO TIMESTAMP` statement [#14088](https://github.com/tikv/tikv/pull/14088) @[Defined2014](https://github.com/Defined2014) @[JmPotato](https://github.com/JmPotato) **tw@ran-huang**
+
+    The [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md) statement supports restoring the entire cluster to a specified point in time within the Garbage Collection (GC) lifetime. In TiDB v6.6.0, this feature adds support for rolling back DDL operations. This can be used to quickly undo a DML or DDL misoperation on a cluster, roll back a cluster within minutes, and roll back a cluster multiple times on the timeline to determine when specific data changes occurred.
+
+    For more information, see [documentation](/sql-statements/sql-statement-flashback-to-timestamp.md).
+
+### Stability
+
+* <a name="binding-his-ga" style="text-decoration:none; color:inherit; cursor:default;">Binding historical execution plans is GA</a> [#39199](https://github.com/pingcap/tidb/issues/39199) @[fzzf678](https://github.com/fzzf678) **tw@TomShawn**
 
     In v6.5.0, TiDB extends the binding targets in the [`CREATE [GLOBAL | SESSION] BINDING`](/sql-statements/sql-statement-create-binding.md) statements and supports creating bindings according to historical execution plans. In v6.6.0, this feature is GA. The selection of execution plans is not limited to the current TiDB node. Any historical execution plan generated by any TiDB node can be selected as the target of [SQL binding](/sql-statements/sql-statement-create-binding.md), which further improves the feature usability.
 
     For more information, see [documentation](/sql-plan-management.md#create-a-binding-according-to-a-historical-execution-plan).
+
+* Add several optimizer hints [#39964](https://github.com/pingcap/tidb/issues/39964) @[Reminiscent](https://github.com/Reminiscent) **tw@TomShawn**
+
+    TiDB adds several optimizer hints in v6.6.0 to control the execution plan selection of `LIMIT` operations.
+
+    - [`ORDER_INDEX()`](/optimizer-hints.md#keep_ordert1_name-idx1_name--idx2_name-): tells the optimizer to use the specified index, to keep the order of the index when reading data, and generates plans similar to `Limit + IndexScan(keep order: true)`.
+    - [`NO_ORDER_INDEX()`](/optimizer-hints.md#no_keep_ordert1_name-idx1_name--idx2_name-): tells the optimizer to use the specified index, not to keep the order of the index when reading data, and generates plans similar to `TopN + IndexScan(keep order: false)`.
+
+    Continuously introducing optimizer hints provides users with more intervention methods, helps solve SQL performance issues, and improves the stability of overall performance.
+
+* Support a stable wake-up model for pessimistic lock queues [#13298](https://github.com/tikv/tikv/issues/13298) @[MyonKeminta](https://github.com/MyonKeminta) **tw@TomShawn**
+
+    If an application encounters frequent single-point pessimistic lock conflicts, the existing wake-up mechanism cannot guarantee the time for transactions to acquire locks, which causes high long-tail latency and even lock acquisition timeout. Starting from v6.6.0, you can enable a stable wake-up model for pessimistic locks by setting the value of the system variable [`tidb_pessimistic_txn_aggressive_locking`](/system-variables.md#tidb_pessimistic_txn_aggressive_locking-new-in-v660) to `ON`. In this wake-up model, the wake-up sequence of a queue can be strictly controlled to avoid the waste of resources caused by invalid wake-ups. In scenarios with serious lock conflicts, the stable wake-up model can reduce long-tail latency and the P99 response time.
+
+    For details, see [documentation](/system-variables.md#tidb_pessimistic_txn_aggressive_locking-new-in-v660).
+
+* Support dynamically managing the resource usage of DDL operations (experimental) [#38025](https://github.com/pingcap/tidb/issues/38025) @[hawkingrei](https://github.com/hawkingrei) **tw@ran-huang**
+
+    TiDB v6.6.0 introduces resource management for DDL operations to reduce the impact of DDL changes on online applications by automatically controlling the CPU usage of these operations. This feature is effective only after the [DDL distributed parallel execution framework](/system-variables.md#tidb_ddl_distribute_reorg-new-in-v660) is enabled.
+
+### Performance
+
+* Batch aggregate data requests [#39361](https://github.com/pingcap/tidb/issues/39361) @[cfzjywxk](https://github.com/cfzjywxk) @[you06](https://github.com/you06) **tw@TomShawn**
+
+    When TiDB sends a data request to TiKV, TiDB compiles the request into different sub-tasks according to the Region where the data is located, and each sub-task only processes the request of a single Region. When the data to be accessed is highly dispersed, even if the size of the data is not large, many sub-tasks will be generated, which in turn will generate many RPC requests and consume extra time. Starting from v6.6.0, TiDB supports partially merging data requests that are sent to the same TiKV instance, which reduces the number of sub-tasks and the overhead of RPC requests. In the case of high data dispersion and insufficient gRPC thread pool resources, batching requests can improve performance by more than 50%.
+
+    This feature is enabled by default. You can set the batch size of requests using the system variable [`tidb_store_batch_size`](/system-variables.md#tidb_store_batch_size).
+
+* Remove the limit on `LIMIT` clauses [#40219](https://github.com/pingcap/tidb/issues/40219) @[fzzf678](https://github.com/fzzf678) **tw@shichun-0415**
+
+    Starting from v6.6.0, TiDB plan cache supports caching queries containing `?` after `Limit`, such as `Limit ?` or `Limit 10, ?`. This feature allows more SQL statements to benefit from plan cache, thus improving execution efficiency.
+
+    For more information, see [documentation](/sql-prepared-plan-cache.md).
+
+* Support the distributed parallel execution framework for DDL operations (experimental) [#37125](https://github.com/pingcap/tidb/issues/37125) @[zimulala](https://github.com/zimulala) **tw@ran-huang**
+
+    In previous versions, only one TiDB instance in the entire TiDB cluster was allowed to handle schema change tasks as a DDL owner. To further improve DDL concurrency, TiDB v6.6.0 introduces the distributed parallel execution framework for DDL, through which all TiDB instances in the cluster can concurrently execute the `StateWriteReorganization` phase of the same task to speed up DDL execution. This feature is controlled by the system variable [`tidb_ddl_distribute_reorg`](/system-variables.md#tidb_ddl_distribute_reorg-new-in-v660) and is currently only supported for `Add Index` operations.
+
+### HTAP
+
+* <a name="compression-exchange" style="text-decoration:none; color:inherit; cursor:default;">TiFlash supports data exchange with compression</a> [#6620](https://github.com/pingcap/tiflash/issues/6620) @[solotzg](https://github.com/solotzg) **tw@TomShawn**
+
+    To cooperate with multiple nodes for computing, the TiFlash engine needs to exchange data among different nodes. When the size of the data to be exchanged is very large, the performance of data exchange might affect the overall computing efficiency. In v6.6.0, the TiFlash engine introduces a compression mechanism to compress the data that needs to be exchanged when necessary, and then to perform the exchange, thereby improving the efficiency of data exchange.
+
+    For details, see [documentation]().
+
+* <a name="tiflash-stale-read" style="text-decoration:none; color:inherit; cursor:default;">TiFlash supports the Stale Read feature</a> [#4483](https://github.com/pingcap/tiflash/issues/4483) @[hehechen](https://github.com/hehechen) **tw@qiancai**
+
+   The Stale Read feature has been generally available (GA) since v5.1.1, which allows you to read historical data at a specific timestamp or within a specified time range. Stale read can reduce read latency and improve query performance by reading data from local TiKV replicas directly. Before v6.6.0, TiFlash does not support Stale Read. Even if a table has TiFlash replicas, Stale Read can only read its TiKV replicas.
+
+   Starting from v6.6.0, TiFlash supports the Stale Read feature. When you query the historical data of a table using the [`AS OF TIMESTAMP`](/as-of-timestamp.md) syntax or the [`tidb_read_staleness`](/tidb-read-staleness.md) system variable, if the table has a TiFlash replica, the optimizer now can choose to read the corresponding data from the TiFlash replica, thus further improving query performance.
+
+    For more information, see [documentation](/stale-read.md).
+
+* Support pushing down the `regexp_replace` string function to TiFlash [#6115](https://github.com/pingcap/tiflash/issues/6115) @[xzhangxian1008](https://github.com/xzhangxian1008) **tw@qiancai**
+
+### High availability
 
 * Support configuring `SURVIVAL_PREFERENCE` for [placement rules in SQL](/placement-rules-in-sql.md) [#38605](https://github.com/pingcap/tidb/issues/38605) @[nolouch](https://github.com/nolouch) **tw@qiancai**
 
@@ -72,6 +161,49 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
     In v6.6.0, TiDB supports automatic rotations of TiFlash TLS certificates. For a TiDB cluster with encrypted data transmission between components enabled, when a TLS certificate of TiFlash expires and needs to be reissued with a new one, the new TiFlash TLS certificate can be automatically loaded without restarting the TiDB cluster. In addition, the rotation of a TLS certificate between components within a TiDB cluster does not affect the use of the TiDB cluster, which ensures high availability of the cluster.
 
     For more information, see [documentation](/enable-tls-between-components.md).
+
+* TiDB Lightning supports accessing Amazon S3 data via AWS IAM role keys and session tokens [#4075](https://github.com/pingcap/tidb/issues/40750) @[okJiang](https://github.com/okJiang) **tw@qiancai**
+
+    Before v6.6.0, TiDB Lightning only supports accessing S3 data via AWS IAM **user's access keys** (each access key consists of an access key ID and secret access key) so you cannot use a temporary session token to acess S3 data. Staring from v6.6.0, TiDB Lightning supports accessing S3 data via AWS IAM **role's access keys + session tokens** as well to improve the data security.
+
+    For more information, see [documentation](/tidb-lightning-data-source#import-data-from-amazon-s3).
+
+### DB operations
+
+* <a name="resource-group" style="text-decoration:none; color:inherit; cursor:default;">Support resource control based on resource groups (experimental)</a> [#38825](https://github.com/pingcap/tidb/issues/38825) @[nolouch](https://github.com/nolouch) @[BornChanger](https://github.com/BornChanger) @[glorv](https://github.com/glorv) @[tiancaiamao](https://github.com/tiancaiamao) @[Connor1996](https://github.com/Connor1996) @[JmPotato](https://github.com/JmPotato) @[hnes](https://github.com/hnes) @[CabinfeverB](https://github.com/CabinfeverB) @[HuSharp](https://github.com/HuSharp) **tw@hfxsd**
+
+    Now you can create resource groups for a TiDB cluster, bind different database users to corresponding resource groups, and set quotas for each resource group according to actual needs. When the cluster resources are limited, all resources used by sessions in the same resource group will be limited to the quota. In this way, even if a resource group is over-consumed, the sessions in other resource groups are not affected. TiDB provides a built-in view of the actual usage of resources on Grafana dashboards, assisting you to allocate resources more rationally.
+
+    The introduction of the resource control feature is a milestone for TiDB. It can divide a distributed database cluster into multiple logical units. Even if an individual unit overuses resources, it does not crowd out the resources needed by other units.
+
+    With this feature, you can:
+
+    - Combine multiple small and medium-sized applications from different systems into a single TiDB cluster. When the workload of an application grows larger, it does not affect the normal operation of other applications. When the system workload is low, busy applications can still be allocated the required system resources even if they exceed the set read and write quotas, so as to achieve the maximum utilization of resources.
+    - Choose to combine all test environments into a single TiDB cluster, or group the batch tasks that consume more resources into a single resource group. It can improve hardware utilization and reduce operating costs while ensuring that critical applications can always get the necessary resources.
+
+    In addition, the rational use of the resource control feature can reduce the number of clusters, ease the difficulty of operation and maintenance, and save management costs.
+
+    In v6.6, you need to enable both TiDB's global variable [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660) and the TiKV configuration item [`resource-control.enabled`](/tikv-configuration-file.md#resource_control) to enable resource control. Currently, the supported quota method is based on "[Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru)". RU is TiDB's unified abstraction unit for system resources such as CPU and IO.
+
+    For more information, see [documentation](/tidb-resource-control.md).
+
+* Support configuring read-only storage nodes for resource-consuming tasks @[v01dstar](https://github.com/v01dstar) **tw@Oreoxmt**
+
+    In production environments, some read-only operations might consume a large number of resources regularly and affect the performance of the entire cluster, such as backups and large-scale data reading and analysis. TiDB v6.6.0 supports configuring read-only storage nodes for resource-consuming read-only tasks to reduce the impact on the online application. Currently, TiDB, TiSpark, and BR support reading data from read-only storage nodes. You can configure read-only storage nodes according to [steps](/readonly-nodes.md#steps) and specify where data is read through the system variable `tidb_replica_read`, the TiSpark configuration item `spark.tispark.replica_read`, or the br command line argument `--read-only`, to ensure the stability of cluster performance.
+
+    For more information, see [documentation](/best-practices/readonly-nodes.md).
+
+* Support dynamically modifying `store-io-pool-size` [#13964](https://github.com/tikv/tikv/issues/13964) @[LykxSassinator](https://github.com/LykxSassinator) **tw@shichun-0415**
+
+    The TiKV configuration item [`raftstore.store-io-pool-size`](/tikv-configuration-file.md#store-io-pool-size-new-in-v530) specifies the allowable number of threads that process Raft I/O tasks, which can be adjusted when tuning TiKV performance. Before v6.6.0, this configuration item cannot be modified dynamically. Starting from v6.6.0, you can modify this configuration without restarting the server, which means more flexible performance tuning.
+
+    For more information, see [documentation](/dynamic-config.md).
+
+* Support specifying the SQL script executed upon TiDB cluster intialization [#35624](https://github.com/pingcap/tidb/issues/35624) @[morgo](https://github.com/morgo) **tw@shichun-0415**
+
+    When you start a TiDB cluster for the first time, you can specify the SQL script to be executed by configuring the command line parameter `--initialize-sql-file`. You can use this feature when you need to perform such operations as modifying the value of a system variable, creating a user, or granting privileges.
+
+    For more information, see [documentation](/tidb-configuration-file.md#initialize-sql-file-new-in-v660).
 
 ### Observability
 
@@ -131,101 +263,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
     For more information, see [documentation](/statement-summary-tables.md#persist-statements-summary).
 
-### Performance
-
-* TiFlash supports the Stale Read feature [#4483](https://github.com/pingcap/tiflash/issues/4483) @[hehechen](https://github.com/hehechen) **tw@qiancai**
-
-   The Stale Read feature has been generally available (GA) since v5.1.1, which allows you to read historical data at a specific timestamp or within a specified time range. Stale read can reduce read latency and improve query performance by reading data from local TiKV replicas directly. Before v6.6.0, TiFlash does not support Stale Read. Even if a table has TiFlash replicas, Stale Read can only read its TiKV replicas.
-
-   Starting from v6.6.0, TiFlash supports the Stale Read feature. When you query the historical data of a table using the [`AS OF TIMESTAMP`](/as-of-timestamp.md) syntax or the [`tidb_read_staleness`](/tidb-read-staleness.md) system variable, if the table has a TiFlash replica, the optimizer now can choose to read the corresponding data from the TiFlash replica, thus further improving query performance.
-
-    For more information, see [documentation](/stale-read.md).
-
-* Support pushing down the `regexp_replace` string function to TiFlash [#6115](https://github.com/pingcap/tiflash/issues/6115) @[xzhangxian1008](https://github.com/xzhangxian1008) **tw@qiancai**
-
-* Batch aggregate data requests [#39361](https://github.com/pingcap/tidb/issues/39361) @[cfzjywxk](https://github.com/cfzjywxk) @[you06](https://github.com/you06) **tw@TomShawn**
-
-    When TiDB sends a data request to TiKV, TiDB compiles the request into different sub-tasks according to the Region where the data is located, and each sub-task only processes the request of a single Region. When the data to be accessed is highly dispersed, even if the size of the data is not large, many sub-tasks will be generated, which in turn will generate many RPC requests and consume extra time. Starting from v6.6.0, TiDB supports partially merging data requests that are sent to the same TiKV instance, which reduces the number of sub-tasks and the overhead of RPC requests. In the case of high data dispersion and insufficient gRPC thread pool resources, batching requests can improve performance by more than 50%.
-
-    This feature is enabled by default. You can set the batch size of requests using the system variable [`tidb_store_batch_size`](/system-variables.md#tidb_store_batch_size).
-
-* Add several optimizer hints [#39964](https://github.com/pingcap/tidb/issues/39964) @[Reminiscent](https://github.com/Reminiscent) **tw@TomShawn**
-
-    TiDB adds several optimizer hints in v6.6.0 to control the execution plan selection of `LIMIT` operations.
-
-    - [`ORDER_INDEX()`](/optimizer-hints.md#keep_ordert1_name-idx1_name--idx2_name-): tells the optimizer to use the specified index, to keep the order of the index when reading data, and generates plans similar to `Limit + IndexScan(keep order: true)`.
-    - [`NO_ORDER_INDEX()`](/optimizer-hints.md#no_keep_ordert1_name-idx1_name--idx2_name-): tells the optimizer to use the specified index, not to keep the order of the index when reading data, and generates plans similar to `TopN + IndexScan(keep order: false)`.
-
-    Continuously introducing optimizer hints provides users with more intervention methods, helps solve SQL performance issues, and improves the stability of overall performance.
-
-* Remove the limit on `LIMIT` clauses [#40219](https://github.com/pingcap/tidb/issues/40219) @[fzzf678](https://github.com/fzzf678) **tw@shichun-0415**
-
-    Starting from v6.6.0, TiDB plan cache supports caching queries containing `?` after `Limit`, such as `Limit ?` or `Limit 10, ?`. This feature allows more SQL statements to benefit from plan cache, thus improving execution efficiency.
-
-    For more information, see [documentation](/sql-prepared-plan-cache.md).
-
-* Support a stable wake-up model for pessimistic lock queues [#13298](https://github.com/tikv/tikv/issues/13298) @[MyonKeminta](https://github.com/MyonKeminta) **tw@TomShawn**
-
-    If an application encounters frequent single-point pessimistic lock conflicts, the existing wake-up mechanism cannot guarantee the time for transactions to acquire locks, which causes high long-tail latency and even lock acquisition timeout. Starting from v6.6.0, you can enable a stable wake-up model for pessimistic locks by setting the value of the system variable [`tidb_pessimistic_txn_aggressive_locking`](/system-variables.md#tidb_pessimistic_txn_aggressive_locking-new-in-v660) to `ON`. In this wake-up model, the wake-up sequence of a queue can be strictly controlled to avoid the waste of resources caused by invalid wake-ups. In scenarios with serious lock conflicts, the stable wake-up model can reduce long-tail latency and the P99 response time.
-
-    For details, see [documentation](/system-variables.md#tidb_pessimistic_txn_aggressive_locking-new-in-v660).
-
-* TiFlash supports data exchange with compression [#6620](https://github.com/pingcap/tiflash/issues/6620) @[solotzg](https://github.com/solotzg) **tw@TomShawn**
-
-    To cooperate with multiple nodes for computing, the TiFlash engine needs to exchange data among different nodes. When the size of the data to be exchanged is very large, the performance of data exchange might affect the overall computing efficiency. In v6.6.0, the TiFlash engine introduces a compression mechanism to compress the data that needs to be exchanged when necessary, and then to perform the exchange, thereby improving the efficiency of data exchange.
-
-    For details, see [documentation]().
-
-### Stability
-
-* Support resource control based on resource groups (experimental) [#38825](https://github.com/pingcap/tidb/issues/38825) @[nolouch](https://github.com/nolouch) @[BornChanger](https://github.com/BornChanger) @[glorv](https://github.com/glorv) @[tiancaiamao](https://github.com/tiancaiamao) @[Connor1996](https://github.com/Connor1996) @[JmPotato](https://github.com/JmPotato) @[hnes](https://github.com/hnes) @[CabinfeverB](https://github.com/CabinfeverB) @[HuSharp](https://github.com/HuSharp) **tw@hfxsd**
-
-    Now you can create resource groups for a TiDB cluster, bind different database users to corresponding resource groups, and set quotas for each resource group according to actual needs. When the cluster resources are limited, all resources used by sessions in the same resource group will be limited to the quota. In this way, even if a resource group is over-consumed, the sessions in other resource groups are not affected. TiDB provides a built-in view of the actual usage of resources on Grafana dashboards, assisting you to allocate resources more rationally.
-
-    The introduction of the resource control feature is a milestone for TiDB. It can divide a distributed database cluster into multiple logical units. Even if an individual unit overuses resources, it does not crowd out the resources needed by other units.
-
-    With this feature, you can:
-
-    - Combine multiple small and medium-sized applications from different systems into a single TiDB cluster. When the workload of an application grows larger, it does not affect the normal operation of other applications. When the system workload is low, busy applications can still be allocated the required system resources even if they exceed the set read and write quotas, so as to achieve the maximum utilization of resources.
-    - Choose to combine all test environments into a single TiDB cluster, or group the batch tasks that consume more resources into a single resource group. It can improve hardware utilization and reduce operating costs while ensuring that critical applications can always get the necessary resources.
-
-    In addition, the rational use of the resource control feature can reduce the number of clusters, ease the difficulty of operation and maintenance, and save management costs.
-
-    In v6.6, you need to enable both TiDB's global variable [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660) and the TiKV configuration item [`resource-control.enabled`](/tikv-configuration-file.md#resource_control) to enable resource control. Currently, the supported quota method is based on "[Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru)". RU is TiDB's unified abstraction unit for system resources such as CPU and IO.
-
-    For more information, see [documentation](/tidb-resource-control.md).
-
-* Support configuring read-only storage nodes for resource-consuming tasks @[v01dstar](https://github.com/v01dstar) **tw@Oreoxmt**
-
-    In production environments, some read-only operations might consume a large number of resources regularly and affect the performance of the entire cluster, such as backups and large-scale data reading and analysis. TiDB v6.6.0 supports configuring read-only storage nodes for resource-consuming read-only tasks to reduce the impact on the online application. Currently, TiDB, TiSpark, and BR support reading data from read-only storage nodes. You can configure read-only storage nodes according to [steps](/readonly-nodes.md#steps) and specify where data is read through the system variable `tidb_replica_read`, the TiSpark configuration item `spark.tispark.replica_read`, or the br command line argument `--read-only`, to ensure the stability of cluster performance.
-
-    For more information, see [documentation](/best-practices/readonly-nodes.md).
-
-### Ease of use
-
-* Support dynamically modifying `store-io-pool-size` [#13964](https://github.com/tikv/tikv/issues/13964) @[LykxSassinator](https://github.com/LykxSassinator) **tw@shichun-0415**
-
-    The TiKV configuration item [`raftstore.store-io-pool-size`](/tikv-configuration-file.md#store-io-pool-size-new-in-v530) specifies the allowable number of threads that process Raft I/O tasks, which can be adjusted when tuning TiKV performance. Before v6.6.0, this configuration item cannot be modified dynamically. Starting from v6.6.0, you can modify this configuration without restarting the server, which means more flexible performance tuning.
-
-    For more information, see [documentation](/dynamic-config.md).
-
-* Support specifying the SQL script executed upon TiDB cluster intialization [#35624](https://github.com/pingcap/tidb/issues/35624) @[morgo](https://github.com/morgo) **tw@shichun-0415**
-
-    When you start a TiDB cluster for the first time, you can specify the SQL script to be executed by configuring the command line parameter `--initialize-sql-file`. You can use this feature when you need to perform such operations as modifying the value of a system variable, creating a user, or granting privileges.
-
-    For more information, see [documentation](/tidb-configuration-file.md#initialize-sql-file-new-in-v660).
-
-### MySQL compatibility
-
-* Support the MySQL-compatible foreign key constraint [#18209](https://github.com/pingcap/tidb/issues/18209) @[crazycs520](https://github.com/crazycs520) **tw@Oreoxmt**
-
-    For more information, see the [SQL](#sql) section in v6.6.0 Release Notes and [documentation](/sql-statements/sql-statement-foreign-key.md).
-
-* Support the MySQL-compatible multi-valued index [#39592](https://github.com/pingcap/tidb/issues/39592) @[xiongjiwei](https://github.com/xiongjiwei) @[qw4990](https://github.com/qw4990) **tw@TomShawn**
-
-    For more information, see the [SQL](#sql) section in v6.6.0 Release Notes and [documentation](/sql-statements/sql-statement-create-index.md#multi-valued-index).
-
-### Data migration
+### Ecosystem
 
 * TiDB Data Migration (DM) integrates with TiDB Lightning's physical import mode for up to a 10x performance boost for full migration (experimental) @[lance6716](https://github.com/lance6716) **tw@ran-huang**
 
@@ -239,13 +277,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
     In v6.6.0, TiDB Lightning adds a new profile parameter `header-schema-match`. The default value is `true`, which means the first row of the source CSV file is treated as the column name, and consistent with that in the target table. If the field name in the CSV table header does not match the column name of the target table, you can set this configuration to `false`. TiDB Lightning will ignore the error and continue to import the data in the order of the columns in the target table.
 
-   For more information, see [TiDB Lightning (Task)](tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task).
-
-* TiDB Lightning supports accessing Amazon S3 data via AWS IAM role keys and session tokens [#4075](https://github.com/pingcap/tidb/issues/40750) @[okJiang](https://github.com/okJiang) **tw@qiancai**
-
-    Before v6.6.0, TiDB Lightning only supports accessing S3 data via AWS IAM **user's access keys** (each access key consists of an access key ID and secret access key) so you cannot use a temporary session token to acess S3 data. Staring from v6.6.0, TiDB Lightning supports accessing S3 data via AWS IAM **role's access keys + session tokens** as well to improve the data security.
-
-    For more information, see [documentation](/tidb-lightning-data-source#import-data-from-amazon-s3).
+    For more information, see [TiDB Lightning (Task)](tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task).
 
 * TiDB Lightning supports enabling compressed transfers when sending key-value pairs to TiKV [#41163](https://github.com/pingcap/tidb/issues/41163) @[gozssky](https://github.com/gozssky) **tw@qiancai**
 
@@ -254,8 +286,6 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
     This feature is disabled by default. To enable it, you can set the `compress-kv-pairs` configuration item of TiDB Lightning to "gzip" or "gz".
 
     For more information, see [documentation](/tidb-lightning-configuration#tidb-lightning-task).
-
-### TiDB data share subscription
 
 * The TiKV-CDC tool is now GA and supports subscribing to data changes of RawKV [#48](https://github.com/tikv/migration/issues/48) @[zeminzhou](https://github.com/zeminzhou) @[haojinming](https://github.com/haojinming) @[pingyu](https://github.com/pingyu) **tw@Oreoxmt**
 
@@ -270,6 +300,16 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
     For more information, see [documentation](/ticdc/ticdc-sink-to-kafka.md#scale-out-the-load-of-a-single-large-table-to-multiple-ticdc-nodes).
 
 ## Compatibility changes
+
+### MySQL compatibility
+
+* Support the MySQL-compatible foreign key constraint [#18209](https://github.com/pingcap/tidb/issues/18209) @[crazycs520](https://github.com/crazycs520) **tw@Oreoxmt**
+
+    For more information, see the [SQL](#sql) section in v6.6.0 Release Notes and [documentation](/sql-statements/sql-statement-foreign-key.md).
+
+* Support the MySQL-compatible multi-valued index [#39592](https://github.com/pingcap/tidb/issues/39592) @[xiongjiwei](https://github.com/xiongjiwei) @[qw4990](https://github.com/qw4990) **tw@TomShawn**
+
+    For more information, see the [SQL](#sql) section in v6.6.0 Release Notes and [documentation](/sql-statements/sql-statement-create-index.md#multi-valued-index).
 
 ### System variables
 
