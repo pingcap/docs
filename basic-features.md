@@ -10,7 +10,7 @@ This document lists the features supported in different TiDB versions, including
 
 > **Note:**
 >
-> PingCAP does not provide patch releases (including bug fixes and security vulnerability fixes) for DMR versions. If you encounter any bugs in a DMR version, they will be fixed in the subsequent releases. It is recommended to use the [latest LTS version](/releases/release-schedule.md) unless you have special needs.
+> PingCAP does not provide patch releases (including bug fixes and security vulnerability fixes) for DMR versions. If you encounter any bugs in a DMR version, they will be fixed in the subsequent releases. It is recommended to use the [latest LTS version](https://docs.pingcap.com/tidb/stable) unless you have special needs.
 >
 > The abbreviations in the table below have the following meanings:
 >
@@ -231,3 +231,134 @@ This document lists the features supported in different TiDB versions, including
 [^4]: Starting from [v6.4.0](/releases/release-6.4.0.md), TiDB supports [high-performance and globally monotonic `AUTO_INCREMENT` columns](/auto-increment.md#mysql-compatibility-mode)
 
 [^5]: For TiDB v4.0, the `LOAD DATA` transaction does not guarantee atomicity.
+
+<table>
+<thead>
+  <tr>
+    <th>L1 features and tools</th>
+    <th>L2 features and tools</th>
+    <th>6.5</th>
+    <th>6.1</th>
+    <th>5.4</th>
+    <th>5.3</th>
+    <th>5.2</th>
+    <th>5.1</th>
+    <th>5.0</th>
+    <th>4.0</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td rowspan="4">Fast Importer (TiDB Lightning)</td>
+    <td></td>
+    <td>Y</td>
+    <td>Y</td>
+    <td>Y</td>
+    <td>Y</td>
+    <td>Y</td>
+    <td>Y</td>
+    <td>Y</td>
+    <td>Y</td>
+  </tr>
+  <tr>
+    <td>feature 1</td>
+    <td>Y</td>
+    <td>Y</td>
+    <td>N</td>
+    <td>N</td>
+    <td>N</td>
+    <td>N</td>
+    <td>N</td>
+    <td>N</td>
+  </tr>
+  <tr>
+    <td>feature 2</td>
+    <td>Y</td>
+    <td>N</td>
+    <td>N</td>
+    <td>N</td>
+    <td>N</td>
+    <td>N</td>
+    <td>N</td>
+    <td>N</td>
+  </tr>
+  <tr>
+    <td>feature 3</td>
+    <td>Y</td>
+    <td>Y</td>
+    <td>Y</td>
+    <td>Y</td>
+    <td>Y</td>
+    <td>N</td>
+    <td>N</td>
+    <td>N</td>
+  </tr>
+  <tr>
+    <td colspan="2">mydumper logical dumper</td>
+    <td>Deprecated</td>
+    <td>Deprecated</td>
+    <td>Deprecated</td>
+    <td>Deprecated</td>
+    <td>Deprecated</td>
+    <td>Deprecated</td>
+    <td>Y</td>
+    <td>Y</td>
+  </tr>
+  <tr>
+    <td colspan="2">Dumpling logical dumper</td>
+    <td>Y</td>
+    <td>Y</td>
+    <td>Y</td>
+    <td>Y</td>
+    <td>Y</td>
+    <td>Y</td>
+    <td>Y</td>
+    <td>Y</td>
+  </tr>
+  <tr>
+    <td rowspan="4">Database migration toolkit (DM)</td>
+    <td></td>
+    <td>Y</td>
+    <td>Y</td>
+    <td>Y</td>
+    <td>Y</td>
+    <td>Y</td>
+    <td>Y</td>
+    <td>Y</td>
+    <td>Y</td>
+  </tr>
+  <tr>
+    <td>feature 1</td>
+    <td>Y</td>
+    <td>Y</td>
+    <td>N</td>
+    <td>N</td>
+    <td>N</td>
+    <td>N</td>
+    <td>N</td>
+    <td>N</td>
+  </tr>
+  <tr>
+    <td>feature 2</td>
+    <td>Y</td>
+    <td>Y</td>
+    <td>E</td>
+    <td>E</td>
+    <td>E</td>
+    <td>E</td>
+    <td>E</td>
+    <td>E</td>
+  </tr>
+  <tr>
+    <td>feature 3</td>
+    <td>Y</td>
+    <td>Y</td>
+    <td>Y</td>
+    <td>Y</td>
+    <td>Y</td>
+    <td>Y</td>
+    <td>Y</td>
+    <td>Y</td>
+  </tr>
+</tbody>
+</table>
