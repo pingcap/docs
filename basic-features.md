@@ -6,13 +6,17 @@ aliases: ['/docs/dev/basic-features/','/tidb/dev/experimental-features-4.0/']
 
 # TiDB Features
 
-This document lists the features supported in each TiDB version.
+This document lists the features supported in different TiDB versions, including [Long-Term Support (LTS)](/releases/versioning.md#long-term-support-releases) versions and [Development Milestone Release (DMR)](/releases/versioning.md#development-milestone-releases) versions after the latest LTS version.
 
 > **Note:**
 >
-> - Y: the feature is generally available (GA) and can be used in production environments.
+> PingCAP does not provide patch releases (including bug fixes and security vulnerability fixes) for DMR versions. If you encounter any bugs in a DMR version, they will be fixed in the subsequent release series. It is recommended to use the [latest LTS version](/releases/release-schedule.md) unless you have special needs.
+>
+> The abbreviations in the table below have the following meanings:
+>
+> - Y: the feature is generally available (GA) and can be used in production environments. Note that even if a feature is GA in a DMR version, it is recommended to use the feature in production environments in a later LTS version.
 > - N: the feature is not supported.
-> - Experimental: the feature is not GA yet and you need to be aware of the usage limitations. Experimental features are subject to change or removal without prior notice. The syntax and implementation might be modified before the general availability. If you encounter any problems, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> - E: the feature is not GA yet (experimental) and you need to be aware of the usage limitations. Experimental features are subject to change or removal without prior notice. The syntax and implementation might be modified before the general availability. If you encounter any problems, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 ## Data types, functions, and operators
 
@@ -224,6 +228,6 @@ This document lists the features supported in each TiDB version.
 
 [^3]: See [Statement Reference](/sql-statements/sql-statement-select.md) for a full list of SQL statements supported.
 
-[^4]: Starting from v6.4.0, TiDB supports [high-performance and globally monotonic `AUTO_INCREMENT` columns](/auto-increment.md#mysql-compatibility-mode)
+[^4]: Starting from [v6.4.0](/releases/release-6.4.0.md), TiDB supports [high-performance and globally monotonic `AUTO_INCREMENT` columns](/auto-increment.md#mysql-compatibility-mode)
 
 [^5]: For TiDB v4.0, the `LOAD DATA` transaction does not guarantee atomicity.
