@@ -1,20 +1,20 @@
 ---
-title: TiDB 容灾方案概述
-summary: 了解 TiDB 提供的几种容灾方案，包括基于主备集群的容灾、基于多副本的单集群容灾和基于备份与恢复的容灾。
+title: TiDB DR Solution Introduction
+summary: Learn about the disaster solutions provided by TiDB, including disaster recovery based on the primary and secondary clusters, disaster recovery based on multiple replicas in a single cluster, and disaster recovery based on backup and restore.
 ---
 
-# TiDB 容灾方案概述
+# TiDB DR Solution Introduction
 
-本文将以如下结构系统介绍 TiDB 容灾解决方案：
+This document introduces the disaster recovery (DR) solutions provided by TiDB in the following structure:
 
-- 介绍容灾解决方案涉及的基本概念。
-- 介绍核心组件 TiDB、TiCDC 及 BR 的架构。
-- 介绍各种容灾方案。
-- 对比不同的容灾解决方案。
+- Describe the basic concepts involved in disaster recovery.
+- Introduce the architecture of TiDB, TiCDC, and BR.
+- Describes the DR solutions provided by TiDB.
+- Compare the DR solutions provided by TiDB.
 
-## 基本概念
+## Basic concepts
 
-- RTO (Recovery Time Objective)：是指灾难发生后，系统恢复服务所需的时间。
+- RTO (Recovery Time Objective): Time required for the system to recover from a disaster.
 - RPO (Recovery Point Objective)：是指灾难发生后，确保对业务不产生损失的前提下，可以丢失的最大数据量。
 
 下面的图形描述了这两个概念：
