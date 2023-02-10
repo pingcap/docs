@@ -182,7 +182,7 @@ delta_index_cache_size = 0
     ## When the value is an integer, the unit is byte. For example, 34359738368 means 32 GiB of memory limit, and 0 means no limit.
     ## When the value is a floating-point number in the range of [0.0, 1.0), it means the ratio of the allowed memory usage to the total memory of the node. For example, 0.8 means 80% of the total memory, and 0.0 means no limit.
     ## The default value is 0, which means no limit.
-    ## When a query attempts to consume memory that exceeds the limit of this parameter, the query is terminated and an error is reported.
+    ## When a query attempts to consume memory that exceeds the limit, the query is terminated and an error is reported.
     max_memory_usage = 0
 
     ## The memory usage limit for the generated intermediate data in all queries.
