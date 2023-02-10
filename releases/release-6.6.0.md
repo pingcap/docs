@@ -37,20 +37,20 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
   </tr>
   <tr>
     <td>Stability<br /><br />RELIABLE to use</td>
-    <td>Historical SQL binding</td>
+    <td><a href="#binding-his-ga">Historical SQL binding</a></td>
     <td>Support binding historical execution plans and quickly binding execution plans on TiDB Dashboard.</td>
   </tr>
   <tr>
     <td rowspan="3">Performance<br /><br />POWERFUL to use</td>
-    <td>TiFlash supports compression exchange</td>
+    <td><a href="#compression-exchange">TiFlash supports compression exchange</a></td>
     <td>TiFlash supports data compression to improve the efficiency of parallel data exchange.</td>
   </tr>
   <tr>
-    <td>TiFlash supports stale read</td>
+    <td><a href="#tiflash-stale-read">TiFlash supports stale read</a></td>
     <td>TiFlash supports the Stale Read feature, which can improve query performance in scenarios where real-time requirements are not restricted.</td>
   </tr>
   <tr>
-    <td>DM support physical import (experimental)</td>
+    <td><a href="#dm-physical">DM support physical import (experimental)</a></td>
     <td>TiDB Data Migration (DM) integrates TiDB Lightning's Physical Import mode to improve the performance of full data migration, with performance being up to 10 times faster.</td>
   </tr>
 </tbody>
@@ -265,7 +265,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
 ### Ecosystem
 
-* TiDB Data Migration (DM) integrates with TiDB Lightning's physical import mode for up to a 10x performance boost for full migration (experimental) @[lance6716](https://github.com/lance6716) **tw@ran-huang**
+* <a name="dm-physical" style="text-decoration:none; color:inherit; cursor:default;">TiDB Data Migration (DM) integrates with TiDB Lightning's physical import mode for up to a 10x performance boost for full migration (experimental)</a> @[lance6716](https://github.com/lance6716) **tw@ran-huang**
 
     In v6.6.0, DM's full migration capability integrates with TiDB Lightning's physical import mode, which enables DM to improve the performance of full data migration by up to 10 times, greatly reducing the migration time in large data volume scenarios.
 
