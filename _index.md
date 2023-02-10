@@ -4,7 +4,7 @@ hide_sidebar: true
 hide_commit: true
 ---
 
-<LearningPathContainer platform="tidb" title="TiDB" subTitle="TiDB is an open-source distributed SQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. Find the guide, samples, and references you need to use TiDB.">
+<LearningPathContainer platform="tidb" title="TiDB" subTitle="TiDBは、HTAP（Hybrid Transactional and Analytical Processing）ワークロードをサポートするオープンソースの分散型SQLデータベースです。TiDBを使用するために必要なガイド、サンプル、およびリファレンスをご参照ください。">
 
 <!-- Localization note for TiDB:
 
