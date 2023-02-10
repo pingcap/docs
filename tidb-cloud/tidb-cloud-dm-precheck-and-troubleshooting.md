@@ -15,7 +15,7 @@ The solutions vary depending on your upstream database.
 
 ### Error message: Check whether mysql server_id has been greater than 0
 
-- Amazon Aurora MySQL or Amazon RDS: `server_id` is configured by default. You do not need to configure it.
+- Amazon Aurora MySQL or Amazon RDS: `server_id` is configured by default. You do not need to configure it. Make sure you are using Amazon Aurora MySQL writer instances to support both full and incrental data migration.
 - MySQL: to configure `server_id` for MySQL, see [Setting the Replication Source Configuration](https://dev.mysql.com/doc/refman/5.7/en/replication-howto-masterbaseconfig.html).
 
 ### Error message: Check whether mysql binlog is enabled
