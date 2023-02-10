@@ -57,7 +57,7 @@ Compared to Mydumper, Dumpling has the following improvements:
 - Support exporting data to Amazon S3 cloud storage.
 - More optimizations are made for TiDB:
     - Support configuring the memory limit of a single TiDB SQL statement.
-    - If it is possible for dumpling to connect directly to PD, Dumpling supports automatic adjustment of TiDB GC time for TiDB v4.0.0 and later versions.
+    - If Dumpling can connect directly to PD, Dumpling supports automatic adjustment of TiDB GC time for TiDB v4.0.0 and later versions.
     - Use TiDB's hidden column `_tidb_rowid` to optimize the performance of concurrent data export from a single table.
     - For TiDB, you can set the value of [`tidb_snapshot`](/read-historical-data.md#how-tidb-reads-data-from-history-versions) to specify the time point of the data backup. This ensures the consistency of the backup, instead of using `FLUSH TABLES WITH READ LOCK` to ensure the consistency.
 
