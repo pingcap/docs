@@ -60,6 +60,10 @@ This document introduces the user scenarios, supported upstreams and downstreams
 
 ## [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md)
 
+> **Warning:**
+>
+> TiDB Binlog is no longer maintained. It is not recommended to use it. You can use [TiCDC](/ticdc/ticdc-overview.md) instead.
+
 | User scenario | <span style="font-weight:normal">Incremental replication between TiDB clusters, such as using one TiDB cluster as the secondary cluster of another TiDB cluster</span> |
 |---|---|
 | **Upstream** | TiDB |

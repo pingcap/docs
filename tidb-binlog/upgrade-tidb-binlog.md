@@ -6,6 +6,10 @@ aliases: ['/docs/dev/tidb-binlog/upgrade-tidb-binlog/','/docs/dev/reference/tidb
 
 # Upgrade TiDB Binlog
 
+> **Warning:**
+>
+> TiDB Binlog is no longer maintained. It is not recommended to use it. You can use [TiCDC](/ticdc/ticdc-overview.md) instead.
+
 This document introduces how to upgrade TiDB Binlog that is deployed manually to the latest [cluster](/tidb-binlog/tidb-binlog-overview.md) version. There is also a section on how to upgrade TiDB Binlog from an earlier incompatible version (Kafka/Local version) to the latest version.
 
 ## Upgrade TiDB Binlog deployed manually

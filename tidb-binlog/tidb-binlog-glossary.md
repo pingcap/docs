@@ -6,6 +6,10 @@ aliases: ['/docs/dev/tidb-binlog/tidb-binlog-glossary/','/docs/dev/reference/tid
 
 # TiDB Binlog Glossary
 
+> **Warning:**
+>
+> TiDB Binlog is no longer maintained. It is not recommended to use it. You can use [TiCDC](/ticdc/ticdc-overview.md) instead.
+
 This document lists the terms used in the logs, monitoring, configurations, and documentation of TiDB Binlog.
 
 ## Binlog

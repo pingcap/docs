@@ -6,6 +6,10 @@ aliases: ['/docs/dev/tidb-binlog/troubleshoot-tidb-binlog/','/docs/dev/reference
 
 # TiDB Binlog Troubleshooting
 
+> **Warning:**
+>
+> TiDB Binlog is no longer maintained. It is not recommended to use it. You can use [TiCDC](/ticdc/ticdc-overview.md) instead.
+
 This document describes how to troubleshoot TiDB Binlog to find the problem.
 
 If you encounter errors while running TiDB Binlog, take the following steps to troubleshoot:

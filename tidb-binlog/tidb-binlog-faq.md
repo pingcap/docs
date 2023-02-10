@@ -6,6 +6,10 @@ aliases: ['/docs/dev/tidb-binlog/tidb-binlog-faq/','/docs/dev/reference/tidb-bin
 
 # TiDB Binlog FAQs
 
+> **Warning:**
+>
+> TiDB Binlog is no longer maintained. It is not recommended to use it. You can use [TiCDC](/ticdc/ticdc-overview.md) instead.
+
 This document collects the frequently asked questions (FAQs) about TiDB Binlog.
 
 ## What is the impact of enabling TiDB Binlog on the performance of TiDB?

@@ -6,6 +6,10 @@ aliases: ['/docs/dev/tidb-binlog/binlog-control/']
 
 # binlogctl
 
+> **Warning:**
+>
+> TiDB Binlog is no longer maintained. It is not recommended to use it. You can use [TiCDC](/ticdc/ticdc-overview.md) instead.
+
 [Binlog Control](https://github.com/pingcap/tidb-binlog/tree/master/binlogctl) (`binlogctl` for short) is a command line tool for TiDB Binlog. You can use `binlogctl` to manage TiDB Binlog clusters.
 
 You can use `binlogctl` to:

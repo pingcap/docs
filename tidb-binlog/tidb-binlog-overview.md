@@ -6,6 +6,10 @@ aliases: ['/docs/dev/tidb-binlog/tidb-binlog-overview/','/docs/dev/reference/tid
 
 # TiDB Binlog Cluster Overview
 
+> **Warning:**
+>
+> TiDB Binlog is no longer maintained. It is not recommended to use it. You can use [TiCDC](/ticdc/ticdc-overview.md) instead.
+
 This document introduces the architecture and the deployment of the cluster version of TiDB Binlog.
 
 TiDB Binlog is a tool used to collect binlog data from TiDB and provide near real-time backup and replication to downstream platforms.

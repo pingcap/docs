@@ -8,7 +8,8 @@ aliases: ['/docs/dev/tidb-binlog/bidirectional-replication-between-tidb-clusters
 
 > **Warning:**
 >
-> Currently, bidirectional replication is still an experimental feature. It is **NOT** recommended to use it in the production environment.
+> - TiDB Binlog used in this document is no longer maintained. It is not recommended to use it. You can use [TiCDC](/ticdc/ticdc-overview.md) instead.
+> - Currently, bidirectional replication is still an experimental feature. It is **NOT** recommended to use it in the production environment.
 
 This document describes the bidirectional replication between two TiDB clusters, how the replication works, how to enable it, and how to replicate DDL operations.
 
