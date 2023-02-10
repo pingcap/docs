@@ -10,7 +10,7 @@ This document lists the features supported in different TiDB versions, including
 
 > **Note:**
 >
-> PingCAP does not provide patch releases (including bug fixes and security vulnerability fixes) for DMR versions. If you encounter any bugs in a DMR version, they will be fixed in the subsequent releases. It is recommended to use the [latest LTS version](https://docs.pingcap.com/tidb/stable) unless you have special needs.
+> PingCAP does not provide patch releases for DMR versions. Any bugs will be fixed in future releases. For general purposes, it is recommended to use the [latest LTS version](https://docs.pingcap.com/tidb/stable).
 >
 > The abbreviations in the table below have the following meanings:
 >
