@@ -51,7 +51,7 @@ This document lists the features supported in different TiDB versions, including
 | [Use FastScan to accelerate queries in OLAP scenarios](/develop/dev-guide-use-fastscan.md) | E | N | N | N | N | N | N | N |
 | [RocksDB engine](/storage-engine/rocksdb-overview.md)        | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | [Titan plugin](/storage-engine/titan-overview.md)            | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Titan Level Merge](/storage-engine/titan-configuration.md#level-merge-E)   |  E   |  E    |    E     |    E     |    E     |    E     |    E     |    E     |
+| [Titan Level Merge](/storage-engine/titan-configuration.md#level-merge-experimental)   |  E   |  E    |    E     |    E     |    E     |    E     |    E     |    E     |
 | [Use buckets to improve scan concurrency](/tune-region-performance.md#use-bucket-to-increase-concurrency) | E | E | N | N | N | N | N | N |
 | [Invisible indexes](/sql-statements/sql-statement-add-index.md) | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      N       |
 | [Composite `PRIMARY KEY`](/constraints.md)                   | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
