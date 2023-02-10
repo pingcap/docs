@@ -17,7 +17,7 @@ To allow TiDB Cloud to access the source data in your Amazon S3 bucket, you need
 <SimpleTab>
 <div label="By Access Keys">
 
-You can use Amazon access keys to access your Amazon S3 bucket. It is recommended that you use an IAM user to create an access key, instead of the AWS account root user.
+You can use Amazon access keys to access your Amazon S3 bucket. It is recommended that you use [an IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html#id_users_create_console) to create an access key, instead of the AWS account root user.
 
 For more information about how to create access keys, see [Managing access keys for IAM users](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey).
 
