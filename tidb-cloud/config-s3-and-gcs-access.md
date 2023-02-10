@@ -9,7 +9,22 @@ If your source data is stored in Amazon S3 or Google Cloud Storage (GCS) buckets
 
 ## Configure Amazon S3 access
 
-To allow TiDB Cloud to access the source data in your Amazon S3 bucket, take the following steps to configure the bucket access for TiDB Cloud and get the Role-ARN.
+To allow TiDB Cloud to access the source data in your Amazon S3 bucket, you need to configure the bucket access for TiDB Cloud. You can use either of the following two methods to configure the bucket access:
+
+- Use Amazon access keys (recommended): use the access key of an IAM user to access your Amazon S3 bucket.
+- Use a role-ARN: use a role-ARN to access your Amazon S3 bucket.
+
+<SimpleTab>
+<div label="By Access Keys">
+
+You can use Amazon access keys to access your Amazon S3 bucket. It is recommended that you use an IAM user to create an access key, instead of the AWS account root user.
+
+For more information about how to create access keys, see [Managing access keys for IAM users](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey).
+
+</div>
+<div label="By Role-ARN">
+
+Configure the bucket access for TiDB Cloud and get the Role-ARN as follows:
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), get the TiDB Cloud account ID and external ID of the target TiDB cluster.
 
@@ -98,6 +113,9 @@ To allow TiDB Cloud to access the source data in your Amazon S3 bucket, take the
         ![Copy AWS role ARN](/media/tidb-cloud/aws-role-arn.png)
 
 4. In the TiDB Cloud console, go to the **Data Import** page where you get the TiDB Cloud account ID and external ID, and then paste the role ARN to the **Role ARN** field.
+
+</div>
+</SimpleTab>
 
 ## Configure GCS access
 
