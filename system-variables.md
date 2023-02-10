@@ -1732,9 +1732,11 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
->
-> This TiDB variable is not applicable to TiDB Cloud.
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `OFF`
+- This variable controls whether to enable the `PLAN REPLAYER CAPTURE` feature. The default value `OFF` means to disable the `PLAN REPLAYER CAPTURE` feature.
 
 </CustomContent>
 
