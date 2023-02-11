@@ -820,6 +820,7 @@
     - [Partitioning](/partitioned-table.md)
     - [Temporary Tables](/temporary-tables.md)
     - [Cached Tables](/cached-tables.md)
+    - [FOREIGN KEY Constraints](/foreign-key.md)
     - Character Set and Collation
       - [Overview](/character-set-and-collation.md)
       - [GBK](/character-set-gbk.md)
@@ -945,6 +946,7 @@
   - v6.2
     - [6.2.0-DMR](/releases/release-6.2.0.md)
   - v6.1
+    - [6.1.4](/releases/release-6.1.4.md)
     - [6.1.3](/releases/release-6.1.3.md)
     - [6.1.2](/releases/release-6.1.2.md)
     - [6.1.1](/releases/release-6.1.1.md)
