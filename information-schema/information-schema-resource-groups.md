@@ -7,9 +7,9 @@ summary: Learn the `RESOURCE_GROUPS` information_schema table.
 
 > **Warning:**
 >
-> This feature is experimental and its form and usage may change in subsequent versions.
+> This feature is experimental and its form and usage might change in subsequent versions.
 
-The `RESOURCE_GROUPS` table shows information about all resource groups. See [Use Resource Control to Achieve Resource Isolation](/tidb-resource-control.md).
+The `RESOURCE_GROUPS` table shows the information about all resource groups. For more information, see [Use Resource Control to Achieve Resource Isolation](/tidb-resource-control.md).
 
 ```sql
 USE information_schema;
@@ -29,12 +29,10 @@ DESC resource_groups;
 
 ## Examples
 
-{{< copyable "sql" >}}
-
 ```sql
 mysql> CREATE RESOURCE GROUP rg1 RU_PER_SEC=1000; -- Create the resource group rg1
 Query OK, 0 rows affected (0.34 sec)
-mysql> SHOW CREATE RESOURCE GROUP rg1; -- Displays the definition of the rg1 resource group.
+mysql> SHOW CREATE RESOURCE GROUP rg1; -- Display the definition of the rg1 resource group
 +----------------+---------------------------------------------+
 | Resource_Group | Create Resource Group                       |
 +----------------+---------------------------------------------+

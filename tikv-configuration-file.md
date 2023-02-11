@@ -2156,10 +2156,10 @@ To reduce write latency, TiKV periodically fetches and caches a batch of timesta
 
 ## resource-control
 
-Configuration items related to resource control related to the TiKV storage layer.
+Configuration items related to resource control of the TiKV storage layer.
 
 ### `enabled` <span class="version-mark">New in v6.6.0</span>
 
-+ Whether to support scheduling for user foreground read/write requests according to Request Unit (RU) of the corresponding resource group. For information about TiDB resource groups and resource control, see [TiDB resource control](/tidb-resource-control.md).
-+ It is only meaningful to enable this configuration item if [`tidb_enable_resource_control](/system-variables.md#tidb_enable_resource_control-new-in-v660) is enabled on TiDB. When it is enabled, TiKV will use the priority queue to schedule the queued requests for user foreground read/write requests. The priority of scheduling is inversely related to the amount of resources already consumed by the resource group where the request is located, and positively related to the quota of the corresponding resource group.
++ Controls whether to enable scheduling for user foreground read/write requests according to [Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru) of the corresponding resource groups. For information about TiDB resource groups and resource control, see [TiDB resource control](/tidb-resource-control.md).
++ Enabling this configuration item only works when [`tidb_enable_resource_control](/system-variables.md#tidb_enable_resource_control-new-in-v660) is enabled on TiDB. When this configuration item is enabled, TiKV will use the priority queue to schedule the queued read/write requests from foreground users. The scheduling priority of a request is inversely related to the amount of resources already consumed by the resource group that receives this request, and positively related to the quota of the corresponding resource group.
 + Default value: `false`, which means to disable scheduling based on the RU of the resource group.
