@@ -115,7 +115,7 @@ To monitor lag concerning the RPO, do the following:
 2. Click **Create a replica of your TiDB Cluster**.
 3. You can see the lag of the primary-secondary cluster.
 
-## Why the "cloud_cdc_admin" account is required
+## Why the `cloud_cdc_admin` account is required
 
 When you use the TiDB Cloud Replication feature, the secondary cluster will automatically create a database account named `cloud_cdc_admin` during its initialization. This account has been granted DDL, DML, and RESTRICTED_REPLICA_WRITER_ADMIN privileges through the `cloud_cdc_role` role, allowing it to replicate data from the primary cluster to the secondary cluster.
 
