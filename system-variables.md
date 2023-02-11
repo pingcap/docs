@@ -1810,7 +1810,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 > **Warning:**
 >
-> This feature is experimental and its form and usage may change in subsequent versions.
+> This feature is experimental and its form and usage might change in subsequent versions.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes

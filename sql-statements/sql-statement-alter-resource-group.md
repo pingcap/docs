@@ -5,7 +5,7 @@ summary: Learn the usage of ALTER RESOURCE GROUP in TiDB.
 
 # ALTER RESOURCE GROUP
 
-The `ALTER RESOURCE GROUP` statement is used to modify the resource group in a database.
+The `ALTER RESOURCE GROUP` statement is used to modify a resource group in a database.
 
 ## Synopsis
 
@@ -30,13 +30,13 @@ DirectResourceGroupOption:
 
 ```
 
-TiDB supports the following `DirectResourceGroupOption`, where [Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru) is TiDB's unified abstraction unit for CPU, IO, and other system resources.
+TiDB supports the following `DirectResourceGroupOption`, where [Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru) is a unified abstraction unit in TiDB for CPU, IO, and other system resources.
 
 | Option     | Description                         | Example                |
 |---------------|-------------------------------------|------------------------|
-|`RU_PER_SEC` | Rate of RU filling per second |`RU_PER_SEC = 500` indicates that this resource group is backfilled with 500 RUs per second |
+| `RU_PER_SEC` | Rate of RU backfilling per second | `RU_PER_SEC = 500` indicates that this resource group is backfilled with 500 RUs per second |
 
-If the `BURSTABLE` attribute is set, the corresponding resource group allows the available system resources to be used exceeding the quota.
+If the `BURSTABLE` attribute is set, TiDB allows the corresponding resource group to use the available system resources when the quota is exceeded.
 
 > **Note:**
 > 
@@ -54,27 +54,27 @@ mysql> CREATE RESOURCE GROUP IF NOT EXISTS rg1
     ->  BURSTABLE;
 Query OK, 0 rows affected (0.08 sec)
 mysql> SELECT * FROM information_schema.resource_groups WHERE NAME ='rg1';
-+------+-------------+-----------+
-| NAME | RU_PER_SEC  | BURSTABLE |
-+------+-------------+-----------+
-| rg1  |         100 |  YES       |
-+------+-------------+-----------+
++------+------------+-----------+
+| NAME | RU_PER_SEC | BURSTABLE |
++------+------------+-----------+
+| rg1  |        100 | YES       |
++------+------------+-----------+
 1 rows in set (1.30 sec)
 mysql> ALTER RESOURCE GROUP rg1
     ->  RU_PER_SEC = 200;
 Query OK, 0 rows affected (0.08 sec)
 mysql> SELECT * FROM information_schema.resource_groups WHERE NAME ='rg1';
-+------+-------------+-----------+
-| NAME | RU_PER_SEC  |  BURSTABLE |
-+------+-------------+-----------+
-| rg1  |         200 | NO        |
-+------+-------------+-----------+
++------+------------+-----------+
+| NAME | RU_PER_SEC | BURSTABLE |
++------+------------+-----------+
+| rg1  |        200 | NO        |
++------+------------+-----------+
 1 rows in set (1.30 sec)
 ```
 
 ## MySQL compatibility
 
-MySQL also supports [ALTER RESOURCE GROUP](https://dev.mysql.com/doc/refman/8.0/en/alter-resource-group.html). However, the accepted parameters are different from TiDB so that they are not compatible.
+MySQL also supports [ALTER RESOURCE GROUP](https://dev.mysql.com/doc/refman/8.0/en/alter-resource-group.html). However, the acceptable parameters are different from that of TiDB so that they are not compatible.
 
 ## See also
 
