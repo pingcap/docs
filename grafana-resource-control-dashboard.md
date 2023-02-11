@@ -24,7 +24,7 @@ This document describes some key monitoring metrics displayed on the Resource Co
 
 ## Metrics about resources
 
-- KV Request Count: the number of KV requests is calculated in real time for each resource group. They are divided into read and write types. `total` is the sum of the KV requests involved by all Resource Groups.
+- KV Request Count: the number of KV requests for each resource group, calculated per second. The requests are divided into read and write types. `total` is the sum of the KV requests for all Resource Groups.
 - KV Request Count Per Query: the average number of read and write KV requests by each SQL statement per second. It is obtained by dividing the above KV Request Count metric by the number of SQL statements executed per second.
 - Bytes Read: the amount of data read by each Resource Group, calculated per second. `total` is the sum of the data read by all Resource Groups.
 - Bytes Read Per Query: the average amount of data read by each SQL statement per second. It is obtained by dividing the above Bytes Read metric by the number of SQL statements executed per second.
