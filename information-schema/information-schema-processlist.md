@@ -48,6 +48,7 @@ DESC processlist;
 ```sql
 SELECT * FROM processlist\G
 ```
+
 ```sql
 *************************** 1. row ***************************
                  ID: 2300033189772525975
