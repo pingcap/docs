@@ -1,19 +1,19 @@
 ---
 title: Best Practices for Read-Only Storage Nodes
-summary: Learn how to configure read-only storage nodes to achieve physical isolation from important online service.
+summary: Learn how to configure read-only storage nodes to physically isolate important online services.
 ---
 
 # Best Practices for Read-Only Storage Nodes
 
-This document introduces how to configure read-only storage nodes and how to direct backup, analysis, testing, and other traffic to these nodes. So that these loads with high tolerance for delay can be physically isolated from the online important service.
+This document introduces how to configure read-only storage nodes and how to direct backup, analysis, testing, and other traffic to these nodes. In this way, loads with high tolerance for delay can be physically isolated from important online services.
 
 ## Procedures
 
-### 1. Specify some TiKV nodes as read-only nodes
+### 1. Specify some TiKV nodes as read-only
 
 To specify some TiKV nodes as read-only, you can mark these nodes with a special label (use `$` as the prefix of the label key). Unless you explicitly specify these nodes to store some data using Placement Rules, PD does not schedule any data to these nodes.
 
-For example, use the `tiup cluster edit-config` command to configure the a read-only node:
+You can configure a read-only node by running the `tiup cluster edit-config` command:
 
 ```
 tikv_servers:
@@ -25,13 +25,13 @@ tikv_servers:
 
 ### 2. Use Placement Rules to store data on read-only nodes as learners
 
-1. Use the `pd-ctl config placement-rules` command to export the default Placement Rules as the basis for modification:
+1. Run the `pd-ctl config placement-rules` command to export the default Placement Rules:
 
     ```shell
     pd-ctl config placement-rules rule-bundle load --out="rules.json"
     ```
 
-    If you have not configured Placement Rules before, the output file is as follows:
+    If you have not configured Placement Rules before, the output is as follows:
 
     ```json
     [
@@ -53,7 +53,7 @@ tikv_servers:
     ]
     ```
 
-2. Store all data on the read-only nodes as a learner. The following example is based on the default configuration.
+2. Store all data on the read-only nodes as a learner. The following example is based on the default configuration:
 
     ```json
     [
@@ -93,7 +93,7 @@ tikv_servers:
     ]
     ```
 
-3. Use the `pd-ctl config placement-rules` command to write the configuration to PD:
+3. Use the `pd-ctl config placement-rules` command to write the preceding configurations to PD:
 
     ```shell
     pd-ctl config placement-rules rule-bundle save --in="rules.json"
