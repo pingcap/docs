@@ -31,7 +31,9 @@ This document describes how to import sample data into TiDB Cloud via the UI. Th
 
     - **Data format**: select **SQL File**.
     - **Bucket URI**: enter the sample data URI `s3://tidbcloud-sample-data/data-ingestion/`
-    - **Role ARN**: enter `arn:aws:iam::801626783489:role/import-sample-access`
+    - **Bucket Access**: you can use either an Amazon access key or role-ARN to access your bucket.
+        - **AWS Access Keys**: enter the access key ID and secret access key. For more information about configuring access keys, see [Configure Amazon S3 access](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access).
+        - **Role ARN**: enter `arn:aws:iam::801626783489:role/import-sample-access`
 
     If the region of the bucket is different from your cluster, confirm the compliance of cross region. Click **Next**.
 

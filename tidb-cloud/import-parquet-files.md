@@ -86,7 +86,7 @@ To allow TiDB Cloud to access the Parquet files in the Amazon S3 or GCS bucket, 
 
 - If your Parquet files are located in Amazon S3, [configure Amazon S3 access](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access).
 
-    Once finished, make a note of the Role ARN value as you will need it in [Step 4](#step-4-import-parquet-files-to-tidb-cloud).
+    You can use either an Amazon access key or a Role ARN to access your bucket. Once finished, make a note of the access key or the Role ARN value as you will need it in [Step 4](#step-4-import-parquet-files-to-tidb-cloud).
 
 - If your Parquet files are located in GCS, [configure GCS access](/tidb-cloud/config-s3-and-gcs-access.md#configure-gcs-access).
 
@@ -112,7 +112,9 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 
     - **Data format**: select **Parquet**.
     - **Bucket URI**: select the bucket URI where your Parquet files are located.
-    - **Role ARN**: (This field is visible only for AWS S3): enter the Role ARN value for **Role ARN**.
+    - **Bucket Access**: you can use either an Amazon access key or role-ARN to access your bucket.
+        - **AWS Access Keys**: enter the access key ID and secret access key. For more information about configuring access keys, see [Configure Amazon S3 access](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access).
+        - **Role ARN**: (This field is visible only for AWS S3): enter the Role ARN value for **Role ARN**.
 
     If the region of the bucket is different from your cluster, confirm the compliance of cross region. Click **Next**.
 
