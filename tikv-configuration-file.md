@@ -3,7 +3,7 @@ title: TiKV Configuration File
 summary: Learn the TiKV configuration file.
 ---
 
-# TiKVConfiguration / コンフィグレーションファイル {#tikv-configuration-file}
+# TiKVコンフィグレーションファイル {#tikv-configuration-file}
 
 <!-- markdownlint-disable MD001 -->
 
@@ -37,7 +37,7 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 
 ## ログ<span class="version-mark">v5.4.0 の新機能</span> {#log-span-class-version-mark-new-in-v5-4-0-span}
 
--   ログに関するConfiguration / コンフィグレーション項目です。
+-   ログに関するコンフィグレーション項目です。
 
 -   v5.4.0 から、TiKV と TiDB のログ構成項目を一致させるために、TiKV は以前の構成項目`log-rotation-timespan`を廃止し、 `log-level` 、 `log-format` 、 `log-file` 、 `log-rotation-size`を次のように変更します。古い構成アイテムのみを設定し、それらの値がデフォルト以外の値に設定されている場合、古いアイテムは新しいアイテムと互換性があります。新旧両方の構成項目が設定されている場合、新しい項目が有効になります。
 
@@ -61,11 +61,11 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 
 ## log.file v5.4.0<span class="version-mark">の新機能</span> {#log-file-span-class-version-mark-new-in-v5-4-0-span}
 
--   ログファイルに関するConfiguration / コンフィグレーション項目です。
+-   ログファイルに関するコンフィグレーション項目です。
 
 ### <code>filename</code> <span class="version-mark">v5.4.0 の新機能</span> {#code-filename-code-span-class-version-mark-new-in-v5-4-0-span}
 
--   ログファイル。この設定項目が設定されていない場合、デフォルトで「stderr」にログが出力されます。この設定項目が設定されている場合、ログは対応するファイルに出力されます。
+-   ログファイル。この設定項目が設定されていない場合、ログはデフォルトで「stderr」に出力されます。この設定項目が設定されている場合、ログは対応するファイルに出力されます。
 -   デフォルト値: `""`
 
 ### <code>max-size</code><span class="version-mark">新機能</span> {#code-max-size-code-span-class-version-mark-new-in-v5-4-0-span}
@@ -98,7 +98,7 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 
 ## サーバー {#server}
 
--   サーバーに関連するConfiguration / コンフィグレーション項目。
+-   サーバーに関連するコンフィグレーション項目。
 
 ### <code>status-thread-pool-size</code> {#code-status-thread-pool-size-code}
 
@@ -127,7 +127,7 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 
 ### <code>grpc-memory-pool-quota</code> {#code-grpc-memory-pool-quota-code}
 
--   gRPC で使用できるメモリ サイズを制限します
+-   gRPC で使用できるメモリサイズを制限します
 -   デフォルト値: 制限なし
 -   OOM が観察された場合に備えてメモリを制限します。使用を制限すると、潜在的な失速につながる可能性があることに注意してください
 
@@ -177,7 +177,7 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 
 ### <code>end-point-recursion-limit</code> {#code-end-point-recursion-limit-code}
 
--   TiKV がコプロセッサー DAG 式をデコードするときに許可される再帰レベルの最大数
+-   TiKV がコプロセッサーDAG 式をデコードするときに許可される再帰レベルの最大数
 -   デフォルト値: `1000`
 -   最小値: `1`
 
@@ -212,7 +212,7 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 
 ## readpool.unified {#readpool-unified}
 
-読み取り要求を処理する単一のスレッド プールに関連するConfiguration / コンフィグレーション項目。このスレッド プールは、4.0 バージョン以降、元のストレージ スレッド プールとコプロセッサ スレッド プールに取って代わります。
+読み取り要求を処理する単一のスレッド プールに関連するコンフィグレーション項目。このスレッド プールは、4.0 バージョン以降、元のストレージ スレッド プールとコプロセッサ スレッド プールに取って代わります。
 
 ### <code>min-thread-count</code> {#code-min-thread-count-code}
 
@@ -241,7 +241,7 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 
 ## readpool.storage {#readpool-storage}
 
-ストレージ スレッド プールに関連するConfiguration / コンフィグレーションアイテム。
+ストレージ スレッド プールに関連するコンフィグレーションアイテム。
 
 ### <code>use-unified-pool</code> {#code-use-unified-pool-code}
 
@@ -295,7 +295,7 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 
 ## <code>readpool.coprocessor</code> {#code-readpool-coprocessor-code}
 
-コプロセッサ スレッド プールに関連するConfiguration / コンフィグレーション項目。
+コプロセッサースレッド プールに関連するコンフィグレーション項目。
 
 ### <code>use-unified-pool</code> {#code-use-unified-pool-code}
 
@@ -349,11 +349,11 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 
 ## 保管所 {#storage}
 
-ストレージに関するConfiguration / コンフィグレーション項目。
+ストレージに関するコンフィグレーション項目。
 
 ### <code>scheduler-concurrency</code> {#code-scheduler-concurrency-code}
 
--   キーの同時操作を防止する内蔵メモリーロック機構。各キーには、異なるスロットにハッシュがあります。
+-   キーの同時操作を防止する内蔵メモリロック機構。各キーには、異なるスロットにハッシュがあります。
 -   デフォルト値: `524288`
 -   最小値: `1`
 
@@ -395,22 +395,22 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 
 ## storage.block-cache {#storage-block-cache}
 
-複数の RocksDBカラムファミリー (CF) 間でのブロック キャッシュの共有に関連するConfiguration / コンフィグレーション項目。これらの構成項目を有効にすると、列ファミリーごとに個別に構成されたブロック キャッシュが無効になります。
+複数の RocksDBカラムファミリー (CF) 間でのブロックキャッシュの共有に関連するコンフィグレーション項目。これらの構成項目を有効にすると、カラムファミリーごとに個別に構成されたブロックキャッシュが無効になります。
 
 ### <code>shared</code> {#code-shared-code}
 
--   ブロック キャッシュの共有を有効または無効にします。
+-   ブロックキャッシュの共有を有効または無効にします。
 -   デフォルト値: `true`
 
 ### <code>capacity</code> {#code-capacity-code}
 
--   共有ブロック キャッシュのサイズ。
--   デフォルト値: 合計システム メモリのサイズの 45%
+-   共有ブロックキャッシュのサイズ。
+-   デフォルト値: 合計システムメモリのサイズの 45%
 -   単位: KB|MB|GB
 
 ## storage.flow-control {#storage-flow-control}
 
-TiKVにおけるフロー制御機構に関するConfiguration / コンフィグレーション項目です。このメカニズムは、RocksDB の書き込みストール メカニズムに取って代わり、スケジューラレイヤーでフローを制御します。
+TiKVにおけるフロー制御機構に関するコンフィグレーション項目です。このメカニズムは、RocksDB の書き込みストール メカニズムに取って代わり、スケジューラレイヤーでフローを制御します。
 
 ### <code>enable</code> {#code-enable-code}
 
@@ -439,7 +439,7 @@ TiKVにおけるフロー制御機構に関するConfiguration / コンフィグ
 
 ## storage.io-rate-limit {#storage-io-rate-limit}
 
-I/Oレートリミッターに関するConfiguration / コンフィグレーション項目です。
+I/Oレートリミッターに関するコンフィグレーション項目です。
 
 ### <code>max-bytes-per-sec</code> {#code-max-bytes-per-sec-code}
 
@@ -454,7 +454,7 @@ I/Oレートリミッターに関するConfiguration / コンフィグレーシ�
 
 ## いかだ屋 {#raftstore}
 
-Raftstore に関連するConfiguration / コンフィグレーション項目。
+Raftstore に関連するコンフィグレーション項目。
 
 ### <code>prevote</code> {#code-prevote-code}
 
@@ -581,7 +581,7 @@ Raftstore に関連するConfiguration / コンフィグレーション項目。
 
 ### <code>raft-log-reserve-max-ticks</code> <span class="version-mark">v5.3 の新機能</span> {#code-raft-log-reserve-max-ticks-code-span-class-version-mark-new-in-v5-3-span}
 
--   この構成項目で設定されたティック数が経過した後、残りのRaftログの数が`raft-log-gc-threshold`で設定された値に達しない場合でも、TiKV はこれらのログに対してガベージ コレクション (GC) を実行します。
+-   この構成項目で設定されたティック数が経過した後、残りのRaftログの数が`raft-log-gc-threshold`で設定された値に達しない場合でも、TiKV はこれらのログに対してガベージコレクション(GC) を実行します。
 -   デフォルト値: `6`
 -   最小値: `0`より大きい
 
@@ -593,7 +593,7 @@ Raftstore に関連するConfiguration / コンフィグレーション項目。
 
 ### <code>hibernate-regions</code> {#code-hibernate-regions-code}
 
--   Hibernate リージョンを有効または無効にします。このオプションを有効にすると、長時間アイドル状態のリージョンが自動的に休止状態に設定されます。これにより、アイドル状態のリージョンのRaftリーダーとフォロワーの間のハートビート メッセージによって引き起こされる余分なオーバーヘッドが削減されます。 `peer-stale-state-check-interval`を使用して、休止状態のリージョンのリーダーとフォロワーの間のハートビート間隔を変更できます。
+-   Hibernate リージョンを有効または無効にします。このオプションを有効にすると、長時間アイドル状態のリージョンが自動的に休止状態に設定されます。これにより、アイドル状態のリージョンのRaftリーダーとフォロワーの間のハートビートメッセージによって引き起こされる余分なオーバーヘッドが削減されます。 `peer-stale-state-check-interval`を使用して、休止状態のリージョンのリーダーとフォロワーの間のハートビート間隔を変更できます。
 -   デフォルト値: v5.0.2 以降のバージョンでは`true` 。 v5.0.2 より前のバージョンでは`false`
 
 ### <code>split-region-check-tick-interval</code> {#code-split-region-check-tick-interval-code}
@@ -667,7 +667,6 @@ Raftstore に関連するConfiguration / コンフィグレーション項目。
 ### <code>lock-cf-compact-interval</code> {#code-lock-cf-compact-interval-code}
 
 -   TiKV が Lock カラム Family の手動圧縮をトリガーする時間間隔
--   デフォルト値: `"256MB"`
 -   デフォルト値: `"10m"`
 -   最小値: `0`
 
@@ -722,7 +721,7 @@ Raftstore に関連するConfiguration / コンフィグレーション項目。
 
 ### <code>snap-apply-batch-size</code> {#code-snap-apply-batch-size-code}
 
--   インポートされたスナップショット ファイルがディスクに書き込まれるときに必要なメモリ キャッシュ サイズ
+-   インポートされたスナップショット ファイルがディスクに書き込まれるときに必要なメモリキャッシュ サイズ
 -   デフォルト値: `"10MB"`
 -   最小値: `0`
 -   単位：MB
@@ -731,7 +730,7 @@ Raftstore に関連するConfiguration / コンフィグレーション項目。
 
 > **警告：**
 >
-> クラスターのパフォーマンスに影響し、TiDB のガベージ コレクションと互換性がないため、運用環境で整合性チェックを有効にすることはお勧めし**ません**。
+> クラスターのパフォーマンスに影響し、TiDB のガベージコレクションと互換性がないため、本番環境で整合性チェックを有効にすることはお勧めし**ません**。
 
 -   整合性チェックがトリガーされる時間間隔。 `0`は、この機能が無効であることを意味します。
 -   デフォルト値: `"0s"`
@@ -815,7 +814,7 @@ Raftstore に関連するConfiguration / コンフィグレーション項目。
 
 ### <code>inspect-interval</code> {#code-inspect-interval-code}
 
--   一定の間隔で、TiKV は Raftstore コンポーネントのレイテンシーを検査します。このパラメーターは、検査の間隔を指定します。レイテンシーがこの値を超えると、この検査はタイムアウトとしてマークされます。
+-   一定の間隔で、TiKV は Raftstoreコンポーネントのレイテンシーを検査します。このパラメーターは、検査の間隔を指定します。レイテンシーがこの値を超えると、この検査はタイムアウトとしてマークされます。
 -   タイムアウト検査の割合からTiKVノードが遅いかどうかを判断します。
 -   デフォルト値: `"500ms"`
 -   最小値: `"1ms"`
@@ -828,7 +827,7 @@ Raftstore に関連するConfiguration / コンフィグレーション項目。
 
 ## コプロセッサー {#coprocessor}
 
-コプロセッサに関連するConfiguration / コンフィグレーション項目。
+コプロセッサーに関連するコンフィグレーション項目。
 
 ### <code>split-region-on-table</code> {#code-split-region-on-table-code}
 
@@ -865,7 +864,7 @@ Raftstore に関連するConfiguration / コンフィグレーション項目。
 
 ## RocksDB {#rocksdb}
 
-RocksDBに関するConfiguration / コンフィグレーション項目
+RocksDBに関するコンフィグレーション項目
 
 ### <code>max-background-jobs</code> {#code-max-background-jobs-code}
 
@@ -974,7 +973,7 @@ RocksDBに関するConfiguration / コンフィグレーション項目
 -   オプションの値: `"read-only"` 、 `"write-only"` 、 `"all-io"`
 -   デフォルト値: `"write-only"`
 
-### <code>rate-limiter-auto-tuned</code><span class="version-mark">新</span>機能 {#code-rate-limiter-auto-tuned-code-span-class-version-mark-new-in-v5-0-span}
+### <code>rate-limiter-auto-tuned</code> <span class="version-mark">v5.0 の新</span>機能 {#code-rate-limiter-auto-tuned-code-span-class-version-mark-new-in-v5-0-span}
 
 -   最近のワークロードに基づいて、RocksDB の圧縮レート リミッターの構成を自動的に最適化するかどうかを決定します。この構成が有効になっている場合、圧縮保留中のバイトは通常よりわずかに高くなります。
 -   デフォルト値: `true`
@@ -1023,7 +1022,7 @@ RocksDBに関するConfiguration / コンフィグレーション項目
 
 ## rocksdb.titan {#rocksdb-titan}
 
-Titan関連のConfiguration / コンフィグレーション項目。
+Titan関連のコンフィグレーション項目。
 
 ### <code>enabled</code> {#code-enabled-code}
 
@@ -1048,7 +1047,7 @@ Titan関連のConfiguration / コンフィグレーション項目。
 
 ## rocksdb.defaultcf | rocksdb.writecf | rocksdb.lockcf {#rocksdb-defaultcf-rocksdb-writecf-rocksdb-lockcf}
 
-`rocksdb.defaultcf`に`rocksdb.lockcf`するConfiguration / コンフィグレーション項目`rocksdb.writecf` 。
+`rocksdb.defaultcf`に`rocksdb.lockcf`するコンフィグレーション項目`rocksdb.writecf` 。
 
 ### <code>block-size</code> {#code-block-size-code}
 
@@ -1084,7 +1083,7 @@ Titan関連のConfiguration / コンフィグレーション項目。
 
 ### <code>use-bloom-filter</code> {#code-use-bloom-filter-code}
 
--   ブルーム フィルターを有効または無効にします
+-   ブルームフィルターを有効または無効にします
 -   デフォルト値: `true`
 
 ### <code>optimize-filters-for-hits</code> {#code-optimize-filters-for-hits-code}
@@ -1095,7 +1094,7 @@ Titan関連のConfiguration / コンフィグレーション項目。
 
 ### <code>whole-key-filtering</code> {#code-whole-key-filtering-code}
 
--   キー全体をブルーム フィルターに入れるかどうかを決定します
+-   キー全体をブルームフィルターに入れるかどうかを決定します
 -   `defaultcf`および`lockcf`のデフォルト値: `true`
 -   `writecf`のデフォルト値: `false`
 
@@ -1107,7 +1106,7 @@ Titan関連のConfiguration / コンフィグレーション項目。
 
 ### <code>block-based-bloom-filter</code> {#code-block-based-bloom-filter-code}
 
--   各ブロックがブルーム フィルターを作成するかどうかを決定します
+-   各ブロックがブルームフィルターを作成するかどうかを決定します
 -   デフォルト値: `false`
 
 ### <code>read-amp-bytes-per-bit</code> {#code-read-amp-bytes-per-bit-code}
@@ -1251,13 +1250,13 @@ Titan関連のConfiguration / コンフィグレーション項目。
 
 ### <code>compaction-guard-max-output-file-size</code> {#code-compaction-guard-max-output-file-size-code}
 
--   コンパクション ガードが有効な場合の SST ファイルの最大サイズ。この構成により、圧縮ガードが有効になっている場合に SST ファイルが大きくなりすぎるのを防ぐことができます。この構成は、同じ列ファミリーの`target-file-size-base`をオーバーライドします。
+-   コンパクション ガードが有効な場合の SST ファイルの最大サイズ。この構成により、圧縮ガードが有効になっている場合に SST ファイルが大きくなりすぎるのを防ぐことができます。この構成は、同じカラムファミリーの`target-file-size-base`をオーバーライドします。
 -   デフォルト値: `"128MB"`
 -   単位: KB|MB|GB
 
 ## rocksdb.defaultcf.titan {#rocksdb-defaultcf-titan}
 
-に関連するConfiguration / コンフィグレーション項目`rocksdb.defaultcf.titan` ．
+に関連するコンフィグレーション項目`rocksdb.defaultcf.titan` ．
 
 ### <code>min-blob-size</code> {#code-min-blob-size-code}
 
@@ -1335,7 +1334,7 @@ Titan関連のConfiguration / コンフィグレーション項目。
 
 ## raftdb {#raftdb}
 
-`raftdb`に関するConfiguration / コンフィグレーション項目
+`raftdb`に関するコンフィグレーション項目
 
 ### <code>max-background-jobs</code> {#code-max-background-jobs-code}
 
@@ -1356,7 +1355,7 @@ Titan関連のConfiguration / コンフィグレーション項目。
 
 ## いかだエンジン {#raft-engine}
 
-Raft Engineに関連するConfiguration / コンフィグレーション項目。
+Raft Engineに関連するコンフィグレーション項目。
 
 > **警告：**
 >
@@ -1416,7 +1415,7 @@ Raft Engineに関連するConfiguration / コンフィグレーション項目�
 
 ## 安全 {#security}
 
-セキュリティに関するConfiguration / コンフィグレーション項目です。
+セキュリティに関するコンフィグレーション項目です。
 
 ### <code>ca-path</code> {#code-ca-path-code}
 
@@ -1445,7 +1444,7 @@ Raft Engineに関連するConfiguration / コンフィグレーション項目�
 
 ## セキュリティ暗号化 {#security-encryption}
 
-[保存時の暗号化](/encryption-at-rest.md) （TDE）に関するConfiguration / コンフィグレーション項目。
+[保存時の暗号化](/encryption-at-rest.md) （TDE）に関するコンフィグレーション項目。
 
 ### <code>data-encryption-method</code> {#code-data-encryption-method-code}
 
@@ -1475,7 +1474,7 @@ Raft Engineに関連するConfiguration / コンフィグレーション項目�
 
 ## <code>import</code> {#code-import-code}
 
-TiDB Lightningのインポートと BR の復元に関するConfiguration / コンフィグレーション項目です。
+TiDB LightningのインポートとBRの復元に関するコンフィグレーション項目です。
 
 ### <code>num-threads</code> {#code-num-threads-code}
 
@@ -1492,7 +1491,7 @@ TiDB Lightningのインポートと BR の復元に関するConfiguration / コ�
 
 ## バックアップ {#backup}
 
-BRバックアップに関するConfiguration / コンフィグレーション項目です。
+BRバックアップに関するコンフィグレーション項目です。
 
 ### <code>num-threads</code> {#code-num-threads-code}
 
@@ -1502,7 +1501,7 @@ BRバックアップに関するConfiguration / コンフィグレーション�
 
 ### <code>enable-auto-tune</code> <span class="version-mark">v5.4.0 の新機能</span> {#code-enable-auto-tune-code-span-class-version-mark-new-in-v5-4-0-span}
 
--   クラスタ リソースの使用率が高い場合に、バックアップ タスクで使用されるリソースを制限してクラスタへの影響を軽減するかどうかを制御します。詳細については、 [BR オートチューン](/br/br-auto-tune.md)を参照してください。
+-   クラスタ リソースの使用率が高い場合に、バックアップ タスクで使用されるリソースを制限してクラスタへの影響を軽減するかどうかを制御します。詳細については、 [BRオートチューン](/br/br-auto-tune.md)を参照してください。
 -   デフォルト値: `true`
 
 ### <code>s3-multi-part-size</code> <span class="version-mark">v5.3.2 の新機能</span> {#code-s3-multi-part-size-code-span-class-version-mark-new-in-v5-3-2-span}
@@ -1517,7 +1516,7 @@ BRバックアップに関するConfiguration / コンフィグレーション�
 
 ## CDC {#cdc}
 
-TiCDC に関連するConfiguration / コンフィグレーション項目。
+TiCDC に関連するコンフィグレーション項目。
 
 ### <code>min-ts-interval</code> {#code-min-ts-interval-code}
 
@@ -1552,7 +1551,7 @@ TiCDC に関連するConfiguration / コンフィグレーション項目。
 
 ## 解決済み-TS {#resolved-ts}
 
-ステイル読み取り要求を処理するための解決済み TS の維持に関連するConfiguration / コンフィグレーション項目。
+ステイル読み取り要求を処理するための解決済み TS の維持に関連するコンフィグレーション項目。
 
 ### <code>enable</code> {#code-enable-code}
 
@@ -1571,20 +1570,20 @@ TiCDC に関連するConfiguration / コンフィグレーション項目。
 
 ## 悲観的-txn {#pessimistic-txn}
 
-悲観的トランザクションの使用法については、 [TiDB ペシミスティック トランザクション モード](/pessimistic-transaction.md)を参照してください。
+悲観的トランザクションの使用法については、 [TiDB ペシミスティックトランザクションモード](/pessimistic-transaction.md)を参照してください。
 
 ### <code>wait-for-lock-timeout</code> {#code-wait-for-lock-timeout-code}
 
--   TiKV のペシミスティック トランザクションが、他のトランザクションがロックを解放するまで待機する最長時間。タイムアウトになると、TiDB にエラーが返され、TiDB はロックの追加を再試行します。ロック待機タイムアウトは`innodb_lock_wait_timeout`で設定されます。
+-   TiKV の悲観的トランザクションが、他のトランザクションがロックを解放するまで待機する最長時間。タイムアウトになると、TiDB にエラーが返され、TiDB はロックの追加を再試行します。ロック待機タイムアウトは`innodb_lock_wait_timeout`で設定されます。
 -   デフォルト値: `"1s"`
 -   最小値: `"1ms"`
 
 ### <code>wake-up-delay-duration</code> {#code-wake-up-delay-duration-code}
 
--   悲観的なトランザクションがロックを解放すると、ロックを待っているすべてのトランザクションのうち、最小の`start_ts`のトランザクションのみが起こされます。他のトランザクションは`wake-up-delay-duration`後に起こされます。
+-   悲観的トランザクションがロックを解放すると、ロックを待っているすべてのトランザクションのうち、最小の`start_ts`のトランザクションのみが起こされます。他のトランザクションは`wake-up-delay-duration`後に起こされます。
 -   デフォルト値: `"20ms"`
 
 ### <code>pipelined</code> {#code-pipelined-code}
 
--   この構成アイテムは、ペシミスティック ロックを追加するパイプライン プロセスを有効にします。この機能を有効にすると、データをロックできることを検出した後、TiKV は直ちに TiDB に通知して後続のリクエストを実行し、悲観的ロックを非同期で書き込みます。これにより、ほとんどのレイテンシーが短縮され、悲観的トランザクションのパフォーマンスが大幅に向上します。しかし、悲観的ロックの非同期書き込みが失敗する可能性はまだ低く、悲観的トランザクション コミットの失敗を引き起こす可能性があります。
+-   この構成アイテムは、悲観的ロックを追加するパイプライン プロセスを有効にします。この機能を有効にすると、データをロックできることを検出した後、TiKV は直ちに TiDB に通知して後続のリクエストを実行し、悲観的ロックを非同期で書き込みます。これにより、ほとんどのレイテンシーが短縮され、悲観的トランザクションのパフォーマンスが大幅に向上します。しかし、悲観的ロックの非同期書き込みが失敗する可能性はまだ低く、悲観的トランザクション コミットの失敗を引き起こす可能性があります。
 -   デフォルト値: `true`
