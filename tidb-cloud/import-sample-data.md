@@ -5,7 +5,7 @@ summary: Learn how to import sample data into TiDB Cloud via UI.
 
 # Import Sample Data
 
-This document describes how to import sample data into TiDB Cloud via the UI. The sample data used is the system data from Capital Bikeshare, released under the Capital Bikeshare Data License Agreement. Before importing the sample data, you need to have one TiDB cluster.
+This document describes how to import the sample data into TiDB Cloud via the UI. The sample data used is the system data from Capital Bikeshare, released under the Capital Bikeshare Data License Agreement. Before importing the sample data, you need to have one TiDB cluster.
 
 1. Open the **Import** page for your target cluster.
 
@@ -31,8 +31,8 @@ This document describes how to import sample data into TiDB Cloud via the UI. Th
 
     - **Data format**: select **SQL File**.
     - **Bucket URI**: enter the sample data URI `s3://tidbcloud-sample-data/data-ingestion/`
-    - **Bucket Access**: you can use either an Amazon access key or a Role ARN to access your bucket.
-        - **AWS Access Keys**: enter the access key ID and secret access key. For more information about configuring access keys, see [Configure Amazon S3 access](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access).
+    - **Bucket Access**: to import the sample data, you can only use a Role ARN to access your bucket.
+        - **AWS Access Keys**: do not use this method when importing the sample data.
         - **Role ARN**: enter `arn:aws:iam::801626783489:role/import-sample-access`
 
     If the region of the bucket is different from your cluster, confirm the compliance of cross region. Click **Next**.
