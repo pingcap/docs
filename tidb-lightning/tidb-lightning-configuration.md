@@ -179,7 +179,7 @@ read-block-size = "64KiB" # default value
 # This value should be in the range (0 <= batch-import-ratio < 1).
 batch-import-ratio = 0.75
 
-# Local source data directory or the URI of the external storage. For more information about the URI of the external storage, see https://docs.pingcap.com/tidb/stable/backup-and-restore-storages#uri-format.
+# Local source data directory or the URI of the external storage. For more information about the URI of the external storage, see https://docs.pingcap.com/tidb/v6.6/backup-and-restore-storages#uri-format.
 data-source-dir = "/data/my_database"
 
 # The character set of the schema files, containing CREATE TABLE statements;

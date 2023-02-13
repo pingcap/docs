@@ -12,7 +12,7 @@ To specify the data source for TiDB Lightning, use the following configuration:
 
 ```toml
 [mydumper]
-# Local source data directory or the URI of the external storage such as S3. For more information about the URI of the external storage, see https://docs.pingcap.com/tidb/stable/backup-and-restore-storages#uri-format.
+# Local source data directory or the URI of the external storage such as S3. For more information about the URI of the external storage, see https://docs.pingcap.com/tidb/v6.6/backup-and-restore-storages#uri-format.
 data-source-dir = "/data/my_database"
 ```
 
@@ -363,7 +363,7 @@ The following examples show how to import data from Amazon S3 using TiDB Lightni
     ./tidb-lightning --tidb-port=4000 --pd-urls=127.0.0.1:2379 --backend=local --sorted-kv-dir=/tmp/sorted-kvs \
         -d 's3://my-bucket/test-data?access_key={my_access_key}&secret_access_key={my_secret_access_key}'
 
-* Use access keys of an AWS IAM role and session tokens to access S3 data:
+* Use the combination of AWS IAM role access keys and session tokens to access S3 data:
 
     ```bash
     ./tidb-lightning --tidb-port=4000 --pd-urls=127.0.0.1:2379 --backend=local --sorted-kv-dir=/tmp/sorted-kvs \
