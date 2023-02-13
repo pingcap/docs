@@ -7,10 +7,6 @@ summary: Learn how to view TiDB Cloud built-in monitoring metrics and understand
 
 TiDB Cloud collects and displays a full set of standard metrics of your cluster on the Monitoring page. By viewing these metrics, you can easily identify performance issues and determine whether your current database deployment meets your requirements.
 
-> **Note:**
->
-> Currently, the Monitoring page is unavailable for [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta).
-
 ## View the Monitoring page
 
 To view the metrics on the Monitoring page, take the following steps:
