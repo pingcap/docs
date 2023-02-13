@@ -15,7 +15,7 @@ To allow TiDB Cloud to access the source data in your Amazon S3 bucket, you need
 - Use a Role ARN: use a Role ARN to access your Amazon S3 bucket.
 
 <SimpleTab>
-<div label="Configure an Access Key">
+<div label="Access Key">
 
 It is recommended that you use an IAM user (instead of the AWS account root user) to create an access key.
 
@@ -26,7 +26,7 @@ Take the following steps to configure an access key:
 2. Create an access key for the IAM user. For more information, see [Creating an access key for an IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey).
 
 </div>
-<div label="Configure Role ARN">
+<div label="Role ARN">
 
 Configure the bucket access for TiDB Cloud and get the Role ARN as follows:
 
