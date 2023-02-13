@@ -82,6 +82,46 @@ If your policy is not correctly configured as the preceding example shows, corre
 >
 > Note that this might affect your other applications.
 
+## Check the policy of the IAM user
+
+When you use an IAM user to access the Amazon S3 bucket, you might encounter the following error:
+
+- "Access denied to the source '{bucket_uri}' using the access key ID '{access_key_id}' and the secret access key '{secret_access_key}'"
+
+It indicates that TiDB Cloud failed to access the Amazon S3 bucket due to insufficient permissions. You need the following permissions to access the Amazon S3 bucket:
+
+- `s3:GetObject`
+- `s3:ListBucket`
+- `s3:GetBucketLocation`
+
+The following is a sample policy:
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject"
+            ],
+            "Resource": "arn:aws:s3:::tidb-cloud-source-data/mydata/*"
+        },
+        {
+            "Sid": "VisualEditor1",
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListBucket",
+                "s3:GetBucketLocation"
+            ],
+            "Resource": "arn:aws:s3:::tidb-cloud-source-data"
+        },
+}
+```
+
+For more information about how to grant a user permissions and test them, see [Controlling access to a bucket with user policies](https://docs.aws.amazon.com/AmazonS3/latest/userguide/walkthrough1.html).
+
 ## Check the bucket policy
 
 1. In the AWS Management Console, open the Amazon S3 console, and then go to the **Buckets** page. A list of buckets is displayed.
