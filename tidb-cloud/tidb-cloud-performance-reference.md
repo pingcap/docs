@@ -11,6 +11,8 @@ All the performance data is based on the condition: P95 latency < 105 ms.
 
 All the test environments are based on TiDB version: v6.1.1.
 
+The transaction model `Read Only`, `Read Write`, `Write Only` represent the workload of `Read`, `Mixed`, `Write`.
+
 ## 2 vCPU performance
 
 Currently, the 2 vCPU support of TiDB and TiKV is still in beta.

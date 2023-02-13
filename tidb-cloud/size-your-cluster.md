@@ -46,8 +46,8 @@ The performance of the 8 vCPU, 16 GiB TiDB node in different workloads:
     | workload | TiDB performance (QPS) |
     |----------|------------------------|
     | Read     | 18,900                 |
-    | Write    | 18,000                 |
     | Mixed    | 15,500                 |
+    | Write    | 18,000                 |
 
 We estimate the number of TiDB nodes based on the workload type, overall expected performance (QPS), and the performance of a single TiDB node under different workloads:
  `node num = ceil( overall expected perfromance / performance per node * (1 - performance degradation coefficient) )`
@@ -123,8 +123,8 @@ The performance of the 8 vCPU, 32 GiB TiKV node in different workloads:
     | workload | TiKV performance (QPS) |
     |----------|------------------------|
     | Read     | 28,000                 |
-    | Write    | 14,500                 |
     | Mixed    | 17,800                 |
+    | Write    | 14,500                 |
 
 We estimate the number of TiKV nodes based on the workload type, overall expected performance (QPS), and the performance of a single TiKV node under different workloads:
  `node num = ceil( overall expected perfromance / performance per node * (1 - performance degradation coefficient) )`
