@@ -22,7 +22,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 </thead>
 <tbody>
   <tr>
-    <td rowspan="2">SQL<br /><br />SEAMLESS to use</td>
+    <td rowspan="2">SQL operations and compatibility<br /><br /><i>SEAMLESS to use</i></td>
     <td><a href="#foreign-key">Foreign Key</a></td>
     <td>Support MySQL-compatible foreign key constraints to maintain data consistency and improve data quality.</td>
   </tr>
@@ -31,17 +31,17 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
     <td>Introduce MySQL-compatible multi-valued indexes and enhance the JSON type to improve TiDB's compatibility with MySQL 8.0.</td>
   </tr>
   <tr>
-    <td>DB Operations<br /><br />SMOOTH to use</td>
-    <td><a href="#resource-group">Resource group (experimental)</a></td>
+    <td>DB Operations<br /><br /><i>SMOOTH to use</i></td>
+    <td><a href="#resource-group">Tenant resource group control (experimental)</a></td>
     <td>Support resource management based on resource groups, mapping database users to the corresponding resource groups and setting quotas for each resource group based on actual needs.</td>
   </tr>
   <tr>
-    <td>Stability<br /><br />RELIABLE to use</td>
+    <td>Stability<br /><br /><i>RELIABLE to use</i></td>
     <td><a href="#binding-his-ga">Historical SQL binding</a></td>
     <td>Support binding historical execution plans and quickly binding execution plans on TiDB Dashboard.</td>
   </tr>
   <tr>
-    <td rowspan="3">Performance<br /><br />POWERFUL to use</td>
+    <td rowspan="3">Performance<br /><br /><i>POWERFUL to use</i></td>
     <td><a href="#compression-exchange">TiFlash supports compression exchange</a></td>
     <td>TiFlash supports data compression to improve the efficiency of parallel data exchange.</td>
   </tr>
