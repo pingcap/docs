@@ -5,7 +5,7 @@ summary: Learn how to implement primary-secondary disaster recovery based on TiC
 
 # DR Solution based on Primary and Secondary Clusters
 
-Disaster recovery (DR) based on primary and secondary databases is a common solution. In this solution, the DR system has a primary cluster and a secondary cluster. The primary cluster handles user requests, while the secondary cluster backs up the data of the primary database. When the primary cluster fails, the system switches to the secondary cluster and continues to provide services using the backed up data. In this way, the system continues to run normally even when a failure occurs, instead of being interrupted by the failure.
+Disaster recovery (DR) based on primary and secondary databases is a common solution. In this solution, the DR system has a primary cluster and a secondary cluster. The primary cluster handles user requests, while the secondary cluster backs up data of the primary cluster. When the primary cluster fails, the secondary cluster takes over services and continues to provide services using the backup data. In this way, the business system continues to run normally even when a failure occurs, instead of being interrupted by the failure.
 
 The primary-secondary DR solution has the following benefits:
 
@@ -28,32 +28,33 @@ Meanwhile, this document also describes how to query the business data on the se
 
 ![TiCDC secondary cluster architecture](/media/dr/dr-ticdc-secondary-cluster.png)
 
-The preceding architecture includes two TiDB clusters: Primary Cluster and Secondary Cluster.
+The preceding architecture includes two TiDB clusters: Primary cluster and secondary cluster.
 
-- Primary Cluster: The active cluster that runs in Region 1 and has three replicas. This cluster handles read and write requests.
-- Secondary Cluster: The standby cluster that runs in Region 2 and replicates data from Primary Cluster through TiCDC.
+- Primary cluster: The active cluster that runs in region 1 and has three replicas. This cluster handles read and write requests.
+- Secondary cluster: The standby cluster that runs in region 2 and replicates data from the primary cluster through TiCDC.
 
-This DR architecture is simple and easy to use. Being capable of tolerating failures at the Region level, the DR system guarantees that the write performance of the primary cluster does not deteriorate, and the secondary cluster can handle some read-only business that is not sensitive to latency. The Recovery Point Objective (RPO) of this solution is in seconds, and the Recovery Time Objective (RTO) can be minutes or even lower. This is a solution recommended by many database vendors for important production systems.
+This DR architecture is simple and easy to use. Being capable of tolerating regional failures, the DR system guarantees that the write performance of the primary cluster does not deteriorate, and the secondary cluster can handle some read-only business that is not sensitive to latency. The Recovery Point Objective (RPO) of this solution is in seconds, and the Recovery Time Objective (RTO) can be minutes or even lower. This is a solution recommended by many database vendors for important production systems.
 
 > **Note:**
 >
-> Do not run multiple changefeeds to replicate data to the secondary cluster, or run another secondary cluster with the presence of a secondary cluster already. Otherwise, integrity of data transactions of the secondary cluster cannot be guaranteed.
+> - The term "Region" in TiKV means a range of data while the term "region" means a physical location. The two terms are not interchangeable.
+> - Do not run multiple changefeeds to replicate data to the secondary cluster, or run another secondary cluster with the presence of a secondary cluster already. Otherwise, integrity of data transactions of the secondary cluster cannot be guaranteed.
 
 ### Set up primary and secondary clusters
 
-In this document, the TiDB primary and secondary clusters are deployed in two different regions (Region 1 and Region 2). TiCDC is deployed together with the TiDB secondary cluster, because there is a certain network latency between the primary and secondary clusters. Deploying TiCDC with the secondary cluster can avoid the impact of network latency, which helps achieve optimal replication performance. The deployment topology of the example provided in this document is as follows (one component node is deployed on each server):
+In this document, the TiDB primary and secondary clusters are deployed in two different regions (region 1 and region 2). TiCDC is deployed together with the secondary cluster, because there is a certain network latency between the primary and secondary clusters. Deploying TiCDC with the secondary cluster can avoid the impact of network latency, which helps achieve optimal replication performance. The deployment topology of the example provided in this document is as follows (one component node is deployed on one server):
 
 |**Region** | **Host** | **Cluster** | **Component** |
 | --- | --- | --- | --- |
+| Region 1 | 10.0.1.9 | Primary | Monitor, Grafana, or AlterManager |
+| Region 2 | 10.0.1.11 | Secondary | Monitor, Grafana, or AlterManager |
 | Region 1 | 10.0.1.1/10.0.1.2/10.0.1.3 | Primary | PD |
-| Region 1 | 10.0.1.4/10.0.1.5 | Primary| TiDB |
-| Region 1 | 10.0.1.6/10.0.1.7/10.0.1.8 | Primary | TiKV |
-| Region 1 | 10.0.1.9 | Primary | Monitor、Grafana 或 AlterManager |
-| Region 2 | 10.1.1.9/10.1.1.10 | Primary | TiCDC |
 | Region 2 | 10.1.1.1/10.1.1.2/10.1.1.3 | Secondary | PD |
+| Region 2 | 10.1.1.9/10.1.1.10 | Primary | TiCDC |
+| Region 1 | 10.0.1.4/10.0.1.5 | Primary| TiDB |
 | Region 2 | 10.1.1.4/10.1.1.5 | Secondary | TiDB |
+| Region 1 | 10.0.1.6/10.0.1.7/10.0.1.8 | Primary | TiKV |
 | Region 2 | 10.1.1.6/10.1.1.7/10.1.1.8 | Secondary | TiKV |
-| Region 2 | 10.0.1.11 | Secondary | Monitor、Grafana 或 AlterManager |
 
 For server configurations, see the following documents:
 
@@ -62,7 +63,7 @@ For server configurations, see the following documents:
 
 For details about how to deploy TiDB primary and secondary clusters, see [Deploy a TiDB Cluster](/production-deployment-using-tiup.md).
 
-When deploying TiCDC, note that the Secondary Cluster and TiCDC must be deployed and managed together, and the network between them must be connected.
+When deploying TiCDC, note that the secondary cluster and TiCDC must be deployed and managed together, and the network between them must be connected.
 
 - To deploy TiCDC on an existing primary cluster, see [Deploy TiCDC](/ticdc/deploy-ticdc.md#add-or-scale-out-ticdc-to-an-existing-tidb-cluster-using-tiup).
 - To deploy a new primary cluster and TiCDC, use the following deployment template and modify the configuration parameters as needed:
@@ -104,21 +105,21 @@ When deploying TiCDC, note that the Secondary Cluster and TiCDC must be deployed
 
 ### Replicate data from the primary cluster to the secondary cluster
 
-After setting up the TiDB primary and secondary clusters, you need to first migrate the data from the primary cluster to the secondary cluster, and then create a replication task to replicate real-time change data from the primary cluster to the secondary cluster.
+After setting up the TiDB primary and secondary clusters, first migrate the data from the primary cluster to the secondary cluster, and then create a replication task to replicate real-time change data from the primary cluster to the secondary cluster.
 
-#### Select the external storage
+#### Select an external storage
 
 External storage is used when migrating data and replicating real-time change data. Amazon S3 is a recommended choice. If the TiDB cluster is deployed in a self-built data center, the following methods are recommended:
 
 * Build [MinIO](https://docs.min.io/docs/minio-quickstart-guide.html) as the backup storage system, and use the S3 protocol to back up data to MinIO.
 * Mount Network File System (NFS, such as NAS) disks to br command-line tool, TiKV and TiCDC instances, and use the POSIX file system interface to write backup data to the corresponding NFS directory.
 
-The following example uses MinIO as the storage system and is for reference only. Note that you need to prepare a separate server to deploy MinIO in Region 1 or Region 2.
+The following example uses MinIO as the storage system and is for reference only. Note that you need to prepare a separate server to deploy MinIO in region 1 or region 2.
 
 ```shell
 wget https://dl.min.io/server/minio/release/linux-amd64/minio
 chmod +x minio
-# Configure access-key access-screct-id to access MinIO
+# Configure access-key access-secret-id to access MinIO
 export HOST_IP='10.0.1.10' # Replace it with the IP address of MinIO
 export MINIO_ROOT_USER='minio'
 export MINIO_ROOT_PASSWORD='miniostorage'
@@ -129,7 +130,7 @@ mkdir -p data/backup
 nohup ./minio server ./data --address :6060 &
 ```
 
-The preceding command starts a MinIO server on one node to simulate S3 services. Parameters in the command are configured as follows:
+The preceding command starts a MinIO server on one node to simulate Amazon S3 services. Parameters in the command are configured as follows:
 
 * `endpoint`: `http://10.0.1.10:6060/`
 * `access-key`: `minio`
@@ -284,11 +285,11 @@ Currently, TiDB DR Dashboard is unavailable. You can check the status of TiDB pr
 
 ### Perform DR switchover
 
-This section describes planned DR switchover, DR switchover upon disasters, and the steps to rebuild a secondary cluster.
+This section describes how to perform a planned DR switchover, a DR switchover upon disasters, and the steps to rebuild a secondary cluster.
 
 #### Planned primary and secondary switchover
 
-It's important to conduct regular DR drills for critical business systems to test their reliability. The following are the recommended steps for DR drills. Note that simulated business writes and usage of proxy services to access databases are not considered, and therefore the steps might differ from actual application scenarios. You can modify the configurations as required.
+It is important to conduct regular DR drills for critical business systems to test their reliability. The following are the recommended steps for DR drills. Note that simulated business writes and usage of proxy services to access databases are not considered, and therefore the steps might differ from actual application scenarios. You can modify the configurations as required.
 
 1. Stop business writes on the primary cluster.
 2. After there are no more writes, query the latest `TSO: {Position}` of the TiDB cluster":
@@ -304,8 +305,6 @@ It's important to conduct regular DR drills for critical business systems to tes
     ```
 
 3. Poll the replication time point `{TSO}` of the changefeed `dr-primary-to-secondary` until `{TSO}` is equal to or greater than `{Position}`.
-
-    ```shell
 
     ```shell
     tiup cdc cli changefeed query -s --server=http://10.1.1.9:8300 --changefeed-id="dr-primary-to-secondary"
@@ -340,7 +339,7 @@ When a disaster occurs, for example, power outage in the region where the primar
     tiup cdc redo apply --storage "s3://redo?access-key=minio&secret-access-key=miniostorage&endpoint=http://10.0.1.10:6060&force-path-style=true" --tmp-dir /tmp/redo --sink-uri "mysql://{username}:{password}@10.1.1.4:4000"
     ```
 
-    其中
+    Where:
 
     - `--storage`: The path where redo logs are stored in Amazon S3
     - `--tmp-dir`: The cache directory for downloading redo logs from Amazon S3
@@ -351,7 +350,7 @@ When a disaster occurs, for example, power outage in the region where the primar
 
 #### Rebuild the primary and secondary clusters
 
-After the TiDB primary cluster recovers form a disaster or the primary cluster cannot be recovered temporarily, the TiDB cluster is fragile because only the secondary cluster is in service as the primary cluster. To maintain the reliability of the system, you need to rebuild the DR cluster.
+After the disaster encountered by the primary cluster is resolved or the primary cluster cannot be recovered temporarily, the TiDB cluster is fragile because only the secondary cluster is in service as the primary cluster. To maintain the reliability of the system, you need to rebuild the DR cluster.
 
 To rebuild the TiDB primary and secondary clusters, you can deploy a new cluster to form a new DR system. For details, see the following documents:
 
@@ -361,7 +360,7 @@ To rebuild the TiDB primary and secondary clusters, you can deploy a new cluster
 
 > **Note:**
 >
-> If the data inconsistency between the primary and secondary clusters can be resolved, you can use the repaired cluster to rebuild the DR system without building a new cluster.
+> If data inconsistency between the primary and secondary clusters can be resolved, you can use the repaired cluster to rebuild the DR system without building a new cluster.
 
 ### Query business data on the secondary cluster
 

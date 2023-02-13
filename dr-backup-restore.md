@@ -1,28 +1,32 @@
 ---
-title: DR Solution based on Backup and Restore
+title: DR Solution based on BR
 summary: Learn how to implement disaster recovery based on TiDB's backup and restore feature.
 ---
 
-# DR Solution based on Backup and Restore
+# DR Solution based on BR
 
-A TiDB cluster has multiple replicas. This feature allows it to tolerate the failure of a single data center or region and continue to provide services to the outside world. In the case of a larger natural disaster, software vulnerability, hardware failure, virus attack, or misoperations, TiDB's Backup & Restore (BR) feature can back up data to an independent disaster recovery storage device to protect user data from damage. Compared with other DR solutions, the BR feature is more flexible, reliable, recoverable, and cost effective:
+A TiDB cluster has multiple replicas, which allows it to tolerate the failure of a single data center or region and continue to provide services. In the case of a natural disaster, software vulnerability, hardware failure, virus attack, or misoperations, TiDB's Backup & Restore (BR) feature can back up data to an independent disaster recovery (DR) storage device to protect user data from damage. Compared with other DR solutions, the BR feature is more flexible, reliable, recoverable, and cost effective:
 
 - Flexibility: You can back up data any time with any frequency. This makes backup and restore flexible and better adapts to different business scenarios.
-- Reliability: Backup data is usually stored on an independent storage device, which further improves the security of data.
-- Recoverability: Any loss or damage to the original data caused by any unexpected situation can be recovered by restoring the backup data. This makes the backup and restore feature highly recoverable and ensures the normal use of the database.
+- Reliability: Backup data is usually stored on an independent storage device and this means enhanced data security.
+- Recoverability: Any loss or damage to the original data caused by any unexpected situation can be recovered by restoring the backup data. This makes the BR feature highly recoverable and ensures the normal use of your database.
 - Cost effectiveness: You can get your database protected using BR without spending too much.
 
-General speaking, BR is the last resort for data security. It improves the security and reliability of the databases without increasing too much cost. BR protects data in various unexpected situations, so that you can use the database safely without worrying about the risk of data loss or damage.
+Generally speaking, BR is the last resort for data security. It improves the security and reliability of the databases without requiring too much cost. BR protects data in various unexpected situations, so that you can use the database safely without worrying about the risk of data loss or damage.
 
 ## Perform backup and restore
 
 ![BR log backup and PITR architecture](/media/dr/dr-backup-and-restore.png)
 
-As shown in the preceding architecture, you can back up data to a DR storage device of other Regions and recover the data from backup data when needed. This means that the cluster can tolerate the failure of a single Region with an Recovery Point Objective (RPO) of up to 5 minutes and an Recovery Time Objective (RTO) between tens of minutes and a few hours. However, if the database size is large, the RTO time might be longer.
+As shown in the preceding architecture, you can back up data to a DR storage device of other regions, and recover data from the backup data as needed. This means that the cluster can tolerate the failure of a single region with a Recovery Point Objective (RPO) of up to 5 minutes and a Recovery Time Objective (RTO) between tens of minutes and a few hours. However, if the database size is large, the RTO time might be longer.
 
-Meanwhile, TiDB provides backup and restore based on block storage snapshots. This feature reduces the recovery time to hours or even less than one hour. TiDB is continuously improving and optimizing the backup and restore capabilities of this feature so as to provide better services.
+> **Note:**
+>
+> The term "region" in this document means a physical location.
 
-TiDB also provides rich documentation to help you understand how to use the backup and restore feature in a disaster recovery scenario. Among them,
+Meanwhile, TiDB provides backup and restore based on block storage snapshots. This feature reduces the recovery time to hours or even less than one hour. TiDB is continuously improving and optimizing the backup and restore capabilities so as to provide you better services.
+
+TiDB also provides detailed documentation to help you understand how to use the backup and restore feature in a DR scenario. Among them,
 
 - [Usage Overview of TiDB Backup and Restore](/br/br-use-overview.md) is an overview of the BR feature, including the backup strategy and the organization of backup data.
 - [Backup & Restore FAQs](/faq/backup-and-restore-faq.md) lists the frequently asked questions (FAQs) and the solutions of TiDB Backup & Restore (BR).
