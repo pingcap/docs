@@ -17,6 +17,7 @@ With TiDB Cloud Replication, you can perform quick disaster recovery of a databa
 > * You cannot use a secondary cluster as a source of **TiDB Cloud Replication** to another cluster.
 > * **TiDB Cloud Replication** contradicts [**Sink to Apache Kafka**](/tidb-cloud/changefeed-sink-to-apache-kafka.md) and [**Sink to MySQL**](/tidb-cloud/changefeed-sink-to-mysql.md). When **TiDB Cloud Replication** is enabled, neither the primary nor the secondary cluster can use the **Sink to Apache Kafka** or **Sink to MySQL** changefeed and vice versa.
 > * Because TiDB Cloud uses TiCDC to establish replication, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#restrictions).
+> * **TiDB Cloud Replication** is only available upon request. To request this feature, click **Help** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), fill in "Apply for TiDB Cloud Replication" in the **Description** field, and then click **Send**.
 
 To support application replication, you must deploy your applications in both primary and secondary regions, and ensure that each application is connected to the TiDB cluster in the same region. The applications in the secondary region are on standby. When the primary region fails, you can initiate a "Detach" operation to make the TiDB cluster in the secondary region active, and then transfer all data traffic to the applications in the secondary region.
 
@@ -114,14 +115,3 @@ To monitor lag concerning the RPO, do the following:
 1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the cluster overview page of your TiDB cluster, and then click **Changefeed** in the left navigation pane.
 2. Click **Create a replica of your TiDB Cluster**.
 3. You can see the lag of the primary-secondary cluster.
-
-## Why the `cloud_cdc_admin` account is required
-
-When you use the TiDB Cloud Replication feature, the secondary cluster will automatically create a database account named `cloud_cdc_admin` during its initialization. This account has been granted DDL, DML, and RESTRICTED_REPLICA_WRITER_ADMIN privileges through the `cloud_cdc_role` role, allowing it to replicate data from the primary cluster to the secondary cluster.
-
-This account is required because the secondary cluster must be set to the read-only mode before data replication. In this mode, regular users cannot write data to the secondary cluster. TiDB Cloud needs to use the `cloud_cdc_admin` account to replicate data. This prevents data inconsistency issues between the primary and secondary clusters in case users write data during data replication.
-
-> **Note:**
->
-> * This account is visible to users in the secondary cluster. Do not modify or delete this account, as this might cause data replication disruptions for the primary and secondary clusters.
-> * The purpose of this account is limited to data replication and is automatically deleted when the primary and secondary clusters are detached.
