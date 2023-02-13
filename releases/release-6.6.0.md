@@ -263,6 +263,12 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
     For more information, see [documentation](/statement-summary-tables.md#persist-statements-summary).
 
+### Telemetry
+
+Starting from v6.6.0, the [telemetry](/telemetry.md) is disabled by default for TiDB and TiDB Dashboard.
+
+Starting from TiUP v1.11.3, the telemetry is disabled by default for newly deployed TiUP. If you upgrade your TiUP version to v1.11.3 or later, the telemetry keeps the setting of the old TiUP versions.
+
 ### Ecosystem
 
 * <a name="dm-physical" style="text-decoration:none; color:inherit; cursor:default;">TiDB Data Migration (DM) integrates with TiDB Lightning's physical import mode for up to a 10x performance boost for full migration (experimental)</a> <a href="https://github.com/lance6716" target="_blank" referrerpolicy="no-referrer-when-downgrade">@lance6716</a> **tw@ran-huang**
@@ -299,7 +305,18 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
     For more information, see [documentation](/ticdc/ticdc-sink-to-kafka.md#scale-out-the-load-of-a-single-large-table-to-multiple-ticdc-nodes).
 
+* GORM adds TiDB integration tests. Now TiDB is the default database supported by GORM.
+
+    - In v1.4.6, [GORM MySQL driver](https://github.com/go-gorm/mysql) adapts to the `AUTO_RANDOM` attribute of TiDB [#104](https://github.com/go-gorm/mysql/pull/104) @[Icemap](https://github.com/Icemap)
+    - In v1.4.6, [GORM MySQL driver](https://github.com/go-gorm/mysql) fixes the issue that when connecting to TiDB, the `Unique` attribute of the `Unique` field cannot be modified during `AutoMigrate` [#105](https://github.com/go-gorm/mysql/pull/104) @[Icemap](https://github.com/Icemap)
+    - [GORM](https://github.com/go-gorm/gorm) adds TiDB as the default database [#6014](https://github.com/go-gorm/gorm/pull/6014) @[Icemap](https://github.com/Icemap)
+    - [GORM documentation](https://github.com/go-gorm/gorm.io) mentions TiDB as the default database [#638](https://github.com/go-gorm/gorm.io/pull/638) @[Icemap](https://github.com/Icemap)
+
 ## Compatibility changes
+
+> **Note:**
+>
+> If you are upgrading from v6.4 or earlier versions to v6.6, you might also need to check the compatibility changes introduced in the intermediate versions.
 
 ### MySQL compatibility
 
@@ -370,6 +387,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
 - Support dynamically modifying [`store-io-pool-size`](/tikv-configuration-file.md#store-io-pool-size-new-in-v530). This facilitate more flexible TiKV performance tuning.
 - Remove the limit on `LIMIT` clauses, thus improving the execution performance.
+- Starting from v6.6.0, BR does not support restoring data to clusters earlier than v6.5.0.
 
 ## Deprecated features
 
