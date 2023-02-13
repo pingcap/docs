@@ -109,7 +109,7 @@ In this example, TiDB contains five replicas and three Regions. Region 1 is the 
 
     # The following step adds some test data to the cluster, which is optional.
     # tiup bench tpcc  prepare -H 127.0.0.1 -P 4000 -D tpcc --warehouses 1
-    ``````
+    ```
 
     Specify the priority of PD leader:
 

@@ -145,7 +145,7 @@ s3://backup?access-key=minio&secret-access-key=miniostorage&endpoint=http://10.0
 
 #### Migrate data
 
-Use the [backup and restore feature]((/br/backup-and-restore-overview.md)) to migrate data from the primary cluster to the secondary cluster.
+Use the [backup and restore feature](/br/backup-and-restore-overview.md) to migrate data from the primary cluster to the secondary cluster.
 
 1. Disable GC. To ensure that newly written data is not deleted during incremental migration, you should disable GC for the upstream cluster before backup. In this way, history data is not deleted.
 
@@ -252,8 +252,6 @@ After migrating data as described in the preceding section, you can replicate in
 3. Enable GC.
 
     TiCDC ensures that history data is not garbage collected before it is replicated. Therefore, after creating a changefeed from the primary cluster to the secondary cluster, you can run the following command to enable GC again.
-
-    ```sql
 
    Run the following command to enable GC:
 
