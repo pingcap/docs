@@ -969,6 +969,7 @@ Configuration items related to Raftstore.
 + Determines the minimum interval at which the resolved timestamp is reported to the PD leader. If this value is set to `0`, it means that the reporting is disabled.
 + Default value: `"1s"`, which is the smallest positive value
 + Minimum value: `0`
++ Unit: second
 
 ## Coprocessor
 
