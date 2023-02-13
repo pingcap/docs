@@ -64,8 +64,8 @@ Compared to Mydumper, Dumpling has the following improvements:
 >
 > Dumpling cannot connect to PD in the following scenarios:
 >
-> - If the TiDB cluster is running on Kubernetes (unless Dumpling itself is run inside the Kubernetes environment).
-> - If the TiDB cluster is running on TiDB Cloud.
+> - The TiDB cluster is running on Kubernetes (unless Dumpling itself is run inside the Kubernetes environment).
+> - The TiDB cluster is running on TiDB Cloud.
 >
 > In such cases, you need to manually [adjust the TiDB GC time](#manually-set-the-tidb-gc-time) to avoid export failure.
 
@@ -395,8 +395,8 @@ When exporting data from TiDB (more than 1 TB), if the TiDB version is later tha
 
 However, in either of the following scenarios, Dumpling cannot automatically adjust the GC time:
 
-- When the data size is very large (more than 1 TB)
-- When Dumpling cannot connect directly to PD, for example, if the TiDB cluster is on TiDB Cloud or on Kubernetes that is separated from Dumpling.
+- The data size is very large (more than 1 TB).
+- Dumpling cannot connect directly to PD, for example, if the TiDB cluster is on TiDB Cloud or on Kubernetes that is separated from Dumpling.
 
 In such scenarios, you must manually extend the GC time in advance to avoid export failure due to GC during the export process.
 
@@ -406,7 +406,7 @@ To manually adjust the GC time, use the following SQL statement:
 SET GLOBAL tidb_gc_life_time = '720h';
 ```
 
-After Dumpling exits, whether the export is successful or not, you must set the GC time back to its original value (the default value is `10m`).
+After Dumpling exits, regardless of whether the export is successful or not, you must set the GC time back to its original value (the default value is `10m`).
 
 ```sql
 SET GLOBAL tidb_gc_life_time = '10m';
