@@ -1,26 +1,30 @@
 ---
-title: Multi-replica DR Solution for a Single Cluster
+title: DR Solution based on Multiple Replicas in a Single Cluster
 summary: Learn about the multi-replica disaster recovery solution for a single cluster.
 ---
 
-# Multi-replica DR Solution for a Single Cluster
+# DR Solution based on Multiple Replicas in a Single Cluster
 
-This document describes the multi-replica disaster recovery (DR) solution for a single cluster. The document is organized as follows:
+This document describes the disaster recovery (DR) solution based on multiple replicas in a single cluster. The document is organized as follows:
 
-- Introduce the solution.
-- Set up a cluster and configure replicas.
-- Monitor the cluster.
-- Perform a DR switchover.
+- Solution introduction
+- How to set up a cluster and configure replicas
+- How to monitor the cluster
+- How to perform a DR switchover
 
 ## Introduction
 
 Important production systems usually require regional DR with zero RPO and minute-level RTO. A Raft-based distributed database, TiDB provides multiple replicas, which allows it to support regional DR with data consistency and high availability guaranteed. Considering the small network latency between available zones (AZs) in the same region, we can dispatch business traffic to two AZs on the same region simultaneously, and achieve load balance among AZs on the same region by properly locating the Region Leader and PD Leader.
 
+> **Note:**
+>
+> The term "Region" in TiKV means a range of data while the term "region" means a physical location. The two terms are not interchangeable.
+
 ## Set up a cluster and configure replicas
 
-This section illustrates how to create a TiDB cluster across three regions with five replicas using TiUP, and how to achieve DR by properly distributing data and PD nodes.
+This section illustrates how to create a TiDB cluster across three Regions with five replicas using TiUP, and how to achieve DR by properly distributing data and PD nodes.
 
-In this example, TiDB contains five replicas and three Regions. Region 1 is the primary region, Region 2 is the secondary region, and Region 3 is used for voting. Similarly, the PD cluster also contains 5 replicas, which function basically the same as the TiDB cluster.
+In this example, TiDB contains five replicas and three Regions. Region 1 is the primary Region, Region 2 is the secondary Region, and Region 3 is used for voting. Similarly, the PD cluster also contains 5 replicas, which function basically the same as the TiDB cluster.
 
 1. Create a topology file similar to the following:
 
@@ -87,7 +91,7 @@ In this example, TiDB contains five replicas and three Regions. Region 1 is the 
     The preceding configurations use the following options to optimize cross-Region DR:
 
     - `server.grpc-compression-type: gzip` to enable gRPC message compression in TiKV, thus reducing network traffic.
-    - `raftstore.raft-min-election-timeout-ticks` and `raftstore.raft-max-election-timeout-ticks` to extend the time before `Region 3` participates in the election, thus preventing any replica in this Region from being voted as the leader.
+    - `raftstore.raft-min-election-timeout-ticks` and `raftstore.raft-max-election-timeout-ticks` to extend the time before Region 3 participates in the election, thus preventing any replica in this Region from being voted as the leader.
 
 2. Create a cluster using the preceding configuration file:
 
@@ -124,12 +128,12 @@ In this example, TiDB contains five replicas and three Regions. Region 1 is the 
 3. Create placement rules and fix the primary replica of the test table to Region 1:
 
     ```sql
-    --Create two placement rules, the first rule specifies Region1 works as the primary Region, and Region 2 as the standby Region.
+    --Create two placement rules, the first rule specifies that Region 1 works as the primary Region, and Region 2 as the secondary Region.
     -- The second placement rule specifies that when Region 1 is down, Region 2 will become the primary Region.
     MySQL [(none)]> CREATE PLACEMENT POLICY primary_rule_for_region1 PRIMARY_REGION="Region1" REGIONS="Region1, Region2,Region3";
     MySQL [(none)]> CREATE PLACEMENT POLICY secondary_rule_for_region2 PRIMARY_REGION="Region2" REGIONS="Region1,Region2,Region3";
 
-    -- Apply the rule primary_rule_for_region1 to the corresponding user table.
+    -- Apply the rule primary_rule_for_region1 to the corresponding user tables.
     ALTER TABLE tpcc.warehouse PLACEMENT POLICY=primary_rule_for_region1;
     ALTER TABLE tpcc.district PLACEMENT POLICY=primary_rule_for_region1;
 
@@ -148,7 +152,7 @@ In this example, TiDB contains five replicas and three Regions. Region 1 is the 
 
 ## Monitor the cluster
 
-You can monitor the performance metrics of TiKV, TiDB, PD, and other components in the cluster by accessing the Grafana address or TiDB Dashboard. Based on the status of the components, you can determine whether to perform a DR switchover. For details, see the following documents:
+You can monitor the performance metrics of TiKV, TiDB, PD, and other components in the cluster by accessing Grafana or TiDB Dashboard. Based on the status of the components, you can determine whether to perform a DR switchover. For details, see the following documents:
 
 - [Key Monitoring Metrics of TiDB](/grafana-tidb-dashboard.md)
 - [Key Monitoring Metrics of TiKV](/grafana-tikv-dashboard.md)
@@ -157,7 +161,7 @@ You can monitor the performance metrics of TiKV, TiDB, PD, and other components 
 
 ## Perform a DR switchover
 
-This section describes how to perform a DR switchover, including planned and unplanned switchovers.
+This section describes how to perform a DR switchover, including planned switchover and unplanned switchover.
 
 ### Planned switchover
 
@@ -183,9 +187,9 @@ A planned switchover is a scheduled switch between the primary and secondary Reg
 
 2. Observe the PD and TiKV nodes in Grafana and ensure that Leaders of the PD and user tables have been transferred to the target Region. The steps for switching back to the original Region are the same as the preceding steps and are therefore not covered in this document.
 
-### Unplanned switchovers
+### Unplanned switchover
 
-An unplanned switchover means a switchover between primary and secondary Regions when a disaster scenario occurs. It can also be a primary-secondary Region switchover initiated to simulate disaster scenarios, which is to verify the effectiveness of DR systems.
+An unplanned switchover means a switchover between primary and secondary Regions when a disaster occurs. It can also be a primary-secondary Region switchover initiated to simulate disaster scenarios so as to verify the effectiveness of DR systems.
 
 1. Run the following command to stop all TiKV, TiDB, and PD nodes in Region 1:
 
