@@ -354,7 +354,7 @@ To rebuild the TiDB primary and secondary clusters, you can deploy a new cluster
 
 - [Set up primary and secondary clusters](#set-up-primary-and-secondary-clusters-based-on-ticdc)
 - [Replicate data from the primary cluster to the secondary cluster](#replicate-data-from-the-primary-cluster-to-the-secondary-cluster)
-- After the preceding steps are completed, to make the new cluster the primary cluster, see [Primary and secondary switchover](#primary-and-secondary-switchover).
+- After the preceding steps are completed, to make the new cluster the primary cluster, see [Primary and secondary switchover](#planned-primary-and-secondary-switchover).
 
 > **Note:**
 >
