@@ -87,6 +87,16 @@ The TiDB cluster storage is running low. It is recommended to [increase the TiKV
 
 Failed to connect to the source database. It is recommended to check whether the source database is started, the number of database connections has not reached the upper limit, and you can connect using the parameters specified by the job. After confirming that the source database is available, you can try to resume the job by clicking **Restart**.
 
+### Error message: "Access denied to the source '{bucket_uri}' using the access key ID '{access_key_id}' and the secret access key '{secret_access_key}'"
+
+Failed to access the Amazon S3 bucket due to insufficient permissions. You need the following permissions to access the Amazon S3 bucket:
+
+- `s3:GetObject`
+- `s3:ListBucket`
+- `s3:GetBucketLocation`
+
+For more information about how to grant a user permissions, see [Controlling access to a bucket with user policies](https://docs.aws.amazon.com/AmazonS3/latest/userguide/walkthrough1.html).
+
 ## Alerts
 
 You can subscribe to TiDB Cloud alert emails to be informed in time when an alert occurs.
