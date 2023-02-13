@@ -491,12 +491,7 @@ Configuration items related to storage.
 
 ## storage.block-cache
 
-Configuration items related to the sharing of block cache among multiple RocksDB Column Families (CF). When these configuration items are enabled, block cache separately configured for each column family is disabled.
-
-### `shared`
-
-+ Enables or disables the sharing of block cache.
-+ Default value: `true`
+Configuration items related to the sharing of block cache among multiple RocksDB Column Families (CF).
 
 ### `capacity`
 
@@ -969,6 +964,13 @@ Configuration items related to Raftstore.
 + Default value: `1MB`
 + Minimum value: `0`
 
+### `report-min-resolved-ts-interval`
+
++ Determines the minimum interval at which the resolved timestamp is reported to the PD leader. If this value is set to `0`, it means that the reporting is disabled.
++ Default value: `"1s"`, which is the smallest positive value
++ Minimum value: `0`
++ Unit: second
+
 ## Coprocessor
 
 Configuration items related to Coprocessor.
@@ -1129,11 +1131,6 @@ Configuration items related to RocksDB
 + The maximum RocksDB WAL size in total, which is the size of `*.log` files in the `data-dir`.
 + Default value: `"4GB"`
 
-### `enable-statistics`
-
-+ Determines whether to enable the statistics of RocksDB
-+ Default value: `true`
-
 ### `stats-dump-period`
 
 + The interval at which statistics are output to the log.
@@ -1267,7 +1264,7 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 
 ### `block-cache-size`
 
-+ The cache size of a RocksDB block
++ The cache size of a RocksDB block. Starting from v6.6.0, this configuration is only used to calculate the default value of `storage.block-cache.capacity`.
 + Default value for `defaultcf`: `Total machine memory * 25%`
 + Default value for `writecf`: `Total machine memory * 15%`
 + Default value for `lockcf`: `Total machine memory * 2%`
