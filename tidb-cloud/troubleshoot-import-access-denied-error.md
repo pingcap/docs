@@ -88,7 +88,7 @@ When you use an IAM user to access the Amazon S3 bucket, you might encounter the
 
 - "Access denied to the source '{bucket_uri}' using the access key ID '{access_key_id}' and the secret access key '{secret_access_key}'"
 
-It indicates that TiDB Cloud failed to access the Amazon S3 bucket due to insufficient permissions. You need the following permissions to access the Amazon S3 bucket:
+It indicates that TiDB Cloud failed to access the Amazon S3 bucket due to insufficient permissions. In TiDB Cloud, you need the following permissions to access the Amazon S3 bucket at least:
 
 - `s3:GetObject`
 - `s3:ListBucket`
