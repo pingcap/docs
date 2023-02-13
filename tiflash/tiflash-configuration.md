@@ -182,14 +182,14 @@ delta_index_cache_size = 0
     ## When the value is an integer, the unit is byte. For example, 34359738368 means 32 GiB of memory limit, and 0 means no limit.
     ## When the value is a floating-point number in the range of [0.0, 1.0), it means the ratio of the allowed memory usage to the total memory of the node. For example, 0.8 means 80% of the total memory, and 0.0 means no limit.
     ## The default value is 0, which means no limit.
-    ## When a query attempts to consume memory that exceeds the limit, the query is terminated and an error is reported.
+    ## When a query attempts to consume memory that exceeds this limit, the query is terminated and an error is reported.
     max_memory_usage = 0
 
     ## The memory usage limit for the generated intermediate data in all queries.
     ## When the value is an integer, the unit is byte. For example, 34359738368 means 32 GiB of memory limit, and 0 means no limit.
     ## When the value is a floating-point number in the range of [0.0, 1.0), it means the ratio of the allowed memory usage to the total memory of the node. For example, 0.8 means 80% of the total memory, and 0.0 means no limit.
     ## The default value is 0.8, which means 80% of the total memory.
-    ## When the queries attempt to consume memory that exceeds the limit of this parameter, the queries are terminated and an error is reported.
+    ## When the queries attempt to consume memory that exceeds this limit, the queries are terminated and an error is reported.
     max_memory_usage_for_all_queries = 0.8
 
     ## New in v5.0. This item specifies the maximum number of cop requests that TiFlash Coprocessor executes at the same time. If the number of requests exceeds the specified value, the exceeded requests will queue. If the configuration value is set to 0 or not set, the default value is used, which is twice the number of physical cores.
