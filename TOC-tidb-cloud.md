@@ -493,6 +493,7 @@
       - [list](/tidb-cloud/ticloud-config-list.md)
       - [set](/tidb-cloud/ticloud-config-set.md)
       - [use](/tidb-cloud/ticloud-config-use.md)
+    - [connect](/tidb-cloud/ticloud-connect.md)
     - import
       - [cancel](/tidb-cloud/ticloud-import-cancel.md)
       - [describe](/tidb-cloud/ticloud-import-describe.md)
