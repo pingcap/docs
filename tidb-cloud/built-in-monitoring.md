@@ -58,6 +58,10 @@ The following sections illustrate the metrics on the Monitoring page.
 
 ### Latency Break Down
 
+> **Note:**
+>
+> For [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters, the Query Duration metric is named as Average Query Duration.
+
 | Metric name  | Labels | Description                                   |
 | :------------| :------| :-------------------------------------------- |
 | `*` Query Duration | avg-{SQL Types}, 99-{SQL Types} | The duration from receiving a request from the client to TiDB till TiDB executing the request and returning the result to the client. In general, client requests are sent in the form of SQL statements; however, this duration can include the execution time of commands such as `COM_PING`, `COM_SLEEP`, `COM_STMT_FETCH`, and `COM_SEND_LONG_DATA`. TiDB supports Multi-Query, which means the client can send multiple SQL statements at one time, such as `select 1; select 1; select 1;`. In this case, the total execution time of this query includes the execution time of all SQL statements. |
@@ -68,6 +72,10 @@ The following sections illustrate the metrics on the Monitoring page.
 | Execute Duration | avg, 99 | The average time or P99 duration consumed in executing execution plans of SQL statements. |
 
 ### Transaction
+
+> **Note:**
+>
+> For [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters, the Transaction Duration metric is named as Average Transaction Duration.
 
 | Metric name  | Labels | Description                                   |
 | :------------| :------| :-------------------------------------------- |
