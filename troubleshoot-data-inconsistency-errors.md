@@ -84,7 +84,7 @@ This error indicates that `index-values` are null and `record-values` are not nu
 
 ## Solutions
 
-If you encounter a data inconsistency error, contact PingCAP technical support for troubleshooting immediately instead of dealing with the error by yourself. If your application needs to skip such errors urgently, you can use the following methods to bypass the check.
+If you encounter a data inconsistency error, [get support](/support.md) from PingCAP for troubleshooting immediately instead of dealing with the error by yourself. If your application needs to skip such errors urgently, you can use the following methods to bypass the check.
 
 ### Rewrite SQL
 

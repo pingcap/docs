@@ -172,7 +172,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
     The serial number of the data packet from the client is incorrect.
 
-    If you encounter this error, check the client. If the client is normal, [contact PingCAP](mailto:info@pingcap.com) for support.
+    If you encounter this error, check the client. If the client is normal, [get support](/support.md) from PingCAP or the community.
 
 * Error Number: 8055
 
@@ -256,7 +256,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
     The plugin defines a system variable whose name does not begin with the plugin name.
 
-    Contact the developer of the plugin to modify.
+    Contact the developer of the plugin to modify, or [get support](/support.md) from PingCAP or the community.
 
 * Error Number: 8107
 
@@ -268,7 +268,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
     Unsupported execution plan type. This error is an internal error.
 
-    If you encounter this error, [contact PingCAP](mailto:info@pingcap.com) for support.
+    If you encounter this error, [get support](/support.md) from PingCAP or the community.
 
 * Error Number: 8109
 
@@ -372,7 +372,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
     [`ADMIN REPAIR TABLE`](/sql-statements/sql-statement-admin.md#admin-repair-statement) fails.
 
-    If you encounter this error, [contact PingCAP](mailto:info@pingcap.com) for support.
+    If you encounter this error, [get support](/support.md) from PingCAP or the community.
 
 * Error Number: 8216
 
@@ -384,7 +384,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
     This error occurs when detecting that the data is not consistent with the index.
 
-    If you encounter this error, [contact PingCAP](mailto:info@pingcap.com) for support.
+    If you encounter this error, [get support](/support.md) from PingCAP or the community.
 
 * Error Number: 8224
 
