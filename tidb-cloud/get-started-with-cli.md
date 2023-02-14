@@ -119,7 +119,7 @@ ticloud config create
 
 ### Create a Serverless Tier cluster
 
-To create a Serverless Tier cluster, enter the following command, and then follow the CLI prompts to provide the required information:
+To create a Serverless Tier cluster, enter the following command, and then follow the CLI prompts to provide the required information and set the password:
 
 ```shell
 ticloud cluster create
@@ -132,6 +132,8 @@ After the cluster is created, you can connect to the cluster:
 ```shell
 ticloud cluster connect
 ```
+
+When you are prompted about whether to use the default user, choose `Y` and enter the password that you set when creating the cluster.
 
 ## What's next
 
