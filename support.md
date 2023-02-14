@@ -9,7 +9,7 @@ If you encounter a problem when you use TiDB, you can reach out for support from
 
 + Get support from PingCAP (requires subscription to TiDB Enterprise Edition):
 
-    - [Submit a request](https://support.pingcap.com/hc/en-us)
+    - [Submit a request](https://support.pingcap.com/)
 
 + Seek help from the TiDB community:
 
