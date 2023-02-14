@@ -159,7 +159,7 @@
       - [Back up and Restore Data Using Dumpling and TiDB Lightning](/backup-and-restore-using-dumpling-lightning.md)
       - [Back Up and Restore RawKV](/br/rawkv-backup-and-restore.md)
       - [Incremental Backup and Restore](/br/br-incremental-guide.md)
-  - Cluster DR
+  - Cluster Disaster Recovery (DR)
     - [DR Solutions Overview](/dr-solution-introduction.md)
     - [Primary-Secondary DR](/dr-secondary-cluster.md)
     - [Multi-replica Cluster DR](/dr-multi-replica.md)
