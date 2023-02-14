@@ -43,7 +43,6 @@ We are constantly filling in the feature gaps between Serverless Tier and Dedica
 
 ## Monitoring
 
-- [Built-in Monitoring](/tidb-cloud/built-in-monitoring.md) is currently not available for Serverless Tier.
 - [Third-party Monitoring integrations](/tidb-cloud/third-party-monitoring-integrations.md) are currently not available for Serverless Tier.
 
 ## Diagnosis
