@@ -238,5 +238,3 @@ Currently, because statistics of the system tables are not collected, sometimes 
 ```sql
 SELECT /*+ AGG_TO_COP() */ count(*) FROM cluster_slow_query GROUP BY user;
 ```
-
-
