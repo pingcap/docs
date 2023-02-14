@@ -84,7 +84,17 @@ This error indicates that `index-values` are null and `record-values` are not nu
 
 ## Solutions
 
+<CustomContent platform="tidb">
+
 If you encounter a data inconsistency error, [get support](/support.md) from PingCAP for troubleshooting immediately instead of dealing with the error by yourself. If your application needs to skip such errors urgently, you can use the following methods to bypass the check.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+If you encounter a data inconsistency error, [contact TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md) for troubleshooting immediately instead of dealing with the error by yourself. If your application needs to skip such errors urgently, you can use the following methods to bypass the check.
+
+</CustomContent>
 
 ### Rewrite SQL
 
