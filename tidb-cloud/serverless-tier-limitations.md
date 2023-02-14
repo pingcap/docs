@@ -24,7 +24,7 @@ We are constantly filling in the feature gaps between Serverless Tier and Dedica
 - [Time to live (TTL)](/time-to-live.md) is not available for Serverless Tier clusters currently.
 - The [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md) syntax is not applicable to TiDB Cloud [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters.
 
-## System Tables
+## System tables
 
 - Tables `CLUSTER_SLOW_QUERY`, `SLOW_QUERY`, `CLUSTER_STATEMENTS_SUMMARY`, `CLUSTER_STATEMENTS_SUMMARY_HISTORY`, `STATEMENTS_SUMMARY`, `STATEMENTS_SUMMARY_HISTORY` are not available for Serverless Tier clusters.
 
