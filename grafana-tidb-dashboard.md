@@ -17,7 +17,7 @@ This document describes some key monitoring metrics displayed on the TiDB dashbo
 
 ## Key metrics description
 
-To understand the key metrics displayed on the TiDB dashboard, check the following items:
+To understand the key metrics displayed on the TiDB dashboard, check the following sections:
 
 ### Query Summary
 
