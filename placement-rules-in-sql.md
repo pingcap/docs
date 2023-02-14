@@ -267,7 +267,7 @@ After creating the placement policies, you can attach them to the corresponding 
 
 > **Note:**
 >
-> `SURVIVAL_PREFERENCES` is equivalent to `LOCATION_LABELS` in PD. For more information, see [Schedule replicas by topology labels](/schedule-replicas-by-topology-labels.md).
+> `SURVIVAL_PREFERENCES` is equivalent to `location-labels` in PD. For more information, see [Schedule Replicas by Topology Labels](/schedule-replicas-by-topology-labels.md).
 
 ## Compatibility with tools
 
