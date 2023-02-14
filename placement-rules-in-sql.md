@@ -251,18 +251,19 @@ In dictionary format, constraints also indicate a number of instances that apply
 
 ### Survival preferences
 
-For some important data, you might want to store multiple replicas across availability zones to get high disaster survivability, such as survivability at the cloud region level. When you create or modify a placement policy, you can use `SURVIVAL_PREFERENCES` to set the preferred survivability for your data.
+When you create or modify a placement policy, you can use the `SURVIVAL_PREFERENCES` option to set the preferred survivability for your data.
 
-For example, when creating a placement policy, you can set the `SURVIVAL_PREFERENCES` as follows to require the data to meet the configured survival preferences as much as possible:
+For example, assuming that you have a TiDB cluster across 3 availability zones, with multiple TiKV instances deployed on each host in each zone. And when creating placement policies for this cluster, you have set the `SURVIVAL_PREFERENCES` as follows:
 
 ``` sql
-CREATE PLACEMENT POLICY multiregion
-    follower=4
-    PRIMARY_REGION="region1"
-    SURVIVAL_PREFERENCES="[region, zone]";
+CREATE PLACEMENT POLICY multiaz SURVIVAL_PREFERENCES="[zone, host]";
+CREATE PLACEMENT POLICY singleaz CONSTRAINTS="[+zone=zone1]" SURVIVAL_PREFERENCES="[host]";
 ```
 
-Then, for tables attached with this policy, data will first meet the survival objectives of data isolation across regions, and then meet the survival objectives of data isolation across availability zones.
+After creating the placement policies, you can attach them to the corresponding tables as needed:
+
+- For tables attached with the `multiaz` placement policy, data will be placed in 3 replicas in different availability zones, prioritizing survival goals of data isolation cross zones, followed by survival goals of data isolation cross hosts.
+- For tables attached with the `singleaz` placement policy, data will be placed in 3 replicas in the `zone1` availability zone first, and then meet survival goals of data isolation cross hosts.
 
 > **Note:**
 >
