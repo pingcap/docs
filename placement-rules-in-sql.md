@@ -135,7 +135,7 @@ In addition to the placement options above, you can also use the advance configu
 | `FOLLOWER_CONSTRAINTS`     | A list of constraints that only apply to followers.                                   |
 | `LEARNER_CONSTRAINTS`      | A list of constraints that only apply to learners.                                     |
 | `LEARNERS`                 | The number of learners. |
-| `SURVIVAL_PREFERENCE`      | Specifies the replica placement priority according to the disaster tolerance level of the labels. For example, `SURVIVAL_PREFERENCE="[region, zone, host]"`. |
+| `SURVIVAL_PREFERENCE`      | The replica placement priority according to the disaster tolerance level of the labels. For example, `SURVIVAL_PREFERENCE="[region, zone, host]"`. |
 
 ## Examples
 
