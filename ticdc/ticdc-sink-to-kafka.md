@@ -243,7 +243,7 @@ This feature splits a single large table into multiple data ranges based on the 
 
 > **Warning:**
 >
-> - The scaling-out feature is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> - Scaling out single large tables is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 > - TiCDC v6.6.0 only supports scaling out a large single table on Kafka changefeeds.
 
 Sample configuration:
