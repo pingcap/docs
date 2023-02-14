@@ -11,7 +11,7 @@ The `SLOW_QUERY` table provides the slow query information of the current node, 
 
 > **Note:**
 >
-> Currently, the `SLOW_QUERY` table is unavailable for [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta).
+> The `SLOW_QUERY` table is unavailable for [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta).
   
 </CustomContent>
 
