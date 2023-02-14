@@ -30,7 +30,7 @@ The following sections illustrate the metrics on the Monitoring page.
 
 > **Note:**
 >
-> For [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters, the Monitoring page only provides a subset of monitoring metrics, which are marked with `*` in the **Metric name** column of the following sections.
+> For [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters, the Monitoring page only provides a subset of monitoring metrics, which are marked with `*` in the **Metric name** column.
 
 ### Database Time
 
