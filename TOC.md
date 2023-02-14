@@ -162,7 +162,7 @@
   - Cluster Disaster Recovery (DR)
     - [DR Solutions Overview](/dr-solution-introduction.md)
     - [Primary-Secondary DR](/dr-secondary-cluster.md)
-    - [Multi-replica Cluster DR](/dr-multi-replica.md)
+    - [Multi-Replica Cluster DR](/dr-multi-replica.md)
     - [BR-based DR](/dr-backup-restore.md)
   - [Configure Time Zone](/configure-time-zone.md)
   - [Daily Checklist](/daily-check.md)
