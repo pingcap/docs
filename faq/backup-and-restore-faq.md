@@ -8,9 +8,7 @@ aliases: ['/tidb/stable/pitr-troubleshoot/','/tidb/stable/pitr-known-issues/']
 
 This document lists the frequently asked questions (FAQs) and the solutions of TiDB Backup & Restore (BR).
 
-## Backup and restore issues
-
-### What should I do to quickly recover data after mistakenly deleting or updating data?
+## What should I do to quickly recover data after mistakenly deleting or updating data?
 
 TiDB v6.4.0 introduces the flashback feature. You can use this feature to quickly recover data within the GC time to a specified point in time. Therefore, if misoperations occur, you can use this feature to recover data. For details, see [Flashback Cluster](/sql-statements/sql-statement-flashback-to-timestamp.md) and [Flashback Database](/sql-statements/sql-statement-flashback-database.md).
 
