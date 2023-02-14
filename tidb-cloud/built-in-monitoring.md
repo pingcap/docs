@@ -28,6 +28,10 @@ All monitoring data is kept for 2 days.
 
 The following sections illustrate the metrics on the Monitoring page.
 
+> **Note:**
+>
+> For [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters, the Monitoring page only provides only a subset of monitoring metrics, which are marked with `*` in the **Metric name** column of the following sections.
+
 ### Database Time
 
 | Metric name  | Labels | Description                                   |
@@ -104,11 +108,7 @@ The following sections illustrate the metrics on the Monitoring page.
 
 ## FAQ
 
-**1. which metrics are available on Serverless Tier?**
-
-The subset of metrics that are marked with `*` in the **Metric Name** column are supported on [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta).
-
-**2. Why are some panes empty on this page?**
+**1. Why are some panes empty on this page?**
 
 If a pane does not provide any metrics, the possible reasons are as follows:
 
