@@ -3819,7 +3819,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Default value: `tidb-statements.log`
 - This variable is read-only. It specifies the file to which persistent data is written when [statements summary persistence](/statement-summary-tables.md#persist-statements-summary) is enabled. The value of this variable is the same as that of the configuration item [`tidb_stmt_summary_enable_persistent`](/tidb-configuration-file.md#tidb_stmt_summary_enable_persistent-new-in-v660).
 
-### `tidb_stmt_summary_file_max_backups` <span class="version-mark">New in v6.6.0</span>
+### tidb_stmt_summary_file_max_backups <span class="version-mark">New in v6.6.0</span>
 
 > **Warning:**
 >
@@ -3830,7 +3830,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Default value: `0`
 - This variable is read-only. It specifies the maximum number of data files that can be persisted. when [statements summary persistence](/statement-summary-tables.md#persist-statements-summary) is enabled. The value of this variable is the same as that of the configuration item [`tidb_stmt_summary_enable_persistent`](/tidb-configuration-file.md#tidb_stmt_summary_enable_persistent-new-in-v660).
 
-### `tidb_stmt_summary_file_max_days` <span class="version-mark">New in v6.6.0</span>
+### tidb_stmt_summary_file_max_days <span class="version-mark">New in v6.6.0</span>
 
 > **Warning:**
 >
@@ -3842,7 +3842,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Unit: day
 - This variable is read-only. It specifies the maximum number of days to keep persistent data files when [statements summary persistence](/statement-summary-tables.md#persist-statements-summary) is enabled. The value of this variable is the same as that of the configuration item [`tidb_stmt_summary_enable_persistent`](/tidb-configuration-file.md#tidb_stmt_summary_enable_persistent-new-in-v660).
 
-### `tidb_stmt_summary_file_max_size` <span class="version-mark">New in v6.6.0</span>
+### tidb_stmt_summary_file_max_size <span class="version-mark">New in v6.6.0</span>
 
 > **Warning:**
 >
