@@ -8,7 +8,7 @@ aliases: ['/docs/dev/keywords-and-reserved-words/','/docs/dev/reference/sql/lang
 
 This article introduces the keywords in TiDB, the differences between reserved words and non-reserved words and summarizes all keywords for the query.
 
-Keywords are words that have special meanings in SQL statements, such as `SELECT`, `UPDATE`, and `DELETE`. Some of them can be used as identifiers directly, which are called **non-reserved keywords**. Some of them require special treatment before being used as identifiers, which are called **reserved keywords**. However, there are special non-reserved keywords that might still require special treatment. It is recommended that you use them as reserved keywords.
+Keywords are words that have special meanings in SQL statements, such as `SELECT`, `UPDATE`, and `DELETE`. Some of them can be used as identifiers directly, which are called **non-reserved keywords**. Some of them require special treatment before being used as identifiers, which are called **reserved keywords**. However, there are special non-reserved keywords that might still require special treatment. It is recommended that you treat them as reserved keywords.
 
 To use the reserved keywords as identifiers, you must enclose them in backticks `` ` ``:
 
