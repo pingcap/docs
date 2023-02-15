@@ -19,6 +19,10 @@ To allow TiDB Cloud to access the source data in your Amazon S3 bucket, you need
 
 It is recommended that you use an IAM user (instead of the AWS account root user) to create an access key.
 
+> **Note:**
+>
+> Your access key will not be persisted. It is recommended that you [delete the access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey) after the import is complete.
+
 Take the following steps to configure an access key:
 
 1. Create an IAM user with the `AmazonS3ReadOnlyAccess` policy. It is recommended that the policy only works for your bucket that stores the source data. For more information, see [Creating an IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html#id_users_create_console).
