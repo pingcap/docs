@@ -9,6 +9,14 @@ summary: Learn the `RESOURCE_GROUPS` information_schema table.
 >
 > This feature is experimental and its form and usage might change in subsequent versions.
 
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> This feature is not available on [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta).
+
+</CustomContent>
+
 The `RESOURCE_GROUPS` table shows the information about all resource groups. For more information, see [Use Resource Control to Achieve Resource Isolation](/tidb-resource-control.md).
 
 ```sql
