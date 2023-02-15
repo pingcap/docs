@@ -21,7 +21,7 @@ It is recommended that you use an IAM user (instead of the AWS account root user
 
 > **Note:**
 >
-> Your access key will not be persisted. It is recommended that you [delete the access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey) after the import is complete.
+> TiDB Cloud does not persist or store your access keys. It is recommended that you [delete the access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey) after the import is complete.
 
 Take the following steps to configure an access key:
 
