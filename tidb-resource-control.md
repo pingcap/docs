@@ -64,7 +64,7 @@ The resource control feature introduces two new global variables.
 
 > **Note:**
 >
-> In TiDB Cloud, the value of the `resource-control.enabled` parameter is  `false` by default and does not support dynamic modification. If you need to enable it for TiDB Cloud Dedicated Tier clusters, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+> In TiDB Cloud, the value of the `resource-control.enabled` parameter is `false` by default and does not support dynamic modification. If you need to enable it for TiDB Cloud Dedicated Tier clusters, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 </CustomContent>
 
@@ -83,7 +83,7 @@ To create, modify, or delete a resource group, you need to have the `SUPER` or `
 
 You can create a resource group in the cluster by using [`CREATE RESOURCE GROUP`](/sql-statements/sql-statement-create-resource-group.md), and then bind users to a specific resource group by using [`CREATE USER`](/sql-statements/ sql-statement-create-user.md) or [`ALTER USER`](/sql-statements/sql-statement-alter-user.md).
 
-For an existing resource group, you can modify the read and write quota of the resource group by using [`ALTER RESOURCE GROUP`](/sql-statements/sql-statement-alter-resource-group.md). The quota changes to the resource group take effect immediately.
+For an existing resource group, you can modify the `RU_PER_SEC` option (the rate of RU backfilling per second) of the resource group by using [`ALTER RESOURCE GROUP`](/sql-statements/sql-statement-alter-resource-group.md). The changes to the resource group take effect immediately.
 
 You can delete a resource group by using [`DROP RESOURCE GROUP`](/sql-statements/sql-statement-drop-resource-group.md).
 
