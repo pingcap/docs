@@ -58,7 +58,7 @@ Based on the above table, assuming that the TiKV time consumed by a resource gro
 The resource control feature introduces two new global variables.
 
 * TiDB: you can use the [`tidb_enable_resource_control`](/system-variables.md#tidb-tidb_enable_resource_control-new-in-v660) system variable to control whether to enable flow control for resource groups.
-* TiKV: you can use the [`resource-control.enabled`](/tikv-configuration-file.md#resource-control) parameter to control whether to use request scheduling based on resource group quotas.
+* TiKV: you can use the [`resource-control.enabled`](/tikv-configuration-file.md#resource-control) parameter to control whether to use request scheduling based on resource groups.
 
 <CustomContent platform="tidb-cloud">
 
