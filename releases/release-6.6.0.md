@@ -582,14 +582,14 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
     + TiDB Lightning
 
         - Fix the issue that TiDB Lightning timeout hangs due to TiDB restart in some scenarios [#33714](https://github.com/pingcap/tidb/issues/33714) @[lichunzhu](https://github.com/lichunzhu) **tw@shichun-0415**
-        - 修复并行导入时，当除最后一个外的 lightning 实例都遇到本地重复时，lightning 可能会跳过冲突处理的问题 [#40923](https://github.com/pingcap/tidb/issues/40923) @[lichunzhu]
-        - 修复 precheck 无法准确检测目标集群是否存在运行中的 CDC 的问题 [#41040](https://github.com/pingcap/tidb/issues/41040) @[lance6716]
-        - 修复 lightning 在 split-region 阶段 panic 问题（next key） [#40934](https://github.com/pingcap/tidb/issues/40934) @[lance6716]
-        - 修复踢重逻辑可能导致 checksum 不一致的问题 [#40657](https://github.com/pingcap/tidb/issues/40657) @[gozssky]
-        - 修复当数据文件中存在未闭合的 delimiter 可能导致 OOM 的问题 [#40400](https://github.com/pingcap/tidb/issues/40400) @[buchuitoudegou]
-        - 修复报错中的文件 offset 超过文件大小的问题 [#40034](https://github.com/pingcap/tidb/issues/40034) @[buchuitoudegou]
-        - 修复新版 PDClient 可能导致并行导入失败的问题 [#40493](https://github.com/pingcap/tidb/issues/40493) @[AmoebaProtozoa]
-        (dup: release-6.1.4.md > Bug 修复> Tools> TiDB Lightning)- 修复 precheck 检查项有时无法监测到之前的导入失败遗留的脏数据的问题 [#39477](https://github.com/pingcap/tidb/issues/39477) @[dsdashun](https://github.com/dsdashun) @[dsdashun]
+        - Fix the issue that TiDB Lightning might incorrectly skip conflict resolution when all but the last TiDB Lightning instance encounters a local duplicate record during a parallel import [#40923](https://github.com/pingcap/tidb/issues/40923) @[lichunzhu]
+        - Fix the issue that precheck cannot accurately detect the presence of a running TiCDC in the target cluster [#41040](https://github.com/pingcap/tidb/issues/41040) @[lance6716]
+        - Fix the issue that TiDB Lightning panics in the split-region phase [#40934](https://github.com/pingcap/tidb/issues/40934) @[lance6716]
+        - Fix the issue that the conflict resolution logic (`duplicate-resolution`) might lead to inconsistent checksums [#40657](https://github.com/pingcap/tidb/issues/40657) @[gozssky]
+        - Fix a possible OOM problem when there is an unclosed delimiter in the data file [#40400](https://github.com/pingcap/tidb/issues/40400) @[buchuitoudegou]
+        - Fix the issue that the file offset in the error report exceeds the file size [#40034](https://github.com/pingcap/tidb/issues/40034) @[buchuitoudegou]
+        - Fix an issue with the new version of PDClient that might cause parallel import to fail [#40493](https://github.com/pingcap/tidb/issues/40493) @[AmoebaProtozoa]
+        (dup: release-6.1.4.md > Bug 修复> Tools> TiDB Lightning)- Fix the issue that TiDB Lightning prechecks cannot find dirty data left by previously failed imports [#39477](https://github.com/pingcap/tidb/issues/39477) @[dsdashun](https://github.com/dsdashun) @[dsdashun]
 
 ## Contributors
 
