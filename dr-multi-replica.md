@@ -18,7 +18,7 @@ Important production systems usually require regional DR with zero RPO and minut
 
 > **Note:**
 >
-> The term "Region" in TiKV means a range of data while the term "region" means a physical location. The two terms are not interchangeable.
+> The term ["Region" in TiKV](/glossary.md#regionpeerraft-group) means a range of data while the term "region" means a physical location. The two terms are not interchangeable.
 
 ## Set up a cluster and configure replicas
 
@@ -88,7 +88,7 @@ In this example, TiDB contains five replicas and three Regions. Region 1 is the 
       - host: tidb-dr-test2
       ```
 
-    The preceding configurations use the following options to optimize cross-Region DR:
+    The preceding configurations use the following options to optimize toward cross-Region DR:
 
     - `server.grpc-compression-type: gzip` to enable gRPC message compression in TiKV, thus reducing network traffic.
     - `raftstore.raft-min-election-timeout-ticks` and `raftstore.raft-max-election-timeout-ticks` to extend the time before Region 3 participates in the election, thus preventing any replica in this Region from being voted as the leader.
@@ -128,7 +128,7 @@ In this example, TiDB contains five replicas and three Regions. Region 1 is the 
 3. Create placement rules and fix the primary replica of the test table to Region 1:
 
     ```sql
-    --Create two placement rules, the first rule specifies that Region 1 works as the primary Region, and Region 2 as the secondary Region.
+    -- Create two placement rules: the first rule specifies that Region 1 works as the primary Region, and Region 2 as the secondary Region.
     -- The second placement rule specifies that when Region 1 is down, Region 2 will become the primary Region.
     MySQL [(none)]> CREATE PLACEMENT POLICY primary_rule_for_region1 PRIMARY_REGION="Region1" REGIONS="Region1, Region2,Region3";
     MySQL [(none)]> CREATE PLACEMENT POLICY secondary_rule_for_region2 PRIMARY_REGION="Region2" REGIONS="Region1,Region2,Region3";
@@ -140,14 +140,14 @@ In this example, TiDB contains five replicas and three Regions. Region 1 is the 
     -- Note: You can modify the database name, table name, and placement rule name as needed.
 
     -- Confirm whether the leaders have been transferred by executing the following query to check the number of leaders in each Region.
-    select STORE_ID, address, leader_count, label from TIKV_STORE_STATUS order by store_id;
+    SELECT STORE_ID, address, leader_count, label FROM TIKV_STORE_STATUS ORDER BY store_id;
     ```
 
     The following SQL statement can generate a SQL script to configure the leader of all non-system schema tables to a specific Region:
 
     ```sql
-    set @region_name=primary_rule_for_region1;
-    select concat('ALTER TABLE ', table_schema, '.', table_name, ' PLACEMENT POLICY=', @region_name, ';') from information_schema.tables where table_schema not in ('METRICS_SCHEMA', 'PERFORMANCE_SCHEMA', 'INFORMATION_SCHEMA','mysql');
+    SET @region_name=primary_rule_for_region1;
+    SELECT CONCAT('ALTER TABLE ', table_schema, '.', table_name, ' PLACEMENT POLICY=', @region_name, ';') FROM information_schema.tables WHERE table_schema NOT IN ('METRICS_SCHEMA', 'PERFORMANCE_SCHEMA', 'INFORMATION_SCHEMA','mysql');
     ```
 
 ## Monitor the cluster
@@ -169,7 +169,7 @@ A planned switchover is a scheduled switch between the primary and secondary Reg
 
 1. Run the following command to switch all user tables and PD leaders to Region 2:
 
-    ``` sql
+    ```sql
     -- Apply the rule secondary_rule_for_region2 to the corresponding user tables.
     ALTER TABLE tpcc.warehouse PLACEMENT POLICY=secondary_rule_for_region2;
     ALTER TABLE tpcc.district PLACEMENT POLICY=secondary_rule_for_region2;
@@ -177,12 +177,13 @@ A planned switchover is a scheduled switch between the primary and secondary Reg
 
     Note: You can modify the database name, table name, and placement rule name as needed.
 
-    ``` shell
     Run the following commands to lower the priority of PD nodes in Region 1 and increase that of PD nodes in Region 2.
-    # tiup ctl:v6.4.0 pd member leader_priority  pd-1 2
-    # tiup ctl:v6.4.0 pd member leader_priority  pd-2 1
-    # tiup ctl:v6.4.0 pd member leader_priority  pd-3 4
-    # tiup ctl:v6.4.0 pd member leader_priority  pd-4 3
+
+    ``` shell
+    tiup ctl:v6.4.0 pd member leader_priority  pd-1 2
+    tiup ctl:v6.4.0 pd member leader_priority  pd-2 1
+    tiup ctl:v6.4.0 pd member leader_priority  pd-3 4
+    tiup ctl:v6.4.0 pd member leader_priority  pd-4 3
     ```
 
 2. Observe the PD and TiKV nodes in Grafana and ensure that Leaders of the PD and user tables have been transferred to the target Region. The steps for switching back to the original Region are the same as the preceding steps and are therefore not covered in this document.
@@ -205,7 +206,7 @@ An unplanned switchover means a switchover between primary and secondary Regions
     ALTER TABLE tpcc.district PLACEMENT POLICY=secondary_rule_for_region2;
 
     --- Confirm whether the leaders have been transferred by executing the following query to check the number of leaders in each Region.
-    select STORE_ID, address, leader_count, label from TIKV_STORE_STATUS order by store_id;
+    SELECT STORE_ID, address, leader_count, label FROM TIKV_STORE_STATUS ORDER BY store_id;
     ```
 
     After Region 1 recovers, you can use commands similar to the preceding ones to switch the leaders of user tables back to Region 1.
