@@ -7,17 +7,17 @@ summary: Learn TiDB Cloud performance test results.
 
 This document provides [Sysbench](https://github.com/akopytov/sysbench) performance test results of different TiDB cluster scales, which can be taken as a reference when you [determine the cluster size](/tidb-cloud/size-your-cluster.md).
 
-All the performance data is based on the condition: P95 latency < 105 ms.
+> **Note:**
+>
+> The tests are performed on TiDB v6.1.1, and the test results are based on the condition that the P95 latency is below 105 ms.
 
-All the test environments are based on TiDB version: v6.1.1.
-
-The transaction model `Read Only`, `Read Write`, `Write Only` represent the workload of `Read`, `Mixed`, `Write`.
+In this document, the transaction models `Read Only`, `Read Write`, and `Write Only` represent read workloads, mixed workloads, and write workloads. 
 
 ## 2 vCPU performance
 
 Currently, the 2 vCPU support of TiDB and TiKV is still in beta.
 
-Test scale:
+Test scales:
 
 - TiDB (2 vCPU, 8 GiB) \* 1; TiKV (2 vCPU, 8 GiB) \* 3
 - TiDB (2 vCPU, 8 GiB) \* 2; TiKV (2 vCPU, 8 GiB) \* 3
@@ -44,7 +44,7 @@ Test results:
 
 ## 4 vCPU performance
 
-Test scale:
+Test scales:
 
 - TiDB (4 vCPU, 16 GiB) \* 1; TiKV (4 vCPU, 16 GiB) \* 3
 - TiDB (4 vCPU, 16 GiB) \* 2; TiKV (4 vCPU, 16 GiB) \* 3
