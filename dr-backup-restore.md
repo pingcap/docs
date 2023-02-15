@@ -5,20 +5,20 @@ summary: Learn how to implement disaster recovery based on TiDB's backup and res
 
 # DR Solution based on BR
 
-A TiDB cluster has multiple replicas, which allows it to tolerate the failure of a single data center or region and continue to provide services. In the case of a natural disaster, software vulnerability, hardware failure, virus attack, or misoperations, TiDB's Backup & Restore (BR) feature can back up data to an independent disaster recovery (DR) storage device to protect user data from damage. Compared with other DR solutions, the BR feature is more flexible, reliable, recoverable, and cost effective:
+A TiDB cluster has multiple replicas, which allows it to tolerate the failure of a single data center or region and continue to provide services. In the case of a natural disaster, software vulnerability, hardware failure, virus attack, or misoperations, which impacts an area larger than a single data center or region, TiDB's Backup & Restore (BR) feature can back up data to an independent disaster recovery (DR) storage device to protect user data from damage. Compared with other DR solutions, the BR feature is more flexible, reliable, recoverable, and cost-effective:
 
 - Flexibility: You can back up data any time with any frequency. This makes backup and restore flexible and better adapts to different business scenarios.
 - Reliability: Backup data is usually stored on an independent storage device and this means enhanced data security.
 - Recoverability: Any loss or damage to the original data caused by any unexpected situation can be recovered by restoring the backup data. This makes the BR feature highly recoverable and ensures the normal use of your database.
 - Cost effectiveness: You can get your database protected using BR without spending too much.
 
-Generally speaking, BR is the last resort for data security. It improves the security and reliability of the databases without requiring too much cost. BR protects data in various unexpected situations, so that you can use the database safely without worrying about the risk of data loss or damage.
+Generally speaking, BR is the last resort for data safety. It improves the safety and reliability of the databases without requiring too much cost. BR protects data in various unexpected situations so that you can use the database safely without worrying about the risk of data loss or damage.
 
 ## Perform backup and restore
 
 ![BR log backup and PITR architecture](/media/dr/dr-backup-and-restore.png)
 
-As shown in the preceding architecture, you can back up data to a DR storage device of other regions, and recover data from the backup data as needed. This means that the cluster can tolerate the failure of a single region with a Recovery Point Objective (RPO) of up to 5 minutes and a Recovery Time Objective (RTO) between tens of minutes and a few hours. However, if the database size is large, the RTO time might be longer.
+As shown in the preceding architecture, you can back up data to a DR storage device located in other regions, and recover data from the backup data as needed. This means that the cluster can tolerate the failure of a single region with a Recovery Point Objective (RPO) of up to 5 minutes and a Recovery Time Objective (RTO) between tens of minutes and a few hours. However, if the database size is large, the RTO time might be longer.
 
 > **Note:**
 >

@@ -32,7 +32,7 @@ Before introducing specific DR solutions, this section introduces the architectu
 
 ![TiDB architecture](/media/dr/tidb-architecture.png)
 
-TiDB uses a storage-compute separated architecture:
+TiDB is designed with an architecture of separated computing and storage:
 
 - TiDB is the SQL computing layer of the system.
 - TiKV is the storage layer of the system, and is a row-based storage engine. [Region](/glossary.md#regionpeerraft-group) is the basic unit for scheduling data in TiKV. A Region is a collection of sorted rows of data. The data in a Region is saved in at least three replicas, and data changes are replicated in the log layer through the Raft protocol.

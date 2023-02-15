@@ -10,7 +10,7 @@ Disaster recovery (DR) based on primary and secondary databases is a common solu
 The primary-secondary DR solution has the following benefits:
 
 - High availability: The primary-secondary architecture enhances the availability of the system essentially. This guarantees quick system recovery from any failure.
-- Fast switchover: When the primary cluster fails, the system can quickly switches to the secondary cluster and continues to provide services.
+- Fast switchover: When the primary cluster fails, the system can quickly switch to the secondary cluster and continue to provide services.
 - Data consistency: The secondary cluster backs up the data of the primary cluster in almost real time. In this way, the data is basically up-to-date when the system switches to the secondary cluster due to a failure.
 
 This document includes the following contents:
@@ -44,7 +44,7 @@ This DR architecture is simple and easy to use. Being capable of tolerating regi
 
 In this document, the TiDB primary and secondary clusters are deployed in two different regions (region 1 and region 2). TiCDC is deployed together with the secondary cluster, because there is a certain network latency between the primary and secondary clusters. Deploying TiCDC with the secondary cluster can avoid the impact of network latency, which helps achieve optimal replication performance. The deployment topology of the example provided in this document is as follows (one component node is deployed on one server):
 
-|**Region** | **Host** | **Cluster** | **Component** |
+|Region | Host | Cluster | Component |
 | --- | --- | --- | --- |
 | Region 1 | 10.0.1.9 | Primary | Monitor, Grafana, or AlterManager |
 | Region 2 | 10.0.1.11 | Secondary | Monitor, Grafana, or AlterManager |
@@ -68,7 +68,7 @@ When deploying TiCDC, note that the secondary cluster and TiCDC must be deployed
 - To deploy TiCDC on an existing primary cluster, see [Deploy TiCDC](/ticdc/deploy-ticdc.md#add-or-scale-out-ticdc-to-an-existing-tidb-cluster-using-tiup).
 - To deploy a new primary cluster and TiCDC, use the following deployment template and modify the configuration parameters as needed:
 
-    ```shell
+    ```yaml
     global:
     user: "tidb"
     ssh_port: 22
@@ -112,7 +112,7 @@ After setting up the TiDB primary and secondary clusters, first migrate the data
 External storage is used when migrating data and replicating real-time change data. Amazon S3 is a recommended choice. If the TiDB cluster is deployed in a self-built data center, the following methods are recommended:
 
 * Build [MinIO](https://docs.min.io/docs/minio-quickstart-guide.html) as the backup storage system, and use the S3 protocol to back up data to MinIO.
-* Mount Network File System (NFS, such as NAS) disks to br command-line tool, TiKV and TiCDC instances, and use the POSIX file system interface to write backup data to the corresponding NFS directory.
+* Mount Network File System (NFS, such as NAS) disks to br command-line tool, TiKV, and TiCDC instances, and use the POSIX file system interface to write backup data to the corresponding NFS directory.
 
 The following example uses MinIO as the storage system and is for reference only. Note that you need to prepare a separate server to deploy MinIO in region 1 or region 2.
 
@@ -276,7 +276,7 @@ After migrating data as described in the preceding section, you can replicate in
 
 ### Monitor the primary and secondary clusters
 
-Currently, TiDB DR Dashboard is unavailable. You can check the status of TiDB primary and secondary cluster using the following dashboards and decide whether to perform a DR switchover:
+Currently, TiDB DR Dashboard is unavailable. You can check the status of TiDB primary and secondary clusters using the following dashboards and decide whether to perform a DR switchover:
 
 - [TiDB Key Metrics](/grafana-overview-dashboard.md)
 - [Changefeed Metrics](/ticdc/monitor-ticdc.md#changefeed)
