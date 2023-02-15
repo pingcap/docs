@@ -23,34 +23,34 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 <tbody>
   <tr>
     <td rowspan="2">SQL operations and compatibility<br /><br /><i>SEAMLESS to use</i></td>
-    <td><a href="#foreign-key">Foreign Key</a></td>
+    <td>Foreign Key</td>
     <td>Support MySQL-compatible foreign key constraints to maintain data consistency and improve data quality.</td>
   </tr>
   <tr>
-    <td><a href="#multi-valued-index">Multi-valued index (experimental)</a></td>
+    <td>Multi-valued index (experimental)</td>
     <td>Introduce MySQL-compatible multi-valued indexes and enhance the JSON type to improve TiDB's compatibility with MySQL 8.0.</td>
   </tr>
   <tr>
     <td>DB Operations<br /><br /><i>SMOOTH to use</i></td>
-    <td><a href="#resource-group">Tenant resource group control (experimental)</a></td>
+    <td>Tenant resource group control (experimental)</td>
     <td>Support resource management based on resource groups, mapping database users to the corresponding resource groups and setting quotas for each resource group based on actual needs.</td>
   </tr>
   <tr>
     <td>Stability<br /><br /><i>RELIABLE to use</i></td>
-    <td><a href="#binding-his-ga">Historical SQL binding</a></td>
+    <td>Historical SQL binding</td>
     <td>Support binding historical execution plans and quickly binding execution plans on TiDB Dashboard.</td>
   </tr>
   <tr>
     <td rowspan="3">Performance<br /><br /><i>POWERFUL to use</i></td>
-    <td><a href="#compression-exchange">TiFlash supports compression exchange</a></td>
+    <td>TiFlash supports compression exchange</td>
     <td>TiFlash supports data compression to improve the efficiency of parallel data exchange.</td>
   </tr>
   <tr>
-    <td><a href="#tiflash-stale-read">TiFlash supports stale read</a></td>
+    <td>TiFlash supports stale read</td>
     <td>TiFlash supports the Stale Read feature, which can improve query performance in scenarios where real-time requirements are not restricted.</td>
   </tr>
   <tr>
-    <td><a href="#dm-physical">DM support physical import (experimental)</a></td>
+    <td>DM support physical import (experimental)</td>
     <td>TiDB Data Migration (DM) integrates TiDB Lightning's Physical Import mode to improve the performance of full data migration, with performance being up to 10 times faster.</td>
   </tr>
 </tbody>
@@ -60,13 +60,13 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
 ### SQL
 
-* <a name="foreign-key" style="text-decoration:none; color:inherit; cursor:default;">Support the MySQL-compatible foreign key constraints</a> <a href="https://github.com/pingcap/tidb/issues/18209" target="_blank" referrerpolicy="no-referrer-when-downgrade">#18209</a> <a href="https://github.com/crazycs520" target="_blank" referrerpolicy="no-referrer-when-downgrade">@crazycs520</a> **tw@Oreoxmt**
+* Support the MySQL-compatible foreign key constraints <a href="https://github.com/pingcap/tidb/issues/18209" target="_blank" referrerpolicy="no-referrer-when-downgrade">#18209</a> <a href="https://github.com/crazycs520" target="_blank" referrerpolicy="no-referrer-when-downgrade">@crazycs520</a> **tw@Oreoxmt**
 
     TiDB v6.6.0 introduces the foreign key constraints feature, which is compatible with MySQL. This feature supports referencing within a table or between tables, constraints validation, and cascade operations. This feature helps to migrate applications to TiDB, maintain data consistency, improve data quality, and facilitate data modeling.
 
     For more information, see [documentation](/foreign-key.md).
 
-* <a name="multi-valued-index" style="text-decoration:none; color:inherit; cursor:default;">Support the MySQL-compatible multi-valued index (experimental)</a> <a href="https://github.com/pingcap/tidb/issues/39592" target="_blank" referrerpolicy="no-referrer-when-downgrade">#39592</a> <a href="https://github.com/xiongjiwei" target="_blank" referrerpolicy="no-referrer-when-downgrade">@xiongjiwei</a> <a href="https://github.com/qw4990" target="_blank" referrerpolicy="no-referrer-when-downgrade">@qw4990</a> **tw@TomShawn**
+* Support the MySQL-compatible multi-valued index (experimental) <a href="https://github.com/pingcap/tidb/issues/39592" target="_blank" referrerpolicy="no-referrer-when-downgrade">#39592</a> <a href="https://github.com/xiongjiwei" target="_blank" referrerpolicy="no-referrer-when-downgrade">@xiongjiwei</a> <a href="https://github.com/qw4990" target="_blank" referrerpolicy="no-referrer-when-downgrade">@qw4990</a> **tw@TomShawn**
 
     TiDB introduces the MySQL-compatible multi-valued index in v6.6.0. Filtering the values of an array in a JSON column is a common operation, but normal indexes cannot help speed up such an operation. Creating a multi-valued index on an array can greatly improve filtering performance. If an array in the JSON column has a multi-valued index, you can use the multi-value index to filter the retrieval conditions with `MEMBER OF()`, `JSON_CONTAINS()`, `JSON_OVERLAPS()` functions, thereby reducing much I/O consumption and improving operation speed.
 
@@ -82,7 +82,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
 ### Stability
 
-* <a name="binding-his-ga" style="text-decoration:none; color:inherit; cursor:default;">Binding historical execution plans is GA</a> <a href="https://github.com/pingcap/tidb/issues/39199" target="_blank" referrerpolicy="no-referrer-when-downgrade">#39199</a> <a href="https://github.com/fzzf678" target="_blank" referrerpolicy="no-referrer-when-downgrade">@fzzf678</a> **tw@TomShawn**
+* Binding historical execution plans is GA <a href="https://github.com/pingcap/tidb/issues/39199" target="_blank" referrerpolicy="no-referrer-when-downgrade">#39199</a> <a href="https://github.com/fzzf678" target="_blank" referrerpolicy="no-referrer-when-downgrade">@fzzf678</a> **tw@TomShawn**
 
     In v6.5.0, TiDB extends the binding targets in the [`CREATE [GLOBAL | SESSION] BINDING`](/sql-statements/sql-statement-create-binding.md) statements and supports creating bindings according to historical execution plans. In v6.6.0, this feature is GA. The selection of execution plans is not limited to the current TiDB node. Any historical execution plan generated by any TiDB node can be selected as the target of [SQL binding](/sql-statements/sql-statement-create-binding.md), which further improves the feature usability.
 
@@ -127,13 +127,13 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
 ### HTAP
 
-* <a name="compression-exchange" style="text-decoration:none; color:inherit; cursor:default;">TiFlash supports data exchange with compression</a> <a href="https://github.com/pingcap/tiflash/issues/6620" target="_blank" referrerpolicy="no-referrer-when-downgrade">#6620</a> <a href="https://github.com/solotzg" target="_blank" referrerpolicy="no-referrer-when-downgrade">@solotzg</a> **tw@TomShawn**
+* TiFlash supports data exchange with compression <a href="https://github.com/pingcap/tiflash/issues/6620" target="_blank" referrerpolicy="no-referrer-when-downgrade">#6620</a> <a href="https://github.com/solotzg" target="_blank" referrerpolicy="no-referrer-when-downgrade">@solotzg</a> **tw@TomShawn**
 
     To cooperate with multiple nodes for computing, the TiFlash engine needs to exchange data among different nodes. When the size of the data to be exchanged is very large, the performance of data exchange might affect the overall computing efficiency. In v6.6.0, the TiFlash engine introduces a compression mechanism to compress the data that needs to be exchanged when necessary, and then to perform the exchange, thereby improving the efficiency of data exchange.
 
     For details, see [documentation]().
 
-* <a name="tiflash-stale-read" style="text-decoration:none; color:inherit; cursor:default;">TiFlash supports the Stale Read feature</a> <a href="https://github.com/pingcap/tiflash/issues/4483" target="_blank" referrerpolicy="no-referrer-when-downgrade">#4483</a> <a href="https://github.com/hehechen" target="_blank" referrerpolicy="no-referrer-when-downgrade">@hehechen</a> **tw@qiancai**
+* TiFlash supports the Stale Read feature <a href="https://github.com/pingcap/tiflash/issues/4483" target="_blank" referrerpolicy="no-referrer-when-downgrade">#4483</a> <a href="https://github.com/hehechen" target="_blank" referrerpolicy="no-referrer-when-downgrade">@hehechen</a> **tw@qiancai**
 
    The Stale Read feature has been generally available (GA) since v5.1.1, which allows you to read historical data at a specific timestamp or within a specified time range. Stale read can reduce read latency and improve query performance by reading data from local TiKV replicas directly. Before v6.6.0, TiFlash does not support Stale Read. Even if a table has TiFlash replicas, Stale Read can only read its TiKV replicas.
 
@@ -170,7 +170,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
 ### DB operations
 
-* <a name="resource-group" style="text-decoration:none; color:inherit; cursor:default;">Support resource control based on resource groups (experimental)</a> <a href="https://github.com/pingcap/tidb/issues/38825" target="_blank" referrerpolicy="no-referrer-when-downgrade">#38825</a> <a href="https://github.com/nolouch" target="_blank" referrerpolicy="no-referrer-when-downgrade">@nolouch</a> <a href="https://github.com/BornChanger" target="_blank" referrerpolicy="no-referrer-when-downgrade">@BornChanger</a> <a href="https://github.com/glorv" target="_blank" referrerpolicy="no-referrer-when-downgrade">@glorv</a> <a href="https://github.com/tiancaiamao" target="_blank" referrerpolicy="no-referrer-when-downgrade">@tiancaiamao</a> <a href="https://github.com/Connor1996" target="_blank" referrerpolicy="no-referrer-when-downgrade">@Connor1996</a> <a href="https://github.com/JmPotato" target="_blank" referrerpolicy="no-referrer-when-downgrade">@JmPotato</a> <a href="https://github.com/hnes" target="_blank" referrerpolicy="no-referrer-when-downgrade">@hnes</a> <a href="https://github.com/CabinfeverB" target="_blank" referrerpolicy="no-referrer-when-downgrade">@CabinfeverB</a> <a href="https://github.com/HuSharp" target="_blank" referrerpolicy="no-referrer-when-downgrade">@HuSharp</a> **tw@hfxsd**
+* Support resource control based on resource groups (experimental) <a href="https://github.com/pingcap/tidb/issues/38825" target="_blank" referrerpolicy="no-referrer-when-downgrade">#38825</a> <a href="https://github.com/nolouch" target="_blank" referrerpolicy="no-referrer-when-downgrade">@nolouch</a> <a href="https://github.com/BornChanger" target="_blank" referrerpolicy="no-referrer-when-downgrade">@BornChanger</a> <a href="https://github.com/glorv" target="_blank" referrerpolicy="no-referrer-when-downgrade">@glorv</a> <a href="https://github.com/tiancaiamao" target="_blank" referrerpolicy="no-referrer-when-downgrade">@tiancaiamao</a> <a href="https://github.com/Connor1996" target="_blank" referrerpolicy="no-referrer-when-downgrade">@Connor1996</a> <a href="https://github.com/JmPotato" target="_blank" referrerpolicy="no-referrer-when-downgrade">@JmPotato</a> <a href="https://github.com/hnes" target="_blank" referrerpolicy="no-referrer-when-downgrade">@hnes</a> <a href="https://github.com/CabinfeverB" target="_blank" referrerpolicy="no-referrer-when-downgrade">@CabinfeverB</a> <a href="https://github.com/HuSharp" target="_blank" referrerpolicy="no-referrer-when-downgrade">@HuSharp</a> **tw@hfxsd**
 
     Now you can create resource groups for a TiDB cluster, bind different database users to corresponding resource groups, and set quotas for each resource group according to actual needs. When the cluster resources are limited, all resources used by sessions in the same resource group will be limited to the quota. In this way, even if a resource group is over-consumed, the sessions in other resource groups are not affected. TiDB provides a built-in view of the actual usage of resources on Grafana dashboards, assisting you to allocate resources more rationally.
 
@@ -270,7 +270,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
 ### Ecosystem
 
-* <a name="dm-physical" style="text-decoration:none; color:inherit; cursor:default;">TiDB Data Migration (DM) integrates with TiDB Lightning's physical import mode for up to a 10x performance boost for full migration (experimental)</a> <a href="https://github.com/lance6716" target="_blank" referrerpolicy="no-referrer-when-downgrade">@lance6716</a> **tw@ran-huang**
+* TiDB Data Migration (DM) integrates with TiDB Lightning's physical import mode for up to a 10x performance boost for full migration (experimental) <a href="https://github.com/lance6716" target="_blank" referrerpolicy="no-referrer-when-downgrade">@lance6716</a> **tw@ran-huang**
 
     In v6.6.0, DM's full migration capability integrates with TiDB Lightning's physical import mode, which enables DM to improve the performance of full data migration by up to 10 times, greatly reducing the migration time in large data volume scenarios.
 
