@@ -265,12 +265,8 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
 ### Telemetry
 
-- 在 v6.6.0 及之后发布的里程碑版本 (DMR) 和长期支持版本 (LTS) 中，TiDB 和 TiDB Dashboard 默认关闭遥测功能，即默认不再收集使用情况信息。如果升级前使用默认的遥测配置，则升级后遥测功能处于关闭状态。
-- 从 v1.11.3 起，新部署的 TiUP 默认关闭遥测功能，即默认不再收集使用情况信息。如果从 v1.11.3 之前的 TiUP 版本升级至 v1.11.3 或更高 TiUP 版本，遥测保持升级前的开启或关闭状态。
-
-> **注意：**
->
-> 除了 v6.6.0 及之后发布的 DMR 和 LTS 版本默认关闭遥测外，2023 年 2 月 20 日后，为 TiDB LTS 版本发布的补丁版本也默认关闭遥测功能，默认不再收集使用情况信息分享给 PingCAP。具体的版本可参考 [TiDB 版本发布时间线](/releases/release-timeline.md)。
+- Starting from Februray 20, 2023, the telemetry feature is disabled by default in new versions of TiDB and TiDB Dashboard (including v6.6.0). If you upgrade from a previous version that uses the default telemetry configuration, the telemetry feature is disabled after the upgrade. For the specific versions, see [TiDB Release Timeline](/releases/release-timeline.md).
+- Starting from v1.11.3, the telemetry feature is disabled by default in newly deployed TiUP. If you upgrade from a previous version of TiUP to v1.11.3 or a later version, the telemetry feature keeps the same status as before the upgrade.
 
 ### Ecosystem
 
