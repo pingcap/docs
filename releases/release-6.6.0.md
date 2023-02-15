@@ -564,13 +564,12 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
     + TiCDC
 
-        `<!-- 6 -->`
-        (dup: release-6.1.4.md > Bug 修复> Tools> TiCDC)- 修复不能通过配置文件修改 `transaction_atomicity` 和 `protocol` 参数的问题 [#7935](https://github.com/pingcap/tiflow/issues/7935) @[CharlesCheung96](https://github.com/CharlesCheung96)
-        - 修复 redo log 存储路径没做权限预检查的问题。 [#6335](https://github.com/pingcap/tiflow/issues/6335)
-        - 修复 redo log 容忍S3存储故障过短的问题。 [#8089](https://github.com/pingcap/tiflow/issues/8089)
+        (dup: release-6.1.4.md > Bug 修复> Tools> TiCDC)- Fix the issue that `transaction_atomicity` and `protocol` cannot be updated via the configuration file [#7935](https://github.com/pingcap/tiflow/issues/7935) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        - Fix the issue that precheck is not performed on the storage path of redo log [#6335](https://github.com/pingcap/tiflow/issues/6335)
+        - Fix the issue of insufficient duration that redo log can tolerate for S3 storage failure [#8089](https://github.com/pingcap/tiflow/issues/8089)
         - 修复 changefeed 在 tikv、CDC 节点扩缩容特殊场景下卡住的问题。 [#8197](https://github.com/pingcap/tiflow/issues/8197)
-        - 修复 在6.5 中引入tikv 节点之间流量过大的问题。 [#14092](https://github.com/tikv/tikv/issues/14092)
-        - 优化 pull-based sink 打开时在 CPU 利用率、内存控制、吞吐等方面若干性能问题。[#8142](https://github.com/pingcap/tiflow/issues/8142) [#8157](https://github.com/pingcap/tiflow/issues/8157) [#8001](https://github.com/pingcap/tiflow/issues/8001) [#5928](https://github.com/pingcap/tiflow/issues/5928)
+        - Fix the issue of too large traffic among TiKV nodes [#14092](https://github.com/tikv/tikv/issues/14092)
+        - Fix the performance issues of TiCDC in terms of CPU usage, memory control, and throughput when the pull-based sink is enabled [#8142](https://github.com/pingcap/tiflow/issues/8142) [#8157](https://github.com/pingcap/tiflow/issues/8157) [#8001](https://github.com/pingcap/tiflow/issues/8001) [#5928](https://github.com/pingcap/tiflow/issues/5928)
 
     + TiDB Data Migration (DM)
 
