@@ -7,10 +7,6 @@ summary: Learn how to view TiDB Cloud built-in monitoring metrics and understand
 
 TiDB Cloud collects and displays a full set of standard metrics of your cluster on the Monitoring page. By viewing these metrics, you can easily identify performance issues and determine whether your current database deployment meets your requirements.
 
-> **Note:**
->
-> Currently, the Monitoring page is unavailable for [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta).
-
 ## View the Monitoring page
 
 To view the metrics on the Monitoring page, take the following steps:
@@ -32,6 +28,10 @@ All monitoring data is kept for 2 days.
 
 The following sections illustrate the metrics on the Monitoring page.
 
+> **Note:**
+>
+> For [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters, the Monitoring page only provides a subset of monitoring metrics, which are marked with `*` in the **Metric name** column.
+
 ### Database Time
 
 | Metric name  | Labels | Description                                   |
@@ -44,23 +44,27 @@ The following sections illustrate the metrics on the Monitoring page.
 
 | Metric name  | Labels | Description                                   |
 | :------------| :------| :-------------------------------------------- |
-| Connection Count | Total, active connection | Total: the number of connections to all TiDB instances. <br/> Active connections: the number of active connections to all TiDB instances. |
+| `*` Connection Count | Total, active connection | Total: the number of connections to all TiDB instances. <br/> Active connections: the number of active connections to all TiDB instances. |
 | Disconnection | Instances | The number of clients disconnected to each TiDB instance. |
 
 ### SQL Count
 
 | Metric name  | Labels | Description                                   |
 | :------------| :------| :-------------------------------------------- |
-| Query Per Second | {SQL type} | The number of SQL statements executed per second in all TiDB instances, which are collected by SQL types, such as `SELECT`, `INSERT`, and `UPDATE`. |
-| Failed Queries | Error types | The statistics of error types (such as syntax errors and primary key conflicts) according to the SQL statement execution errors per minute on each TiDB instance. It contains the module in which an error occurs and the error code. |
+| `*` Query Per Second | {SQL type} | The number of SQL statements executed per second in all TiDB instances, which are collected by SQL types, such as `SELECT`, `INSERT`, and `UPDATE`. |
+| `*` Failed Queries | Error types | The statistics of error types (such as syntax errors and primary key conflicts) according to the SQL statement execution errors per minute on each TiDB instance. It contains the module in which an error occurs and the error code. |
 | Command Per Second | Query, StmtExecute, and StmtPrepare | The number of commands processed by all TiDB instances per second based on command types. |
 | Queries Using Plan Cache OPS | hit, miss | hit: the number of queries using plan cache per second in all TiDB instances. <br/> miss: the number of queries missing plan cache per second in all TiDB instances. |
 
 ### Latency Break Down
 
+> **Note:**
+>
+> For [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters, the Query Duration metric is named as Average Query Duration.
+
 | Metric name  | Labels | Description                                   |
 | :------------| :------| :-------------------------------------------- |
-| Query Duration | avg-{SQL Types}, 99-{SQL Types} | The duration from receiving a request from the client to TiDB till TiDB executing the request and returning the result to the client. In general, client requests are sent in the form of SQL statements; however, this duration can include the execution time of commands such as `COM_PING`, `COM_SLEEP`, `COM_STMT_FETCH`, and `COM_SEND_LONG_DATA`. TiDB supports Multi-Query, which means the client can send multiple SQL statements at one time, such as `select 1; select 1; select 1;`. In this case, the total execution time of this query includes the execution time of all SQL statements. |
+| `*` Query Duration | avg-{SQL Types}, 99-{SQL Types} | The duration from receiving a request from the client to TiDB till TiDB executing the request and returning the result to the client. In general, client requests are sent in the form of SQL statements; however, this duration can include the execution time of commands such as `COM_PING`, `COM_SLEEP`, `COM_STMT_FETCH`, and `COM_SEND_LONG_DATA`. TiDB supports Multi-Query, which means the client can send multiple SQL statements at one time, such as `select 1; select 1; select 1;`. In this case, the total execution time of this query includes the execution time of all SQL statements. |
 | Average Idle Connection Duration | avg-in-txn, avg-not-in-txn | The connection idle duration indicates the duration of a connection being idle.<br/> avg-in-txn: The average connection idle duration when a connection is within a transaction. <br/>avg-not-in-txn: The average connection idle duration when a connection is not within a transaction. |
 | Get Token Duration | avg, 99 | The average time or P99 duration consumed in getting tokens of SQL statements. |
 | Parse Duration | avg, 99 | The average time or P99 duration consumed in parsing SQL statements. |
@@ -69,10 +73,14 @@ The following sections illustrate the metrics on the Monitoring page.
 
 ### Transaction
 
+> **Note:**
+>
+> For [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters, the Transaction Duration metric is named as Average Transaction Duration.
+
 | Metric name  | Labels | Description                                   |
 | :------------| :------| :-------------------------------------------- |
-| Transaction Per Second | {types}-{transaction model} | The number of transactions executed per second. |
-| Transaction Duration | avg-{transaction model}, 99-{transaction model} | The execution duration of a transaction. |
+| `*` Transaction Per Second | {types}-{transaction model} | The number of transactions executed per second. |
+| `*` Transaction Duration | avg-{transaction model}, 99-{transaction model} | The execution duration of a transaction. |
 
 ### Core Path Duration
 
