@@ -5,6 +5,14 @@ summary: Learn the usage of DROP RESOURCE GROUP in TiDB.
 
 # DROP RESOURCE GROUP
 
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> This feature is not available on [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta).
+
+</CustomContent>
+
 You can use the `DROP RESOURCE GROUP` statement to drop a resource group.
 
 ## Synopsis

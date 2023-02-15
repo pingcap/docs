@@ -5,6 +5,14 @@ summary: Learn the usage of CREATE RESOURCE GROUP in TiDB.
 
 # CREATE RESOURCE GROUP
 
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> This feature is not available on [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta).
+
+</CustomContent>
+
 You can use the `CREATE RESOURCE GROUP` statement to create a resource group.
 
 ## Synopsis

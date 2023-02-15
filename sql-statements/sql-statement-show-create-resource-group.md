@@ -5,6 +5,14 @@ summary: Learn the usage of SHOW CREATE RESOURCE GROUP in TiDB.
 
 # SHOW CREATE RESOURCE GROUP
 
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> This feature is not available on [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta).
+
+</CustomContent>
+
 You can use the `SHOW CREATE RESOURCE GROUP` statement to view the current definition of a resource group.
 
 ## Synopsis
