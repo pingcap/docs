@@ -8,7 +8,7 @@ aliases: ['/docs/dev/keywords-and-reserved-words/','/docs/dev/reference/sql/lang
 
 This article introduces the keywords in TiDB, the differences between reserved words and non-reserved words and summarizes all keywords for the query.
 
-Keywords are words that have special meanings in SQL statements, such as `SELECT`, `UPDATE`, and `DELETE`. Some of them can be used as identifiers directly, which are called **non-reserved keywords**. Some of them require special treatment before being used as identifiers, which are called **reserved keywords**.
+Keywords are words that have special meanings in SQL statements, such as `SELECT`, `UPDATE`, and `DELETE`. Some of them can be used as identifiers directly, which are called **non-reserved keywords**. Some of them require special treatment before being used as identifiers, which are called **reserved keywords**. There are some special non-reserved keywords that need to be escaped with backticks `` ` `` (sometimes they can also be used without escaping). It is recommended that you use them as reserved keywords.
 
 To use the reserved keywords as identifiers, you must enclose them in backticks `` ` ``:
 
@@ -58,7 +58,7 @@ Query OK, 0 rows affected (0.08 sec)
 
 ## Keyword list
 
-The following list shows the keywords in TiDB. Reserved keywords are marked with `(R)`. Reserved keywords for [Window Functions](/functions-and-operators/window-functions.md) are marked with `(R-Window)`:
+The following list shows the keywords in TiDB. Reserved keywords are marked with `(R)`. Reserved keywords for [Window Functions](/functions-and-operators/window-functions.md) are marked with `(R-Window)`. Special non-reserved keywords that need to be escaped with backticks `` ` `` are marked with `(S)`.
 
 <TabsPanel letters="ABCDEFGHIJKLMNOPQRSTUVWXYZ" />
 
@@ -449,6 +449,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - PER_DB
 - PER_TABLE
 - PESSIMISTIC (R)
+- PLACEMENT (S)
 - PLUGINS
 - PRECEDING
 - PRECISION (R)
@@ -680,9 +681,3 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 <a id="Z" class="letter" href="#Z">Z</a>
 
 - ZEROFILL (R)
-
-## Special keywords
-
-There are some special non-reserved keywords that need to be escaped with backticks `` ` `` (sometimes they can also be used without escaping). It is recommended that you use them as reserved keywords. The following lists such special keywords:
-
-- PLACEMENT
