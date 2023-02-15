@@ -510,6 +510,7 @@
 - FAQs
   - [TiDB Cloud FAQs](/tidb-cloud/tidb-cloud-faq.md)
   - [Serverless Tier FAQs](/tidb-cloud/serverless-tier-faqs.md)
+  - [Security FAQs](/tidb-cloud/tidb-cloud-security-faq.md) 
 - Release Notes
   - [2023](/tidb-cloud/tidb-cloud-release-notes.md)
   - [2022](/tidb-cloud/release-notes-2022.md)
