@@ -389,8 +389,8 @@ All operations above performed on the cluster machine use the SSH client embedde
 
 Then you can use the `--native-ssh` command-line flag to enable the system-native command-line tool:
 
-- Deploy a cluster: `tiup dm deploy <cluster-name> <version> <topo> --native-ssh`. `<cluster-name>` is the cluster name, `<version>` is the DM version to be deployed (such as `v6.5.0`), and `<topo>` is the topology file.
-- Start a cluster: `tiup dm start <cluster-name> --native-ssh`. `<cluster-name>` is the cluster name.
+- Deploy a cluster: `tiup dm deploy <cluster-name> <version> <topo> --native-ssh`. Fill in the name of your cluster for `<cluster-name>`,  the DM version to be deployed (such as `v6.5.0`) for `<version>` , and the topology file name for `<topo>`.
+- Start a cluster: `tiup dm start <cluster-name> --native-ssh`.
 - Upgrade a cluster: `tiup dm upgrade ... --native-ssh`
 
 You can add `--native-ssh` in all cluster operation commands above to use the system's native SSH client.
