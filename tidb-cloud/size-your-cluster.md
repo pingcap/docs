@@ -108,7 +108,8 @@ Although TiKV is mainly used for data storage, the performance of the TiKV node 
 
 **Data volume**
 
-Recommended number of TiKV nodes by data volume: 
+You can calculate a recommended number of TiKV nodes according to your data volume as follows:
+
 `ceil( size of your data * compression ratio * the number of replicas ÷ TiKV storage usage ratio ÷ one TiKV capacity ÷ 3 ) * 3`
 
 Generally, the usage ratio of TiKV storage is not recommended to exceed 80%, the number of replicas is assumed to be 3 by default, the storage capacity of a 8 vCPU, 64 GiB TiKV node is 4096 GiB.
