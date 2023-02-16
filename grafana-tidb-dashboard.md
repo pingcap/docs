@@ -115,7 +115,6 @@ To understand the key metrics displayed on the TiDB dashboard, check the followi
 - KV Request Duration 99 by store: the execution time of a KV request, displayed according to TiKV
 - KV Request Duration 99 by type: the execution time of a KV request, displayed according to the request type
 
-<<<<<<< HEAD
 ### PD Client
 
 - PD Client CMD OPS: the statistics of commands executed by PD Client per second
