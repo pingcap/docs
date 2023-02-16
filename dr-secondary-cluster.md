@@ -5,13 +5,13 @@ summary: Learn how to implement primary-secondary disaster recovery based on TiC
 
 # DR Solution based on Primary and Secondary Clusters
 
-Disaster recovery (DR) based on primary and secondary databases is a common solution. In this solution, the DR system has a primary cluster and a secondary cluster. The primary cluster handles user requests, while the secondary cluster backs up data of the primary cluster. When the primary cluster fails, the secondary cluster takes over services and continues to provide services using the backup data. In this way, the business system continues to run normally even when a failure occurs, instead of being interrupted by the failure.
+Disaster recovery (DR) based on primary and secondary databases is a common solution. In this solution, the DR system has a primary cluster and a secondary cluster. The primary cluster handles user requests, while the secondary cluster backs up data from the primary cluster. When the primary cluster fails, the secondary cluster takes over services and continues to provide services using the backup data. This ensures that the business system continues to run normally without any interruptions caused by a failure.
 
 The primary-secondary DR solution has the following benefits:
 
 - High availability: The primary-secondary architecture enhances the availability of the system essentially. This guarantees quick system recovery from any failure.
 - Fast switchover: When the primary cluster fails, the system can quickly switch to the secondary cluster and continue to provide services.
-- Data consistency: The secondary cluster backs up the data of the primary cluster in almost real time. In this way, the data is basically up-to-date when the system switches to the secondary cluster due to a failure.
+- Data consistency: The secondary cluster backs up the data from the primary cluster in almost real time. In this way, the data is basically up-to-date when the system switches to the secondary cluster due to a failure.
 
 This document includes the following contents:
 
@@ -28,7 +28,7 @@ Meanwhile, this document also describes how to query the business data on the se
 
 ![TiCDC secondary cluster architecture](/media/dr/dr-ticdc-secondary-cluster.png)
 
-The preceding architecture includes two TiDB clusters: Primary cluster and secondary cluster.
+The preceding architecture includes two TiDB clusters: primary cluster and secondary cluster.
 
 - Primary cluster: The active cluster that runs in region 1 and has three replicas. This cluster handles read and write requests.
 - Secondary cluster: The standby cluster that runs in region 2 and replicates data from the primary cluster through TiCDC.
@@ -61,7 +61,7 @@ For server configurations, see the following documents:
 - [Software and hardware recommendations for TiDB](/hardware-and-software-requirements.md)
 - [Software and hardware recommendations for TiCDC](/ticdc/deploy-ticdc.md#software-and-hardware-recommendations)
 
-For details about how to deploy TiDB primary and secondary clusters, see [Deploy a TiDB Cluster](/production-deployment-using-tiup.md).
+For details about how to deploy TiDB primary and secondary clusters, see [Deploy a TiDB cluster](/production-deployment-using-tiup.md).
 
 When deploying TiCDC, note that the secondary cluster and TiCDC must be deployed and managed together, and the network between them must be connected.
 
@@ -109,7 +109,7 @@ After setting up the TiDB primary and secondary clusters, first migrate the data
 
 #### Select an external storage
 
-External storage is used when migrating data and replicating real-time change data. Amazon S3 is a recommended choice. If the TiDB cluster is deployed in a self-built data center, the following methods are recommended:
+An external storage is used when migrating data and replicating real-time change data. Amazon S3 is a recommended choice. If the TiDB cluster is deployed in a self-built data center, the following methods are recommended:
 
 * Build [MinIO](https://docs.min.io/docs/minio-quickstart-guide.html) as the backup storage system, and use the S3 protocol to back up data to MinIO.
 * Mount Network File System (NFS, such as NAS) disks to br command-line tool, TiKV, and TiCDC instances, and use the POSIX file system interface to write backup data to the corresponding NFS directory.
@@ -119,7 +119,7 @@ The following example uses MinIO as the storage system and is for reference only
 ```shell
 wget https://dl.min.io/server/minio/release/linux-amd64/minio
 chmod +x minio
-# Configure access-key access-secret-id to access MinIO
+# Configure access-key and access-secret-id to access MinIO
 export HOST_IP='10.0.1.10' # Replace it with the IP address of MinIO
 export MINIO_ROOT_USER='minio'
 export MINIO_ROOT_PASSWORD='miniostorage'
@@ -152,13 +152,13 @@ Use the [backup and restore feature](/br/backup-and-restore-overview.md) to migr
     Run the following command to disable GC:
 
     ```sql
-    MySQL [test]> SET GLOBAL tidb_gc_enable=FALSE;
+    SET GLOBAL tidb_gc_enable=FALSE;
     ```
 
     To verify that the change takes effect, query the value of `tidb_gc_enable`:
 
     ```sql
-    MySQL [test]> SELECT @@global.tidb_gc_enable;
+    SELECT @@global.tidb_gc_enable;
     ```
 
     ```
@@ -177,7 +177,7 @@ Use the [backup and restore feature](/br/backup-and-restore-overview.md) to migr
 2. Back up data. Run the `BACKUP` statement in the upstream cluster to back up data:
 
     ```sql
-    MySQL [(none)]> BACKUP DATABASE * TO '`s3://backup?access-key=minio&secret-access-key=miniostorage&endpoint=http://10.0.1.10:6060&force-path-style=true`';
+    BACKUP DATABASE * TO '`s3://backup?access-key=minio&secret-access-key=miniostorage&endpoint=http://10.0.1.10:6060&force-path-style=true`';
     ```
 
     ```
@@ -194,7 +194,7 @@ Use the [backup and restore feature](/br/backup-and-restore-overview.md) to migr
 3. Restore data. Run the `RESTORE` command in the secondary cluster to restore data:
 
     ```sql
-    mysql> RESTORE DATABASE * FROM '`s3://backup?access-key=minio&secret-access-key=miniostorage&endpoint=http://10.0.1.10:6060&force-path-style=true`';
+    RESTORE DATABASE * FROM '`s3://backup?access-key=minio&secret-access-key=miniostorage&endpoint=http://10.0.1.10:6060&force-path-style=true`';
     ```
 
     ```
@@ -229,12 +229,14 @@ After migrating data as described in the preceding section, you can replicate in
     In the primary cluster, run the following command to create a changefeed from the primary to the secondary clusters:
 
     ```shell
-    tiup cdc cli changefeed create --server=http://10.1.1.9:8300 --sink-uri="mysql://{username}:{password}@10.1.1.4:4000" --changefeed-id="dr-primary-to-secondary" --start-ts="431434047157698561"
+    tiup cdc cli changefeed create --server=http://10.1.1.9:8300 \
+    --sink-uri="mysql://{username}:{password}@10.1.1.4:4000" \
+    --changefeed-id="dr-primary-to-secondary" --start-ts="431434047157698561"
     ```
 
     For more information about the changefeed configurations, see [TiCDC Changefeed Configurations](/ticdc/ticdc-changefeed-config.md).
 
-2. To check whether a changefeed task runs properly, run the `changefeed query` command. The query result includes the task information and the task state. You can specify the `--simple` or `-s` argument to simplify the query result so that only the basic replication state and the checkpoint information are displayed. If you do not specify this argument, detailed task configuration, replication states, and replication table information are output.
+2. To check whether a changefeed task runs properly, run the `changefeed query` command. The query result includes the task information and the task state. You can specify the `--simple` or `-s` argument to simplify the query result so that only the basic replication state and the checkpoint information are displayed. If you do not specify this argument, the output includes detailed task configuration, replication states, and replication table informationt.
 
     ```shell
     tiup cdc cli changefeed query -s --server=http://10.1.1.9:8300 --changefeed-id="dr-primary-to-secondary"
@@ -256,13 +258,13 @@ After migrating data as described in the preceding section, you can replicate in
    Run the following command to enable GC:
 
     ```sql
-    MySQL [test]> SET GLOBAL tidb_gc_enable=TRUE;
+    SET GLOBAL tidb_gc_enable=TRUE;
     ```
 
     To verify that the change takes effect, query the value of `tidb_gc_enable`:
 
     ```sql
-    MySQL [test]> SELECT @@global.tidb_gc_enable;
+    SELECT @@global.tidb_gc_enable;
     ```
 
     ```
@@ -331,7 +333,7 @@ You can restore the previous primary and secondary cluster configurations by rep
 
 When a disaster occurs, for example, power outage in the region where the primary cluster locates, the replication between the primary and secondary clusters might be interrupted suddenly. As a result, the data in the secondary cluster is inconsistent with the primary cluster.
 
-1. Restore the secondary cluster to a transaction-consistent state. Specifically, run the following command on any TiCDC node in Region 2 to apply the redo log to the secondary cluster:
+1. Restore the secondary cluster to a transaction-consistent state. Specifically, run the following command on any TiCDC node in region 2 to apply the redo log to the secondary cluster:
 
     ```shell
     tiup cdc redo apply --storage "s3://redo?access-key=minio&secret-access-key=miniostorage&endpoint=http://10.0.1.10:6060&force-path-style=true" --tmp-dir /tmp/redo --sink-uri "mysql://{username}:{password}@10.1.1.4:4000"
@@ -354,7 +356,7 @@ To rebuild the TiDB primary and secondary clusters, you can deploy a new cluster
 
 - [Set up primary and secondary clusters](#set-up-primary-and-secondary-clusters-based-on-ticdc)
 - [Replicate data from the primary cluster to the secondary cluster](#replicate-data-from-the-primary-cluster-to-the-secondary-cluster)
-- After the preceding steps are completed, to make the new cluster the primary cluster, see [Primary and secondary switchover](#planned-primary-and-secondary-switchover).
+- After the preceding steps are completed, to make the new primary cluster, see [Primary and secondary switchover](#planned-primary-and-secondary-switchover).
 
 > **Note:**
 >
@@ -401,10 +403,10 @@ In this DR scenario, the TiDB clusters in two regions can be each other's disast
 
 ![TiCDC bidirectional replication](/media/dr/dr-ticdc.png)
 
-With the bidirectional replication feature, the TiDB clusters in two regions can be each other's disaster recovery clusters. This DR solution guarantees data security and reliability, and also ensures the write performance of the database. In a planned DR switchover, you do not need to stop the running changefeed and then start a new changefeed, which simplifies the operation and maintenance.
+With the bidirectional replication feature, the TiDB clusters in two regions can be each other's disaster recovery clusters. This DR solution guarantees data security and reliability, and also ensures the write performance of the database. In a planned DR switchover, you do not need to stop the running changefeeds and then start a new changefeed, which simplifies the operation and maintenance.
 
 To build a bidirectional DR cluster, see [TiCDC bidirectional replication](/ticdc/ticdc-bidirectional-replication.md).
 
 ## Troubleshooting
 
-If you encounter any problem in the preceding steps, you can first find the solution to the problem in [TiDB FAQs](/faq/faq-overview.md). If the problem is not resolved, please report an [issue](https://github.com/pingcap/tidb/issues/new/choose) and we will reach you as soon as possible.
+If you encounter any problem in the preceding steps, you can first find the solution to the problem in [TiDB FAQs](/faq/faq-overview.md). If the problem is not resolved, please report an [issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub and we will reach you as soon as possible.
