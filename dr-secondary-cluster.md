@@ -339,7 +339,7 @@ When a disaster occurs, for example, power outage in the region where the primar
     tiup cdc redo apply --storage "s3://redo?access-key=minio&secret-access-key=miniostorage&endpoint=http://10.0.1.10:6060&force-path-style=true" --tmp-dir /tmp/redo --sink-uri "mysql://{username}:{password}@10.1.1.4:4000"
     ```
 
-    Where:
+    The descriptions of parameters in this command are as follows:
 
     - `--storage`: The path where redo logs are stored in Amazon S3
     - `--tmp-dir`: The cache directory for downloading redo logs from Amazon S3
