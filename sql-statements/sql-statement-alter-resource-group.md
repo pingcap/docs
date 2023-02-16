@@ -19,7 +19,7 @@ The `ALTER RESOURCE GROUP` statement is used to modify a resource group in a dat
 
 ```ebnf+diagram
 AlterResourceGroupStmt:
-   "ALTER" "RESOURCE" "GROUP" IfNotExists ResourceGroupName ResourceGroupOptionList
+   "ALTER" "RESOURCE" "GROUP" IfExists ResourceGroupName ResourceGroupOptionList
 
 IfNotExists ::=
     ('IF' 'EXISTS')?
