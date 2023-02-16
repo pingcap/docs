@@ -127,8 +127,7 @@ Before performing backup and restore, BR compares and checks the TiDB cluster ve
 | Backup version (vertical) \ Restore version (horizontal)   | Restore to TiDB v6.0 | Restore to TiDB v6.1 | Restore to TiDB v6.2 | Restore to TiDB v6.3, v6.4, or v6.5 | Restore to TiDB v6.6 |
 |  ----  |  ----  | ---- | ---- | ---- | ---- |
 | TiDB v6.0, v6.1, v6.2, v6.3, or v6.4 snapshot backup | Compatible (known issue [#36379](https://github.com/pingcap/tidb/issues/36379): if backup data contains an empty schema, BR might report an error.) | Compatible | Compatible | Compatible | Compatible (BR must be v6.6 or later) |
-| TiDB v6.3, v6.4, or v6.5 log backup| Incompatible | Incompatible | Incompatible | Compatible | Compatible |
-| TiDB v6.6 log backup| Incompatible | Incompatible | Incompatible | Compatible | Compatible |
+| TiDB v6.3, v6.4, v6.5, or v6.6 log backup| Incompatible | Incompatible | Incompatible | Compatible | Compatible |
 
 ## See also
 
