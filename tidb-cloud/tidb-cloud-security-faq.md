@@ -62,9 +62,11 @@ As a customer, you are your database owner, and you have an administrative and o
 
 PingCAP highest priority is securing our customer's data in TiDB Cloud, and we implement rigorous contractual,technical and organizational measures to protect TiDB Cloud confidentiality,integrity,and availability regardless of which TiDB Cloud region a customer has selected.
 
-PingCAP have passed the standard certification and verification of SOC2 Type2, GDPR, PCI-DSS, and HIPAA. For details, see [PingCAP's Trust Center](https://www.pingcap.com/trust-compliance-center) , and invite third-party auditors to audit the certified standards every year.
+PingCAP has passed the standard certification and verification of SOC2 Type2, GDPR, PCI-DSS, and HIPAA, and invites third-party auditors to audit the certified standards every year. For details, see [PingCAP Trust Center](https://www.pingcap.com/trust-compliance-center)
 
-PingCAP designs a multi-tenant TiDB Cloud database service platform, follows the multi-tenant isolation architecture and best practices of AWS and GCP SaaS applications, and designs functions and isolation mechanisms such as multi-tenant authentication and authorization, network access control, data encryption, and auditing, focusing on Protect customer data with ongoing security and compliance.
+In TiDB Cloud, the data access security measures includes the following:
+
+- TiDB Cloud has designed a multi-tenant TiDB Cloud database service platform that follows the multi-tenant isolation architecture and best practices of AWS and GCP SaaS applications. The security functions and isolation mechanisms include multi-tenant authentication and authorization, network access control, data encryption, and auditing, focusing on protecting customer data with ongoing security and compliance.
 
 TiDB Cloud has designed a secure and trusted TiDB Cloud technical architecture. The architecture effectively isolates and prohibits any insiders from directly accessing the TiDB Cloud infrastructure.No technical staff of PingCAP can directly access the TiDB Cloud infrastructure where customer data resides. When internal technical personnel normally monitor and maintain the TiDB Cloud infrastructure, they can only go through a strict approval process, obtain minimum permissions, and pass the Bastion audit to complete the approved operation and maintenance within a limited time. Moreover, all operational behaviors will be recorded and audited, and we also configure monitoring and alarms for unauthorized operation and maintenance.
 
