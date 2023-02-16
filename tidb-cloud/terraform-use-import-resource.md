@@ -58,7 +58,7 @@ Here is an example on how to manage a LOCAL import task with import resource.
         separator = ";"
       }
       target_table = {
-        schema = "test"
+        database = "test"
         table  = "import_test"
       }
       file_name = "your_csv_path"
@@ -115,7 +115,7 @@ Here is an example on how to manage a LOCAL import task with import resource.
        project_id                    = "1372813089191151295"
        status                        = "IMPORTING"
        target_table                  = {
-           schema = "test"
+           database = "test"
            table  = "import_test"
        }
        total_files                   = 0
@@ -157,7 +157,7 @@ Here is an example on how to manage a LOCAL import task with import resource.
        project_id                    = "1372813089191151295"
        status                        = "COMPLETED"
        target_table                  = {
-           schema = "test"
+           database = "test"
            table  = "import_test"
        }
        total_files                   = 0
