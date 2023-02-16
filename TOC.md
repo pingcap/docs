@@ -157,7 +157,6 @@
   - [TiFlash Alert Rules](/tiflash/tiflash-alert-rules.md)
   - [Customize Configurations of Monitoring Servers](/tiup/customized-montior-in-tiup-environment.md)
 - Troubleshoot
-<<<<<<< HEAD
   - [TiDB Troubleshooting Map](/tidb-troubleshooting-map.md)
   - [Identify Slow Queries](/identify-slow-queries.md)
   - [Analyze Slow Queries](/analyze-slow-queries.md)
