@@ -54,7 +54,7 @@ The performance of an 8 vCPU, 16 GiB TiDB node in different workloads is as foll
     | Write    | 18,000                 |
 
 You can estimate the number of TiDB nodes according to your workload type, your overall expected performance (QPS), and the performance of a single TiDB node corresponding to the workload type as follows:
- `node num = ceil( overall expected perfromance / performance per node * (1 - performance degradation coefficient) )`
+ `node num = ceil(overall expected performance ÷ performance per node * (1 - performance deviation coefficient))`
 
 In the absence of performance degradation, the performance of 16 vCPU, 32 GiB TiDB nodes is roughly twice that of 8 vCPU, 16 GiB TiDB nodes. If the number of nodes is too large, it is recommended to choose 16 vCPU, 32 GiB TiDB nodes as this will require fewer nodes and have a smaller performance degradation coefficient.
 
