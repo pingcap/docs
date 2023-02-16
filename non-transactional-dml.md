@@ -348,7 +348,7 @@ If the error occurs when the selected shard column is not one of these unsupport
 
 <CustomContent platform="tidb-cloud">
 
-If the error occurs when the selected shard column is not one of these unsupported types, [contact TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md).
+If the error occurs when the selected shard column is not one of these unsupported types, [contact TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 </CustomContent>
 
