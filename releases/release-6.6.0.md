@@ -540,7 +540,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
     `<!-- 5 -->`
     - Fix an error that occurs when casting the `const Enum` type to other types [#14156](https://github.com/tikv/tikv/issues/14156) @[wshwsh12](https://github.com/wshwsh12)
     - Fix the issue that Resolved TS causes higher network traffic [#14098](https://github.com/tikv/tikv/issues/14092) @[overvenus] (https://github.com/overvenus)
-    - Fix the issue that TiKV cannot restart when the number of CPU cores is less than 1  [#13586](https://github.com/tikv/tikv/issues/13586) [#13752](https://github.com/tikv/tikv/issues/13752) [#14017](https://github.com/tikv/tikv/issues/14017) @[andreid-db](https://github.com/andreid-db)
+    - Fix the issue that TiKV cannot restart when the number of CPU cores is less than 1 [#13586](https://github.com/tikv/tikv/issues/13586) [#13752](https://github.com/tikv/tikv/issues/13752) [#14017](https://github.com/tikv/tikv/issues/14017) @[andreid-db](https://github.com/andreid-db)
     (dup: release-6.1.4.md > Bug 修复> TiKV)- Fix the data inconsistency issue caused by network failure between TiDB and TiKV during the execution of a DML after a failed pessimistic DML [#14038](https://github.com/tikv/tikv/issues/14038) @[MyonKeminta](https://github.com/MyonKeminta) @[myonkeminta](https://github.com/myonkeminta)
 
 + PD
