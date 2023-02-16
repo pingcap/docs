@@ -48,15 +48,15 @@ In TiDB Cloud, you have the flexibility to choose how and where you want to run 
 
 As a customer, you can decide in which AWS or GCP region your data will be stored by creating your TiDB cluster in the target region that meets your geographic needs. For example, if you are in the USA and you want to store all your data only in the USA, you can choose to deploy a TiDB cluster exclusively in the AWS Oregon (us-west-2) region.
 
-You can also replicate and back up your data in multiple AWS or GCP regions. PingCAP will not move or replicate your data outside of your chosen AWS or GCP region without your agreement.
+You can also replicate and back up your data in multiple AWS or GCP regions. PingCAP will not move or replicate your data outside of your chosen AWS or GCP region without your permission.
 
-## What is my role in securing customer data？
+## What are the roles in securing customer data？
 
 When you assess the security and compliance of roles and responsibilities, it is crucial to differentiate between the security role of TiDB Cloud and the security role of your own in using TiDB Cloud. 
 
 PingCAP is the role of TiDB cloud platform service and management, mainly responsible for implementing and maintaining the sustainable, safe, stable, and compliant operation of TiDB cloud.
 
-The customer is the database owner, has an administrative and operational role, and is primarily responsible for ensuring the security and compliance of your TiDB cluster within the TiDB Cloud. Your role in TiDB Cloud involves implementing and managing any security features and access control policy of your own TiDB cluster.
+As a customer, you are your database owner, and you have an administrative and operational role. You are primarily responsible for ensuring the security and compliance of your TiDB cluster within the TiDB Cloud. And your role in TiDB Cloud also involves implementing and managing any security features and access control policies of your own TiDB cluster.
 
 ## Who can access customer data in TiDB Cloud？
 
