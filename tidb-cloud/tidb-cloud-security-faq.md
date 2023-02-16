@@ -9,7 +9,7 @@ summary: Learn about the most frequently asked security questions (FAQs) relatin
 
 This document lists the most frequently asked security questions about TiDB Cloud.
 
-## How does TiDB Cloud classify customer information？
+## How does TiDB Cloud classify customer data？
 
 TiDB Cloud defines customer data as follows:
 
@@ -68,10 +68,6 @@ TiDB Cloud has designed a secure and credible database SAAS platform, which limi
 
 TiDB Cloud has designed an internal operation account permission isolation structure to prevent any internal personnel from accessing TiDB clusters using privileged service accounts. The service account is only invoked when the customer initiates the TiDB cluster through the TiDB Cloud console or command line. Upon completion of the TiDB initialization, the customer becomes the owner of the most privileged root account and the service account is transferred to their control. PingCAP employees do not have access to the service account credentials or permissions that are initialized by TiDB.
 
-## Can I run TiDB Cloud in my own VPC?
-
-No. TiDB Cloud is Database-as-a-Service (DBaaS) and runs only in the TiDB Cloud VPC. As a cloud computing managed service, TiDB Cloud provides access to a database without requiring the setup of physical hardware and the installation of software.
-
 ## How does TiDB Cloud encrypts customer data？
 
 TiDB Cloud uses storage volume encryption by default for customer data at rest, including both database data and backup data. TiDB Cloud requires TLS encryption for customer data in transit, and also requires component-level TLS encryption for data in your Dedicated Tier cluster between TiDB, PD, TiKV, and TiFlash.
@@ -99,3 +95,7 @@ For Serverless Tier clusters, TiDB Cloud ensures cluster security with the follo
 - Set up firewall rules to isolate external connections.
 
 - Provides cluster server TLS certificates to encrypt cluster data in transit.
+
+## Can I run TiDB Cloud in my own VPC?
+
+No. TiDB Cloud is Database-as-a-Service (DBaaS) and runs only in the TiDB Cloud VPC. As a cloud computing managed service, TiDB Cloud provides access to a database without requiring the setup of physical hardware and the installation of software.
