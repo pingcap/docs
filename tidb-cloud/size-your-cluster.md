@@ -100,7 +100,7 @@ The number of TiKV nodes should be **at least 1 set (3 nodes in 3 different Avai
 
 TiDB Cloud deploys TiKV nodes evenly to all availability zones (at least 3) in the region you select to achieve durability and high availability. In a typical 3-replica setup, your data is distributed evenly among the TiKV nodes across all availability zones and is persisted to the disk of each TiKV node.
 
-Although TiKV is mainly used for data storage, the performance of the TiKV node also varies under different workloads. Therefore, we need to estimate the number of TiKV nodes based on both the data volume and performance factors and take the larger of the two estimates as the recommended number of TiKV nodes.
+Although TiKV is mainly used for data storage, the performance of the TiKV node also varies depending on different workloads. Therefore, when planning the number of TiKV nodes, you need to estimate it according to both your **data volume** and **performance**, and then take the larger of the two estimates as the recommended node number.
 
 > **Note:**
 >
