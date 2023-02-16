@@ -275,9 +275,6 @@ In addition, when other concurrent writes occur, the number of rows processed in
 
 The dividing column does not support `ENUM`, `BIT`, `SET`, `JSON` types. Try to specify a new dividing column. It is recommended to use an integer or string type column.
 
-<<<<<<< HEAD
-If the error occurs when the selected dividing column is not one of these unsupported types, contact PingCAP technical support.
-=======
 <CustomContent platform="tidb">
 
 If the error occurs when the selected shard column is not one of these unsupported types, [get support](/support.md) from PingCAP or the community.
@@ -289,7 +286,6 @@ If the error occurs when the selected shard column is not one of these unsupport
 If the error occurs when the selected shard column is not one of these unsupported types, [contact TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 </CustomContent>
->>>>>>> 04c6dbc17 (*: update info on support resources (#12356))
 
 ### Non-transactional `DELETE` has "exceptional" behavior that is not equivalent to ordinary `DELETE`
 
