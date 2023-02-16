@@ -142,12 +142,12 @@ Method 2: Manually pack an offline component package using `tiup mirror clone`. 
 
     If you want to adjust an existing offline mirror (such as adding a new version of a component), take the following steps:
 
-    1. When pulling an offline mirror, you can get an incomplete offline mirror by specifying specific information via parameters, such as the component and version information. For example, you can pull an offline mirror that includes only the offline mirror of TiUP v1.11.0 and TiUP Cluster v1.11.0 by running the following command:
+    1. When pulling an offline mirror, you can get an incomplete offline mirror by specifying specific information via parameters, such as the component and version information. For example, you can pull an offline mirror that includes only the offline mirror of TiUP v1.11.3 and TiUP Cluster v1.11.3 by running the following command:
 
         {{< copyable "shell-regular" >}}
 
         ```bash
-        tiup mirror clone tiup-custom-mirror-v1.11.0 --tiup v1.11.0 --cluster v1.11.0
+        tiup mirror clone tiup-custom-mirror-v1.11.3 --tiup v1.11.3 --cluster v1.11.3
         ```
 
         If you only need the components for a particular platform, you can specify them using the `--os` or `--arch` parameters.
@@ -179,10 +179,10 @@ Method 2: Manually pack an offline component package using `tiup mirror clone`. 
         {{< copyable "shell-regular" >}}
 
         ```bash
-        tiup mirror merge tiup-custom-mirror-v1.11.0
+        tiup mirror merge tiup-custom-mirror-v1.11.3
         ```
 
-    5. When the above steps are completed, check the result by running the `tiup list` command. In this document's example, the outputs of both `tiup list tiup` and `tiup list cluster` show that the corresponding components of `v1.11.0` are available.
+    5. When the above steps are completed, check the result by running the `tiup list` command. In this document's example, the outputs of both `tiup list tiup` and `tiup list cluster` show that the corresponding components of `v1.11.3` are available.
 
 #### Deploy the offline TiUP component
 
