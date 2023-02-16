@@ -37,7 +37,8 @@ The supported node sizes include the following:
 > - TiFlash is unavailable.
 
 ### TiDB node quantity
-The performance of the TiDB node is generally linearly scalable, but there is some performance degradation when there are a larger number of nodes. We estimate this performance degradation by increasing the performance degradation coefficient by 5% every time the number of nodes reaches 8. 
+
+In general, the TiDB performance increases linearly with the number of TiDB nodes. However, when the number of TiDB nodes exceeds 8, the performance increment becomes slightly less than linearly proportional. For each additional 8 nodes, the performance deviation coefficient is about 5%.
 For example, when there are 9 TiDB nodes, the overall performance is `9 * (1 - 5%) = 8.55` times the performance of a single TiDB node. And when there are 16 TiDB nodes, the overall performance is `16 * (1 - 10%) = 14.4` times the performance of a single TiDB node.
 
 Different workloads involve queries with varying read-write ratios and have different performance in the specified latency for a TiDB node.
