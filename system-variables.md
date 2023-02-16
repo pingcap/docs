@@ -3797,9 +3797,15 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Unit: Milliseconds
 - This variable controls whether to enable the synchronously loading statistics feature. The value `0` means that the feature is disabled. To enable the feature, you can set this variable to a timeout (in milliseconds) that SQL optimization can wait for at most to synchronously load complete column statistics. For details, see [Load statistics](/statistics.md#load-statistics).
 
-<CustomContent platform="tidb">
-
 ### tidb_stmt_summary_enable_persistent <span class="version-mark">New in v6.6.0</span>
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> This TiDB variable is not applicable to TiDB Cloud.
+
+</CustomContent>
 
 > **Warning:**
 >
@@ -3808,9 +3814,23 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Scope: GLOBAL
 - Type: Boolean
 - Default value: `OFF`
-- This variable is read-only. It controls whether to enable [statements summary persistence](/statement-summary-tables.md#persist-statements-summary). The value of this variable is the same as that of the configuration item [`tidb_stmt_summary_enable_persistent`](/tidb-configuration-file.md#tidb_stmt_summary_enable_persistent-new-in-v660).
+- This variable is read-only. It controls whether to enable [statements summary persistence](/statement-summary-tables.md#persist-statements-summary). 
+
+<CustomContent platform="tidb">
+
+- The value of this variable is the same as that of the configuration item [`tidb_stmt_summary_enable_persistent`](/tidb-configuration-file.md#tidb_stmt_summary_enable_persistent-new-in-v660).
+
+</CustomContent>
 
 ### tidb_stmt_summary_filename <span class="version-mark">New in v6.6.0</span>
+
+<CustomContent platform="tidb-cloud">
+	
+> **Note:**
+>
+> This TiDB variable is not applicable to TiDB Cloud.
+	
+</CustomContent>
 
 > **Warning:**
 >
@@ -3819,7 +3839,13 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Scope: GLOBAL
 - Type: String
 - Default value: `"tidb-statements.log"`
-- This variable is read-only. It specifies the file to which persistent data is written when [statements summary persistence](/statement-summary-tables.md#persist-statements-summary) is enabled. The value of this variable is the same as that of the configuration item [`tidb_stmt_summary_filename`](/tidb-configuration-file.md#tidb_stmt_summary_filename-new-in-v660).
+- This variable is read-only. It specifies the file to which persistent data is written when [statements summary persistence](/statement-summary-tables.md#persist-statements-summary) is enabled. 
+
+<CustomContent platform="tidb">
+
+- The value of this variable is the same as that of the configuration item [`tidb_stmt_summary_filename`](/tidb-configuration-file.md#tidb_stmt_summary_filename-new-in-v660).
+
+</CustomContent>
 
 ### tidb_stmt_summary_file_max_backups <span class="version-mark">New in v6.6.0</span>
 
@@ -3830,9 +3856,23 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Scope: GLOBAL
 - Type: Integer
 - Default value: `0`
-- This variable is read-only. It specifies the maximum number of data files that can be persisted when [statements summary persistence](/statement-summary-tables.md#persist-statements-summary) is enabled. The value of this variable is the same as that of the configuration item [`tidb_stmt_summary_file_max_backups`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_backups-new-in-v660).
+- This variable is read-only. It specifies the maximum number of data files that can be persisted when [statements summary persistence](/statement-summary-tables.md#persist-statements-summary) is enabled.
+
+<CustomContent platform="tidb">
+
+- The value of this variable is the same as that of the configuration item [`tidb_stmt_summary_file_max_backups`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_backups-new-in-v660).
+
+</CustomContent>
 
 ### tidb_stmt_summary_file_max_days <span class="version-mark">New in v6.6.0</span>
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> This TiDB variable is not applicable to TiDB Cloud.
+	
+</CustomContent>
 
 > **Warning:**
 >
@@ -3842,9 +3882,23 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Type: Integer
 - Default value: `3`
 - Unit: day
-- This variable is read-only. It specifies the maximum number of days to keep persistent data files when [statements summary persistence](/statement-summary-tables.md#persist-statements-summary) is enabled. The value of this variable is the same as that of the configuration item [`tidb_stmt_summary_file_max_days`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_days-new-in-v660).
+- This variable is read-only. It specifies the maximum number of days to keep persistent data files when [statements summary persistence](/statement-summary-tables.md#persist-statements-summary) is enabled.
+
+<CustomContent platform="tidb">
+
+The value of this variable is the same as that of the configuration item [`tidb_stmt_summary_file_max_days`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_days-new-in-v660).
+
+</CustomContent>
 
 ### tidb_stmt_summary_file_max_size <span class="version-mark">New in v6.6.0</span>
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> This TiDB variable is not applicable to TiDB Cloud.
+	
+</CustomContent>
 
 > **Warning:**
 >
@@ -3854,7 +3908,11 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Type: Integer
 - Default value: `64`
 - Unit: MiB
-- This variable is read-only. It specifies the maximum size of a persistent data file when [statements summary persistence](/statement-summary-tables.md#persist-statements-summary) is enabled. The value of this variable is the same as that of the configuration item [`tidb_stmt_summary_file_max_size`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_size-new-in-v660).
+- This variable is read-only. It specifies the maximum size of a persistent data file when [statements summary persistence](/statement-summary-tables.md#persist-statements-summary) is enabled.
+
+<CustomContent platform="tidb">
+
+- The value of this variable is the same as that of the configuration item [`tidb_stmt_summary_file_max_size`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_size-new-in-v660).
 
 </CustomContent>
 
