@@ -28,9 +28,9 @@ Customer data does not include TiDB Cloud operational, diagnosis, and metadata:
 
 For more information about TiDB Cloud operational data, see [TiDB Cloud Privacy Policy](https://www.pingcap.com/privacy-policy/) and [TiDB Cloud Data Processing Agreement](https://www.pingcap.com/legal/data-processing-agreement-for-tidb-cloud-services/).
 
-## Who owns customer Data？
+## Who owns customer data？
 
-As a customer, you own your data and have the right to choose which TiDB Cloud cluster can process, store, and host it. TiDB Cloud will not access or use your data without your permission. 
+As a customer, you own your data and have the right to choose which TiDB Cloud cluster can process, store, and host the data. TiDB Cloud will not access or use your data without your permission. 
 
 ## Who has control over customer data？
 
@@ -42,11 +42,11 @@ As a customer, you have full control of your data:
 
 - You manage access to your data, as well as access to the TiDB Cloud databases and tools through users, roles, and credentials that you control.
 
-## Where is Customer Data stored？
+## Where is customer data stored？
 
 In TiDB Cloud, you have the flexibility to choose how and where you want to run your TiDB database. When you do, you will have access to the same database tools, storage locations, regional control planes, APIs, Chat2Query, and other database services. If you want to run your database globally, you can choose from various regions on AWS or GCP.
 
-As a customer, you can decide in which AWS or GCP region your data will be stored by deploying your TiDB cluster in the target region that meets your geographic needs. For example, if you are in the USA and you want to store all your data only in the USA, you can choose to deploy a TiDB cluster exclusively in the AWS Oregon (us-west-2) region.
+As a customer, you can decide in which AWS or GCP region your data will be stored by creating your TiDB cluster in the target region that meets your geographic needs. For example, if you are in the USA and you want to store all your data only in the USA, you can choose to deploy a TiDB cluster exclusively in the AWS Oregon (us-west-2) region.
 
 You can also replicate and back up your data in multiple AWS or GCP regions. PingCAP will not move or replicate your data outside of your chosen AWS or GCP region without your agreement.
 
