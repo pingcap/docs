@@ -45,7 +45,7 @@ For example:
 - When there are 16 TiDB nodes, the performance deviation coefficient is about 10%, so the overall performance is `16 * (1 - 10%) = 14.4` times the performance of a single TiDB node.
 
 For a specified latency of a TiDB node, the TiDB performance varies depending on the different read-write ratios.
-The performance of the 8 vCPU, 16 GiB TiDB node in different workloads:
+The performance of an 8 vCPU, 16 GiB TiDB node in different workloads is as follows:
 
     | workload | TiDB performance (QPS) |
     |----------|------------------------|
