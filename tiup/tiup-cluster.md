@@ -697,8 +697,8 @@ All operations above performed on the cluster machine use the SSH client embedde
 
 Then you can use the `--ssh=system` command-line flag to enable the system-native command-line tool:
 
-- Deploy a cluster: `tiup cluster deploy <cluster-name> <version> <topo> --ssh=system`. `<cluster-name>` is the cluster name, `<version>` is the TiDB version to be deployed (such as `v6.5.0`), and `<topo>` is the topology file.
-- Start a cluster: `tiup cluster start <cluster-name> --ssh=system`. `<cluster-name>` is the cluster name.
+- Deploy a cluster: `tiup cluster deploy <cluster-name> <version> <topo> --ssh=system`. Fill in the name of your cluster for `<cluster-name>`, the TiDB version to be deployed (such as `v6.5.0`) for `<version>`, and the topology file for `<topo>`.
+- Start a cluster: `tiup cluster start <cluster-name> --ssh=system`
 - Upgrade a cluster: `tiup cluster upgrade ... --ssh=system`
 
 You can add `--ssh=system` in all cluster operation commands above to use the system's native SSH client.
