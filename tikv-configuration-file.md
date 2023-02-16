@@ -790,7 +790,6 @@ Configuration items related to Raftstore.
 ### `lock-cf-compact-interval`
 
 + The time interval at which TiKV triggers a manual compaction for the Lock Column Family
-+ Default value: `"256MB"`
 + Default value: `"10m"`
 + Minimum value: `0`
 
@@ -963,6 +962,13 @@ Configuration items related to Raftstore.
 + Determines the threshold at which Raft data is written into the disk. If the data size is larger than the value of this configuration item, the data is written to the disk. When the value of `store-io-pool-size` is `0`, this configuration item does not take effect.
 + Default value: `1MB`
 + Minimum value: `0`
+
+### `report-min-resolved-ts-interval`
+
++ Determines the minimum interval at which the resolved timestamp is reported to the PD leader. If this value is set to `0`, it means that the reporting is disabled.
++ Default value: `"1s"`, which is the smallest positive value
++ Minimum value: `0`
++ Unit: second
 
 ## Coprocessor
 
