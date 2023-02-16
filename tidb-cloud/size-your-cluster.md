@@ -47,7 +47,7 @@ For example:
 For a specified latency of a TiDB node, the TiDB performance varies depending on the different read-write ratios.
 The performance of an 8 vCPU, 16 GiB TiDB node in different workloads is as follows:
 
-    | workload | TiDB performance (QPS) |
+    | Workload | TiDB performance (QPS)  |
     |----------|------------------------|
     | Read     | 18,900                 |
     | Mixed    | 15,500                 |
