@@ -2382,8 +2382,8 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Type: Float
 - Default value: `0`
 - Range: `[0, 18446744073709551615]`
-- This variable determines whether to apply a penalty cost to the index join selection, which reduces the likelihood of the optimizer selecting this operation, and increases the likelihood of selecting alternative join methods such as hash join and tiflash join.
-- When index join is selected, many table lookup requests are triggered, which causes a lot of resource consumption. You can use this variable to reduce the likelihood of the optimizer selecting index join.
+- This variable determines whether to apply a penalty cost to the selection of index join, which reduces the likelihood of the optimizer selecting index join, and increases the likelihood of selecting alternative join methods such as hash join and tiflash join.
+- When index join is selected, many table lookup requests are triggered, which consumes too many resources. You can use this variable to reduce the likelihood of the optimizer selecting index join.
 - This variable takes effect only when the [`tidb_cost_model_version`](/system-variables.md#tidb_cost_model_version-new-in-v620) variable is set to `2`.
 
 ### tidb_index_lookup_concurrency
