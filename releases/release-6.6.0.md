@@ -256,7 +256,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
     To use this feature, set the value of [`tidb_enable_plan_replayer_capture`](/system-variables.md#tidb_enable_plan_replayer_capture) to `ON`.
 
-    For more information, see [documentation](/sql-plan-replayer.md#使用-plan-replayer-capture-抓取目标计划)。
+    For more information, see [documentation](/sql-plan-replayer.md#use-plan-replayer-capture).
 
 * Support persisting statements summary (experimental) [#40812](https://github.com/pingcap/tidb/issues/40812) @[mornyx](https://github.com/mornyx) **tw@shichun-0415**
 
