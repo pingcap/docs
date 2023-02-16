@@ -157,6 +157,7 @@
   - [TiFlash Alert Rules](/tiflash/tiflash-alert-rules.md)
   - [Customize Configurations of Monitoring Servers](/tiup/customized-montior-in-tiup-environment.md)
 - Troubleshoot
+<<<<<<< HEAD
   - [TiDB Troubleshooting Map](/tidb-troubleshooting-map.md)
   - [Identify Slow Queries](/identify-slow-queries.md)
   - [Analyze Slow Queries](/analyze-slow-queries.md)
@@ -174,6 +175,30 @@
   - [Troubleshoot TiFlash](/tiflash/troubleshoot-tiflash.md)
   - [Troubleshoot Write Conflicts in Optimistic Transactions](/troubleshoot-write-conflicts.md)
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
+=======
+  - Issue Summary
+    - [TiDB Troubleshooting Map](/tidb-troubleshooting-map.md)
+    - [Troubleshoot TiDB Cluster Setup](/troubleshoot-tidb-cluster.md)
+    - [Troubleshoot TiFlash](/tiflash/troubleshoot-tiflash.md)
+  - Issue Scenarios
+    - Slow Queries
+      - [Identify Slow Queries](/identify-slow-queries.md)
+      - [Analyze Slow Queries](/analyze-slow-queries.md)
+    - [TiDB OOM](/troubleshoot-tidb-oom.md)
+    - [Hotspot](/troubleshoot-hot-spot-issues.md)
+    - [Increased Read and Write Latency](/troubleshoot-cpu-issues.md)
+    - [Write Conflicts in Optimistic Transactions](/troubleshoot-write-conflicts.md)
+    - [High Disk I/O Usage](/troubleshoot-high-disk-io.md)
+    - [Lock Conflicts](/troubleshoot-lock-conflicts.md)
+    - [Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
+  - Diagnostic Methods
+    - [SQL Diagnostics](/information-schema/information-schema-sql-diagnostics.md)
+    - [Statement Summary Tables](/statement-summary-tables.md)
+    - [Identify Expensive Queries Using Top SQL](/dashboard/top-sql.md)
+    - [Identify Expensive Queries Using Logs](/identify-expensive-queries.md)
+    - [Save and Restore the On-Site Information of a Cluster](/sql-plan-replayer.md)
+  - [Support Resources](/support.md)
+>>>>>>> 04c6dbc17 (*: update info on support resources (#12356))
 - Performance Tuning
   - Tuning Guide
     - [Performance Tuning Overview](/performance-tuning-overview.md)
