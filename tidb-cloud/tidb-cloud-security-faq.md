@@ -11,21 +11,19 @@ This document lists the most frequently asked security questions about TiDB Clou
 
 ## How does TiDB Cloud classify customer data？
 
-TiDB Cloud defines customer data as follows:
+Customer data is that customer app sends to the TiDB cluster for analysis, processing, storage by TiDB Cloud in connection with the customer's account. TiDB Cloud defines customer data as follows:
 
-- Business data
-- Database files (including backups and snapshots)
-- Logs
-- Customer personally identifiable information (PII) that a customer sends to the TiDB cluster for analysis, processing, storage, or hosting by TiDB Cloud in connection with the customer's account. 
+- Business data (including consumer data and table data)
+- Database files (including database backups and snapshots)
+- Logs (including SQL logs and )
+- Consumer personally identifiable information (PII) （including consumer personally identifiable information，but don't include relevant PII information when customers register and log in to TiDB Cloud）
 
 For example, customer data includes data that a customer or their consumers store in TiKV or Tiflash, which are located in S3 buckets or EBS of AWS.
 
 Customer data does not include TiDB Cloud operational, diagnosis, and metadata as follows:
 
-- Operational data includes TiDB Cloud control plane logs, runtime metrics, usage policies, and service ticket-related information.
-
+- Operational data includes TiDB Cloud control plane logs, runtime metrics, usage policies, and service ticket-related information
 - Diagnosis data includes TiDB cluster logs (including logs, error logs, and slow query logs), metrics (including usage and runtime metrics), configuration (including TiDB cluster configuration items, node IPs, and values), monitoring, and alert-related information.
-
 - Metadata includes TiDB Cloud account registration information (including email, company name, phone number, and IP address), permissions, endpoint services, devices, versions, and tag-related information.
 
 For more information about TiDB Cloud operational data, see [TiDB Cloud Privacy Policy](https://www.pingcap.com/privacy-policy/) and [TiDB Cloud Data Processing Agreement](https://www.pingcap.com/legal/data-processing-agreement-for-tidb-cloud-services/).
