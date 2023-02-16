@@ -3828,7 +3828,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Scope: GLOBAL
 - Type: Integer
 - Default value: `0`
-- This variable is read-only. It specifies the maximum number of data files that can be persisted. when [statements summary persistence](/statement-summary-tables.md#persist-statements-summary) is enabled. The value of this variable is the same as that of the configuration item [`tidb_stmt_summary_file_max_backups`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_backups-new-in-v660).
+- This variable is read-only. It specifies the maximum number of data files that can be persisted when [statements summary persistence](/statement-summary-tables.md#persist-statements-summary) is enabled. The value of this variable is the same as that of the configuration item [`tidb_stmt_summary_file_max_backups`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_backups-new-in-v660).
 
 ### tidb_stmt_summary_file_max_days <span class="version-mark">New in v6.6.0</span>
 
