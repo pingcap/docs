@@ -112,7 +112,7 @@ You can calculate a recommended number of TiKV nodes according to your data volu
 
 `node num = ceil( size of your data * compression ratio * the number of replicas ÷ TiKV storage usage ratio ÷ one TiKV capacity ÷ 3 ) * 3`
 
-Generally, the usage ratio of TiKV storage is not recommended to exceed 80%, the number of replicas is assumed to be 3 by default, the storage capacity of a 8 vCPU, 64 GiB TiKV node is 4096 GiB.
+Generally, the usage ratio of TiKV storage is not recommended to exceed 80%, the number of replicas in TiDB Cloud is 3 by default, and the storage capacity of an 8 vCPU, 64 GiB TiKV node is 4096 GiB.
 
 Supposing the size of your MySQL dump files is 20 TB, the TiDB compression ratio is 40%, the estimate number of TiKV nodes by data volume can be calculated as follows:
  `node num = ceil( 20 TB * 40% * 3 ÷ 0.8 ÷ 4096 GiB ÷ 3 ) * 3 = 9`
