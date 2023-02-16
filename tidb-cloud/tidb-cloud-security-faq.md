@@ -1,5 +1,5 @@
 ---
-title:  Security FAQs
+title: Security FAQs
 summary: Learn about the most frequently asked questions (FAQs) relating to TiDB Cloud security.
 ---
 
