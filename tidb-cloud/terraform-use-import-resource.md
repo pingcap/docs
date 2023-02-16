@@ -16,7 +16,7 @@ You can learn how to manage an import task with the `tidbcloud_import` resource 
 ## Before you start
 
 - Learn how to [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md) first.
-- A serverless tier or dedicated tier is required.
+- A serverless tier or dedicated tier cluster is required.
 
 ## Manage the import resource
 
