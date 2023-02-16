@@ -38,35 +38,40 @@ The supported node sizes include the following:
 
 ### TiDB node quantity
 
+For high availability, it is recommended that you configure at least two TiDB nodes for each TiDB Cloud cluster.
+
 In general, the TiDB performance increases linearly with the number of TiDB nodes. However, when the number of TiDB nodes exceeds 8, the performance increment becomes slightly less than linearly proportional. For each additional 8 nodes, the performance deviation coefficient is about 5%.
+
 For example:
 
-- When there are 9 TiDB nodes, the performance deviation coefficient is about 5%, so the TiDB performance is about `9 * (1 - 5%) = 8.55` times the performance of a single TiDB node. 
-- When there are 16 TiDB nodes, the performance deviation coefficient is about 10%, so the overall performance is `16 * (1 - 10%) = 14.4` times the performance of a single TiDB node.
+- When there are 9 TiDB nodes, the performance deviation coefficient is about 5%, so the TiDB performance is about `9 * (1 - 5%) = 8.55` times the performance of a single TiDB node.
+- When there are 16 TiDB nodes, the performance deviation coefficient is about 10%, so the overall TiDB performance is `16 * (1 - 10%) = 14.4` times the performance of a single TiDB node.
 
 For a specified latency of a TiDB node, the TiDB performance varies depending on the different read-write ratios.
+
 The performance of an 8 vCPU, 16 GiB TiDB node in different workloads is as follows:
 
-    | Workload | TiDB performance (QPS)  |
-    |----------|------------------------|
-    | Read     | 18,900                 |
-    | Mixed    | 15,500                 |
-    | Write    | 18,000                 |
+| Workload | TiDB performance (QPS)  |
+|----------|------------------------|
+| Read     | 18,900                 |
+| Mixed    | 15,500                 |
+| Write    | 18,000                 |
 
-You can estimate the number of TiDB nodes according to your workload type, your overall expected performance (QPS), and the performance of a single TiDB node corresponding to the workload type as follows:
+If the number of TiDB nodes is less than 8, the performance deviation coefficient is nearly 0%, so the TiDB performance of 16 vCPU, 32 GiB TiDB nodes is roughly twice that of 8 vCPU, 16 GiB TiDB nodes. If the number of TiDB nodes exceeds 8, it is recommended to choose 16 vCPU, 32 GiB TiDB nodes as this will require fewer nodes, which means smaller performance deviation coefficient.
+
+When planning your cluster size, you can estimate the number of TiDB nodes according to your workload type, your overall expected performance (QPS), and the performance of a single TiDB node corresponding to the workload type using the following formula:
+
  `node num = ceil(overall expected performance ÷ performance per node * (1 - performance deviation coefficient))`
 
-When the number of TiDB nodes is less than 8, the performance deviation coefficient is nearly 0%, so the performance of 16 vCPU, 32 GiB TiDB nodes is roughly twice that of 8 vCPU, 16 GiB TiDB nodes. If the number of TiDB nodes exceeds 8, it is recommended to choose 16 vCPU, 32 GiB TiDB nodes as this will require fewer nodes, which means smaller performance deviation coefficient.
+In the formula, you need to calculate `node num = ceil(overall expected performance ÷ performance per node` first to get a rough node number, and then use the corresponding performance deviation coefficient to get the final result of the node number.
 
-Suppose the overall expected performance is 100,000 QPS under a mixed workload, then the number of TiDB nodes can be calculated as follows:
+For example, your overall expected performance is 100,000 QPS under a mixed workload, and you want to use 8 vCPU, 16 GiB TiDB nodes. Then you can calculate an estimated number of TiDB nodes as follows:
 
-`node num = ceil(100,000 / 15,500 ) = 7`
+`node num = ceil(100,000 ÷ 15,500) = 7`
 
-Since there are 7 nodes, the performance degradation coefficient is 0.
+As 7 is less than 8, the performance degradation coefficient is 0.
 
-So, 7 TiDB nodes (8 vCPU, 16 GiB) can meet the performance requirements.
-
-For high availability, it is recommended that you configure at least two TiDB nodes for each TiDB Cloud cluster.
+So, you need 7 TiDB nodes (8 vCPU, 16 GiB) to meet your performance requirements.
 
 ## Size TiKV
 
@@ -100,53 +105,60 @@ The number of TiKV nodes should be **at least 1 set (3 nodes in 3 different Avai
 
 TiDB Cloud deploys TiKV nodes evenly to all availability zones (at least 3) in the region you select to achieve durability and high availability. In a typical 3-replica setup, your data is distributed evenly among the TiKV nodes across all availability zones and is persisted to the disk of each TiKV node.
 
-Although TiKV is mainly used for data storage, the performance of the TiKV node also varies depending on different workloads. Therefore, when planning the number of TiKV nodes, you need to estimate it according to both your **data volume** and **performance**, and then take the larger of the two estimates as the recommended node number.
-
 > **Note:**
 >
 > When you scale your TiDB cluster, nodes in the 3 availability zones are increased or decreased at the same time. For how to scale in or scale out a TiDB cluster based on your needs, see [Scale Your TiDB Cluster](/tidb-cloud/scale-tidb-cluster.md).
 
-**Data volume**
+Although TiKV is mainly used for data storage, the performance of the TiKV node also varies depending on different workloads. Therefore, when planning the number of TiKV nodes, you need to estimate it according to both your [**data volume**](#estimate-tikv-node-quantity-according-to-data-volume) and [performance](#estimate-tikv-node-quantity-according-to-expected-performance), and then take the larger of the two estimates as the recommended node number.
+
+#### Estimate TiKV node quantity according to data volume
 
 You can calculate a recommended number of TiKV nodes according to your data volume as follows:
 
-`node num = ceil( size of your data * compression ratio * the number of replicas ÷ TiKV storage usage ratio ÷ one TiKV capacity ÷ 3 ) * 3`
+`node num = ceil(size of your data * compression ratio * the number of replicas ÷ TiKV storage usage ratio ÷ one TiKV capacity ÷ 3) * 3`
 
-Generally, the usage ratio of TiKV storage is not recommended to exceed 80%, the number of replicas in TiDB Cloud is 3 by default, and the storage capacity of an 8 vCPU, 64 GiB TiKV node is 4096 GiB.
+Generally, the usage ratio of TiKV storage is not recommended to exceed 80%, the number of replicas in TiDB Cloud is 3 by default, and the maximum storage capacity of an 8 vCPU, 64 GiB TiKV node is 4096 GiB.
 
 Suppose that the size of your MySQL dump files is 20 TB and the TiDB compression ratio is 40%. Then, you can calculate a recommended number of TiKV nodes by data volume as follows:
- `node num = ceil( 20 TB * 40% * 3 ÷ 0.8 ÷ 4096 GiB ÷ 3 ) * 3 = 9`
 
-**Performance** 
+ `node num = ceil(20 TB * 40% * 3 ÷ 0.8 ÷ 4096 GiB ÷ 3) * 3 = 9`
 
-In general, the TiKV performance increases linearly with the number of TiKV nodes. However, when the number of TiKV nodes exceeds 8, the performance increment becomes slightly less than linearly proportional. For each additional 8 nodes, the performance deviation coefficient is about 5%.
+#### Estimate TiKV node quantity according to expected performance
+
+Similarly as TiDB performance, the TiKV performance increases linearly with the number of TiKV nodes. However, when the number of TiKV nodes exceeds 8, the performance increment becomes slightly less than linearly proportional. For each additional 8 nodes, the performance deviation coefficient is about 5%.
 
 For example:
 
-- When there are 9 TiKV nodes, the performance deviation coefficient is about 5%, so the TiDB performance is about `9 * (1 - 5%) = 8.55` times the performance of a single TiKV node. 
-- When there are 18 TiKV nodes, the performance deviation coefficient is about 10%, so the overall performance is `18 * (1 - 10%) = 16.2` times the performance of a single TiKV node.
+- When there are 9 TiKV nodes, the performance deviation coefficient is about 5%, so the TiKV performance is about `9 * (1 - 5%) = 8.55` times the performance of a single TiKV node.
+- When there are 18 TiKV nodes, the performance deviation coefficient is about 10%, so the overall TiKV performance is `18 * (1 - 10%) = 16.2` times the performance of a single TiKV node.
 
 For a specified latency of a TiKV node, the TiKV performance varies depending on the different read-write ratios.
+
 The performance of an 8 vCPU, 32 GiB TiKV node in different workloads is as follows:
 
-    | Workload | TiKV performance (QPS) |
-    |----------|------------------------|
-    | Read     | 28,000                 |
-    | Mixed    | 17,800                 |
-    | Write    | 14,500                 |
+| Workload | TiKV performance (QPS) |
+|----------|------------------------|
+| Read     | 28,000                 |
+| Mixed    | 17,800                 |
+| Write    | 14,500                 |
 
-You can estimate the number of TiKV nodes according to your workload type, your overall expected performance (QPS), and the performance of a single TiKV node corresponding to the workload type as follows:
+If the number of TiKV nodes is less than 8, the performance deviation coefficient is nearly 0%, so the performance of 16 vCPU, 64 GiB TiKV nodes is roughly twice that of 8 vCPU, 32 GiB TiKV nodes. If the number of TiKV nodes exceeds 8, it is recommended to choose 16 vCPU, 64 GiB TiKV nodes as this will require fewer nodes, which means smaller performance deviation coefficient.
+
+When planning your cluster size, you can estimate the number of TiKV nodes according to your workload type, your overall expected performance (QPS), and the performance of a single TiKV node corresponding to the workload type using the following formula:
+
 `node num = ceil(overall expected performance ÷ performance per node * (1 - performance deviation coefficient))`
 
-When the number of TiKV nodes is less than 8, the performance deviation coefficient is nearly 0%, so the performance of 16 vCPU, 64 GiB TiKV nodes is roughly twice that of 8 vCPU, 32 GiB TiKV nodes. If the number of TiKV nodes exceeds 8, it is recommended to choose 16 vCPU, 64 GiB TiKV nodes as this will require fewer nodes, which means smaller performance deviation coefficient.
+In the formula, you need to calculate `node num = ceil(overall expected performance ÷ performance per node` first to get a rough node number, and then use the corresponding performance deviation coefficient to get the final result of the node number.
 
-Suppose the overall expected performance is 100,000 QPS under a mixed workload, then the number of TiKV nodes can be calculated as follows:
+For example, your overall expected performance is 100,000 QPS under a mixed workload, and you want to use 8 vCPU, 32 GiB TiKV nodes. Then the number of TiKV nodes can be calculated as follows:
 
 `node num = ceil(100,000 / 17,800 ) = 6`
 
-Since there are 6 nodes, the performance degradation coefficient is 0.
+As 6 is less than 8, the performance degradation coefficient is 0.
 
-So, 6 TiKV nodes (8 vCPU, 32 GiB) can meet the performance requirements.
+So, you need 6 TiKV nodes (8 vCPU, 32 GiB) to meet your performance requirements.
+
+Next, you can compare the calculated TiKV node number according to data volume and that according to expected performance, and take the larger one as a recommended number of your TiKV nodes.
 
 ### TiKV node storage
 
