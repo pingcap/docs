@@ -9,16 +9,6 @@ summary: Learn about the most frequently asked security questions (FAQs) relatin
 
 This document lists the most frequently asked security questions about TiDB Cloud.
 
-## How does TiDB Cloud protect my data privacy？
- 
-At TiDB Cloud, customer trust is our top priority. TiDB Cloud continually monitors the evolving privacy regulatory and legislative landscape to identify changes and determine what tools our customers might need to meet their compliance needs. Maintaining customer trust is an ongoing commitment. We strive to inform you of the privacy and data security policies, practices, and technologies we’ve put in place. Our commitments include:
-
-- Access: As a customer, you maintain full control of your content that you upload to the TiDB Cloud under your TiDB Cloud  account, and responsibility for configuring access to TiDB Cloud and resources. We provide an advanced set of access, encryption, and logging features to help you do this effectively (e.g., https://docs.pingcap.com/tidbcloud/set-up-private-endpoint-connections,https://docs.pingcap.com/tidbcloud/manage-user-access and https://docs.pingcap.com/tidbcloud/tidb-cloud-auditing). We do not access or use your content for any purpose without your agreement. 
-
-- Storage: You choose the TiDB Cloud  Regions in which your content is stored. You can replicate and back up your content in more than one TiDB Cloud  Regions. We will not move or replicate your content outside of your chosen TiDB Cloud Regions except as agreed with you.
-
-- Disclosure of customer content:We will not disclose customer content as governed by the Privacy Policy. (For details about TiDB Cloud's Privacy Policy) unless we're required to do so to comply with the law or a binding order of a government body. If a governmental body sends TiDB Cloud  a demand for your customer content, we will attempt to redirect the governmental body to request that data directly from you. If compelled to disclose your customer content to a government body, we will give you reasonable notice of the demand to allow the customer to seek a protective order or other appropriate remedy unless TiDB Cloud is legally prohibited from doing so.
-
 ## How does TiDB Cloud classify customer information？
 
 TiDB Cloud defines customer data as follows:
