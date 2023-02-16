@@ -21,65 +21,76 @@ At TiDB Cloud, customer trust is our top priority. TiDB Cloud continually monito
 
 ## How does TiDB Cloud classify customer information？
 
-We define customer data as your business data, database files (including backups and snapshots), logs, and customer PII that a customer sends to the TiDB cluster for analysis, processing, storage, or hosting by TiDB Cloud in connection with the customer's account. For example, customer data includes data that a customer or their consumers store in TiKV or Tiflash, which are located in S3 buckets or EBS of AWS.
+TiDB Cloud defines customer data as follows:
 
-Customer data does not include TiDB Cloud operational, clinic, and meta data（For details about TiDB Cloud's Privacy Policy）:
+- Business data
+- Database files (including backups and snapshots)
+- Logs
+- Customer personally identifiable information (PII) that a customer sends to the TiDB cluster for analysis, processing, storage, or hosting by TiDB Cloud in connection with the customer's account. 
+
+For example, customer data includes data that a customer or their consumers store in TiKV or Tiflash, which are located in S3 buckets or EBS of AWS.
+
+Customer data does not include TiDB Cloud operational, diagnosis, and metadata as follows:
 
 - Operational data includes TiDB Cloud control plane logs, runtime metrics, usage policies, and service ticket-related information.
 
-- Clinic data includes TiDB Cluster logs (including logs, error logs, and slow query logs), metrics (including usage and runtime metrics), configuration (including TiDB Cluster config items, node IPs, and values), monitoring, and alert-related information.
+- Diagnosis data includes TiDB cluster logs (including logs, error logs, and slow query logs), metrics (including usage and runtime metrics), configuration (including TiDB cluster configuration items, node IPs, and values), monitoring, and alert-related information.
 
-- Meta data includes TiDB Cloud customer register accounts (including email, company name, phone number, and IP address), permissions, endpoint services, devices, versions, and tag-related information.
+- Metadata includes TiDB Cloud account registration information (including email, company name, phone number, and IP address), permissions, endpoint services, devices, versions, and tag-related information.
 
-TiDB Cloud operational data is described in [TiDB Cloud Privacy Policy](https://www.pingcap.com/privacy-policy/) and [TiDB Cloud Data Processing Agreement](https://www.pingcap.com/legal/data-processing-agreement-for-tidb-cloud-services/).
+For more information about TiDB Cloud operational data, see [TiDB Cloud Privacy Policy](https://www.pingcap.com/privacy-policy/) and [TiDB Cloud Data Processing Agreement](https://www.pingcap.com/legal/data-processing-agreement-for-tidb-cloud-services/).
 
 ## Who owns customer Data？
 
-As a customer, you own your customer data and have the right to choose which TiDB Cloud can process, store, and host it. TiDB Cloud will not access or use your customer data without your permission. 
+As a customer, you own your data and have the right to choose which TiDB Cloud cluster can process, store, and host it. TiDB Cloud will not access or use your data without your permission. 
 
 ## Who has control over customer data？
 
-As a customer, you have control over your customer data:
+As a customer, you have full control of your data:
 
-- You decide where your customer data will be stored, including the type of storage and geographic location.
+- You decide where your data will be stored, including the type of storage and geographic location.
 
-- You determine the level of security for your customer data based on your industry's data security and privacy policies. TiDB Cloud offers hosting encryption features to protect your customer data in transit and when stored at different security levels.
+- You determine the level of security of your data based on your industry's data security and privacy policies. TiDB Cloud offers encryption features to protect your data either in transit or stored at different security levels.
 
-- You manage access to your customer data, as well as access to the TiDB Cloud database and tools, through users, roles, and credentials that you control.
+- You manage access to your data, as well as access to the TiDB Cloud databases and tools, through users, roles, and credentials that you control.
 
 ## Where is Customer Data stored？
 
-With TiDB Cloud, you have the flexibility to choose how and where you want to run your TiDB database. When you do, you will have access to the same database tools, storage locations, regional control planes, APIs, Chat2query, and other database services. If you want to run your database globally, you can choose from 7 regions on AWS or GCP.
+In TiDB Cloud, you have the flexibility to choose how and where you want to run your TiDB database. When you do, you will have access to the same database tools, storage locations, regional control planes, APIs, Chat2Query, and other database services. If you want to run your database globally, you can choose from various regions on AWS or GCP.
 
-As a customer, you decide in which AWS/GCP region your customer data will be stored, allowing you to deploy your TiDB cluster in the locations that meet your specific geographic needs. For example, if a TiDB Cloud customer in the USA wants to store their customer data only in the USA, they can choose to deploy their TiDB cluster exclusively in the US West (Oregon) AWS Region.
+As a customer, you can decide in which AWS or GCP region your data will be stored by deploying your TiDB cluster in the target region that meets your geographic needs. For example, if you are in the USA and you want to store all your data only in the USA, you can choose to deploy a TiDB cluster exclusively in the AWS Oregon (us-west-2) region.
 
-You can replicate and back up your customer data in multiple AWS/GCP regions. We will not move or replicate your customer data outside of your chosen AWS/GCP region without your agreement.
+You can also replicate and back up your data in multiple AWS or GCP regions. PingCAP will not move or replicate your data outside of your chosen AWS or GCP region without your agreement.
 
-## What is my role in securing customer Data？
+## What is my role in securing customer data？
 
-When assessing the security and compliance of roles and responsibilities, it is crucial to differentiate between the security role of TiDB Cloud and your own security role in using the TiDB Cloud. TiDB Cloud is responsible for implementing and maintaining its own security measures, while you are responsible for ensuring the security and compliance of your TiDB cluster within the TiDB Cloud environment. Your security role in the TiDB Cloud involves implementing and managing any security features and measures related to your use of the TiDB Cloud.
+When you assess the security and compliance of roles and responsibilities, it is crucial to differentiate between the security role of TiDB Cloud and the security role of your own in using TiDB Cloud. 
+
+TiDB Cloud is responsible for implementing and maintaining its own security measures, while you are responsible for ensuring the security and compliance of your TiDB cluster within the TiDB Cloud environment. Your security role in TiDB Cloud involves implementing and managing any security features and measures related to your use of TiDB Cloud.
 
 ## Who can access customer data in TiDB Cloud？
 
 At TiDB Cloud, our highest priority is securing our customer's data, and we implement rigorous contractual,technical and organizational measures to protect TiDB Cloud confidentiality,integrity,and availability regardless of which TiDB Cloud region a customer has selected.
 
-TiDB Cloud provides a multi-tenant TiDB Cloud SaaS database service platform, follows the multi-tenant isolation architecture and best practices of AWS and GCP SaaS applications, and designs isolation measures and security features for account, authentication,authorization, VPC access control, multiple encryption, and auditing.
+TiDB Cloud provides a multi-tenant SaaS database service platform, follows the multi-tenant isolation architecture and best practices of AWS and GCP SaaS applications, and designs isolation measures and security features for accounts, authentication, authorization, VPC access control, multiple encryption, and auditing.
 
-TiDB Cloud has designed customers with a secure and credible database SAAS platform. We limit the access and time of internal employees to the TiDB Cloud infrastructure in accordance with the principle of least privilege. Any internal Oncall , developers, and operation employees only access TiDB Cloud infrastructure through strict approval processes and Bastion on time, and any privileged users behavior who login and operate is monitored and alert on time.
+TiDB Cloud has designed a secure and credible database SAAS platform, which limits the access of internal employees to the TiDB Cloud infrastructure in accordance with the principle of least privilege. For any technical support, PingCAP developers and operation employees can only access TiDB Cloud infrastructure through strict approval processes and Bastion on time, and any privileged users' behavior of login and operation is monitored and alerted on time.
 
-TiDB Cloud has designed an internal operations account permission isolation structure to prevent any internal personnel from accessing TiDB clusters using privileged service accounts. The service account is only invoked when the customer initiates the TiDB cluster initialization through the Console or command line. Upon completion of the TiDB initialization, the customer becomes the owner of the most privileged root account and the service account is transferred to their control. TiDB Cloud employees do not have access to the service account credentials or permissions that are initialized by TiDB.
+TiDB Cloud has designed an internal operation account permission isolation structure to prevent any internal personnel from accessing TiDB clusters using privileged service accounts. The service account is only invoked when the customer initiates the TiDB cluster through the TiDB Cloud console or command line. Upon completion of the TiDB initialization, the customer becomes the owner of the most privileged root account and the service account is transferred to their control. PingCAP employees do not have access to the service account credentials or permissions that are initialized by TiDB.
 
-## Could customer run TiDB Cloud in my VPC?
+## Can I run TiDB Cloud in my own VPC?
 
 No. TiDB Cloud is Database-as-a-Service (DBaaS) and runs only in the TiDB Cloud VPC. As a cloud computing managed service, TiDB Cloud provides access to a database without requiring the setup of physical hardware and the installation of software.
 
-## How to encrypt customer data in TiDB Cloud？
+## How does TiDB Cloud encrypts customer data？
 
-TiDB Cloud uses storage volume encryption by default for customer data at rest, including your database data and backup data. TiDB Cloud requires TLS encryption for customer data in transit, and also requires component-level TLS encryption for data in your dedicated TIDB cluster between TiDB, PD, TiKV, and TiFlash.For more detial information, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+TiDB Cloud uses storage volume encryption by default for customer data at rest, including both database data and backup data. TiDB Cloud requires TLS encryption for customer data in transit, and also requires component-level TLS encryption for data in your Dedicated Tier cluster between TiDB, PD, TiKV, and TiFlash.
 
-## How to configure a secure TiDB Cluster？
+For more details, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
-In TiDB Cloud, you can use either a Dedicated Tier cluster or a Serverless Tier cluster according to your needs.
+## How do I configure a secure TiDB cluster？
+
+In TiDB Cloud, you can use either a [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) cluster or a [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) cluster according to your needs.
 
 For Dedicated Tier clusters, TiDB Cloud ensures cluster security with the following measures:
 
@@ -89,7 +100,7 @@ For Dedicated Tier clusters, TiDB Cloud ensures cluster security with the follow
 
 - Creates server-side TLS certificates and component-level TLS certificates for each cluster to encrypt cluster data in transit.
 
-- Provide IP access rules for each cluster to ensure that only allowed source IP addresses can access your cluster.
+- Allows you to [configure an IP access list](/tidb-cloud/configure-ip-access-list.md) for each cluster to filter the IP addresses that can access your cluster.
 
 For Serverless Tier clusters, TiDB Cloud ensures cluster security with the following measures:
 
