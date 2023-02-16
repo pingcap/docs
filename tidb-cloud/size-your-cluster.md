@@ -58,7 +58,7 @@ You can estimate the number of TiDB nodes according to your workload type, your 
 
 When the number of TiDB nodes is less than 8, the performance deviation coefficient is nearly 0%, so the performance of 16 vCPU, 32 GiB TiDB nodes is roughly twice that of 8 vCPU, 16 GiB TiDB nodes. If the number of TiDB nodes exceeds 8, it is recommended to choose 16 vCPU, 32 GiB TiDB nodes as this will require fewer nodes, which means smaller performance deviation coefficient.
 
-Suppose the overall expected performance is 100,000 QPS under mixed workload, then the number of TiDB nodes can be calculated as follows:
+Suppose the overall expected performance is 100,000 QPS under a mixed workload, then the number of TiDB nodes can be calculated as follows:
 
 `node num = ceil(100,000 / 15,500 ) = 7`
 
