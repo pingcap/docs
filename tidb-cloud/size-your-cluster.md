@@ -119,24 +119,28 @@ Suppose that the size of your MySQL dump files is 20 TB and the TiDB compression
 
 **Performance** 
 
-The performance of the TiKV node is generally linearly scalable, but there is some performance degradation when there are a larger number of nodes. We estimate this performance degradation by increasing the performance degradation coefficient by 5% every time the number of nodes reaches 8. 
-For example, when there are 9 TiKV nodes, the overall performance is `9 * (1 - 5%) = 8.55` times the performance of a single TiKV node. And when there are 18 TiKV nodes, the overall performance is `18 * (1 - 10%) = 16.2` times the performance of a single TiKV node.
+In general, the TiKV performance increases linearly with the number of TiKV nodes. However, when the number of TiKV nodes exceeds 8, the performance increment becomes slightly less than linearly proportional. For each additional 8 nodes, the performance deviation coefficient is about 5%.
 
-Different workloads involve queries with varying read-write ratios and have different performance in the specified latency for a TiKV node.
-The performance of the 8 vCPU, 32 GiB TiKV node in different workloads:
+For example:
 
-    | workload | TiKV performance (QPS) |
+- When there are 9 TiKV nodes, the performance deviation coefficient is about 5%, so the TiDB performance is about `9 * (1 - 5%) = 8.55` times the performance of a single TiKV node. 
+- When there are 18 TiKV nodes, the performance deviation coefficient is about 10%, so the overall performance is `18 * (1 - 10%) = 16.2` times the performance of a single TiKV node.
+
+For a specified latency of a TiKV node, the TiKV performance varies depending on the different read-write ratios.
+The performance of an 8 vCPU, 32 GiB TiKV node in different workloads is as follows:
+
+    | Workload | TiKV performance (QPS) |
     |----------|------------------------|
     | Read     | 28,000                 |
     | Mixed    | 17,800                 |
     | Write    | 14,500                 |
 
-We estimate the number of TiKV nodes based on the workload type, overall expected performance (QPS), and the performance of a single TiKV node under different workloads:
- `node num = ceil( overall expected perfromance / performance per node * (1 - performance degradation coefficient) )`
+You can estimate the number of TiKV nodes according to your workload type, your overall expected performance (QPS), and the performance of a single TiKV node corresponding to the workload type as follows:
+`node num = ceil(overall expected performance ÷ performance per node * (1 - performance deviation coefficient))`
 
-In the absence of performance degradation, the performance of 16 vCPU, 64 GiB TiKV nodes is roughly twice that of 8 vCPU, 32 GiB TiKV nodes. If the number of nodes is too large, it is recommended to choose 16 vCPU, 64 GiB TiKV nodes as this will require fewer nodes and have a smaller performance degradation coefficient.
+When the number of TiKV nodes is less than 8, the performance deviation coefficient is nearly 0%, so the performance of 16 vCPU, 64 GiB TiKV nodes is roughly twice that of 8 vCPU, 32 GiB TiKV nodes. If the number of TiKV nodes exceeds 8, it is recommended to choose 16 vCPU, 64 GiB TiKV nodes as this will require fewer nodes, which means smaller performance deviation coefficient.
 
-Suppose the overall expected performance is 100,000 QPS under mixed workload, then the number of TiKV nodes can be calculated as follows:
+Suppose the overall expected performance is 100,000 QPS under a mixed workload, then the number of TiKV nodes can be calculated as follows:
 
 `node num = ceil(100,000 / 17,800 ) = 6`
 
