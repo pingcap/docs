@@ -16,7 +16,7 @@ Customer data is that customer app sends to the TiDB cluster for analysis, proce
 - Business data (including consumer data and table data)
 - Database files (including database backups and snapshots)
 - Logs (including SQL logs and )
-- Consumer personally identifiable information (PII) （including consumer personally identifiable information，but don't include relevant PII information when customers register and log in to TiDB Cloud）
+- Consumer personally identifiable information (PII) （including consumer personally identifiable information，but don't include relevant PII information when customers register and login to TiDB Cloud）
 
 For example, customer data includes data that a customer or their consumers store in TiKV or TiFlash, which are located in Amazon S3 buckets or EBS of AWS.
 
@@ -40,7 +40,7 @@ As a customer, you have full control of your data:
 
 - You determine the level of security of your data based on your industry's data security and privacy policies. TiDB Cloud offers encryption features to protect your data either in transit or stored at different security levels.
 
-- You manage access to your data, as well as access to the TiDB Cloud databases and tools, through users, roles, and credentials that you control.
+- You manage access to your data, as well as access to the TiDB Cloud databases and tools through users, roles, and credentials that you control.
 
 ## Where is Customer Data stored？
 
@@ -54,45 +54,27 @@ You can also replicate and back up your data in multiple AWS or GCP regions. Pin
 
 When you assess the security and compliance of roles and responsibilities, it is crucial to differentiate between the security role of TiDB Cloud and the security role of your own in using TiDB Cloud. 
 
-TiDB Cloud is responsible for implementing and maintaining its own security measures, while you are responsible for ensuring the security and compliance of your TiDB cluster within the TiDB Cloud environment. Your security role in TiDB Cloud involves implementing and managing any security features and measures related to your use of TiDB Cloud.
+PingCAP is the role of TiDB cloud platform service and management, mainly responsible for implementing and maintaining the sustainable, safe, stable, and compliant operation of TiDB cloud.
+
+The customer is the database owner, has an administrative and operational role, and is primarily responsible for ensuring the security and compliance of your TiDB cluster within the TiDB Cloud. Your role in TiDB Cloud involves implementing and managing any security features and access control policy of your own TiDB cluster.
 
 ## Who can access customer data in TiDB Cloud？
 
-At TiDB Cloud, our highest priority is securing our customer's data, and we implement rigorous contractual,technical and organizational measures to protect TiDB Cloud confidentiality,integrity,and availability regardless of which TiDB Cloud region a customer has selected.
+PingCAP highest priority is securing our customer's data in TiDB Cloud, and we implement rigorous contractual,technical and organizational measures to protect TiDB Cloud confidentiality,integrity,and availability regardless of which TiDB Cloud region a customer has selected.
 
-TiDB Cloud provides a multi-tenant SaaS database service platform, follows the multi-tenant isolation architecture and best practices of AWS and GCP SaaS applications, and designs isolation measures and security features for accounts, authentication, authorization, VPC access control, multiple encryption, and auditing.
+PingCAP have passed the standard certification and verification of SOC2 Type2, GDPR, PCI-DSS, and HIPAA. For details, see [PingCAP's Trust Center](https://www.pingcap.com/trust-compliance-center) , and invite third-party auditors to audit the certified standards every year.
 
-TiDB Cloud has designed a secure and credible database SAAS platform, which limits the access of internal employees to the TiDB Cloud infrastructure in accordance with the principle of least privilege. For any technical support, PingCAP developers and operation employees can only access TiDB Cloud infrastructure through strict approval processes and Bastion on time, and any privileged users' behavior of login and operation is monitored and alerted on time.
+PingCAP designs a multi-tenant TiDB Cloud database service platform, follows the multi-tenant isolation architecture and best practices of AWS and GCP SaaS applications, and designs functions and isolation mechanisms such as multi-tenant authentication and authorization, network access control, data encryption, and auditing, focusing on Protect customer data with ongoing security and compliance.
 
-TiDB Cloud has designed an internal operation account permission isolation structure to prevent any internal personnel from accessing TiDB clusters using privileged service accounts. The service account is only invoked when the customer initiates the TiDB cluster through the TiDB Cloud console or command line. Upon completion of the TiDB initialization, the customer becomes the owner of the most privileged root account and the service account is transferred to their control. PingCAP employees do not have access to the service account credentials or permissions that are initialized by TiDB.
+TiDB Cloud has designed a secure and trusted TiDB Cloud technical architecture. The architecture effectively isolates and prohibits any insiders from directly accessing the TiDB Cloud infrastructure.No technical staff of PingCAP can directly access the TiDB Cloud infrastructure where customer data resides. When internal technical personnel normally monitor and maintain the TiDB Cloud infrastructure, they can only go through a strict approval process, obtain minimum permissions, and pass the Bastion audit to complete the approved operation and maintenance within a limited time. Moreover, all operational behaviors will be recorded and audited, and we also configure monitoring and alarms for unauthorized operation and maintenance.
 
-## How does TiDB Cloud encrypts customer data？
+TiDB Cloud has designed an internal operation account permission isolation structure to prevent internal personnel from using privileged service accounts to access TiDB clusters. The service account is only called when the customer starts the TiDB cluster through the TiDB Cloud console or command line. After completing the initialization of TiDB according to the customer's instructions, the customer becomes the owner of the TiDB cluster and has the account with the maximum authority of the TiDB cluster. PingCAP staff do not have access to service account credentials or permissions for TiDB initialization.
+
+## How to encrypts customer data in TiDB Cloud？
 
 TiDB Cloud uses storage volume encryption by default for customer data at rest, including both database data and backup data. TiDB Cloud requires TLS encryption for customer data in transit, and also requires component-level TLS encryption for data in your Dedicated Tier cluster between TiDB, PD, TiKV, and TiFlash.
 
 For more details, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
-
-## How do I configure a secure TiDB cluster？
-
-In TiDB Cloud, you can use either a [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) cluster or a [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) cluster according to your needs.
-
-For Dedicated Tier clusters, TiDB Cloud ensures cluster security with the following measures:
-
-- Creates independent sub-accounts and VPCs for each cluster.
-
-- Set up firewall rules to isolate external connections.
-
-- Creates server-side TLS certificates and component-level TLS certificates for each cluster to encrypt cluster data in transit.
-
-- Allows you to [configure an IP access list](/tidb-cloud/configure-ip-access-list.md) for each cluster to filter the IP addresses that can access your cluster.
-
-For Serverless Tier clusters, TiDB Cloud ensures cluster security with the following measures:
-
-- Creates independent sub-accounts for each cluster.
-
-- Set up firewall rules to isolate external connections.
-
-- Provides cluster server TLS certificates to encrypt cluster data in transit.
 
 ## Can I run TiDB Cloud in my own VPC?
 
