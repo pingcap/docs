@@ -36,8 +36,6 @@ As a customer, you own your data and have the right to choose which TiDB Cloud c
 
 As a customer, you have full control of your data:
 
-- You decide where your data will be stored, including the type of storage and geographic location.
-
 - You determine the level of security of your data based on your industry's data security and privacy policies. TiDB Cloud offers encryption features to protect your data either in transit or stored at different security levels.
 
 - You manage access to your data, as well as access to the TiDB Cloud databases and tools through users, roles, and credentials that you control.
