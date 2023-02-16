@@ -415,6 +415,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
     - `partial order prop push down` now supports the LIST-type partitioned tables [#40273](https://github.com/pingcap/tidb/issues/40273) @[winoros](https://github.com/winoros)
     - Add error messages for conflicts between optimizer hints and execution plan bindings [#40910](https://github.com/pingcap/tidb/issues/40910) @[Reminiscent](https://github.com/Reminiscent)
     - Optimize the plan cache strategy to avoid non-optimal plans when using plan cache in some scenarios [#40312](https://github.com/pingcap/tidb/pull/40312) [#40218](https://github.com/pingcap/tidb/pull/40218) [#40280](https://github.com/pingcap/tidb/pull/40280) [#41136](https://github.com/pingcap/tidb/pull/41136) [#40686](https://github.com/pingcap/tidb/pull/40686) @[qw4990](https://github.com/qw4990)
+    - Clear expired region cache regularly to avoid memory leak and performance degradation [#40461](https://github.com/pingcap/tidb/issues/40461) @[sticnarf](https://github.com/sticnarf)
 
 + TiKV
 
@@ -525,24 +526,21 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
     - Fix the issue that data race might occur when an index is added [#40879](https://github.com/pingcap/tidb/issues/40879) @[tangenta](https://github.com/tangenta)
 
     `<!-- planner 4-->`
-    - 修复了非法的 datetime 值导致 analyze 失败的问题 [#39336](https://github.com/pingcap/tidb/issues/39336) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
     - Fix the `can't find proper physical plan` issue caused by virtual columns [#41014](https://github.com/pingcap/tidb/issues/41014) @[AilinKid](https://github.com/AilinKid)
     - Fix the issue that TiDB cannot restart after global bindings are created for partition tables in dynamic trimming mode [#40368](https://github.com/pingcap/tidb/issues/40368) @[Yisaer](https://github.com/Yisaer)
     - Fix the issue that auto analyze causes graceful shutdown to take a long time [#40038](https://github.com/pingcap/tidb/issues/40038) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
 
     `<!-- compute 2-->`
-    - Fix the panic of the TiDB server when the IndexMerge operator triggering memory limiting behaviors [#41036](https://github.com/pingcap/tidb/pull/41036) @[guo-shaoge](https://github.com/guo-shaoge)
+    - Fix the panic of the TiDB server when the IndexMerge operator triggers memory limiting behaviors [#41036](https://github.com/pingcap/tidb/pull/41036) @[guo-shaoge](https://github.com/guo-shaoge)
     - Fix the issue that the `SELECT * FROM table_name LIMIT 1` query on partitioned tables is slow [#40741](https://github.com/pingcap/tidb/pull/40741) @[solotzg](https://github.com/solotzg)
     `<!-- transaction 1-->`
-    - Clear expired region cache regularly to avoid memory leak and performance degradation [#40461](https://github.com/pingcap/tidb/issues/40461) @[sticnarf](https://github.com/sticnarf)
 
 + TiKV
 
     `<!-- 5 -->`
     - Fix an error that occurs when casting the `const Enum` type to other types [#14156](https://github.com/tikv/tikv/issues/14156) @[wshwsh12](https://github.com/wshwsh12)
     - Fix the issue that Resolved TS causes higher network traffic [#14098](https://github.com/tikv/tikv/issues/14092) @[overvenus] (https://github.com/overvenus)
-    - Fix the issue that TiKV cannot restart when the number of CPU cores is less than 1  [#13586] [#13752] [#14017](https://github.com/tikv/tikv/issues/13586) @[andreid-db](https://github.com/andreid-db)
-    - copr: 修复old collation时Like中的 _ pattern的行为 [#13785](https://github.com/tikv/tikv/pull/13785) @[Yangkeao](https://github.com/Yangkeao)
+    - Fix the issue that TiKV cannot restart when the number of CPU cores is less than 1  [#13586](https://github.com/tikv/tikv/issues/13586) [#13752](https://github.com/tikv/tikv/issues/13752) [#14017](https://github.com/tikv/tikv/issues/14017) @[andreid-db](https://github.com/andreid-db)
     (dup: release-6.1.4.md > Bug 修复> TiKV)- Fix the data inconsistency issue caused by network failure between TiDB and TiKV during the execution of a DML after a failed pessimistic DML [#14038](https://github.com/tikv/tikv/issues/14038) @[MyonKeminta](https://github.com/MyonKeminta) @[myonkeminta](https://github.com/myonkeminta)
 
 + PD
