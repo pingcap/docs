@@ -21,7 +21,7 @@ The `ALTER RESOURCE GROUP` statement is used to modify a resource group in a dat
 AlterResourceGroupStmt:
    "ALTER" "RESOURCE" "GROUP" IfExists ResourceGroupName ResourceGroupOptionList
 
-IfNotExists ::=
+IfExists ::=
     ('IF' 'EXISTS')?
 
 ResourceGroupName:
