@@ -125,7 +125,7 @@ You can only search the running DDL job corresponding to `job_id` within the las
  ADMIN SHOW DDL JOB QUERIES LIMIT m OFFSET n;  # Retrieve rows [n+1, n+m]
  ```
  
- where n and m are integers greater or equal to 0.
+ where `n` and `m` are integers greater or equal to 0.
 
  ```sql
  ADMIN SHOW DDL JOB QUERIES LIMIT 3;  # Retrieve first 3 rows
@@ -162,7 +162,7 @@ You can only search the running DDL job corresponding to `job_id` within the las
  3 rows in set (0.00 sec)
  ```
 
- You can search the running DDL job corresponding to `job_id` within a arbitrarily specified range of results in the DDL history job queue. This syntax does not have the limitation of the last ten results of `ADMIN SHOW DDL JOB QUERIES`.
+ You can search the running DDL job corresponding to `job_id` within an arbitrarily specified range of results in the DDL history job queue. This syntax does not have the limitation of the last ten results of `ADMIN SHOW DDL JOB QUERIES`.
 
 ## MySQL compatibility
 
