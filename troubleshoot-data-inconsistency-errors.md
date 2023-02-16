@@ -15,7 +15,7 @@ This document describes the meanings of data inconsistency errors and provides s
 
 <CustomContent platform="tidb-cloud">
 
-This document describes the meanings of data inconsistency errors and provides some methods to bypass the consistency check. If a data consistency error occurs, you can [get support](/tidb-cloud/tidb-cloud-support.md) from PingCAP.
+This document describes the meanings of data inconsistency errors and provides some methods to bypass the consistency check. If a data consistency error occurs, you can [contact TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 </CustomContent>
 
