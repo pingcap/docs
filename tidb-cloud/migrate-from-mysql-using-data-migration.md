@@ -193,7 +193,7 @@ On the **Create Migration Job** page, configure the source and target connection
 
         <img src="https://download.pingcap.com/images/docs/tidb-cloud/migration-job-select-db.png" width="60%" />
 
-    - If you click **Customize** and select some tables under a dataset name, the migration job only will migrate the existing data and replicate ongoing changes of the selected tables. Tables created afterwards in the same database will not be migrated.
+    - If you click **Customize** and select some tables under a dataset name, the migration job will migrate the existing data and replicate ongoing changes of the selected tables. Tables created afterwards in the same database will also be migrated.
 
         <img src="https://download.pingcap.com/images/docs/tidb-cloud/migration-job-select-tables.png" width="60%" />
 
