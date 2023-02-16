@@ -275,7 +275,6 @@ In addition, when other concurrent writes occur, the number of rows processed in
 
 The dividing column does not support `ENUM`, `BIT`, `SET`, `JSON` types. Try to specify a new dividing column. It is recommended to use an integer or string type column.
 
-
 <CustomContent platform="tidb">
 
 If the error occurs when the selected shard column is not one of these unsupported types, [get support](/support.md) from PingCAP or the community.
