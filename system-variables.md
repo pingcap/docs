@@ -3797,6 +3797,8 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Unit: Milliseconds
 - This variable controls whether to enable the synchronously loading statistics feature. The value `0` means that the feature is disabled. To enable the feature, you can set this variable to a timeout (in milliseconds) that SQL optimization can wait for at most to synchronously load complete column statistics. For details, see [Load statistics](/statistics.md#load-statistics).
 
+<CustomContent platform="tidb">
+
 ### tidb_stmt_summary_enable_persistent <span class="version-mark">New in v6.6.0</span>
 
 > **Warning:**
@@ -3853,6 +3855,8 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Default value: `64`
 - Unit: MiB
 - This variable is read-only. It specifies the maximum size of a persistent data file when [statements summary persistence](/statement-summary-tables.md#persist-statements-summary) is enabled. The value of this variable is the same as that of the configuration item [`tidb_stmt_summary_file_max_size`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_size-new-in-v660).
+
+</CustomContent>
 
 ### tidb_stmt_summary_history_size <span class="version-mark">New in v4.0</span>
 
