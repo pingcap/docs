@@ -3825,11 +3825,11 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 ### tidb_stmt_summary_filename <span class="version-mark">New in v6.6.0</span>
 
 <CustomContent platform="tidb-cloud">
-	
+
 > **Note:**
 >
 > This TiDB variable is not applicable to TiDB Cloud.
-	
+
 </CustomContent>
 
 > **Warning:**
@@ -3850,11 +3850,11 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 ### tidb_stmt_summary_file_max_backups <span class="version-mark">New in v6.6.0</span>
 
 <CustomContent platform="tidb-cloud">
-	
+
 > **Note:**
 >
 > This TiDB variable is not applicable to TiDB Cloud.
-	
+
 </CustomContent>
 
 > **Warning:**
@@ -3879,7 +3879,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 > **Note:**
 >
 > This TiDB variable is not applicable to TiDB Cloud.
-	
+
 </CustomContent>
 
 > **Warning:**
@@ -3894,7 +3894,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 <CustomContent platform="tidb">
 
-The value of this variable is the same as that of the configuration item [`tidb_stmt_summary_file_max_days`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_days-new-in-v660).
+- The value of this variable is the same as that of the configuration item [`tidb_stmt_summary_file_max_days`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_days-new-in-v660).
 
 </CustomContent>
 
@@ -3905,7 +3905,7 @@ The value of this variable is the same as that of the configuration item [`tidb_
 > **Note:**
 >
 > This TiDB variable is not applicable to TiDB Cloud.
-	
+
 </CustomContent>
 
 > **Warning:**
