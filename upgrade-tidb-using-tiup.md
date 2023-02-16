@@ -60,7 +60,7 @@ Before upgrading your TiDB cluster, you first need to upgrade TiUP or TiUP mirro
 >
 > If the control machine of the cluster to upgrade cannot access `https://tiup-mirrors.pingcap.com`, skip this section and see [Upgrade TiUP offline mirror](#upgrade-tiup-offline-mirror).
 
-1. Upgrade the TiUP version. It is recommended that the TiUP version is `1.11.0` or later.
+1. Upgrade the TiUP version. It is recommended that the TiUP version is `1.11.3` or later.
 
     {{< copyable "shell-regular" >}}
 
@@ -69,7 +69,7 @@ Before upgrading your TiDB cluster, you first need to upgrade TiUP or TiUP mirro
     tiup --version
     ```
 
-2. Upgrade the TiUP Cluster version. It is recommended that the TiUP Cluster version is `1.11.0` or later.
+2. Upgrade the TiUP Cluster version. It is recommended that the TiUP Cluster version is `1.11.3` or later.
 
     {{< copyable "shell-regular" >}}
 

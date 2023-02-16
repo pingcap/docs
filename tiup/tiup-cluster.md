@@ -17,7 +17,7 @@ tiup cluster
 ```
 
 ```
-Starting component `cluster`: /home/tidb/.tiup/components/cluster/v1.11.0/cluster
+Starting component `cluster`: /home/tidb/.tiup/components/cluster/v1.11.3/cluster
 Deploy a TiDB cluster for production
 
 Usage:
@@ -172,7 +172,7 @@ tiup cluster list
 ```
 
 ```
-Starting /root/.tiup/components/cluster/v1.11.0/cluster list
+Starting /root/.tiup/components/cluster/v1.11.3/cluster list
 Name          User  Version    Path                                               PrivateKey
 ----          ----  -------    ----                                               ----------
 prod-cluster  tidb  v6.6.0    /root/.tiup/storage/cluster/clusters/prod-cluster  /root/.tiup/storage/cluster/clusters/prod-cluster/ssh/id_rsa
@@ -203,7 +203,7 @@ tiup cluster display prod-cluster
 ```
 
 ```
-Starting /root/.tiup/components/cluster/v1.11.0/cluster display prod-cluster
+Starting /root/.tiup/components/cluster/v1.11.3/cluster display prod-cluster
 TiDB Cluster: prod-cluster
 TiDB Version: v6.6.0
 ID                  Role        Host          Ports                            OS/Arch       Status  Data Dir              Deploy Dir
@@ -277,7 +277,7 @@ tiup cluster display prod-cluster
 ```
 
 ```
-Starting /root/.tiup/components/cluster/v1.11.0/cluster display prod-cluster
+Starting /root/.tiup/components/cluster/v1.11.3/cluster display prod-cluster
 TiDB Cluster: prod-cluster
 TiDB Version: v6.6.0
 ID                  Role        Host          Ports                            OS/Arch       Status   Data Dir              Deploy Dir
@@ -574,14 +574,14 @@ tiup cluster audit
 ```
 
 ```
-Starting component `cluster`: /home/tidb/.tiup/components/cluster/v1.11.2/cluster audit
+Starting component `cluster`: /home/tidb/.tiup/components/cluster/v1.11.3/cluster audit
 ID      Time                       Command
 --      ----                       -------
-4BLhr0  2022-02-09T23:55:09+08:00  /home/tidb/.tiup/components/cluster/v1.11.2/cluster deploy test v6.6.0 /tmp/topology.yaml
-4BKWjF  2022-02-09T23:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.11.2/cluster deploy test v6.6.0 /tmp/topology.yaml
-4BKVwH  2022-02-09T23:02:08+08:00  /home/tidb/.tiup/components/cluster/v1.11.2/cluster deploy test v6.6.0 /tmp/topology.yaml
-4BKKH1  2022-02-09T16:39:04+08:00  /home/tidb/.tiup/components/cluster/v1.11.2/cluster destroy test
-4BKKDx  2022-02-09T16:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.11.2/cluster deploy test v6.6.0 /tmp/topology.yaml
+4BLhr0  2022-02-09T23:55:09+08:00  /home/tidb/.tiup/components/cluster/v1.11.3/cluster deploy test v6.6.0 /tmp/topology.yaml
+4BKWjF  2022-02-09T23:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.11.3/cluster deploy test v6.6.0 /tmp/topology.yaml
+4BKVwH  2022-02-09T23:02:08+08:00  /home/tidb/.tiup/components/cluster/v1.11.3/cluster deploy test v6.6.0 /tmp/topology.yaml
+4BKKH1  2022-02-09T16:39:04+08:00  /home/tidb/.tiup/components/cluster/v1.11.3/cluster destroy test
+4BKKDx  2022-02-09T16:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.11.3/cluster deploy test v6.6.0 /tmp/topology.yaml
 ```
 
 The first column is `audit-id`. To view the execution log of a certain command, pass the `audit-id` of a command as the flag as follows:
