@@ -54,7 +54,7 @@ When you assess the security and compliance of roles and responsibilities, it is
 
 PingCAP is the role of TiDB cloud platform service and management, mainly responsible for implementing and maintaining the sustainable, safe, stable, and compliant operation of TiDB cloud.
 
-As a customer, you are your database owner, and you have an administrative and operational role. You are primarily responsible for ensuring the security and compliance of your TiDB cluster within the TiDB Cloud. And your role in TiDB Cloud also involves implementing and managing any security features and access control policies of your own TiDB cluster.
+As a customer, you are your database owner, and you take the administrative and operational role of your database. You are primarily responsible for ensuring the security and compliance of your TiDB cluster within the TiDB Cloud. And your role in TiDB Cloud also involves implementing and managing any security features and access control policies of your own TiDB cluster.
 
 ## Who can access customer data in TiDB Cloud？
 
