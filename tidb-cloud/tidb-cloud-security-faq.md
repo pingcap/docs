@@ -18,7 +18,7 @@ Customer data is that customer app sends to the TiDB cluster for analysis, proce
 - Logs (including SQL logs and )
 - Consumer personally identifiable information (PII) （including consumer personally identifiable information，but don't include relevant PII information when customers register and log in to TiDB Cloud）
 
-For example, customer data includes data that a customer or their consumers store in TiKV or Tiflash, which are located in S3 buckets or EBS of AWS.
+For example, customer data includes data that a customer or their consumers store in TiKV or TiFlash, which are located in Amazon S3 buckets or EBS of AWS.
 
 Customer data does not include TiDB Cloud operational, diagnosis, and metadata as follows:
 
