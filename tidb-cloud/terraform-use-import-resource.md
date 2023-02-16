@@ -125,7 +125,7 @@ Here is an example on how to manage a LOCAL import task with import resource.
    }
    ```
 
-5. Use `terraform refersh` to update the status after several minutes
+5. Use `terraform refresh` to update the status after several minutes
 
    ```
    $ terraform refresh && terraform state show tidbcloud_import.example_local
