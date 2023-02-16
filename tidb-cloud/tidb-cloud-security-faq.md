@@ -44,7 +44,7 @@ As a customer, you have full control of your data:
 
 ## Where is customer data stored？
 
-In TiDB Cloud, you have the flexibility to choose how and where you want to run your TiDB database. When you do, you will have access to the same database tools, storage locations, regional control planes, APIs, Chat2Query, and other database services. If you want to run your database globally, you can choose from various regions on AWS or GCP.
+In TiDB Cloud, you have access to your TiDB database tools, storage locations, regional control planes, APIs, Chat2Query, and other database services. If you want to run your database globally, you can choose from various regions on AWS or GCP.
 
 As a customer, you can decide in which AWS or GCP region your data will be stored by creating your TiDB cluster in the target region that meets your geographic needs. For example, if you are in the USA and you want to store all your data only in the USA, you can choose to deploy a TiDB cluster exclusively in the AWS Oregon (us-west-2) region.
 
@@ -74,7 +74,7 @@ In TiDB Cloud, the data access security measures includes the following:
 
 ## How to encrypts customer data in TiDB Cloud？
 
-TiDB Cloud uses storage volume encryption by default for customer data at rest, including both database data and backup data. TiDB Cloud requires TLS encryption for customer data in transit, and also requires component-level TLS encryption for data in your Dedicated Tier cluster between TiDB, PD, TiKV, and TiFlash.
+TiDB Cloud uses storage volume encryption by default for customer data at rest, including both database data and backup data. TiDB Cloud requires TLS encryption for customer data in transit, and also requires component-level TLS encryption for data in your Dedicated Tier cluster between TiDB, TiKV, and TiFlash.
 
 For more details, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
