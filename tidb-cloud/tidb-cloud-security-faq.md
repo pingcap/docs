@@ -58,7 +58,7 @@ As a customer, you are your database owner, and you take the administrative and 
 
 ## Who can access customer data in TiDB Cloud？
 
-PingCAP highest priority is securing our customer's data in TiDB Cloud, and we implement rigorous contractual,technical and organizational measures to protect TiDB Cloud confidentiality,integrity,and availability regardless of which TiDB Cloud region a customer has selected.
+The security of customer data is of the highest priority to TiDB Cloud. Regardless of which TiDB Cloud region you have selected, TiDB Cloud implements rigorous technical, contractual, and organizational measures to safeguard your data confidentiality, integrity, and availability.
 
 PingCAP has passed the standard certification and verification of SOC2 Type2, GDPR, PCI-DSS, and HIPAA, and invites third-party auditors to audit the certified standards every year. For details, see [PingCAP Trust Center](https://www.pingcap.com/trust-compliance-center)
 
