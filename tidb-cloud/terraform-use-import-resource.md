@@ -44,10 +44,10 @@ Here is an example on how to manage a LOCAL import task with import resource.
      }
    }
 
-   provider "tidbcloud" {
-     public_key = "fake_public_key"
-     private_key = "fake_private_key"
-   }
+    provider "tidbcloud" {
+      public_key = "fake_public_key"
+      private_key = "fake_private_key"
+    }
    
     resource "tidbcloud_import" "example_local" {
       project_id  = "your_project_id"
