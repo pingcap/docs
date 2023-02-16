@@ -52,7 +52,7 @@ You can also replicate and back up your data in multiple AWS or GCP regions. Pin
 
 When you assess the security and compliance of roles and responsibilities, it is crucial to differentiate between the security role of TiDB Cloud and the security role of your own in using TiDB Cloud. 
 
-PingCAP is the role of TiDB cloud platform service and management, mainly responsible for implementing and maintaining the sustainable, safe, stable, and compliant operation of TiDB cloud.
+TiDB Cloud is mainly responsible for implementing and maintaining the sustainable, safe, stable, and compliant operation of TiDB Cloud.
 
 As a customer, you are your database owner, and you take the administrative and operational role of your database. You are primarily responsible for ensuring the security and compliance of your TiDB cluster within the TiDB Cloud. And your role in TiDB Cloud also involves implementing and managing any security features and access control policies of your own TiDB cluster.
 
