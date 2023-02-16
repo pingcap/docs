@@ -364,6 +364,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 | TiKV  | `enable-statistics` | Deleted | This configuration item specifies whether to enable RocksDB statistics. Starting from v6.6.0, this item is deleted. RocksDB statistics are enabled for all clusters by default to help diagnostics. For details, see [#13942](https://github.com/tikv/tikv/pull/13942). |
 | TiKV | `storage.block-cache.shared` | Deleted | Starting from v6.6.0, this configuration item is deleted, and the block cache is enabled by default and cannot be disabled. For details, see [#12936](https://github.com/tikv/tikv/issues/12936). |
 | TiDB | [`enable-telemetry`](/tidb-configuration-file.md#enable-telemetry-new-in-v402) | Modified | Starting from v6.6.0, the default value changes from `true` to `false`, which means that telemetry is disabled by default in TiDB. |
+| TiKV  | [`rocksdb.defaultcf.block-size`](/tikv-configuration-file.md#block-size) and [`rocksdb.writecf.block-size`](/tikv-configuration-file.md#block-size)  |  Modified  |   The default values change from `64K` to `16K`.  |
 | TiKV | `storage.block-cache.block-cache-size` | Modified | Starting from v6.6.0, this configuration item is only used for calculating the default value of `storage.block-cache.capacity`. For details, see [#12936](https://github.com/tikv/tikv/issues/12936). |
 | PD | [`enable-telemetry`](/pd-configuration-file.md#enable-telemetry) | Modified | Starting from v6.6.0, the default value changes from `true` to `false`, which means that telemetry is disabled by default in TiDB Dasboard. |
 | TiFlash |  [`profile.default.max_memory_usage_for_all_queries`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)  |  Modified  |  Specifies the memory usage limit for the generated intermediate data in all queries. Starting from v6.6.0, the default value changes from `0` to `0.8`, which means the limit is 80% of the total memory. |
@@ -397,46 +398,45 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 - Support dynamically modifying [`store-io-pool-size`](/tikv-configuration-file.md#store-io-pool-size-new-in-v530). This facilitate more flexible TiKV performance tuning.
 - Remove the limit on `LIMIT` clauses, thus improving the execution performance.
 - Starting from v6.6.0, BR does not support restoring data to clusters earlier than v6.5.0.
-- TiDB no longer supports modifying column types on partitioned tables because of potential correctness issues.
+- Starting from v6.6.0, TiDB no longer supports modifying column types on partitioned tables because of potential correctness issues.
 
 ## Improvements
 
 + TiDB
 
     `<!-- sql-infra 5-->`
-    - 改进了 TTL 后台清理任务的调度机制。允许将单个表的清理任务拆分成若干子任务并调度到多个 TiDB 节点同时运行。 [#40361](https://github.com/pingcap/tidb/issues/40361) @[YangKeao](https://github.com/YangKeao)
-    - 优化了在设置了非默认的 delimiter 后运行 multi-statement 返回结果的列名的显示 [#39662](https://github.com/pingcap/tidb/issues/39662) @[mjonss](https://github.com/mjonss)
-    - 优化了生成警告信息时的执行效率 [#39702](https://github.com/pingcap/tidb/issues/39702) @[tiancaiamao](https://github.com/tiancaiamao)
-    - 为 ADD INDEX 支持分布式数据回填 (实验特性) [#37119](https://github.com/pingcap/tidb/issues/37119) @[zimulala](https://github.com/zimulala)
-    - 允许使用 CURDATE() 作为列的默认值 [#38356](https://github.com/pingcap/tidb/issues/38356) @[CbcWestwolf](https://github.com/CbcWestwolf)
+    - Improve the scheduling mechanism of TTL background cleaning tasks to allow the cleaning task of a single table to be split into several sub-tasks and scheduled to run on multiple TiDB nodes simultaneously [#40361](https://github.com/pingcap/tidb/issues/40361) @[YangKeao](https://github.com/YangKeao)
+    - Optimize the column name display of the result returned by running multi-statements after setting a non-default delimiter [#39662](https://github.com/pingcap/tidb/issues/39662) @[mjonss](https://github.com/mjonss)
+    - Optimize the execution efficiency of statements after warning messages are generated [#39702](https://github.com/pingcap/tidb/issues/39702) @[tiancaiamao](https://github.com/tiancaiamao)
+    - Support distributed data backfill for `ADD INDEX` (experimental) [#37119](https://github.com/pingcap/tidb/issues/37119) @[zimulala](https://github.com/zimulala)
+    - Support using `CURDATE()` as the default value of a column [#38356](https://github.com/pingcap/tidb/issues/38356) @[CbcWestwolf](https://github.com/CbcWestwolf)
 
     `<!-- sql-planner 3-->`
-    - 增加了 partial order prop push down 对 LIST 类型的分区表的支持 [#40273](https://github.com/pingcap/tidb/issues/40273) @[winoros](https://github.com/winoros)
-    - 增加了 hint 和 binding 冲突时的 warning 信息 [#40910](https://github.com/pingcap/tidb/issues/40910) @[Reminiscent](https://github.com/Reminiscent)
-    - 优化了 Plan Cache 策略避免在一些场景使用 Plan Cache 时产生不优的计划 [#40312](https://github.com/pingcap/tidb/pull/40312) [#40218](https://github.com/pingcap/tidb/pull/40218) [#40280](https://github.com/pingcap/tidb/pull/40280) [#41136](https://github.com/pingcap/tidb/pull/41136) [#40686](https://github.com/pingcap/tidb/pull/40686) @[qw4990](https://github.com/qw4990)
+    - `partial order prop push down` now supports the LIST-type partitioned tables [#40273](https://github.com/pingcap/tidb/issues/40273) @[winoros](https://github.com/winoros)
+    - Add error messages for conflicts between optimizer hints and execution plan bindings [#40910](https://github.com/pingcap/tidb/issues/40910) @[Reminiscent](https://github.com/Reminiscent)
+    - Optimize the plan cache strategy to avoid non-optimal plans when using plan cache in some scenarios [#40312](https://github.com/pingcap/tidb/pull/40312) [#40218](https://github.com/pingcap/tidb/pull/40218) [#40280](https://github.com/pingcap/tidb/pull/40280) [#41136](https://github.com/pingcap/tidb/pull/41136) [#40686](https://github.com/pingcap/tidb/pull/40686) @[qw4990](https://github.com/qw4990)
 
 + TiKV
 
     `<!-- 6 -->`
-    - 优化一些参数的默认值，当partitioned-raft-kv开启时block-cache调整为0.3可用内存(原来是0.45), region-split-size调整为10GB。当沿用raft-kv时且enable-region-bucket为true时，region-split-size默认调整为1GB [#12842](https://github.com/tikv/tikv/issues/12842) @[tonyxuqqi](https://github.com/tonyxuqqi)
-    - 支持在Raftstore异步写入中的优先级调度[#13730] (https://github.com/tikv/tikv/issues/13730) @[Connor1996](https://github.com/Connor1996)
-    - 支持TiKV在小于1 core的CPU下启动 [#13586] [#13752] [#14017](https://github.com/tikv/tikv/issues/13586) @[andreid-db](https://github.com/andreid-db)
-    - 修改rocksdb.defaultcf.block-size以及rocksdb.writecf.block-size的默认参数为16KB [#14052](https://github.com/tikv/tikv/issues/14052) @[tonyxuqqi](https://github.com/tonyxuqqi)
-    - raftstore: 优化slow score探测的新机制，加入新的`evict-slow-trend-scheduler` [#14131](https://github.com/tikv/tikv/issues/14131) @[innerr](https://github.com/innerr)
-    - rocksdb的block cache强制为共享的。不支持按照CF单独设置Block cache [#12936](https://github.com/tikv/tikv/issues/12936) @[busyjay](https://github.com/busyjay)
+    - Optimize the default values of some parameters in partitioned-raft-kv mode: the default value of the TiKV configuration item `storage.block-cache.capacity` is adjusted from 45% to 30%, and the default value of `region-split-size` is adjusted from `96MiB` adjusted to `10GiB`. When using raft-kv mode and `enable-region-bucket` is `true`, `region-split-size` is adjusted to 1GiB by default. [#12842](https://github.com/tikv/tikv/issues/12842) @[tonyxuqqi](https://github.com/tonyxuqqi)
+    - Support priority scheduling in Raftstore asynchronous writes [#13730] (https://github.com/tikv/tikv/issues/13730) @[Connor1996](https://github.com/Connor1996)
+    - Support starting TiKV on a CPU with less than 1 core [#13586](https://github.com/tikv/tikv/issues/13586) [#13752](https://github.com/tikv/tikv/issues/13752) [#14017](https://github.com/tikv/tikv/issues/13586) @[andreid-db](https://github.com/andreid-db)
+    - Optimize the new detection mechanism of Raftstore slow score and add `evict-slow-trend-scheduler` [#14131](https://github.com/tikv/tikv/issues/14131) @[innerr](https://github.com/innerr)
+    - Force the block cache of RocksDB to be shared and no longer support setting the block cache separately according to CF [#12936](https://github.com/tikv/tikv/issues/12936) @[busyjay](https://github.com/busyjay)
 
 + PD
 
     - Support limiting the global memory to alleviate the OOM problem (experimental) [#5827](https://github.com/tikv/pd/issues/5827) @[hnes](https://github.com/hnes)
     - Add the GC Tuner to alleviate the GC pressure (experimental) [#5827](https://github.com/tikv/pd/issues/5827) @[hnes](https://github.com/hnes)
-    - 新增 `balance-witness-scheduler` 调度器用于调度 witness [#5763](https://github.com/tikv/pd/pull/5763) @[ethercflow](https://github.com/ethercflow)
-    - 新加 `evict-slow-trend-scheduler` 调度器用于异常节点检测和调度 [#5808](https://github.com/tikv/pd/pull/5808) @[innerr](https://github.com/innerr)
-    - 新加 keyspace manager，支持对 keyspace 的管理 [#5293](https://github.com/tikv/pd/issues/5293) @[AmoebaProtozoa](https://github.com/AmoebaProtozoa)
+    - Add the `balance-witness-scheduler` scheduler to schedule witness [#5763](https://github.com/tikv/pd/pull/5763) @[ethercflow](https://github.com/ethercflow)
+    - Add the `evict-slow-trend-scheduler` scheduler to detect and schedule abnormal nodes [#5808](https://github.com/tikv/pd/pull/5808) @[innerr](https://github.com/innerr)
+    - Add the keyspace manager to manage keyspace [#5293](https://github.com/tikv/pd/issues/5293) @[AmoebaProtozoa](https://github.com/AmoebaProtozoa)
 
 + TiFlash
 
     - Support an independent MVCC bitmap filter that decouples the MVCC filtering operations in the TiFlash data scanning process, which provides the foundation for future optimization of the data scanning process [#6296](https://github.com/pingcap/tiflash/issues/6296) @[JinheLin](https://github.com/JinheLin) **tw@qiancai**
-    - 减少 TiFlash 在没有查询的情况下的内存使用，最高减少 30% [#6589](https://github.com/pingcap/tiflash/pull/6589) @[hongyunyan](https://github.com/hongyunyan)
+    - Reduce the memory usage of TiFlash up to 30% when there is no query [#6589](https://github.com/pingcap/tiflash/pull/6589) @[hongyunyan](https://github.com/hongyunyan)
 
 + Tools
 
