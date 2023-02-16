@@ -27,7 +27,7 @@ ticloud import cancel --project-id <project-id> --cluster-id <cluster-id> --impo
 
 ## Flags
 
-In non-interactive mode, you need to manually enter required flags. In interactive mode, you can just follow CLI prompts to fill in them.
+In non-interactive mode, you need to manually enter the required flags. In interactive mode, you can just follow CLI prompts to fill them in.
 
 | Flag                    | Description                           | Required | Note                                               |
 |-------------------------|---------------------------------------|----------|-----------------------------------------------------|
@@ -41,7 +41,7 @@ In non-interactive mode, you need to manually enter required flags. In interacti
 
 | Flag                 | Description                                                                               | Required | Note                                                                                                                    |
 |----------------------|-------------------------------------------------------------------------------------------|----------|--------------------------------------------------------------------------------------------------------------------------|
-| --no-color           | Disables color in output.                                                                  | No       | Only works in the non-interactive mode. In the interactive mode, disabling color might not work with some UI components. |
+| --no-color           | Disables color in output.                                                                  | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components. |
 | -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Works in both non-interactive and interactive modes.                                                                      |
 
 ## Feedback

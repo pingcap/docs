@@ -30,6 +30,12 @@ Use the default user to connect to a TiDB Cloud cluster in non-interactive mode:
 ticloud connect -p <project-id> -c <cluster-id>
 ```
 
+Use the default user to connect to the TiDB Cloud cluster with password in non-interactive mode:
+
+```shell
+ticloud connect -p <project-id> -c <cluster-id> --password <password>
+```
+
 Use a specific user to connect to the TiDB Cloud cluster in non-interactive mode:
 
 ```shell
@@ -38,20 +44,21 @@ ticloud connect -p <project-id> -c <cluster-id> -u <user-name>
 
 ## Flags
 
-In non-interactive mode, you need to manually enter required flags. In interactive mode, you can just follow CLI prompts to fill in them.
+In non-interactive mode, you need to manually enter the required flags. In interactive mode, you can just follow CLI prompts to fill them in.
 
-| Flag                    | Description                                      | Required | Note                                                 |
-|-------------------------|--------------------------------------------------|----------|------------------------------------------------------|
-| -c, --cluster-id string | Cluster ID                                       | Yes      | Only works in non-interactive mode.                  |
-| -h, --help              | Help information for this command                | No       | Works in both non-interactive and interactive modes. |
-| -p, --project-id string | Project ID                                       | Yes      | Only works in non-interactive mode.                  |
-| -u, --user string       | A specific user for login | No       | Only works in non-interactive mode.                  |
+| Flag                    | Description                       | Required | Note                                                 |
+|-------------------------|-----------------------------------|----------|------------------------------------------------------|
+| -c, --cluster-id string | Cluster ID                        | Yes      | Only works in non-interactive mode.                  |
+| -h, --help              | Help information for this command | No       | Works in both non-interactive and interactive modes. |
+| --password              | The password of the user          | No       | Only works in non-interactive mode.                  |
+| -p, --project-id string | Project ID                        | Yes      | Only works in non-interactive mode.                  |
+| -u, --user string       | A specific user for login         | No       | Only works in non-interactive mode.                  |
 
 ## Inherited flags
 
 | Flag                 | Description                                                                                          | Required | Note                                                                                                                     |
 |----------------------|------------------------------------------------------------------------------------------------------|----------|--------------------------------------------------------------------------------------------------------------------------|
-| --no-color           | Disables color in output.                                                                            | No       | Only works in the non-interactive mode. In the interactive mode, disabling color might not work with some UI components. |
+| --no-color           | Disables color in output.                                                                            | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components. |
 | -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Works in both non-interactive and interactive modes.                                                                     |
 
 ## Feedback
