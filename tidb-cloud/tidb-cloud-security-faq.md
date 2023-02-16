@@ -3,7 +3,7 @@ title: Security FAQs
 summary: Learn about the most frequently asked questions (FAQs) relating to TiDB Cloud security.
 ---
 
-#  Security FAQs
+# Security FAQs
 
 <!-- markdownlint-disable MD026 -->
 
