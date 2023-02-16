@@ -65,7 +65,7 @@ When planning your cluster size, you can estimate the number of TiDB nodes accor
 
 In the formula, you need to calculate `node num = ceil(overall expected performance ÷ performance per node` first to get a rough node number, and then use the corresponding performance deviation coefficient to get the final result of the node number.
 
-For example, your overall expected performance is 100,000 QPS under a mixed workload, and you want to use 8 vCPU, 16 GiB TiDB nodes. Then you can calculate an estimated number of TiDB nodes as follows:
+For example, your overall expected performance is 100,000 QPS under a mixed workload, and you want to use 8 vCPU, 16 GiB TiDB nodes. Then you can calculate a rough number of TiDB nodes as follows:
 
 `node num = ceil(100,000 ÷ 15,500) = 7`
 
@@ -150,7 +150,7 @@ When planning your cluster size, you can estimate the number of TiKV nodes accor
 
 In the formula, you need to calculate `node num = ceil(overall expected performance ÷ performance per node` first to get a rough node number, and then use the corresponding performance deviation coefficient to get the final result of the node number.
 
-For example, your overall expected performance is 100,000 QPS under a mixed workload, and you want to use 8 vCPU, 32 GiB TiKV nodes. Then the number of TiKV nodes can be calculated as follows:
+For example, your overall expected performance is 100,000 QPS under a mixed workload, and you want to use 8 vCPU, 32 GiB TiKV nodes. Then you can calculate a rough number of TiKV nodes as follows:
 
 `node num = ceil(100,000 / 17,800 ) = 6`
 
