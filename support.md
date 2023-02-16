@@ -7,7 +7,7 @@ summary: Find support resources if you encounter a problem using TiDB.
 
 If you encounter a problem when you use TiDB, you can reach out for support from PingCAP or the TiDB community via the following methods:
 
-+ Get support from PingCAP (requires subscription to TiDB Enterprise Edition):
++ Get support from PingCAP (requires subscription to [TiDB Enterprise Edition](https://www.pingcap.com/tidb-enterprise/)):
 
     - [Submit a request](https://support.pingcap.com/hc/en-us)
 
