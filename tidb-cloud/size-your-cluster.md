@@ -39,7 +39,10 @@ The supported node sizes include the following:
 ### TiDB node quantity
 
 In general, the TiDB performance increases linearly with the number of TiDB nodes. However, when the number of TiDB nodes exceeds 8, the performance increment becomes slightly less than linearly proportional. For each additional 8 nodes, the performance deviation coefficient is about 5%.
-For example, when there are 9 TiDB nodes, the overall performance is `9 * (1 - 5%) = 8.55` times the performance of a single TiDB node. And when there are 16 TiDB nodes, the overall performance is `16 * (1 - 10%) = 14.4` times the performance of a single TiDB node.
+For example:
+
+- When there are 9 TiDB nodes, the performance deviation coefficient is about 5%, so the TiDB performance is about `9 * (1 - 5%) = 8.55` times the performance of a single TiDB node. 
+- When there are 16 TiDB nodes, the performance deviation coefficient is about 10%, so the overall performance is `16 * (1 - 10%) = 14.4` times the performance of a single TiDB node.
 
 Different workloads involve queries with varying read-write ratios and have different performance in the specified latency for a TiDB node.
 The performance of the 8 vCPU, 16 GiB TiDB node in different workloads:
