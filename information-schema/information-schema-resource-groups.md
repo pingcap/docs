@@ -32,7 +32,7 @@ DESC resource_groups;
 | RU_PER_SEC | bigint(21)  | YES  |      | NULL    |       |
 | BURSTABLE  | varchar(3)  | YES  |      | NULL    |       |
 +------------+-------------+------+------+---------+-------+
-4 rows in set (0.00 sec)
+3 rows in set (0.00 sec)
 ```
 
 ## Examples
