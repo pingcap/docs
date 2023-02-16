@@ -519,37 +519,37 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
     `<!-- planner 4-->`
     - 修复了非法的 datetime 值导致 analyze 失败的问题 [#39336](https://github.com/pingcap/tidb/issues/39336) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
-    - 修复了由虚拟列引发的 `can't find proper physical plan` 问题 [#41014](https://github.com/pingcap/tidb/issues/41014) @[AilinKid](https://github.com/AilinKid)
-    - 修复了当动态裁剪模式下的分区表有 global binding 时，TiDB 重启失败的问题 [#40368](https://github.com/pingcap/tidb/issues/40368) @[Yisaer](https://github.com/Yisaer)
-    - 修复了 auto analyze 导致 graceful shutdown 耗时的问题 [#40038](https://github.com/pingcap/tidb/issues/40038) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
+    - Fix the `can't find proper physical plan` issue caused by virtual columns [#41014](https://github.com/pingcap/tidb/issues/41014) @[AilinKid](https://github.com/AilinKid)
+    - Fix the issue that TiDB cannot restart after global bindings are created for partition tables in dynamic trimming mode [#40368](https://github.com/pingcap/tidb/issues/40368) @[Yisaer](https://github.com/Yisaer)
+    - Fix the issue that auto analyze causes graceful shutdown to take a long time [#40038](https://github.com/pingcap/tidb/issues/40038) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
 
     `<!-- compute 2-->`
-    - 修复了 IndexMerge 算子在触发内存限制行为时可能导致 TiDB server 崩溃的问题[#41036](https://github.com/pingcap/tidb/pull/41036) @[guo-shaoge](https://github.com/guo-shaoge)
-    - 修复了在分区表上执行 `SELECT * FROM table_name LIMIT 1` 查询时，执行速度慢的问题 [#40741](https://github.com/pingcap/tidb/pull/40741) @[solotzg](https://github.com/solotzg)
+    - Fix the panic of the TiDB server when the IndexMerge operator triggering memory limiting behaviors [#41036](https://github.com/pingcap/tidb/pull/41036) @[guo-shaoge](https://github.com/guo-shaoge)
+    - Fix the issue that the `SELECT * FROM table_name LIMIT 1` query on partitioned tables is slow [#40741](https://github.com/pingcap/tidb/pull/40741) @[solotzg](https://github.com/solotzg)
     `<!-- transaction 1-->`
-    - 修复了过期的 region 缓存可能残留导致的内存泄漏和性能下降问题 [#40461](https://github.com/pingcap/tidb/issues/40461) @[sticnarf](https://github.com/sticnarf)
+    - Clear expired region cache regularly to avoid memory leak and performance degradation [#40461](https://github.com/pingcap/tidb/issues/40461) @[sticnarf](https://github.com/sticnarf)
 
 + TiKV
 
     `<!-- 5 -->`
-    - 修复转换 `const Enum` 类型到其他类型时报错的问题 [#14156](https://github.com/tikv/tikv/issues/14156) @[wshwsh12](https://github.com/wshwsh12)
-    - 修复 Resolved TS 导致网络流量升高的问题 [#14098](https://github.com/tikv/tikv/issues/14092) @[overvenus] (https://github.com/overvenus)
-    - 修复 TiKV 在 CPU 核数小于 1 时无法启动的问题  [#13586] [#13752] [#14017](https://github.com/tikv/tikv/issues/13586) @[andreid-db](https://github.com/andreid-db)
+    - Fix an error that occurs when casting the `const Enum` type to other types [#14156](https://github.com/tikv/tikv/issues/14156) @[wshwsh12](https://github.com/wshwsh12)
+    - Fix the issue that Resolved TS causes higher network traffic [#14098](https://github.com/tikv/tikv/issues/14092) @[overvenus] (https://github.com/overvenus)
+    - Fix the issue that TiKV cannot restart when the number of CPU cores is less than 1  [#13586] [#13752] [#14017](https://github.com/tikv/tikv/issues/13586) @[andreid-db](https://github.com/andreid-db)
     - copr: 修复old collation时Like中的 _ pattern的行为 [#13785](https://github.com/tikv/tikv/pull/13785) @[Yangkeao](https://github.com/Yangkeao)
-    (dup: release-6.1.4.md > Bug 修复> TiKV)- 修复 TiDB 中事务在执行悲观 DML 失败后，再执行其他 DML 时，如果 TiDB 和 TiKV 之间存在网络故障，可能会造成数据不一致的问题 [#14038](https://github.com/tikv/tikv/issues/14038) @[MyonKeminta](https://github.com/MyonKeminta) @[myonkeminta](https://github.com/myonkeminta)
+    (dup: release-6.1.4.md > Bug 修复> TiKV)- Fix the data inconsistency issue caused by network failure between TiDB and TiKV during the execution of a DML after a failed pessimistic DML [#14038](https://github.com/tikv/tikv/issues/14038) @[MyonKeminta](https://github.com/MyonKeminta) @[myonkeminta](https://github.com/myonkeminta)
 
 + PD
     `<!-- 4 -->`
-    - 修复 Region Scatter 任务会生成非预期的多余副本的问题 [#5909](https://github.com/tikv/pd/issues/5909) @[HundunDM](https://github.com/HunDunDM)
-    - 修复 Online Unsafe Recovery 功能在 `auto-detect` 模式下卡住并超时的问题 [#5753](https://github.com/tikv/pd/issues/5753) @[Connor1996](https://github.com/Connor1996)
-    - 修复 `replace-down-peer` 在特定条件下执行变慢的问题 [#5788](https://github.com/tikv/pd/issues/5788) @[HundunDM](https://github.com/HunDunDM)
-    - 修复调用 `ReportMinResolvedTS` 过高的情况下造成 PD OOM 的问题  [#5965](https://github.com/tikv/pd/issues/5965) @[HundunDM](https://github.com/HunDunDM)
+    - Fix the issue that the Region Scatter task generates redundant replicas unexpectedly [#5909](https://github.com/tikv/pd/issues/5909) @[HundunDM](https://github.com/HunDunDM)
+    - Fix the issue that the Online Unsafe Recovery feature would get stuck and time out in `auto-detect` mode [#5753](https://github.com/tikv/pd/issues/5753) @[Connor1996](https://github.com/Connor1996)
+    - Fix the issue that the execution `replace-down-peer` slows down under certain conditions [#5788](https://github.com/tikv/pd/issues/5788) @[HundunDM](https://github.com/HunDunDM)
+    - Fix the PD OOM issue that occurs when the calls of `ReportMinResolvedTS` is too frequent [#5965](https://github.com/tikv/pd/issues/5965) @[HundunDM](https://github.com/HunDunDM)
 
 + TiFlash
     `<!-- 3 -->`
-    - 修复查询 TiFlash 相关的系统表可能会卡住的问题 [#6745](https://github.com/pingcap/tiflash/pull/6745) @[lidezhu](https://github.com/lidezhu)
-    - 修复半连接在计算笛卡尔积时，使用内存过量的问题 [#6730](https://github.com/pingcap/tiflash/issues/6730) @[gengliqi](https://github.com/gengliqi)
-    - 修复了 decimal 进行除法运算时不舍入的问题 [#6393](https://github.com/pingcap/tiflash/issues/6393) @[LittleFall](https://github.com/LittleFall)
+    - Fix the issue that querying TiFlash-related system tables might get stuck [#6745](https://github.com/pingcap/tiflash/pull/6745) @[lidezhu](https://github.com/lidezhu)
+    - Fix the issue that semi-joins use excessive memory when calculating Cartesian products [#6730](https://github.com/pingcap/tiflash/issues/6730) @[gengliqi](https://github.com/gengliqi)
+    - Fix the issue that the result of division operation on the DECIMAL data type is not rounded [#6393](https://github.com/pingcap/tiflash/issues/6393) @[LittleFall](https://github.com/LittleFall)
 
 + Tools
 
