@@ -482,11 +482,11 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 + TiDB
 
     `<!-- sql-infra 41-->`
-    - Fix the issue that the statistics collection task fails due to an incorrect `DATETIME` value [#39336](https://github.com/pingcap/tidb/issues/39336) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
-    - Fix the issue that `stats_meta` is not created after creating a table [#38189](https://github.com/pingcap/tidb/issues/38189) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
-    - Optimize the error message when deleting a column that a partitioned table depends on [#38739](https://github.com/pingcap/tidb/issues/38739) @[jiyfhust](https://github.com/jiyfhust)
-    - Fix the issue of frequent write conflicts in transactions when performing DDL data backfill [#24427](https://github.com/pingcap/tidb/issues/24427) @[mjonss](https://github.com/mjonss)
-    - Add a retry mechanism for `FLASHBACK CLUSTER` after failing to check the `min-resolved-ts` [#39836](https://github.com/pingcap/tidb/issues/39836) @[Defined2014](https://github.com/Defined2014)
+    - Fix the issue that a statistics collection task fails due to an incorrect `datetime` value [#39336](https://github.com/pingcap/tidb/issues/39336) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
+    - Fix the issue that `stats_meta` is not created following table creation [#38189](https://github.com/pingcap/tidb/issues/38189) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
+    - Refine the error message reported when a column that a partitioned table depends on is deleted [#38739](https://github.com/pingcap/tidb/issues/38739) @[jiyfhust](https://github.com/jiyfhust)
+    - Fix frequent write conflicts in transactions when performing DDL data backfill [#24427](https://github.com/pingcap/tidb/issues/24427) @[mjonss](https://github.com/mjonss)
+    - Add a mechanism that `FLASHBACK CLUSTER` retries when it fails to check the `min-resolved-ts` [#39836](https://github.com/pingcap/tidb/issues/39836) @[Defined2014](https://github.com/Defined2014)
     - Fix the issue that sometimes an index cannot be created for an empty table using injest mode [#39641](https://github.com/pingcap/tidb/issues/39641) @[tangenta](https://github.com/tangenta)
     - Fix the issue that `wait_ts` in the slow query log is the same for different SQL statements within the same transaction [#39713](https://github.com/pingcap/tidb/issues/39713) @[TonsnakeLin](https://github.com/TonsnakeLin)
     - Fix the issue that the `Assertion Failed` error is reported when adding a column during the process of deleting a row record [#39570](https://github.com/pingcap/tidb/issues/39570) @[wjhuang2016](https://github.com/wjhuang2016)
