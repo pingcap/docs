@@ -192,9 +192,17 @@ Dynamic privileges include:
 
 * `BACKUP_ADMIN`
 * `RESTORE_ADMIN`
+* `SYSTEM_USER`
+* `SYSTEM_VARIABLES_ADMIN`
 * `ROLE_ADMIN`
 * `CONNECTION_ADMIN`
-* `SYSTEM_VARIABLES_ADMIN`
+* `PLACEMENT_ADMIN` privilege owners can create, modify, and remove placement policies.
+* `DASHBOARD_CLIENT` privilege owners can log in to the TiDB-Dashboard.
+* `RESTRICTED_TABLES_ADMIN` privilege owners can see system tables when SEM is enabled
+* `RESTRICTED_STATUS_ADMIN` privilege owners can see all status vars when SEM is enabled.
+* `RESTRICTED_VARIABLES_ADMIN` privilege owners can see all variables when SEM is enabled.
+* `RESTRICTED_USER_ADMIN` privilege owners cannot have their access revoked by SUPER users.
+* `RESTRICTED_CONNECTION_ADMIN` privilege owners cannot be killed by PROCESS/CONNECTION_ADMIN privilege
 * `RESTRICTED_REPLICA_WRITER_ADMIN` allows privilege owners to perform write or update operations without being affected when the read-only mode is enabled in the TiDB cluster. For details, see [`tidb_restricted_read_only`](/system-variables.md#tidb_restricted_read_only-new-in-v520).
 
 To see the full set of dynamic privileges, execute the `SHOW PRIVILEGES` statement. Because plugins are permitted to add new privileges, the list of privileges that are assignable might differ based on your TiDB installation.
