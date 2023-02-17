@@ -425,7 +425,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
     `<!-- 6 -->`
     - Optimize the default values of some parameters in partitioned-raft-kv mode: the default value of the TiKV configuration item `storage.block-cache.capacity` is adjusted from 45% to 30%, and the default value of `region-split-size` is adjusted from `96MiB` adjusted to `10GiB`. When using raft-kv mode and `enable-region-bucket` is `true`, `region-split-size` is adjusted to 1GiB by default. [#12842](https://github.com/tikv/tikv/issues/12842) @[tonyxuqqi](https://github.com/tonyxuqqi)
     - Support priority scheduling in Raftstore asynchronous writes [#13730] (https://github.com/tikv/tikv/issues/13730) @[Connor1996](https://github.com/Connor1996)
-    - Support starting TiKV on a CPU with less than 1 core [#13586](https://github.com/tikv/tikv/issues/13586) [#13752](https://github.com/tikv/tikv/issues/13752) [#14017](https://github.com/tikv/tikv/issues/13586) @[andreid-db](https://github.com/andreid-db)
+    - Support starting TiKV on a CPU with less than 1 core [#13586](https://github.com/tikv/tikv/issues/13586) [#13752](https://github.com/tikv/tikv/issues/13752) [#14017](https://github.com/tikv/tikv/issues/14017) @[andreid-db](https://github.com/andreid-db)
     - Optimize the new detection mechanism of Raftstore slow score and add `evict-slow-trend-scheduler` [#14131](https://github.com/tikv/tikv/issues/14131) @[innerr](https://github.com/innerr)
     - Force the block cache of RocksDB to be shared and no longer support setting the block cache separately according to CF [#12936](https://github.com/tikv/tikv/issues/12936) @[busyjay](https://github.com/busyjay)
 
@@ -479,7 +479,6 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
     + Sync-diff-inspector
 
         - Add a new parameter `skip-non-existing-table` to control whether to skip checking upstream and downstream data consistency when tables in the downstream do not exist in the upstream [#692](https://github.com/pingcap/tidb-tools/issues/692) @[lichunzhu](https://github.com/lichunzhu) @[liumengya94](https://github.com/liumengya94) **tw@shichun-0415**
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
 
 ## Bug fixes
 
@@ -575,30 +574,30 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
     + TiCDC
 
         (dup: release-6.1.4.md > Bug 修复> Tools> TiCDC)- Fix the issue that `transaction_atomicity` and `protocol` cannot be updated via the configuration file [#7935](https://github.com/pingcap/tiflow/issues/7935) @[CharlesCheung96](https://github.com/CharlesCheung96)
-        - Fix the issue that precheck is not performed on the storage path of redo log [#6335](https://github.com/pingcap/tiflow/issues/6335)
-        - Fix the issue of insufficient duration that redo log can tolerate for S3 storage failure [#8089](https://github.com/pingcap/tiflow/issues/8089)
-        - 修复 changefeed 在 tikv、CDC 节点扩缩容特殊场景下卡住的问题。 [#8197](https://github.com/pingcap/tiflow/issues/8197)
-        - Fix the issue of too large traffic among TiKV nodes [#14092](https://github.com/tikv/tikv/issues/14092)
-        - Fix the performance issues of TiCDC in terms of CPU usage, memory control, and throughput when the pull-based sink is enabled [#8142](https://github.com/pingcap/tiflow/issues/8142) [#8157](https://github.com/pingcap/tiflow/issues/8157) [#8001](https://github.com/pingcap/tiflow/issues/8001) [#5928](https://github.com/pingcap/tiflow/issues/5928)
+        - Fix the issue that precheck is not performed on the storage path of redo log [#6335](https://github.com/pingcap/tiflow/issues/6335) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        - Fix the issue of insufficient duration that redo log can tolerate for S3 storage failure [#8089](https://github.com/pingcap/tiflow/issues/8089)  @[CharlesCheung96](https://github.com/CharlesCheung96)
+        - 修复 changefeed 在 tikv、CDC 节点扩缩容特殊场景下卡住的问题。 [#8197](https://github.com/pingcap/tiflow/issues/8197) @[hicqu](https://github.com/hicqu)
+        - Fix the issue of too high traffic among TiKV nodes [#14092](https://github.com/tikv/tikv/issues/14092) @[overvenus](https://github.com/overvenus)
+        - Fix the performance issues of TiCDC in terms of CPU usage, memory control, and throughput when the pull-based sink is enabled [#8142](https://github.com/pingcap/tiflow/issues/8142) [#8157](https://github.com/pingcap/tiflow/issues/8157) [#8001](https://github.com/pingcap/tiflow/issues/8001) [#5928](https://github.com/pingcap/tiflow/issues/5928) @[hicqu](https://github.com/hicqu) @[hi-rustin](https://github.com/hi-rustin)
 
     + TiDB Data Migration (DM)
 
         `<!-- 4 -->`
-        - Fix the issue that the `binlog-schema delete` command fails to execute [#7373](https://github.com/pingcap/tiflow/issues/7373) @[liumengya94]
-        - Fix the issue that the checkpoint does not advance when the last binlog is a skipped DDL [#8175](https://github.com/pingcap/tiflow/issues/8175) @[D3Hunter]
-        (dup: release-6.1.4.md > Bug 修复> Tools> TiDB Data Migration (DM))- Fix a bug that when the expression filters of both "update" and "non-update" types are specified in one table, all `UPDATE` statements are skipped [#7831](https://github.com/pingcap/tiflow/issues/7831) @[lance6716](https://github.com/lance6716) @[lance6716]
-        (dup: release-6.1.4.md > Bug 修复> Tools> TiDB Data Migration (DM))- Fix a bug that when only one of `update-old-value-expr` or `update-new-value-expr` is set for a table, the filter rule does not take effect or DM panics [#7774](https://github.com/pingcap/tiflow/issues/7774) @[lance6716](https://github.com/lance6716) @[lance6716]
+        - Fix the issue that the `binlog-schema delete` command fails to execute [#7373](https://github.com/pingcap/tiflow/issues/7373) @[liumengya94](https://github.com/liumengya94)
+        - Fix the issue that the checkpoint does not advance when the last binlog is a skipped DDL [#8175](https://github.com/pingcap/tiflow/issues/8175) @[D3Hunter](https://github.com/D3Hunter)
+        (dup: release-6.1.4.md > Bug 修复> Tools> TiDB Data Migration (DM))- Fix a bug that when the expression filters of both "update" and "non-update" types are specified in one table, all `UPDATE` statements are skipped [#7831](https://github.com/pingcap/tiflow/issues/7831) @[lance6716](https://github.com/lance6716)
+        (dup: release-6.1.4.md > Bug 修复> Tools> TiDB Data Migration (DM))- Fix a bug that when only one of `update-old-value-expr` or `update-new-value-expr` is set for a table, the filter rule does not take effect or DM panics [#7774](https://github.com/pingcap/tiflow/issues/7774) @[lance6716](https://github.com/lance6716)
 
     + TiDB Lightning
 
         - Fix the issue that TiDB Lightning timeout hangs due to TiDB restart in some scenarios [#33714](https://github.com/pingcap/tidb/issues/33714) @[lichunzhu](https://github.com/lichunzhu) **tw@shichun-0415**
-        - Fix the issue that TiDB Lightning might incorrectly skip conflict resolution when all but the last TiDB Lightning instance encounters a local duplicate record during a parallel import [#40923](https://github.com/pingcap/tidb/issues/40923) @[lichunzhu]
-        - Fix the issue that precheck cannot accurately detect the presence of a running TiCDC in the target cluster [#41040](https://github.com/pingcap/tidb/issues/41040) @[lance6716]
-        - Fix the issue that TiDB Lightning panics in the split-region phase [#40934](https://github.com/pingcap/tidb/issues/40934) @[lance6716]
-        - Fix the issue that the conflict resolution logic (`duplicate-resolution`) might lead to inconsistent checksums [#40657](https://github.com/pingcap/tidb/issues/40657) @[gozssky]
-        - Fix a possible OOM problem when there is an unclosed delimiter in the data file [#40400](https://github.com/pingcap/tidb/issues/40400) @[buchuitoudegou]
-        - Fix the issue that the file offset in the error report exceeds the file size [#40034](https://github.com/pingcap/tidb/issues/40034) @[buchuitoudegou]
-        - Fix an issue with the new version of PDClient that might cause parallel import to fail [#40493](https://github.com/pingcap/tidb/issues/40493) @[AmoebaProtozoa]
+        - Fix the issue that TiDB Lightning might incorrectly skip conflict resolution when all but the last TiDB Lightning instance encounters a local duplicate record during a parallel import [#40923](https://github.com/pingcap/tidb/issues/40923) @[lichunzhu](https://github.com/lichunzhu)
+        - Fix the issue that precheck cannot accurately detect the presence of a running TiCDC in the target cluster [#41040](https://github.com/pingcap/tidb/issues/41040) @[lance6716](https://github.com/lance6716)
+        - Fix the issue that TiDB Lightning panics in the split-region phase [#40934](https://github.com/pingcap/tidb/issues/40934) @[lance6716](https://github.com/lance6716)
+        - Fix the issue that the conflict resolution logic (`duplicate-resolution`) might lead to inconsistent checksums [#40657](https://github.com/pingcap/tidb/issues/40657) @[gozssky](https://github.com/gozssky)
+        - Fix a possible OOM problem when there is an unclosed delimiter in the data file [#40400](https://github.com/pingcap/tidb/issues/40400) @[buchuitoudegou](https://github.com/buchuitoudegou)
+        - Fix the issue that the file offset in the error report exceeds the file size [#40034](https://github.com/pingcap/tidb/issues/40034) @[buchuitoudegou](https://github.com/buchuitoudegou)
+        - Fix an issue with the new version of PDClient that might cause parallel import to fail [#40493](https://github.com/pingcap/tidb/issues/40493) @[AmoebaProtozoa](https://github.com/AmoebaProtozoa)
         (dup: release-6.1.4.md > Bug 修复> Tools> TiDB Lightning)- Fix the issue that TiDB Lightning prechecks cannot find dirty data left by previously failed imports [#39477](https://github.com/pingcap/tidb/issues/39477) @[dsdashun](https://github.com/dsdashun) @[dsdashun]
 
 ## Contributors
