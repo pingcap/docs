@@ -1,7 +1,6 @@
 ---
 title: TiDB Operator
 summary: Learn about TiDB Operator, the automatic operation system for TiDB clusters on Kubernetes.
-aliases: ['/docs/tidb-in-kubernetes/dev/']
 ---
 
 # TiDB Operator
