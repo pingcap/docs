@@ -22,7 +22,7 @@ Customer data includes data that a customer or their consumers store in TiKV or 
 
 Customer data does not include TiDB Cloud operational, diagnosis, or metadata:
 
-- Operational data: TiDB Cloud control plane logs, runtime metrics, usage policies, and service ticket-related information
+- Operational data: TiDB Cloud control plane logs, runtime metrics, usage policies, and service ticket-related information.
 - Diagnosis data: TiDB cluster logs (including logs, error logs, and slow query logs), metrics (including usage and runtime metrics), configuration (including TiDB cluster configuration items, node IP addresses, and values), monitoring, and alert-related information.
 - Metadata: TiDB Cloud account registration information (including email, company name, phone number, and IP address), permissions, endpoint services, devices, versions, and tag-related information.
 
@@ -60,7 +60,7 @@ As a customer, you are your database owner, and you take the administrative and 
 
 The security of customer data is of the highest priority to TiDB Cloud. Regardless of which TiDB Cloud region you have selected, TiDB Cloud implements rigorous technical, contractual, and organizational measures to safeguard your data confidentiality, integrity, and availability.
 
-PingCAP has passed the standard certification and verification of SOC2 Type2, GDPR, PCI-DSS, and HIPAA, and invites third-party auditors to audit the certified standards every year. For details, see [PingCAP Trust Center](https://www.pingcap.com/trust-compliance-center).
+PingCAP has passed the standard certification and verification of SOC2 Type II, General Data Protection Regulation (GDPR), Payment Card Industry Data Security Standard (PCI DSS), and Health Insurance Portability and Accountability Act of 1996 (HIPAA), and invites third-party auditors to audit the certified standards every year. For details, see [PingCAP Trust Center](https://www.pingcap.com/trust-compliance-center).
 
 In TiDB Cloud, the data access security measures includes the following:
 
