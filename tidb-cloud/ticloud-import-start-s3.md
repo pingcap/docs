@@ -37,7 +37,7 @@ ticloud import start s3 --project-id <project-id> --cluster-id <cluster-id> --aw
 
 ## Flags
 
-In non-interactive mode, you need to manually enter required flags. In interactive mode, you can just follow CLI prompts to fill in them.
+In non-interactive mode, you need to manually enter the required flags. In interactive mode, you can just follow CLI prompts to fill them in.
 
 | Flag                    | Description                                              | Required | Note                             |
 |-------------------------|----------------------------------------------------------|----------|-----------------------------------|

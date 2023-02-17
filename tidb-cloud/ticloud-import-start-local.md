@@ -37,7 +37,7 @@ ticloud import start local <file-path> --project-id <project-id> --cluster-id <c
 
 ## Flags
 
-In non-interactive mode, you need to manually enter required flags. In interactive mode, you can just follow CLI prompts to fill in them.
+In non-interactive mode, you need to manually enter the required flags. In interactive mode, you can just follow CLI prompts to fill them in.
 
 | Flag                     | Description                          | Required | Note                             |
 |--------------------------|--------------------------------------|----------|-----------------------------------|
