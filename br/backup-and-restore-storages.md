@@ -1,12 +1,6 @@
 ---
 title: Backup Storages
-<<<<<<< HEAD
-summary: Describes the storage URL format used in TiDB backup and restore.
-=======
 summary: Describes the storage URI format used in TiDB backup and restore.
-aliases: ['/docs/dev/br/backup-and-restore-storages/','/tidb/dev/backup-storage-S3/','/tidb/dev/backup-storage-azblob/','/tidb/dev/backup-storage-gcs/','/tidb/dev/external-storage/']
->>>>>>> f6ac04344 (lightning/br/dumpling: add session-token to external storage url (#12442))
----
 
 # Backup Storages
 
