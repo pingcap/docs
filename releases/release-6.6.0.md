@@ -23,55 +23,55 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 </thead>
 <tbody>
   <tr>
-    <td rowspan="4">Scalability and Performance<br /></td>
-    <td>TiKV support <a href="https://docs.pingcap.com/tidb/v6.6/system-variables#tidb_store_batch_size" target="_blank">batch aggregating data requests</a></td>
-    <td>This enhancement significantly reduces total RPC requests in TiKV batch-get operations. In situations where data is highly dispersed and the gRPC thread pool has insufficient resource, batching coprocessor requests can improve performance by more than 50%.</td>
+    <td rowspan="3">Scalability and Performance<br /></td>
+    <td>TiKV supports Partitioned-Raft-KV storage engine (experimental)</td>
+    <td>TiKV introduces the next-generation storage engine Partitioned-Raft-KV, and each 'Region' uses an independent RocksDB instance, which can easily expand the storage capacity of the cluster from TB to PB and provide more stable write latency and stronger scalability.</td>
   </tr>
   <tr>
-      <td>TiKV supports the Partitioned-Raft-KV storage engine</td>
-      <td>TiKV introduces the next-generation storage engine Partitioned-Raft-KV. Each Region uses an independent RocksDB instance, which can easily expand the storage capacity of the cluster from TB to PB and provide more stable write latency and stronger expansion capabilities.</td>
+    <td>TiKV support batch aggregate data requests</td>
+    <td>This enhancement significantly reduces total RPCs in TiKV batch get operations. In situations where data is highly dispersed and the gRPC thread pool is stretched, batching coprocessor requests can improve performance by 50+%.</td>
   </tr>
   <tr>
-    <td><a href="https://docs.pingcap.com/tidb/v6.6/explain-mpp#mpp-version-and-exchange-data-compression" target="_blank">TiFlash supports compression exchange</a></td>
-    <td>TiFlash supports data compression to improve the efficiency of parallel data exchange, and the overall TPC-H performance improves by roughly 10%, which can save more than 50% of network usage.</td>
+    <td>TiFlash supports compression exchange</td>
+    <td>TiFlash supports data compression to improve the efficiency of parallel data exchange, overall performance for TPCH improves 10%, and can save 50+% network usage.</td>
   </tr>
   <tr>
-    <td>TiFlash supports <a href="https://docs.pingcap.com/tidb/v6.6/stale-read" target="_blank">stale read</a></td>
+    <td>TiFlash supports stale read</td>
     <td>TiFlash supports the Stale Read feature, which can improve query performance in scenarios where real-time requirements are not restricted.</td>
   </tr>
   <tr>
     <td rowspan="2">Reliability and Availability<br /></td>
-    <td><a href="https://docs.pingcap.com/zh/tidb/v6.6/tidb-resource-control" target="_blank">Resource control</a> (experimental)</td>
+    <td>Resource control (experimental)</td>
     <td>Support resource management based on resource groups, mapping database users to the corresponding resource groups and setting quotas for each resource group based on actual needs.</td>
   </tr>
   <tr>
-    <td><a href="https://docs.pingcap.com/tidb/v6.6/sql-plan-management#create-a-binding-according-to-a-historical-execution-plan" target="_blank">Historical SQL binding</a></td>
+    <td>Historical SQL binding</td>
     <td>Support binding historical execution plans and quickly binding execution plans on TiDB Dashboard.</td>
   </tr>
   <tr>
-    <td rowspan="2">SQL Functionalities<br /></td>
-    <td><a href="https://docs.pingcap.com/zh/tidb/v6.6/foreign-key" target="_blank">Foreign key</a></td>
+    <td rowspan="2">SQL Functionality<br /></td>
+    <td>Foreign key</td>
     <td>Support MySQL-compatible foreign key constraints to maintain data consistency and improve data quality.</td>
   </tr>
   <tr>
-    <td><a href="https://docs.pingcap.com/tidb/v6.6/sql-statement-create-index/#multi-valued-index" target="_blank">Multi-valued index</a> (experimental)</td>
+    <td>Multi-valued index (experimental)</td>
     <td>Introduce MySQL-compatible multi-valued indexes and enhance the JSON type to improve TiDB's compatibility with MySQL 8.0.</td>
   </tr>
   <tr>
     <td>DB Operations and Observability<br /></td>
-    <td><a href="https://docs.pingcap.com/tidb/v6.6/dm-precheck#check-items-for-physical-import" target="_blank">DM support physical import</a> (experimental)</td>
+    <td>DM support physical import (experimental)</td>
     <td>TiDB Data Migration (DM) integrates TiDB Lightning's physical import mode to improve the performance of full data migration, with performance being up to 10 times faster.</td>
   </tr>
 </tbody>
 </table>
 
-## Feature details
+## Feature Details
 
 ### Scalability
 
-* Support the next-generation Partitioned-Raft-KV storage engine (experimental) [#11515](https://github.com/tikv/tikv/issues/11515) [#12842](https://github.com/tikv/tikv/issues/12842) @[busyjay](https://github.com/busyjay) @[tonyxuqqi](https://github.com/tonyxuqqi) @[tabokie](https://github.com/tabokie) @[bufferflies](https://github.com/bufferflies) @[5kbpers](https://github.com/5kbpers) @[SpadeA-Tang](https://github.com/SpadeA-Tang) @[nolouch](https://github.com/nolouch)
+* Support Partitioned-Raft-KV storage engine (experimental) [#11515](https://github.com/tikv/tikv/issues/11515) [#12842](https://github.com/tikv/tikv/issues/12842) @[busyjay](https://github.com/busyjay) @[tonyxuqqi](https://github.com/tonyxuqqi) @[tabokie](https://github.com/tabokie) @[bufferflies](https://github.com/bufferflies) @[5kbpers](https://github.com/5kbpers) @[SpadeA-Tang](https://github.com/SpadeA-Tang) @[nolouch](https://github.com/nolouch)
 
-    Before TiDB v6.6.0, TiKV's Raft-based storage engine used a single RocksDB instance to store the data of all Regions of the TiKV instance. To support larger clusters more stably, starting from TiDB v6.6.0, a new TiKV storage engine is introduced, which uses multiple RocksDB instances to store TiKV Region data, and the data of each Region is independently stored in a separate RocksDB instance. The new engine can better control the number and level of files in the RocksDB instance, achieve physical isolation of data operations between Regions, and support stably managing more data. You can see it as TiKV managing multiple RocksDB instances through partitioning, which is why the feature is named Partitioned-Raft-KV. The main advantage of this feature is better write performance, faster scaling, and larger volume of data supported with the same hardware. It can also support larger cluster scales.
+    Before TiDB v6.6.0, TiKV's Raft-based storage engine used a single RocksDB instance to store the data of all 'Regions' of the TiKV instance. To support larger clusters more stably, starting from TiDB v6.6.0, a new TiKV storage engine is introduced, which uses multiple RocksDB instances to store TiKV Region data, and the data of each Region is independently stored in a separate RocksDB instance. The new engine can better control the number and level of files in the RocksDB instance, achieve physical isolation of data operations between Regions, and support stably managing more data. You can see it as TiKV managing multiple RocksDB instances through partitioning, which is why the feature is named Partitioned-Raft-KV. The main advantage of this feature is better write performance, faster scaling, and larger volume of data supported with the same hardware. It can also support larger cluster scales.
 
     Currently, this feature is experimental and not recommended for use in production environments.
 
@@ -84,7 +84,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 * Support a stable wake-up model for pessimistic lock queues [#13298](https://github.com/tikv/tikv/issues/13298) @[MyonKeminta](https://github.com/MyonKeminta) **tw@TomShawn**
 
     If an application encounters frequent single-point pessimistic lock conflicts, the existing wake-up mechanism cannot guarantee the time for transactions to acquire locks, which causes high long-tail latency and even lock acquisition timeout. Starting from v6.6.0, you can enable a stable wake-up model for pessimistic locks by setting the value of the system variable [`tidb_pessimistic_txn_aggressive_locking`](/system-variables.md#tidb_pessimistic_txn_aggressive_locking-new-in-v660) to `ON`. In this wake-up model, the wake-up sequence of a queue can be strictly controlled to avoid the waste of resources caused by invalid wake-ups. In scenarios with serious lock conflicts, the stable wake-up model can reduce long-tail latency and the P99 response time.
-
+    
     Tests indicate this reduces tail latency 40-60%.
 
     For details, see [documentation](/system-variables.md#tidb_pessimistic_txn_aggressive_locking-new-in-v660).
@@ -135,6 +135,9 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
     In v6.6, you need to enable both TiDB's global variable [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660) and the TiKV configuration item [`resource-control.enabled`](/tikv-configuration-file.md#resource_control) to enable resource control. Currently, the supported quota method is based on "[Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru)". RU is TiDB's unified abstraction unit for system resources such as CPU and IO.
 
     For more information, see [documentation](/tidb-resource-control.md).
+* Support dynamically managing the resource usage of DDL operations (experimental) [#38025](https://github.com/pingcap/tidb/issues/38025) @[hawkingrei](https://github.com/hawkingrei) **tw@ran-huang**
+
+    TiDB v6.6.0 introduces resource management for DDL operations to reduce the impact of DDL changes on online applications by automatically controlling the CPU usage of these operations. This feature is effective only after the [DDL distributed parallel execution framework](/system-variables.md#tidb_ddl_distribute_reorg-new-in-v660) is enabled.
 
 * Binding historical execution plans is GA [#39199](https://github.com/pingcap/tidb/issues/39199) @[fzzf678](https://github.com/fzzf678) **tw@TomShawn**
 
@@ -150,10 +153,6 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
     - [`NO_ORDER_INDEX()`](/optimizer-hints.md#no_keep_ordert1_name-idx1_name--idx2_name-): tells the optimizer to use the specified index, not to keep the order of the index when reading data, and generates plans similar to `TopN + IndexScan(keep order: false)`.
 
     Continuously introducing optimizer hints provides users with more intervention methods, helps solve SQL performance issues, and improves the stability of overall performance.
-
-* Support dynamically managing the resource usage of DDL operations (experimental) [#38025](https://github.com/pingcap/tidb/issues/38025) @[hawkingrei](https://github.com/hawkingrei) **tw@ran-huang**
-
-    TiDB v6.6.0 introduces resource management for DDL operations to reduce the impact of DDL changes on online applications by automatically controlling the CPU usage of these operations. This feature is effective only after the [DDL distributed parallel execution framework](/system-variables.md#tidb_ddl_distribute_reorg-new-in-v660) is enabled.
 
 ### Availability
 
