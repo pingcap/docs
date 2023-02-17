@@ -273,7 +273,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 - Starting from Februray 20, 2023, the telemetry feature is disabled by default in new versions of TiDB and TiDB Dashboard (including v6.6.0). If you upgrade from a previous version that uses the default telemetry configuration, the telemetry feature is disabled after the upgrade. For the specific versions, see [TiDB Release Timeline](/releases/release-timeline.md).
 - Starting from v1.11.3, the telemetry feature is disabled by default in newly deployed TiUP. If you upgrade from a previous version of TiUP to v1.11.3 or a later version, the telemetry feature keeps the same status as before the upgrade.
 
-### Ecosystem
+### TiDB tools
 
 * TiDB Data Migration (DM) integrates with TiDB Lightning's physical import mode for up to a 10x performance boost for full migration (experimental) @[lance6716](https://github.com/lance6716) **tw@ran-huang**
 
