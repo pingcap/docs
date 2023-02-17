@@ -40,6 +40,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
     <td>Resource Control (experimental)</td>
     <td>Support resource management based on resource groups, mapping database users to the corresponding resource groups and setting quotas for each resource group based on actual needs.</td>
   </tr>
+  <tr>
     <td>Historical SQL binding</td>
     <td>Support binding historical execution plans and quickly binding execution plans on TiDB Dashboard.</td>
   </tr>
