@@ -11,7 +11,7 @@ This statement creates a new user, specified with a password. In the MySQL privi
 
 ```ebnf+diagram
 CreateUserStmt ::=
-    'CREATE' 'USER' IfNotExists UserSpecList RequireClauseOpt ConnectionOptions PasswordOption LockOption AttributeOption
+    'CREATE' 'USER' IfNotExists UserSpecList RequireClauseOpt ConnectionOptions PasswordOption LockOption AttributeOption ResourceGroupNameOption
 
 IfNotExists ::=
     ('IF' 'NOT' 'EXISTS')?
@@ -34,6 +34,8 @@ PasswordOption ::= ( 'PASSWORD' 'EXPIRE' ( 'DEFAULT' | 'NEVER' | 'INTERVAL' N 'D
 LockOption ::= ( 'ACCOUNT' 'LOCK' | 'ACCOUNT' 'UNLOCK' )?
 
 AttributeOption ::= ( 'COMMENT' CommentString | 'ATTRIBUTE' AttributeString )?
+
+ResourceGroupNameOption::= ( 'RESOURCE' 'GROUP' Identifier)?
 ```
 
 ## Examples
@@ -126,6 +128,22 @@ CREATE USER 'newuser9'@'%' PASSWORD EXPIRE;
 
 ```
 Query OK, 1 row affected (0.02 sec)
+```
+
+Create a user that uses the resource group `rg1`.
+
+```sql
+CREATE USER 'newuser7'@'%' RESOURCE GROUP rg1;
+SELECT USER, HOST, USER_ATTRIBUTES FROM MYSQL.USER WHERE USER='newuser7';
+```
+
+```sql
++----------+------+---------------------------+
+| USER     | HOST | USER_ATTRIBUTES           |
++----------+------+---------------------------+
+| newuser7 | %    | {"resource_group": "rg1"} |
++----------+------+---------------------------+
+1 rows in set (0.00 sec)
 ```
 
 ## MySQL compatibility
