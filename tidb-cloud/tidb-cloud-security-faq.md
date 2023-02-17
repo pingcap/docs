@@ -68,8 +68,6 @@ In TiDB Cloud, the data access security measures includes the following:
 
 - TiDB Cloud has designed a secure and trusted TiDB Cloud technical architecture. The architecture effectively isolates and prohibits any insiders from directly accessing the TiDB Cloud infrastructure. No PingCAP staff can directly access the TiDB Cloud infrastructure where customer data resides. If internal technical personnel needs to monitor and maintain the TiDB Cloud infrastructure, they must go through a strict approval process, obtain minimum permissions, and pass the Bastion audit to complete the approved operation and maintenance within a limited time. Moreover, all operational behaviors will be recorded and audited, and TiDB Cloud also configures monitoring and alarms for unauthorized operation and maintenance.
 
-- TiDB Cloud has designed an isolation structure for internal operation account permissions to prevent internal personnel from using a privileged service account to access TiDB clusters. The service account is only used for initializing Serverless Tier and Dedicated Tier through the TiDB Cloud service gateway, and PingCAP staff do not have access and permissions to credentials of this service account. After TiDB Cloud is initialized, you have the maximum authority over your TiDB clusters.
-
 ## How does TiDB Cloud encrypt customer data?
 
 TiDB Cloud uses storage volume encryption by default for customer data at rest, including both database data and backup data. TiDB Cloud requires TLS encryption for customer data in transit, and also requires component-level TLS encryption for data in your Dedicated Tier cluster between TiDB, TiKV, and TiFlash.
