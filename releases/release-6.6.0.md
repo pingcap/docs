@@ -37,7 +37,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
   </tr>
   <tr>
     <td rowspan="2">Reliability and Availability<br /></td>
-    <td>Resource Control (experimental)</td>
+    <td>Resource control (experimental)</td>
     <td>Support resource management based on resource groups, mapping database users to the corresponding resource groups and setting quotas for each resource group based on actual needs.</td>
   </tr>
   <tr>
@@ -46,7 +46,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
   </tr>
   <tr>
     <td rowspan="2">SQL Functionality<br /></td>
-    <td>Foreign Key</td>
+    <td>Foreign key</td>
     <td>Support MySQL-compatible foreign key constraints to maintain data consistency and improve data quality.</td>
   </tr>
   <tr>
@@ -56,7 +56,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
   <tr>
     <td>DB Operations and Observability<br /></td>
     <td>DM support physical import (experimental)</td>
-    <td>TiDB Data Migration (DM) integrates TiDB Lightning's Physical Import mode to improve the performance of full data migration, with performance being up to 10 times faster.</td>
+    <td>TiDB Data Migration (DM) integrates TiDB Lightning's physical import mode to improve the performance of full data migration, with performance being up to 10 times faster.</td>
   </tr>
 </tbody>
 </table>
