@@ -28,6 +28,10 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
     <td>This enhancement significantly reduces total RPCs in TiKV batch get operations. In situations where data is highly dispersed and the gRPC thread pool is stretched, batching coprocessor requests can improve performance by 50+%.</td>
   </tr>
   <tr>
+      <td>TiKV supports the Partitioned-Raft-KV storage engine</td>
+      <td>TiKV introduces the next-generation storage engine Partitioned-Raft-KV, and each Region uses an independent RocksDB instance, which can easily expand the storage capacity of the cluster from TB to PB and provide more stable write latency and stronger expansion capabilities.</td>
+  </tr>
+  <tr>
     <td>TiFlash supports compression exchange</td>
     <td>TiFlash supports data compression to improve the efficiency of parallel data exchange, overall performance for TPCH improves 10%, and can save 50+% network usage.</td>
   </tr>
@@ -65,9 +69,9 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
 ### Scalability
 
-* Support the next generation Partitioned-Raft-KV storage engine (experimental) [#11515](https://github.com/tikv/tikv/issues/11515) [#12842](https://github.com/tikv/tikv/issues/12842) @[busyjay](https://github.com/busyjay) @[tonyxuqqi](https://github.com/tonyxuqqi) @[tabokie](https://github.com/tabokie) @[bufferflies](https://github.com/bufferflies) @[5kbpers](https://github.com/5kbpers) @[SpadeA-Tang](https://github.com/SpadeA-Tang) @[nolouch](https://github.com/nolouch)
+* Support the next-generation Partitioned-Raft-KV storage engine (experimental) [#11515](https://github.com/tikv/tikv/issues/11515) [#12842](https://github.com/tikv/tikv/issues/12842) @[busyjay](https://github.com/busyjay) @[tonyxuqqi](https://github.com/tonyxuqqi) @[tabokie](https://github.com/tabokie) @[bufferflies](https://github.com/bufferflies) @[5kbpers](https://github.com/5kbpers) @[SpadeA-Tang](https://github.com/SpadeA-Tang) @[nolouch](https://github.com/nolouch)
 
-    Before TiDB v6.6.0, TiKV's Raft-based storage engine used a single RocksDB instance to store the data of all Regions of the TiKV instance. To support larger clusters more smoothly, starting from TiDB v6.6.0, a new TiKV storage engine is introduced, which uses multiple RocksDB instances to store TiKV Region data, and the data of each Region is independently stored in a separate RocksDB instance. The new engine can better control the number and level of files in the RocksDB instance, achieve physical isolation of data operations between Regions, and support smoothly managing more data. You can see it as TiKV managing multiple RocksDB instances through partitioning, which is why the feature is named as Partitioned-Raft-KV. The main advantage of this feature is better write performance, faster scaling, and larger volume of data supported with the same hardware. It can also support larger cluster scale.
+    Before TiDB v6.6.0, TiKV's Raft-based storage engine used a single RocksDB instance to store the data of all Regions of the TiKV instance. To support larger clusters more stably, starting from TiDB v6.6.0, a new TiKV storage engine is introduced, which uses multiple RocksDB instances to store TiKV Region data, and the data of each Region is independently stored in a separate RocksDB instance. The new engine can better control the number and level of files in the RocksDB instance, achieve physical isolation of data operations between Regions, and support stably managing more data. You can see it as TiKV managing multiple RocksDB instances through partitioning, which is why the feature is named Partitioned-Raft-KV. The main advantage of this feature is better write performance, faster scaling, and larger volume of data supported with the same hardware. It can also support larger cluster scales.
 
     Currently, this feature is experimental and not recommended for use in production environments.
 
