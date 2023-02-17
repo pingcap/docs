@@ -69,9 +69,9 @@ For example, your overall expected performance is 110,000 QPS under a mixed work
 
 `node num = ceil(110,000 ÷ 15,500) = 8`
 
-As 8 is equal to 8, the performance deviation coefficient is 5%. The TiDB performance is `8 * 15,500 * (1 - 5%) = 117,800 > 110,000`. 
+As the performance deviation coefficient of 8 nodes is about 5%, the estimated TiDB performance is `8 * 15,500 * (1 - 5%) = 117,800 `, which can meet your expected performance of 110,000 QPS.
 
-So, you need 8 TiDB nodes (8 vCPU, 16 GiB) to meet your performance requirements.
+Therefore, 8 TiDB nodes (8 vCPU, 16 GiB) are recommended for you.
 
 ## Size TiKV
 
@@ -121,7 +121,7 @@ Generally, the usage ratio of TiKV storage is not recommended to exceed 80%, the
 
 Based on historical data, the average TiKV compression ratio is around 40%.
 
-Suppose that the size of your MySQL dump files is 20 TB and the TiKV compression ratio is 40%. Then, you can calculate a recommended number of TiKV nodes by data volume as follows:
+Suppose that the size of your MySQL dump files is 20 TB and the TiKV compression ratio is 40%. Then, you can calculate a recommended number of TiKV nodes according to your data volume as follows:
 
  `node num = ceil(20 TB * 40% * 3 ÷ 0.8 ÷ 4096 GiB ÷ 3) * 3 = 9`
 
@@ -156,9 +156,9 @@ For example, your overall expected performance is 110,000 QPS under a mixed work
 
 `node num = ceil(110,000 / 17,800 ) = 7`
 
-As 7 is less than 8, the performance deviation coefficient is 0. The TiKV performance is `7 * 17,800 * (1 - 0) = 124,600 > 110,000`. 
+As 7 is less than 8, the performance deviation coefficient of 7 nodes is 0. The estimated TiKV performance is `7 * 17,800 * (1 - 0) = 124,600`, which can meet your expected performance of 110,000 QPS.
 
-So, you need 7 TiKV nodes (8 vCPU, 32 GiB) to meet your performance requirements.
+Therefore, 7 TiKV nodes (8 vCPU, 32 GiB) are recommended for you according to your expected performance. 
 
 Next, you can compare the calculated TiKV node number according to data volume and that according to expected performance, and take the larger one as a recommended number of your TiKV nodes.
 
