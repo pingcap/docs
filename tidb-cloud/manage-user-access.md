@@ -222,7 +222,7 @@ There are four roles in an organization. The permissions of each role are as fol
 >
 > Currently, the Audit Admin role is only visible upon request.
 >
-> - For [console audit logging](/tidb-cloud/tidb-cloud-console-auditing.md), it is recommended that you use the Owner role instead of the Audit Admin role.
+> - For [console audit logging](/tidb-cloud/tidb-cloud-console-auditing.md), It is recommended that you use the Owner role directly. If you need to use the Audit Admin role, please click **Help** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), fill in "Apply for Apply for the Audit Admin role" in the **Description** field, and then click **Send**.
 > - For [database audit logging](/tidb-cloud/tidb-cloud-auditing.md), to get the the Audit Admin role, click **Help** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), fill in "Apply for database audit logging" in the **Description** field, and then click **Send**.
 
 ## Manage user profiles
