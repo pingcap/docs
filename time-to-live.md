@@ -174,7 +174,7 @@ For details of the metrics, see the TTL section in [TiDB Monitoring Metrics](/gr
 
 At the same time, TiDB provides three tables to obtain more information about TTL jobs:
 
-+ The `mysql.tidb_ttl_table_status` table contains information about the last execution and the current execution of TTL jobs for all TTL tables.
++ The `mysql.tidb_ttl_table_status` table contains information about the previously executed TTL job and ongoing TTL job for all TTL tables
 
   ```sql
   MySQL [(none)]> SELECT * FROM mysql.tidb_ttl_table_status LIMIT 1\G;
@@ -199,11 +199,11 @@ At the same time, TiDB provides three tables to obtain more information about TT
   1 row in set (0.040 sec)
   ```
 
-  The column `table_id` is the ID of the partition, and the `parent_table_id` is the ID of table, corresponding with the ID in  `infomation_schema.tables`. If the table is not a partition, the two IDs are the same.
+  The column `table_id` is the ID of the partitioned table, and the `parent_table_id` is the ID of the table, corresponding with the ID in  `infomation_schema.tables`. If the table is not a partitioned table, the two IDs are the same.
 
-  The column `{last, current}_job_{start_time, finish_time, ttl_expire}` describes the start time, finish time, and expiration time used by TTL job of the last or current execution. The `last_job_summary` column describes the execution status of the last TTL task, including the total number of rows, the number of successful rows, and the number of failed rows.
+  The columns `{last, current}_job_{start_time, finish_time, ttl_expire}` describe respectively the start time, finish time, and expiration time used by the TTL job of the last or current execution. The `last_job_summary` column describes the execution status of the last TTL task, including the total number of rows, the number of successful rows, and the number of failed rows.
 
-+ The `mysql.tidb_ttl_task` table contains information about the current execution of TTL subtasks. A TTL job is split into many subtasks, and this table records the subtasks that are currently being executed.
++ The `mysql.tidb_ttl_task` table contains information about the ongoing TTL subtasks. A TTL job is split into many subtasks, and this table records the subtasks that are currently being executed.
 + The `mysql.tidb_ttl_job_history` table contains information about the TTL jobs that have been executed. The record of TTL job history is kept for 90 days.
 
   ```sql
@@ -225,7 +225,7 @@ At the same time, TiDB provides three tables to obtain more information about TT
             status: finished
   ```
 
-  The column `table_id` is the partition table ID, and `parent_table_id` is the table ID, which corresponds to the ID in the `infomation_schema.tables`. `table_schema`, `table_name`, and `partition_name` correspond to the database, table name, and partition name. `create_time`, `finish_time`, and `ttl_expire` indicate the creation time, end time, and expiration time of the TTL task. `expired_rows` and `deleted_rows` indicate the number of expired rows and the number of rows deleted successfully.
+  The column `table_id` is the ID of the partitioned table, and the `parent_table_id` is the ID of the table, corresponding with the ID in  `infomation_schema.tables`. `table_schema`, `table_name`, and `partition_name` correspond to the database, table name, and partition name. `create_time`, `finish_time`, and `ttl_expire` indicate the creation time, end time, and expiration time of the TTL task. `expired_rows` and `deleted_rows` indicate the number of expired rows and the number of rows deleted successfully.
 
 ## Compatibility with TiDB tools
 
@@ -240,30 +240,31 @@ Currently, the TTL feature has the following limitations:
 * It is not guaranteed that all expired data is deleted immediately. The time when expired data is deleted depends on the scheduling interval and scheduling window of the background cleanup job.
 
 
-## Question
+## FAQs
 
-- How can I determine whether the deletion is fast enough to keep the size of data relatively stable?
+- How can I determine whether the deletion is fast enough to keep the data size relatively stable?
 
-   In the [Grafana `TiDB` dashboard](/grafana-tidb-dashboard.md), the panel `TTL Insert Rows Per Hour` records the total number of data inserted into the TTL table in the previous hour. The corresponding `TTL Delete Rows Per Hour` records the total amount of data deleted by the TTL task in the previous hour. If `TTL Insert Rows Per Hour` is higher than `TTL Delete Rows Per Hour` for a long time, it means that the rate of insertion is higher than the rate of deletion and the total amount of data will increase. For example.
+   In the [Grafana `TiDB` dashboard](/grafana-tidb-dashboard.md), the panel `TTL Insert Rows Per Hour` records the total number of rows inserted in the previous hour. The corresponding `TTL Delete Rows Per Hour` records the total number of rows deleted by the TTL task in the previous hour. If `TTL Insert Rows Per Hour` is higher than `TTL Delete Rows Per Hour` for a long time, it means that the rate of insertion is higher than the rate of deletion and the total amount of data will increase. For example:
 
-   ! [insert fast example](/media/ttl/insert-fast.png)
+   ![insert fast example](/media/ttl/insert-fast.png)
 
-   It is worth noting that since TTL does not guarantee that the expired rows will be deleted immediately, and the rows currently inserted will be deleted in a future TTL task, even if the speed of TTL deletion is lower than the speed of insertion in a short period of time, it does not necessarily mean that the speed of TTL is too slow. It needs to be considered in the context.
+   It is worth noting that since TTL does not guarantee that the expired rows will be deleted immediately, and the rows currently inserted will be deleted in a future TTL task, even if the speed of TTL deletion is lower than the speed of insertion in a short period of time, it does not necessarily mean that the speed of TTL is too slow. You need to consider the situation in its context.
 
 - How can I determine whether the bottleneck of a TTL task is in scanning or deleting?
 
-   Look at the `TTL Scan Worker Time By Phase` and `TTL Delete Worker Time By Phase` panels. If the scan worker is in the `dispatch` phase for a large percentage of time and the delete worker is rarely in the `idle` phase, then the scan worker is waiting for the delete worker to finish the deletion work, and if the cluster resources are still free at this point, you can consider increasing the `tidb_ttl_ delete_worker_count` to increase the number of delete workers. For example.
+   Look at the `TTL Scan Worker Time By Phase` and `TTL Delete Worker Time By Phase` panels. If the scan worker is in the `dispatch` phase for a large percentage of time and the delete worker is rarely in the `idle` phase, then the scan worker is waiting for the delete worker to finish the deletion. If the cluster resources are still free at this point, you can consider increasing `tidb_ttl_ delete_worker_count` to increase the number of delete workers. For example:
 
-   ! [scan fast example](/media/ttl/scan-fast.png)
+   ![scan fast example](/media/ttl/scan-fast.png)
 
-   In contrast, if the scan worker is rarely in the `dispatch` phase and the delete worker is in the `idle` phase for a long time, then the scan worker is relatively busy. For example.
+   In contrast, if the scan worker is rarely in the `dispatch` phase and the delete worker is in the `idle` phase for a long time, then the scan worker is relatively busy. For example:
 
-   ! [delete fast example](/media/ttl/delete-fast.png)
+   ![delete fast example](/media/ttl/delete-fast.png)
 
-   The percentage of scan and delete in TTL jobs is related to the machine configuration and data distribution, so the monitoring data at each moment is only representative of the TTL Jobs being executed. Users can read the table `mysql.tidb_ttl_job_history` to determine which TTL job is running at a certain moment, and the corresponding table of the job.
+   The percentage of scan and delete in TTL jobs is related to the machine configuration and data distribution, so the monitoring data at each moment is only representative of the TTL Jobs being executed. You can read the table `mysql.tidb_ttl_job_history` to determine which TTL job is running at a certain moment and the corresponding table of the job.
 
 - How to configure `tidb_ttl_scan_worker_count` and `tidb_ttl_delete_worker_count` properly?
 
-   First, you can refer to the question "How to determine whether the bottleneck of TTL tasks is in scanning or deleting?" to consider whether to boost `tidb_ttl_scan_worker_count` or `tidb_ttl_delete_worker_count`. Also, if the number of TiKV nodes is high, boosting `tidb_ttl_scan_worker_count` can make the TTL task load more even.
+   1. Refer to the question "How to determine whether the bottleneck of TTL tasks is in scanning or deleting?" to consider whether to increase the value of `tidb_ttl_scan_worker_count` or `tidb_ttl_delete_worker_count`.
+   2. If the number of TiKV nodes is high, increase the value of `tidb_ttl_scan_worker_count` can make the TTL task workload more balanced.
 
-   Since too many TTL workers will cause a lot of stress, you need to look at the CPU level of TiDB and the disk and CPU usage of TiKV together. Depending on different scenarios and needs (need to speed up TTL as much as possible, or need to reduce the impact of TTL on other queries), `tidb_ttl_scan_worker_count` and `tidb_ttl_delete_worker_count` can be increased to improve the speed of TTL scanning and deleting data, or reduce the performance impact brought by TTL tasks.
+   Since too many TTL workers will cause a lot of pressure, you need to evaluate the CPU level of TiDB and the disk and CPU usage of TiKV together. Depending on different scenarios and needs (whether you need to speed up TTL as much as possible, or to reduce the impact of TTL on other queries), you can adjust the value of `tidb_ttl_scan_worker_count` and `tidb_ttl_delete_worker_count` to improve the speed of TTL scanning and deleting or reduce the performance impact brought by TTL tasks.
