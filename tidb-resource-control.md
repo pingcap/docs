@@ -140,7 +140,7 @@ The following is an example of how to create a resource group and bind users to 
 
 After you complete the above operations of creating resource groups and binding users, the resource consumption of newly created sessions will be controlled by the specified quota. If the system workload is relatively high and there is no spare capacity, the resource consumption rate of `usr2` will be strictly controlled not to exceed the quota. Because `usr1` is bound by `rg1` with `BURSTABLE` configured, the consumption rate of `usr1` is allowed to exceed the quota.
 
-If the resource group corresponds to a request with insufficient quota, the client's request will wait. If the wait time is too long, the request will report an error.
+If the resource group corresponds to a request with an insufficient quota, the client's request will wait. If the wait time is too long, the request will report an error.
 
 ## Monitoring metrics and charts
 
@@ -156,7 +156,7 @@ TiDB regularly collects runtime information about resource control and provides 
 
 TiKV also records the request QPS from different resource groups. For more details, see [TiKV Monitoring Metrics Detail](/grafana-tikv-dashboard.md#gRPC).
 
-## Tool Compatibility
+## Tool compatibility
 
 The resource control feature is still in its experimental stage and does not impact the regular usage of data import, export, and other replication tools. BR, TiDB Lightning, and TiCDC do not currently support processing DDL operations related to resource control, and their resource consumption is not limited by resource control.
 
