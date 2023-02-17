@@ -68,7 +68,7 @@ Based on the above table, assuming that the TiKV time consumed by a resource gro
 
 The resource control feature introduces two new global variables.
 
-* TiDB: you can use the [`tidb_enable_resource_control`](/system-variables.md#tidb-tidb_enable_resource_control-new-in-v660) system variable to control whether to enable flow control for resource groups.
+* TiDB: you can use the [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660) system variable to control whether to enable flow control for resource groups.
 
 <CustomContent platform="tidb">
 
@@ -162,7 +162,7 @@ If there are too many requests that result in insufficient resources for the res
 
 TiDB regularly collects runtime information about resource control and provides visual charts of the metrics in Grafana's **TiDB** > **Resource Control** dashboard. The metrics are detailed in the **Resource Control** section of [TiDB Important Monitoring Metrics](/grafana-tidb-dashboard.md).
 
-TiKV also records the request QPS from different resource groups. For more details, see [TiKV Monitoring Metrics Detail](/grafana-tikv-dashboard.md#gRPC).
+TiKV also records the request QPS from different resource groups. For more details, see [TiKV Monitoring Metrics Detail](/grafana-tikv-dashboard.md#grpc).
 
 </CustomContent>
 
