@@ -98,7 +98,6 @@
   - [Scale a TiDB Cluster](/tidb-cloud/scale-tidb-cluster.md)
   - [Pause or Resume a TiDB Cluster](/tidb-cloud/pause-or-resume-tidb-cluster.md)
   - [Upgrade a TiDB Cluster](/tidb-cloud/upgrade-tidb-cluster.md)
-  - [Resource Control](/tidb-resource-control.md)
   - [Delete a TiDB Cluster](/tidb-cloud/delete-tidb-cluster.md)
 - Migrate or Import Data
   - [Overview](/tidb-cloud/tidb-cloud-migration-overview.md)
@@ -483,6 +482,7 @@
   - [Table Filter](/table-filter.md)
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
   - [Serverless Tier Limitations](/tidb-cloud/serverless-tier-limitations.md)
+  - [Resource Control](/tidb-resource-control.md)
 - FAQs
   - [TiDB Cloud FAQs](/tidb-cloud/tidb-cloud-faq.md)
   - [Serverless Tier FAQs](/tidb-cloud/serverless-tier-faqs.md)
