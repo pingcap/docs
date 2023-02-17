@@ -447,7 +447,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
     + TiCDC
 
-        - Support batch UPDATE DML statements to improve TiCDC replication performance [#8084](https://github.com/pingcap/tiflow/issues/8084)
+        - Support batch UPDATE DML statements to improve TiCDC replication performance [#8084](https://github.com/pingcap/tiflow/issues/8084) @[amyangfei](https://github.com/amyangfei)
         - Implement MQ sink and MySQL sink in the asynchronous mode to improve the sink throughput [#5928](https://github.com/pingcap/tiflow/issues/5928) @[hicqu](https://github.com/hicqu) @[hi-rustin](https://github.com/hi-rustin)
 
     + TiDB Data Migration (DM)
@@ -463,7 +463,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
     + TiDB Lightning
 
-        - Physical Import Mode supports Keyspace [#40531](https://github.com/pingcap/tidb/issues/40531) @[iosmanthus](https://github.com/iosmanthus)
+        - Physical Import Mode supports keyspace [#40531](https://github.com/pingcap/tidb/issues/40531) @[iosmanthus](https://github.com/iosmanthus)
         - Support setting the maximum number of conflicts by `lightning.max-error` [#40743](https://github.com/pingcap/tidb/issues/40743) @[dsdashun](https://github.com/dsdashun)
         - Support importing CSV data files with BOM headers [#40744](https://github.com/pingcap/tidb/issues/40744) @[dsdashun](https://github.com/dsdashun)
         - Optimize the processing logic when encountering TiKV flow-limiting errors and try other available regions instead [#40205](https://github.com/pingcap/tidb/issues/40205) @[lance6716](https://github.com/lance6716)
@@ -559,7 +559,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
     + Backup & Restore (BR)
 
-        - Fix the issue that when restoring log backup, hot regions cause the restore to fail [#37207](https://github.com/pingcap/tidb/issues/37207) @[Leavrth](https://github.com/Leavrth)
+        - Fix the issue that when restoring log backup, hot Regions cause the restore to fail [#37207](https://github.com/pingcap/tidb/issues/37207) @[Leavrth](https://github.com/Leavrth)
         - Fix the issue that restoring data to a cluster on which the log backup is running causes the log backup file to be unrecoverable [#40797](https://github.com/pingcap/tidb/issues/40797) @[Leavrth](https://github.com/Leavrth)
         - Fix the issue that the PITR feature does not support CA-bundles [#38775](https://github.com/pingcap/tidb/issues/38775) @[YuJuncen](https://github.com/YuJuncen)
         - Fix the panic issue caused by duplicate temporary tables during recovery [#40797](https://github.com/pingcap/tidb/issues/40797) @[joccau](https://github.com/joccau)
