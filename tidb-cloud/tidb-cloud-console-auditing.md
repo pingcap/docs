@@ -5,7 +5,7 @@ summary: Learn about the log auditing feature for the TiDB Cloud console.
 
 # Console Audit Logging
 
-TiDB Cloud provides the console audit logging feature to help you track various behaviors and operations of users on the [TiDB Cloud console](https://tidbcloud.com). For example, you can track operations such as login into the TiDB Cloud console and creating a cluster.
+TiDB Cloud provides the console audit logging feature to help you track various behaviors and operations of users on the [TiDB Cloud console](https://tidbcloud.com). For example, you can track operations, such as login into the TiDB Cloud console and creating a cluster.
 
 ## Prerequisites
 
