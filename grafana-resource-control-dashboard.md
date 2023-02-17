@@ -9,7 +9,7 @@ If you use TiUP to deploy the TiDB cluster, the monitoring system (Prometheus & 
 
 The Grafana dashboard is divided into a series of sub dashboards which include Overview, PD, TiDB, TiKV, Node\_exporter, Disk Performance, and Performance\_overview.
 
-If your cluster has used the [Resource Control](tidb-resource-control.md) feature, you can get an overview of the resource consumption status from the Resource Control dashboard.
+If your cluster has used the [Resource Control](/tidb-resource-control.md) feature, you can get an overview of the resource consumption status from the Resource Control dashboard.
 
 This document describes some key monitoring metrics displayed on the Resource Control dashboard.
 
