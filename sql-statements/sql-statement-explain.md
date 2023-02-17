@@ -147,8 +147,21 @@ If the `dot` program is not installed on your computer, copy the result to [this
 ## MySQL compatibility
 
 * Both the format of `EXPLAIN` and the potential execution plans in TiDB differ substaintially from MySQL.
+<<<<<<< HEAD
 * TiDB does not support the `EXPLAIN FORMAT=JSON` as in MySQL.
 * TiDB does not currently support `EXPLAIN` for insert statements.
+=======
+* TiDB does not support the `FORMAT=JSON` or `FORMAT=TREE` options.
+* `FORMAT=tidb_json` in TiDB is the JSON format output of the default `EXPLAIN` result. The format and fields are different from the `FORMAT=JSON` output in MySQL.
+
+### `EXPLAIN FOR CONNECTION`
+
+`EXPLAIN FOR CONNECTION` is used to get the execution plan of the currently executed SQL query or the last executed SQL query in a connection. The output format is the same as that of `EXPLAIN`. However, the implementation of `EXPLAIN FOR CONNECTION` in TiDB is different from that in MySQL. Their differences (apart from the output format) are listed as follows:
+
+- If the connection is sleeping, MySQL returns an empty result, while TiDB returns the last executed query plan.
+- If you try to get the execution plan of the current session, MySQL returns an error, while TiDB returns the result normally.
+- MySQL requires the login user to be the same as the connection being queried, or the login user has the **`PROCESS`** privilege; while TiDB requires the login user to be the same as the connection being queried, or the login user has the **`SUPER`** privilege.
+>>>>>>> ee5b10de6 (explain for connection: fix the compatibility with MySQL (#12536))
 
 ## See also
 
