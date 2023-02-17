@@ -362,6 +362,7 @@ The following examples show how to import data from Amazon S3 using TiDB Lightni
     ```bash
     ./tidb-lightning --tidb-port=4000 --pd-urls=127.0.0.1:2379 --backend=local --sorted-kv-dir=/tmp/sorted-kvs \
         -d 's3://my-bucket/test-data?access_key={my_access_key}&secret_access_key={my_secret_access_key}'
+    ```
 
 * Use the combination of AWS IAM role access keys and session tokens to access S3 data:
 
