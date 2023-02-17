@@ -8,6 +8,14 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2023.
 
+## February 17, 2023
+
+**CLI changes**
+
+- Add new command [`ticloud connect`](/tidb-cloud/ticloud-connect.md)
+
+    `ticloud connect` is a command that allows you to connect to a TiDB Cloud cluster from your local machine. You can use `ticloud connect` to connect to a TiDB Cloud cluster and execute SQL statements.
+
 ## February 2, 2023
 
 **CLI changes**
