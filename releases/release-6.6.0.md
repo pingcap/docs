@@ -23,7 +23,28 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 </thead>
 <tbody>
   <tr>
-    <td rowspan="2">SQL operations and compatibility<br /><br /><i>SEAMLESS to use</i></td>
+    <td rowspan="3">Scalability and Performance<br /></td>
+    <td>TiKV support batch aggregate data requests</td>
+    <td>This enhancement significantly reduces total RPCs in TiKV batch get operations. In situations where data is highly dispersed and the gRPC thread pool is stretched, batching coprocessor requests can improve performance by 50+%.</td>
+  </tr>
+  <tr>
+    <td>TiFlash supports compression exchange</td>
+    <td>TiFlash supports data compression to improve the efficiency of parallel data exchange, overall performance for TPCH improves 10%, and can save 50+% network usage.</td>
+  </tr>
+  <tr>
+    <td>TiFlash supports stale read</td>
+    <td>TiFlash supports the Stale Read feature, which can improve query performance in scenarios where real-time requirements are not restricted.</td>
+  </tr>
+  <tr>
+    <td rowspan="2">Reliability and Availability<br /></td>
+    <td>Resource Control (experimental)</td>
+    <td>Support resource management based on resource groups, mapping database users to the corresponding resource groups and setting quotas for each resource group based on actual needs.</td>
+  </tr>
+    <td>Historical SQL binding</td>
+    <td>Support binding historical execution plans and quickly binding execution plans on TiDB Dashboard.</td>
+  </tr>
+  <tr>
+    <td rowspan="2">SQL Functionality<br /></td>
     <td>Foreign Key</td>
     <td>Support MySQL-compatible foreign key constraints to maintain data consistency and improve data quality.</td>
   </tr>
@@ -32,25 +53,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
     <td>Introduce MySQL-compatible multi-valued indexes and enhance the JSON type to improve TiDB's compatibility with MySQL 8.0.</td>
   </tr>
   <tr>
-    <td>DB Operations<br /><br /><i>SMOOTH to use</i></td>
-    <td>Tenant resource group control (experimental)</td>
-    <td>Support resource management based on resource groups, mapping database users to the corresponding resource groups and setting quotas for each resource group based on actual needs.</td>
-  </tr>
-  <tr>
-    <td>Stability<br /><br /><i>RELIABLE to use</i></td>
-    <td>Historical SQL binding</td>
-    <td>Support binding historical execution plans and quickly binding execution plans on TiDB Dashboard.</td>
-  </tr>
-  <tr>
-    <td rowspan="3">Performance<br /><br /><i>POWERFUL to use</i></td>
-    <td>TiFlash supports compression exchange</td>
-    <td>TiFlash supports data compression to improve the efficiency of parallel data exchange.</td>
-  </tr>
-  <tr>
-    <td>TiFlash supports stale read</td>
-    <td>TiFlash supports the Stale Read feature, which can improve query performance in scenarios where real-time requirements are not restricted.</td>
-  </tr>
-  <tr>
+    <td>DB Operations and Observability<br /></td>
     <td>DM support physical import (experimental)</td>
     <td>TiDB Data Migration (DM) integrates TiDB Lightning's Physical Import mode to improve the performance of full data migration, with performance being up to 10 times faster.</td>
   </tr>
