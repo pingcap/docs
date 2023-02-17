@@ -32,12 +32,8 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
     <td>This enhancement significantly reduces total RPCs in TiKV batch get operations. In situations where data is highly dispersed and the gRPC thread pool is stretched, batching coprocessor requests can improve performance by 50+%.</td>
   </tr>
   <tr>
-    <td>TiFlash supports compression exchange</td>
-    <td>TiFlash supports data compression to improve the efficiency of parallel data exchange, overall performance for TPCH improves 10%, and can save 50+% network usage.</td>
-  </tr>
-  <tr>
-    <td>TiFlash supports stale read</td>
-    <td>TiFlash supports the Stale Read feature, which can improve query performance in scenarios where real-time requirements are not restricted.</td>
+    <td>TiFlash supports stale read and compression exchange</td>
+    <td>TiFlash supports the stale read feature, which can improve query performance in scenarios where real-time requirements are not restricted. TiFlash supports data compression to improve the efficiency of parallel data exchange, overall performance for TPCH improves 10%, and can save 50+% network usage.</td>
   </tr>
   <tr>
     <td rowspan="2">Reliability and Availability<br /></td>
