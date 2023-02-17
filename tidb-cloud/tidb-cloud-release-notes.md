@@ -12,9 +12,9 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **CLI changes**
 
-- Add new command [`ticloud connect`](/tidb-cloud/ticloud-connect.md)
+- Add a new command [`ticloud connect`](/tidb-cloud/ticloud-connect.md) for [TiDB Cloud CLI](/tidb-cloud/cli-reference.md).
 
-    `ticloud connect` is a command that allows you to connect to a TiDB Cloud cluster from your local machine. You can use `ticloud connect` to connect to a TiDB Cloud cluster and execute SQL statements.
+    `ticloud connect` is a command that allows you to connect to your TiDB Cloud cluster from your local machine without installing any SQL clients. After connecting to your TiDB Cloud cluster, you can execute SQL statements in the TiDB Cloud CLI.
 
 ## February 2, 2023
 
