@@ -90,7 +90,7 @@ You can delete a resource group by using [`DROP RESOURCE GROUP`](/sql-statements
 > **Note:**
 >
 > - When you bind a user to a resource group by using `CREATE USER` or `ALTER USER`, it will not take effect for the user's existing sessions, but only for the user's new sessions.
-> - If a user is not bound to a resource group or is bound to a `default` resource group, the user's requests are not subject to the flow control restrictions of TiDB. The `default` resource group is currently not visible to the user and cannot be created or modified.
+> - If a user is not bound to a resource group or is bound to a `default` resource group, the user's requests are not subject to the flow control restrictions of TiDB. The `default` resource group is currently not visible to the user and cannot be created or modified. You cannot view it with `SHOW CREATE RESOURCE GROUP` or `SELECT * FROM information_schema.resource_groups`. But you can view it through the `mysql.user` table.
 
 ### Step 1. Enable the resource control feature
 
@@ -140,7 +140,7 @@ The following is an example of how to create a resource group and bind users to 
 
 After you complete the above operations of creating resource groups and binding users, the resource consumption of newly created sessions will be controlled by the specified quota. If the system workload is relatively high and there is no spare capacity, the resource consumption rate of `usr2` will be strictly controlled not to exceed the quota. Because `usr1` is bound by `rg1` with `BURSTABLE` configured, the consumption rate of `usr1` is allowed to exceed the quota.
 
-If the resource group corresponds to a request with an insufficient quota, the client's request will wait. If the wait time is too long, the request will report an error.
+If there are too many requests that result in insufficient resources for the resource group, the client's requests will wait. If the wait time is too long, the requests will report an error.
 
 ## Monitoring metrics and charts
 
