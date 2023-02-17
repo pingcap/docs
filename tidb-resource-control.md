@@ -75,7 +75,7 @@ The results of the combinations of these two parameters are shown in the followi
 | `resource-control.enabled`= true  |  Flow control and scheduling (recommended) | Invalid combination      |  
 | `resource-control.enabled`= false |  Only flow control (not recommended)                 | The feature is disabled. |
 
-For more information about the resource control mechanism and parameters, see [RFC: Global Resource Control in TiDB](https://docs.google.com/document/d/1sV5EVv8Cdpc6aBCDihc2akpE0iuantPf/edit?n= RFC_Global_Resource_Control_in_TiDB.docx#heading=h.sjp9cmjfszlu).
+For more information about the resource control mechanism and parameters, see [RFC: Global Resource Control in TiDB](https://docs.google.com/document/d/1sV5EVv8Cdpc6aBCDihc2akpE0iuantPf/edit?n=RFC_Global_Resource_Control_in_TiDB.docx#heading=h.sjp9cmjfszlu).
 
 ## How to use resource control
 
