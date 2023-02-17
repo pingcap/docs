@@ -22,7 +22,18 @@ As a cluster administrator, you can use the resource control feature to create r
 The TiDB resource control feature provides two layers of resource management capabilities: the flow control capability at the TiDB layer and the priority scheduling capability at the TiKV layer. The two capabilities can be enabled separately or simultaneously. See the [Parameters for resource control](#parameters-for-resource-control) for details.
 
 - TiDB flow control: TiDB flow control uses the [token bucket algorithm](https://en.wikipedia.org/wiki/Token_bucket). If there are not enough tokens in a bucket, and the resource group does not specify the `BURSTABLE` option, the requests to the resource group will wait for the token bucket to backfill the tokens and retry. The retry might fail due to timeout.
+
+<CustomContent platform="tidb">
+
 - TiKV scheduling: if [`resource-control.enabled`](/tikv-configuration-file.md#resource-control) is enabled, TiKV uses the value of `RU_PER_SEC` of each resource group to determine the priority of the read and write requests for each resource group. Based on the priorities, the storage layer uses the priority queue to schedule and process requests.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- TiKV scheduling: for on-premises TiDB, if the `resource-control.enabled` parameter is enabled, TiKV uses the value of `RU_PER_SEC` of each resource group to determine the priority of the read and write requests for each resource group. Based on the priorities, the storage layer uses the priority queue to schedule and process requests. For TiDB Cloud, the value of the `resource-control.enabled` parameter is `false` by default and does not support dynamic modification. If you need to enable it for TiDB Cloud Dedicated Tier clusters, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+
+</CustomContent>
 
 ## Scenarios for resource control
 
@@ -58,13 +69,16 @@ Based on the above table, assuming that the TiKV time consumed by a resource gro
 The resource control feature introduces two new global variables.
 
 * TiDB: you can use the [`tidb_enable_resource_control`](/system-variables.md#tidb-tidb_enable_resource_control-new-in-v660) system variable to control whether to enable flow control for resource groups.
+
+<CustomContent platform="tidb">
+
 * TiKV: you can use the [`resource-control.enabled`](/tikv-configuration-file.md#resource-control) parameter to control whether to use request scheduling based on resource groups.
+
+</CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
->
-> In TiDB Cloud, the value of the `resource-control.enabled` parameter is `false` by default and does not support dynamic modification. If you need to enable it for TiDB Cloud Dedicated Tier clusters, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+* TiKV: For on-premises TiDB, you can use the `resource-control.enabled` parameter to control whether to use request scheduling based on resource group quotas. For TiDB Cloud, the value of the `resource-control.enabled` parameter is  `false` by default and does not support dynamic modification. If you need to enable it for TiDB Cloud Dedicated Tier clusters, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 </CustomContent>
 
@@ -108,7 +122,7 @@ Set the TiKV [`resource-control.enabled`](/tikv-configuration-file.md#resource-c
 
 <CustomContent platform="tidb-cloud">
 
-In TiKV, set the parameter [`resource-control.enabled`](https://docs.pingcap.com/tidb/stable/tikv-configuration-file#resource_control) to `true`. The parameter `resource-control.enabled` is disabled by default. You need to contact the [PingCAP support team](/tidb-cloud/tidb-cloud-support.md) to enable it.
+For on-premises TiDB, set the TiKV `resource-control.enabled` parameter to `true`. For TiDB Cloud, the value of the `resource-control.enabled` parameter is  `false` by default and does not support dynamic modification. If you need to enable it for TiDB Cloud Dedicated Tier clusters, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 </CustomContent>
 
@@ -144,17 +158,25 @@ If there are too many requests that result in insufficient resources for the res
 
 ## Monitoring metrics and charts
 
+<CustomContent platform="tidb">
+
+TiDB regularly collects runtime information about resource control and provides visual charts of the metrics in Grafana's **TiDB** > **Resource Control** dashboard. The metrics are detailed in the **Resource Control** section of [TiDB Important Monitoring Metrics](/grafana-tidb-dashboard.md).
+
+TiKV also records the request QPS from different resource groups. For more details, see [TiKV Monitoring Metrics Detail](/grafana-tikv-dashboard.md#gRPC).
+
+</CustomContent>
+
 <CustomContent platform="tidb-cloud">
 
 > **Note:**
 >
 > This section is only applicable to on-premises TiDB. Currently, TiDB Cloud does not provide resource control metrics.
 
+TiDB regularly collects runtime information about resource control and provides visual charts of the metrics in Grafana's **TiDB** > **Resource Control** dashboard.
+
+TiKV also records the request QPS from different resource groups in Grafana's **TiKV** dashboard.
+
 </CustomContent>
-
-TiDB regularly collects runtime information about resource control and provides visual charts of the metrics in Grafana's **TiDB** > **Resource Control** dashboard. The metrics are detailed in the **Resource Control** section of [TiDB Important Monitoring Metrics](/grafana-tidb-dashboard.md).
-
-TiKV also records the request QPS from different resource groups. For more details, see [TiKV Monitoring Metrics Detail](/grafana-tikv-dashboard.md#gRPC).
 
 ## Tool compatibility
 
