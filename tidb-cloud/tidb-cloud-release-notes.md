@@ -14,7 +14,23 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - Add a new command [`ticloud connect`](/tidb-cloud/ticloud-connect.md) for [TiDB Cloud CLI](/tidb-cloud/cli-reference.md).
 
-    `ticloud connect` is a command that allows you to connect to your TiDB Cloud cluster from your local machine without installing any SQL clients. After connecting to your TiDB Cloud cluster, you can execute SQL statements in the TiDB Cloud CLI.
+  `ticloud connect` is a command that allows you to connect to your TiDB Cloud cluster from your local machine without installing any SQL clients. After connecting to your TiDB Cloud cluster, you can execute SQL statements in the TiDB Cloud CLI.
+
+## February 14, 2023
+
+**General changes**
+
+- Support decreasing the number of TiKV and TiFlash nodes to scale in a TiDB [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) cluster.
+
+    You can decrease the node number [via the TiDB Cloud console](/tidb-cloud/scale-tidb-cluster.md#decrease-node-number) or [via the TiDB Cloud API (beta)](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster).
+
+**Console changes**
+
+- Introduce the **Monitoring** page for [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters.
+
+    The **Monitoring** page provides a range of metrics and data, such as the number of SQL statements executed per second, the average duration of queries, and the number of failed queries, which helps you better understand the overall performance of SQL statements in your Serverless Tier cluster.
+
+    For more information, see [TiDB Cloud built-in monitoring](/tidb-cloud/built-in-monitoring.md).
 
 ## February 2, 2023
 

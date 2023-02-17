@@ -61,7 +61,7 @@ To deploy the cluster, run the `tiup cluster deploy` command. The usage of the c
 tiup cluster deploy <cluster-name> <version> <topology.yaml> [flags]
 ```
 
-This command requires you to provide the cluster name, the TiDB cluster version, and a topology file of the cluster.
+This command requires you to provide the cluster name, the TiDB cluster version (such as `v6.5.0`), and a topology file of the cluster.
 
 To write a topology file, refer to [the example](https://github.com/pingcap/tiup/blob/master/embed/examples/cluster/topology.example.yaml). The following file is an example of the simplest topology:
 
@@ -625,7 +625,7 @@ Before TiUP is released, you can control the cluster using `tidb-ctl`, `tikv-ctl
 
 ```bash
 Usage:
-  tiup ctl:<cluster-version> {tidb/pd/tikv/binlog/etcd} [flags]
+  tiup ctl:v<CLUSTER_VERSION> {tidb/pd/tikv/binlog/etcd} [flags]
 
 Flags:
   -h, --help   help for tiup
@@ -646,7 +646,7 @@ For example, if you previously view the store by running `pd-ctl -u http://127.0
 {{< copyable "shell-regular" >}}
 
 ```bash
-tiup ctl:<cluster-version> pd -u http://127.0.0.1:2379 store
+tiup ctl:v<CLUSTER_VERSION> pd -u http://127.0.0.1:2379 store
 ```
 
 ## Environment checks for target machines
@@ -696,7 +696,7 @@ All operations above performed on the cluster machine use the SSH client embedde
 
 Then you can use the `--ssh=system` command-line flag to enable the system-native command-line tool:
 
-- Deploy a cluster: `tiup cluster deploy <cluster-name> <version> <topo> --ssh=system`
+- Deploy a cluster: `tiup cluster deploy <cluster-name> <version> <topo> --ssh=system`. Fill in the name of your cluster for `<cluster-name>`, the TiDB version to be deployed (such as `v6.5.0`) for `<version>`, and the topology file for `<topo>`.
 - Start a cluster: `tiup cluster start <cluster-name> --ssh=system`
 - Upgrade a cluster: `tiup cluster upgrade ... --ssh=system`
 

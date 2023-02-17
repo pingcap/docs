@@ -197,6 +197,7 @@
     - [Identify Expensive Queries Using Top SQL](/dashboard/top-sql.md)
     - [Identify Expensive Queries Using Logs](/identify-expensive-queries.md)
     - [Save and Restore the On-Site Information of a Cluster](/sql-plan-replayer.md)
+  - [Support Resources](/support.md)
 - Performance Tuning
   - Tuning Guide
     - [Performance Tuning Overview](/performance-tuning-overview.md)
@@ -938,6 +939,7 @@
   - v6.2
     - [6.2.0-DMR](/releases/release-6.2.0.md)
   - v6.1
+    - [6.1.4](/releases/release-6.1.4.md)
     - [6.1.3](/releases/release-6.1.3.md)
     - [6.1.2](/releases/release-6.1.2.md)
     - [6.1.1](/releases/release-6.1.1.md)

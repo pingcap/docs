@@ -27,7 +27,7 @@ ACID refers to the four key properties of a transaction: atomicity, consistency,
 
 Determines the functionality and capacity of your cluster. Different cluster tiers provide different numbers of TiDB, TiKV, and TiFlash nodes in your cluster.
 
-## Credit
+### Credit
 
 TiDB Cloud offers a certain number of credits for Proof of Concept (PoC) users. One credit is equivalent to one U.S. dollar. You can use credits to pay TiDB cluster fees before the credits become expired.
 
