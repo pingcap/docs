@@ -1,7 +1,6 @@
 ---
 title: Multiple Data Centers in One City Deployment
 summary: Learn the deployment solution to multi-data centers in one city.
-aliases: ['/docs/dev/how-to/deploy/geographic-redundancy/overview/','/docs/dev/geo-redundancy-deployment/','/tidb/dev/geo-redundancy-deployment']
 ---
 
 # Multiple Data Centers in One City Deployment

@@ -1,7 +1,6 @@
 ---
 title: TiDB Dashboard Diagnostic Report
 summary: Learn the TiDB Dashboard diagnostic report.
-aliases: ['/docs/dev/dashboard/dashboard-diagnostics-report/']
 ---
 
 # TiDB Dashboard Diagnostic Report
