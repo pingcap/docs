@@ -23,7 +23,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 </thead>
 <tbody>
   <tr>
-    <td rowspan="3">Scalability and Performance<br /></td>
+    <td rowspan="4">Scalability and Performance<br /></td>
     <td>TiKV support batch aggregate data requests</td>
     <td>This enhancement significantly reduces total RPCs in TiKV batch get operations. In situations where data is highly dispersed and the gRPC thread pool is stretched, batching coprocessor requests can improve performance by 50+%.</td>
   </tr>
