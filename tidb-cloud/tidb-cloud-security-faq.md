@@ -46,8 +46,6 @@ In TiDB Cloud, you have the flexibility to choose how and where you want to run 
 
 As a customer, you can decide in which AWS or GCP region your data will be stored by creating your TiDB cluster in the target region that meets your geographic needs. For example, if you are in the USA and you want to store all your data only in the USA, you can choose to deploy a TiDB cluster exclusively in the AWS Oregon (us-west-2) region.
 
-You can also replicate and back up your data in multiple AWS or GCP regions. PingCAP will not move or replicate your data outside of your chosen AWS or GCP region without your permission.
-
 ## What are the roles in securing customer data?
 
 When you assess the security and compliance of roles and responsibilities, it is crucial to differentiate between the security role of TiDB Cloud and the security role of your own in using TiDB Cloud. 
