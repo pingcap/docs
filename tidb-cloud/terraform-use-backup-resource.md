@@ -147,7 +147,7 @@ Now, you have created a backup for the cluster. If you want to use the backup to
 
 ## Update a backup
 
-Backup cannot be updated.
+Backups cannot be updated.
 
 ## Delete a backup
 

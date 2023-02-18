@@ -3,7 +3,7 @@ title: Use Import Resource
 summary: Learn how to manage the import task using the import resource.
 ---
 
-# Import Resource
+# Use Import Resource
 
 Import resource supports:
 
@@ -15,16 +15,16 @@ You can learn how to manage an import task with the `tidbcloud_import` resource 
 
 ## Before you start
 
-- Learn how to [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md) first.
-- A serverless tier or dedicated tier cluster is required.
+- [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md).
+- [Create a Serverless Tier or Dedicated Tier cluster](/tidb-cloud/create-tidb-cluster.md).
 
 ## Manage the import resource
 
-Here is an example on how to manage a LOCAL import task with import resource.
+You can manage either a local import task or an Amazon S3 import task using the import resource. The following sections take a local import task as an example to show you how to manage the import resource.
 
-### Create
+### Create and run an import task
 
-1. Create a csv file for import. For example:
+1. Create a CSV file for import. For example:
 
    ```
    id;name;age
@@ -32,7 +32,7 @@ Here is an example on how to manage a LOCAL import task with import resource.
    2;Bob;30
    ```
 
-2. Create an `import` directory then create a `main.tf` inside it. For example:
+2. Create an `import` directory, and then create a `main.tf` inside it. For example:
 
     ```
     terraform {
@@ -67,7 +67,7 @@ Here is an example on how to manage a LOCAL import task with import resource.
 
    Replace resource values (such as project ID and cluster ID) in the file with your own. And you can find the details of `csv_format` in [CSV Configurations for Importing Data](/tidb-cloud/csv-config-for-import-data.md).
 
-3. Run the `terraform apply` command and type `yes` to confirm the creation:
+3. Run the `terraform apply` command to create the import task, and then type `yes` to confirm the creation and start the import:
 
    ```
    $ terraform apply
@@ -125,7 +125,7 @@ Here is an example on how to manage a LOCAL import task with import resource.
    }
    ```
 
-5. Use `terraform refresh` to update the status after several minutes
+5. Use `terraform refresh` to update the status after several minutes:
 
    ```
    $ terraform refresh && terraform state show tidbcloud_import.example_local
@@ -167,9 +167,9 @@ Here is an example on how to manage a LOCAL import task with import resource.
    }
    ```
 
-   When the status turns to `COMPLETED`, it indicates that the import task has finished.
+   When the status turns to `COMPLETED`, it indicates that the import task is finished.
 
-6. Check the import results with MySQL CLI
+6. Check the import data with MySQL CLI:
 
    ```
    mysql> select * from test.import_test;
@@ -182,15 +182,15 @@ Here is an example on how to manage a LOCAL import task with import resource.
    2 rows in set (0.24 sec)
    ```
 
-### Update
+### Update an import task
 
 Import tasks cannot be updated.
 
-### Delete
+### Delete an import task
 
-Delete is actually cancel in import resource, and you can not cancel a `COMPLETED` import task.
+For Terraform, deleting an import task means canceling the corresponding import resource. 
 
-Cancel an import task which has completed:
+you cannot cancel a `COMPLETED` import task. For example, if you cancel an import task that is completed, you will see get the `Delete Error` as follows:
 
 ```
 $ terraform destroy
@@ -212,7 +212,7 @@ tidbcloud_import.example_local: Destroying... [id=781074]
 ╵
 ```
 
-Cancel an import task which status is `IMPORTING`:
+Cancel an import task whose status is `IMPORTING`:
 
 ```
 $ terraform destroy
@@ -233,4 +233,4 @@ Destroy complete! Resources: 1 destroyed.
 
 ## Configurations
 
-See [configuration documentation](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/import) to get all the available configurations for import resource.
+See [configuration documentation](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/import) to get all the available configurations for the import resource.
