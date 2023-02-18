@@ -1254,7 +1254,8 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 ### `block-size`
 
 + The default size of a RocksDB block
-+ Default value: `"16KB"`
++ Default value for `defaultcf` and `writecf`: `"64KB"`
++ Default value for `lockcf`: `"16KB"`
 + Minimum value: `"1KB"`
 + Unit: KB|MB|GB
 
