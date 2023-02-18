@@ -1,5 +1,4 @@
 ---
----
 title: Use Backup Resource
 summary: Learn how to create a backup of a TiDB Cloud cluster using the backup resource.
 ---
