@@ -1,15 +1,15 @@
 ---
 title: Console Audit Logging
-summary: Learn about the log auditing feature for the TiDB Cloud console.
+summary: Learn about the audit logging feature for the TiDB Cloud console.
 ---
 
 # Console Audit Logging
 
-TiDB Cloud provides the console audit logging feature to help you track various behaviors and operations of users on the [TiDB Cloud console](https://tidbcloud.com). For example, you can track operations, such as login into the TiDB Cloud console and creating a cluster.
+TiDB Cloud provides the console audit logging feature to help you track various behaviors and operations of users on the [TiDB Cloud console](https://tidbcloud.com). For example, you can track operations, such as inviting a user to join the organization and creating a cluster.
 
 ## Prerequisites
 
-- You are the owner of your organization in TiDB Cloud. Otherwise, you cannot see the console audit logging-related options in the TiDB Cloud console. For more information, see [Manage role access](/tidb-cloud/manage-user-access.md#manage-role-access).
+- You must be the owner or Audit Admin of your organization in TiDB Cloud. Otherwise, you cannot see the console audit logging-related options in the TiDB Cloud console. For more information, see [Manage role access](/tidb-cloud/manage-user-access.md#manage-role-access).
 - You can only enable and disable the console audit logging for your organization. You can only track the actions of users in your organization.
 - After the console audit logging is enabled, all event types of the TiDB Cloud console will be audited, and you cannot specify only auditing some of them.
 
