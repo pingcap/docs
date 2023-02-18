@@ -1,4 +1,5 @@
 ---
+---
 title: Use Backup Resource
 summary: Learn how to create a backup of a TiDB Cloud cluster using the backup resource.
 ---
@@ -25,7 +26,6 @@ You can learn how to create a backup of a TiDB Cloud cluster with the `tidbcloud
      required_providers {
        tidbcloud = {
          source = "tidbcloud/tidbcloud"
-         version = "~> 0.1.0"
        }
      }
    }

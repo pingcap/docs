@@ -13,7 +13,7 @@ Import resource supports:
 
 You can learn how to manage an import task with the `tidbcloud_import` resource in this document.
 
-## Before you start
+## Prerequisites
 
 - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md).
 - [Create a Serverless Tier or Dedicated Tier cluster](/tidb-cloud/create-tidb-cluster.md).
@@ -39,7 +39,6 @@ You can manage either a local import task or an Amazon S3 import task using the 
      required_providers {
        tidbcloud = {
          source = "tidbcloud/tidbcloud"
-         version = "~> 0.2.0"
        }
      }
    }
@@ -65,7 +64,7 @@ You can manage either a local import task or an Amazon S3 import task using the 
     }
     ```
 
-   Replace resource values (such as project ID and cluster ID) in the file with your own. And you can find the details of `csv_format` in [CSV Configurations for Importing Data](/tidb-cloud/csv-config-for-import-data.md).
+   Replace resource values (such as project ID and cluster ID) in the file with your own. And you can find the details of `csv_format` in [configuration page](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/import#nested-schema-for-csv_format).
 
 3. Run the `terraform apply` command to create the import task, and then type `yes` to confirm the creation and start the import:
 

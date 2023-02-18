@@ -26,7 +26,6 @@ To view the information of all available projects, you can use the `tidbcloud_pr
      required_providers {
        tidbcloud = {
          source = "tidbcloud/tidbcloud"
-         version = "~> 0.1.0"
        }
      }
    }
@@ -126,7 +125,6 @@ To get the cluster specification information, you can use the `tidbcloud_cluster
       required_providers {
         tidbcloud = {
           source = "tidbcloud/tidbcloud"
-          version = "~> 0.1.0"
         }
       }
     }
@@ -296,7 +294,6 @@ The following example shows how to create a Dedicated Tier cluster.
      required_providers {
        tidbcloud = {
          source = "tidbcloud/tidbcloud"
-         version = "~> 0.1.0"
        }
      }
    }
@@ -857,7 +854,6 @@ For example, you can import a cluster that is not created by Terraform or import
      required_providers {
        tidbcloud = {
          source = "tidbcloud/tidbcloud"
-         version = "~> 0.1.0"
        }
      }
    }
