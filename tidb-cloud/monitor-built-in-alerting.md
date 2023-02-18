@@ -62,5 +62,5 @@ The following table provides the TiDB Cloud built-in alert conditions and the co
 
 > **Note:**
 >
-> - [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) only support a subset of alert conditions that are marked with `*` in the **Condition** column.
+> - [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) doesn't support any of the alerts in this list.
 > - "cluster ABC" and "project XYZ" in the **Recommended Action** column are example names for reference.
