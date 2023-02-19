@@ -94,8 +94,9 @@ The console audit logs can record various user activities on the TiDB Cloud cons
 | DeleteAWSVPCPeering | Delete an AWS VPC Peering |
 | CreateGCPVPCPeering | Create a GCP VPC Peering |
 | DeleteGCPVPCPeering | Delete a GCP VPC Peering |
+| CreatePrivateEndpointService | Create private endpoint service |
+| DeletePrivateEndpointService | Delete private endpoint service |
 | CreateAWSPrivateEndPoint | Create an AWS private endpoint |
-| EditAWSPrivateEndPoint | Edit AWS private endpoint |
 | DeleteAWSPrivateEndPoint | Delete AWS private endpoint |
 | SubscribeAlerts | Subscribe alerts |
 | UnsubscribeAlerts | Unsubscribe alerts |
@@ -114,7 +115,6 @@ The console audit logs can record various user activities on the TiDB Cloud cons
 | OpenWebSQLConsole | Connect to a TiDB cluster through Web SQL |
 | SetRootPassword | Set the root password of a TiDB cluster |
 | UpdateIPAccessList | Update the IP access list of a TiDB cluster |
-| DeleteAccessList | Delete the IP access list of TiDB cluster |
 | SetAutoBackup | Set the automatic backup mechanism of a TiDB cluster |
 | DoManualBackup | Perform a manual backup of TiDB cluster |
 | DeleteBackupTask | Delete a backup task |
@@ -136,8 +136,6 @@ The console audit logs can record various user activities on the TiDB Cloud cons
 | BindSupportPlan | Bind a support plan |
 | CancelSupportPlan | Cancel a support plan |
 | UpdateOrganizationName | Update the organization name |
-| CreatePrivateEndpointService | Create private endpoint service |
-| DeletePrivateEndpointService | Delete private endpoint service |
 
 ## Console audit log fields
 
