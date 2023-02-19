@@ -149,7 +149,7 @@ To help you track user activities, TiDB Cloud provides the following fields for 
 | operator_id | uint64 | Operator ID |
 | operator_name | string | Operator name |
 | operator_ip | string | Operator's IP address |
-| operator_login_method | enum | Operator's login method: `google`, `github`, `email`, or `api_key` |
+| operator_login_method | enum | Operator's login method: `google`, `github`, `microsoft`, `email`, or `api_key` |
 | org_id | uint64 | Organization ID to which the event belongs |
 | org_name | string | Organization name to which the event belongs |
 | project_id | uint64 | Project ID to which the event belongs |
