@@ -25,7 +25,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
   <tr>
     <td rowspan="3">Scalability and Performance<br /></td>
     <td>TiKV supports Partitioned-Raft-KV storage engine (experimental)</td>
-    <td>TiKV introduces the next-generation storage engine Partitioned-Raft-KV, and each Region uses an independent RocksDB instance, which can easily expand the storage capacity of the cluster from TB to PB and provide more stable write latency and stronger scalability.</td>
+    <td>TiKV introduces the Partitioned-Raft-KV storage engine, and each Region uses an independent RocksDB instance, which can easily expand the storage capacity of the cluster from TB to PB and provide more stable write latency and stronger scalability.</td>
   </tr>
   <tr>
     <td>TiKV support <a href="https://docs.pingcap.com/tidb/v6.6/system-variables#tidb_store_batch_size" target="_blank">batch aggregating data requests</a></td>
