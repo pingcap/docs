@@ -224,7 +224,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
     This feature is disabled by default. To enable it, you can set the `compress-kv-pairs` configuration item of TiDB Lightning to `"gzip"` or `"gz"`.
 
-    For more information, see [documentation](/tidb-lightning-configuration.md#tidb-lightning-task).
+    For more information, see [documentation](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task).
 
 * The TiKV-CDC tool is now GA and supports subscribing to data changes of RawKV [#48](https://github.com/tikv/migration/issues/48) @[zeminzhou](https://github.com/zeminzhou) @[haojinming](https://github.com/haojinming) @[pingyu](https://github.com/pingyu)
 
@@ -379,7 +379,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 | DM | `on-duplicate` |  Deleted | This configuration item controls the methods to resolve conflicts during the full import phase. In v6.6.0, new configuration items `on-duplicate-logical` and `on-duplicate-physical` are introduced to replace `on-duplicate`. |
 | TiDB | [`enable-telemetry`](/tidb-configuration-file.md#enable-telemetry-new-in-v402) | Modified | Starting from v6.6.0, the default value changes from `true` to `false`, which means that telemetry is disabled by default in TiDB. |
 | TiKV  | [`rocksdb.defaultcf.block-size`](/tikv-configuration-file.md#block-size) and [`rocksdb.writecf.block-size`](/tikv-configuration-file.md#block-size)  |  Modified  |   The default values change from `64K` to `32K`.  |
-| TiKV | [`rocksdb.defaultcf.block-cache-size`](/tikv-configuration-file.md#block-cache-size), [`rocksdb.writecf.block-cache-size`](/tikv-configuration-file.md#block-cache-size), [`rocksdb.lockcf.block-cache-size`](/tikv-configuration-file.md#block-cache-size) | Modified | Starting from v6.6.0, these configuration items are only used for calculating the default value of `storage.block-cache.capacity`. For details, see [#12936](https://github.com/tikv/tikv/issues/12936). |
+| TiKV | [`rocksdb.defaultcf.block-cache-size`](/tikv-configuration-file.md#block-cache-size), [`rocksdb.writecf.block-cache-size`](/tikv-configuration-file.md#block-cache-size), [`rocksdb.lockcf.block-cache-size`](/tikv-configuration-file.md#block-cache-size) | Deprecated | Starting from v6.6.0, these configuration items are deprecated. For details, see [#12936](https://github.com/tikv/tikv/issues/12936). |
 | PD | [`enable-telemetry`](/pd-configuration-file.md#enable-telemetry) | Modified | Starting from v6.6.0, the default value changes from `true` to `false`, which means that telemetry is disabled by default in TiDB Dasboard. |
 | DM | [`import-mode`](/dm/task-configuration-file-full.md) |  Modified | The possible values of this configuration item are changed from `"sql"` and `"loader"` to `"logical"` and `"physical"`. The default value is `"logical"`, which means using TiDB Lightning's logical import mode to import data. |
 | TiFlash |  [`profile.default.max_memory_usage_for_all_queries`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)  |  Modified  |  Specifies the memory usage limit for the generated intermediate data in all queries. Starting from v6.6.0, the default value changes from `0` to `0.8`, which means the limit is 80% of the total memory. |
