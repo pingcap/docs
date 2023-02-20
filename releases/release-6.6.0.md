@@ -320,7 +320,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
 ### Telemetry
 
-- Starting from Februray 20, 2023, the [telemetry feature](/telemetry.md) is disabled by default in new versions of TiDB and TiDB Dashboard (including v6.6.0). If you upgrade from a previous version that uses the default telemetry configuration, the telemetry feature is disabled after the upgrade. For the specific versions, see [TiDB Release Timeline](/releases/release-timeline.md).
+- Starting from February 20, 2023, the [telemetry feature](/telemetry.md) is disabled by default in new versions of TiDB and TiDB Dashboard (including v6.6.0). If you upgrade from a previous version that uses the default telemetry configuration, the telemetry feature is disabled after the upgrade. For the specific versions, see [TiDB Release Timeline](/releases/release-timeline.md).
 - Starting from v1.11.3, the telemetry feature is disabled by default in newly deployed TiUP. If you upgrade from a previous version of TiUP to v1.11.3 or a later version, the telemetry feature keeps the same status as before the upgrade.
 
 ## Compatibility changes
@@ -381,7 +381,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 | TiDB | [`enable-telemetry`](/tidb-configuration-file.md#enable-telemetry-new-in-v402) | Modified | Starting from v6.6.0, the default value changes from `true` to `false`, which means that telemetry is disabled by default in TiDB. |
 | TiKV  | [`rocksdb.defaultcf.block-size`](/tikv-configuration-file.md#block-size) and [`rocksdb.writecf.block-size`](/tikv-configuration-file.md#block-size)  |  Modified  |   The default values change from `64K` to `32K`.  |
 | TiKV | [`rocksdb.defaultcf.block-cache-size`](/tikv-configuration-file.md#block-cache-size), [`rocksdb.writecf.block-cache-size`](/tikv-configuration-file.md#block-cache-size), [`rocksdb.lockcf.block-cache-size`](/tikv-configuration-file.md#block-cache-size) | Deprecated | Starting from v6.6.0, these configuration items are deprecated. For details, see [#12936](https://github.com/tikv/tikv/issues/12936). |
-| PD | [`enable-telemetry`](/pd-configuration-file.md#enable-telemetry) | Modified | Starting from v6.6.0, the default value changes from `true` to `false`, which means that telemetry is disabled by default in TiDB Dasboard. |
+| PD | [`enable-telemetry`](/pd-configuration-file.md#enable-telemetry) | Modified | Starting from v6.6.0, the default value changes from `true` to `false`, which means that telemetry is disabled by default in TiDB Dashboard. |
 | DM | [`import-mode`](/dm/task-configuration-file-full.md) |  Modified | The possible values of this configuration item are changed from `"sql"` and `"loader"` to `"logical"` and `"physical"`. The default value is `"logical"`, which means using TiDB Lightning's logical import mode to import data. |
 | TiFlash |  [`profile.default.max_memory_usage_for_all_queries`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)  |  Modified  |  Specifies the memory usage limit for the generated intermediate data in all queries. Starting from v6.6.0, the default value changes from `0` to `0.8`, which means the limit is 80% of the total memory. |
 | TiCDC  | [`consistent.storage`](/ticdc/ticdc-sink-to-mysql.md#prerequisites)  |  Modified  | The path under which redo log backup is stored. Two more value options are added for `scheme`, GCS, and Azure. |
