@@ -28,7 +28,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
     <td>TiKV introduces the Partitioned-Raft-KV storage engine, and each Region uses an independent RocksDB instance, which can easily expand the storage capacity of the cluster from TB to PB and provide more stable write latency and stronger scalability.</td>
   </tr>
   <tr>
-    <td>TiKV support <a href="https://docs.pingcap.com/tidb/v6.6/system-variables#tidb_store_batch_size" target="_blank">batch aggregating data requests</a></td>
+    <td>TiKV supports <a href="https://docs.pingcap.com/tidb/v6.6/system-variables#tidb_store_batch_size" target="_blank">batch aggregating data requests</a></td>
     <td>This enhancement significantly reduces total RPCs in TiKV batch-get operations. In situations where data is highly dispersed and the gRPC thread pool has insufficient resources, batching coprocessor requests can improve performance by more than 50%.</td>
   </tr>
   <tr>
@@ -408,7 +408,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
 ### Others
 
-- Support dynamically modifying [`store-io-pool-size`](/tikv-configuration-file.md#store-io-pool-size-new-in-v530). This facilitate more flexible TiKV performance tuning.
+- Support dynamically modifying [`store-io-pool-size`](/tikv-configuration-file.md#store-io-pool-size-new-in-v530). This facilitates more flexible TiKV performance tuning.
 - Remove the limit on `LIMIT` clauses, thus improving the execution performance.
 - Starting from v6.6.0, BR does not support restoring data to clusters earlier than v6.1.0.
 - Starting from v6.6.0, TiDB no longer supports modifying column types on partitioned tables because of potential correctness issues.
