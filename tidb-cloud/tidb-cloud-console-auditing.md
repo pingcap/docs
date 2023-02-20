@@ -165,6 +165,6 @@ To help you track user activities, TiDB Cloud provides the following fields for 
 | project_name | string | Project name to which the event belongs |
 | cluster_id | uint64 | Cluster ID to which the event belongs |
 | cluster_name | string | Cluster name to which the event belongs |
-| trace_id | string | Trace ID of the request initiated by the operator. Currently, this field is empty and will be available in future releases. |
+| trace_id | string | Trace ID of the request initiated by the operator. This field is empty currently and will be available in future releases. |
 | result | enum | Event result: `success` or `failure` |
 | details | json | Detailed description of the event |
