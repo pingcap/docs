@@ -137,6 +137,10 @@ The console audit logs can record various user activities on the TiDB Cloud cons
 | CancelSupportPlan | Cancel a support plan |
 | UpdateOrganizationName | Update the organization name |
 
+> **Note:**
+>
+> The main event types have been covered, but a small number of event types have not been covered for the time being and are being improved.
+
 ## Console audit log fields
 
 To help you track user activities, TiDB Cloud provides the following fields for each console audit log:
@@ -159,3 +163,7 @@ To help you track user activities, TiDB Cloud provides the following fields for 
 | trace_id | string | Trace ID of the request initiated by the operator |
 | result | enum | Event result: `success` or `failure` |
 | details | json | Detailed description of the event |
+
+> **Note:**
+>
+> The trace_id field is temporarily unavailable
