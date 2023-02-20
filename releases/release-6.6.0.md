@@ -83,7 +83,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
     Tests indicate this reduces tail latency 40-60%.
 
-    For details, see [documentation](/system-variables.md#tidb_pessimistic_txn_aggressive_locking-new-in-v660).
+    For more information, see [documentation](/system-variables.md#tidb_pessimistic_txn_aggressive_locking-new-in-v660).
 
 * Batch aggregate data requests [#39361](https://github.com/pingcap/tidb/issues/39361) @[cfzjywxk](https://github.com/cfzjywxk) @[you06](https://github.com/you06)
 
@@ -101,7 +101,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
     To cooperate with multiple nodes for computing, the TiFlash engine needs to exchange data among different nodes. When the size of the data to be exchanged is very large, the performance of data exchange might affect the overall computing efficiency. In v6.6.0, the TiFlash engine introduces a compression mechanism to compress the data that needs to be exchanged when necessary, and then to perform the exchange, thereby improving the efficiency of data exchange.
 
-    For details, see [documentation](/explain-mpp.md#mpp-version-and-exchange-data-compression).
+    For more information, see [documentation](/explain-mpp.md#mpp-version-and-exchange-data-compression).
 
 * TiFlash supports the Stale Read feature [#4483](https://github.com/pingcap/tiflash/issues/4483) @[hehechen](https://github.com/hehechen)
 
@@ -182,7 +182,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
     Introducing multi-valued indexes further enhances TiDB's support for the JSON data type and also improves TiDB's compatibility with MySQL 8.0.
 
-    For details, see [documentation](/sql-statements/sql-statement-create-index.md#multi-valued-index).
+    For more information, see [documentation](/sql-statements/sql-statement-create-index.md#multi-valued-index).
 
 ### DB operations
 
