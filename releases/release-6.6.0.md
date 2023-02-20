@@ -5,7 +5,7 @@ summary: Learn about the new features, compatibility changes, improvements, and 
 
 # TiDB 6.6.0 Release Notes
 
-Release date: Februrary 20, 2023
+Release date: February 20, 2023
 
 TiDB version: 6.6.0-[DMR](/releases/versioning.md#development-milestone-releases)
 
