@@ -33,7 +33,7 @@ For details about how to control and manage TiDB SQL users, see [TiDB User Accou
 
     - SYSTEM_VARIABLES_ADMIN
 
-- To use the [Fast Bind Executions Plan](dashboard-statement-details.md#fast-plan-binding) feature on the interface after signing in to TiDB Dashboard, the SQL user must also have the following privilege:
+- To use the [Fast Bind Executions Plan](/dashboard/dashboard-statement-details.md#fast-plan-binding) feature on the interface after signing in to TiDB Dashboard, the SQL user must also have the following privilege:
 
     - SYSTEM_VARIABLES_ADMIN
     - SUPER
