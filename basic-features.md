@@ -208,7 +208,7 @@ This document lists the features supported in different TiDB versions, including
 | [Information schema](/information-schema/information-schema.md) | Y | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | [Metrics schema](/metrics-schema.md)                       | Y | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | [Statements summary tables](/statement-summary-tables.md)    | Y | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Statements summary tables - summary persistence](/statement-summary-tables.md#持久化-statements-summary)                 |    E    |    N    |    N     |    N     |    N     |    N     |    N     |    N     | N        |
+| [Statements summary tables - summary persistence](/statement-summary-tables.md#persist-statements-summary)                 |    E    |    N    |    N     |    N     |    N     |    N     |    N     |    N     | N        |
 | [Slow query log](/identify-slow-queries.md)                 | Y | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | [TiUP deployment](/tiup/tiup-overview.md)                   | Y | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | [Kubernetes operator](https://docs.pingcap.com/tidb-in-kubernetes/) | Y | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
