@@ -17,14 +17,14 @@ The TiDB configuration file supports more options than command-line parameters. 
 - Default value: `true`
 - It is recommended to set it to `false` if you need to create a large number of tables (for example, more than 100 thousand tables).
 
-### `tidb_max_reuse_chunk` <span class="version-mark">New in v6.4.0</span>
+### `tidb-max-reuse-chunk` <span class="version-mark">New in v6.4.0</span>
 
 - Controls the maximum cached chunk objects of chunk allocation. Setting this configuration item to too large a value might increase the risk of OOM.
 - Default value: `64`
 - Minimum value: `0`
 - Maximum value: `2147483647`
 
-### `tidb_max_reuse_column` <span class="version-mark">New in v6.4.0</span>
+### `tidb-max-reuse-column` <span class="version-mark">New in v6.4.0</span>
 
 - Controls the maximum cached column objects of chunk allocation. Setting this configuration item to too large a value might increase the risk of OOM.
 - Default value: `256`
@@ -184,6 +184,13 @@ The TiDB configuration file supports more options than command-line parameters. 
 + Controls whether to enable the Global Kill (terminating queries or connections across instances) feature.
 + Default value: `true`
 + When the value is `true`, both `KILL` and `KILL TIDB` statements can terminate queries or connections across instances so you do not need to worry about erroneously terminating queries or connections. When you use a client to connect to any TiDB instance and execute the `KILL` or `KILL TIDB` statement, the statement will be forwarded to the target TiDB instance. If there is a proxy between the client and the TiDB cluster, the `KILL` and `KILL TIDB` statements will also be forwarded to the target TiDB instance for execution. Currently, using the MySQL command line <kbd>ctrl</kbd>+<kbd>c</kbd> to terminate a query or connection in TiDB is not supported when `enable-global-kill` is `true`. For more information on the `KILL` statement, see [KILL](/sql-statements/sql-statement-kill.md).
+
+### `initialize-sql-file` <span class="version-mark">New in v6.6.0</span>
+
++ Specifies the SQL script to be executed when the TiDB cluster is started for the first time.
++ Default value: `""`
++ All SQL statements in this script are executed with the highest privilege without any privilege check. If the specified SQL script fails to execute, the TiDB cluster might fail to start.
++ This configuration item is used to perform such operations as modifying the value of a system variable, creating a user, or granting privileges.
 
 ### `enable-forwarding` <span class="version-mark">New in v5.0.0</span>
 
@@ -730,7 +737,7 @@ For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](
 + Controls whether the [`INFORMATION_SCHEMA.DEADLOCKS`](/information-schema/information-schema-deadlocks.md) table collects the information of retryable deadlock errors. For the description of retryable deadlock errors, see [Retryable deadlock errors](/information-schema/information-schema-deadlocks.md#retryable-deadlock-errors).
 + Default value: `false`
 
-### pessimistic-auto-commit (New in v6.0.0)
+### pessimistic-auto-commit <span class="version-mark">New in v6.0.0</span>
 
 + Determines the transaction mode that the auto-commit transaction uses when the pessimistic transaction mode is globally enabled (`tidb_txn_mode='pessimistic'`). By default, even if the pessimistic transaction mode is globally enabled, the auto-commit transaction still uses the optimistic transaction mode. After enabling `pessimistic-auto-commit` (set to `true`), the auto-commit transaction also uses pessimistic mode, which is consistent with the other explicitly committed pessimistic transactions.
 + For scenarios with conflicts, after enabling this configuration, TiDB includes auto-commit transactions into the global lock-waiting management, which avoids deadlocks and mitigates the latency spike brought by deadlock-causing conflicts.
@@ -806,6 +813,57 @@ Configuration items related to read isolation.
 - Possible values: `OFF`, `ON`
 - The value of this configuration will initialize the value of the system variable [`tidb_enable_ddl`](/system-variables.md#tidb_enable_ddl)
 - Before v6.3.0, this configuration is set by `run-ddl`.
+
+### `tidb_stmt_summary_enable_persistent` <span class="version-mark">New in v6.6.0</span>
+
+> **Warning:**
+>
+> Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
++ Controls whether to enable statements summary persistence.
++ Default value: `false`
++ For more details, see [Persist statements summary](/statement-summary-tables.md#persist-statements-summary).
+
+### `tidb_stmt_summary_filename` <span class="version-mark">New in v6.6.0</span>
+
+> **Warning:**
+>
+> Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
++ When statements summary persistence is enabled, this configuration specifies the file to which persistent data is written.
++ Default value: `tidb-statements.log`
+
+### `tidb_stmt_summary_file_max_days` <span class="version-mark">New in v6.6.0</span>
+
+> **Warning:**
+>
+> Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
++ When statements summary persistence is enabled, this configuration specifies the maximum number of days to keep persistent data files.
++ Default value: `3`
++ Unit: day
++ You can adjust the value based on the data retention requirements and disk space usage.
+
+### `tidb_stmt_summary_file_max_size` <span class="version-mark">New in v6.6.0</span>
+
+> **Warning:**
+>
+> Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
++ When statements summary persistence is enabled, this configuration specifies the maximum size of a persistent data file.
++ Default value: `64`
++ Unit: MiB
++ You can adjust the value based on the data retention requirements and disk space usage.
+
+### `tidb_stmt_summary_file_max_backups` <span class="version-mark">New in v6.6.0</span>
+
+> **Warning:**
+>
+> Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
++ When statements summary persistence is enabled, this configuration specifies the maximum number of data files that can be persisted. `0` means no limit on the number of files.
++ Default value: `0`
++ You can adjust the value based on the data retention requirements and disk space usage.
 
 ## proxy-protocol
 

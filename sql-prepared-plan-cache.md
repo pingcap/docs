@@ -23,7 +23,7 @@ In the current version of TiDB, if a `Prepare` statement meets any of the follow
 - The query contains the `ignore_plan_cache` hint, such as `select /*+ ignore_plan_cache() */ * from t`.
 - The query contains variables other than `?` (including system variables or user-defined variables), such as `select * from t where a>? and b>@x`.
 - The query contains the functions that cannot be cached: `database()`, `current_user`, `current_role`, `user`, `connection_id`, `last_insert_id`, `row_count`, `version`, and `like`.
-- The query contains `?` after `Limit`, such as `Limit ?` and `Limit 10, ?`. Such queries are not cached because the specific value of `?` has a great impact on query performance.
+- The query with a variable as the `LIMIT` parameter (`LIMIT ?`) and the variable value is greater than 10000.
 - The query contains `?` after `Order By`, such as `Order By ?`. Such queries sort data based on the column specified by `?`. If the queries targeting different columns use the same execution plan, the results will be wrong. Therefore, such queries are not cached. However, if the query is a common one, such as `Order By a+?`, it is cached.
 - The query contains `?` after `Group By`, such as `Group By?`. Such queries group data based on the column specified by `?`. If the queries targeting different columns use the same execution plan, the results will be wrong. Therefore, such queries are not cached. However, if the query is a common one, such as `Group By a+?`, it is cached.
 - The query contains `?` in the definition of the `Window Frame` window function, such as `(partition by year order by sale rows ? preceding)`. If `?` appears elsewhere in the window function, the query is cached.
@@ -120,6 +120,46 @@ MySQL [test]> select @@last_plan_from_cache;
 +------------------------+
 | 0                      |
 +------------------------+
+1 row in set (0.00 sec)
+```
+
+## Diagnostics of Prepared Plan Cache
+
+Some queries or plans cannot be cached. You can use the `SHOW WARNINGS` statement to check whether the query or plan is cached. If it is not cached, you can check the reason for the failure in the result. For example:
+
+```sql
+mysql> PREPARE st FROM 'SELECT * FROM t WHERE a > (SELECT MAX(a) FROM t)';  -- The query contains a subquery and cannot be cached.
+
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+
+mysql> show warnings;  -- Checks the reason why the query plan cannot be cached.
+
++---------+------+-----------------------------------------------+
+| Level   | Code | Message                                       |
++---------+------+-----------------------------------------------+
+| Warning | 1105 | skip plan-cache: sub-queries are un-cacheable |
++---------+------+-----------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> prepare st from 'select * from t where a<?';
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> set @a='1';
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> execute st using @a;  -- The optimization converts a non-INT type to an INT type, and the execution plan might change with the change of the parameter, so TiDB does not cache the plan.
+
+Empty set, 1 warning (0.01 sec)
+
+mysql> show warnings;
+
++---------+------+----------------------------------------------+
+| Level   | Code | Message                                      |
++---------+------+----------------------------------------------+
+| Warning | 1105 | skip plan-cache: '1' may be converted to INT |
++---------+------+----------------------------------------------+
 1 row in set (0.00 sec)
 ```
 
