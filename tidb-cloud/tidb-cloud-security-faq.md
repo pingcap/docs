@@ -36,7 +36,7 @@ As a customer, you own your data and have the right to choose which TiDB Cloud c
 
 As a customer, you have full control of your data:
 
-- You choose how to protect your customer data. TiDB Cloud offers you with encryption at rest and in transit to protect your data .And you can choose to manage your own encryption key. If you need to bring your own key, contact [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support).
+- You can choose how to protect your data with TiDB Cloud, which offers encryption at rest and in transit to safeguard your data. And, you have the option to manage your own encryption key. If you prefer to bring your own key, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 - You manage access to your data, as well as access to the TiDB Cloud databases and tools through users, roles, and credentials that you control.
 
