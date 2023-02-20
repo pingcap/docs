@@ -201,7 +201,7 @@ Dynamic privileges include:
 * `RESTRICTED_STATUS_ADMIN` allows privilege owners to see all status variables in [`SHOW [GLOBAL|SESSION] STATUS`](/sql-statements/sql-statement-show-status.md) when SEM is enabled.
 * `RESTRICTED_VARIABLES_ADMIN` allows privilege owners to see all system variables when SEM is enabled.
 * `RESTRICTED_USER_ADMIN` prohibits privilege owners to have their access revoked by SUPER users when SEM is enabled.
-* `RESTRICTED_CONNECTION_ADMIN` prohibits privilege owners to have connections killed by the `PROCESS` or `CONNECTION_ADMIN` privilege.
+* `RESTRICTED_CONNECTION_ADMIN` allows privilege owners to kill connections of `RESTRICTED_USER_ADMIN` users. This affects `KILL` and `KILL TIDB` commands.
 * `RESTRICTED_REPLICA_WRITER_ADMIN` allows privilege owners to perform write or update operations without being affected when the read-only mode is enabled in the TiDB cluster. For details, see [`tidb_restricted_read_only`](/system-variables.md#tidb_restricted_read_only-new-in-v520).
 
 To see the full set of dynamic privileges, execute the `SHOW PRIVILEGES` statement. Because plugins are permitted to add new privileges, the list of privileges that are assignable might differ based on your TiDB installation.
