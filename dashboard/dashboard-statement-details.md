@@ -57,6 +57,8 @@ Currently, the fast plan binding feature does not support the following types of
 - Queries that access TiFlash
 - Queries that join three or more tables
 
+The current feature requires users to have SUPER privilege to use. If you encounter permission issues while using it, please refer to [TiDB Dashboard User Management](dashboard-user.md) to add the necessary privileges.
+
 ## Execution details of plans
 
 The execution detail of plans includes the following information:
