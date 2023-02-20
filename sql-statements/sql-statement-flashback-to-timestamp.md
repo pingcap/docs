@@ -51,6 +51,7 @@ FlashbackToTimestampStmt ::=
 * If the `FLASHBACK CLUSTER` statement causes the rollback of metadata (table structure, database structure), the related modifications will **not** be replicated by TiCDC. Therefore, you need to pause the task manually, wait for the completion of `FLASHBACK CLUSTER`, and manually replicate the schema definitions of the upstream and downstream to make sure that they are consistent. After that, you need to recreate the TiCDC changefeed.
 
 </CustomContent>
+
 <CustomContent platform='tidb-cloud'>
 
 * Only a user with the `SUPER` privilege can execute the `FLASHBACK CLUSTER` SQL statement.
