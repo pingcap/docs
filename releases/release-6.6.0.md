@@ -198,7 +198,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
     For more information, see [documentation](/dynamic-config.md).
 
-* Support specifying the SQL script executed upon TiDB cluster intialization [#35624](https://github.com/pingcap/tidb/issues/35624) @[morgo](https://github.com/morgo)
+* Support specifying the SQL script executed upon TiDB cluster initialization [#35624](https://github.com/pingcap/tidb/issues/35624) @[morgo](https://github.com/morgo)
 
     When you start a TiDB cluster for the first time, you can specify the SQL script to be executed by configuring the command line parameter `--initialize-sql-file`. You can use this feature when you need to perform such operations as modifying the value of a system variable, creating a user, or granting privileges.
 
@@ -464,7 +464,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
         - Optimize DM alert rules and content [#7376](https://github.com/pingcap/tiflow/issues/7376) @[D3Hunter](https://github.com/D3Hunter)
 
-             Previously, alerts similar to "DM_XXX_process_exits_with_error" were raised whenever a related error occured. But some alerts are caused by idle database connections, which can be recovered after reconnecting. To reduce this kind of alerts, DM divides errors into two types: automatically recoverable errors and unrecoverable errors:
+             Previously, alerts similar to "DM_XXX_process_exits_with_error" were raised whenever a related error occurred. But some alerts are caused by idle database connections, which can be recovered after reconnecting. To reduce these kinds of alerts, DM divides errors into two types: automatically recoverable errors and unrecoverable errors:
 
             - For an error that is automatically recoverable, DM reports the alert only if the error occurs more than 3 times within 2 minutes.
             - For an error that is not automatically recoverable, DM maintains the original behavior and reports the alert immediately.
@@ -496,7 +496,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
     - Refine the error message reported when a column that a partitioned table depends on is deleted [#38739](https://github.com/pingcap/tidb/issues/38739) @[jiyfhust](https://github.com/jiyfhust)
     - Fix frequent write conflicts in transactions when performing DDL data backfill [#24427](https://github.com/pingcap/tidb/issues/24427) @[mjonss](https://github.com/mjonss)
     - Add a mechanism that `FLASHBACK CLUSTER` retries when it fails to check the `min-resolved-ts` [#39836](https://github.com/pingcap/tidb/issues/39836) @[Defined2014](https://github.com/Defined2014)
-    - Fix the issue that sometimes an index cannot be created for an empty table using injest mode [#39641](https://github.com/pingcap/tidb/issues/39641) @[tangenta](https://github.com/tangenta)
+    - Fix the issue that sometimes an index cannot be created for an empty table using ingest mode [#39641](https://github.com/pingcap/tidb/issues/39641) @[tangenta](https://github.com/tangenta)
     - Fix the issue that `wait_ts` in the slow query log is the same for different SQL statements within the same transaction [#39713](https://github.com/pingcap/tidb/issues/39713) @[TonsnakeLin](https://github.com/TonsnakeLin)
     - Fix the issue that the `Assertion Failed` error is reported when adding a column during the process of deleting a row record [#39570](https://github.com/pingcap/tidb/issues/39570) @[wjhuang2016](https://github.com/wjhuang2016)
     - Fix the issue that the `not a DDL owner` error is reported when modifying a column type [#39643](https://github.com/pingcap/tidb/issues/39643) @[zimulala](https://github.com/zimulala)
