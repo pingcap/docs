@@ -32,7 +32,7 @@ For details about how to control and manage TiDB SQL users, see [TiDB User Accou
 
     - SYSTEM_VARIABLES_ADMIN
 
-- To use the [Fast Bind Executions Plan](/dashboard/dashboard-statement-details.md#fast-plan-binding) feature on the interface after signing in to TiDB Dashboard, the SQL user must also have the following privilege:
+- To use the [Fast Bind Executions Plan](/dashboard/dashboard-statement-details.md#fast-plan-binding) feature on the interface after signing in to TiDB Dashboard, the SQL user must also have the following privileges:
 
     - SYSTEM_VARIABLES_ADMIN
     - SUPER
@@ -58,7 +58,7 @@ If an SQL user does not meet the preceding privilege requirements, the user fail
     -- To modify the configuration items on the interface after signing in to TiDB Dashboard, the user-defined SQL user must be granted with the following privilege.
     GRANT SYSTEM_VARIABLES_ADMIN ON *.* TO 'dashboardAdmin'@'%';
     
-    -- To use the Fast Bind Executions Plan feature (https://docs.pingcap.com/tidb/dev/dashboard-statement-details#fast-plan-binding) on the interface after signing in to TiDB Dashboard, the user-defined SQL user must be granted with the following privilege.
+    -- To use the Fast Bind Executions Plan feature (https://docs.pingcap.com/tidb/dev/dashboard-statement-details#fast-plan-binding) on the interface after signing in to TiDB Dashboard, the user-defined SQL user must be granted with the following privileges.
     GRANT SYSTEM_VARIABLES_ADMIN ON *.* TO 'dashboardAdmin'@'%';
     GRANT SUPER ON *.* TO 'dashboardAdmin'@'%';
     ```
@@ -77,7 +77,7 @@ If an SQL user does not meet the preceding privilege requirements, the user fail
     -- To modify the configuration items on the interface after signing in to TiDB Dashboard, the user-defined SQL user must be granted with the following privilege.
     GRANT SYSTEM_VARIABLES_ADMIN ON *.* TO 'dashboardAdmin'@'%';
     
-    -- To use the Fast Bind Executions Plan feature (https://docs.pingcap.com/tidb/dev/dashboard-statement-details#fast-plan-binding) on the interface after signing in to TiDB Dashboard, the user-defined SQL user must be granted with the following privilege.
+    -- To use the Fast Bind Executions Plan feature (https://docs.pingcap.com/tidb/dev/dashboard-statement-details#fast-plan-binding) on the interface after signing in to TiDB Dashboard, the user-defined SQL user must be granted with the following privileges.
     GRANT SYSTEM_VARIABLES_ADMIN ON *.* TO 'dashboardAdmin'@'%';
     GRANT SUPER ON *.* TO 'dashboardAdmin'@'%';
     ```
