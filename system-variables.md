@@ -745,19 +745,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Type: Integer
-
-<CustomContent platform="tidb">
-
-- Default value: `2`
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-- Default value: `1`
-
-</CustomContent>
-
+- Default value: `2` for on-premises TiDB and `1` for TiDB Cloud
 - Range: `[1, 2]`
 - Controls how TiDB collects statistics.
 
@@ -1164,6 +1152,19 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 </CustomContent>
 
+### `tidb_ddl_distribute_reorg` <span class="version-mark">New in v6.6.0</span>
+
+> **Warning:**
+>
+> - This feature is still in the experimental stage. It is not recommended to enable this feature in production environments.
+> - When this feature is enabled, TiDB only performs simple retries when an exception occurs during the DDL reorg phase. There is currently no retry method that is compatible with DDL operations. That is, you cannot control the number of retries using [`tidb_ddl_error_count_limit`](#tidb_ddl_error_count_limit).
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Default value: `OFF`
+- This variable is used to control whether to enable distributed execution of the DDL reorg phase to improve the speed of this phase. Currently, this variable is only valid for the `ADD INDEX` statement. Enabling this variable improves the performance of large tables. Distributed DDL execution can control the CPU usage of DDL through dynamic DDL resource management to prevent DDL from affecting the online application.
+- To verify whether a completed `ADD INDEX` operation is accelerated by this feature, you can check whether a corresponding task is in the `mysql.tidb_background_subtask_history` table.
+
 ### tidb_ddl_error_count_limit
 
 - Scope: GLOBAL
@@ -1294,26 +1295,6 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 > - The default value of `ON` only applies to new clusters. if your cluster was upgraded from an earlier version of TiDB, the value `OFF` will be used instead.
 > - If you have enabled TiDB Binlog, enabling this variable cannot improve the performance. To improve the performance, it is recommended to use [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) instead.
 > - Enabling this parameter only means that one-phase commit becomes an optional mode of transaction commit. In fact, the most suitable mode of transaction commit is determined by TiDB.
-
-### tidb_enable_amend_pessimistic_txn <span class="version-mark">New in v4.0.7</span>
-
-> **Warning:**
->
-> Starting from v6.5.0, this variable is deprecated, and TiDB uses the [Metadata Lock](/metadata-lock.md) feature by default to avoid the `Information schema is changed` error. Note that this variable is planned to be removed in v6.6.0.
-
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- This variable is used to control whether to enable the `AMEND TRANSACTION` feature. If you enable the `AMEND TRANSACTION` feature in a pessimistic transaction, when concurrent DDL operations and SCHEMA VERSION changes exist on tables associated with this transaction, TiDB attempts to amend the transaction. TiDB corrects the transaction commit to make the commit consistent with the latest valid SCHEMA VERSION so that the transaction can be successfully committed without getting the `Information schema is changed` error. This feature is effective on the following concurrent DDL operations:
-
-    - `ADD COLUMN` or `DROP COLUMN` operations.
-    - `MODIFY COLUMN` or `CHANGE COLUMN` operations which increase the length of a field.
-    - `ADD INDEX` or `DROP INDEX` operations in which the index column is created before the transaction is opened.
-
-> **Note:**
->
-> Currently, this feature is incompatible with TiDB Binlog in some scenarios and might cause semantic changes on a transaction. For more usage precautions of this feature, refer to [Incompatibility issues about transaction semantic](https://github.com/pingcap/tidb/issues/21069) and [Incompatibility issues about TiDB Binlog](https://github.com/pingcap/tidb/issues/20996).
 
 ### tidb_enable_analyze_snapshot <span class="version-mark">New in v6.2.0</span>
 
@@ -1529,7 +1510,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Default value: `OFF`
 - This variable controls whether to enable GC-Aware memory track.
 
-### `tidb_enable_general_plan_cache` <span class="version-mark">New in v6.3.0</span>
+### tidb_enable_non_prepared_plan_cache
 
 > **Warning:**
 >
@@ -1554,8 +1535,20 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
+- Default value: `ON`
+- This variable controls whether to enable historical statistics. The default value changes from `OFF` to `ON`, which means that historical statistics are enabled by default.
+
+### tidb_enable_historical_stats_for_capture
+
+> **Warning:**
+>
+> The feature controlled by this variable is not fully functional in the current TiDB version. Do not change the default value.
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
 - Default value: `OFF`
-- This variable is used for an unreleased feature. **Do not change the variable value**.
+- This variable controls whether the information captured by `PLAN REPLAYER CAPTURE` includes historical statistics by default. The default value `OFF` means that historical statistics are not included by default.
 
 ### tidb_enable_index_merge <span class="version-mark">New in v4.0</span>
 
@@ -1712,7 +1705,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - User scenarios:
 
     - In all OLTP scenarios, it is recommended to use the method of paging.
-    - For read queries that use `IndexLookup` and `Limit` and that `Limit` cannot be pushed down to `IndexScan`, there might be high latency for the read queries and high usage for TiKV `Unified read pool CPU`. In such cases, because the `Limit` operator only requires a small set of data, if you set `tidb_enable_paging` to `ON`, TiDB processes less data, which reduces query latency and resource consumption.
+    - For read queries that use `IndexLookup` and `Limit` and that `Limit` cannot be pushed down to `IndexScan`, there might be high latency for the read queries and high usage for TiKV `Unified read pool CPU`. In such cases, because the `Limit` operator only requires a small set of data, if you set [`tidb_enable_paging`](#tidb_enable_paging-new-in-v540) to `ON`, TiDB processes less data, which reduces query latency and resource consumption.
     - In scenarios such as data export using [Dumpling](/dumpling-overview.md) and full table scan, enabling paging can effectively reduce the memory consumption of TiDB processes.
 
 > **Note:**
@@ -1733,13 +1726,43 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Persists to cluster: Yes
 - Type: Boolean
 - Default value: `ON`
-- This variables specifies whether to use the pipeline execution algorithm for window functions.
+- This variable specifies whether to use the pipeline execution algorithm for window functions.
+
+### `tidb_enable_plan_cache_for_param_limit` <span class="version-mark">New in v6.6.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `ON`
+- This variable controls whether Prepared Plan Cache caches execution plans with a variable as the `LIMIT` parameter (`LIMIT ?`). The default value is `ON`, which means Prepared Plan Cache supports caching such execution plans. Note that Prepared Plan Cache does not support caching execution plans with a variable that is greater than 10000.
 
 ### tidb_enable_plan_replayer_capture
 
-> Warning:
+<CustomContent platform="tidb-cloud">
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `OFF`
+- This variable controls whether to enable the `PLAN REPLAYER CAPTURE` feature. The default value `OFF` means to disable the `PLAN REPLAYER CAPTURE` feature.
+
+</CustomContent>
+
+<CustomContent platform="tidb">
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `ON`
+- This variable controls whether to enable the [`PLAN REPLAYER CAPTURE` feature](/sql-plan-replayer.md#use-plan-replayer-capture-to-capture-target-plans). The default value `ON` means to enable the `PLAN REPLAYER CAPTURE` feature.
+
+</CustomContent>
+
+### tidb_enable_plan_replayer_continues_capture
+
+> **Warning:**
 >
-> This variable controls a feature that is not fully functional in the current TiDB version. Do not change the default value.
+> The feature controlled by this variable is not fully functional in the current TiDB version. Do not change the default value.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
@@ -1805,6 +1828,18 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - When the operator that reads data has only one thread left and the memory usage of a single SQL statement continues to exceed [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query), this SQL statement triggers other memory control behaviors, such as spilling data to disk.
 
 </CustomContent>
+
+### `tidb_enable_resource_control` <span class="version-mark">New in v6.6.0</span>
+
+> **Warning:**
+>
+> This feature is experimental and its form and usage might change in subsequent versions.
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Default value: `OFF`
+- Type: Boolean
+- This variable is a switch for [the resource control feature](/tidb-resource-control.md). When this variable is set to `ON`, the TiDB cluster can isolate application resources based on resource groups.
 
 ### tidb_enable_reuse_chunk <span class="version-mark">New in v6.4.0</span>
 
@@ -1898,11 +1933,11 @@ Query OK, 0 rows affected (0.09 sec)
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
-- Default value: `ON`
+- Default value: `OFF`
 
 <CustomContent platform="tidb">
 
-- This variable is used to dynamically control whether the telemetry collection in TiDB is enabled. By setting the value to `OFF`, the telemetry collection is disabled. If the [`enable-telemetry`](/tidb-configuration-file.md#enable-telemetry-new-in-v402) TiDB configuration item is set to `false` on all TiDB instances, the telemetry collection is always disabled and this system variable will not take effect. See [Telemetry](/telemetry.md) for details.
+- This variable is used to dynamically control whether the telemetry collection in TiDB is enabled. In the current version, the telemetry is disabled by default. If the [`enable-telemetry`](/tidb-configuration-file.md#enable-telemetry-new-in-v402) TiDB configuration item is set to `false` on all TiDB instances, the telemetry collection is always disabled and this system variable will not take effect. See [Telemetry](/telemetry.md) for details.
 
 </CustomContent>
 
@@ -2239,7 +2274,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 </CustomContent>
 
-### tidb_general_plan_cache_size <span class="version-mark">New in v6.3.0</span>
+### tidb_non_prepared_plan_cache_size
 
 > **Warning:**
 >
@@ -2336,6 +2371,14 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - When the parameter of the aggregate function is not distinct, `HashAgg` is run concurrently and respectively in two phases - the `partial` phase and the `final` phase.
 - A value of `-1` means that the value of `tidb_executor_concurrency` will be used instead.
 
+### tidb_historical_stats_duration <span class="version-mark">New in v6.6.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Tyle: Duration
+- Default value: `168h`, which means 7 days
+- This variable controls the duration that the historical statistics are retained in the storage.
+
 ### tidb_ignore_prepared_cache_close_stmt <span class="version-mark">New in v6.0.0</span>
 
 - Scope: SESSION | GLOBAL
@@ -2355,6 +2398,17 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Unit: Rows
 - This variable is used to set the batch size of the `index lookup join` operation.
 - Use a bigger value in OLAP scenarios, and a smaller value in OLTP scenarios.
+
+### tidb_index_join_double_read_penalty_cost_rate <span class="version-mark">New in v6.6.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Float
+- Default value: `0`
+- Range: `[0, 18446744073709551615]`
+- This variable determines whether to apply a penalty cost to the selection of index join, which reduces the likelihood of the optimizer selecting index join, and increases the likelihood of selecting alternative join methods such as hash join and tiflash join.
+- When index join is selected, many table lookup requests are triggered, which consumes too many resources. You can use this variable to reduce the likelihood of the optimizer selecting index join.
+- This variable takes effect only when the [`tidb_cost_model_version`](/system-variables.md#tidb_cost_model_version-new-in-v620) variable is set to `2`.
 
 ### tidb_index_lookup_concurrency
 
@@ -2771,7 +2825,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 ![Paging size impact on TPCH](/media/paging-size-impact-on-tpch.png)
 
-As shown in this diagram, when [`tidb_enable_paging`](/system-variables.md#tidb_max_paging_size-new-in-v630) is enabled, the performance of TPCH is affected by the settings of `tidb_min_paging_size` and [`tidb_max_paging_size`](/system-variables.md#tidb_max_paging_size-new-in-v630). The vertical axis is the execution time, and it is the smaller the better.
+As shown in this diagram, when [`tidb_enable_paging`](#tidb_enable_paging-new-in-v540) is enabled, the performance of TPCH is affected by the settings of `tidb_min_paging_size` and [`tidb_max_paging_size`](#tidb_max_paging_size-new-in-v630). The vertical axis is the execution time, and it is the smaller the better.
 
 ### tidb_mpp_store_fail_ttl
 
@@ -3555,7 +3609,7 @@ SHOW WARNINGS;
 - Persists to cluster: Yes
 - Type: Enumeration
 - Default value: `leader`
-- Possible values: `leader`, `follower`, `leader-and-follower`, `prefer-leader`, `closest-replicas`, `closest-adaptive`
+- Possible values: `leader`, `follower`, `leader-and-follower`, `prefer-leader`, `closest-replicas`, `closest-adaptive`, and `learner`. The `learner` value is introduced in v6.6.0.
 - This variable is used to control where TiDB reads data.
 - For more details about usage and implementation, see [Follower read](/follower-read.md).
 
@@ -3805,6 +3859,133 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Range: `[0, 2147483647]`
 - Unit: Milliseconds
 - This variable controls whether to enable the synchronously loading statistics feature. The value `0` means that the feature is disabled. To enable the feature, you can set this variable to a timeout (in milliseconds) that SQL optimization can wait for at most to synchronously load complete column statistics. For details, see [Load statistics](/statistics.md#load-statistics).
+
+### tidb_stmt_summary_enable_persistent <span class="version-mark">New in v6.6.0</span>
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> This TiDB variable is not applicable to TiDB Cloud.
+
+</CustomContent>
+
+> **Warning:**
+>
+> Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
+- Scope: GLOBAL
+- Type: Boolean
+- Default value: `OFF`
+- This variable is read-only. It controls whether to enable [statements summary persistence](/statement-summary-tables.md#persist-statements-summary). 
+
+<CustomContent platform="tidb">
+
+- The value of this variable is the same as that of the configuration item [`tidb_stmt_summary_enable_persistent`](/tidb-configuration-file.md#tidb_stmt_summary_enable_persistent-new-in-v660).
+
+</CustomContent>
+
+### tidb_stmt_summary_filename <span class="version-mark">New in v6.6.0</span>
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> This TiDB variable is not applicable to TiDB Cloud.
+
+</CustomContent>
+
+> **Warning:**
+>
+> Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
+- Scope: GLOBAL
+- Type: String
+- Default value: `"tidb-statements.log"`
+- This variable is read-only. It specifies the file to which persistent data is written when [statements summary persistence](/statement-summary-tables.md#persist-statements-summary) is enabled. 
+
+<CustomContent platform="tidb">
+
+- The value of this variable is the same as that of the configuration item [`tidb_stmt_summary_filename`](/tidb-configuration-file.md#tidb_stmt_summary_filename-new-in-v660).
+
+</CustomContent>
+
+### tidb_stmt_summary_file_max_backups <span class="version-mark">New in v6.6.0</span>
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> This TiDB variable is not applicable to TiDB Cloud.
+
+</CustomContent>
+
+> **Warning:**
+>
+> Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
+- Scope: GLOBAL
+- Type: Integer
+- Default value: `0`
+- This variable is read-only. It specifies the maximum number of data files that can be persisted when [statements summary persistence](/statement-summary-tables.md#persist-statements-summary) is enabled.
+
+<CustomContent platform="tidb">
+
+- The value of this variable is the same as that of the configuration item [`tidb_stmt_summary_file_max_backups`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_backups-new-in-v660).
+
+</CustomContent>
+
+### tidb_stmt_summary_file_max_days <span class="version-mark">New in v6.6.0</span>
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> This TiDB variable is not applicable to TiDB Cloud.
+
+</CustomContent>
+
+> **Warning:**
+>
+> Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
+- Scope: GLOBAL
+- Type: Integer
+- Default value: `3`
+- Unit: day
+- This variable is read-only. It specifies the maximum number of days to keep persistent data files when [statements summary persistence](/statement-summary-tables.md#persist-statements-summary) is enabled.
+
+<CustomContent platform="tidb">
+
+- The value of this variable is the same as that of the configuration item [`tidb_stmt_summary_file_max_days`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_days-new-in-v660).
+
+</CustomContent>
+
+### tidb_stmt_summary_file_max_size <span class="version-mark">New in v6.6.0</span>
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> This TiDB variable is not applicable to TiDB Cloud.
+
+</CustomContent>
+
+> **Warning:**
+>
+> Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
+- Scope: GLOBAL
+- Type: Integer
+- Default value: `64`
+- Unit: MiB
+- This variable is read-only. It specifies the maximum size of a persistent data file when [statements summary persistence](/statement-summary-tables.md#persist-statements-summary) is enabled.
+
+<CustomContent platform="tidb">
+
+- The value of this variable is the same as that of the configuration item [`tidb_stmt_summary_file_max_size`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_size-new-in-v660).
+
+</CustomContent>
 
 ### tidb_stmt_summary_history_size <span class="version-mark">New in v4.0</span>
 
@@ -4097,18 +4278,6 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Default value: `4`
 - Range: `[1, 256]`
 - This variable is used to set the maximum concurrency of TTL scan jobs on each TiDB node.
-
-### tidb_ttl_job_run_interval <span class="version-mark">New in v6.5.0</span>
-
-> **Warning:**
->
-> [TTL](/time-to-live.md) is an experimental feature. This system variable might be changed or removed in future releases.
-
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Default value: `1h0m0s`
-- Range: `[10m0s, 8760h0m0s]`
-- This variable is used to control the scheduling interval of TTL jobs in the background. For example, if the current value is set to `1h0m0s`, each table with TTL attributes cleans up expired data once every hour.
 
 ### tidb_ttl_job_schedule_window_start_time <span class="version-mark">New in v6.5.0</span>
 
