@@ -199,9 +199,9 @@ Dynamic privileges include:
 * `PLACEMENT_ADMIN` allows privilege owners to create, modify, and remove placement policies.
 * `DASHBOARD_CLIENT` allows privilege owners to log in to the TiDB-Dashboard.
 * `RESTRICTED_TABLES_ADMIN` allows privilege owners to see system tables when SEM is enabled.
-* `RESTRICTED_STATUS_ADMIN` allows privilege owners to see all status vars when SEM is enabled.
-* `RESTRICTED_VARIABLES_ADMIN` allows privilege owners to see all variables when SEM is enabled.
-* `RESTRICTED_USER_ADMIN` prohibits privilege owners to have their access revoked by SUPER users.
+* `RESTRICTED_STATUS_ADMIN` allows privilege owners to see all status variables in [`SHOW [GLOBAL|SESSION] STATUS`](/sql-statements/sql-statement-show-status.md) when SEM is enabled.
+* `RESTRICTED_VARIABLES_ADMIN` allows privilege owners to see all system variables when SEM is enabled.
+* `RESTRICTED_USER_ADMIN` prohibits privilege owners to have their access revoked by SUPER users when SEM is enabled.
 * `RESTRICTED_CONNECTION_ADMIN` prohibits privilege owners to have connections killed by the `PROCESS` or `CONNECTION_ADMIN` privilege.
 * `RESTRICTED_REPLICA_WRITER_ADMIN` allows privilege owners to perform write or update operations without being affected when the read-only mode is enabled in the TiDB cluster. For details, see [`tidb_restricted_read_only`](/system-variables.md#tidb_restricted_read_only-new-in-v520).
 
