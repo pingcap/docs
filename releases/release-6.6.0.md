@@ -409,7 +409,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
 - Support dynamically modifying [`store-io-pool-size`](/tikv-configuration-file.md#store-io-pool-size-new-in-v530). This facilitate more flexible TiKV performance tuning.
 - Remove the limit on `LIMIT` clauses, thus improving the execution performance.
-- Starting from v6.6.0, BR does not support restoring data to clusters earlier than v6.5.0.
+- Starting from v6.6.0, BR does not support restoring data to clusters of v6.1.0 or earlier versions.
 - Starting from v6.6.0, TiDB no longer supports modifying column types on partitioned tables because of potential correctness issues.
 
 ## Improvements
