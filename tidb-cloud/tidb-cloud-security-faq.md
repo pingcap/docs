@@ -11,7 +11,7 @@ This document lists the most frequently asked questions about TiDB Cloud securit
 
 ## How does TiDB Cloud classify customer data?
 
-Customer data is the data sent from customer applications to TiDB Cloud clusters for analysis, processing, and storage with customers' accounts. TiDB Cloud classifies customer data as follows:
+Customer data refers to the data that customer applications send to TiDB Cloud clusters for analysis, processing, and storage under customers' accounts. TiDB Cloud classifies customer data into the following categories:
 
 - Business data (including consumer data and table data)
 - Database files (including database backups and snapshots)
