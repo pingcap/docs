@@ -132,7 +132,7 @@ After deploying a TiFlash node and starting replication (by performing the ALTER
    Check whether there is any change in `progress`:
 
    - If yes, TiFlash replication runs correctly.
-   - If no, TiFlash replication is abnormal. In `tidb.log`, search the log saying `Tiflash replica is not available`. Check whether `progress` of the corresponding table is updated. If not, check the `tiflash` log for further information.
+   - If no, TiFlash replication is abnormal. In `tidb.log`, search the log saying `Tiflash replica is not available`. Check whether `progress` of the corresponding table is updated. If not, check the `tiflash log` for further information. For example, search `lag_region_info` in `tiflash log` to find out which Region lags behind.
 
 3. Check whether the [Placement Rules](/configure-placement-rules.md) function has been enabled by using pd-ctl:
 
