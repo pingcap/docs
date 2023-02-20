@@ -355,7 +355,16 @@ For more information, see [Authorization and authentication through TiDB server]
 >
 > After enabling the authentication and authorization feature, TiSpark Spark SQL can only use TiDB as the data source, so switching to other data sources (such as Hive) makes tables invisible.
 
+<<<<<<< HEAD
 ## TiSpark FAQ
+=======
+- [Push down](https://github.com/pingcap/tispark/blob/master/docs/features/push_down.md)
+- [Delete with TiSpark](https://github.com/pingcap/tispark/blob/master/docs/features/delete_userguide.md)
+- [Stale read](https://github.com/pingcap/tispark/blob/master/docs/features/stale_read.md)
+- [TiSpark with multiple catalogs](https://github.com/pingcap/tispark/wiki/TiSpark-with-multiple-catalogs)
+- [TiSpark TLS](#tls-configurations)
+- [TiSpark plan](https://github.com/pingcap/tispark/blob/master/docs/features/query_execution_plan_in_TiSpark.md)
+>>>>>>> 6d3dc6bfd (*: disable telemetry by default (#12519))
 
 Q: What are the pros/cons of independent deployment as opposed to a shared resource with an existing Spark / Hadoop cluster?
 
