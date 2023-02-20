@@ -131,7 +131,7 @@ After deploying a TiFlash node and starting replication (by performing the ALTER
    Check whether there is any change in `progress`:
 
    - If yes, TiFlash replication runs correctly.
-   - If no, TiFlash replication is abnormal. In `tidb.log`, search the log saying `Tiflash replica is not available`. Check whether `region have` of the corresponding table is updated. If not, check the `tiflash` log for further information.
+   - If no, TiFlash replication is abnormal. In `tidb.log`, search the log saying `Tiflash replica is not available`. Check whether `progress` of the corresponding table is updated. If not, check the `tiflash` log for further information.
 
 3. Check whether the [Placement Rules](/configure-placement-rules.md) function has been enabled by using pd-ctl:
 
@@ -169,14 +169,14 @@ After deploying a TiFlash node and starting replication (by performing the ALTER
         }' <http://172.16.x.xxx:2379/pd/api/v1/config/rule>
     ```
 
-5. Check whether TiDB has created `placement-rule` for tables.
+5. Check whether TiDB has created any placement rule for tables.
 
-    Search the logs of TiDB DDL Owner and check whether TiDB has notified PD to add `placement-rule`. For non-partitioned tables, search `ConfigureTiFlashPDForTable`. For partitioned tables, search `ConfigureTiFlashPDForPartitions`.
+    Search the logs of TiDB DDL Owner and check whether TiDB has notified PD to add placement rules. For non-partitioned tables, search `ConfigureTiFlashPDForTable`. For partitioned tables, search `ConfigureTiFlashPDForPartitions`.
 
     - If the keyword is found, go to the next step.
     - If not, collect logs of the corresponding component for troubleshooting.
 
-6. Check whether PD has configured `placement-rule` for tables.
+6. Check whether PD has configured any placement rule for tables.
 
     Run the `curl http://<pd-ip>:<pd-port>/pd/api/v1/config/rules/group/tiflash` command to view  all TiFlash placement rules on the current PD. If a rule with the ID being `table-<table_id>-r` is found, the PD has configured a placement rule successfully.
 
