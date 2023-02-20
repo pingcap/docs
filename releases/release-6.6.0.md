@@ -444,7 +444,6 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
 
     - Support managing the global memory threshold to alleviate the OOM problem (experimental) [#5827](https://github.com/tikv/pd/issues/5827) @[hnes](https://github.com/hnes)
     - Add the GC Tuner to alleviate the GC pressure (experimental) [#5827](https://github.com/tikv/pd/issues/5827) @[hnes](https://github.com/hnes)
-    - Add the `balance-witness-scheduler` scheduler to schedule witness [#5763](https://github.com/tikv/pd/pull/5763) @[ethercflow](https://github.com/ethercflow)
     - Add the `evict-slow-trend-scheduler` scheduler to detect and schedule abnormal nodes [#5808](https://github.com/tikv/pd/pull/5808) @[innerr](https://github.com/innerr)
     - Add the keyspace manager to manage keyspace [#5293](https://github.com/tikv/pd/issues/5293) @[AmoebaProtozoa](https://github.com/AmoebaProtozoa)
 
