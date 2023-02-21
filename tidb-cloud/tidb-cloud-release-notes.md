@@ -26,8 +26,8 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - Extend the [monitoring metrics retention period](/tidb-cloud/built-in-monitoring.md#metrics-retention-policy) from 2 days to a longer period:
 
-    - For Dedicated Tier, you can view metrics data for the past 7 days.
-    - For Serverless Tier, you can view metrics data for the past 3 days.
+    - For Dedicated Tier clusters, you can view metrics data for the past 7 days.
+    - For Serverless Tier clusters, you can view metrics data for the past 3 days.
 
   By extending the metrics retention period, you now have access to more historical data. This helps you identify trends and patterns of the cluster, which leads to better decision-making and faster troubleshooting.
 
