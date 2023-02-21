@@ -235,7 +235,7 @@ You can manage either a local import task or an Amazon S3 import task using the 
    tidbcloud_import.example_s3_parquet: Creation complete after 4s [id=781076]
    ```
    
-3. Use `terraform refresh` and `terraform state show tidbcloud_import.${resource-name}` to update and check the status just as described in the last section.
+3. Use `terraform refresh` and `terraform state show tidbcloud_import.${resource-name}` to update and check the status of the import task.
 
 ## Update an import task
 
