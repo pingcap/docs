@@ -11,6 +11,54 @@ After you click **Next** on the **Data Import** page of the TiDB Cloud console a
 
 To troubleshoot the access denied errors, perform the following checks in the AWS Management Console.
 
+## Check the policy of the IAM user
+
+When you use the AWS access key of an IAM user to access the Amazon S3 bucket, you might encounter the following error:
+
+- "Access denied to the source '{bucket_uri}' using the access key ID '{access_key_id}' and the secret access key '{secret_access_key}'"
+
+It indicates that TiDB Cloud failed to access the Amazon S3 bucket due to insufficient permissions. You need the following permissions to access the Amazon S3 bucket:
+
+- `s3:GetObject`
+- `s3:ListBucket`
+- `s3:GetBucketLocation`
+
+To check the policy of the IAM user, perform the following steps:
+
+1. In the AWS Management Console, go to **IAM** > **Access Management** > **Users**.
+2. In the list of users, find and click the user you have used for importing data to TiDB Cloud. The user summary page is displayed.
+3. In the **Permission policies** area of the user summary page, a list of policies is displayed. Take the following steps for each policy:
+    1. Click the policy to enter the policy summary page.
+    2. On the policy summary page, click the **{}JSON** tab to check the permission policy. Make sure that the `Resource` fields in the policy are correctly configured.
+
+The following is a sample policy:
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject"
+            ],
+            "Resource": "arn:aws:s3:::tidb-cloud-source-data/mydata/*"
+        },
+        {
+            "Sid": "VisualEditor1",
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListBucket",
+                "s3:GetBucketLocation"
+            ],
+            "Resource": "arn:aws:s3:::tidb-cloud-source-data"
+        },
+}
+```
+
+For more information about how to grant a user permissions and test them, see [Controlling access to a bucket with user policies](https://docs.aws.amazon.com/AmazonS3/latest/userguide/walkthrough1.html).
+
 ## Check the policy of the IAM role
 
 1. In the AWS Management Console, go to **IAM** > **Access Management** > **Roles**. 
