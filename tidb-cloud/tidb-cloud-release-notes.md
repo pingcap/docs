@@ -12,7 +12,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- Support using AWS access keys of an IAM user to access your Amazon S3 bucket when importing data to TiDB Cloud.
+- Support using the AWS access keys of an IAM user to access your Amazon S3 bucket when importing data to TiDB Cloud.
 
     This method is simpler than using Role ARN. For more information, refer to [Configure Amazon S3 access](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access).
 
@@ -29,11 +29,11 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
     - For Dedicated Tier clusters, you can view metrics data for the past 7 days.
     - For Serverless Tier clusters, you can view metrics data for the past 3 days.
 
-  By extending the metrics retention period, you now have access to more historical data. This helps you identify trends and patterns of the cluster, which leads to better decision-making and faster troubleshooting.
+  By extending the metrics retention period, now you have access to more historical data. This helps you identify trends and patterns of the cluster for better decision-making and faster troubleshooting.
 
 **Console changes**
 
-- Release the new native web infrastructure on the monitoring page of [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters.
+- Release a new native web infrastructure on the Monitoring page of [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters.
 
     With the new design, you can easily navigate through the monitoring page and access the necessary information in a more intuitive and efficient manner. The new infrastructure also resolves many problems on UX, making the monitoring process a lot more user-friendly.
 
