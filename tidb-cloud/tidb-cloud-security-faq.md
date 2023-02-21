@@ -20,7 +20,7 @@ Customer data refers to the data that customer applications send to TiDB Cloud c
 
 Customer data includes data that customers or their consumers store in TiKV or TiFlash, which is located in the cloud providers' storage (such as S3 buckets or EBS of AWS).
 
-Customer data does not include TiDB Cloud operational, diagnosis, or metadata:
+Customer data does not include TiDB Cloud operational data, diagnosis data, or metadata:
 
 - Operational data: TiDB Cloud control plane logs, runtime metrics, usage policies, and service ticket-related information.
 - Diagnosis data: TiDB cluster logs (including logs, error logs, and slow query logs), metrics (including usage and runtime metrics), configuration (including TiDB cluster configuration items, node IP addresses, and values), monitoring, and alert-related information.
@@ -68,7 +68,7 @@ Customers are responsible for the security and compliance of your TiDB cluster, 
 
 TiDB Cloud places the highest priority on customer data security. Regardless of the region selected, TiDB Cloud implements technical, contractual, and organizational measures to ensure data confidentiality, integrity, and availability.
 
-TiDB Cloud has achieved SOC2 Type II, General Data Protection Regulation (GDPR), Payment Card Industry Data Security Standard (PCI DSS), and Health Insurance Portability and Accountability Act of 1996 (HIPAA) certification and verification. Additionally, third-party auditors are invited to review the certified standards annually. For more information, see the [PingCAP Trust Center](https://www.pingcap.com/trust-compliance-center).
+TiDB Cloud has achieved SOC2 Type II, General Data Protection Regulation (GDPR), Payment Card Industry Data Security Standard (PCI DSS), and Health Insurance Portability and Accountability Act of 1996 (HIPAA) certification and verification. Additionally, third-party auditors are invited to review the certified standards annually. For more information, see [PingCAP Trust Center](https://www.pingcap.com/trust-compliance-center).
 
 In TiDB Cloud, data access is secured with the following measures:
 
