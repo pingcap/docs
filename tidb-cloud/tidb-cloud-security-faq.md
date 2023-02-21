@@ -68,7 +68,7 @@ In TiDB Cloud, data access is secured with the following measures:
 
 ## How is customer data encrypted in TiDB Cloud?
 
-At TiDB Cloud, the security of customer data is a top priority. Here's how TiDB Cloud encrypts customer data:
+At TiDB Cloud, the security of customer data is the top priority. Here is how TiDB Cloud encrypts customer data:
 
 - Encryption at rest: TiDB Cloud uses storage volume encryption by default to encrypt all customer data at rest, including database data and backup data. This encryption ensures that data is protected.
 
