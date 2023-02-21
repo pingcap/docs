@@ -22,7 +22,8 @@ To view the metrics on the Monitoring page, take the following steps:
 
 ## Metrics retention policy
 
-All monitoring data is kept for 2 days.
+- For Dedicated Tier clusters, the monitoring data is kept for 7 days.
+- For Serverless Tier clusters, the monitoring data is kept for 3 days.
 
 ## Monitoring metrics
 
