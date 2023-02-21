@@ -5,11 +5,13 @@ summary: Learn how to manage the import task using the import resource.
 
 # Use Import Resource
 
-Import resource supports:
+You can learn how to import data to a TiDB Cloud cluster with the `tidbcloud_import` resource in this document.
 
-- Create import tasks in serverless tier and dedicated tier.
-- LOCAL and S3 import type.
-- Cancel import tasks.
+The features of the `tidbcloud_import` resource include the following:
+
+- Create import tasks for Serverless Tier and Dedicated Tier clusters.
+- Import data either from local disks or from Amazon S3 buckets.
+- Cancel ongoing import tasks.
 
 You can learn how to manage an import task with the `tidbcloud_import` resource in this document.
 
@@ -64,9 +66,9 @@ You can manage either a local import task or an Amazon S3 import task using the 
     }
     ```
 
-   Replace resource values (such as project ID and cluster ID) in the file with your own. And you can find the details of `csv_format` in [configuration page](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/import#nested-schema-for-csv_format).
+   Replace resource values (such as project ID, cluster ID, and CSV path) in the file with your own. And you can find details of `csv_format` on the [configuration page](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/import#nested-schema-for-csv_format).
 
-3. Run the `terraform apply` command to create the import task, and then type `yes` to confirm the creation and start the import:
+3. Run the `terraform apply` command to create an import task, and then type `yes` to confirm the creation and start the import:
 
    ```
    $ terraform apply
@@ -168,7 +170,7 @@ You can manage either a local import task or an Amazon S3 import task using the 
 
    When the status turns to `COMPLETED`, it indicates that the import task is finished.
 
-6. Check the import data with MySQL CLI:
+6. Check the imported data with MySQL CLI:
 
    ```
    mysql> select * from test.import_test;
@@ -189,7 +191,7 @@ Import tasks cannot be updated.
 
 For Terraform, deleting an import task means canceling the corresponding import resource. 
 
-you cannot cancel a `COMPLETED` import task. For example, if you cancel an import task that is completed, you will see get the `Delete Error` as follows:
+You cannot cancel a `COMPLETED` import task. Otherwise, you will get a `Delete Error` as in the following example:
 
 ```
 $ terraform destroy
@@ -211,7 +213,7 @@ tidbcloud_import.example_local: Destroying... [id=781074]
 ╵
 ```
 
-Cancel an import task whose status is `IMPORTING`:
+You can cancel an import task whose status is `IMPORTING`. For example:
 
 ```
 $ terraform destroy
