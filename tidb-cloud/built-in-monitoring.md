@@ -22,7 +22,8 @@ To view the metrics on the Monitoring page, take the following steps:
 
 ## Metrics retention policy
 
-The monitoring data is kept for 7 days in Dedicated Tier and for 3 days in Serverless Tier.
+- For Dedicated Tier, the monitoring data is kept for 7 days.
+- For Serverless Tier, the monitoring data is kept for 3 days.
 
 ## Monitoring metrics
 
