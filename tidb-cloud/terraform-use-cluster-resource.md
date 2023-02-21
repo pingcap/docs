@@ -12,7 +12,7 @@ In addition, you will also learn how to get the necessary information with the `
 The features of the `tidbcloud_cluster` resource include the following:
 
 - Create Serverless Tier and Dedicated Tier clusters.
-- Update Dedicated Tier clusters.
+- Modify Dedicated Tier clusters.
 - Delete Serverless Tier and Dedicated Tier clusters.
 
 ## Prerequisites
