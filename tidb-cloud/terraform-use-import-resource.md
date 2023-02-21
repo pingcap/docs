@@ -18,11 +18,9 @@ The features of the `tidbcloud_import` resource include the following:
 - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md).
 - [Create a Serverless Tier or Dedicated Tier cluster](/tidb-cloud/create-tidb-cluster.md).
 
-## Manage the import resource
-
 You can manage either a local import task or an Amazon S3 import task using the import resource.
 
-### Create and run a local import task
+## Create and run a local import task
 
 1. Create a CSV file for import. For example:
 
@@ -240,11 +238,11 @@ You can manage either a local import task or an Amazon S3 import task using the 
 3. Use `terraform refresh` and `terraform state show tidbcloud_import.${resource-name}` to update and check the status just as described in the last section.
 
 
-### Update an import task
+## Update an import task
 
 Import tasks cannot be updated.
 
-### Delete an import task
+## Delete an import task
 
 For Terraform, deleting an import task means canceling the corresponding import resource. 
 
