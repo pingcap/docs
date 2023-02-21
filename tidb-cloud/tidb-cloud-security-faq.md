@@ -64,7 +64,7 @@ In TiDB Cloud, data access is secured with the following measures:
 
 - TiDB Cloud has designed a multi-tenant architecture for its database service platform that follows best practices of AWS and GCP SaaS applications. The security functions and isolation mechanisms include multi-tenant authentication and authorization, network access control, data encryption, and auditing.
 
-- TiDB Cloud has designed a secure technical architecture that prohibits insiders from directly accessing the TiDB Cloud infrastructure. No PingCAP staff can directly access the TiDB Cloud infrastructure where customer data resides. If internal technical personnel need to monitor and maintain the TiDB Cloud infrastructure, they must go through a strict approval process, obtain minimum permissions, and pass the Bastion audit. All operational behaviors are recorded and audited, and monitoring and alarms are configured for unauthorized access.
+- TiDB Cloud has designed a secure technical architecture that prohibits insiders from directly accessing the TiDB Cloud infrastructure. No PingCAP staff can directly access the TiDB Cloud infrastructure where customer data resides. If PingCAP technical personnel need to monitor and maintain the TiDB Cloud infrastructure, they must go through a strict approval process, obtain minimum permissions, and pass the Bastion audit. All operational behaviors are recorded and audited, and monitoring and alarms are configured for unauthorized access.
 
 ## How is customer data encrypted in TiDB Cloud?
 
