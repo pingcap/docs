@@ -34,7 +34,7 @@ You can only view the console audit logs of your organization.
 > **Note:**
 >
 > - If it is the first time your organization enables console audit logging, the console audit logs are empty. After any audited events are performed, you will see the corresponding logs.
-> - If it has been more than 90 days since console audit logging was disabled, the console audit logs are empty.
+> - If it has been more than 90 days since console audit logging was disabled, you cannot see any logs.
 
 1. In the upper-right corner of the [TiDB Cloud console](https://tidbcloud.com/), click <MDSvgIcon name="icon-top-organization" /> **Organization** > **Console Audit Logging**.
 2. To get a specific part of audit logs, you can filter the event type, operation status, and time range. 
