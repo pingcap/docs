@@ -40,11 +40,21 @@ As a customer, you have complete control over your data:
 
 - You can manage access to your data, as well as the TiDB Cloud databases and tools, through users, roles, and credentials that you control.
 
-## Where is customer data stored?
+## Where is customer data security stored in TiDB Cloud?
 
-In TiDB Cloud, you have the flexibility to choose how and where you want to run your TiDB database. This grants you access to TiDB database tools, storage locations, regional control planes, APIs, Chat2Query, and other database services. If you want to run your database globally, you can select from various regions on AWS or GCP.
+In TiDB Cloud, customer data is protected through a combination of features and best practices, including:
 
-As a customer, you can choose in which AWS or GCP region you want to store your data by creating your TiDB cluster in the desired region that meets your geographic needs. For instance, if you are in the USA and prefer to store your data only in the USA, you can create a TiDB cluster exclusively in the AWS Oregon (us-west-2) region.
+- Encryption: TiDB Cloud supports encryption at rest and in transit. Data is encrypted when it is stored on disk, and is also encrypted when it is transmitted over the network. 
+
+- Access controls: TiDB Cloud allows customers to control who has access to their data by setting up access controls list. Customers can set up roles and assign privileges to specific users.
+
+- Network security: TiDB Cloud is designed to run in a virtual private cloud (VPC) to isolate customer traffic from other traffic on the internet. TiDB Cloud also supports secure network communication using SSL/TLS.
+
+- Backup and disaster recovery: TiDB Cloud provides a variety of backup and disaster recovery options to ensure that customer data is protected in case of an outage or disaster. Customers can set up automatic backups, incremental backups, and point-in-time recovery, as well as replicate their data to different regions for disaster recovery.
+
+- Compliance: TiDB Cloud is designed to comply with various data privacy and security regulations, such as ISO27701，SOC2，GDPR and HIPAA. Customers can also set up their own compliance requirements and audit logs to monitor access to their data.
+
+Overall, TiDB Cloud is designed to provide a secure and reliable platform for storing and managing customer data. TiDB Cloud's security features and best practices are continuously updated and reviewed to ensure that customer data is protected against the latest threats and vulnerabilities.
 
 ## What are the responsibilities in securing customer data?
 
