@@ -5,7 +5,7 @@ summary: The reference of `ticloud cluster connect-info`.
 
 # ticloud cluster connect-info
 
-Get connection string for the specified cluster:
+Get the connection string of a cluster:
 
 ```shell
 ticloud cluster connect-info [flags]
@@ -13,13 +13,13 @@ ticloud cluster connect-info [flags]
 
 ## Examples
 
-Get connection string in interactive mode:
+Get the connection string of a cluster in interactive mode:
 
 ```shell
 ticloud cluster connect-info
 ```
 
-Get connection string in non-interactive mode:
+Get the connection string of a cluster in non-interactive mode:
 
 ```shell
 ticloud cluster connect-info --project-id <project-id> --cluster-id <cluster-id> --client <client-name> --operating-system <operating-system>
@@ -31,10 +31,10 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 
 | Flag                       | Description                                                                                                                                                                                                                                                                                                                                                                | Required | Note                                                 |
 |----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|------------------------------------------------------|
-| -p, --project-id string    | The ID of the project, in which the cluster will be created                                                                                                                                                                                                                                                                                                                | Yes      | Only works in non-interactive mode.                  |
+| -p, --project-id string    | The ID of the project, in which the cluster is created                                                                                                                                                                                                                                                                                                                | Yes      | Only works in non-interactive mode.                  |
 | -c, --cluster-id string    | The ID of the cluster                                                                                                                                                                                                                                                                                                                                                      | Yes      | Only works in non-interactive mode.                  |
-| --client string            | Connected client. Supported clients: ["general" "mysql_cli" "mycli" "libmysqlclient" "python_mysqlclient" "pymysql" "mysql_connector_python" "mysql_connector_java" "go_mysql_driver" "node_mysql2" "ruby_mysql2" "php_mysqli" "rust_mysql" "mybatis" "hibernate" "spring_boot" "gorm" "prisma" "sequelize_mysql2" "django_tidb" "sqlalchemy_mysqlclient" "active_record"] | Yes      | Only works in non-interactive mode.                  |
-| --operating-system string  | Operating system name. Supported operating systems: ["macOS" "Windows" "Ubuntu" "CentOS" "RedHat" "Fedora" "Debian" "Arch" "OpenSUSE" "Alpine" "Others"]                                                                                                                                                                                                                   | Yes      | Only works in non-interactive mode.                  |
+| --client string            | The desired client used for the connection. Supported clients include `general`, `mysql_cli`, `mycli`, `libmysqlclient`, `python_mysqlclient`, `pymysql`, `mysql_connector_python`, `mysql_connector_java`, `go_mysql_driver`, `node_mysql2`, `ruby_mysql2`, `php_mysqli`, `rust_mysql`, `mybatis`, `hibernate`, `spring_boot`, `gorm`, `prisma`, `sequelize_mysql2`, `django_tidb`, `sqlalchemy_mysqlclient`,  and `active_record`. | Yes      | Only works in non-interactive mode.                  |
+| --operating-system string  | The operating system name. Supported operating systems include `macOS`, `Windows`, `Ubuntu`, `CentOS`, `RedHat`, `Fedora`, `Debian`, `Arch`, `OpenSUSE`, `Alpine`, and `Others`.                                                                                                                    | Yes      | Only works in non-interactive mode.                  |
 | -h, --help                 | Help information for this command                                                                                                                                                                                                                                                                                                                                          | No       | Works in both non-interactive and interactive modes. |
 
 ## Inherited flags
