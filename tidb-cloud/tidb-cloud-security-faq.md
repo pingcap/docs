@@ -44,7 +44,7 @@ As a customer, you have complete control over your data:
 
 In TiDB Cloud, you have the flexibility to choose how and where you want to run your TiDB database. This grants you access to TiDB database tools, storage locations, regional control planes, APIs, Chat2Query, and other database services. If you want to run your database globally, you can select from various regions on AWS or GCP.
 
-As a customer, you can choose in which AWS or GCP region you want to store your data by creating your TiDB cluster in the desired region that meets your geographic needs. For instance, if you are in the USA and prefer to store your data only in the USA, you can deploy a TiDB cluster exclusively in the AWS Oregon (us-west-2) region.
+As a customer, you can choose in which AWS or GCP region you want to store your data by creating your TiDB cluster in the desired region that meets your geographic needs. For instance, if you are in the USA and prefer to store your data only in the USA, you can create a TiDB cluster exclusively in the AWS Oregon (us-west-2) region.
 
 ## What are the responsibilities in securing customer data?
 
