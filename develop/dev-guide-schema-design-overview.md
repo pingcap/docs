@@ -53,7 +53,7 @@ To improve query performance of various user scenarios, TiDB provides you with s
 
 </CustomContent>
 
-<CustomContent platform="tidb">
+<CustomContent platform="tidb-cloud">
 
 To improve query performance of various user scenarios, TiDB provides you with some specialized types of indexes. For details of each type, see [Indexing and constraints](https://docs.pingcap.com/tidb/stable/basic-features#indexing-and-constraints).
 
