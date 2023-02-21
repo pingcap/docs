@@ -40,7 +40,7 @@ As a customer, you have complete control over your data:
 
 - You can manage access to your data, as well as the TiDB Cloud databases and tools, through users, roles, and credentials that you control.
 
-## Where is customer data security stored in TiDB Cloud?
+## Is customer data securely stored in TiDB Cloud?
 
 In TiDB Cloud, customer data is protected through a combination of features and best practices, including:
 
