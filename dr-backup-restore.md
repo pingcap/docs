@@ -18,7 +18,7 @@ Generally speaking, BR is the last resort for data safety. It improves the safet
 
 ![BR log backup and PITR architecture](/media/dr/dr-backup-and-restore.png)
 
-As shown in the preceding architecture, you can back up data to a DR storage device located in other regions, and recover data from the backup data as needed. This means that the cluster can tolerate the failure of a single region with a Recovery Point Objective (RPO) of up to 5 minutes and a Recovery Time Objective (RTO) between tens of minutes and a few hours. However, if the database size is large, the RTO time might be longer.
+As shown in the preceding architecture, you can back up data to a DR storage device located in other regions, and recover data from the backup data as needed. This means that the cluster can tolerate the failure of a single region with a Recovery Point Objective (RPO) of up to 5 minutes and a Recovery Time Objective (RTO) between tens of minutes and a few hours. However, if the database size is large, the RTO might be longer.
 
 > **Note:**
 >
@@ -26,7 +26,7 @@ As shown in the preceding architecture, you can back up data to a DR storage dev
 
 Meanwhile, TiDB provides backup and restore based on block storage snapshots. This feature reduces the recovery time to hours or even less than one hour. TiDB is continuously improving and optimizing the backup and restore capabilities so as to provide you better services.
 
-TiDB also provides detailed documentation to help you understand how to use the backup and restore feature in a DR scenario. Among them,
+TiDB also provides detailed documentation to help you understand how to use the backup and restore feature in DR scenarios. Among them,
 
 - [Usage Overview of TiDB Backup and Restore](/br/br-use-overview.md) is an overview of the BR feature, including the backup strategy and the organization of backup data.
 - [Backup & Restore FAQs](/faq/backup-and-restore-faq.md) lists the frequently asked questions (FAQs) and the solutions of TiDB Backup & Restore (BR).
