@@ -8,6 +8,35 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2023.
 
+## February 21, 2023
+
+**General changes**
+
+- Support using AWS access keys of an IAM user to access your Amazon S3 bucket when importing data to TiDB Cloud.
+
+    This method is simpler than using Role ARN. For more information, refer to [Configure Amazon S3 access](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access).
+
+- Support using the [console audit logging](/tidb-cloud/tidb-cloud-console-auditing.md) feature to track various activities performed by members within your organization in the [TiDB Cloud console](https://tidbcloud.com/).
+
+    The console audit logging feature is only visible to users with the `Owner` or `Audit Admin` role and is disabled by default. To enable it, click **Organization** > **Console Audit Logging** in the upper-right corner of the [TiDB Cloud console](https://tidbcloud.com/).
+
+    By analyzing console audit logs, you can identify suspicious operations performed within your organization, thereby improving the security of your organization's resources and data.
+
+    For more information, see [Console audit logging](/tidb-cloud/tidb-cloud-console-auditing.md).
+
+- Extend the [monitoring metrics retention period](/tidb-cloud/built-in-monitoring.md#metrics-retention-policy) from 2 days to a longer period:
+
+    - For Dedicated Tier, you can view metrics data for the past 7 days.
+    - For Serverless Tier, you can view metrics data for the past 3 days.
+
+  By extending the metrics retention period, you now have access to more historical data. This helps you identify trends and patterns of the cluster, which leads to better decision-making and faster troubleshooting.
+
+**Console changes**
+
+- Release the new native web infrastructure on the monitoring page of [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters.
+
+    With the new design, you can easily navigate through the monitoring page and access the necessary information in a more intuitive and efficient manner. The new infrastructure also resolves many problems on UX, making the monitoring process a lot more user-friendly.
+
 ## February 17, 2023
 
 **CLI changes**
