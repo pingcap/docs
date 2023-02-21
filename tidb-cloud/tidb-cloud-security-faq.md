@@ -46,7 +46,7 @@ In TiDB Cloud, you have the flexibility to choose how and where you want to run 
 
 As a customer, you can choose in which AWS or GCP region you want to store your data by creating your TiDB cluster in the desired region that meets your geographic needs. For instance, if you are in the USA and prefer to store your data only in the USA, you can deploy a TiDB cluster exclusively in the AWS Oregon (us-west-2) region.
 
-## What are the responsibility in securing customer data?
+## What are the responsibilities in securing customer data?
 
 When it comes to securing customer data, it is important to understand the roles and responsibilities of both TiDB Cloud and customers.
 
