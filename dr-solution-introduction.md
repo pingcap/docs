@@ -14,7 +14,7 @@ This document introduces the disaster recovery (DR) solutions provided by TiDB. 
 
 ## Basic concepts
 
-- RTO (Recovery Time Objective): Time required for the system to recover from a disaster.
+- RTO (Recovery Time Objective): The time required for the system to recover from a disaster.
 - RPO (Recovery Point Objective): The maximum amount of data loss that the business can tolerate in a disaster.
 
 The following figure illustrates these two concepts:
@@ -108,6 +108,6 @@ This section compares the DR solutions mentioned in this document, based on whic
 | DR solution | TCO | Error tolerance objective | RPO | RTO | Network latency requirement | Target system |
 | --- | --- | --- | --- | --- | --- | --- |
 | DR solution based on multiple replicas in a single cluster (2-2-1) | High | Individual region | 0 | Minute level | Less than 30 ms between regions | Production systems that have specific requirements on DR and response (RPO=0) |
-| TiCDC-based primary and secondary DR solution (1:1)  | Medium | Individual region | < 10 seconds | < 5 minutes | Less than 100 ms between regions | Production systems that have specific requirements on DR and response (RPO=0) |
+| DR solution based on primary and secondary clusters (1:1)  | Medium | Individual region | < 10 seconds | < 5 minutes | Less than 100 ms between regions | Production systems that have specific requirements on DR and response (RPO=0) |
 | DR solution based on TiCDC and multiple replicas (2-2-1:1) | High | Multiple regions | < 10 seconds | < 5 minutes | Less than 30 ms for regions that use multiple replicas for DR. Less than 100 ms for the third region and other regions | Production systems that have strict requirements on DR and response (RPO=0) |
-| Backup and restore-based DR solution | Low | Individual region | < 5 minutes |  Hour level | No special requirement | Production systems that accept an RPO of less than 5 minutes and an RTO of up to an hour |
+| DR solution based on BR | Low | Individual region | < 5 minutes |  Hour level | No special requirement | Production systems that accept an RPO of less than 5 minutes and an RTO of up to an hour |

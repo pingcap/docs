@@ -37,7 +37,7 @@ This DR architecture is simple and easy to use. Being capable of tolerating regi
 
 > **Note:**
 >
-> - The term "Region" in TiKV means a range of data while the term "region" means a physical location. The two terms are not interchangeable.
+> - ["Region" in TiKV](/glossary.md#regionpeerraft-group) means a range of data while the term "region" means a physical location. The two terms are not interchangeable.
 > - Do not run multiple changefeeds to replicate data to the secondary cluster, or run another secondary cluster with the presence of a secondary cluster already. Otherwise, integrity of data transactions of the secondary cluster cannot be guaranteed.
 
 ### Set up primary and secondary clusters
@@ -220,7 +220,7 @@ After migrating data as described in the preceding section, you can replicate in
     level = "eventual"
     # The size of a single redo log, in MiB. The default value is 64, and the recommended value is less than 128.
     max-log-size = 64
-    # Interval for refreshing or uploading redo logs to Amazon S3, in milliseconds. The default value is 1000, and the recommended value range is 500-2000.
+    # The interval for refreshing or uploading redo logs to Amazon S3, in milliseconds. The default value is 1000, and the recommended value range is 500-2000.
     flush-interval = 2000
     # The path where redo logs are saved.
     storage = "s3://redo?access-key=minio&secret-access-key=miniostorage&endpoint=http://10.0.1.10:6060&force-path-style=true"
@@ -236,7 +236,7 @@ After migrating data as described in the preceding section, you can replicate in
 
     For more information about the changefeed configurations, see [TiCDC Changefeed Configurations](/ticdc/ticdc-changefeed-config.md).
 
-2. To check whether a changefeed task runs properly, run the `changefeed query` command. The query result includes the task information and the task state. You can specify the `--simple` or `-s` argument to simplify the query result so that only the basic replication state and the checkpoint information are displayed. If you do not specify this argument, the output includes detailed task configuration, replication states, and replication table informationt.
+2. To check whether a changefeed task runs properly, run the `changefeed query` command. The query result includes the task information and the task state. You can specify the `--simple` or `-s` argument to simplify the query result so that only the basic replication state and the checkpoint information are displayed. If you do not specify this argument, the output includes detailed task configuration, replication states, and replication table information.
 
     ```shell
     tiup cdc cli changefeed query -s --server=http://10.1.1.9:8300 --changefeed-id="dr-primary-to-secondary"
@@ -278,7 +278,7 @@ After migrating data as described in the preceding section, you can replicate in
 
 ### Monitor the primary and secondary clusters
 
-Currently, TiDB DR Dashboard is unavailable. You can check the status of TiDB primary and secondary clusters using the following dashboards and decide whether to perform a DR switchover:
+Currently, no DR dashboard is available in TiDB. You can check the status of TiDB primary and secondary clusters using the following dashboards and decide whether to perform a DR switchover:
 
 - [TiDB Key Metrics](/grafana-overview-dashboard.md)
 - [Changefeed Metrics](/ticdc/monitor-ticdc.md#changefeed)
@@ -403,7 +403,7 @@ In this DR scenario, the TiDB clusters in two regions can be each other's disast
 
 ![TiCDC bidirectional replication](/media/dr/bdr-ticdc.png)
 
-With the bidirectional replication feature, the TiDB clusters in two regions can be each other's disaster recovery clusters. This DR solution guarantees data security and reliability, and also ensures the write performance of the database. In a planned DR switchover, you do not need to stop the running changefeeds and then start a new changefeed, which simplifies the operation and maintenance.
+With the bidirectional replication feature, the TiDB clusters in two regions can be each other's disaster recovery clusters. This DR solution guarantees data security and reliability, and also ensures the write performance of the database. In a planned DR switchover, you do not need to stop the running changefeeds before starting a new changefeed, which simplifies the operation and maintenance.
 
 To build a bidirectional DR cluster, see [TiCDC bidirectional replication](/ticdc/ticdc-bidirectional-replication.md).
 
