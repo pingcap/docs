@@ -193,7 +193,7 @@ On the **Create Migration Job** page, configure the source and target connection
 
         <img src="https://download.pingcap.com/images/docs/tidb-cloud/migration-job-select-db.png" width="60%" />
 
-    - If you want to migrate only some specific tables, you can click **Customize**, select the database, select those tables under a dataset name, and then uncheck the database name, the migration job only will migrate the existing data and replicate ongoing changes of the selected tables. Tables created afterwards in the same database will not be migrated. This mechanism works as a allowlist.
+    - If you want to migrate only some specific tables, you can click **Customize**, select the database, select those tables under a dataset name, uncheck the database name, and then move them to the **Selected Objects** area, the migration job only will migrate the existing data and replicate ongoing changes of the selected tables. Tables created afterwards in the same database will not be migrated. This mechanism works as a allowlist.
 
         <img src="https://download.pingcap.com/images/docs/tidb-cloud/migration-job-select-tables.png" width="60%" />
 
