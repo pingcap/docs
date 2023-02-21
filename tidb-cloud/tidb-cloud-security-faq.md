@@ -44,17 +44,17 @@ As a customer, you have complete control over your data:
 
 In TiDB Cloud, customer data is protected through a combination of features and best practices, including:
 
-- Encryption: TiDB Cloud supports encryption at rest and in transit. Data is encrypted when it is stored on disk, and is also encrypted when it is transmitted over the network. 
+- TiDB Cloud provides encryption for data both at rest and in transit. This means that the data is encrypted when it is stored on disks and when it is transmitted over the network.
 
-- TiDB Cloud allows customers to control who has access to their data by setting up access controls list. Customers can set up roles and assign privileges to specific users.
+- TiDB Cloud allows customers to set up an IP access list to control who has access to their data, and also allows customers to set up roles and assign privileges to specified users only.
 
-- TiDB Cloud is designed to run in a virtual private cloud (VPC) to isolate customer traffic from other traffic on the internet. TiDB Cloud also supports secure network communication using SSL/TLS.
+- TiDB Cloud runs in a virtual private cloud (VPC) that isolates customer traffic from other traffic on the internet, and TiDB Cloud supports secure network communication using SSL/TLS.
 
-- TiDB Cloud provides a variety of backup and disaster recovery options to ensure that customer data is protected in case of an outage or disaster. Customers can set up automatic backups, incremental backups, and point-in-time recovery, as well as replicate their data to different regions for disaster recovery.
+- TiDB Cloud provides various backup and disaster recovery options to ensure that customer data is protected in case of an outage or disaster. Customers can set up automatic backups, incremental backups, and point-in-time recovery (PITR), and replicate their data to different regions for disaster recovery.
 
-- TiDB Cloud is designed to comply with various data privacy and security regulations, such as ISO27701，SOC2，GDPR and HIPAA. Customers can also set up their own compliance requirements and audit logs to monitor access to their data.
+- TiDB Cloud complies with various data privacy and security regulations, such as ISO27701, SOC2 Type II, General Data Protection Regulation (GDPR), and Health Insurance Portability and Accountability Act of 1996 (HIPAA). Customers can set up their own compliance requirements and audit logs to monitor access to their data.
 
-Overall, TiDB Cloud is designed to provide a secure and reliable platform for storing and managing customer data. TiDB Cloud's security features and best practices are continuously updated and reviewed to ensure that customer data is protected against the latest threats and vulnerabilities.
+Overall, TiDB Cloud provides a secure and reliable platform for storing and managing customer data. TiDB Cloud security features and best practices are also continuously updated and reviewed to ensure that customer data is protected against the latest threats and vulnerabilities.
 
 ## What are the responsibilities in securing customer data?
 
