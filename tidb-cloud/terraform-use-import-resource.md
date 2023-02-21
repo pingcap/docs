@@ -179,7 +179,7 @@ You can manage either a local import task or an Amazon S3 import task using the 
    2 rows in set (0.24 sec)
    ```
 
-### Create and run a S3 import task
+### Create and run an AmazonS3 import task
 
 1. Create an `import` directory, and then create a `main.tf` inside it. For example:
 
