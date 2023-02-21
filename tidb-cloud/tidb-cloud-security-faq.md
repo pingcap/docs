@@ -13,18 +13,20 @@ This document lists the most frequently asked questions about TiDB Cloud securit
 
 Customer data refers to the data that customer applications send to TiDB Cloud clusters for analysis, processing, and storage under their accounts. TiDB Cloud classifies customer data into the following categories:
 
-Business data (including consumer data and table data)
-Database files (including database backups and snapshots)
-SQL logs
-Personally identifiable information (PII) of customers' consumers (excluding TiDB Cloud account registration and login information)
+- Business data (including consumer data and table data)
+- Database files (including database backups and snapshots)
+- SQL logs
+- Personally identifiable information (PII) of customers' consumers (excluding TiDB Cloud account registration and login information)
+
 Customer data includes data that customers or their consumers store in TiKV or TiFlash, which is located in the cloud providers' storage (such as S3 buckets or EBS of AWS).
 
 Customer data does not include TiDB Cloud's operational, diagnosis, or metadata:
 
-Operational data: TiDB Cloud control plane logs, runtime metrics, usage policies, and service ticket-related information.
-Diagnosis data: TiDB cluster logs (including logs, error logs, and slow query logs), metrics (including usage and runtime metrics), configuration (including TiDB cluster configuration items, node IP addresses, and values), monitoring, and alert-related information.
-Metadata: TiDB Cloud account registration information (including email, company name, phone number, and IP address), permissions, endpoint services, devices, versions, and tag-related information.
-For more information about TiDB Cloud's operational data, please refer to [TiDB Cloud Privacy Policy](https://www.pingcap.com/privacy-policy/) and [TiDB Cloud Data Processing Agreement](https://www.pingcap.com/legal/data-processing-agreement-for-tidb-cloud-services/).
+- Operational data: TiDB Cloud control plane logs, runtime metrics, usage policies, and service ticket-related information.
+- Diagnosis data: TiDB cluster logs (including logs, error logs, and slow query logs), metrics (including usage and runtime metrics), configuration (including TiDB cluster configuration items, node IP addresses, and values), monitoring, and alert-related information.
+- Metadata: TiDB Cloud account registration information (including email, company name, phone number, and IP address), permissions, endpoint services, devices, versions, and tag-related information.
+
+For more information about the operational data, see [TiDB Cloud Privacy Policy](https://www.pingcap.com/privacy-policy/) and [TiDB Cloud Data Processing Agreement](https://www.pingcap.com/legal/data-processing-agreement-for-tidb-cloud-services/).
 
 ## Who owns customer data?
 
@@ -34,7 +36,7 @@ As a customer, you have full ownership of your data and can choose which TiDB Cl
 
 As a customer, you have complete control over your data:
 
-- You can choose how to protect your data using TiDB Cloud, which offers encryption at rest and in transit to safeguard your data. Additionally, you have the option to manage your encryption key. If you prefer to bring your key, please contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+- You can choose how to protect your data using TiDB Cloud, which offers encryption at rest and in transit to safeguard your data. Additionally, you have the option to manage your encryption key. If you prefer to bring your key, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 - You can manage access to your data, as well as the TiDB Cloud databases and tools, through users, roles, and credentials that you control.
 
