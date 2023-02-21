@@ -401,7 +401,7 @@ storage = "s3://redo?access-key=minio&secret-access-key=miniostorage&endpoint=ht
 
 In this DR scenario, the TiDB clusters in two regions can be each other's disaster recovery clusters: the business traffic is written to the corresponding TiDB cluster based on the region configuration, and the two TiDB clusters back up each other's data.
 
-![TiCDC bidirectional replication](/media/dr/dr-ticdc.png)
+![TiCDC bidirectional replication](/media/dr/bdr-ticdc.png)
 
 With the bidirectional replication feature, the TiDB clusters in two regions can be each other's disaster recovery clusters. This DR solution guarantees data security and reliability, and also ensures the write performance of the database. In a planned DR switchover, you do not need to stop the running changefeeds and then start a new changefeed, which simplifies the operation and maintenance.
 
