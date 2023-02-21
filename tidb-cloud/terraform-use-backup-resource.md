@@ -7,6 +7,11 @@ summary: Learn how to create a backup of a TiDB Cloud cluster using the backup r
 
 You can learn how to create a backup of a TiDB Cloud cluster with the `tidbcloud_backup` resource in this document.
 
+The features of the `tidbcloud_backup` resource include the following:
+
+- Create backups for Dedicated Tier clusters.
+- Delete backups for Dedicated Tier clusters.
+
 ## Prerequisites
 
 - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md).

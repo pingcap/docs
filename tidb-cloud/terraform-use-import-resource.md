@@ -13,8 +13,6 @@ The features of the `tidbcloud_import` resource include the following:
 - Import data either from local disks or from Amazon S3 buckets.
 - Cancel ongoing import tasks.
 
-You can learn how to manage an import task with the `tidbcloud_import` resource in this document.
-
 ## Prerequisites
 
 - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md).
@@ -22,9 +20,9 @@ You can learn how to manage an import task with the `tidbcloud_import` resource 
 
 ## Manage the import resource
 
-You can manage either a local import task or an Amazon S3 import task using the import resource. The following sections take a local import task as an example to show you how to manage the import resource.
+You can manage either a local import task or an Amazon S3 import task using the import resource.
 
-### Create and run an import task
+### Create and run a local import task
 
 1. Create a CSV file for import. For example:
 
@@ -182,6 +180,65 @@ You can manage either a local import task or an Amazon S3 import task using the 
    +------+-------+------+
    2 rows in set (0.24 sec)
    ```
+
+### Create and run a S3 import task
+
+1. Create an `import` directory, and then create a `main.tf` inside it. For example:
+
+   ```
+   terraform {
+     required_providers {
+       tidbcloud = {
+         source = "tidbcloud/tidbcloud"
+       }
+     }
+   }
+   
+   provider "tidbcloud" {
+     public_key  = "fake_public_key"
+     private_key = "fake_private_key"
+   }
+   
+   resource "tidbcloud_import" "example_s3_csv" {
+     project_id   = "your_project_id"
+     cluster_id   = "your_cluster_id"
+     type         = "S3"
+     data_format  = "CSV"
+     aws_role_arn = "your_arn"
+     source_url   = "your_url"
+   }
+   
+   resource "tidbcloud_import" "example_s3_parquet" {
+     project_id   = "your_project_id"
+     cluster_id   = "your_cluster_id"
+     type         = "S3"
+     data_format  = "Parquet"
+     aws_role_arn = "your_arn"
+     source_url   = "your_url"
+   }
+   ```
+   
+2. Run the `terraform apply` command to create an import task, and then type `yes` to confirm the creation and start the import:
+
+   ```
+   $ terraform apply
+   ...
+   Plan: 2 to add, 0 to change, 0 to destroy.
+   
+   Do you want to perform these actions?
+   Terraform will perform the actions described above.
+   Only 'yes' will be accepted to approve.
+   
+   Enter a value: yes
+   
+   tidbcloud_import.example_s3_csv: Creating...
+   tidbcloud_import.example_s3_csv: Creation complete after 3s [id=781075]
+   tidbcloud_import.example_s3_parquet: Creating...
+   tidbcloud_import.example_s3_parquet: Creation complete after 4s [id=781076]
+   ```
+   
+3. Use `terraform refresh` and `terraform state show tidbcloud_import.${resource-name}` to update and check the status just as described in the last section.
+
 
 ### Update an import task
 

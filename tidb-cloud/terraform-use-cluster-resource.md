@@ -5,9 +5,15 @@ summary: Learn how to use the cluster resource to create and modify a TiDB Cloud
 
 # Use Cluster Resource
 
-You can learn how to create and modify a TiDB Cloud cluster with the `tidbcloud_cluster` resource in this document.
+You can learn how to manage a TiDB Cloud cluster with the `tidbcloud_cluster` resource in this document.
 
 In addition, you will also learn how to get the necessary information with the `tidbcloud_projects` and `tidbcloud_cluster_specs` data sources.
+
+The features of the `tidbcloud_cluster` resource include the following:
+
+- Create Serverless Tier and Dedicated Tier clusters.
+- Update Dedicated Tier clusters.
+- Delete Serverless Tier and Dedicated Tier clusters.
 
 ## Prerequisites
 
