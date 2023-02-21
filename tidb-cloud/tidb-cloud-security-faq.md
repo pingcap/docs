@@ -48,11 +48,11 @@ As a customer, you can choose in which AWS or GCP region you want to store your 
 
 ## What are the responsibility in securing customer data?
 
-When it comes to securing customer data, it's important to understand the roles and responsibilities of both TiDB Cloud and the customer.
+When it comes to securing customer data, it is important to understand the roles and responsibilities of both TiDB Cloud and customers.
 
-TiDB Cloud is responsible for ensuring the sustainable, safe, stable, and compliant operation of the TiDB Cloud service, including the underlying infrastructure and the TiDB Cloud control plane.
+TiDB Cloud is responsible for ensuring the sustainable, safe, stable, and compliant operation of the TiDB Cloud service, including the TiDB Cloud underlying infrastructure and the control plane.
 
-Customer are responsible for the security and compliance of your TiDB cluster, including managing access controls, implementing security features, and monitoring the security posture of your cluster. You are also responsible for the security and compliance of any data that you store, process, and transmit through your TiDB cluster. It's important to ensure that your TiDB cluster is configured to meet your security and compliance requirements.
+Customers are responsible for the security and compliance of your TiDB cluster, including managing access controls, implementing security features, and monitoring the security posture of your cluster. You are also responsible for the security and compliance of any data that you store, process, and transmit through your TiDB cluster. It is important to ensure that your TiDB cluster is configured to meet your security and compliance requirements.
 
 ## Who can access customer data in TiDB Cloud?
 
