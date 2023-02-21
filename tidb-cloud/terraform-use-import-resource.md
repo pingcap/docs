@@ -237,7 +237,6 @@ You can manage either a local import task or an Amazon S3 import task using the 
    
 3. Use `terraform refresh` and `terraform state show tidbcloud_import.${resource-name}` to update and check the status just as described in the last section.
 
-
 ## Update an import task
 
 Import tasks cannot be updated.
