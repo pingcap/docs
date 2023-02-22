@@ -161,7 +161,7 @@ Use the [backup and restore feature](/br/backup-and-restore-overview.md) to migr
     SELECT @@global.tidb_gc_enable;
     ```
 
-If the value is `0`, it means that GC is disabled:
+    If the value is `0`, it means that GC is disabled:
 
     ```
     +-------------------------+
@@ -269,7 +269,7 @@ After migrating data as described in the preceding section, you can replicate in
     SELECT @@global.tidb_gc_enable;
     ```
 
-If the value is `1`, it means that GC is enabled:
+    If the value is `1`, it means that GC is enabled:
 
     ```
     +-------------------------+
