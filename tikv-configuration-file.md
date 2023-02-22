@@ -497,6 +497,17 @@ Configuration items related to the sharing of block cache among multiple RocksDB
 + Default value: 45% of the size of total system memory
 + Unit: KB|MB|GB
 
+## storage.engine <span class="version-mark">New in v6.6.0</span>
+
+> **Note:**
+>
+> This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
+Specifies the engine type. Value optionas are `raft-kv` and `partitioned-raft-kv`. This configuration can only be specified when creating a new cluster and cannot be modifies once being specified.
+
+- `raft-kv`: The default engine type in TiDB v6.6.0 and earlier versions.
+- `partitioned-raft-kv`: A new storage engine introduced in TiDB v6.6.0.
+
 ## storage.flow-control
 
 Configuration items related to the flow control mechanism in TiKV. This mechanism replaces the write stall mechanism in RocksDB and controls flow at the scheduler layer, which avoids secondary disasters caused by the stuck Raftstore or Apply threads.
@@ -1093,6 +1104,27 @@ Configuration items related to RocksDB
 
 + Determines whether to automatically create a DB switch
 + Default value: `true`
+
+### rocksdb.write-buffer-flush-oldest-first <span class="version-mark">New in v6.6.0</span>
+
+> **Note:**
+>
+> This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
+Specifies the flush strategy used when the memory usage of `memtable` of the current RocksDB reaches the threshold.
+
+- `false`: Default value. `memtable`with the largest data volume is flushed to SST files.
+- `true`: The earliest `memtable` is flushed to SST files. This strategy can clear the `memtable` of cold data, which is suitable for scenarios with obvious cold and hot data.
+
+### rocksdb.write-buffer-limit <span class="version-mark">New in v6.6.0</span>
+
+> **Note:**
+>
+> This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
++ Specifies the total memory limit of `memtable` for all RocksDB instances in a single TiKV. The default value is 25% of the memory of the machine. It is recommended to configure a memory of at least 5 GiB. This configuration only takes effect for `partitioned-raft-kv`.
++ Default value: 25%
++ Unit: KB|MB|GB
 
 ### `wal-recovery-mode`
 
