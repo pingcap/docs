@@ -213,9 +213,17 @@ There are four roles in an organization. The permissions of each role are as fol
 | Invite members to or remove members from a project          | ✅     | ❌      | ❌             | ❌           |
 | Edit time zone                                                                        | ✅     | ❌      | ❌             | ❌           |
 | View bills and edit payment information                                               | ✅     | ❌      | ✅             | ❌           |
-| View and configure audit logging                                                      | ❌     | ❌      | ❌             | ✅           |
+| Enable, view, or disable [console audit logging](/tidb-cloud/tidb-cloud-console-auditing.md)                                                      | ✅     | ❌      | ❌             | ✅           |
+| View and configure [database audit logging](/tidb-cloud/tidb-cloud-auditing.md)                                                      | ❌     | ❌      | ❌             | ✅           |
 | Obtain project instance management permissions                                             | ✅     | ✅      | ✅             | ✅           |
 | Manage an API key                                                                     | ✅     | ❌      | ❌             | ❌           |
+
+> **Note:**
+>
+> Currently, the Audit Admin role is only visible upon request.
+>
+> - For [console audit logging](/tidb-cloud/tidb-cloud-console-auditing.md), it is recommended that you use the Owner role directly. If you need to use the Audit Admin role, click **Help** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), fill in "Apply for the Audit Admin role" in the **Description** field, and then click **Send**.
+> - For [database audit logging](/tidb-cloud/tidb-cloud-auditing.md), to get the Audit Admin role, click **Help** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), fill in "Apply for database audit logging" in the **Description** field, and then click **Send**.
 
 ## Manage user profiles
 
