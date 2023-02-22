@@ -73,7 +73,7 @@ This error means that the connection to the source database failed. Check whethe
 
 ### The migration task is interrupted and contains the error "driver: bad connection" or "invalid connection"
 
-This error means that the connection to the downstream TiDB cluster failed. Check whether the downstream TiDB cluster is in in a normal state (including `Available` and `Modifying`) and can be connected with the username and password specified by the job. After confirming that the downstream TiDB cluster is available, you can try to resume the task by clicking **Restart**.
+This error means that the connection to the downstream TiDB cluster failed. Check whether the downstream TiDB cluster is in a normal state (including `Available` and `Modifying`) and can be connected with the username and password specified by the job. After confirming that the downstream TiDB cluster is available, you can try to resume the task by clicking **Restart**.
 
 ### Error message: "Failed to connect to the TiDB cluster using the given user and password. Please make sure TiDB Cluster is up and can be connected to using the given user and password."
 
