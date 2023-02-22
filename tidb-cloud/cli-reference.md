@@ -19,7 +19,7 @@ To use the `ticloud` CLI in your terminal, run `ticloud [command] [subcommand]`.
 
 | Command    | Subcommand                                                 | Description                                                                                              |
 |------------|------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
-| cluster    | create, delete, describe, list                             | Manage clusters                                                                                          |
+| cluster    | create, delete, describe, list, connect-info               | Manage clusters                                                                                          |
 | completion | bash, fish, powershell, zsh                                | Generate completion script for specified shell                                                           |
 | config     | create, delete, describe, edit, list, set, use             | Configure user profiles                                                                                  |
 | connect    | -                                                          | Connect to a TiDB cluster                                                                                |
