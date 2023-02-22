@@ -180,10 +180,10 @@ A planned switchover is a scheduled switchover between the primary and secondary
     Run the following commands to lower the priority of PD nodes in region 1 and increase that of PD nodes in region 2.
 
     ``` shell
-    tiup ctl:v6.4.0 pd member leader_priority  pd-1 2
-    tiup ctl:v6.4.0 pd member leader_priority  pd-2 1
-    tiup ctl:v6.4.0 pd member leader_priority  pd-3 4
-    tiup ctl:v6.4.0 pd member leader_priority  pd-4 3
+    tiup ctl:v6.4.0 pd member leader_priority pd-1 2
+    tiup ctl:v6.4.0 pd member leader_priority pd-2 1
+    tiup ctl:v6.4.0 pd member leader_priority pd-3 4
+    tiup ctl:v6.4.0 pd member leader_priority pd-4 3
     ```
 
 2. Observe the PD and TiKV nodes in Grafana and ensure that leaders of the PD and user tables have been transferred to the target region. The steps for switching back to the original region are the same as the preceding steps and are therefore not covered in this document.
