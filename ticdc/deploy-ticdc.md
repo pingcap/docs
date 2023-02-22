@@ -90,12 +90,12 @@ You can upgrade TiDB clusters using TiUP, during which TiCDC is upgraded as well
 ```shell
 tiup update --self && \
 tiup update --all && \
-tiup cluster upgrade <cluster-name> <cluster-version> --transfer-timeout 600
+tiup cluster upgrade <cluster-name> <version> --transfer-timeout 600
 ```
 
 > **Note:**
 >
-> In the preceding command, you need to replace `<cluster-name>` and `<cluster-version>` with the actual cluster name and cluster version. For example, the version can be v6.5.0.
+> In the preceding command, you need to replace `<cluster-name>` and `<version>` with the actual cluster name and cluster version. For example, the version can be v6.6.0.
 
 ### Upgrade cautions
 
@@ -106,7 +106,7 @@ When you upgrade a TiCDC cluster, you need to pay attention to the following:
 - Since v6.3.0, TiCDC supports rolling upgrade. During the upgrade, the replication latency is stable and does not fluctuate significantly. Rolling upgrade takes effect automatically if the following conditions are met:
 
 - TiCDC is v6.3.0 or later.
-    - TiUP is v1.11.0 or later.
+    - TiUP is v1.11.3 or later.
     - At least two TiCDC instances are running in the cluster.
 
 ## Modify TiCDC cluster configurations using TiUP
@@ -152,10 +152,10 @@ See [Enable TLS Between TiDB Components](/enable-tls-between-components.md).
 
 ## View TiCDC status using the command-line tool
 
-Run the following command to view the TiCDC cluster status. Note that you need to replace `<version>` with the TiCDC cluster version:
+Run the following command to view the TiCDC cluster status. Note that you need to replace `v<CLUSTER_VERSION>` with the TiCDC cluster version, such as `v6.5.0`:
 
 ```shell
-tiup ctl:<version> cdc capture list --server=http://10.0.10.25:8300
+tiup ctl:v<CLUSTER_VERSION> cdc capture list --server=http://10.0.10.25:8300
 ```
 
 ```shell

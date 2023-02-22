@@ -17,14 +17,14 @@ The TiDB configuration file supports more options than command-line parameters. 
 - Default value: `true`
 - It is recommended to set it to `false` if you need to create a large number of tables (for example, more than 100 thousand tables).
 
-### `tidb_max_reuse_chunk` <span class="version-mark">New in v6.4.0</span>
+### `tidb-max-reuse-chunk` <span class="version-mark">New in v6.4.0</span>
 
 - Controls the maximum cached chunk objects of chunk allocation. Setting this configuration item to too large a value might increase the risk of OOM.
 - Default value: `64`
 - Minimum value: `0`
 - Maximum value: `2147483647`
 
-### `tidb_max_reuse_column` <span class="version-mark">New in v6.4.0</span>
+### `tidb-max-reuse-column` <span class="version-mark">New in v6.4.0</span>
 
 - Controls the maximum cached column objects of chunk allocation. Setting this configuration item to too large a value might increase the risk of OOM.
 - Default value: `256`
@@ -158,7 +158,8 @@ The TiDB configuration file supports more options than command-line parameters. 
 ### `enable-telemetry` <span class="version-mark">New in v4.0.2</span>
 
 - Enables or disables the telemetry collection in TiDB.
-- Default value: `true`
+- Default value: `false`
+- When this configuration is set to `true` on a TiDB instance, the telemetry collection in this TiDB instance is enabled and the [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402) system variable takes effect.
 - When this configuration is set to `false` on all TiDB instances, the telemetry collection in TiDB is disabled and the [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402) system variable does not take effect. See [Telemetry](/telemetry.md) for details.
 
 ### `enable-tcp4-only` <span class="version-mark">New in v5.0</span>
@@ -813,6 +814,57 @@ Configuration items related to read isolation.
 - Possible values: `OFF`, `ON`
 - The value of this configuration will initialize the value of the system variable [`tidb_enable_ddl`](/system-variables.md#tidb_enable_ddl)
 - Before v6.3.0, this configuration is set by `run-ddl`.
+
+### `tidb_stmt_summary_enable_persistent` <span class="version-mark">New in v6.6.0</span>
+
+> **Warning:**
+>
+> Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
++ Controls whether to enable statements summary persistence.
++ Default value: `false`
++ For more details, see [Persist statements summary](/statement-summary-tables.md#persist-statements-summary).
+
+### `tidb_stmt_summary_filename` <span class="version-mark">New in v6.6.0</span>
+
+> **Warning:**
+>
+> Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
++ When statements summary persistence is enabled, this configuration specifies the file to which persistent data is written.
++ Default value: `tidb-statements.log`
+
+### `tidb_stmt_summary_file_max_days` <span class="version-mark">New in v6.6.0</span>
+
+> **Warning:**
+>
+> Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
++ When statements summary persistence is enabled, this configuration specifies the maximum number of days to keep persistent data files.
++ Default value: `3`
++ Unit: day
++ You can adjust the value based on the data retention requirements and disk space usage.
+
+### `tidb_stmt_summary_file_max_size` <span class="version-mark">New in v6.6.0</span>
+
+> **Warning:**
+>
+> Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
++ When statements summary persistence is enabled, this configuration specifies the maximum size of a persistent data file.
++ Default value: `64`
++ Unit: MiB
++ You can adjust the value based on the data retention requirements and disk space usage.
+
+### `tidb_stmt_summary_file_max_backups` <span class="version-mark">New in v6.6.0</span>
+
+> **Warning:**
+>
+> Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
++ When statements summary persistence is enabled, this configuration specifies the maximum number of data files that can be persisted. `0` means no limit on the number of files.
++ Default value: `0`
++ You can adjust the value based on the data retention requirements and disk space usage.
 
 ## proxy-protocol
 
