@@ -69,7 +69,7 @@ For example, your overall expected performance is 110,000 QPS under a mixed work
 
 `node num = ceil(110,000 ÷ 15,500) = 8`
 
-As the performance deviation coefficient of 8 nodes is about 5%, the estimated TiDB performance is `8 * 15,500 * (1 - 5%) = 117,800 `, which can meet your expected performance of 110,000 QPS.
+As the performance deviation coefficient of 8 nodes is about 5%, the estimated TiDB performance is `8 * 15,500 * (1 - 5%) = 117,800`, which can meet your expected performance of 110,000 QPS.
 
 Therefore, 8 TiDB nodes (8 vCPU, 16 GiB) are recommended for you.
 
