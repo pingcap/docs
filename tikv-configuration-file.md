@@ -507,8 +507,8 @@ Configuration items related to the sharing of block cache among multiple RocksDB
 + Specifies the engine type. This configuration can only be specified when creating a new cluster and cannot be modifies once being specified.
 + Value options:
 
-    + `"raft-kv"`: The default engine type in TiDB v6.6.0 and earlier versions.
-    + `"partitioned-raft-kv"`: A new storage engine introduced in TiDB v6.6.0.
+    + `"raft-kv"`: The default engine type in versions earlier than TiDB v6.6.0.
+    + `"partitioned-raft-kv"`: The new storage engine type introduced in TiDB v6.6.0.
 
 ## storage.flow-control
 
