@@ -5,7 +5,7 @@ summary: Learn TiDB Cloud performance test results.
 
 # TiDB Cloud Performance Reference
 
-This document provides [Sysbench](https://github.com/akopytov/sysbench) performance test results of different TiDB cluster scales, which can be taken as a reference when you [determine the cluster size](/tidb-cloud/size-your-cluster.md).
+This document provides [Sysbench](https://github.com/akopytov/sysbench) performance test results of different TiDB cluster scales, which can be used as a reference when you [determine the cluster size](/tidb-cloud/size-your-cluster.md).
 
 > **Note:**
 >
