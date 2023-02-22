@@ -150,7 +150,7 @@ When planning your cluster size, you can estimate the number of TiKV nodes accor
 
 `node num = ceil(overall expected performance ÷ performance per node * (1 - performance deviation coefficient))`
 
-In the formula, you need to calculate `node num = ceil(overall expected performance ÷ performance per node` first to get a rough node number, and then use the corresponding performance deviation coefficient to get the final result of the node number.
+In the formula, you need to calculate `node num = ceil(overall expected performance ÷ performance per node)` first to get a rough node number, and then use the corresponding performance deviation coefficient to get the final result of the node number.
 
 For example, your overall expected performance is 110,000 QPS under a mixed workload, and you want to use 8 vCPU, 32 GiB TiKV nodes. Then you can calculate a rough number of TiKV nodes as follows:
 
