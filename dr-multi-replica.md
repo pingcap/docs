@@ -1,9 +1,9 @@
 ---
-title: DR Solution based on Multiple Replicas in a Single Cluster
+title: DR Solution Based on Multiple Replicas in a Single Cluster
 summary: Learn about the multi-replica disaster recovery solution for a single cluster.
 ---
 
-# DR Solution based on Multiple Replicas in a Single Cluster
+# DR Solution Based on Multiple Replicas in a Single Cluster
 
 This document describes the disaster recovery (DR) solution based on multiple replicas in a single cluster. The document is organized as follows:
 
