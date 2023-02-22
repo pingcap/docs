@@ -61,7 +61,7 @@ If the number of TiDB nodes is less than 8, the performance deviation coefficien
 
 When planning your cluster size, you can estimate the number of TiDB nodes according to your workload type, your overall expected performance (QPS), and the performance of a single TiDB node corresponding to the workload type using the following formula:
 
- `node num = ceil(overall expected performance ÷ performance per node * (1 - performance deviation coefficient))`
+`node num = ceil(overall expected performance ÷ performance per node * (1 - performance deviation coefficient))`
 
 In the formula, you need to calculate `node num = ceil(overall expected performance ÷ performance per node` first to get a rough node number, and then use the corresponding performance deviation coefficient to get the final result of the node number.
 
