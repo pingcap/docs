@@ -29,7 +29,7 @@ Advantages of this feature are better write performance, faster scaling speed, a
 
 ## Usage
 
-To enable Partitioned Raft KV, set the configuration item [`storage.engine`](/tikv-configuration-file.md#storageengine-new-in-v660) to `partitioned-raft-kv` when creating a cluster. At the same time, you can use the configuration items [`rocksdb.write-buffer-flush-oldest-first`](/tikv-configuration-file.md#rocksdbwrite-buffer-flush-oldest-first-new-in-v660) and [`rocksdb.write-buffer-limit`](/tikv-configuration-file.md#rocksdbwrite-buffer-limit-new-in-v660) to control the memory usage of RocksDB when using Raft KV.
+To enable Partitioned Raft KV, set the configuration item [`"storage.engine"`](/tikv-configuration-file.md#engine-new-in-v660) to `partitioned-raft-kv` when creating a cluster. At the same time, you can use the configuration items [`rocksdb.write-buffer-flush-oldest-first`](/tikv-configuration-file.md#write-buffer-flush-oldest-first-new-in-v660) and [`rocksdb.write-buffer-limit`](/tikv-configuration-file.md#write-buffer-limit-new-in-v660) to control the memory usage of RocksDB when using Raft KV.
 
 ## Restrictions
 
