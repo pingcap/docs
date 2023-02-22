@@ -1,9 +1,9 @@
 ---
-title: DR Solution based on BR
+title: DR Solution Based on BR
 summary: Learn how to implement disaster recovery based on TiDB's backup and restore feature.
 ---
 
-# DR Solution based on BR
+# DR Solution Based on BR
 
 A TiDB cluster has multiple replicas, which allows it to tolerate the failure of a single data center or region and continue to provide services. In the case of a natural disaster, software vulnerability, hardware failure, virus attack, or misoperations, which impacts an area larger than a single data center or region, TiDB's Backup & Restore (BR) feature can back up data to an independent disaster recovery (DR) storage device to protect user data from damage. Compared with other DR solutions, the BR feature is more flexible, reliable, recoverable, and cost-effective:
 
