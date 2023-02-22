@@ -38,7 +38,7 @@ Before using Online Unsafe Recovery, make sure that the following requirements a
 
 ### Step 1. Specify the stores that cannot be recovered
 
-To trigger the automatic recovery, use PD Control to execute [`unsafe remove-failed-stores <store_id>[,<store_id>,...]`](/pd-control.md#unsafe-remove-failed-stores-store-ids--show) and specify **all** the TiKV nodes that cannot be recovered, seperated by commas.
+To trigger automatic recovery, use PD Control to execute [`unsafe remove-failed-stores <store_id>[,<store_id>,...]`](/pd-control.md#unsafe-remove-failed-stores-store-ids--show) and specify **all** the TiKV nodes that cannot be recovered, seperated by commas.
 
 {{< copyable "shell-regular" >}}
 
@@ -168,7 +168,7 @@ If an error occurs during the task, the last stage in the output shows `"Unsafe 
 >
 > Although the data can be read and written, it does not mean that there is no data loss.
 
-After the recovery is completed, the data and index might be inconsistent. Use the SQL command [`ADMIN CHECK`](/sql-statements/sql-statement-admin-check-table-index.md) to check the data consistency and index consistency of the affected tables
+After the recovery is completed, the data and index might be inconsistent. Use the SQL command [`ADMIN CHECK`](/sql-statements/sql-statement-admin-check-table-index.md) to check the data and index consistency of the affected tables
 
 ```sql
 ADMIN CHECK TABLE table_name;
