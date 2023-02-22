@@ -504,6 +504,7 @@ Configuration items related to the sharing of block cache among multiple RocksDB
 > This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 + Specifies the engine type. This configuration can only be specified when creating a new cluster and cannot be modifies once being specified.
++ Default value: `"raft-kv"`
 + Value options:
 
     + `"raft-kv"`: The default engine type in versions earlier than TiDB v6.6.0.
