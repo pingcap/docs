@@ -38,4 +38,4 @@ Partitioned Raft KV has the following restrictions:
 * It does not support data import, replication, and backup tools, such as TiDB Lightning, TiCDC, BR, and Dumping.
 * It does not support the tikv-ctl command-line tool.
 * It cannot be used together with TiFlash.
-* You can only enable Partitioned Raft KV when creating a cluster and cannot enable it after the cluster is created.
+* You can only enable Partitioned Raft KV when creating a cluster and cannot change the type of engine after the cluster is created.
