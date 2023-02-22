@@ -20,6 +20,12 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     For more information, see [Console audit logging](/tidb-cloud/tidb-cloud-console-auditing.md).
 
+**CLI changes**
+
+- Add a new command [`ticloud cluster connect-info`](/tidb-cloud/ticloud-cluster-connect-info.md) for [TiDB Cloud CLI](/tidb-cloud/cli-reference.md).
+
+    `ticloud cluster connect-info` is a command that allows you to get the connection string of a cluster.
+
 ## February 21, 2023
 
 **General changes**
