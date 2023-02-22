@@ -25,7 +25,7 @@ You can use this feature if your TiKV cluster has the following characteristics:
 * The workload has a serious read and write amplification.
 * TiKV has sufficient memory.
 
-The main advantage of this feature is better write performance, faster scaling, and larger volume of data supported with the same hardware. It can also support larger cluster scales.
+Advantages of this feature are better write performance, faster scaling speed, and larger volume of data supported with the same hardware. It can also support larger cluster scale.
 
 ## Enable Partitioned Raft KV
 
