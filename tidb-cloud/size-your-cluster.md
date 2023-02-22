@@ -109,7 +109,7 @@ TiDB Cloud deploys TiKV nodes evenly to all availability zones (at least 3) in t
 >
 > When you scale your TiDB cluster, nodes in the 3 availability zones are increased or decreased at the same time. For how to scale in or scale out a TiDB cluster based on your needs, see [Scale Your TiDB Cluster](/tidb-cloud/scale-tidb-cluster.md).
 
-Although TiKV is mainly used for data storage, the performance of the TiKV node also varies depending on different workloads. Therefore, when planning the number of TiKV nodes, you need to estimate it according to both your [**data volume**](#estimate-tikv-node-quantity-according-to-data-volume) and [performance](#estimate-tikv-node-quantity-according-to-expected-performance), and then take the larger of the two estimates as the recommended node number.
+Although TiKV is mainly used for data storage, the performance of the TiKV node also varies depending on different workloads. Therefore, when planning the number of TiKV nodes, you need to estimate it according to both your [**data volume**](#estimate-tikv-node-quantity-according-to-data-volume) and [expected performance](#estimate-tikv-node-quantity-according-to-expected-performance), and then take the larger of the two estimates as the recommended node number.
 
 #### Estimate TiKV node quantity according to data volume
 
