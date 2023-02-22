@@ -148,10 +148,6 @@ The console audit logs record various user activities on the TiDB Cloud console 
 | CancelSupportPlan | Cancel a support plan |
 | UpdateOrganizationName | Update the organization name |
 
-> **Note:**
->
-> The main event types have been covered, but a small number of event types have not been covered for the time being and are being improved.
-
 ## Console audit log fields
 
 To help you track user activities, TiDB Cloud provides the following fields for each console audit log:
