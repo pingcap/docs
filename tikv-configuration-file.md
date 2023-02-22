@@ -500,7 +500,7 @@ Configuration items related to the sharing of block cache among multiple RocksDB
 
 ## storage.engine <span class="version-mark">New in v6.6.0</span>
 
-> **Note:**
+> **Warning:**
 >
 > This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
@@ -1109,7 +1109,7 @@ Configuration items related to RocksDB
 
 ### rocksdb.write-buffer-flush-oldest-first <span class="version-mark">New in v6.6.0</span>
 
-> **Note:**
+> **Warning:**
 >
 > This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
@@ -1117,12 +1117,12 @@ Configuration items related to RocksDB
 + Default value: `false`
 + Value options:
 
-    + `false`: `memtable`with the largest data volume is flushed to SST files.
+    + `false`: `memtable` with the largest data volume is flushed to SST files.
     + `true`: The earliest `memtable` is flushed to SST files. This strategy can clear the `memtable` of cold data, which is suitable for scenarios with obvious cold and hot data.
 
 ### rocksdb.write-buffer-limit <span class="version-mark">New in v6.6.0</span>
 
-> **Note:**
+> **Warning:**
 >
 > This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 

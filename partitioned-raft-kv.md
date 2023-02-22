@@ -5,15 +5,15 @@ summary: Learn about the partitioned Raft KV feature of TiKV.
 
 # Partitioned Raft KV
 
-> **Note:**
+> **Warning:**
 >
 > Partitioned Raft KV is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
-Before v6.6.0, TiKV's Raft-based storage engine used a single RocksDB instance to store the data of all 'Regions' of the TiKV instance.
+Before v6.6.0, TiKV's Raft-based storage engine used a single RocksDB instance to store the data of all Regions of the TiKV instance.
 
 To support larger clusters more stably, starting from TiDB v6.6.0, a new TiKV storage engine is introduced, which uses multiple RocksDB instances to store TiKV Region data, and the data of each Region is independently stored in a separate RocksDB instance.
 
-The new engine can better control the number and level of files in the RocksDB instance, achieve physical isolation of data operations between Regions, and support stably managing more data. You can see it as TiKV managing multiple RocksDB instances through partitioning, which is why the feature is named Partitioned Raft KV.
+The new engine can better control the number and level of files in each RocksDB instance, achieve physical isolation of data operations between Regions, and support stably managing more data. You can see it as TiKV managing multiple RocksDB instances through partitioning, which is why the feature is named Partitioned Raft KV.
 
 ## Application scenarios
 
@@ -27,7 +27,7 @@ You can use this feature if your TiKV cluster has the following characteristics:
 
 Advantages of this feature are better write performance, faster scaling speed, and larger volume of data supported with the same hardware. It can also support larger cluster scale.
 
-## Enable Partitioned Raft KV
+## Usage
 
 To enable Partitioned Raft KV, set the configuration item [`storage.engine`](/tikv-configuration-file.md#storageengine-new-in-v660) to `partitioned-raft-kv` when creating a cluster. At the same time, you can use the configuration items [`rocksdb.write-buffer-flush-oldest-first`](/tikv-configuration-file.md#rocksdbwrite-buffer-flush-oldest-first-new-in-v660) and [`rocksdb.write-buffer-limit`](/tikv-configuration-file.md#rocksdbwrite-buffer-limit-new-in-v660) to control the memory usage of RocksDB when using Raft KV.
 
