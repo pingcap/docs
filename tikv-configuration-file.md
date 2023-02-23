@@ -883,6 +883,11 @@ Configuration items related to Raftstore.
 + Default value: `"9s"`
 + Minimum value: `0`
 
+### `right-derive-when-split`
+
++ When this configuration is set to `true`, the key of the original Region is reused for the Region starting from the maximum split key. Otherwise, the key is reused for the Region starting from the original Region's start key.
++ Default value: `true`
+
 ### `merge-max-log-gap`
 
 + The maximum number of missing logs allowed when `merge` is performed
@@ -982,7 +987,7 @@ Configuration items related to Raftstore.
 + Minimum value: `0`
 + Unit: second
 
-## Coprocessor
+## coprocessor
 
 Configuration items related to Coprocessor.
 
@@ -1062,7 +1067,7 @@ Configuration items related to Coprocessor.
 + The interval at which TiKV reports bucket information to PD when `enable-region-bucket` is true.
 + Default value: `10s`
 
-## RocksDB
+## rocksdb
 
 Configuration items related to RocksDB
 
@@ -1438,7 +1443,11 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 ### `compaction-pri`
 
 + The priority type of compaction
-+ Optional values: `"by-compensated-size"`, `"oldest-largest-seq-first"`, `"oldest-smallest-seq-first"`, `"min-overlapping-ratio"`
++ Optional values:
+    - `"by-compensated-size"`: prioritize the compaction on large files in order of file size
+    - `"oldest-largest-seq-first"`: perform the compaction on files with data whose latest update time is old in chronological order. **Only** set this value when updating hot keys in small ranges.
+    - `"oldest-smallest-seq-first"`: prioritize compaction on files with ranges that are not compacted to the next level for a long time in chronological order. If you randomly update hot keys across the key space, setting this value can slightly reduce write amplification.
+    - `"min-overlapping-ratio"`: prioritize compaction on files with a high overlap ratio. When the file size in different levels is small (which means the value of  `the file size in the next level` ÷ `the file size in this level` is small), TiKV compacts the file first. In many cases, setting this value can effectively reduce write amplification.
 + Default value for `defaultcf` and `writecf`: `"min-overlapping-ratio"`
 + Default value for `lockcf`: `"by-compensated-size"`
 
@@ -1864,7 +1873,7 @@ Configuration items related to [encryption at rest](/encryption-at-rest.md) (TDE
 
 + Specifies the old master key when rotating the new master key. The configuration format is the same as that of `master-key`. To learn how to configure a master key, see [Encryption at Rest - Configure encryption](/encryption-at-rest.md#configure-encryption).
 
-## `import`
+## import
 
 Configuration items related to TiDB Lightning import and BR restore.
 
