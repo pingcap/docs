@@ -1713,7 +1713,7 @@ Configuration items related to `raftdb`
 
 ### `info-log-level`
 
-+ Log levels of RocksDB
++ Log levels of RaftDB
 + Default value: `"info"`
 
 ## raft-engine
