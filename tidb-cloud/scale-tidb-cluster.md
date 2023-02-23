@@ -129,7 +129,7 @@ You can also increase the size of a TiDB, TiKV, or TiFlash node using TiDB Cloud
 
 > **Note:**
 >
-> - Decreasing node size is only available to clusters that are hosted on AWS and created after `{PLACEHOLDER}`.
+> - Decreasing node size is only available to clusters that are hosted on AWS and created after `2022/12/31`.
 > - AWS has a cooldown period of node size changes. If your TiDB cluster is hosted on AWS, after changing the node storage or node size of TiKV or TiFlash, you must wait at least six hours before you can change it again.
 
 To decrease the size of TiDB, TiKV, or TiFlash nodes, take the following steps:
