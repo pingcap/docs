@@ -174,25 +174,25 @@ After the recovery is completed, the data and index might be inconsistent. Use t
 ADMIN CHECK TABLE table_name;
 ```
 
-If there are inconsistent indexes, you can fix the index inconsistency by renaming the old index, creating a new index, and droping the old index.
+If there are inconsistent indexes, you can fix the index inconsistency by renaming the old index, creating a new index, and then droping the old index.
 
-Rename the old index:
+1. Rename the old index:
 
-```sql
-ALTER TABLE table_name RENAME INDEX index_name TO index_name_lame_duck;
-```
+    ```sql
+    ALTER TABLE table_name RENAME INDEX index_name TO index_name_lame_duck;
+    ```
 
-Create a new index:
+2. Create a new index:
 
-```sql
-ALTER TABLE table_name ADD INDEX index_name (column_name);
-```
+    ```sql
+    ALTER TABLE table_name ADD INDEX index_name (column_name);
+    ```
 
-Drop the old index:
+3. Drop the old index:
 
-```sql
-ALTER TABLE table_name DROP INDEX index_name_lame_duck;
-```
+    ```sql
+    ALTER TABLE table_name DROP INDEX index_name_lame_duck;
+    ```
 
 ### Step 4: Remove unrecoverable stores (optional)
 
