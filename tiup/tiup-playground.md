@@ -120,7 +120,7 @@ After you stop a TiDB cluster started using TiUP playground, all cluster data is
 tiup playground --tag <tagname>
 ```
 
-For clusters started in this way, the data files are retained after the cluster is stopped. You can use this tag to start the cluster next time so that you can use the data kept since the cluster was stopped.
+For a cluster started in this way, the data files are retained after the cluster is stopped. You can use this tag to start the cluster next time so that you can use the data kept since the cluster was stopped.
 
 ## Quickly connect to the TiDB cluster started by playground
 
