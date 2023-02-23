@@ -1000,9 +1000,13 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 > **Warning:**
 >
+<<<<<<< HEAD
 > Acceleration of `ADD INDEX` and `CREATE INDEX` is an experimental feature. It is not recommended that you use it in production environments.
 >
 > Currently, this feature is not fully compatible with [altering multiple columns or indexes in a single `ALTER TABLE` statement](/sql-statements/sql-statement-alter-table.md). When adding a unique index with the index acceleration, you need to avoid altering other columns or indexes in the same statement.
+=======
+> Currently, this feature is not fully compatible with adding a unique index. When adding a unique index, it is recommended to disable the index acceleration feature (set `tidb_ddl_enable_fast_reorg` to `OFF`).
+>>>>>>> 50b21a463 (index acceleration: not compatible with unique index (#12456))
 >
 > Currently, this feature is not compatible with [PITR (Point-in-time recovery)](/br/point-in-time-recovery.md). When using index acceleration, you need to ensure that there are no PITR log backup tasks running in the background. Otherwise, unexpected behaviors might occur, including:
 >
