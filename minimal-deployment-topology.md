@@ -11,7 +11,7 @@ This document describes the minimal deployment topology of TiDB clusters.
 
 | Instance | Count | Physical machine configuration | IP | Configuration |
 | :-- | :-- | :-- | :-- | :-- |
-| TiDB | 2 | 16 VCore 32 GiB * 1 <br/> 100 GiB | 10.0.1.1 <br/> 10.0.1.2 <br/> 10.0.1.3 | Default port <br/> Global directory configuration |
+| TiDB | 2 | 16 VCore 32 GiB * 1 <br/> 100 GiB | 10.0.1.1 <br/> 10.0.1.2 | Default port <br/> Global directory configuration |
 | PD | 3 | 4 VCore 8 GiB * 1 <br/> 100 GiB |10.0.1.4 <br/> 10.0.1.5 <br/> 10.0.1.6 | Default port <br/> Global directory configuration |
 | TiKV | 3 | 16 VCore 32 GiB * 1 <br/> 2 TiB (nvme ssd) | 10.0.1.7 <br/> 10.0.1.8 <br/> 10.0.1.9 | Default port <br/> Global directory configuration |
 | Monitoring & Grafana | 1 | 4 VCore 8 GiB * 1 <br/> 500 GiB (ssd) | 10.0.1.10 | Default port <br/> Global directory configuration |
