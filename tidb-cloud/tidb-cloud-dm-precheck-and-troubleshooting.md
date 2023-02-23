@@ -94,10 +94,15 @@ You can subscribe to TiDB Cloud alert emails to be informed in time when an aler
 The following are alerts about Data Migration: 
 
 - "Data migration job met error during data export"
+    - Recommended Action : Check the error message from data migration page, and refer to [Migration errors and solutions](#migration-errors-and-solutions) for help.
 - "Data migration job met error during data import"
+    - Recommended Action : Check the error message from data migration page, and refer to [Migration errors and solutions](#migration-errors-and-solutions) for help.
 - "Data migration job met error during incremental data migration"
-- "Data migration job has been paused for more than 6 hours during incremental migration" (If this alert occurs, you can resume the data migration job or ignore this alert directly.)      
+    - Recommended Action : Check the error message from data migration page, and refer to [Migration errors and solutions](#migration-errors-and-solutions) for help.
+- "Data migration job has been paused for more than 6 hours during incremental migration" 
+    - Recommended Action : If this alert occurs, you can resume the data migration job or ignore this alert directly.     
 - "Replication lag is larger than 10 minutes and stilling increasing for more than 20 minutes"
+    - Recommended Action : Contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for consultation.
 
 If you need help to address these alerts, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for consultation.
 
