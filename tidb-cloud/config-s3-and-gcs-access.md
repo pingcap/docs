@@ -135,7 +135,7 @@ To allow TiDB Cloud to access the source data in your GCS bucket, you need to co
 
         > **Tip:**
         >
-        > If you have multiple projects, you can switch to the target project in the left navigation pane of the **Clusters** page.
+        > If you have multiple projects, you can switch to the target project by clicking the ☰ button on the top-left corner and select the target project in the project list.
 
     2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
 
