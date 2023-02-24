@@ -46,8 +46,8 @@ You can manage either a local import task or an Amazon S3 import task using the 
    }
 
     provider "tidbcloud" {
-      public_key = "fake_public_key"
-      private_key = "fake_private_key"
+      public_key = "your_public_key"
+      private_key = "your_private_key"
     }
    
     resource "tidbcloud_import" "example_local" {
@@ -201,8 +201,8 @@ You can manage either a local import task or an Amazon S3 import task using the 
    }
    
    provider "tidbcloud" {
-     public_key  = "fake_public_key"
-     private_key = "fake_private_key"
+     public_key  = "your_public_key"
+     private_key = "your_private_key"
    }
    
    resource "tidbcloud_import" "example_s3_csv" {

@@ -95,8 +95,8 @@ terraform {
 }
 
 provider "tidbcloud" {
-  public_key = "fake_public_key"
-  private_key = "fake_private_key"
+  public_key = "your_public_key"
+  private_key = "your_private_key"
 }
 ```
 
