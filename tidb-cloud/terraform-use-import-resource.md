@@ -169,7 +169,7 @@ You can manage either a local import task or an Amazon S3 import task using the 
 6. Check the imported data with MySQL CLI:
 
    ```
-   mysql> select * from test.import_test;
+   mysql> SELECT * FROM test.import_test;
    +------+-------+------+
    | id   | name  | age  |
    +------+-------+------+
