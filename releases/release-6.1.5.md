@@ -36,19 +36,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-
 
 - PD
 
-    - dup 修复 PD 可能会非预期地向 Region 添加多个 Learner 的问题 [#5786](https://github.com/tikv/pd/issues/5786) @[HunDunDM](https://github.com/HunDunDM)
     - dup Fix the PD OOM issue that occurs when the calls of `ReportMinResolvedTS` are too frequent [#5965](https://github.com/tikv/pd/issues/5965) @[HundunDM](https://github.com/HunDunDM)
 
 + Tools
 
-    + Backup & Restore (BR)
-
-        - dup 修复使用 `br debug` 命令解析 backupmeta 文件导致的 panic 的问题 [#40878](https://github.com/pingcap/tidb/issues/40878) @[MoCuishle28](https://github.com/MoCuishle28)
-
     + TiCDC
 
         - Fix the issue that applying redo log might cause OOM when the latency is excessively high [#8085](https://github.com/pingcap/tiflow/issues/8085)
-        - Fix the logic of invalid retry when the execution of some DML statements get errors [#8087](https://github.com/pingcap/tiflow/issues/8087)
         - Fix the issue that the performance degrades when enabling redo log to write meta [#8074](https://github.com/pingcap/tiflow/issues/8074)
 
     + TiDB Data Migration (DM)
