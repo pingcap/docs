@@ -51,7 +51,7 @@ For a specified latency of a TiDB node, the TiDB performance varies depending on
 
 The performance of an 8 vCPU, 16 GiB TiDB node in different workloads is as follows:
 
-| Workload | QPS (P95 < 105ms) | QPS (P99 < 300ms) | QPS (P99 < 105ms) |
+| Workload | QPS (P95 ≈ 100ms) | QPS (P99 ≈ 300ms) | QPS (P99 ≈ 100ms) |
 |----------|-------------------|-------------------|-------------------|
 | Read     | 18,900            | 9,450             | 6,300             |
 | Mixed    | 15,500            | 7,750             | 5,200             |
@@ -138,7 +138,7 @@ For a specified latency of a TiKV node, the TiKV performance varies depending on
 
 The performance of an 8 vCPU, 32 GiB TiKV node in different workloads is as follows:
 
-| Workload | QPS (P95 < 105ms) | QPS (P99 < 300ms) | QPS (P99 < 105ms) |
+| Workload | QPS (P95 ≈ 100ms) | QPS (P99 ≈ 300ms) | QPS (P99 ≈ 100ms) |
 |----------|-------------------|-------------------|-------------------|
 | Read     | 28,000            | 14,000            | 7,000             |
 | Mixed    | 17,800            | 8,900             | 4,450             |
