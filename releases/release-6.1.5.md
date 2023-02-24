@@ -31,13 +31,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-
 
 + TiDB
 
-    - 修复 data race 可能导致 TiDB 重启的问题 [#27725](https://github.com/pingcap/tidb/issues/27725) @[XuHuaiyu](https://github.com/XuHuaiyu)
-    - 修复使用 Read Committed 隔离级别 update 时可能读不到最新数据的问题 [#41581](https://github.com/pingcap/tidb/issues/41581) @ [cfzjywxk](https://github.com/cfzjywxk)
+    - Fix the issue that data race might cause TiDB to restart [#27725](https://github.com/pingcap/tidb/issues/27725) @[XuHuaiyu](https://github.com/XuHuaiyu)
+    - Fix the issue the latest data might not be read when the Read Committed isolation level is used for updating data [#41581](https://github.com/pingcap/tidb/issues/41581) @[cfzjywxk](https://github.com/cfzjywxk)
 
 - PD
 
     - dup 修复 PD 可能会非预期地向 Region 添加多个 Learner 的问题 [#5786](https://github.com/tikv/pd/issues/5786) @[HunDunDM](https://github.com/HunDunDM)
-    - dup 修复调用 `ReportMinResolvedTS` 过于频繁导致 PD OOM 的问题 [#5965](https://github.com/tikv/pd/issues/5965) @[HundunDM](https://github.com/HunDunDM)
+    - dup Fix the PD OOM issue that occurs when the calls of `ReportMinResolvedTS` are too frequent [#5965](https://github.com/tikv/pd/issues/5965) @[HundunDM](https://github.com/HunDunDM)
 
 + Tools
 
@@ -47,11 +47,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-
 
     + TiCDC
 
-        - 修复在延迟过大时 apply redo log 可能会出现 OOM 的问题 [#8085](https://github.com/pingcap/tiflow/issues/8085)
-        - 修复部分 DML 执行出错时重试无效的逻辑 [#8087](https://github.com/pingcap/tiflow/issues/8087)
-        - 修复开启 redo log 写 meta 时性能下降的问题 [#8074](https://github.com/pingcap/tiflow/issues/8074)
+        - Fix the issue that applying redo log might cause OOM when the latency is excessively high [#8085](https://github.com/pingcap/tiflow/issues/8085)
+        - Fix the logic of invalid retry when the execution of some DML statements get errors [#8087](https://github.com/pingcap/tiflow/issues/8087)
+        - Fix the issue that the performance degrades when enabling redo log to write meta [#8074](https://github.com/pingcap/tiflow/issues/8074)
 
     + TiDB Data Migration (DM)
 
-        - dup 修复 `binlog-schema delete` 命令执行失败的问题 [#7373](https://github.com/pingcap/tiflow/issues/7373) @[liumengya94](https://github.com/liumengya94)
-        - dup 修复当最后一个 binlog 是被 skip 的 DDL 时，checkpoint 不推进的问题 [#8175](https://github.com/pingcap/tiflow/issues/8175) @[D3Hunter](https://github.com/D3Hunter)
+        - dup Fix the issue that the `binlog-schema delete` command fails to execute [#7373](https://github.com/pingcap/tiflow/issues/7373) @[liumengya94](https://github.com/liumengya94)
+        - dup Fix the issue that the checkpoint does not advance when the last binlog is a skipped DDL [#8175](https://github.com/pingcap/tiflow/issues/8175) @[D3Hunter](https://github.com/D3Hunter)
