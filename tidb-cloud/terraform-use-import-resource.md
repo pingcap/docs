@@ -22,6 +22,10 @@ You can manage either a local import task or an Amazon S3 import task using the 
 
 ## Create and run a local import task
 
+> **Note:**
+>
+> Importing local files is supported only for Serverless Tier clusters, not for Dedicated Tier clusters.
+
 1. Create a CSV file for import. For example:
 
    ```
