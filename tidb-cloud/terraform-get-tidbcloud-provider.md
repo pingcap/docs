@@ -90,15 +90,13 @@ terraform {
   required_providers {
     tidbcloud = {
       source = "tidbcloud/tidbcloud"
-      version = "~> 0.1.0"
     }
   }
-  required_version = ">= 1.0.0"
 }
 
 provider "tidbcloud" {
-  public_key = "fake_public_key"
-  private_key = "fake_private_key"
+  public_key = "your_public_key"
+  private_key = "your_private_key"
 }
 ```
 
