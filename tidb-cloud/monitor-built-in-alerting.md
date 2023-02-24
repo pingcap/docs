@@ -62,7 +62,7 @@ The following table provides the TiDB Cloud built-in alert conditions and the co
 | Data migration job met error during data export | Please check the error and refer to [Troubleshoot DM](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshootin) for help.  |
 | Data migration job met error during data import | Please check the error and refer to [Troubleshoot DM](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshootin) for help. |
 | Data migration job met error during incremental data migration | Please check the error and refer to [Troubleshoot DM](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshootin) for help. |
-| Data migration job has been paused for more than 6 hours during incremental migration | Data migration job has been paused for more than 6 hours during incremental migration, binlog in upstream database might be purged(depends on your database binlog purge strategy) and may cause incremental migration fail. Please refer to [Troubleshoot DM](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshootin) for help. |
+| Data migration job has been paused for more than 6 hours during incremental migration | Data migration job has been paused for more than 6 hours during incremental migration, binlog in upstream database might be purged(depends on your database binlog purge strategy) and may cause incremental migration to fail. Please refer to [Troubleshoot DM](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshootin) for help. |
 | Replication lag is larger than 10 minutes and still increasing for more than 20 minutes | Please refer to [Troubleshoot DM](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshootin) for help. |
 
 > **Note:**
