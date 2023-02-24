@@ -51,11 +51,11 @@ For a specified latency of a TiDB node, the TiDB performance varies depending on
 
 The performance of an 8 vCPU, 16 GiB TiDB node in different workloads is as follows:
 
-| Workload | TiDB performance (QPS) |
-|----------|------------------------|
-| Read     | 18,900                 |
-| Mixed    | 15,500                 |
-| Write    | 18,000                 |
+| Workload | QPS (P95 < 105ms) | QPS (P99 < 300ms) | QPS (P99 < 105ms) |
+|----------|-------------------|-------------------|-------------------|
+| Read     | 18,900            | 9,450             | 6,300             |
+| Mixed    | 15,500            | 7,750             | 5,200             |
+| Write    | 18,000            | 9,000             | 6,000             |
 
 If the number of TiDB nodes is less than 8, the performance deviation coefficient is nearly 0%, so the TiDB performance of 16 vCPU, 32 GiB TiDB nodes is roughly twice that of 8 vCPU, 16 GiB TiDB nodes. If the number of TiDB nodes exceeds 8, it is recommended to choose 16 vCPU, 32 GiB TiDB nodes as this will require fewer nodes, which means smaller performance deviation coefficient.
 
@@ -138,11 +138,11 @@ For a specified latency of a TiKV node, the TiKV performance varies depending on
 
 The performance of an 8 vCPU, 32 GiB TiKV node in different workloads is as follows:
 
-| Workload | TiKV performance (QPS) |
-|----------|------------------------|
-| Read     | 28,000                 |
-| Mixed    | 17,800                 |
-| Write    | 14,500                 |
+| Workload | QPS (P95 < 105ms) | QPS (P99 < 300ms) | QPS (P99 < 105ms) |
+|----------|-------------------|-------------------|-------------------|
+| Read     | 28,000            | 14,000            | 7,000             |
+| Mixed    | 17,800            | 8,900             | 4,450             |
+| Write    | 14,500            | 7,250             | 3,625             |
 
 If the number of TiKV nodes is less than 8, the performance deviation coefficient is nearly 0%, so the performance of 16 vCPU, 64 GiB TiKV nodes is roughly twice that of 8 vCPU, 32 GiB TiKV nodes. If the number of TiKV nodes exceeds 8, it is recommended to choose 16 vCPU, 64 GiB TiKV nodes as this will require fewer nodes, which means smaller performance deviation coefficient.
 
