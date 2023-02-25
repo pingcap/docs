@@ -40,22 +40,6 @@ As a customer, you have complete control over your data:
 
 - You can manage access to your data, as well as the TiDB Cloud databases and tools, through users, roles, and credentials that you control.
 
-## How is customer data encrypted in TiDB Cloud?
-
-In TiDB Cloud, customer data is protected through a combination of features and best practices, including:
-
-- TiDB Cloud provides encryption for data both at rest and in transit. This means that the data is encrypted when it is stored on disks and when it is transmitted over the network.
-
-- TiDB Cloud allows customers to set up an IP access list to control who has access to their data, and also allows customers to set up roles and assign privileges to specified users only.
-
-- TiDB Cloud runs in a virtual private cloud (VPC) that isolates customer traffic from other traffic on the internet, and TiDB Cloud supports secure network communication using SSL/TLS.
-
-- TiDB Cloud provides various backup and disaster recovery options to ensure that customer data is protected in case of an outage or disaster. Customers can set up automatic backups, incremental backups, and point-in-time recovery (PITR), and replicate their data to different regions for disaster recovery.
-
-- TiDB Cloud complies with various data privacy and security regulations, such as ISO27701, SOC2 Type II, General Data Protection Regulation (GDPR), and Health Insurance Portability and Accountability Act of 1996 (HIPAA). Customers can set up their own compliance requirements and audit logs to monitor access to their data.
-
-Overall, TiDB Cloud provides a secure and reliable platform for storing and managing customer data. In addition, TiDB Cloud security features and best practices are continuously updated and reviewed to ensure that customer data is protected against the latest threats and vulnerabilities.
-
 ## What are the responsibilities in securing customer data?
 
 When it comes to securing customer data, it is important to understand the roles and responsibilities of both TiDB Cloud and customers.
