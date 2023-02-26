@@ -18,9 +18,11 @@ The features of the `tidbcloud_import` resource include the following:
 - [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md).
 - [Create a Serverless Tier or Dedicated Tier cluster](/tidb-cloud/create-tidb-cluster.md).
 
+## Create and run an import task
+
 You can manage either a local import task or an Amazon S3 import task using the import resource.
 
-## Create and run a local import task
+### Create and run a local import task
 
 > **Note:**
 >
