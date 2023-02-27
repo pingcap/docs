@@ -25,7 +25,7 @@ Customer data does not include TiDB Cloud diagnosis data, metadata:
 - Diagnosis data: TiDB cluster logs (including logs, error logs, and slow query logs), metrics (including usage and runtime metrics), configuration (including TiDB cluster configuration items, node IP addresses, and values), monitoring, and alert-related information.
 - Metadata: TiDB Cloud account registration information (including email, company name, phone number, and IP address), permissions, endpoint services, devices, versions, and tag-related information.
 
-For more information about the operational data, see [TiDB Cloud Privacy Policy](https://www.pingcap.com/privacy-policy/) and [TiDB Cloud Data Processing Agreement](https://www.pingcap.com/legal/data-processing-agreement-for-tidb-cloud-services/).
+For more information about the diagnosis data, see [TiDB Cloud Privacy Policy](https://www.pingcap.com/privacy-policy/) and [TiDB Cloud Data Processing Agreement](https://www.pingcap.com/legal/data-processing-agreement-for-tidb-cloud-services/).
 
 ## Who owns customer data?
 
