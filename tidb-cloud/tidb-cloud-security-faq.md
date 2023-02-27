@@ -30,7 +30,7 @@ For more information about the operational data, see [TiDB Cloud Privacy Policy]
 
 ## Who owns customer data?
 
-As a customer, you have full ownership of your data and can choose which TiDB Cloud cluster can process, store, and host your data. TiDB Cloud will not access or use your data without your permission.
+As a customer, you have full ownership of your data and can choose which TiDB Cloud cluster can process, store, and host your data. TiDB Cloud cannot access or use your data without your permission.
 
 ## Who has control over customer data?
 
