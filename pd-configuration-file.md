@@ -222,7 +222,7 @@ Configuration items related to scheduling
 + Controls the time interval between the `split` and `merge` operations on the same Region. That means a newly split Region will not be merged for a while.
 + Default value: `1h`
 
-### `switch-witness-interval` <span class="version-mark">New in v6.6.0</span>
+### `switch-witness-interval` <span class="version-mark">New in v7.0.0</span>
 
 + Controls the time interval in switching between [Witness](/glossary.md#witness) and non-Witness operations on the same Region. That means a Region newly switched to non-Witness cannot be switched to Witness for a while.
 + Default value: `1h`
@@ -282,14 +282,14 @@ Configuration items related to scheduling
 + The number of the `Region Merge` scheduling tasks performed at the same time. Set this parameter to `0` to disable `Region Merge`.
 + Default value: `8`
 
-### `witness-schedule-limit` <span class="version-mark">New in v6.6.0</span>
+### `witness-schedule-limit` <span class="version-mark">New in v7.0.0</span>
 
 + Controls the concurrency of Witness scheduling tasks.
 + Default value: `4`
 + Minimum value: `1`
 + Maximum value: `9`
 
-### `enable-witness` <span class="version-mark">New in v6.6.0</span>
+### `enable-witness` <span class="version-mark">New in v7.0.0</span>
 
 + Controls whether to enable the Witness replica feature.
 + Witness replicas are applicable to the following scenarios:
