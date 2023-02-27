@@ -22,7 +22,6 @@ Customer data includes data that customers or their consumers store in TiKV or T
 
 Customer data does not include TiDB Cloud operational data, diagnosis data, or metadata:
 
-- Operational data: TiDB Cloud control plane logs, runtime metrics, usage policies, and service ticket-related information.
 - Diagnosis data: TiDB cluster logs (including logs, error logs, and slow query logs), metrics (including usage and runtime metrics), configuration (including TiDB cluster configuration items, node IP addresses, and values), monitoring, and alert-related information.
 - Metadata: TiDB Cloud account registration information (including email, company name, phone number, and IP address), permissions, endpoint services, devices, versions, and tag-related information.
 
