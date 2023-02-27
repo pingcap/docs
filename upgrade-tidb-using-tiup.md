@@ -169,12 +169,12 @@ If your application has a maintenance window for the database to be stopped for 
 tiup cluster upgrade <cluster-name> <version>
 ```
 
-For example, if you want to upgrade the cluster to v6.1.4:
+For example, if you want to upgrade the cluster to v6.1.5:
 
 {{< copyable "shell-regular" >}}
 
 ```shell
-tiup cluster upgrade <cluster-name> v6.1.4
+tiup cluster upgrade <cluster-name> v6.1.5
 ```
 
 > **Note:**
@@ -231,7 +231,7 @@ tiup cluster display <cluster-name>
 ```
 Cluster type:       tidb
 Cluster name:       <cluster-name>
-Cluster version:    v6.1.4
+Cluster version:    v6.1.5
 ```
 
 > **Note:**
@@ -281,5 +281,5 @@ You can upgrade the tool version by using TiUP to install the `ctl` component of
 {{< copyable "shell-regular" >}}
 
 ```shell
-tiup install ctl:v6.1.4
+tiup install ctl:v6.1.5
 ```
