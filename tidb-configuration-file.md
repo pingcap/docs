@@ -17,14 +17,14 @@ The TiDB configuration file supports more options than command-line parameters. 
 - Default value: `true`
 - It is recommended to set it to `false` if you need to create a large number of tables (for example, more than 100 thousand tables).
 
-### `tidb_max_reuse_chunk` <span class="version-mark">New in v6.4.0</span>
+### `tidb-max-reuse-chunk` <span class="version-mark">New in v6.4.0</span>
 
 - Controls the maximum cached chunk objects of chunk allocation. Setting this configuration item to too large a value might increase the risk of OOM.
 - Default value: `64`
 - Minimum value: `0`
 - Maximum value: `2147483647`
 
-### `tidb_max_reuse_column` <span class="version-mark">New in v6.4.0</span>
+### `tidb-max-reuse-column` <span class="version-mark">New in v6.4.0</span>
 
 - Controls the maximum cached column objects of chunk allocation. Setting this configuration item to too large a value might increase the risk of OOM.
 - Default value: `256`
@@ -158,7 +158,8 @@ The TiDB configuration file supports more options than command-line parameters. 
 ### `enable-telemetry` <span class="version-mark">New in v4.0.2</span>
 
 - Enables or disables the telemetry collection in TiDB.
-- Default value: `true`
+- Default value: `false`
+- When this configuration is set to `true` on a TiDB instance, the telemetry collection in this TiDB instance is enabled and the [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402) system variable takes effect.
 - When this configuration is set to `false` on all TiDB instances, the telemetry collection in TiDB is disabled and the [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402) system variable does not take effect. See [Telemetry](/telemetry.md) for details.
 
 ### `enable-tcp4-only` <span class="version-mark">New in v5.0</span>
@@ -808,7 +809,7 @@ Configuration items related to read isolation.
 
 ### `tidb_enable_ddl`
 
-- This configuration controls whether the corresponding TiDB instance can run DDL statements or not.
+- This configuration controls whether the corresponding TiDB instance can become a DDL owner or not.
 - Default value: `true`
 - Possible values: `OFF`, `ON`
 - The value of this configuration will initialize the value of the system variable [`tidb_enable_ddl`](/system-variables.md#tidb_enable_ddl)

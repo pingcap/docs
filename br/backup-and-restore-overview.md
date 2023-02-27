@@ -100,7 +100,7 @@ Corresponding to the backup features, you can perform two types of restore: full
 
 TiDB supports backing up data to Amazon S3, Google Cloud Storage (GCS), Azure Blob Storage, NFS, and other S3-compatible file storage services. For details, see the following documents:
 
-- [Specify backup storage in URL](/br/backup-and-restore-storages.md#url-format)
+- [Specify backup storage in URI](/br/backup-and-restore-storages.md#uri-format)
 - [Configure access privileges to backup storages](/br/backup-and-restore-storages.md#authentication)
 
 ## Compatibility
@@ -121,15 +121,14 @@ Backup and restore might go wrong when some TiDB features are enabled or disable
 
 Before performing backup and restore, BR compares and checks the TiDB cluster version with its own. If there is a major-version mismatch, BR prompts a reminder to exit. To forcibly skip the version check, you can set `--check-requirements=false`. Note that skipping the version check might introduce incompatibility.
 
-| Backup version (vertical) \ Restore version (horizontal) | Restore to TiDB v6.0 | Restore to TiDB v6.1 | Restore to TiDB v6.2 | Restore to TiDB v6.3 | Restore to TiDB v6.4 | Restore to TiDB v6.5 |
-|  ----  |  ----  | ---- | ---- | ---- | ---- | ---- |
-| TiDB v6.0 snapshot backup | Compatible | Compatible | Compatible | Compatible | Compatible | Compatible |
-| TiDB v6.1 snapshot backup | Compatible (A known issue [#36379](https://github.com/pingcap/tidb/issues/36379): if backup data contains an empty schema, BR might report an error.) | Compatible | Compatible | Compatible | Compatible | Compatible |
-| TiDB v6.2 snapshot backup | Compatible (A known issue [#36379](https://github.com/pingcap/tidb/issues/36379): if backup data contains an empty schema, BR might report an error.) | Compatible | Compatible | Compatible | Compatible | Compatible |
-| TiDB v6.3 snapshot backup | Compatible (A known issue [#36379](https://github.com/pingcap/tidb/issues/36379): if backup data contains an empty schema, BR might report an error.) | Compatible | Compatible | Compatible | Compatible | Compatible |
-| TiDB v6.3 log backup | N/A | N/A | Incompatible | Compatible | Compatible | Compatible |
-| TiDB v6.4 log backup | N/A | N/A | Incompatible | Compatible | Compatible | Compatible |
-| TiDB v6.5 log backup | N/A | N/A | Incompatible | Compatible | Compatible | Compatible |
+> **Note:**
+>
+> When performing backup and restore, it is recommended that the BR and TiDB cluster are of the same version.
+
+| Backup version (vertical) \ Restore version (horizontal)   | Restore to TiDB v6.0 | Restore to TiDB v6.1 | Restore to TiDB v6.2 | Restore to TiDB v6.3, v6.4, or v6.5 | Restore to TiDB v6.6 |
+|  ----  |  ----  | ---- | ---- | ---- | ---- |
+| TiDB v6.0, v6.1, v6.2, v6.3, v6.4, or v6.5 snapshot backup | Compatible (known issue [#36379](https://github.com/pingcap/tidb/issues/36379): if backup data contains an empty schema, BR might report an error.) | Compatible | Compatible | Compatible | Compatible (BR must be v6.6 or later) |
+| TiDB v6.3, v6.4, v6.5, or v6.6 log backup| Incompatible | Incompatible | Incompatible | Compatible | Compatible |
 
 ## See also
 
