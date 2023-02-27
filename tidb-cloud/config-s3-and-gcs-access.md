@@ -21,7 +21,7 @@ It is recommended that you use an IAM user (instead of the AWS account root user
 
 Take the following steps to configure an access key:
 
-1. Create an IAM user with the following policies.
+1. Create an IAM user with the following policies:
 
    - `AmazonS3ReadOnlyAccess`
    - [`CreateOwnAccessKeys` and `ManageOwnAccessKeys`](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#access-keys_required-permissions)
