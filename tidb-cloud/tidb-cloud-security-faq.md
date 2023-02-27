@@ -35,7 +35,7 @@ As a customer, you have full ownership of your data and can choose which TiDB Cl
 
 As a customer, you have complete control over your data:
 
-- You can choose how to protect your data using TiDB Cloud, which offers encryption at rest and in transit to safeguard your data. Additionally, if you prefer to bring your encryption key, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+- You can choose how to protect your data using TiDB Cloud, which offers encryption at rest and in transit to safeguard your data. 
 
 - You can manage access to your data, as well as the TiDB Cloud databases and tools, through users, roles, and credentials that you control.
 
@@ -50,8 +50,6 @@ Customers are responsible for the security and compliance of your TiDB cluster, 
 ## Who can access customer data in TiDB Cloud?
 
 TiDB Cloud places the highest priority on customer data security. Regardless of the region selected, TiDB Cloud implements technical, contractual, and organizational measures to ensure data confidentiality, integrity, and availability.
-
-TiDB Cloud has achieved SOC2 Type II, General Data Protection Regulation (GDPR), Payment Card Industry Data Security Standard (PCI DSS), and Health Insurance Portability and Accountability Act of 1996 (HIPAA) certification and verification. Additionally, third-party auditors are invited to review the certified standards annually. For more information, see [PingCAP Trust Center](https://www.pingcap.com/trust-compliance-center).
 
 In TiDB Cloud, data access is secured with the following measures:
 
