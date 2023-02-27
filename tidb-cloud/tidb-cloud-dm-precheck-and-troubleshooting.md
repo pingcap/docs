@@ -113,7 +113,6 @@ The following are alerts about Data Migration:
 
     - Recommended action: contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for help.
 
-
 If you need help to address these alerts, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for consultation.
 
 For more information about how to subscribe to alert emails, see [TiDB Cloud Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md).
