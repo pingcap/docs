@@ -18,7 +18,7 @@ aliases: ['/docs/dev/ticdc/ticdc-overview/','/docs/dev/reference/tools/ticdc/ove
 ### Key capabilities
 
 - Replicate incremental data from one TiDB cluster to another TiDB cluster with second-level RPO and minute-level RTO.
-- Replicate bidirectionally between TiDB clusters, based on which you can create a multi-active TiDB solution using TiCDC.
+- Replicate data bidirectionally between TiDB clusters, based on which you can create a multi-active TiDB solution using TiCDC.
 - Replicate incremental data from a TiDB cluster to a MySQL database (or other MySQL-compatible databases) with low latency.
 - Replicate incremental data from a TiDB cluster to a Kafka cluster. The recommended data format includes [Canal-JSON](/ticdc/ticdc-canal-json.md) and [Avro](/ticdc/ticdc-avro-protocol.md).
 - Replicate tables with the ability to filter databases, tables, DMLs, and DDLs.
