@@ -19,6 +19,10 @@ TiDB Cloud provides [Statement Analysis](#statement-analysis), [Slow Query](#slo
 
 ## Statement Analysis
 
+> **Note:**
+>
+> Statement Analysis is only available for [Dedicated Tier clusters](/tidb-cloud/select-cluster-tier.md#dedicated-tier).
+
 To use the statement analysis, perform the following steps:
 
 1. Navigate to the **SQL Diagnosis** tab of a cluster.
@@ -56,6 +60,10 @@ The results are displayed in the form of a table, and you can sort the results b
 For more information, see [Slow Queries in TiDB Dashboard](https://docs.pingcap.com/tidb/stable/dashboard-slow-query).
 
 ## Key Visualizer
+
+> **Note:**
+>
+> Key Visualizer is only available for [Dedicated Tier clusters](/tidb-cloud/select-cluster-tier.md#dedicated-tier).
 
 To view the key analytics, perform the following steps:
 
