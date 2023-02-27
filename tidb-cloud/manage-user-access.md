@@ -115,6 +115,10 @@ To check which project you belong to, take the following steps:
 
 2. Click **Organization Settings**. The **Projects** tab is displayed by default.
 
+> **Tip:**
+>
+> If you have multiple projects, you can check the project list by clicking the ☰ button in the upper-left corner. You can also switch between projects by clicking the project name.
+
 ### Create a project
 
 > **Note:**

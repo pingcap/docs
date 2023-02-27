@@ -96,7 +96,7 @@ To create a Dedicated Tier cluster, take the following steps:
 
     > **Tip:**
     >
-    > If you have multiple projects, you can switch to the target project in the left navigation pane of the **Clusters** page.
+    > If you have multiple projects, you can switch to the target project by clicking the ☰ button in the upper-left corner and selecting the target project in the project list.
 
 2. Click **Create Cluster**.
 
