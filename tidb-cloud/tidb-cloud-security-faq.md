@@ -36,7 +36,7 @@ As a customer, you have full ownership of your data and can choose which TiDB Cl
 
 As a customer, you have complete control over your data:
 
-- You can choose how to protect your data using TiDB Cloud, which offers encryption at rest and in transit to safeguard your data. Additionally. If you prefer to bring your key, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+- You can choose how to protect your data using TiDB Cloud, which offers encryption at rest and in transit to safeguard your data. Additionally, if you prefer to bring your encryption key, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 - You can manage access to your data, as well as the TiDB Cloud databases and tools, through users, roles, and credentials that you control.
 
