@@ -15,6 +15,13 @@ This document describes how to stream data from TiDB Cloud to MySQL using the **
 >
 > For [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta), the changefeed feature is unavailable.
 
+## Restrictions
+
+- For each TiDB Cloud cluster, you can create up to 10 changefeeds.
+- Because TiDB Cloud uses TiCDC to establish changefeeds, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#restrictions).
+- If the table to be replicated has no primary key or no non-null unique index, the lack of unique constraint during replication might lead to duplicate data insertion downstream in some retry scenarios.
+- You need to create a target table in MySQL with the same name as the source table in TiDB in advance. Otherwise, the data will not be replicated.
+
 ## Prerequisites
 
 ### Network
@@ -116,8 +123,3 @@ After completing the prerequisites, you can sink your data to MySQL.
 ```sql
 SET GLOBAL tidb_gc_life_time = '10m';
 ```
-
-## Restrictions
-
-- For each TiDB Cloud cluster, you can create up to 10 changefeeds.
-- Because TiDB Cloud uses TiCDC to establish changefeeds, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#restrictions).
