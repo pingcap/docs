@@ -20,7 +20,6 @@ This document describes how to stream data from TiDB Cloud to MySQL using the **
 - For each TiDB Cloud cluster, you can create up to 10 changefeeds.
 - Because TiDB Cloud uses TiCDC to establish changefeeds, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#restrictions).
 - If the table to be replicated has no primary key or no non-null unique index, the lack of unique constraint during replication might lead to duplicate data insertion downstream in some retry scenarios.
-- You need to create a target table in MySQL with the same name as the source table in TiDB in advance. Otherwise, the data will not be replicated.
 
 ## Prerequisites
 
@@ -78,6 +77,10 @@ The **Sink to MySQL** connector can only sink incremental data from your TiDB cl
             Pos: 420747102018863124
     Finished dump at: 2020-11-10 10:40:20
     ``` 
+
+### Create a target table in MySQL
+
+You need to create a target table in MySQL with the same name as the source table in TiDB in advance. Otherwise, the data will not be replicated.
 
 ## Create a MySQL sink
 
