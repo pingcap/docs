@@ -23,6 +23,12 @@ This document describes how to stream data from TiDB Cloud to MySQL using the **
 
 ## Prerequisites
 
+Before creating a changefeed, you need to complete the following prerequisites:
+
+- Set up your network connection
+- Export and load the full load data
+- Create a target table in MySQL
+
 ### Network
 
 Make sure that your TiDB Cluster can connect to the MySQL service.
