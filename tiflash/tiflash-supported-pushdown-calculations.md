@@ -62,7 +62,7 @@ TiFlash supports the following push-down expressions:
 
 If a query encounters unsupported push-down calculations, TiDB needs to complete the remaining calculations, which might greatly affect the TiFlash acceleration effect. The currently unsupported operators and expressions might be supported in future versions.
 
-Functions like `MAX()` are supported for push-down when used as aggregate function, but not as window functioon.
+Functions like `MAX()` are supported for push-down when used as aggregate functions, but not as window functions.
 
 ## Examples
 
@@ -181,7 +181,7 @@ EXPLAIN SELECT id, ROW_NUMBER() OVER (PARTITION BY id > 10) FROM t;
 
 ```
 
-In this output you can see that the `Window` operation has a value of `mpp[tiflash]` in the `task` column indicating it was able to push down the `ROW_NUMBER() OVER (PARTITION BY id > 10)` operation to TiFlash.
+In this output, you can see that the `Window` operation has a value of `mpp[tiflash]` in the `task` column indicating it was able to push down the `ROW_NUMBER() OVER (PARTITION BY id > 10)` operation to TiFlash.
 
 ```sql
 CREATE TABLE t(id INT PRIMARY KEY, c1 VARCHAR(100));
@@ -203,4 +203,4 @@ EXPLAIN SELECT id, MAX(id) OVER (PARTITION BY id > 10) FROM t;
 7 rows in set (0.0010 sec)
 ```
 
-In this output you can see that the `Window` operation has a value of `root` in the `task` column indicating it wasn't able to push down the `MAX(id) OVER (PARTITION BY id > 10)` operation to TiFlash. This is because `MAX()` is only supported for push-down as aggregate function and not as window function.
+In this output, you can see that the `Window` operation has a value of `root` in the `task` column indicating it wasn't able to push down the `MAX(id) OVER (PARTITION BY id > 10)` operation to TiFlash. This is because `MAX()` is only supported for push-down as an aggregate function and not as a window function.
