@@ -91,7 +91,7 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
         > **Tip:**
         >
-        > If you have multiple projects, you can switch to the target project in the left navigation pane of the **Clusters** page.
+        > If you have multiple projects, you can view the project list and switch to another project from the ☰ hover menu in the upper-left corner.
 
     2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
 

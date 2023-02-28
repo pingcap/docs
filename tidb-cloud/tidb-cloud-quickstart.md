@@ -37,7 +37,7 @@ TiDB Cloud is powered by AI. You can use Chat2Query (beta), an AI-powered SQL ed
 
 In Chat2Query, you can either simply type `--` followed by your instructions to let AI generate SQL queries automatically or write SQL queries manually, and then run SQL queries against databases without a terminal.
 
-1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click a cluster name to go to its overview page, and then click <MDSvgIcon name="icon-left-sql-editor" /> **Chat2Query** in the left navigation pane.
+1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click a cluster name to go to its overview page, and then click **Chat2Query** in the left navigation pane.
 
 2. To try TiDB Cloud AI capacity, follow the on-screen instructions to allow PingCAP and OpenAI to use your code snippets to research and improve the services, and then click **Save and Get Started**.
 
