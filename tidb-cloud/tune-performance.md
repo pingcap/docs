@@ -15,9 +15,13 @@ TiDB Cloud provides [Statement Analysis](#statement-analysis), [Slow Query](#slo
 
 > **Note:**
 >
-> Currently, these three features are unavailable for [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta).
-  
+> Currently, **Statement Analysis** and **Key Visualizer** are unavailable for [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta).
+
 ## Statement Analysis
+
+> **Note:**
+>
+> Statement Analysis is only available for [Dedicated Tier clusters](/tidb-cloud/select-cluster-tier.md#dedicated-tier).
 
 To use the statement analysis, perform the following steps:
 
@@ -37,7 +41,7 @@ For more information, see [Statement Execution Details in TiDB Dashboard](https:
 
 ## Slow Query
 
-By default, SQL queries that take more than 300 milliseconds are considered as slow queries. 
+By default, SQL queries that take more than 300 milliseconds are considered as slow queries.
 
 To view slow queries in a cluster, perform the following steps:
 
@@ -56,6 +60,10 @@ The results are displayed in the form of a table, and you can sort the results b
 For more information, see [Slow Queries in TiDB Dashboard](https://docs.pingcap.com/tidb/stable/dashboard-slow-query).
 
 ## Key Visualizer
+
+> **Note:**
+>
+> Key Visualizer is only available for [Dedicated Tier clusters](/tidb-cloud/select-cluster-tier.md#dedicated-tier).
 
 To view the key analytics, perform the following steps:
 
