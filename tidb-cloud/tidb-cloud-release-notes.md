@@ -33,13 +33,13 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - Release several TiDB Cloud API endpoints for the Import feature：
 
-    - List Import Tasks
-    - Create Import Task
-    - Preview Data before Starting an Import Task
-    - Get Import Task Role Info
-    - Upload a Local File for an Import Task
-    - Get Import Task
-    - Update Import Task
+    - List all import tasks
+    - Get an import task
+    - Create an import task
+    - Update an import task
+    - Upload a local file for an import task
+    - Preview data before starting an import task
+    - Get the role information for import tasks
 
   For more information, refer to the [API documentation](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Import).
 
