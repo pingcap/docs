@@ -18,8 +18,6 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     To use SQL Diagnosis, click **SQL Diagnosis** on the left navigation bar of your Serverless Tier cluster page.
 
-- Upgrade the default TiDB version of all [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters from [v6.4.0](https://docs.pingcap.com/tidb/v6.4/release-6.4.0) to [v6.6.0](https://docs.pingcap.com/tidb/v6.6/release-6.6.0).
-
 **Console changes**
 
 - Optimize the left navigation.
