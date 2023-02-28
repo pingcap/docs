@@ -181,7 +181,7 @@ After configuring the Amazon S3 access, you can perform the data import task in 
 
         > **Tip:**
         >
-        > If you have multiple projects, you can switch to the target project by clicking the ☰ button in the upper-left corner and selecting the target project in the project list.
+        > If you have multiple projects, you can view the project list and switch to another project from the ☰ hover menu in the upper-left corner.
 
     2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
 

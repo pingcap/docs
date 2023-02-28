@@ -38,7 +38,7 @@ To connect to a Dedicated Tier cluster via standard connection, perform the foll
 
         > **Tip:**
         >
-        > If you have multiple projects, you can switch to the target project by clicking the ☰ button in the upper-left corner and selecting the target project in the project list.
+        > If you have multiple projects, you can view the project list and switch to another project from the ☰ hover menu in the upper-left corner.
 
     2. Click the name of your target cluster to go to its overview page.
 

@@ -15,7 +15,7 @@ For Dedicated Tier clusters, you can configure the root password and allowed IP 
 
     > **Tip:**
     >
-    > If you have multiple projects, you can switch to the target project by clicking the ☰ button in the upper-left corner and selecting the target project in the project list.
+    > If you have multiple projects, you can view the project list and switch to another project from the ☰ hover menu in the upper-left corner.
 
 2. In the row of your target cluster, click **...** and select **Security Settings**.
 3. In the **Security Settings** dialog, configure the root password and allowed IP addresses.

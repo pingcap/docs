@@ -15,7 +15,7 @@ To view the metrics on the Monitoring page, take the following steps:
 
     > **Tip:**
     >
-    > If you have multiple projects, you can switch to the target project by clicking the ☰ button in the upper-left corner and selecting the target project in the project list.
+    > If you have multiple projects, you can view the project list and switch to another project from the ☰ hover menu in the upper-left corner.
 
 2. Click the name of the target cluster. The cluster overview page is displayed.
 3. Click **Monitoring** in the left navigation pane.

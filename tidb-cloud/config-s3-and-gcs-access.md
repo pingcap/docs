@@ -40,7 +40,7 @@ Configure the bucket access for TiDB Cloud and get the Role ARN as follows:
 
         > **Tip:**
         >
-        > If you have multiple projects, you can switch to the target project by clicking the ☰ button in the upper-left corner and selecting the target project in the project list.
+        > If you have multiple projects, you can view the project list and switch to another project from the ☰ hover menu in the upper-left corner.
 
     2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
 
@@ -135,7 +135,7 @@ To allow TiDB Cloud to access the source data in your GCS bucket, you need to co
 
         > **Tip:**
         >
-        > If you have multiple projects, you can switch to the target project by clicking the ☰ button in the upper-left corner and selecting the target project in the project list.
+        > If you have multiple projects, you can view the project list and switch to another project from the ☰ hover menu in the upper-left corner.
 
     2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
 
