@@ -16,7 +16,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     With SQL Diagnosis, you can gain deep insights into SQL-related runtime status, which makes the SQL performance tuning more efficient. Currently, the SQL Diagnosis feature for Serverless Tier only provides slow query data.
 
-    To use this feature, click **SQL Diagnosis** on the left navigation bar of your cluster page.
+    To use SQL Diagnosis, click **SQL Diagnosis** on the left navigation bar of your Serverless Tier cluster page.
 
 - Upgrade the default TiDB version of all [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters from [v6.4.0](https://docs.pingcap.com/tidb/v6.4/release-6.4.0) to [v6.6.0](https://docs.pingcap.com/tidb/v6.6/release-6.6.0).
 
@@ -26,12 +26,12 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     You can navigate pages more efficiently, for example:
 
-    - You can hover the mouse on the upper-left corner to quickly switch between clusters or projects.
+    - You can hover the mouse in the upper-left corner to quickly switch between clusters or projects.
     - You can switch between the **Clusters** page and the **Admin** page.
 
 **API changes**
 
-- Release several TiDB Cloud API endpoints for the Import feature：
+- Release several TiDB Cloud API endpoints for data import：
 
     - List all import tasks
     - Get an import task
