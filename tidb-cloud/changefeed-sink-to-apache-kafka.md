@@ -18,7 +18,7 @@ This document describes how to create a changefeed to stream data from TiDB Clou
 - For each TiDB Cloud cluster, you can create up to 10 changefeeds.
 - Currently, TiDB Cloud does not support uploading self-signed TLS certificates to connect to Kafka brokers.
 - Because TiDB Cloud uses TiCDC to establish changefeeds, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios).
-- If the table to be replicated has no primary key or no non-null unique index, the lack of unique constraint during replication might lead to duplicate data insertion downstream in some retry scenarios.
+- If the table to be replicated does not have a primary key or a non-null unique index, the absence of a unique constraint during replication could result in duplicated data being inserted downstream in some retry scenarios.
 
 ## Prerequisites
 
