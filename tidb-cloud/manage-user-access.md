@@ -117,7 +117,7 @@ To check which project you belong to, take the following steps:
 
 > **Tip:**
 >
-> If you have multiple projects, you can check the project list by clicking the ☰ button in the upper-left corner. You can also switch between projects by clicking the project name.
+> If you have multiple projects, you can view the project list and switch to another project from the ☰ hover menu in the upper-left corner.
 
 ### Create a project
 
