@@ -8,6 +8,39 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2023.
 
+## February 28, 2023
+
+**General changes**
+
+- Add the [SQL Diagnosis](/tidb-cloud/tune-performance.md) feature for [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters.
+
+    With SQL Diagnosis, you can gain deep insights into SQL-related runtime status, which makes the SQL performance tuning more efficient. Currently, the SQL Diagnosis feature for Serverless Tier only provides slow query data.
+
+    To use SQL Diagnosis, click **SQL Diagnosis** on the left navigation bar of your Serverless Tier cluster page.
+
+**Console changes**
+
+- Optimize the left navigation.
+
+    You can navigate pages more efficiently, for example:
+
+    - You can hover the mouse in the upper-left corner to quickly switch between clusters or projects.
+    - You can switch between the **Clusters** page and the **Admin** page.
+
+**API changes**
+
+- Release several TiDB Cloud API endpoints for data import：
+
+    - List all import tasks
+    - Get an import task
+    - Create an import task
+    - Update an import task
+    - Upload a local file for an import task
+    - Preview data before starting an import task
+    - Get the role information for import tasks
+
+  For more information, refer to the [API documentation](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Import).
+
 ## February 22, 2023
 
 **General changes**
