@@ -24,8 +24,7 @@ Take the following steps to configure an access key:
 1. Create an IAM user with the following policies:
 
    - `AmazonS3ReadOnlyAccess`
-   - [`CreateOwnAccessKeys`](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#access-keys_required-permissions)
-   - [`ManageOwnAccessKeys`](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#access-keys_required-permissions) (optional)
+   - [`CreateOwnAccessKeys` (required) and `ManageOwnAccessKeys` (optional)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#access-keys_required-permissions)
 
    It is recommended that these policies only work for your bucket that stores the source data.
 
