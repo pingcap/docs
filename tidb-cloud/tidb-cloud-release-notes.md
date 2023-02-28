@@ -12,9 +12,9 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- Add the [SQL Diagnosis](/tidb-cloud/tune-performance.md) feature for Serverless Tier clusters.
+- Add the [SQL Diagnosis](/tidb-cloud/tune-performance.md) feature for [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters.
 
-    With SQL Diagnosis, you can gain deep insights into SQL-related runtime status, which makes the SQL performance tuning more efficiently. Currently, the SQL Diagnosis feature for Serverless Tier only provides slow query data.
+    With SQL Diagnosis, you can gain deep insights into SQL-related runtime status, which makes the SQL performance tuning more efficient. Currently, the SQL Diagnosis feature for Serverless Tier only provides slow query data.
 
     To use this feature, click **SQL Diagnosis** on the left navigation bar of your cluster page.
 
