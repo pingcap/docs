@@ -18,7 +18,7 @@ This document describes how to stream data from TiDB Cloud to MySQL using the **
 ## Restrictions
 
 - For each TiDB Cloud cluster, you can create up to 10 changefeeds.
-- Because TiDB Cloud uses TiCDC to establish changefeeds, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#restrictions).
+- Because TiDB Cloud uses TiCDC to establish changefeeds, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios).
 - If the table to be replicated has no primary key or no non-null unique index, the lack of unique constraint during replication might lead to duplicate data insertion downstream in some retry scenarios.
 
 ## Prerequisites
