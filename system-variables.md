@@ -4302,6 +4302,15 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Default value: `23:59 +0000`
 - This variable is used to control the end time of the scheduling window of TTL jobs in the background. When you modify the value of this variable, be cautious that a small window might cause the cleanup of expired data to fail.
 
+### tidb_ttl_running_tasks <span class="version-mark">New in v7.0.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: Integer
+- Default value: `-1`
+- Range: `[1, 256]`
+- Specifies the maximum number of running TTL tasks. `-1` means the limitation is set according to the count of TiKV nodes.
+
 ### tidb_txn_assertion_level <span class="version-mark">New in v6.0.0</span>
 
 - Scope: SESSION | GLOBAL
