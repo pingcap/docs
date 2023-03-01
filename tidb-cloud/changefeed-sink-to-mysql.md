@@ -26,8 +26,8 @@ This document describes how to stream data from TiDB Cloud to MySQL using the **
 Before creating a changefeed, you need to complete the following prerequisites:
 
 - Set up your network connection
-- If you do not load the existing data, you need to create a target table in MySQL
-- Export and load the existing data
+- Export and load the existing data (optional)
+- If you do not load the existing data, you need to create corresponding target tables in MySQL manually to store the incremental data from TiDB. Otherwise, the data will not be replicated.
 
 ### Network
 
@@ -53,13 +53,9 @@ If your MySQL service is in a GCP VPC that has no public internet access, take t
 
     You must add [the CIDR of the region where your TiDB Cloud cluster is located](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr) to the ingress firewall rules. Doing so allows the traffic to flow from your TiDB Cluster to the MySQL endpoint. 
 
-### Create a target table in MySQL
+### Load existing data (optional)
 
-If you decide no to load the existing data, you need to create a target table in MySQL with the same name as that of the source table in TiDB in advance. Otherwise, the data will not be replicated.
-
-### Load existing data
-
-The **Sink to MySQL** connector can only sink incremental data from your TiDB cluster to MySQL after a certain timestamp. If you already have data in your TiDB cluster, you can export and load the existing data of your TiDB cluster into MySQL before enabling **Sink to MySQL**. If you decide no to load the existing data, you need to [create a target table](#create-a-target-table-in-mysql) with the same name as that of the source table in TiDB.
+The **Sink to MySQL** connector can only sink incremental data from your TiDB cluster to MySQL after a certain timestamp. If you already have data in your TiDB cluster, you can export and load the existing data of your TiDB cluster into MySQL before enabling **Sink to MySQL**.
 
 To load the existing data:
 
