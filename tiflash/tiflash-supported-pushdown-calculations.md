@@ -88,7 +88,7 @@ EXPLAIN SELECT * FROM t LIMIT 3;
 5 rows in set (0.18 sec)
 ```
 
-In the preceding example, the operator `Limit` is pushed down to TiFlash for filtering data, which helps reduce the amount of data to be transferred over the network and reduce the network overhead. This is indicated by the `mpp[tiflash]` value of the `task` column on the row of the `Limit` operator.
+In the preceding example, the operator `Limit` is pushed down to TiFlash for filtering data, which helps reduce the amount of data to be transferred over the network and reduce the network overhead. This is indicated by the `mpp[tiflash]` value of the `task` column on the row of the `Limit_15` operator.
 
 ### Example 2: Push expressions down to TiFlash
 
