@@ -123,7 +123,7 @@ Based on historical data, the average TiKV compression ratio is around 40%.
 
 Suppose that the size of your MySQL dump files is 20 TB and the TiKV compression ratio is 40%. Then, you can calculate a recommended number of TiKV nodes according to your data volume as follows:
 
- `node num = ceil(20 TB * 40% * 3 ÷ 0.8 ÷ 4096 GiB ÷ 3) * 3 = 9`
+`node num = ceil(20 TB * 40% * 3 ÷ 0.8 ÷ 4096 GiB ÷ 3) * 3 = 9`
 
 #### Estimate TiKV node quantity according to expected performance
 
