@@ -27,7 +27,7 @@ Before creating a changefeed, you need to complete the following prerequisites:
 
 - Set up your network connection
 - Export and load the existing data (optional)
-- If you do not load the existing data, you need to create corresponding target tables in MySQL manually to store the incremental data from TiDB. Otherwise, the data will not be replicated.
+- Create corresponding target tables in MySQL
 
 ### Network
 
@@ -85,6 +85,10 @@ To load the existing data:
             Pos: 420747102018863124
     Finished dump at: 2020-11-10 10:40:20
     ``` 
+
+### Create target tables in MySQL
+
+If you do not load the existing data, you need to create corresponding target tables in MySQL manually to store the incremental data from TiDB. Otherwise, the data will not be replicated.
 
 ## Create a MySQL sink
 
