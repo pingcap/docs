@@ -22,6 +22,11 @@ This document describes how to create a changefeed to stream data from TiDB Clou
 
 ## Prerequisites
 
+Before creating a changefeed to stream data to Apache Kafka, you need to complete the following prerequisites:
+
+- Set up your network connection
+- Add permissions for Kafka ACL authorization
+
 ### Network
 
 Make sure that your TiDB cluster can connect to the Apache Kafka service.

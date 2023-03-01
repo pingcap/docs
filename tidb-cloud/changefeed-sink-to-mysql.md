@@ -27,7 +27,7 @@ Before creating a changefeed, you need to complete the following prerequisites:
 
 - Set up your network connection
 - Export and load the full data
-- Create a target table in MySQL
+- If you do not load the full data, you need to create a target table in MySQL
 
 ### Network
 
@@ -55,7 +55,9 @@ If your MySQL service is in a GCP VPC that has no public internet access, take t
 
 ### Full load data
 
-The **Sink to MySQL** connector can only sink incremental data from your TiDB cluster to MySQL after a certain timestamp. If you already have data in your TiDB cluster, you must export and load the full data of your TiDB cluster into MySQL before enabling **Sink to MySQL**:
+The **Sink to MySQL** connector can only sink incremental data from your TiDB cluster to MySQL after a certain timestamp. If you already have data in your TiDB cluster, you can export and load the full data of your TiDB cluster into MySQL before enabling **Sink to MySQL**. If you decide no to load the full data, you need to [create a target table](#create-a-target-table-in-mysql) with the same name as that of the source table in TiDB.
+
+To load the full data:
 
 1. Extend the [tidb_gc_life_time](https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50) to be longer than the total time of the following two operations, so that historical data during the time is not garbage collected by TiDB.
 
@@ -86,7 +88,7 @@ The **Sink to MySQL** connector can only sink incremental data from your TiDB cl
 
 ### Create a target table in MySQL
 
-You need to create a target table in MySQL with the same name as that of the source table in TiDB in advance. Otherwise, the data will not be replicated.
+If you decide no to load the full data, you need to create a target table in MySQL with the same name as that of the source table in TiDB in advance. Otherwise, the data will not be replicated.
 
 ## Create a MySQL sink
 
