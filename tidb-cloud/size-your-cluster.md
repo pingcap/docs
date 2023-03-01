@@ -117,7 +117,7 @@ You can calculate a recommended number of TiKV nodes according to your data volu
 
 `node num = ceil(size of your data * TiKV compression ratio * the number of replicas ÷ TiKV storage usage ratio ÷ one TiKV capacity ÷ 3) * 3`
 
-Generally, the usage ratio of TiKV storage is not recommended to exceed 80%, the number of replicas in TiDB Cloud is 3 by default, and the maximum storage capacity of an 8 vCPU, 64 GiB TiKV node is 4096 GiB.
+Generally, it is recommended to keep the usage ratio of TiKV storage below 80%. The number of replicas in TiDB Cloud is 3 by default. The maximum storage capacity of an 8 vCPU, 64 GiB TiKV node is 4096 GiB.
 
 Based on historical data, the average TiKV compression ratio is around 40%.
 
