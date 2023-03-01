@@ -40,7 +40,7 @@ The supported node sizes include the following:
 
 For high availability, it is recommended that you configure at least two TiDB nodes for each TiDB Cloud cluster.
 
-In general, the TiDB performance increases linearly with the number of TiDB nodes. However, when the number of TiDB nodes exceeds 8, the performance increment becomes slightly less than linearly proportional. For each additional 8 nodes, the performance deviation coefficient is about 5%.
+In general, TiDB performance increases linearly with the number of TiDB nodes. However, when the number of TiDB nodes exceeds 8, the performance increment becomes slightly less than linearly proportional. For each additional 8 nodes, the performance deviation coefficient is about 5%.
 
 For example:
 
@@ -127,7 +127,7 @@ Suppose that the size of your MySQL dump files is 20 TB and the TiKV compression
 
 #### Estimate TiKV node quantity according to expected performance
 
-Similarly as TiDB performance, the TiKV performance increases linearly with the number of TiKV nodes. However, when the number of TiKV nodes exceeds 8, the performance increment becomes slightly less than linearly proportional. For each additional 8 nodes, the performance deviation coefficient is about 5%.
+Similarly as TiDB performance, TiKV performance increases linearly with the number of TiKV nodes. However, when the number of TiKV nodes exceeds 8, the performance increment becomes slightly less than linearly proportional. For each additional 8 nodes, the performance deviation coefficient is about 5%.
 
 For example:
 
@@ -160,7 +160,7 @@ As 7 is less than 8, the performance deviation coefficient of 7 nodes is 0. The 
 
 Therefore, 7 TiKV nodes (8 vCPU, 32 GiB) are recommended for you according to your expected performance. 
 
-Next, you can compare the calculated TiKV node number according to data volume and that according to expected performance, and take the larger one as a recommended number of your TiKV nodes.
+Next, you can compare the TiKV node number calculated according to data volume with the number calculated according to your expected performance, and take the larger one as a recommended number of your TiKV nodes.
 
 ### TiKV node storage
 
