@@ -203,4 +203,4 @@ EXPLAIN SELECT id, MAX(id) OVER (PARTITION BY id > 10) FROM t;
 7 rows in set (0.0010 sec)
 ```
 
-In this output, you can see that the `Window` operation has a value of `root` in the `task` column indicating it wasn't able to push down the `MAX(id) OVER (PARTITION BY id > 10)` operation to TiFlash. This is because `MAX()` is only supported for push-down as an aggregate function and not as a window function.
+In this output, you can see that the `Window` operation has a value of `root` in the `task` column indicating it was not able to push down the `MAX(id) OVER (PARTITION BY id > 10)` operation to TiFlash. This is because `MAX()` is only supported for push-down as an aggregate function and not as a window function.
