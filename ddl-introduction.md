@@ -79,62 +79,54 @@ For users, the newly created index is unavailable before the `public` state.
 <SimpleTab>
 <div label="Online DDL asychronous change before TiDB v6.2">
 
-在 v6.2.0 之前，TiDB SQL 层中处理异步 Schema 变更的基本流程如下：
+Before v6.2.0, the process of handling asynchronous schema changes in the TiDB SQL layer is as follows:
 
-1. MySQL Client 发送给 TiDB server 一个 DDL 操作请求。
-1. MySQL Client sends a DDL request to TiDB server.
+1. MySQL Client sends a DDL request to the TiDB server.
 
-2. 某个 TiDB server 收到请求（即 TiDB server 的 MySQL Protocol 层对请求进行解析优化），然后发送到 TiDB SQL 层进行执行。
-2. A TiDB server receives the request (that is, the MySQL Protocol layer of the TiDB server parses and optimizes the request), and then sends it to the TiDB SQL layer for execution.
+2. After receiving the request, a TiDB server parses and optimizes the request at the MySQL Protocol layer, and then sends it to the TiDB SQL layer for execution.
 
-    TiDB SQL 层接到 DDL 请求后，会启动 `start job` 模块根据请求将请求封装成特定的 DDL Job（即 DDL 任务），然后将此 Job 按语句类型分类，分别存储到 KV 层的对应 DDL Job 队列，并通知自身对应的 worker 有 Job 需要处理。
+    Once the SQL layer of TiDB receives the DDL request, it starts the `start job` module to encapsulate the request into a specific DDL Job (that is, a DDL task), and then stores this Job in the corresponding DDL Job queue in the KV layer based on the statement type. The corresponding worker is notified of the Job that requires processing.
 
-    After the SQL layer of TiDB receives the DDL request, it starts the `start job` module to encapsulate the request into a specific DDL Job (that is, a DDL task), and then stores this Job in the corresponding DDL Job queue in the KV layer according to the statement type, and notifies the corresponding worker that there is a Job that needs to be processed.
+3. When receiving the notification to process the Job, the worker determines whether it is the role of the DDL Owner. If it is the Owner role, it directly processes the Job. Otherwise, it exits without performing any processing.
 
-3. 接收到处理 Job 通知的 worker，会判断自身是否处于 DDL Owner 的角色。如果是 Owner 角色则直接处理此 Job。如果没有处于 Owner 角色则退出不做任何处理。
-3. When receiving the notification to process the Job, the worker determines whether it is in the role of the DDL Owner. If it is the Owner role, it directly processes the Job. If it is not the Owner role, it exits without performing any processing.
+    If a TiDB server is not the Owner role, then another node must be the Owner. The worker of the node in the Owner role periodically checks whether there is an available Job that can be executed. If such a Job is identified, the worker will process the Job.
 
-    假设某台 TiDB server 不是 Owner 角色，那么其他某个节点一定有一个是 Owner。处于 Owner 角色的节点的 worker 通过定期检测机制来检查是否有 Job 可以被执行。如果发现有 Job ，那么 worker 就会处理该 Job。
+4. After the worker processes the Job, it removes the Job from the Job queue in the KV layer and places it in the `job history queue`. The `start job` module that encapsulated the Job will periodically check the ID of the Job in the `job history queue` to see whether it has been processed. If so, the entire DDL operation corresponding to the Job ends.
 
-    If a TiDB server is not the Owner role, then another node must be the Owner. The worker of the node in the Owner role periodically checks whether there is a Job that can be executed. If such a Job is found, the worker will process the Job.
+5. TiDB server returns the DDL processing result to the MySQL Client.
 
-4. Worker 处理完 Job 后，会将此 Job 从 KV 层对应的 Job queue 中移除，并放入 `job history queue`。之前封装 Job 的 `start job` 模块会定期在 `job history queue` 中查看是否有已经处理完成的 Job 的 ID。如果有，则这个 Job 对应的整个 DDL 操作结束执行。
-4. 
+Before TiDB v6.2.0, the DDL execution framework had the following limitations:
 
-5. TiDB server 将 DDL 处理结果返回至 MySQL Client。
+- The TiKV cluster only has two queues: `general job queue` and `add index job queue`, which handle logical DDL and physical DDL, respectively.
+- The DDL Owner always processes DDL Jobs in a first-in-first-out way.
+- The DDL Owner can only execute one DDL task of the same type (logical or physical) at a time, which is relatively strict.
 
-在 TiDB v6.2.0 前，该 DDL 执行框架存在以下限制：
-
-- TiKV 集群中只有 `general job queue` 和 `add index job queue` 两个队列，分别处理逻辑 DDL 和物理 DDL。
-- DDL Owner 总是以先入先出的方式处理 DDL Job。
-- DDL Owner 每次只能执行一个同种类型（逻辑或物理）的 DDL 任务，这个约束较为严格。
-
-这些限制可能会导致一些“非预期”的 DDL 阻塞行为。具体可以参考 [SQL FAQ - DDL 执行](/faq/sql-faq.md#ddl-执行)。
+These limitations might lead to some "unintended" DDL blocking behavior. For more details, see [SQL FAQ - DDL Execution](/faq/sql-faq.md#ddl-execution).
 
 </div>
-<div label="并发 DDL 框架（TiDB v6.2 及以上）">
+<div label="Parallel DDL framework starting from v6.2">
 
-在 TiDB v6.2 之前，由于 Owner 每次只能执行一个同种类型（逻辑或物理）的 DDL 任务，这个约束较为严格，同时影响用户体验。
+Before TiDB v6.2, because the Owner can only execute one DDL task of the same type (logical or physical) at a time, which is relatively strict, and affects the user experience.
 
-当 DDL 任务之间不存在相关依赖时，并行执行并不会影响数据正确性和一致性。例如：用户 A 在 `T1` 表上增加一个索引，同时用户 B 从 `T2` 表删除一列。这两条 DDL 语句可以并行执行。
+If there is no dependency between DDL tasks, parallel execution does not affect data correctness and consistency. For example, user A adds an index to the `T1` table, while user B deletes a column from the `T2` table. These two DDL statements can be executed in parallel.
 
-为了提升 DDL 执行的用户体验，从 v6.2.0 起，TiDB 对原有的 DDL Owner 角色进行了升级，使得 Owner 能对 DDL 任务做相关性判断，判断逻辑如下：
+To improve the user experience of DDL execution, starting from v6.2.0, TiDB enables the Owner to determine the relevance of DDL tasks. The logic is as follows:
 
-+ 涉及同一张表的 DDL 相互阻塞。
-+ `DROP DATABASE` 和数据库内所有对象的 DDL 互相阻塞。
-+ 涉及不同表的加索引和列类型变更可以并发执行。
-+ 逻辑 DDL 需要等待之前正在执行的逻辑 DDL 执行完才能执行。
-+ 其他情况下 DDL 可以根据 Concurrent DDL 并行度可用情况确定是否可以执行。
++ DDL statements to be performed on the same table are mutually blocked.
++ `DROP DATABASE` and DDL statements that affect all objects in the database are mutually blocked.
++ Adding indexes and column type changes on different tables can be executed concurrently.
++ A logical DDL statement must wait for the previous logical DDL statement to be executed before it can be executed.
++ In other cases, DDL can be executed based on the level of availability for concurrent DDL execution.
 
-具体来说，TiDB 在 v6.2.0 中对 DDL 执行框架进行了如下升级：
+In specific, TiDB has upgraded the DDL execution framework in v6.2.0 in the following aspects:
 
-+ DDL Owner 能够根据以上判断逻辑并行执行 DDL 任务。
-+ 改善了 DDL Job 队列先入先出的问题。DDL Owner 不再选择当前队列最前面的 DDL Job，而是选择当前可以执行的 DDL Job。
-+ 扩充了处理物理 DDL 的 worker 数量，使得能够并行地添加多个物理 DDL。
++ The DDL Owner can execute DDL tasks in parallel based on the preceding logic.
++ The first-in-first-out issue in the DDL Job queue has been addressed. The DDL Owner no longer selects the first Job in the queue, but instead selects the Job that can be executed at the current time.
++ The number of workers that handle physical DDL has been increased, enabling multiple physical DDLs to be executed in parallel.
 
-    因为 TiDB 中所有支持的 DDL 任务都是以在线变更的方式来实现的，TiDB 通过 Owner 即可对新的 DDL Job 进行相关性判断，并根据相关性结果进行 DDL 任务的调度，从而使分布式数据库实现了和传统数据库中 DDL 并发相同的效果。
+    Because all DDL tasks in TiDB are implemented using an online change approach, TiDB can determine the relevance of new DDL Jobs through the Owner, and schedule DDL tasks based on this information. This approach enables the distributed database to achieve the same level of DDL concurrency as traditional databases.
 
-并发 DDL 框架的实现进一步加强了 TiDB 中 DDL 语句的执行能力，并更符合商用数据库的使用习惯。
+The concurrent DDL framework enhances the execution capability of DDL statements in TiDB, making it more compatible with the usage patterns of commercial databases.
 
 </div>
 </SimpleTab>
