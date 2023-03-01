@@ -27,7 +27,7 @@ Before creating a changefeed, you need to complete the following prerequisites:
 
 - Set up your network connection
 - Export and load the existing data (optional)
-- Create corresponding target tables in MySQL
+- Create corresponding target tables in MySQL if you do not load the existing data and only replicate incremental data
 
 ### Network
 
