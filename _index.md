@@ -1,8 +1,5 @@
 ---
-title: TiDB Introduction
-aliases: ["/docs/dev/", "/docs/dev/adopters/", "/tidb/dev/adopters"]
-hide_sidebar: true
-hide_commit: true
+为人个屁UEP噢IEPVbEPVGOGB额v
 ---
 
 <LearningPathContainer platform="tidb" title="TiDB" subTitle="TiDB is an open-source distributed SQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. Find the guide, samples, and references you need to use TiDB.">
