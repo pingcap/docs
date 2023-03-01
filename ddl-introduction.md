@@ -131,53 +131,53 @@ The concurrent DDL framework enhances the execution capability of DDL statements
 </div>
 </SimpleTab>
 
-## 最佳实践
+## Best practices
 
-### 通过系统变量来平衡物理 DDL 的执行速度与对业务负载的影响
+### Balance the physical DDL execution speed and the impact on application load through system variables
 
-执行物理 DDL（包括添加索引或列类型变更）时，适当调整以下系统变量可以平衡 DDL 执行速度与对业务负载的影响：
+When executing physical DDLs (including adding indexes or column type changes), you can adjust the values of the following system variables to balance the speed of DDL execution and the impact on application load:
 
-- [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt)：这个变量用来设置 DDL 操作 reorg worker 的数量，控制回填的并发度。
+- [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt): This variable sets the number of reorg workers for a DDL operation, which controls the concurrency of backfilling.
 
-- [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size)：这个变量用来设置 DDL 操作 `re-organize` 阶段的 batch size，以控制回填的数据量。
+- [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size): This variable sets the batch size for a DDL operation in the `re-organize` phase, which controls the amount of data to be backfilled.
 
-    推荐值：
+    Recommended values:
 
-    - 在无其他负载情况下，如需让 `ADD INDEX` 尽快完成，可以将 `tidb_ddl_reorg_worker_cnt` 和 `tidb_ddl_reorg_batch_size` 的值适当调大，例如将两个变量值分别调为 `20` 和 `2048`。
-    - 在有其他负载情况下，如需让 `ADD INDEX` 尽量不影响其他业务，可以将 `tidb_ddl_reorg_worker_cnt` 和 `tidb_ddl_reorg_batch_size` 适当调小，例如将两个变量值分别调为 `4` 和 `256`。
+    - If there is no other load, you can increase the values of `tidb_ddl_reorg_worker_cnt` and `tidb_ddl_reorg_batch_size` to speed up the `ADD INDEX` operation. For example, you can set the values of the two variables to `20` and `2048`, respectively.
+    - If there is other load, you can decrease the values of `tidb_ddl_reorg_worker_cnt` and `tidb_ddl_reorg_batch_size` to minimize the impact on other application. For example, you can set the values of the these variables to `4` and `256`, respectively.
 
-> **建议：**
+> **Tip:**
 >
-> - 以上两个变量均可以在 DDL 任务执行过程中动态调整，并且在下一个 batch 生效。
-> - 根据 DDL 操作的类型，并结合业务负载压力，选择合适的时间点执行，例如建议在业务负载比较低的情况运行 `ADD INDEX` 操作。
-> - 由于添加索引的时间跨度较长，发送相关的指令后，TiDB 会在后台执行任务，TiDB server 挂掉不会影响继续执行。
+> - The preceding two variables can be dynamically adjusted during the execution of a DDL task, and take effect in the next transaction batch.
+> - Choose the appropriate time to execute the DDL operation based on the type of the operation and the application load pressure. For example, it is recommended to run the `ADD INDEX` operation when the application load is low.
+> - Because the duration of adding an index is relatively long, TiDB will execute the task in the background after the command is sent. If the TiDB server is down, the execution will not be affected.
 
-### 并发发送 DDL 请求实现快速建大量表
+### Quickly create many tables by concurrently sending DDL requests
 
-一个建表的操作耗时大约 50 毫秒。受框架的限制，建表耗时可能更长。
+A table creation operation takes about 50 milliseconds. The actual time taken to create a table might be longer because of the framework limitations.
 
-为了更快地建表，推荐通过并发发送多个 DDL 请求以达到最快建表速度。如果串行地发送 DDL 请求，并且没有发给 Owner 节点，则建表速度会很慢。
+To create tables faster, it is recommended to send multiple DDL requests concurrently to achieve the fastest table creation speed. If you send DDL requests serially and do not send them to the Owner node, the table creation speed will be very slow.
 
-### 在一条 `ALTER` 语句中进行多次变更
+### Make multiple changes in a single `ALTER` statement
 
-自 v6.2.0 起，TiDB 支持在一条 `ALTER` 语句中修改一张表的多个模式对象（如列、索引），同时保证整个语句的原子性。因此推荐在一条 `ALTER` 语句中进行多次变更。
+Starting from v6.2.0, TiDB supports modifying multiple schema objects (such as columns and indexes) of a table in a single `ALTER` statement while ensuring the atomicity of the entire statement. Therefore, it is recommended to make multiple changes in a single `ALTER` statement.
 
-### 检查读写性能
+### Check the read and write performance
 
-在添加索引时，回填数据阶段会对集群造成一定的读写压力。在 `ADD INDEX` 的命令发送成功后，并且在 `write reorg` 阶段，建议检查 Grafana 面板上 TiDB 和 TiKV 读写相关的性能指标，以及业务响应时间，来确定 `ADD INDEX` 操作对集群是否造成影响。
+When TiDB is adding an index, the phase of backfilling data will cause read and write pressure on the cluster. After the `ADD INDEX` command is sent and the `write reorg` phase starts, it is recommended to check the read and write performance metrics of TiDB and TiKV on the Grafana dashboard and the application response time, to determine whether the `ADD INDEX` operation affects the cluster.
 
-## DDL 相关的命令介绍
+## DDL-related commands
 
-- `ADMIN SHOW DDL`：用于查看 TiDB DDL 的状态，包括当前 schema 版本号、DDL Owner 的 DDL ID 和地址、正在执行的 DDL 任务和 SQL、当前 TiDB 实例的 DDL ID。详情参阅 [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md#admin-show-ddl)。
+- `ADMIN SHOW DDL`: Used to view the status of TiDB DDL operations, including the current schema version number, the DDL ID and address of the DDL Owner, the DDL task and SQL being executed, and the DDL ID of the current TiDB instance. For details, see [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md#admin-show-ddl).
 
-- `ADMIN SHOW DDL JOBS`：查看集群环境中的 DDL 任务运行中详细的状态。详情参阅 [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md#admin-show-ddl-jobs)。
+- `ADMIN SHOW DDL JOBS`: Used to view the detailed status of DDL tasks running in the cluster environment. For details, see [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md#admin-show-ddl-jobs).
 
-- `ADMIN SHOW DDL JOB QUERIES job_id [, job_id]`：用于查看 job_id 对应的 DDL 任务的原始 SQL 语句。详情参阅 [`ADMIN SHOW DDL JOB QUERIES`](/sql-statements/sql-statement-admin-show-ddl.md#admin-show-ddl-job-queries)。
+- `ADMIN SHOW DDL JOB QUERIES job_id [, job_id]`: Used to view the original SQL statement of the DDL task corresponding to the `job_id`. For details, see [`ADMIN SHOW DDL JOB QUERIES`](/sql-statements/sql-statement-admin-show-ddl.md#admin-show-ddl-job-queries).
 
-- `ADMIN CANCEL DDL JOBS job_id, [, job_id]`：用于取消已经提交但未执行完成的 DDL 任务。取消完成后，执行 DDL 任务的 SQL 语句会返回 `ERROR 8214 (HY000): Cancelled DDL job` 错误。
+- `ADMIN CANCEL DDL JOBS job_id, [, job_id]`: Used to cancel DDL tasks that have been submitted but not completed. After the cancellation is completed, the SQL statement that executes the DDL task returns the `ERROR 8214 (HY000): Cancelled DDL job` error.
 
-    取消一个已经执行完成的 DDL 任务会在 RESULT 列看到 `DDL Job:90 not found` 的错误，表示该任务已从 DDL 等待队列中被移除。
+    If a completed DDL task is canceled, you can see the `DDL Job:90 not found` error in the `RESULT` column, which means that the task has been removed from the DDL waiting queue.
 
-## 常见问题
+## Common questions
 
-DDL 语句执行相关的常见问题，参考 [SQL FAQ - DDL 执行](/faq/sql-faq.md#ddl-执行)。
+For common questions about DDL execution, see [SQL FAQ - DDL execution](/faq/sql-faq.md#ddl-execution).
