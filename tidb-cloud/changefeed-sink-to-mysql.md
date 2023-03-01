@@ -109,7 +109,7 @@ After completing the prerequisites, you can sink your data to MySQL.
 
 6. In **Start Position**, configure the starting position for your MySQL sink.
 
-    - If you have [loaded the existing data](#load-existing-data) using Dumpling, select **Start replication from a specific TSO** and fill in the TSO that you get from Dumpling exported metadata files.
+    - If you have [loaded the existing data](#load-existing-data-optional) using Dumpling, select **Start replication from a specific TSO** and fill in the TSO that you get from Dumpling exported metadata files.
     - If you do not have any data in the upstream TiDB cluster, select **Start replication from now on**.
     - Otherwise, you can customize the start time point by choosing **Start replication from a specific time**.
 
@@ -123,7 +123,7 @@ After completing the prerequisites, you can sink your data to MySQL.
 
     Click the **Sink to MySQL** card, and you can see the Changfeed running status in a pop-up window, including checkpoint, replication latency, and other metrics.
 
-9. If you have [loaded the existing data](#load-existing-data) using Dumpling, you need to restore the GC time to its original value (the default value is `10m`) after the sink is created:
+9. If you have [loaded the existing data](#load-existing-data-optional) using Dumpling, you need to restore the GC time to its original value (the default value is `10m`) after the sink is created:
 
 {{< copyable "sql" >}}
 
