@@ -37,7 +37,7 @@ Based on whether to operate the data included in the target DDL object, DDL stat
 
 ### TiDB DDL module
 
-The TiDB DDL module incorporates the role of the DDL Owner (or Owner), which serves as a proxy for executing all DDL statements within the TiDB cluster. In the current implementation, only one TiDB node in the entire cluster can be elected as the Owner at any given time. Once elected, the worker started in that TiDB node can handle the DDL tasks in the cluster.
+The TiDB DDL module introduces the role of the DDL Owner (or Owner), which serves as a proxy for executing all DDL statements within the TiDB cluster. In the current implementation, only one TiDB node in the entire cluster can be elected as the Owner at any given time. Once a TiDB node is elected as Owner, the worker started in that TiDB node can handle the DDL tasks in the cluster.
 
 TiDB uses the election mechanism of etcd to elect a node to host the Owner from multiple TiDB nodes. By default, each TiDB node can potentially be elected as the Owner (you can configure `run-ddl` to manage node participation in the election). The elected Owner node has a term, and it actively maintains the term by renewing it. When the Owner node is down, another node can be elected as the new Owner through etcd and continue executing DDL tasks in the cluster.
 
@@ -81,7 +81,7 @@ For users, the newly created index is unavailable before the `public` state.
 
 Before v6.2.0, the process of handling asynchronous schema changes in the TiDB SQL layer is as follows:
 
-1. MySQL Client sends a DDL request to the TiDB server.
+1. MySQL Client sends a DDL request to a TiDB server.
 
 2. After receiving the request, a TiDB server parses and optimizes the request at the MySQL Protocol layer, and then sends it to the TiDB SQL layer for execution.
 
@@ -99,7 +99,7 @@ Before TiDB v6.2.0, the DDL execution framework had the following limitations:
 
 - The TiKV cluster only has two queues: `general job queue` and `add index job queue`, which handle logical DDL and physical DDL, respectively.
 - The DDL Owner always processes DDL jobs in a first-in-first-out way.
-- The DDL Owner can only execute one DDL task of the same type (logical or physical) at a time, which is relatively strict.
+- The DDL Owner can only execute one DDL task of the same type (either logical or physical) at a time, which is relatively strict, and affects the user experience.
 
 These limitations might lead to some "unintended" DDL blocking behavior. For more details, see [SQL FAQ - DDL Execution](/faq/sql-faq.md#ddl-execution).
 
