@@ -26,8 +26,8 @@ This document describes how to stream data from TiDB Cloud to MySQL using the **
 Before creating a changefeed, you need to complete the following prerequisites:
 
 - Set up your network connection
-- Export and load the existing data (optional)
-- Create corresponding target tables in MySQL if you do not load the existing data and only replicate incremental data
+- Export and load the existing data to MySQL (optional)
+- Create corresponding target tables in MySQL if you do not load the existing data and only want to replicate incremental data to MySQL
 
 ### Network
 
