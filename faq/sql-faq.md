@@ -239,11 +239,11 @@ SELECT column_name FROM table_name USE INDEX（index_name）WHERE where_conditio
 
 ## DDL Execution
 
-This section lists issues related to DDL statement execution. For detailed explanations on the DDL execution principle, refer to [Execution Principles and Best Practices of DDL Statements](/ddl-introduction.md).
+This section lists issues related to DDL statement execution. For detailed explanations on the DDL execution principles, see [Execution Principles and Best Practices of DDL Statements](/ddl-introduction.md).
 
 ### How long does it take to perform various DDL operations?
 
-Assuming that DDL operations are not blocked, each TiDB server can update the schema version normally, and the DDL owner node is running normally. In this case, the estimated time for various DDL operations is as follows:
+Assume that DDL operations are not blocked, each TiDB server can update the schema version normally, and the DDL Owner node is running normally. In this case, the estimated time for various DDL operations is as follows:
 
 | DDL Operation Type | Estimated Time |
 |:----------|:-----------|
@@ -252,18 +252,18 @@ Assuming that DDL operations are not blocked, each TiDB server can update the sc
 
 > **Note:**
 >
-> The above are estimated times for the operations. The actual time might be different.
+> The above is estimated time for the operations. The actual time might be different.
 
 ### Possible reasons why DDL execution is slow
 
-- In a user session, if there is a non-auto-commit DML statement before a DDL statement, and if the commit operation of the DML statement is slow, it will cause the DDL statement to execute slowly. That is, TiDB commits the uncommitted DML statement before executing the DDL statement.
+- In a user session, if there is a non-auto-commit DML statement before a DDL statement, and if the commit operation of the non-auto-commit DML statement is slow, it will cause the DDL statement to execute slowly. That is, TiDB commits the uncommitted DML statement before executing the DDL statement.
 
 - When multiple DDL statements are executed together, the execution of the later DDL statements might be slower because they might need to wait in queue. Queuing scenarios include:
 
-    - The same type of DDL statements need to be queued. For example, both `CREATE TABLE` and `CREATE DATABASE` are general DDL statements, so when both operations are executed at the same time, they need to be queued. Since TiDB v6.2.0, parallel DDL statements are supported, but to avoid DDL execution using too many TiDB computing resources, there is also concurrency limit. Queuing occurs when DDL exceeds the concurrency limit.
-    - The DDL operations performed on the same table have a dependency relationship between. The later DDL statement needs to wait for the previous DDL operation to complete.
+    - The same type of DDL statements need to be queued. For example, both `CREATE TABLE` and `CREATE DATABASE` are general DDL statements, so when both operations are executed at the same time, they need to be queued. Starting from TiDB v6.2.0, parallel DDL statements are supported, but to avoid DDL execution using too many TiDB computing resources, there is also a concurrency limit. Queuing occurs when DDL exceeds the concurrency limit.
+    - The DDL operations performed on the same table have a dependency relationship between them. The later DDL statement needs to wait for the previous DDL operation to complete.
 
-- After the cluster is started normally, the execution time of the first DDL operation might be relatively long because the DDL module is electing the DDL owner.
+- After the cluster is started normally, the execution time of the first DDL operation might be relatively long because the DDL module is electing the DDL Owner.
 
 - TiDB is terminated, which causes TiDB to not able to communicate with PD normally (including power-off situations). Or TiDB is terminated by the `kill -9` command, which causes TiDB to not timely clear the registration data from PD.
 
@@ -271,7 +271,9 @@ Assuming that DDL operations are not blocked, each TiDB server can update the sc
 
 ### What triggers the `Information schema is changed` error?
 
-When executing SQL statements, TiDB determines the schema version of an object based on the isolation level and processes the SQL statement accordingly. TiDB also supports online asynchronous DDL changes. When executing DML statements, there may be DDL statements being executed at the same time, and you need to ensure that each SQL statement is executed on the same schema. Therefore, when executing DML, if a DDL operation is ongoing, TiDB might report an `Information schema is changed` error. Starting from v6.4.0, TiDB has implemented a [metadata lock mechanism](/metadata-lock.md), which allows the coordinated execution of DML statements and DDL schema changes, avoiding most `Information schema is changed` errors.
+When executing SQL statements, TiDB determines the schema version of an object based on the isolation level and processes the SQL statement accordingly. TiDB also supports online asynchronous DDL changes. When you execute DML statements, there might be DDL statements being executed at the same time, and you need to ensure that each SQL statement is executed on the same schema. Therefore, when executing DML, if a DDL operation is ongoing, TiDB might report an `Information schema is changed` error. 
+
+Starting from v6.4.0, TiDB has implemented a [metadata lock mechanism](/metadata-lock.md), which allows the coordinated execution of DML statements and DDL schema changes, and avoids most `Information schema is changed` errors.
 
 Now, there are still a few causes for this error reporting:
 
@@ -311,7 +313,7 @@ For example, consider the following DDL statements:
 - DDL 2: `ALTER TABLE t ADD COLUMN b int;`
 - DDL 3: `CREATE TABLE t1(a int);`
 
-Due to the limitation of the first-in-first-out queue, DDL 3 must wait for DDL 2 to execute. Also, because DDL statements on the same table need to be executed in serial, DDL 2 must for DDL 1 to execute. Therefore, DDL 3 needs to wait for DDL 1 to be executed first, even if they operate on different tables.
+Due to the limitation of the first-in-first-out queue, DDL 3 must wait for DDL 2 to execute. Also, because DDL statements on the same table need to be executed in serial, DDL 2 must wait for DDL 1 to execute. Therefore, DDL 3 needs to wait for DDL 1 to be executed first, even if they operate on different tables.
 
 Starting from TiDB v6.2.0, the TiDB DDL module uses a concurrent framework. In the concurrent framework, there is no longer the limitation of the first-in-first-out queue. Instead, TiDB picks up the DDL task that can be executed from all DDL tasks. Additionally, the number of Reorg workers has been expanded, approximately to `CPU/4` per node. This allows TiDB to build indexes for multiple tables simultaneously in the concurrent framework.
 
@@ -320,7 +322,7 @@ Whether your cluster is a new cluster or an upgraded cluster from an earlier ver
 ### Identify the cause of stuck DDL execution
 
 1. Eliminate other reasons that make the DDL statement execution slow.
-2. Use one of the following methods to identify the DDL owner node:
+2. Use one of the following methods to identify the DDL Owner node:
     - Use `curl http://{TiDBIP}:10080/info/all` to obtain the owner of the current cluster.
     - View the owner during a specific time period from the monitoring dashboard **DDL** > **DDL META OPM**.
 
