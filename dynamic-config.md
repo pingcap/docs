@@ -191,6 +191,16 @@ The following TiKV configuration items can be modified online:
 | `{db-name}.{cf-name}.soft-pending-compaction-bytes-limit` | The soft limit on the pending compaction bytes |
 | `{db-name}.{cf-name}.hard-pending-compaction-bytes-limit` | The hard limit on the pending compaction bytes |
 | `{db-name}.{cf-name}.titan.blob-run-mode` | The mode of processing blob files |
+<<<<<<< HEAD
+=======
+| `server.grpc-memory-pool-quota` | Limits the memory size that can be used by gRPC |
+| `server.max-grpc-send-msg-len` | Sets the maximum length of a gRPC message that can be sent |
+| `server.snap-max-write-bytes-per-sec` | Sets the maximum allowable disk bandwidth when processing snapshots |
+| `server.concurrent-send-snap-limit` | Sets the maximum number of snapshots sent at the same time |
+| `server.concurrent-recv-snap-limit` | Sets the maximum number of snapshots received at the same time |
+| `server.raft-msg-max-batch-size` | Sets the maximum number of Raft messages that are contained in a single gRPC message |
+| `server.simplify-metrics`        | Controls whether to simplify the sampling monitoring metrics                   |
+>>>>>>> 900a633d4 (fix a dynamic config (#12707))
 | `storage.block-cache.capacity` | The size of shared block cache (supported since v4.0.3) |
 | `backup.num-threads` | The number of backup threads (supported since v4.0.3) |
 | `split.qps-threshold` | The threshold to execute `load-base-split` on a Region. If the QPS of read requests for a Region exceeds `qps-threshold` for a consecutive period of time, this Region should be split.|
