@@ -41,7 +41,7 @@ Besides, TiDB provides a way to specify an exact point in time by setting the [`
 
 The Stale Read feature periodically advances the Resolved TS timestamp of the TiDB cluster, which ensures that TiDB reads data that meets transaction consistency. If the timestamp used by Stale Read (for example, `AS OF TIMESTAMP '2016-10-08 16:45:26'`) is greater than the Resolved TS, Stale Read will trigger TiDB to advance the Resolved TS first and wait for the advance to complete before reading the data, leading to an increase in latency.
 
-To reduce the Stale Read latency, you can modify the following TiKV configuration items to make TiDB advance the Resolved TS timestamp more frequently:
+To reduce the Stale Read latency, you can modify the following TiKV configuration item to make TiDB advance the Resolved TS timestamp more frequently:
 
 ```toml
 [resolved-ts]
