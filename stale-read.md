@@ -50,7 +50,7 @@ advance-ts-interval = "20s" # The default value is "20s". You can set it to a sm
 
 > **Note:**
 >
-> Decreasing this parameter will lead to an increase in TiKV CPU usage and traffic between nodes.
+> Decreasing the preceding TiKV configuration item will lead to an increase in TiKV CPU usage and traffic between nodes.
 
 ## Restrictions
 
