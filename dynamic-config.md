@@ -191,6 +191,9 @@ The following TiKV configuration items can be modified online:
 | `{db-name}.{cf-name}.soft-pending-compaction-bytes-limit` | The soft limit on the pending compaction bytes |
 | `{db-name}.{cf-name}.hard-pending-compaction-bytes-limit` | The hard limit on the pending compaction bytes |
 | `{db-name}.{cf-name}.titan.blob-run-mode` | The mode of processing blob files |
+| `server.snap-max-write-bytes-per-sec` | Sets the maximum allowable disk bandwidth when processing snapshots |
+| `server.concurrent-send-snap-limit` | Sets the maximum number of snapshots sent at the same time |
+| `server.concurrent-recv-snap-limit` | Sets the maximum number of snapshots received at the same time |
 | `storage.block-cache.capacity` | The size of shared block cache (supported since v4.0.3) |
 | `backup.num-threads` | The number of backup threads (supported since v4.0.3) |
 | `split.qps-threshold` | The threshold to execute `load-base-split` on a Region. If the QPS of read requests for a Region exceeds `qps-threshold` for a consecutive period of time, this Region should be split.|
