@@ -54,7 +54,8 @@ You can use the tool [Dumpling](/dumpling-overview.md) for data export.
    > **Note:**
    > 
    > For exporting serverless tier data, you must ensure that the dumpling version is at least v6.5.0.
-   > When using dumpling:v6.5.0, you need to set `--ca=${ca_path}` in the command. Refer to [TLS Connections to Serverless Tier](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md#root-certificate-default-path).
+   >
+   > When using dumpling:v6.5.0, you need to set `--ca=${ca_path}` in the command. To find the CA root path on your system, see [TLS Connections to Serverless Tier](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md#root-certificate-default-path).
 
 
     </div>
