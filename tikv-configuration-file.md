@@ -702,10 +702,10 @@ Configuration items related to Raftstore
 + Default value: `"9s"`
 + Minimum value: `0`
 
-### `allow-remove-leader`
+### `right-derive-when-split`
 
-+ Determines whether to allow deleting the main switch
-+ Default value: `false`
++ Specifies the start key of the new Region when a Region is split. When this configuration item is set to `true`, the start key is the maximum split key. When this configuration item is set to `false`, the start key is the original Region's start key.
++ Default value: `true`
 
 ### `merge-max-log-gap`
 
@@ -796,7 +796,7 @@ Configuration items related to Raftstore
 + Default value: `250us`
 + Minimum value: `0`
 
-## Coprocessor
+## coprocessor
 
 Configuration items related to Coprocessor
 
@@ -833,7 +833,7 @@ Configuration items related to Coprocessor
 + The number of keys in the newly split Region. This value is an estimate.
 + Default value: `960000`
 
-## RocksDB
+## rocksdb
 
 Configuration items related to RocksDB
 
@@ -1165,7 +1165,11 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 ### `compaction-pri`
 
 + The priority type of compaction
-+ Optional values: `"by-compensated-size"`, `"oldest-largest-seq-first"`, `"oldest-smallest-seq-first"`, `"min-overlapping-ratio"`
++ Optional values:
+    - `"by-compensated-size"`: compact files in order of file size and large files are compacted with higher priority.
+    - `"oldest-largest-seq-first"`: prioritize compaction on files with the oldest update time. Use this value **only** when updating hot keys in small ranges.
+    - `"oldest-smallest-seq-first"`: prioritize compaction on files with ranges that are not compacted to the next level for a long time. If you randomly update hot keys across the key space, this value can slightly reduce write amplification.
+    - `"min-overlapping-ratio"`: prioritize compaction on files with a high overlap ratio. When a file is small in different levels (the result of `the file size in the next level` ÷ `the file size in this level` is small), TiKV compacts this file first. In many cases, this value can effectively reduce write amplification.
 + Default value for `defaultcf` and `writecf`: `"min-overlapping-ratio"`
 + Default value for `lockcf`: `"by-compensated-size"`
 
