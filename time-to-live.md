@@ -231,7 +231,21 @@ In addition, TiDB provides three tables to obtain more information about TTL job
 
 ## Compatibility with TiDB tools
 
-As an experimental feature, the TTL feature is not compatible with data import and export tools, including BR, TiDB Lightning, and TiCDC.
+TTL can be used with other TiDB migration, backup, and recovery tools.
+
+| Tool name | Minimum supported version | Description |
+| --- | --- | --- |
+| Backup & Restore (BR) | v6.6.0 | After you restore data using BR, the `TTL_ENABLE` attribute of the tables will be set to `OFF`. This prevents TiDB from immediately deleting expired data after backup and restore. You need to manually turn on the `TTL_ENABLE` attribute to re-enable TTL for each table. |
+| TiDB Lightning | v6.6.0 | After you import data using TiDB Lighting, the `TTL_ENABLE` attribute of the imported table will be set to `OFF`.  This prevents TiDB from immediately deleting expired data after importing. You need to manually turn on the `TTL_ENABLE` attribute to re-enable TTL for each table. |
+| TiCDC | v7.0.0 | The `TTL_ENABLE` attribute in the downstream will be automatically set to `OFF`. The upstream TTL deletion will be synchronized to the downstream. Therefore, to prevent duplicate deletions, the `TTL_ENABLE` attribute of the downstream tables will be forcibly set to OFF. |
+
+## Compatibility with SQL
+
+| Feature name | Description |
+| :-- | :---- |
+| [`FLASHBACK TABLE`](/sql-statements/sql-statement-flashback-table.md) |  `FLASHBACK TABLE` will set the `TTL_ENABLE` attribute of the tables to `OFF`. This prevents TiDB from immediately deleting expired data after the flashback. You need to manually turn on the `TTL_ENABLE` attribute to re-enable TTL for each table. |
+| [`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md) | `FLASHBACK DATABASE` will set the `TTL_ENABLE` attribute of the tables to `OFF`, and the `TTL_ENABLE` attribute will not be modified. This prevents TiDB from immediately deleting expired data after the flashback. You need to manually turn on the `TTL_ENABLE` attribute to re-enable TTL for each table. |
+| [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md) | `FLASHBACK CLUSTER TO TIMESTAMP` will set the system variable [`TIDB_TTL_JOB_ENABLE`](/system-variables.md#tidb_ttl_job_enable-new-in-v650) to `OFF`. |
 
 ## Limitations
 
