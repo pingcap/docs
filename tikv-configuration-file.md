@@ -702,6 +702,11 @@ Configuration items related to Raftstore
 + Default value: `"9s"`
 + Minimum value: `0`
 
+### `allow-remove-leader`
+
++ Determines whether to allow deleting the main switch
++ Default value: `false`
+
 ### `right-derive-when-split`
 
 + Specifies the start key of the new Region when a Region is split. When this configuration item is set to `true`, the start key is the maximum split key. When this configuration item is set to `false`, the start key is the original Region's start key.
