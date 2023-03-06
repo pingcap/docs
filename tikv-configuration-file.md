@@ -885,7 +885,7 @@ Configuration items related to Raftstore.
 
 ### `right-derive-when-split`
 
-+ Specifies the start key of the new Region when a Region is split. If this configuration item is set to `true`, the start key is the maximum split key. Otherwise, the start key is the original Region's start key.
++ Specifies the start key of the new Region when a Region is split. When this configuration item is set to `true`, the start key is the maximum split key. When this configuration item is set to `false`, the start key is the original Region's start key.
 + Default value: `true`
 
 ### `merge-max-log-gap`
