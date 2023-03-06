@@ -681,6 +681,11 @@ Configuration items related to Raftstore
 + Determines whether to allow deleting the main switch
 + Default value: `false`
 
+### `right-derive-when-split`
+
++ Specifies the start key of the new Region when a Region is split. When this configuration item is set to `true`, the start key is the maximum split key. When this configuration item is set to `false`, the start key is the original Region's start key.
++ Default value: `true`
+
 ### `merge-max-log-gap`
 
 + The maximum number of missing logs allowed when `merge` is performed
@@ -752,7 +757,7 @@ Configuration items related to Raftstore
 + Default value: `"500ms"`
 + Minimum value: `"1ms"`
 
-## Coprocessor
+## coprocessor
 
 Configuration items related to Coprocessor
 
@@ -789,7 +794,7 @@ Configuration items related to Coprocessor
 + The number of keys in the newly split Region. This value is an estimate.
 + Default value: `960000`
 
-## RocksDB
+## rocksdb
 
 Configuration items related to RocksDB
 
@@ -1338,7 +1343,7 @@ Configuration items related to [encryption at rest](/encryption-at-rest.md) (TDE
 
 + Specifies the old master key when rotating the new master key. The configuration format is the same as that of `master-key`. To learn how to configure a master key, see [Encryption at Rest - Configure encryption](/encryption-at-rest.md#configure-encryption).
 
-## `import`
+## import
 
 Configuration items related to TiDB Lightning import and BR restore.
 
