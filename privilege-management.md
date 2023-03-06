@@ -208,7 +208,7 @@ To see the full set of dynamic privileges, execute the `SHOW PRIVILEGES` stateme
 
 ## `SUPER` privilege
 
-- The `SUPER` privilege allows the owner to perform almost any operation. By default, only the `root` user is granted with this privilege. Be careful when granting this privilege to other users.
+- The `SUPER` privilege allows the user to perform almost any operation. By default, only the `root` user is granted with this privilege. Be careful when granting this privilege to other users.
 - The `SUPER` privilege is considered [deprecated in MySQL 8.0](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#dynamic-privileges-migration-from-super) and can be replaced by [dynamic privileges](#dynamic-privileges) to provide more fine-grained access control.
 
 ## Privileges required for TiDB operations
