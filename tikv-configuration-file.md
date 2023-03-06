@@ -876,7 +876,7 @@ Configuration items related to Raftstore.
 
 ### `right-derive-when-split`
 
-+ When this configuration is set to `true`, the key of the original Region is reused for the Region starting from the maximum split key. Otherwise, the key is reused for the Region starting from the original Region's start key.
++ Specifies the start key of the new Region when a Region is split. If this configuration item is set to `true`, the start key is the maximum split key. Otherwise, the start key is the original Region's start key.
 + Default value: `true`
 
 ### `merge-max-log-gap`
@@ -1413,10 +1413,10 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 
 + The priority type of compaction
 + Optional values:
-    - `"by-compensated-size"`: prioritize the compaction on large files in order of file size
-    - `"oldest-largest-seq-first"`: perform the compaction on files with data whose latest update time is old in chronological order. **Only** set this value when updating hot keys in small ranges.
-    - `"oldest-smallest-seq-first"`: prioritize compaction on files with ranges that are not compacted to the next level for a long time in chronological order. If you randomly update hot keys across the key space, setting this value can slightly reduce write amplification.
-    - `"min-overlapping-ratio"`: prioritize compaction on files with a high overlap ratio. When the file size in different levels is small (which means the value of  `the file size in the next level` ÷ `the file size in this level` is small), TiKV compacts the file first. In many cases, setting this value can effectively reduce write amplification.
+    - `"by-compensated-size"`: compact files in order of file size and large files are compacted with higher priority.
+    - `"oldest-largest-seq-first"`: prioritize compaction on files with the oldest update time. Use this value **only** when updating hot keys in small ranges.
+    - `"oldest-smallest-seq-first"`: prioritize compaction on files with ranges that are not compacted to the next level for a long time. If you randomly update hot keys across the key space, this value can slightly reduce write amplification.
+    - `"min-overlapping-ratio"`: prioritize compaction on files with a high overlap ratio. When a file is small in different levels (the result of `the file size in the next level` ÷ `the file size in this level` is small), TiKV compacts this file first. In many cases, this value can effectively reduce write amplification.
 + Default value for `defaultcf` and `writecf`: `"min-overlapping-ratio"`
 + Default value for `lockcf`: `"by-compensated-size"`
 
