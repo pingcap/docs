@@ -40,7 +40,7 @@ We provide a fullstack app in TypeScript with Next.js using React and Prisma Cli
 
 Navigate to [Fullstack Example with Next.js and Prisma](https://github.com/tidbcloud/nextjs-prisma-example), fork it to your own GitHub repository.
 
-Then, use the following commond to clone it.
+Then, use the following command to clone it.
 
 ```shell
 git clone https://github.com/${your_username}/nextjs-prisma-example.git
