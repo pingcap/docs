@@ -489,6 +489,11 @@ Configuration items related to Raftstore
 + Determines whether to allow deleting the main switch
 + Default value: `false`
 
+### `right-derive-when-split`
+
++ Specifies the start key of the new Region when a Region is split. When this configuration item is set to `true`, the start key is the maximum split key. When this configuration item is set to `false`, the start key is the original Region's start key.
++ Default value: `true`
+
 ### `merge-max-log-gap`
 
 + The maximum number of missing logs allowed when `merge` is performed
@@ -552,7 +557,7 @@ Configuration items related to Raftstore
 + Default value: `1`
 + Minimum value: greater than `0`
 
-## Coprocessor
+## coprocessor
 
 Configuration items related to Coprocessor
 
@@ -589,7 +594,7 @@ Configuration items related to Coprocessor
 + The number of keys in the newly split Region. This value is an estimate.
 + Default value: `960000`
 
-## RocksDB
+## rocksdb
 
 Configuration items related to RocksDB
 
@@ -1052,7 +1057,7 @@ Configuration items related to security
 + The path of the PEM file that contains the X509 key
 + Default value: ""
 
-## `import`
+## import
 
 Configuration items related to `import`
 
