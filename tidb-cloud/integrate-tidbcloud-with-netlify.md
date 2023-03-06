@@ -73,11 +73,17 @@ Choose the operating system
 
 datasource db {
   provider = "mysql"
-  url      = "mysql://3ifwYaXfo9iuOXO.root:${password}@gateway01.ap-southeast-1.prod.aws.tidbcloud.com:4000/nextjs_prisma?sslaccept=strict"
+  url      = "mysql://<User>:<Password>@<Endpoint>:<Port>/<Database>?sslaccept=strict"
 }
 ```
 
-The output is the connection string for Prisma connecting to TiDB Cloud. Please use your own password to replace `${password}` field.
+> **Note:**
+> 
+> Don't forget to replace the parameters in the connection string.
+> 
+> This example must create a new database, so replace `<Database>` with a name that doesn't exist.
+
+The output is the connection string for Prisma connecting to TiDB Cloud.
 
 For more information about TiDB Cloud CLI, see [TiDB Cloud CLI Reference](./cli-reference.md).
 
@@ -87,10 +93,15 @@ For more information about TiDB Cloud CLI, see [TiDB Cloud CLI Reference](./cli-
 Navigate to [TiDB Cloud console](https://tidbcloud.com/). Get the following connection parameters `${host}`, `${port}`, and `${user}` from the connection string in the [**Connect**](/tidb-cloud/connect-via-standard-connection.md) dialog and fill them into the following connection string.
 
 ```
-mysql://${user}:${password}@${host}:${port}/nextjs_prisma?sslaccept=strict
+mysql://<User>:<Password>@<Endpoint>:<Port>/<Database>?sslaccept=strict
 ```
 
-Please use your own password to replace `${password}` field.
+> **Note:**
+>
+> Don't forget to replace the parameters in the connection string.
+>
+> This example must create a new database, so replace `<Database>` with a name that doesn't exist.
+
 
 </div>
 </SimpleTab>
@@ -154,10 +165,10 @@ Please use your own password to replace `${password}` field.
 
     ```shell
     # set on your own space
-    export DATABASE_URL='mysql://3ifwYaXfo9iuOXO.root:${password}@gateway01.ap-southeast-1.prod.aws.tidbcloud.com:4000/nextjs_prisma?sslaccept=strict'
+    export DATABASE_URL='mysql://<User>:<Password>@<Endpoint>:<Port>/<Database>?sslaccept=strict'
     
     # set on Netlify space   
-    netlify env:set DATABASE_URL 'mysql://3ifwYaXfo9iuOXO.root:${password}@gateway01.ap-southeast-1.prod.aws.tidbcloud.com:4000/nextjs_prisma?sslaccept=strict'
+    netlify env:set DATABASE_URL 'mysql://<User>:<Password>@<Endpoint>:<Port>/<Database>?sslaccept=strict'
     ```
    
     Check your environment variables.
