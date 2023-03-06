@@ -162,7 +162,100 @@ To understand the key metrics displayed on the TiDB dashboard, check the followi
     - Delete Range Task Status: the task status of `Delete Range`, including completion and failure
     - Push Task Duration 95: the time spent pushing GC subtasks to GC workers
 
+<<<<<<< HEAD
 - Batch Client
     - Pending Request Count by TiKV: the number of Batch messages that are pending processing
     - Batch Client Unavailable Duration 95: the unavailable time of the Batch client
     - No Available Connection Counter: the number of times the Batch client cannot find an available link
+=======
+- KV Request OPS: the execution times of a KV request, displayed according to TiKV
+- KV Request Duration 99 by store: the execution time of a KV request, displayed according to TiKV
+- KV Request Duration 99 by type: the execution time of a KV request, displayed according to the request type
+
+### PD Client
+
+- PD Client CMD OPS: the statistics of commands executed by PD Client per second
+- PD Client CMD Duration: the time it takes for PD Client to execute commands
+- PD Client CMD Fail OPS: the statistics of failed commands executed by PD Client per second
+- PD TSO OPS: the number of TSO that TiDB obtains from PD per second
+- PD TSO Wait Duration: the time that TiDB waits for PD to return TSO
+- PD TSO RPC duration: the duration from the time that TiDB sends request to PD (to get TSO) to the time that TiDB receives TSO
+- Start TSO Wait Duration: the duration from the time that TiDB sends request to PD (to get `start TSO`) to the time that TiDB receives `start TSO`
+
+### Schema Load
+
+- Load Schema Duration: the time it takes TiDB to obtain the schema from TiKV
+- Load Schema OPS: the statistics of the schemas that TiDB obtains from TiKV per second
+- Schema Lease Error OPM: the Schema Lease errors include two types: `change` and `outdate`. `change` means that the schema has changed, and `outdate` means that the schema cannot be updated, which is a more serious error and triggers an alert.
+- Load Privilege OPS: the statistics of the number of privilege information obtained by TiDB from TiKV per second
+
+### DDL
+
+- DDL Duration 95: 95% quantile of DDL statement processing time
+- Batch Add Index Duration 100: statistics of the maximum time spent by each Batch on creating an index
+- DDL Waiting Jobs Count: the number of DDL tasks that are waiting
+- DDL META OPM: the number of times that a DDL obtains META every minute
+- DDL Worker Duration 99: 99% quantile of the execution time of each DDL worker
+- Deploy Syncer Duration: the time consumed by Schema Version Syncer initialization, restart, and clearing up operations
+- Owner Handle Syncer Duration: the time that it takes the DDL Owner to update, obtain, and check the Schema Version
+- Update Self Version Duration: the time consumed by updating the version information of Schema Version Syncer
+- DDL OPM: the number of DDL executions per second
+- DDL backfill progress in percentage: the progress of backfilling DDL tasks
+
+### Statistics
+
+- Auto Analyze Duration 95: the time consumed by automatic `ANALYZE`
+- Auto Analyze QPS: the statistics of automatic `ANALYZE`
+- Stats Inaccuracy Rate: the information of the statistics inaccuracy rate
+- Pseudo Estimation OPS: the number of the SQL statements optimized using pseudo statistics
+- Dump Feedback OPS: the number of stored statistical feedbacks
+- Store Query Feedback QPS: the number of operations per second to store the feedback information of the union query, which is performed in TiDB memory
+- Significant Feedback: the number of significant feedback pieces that update the statistics information
+- Update Stats OPS: the number of operations of updating statistics with feedback
+- Fast Analyze Status 100: the status for quickly collecting statistical information
+
+### Owner
+
+- New ETCD Session Duration 95: the time it takes to create a new etcd session. TiDB connects to etcd in PD through etcd client to save/read some metadata information. This records the time spent creating the session
+- Owner Watcher OPS: the number of Goroutine operations per second of DDL owner watch PD's etcd metadata
+
+### Meta
+
+- AutoID QPS: AutoID related statistics, including three operations (global ID allocation, a single table AutoID allocation, a single table AutoID Rebase)
+- AutoID Duration: the time consumed by AutoID related operations
+- Region Cache Error OPS: the number of errors encountered per second by the cached Region information in TiDB
+- Meta Operations Duration 99: the latency of Meta operations
+
+### GC
+
+- Worker Action OPM: the number of GC related operations, including `run_job`, `resolve_lock`, and `delete_range`
+- Duration 99: the time consumed by GC related operations
+- Config: the configuration of GC data life time and GC running interval
+- GC Failure OPM: the number of failed GC related operations
+- Delete Range Failure OPM: the number of times the `Delete Range` has failed
+- Too Many Locks Error OPM: the number of the error that GC clears up too many locks
+- Action Result OPM: the number of results of GC-related operations
+- Delete Range Task Status: the task status of `Delete Range`, including completion and failure
+- Push Task Duration 95: the time spent pushing GC subtasks to GC workers
+
+### Batch Client
+
+- Pending Request Count by TiKV: the number of Batch messages that are pending processing
+- Batch Client Unavailable Duration 95: the unavailable time of the Batch client
+- No Available Connection Counter: the number of times the Batch client cannot find an available link
+
+### TTL
+
+- TiDB CPU Usage: the CPU usage of each TiDB instance.
+- TiKV IO MBps: the total bytes of I/O in each TiKV instance.
+- TiKV CPU: the CPU usage of each TiKV instance.
+- TTL QPS By Type: the QPS information of different types of statements generated by TTL jobs.
+- TTL Insert Rows Per Second: the number of rows inserted into TTL tables per second.
+- TTL Processed Rows Per Second: the number of expired rows processed by TTL jobs per second.
+- TTL Insert Rows Per Hour: the number of rows inserted into TTL tables for every hour.
+- TTL Delete Rows Per Hour: the number of expired rows deleted by TTL jobs for every hour.
+- TTL Scan/Delete Query Duration: the execution time of TTL scan/delete statements.
+- TTL Scan/Delete Worker Time By Phase: the time consumed by different phases of TTL internal worker threads.
+- TTL Job Count By Status: the number of TTL jobs currently being executed.
+- TTL Task Count By Status: the number of TTL tasks currently being executed.
+>>>>>>> 4f5cfa5dc (grafana-tidb-dashboard: update DDL related metrics (#12750))
