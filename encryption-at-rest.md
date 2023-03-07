@@ -184,7 +184,7 @@ TiFlash uses the current data key to encrypt all data placed on the disk, includ
 
 ### Key creation
 
-To create a key on AWS, please refer to the steps to create a key for TiKV.
+To create a key on AWS, refer to the steps to create a key for TiKV.
 
 ### Configure encryption
 
