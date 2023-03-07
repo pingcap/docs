@@ -45,7 +45,7 @@ To reduce the Stale Read latency, you can modify the following TiKV configuratio
 
 ```toml
 [resolved-ts]
-advance-ts-interval = "20s" # The default value is "20s". You can set it to a smaller value such as "1s".
+advance-ts-interval = "20s" # The default value is "20s". You can set it to a smaller value such as "1s" to advance the Resolved TS timestamp more frequently.
 ```
 
 > **Note:**

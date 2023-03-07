@@ -23,7 +23,7 @@ After reading the historical data, you can read the latest data in the following
 
 > **Note:**
 >
-> To reduce the latency and improve the timeliness of Stale Read data, you can modify the TiKV `advance-ts-interval` configuration item. See [Reduce Stale Read latency](/stale-read.md#reduce-stale-read-latency) for details.
+> To reduce the latency and improve the timeliness of the Stale Read data, you can modify the TiKV `advance-ts-interval` configuration item. See [Reduce Stale Read latency](/stale-read.md#reduce-stale-read-latency) for details.
 
 ## Usage examples
 
