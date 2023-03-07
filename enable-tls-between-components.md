@@ -8,10 +8,9 @@ aliases: ['/docs/dev/enable-tls-between-components/','/docs/dev/how-to/secure/en
 
 This document describes how to enable encrypted data transmission between components within a TiDB cluster. Once enabled, encrypted transmission is used between the following components:
 
-- TiDB and TiKV; TiDB and PD
-- TiKV and PD
+- Communication between TiDB, TiKV, PD, and TiFlash
 - TiDB Control and TiDB; TiKV Control and TiKV; PD Control and PD
-- Internal communication within each TiKV, PD, TiDB cluster
+- Internal communication within each TiDB, TiKV, PD, and TiFlash cluster
 
 Currently, it is not supported to only enable encrypted transmission of some specific components.
 
@@ -144,7 +143,7 @@ Currently, it is not supported to only enable encrypted transmission of some spe
     {{< copyable "shell-regular" >}}
 
     ```bash
-    tiup ctl:<cluster-version> pd -u https://127.0.0.1:2379 --cacert /path/to/ca.pem --cert /path/to/client.pem --key /path/to/client-key.pem
+    tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert /path/to/ca.pem --cert /path/to/client.pem --key /path/to/client-key.pem
     ```
 
     {{< copyable "shell-regular" >}}
@@ -207,9 +206,15 @@ To verify component caller's identity, you need to mark the certificate user ide
     cert-allowed-cn = ["PD-Server", "TiKV-Server", "TiFlash-Server"]
     ```
 
-### Reload certificates
+## Reload certificates
 
-To reload the certificates and the keys, TiDB, PD, TiKV, and all kinds of clients reread the current certificates and the key files each time a new connection is created. Currently, you cannot reload the CA certificate.
+- If your TiDB cluster is deployed in a local data center, to reload the certificates and keys, TiDB, PD, TiKV, TiFlash, TiCDC, and all kinds of clients reread the current certificates and key files each time a new connection is created, without restarting the TiDB cluster.
+
+- If your TiDB cluster is deployed on your own managed cloud, make sure that the issuance of TLS certificates is integrated with the certificate management service of the cloud provider. The TLS certificates of the TiDB, PD, TiKV, TiFlash, and TiCDC components can be automatically rotated without restarting the TiDB cluster.
+
+## Certificate validity
+
+You can customize the validity period of TLS certificates for each component in a TiDB cluster. For example, when using OpenSSL to issue and generate TLS certificates, you can set the validity period via the **days** parameter. For more information, see [Generate self-signed certificates](/generate-self-signed-certificates.md).
 
 ## See also
 

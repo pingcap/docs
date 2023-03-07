@@ -8,17 +8,8 @@ aliases: ['/docs/dev/statistics/','/docs/dev/reference/performance/statistics/']
 
 TiDB uses statistics to decide [which index to choose](/choose-index.md). The `tidb_analyze_version` variable controls the statistics collected by TiDB. Currently, two versions of statistics are supported: `tidb_analyze_version = 1` and `tidb_analyze_version = 2`.
 
-<CustomContent platform="tidb">
-
-In versions before v5.1.0, the default value of this variable is `1`. In v5.3.0 and later versions, the default value of this variable is `2`. If your cluster is upgraded from a version earlier than v5.3.0 to v5.3.0 or later, the default value of `tidb_analyze_version` does not change.
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-For TiDB Cloud, the default value of this variable is `1`.
-
-</CustomContent>
+- For on-premises TiDB, the default value of this variable is `1` before v5.1.0. In v5.3.0 and later versions, the default value of this variable is `2`. If your cluster is upgraded from a version earlier than v5.3.0 to v5.3.0 or later, the default value of `tidb_analyze_version` does not change.
+- For TiDB Cloud, the default value of this variable is `1`.
 
 > **Note:**
 >
@@ -34,6 +25,13 @@ For TiDB Cloud, the default value of this variable is `1`.
 >
 >    ```sql
 >    SELECT DISTINCT(CONCAT('DROP STATS ', table_schema, '.', table_name, ';')) FROM information_schema.tables, mysql.stats_histograms WHERE stats_ver = 2 AND table_id = tidb_table_id;
+>    ```
+>
+> - If the result of the preceding statement is too long to copy and paste, you can export the result to a temporary text file and then perform execution from the file like this:
+>
+>    ```sql
+>    SELECT DISTINCT ... INTO OUTFILE '/tmp/sql.txt';
+>    mysql -h XXX -u user -P 4000 ... < '/tmp/sql.txt';
 >    ```
 
 These two versions include different information in TiDB:
@@ -864,14 +862,9 @@ mysql> show warnings;
 
 * [LOAD STATS](/sql-statements/sql-statement-load-stats.md)
 * [DROP STATS](/sql-statements/sql-statement-drop-stats.md)
+
+</CustomContent>
+
 * [LOCK STATS](/sql-statements/sql-statement-lock-stats.md)
 * [UNLOCK STATS](/sql-statements/sql-statement-unlock-stats.md)
 * [SHOW STATS_LOCKED](/sql-statements/sql-statement-show-stats-locked.md)
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-* [SQL Prepare Execution Plan Cache](/sql-prepared-plan-cache.md)
-
-</CustomContent>

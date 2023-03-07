@@ -19,6 +19,15 @@ We are constantly filling in the feature gaps between Serverless Tier and Dedica
     - The compute resource is limited to 1 vCPU and 1 GiB RAM.
     - **Note**: In the coming months, we intend to offer a usage-based billing plan for additional resources and higher performance, while still keeping offering the free starter plan. In the coming releases, the limitations of the free Serverless Tier might be changed.
 
+## SQL
+
+- [Time to live (TTL)](/time-to-live.md) is not available for Serverless Tier clusters currently.
+- The [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md) syntax is not applicable to TiDB Cloud [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters.
+
+## System tables
+
+- Tables `CLUSTER_SLOW_QUERY`, `SLOW_QUERY`, `CLUSTER_STATEMENTS_SUMMARY`, `CLUSTER_STATEMENTS_SUMMARY_HISTORY`, `STATEMENTS_SUMMARY`, `STATEMENTS_SUMMARY_HISTORY` are not available for Serverless Tier clusters.
+
 ## Transaction
 
 - The total size of a single transaction is set to no more than 10 MB on Serverless Tier during the beta phase.
@@ -36,6 +45,10 @@ We are constantly filling in the feature gaps between Serverless Tier and Dedica
 
 - [Built-in Monitoring](/tidb-cloud/built-in-monitoring.md) is currently not available for Serverless Tier.
 - [Third-party Monitoring integrations](/tidb-cloud/third-party-monitoring-integrations.md) are currently not available for Serverless Tier.
+
+## Diagnosis
+
+- [SQL Diagnosis](/tidb-cloud/tune-performance.md) is currently not available for Serverless Tier.
 
 ## Stream data
 

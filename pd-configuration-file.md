@@ -106,6 +106,61 @@ This document only describes parameters that are not included in command-line pa
 + Default value: `50ms`
 + Minimum value: `1ms`
 
+## pd-server
+
+Configuration items related to pd-server
+
+### `server-memory-limit` <span class="version-mark">New in v6.6.0</span>
+
+> **Warning:**
+>
+> This configuration is an experimental feature. It is not recommended to use it in production environments.
+
++ The memory limit ratio for a PD instance. The value `0` means no memory limit.
++ Default value: `0`
++ Minimum value: `0`
++ Maximum value: `0.99`
+
+### `server-memory-limit-gc-trigger` <span class="version-mark">New in v6.6.0</span>
+
+> **Warning:**
+>
+> This configuration is an experimental feature. It is not recommended to use it in production environments.
+
++ The threshold ratio at which PD tries to trigger GC. When the memory usage of PD reaches the value of `server-memory-limit` * the value of `server-memory-limit-gc-trigger`, PD triggers a Golang GC. Only one GC is triggered in one minute.
++ Default value: `0.7`
++ Minimum value: `0.5`
++ Maximum value: `0.99`
+
+### `enable-gogc-tuner` <span class="version-mark">New in v6.6.0</span>
+
+> **Warning:**
+>
+> This configuration is an experimental feature. It is not recommended to use it in production environments.
+
++ Controls whether to enable the GOGC Tuner.
++ Default value: `false`
+
+### `gc-tuner-threshold` <span class="version-mark">New in v6.6.0</span>
+
+> **Warning:**
+>
+> This configuration is an experimental feature. It is not recommended to use it in production environments.
+
++ The maximum memory threshold ratio for tuning GOGC. When the memory exceeds this threshold, i.e. the value of `server-memory-limit` * the value of `gc-tuner-threshold`, GOGC Tuner stops working.
++ Default value: `0.6`
++ Minimum value: `0`
++ Maximum value: `0.9`
+
+### `flow-round-by-digit` <span class="version-mark">New in TiDB 5.1</span>
+
++ Default value: 3
++ PD rounds the lowest digits of the flow number, which reduces the update of statistics caused by the changes of the Region flow information. This configuration item is used to specify the number of lowest digits to round for the Region flow information. For example, the flow `100512` will be rounded to `101000` because the default value is `3`. This configuration replaces `trace-region-flow`.
+
+> **Note:**
+>
+> If you have upgraded your cluster from a TiDB 4.0 version to the current version, the behavior of `flow-round-by-digit` after the upgrading and the behavior of `trace-region-flow` before the upgrading are consistent by default. This means that if the value of `trace-region-flow` is false before the upgrading, the value of `flow-round-by-digit` after the upgrading is 127; if the value of `trace-region-flow` is `true` before the upgrading, the value of `flow-round-by-digit` after the upgrading is `3`.
+
 ## security
 
 Configuration items related to security
@@ -350,15 +405,6 @@ Configuration items related to replicas
 + Default value: `true`
 + See [Placement Rules](/configure-placement-rules.md).
 
-### `flow-round-by-digit` <span class="version-mark">New in TiDB 5.1</span>
-
-+ Default value: 3
-+ PD rounds the lowest digits of the flow number, which reduces the update of statistics caused by the changes of the Region flow information. This configuration item is used to specify the number of lowest digits to round for the Region flow information. For example, the flow `100512` will be rounded to `101000` because the default value is `3`. This configuration replaces `trace-region-flow`.
-
-> **Note:**
->
-> If you have upgraded your cluster from a TiDB 4.0 version to the current version, the behavior of `flow-round-by-digit` after the upgrading and the behavior of `trace-region-flow` before the upgrading are consistent by default. This means that if the value of `trace-region-flow` is false before the upgrading, the value of `flow-round-by-digit` after the upgrading is 127; if the value of `trace-region-flow` is `true` before the upgrading, the value of `flow-round-by-digit` after the upgrading is `3`.
-
 ## `label-property`
 
 Configuration items related to labels
@@ -401,7 +447,7 @@ Configuration items related to the [TiDB Dashboard](/dashboard/dashboard-intro.m
 ### `enable-telemetry`
 
 + Determines whether to enable the telemetry collection feature in TiDB Dashboard.
-+ Default value: `true`
++ Default value: `false`
 + See [Telemetry](/telemetry.md) for details.
 
 ## `replication-mode`

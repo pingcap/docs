@@ -272,7 +272,9 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
 * TiCDC performance improves significantly [#7540](https://github.com/pingcap/tiflow/issues/7540) [#7478](https://github.com/pingcap/tiflow/issues/7478) [#7532](https://github.com/pingcap/tiflow/issues/7532) @[sdojjy](https://github.com/sdojjy) [@3AceShowHand](https://github.com/3AceShowHand)
 
-    In a test scenario of the TiDB cluster, the performance of TiCDC has improved significantly. Specifically, the maximum row changes that a single TiCDC can process reaches 30K rows/s, and the replication latency is reduced to 10s. Even during TiKV and TiCDC rolling upgrade, the replication latency is less than 30s. In a disaster recovery (DR) scenario, by enabling TiCDC redo logs and Syncpoint, the TiCDC throughput of [replicating data to Kafka](/replicate-data-to-kafka.md) can be improved from 4000 rows/s to 35000 rows/s, and the replication latency can be maintained at 2s.
+    In a test scenario of the TiDB cluster, the performance of TiCDC has improved significantly. Specifically, in the scenario of replicating data to Kafka, the maximum row changes that a single TiCDC can process reaches 30K rows/s, and the replication latency is reduced to 10s. Even during TiKV and TiCDC rolling upgrade, the replication latency is less than 30s.
+
+    In a disaster recovery (DR) scenario, if TiCDC redo log and Syncpoint are enabled, the TiCDC throughput of [replicating data to Kafka](/replicate-data-to-kafka.md) can be improved from 4000 rows/s to 35000 rows/s, and the replication latency can be limited to 2s.
 
 ### Backup and restore
 
@@ -298,7 +300,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
 | Variable name | Change type | Description |
 |--------|------------------------------|------|
-|[`tidb_enable_amend_pessimistic_txn`](/system-variables.md#tidb_enable_amend_pessimistic_txn-new-in-v407)| Deprecated | Starting from v6.5.0, this variable is deprecated, and TiDB uses the [Metadata Lock](/metadata-lock.md) feature by default to avoid the `Information schema is changed` error. |
+|`tidb_enable_amend_pessimistic_txn`| Deprecated | Starting from v6.5.0, this variable is deprecated, and TiDB uses the [Metadata Lock](/metadata-lock.md) feature by default to avoid the `Information schema is changed` error. |
 | [`tidb_enable_outer_join_reorder`](/system-variables.md#tidb_enable_outer_join_reorder-new-in-v610) | Modified | Changes the default value from `OFF` to `ON` after further tests, meaning that the support of Outer Join for the [Join Reorder](/join-reorder.md) algorithm is enabled by default. |
 | [`tidb_cost_model_version`](/system-variables.md#tidb_cost_model_version-new-in-v620) | Modified | Changes the default value from `1` to `2` after further tests, meaning that Cost Model Version 2 is used for index selection and operator selection by default.  |
 | [`tidb_enable_gc_aware_memory_track`](/system-variables.md#tidb_enable_gc_aware_memory_track)  |  Modified |   Changes the default value from `ON` to `OFF`. Because the GC-aware memory track is found inaccurate in tests and causes too large analyzed memory size tracked, the memory track is disabled. In addition, in Golang 1.19, the memory tracked by the GC-aware memory track does not have much impact on the overall memory.  |
@@ -321,7 +323,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 | [`tidb_ttl_delete_rate_limit`](/system-variables.md#tidb_ttl_delete_rate_limit-new-in-v650) | Newly added | This variable is used to limit the maximum number of `DELETE` statements allowed per second in a single node in a TTL job. When this variable is set to `0`, no limit is applied. |
 | [`tidb_ttl_delete_worker_count`](/system-variables.md#tidb_ttl_delete_worker_count-new-in-v650) | Newly added | This variable is used to set the maximum concurrency of TTL jobs on each TiDB node. |
 | [`tidb_ttl_job_enable`](/system-variables.md#tidb_ttl_job_enable-new-in-v650) | Newly added | This variable is used to control whether to enable TTL jobs. If it is set to `OFF`, all tables with TTL attributes automatically stop cleaning up expired data. |
-| [`tidb_ttl_job_run_interval`](/system-variables.md#tidb_ttl_job_run_interval-new-in-v650) | Newly added | This variable is used to control the scheduling interval of the TTL job in the background. For example, if the current value is set to `1h0m0s`, each table with TTL attributes will clean up expired data once every hour. |
+| `tidb_ttl_job_run_interval` | Newly added | This variable is used to control the scheduling interval of the TTL job in the background. For example, if the current value is set to `1h0m0s`, each table with TTL attributes will clean up expired data once every hour. |
 | [`tidb_ttl_job_schedule_window_start_time`](/system-variables.md#tidb_ttl_job_schedule_window_start_time-new-in-v650) | Newly added | This variable is used to control the start time of the scheduling window of the TTL job in the background. When you modify the value of this variable, be cautious that a small window might cause the cleanup of expired data to fail. |
 | [`tidb_ttl_job_schedule_window_end_time`](/system-variables.md#tidb_ttl_job_schedule_window_end_time-new-in-v650) | Newly added | This variable is used to control the end time of the scheduling window of the TTL job in the background. When you modify the value of this variable, be cautious that a small window might cause the cleanup of expired data to fail. |
 | [`tidb_ttl_scan_batch_size`](/system-variables.md#tidb_ttl_scan_batch_size-new-in-v650) | Newly added | This variable is used to set the `LIMIT` value of each `SELECT` statement used to scan expired data in a TTL job. |
@@ -359,7 +361,7 @@ Compared with the previous LTS 6.1.0, 6.5.0 not only includes new features, impr
 
 ## Deprecated feature
 
-Starting from v6.5.0, the [`AMEND TRANSACTION`](/system-variables.md#tidb_enable_amend_pessimistic_txn-new-in-v407) mechanism introduced in v4.0.7 is deprecated and replaced by [Metadata Lock](/metadata-lock.md).
+Starting from v6.5.0, the `AMEND TRANSACTION` mechanism introduced in v4.0.7 is deprecated and replaced by [Metadata Lock](/metadata-lock.md).
 
 ## Improvements
 

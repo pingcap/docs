@@ -28,7 +28,7 @@ Before you start working with TiDB, you need to understand some important mechan
 
 - Read the [TiDB Transaction Overview](/transaction-overview.md) to understand how transactions work in TiDB, or check out the [Transaction Notes for Application Developers](/develop/dev-guide-transaction-overview.md) to learn about transaction knowledge required for application development.
 - Understand [the way applications interact with TiDB](#the-way-applications-interact-with-tidb).
-- To learn core components and concepts of building up the distributed database TiDB and TiDB Cloud, refer to the free online course [TiDB Architecture Basics](https://freeclasses.edu.pingcap.com/catalog/info/id:203/?utm_source=docs-dev-guide).
+- To learn core components and concepts of building up the distributed database TiDB and TiDB Cloud, refer to the free online course [Introduction to TiDB](https://eng.edu.pingcap.com/catalog/info/id:203/?utm_source=docs-dev-guide).
 
 ## TiDB transaction mechanisms
 
@@ -56,20 +56,31 @@ TiDB is highly compatible with the MySQL protocol and supports [most MySQL synta
 
 Since TiDB is compatible with the MySQL protocol and MySQL syntax, most of the ORMs that support MySQL are also compatible with TiDB.
 
-## Read More
-
-- [Quick Start](/develop/dev-guide-build-cluster-in-cloud.md)
-- [Choose Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)
+## Read more
 
 <CustomContent platform="tidb">
 
+- [Quick Start](/develop/dev-guide-build-cluster-in-cloud.md)
+- [Choose Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)
 - [Connect to TiDB](/develop/dev-guide-connect-to-tidb.md)
-
-</CustomContent>
-
 - [Database Schema Design](/develop/dev-guide-schema-design-overview.md)
 - [Write Data](/develop/dev-guide-insert-data.md)
 - [Read Data](/develop/dev-guide-get-data-from-single-table.md)
 - [Transaction](/develop/dev-guide-transaction-overview.md)
 - [Optimize](/develop/dev-guide-optimize-sql-overview.md)
 - [Example Applications](/develop/dev-guide-sample-application-spring-boot.md)
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- [Quick Start](/develop/dev-guide-build-cluster-in-cloud.md)
+- [Choose Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)
+- [Database Schema Design](/develop/dev-guide-schema-design-overview.md)
+- [Write Data](/develop/dev-guide-insert-data.md)
+- [Read Data](/develop/dev-guide-get-data-from-single-table.md)
+- [Transaction](/develop/dev-guide-transaction-overview.md)
+- [Optimize](/develop/dev-guide-optimize-sql-overview.md)
+- [Example Applications](/develop/dev-guide-sample-application-spring-boot.md)
+
+</CustomContent>

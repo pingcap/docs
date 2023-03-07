@@ -8,7 +8,9 @@ aliases: ['/docs/dev/br/backup-and-restore-faq/','/tidb/dev/pitr-troubleshoot/',
 
 This document lists the frequently asked questions (FAQs) and the solutions of TiDB Backup & Restore (BR).
 
-## Performance issues of backup and restore
+## What should I do to quickly recover data after mistakenly deleting or updating data?
+
+TiDB v6.4.0 introduces the flashback feature. You can use this feature to quickly recover data within the GC time to a specified point in time. Therefore, if misoperations occur, you can use this feature to recover data. For details, see [Flashback Cluster](/sql-statements/sql-statement-flashback-to-timestamp.md) and [Flashback Database](/sql-statements/sql-statement-flashback-database.md).
 
 ## In TiDB v5.4.0 and later versions, when backup tasks are performed on the cluster under a heavy workload, why does the speed of backup tasks become slow?
 
@@ -26,6 +28,12 @@ In addition, auto-tune reduces the default number of threads used by backup task
 When you perform backup tasks on an offline cluster, to speed up the backup, you can modify the value of `backup.num-threads` to a larger number using `tikv-ctl`.
 
 ## PITR issues
+
+### What is the difference between [PITR](/br/br-pitr-guide.md) and [cluster flashback](/sql-statements/sql-statement-flashback-to-timestamp.md)?
+
+From the perspective of use cases, PITR is usually used to restore the data of a cluster to a specified point in time when the cluster is completely out of service or the data is corrupted and cannot be recovered using other solutions. To use PITR, you need a new cluster for data recovery. The cluster flashback feature is specifically designed for the data error scenarios caused by user mis-operations or other factors, which allows you to restore the data of a cluster in-place to the latest timestamp before the data errors occur.
+
+In most cases, flashback is a better recovery solution than PITR for data errors caused by human mistakes, as it has a much shorter RPO (close to zero) and RTO. However, when a cluster is completely unavailable, because flashback cannot run at this time, PITR is the only solution to recover the cluster in this case. Therefore, PITR is always a must-have solution when you develop database disaster recovery strategies, even though it has a longer RPO (up to 5 minutes) and RTO than flashback.
 
 ### When the upstream database imports data using TiDB Lightning in the physical import mode, the log backup feature becomes unavailable. Why?
 
