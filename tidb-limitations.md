@@ -63,7 +63,6 @@ You can adjust the size limit via the [`txn-entry-size-limit`](/tidb-configurati
 
 </CustomContent>
 
-
 ## Limitations on data types
 
 | Type       | Upper limit   |
