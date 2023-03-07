@@ -58,6 +58,6 @@ Fields in the `TABLE_STORAGE_STATS` table are described as follows:
 * `TABLE_ID`: The ID of the table.
 * `PEER_COUNT`: The number of replicas of the table.
 * `REGION_COUNT`: The number of Regions.
-* `EMPTY_REGION_COUNT`: The number of Regions that do not contain data of this table.
+* `EMPTY_REGION_COUNT`: The number of Regions that do not contain data in this table.
 * `TABLE_SIZE`: The total size of the table.
 * `TABLE_KEYS`: The total number of records in the table.
