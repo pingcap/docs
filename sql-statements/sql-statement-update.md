@@ -71,17 +71,7 @@ mysql> SELECT * FROM t1;
 
 ## MySQL compatibility
 
-TiDB always uses the original value of a column when evaluating expressions. For example:
-
-```sql
-CREATE TABLE t (a int, b int);
-INSERT INTO t VALUES (1,2);
-UPDATE t SET a = a+1,b=a;
-```
-
-In MySQL, the column `b` is updated to 2 because it is set to the value of `a`, and the value of `a` (which is 1) is updated to `a+1` (which is 2) in the same statement. 
-
-TiDB follows the more standard SQL behavior, and updates `b` to 1.
+This statement is expected to be fully compatible with MySQL. If you find any compatibility difference, [reported it via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
 
 ## See also
 
