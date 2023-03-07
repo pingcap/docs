@@ -205,7 +205,7 @@ TiDB supports changing the priority on a [global](/system-variables.md#tidb_forc
 
 - `LOW_PRIORITY`: this statement has a low priority, that is, TiDB reduces the priority of this statement during the execution period.
 
-- `DELAYED`: this statement has normal priority. This is the same as the `NO_PRIORITY` setting for `tidb_force_priority`.
+- `DELAYED`: this statement has normal priority and is the same as the `NO_PRIORITY` setting for `tidb_force_priority`.
 
 You can combine the above two parameters with the DML of TiDB to use them. For example:
 
