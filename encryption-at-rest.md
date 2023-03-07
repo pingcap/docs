@@ -189,7 +189,7 @@ To create a key on AWS, refer to the steps to create a key for TiKV.
 
 ### Configure encryption
 
-To enable encryption, you can add the encryption section in the tiflash-learner.toml configuration file:
+To enable encryption, you can add the encryption section in the `tiflash-learner.toml` configuration file:
 
 ```
 [security.encryption]
