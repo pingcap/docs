@@ -29,7 +29,7 @@ ADMIN CHECK INDEX tbl idx ;
 ERROR 1105 (HY000): handle &kv.CommonHandle{encoded:[]uint8{0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xf8}, colEndOffsets:[]uint16{0xa}}, index:types.Datum{k:0x5, decimal:0x0, length:0x0, i:0, collation:"utf8mb4_bin", b:[]uint8{0x0}, x:interface {}(nil)} != record:<nil>
 ```
 
-It can be seen from the error message of the `SELECT` query that, the `tbl` table contains 2 rows of data and 3 rows of index data, which means inconsistent row data and index data. At the same time, at least one index is in a dangling state. In this case, you can use the `ADMIN CLEANUP INDEX` statement to delete the dangling index:
+It can be seen from the error message of the `SELECT` query that, the `tbl` table contains two rows of data and three rows of index data, which means inconsistent row and index data. At the same time, at least one index is in dangling state. In this case, you can use the `ADMIN CLEANUP INDEX` statement to delete the dangling index:
 
 ```sql
 ADMIN CLEANUP INDEX tbl idx;
@@ -46,7 +46,7 @@ ADMIN CLEANUP INDEX tbl idx;
 +---------------+
 ```
 
-You can execute the `ADMIN CHECK INDEX` statement again to check the consistency of data and index, and verify whether the data has been restored to normal state:
+You can execute the `ADMIN CHECK INDEX` statement again to check the consistency of data and index, and verify whether the data has been restored to a normal state:
 
 ```sql
 ADMIN CHECK INDEX tbl idx;
@@ -56,7 +56,7 @@ Query OK, 0 rows affected (0.01 sec)
 ### Precautions
 
 * When the data and index are inconsistent due to the loss of replicas:
-    * There might be loss of both row data and index data. To address the issue, use the `ADMIN CLEANUP INDEX`and [`ADMIN RECOVER INDEX`](/sql-statements/sql-statement-admin-recover.md) statements together to restore the consistency of row data and index data.
+    * There might be a loss of both row data and index data. To restore the consistency, use the `ADMIN CLEANUP INDEX` and [`ADMIN RECOVER INDEX`](/sql-statements/sql-statement-admin-recover.md) statements together.
     * The `ADMIN CLEANUP INDEX` statement is always executed in a single thread. When the table data is large, it is recommended to recover the index data by rebuilding the index.
     * If you use the enterprise edition of TiDB, you can contact the support engineer for help.
 * The `ADMIN CLEANUP INDEX` statement is not atomic: if the statement is interrupted during execution, it is recommended to execute it again until it succeeds.
