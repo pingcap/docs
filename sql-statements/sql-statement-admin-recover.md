@@ -5,7 +5,7 @@ summary: An overview of the usage of ADMIN RECOVER INDEX for the TiDB database.
 
 # ADMIN RECOVER INDEX
 
-When the row data and index data are inconsistent, you can use the `ADMIN RECOVER INDEX` statement to recover the consistency based on the redundant indexes. Note that this syntax does not support [foreign key constraints](/foreign-key.md) yet.
+When the row data and index data are inconsistent, you can use the `ADMIN RECOVER INDEX` statement to recover the consistency based on the redundant indexes. Note that this syntax does not support foreign key constraints yet.
 
 ## Synopsis
 
