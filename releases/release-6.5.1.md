@@ -48,7 +48,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
     + Backup & Restore (BR)
 
         - (dup: release-6.6.0.md > Improvements> Tools> Backup & Restore (BR))- Optimize the concurrency of downloading log backup files on the TiKV side to improve the performance of PITR recovery in regular scenarios [#14206](https://github.com/tikv/tikv/issues/14206) @[YuJuncen](https://github.com/YuJuncen)
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
 
     + TiCDC
 
