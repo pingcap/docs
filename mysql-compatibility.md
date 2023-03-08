@@ -154,7 +154,7 @@ In TiDB, all supported DDL changes are performed online. Compared with DDL opera
     - `PARTITION BY KEY`
     - `PARTITION BY LINEAR KEY`
     - `SUBPARTITION`
-* And the following `ALTER TABLE` commands are not supported:
+* The following `ALTER TABLE` commands are not supported:
     - `{CHECK|OPTIMIZE|REPAIR|IMPORT|DISCARD|REBUILD|REORGANIZE|COALESCE} PARTITION`
 
     For more details, see [Partitioning](/partitioned-table.md).
