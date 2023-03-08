@@ -109,7 +109,7 @@
         -   [オペレーティング システムのチューニング](/tune-operating-system.md)
     -   ソフトウェアのチューニング
         -   コンフィグレーション
-            -   [TiDB メモリの調整](/configure-memory-usage.md)
+            -   [TiDB メモリのチューニング](/configure-memory-usage.md)
             -   [TiKV スレッドの調整](/tune-tikv-thread-performance.md)
             -   [TiKV メモリの調整](/tune-tikv-memory-performance.md)
             -   [TiKV Follower Readの調整](/follower-read.md)
@@ -140,7 +140,7 @@
                 -   [パーティションのプルーニング](/partition-pruning.md)
                 -   [TopN とリミット プッシュ ダウン](/topn-limit-push-down.md)
                 -   [結合したテーブルの再配置](/join-reorder.md)
-            -   物理的な最適化
+            -   物理的最適化
                 -   [概要](/sql-physical-optimization.md)
                 -   [インデックスの選択](/choose-index.md)
                 -   [統計](/statistics.md)
@@ -492,6 +492,8 @@
             -   [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)
             -   [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)
             -   [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md)
+            -   [`ADMIN CLEANUP`](/sql-statements/sql-statement-admin-cleanup.md)
+            -   [`ADMIN RECOVER INDEX`](/sql-statements/sql-statement-admin-recover.md)
             -   [`ADMIN SHOW DDL [JOBS|JOB QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)
             -   [`ADMIN SHOW TELEMETRY`](/sql-statements/sql-statement-admin-show-telemetry.md)
             -   [`ALTER DATABASE`](/sql-statements/sql-statement-alter-database.md)
