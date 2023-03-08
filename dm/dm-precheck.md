@@ -129,6 +129,7 @@ Prechecks can find potential risks in your environments. It is not recommended t
 | `table_schema`          | Checks the compatibility of the table schemas in the upstream MySQL tables. |
 | `schema_of_shard_tables`| Checks the consistency of the table schemas in the upstream MySQL multi-instance shards. |
 | `auto_increment_ID`     | Checks whether the auto-increment primary key conflicts in the upstream MySQL multi-instance shards. |
+|`online_ddl`| Checks whether the upstream is in the process of [online-DDL](/dm/feature-online-ddl.md). |
 
 > **Note:**
 >
