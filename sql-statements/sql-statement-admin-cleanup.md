@@ -53,14 +53,16 @@ ADMIN CHECK INDEX tbl idx;
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-### Precautions
-
-* When the data and index are inconsistent due to the loss of replicas:
-    * There might be a loss of both row data and index data. To restore the consistency, use the `ADMIN CLEANUP INDEX` and [`ADMIN RECOVER INDEX`](/sql-statements/sql-statement-admin-recover.md) statements together.
-    * The `ADMIN CLEANUP INDEX` statement is always executed in a single thread. When the table data is large, it is recommended to recover the index data by rebuilding the index.
-    * If you use the enterprise edition of TiDB, you can contact the support engineer for help.
-* The `ADMIN CLEANUP INDEX` statement is not atomic: if the statement is interrupted during execution, it is recommended to execute it again until it succeeds.
-* When you execute the `ADMIN CLEANUP INDEX` statement, the corresponding table or index is not locked and TiDB allows other sessions to modify the table records at the same time. However, in this case, `ADMIN CLEANUP INDEX` might not be able to handle all table records correctly. Therefore, when you execute `ADMIN CLEANUP INDEX`, avoid modifying the table data at the same time.
+> **Note:**
+>
+> When the data and index are inconsistent due to the loss of replicas:
+>
+> - There might be a loss of both row data and index data. To restore the consistency, use the `ADMIN CLEANUP INDEX` and [`ADMIN RECOVER INDEX`](/sql-statements/sql-statement-admin-recover.md) statements together.
+> - The `ADMIN CLEANUP INDEX` statement is always executed in a single thread. When the table data is large, it is recommended to recover the index data by rebuilding the index.
+> - When you execute the `ADMIN CLEANUP INDEX` statement, the corresponding table or index is not locked and TiDB allows other sessions to modify the table records at the same time. However, in this case, `ADMIN CLEANUP INDEX` might not be able to handle all table records correctly. Therefore, when you execute `ADMIN CLEANUP INDEX`, avoid modifying the table data at the same time.
+> - If you use the enterprise edition of TiDB, you can contact the support engineer for help.
+>
+> The `ADMIN CLEANUP INDEX` statement is not atomic: if the statement is interrupted during execution, it is recommended to execute it again until it succeeds.
 
 ## MySQL compatibility
 
