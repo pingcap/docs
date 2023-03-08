@@ -12,7 +12,6 @@ TiDB version: 6.5.1
 Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-tidb) | [Production deployment](https://docs.pingcap.com/tidb/v6.5/production-deployment-using-tiup) | [Installation packages](https://www.pingcap.com/download/?version=v6.5.1#version-list)
 
 ## Compatibility changes
-## 兼容性变更
 
 - Starting from February 20, 2023, the [telemetry feature](/telemetry.md) is disabled by default in new versions of TiDB and TiDB Dashboard, including v6.5.1, and usage information is not collected and shared with PingCAP. Before upgrading to these versions, if the cluster uses the default telemetry configuration, the telemetry feature is disabled after the upgrade. See [TiDB Release Timeline](/releases/release-timeline.md) for a specific version.
 
@@ -87,7 +86,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
     - 修复时区使用可能导致数据索引不一致问题 [#40710](https://github.com/pingcap/tidb/issues/40710) @[wjhuang2016](https://github.com/wjhuang2016)
     - 修复 batch cop 执行过程 scan detail 信息不准确的问题 [#41582](https://github.com/pingcap/tidb/issues/41582) @[you06](https://github.com/you06)
     - 修复 cop 并发度上限不受限制的问题 [#41134](https://github.com/pingcap/tidb/issues/41134) @[you06](https://github.com/you06)
-    - 修复 cursour read 中 statement context 被错误 cache 的问题 [#39998](https://github.com/pingcap/tidb/issues/39998) @[zyguan](https://github.com/zyguan) 
+    - 修复 cursour read 中 statement context 被错误 cache 的问题 [#39998](https://github.com/pingcap/tidb/issues/39998) @[zyguan](https://github.com/zyguan)
     - note [#issue](链接) @[贡献者 GitHub ID](链接)
 
 + TiKV
