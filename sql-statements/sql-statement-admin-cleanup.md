@@ -5,7 +5,7 @@ summary: An overview of the usage of ADMIN CLEANUP for the TiDB database.
 
 # ADMIN CLEANUP INDEX
 
-The `ADMIN CLEANUP INDEX` statement is used to delete redundant indexes from a table when the table has inconsistent data and index. Note that this syntax does not support [foreign key constraints](/foreign-key.md) yet.
+The `ADMIN CLEANUP INDEX` statement is used to delete redundant indexes from a table when the table has inconsistent data and index. Note that this syntax does not support foreign key constraints yet.
 
 ## Synopsis
 
