@@ -91,7 +91,7 @@ You cannot acquire table locks on tables in the following databases:
 
 - `INFORMATION_SCHEMA`
 - `PERFORMANCE_SCHEMA`
-- `METRICS_SCHEMA` 
+- `METRICS_SCHEMA`
 - `mysql`
 
 ## MySQL compatibility
@@ -99,7 +99,7 @@ You cannot acquire table locks on tables in the following databases:
 ### Table lock acquisition
 
 - In TiDB, if session A has already held a table lock, an error is returned if session B attempts to write to the table. In MySQL, the write request of session B is blocked until session A releases the table lock. Requests for locking the table from other sessions are blocked until the current session releases the `WRITE` lock.
-- In TiDB, if the `LOCK TABLES` statement must wait due to locks held by other sessions on any of the tables, an error is returned upon the execution of this statement. In MySQL, this statement is blocked until the lock is acquired.
+- In TiDB, if the lock that the `LOCK TABLES` statement needs is held by another session, the `LOCK TABLES` statement must wait, and an error is returned upon the execution of this statement. In MySQL, this statement is blocked until the lock is acquired.
 - In TiDB, the `LOCK TABLES` statement is effective in the whole cluster. In MySQL, this statement is effective only in the current MySQL server, and is not compatible with the NDB cluster.
 
 ### Table lock release
