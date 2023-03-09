@@ -29,9 +29,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
 
 + TiDB
 
-    - Starting from v6.5.1, TiDB deployed by TiDB Operator v1.4.3 or higher supports IPv6 addresses. This means that TiDB can support a larger address space and bring you better security and network performance.
+    - Starting from v6.5.1, the TiDB cluster deployed by TiDB Operator v1.4.3 or higher supports IPv6 addresses. This means that TiDB can support a larger address space and bring you better security and network performance.
 
-        - Full IPv6 addressing support: TiDB supports using IPv6 addresses for all network connections, including client connections, internal communication between nodes, and communication with external systems.
+        - Full support for IPv6 addressing: TiDB supports using IPv6 addresses for all network connections, including client connections, internal communication between nodes, and communication with external systems.
         - Dual-stack support: If you are not ready to fully switch to IPv6 yet, TiDB also supports dual-stack networks. This means that you can use both IPv4 and IPv6 addresses in the same TiDB cluster and choose a network deployment mode that prioritizes IPv6 by configuration.
 
       For more information on IPv6 deployment, see [TiDB on Kubernetes documentation]().
