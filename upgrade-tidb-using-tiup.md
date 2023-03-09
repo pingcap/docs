@@ -24,7 +24,7 @@ This document is targeted for the following upgrade paths:
 
 > **Note:**
 >
-> If your cluster to be upgraded is v3.1 or an earlier version (v3.0 or v2.1), the direct upgrade to v6.5.1 is not supported. You need to upgrade your cluster first to v4.0 and then to v6.5.1.
+> If your cluster to be upgraded is v3.1 or an earlier version (v3.0 or v2.1), the direct upgrade to v6.5.0 or a later v6.5.x version is not supported. You need to upgrade your cluster first to v4.0 and then to the target TiDB version.
 
 ## Upgrade caveat
 
