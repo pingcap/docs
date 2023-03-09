@@ -58,7 +58,7 @@ When you start the TiDB cluster, you can use command-line options or environment
 
 ## `--initialize-sql-file`
 
-- The SQL script to be executed when the TiDB cluster is started for the first time. For details, see [configuration item `initialize-sql-file`](/tidb-configuration-file.md#initialize-sql-file-new-in-v660)
+- The SQL script to be executed when the TiDB cluster is started for the first time. For details, see [configuration item `initialize-sql-file`](/tidb-configuration-file.md#initialize-sql-file-new-in-v651)
 - Default: `""`
 
 ## `-L`
