@@ -1809,6 +1809,15 @@ Configuration items related to Raft Engine.
 + Determines whether to recycle stale log files in Raft Engine. When it is enabled, logically purged log files will be reserved for recycling. This reduces the long tail latency on write workloads.
 + Default value: `false`
 
+### `prefill-for-recycle` <span class="version-mark">New in 7.0.0</span>
+
+> **Note:**
+>
+> This configuration item is only available when [`eable-log-recycle`](#enable-log-recycle-new-in-v630) >= 2.
+
++ Whether to generate empty log files for log recycling in Raft Engine. When it is enabled, Raft Engine will automatically fill a batch of empty log files for log recycling during initialization, making log recycling effective immediately after initialization.
++ Default value: `false`
+
 ## security
 
 Configuration items related to security.
