@@ -5,7 +5,7 @@ summary: Learn about the compatibility changes, improvements, and bug fixes in T
 
 # TiDB 6.5.1 Release Notes
 
-Release date: xx xx, 2023
+Release date: March 10, 2023
 
 TiDB version: 6.5.1
 
