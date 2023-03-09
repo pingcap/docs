@@ -22,7 +22,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
 - Starting from v1.11.3, the telemetry feature is disabled by default in newly deployed TiUP, and usage information is not collected. If you upgrade from a TiUP version earlier than v1.11.3 to v1.11.3 or a later version, the telemetry feature keeps the same status as before the upgrade.
 
 - (dup: release-6.1.4.md > Compatibility changes> TiDB)- No longer support modifying column types on partitioned tables because of potential correctness issues [#40620](https://github.com/pingcap/tidb/issues/40620) @[mjonss](https://github.com/mjonss)
+
 - The default value of the TiKV [`advance-ts-interval`](/tikv-configuration-file.md#advance-ts-interval) configuration item is changed from `1s` to `20s`. You can modify this configuration item to reduce the latency and improve the timeliness of the Stale Read data. See [Reduce Stale Read latency](/stale-read.md#reduce-stale-read-latency) for details.
+
 ## Improvements
 
 + TiDB
