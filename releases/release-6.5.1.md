@@ -22,14 +22,21 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
 - Starting from v1.11.3, the telemetry feature is disabled by default in newly deployed TiUP, and usage information is not collected. If you upgrade from a TiUP version earlier than v1.11.3 to v1.11.3 or a later version, the telemetry feature keeps the same status as before the upgrade.
 
 - (dup: release-6.1.4.md > Compatibility changes> TiDB)- No longer support modifying column types on partitioned tables because of potential correctness issues [#40620](https://github.com/pingcap/tidb/issues/40620) @[mjonss](https://github.com/mjonss)
-
-## 改进提升
+- The default value of the TiKV [`advance-ts-interval`](/tikv-configuration-file.md#advance-ts-interval) configuration item is changed from `1s` to `20s`. You can modify this configuration item to reduce the latency and improve the timeliness of the Stale Read data. See [Reduce Stale Read latency](/stale-read.md#reduce-stale-read-latency) for details.
+## Improvements
 
 + TiDB
 
+    - Starting from v6.5.1, TiDB deployed by TiDB Operator v1.4.3 or higher supports IPv6 addresses. This means that TiDB can support a larger address space and bring you better security and network performance.
+
+        - Full IPv6 addressing support: TiDB supports using IPv6 addresses for all network connections, including client connections, internal communication between nodes, and communication with external systems.
+        - Dual-stack support: If you are not ready to fully switch to IPv6 yet, TiDB also supports dual-stack networks. This means that you can use both IPv4 and IPv6 addresses in the same TiDB cluster and choose a network deployment mode that prioritizes IPv6 by configuration.
+
+      For more information on IPv6 deployment, see [TiDB on Kubernetes documentation]().
+
     - (dup: release-6.6.0.md > # DB operations)* Support specifying the SQL script executed upon TiDB cluster initialization [#35624](https://github.com/pingcap/tidb/issues/35624) @[morgo](https://github.com/morgo)
 
-        When you start a TiDB cluster for the first time, you can specify the SQL script to be executed by configuring the command line parameter `--initialize-sql-file`. You can use this feature when you need to perform such operations as modifying the value of a system variable, creating a user, or granting privileges. For more information, see [documentation](https://docs.pingcap.com/tidb/v6.5/tidb-configuration-file#initialize-sql-file-new-in-v651).
+        TiDB v6.5.1 adds a new configuration item [`initialize-sql-file`](https://docs.pingcap.com/tidb/v6.5/tidb-configuration-file#initialize-sql-file-new-in-v651). When you start a TiDB cluster for the first time, you can specify the SQL script to be executed by configuring the command line parameter `--initialize-sql-file`. You can use this feature when you need to perform such operations as modifying the value of a system variable, creating a user, or granting privileges. For more information, see [documentation](https://docs.pingcap.com/tidb/v6.5/tidb-configuration-file#initialize-sql-file-new-in-v651).
 
     - (dup: release-6.6.0.md > Improvements> TiDB)- Clear expired region cache regularly to avoid memory leak and performance degradation [#40461](https://github.com/pingcap/tidb/issues/40461) @[sticnarf](https://github.com/sticnarf)
     - 添加 `-proxy protocol fallbackable` 选项，让 TiDB 可以处理客户端 IP 在 proxy 协议允许的 IP 列表中的原始连接。[#41409](https://github.com/pingcap/tidb/issues/41409) @[blacktear23](https://github.com/blacktear23)
@@ -45,7 +52,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
 
 + TiFlash
 
-    - Improve the TiFlash startup speed greatly under large data volume  [#6395](https://github.com/pingcap/tiflash/issues/6395) @[hehechen](https://github.com/hehechen)
+    - Improve the TiFlash startup speed greatly under large data volume [#6395](https://github.com/pingcap/tiflash/issues/6395) @[hehechen](https://github.com/hehechen)
 
 + Tools
 
@@ -59,7 +66,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
         - (dup: release-6.1.4.md > Improvements> Tools> TiCDC)- Support storing redo logs to GCS- or Azure-compatible object storage [#7987](https://github.com/pingcap/tiflow/issues/7987) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - (dup: release-6.6.0.md > Improvements> Tools> TiCDC)- Implement MQ sink and MySQL sink in the asynchronous mode to improve the sink throughput [#5928](https://github.com/pingcap/tiflow/issues/5928) @[amyangfei](https://github.com/amyangfei) @[CharlesCheung96](https://github.com/CharlesCheung96)
 
-## 错误修复
+## Bug fixes
 
 + TiDB
 
