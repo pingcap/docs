@@ -43,6 +43,10 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
     - 提高unified read pool的线程上限至CPU vCore的10倍 [#13690](https://github.com/tikv/tikv/issues/13690) @[v01dstar](https://github.com/v01dstar)
     - 延长resolved-ts.advance-ts-interval到20s， 从而节省跨域流量 [#14100](https://github.com/tikv/tikv/issues/14100) @[overvenus](https://github.com/overvenus)
 
++ TiFlash
+
+    - 显著提升 TiFlash 在大数据量下的启动速度 [#6395](https://github.com/pingcap/tiflash/issues/6395) @[hehechen](https://github.com/hehechen)
+
 + Tools
 
     + Backup & Restore (BR)
@@ -63,8 +67,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
     - (dup: release-6.1.4.md > Bug fixes> TiDB)- Fix the issue that the `INSERT` or `REPLACE` statements might panic in long session connections [#40351](https://github.com/pingcap/tidb/issues/40351) @[winoros](https://github.com/winoros)
     - (dup: release-6.6.0.md > Bug fixes> TiDB)- Fix the issue that `auto analyze` causes graceful shutdown to take a long time [#40038](https://github.com/pingcap/tidb/issues/40038) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
     - (dup: release-6.6.0.md > Bug fixes> TiDB)- Fix the issue that data race might occur during DDL ingestion [#40970](https://github.com/pingcap/tidb/issues/40970) @[tangenta](https://github.com/tangenta)
-    - (dup: release-6.6.0.md > Bug fixes> TiDB)- Fix the issue that data might be inconsistent with the index when a unique index is created in the ingest mode [#40464](https://github.com/pingcap/tidb/issues/40464) @[tangenta](https://github.com/tangenta)
-    - (dup: release-6.6.0.md > Bug fixes> TiDB)- Fix the issue that a unique index might still produce duplicate data in some cases [#40217](https://github.com/pingcap/tidb/issues/40217) @[tangenta](https://github.com/tangenta)
     - (dup: release-6.6.0.md > Bug fixes> TiDB)- Fix the issue that data race might occur when an index is added [#40879](https://github.com/pingcap/tidb/issues/40879) @[tangenta](https://github.com/tangenta)
     - (dup: release-6.6.0.md > Bug fixes> TiDB)- Fix the issue that the adding index operation is inefficient due to invalid Region cache when there are many Regions in a table [#38436](https://github.com/pingcap/tidb/issues/38436) @[tangenta](https://github.com/tangenta)
     - (dup: release-6.6.0.md > Bug fixes> TiDB)- Fix the issue that TiDB might deadlock during initialization [#40408](https://github.com/pingcap/tidb/issues/40408) @[Defined2014](https://github.com/Defined2014)
@@ -100,6 +102,10 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
     - 修复在分区表上创建 Global Binding 后可能导致 TiDB 启动错误的问题 [#40402](https://github.com/pingcap/tidb/issues/40402) @[Yisaer](https://github.com/Yisaer)
     - 修复慢日志中查询计划算子可能缺失的问题 [#41461](https://github.com/pingcap/tidb/issues/41461) @[time-and-fate](https://github.com/time-and-fate)
     - 修复错误下推包含虚拟列的 TopN 算子到 TiKV/TiFlash 导致结果错误的问题 [#41370](https://github.com/pingcap/tidb/issues/41370) @[Dousir9](https://github.com/Dousir9)
+    - 修复添加索引时数据不一致的问题 [#40698](https://github.com/pingcap/tidb/issues/40698）[#40730](https://github.com/pingcap/tidb/issues/40730）[#41459](https://github.com/pingcap/tidb/issues/41459）[#40464](https://github.com/pingcap/tidb/issues/40464）[#40217](https://github.com/pingcap/tidb/issues/40217）@[tangenta](https://github.com/tangenta)
+    - 修复添加索引时 Pessimistic lock not found 的报错问题 [#41515](https://github.com/pingcap/tidb/issues/41515) @[tangenta](https://github.com/tangenta)
+    - 修复添加唯一索引时误报重复键的问题 [#41630](https://github.com/pingcap/tidb/issues/41630) @[tangenta](https://github.com/tangenta)
+    - 修复 TiDB 使用 `paging` 时性能下降的问题 [#40741](https://github.com/pingcap/tidb/issues/40741) @[solotzg](https://github.com/solotzg)
 
 + TiKV
 
@@ -140,7 +146,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
         - (dup: release-6.6.0.md > Bug fixes> Tools> Backup & Restore (BR))- Fix the issue that the frequency of `resolve lock` is too high when there is no PITR backup task in the TiDB cluster [#40759](https://github.com/pingcap/tidb/issues/40759) @[joccau](https://github.com/joccau)
         - (dup: release-6.6.0.md > Bug fixes> Tools> Backup & Restore (BR))- Fix the issue that restoring data to a cluster on which the log backup is running causes the log backup file to be unrecoverable [#40797](https://github.com/pingcap/tidb/issues/40797) @[Leavrth](https://github.com/Leavrth)
         - 修复全量备份失败后，从断点重启备份 panic 的问题 [#40704](https://github.com/pingcap/tidb/issues/40704) @[Leavrth](https://github.com/Leavrth)
-        - 修复 pitr 错误被覆盖的问题 [#40576](https://github.com/pingcap/tidb/issues/40576)@[Leavrth](https://github.com/Leavrth)
+        - 修复 PITR 错误被覆盖的问题 [#40576](https://github.com/pingcap/tidb/issues/40576)@[Leavrth](https://github.com/Leavrth)
+        - 修复 PITR 备份任务在 advance owner 与 gc owner 不同情况下 checkpoint 不推进的问题 [#41806](https://github.com/pingcap/tidb/issues/41806) @[joccau](https://github.com/joccau)
 
     + TiCDC
 
