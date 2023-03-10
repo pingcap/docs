@@ -64,6 +64,7 @@ This document lists the features supported in each TiDB version. Note that suppo
 | [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | [User-defined variables](/user-defined-variables.md)         | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
 | [`BATCH [ON COLUMN] LIMIT INTEGER DELETE`](/sql-statements/sql-statement-batch.md) | Y | N | N | N | N | N | N | N |
+| [Table Lock](/sql-statements/sql-statement-lock-tables-and-unlock-tables.md)  | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
 
 ## Advanced SQL features
 
