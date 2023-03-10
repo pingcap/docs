@@ -23,7 +23,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
 
 - No longer support modifying column types on partitioned tables because of potential correctness issues. [#40620](https://github.com/pingcap/tidb/issues/40620) @[mjonss](https://github.com/mjonss)
 
-- The default value of the TiKV [`advance-ts-interval`](/tikv-configuration-file.md#advance-ts-interval) configuration item is changed from `1s` to `20s`. You can modify this configuration item to reduce the latency and improve the timeliness of the Stale Read data. See [Reduce Stale Read latency](/stale-read.md#reduce-stale-read-latency) for details.
+- The default value of the TiKV [`advance-ts-interval`](/tikv-configuration-file.md#advance-ts-interval) configuration item is changed from `1s` to `20s`. You can modify this configuration item to reduce the latency and improve the timeliness of the Stale Read data. See [Reduce Stale Read latency](https://docs.pingcap.com/tidb/stable/stale-read#reduce-stale-read-latency) for details.
 
 ## Improvements
 
