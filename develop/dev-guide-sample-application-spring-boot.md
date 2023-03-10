@@ -989,7 +989,7 @@ This application is built using [Spring Initializr](https://start.spring.io/). Y
 
 **Spring Boot**
 
-- Latest Stable Version
+- Latest stable version
 
 **Project Metadata**
 
