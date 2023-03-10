@@ -53,7 +53,7 @@ The meaning of each column field in the `TIDB_TRX` table is as follows:
 * `USER`: The name of the user who performs the transaction.
 * `DB`: The current default database name of the session in which the transaction is executed.
 * `ALL_SQL_DIGESTS`: The digest list of statements that have been executed by the transaction. The list is shown as a string array in JSON format. Each transaction records at most the first 50 statements. Using the [`TIDB_DECODE_SQL_DIGESTS`](/functions-and-operators/tidb-functions.md#tidb_decode_sql_digests) function, you can convert the information in this column into a list of corresponding normalized SQL statements.
-* `RELATED_TABLE_IDS`: <!--TODO-->
+* `RELATED_TABLE_IDS`: The IDs of the tables, views, and other objects that the transaction accesses.
 
 > **Note:**
 >
