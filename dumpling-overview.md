@@ -4,40 +4,9 @@ summary: Use the Dumpling tool to export data from TiDB.
 aliases: ['/docs/dev/mydumper-overview/','/docs/dev/reference/tools/mydumper/','/tidb/dev/mydumper-overview/']
 ---
 
-# Dumpling Overview
+# Use Dumpling to Export Data
 
-This document introduces the data export tool - [Dumpling](https://github.com/pingcap/dumpling). Dumpling exports data stored in TiDB/MySQL as SQL or CSV data files and can be used to make a logical full backup or export.
-
-<CustomContent platform="tidb">
-
-For backups of SST files (key-value pairs) or backups of incremental data that are not sensitive to latency, refer to [BR](/br/backup-and-restore-overview.md). For real-time backups of incremental data, refer to [TiCDC](/ticdc/ticdc-overview.md).
-
-</CustomContent>
-
-> **Note:**
->
-> PingCAP previously maintained a fork of the [mydumper project](https://github.com/maxbube/mydumper) with enhancements specific to TiDB. This fork has since been replaced by [Dumpling](/dumpling-overview.md), which has been rewritten in Go, and supports more optimizations that are specific to TiDB. It is strongly recommended that you use Dumpling instead of mydumper.
->
-> For the overview of Mydumper, refer to [v4.0 Mydumper documentation](https://docs.pingcap.com/tidb/v4.0/backup-and-restore-using-mydumper-lightning).
-
-## Improvements of Dumpling compared with Mydumper
-
-1. Support exporting data in multiple formats, including SQL and CSV
-2. Support the [table-filter](https://github.com/pingcap/tidb-tools/blob/master/pkg/table-filter/README.md) feature, which makes it easier to filter data
-3. Support exporting data to Amazon S3 cloud storage.
-4. More optimizations are made for TiDB:
-    - Support configuring the memory limit of a single TiDB SQL statement
-    - Support automatic adjustment of TiDB GC time for TiDB v4.0.0 and above
-    - Use TiDB's hidden column `_tidb_rowid` to optimize the performance of concurrent data export from a single table
-    - For TiDB, you can set the value of [`tidb_snapshot`](/read-historical-data.md#how-tidb-reads-data-from-history-versions) to specify the time point of the data backup. This ensures the consistency of the backup, instead of using `FLUSH TABLES WITH READ LOCK` to ensure the consistency.
-
-## Dumpling introduction
-
-Dumpling is written in Go. The Github project is [pingcap/dumpling](https://github.com/pingcap/dumpling).
-
-For detailed usage of Dumpling, use the `--help` option or refer to [Option list of Dumpling](#option-list-of-dumpling).
-
-When using Dumpling, you need to execute the export command on a running cluster. This document assumes that there is a TiDB instance on the `127.0.0.1:4000` host and that this TiDB instance has a root user without a password.
+This document introduces the data export tool - [Dumpling](https://github.com/pingcap/tidb/tree/master/dumpling). Dumpling exports data stored in TiDB/MySQL as SQL or CSV data files and can be used to make a logical full backup or export. Dumpling also supports exporting data to Amazon S3.
 
 <CustomContent platform="tidb">
 
@@ -61,7 +30,47 @@ In the above commands, you need to modify `~/.bash_profile` to the path of your 
 
 </CustomContent>
 
-## Export data from TiDB/MySQL
+For detailed usage of Dumpling, use the `--help` option or refer to [Option list of Dumpling](#option-list-of-dumpling).
+
+When using Dumpling, you need to execute the export command on a running cluster.
+
+<CustomContent platform="tidb">
+
+TiDB also provides other tools that you can choose to use as needed.
+
+- For backups of SST files (key-value pairs) or backups of incremental data that are not sensitive to latency, refer to [BR](/br/backup-and-restore-overview.md).
+- For real-time backups of incremental data, refer to [TiCDC](/ticdc/ticdc-overview.md).
+- All exported data can be imported back to TiDB using [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md).
+
+</CustomContent>
+
+> **Note:**
+>
+> PingCAP previously maintained a fork of the [mydumper project](https://github.com/maxbube/mydumper) with enhancements specific to TiDB. This fork has since been replaced by [Dumpling](/dumpling-overview.md), which has been rewritten in Go, and supports more optimizations that are specific to TiDB. It is strongly recommended that you use Dumpling instead of mydumper.
+>
+> For more information on Mydumper, refer to [v4.0 Mydumper documentation](https://docs.pingcap.com/tidb/v4.0/backup-and-restore-using-mydumper-lightning).
+
+Compared to Mydumper, Dumpling has the following improvements:
+
+- Support exporting data in multiple formats, including SQL and CSV.
+- Support the [table-filter](https://github.com/pingcap/tidb-tools/blob/master/pkg/table-filter/README.md) feature, which makes it easier to filter data.
+- Support exporting data to Amazon S3 cloud storage.
+- More optimizations are made for TiDB:
+    - Support configuring the memory limit of a single TiDB SQL statement.
+    - If Dumpling can connect directly to PD, Dumpling supports automatic adjustment of TiDB GC time for TiDB v4.0.0 and later versions.
+    - Use TiDB's hidden column `_tidb_rowid` to optimize the performance of concurrent data export from a single table.
+    - For TiDB, you can set the value of [`tidb_snapshot`](/read-historical-data.md#how-tidb-reads-data-from-history-versions) to specify the time point of the data backup. This ensures the consistency of the backup, instead of using `FLUSH TABLES WITH READ LOCK` to ensure the consistency.
+
+> **Note:**
+>
+> Dumpling cannot connect to PD in the following scenarios:
+>
+> - The TiDB cluster is running on Kubernetes (unless Dumpling itself is run inside the Kubernetes environment).
+> - The TiDB cluster is running on TiDB Cloud.
+>
+> In such cases, you need to manually [adjust the TiDB GC time](#manually-set-the-tidb-gc-time) to avoid export failure.
+
+## Export data from TiDB or MySQL
 
 ### Required privileges
 
@@ -72,6 +81,8 @@ In the above commands, you need to modify `~/.bash_profile` to the path of your 
 - PROCESS
 
 ### Export to SQL files
+
+This document assumes that there is a TiDB instance on the 127.0.0.1:4000 host and that this TiDB instance has a root user without a password.
 
 Dumpling exports data to SQL files by default. You can also export data to SQL files by adding the `--filetype sql` flag:
 
@@ -95,13 +106,13 @@ In the command above:
 
 <CustomContent platform="tidb">
 
-+ The `-o` option specifies the export directory of the storage, which supports a local file path or a [URL of an external storage](/br/backup-and-restore-storages.md).
++ The `-o` (or `--output`) option specifies the export directory of the storage, which supports a local file path or an [external storage URI](/br/backup-and-restore-storages.md#uri-format).
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-+ The `-o` option specifies the export directory of the storage, which supports a local file path or a [URL of an external storage](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages).
++ The `-o` (or `--output`) option specifies the export directory of the storage, which supports a local file path or an [external storage URI](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages#uri-format).
 
 </CustomContent>
 
@@ -225,11 +236,11 @@ You can use the `--compress <format>` option to compress the CSV and SQL data an
 
 ### Export data to Amazon S3 cloud storage
 
-Since v4.0.8, Dumpling supports exporting data to cloud storages. If you need to back up data to Amazon's S3 backend storage, you need to specify the S3 storage path in the `-o` parameter.
+Starting from v4.0.8, Dumpling supports exporting data to cloud storages. If you need to back up data to Amazon S3, you need to specify the Amazon S3 storage path in the `-o` parameter.
 
-You need to create an S3 bucket in the specified region (see the [Amazon documentation - How do I create an S3 Bucket](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html)). If you also need to create a folder in the bucket, see the [Amazon documentation - Creating a folder](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-folder.html).
+You need to create an Amazon S3 bucket in the specified region (see the [Amazon documentation - How do I create an S3 Bucket](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html)). If you also need to create a folder in the bucket, see the [Amazon documentation - Creating a folder](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-folder.html).
 
-Pass `SecretKey` and `AccessKey` of the account with the permission to access the S3 backend storage to the Dumpling node as environment variables.
+Pass `SecretKey` and `AccessKey` of the account with the permission to access the Amazon S3 backend storage to the Dumpling node as environment variables.
 
 {{< copyable "shell-regular" >}}
 
@@ -240,13 +251,13 @@ export AWS_SECRET_ACCESS_KEY=${SecretKey}
 
 <CustomContent platform="tidb">
 
-Dumpling also supports reading credential files from `~/.aws/credentials`. For more Dumpling configuration, see the configuration of [External storages](/br/backup-and-restore-storages.md).
+Dumpling also supports reading credential files from `~/.aws/credentials`. Parameters for exporting data to Amazon S3 using Dumpling are the same as the parameters used in BR. For more parameter descriptions, see [external storage URI](/br/backup-and-restore-storages.md#uri-format).
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Dumpling also supports reading credential files from `~/.aws/credentials`. For more Dumpling configuration, see the configuration of [External storages](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages).
+Dumpling also supports reading credential files from `~/.aws/credentials`. Parameters for exporting data to Amazon S3 using Dumpling are the same as the parameters used in BR. For more parameter descriptions, see [external storage URI](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages#uri-format).
 
 </CustomContent>
 
@@ -327,7 +338,7 @@ With the above options specified, Dumpling can have a quicker speed of data expo
 
 > **Note:**
 >
-> In most scenarios, you do not need to adjust the default data consistency options of Dumpling (the default value is `auto`).
+> The default value is `auto` for the data consistency option. In most scenarios, you do not need to adjust the default data consistency options of Dumpling.
 
 Dumpling uses the `--consistency <consistency level>` option to control the way in which data is exported for "consistency assurance". When using snapshot for consistency, you can use the `--snapshot` option to specify the timestamp to be backed up. You can also use the following levels of consistency:
 
@@ -356,7 +367,7 @@ ls -lh /tmp/test | awk '{print $5 "\t" $9}'
 190K  test.sbtest3.0.sql
 ```
 
-### Export historical data snapshot of TiDB
+### Export historical data snapshots of TiDB
 
 Dumpling can export the data of a certain [tidb_snapshot](/read-historical-data.md#how-tidb-reads-data-from-history-versions) with the `--snapshot` option specified.
 
@@ -379,37 +390,28 @@ When Dumpling is exporting a large single table from TiDB, Out of Memory (OOM) m
 + Reduce the value of `--tidb-mem-quota-query` to `8589934592` (8 GB) or lower. `--tidb-mem-quota-query` controls the memory usage of a single query statement in TiDB.
 + Adjust the `--params "tidb_distsql_scan_concurrency=5"` parameter. [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency) is a session variable which controls the concurrency of the scan operations in TiDB.
 
-### TiDB GC settings when exporting a large volume of data (more than 1 TB)
+### Manually set the TiDB GC time
 
 When exporting data from TiDB (more than 1 TB), if the TiDB version is later than or equal to v4.0.0 and Dumpling can access the PD address of the TiDB cluster, Dumpling automatically extends the GC time without affecting the original cluster.
 
-In other scenarios, if the data size is very large, to avoid export failure due to GC during the export process, you can extend the GC time in advance:
+However, in either of the following scenarios, Dumpling cannot automatically adjust the GC time:
 
-{{< copyable "sql" >}}
+- The data size is very large (more than 1 TB).
+- Dumpling cannot connect directly to PD, for example, if the TiDB cluster is on TiDB Cloud or on Kubernetes that is separated from Dumpling.
+
+In such scenarios, you must manually extend the GC time in advance to avoid export failure due to GC during the export process.
+
+To manually adjust the GC time, use the following SQL statement:
 
 ```sql
 SET GLOBAL tidb_gc_life_time = '720h';
 ```
 
-After your operation is completed, set the GC time back (the default value is `10m`):
-
-{{< copyable "sql" >}}
+After Dumpling exits, regardless of whether the export is successful or not, you must set the GC time back to its original value (the default value is `10m`).
 
 ```sql
 SET GLOBAL tidb_gc_life_time = '10m';
 ```
-
-<CustomContent platform="tidb">
-
-Finally, all the exported data can be imported back to TiDB using [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-Finally, all the exported data can be imported back to TiDB.
-
-</CustomContent>
 
 ## Option list of Dumpling
 
@@ -433,7 +435,7 @@ Finally, all the exported data can be imported back to TiDB.
 | `-s` or `--statement-size`   | Control the size of the `INSERT` statements; the unit is bytes                                                                                                                                                                                                                                                                     |
 | `-F` or `--filesize`         | The file size of the divided tables. The unit must be specified such as `128B`, `64KiB`, `32MiB`, and `1.5GiB`.                                                                                                                                                                                                                    |
 | `--filetype`                 | Exported file type (csv/sql)                                                                                                                                                                                                                                                                                                       | "sql"                                      |
-| `-o` or `--output`           | The path of exported local files or [the URL of the external storage](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages)                                                                                                                                                                                                                                                                                                    | "./export-${time}"                         |
+| `-o` or `--output`           | The path of exported local files or [external storage URI](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages#uri-format)                                                                                                                                                                                                                                                                                                    | "./export-${time}"                         |
 | `-S` or `--sql`              | Export data according to the specified SQL statement. This command does not support concurrent export.                                                                                                                                                                                                                             |
 | `--consistency`              | flush: use FTWRL before the dump <br/> snapshot: dump the TiDB data of a specific snapshot of a TSO <br/> lock: execute `lock tables read` on all tables to be dumped <br/> none: dump without adding locks, which cannot guarantee consistency <br/> auto: use --consistency flush for MySQL; use --consistency snapshot for TiDB | "auto"                                     |
 | `--snapshot`                 | Snapshot TSO; valid only when `consistency=snapshot`                                                                                                                                                                                                                                                                               |
@@ -453,4 +455,4 @@ Finally, all the exported data can be imported back to TiDB.
 | `--status-addr`              | Dumpling's service address, including the address for Prometheus to pull metrics and pprof debugging                                                                                                                                                                                                                               | ":8281"                                    |
 | `--tidb-mem-quota-query`     | The memory limit of exporting SQL statements by a single line of Dumpling command, and the unit is byte. For v4.0.10 or later versions, if you do not set this parameter, TiDB uses the value of the `mem-quota-query` configuration item as the memory limit value by default. For versions earlier than v4.0.10, the parameter value defaults to 32 GB.  | 34359738368 |
 | `--params`                   | Specifies the session variable for the connection of the database to be exported. The required format is `"character_set_client=latin1,character_set_connection=latin1"`                                                                                                                                                           |
-|  `-c` or `--compress` |  Compresses the CSV and SQL data and table structure files exported by Dumpling. It supports the following compression algorithms: `gzip`, `snappy`, and `zstd`.  | "" | 
+|  `-c` or `--compress` |  Compresses the CSV and SQL data and table structure files exported by Dumpling. It supports the following compression algorithms: `gzip`, `snappy`, and `zstd`.  | "" |

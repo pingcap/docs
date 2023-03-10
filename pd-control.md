@@ -16,7 +16,7 @@ As a command line tool of PD, PD Control obtains the state information of the cl
 
 ### Use TiUP command
 
-To use PD Control, execute the `tiup ctl:<cluster-version> pd -u http://<pd_ip>:<pd_port> [-i]` command.
+To use PD Control, execute the `tiup ctl:v<CLUSTER_VERSION> pd -u http://<pd_ip>:<pd_port> [-i]` command.
 
 ### Download the installation package
 
@@ -29,7 +29,7 @@ To obtain `pd-ctl` of the latest version, download the TiDB server installation 
 
 > **Note:**
 >
-> `{version}` in the link indicates the version number of TiDB. For example, the download link for `v6.4.0` in the `amd64` architecture is `https://download.pingcap.org/tidb-community-server-v6.4.0-linux-amd64.tar.gz`.
+> `{version}` in the link indicates the version number of TiDB. For example, the download link for `v6.6.0` in the `amd64` architecture is `https://download.pingcap.org/tidb-community-server-v6.6.0-linux-amd64.tar.gz`.
 
 ### Compile from source code
 
@@ -41,26 +41,26 @@ To obtain `pd-ctl` of the latest version, download the TiDB server installation 
 Single-command mode:
 
 ```bash
-tiup ctl:<cluster-version> pd store -u http://127.0.0.1:2379
+tiup ctl:v<CLUSTER_VERSION> pd store -u http://127.0.0.1:2379
 ```
 
 Interactive mode:
 
 ```bash
-tiup ctl:<cluster-version> pd -i -u http://127.0.0.1:2379
+tiup ctl:v<CLUSTER_VERSION> pd -i -u http://127.0.0.1:2379
 ```
 
 Use environment variables:
 
 ```bash
 export PD_ADDR=http://127.0.0.1:2379
-tiup ctl:<cluster-version> pd
+tiup ctl:v<CLUSTER_VERSION> pd
 ```
 
 Use TLS to encrypt:
 
 ```bash
-tiup ctl:<cluster-version> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" --cert="path/to/cert" --key="path/to/key"
+tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" --cert="path/to/cert" --key="path/to/key"
 ```
 
 ## Command line flags
@@ -730,9 +730,9 @@ Usage:
 
 ```
 
-### `region check [miss-peer | extra-peer | down-peer | pending-peer | offline-peer | empty-region | hist-size | hist-keys]`
+### `region check [miss-peer | extra-peer | down-peer | pending-peer | offline-peer | empty-region | hist-size | hist-keys] [--jq="<query string>"]`
 
-Use this command to check the Regions in abnormal conditions.
+Use this command to check the Regions in abnormal conditions. For a jq formatted output, see [jq formatted JSON output usage](#jq-formatted-json-output-usage).
 
 Description of various types:
 

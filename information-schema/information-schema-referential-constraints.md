@@ -5,7 +5,7 @@ summary: Learn the `REFERENTIAL_CONSTRAINTS` INFORMATION_SCHEMA table.
 
 # REFERENTIAL_CONSTRAINTS
 
-The `REFERENTIAL_CONSTRAINTS` table provides information about `FOREIGN KEY` relationships between tables. Note that TiDB currently does not enforce `FOREIGN KEY` constraints, or perform actions such as `ON DELETE CASCADE`.
+The `REFERENTIAL_CONSTRAINTS` table provides information about `FOREIGN KEY` relationships between tables.
 
 ```sql
 USE INFORMATION_SCHEMA;

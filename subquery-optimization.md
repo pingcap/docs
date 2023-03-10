@@ -75,7 +75,7 @@ At present, for a subquery in such scenarios, if the subquery is not a correlate
 create table t1(a int);
 create table t2(a int);
 insert into t2 values(1);
-explain select * from t where exists (select * from t2);
+explain select * from t1 where exists (select * from t2);
 ```
 
 ```sql
@@ -83,7 +83,7 @@ explain select * from t where exists (select * from t2);
 | id                     | estRows  | task      | access object | operator info                  |
 +------------------------+----------+-----------+---------------+--------------------------------+
 | TableReader_12         | 10000.00 | root      |               | data:TableFullScan_11          |
-| └─TableFullScan_11     | 10000.00 | cop[tikv] | table:t       | keep order:false, stats:pseudo |
+| └─TableFullScan_11     | 10000.00 | cop[tikv] | table:t1      | keep order:false, stats:pseudo |
 +------------------------+----------+-----------+---------------+--------------------------------+
 ```
 

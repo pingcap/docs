@@ -56,6 +56,8 @@ The following are descriptions of sink URI parameters and values that can be con
 | `partition-num`      | The number of the downstream Kafka partitions (optional. The value must be **no greater than** the actual number of partitions; otherwise, the replication task cannot be created successfully. `3` by default). |
 | `max-message-bytes`  | The maximum size of data that is sent to Kafka broker each time (optional, `10MB` by default). From v5.0.6 and v4.0.6, the default value has changed from `64MB` and `256MB` to `10MB`. |
 | `replication-factor` | The number of Kafka message replicas that can be saved (optional, `1` by default).                       |
+| `required-acks` | A parameter used in the `Produce` request, which notifies the broker of the number of replica acknowledgements it needs to receive before responding. Value options are `0` (`NoResponse`: no response, only `TCP ACK` is provided), `1` (`WaitForLocal`: responds only after local commits are submitted successfully), and `-1` (`WaitForAll`: responds after all replicated replicas are committed successfully. You can configure the minimum number of replicated replicas using the [`min.insync.replicas`](https://kafka.apache.org/33/documentation.html#brokerconfigs_min.insync.replicas) configuration item of the broker). (Optional, the default value is `-1`).    |
+| `compression` | The compression algorithm used when sending messages (value options are `none`, `lz4`, `gzip`, `snappy`, and `zstd`; `none` by default). |
 | `protocol` | The protocol with which messages are output to Kafka. The value options are `canal-json`, `open-protocol`, `canal`, `avro` and `maxwell`.   |
 | `auto-create-topic` | Determines whether TiCDC creates the topic automatically when the `topic-name` passed in does not exist in the Kafka cluster (optional, `true` by default). |
 | `enable-tidb-extension` | Optional. `false` by default. When the output protocol is `canal-json`, if the value is `true`, TiCDC sends Resolved events and adds the TiDB extension field to the Kafka message. From v6.1.0, this parameter is also applicable to the `avro` protocol. If the value is `true`, TiCDC adds [three TiDB extension fields](/ticdc/ticdc-avro-protocol.md#tidb-extension-fields) to the Kafka message. |
@@ -81,7 +83,7 @@ The following are descriptions of sink URI parameters and values that can be con
 | `avro-decimal-handling-mode` | Only effective with the `avro` protocol. Determines how Avro handles the DECIMAL field. The value can be `string` or `precise`, indicating either mapping the DECIMAL field to a string or a precise floating number.  |
 | `avro-bigint-unsigned-handling-mode` | Only effective with the `avro` protocol. Determines how Avro handles the BIGINT UNSIGNED field. The value can be `string` or `long`, indicating either mapping the BIGINT UNSIGNED field to a 64-bit signed number or a string.  |
 
-Best practices:
+### Best practices
 
 * It is recommended that you create your own Kafka Topic. At a minimum, you need to set the maximum amount of data of each message that the Topic can send to the Kafka broker, and the number of downstream Kafka partitions. When you create a changefeed, these two settings correspond to `max-message-bytes` and `partition-num`, respectively.
 * If you create a changefeed with a Topic that does not yet exist, TiCDC will try to create the Topic using the `partition-num` and `replication-factor` parameters. It is recommended that you specify these parameters explicitly.
@@ -231,3 +233,22 @@ You can use `partition = "xxx"` to specify a partition dispatcher. It supports f
 > ```
 > {matcher = ['*.*'], dispatcher = "ts", partition = "table"},
 > ```
+
+## Scale out the load of a single large table to multiple TiCDC nodes
+
+This feature splits a single large table into multiple data ranges based on the number of Regions, and distributes these data ranges to multiple TiCDC nodes so that multiple TiCDC nodes can replicate the large single table at the same time. This feature can solve the following two problems:
+
+- A single TiCDC node cannot replicate a large single table in time.
+- The resources (such as CPU and memory) consumed by TiCDC nodes are not evenly distributed.
+
+> **Warning:**
+>
+> - Scaling out a single large table is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> - TiCDC v6.6.0 only supports scaling out a large single table on Kafka changefeeds.
+
+Sample configuration:
+
+```toml
+[scheduler]
+region-per-span = 50000
+```

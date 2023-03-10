@@ -12,7 +12,7 @@ This statement changes an existing user inside the TiDB privilege system. In the
 
 ```ebnf+diagram
 AlterUserStmt ::=
-    'ALTER' 'USER' IfExists (UserSpecList RequireClauseOpt ConnectionOptions PasswordOption LockOption AttributeOption | 'USER' '(' ')' 'IDENTIFIED' 'BY' AuthString)
+    'ALTER' 'USER' IfExists (UserSpecList RequireClauseOpt ConnectionOptions PasswordOption LockOption AttributeOption | 'USER' '(' ')' 'IDENTIFIED' 'BY' AuthString) ResourceGroupNameOption
 
 UserSpecList ::=
     UserSpec ( ',' UserSpec )*
@@ -26,11 +26,13 @@ Username ::=
 AuthOption ::=
     ( 'IDENTIFIED' ( 'BY' ( AuthString | 'PASSWORD' HashString ) | 'WITH' StringName ( 'BY' AuthString | 'AS' HashString )? ) )?
 
-PasswordOption ::= ( 'PASSWORD' 'EXPIRE' ( 'DEFAULT' | 'NEVER' | 'INTERVAL' 'N' 'DAY' )? | 'PASSWORD' 'HISTORY' ( 'DEFAULT' | 'N' ) ｜ 'PASSWORD' 'REUSE' 'INTERVAL' ( 'DEFAULT' | 'N' 'DAY' ) | 'FAILED_LOGIN_ATTEMPTS' 'N' | 'PASSWORD_LOCK_TIME' ( 'N' | 'UNBOUNDED' ) )?
+PasswordOption ::= ( 'PASSWORD' 'EXPIRE' ( 'DEFAULT' | 'NEVER' | 'INTERVAL' N 'DAY' )? | 'PASSWORD' 'HISTORY' ( 'DEFAULT' | N ) | 'PASSWORD' 'REUSE' 'INTERVAL' ( 'DEFAULT' | N 'DAY' ) | 'FAILED_LOGIN_ATTEMPTS' N | 'PASSWORD_LOCK_TIME' ( N | 'UNBOUNDED' ) )*
 
 LockOption ::= ( 'ACCOUNT' 'LOCK' | 'ACCOUNT' 'UNLOCK' )?
 
 AttributeOption ::= ( 'COMMENT' CommentString | 'ATTRIBUTE' AttributeString )?
+
+ResourceGroupNameOption::= ( 'RESOURCE' 'GROUP' Identifier)?
 ```
 
 ## Examples
@@ -129,6 +131,16 @@ Modify the password reuse policy for `newuser` to disallow the reuse of any pass
 
 ```sql
 ALTER USER 'newuser' PASSWORD REUSE INTERVAL 90 DAY;
+```
+
+```
+Query OK, 0 rows affected (0.02 sec)
+```
+
+Use `ALTER USER ... RESOURCE GROUP` to modify the resource group of the user `newuser` to `rg1`.
+
+```sql
+ALTER USER 'newuser' RESOURCE GROUP rg1;
 ```
 
 ```

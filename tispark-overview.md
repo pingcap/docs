@@ -299,6 +299,8 @@ The configurations in the following table can be put together with `spark-defaul
 | `spark.tispark.tikv.conn_recycle_time`          | `60s`            | The interval for cleaning expired connections with TiKV. It takes effect only when certificate reloading is enabled. The default value is `60s` (60 seconds).                                                                                                                                                                                                                                                                                                                                                           |
 | `spark.tispark.host_mapping`                    |                  | The route map used to configure the mapping between public IP addresses and intranet IP addresses. When the TiDB cluster is running on the intranet, you can map a set of intranet IP addresses to public IP addresses for an outside Spark cluster to access. The format is `{Intranet IP1}:{Public IP1};{Intranet IP2}:{Public IP2}`, for example, `192.168.0.2:8.8.8.8;192.168.0.3:9.9.9.9`.                                                                                                                         |
 | `spark.tispark.new_collation_enable`            |                  | When [new collation](https://docs.pingcap.com/tidb/stable/character-set-and-collation#new-framework-for-collations) is enabled on TiDB, this configuration can be set to `true`. If `new collation` is not enabled on TiDB, this configuration can be set to `false`. If this item is not configured, TiSpark configures `new collation` automatically based on the TiDB version. The configuration rule is as follows: If the TiDB version is greater than or equal to v6.0.0, it is `true`; otherwise, it is `false`. |
+| `spark.tispark.replica_read` | `leader` | The type of the replica to read. Value options are `leader`, `follower`, and `learner`. Multiple types can be specified at the same time and TiSpark selects the type according to the order. |
+| `spark.tispark.replica_read.label` |  | The label of the target TiKV node. The format is `label_x=value_x,label_y=value_y`, and the items are connected by logical conjunction. |
 
 ### TLS configurations
 
@@ -341,7 +343,7 @@ spark.tispark.jdbc.client_cert_password                        jdbc_clientstore_
 ```
 
 - For details about how to open TiDB TLS, see [Enable TLS between TiDB Clients and Servers](/enable-tls-between-clients-and-servers.md).
-- For details about how to generate a JAVA key store, see [Connecting Securely Using SSL](https://dev.mysql.com/doc/connector-j/5.1/en/connector-j-reference-using-ssl.html).
+- For details about how to generate a JAVA key store, see [Connecting Securely Using SSL](https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-reference-using-ssl.html).
 
 ### Log4j configuration
 
@@ -456,7 +458,6 @@ For more information, see [Authorization and authentication through TiDB server]
 - [Stale read](https://github.com/pingcap/tispark/blob/master/docs/features/stale_read.md)
 - [TiSpark with multiple catalogs](https://github.com/pingcap/tispark/wiki/TiSpark-with-multiple-catalogs)
 - [TiSpark TLS](#tls-configurations)
-- [TiSpark Telemetry](https://github.com/pingcap/tispark/blob/master/docs/features/telemetry.md)
 - [TiSpark plan](https://github.com/pingcap/tispark/blob/master/docs/features/query_execution_plan_in_TiSpark.md)
 
 ## Statistics information

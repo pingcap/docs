@@ -145,7 +145,6 @@ This document only describes the parameters that are not included in command-lin
 + The compression algorithm for gRPC messages
 + Optional values: `"none"`, `"deflate"`, `"gzip"`
 + Default value: `"none"`
-+ Note: When the value is `gzip`, TiDB Dashboard will have a display error because it might not complete the corresponding compression algorithm in some cases. If you adjust the value back to the default `none`, TiDB Dashboard will display normally.
 
 ### `grpc-concurrency`
 
@@ -276,8 +275,12 @@ Configuration items related to the single thread pool serving read requests. Thi
 ### `max-thread-count`
 
 + The maximum working thread count of the unified read pool or the UnifyReadPool thread pool. When you modify the size of this thread pool, refer to [Performance tuning for TiKV thread pools](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools).
-+ Value range: `[min-thread-count, MAX(4, CPU)]`. In `MAX(4, CPU)`, `CPU` means the number of your CPU cores. `MAX(4, CPU)` takes the greater value out of `4` and the `CPU`.
++ Value range: `[min-thread-count, MAX(4, CPU quota * 10)]`. `MAX(4, CPU quota * 10)` takes the greater value out of `4` and the `CPU quota * 10`.
 + Default value: MAX(4, CPU * 0.8)
+
+> **Note:**
+>
+> Increasing the thread count will lead to more context switches, which might cause a performance decrease. It is not recommended to modify the value of this configuration item.
 
 ### `stack-size`
 
@@ -416,6 +419,19 @@ Configuration items related to storage.
 + The storage path of the RocksDB directory
 + Default value: `"./"`
 
+### `engine` <span class="version-mark">New in v6.6.0</span>
+
+> **Warning:**
+>
+> This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
++ Specifies the engine type. This configuration can only be specified when creating a new cluster and cannot be modifies once being specified.
++ Default value: `"raft-kv"`
++ Value options:
+
+    + `"raft-kv"`: The default engine type in versions earlier than TiDB v6.6.0.
+    + `"partitioned-raft-kv"`: The new storage engine type introduced in TiDB v6.6.0.
+
 ### `scheduler-concurrency`
 
 + A built-in memory lock mechanism to prevent simultaneous operations on a key. Each key has a hash in a different slot.
@@ -491,12 +507,7 @@ Configuration items related to storage.
 
 ## storage.block-cache
 
-Configuration items related to the sharing of block cache among multiple RocksDB Column Families (CF). When these configuration items are enabled, block cache separately configured for each column family is disabled.
-
-### `shared`
-
-+ Enables or disables the sharing of block cache.
-+ Default value: `true`
+Configuration items related to the sharing of block cache among multiple RocksDB Column Families (CF).
 
 ### `capacity`
 
@@ -795,7 +806,6 @@ Configuration items related to Raftstore.
 ### `lock-cf-compact-interval`
 
 + The time interval at which TiKV triggers a manual compaction for the Lock Column Family
-+ Default value: `"256MB"`
 + Default value: `"10m"`
 + Minimum value: `0`
 
@@ -876,6 +886,11 @@ Configuration items related to Raftstore.
 + The longest trusted period of a Raft leader
 + Default value: `"9s"`
 + Minimum value: `0`
+
+### `right-derive-when-split`
+
++ Specifies the start key of the new Region when a Region is split. When this configuration item is set to `true`, the start key is the maximum split key. When this configuration item is set to `false`, the start key is the original Region's start key.
++ Default value: `true`
 
 ### `merge-max-log-gap`
 
@@ -969,7 +984,14 @@ Configuration items related to Raftstore.
 + Default value: `1MB`
 + Minimum value: `0`
 
-## Coprocessor
+### `report-min-resolved-ts-interval`
+
++ Determines the minimum interval at which the resolved timestamp is reported to the PD leader. If this value is set to `0`, it means that the reporting is disabled.
++ Default value: `"1s"`, which is the smallest positive value
++ Minimum value: `0`
++ Unit: second
+
+## coprocessor
 
 Configuration items related to Coprocessor.
 
@@ -1049,7 +1071,7 @@ Configuration items related to Coprocessor.
 + The interval at which TiKV reports bucket information to PD when `enable-region-bucket` is true.
 + Default value: `10s`
 
-## RocksDB
+## rocksdb
 
 Configuration items related to RocksDB
 
@@ -1128,11 +1150,6 @@ Configuration items related to RocksDB
 
 + The maximum RocksDB WAL size in total, which is the size of `*.log` files in the `data-dir`.
 + Default value: `"4GB"`
-
-### `enable-statistics`
-
-+ Determines whether to enable the statistics of RocksDB
-+ Default value: `true`
 
 ### `stats-dump-period`
 
@@ -1228,6 +1245,29 @@ Configuration items related to RocksDB
 + Log levels of RocksDB
 + Default value: `"info"`
 
+### `write-buffer-flush-oldest-first` <span class="version-mark">New in v6.6.0</span>
+
+> **Warning:**
+>
+> This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
++ Specifies the flush strategy used when the memory usage of `memtable` of the current RocksDB reaches the threshold.
++ Default value: `false`
++ Value options:
+
+    + `false`: `memtable` with the largest data volume is flushed to SST files.
+    + `true`: The earliest `memtable` is flushed to SST files. This strategy can clear the `memtable` of cold data, which is suitable for scenarios with obvious cold and hot data.
+
+### `write-buffer-limit` <span class="version-mark">New in v6.6.0</span>
+
+> **Warning:**
+>
+> This feature is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
++ Specifies the total memory limit of `memtable` for all RocksDB instances in a single TiKV. The default value is 25% of the memory of the machine. It is recommended to configure a memory of at least 5 GiB. This configuration only takes effect for Partitioned Raft KV (`storage.engine`=`"partitioned-raft-kv"`).
++ Default value: 25%
++ Unit: KiB|MiB|GiB
+
 ## rocksdb.titan
 
 Configuration items related to Titan.
@@ -1260,14 +1300,18 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 ### `block-size`
 
 + The default size of a RocksDB block
-+ Default value for `defaultcf` and `writecf`: `"64KB"`
++ Default value for `defaultcf` and `writecf`: `"32KB"`
 + Default value for `lockcf`: `"16KB"`
 + Minimum value: `"1KB"`
 + Unit: KB|MB|GB
 
 ### `block-cache-size`
 
-+ The cache size of a RocksDB block
+> **Warning:**
+>
+> Starting from v6.6.0, this configuration is deprecated.
+
++ The cache size of a RocksDB block.
 + Default value for `defaultcf`: `Total machine memory * 25%`
 + Default value for `writecf`: `Total machine memory * 15%`
 + Default value for `lockcf`: `Total machine memory * 2%`
@@ -1360,11 +1404,12 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 
 ### `max-bytes-for-level-base`
 
-+ The maximum number of bytes at base level (L1). Generally, it is set to 4 times the size of a memtable.
++ The maximum number of bytes at base level (level-1). Generally, it is set to 4 times the size of a memtable. When the level-1 data size reaches the limit value of `max-bytes-for-level-base`, the SST files of level-1 and their overlapping SST files of level-2 will be compacted.
 + Default value for `defaultcf` and `writecf`: `"512MB"`
 + Default value for `lockcf`: `"128MB"`
 + Minimum value: `0`
 + Unit: KB|MB|GB
++ It is recommended that the value of `max-bytes-for-level-base` is set approximately equal to the data volume in L0 to reduce unnecessary compaction. For example, if the compression method is "no:no:lz4:lz4:lz4:lz4:lz4", the value of `max-bytes-for-level-base` should be `write-buffer-size * 4`, because there is no compression of L0 and L1 and the trigger condition of compaction for L0 is that the number of the SST files reaches 4 (the default value). When L0 and L1 both adopt compaction, you need to analyze RocksDB logs to understand the size of an SST file compressed from a memtable. For example, if the file size is 32 MB, it is recommended to set the value of `max-bytes-for-level-base` to 128 MB (`32 MB * 4`).
 
 ### `target-file-size-base`
 
@@ -1402,7 +1447,11 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 ### `compaction-pri`
 
 + The priority type of compaction
-+ Optional values: `"by-compensated-size"`, `"oldest-largest-seq-first"`, `"oldest-smallest-seq-first"`, `"min-overlapping-ratio"`
++ Optional values:
+    - `"by-compensated-size"`: compact files in order of file size and large files are compacted with higher priority.
+    - `"oldest-largest-seq-first"`: prioritize compaction on files with the oldest update time. Use this value **only** when updating hot keys in small ranges.
+    - `"oldest-smallest-seq-first"`: prioritize compaction on files with ranges that are not compacted to the next level for a long time. If you randomly update hot keys across the key space, this value can slightly reduce write amplification.
+    - `"min-overlapping-ratio"`: prioritize compaction on files with a high overlap ratio. When a file is small in different levels (the result of `the file size in the next level` ÷ `the file size in this level` is small), TiKV compacts this file first. In many cases, this value can effectively reduce write amplification.
 + Default value for `defaultcf` and `writecf`: `"min-overlapping-ratio"`
 + Default value for `lockcf`: `"by-compensated-size"`
 
@@ -1569,11 +1618,6 @@ Configuration items related to `raftdb`
 + If the value is `true`, the database will be created if it is missing
 + Default value: `true`
 
-### `enable-statistics`
-
-+ Determines whether to enable the statistics of Raft RocksDB
-+ Default value: `true`
-
 ### `stats-dump-period`
 
 + The interval at which statistics are output to the log
@@ -1674,7 +1718,7 @@ Configuration items related to `raftdb`
 
 ### `info-log-level`
 
-+ Log levels of RocksDB
++ Log levels of RaftDB
 + Default value: `"info"`
 
 ## raft-engine
@@ -1828,7 +1872,7 @@ Configuration items related to [encryption at rest](/encryption-at-rest.md) (TDE
 
 + Specifies the old master key when rotating the new master key. The configuration format is the same as that of `master-key`. To learn how to configure a master key, see [Encryption at Rest - Configure encryption](/encryption-at-rest.md#configure-encryption).
 
-## `import`
+## import
 
 Configuration items related to TiDB Lightning import and BR restore.
 
@@ -2014,7 +2058,7 @@ Configuration items related to maintaining the Resolved TS to serve Stale Read r
 ### `advance-ts-interval`
 
 + The interval at which Resolved TS is calculated and forwarded.
-+ Default value: `"1s"`
++ Default value: `"20s"`
 
 ### `scan-lock-pool-size`
 
@@ -2041,7 +2085,7 @@ For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](
 - This configuration item enables the pipelined process of adding the pessimistic lock. With this feature enabled, after detecting that data can be locked, TiKV immediately notifies TiDB to execute the subsequent requests and write the pessimistic lock asynchronously, which reduces most of the latency and significantly improves the performance of pessimistic transactions. But there is a still low probability that the asynchronous write of the pessimistic lock fails, which might cause the failure of pessimistic transaction commits.
 - Default value: `true`
 
-### `in-memory` (New in v6.0.0)
+### `in-memory` <span class="version-mark">New in v6.0.0</span>
 
 + Enables the in-memory pessimistic lock feature. With this feature enabled, pessimistic transactions try to store their locks in memory, instead of writing the locks to disk or replicating the locks to other replicas. This improves the performance of pessimistic transactions. However, there is a still low probability that the pessimistic lock gets lost and causes the pessimistic transaction commits to fail.
 + Default value: `true`
@@ -2159,3 +2203,13 @@ To reduce write latency, TiKV periodically fetches and caches a batch of timesta
 + The maximum number of TSOs in a timestamp request.
 + In a default TSO physical time update interval (`50ms`), PD provides at most 262144 TSOs. When requested TSOs exceed this number, PD provides no more TSOs. This configuration item is used to avoid exhausting TSOs and the reverse impact of TSO exhaustion on other businesses. If you increase the value of this configuration item to improve high availability, you need to decrease the value of [`tso-update-physical-interval`](/pd-configuration-file.md#tso-update-physical-interval) at the same time to get enough TSOs.
 + Default value: `8192`
+
+## resource-control
+
+Configuration items related to resource control of the TiKV storage layer.
+
+### `enabled` <span class="version-mark">New in v6.6.0</span>
+
++ Controls whether to enable scheduling for user foreground read/write requests according to [Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru) of the corresponding resource groups. For information about TiDB resource groups and resource control, see [TiDB resource control](/tidb-resource-control.md).
++ Enabling this configuration item only works when [`tidb_enable_resource_control](/system-variables.md#tidb_enable_resource_control-new-in-v660) is enabled on TiDB. When this configuration item is enabled, TiKV will use the priority queue to schedule the queued read/write requests from foreground users. The scheduling priority of a request is inversely related to the amount of resources already consumed by the resource group that receives this request, and positively related to the quota of the corresponding resource group.
++ Default value: `false`, which means to disable scheduling based on the RU of the resource group.

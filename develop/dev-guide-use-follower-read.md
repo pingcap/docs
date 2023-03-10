@@ -15,6 +15,8 @@ By default, TiDB only reads and writes data on the leader of the same Region. Wh
 
 ## When to use
 
+### Reduce read hotspots
+
 <CustomContent platform="tidb">
 
 You can visually analyze whether your application has a hotspot Region on the [TiDB Dashboard Key Visualizer Page](/dashboard/dashboard-key-visualizer.md). You can check whether a read hotspot occurs by selecting the "metrics selection box" to `Read (bytes)` or `Read (keys)`.
@@ -33,14 +35,16 @@ For more information about handling hotspot, see [TiDB Hotspot Problem Handling]
 
 If read hotspots are unavoidable or the changing cost is very high, you can try using the Follower Read feature to better load the balance of reading requests to the follower Region.
 
+### Reduce latency for geo-distributed deployments
+
+If your TiDB cluster is deployed across districts or data centers, different replicas of a Region are distributed in different districts or data centers. In this case, you can configure Follower Read as `closest-adaptive` or `closest-replicas` to allow TiDB to prioritize reading from the current data center, which can significantly reduce the latency and traffic overhead of read operations. For implementation details, see [Follower Read](/follower-read.md).
+
 ## Enable Follower Read
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
 
-To enable Follower Read, set the variable `tidb_replica_read` (default value is `leader`) to `follower` or `leader-and-follower`:
-
-{{< copyable "sql" >}}
+To enable Follower Read, set the variable `tidb_replica_read` (default value is `leader`) to `follower`, `leader-and-follower`, `prefer-leader`, `closest-replicas`, or `closest-adaptive`:
 
 ```sql
 SET [GLOBAL] tidb_replica_read = 'follower';
@@ -53,13 +57,14 @@ For more details about this variable, see [Follower Read Usage](/follower-read.m
 
 In Java, to enable Follower Read, define a `FollowerReadHelper` class.
 
-{{< copyable "" >}}
-
 ```java
 public enum FollowReadMode {
     LEADER("leader"),
     FOLLOWER("follower"),
-    LEADER_AND_FOLLOWER("leader-and-follower");
+    LEADER_AND_FOLLOWER("leader-and-follower"),
+    CLOSEST_REPLICA("closest-replica"),
+    CLOSEST_ADAPTIVE("closest-adaptive"),
+    PREFER_LEADER("prefer-leader");
 
     private final String mode;
 
@@ -96,8 +101,6 @@ public class FollowerReadHelper {
 ```
 
 When reading data from the Follower node, use the `setSessionReplicaRead(conn, FollowReadMode.LEADER_AND_FOLLOWER)` method to enable the Follower Read feature, which can balance the load between the Leader node and the Follower node in the current session. When the connection is disconnected, it will be restored to the original mode.
-
-{{< copyable "" >}}
 
 ```java
 public static class AuthorDAO {

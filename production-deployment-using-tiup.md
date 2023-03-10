@@ -10,10 +10,6 @@ aliases: ['/docs/dev/production-deployment-using-tiup/','/docs/dev/how-to/deploy
 
 TiUP supports deploying TiDB, TiFlash, TiDB Binlog, TiCDC, and the monitoring system. This document introduces how to deploy TiDB clusters of different topologies.
 
-> **Note:**
->
-> TiDB, TiUP and TiDB Dashboard share usage details with PingCAP to help understand how to improve the product. For details about what is shared and how to disable the sharing, see [Telemetry](/telemetry.md).
-
 ## Step 1. Prerequisites and precheck
 
 Make sure that you have read the following documents:
@@ -87,7 +83,9 @@ Perform the following steps in this section to deploy a TiDB cluster offline usi
 
 #### Prepare the TiUP offline component package
 
-To prepare the TiUP offline component package, you can manually pack an offline component package using `tiup mirror clone`.
+Method 1: On the [official download page](https://www.pingcap.com/download/), select the offline mirror package (TiUP offline package included) of the target TiDB version. Note that you need to download the server package and toolkit package at the same time.
+
+Method 2: Manually pack an offline component package using `tiup mirror clone`. The detailed steps are as follows:
 
 1. Install the TiUP package manager online.
 
@@ -141,12 +139,12 @@ To prepare the TiUP offline component package, you can manually pack an offline 
 
     If you want to adjust an existing offline mirror (such as adding a new version of a component), take the following steps:
 
-    1. When pulling an offline mirror, you can get an incomplete offline mirror by specifying specific information via parameters, such as the component and version information. For example, you can pull an offline mirror that includes only the offline mirror of TiUP v1.11.0 and TiUP Cluster v1.11.0 by running the following command:
+    1. When pulling an offline mirror, you can get an incomplete offline mirror by specifying specific information via parameters, such as the component and version information. For example, you can pull an offline mirror that includes only the offline mirror of TiUP v1.11.3 and TiUP Cluster v1.11.3 by running the following command:
 
         {{< copyable "shell-regular" >}}
 
         ```bash
-        tiup mirror clone tiup-custom-mirror-v1.11.0 --tiup v1.11.0 --cluster v1.11.0
+        tiup mirror clone tiup-custom-mirror-v1.11.3 --tiup v1.11.3 --cluster v1.11.3
         ```
 
         If you only need the components for a particular platform, you can specify them using the `--os` or `--arch` parameters.
@@ -178,10 +176,10 @@ To prepare the TiUP offline component package, you can manually pack an offline 
         {{< copyable "shell-regular" >}}
 
         ```bash
-        tiup mirror merge tiup-custom-mirror-v1.11.0
+        tiup mirror merge tiup-custom-mirror-v1.11.3
         ```
 
-    5. When the above steps are completed, check the result by running the `tiup list` command. In this document's example, the outputs of both `tiup list tiup` and `tiup list cluster` show that the corresponding components of `v1.11.0` are available.
+    5. When the above steps are completed, check the result by running the `tiup list` command. In this document's example, the outputs of both `tiup list tiup` and `tiup list cluster` show that the corresponding components of `v1.11.3` are available.
 
 #### Deploy the offline TiUP component
 
@@ -196,6 +194,20 @@ source /home/tidb/.bash_profile
 ```
 
 The `local_install.sh` script automatically runs the `tiup mirror set tidb-community-server-${version}-linux-amd64` command to set the current mirror address to `tidb-community-server-${version}-linux-amd64`.
+
+#### Merge offline packages
+
+If you download the offline packages from the [official download page](https://www.pingcap.com/download/), you need to merge the server package and the toolkit package into an offline mirror. If you manually package the offline component packages using the `tiup mirror clone` command, you can skip this step.
+
+Run the following commands to merge the offline toolkit package into the server package directory:
+
+```bash
+tar xf tidb-community-toolkit-${version}-linux-amd64.tar.gz
+ls -ld tidb-community-server-${version}-linux-amd64 tidb-community-toolkit-${version}-linux-amd64
+cd tidb-community-server-${version}-linux-amd64/
+cp -rp keys ~/.tiup/
+tiup mirror merge ../tidb-community-toolkit-${version}-linux-amd64
+```
 
 To switch the mirror to another directory, run the `tiup mirror set <mirror-dir>` command. To switch the mirror to the online environment, run the `tiup mirror set https://tiup-mirrors.pingcap.com` command.
 
@@ -322,13 +334,13 @@ Before you run the `deploy` command, use the `check` and `check --apply` command
     {{< copyable "shell-regular" >}}
 
     ```shell
-    tiup cluster deploy tidb-test v6.4.0 ./topology.yaml --user root [-p] [-i /home/root/.ssh/gcp_rsa]
+    tiup cluster deploy tidb-test v6.6.0 ./topology.yaml --user root [-p] [-i /home/root/.ssh/gcp_rsa]
     ```
 
 In the `tiup cluster deploy` command above:
 
 - `tidb-test` is the name of the TiDB cluster to be deployed.
-- `v6.4.0` is the version of the TiDB cluster to be deployed. You can see the latest supported versions by running `tiup list tidb`.
+- `v6.6.0` is the version of the TiDB cluster to be deployed. You can see the latest supported versions by running `tiup list tidb`.
 - `topology.yaml` is the initialization configuration file.
 - `--user root` indicates logging into the target machine as the `root` user to complete the cluster deployment. The `root` user is expected to have `ssh` and `sudo` privileges to the target machine. Alternatively, you can use other users with `ssh` and `sudo` privileges to complete the deployment.
 - `[-i]` and `[-p]` are optional. If you have configured login to the target machine without password, these parameters are not required. If not, choose one of the two parameters. `[-i]` is the private key of the root user (or other users specified by `--user`) that has access to the target machine. `[-p]` is used to input the user password interactively.
