@@ -46,7 +46,6 @@ This document lists the features supported in each TiDB version. Note that suppo
 
 ## SQL statements
 
-<<<<<<< HEAD
 | **SQL statements** [^2]                                      | **5.4**          |   **5.3**    |   **5.2**    |   **5.1**    |   **5.0**    |   **4.0**    |
 | ------------------------------------------------------------ | ------------ | :----------: | :----------: | :----------: | :----------: | :----------: |
 | Basic `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `REPLACE`      | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
@@ -63,29 +62,7 @@ This document lists the features supported in each TiDB version. Note that suppo
 | [`EXPLAIN`](/sql-statements/sql-statement-explain.md)        | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | [User-defined variables](/user-defined-variables.md)         | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
-=======
-| SQL statements [^3]                                      | 6.6 | 6.5 | 6.1 | 5.4          |   5.3    |   5.2    |   5.1    |   5.0    |   4.0    |
-| -------------------------------------------------------- | :--: | :--:| :--: | :--: | :--: | :----------: | :------: | :------: | :------: |
-| Basic `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `REPLACE`     | Y | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| `INSERT ON DUPLICATE KEY UPDATE`                             | Y | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| `LOAD DATA INFILE`                                           | Y | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| `SELECT INTO OUTFILE`                                        | Y | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| `INNER JOIN`, <code>LEFT\|RIGHT [OUTER] JOIN</code>          | Y | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| `UNION`, `UNION ALL`                                         | Y | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [`EXCEPT` and `INTERSECT` operators](/functions-and-operators/set-operators.md) | Y | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      N       |
-| `GROUP BY`, `ORDER BY`                                       | Y | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Window Functions](/functions-and-operators/window-functions.md) | Y | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Common Table Expressions (CTE)](/sql-statements/sql-statement-with.md)| Y | Y | Y | Y            |      Y       |      Y       |      Y       |      N       |      N       |
-| `START TRANSACTION`, `COMMIT`, `ROLLBACK`                    | Y | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [`EXPLAIN`](/sql-statements/sql-statement-explain.md)        | Y | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) | Y | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [User-defined variables](/user-defined-variables.md)        | E | E | E | E | E | E | E | E | E |
-| [`BATCH [ON COLUMN] LIMIT INTEGER DELETE`](/sql-statements/sql-statement-batch.md) | Y | Y | Y | N | N | N | N | N | N |
-| [`BATCH [ON COLUMN] LIMIT INTEGER INSERT/UPDATE/REPLACE`](/sql-statements/sql-statement-batch.md) | Y | Y | N | N | N | N | N | N | N |
-| [`ALTER TABLE ... COMPACT`](/sql-statements/sql-statement-alter-table-compact.md) | Y | Y | E | N | N | N | N | N | N |
-| [Table Lock](/sql-statements/sql-statement-lock-tables-and-unlock-tables.md) | E | E | E | E | E | E | E | E | E |
-| [TiFlash Query Result Materialization](/tiflash/tiflash-results-materialization.md) | E | E | N | N | N | N | N | N | N |
->>>>>>> e97015e81 (sql-statements: add doc of lock tables and unlock tables (#12818))
+| [Table Lock](/sql-statements/sql-statement-lock-tables-and-unlock-tables.md)        | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
 
 ## Advanced SQL features
 
