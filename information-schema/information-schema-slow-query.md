@@ -26,13 +26,9 @@ USE INFORMATION_SCHEMA;
 DESC SLOW_QUERY;
 ```
 
-<<<<<<< HEAD
-```
-=======
 The output is as follows:
 
-```sqlsql
->>>>>>> 690a7db33 (update the format, command, and output of information schemas (#11687))
+```sql
 +-------------------------------+---------------------+------+------+---------+-------+
 | Field                         | Type                | Null | Key  | Default | Extra |
 +-------------------------------+---------------------+------+------+---------+-------+
