@@ -7,9 +7,9 @@ summary: Learn the TiDB configuration file options that are not involved in comm
 
 <!-- markdownlint-disable MD024 -->
 
-# TiDBConfiguration / コンフィグレーションファイル {#tidb-configuration-file}
+# TiDBコンフィグレーションファイル {#tidb-configuration-file}
 
-TiDB 構成ファイルは、コマンドライン パラメーターよりも多くのオプションをサポートしています。デフォルトの構成ファイル[`config.toml.example`](https://github.com/pingcap/tidb/blob/master/config/config.toml.example)をダウンロードして、名前を`config.toml`に変更できます。このドキュメントでは、 [コマンド ライン オプション](/command-line-flags-for-tidb-configuration.md)に含まれないオプションのみを説明します。
+TiDB 構成ファイルは、コマンドライン パラメーターよりも多くのオプションをサポートしています。デフォルトの構成ファイル[`config.toml.example`](https://github.com/pingcap/tidb/blob/master/config/config.toml.example)ダウンロードして、名前を`config.toml`に変更できます。このドキュメントでは、 [コマンド ライン オプション](/command-line-flags-for-tidb-configuration.md)に含まれないオプションのみを説明します。
 
 ### <code>split-table</code> {#code-split-table-code}
 
@@ -36,14 +36,14 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 
 ### <code>oom-use-tmp-storage</code> {#code-oom-use-tmp-storage-code}
 
--   1 つの SQL ステートメントが`mem-quota-query`で指定されたメモリ クォータを超えた場合に、一部の演算子の一時ストレージを有効にするかどうかを制御します。
+-   1 つの SQL ステートメントが`mem-quota-query`で指定されたメモリクォータを超えた場合に、一部の演算子の一時ストレージを有効にするかどうかを制御します。
 -   デフォルト値: `true`
 
 ### <code>tmp-storage-path</code> {#code-tmp-storage-path-code}
 
--   1 つの SQL ステートメントが`mem-quota-query`で指定されたメモリ クォータを超える場合に、一部の演算子の一時ストレージ パスを指定します。
--   デフォルト値: `<temporary directory of OS>/<OS user ID>_tidb/MC4wLjAuMDo0MDAwLzAuMC4wLjA6MTAwODA=/tmp-storage` 。 `MC4wLjAuMDo0MDAwLzAuMC4wLjA6MTAwODA=`は`<host>:<port>/<statusHost>:<statusPort>`の`Base64`エンコード結果です。
--   この構成は、 `oom-use-tmp-storage`が`true`の場合にのみ有効です。
+-   1 つの SQL ステートメントが`mem-quota-query`で指定されたメモリクォータを超える場合に、一部の演算子の一時ストレージ パスを指定します。
+-   デフォルト値: `<temporary directory of OS>/<OS user ID>_tidb/MC4wLjAuMDo0MDAwLzAuMC4wLjA6MTAwODA=/tmp-storage` 。 `MC4wLjAuMDo0MDAwLzAuMC4wLjA6MTAwODA=` `<host>:<port>/<statusHost>:<statusPort>`の`Base64`エンコード結果です。
+-   この構成は、 `oom-use-tmp-storage`が`true`場合にのみ有効です。
 
 ### <code>tmp-storage-quota</code> {#code-tmp-storage-quota-code}
 
@@ -55,9 +55,9 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 
 ### <code>oom-action</code> {#code-oom-action-code}
 
--   単一の SQL ステートメントが`mem-quota-query`で指定されたメモリ クォータを超え、ディスクにスピルオーバーできない場合に、TiDB が実行する操作を指定します。
+-   単一の SQL ステートメントが`mem-quota-query`で指定されたメモリクォータを超え、ディスクにスピルオーバーできない場合に、TiDB が実行する操作を指定します。
 -   デフォルト値: `"cancel"` (TiDB v4.0.2 以前のバージョンでは、デフォルト値は`"log"`です)
--   有効なオプションは`"log"`と`"cancel"`です。 `oom-action="log"`の場合、ログのみを出力します。 `oom-action="cancel"`の場合、操作をキャンセルしてログを出力します。
+-   有効なオプションは`"log"`と`"cancel"`です。 `oom-action="log"`の場合、ログのみを出力。 `oom-action="cancel"`の場合、操作をキャンセルしてログを出力します。
 
 ### <code>lower-case-table-names</code> {#code-lower-case-table-names-code}
 
@@ -79,8 +79,8 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 
 -   `KILL`ステートメントを MySQL 互換に設定するかどうかを決定します。
 -   デフォルト値: `false`
--   TiDB での`KILL xxx`の動作は、MySQL での動作とは異なります。 TiDB には`TIDB`キーワード、つまり`KILL TIDB xxx`が必要です。 `compatible-kill-query`が`true`に設定されている場合、 `TIDB`キーワードは必要ありません。
--   ユーザーが<kbd>Ctrl</kbd> + <kbd>C</kbd>を押したときの MySQL コマンドライン クライアントのデフォルトの動作は、バックエンドへの新しい接続を作成し、その新しい接続で`KILL`ステートメントを実行するため、この区別は重要です。ロード バランサーまたはプロキシが元のセッションとは異なる TiDBサーバーインスタンスに新しい接続を送信した場合、間違ったセッションが終了し、クラスターを使用しているアプリケーションが中断される可能性があります。 `KILL`ステートメントで参照する接続が、 `KILL`ステートメントの送信先と同じサーバー上にあることが確実な場合にのみ、 `compatible-kill-query`を有効にしてください。
+-   TiDB での`KILL xxx`の動作は、MySQL での動作とは異なります。 TiDB には`TIDB`キーワード、つまり`KILL TIDB xxx`必要です。 `compatible-kill-query`が`true`に設定されている場合、 `TIDB`キーワードは必要ありません。
+-   ユーザーが<kbd>Ctrl</kbd> + <kbd>C</kbd>を押したときの MySQL コマンドライン クライアントのデフォルトの動作は、バックエンドへの新しい接続を作成し、その新しい接続で`KILL`ステートメントを実行するため、この区別は重要です。ロード バランサーまたはプロキシが元のセッションとは異なる TiDBサーバーインスタンスに新しい接続を送信した場合、間違ったセッションが終了し、クラスターを使用しているアプリケーションが中断される可能性があります。 `KILL`ステートメントで参照する接続が、 `KILL`ステートメントの送信先と同じサーバー上にあることが確実な場合にのみ、 `compatible-kill-query`有効にしてください。
 
 ### <code>check-mb4-value-in-utf8</code> {#code-check-mb4-value-in-utf8-code}
 
@@ -118,7 +118,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 
 ### <code>repair-table-list</code> {#code-repair-table-list-code}
 
--   `repair-table-list`は、 [`repair-mode`](#repair-mode)が`true`に設定されている場合にのみ有効です。 `repair-table-list`は、インスタンスで修復する必要がある不良テーブルのリストです。リストの例: [&quot;db.table1&quot;,&quot;db.table2&quot;...].
+-   `repair-table-list`は、 [`repair-mode`](#repair-mode) `true`に設定されている場合にのみ有効です。 `repair-table-list`は、インスタンスで修復する必要がある不良テーブルのリストです。リストの例: [&quot;db.table1&quot;,&quot;db.table2&quot;...].
 -   デフォルト値: []
 -   デフォルトでは、リストは空です。これは、修復が必要な不良テーブルがないことを意味します。
 
@@ -126,7 +126,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 
 -   新しい照合順序サポートを有効または無効にします。
 -   デフォルト値: `false`
--   注: この構成は、最初に初期化された TiDB クラスターに対してのみ有効です。初期化後は、この構成項目を使用して新しい照合順序サポートを有効または無効にすることはできません。 TiDB クラスターが v4.0 にアップグレードされると、クラスターは以前に初期化されているため、この構成項目の`true`と`false`の値は両方とも`false`と見なされます。
+-   注: この構成は、最初に初期化された TiDB クラスターに対してのみ有効です。初期化後は、この構成項目を使用して新しい照合順序サポートを有効または無効にすることはできません。 TiDB クラスターが v4.0 にアップグレードされると、クラスターは以前に初期化されているため、この構成項目の`true`と`false`値は両方とも`false`と見なされます。
 
 ### <code>max-server-connections</code> {#code-max-server-connections-code}
 
@@ -153,17 +153,17 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 -   デフォルト値: `64`
 -   現在、有効な値の範囲は`[64, 512]`です。
 
-### <code>enable-telemetry</code> <span class="version-mark">telemetry v4.0.2 の新機能</span> {#code-enable-telemetry-code-span-class-version-mark-new-in-v4-0-2-span}
+### <code>enable-telemetry</code> <span class="version-mark">v4.0.2 の新機能</span> {#code-enable-telemetry-code-span-class-version-mark-new-in-v4-0-2-span}
 
 -   TiDB でのテレメトリ収集を有効または無効にします。
 -   デフォルト値: `true`
 -   この構成がすべての TiDB インスタンスで`false`に設定されている場合、TiDB のテレメトリ収集は無効になり、 [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402)システム変数は有効になりません。詳細は[テレメトリー](/telemetry.md)を参照してください。
 
-### <code>enable-tcp4-only</code> <span class="version-mark">v5.0 の新</span>機能 {#code-enable-tcp4-only-code-span-class-version-mark-new-in-v5-0-span}
+### <code>enable-tcp4-only</code> <span class="version-mark">v5.0 の新機能</span> {#code-enable-tcp4-only-code-span-class-version-mark-new-in-v5-0-span}
 
 -   TCP4 のみでのリッスンを有効または無効にします。
 -   デフォルト値: `false`
--   このオプションを有効にすると、「tcp4」プロトコルで[TCP ヘッダーからの実際のクライアント IP](https://github.com/alibaba/LVS/tree/master/kernel/net/toa)を正しく解析できるため、TiDB を LVS で使用してロード バランシングを行う場合に便利です。
+-   このオプションを有効にすると、「tcp4」プロトコルで[TCP ヘッダーからの実際のクライアント IP](https://github.com/alibaba/LVS/tree/master/kernel/net/toa)正しく解析できるため、TiDB を LVS で使用してロード バランシングを行う場合に便利です。
 
 ### <code>enable-enum-length-limit</code> <span class="version-mark">v5.0 の新機能</span> {#code-enable-enum-length-limit-code-span-class-version-mark-new-in-v5-0-span}
 
@@ -171,13 +171,13 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 -   デフォルト値: `true`
 -   この構成値が`true`の場合、単一の`ENUM`エレメントと単一の`SET`エレメントの最大長は 255 文字であり、これは[MySQL 8.0](https://dev.mysql.com/doc/refman/8.0/en/string-type-syntax.html)と互換性があります。この構成値が`false`の場合、1 つの要素の長さに制限はなく、TiDB (v5.0 より前) と互換性があります。
 
-#### <code>graceful-wait-before-shutdown</code> <span class="version-mark">v5.0 の新</span>機能 {#code-graceful-wait-before-shutdown-code-span-class-version-mark-new-in-v5-0-span}
+#### <code>graceful-wait-before-shutdown</code> <span class="version-mark">v5.0 の新機能</span> {#code-graceful-wait-before-shutdown-code-span-class-version-mark-new-in-v5-0-span}
 
 -   サーバーをシャットダウンするときに TiDB が待機する秒数を指定します。これにより、クライアントは切断できるようになります。
 -   デフォルト値: `0`
 -   TiDB が (猶予期間で) シャットダウンを待機している場合、HTTP ステータスは失敗を示し、ロード バランサーがトラフィックを再ルーティングできるようにします。
 
-### <code>enable-forwarding</code><span class="version-mark">新機能</span> {#code-enable-forwarding-code-span-class-version-mark-new-in-v5-0-0-span}
+### <span class="version-mark">v5.0.0 の新</span><code>enable-forwarding</code> {#code-enable-forwarding-code-span-class-version-mark-new-in-v5-0-0-span}
 
 -   ネットワーク分離の可能性がある場合に、TiDB の PD クライアントと TiKV クライアントがフォロワー経由でリーダーにリクエストを転送するかどうかを制御します。
 -   デフォルト値: `false`
@@ -192,11 +192,11 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 
 -   テーブル ロック機能を有効にするかどうかを制御します。
 -   デフォルト値: `false`
--   テーブル ロックは、複数のセッション間で同じテーブルへの同時アクセスを調整するために使用されます。現在、 `READ` 、 `WRITE` 、および`WRITE LOCAL`のロック タイプがサポートされています。構成項目が`false`に設定されている場合、 `LOCK TABLE`または`UNLOCK TABLE`ステートメントを実行しても効果がなく、「LOCK/UNLOCK TABLES is not supported」という警告が返されます。
+-   テーブル ロックは、複数のセッション間で同じテーブルへの同時アクセスを調整するために使用されます。現在、 `READ` 、 `WRITE` 、および`WRITE LOCAL`ロック タイプがサポートされています。構成項目が`false`に設定されている場合、 `LOCK TABLES`または`UNLOCK TABLES`ステートメントを実行しても効果がなく、「LOCK/UNLOCK TABLES is not supported」という警告が返されます。詳細については、 [`LOCK TABLES`と<code>UNLOCK TABLES</code>](/sql-statements/sql-statement-lock-tables-and-unlock-tables.md)参照してください。
 
 ## ログ {#log}
 
-ログに関するConfiguration / コンフィグレーション項目です。
+ログに関するコンフィグレーション項目です。
 
 ### <code>level</code> {#code-level-code}
 
@@ -220,7 +220,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 >
 > -   下位互換性を維持するために、最初の`disable-timestamp`構成アイテムは引き続き有効です。ただし、 `disable-timestamp`の値が`enable-timestamp`の値と意味的に競合する場合 (たとえば、 `enable-timestamp`と`disable-timestamp`の両方が`true`に設定されている場合)、TiDB は`disable-timestamp`の値を無視します。
 > -   現在、TiDB は`disable-timestamp`を使用してログにタイムスタンプを出力するかどうかを決定します。この場合、 `enable-timestamp`の値は`null`です。
-> -   それ以降のバージョンでは、 `disable-timestamp`の構成が削除されます。 `disable-timestamp`を破棄して、意味的に理解しやすい`enable-timestamp`を使用します。
+> -   それ以降のバージョンでは、 `disable-timestamp`構成が削除されます。 `disable-timestamp`破棄して、意味的に理解しやすい`enable-timestamp`使用します。
 
 ### <code>enable-slow-log</code> {#code-enable-slow-log-code}
 
@@ -245,13 +245,13 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 
 -   実行計画をスロー ログに記録するかどうかを決定します。
 -   デフォルト値: `1`
--   `0`は無効にすることを意味し、 `1` (デフォルト) は有効にすることを意味します。このパラメータの値は、システム変数[`tidb_record_plan_in_slow_log`](/system-variables.md#tidb_record_plan_in_slow_log)の初期値です。
+-   `0`無効にすることを意味し、 `1` (デフォルト) は有効にすることを意味します。このパラメータの値は、システム変数[`tidb_record_plan_in_slow_log`](/system-variables.md#tidb_record_plan_in_slow_log)の初期値です。
 
 ### <code>expensive-threshold</code> {#code-expensive-threshold-code}
 
--   `expensive`の操作で行数の閾値を出力します。
+-   `expensive`回の操作で行数の閾値を出力します。
 -   デフォルト値: `10000`
--   クエリの行数（統計に基づく中間結果を含む）がこの値より大きい場合は、 `expensive`の操作で`[EXPENSIVE_QUERY]`のプレフィックスを付けてログを出力します。
+-   クエリの行数（統計に基づく中間結果を含む）がこの値より大きい場合は、 `expensive`回の操作で`[EXPENSIVE_QUERY]`プレフィックスを付けてログを出力します。
 
 ### <code>query-log-max-len</code> {#code-query-log-max-len-code}
 
@@ -261,7 +261,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 
 ## ログファイル {#log-file}
 
-ログファイルに関するConfiguration / コンフィグレーション項目です。
+ログファイルに関するコンフィグレーション項目です。
 
 #### <code>filename</code> {#code-filename-code}
 
@@ -290,7 +290,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 
 ## 安全 {#security}
 
-セキュリティに関するConfiguration / コンフィグレーション項目です。
+セキュリティに関するコンフィグレーション項目です。
 
 ### <code>require-secure-transport</code> {#code-require-secure-transport-code}
 
@@ -314,7 +314,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 
 -   PEM 形式の SSL 証明書のファイル パス。
 -   デフォルト値: &quot;&quot;
--   このオプションと`--ssl-key`を同時に設定すると、TiDB はクライアントが TLS を使用して TiDB に安全に接続することを許可します (強制はしません)。
+-   このオプションと`--ssl-key`同時に設定すると、TiDB はクライアントが TLS を使用して TiDB に安全に接続することを許可します (強制はしません)。
 -   指定された証明書または秘密鍵が無効な場合、TiDB は通常どおり起動しますが、安全な接続を受け取ることができません。
 
 ### <code>ssl-key</code> {#code-ssl-key-code}
@@ -357,29 +357,29 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 
 ## パフォーマンス {#performance}
 
-性能に関するConfiguration / コンフィグレーション項目です。
+性能に関するコンフィグレーション項目です。
 
 ### <code>max-procs</code> {#code-max-procs-code}
 
 -   TiDB が使用する CPU の数。
 -   デフォルト値: `0`
--   デフォルトの`0`は、マシン上のすべての CPU を使用することを示します。 n に設定すると、TiDB は n 個の CPU を使用することもできます。
+-   デフォルトの`0`マシン上のすべての CPU を使用することを示します。 n に設定すると、TiDB は n 個の CPU を使用することもできます。
 
 ### <code>server-memory-quota</code> <span class="version-mark">v4.0.9 の新機能</span> {#code-server-memory-quota-code-span-class-version-mark-new-in-v4-0-9-span}
 
 > **警告：**
 >
-> `server-memory-quota`はまだ実験的機能です。実稼働環境で使用することはお勧めし**ません**。
+> `server-memory-quota`はまだ実験的機能です。本番環境で使用することは**お**勧めしません。
 
 -   tidb-server インスタンスのメモリ使用制限。
 -   デフォルト値: `0` (バイト単位)。これは、メモリ制限がないことを意味します。
 
-### <code>memory-usage-alarm-ratio</code><span class="version-mark">新機能</span> {#code-memory-usage-alarm-ratio-code-span-class-version-mark-new-in-v4-0-9-span}
+### <span class="version-mark">v4.0.9 の新</span><code>memory-usage-alarm-ratio</code> {#code-memory-usage-alarm-ratio-code-span-class-version-mark-new-in-v4-0-9-span}
 
 -   tidb-server インスタンスのメモリ使用量が特定のしきい値を超えると、TiDB はアラームをトリガーします。この構成アイテムの有効な値の範囲は`0`から`1`です。 `0`または`1`として構成されている場合、このアラーム機能は無効になります。
 -   デフォルト値: `0.8`
 -   メモリ使用量アラームが有効になっている場合、 [`server-memory-quota`](/tidb-configuration-file.md#server-memory-quota-new-in-v409)が設定されていない場合、メモリ使用量のしきい値は``the `memory-usage-alarm-ratio` value * the system memory size``です。 `server-memory-quota`が 0 より大きい値に設定されている場合、メモリ使用量のしきい値は``the `memory-usage-alarm-ratio` value * the `server-memory-quota` value``です。
--   TiDB は、tidb-server インスタンスのメモリ使用量がしきい値を超えていることを検出すると、OOM のリスクがあると見なします。したがって、ディレクトリ[`tmp-storage-path/record`](/tidb-configuration-file.md#tmp-storage-path)に現在実行されているすべての SQL ステートメントのうち、メモリ使用量が最も多い 10 個の SQL ステートメント、実行時間が最も長い 10 個の SQL ステートメント、およびヒープ プロファイルを記録し、キーワード`tidb-server has the risk of OOM`を含むログを出力します。
+-   TiDB は、tidb-server インスタンスのメモリ使用量がしきい値を超えていることを検出すると、OOM のリスクがあると見なします。したがって、ディレクトリ[`tmp-storage-path/record`](/tidb-configuration-file.md#tmp-storage-path)に現在実行されているすべての SQL ステートメントのうち、メモリ使用量が最も多い 10 個の SQL ステートメント、実行時間が最も長い 10 個の SQL ステートメント、およびヒープ プロファイルを記録し、キーワード`tidb-server has the risk of OOM`含むログを出力します。
 -   この設定項目の値は、システム変数[`tidb_memory_usage_alarm_ratio`](/system-variables.md#tidb_memory_usage_alarm_ratio)の初期値です。
 
 ### <code>max-txn-ttl</code> {#code-max-txn-ttl-code}
@@ -399,7 +399,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 
 -   1 つの TiDB トランザクションで許可されるステートメントの最大数。
 -   デフォルト値: `5000`
--   ステートメントの数が`stmt-count-limit`を超えた後にトランザクションがロールバックまたはコミットされない場合、TiDB は`statement count 5001 exceeds the transaction limitation, autocommit = false`エラーを返します。この構成は、リトライ可能なオプティミスティック トランザクションで**のみ**有効です。ペシミスティック トランザクションを使用するか、トランザクションの再試行を無効にしている場合、トランザクション内のステートメントの数はこの構成によって制限されません。
+-   ステートメントの数が`stmt-count-limit`超えた後にトランザクションがロールバックまたはコミットされない場合、TiDB は`statement count 5001 exceeds the transaction limitation, autocommit = false`エラーを返します。この構成は、リトライ可能な楽観的トランザクションで**のみ**有効です。悲観的トランザクションを使用するか、トランザクションの再試行を無効にしている場合、トランザクション内のステートメントの数はこの構成によって制限されません。
 
 ### <code>txn-entry-size-limit</code> <span class="version-mark">v5.0 の新機能</span> {#code-txn-entry-size-limit-code-span-class-version-mark-new-in-v5-0-span}
 
@@ -453,7 +453,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 
 > **警告：**
 >
-> この機能は、v5.4 以降廃止されました。この機能を有効にすることはお勧めしません。
+> この機能は、v5.4 から廃止されました。この機能を有効にすることはお勧めしません。
 
 -   TiDB が各クエリのフィードバック統計を収集する確率。
 -   デフォルト値: `0`
@@ -511,7 +511,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 
 ## オープントレース {#opentracing}
 
-opentracing に関連するConfiguration / コンフィグレーション項目。
+opentracing に関連するコンフィグレーション項目。
 
 ### <code>enable</code> {#code-enable-code}
 
@@ -525,7 +525,7 @@ opentracing に関連するConfiguration / コンフィグレーション項目�
 
 ## opentracing.sampler {#opentracing-sampler}
 
-opentracing.sampler に関するConfiguration / コンフィグレーション項目です。
+opentracing.sampler に関するコンフィグレーション項目です。
 
 ### <code>type</code> {#code-type-code}
 
@@ -559,7 +559,7 @@ opentracing.sampler に関するConfiguration / コンフィグレーション�
 
 ## opentracing.reporter {#opentracing-reporter}
 
-opentracing.reporter に関するConfiguration / コンフィグレーション項目です。
+opentracing.reporter に関するコンフィグレーション項目です。
 
 ### <code>queue-size</code> {#code-queue-size-code}
 
@@ -590,7 +590,7 @@ opentracing.reporter に関するConfiguration / コンフィグレーション�
 
 ### <code>grpc-keepalive-time</code> {#code-grpc-keepalive-time-code}
 
--   TiDB ノードと TiKV ノード間の RPC 接続の`keepalive`時間間隔。指定された時間間隔内にネットワーク パケットがない場合、gRPC クライアントは TiKV に対して`ping`のコマンドを実行して、生きているかどうかを確認します。
+-   TiDB ノードと TiKV ノード間の RPC 接続の`keepalive`時間間隔。指定された時間間隔内にネットワーク パケットがない場合、gRPC クライアントは TiKV に対して`ping`コマンドを実行して、生きているかどうかを確認します。
 -   デフォルト: `10`
 -   単位：秒
 
@@ -628,9 +628,9 @@ opentracing.reporter に関するConfiguration / コンフィグレーション�
 -   TiKV 負荷のしきい値。 TiKV 負荷がこのしきい値を超えると、TiKV の圧力を軽減するために、より多くの`batch`パケットが収集されます。 `tikv-client.max-batch-size`の値が`0`より大きい場合にのみ有効です。この値は変更しないことをお勧めします。
 -   デフォルト値: `200`
 
-## tikv-client.copr-cache v4.0.0 の<span class="version-mark">新機能</span> {#tikv-client-copr-cache-span-class-version-mark-new-in-v4-0-0-span}
+## tikv-client.copr-cache <span class="version-mark">v4.0.0 の新機能</span> {#tikv-client-copr-cache-span-class-version-mark-new-in-v4-0-0-span}
 
-このセクションでは、コプロセッサ キャッシュ機能に関連する設定項目を紹介します。
+このセクションでは、コプロセッサーキャッシュ機能に関連する設定項目を紹介します。
 
 ### <code>capacity-mb</code> {#code-capacity-mb-code}
 
@@ -641,11 +641,11 @@ opentracing.reporter に関するConfiguration / コンフィグレーション�
 
 ## txn ローカル ラッチ {#txn-local-latches}
 
-トランザクション ラッチに関するConfiguration / コンフィグレーション。多くのローカル トランザクションの競合が発生する場合は、有効にすることをお勧めします。
+トランザクション ラッチに関するコンフィグレーション。多くのローカル トランザクションの競合が発生する場合は、有効にすることをお勧めします。
 
 ### <code>enabled</code> {#code-enabled-code}
 
--   トランザクションのメモリ ロックを有効にするかどうかを決定します。
+-   トランザクションのメモリロックを有効にするかどうかを決定します。
 -   デフォルト値: `false`
 
 ### <code>capacity</code> {#code-capacity-code}
@@ -672,7 +672,7 @@ TiDB Binlogに関連する構成。
 
 -   binlog をPumpに書き込むプロセスで発生したエラーを無視するかどうかを決定します。この値を変更することはお勧めしません。
 -   デフォルト値: `false`
--   値を`true`に設定してエラーが発生すると、TiDB は binlog の書き込みを停止し、 `tidb_server_critical_error_total`の監視項目のカウントに`1`を追加します。値が`false`に設定されている場合、binlog の書き込みは失敗し、TiDB サービス全体が停止します。
+-   値を`true`に設定してエラーが発生すると、TiDB は binlog の書き込みを停止し、 `tidb_server_critical_error_total`監視項目のカウントに`1`を追加します。値が`false`に設定されている場合、binlog の書き込みは失敗し、TiDB サービス全体が停止します。
 
 ### <code>binlog-socket</code> {#code-binlog-socket-code}
 
@@ -681,12 +681,12 @@ TiDB Binlogに関連する構成。
 
 ### <code>strategy</code> {#code-strategy-code}
 
--   バイナリログをエクスポートするときのPump選択の戦略。現在、 `hash`と`range`の方法のみがサポートされています。
+-   バイナリログをエクスポートするときのPump選択の戦略。現在、 `hash`と`range`方法のみがサポートされています。
 -   デフォルト値: `range`
 
-## 状態 {#status}
+## スターテス {#status}
 
-TiDB サービスのステータスに関するConfiguration / コンフィグレーション。
+TiDB サービスのステータスに関するコンフィグレーション。
 
 ### <code>report-status</code> {#code-report-status-code}
 
@@ -709,21 +709,21 @@ TiDB サービスのステータスに関するConfiguration / コンフィグ�
 
 ### 最大 SQL 長 {#max-sql-length}
 
--   [ステートメント要約表](/statement-summary-tables.md)の`DIGEST_TEXT`列と`QUERY_SAMPLE_TEXT`列の最長表示長。
+-   [ステートメント要約表](/statement-summary-tables.md)の`DIGEST_TEXT`と`QUERY_SAMPLE_TEXT`列の最長表示長。
 -   デフォルト値: `4096`
 
 ## 悲観的-txn {#pessimistic-txn}
 
-悲観的トランザクションの使用法については、 [TiDB ペシミスティック トランザクション モード](/pessimistic-transaction.md)を参照してください。
+悲観的トランザクションの使用法については、 [TiDB ペシミスティックトランザクションモード](/pessimistic-transaction.md)を参照してください。
 
 ### 最大再試行回数 {#max-retry-count}
 
--   ペシミスティック トランザクションでの各ステートメントの最大再試行回数。再試行回数がこの制限を超えると、エラーが発生します。
+-   悲観的トランザクションでの各ステートメントの最大再試行回数。再試行回数がこの制限を超えると、エラーが発生します。
 -   デフォルト値: `256`
 
 ### デッドロック履歴容量 {#deadlock-history-capacity}
 
--   1 つの TiDBサーバーの[`INFORMATION_SCHEMA.DEADLOCKS`](/information-schema/information-schema-deadlocks.md)つのテーブルに記録できるデッドロック イベントの最大数。このテーブルがいっぱいになり、追加のデッドロック イベントが発生した場合、テーブル内の最も古いレコードが削除され、最新のエラーに対応します。
+-   1 つの TiDBサーバーの[`INFORMATION_SCHEMA.DEADLOCKS`](/information-schema/information-schema-deadlocks.md)のテーブルに記録できるデッドロック イベントの最大数。このテーブルがいっぱいになり、追加のデッドロック イベントが発生した場合、テーブル内の最も古いレコードが削除され、最新のエラーに対応します。
 -   デフォルト値: `10`
 -   最小値: `0`
 -   最大値: `10000`
@@ -735,7 +735,7 @@ TiDB サービスのステータスに関するConfiguration / コンフィグ�
 
 ## 分離読み取り {#isolation-read}
 
-読み取り分離に関連するConfiguration / コンフィグレーション項目。
+読み取り分離に関連するコンフィグレーション項目。
 
 ### <code>engines</code> {#code-engines-code}
 
@@ -745,18 +745,18 @@ TiDB サービスのステータスに関するConfiguration / コンフィグ�
 
 ## プロキシプロトコル {#proxy-protocol}
 
-PROXY プロトコルに関するConfiguration / コンフィグレーション項目です。
+PROXY プロトコルに関するコンフィグレーション項目です。
 
 ### <code>networks</code> {#code-networks-code}
 
 -   [プロキシ プロトコル](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt)を使用して TiDB に接続できるプロキシ サーバーの IP アドレスのリスト
 -   デフォルト値: &quot;&quot;
 -   一般に、リバース プロキシの背後にある TiDB にアクセスすると、TiDB はリバース プロキシサーバーの IP アドレスをクライアントの IP アドレスとして取得します。 PROXY プロトコルを有効にすることで、このプロトコルをサポートする HAProxy などのリバース プロキシは、実際のクライアント IP アドレスを TiDB に渡すことができます。
--   このパラメータを設定すると、TiDB は、設定された送信元 IP アドレスが PROXY プロトコルを使用して TiDB に接続できるようにします。 PROXY 以外のプロトコルが使用されている場合、この接続は拒否されます。このパラメーターを空のままにすると、PROXY プロトコルを使用して IP アドレスが TiDB に接続できなくなります。値は、IP アドレス (192.168.1.50) または CIDR (192.168.1.0/24) で、区切り記号として`,`を使用できます。 `*`は任意の IP アドレスを意味します。
+-   このパラメータを設定すると、TiDB は、設定された送信元 IP アドレスが PROXY プロトコルを使用して TiDB に接続できるようにします。 PROXY 以外のプロトコルが使用されている場合、この接続は拒否されます。このパラメーターを空のままにすると、PROXY プロトコルを使用して IP アドレスが TiDB に接続できなくなります。値は、IP アドレス (192.168.1.50) または CIDR (192.168.1.0/24) で、区切り記号として`,`を使用できます。 `*`任意の IP アドレスを意味します。
 
 > **警告：**
 >
-> `*`を使用すると、任意の IP アドレスのクライアントがその IP アドレスを報告できるようになり、セキュリティ上のリスクが生じる可能性があるため、注意して使用してください。さらに、 `*`を使用すると、TiDB に直接接続する内部コンポーネント (TiDB ダッシュボードなど) が使用できなくなる可能性もあります。
+> `*`を使用すると、任意の IP アドレスのクライアントがその IP アドレスを報告できるようになり、セキュリティ上のリスクが生じる可能性があるため、注意して使用してください。さらに、 `*`を使用すると、TiDB に直接接続する内部コンポーネント(TiDB ダッシュボードなど) が使用できなくなる可能性もあります。
 
 ## 実験的 {#experimental}
 
@@ -771,7 +771,7 @@ v3.1.0 で導入された`experimental`セクションでは、TiDB の実験的
 
 > **警告：**
 >
-> 現在、統計の同期読み込みは実験的機能です。実稼働環境で使用することはお勧めしません。
+> 現在、統計の同期読み込みは実験的機能です。本番環境で使用することはお勧めしません。
 
 -   TiDB 同期ロード統計機能が同時に処理できる列の最大数。
 -   デフォルト値: `5`
@@ -781,7 +781,7 @@ v3.1.0 で導入された`experimental`セクションでは、TiDB の実験的
 
 > **警告：**
 >
-> 現在、統計の同期読み込みは実験的機能です。実稼働環境で使用することはお勧めしません。
+> 現在、統計の同期読み込みは実験的機能です。本番環境で使用することはお勧めしません。
 
 -   TiDB 同期読み込み統計機能がキャッシュできる列リクエストの最大数。
 -   デフォルト値: `1000`

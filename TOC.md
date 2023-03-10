@@ -140,7 +140,7 @@
                 -   [パーティションのプルーニング](/partition-pruning.md)
                 -   [TopN とリミット プッシュ ダウン](/topn-limit-push-down.md)
                 -   [結合したテーブルの再配置](/join-reorder.md)
-            -   物理的最適化
+            -   物理的な最適化
                 -   [概要](/sql-physical-optimization.md)
                 -   [インデックスの選択](/choose-index.md)
                 -   [統計](/statistics.md)
@@ -393,7 +393,7 @@
         -   セキュリティ
             -   [DM 接続の TLS を有効にする](/dm/dm-enable-tls.md)
             -   [自己署名証明書の生成](/dm/dm-generate-self-signed-certificates.md)
-        -   [指標の監視](/dm/monitor-a-dm-cluster.md)
+        -   [指標のモニタリング](/dm/monitor-a-dm-cluster.md)
         -   [アラート ルール](/dm/dm-alert-rules.md)
         -   [エラーコード](/dm/dm-error-handling.md#handle-common-errors)
         -   [FAQ](/dm/dm-faq.md)
@@ -548,6 +548,7 @@
             -   [`KILL [TIDB]`](/sql-statements/sql-statement-kill.md)
             -   [`LOAD DATA`](/sql-statements/sql-statement-load-data.md)
             -   [`LOAD STATS`](/sql-statements/sql-statement-load-stats.md)
+            -   [`LOCK TABLES`と<code>UNLOCK TABLES</code>](/sql-statements/sql-statement-lock-tables-and-unlock-tables.md)
             -   [`MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md)
             -   [`PREPARE`](/sql-statements/sql-statement-prepare.md)
             -   [`RECOVER TABLE`](/sql-statements/sql-statement-recover-table.md)
@@ -611,6 +612,7 @@
             -   [`SPLIT REGION`](/sql-statements/sql-statement-split-region.md)
             -   [`START TRANSACTION`](/sql-statements/sql-statement-start-transaction.md)
             -   [`TABLE`](/sql-statements/sql-statement-table.md)
+            -   [`TRACE`](/sql-statements/sql-statement-trace.md)
             -   [`TRACE`](/sql-statements/sql-statement-trace.md)
             -   [`TRUNCATE`](/sql-statements/sql-statement-truncate.md)
             -   [`UPDATE`](/sql-statements/sql-statement-update.md)
