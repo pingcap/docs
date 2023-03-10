@@ -2028,7 +2028,9 @@ Configuration items related to maintaining the Resolved TS to serve Stale Read r
 ### `advance-ts-interval`
 
 + The interval at which Resolved TS is calculated and forwarded.
-+ Default value: `"20s"`
++ Default value:
+    - For TiDB v6.5.0, the default value is `"1s"`.
+    - For TiDB v6.5.1 and later v6.5.x versions, the default value is `"20s"`.
 
 ### `scan-lock-pool-size`
 
