@@ -54,7 +54,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
 
 + TiFlash
 
-    - Improve the TiFlash startup speed greatly under large data volume [#6395](https://github.com/pingcap/tiflash/issues/6395) @[hehechen](https://github.com/hehechen)
+    - Accelerate TiFlash startup greatly when the data volume is large [#6395](https://github.com/pingcap/tiflash/issues/6395) @[hehechen](https://github.com/hehechen)
 
 + Tools
 
@@ -136,10 +136,10 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
 + TiFlash
 
     - Fix the issue that semi-joins use excessive memory when calculating Cartesian products [#6730](https://github.com/pingcap/tiflash/issues/6730) @[gengliqi](https://github.com/gengliqi)
-    - 修复 TiFlash 日志搜索过慢的问题 [#6829](https://github.com/pingcap/tiflash/issues/6829) @[hehechen](https://github.com/hehechen)
-    - 修复 TiFlash 在反复重启后由于文件错误被删除而无法启动的问题 [#6486](https://github.com/pingcap/tiflash/issues/6486) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    - 修复 TiFlash 可能在添加新列后查询报错的问题 [#6726](https://github.com/pingcap/tiflash/issues/6726) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    - 修复 TiFlash 配置不支持 ipv6 的问题 [#6734](https://github.com/pingcap/tiflash/issues/6734) @[ywqzzy](https://github.com/ywqzzy)
+    - Fix the issue that TiFlash log search is too slow [#6829](https://github.com/pingcap/tiflash/issues/6829) @[hehechen](https://github.com/hehechen)
+    - Fix the issue that TiFlash cannot start due to unexpected removal of files after repeated restarts [#6486](https://github.com/pingcap/tiflash/issues/6486) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - Fix the issue that TiFlash might report an error when performing a query after adding a new column [#6726](https://github.com/pingcap/tiflash/issues/6726) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - Fix the issue that TiFlash does not support IPv6 configuration [#6734](https://github.com/pingcap/tiflash/issues/6734) @[ywqzzy](https://github.com/ywqzzy)
 
 + Tools
 
@@ -155,8 +155,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
         - Fix the issue that the frequency of `resolve lock` is too high when there is no PITR backup task in the TiDB cluster [#40759](https://github.com/pingcap/tidb/issues/40759) @[joccau](https://github.com/joccau)
         - Fix the issue that restoring data to a cluster on which the log backup is running causes the log backup file to be unrecoverable [#40797](https://github.com/pingcap/tidb/issues/40797) @[Leavrth](https://github.com/Leavrth)
         - Fix the panic issue that occurs when attempting to resume backup from a checkpoint after a full backup failure [#40704](https://github.com/pingcap/tidb/issues/40704) @[Leavrth](https://github.com/Leavrth)
-        - 修复 PITR 错误被覆盖的问题 [#40576](https://github.com/pingcap/tidb/issues/40576)@[Leavrth](https://github.com/Leavrth)
-        - 修复 PITR 备份任务在 advance owner 与 gc owner 不同情况下 checkpoint 不推进的问题 [#41806](https://github.com/pingcap/tidb/issues/41806) @[joccau](https://github.com/joccau)
+        - Fix the issue that PITR errors are overwritten [#40576](https://github.com/pingcap/tidb/issues/40576)@[Leavrth](https://github.com/Leavrth)
+        - Fix the issue that checkpoints do not advance in PITR backup tasks when the advance owner and gc owner are different [#41806](https://github.com/pingcap/tidb/issues/41806) @[joccau](https://github.com/joccau)
 
     + TiCDC
 
@@ -168,10 +168,10 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
         - Fix the issue that applying redo log might cause OOM when the replication lag is excessively high [#8085](https://github.com/pingcap/tiflow/issues/8085) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - Fix the issue that the performance degrades when redo log is enabled to write meta [#8074](https://github.com/pingcap/tiflow/issues/8074) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - Fix a bug that the context deadline is exceeded when TiCDC replicates data without splitting large transactions [#7982](https://github.com/pingcap/tiflow/issues/7982) @[hi-rustin](https://github.com/hi-rustin)
-        - 默认打开 pull-based sink 功能提升系统的吞吐 [#8232](https://github.com/pingcap/tiflow/issues/8232) @[hi-rustin](https://github.com/hi-rustin)
-        - 修复在PD 异常时，暂停一个 changefeed 会错误设置状态的问题 [#8330](https://github.com/pingcap/tiflow/issues/8330) @[sdojjy](https://github.com/sdojjy)
-        - 修复下游为 tidb/mysql ，无主键且非空唯一索引所在列指定了 CHARACTER SET 同步时可能会出现数据不一致的问题。[#8420](https://github.com/pingcap/tiflow/issues/8420) @[asddongmen](https://github.com/asddongmen)
-        - Fix panics about table scheduling or blackhole sink [#8024](https://github.com/pingcap/tiflow/issues/8024) [#8142](https://github.com/pingcap/tiflow/issues/8142) @[hicqu](https://github.com/hicqu)
+        - Enable pull-based sink to optimize system throughput [#8232](https://github.com/pingcap/tiflow/issues/8232) @[hi-rustin](https://github.com/hi-rustin)
+        - Fix the issue that pausing a changefeed when PD is abnormal results in incorrect status [#8330](https://github.com/pingcap/tiflow/issues/8330) @[sdojjy](https://github.com/sdojjy)
+        - Fix data inconsistency when replicating to a TiDB or MySQL sink and the column where the non-unique index key without a primary key [#8420](https://github.com/pingcap/tiflow/issues/8420) @[asddongmen](https://github.com/asddongmen)
+        - Fix the panic issue about table scheduling and blackhole sink [#8024](https://github.com/pingcap/tiflow/issues/8024) [#8142](https://github.com/pingcap/tiflow/issues/8142) @[hicqu](https://github.com/hicqu)
 
     + TiDB Data Migration (DM)
 
@@ -185,4 +185,4 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
         - Fix the issue that TiDB Lightning panics in the split-region phase [#40934](https://github.com/pingcap/tidb/issues/40934) @[lance6716](https://github.com/lance6716)
         - Fix the issue that the conflict resolution logic (`duplicate-resolution`) might lead to inconsistent checksums [#40657](https://github.com/pingcap/tidb/issues/40657) @[gozssky](https://github.com/gozssky)
         - Fix the issue that TiDB Lightning might incorrectly skip conflict resolution when all but the last TiDB Lightning instance encounters a local duplicate record during a parallel import [#40923](https://github.com/pingcap/tidb/issues/40923) @[lichunzhu](https://github.com/lichunzhu)
-        - 修复了在使用 Local Backend 模式导入数据时，当导入目标表的复合主键中存在 `auto_random` 列，且源数据中没有指定该列的值时，相关列没有自动生成数据的问题。[#41454](https://github.com/pingcap/tidb/issues/41454) @[D3Hunter](https://github.com/D3Hunter)
+        - Fix the issue that when importing data in Local Backend mode, the target columns do not automatically generate data if the compound primary key of the imported target table has an 'auto_random' column and no value for the column is specified in the source data [#41454](https://github.com/pingcap/tidb/issues/41454) @[D3Hunter](https://github.com/D3Hunter)
