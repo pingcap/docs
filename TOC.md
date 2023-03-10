@@ -673,6 +673,11 @@
       - [`KILL [TIDB]`](/sql-statements/sql-statement-kill.md)
       - [`LOAD DATA`](/sql-statements/sql-statement-load-data.md)
       - [`LOAD STATS`](/sql-statements/sql-statement-load-stats.md)
+<<<<<<< HEAD
+=======
+      - [`LOCK STATS`](/sql-statements/sql-statement-lock-stats.md)
+      - [`LOCK TABLES` and `UNLOCK TABLES`](/sql-statements/sql-statement-lock-tables-and-unlock-tables.md)
+>>>>>>> 343287e4c (Correct the location of table lock in TOC (#12851))
       - [`MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md)
       - [`PREPARE`](/sql-statements/sql-statement-prepare.md)
       - [`RECOVER TABLE`](/sql-statements/sql-statement-recover-table.md)
@@ -737,7 +742,6 @@
       - [`SPLIT REGION`](/sql-statements/sql-statement-split-region.md)
       - [`START TRANSACTION`](/sql-statements/sql-statement-start-transaction.md)
       - [`TABLE`](/sql-statements/sql-statement-table.md)
-      - [`LOCK TABLES` and `UNLOCK TABLES`](/sql-statements/sql-statement-lock-tables-and-unlock-tables.md)
       - [`TRACE`](/sql-statements/sql-statement-trace.md)
       - [`TRACE`](/sql-statements/sql-statement-trace.md)
       - [`TRUNCATE`](/sql-statements/sql-statement-truncate.md)
