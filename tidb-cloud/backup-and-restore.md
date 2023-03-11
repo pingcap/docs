@@ -53,6 +53,7 @@ By the automatic backup, you can back up the cluster data every day at the backu
             - Your TiDB cluster is hosted on AWS and your TiDB version is at least v6.5.0. 
             - If your TiDB version is v6.5.0, the TiKV node size is at least 4 vCPU and 16 GiB. 
             - When you restore the data backed up the **EBS snapshot** feature, the number of TiKV and TiFlash nodes in the new cluster is the same as that of the original cluster.
+            - The EBS snapshot feature and PITR feature are mutually exclusive. Therefore, only one of them can be enabled at a time.
 
     - Turn on or off the PITR (**Point-in-time Recovery**) feature.
 
@@ -62,7 +63,7 @@ By the automatic backup, you can back up the cluster data every day at the backu
         - Resolve cases of data write errors by restoring point-in-time that is before the error event.
         - Audit the historical data of the business.
 
-        If you have one of the preceding needs and want to use the PITR feature, make sure that your TiDB cluster version is at least v6.4.0 and the TiKV node size is at least 8 vCPU and 16 GiB.
+        If you have one of the preceding needs and want to use the PITR feature, make sure that your TiDB cluster version is at least v6.4.0, the TiKV node size is at least 8 vCPU and 16 GiB, and the EBS snapshot feature is disabled.
 
     - In **Backup Storage Region**, select the regions where you want to store your backup data.
 
