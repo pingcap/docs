@@ -48,7 +48,7 @@ By the automatic backup, you can back up the cluster data every day at the backu
         - Minimize or nearly eliminate the impact of backup on cluster performance, for example, keeping the impact on QPS and transaction latency less than 1%, and not consuming any cluster CPU or memory.
         - Achieve fast backup and restore times, such as completing backup within 1 hour and restore within 2 hours.
 
-      If you have one of the preceding needs and want to use the EBS snapshot feature, make sure that the following requirements are met:
+      To use the EBS snapshot feature, make sure that the following requirements are met:
 
             - Your TiDB cluster is hosted on AWS and your TiDB version is at least v6.5.0. 
             - If your TiDB version is v6.5.0, the TiKV node size is at least 4 vCPU and 16 GiB. 
@@ -63,7 +63,7 @@ By the automatic backup, you can back up the cluster data every day at the backu
         - Resolve cases of data write errors by restoring point-in-time that is before the error event.
         - Audit the historical data of the business.
 
-        If you have one of the preceding needs and want to use the PITR feature, make sure that your TiDB cluster version is at least v6.4.0, the TiKV node size is at least 8 vCPU and 16 GiB, and the EBS snapshot feature is disabled.
+        To use the PITR feature, make sure that your TiDB cluster version is at least v6.4.0, the TiKV node size is at least 8 vCPU and 16 GiB, and the EBS snapshot feature is disabled.
 
     - In **Backup Storage Region**, select the regions where you want to store your backup data.
 
