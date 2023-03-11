@@ -22,7 +22,6 @@ This feature helps you migrate your database and its ongoing changes to TiDB Clo
     - AWS Tokyo (ap-northeast-1)
     - AWS Frankfurt (eu-central-1)
     - AWS Seoul (ap-northeast-2)
-    - GCP Tokyo (asia-northeast1)
 
 - Amazon Aurora MySQL writer instances support both full and incremental data migration. Amazon Aurora MySQL reader instances only support full data migration and do not support incremental data migration.
 
