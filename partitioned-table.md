@@ -815,7 +815,7 @@ You can see that the inserted record `(NULL, 'mothra')` falls into the same part
 >
 > In this case, the actual behavior of TiDB is in line with the description of this document.
 
-#### Handling of NULL with Key partitioning
+#### Handling of NULL with Key partitions
 
 When partitioning tables by Key, the way of handling `NULL` value is consistent with that of Hash partitioning - if the value of the partitioning field is `NULL`, it is considered as `0`.
 
