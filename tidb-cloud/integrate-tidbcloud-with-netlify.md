@@ -15,7 +15,7 @@ Before connecting, make sure the following prerequisites are met.
 
 ### A Netlify account and CLI
 
-You are expected to have an account and a site in Netlify. If you do not have any, refer to the following links to create one:
+You are expected to have a Netlify account and CLI. If you do not have any, refer to the following links to create one:
 
 * [Sign up a new account](https://app.netlify.com/signup).
 * [Get Netlify CLI](https://docs.netlify.com/cli/get-started/).
@@ -90,10 +90,10 @@ For more information about TiDB Cloud CLI, see [TiDB Cloud CLI Reference](./cli-
 </div>
 <div label="TiDB Cloud console">
 
-Navigate to [TiDB Cloud console](https://tidbcloud.com/). Get the following connection parameters `${host}`, `${port}`, and `${user}` from the connection string in the [**Connect**](/tidb-cloud/connect-via-standard-connection.md) dialog and fill them into the following connection string.
+Navigate to [TiDB Cloud console](https://tidbcloud.com/). Get the following connection parameters `${host}`, `${port}`, `${user}` and `${password}` from the connection string in the [**Connect**](/tidb-cloud/connect-via-standard-connection.md) dialog and fill them into the following connection string.
 
 ```
-mysql://<User>:<Password>@<Endpoint>:<Port>/<Database>?sslaccept=strict
+mysql://<User>:<Password>@<Host>:<Port>/<Database>?sslaccept=strict
 ```
 
 > **Note:**
