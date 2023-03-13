@@ -114,11 +114,11 @@ If your MySQL service is in an AWS VPC, take the following steps:
 
 1. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of the MySQL service and your TiDB cluster.
 
-2. Modify the inbound rules of the security group that the MySQL service is associated with. 
+2. Modify the inbound rules of the security group that the MySQL service is associated with.
 
     You must add [the CIDR of the region where your TiDB Cloud cluster is located](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr) to the inbound rules. Doing so allows the traffic to flow from your TiDB cluster to the MySQL instance.
 
-3. If the MySQL URL contains a DNS hostname, you need to allow TiDB Cloud to be able to resolve the hostname of the MySQL service. 
+3. If the MySQL URL contains a DNS hostname, you need to allow TiDB Cloud to be able to resolve the hostname of the MySQL service.
 
     1. Follow the steps in [Enable DNS resolution for a VPC peering connection](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html#vpc-peering-dns).
     2. Enable the **Accepter DNS resolution** option.
@@ -135,7 +135,7 @@ To perform incremental data migration, make sure you have enabled binlogs of the
 
     > **Tip:**
     >
-    > If you have multiple projects, you can switch to the target project in the left navigation pane of the **Clusters** page.
+    > If you have multiple projects, you can view the project list and switch to another project from the ☰ hover menu in the upper-left corner.
 
 2. Click the name of your target cluster to go to its overview page, and then click **Data Migration** in the left navigation pane.
 

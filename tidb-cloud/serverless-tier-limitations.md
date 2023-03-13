@@ -47,7 +47,7 @@ We are constantly filling in the feature gaps between Serverless Tier and Dedica
 
 ## Diagnosis
 
-- [SQL Diagnosis](/tidb-cloud/tune-performance.md) is currently not available for Serverless Tier.
+- [Statement Analysis](/tidb-cloud/tune-performance.md#statement-analysis) and [Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer) are unavailable for Serverless Tier.
 
 ## Stream data
 

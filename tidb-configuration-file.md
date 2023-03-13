@@ -157,7 +157,8 @@ The TiDB configuration file supports more options than command-line parameters. 
 ### `enable-telemetry` <span class="version-mark">New in v4.0.2</span>
 
 - Enables or disables the telemetry collection in TiDB.
-- Default value: `true`
+- Default value: `true` for v6.5.0; `false` for v6.5.1 and later v6.5.x versions
+- When this configuration is set to `true` on a TiDB instance and the [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402) system variable is set to `ON`, the telemetry collection in this TiDB instance is enabled.
 - When this configuration is set to `false` on all TiDB instances, the telemetry collection in TiDB is disabled and the [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402) system variable does not take effect. See [Telemetry](/telemetry.md) for details.
 
 ### `enable-tcp4-only` <span class="version-mark">New in v5.0</span>
@@ -184,6 +185,13 @@ The TiDB configuration file supports more options than command-line parameters. 
 + Default value: `true`
 + When the value is `true`, both `KILL` and `KILL TIDB` statements can terminate queries or connections across instances so you do not need to worry about erroneously terminating queries or connections. When you use a client to connect to any TiDB instance and execute the `KILL` or `KILL TIDB` statement, the statement will be forwarded to the target TiDB instance. If there is a proxy between the client and the TiDB cluster, the `KILL` and `KILL TIDB` statements will also be forwarded to the target TiDB instance for execution. Currently, using the MySQL command line <kbd>ctrl</kbd>+<kbd>c</kbd> to terminate a query or connection in TiDB is not supported when `enable-global-kill` is `true`. For more information on the `KILL` statement, see [KILL](/sql-statements/sql-statement-kill.md).
 
+### `initialize-sql-file` <span class="version-mark">New in v6.5.1</span>
+
++ Specifies the SQL script to be executed when the TiDB cluster is started for the first time.
++ Default value: `""`
++ All SQL statements in this script are executed with the highest privilege without any privilege check. If the specified SQL script fails to execute, the TiDB cluster might fail to start.
++ This configuration item is used to perform such operations as modifying the value of a system variable, creating a user, or granting privileges.
+
 ### `enable-forwarding` <span class="version-mark">New in v5.0.0</span>
 
 + Controls whether the PD client and TiKV client in TiDB forward requests to the leader via the followers in the case of possible network isolation.
@@ -199,7 +207,7 @@ The TiDB configuration file supports more options than command-line parameters. 
 
 + Controls whether to enable the table lock feature.
 + Default value: `false`
-+ The table lock is used to coordinate concurrent access to the same table among multiple sessions. Currently, the `READ`, `WRITE`, and `WRITE LOCAL` lock types are supported. When the configuration item is set to `false`, executing the `LOCK TABLE` or `UNLOCK TABLE` statement does not take effect and returns the "LOCK/UNLOCK TABLES is not supported" warning.
++ The table lock is used to coordinate concurrent access to the same table among multiple sessions. Currently, the `READ`, `WRITE`, and `WRITE LOCAL` lock types are supported. When the configuration item is set to `false`, executing the `LOCK TABLES` or `UNLOCK TABLES` statement does not take effect and returns the "LOCK/UNLOCK TABLES is not supported" warning. For more information, see [`LOCK TABLES` and `UNLOCK TABLES`](/sql-statements/sql-statement-lock-tables-and-unlock-tables.md).
 
 ## Log
 
