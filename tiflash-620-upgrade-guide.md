@@ -14,7 +14,7 @@ To learn the standard upgrade process, see the following documents:
 
 > **Note:**
 >
-> - [FastScan](/develop/dev-guide-use-fastscan.md) is introduced in v6.2.0 as an experimental feature and becomes generally available (GA) in v7.0.0. It provides more efficient query performance at the cost of strong data consistency.
+> - [FastScan](/tiflash/dev-guide-use-fastscan.md) is introduced in v6.2.0 as an experimental feature and becomes generally available (GA) in v7.0.0. It provides more efficient query performance at the cost of strong data consistency.
 >
 > - It is not recommended that you upgrade TiDB that includes TiFlash across major versions, for example, from v4.x to v6.x. Instead, you need to upgrade from v4.x to v5.x first, and then to v6.x.
 >
