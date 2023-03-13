@@ -275,8 +275,12 @@ Configuration items related to the single thread pool serving read requests. Thi
 ### `max-thread-count`
 
 + The maximum working thread count of the unified read pool or the UnifyReadPool thread pool. When you modify the size of this thread pool, refer to [Performance tuning for TiKV thread pools](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools).
-+ Value range: `[min-thread-count, MAX(4, CPU)]`. In `MAX(4, CPU)`, `CPU` means the number of your CPU cores. `MAX(4, CPU)` takes the greater value out of `4` and the `CPU`.
++ Value range: `[min-thread-count, MAX(4, CPU quota * 10)]`. `MAX(4, CPU quota * 10)` takes the greater value out of `4` and the `CPU quota * 10`.
 + Default value: MAX(4, CPU * 0.8)
+
+> **Note:**
+>
+> Increasing the thread count will lead to more context switches, which might cause a performance decrease. It is not recommended to modify the value of this configuration item.
 
 ### `stack-size`
 
@@ -883,6 +887,11 @@ Configuration items related to Raftstore.
 + Default value: `"9s"`
 + Minimum value: `0`
 
+### `right-derive-when-split`
+
++ Specifies the start key of the new Region when a Region is split. When this configuration item is set to `true`, the start key is the maximum split key. When this configuration item is set to `false`, the start key is the original Region's start key.
++ Default value: `true`
+
 ### `merge-max-log-gap`
 
 + The maximum number of missing logs allowed when `merge` is performed
@@ -982,7 +991,7 @@ Configuration items related to Raftstore.
 + Minimum value: `0`
 + Unit: second
 
-## Coprocessor
+## coprocessor
 
 Configuration items related to Coprocessor.
 
@@ -1062,7 +1071,7 @@ Configuration items related to Coprocessor.
 + The interval at which TiKV reports bucket information to PD when `enable-region-bucket` is true.
 + Default value: `10s`
 
-## RocksDB
+## rocksdb
 
 Configuration items related to RocksDB
 
@@ -1438,7 +1447,11 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 ### `compaction-pri`
 
 + The priority type of compaction
-+ Optional values: `"by-compensated-size"`, `"oldest-largest-seq-first"`, `"oldest-smallest-seq-first"`, `"min-overlapping-ratio"`
++ Optional values:
+    - `"by-compensated-size"`: compact files in order of file size and large files are compacted with higher priority.
+    - `"oldest-largest-seq-first"`: prioritize compaction on files with the oldest update time. Use this value **only** when updating hot keys in small ranges.
+    - `"oldest-smallest-seq-first"`: prioritize compaction on files with ranges that are not compacted to the next level for a long time. If you randomly update hot keys across the key space, this value can slightly reduce write amplification.
+    - `"min-overlapping-ratio"`: prioritize compaction on files with a high overlap ratio. When a file is small in different levels (the result of `the file size in the next level` ÷ `the file size in this level` is small), TiKV compacts this file first. In many cases, this value can effectively reduce write amplification.
 + Default value for `defaultcf` and `writecf`: `"min-overlapping-ratio"`
 + Default value for `lockcf`: `"by-compensated-size"`
 
@@ -1705,7 +1718,7 @@ Configuration items related to `raftdb`
 
 ### `info-log-level`
 
-+ Log levels of RocksDB
++ Log levels of RaftDB
 + Default value: `"info"`
 
 ## raft-engine
@@ -1859,7 +1872,7 @@ Configuration items related to [encryption at rest](/encryption-at-rest.md) (TDE
 
 + Specifies the old master key when rotating the new master key. The configuration format is the same as that of `master-key`. To learn how to configure a master key, see [Encryption at Rest - Configure encryption](/encryption-at-rest.md#configure-encryption).
 
-## `import`
+## import
 
 Configuration items related to TiDB Lightning import and BR restore.
 
@@ -2045,7 +2058,7 @@ Configuration items related to maintaining the Resolved TS to serve Stale Read r
 ### `advance-ts-interval`
 
 + The interval at which Resolved TS is calculated and forwarded.
-+ Default value: `"1s"`
++ Default value: `"20s"`
 
 ### `scan-lock-pool-size`
 
