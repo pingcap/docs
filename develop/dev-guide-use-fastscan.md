@@ -6,10 +6,6 @@ aliases: ['/tidb/dev/sql-statement-set-tiflash-mode']
 
 # FastScan
 
-> **Warning:**
->
-> This feature is experimental and its form and usage may change in subsequent versions.
-
 This document describes how to use FastScan to speed up queries in Online Analytical Processing (OLAP) scenarios.
 
 By default, TiFlash guarantees the precision of query results and data consistency. With the feature FastScan, TiFlash provides more efficient query performance, but does not guarantee the accuracy of query results and data consistency.
