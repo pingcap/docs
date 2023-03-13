@@ -59,7 +59,7 @@ SELECT CURRENT_RESOURCE_GROUP();
 1 row in set (0.00 sec)
 ```
 
-Execute `SET RESOURCE GROUP` to set the resource group of the current session as the default resource group.
+Execute `SET RESOURCE GROUP` to specify the current session to use the default resource group.
 
 ```sql
 SET RESOURCE GROUP ``;
