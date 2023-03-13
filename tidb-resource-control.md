@@ -135,15 +135,11 @@ The following is an example of how to create a resource group and bind users to 
     CREATE RESOURCE GROUP IF NOT EXISTS rg2 RU_PER_SEC = 600;
     ```
 
-After you bind users, the resource consumption of newly created sessions will be controlled by the specified quota. If the system workload is relatively high and there is no spare capacity, the resource consumption rate of `usr2` will be strictly controlled not to exceed the quota. Because `usr1` is bound by `rg1` with `BURSTABLE` configured, the consumption rate of `usr1` is allowed to exceed the quota.
-
-If there are too many requests that result in insufficient resources for the resource group, the client's requests will wait. If the wait time is too long, the requests will report an error.
-
 ### Bind resource groups
 
 TiDB supports three levels of resource group settings as follows.
 
-- User level. Bind the user using the [`CREATE USER`](/sql-statements/sql-statement-create-user.md) or [`ALTER USER`](/sql-statements/sql-statement-alter-user.md) statements to a specific resource group. After binding a resource group to a user, sessions created with the corresponding user are automatically bound to the corresponding resource group.
+- User level. Bind the user using the [`CREATE USER`](/sql-statements/sql-statement-create-user.md) or [`ALTER USER`](/sql-statements/sql-statement-alter-user.md) statements to a specific resource group. After binding a resource group to a user, sessions created by the corresponding user are automatically bound to the corresponding resource group.
 - Session level. Set the resource group used by the current session via [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md).
 - Statement level. Set the resource group used by the current statement via [`RESOURCE_GROUP()`](/optimizer-hints.md#resource_groupresource_group_name).
 
@@ -158,6 +154,10 @@ ALTER USER usr1 RESOURCE GROUP rg1;
 ```sql
 ALTER USER usr2 RESOURCE GROUP rg2;
 ```
+
+After you bind users, the resource consumption of newly created sessions will be controlled by the specified quota. If the system workload is relatively high and there is no spare capacity, the resource consumption rate of `usr2` will be strictly controlled not to exceed the quota. Because `usr1` is bound by `rg1` with `BURSTABLE` configured, the consumption rate of `usr1` is allowed to exceed the quota.
+
+If there are too many requests that result in insufficient resources for the resource group, the client's requests will wait. If the wait time is too long, the requests will report an error.
 
 > **Note:**
 >
