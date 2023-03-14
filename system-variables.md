@@ -2523,6 +2523,14 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Type: String
 - This variable is read-only and is used to obtain the result of the last `PLAN REPLAYER DUMP` execution in the current session.
 
+### tidb_load_based_replica_read_threshold <span class="version-mark">New in v7.0.0</span>
+
+- Scope: SESSION | GLOBAL
+- Default value: `"0s"`
+- Range: `[0s, 1h]`
+- Type: String
+- This variable is used to set the threshold for triggering load-based replica read. When the estimated queue time of the leader node exceeds the threshold, TiDB prioritizes reading data from the follower node. The format is a time duration, such as `"100ms"` or `"1s"`.
+
 ### tidb_log_file_max_days <span class="version-mark">New in v5.3.0</span>
 
 - Scope: GLOBAL
