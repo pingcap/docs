@@ -51,7 +51,7 @@ By the automatic backup, you can back up the cluster data every day at the backu
       To use the EBS snapshot feature, make sure that the following prerequisites are met:
 
             - Your TiDB cluster is hosted on AWS and your TiDB version is v6.5.1 or later.
-            - When you restore the data backed up by the **EBS snapshot** feature, the number of TiKV and TiFlash nodes in the new cluster is the same as that of the original cluster.
+            - When you restore the data backed up by the **EBS snapshot** feature to a new cluster, the number of TiKV and TiFlash nodes in the new cluster is the same as that of the original cluster.
             - The EBS snapshot feature and PITR feature are mutually exclusive. Therefore, only one of them can be enabled at a time.
 
     - Turn on or off the PITR (**Point-in-time Recovery**) feature.
