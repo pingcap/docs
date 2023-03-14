@@ -41,7 +41,7 @@ By the automatic backup, you can back up the cluster data every day at the backu
 
     - In **Backup Retention**, configure the minimum backup data retention period.
 
-    - Turn on or off the **EBS snapshot** feature.
+    - Turn on or off the **EBS snapshot** feature (beta).
 
         The EBS snapshot feature supports backing up and restoring data using EBS snapshots. You can use it to:
         
@@ -51,7 +51,7 @@ By the automatic backup, you can back up the cluster data every day at the backu
       To use the EBS snapshot feature, make sure that the following requirements are met:
 
             - Your TiDB cluster is hosted on AWS and your TiDB version is at least v6.5.0. 
-            - If your TiDB version is v6.5.0, the TiKV node size is at least 4 vCPU and 16 GiB. 
+            - If your TiDB version is v6.5.0, the TiKV node size is at least 4 vCPU and 16 GiB. If your TiDB version is v6.5.1 or later, there is no requirement on the TiKV node size.
             - When you restore the data backed up by the **EBS snapshot** feature, the number of TiKV and TiFlash nodes in the new cluster is the same as that of the original cluster.
             - The EBS snapshot feature and PITR feature are mutually exclusive. Therefore, only one of them can be enabled at a time.
 
