@@ -69,10 +69,7 @@ In addition to the preceding prerequisites, you should also perform the followin
 
 #### Check before backup
 
-Before running the [`br backup` command](/br/use-br-command-line-tool.md#br-command-line-description), make sure the following conditions are met:
-
-- No DDL statements are running on the TiDB cluster.
-- The target storage device has required space (no less than 1/3 of the disk space of the backup cluster).
+Before running the [`br backup` command](/br/use-br-command-line-tool.md#br-command-line-description), make sure that the target storage device has required space (no less than 1/3 of the disk space of the backup cluster).
 
 #### Check before restoration
 
