@@ -215,7 +215,7 @@ delta_index_cache_size = 0
     ## New in v7.0.0. This item specifies the maximum memory available for the HashAggregation operator with group by key before a disk spill is triggered. When the memory usage exceeds the threshold, HashAggregation reduces memory usage by spilling to disk. This item defaults to 0, which means that the memory usage is unlimited and spill to disk is never used for HashAggregation.
     max_bytes_before_external_group_by = 0
 
-    ## New in v7.0.0. This item specifies the maximum memory available for the sort or topN operator before a disk spill is triggered. When the memory usage exceeds the threshold, the sort or topN operator reduces memory usage by spilling to disk. This item defaults to 0, which means that the memory usage is unlimited and spill to disk is never used for topN.
+    ## New in v7.0.0. This item specifies the maximum memory available for the sort or topN operator before a disk spill is triggered. When the memory usage exceeds the threshold, the sort or topN operator reduces memory usage by spilling to disk. This item defaults to 0, which means that the memory usage is unlimited and spill to disk is never used for sort or topN.
     max_bytes_before_external_sort = 0
 
     ## New in v7.0.0. This item specifies the maximum memory available for the HashJoin operator with EquiJoin before a disk spill is triggered. When the memory usage exceeds the threshold, HashJoin reduces memory usage by spilling to disk. This item defaults to 0, which means that the memory usage is unlimited and spill to disk is never used for HashJoin with EquiJoin.
