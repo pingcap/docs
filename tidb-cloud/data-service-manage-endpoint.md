@@ -23,13 +23,14 @@ To create an endpoint, perform the following steps:
 2. In the left pane, click the name of your target Data App and click **...** > **Create Endpoint**. You can update the default name if necessary.
 
     <!--TODO: Add the icon to MDSvgIcon.tsx-->
-    <!--TODO: Update the icon-->
 
     > **Tip:**
     >
     > Alternatively, you can also locate the Data App and click <svg width="16" height="16" viewBox="0 -2 24 24" fill="none" stroke-width="3" xmlns="http://www.w3.org/2000/svg"><path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="inherit" stroke-linecap="round" stroke-linejoin="round"></path></svg> **Create Endpoint** at the top of the left pane.
 
 3. The newly created endpoint is added to the top of the endpoint list.
+
+You can also create an endpoint from a SQL file in Chat2Query (beta). For more details, see [Generate an endpoint from a SQL file](/tidb-cloud/explore-data-with-chat2query.md#generate-an-endpoint-from-a-sql-file)
 
 ## Develop an endpoint
 
