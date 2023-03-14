@@ -45,13 +45,12 @@ By the automatic backup, you can back up the cluster data every day at the backu
 
         The EBS snapshot feature supports backing up and restoring data using EBS snapshots. You can use it to:
         
-        - Minimize or nearly eliminate the impact of backup on cluster performance, for example, keeping the impact on QPS and transaction latency below 1%, and not consuming any cluster CPU or memory.
+        - Minimize the impact of backup on cluster performance, with the potential to keep the impact on QPS and transaction latency under 1% while using no cluster CPU or memory resources.
         - Achieve fast backup and restore times, such as completing backup within 1 hour and restore within 2 hours.
 
-      To use the EBS snapshot feature, make sure that the following requirements are met:
+      To use the EBS snapshot feature, make sure that the following prerequisites are met:
 
-            - Your TiDB cluster is hosted on AWS and your TiDB version is at least v6.5.0. 
-            - If your TiDB version is v6.5.0, the TiKV node size is at least 4 vCPU and 16 GiB. If your TiDB version is v6.5.1 or later, there is no requirement on the TiKV node size.
+            - Your TiDB cluster is hosted on AWS and your TiDB version is v6.5.1 or later.
             - When you restore the data backed up by the **EBS snapshot** feature, the number of TiKV and TiFlash nodes in the new cluster is the same as that of the original cluster.
             - The EBS snapshot feature and PITR feature are mutually exclusive. Therefore, only one of them can be enabled at a time.
 
@@ -63,7 +62,7 @@ By the automatic backup, you can back up the cluster data every day at the backu
         - Resolve cases of data write errors by restoring point-in-time that is before the error event.
         - Audit the historical data of the business.
 
-        To use the PITR feature, make sure that your TiDB cluster version is at least v6.4.0, the TiKV node size is at least 8 vCPU and 16 GiB, and the EBS snapshot feature is disabled.
+        To use the PITR feature, make sure that your TiDB cluster version is v6.4.0 or later, the TiKV node size is at least 8 vCPU and 16 GiB, and the EBS snapshot feature is disabled.
 
     - In **Backup Storage Region**, select the regions where you want to store your backup data.
 
