@@ -9,7 +9,7 @@ This document introduces the `SHARD_ROW_ID_BITS` table attribute, which is used 
 
 ## Concept
 
-For the tables with a non-integer primary key or no primary key, TiDB uses an implicit auto-increment row ID. When a large number of `INSERT` operations are performed, the data is written into a single Region, causing a write hot spot.
+For the tables with a non-clustered primary key, no primary key or a multi-column primary key TiDB uses an implicit auto-increment row ID. When a large number of `INSERT` operations are performed, the data is written into a single Region, causing a write hot spot.
 
 To mitigate the hot spot issue, you can configure `SHARD_ROW_ID_BITS`. The row IDs are scattered and the data are written into multiple different Regions.
 
@@ -17,7 +17,19 @@ To mitigate the hot spot issue, you can configure `SHARD_ROW_ID_BITS`. The row I
 - `SHARD_ROW_ID_BITS = 6` indicates 64 shards
 - `SHARD_ROW_ID_BITS = 0` indicates the default 1 shard
 
+See also [the Troubleshoot Hotspot Issues guide](/troubleshoot-hot-spot-issues.md#use-shard_row_id_bits-to-process-hotspots) for a guide about how to use this.
 ## Examples
 
-- `CREATE TABLE`: `CREATE TABLE t (c int) SHARD_ROW_ID_BITS = 4;`
-- `ALTER TABLE`: `ALTER TABLE t SHARD_ROW_ID_BITS = 4;`
+{{< copyable "sql" >}}
+
+```sql
+CREATE TABLE t (
+    id INT PRIMARY KEY NONCLUSTERED
+) SHARD_ROW_ID_BITS = 4;
+```
+
+{{< copyable "sql" >}}
+
+```sql
+ALTER TABLE t SHARD_ROW_ID_BITS = 4;
+```
