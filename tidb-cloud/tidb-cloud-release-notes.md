@@ -18,7 +18,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     When importing a local CSV file with a header row to [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters, if you need TiDB Cloud to create the target table and the column names in the header row do not follow the TiDB Cloud column naming conventions, you will see a warning icon in the name field. To resolve the warning, you can move the cursor over the icon and follow the message to edit the existing column names or enter new column names.
 
-  For information about column naming conventions, see [Import local files](/tidb-cloud/tidb-cloud-import-local-files.md#import-local-files).
+    For information about column naming conventions, see [Import local files](/tidb-cloud/tidb-cloud-import-local-files.md#import-local-files).
 
 ## March 7, 2023
 
