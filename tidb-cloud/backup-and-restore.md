@@ -45,7 +45,7 @@ By the automatic backup, you can back up the cluster data every day at the backu
 
         The EBS snapshot feature supports backing up and restoring data using EBS snapshots. You can use it to:
         
-        - Minimize or nearly eliminate the impact of backup on cluster performance, for example, keeping the impact on QPS and transaction latency less than 1%, and not consuming any cluster CPU or memory.
+        - Minimize or nearly eliminate the impact of backup on cluster performance, for example, keeping the impact on QPS and transaction latency below 1%, and not consuming any cluster CPU or memory.
         - Achieve fast backup and restore times, such as completing backup within 1 hour and restore within 2 hours.
 
       To use the EBS snapshot feature, make sure that the following requirements are met:
