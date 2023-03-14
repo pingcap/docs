@@ -81,7 +81,7 @@ Failed to connect to the TiDB cluster. It is recommended to check whether the Ti
 
 ### Error message: "TiDB cluster storage is not enough. Please increase the node storage of TiKV."
 
-The TiDB cluster storage is running low. It is recommended to [increase the TiKV node storage](/tidb-cloud/scale-tidb-cluster.md#increase-node-storage) and then resume the task by clicking **Restart**.
+The TiDB cluster storage is running low. It is recommended to [increase the TiKV node storage](/tidb-cloud/scale-tidb-cluster.md#change-node-storage) and then resume the task by clicking **Restart**.
 
 ### Error message: "Failed to connect to the source database. Please check whether the database is available or the maximum connections have been reached."
 
