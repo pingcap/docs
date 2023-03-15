@@ -73,7 +73,7 @@ If this causes performance issues, you can use the `ignore_plan_cache()` hint to
 Due to the preceding risks and the fact that the execution plan cache only provides significant benefits for simple queries (if a query is complex and takes a long time to execute, using the execution plan cache might not be very helpful), TiDB has strict restrictions on the scope of non-prepared plan cache. The restrictions are as follows:
 
 - Queries or plans that are not supported by the [Prepared plan cache](/sql-prepared-plan-cache.md) are also not supported by the non-prepared plan cache.
-- Currently, only point get or range queries on a single table that contain Scan-Selection-Projection operators are supported, such as `SELECT * FROM t WHERE a < 10 AND b in (1, 2)`.
+- Currently, only point get or range queries on a single table that contain `Scan`, `Selection`, or `Projection` operators are supported, such as `SELECT * FROM t WHERE a < 10 AND b in (1, 2)`.
 - Queries that contain complex operators such as `Agg`, `Limit`, `Window`, or `Sort` are not supported.
 - Queries that contain non-range query conditions are not supported, such as:
     - `LIKE` is not supported, such as `c LIKE 'c%'`.
