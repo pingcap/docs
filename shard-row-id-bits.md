@@ -21,8 +21,6 @@ For details on the usage, see [the Troubleshoot Hotspot Issues guide](/troublesh
 
 ## Examples
 
-{{< copyable "sql" >}}
-
 ```sql
 CREATE TABLE t (
     id INT PRIMARY KEY NONCLUSTERED
