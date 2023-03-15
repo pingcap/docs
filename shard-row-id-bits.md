@@ -27,8 +27,6 @@ CREATE TABLE t (
 ) SHARD_ROW_ID_BITS = 4;
 ```
 
-{{< copyable "sql" >}}
-
 ```sql
 ALTER TABLE t SHARD_ROW_ID_BITS = 4;
 ```
