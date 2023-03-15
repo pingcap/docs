@@ -87,7 +87,7 @@ Hover over the bright block, you can see what table or index has a heavy load. F
 
 ## Use `SHARD_ROW_ID_BITS` to process hotspots
 
-For a non-clustered primary key or a table without a primary key or a multi-column primary key, TiDB uses an implicit auto-increment RowID. When a large number of `INSERT` operations exist, the data is written into a single Region, resulting in a write hotspot.
+For a non-clustered primary key or a table without a primary key, TiDB uses an implicit auto-increment RowID. When a large number of `INSERT` operations exist, the data is written into a single Region, resulting in a write hotspot.
 
 By setting [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md), row IDs are scattered and written into multiple Regions, which can alleviate the write hotspot issue.
 
