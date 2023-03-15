@@ -5,7 +5,7 @@ summary: Learn how to monitor your TiDB cluster with the New Relic integration.
 
 # Integrate TiDB Cloud with New Relic
 
-You can configure TiDB Cloud to send metric data about your TiDB clusters to [New Relic](https://newrelic.com/). After that, you can view these metrics in your New Relic dashboards directly.
+You can configure TiDB Cloud to send metric data of your TiDB clusters to [New Relic](https://newrelic.com/). After that, you can directly view these metrics in your New Relic dashboards.
 
 ## Prerequisites
 
@@ -13,7 +13,7 @@ You can configure TiDB Cloud to send metric data about your TiDB clusters to [Ne
 
     If you do not have a New Relic account, sign up [here](https://newrelic.com/signup).
 
-- To edit third-party integration settings of TiDB Cloud, you must have the `Organization Owner` access to your organization or `Project Member` access to the target project in TiDB Cloud.
+- To edit third-party integration settings for TiDB Cloud, you must have the **Organization Owner** access to your organization or **Project Member** access to the target project in TiDB Cloud.
 
 ## Limitation
 
