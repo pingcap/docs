@@ -889,6 +889,23 @@ Usage:
     scheduler config balance-hot-region-scheduler set enable-for-tiflash true
     ```
 
+### `service-gc-safepoint`
+
+Use this command to query the current GC safepoint and service GC safepoint. The output is as follows:
+
+```bash
+{
+  "service_gc_safe_points": [
+    {
+      "service_id": "gc_worker",
+      "expired_at": 9223372036854775807,
+      "safe_point": 439923410637160448
+    }
+  ],
+  "gc_safe_point": 0
+}
+```
+
 ### `store [delete | cancel-delete | label | weight | remove-tombstone | limit ] <store_id> [--jq="<query string>"]`
 
 Use this command to view the store information or remove a specified store. For a jq formatted output, see [jq-formatted-json-output-usage](#jq-formatted-json-output-usage).
