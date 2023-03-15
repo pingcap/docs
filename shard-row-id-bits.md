@@ -9,7 +9,7 @@ This document introduces the `SHARD_ROW_ID_BITS` table attribute, which is used 
 
 ## Concept
 
-For the tables with a non-clustered primary key, no primary key or a multi-column primary key TiDB uses an implicit auto-increment row ID. When a large number of `INSERT` operations are performed, the data is written into a single Region, causing a write hot spot.
+For the tables with a non-clustered primary key or no primary key, TiDB uses an implicit auto-increment row ID. When a large number of `INSERT` operations are performed, the data is written into a single Region, causing a write hot spot.
 
 To mitigate the hot spot issue, you can configure `SHARD_ROW_ID_BITS`. The row IDs are scattered and the data are written into multiple different Regions.
 
