@@ -11,7 +11,7 @@ You can configure TiDB Cloud to send metric data about your TiDB clusters to [Ne
 
 - To integrate TiDB Cloud with New Relic, you must have a New Relic account and a [New Relic API key](https://one.newrelic.com/admin-portal/api-keys/home?). New Relic grants you an API key when you first create a New Relic account.
 
-    If you do not have a New Relic account, sign up at [https://app.datadoghq.com/signup](https://newrelic.com/signup).
+    If you do not have a New Relic account, sign up [here](https://newrelic.com/signup).
 
 - To edit third-party integration settings of TiDB Cloud, you must have the `Organization Owner` access to your organization or `Project Member` access to the target project in TiDB Cloud.
 
@@ -42,7 +42,7 @@ You cannot use the New Relic integration in [Serverless Tier clusters](/tidb-clo
 
 1. Log in to [New Relic](https://one.newrelic.com/).
 2. Go to the [TiDB Cloud dashboard page](TBD) on **Add Data** page in New Relic.
-3. Chose your accountid and create the dashboard in New Relic.
+3. Choose your account ID and create the dashboard in New Relic.
 
 ## Pre-built dashboard
 
