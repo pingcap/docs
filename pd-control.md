@@ -5,7 +5,7 @@ summary: Use PD Control to obtain the state information of a cluster and tune a 
 
 # PD Controlユーザー ガイド {#pd-control-user-guide}
 
-PD Controlは、PD のコマンド ライン ツールとして、クラスターの状態情報を取得し、クラスターをチューニングします。
+PD Control は、PD のコマンド ライン ツールとして、クラスターの状態情報を取得し、クラスターをチューニングします。
 
 ## PD Controlをインストールする {#install-pd-control}
 
@@ -13,13 +13,13 @@ PD Controlは、PD のコマンド ライン ツールとして、クラスタ�
 >
 > 使用するコントロール ツールのバージョンは、クラスターのバージョンと一致していることが推奨されます。
 
-### TiUP コマンドを使用する {#use-tiup-command}
+### TiUPコマンドを使用する {#use-tiup-command}
 
 PD Controlを使用するには、 `tiup ctl:<cluster-version> pd -u http://<pd_ip>:<pd_port> [-i]`コマンドを実行します。
 
 ### TiDB インストール パッケージのダウンロード {#download-tidb-installation-package}
 
-`pd-ctl`の最新バージョンをダウンロードする場合は、TiDB パッケージに`pd-ctl`が含まれているため、TiDB パッケージを直接ダウンロードします。
+`pd-ctl`の最新バージョンをダウンロードする場合は、TiDB パッケージに`pd-ctl`含まれているため、TiDB パッケージを直接ダウンロードします。
 
 | パッケージのダウンロード リンク                                                          | OS    | アーキテクチャ | SHA256 チェックサム                                                    |
 | :------------------------------------------------------------------------ | :---- | :------ | :--------------------------------------------------------------- |
@@ -27,11 +27,11 @@ PD Controlを使用するには、 `tiup ctl:<cluster-version> pd -u http://<pd_
 
 > **ノート：**
 >
-> `{version}`は TiDB のバージョン番号を示します。たとえば、 `{version}`が`v5.4.3`の場合、パッケージのダウンロード リンクは`https://download.pingcap.org/tidb-v5.4.3-linux-amd64.tar.gz`です。
+> `{version}` TiDB のバージョン番号を示します。たとえば、 `{version}`が`v5.4.3`の場合、パッケージのダウンロード リンクは`https://download.pingcap.org/tidb-v5.4.3-linux-amd64.tar.gz`です。
 
 ### ソースコードからコンパイル {#compile-from-source-code}
 
-1.  [行け](https://golang.org/) Go モジュールを使用するため、バージョン 1.13 以降。
+1.  [行く](https://golang.org/) Go モジュールを使用するため、バージョン 1.13 以降。
 2.  [PDプロジェクト](https://github.com/pingcap/pd)のルート ディレクトリで、 `make`または`make pd-ctl`コマンドを使用して`bin/pd-ctl`をコンパイルおよび生成します。
 
 ## 使用法 {#usage}
@@ -99,12 +99,12 @@ tiup ctl:<cluster-version> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" --
 -   デフォルトのアドレス: `http://127.0.0.1:2379`
 -   環境変数: `PD_ADDR`
 
-### -- <code>--version</code> / <code>-V</code> {#code-version-code-code-v-code}
+### <code>--version</code> / <code>-V</code> {#code-version-code-code-v-code}
 
 -   バージョン情報を出力して終了します
 -   デフォルト: false
 
-## 指示 {#command}
+## 指図 {#command}
 
 ### <code>cluster</code> {#code-cluster-code}
 
@@ -173,37 +173,37 @@ tiup ctl:<cluster-version> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" --
 "5.2.2"
 ```
 
--   `max-snapshot-count`は、1 つのストアが同時に受信または送信するスナップショットの最大数を制御します。スケジューラは、通常のアプリケーション リソースを占有しないように、この構成によって制限されます。レプリカの追加またはバランシングの速度を向上させる必要がある場合は、この値を増やしてください。
+-   `max-snapshot-count` 、1 つのストアが同時に受信または送信するスナップショットの最大数を制御します。スケジューラは、通常のアプリケーション リソースを占有しないように、この構成によって制限されます。レプリカの追加またはバランシングの速度を向上させる必要がある場合は、この値を増やしてください。
 
     ```bash
     config set max-snapshot-count 64  // Set the maximum number of snapshots to 64
     ```
 
--   `max-pending-peer-count`は、1 つのストア内の保留中のピアの最大数を制御します。スケジューラーは、一部のノードで最新のログなしで多数のリージョンが生成されるのを避けるために、この構成によって制限されます。レプリカの追加またはバランシングの速度を向上させる必要がある場合は、この値を増やしてください。 0 に設定すると、制限がないことを示します。
+-   `max-pending-peer-count` 1 つのストア内の保留中のピアの最大数を制御します。スケジューラーは、一部のノードで最新のログなしで多数のリージョンが生成されるのを避けるために、この構成によって制限されます。レプリカの追加またはバランシングの速度を向上させる必要がある場合は、この値を増やしてください。 0 に設定すると、制限がないことを示します。
 
     ```bash
     config set max-pending-peer-count 64  // Set the maximum number of pending peers to 64
     ```
 
--   `max-merge-region-size`は、リージョンマージのサイズの上限を制御します (単位は MiB)。 `regionSize`が指定値を超えると、PD は隣接するリージョンとマージしません。 0 に設定すると、リージョンマージが無効になります。
+-   `max-merge-region-size`リージョンマージのサイズの上限を制御します (単位は MiB)。 `regionSize`が指定値を超えると、PD は隣接するリージョンとマージしません。 0 に設定すると、リージョンマージが無効になります。
 
     ```bash
     config set max-merge-region-size 16 // Set the upper limit on the size of Region Merge to 16 MiB
     ```
 
--   `max-merge-region-keys`は、リージョンマージのキー カウントの上限を制御します。 `regionKeyCount`が指定値を超えると、PD は隣接するリージョンとマージしません。
+-   `max-merge-region-keys`リージョンマージのキー カウントの上限を制御します。 `regionKeyCount`が指定値を超えると、PD は隣接するリージョンとマージしません。
 
     ```bash
     config set max-merge-region-keys 50000 // Set the the upper limit on keyCount to 50000
     ```
 
--   `split-merge-interval`は、同じリージョンでの`split`と`merge`の操作の間隔を制御します。これは、新しく分割されたリージョンが一定期間内にマージされないことを意味します。
+-   `split-merge-interval`同じリージョンでの`split`と`merge`の操作の間隔を制御します。これは、新しく分割されたリージョンが一定期間内にマージされないことを意味します。
 
     ```bash
     config set split-merge-interval 24h  // Set the interval between `split` and `merge` to one day
     ```
 
--   `enable-one-way-merge`は、PD が Region を次のリージョンとマージすることのみを許可するかどうかを制御しリージョン。 `false`に設定すると、PD はリージョンが隣接する 2 つのリージョンとマージできるようにします。
+-   `enable-one-way-merge`は、PD がリージョン を次のリージョンとマージすることのみを許可するかどうかを制御します。 `false`に設定すると、PD はリージョンが隣接する 2 つのリージョンとマージできるようにします。
 
     ```bash
     config set enable-one-way-merge true  // Enables one-way merging.
@@ -215,16 +215,16 @@ tiup ctl:<cluster-version> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" --
     config set enable-cross-table-merge true  // Enable cross table merge.
     ```
 
--   `key-type`は、クラスターに使用されるキーのエンコード タイプを指定します。サポートされているオプションは [&quot;table&quot;, &quot;raw&quot;, &quot;txn&quot;] で、デフォルト値は &quot;table&quot; です。
+-   `key-type`クラスターに使用されるキーのエンコード タイプを指定します。サポートされているオプションは [&quot;table&quot;, &quot;raw&quot;, &quot;txn&quot;] で、デフォルト値は &quot;table&quot; です。
 
-    -   クラスターに TiDB インスタンスが存在しない場合、 `key-type`は「raw」または「txn」になり、PD は`enable-cross-table-merge`の設定に関係なく、テーブル全体でリージョンをマージできます。
-    -   クラスターに TiDB インスタンスが存在する場合、 `key-type`は「テーブル」である必要があります。 PD がテーブル間でリージョンをマージできるかどうかは、 `enable-cross-table-merge`によって決定されます。 `key-type`が「raw」の場合、配置ルールは機能しません。
+    -   クラスターに TiDB インスタンスが存在しない場合、 `key-type` 「raw」または「txn」になり、PD は`enable-cross-table-merge`設定に関係なく、テーブル全体でリージョンをマージできます。
+    -   クラスターに TiDB インスタンスが存在する場合、 `key-type` 「テーブル」である必要があります。 PD がテーブル間でリージョンをマージできるかどうかは、 `enable-cross-table-merge`によって決定されます。 `key-type`が「raw」の場合、配置ルールは機能しません。
 
     ```bash
     config set key-type raw  // Enable cross table merge.
     ```
 
--   `region-score-formula-version`は、リージョンスコア式のバージョンを制御します。値のオプションは`v1`と`v2`です。式のバージョン 2 は、TiKV ノードをオンラインまたはオフラインにするなど、一部のシナリオで冗長なバランスリージョンスケジューリングを減らすのに役立ちます。
+-   `region-score-formula-version`リージョンスコア式のバージョンを制御します。値のオプションは`v1`と`v2`です。式のバージョン 2 は、TiKV ノードをオンラインまたはオフラインにするなど、一部のシナリオで冗長なバランスリージョンスケジューリングを減らすのに役立ちます。
 
     {{< copyable "" >}}
 
@@ -232,43 +232,43 @@ tiup ctl:<cluster-version> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" --
     config set region-score-formula-version v2
     ```
 
--   `patrol-region-interval`は、 `replicaChecker`がリージョンのヘルス ステータスをチェックする実行頻度を制御します。間隔が短いほど、実行頻度が高くなります。通常、調整する必要はありません。
+-   `patrol-region-interval` `replicaChecker`リージョンのヘルス ステータスをチェックする実行頻度を制御します。間隔が短いほど、実行頻度が高くなります。通常、調整する必要はありません。
 
     ```bash
     config set patrol-region-interval 10ms // Set the execution frequency of replicaChecker to 10ms
     ```
 
--   `max-store-down-time`を超えると、PD が切断されたストアを復元できないと判断する時間を制御します。 PD が指定された期間内にストアからハートビートを受信しない場合、PD は他のノードにレプリカを追加します。
+-   `max-store-down-time`超えると、PD が切断されたストアを復元できないと判断する時間を制御します。 PD が指定された期間内にストアからハートビートを受信しない場合、PD は他のノードにレプリカを追加します。
 
     ```bash
     config set max-store-down-time 30m  // Set the time within which PD receives no heartbeats and after which PD starts to add replicas to 30 minutes
     ```
 
--   `leader-schedule-limit`は、リーダーを同時にスケジュールするタスクの数を制御します。この値は、リーダー バランスの速度に影響します。値が大きいほど高速であることを意味し、値を 0 に設定するとスケジューリングが終了します。通常、リーダー スケジューリングの負荷は小さいため、必要に応じて値を増やすことができます。
+-   `leader-schedule-limit`リーダーを同時にスケジュールするタスクの数を制御します。この値は、リーダー バランスの速度に影響します。値が大きいほど高速であることを意味し、値を 0 に設定するとスケジューリングが終了します。通常、リーダー スケジューリングの負荷は小さいため、必要に応じて値を増やすことができます。
 
     ```bash
     config set leader-schedule-limit 4         // 4 tasks of leader scheduling at the same time at most
     ```
 
--   `region-schedule-limit`は、リージョンを同時にスケジューリングするタスクの数を制御します。この値により、作成されるリージョンバランス オペレータが多すぎるのを回避できます。デフォルト値は`2048`で、すべてのサイズのクラスターで十分です。値を`0`に設定すると、スケジューリングが終了します。通常、リージョンのスケジューリング速度は`store-limit`に制限されていますが、何を行っているかを正確に把握していない限り、この値をカスタマイズしないことをお勧めします。
+-   `region-schedule-limit`リージョンを同時にスケジューリングするタスクの数を制御します。この値により、作成されるリージョンバランス オペレータが多すぎるのを回避できます。デフォルト値は`2048`で、すべてのサイズのクラスターで十分です。値を`0`に設定すると、スケジューリングが終了します。通常、リージョンのスケジューリング速度は`store-limit`に制限されていますが、何を行っているかを正確に把握していない限り、この値をカスタマイズしないことをお勧めします。
 
     ```bash
     config set region-schedule-limit 2         // 2 tasks of Region scheduling at the same time at most
     ```
 
--   `replica-schedule-limit`は、レプリカを同時にスケジュールするタスクの数を制御します。この値は、ノードがダウンまたは削除されたときのスケジューリング速度に影響します。値が大きいほど高速であることを意味し、値を 0 に設定するとスケジューリングが終了します。通常、レプリカのスケジューリングは負荷が大きいため、あまり大きな値を設定しないでください。通常、この構成項目はデフォルト値のままであることに注意してください。値を変更する場合は、いくつかの値を試して、実際の状況に応じてどれが最適かを確認する必要があります。
+-   `replica-schedule-limit`レプリカを同時にスケジュールするタスクの数を制御します。この値は、ノードがダウンまたは削除されたときのスケジューリング速度に影響します。値が大きいほど高速であることを意味し、値を 0 に設定するとスケジューリングが終了します。通常、レプリカのスケジューリングは負荷が大きいため、あまり大きな値を設定しないでください。通常、この構成項目はデフォルト値のままであることに注意してください。値を変更する場合は、いくつかの値を試して、実際の状況に応じてどれが最適かを確認する必要があります。
 
     ```bash
     config set replica-schedule-limit 4        // 4 tasks of replica scheduling at the same time at most
     ```
 
--   `merge-schedule-limit`は、 リージョン Merge スケジューリング タスクの数を制御します。値を 0 に設定すると、リージョンマージが閉じます。通常、Merge スケジューリングは負荷が大きいため、あまり大きな値を設定しないでください。通常、この構成項目はデフォルト値のままであることに注意してください。値を変更する場合は、いくつかの値を試して、実際の状況に応じてどれが最適かを確認する必要があります。
+-   `merge-schedule-limit` リージョン Merge スケジューリング タスクの数を制御します。値を 0 に設定すると、リージョンマージが閉じます。通常、Merge スケジューリングは負荷が大きいため、あまり大きな値を設定しないでください。通常、この構成項目はデフォルト値のままであることに注意してください。値を変更する場合は、いくつかの値を試して、実際の状況に応じてどれが最適かを確認する必要があります。
 
     ```bash
     config set merge-schedule-limit 16       // 16 tasks of Merge scheduling at the same time at most
     ```
 
--   `hot-region-schedule-limit`は、同時に実行されているホットリージョンスケジューリング タスクを制御します。値を`0`に設定すると、スケジューリングが無効になります。大きすぎる値を設定することはお勧めしません。そうしないと、システムのパフォーマンスに影響を与える可能性があります。通常、この構成項目はデフォルト値のままであることに注意してください。値を変更する場合は、いくつかの値を試して、実際の状況に応じてどれが最適かを確認する必要があります。
+-   `hot-region-schedule-limit`同時に実行されているホットリージョンスケジューリング タスクを制御します。値を`0`に設定すると、スケジューリングが無効になります。大きすぎる値を設定することはお勧めしません。そうしないと、システムのパフォーマンスに影響を与える可能性があります。通常、この構成項目はデフォルト値のままであることに注意してください。値を変更する場合は、いくつかの値を試して、実際の状況に応じてどれが最適かを確認する必要があります。
 
     ```bash
     config set hot-region-schedule-limit 4       // 4 tasks of hot Region scheduling at the same time at most
@@ -276,19 +276,19 @@ tiup ctl:<cluster-version> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" --
 
 -   `hot-region-cache-hits-threshold`は、ホットリージョンを識別するのに必要な分数を設定するために使用されます。 PD は、リージョンがこの分数を超えてホットスポット状態になった後にのみ、ホットスポット スケジューリングに参加できます。
 
--   `tolerant-size-ratio`は、バランス バッファ領域のサイズを制御します。 2 店舗のリーダーまたはリージョンのスコア差が、指定されたリージョンサイズの倍数未満の場合、PD によってバランスが取れていると見なされます。
+-   `tolerant-size-ratio`バランス バッファ領域のサイズを制御します。 2 店舗のリーダーまたはリージョンのスコア差が、指定されたリージョンサイズの倍数未満の場合、PD によってバランスが取れていると見なされます。
 
     ```bash
     config set tolerant-size-ratio 20        // Set the size of the buffer area to about 20 times of the average Region Size
     ```
 
--   `low-space-ratio`は、ストア スペースが不十分であると見なされるしきい値を制御します。ノードが占有するスペースの割合が指定された値を超えると、PD は該当するノードへのデータの移行を可能な限り回避しようとします。同時に、PD は主に残りの領域をスケジュールして、対応するノードのディスク領域を使い果たすことを回避します。
+-   `low-space-ratio`ストア スペースが不十分であると見なされるしきい値を制御します。ノードが占有するスペースの割合が指定された値を超えると、PD は該当するノードへのデータの移行を可能な限り回避しようとします。同時に、PD は主に残りの領域をスケジュールして、対応するノードのディスク領域を使い果たすことを回避します。
 
     ```bash
     config set low-space-ratio 0.9              // Set the threshold value of insufficient space to 0.9
     ```
 
--   `high-space-ratio`は、十分なストア スペースと見なされるしきい値を制御します。この構成は、 `region-score-formula-version`が`v1`に設定されている場合にのみ有効です。ノードが占有する容量の比率が指定された値よりも小さい場合、PD は残りの容量を無視し、主に実際のデータ量をスケジュールします。
+-   `high-space-ratio`十分なストア スペースと見なされるしきい値を制御します。この構成は、 `region-score-formula-version`が`v1`に設定されている場合にのみ有効です。ノードが占有する容量の比率が指定された値よりも小さい場合、PD は残りの容量を無視し、主に実際のデータ ボリュームをスケジュールします。
 
     ```bash
     config set high-space-ratio 0.5             // Set the threshold value of sufficient space to 0.5
@@ -300,7 +300,7 @@ tiup ctl:<cluster-version> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" --
     config set cluster-version 1.0.8              // Set the version of the cluster to 1.0.8
     ```
 
--   `replication-mode`は、デュアル データ センター シナリオでのリージョンのレプリケーション モードを制御します。詳細は[DR 自動同期モードを有効にする](/two-data-centers-in-one-city-deployment.md#enable-the-dr-auto-sync-mode)を参照してください。
+-   `replication-mode`デュアル データ センター シナリオでのリージョンのレプリケーション モードを制御します。詳細は[DR 自動同期モードを有効にする](/two-data-centers-in-one-city-deployment.md#enable-the-dr-auto-sync-mode)を参照してください。
 
 -   `leader-schedule-policy`は、リーダーのスケジューリング戦略を選択するために使用されます。 `size`または`count`に従ってリーダーをスケジュールできます。
 
@@ -318,11 +318,11 @@ tiup ctl:<cluster-version> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" --
 
 -   `enable-debug-metrics`は、デバッグ用のメトリックを有効にするために使用されます。 `true`に設定すると、PD は`balance-tolerant-size`などのいくつかのメトリックを有効にします。
 
--   `enable-placement-rules`は、v5.0 以降のバージョンでデフォルトで有効になっている配置ルールを有効にするために使用されます。
+-   `enable-placement-rules` 、v5.0 以降のバージョンでデフォルトで有効になっている配置ルールを有効にするために使用されます。
 
 -   `store-limit-mode`は、ストア速度を制限するモードを制御するために使用されます。オプションのモードは`auto`と`manual`です。 `auto`モードでは、負荷に応じてストアが自動的にバランス調整されます (実験的)。
 
--   PD は、フロー番号の最下位桁を四捨五入します。これにより、リージョンフロー情報の変更によって引き起こされる統計の更新が減少します。この構成項目は、リージョンフロー情報を丸める最小桁数を指定するために使用されます。たとえば、デフォルト値が`3`であるため、フロー`100512`は`101000`に丸められます。この構成は`trace-region-flow`を置き換えます。
+-   PD は、フロー番号の最下位桁を四捨五入します。これにより、リージョンフロー情報の変更によって引き起こされる統計の更新が減少します。この構成項目は、リージョンフロー情報を丸める最小桁数を指定するために使用されます。たとえば、デフォルト値が`3`であるため、フロー`100512` `101000`に丸められます。この構成は`trace-region-flow`を置き換えます。
 
 -   たとえば、 `flow-round-by-digit`の値を`4`に設定します。
 
@@ -478,11 +478,11 @@ Success!
 >> operator check 1                                     // Check the status of the operators related to Region 1
 ```
 
-リージョンの分割は、できるだけ中央に近い位置から開始します。この位置は、「スキャン」と「概算」という 2 つの戦略を使用して見つけることができます。それらの違いは、前者はリージョンをスキャンして中間キーを決定するのに対し、後者は SST ファイルに記録された統計をチェックしておおよその位置を取得することです。一般に、前者はより正確ですが、後者はより少ない I/O を消費し、より速く完了することができます。
+リージョンの分割は、できるだけ中央に近い位置から開始します。この位置は、「スキャン」と「概算」という 2 つの戦略を使用して見つけることができます。それらの違いは、前者はリージョン をスキャンして中間キーを決定し、後者は SST ファイルに記録された統計をチェックしておおよその位置を取得することです。一般に、前者はより正確ですが、後者はより少ない I/O を消費し、より速く完了することができます。
 
 ### <code>ping</code> {#code-ping-code}
 
-このコマンドを使用して、 `ping`の PD にかかる時間を表示します。
+このコマンドを使用して、 `ping` PD にかかる時間を表示します。
 
 使用法：
 
@@ -604,7 +604,7 @@ Raw フォーマットの使用法:
 
 このコマンドを使用して、特定の範囲`[startkey, endkey)`内のすべてのリージョンを照会します。 `endKey`秒のない範囲がサポートされています。
 
-`limit`パラメータは、キーの数を制限します。デフォルト値`limit`は`16`で、値`-1`は無制限のキーを意味します。
+`limit`パラメータは、キーの数を制限します。デフォルト値`limit` `16`で、値`-1`は無制限のキーを意味します。
 
 使用法：
 
@@ -801,37 +801,37 @@ Raw フォーマットの使用法:
 }
 ```
 
--   `min-hot-byte-rate`はカウントされる最小のバイト数を意味し、通常は 100 です。
+-   `min-hot-byte-rate`カウントされる最小のバイト数を意味し、通常は 100 です。
 
     ```bash
     scheduler config balance-hot-region-scheduler set min-hot-byte-rate 100
     ```
 
--   `min-hot-key-rate`は、カウントされるキーの最小数を意味し、通常は 10 です。
+-   `min-hot-key-rate`カウントされるキーの最小数を意味し、通常は 10 です。
 
     ```bash
     scheduler config balance-hot-region-scheduler set min-hot-key-rate 10
     ```
 
--   `min-hot-query-rate`は、カウントされるクエリの最小数を意味し、通常は 10 です。
+-   `min-hot-query-rate`カウントされるクエリの最小数を意味し、通常は 10 です。
 
     ```bash
     scheduler config balance-hot-region-scheduler set min-hot-query-rate 10
     ```
 
--   `max-zombie-rounds`は、オペレーターが保留中の影響と見なすことができるハートビートの最大数を意味します。より大きな値に設定すると、保留中の影響に含まれるオペレーターが増える可能性があります。通常、その値を調整する必要はありません。保留中の影響とは、スケジューリング中に生成されるが、まだ効果があるオペレーターの影響を指します。
+-   `max-zombie-rounds`オペレーターが保留中の影響と見なすことができるハートビートの最大数を意味します。より大きな値に設定すると、保留中の影響に含まれるオペレーターが増える可能性があります。通常、その値を調整する必要はありません。保留中の影響とは、スケジューリング中に生成されるが、まだ効果があるオペレーターの影響を指します。
 
     ```bash
     scheduler config balance-hot-region-scheduler set max-zombie-rounds 3
     ```
 
--   `max-peer-number`は、解決されるピアの最大数を意味し、スケジューラが遅すぎるのを防ぎます。
+-   `max-peer-number`解決されるピアの最大数を意味し、スケジューラが遅すぎるのを防ぎます。
 
     ```bash
     scheduler config balance-hot-region-scheduler set max-peer-number 1000
     ```
 
--   `byte-rate-rank-step-ratio` 、 `key-rate-rank-step-ratio` 、 `query-rate-rank-step-ratio` 、および`count-rank-step-ratio`は、それぞれバイト、キー、クエリ、およびカウントのステップ ランクを意味します。ランクステップ比は、ランクを計算する際のステップを決定します。 `great-dec-ratio`と`minor-dec-ratio`は、 `dec`のランクを決定するために使用されます。通常、これらの項目を変更する必要はありません。
+-   `byte-rate-rank-step-ratio` 、 `key-rate-rank-step-ratio` 、 `query-rate-rank-step-ratio` 、および`count-rank-step-ratio` 、それぞれバイト、キー、クエリ、およびカウントのステップ ランクを意味します。ランクステップ比は、ランクを計算する際のステップを決定します。 `great-dec-ratio`と`minor-dec-ratio` `dec`ランクを決定するために使用されます。通常、これらの項目を変更する必要はありません。
 
     ```bash
     scheduler config balance-hot-region-scheduler set byte-rate-rank-step-ratio 0.05
@@ -843,31 +843,48 @@ Raw フォーマットの使用法:
     scheduler config balance-hot-region-scheduler set src-tolerance-ratio 1.1
     ```
 
--   `read-priorities` 、 `write-leader-priorities` 、および`write-peer-priorities`は、スケジューラーがホットリージョンスケジューリングで優先するディメンションを制御します。構成では 2 つのディメンションがサポートされています。
+-   `read-priorities` 、 `write-leader-priorities` 、および`write-peer-priorities` 、スケジューラーがホットリージョンスケジューリングで優先するディメンションを制御します。構成では 2 つのディメンションがサポートされています。
 
-    -   `read-priorities`と`write-leader-priorities`は、読み取りおよび書き込みリーダー タイプのホット リージョンをスケジュールするためにスケジューラが優先するディメンションを制御します。次元オプションは`query` 、 `byte` 、および`key`です。
+    -   `read-priorities`と`write-leader-priorities` 、読み取りおよび書き込みリーダー タイプのホット リージョンをスケジュールするためにスケジューラが優先するディメンションを制御します。次元オプションは`query` 、 `byte` 、および`key`です。
 
-    -   `write-peer-priorities`は、書き込みピア タイプのホット リージョンをスケジュールするために、スケジューラがどのディメンションを優先するかを制御します。次元オプションは`byte`と`key`です。
+    -   `write-peer-priorities`書き込みピア タイプのホット リージョンをスケジュールするために、スケジューラがどのディメンションを優先するかを制御します。次元オプションは`byte`と`key`です。
 
     > **ノート：**
     >
-    > クラスタ コンポーネントが v5.2 より前の場合、 `query`ディメンションの構成は有効になりません。一部のコンポーネントが v5.2 以降にアップグレードされた場合でも、デフォルトでは`byte`次元と`key`次元が引き続きホットリージョンスケジューリングの優先順位を持ちます。クラスターのすべてのコンポーネントが v5.2 以降にアップグレードされた後も、そのような構成は互換性のために有効になります。 `pd-ctl`コマンドを使用して、リアルタイムの構成を表示できます。通常、これらの構成を変更する必要はありません。
+    > クラスタコンポーネントがv5.2 より前の場合、 `query`ディメンションの構成は有効になりません。一部のコンポーネントが v5.2 以降にアップグレードされた場合でも、デフォルトでは`byte`と`key`が引き続きホットリージョンスケジューリングの優先順位を持ちます。クラスターのすべてのコンポーネントが v5.2 以降にアップグレードされた後も、そのような構成は互換性のために有効になります。 `pd-ctl`コマンドを使用して、リアルタイムの構成を表示できます。通常、これらの構成を変更する必要はありません。
 
     ```bash
     scheduler config balance-hot-region-scheduler set read-priorities query,byte
     ```
 
--   `strict-picking-store`は、ホットリージョンスケジューリングの検索スペースを制御します。通常は有効になっています。有効にすると、ホットリージョンスケジューリングにより、構成された 2 つのディメンションでホットスポットのバランスが確保されます。無効にすると、ホットリージョンスケジューリングは優先度が最も高いディメンションのバランスのみを確保するため、他のディメンションのバランスが低下する可能性があります。通常、この構成を変更する必要はありません。
+-   `strict-picking-store`ホットリージョンスケジューリングの検索スペースを制御します。通常は有効になっています。有効にすると、ホットリージョンスケジューリングにより、構成された 2 つのディメンションでホットスポットのバランスが確保されます。無効にすると、ホットリージョンスケジューリングは優先度が最も高いディメンションのバランスのみを確保するため、他のディメンションのバランスが低下する可能性があります。通常、この構成を変更する必要はありません。
 
     ```bash
     scheduler config balance-hot-region-scheduler set strict-picking-store true
     ```
 
--   `enable-for-tiflash`は、ホットリージョンスケジューリングが TiFlash インスタンスに対して有効かどうかを制御します。通常は有効になっています。無効にすると、TiFlash インスタンス間のホットリージョンスケジューリングは実行されません。
+-   `enable-for-tiflash`ホットリージョンスケジューリングがTiFlashインスタンスに対して有効かどうかを制御します。通常は有効になっています。無効にすると、 TiFlashインスタンス間のホットリージョンスケジューリングは実行されません。
 
     ```bash
     scheduler config balance-hot-region-scheduler set enable-for-tiflash true
     ```
+
+### <code>service-gc-safepoint</code> {#code-service-gc-safepoint-code}
+
+このコマンドを使用して、現在の GC セーフポイントとサービス GC セーフポイントを照会します。出力は次のとおりです。
+
+```bash
+{
+  "service_gc_safe_points": [
+    {
+      "service_id": "gc_worker",
+      "expired_at": 9223372036854775807,
+      "safe_point": 439923410637160448
+    }
+  ],
+  "gc_safe_point": 0
+}
+```
 
 ### <code>store [delete | label | weight | remove-tombstone | limit ] &#x3C;store_id>  [--jq="&#x3C;query string>"]</code> {#code-store-delete-label-weight-remove-tombstone-limit-x3c-store-id-jq-x3c-query-string-code}
 
@@ -930,7 +947,7 @@ logic:  120102
 > **警告：**
 >
 > -   この機能は非可逆リカバリであるため、TiKV は機能の使用後にデータの整合性とデータ インデックスの整合性を保証できません。
-> -   Online Unsafe Recovery は実験的機能であり、運用環境で使用することはお勧めし**ません**。この機能のインターフェイス、戦略、および内部実装は、一般提供 (GA) になったときに変更される可能性があります。この機能はいくつかのシナリオでテストされていますが、完全に検証されておらず、システムが使用できなくなる可能性があります。
+> -   Online Unsafe Recovery は実験的機能であり、本番環境で使用することは**お**勧めしません。この機能のインターフェイス、戦略、および内部実装は、一般提供 (GA) になったときに変更される可能性があります。この機能はいくつかのシナリオでテストされていますが、完全に検証されておらず、システムが使用できなくなる可能性があります。
 > -   TiDB チームのサポートを受けて機能関連の操作を実行することをお勧めします。操作を誤ると、クラスタの復旧が困難になる場合があります。
 
 このコマンドを使用して、永続的に損傷したレプリカによってデータが使用できなくなった場合に、損失のある回復操作を実行します。例えば：
@@ -1014,7 +1031,7 @@ store --jq='.stores[].store | select(.state_name!="Up") | { id, address, state_n
 ...
 ```
 
-### すべての TiFlash ノードを照会する {#query-all-tiflash-nodes}
+### すべてのTiFlashノードを照会する {#query-all-tiflash-nodes}
 
 {{< copyable "" >}}
 
@@ -1087,7 +1104,7 @@ store --jq='.stores[].store | select(.labels | length>0 and contains([{"key":"en
 {"id":24,"peer_stores":[1,32,33]}
 ```
 
-[store30, store31] がダウンしている場合、 `remove-peer`の Operator を作成することで安全に処理できるすべてのリージョン、つまり DownPeer が 1 つだけのリージョンを見つけます。
+[store30, store31] がダウンしている場合、 `remove-peer` Operator を作成することで安全に処理できるすべてのリージョン、つまり DownPeer が 1 つだけのリージョンを見つけます。
 
 ```bash
 >> region --jq=".regions[] | {id: .id, remove_peer: [.peers[].store_id] | select(length>1) | map(if .==(30,31) then . else empty end) | select(length==1)}"
