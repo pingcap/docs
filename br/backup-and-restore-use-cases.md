@@ -69,6 +69,8 @@ In addition to the preceding prerequisites, you should also perform the followin
 
 #### Check before backup
 
+The BR tool already supports self-adapting to GC. It automatically registers `backupTS` (the latest PD timestamp by default) to PD's `safePoint` to ensure that TiDB's GC Safe Point does not move forward during the backup, thus avoiding manually setting GC configurations.
+
 Before running the [`br backup` command](/br/use-br-command-line-tool.md#br-command-line-description), make sure the following conditions are met:
 
 - No DDL statements are running on the TiDB cluster.
