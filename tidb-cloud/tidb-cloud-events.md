@@ -30,12 +30,12 @@ To view the events on the Events page, take the following steps:
 
 TiDB Cloud logs the following types of cluster events:
 
-| Event Type| Description |  Added since |
+| Event Type| Description |  Available since |
 |:--- |:--- |:--- |
-| Creating Cluster / Cluster Created |  Events recoded for cluster creation action.  |  2023-03-01   |
-| Pausing Cluster  / Cluster Paused  |   Events recoded for cluster pause action. |  2023-03-01   |
-| Resuming Cluster / Cluster Resumed  |   Events recoded for cluster resume action. |  2023-03-01   |
-| Modifying Cluster Size  / Cluster Size Modified  |   Events recoded for modify cluster size action. |  2023-03-01   |
+| CreateCluster |  Events recoded for cluster creation action.  |  2023-03-21   |
+| PauseCluster |   Events recoded for cluster pause action. |  2023-03-21   |
+| ResumeCluster |   Events recoded for cluster resume action. |  2023-03-21   |
+| ModifyClusterSize |   Events recoded for modifying cluster size action. |  2023-03-21   |
 
 For each event, the following information is logged:
 
@@ -47,8 +47,7 @@ For each event, the following information is logged:
 
 > **Note:**
 >
-> - If the cluster events happened before 2023-03-01, these events are not visible on the Events page. 
-> - TiDB Cloud will keep adding more event types in future release. 
+> - If the cluster events happened before 2023-03-21, these events are not visible on the Events page. 
 
 ## Event retention policy
 
