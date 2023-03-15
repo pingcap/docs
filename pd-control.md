@@ -867,9 +867,6 @@ Usage:
     scheduler config balance-hot-region-scheduler set enable-for-tiflash true
     ```
 
-<<<<<<< HEAD
-### `store [delete | label | weight | remove-tombstone | limit ] <store_id>  [--jq="<query string>"]`
-=======
 ### `service-gc-safepoint`
 
 Use this command to query the current GC safepoint and service GC safepoint. The output is as follows:
@@ -887,8 +884,7 @@ Use this command to query the current GC safepoint and service GC safepoint. The
 }
 ```
 
-### `store [delete | cancel-delete | label | weight | remove-tombstone | limit ] <store_id> [--jq="<query string>"]`
->>>>>>> d9dd006dd (pd control: add service-gc-safepoint command (#12890))
+### `store [delete | label | weight | remove-tombstone | limit ] <store_id>  [--jq="<query string>"]`
 
 Use this command to view the store information or remove a specified store. For a jq formatted output, see [jq-formatted-json-output-usage](#jq-formatted-json-output-usage).
 
