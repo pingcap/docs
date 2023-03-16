@@ -299,7 +299,7 @@ The `filter` parameters are described as follows:
 | `ignore_txn_start_ts` | `UINT64 ARRAY` type. Specifying this will ignore transactions that specify `start_ts`, such as `[1, 2]`. (Optional)   |
 | `rules`               | `STRING ARRAY` type. The rules for table schema filtering, such as `['foo*.*', 'bar*.*']`. For more information, see [Table Filter](/table-filter.md). (Optional)  |
 
-The `filter.event_filters` parameters are described as follows. For more infomation, see [Changefeed Log Filters](/ticdc/ticdc-filter.md).
+The `filter.event_filters` parameters are described as follows. For more information, see [Changefeed Log Filters](/ticdc/ticdc-filter.md).
 
 | Parameter name | Description |
 |:-----------------|:---------------------------------------|
@@ -531,7 +531,7 @@ The `error` parameters are described as follows:
 
 | Parameter name | Description |
 |:-----------------|:---------------------------------------|
-| `addr` | `STRING` type.  The capture address |
+| `addr` | `STRING` type. The capture address |
 | `code` | `STRING` type. The error code          |
 | `message` | `STRING` type. The details of the error      |
 
@@ -890,8 +890,8 @@ curl -X GET http://127.0.0.1:8300/api/v2/processors
 
 The parameters are described as follows:
 
-- `changefeed_id`：the changefeed ID
-- `capture_id`：the capture ID
+- `changefeed_id`: the changefeed ID
+- `capture_id`: the capture ID
 
 ## Query a specific replication subtask
 
@@ -928,7 +928,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/processors/test/561c3784-77f0-4863-ad52
 
 The parameter is described as follows:
 
-- `table_ids`：The table ID to be replicated on this capture.
+- `table_ids`: The table ID to be replicated on this capture.
 
 ## Query the TiCDC service process list
 
@@ -959,9 +959,9 @@ curl -X GET http://127.0.0.1:8300/api/v2/captures
 
 The parameter is described as follows:
 
-- `id`：the capture ID.
-- `is_owner`：whether the capture is the owner.
-- `address`：the address of the capture.
+- `id`: the capture ID.
+- `is_owner`: whether the capture is the owner.
+- `address`: the address of the capture.
 
 ## Evict an owner node
 
