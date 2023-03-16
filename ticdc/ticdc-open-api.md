@@ -7,6 +7,10 @@ summary: Learn how to use the OpenAPI interface to manage the cluster status and
 
 <!-- markdownlint-disable MD024 -->
 
+> **Note**
+>
+> This version of OpenAPI is deprecated. It is recommended to use [TiCDC OpenAPI v2](/ticdc/ticdc-open-api-v2.md).
+
 TiCDC provides the OpenAPI feature for querying and operating the TiCDC cluster, which is similar to the feature of [`cdc cli` tool](/ticdc/ticdc-manage-changefeed.md).
 
 You can use the APIs to perform the following maintenance operations on the TiCDC cluster:
