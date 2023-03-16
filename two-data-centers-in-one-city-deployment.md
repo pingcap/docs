@@ -1,12 +1,6 @@
 ---
-<<<<<<< HEAD
-title: Two Data Centers in One City Deployment
-summary: Learn the deployment solution of two data centers in one city.
-=======
 title: Two Availability Zones in One Region Deployment
 summary: Learn the deployment solution of two availability zones in one region.
-aliases: ['/tidb/dev/synchronous-replication']
->>>>>>> 6a4fcd938 (replace "data center" and "city" with "AZ" and "region" (#12872))
 ---
 
 # Two Availability Zones in One Region Deployment
