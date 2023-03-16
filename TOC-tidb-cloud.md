@@ -122,6 +122,8 @@
       - [Precheck Errors, Migration Errors, and Alerts for Data Migration](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md)
 - Explore Data
   - [Chat2Query (Beta)](/tidb-cloud/explore-data-with-chat2query.md)
+- Data Service (Beta)
+  - [Response and Error Code](/tidb-cloud/data-service-response-and-error-code.md)
 - Stream Data
   - [Changefeed Overview](/tidb-cloud/changefeed-overview.md)
   - [To MySQL Sink](/tidb-cloud/changefeed-sink-to-mysql.md)
