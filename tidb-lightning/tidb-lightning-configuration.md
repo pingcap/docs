@@ -141,7 +141,7 @@ addr = "172.16.31.10:8287"
 # duplicate-resolution = 'none'
 # The number of KV pairs sent in one request in the physical import mode.
 # send-kv-pairs = 32768
-# Whether to enable compression when sending KV pairs to TiKV in the physical import mode. Currently, only the Gzip compression algorithm is supported. To use this algorithm, you can fill in either "gzip" or "gz" for this parameter. By default, the compression is not enabled.
+# Whether to enable compression when sending KV pairs to TiKV in the physical import mode. Currently, only the Gzip compression algorithm is supported. To use this algorithm, you can fill in either "gzip" or "gz" for this parameter. By default, the compression is not enabled. This configuration is an experimental feature. It is not recommended to use it in production environments.
 # compress-kv-pairs = ""
 # The directory of local KV sorting in the physical import mode. If the disk
 # performance is low (such as in HDD), it is recommended to set the directory
