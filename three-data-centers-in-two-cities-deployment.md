@@ -1,12 +1,6 @@
 ---
-<<<<<<< HEAD
-title: Three Data Centers in Two Cities Deployment
-summary: Learn the deployment solution to three data centers in two cities.
-=======
 title: Three Availability Zones in Two Regions Deployment
 summary: Learn the deployment solution to three availability zones in two regions.
-aliases: ['/docs/dev/three-data-centers-in-two-cities-deployment/']
->>>>>>> 6a4fcd938 (replace "data center" and "city" with "AZ" and "region" (#12872))
 ---
 
 # Three Availability Zones in Two Regions Deployment

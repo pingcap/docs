@@ -1,12 +1,6 @@
 ---
-<<<<<<< HEAD
-title: Multiple Data Centers in One City Deployment
-summary: Learn the deployment solution to multi-data centers in one city.
-=======
 title: Multiple Availability Zones in One Region Deployment
 summary: Learn the deployment solution to multiple availability zones in one region.
-aliases: ['/docs/dev/how-to/deploy/geographic-redundancy/overview/','/docs/dev/geo-redundancy-deployment/','/tidb/dev/geo-redundancy-deployment']
->>>>>>> 6a4fcd938 (replace "data center" and "city" with "AZ" and "region" (#12872))
 ---
 
 # Multiple Availability Zones in One Region Deployment
