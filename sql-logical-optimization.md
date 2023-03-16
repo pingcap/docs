@@ -15,4 +15,5 @@ This chapter introduces the following key rewrites:
 - [Predicates Push Down](/predicate-push-down.md)
 - [Partition Pruning](/partition-pruning.md)
 - [TopN and Limit Operator Push Down](/topn-limit-push-down.md)
+- [Derive TopN/Limit from Window Functions](/derive-topn-or-limit.md)
 - [Join Reorder](/join-reorder.md)
