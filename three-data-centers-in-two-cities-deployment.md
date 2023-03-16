@@ -8,7 +8,7 @@ aliases: ['/docs/dev/three-data-centers-in-two-cities-deployment/']
 
 This document introduces the architecture and configuration of the three availability zones (AZs) in two regions deployment.
 
-The term "region" in this document refers to a geographic area, and "AZ" refers to a group of independent resources that are divided within a region. The solution described in this document also applies to the scenario where three data centers are located in two cities.
+The term "region" in this document refers to a geographic area, while the capitalized "Region" refers to a basic unit of data storage in TiKV. "AZ" refers to an isolated location within a region, and each region has multiple AZs. The solution described in this document also applies to the scenario where multiple data centers are located in a single city.
 
 ## Overview
 
@@ -193,7 +193,7 @@ In the deployment of three AZs in two regions, to optimize performance, you need
 
    > **Note:**
    >
-   > Since TiDB v5.2, the `label-property` configuration is not supported by default. To set the replica policy, use the [placement rules](/configure-placement-rules.md).
+   > Starting from TiDB v5.2, the `label-property` configuration is not supported by default. To set the replica policy, use the [placement rules](/configure-placement-rules.md).
 
 - Configure the priority of PD. To avoid the situation where the PD leader is in another region (AZ3), you can increase the priority of local PD (in Seattle) and decrease the priority of PD in another region (San Francisco). The larger the number, the higher the priority.
 

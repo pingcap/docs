@@ -8,7 +8,7 @@ aliases: ['/tidb/dev/synchronous-replication']
 
 This document introduces the deployment mode of two availability zones (AZs) in one region, including the architecture, configuration, how to enable this deployment mode, and how to use replicas in this mode.
 
-The term "region" in this document refers to a geographic area, and "AZ" refers to a group of independent resources that are divided within a region. The solution described in this document also applies to the scenario where two data centers are located in one city.
+The term "region" in this document refers to a geographic area, while the capitalized "Region" refers to a basic unit of data storage in TiKV. "AZ" refers to an isolated location within a region, and each region has multiple AZs. The solution described in this document also applies to the scenario where multiple data centers are located in a single city.
 
 ## Introduction
 
