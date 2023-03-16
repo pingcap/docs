@@ -250,7 +250,7 @@ This interface is used to submit a replication task to TiCDC. If the request is 
 The parameters are described as follows:
 
 | Parameter name | Description |
-| :------------------------ | :---------------------- ------------------------------- |
+| :------------------------ | :----------------------------------------------------- |
 | `changefeed_id` | `STRING` type. The ID of the replication task. (Optional) |
 | `replica_config` | Configuration parameters for the replication task. (Optional) |
 | **`sink_uri`** | `STRING` type. The downstream address of the replication task. (**Required**) |
@@ -262,7 +262,7 @@ The meaning and format of `changefeed_id`, `start_ts`, `target_ts`, and `sink_ur
 The descriptions of the `replica_config` parameters are as follows.
 
 | Parameter name | Description |
-| :------------------------ | :---------------------- ------------------------------- |
+| :------------------------ | :----------------------------------------------------- |
 | `bdr_mode`                | `BOOLEAN` type. Determines whether to enable [bidirectional replication](/ticdc/ticdc-bidirectional-replication.md). The default value is `false`. (Optional)               |
 | `case_sensitive`          | `BOOLEAN` type. Determines whether to filter for case-sensitive table names. The default value is `true`. (Optional)   |
 | `check_gc_safe_point`     | `BOOLEAN` type. Determines whether to check that the start time of the replication task is earlier than the GC time. The default value is `true`. (Optional)                                  |
@@ -304,7 +304,7 @@ The `filter.event_filters` parameters are described as follows. For more informa
 | Parameter name | Description |
 |:-----------------|:---------------------------------------|
 | `ignore_delete_value_expr`     | `STRING ARRAY` type. For example, `"name = 'john'"` means to filter out DELETE DML containing the `name = 'john'` condition. (Optional)            |
-| `ignore_event`                 | `STRING ARRAY` type. For example, ``["insert"]` indicates that the INSERT events are filtered out. (Optional)     |
+| `ignore_event`                 | `STRING ARRAY` type. For example, `["insert"]` indicates that the INSERT events are filtered out. (Optional)     |
 | `ignore_insert_value_expr`     | `STRING ARRAY` type. For example, `"id >= 100"` means to filter out INSERT DMLs that match the `id >= 100` condition. (Optional)                |
 | `ignore_sql`                   | `STRING ARRAY` type. For example, ["^drop", "add column"]` means to filter out DDLs that start with "DROP" or contain "ADD COLUMN". (Optional)  |
 | `ignore_update_new_value_expr` | `STRING ARRAY` type. For example, `"gender = 'male'"` means to filter out the UPDATE DML with the new value `gender = 'male'`. (Optional)          |
@@ -689,7 +689,7 @@ To modify the changefeed configuration, follow the steps of `pause the replicati
 Currently, only the following configurations can be modified via the API.
 
 | Parameter name | Description |
-| :-------------------- | :-------------------------- --------------------------- |
+| :-------------------- | :----------------------------------------------------- |
 | `target_ts` | `UINT64` type. Specifies the target TSO of the changefeed. (Optional) |
 | `sink_uri` | `STRING` type. The downstream address of the replication task. (Optional) |
 | `replica_config` | The configuration parameters of sink. It must be complete. (Optional) |
@@ -719,7 +719,7 @@ This API is a synchronous interface. If the request is successful, the basic inf
 #### Query parameter
 
 | Parameter name | Description |
-| :------ | :---------------------------------------- ----- |
+| :------ | :--------------------------------------------- |
 | `state` | When this parameter is specified, the information of replication tasks in this specified state is returned. (Optional) |
 
 The value options for `state` are `all`, `normal`, `stopped`, `error`, `failed`, and `finished`.
@@ -728,7 +728,7 @@ If this parameter is not specified, the basic information of replication tasks i
 
 ### Example
 
-The following request queries the basic information of all replication tasks in the `normal`state.
+The following request queries the basic information of all replication tasks in the `normal` state.
 
 ```shell
 curl -X GET http://127.0.0.1:8300/api/v2/changefeeds?state=normal
@@ -912,7 +912,7 @@ This API is a synchronous interface. If the request is successful, the detailed 
 
 ### Example
 
-The following request queries the detailed information of a subtask whose `changefeed_id` is `test` and `capture_id` is `561c3784-77f0-4863-ad52-65a3436db6af`. A subtask can be indentifed by `changefeed_id` and `capture_id`.
+The following request queries the detailed information of a subtask whose `changefeed_id` is `test` and `capture_id` is `561c3784-77f0-4863-ad52-65a3436db6af`. A subtask can be identified by `changefeed_id` and `capture_id`.
 
 ```shell
 curl -X GET http://127.0.0.1:8300/api/v2/processors/test/561c3784-77f0-4863-ad52-65a3436db6af
