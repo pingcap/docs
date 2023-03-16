@@ -32,7 +32,7 @@ You can use the APIs to perform the following maintenance operations on the TiCD
 
 The request body and returned value of all APIs are in JSON format. A successful request returns a `200 OK` message. The following sections describe the specific usage of the APIs.
 
-In the following examples, the listening IP address of the TiCDC server is `127.0.0.1` and the port is `8300`. You can bind a specified IP address and port via `--addr=ip:port` when starting the TiCDC server.
+In the following examples, the listening IP address of the TiCDC server is `127.0.0.1` and the port is `8300`. You can bind a specified IP address and port bound to TiCDC via `--addr=ip:port` when starting the TiCDC server.
 
 ## API error message template
 
@@ -49,7 +49,7 @@ In the above JSON output, `error_msg` describes the error message and `error_cod
 
 ## Return format of the API List interface
 
-If an API request returns a list of resources, for example a request to return all `Captures`, the TiCDC return format is as follows:
+If an API request returns a list of resources (for example, a request used to return all `Captures`), the TiCDC return format is as follows:
 
 ```json
 {
@@ -108,7 +108,7 @@ The fields of the above output are described as follows:
 - `id`: the capture ID of the node.
 - `pid`: the capture process PID of the node.
 - `is_owner`: indicates whether the node is an owner.
-- `liveness`: the liveness status of this node. `0` means normal. `1` means that the node is in `graceful shutdown` state.
+- `liveness`: whether this node is live. `0` means normal. `1` means that the node is in `graceful shutdown` state.
 
 ## Check the health status of a TiCDC cluster
 
@@ -255,7 +255,7 @@ The parameters are described as follows:
 | `replica_config` | Configuration parameters for the replication task. (Optional) |
 | **`sink_uri`** | `STRING` type. The downstream address of the replication task. (**Required**) |
 | `start_ts` | `UINT64` type. Specifies the start TSO of the changefeed. The TiCDC cluster will start pulling data from this TSO. The default value is the current time. (Optional) |
-| `target_ts` | `UINT64` type. Specifies the target TSO of the changefeed. The TiCDC cluster pulls data until this TSO. The default is empty, meaning TiCDC does not stop automatically. (Optional) |
+| `target_ts` | `UINT64` type. Specifies the target TSO of the changefeed. The TiCDC cluster stops pulling data when reaching this TSO. The default is empty, meaning TiCDC does not stop automatically. (Optional) |
 
 The meaning and format of `changefeed_id`, `start_ts`, `target_ts`, and `sink_uri` are the same as those described in the [Use `cdc cli` to create a replication task](/ticdc/ticdc-manage-changefeed.md#create-a-replication-task) document. For the detailed description of these parameters, see that document. Note that when you specify the certificate path in `sink_uri`, make sure you have uploaded the corresponding certificate to the corresponding TiCDC server.
 
@@ -264,7 +264,7 @@ The descriptions of the `replica_config` parameters are as follows.
 | Parameter name | Description |
 | :------------------------ | :----------------------------------------------------- |
 | `bdr_mode`                | `BOOLEAN` type. Determines whether to enable [bidirectional replication](/ticdc/ticdc-bidirectional-replication.md). The default value is `false`. (Optional)               |
-| `case_sensitive`          | `BOOLEAN` type. Determines whether to filter for case-sensitive table names. The default value is `true`. (Optional)   |
+| `case_sensitive`          | `BOOLEAN` type. Determines whether to be case-sensitive when filtering table names. The default value is `true`. (Optional)   |
 | `check_gc_safe_point`     | `BOOLEAN` type. Determines whether to check that the start time of the replication task is earlier than the GC time. The default value is `true`. (Optional)                                  |
 | `consistent`              | The configuration parameters of redo log. (Optional) |
 | `enable_old_value`        | `BOOLEAN` type. Determines whether to output the old value. (Optional)         |
@@ -306,7 +306,7 @@ The `filter.event_filters` parameters are described as follows. For more informa
 | `ignore_delete_value_expr`     | `STRING ARRAY` type. For example, `"name = 'john'"` means to filter out DELETE DML containing the `name = 'john'` condition. (Optional)            |
 | `ignore_event`                 | `STRING ARRAY` type. For example, `["insert"]` indicates that the INSERT events are filtered out. (Optional)     |
 | `ignore_insert_value_expr`     | `STRING ARRAY` type. For example, `"id >= 100"` means to filter out INSERT DMLs that match the `id >= 100` condition. (Optional)                |
-| `ignore_sql`                   | `STRING ARRAY` type. For example, `["^drop", "add column"]` means to filter out DDLs that start with "DROP" or contain "ADD COLUMN". (Optional)  |
+| `ignore_sql`                   | `STRING ARRAY` type. For example, `["^drop", "add column"]` means to filter out DDLs that start with `DROP` or contain `ADD COLUMN`. (Optional)  |
 | `ignore_update_new_value_expr` | `STRING ARRAY` type. For example, `"gender = 'male'"` means to filter out the UPDATE DML with the new value `gender = 'male'`. (Optional)          |
 | `ignore_update_old_value_expr` | `STRING ARRAY` type. For example, `"age < 18"` means to filter out the UPDATE DML with the old value `age < 18`. (Optional)                  |
 | `matcher`                      | `STRING ARRAY` type. It works as a allowlist. For example, `["test.worker"]` means that the filter rule applies only to the `worker` table in the `test` database. (Optional)          |
@@ -328,7 +328,7 @@ The `sink` parameters are described as follows:
 | `encoder_concurrency`   | `INT` type. The number of encoder threads in the MQ sink. The deault value is `16`. (Optional)               |
 | `protocol`              | `STRING` type. For MQ sinks, you can specify the protocol format of the message. The following protocols are currently supported: `canal-json`, `open-protocol`, `canal`, `avro` and `maxwell`. |
 | `schema_registry`       | `STRING` type. The schema registry address. (Optional)                                                  |
-| `terminator`            | `STRING` type. The terminator is used to separate two data change events. The default value is null, which means "\r\n" is used as the terminator. (Optional)                |
+| `terminator`            | `STRING` type. The terminator is used to separate two data change events. The default value is null, which means `"\r\n"` is used as the terminator. (Optional)                |
 | `transaction_atomicity` | `STRING` type. The atomicity of the transaction. (Optional)  |
 
 `sink.column_selectors` is an array. The parameters are described as follows:
