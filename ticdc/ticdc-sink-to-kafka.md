@@ -243,7 +243,7 @@ This feature splits a single large table into multiple data ranges based on the 
 
 > **Warning:**
 >
-> - TiCDC v7.0 only supports scaling out a large single table on Kafka changefeeds.
+> TiCDC v7.0.0 only supports scaling out a large single table on Kafka changefeeds.
 
 Sample configuration:
 
