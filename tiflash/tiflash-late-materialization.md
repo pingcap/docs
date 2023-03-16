@@ -7,7 +7,7 @@ summary: Describe how to use the TiFlash late materialization feature to acceler
 
 > **Warning:**
 >
-> Currently, this is an experimental feature. The form and usage  might be modified in future releases.
+> Currently, this is an experimental feature. The form and usage might be modified in future releases.
 
 This document describes how to use the TiFlash late materialization feature to accelerate queries in OLAP scenarios.
 
@@ -37,7 +37,7 @@ In this example, the `a < 1` filtering condition is pushed down to the TableScan
 
 ## Enable or disable TiFlash late materialization
 
-By default,  the `tidb_opt_enable_late_materialization` system variable is `OFF` at both of the session and global levels, which means that the TiFlash late materialization feature is not enabled. You can use the following statement to view the corresponding variable information:
+By default,  the `tidb_opt_enable_late_materialization` system variable is `OFF` at both the session and global levels, which means that the TiFlash late materialization feature is not enabled. You can use the following statement to view the corresponding variable information:
 
 ```sql
 SHOW VARIABLES LIKE 'tidb_opt_enable_late_materialization';
@@ -94,7 +94,7 @@ set global tidb_opt_enable_late_materialization=OFF;
 When a filtering condition is pushed down to the TableScan operator, the execution process of the TableScan operator mainly includes the following steps:
 
 1. Reads the three columns `<handle, del_mark, version>`, performs multi-version concurrency control (MVCC) filtering, and then generates the MVCC Bitmap.
-2. Reads the columns related to the filtering condition, performs the filtering condition, and then  generates the Filter Bitmap.
+2. Reads the columns related to the filtering condition, performs the filtering condition, and then generates the Filter Bitmap.
 3. Performs an `AND` operation between the MVCC Bitmap and Filter Bitmap to generate the Final Bitmap.
 4. Reads the corresponding rows of the remaining columns according to the Final Bitmap.
 5. Returns the results.

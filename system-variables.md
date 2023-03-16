@@ -1574,6 +1574,15 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Specifies whether to enable the `IndexMergeJoin` operator.
 - This variable is used only for the internal operation of TiDB. It is **NOT recommended** to adjust it. Otherwise, data correctness might be affected.
 
+### `tidb_opt_enable_late_materialization` <span class="version-mark">New in v7.0.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `OFF`
+- Specifies whether to enable the [TiFlash late materialization](/tiflash/tiflash-late-materialization.md) feature.
+- By default, if a `SELECT` statement includes a filtering condition (`WHERE` clause), TiFlash scans all the data of the required columns before filtering. When this variable is set to `ON` to enable the TiFlash late materialization feature, TiFlash can first scan the column data related to the filtering conditions, filter the rows that meet the conditions, and then scan the data of other columns of these rows for further calculations, thereby reducing the amount of scanning IO and data parsing computations.
+
 ### tidb_enable_legacy_instance_scope <span class="version-mark">New in v6.0.0</span>
 
 - Scope: SESSION | GLOBAL
