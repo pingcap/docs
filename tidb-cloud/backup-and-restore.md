@@ -10,7 +10,7 @@ This document describes how to back up and restore your TiDB cluster data on TiD
 
 > **Note:**
 >
-> For [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier), the backup and restore feature is unavailable. You can use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export your data as a backup.
+> For [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier), the backup and restore feature is unavailable. You can use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export your data as a backup.
 
 ## Backup
 
@@ -30,22 +30,7 @@ By the automatic backup, you can back up the cluster data every day at the backu
 
 4. Click **Confirm**.
 
-If you do not specify a preferred backup time, TiDB Cloud assigns a default backup time based on each region. The following table lists the default backup time for each region:
-
-| Cloud provider | Region name              | Region          | Default backup time |
-|----------------|--------------------------|-----------------|---------------------|
-| AWS            | US East (N. Virginia)    | us-east-1       | 07:00 UTC           |
-| AWS            | US West (Oregon)         | us-west-2       | 10:00 UTC           |
-| AWS            | Asia Pacific (Tokyo)     | ap-northeast-1  | 17:00 UTC           |
-| AWS            | Asia Pacific (Seoul)     | ap-northeast-2  | 17:00 UTC           |
-| AWS            | Asia Pacific (Singapore) | ap-southeast-1  | 18:00 UTC           |
-| AWS            | Asia Pacific (Mumbai)    | ap-south-1      | 20:30 UTC           |
-| AWS            | Europe (Frankfurt)       | eu-central-1    | 03:00 UTC           |
-| GCP            | Iowa                     | us-central1     | 08:00 UTC           |
-| GCP            | Oregon                   | us-west1        | 10:00 UTC           |
-| GCP            | Tokyo                    | asia-northeast1 | 17:00 UTC           |
-| GCP            | Singapore                | asia-southeast1 | 18:00 UTC           |
-| GCP            | Taiwan                   | asia-east1      | 18:00 UTC           |
+If you do not specify a preferred backup time, TiDB Cloud assigns a default backup time, which is 2:00 AM in the time zone of the region where the cluster is located.
 
 Note that you can not disable automatic backup.
 
@@ -103,13 +88,13 @@ To restore your TiDB cluster data from a backup to a new cluster, take the follo
 3. In the **Restore** window, make the following changes if necessary:
 
     - Update the port number of the cluster.
-    - Increase the node size, node quantity, and storage size for the cluster.
+    - Increase the node size, node quantity, and node storage for the cluster.
 
 4. Click **Confirm**.
 
-   The cluster restore process starts and the **Security Quick Start** dialog box is displayed.
+   The cluster restore process starts and the **Security Settings** dialog box is displayed.
 
-5. In the **Security Quick Start** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
+5. In the **Security Settings** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
 
 ### Restore a deleted cluster
 
@@ -121,10 +106,10 @@ To restore a deleted cluster from recycle bin, take the following steps:
 4. In the **Restore** window, make the following changes if necessary:
 
     - Update the port number of the cluster.
-    - Increase the node size, node quantity, and storage size for the cluster.
+    - Increase the node size, node quantity, and node storage for the cluster.
 
 5. Click **Confirm**.
 
-   The cluster restore process starts and the **Security Quick Start** dialog box is displayed.
+   The cluster restore process starts and the **Security Settings** dialog box is displayed.
 
-6. In the **Security Quick Start** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
+6. In the **Security Settings** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
