@@ -35,6 +35,10 @@ include-commit-ts = true
 - The same transactions of a single table are stored in the same CSV file.
 - Multiple tables of the same transaction can be stored in different CSV files.
 
+## 数据存储路径结构
+
+关于数据存储路径结构的更多信息，请参考[同步数据到存储服务](/ticdc/ticdc-sink-to-cloud-storage.md#存储路径组织结构)。
+
 ## Definition of the data format
 
 In the CSV file, each column is defined as follows:
