@@ -267,7 +267,7 @@ The descriptions of the `replica_config` parameters are as follows.
 | `case_sensitive`          | `BOOLEAN` type. Determines whether to be case-sensitive when filtering table names. The default value is `true`. (Optional)   |
 | `check_gc_safe_point`     | `BOOLEAN` type. Determines whether to check that the start time of the replication task is earlier than the GC time. The default value is `true`. (Optional)                                  |
 | `consistent`              | The configuration parameters of redo log. (Optional) |
-| `enable_old_value`        | `BOOLEAN` type. Determines whether to output the old value. (Optional)         |
+| `enable_old_value`        | `BOOLEAN` type. Determines whether to output the old value (that is, the value before the update). The default value is `true`. (Optional)         |
 | `enable_sync_point`       | `BOOLEAN` type. Determines whether to enable `sync point`. (Optional)         |
 | `filter`                  | The configuration parameters of `filter`. (Optional)           |
 | `force_replicate`         | `BOOLEAN` type. The default value is `false`. When you set it to `true`, the replicaton task forcibly replicates the tables without unique indexes. (Optional)                |
