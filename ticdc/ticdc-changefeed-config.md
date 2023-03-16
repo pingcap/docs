@@ -92,9 +92,9 @@ ignore-insert-value-expr = "price > 1000 and origin = 'no where'" # Ignore inser
 [scheduler]
 # Splits a table into multiple replication ranges based on the number of Regions, and these ranges can be replicated by multiple TiCDC nodes.
 # Note: This parameter only takes effect on Kafka changefeeds and is not supported on MySQL changefeeds.
-# The value is "false" by default. Set it to "true" to enable it.
+# The value is "false" by default. Set it to "true" to enable this feature.
 enable-table-across-nodes = false
-# When you enable this feature, it only takes effect for tables with the number of regions greater than or equal to the `region-threshold` value.
+# When you enable this feature, it only takes effect for tables with the number of regions greater than the `region-threshold` value.
 region-threshold = 100000
 
 [sink]

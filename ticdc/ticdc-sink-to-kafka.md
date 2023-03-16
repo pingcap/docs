@@ -243,7 +243,7 @@ This feature splits a single large table into multiple data ranges based on the 
 
 > **Warning:**
 >
-> TiCDC v7.0.0 only supports scaling out a large single table on Kafka changefeeds.
+> TiCDC v7.0.0 only supports scaling out the load of a large single table on Kafka changefeeds.
 
 Sample configuration:
 
@@ -251,11 +251,11 @@ Sample configuration:
 [scheduler]
 # Set it to "true" to enable this feature.
 enable-table-across-nodes = true
-# When you enable this feature, it only takes effect for tables with the number of regions greater than or equal to the `region-threshold` value.
+# When you enable this feature, it only takes effect for tables with the number of regions greater than the `region-threshold` value.
 region-threshold = 100000
 ```
 
-You can query the number of Regions a table contains by the following SQL:
+You can query the number of Regions a table contains by the following SQL statement:
 
 ```sql
 SELECT COUNT(*) FROM INFORMATION_SCHEMA.TIKV_REGION_STATUS WHERE DB_NAME="database1" AND TABLE_NAME="table1" AND IS_INDEX=0;
