@@ -306,7 +306,7 @@ The `filter.event_filters` parameters are described as follows. For more informa
 | `ignore_delete_value_expr`     | `STRING ARRAY` type. For example, `"name = 'john'"` means to filter out DELETE DML containing the `name = 'john'` condition. (Optional)            |
 | `ignore_event`                 | `STRING ARRAY` type. For example, `["insert"]` indicates that the INSERT events are filtered out. (Optional)     |
 | `ignore_insert_value_expr`     | `STRING ARRAY` type. For example, `"id >= 100"` means to filter out INSERT DMLs that match the `id >= 100` condition. (Optional)                |
-| `ignore_sql`                   | `STRING ARRAY` type. For example, ["^drop", "add column"]` means to filter out DDLs that start with "DROP" or contain "ADD COLUMN". (Optional)  |
+| `ignore_sql`                   | `STRING ARRAY` type. For example, `["^drop", "add column"]` means to filter out DDLs that start with "DROP" or contain "ADD COLUMN". (Optional)  |
 | `ignore_update_new_value_expr` | `STRING ARRAY` type. For example, `"gender = 'male'"` means to filter out the UPDATE DML with the new value `gender = 'male'`. (Optional)          |
 | `ignore_update_old_value_expr` | `STRING ARRAY` type. For example, `"age < 18"` means to filter out the UPDATE DML with the old value `age < 18`. (Optional)                  |
 | `matcher`                      | `STRING ARRAY` type. It works as a allowlist. For example, `["test.worker"]` means that the filter rule applies only to the `worker` table in the `test` database. (Optional)          |
