@@ -16,7 +16,7 @@ aliases: ['/docs/dev/how-to/deploy/geographic-redundancy/overview/','/docs/dev/g
 
 As a distributed SQL database, TiDB combines the best features of the traditional relational database and the scalability of the NoSQL database, and is highly available across availability zones (AZs). This document introduces the deployment of multiple AZs in one region.
 
-The term "region" in this document refers to a geographic area, and "AZ" refers to a group of independent resources that are divided within a region. The solution described in this document also applies to the scenario where multiple data centers are located in a single city.
+The term "region" in this document refers to a geographic area, while the capitalized "Region" refers to a basic unit of data storage in TiKV. "AZ" refers to an isolated location within a region, and each region has multiple AZs. The solution described in this document also applies to the scenario where multiple data centers are located in a single city.
 
 ## Raft protocol
 
@@ -62,7 +62,7 @@ The performance can be affected by the network latency.
 
 ### Optimized architecture
 
-If not all of the three AZs need to provide services to the applications, you can dispatch all the requests to one AZ and configure the scheduling policy to migrate all the TiKV Region leaders and PD leaders to the same AZ. In this way, neither obtaining TSO nor reading TiKV Regions will be impacted by the network latency across AZs. If this AZ is down, the PD leader and TiKV Region leader will be automatically elected in other surviving AZs, and you just need to switch the requests to the AZs that are still alive.
+If not all of the three AZs need to provide services to the applications, you can dispatch all the requests to one AZ and configure the scheduling policy to migrate the TiKV Region leader and PD leader to the same AZ. In this way, neither obtaining TSO nor reading TiKV Regions will be impacted by the network latency across AZs. If this AZ is down, the PD leader and TiKV Region leader will be automatically elected in other surviving AZs, and you just need to switch the requests to the AZs that are still alive.
 
 ![Read Performance Optimized 3-AZ Deployment](/media/deploy-3dc-optimize.png)
 
@@ -83,7 +83,7 @@ member leader_priority pdName3 3
 
 > **Note:**
 >
-> Since TiDB v5.2, the `label-property` configuration is not supported by default. To set the replica policy, use the [placement rules](/configure-placement-rules.md).
+> Starting from TiDB v5.2, the `label-property` configuration is not supported by default. To set the replica policy, use the [placement rules](/configure-placement-rules.md).
 
 **Disadvantages:**
 
@@ -112,7 +112,7 @@ Because of the preceding limitation, `label` is used to describe the location in
 
 #### TiKV labels planning example
 
-To improve the availability and disaster recovery of the system, you need to design and plan TiKV labels according to your existing physical resources and the disaster recovery capability. You also need to configure the cluster initialization configuration file according to the planned topology:
+To improve the availability and disaster recovery of the system, you need to design and plan TiKV labels according to your existing physical resources and the disaster recovery capability. You also need to edit the cluster initialization configuration file according to the planned topology:
 
 ```ini
 server_configs:
