@@ -61,7 +61,7 @@ Currently, the execution plan cache is disabled by default. You can enable this 
 
 <CustomContent platform="tidb-cloud">
 
-Starting from v6.1.0, the execution plan cache is enabled by default. You can control prepared plan cache via the system variable [`tidb_enable_prepared_plan_cache`](https://docs.pingcap.com/tidb/stable/system-variables#tidb_enable_prepared_plan_cache-new-in-v610).
+Starting from v6.1.0, the execution plan cache is enabled by default. You can control prepared plan cache via the system variable [`tidb_enable_prepared_plan_cache`](https://docs.pingcap.com/tidb/v5.4/system-variables#tidb_enable_prepared_plan_cache-new-in-v610).
 
 In TiDB v5.4, the execution plan cache is disabled by default. To use this feature in v5.4, you need to contact [PingCAP Technical Support](/tidb-cloud/tidb-cloud-support.md).
 
