@@ -27,38 +27,38 @@ An example response is as follows:
 
 ```json
 {
-    "type": "sql_endpoint",
-    "data": {
-        "columns": [
-            {
-                "col": "id",
-                "data_type": "INT",
-                "nullable": false
-            },
-            {
-                "col": "name",
-                "data_type": "VARCHAR",
-                "nullable": true
-            }
-        ],
-        "rows": [
-            {
-                "id": "1",
-                "name": "a"
-            }
-        ],
-        "result": {
-            "code": 200,
-            "message": "message=ok/message=${system error}/sql_error_message",
-            "start_ms": "2023-03-01 16:53:08.277",
-            "end_ms": "2023-03-01 16:53:08.713",
-            "latency": "436ms",
-            "row_count": 1,
-            "row_affect": 0,
-            "limit": 500,
-            "query": "Query OK!"
-        }
+  "type": "sql_endpoint",
+  "data": {
+    "columns": [
+      {
+        "col": "id",
+        "data_type": "BIGINT",
+        "nullable": false
+      },
+      {
+        "col": "type",
+        "data_type": "VARCHAR",
+        "nullable": false
+      }
+    ],
+    "rows": [
+      {
+        "id": "20008295419",
+        "type": "CreateEvent"
+      }
+    ],
+    "result": {
+      "code": 200,
+      "message": "ok",
+      "start_ms": 1678965476709,
+      "end_ms": 1678965476839,
+      "latency": "130ms",
+      "row_count": 1,
+      "row_affect": 0,
+      "limit": 50,
+      "query": "Query OK!"
     }
+  }
 }
 ```
 
@@ -68,39 +68,40 @@ An example response is as follows:
 
 ```json
 {
-    "type": "chat2data_endpoint",
-    "data": {
-        "columns": [
-            {
-                "col": "id",
-                "data_type": "INT",
-                "nullable": false
-            },
-            {
-                "col": "name",
-                "data_type": "VARCHAR",
-                "nullable": true
-            }
-        ],
-        "rows": [
-            {
-                "id": "1",
-                "name": "a"
-            }
-        ],
-        "result": {
-            "code": 200,
-            "message": "message=ok/message=${system error}/sql_error_message",
-            "start_ms": "2023-03-01 16:53:08.277",
-            "end_ms": "2023-03-01 16:53:08.713",
-            "latency": "436ms",
-            "row_count": 1,
-            "row_affect": 0,
-            "limit": 500,
-            "query": "Query OK!",
-            "ai_latency": "3000ms"
-        }
+  "type": "chat2data_endpoint",
+  "data": {
+    "columns": [
+      {
+        "col": "id",
+        "data_type": "BIGINT",
+        "nullable": false
+      },
+      {
+        "col": "type",
+        "data_type": "VARCHAR",
+        "nullable": false
+      }
+    ],
+    "rows": [
+      {
+        "id": "20008295419",
+        "type": "CreateEvent"
+      }
+    ],
+    "result": {
+      "code": 200,
+      "message": "ok",
+      "start_ms": 1678965476709,
+      "end_ms": 1678965476839,
+      "latency": "130ms",
+      "row_count": 1,
+      "row_affect": 0,
+      "limit": 50,
+      "query": "Query OK!",
+      "sql": "select id,type from sample_data.github_events limit 1;",
+      "ai_latency": "30ms"
     }
+  }
 }
 ```
 
