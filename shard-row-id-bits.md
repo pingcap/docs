@@ -17,7 +17,17 @@ To mitigate the hot spot issue, you can configure `SHARD_ROW_ID_BITS`. The row I
 - `SHARD_ROW_ID_BITS = 6` indicates 64 shards
 - `SHARD_ROW_ID_BITS = 0` indicates the default 1 shard
 
+<CustomContent platform="tidb">
+
 For details on the usage, see [the Troubleshoot Hotspot Issues guide](/troubleshoot-hot-spot-issues.md#use-shard_row_id_bits-to-process-hotspots).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+For details on the usage, see [the Troubleshoot Hotspot Issues guide](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues#use-shard_row_id_bits-to-process-hotspots).
+
+</CustomContent>
 
 ## Examples
 
