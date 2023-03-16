@@ -1,19 +1,10 @@
 ---
-<<<<<<< HEAD
-title: Multiple Data Centers in One City Deployment
-summary: Learn the deployment solution to multi-data centers in one city.
-=======
 title: Multiple Availability Zones in One Region Deployment
 summary: Learn the deployment solution to multiple availability zones in one region.
-aliases: ['/docs/dev/how-to/deploy/geographic-redundancy/overview/','/docs/dev/geo-redundancy-deployment/','/tidb/dev/geo-redundancy-deployment']
->>>>>>> 6a4fcd938 (replace "data center" and "city" with "AZ" and "region" (#12872))
 ---
 
 # Multiple Availability Zones in One Region Deployment
 
-<<<<<<< HEAD
-As a NewSQL database, TiDB combines the best features of the traditional relational database and the scalability of the NoSQL database, and is highly available across data centers (DC). This document introduces the deployment of multiple DCs in one city.
-=======
 <!-- Localization note for TiDB:
 
 - English: use distributed SQL, and start to emphasize HTAP
@@ -25,7 +16,6 @@ As a NewSQL database, TiDB combines the best features of the traditional relatio
 As a distributed SQL database, TiDB combines the best features of the traditional relational database and the scalability of the NoSQL database, and is highly available across availability zones (AZs). This document introduces the deployment of multiple AZs in one region.
 
 The term "region" in this document refers to a geographic area, while the capitalized "Region" refers to a basic unit of data storage in TiKV. "AZ" refers to an isolated location within a region, and each region has multiple AZs. The solution described in this document also applies to the scenario where multiple data centers are located in a single city.
->>>>>>> 6a4fcd938 (replace "data center" and "city" with "AZ" and "region" (#12872))
 
 ## Raft protocol
 
@@ -91,13 +81,8 @@ member leader_priority pdName3 3
 ```
 
 > **Note:**
-<<<<<<< HEAD
-> 
-> Since TiDB 5.2, the `label-property` configuration is not supported by default. To set the replica policy, use the [placement rules](/configure-placement-rules.md).
-=======
 >
 > Starting from TiDB v5.2, the `label-property` configuration is not supported by default. To set the replica policy, use the [placement rules](/configure-placement-rules.md).
->>>>>>> 6a4fcd938 (replace "data center" and "city" with "AZ" and "region" (#12872))
 
 **Disadvantages:**
 
