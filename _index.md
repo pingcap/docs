@@ -137,7 +137,7 @@ hide_commit: true
 
 [System Variables](https://docs.pingcap.com/tidb/dev/system-variables)
 
-[Release Notes](https://docs.pingcap.com/tidb/dev/release-notes)
+[Partitioning](https://docs.pingcap.com/tidb/dev/partitioned-table)
 
 [FAQ Summary](https://docs.pingcap.com/tidb/dev/faq-overview)
 
