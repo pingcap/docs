@@ -249,5 +249,14 @@ Sample configuration:
 
 ```toml
 [scheduler]
-region-per-span = 50000
+# Set it to "true" to enable this feature.
+enable-table-across-nodes = true
+# When you enable this feature, it only takes effect for tables with the number of regions greater than or equal to the `region-threshold` value.
+region-threshold = 100000
+```
+
+You can query the number of Regions a table contains by the following SQL:
+
+```sql
+SELECT COUNT(*) FROM INFORMATION_SCHEMA.TIKV_REGION_STATUS WHERE DB_NAME="database1" AND TABLE_NAME="table1" AND IS_INDEX=0;
 ```
