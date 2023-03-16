@@ -25,13 +25,9 @@ To view the metrics on the Monitoring page, take the following steps:
 - For Dedicated Tier clusters, the monitoring data is kept for 7 days.
 - For Serverless Tier clusters, the monitoring data is kept for 3 days.
 
-## Monitoring metrics
+## Monitoring metrics for Dedicated Tier Clusters
 
 The following sections illustrate the metrics on the Monitoring page.
-
-> **Note:**
->
-> For [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters, the Monitoring page only provides a subset of monitoring metrics, which are marked with `*` in the **Metric name** column.
 
 ### Database Time
 
@@ -45,15 +41,15 @@ The following sections illustrate the metrics on the Monitoring page.
 
 | Metric name  | Labels | Description                                   |
 | :------------| :------| :-------------------------------------------- |
-| `*` Connection Count | Total, active connection | Total: the number of connections to all TiDB instances. <br/> Active connections: the number of active connections to all TiDB instances. |
+| Connection Count | Total, active connection | Total: the number of connections to all TiDB instances. <br/> Active connections: the number of active connections to all TiDB instances. |
 | Disconnection | Instances | The number of clients disconnected to each TiDB instance. |
 
 ### SQL Count
 
 | Metric name  | Labels | Description                                   |
 | :------------| :------| :-------------------------------------------- |
-| `*` Query Per Second | {SQL type} | The number of SQL statements executed per second in all TiDB instances, which are collected by SQL types, such as `SELECT`, `INSERT`, and `UPDATE`. |
-| `*` Failed Queries | Error types | The statistics of error types (such as syntax errors and primary key conflicts) according to the SQL statement execution errors per minute on each TiDB instance. It contains the module in which an error occurs and the error code. |
+| Query Per Second | {SQL type} | The number of SQL statements executed per second in all TiDB instances, which are collected by SQL types, such as `SELECT`, `INSERT`, and `UPDATE`. |
+| Failed Queries | Error types | The statistics of error types (such as syntax errors and primary key conflicts) according to the SQL statement execution errors per minute on each TiDB instance. It contains the module in which an error occurs and the error code. |
 | Command Per Second | Query, StmtExecute, and StmtPrepare | The number of commands processed by all TiDB instances per second based on command types. |
 | Queries Using Plan Cache OPS | hit, miss | hit: the number of queries using plan cache per second in all TiDB instances. <br/> miss: the number of queries missing plan cache per second in all TiDB instances. |
 
@@ -65,7 +61,7 @@ The following sections illustrate the metrics on the Monitoring page.
 
 | Metric name  | Labels | Description                                   |
 | :------------| :------| :-------------------------------------------- |
-| `*` Query Duration | avg-{SQL Types}, 99-{SQL Types} | The duration from receiving a request from the client to TiDB till TiDB executing the request and returning the result to the client. In general, client requests are sent in the form of SQL statements; however, this duration can include the execution time of commands such as `COM_PING`, `COM_SLEEP`, `COM_STMT_FETCH`, and `COM_SEND_LONG_DATA`. TiDB supports Multi-Query, which means the client can send multiple SQL statements at one time, such as `select 1; select 1; select 1;`. In this case, the total execution time of this query includes the execution time of all SQL statements. |
+| Query Duration | avg-{SQL Types}, 99-{SQL Types} | The duration from receiving a request from the client to TiDB till TiDB executing the request and returning the result to the client. In general, client requests are sent in the form of SQL statements; however, this duration can include the execution time of commands such as `COM_PING`, `COM_SLEEP`, `COM_STMT_FETCH`, and `COM_SEND_LONG_DATA`. TiDB supports Multi-Query, which means the client can send multiple SQL statements at one time, such as `select 1; select 1; select 1;`. In this case, the total execution time of this query includes the execution time of all SQL statements. |
 | Average Idle Connection Duration | avg-in-txn, avg-not-in-txn | The connection idle duration indicates the duration of a connection being idle.<br/> avg-in-txn: The average connection idle duration when a connection is within a transaction. <br/>avg-not-in-txn: The average connection idle duration when a connection is not within a transaction. |
 | Get Token Duration | avg, 99 | The average time or P99 duration consumed in getting tokens of SQL statements. |
 | Parse Duration | avg, 99 | The average time or P99 duration consumed in parsing SQL statements. |
@@ -74,14 +70,10 @@ The following sections illustrate the metrics on the Monitoring page.
 
 ### Transaction
 
-> **Note:**
->
-> For [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters, the Transaction Duration metric is named as Average Transaction Duration.
-
 | Metric name  | Labels | Description                                   |
 | :------------| :------| :-------------------------------------------- |
-| `*` Transaction Per Second | {types}-{transaction model} | The number of transactions executed per second. |
-| `*` Transaction Duration | avg-{transaction model}, 99-{transaction model} | The execution duration of a transaction. |
+| Transaction Per Second | {types}-{transaction model} | The number of transactions executed per second. |
+| Transaction Duration | avg-{transaction model}, 99-{transaction model} | The execution duration of a transaction. |
 
 ### Core Path Duration
 
@@ -115,6 +107,34 @@ The following sections illustrate the metrics on the Monitoring page.
 | TiFlash IO MBps | instances-write, instances-read | The total bytes of read and write in each TiFlash instance. |
 | TiFlash Storage Usage | instances | The storage size per TiFlash instance. |
 
+## Monitoring metrics for Serverless Tier Clusters
+
+The following sections illustrate the metrics on the Monitoring page.
+
+### Cluster Status
+
+Cluster-level main metrics are displayed in this section.
+
+| Metric name  | Labels | Description                                   |
+| :------------| :------| :-------------------------------------------- |
+| Query Per Second | All, {SQL type} | The number of SQL statements executed per second, which are collected by SQL types, such as `SELECT`, `INSERT`, and `UPDATE`. |
+| Average Query Duration | All, {SQL Types} | The duration from receiving a request from the client to Serverless Tier till Serverless Tier executing the request and returning the result to the client.|
+| Failed Query | All, {Error types} | The statistics of error types according to the SQL statement execution errors per second.|
+| Transaction Per Second | All | The number of transactions executed per second. |
+| Average Transaction Duration | All | The execution duration of a transaction. |
+| Total Connection | All | The number of connections to Serverless. |
+| Used Storage Size | Row-Storage, Column-Storage | The storage size on Row or Column store. |
+
+### Database Status
+
+Database-level main metrics are displayed in this section.
+
+| Metric name  | Labels | Description                                   |
+| :------------| :------| :-------------------------------------------- |
+| QPS Per DB | All, {database_name} | The number of SQL statements executed per second on every Database, which are collected by SQL types, such as `SELECT`, `INSERT`, and `UPDATE`. |
+| Average Query Duration Per DB | All, {database_name} | The duration from receiving a request from the client to every Database till TiDB executing the request and returning the result to the client.|
+| Failed Query Per DB | All, {database_name} | The statistics of error types according to the SQL statement execution errors per second on every Database.|
+
 ## FAQ
 
 **1. Why are some panes empty on this page?**
@@ -125,3 +145,4 @@ If a pane does not provide any metrics, the possible reasons are as follows:
 - The cluster version is low. You need to upgrade it to the latest version of TiDB to see these metrics.
 
 If all these reasons are excluded, you can contact the [PingCAP support team](/tidb-cloud/tidb-cloud-support.md) for troubleshooting.
+
