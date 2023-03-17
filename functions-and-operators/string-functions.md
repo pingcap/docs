@@ -40,7 +40,7 @@ Oracle と TiDB の関数と構文の比較については、 [Oracle と TiDB �
 | [`LIKE`](https://dev.mysql.com/doc/refman/5.7/en/string-comparison-functions.html#operator_like)                                              | シンプルなパターンマッチング                                                                |
 | [`LOCATE()`](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_locate)                                                   | 部分文字列の最初の出現位置を返します                                                            |
 | [`LOWER()`](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_lower)                                                     | 引数を小文字で返す                                                                     |
-| [`LPAD()`](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_lpad)                                                       | 指定された文字列で左側がパディングされた文字列引数を返します                                                |
+| [`LPAD()`](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_lpad)                                                       | 指定された文字列で左がパディングされた文字列引数を返します                                                 |
 | [`LTRIM()`](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_ltrim)                                                     | 先頭のスペースを削除                                                                    |
 | [`MAKE_SET()`](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_make-set)                                               | ビット セット内の対応するビットを持つコンマ区切り文字列のセットを返します                                         |
 | [`MID()`](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_mid)                                                         | 指定された位置から始まる部分文字列を返します                                                        |
@@ -74,7 +74,6 @@ Oracle と TiDB の関数と構文の比較については、 [Oracle と TiDB �
 ## サポートされていない関数 {#unsupported-functions}
 
 -   `LOAD_FILE()`
--   `MATCH`
+-   `MATCH()`
 -   `SOUNDEX()`
--   `SOUNDS LIKE`
 -   `WEIGHT_STRING()`
