@@ -2525,6 +2525,9 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 ### tidb_load_based_replica_read_threshold <span class="version-mark">New in v7.0.0</span>
 
+> **Warning:**
+>
+> The feature controlled by this variable is not fully functional in the current TiDB version. Do not change the default value.
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Default value: `"0s"`
