@@ -1685,6 +1685,14 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
     - If the TiDB version before the upgrade is earlier than v6.1.0, the default value of this variable after the upgrade is `ON`.
     - If the TiDB version before the upgrade is v6.1.0 or later, the default value of the variable after the upgrade follows the value before the upgrade.
 
+### `tidb_enable_inl_join_inner_multi_pattern` <span class="version-mark">New in v7.0.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `OFF`
+- This variable controls whether the inner table of Index Join supports `Selection` or `Projection` operators.
+
 ### tidb_enable_ordered_result_mode
 
 - Scope: SESSION | GLOBAL
