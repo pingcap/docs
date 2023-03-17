@@ -451,7 +451,7 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 
 <CustomContent platform="tidb">
 
-This setting can be overridden on a per query basis with the [`MAX_EXECUTION_TIME`](/optimizer-hints.md#max_execution_timen) hint. It can also be used together with SQL bindings as described [in the SQL FAQ](/faq/sql-faq.md#how-to-prevent-the-execution-of-a-particular-sql-statement).
+For a SQL statement with the [`MAX_EXECUTION_TIME`](/optimizer-hints.md#max_execution_timen) hint, the maximum execution time of this statement is limited by the hint instead of this variable. The hint can also be used with SQL bindings as described [in the SQL FAQ](/faq/sql-faq.md#how-to-prevent-the-execution-of-a-particular-sql-statement).
 
 </CustomContent>
 
