@@ -37,6 +37,10 @@ backend = "tidb"
 # - error: pause the import and report an error
 on-duplicate = "replace"
 
+# Specifies whether Physical Import Mode adds indexes via SQL. The default value is automatically selected based on the TiDB version. If the TiDB version is earlier than v7.0.0, the default value is `false`. Starting from v7.0.0, the default value is `true`, which means that TiDB Lightning will add indexes via SQL.
+# The benefit of adding indexes via SQL is that you can import data quickly. Even if the indexes fail to be added, it does not affect the consistency of the data.
+# add-index-by-sql = true
+
 [tidb]
 # The information of the target cluster. The address of any tidb-server from the cluster.
 host = "172.16.31.1"
