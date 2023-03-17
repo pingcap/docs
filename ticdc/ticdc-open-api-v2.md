@@ -92,7 +92,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/status
 
 ```json
 {
-  "version": "v7.0-master-dirty",
+  "version": "v7.0.0-master-dirty",
   "git_hash": "10413bded1bdb2850aa6d7b94eb375102e9c44dc",
   "id": "d2912e63-3349-447c-90ba-72a4e04b5e9e",
   "pid": 1447,
@@ -537,7 +537,7 @@ The `error` parameters are described as follows:
 
 ## Remove a replication task
 
-This API is an asynchronous interface. If the request is successful, `200 OK` is returned. The returned result only means that the server agrees to run the command but does not guarantee that the command will be run successfully.
+This API is an idempotent interface (that is, it can be applied multiple times without changing the result beyond the initial application). If the request is successful, `200 OK` is returned. The returned result only means that the server agrees to run the command but does not guarantee that the command will be run successfully.
 
 ### Request URI
 
