@@ -101,7 +101,7 @@ In Chat2Query, you can save your SQL queries in different SQL files and manage S
 
 ## Manage Chat2Query settings
 
-By default, Chat2Query limits the maximum number of rows in query results to 500 and does not show system database schemas on the **Schemas** tab.
+By default, Chat2Query limits the maximum number of rows in query results to 2000 and does not show system database schemas on the **Schemas** tab.
 
 To change the settings, take the following steps:
 
