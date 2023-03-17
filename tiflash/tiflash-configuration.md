@@ -133,7 +133,7 @@ delta_index_cache_size = 0
     # access_key_id: {ACCESS_KEY_ID}             # Access S3 with ACCESS_KEY_ID
     # secret_access_key: {SECRET_ACCESS_KEY}     # Access S3 with SECRET_ACCESS_KEY
     # [storage.remote.cache]
-    # dir: /data1/tiflash/cache        # Local data cache directory of Compute Node
+    # dir: /data1/tiflash/cache        # Local data cache directory of the Compute Node
     # capacity: 858993459200           # 800 GiB
 
 [flash]
