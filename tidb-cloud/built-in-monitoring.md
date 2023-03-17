@@ -119,7 +119,7 @@ Cluster-level main metrics are displayed in this section.
 | :------------| :------| :-------------------------------------------- |
 | Query Per Second | All, {SQL type} | The number of SQL statements executed per second, which are collected by SQL types, such as `SELECT`, `INSERT`, and `UPDATE`. |
 | Average Query Duration | All, {SQL Types} | The duration from receiving a request from the client to Serverless Tier till Serverless Tier executing the request and returning the result to the client.|
-| Failed Query | All, {Error types} | The statistics of error types according to the SQL statement execution errors per second.|
+| Failed Query | All | The SQL statement execution errors per second.|
 | Transaction Per Second | All | The number of transactions executed per second. |
 | Average Transaction Duration | All | The execution duration of a transaction. |
 | Total Connection | All | The number of connections to Serverless. |
