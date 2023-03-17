@@ -68,7 +68,6 @@ TiDB supports most of the [string functions](https://dev.mysql.com/doc/refman/5.
 ## Unsupported functions
 
 * `LOAD_FILE()`
-* `MATCH`
+* `MATCH()`
 * `SOUNDEX()`
-* `SOUNDS LIKE`
 * `WEIGHT_STRING()`
