@@ -1691,7 +1691,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Persists to cluster: Yes
 - Type: Boolean
 - Default value: `OFF`
-- This variable controls whether the inner table of Index Join supports `Selection` or `Projection` operators.
+- This variable controls whether Index Join is supported when the inner table has `Selection` or `Projection` operators on it.
 
 ### tidb_enable_ordered_result_mode
 
