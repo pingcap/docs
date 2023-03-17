@@ -1335,7 +1335,7 @@ This variable is associated with a feature available since v6.2.0 and not usable
 - Persists to cluster: Yes
 - Type: Boolean
 - Default value: `OFF`
-- This variable controls whether Index Join is supported when the inner table has `Selection` or `Projection` operators on it.
+- This variable controls whether Index Join is supported when the inner table has `Selection` or `Projection` operators on it. The default value `OFF` means that Index Join is not supported in this scenario.
 
 ### tidb_enable_ordered_result_mode
 
