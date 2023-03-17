@@ -18,7 +18,7 @@ The non-prepared plan cache is a session-level feature that is independent of th
 1. After you enable the non-prepared plan cache, TiDB first parameterizes the query based on the abstract syntax tree (AST). For example, `SELECT * FROM t WHERE b < 10 AND a = 1` is parameterized as `SELECT * FROM t WHERE b < ? and a = ?`.
 2. Then, TiDB uses the parameterized query to search the non-prepared plan cache.
 3. If a reusable plan is found, it is directly used and the optimization phase is skipped.
-4. Otherwise, the optimizer generates the plan and adds it back into the cache for reuse in the subsequent query.
+4. Otherwise, the optimizer generates a new plan and adds it back into the cache for reuse in the subsequent query.
 
 ## Usage
 
