@@ -124,11 +124,13 @@ This API is a synchronous interface. If the cluster is healthy, `200 OK` is retu
 curl -X GET http://127.0.0.1:8300/api/v2/health
 ```
 
-The response is an empty JSON object:
+If the cluster is healthy, the response is an empty JSON object:
 
 ```json
 {}
 ```
+
+If the cluster is not healthy, the response is a JSON object containing the error message.
 
 ## Create a replication task
 
