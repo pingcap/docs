@@ -68,7 +68,7 @@ To replicate incremental data from a running TiDB cluster to its secondary clust
 
 4. Prepare external storage.
 
-    In full data backup, both the upstream and downstream clusters need to access backup files. It is recommended that you use [External storage](/br/backup-and-restore-storages.md#external-storages) to store backup files. In this example, Minio is used to simulate an S3-compatible storage service.
+    In full data backup, both the upstream and downstream clusters need to access backup files. It is recommended that you use [External storage](/br/backup-and-restore-storages.md) to store backup files. In this example, Minio is used to simulate an S3-compatible storage service.
 
     ```shell
     wget https://dl.min.io/server/minio/release/linux-amd64/minio
@@ -99,13 +99,13 @@ To replicate incremental data from a running TiDB cluster to its secondary clust
 
 ## Step 2. Migrate full data
 
-After setting up the environment, you can use the backup and restore functions of [BR](https://github.com/pingcap/tidb/tree/master/br)) to migrate full data. BR can be started in [three ways](/br/br-deployment.md#use-br). In this document, we use the SQL statements, `BACKUP` and `RESTORE`.
+After setting up the environment, you can use the backup and restore functions of [BR](https://github.com/pingcap/tidb/tree/master/br)) to migrate full data. BR can be started in [three ways](/br/br-use-overview.md#deploy-and-use-br). In this document, we use the SQL statements, `BACKUP` and `RESTORE`.
 
 > **Note:**
 >
 > - In production clusters, performing a backup with GC disabled might affect cluster performance. It is recommended that you back up data in off-peak hours, and set RATE_LIMIT to a proper value to avoid performance degradation.
 >
-> - If the versions of the upstream and downstream clusters are different, you should check [BR compatibility](/br/backup-and-restore-overview.md#before-you-use-br). In this document, we assume that the upstream and downstream clusters are the same version.
+> - If the versions of the upstream and downstream clusters are different, you should check [BR compatibility](/br/backup-and-restore-overview.md#some-tips). In this document, we assume that the upstream and downstream clusters are the same version.
 
 1. Disable GC.
 
@@ -233,16 +233,16 @@ After setting up the environment, you can use the backup and restore functions o
     In the upstream cluster, run the following command to create a changefeed from the upstream to the downstream clusters:
 
     ```shell
-    tiup cdc cli changefeed create --pd=http://172.16.6.122:2379 --sink-uri="mysql://root:@172.16.6.125:4000" --changefeed-id="primary-to-secondary" --start-ts="431434047157698561"
+    tiup cdc cli changefeed create --server=http://172.16.6.122:8300 --sink-uri="mysql://root:@172.16.6.125:4000" --changefeed-id="primary-to-secondary" --start-ts="431434047157698561"
     ```
 
     In this command, the parameters are as follows:
 
-    - `--pd`: PD address of the upstream cluster
+    - `--server`: IP address of any node in the TiCDC cluster
     - `--sink-uri`: URI of the downstream cluster
     - `--start-ts`: start timestamp of the changefeed, must be the backup time (or BackupTS mentioned in [Step 2. Migrate full data](#step-2-migrate-full-data))
 
-    For more information about the changefeed configurations, see [Task configuration file](/ticdc/manage-ticdc.md#task-configuration-file).
+    For more information about the changefeed configurations, see [TiCDC Changefeed Configurations](/ticdc/ticdc-changefeed-config.md).
 
 3. Enable GC.
 
@@ -312,5 +312,5 @@ After the previous step, the downstream (secondary) cluster has data that is con
 
     ```shell
     # Create a changefeed
-    tiup cdc cli changefeed create --pd=http://172.16.6.122:2379 --sink-uri="mysql://root:@172.16.6.125:4000" --changefeed-id="primary-to-secondary"
+    tiup cdc cli changefeed create --server=http://172.16.6.122:8300 --sink-uri="mysql://root:@172.16.6.125:4000" --changefeed-id="primary-to-secondary"
     ```

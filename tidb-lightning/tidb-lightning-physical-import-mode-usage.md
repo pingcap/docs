@@ -5,7 +5,7 @@ summary: Learn how to use the physical import mode in TiDB Lightning.
 
 # Use Physical Import Mode
 
-This document introduces how to use the physical import mode in TiDB Lightning, including writing the configuration file, tuning performance, and configuring disk quota.
+This document introduces how to use the [physical import mode](/tidb-lightning/tidb-lightning-physical-import-mode.md) in TiDB Lightning, including writing the configuration file, tuning performance, and configuring disk quota.
 
 ## Configure and use the physical import mode
 
@@ -24,7 +24,7 @@ max-backups = 14
 check-requirements = true
 
 [mydumper]
-# The local data source directory or the external storage URL.
+# The local data source directory or the URI of the external storage. For more information about the URI of the external storage, see https://docs.pingcap.com/tidb/v6.6/backup-and-restore-storages#uri-format.
 data-source-dir = "/data/my_database"
 
 [tikv-importer]
@@ -130,11 +130,9 @@ mysql> select table_name,index_name,key_data,row_data from conflict_error_v1 lim
 
 You can manually identify the records that need to be retained and insert these records into the table.
 
-## Import data into a cluster in production
+## Pause scheduling on the table level
 
-Starting from TiDB Lightning v6.2.0, you can import data into a cluster in production using the physical import mode. TiDB Lightning implements a new mechanism to limit the impact of the import on the online application.
-
-With the new mechanism, TiDB Lightning does not pause the global scheduling, but only pauses scheduling for the region that stores the target table data. This significantly reduces the impact of the import on the online application.
+Starting from v6.2.0, TiDB Lightning implements a mechanism to limit the impact of data import on online applications. With the new mechanism, TiDB Lightning does not pause the global scheduling, but only pauses scheduling for the region that stores the target table data. This significantly reduces the impact of the import on online applications.
 
 <Note>
 TiDB Lightning does not support importing data into a table that already contains data.
@@ -223,10 +221,6 @@ After the file data is read, Lightning needs to do some post-processing, such as
 The [`num-threads`](/tikv-configuration-file.md#num-threads) configuration of TiKV can also affect the performance. For new clusters, it is recommended to set `num-threads` to the number of CPU cores.
 
 ## Configure disk quota <span class="version-mark">New in v6.2.0</span>
-
-> **Warning:**
->
-> Disk quota is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
 
 When you import data in the physical import mode, TiDB Lightning creates a large number of temporary files on the local disk to encode, sort, and split the original data. When the local disk space is insufficient, TiDB Lightning reports an error and exits because of write failure.
 

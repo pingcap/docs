@@ -12,7 +12,7 @@ To specify the data source for TiDB Lightning, use the following configuration:
 
 ```toml
 [mydumper]
-# Local source data directory or the URL of the external storage such as S3.
+# Local source data directory or the URI of the external storage such as S3. For more information about the URI of the external storage, see https://docs.pingcap.com/tidb/v6.6/backup-and-restore-storages#uri-format.
 data-source-dir = "/data/my_database"
 ```
 
@@ -24,6 +24,7 @@ When TiDB Lightning is running, it looks for all files that match the pattern of
 | Schema file | Contains the `CREATE DATABASE` DDL statement| `${db_name}-schema-create.sql` |
 | Data file | If the data file contains data for a whole table, the file is imported into a table named `${db_name}.${table_name}` | <code>\${db_name}.\${table_name}.\${csv\|sql\|parquet}</code> |
 | Data file | If the data for a table is split into multiple data files, each data file must be suffixed with a number in its filename | <code>\${db_name}.\${table_name}.001.\${csv\|sql\|parquet}</code> |
+| Compressed file | If the file contains a compression suffix, such as `gzip`, `snappy`, or `zstd`, TiDB Lightning will decompress the file before importing it. | <code>\${db_name}.\${table_name}.\${csv\|sql\|parquet}.{compress}</code> |
 
 TiDB Lightning processes data in parallel as much as possible. Because files must be read in sequence, the data processing concurrency is at the file level (controlled by `region-concurrency`). Therefore, when the imported file is large, the import performance is poor. It is recommended to limit the size of the imported file to no greater than 256 MiB to achieve the best performance.
 
@@ -286,6 +287,17 @@ Note that this configuration only shows how to match the parquet files exported 
 
 For more information on `mydumper.files`, refer to [Match customized file](#match-customized-files).
 
+## Compressed files
+
+TiDB Lightning currently supports compressed files exported by Dumpling or compressed files that follow the naming rules. Currently, TiDB Lightning supports the following compression algorithms: `gzip`, `snappy`, and `zstd`. When the file name follows the naming rules, TiDB Lightning automatically identifies the compression algorithm and imports the file after streaming decompression, without additional configuration.
+
+> **Note:**
+>
+> - Because TiDB Lightning cannot concurrently decompress a single large compressed file, the size of the compressed file affects the import speed. It is recommended that a source file is no greater than 256 MiB after decompression.
+> - TiDB Lightning only imports individually compressed data files and does not support importing a single compressed file with multiple data files included.
+> - TiDB Lightning does not support `parquet` files compressed through another compression tool, such as `db.table.parquet.snappy`. If you want to compress `parquet` files, you can configure the compression format for the `parquet` file writer.
+> - TiDB Lightning v6.4.0 and later versions only support `.bak` files and the following compressed data files: `gzip`, `snappy`, and `zstd`. Other types of files cause errors. For those unsupported files, you need to modify the file names in advance, or move those files out of the import data directory to avoid such errors.
+
 ## Match customized files
 
 TiDB Lightning only recognizes data files that follow the naming pattern. In some cases, your data file might not follow the naming pattern, and thus data import is completed in a short time without importing any file.
@@ -319,6 +331,45 @@ type = '$3'
     - The group index obtained by using a regular expression, such as `$3`.
 - **key**: The file number, such as `001` in `${db_name}.${table_name}.001.csv`.
     - The group index obtained by using a regular expression, such as `$4`.
+
+## Import data from Amazon S3
+
+The following examples show how to import data from Amazon S3 using TiDB Lightning. For more parameter configurations, see [external storage URI](/br/backup-and-restore-storages.md#uri-format).
+
++ Use the locally configured permissions to access S3 data:
+
+    ```bash
+    ./tidb-lightning --tidb-port=4000 --pd-urls=127.0.0.1:2379 --backend=local --sorted-kv-dir=/tmp/sorted-kvs \
+        -d 's3://my-bucket/sql-backup'
+    ```
+
++ Use the path-style request to access S3 data:
+
+    ```bash
+    ./tidb-lightning --tidb-port=4000 --pd-urls=127.0.0.1:2379 --backend=local --sorted-kv-dir=/tmp/sorted-kvs \
+        -d 's3://my-bucket/sql-backup?force-path-style=true&endpoint=http://10.154.10.132:8088'
+    ```
+
++ Use a specific AWS IAM role ARN to access S3 data:
+
+    ```bash
+    ./tidb-lightning --tidb-port=4000 --pd-urls=127.0.0.1:2379 --backend=local --sorted-kv-dir=/tmp/sorted-kvs \
+        -d 's3://my-bucket/test-data?role-arn=arn:aws:iam::888888888888:role/my-role'
+    ```
+
+* Use access keys of an AWS IAM user to access S3 data:
+
+    ```bash
+    ./tidb-lightning --tidb-port=4000 --pd-urls=127.0.0.1:2379 --backend=local --sorted-kv-dir=/tmp/sorted-kvs \
+        -d 's3://my-bucket/test-data?access_key={my_access_key}&secret_access_key={my_secret_access_key}'
+    ```
+
+* Use the combination of AWS IAM role access keys and session tokens to access S3 data:
+
+    ```bash
+    ./tidb-lightning --tidb-port=4000 --pd-urls=127.0.0.1:2379 --backend=local --sorted-kv-dir=/tmp/sorted-kvs \
+        -d 's3://my-bucket/test-data?access_key={my_access_key}&secret_access_key={my_secret_access_key}&session-token={my_session_token}'
+    ```
 
 ## More resources
 

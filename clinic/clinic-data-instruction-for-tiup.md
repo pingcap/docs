@@ -16,7 +16,7 @@ A diagnostic service deployed in the cloud, Clinic Server provides two independe
 
 ## TiDB clusters
 
-This section lists the types of diagnostic data that can be collected by Diag from the TiDB clusters deployed using TiUP.
+This section lists the types of diagnostic data that can be collected by [Diag](https://github.com/pingcap/diag) from the TiDB clusters deployed using TiUP.
 
 ### TiDB cluster information
 
@@ -52,8 +52,8 @@ This section lists the types of diagnostic data that can be collected by Diag fr
 | Error log | `pd_stderr.log` | `--include=log` |
 | Configuration file | `pd.toml` | `--include=config` |
 | Real-time configuration | `config.json` | `--include=config` |
-| Outputs of the command `tiup ctl:<cluster-version> pd -u http://${pd IP}:${PORT} store` | `store.json` | `--include=config` |
-| Outputs of the command `tiup ctl:<cluster-version> pd -u http://${pd IP}:${PORT} config placement-rules show` | `placement-rule.json` | `--include=config` |
+| Outputs of the command `tiup ctl:v<CLUSTER_VERSION> pd -u http://${pd IP}:${PORT} store` | `store.json` | `--include=config` |
+| Outputs of the command `tiup ctl:v<CLUSTER_VERSION> pd -u http://${pd IP}:${PORT} config placement-rules show` | `placement-rule.json` | `--include=config` |
 
 ### TiFlash diagnostic data
 

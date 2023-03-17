@@ -17,14 +17,14 @@ The TiDB configuration file supports more options than command-line parameters. 
 - Default value: `true`
 - It is recommended to set it to `false` if you need to create a large number of tables (for example, more than 100 thousand tables).
 
-### `tidb_max_reuse_chunk` <span class="version-mark">New in v6.4.0</span>
+### `tidb-max-reuse-chunk` <span class="version-mark">New in v6.4.0</span>
 
 - Controls the maximum cached chunk objects of chunk allocation. Setting this configuration item to too large a value might increase the risk of OOM.
 - Default value: `64`
 - Minimum value: `0`
 - Maximum value: `2147483647`
 
-### `tidb_max_reuse_column` <span class="version-mark">New in v6.4.0</span>
+### `tidb-max-reuse-column` <span class="version-mark">New in v6.4.0</span>
 
 - Controls the maximum cached column objects of chunk allocation. Setting this configuration item to too large a value might increase the risk of OOM.
 - Default value: `256`
@@ -39,6 +39,12 @@ The TiDB configuration file supports more options than command-line parameters. 
 + Minimum value: `1`
 + Maximum Value (64-bit platforms): `18446744073709551615`
 + Maximum Value (32-bit platforms): `4294967295`
+
+### `temp-dir` <span class="version-mark">New in v6.3.0</span>
+
++ File system location used by TiDB to store temporary data. If a feature requires local storage in TiDB nodes, TiDB stores the corresponding temporary data in this location.
++ When creating an index, if [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) is enabled, data that needs to be backfilled for a newly created index will be at first stored in the TiDB local temporary directory, and then imported into TiKV in batches, thus accelerating the index creation.
++ Default value: `"/tmp/tidb"`
 
 ### `oom-use-tmp-storage`
 
@@ -152,7 +158,8 @@ The TiDB configuration file supports more options than command-line parameters. 
 ### `enable-telemetry` <span class="version-mark">New in v4.0.2</span>
 
 - Enables or disables the telemetry collection in TiDB.
-- Default value: `true`
+- Default value: `false`
+- When this configuration is set to `true` on a TiDB instance, the telemetry collection in this TiDB instance is enabled and the [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402) system variable takes effect.
 - When this configuration is set to `false` on all TiDB instances, the telemetry collection in TiDB is disabled and the [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402) system variable does not take effect. See [Telemetry](/telemetry.md) for details.
 
 ### `enable-tcp4-only` <span class="version-mark">New in v5.0</span>
@@ -179,6 +186,13 @@ The TiDB configuration file supports more options than command-line parameters. 
 + Default value: `true`
 + When the value is `true`, both `KILL` and `KILL TIDB` statements can terminate queries or connections across instances so you do not need to worry about erroneously terminating queries or connections. When you use a client to connect to any TiDB instance and execute the `KILL` or `KILL TIDB` statement, the statement will be forwarded to the target TiDB instance. If there is a proxy between the client and the TiDB cluster, the `KILL` and `KILL TIDB` statements will also be forwarded to the target TiDB instance for execution. Currently, using the MySQL command line <kbd>ctrl</kbd>+<kbd>c</kbd> to terminate a query or connection in TiDB is not supported when `enable-global-kill` is `true`. For more information on the `KILL` statement, see [KILL](/sql-statements/sql-statement-kill.md).
 
+### `initialize-sql-file` <span class="version-mark">New in v6.6.0</span>
+
++ Specifies the SQL script to be executed when the TiDB cluster is started for the first time.
++ Default value: `""`
++ All SQL statements in this script are executed with the highest privilege without any privilege check. If the specified SQL script fails to execute, the TiDB cluster might fail to start.
++ This configuration item is used to perform such operations as modifying the value of a system variable, creating a user, or granting privileges.
+
 ### `enable-forwarding` <span class="version-mark">New in v5.0.0</span>
 
 + Controls whether the PD client and TiKV client in TiDB forward requests to the leader via the followers in the case of possible network isolation.
@@ -194,7 +208,7 @@ The TiDB configuration file supports more options than command-line parameters. 
 
 + Controls whether to enable the table lock feature.
 + Default value: `false`
-+ The table lock is used to coordinate concurrent access to the same table among multiple sessions. Currently, the `READ`, `WRITE`, and `WRITE LOCAL` lock types are supported. When the configuration item is set to `false`, executing the `LOCK TABLE` or `UNLOCK TABLE` statement does not take effect and returns the "LOCK/UNLOCK TABLES is not supported" warning.
++ The table lock is used to coordinate concurrent access to the same table among multiple sessions. Currently, the `READ`, `WRITE`, and `WRITE LOCAL` lock types are supported. When the configuration item is set to `false`, executing the `LOCK TABLES` or `UNLOCK TABLES` statement does not take effect and returns the "LOCK/UNLOCK TABLES is not supported" warning. For more information, see [`LOCK TABLES` and `UNLOCK TABLES`](/sql-statements/sql-statement-lock-tables-and-unlock-tables.md).
 
 ## Log
 
@@ -367,6 +381,13 @@ Configuration items related to security.
 - Set the JWKS refresh interval for the `tidb_auth_token` authentication method.
 - Default value: `1h`
 
+### `disconnect-on-expired-password` <span class="version-mark">New in v6.5.0</span>
+
+- Determines whether TiDB disconnects the client connection when the password is expired.
+- Default value: `true`
+- Optional values: `true`, `false`
+- If you set it to `true`, the client connection is disconnected when the password is expired. If you set it to `false`, the client connection is restricted to the "sandbox mode" and the user can only execute the password reset operation.
+
 ## Performance
 
 Configuration items related to performance.
@@ -381,7 +402,7 @@ Configuration items related to performance.
 
 > **Warning:**
 >
-> `server-memory-quota` is still an experimental feature. It is **NOT** recommended that you use it in a production environment.
+> Since v6.5.0, the `server-memory-quota` configuration item is deprecated and replaced by the system variable [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640).
 
 + The memory usage limit of tidb-server instances.
 + Default value: `0` (in bytes), which means no memory limit.
@@ -413,6 +434,9 @@ Configuration items related to performance.
 - The size limit of a single transaction in TiDB.
 - Default value: `104857600` (in bytes)
 - In a single transaction, the total size of key-value records cannot exceed this value. The maximum value of this parameter is `1099511627776` (1 TB). Note that if you have used the binlog to serve the downstream consumer Kafka (such as the `arbiter` cluster), the value of this parameter must be no more than `1073741824` (1 GB). This is because 1 GB is the upper limit of a single message size that Kafka can process. Otherwise, an error is returned if this limit is exceeded.
+- In TiDB v6.5.0 and later versions, this configuration is no longer recommended. The memory size of a transaction will be accumulated into the memory usage of the session, and the [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) variable will take effect when the session memory threshold is exceeded. To be compatible with previous versions, this configuration works as follows when you upgrade from an earlier version to TiDB v6.5.0 or later:
+    - If this configuration is not set or is set to the default value (`104857600`), after an upgrade, the memory size of a transaction will be accumulated into the memory usage of the session, and the `tidb_mem_quota_query` variable will take effect.
+    - If this configuration is not defaulted (`104857600`), it still takes effect and its behavior on controling the size of a single transaction remains unchanged before and after the upgrade. This means that the memory size of the transaction is not controlled by the `tidb_mem_quota_query` variable.
 
 ### `tcp-keep-alive`
 
@@ -480,7 +504,7 @@ Configuration items related to performance.
 
 ### `stats-load-concurrency` <span class="version-mark">New in v5.4.0</span>
 
-> **WARNING:**
+> **Warning:**
 >
 > Currently, synchronously loading statistics is an experimental feature. It is not recommended that you use it in production environments.
 
@@ -490,7 +514,7 @@ Configuration items related to performance.
 
 ### `stats-load-queue-size` <span class="version-mark">New in v5.4.0</span>
 
-> **WARNING:**
+> **Warning:**
 >
 > Currently, synchronously loading statistics is an experimental feature. It is not recommended that you use it in production environments.
 
@@ -714,7 +738,7 @@ For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](
 + Controls whether the [`INFORMATION_SCHEMA.DEADLOCKS`](/information-schema/information-schema-deadlocks.md) table collects the information of retryable deadlock errors. For the description of retryable deadlock errors, see [Retryable deadlock errors](/information-schema/information-schema-deadlocks.md#retryable-deadlock-errors).
 + Default value: `false`
 
-### pessimistic-auto-commit (New in v6.0.0)
+### pessimistic-auto-commit <span class="version-mark">New in v6.0.0</span>
 
 + Determines the transaction mode that the auto-commit transaction uses when the pessimistic transaction mode is globally enabled (`tidb_txn_mode='pessimistic'`). By default, even if the pessimistic transaction mode is globally enabled, the auto-commit transaction still uses the optimistic transaction mode. After enabling `pessimistic-auto-commit` (set to `true`), the auto-commit transaction also uses pessimistic mode, which is consistent with the other explicitly committed pessimistic transactions.
 + For scenarios with conflicts, after enabling this configuration, TiDB includes auto-commit transactions into the global lock-waiting management, which avoids deadlocks and mitigates the latency spike brought by deadlock-causing conflicts.
@@ -785,11 +809,62 @@ Configuration items related to read isolation.
 
 ### `tidb_enable_ddl`
 
-- This configuration controls whether the corresponding TiDB instance can run DDL statements or not.
+- This configuration controls whether the corresponding TiDB instance can become a DDL owner or not.
 - Default value: `true`
 - Possible values: `OFF`, `ON`
 - The value of this configuration will initialize the value of the system variable [`tidb_enable_ddl`](/system-variables.md#tidb_enable_ddl)
 - Before v6.3.0, this configuration is set by `run-ddl`.
+
+### `tidb_stmt_summary_enable_persistent` <span class="version-mark">New in v6.6.0</span>
+
+> **Warning:**
+>
+> Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
++ Controls whether to enable statements summary persistence.
++ Default value: `false`
++ For more details, see [Persist statements summary](/statement-summary-tables.md#persist-statements-summary).
+
+### `tidb_stmt_summary_filename` <span class="version-mark">New in v6.6.0</span>
+
+> **Warning:**
+>
+> Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
++ When statements summary persistence is enabled, this configuration specifies the file to which persistent data is written.
++ Default value: `tidb-statements.log`
+
+### `tidb_stmt_summary_file_max_days` <span class="version-mark">New in v6.6.0</span>
+
+> **Warning:**
+>
+> Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
++ When statements summary persistence is enabled, this configuration specifies the maximum number of days to keep persistent data files.
++ Default value: `3`
++ Unit: day
++ You can adjust the value based on the data retention requirements and disk space usage.
+
+### `tidb_stmt_summary_file_max_size` <span class="version-mark">New in v6.6.0</span>
+
+> **Warning:**
+>
+> Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
++ When statements summary persistence is enabled, this configuration specifies the maximum size of a persistent data file.
++ Default value: `64`
++ Unit: MiB
++ You can adjust the value based on the data retention requirements and disk space usage.
+
+### `tidb_stmt_summary_file_max_backups` <span class="version-mark">New in v6.6.0</span>
+
+> **Warning:**
+>
+> Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
++ When statements summary persistence is enabled, this configuration specifies the maximum number of data files that can be persisted. `0` means no limit on the number of files.
++ Default value: `0`
++ You can adjust the value based on the data retention requirements and disk space usage.
 
 ## proxy-protocol
 
@@ -805,12 +880,6 @@ Configuration items related to the PROXY protocol.
 > **Warning:**
 >
 > Use `*` with caution because it might introduce security risks by allowing a client of any IP address to report its IP address. In addition, using `*` might also cause the internal component that directly connects to TiDB (such as TiDB Dashboard) to be unavailable.
-
-### `temp-dir` <span class="version-mark">New in v6.3.0</span>
-
-+ File system location used by TiDB to store temporary data. If a feature requires local storage in TiDB nodes, TiDB stores the corresponding temporary data in this location.
-+ When creating an index, if [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) is enabled, data that needs to be backfilled for a newly created index will be at first stored in the TiDB local temporary directory, and then imported into TiKV in batches, thus accelerating the index creation.
-+ Default value: `"/tmp/tidb"`
 
 ## experimental
 

@@ -15,7 +15,7 @@ However, some features of MySQL are not supported. This could be because there i
 In addition, TiDB does not support the MySQL replication protocol, but provides specific tools to replicate data with MySQL:
 
 - Replicate data from MySQL: [TiDB Data Migration (DM)](/dm/dm-overview.md) is a tool that supports the full data migration and the incremental data replication from MySQL/MariaDB into TiDB.
-- Replicate data to MySQL: [TiCDC](/ticdc/ticdc-overview.md) is a tool for replicating the incremental data of TiDB by pulling TiKV change logs. TiCDC uses the [MySQL sink](/ticdc/ticdc-overview.md#sink-support) to replicate the incremental data of TiDB to MySQL.
+- Replicate data to MySQL: [TiCDC](/ticdc/ticdc-overview.md) is a tool for replicating the incremental data of TiDB by pulling TiKV change logs. TiCDC uses the [MySQL sink](/ticdc/ticdc-overview.md#replication-consistency) to replicate the incremental data of TiDB to MySQL.
 
 </CustomContent>
 
@@ -41,7 +41,6 @@ In addition, TiDB does not support the MySQL replication protocol, but provides 
 + Triggers
 + Events
 + User-defined functions
-+ `FOREIGN KEY` constraints [#18209](https://github.com/pingcap/tidb/issues/18209)
 + `FULLTEXT` syntax and indexes [#1793](https://github.com/pingcap/tidb/issues/1793)
 + `SPATIAL` (also known as `GIS`/`GEOMETRY`) functions, data types and indexes [#6347](https://github.com/pingcap/tidb/issues/6347)
 + Character sets other than `ascii`, `latin1`, `binary`, `utf8`, `utf8mb4`, and `gbk`.
@@ -58,6 +57,7 @@ In addition, TiDB does not support the MySQL replication protocol, but provides 
 + `OPTIMIZE TABLE` syntax
 + `HANDLER` statement
 + `CREATE TABLESPACE` statement
++ "Session Tracker: Add GTIDs context to the OK packet"
 
 ## Features that are different from MySQL
 
@@ -219,9 +219,6 @@ TiDB supports most [SQL modes](/sql-mode.md):
     - The default collation of `utf8mb4` in TiDB is `utf8mb4_bin`.
     - The default collation of `utf8mb4` in MySQL 5.7 is `utf8mb4_general_ci`.
     - The default collation of `utf8mb4` in MySQL 8.0 is `utf8mb4_0900_ai_ci`.
-- Default value of `foreign_key_checks`:
-    - The default value in TiDB is `OFF` and currently TiDB only supports `OFF`.
-    - The default value in MySQL 5.7 is `ON`.
 - Default SQL mode:
     - The default SQL mode in TiDB includes these modes: `ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION`.
     - The default SQL mode in MySQL:
@@ -230,9 +227,9 @@ TiDB supports most [SQL modes](/sql-mode.md):
 - Default value of `lower_case_table_names`:
     - The default value in TiDB is `2` and currently TiDB only supports `2`.
     - The default value in MySQL:
-        - On Linux: `0`
-        - On Windows: `1`
-        - On macOS: `2`
+        - On Linux: `0`. It means that table and database names are stored on disk using the lettercase specified in the `CREATE TABLE` or `CREATE DATABASE` statement. Name comparisons are case-sensitive.
+        - On Windows: `1`. It means that table names are stored in lowercase on disk and name comparisons are not case-sensitive. MySQL converts all table names to lowercase on storage and lookup. This behavior also applies to database names and table aliases.
+        - On macOS: `2`. It means that table and database names are stored on disk using the lettercase specified in the `CREATE TABLE` or `CREATE DATABASE` statement, but MySQL converts them to lowercase on lookup. Name comparisons are not case-sensitive.
 - Default value of `explicit_defaults_for_timestamp`:
     - The default value in TiDB is `ON` and currently TiDB only supports `ON`.
     - The default value in MySQL:
@@ -259,3 +256,11 @@ TiDB does not implement certain features that have been marked as deprecated in 
 
 * Specifying precision for floating point types. MySQL 8.0 [deprecates](https://dev.mysql.com/doc/refman/8.0/en/floating-point-types.html) this feature, and it is recommended to use the `DECIMAL` type instead.
 * The `ZEROFILL` attribute. MySQL 8.0 [deprecates](https://dev.mysql.com/doc/refman/8.0/en/numeric-type-attributes.html) this feature, and it is recommended to instead pad numeric values in your application.
+
+### `CREATE RESOURCE GROUP`, `DROP RESOURCE GROUP`, and `ALTER RESOURCE GROUP` statements
+
+For the statements of creating, modifying, and dropping resource groups, the supported parameters are different from that of MySQL. See the following documents for details:
+
+- [`CREATE RESOURCE GROUP`](/sql-statements/sql-statement-create-resource-group.md)
+- [`DROP RESOURCE GROUP`](/sql-statements/sql-statement-drop-resource-group.md)
+- [`ALTER RESOURCE GROUP`](/sql-statements/sql-statement-alter-resource-group.md)

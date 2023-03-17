@@ -6,7 +6,15 @@ aliases: ['/docs/dev/hardware-and-software-requirements/','/docs/dev/how-to/depl
 
 # Software and Hardware Recommendations
 
-As an open source distributed NewSQL database with high performance, TiDB can be deployed in the Intel architecture server, ARM architecture server, and major virtualization environments and runs well. TiDB supports most of the major hardware networks and Linux operating systems.
+<!-- Localization note for TiDB:
+
+- English: use distributed SQL, and start to emphasize HTAP
+- Chinese: can keep "NewSQL" and emphasize one-stop real-time HTAP ("一栈式实时 HTAP")
+- Japanese: use NewSQL because it is well-recognized
+
+-->
+
+As an open-source distributed SQL database with high performance, TiDB can be deployed in the Intel architecture server, ARM architecture server, and major virtualization environments and runs well. TiDB supports most of the major hardware networks and Linux operating systems.
 
 ## OS and platform requirements
 
@@ -100,6 +108,7 @@ You can deploy and run TiDB on the 64-bit generic hardware server platform in th
 > - For the TiKV server, it is recommended to use NVMe SSDs to ensure faster reads and writes.
 > - If you only want to test and verify the features, follow [Quick Start Guide for TiDB](/quick-start-with-tidb.md) to deploy TiDB on a single machine.
 > - The TiDB server uses the disk to store server logs, so there are no special requirements for the disk type and capacity in the test environment.
+> - Starting from v6.3.0, to deploy TiFlash under the Linux AMD64 architecture, the CPU must support the AVX2 instruction set. Ensure that `cat /proc/cpuinfo | grep avx2` has output. To deploy TiFlash under the Linux ARM64 architecture, the CPU must support the ARMv8 instruction set architecture. Ensure that `cat /proc/cpuinfo | grep 'crc32' | grep 'asimd'` has output. By using the instruction set extensions, TiFlash's vectorization engine can deliver better performance.
 
 ### Production environment
 
@@ -129,7 +138,15 @@ Before you deploy TiCDC, note that it is recommended to deploy TiCDC on PCIe-SSD
 
 ## Network requirements
 
-As an open source distributed NewSQL database, TiDB requires the following network port configuration to run. Based on the TiDB deployment in actual environments, the administrator can open relevant ports in the network side and host side.
+<!-- Localization note for TiDB:
+
+- English: use distributed SQL, and start to emphasize HTAP
+- Chinese: can keep "NewSQL" and emphasize one-stop real-time HTAP ("一栈式实时 HTAP")
+- Japanese: use NewSQL because it is well-recognized
+
+-->
+
+As an open-source distributed SQL database, TiDB requires the following network port configuration to run. Based on the TiDB deployment in actual environments, the administrator can open relevant ports in the network side and host side.
 
 | Component | Default Port | Description |
 | :--:| :--: | :-- |

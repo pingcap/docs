@@ -16,7 +16,7 @@ As a command line tool of PD, PD Control obtains the state information of the cl
 
 ### Use TiUP command
 
-To use PD Control, execute the `tiup ctl:<cluster-version> pd -u http://<pd_ip>:<pd_port> [-i]` command.
+To use PD Control, execute the `tiup ctl:v<CLUSTER_VERSION> pd -u http://<pd_ip>:<pd_port> [-i]` command.
 
 ### Download the installation package
 
@@ -29,11 +29,11 @@ To obtain `pd-ctl` of the latest version, download the TiDB server installation 
 
 > **Note:**
 >
-> `{version}` in the link indicates the version number of TiDB. For example, the download link for `v6.4.0` in the `amd64` architecture is `https://download.pingcap.org/tidb-community-server-v6.4.0-linux-amd64.tar.gz`.
+> `{version}` in the link indicates the version number of TiDB. For example, the download link for `v6.6.0` in the `amd64` architecture is `https://download.pingcap.org/tidb-community-server-v6.6.0-linux-amd64.tar.gz`.
 
 ### Compile from source code
 
-1. [Go](https://golang.org/) Version 1.13 or later because the Go modules are used.
+1. [Go](https://golang.org/) Version 1.19 or later because the Go modules are used.
 2. In the root directory of the [PD project](https://github.com/pingcap/pd), use the `make` or `make pd-ctl` command to compile and generate `bin/pd-ctl`.
 
 ## Usage
@@ -41,26 +41,26 @@ To obtain `pd-ctl` of the latest version, download the TiDB server installation 
 Single-command mode:
 
 ```bash
-tiup ctl:<cluster-version> pd store -u http://127.0.0.1:2379
+tiup ctl:v<CLUSTER_VERSION> pd store -u http://127.0.0.1:2379
 ```
 
 Interactive mode:
 
 ```bash
-tiup ctl:<cluster-version> pd -i -u http://127.0.0.1:2379
+tiup ctl:v<CLUSTER_VERSION> pd -i -u http://127.0.0.1:2379
 ```
 
 Use environment variables:
 
 ```bash
 export PD_ADDR=http://127.0.0.1:2379
-tiup ctl:<cluster-version> pd
+tiup ctl:v<CLUSTER_VERSION> pd
 ```
 
 Use TLS to encrypt:
 
 ```bash
-tiup ctl:<cluster-version> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" --cert="path/to/cert" --key="path/to/key"
+tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" --cert="path/to/cert" --key="path/to/key"
 ```
 
 ## Command line flags
@@ -730,9 +730,9 @@ Usage:
 
 ```
 
-### `region check [miss-peer | extra-peer | down-peer | pending-peer | offline-peer | empty-region | hist-size | hist-keys]`
+### `region check [miss-peer | extra-peer | down-peer | pending-peer | offline-peer | empty-region | hist-size | hist-keys] [--jq="<query string>"]`
 
-Use this command to check the Regions in abnormal conditions.
+Use this command to check the Regions in abnormal conditions. For a jq formatted output, see [jq formatted JSON output usage](#jq-formatted-json-output-usage).
 
 Description of various types:
 
@@ -917,6 +917,23 @@ Usage:
     scheduler config balance-hot-region-scheduler set enable-for-tiflash true
     ```
 
+### `service-gc-safepoint`
+
+Use this command to query the current GC safepoint and service GC safepoint. The output is as follows:
+
+```bash
+{
+  "service_gc_safe_points": [
+    {
+      "service_id": "gc_worker",
+      "expired_at": 9223372036854775807,
+      "safe_point": 439923410637160448
+    }
+  ],
+  "gc_safe_point": 0
+}
+```
+
 ### `store [delete | cancel-delete | label | weight | remove-tombstone | limit ] <store_id> [--jq="<query string>"]`
 
 For a jq formatted output, see [jq-formatted-json-output-usage](#jq-formatted-json-output-usage).
@@ -1031,8 +1048,7 @@ You can set the scheduling speed of stores by using `store limit`. For more deta
 
 > **Note:**
 >
-> - The original `region-add` and `region-remove` parameters of the `store limit` command are deprecated and are replaced with `add-peer` and `remove-peer`.
-> - You can use `pd-ctl` to check the state (`Up`, `Disconnect`, `Offline`, `Down`, or `Tombstone`) of a TiKV store. For the relationship between each state, refer to [Relationship between each state of a TiKV store](/tidb-scheduling.md#information-collection).
+> You can use `pd-ctl` to check the state (`Up`, `Disconnect`, `Offline`, `Down`, or `Tombstone`) of a TiKV store. For the relationship between each state, refer to [Relationship between each state of a TiKV store](/tidb-scheduling.md#information-collection).
 
 ### `log [fatal | error | warn | info | debug]`
 

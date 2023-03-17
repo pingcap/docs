@@ -121,7 +121,7 @@ In v5.4, the key new features or improvements are as follows:
     - Support pusing down more functions to the MPP engine:
 
         - String functions: `LPAD()`, `RPAD()`, `STRCMP()`
-        - Date functions: `ADDDATE()`, `DATE_ADD()`, `DATE_SUB()`, `SUBDATE()`, `QUARTER()`
+        - Date functions: `ADDDATE(string, real)`, `DATE_ADD(string, real)`, `DATE_SUB(string, real)`, `SUBDATE(string, real)`, `QUARTER()`
 
     - Introduce the elastic thread pool feature to improve resource utilization (experimental)
     - Improve the efficiency of converting data from row-based storage format to column-based storage format when replicating data from TiKV, which brings 50% improvement in the overall performance of data replication
@@ -214,7 +214,7 @@ In v5.4, the key new features or improvements are as follows:
 
    Backup & Restore (BR) supports Azure Blob Storage as a remote backup storage. If you deploy TiDB in Azure Cloud, now you can back up the cluster data to the Azure Blob Storage service.
 
-    [User document](/br/backup-storage-azblob.md)
+    [User document](/br/backup-and-restore-storages.md)
 
 ### Data migration
 

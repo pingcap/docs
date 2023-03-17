@@ -89,97 +89,6 @@ For other installation methods, refer to the [Maven official documentation](http
 
 Download or clone the [sample code repository](https://github.com/pingcap-inc/tidb-example-java) and navigate to the `spring-jpa-hibernate` directory.
 
-### Create a blank application with the same dependency (optional)
-
-This application is built using [Spring Initializr](https://start.spring.io/). You can quickly get a blank application with the same dependencies as this sample application by clicking on the following options and changing a few configuration items:
-
-**Project**
-
-- Maven Project
-
-**Language**
-
-- Java
-
-**Spring Boot**
-
-- 3.0.0-M2
-
-**Project Metadata**
-
-- Group: com.pingcap
-- Artifact: spring-jpa-hibernate
-- Name: spring-jpa-hibernate
-- Package name: com.pingcap
-- Packaging: Jar
-- Java: 17
-
-**Dependencies**
-
-- Spring Web
-- Spring Data JPA
-- MySQL Driver
-
-The complete configuration is as follows:
-
-![Spring Initializr Configuration](/media/develop/develop-spring-initializr-configuration.png)
-
-> **Note:**
->
-> Although SQL is relatively standardized, each database vendor uses a subset and superset of ANSI SQL defined syntax. This is referred to as the database's dialect. Hibernate handles variations across these dialects through its `org.hibernate.dialect.Dialect` class and the various subclasses for each database vendor.
->
-> In most cases, Hibernate will be able to determine the proper Dialect to use by asking some questions of the JDBC Connection during bootstrap. For information on Hibernate's ability to determine the proper Dialect to use (and your ability to influence that resolution), see [Dialect resolution](https://docs.jboss.org/hibernate/orm/6.0/userguide/html_single/Hibernate_User_Guide.html#portability-dialectresolver).
->
-> If for some reason it is not able to determine the proper one or you want to use a custom Dialect, you will need to set the `hibernate.dialect` setting.
->
-> _—— Excerpt from the Hibernate official documentation: [Database Dialect](https://docs.jboss.org/hibernate/orm/6.0/userguide/html_single/Hibernate_User_Guide.html#database-dialect)_
-
-After the configuration, the project can be used normally, but only in the same way that you use with MySQL, that is, using the **MySQL dialect**. This is because **Hibernate** supports the **TiDB dialect** in `6.0.0.Beta2` and later versions, but the default dependency of Spring Data JPA on Hibernate is `5.6.4.Final`. Therefore, we recommend the following changes to `pom.xml`.
-
-1. Exclude the `jakarta` packages introduced in `Spring Data JPA`, as shown in this [dependency file](https://github.com/pingcap-inc/tidb-example-java/blob/main/spring-jpa-hibernate/pom.xml#L26):
-
-    Change the dependency file from:
-
-    {{< copyable "" >}}
-
-    ```xml
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-data-jpa</artifactId>
-    </dependency>
-    ```
-
-    To:
-
-    {{< copyable "" >}}
-
-    ```xml
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-data-jpa</artifactId>
-        <exclusions>
-            <exclusion>
-                <groupId>org.hibernate</groupId>
-                <artifactId>hibernate-core-jakarta</artifactId>
-            </exclusion>
-        </exclusions>
-    </dependency>
-    ```
-
-2. Introduce **Hibernate** dependencies from `6.0.0.Beta2` or a later version, as shown in this [dependency file](https://github.com/pingcap-inc/tidb-example-java/blob/main/spring-jpa-hibernate/pom.xml#L53):
-
-    {{< copyable "" >}}
-
-    ```xml
-    <dependency>
-        <groupId>org.hibernate.orm</groupId>
-        <artifactId>hibernate-core</artifactId>
-        <version>6.0.0.CR2</version>
-    </dependency>
-    ```
-
-    Once the changes are made, you can get a blank **Spring Boot** application with the same dependencies as the sample application.
-
 ## Step 5: Run the application
 
 In this step, the application code is compiled and run, which produces a web application. Hibernate creates a `player_jpa` table within the `test` database. If you make requests using the application's RESTful API, these requests run [database transactions](/develop/dev-guide-transaction-overview.md) on the TiDB cluster.
@@ -189,8 +98,6 @@ If you want to learn more about the code of this application, refer to [Implemen
 ### Step 5.1 Change parameters
 
 If you are using a TiDB Cloud Serverless Tier cluster, change the `spring.datasource.url`, `spring.datasource.username`, `spring.datasource.password` parameters in the `application.yml` (located in `src/main/resources`).
-
-{{< copyable "" >}}
 
 ```yaml
 spring:
@@ -214,8 +121,6 @@ Suppose that the password you set is `123456`, and the connection parameters you
 
 Accordingly, the parameters must be set as folows:
 
-{{< copyable "" >}}
-
 ```yaml
 spring:
   datasource:
@@ -234,15 +139,11 @@ spring:
 
 Open a terminal session and make sure you are in the `spring-jpa-hibernate` directory. If you are not already in this directory, navigate to the directory with the following command:
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 cd <path>/tidb-example-java/spring-jpa-hibernate
 ```
 
 #### Build and run with Make (recommended)
-
-{{< copyable "shell-regular" >}}
 
 ```shell
 make
@@ -279,35 +180,33 @@ The final part of the output should look like the following:
  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
   '  |____| .__|_| |_|_| |_\__, | / / / /
  =========|_|==============|___/=/_/_/_/
- :: Spring Boot ::             (v3.0.0-M1)
+ :: Spring Boot ::                (v3.0.1)
 
-2022-03-28 18:46:01.429  INFO 14923 --- [           main] com.pingcap.App                          : Starting App v0.0.1 using Java 17.0.2 on CheesedeMacBook-Pro.local with PID 14923 (/path/code/tidb-example-java/spring-jpa-hibernate/target/spring-jpa-hibernate-0.0.1.jar started by cheese in /path/code/tidb-example-java/spring-jpa-hibernate)
-2022-03-28 18:46:01.430  INFO 14923 --- [           main] com.pingcap.App                          : No active profile set, falling back to default profiles: default
-2022-03-28 18:46:01.709  INFO 14923 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2022-03-28 18:46:01.733  INFO 14923 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 20 ms. Found 1 JPA repository interfaces.
-2022-03-28 18:46:02.010  INFO 14923 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
-2022-03-28 18:46:02.016  INFO 14923 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2022-03-28 18:46:02.016  INFO 14923 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/10.0.16]
-2022-03-28 18:46:02.050  INFO 14923 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2022-03-28 18:46:02.051  INFO 14923 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 598 ms
-2022-03-28 18:46:02.143  INFO 14923 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2022-03-28 18:46:02.173  INFO 14923 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.0.0.CR2
-2022-03-28 18:46:02.262  WARN 14923 --- [           main] org.hibernate.orm.deprecation            : HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
-2022-03-28 18:46:02.324  INFO 14923 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2022-03-28 18:46:02.415  INFO 14923 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2575f671
-2022-03-28 18:46:02.416  INFO 14923 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2022-03-28 18:46:02.443  INFO 14923 --- [           main] SQL dialect                              : HHH000400: Using dialect: org.hibernate.dialect.TiDBDialect
+2023-01-05T14:06:54.427+08:00  INFO 22005 --- [           main] com.pingcap.App                          : Starting App using Java 17.0.2 with PID 22005 (/Users/cheese/IdeaProjects/tidb-example-java/spring-jpa-hibernate/target/classes started by cheese in /Users/cheese/IdeaProjects/tidb-example-java)
+2023-01-05T14:06:54.428+08:00  INFO 22005 --- [           main] com.pingcap.App                          : No active profile set, falling back to 1 default profile: "default"
+2023-01-05T14:06:54.642+08:00  INFO 22005 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-01-05T14:06:54.662+08:00  INFO 22005 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 17 ms. Found 1 JPA repository interfaces.
+2023-01-05T14:06:54.830+08:00  INFO 22005 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-01-05T14:06:54.833+08:00  INFO 22005 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-01-05T14:06:54.833+08:00  INFO 22005 --- [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.4]
+2023-01-05T14:06:54.865+08:00  INFO 22005 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-01-05T14:06:54.865+08:00  INFO 22005 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 421 ms
+2023-01-05T14:06:54.916+08:00  INFO 22005 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-01-05T14:06:54.929+08:00  INFO 22005 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.1.6.Final
+2023-01-05T14:06:54.969+08:00  WARN 22005 --- [           main] org.hibernate.orm.deprecation            : HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+2023-01-05T14:06:55.005+08:00  INFO 22005 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-01-05T14:06:55.074+08:00  INFO 22005 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5e905f2c
+2023-01-05T14:06:55.075+08:00  INFO 22005 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-01-05T14:06:55.089+08:00  INFO 22005 --- [           main] SQL dialect                              : HHH000400: Using dialect: org.hibernate.dialect.TiDBDialect
 Hibernate: drop table if exists player_jpa
 Hibernate: drop sequence player_jpa_id_seq
 Hibernate: create sequence player_jpa_id_seq start with 1 increment by 1
 Hibernate: create table player_jpa (id bigint not null, coins integer, goods integer, primary key (id)) engine=InnoDB
-2022-03-28 18:46:02.883  INFO 14923 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2022-03-28 18:46:02.888  INFO 14923 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2022-03-28 18:46:03.125  WARN 14923 --- [           main] org.hibernate.orm.deprecation            : HHH90000021: Encountered deprecated setting [javax.persistence.lock.timeout], use [jakarta.persistence.lock.timeout] instead
-2022-03-28 18:46:03.132  WARN 14923 --- [           main] org.hibernate.orm.deprecation            : HHH90000021: Encountered deprecated setting [javax.persistence.lock.timeout], use [jakarta.persistence.lock.timeout] instead
-2022-03-28 18:46:03.168  WARN 14923 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2022-03-28 18:46:03.307  INFO 14923 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
-2022-03-28 18:46:03.311  INFO 14923 --- [           main] com.pingcap.App                          : Started App in 2.072 seconds (JVM running for 2.272)
+2023-01-05T14:06:55.332+08:00  INFO 22005 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-01-05T14:06:55.335+08:00  INFO 22005 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-01-05T14:06:55.579+08:00  WARN 22005 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-01-05T14:06:55.710+08:00  INFO 22005 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-01-05T14:06:55.714+08:00  INFO 22005 --- [           main] com.pingcap.App                          : Started App in 1.432 seconds (process running for 1.654)
 ```
 
 The output log indicates the application behavior during startup. In this example, the application starts a **Servlet** using [Tomcat](https://tomcat.apache.org/), uses Hibernate as the ORM, uses [HikariCP](https://github.com/brettwooldridge/HikariCP) as the database connection pool implementation, and uses `org.hibernate.dialect.TiDBDialect` as the database dialect. After startup, Hibernate deletes and re-creates the `player_jpa` table and the `player_jpa_id_seq` sequence. At the end of startup, the application listens on port `8080` to provide HTTP services to the outside.
@@ -370,8 +269,6 @@ You can also use curl to make requests directly.
 
 To create players, you can send a **POST** request to the `/player` endpoint. For example:
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 curl --location --request POST 'http://localhost:8080/player/' --header 'Content-Type: application/json' --data-raw '[{"coins":100,"goods":20}]'
 ```
@@ -385,8 +282,6 @@ The request uses JSON as the payload. The example above indicates creating a pla
 #### Get player information by ID
 
 To get the player information, you can send a **GET** request to the `/player` endpoint. You need to specify the `id` of the player in the path parameter as follows: `/player/{id}`. The following example shows how to get the information of a player with `id` 1:
-
-{{< copyable "shell-regular" >}}
 
 ```shell
 curl --location --request GET 'http://localhost:8080/player/1'
@@ -405,8 +300,6 @@ The return value is the player's information:
 #### Get player information in bulk by limit
 
 To get the player information in bulk, you can send a **GET** request to the `/player/limit` endpoint. You need to specify the total number of players in the path parameter as follows: `/player/limit/{limit}`. The following example shows how to get the information of up to 3 players:
-
-{{< copyable "shell-regular" >}}
 
 ```shell
 curl --location --request GET 'http://localhost:8080/player/limit/3'
@@ -437,8 +330,6 @@ The return value is a list of player information:
 #### Get player information by page
 
 To get paginated player information, you can send a **GET** request to the `/player/page` endpoint. To specify additional parameters, you need to use the URL parameter. The following example shows how to get the information from a page whose `index` is 0, where each page has a maximum `size` of 2 players.
-
-{{< copyable "shell-regular" >}}
 
 ```shell
 curl --location --request GET 'http://localhost:8080/player/page?index=0&size=2'
@@ -492,8 +383,6 @@ The return value is the page with `index` 0, where 2 players are listed per page
 
 To get the number of players, you can send a **GET** request to the `/player/count` endpoint:
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 curl --location --request GET 'http://localhost:8080/player/count'
 ```
@@ -507,8 +396,6 @@ The return value is the number of players:
 #### Player trading
 
 To initiate a transaction between players, you can send a **PUT** request to the `/player/trade` endpoint. For example:
-
-{{< copyable "shell-regular" >}}
 
 ```shell
 curl --location --request PUT 'http://localhost:8080/player/trade' \
@@ -607,97 +494,62 @@ This part briefly describes the Maven configuration in the `pom.xml` file and th
 
 The `pom.xml` file is a Maven configuration file that declares the project's Maven dependencies, packaging methods, and packaging information. You can replicate the process of generating this configuration file by [creating a blank application with the same dependency](#create-a-blank-application-with-the-same-dependency-optional), or copying it directly to your project.
 
-{{< copyable "" >}}
-
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-   <modelVersion>4.0.0</modelVersion>
-   <parent>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-parent</artifactId>
-      <version>3.0.0-M1</version>
-      <relativePath/> <!-- lookup parent from repository -->
-   </parent>
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.0.1</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
 
-   <groupId>com.pingcap</groupId>
-   <artifactId>spring-jpa-hibernate</artifactId>
-   <version>0.0.1</version>
-   <name>spring-jpa-hibernate</name>
-   <description>an example for spring boot, jpa, hibernate and TiDB</description>
+    <groupId>com.pingcap</groupId>
+    <artifactId>spring-jpa-hibernate</artifactId>
+    <version>0.0.1</version>
+    <name>spring-jpa-hibernate</name>
+    <description>an example for spring boot, jpa, hibernate and TiDB</description>
 
-   <properties>
-      <java.version>17</java.version>
-      <maven.compiler.source>17</maven.compiler.source>
-      <maven.compiler.target>17</maven.compiler.target>
-   </properties>
+    <properties>
+        <java.version>17</java.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+    </properties>
 
-   <dependencies>
-      <dependency>
-         <groupId>org.springframework.boot</groupId>
-         <artifactId>spring-boot-starter-data-jpa</artifactId>
-         <exclusions>
-            <exclusion>
-               <groupId>org.hibernate</groupId>
-               <artifactId>hibernate-core-jakarta</artifactId>
-            </exclusion>
-         </exclusions>
-      </dependency>
-
-      <dependency>
-         <groupId>org.springframework.boot</groupId>
-         <artifactId>spring-boot-starter-web</artifactId>
-      </dependency>
-
-      <dependency>
-         <groupId>mysql</groupId>
-         <artifactId>mysql-connector-java</artifactId>
-         <scope>runtime</scope>
-      </dependency>
-
-      <dependency>
-         <groupId>org.springframework.boot</groupId>
-         <artifactId>spring-boot-starter-test</artifactId>
-         <scope>test</scope>
-      </dependency>
-
-      <dependency>
-         <groupId>org.hibernate.orm</groupId>
-         <artifactId>hibernate-core</artifactId>
-         <version>6.0.0.CR2</version>
-      </dependency>
-   </dependencies>
-
-   <build>
-      <plugins>
-         <plugin>
+    <dependencies>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-maven-plugin</artifactId>
-         </plugin>
-      </plugins>
-   </build>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
 
-   <repositories>
-      <repository>
-         <id>spring-milestones</id>
-         <name>Spring Milestones</name>
-         <url>https://repo.spring.io/milestone</url>
-         <snapshots>
-            <enabled>false</enabled>
-         </snapshots>
-      </repository>
-   </repositories>
-   <pluginRepositories>
-      <pluginRepository>
-         <id>spring-milestones</id>
-         <name>Spring Milestones</name>
-         <url>https://repo.spring.io/milestone</url>
-         <snapshots>
-            <enabled>false</enabled>
-         </snapshots>
-      </pluginRepository>
-   </pluginRepositories>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 </project>
 ```
 
@@ -733,8 +585,6 @@ The configuration is written in [YAML](https://yaml.org/). The fields are descri
 
 The `App.java` file is the entry point:
 
-{{< copyable "" >}}
-
 ```java
 package com.pingcap;
 
@@ -761,8 +611,6 @@ The `dao` (Data Access Object) package implements the persistence of data object
 #### Entity objects
 
 The `PlayerBean.java` file is an entity object, which corresponds to a table in the database:
-
-{{< copyable "" >}}
 
 ```java
 package com.pingcap.dao;
@@ -835,8 +683,6 @@ The entity class has several annotations that give Hibernate additional informat
 
 To abstract the database layer, Spring applications use the [`Repository`](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories) interface, or a sub-interface of the `Repository`. This interface maps to a database object, such as a table. JPA implements some pre-built methods, such as [`INSERT`](/sql-statements/sql-statement-insert.md), or [`SELECT`](/sql-statements/sql-statement-select.md) using the primay key.
 
-{{< copyable "" >}}
-
 ```java
 package com.pingcap.dao;
 
@@ -890,8 +736,6 @@ In the SQL for the `getPlayersByLimit` annotation, `:limit` is called a [named p
 
 In `getPlayerAndLock`, an annotation [`@Lock`](https://docs.spring.io/spring-data/jpa/docs/current/api/org/springframework/data/jpa/repository/Lock.html) is used to declare that pessimistic locking is applied. For details on other locking methods, see [Entity Locking](https://openjpa.apache.org/builds/2.2.2/apache-openjpa/docs/jpa_overview_em_locking.html). The `@Lock` annotation must be used with `HQL`; otherwise, an error occurs. If you want to use SQL directly for locking, you can use the annotation from the comment:
 
-{{< copyable "" >}}
-
 ```java
 @Query(value = "SELECT * FROM player_jpa WHERE id = :id FOR UPDATE", nativeQuery = true)
 ```
@@ -905,8 +749,6 @@ The logic implementation layer is the `service` package, which contains the inte
 #### Interface
 
 The `PlayerService.java` file defines the logical interface and implements the interface rather than writing a class directly. This is to keep the example as close to actual use as possible and to reflect the [open-closed principle](https://en.wikipedia.org/wiki/Open%E2%80%93closed_principle) of the design. You may omit this interface and inject the implementation class directly in the dependency class, but this approach is not recommended.
-
-{{< copyable "" >}}
 
 ```java
 package com.pingcap.service;
@@ -971,8 +813,6 @@ public interface PlayerService {
 #### Implementation (Important)
 
 The `PlayerService.java` file implements the `PlayerService` interface, which contains all the data processing logic.
-
-{{< copyable "" >}}
 
 ```java
 package com.pingcap.service.impl;
@@ -1066,8 +906,6 @@ In all implementation classes, the `buyGoods` function is requires attention. Wh
 
 The `controller` package exposes the HTTP interface to the outside world and allows access to the service via the [REST API](https://www.redhat.com/en/topics/api/what-is-a-rest-api#).
 
-{{< copyable "" >}}
-
 ```java
 package com.pingcap.controller;
 
@@ -1136,3 +974,50 @@ public class PlayerController {
     - [`@PathVariable`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/PathVariable.html) shows that the annotation has placeholders like `{id}` and `{limit_size}`, which are bound to the variable annotated by `@PathVariable`. Such binding is based on the annotation attribute `name`. If the annotation attribute `name` is not specified, it is the same as the variable name. The variable name can be omitted, that is, `@PathVariable(name="limit_size")` can be written as `@PathVariable("limit_size")`.
 - [`@PutMapping`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/PutMapping.html) declares that this function responds to a [PUT](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PUT) request in HTTP.
 - [`@RequestParam`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/RequestParam.html) declares that this function parses URL parameters, form parameters, and other parameters in the request and binds them to the annotated variables.
+
+## Create a blank application with the same dependency (optional)
+
+This application is built using [Spring Initializr](https://start.spring.io/). You can quickly get a blank application with the same dependencies as this sample application by clicking on the following options and changing a few configuration items:
+
+**Project**
+
+- Maven Project
+
+**Language**
+
+- Java
+
+**Spring Boot**
+
+- Latest stable version
+
+**Project Metadata**
+
+- Group: com.pingcap
+- Artifact: spring-jpa-hibernate
+- Name: spring-jpa-hibernate
+- Package name: com.pingcap
+- Packaging: Jar
+- Java: 17
+
+**Dependencies**
+
+- Spring Web
+- Spring Data JPA
+- MySQL Driver
+
+The complete configuration is as follows:
+
+![Spring Initializr Configuration](/media/develop/develop-spring-initializr-configuration.png)
+
+> **Note:**
+>
+> Although SQL is relatively standardized, each database vendor uses a subset and superset of ANSI SQL defined syntax. This is referred to as the database's dialect. Hibernate handles variations across these dialects through its `org.hibernate.dialect.Dialect` class and the various subclasses for each database vendor.
+>
+> In most cases, Hibernate will be able to determine the proper Dialect to use by asking some questions of the JDBC Connection during bootstrap. For information on Hibernate's ability to determine the proper Dialect to use (and your ability to influence that resolution), see [Dialect resolution](https://docs.jboss.org/hibernate/orm/6.0/userguide/html_single/Hibernate_User_Guide.html#portability-dialectresolver).
+>
+> If for some reason it is not able to determine the proper one or you want to use a custom Dialect, you will need to set the `hibernate.dialect` setting.
+>
+> _—— Excerpt from the Hibernate official documentation: [Database Dialect](https://docs.jboss.org/hibernate/orm/6.0/userguide/html_single/Hibernate_User_Guide.html#database-dialect)_
+
+After the configuration, you can get a blank **Spring Boot** application with the same dependencies as the sample application.

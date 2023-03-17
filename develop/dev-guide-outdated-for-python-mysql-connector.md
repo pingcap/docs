@@ -7,15 +7,13 @@ summary: Learn how to build a simple Python application based on TiDB and mysql-
 
 > **Note:**
 >
-> This document has been archived. This indicates that this document will not be updated thereafter. You can see [Developer Guide Overview](/develop/dev-guide-overview.md) for more details.
+> This legacy document is outdated and will not be updated thereafter. You can see [Developer Guide Overview](/develop/dev-guide-overview.md) for more details.
 
 This tutorial shows you how to build a simple Python application based on TiDB and mysql-connector-python. The sample application to build here is a simple CRM tool where you can add, query, and update customer and order information.
 
 ## Step 1. Start a TiDB cluster
 
 Start a pseudo TiDB cluster on your local storage:
-
-{{< copyable "" >}}
 
 ```bash
 docker run -p 127.0.0.1:$LOCAL_PORT:4000 pingcap/tidb:v5.1.0
@@ -85,8 +83,6 @@ The above command starts a temporary and single-node cluster with mock TiKV. The
 ## Step 4. Get and run the application code
 
 The sample application code in this tutorial (`main.py`) uses mysql-connector-python to map Python methods to SQL operations that are described in the code comments. You can save the example application code as a Python file named `main.py` on your local machine.
-
-{{< copyable "" >}}
 
 ```python
 import mysql.connector
@@ -162,8 +158,6 @@ mydb.close()
 
 Replace the string passed to `mysql.connector.connect()` with the connection string you have obtained when creating the database.
 
-{{< copyable "" >}}
-
 ```python
 mydb = mysql.connector.connect(
   host="localhost",
@@ -177,8 +171,6 @@ mydb = mysql.connector.connect(
 ### Step 2. Run the application code
 
 Run the following command to run the `main.py` code:
-
-{{< copyable "" >}}
 
 ```python
 python3 main.py
