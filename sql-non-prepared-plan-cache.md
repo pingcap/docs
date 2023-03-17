@@ -13,7 +13,7 @@ TiDB supports execution plan caching for some non-`PREPARE` statements, similar 
 
 ## Principle
 
-The non-prepared plan cache is a session-level feature that is independent of the [Prepared plan cache](/sql-prepared-plan-cache.md), and the cached plans do not affect each other. The basic principle of the non-prepared plan cache is as follows:
+The non-prepared plan cache is a session-level feature that is independent of the [prepared plan cache](/sql-prepared-plan-cache.md), and the cached plans do not affect each other. The basic principle of the non-prepared plan cache is as follows:
 
 1. After you enable the non-prepared plan cache, TiDB first parameterizes the query based on the abstract syntax tree (AST). For example, `SELECT * FROM t WHERE b < 10 AND a = 1` is parameterized as `SELECT * FROM t WHERE b < ? and a = ?`.
 2. Then, TiDB uses the parameterized query to search the non-prepared plan cache.
