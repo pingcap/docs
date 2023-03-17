@@ -75,6 +75,5 @@ For comparisons between functions and syntax of Oracle and TiDB, see [Comparison
 ## Unsupported functions
 
 * `LOAD_FILE()`
-* `MATCH`
+* `MATCH()`
 * `SOUNDEX()`
-* `SOUNDS LIKE`
