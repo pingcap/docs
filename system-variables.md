@@ -1329,6 +1329,14 @@ This variable is associated with a feature available since v6.2.0 and not usable
 - Since v6.1.0, the [Join Reorder](/join-reorder.md) algorithm of TiDB supports Outer Join. This variable controls the support behavior. The default value is `OFF`, which means the Join Reorder's support for Outer Join is disabled by default.
 - For a cluster upgraded from a version earlier than v6.1.0, the default value is `OFF`. For a cluster upgraded from v6.1.0, the default value is `ON`.
 
+### `tidb_enable_inl_join_inner_multi_pattern` <span class="version-mark">New in v7.0.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `OFF`
+- This variable controls whether the inner table of Index Join supports `Selection` or `Projection` operators.
+
 ### tidb_enable_ordered_result_mode
 
 - Scope: SESSION | GLOBAL
