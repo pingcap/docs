@@ -15,7 +15,19 @@ This document describes how to stream data from TiDB Cloud to MySQL using the **
 >
 > For [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta), the changefeed feature is unavailable.
 
+## Restrictions
+
+- For each TiDB Cloud cluster, you can create up to 10 changefeeds.
+- Because TiDB Cloud uses TiCDC to establish changefeeds, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios).
+- If the table to be replicated does not have a primary key or a non-null unique index, the absence of a unique constraint during replication could result in duplicated data being inserted downstream in some retry scenarios.
+
 ## Prerequisites
+
+Before creating a changefeed, you need to complete the following prerequisites:
+
+- Set up your network connection
+- Export and load the existing data to MySQL (optional)
+- Create corresponding target tables in MySQL if you do not load the existing data and only want to replicate incremental data to MySQL
 
 ### Network
 
@@ -41,13 +53,15 @@ If your MySQL service is in a GCP VPC that has no public internet access, take t
 
     You must add [the CIDR of the region where your TiDB Cloud cluster is located](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr) to the ingress firewall rules. Doing so allows the traffic to flow from your TiDB Cluster to the MySQL endpoint. 
 
-### Full load data
+### Load existing data (optional)
 
-The **Sink to MySQL** connector can only sink incremental data from your TiDB cluster to MySQL after a certain timestamp. If you already have data in your TiDB cluster, you must export and load the full load data of your TiDB cluster into MySQL before enabling **Sink to MySQL**:
+The **Sink to MySQL** connector can only sink incremental data from your TiDB cluster to MySQL after a certain timestamp. If you already have data in your TiDB cluster, you can export and load the existing data of your TiDB cluster into MySQL before enabling **Sink to MySQL**.
+
+To load the existing data:
 
 1. Extend the [tidb_gc_life_time](https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50) to be longer than the total time of the following two operations, so that historical data during the time is not garbage collected by TiDB.
 
-    - The time to export and import the full load data
+    - The time to export and import the existing data
     - The time to create **Sink to MySQL**
 
     For example:
@@ -62,7 +76,7 @@ The **Sink to MySQL** connector can only sink incremental data from your TiDB cl
 
 3. From the [exported files of Dumpling](/dumpling-overview.md#format-of-exported-files), get the start position of MySQL sink from the metadata file:
 
-    The following is a part of an example metadata file. The `Pos` of `SHOW MASTER STATUS` is the TSO of the full load data, which is also the start position of MySQL sink.
+    The following is a part of an example metadata file. The `Pos` of `SHOW MASTER STATUS` is the TSO of the existing data, which is also the start position of MySQL sink.
 
     ```
     Started dump at: 2020-11-10 10:40:19
@@ -71,6 +85,10 @@ The **Sink to MySQL** connector can only sink incremental data from your TiDB cl
             Pos: 420747102018863124
     Finished dump at: 2020-11-10 10:40:20
     ``` 
+
+### Create target tables in MySQL
+
+If you do not load the existing data, you need to create corresponding target tables in MySQL manually to store the incremental data from TiDB. Otherwise, the data will not be replicated.
 
 ## Create a MySQL sink
 
@@ -95,7 +113,7 @@ After completing the prerequisites, you can sink your data to MySQL.
 
 6. In **Start Position**, configure the starting position for your MySQL sink.
 
-    - If you have performed [full load data](#full-load-data) using Dumpling, select **Start replication from a specific TSO** and fill in the TSO that you get from Dumpling exported metadata files.
+    - If you have [loaded the existing data](#load-existing-data-optional) using Dumpling, select **Start replication from a specific TSO** and fill in the TSO that you get from Dumpling exported metadata files.
     - If you do not have any data in the upstream TiDB cluster, select **Start replication from now on**.
     - Otherwise, you can customize the start time point by choosing **Start replication from a specific time**.
 
@@ -109,15 +127,10 @@ After completing the prerequisites, you can sink your data to MySQL.
 
     Click the **Sink to MySQL** card, and you can see the Changfeed running status in a pop-up window, including checkpoint, replication latency, and other metrics.
 
-9. If you have performed [full load data](#full-load-data) using Dumpling, you need to restore the GC time to its original value (the default value is `10m`) after the sink is created:
+9. If you have [loaded the existing data](#load-existing-data-optional) using Dumpling, you need to restore the GC time to its original value (the default value is `10m`) after the sink is created:
 
 {{< copyable "sql" >}}
 
 ```sql
 SET GLOBAL tidb_gc_life_time = '10m';
 ```
-
-## Restrictions
-
-- For each TiDB Cloud cluster, you can create up to 10 changefeeds.
-- Because TiDB Cloud uses TiCDC to establish changefeeds, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#restrictions).

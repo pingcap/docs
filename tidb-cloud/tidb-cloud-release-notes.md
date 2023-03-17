@@ -8,6 +8,57 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2023.
 
+## March 14, 2023
+
+**General changes**
+
+- Upgrade the default TiDB version of new [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters from [v6.5.0](https://docs.pingcap.com/tidb/v6.5/release-6.5.0) to [v6.5.1](https://docs.pingcap.com/tidb/v6.5/release-6.5.1).
+
+- Support modifying column names of the target table to be created by TiDB Cloud when uploading a local CSV file with a header row.
+
+    When importing a local CSV file with a header row to a [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) cluster, if you need TiDB Cloud to create the target table and the column names in the header row do not follow the TiDB Cloud column naming conventions, you will see a warning icon next to the corresponding column name. To resolve the warning, you can move the cursor over the icon and follow the message to edit the existing column names or enter new column names.
+
+    For information about column naming conventions, see [Import local files](/tidb-cloud/tidb-cloud-import-local-files.md#import-local-files).
+
+## March 7, 2023
+
+**General changes**
+
+- Upgrade the default TiDB version of all [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters from [v6.4.0](https://docs.pingcap.com/tidb/v6.4/release-6.4.0) to [v6.6.0](https://docs.pingcap.com/tidb/v6.6/release-6.6.0).
+
+## February 28, 2023
+
+**General changes**
+
+- Add the [SQL Diagnosis](/tidb-cloud/tune-performance.md) feature for [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters.
+
+    With SQL Diagnosis, you can gain deep insights into SQL-related runtime status, which makes the SQL performance tuning more efficient. Currently, the SQL Diagnosis feature for Serverless Tier only provides slow query data.
+
+    To use SQL Diagnosis, click **SQL Diagnosis** on the left navigation bar of your Serverless Tier cluster page.
+
+**Console changes**
+
+- Optimize the left navigation.
+
+    You can navigate pages more efficiently, for example:
+
+    - You can hover the mouse in the upper-left corner to quickly switch between clusters or projects.
+    - You can switch between the **Clusters** page and the **Admin** page.
+
+**API changes**
+
+- Release several TiDB Cloud API endpoints for data import：
+
+    - List all import tasks
+    - Get an import task
+    - Create an import task
+    - Update an import task
+    - Upload a local file for an import task
+    - Preview data before starting an import task
+    - Get the role information for import tasks
+
+  For more information, refer to the [API documentation](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Import).
+
 ## February 22, 2023
 
 **General changes**

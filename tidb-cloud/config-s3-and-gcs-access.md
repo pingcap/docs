@@ -21,9 +21,18 @@ It is recommended that you use an IAM user (instead of the AWS account root user
 
 Take the following steps to configure an access key:
 
-1. Create an IAM user with the `AmazonS3ReadOnlyAccess` policy. It is recommended that the policy only works for your bucket that stores the source data. For more information, see [Creating an IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html#id_users_create_console).
+1. Create an IAM user with the following policies:
 
-2. Create an access key for the IAM user. For more information, see [Creating an access key for an IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey).
+   - `AmazonS3ReadOnlyAccess`
+   - [`CreateOwnAccessKeys` (required) and `ManageOwnAccessKeys` (optional)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#access-keys_required-permissions)
+
+   It is recommended that these policies only work for your bucket that stores the source data.
+
+   For more information, see [Creating an IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html#id_users_create_console).
+
+2. Use your AWS account ID or account alias, and your IAM user name and password to sign in to [the IAM console](https://console.aws.amazon.com/iam).
+
+3. Create an access key. For more details, see [Creating an access key for an IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey).
 
 > **Note:**
 >
@@ -40,7 +49,7 @@ Configure the bucket access for TiDB Cloud and get the Role ARN as follows:
 
         > **Tip:**
         >
-        > If you have multiple projects, you can switch to the target project in the left navigation pane of the **Clusters** page.
+        > If you have multiple projects, you can view the project list and switch to another project from the ☰ hover menu in the upper-left corner.
 
     2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
 
@@ -135,7 +144,7 @@ To allow TiDB Cloud to access the source data in your GCS bucket, you need to co
 
         > **Tip:**
         >
-        > If you have multiple projects, you can switch to the target project in the left navigation pane of the **Clusters** page.
+        > If you have multiple projects, you can view the project list and switch to another project from the ☰ hover menu in the upper-left corner.
 
     2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
 

@@ -181,7 +181,7 @@ After configuring the Amazon S3 access, you can perform the data import task in 
 
         > **Tip:**
         >
-        > If you have multiple projects, you can switch to the target project in the left navigation pane of the **Clusters** page.
+        > If you have multiple projects, you can view the project list and switch to another project from the ☰ hover menu in the upper-left corner.
 
     2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
 
@@ -406,7 +406,7 @@ The TiDB Cloud console does not provide any feature about incremental data repli
      host: "tidb.xxxxxxx.xxxxxxxxx.ap-northeast-1.prod.aws.tidbcloud.com"
      port: 4000
      user: "root"
-     password: "${password}"  # If the password is not empty, it is recommended to use a dmctl-encrypted cipher. 
+     password: "${password}"  # If the password is not empty, it is recommended to use a dmctl-encrypted cipher.
 
     ## ******** Function Configuration **********
     routes:

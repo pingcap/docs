@@ -13,7 +13,19 @@ This document describes how to create a changefeed to stream data from TiDB Clou
 >
 > For [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta), the changefeed feature is unavailable.
 
+## Restrictions
+
+- For each TiDB Cloud cluster, you can create up to 10 changefeeds.
+- Currently, TiDB Cloud does not support uploading self-signed TLS certificates to connect to Kafka brokers.
+- Because TiDB Cloud uses TiCDC to establish changefeeds, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios).
+- If the table to be replicated does not have a primary key or a non-null unique index, the absence of a unique constraint during replication could result in duplicated data being inserted downstream in some retry scenarios.
+
 ## Prerequisites
+
+Before creating a changefeed to stream data to Apache Kafka, you need to complete the following prerequisites:
+
+- Set up your network connection
+- Add permissions for Kafka ACL authorization
 
 ### Network
 
@@ -131,9 +143,3 @@ For example, if your Kafka cluster is in Confluent Cloud, you can see [Resources
 On this page, you can review all the changefeed configurations that you set.
 
 If you find any error, you can go back to fix the error. If there is no error, you can click the check box at the bottom, and then click **Create** to create the changefeed.
-
-## Restrictions
-
-- For each TiDB Cloud cluster, you can create up to 10 changefeeds.
-- Currently, TiDB Cloud does not support uploading self-signed TLS certificates to connect to Kafka brokers.
-- Because TiDB Cloud uses TiCDC to establish changefeeds, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#restrictions).
