@@ -12,7 +12,24 @@ The `LOAD DATA` statement batch loads data into a TiDB table.
 
 ```ebnf+diagram
 LoadDataStmt ::=
-    'LOAD' 'DATA' LocalOpt 'INFILE' stringLit DuplicateOpt 'INTO' 'TABLE' TableName CharsetOpt Fields Lines IgnoreLines ColumnNameOrUserVarListOptWithBrackets LoadDataSetSpecOpt
+    'LOAD' 'DATA' LocalOpt 'INFILE' stringLit FormatOpt DuplicateOpt 'INTO' 'TABLE' TableName CharsetOpt Fields Lines IgnoreLines ColumnNameOrUserVarListOptWithBrackets LoadDataSetSpecOpt LoadDataOptionListOpt
+
+LocalOpt ::= ('LOCAL')?
+
+FormatOpt ::=
+    ('FORMAT' ('DELIMITED DATA' | 'SQL FILE' | 'PARQUET'))?
+
+Fields ::=
+    ('TERMINATED' 'BY' stringLit
+    | ('OPTIONALLY')? 'ENCLOSED' 'BY' stringLit
+    | 'ESCAPED' 'BY' stringLit
+    | 'DEFINED' 'NULL' 'BY' stringLit ('OPTIONALLY' 'ENCLOSED')?)?
+
+LoadDataOptionListOpt ::=
+    ('WITH' (LoadDataOption (',' LoadDataOption)*))?
+
+LoadDataOption ::=
+    detached | batch_size '=' numberLiteral
 ```
 
 ## Parameters
