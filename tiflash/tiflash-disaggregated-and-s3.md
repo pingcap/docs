@@ -178,4 +178,4 @@ By default, TiUP deploys TiFlash in the coupled storage and computation architec
 - After the migration from one architecture to another, all TiFlash data needs to be replicated again.
 - Only TiFlash nodes with the same architecture are allowed in the same TiDB cluster. Two architectures cannot coexist in one cluster.
 - The disaggregated storage and compute architecture only supports object storage using the S3 API, while the coupled storage and compute architecture only supports local storage.
-- When using S3 storage, TiFlash nodes cannot obtain the keys of files not on their own nodes, so the [static encryption](/encryption-at-rest.md) feature is cannot be used.
+- When using S3 storage, TiFlash nodes cannot obtain the keys of files not on their own nodes, so the [Encryption at Rest](/encryption-at-rest.md) feature is cannot be used.
