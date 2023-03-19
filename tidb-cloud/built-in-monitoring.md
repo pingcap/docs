@@ -25,9 +25,9 @@ To view the metrics on the Monitoring page, take the following steps:
 - For Dedicated Tier clusters, the monitoring data is kept for 7 days.
 - For Serverless Tier clusters, the monitoring data is kept for 3 days.
 
-## Monitoring metrics for Dedicated Tier Clusters
+## Monitoring metrics for Dedicated Tier clusters
 
-The following sections illustrate the metrics on the Monitoring page.
+The following sections illustrate the metrics on the Monitoring page for Dedicated Tier clusters.
 
 ### Database Time
 
@@ -61,7 +61,7 @@ The following sections illustrate the metrics on the Monitoring page.
 
 | Metric name  | Labels | Description                                   |
 | :------------| :------| :-------------------------------------------- |
-| Query Duration | avg-{SQL Types}, 99-{SQL Types} | The duration from receiving a request from the client to TiDB till TiDB executing the request and returning the result to the client. In general, client requests are sent in the form of SQL statements; however, this duration can include the execution time of commands such as `COM_PING`, `COM_SLEEP`, `COM_STMT_FETCH`, and `COM_SEND_LONG_DATA`. TiDB supports Multi-Query, which means the client can send multiple SQL statements at one time, such as `select 1; select 1; select 1;`. In this case, the total execution time of this query includes the execution time of all SQL statements. |
+| Query Duration | avg-{SQL Types}, 99-{SQL Types} | The duration from receiving a request from the client to TiDB until TiDB executes the request and returns the result to the client. In general, client requests are sent in the form of SQL statements; however, this duration can include the execution time of commands such as `COM_PING`, `COM_SLEEP`, `COM_STMT_FETCH`, and `COM_SEND_LONG_DATA`. TiDB supports Multi-Query, which means the client can send multiple SQL statements at one time, such as `select 1; select 1; select 1;`. In this case, the total execution time of this query includes the execution time of all SQL statements. |
 | Average Idle Connection Duration | avg-in-txn, avg-not-in-txn | The connection idle duration indicates the duration of a connection being idle.<br/> avg-in-txn: The average connection idle duration when a connection is within a transaction. <br/>avg-not-in-txn: The average connection idle duration when a connection is not within a transaction. |
 | Get Token Duration | avg, 99 | The average time or P99 duration consumed in getting tokens of SQL statements. |
 | Parse Duration | avg, 99 | The average time or P99 duration consumed in parsing SQL statements. |
@@ -107,33 +107,36 @@ The following sections illustrate the metrics on the Monitoring page.
 | TiFlash IO MBps | instances-write, instances-read | The total bytes of read and write in each TiFlash instance. |
 | TiFlash Storage Usage | instances | The storage size per TiFlash instance. |
 
-## Monitoring metrics for Serverless Tier Clusters
+## Monitoring metrics for Serverless Tier clusters
 
-The following sections illustrate the metrics on the Monitoring page.
+The Monitoring page provides two tabs for metrics of Serverless Tier clusters:
+
+- Cluster Status: displays the cluster-level main metrics. 
+- Database Status: displays the database-level main metrics. 
 
 ### Cluster Status
 
-Cluster-level main metrics are displayed in this section.
+The following table illustrates the cluster-level main metrics under the **Cluster Status** tab.
 
 | Metric name  | Labels | Description                                   |
 | :------------| :------| :-------------------------------------------- |
 | Query Per Second | All, {SQL type} | The number of SQL statements executed per second, which are collected by SQL types, such as `SELECT`, `INSERT`, and `UPDATE`. |
-| Average Query Duration | All, {SQL Types} | The duration from receiving a request from the client to Serverless Tier till Serverless Tier executing the request and returning the result to the client.|
-| Failed Query | All | The SQL statement execution errors per second.|
+| Average Query Duration | All, {SQL Types} | The duration from receiving a request from the client to the Serverless Tier cluster until the cluster executes the request and returns the result to the client. |
+| Failed Query | All | The number of SQL statement execution errors per second. |
 | Transaction Per Second | All | The number of transactions executed per second. |
-| Average Transaction Duration | All | The execution duration of a transaction. |
-| Total Connection | All | The number of connections to Serverless. |
-| Used Storage Size | Row-Storage, Column-Storage | The storage size on Row or Column store. |
+| Average Transaction Duration | All | The average execution duration of transactions. |
+| Total Connection | All | The number of connections to the Serverless Tier cluster. |
+| Used Storage Size | Row-Storage, Column-Storage | The size of the row store and the size of the column store. |
 
 ### Database Status
 
-Database-level main metrics are displayed in this section.
+The following table illustrates the database-level main metrics under the **Database Status** tab.
 
 | Metric name  | Labels | Description                                   |
 | :------------| :------| :-------------------------------------------- |
 | QPS Per DB | All, {database_name} | The number of SQL statements executed per second on every Database, which are collected by SQL types, such as `SELECT`, `INSERT`, and `UPDATE`. |
-| Average Query Duration Per DB | All, {database_name} | The duration from receiving a request from the client to every Database till TiDB executing the request and returning the result to the client.|
-| Failed Query Per DB | All, {database_name} | The statistics of error types according to the SQL statement execution errors per second on every Database.|
+| Average Query Duration Per DB | All, {database_name} | The duration from receiving a request from the client to a database until the database executes the request and returns the result to the client.|
+| Failed Query Per DB | All, {database_name} | The statistics of error types according to the SQL statement execution errors per second on every database.|
 
 ## FAQ
 
