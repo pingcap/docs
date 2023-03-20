@@ -33,7 +33,7 @@ You cannot use the New Relic integration in [Serverless Tier clusters](/tidb-clo
 4. Enter your API key of New Relic and choose the site of New Relic.
 5. Click **Test Integration**.
 
-    - If the test successes, the **Confirm** button is displayed.
+    - If the test succeeds, the **Confirm** button is displayed.
     - If the test fails, an error message is displayed. Follow the message for troubleshooting and retry the integration.
 
 6. Click **Confirm** to complete the integration.
