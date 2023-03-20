@@ -46,19 +46,35 @@ TiFlash disaggregated storage and compute architecture is suitable for cost-effe
 
 ## Prerequisites
 
-Prepare an Amazon S3 bucket for storing TiFlash data. You can also use an existing bucket, but you need to create a dedicated storage directory for each TiDB cluster. For more information about S3 buckets, see [AWS documentation](https://docs.aws.amazon.com/en_us/AmazonS3/latest/userguide/creating-buckets-s3.html).
+1. Prepare an Amazon S3 bucket for storing TiFlash data.
 
-You can also use other S3-compatible object storage, such as [MinIO](https://min.io/).
+    You can also use an existing bucket, but you need to create a dedicated storage directory for each TiDB cluster. For more information about S3 buckets, see [AWS documentation](https://docs.aws.amazon.com/en_us/AmazonS3/latest/userguide/creating-buckets-s3.html).
 
-The S3 APIs used by TiFlash are as follows:
+    You can also use other S3-compatible object storage, such as [MinIO](https://min.io/).
 
-- PutObject
-- GetObject
-- CopyObject
-- DeleteObject
-- ListObjectV2
-- GetObjectTagging
-- PutBucketLifecycle
+    The S3 APIs used by TiFlash are as follows:
+
+    - PutObject
+    - GetObject
+    - CopyObject
+    - DeleteObject
+    - ListObjectV2
+    - GetObjectTagging
+    - PutBucketLifecycle
+
+2. Add a [lifecycle](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lifecycle-mgmt.html) to the prepared S3 bucket for cleaning up deleted data:
+
+    ```shell
+    "Expiration": {
+        "Days": 1
+    },
+    "Tags": [
+        {
+            "Value": "tiflash_deleted", 
+            "Key": "true"
+        }
+    ]
+    ```
 
 ## Usage
 
