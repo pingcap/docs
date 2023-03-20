@@ -89,7 +89,7 @@ def update_pr_author_and_release_notes(excel_path):
     sheet = workbook['pr_for_release_note']
 
     # Get the sheet header
-    header = next(sheet.iter_rows(min_row=1, max_row=1, values_only=True)) #限定只读取第一行的数据
+    header = next(sheet.iter_rows(min_row=1, max_row=1, values_only=True)) # Read the first line in the sheet
     #print (header)
     # Get the column info
     pr_author_index = header.index('pr_author')
