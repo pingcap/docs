@@ -12,7 +12,7 @@ This document introduces TiDB's implementation of partitioning.
 
 This section introduces the types of partitioning in TiDB. Currently, TiDB supports [Range partitioning](#range-partitioning), [Range COLUMNS partitioning](#range-columns-partitioning), [List partitioning](#list-partitioning), [List COLUMNS partitioning](#list-columns-partitioning), [Hash partitioning](#hash-partitioning), and [Key partitioning](#key-partitioning).
 
-- Range partitioning, Range COLUMNS partitioning, List partitioning, and List COLUMNS partitioning are used to resolve the performance issues caused by a large number of deletions in the application, and support fast drop partition operations.
+- Range partitioning, Range COLUMNS partitioning, List partitioning, and List COLUMNS partitioning are used to resolve the performance issues caused by a large number of deletions in the application, and support dropping partitions quickly.
 - Hash partitioning and Key partitioning are used to distribute data in scenarios with a large number of writes. Compared with Hash partitioning, Key partitioning supports distributing data of multiple columns and partitioning by non-integer columns.
 
 ### Range partitioning
@@ -581,6 +581,7 @@ CREATE TABLE employees (
     job_code INT,
     store_id INT
 )
+
 PARTITION BY KEY(store_id)
 PARTITIONS 4;
 ```
@@ -599,6 +600,7 @@ CREATE TABLE employees (
     job_code INT,
     store_id INT
 )
+
 PARTITION BY KEY(fname)
 PARTITIONS 4;
 ```
@@ -615,6 +617,7 @@ CREATE TABLE employees (
     job_code INT,
     store_id INT
 )
+
 PARTITION BY KEY(fname, store_id)
 PARTITIONS 4;
 ```
@@ -631,6 +634,7 @@ CREATE TABLE employees (
     job_code INT,
     store_id INT
 )
+
 PARTITION BY KEY()
 PARTITIONS 4;
 ```
@@ -805,7 +809,7 @@ You can see that the inserted record `(NULL, 'mothra')` falls into the same part
 
 #### Handling of NULL with Key partitioning
 
-For Key partitioning, the way of handling `NULL` value is consistent with that of Hash partitioning. If the value of a partitioning field is `NULL`, it is considered as `0`.
+For Key partitioning, the way of handling `NULL` value is consistent with that of Hash partitioning. If the value of a partitioning field is `NULL`, it is treated as `0`.
 
 ## Partition management
 
