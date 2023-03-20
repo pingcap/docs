@@ -9,7 +9,7 @@ import os
 release_note_excel = r'/Users/userid/Downloads/patch_6.5.1_release_note_test copy.xlsx'
 ext_path = r'/Users/userid/Documents/GitHub/githubid/docs-cn/releases'  # The path of the existing release notes
 main_path = r'/Users/githubid/Documents/GitHub/githubid/docs-cn/releases/release-6.5.1.md'  # The path of the release notes in preparation
-with open("/Users/githubid/Documents/gh_token.txt", "r") as f: # Read the GitHub personal access token from the token.txt file
+with open("/Users/githubid/Documents/gh_token.txt", "r") as f: # Read the GitHub personal access token from the gh_token.txt file
     access_token = f.read().strip()
 
 # Get the issue info of the existing release notes
