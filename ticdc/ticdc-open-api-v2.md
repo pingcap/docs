@@ -7,11 +7,11 @@ summary: Learn how to use the OpenAPI v2 interface to manage the cluster status 
 
 <!-- markdownlint-disable MD024 -->
 
-TiCDC provides the OpenAPI feature for querying and operating the TiCDC cluster, which is similar to the feature of [`cdc cli` tool](/ticdc/ticdc-manage-changefeed.md).
+TiCDC provides the OpenAPI feature for querying and operating the TiCDC cluster. The OpenAPI feature is a subset of the [`cdc cli` tool](/ticdc/ticdc-manage-changefeed.md).
 
 > **Note:**
 >
-> TiCDC OpenAPI v1 will be removed in future.
+> TiCDC OpenAPI v1 will be removed in the future. It is recommended to use TiCDC OpenAPI v2.
 
 You can use the APIs to perform the following maintenance operations on the TiCDC cluster:
 
@@ -30,9 +30,9 @@ You can use the APIs to perform the following maintenance operations on the TiCD
 - [Evict an owner node](#evict-an-owner-node)
 - [Dynamically adjust the log level of the TiCDC server](#dynamically-adjust-the-log-level-of-the-ticdc-server)
 
-The request body and returned value of all APIs are in JSON format. A successful request returns a `200 OK` message. The following sections describe the specific usage of the APIs.
+The request body and returned values of all APIs are in JSON format. A successful request returns a `200 OK` message. The following sections describe the specific usage of the APIs.
 
-In the following examples, the listening IP address of the TiCDC server is `127.0.0.1` and the port is `8300`. You can bind a specified IP address and port bound to TiCDC via `--addr=ip:port` when starting the TiCDC server.
+In the following examples, the listening IP address of the TiCDC server is `127.0.0.1` and the port is `8300`. You can specify the IP address and port bound to TiCDC via `--addr=ip:port` when starting the TiCDC server.
 
 ## API error message template
 
@@ -49,7 +49,7 @@ In the above JSON output, `error_msg` describes the error message and `error_cod
 
 ## Return format of the API List interface
 
-If an API request returns a list of resources (for example, a request used to return all `Captures`), the TiCDC return format is as follows:
+If an API request returns a list of resources (for example, a list of all `Captures`), the TiCDC return format is as follows:
 
 ```json
 {
@@ -72,7 +72,7 @@ If an API request returns a list of resources (for example, a request used to re
 In the above example:
 
 - `total`: indicates the total number of resources.
-- `items`: an array that contains all the resources returned by the this request. All elements of the array are of the same resource. If the API supports paging, the number of elements in the array might be less than the value of `total`.
+- `items`: an array that contains all the resources returned by this request. All elements of the array are of the same resource.
 
 ## Get the status information of a TiCDC node
 
@@ -101,14 +101,14 @@ curl -X GET http://127.0.0.1:8300/api/v2/status
 }
 ```
 
-The fields of the above output are described as follows:
+The parameters of the above output are described as follows:
 
 - `version`: the current version number of TiCDC.
 - `git_hash`: the Git hash value.
 - `id`: the capture ID of the node.
-- `pid`: the capture process PID of the node.
+- `pid`: the capture process ID (PID) of the node.
 - `is_owner`: indicates whether the node is an owner.
-- `liveness`: whether this node is live. `0` means normal. `1` means that the node is in `graceful shutdown` state.
+- `liveness`: whether this node is live. `0` means normal. `1` means that the node is in the `graceful shutdown` state.
 
 ## Check the health status of a TiCDC cluster
 
@@ -257,7 +257,7 @@ The parameters are described as follows:
 | `replica_config` | Configuration parameters for the replication task. (Optional) |
 | **`sink_uri`** | `STRING` type. The downstream address of the replication task. (**Required**) |
 | `start_ts` | `UINT64` type. Specifies the start TSO of the changefeed. The TiCDC cluster will start pulling data from this TSO. The default value is the current time. (Optional) |
-| `target_ts` | `UINT64` type. Specifies the target TSO of the changefeed. The TiCDC cluster stops pulling data when reaching this TSO. The default is empty, meaning TiCDC does not stop automatically. (Optional) |
+| `target_ts` | `UINT64` type. Specifies the target TSO of the changefeed. The TiCDC cluster stops pulling data when reaching this TSO. The default value is empty, meaning TiCDC does not stop automatically. (Optional) |
 
 The meaning and format of `changefeed_id`, `start_ts`, `target_ts`, and `sink_uri` are the same as those described in the [Use `cdc cli` to create a replication task](/ticdc/ticdc-manage-changefeed.md#create-a-replication-task) document. For the detailed description of these parameters, see that document. Note that when you specify the certificate path in `sink_uri`, make sure you have uploaded the corresponding certificate to the corresponding TiCDC server.
 
@@ -305,13 +305,13 @@ The `filter.event_filters` parameters are described as follows. For more informa
 
 | Parameter name | Description |
 |:-----------------|:---------------------------------------|
-| `ignore_delete_value_expr`     | `STRING ARRAY` type. For example, `"name = 'john'"` means to filter out DELETE DML containing the `name = 'john'` condition. (Optional)            |
+| `ignore_delete_value_expr`     | `STRING ARRAY` type. For example, `"name = 'john'"` means to filter out DELETE DML statements containing the `name = 'john'` condition. (Optional)            |
 | `ignore_event`                 | `STRING ARRAY` type. For example, `["insert"]` indicates that the INSERT events are filtered out. (Optional)     |
-| `ignore_insert_value_expr`     | `STRING ARRAY` type. For example, `"id >= 100"` means to filter out INSERT DMLs that match the `id >= 100` condition. (Optional)                |
-| `ignore_sql`                   | `STRING ARRAY` type. For example, `["^drop", "add column"]` means to filter out DDLs that start with `DROP` or contain `ADD COLUMN`. (Optional)  |
-| `ignore_update_new_value_expr` | `STRING ARRAY` type. For example, `"gender = 'male'"` means to filter out the UPDATE DML with the new value `gender = 'male'`. (Optional)          |
-| `ignore_update_old_value_expr` | `STRING ARRAY` type. For example, `"age < 18"` means to filter out the UPDATE DML with the old value `age < 18`. (Optional)                  |
-| `matcher`                      | `STRING ARRAY` type. It works as a allowlist. For example, `["test.worker"]` means that the filter rule applies only to the `worker` table in the `test` database. (Optional)          |
+| `ignore_insert_value_expr`     | `STRING ARRAY` type. For example, `"id >= 100"` means to filter out INSERT DML statements that match the `id >= 100` condition. (Optional)                |
+| `ignore_sql`                   | `STRING ARRAY` type. For example, `["^drop", "add column"]` means to filter out DDL statements that start with `DROP` or contain `ADD COLUMN`. (Optional)  |
+| `ignore_update_new_value_expr` | `STRING ARRAY` type. For example, `"gender = 'male'"` means to filter out the UPDATE DML statements with the new value `gender = 'male'`. (Optional)          |
+| `ignore_update_old_value_expr` | `STRING ARRAY` type. For example, `"age < 18"` means to filter out the UPDATE DML statements with the old value `age < 18`. (Optional)                  |
+| `matcher`                      | `STRING ARRAY` type. It works as an allowlist. For example, `["test.worker"]` means that the filter rule applies only to the `worker` table in the `test` database. (Optional)          |
 
 The `mounter` parameter is described as follows:
 
@@ -328,17 +328,17 @@ The `sink` parameters are described as follows:
 | `date_separator`        | `STRING` type. Indicates the date separator type of the file directory. Value options are `none`, `year`, `month`, and `day`. `none` is the default value and means that the date is not separated. (Optional)      |
 | `dispatchers`           | An configuration array for event dispatching. (Optional)                                                     |
 | `encoder_concurrency`   | `INT` type. The number of encoder threads in the MQ sink. The deault value is `16`. (Optional)               |
-| `protocol`              | `STRING` type. For MQ sinks, you can specify the protocol format of the message. The following protocols are currently supported: `canal-json`, `open-protocol`, `canal`, `avro` and `maxwell`. |
+| `protocol`              | `STRING` type. For MQ sinks, you can specify the protocol format of the message. The following protocols are currently supported: `canal-json`, `open-protocol`, `canal`, `avro`, and `maxwell`. |
 | `schema_registry`       | `STRING` type. The schema registry address. (Optional)                                                  |
 | `terminator`            | `STRING` type. The terminator is used to separate two data change events. The default value is null, which means `"\r\n"` is used as the terminator. (Optional)                |
-| `transaction_atomicity` | `STRING` type. The atomicity of the transaction. (Optional)  |
+| `transaction_atomicity` | `STRING` type. The atomicity level of the transaction. (Optional)  |
 
 `sink.column_selectors` is an array. The parameters are described as follows:
 
 | Parameter name | Description |
 |:-----------------|:---------------------------------------|
 | `columns` | `STRING ARRAY` type. The column array.                 |
-| `matcher` | `STRING ARRAY` type. The matcher configuration. It has the same match syntax as the filter rule syntax.  |
+| `matcher` | `STRING ARRAY` type. The matcher configuration. It has the same matching syntax as the filter rule does.  |
 
 The `sink.csv` parameters are described as follows:
 
@@ -346,7 +346,7 @@ The `sink.csv` parameters are described as follows:
 |:-----------------|:---------------------------------------|
 | `delimiter`         | `STRING` type. The character used to separate fields in the CSV file. The value must be an ASCII character and defaults to `,`.     |
 | `include_commit_ts` | `BOOLEAN` type. Whether to include commit-ts in CSV rows. The default value is `false`. |
-| `null`              | `STRING` type. The character displayed when a CSV column is null. The default value is `\N`. |
+| `null`              | `STRING` type. The character that is displayed when a CSV column is null. The default value is `\N`. |
 | `quote`             | `STRING` type. The quotation character used to surround fields in the CSV file. If the value is empty, no quotation is used. The default value is `"`. |
 
 `sink.dispatchers`: for the sink of MQ type, you can use this parameter to configure the event dispatcher. The following dispatchers are supported: `default`, `ts`, `rowid`, and `table`. The dispatcher rules are as follows:
@@ -360,7 +360,7 @@ The `sink.csv` parameters are described as follows:
 
 | Parameter name | Description |
 |:-----------------|:---------------------------------------|
-| `matcher`   | `STRING ARRAY` type. It has the same match syntax as the filter rule syntax. |
+| `matcher`   | `STRING ARRAY` type. It has the same matching syntax as the filter rule does. |
 | `partition` | `STRING` type. The target partition for dispatching events.    |
 | `topic`     | `STRING` type. The target topic for dispatching events.        |
 
@@ -509,7 +509,7 @@ The parameters are described as follows:
 |:-----------------|:---------------------------------------|
 | `admin_job_type`  | `INTEGER` type. The admin job type.                 |
 | `checkpoint_time` | `STRING` type. The formatted time of the current checkpoint for the replication task.                  |
-| `checkpoint_ts`   | `STRING` type. TSO of the current checkpoint for the replication task.    |
+| `checkpoint_ts`   | `STRING` type. The TSO of the current checkpoint for the replication task.    |
 | `config`          | The replication task configuration. The structure and meaning are the same as that of the `replica_config` configuration in creating the replication task.       |
 | `create_time`     | `STRING` type. The time when the replication task is created.                          |
 | `creator_version` | `STRING` type. The TiCDC version when the replication task is created.         |
@@ -518,7 +518,7 @@ The parameters are described as follows:
 | `resolved_ts`     | `UINT64` type. The replication task resolved ts.    |
 | `sink_uri`        | `STRING` type. The replication task sink URI.                                     |
 | `start_ts`        | `UINT64` type. The replication task start ts.                                      |
-| `state`           | `STRING` type. The replication task status. It can be `normal`, `stopped`, `error`, `failed`, and `finished`. |
+| `state`           | `STRING` type. The replication task status. It can be `normal`, `stopped`, `error`, `failed`, or `finished`. |
 | `target_ts`       | `UINT64` type. The replication task target ts.                                    |
 | `task_status`     | The detailed status of dispatching the replication task. |
 
@@ -533,13 +533,13 @@ The `error` parameters are described as follows:
 
 | Parameter name | Description |
 |:-----------------|:---------------------------------------|
-| `addr` | `STRING` type. The capture address |
-| `code` | `STRING` type. The error code          |
-| `message` | `STRING` type. The details of the error      |
+| `addr` | `STRING` type. The capture address. |
+| `code` | `STRING` type. The error code.          |
+| `message` | `STRING` type. The details of the error.      |
 
 ## Remove a replication task
 
-This API is an idempotent interface (that is, it can be applied multiple times without changing the result beyond the initial application). If the request is successful, `200 OK` is returned. The returned result only means that the server agrees to run the command but does not guarantee that the command will be run successfully.
+This API is an idempotent interface (that is, it can be applied multiple times without changing the result beyond the initial application) for removing a replication task. If the request is successful, `200 OK` is returned. The returned result only means that the server agrees to run the command but does not guarantee that the command will be run successfully.
 
 ### Request URI
 
@@ -565,7 +565,7 @@ If the request is successful, `200 OK` is returned. If the request fails, an err
 
 ## Update the replication configuration
 
-This API is an asynchronous interface. If the request is successful, `200 OK` is returned. The returned result only means that the server agrees to run the command but does not guarantee that the command will be run successfully.
+This API is used for updating a replication task. If the request is successful, `200 OK` is returned. The returned result only means that the server agrees to run the command but does not guarantee that the command will be run successfully.
 
 To modify the changefeed configuration, follow the steps of `pause the replication task -> modify the configuration -> resume the replication task`.
 
@@ -706,7 +706,7 @@ The following request updates the `target_ts` of the replication task with the I
  curl -X PUT -H "'Content-type':'application/json'" http://127.0.0.1:8300/api/v2/changefeeds/test1 -d '{"target_ts":32}'
 ```
 
-If the request is successful, `200 OK` is returned. If the request fails, an error message and error code are returned. The meanings of the above parameters are the same as those in the [Create a replication task](#create-a-replication-task) section. See that section for details.
+If the request is successful, `200 OK` is returned. If the request fails, an error message and error code are returned. The meanings of the JSON response body are the same as those in the [Create a replication task](#create-a-replication-task) section. See that section for details.
 
 ## Query the replication task list
 
@@ -758,7 +758,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/changefeeds?state=normal
 }
 ```
 
-The fields in the returned result above are described as follows:
+The parameters in the returned result above are described as follows:
 
 - `id`: the ID of the replication task.
 - `state`: the current [state](/ticdc/ticdc-changefeed-overview.md#changefeed-state-transfer) of the replication task.
@@ -790,7 +790,7 @@ The following request queries the detailed information of the replication task w
 curl -X GET http://127.0.0.1:8300/api/v2/changefeeds/test1
 ```
 
-The meanings of the above parameters are the same as those in the [Create a replication task](#create-a-replication-task) section. See that section for details.
+The meanings of the JSON response body are the same as those in the [Create a replication task](#create-a-replication-task) section. See that section for details.
 
 ## Pause a replication task
 
@@ -892,8 +892,8 @@ curl -X GET http://127.0.0.1:8300/api/v2/processors
 
 The parameters are described as follows:
 
-- `changefeed_id`: the changefeed ID
-- `capture_id`: the capture ID
+- `changefeed_id`: the changefeed ID.
+- `capture_id`: the capture ID.
 
 ## Query a specific replication subtask
 
@@ -959,7 +959,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/captures
 }
 ```
 
-The parameter is described as follows:
+The parameters are described as follows:
 
 - `id`: the capture ID.
 - `is_owner`: whether the capture is the owner.

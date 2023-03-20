@@ -9,7 +9,7 @@ summary: Learn how to use the OpenAPI interface to manage the cluster status and
 
 > **Note**
 >
-> TiCDC OpenAPI v1 is deprecated and will be deleted in future. It is recommended to use [TiCDC OpenAPI v2](/ticdc/ticdc-open-api-v2.md).
+> TiCDC OpenAPI v1 is deprecated and will be deleted in the future. It is recommended to use [TiCDC OpenAPI v2](/ticdc/ticdc-open-api-v2.md).
 
 TiCDC provides the OpenAPI feature for querying and operating the TiCDC cluster, which is similar to the feature of [`cdc cli` tool](/ticdc/ticdc-manage-changefeed.md).
 
