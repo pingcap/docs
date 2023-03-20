@@ -1,5 +1,5 @@
 # This script can replace the bot author info in the release note table with the actual PR authors and add the history duplicated release notes based on issue links and author info.
-# Before running this script, you need to get a GitHub personal access token and save it in a text file.
+# Before running this script, you need to get a GitHub personal access token (https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) and save it in a text file.
 
 from github import Github
 import re
