@@ -5,7 +5,7 @@ summary: Learn how to use TiDB Cloud Data Service to access your data with HTTPS
 
 # Get Started with Data Service
 
-Data Service (beta) enables you to access TiDB Cloud data via an HTTPS request using a custom API endpoint and allows you to seamlessly integrate with any application or service that is compatible with HTTPS.
+Data Service (beta) enables you to access TiDB Cloud data via an HTTPS request using a custom API endpoint and allows you to seamlessly integrate with any application or service that is compatible with HTTPS. TiDB Cloud provides a system Data App called **Chat2Query**. You can use this to call the Chat2Data endpoint to let AI generate and execute SQL statements by providing instructions. For more details, see [Get started with Chat2Query API](/tidb-cloud/use-chat2query-api.md).
 
 This document introduces how to quickly get started with TiDB Cloud Data Service (beta) by creating a Data App, developing, testing, deploying, and calling an endpoint.
 
@@ -19,7 +19,7 @@ A Data App is a group of endpoints that you can use to access data for a specifi
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
 
-2. In the left navigation pane, click <svg width="16" height="16" viewBox="0 -2 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke-width="1.5"><path d="M14 20C14 21.1046 13.1046 22 12 22C10.8954 22 10 21.1046 10 20M14 20C14 18.8954 13.1046 18 12 18M14 20H21M10 20C10 18.8954 10.8954 18 12 18M10 20H3M12 18V14M21 5C21 6.65685 16.9706 8 12 8C7.02944 8 3 6.65685 3 5M21 5C21 3.34315 16.9706 2 12 2C7.02944 2 3 3.34315 3 5M21 5V11C21 12.66 17 14 12 14M3 5V11C3 12.66 7 14 12 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg> **Data Service**.
+2. In the left navigation pane, click <MDSvgIcon name="icon-left-data-service" /> **Data Service**.
 
 3. On the **Get started by creating your first data application** page, enter a name for the Data App and click **Create Data App**. The [**Data Service**](https://tidbcloud.com/console/dataservice) details page is displayed.
 
@@ -205,6 +205,7 @@ For more information about the response, see [Response of an endpoint](/tidb-clo
 
 ## Learn more
 
-- [Overview](/tidb-cloud/data-service-overview.md)
+- [Data Service Overview](/tidb-cloud/data-service-overview.md)
+- [Get Started with Chat2Query API](/tidb-cloud/use-chat2query-api.md)
 - [Manage a Data App](/tidb-cloud/data-service-manage-data-app.md)
 - [Manage an Endpoint](/tidb-cloud/data-service-manage-endpoint.md)

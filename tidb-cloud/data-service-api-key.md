@@ -17,6 +17,10 @@ The TiDB Cloud Data API uses [HTTP Digest Authentication](https://en.wikipedia.o
 - Each API key belongs to one Data App only and is used to access the data in the TiDB Cloud clusters.
 - You must provide the correct API key in every request. Otherwise, TiDB Cloud responds with a `401` error.
 
+## Rate limiting
+
+The TiDB Cloud Data API has a rate limit of 100 requests per minute per API key. If you exceed the rate limit, the API returns a `429` error. For more quota, you can [submit a request](https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519) to contact our support team.
+
 ## Manage API keys
 
 The following sections describe how to create, edit, and delete an API key for a Data App.

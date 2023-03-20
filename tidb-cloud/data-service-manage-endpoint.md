@@ -22,11 +22,9 @@ To create an endpoint, perform the following steps:
 1. Navigate to the [**Data Service**](https://tidbcloud.com/console/dataservice) page of your project.
 2. In the left pane, click the name of your target Data App and click **...** > **Create Endpoint**. You can update the default name if necessary.
 
-    <!--TODO: Add the icon to MDSvgIcon.tsx-->
-
     > **Tip:**
     >
-    > Alternatively, you can also locate the Data App and click <svg width="16" height="16" viewBox="0 -2 24 24" fill="none" stroke-width="3" xmlns="http://www.w3.org/2000/svg"><path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="inherit" stroke-linecap="round" stroke-linejoin="round"></path></svg> **Create Endpoint** at the top of the left pane.
+    > Alternatively, you can also locate the Data App and click **+** **Create Endpoint** at the top of the left pane.
 
 3. The newly created endpoint is added to the top of the endpoint list.
 
@@ -229,61 +227,7 @@ TiDB Cloud generates code examples to help you call an endpoint. To get the code
 
 ### Response
 
-After calling an endpoint, you can see the response in JSON format. The following is an example:
-
-```json
-{
-    "code": 200,
-    "message": "ok",
-    "data": [
-        {
-            "err_code": 0,
-            "err_message": "",
-            "columns": [
-                {
-                    "col": "id",
-                    "data_type": "INT",
-                    "nullable": false
-                },
-                ...
-            ],
-            "rows": [
-                [
-                    "1",
-                    "a"
-                ],
-                ...
-            ],
-            "start_ms": 1678374098543,
-            "end_ms": 1678374098675,
-            "latency": "132ms",
-            "row_count": 10,
-            "row_affect": 0,
-            "limit": 2000,
-            "query": "Query OK!"
-        }
-    ]
-}
-```
-
-The following table describes the fields in the response:
-
-| Field | Description |
-| :--- | :--- |
-| `code` | The status code of the request. `200` indicates that the request is successful. |
-| `message` | The status message of the request. The value `ok` indicates that the request is successful. |
-| `data` | An array containing the data returned by the request. |
-| `err_code` | The error code of the request. The value `0` indicates that there is no error. |
-| `err_message` | The error message of the request. |
-| `columns` | An array containing the columns returned by the SQL statements. Each column contains the following fields: `col`, `data_type`, and `nullable`. |
-| `rows` | An array containing the rows returned by the SQL statements. |
-| `start_ms` | The Unix timestamp when the request starts. |
-| `end_ms` | The Unix timestamp when the request ends. |
-| `latency` | The latency of the request. |
-| `row_count` | The number of rows returned by the SQL statements. |
-| `row_affect` | The number of rows affected by the SQL statements. |
-| `limit` | The maximum number of rows that returned by the SQL statements, which is specified in the **Max Rows** field of the endpoint. |
-| `query` | The query message of the SQL statements. `Query OK!` indicates that the SQL statements are executed successfully. |
+After calling an endpoint, you can see the response in JSON format. For more details, refer to [Response and Error Codes of Data Service](/markdown-pages/en/tidbcloud/master/tidb-cloud/data-service-response-and-error-code.md).
 
 ## Undeploy an endpoint
 

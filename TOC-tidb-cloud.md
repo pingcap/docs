@@ -127,6 +127,7 @@
   - [Get Started](/tidb-cloud/data-service-get-started.md)
   - [Manage Data App](/tidb-cloud/data-service-manage-data-app.md)
   - [Manage Endpoint](/tidb-cloud/data-service-manage-endpoint.md)
+  - [Use Chat2Query API](/tidb-cloud/use-chat2query-api.md)
   - [API Key](/tidb-cloud/data-service-api-key.md)
 - Stream Data
   - [Changefeed Overview](/tidb-cloud/changefeed-overview.md)
