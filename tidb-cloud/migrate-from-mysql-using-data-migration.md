@@ -132,9 +132,9 @@ Before creating a migration job, set up the network connection according to your
     <details>
     <summary> Set up GCP VPC Network Peering </summary>
 
-    If your Google Cloud SQL for MySQL service is in an GCP VPC, take the following steps:
+    If your MySQL service is in an GCP VPC, take the following steps:
 
-    1. If your MySQL service is Google Cloud SQL, you must expose a MySQL endpoint in the associated VPC of the Google Cloud SQL instance. You may need to use the [Cloud SQL Auth proxy](https://cloud.google.com/sql/docs/mysql/sql-proxy) which is developed by Google.
+    1. If it is a self-hosted mysql, please skip this step and go to the second step.If your MySQL service is Google Cloud SQL, you must expose a MySQL endpoint in the associated VPC of the Google Cloud SQL instance. You may need to use the [Cloud SQL Auth proxy](https://cloud.google.com/sql/docs/mysql/sql-proxy) which is developed by Google.
 
     2. [Set up a VPC peering connection](https://docs.pingcap.com/tidbcloud/set-up-vpc-peering-connections) between the VPC of the MySQL service and your TiDB cluster.
 
