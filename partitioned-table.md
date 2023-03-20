@@ -563,7 +563,7 @@ MOD(YEAR('2005-09-01'),4)
 
 ### Key partitioning
 
-Starting from v7.0.0, TiDB supports Key partitioning. For TiDB versions earlier than v7.0.0, if you try creating a Key partitioned table, TiDB will create it as a non-partitioned table and return a warning.
+Starting from v7.0.0, TiDB supports Key partitioning. For TiDB versions earlier than v7.0.0, if you try creating a Key partitioned table, TiDB creates it as a non-partitioned table and returns a warning.
 
 Both Key partitioning and Hash partitioning can evenly distribute data into a certain number of partitions. The difference is that Hash partitioning only supports distributing data based on a specified integer expression or an integer column, while Key partitioning supports distributing data based on a column list, and partitioning columns of Key partitioning are not limited to the integer type. The Hash algorithm of TiDB for Key partitioning is different from that of MySQL, so the table data distribution is also different.
 
@@ -649,7 +649,7 @@ Since v6.4.0, TiDB supports parsing the MySQL `PARTITION BY LINEAR HASH` syntax 
 
 Starting from v7.0.0, TiDB supports parsing the MySQL `PARTITION BY LINEAR HASH` syntax for Key partitioning. However, TiDB ignores the `LINEAR` keyword and uses a non-linear hash algorithm instead.
 
-Before v7.0.0, if you try creating a Key partitioned table, TiDB will create it as a non-partitioned table and return a warning.
+Before v7.0.0, if you try creating a Key partitioned table, TiDB creates it as a non-partitioned table and returns a warning.
 
 ### How TiDB partitioning handles NULL
 
