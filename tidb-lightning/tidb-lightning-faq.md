@@ -228,8 +228,7 @@ port = 4000
 user = "root"
 
 [tikv-importer]
-backend = "local"
-sorted-kv-dir = "/tmp/sorted-kv"
+backend = "tidb"
 
 [mydumper]
 data-source-dir = "/tmp/bck1"
