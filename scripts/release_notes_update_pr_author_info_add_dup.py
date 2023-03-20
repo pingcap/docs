@@ -99,9 +99,9 @@ def update_pr_author_and_release_notes(excel_path):
     pr_last_col_index = sheet.max_column
     sheet.insert_cols(pr_last_col_index + 1) # Insert a new column for the dup release notes
     sheet.cell(row=1, column=pr_last_col_index + 1, value='published_release_notes') # Set a column name
-    # 遍历每一行
+    # Go through each row
     for row_index, row in enumerate(sheet.iter_rows(min_row=2, values_only=True), start=2):
-        # 如果 pr_author 列的值为 ti-chi-bot 或 ti-srebot
+        # If pr_author is ti-chi-bot or ti-srebot
         current_pr_author = row[pr_author_index]
         current_formated_rn= row[pr_formated_rn_index]
         if current_pr_author in ['ti-chi-bot', 'ti-srebot']:
