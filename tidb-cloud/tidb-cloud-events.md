@@ -32,10 +32,10 @@ TiDB Cloud logs the following types of cluster events:
 
 | Event Type| Description |  Available since |
 |:--- |:--- |:--- |
-| CreateCluster |  Events recoded for cluster creation action.  |  2023-03-22   |
-| PauseCluster |   Events recoded for cluster pause action. |  2023-03-22   |
-| ResumeCluster |   Events recoded for cluster resume action. |  2023-03-22   |
-| ModifyClusterSize |   Events recoded for modifying cluster size action. |  2023-03-22   |
+| CreateCluster |  Events recoded for cluster creation actions.  |  2023-03-22   |
+| PauseCluster |   Events recoded for cluster pause actions. |  2023-03-22   |
+| ResumeCluster |   Events recoded for cluster resume actions. |  2023-03-22   |
+| ModifyClusterSize |   Events recoded for modifying cluster size actions. |  2023-03-22   |
 
 For each event, the following information is logged:
 
