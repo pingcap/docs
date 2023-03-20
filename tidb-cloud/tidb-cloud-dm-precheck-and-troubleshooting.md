@@ -22,6 +22,7 @@ The solutions vary depending on your upstream database.
 
 - Amazon Aurora MySQL: see [How do I turn on binary logging for my Amazon Aurora MySQL-Compatible cluster](https://aws.amazon.com/premiumsupport/knowledge-center/enable-binary-logging-aurora/?nc1=h_ls). Make sure you are using Amazon Aurora MySQL writer instances to support both full and incremental data migration.
 - Amazon RDS: see [Configuring MySQL binary logging](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.MySQL.BinaryFormat.html).
+- Google Cloud SQL for MySQL: Google enables binary logging through point-in-time recovery for MySQL master databases. See [Enable point-in-time recovery](https://cloud.google.com/sql/docs/mysql/backup-recovery/pitr#enablingpitr)
 - MySQL: see [Setting the Replication Source Configuration](https://dev.mysql.com/doc/refman/5.7/en/replication-howto-masterbaseconfig.html).
 
 ### Error message: Check whether mysql binlog_format is ROW
