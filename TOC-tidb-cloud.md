@@ -237,7 +237,8 @@
     - [Storage](/tidb-storage.md)
     - [Computing](/tidb-computing.md)
     - [Scheduling](/tidb-scheduling.md)
-  - [TiDB Cloud Cluster Limits and Quotas](/tidb-cloud/limitations-and-quotas.md)
+  - [Dedicated Tier Limitations and Quotas](/tidb-cloud/limitations-and-quotas.md)
+  - [Serverless Tier Limitations](/tidb-cloud/serverless-tier-limitations.md)
   - [TiDB Limitations](/tidb-limitations.md)
   - SQL
     - [Explore SQL with TiDB](/basic-sql-operations.md)
@@ -510,7 +511,6 @@
   - [Dumpling](/dumpling-overview.md)
   - [Table Filter](/table-filter.md)
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
-  - [Serverless Tier Limitations](/tidb-cloud/serverless-tier-limitations.md)
 - FAQs
   - [TiDB Cloud FAQs](/tidb-cloud/tidb-cloud-faq.md)
   - [Serverless Tier FAQs](/tidb-cloud/serverless-tier-faqs.md)
