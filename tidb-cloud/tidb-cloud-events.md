@@ -1,17 +1,17 @@
 ---
 title: TiDB Cloud Cluster Events
-summary: Learn how to review the events for TiDB Cloud clusters using the Event page. 
+summary: Learn how to view the events for TiDB Cloud clusters using the Events page. 
 ---
 
-# TiDB Cloud Events
+# TiDB Cloud Cluster Events
 
-TiDB Cloud logs the historical events at the cluster level. An *event* indicates a change in the TiDB Cloud cluster environment. You can review the logged events on the **Events** page, including the event type, status, message, trigger time, and trigger user.
+TiDB Cloud logs the historical events at the cluster level. An *event* indicates a change in your TiDB Cloud cluster. You can view the logged events on the **Events** page, including the event type, status, message, trigger time, and trigger user.
 
-This document describes how to review the events for TiDB Cloud clusters using the **Events** page. 
+This document describes how to view the events for TiDB Cloud clusters using the **Events** page and lists the supported event types.
 
 > **Note:**
 >
-> The Events page currently is only available for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters.
+> Currently, the Events page is only available for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters.
 
 ## View the Events page
 
@@ -47,9 +47,8 @@ For each event, the following information is logged:
 
 > **Note:**
 >
-> - If the cluster events happened before 2023-03-22, these events are not visible on the Events page. 
+> Cluster events started before 2023-03-22 are not visible on the Events page. 
 
 ## Event retention policy
 
-- For Dedicated Tier clusters, the event data is kept for 7 days.
-- For Serverless Tier clusters, the event data is not available.
+For Dedicated Tier clusters, the event data is kept for 7 days.
