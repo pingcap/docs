@@ -39,7 +39,7 @@ This section describes how to configure storage services in the changefeed URI, 
 
 ### Configure external storage
 
-The URI parameters of Amazon S3, GCS and Azure Blob Storage in TiCDC are the same as their URI parameters in BR. For details, see [Backup storage URI format](/br/backup-and-restore-storages.md#uri-format-description).
+The URI parameters of Amazon S3, GCS, and Azure Blob Storage in TiCDC are the same as their URI parameters in BR. For details, see [Backup storage URI format](/br/backup-and-restore-storages.md#uri-format-description).
 
 ### Configure NFS
 
@@ -99,19 +99,19 @@ Data change records are saved to the following path:
 
 ### Index files
 
-An index file is used to prevent written data from being overwritten by mistake. It is stored in the same path as the data change record.
+An index file is used to prevent written data from being overwritten by mistake. It is stored in the same path as the data change records.
 
 ```shell
 {scheme}://{prefix}/{schema}/{table}/{table-version-separator}/{partition-separator}/{date-separator}/CDC.index
 ```
 
-An index file records the largest file name used in the current directory. For example:
+The index file records the largest file name used in the current directory. For example:
 
 ```
 CDC000005.csv
 ```
 
-In this example, the files CDC000001.csv through CDC000004.csv in this directory are occupied. When a table scheduling or node restart occurs in the TiCDC cluster, the new node reads the index file and determines if CDC000005.csv is occupied. If it is not occupied, the new node writes the file starting from CDC000005.csv. If it is occupied, it starts writing from CDC000006.csv, which prevents overwriting data written by other nodes.
+In this example, the files `CDC000001.csv` through `CDC000004.csv` in this directory are occupied. When a table scheduling or node restart occurs in the TiCDC cluster, the new node reads the index file and determines if `CDC000005.csv` is occupied. If it is not occupied, the new node writes the file starting from `CDC000005.csv`. If it is occupied, it starts writing from `CDC000006.csv`, which prevents overwriting data written by other nodes.
 
 ### Metadata
 

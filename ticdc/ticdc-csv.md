@@ -37,7 +37,7 @@ include-commit-ts = true
 
 ## Data storage path structure
 
-For more information about the storage path structure of data change records, metadata, and DDL events, see [Storage path structure](/ticdc/ticdc-sink-to-cloud-storage.md#storage-path-structure).
+For more information about the storage path structure of the data, see [Storage path structure](/ticdc/ticdc-sink-to-cloud-storage.md#storage-path-structure).
 
 ## Definition of the data format
 
