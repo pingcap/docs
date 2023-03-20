@@ -237,7 +237,7 @@
     - [Storage](/tidb-storage.md)
     - [Computing](/tidb-computing.md)
     - [Scheduling](/tidb-scheduling.md)
-  - [Dedicated Tier Limits and Quotas](/tidb-cloud/limitations-and-quotas.md)
+  - [Dedicated Tier Limitations and Quotas](/tidb-cloud/limitations-and-quotas.md)
   - [Serverless Tier Limitations](/tidb-cloud/serverless-tier-limitations.md)
   - [TiDB Limitations](/tidb-limitations.md)
   - SQL
