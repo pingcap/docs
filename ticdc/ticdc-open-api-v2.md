@@ -272,7 +272,7 @@ The descriptions of the `replica_config` parameters are as follows.
 | `enable_old_value`        | `BOOLEAN` type. Determines whether to output the old value (that is, the value before the update). The default value is `true`. (Optional)         |
 | `enable_sync_point`       | `BOOLEAN` type. Determines whether to enable `sync point`. (Optional)         |
 | `filter`                  | The configuration parameters of `filter`. (Optional)           |
-| `force_replicate`         | `BOOLEAN` type. The default value is `false`. When you set it to `true`, the replicaton task forcibly replicates the tables without unique indexes. (Optional)                |
+| `force_replicate`         | `BOOLEAN` type. The default value is `false`. When you set it to `true`, the replication task forcibly replicates the tables without unique indexes. (Optional)                |
 | `ignore_ineligible_table` | `BOOLEAN` type. The default value is `false`. When you set it to `true`, the replication task ignores the tables that cannot be replicated. (Optional)                     |
 | `memory_quota`            | `UINT64` type. The memory quota for the replication task. (Optional)           |
 | `mounter`                 | The  configuration parameters of `mounter`. (Optional)               |
@@ -327,7 +327,7 @@ The `sink` parameters are described as follows:
 | `csv`                   | The CSV configuration. (Optional)                                         |
 | `date_separator`        | `STRING` type. Indicates the date separator type of the file directory. Value options are `none`, `year`, `month`, and `day`. `none` is the default value and means that the date is not separated. (Optional)      |
 | `dispatchers`           | An configuration array for event dispatching. (Optional)                                                     |
-| `encoder_concurrency`   | `INT` type. The number of encoder threads in the MQ sink. The deault value is `16`. (Optional)               |
+| `encoder_concurrency`   | `INT` type. The number of encoder threads in the MQ sink. The default value is `16`. (Optional)               |
 | `protocol`              | `STRING` type. For MQ sinks, you can specify the protocol format of the message. The following protocols are currently supported: `canal-json`, `open-protocol`, `canal`, `avro`, and `maxwell`. |
 | `schema_registry`       | `STRING` type. The schema registry address. (Optional)                                                  |
 | `terminator`            | `STRING` type. The terminator is used to separate two data change events. The default value is null, which means `"\r\n"` is used as the terminator. (Optional)                |
@@ -794,7 +794,7 @@ The meanings of the JSON response body are the same as those in the [Create a re
 
 ## Pause a replication task
 
-This API is an asynchronous interface. If the request is successful, `200 OK` is returned. The returned result only means that the server agrees to run the command but does not guarantee that the command will be run successfully.
+This API pauses a replication task. If the request is successful, `200 OK` is returned. The returned result only means that the server agrees to run the command but does not guarantee that the command will be run successfully.
 
 ### Request URI
 
@@ -820,7 +820,7 @@ If the request is successful, `200 OK` is returned. If the request fails, an err
 
 ## Resume a replication task
 
-This API is an asynchronous interface. If the request is successful, `200 OK` is returned. The returned result only means that the server agrees to run the command but does not guarantee that the command will be run successfully.
+This API resumes a replication task. If the request is successful, `200 OK` is returned. The returned result only means that the server agrees to run the command but does not guarantee that the command will be run successfully.
 
 ### Request URI
 
