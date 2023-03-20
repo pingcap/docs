@@ -32,7 +32,7 @@ The backend for the physical import mode is `local`.
 
     Note that when `tidb-lightning` adds indexes using the SQL interface, the index engine will not write data because the secondary indexes of the target table have already been removed in step 2.
 
-6. After all engine files are imported, TiDB Lightning compares the checksum between the local data source and the downstream cluster, and ensures that the imported data is not corrupted. Then TiDB Lightning adds the missing secondary indexes, or lets TiDB analyze the new data (`ANALYZE`) to optimize the future operations. Meanwhile, `tidb-lightning` adjusts the `AUTO_INCREMENT` value to prevent conflicts in the future.
+6. After all engine files are imported, TiDB Lightning compares the checksum between the local data source and the downstream cluster, and ensures that the imported data is not corrupted. Then TiDB Lightning adds the previously dropped secondary indexes, or lets TiDB analyze the new data (`ANALYZE`) to optimize the future operations. Meanwhile, `tidb-lightning` adjusts the `AUTO_INCREMENT` value to prevent conflicts in the future.
 
     The auto-increment ID is estimated by the **upper bound** of the number of rows, and is proportional to the total size of the table data file. Therefore, the auto-increment ID is usually larger than the actual number of rows. This is normal because the auto-increment ID [is not necessarily contiguous](/mysql-compatibility.md#auto-increment-id).
 
