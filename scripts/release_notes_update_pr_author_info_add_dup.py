@@ -79,8 +79,6 @@ def get_pr_info_from_github(cp_pr_link,cp_pr_title):
 
     return(pr_author)
 
-    print (1111)
-
 def update_pr_author_and_release_notes(excel_path):
 
     # Open the excel file
@@ -90,7 +88,7 @@ def update_pr_author_and_release_notes(excel_path):
 
     # Get the sheet header
     header = next(sheet.iter_rows(min_row=1, max_row=1, values_only=True)) # Read the first line in the sheet
-    #print (header)
+
     # Get the column info
     pr_author_index = header.index('pr_author')
     pr_link_index = header.index('pr_link')
