@@ -32,6 +32,10 @@ For information about how to determine the size of your TiDB cluster, see [Deter
 
 You can increase or decrease the number of TiDB, TiKV, or TiFlash nodes.
 
+> **Warning:**
+>
+> Decreasing TiKV or TiFlash node number can be risky, which might lead to insufficient storage space, excessive CPU usage, or excessive memory usage on remaining nodes.
+
 To change the number of TiDB, TiKV, or TiFlash nodes, take the following steps:
 
 1. In the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
@@ -45,19 +49,16 @@ To change the number of TiDB, TiKV, or TiFlash nodes, take the following steps:
 4. On the **Modify Cluster** page, change the number of TiDB, TiKV, or TiFlash nodes.
 5. Click **Confirm**.
 
-> **Warning:**
->
-> Decreasing TiKV or TiFlash node number can be risky, which might lead to insufficient storage space, excessive CPU usage, or excessive memory usage on remaining nodes.
-
 You can also change the number of TiDB, TiKV, or TiFlash nodes using TiDB Cloud API through the [Modify a Dedicated Tier cluster](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster) endpoint. Currently, TiDB Cloud API is still in beta. For more information, see [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta).
 
 ## Change node storage
 
-You can increase or decrease the node storage of TiKV or TiFlash.
+You can increase the node storage of TiKV or TiFlash.
 
-> **Note:**
+> **Warning:**
 >
-> AWS has a cooldown period of node storage changes. If your TiDB cluster is hosted on AWS, after changing the node storage or node size of TiKV or TiFlash, you must wait at least six hours before you can change it again.
+> - For a running cluster, AWS and Google Cloud do not allow in-place storage capacity downgrade.
+> - AWS has a cooldown period of node storage changes. If your TiDB cluster is hosted on AWS, after changing the node storage or node size of TiKV or TiFlash, you must wait at least six hours before you can change it again.
 
 To change the node storage of TiKV or TiFlash, take the following steps:
 
@@ -71,10 +72,6 @@ To change the node storage of TiKV or TiFlash, take the following steps:
 3. Click **Modify** in the drop-down menu. The **Modify Cluster** page is displayed.
 4. On the **Modify Cluster** page, change the node storage of TiKV or TiFlash.
 5. Click **Confirm**.
-
-> **Warning:**
->
-> For a running cluster, AWS and Google Cloud do not allow in-place storage capacity downgrade.
 
 You can also change the storage of a TiKV or TiFlash node using TiDB Cloud API through the [Modify a Dedicated Tier cluster](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster) endpoint. Currently, TiDB Cloud API is still in beta. For more information, see [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta).
 
