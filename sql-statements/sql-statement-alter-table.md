@@ -162,7 +162,15 @@ Query OK, 0 rows affected, 1 warning (0.25 sec)
 
 The following major restrictions apply to `ALTER TABLE` in TiDB:
 
+<<<<<<< HEAD
 - Making multiple changes in a single `ALTER TABLE` statement is currently not supported.
+=======
+- When altering multiple schema objects in a single `ALTER TABLE` statement:
+
+    - Modifying the same object in multiple changes is not supported.
+    - TiDB validates statements according to the table schema **before execution**. For example, an error returns when `ALTER TABLE t ADD COLUMN c1 INT, ADD COLUMN c2 INT AFTER c1;` is executed because column `c1` does not exist in the table.
+    - For an `ALTER TABLE` statement, the order of execution in TiDB is one change after another from left to right, which is incompatible with MySQL in some cases.
+>>>>>>> 0533f6e44 (sql-statement-alter-table: Beter example for schema dependency (#12314))
 
 - Changes of the [Reorg-Data](/sql-statements/sql-statement-modify-column.md#reorg-data-change) types on primary key columns are not supported.
 
