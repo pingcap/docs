@@ -10,9 +10,10 @@ This document introduces TiDB's implementation of partitioning.
 
 ## Partitioning types
 
-This section introduces the types of partitioning in TiDB. Currently, TiDB supports [Range partitioning](#range-partitioning), [Range COLUMNS partitioning](#range-columns-partitioning), [List partitioning](#list-partitioning), [List COLUMNS partitioning](#list-columns-partitioning), and [Hash partitioning](#hash-partitioning).
+This section introduces the types of partitioning in TiDB. Currently, TiDB supports [Range partitioning](#range-partitioning), [Range COLUMNS partitioning](#range-columns-partitioning), [List partitioning](#list-partitioning), [List COLUMNS partitioning](#list-columns-partitioning), [Hash partitioning](#hash-partitioning), and [Key partitioning](#key-partitioning).
 
-Range partitioning, Range COLUMNS partitioning, List partitioning and List COLUMNS partitioning are used to resolve the performance issues caused by a large amount of deletions in the application, and support fast drop partition operations. Hash partitioning is used to scatter the data when there are a large amount of writes.
+- Range partitioning, Range COLUMNS partitioning, List partitioning, and List COLUMNS partitioning are used to resolve the performance issues caused by a large number of deletions in the application, and support fast drop partition operations.
+- Hash partitioning and Key partitioning are used to distribute data in scenarios with a large number of writes. Compared with Hash partitioning, Key partitioning supports distributing data of multiple columns and partitioning by non-integer columns.
 
 ### Range partitioning
 
@@ -560,6 +561,88 @@ MOD(YEAR('2005-09-01'),4)
 =  1
 ```
 
+### Key partitioning
+
+Starting from v7.0.0, TiDB supports Key partitioning. For TiDB versions earlier than v7.0.0, if you try creating a Key partitioned table, TiDB will create it as a non-partitioned table and return a warning.
+
+Both Key partitioning and Hash partitioning can evenly distribute data into a certain number of partitions. The difference is that Hash partitioning only supports distributing data based on a specified integer expression or an integer column, while Key partitioning supports distributing data based on a column list, and partitioning columns of Key partitioning are not limited to the integer type. The Hash algorithm of TiDB for Key partitioning is different from that of MySQL, so the table data distribution is also different.
+
+Partitioning by Key requires you to append a `PARTITION BY Key (columList)` clause to the `CREATE TABLE` statement. `columList` is a column list with one or more column names. The data type of each column in the list can be any type except `BLOB`, `JSON`, and `GEOMETRY` (Note that TiDB does not support the `GEOMETRY`). In addition, you might also need to append `PARTITIONS num`, where `num` is a positive integer indicating how many partitions a table is divided into.
+
+The following operation creates a Key partitioned table, which is divided into 4 partitions by `store_id`:
+
+{{< copyable "sql" >}}
+
+```sql
+CREATE TABLE employees (
+    id INT NOT NULL,
+    fname VARCHAR(30),
+    lname VARCHAR(30),
+    hired DATE NOT NULL DEFAULT '1970-01-01',
+    separated DATE DEFAULT '9999-12-31',
+    job_code INT,
+    store_id INT
+)
+PARTITION BY KEY(store_id)
+PARTITIONS 4;
+```
+
+If `PARTITIONS num` is not specified, the default number of partitions is 1.
+
+You can also create a Key partitioned table based on non-integer columns such as VARCHAR. For example, you can partition a table by the `fname` column:
+
+{{< copyable "sql" >}}
+
+```sql
+CREATE TABLE employees (
+    id INT NOT NULL,
+    fname VARCHAR(30),
+    lname VARCHAR(30),
+    hired DATE NOT NULL DEFAULT '1970-01-01',
+    separated DATE DEFAULT '9999-12-31',
+    job_code INT,
+    store_id INT
+)
+PARTITION BY KEY(fname)
+PARTITIONS 4;
+```
+
+You can also create a Key partitioned table based on multiple columns. For example, you can divide a table into 4 partitions based on `fname` and `store_id`:
+
+{{< copyable "sql" >}}
+
+```sql
+CREATE TABLE employees (
+    id INT NOT NULL,
+    fname VARCHAR(30),
+    lname VARCHAR(30),
+    hired DATE NOT NULL DEFAULT '1970-01-01',
+    separated DATE DEFAULT '9999-12-31',
+    job_code INT,
+    store_id INT
+)
+PARTITION BY KEY(fname, store_id)
+PARTITIONS 4;
+```
+
+Currently, TiDB does not support creating Key partitioned tables if the partition column list specified in `PARTITION BY KEY` is empty. For example, after you execute the following statement, TiDB will create a non-partitioned table and return an `Unsupported partition type KEY, treat as normal table` warning.
+
+{{< copyable "sql" >}}
+
+```sql
+CREATE TABLE employees (
+    id INT NOT NULL,
+    fname VARCHAR(30),
+    lname VARCHAR(30),
+    hired DATE NOT NULL DEFAULT '1970-01-01',
+    separated DATE DEFAULT '9999-12-31',
+    job_code INT,
+    store_id INT
+)
+PARTITION BY KEY()
+PARTITIONS 4;
+```
+
 #### How TiDB handles Linear Hash partitions
 
 Before v6.4.0, if you execute DDL statements of [MySQL Linear Hash](https://dev.mysql.com/doc/refman/5.7/en/partitioning-linear-hash.html) partitions in TiDB, TiDB can only create non-partitioned tables. In this case, if you still want to use partitioned tables in TiDB, you need to modify the DDL statements.
@@ -569,6 +652,12 @@ Since v6.4.0, TiDB supports parsing the MySQL `PARTITION BY LINEAR HASH` syntax 
 - For a `CREATE` statement of MySQL Linear Hash partitions, TiDB will create a non-linear Hash partitioned table (note that there is no Linear Hash partitioned table in TiDB). If the number of partitions is a power of 2, the rows in the TiDB Hash partitioned table are distributed the same as that in the MySQL Linear Hash partitioned table. Otherwise, the distribution of these rows in TiDB is different from MySQL. This is because non-linear partitioned tables use a simple "modulus number of partition", while linear partitioned tables use "modulus next power of 2 and fold the values between the number of partitions and the next power of 2". For details, see [#38450](https://github.com/pingcap/tidb/issues/38450).
 
 - For all other statements of MySQL Linear Hash partitions, they work in TiDB the same as that in MySQL, except that the rows are distributed differently if the number of partitions is not a power of 2, which will give different results for [partition selection](#partition-selection), `TRUNCATE PARTITION`, and `EXCHANGE PARTITION`.
+
+### How TiDB handles Linear Key partitions
+
+Starting from v7.0.0, TiDB supports parsing the MySQL `PARTITION BY LINEAR HASH` syntax for Key partitioning. However, TiDB ignores the `LINEAR` keyword and uses a non-linear hash algorithm instead.
+
+Before v7.0.0, if you try creating a Key partitioned table, TiDB will create it as a non-partitioned table and return a warning.
 
 ### How TiDB partitioning handles NULL
 
@@ -722,13 +811,17 @@ You can see that the inserted record `(NULL, 'mothra')` falls into the same part
 >
 > In this case, the actual behavior of TiDB is in line with the description of this document.
 
+#### Handling of NULL with Key partitioning
+
+For Key partitioning, the way of handling `NULL` value is consistent with that of Hash partitioning. If the value of a partitioning field is `NULL`, it is considered as `0`.
+
 ## Partition management
 
 For `LIST` and `RANGE` partitioned tables, you can add and drop partitions using the `ALTER TABLE <table name> ADD PARTITION (<partition specification>)` or `ALTER TABLE <table name> DROP PARTITION <list of partitions>` statement.
 
 For `LIST` and `RANGE` partitioned tables, `REORGANIZE PARTITION` is not yet supported.
 
-For `HASH` partitioned tables, `COALESCE PARTITION` and `ADD PARTITION` are not yet supported.
+For `HASH` and `KEY` partitioned tables, only `ALTER TABLE ... TRUNCATE PARTITION` is supported, while `COALESCE PARTITION` and `ADD PARTITION` are not yet supported.
 
 `EXCHANGE PARTITION` works by swapping a partition and a non-partitioned table, similar to how renaming a table like `RENAME TABLE t1 TO t1_tmp, t2 TO t1, t1_tmp TO t2` works.
 
@@ -835,6 +928,20 @@ Currently, `ALTER TABLE ... COALESCE PARTITION` is not supported in TiDB as well
 
 ```sql
 alter table members optimize partition p0;
+```
+
+```sql
+ERROR 8200 (HY000): Unsupported optimize partition
+```
+
+### Key partition management
+
+Currently, Key partitioning only supports the `ALTER TABLE ... TRUNCATE PARTITION` partition management statement.
+
+If you execute a Key partition management statement that is not yet supported, TiDB will return an error.
+
+```sql
+ALTER TABLE members OPTIMIZE PARTITION p0;
 ```
 
 ```sql
