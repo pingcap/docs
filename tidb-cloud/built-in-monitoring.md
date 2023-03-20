@@ -61,7 +61,7 @@ The following sections illustrate the metrics on the Monitoring page for Dedicat
 
 | Metric name  | Labels | Description                                   |
 | :------------| :------| :-------------------------------------------- |
-| Query Duration | avg-{SQL Types}, 99-{SQL Types} | The duration from receiving a request from the client to TiDB until TiDB executes the request and returns the result to the client. In general, client requests are sent in the form of SQL statements; however, this duration can include the execution time of commands such as `COM_PING`, `COM_SLEEP`, `COM_STMT_FETCH`, and `COM_SEND_LONG_DATA`. TiDB supports Multi-Query, which means the client can send multiple SQL statements at one time, such as `select 1; select 1; select 1;`. In this case, the total execution time of this query includes the execution time of all SQL statements. |
+| Query Duration | avg-{SQL type}, 99-{SQL type} | The duration from receiving a request from the client to TiDB until TiDB executes the request and returns the result to the client. In general, client requests are sent in the form of SQL statements; however, this duration can include the execution time of commands such as `COM_PING`, `COM_SLEEP`, `COM_STMT_FETCH`, and `COM_SEND_LONG_DATA`. TiDB supports Multi-Query, which means the client can send multiple SQL statements at one time, such as `select 1; select 1; select 1;`. In this case, the total execution time of this query includes the execution time of all SQL statements. |
 | Average Idle Connection Duration | avg-in-txn, avg-not-in-txn | The connection idle duration indicates the duration of a connection being idle.<br/> avg-in-txn: The average connection idle duration when a connection is within a transaction. <br/>avg-not-in-txn: The average connection idle duration when a connection is not within a transaction. |
 | Get Token Duration | avg, 99 | The average time or P99 duration consumed in getting tokens of SQL statements. |
 | Parse Duration | avg, 99 | The average time or P99 duration consumed in parsing SQL statements. |
@@ -121,7 +121,7 @@ The following table illustrates the cluster-level main metrics under the **Clust
 | Metric name  | Labels | Description                                   |
 | :------------| :------| :-------------------------------------------- |
 | Query Per Second | All, {SQL type} | The number of SQL statements executed per second, which are collected by SQL types, such as `SELECT`, `INSERT`, and `UPDATE`. |
-| Average Query Duration | All, {SQL Types} | The duration from receiving a request from the client to the Serverless Tier cluster until the cluster executes the request and returns the result to the client. |
+| Average Query Duration | All, {SQL type} | The duration from receiving a request from the client to the Serverless Tier cluster until the cluster executes the request and returns the result to the client. |
 | Failed Query | All | The number of SQL statement execution errors per second. |
 | Transaction Per Second | All | The number of transactions executed per second. |
 | Average Transaction Duration | All | The average execution duration of transactions. |
@@ -134,9 +134,9 @@ The following table illustrates the database-level main metrics under the **Data
 
 | Metric name  | Labels | Description                                   |
 | :------------| :------| :-------------------------------------------- |
-| QPS Per DB | All, {database_name} | The number of SQL statements executed per second on every Database, which are collected by SQL types, such as `SELECT`, `INSERT`, and `UPDATE`. |
-| Average Query Duration Per DB | All, {database_name} | The duration from receiving a request from the client to a database until the database executes the request and returns the result to the client.|
-| Failed Query Per DB | All, {database_name} | The statistics of error types according to the SQL statement execution errors per second on every database.|
+| QPS Per DB | All, {Database name} | The number of SQL statements executed per second on every database, which are collected by SQL types, such as `SELECT`, `INSERT`, and `UPDATE`. |
+| Average Query Duration Per DB | All, {Database name} | The duration from receiving a request from the client to a database until the database executes the request and returns the result to the client.|
+| Failed Query Per DB | All, {Database name} | The statistics of error types according to the SQL statement execution errors per second on every database.|
 
 ## FAQ
 
@@ -148,4 +148,3 @@ If a pane does not provide any metrics, the possible reasons are as follows:
 - The cluster version is low. You need to upgrade it to the latest version of TiDB to see these metrics.
 
 If all these reasons are excluded, you can contact the [PingCAP support team](/tidb-cloud/tidb-cloud-support.md) for troubleshooting.
-
