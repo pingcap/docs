@@ -930,6 +930,14 @@ ERROR 8200 (HY000): Unsupported optimize partition
 
 Currently, Key partitioning only supports the `ALTER TABLE ... TRUNCATE PARTITION` partition management statement.
 
+```sql
+ALTER TABLE members TRUNCATE PARTITION p0;
+```
+
+```
+Query OK, 0 rows affected (0.03 sec)
+```
+
 If you execute a Key partition management statement that is not yet supported, TiDB returns an error.
 
 ```sql
