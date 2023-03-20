@@ -50,9 +50,9 @@ When the data files are stored on S3, you can import individual files or use the
 - Import all files prefixed with `foo` under the specified path: `s3://<bucket-name>/path/to/data/foo*`
 - Import all files prefixed with `foo` and ending with `.csv` under the specified path: `s3://<bucket-name>/path/to/data/foo*.csv`
 
-### `Format`
+### `FORMAT`
 
-You can use the `Format` parameter to specify the format of the data file. If you do not specify this parameter, you can use the format defined by `DELIMITED DATA`, which is the data format supported by MySQL `LOAD DATA`.
+You can use the `FORMAT` parameter to specify the format of the data file. If you do not specify this parameter, you can use the format defined by `DELIMITED DATA`, which is the data format supported by MySQL `LOAD DATA`.
 
 ### `Fields`, `Lines`, and `Ignore Lines`
 
@@ -68,7 +68,7 @@ You can use `DEFINED NULL BY` to specify how NULL values are represented in the 
 
 Take the following data format as an example:
 
-```
+```sql
 "bob","20","street 1"\r\n
 "alice","33","street 1"\r\n
 ```
@@ -106,7 +106,7 @@ When the job is run in the background, the corresponding job id is output after 
 LOAD DATA INFILE 's3://bucket-name/test.csv?access_key=XXX&secret_access_key=XXX' INTO TABLE my_db.my_table FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '' LINES TERMINATED BY '\n' WITH detached;
 ```
 
-```
+```sql
 +--------+
 | Job_ID |
 +--------+
@@ -119,7 +119,7 @@ LOAD DATA INFILE 's3://bucket-name/test.csv?access_key=XXX&secret_access_key=XXX
 SHOW LOAD DATA JOB 1;
 ```
 
-```
+```sql
 +--------+----------------------------+----------------------------+---------------------+---------------------------+--------------------+-------------+------------+-----------+------------+------------------+------------------+-------------+----------------+
 | Job_ID | Create_Time                | Start_Time                 | End_Time            | Data_Source               | Target_Table       | Import_Mode | Created_By | Job_State | Job_Status | Source_File_Size | Loaded_File_Size | Result_Code | Result_Message |
 +--------+----------------------------+----------------------------+---------------------+---------------------------+-------------------+-------------+------------+-----------+------------+------------------+------------------+-------------+----------------+
@@ -136,7 +136,7 @@ If you see the error message `ERROR 1148 (42000): the used command is not allowe
 LOAD DATA LOCAL INFILE '/mnt/evo970/data-sets/bikeshare-data/2017Q4-capitalbikeshare-tripdata.csv' INTO TABLE trips FIELDS TERMINATED BY ',' ENCLOSED BY '\"' LINES TERMINATED BY '\r\n' IGNORE 1 LINES (duration, start_date, end_date, start_station_number, start_station, end_station_number, end_station, bike_number, member_type);
 ```
 
-```
+```sql
 Query OK, 815264 rows affected (39.63 sec)
 Records: 815264  Deleted: 0  Skipped: 0  Warnings: 0
 ```
