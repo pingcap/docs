@@ -571,8 +571,6 @@ Partitioning by Key requires you to append a `PARTITION BY Key (columList)` clau
 
 The following operation creates a Key partitioned table, which is divided into 4 partitions by `store_id`:
 
-{{< copyable "sql" >}}
-
 ```sql
 CREATE TABLE employees (
     id INT NOT NULL,
@@ -591,8 +589,6 @@ If `PARTITIONS num` is not specified, the default number of partitions is 1.
 
 You can also create a Key partitioned table based on non-integer columns such as VARCHAR. For example, you can partition a table by the `fname` column:
 
-{{< copyable "sql" >}}
-
 ```sql
 CREATE TABLE employees (
     id INT NOT NULL,
@@ -609,8 +605,6 @@ PARTITIONS 4;
 
 You can also create a Key partitioned table based on multiple columns. For example, you can divide a table into 4 partitions based on `fname` and `store_id`:
 
-{{< copyable "sql" >}}
-
 ```sql
 CREATE TABLE employees (
     id INT NOT NULL,
@@ -626,8 +620,6 @@ PARTITIONS 4;
 ```
 
 Currently, TiDB does not support creating Key partitioned tables if the partition column list specified in `PARTITION BY KEY` is empty. For example, after you execute the following statement, TiDB will create a non-partitioned table and return an `Unsupported partition type KEY, treat as normal table` warning.
-
-{{< copyable "sql" >}}
 
 ```sql
 CREATE TABLE employees (
