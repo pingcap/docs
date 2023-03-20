@@ -1046,7 +1046,7 @@ Currently, partition pruning does not work with `LIKE` conditions.
 
     If the TiKV coprocessor does not support this `fn` function, `fn(col)` would not be pushed down to the leaf node. Instead, it becomes a `Selection` node above the leaf node. The current partition pruning implementation does not support this kind of plan tree.
 
-4. For Hash partition, the only query supported by partition pruning is the equal condition.
+4. For Hash and Key partition types, the only query supported by partition pruning is the equal condition.
 
 5. For Range partition, for partition pruning to take effect, the partition expression must be in those forms: `col` or `fn(col)`, and the query condition must be one of `>`, `<`, `=`, `>=`, and `<=`. If the partition expression is in the form of `fn(col)`, the `fn` function must be monotonous.
 
@@ -1457,7 +1457,9 @@ YEARWEEK()
 
 ### Compatibility with MySQL
 
-Currently, TiDB supports Range partitioning, Range COLUMNS partitioning, List partitioning, List COLUMNS partitioning, and Hash partitioning. Other partitioning types that are available in MySQL such as key partitioning are not supported yet in TiDB.
+Currently, TiDB supports Range partitioning, Range COLUMNS partitioning, List partitioning, List COLUMNS partitioning, Hash partitioning, and Key partitioning. Other partitioning types that are available in MySQL are not supported yet in TiDB.
+
+Currently, TiDB does not support using an empty partition column list for Key partitioning.
 
 With regard to partition management, any operation that requires moving data in the bottom implementation is not supported currently, including but not limited to: adjust the number of partitions in a Hash partitioned table, modify the Range of a Range partitioned table, merge partitions and exchange partitions.
 
