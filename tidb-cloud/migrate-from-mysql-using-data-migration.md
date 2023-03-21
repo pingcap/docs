@@ -1,6 +1,6 @@
 ---
 title: Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration
-summary: Learn how to migrate data from MySQL-compatible databases hosted in Amazon Aurora MySQL, Amazon Relational Database Service (RDS),Google Cloud SQL for MySQL,or a local MySQL instance to TiDB Cloud using Data Migration.
+summary: Learn how to migrate data from MySQL-compatible databases hosted in Amazon Aurora MySQL, Amazon Relational Database Service (RDS), Google Cloud SQL for MySQL, or a local MySQL instance to TiDB Cloud using Data Migration.
 ---
 
 # Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration
