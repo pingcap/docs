@@ -33,9 +33,11 @@ To enable the Chat2Query API, perform the following steps:
 
     > **Note:**
     >
-    > After enabling DataAPI, all Serverless Tier clusters in the current project can use the Chat2Query API.
+    > After DataAPI is enabled for one Serverless Tier cluster, all Serverless Tier clusters in the same project can use the Chat2Query API.
 
-5. In the left navigation pane, click <MDSvgIcon name="icon-left-data-service" /> **Data Service** to access the Chat2Query API. The **Chat2Query System** [Data App](/tidb-cloud/tidb-cloud-glossary.md#data-app) and its **Chat2Data** [endpoint](/tidb-cloud/tidb-cloud-glossary.md#endpoint) will be displayed in the left pane.
+5. In the left navigation pane, click <MDSvgIcon name="icon-left-data-service" /> **Data Service** to access the Chat2Query API. 
+
+    You can find that the **Chat2Query System** [Data App](/tidb-cloud/tidb-cloud-glossary.md#data-app) and its **Chat2Data** [endpoint](/tidb-cloud/tidb-cloud-glossary.md#endpoint) are displayed in the left pane.
 
 ## Step 2. Create an API key
 
@@ -51,7 +53,7 @@ Before calling an endpoint, you need to create an API key. To create an API key 
 
 ## Step 3. Call the Chat2Data endpoint
 
-In the left pane of the [**Data Service**](https://tidbcloud.com/console/dataservice) page, click **Chat2Query** > **Chat2Data** to view the endpoint details. The **Properties** of Chat2Data are displayed:
+In the left pane of the [**Data Service**](https://tidbcloud.com/console/dataservice) page, click **Chat2Query** > **/chat2data** to view the endpoint details. The **Properties** of Chat2Data are displayed:
 
 - **Endpoint Path**: (read-only) the path of the Chat2Data endpoint, which is `/chat2data`.
 
@@ -72,10 +74,10 @@ In the left pane of the [**Data Service**](https://tidbcloud.com/console/dataser
     - Maximum value: `2000`
     - Minimum value: `1`
 
-TiDB Cloud generates code examples to help you call an endpoint. To get the code example, perform the following steps:
+TiDB Cloud generates code examples to help you call an endpoint. To get the examples and run the code, perform the following steps:
 
-1. In the Chat2Data details page, click **Code Example** to the right of **Endpoint URL**. The **Code Example** dialog box is displayed.
-2. In the dialog box, select the cluster, database, and language that you want to use to call the endpoint, and then copy the code example.
+1. On the current **Chat2Data** page, click **Code Example** to the right of **Endpoint URL**. The **Code Example** dialog box is displayed.
+2. In the dialog box, select the cluster and database that you want to use to call the endpoint, and then copy the code example.
 3. Paste the code example in your application and run it.
 
     - Replace the `<Public Key>` and `<Private Key>` placeholders with your API key.

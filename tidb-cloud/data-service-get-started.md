@@ -9,7 +9,7 @@ Data Service (beta) enables you to access TiDB Cloud data via an HTTPS request u
 
 > **Tip:**
 >
-> TiDB Cloud provides a system Data App called **Chat2Query**. You can use this App to call the Chat2Data endpoint to let AI generate and execute SQL statements by providing instructions. For more information, see [Get started with Chat2Query API](/tidb-cloud/use-chat2query-api.md).
+> TiDB Cloud provides a Chat2Query API for Serverless Tier clusters. After it is enabled, TiDB Cloud will automatically create a system Data App called **Chat2Query** and a Chat2Data endpoint in Data Service. You can call this endpoint to let AI generate and execute SQL statements by providing instructions. For more information, see [Get started with Chat2Query API](/tidb-cloud/use-chat2query-api.md).
 
 This document introduces how to quickly get started with TiDB Cloud Data Service (beta) by creating a Data App, developing, testing, deploying, and calling an endpoint.
 
@@ -31,7 +31,7 @@ A Data App is a group of endpoints that you can use to access data for a specifi
 
 An endpoint is a web API that you can customize to execute SQL statements.
 
-After creating a Data App, a default endpoint `untitled endpoint` is created for you automatically. You can use the default endpoint to access your TiDB Cloud cluster.
+After creating a Data App, a default `untitled endpoint` is created for you automatically. You can use the default endpoint to access your TiDB Cloud cluster.
 
 If you want to create a new endpoint, locate the newly created Data App and click **+** **Create Endpoint** on the top of the left pane.
 
@@ -130,7 +130,7 @@ TiDB Cloud generates code examples to help you call an endpoint. To get the code
 
 1. In the left pane of the [**Data Service**](https://tidbcloud.com/console/dataservice) page, click the name of your endpoint, and then click **...** > **Code Example** in the upper-right corner. The **Code Example** dialog box is displayed.
 
-2. In the dialog box, select the environment and language that you want to use to call the endpoint, and then copy the code example.
+2. In the dialog box, select the environment that you want to use to call the endpoint, and then copy the code example.
 
     An example of the curl code example is as follows:
 

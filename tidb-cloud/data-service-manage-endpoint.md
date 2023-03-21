@@ -183,7 +183,7 @@ TiDB Cloud generates code examples to help you call an endpoint. To get the code
     >
     > Alternatively, you can also click the endpoint name to view its details and click **...** > **Code Example** in the upper-right corner.
 
-4. In the dialog box, select the environment and language that you want to use to call the endpoint, and then copy the code example.
+4. In the dialog box, select the environment that you want to use to call the endpoint, and then copy the code example.
 
     > **Note:**
     >
