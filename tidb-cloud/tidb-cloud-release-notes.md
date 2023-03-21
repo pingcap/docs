@@ -45,7 +45,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     On this page, you can view the event history for the last 7 days and track important details such as the trigger time and the user who initiated an action. For example, you can view events such as when a cluster was paused or who modified the cluster size.
 
-    For more information, see [TiDB Cloud cluster events](tidb-cloud/tidb-cloud-events.md).
+    For more information, see [TiDB Cloud cluster events](/tidb-cloud/tidb-cloud-events.md).
 
 - Add the **Database Status** tab to the **Monitoring** page for [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters, which displays the following database-level metrics:
 
