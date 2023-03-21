@@ -8,6 +8,55 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2023.
 
+## March 21, 2023
+
+**General changes**
+
+- Introduce [Data Service (beta)](https://tidbcloud.com/console/dataservice) for [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters, which enables you to access data via an HTTPS request using a custom API endpoint.
+
+    With Data Service, you can seamlessly integrate TiDB Cloud with any application or service that is compatible with HTTPS. The following are some common scenarios:
+
+    - Access the database of your TiDB cluster directly from a mobile or web application.
+    - Use serverless edge functions to call endpoints and avoid scalability issues caused by database connection pooling.
+    - Integrate TiDB Cloud with data visualization projects by using Data Service as a data source.
+    - Connect to your database from an environment that MySQL interface does not support.
+
+    In addition, TiDB Cloud provides the [Chat2Query API](/tidb-cloud/use-chat2query-api.md), a RESTful interface that allows you to generate and execute SQL statements using AI.
+
+    To access Data Service, navigate to the [**Data Service**](https://tidbcloud.com/console/dataservice) page in the left navigation pane. For more information, see the following documentation:
+
+    - [Data Service Overview](/tidb-cloud/data-service-overview.md)
+    - [Get Started with Data Service](/tidb-cloud/data-service-get-started.md)
+    - [Get Started with Chat2Query API](/tidb-cloud/use-chat2query-api.md)
+
+- Support decreasing the size of TiDB, TiKV, and TiFlash nodes to scale in a [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) cluster.
+
+    You can decrease the node size [via the TiDB Cloud console](//tidb-cloud/scale-tidb-cluster.md#change-node-size) or [via the TiDB Cloud API (beta)](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster).
+
+- Support a new GCP region for the [Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md) feature of [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters: `Tokyo (asia-northeast1)`.
+
+    The feature can help you to migrate data from MySQL-compatible databases in Google Cloud Platform (GCP) to your TiDB cluster easily and efficiently.
+
+    For more information, see [Migrate MySQL-compatible databases to TiDB Cloud using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md).
+
+**Console changes**
+
+- Introduce the **Events** page for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters, which provides the records of main changes to your cluster.
+
+    On this page, you can view the event history for the last 7 days and track important details such as the trigger time and the user who initiated an action. For example, you can view events such as when a cluster was paused or who modified the cluster size.
+
+    For more information, see [TiDB Cloud cluster events](tidb-cloud/tidb-cloud-events.md).
+
+- Add the **Database Status** tab to the **Monitoring** page for [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters, which displays the following database-level metrics:
+
+    - QPS Per DB
+    - Average Query Duration Per DB
+    - Failed Queries Per DB
+
+  With these metrics, you can monitor the performance of individual databases, make data-driven decisions, and take actions that improve the performance of your applications.
+
+  For more information, see [Monitoring metrics for Serverless Tier clusters](/tidb-cloud/built-in-monitoring.md).
+
 ## March 14, 2023
 
 **General changes**
