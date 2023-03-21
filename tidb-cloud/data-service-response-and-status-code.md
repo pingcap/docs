@@ -313,8 +313,8 @@ An example response is as follows:
     "columns": [],
     "rows": [],
     "result": {
-      "code": 49900007,
-      "message": "The request exceeded the limit of 100 times per apikey per minute. For more quota, please contact us: https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519",
+      "code": 429,
+      "message": "The AI request exceeded the limit of 100 times per day. For more quota, please contact us: https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519",
       "start_ms": "",
       "end_ms": "",
       "latency": "",

@@ -86,7 +86,7 @@ TiDB Cloud generates code examples to help you call an endpoint. To get the exam
 
 > **Note:**
 >
-> The Chat2Query Data App has a rate limit of 100 requests per day for each App. If you exceed the rate limit, the API returns a `429` error. For more quota, you can [submit a request](https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519) to our support team.
+> Each Chat2Query Data App has a rate limit of 100 requests per day. If you exceed the rate limit, the API returns a `429` error. For more quota, you can [submit a request](https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519) to our support team.
 
 The following code example is used to find the most popular GitHub repository from `sample_data.github_events` table:
 
