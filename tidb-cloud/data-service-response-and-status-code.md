@@ -283,7 +283,7 @@ An example response is as follows:
 
 ```json
 {
-  "type": "sql_endpoint",
+  "type": "",
   "data": {
     "columns": [],
     "rows": [],
