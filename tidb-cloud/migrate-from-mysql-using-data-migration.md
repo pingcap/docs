@@ -107,7 +107,7 @@ Before creating a migration job, set up the network connection according to your
 
 - If you use AWS PrivateLink, set it up according to [Set Up Private Endpoint Connections](/tidb-cloud/set-up-private-endpoint-connections.md).
 
-- If you use VPC Peering, see the following instructions to configure the network.
+- If you use AWS VPC Peering or GCP VPC Network Peering, see the following instructions to configure the network.
 
 <details>
 <summary> Set up AWS VPC Peering</summary>
@@ -197,16 +197,16 @@ On the **Create Migration Job** page, configure the source and target connection
 
     > **Tip:**
     >
-    > - To migrate data to TiDB Cloud once and for all, choose both **existing data migration** and **Incremental data migration**, which ensures data consistency between the source and target databases.
-    > - To migrate only the existing data of the source database to TiDB Cloud, only choose the **existing data migration** checkbox.
+    > - To migrate data to TiDB Cloud once and for all, choose both **Existing data migration** and **Incremental data migration**, which ensures data consistency between the source and target databases.
+    > - To migrate only the existing data of the source database to TiDB Cloud, only choose the **Existing data migration** checkbox.
 
 2. On the **Choose Objects to Migrate** page, select the objects to be migrated. You can click **All** to select all objects, or click **Customize** and then click the checkbox next to the object name to select the object.
 
-    - If you click **All**, the migration job will migrate the existing data from the whole source database instance to TiDB Cloud and replicate ongoing changes after the full migration. Note that it happens only if you have selected the **existing data migration** and **Incremental data migration** checkboxes in the previous step.
+    - If you click **All**, the migration job will migrate the existing data from the whole source database instance to TiDB Cloud and replicate ongoing changes after the full migration. Note that it happens only if you have selected the **Existing data migration** and **Incremental data migration** checkboxes in the previous step.
 
         <img src="https://download.pingcap.com/images/docs/tidb-cloud/migration-job-select-all.png" width="60%" />
 
-    - If you click **Customize** and select some databases, the migration job will migrate the existing data and replicate ongoing changes of the selected databases to TiDB Cloud. Note that it happens only if you have selected the **existing data migration** and **Incremental data migration** checkboxes in the previous step.
+    - If you click **Customize** and select some databases, the migration job will migrate the existing data and replicate ongoing changes of the selected databases to TiDB Cloud. Note that it happens only if you have selected the **Existing data migration** and **Incremental data migration** checkboxes in the previous step.
 
         <img src="https://download.pingcap.com/images/docs/tidb-cloud/migration-job-select-db.png" width="60%" />
 
