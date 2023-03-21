@@ -5,19 +5,19 @@ summary: This document describes the response and error codes of Data Service in
 
 # Response and Error Codes of Data Service
 
-When you call an API endpoint defined in [Data Service](/tidb-cloud/data-service-overview.md), Data Service returns a HTTP response. Understanding the structure of an API response and the meaning of error codes is essential for interpreting data returned by a Data Service API.
+When you call an API endpoint defined in [Data Service](/tidb-cloud/data-service-overview.md), Data Service returns an HTTP response. Understanding the structure of this response and the meaning of error codes is essential for interpreting data returned by a Data Service endpoint.
 
 This document describes the response and error codes of Data Service in TiDB Cloud.
 
 ## Response
 
-Data Service returns a HTTP response with a JSON body. The response body contains the following fields:
+Data Service returns an HTTP response with a JSON body. The response body contains the following fields:
 
 - `type`: _string_. The type of this endpoint. The value might be `"sql_endpoint"` or `"chat2query_endpoint"`. Different endpoints return different types of responses.
 - `data`: _object_. The execution results, which include three parts:
 
     - `columns`: _array_. Schema information for the returned fields.
-    - `rows`: _array_. The returned results in key:value format.
+    - `rows`: _array_. The returned results in `key:value` format.
     - `result`: _object_. The execution-related information of the SQL statement, including success/failure status, execution time, number of rows returned, and user configuration.
 
 An example response is as follows:
@@ -110,7 +110,7 @@ An example response is as follows:
 
 ## Error code
 
-### 200
+### 1146
 
 This error code indicates that TiDB Cloud fails to execute the SQL statement defined in your endpoint. You can check the `code` and `message` fields for detailed information.
 
@@ -247,7 +247,7 @@ An example response is as follows:
 
 ### 408
 
-This error code indicates that the request exceeds the timeout duration of the endpoint.
+This error code indicates that the request exceeds the timeout duration of the endpoint. To modify the timeout of an endpoint, refer to [Configure properties](/tidb-cloud/data-service-manage-endpoint.md#configure-properties).
 
 An example response is as follows:
 
@@ -301,7 +301,7 @@ An example response is as follows:
 }
 ```
 
-This might also be related to inability to connect the TiDB Cloud cluster. You need to refer to the `message` for troubleshooting.
+This might also be related to the inability to connect the TiDB Cloud cluster. You need to refer to the `message` for troubleshooting.
 
 ```json
 {
