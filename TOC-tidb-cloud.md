@@ -20,7 +20,7 @@
     - [CRUD SQL in TiDB](/develop/dev-guide-tidb-crud-sql.md)
   - Connect to TiDB Cloud
     - [Java](/develop/dev-guide-sample-application-java.md)
-    - [Java (Spring Boot)](/develop/dev-guide-sample-application-spring-boot.md)
+    - [Java (Spring Boot)](/develop/dev-guide-sample-application-java-spring-boot.md)
     - [Golang](/develop/dev-guide-sample-application-golang.md)
   - Third-Party Support
     - [Third-Party Tools Supported by TiDB](/develop/dev-guide-third-party-support.md)

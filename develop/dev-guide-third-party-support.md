@@ -31,8 +31,8 @@ If you encounter problems when connecting to TiDB using the tools listed in this
 | C | [libmysqlclient](https://dev.mysql.com/doc/c-api/8.0/en/c-api-introduction.html) | 8.0 | Compatible | N/A | N/A |
 | C#(.Net) | [MySQL Connector/NET](https://downloads.mysql.com/archives/c-net/) | 8.0 | Compatible | N/A | N/A |
 | ODBC | [MySQL Connector/ODBC](https://downloads.mysql.com/archives/c-odbc/) | 8.0 | Compatible | N/A | N/A |
-| Go | [go-sql-driver/mysql](https://github.com/go-sql-driver/mysql) | v1.6.0 | Full | N/A | [Build a Simple CRUD App with TiDB and Golang](/develop/dev-guide-sample-application-golang.md) |
-| Java | [JDBC](https://dev.mysql.com/downloads/connector/j/) | 8.0 | Full | [pingcap/mysql-connector-j](/develop/dev-guide-choose-driver-or-orm.md#java-drivers) <br/> [pingcap/tidb-loadbalance](/develop/dev-guide-choose-driver-or-orm.md#java-client-load-balancing) | [Build a Simple CRUD App with TiDB and Java](/develop/dev-guide-sample-application-java.md) |
+| Go | [go-sql-driver/mysql](https://github.com/go-sql-driver/mysql) | v1.6.0 | Full | N/A | [Build a Simple CRUD App with TiDB and Go-MySQL-Driver](/develop/dev-guide-sample-application-golang-sql-driver.md) |
+| Java | [JDBC](https://dev.mysql.com/downloads/connector/j/) | 8.0 | Full | [pingcap/mysql-connector-j](/develop/dev-guide-choose-driver-or-orm.md#java-drivers) <br/> [pingcap/tidb-loadbalance](/develop/dev-guide-choose-driver-or-orm.md#java-client-load-balancing) | [Build a Simple CRUD App with TiDB and JDBC](/develop/dev-guide-sample-application-java-jdbc.md) |
 | JavaScript | [mysql](https://github.com/mysqljs/mysql) | v2.18.1 | Compatible | N/A | N/A |
 | PHP | [mysqlnd](https://dev.mysql.com/downloads/connector/php-mysqlnd/) | PHP 5.4+ | Compatible | N/A | N/A |
 | Python | [MySQL Connector/Python](https://downloads.mysql.com/archives/c-python/) | 8.0 | Compatible | N/A | N/A |
@@ -41,14 +41,14 @@ If you encounter problems when connecting to TiDB using the tools listed in this
 
 | Language | ORM framework | Latest tested version | Support level | TiDB adapter | Tutorial |
 | - | - | - | - | - | - |
-| Go | [gorm](https://github.com/go-gorm/gorm) | v1.23.5 | Full | N/A | [Build a Simple CRUD App with TiDB and Golang](/develop/dev-guide-sample-application-golang.md) |
+| Go | [gorm](https://github.com/go-gorm/gorm) | v1.23.5 | Full | N/A | [Build a Simple CRUD App with TiDB and GORM](/develop/dev-guide-sample-application-golang-gorm.md) |
 | Go | [beego](https://github.com/beego/beego) | v2.0.3 | Full | N/A | N/A |
 | Go | [upper/db](https://github.com/upper/db) | v4.5.2 | Full | N/A | N/A |
 | Go | [xorm](https://gitea.com/xorm/xorm) | v1.3.1 | Full | N/A | N/A |
 | Go | [ent](https://github.com/ent/ent) | v0.11.0 | Compatible | N/A | N/A |
-| Java | [Hibernate](https://hibernate.org/orm/) | 6.1.0.Final | Full | N/A | [Build a Simple CRUD App with TiDB and Java](/develop/dev-guide-sample-application-java.md) |
-| Java | [MyBatis](https://mybatis.org/mybatis-3/) | v3.5.10 | Full | N/A | [Build a Simple CRUD App with TiDB and Java](/develop/dev-guide-sample-application-java.md) |
-| Java | [Spring Data JPA](https://spring.io/projects/spring-data-jpa/) | 2.7.2 | Full | N/A | [Build a TiDB Application Using Spring Boot](/develop/dev-guide-sample-application-spring-boot.md) |
+| Java | [Hibernate](https://hibernate.org/orm/) | 6.1.0.Final | Full | N/A | [Build a Simple CRUD App with TiDB and Hibernate](/develop/dev-guide-sample-application-java-hibernate.md) |
+| Java | [MyBatis](https://mybatis.org/mybatis-3/) | v3.5.10 | Full | N/A | [Build a Simple CRUD App with TiDB and Mybatis](/develop/dev-guide-sample-application-java-mybatis.md) |
+| Java | [Spring Data JPA](https://spring.io/projects/spring-data-jpa/) | 2.7.2 | Full | N/A | [Build a TiDB Application Using Spring Boot](/develop/dev-guide-sample-application-java-spring-boot.md) |
 | Java | [jOOQ](https://github.com/jOOQ/jOOQ) | v3.16.7 (Open Source) | Full | N/A | N/A |
 | Ruby | [Active Record](https://guides.rubyonrails.org/active_record_basics.html) | v7.0 | Full | N/A | N/A |
 | JavaScript/TypeScript | [sequelize](https://www.npmjs.com/package/sequelize) | v6.20.1 | Compatible | N/A | N/A |

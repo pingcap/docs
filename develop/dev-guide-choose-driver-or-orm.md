@@ -33,7 +33,7 @@ You can follow the [MySQL documentation](https://dev.mysql.com/doc/connector-j/8
 >
 > There is a [bug](https://bugs.mysql.com/bug.php?id=106252) in the Connector/J 8.0 versions before 8.0.32, which might cause threads to hang when using TiDB versions earlier than v6.3.0. To avoid this issue, it is recommended that you use either MySQL Connector/J 8.0.32 or a later version, or the TiDB JDBC (see the *TiDB-JDBC* tab).
 
-For an example of how to build a complete application, see [Build a Simple CRUD App with TiDB and JDBC](/develop/dev-guide-sample-application-java.md).
+For an example of how to build a complete application, see [Build a Simple CRUD App with TiDB and JDBC](/develop/dev-guide-sample-application-java-jdbc.md).
 
 </div>
 <div label="TiDB-JDBC">
@@ -123,8 +123,8 @@ implementation 'org.hibernate:hibernate-core:6.0.0.CR2'
 implementation 'mysql:mysql-connector-java:5.1.49'
 ```
 
-- For an example of using Hibernate to build a TiDB application by native Java, see [Build a Simple CRUD App with TiDB and Java](/develop/dev-guide-sample-application-java.md).
-- For an example of using Spring Data JPA or Hibernate to build a TiDB application by Spring, see [Build a TiDB Application using Spring Boot](/develop/dev-guide-sample-application-spring-boot.md).
+- For an example of using Hibernate to build a TiDB application by native Java, see [Build a Simple CRUD App with TiDB and Hibernate](/develop/dev-guide-sample-application-java-hibernate.md).
+- For an example of using Spring Data JPA or Hibernate to build a TiDB application by Spring, see [Build a TiDB Application using Spring Boot](/develop/dev-guide-sample-application-java-spring-boot.md).
 
 In addition, you need to specify the TiDB dialect in your [Hibernate configuration file](https://www.tutorialspoint.com/hibernate/hibernate_configuration.htm): `org.hibernate.dialect.TiDBDialect`, which is only supported by Hibernate `6.0.0.Beta2` or above. If your `Hibernate` version is earlier than `6.0.0.Beta2`, upgrade it first.
 
@@ -163,7 +163,7 @@ implementation 'org.mybatis:mybatis:3.5.9'
 implementation 'mysql:mysql-connector-java:5.1.49'
 ```
 
-For an example of using MyBatis to build a TiDB application, see [Build a Simple CRUD App with TiDB and Java](/develop/dev-guide-sample-application-java.md).
+For an example of using MyBatis to build a TiDB application, see [Build a Simple CRUD App with TiDB and Mybatis](/develop/dev-guide-sample-application-java-mybatis.md).
 
 </div>
 
@@ -217,7 +217,7 @@ Support level: **Full**
 
 To download and configure a Golang driver, refer to the [go-sql-driver/mysql documentation](https://github.com/go-sql-driver/mysql).
 
-For an example of how to build a complete application, see [Build a Simple CRUD App with TiDB and Golang](/develop/dev-guide-sample-application-golang.md).
+For an example of how to build a complete application, see [Build a Simple CRUD App with TiDB and Go-MySQL-Driver](/develop/dev-guide-sample-application-golang-sql-driver.md).
 
 ### Golang ORM frameworks
 
@@ -232,7 +232,7 @@ go get -u gorm.io/gorm
 go get -u gorm.io/driver/mysql
 ```
 
-For an example of using GORM to build a TiDB application, see [Build a Simple CRUD App with TiDB and Golang](/develop/dev-guide-sample-application-golang.md).
+For an example of using GORM to build a TiDB application, see [Build a Simple CRUD App with TiDB and GORM](/develop/dev-guide-sample-application-golang-gorm.md).
 
 <CustomContent platform="tidb-cloud">
 

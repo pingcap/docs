@@ -115,9 +115,9 @@ jdbc:mysql://127.0.0.1:4000/test?user=root&useConfigs=maxPerformance&useServerPr
 
 For a complete example in Java, see:
 
-- [Build a Simple CRUD App with TiDB and Java - Using JDBC](/develop/dev-guide-sample-application-java.md#step-2-get-the-code)
-- [Build a Simple CRUD App with TiDB and Java - Using Hibernate](/develop/dev-guide-sample-application-java.md#step-2-get-the-code)
-- [Build the TiDB Application using Spring Boot](/develop/dev-guide-sample-application-spring-boot.md)
+- [Build a Simple CRUD App with TiDB and JDBC](/develop/dev-guide-sample-application-java-jdbc.md#step-2-get-the-code)
+- [Build a Simple CRUD App with TiDB and Hibernate](/develop/dev-guide-sample-application-java-hibernate.md#step-2-get-the-code)
+- [Build the TiDB Application using Spring Boot](/develop/dev-guide-sample-application-java-spring-boot.md)
 
 </div>
 
@@ -191,8 +191,8 @@ func buildBulkInsertSQL(amount int) string {
 
 For a complete example in Golang, see:
 
-- [Use go-sql-driver/mysql to build a simple CRUD app with TiDB and Golang](/develop/dev-guide-sample-application-golang.md#step-2-get-the-code)
-- [Use GORM to build a simple CRUD app with TiDB and Golang](/develop/dev-guide-sample-application-java.md#step-2-get-the-code)
+- [Use Go-MySQL-Driver to build a simple CRUD app with TiDB and Golang](/develop/dev-guide-sample-application-golang-sql-driver.md#step-2-get-the-code)
+- [Use GORM to build a simple CRUD app with TiDB and Golang](/develop/dev-guide-sample-application-golang-gorm.md#step-2-get-the-code) 
 
 </div>
 
