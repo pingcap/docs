@@ -15,7 +15,7 @@ By default, when receiving a query request, TiFlash reads all the data from the 
 
 If you want to improve the performance of certain queries in OLAP scenarios, you can enable the TiFlash late materialization feature at the session level or global level. By modifying the value of the [`tidb_opt_enable_late_materialization`](/system-variables.md#tidb_opt_enable_late_materialization-new-in-v700) system variable, you can choose to enable or disable the TiFlash late materialization feature.
 
-When the TiFlash late materialization feature is enabled, the TiDB optimizer will determine which filtering conditions will be pushed down based on statistics and filtering conditions. The optimizer will prioritize pushing down the filtering conditions with low selectivity. For detailed algorithms, see the [RFC document](https://github.com/pingcap/tidb/tree/master/docs/design/2022-12-06-support-late-materialization.md).
+When the TiFlash late materialization feature is enabled, the TiDB optimizer will determine which filtering conditions will be pushed down based on statistics and filtering conditions. The optimizer will prioritize pushing down the filtering conditions with high filtration rates. For detailed algorithms, see the [RFC document](https://github.com/pingcap/tidb/tree/master/docs/design/2022-12-06-support-late-materialization.md).
 
 For example:
 
