@@ -148,3 +148,9 @@ If a pane does not provide any metrics, the possible reasons are as follows:
 - The cluster version is low. You need to upgrade it to the latest version of TiDB to see these metrics.
 
 If all these reasons are excluded, you can contact the [PingCAP support team](/tidb-cloud/tidb-cloud-support.md) for troubleshooting.
+
+**2. Why Metrics may be discontinuous in rare cases?**
+
+In some rare situations, metrics might be lost, such as high pressure on the monitoring system.
+
+If you encounter this problem, you can contact the [PingCAP support team](/tidb-cloud/tidb-cloud-support.md) for troubleshooting.
