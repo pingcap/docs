@@ -229,7 +229,7 @@ TiDB Cloud generates code examples to help you call an endpoint. To get the code
 
 ### Response
 
-After calling an endpoint, you can see the response in JSON format. For more information, see [Response and Error Codes of Data Service](/tidb-cloud/data-service-response-and-error-code.md).
+After calling an endpoint, you can see the response in JSON format. For more information, see [Response and Status Codes of Data Service](/tidb-cloud/data-service-response-and-status-code.md).
 
 ## Undeploy an endpoint
 

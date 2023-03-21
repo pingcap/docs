@@ -1,13 +1,13 @@
 ---
-title: Response and Error Codes of Data Service
-summary: This document describes the response and error codes of Data Service in TiDB Cloud.
+title: Response and HTTP Status Codes of Data Service
+summary: This document describes the response and HTTP status codes of Data Service in TiDB Cloud.
 ---
 
-# Response and Error Codes of Data Service
+# Response and HTTP Status Codes of Data Service
 
-When you call an API endpoint defined in [Data Service](/tidb-cloud/data-service-overview.md), Data Service returns an HTTP response. Understanding the structure of this response and the meaning of error codes is essential for interpreting data returned by a Data Service endpoint.
+When you call an API endpoint defined in [Data Service](/tidb-cloud/data-service-overview.md), Data Service returns an HTTP response. Understanding the structure of this response and the meaning of status codes is essential for interpreting data returned by a Data Service endpoint.
 
-This document describes the response and error codes of Data Service in TiDB Cloud.
+This document describes the response and status codes of Data Service in TiDB Cloud.
 
 ## Response
 
@@ -108,11 +108,11 @@ An example response is as follows:
 </div>
 </SimpleTab>
 
-## Error code
+## Status code
 
-### 1146
+### 200
 
-This error code indicates that TiDB Cloud fails to execute the SQL statement defined in your endpoint. You can check the `code` and `message` fields for detailed information.
+If the HTTP status code is `200` and the `result.code` field also shows `200`, this indicated that the SQL statement is executed successfully. Otherwise, TiDB Cloud fails to execute the SQL statement defined in your endpoint. You can check the `code` and `message` fields for detailed information.
 
 An example response is as follows:
 
@@ -139,7 +139,7 @@ An example response is as follows:
 
 ### 400
 
-This error code indicates that the parameter check failed.
+This status code indicates that the parameter check failed.
 
 An example response is as follows:
 
@@ -166,7 +166,7 @@ An example response is as follows:
 
 ### 401
 
-This error code indicates that the authentication failed due to lack of permission.
+This status code indicates that the authentication failed due to lack of permission.
 
 An example response is as follows:
 
@@ -193,7 +193,7 @@ An example response is as follows:
 
 ### 404
 
-This error code indicates that the authentication failed due to the inability to find the specified endpoint.
+This status code indicates that the authentication failed due to the inability to find the specified endpoint.
 
 An example response is as follows:
 
@@ -220,7 +220,7 @@ An example response is as follows:
 
 ### 405
 
-This error code indicates that the request used a method that is not allowed. Note that Data Service only supports `GET` and `POST`.
+This status code indicates that the request used a method that is not allowed. Note that Data Service only supports `GET` and `POST`.
 
 An example response is as follows:
 
@@ -247,7 +247,7 @@ An example response is as follows:
 
 ### 408
 
-This error code indicates that the request exceeds the timeout duration of the endpoint. To modify the timeout of an endpoint, refer to [Configure properties](/tidb-cloud/data-service-manage-endpoint.md#configure-properties).
+This status code indicates that the request exceeds the timeout duration of the endpoint. To modify the timeout of an endpoint, refer to [Configure properties](/tidb-cloud/data-service-manage-endpoint.md#configure-properties).
 
 An example response is as follows:
 
@@ -274,7 +274,7 @@ An example response is as follows:
 
 ### 500
 
-This error code indicates that the request met an internal error. There might be various causes for this error.
+This status code indicates that the request met an internal error. There might be various causes for this error.
 
 One possible cause is that the authentication failed due to the inability to connect to the authentication server.
 

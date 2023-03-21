@@ -171,4 +171,4 @@ If your API call is not successful, you will receive a status code other than `2
 ## Learn more
 
 - [Manage an API key](/tidb-cloud/data-service-api-key.md)
-- [Response and Error Codes of Data Service](/tidb-cloud/data-service-response-and-error-code.md)
+- [Response and Status Codes of Data Service](/tidb-cloud/data-service-response-and-status-code.md)
