@@ -101,7 +101,7 @@ mysql> SELECT _tidb_rowid, id FROM t;
 3 rows in set (0.01 sec)
 ```
 
-As you can see, because of the shared allocator, the ID increments by 2 each time. This behavior is changed in [MySQL compatibility mode](/auto-increment.md#mysql-compatibility-mode), where there is no shared allocator and therefore no skipping of numbers.
+As you can see, because of the shared allocator, the `id` increments by 2 each time. This behavior is changed in [MySQL compatibility mode](/auto-increment.md#mysql-compatibility-mode), where there is no shared allocator and therefore no skipping of numbers.
 
 <CustomContent platform="tidb">
 
