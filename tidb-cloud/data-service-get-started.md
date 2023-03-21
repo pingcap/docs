@@ -44,7 +44,7 @@ On the right pane, click the **Properties** tab and set properties for the endpo
 - **Endpoint Path**: the unique path of the endpoint that users use to access it.
 
     - The path must be unique within a Data App.
-    - Only letters, numbers, underscores (`_`), and slashs (`/`) are allowed in the path, which must start with a slash (`/`). For example, `/my_endpoint/get_id`.
+    - Only letters, numbers, underscores (`_`), and slashes (`/`) are allowed in the path, which must start with a slash (`/`). For example, `/my_endpoint/get_id`.
     - The length of the path must be less than 64 characters.
 
 - **Endpoint URL**: (read-only) the URL is automatically generated based on the service URL of the Data App and the path of the endpoint. For example, if the path of the endpoint is `/my_endpoint/get_id`, the endpoint URL is `https://data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id`.
@@ -83,7 +83,7 @@ You can customize SQL statements for the endpoint in the SQL editor, which is th
     > - The parameter name is case-sensitive.
     > - The parameter cannot be used as a table name or column name.
 
-    - In the **Definition** section, you can specify whether the parameter is required when a client calls the endpoint, the data type (`STRING`, `NUMBER`, or `BOOLEAN`), and the default value of the parameter. When using a `STRING` type parameter, you do not need to add quotation marks (`'` or `"`). For example, `sample` is valid for the `STRING` data type and is interpreted as `"sample"`, whereas `'sample'` is interpreted as `"\"sample\""`.
+    - In the **Definition** section, you can specify whether the parameter is required when a client calls the endpoint, the data type (`STRING`, `NUMBER`, or `BOOLEAN`), and the default value of the parameter. When using a `STRING` type parameter, you do not need to add quotation marks (`'` or `"`). For example, `foo` is valid for the `STRING` type and is processed as `"foo"`, whereas `"foo"` is processed as `"\"foo\""`.
     - In the **Test Values** section, you can set the test value for a parameter. The test values are used when you run the SQL statements or test the endpoint. If you do not set the test values, the default values are used.
     - For more information, see [Configure parameters](/tidb-cloud/data-service-manage-endpoint.md#configure-parameters).
 
@@ -137,7 +137,7 @@ TiDB Cloud generates code examples to help you call an endpoint. To get the code
 
 1. In the left pane of the [**Data Service**](https://tidbcloud.com/console/dataservice) page, click the name of your endpoint, and then click **...** > **Code Example** in the upper-right corner. The **Code Example** dialog box is displayed.
 
-2. In the dialog box, select the environment that you want to use to call the endpoint, and then copy the code example.
+2. In the dialog box, select the cluster and database that you want to use to call the endpoint, and then copy the code example.
 
     An example of the curl code example is as follows:
 

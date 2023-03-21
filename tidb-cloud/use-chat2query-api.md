@@ -35,7 +35,7 @@ To enable the Chat2Query API, perform the following steps:
     >
     > After DataAPI is enabled for one Serverless Tier cluster, all Serverless Tier clusters in the same project can use the Chat2Query API.
 
-5. Click **Data Service** in the message to access the Chat2Query API.
+5. Click the **Data Service** link in the message to access the Chat2Query API.
 
     You can find that the **Chat2Query System** [Data App](/tidb-cloud/tidb-cloud-glossary.md#data-app) and its **Chat2Data** [endpoint](/tidb-cloud/tidb-cloud-glossary.md#endpoint) are displayed in the left pane.
 

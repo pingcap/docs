@@ -41,7 +41,7 @@ On the right pane of the endpoint details page, you can click the **Properties**
 - **Endpoint Path**: the unique path of the endpoint that users use to access it.
 
     - The path must be unique within a Data App.
-    - Only letters, numbers, underscores (`_`), and slashs (`/`) are allowed in the path, which must start with a slash (`/`). For example, `/my_endpoint/get_id`.
+    - Only letters, numbers, underscores (`_`), and slashes (`/`) are allowed in the path, which must start with a slash (`/`). For example, `/my_endpoint/get_id`.
     - The length of the path must be less than 64 characters.
 
 - **Endpoint URL**: (read-only) the URL is automatically generated based on the service URL of the Data App and the path of the endpoint. For example, if the path of the endpoint is `/my_endpoint/get_id`, the endpoint URL is `https://data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id`.
@@ -107,9 +107,9 @@ On the right pane of the endpoint details page, you can click the **Params** tab
 
 In the **Definition** section, you can view and manage the following properties for a parameter:
 
-- The parameter name: the name can only include letters, digits, underscores (`_`) and must start with a letter or a underscore (`_`).
+- The parameter name: the name can only include letters, digits, and underscores (`_`) and must start with a letter or an underscore (`_`).
 - **Required**: specifies whether the parameter is required in the request. The default configuration is set to not required.
-- **Type**: specifies the data type of the parameter. Supported values are `STRING`, `NUMBER`, and `BOOLEAN`.  When using a `STRING` type parameter, you do not need to add quotation marks (`'` or `"`). For example, `sample` is valid for the `STRING` data type and is interpreted as `"sample"`, whereas `'sample'` is interpreted as `"\"sample\""`.
+- **Type**: specifies the data type of the parameter. Supported values are `STRING`, `NUMBER`, and `BOOLEAN`.  When using a `STRING` type parameter, you do not need to add quotation marks (`'` or `"`). For example, `foo` is valid for the `STRING` type and is processed as `"foo"`, whereas `"foo"` is processed as `"\"foo\""`.
 - **Default Value**: specifies the default value of the parameter.
 
     - Make sure that the value can be converted to the type of parameter. Otherwise, the endpoint returns an error.
@@ -117,7 +117,7 @@ In the **Definition** section, you can view and manage the following properties 
 
 In the **Test Values** section, you can view and set test parameters. These values are used as the parameter values when you test the endpoint. Make sure that the value can be converted to the type of parameter. Otherwise, the endpoint returns an error.
 
-### Mange versions
+### Manage versions
 
 On the right pane of the endpoint details page, you can click the **Deployments** tab to view and manage the deployed versions of the endpoint.
 
@@ -161,7 +161,7 @@ To deploy an endpoint, perform the following steps:
 2. In the left pane, click the name of your target Data App to view its endpoints.
 3. Locate the endpoint you want to deploy, click the endpoint name to view its details, and then click **Deploy** in the upper-right corner.
 
-4. Click **Deploy** to confirm the deploy. You will get the **Endpoint has been deployed** prompt if the endpoint is successfully deployed.
+4. Click **Deploy** to confirm the deployment. You will get the **Endpoint has been deployed** prompt if the endpoint is successfully deployed.
 
     On the right pane of the endpoint details page, you can click the **Deployments** tab to view the deployed history.
 
@@ -185,7 +185,7 @@ TiDB Cloud generates code examples to help you call an endpoint. To get the code
     >
     > Alternatively, you can also click the endpoint name to view its details and click **...** > **Code Example** in the upper-right corner.
 
-4. In the dialog box, select the environment that you want to use to call the endpoint, and then copy the code example.
+4. In the dialog box, select the cluster and database that you want to use to call the endpoint, and then copy the code example.
 
     > **Note:**
     >
