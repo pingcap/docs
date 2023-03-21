@@ -56,7 +56,7 @@ Data Migration supports the following data sources and versions:
 - MySQL 5.6, 5.7, and 8.0 local instances or on a public cloud provider. Note that MySQL 8.0 is still experimental on TiDB Cloud and might have incompatibility issues.
 - Amazon Aurora (MySQL 5.6 and 5.7)
 - Amazon RDS (MySQL 5.7)
-- Google Cloud SQL for (MySQL 5.6 and 5.7) 
+- Google Cloud SQL for MySQL 5.6 and 5.7
 
 ### Grant required privileges to the upstream database
 
