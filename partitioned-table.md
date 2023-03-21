@@ -567,7 +567,7 @@ Starting from v7.0.0, TiDB supports Key partitioning. For TiDB versions earlier 
 
 Both Key partitioning and Hash partitioning can evenly distribute data into a certain number of partitions. The difference is that Hash partitioning only supports distributing data based on a specified integer expression or an integer column, while Key partitioning supports distributing data based on a column list, and partitioning columns of Key partitioning are not limited to the integer type. The Hash algorithm of TiDB for Key partitioning is different from that of MySQL, so the table data distribution is also different.
 
-Partitioning by Key requires you to append a `PARTITION BY Key (columList)` clause to the `CREATE TABLE` statement. `columList` is a column list with one or more column names. The data type of each column in the list can be any type except `BLOB`, `JSON`, and `GEOMETRY` (Note that TiDB does not support the `GEOMETRY`). In addition, you might also need to append `PARTITIONS num`, where `num` is a positive integer indicating how many partitions a table is divided into.
+Partitioning by Key requires you to append a `PARTITION BY KEY (columList)` clause to the `CREATE TABLE` statement. `columList` is a column list with one or more column names. The data type of each column in the list can be any type except `BLOB`, `JSON`, and `GEOMETRY` (Note that TiDB does not support the `GEOMETRY`). In addition, you also need to append `PARTITIONS num`, where `num` is a positive integer indicating how many partitions a table is divided into, or named definitions of the partitions like `(PARTITION pOne, PARTITION pTwo).
 
 The following operation creates a Key partitioned table, which is divided into 4 partitions by `store_id`:
 
