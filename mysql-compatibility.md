@@ -69,9 +69,9 @@ In addition, TiDB does not support the MySQL replication protocol, but provides 
 
 + TiDB does not support adding the `AUTO_INCREMENT` column attribute, and this attribute cannot be recovered once it is removed.
 
-+ See [`AUTO_INCREMENT`](/auto-increment.md) for more details.
-
 + For TiDB v6.6.0 and earlier versions, TiDB behaves the same as MySQL InnoDB, which requires auto-increment columns to be primary keys or index prefixes. Starting from v7.0.0, TiDB removes the restriction that auto-increment columns must be indexes or index prefixes, which allows you to define table primary keys more flexibly. [#40580](https://github.com/pingcap/tidb/issues/40580)
+
+For more details, see [`AUTO_INCREMENT`](/auto-increment.md).
 
 > **Note:**
 >
