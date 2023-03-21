@@ -272,6 +272,64 @@ An example response is as follows:
 }
 ```
 
+### 429
+
+This status code indicates that the request exceeds the rate limit of the API key. For more quota, you can [submit a request](https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519) to our support team.
+
+An example response is as follows:
+
+<SimpleTab>
+<div label="SQL Endpoint">
+
+```json
+{
+  "type": "sql_endpoint",
+  "data": {
+    "columns": [],
+    "rows": [],
+    "result": {
+      "code": 49900007,
+      "message": "The request exceeded the limit of 100 times per apikey per minute. For more quota, please contact us: https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519",
+      "start_ms": "",
+      "end_ms": "",
+      "latency": "",
+      "row_count": 0,
+      "row_affect": 0,
+      "limit": 0,
+      "query": ""
+    }
+  }
+}
+```
+
+</div>
+
+<div label="Chat2Data Endpoint">
+
+```json
+{
+  "type": "chat2data_endpoint",
+  "data": {
+    "columns": [],
+    "rows": [],
+    "result": {
+      "code": 49900007,
+      "message": "The request exceeded the limit of 100 times per apikey per minute. For more quota, please contact us: https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519",
+      "start_ms": "",
+      "end_ms": "",
+      "latency": "",
+      "row_count": 0,
+      "row_affect": 0,
+      "limit": 0,
+      "query": ""
+    }
+  }
+}
+```
+
+</div>
+</SimpleTab>
+
 ### 500
 
 This status code indicates that the request met an internal error. There might be various causes for this error.
