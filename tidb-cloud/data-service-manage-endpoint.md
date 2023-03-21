@@ -44,7 +44,7 @@ On the right pane of the endpoint details page, you can click the **Properties**
     - Only letters, numbers, underscores (`_`), and slashs (`/`) are allowed in the path, which must start with a slash (`/`). For example, `/my_endpoint/get_id`.
     - The length of the path must be less than 64 characters.
 
-- **Endpoint URL**: (read-only) the URL is automatically generated based on the service URL of the Data App and the path of the endpoint. For example, if the path of the endpoint is `/my_endpoint/get_id`, the endpoint URL is `https://data.tidbcloud.com/api/v1beta/apps/{APP_ID}/endpoint/my_endpoint/get_id`.
+- **Endpoint URL**: (read-only) the URL is automatically generated based on the service URL of the Data App and the path of the endpoint. For example, if the path of the endpoint is `/my_endpoint/get_id`, the endpoint URL is `https://data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id`.
 
 - **Request Method**: the HTTP method of the endpoint. The following methods are supported:
 
@@ -199,9 +199,9 @@ TiDB Cloud generates code examples to help you call an endpoint. To get the code
     To call a draft version of the endpoint, you need to add the `endpoint-type: draft` header:
 
     ```bash
-    curl --digest --user '<Public Key>:<Private Key>' --request GET 'https://data.tidbcloud.com/api/v1beta/app/<AppID>/endpoint/<ENDPOINT_PATH>'\
-    --header 'Content-Type: application/x-www-form-urlencoded'\
-    --header 'endpoint-type: draft'
+    curl --digest --user '<Public Key>:<Private Key>' \
+      --request GET 'https://data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/<Endpoint Path>' \
+      --header 'endpoint-type: draft'
     ```
 
     </div>
@@ -213,8 +213,8 @@ TiDB Cloud generates code examples to help you call an endpoint. To get the code
     To call the current online version of the endpoint, use the following command:
 
     ```bash
-    curl --digest --user '<Public Key>:<Private Key>' --request GET 'https://data.tidbcloud.com/api/v1beta/app/<AppID>/endpoint/<ENDPOINT_PATH>'\
-    --header 'Content-Type: application/x-www-form-urlencoded'\
+    curl --digest --user '<Public Key>:<Private Key>' \
+      --request GET 'https://data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/<Endpoint Path>'
     ```
 
     </div>
@@ -222,7 +222,7 @@ TiDB Cloud generates code examples to help you call an endpoint. To get the code
 
 5. Paste the code example in your application and run it.
 
-    - You need to replace the `{Public Key}` and `{Private Key}` placeholders with your API key. For more information, refer to [Manage an API key](/tidb-cloud/data-service-api-key.md).
+    - You need to replace the `<Public Key>` and `<Private Key>` placeholders with your API key. For more information, refer to [Manage an API key](/tidb-cloud/data-service-api-key.md).
     - If the endpoint contains parameters, specify the parameter values when calling the endpoint.
 
 ### Response

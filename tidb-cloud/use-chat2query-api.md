@@ -57,7 +57,7 @@ In the left pane of the [**Data Service**](https://tidbcloud.com/console/dataser
 
 - **Endpoint Path**: (read-only) the path of the Chat2Data endpoint, which is `/chat2data`.
 
-- **Endpoint URL**: (read-only) the URL of the Chat2Data endpoint, which is used to call the endpoint. For example, `https://data.tidbcloud.com/api/v1beta/apps/chat2query-{ID}/endpoint/chat2data`.
+- **Endpoint URL**: (read-only) the URL of the Chat2Data endpoint, which is used to call the endpoint. For example, `https://data.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/chat2data`.
 
 - **Request Method**: (read-only) the HTTP method of the Chat2Data endpoint, which is `POST`.
 
@@ -88,12 +88,12 @@ The following code example is used to find the most popular GitHub repository fr
 
 ```bash
 curl --digest --user '<Public Key>:<Private Key>' \
-  --request POST 'https://data.tidbcloud.com/api/v1beta/apps/chat2query-ABCDEFGH/endpoint/chat2data' \
+  --request POST 'https://data.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/chat2data' \
   --header 'content-type: application/json' \
   --data-raw '{
       "cluster_id": "12345678912345678960",
       "database": "sample_data",
-      "table": ["github_events"],
+      "tables": ["github_events"],
       "instruction": "Find the most popular repo from GitHub events"
       }'
 ```
@@ -102,7 +102,7 @@ In the preceding example, the request body is a JSON object with the following p
 
 - `cluster_id`: _string_. A unique identifier of the TiDB cluster.
 - `database`: _string_. The name of the database.
-- `table`: _array_. (optional) A list of table names to be queried.
+- `tables`: _array_. (optional) A list of table names to be queried.
 - `instruction`: _string_. A natural language instruction describing the query you want.
 
 The response is as follows:
@@ -149,7 +149,7 @@ If your API call is not successful, you will receive a status code other than `2
 
 ```json
 {
-    "type": "sql_endpoint",
+    "type": "chat2data_endpoint",
     "data": {
         "columns": [],
         "rows": [],
