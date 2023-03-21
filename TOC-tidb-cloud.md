@@ -47,7 +47,7 @@
       - [Follower Read](/develop/dev-guide-use-follower-read.md)
       - [Stale Read](/develop/dev-guide-use-stale-read.md)
     - [HTAP Queries](/develop/dev-guide-hybrid-oltp-and-olap-queries.md)
-    - [FastScan](/develop/dev-guide-use-fastscan.md)
+    - [FastScan](/tiflash/use-fastscan.md)
   - Transaction
     - [Overview](/develop/dev-guide-transaction-overview.md)
     - [Optimistic and Pessimistic Transactions](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)
@@ -171,7 +171,8 @@
         - [Wrong Index Solution](/wrong-index-solution.md)
         - [Distinct Optimization](/agg-distinct-optimization.md)
         - [Cost Model](/cost-model.md)
-      - [Prepare Execution Plan Cache](/sql-prepared-plan-cache.md)
+      - [Prepared Execution Plan Cache](/sql-prepared-plan-cache.md)
+      - [Non-Prepared Execution Plan Cache](/sql-non-prepared-plan-cache.md)
     - Control Execution Plans
       - [Overview](/control-execution-plan.md)
       - [Optimizer Hints](/optimizer-hints.md)
