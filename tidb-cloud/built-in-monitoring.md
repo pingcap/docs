@@ -153,4 +153,4 @@ If all these reasons are excluded, you can contact the [PingCAP support team](/t
 
 In some rare cases, metrics might be lost, such as when the monitoring system experiences high pressure.
 
-If you encounter this problem, you can contact the [PingCAP support team](/tidb-cloud/tidb-cloud-support.md) for troubleshooting.
+If you encounter this problem, you can contact [PingCAP Support](/tidb-cloud/tidb-cloud-support.md) for troubleshooting.
