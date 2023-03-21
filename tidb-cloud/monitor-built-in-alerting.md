@@ -23,7 +23,7 @@ If you are a member of a project and you want to get alert notification emails o
     - If you have multiple projects, switch to the target project, and then click **Admin** > **Alert Subscription**.
     - If you only have one project, click **Admin** > **Alert Subscription**.
 
-3. Click **Add Subscriber** ，enter your email address in the popup window and then click **Add**.
+3. Click **Add Subscriber**, enter your email address in the popup window and then click **Add**.
 
 If the condition triggering an alert does not change, the alert will send email notifications every 3 hours .
 
