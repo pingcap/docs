@@ -15,7 +15,7 @@ To create a Data App for your project, perform the following steps:
 
 1. Navigate to the [**Data Service**](https://tidbcloud.com/console/dataservice) page of your project.
 2. In the left pane, click <MDSvgIcon name="icon-create-data-app" /> **Create DataApp** and update the default name if necessary.
-3. The newly created Data App is added to the top of the list. A default endpoint called **New Endpoint** is created for the new Data App.
+3. The newly created Data App is added to the top of the list. A default endpoint called **untitled endpoint** is created for the new Data App.
 
 ## View a Data App
 

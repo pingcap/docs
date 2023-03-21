@@ -38,7 +38,7 @@ For each endpoint, you can write SQL statements to execute on a TiDB cluster, de
 
 On the right pane of the endpoint details page, you can click the **Properties** tab to view and manage the following properties of the endpoint:
 
-- **Path**: the unique path of the endpoint that users use to access it.
+- **Endpoint Path**: the unique path of the endpoint that users use to access it.
 
     - The path must be unique within a Data App.
     - Only letters, numbers, underscores (`_`), and slashs (`/`) are allowed in the path, which must start with a slash (`/`). For example, `/my_endpoint/get_id`.
@@ -117,9 +117,9 @@ In the **Test Values** section, you can view and set test parameters. These valu
 
 ### Mange versions
 
-On the right pane of the endpoint details page, you can click the **Version** tab to view and manage the deployed versions of the endpoint.
+On the right pane of the endpoint details page, you can click the **Deployments** tab to view and manage the deployed versions of the endpoint.
 
-In the **Version** tab, you can deploy a draft version and undeploy the online version.
+In the **Deployments** tab, you can deploy a draft version and undeploy the online version.
 
 ### Rename
 
@@ -161,7 +161,7 @@ To deploy an endpoint, perform the following steps:
 
 4. Click **Deploy** to confirm the deploy. You will get the **Endpoint has been deployed** prompt if the endpoint is successfully deployed.
 
-    On the right pane of the endpoint details page, you can click the **Version** tab to view the deployed history.
+    On the right pane of the endpoint details page, you can click the **Deployments** tab to view the deployed history.
 
 ## Call an endpoint
 
@@ -209,7 +209,7 @@ TiDB Cloud generates code examples to help you call an endpoint. To get the code
     <div label="Online Environment">
 
     You must deploy your endpoint first before checking the code example in the online environment.
-    
+
     To call the current online version of the endpoint, use the following command:
 
     ```bash
@@ -227,7 +227,7 @@ TiDB Cloud generates code examples to help you call an endpoint. To get the code
 
 ### Response
 
-After calling an endpoint, you can see the response in JSON format. For more details, refer to [Response and Error Codes of Data Service](/markdown-pages/en/tidbcloud/master/tidb-cloud/data-service-response-and-error-code.md).
+After calling an endpoint, you can see the response in JSON format. For more information, see [Response and Error Codes of Data Service](/tidb-cloud/data-service-response-and-error-code.md).
 
 ## Undeploy an endpoint
 
@@ -236,7 +236,7 @@ To undeploy an endpoint, perform the following steps:
 1. Navigate to the [**Data Service**](https://tidbcloud.com/console/dataservice) page of your project.
 2. In the left pane, click the name of your target Data App to view its endpoints.
 3. Click the name of the endpoint you want to undeploy to view its details.
-4. On the right pane of the endpoint details page, click the **Version** tab. The deployed version page is displayed.
+4. On the right pane of the endpoint details page, click the **Deployments** tab. The deployed version page is displayed.
 5. Locate the current online version and click **Undeploy**. The version status will be changed to **Offline**.
 
 ## Delete an endpoint

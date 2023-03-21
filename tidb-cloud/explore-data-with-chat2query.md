@@ -9,7 +9,7 @@ TiDB Cloud is powered by AI. You can use Chat2Query (beta), an AI-powered SQL ed
 
 In Chat2Query, you can either simply type `--` followed by your instructions to let AI generate SQL queries automatically or write SQL queries manually, and then run SQL queries against databases without a terminal. You can find the query results in tables intuitively and check the query logs easily.
 
-TiDB Cloud also provides the Chat2Query API, which is a REST interface. For more details, refer to [Get started with Chat2Query API](/tidb-cloud/use-chat2query-api.md).
+TiDB Cloud also provides the Chat2Query API, which is a REST interface. For more information, see [Get started with Chat2Query API](/tidb-cloud/use-chat2query-api.md).
 
 > **Note:**
 >

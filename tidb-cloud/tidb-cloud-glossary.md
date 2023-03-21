@@ -29,7 +29,7 @@ TiDB Cloud is powered by AI. You can use Chat2Query (beta), an AI-powered SQL ed
 
 In Chat2Query, you can either simply type `--` followed by your instructions to let AI generate SQL queries automatically or write SQL queries manually, and then run SQL queries against databases without a terminal. You can find the query results in tables intuitively and check the query logs easily.
 
-For more details, refer to [Chat2Query (beta)](/tidb-cloud/explore-data-with-chat2query.md).
+For more information, see [Chat2Query (beta)](/tidb-cloud/explore-data-with-chat2query.md).
 
 ### cluster tier
 
@@ -45,13 +45,13 @@ TiDB Cloud offers a certain number of credits for Proof of Concept (PoC) users. 
 
 A Data App in [Data Service (beta)](#data-service) is a group of endpoints that you can use to access data for a specific application. You can configure authorization settings using API keys to restrict access to endpoints in a Data App.
 
-For more details, refer to [Manage a Data App](/tidb-cloud/data-service-manage-data-app.md).
+For more information, see [Manage a Data App](/tidb-cloud/data-service-manage-data-app.md).
 
 ### Data Service
 
 Data Service (beta) enables you to access TiDB Cloud data via an HTTPS request using a custom API [endpoint](#endpoint). This feature uses a serverless architecture to handle computing resources and elastic scaling, so you can focus on the query logic in endpoints without worrying about infrastructure or maintenance costs.
 
-For more details, refer to [Data Service Overview](/tidb-cloud/data-service-overview.md).
+For more information, see [Data Service Overview](/tidb-cloud/data-service-overview.md).
 
 ## E
 
@@ -59,7 +59,7 @@ For more details, refer to [Data Service Overview](/tidb-cloud/data-service-over
 
 An endpoint in Data Service is a web API that you can customize to execute SQL statements. You can specify parameters for your SQL statements, such as the value used in the `WHERE` clause. When a client calls an endpoint and provides values for the parameters in a request URL, the endpoint executes the corresponding SQL statement with the provided parameters and returns the results as part of the HTTP response.
 
-For more details, refer to [Manage an endpoint](/tidb-cloud/data-service-manage-endpoint.md).
+For more information, see [Manage an endpoint](/tidb-cloud/data-service-manage-endpoint.md).
 
 ## M
 

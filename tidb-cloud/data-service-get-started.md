@@ -5,7 +5,11 @@ summary: Learn how to use TiDB Cloud Data Service to access your data with HTTPS
 
 # Get Started with Data Service
 
-Data Service (beta) enables you to access TiDB Cloud data via an HTTPS request using a custom API endpoint and allows you to seamlessly integrate with any application or service that is compatible with HTTPS. TiDB Cloud provides a system Data App called **Chat2Query**. You can use this to call the Chat2Data endpoint to let AI generate and execute SQL statements by providing instructions. For more details, see [Get started with Chat2Query API](/tidb-cloud/use-chat2query-api.md).
+Data Service (beta) enables you to access TiDB Cloud data via an HTTPS request using a custom API endpoint and allows you to seamlessly integrate with any application or service that is compatible with HTTPS.
+
+> **Tip:**
+>
+> TiDB Cloud provides a system Data App called **Chat2Query**. You can use this App to call the Chat2Data endpoint to let AI generate and execute SQL statements by providing instructions. For more information, see [Get started with Chat2Query API](/tidb-cloud/use-chat2query-api.md).
 
 This document introduces how to quickly get started with TiDB Cloud Data Service (beta) by creating a Data App, developing, testing, deploying, and calling an endpoint.
 
@@ -27,7 +31,7 @@ A Data App is a group of endpoints that you can use to access data for a specifi
 
 An endpoint is a web API that you can customize to execute SQL statements.
 
-After creating a Data App, a default endpoint `New Endpoint` is created for you automatically. You can use the default endpoint to access your TiDB Cloud cluster.
+After creating a Data App, a default endpoint `untitled endpoint` is created for you automatically. You can use the default endpoint to access your TiDB Cloud cluster.
 
 If you want to create a new endpoint, locate the newly created Data App and click **+** **Create Endpoint** on the top of the left pane.
 
@@ -35,7 +39,7 @@ If you want to create a new endpoint, locate the newly created Data App and clic
 
 On the right pane, click the **Properties** tab and set properties for the endpoint, such as:
 
-- **Path**: the unique path of the endpoint that users use to access it.
+- **Endpoint Path**: the unique path of the endpoint that users use to access it.
 
     - The path must be unique within a Data App.
     - Only letters, numbers, underscores (`_`), and slashs (`/`) are allowed in the path, which must start with a slash (`/`). For example, `/my_endpoint/get_id`.
@@ -102,7 +106,7 @@ To deploy the endpoint, perform the following steps:
 
 2. Click **Deploy** to confirm the deployment. You will get the **Endpoint has been deployed** prompt if the endpoint is successfully deployed.
 
-    On the right pane of the endpoint details page, you can click the **Version** tab to view the deployed history.
+    On the right pane of the endpoint details page, you can click the **Deployments** tab to view the deployed history.
 
 ## Step 5. Call the endpoint
 
