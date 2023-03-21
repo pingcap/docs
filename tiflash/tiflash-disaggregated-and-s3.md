@@ -65,6 +65,7 @@ TiFlash disaggregated storage and compute architecture is suitable for cost-effe
 2. Add a [lifecycle](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lifecycle-mgmt.html) to the prepared S3 bucket for cleaning up deleted data:
 
     ```shell
+    "ID": "tiflash-clean",
     "Expiration": {
         "Days": 1
     },
