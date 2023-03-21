@@ -355,7 +355,7 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 - Default value: `OFF`
 - This variable is used to show whether the execution plan used in the previous `execute` statement is taken directly from the plan cache.
 
-### `last_sql_use_alloc` <span class="version-mark">New in v6.4.0</span>
+### last_sql_use_alloc <span class="version-mark">New in v6.4.0</span>
 
 - Scope: SESSION
 - Default value: `OFF`
@@ -644,7 +644,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 - Default value: (system dependent)
 - This variable shows the system time zone from when TiDB was first bootstrapped. See also [`time_zone`](#time_zone).
 
-### `tidb_adaptive_closest_read_threshold` <span class="version-mark">New in v6.3.0</span>
+### tidb_adaptive_closest_read_threshold <span class="version-mark">New in v6.3.0</span>
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
@@ -981,7 +981,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
         ERROR 1062 : Duplicate entry '1' for key 't.PRIMARY'
         ```
 
-### `tidb_constraint_check_in_place_pessimistic` <span class="version-mark">New in v6.3.0</span>
+### tidb_constraint_check_in_place_pessimistic <span class="version-mark">New in v6.3.0</span>
 
 - Scope: SESSION
 - Type: Boolean
@@ -1136,7 +1136,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Range: `[0, 9223372036854775807]`
 - This variable is used to set the number of retries when the DDL operation fails. When the number of retries exceeds the parameter value, the wrong DDL operation is canceled.
 
-### `tidb_ddl_flashback_concurrency` <span class="version-mark">New in v6.3.0</span>
+### tidb_ddl_flashback_concurrency <span class="version-mark">New in v6.3.0</span>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -1484,7 +1484,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - This variable is used to set whether to enable the statistics `Fast Analyze` feature.
 - If the statistics `Fast Analyze` feature is enabled, TiDB randomly samples about 10,000 rows of data as statistics. When the data is distributed unevenly or the data size is small, the statistics accuracy is low. This might lead to a non-optimal execution plan, for example, selecting a wrong index. If the execution time of the regular `Analyze` statement is acceptable, it is recommended to disable the `Fast Analyze` feature.
 
-### `tidb_enable_foreign_key` <span class="version-mark">New in v6.3.0</span>
+### tidb_enable_foreign_key <span class="version-mark">New in v6.3.0</span>
 
 > **Warning:**
 >
@@ -1508,7 +1508,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Default value: `OFF`
 - This variable controls whether to enable GC-Aware memory track.
 
-### `tidb_enable_general_plan_cache` <span class="version-mark">New in v6.3.0</span>
+### tidb_enable_general_plan_cache <span class="version-mark">New in v6.3.0</span>
 
 > **Warning:**
 >
@@ -1652,7 +1652,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
     * When you use `SELECT` to read a `noop` variable, TiDB returns the `"variable *variable_name* has no effect in TiDB"` warning.
 - To check whether a TiDB instance has set and read the `noop` variable, you can use the `SELECT * FROM INFORMATION_SCHEMA.CLIENT_ERRORS_SUMMARY_GLOBAL;` statement.
 
-### `tidb_enable_null_aware_anti_join` <span class="version-mark">New in v6.3.0</span>
+### tidb_enable_null_aware_anti_join <span class="version-mark">New in v6.3.0</span>
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
@@ -1877,11 +1877,11 @@ Query OK, 0 rows affected (0.09 sec)
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
-- Default value: `ON`
+- Default value: `ON` for v6.5.0; `OFF` for v6.5.1 and later v6.5.x versions
 
 <CustomContent platform="tidb">
 
-- This variable is used to dynamically control whether the telemetry collection in TiDB is enabled. By setting the value to `OFF`, the telemetry collection is disabled. If the [`enable-telemetry`](/tidb-configuration-file.md#enable-telemetry-new-in-v402) TiDB configuration item is set to `false` on all TiDB instances, the telemetry collection is always disabled and this system variable will not take effect. See [Telemetry](/telemetry.md) for details.
+- This variable is used to dynamically control whether the [telemetry collection](/telemetry.md) in TiDB is enabled. If the TiDB [`enable-telemetry`](/tidb-configuration-file.md#enable-telemetry-new-in-v402) configuration item is set to `false` on all TiDB instances, the telemetry collection is always disabled and this system variable will not take effect. See [Telemetry](/telemetry.md) for details.
 
 </CustomContent>
 
@@ -1891,7 +1891,7 @@ Query OK, 0 rows affected (0.09 sec)
 
 </CustomContent>
 
-### `tidb_enable_tiflash_read_for_write_stmt` <span class="version-mark">New in v6.3.0</span>
+### tidb_enable_tiflash_read_for_write_stmt <span class="version-mark">New in v6.3.0</span>
 
 > **Warning:**
 >
@@ -1952,7 +1952,7 @@ Query OK, 0 rows affected (0.09 sec)
 >
 > Suppose that the TSO RPC latency increases for reasons other than a CPU usage bottleneck of the PD leader (such as network issues). In this case, enabling the TSO Follower Proxy might increase the execution latency in TiDB and affect the QPS performance of the cluster.
 
-### `tidb_enable_unsafe_substitute` <span class="version-mark">New in v6.3.0</span>
+### tidb_enable_unsafe_substitute <span class="version-mark">New in v6.3.0</span>
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
@@ -2443,7 +2443,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
     - The information of transaction fallback from async commit or one-phase commit to two-phase commit.
     - The error encountered.
 
-### `tidb_last_plan_replayer_token` <span class="version-mark">New in v6.3.0</span>
+### tidb_last_plan_replayer_token <span class="version-mark">New in v6.3.0</span>
 
 - Scope: SESSION
 - Type: String
@@ -2667,7 +2667,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 </CustomContent>
 
-### `tidb_memory_usage_alarm_keep_record_num` <span class="version-mark">New in v6.4.0</span>
+### tidb_memory_usage_alarm_keep_record_num <span class="version-mark">New in v6.4.0</span>
 
 <CustomContent platform="tidb-cloud">
 
@@ -3817,7 +3817,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Unit: Seconds
 - This variable is used to set the refresh time of [statement summary tables](/statement-summary-tables.md).
 
-### `tidb_store_batch_size`
+### tidb_store_batch_size
 
 > **Warning:**
 >
@@ -4119,7 +4119,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 - For new clusters of v6.0.0 or later versions, the default value is `FAST`. For existing clusters that upgrade from versions earlier than v6.0.0, the default value is `OFF`.
 
-### `tidb_txn_commit_batch_size` <span class="version-mark">New in v6.2.0</span>
+### tidb_txn_commit_batch_size <span class="version-mark">New in v6.2.0</span>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -4193,14 +4193,14 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - This variable is used to set the concurrency degree of the window operator.
 - A value of `-1` means that the value of `tidb_executor_concurrency` will be used instead.
 
-### `tiflash_fastscan` <span class="version-mark">New in v6.3.0</span>
+### tiflash_fastscan <span class="version-mark">New in v6.3.0</span>
 
 - Scope: SESSION | GLOBAL
 - Default value: `OFF`
 - Type: Boolean
 - If [FastScan](/develop/dev-guide-use-fastscan.md) is enabled (set to `ON`), TiFlash provides more efficient query performance, but does not guarantee the accuracy of the query results or data consistency.
 
-### `tiflash_fine_grained_shuffle_batch_size` <span class="version-mark">New in v6.2.0</span>
+### tiflash_fine_grained_shuffle_batch_size <span class="version-mark">New in v6.2.0</span>
 
 - Scope: SESSION | GLOBAL
 - Default value: `8192`
@@ -4208,7 +4208,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - When Fine Grained Shuffle is enabled, the window function pushed down to TiFlash can be executed in parallel. This variable controls the batch size of the data sent by the sender.
 - Impact on performance: set a reasonable size according to your business requirements. Improper setting affects the performance. If the value is set too small, for example `1`, it causes one network transfer per Block. If the value is set too large, for example, the total number of rows of the table, it causes the receiving end to spend most of the time waiting for data, and the piplelined computation cannot work. To set a proper value, you can observe the distribution of the number of rows received by the TiFlash receiver. If most threads receive only a few rows, for example a few hundred, you can increase this value to reduce the network overhead.
 
-### `tiflash_fine_grained_shuffle_stream_count` <span class="version-mark">New in v6.2.0</span>
+### tiflash_fine_grained_shuffle_stream_count <span class="version-mark">New in v6.2.0</span>
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes

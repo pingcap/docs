@@ -261,9 +261,9 @@
       - [SQL Plan Management](/sql-plan-management.md)
       - [The Blocklist of Optimization Rules and Expression Pushdown](/blocklist-control-plan.md)
 - Tutorials
-  - [Multiple Data Centers in One City Deployment](/multi-data-centers-in-one-city-deployment.md)
-  - [Three Data Centers in Two Cities Deployment](/three-data-centers-in-two-cities-deployment.md)
-  - [Two Data Centers in One City Deployment](/two-data-centers-in-one-city-deployment.md)
+  - [Multiple Availability Zones in One Region Deployment](/multi-data-centers-in-one-city-deployment.md)
+  - [Three Availability Zones in Two Regions Deployment](/three-data-centers-in-two-cities-deployment.md)
+  - [Two Availability Zones in One Region Deployment](/two-data-centers-in-one-city-deployment.md)
   - Read Historical Data
     - Use Stale Read (Recommended)
       - [Usage Scenarios of Stale Read](/stale-read.md)
@@ -285,6 +285,7 @@
   - [Use Placement Rules](/configure-placement-rules.md)
   - [Use Load Base Split](/configure-load-base-split.md)
   - [Use Store Limit](/configure-store-limit.md)
+  - [DDL Execution Principles and Best Practices](/ddl-introduction.md)
 - TiDB Tools
   - [Overview](/ecosystem-tool-user-guide.md)
   - [Use Cases](/ecosystem-tool-user-case.md)
@@ -645,6 +646,8 @@
       - [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)
       - [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)
       - [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md)
+      - [`ADMIN CLEANUP`](/sql-statements/sql-statement-admin-cleanup.md)
+      - [`ADMIN RECOVER INDEX`](/sql-statements/sql-statement-admin-recover.md)
       - [`ADMIN SHOW DDL [JOBS|JOB QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)
       - [`ADMIN SHOW TELEMETRY`](/sql-statements/sql-statement-admin-show-telemetry.md)
       - [`ALTER DATABASE`](/sql-statements/sql-statement-alter-database.md)
@@ -704,6 +707,7 @@
       - [`LOAD DATA`](/sql-statements/sql-statement-load-data.md)
       - [`LOAD STATS`](/sql-statements/sql-statement-load-stats.md)
       - [`LOCK STATS`](/sql-statements/sql-statement-lock-stats.md)
+      - [`LOCK TABLES` and `UNLOCK TABLES`](/sql-statements/sql-statement-lock-tables-and-unlock-tables.md)
       - [`MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md)
       - [`PREPARE`](/sql-statements/sql-statement-prepare.md)
       - [`RECOVER TABLE`](/sql-statements/sql-statement-recover-table.md)
@@ -770,6 +774,7 @@
       - [`SPLIT REGION`](/sql-statements/sql-statement-split-region.md)
       - [`START TRANSACTION`](/sql-statements/sql-statement-start-transaction.md)
       - [`TABLE`](/sql-statements/sql-statement-table.md)
+      - [`TRACE`](/sql-statements/sql-statement-trace.md)
       - [`TRACE`](/sql-statements/sql-statement-trace.md)
       - [`TRUNCATE`](/sql-statements/sql-statement-truncate.md)
       - [`UNLOCK STATS`](/sql-statements/sql-statement-unlock-stats.md)
@@ -936,6 +941,7 @@
   - [TiDB Versioning](/releases/versioning.md)
   - [TiDB Installation Packages](/binary-package.md)
   - v6.5
+    - [6.5.1](/releases/release-6.5.1.md)
     - [6.5.0](/releases/release-6.5.0.md)
   - v6.4
     - [6.4.0-DMR](/releases/release-6.4.0.md)

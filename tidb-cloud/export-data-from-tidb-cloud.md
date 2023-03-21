@@ -36,7 +36,7 @@ You can use the tool [Dumpling](/dumpling-overview.md) for data export.
     {{< copyable "shell-regular" >}}
 
     ```shell
-    tiup install dumpling:v6.5.0
+    tiup install dumpling
     ```
 
 4. Export your data using Dumpling from TiDB.
@@ -48,14 +48,18 @@ You can use the tool [Dumpling](/dumpling-overview.md) for data export.
     <div label="Serverless Tier">
 
     ```shell
-    tiup dumpling:v6.5.0 -h ${tidb_endpoint} -P 4000 -u ${user} -p ${password} --ca=${ca_path} -F 67108864MiB -t 4 -o ${export_dir} --filetype sql
+    tiup dumpling -h ${tidb_endpoint} -P 4000 -u ${user} -p ${password} -F 67108864MiB -t 4 -o ${export_dir} --filetype sql --consistency none
     ```
+   
+   > **Note:**
+   > 
+   > To export Serverless Tier cluster data, you must ensure that the Dumpling version is at least v6.5.0. If your Dumpling version is v6.5.0, you also need to set `--ca=${ca_path}` in the command. To find the CA root path on your system, see [TLS Connections to Serverless Tier](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md#root-certificate-default-path).
 
     </div>
     <div label="Dedicated Tier">
 
     ```shell
-    tiup dumpling:v6.5.0 -h ${tidb_endpoint} -P ${port} -u ${user} -p ${password} -F 67108864MiB -t 4 -o ${export_dir} --filetype sql
+    tiup dumpling:v6.5.1 -h ${tidb_endpoint} -P ${port} -u ${user} -p ${password} -F 67108864MiB -t 4 -o ${export_dir} --filetype sql
     ```
 
     </div>
@@ -68,9 +72,9 @@ You can use the tool [Dumpling](/dumpling-overview.md) for data export.
     - `-u`: The TiDB cluster user.
     - `-p`: The TiDB cluster password.
     - `-F`: The maximum size of a single file.
-    - `--ca`: The CA root path. Refer to [TLS Connections to Serverless Tier](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md#root-certificate-default-path).
     - `-o`: The export directory.
     - `--filetype`: The exported file type. The default value is `sql`. You can choose from `sql` and `csv`.
+    - `--consistency`: The data consistency. The default value is `auto`. For Serverless Tier, you must set it to `none`.
 
     For more information about Dumpling options, see [Dumpling option list](/dumpling-overview.md#option-list-of-dumpling).
 

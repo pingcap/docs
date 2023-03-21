@@ -73,11 +73,10 @@ Compared to Mydumper, Dumpling has the following improvements:
 
 ### Required privileges
 
-- SELECT
-- RELOAD
-- LOCK TABLES
-- REPLICATION CLIENT
-- PROCESS
+- SELECT: Required when exporting tables.
+- RELOAD: Required when using `consistency flush`. Note that only TiDB supports this privilege. When the upstream is an RDS database or a managed service, you can ignore this privilege.
+- LOCK TABLES: Required when using `consistency lock`. This privilege must be granted for all the databases and tables to be exported.
+- REPLICATION CLIENT: Required when exporting metadata to record data snapshot. This privilege is optional and you can ignore it if you do not need to export metadata.
 
 ### Export to SQL files
 
@@ -217,7 +216,7 @@ You can use the `--compress <format>` option to compress the CSV and SQL data an
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
     ```
 
-- `{schema}.{table}.{0001}.{sql|csv`}: The date source file
+- `{schema}.{table}.{0001}.{sql|csv}`: The date source file
 
     {{< copyable "shell-regular" >}}
 
@@ -231,7 +230,7 @@ You can use the `--compress <format>` option to compress the CSV and SQL data an
     (1);
     ```
 
-- `*-schema-view.sql`、`*-schema-trigger.sql`、`*-schema-post.sql`: Other exported files
+- `*-schema-view.sql`, `*-schema-trigger.sql`, `*-schema-post.sql`: Other exported files
 
 ### Export data to Amazon S3 cloud storage
 

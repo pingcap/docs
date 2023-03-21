@@ -16,7 +16,6 @@ This document describes how to back up and restore your TiDB cluster data on TiD
 >
 > - TiDB Cloud does not support restoring tables in the `mysql` schema, including user permissions and system variables. You can use [Dumpling and Lightning](https://docs.pingcap.com/tidb/dev/backup-and-restore-using-dumpling-lightning) to manually back up and restore these data.
 > - If you turn on and off PITR (Point-in-time Recovery) multiple times, you can only choose a time point within the recoverable range after the most recent PITR is enabled. The earlier recoverable range is not accessible.
-> - You cannot disable automatic backup.
 
 ## Backup
 
@@ -34,6 +33,14 @@ By the automatic backup, you can back up the cluster data every day at the backu
 
 3. In the setting window, configure the automatic backup:
 
+    - Toggle the **Auto Backup** switch to **On**.
+
+    - In **Backup Time**, schedule a start time for the daily cluster backup.
+
+        It is recommended to schedule automatic backup at a low workload period. If you do not specify a preferred backup time, TiDB Cloud assigns a default backup time, which is 2:00 AM in the time zone of the region where the cluster is located.
+
+    - In **Backup Retention**, configure the minimum backup data retention period.
+
     - Turn on or off the PITR (**Point-in-time Recovery**) feature.
 
         PITR supports restoring data of any point in time to a new cluster. You can use it to:
@@ -43,12 +50,6 @@ By the automatic backup, you can back up the cluster data every day at the backu
         - Audit the historical data of the business.
 
         If you have one of the preceding needs and want to use the PITR feature, make sure that your TiDB cluster version is at least v6.4.0 and the TiKV node size is at least 8 vCPU and 16 GiB.
-
-    - In **Backup Time**, schedule a start time for the daily cluster backup.
-
-        It is recommended to schedule automatic backup at a low workload period. If you do not specify a preferred backup time, TiDB Cloud assigns a default backup time, which is 2:00 AM in the time zone of the region where the cluster is located.
-
-    - In **Backup Retention**, configure the minimum backup data retention period.
 
     - In **Backup Storage Region**, select the regions where you want to store your backup data.
 
@@ -64,7 +65,7 @@ By the automatic backup, you can back up the cluster data every day at the backu
 
 Currently, you cannot select an arbitrary remote region for backup data storage. The regions already supported are as follows:
 
-| Cloud provider | Custer region                      | Remote region support   |
+| Cloud provider | Cluster region                      | Remote region support   |
 |----------------|-----------------------------|--------------------------|
 | GCP            | Tokyo (asia-northeast1)     | Osaka (asia-northeast2)  |
 

@@ -1,11 +1,11 @@
 ---
-title: Limitations and Quotas in TiDB Cloud
+title: Dedicated Tier Limitations and Quotas
 summary: Learn the limitations and quotas in TiDB Cloud.
 ---
 
-# Limitations and Quotas in TiDB Cloud
+# Dedicated Tier Limitations and Quotas
 
-TiDB Cloud limits how many of each kind of component you can create, and the common usage limitations of TiDB. In addition, there are some organization-level quotas to limit the amount of resources created by users to prevent from creating more resources than you actually need. These tables outline limits and quotas.
+TiDB Cloud limits how many of each kind of component you can create in a [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) cluster, and the common usage limitations of TiDB. In addition, there are some organization-level quotas to limit the amount of resources created by users to prevent from creating more resources than you actually need. These tables outline limits and quotas.
 
 > **Note:**
 >

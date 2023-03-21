@@ -56,6 +56,11 @@ When you start the TiDB cluster, you can use command-line options or environment
 - Bootstraps tidb-server in secure mode
 - Default: `false`
 
+## `--initialize-sql-file`
+
+- The SQL script to be executed when the TiDB cluster is started for the first time. For details, see [configuration item `initialize-sql-file`](/tidb-configuration-file.md#initialize-sql-file-new-in-v651)
+- Default: `""`
+
 ## `-L`
 
 - The log level
@@ -105,6 +110,11 @@ When you start the TiDB cluster, you can use command-line options or environment
 - For the distributed storage engine like TiKV, `--path` specifies the actual PD address. Assuming that you deploy the PD server on 192.168.100.113:2379, 192.168.100.114:2379 and 192.168.100.115:2379, the value of `--path` is "192.168.100.113:2379, 192.168.100.114:2379, 192.168.100.115:2379".
 - Default: `"/tmp/tidb"`
 - You can use `tidb-server --store=unistore --path=""` to enable a pure in-memory TiDB.
+
+## `--proxy-protocol-fallbackable`
+
+- Controls whether to enable PROXY protocol fallback mode. When this parameter is set to `true`, TiDB accepts PROXY client connections and client connections without any PROXY protocol header. By default, TiDB only accepts client connections with a PROXY protocol header.
+- Default value: `false`
 
 ## `--proxy-protocol-networks`
 
