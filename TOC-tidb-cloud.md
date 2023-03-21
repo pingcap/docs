@@ -129,6 +129,7 @@
   - [Manage Endpoint](/tidb-cloud/data-service-manage-endpoint.md)
   - [Use Chat2Query API](/tidb-cloud/use-chat2query-api.md)
   - [API Key](/tidb-cloud/data-service-api-key.md)
+  - [Response and Error Code](/tidb-cloud/data-service-response-and-error-code.md)
 - Stream Data
   - [Changefeed Overview](/tidb-cloud/changefeed-overview.md)
   - [To MySQL Sink](/tidb-cloud/changefeed-sink-to-mysql.md)
