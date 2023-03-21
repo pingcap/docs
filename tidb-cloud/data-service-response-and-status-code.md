@@ -112,7 +112,7 @@ An example response is as follows:
 
 ### 200
 
-If the HTTP status code is `200` and the `result.code` field also shows `200`, this indicated that the SQL statement is executed successfully. Otherwise, TiDB Cloud fails to execute the SQL statement defined in your endpoint. You can check the `code` and `message` fields for detailed information.
+If the HTTP status code is `200` and the `data.result.code` field also shows `200`, this indicated that the SQL statement is executed successfully. Otherwise, TiDB Cloud fails to execute the SQL statement defined in your endpoint. You can check the `code` and `message` fields for detailed information.
 
 An example response is as follows:
 

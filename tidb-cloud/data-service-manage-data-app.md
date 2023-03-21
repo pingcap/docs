@@ -64,7 +64,7 @@ For more information, see [Manage an endpoint](/tidb-cloud/data-service-manage-e
 To delete a Data App, perform the following steps:
 
 1. Navigate to the [**Data Service**](https://tidbcloud.com/console/dataservice) page of your project.
-2. In the left pane, locate your target Data App, and click **...** > **Delete**. The **Confirm deletion of service** dialog box is displayed.
+2. In the left pane, locate your target Data App, and click **...** > **Delete**. The **Confirm deletion of DataApp** dialog box is displayed.
 3. Click **Delete** to confirm the deletion.
 
     Once a Data App is deleted, the existing endpoints and API keys in the Data App are also deleted.
