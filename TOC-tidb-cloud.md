@@ -77,6 +77,7 @@
       - [Object Naming Convention](/develop/dev-guide-object-naming-guidelines.md)
       - [SQL Development Specifications](/develop/dev-guide-sql-development-specification.md)
     - [Bookshop Example Application](/develop/dev-guide-bookshop-schema-design.md)
+    - [Choose Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)
 - Manage Cluster
   - Plan Your Cluster
     - [Select Your Cluster Tier](/tidb-cloud/select-cluster-tier.md)
