@@ -11,7 +11,11 @@ An endpoint in Data Service is a web API that you can customize to execute SQL s
 
 To manage endpoints more efficiently, you can use Data Apps. A Data App in Data Service is a group of endpoints that you can use to access data for a specific application. By creating a Data App, you can group your endpoints and configure authorization settings using API keys to restrict access to endpoints. In this way, you can ensure that only authorized users can access and manipulate your data, making your application more secure.
 
-TiDB Cloud provides a system Data App called **Chat2Query**. You can use this App to call the Chat2Data endpoint to let AI generate and execute SQL statements by providing instructions. For more information, see [Get started with Chat2Query API](/tidb-cloud/use-chat2query-api.md).
+> **Tip:**
+>
+> TiDB Cloud provides a Chat2Query API for Serverless Tier clusters. After it is enabled, TiDB Cloud will automatically create a system Data App called **Chat2Query** and a Chat2Data endpoint in Data Service. You can call this endpoint to let AI generate and execute SQL statements by providing instructions.
+>
+> For more information, see [Get started with Chat2Query API](/tidb-cloud/use-chat2query-api.md).
 
 > **Note:**
 >
@@ -24,7 +28,7 @@ Data Service allows you to seamlessly integrate TiDB Cloud with any application 
 - Access the database of your TiDB cluster directly from a mobile or web application.
 - Use serverless edge functions to call endpoints and avoid scalability issues caused by database connection pooling.
 - Integrate TiDB Cloud with data visualization projects by using Data Service as a data source. This avoids exposing your database connection username and password, making your API more secure and easier to use.
-- Connect to your database from an environment that is not supported by a MySQL driver. This provides more flexibility and options for you to access data.
+- Connect to your database from an environment that the MySQL interface does not support. This provides more flexibility and options for you to access data.
 
 ## What's next
 

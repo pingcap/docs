@@ -9,7 +9,9 @@ Data Service (beta) enables you to access TiDB Cloud data via an HTTPS request u
 
 > **Tip:**
 >
-> TiDB Cloud provides a Chat2Query API for Serverless Tier clusters. After it is enabled, TiDB Cloud will automatically create a system Data App called **Chat2Query** and a Chat2Data endpoint in Data Service. You can call this endpoint to let AI generate and execute SQL statements by providing instructions. For more information, see [Get started with Chat2Query API](/tidb-cloud/use-chat2query-api.md).
+> TiDB Cloud provides a Chat2Query API for Serverless Tier clusters. After it is enabled, TiDB Cloud will automatically create a system Data App called **Chat2Query** and a Chat2Data endpoint in Data Service. You can call this endpoint to let AI generate and execute SQL statements by providing instructions.
+>
+> For more information, see [Get started with Chat2Query API](/tidb-cloud/use-chat2query-api.md).
 
 This document introduces how to quickly get started with TiDB Cloud Data Service (beta) by creating a Data App, developing, testing, deploying, and calling an endpoint.
 
@@ -68,15 +70,20 @@ You can customize SQL statements for the endpoint in the SQL editor, which is th
 
     On the upper part of the SQL editor, select a cluster on which the SQL statements are executed from the drop-down list. Then, you can view all databases of this cluster in the **Schema** tab on the right pane.
 
-    The database field is optional. If you do not select a database from the drop-down list, you need to specify the database in the SQL statements. For example, `USE database_name;`.
-
 2. Write SQL statements.
+
+    Before querying or modifying data, you need to first specify the database in the SQL statements. For example, `USE database_name;`.
 
     In the SQL editor, you can write statements such as table join queries, complex queries, and aggregate functions. You can also simply type `--` followed by your instructions to let AI generate SQL statements automatically.
 
     To define a parameter, you can insert it as a variable placeholder like `${ID}` in the SQL statement. For example, `SELECT * FROM table_name WHERE id = ${ID}`. Then, you can click the **Params** tab on the right pane to change the parameter definition and test values.
 
-    - In the **Definition** section, you can specify whether the parameter is required when a client calls the endpoint, the data type (`STRING`, `NUMBER`, or `BOOLEAN`), and the default value of the parameter.
+    > **Note:**
+    >
+    > - The parameter name is case-sensitive.
+    > - The parameter cannot be used as a table name or column name.
+
+    - In the **Definition** section, you can specify whether the parameter is required when a client calls the endpoint, the data type (`STRING`, `NUMBER`, or `BOOLEAN`), and the default value of the parameter. When using a `STRING` type parameter, you do not need to add quotation marks (`'` or `"`). For example, `sample` is valid for the `STRING` data type and is interpreted as `"sample"`, whereas `'sample'` is interpreted as `"\"sample\""`.
     - In the **Test Values** section, you can set the test value for a parameter. The test values are used when you run the SQL statements or test the endpoint. If you do not set the test values, the default values are used.
     - For more information, see [Configure parameters](/tidb-cloud/data-service-manage-endpoint.md#configure-parameters).
 
@@ -172,36 +179,38 @@ After calling an endpoint, you can see the response in JSON format. The followin
 
 ```json
 {
-    "code": 200,
-    "message": "ok",
-    "data": [
-        {
-            "err_code": 0,
-            "err_message": "",
-            "columns": [
-                {
-                    "col": "id",
-                    "data_type": "INT",
-                    "nullable": false
-                },
-                ...
-            ],
-            "rows": [
-                [
-                    "1",
-                    "a"
-                ],
-                ...
-            ],
-            "start_ms": 1678374098543,
-            "end_ms": 1678374098675,
-            "latency": "132ms",
-            "row_count": 10,
-            "row_affect": 0,
-            "limit": 2000,
-            "query": "Query OK!"
-        }
-    ]
+  "type": "sql_endpoint",
+  "data": {
+    "columns": [
+      {
+        "col": "id",
+        "data_type": "BIGINT",
+        "nullable": false
+      },
+      {
+        "col": "type",
+        "data_type": "VARCHAR",
+        "nullable": false
+      }
+    ],
+    "rows": [
+      {
+        "id": "20008295419",
+        "type": "CreateEvent"
+      }
+    ],
+    "result": {
+      "code": 200,
+      "message": "ok",
+      "start_ms": 1678965476709,
+      "end_ms": 1678965476839,
+      "latency": "130ms",
+      "row_count": 1,
+      "row_affect": 0,
+      "limit": 50,
+      "query": "Query OK!"
+    }
+  }
 }
 ```
 

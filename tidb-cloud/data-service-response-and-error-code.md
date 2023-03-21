@@ -13,7 +13,7 @@ This document describes the response and error codes of Data Service in TiDB Clo
 
 Data Service returns an HTTP response with a JSON body. The response body contains the following fields:
 
-- `type`: _string_. The type of this endpoint. The value might be `"sql_endpoint"` or `"chat2query_endpoint"`. Different endpoints return different types of responses.
+- `type`: _string_. The type of this endpoint. The value might be `"sql_endpoint"` or `"chat2data_endpoint"`. Different endpoints return different types of responses.
 - `data`: _object_. The execution results, which include three parts:
 
     - `columns`: _array_. Schema information for the returned fields.

@@ -70,17 +70,19 @@ On the right pane of the endpoint details page, you can click the **Properties**
 
 On the SQL editor of the endpoint details page, you can write and run the SQL statements for an endpoint. You can also simply type `--` followed by your instructions to let AI generate SQL statements automatically.
 
-1. On the upper part of the SQL editor, select a cluster on which the SQL statements are executed from the drop-down list.
+1. Select a cluster.
 
     > **Note:**
     >
     > Only clusters in the **Available** state are displayed in the drop-down list.
 
-    Once you select a cluster, you can view all databases of this cluster in the **Schema** tab on the right pane.
-
-    The database field is optional. If you do not select a database from the drop-down list, you need to specify the database in the SQL statements. For example, `USE database_name;`.
+    On the upper part of the SQL editor, select a cluster on which the SQL statements are executed from the drop-down list. Then, you can view all databases of this cluster in the **Schema** tab on the right pane.
 
 2. Write SQL statements.
+
+    Before querying or modifying data, you need to first specify the database in the SQL statements. For example, `USE database_name;`.
+
+    In the SQL editor, you can write statements such as table join queries, complex queries, and aggregate functions. You can also simply type `--` followed by your instructions to let AI generate SQL statements automatically.
 
     To define a parameter, you can insert it as a variable placeholder like `${ID}` in the SQL statement. For example, `SELECT * FROM table_name WHERE id = ${ID}`. Then, you can click the **Params** tab on the right pane to change the parameter definition and test values. For more information, see [Parameters](#configure-parameters).
 
@@ -107,7 +109,7 @@ In the **Definition** section, you can view and manage the following properties 
 
 - The parameter name: the name can only include letters, digits, underscores (`_`) and must start with a letter or a underscore (`_`).
 - **Required**: specifies whether the parameter is required in the request. The default configuration is set to not required.
-- **Type**: specifies the data type of the parameter. Supported values are `STRING`, `NUMBER`, and `BOOLEAN`.
+- **Type**: specifies the data type of the parameter. Supported values are `STRING`, `NUMBER`, and `BOOLEAN`.  When using a `STRING` type parameter, you do not need to add quotation marks (`'` or `"`). For example, `sample` is valid for the `STRING` data type and is interpreted as `"sample"`, whereas `'sample'` is interpreted as `"\"sample\""`.
 - **Default Value**: specifies the default value of the parameter.
 
     - Make sure that the value can be converted to the type of parameter. Otherwise, the endpoint returns an error.
