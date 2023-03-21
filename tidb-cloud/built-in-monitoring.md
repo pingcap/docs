@@ -149,8 +149,8 @@ If a pane does not provide any metrics, the possible reasons are as follows:
 
 If all these reasons are excluded, you can contact the [PingCAP support team](/tidb-cloud/tidb-cloud-support.md) for troubleshooting.
 
-**2. Why Metrics may be discontinuous in rare cases?**
+**2. Why might metrics be discontinuous in rare cases?**
 
-In some rare situations, metrics might be lost, such as high pressure on the monitoring system.
+In some rare cases, metrics might be lost, such as when the monitoring system experiences high pressure.
 
 If you encounter this problem, you can contact the [PingCAP support team](/tidb-cloud/tidb-cloud-support.md) for troubleshooting.
