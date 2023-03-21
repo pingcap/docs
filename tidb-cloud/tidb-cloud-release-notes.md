@@ -53,7 +53,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
     - Average Query Duration Per DB
     - Failed Queries Per DB
 
-  With these metrics, you can monitor the performance of individual databases, make data-driven decisions, and take actions that improve the performance of your applications.
+  With these metrics, you can monitor the performance of individual databases, make data-driven decisions, and take actions to improve the performance of your applications.
 
   For more information, see [Monitoring metrics for Serverless Tier clusters](/tidb-cloud/built-in-monitoring.md).
 
