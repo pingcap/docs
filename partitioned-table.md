@@ -756,7 +756,7 @@ In addition, there are limitations on the compatibility of `EXCHANGE PARTITION` 
 - TiCDC: TiCDC replicates the `EXCHANGE PARTITION` operation when both partitioned and non-partitioned tables have primary keys or unique keys. Otherwise, TiCDC will not replicate the operation.
 - TiDB Lightning and BR: do not perform the `EXCHANGE PARTITION` operation during import using TiDB Lightning or during restore using BR.
 
-### Manage Range and List partitions
+### Manage Range/Range COLUMNS/List/List COLUMNS partitions
 
 This section uses the partitioned tables created by the following SQL statements as examples to show you how to manage Range and List partitions.
 
