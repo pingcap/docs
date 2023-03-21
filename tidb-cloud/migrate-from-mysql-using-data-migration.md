@@ -132,13 +132,13 @@ If your MySQL service is in an AWS VPC, take the following steps:
 
 If your MySQL service is in an GCP VPC, take the following steps:
 
-1. If it is a self-hosted mysql, please skip this step and go to the second step.If your MySQL service is Google Cloud SQL, you must expose a MySQL endpoint in the associated VPC of the Google Cloud SQL instance. You may need to use the [Cloud SQL Auth proxy](https://cloud.google.com/sql/docs/mysql/sql-proxy) which is developed by Google.
+1. If it is a self-hosted MySQL, you can skip this step and proceed to the next step. If your MySQL service is Google Cloud SQL, you must expose a MySQL endpoint in the associated VPC of the Google Cloud SQL instance. You might need to use the [Cloud SQL Auth proxy](https://cloud.google.com/sql/docs/mysql/sql-proxy) developed by Google.
 
-2. [Set up a VPC peering connection](https://docs.pingcap.com/tidbcloud/set-up-vpc-peering-connections) between the VPC of the MySQL service and your TiDB cluster.
+2. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of your MySQL service and your TiDB cluster.
 
 3. Modify the ingress firewall rules of the VPC where MySQL is located.
 
-    You must add [the CIDR of the region where your TiDB Cloud cluster is located](https://docs.pingcap.com/tidbcloud/set-up-vpc-peering-connections#prerequisite-set-a-project-cidr) to the ingress firewall rules. Doing so allows the traffic to flow from your TiDB Cluster to the MySQL endpoint. 
+    You must add [the CIDR of the region where your TiDB Cloud cluster is located](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr) to the ingress firewall rules. This allows the traffic to flow from your TiDB cluster to the MySQL endpoint. 
 
 </details>
 
