@@ -2946,7 +2946,7 @@ As shown in this diagram, when [`tidb_enable_paging`](#tidb_enable_paging-new-in
 - Persists to cluster: Yes
 - Type: Boolean
 - Default value: `OFF`
-- This variable is used to set whether to enable the optimization of [Deriving TopN or Limit from window functions](/derive-topn-from-window.md).
+- Controls whether to enable the optimization rule of [Deriving TopN or Limit from window functions](/derive-topn-from-window.md).
 
 ### tidb_opt_desc_factor
 

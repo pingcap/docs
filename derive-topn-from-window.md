@@ -1,11 +1,11 @@
 ---
 title: Derive TopN or Limit from Window Functions
-summary: Introduce the optimization rule for deriving TopN or Limit from window functions and how to enable this rule.
+summary: Introduce the optimization rule of deriving TopN or Limit from window functions and how to enable this rule.
 ---
 
 # Derive TopN or Limit from Window Functions
 
-[Window Functions](/functions-and-operators/window-functions.md) are a common type of SQL function. When you use window functions for row numbering, such as `ROW_NUMBER()` or `RANK()`, it is common to filter the results after the window function is evaluated. For example:
+[Window Functions](/functions-and-operators/window-functions.md) are a common type of SQL function. When you use a window function for row numbering, such as `ROW_NUMBER()` or `RANK()`, it is common to filter the results after the window function is evaluated. For example:
 
 ```sql
 SELECT * FROM (SELECT ROW_NUMBER() OVER (ORDER BY a) AS rownumber FROM t) dt WHERE rownumber <= 3
@@ -13,13 +13,13 @@ SELECT * FROM (SELECT ROW_NUMBER() OVER (ORDER BY a) AS rownumber FROM t) dt WHE
 
 In a typical SQL execution process, TiDB first sorts all data in the table `t`, then calculates the `ROW_NUMBER()` result for each row, and finally filters with `rownumber <= 3`.
 
-Starting from v7.0.0, TiDB supports deriving TopN or Limit from window functions. With this optimization rule, TiDB can rewrite the original SQL into an equivalent form as follows:
+Starting from v7.0.0, TiDB supports deriving the TopN or Limit operator from window functions. With this optimization rule, TiDB can rewrite the original SQL into an equivalent form as follows:
 
 ```sql
 WITH t_topN AS (SELECT a FROM t1 ORDER BY a LIMIT 3) SELECT * FROM (SELECT ROW_NUMBER() OVER (ORDER BY a) AS rownumber FROM t_topN) dt WHERE rownumber <= 3
 ```
 
-After rewriting, TiDB can derive a TopN operator from the window function and the subsequent filter condition. Compared to the Sort operator in the original SQL (`ORDER BY`), the TopN operator has a much higher execution efficiency. In addition, both TiKV and TiFlash support pushing down the TopN operator, which further improves the performance of the rewritten SQL.
+After rewriting, TiDB can derive a TopN operator from the window function and the subsequent filter condition. Compared with the Sort operator in the original SQL (`ORDER BY`), the TopN operator has a much higher execution efficiency. In addition, both TiKV and TiFlash support pushing down the TopN operator, which further improves the performance of the rewritten SQL.
 
 Deriving TopN or Limit from window functions is disabled by default. To enable this feature, you can set the session variable [tidb_opt_derive_topn](/system-variables.md#tidb_opt_derive_topn-new-in-v700) to `ON`.
 
@@ -95,7 +95,7 @@ In this query, the optimizer derives the TopN operator from the window function 
 
 > **Note:**
 >
-> When the window function contains `PARTITION BY`, the optimization rule can only take effect when the partition column is a prefix of the primary key and the primary key is a clustered index.
+> For a window function containing `PARTITION BY`, the optimization rule only takes effect when the partition column is a prefix of the primary key and the primary key is a clustered index.
 
 #### Example 3: window functions without ORDER BY
 
@@ -122,7 +122,7 @@ The result is as follows:
 +------------------------------------+---------+-----------+---------------+-----------------------------------------------------------------------------------------------+
 ```
 
-In this query, the optimizer derives the Limit operator from the window function and pushes it down to TiKV. It is worth noting that this Limit is actually a partition Limit, which means that the Limit will be applied to each group of data with the same `id1` value.
+In this query, the optimizer derives the Limit operator from the window function and pushes it down to TiKV. Note that this Limit is actually a partition Limit, which means that the Limit will be applied to each group of data with the same `id1` value.
 
 #### Example 4: window functions with ORDER BY
 
@@ -149,7 +149,7 @@ The result is as follows:
 +------------------------------------+----------+-----------+---------------+----------------------------------------------------------------------------------------------------------------------+
 ```
 
-In this query, the optimizer derives the TopN operator from the window function and pushes it down to TiKV. It is worth noting that this TopN is actually a partition TopN, which means that the Limit will be applied to each group of data with the same `id1` value.
+In this query, the optimizer derives the TopN operator from the window function and pushes it down to TiKV. Note that this TopN is actually a partition TopN, which means that the TopN will be applied to each group of data with the same `id1` value.
 
 #### Example 5: PARTITION BY column is not a prefix of the primary key
 
@@ -175,7 +175,7 @@ The result is as follows:
 +----------------------------------+----------+-----------+---------------+--------------------------------------------------------------------------------------------------+
 ```
 
-In this query, the SQL is not rewritten because the partition column is not a prefix of the primary key.
+In this query, the SQL is not rewritten because the `PARTITION BY` column is not a prefix of the primary key.
 
 #### Example 6: PARTITION BY column is a prefix of the primary key but not a clustered index
 
@@ -201,4 +201,4 @@ The result is as follows:
 +----------------------------------+----------+-----------+---------------+-----------------------------------------------------------------------------------------------+
 ```
 
-In this query, although the PARTITION BY column is a prefix of the primary key, the SQL is not rewritten because the primary key is not a clustered index.
+In this query, although the `PARTITION BY` column is a prefix of the primary key, the SQL is not rewritten because the primary key is not a clustered index.
