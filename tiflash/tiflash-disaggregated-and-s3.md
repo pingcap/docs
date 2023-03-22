@@ -36,17 +36,17 @@ In the disaggregated storage and compute architecture, different functionalities
     - When the query workload is low, reduce the number of Compute Nodes to save costs. When there are no queries, you can even stop all Compute Nodes.
     - When the query workload increases, quickly increase the number of Compute Nodes to ensure query performance.
 
-## Use cases
+## Scenarios
 
-TiFlash disaggregated storage and compute architecture is suitable for cost-effective data analysis services. As storage and compute resources can be scaled separately as needed in this architecture, you can get significant benefits in the following scenarios:
+TiFlash disaggregated storage and compute architecture is suitable for cost-effective data analysis services. Because storage and compute resources can be scaled separately as needed in this architecture, you can get significant benefits in the following scenarios:
 
-- The amount of data is large, but only a small amount of data is frequently queried; most of the data belongs to cold data and is rarely queried. At this time, the frequently queried data is usually cached on the local SSD of the Compute Node to provide fast query performance, while most of the other cold data is stored in low-cost S3 or other object storage to save storage costs.
+- The amount of data is large, but only a small amount of data is frequently queried. Most of the data is cold data and rarely queried. At this time, the frequently queried data is usually cached on the local SSD of the Compute Node to provide fast query performance, while most of the other cold data is stored in low-cost S3 or other object storage to save storage costs.
 
 - The demand for compute resources has obvious peaks and valleys. For example, intensive reconciliation queries are usually performed at night, which demands high compute resources. In this case, you can consider temporarily adding more Compute Nodes at night. While at other times, you only need fewer Compute Nodes to complete regular query tasks.
 
 ## Prerequisites
 
-1. Prepare an Amazon S3 bucket for storing TiFlash data.
+1. Prepare an Amazon S3 bucket for storing the TiFlash data.
 
     You can also use an existing bucket, but you need to create a dedicated storage directory for each TiDB cluster. For more information about S3 buckets, see [AWS documentation](https://docs.aws.amazon.com/en_us/AmazonS3/latest/userguide/creating-buckets-s3.html).
 
@@ -85,7 +85,7 @@ TiFlash disaggregated storage and compute architecture is suitable for cost-effe
 
 By default, TiUP deploys TiFlash in the coupled storage and computation architecture. If you need to deploy TiFlash in the disaggregated storage and compute architecture, take the following steps for manual configuration:
 
-1. Make sure that there are no TiFlash nodes in the TiDB cluster. If there are any, set the TiFlash replica count of all tables to `0` and then remove all TiFlash nodes. For example:
+1. Make sure that there are no TiFlash nodes in the TiDB cluster. If any, set the TiFlash replica count of all tables to `0` and then remove all TiFlash nodes. For example:
 
     ```sql
     SELECT * FROM INFORMATION_SCHEMA.TIFLASH_REPLICA; # Query all tables with TiFlash replicas
@@ -114,7 +114,7 @@ By default, TiUP deploys TiFlash in the coupled storage and computation architec
           storage.s3.root: /cluster1_data                       # Root directory where data is stored in the S3 bucket
           storage.s3.access_key_id: {ACCESS_KEY_ID}             # Access S3 with ACCESS_KEY_ID
           storage.s3.secret_access_key: {SECRET_ACCESS_KEY}     # Access S3 with SECRET_ACCESS_KEY
-          storage.main.dir: ["/data1/tiflash/data"]             # Local data directory of the Write Node, the same configuration way as that of the coupled storage and compute architecture
+          storage.main.dir: ["/data1/tiflash/data"]             # Local data directory of the Write Node. Configure it in the same way as the directory configuration of the coupled storage and compute architecture
       - host: 172.31.8.2
         config:
           flash.disaggregated_mode: tiflash_write               # This is a Write Node
@@ -123,7 +123,7 @@ By default, TiUP deploys TiFlash in the coupled storage and computation architec
           storage.s3.root: /cluster1_data                       # Root directory where data is stored in the S3 bucket
           storage.s3.access_key_id: {ACCESS_KEY_ID}             # Access S3 with ACCESS_KEY_ID
           storage.s3.secret_access_key: {SECRET_ACCESS_KEY}     # Access S3 with SECRET_ACCESS_KEY
-          storage.main.dir: ["/data1/tiflash/data"]             # Local data directory of the Write Node, the same configuration way as that of the coupled storage and compute architecture
+          storage.main.dir: ["/data1/tiflash/data"]             # Local data directory of the Write Node. Configure it in the same way as the directory configuration of the coupled storage and compute architecture
 
       # 172.31.9.1~2 are TiFlash Compute Nodes
       - host: 172.31.9.1
@@ -134,7 +134,7 @@ By default, TiUP deploys TiFlash in the coupled storage and computation architec
           storage.s3.root: /cluster1_data                       # Root directory where data is stored in the S3 bucket
           storage.s3.access_key_id: {ACCESS_KEY_ID}             # Access S3 with ACCESS_KEY_ID
           storage.s3.secret_access_key: {SECRET_ACCESS_KEY}     # Access S3 with SECRET_ACCESS_KEY
-          storage.main.dir: ["/data1/tiflash/data"]             # Local data directory of the Compute Node, the same configuration way as that of the coupled storage and compute architecture
+          storage.main.dir: ["/data1/tiflash/data"]             # Local data directory of the Compute Node. Configure it in the same way as the directory configuration of the coupled storage and compute architecture
           storage.remote.cache.dir: /data1/tiflash/cache        # Local data cache directory of the Compute Node
           storage.remote.cache.capacity: 858993459200           # 800 GiB
       - host: 172.31.9.2
@@ -145,12 +145,12 @@ By default, TiUP deploys TiFlash in the coupled storage and computation architec
           storage.s3.root: /cluster1_data                       # Root directory where data is stored in the S3 bucket
           storage.s3.access_key_id: {ACCESS_KEY_ID}             # Access S3 with ACCESS_KEY_ID
           storage.s3.secret_access_key: {SECRET_ACCESS_KEY}     # Access S3 with SECRET_ACCESS_KEY
-          storage.main.dir: ["/data1/tiflash/data"]             # Local data directory of the Compute Node, the same configuration way as that of the coupled storage and compute architecture
+          storage.main.dir: ["/data1/tiflash/data"]             # Local data directory of the Compute Node. Configure it in the same way as the directory configuration of the coupled storage and compute architecture
           storage.remote.cache.dir: /data1/tiflash/cache        # Local data cache directory of the Compute Node
           storage.remote.cache.capacity: 858993459200           # 800 GiB
     ```
 
-    * Note that the above `ACCESS_KEY_ID` and `SECRET_ACCESS_KEY` are directly written in the configuration file. You can also choose to configure them separately using environment variables. If both ways are configured. the priority of environment variables is higher than that of configuration files.
+    * Note that the above `ACCESS_KEY_ID` and `SECRET_ACCESS_KEY` are directly written in the configuration file. You can also choose to configure them separately using environment variables. If both ways are configured, the environment variables have higher priority.
 
         To configure `ACCESS_KEY_ID` and `SECRET_ACCESS_KEY` through environment variables, switch to the user environment that starts the TiFlash process (usually `tidb`) on all machines where TiFlash processes are deployed, and then modify `~/.bash_profile` to add the following configurations:
 
@@ -199,4 +199,4 @@ By default, TiUP deploys TiFlash in the coupled storage and computation architec
 - After the migration from one architecture to another, all TiFlash data needs to be replicated again.
 - Only TiFlash nodes with the same architecture are allowed in the same TiDB cluster. Two architectures cannot coexist in one cluster.
 - The disaggregated storage and compute architecture only supports object storage using the S3 API, while the coupled storage and compute architecture only supports local storage.
-- When using S3 storage, TiFlash nodes cannot obtain the keys of files not on their own nodes, so the [Encryption at Rest](/encryption-at-rest.md) feature is cannot be used.
+- When using S3 storage, TiFlash nodes cannot obtain the keys of files not on their own nodes, so the [Encryption at Rest](/encryption-at-rest.md) feature cannot be used.
