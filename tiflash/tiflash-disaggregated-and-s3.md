@@ -23,7 +23,7 @@ In the disaggregated storage and compute architecture, different functionalities
 
     The Write Node uses local disks (usually NVMe SSDs) to cache the latest written data to avoid excessive use of memory.
 
-    The Write Node has a faster scaling speed than the TiFlash node in the coupled storage and compute architecture. That is, after adding or removing Write Nodes, data can reach balance faster among Write Nodes. The reason is that the Write Node stores all the data in S3 and only needs to store a small amount of data locally at runtime. The scaling up and down process is essentially the migration of Region Peers among nodes. To migrate a Region Peer from one Write Node to another Write Node for management, the target Write node only needs to download a small amount of metadata about this Region from the latest files uploaded to S3 by the Region Peer's original Write Node, and then synchronize the latest Region updates from TiKV to catch up with the Region Leader's progress.
+    The Write Node has a faster scaling speed than the TiFlash node in the coupled storage and compute architecture. That is, after adding or removing Write Nodes, data can reach balance faster among Write Nodes. The reason is that the Write Node stores all the data in S3 and only needs to store a small amount of data locally at runtime. The scaling up and down process is essentially the migration of Region Peers among nodes. To migrate a Region Peer from one Write Node to another for management, the target Write node only needs to download a small amount of metadata about this Region from the latest files uploaded to S3 by the Region Peer's original Write Node, and then synchronizes the latest Region updates from TiKV to catch up with the Region Leader's progress. This completes the migration of Region Peers.
 
 - TiFlash Compute Node
 
@@ -48,7 +48,7 @@ TiFlash disaggregated storage and compute architecture is suitable for cost-effe
 
 1. Prepare an Amazon S3 bucket for storing the TiFlash data.
 
-    You can also use an existing bucket, but you need to create a dedicated storage directory for each TiDB cluster. For more information about S3 buckets, see [AWS documentation](https://docs.aws.amazon.com/en_us/AmazonS3/latest/userguide/creating-buckets-s3.html).
+    You can also use an existing bucket, but you need to reserve dedicated key prefixes for each TiDB cluster. For more information about S3 buckets, see [AWS documentation](https://docs.aws.amazon.com/en_us/AmazonS3/latest/userguide/creating-buckets-s3.html).
 
     You can also use other S3-compatible object storage, such as [MinIO](https://min.io/).
 
@@ -103,7 +103,8 @@ By default, TiUP deploys TiFlash in the coupled storage and computation architec
     ```yaml
     tiflash_servers:
       # In the TiFlash topology configuration file, the `storage.s3` configuration indicates that the disaggregated storage and compute architecture is used for deployment.
-      # If `flash.disaggregated_mode: tiflash_compute` is configured for a node, it is a Compute Node; otherwise, it is a Write Node.
+      # If `flash.disaggregated_mode: tiflash_compute` is configured for a node, it is a Compute Node.
+      # If `flash.disaggregated_mode: tiflash_write` is configured for a node, it is a Write Node.
 
       # 172.31.8.1~2 are TiFlash Write Nodes
       - host: 172.31.8.1
