@@ -9,7 +9,7 @@ This document introduces how TiFlash spills data to disk during computation.
 
 Starting from v7.0.0, TiFlash supports spilling intermediate data to disk to relieve memory pressure. The following operators are supported:
 
-* Hash Join operators with equal join conditions
+* Hash Join operators with equi-join conditions
 * Hash Aggregation operators with `GROUP BY` keys
 * TopN operators, and Sort operators in Window functions
 
