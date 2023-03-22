@@ -38,11 +38,11 @@ LoadDataOption ::=
 
 You can use `LOCAL` to specify to import data files located on the client, where the file parameter must be the file system path on the client.
 
-### S3 storage
+### S3 and GCS storage
 
-If you do not specify `LOCAL`, the file parameter must be a valid S3 path, as detailed in [external storage](/br/backup-and-restore-storages.md).
+If you do not specify `LOCAL`, the file parameter must be a valid S3 or GCS path, as detailed in [external storage](/br/backup-and-restore-storages.md).
 
-When the data files are stored on S3, you can import individual files or use the wildcard character `*` to match multiple files to be imported. Note that wildcards do not recursively process files in subdirectories. The following are some examples:
+When the data files are stored on S3 or GCS, you can import individual files or use the wildcard character `*` to match multiple files to be imported. Note that wildcards do not recursively process files in subdirectories. The following are some examples:
 
 - Import a single file: `s3://<bucket-name>/path/to/data/foo.csv`
 - Import all files in the specified path: `s3://<bucket-name>/path/to/data/*`
