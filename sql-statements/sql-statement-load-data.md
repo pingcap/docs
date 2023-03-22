@@ -74,7 +74,7 @@ You can use `DEFINED NULL BY` to specify how NULL values are represented in the 
 
 Take the following data format as an example:
 
-```sql
+```
 "bob","20","street 1"\r\n
 "alice","33","street 1"\r\n
 ```
