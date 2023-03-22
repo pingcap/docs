@@ -388,7 +388,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 * Error Number: 8162
 
-    There is an error in the `LOAD DATA` statement. See [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) for supported functions.
+    There is an error in the `LOAD DATA` statement. See [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) for supported options.
 
 * Error Number: 8163
 
@@ -400,7 +400,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 * Error Number: 8165
 
-    Repeatedly specify the `LOAD DATA ... WITH ... ` option. Each option can be specified only once.
+    Specify duplicated `LOAD DATA ... WITH ... ` options. Each option can be specified only once.
 
 * Error Number: 8166
 

@@ -52,7 +52,7 @@ When the data files are stored on S3, you can import individual files or use the
 
 ### `FORMAT`
 
-You can use the `FORMAT` parameter to specify the format of the data file. If you do not specify this parameter, you can use the format defined by `DELIMITED DATA`, which is the data format supported by MySQL `LOAD DATA`.
+You can use the `FORMAT` parameter to specify the format of the data file. If you do not specify this parameter, you are using the format defined by `DELIMITED DATA`, which is the default data format of MySQL `LOAD DATA`.
 
 ### `Fields`, `Lines`, and `Ignore Lines`
 
@@ -66,6 +66,12 @@ You can use the `Fields` and `Lines` parameters to specify how to handle the dat
 
 You can use `DEFINED NULL BY` to specify how NULL values are represented in the data file.
 
+- Consistent with MySQL behavior, if `ESCAPED BY` is not null, for example, if the default value is `\`, then `\N` will be considered a NULL value.
+- If you use `DEFINED NULL BY`, for example `DEFINED NULL BY 'my-null'`, `my-null` will be considered a NULL value.
+- If you use `DEFINED NULL BY ... OPTIONALLY ENCLOSED`, such as `DEFINED NULL BY 'my-null' OPTIONALLY ENCLOSED`, `my-null` and `"my-null"` (assuming `ENCLOSED BY '"`) will be considered NULL values.
+- If you do not use `DEFINED NULL BY` or `DEFINED NULL BY ... OPTIONALLY ENCLOSED`, but use `ENCLOSED BY`, such as `ENCLOSED BY '"'`, then `NULL` will be considered a NULL value. This behavior is consistent with MySQL.
+- In other cases, it will not be considered a NULL value.
+
 Take the following data format as an example:
 
 ```sql
@@ -73,7 +79,7 @@ Take the following data format as an example:
 "alice","33","street 1"\r\n
 ```
 
-If you want to extract `bob`, `20`, and `street 1`, specify the delimiter as `','`, and the enclosing character as `'\"'`:
+If you want to extract `bob`, `20`, and `street 1`, specify the field delimiter as `','`, and the enclosing character as `'\"'`:
 
 ```sql
 FIELDS TERMINATED BY ',' ENCLOSED BY '\"' LINES TERMINATED BY '\r\n'
@@ -96,7 +102,7 @@ You can view the created jobs with [SHOW LOAD DATA](/sql-statements/sql-statemen
 
 ### `WITH batch_size=<number>`
 
-You can specify the number of rows to be written to TiDB in a batch with `WITH batch_size=<number>`. The default value is 1000.
+You can specify the number of rows to be written to TiDB in a batch with `WITH batch_size=<number>`. The default value is `1000`. `0` means no splitting.
 
 ## Examples
 
@@ -128,7 +134,7 @@ SHOW LOAD DATA JOB 1;
 1 row in set (0.01 sec)
 ```
 
-The following example imports data using `LOAD DATA`. Comma is specified as the delimiter. The double quotation marks that enclose the data are ignored. The first line of the file is ignored.
+The following example imports data using `LOAD DATA`. Comma is specified as the field delimiter. The double quotation marks that enclose the data are ignored. The first line of the file is ignored.
 
 If you see the error message `ERROR 1148 (42000): the used command is not allowed with this TiDB version`, refer to [ERROR 1148 (42000): the used command is not allowed with this TiDB version](/error-codes.md#mysql-native-error-messages).
 
