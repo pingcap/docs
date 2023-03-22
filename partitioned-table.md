@@ -724,7 +724,7 @@ You can see that the inserted record `(NULL, 'mothra')` falls into the same part
 
 ## Partition management
 
-For `LIST`, `LIST COLUMNS`, `RANGE`, and `RANGE COLUMNS` partitioned tables, you can manage the partitions as follows:
+For `RANGE`, `RANGE COLUMNS`, `LIST`, and `LIST COLUMNS` partitioned tables, you can manage the partitions as follows:
 
 - Add partitions using the `ALTER TABLE <table name> ADD PARTITION (<partition specification>)` statement. 
 - Drop partitions using the `ALTER TABLE <table name> DROP PARTITION <list of partitions>` statement. 
