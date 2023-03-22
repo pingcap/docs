@@ -724,7 +724,7 @@ You can see that the inserted record `(NULL, 'mothra')` falls into the same part
 
 ## Partition management
 
-For List/List COLUMNS/Range/Range COLUMNS partitioned tables, you can manage the partitions as follows:
+For List, List COLUMNS, Range, and Range COLUMNS partitioned tables, you can manage the partitions as follows:
 
 - Add partitions using the `ALTER TABLE <table name> ADD PARTITION (<partition specification>)` statement. 
 - Drop partitions using the `ALTER TABLE <table name> DROP PARTITION <list of partitions>` statement. 
@@ -756,7 +756,7 @@ In addition, there are limitations on the compatibility of `EXCHANGE PARTITION` 
 - TiCDC: TiCDC replicates the `EXCHANGE PARTITION` operation when both partitioned and non-partitioned tables have primary keys or unique keys. Otherwise, TiCDC will not replicate the operation.
 - TiDB Lightning and BR: do not perform the `EXCHANGE PARTITION` operation during import using TiDB Lightning or during restore using BR.
 
-### Manage Range/Range COLUMNS/List/List COLUMNS partitions
+### Manage Range, Range COLUMNS, List, and List COLUMNS partitions
 
 This section uses the partitioned tables created by the following SQL statements as examples to show you how to manage Range and List partitions.
 
@@ -898,7 +898,7 @@ When reorganizing partitions, you need to note the following key points:
     ERROR 1526 (HY000): Table has no partition for value 6
     ```
 
-### Hash partition management
+### Manage Hash partitions
 
 Unlike Range partitioning, `DROP PARTITION` is not supported in Hash partitioning.
 
