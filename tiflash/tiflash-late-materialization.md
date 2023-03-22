@@ -97,4 +97,4 @@ When filtering conditions are pushed down to the TableScan operator, the executi
 2. Reads the columns related to the filtering conditions, filters the rows that meet the conditions, and then generates the Filter Bitmap.
 3. Performs an `AND` operation between the MVCC Bitmap and Filter Bitmap to generate the Final Bitmap.
 4. Reads the corresponding rows of the remaining columns according to the Final Bitmap.
-5. Returns the results.
+5. Merges the data read in steps 2 and 4, and then returns the results.
