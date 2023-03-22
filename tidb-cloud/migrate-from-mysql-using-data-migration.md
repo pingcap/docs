@@ -17,7 +17,6 @@ This feature helps you migrate your source databases' existing data and ongoing 
 
     - AWS Oregon (us-west-2)
     - AWS N. Virginia (us-east-1)
-    - AWS Mumbai (ap-south-1)
     - AWS Singapore (ap-southeast-1)
     - AWS Tokyo (ap-northeast-1)
     - AWS Frankfurt (eu-central-1)
