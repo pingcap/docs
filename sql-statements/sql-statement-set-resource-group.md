@@ -14,6 +14,7 @@ summary: An overview of the usage of SET RESOURCE GROUP in the TiDB database.
 ```ebnf+diagram
 SetResourceGroupStmt:
    "SET" "RESOURCE" "GROUP" ResourceGroupName
+
 ResourceGroupName:
    Identifier
 ```
@@ -25,7 +26,7 @@ Create a user `user1`, create two resource groups `rg1` and `rg2`, and bind the 
 ```sql
 CREATE USER 'user1';
 CREATE RESOURCE GROUP 'rg1' RU_PER_SEC = 1000;
-ALTER USER 'u1' RESOURCE GROUP `rg1`;
+ALTER USER 'user1' RESOURCE GROUP `rg1`;
 ```
 
 Use `user1` to log in and view the resource group bound to the current user.

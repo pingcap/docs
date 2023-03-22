@@ -5,10 +5,6 @@ summary: Learn how to use the resource control feature to control and schedule a
 
 # Use Resource Control to Achieve Resource Isolation
 
-> **Warning:**
->
-> This feature is experimental and its form and usage might change in subsequent versions.
-
 <CustomContent platform="tidb-cloud">
 
 > **Note:**
@@ -25,7 +21,7 @@ The TiDB resource control feature provides two layers of resource management cap
 
 <CustomContent platform="tidb">
 
-- TiKV scheduling: if [`resource-control.enabled`](/tikv-configuration-file.md#resource-control) is enabled, TiKV uses the value of `RU_PER_SEC` of each resource group to determine the priority of the read and write requests for each resource group. Based on the priorities, the storage layer uses the priority queue to schedule and process requests.
+- TiKV scheduling: if you do not set the absolute priority [(`PRIORITY`)](/information-schema/information-schema-resource-groups.md#examples), TiKV uses the value of `RU_PER_SEC` of each resource group to determine the priority of the read and write requests for each resource group. Based on the priorities, the storage layer uses the priority queue to schedule and process requests. In addition, you can set the absolute priority as needed.
 
 </CustomContent>
 
@@ -37,7 +33,7 @@ The TiDB resource control feature provides two layers of resource management cap
 
 ## Scenarios for resource control
 
-The introduction of the resource control feature is a milestone for TiDB. It can divide a distributed database cluster into multiple logical units. Even if an individual unit overuses resources, it does not crowd out the resources needed by other units. 
+The introduction of the resource control feature is a milestone for TiDB. It can divide a distributed database cluster into multiple logical units. Even if an individual unit overuses resources, it does not crowd out the resources needed by other units.
 
 With this feature, you can:
 
@@ -45,6 +41,13 @@ With this feature, you can:
 - Choose to combine all test environments into a single TiDB cluster, or group the batch tasks that consume more resources into a single resource group. It can improve hardware utilization and reduce operating costs while ensuring that critical applications can always get the necessary resources.
 
 In addition, the rational use of the resource control feature can reduce the number of clusters, ease the difficulty of operation and maintenance, and save management costs.
+
+## Limitations
+
+Currently, the resource control feature has the following limitations:
+
+* This feature only supports flow control and scheduling of read and write requests initiated by foreground clients. It does not support flow control and scheduling of background tasks such as DDL operations and auto analyze.
+* Resource control incurs additional scheduling overhead. Therefore, there might be a slight performance degradation when this feature is enabled.
 
 ## What is Request Unit (RU)
 
@@ -78,7 +81,7 @@ The resource control feature introduces two new global variables.
 
 <CustomContent platform="tidb-cloud">
 
-* TiKV: For on-premises TiDB, you can use the `resource-control.enabled` parameter to control whether to use request scheduling based on resource group quotas. For TiDB Cloud, the value of the `resource-control.enabled` parameter is  `false` by default and does not support dynamic modification. If you need to enable it for TiDB Cloud Dedicated Tier clusters, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+* TiKV: For on-premises TiDB, you can use the `resource-control.enabled` parameter to control whether to use request scheduling based on resource group quotas. For TiDB Cloud, the value of the `resource-control.enabled` parameter is  `true` by default and does not support dynamic modification. If you need to disable it for TiDB Cloud Dedicated Tier clusters, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 </CustomContent>
 
@@ -89,35 +92,19 @@ The results of the combinations of these two parameters are shown in the followi
 | `resource-control.enabled`= true  |  Flow control and scheduling (recommended) | Invalid combination      |  
 | `resource-control.enabled`= false |  Only flow control (not recommended)                 | The feature is disabled. |
 
-For more information about the resource control mechanism and parameters, see [RFC: Global Resource Control in TiDB](https://github.com/pingcap/tidb/blob/9fb2d6c35790c4733db0ffa6f3574414c91f1dbb/docs/design/2022-11-25-global-resource-control.md).
+For more information about the resource control mechanism and parameters, see [RFC: Global Resource Control in TiDB](https://github.com/pingcap/tidb/blob/master/docs/design/2022-11-25-global-resource-control.md).
 
 ## How to use resource control
 
+### Manage resource groups
+
 To create, modify, or delete a resource group, you need to have the `SUPER` or `RESOURCE_GROUP_ADMIN` privilege.
 
-You can create a resource group in the cluster by using [`CREATE RESOURCE GROUP`](/sql-statements/sql-statement-create-resource-group.md), and then bind users to a specific resource group by using [`CREATE USER`](/sql-statements/ sql-statement-create-user.md) or [`ALTER USER`](/sql-statements/sql-statement-alter-user.md).
+You can create a resource group in the cluster by using [`CREATE RESOURCE GROUP`](/sql-statements/sql-statement-create-resource-group.md).
 
 For an existing resource group, you can modify the `RU_PER_SEC` option (the rate of RU backfilling per second) of the resource group by using [`ALTER RESOURCE GROUP`](/sql-statements/sql-statement-alter-resource-group.md). The changes to the resource group take effect immediately.
 
-### Enable the resource control feature
-
-Enable the resource control feature.
-
-```sql
-SET GLOBAL tidb_enable_resource_control = 'ON';
-```
-
-<CustomContent platform="tidb">
-
-Set the TiKV [`resource-control.enabled`](/tikv-configuration-file.md#resource-control) parameter to `true`.
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-For on-premises TiDB, set the TiKV `resource-control.enabled` parameter to `true`. For TiDB Cloud, the value of the `resource-control.enabled` parameter is  `false` by default and does not support dynamic modification. If you need to enable it for TiDB Cloud Dedicated Tier clusters, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
-
-</CustomContent>
+You can delete a resource group by using [`DROP RESOURCE GROUP`](/sql-statements/sql-statement-drop-resource-group.md).
 
 ### Create a resource group
 
@@ -135,46 +122,88 @@ The following is an example of how to create a resource group and bind users to 
     CREATE RESOURCE GROUP IF NOT EXISTS rg2 RU_PER_SEC = 600;
     ```
 
+3. Create a resource group `rg3`. Set the absolute priority to `HIGH`. The absolute priority currently supports `LOW|MEDIUM|HIGH`. The default value is `MEDIUM`.
+
+    ```sql
+    CREATE RESOURCE GROUP IF NOT EXISTS rg2 RU_PER_SEC = 100 PRIORITY = HIGH;
+    ```
+
 ### Bind resource groups
 
 TiDB supports three levels of resource group settings as follows.
 
-- User level. Bind the user using the [`CREATE USER`](/sql-statements/sql-statement-create-user.md) or [`ALTER USER`](/sql-statements/sql-statement-alter-user.md) statements to a specific resource group. After binding a resource group to a user, sessions created by the corresponding user are automatically bound to the corresponding resource group.
+- User level. Bind the user using the [`CREATE USER`](/sql-statements/sql-statement-create-user.md) or [`ALTER USER`](/sql-statements/sql-statement-alter-user.md) statements to a specific resource group. After binding a resource group to a user, sessions created by the user are automatically bound to the corresponding resource group.
 - Session level. Set the resource group used by the current session via [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md).
 - Statement level. Set the resource group used by the current statement via [`RESOURCE_GROUP()`](/optimizer-hints.md#resource_groupresource_group_name).
 
 #### Bind users to a resource group
 
-The following example uses `ALTER USER` to bind users `usr1` and `usr2` to resource groups `rg1` and `rg2` respectively.
+The following example creates a user `usr1` and binds the user to the resource group `rg1`.
 
 ```sql
-ALTER USER usr1 RESOURCE GROUP rg1;
+CREATE USER 'usr1'@'%' IDENTIFIED BY '123' RESOURCE GROUP rg1;
 ```
+
+The following example uses `ALTER USER` to bind the user `usr2` to the resource group `rg2`.
 
 ```sql
 ALTER USER usr2 RESOURCE GROUP rg2;
 ```
 
-After you bind users, the resource consumption of newly created sessions will be controlled by the specified quota. If the system workload is relatively high and there is no spare capacity, the resource consumption rate of `usr2` will be strictly controlled not to exceed the quota. Because `usr1` is bound by `rg1` with `BURSTABLE` configured, the consumption rate of `usr1` is allowed to exceed the quota.
+After you bind users, the resource consumption of newly created sessions will be controlled by the specified quota (Request Unit, RU). If the system workload is relatively high and there is no spare capacity, the resource consumption rate of `usr2` will be strictly controlled not to exceed the quota. Because `usr1` is bound by `rg1` with `BURSTABLE` configured, the consumption rate of `usr1` is allowed to exceed the quota.
 
 If there are too many requests that result in insufficient resources for the resource group, the client's requests will wait. If the wait time is too long, the requests will report an error.
 
 > **Note:**
 >
 > - When you bind a user to a resource group by using `CREATE USER` or `ALTER USER`, it will not take effect for the user's existing sessions, but only for the user's new sessions.
-> - If a user is not bound to a resource group or is bound to a `default` resource group, the user's requests are not subject to the flow control restrictions of TiDB. The `default` resource group is currently not visible to the user and cannot be created or modified. You cannot view it with `SHOW CREATE RESOURCE GROUP` or `SELECT * FROM information_schema.resource_groups`. But you can view it through the `mysql.user` table.
+> - The TiDB cluster automatically creates a `default` resource group when it is initialized。 Statements that are not bound to a resource group are automatically bound to this resource group. This resource group does not support deletion, but you can modify the configuration of its RU.
 
 #### Bind the current session to a resource group
 
 By binding a session to a resource group, the resource usage of the statements executed on the corresponding session is limited by the specified usage (RU).
 
+The following example binds the current session to the resource group `rg1`.
+
+```sql
+SET RESOURCE GROUP rg1;
+```
+
 #### Bind the current statement to a resource group
 
-By binding a statement to a resource group, the resource usage of the statement is limited by the specified usage (RU).
+By using [`Optimizer Hint`](/optimizer-hints.md#resource_groupresource_group_name), you can specify the resource group to which the SQL statement is bound. This hint supports SELECT, INSERT, UPDATE, and DELETE statements.
 
-### Delete a resource group
+The following example binds the current statement to the resource group `rg1`.
 
-You can delete a resource group by using [`DROP RESOURCE GROUP`](/sql-statements/sql-statement-drop-resource-group.md).
+```sql
+SELECT /*+ RESOURCE_GROUP(rg1) */ * FROM t limit 10;
+```
+
+## Disable resource control
+
+<CustomContent platform="tidb">
+
+1. Execute the following statement to enable the resource control feature.
+
+    ```sql
+    SET GLOBAL tidb_enable_resource_control = 'OFF';
+    ```
+
+2. Set the TiKV parameter [`resource-control.enabled`](/tikv-configuration-file.md#resource-control) to `false`.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+1. Execute the following statement to enable the resource control feature.
+
+    ```sql
+    SET GLOBAL tidb_enable_resource_control = 'OFF';
+    ```
+
+2. For on-premises TiDB, you can use the `resource-control.enabled` parameter to control whether to use request scheduling based on resource group quotas. For TiDB Cloud, the value of the `resource-control.enabled` parameter is  `true` by default and does not support dynamic modification. If you need to disable it for TiDB Cloud Dedicated Tier clusters, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+
+</CustomContent>
 
 ## Monitoring metrics and charts
 
@@ -201,13 +230,6 @@ TiKV also records the request QPS from different resource groups in Grafana's **
 ## Tool compatibility
 
 The resource control feature is still in its experimental stage and does not impact the regular usage of data import, export, and other replication tools. BR, TiDB Lightning, and TiCDC do not currently support processing DDL operations related to resource control, and their resource consumption is not limited by resource control.
-
-## Limitations
-
-Currently, the resource control feature has the following limitations:
-
-* This feature only supports flow control and scheduling of read and write requests initiated by foreground clients. It does not support flow control and scheduling of background tasks such as DDL operations and auto analyze. 
-* Resource control incurs additional scheduling overhead. Therefore, there might be a slight performance degradation when this feature is enabled.
 
 ## See also
 
