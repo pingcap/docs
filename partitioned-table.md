@@ -651,7 +651,7 @@ Since v6.4.0, TiDB supports parsing the MySQL `PARTITION BY LINEAR HASH` syntax 
 
 ### How TiDB handles Linear Key partitions
 
-Starting from v7.0.0, TiDB supports parsing the MySQL `PARTITION BY LINEAR HASH` syntax for Key partitioning. However, TiDB ignores the `LINEAR` keyword and uses a non-linear hash algorithm instead.
+Starting from v7.0.0, TiDB supports parsing the MySQL `PARTITION BY LINEAR KEY` syntax for Key partitioning. However, TiDB ignores the `LINEAR` keyword and uses a non-linear hash algorithm instead.
 
 Before v7.0.0, if you try creating a Key partitioned table, TiDB creates it as a non-partitioned table and returns a warning.
 
