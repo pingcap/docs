@@ -18,9 +18,11 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
 ### Scalability
 
-* TiFlash 引擎支持存算分离和对象存储（实验特性）[#6882](https://github.com/pingcap/tiflash/issues/6882) @[flowbehappy](https://github.com/flowbehappy) **tw:qiancai**
+* TiFlash supports the disaggregated storage and compute architecture and supports object storage in this architecture (experimental) [#6882](https://github.com/pingcap/tiflash/issues/6882) @[flowbehappy](https://github.com/flowbehappy) **tw:qiancai**
 
-    在 v7.0.0 之前的版本中，TiFlash 引擎以存算一体的方式部署，即 TiFlash 节点即是存储节点，也是计算节点；同时，TiFlash 节点只能使用本地存储。存算一体的部署方式使得 TiFlash 的计算能力和存储能力无法独立扩展。在 v7.0.0 版本中，TiFlash 引擎新增存算分离架构，并在存算分离架构下，支持兼容 S3 API 的对象存储。在 TiFlash 存算分离架构下，TiFlash 节点分为计算节点和写节点。这两种节点都可以单独扩缩容，独立调整计算或数据存储能力。TiFlash 引擎的存算分离架构不能和存算一体架构混合使用、相互转换，需要在部署 TiFlash 时进行相应的配置设定，确定使用存算分离架构或者存算一体架构。
+    Before v7.0.0, TiFlash only supports the coupled storage and compute architecture. In this architecture, each TiFlash node acts as both storage and compute node, and its computing and storage capabilities cannot be independently expanded. In addition, TiFlash nodes can only use local storage.
+
+    Starting from v7.0.0, TiFlash also supports the disaggregated storage and compute architecture. In this architecture, TiFlash nodes are divided into two types (Compute Nodes and Write Nodes) and support object storage that is compatible with S3 API. Both types of nodes can be independently scaled for computing or storage capacities. The **disaggregated storage and compute architecture** and  **coupled storage and compute architecture** cannot be used in the same cluster or converted to each other. You can configure which architecture to use when you deploy TiFlash.
 
     For more information, see [documentation](/tiflash/tiflash-disaggregated-and-s3.md).
 
@@ -48,9 +50,11 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
     For more information, see [documentation](/tiflash/use-fastscan.md).
 
-* TiFlash 引擎支持 Selection 延迟物化功能（实验特性） [#5829](https://github.com/pingcap/tiflash/issues/5829) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger) **tw:qiancai**
+* TiFlash supports late materialization [#5829](https://github.com/pingcap/tiflash/issues/5829) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger) **tw:qiancai**
 
-    当 SELECT 语句中包含过滤条件（WHERE子句）时，普通的处理方式是扫描所有数据后进行过滤。Selection 延迟物化功能可以先扫描过滤条件相关列数据，过滤得到符合条件的行后，再扫描这些行的其他列数据，继续后续计算，从而减少扫描 IO 和数据解析的计算量。在 v7.0.0 中，TiFlash 引擎支持 Selection 延迟物化功能，并通过 variable 控制是否启用该功能。当功能启用时，优化器会根据过滤条件的信息，自动判断选择哪些过滤条件下推到 TableScan 算子。
+    When processing a `SELECT` statement with filtering conditions (`WHERE` clause), TiFlash reads all the data from the columns required by the query by default, and then filters and aggregates the data based on the query conditions. Late materialization is an optimization method that supports pushing down part of the filtering conditions to the TableScan operator. That is, TiFlash first scans the column data related to the filtering conditions that are pushed down, filters the rows that meet the condition, and then scans the other column data of these rows for further calculation, thereby reducing IO scans and computations of data processing.
+
+    The TiFlash late materialization feature is not enabled by default. You can enable it by setting the `tidb_opt_enable_late_materialization` system variable to `OFF`. When the feature is enabled, the TiDB optimizer will determine which filtering conditions to be pushed down based on statistics and filtering conditions.
 
     For more information, see [documentation](/tiflash/tiflash-late-materialization.md).
 
@@ -82,7 +86,11 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
     For more information, see [documentation](/tikv-configuration-file.md#prefill-for-recycle-new-in-v700).
 
-* 新增从[窗口函数](/functions-and-operators/expressions-pushed-down.md)中推导出 TopN/Limit 的优化规则，提升窗口函数的性能 [#13936](https://github.com/tikv/tikv/issues/13936) @[windtalker](https://github.com/windtalker) **tw:qiancai**
+* Support deriving the TopN or Limit operator from [window functions](/functions-and-operators/expressions-pushed-down.md) to improve window function performance [#13936](https://github.com/tikv/tikv/issues/13936) @[windtalker](https://github.com/windtalker) **tw:qiancai**
+
+    This feature is disabled by default. To enable it, you can set the session variable [tidb_opt_derive_topn](/system-variables.md#tidb_opt_derive_topn-new-in-v700) to `ON`.
+
+    For more information, see [documentation](derive-topn-from-window.md).
 
 * Support creating unique indexes through Fast Online DDL [#40730](https://github.com/pingcap/tidb/issues/40730) @[tangenta](https://github.com/tangenta) **tw:ran-huang**
 
@@ -165,17 +173,17 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
     For more information, see [documentation](/time-to-live.md).
 
-* 支持 `ALTER TABLE…REORGANIZE PARTITION` [#15000](https://github.com/pingcap/tidb/issues/15000) @[mjonss](https://github.com/mjonss) **tw:qiancai**
+* Support `ALTER TABLE…REORGANIZE PARTITION` [#15000](https://github.com/pingcap/tidb/issues/15000) @[mjonss](https://github.com/mjonss) **tw:qiancai**
 
-    TiDB 支持 `ALTER TABLE…REORGANIZE PARTITION` 语法。通过该语法，你可以对表的部分或所有分区进行重新组织，包括合并、拆分、或者其他修改，并且不丢失数据。
+    TiDB supports the `ALTER TABLE...REORGANIZE PARTITION` syntax. Using this syntax, you can reorganize some or all of the partitions of a table, including merging, splitting, or other modifications, without losing data.
 
-    For more information, see [documentation](/partitioned-table.md#重组分区).
+    For more information, see [documentation](/partitioned-table.md#reorganize-partitions).
 
-* 支持 Key Partitioning [#41364](https://github.com/pingcap/tidb/issues/41364) @[TonsnakeLin](https://github.com/TonsnakeLin) **tw:qiancai**
+* Support Key partitioning [#41364](https://github.com/pingcap/tidb/issues/41364) @[TonsnakeLin](https://github.com/TonsnakeLin) **tw:qiancai**
 
-    TiDB 支持 Key 分区。Key 分区与 Hash 分区都可以保证将数据均匀地分散到一定数量的分区里面，区别是 Hash 分区只能根据一个指定的整数表达式或字段进行分区，而 Key 分区可以根据字段列表进行分区，且 Key 分区的分区字段不局限于整数类型。
+    Now TiDB supports Key partitioning. Both Key partitioning and Hash partitioning can evenly distribute data into a certain number of partitions. The difference is that Hash partitioning only supports distributing data based on a specified integer expression or an integer column, while Key partitioning supports distributing data based on a column list, and partitioning columns of Key partitioning are not limited to the integer type.
 
-    For more information, see [documentation](/partitioned-table.md#key-分区).
+    For more information, see [documentation](/partitioned-table.md#key-partitioning).
 
 ### DB operations
 
@@ -238,13 +246,13 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
   For more information, see [documentation](待补充).
 
-* TiDB Lightning 向 TiKV 传输键值对时支持启用压缩传输 [#41163](https://github.com/pingcap/tidb/issues/41163) @[gozssky](https://github.com/gozssky) **tw:qiancai**
+* TiDB Lightning supports enabling compressed transfers when sending key-value pairs to TiKV (GA) [#41163](https://github.com/pingcap/tidb/issues/41163) @[gozssky](https://github.com/gozssky)
 
-    自 v6.6.0 起，TiDB Lightning 支持将本地编码排序后的键值对在网络传输时进行压缩再发送到 TiKV，从而减少网络传输的数据量，降低网络带宽开销。之前版本不支持该功能，在数据量较大的情况下，TiDB Lightning 对网络带宽要求相对较高，且会产生较高的流量费。
+    Starting from v6.6.0, TiDB Lightning supports compressing locally encoded and sorted key-value pairs for network transfer when sending them to TiKV, thus reducing the amount of data transferred over the network and lowering the network bandwidth overhead. In the earlier TiDB versions before this feature is supported, TiDB Lightning requires relatively high network bandwidth and incurs high traffic charges in case of large data volumes.
 
-    该功能默认关闭，你可以通过将 TiDB Lightning 配置项 compress-kv-pairs 设置为 "gzip" 或者 "gz" 开启此功能。
+    In v7.7.0, this feature becomes GA and is disabled by default. To enable it, you can set the `compress-kv-pairs` configuration item of TiDB Lightning to `"gzip"` or `"gz"`.
 
-    For more information, see [documentation](https://docs.pingcap.com/zh/tidb/v6.6/tidb-lightning-configuration#tidb-lightning-%E4%BB%BB%E5%8A%A1%E9%85%8D%E7%BD%AE).
+    For more information, see [documentation](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task).
 
 ## Compatibility changes
 
@@ -271,7 +279,22 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
     For more information, see [documentation](/mysql-compatibility.md#auto-increment-id).
 
-* 兼容性 2
+* TiDB supports Key partitions, as shown in the following example: **tw:qiancai**
+
+    ```sql
+    CREATE TABLE employees (
+    id INT NOT NULL,
+    fname VARCHAR(30),
+    lname VARCHAR(30),
+    hired DATE NOT NULL DEFAULT '1970-01-01',
+    separated DATE DEFAULT '9999-12-31',
+    job_code INT,
+    store_id INT) PARTITION BY KEY(store_id) PARTITIONS 4;
+    ```
+
+    Starting from v7.0.0, TiDB supports Key partitions and can parse the MySQL `PARTITION BY LINEAR KEY` syntax. However, TiDB ignores the `LINEAR` keyword and uses a non-linear hash algorithm instead. Currently, the `KEY` partition type does not support partition statements with an empty partition column list.
+
+    For more information, see [documentation](/partitioned-table.md#key-partitioning)
 
 ### TiCDC compatibility
 
