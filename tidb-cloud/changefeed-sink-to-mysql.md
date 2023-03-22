@@ -11,13 +11,13 @@ This document describes how to stream data from TiDB Cloud to MySQL using the **
 >
 > To use the Changefeed feature, make sure that your TiDB cluster version is v6.4.0 or later and the TiKV node size is at least 8 vCPU and 16 GiB.
 >
-> Currently, TiDB Cloud only allows up to 10 changefeeds per cluster.
+> Currently, TiDB Cloud only allows up to 5 changefeeds per cluster.
 >
 > For [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta), the changefeed feature is unavailable.
 
 ## Restrictions
 
-- For each TiDB Cloud cluster, you can create up to 10 changefeeds.
+- For each TiDB Cloud cluster, you can create up to 5 changefeeds.
 - Because TiDB Cloud uses TiCDC to establish changefeeds, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios).
 - If the table to be replicated does not have a primary key or a non-null unique index, the absence of a unique constraint during replication could result in duplicated data being inserted downstream in some retry scenarios.
 
