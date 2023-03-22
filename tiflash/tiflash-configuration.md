@@ -125,9 +125,23 @@ delta_index_cache_size = 0
     ## auto_tune_sec indicates the interval of automatic tuning. The unit is seconds. If the value of auto_tune_sec is 0, the automatic tuning is disabled.
     # auto_tune_sec = 5
 
+    ## The following configuration items only take effect for the TiFlash disaggregated storage and compute architecture mode. For details, see documentation at https://docs.pingcap.com/tidb/dev/tiflash-disaggregated-and-s3.
+    # [storage.s3]
+    # endpoint: http://s3.{region}.amazonaws.com # S3 endpoint address
+    # bucket: mybucket                           # TiFlash stores all data in this bucket
+    # root: /cluster1_data                       # Root directory where data is stored in the S3 bucket
+    # access_key_id: {ACCESS_KEY_ID}             # Access S3 with ACCESS_KEY_ID
+    # secret_access_key: {SECRET_ACCESS_KEY}     # Access S3 with SECRET_ACCESS_KEY
+    # [storage.remote.cache]
+    # dir: /data1/tiflash/cache        # Local data cache directory of the Compute Node
+    # capacity: 858993459200           # 800 GiB
+
 [flash]
     tidb_status_addr = TiDB status port and address. # Multiple addresses are separated with commas.
     service_addr = The listening address of TiFlash Raft services and coprocessor services.
+
+    ## The following configuration item only takes effect for the TiFlash disaggregated storage and compute architecture mode. For details, see documentation at https://docs.pingcap.com/tidb/dev/tiflash-disaggregated-and-s3.
+    # disaggregated_mode = tiflash_write # The supported mode is `tiflash_write` or `tiflash_compute.
 
 ## Multiple TiFlash nodes elect a master to add or delete placement rules to PD,
 ## and the configurations in flash.flash_cluster control this process.
@@ -212,6 +226,14 @@ delta_index_cache_size = 0
     ## New in v6.2.0. This item specifies the minimum ratio of valid data in a PageStorage data file. When the ratio of valid data in a PageStorage data file is less than the value of this configuration, GC is triggered to compact data in the file. The default value is 0.5.
     dt_page_gc_threshold = 0.5
 
+    ## New in v7.0.0. This item specifies the maximum memory available for the HashAggregation operator with group by key before a disk spill is triggered. When the memory usage exceeds the threshold, HashAggregation reduces memory usage by spilling to disk. This item defaults to 0, which means that the memory usage is unlimited and spill to disk is never used for HashAggregation.
+    max_bytes_before_external_group_by = 0
+
+    ## New in v7.0.0. This item specifies the maximum memory available for the sort or topN operator before a disk spill is triggered. When the memory usage exceeds the threshold, the sort or topN operator reduces memory usage by spilling to disk. This item defaults to 0, which means that the memory usage is unlimited and spill to disk is never used for sort or topN.
+    max_bytes_before_external_sort = 0
+
+    ## New in v7.0.0. This item specifies the maximum memory available for the HashJoin operator with EquiJoin before a disk spill is triggered. When the memory usage exceeds the threshold, HashJoin reduces memory usage by spilling to disk. This item defaults to 0, which means that the memory usage is unlimited and spill to disk is never used for HashJoin with EquiJoin.
+    max_bytes_before_external_join = 0
 
 ## Security settings take effect starting from v4.0.5.
 [security]
