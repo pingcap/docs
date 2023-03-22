@@ -5,7 +5,7 @@ summary: Learn how to replicate data to storage services using TiCDC, and learn 
 
 # Replicate Data to Storage Services
 
-Since v6.5.0, TiCDC supports saving row change events to storage services, including Amazon S3, GCS, Azure Blob Storage, and NFS. This document describes how to create a changefeed that replicates incremental data to such storage services using TiCDC, and how data is stored. The organization of this document is as follows:
+Starting from TiDB v6.5.0, TiCDC supports saving row change events to storage services, including Amazon S3, GCS, Azure Blob Storage, and NFS. This document describes how to create a changefeed that replicates incremental data to such storage services using TiCDC, and how data is stored. The organization of this document is as follows:
 
 - [How to replicate data to storage services](#replicate-change-data-to-storage-services).
 - [How data is stored in storage services](#storage-path-structure).
