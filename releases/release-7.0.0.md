@@ -26,9 +26,9 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
 ### Performance
 
-* Achieve compatibility between [Fast Online DDL](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) and PITR [#38045](https://github.com/pingcap/tidb/issues/38045) @[Leavrth](https://github.com/Leavrth) **tw:ran-huang**
+* Achieve compatibility between Fast Online DDL and PITR [#38045](https://github.com/pingcap/tidb/issues/38045) @[Leavrth](https://github.com/Leavrth) **tw:ran-huang**
 
-    In TiDB v6.5.0, Fast Online DDL is not fully compatible with [PITR](/br/backup-and-restore-overview.md). To ensure full data backup, it is recommended to first stop the PITR background backup task, quickly add indexes using Fast Online DDL, and then resume the PITR backup task.
+    In TiDB v6.5.0, [Fast Online DDL](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) is not fully compatible with [PITR](/br/backup-and-restore-overview.md). To ensure full data backup, it is recommended to first stop the PITR background backup task, quickly add indexes using Fast Online DDL, and then resume the PITR backup task.
 
     Starting from TiDB v7.0.0, Fast Online DDL and PITR are fully compatible. When restoring cluster data through PITR, the index operations added via Fast Online DDL during log backup will be automatically replayed to achieve compatibility.
 
@@ -116,11 +116,11 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
     For more information, see [documentation](/ddl-introduction.md).
 
-* TiFlash supports spill-to-disk [#6528](https://github.com/pingcap/tiflash/issues/6528) @[windtalker](https://github.com/windtalker) **tw:ran-huang**
+* TiFlash supports spilling to disk [#6528](https://github.com/pingcap/tiflash/issues/6528) @[windtalker](https://github.com/windtalker) **tw:ran-huang**
 
-    To improve execution performance, TiFlash runs data entirely in memory as much as possible. When the amount of data exceeds the total size of memory, TiFlash will terminate the query to avoid system crashes caused by running out of memory. Therefore, the amount of data that TiFlash can handle is limited by the available memory size.
+    To improve execution performance, TiFlash runs data entirely in memory as much as possible. When the amount of data exceeds the total size of memory, TiFlash terminates the query to avoid system crashes caused by running out of memory. Therefore, the amount of data that TiFlash can handle is limited by the available memory size.
 
-    Starting from v7.0.0, TiFlash supports the spill-to-disk feature. By adjusting the threshold of memory usage for operators ([`tidb_max_bytes_before_tiflash_external_group_by`](/system-variables.md#tidb_max_bytes_before_tiflash_external_group_by-new-in-v700), [`tidb_max_bytes_before_tiflash_external_sort`](/system-variables.md#tidb_max_bytes_before_tiflash_external_sort-new-in-v700), and [`tidb_max_bytes_before_tiflash_external_join`](/system-variables.md#tidb_max_bytes_before_tiflash_external_join-new-in-v700)), you can control the maximum amount of memory that an operator can use. When the memory used by the operator exceeds the threshold, it will automatically write data to disk. This sacrifices some performance but allows for processing of more data.
+    Starting from v7.0.0, TiFlash supports the spill-to-disk feature. By adjusting the threshold of memory usage for operators ([`tidb_max_bytes_before_tiflash_external_group_by`](/system-variables.md#tidb_max_bytes_before_tiflash_external_group_by-new-in-v700), [`tidb_max_bytes_before_tiflash_external_sort`](/system-variables.md#tidb_max_bytes_before_tiflash_external_sort-new-in-v700), and [`tidb_max_bytes_before_tiflash_external_join`](/system-variables.md#tidb_max_bytes_before_tiflash_external_join-new-in-v700)), you can control the maximum amount of memory that an operator can use. When the memory used by the operator exceeds the threshold, it automatically writes data to disk. This sacrifices some performance but allows for processing of more data.
 
     For more information, see [documentation](/tiflash/tiflash-spill-disk.md).
 
@@ -130,7 +130,7 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
 * Add new optimizer hints for MPP optimization [#39710](https://github.com/pingcap/tidb/issues/39710) @[Reminiscent](https://github.com/Reminiscent) **tw:ran-huang**
 
-    In v7.0.0, TiDB added a series of optimizer hints to influence the generation of MPP execution plans.
+    In v7.0.0, TiDB adds a series of optimizer hints to influence the generation of MPP execution plans.
 
     - [`SHUFFLE_JOIN()`](/optimizer-hints.md#shuffle_joint1_name-tl_name): takes effect on MPP. It hints the optimizer to use the Shuffle Join algorithm for the specified table.
     - [`BROADCAST_JOIN()`](/optimizer-hints.md#broadcast_joint1_name-tl_name): takes effect on MPP. It hints the optimizer to use the Broadcast Join algorithm for the specified table.
@@ -141,11 +141,11 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
   For more information, see [documentation](/optimizer-hints.md).
 
-* Optimizer hints are compatible with specified join methods and join orders. [#36600](https://github.com/pingcap/tidb/issues/36600) @[Reminiscent](https://github.com/Reminiscent)
+* Optimizer hints support specifying join methods and join orders [#36600](https://github.com/pingcap/tidb/issues/36600) @[Reminiscent](https://github.com/Reminiscent)
 
     In v7.0.0, the optimizer hint [`LEADING()`](/optimizer-hints.md#leadingt1_name--tl_name-) can be used in conjunction with hints that affect the join method, and their behaviors are compatible. In the case of multi-table joins, you can effectively specify the optimal join method and join order, thereby enhancing the control of optimizer hints over execution plans.
 
-    There will be slight changes in the new Hint behavior. To ensure forward compatibility, TiDB introduces the system variable [`tidb_opt_advanced_join_hint`](/system-variables.md#tidb_opt_advanced_join_hint-new-in-v700). When this variable is set to `OFF`, the optimizer hint behavior is compatible with earlier versions. When you upgrade your cluster from earlier versions to v7.0.0 or later versions, this variable will be set to `OFF`. To obtain more flexible hint behavior, if you ensure that the behavior does not bring about performance regression, it is strongly recommended to set this variable to `ON`.
+    The new Hint behavior has minor changes. To ensure forward compatibility, TiDB introduces the system variable [`tidb_opt_advanced_join_hint`](/system-variables.md#tidb_opt_advanced_join_hint-new-in-v700). When this variable is set to `OFF`, the optimizer hint behavior is compatible with earlier versions. When you upgrade your cluster from earlier versions to v7.0.0 or later versions, this variable will be set to `OFF`. To obtain more flexible hint behavior, after you confirm that the behavior does not bring about performance regression, it is strongly recommended to set this variable to `ON`.
 
     For more information, see [documentation](/optimizer-hints.md).
 
@@ -256,9 +256,7 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
 * TiDB removes the constraint that the auto-increment column must be an index [#40580](https://github.com/pingcap/tidb/issues/40580) @[tiancaiamao](https://github.com/tiancaiamao) **tw:ran-huang**
 
-    TiDB v7.0.0 开始支持移除自增列必须是索引或索引前缀的限制。这意味着用户现在可以更灵活地定义表的主键，并方便地使用自增列实现排序分页，同时避免自增列带来的写入热点问题，并通过使用 Cluster Indexed Table 提高查询性能。之前，TiDB 的行为与 MySQL 一致，要求自增列必须是索引或索引前缀。现在，通过此次更新，您可以使用以下语法创建表并成功移除自增列约束：
-
-    Starting from v7.0.0, TiDB removes the constraint that the auto-increment column must be an index or index prefix. This means that users can now define the primary key of a table more flexibly and use the auto-increment column to implement sorting and pagination more conveniently. This also avoids the write hotspot problem caused by the auto-increment column and improves query performance by using Cluster Indexed Table. Previously, TiDB's behavior was consistent with MySQL, requiring the auto-increment column to be an index or index prefix. With the new release, you can create a table using the following syntax and successfully remove the auto-increment column constraint:
+    Starting from v7.0.0, TiDB removes the constraint that the auto-increment column must be an index or index prefix. Now you can define the primary key of a table more flexibly and use the auto-increment column to implement sorting and pagination more conveniently. This also avoids the write hotspot problem caused by the auto-increment column and improves query performance by using the table with clustered indexes. Previously, TiDB's behavior was consistent with MySQL, requiring the auto-increment column to be an index or index prefix. With the new release, you can create a table using the following syntax and successfully remove the auto-increment column constraint:
 
     ```sql
     CREATE TABLE test1 (
@@ -274,6 +272,12 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
     For more information, see [documentation](/mysql-compatibility.md#auto-increment-id).
 
 * 兼容性 2
+
+### TiCDC compatibility
+
+* TiCDC fixes the issue of incorrect encoding of Float data in Avro [#8490](https://github.com/pingcap/tiflow/issues/8490) @[3AceShowHand](https://github.com/3AceShowHand) **tw:ran-huang**
+
+    When upgrading the TiCDC cluster to v7.0.0, if a table replicated using Avro contains the Float data type, you need to manually adjust the compatibility policy of Confluent Schema Registry to `None` before upgrading so that the changefeed can successfully update the schema. Otherwise, after upgrading, the changefeed will be unable to update the schema and enter an error state.
 
 ### System variables
 
