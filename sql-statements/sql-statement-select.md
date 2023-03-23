@@ -90,7 +90,6 @@ TableList ::=
 
 ![WindowClauseOptional](/media/sqlgram/WindowClauseOptional.png)
 
-
 **TableSampleOpt**
 
 ```ebnf+diagram
