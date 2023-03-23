@@ -81,7 +81,7 @@ The resource control feature introduces two new global variables.
 
 <CustomContent platform="tidb-cloud">
 
-* TiKV: For on-premises TiDB, you can use the `resource-control.enabled` parameter to control whether to use request scheduling based on resource group quotas. For TiDB Cloud, the value of the `resource-control.enabled` parameter is  `true` by default and does not support dynamic modification. If you need to disable it for TiDB Cloud Dedicated Tier clusters, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+* TiKV: For on-premises TiDB, you can use the `resource-control.enabled` parameter to control whether to use request scheduling based on resource group quotas. For TiDB Cloud, the value of the `resource-control.enabled` parameter is  `true` by default and does not support dynamic modification..
 
 </CustomContent>
 
@@ -157,7 +157,7 @@ If there are too many requests that result in insufficient resources for the res
 > **Note:**
 >
 > - When you bind a user to a resource group by using `CREATE USER` or `ALTER USER`, it will not take effect for the user's existing sessions, but only for the user's new sessions.
-> - The TiDB cluster automatically creates a `default` resource group when it is initialized。 Statements that are not bound to a resource group are automatically bound to this resource group. This resource group does not support deletion, but you can modify the configuration of its RU.
+> - The TiDB cluster automatically creates a `default` resource group when it is initialized. Statements that are not bound to a resource group are automatically bound to this resource group. This resource group does not support deletion, but you can modify the configuration of its RU.
 
 #### Bind the current session to a resource group
 

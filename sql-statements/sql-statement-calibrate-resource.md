@@ -27,4 +27,4 @@ CALIBRATE RESOURCE;
 
 > *Note:**
 >
-> The RU capacity of a cluster varies with the topology of the cluster and the hardware and software configuration of each component. The actual RU that each cluster can consume is also related to the actual workload. This estimation is for reference only and might be in error with the actual maximum value.
+> The RU capacity of a cluster varies with the topology of the cluster and the hardware and software configuration of each component. The actual RU that each cluster can consume is also related to the actual workload. This estimation is for reference only and might have some deviation with the actual maximum value.
