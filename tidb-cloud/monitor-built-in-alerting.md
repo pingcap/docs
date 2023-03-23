@@ -20,12 +20,12 @@ If you are a member of a project and you want to get alert notification emails o
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
 2. In the left navigation pane of the [**Clusters**](https://tidbcloud.com/console/clusters) page, do one of the following:
 
-    - If you have multiple projects, switch to the target project, and then click **Admin** > **Alerts**.
-    - If you only have one project, click **Admin** > **Alerts**.
+    - If you have multiple projects, switch to the target project, and then click **Admin** > **Alert Subscription**.
+    - If you only have one project, click **Admin** > **Alert Subscription**.
 
-3. Enter your email address, and then click **Subscribe**.
+3. Click **Add Subscriber**, enter your email address in the displayed dialog, and then click **Add**.
 
-To minimize the number of alert emails sent to subscribers, TiDB Cloud aggregates alerts into a single email that is sent every 3 hours.
+If an alert condition remains unchanged, the alert sends email notifications every 3 hours.
 
 ## Unsubscribe from alert notification emails
 
@@ -34,10 +34,11 @@ If you no longer want to receive alert notification emails of clusters in your p
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
 2. In the left navigation pane of the [**Clusters**](https://tidbcloud.com/console/clusters) page, do one of the following:
 
-    - If you have multiple projects, switch to the target project, and then click **Admin** > **Alerts**.
-    - If you only have one project, click **Admin** > **Alerts**.
+    - If you have multiple projects, switch to the target project, and then click **Admin** > **Alert Subscription**.
+    - If you only have one project, click **Admin** > **Alert Subscription**.
 
-3. In the right pane, locate your email address and click **Delete**.
+3. Locate your email address and click **Unsubscribe**.
+4. Click **Delete** to confirm the unsubscription.
 
 ## TiDB Cloud built-in alert conditions
 
