@@ -12,6 +12,7 @@ Tiflash also supports pushdown for the functions and operators [listed on this p
 ## Supported expressions for pushdown to TiKV
 
 | Expression Type | Operations |
+| :-------------- | :------------------------------------- |
 | [Logical operators](/functions-and-operators/operators.md#logical-operators) | AND (&&), OR (&#124;&#124;), NOT (!), XOR |
 | [Bit operators](/functions-and-operators/operators.md#operators) | [`&`][operator_bitwise-and], [`~`][operator_bitwise-invert], [\|][operator_bitwise-or], [`^`][operator_bitwise-xor], [`<<`][operator_left-shift], [`>>`][operator_right-shift] |
 | [Comparison functions and operators](/functions-and-operators/operators.md#comparison-functions-and-operators) | [`<`][operator_less-than], [`<=`][operator_less-than-or-equal], [`=`][operator_equal], [`!= (<>)`][operator_not-equal], [`>`][operator_greater-than], [`>=`][operator_greater-than-or-equal], [`<=>`][operator_equal-to], [`BETWEEN ... AND ...`][operator_between], [`COALESCE()`][function_coalesce], [`IN()`][operator_in], [`INTERVAL()`][function_interval], [`IS NOT NULL`][operator_is-not-null], [`IS NOT`][operator_is-not], [`IS NULL`][operator_is-null], [`IS`][operator_is], [`ISNULL()`][function_isnull], [`LIKE`][operator_like], [`NOT BETWEEN ... AND ...`][operator_not-between], [`NOT IN()`][operator_not-in], [`NOT LIKE`][operator_not-like], [`STRCMP()`][function_strcmp] |
