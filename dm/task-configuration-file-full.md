@@ -120,6 +120,7 @@ loaders:
     # The directory that stores full data exported from the upstream ("./dumped_data" by default).
     # Supoprts a local filesystem path or an Amazon S3 path. For example, "s3://dm_bucket/dumped_data?endpoint=s3-website.us-east-2.amazonaws.com&access_key=s3accesskey&secret_access_key=s3secretkey&force_path_style=true"
     dir: "./dumped_data"
+
     # The import mode during the full import phase. The following modes are supported:
     # - "logical" (default). Uses TiDB Lightning's logical import mode to import data. Document: https://docs.pingcap.com/tidb/stable/tidb-lightning-logical-import-mode
     # - "physical". Uses TiDB Lightning's physical import mode to import data. Document: https://docs.pingcap.com/zh/tidb/stable/tidb-lightning-physical-import-mode
