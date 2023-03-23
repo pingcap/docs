@@ -52,9 +52,9 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
 * TiFlash supports late materialization [#5829](https://github.com/pingcap/tiflash/issues/5829) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger) **tw:qiancai**
 
-    When processing a `SELECT` statement with filtering conditions (`WHERE` clause), TiFlash reads all the data from the columns required by the query by default, and then filters and aggregates the data based on the query conditions. Late materialization is an optimization method that supports pushing down part of the filtering conditions to the TableScan operator. That is, TiFlash first scans the column data related to the filtering conditions that are pushed down, filters the rows that meet the condition, and then scans the other column data of these rows for further calculation, thereby reducing IO scans and computations of data processing.
+    When processing a `SELECT` statement with filter conditions (`WHERE` clause), TiFlash reads all the data from the columns required by the query by default, and then filters and aggregates the data based on the query conditions. Late materialization is an optimization method that supports pushing down part of the filter conditions to the TableScan operator. That is, TiFlash first scans the column data related to the filter conditions that are pushed down, filters the rows that meet the condition, and then scans the other column data of these rows for further calculation, thereby reducing IO scans and computations of data processing.
 
-    The TiFlash late materialization feature is not enabled by default. You can enable it by setting the `tidb_opt_enable_late_materialization` system variable to `OFF`. When the feature is enabled, the TiDB optimizer will determine which filtering conditions to be pushed down based on statistics and filtering conditions.
+    The TiFlash late materialization feature is not enabled by default. You can enable it by setting the `tidb_opt_enable_late_materialization` system variable to `OFF`. When the feature is enabled, the TiDB optimizer will determine which filter conditions to be pushed down based on statistics and filter conditions.
 
     For more information, see [documentation](/tiflash/tiflash-late-materialization.md).
 
@@ -294,7 +294,7 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
     Starting from v7.0.0, TiDB supports Key partitions and can parse the MySQL `PARTITION BY LINEAR KEY` syntax. However, TiDB ignores the `LINEAR` keyword and uses a non-linear hash algorithm instead. Currently, the `KEY` partition type does not support partition statements with an empty partition column list.
 
-    For more information, see [documentation](/partitioned-table.md#key-partitioning)
+    For more information, see [documentation](/partitioned-table.md#key-partitioning).
 
 ### TiCDC compatibility
 
