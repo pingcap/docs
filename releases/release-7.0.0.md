@@ -100,21 +100,21 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
 ### Reliability
 
-* 支持基于资源组的资源管控 [#38825](https://github.com/pingcap/tidb/issues/38825) @[nolouch](https://github.com/nolouch) @[BornChanger](https://github.com/BornChanger) @[glorv](https://github.com/glorv) @[tiancaiamao](https://github.com/tiancaiamao) @[Connor1996](https://github.com/Connor1996) @[JmPotato](https://github.com/JmPotato) @[hnes](https://github.com/hnes) @[CabinfeverB](https://github.com/CabinfeverB) @[HuSharp](https://github.com/HuSharp) **tw:hfxsd**
+* * Support resource control based on resource groups (GA) [#38825](https://github.com/pingcap/tidb/issues/38825) @[nolouch](https://github.com/nolouch) @[BornChanger](https://github.com/BornChanger) @[glorv](https://github.com/glorv) @[tiancaiamao](https://github.com/tiancaiamao) @[Connor1996](https://github.com/Connor1996) @[JmPotato](https://github.com/JmPotato) @[hnes](https://github.com/hnes) @[CabinfeverB](https://github.com/CabinfeverB) @[HuSharp](https://github.com/HuSharp) **tw:hfxsd**
 
-    TiDB 正式发布了基于资源组的资源管控特性，该特性将会极大地提升 TiDB 集群的资源利用效率和性能表现。资源管控特性的引入对 TiDB 具有里程碑的意义，它允许用户将一个分布式数据库集群划分成多个逻辑单元，将不同的数据库用户映射到对应的资源组中，并根据需要设置每个资源组的配额。当集群资源紧张时，来自同一个资源组的会话所使用的全部资源将被限制在配额内，避免其中一个资源组过度消耗，从而影响其他资源组中的会话正常运行。
+    TiDB has officially released a resource management feature based on resource groups. This feature significantly improves the resource utilization efficiency and performance of TiDB clusters. The introduction of the resource control feature is a milestone for TiDB. You can divide a distributed database cluster into multiple logical units, map different database users to corresponding resource groups, and set the quota for each resource group as needed. When the cluster resources are limited, all resources used by sessions in the same resource group will be limited to the quota. In this way, even if a resource group is over-consumed, the sessions in other resource groups are not affected.      
+   
+    With this feature, you can combine multiple small and medium-sized applications from different systems into a single TiDB cluster. When the system workload is low, busy applications can still be allocated the required system resources even if they exceed the set read and write quotas, so as to achieve the maximum utilization of resources. In addition, the rational use of the resource control feature can reduce the number of clusters, ease the difficulty of operation and maintenance, and save management costs.
 
-    该特性也可以将多个来自不同系统的中小型应用合入一个 TiDB 集群中，个别应用的负载提升，不会影响其他应用的正常运行。而在系统负载较低的时候，繁忙的应用即使超过设定的读写配额，也仍然可以被分配到所需的系统资源，达到资源的最大化利用。此外，合理利用资源管控特性可以减少集群数量，降低运维难度及管理成本。
+    This feature provides a built-in view of the actual usage of resources, assisting you to allocate resources more rationally. It also supports dynamic resource management capabilities based on session and statement levels (Hint). The introduction of these features will help you gain more precise control over the resource usage of your TiDB cluster, and dynamically adjust quotas based on actual needs.
+    
+    You can use resource groups in the following ways:
 
-    我们不仅提供了内置视图展示资源的实际使用情况，协助用户更合理地配置资源，还支持基于会话和语句级别（HINT）的动态资源管控能力。这些功能的引入将帮助用户更精确地掌控 TiDB 集群的资源使用情况，并根据实际需要动态调整配额。
+    - User level. Bind the user using the [`CREATE USER`](/sql-statements/sql-statement-create-user.md) or [`ALTER USER`](/sql-statements/sql-statement-alter-user.md) statements to a specific resource group. After binding a resource group to a user, sessions created by the user are automatically bound to the corresponding resource group.
+    - Session level. Set the resource group used by the current session via [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md).
+    - Statement level. Set the resource group used by the current statement via [`RESOURCE_GROUP()`](/optimizer-hints.md#resource_groupresource_group_name).
 
-    启用资源管控特性需要同时打开 TiDB 的全局变量 [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-从-v660-版本开始引入) 及 TiKV 的配置项 [`resource-control.enabled`](/tikv-configuration-file.md#resource-control)。当前支持的限额方式基于“[用量](/tidb-resource-control.md#什么是-request-unit-ru)”（Request Unit，即 RU），RU 是 TiDB 对 CPU、I/O 等系统资源的统一抽象单位。
-
-    用户可以通过以下方式生效资源组：
-
-    - 用户级别。通过 [`CREATE USER`](/sql-statements/sql-statement-create-user.md) 或 [`ALTER USER`](/sql-statements/sql-statement-alter-user.md) 语句将用户绑定到特定的资源组。将资源组绑定用户后，使用对应的用户创建的会话会自动绑定对应的资源组。
-    - 会话级别。通过 [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md) 设置当前会话的资源组。
-    - 语句级别。通过 [`RESOURCE_GROUP()`](/optimizer-hints.md#resource_groupresource_group_name) 设置当前语句使用的资源组。
+   For more information, see [documentation](/tidb-resource-control.md). 
 
   For more information, see [documentation](/tidb-resource-control.md).
 
@@ -187,33 +187,17 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
 ### DB operations
 
-* TiCDC 支持 storage sink，可输出变更数据至 cloud storage (GA) [#6797](https://github.com/pingcap/tiflow/issues/6797) @[zhaoxinyu](https://github.com/zhaoxinyu) **tw:hfxsd**
+*  TiCDC supports replicating changed logs to storage sinks (GA) [#6797](https://github.com/pingcap/tiflow/issues/6797) @[zhaoxinyu](https://github.com/zhaoxinyu) **tw:hfxsd**
+  
+    TiCDC supports replicating changed logs to Amazon S3, GCS, Azure Blob Storage, NFS, and other S3-compatible storage services. Cloud storage is reasonably priced and easy to use. If you are not using Kafka, you can use storage sinks. TiCDC saves the changed logs to a file and then sends it to the storage system. From the storage system, the consumer program reads the newly generated changed log files periodically. The storage sink supports changed logs in the canal-json and CSV formats. 
 
-    TiCDC 支持将 changed log 输出到 Amazon S3、Azure Blob Storage、NFS，以及兼容 Amazon S3 协议的存储服务中。Cloud storage 价格便宜，使用方便。对于不使用 Kafka 的用户，可以选择使用 storage sink。使用该功能，TiCDC 会将 changed log 保存到文件，发送到存储系统中。用户自研的消费程序定时从存储系统读取新产生的 changed log 进行数据处理。
+    For more information, see [documentation](/ticdc/ticdc-sink-to-cloud-storage).
 
-    Storage sink 支持格式为 canal-json 和 csv 的 changed log。
+* TiCDC OpenAPI v2 GA @[sdojjy](https://github.com/sdojjy) **tw:hfxsd**
 
-    For more information, see [documentation](https://docs.pingcap.com/zh/tidb/stable/ticdc-sink-to-cloud-storage).
+    TiCDC provides the OpenAPI v2 feature. Compared with OpenAPI v1, OpenAPI v2 provides full support for replication tasks. You can query and perform operations on TiCDC clusters via OpenAPI v2. The OpenAPI feature is a subset of the [`cdc cli` tool](/ticdc/ticdc-manage-changefeed.md). You can use OpenAPI to perform operations on TiCDC clusters, such as getting TiCDC node status, checking cluster health status, and managing synchronization tasks.
 
-* TiCDC Open API V2 GA @[sdojjy](https://github.com/sdojjy) **tw:hfxsd**
-
-    TiCDC 提供 OpenAPI 功能，用户可以通过 OpenAPI v2 对 TiCDC 集群进行查询和运维操作。OpenAPI 的功能是 [`cdc cli` 工具](/ticdc/ticdc-manage-changefeed.md)的一个子集。用户可以通过 OpenAPI 完成 TiCDC 集群的如下运维操作：
-
-    - [获取 TiCDC 节点状态信息](#获取-ticdc-节点状态信息)
-    - [检查 TiCDC 集群的健康状态](#检查-ticdc-集群的健康状态)
-    - [创建同步任务](#创建同步任务)
-    - [删除同步任务](#删除同步任务)
-    - [更新同步任务配置](#更新同步任务配置)
-    - [查询同步任务列表](#查询同步任务列表)
-    - [查询特定同步任务](#查询特定同步任务)
-    - [暂停同步任务](#暂停同步任务)
-    - [恢复同步任务](#恢复同步任务)
-    - [查询同步子任务列表](#查询同步子任务列表)
-    - [查询特定同步子任务](#查询特定同步子任务)
-    - [查询 TiCDC 服务进程列表](#查询-ticdc-服务进程列表)
-    - [驱逐 owner 节点](#驱逐-owner-节点)
-    - [动态调整 TiCDC Server 日志级别](#动态调整-ticdc-server-日志级别)
-
+    For more information, see [documentation](/ticdc/ticdc-open-api-v2.md).
   For more information, see [documentation](https://github.com/pingcap/docs-cn/pull/13224).
 
 ### Observability
@@ -234,17 +218,17 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
 ### Data migration
 
-* Load data 语句集成 Lightning ，用户可以使用 Load data 命令完成原先需要单独使用 Lightning 才能完成的数据导入任务。    [#40499](https://github.com/pingcap/tidb/issues/40499) @[lance6716](https://github.com/lance6716) **tw:hfxsd**
+* The `LOAD DATA` statement integrates with TiDB Lightning, so you can use the `LOAD DATA` command to complete data import tasks that would otherwise be done using TiDB Lightning alone. [#40499](https://github.com/pingcap/tidb/issues/40499) @[lance6716](https://github.com/lance6716) **tw:hfxsd**
 
-    在集成 Lightning 之前，Load data 语句只能用于导入位于客户端的数据文件，如果用户要从云存储导入数据，就得借助 Lightning 来实现。但是单独部署 Lightning 又会带来额外的部署成本和管理成本。将 Lightning 逻辑导入能力（TiDB backend ）集成到 Load data 命令后，不仅可以省去 Lightning 的部署和管理成本。还可以借助 Lightning 的功能大大扩展 load data 语句的能力。 部分增强的功能举例说明如下：
+    Before integrating TiDB Lightning, the `LOAD DATA` statement could only be used to import data files located on the client side. If you wanted to import data from cloud storage, you had to rely on TiDB Lightning to do so. However, deploying TiDB Lightning separately would incur additional deployment and management costs. By integrating the TiDB Lightning logical import capability (TiDB Backend) into the `LOAD DATA` command, you can not only eliminate the deployment and management costs of TiDB Lightning, but also greatly extend the capabilities of the `LOAD DATA` statement with the TiDB Lightning features. Some examples of the enhanced functionality are as follows:
 
-    - 支持从 S3 导入数据到 TiDB，且支持通配符一次性匹配多个源文件导入到 TiDB 。
-    - 支持 CSV、TSV、Parquet、SQL(mydumper/dumpling) 格式的源文件。
-    - 支持 precheck ，可在导入之前将所有不满足导入数据的问题检测出来，用户根据检测结果优化后，再次提交任务。提升任务配置体验。
-    - 支持将任务设置为 Detached，让任务在后台执行。
-    - 支持任务管理，可通过 show load data jobid 查询任务状态和进展详情。方便用户管理和维护。
-
-  For more information, see [documentation](待补充).
+    - Supports importing data from Amazon S3 and Google Cloud Storage to TiDB. Supports importing multiple source files to TiDB in one go with wildcards.
+    - Support `DEFINED NULL BY` to define null.
+    - Support for source files in CSV, TSV, Parquet, and SQL (mydumper/dumpling) formats.
+    - Support setting tasks as `Detached` to let tasks run in the background.
+    - Support task management. You can query task status and progress details by `SHOW LOAD DATA jobid`, which is convenient for management and maintenance.
+    
+    For more information, see [documentation](/sql-statements/sql-statement-load-data.md).
 
 * TiDB Lightning supports enabling compressed transfers when sending key-value pairs to TiKV (GA) [#41163](https://github.com/pingcap/tidb/issues/41163) @[gozssky](https://github.com/gozssky)
 
