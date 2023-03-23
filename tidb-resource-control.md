@@ -195,7 +195,7 @@ SELECT /*+ RESOURCE_GROUP(rg1) */ * FROM t limit 10;
 
 <CustomContent platform="tidb-cloud">
 
-1. Execute the following statement to enable the resource control feature.
+1. Execute the following statement to disable the resource control feature.
 
     ```sql
     SET GLOBAL tidb_enable_resource_control = 'OFF';
