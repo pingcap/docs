@@ -97,6 +97,7 @@ TableList ::=
 TableSampleOpt ::=
     'TABLESAMPLE' 'REGIONS()'
 ```
+
 ## Description of the syntax elements
 
 |Syntax Element|Description|
