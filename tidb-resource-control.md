@@ -125,7 +125,7 @@ The following is an example of how to create a resource group and bind users to 
 3. Create a resource group `rg3`. Set the absolute priority to `HIGH`. The absolute priority currently supports `LOW|MEDIUM|HIGH`. The default value is `MEDIUM`.
 
     ```sql
-    CREATE RESOURCE GROUP IF NOT EXISTS rg2 RU_PER_SEC = 100 PRIORITY = HIGH;
+    CREATE RESOURCE GROUP IF NOT EXISTS rg3 RU_PER_SEC = 100 PRIORITY = HIGH;
     ```
 
 ### Bind resource groups
