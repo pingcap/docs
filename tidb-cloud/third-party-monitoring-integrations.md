@@ -23,9 +23,9 @@ The available third-party integrations are displayed.
 
 ## Limitation
 
-1. For [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta), third-party monitoring integrations are not supported.
+- For [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta), third-party monitoring integrations are not supported.
 
-2. Third-Party Monitoring Integrations are not available when the cluster status is CREATING, RESTORING, PAUSED, or RESUMING.
+- Third-party monitoring integrations are not available when the cluster status is **CREATING**, **RESTORING**, **PAUSED**, or **RESUMING**.
 
 ## Available integrations
 

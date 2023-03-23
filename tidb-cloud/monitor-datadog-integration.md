@@ -17,9 +17,9 @@ You can configure TiDB Cloud to send metric data about your TiDB clusters to [Da
 
 ## Limitation
 
-1. You cannot use the Datadog integration in [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta).
+- You cannot use the Datadog integration in [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta).
 
-2. Datadog Integrations are not available when the cluster status is CREATING, RESTORING, PAUSED, or RESUMING.
+- Datadog integrations are not available when the cluster status is **CREATING**, **RESTORING**, **PAUSED**, or **RESUMING**.
 
 ## Steps
 
