@@ -120,40 +120,6 @@ loaders:
     # The directory that stores full data exported from the upstream ("./dumped_data" by default).
     # Supoprts a local filesystem path or an Amazon S3 path. For example, "s3://dm_bucket/dumped_data?endpoint=s3-website.us-east-2.amazonaws.com&access_key=s3accesskey&secret_access_key=s3secretkey&force_path_style=true"
     dir: "./dumped_data"
-<<<<<<< HEAD
-    # The import mode during the full import phase. In most cases you don't need to care about this configuration.
-    # - "sql" (default). Use [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) TiDB-backend mode to import data.
-    # - "loader". Use Loader mode to import data. This mode is only for compatibility with features that TiDB Lightning does not support yet. It will be deprecated in the future.
-    import-mode: "sql"
-    #  Methods to resolve conflicts during the full import phase. You can set it to the following:
-    # - "replace" (default). Only supports the import mode "sql". In this method, it uses the new data to replace the existing data.
-    # - "ignore". Only supports the import mode "sql". It keeps the existing data, and ignores the new data.
-    # - "error". Only supports the import mode "loader". It reports errors when inserting duplicated data, and then stops the replication task.
-    on-duplicate: "replace"
-    # The local directory that is used to locally sort for physical import. The default value for this option is the same as the dir configuration item. See TiDB Lightning's storage requirements for details: https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode#environment-requirements
-    sorting-dir-physical: ". /dumped_data"
-    # Disk space limit, corresponding to the TiDB Lightning disk-quota configuration. See the documentation for details: https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode-usage#configure-disk-quota-new-in-v620
-    disk-quota-physical: "0"
-    # Only available for physical import. Specifies whether to perform `ADMIN CHECKSUM TABLE <table>` for each table to verify data integrity after importing.
-    # The following options are available:
-    # - "required" (default value): Perform admin checksum. If checksum fails, TiDB Lightning will exit with failure.
-    # - "optional": Perform admin checksum. If checksum fails, TiDB Lightning will report a WARN log but ignore any error.
-    # - "off": Do not perform checksum.
-    checksum-physical: "required"
-    # Only available for physical import. Specifies whether to perform the `ANALYZE TABLE <table>` for each table after CHECKSUM has finished.
-    # - "required" (default). Indicates that the Analyze operation will be performed after the import is complete, and if the analysis fails it will cause the task to pause and require manual processing by the user.
-    # - "optional". Indicates that the data will be analysed after the import is complete. If the analysis fails a warn log will be printed and the task will not be paused.
-    # - "off". Indicates that no data analysis will be performed after the import is complete.
-    # Analyze only affects statistics data and it is recommended that Analyze is set to off on in most scenarios.
-    analyze: "off"
-    # Only available for physical import. The concurrency of sending KVs data to TiKV. This can be increased when the direct network transfer speed between dm-worker and TiKV exceeds 10,000 Mb/s.
-    # range-concurrency: 16
-    # Physical Import Mode Whether to enable compression when sending KVs data to TiKV. Currently only Gzip compression is supported, either "gzip" or "gz" can be used. Compression is not enabled by default.
-    # compress-kv-pairs: ""
-    # pd-server address, just fill in one. If empty, the default is to use the pd address information from the TiDB query.
-    # pd-addr: "192.168.0.1:2379"
-=======
-
     # The import mode during the full import phase. The following modes are supported:
     # - "logical" (default). Uses TiDB Lightning's logical import mode to import data. Document: https://docs.pingcap.com/tidb/stable/tidb-lightning-logical-import-mode
     # - "physical". Uses TiDB Lightning's physical import mode to import data. Document: https://docs.pingcap.com/zh/tidb/stable/tidb-lightning-physical-import-mode
@@ -193,7 +159,18 @@ loaders:
     # If checksum fails, the import is abnormal, which means the data is inconsistent or lost.
     # Therefore, it is recommended to always enable checksum.
     checksum-physical: "required"
->>>>>>> 865e1c17ad98a90c2e4c76a997d04681d1c71dc7
+    # Only available for physical import. Specifies whether to perform the `ANALYZE TABLE <table>` for each table after CHECKSUM has finished.
+    # - "required" (default). Indicates that the Analyze operation will be performed after the import is complete, and if the analysis fails it will cause the task to pause and require manual processing by the user.
+    # - "optional". Indicates that the data will be analysed after the import is complete. If the analysis fails a warn log will be printed and the task will not be paused.
+    # - "off". Indicates that no data analysis will be performed after the import is complete.
+    # Analyze only affects statistics data and it is recommended that Analyze is set to off on in most scenarios.
+    analyze: "off"
+    # Only available for physical import. The concurrency of sending KVs data to TiKV. This can be increased when the direct network transfer speed between dm-worker and TiKV exceeds 10,000 Mb/s.
+    # range-concurrency: 16
+    # Physical Import Mode Whether to enable compression when sending KVs data to TiKV. Currently only Gzip compression is supported, either "gzip" or "gz" can be used. Compression is not enabled by default.
+    # compress-kv-pairs: ""
+    # pd-server address, just fill in one. If empty, the default is to use the pd address information from the TiDB query.
+    # pd-addr: "192.168.0.1:2379"
 
 # Configuration arguments of the sync processing unit.
 syncers:
