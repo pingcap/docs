@@ -102,11 +102,11 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
 * * Support resource control based on resource groups (GA) [#38825](https://github.com/pingcap/tidb/issues/38825) @[nolouch](https://github.com/nolouch) @[BornChanger](https://github.com/BornChanger) @[glorv](https://github.com/glorv) @[tiancaiamao](https://github.com/tiancaiamao) @[Connor1996](https://github.com/Connor1996) @[JmPotato](https://github.com/JmPotato) @[hnes](https://github.com/hnes) @[CabinfeverB](https://github.com/CabinfeverB) @[HuSharp](https://github.com/HuSharp) **tw:hfxsd**
 
-    TiDB has officially released a resource management feature based on resource groups. This feature significantly improves the resource utilization efficiency and performance of TiDB clusters. The introduction of the resource control feature is a milestone for TiDB. You can divide a distributed database cluster into multiple logical units, map different database users to corresponding resource groups, and set the quota for each resource group as needed. When the cluster resources are limited, all resources used by sessions in the same resource group will be limited to the quota. In this way, even if a resource group is over-consumed, the sessions in other resource groups are not affected.      
+    TiDB officially releases a resource management feature based on resource groups. This feature significantly improves the resource utilization efficiency and performance of TiDB clusters. The introduction of the resource control feature is a milestone for TiDB. You can divide a distributed database cluster into multiple logical units, map different database users to corresponding resource groups, and set the quota for each resource group as needed. When the cluster resources are limited, all resources used by sessions in the same resource group will be limited to the quota. In this way, even if a resource group is over-consumed, the sessions in other resource groups are not affected.      
    
     With this feature, you can combine multiple small and medium-sized applications from different systems into a single TiDB cluster. When the system workload is low, busy applications can still be allocated the required system resources even if they exceed the set read and write quotas, so as to achieve the maximum utilization of resources. In addition, the rational use of the resource control feature can reduce the number of clusters, ease the difficulty of operation and maintenance, and save management costs.
 
-    This feature provides a built-in view of the actual usage of resources, assisting you to allocate resources more rationally. It also supports dynamic resource management capabilities based on session and statement levels (Hint). The introduction of these features will help you gain more precise control over the resource usage of your TiDB cluster, and dynamically adjust quotas based on actual needs.
+    This feature provides a built-in Resource Control Dashboard in Grafana to show the actual usage of resources, assisting you to allocate resources more rationally. It also supports dynamic resource management capabilities based on session and statement levels (Hint). The introduction of these features will help you gain more precise control over the resource usage of your TiDB cluster, and dynamically adjust quotas based on actual needs.
     
     You can use resource groups in the following ways:
 
@@ -114,9 +114,7 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
     - Session level. Set the resource group used by the current session via [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md).
     - Statement level. Set the resource group used by the current statement via [`RESOURCE_GROUP()`](/optimizer-hints.md#resource_groupresource_group_name).
 
-   For more information, see [documentation](/tidb-resource-control.md). 
-
-  For more information, see [documentation](/tidb-resource-control.md).
+    For more information, see [documentation](/tidb-resource-control.md). 
 
 * Support a checkpoint mechanism for Fast Online DDL, improving fault tolerance and automatic recovery capability [#42164](https://github.com/pingcap/tidb/issues/42164) @[tangenta](https://github.com/tangenta) **tw:ran-huang**
 
@@ -187,18 +185,17 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
 ### DB operations
 
-*  TiCDC supports replicating changed logs to storage sinks (GA) [#6797](https://github.com/pingcap/tiflow/issues/6797) @[zhaoxinyu](https://github.com/zhaoxinyu) **tw:hfxsd**
+*  TiCDC supports replicating change data to storage services (GA) [#6797](https://github.com/pingcap/tiflow/issues/6797) @[zhaoxinyu](https://github.com/zhaoxinyu) **tw:hfxsd**
   
-    TiCDC supports replicating changed logs to Amazon S3, GCS, Azure Blob Storage, NFS, and other S3-compatible storage services. Cloud storage is reasonably priced and easy to use. If you are not using Kafka, you can use storage sinks. TiCDC saves the changed logs to a file and then sends it to the storage system. From the storage system, the consumer program reads the newly generated changed log files periodically. The storage sink supports changed logs in the canal-json and CSV formats. 
+    TiCDC supports replicating changed data to Amazon S3, GCS, Azure Blob Storage, NFS, and other S3-compatible storage services. Storage services are reasonably priced and easy to use. If you are not using Kafka, you can use storage services. TiCDC saves the changed logs to a file and then sends it to the storage services instead. From the storage services, the consumer program reads the newly generated changed log files periodically. Currently, TiCDC supports replicating changed logs in canal-json and CSV formats to the storage service
 
     For more information, see [documentation](/ticdc/ticdc-sink-to-cloud-storage).
 
 * TiCDC OpenAPI v2 GA @[sdojjy](https://github.com/sdojjy) **tw:hfxsd**
 
-    TiCDC provides the OpenAPI v2 feature. Compared with OpenAPI v1, OpenAPI v2 provides full support for replication tasks. You can query and perform operations on TiCDC clusters via OpenAPI v2. The OpenAPI feature is a subset of the [`cdc cli` tool](/ticdc/ticdc-manage-changefeed.md). You can use OpenAPI to perform operations on TiCDC clusters, such as getting TiCDC node status, checking cluster health status, and managing synchronization tasks.
+    TiCDC provides OpenAPI v2. Compared to OpenAPI v1, OpenAPI v2 provides more complete support for replication tasks. The features provided by OpenAPI are a subset of [`cdc cli` tools](/ticdc/ticdc-manage-changefeed.md). You can use OpenAPI v2 to perform queries and operations on TiCDC clusters, such as getting TiCDC node status, checking cluster health status, and managing replication tasks.
 
     For more information, see [documentation](/ticdc/ticdc-open-api-v2.md).
-  For more information, see [documentation](https://github.com/pingcap/docs-cn/pull/13224).
 
 ### Observability
 
@@ -385,9 +382,9 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
     + TiDB Lightning
 
-        - Lightning local backend 支持导入数据和索引分离导入，提升导入速度和稳定性 [#42132](https://github.com/pingcap/tidb/issues/42132) @[gozssky](https://github.com/gozssky)
+        - TiDB Lightning local backend supports separating data import and index import to improve import speed and stability [#42132](https://github.com/pingcap/tidb/issues/42132) @[gozssky](https://github.com/gozssky) **tw:hfxsd**
 
-            Lightning 增加 add-index-by-sql 参数。默认取值为 true，表示在物理导入模式（ local backend）下，会在导入数据完成后，通过 add index 的 SQL 语句帮用户建索引，提升导入数据的速度和稳定性。取值为 false，和历史版本保存一致，表示仍然会用 Lightning  将行数据以及索引数据编码成 kv pairs 后再一同导入到 TiKV。
+            TiDB Lightning adds the `add-index-by-sql` parameter. The default value is `false`, which means that TiDB Lightning still encodes the row data and index data into KV pairs before importing them into TiKV. If you set it to `true`, it creates indexes with the add index SQL statement after the data is imported in physical import mode (local backend). In this way, it can improve the speed and stability of importing data.
 
         - note [#issue](链接) @[贡献者 GitHub ID](链接)
 
