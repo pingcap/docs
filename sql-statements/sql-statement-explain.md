@@ -187,14 +187,19 @@ EXPLAIN DELETE FROM t1 WHERE c1=3;
 4 rows in set (0.01 sec)
 ```
 
-To specify the content and format of the output, you can use the `FORMAT = xxx` syntax in the `EXPLAIN` statement.
+To specify the format of the `EXPLAIN` output, you can use the `FORMAT = xxx` syntax. Currently, TiDB supports the following formats:
 
 | FORMAT | Description |
 | ------ | ------ |
-| Empty  | Same as `row` |
+| Not specified  | If the format is not specified, `EXPLAIN` uses the default format `row`. |
 | `row`  | The `EXPLAIN` statement outputs results in a tabular format. See [Understand the Query Execution Plan](/explain-overview.md) for more information. |
 | `brief`  | The operator IDs in the output of the `EXPLAIN` statement are simplified, compared with those when `FORMAT` is left unspecified. |
 | `dot`    | The `EXPLAIN` statement outputs DOT execution plans, which can be used to generate PNG files through a `dot` program (in the `graphviz` package). |
+| `tidb_json` | The `EXPLAIN` statement outputs execution plans in JSON and stores the operator information in a JSON array. |
+
+<SimpleTab>
+
+<div label="brief">
 
 The following is an example when `FORMAT` is `"brief"` in `EXPLAIN`:
 
@@ -215,6 +220,10 @@ EXPLAIN FORMAT = "brief" DELETE FROM t1 WHERE c1 = 3;
 +-------------------------+---------+-----------+---------------+--------------------------------+
 4 rows in set (0.001 sec)
 ```
+
+</div>
+
+<div label="DotGraph">
 
 In addition to the MySQL standard result format, TiDB also supports DotGraph and you need to specify `FORMAT = "dot"` as in the following example:
 
@@ -272,16 +281,69 @@ If your computer has no `dot` program, copy the result to [this website](http://
 
 ![Explain Dot](/media/explain_dot.png)
 
+</div>
+
+<div label="JSON">
+
+To get the output in JSON, specify `FORMAT = "tidb_json"` in the `EXPLAIN` statement. The following is an example:
+
+```sql
+CREATE TABLE t(id int primary key, a int, b int, key(a));
+EXPLAIN FORMAT = "tidb_json" SELECT id FROM t WHERE a = 1;
+```
+
+```
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| TiDB_JSON                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| [
+    {
+        "id": "Projection_4",
+        "estRows": "10.00",
+        "taskType": "root",
+        "operatorInfo": "test.t.id",
+        "subOperators": [
+            {
+                "id": "IndexReader_6",
+                "estRows": "10.00",
+                "taskType": "root",
+                "operatorInfo": "index:IndexRangeScan_5",
+                "subOperators": [
+                    {
+                        "id": "IndexRangeScan_5",
+                        "estRows": "10.00",
+                        "taskType": "cop[tikv]",
+                        "accessObject": "table:t, index:a(a)",
+                        "operatorInfo": "range:[1,1], keep order:false, stats:pseudo"
+                    }
+                ]
+            }
+        ]
+    }
+]
+ |
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.01 sec)
+```
+
+In the output, `id`, `estRows`, `taskType`, `accessObject`, and `operatorInfo` have the same meaning as the columns in the default format. `subOperators` is an array that stores the sub-nodes. The fields and meanings of the sub-nodes are the same as the parent node. If a field is missing, it means that the field is empty.
+
+</div>
+
+</SimpleTab>
+
 ## MySQL compatibility
 
 * Both the format of `EXPLAIN` and the potential execution plans in TiDB differ substaintially from MySQL.
 * TiDB does not support the `FORMAT=JSON` or `FORMAT=TREE` options.
+* `FORMAT=tidb_json` in TiDB is the JSON format output of the default `EXPLAIN` result. The format and fields are different from the `FORMAT=JSON` output in MySQL.
 
 ### `EXPLAIN FOR CONNECTION`
 
 `EXPLAIN FOR CONNECTION` is used to get the execution plan of the currently executed SQL query or the last executed SQL query in a connection. The output format is the same as that of `EXPLAIN`. However, the implementation of `EXPLAIN FOR CONNECTION` in TiDB is different from that in MySQL. Their differences (apart from the output format) are listed as follows:
 
-- MySQL returns the query plan that is **being executing**, while TiDB returns the **last executed** query plan.
+- If the connection is sleeping, MySQL returns an empty result, while TiDB returns the last executed query plan.
+- If you try to get the execution plan of the current session, MySQL returns an error, while TiDB returns the result normally.
 - MySQL requires the login user to be the same as the connection being queried, or the login user has the **`PROCESS`** privilege; while TiDB requires the login user to be the same as the connection being queried, or the login user has the **`SUPER`** privilege.
 
 ## See also

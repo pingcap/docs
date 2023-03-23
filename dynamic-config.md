@@ -159,6 +159,7 @@ The following TiKV configuration items can be modified dynamically:
 | `raftstore.store-pool-size` | The number of threads in the pool that processes Raft, which is the size of the Raftstore thread pool |
 | `raftstore.apply-max-batch-size` | Raft state machines process data write requests in batches by the BatchSystem. This configuration item specifies the maximum number of Raft state machines that can execute the requests in one batch. |
 | `raftstore.store-max-batch-size` | Raft state machines process requests for flushing logs into the disk in batches by the BatchSystem. This configuration item specifies the maximum number of Raft state machines that can process the requests in one batch. |
+| `raftstore.store-io-pool-size` | The number of threads that process Raft I/O tasks, which is also the size of the StoreWriter thread pool (**DO NOT** modify this value from a non-zero value to 0 or from 0 to a non-zero value) |
 | `readpool.unified.max-thread-count` | The maximum number of threads in the thread pool that uniformly processes read requests, which is the size of the UnifyReadPool thread pool |
 | `readpool.unified.auto-adjust-pool-size` | Determines whether to automatically adjust the UnifyReadPool thread pool size |
 | `coprocessor.split-region-on-table` | Enables to split Region by table |
@@ -208,6 +209,9 @@ The following TiKV configuration items can be modified dynamically:
 | `{db-name}.{cf-name}.titan.blob-run-mode` | The mode of processing blob files |
 | `server.grpc-memory-pool-quota` | Limits the memory size that can be used by gRPC |
 | `server.max-grpc-send-msg-len` | Sets the maximum length of a gRPC message that can be sent |
+| `server.snap-io-max-bytes-per-sec` | Sets the maximum allowable disk bandwidth when processing snapshots |
+| `server.concurrent-send-snap-limit` | Sets the maximum number of snapshots sent at the same time |
+| `server.concurrent-recv-snap-limit` | Sets the maximum number of snapshots received at the same time |
 | `server.raft-msg-max-batch-size` | Sets the maximum number of Raft messages that are contained in a single gRPC message |
 | `server.simplify-metrics`        | Controls whether to simplify the sampling monitoring metrics                   |
 | `storage.block-cache.capacity` | The size of shared block cache (supported since v4.0.3) |

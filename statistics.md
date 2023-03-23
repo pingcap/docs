@@ -8,17 +8,8 @@ aliases: ['/docs/dev/statistics/','/docs/dev/reference/performance/statistics/']
 
 TiDB uses statistics to decide [which index to choose](/choose-index.md). The `tidb_analyze_version` variable controls the statistics collected by TiDB. Currently, two versions of statistics are supported: `tidb_analyze_version = 1` and `tidb_analyze_version = 2`.
 
-<CustomContent platform="tidb">
-
-In versions before v5.1.0, the default value of this variable is `1`. In v5.3.0 and later versions, the default value of this variable is `2`. If your cluster is upgraded from a version earlier than v5.3.0 to v5.3.0 or later, the default value of `tidb_analyze_version` does not change.
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-For TiDB Cloud, the default value of this variable is `1`.
-
-</CustomContent>
+- For on-premises TiDB, the default value of this variable is `1` before v5.1.0. In v5.3.0 and later versions, the default value of this variable is `2`. If your cluster is upgraded from a version earlier than v5.3.0 to v5.3.0 or later, the default value of `tidb_analyze_version` does not change.
+- For TiDB Cloud, the default value of this variable is `1`.
 
 > **Note:**
 >
@@ -34,6 +25,13 @@ For TiDB Cloud, the default value of this variable is `1`.
 >
 >    ```sql
 >    SELECT DISTINCT(CONCAT('DROP STATS ', table_schema, '.', table_name, ';')) FROM information_schema.tables, mysql.stats_histograms WHERE stats_ver = 2 AND table_id = tidb_table_id;
+>    ```
+>
+> - If the result of the preceding statement is too long to copy and paste, you can export the result to a temporary text file and then perform execution from the file like this:
+>
+>    ```sql
+>    SELECT DISTINCT ... INTO OUTFILE '/tmp/sql.txt';
+>    mysql -h XXX -u user -P 4000 ... < '/tmp/sql.txt';
 >    ```
 
 These two versions include different information in TiDB:
@@ -370,11 +368,11 @@ Three system variables related to automatic update of statistics are as follows:
 
 When the ratio of the number of modified rows to the total number of rows of `tbl` in a table is greater than `tidb_auto_analyze_ratio`, and the current time is between `tidb_auto_analyze_start_time` and `tidb_auto_analyze_end_time`, TiDB executes the `ANALYZE TABLE tbl` statement in the background to automatically update the statistics on this table.
 
+To avoid the situation that modifying a small amount of data on a small table frequently triggers the automatic update, when a table has less than 1000 rows, such data modifying does not trigger the automatic update in TiDB. You can use the `SHOW STATS_META` statement to view the number of rows in a table.
+
 > **Note:**
 >
 > Currently, the automatic update does not record the configuration items input at manual `ANALYZE`. Therefore, when you use the `WITH` syntax to control the collecting behavior of `ANALYZE`, you need to manually set scheduled tasks to collect statistics.
-
-Before TiDB v5.0, when you execute a query, TiDB collects feedback with `feedback-probability` and updates the histogram and Count-Min Sketch based on the feedback. **Since v5.0, this feature is disabled by default, and it is not recommended to enable this feature. Since v6.2.0, the configuration item `feedback-probability` is removed.**
 
 Since TiDB v6.0, TiDB supports using the `KILL` statement to terminate an `ANALYZE` task running in the background. If you find that an `ANALYZE` task running in the background consumes a lot of resources and affects your application, you can terminate the `ANALYZE` task by taking the following steps:
 
@@ -710,8 +708,8 @@ The preceding statement only deletes GlobalStats generated in dynamic pruning mo
 
 By default, depending on the size of column statistics, TiDB loads statistics differently as follows:
 
-- For statistics that consume small space (such as count, distinctCount, and nullCount), as long as the column data is updated, TiDB automatically loads the corresponding statistics into memory for use in the SQL optimization stage.
-- For statistics that consume large space (such as histograms, TopN, and Count-Min Sketch), to ensure the performance of SQL execution, TiDB loads the statistics asynchronously on demand. Take histograms as an example. TiDB loads histogram statistics on a column into memory only when the optimizer uses the histogram statistics on that column. On-demand asynchronous statistics loading does not affect the performance of SQL execution but might provide incomplete statistics for SQL optimization.
+- For statistics that consume small amounts of memory (such as count, distinctCount, and nullCount), as long as the column data is updated, TiDB automatically loads the corresponding statistics into memory for use in the SQL optimization stage.
+- For statistics that consume large amounts of memory (such as histograms, TopN, and Count-Min Sketch), to ensure the performance of SQL execution, TiDB loads the statistics asynchronously on demand. Take histograms as an example. TiDB loads histogram statistics on a column into memory only when the optimizer uses the histogram statistics on that column. On-demand asynchronous statistics loading does not affect the performance of SQL execution but might provide incomplete statistics for SQL optimization.
 
 Since v5.4.0, TiDB introduces the synchronously loading statistics feature. This feature allows TiDB to synchronously load large-sized statistics (such as histograms, TopN, and Count-Min Sketch statistics) into memory when you execute SQL statements, which improves the completeness of statistics for SQL optimization.
 
@@ -783,6 +781,81 @@ LOAD STATS 'file_name'
 
 `file_name` is the file name of the statistics to be imported.
 
+## Lock statistics
+
+> **Warning:**
+>
+> Locking statistics is an experimental feature for the current version. It is not recommended to use it in the production environment.
+
+Since v6.5.0, TiDB supports locking statistics. After the statistics of a table are locked, the statistics of the table cannot be modified and the `ANALYZE` statement cannot be executed on the table. For example:
+
+Create table `t`, and insert data into it. When the statistics of table `t` are not locked, the `ANALYZE` statement can be successfully executed.
+
+```sql
+mysql> create table t(a int, b int);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> insert into t values (1,2), (3,4), (5,6), (7,8);
+Query OK, 4 rows affected (0.00 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> analyze table t;
+Query OK, 0 rows affected, 1 warning (0.02 sec)
+
+mysql> show warnings;
++-------+------+-----------------------------------------------------------------+
+| Level | Code | Message                                                         |
++-------+------+-----------------------------------------------------------------+
+| Note  | 1105 | Analyze use auto adjusted sample rate 1.000000 for table test.t |
++-------+------+-----------------------------------------------------------------+
+1 row in set (0.00 sec)
+```
+
+Lock the statistics of table `t` and execute `ANALYZE`. From the output of `SHOW STATS_LOCKED`, you can see that the statistics of table `t` have been locked. The warning message shows that the `ANALYZE` statement has skipped table `t`.
+
+```sql
+mysql> lock stats t;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> show stats_locked;
++---------+------------+----------------+--------+
+| Db_name | Table_name | Partition_name | Status |
++---------+------------+----------------+--------+
+| test    | t          |                | locked |
++---------+------------+----------------+--------+
+1 row in set (0.01 sec)
+
+mysql> analyze table t;
+Query OK, 0 rows affected, 2 warnings (0.00 sec)
+
+mysql> show warnings;
++---------+------+-----------------------------------------------------------------+
+| Level   | Code | Message                                                         |
++---------+------+-----------------------------------------------------------------+
+| Note    | 1105 | Analyze use auto adjusted sample rate 1.000000 for table test.t |
+| Warning | 1105 | skip analyze locked table: t                                    |
++---------+------+-----------------------------------------------------------------+
+2 rows in set (0.00 sec)
+```
+
+Unlock the statistics of table `t` and `ANALYZE` can be successfully executed again.
+
+```sql
+mysql> unlock stats t;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> analyze table t;
+Query OK, 0 rows affected, 1 warning (0.03 sec)
+
+mysql> show warnings;
++-------+------+-----------------------------------------------------------------+
+| Level | Code | Message                                                         |
++-------+------+-----------------------------------------------------------------+
+| Note  | 1105 | Analyze use auto adjusted sample rate 1.000000 for table test.t |
++-------+------+-----------------------------------------------------------------+
+1 row in set (0.00 sec)
+```
+
 ## See also
 
 <CustomContent platform="tidb">
@@ -792,8 +865,6 @@ LOAD STATS 'file_name'
 
 </CustomContent>
 
-<CustomContent platform="tidb-cloud">
-
-* [SQL Prepare Execution Plan Cache](/sql-prepared-plan-cache.md)
-
-</CustomContent>
+* [LOCK STATS](/sql-statements/sql-statement-lock-stats.md)
+* [UNLOCK STATS](/sql-statements/sql-statement-unlock-stats.md)
+* [SHOW STATS_LOCKED](/sql-statements/sql-statement-show-stats-locked.md)

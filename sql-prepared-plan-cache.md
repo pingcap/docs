@@ -1,10 +1,10 @@
 ---
-title: SQL Prepare Execution Plan Cache
-summary: Learn about SQL Prepare Execution Plan Cache in TiDB.
+title: SQL Prepared Execution Plan Cache
+summary: Learn about SQL Prepared Execution Plan Cache in TiDB.
 aliases: ['/tidb/dev/sql-prepare-plan-cache']
 ---
 
-# SQL Prepare Execution Plan Cache
+# SQL Prepared Execution Plan Cache
 
 TiDB supports execution plan caching for `Prepare` and `Execute` queries. This includes both forms of prepared statements:
 
@@ -19,11 +19,12 @@ In the current version of TiDB, if a `Prepare` statement meets any of the follow
 
 - The query contains SQL statements other than `SELECT`, `UPDATE`, `INSERT`, `DELETE`, `Union`, `Intersect`, and `Except`.
 - The query accesses partitioned tables or temporary tables, or a table that contains generated columns.
-- The query contains sub-queries, such as `select * from t where a > (select ...)`.
+- The query contains non-correlated sub-queries, such as `SELECT * FROM t1 WHERE t1.a > (SELECT 1 FROM t2 WHERE t2.b < 1)`.
+- The query contains correlated sub-queries with `PhysicalApply` operators in the execution plan, such as `SELECT * FROM t1 WHERE t1.a > (SELECT a FROM t2 WHERE t1.b > t2.b)`.
 - The query contains the `ignore_plan_cache` hint, such as `select /*+ ignore_plan_cache() */ * from t`.
 - The query contains variables other than `?` (including system variables or user-defined variables), such as `select * from t where a>? and b>@x`.
 - The query contains the functions that cannot be cached: `database()`, `current_user`, `current_role`, `user`, `connection_id`, `last_insert_id`, `row_count`, `version`, and `like`.
-- The query contains `?` after `Limit`, such as `Limit ?` and `Limit 10, ?`. Such queries are not cached because the specific value of `?` has a great impact on query performance.
+- The query with a variable as the `LIMIT` parameter (`LIMIT ?`) and the variable value is greater than 10000.
 - The query contains `?` after `Order By`, such as `Order By ?`. Such queries sort data based on the column specified by `?`. If the queries targeting different columns use the same execution plan, the results will be wrong. Therefore, such queries are not cached. However, if the query is a common one, such as `Order By a+?`, it is cached.
 - The query contains `?` after `Group By`, such as `Group By?`. Such queries group data based on the column specified by `?`. If the queries targeting different columns use the same execution plan, the results will be wrong. Therefore, such queries are not cached. However, if the query is a common one, such as `Group By a+?`, it is cached.
 - The query contains `?` in the definition of the `Window Frame` window function, such as `(partition by year order by sale rows ? preceding)`. If `?` appears elsewhere in the window function, the query is cached.
@@ -123,6 +124,46 @@ MySQL [test]> select @@last_plan_from_cache;
 1 row in set (0.00 sec)
 ```
 
+## Diagnostics of Prepared Plan Cache
+
+Some queries or plans cannot be cached. You can use the `SHOW WARNINGS` statement to check whether the query or plan is cached. If it is not cached, you can check the reason for the failure in the result. For example:
+
+```sql
+mysql> PREPARE st FROM 'SELECT * FROM t WHERE a > (SELECT MAX(a) FROM t)';  -- The query contains a subquery and cannot be cached.
+
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+
+mysql> show warnings;  -- Checks the reason why the query plan cannot be cached.
+
++---------+------+-----------------------------------------------+
+| Level   | Code | Message                                       |
++---------+------+-----------------------------------------------+
+| Warning | 1105 | skip plan-cache: sub-queries are un-cacheable |
++---------+------+-----------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> prepare st from 'select * from t where a<?';
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> set @a='1';
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> execute st using @a;  -- The optimization converts a non-INT type to an INT type, and the execution plan might change with the change of the parameter, so TiDB does not cache the plan.
+
+Empty set, 1 warning (0.01 sec)
+
+mysql> show warnings;
+
++---------+------+----------------------------------------------+
+| Level   | Code | Message                                      |
++---------+------+----------------------------------------------+
+| Warning | 1105 | skip plan-cache: '1' may be converted to INT |
++---------+------+----------------------------------------------+
+1 row in set (0.00 sec)
+```
+
 ## Memory management of Prepared Plan Cache
 
 <CustomContent platform="tidb">
@@ -142,6 +183,7 @@ The following is an example of the **Plan Cache Memory Usage** and **Plan Cache 
 You can control the maximum number of plans that can be cached in each session by configuring the system variable `tidb_prepared_plan_cache_size`. For different environments, the recommended value is as follows and you can adjust it according to the monitoring panels:
 
 </CustomContent>
+
 <CustomContent platform="tidb-cloud">
 
 Using Prepared Plan Cache has some memory overhead. In internal tests, each cached plan consumes an average of 100 KiB of memory. Because Plan Cache is currently at the `SESSION` level, the total memory consumption is approximately `the number of sessions * the average number of cached plans in a session * 100 KiB`.
@@ -287,12 +329,18 @@ mysql> select @@last_plan_from_cache;       -- Reuse the last plan
 1 row in set (0.00 sec)
 ```
 
-<CustomContent platform="tidb">
-
 ### Monitoring
+
+<CustomContent platform="tidb">
 
 In [the Grafana dashboard](/grafana-tidb-dashboard.md) on the TiDB page in the **Executor** section, there are the "Queries Using Plan Cache OPS" and "Plan Cache Miss OPS" graphs. These graphs can be used to check if both TiDB and the application are configured correctly to allow the SQL Plan Cache to work correctly. The **Server** section on the same page provides the "Prepared Statement Count" graph. This graph shows a non-zero value if the application uses prepared statements, which is required for the SQL Plan Cache to function correctly.
 
 ![`sql_plan_cache`](/media/performance/sql_plan_cache.png)
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+On the [**Monitoring**](/tidb-cloud/built-in-monitoring.md) page of the [TiDB Cloud console](https://tidbcloud.com/), you can check the `Queries Using Plan Cache OPS` metric to get the number of queries using or missing plan cache per second in all TiDB instances.
 
 </CustomContent>

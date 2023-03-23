@@ -32,7 +32,7 @@ For performance reasons, `AUTO_INCREMENT` numbers are allocated in a batch of va
 
 > **Note:**
 >
-> If you want the `AUTO_INCREMENT` numbers to be monotonic on all TiDB servers and your TiDB version is v6.4.0 or later, you can enable the [MySQL compatibility mode](#mysql-compatibility-mode) which is an experimental feature introduced in v6.4.0.
+> If you want the `AUTO_INCREMENT` numbers to be monotonic on all TiDB servers and your TiDB version is v6.5.0 or later, it is recommended to enable the [MySQL compatibility mode](#mysql-compatibility-mode).
 
 The following is a basic example of `AUTO_INCREMENT`:
 
@@ -355,10 +355,6 @@ The value (ID) implicitly assigned to auto-increment columns satisfies the follo
 
 TiDB v6.4.0 introduces a centralized auto-increment ID allocating service. In each request, an auto-increment ID is allocated from this service instead of caching data in TiDB instances.
 
-> **Warning:**
->
-> This is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
-
 Currently, the centralized allocating service is in the TiDB process and works like DDL Owner. One TiDB instance allocates IDs as the primary node and other TiDB instances work as secondary nodes. To ensure high availability, when the primary instance fails, TiDB starts automatic failover.
 
 To use the MySQL compatibility mode, you can set `AUTO_ID_CACHE` to `1` when creating a table:
@@ -380,7 +376,7 @@ After you enable the MySQL compatibility mode, the allocated IDs are **unique** 
 
 Currently, `AUTO_INCREMENT` has the following restrictions when used in TiDB:
 
-- It must be defined on the first column of the primary key or the first column of an index.
+- For TiDB v6.6.0 and earlier versions, the defined column must be either primary key or index prefixes.
 - It must be defined on the column of `INTEGER`, `FLOAT`, or `DOUBLE` type.
 - It cannot be specified on the same column with the `DEFAULT` column value.
 - `ALTER TABLE` cannot be used to add the `AUTO_INCREMENT` attribute.

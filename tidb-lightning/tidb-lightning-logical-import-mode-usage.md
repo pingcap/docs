@@ -24,7 +24,7 @@ max-backups = 14
 check-requirements = true
 
 [mydumper]
-# The local data source directory or the external storage URL.
+# The local data source directory or the URI of the external storage. For more information about the URI of the external storage, see https://docs.pingcap.com/tidb/v6.6/backup-and-restore-storages#uri-format.
 data-source-dir = "/data/my_database"
 
 [tikv-importer]
@@ -36,6 +36,10 @@ backend = "tidb"
 # - ignore: keep existing data and ignore new data
 # - error: pause the import and report an error
 on-duplicate = "replace"
+
+# Specifies whether Physical Import Mode adds indexes via SQL. The default value is automatically decided based on the TiDB version. If the TiDB version is earlier than v7.0.0, the default value is `false`, which means that TiDB Lightning will encode both row data and index data into KV pairs and import them into TiKV together. This mechanism is consistent with that of the historical versions. Starting from TiDB v7.0.0, the default value is `true`, which means that TiDB Lightning adds indexes via SQL after importing the row data.
+# The benefit of adding indexes via SQL is that you can separately import data and import indexes, and import data more quickly. After the data is imported, even if the indexes fail to be added, it does not affect the consistency of the imported data.
+# add-index-by-sql = true
 
 [tidb]
 # The information of the target cluster. The address of any tidb-server from the cluster.

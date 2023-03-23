@@ -8,11 +8,14 @@ aliases: ['/docs/dev/upgrade-tidb-using-tiup/','/docs/dev/how-to/upgrade/using-t
 
 This document is targeted for the following upgrade paths:
 
-- Upgrade from TiDB 4.0 versions to TiDB 6.3.
-- Upgrade from TiDB 5.0-5.4 versions to TiDB 6.3.
-- Upgrade from TiDB 6.0 to TiDB 6.3.
-- Upgrade from TiDB 6.1 to TiDB 6.3.
-- Upgrade from TiDB 6.2 to TiDB 6.3.
+- Upgrade from TiDB 4.0 versions to TiDB 6.6.
+- Upgrade from TiDB 5.0-5.4 versions to TiDB 6.6.
+- Upgrade from TiDB 6.0 to TiDB 6.6.
+- Upgrade from TiDB 6.1 to TiDB 6.6.
+- Upgrade from TiDB 6.2 to TiDB 6.6.
+- Upgrade from TiDB 6.3 to TiDB 6.6.
+- Upgrade from TiDB 6.4 to TiDB 6.6.
+- Upgrade from TiDB 6.5 to TiDB 6.6.
 
 > **Warning:**
 >
@@ -23,18 +26,19 @@ This document is targeted for the following upgrade paths:
 
 > **Note:**
 >
-> If your cluster to be upgraded is v3.1 or an earlier version (v3.0 or v2.1), the direct upgrade to v6.3.0 is not supported. You need to upgrade your cluster first to v4.0 and then to v6.3.0.
+> If your cluster to be upgraded is v3.1 or an earlier version (v3.0 or v2.1), the direct upgrade to v6.6.0 is not supported. You need to upgrade your cluster first to v4.0 and then to v6.6.0.
 
 ## Upgrade caveat
 
 - TiDB currently does not support version downgrade or rolling back to an earlier version after the upgrade.
-- For the v4.0 cluster managed using TiDB Ansible, you need to import the cluster to TiUP (`tiup cluster`) for new management according to [Upgrade TiDB Using TiUP (v4.0)](https://docs.pingcap.com/tidb/v4.0/upgrade-tidb-using-tiup#import-tidb-ansible-and-the-inventoryini-configuration-to-tiup). Then you can upgrade the cluster to v6.3.0 according to this document.
-- To update versions earlier than v3.0 to v6.3.0:
+- For the v4.0 cluster managed using TiDB Ansible, you need to import the cluster to TiUP (`tiup cluster`) for new management according to [Upgrade TiDB Using TiUP (v4.0)](https://docs.pingcap.com/tidb/v4.0/upgrade-tidb-using-tiup#import-tidb-ansible-and-the-inventoryini-configuration-to-tiup). Then you can upgrade the cluster to v6.6.0 according to this document.
+- To update versions earlier than v3.0 to v6.6.0:
     1. Update this version to 3.0 using [TiDB Ansible](https://docs.pingcap.com/tidb/v3.0/upgrade-tidb-using-ansible).
     2. Use TiUP (`tiup cluster`) to import the TiDB Ansible configuration.
     3. Update the 3.0 version to 4.0 according to [Upgrade TiDB Using TiUP (v4.0)](https://docs.pingcap.com/tidb/v4.0/upgrade-tidb-using-tiup#import-tidb-ansible-and-the-inventoryini-configuration-to-tiup).
-    4. Upgrade the cluster to v6.3.0 according to this document.
+    4. Upgrade the cluster to v6.6.0 according to this document.
 - Support upgrading the versions of TiDB Binlog, TiCDC, TiFlash, and other components.
+- When upgrading TiFlash from versions earlier than v6.3.0 to v6.3.0 and later versions, note that the CPU must support the AVX2 instruction set under the Linux AMD64 architecture and the ARMv8 instruction set architecture under the Linux ARM64 architecture. For details, see the description in [v6.3.0 Release Notes](/releases/release-6.3.0.md#others).
 - For detailed compatibility changes of different versions, see the [Release Notes](/releases/release-notes.md) of each version. Modify your cluster configuration according to the "Compatibility Changes" section of the corresponding release notes.
 - For clusters that upgrade from versions earlier than v5.3 to v5.3 or later versions, the default deployed Prometheus will upgrade from v2.8.1 to v2.27.1. Prometheus v2.27.1 provides more features and fixes a security issue. Compared with v2.8.1, alert time representation in v2.27.1 is changed. For more details, see [Prometheus commit](https://github.com/prometheus/prometheus/commit/7646cbca328278585be15fa615e22f2a50b47d06) for more details.
 
@@ -42,7 +46,11 @@ This document is targeted for the following upgrade paths:
 
 This section introduces the preparation works needed before upgrading your TiDB cluster, including upgrading TiUP and the TiUP Cluster component.
 
-### Step 1: Upgrade TiUP or TiUP offline mirror
+### Step 1: Review compatibility changes
+
+Review [the compatibility changes](/releases/release-6.6.0.md#compatibility-changes) in TiDB v6.6.0 release notes. If any changes affect your upgrade, take actions accordingly.
+
+### Step 2: Upgrade TiUP or TiUP offline mirror
 
 Before upgrading your TiDB cluster, you first need to upgrade TiUP or TiUP mirror.
 
@@ -52,7 +60,7 @@ Before upgrading your TiDB cluster, you first need to upgrade TiUP or TiUP mirro
 >
 > If the control machine of the cluster to upgrade cannot access `https://tiup-mirrors.pingcap.com`, skip this section and see [Upgrade TiUP offline mirror](#upgrade-tiup-offline-mirror).
 
-1. Upgrade the TiUP version. It is recommended that the TiUP version is `1.11.0` or later.
+1. Upgrade the TiUP version. It is recommended that the TiUP version is `1.11.3` or later.
 
     {{< copyable "shell-regular" >}}
 
@@ -61,7 +69,7 @@ Before upgrading your TiDB cluster, you first need to upgrade TiUP or TiUP mirro
     tiup --version
     ```
 
-2. Upgrade the TiUP Cluster version. It is recommended that the TiUP Cluster version is `1.11.0` or later.
+2. Upgrade the TiUP Cluster version. It is recommended that the TiUP Cluster version is `1.11.3` or later.
 
     {{< copyable "shell-regular" >}}
 
@@ -108,14 +116,14 @@ tiup update cluster
 
 Now, the offline mirror has been upgraded successfully. If an error occurs during TiUP operation after the overwriting, it might be that the `manifest` is not updated. You can try `rm -rf ~/.tiup/manifests/*` before running TiUP again.
 
-### Step 2: Edit TiUP topology configuration file
+### Step 3: Edit TiUP topology configuration file
 
 > **Note:**
 >
 > Skip this step if one of the following situations applies:
 >
 > + You have not modified the configuration parameters of the original cluster. Or you have modified the configuration parameters using `tiup cluster` but no more modification is needed.
-> + After the upgrade, you want to use v6.3.0's default parameter values for the unmodified configuration items.
+> + After the upgrade, you want to use v6.6.0's default parameter values for the unmodified configuration items.
 
 1. Enter the `vi` editing mode to edit the topology file:
 
@@ -131,15 +139,9 @@ Now, the offline mirror has been upgraded successfully. If an error occurs durin
 
 > **Note:**
 >
-> Before you upgrade the cluster to v6.3.0, make sure that the parameters you have modified in v4.0 are compatible in v6.3.0. For details, see [TiKV Configuration File](/tikv-configuration-file.md).
->
-> The following three TiKV parameters are obsolete in TiDB v5.0. If the following parameters have been configured in your original cluster, you need to delete these parameters through `edit-config`:
->
-> - pessimistic-txn.enabled
-> - server.request-batch-enable-cross-command
-> - server.request-batch-wait-duration
+> Before you upgrade the cluster to v6.6.0, make sure that the parameters you have modified in v4.0 are compatible in v6.6.0. For details, see [TiKV Configuration File](/tikv-configuration-file.md).
 
-### Step 3: Check the health status of the current cluster
+### Step 4: Check the health status of the current cluster
 
 To avoid the undefined behaviors or other issues during the upgrade, it is recommended to check the health status of Regions of the current cluster before the upgrade. To do that, you can use the `check` sub-command.
 
@@ -153,6 +155,13 @@ After the command is executed, the "Region status" check result will be output.
 
 + If the result is "All Regions are healthy", all Regions in the current cluster are healthy and you can continue the upgrade.
 + If the result is "Regions are not fully healthy: m miss-peer, n pending-peer" with the "Please fix unhealthy regions before other operations." prompt, some Regions in the current cluster are abnormal. You need to troubleshoot the anomalies until the check result becomes "All Regions are healthy". Then you can continue the upgrade.
+
+### Step 5: Check the DDL and backup status of the cluster
+
+To avoid undefined behaviors or other unexpected problems during the upgrade, it is recommended to check the following items before the upgrade.
+
+- Cluster DDLs: It is recommended to execute the [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md) statement to check whether there is an ongoing DDL job. If yes, wait for its execution or cancel it by executing the [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md) statement before performing an upgrade.
+- Cluster backup: It is recommended to execute the [`SHOW [BACKUPS|RESTORES]`](/sql-statements/sql-statement-show-backups.md) statement to check whether there is an ongoing backup or restore task in the cluster. If yes, wait for its completion before performing an upgrade.
 
 ## Upgrade the TiDB cluster
 
@@ -174,12 +183,12 @@ If your application has a maintenance window for the database to be stopped for 
 tiup cluster upgrade <cluster-name> <version>
 ```
 
-For example, if you want to upgrade the cluster to v6.3.0:
+For example, if you want to upgrade the cluster to v6.6.0:
 
 {{< copyable "shell-regular" >}}
 
 ```shell
-tiup cluster upgrade <cluster-name> v6.3.0
+tiup cluster upgrade <cluster-name> v6.6.0
 ```
 
 > **Note:**
@@ -190,10 +199,12 @@ tiup cluster upgrade <cluster-name> v6.3.0
 >
 > + To keep a stable performance, make sure that all leaders in a TiKV instance are evicted before stopping the instance. You can set `--transfer-timeout` to a larger value, for example, `--transfer-timeout 3600` (unit: second).
 >
-> - To upgrade TiFlash from versions earlier than 5.3 to 5.3 or later, you should stop TiFlash and then upgrade it. The following steps help you upgrade TiFlash without interrupting other components:
+> + To upgrade TiFlash from versions earlier than 5.3 to 5.3 or later, you should stop TiFlash and then upgrade it. The following steps help you upgrade TiFlash without interrupting other components:
 >    1. Stop the TiFlash instance: `tiup cluster stop <cluster-name> -R tiflash`
->    2. Upgrade the TiDB cluster without restarting it (only updating the files): `tiup cluster upgrade <cluster-name> <version> --offline`
+>    2. Upgrade the TiDB cluster without restarting it (only updating the files): `tiup cluster upgrade <cluster-name> <version> --offline`, such as `tiup cluster upgrade <cluster-name> v6.3.0 --offline`
 >    3. Reload the TiDB cluster: `tiup cluster reload <cluster-name>`. After the reload, the TiFlash instance is started and you do not need to manually start it.
+>
+> + Try to avoid creating a new clustered index table when you apply rolling updates to the clusters using TiDB Binlog.
 
 #### Offline upgrade
 
@@ -205,7 +216,7 @@ tiup cluster upgrade <cluster-name> v6.3.0
     tiup cluster stop <cluster-name>
     ```
 
-2. Use the `upgrade` command with the `--offline` option to perform the offline upgrade.
+2. Use the `upgrade` command with the `--offline` option to perform the offline upgrade. Fill in the name of your cluster for `<cluster-name>` and the version to upgrade to for `<version>`, such as `v6.5.0`.
 
     {{< copyable "shell-regular" >}}
 
@@ -234,12 +245,8 @@ tiup cluster display <cluster-name>
 ```
 Cluster type:       tidb
 Cluster name:       <cluster-name>
-Cluster version:    v6.3.0
+Cluster version:    v6.6.0
 ```
-
-> **Note:**
->
-> By default, TiUP and TiDB share usage details with PingCAP to help understand how to improve the product. For details about what is shared and how to disable the sharing, see [Telemetry](/telemetry.md).
 
 ## FAQ
 
@@ -269,7 +276,7 @@ Re-execute the `tiup cluster upgrade` command to resume the upgrade. The upgrade
 
 ### The evict leader has waited too long during the upgrade. How to skip this step for a quick upgrade?
 
-You can specify `--force`. Then the processes of transferring PD leader and evicting TiKV leader are skipped during the upgrade. The cluster is directly restarted to update the version, which has a great impact on the cluster that runs online. Here is the command:
+You can specify `--force`. Then the processes of transferring PD leader and evicting TiKV leader are skipped during the upgrade. The cluster is directly restarted to update the version, which has a great impact on the cluster that runs online. In the following command, `<version>` is the version to upgrade to, such as `v6.5.0`.
 
 {{< copyable "shell-regular" >}}
 
@@ -284,10 +291,5 @@ You can upgrade the tool version by using TiUP to install the `ctl` component of
 {{< copyable "shell-regular" >}}
 
 ```shell
-tiup install ctl:v6.3.0
+tiup install ctl:v6.6.0
 ```
-
-## TiDB 6.3.0 compatibility changes
-
-- See TiDB 6.3.0 Release Notes for the compatibility changes.
-- Try to avoid creating a new clustered index table when you apply rolling updates to the clusters using TiDB Binlog.

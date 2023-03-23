@@ -156,7 +156,7 @@ This section exemplifies how to add a TiFlash node to the `10.0.1.4` host.
 > When adding a TiFlash node to an existing TiDB cluster, note the following:
 >
 > - Confirm that the current TiDB version supports using TiFlash. Otherwise, upgrade your TiDB cluster to v5.0 or later versions.
-> - Run the `tiup ctl:<cluster-version> pd -u http://<pd_ip>:<pd_port> config set enable-placement-rules true` command to enable the Placement Rules feature. Or run the corresponding command in [pd-ctl](/pd-control.md).
+> - Run the `tiup ctl:v<CLUSTER_VERSION> pd -u http://<pd_ip>:<pd_port> config set enable-placement-rules true` command to enable the Placement Rules feature. Or run the corresponding command in [pd-ctl](/pd-control.md).
 
 1. Add the node information to the `scale-out.yaml` file:
 
@@ -274,9 +274,9 @@ This section exemplifies how to remove a TiKV node from the `10.0.1.5` host.
     ```
 
     ```
-    Starting /root/.tiup/components/cluster/v1.10.3/cluster display <cluster-name>
+    Starting /root/.tiup/components/cluster/v1.11.3/cluster display <cluster-name>
     TiDB Cluster: <cluster-name>
-    TiDB Version: v6.3.0
+    TiDB Version: v6.6.0
     ID              Role         Host        Ports                            Status  Data Dir                Deploy Dir
     --              ----         ----        -----                            ------  --------                ----------
     10.0.1.3:8300   cdc          10.0.1.3    8300                             Up      data/cdc-8300           deploy/cdc-8300
@@ -381,12 +381,12 @@ In special cases (such as when a node needs to be forcibly taken down), or if th
 
     * Enter the store command in [pd-ctl](/pd-control.md) (the binary file is under `resources/bin` in the tidb-ansible directory).
 
-    * If you use TiUP deployment, replace `pd-ctl` with `tiup ctl:<cluster-version> pd`:
+    * If you use TiUP deployment, replace `pd-ctl` with `tiup ctl:v<CLUSTER_VERSION> pd`:
 
     {{< copyable "shell-regular" >}}
 
     ```shell
-    tiup ctl:<cluster-version> pd -u http://<pd_ip>:<pd_port> store
+    tiup ctl:v<CLUSTER_VERSION> pd -u http://<pd_ip>:<pd_port> store
     ```
 
     > **Note:**
@@ -397,12 +397,12 @@ In special cases (such as when a node needs to be forcibly taken down), or if th
 
     * Enter `store delete <store_id>` in pd-ctl (`<store_id>` is the store ID of the TiFlash node found in the previous step.
 
-    * If you use TiUP deployment, replace `pd-ctl` with `tiup ctl:<cluster-version> pd`:
+    * If you use TiUP deployment, replace `pd-ctl` with `tiup ctl:v<CLUSTER_VERSION> pd`:
 
         {{< copyable "shell-regular" >}}
 
         ```shell
-        tiup ctl:<cluster-version> pd -u http://<pd_ip>:<pd_port> store delete <store_id>
+        tiup ctl:v<CLUSTER_VERSION> pd -u http://<pd_ip>:<pd_port> store delete <store_id>
         ```
 
     > **Note:**

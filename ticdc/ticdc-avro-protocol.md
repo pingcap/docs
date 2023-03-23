@@ -16,7 +16,7 @@ The following is a configuration example using Avro:
 {{< copyable "shell-regular" >}}
 
 ```shell
-cdc cli changefeed create --pd=http://127.0.0.1:2379 --changefeed-id="kafka-avro" --sink-uri="kafka://127.0.0.1:9092/topic-name?protocol=avro" --schema-registry=http://127.0.0.1:8081 --config changefeed_config.toml
+cdc cli changefeed create --server=http://127.0.0.1:8300 --changefeed-id="kafka-avro" --sink-uri="kafka://127.0.0.1:9092/topic-name?protocol=avro" --schema-registry=http://127.0.0.1:8081 --config changefeed_config.toml
 ```
 
 ```shell
@@ -41,7 +41,7 @@ The following is a configuration example:
 {{< copyable "shell-regular" >}}
 
 ```shell
-cdc cli changefeed create --pd=http://127.0.0.1:2379 --changefeed-id="kafka-avro-enable-extension" --sink-uri="kafka://127.0.0.1:9092/topic-name?protocol=avro&enable-tidb-extension=true" --schema-registry=http://127.0.0.1:8081 --config changefeed_config.toml
+cdc cli changefeed create --server=http://127.0.0.1:8300 --changefeed-id="kafka-avro-enable-extension" --sink-uri="kafka://127.0.0.1:9092/topic-name?protocol=avro&enable-tidb-extension=true" --schema-registry=http://127.0.0.1:8081 --config changefeed_config.toml
 ```
 
 ```shell
@@ -165,29 +165,29 @@ If one column can be NULL, the Column data format can be:
 | MEDIUMINT  | INT       | int       | When it is unsigned, TIDB_TYPE is INT UNSIGNED.                                                                            |
 | INT        | INT       | int       | When it is unsigned, TIDB_TYPE is INT UNSIGNED and AVRO_TYPE is long.                                                      |
 | BIGINT     | BIGINT    | long      | When it is unsigned, TIDB_TYPE is BIGINT UNSIGNED. If `avro-bigint-unsigned-handling-mode` is string, AVRO_TYPE is string. |
-| TINYBLOB   | BLOB      | bytes     |                                                                                                                           |
-| BLOB       | BLOB      | bytes     |                                                                                                                           |
-| MEDIUMBLOB | BLOB      | bytes     |                                                                                                                           |
-| LONGBLOB   | BLOB      | bytes     |                                                                                                                           |
-| BINARY     | BLOB      | bytes     |                                                                                                                           |
-| VARBINARY  | BLOB      | bytes     |                                                                                                                           |
-| TINYTEXT   | TEXT      | string    |                                                                                                                           |
-| TEXT       | TEXT      | string    |                                                                                                                           |
-| MEDIUMTEXT | TEXT      | string    |                                                                                                                           |
-| LONGTEXT   | TEXT      | string    |                                                                                                                           |
-| CHAR       | TEXT      | string    |                                                                                                                           |
-| VARCHAR    | TEXT      | string    |                                                                                                                           |
-| FLOAT      | FLOAT     | double    |                                                                                                                           |
-| DOUBLE     | DOUBLE    | double    |                                                                                                                           |
-| DATE       | DATE      | string    |                                                                                                                           |
-| DATETIME   | DATETIME  | string    |                                                                                                                           |
-| TIMESTAMP  | TIMESTAMP | string    |                                                                                                                           |
-| TIME       | TIME      | string    |                                                                                                                           |
-| YEAR       | YEAR      | int       |                                                                                                                           |
-| BIT        | BIT       | bytes     |                                                                                                                           |
-| JSON       | JSON      | string    |                                                                                                                           |
-| ENUM       | ENUM      | string    |                                                                                                                           |
-| SET        | SET       | string    |                                                                                                                           |
+| TINYBLOB   | BLOB      | bytes     |  -                                                                                                                         |
+| BLOB       | BLOB      | bytes     |  -                                                                                                                         |
+| MEDIUMBLOB | BLOB      | bytes     |  -                                                                                                                         |
+| LONGBLOB   | BLOB      | bytes     |  -                                                                                                                         |
+| BINARY     | BLOB      | bytes     |  -                                                                                                                        |
+| VARBINARY  | BLOB      | bytes     |  -                                                                                                                        |
+| TINYTEXT   | TEXT      | string    |  -                                                                                                                        |
+| TEXT       | TEXT      | string    |  -                                                                                                                        |
+| MEDIUMTEXT | TEXT      | string    |  -                                                                                                                        |
+| LONGTEXT   | TEXT      | string    |  -                                                                                                                         |
+| CHAR       | TEXT      | string    |  -                                                                                                                         |
+| VARCHAR    | TEXT      | string    |  -                                                                                                                         |
+| FLOAT      | FLOAT     | double    |  -                                                                                                                         |
+| DOUBLE     | DOUBLE    | double    |  -                                                                                                                         |
+| DATE       | DATE      | string    |  -                                                                                                                         |
+| DATETIME   | DATETIME  | string    |  -                                                                                                                         |
+| TIMESTAMP  | TIMESTAMP | string    |  -                                                                                                                         |
+| TIME       | TIME      | string    |  -                                                                                                                         |
+| YEAR       | YEAR      | int       |  -                                                                                                                         |
+| BIT        | BIT       | bytes     |  -                                                                                                                         |
+| JSON       | JSON      | string    |  -                                                                                                                         |
+| ENUM       | ENUM      | string    |  -                                                                                                                         |
+| SET        | SET       | string    |  -                                                                                                                         |
 | DECIMAL    | DECIMAL   | bytes     | When `avro-decimal-handling-mode` is string, AVRO_TYPE is string.                                                         |
 
 In the Avro protocol, two other `sink-uri` parameters might affect the Column data format as well: `avro-decimal-handling-mode` and `avro-bigint-unsigned-handling-mode`.
@@ -207,7 +207,7 @@ The following is a configuration example:
 {{< copyable "shell-regular" >}}
 
 ```shell
-cdc cli changefeed create --pd=http://127.0.0.1:2379 --changefeed-id="kafka-avro-string-option" --sink-uri="kafka://127.0.0.1:9092/topic-name?protocol=avro&avro-decimal-handling-mode=string&avro-bigint-unsigned-handling-mode=string" --schema-registry=http://127.0.0.1:8081 --config changefeed_config.toml
+cdc cli changefeed create --server=http://127.0.0.1:8300 --changefeed-id="kafka-avro-string-option" --sink-uri="kafka://127.0.0.1:9092/topic-name?protocol=avro&avro-decimal-handling-mode=string&avro-bigint-unsigned-handling-mode=string" --schema-registry=http://127.0.0.1:8081 --config changefeed_config.toml
 ```
 
 ```shell

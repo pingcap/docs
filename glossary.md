@@ -113,7 +113,7 @@ Quota Limiter is an experimental feature introduced in TiDB v6.0.0. If the machi
 
 ## R
 
-## Raft Engine
+### Raft Engine
 
 Raft Engine is an embedded persistent storage engine with a log-structured design. It is built for TiKV to store multi-Raft logs. Since v5.4, TiDB supports using Raft Engine as the log storage engine. For details, see [Raft Engine](/tikv-configuration-file.md#raft-engine).
 
@@ -155,3 +155,7 @@ Top SQL helps locate SQL queries that contribute to a high load of a TiDB or TiK
 ### TSO
 
 Because TiKV is a distributed storage system, it requires a global timing service, Timestamp Oracle (TSO), to assign a monotonically increasing timestamp. In TiKV, such a feature is provided by PD, and in Google [Spanner](http://static.googleusercontent.com/media/research.google.com/en//archive/spanner-osdi2012.pdf), this feature is provided by multiple atomic clocks and GPS.
+
+### TTL
+
+[Time to live (TTL)](/time-to-live.md) is a feature that allows you to manage TiDB data lifetime at the row level. For a table with the TTL attribute, TiDB automatically checks data lifetime and deletes expired data at the row level.

@@ -13,11 +13,12 @@ summary: Describes TiDB compatibility issues with third-party tools found during
 > - Triggers
 > - Events
 > - User-defined functions
-> - `FOREIGN KEY` constraints
 > - `SPATIAL` functions, data types and indexes
 > - `XA` syntax
 >
 > The preceding unsupported features are expected behavior and are not listed in this document. For more details, see [MySQL Compatibility](/mysql-compatibility.md).
+
+The incompatibility issues listed in this document are found in some [third-party tools supported by TiDB](/develop/dev-guide-third-party-tools-compatibility.md).
 
 ## General incompatibility
 
@@ -39,7 +40,17 @@ MySQL maintains a series of [server status variables starting with `Com_`](https
 
 **Way to avoid**
 
+<CustomContent platform="tidb">
+
 Do not use these variables. One common scenario is monitoring. TiDB is well observable and does not require querying from server status variables. For custom monitoring tools, refer to [TiDB Monitoring Framework Overview](/tidb-monitoring-framework.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Do not use these variables. One common scenario is monitoring. TiDB Cloud is well observable and does not require querying from server status variables. For more information about TiDB Cloud monitoring services, refer to [Monitor a TiDB Cluster](/tidb-cloud/monitor-tidb-cluster.md).
+
+</CustomContent>
 
 ### TiDB distinguishes between `TIMESTAMP` and `DATETIME` in error messages
 
@@ -49,7 +60,17 @@ TiDB error messages distinguish between `TIMESTAMP` and `DATETIME`, while MySQL 
 
 **Way to avoid**
 
+<CustomContent platform="tidb">
+
 Do not use the error messages for string matching. Instead, use [Error Codes](/error-codes.md) for troubleshooting.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Do not use the error messages for string matching. Instead, use [Error Codes](https://docs.pingcap.com/tidb/stable/error-codes) for troubleshooting.
+
+</CustomContent>
 
 ### TiDB does not support the `CHECK TABLE` statement
 
@@ -165,7 +186,6 @@ According to the test results, TiDB supports most of the Sequelize features ([us
 
 Unsupported features are:
 
-- Foreign key constraints (including many-to-many relationships) are not supported.
 - [`GEOMETRY`](https://github.com/pingcap/tidb/issues/6347) is not supported.
 - Modification of integer primary key is not supported.
 - `PROCEDURE` is not supported.
