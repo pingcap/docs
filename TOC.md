@@ -21,9 +21,10 @@
     - [Build a TiDB Cluster in TiDB Cloud (Serverless Tier)](/develop/dev-guide-build-cluster-in-cloud.md)
     - [CRUD SQL in TiDB](/develop/dev-guide-tidb-crud-sql.md)
   - Example Applications
-    - [Java](/develop/dev-guide-sample-application-java.md)
-    - [Java (Spring Boot)](/develop/dev-guide-sample-application-spring-boot.md)
     - [Golang](/develop/dev-guide-sample-application-golang.md)
+    - [Java (Spring Boot)](/develop/dev-guide-sample-application-spring-boot.md)
+    - [Java](/develop/dev-guide-sample-application-java.md)
+    - [Python](/develop/dev-guide-sample-application-python.md)
   - Connect to TiDB
     - [Choose Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)
     - [Connect to TiDB](/develop/dev-guide-connect-to-tidb.md)
@@ -75,8 +76,6 @@
       - [SQL Development Specifications](/develop/dev-guide-sql-development-specification.md)
     - Legacy Docs
       - [For Django](/develop/dev-guide-outdated-for-django.md)
-      - [For SQLAlchemy](/develop/dev-guide-outdated-for-sqlalchemy.md)
-      - [For mysql-connector-python](/develop/dev-guide-outdated-for-python-mysql-connector.md)
   - Cloud Native Development Environment
     - [Gitpod](/develop/dev-guide-playground-gitpod.md)
   - Third-Party Support
@@ -594,6 +593,7 @@
     - [Supported Push-down Calculations](/tiflash/tiflash-supported-pushdown-calculations.md)
     - [TiFlash Query Result Materialization](/tiflash/tiflash-results-materialization.md)
     - [TiFlash Late Materialization](/tiflash/tiflash-late-materialization.md)
+    - [Spill to Disk](/tiflash/tiflash-spill-disk.md)
     - [Data Validation](/tiflash/tiflash-data-validation.md)
     - [Compatibility](/tiflash/tiflash-compatibility.md)
   - [System Variables](/system-variables.md)
