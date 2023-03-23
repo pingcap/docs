@@ -1,13 +1,15 @@
 ---
-title: Cluster Management FAQs
+title: TiDB Cluster Management FAQs
 summary: Learn about the FAQs related to TiDB cluster management.
 ---
 
-# Cluster Management FAQs
+# TiDB Cluster Management FAQs
 
 This document summarizes the FAQs related to TiDB cluster management.
 
 ## Daily management
+
+This section describes common problems you might encounter during daily cluster management, their causes, and solutions.
 
 ### How to log into TiDB?
 
@@ -19,7 +21,7 @@ mysql -h 127.0.0.1 -uroot -P4000
 
 ### How to modify the system variables in TiDB?
 
-Similar to MySQL, TiDB includes static and solid parameters. You can directly modify static parameters using `set global xxx = n`, but the new value of a parameter is only effective within the life cycle in this instance.
+Similar to MySQL, TiDB includes static and solid parameters. You can directly modify static parameters using `SET GLOBAL xxx = n`, but the new value of a parameter is only effective within the life cycle in this instance.
 
 ### Where and what are the data directories in TiDB (TiKV)?
 
@@ -35,32 +37,43 @@ By default, TiDB/PD/TiKV outputs standard error in the logs. If a log file is sp
 
 ### How to safely stop TiDB?
 
-Kill all the services using `kill` directly. The components of TiDB will do `graceful shutdown`.
+- If a load balancer is running (recommended): Stop the load balancer and execute the SQL statement `SHUTDOWN`. Then TiDB waits for a period as specified by [`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50) until all sessions are terminated. Then TiDB stops running.
+
+- If no load balancer is running: Execute the `SHUTDOWN` statement. Then TiDB components are gracefully stopped.
 
 ### Can `kill` be executed in TiDB?
 
-- You can `kill` DML statements. First use `show processlist` to find the ID corresponding with the session, and then run `kill tidb [session id]`.
-- You can `kill` DDL statements. First use `admin show ddl jobs` to find the ID of the DDL job you need to kill, and then run `admin cancel ddl jobs 'job_id' [, 'job_id'] ...`. For more details, see the [`ADMIN` statement](/sql-statements/sql-statement-admin.md).
+- Kill DML statements:
+
+    First use `information_schema.cluster_processlist` to find TiDB instance address and session ID, and then run the kill command.
+
+    TiDB v6.1.0 introduces the Global Kill feature (controlled by the `enable-global-kill` configuration, which is enabled by default). If Global Kill is enabled, just execute `kill session_id`.
+
+    If the TiDB version is earlier than v6.1.0, or the Global Kill feature is not enabled, `kill session_id` does not take effect by default. To terminate a DML statement, you should connect the client directly to the TiDB instance that is executing the DML statement and then execute the `kill tidb session_id` statement. If the client connects to another TiDB instance or there is a proxy between the client and the TiDB cluster, the `kill tidb session_id` statement might be routed to another TiDB instance, which might incorrectly terminate another session. For details, see [`KILL`](/sql-statements/sql-statement-kill.md).
+
+- Kill DDL statements: First use `admin show ddl jobs` to find the ID of the DDL job you need to terminate, and then run `admin cancel ddl jobs 'job_id' [, 'job_id'] ...`. For more details, see the [`ADMIN` statement](/sql-statements/sql-statement-admin.md).
 
 ### Does TiDB support session timeout?
 
-TiDB does not currently support session timeout at the database level. At present, if you want to achieve timeout, when there is no LB (Load Balancing), you need to record the ID of the initiated Session on the application side. You can customize the timeout through the application. After timeout, you need to go to the node that initiated the Query Use `kill tidb [session id]` to kill SQL. It is currently recommended to use an application program to achieve session timeout. When the timeout period is reached, the application layer will throw an exception and continue to execute subsequent program segments.
+TiDB currently supports two timeouts, [`wait_timeout`](/system-variables.md#wait_timeout) and [`interactive_timeout`](/system-variables.md#interactive_timeout).
 
-### What is the TiDB version management strategy for production environment? How to avoid frequent upgrade?
+### What is the TiDB version management strategy?
 
-Currently, TiDB has a standard management of various versions. Each release contains a detailed change log and [release notes](/releases/release-notes.md). Whether it is necessary to upgrade in the production environment depends on the application system. It is recommended to learn the details about the functional differences between the previous and later versions before upgrading.
+For details about TiDB version management, see [TiDB versioning](/releases/versioning.md).
 
-Take `Release Version: v1.0.3-1-ga80e796` as an example of version number description:
+### How about the operating cost of deploying and maintaining a TiDB cluster?
 
-- `v1.0.3` indicates the standard GA version.
-- `-1` indicates the current version has one commit.
-- `ga80e796` indicates the version `git-hash`.
+TiDB provides a few features and [tools](/ecosystem-tool-user-guide.md), with which you can manage the clusters easily at a low cost:
+
+- For maintenance operations, [TiUP](/tiup/tiup-documentation-guide.md) works as the package manager, which simplifies the deployment, scaling, upgrade, and other maintenance tasks.
+- For monitoring, the [TiDB monitoring framework](/tidb-monitoring-framework.md) uses [Prometheus](https://prometheus.io/) to store the monitoring and performance metrics, and uses [Grafana](https://grafana.com/grafana/) to visualize these metrics. Dozens of built-in panels are available with hundreds of metrics.
+- For troubleshooting, the [TiDB Troubleshooting Map](/tidb-troubleshooting-map.md) summarizes common issues of the TiDB server and other components. You can use this map to diagnose and resolve issues when you encounter related problems.
 
 ### What's the difference between various TiDB master versions?
 
-The TiDB community is highly active. After the 1.0 GA release, the engineers have been keeping optimizing and fixing bugs. Therefore, the TiDB version is updated quite fast. If you want to keep informed of the latest version, see [TiDB Weekly update](https://pingcap.com/weekly/).
+The TiDB community is highly active. The engineers have been keeping optimizing features and fixing bugs. Therefore, the TiDB version is updated quite fast. If you want to keep informed of the latest version, see [TiDB Release Timeline](/releases/release-timeline.md).
 
-It is recommeneded to [deploy TiDB using TiUP](/production-deployment-using-tiup.md). TiDB has a unified management of the version number after the 1.0 GA release. You can view the version number using the following two methods:
+It is recommeneded to deploy TiDB [using TiUP](/production-deployment-using-tiup.md) or [using TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable). TiDB has a unified management of the version number. You can view the version number using one of the following methods:
 
 - `select tidb_version()`
 - `tidb-server -V`
@@ -68,6 +81,13 @@ It is recommeneded to [deploy TiDB using TiUP](/production-deployment-using-tiup
 ### Is there a graphical deployment tool for TiDB?
 
 Currently no.
+
+### How to scale out a TiDB cluster?
+
+You can scale out your TiDB cluster without interrupting the online services.
+
+- If your cluster is deployed using [TiUP](/production-deployment-using-tiup.md), refer to [Scale a TiDB Cluster Using TiUP](/scale-tidb-using-tiup.md).
+- If your cluster is deployed using [TiDB Operator](/tidb-operator-overview.md) on Kubernetes, refer to [Manually Scale TiDB on Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/scale-a-tidb-cluster).
 
 ### How to scale TiDB horizontally?
 
@@ -115,6 +135,8 @@ In the following situations, even you have enabled the [Async Commit](/system-va
 
 ## PD management
 
+This section describes common problems you may encounter during PD management, their causes, and solutions.
+
 ### The `TiKV cluster is not bootstrapped` message is displayed when I access PD
 
 Most of the APIs of PD are available only when the TiKV cluster is initialized. This message is displayed if PD is accessed when PD is started while TiKV is not started when a new cluster is deployed. If this message is displayed, start the TiKV cluster. When TiKV is initialized, PD is accessible.
@@ -135,7 +157,7 @@ The client connection can only access the cluster through TiDB. TiDB connects PD
 
 For the relationship between each status, refer to [Relationship between each status of a TiKV store](/tidb-scheduling.md#information-collection).
 
-You can use PD Control to check the status information of a TiKV store. 
+You can use PD Control to check the status information of a TiKV store.
 
 ### What is the difference between the `leader-schedule-limit` and `region-schedule-limit` scheduling parameters in PD?
 
@@ -160,6 +182,8 @@ The offline node usually indicates the TiKV node. You can determine whether the 
 2. Delete the `node_exporter` data of the corresponding node from the Prometheus configuration file.
 
 ## TiDB server management
+
+This section describes common problems you may encounter during TiDB server management, their causes, and solutions.
 
 ### How to set the `lease` parameter in TiDB?
 
@@ -202,7 +226,7 @@ The TiClient Region Error indicator describes the error types and metrics that a
 
 ### What's the maximum number of concurrent connections that TiDB supports?
 
-By default, there is no limit on the maximum number of connections per TiDB server. If too large concurrency leads to an increase of response time, it is recommended to increase the capacity by adding TiDB nodes.
+By default, there is no limit on the maximum number of connections per TiDB server. If needed, you can limit the maximum number of connections by setting `instance.max_connections` in the `config.toml` file, or changing the value of the system variable [`max_connections`](/system-variables.md#max_connections). If too large concurrency leads to an increase of response time, it is recommended to increase the capacity by adding TiDB nodes.
 
 ### How to view the creation time of a table?
 
@@ -218,35 +242,65 @@ To estimate the size of a table in TiDB, you can use the following query stateme
 
 ```sql
 SELECT
-    db_name,
-    table_name,
-    SUM(total_size / cnt)                   Approximate_Size,
-    SUM(total_size / cnt / @amplification)  Disk_Size
+  db_name,
+  table_name,
+  ROUND(SUM(total_size / cnt), 2) Approximate_Size,
+  ROUND(
+    SUM(
+      total_size / cnt / (
+        SELECT
+          ROUND(AVG(value), 2)
+        FROM
+          METRICS_SCHEMA.store_size_amplification
+        WHERE
+          value > 0
+      )
+    ),
+    2
+  ) Disk_Size
 FROM
-    (SELECT
-        db_name,
-            table_name,
-            region_id,
-            SUM(Approximate_Size) total_size,
-            COUNT(*) cnt
+  (
+    SELECT
+      db_name,
+      table_name,
+      region_id,
+      SUM(Approximate_Size) total_size,
+      COUNT(*) cnt
     FROM
-        information_schema.TIKV_REGION_STATUS
+      information_schema.TIKV_REGION_STATUS
     WHERE
-        db_name = @dbname
-        AND table_name in (@table_name)
-    GROUP BY db_name , table_name , region_id) tabinfo
-GROUP BY db_name , table_name;
+      db_name = @dbname
+      AND table_name IN (@table_name)
+    GROUP BY
+      db_name,
+      table_name,
+      region_id
+  ) tabinfo
+GROUP BY
+  db_name,
+  table_name;
 ```
 
 When using the above statement, you need to fill in and replace the following fields in the statement as appropriate.
 
 - `@dbname`: the name of the database.
 - `@table_name`: the name of the target table.
-- `@size_amplification`: the average of the cluster compression ratio. To get this information, check the **Size amplification** metric for each node on the **Grafana Monitoring PD - statistics balance** panel. The average of the cluster compression ratio is the average of the Size amplification for all nodes.
 
-In addition, `Approximate_Size` in the above statement indicates the size of the table before compression and `Disk_Size` indicates the size of the table after compression.
+In addition, in the above statement:
+
+- `store_size_amplification` indicates the average of the cluster compression ratio. In addition to using `SELECT * FROM METRICS_SCHEMA.store_size_amplification;` to query this information, you can also check the **Size amplification** metric for each node on the **Grafana Monitoring PD - statistics balance** panel. The average of the cluster compression ratio is the average of the Size amplification for all nodes.
+- `Approximate_Size` indicates the size of the table in a replica before compression. Note that this is an approximate value, not an accurate one.
+- `Disk_Size` indicates the size of the table after compression. This is an approximate value and can be calculated according to `Approximate_Size` and `store_size_amplification`.
 
 ## TiKV server management
+
+This section describes common problems you might encounter during TiKV server management, their causes, and solutions.
+
+### How to specify the location of data for compliance or multi-tenant applications?
+
+You can use [Placement Rules](/placement-rules-in-sql.md) to specify the location of data for compliance or multi-tenant applications.
+
+Placement Rules in SQL is designed to control the attributes of any continuous data range, such as the number of replicas, the Raft role, the placement location, and the key ranges in which the rules take effect.
 
 ### What is the recommended number of replicas in the TiKV cluster? Is it better to keep the minimum number for high availability?
 
@@ -280,7 +334,7 @@ TiKV implements the Column Family (CF) feature of RocksDB. By default, the KV da
 ### Why is the TiKV channel full?
 
 - The Raftstore thread is too slow or blocked by I/O. You can view the CPU usage status of Raftstore.
-- TiKV is too busy (CPU, disk I/O, etc.) and cannot manage to handle it.
+- TiKV is too busy (such as CPU and disk I/O) and cannot manage to handle it.
 
 ### Why does TiKV frequently switch Region leader?
 
@@ -361,6 +415,8 @@ No. TiDB (or data created from the transactional API) relies on a specific key f
 
 ## TiDB testing
 
+This section describes common problems you might encounter during TiDB testing, their causes, and solutions.
+
 ### What is the performance test result for TiDB using Sysbench?
 
 At the beginning, many users tend to do a benchmark test or a comparison test between TiDB and MySQL. We have also done a similar official test and find the test result is consistent at large, although the test data has some bias. Because the architecture of TiDB differs greatly from MySQL, it is hard to find a benchmark point. The suggestions are as follows:
@@ -382,6 +438,14 @@ TiDB is not suitable for tables of small size (such as below ten million level),
 
 ## Backup and restoration
 
+This section describes common problems you may encounter during backup and restoration, their causes, and solutions.
+
 ### How to back up data in TiDB?
 
-Currently, for the backup of a large volume of data, the preferred method is using [BR](/br/backup-and-restore-tool.md). Otherwise, the recommended tool is [Dumpling](/dumpling-overview.md). Although the official MySQL tool `mysqldump` is also supported in TiDB to back up and restore data, its performance is worse than [BR](/br/backup-and-restore-tool.md) and it needs much more time to back up and restore large volumes of data.
+Currently, for the backup of a large volume of data (more than 1 TB), the preferred method is using [Backup & Restore (BR)](/br/backup-and-restore-overview.md). Otherwise, the recommended tool is [Dumpling](/dumpling-overview.md). Although the official MySQL tool `mysqldump` is also supported in TiDB to back up and restore data, its performance is no better than BR and it needs much more time to back up and restore large volumes of data.
+
+For more FAQs about BR, see [BR FAQs](/faq/backup-and-restore-faq.md).
+
+### How is the speed of backup and restore?
+
+When [BR](/br/backup-and-restore-overview.md) is used to perform backup and restore tasks, the backup is processed at about 40 MB/s per TiKV instance, and restore is processed at about 100 MB/s per TiKV instance.

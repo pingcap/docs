@@ -6,7 +6,7 @@ aliases: ['/docs/dev/statement-summary-tables/','/docs/dev/reference/performance
 
 # Statement Summary Tables
 
-To better handle SQL performance issues, MySQL has provided [statement summary tables](https://dev.mysql.com/doc/refman/5.6/en/statement-summary-tables.html) in `performance_schema` to monitor SQL with statistics. Among these tables, `events_statements_summary_by_digest` is very useful in locating SQL problems with its abundant fields such as latency, execution times, rows scanned, and full table scans.
+To better handle SQL performance issues, MySQL has provided [statement summary tables](https://dev.mysql.com/doc/refman/5.7/en/performance-schema-statement-summary-tables.html) in `performance_schema` to monitor SQL with statistics. Among these tables, `events_statements_summary_by_digest` is very useful in locating SQL problems with its abundant fields such as latency, execution times, rows scanned, and full table scans.
 
 Therefore, starting from v4.0.0-rc.1, TiDB provides system tables in `information_schema` (_not_ `performance_schema`) that are similar to `events_statements_summary_by_digest` in terms of features.
 
@@ -15,6 +15,14 @@ Therefore, starting from v4.0.0-rc.1, TiDB provides system tables in `informatio
 - [`cluster_statements_summary`](#statements_summary_evicted)
 - [`cluster_statements_summary_history`](#statements_summary_evicted)
 - [`statements_summary_evicted`](#statements_summary_evicted)
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> The following tables are unavailable for [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta): `statements_summary`, `statements_summary_history`, `cluster_statements_summary`, and `cluster_statements_summary_history`.
+  
+</CustomContent>
 
 This document details these tables and introduces how to use them to troubleshoot SQL performance issues.
 
@@ -86,7 +94,7 @@ The following is a sample output of querying `statements_summary`:
 
 ## `statements_summary_history`
 
-The table schema of `statements_summary_history` is identical to that of `statements_summary`. `statements_summary_history` saves the historical data of a time range. By checking historical data, you can troubleshoot anomalies and compare monitoring metrics of different time ranges.
+The table schema of `statements_summary_history` is identical to that of `statements_summary`. `statements_summary_history` saves the history data of a time range. By checking history data, you can troubleshoot anomalies and compare monitoring metrics of different time ranges.
 
 The fields `SUMMARY_BEGIN_TIME` and `SUMMARY_END_TIME` represent the start time and the end time of the historical time range.
 
@@ -131,20 +139,13 @@ After the configuration above takes effect, every 30 minutes the `statements_sum
 
 The `statements_summary_evicted` table records the recent 24 periods during which SQL statements are evicted from the statement summary. The `statements_summary_evicted` table is updated every 30 minutes.
 
-The system variables above have two scopes: global and session. These scopes work differently from other system variables:
-
-- After setting the global variable, your setting applies to the whole cluster immediately.
-- After setting the session variable, your setting applies to the current TiDB server immediately. This is useful when you debug on a single TiDB server instance.
-- The session variable has a higher read priority. The global variable is read only when no session variable is set.
-- If you set the session variable to a blank string, the global variable is re-read.
-
 > **Note:**
 >
-> The `tidb_stmt_summary_history_size`, `tidb_stmt_summary_max_stmt_count`, and `tidb_stmt_summary_max_sql_length` configuration items affect memory usage. It is recommended that you adjust these configurations based on your needs. It is not recommended to set them too large values.
+> The `tidb_stmt_summary_history_size`, `tidb_stmt_summary_max_stmt_count`, and `tidb_stmt_summary_max_sql_length` configuration items affect memory usage. It is recommended that you adjust these configurations based on your needs, the SQL size, SQL count, and machine configuration. It is not recommended to set them too large values. You can calculate the memory usage using `tidb_stmt_summary_history_size` \* `tidb_stmt_summary_max_stmt_count` \* `tidb_stmt_summary_max_sql_length` \* `3`.
 
 ### Set a proper size for statement summary
 
-After the system has run for a period of time, you can check the `statement_summary` table to see whether SQL eviction has occurred. For example:
+After the system has run for a period of time (depending on the system load), you can check the `statement_summary` table to see whether SQL eviction has occurred. For example:
 
 ```sql
 select @@global.tidb_stmt_summary_max_stmt_count;
@@ -188,9 +189,60 @@ From the result above, you can see that a maximum of 59 SQL categories are evict
 
 ## Limitation
 
-The statement summary tables have the following limitation:
+By default, statements summary tables are saved in memory. When a TiDB server restarts, all data will be lost.
 
-All data of the statement summary tables above will be lost when the TiDB server is restarted. This is because statement summary tables are all memory tables, and the data is cached in memory instead of being persisted on storage.
+<CustomContent platform="tidb">
+
+To address this issue, TiDB v6.6.0 experimentally introduces the [statement summary persistence](#persist-statements-summary) feature, which is disabled by default. After this feature is enabled, the history data is no longer saved in memory, but directly written to disks. In this way, the history data is still available if a TiDB server restarts.
+
+</CustomContent>
+
+## Persist statements summary
+
+<CustomContent platform="tidb-cloud">
+
+This section is only applicable to on-premises TiDB. For TiDB Cloud, the value of the `tidb_stmt_summary_enable_persistent` parameter is `false` by default and does not support dynamic modification.
+
+</CustomContent>
+
+> **Warning:**
+>
+> Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
+<CustomContent platform="tidb">
+
+As described in the [Limitation](#limitation) section, statements summary tables are saved in memory by default. Once a TiDB server restarts, all the statements summary will be lost. Starting from v6.6.0, TiDB experimentally provides the configuration item [`tidb_stmt_summary_enable_persistent`](/tidb-configuration-file.md#tidb_stmt_summary_enable_persistent-new-in-v660) to allow users to enable or disable statements summary persistence.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+As described in the [Limitation](#limitation) section, statements summary tables are saved in memory by default. Once a TiDB server restarts, all the statements summary will be lost. Starting from v6.6.0, TiDB experimentally provides the configuration item `tidb_stmt_summary_enable_persistent` to allow users to enable or disable statements summary persistence.
+
+</CustomContent>
+
+To enable statements summary persistence, you can add the following configuration items to the TiDB configuration file:
+
+```toml
+[instance]
+tidb_stmt_summary_enable_persistent = true
+# The following entries use the default values, which can be modified as needed.
+# tidb_stmt_summary_filename = "tidb-statements.log"
+# tidb_stmt_summary_file_max_days = 3
+# tidb_stmt_summary_file_max_size = 64 # MiB
+# tidb_stmt_summary_file_max_backups = 0
+```
+
+After statements summary persistence is enabled, the memory keeps only the current real-time data and no history data. Once the real-time data is refreshed as history data, the history data is written to the disk at an interval of `tidb_stmt_summary_refresh_interval` described in the [Parameter configuration](#parameter-configuration) section. Queries on the `statements_summary_history` or `cluster_statements_summary_history` table will return results combining both in-memory and on-disk data.
+
+<CustomContent platform="tidb">
+
+> **Note:**
+>
+> - When statements summary persistence is enabled, the `tidb_stmt_summary_history_size` configuration described in the [Parameter configuration](#parameter-configuration) section will no longer take effect because the memory does not keep the history data. Instead, the following three configurations will be used to control the retention period and size of history data for persistence: [`tidb_stmt_summary_file_max_days`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_days-new-in-v660), [`tidb_stmt_summary_file_max_size`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_size-new-in-v660), and [`tidb_stmt_summary_file_max_backups`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_backups-new-in-v660).
+> - The smaller the value of `tidb_stmt_summary_refresh_interval`, the more immediate data is written to the disk. However, this also means more redundant data is written to the disk.
+
+</CustomContent>
 
 ## Troubleshooting examples
 
@@ -268,6 +320,7 @@ Basic fields:
 - `SAMPLE_USER`: The users who execute SQL statements of this category. Only one user is taken.
 - `PLAN_DIGEST`: The digest of the execution plan.
 - `PLAN`: The original execution plan. If there are multiple statements, the plan of only one statement is taken.
+- `BINARY_PLAN`: The original execution plan encoded in binary format. If there are multiple statements, the plan of only one statement is taken. Execute the `SELECT tidb_decode_binary_plan('xxx...')` statement to parse the specific execution plan.
 - `PLAN_CACHE_HITS`: The total number of times that SQL statements of this category hit the plan cache.
 - `PLAN_IN_CACHE`: Indicates whether the previous execution of SQL statements of this category hit the plan cache.
 
@@ -339,7 +392,7 @@ Transaction-related fields:
 - `SUM_BACKOFF_TIMES`: The sum of retries when SQL statements of this category encounter errors that require a retry.
 - `BACKOFF_TYPES`: All types of errors that require retries and the number of retries for each type. The format of the field is `type:number`. If there is more than one error type, each is separated by a comma, like `txnLock:2,pdRPC:1`.
 - `AVG_AFFECTED_ROWS`: The average number of rows affected.
-- `PREV_SAMPLE_TEXT`:  When the current SQL statement is `COMMIT`, `PREV_SAMPLE_TEXT` is the previous statement to `COMMIT`. In this case, SQL statements are grouped by the digest and `prev_sample_text`. This means that `COMMIT` statements with different `prev_sample_text` are grouped to different rows. When the current SQL statement is not `COMMIT`, the `PREV_SAMPLE_TEXT` field is an empty string.
+- `PREV_SAMPLE_TEXT`: When the current SQL statement is `COMMIT`, `PREV_SAMPLE_TEXT` is the previous statement to `COMMIT`. In this case, SQL statements are grouped by the digest and `prev_sample_text`. This means that `COMMIT` statements with different `prev_sample_text` are grouped to different rows. When the current SQL statement is not `COMMIT`, the `PREV_SAMPLE_TEXT` field is an empty string.
 
 ### `statements_summary_evicted` fields description
 

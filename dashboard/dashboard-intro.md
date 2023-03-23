@@ -8,6 +8,10 @@ aliases: ['/docs/dev/dashboard/dashboard-intro/']
 
 TiDB Dashboard is a Web UI for monitoring, diagnosing, and managing the TiDB cluster, which is available since v4.0. It is built into the PD component and does not require an independent deployment.
 
+> **Note:**
+>
+> TiDB v6.5.0 (and later) and TiDB Operator v1.4.0 (and later) support deploying TiDB Dashboard as an independent Pod on Kubernetes. For details, see [Deploy TiDB Dashboard independently in TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/dev/get-started#deploy-tidb-dashboard-independently).
+
 ![TiDB Dashboard interface](/media/dashboard/dashboard-intro.gif)
 
 TiDB Dashboard is open-sourced on [GitHub](https://github.com/pingcap-incubator/tidb-dashboard).
@@ -61,7 +65,3 @@ See [Search Logs Page](/dashboard/dashboard-log-search.md) for details.
 This is an advanced debugging feature that lets you profile each instance online and analyze various internal operations an instance performed during the profiling data collection period and the proportion of the operation execution time in this period without third-party tools.
 
 See [Profile Instances Page](/dashboard/dashboard-profiling.md) for details.
-
-> **Note:**
->
-> By default, TiDB Dashboard shares usage details with PingCAP to help understand how to improve the product. For details about what is shared and how to disable the sharing, see [Telemetry](/telemetry.md).

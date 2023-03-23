@@ -1,10 +1,10 @@
 ---
-title: TiDB Data Migration FAQ
+title: TiDB Data Migration FAQs
 summary: Learn about frequently asked questions (FAQs) about TiDB Data Migration (DM).
 aliases: ['/docs/tidb-data-migration/dev/faq/']
 ---
 
-# TiDB Data Migration FAQ
+# TiDB Data Migration FAQs
 
 This document collects the frequently asked questions (FAQs) about TiDB Data Migration (DM).
 
@@ -109,7 +109,7 @@ Record the position information in the global checkpoint (`is_global=1`) corresp
 
     - The checkpoint rows to be updated match `id=(source-id)` and `is_global=1`.
 
-    - The checkpoint columns to be updated are  `binlog_name` and `binlog_pos`.
+    - The checkpoint columns to be updated are `binlog_name` and `binlog_pos`.
 
 3. Set `safe-mode: true` for the `syncers` in the task to ensure reentrant execution.
 
@@ -130,11 +130,11 @@ Since DM v2.0, if you directly run the `start-task` command with the task config
 
 This error can be handled by [manually importing DM migration tasks of a DM 1.0 cluster to a DM 2.0 cluster](/dm/manually-upgrade-dm-1.0-to-2.0.md).
 
-## Why does TiUP fail to deploy some versions of DM (for example, v2.0.0-hotfix)？
+## Why does TiUP fail to deploy some versions of DM (for example, v2.0.0-hotfix)?
 
 You can use the `tiup list dm-master` command to view the DM versions that TiUP supports to deploy. TiUP does not manage DM versions which are not shown by this command.
 
-## How to handle the error `parse mydumper metadata error: EOF` that occurs when DM is replicating data？
+## How to handle the error `parse mydumper metadata error: EOF` that occurs when DM is replicating data?
 
 You need to check the error message and log files to further analyze this error. The cause might be that the dump unit does not produce the correct metadata file due to a lack of permissions.
 
@@ -186,7 +186,7 @@ Sometimes, the error message contains the `parse statement` information, for exa
 if the DDL is not needed, you can use a filter rule with \"*\" schema-pattern to ignore it.\n\t : parse statement: line 1 column 11 near \"EVENT `event_del_big_table` \r\nDISABLE\" %!!(MISSING)(EXTRA string=ALTER EVENT `event_del_big_table` \r\nDISABLE
 ```
 
-The reason for this type of error is that the TiDB parser cannot parse DDL statements sent by the upstream, such as `ALTER EVENT`, so `sql-skip` does not take effect as expected. You can add [binlog event filters](/dm/dm-key-features.md#binlog-event-filter) in the configuration file to filter those statements and set `schema-pattern: "*"`. Starting from DM v2.0.1, DM pre-filters statements related to `EVENT`.
+The reason for this type of error is that the TiDB parser cannot parse DDL statements sent by the upstream, such as `ALTER EVENT`, so `sql-skip` does not take effect as expected. You can add [binlog event filters](/dm/dm-binlog-event-filter.md) in the configuration file to filter those statements and set `schema-pattern: "*"`. Starting from DM v2.0.1, DM pre-filters statements related to `EVENT`.
 
 Since DM v6.0, `binlog` replaces `sql-skip` and `handle-error`. You can use the `binlog` command instead to avoid this issue.
 
@@ -351,7 +351,7 @@ For data sources that can be replicated normally (such as `mysql2` in the above 
 
 ## In DM v2.0, how do I handle the error "heartbeat config is different from previous used: serverID not equal" when switching the connection between DM-workers and MySQL instances in a virtual IP environment with the `heartbeat` feature enabled?
 
-The `heartbeat` feature is disabled by default in DM v2.0 and later versions. If you enable the feature in the task configuration file, it interferes with the high availability feature. To solve this issue, you can disable the `heartbeat` feature by setting `enable-heartbeat` to `false` in the task configuration file,  and then reload the task configuration file. DM will forcibly disable the `heartbeat` feature in subsequent releases.
+The `heartbeat` feature is disabled by default in DM v2.0 and later versions. If you enable the feature in the task configuration file, it interferes with the high availability feature. To solve this issue, you can disable the `heartbeat` feature by setting `enable-heartbeat` to `false` in the task configuration file, and then reload the task configuration file. DM will forcibly disable the `heartbeat` feature in subsequent releases.
 
 ## Why does a DM-master fail to join the cluster after it restarts and DM reports the error "fail to start embed etcd, RawCause: member xxx has already been bootstrapped"?
 
@@ -392,3 +392,7 @@ You can avoid this error by the following options:
     ```
 
 - Upgrade DM to v2.0.7 or later versions.
+
+## Why does the load unit report the `Unknown character set` error?
+
+TiDB does not support all MySQL character sets. Therefore, DM reports this error if an unsupported character set is used when creating the table schema during a full import. To bypass this error, you can create the table schema in the downstream in advance using the [character sets supported by TiDB](/character-set-and-collation.md) according to the specific data.

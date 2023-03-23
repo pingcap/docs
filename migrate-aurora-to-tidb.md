@@ -1,7 +1,7 @@
 ---
 title: Migrate Data from Amazon Aurora to TiDB
 summary: Learn how to migrate data from Amazon Aurora to TiDB using DB snapshot.
-aliases: ['/tidb/dev/migrate-from-aurora-using-lightning','/docs/dev/migrate-from-aurora-mysql-database/','/docs/dev/how-to/migrate/from-mysql-aurora/','/docs/dev/how-to/migrate/from-aurora/', '/tidb/dev/migrate-from-aurora-mysql-database/', '/tidb/dev/migrate-from-mysql-aurora/']
+aliases: ['/tidb/dev/migrate-from-aurora-using-lightning','/docs/dev/migrate-from-aurora-mysql-database/','/docs/dev/how-to/migrate/from-mysql-aurora/','/docs/dev/how-to/migrate/from-aurora/', '/tidb/dev/migrate-from-aurora-mysql-database/', '/tidb/dev/migrate-from-mysql-aurora/','/tidb/stable/migrate-from-aurora-using-lightning/']
 ---
 
 # Migrate Data from Amazon Aurora to TiDB
@@ -57,7 +57,7 @@ Export the schema using Dumpling by running the following command. The command i
 {{< copyable "shell-regular" >}}
 
 ```shell
-tiup dumpling --host ${host} --port 3306 --user root --password ${password} --filter 'my_db1.table[12]' --no-data --output 's3://my-bucket/schema-backup?region=us-west-2' --filter "mydb.*"
+tiup dumpling --host ${host} --port 3306 --user root --password ${password} --filter 'my_db1.table[12]' --no-data --output 's3://my-bucket/schema-backup' --filter "mydb.*"
 ```
 
 The parameters used in the command above are as follows. For more parameters, refer to [Dumpling overview](/dumpling-overview.md).
@@ -69,7 +69,7 @@ The parameters used in the command above are as follows. For more parameters, re
 |`-P` or `--port`       |MySQL port|
 |`-h` or `--host`       |MySQL IP address|
 |`-t` or `--thread`     |The number of threads used for export|
-|`-o` or `--output`     |The directory that stores the exported file. Supports local path or [external storage URL](/br/backup-and-restore-storages.md)|
+|`-o` or `--output`     |The directory that stores the exported file. Supports local path or [external storage URI](/br/backup-and-restore-storages.md)|
 |`-r` or `--row`        |The maximum number of rows in a single file|
 |`-F`                   |The maximum size of a single file, in MiB. Recommended value: 256 MiB.|
 |`-B` or `--database`   |Specifies a database to be exported|
@@ -110,7 +110,7 @@ sorted-kv-dir = "/mnt/ssd/sorted-kv-dir"
 
 [mydumper]
 # The path that stores the snapshot file.
-data-source-dir = "${s3_path}"  # e.g.: s3://my-bucket/sql-backup?region=us-west-2
+data-source-dir = "${s3_path}"  # e.g.: s3://my-bucket/sql-backup
 
 [[mydumper.files]]
 # The expression that parses the parquet file.
@@ -129,7 +129,7 @@ If you need to enable TLS in the TiDB cluster, refer to [TiDB Lightning Configur
     {{< copyable "shell-regular" >}}
 
     ```shell
-    tiup tidb-lightning -config tidb-lightning.toml -d ./schema -no-schema=false
+    tiup tidb-lightning -config tidb-lightning.toml -d 's3://my-bucket/schema-backup'
     ```
 
 2. Start the import by running `tidb-lightning`. If you launch the program directly in the command line, the process might exit unexpectedly after receiving a SIGHUP signal. In this case, it is recommended to run the program using a `nohup` or `screen` tool. For example:
@@ -141,7 +141,7 @@ If you need to enable TLS in the TiDB cluster, refer to [TiDB Lightning Configur
     ```shell
     export AWS_ACCESS_KEY_ID=${access_key}
     export AWS_SECRET_ACCESS_KEY=${secret_key}
-    nohup tiup tidb-lightning -config tidb-lightning.toml -no-schema=true > nohup.out 2>&1 &
+    nohup tiup tidb-lightning -config tidb-lightning.toml > nohup.out 2>&1 &
     ```
 
 3. After the import starts, you can check the progress of the import by either of the following methods:
@@ -150,7 +150,7 @@ If you need to enable TLS in the TiDB cluster, refer to [TiDB Lightning Configur
     - Check progress in [the monitoring dashboard](/tidb-lightning/monitor-tidb-lightning.md).
     - Check progress in [the TiDB Lightning web interface](/tidb-lightning/tidb-lightning-web-interface.md).
 
-4. After TiDB Lightning completes the import, it exits automatically. If you find the last 5 lines of its log print `the whole procedure completed`, the import is successful.
+4. After TiDB Lightning completes the import, it exits automatically. Check whether `tidb-lightning.log` contains `the whole procedure completed` in the last lines. If yes, the import is successful. If no, the import encounters an error. Address the error as instructed in the error message.
 
 > **Note:**
 >
@@ -229,15 +229,15 @@ block-allow-list:                     # If the DM version is earlier than v2.0.0
 
 # Configures the data source.
 mysql-instances:
-  - source-id: "mysql-01"               # Data source ID，i.e., source-id in source1.yaml
+  - source-id: "mysql-01"               # Data source ID, i.e., source-id in source1.yaml
     block-allow-list: "listA"           # References the block-allow-list configuration above.
-#       syncer-config-name: "global"    # References the syncers incremental data configuration.
-    meta:                               # When task-mode is "incremental" and the downstream database does not have a checkpoint, DM uses the binlog position as the starting point. If the downstream database has a checkpoint, DM uses the checkpoint as the starting point.
+#       syncer-config-name: "global"    # Name of the syncer configuration.
+    meta:                               # The position where the binlog replication starts when `task-mode` is `incremental` and the downstream database checkpoint does not exist. If the checkpoint exists, the checkpoint is used. If neither the `meta` configuration item nor the downstream database checkpoint exists, the migration starts from the latest binlog position of the upstream.
       binlog-name: "mysql-bin.000004"   # The binlog position recorded in "Step 1. Export an Aurora snapshot to Amazon S3". When the upstream database has source-replica switching, GTID mode is required.
       binlog-pos: 109227
       # binlog-gtid: "09bec856-ba95-11ea-850a-58f2b4af5188:1-9"
 
-   # (Optional) If you need to incrementally replicate data that has already been migrated in the full data migration, you need to enable the safe mode to avoid the incremental data replication error.
+# (Optional) If you need to incrementally replicate data that has already been migrated in the full data migration, you need to enable the safe mode to avoid the incremental data replication error.
    # This scenario is common in the following case: the full migration data does not belong to the data source's consistency snapshot, and after that, DM starts to replicate incremental data from a position earlier than the full migration.
    # syncers:            # The running configurations of the sync processing unit.
    #   global:            # Configuration name.

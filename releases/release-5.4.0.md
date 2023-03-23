@@ -4,7 +4,7 @@ title: TiDB 5.4 Release Notes
 
 # TiDB 5.4 Release Notes
 
-Release date：February 15, 2022
+Release date: February 15, 2022
 
 TiDB version: 5.4.0
 
@@ -57,7 +57,7 @@ In v5.4, the key new features or improvements are as follows:
 | TiKV | `log-level`, `log-format`, `log-file`, `log-rotation-size` | Modified | The names of TiKV log parameters are replaced with the names that are consistent with TiDB log parameters, which are `log.level`, `log.format`, `log.file.filename`, and `log.enable-timestamp`. If you only set the old parameters, and their values are set to non-default values, the old parameters remain compatible with the new parameters. If both old and new parameters are set, the new parameters take effect. For details, see [TiKV Configuration File - log](/tikv-configuration-file.md#log-new-in-v540). |
 | TiKV  |  `log-rotation-timespan`  | Deleted |  The timespan between log rotations. After this timespan passes, a log file is rotated, which means a timestamp is appended to the file name of the current log file, and a new log file is created. |
 | TiKV | `allow-remove-leader` | Deleted  | Determines whether to allow deleting the main switch. |
-| TiKV | `raft-msg-flush-interval` | Deleted | Determines the interval at which Raft messages are sent in batches. The Raft messages  are sent in batches at every interval specified by this configuration item. |
+| TiKV | `raft-msg-flush-interval` | Deleted | Determines the interval at which Raft messages are sent in batches. The Raft messages are sent in batches at every interval specified by this configuration item. |
 | PD | [`log.level`](/pd-configuration-file.md#level) | Modified | The default value is changed from "INFO" to "info", guaranteed to be case-insensitive. |
 | TiFlash | [`profile.default.enable_elastic_threadpool`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file) | Newly added  |  Determines whether to enable or disable the elastic thread pool function. Enabling this configuration item can significantly improve TiFlash CPU utilization in high concurrency scenarios. The default value is `false`. |
 | TiFlash | [`storage.format_version`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file) | Newly added | Specifies the version of DTFile. The default value is `2`, under which hashes are embedded in the data file. You can also set the value to `3`. When it is `3`, the data file contains metadata and token data checksum, and supports multiple hash algorithms. |
@@ -79,6 +79,12 @@ In v5.4, the key new features or improvements are as follows:
 - Since v5.4.0, if you create a SQL binding for an execution plan that has been cached via Plan Cache, the binding invalidates the plan already cached for the corresponding query. The new binding does not affect execution plans cached before v5.4.0.
 - In v5.3 and earlier versions, [TiDB Data Migration (DM)](https://docs.pingcap.com/tidb-data-migration/v5.3/) documentation is independent of TiDB documentation. Since v5.4, DM documentation is integrated into TiDB documentation with the same version. You can directly read [DM documentation](/dm/dm-overview.md) without accessing the DM documentation site.
 - Remove the experimental feature of Point-in-time recovery (PITR) along with cdclog. Since v5.4.0, cdclog-based PITR and cdclog are no longer supported.
+- Make the behavior of setting system variables to the "DEFAULT" more MySQL-compatible [#29680](https://github.com/pingcap/tidb/pull/29680)
+- Set the system variable `lc_time_names` to read-only [#30084](https://github.com/pingcap/tidb/pull/30084)
+- Set the scope of `tidb_store_limit` from INSTANCE or GLOBAL to GLOBAL [#30756](https://github.com/pingcap/tidb/pull/30756)
+- Forbid converting the integer type column to the time type column when the column contains zero [#25728](https://github.com/pingcap/tidb/pull/25728)
+- Fix the issue that no error is reported for the `Inf` or `NAN` value when inserting floating-point values [#30148](https://github.com/pingcap/tidb/pull/30148)
+- Fix the issue that the `REPLACE` statement incorrectly changes other rows when the auto ID is out of range [#30301](https://github.com/pingcap/tidb/pull/30301)
 
 ## New features
 
@@ -115,13 +121,13 @@ In v5.4, the key new features or improvements are as follows:
     - Support pusing down more functions to the MPP engine:
 
         - String functions: `LPAD()`, `RPAD()`, `STRCMP()`
-        - Date functions: `ADDDATE()`, `DATE_ADD()`, `DATE_SUB()`, `SUBDATE()`, `QUARTER()`
+        - Date functions: `ADDDATE(string, real)`, `DATE_ADD(string, real)`, `DATE_SUB(string, real)`, `SUBDATE(string, real)`, `QUARTER()`
 
     - Introduce the elastic thread pool feature to improve resource utilization (experimental)
     - Improve the efficiency of converting data from row-based storage format to column-based storage format when replicating data from TiKV, which brings 50% improvement in the overall performance of data replication
     - Improve TiFlash performance and stability by tuning the default values of some configuration items. In an HTAP hybrid load, the performance of simple queries on a single table improves up to 20%.
 
-    User documents: [Supported push-down calculations](/tiflash/use-tiflash.md#supported-push-down-calculations), [Configure the tiflash.toml file](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)
+    User documents: [Supported push-down calculations](/tiflash/tiflash-supported-pushdown-calculations.md), [Configure the tiflash.toml file](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)
 
 - **Read historical data within a specified time range through a session variable**
 
@@ -164,7 +170,7 @@ In v5.4, the key new features or improvements are as follows:
 
     Support using [Raft Engine](https://github.com/tikv/raft-engine) as the log storage engine in TiKV. Compared with RocksDB, Raft Engine can reduce TiKV I/O write traffic by up to 40% and CPU usage by 10%, while improving foreground throughput by about 5% and reducing tail latency by 20% under certain loads. In addition, Raft Engine improves the efficiency of log recycling and fixes the issue of log accumulation in extreme conditions.
 
-    Raft Engine is still an experimental feature and is disabled by default. Note that the data format of Raft Engine in v5.4.0 is not compatible with previous versions. Before upgrading or downgrading the cluster, you need to make sure that Raft Engine on all TiKV nodes is disabled. It is recommended to use Raft Engine only in v5.4.0 or a later version.
+    Raft Engine is still an experimental feature and is disabled by default. Note that the data format of Raft Engine in v5.4.0 is not compatible with previous versions. Before upgrading the cluster, you need to make sure that Raft Engine on all TiKV nodes is disabled. It is recommended to use Raft Engine only in v5.4.0 or a later version.
 
     [User document](/tikv-configuration-file.md#raft-engine)
 
@@ -208,7 +214,7 @@ In v5.4, the key new features or improvements are as follows:
 
    Backup & Restore (BR) supports Azure Blob Storage as a remote backup storage. If you deploy TiDB in Azure Cloud, now you can back up the cluster data to the Azure Blob Storage service.
 
-    [User document](/br/backup-and-restore-azblob.md)
+    [User document](/br/backup-and-restore-storages.md)
 
 ### Data migration
 
@@ -220,7 +226,7 @@ In v5.4, the key new features or improvements are as follows:
 
 - **TiDB Lightning introduces the schema name that stores the meta information for parallel import**
 
-    TiDB Lightning introduces the `meta-schema-name` configuration item. In parallel import mode, this parameter specifies the schema name that stores the meta information for each TiDB Lightning instance in the target cluster. By default, the value is "lightning_metadata". The value set for this parameter must be the same for each TiDB Lightning instance that participates in the same parallel import; otherwise, the correctness of the imported data can not be ensured.
+    TiDB Lightning introduces the `meta-schema-name` configuration item. In parallel import mode, this parameter specifies the schema name that stores the meta information for each TiDB Lightning instance in the target cluster. By default, the value is "lightning_metadata". The value set for this parameter must be the same for each TiDB Lightning instance that participates in the same parallel import; otherwise, the correctness of the imported data cannot be ensured.
 
   [User document](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)
 
@@ -294,7 +300,6 @@ In v5.4, the key new features or improvements are as follows:
 
 + TiDB
 
-    - Add a new system variable [`tidb_enable_paging`](/system-variables.md#tidb_enable_paging-new-in-v540) to determine whether to use paging to send Coprocessor requests. Enabling this feature can reduce the amount of data to process and to reduce latency and resource consumption [#30578](https://github.com/pingcap/tidb/issues/30578)
     - Support the `ADMIN {SESSION | INSTANCE | GLOBAL} PLAN_CACHE` syntax to clear the cached query plan [#30370](https://github.com/pingcap/tidb/pull/30370)
 
 + TiKV
@@ -429,7 +434,7 @@ In v5.4, the key new features or improvements are as follows:
 
         - Fix the issue of wrong import result that occurs when TiDB Lightning does not have the privilege to access the `mysql.tidb` table [#31088](https://github.com/pingcap/tidb/issues/31088)
         - Fix the issue that some checks are skipped when TiDB Lightning is restarted [#30772](https://github.com/pingcap/tidb/issues/30772)
-        - Fix the issue that TiDB Lighting fails to report the error when the S3 path does not exist [#30674](https://github.com/pingcap/tidb/pull/30674)
+        - Fix the issue that TiDB Lightning fails to report the error when the S3 path does not exist [#30674](https://github.com/pingcap/tidb/pull/30674)
 
     + TiDB Binlog
 

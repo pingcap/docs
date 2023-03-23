@@ -35,7 +35,7 @@ In v5.0, the key new features or improvements are as follows:
     >
     > The scope of the variable is changed from session to global, and the default value is changed from `20000` to `0`. If the application relies on the original default value, you need to use the `set global` statement to modify the variable to the original value after the upgrade.
 
-+ Control temporary tables’ syntax compatibility using the [`tidb_enable_noop_functions`](/system-variables.md#tidb_enable_noop_functions-new-in-v40) system variable. When this variable value is `OFF`, the `CREATE TEMPORARY TABLE` syntax returns an error.
++ Control temporary tables' syntax compatibility using the [`tidb_enable_noop_functions`](/system-variables.md#tidb_enable_noop_functions-new-in-v40) system variable. When this variable value is `OFF`, the `CREATE TEMPORARY TABLE` syntax returns an error.
 + Add the following system variables to directly control the garbage collection-related parameters:
     - [`tidb_gc_concurrency`](/system-variables.md#tidb_gc_concurrency-new-in-v50)
     - [`tidb_gc_enable`](/system-variables.md#tidb_gc_enable-new-in-v50)
@@ -43,7 +43,7 @@ In v5.0, the key new features or improvements are as follows:
     - [`tidb_gc_run_interval`](/system-variables.md#tidb_gc_run_interval-new-in-v50)
     - [`tidb_gc_scan_lock_mode`](/system-variables.md#tidb_gc_scan_lock_mode-new-in-v50)
 + Change the default value of [`enable-joint-consensus`](/pd-configuration-file.md#enable-joint-consensus-new-in-v50) from `false` to `true`, which enables the Joint Consensus feature by default.
-+ Change the value of [`tidb_enable_amend_pessimistic_txn`](/system-variables.md#tidb_enable_amend_pessimistic_txn-new-in-v407) from `0` or `1` to `ON` or `OFF`.
++ Change the value of `tidb_enable_amend_pessimistic_txn` from `0` or `1` to `ON` or `OFF`.
 + Change the default value of [`tidb_enable_clustered_index`](/system-variables.md#tidb_enable_clustered_index-new-in-v50) from `OFF` to `INT_ONLY` with the following new meanings:
     + `ON`: clustered index is enabled. Adding or deleting non-clustered indexes is supported.
     + `OFF`: clustered index is disabled. Adding or deleting non-clustered indexes is supported.
@@ -56,10 +56,10 @@ In v5.0, the key new features or improvements are as follows:
 ### Configuration file parameters
 
 + Add the [`index-limit`](/tidb-configuration-file.md#index-limit-new-in-v50) configuration item for TiDB. Its value defaults to `64` and ranges between `[64,512]`. A MySQL table supports 64 indexes at most. If its value exceeds the default setting and more than 64 indexes are created for a table, when the table schema is re-imported into MySQL, an error will be reported.
-+ Add the [`enable-enum-length-limit`](/tidb-configuration-file.md#enable-enum-length-limit-new-in-v50) configuration item for TiDB to be compatible and consistent with MySQL’s ENUM/SET length (ENUM length < 255). The default value is `true`.
++ Add the [`enable-enum-length-limit`](/tidb-configuration-file.md#enable-enum-length-limit-new-in-v50) configuration item for TiDB to be compatible and consistent with MySQL's ENUM/SET length (ENUM length < 255). The default value is `true`.
 + Replace the `pessimistic-txn.enable` configuration item with the [`tidb_txn_mode`](/system-variables.md#tidb_txn_mode) environment variable.
 + Replace the `performance.max-memory` configuration item with [`performance.server-memory-quota`](/tidb-configuration-file.md#server-memory-quota-new-in-v409)
-+ Replace the `tikv-client.copr-cache.enable` configuration item with [`tikv-client.copr-cache.capacity-mb`](/tidb-configuration-file.md#capacity-mb). If the item’s value is `0.0`, this feature is disabled. If the item’s value is greater than `0.0`, this feature is enabled. Its default value is `1000.0`.
++ Replace the `tikv-client.copr-cache.enable` configuration item with [`tikv-client.copr-cache.capacity-mb`](/tidb-configuration-file.md#capacity-mb). If the item's value is `0.0`, this feature is disabled. If the item's value is greater than `0.0`, this feature is enabled. Its default value is `1000.0`.
 + Replace the `rocksdb.auto-tuned` configuration item with [`rocksdb.rate-limiter-auto-tuned`](/tikv-configuration-file.md#rate-limiter-auto-tuned-new-in-v50).
 + Delete the `raftstore.sync-log` configuration item. By default, written data is forcibly spilled to the disk. Before v5.0, you can explicitly disable `raftstore.sync-log`. Since v5.0, the configuration value is forcibly set to `true`.
 + Change the default value of the `gc.enable-compaction-filter` configuration item from `false` to `true`.
@@ -68,7 +68,7 @@ In v5.0, the key new features or improvements are as follows:
 
 ### Others
 
-+ Before the upgrade, check the value of the TiDB configuration [`feedback-probability`](/tidb-configuration-file.md#feedback-probability). If the value is not 0, the "panic in the recoverable goroutine" error will occur after the upgrade, but this error does not affect the upgrade.
++ Before the upgrade, check the value of the TiDB configuration [`feedback-probability`](https://docs.pingcap.com/tidb/v5.0/tidb-configuration-file#feedback-probability). If the value is not 0, the "panic in the recoverable goroutine" error will occur after the upgrade, but this error does not affect the upgrade.
 + Forbid conversion between `VARCHAR` type and `CHAR` type during the column type change to avoid data correctness issues.
 
 ## New features
@@ -81,7 +81,7 @@ In v5.0, the key new features or improvements are as follows:
 
 With the list partitioning feature, you can effectively query and maintain tables with a large amount of data.
 
-With this feature enabled, partitions and how data is distributed among partitions are defined according to the `PARTITION BY LIST(expr) PARTITION part_name VALUES IN (...)` expression. The partitioned tables’ data set supports at most 1024 distinct integer values. You can define the values using the `PARTITION ... VALUES IN (...)` clause.
+With this feature enabled, partitions and how data is distributed among partitions are defined according to the `PARTITION BY LIST(expr) PARTITION part_name VALUES IN (...)` expression. The partitioned tables' data set supports at most 1024 distinct integer values. You can define the values using the `PARTITION ... VALUES IN (...)` clause.
 
 To enable list partitioning, set the session variable [`tidb_enable_list_partition`](/system-variables.md#tidb_enable_list_partition-new-in-v50) to `ON`.
 
@@ -111,11 +111,11 @@ The `EXCEPT` operator is a set operator, which combines the result sets of two q
 
 ### Transaction
 
-[User document](/system-variables.md#tidb_enable_amend_pessimistic_txn-new-in-v407), [#18005](https://github.com/pingcap/tidb/issues/18005)
+[#18005](https://github.com/pingcap/tidb/issues/18005)
 
 In the pessimistic transaction mode, if the tables involved in a transaction contain concurrent DDL operations or `SCHEMA VERSION` changes, the system automatically updates the transaction's `SCHEMA VERSION` to the latest to ensure the successful transaction commit, and to avoid that the client receives the `Information schema is changed` error when the transaction is interrupted by DDL operations or `SCHEMA VERSION` changes.
 
-This feature is disabled by default. To enable the feature, modify the value of [`tidb_enable_amend_pessimistic_txn`](/system-variables.md#tidb_enable_amend_pessimistic_txn-new-in-v407) system variable. This feature is introduced in v4.0.7 and has the following issues fixed in v5.0:
+This feature is disabled by default. To enable the feature, modify the value of `tidb_enable_amend_pessimistic_txn` system variable. This feature is introduced in v4.0.7 and has the following issues fixed in v5.0:
 
 + The compatibility issue that occurs when TiDB Binlog executes `Add Column` operations
 + The data inconsistency issue that occurs when using the feature together with the unique index
@@ -123,7 +123,7 @@ This feature is disabled by default. To enable the feature, modify the value of 
 
 Currently, this feature still has the following incompatibility issues:
 
-+ Transaction’s semantics might change when there are concurrent transactions
++ Transaction's semantics might change when there are concurrent transactions
 + Known compatibility issue that occurs when using the feature together with TiDB Binlog
 + Incompatibility with `Change Column`
 
@@ -151,7 +151,7 @@ This feature is introduced in v5.0. To use the feature, enable the system variab
 
 ### MPP architecture
 
-[User document](/tiflash/use-tiflash.md)
+[User document](/tiflash/use-tiflash-mpp-mode.md)
 
 TiDB introduces the MPP architecture through TiFlash nodes. This architecture allows multiple TiFlash nodes to share the execution workload of large join queries.
 
@@ -159,7 +159,7 @@ When the MPP mode is on, TiDB determines whether to send a query to the MPP engi
 
 In the TPC-H 100 benchmark test, TiFlash MPP delivers significant processing speed over analytic engines of traditional analytic databases and SQL on Hadoop. With this architecture, you can perform large-scale analytic queries directly on the latest transaction data, with a higher performance than traditional offline analytic solutions. According to the benchmark, with the same cluster resource, TiDB 5.0 MPP shows 2 to 3 times of speedup over Greenplum 6.15.0 and Apache Spark 3.1.1, and some queries have 8 times better performance.
 
-Currently, the main features that the MPP mode does not support are as follows (For details, refer to [Use TiFlash](/tiflash/use-tiflash.md)):
+Currently, the main features that the MPP mode does not support are as follows (For details, refer to [Use TiFlash](/tiflash/use-tiflash-mpp-mode.md)):
 
 + Table partitioning
 + Window Function
@@ -301,13 +301,13 @@ Before v5.0, to balance the contention for I/O resources between background task
 
 You can disable this feature by modifying the `rate-limiter-auto-tuned` configuration item.
 
-#### Enable the GC Compaction Filter feature by default to reduce GC’s consumption of CPU and I/O resources
+#### Enable the GC Compaction Filter feature by default to reduce GC's consumption of CPU and I/O resources
 
 [User document](/garbage-collection-configuration.md#gc-in-compaction-filter), [#18009](https://github.com/pingcap/tidb/issues/18009)
 
 When TiDB performs garbage collection (GC) and data compaction, partitions occupy CPU and I/O resources. Overlapping data exists during the execution of these two tasks.
 
-To reduce GC’s consumption of CPU and I/O resources, the GC Compaction Filter feature combines these two tasks into one and executes them in the same task. This feature is enabled by default. You can disable it by configuring `gc.enable-compaction-filter = false`.
+To reduce GC's consumption of CPU and I/O resources, the GC Compaction Filter feature combines these two tasks into one and executes them in the same task. This feature is enabled by default. You can disable it by configuring `gc.enable-compaction-filter = false`.
 
 #### TiFlash limits the compression and data sorting's use of I/O resources (**experimental feature**)
 
@@ -321,7 +321,7 @@ This feature is disabled by default. You can enable this feature by modifying th
 
 [User document](/sql-plan-management.md)
 
-#### SQL Binding supports the `INSERT`、`REPLACE`、`UPDATE`、`DELETE` statements
+#### SQL Binding supports the `INSERT`, `REPLACE`, `UPDATE`, `DELETE` statements
 
 When tuning performance or maintaining the database, if you find that the system performance is unstable due to unstable execution plans, you can select a manually optimized SQL statement according to your judgement or tested by `EXPLAIN ANALYZE`. You can bind the optimized SQL statement to the SQL statement to be executed in the application code to ensure stable performance.
 
@@ -341,7 +341,7 @@ Add a system variable [`tidb_allow_fallback_to_tikv`](/system-variables.md#tidb_
 
 ### Improve TiCDC stability and alleviate the OOM issue caused by replicating too much incremental data
 
-[User document](/ticdc/manage-ticdc.md#unified-sorter), [#1150](https://github.com/pingcap/tiflow/issues/1150)
+[User document](/ticdc/ticdc-manage-changefeed.md#unified-sorter), [#1150](https://github.com/pingcap/tiflow/issues/1150)
 
 In TiCDC v4.0.9 or earlier versions, replicating too much data change might cause OOM. In v5.0, the Unified Sorter feature is enabled by default to mitigate OOM issues caused by the following scenarios:
 
@@ -368,7 +368,7 @@ This feature is enabled by default. You can disable it by running the `pd-ctl co
 
 ### Optimize the memory management module to reduce system OOM risks
 
-Track the memory usage of aggregate functions. This feature is enabled by default. When SQL statements with aggregate functions are executed, if the total memory usage of the current query exceeds the threshold set by [`mem-quota-query`](/tidb-configuration-file.md#mem-quota-query), the system automatically performs operations defined by [`oom-action`](/tidb-configuration-file.md#oom-action).
+Track the memory usage of aggregate functions. This feature is enabled by default. When SQL statements with aggregate functions are executed, if the total memory usage of the current query exceeds the threshold set by `mem-quota-query`, the system automatically performs operations defined by `oom-action`.
 
 ### Improve the system availability during network partition
 

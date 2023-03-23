@@ -13,8 +13,17 @@ Garbage collection is configured via the following system variables:
 * [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50)
 * [`tidb_gc_concurrency`](/system-variables.md#tidb_gc_concurrency-new-in-v50)
 * [`tidb_gc_scan_lock_mode`](/system-variables.md#tidb_gc_scan_lock_mode-new-in-v50)
+* [`tidb_gc_max_wait_time`](/system-variables.md#tidb_gc_max_wait_time-new-in-v610)
 
 ## GC I/O limit
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> This section is only applicable to on-premises TiDB. TiDB Cloud does not have a GC I/O limit by default.
+
+</CustomContent>
 
 TiKV supports the GC I/O limit. You can configure `gc.max-write-bytes-per-sec` to limit writes of a GC worker per second, and thus to reduce the impact on normal requests.
 
@@ -36,9 +45,25 @@ The `CENTRAL` garbage collection mode is no longer supported. The `DISTRIBUTED` 
 
 For information on changes in previous releases, refer to earlier versions of this document using the _TIDB version selector_ in the left hand menu.
 
+## Changes in TiDB 6.1.0
+
+Before TiDB v6.1.0, the transaction in TiDB does not affect the GC safe point. Since v6.1.0, TiDB considers the startTS of the transaction when calculating the GC safe point, to resolve the problem that the data to be accessed has been cleared. If the transaction is too long, the safe point will be blocked for a long time, which affects the application performance.
+
+In TiDB v6.1.0, the system variable [`tidb_gc_max_wait_time`](/system-variables.md#tidb_gc_max_wait_time-new-in-v610) is introduced to control the maximum time that active transactions block the GC safe point. After the value is exceeded, the GC safe point is forwarded forcefully.
+
 ### GC in Compaction Filter
 
-Based on the `DISTRIBUTED` GC mode, the mechanism of GC in Compaction Filter uses the compaction process of RocksDB, instead of a separate GC worker thread, to run GC. This new GC mechanism helps to avoid extra disk read caused by GC. Also, after clearing the obsolete data, it avoids a large number of left tombstone marks which degrade the sequential scan performance. The following example shows how to enable the mechanism in the TiKV configuration file:
+Based on the `DISTRIBUTED` GC mode, the mechanism of GC in Compaction Filter uses the compaction process of RocksDB, instead of a separate GC worker thread, to run GC. This new GC mechanism helps to avoid extra disk read caused by GC. Also, after clearing the obsolete data, it avoids a large number of left tombstone marks which degrade the sequential scan performance.
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> The following examples of modifying TiKV configurations are only applicable to on-premises TiDB. For TiDB Cloud, the mechanism of GC in Compaction Filter is enabled by default.
+
+</CustomContent>
+
+The following example shows how to enable the mechanism in the TiKV configuration file:
 
 {{< copyable "" >}}
 
@@ -47,7 +72,7 @@ Based on the `DISTRIBUTED` GC mode, the mechanism of GC in Compaction Filter use
 enable-compaction-filter = true
 ```
 
-You can also enable this GC mechanism by modifying the configuration online. See the following example:
+You can also enable this GC mechanism by modifying the configuration dynamically. See the following example:
 
 {{< copyable "sql" >}}
 

@@ -205,7 +205,7 @@ In the SQL statement above, it can be known from the `x in(1,13)` condition that
 
 ##### Scenario two
 
-Partition pruning applies to the query condition of interval comparison，such as `between`, `>`, `<`, `=`, `>=`, `<=`. For example:
+Partition pruning applies to the query condition of interval comparison, such as `between`, `>`, `<`, `=`, `>=`, `<=`. For example:
 
 {{< copyable "sql" >}}
 
@@ -238,10 +238,8 @@ Partition pruning applies to the scenario where the partition expression is in t
 
 If the `fn` function is monotonous, for any `x` and `y`, if `x > y`, then `fn(x) > fn(y)`. Then this `fn` function can be called strictly monotonous. For any `x` and `y`, if `x > y`, then `fn(x) >= fn(y)`. In this case, `fn` could also be called "monotonous". Theoretically, all monotonous functions, strictly or not, are supported by partition pruning. Currently, TiDB only supports the following monotonous functions:
 
-```
-unix_timestamp
-to_days
-```
+* [`UNIX_TIMESTAMP()`](/functions-and-operators/date-and-time-functions.md)
+* [`TO_DAYS()`](/functions-and-operators/date-and-time-functions.md)
 
 For example, partition pruning takes effect when the partition expression is in the form of `fn(col)`, where the `fn` is monotonous function `to_days`:
 
@@ -266,7 +264,7 @@ explain select * from t where id > '2020-04-18';
 
 #### Inapplicable scenario in Range partitioned tables
 
-Because the rule optimization of partition pruning is performed during the generation phase of the query plan, partition pruning is not suitable for scenarios where the filter conditions can be obtained only during the execution phase. For example: 
+Because the rule optimization of partition pruning is performed during the generation phase of the query plan, partition pruning is not suitable for scenarios where the filter conditions can be obtained only during the execution phase. For example:
 
 {{< copyable "sql" >}}
 

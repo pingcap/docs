@@ -15,7 +15,7 @@ To enable OpenAPI, perform one of the following operations:
     openapi = true
     ```
 
-+ If your DM cluster has been deployed using TiUP, add the following configuration to the topology file：
++ If your DM cluster has been deployed using TiUP, add the following configuration to the topology file:
 
     ```yaml
     server_configs:
@@ -358,7 +358,7 @@ curl -X 'DELETE' \
 
 This API is a synchronous interface. If the request is successful, the information of the corresponding data source is returned.
 
-> **NOTE:**
+> **Note:**
 >
 > When you use this API to update the data source configuration, make sure that there are no running tasks under the current data source.
 

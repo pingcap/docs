@@ -64,7 +64,7 @@ In most scenarios, to improve execution efficiency, JDBC obtains query results i
 
 Usually, there are two kinds of processing methods in JDBC:
 
-- [Set `FetchSize` to `Integer.MIN_VALUE`](https://dev.mysql.com/doc/connector-j/5.1/en/connector-j-reference-implementation-notes.html#ResultSet) to ensure that the client does not cache. The client will read the execution result from the network connection through `StreamingResult`.
+- [Set `FetchSize` to `Integer.MIN_VALUE`](https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-reference-implementation-notes.html#ResultSet) to ensure that the client does not cache. The client will read the execution result from the network connection through `StreamingResult`.
 
     When the client uses the streaming read method, it needs to finish reading or close `resultset` before continuing to use the statement to make a query. Otherwise, the error `No statements may be issued when any streaming result sets are open and in use on a given connection. Ensure that you have called .close() on any active streaming result sets before attempting more queries.` is returned.
 
@@ -76,7 +76,7 @@ TiDB supports both methods, but it is preferred that you use the first method, b
 
 ### MySQL JDBC parameters
 
-JDBC usually provides implementation-related configurations in the form of JDBC URL parameters. This section introduces [MySQL Connector/J's parameter configurations](https://dev.mysql.com/doc/connector-j/5.1/en/connector-j-reference-configuration-properties.html) (If you use MariaDB, see [MariaDB's parameter configurations](https://mariadb.com/kb/en/library/about-mariadb-connector-j/#optional-url-parameters)). Because this document cannot cover all configuration items, it mainly focuses on several parameters that might affect performance.
+JDBC usually provides implementation-related configurations in the form of JDBC URL parameters. This section introduces [MySQL Connector/J's parameter configurations](https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-reference-configuration-properties.html) (If you use MariaDB, see [MariaDB's parameter configurations](https://mariadb.com/kb/en/library/about-mariadb-connector-j/#optional-url-parameters)). Because this document cannot cover all configuration items, it mainly focuses on several parameters that might affect performance.
 
 #### Prepare-related parameters
 
@@ -84,11 +84,11 @@ This section introduces parameters related to `Prepare`.
 
 ##### `useServerPrepStmts`
 
-`useServerPrepStmts` is set to `false` by default, that is, even if you use the Prepare API, the “prepare” operation will be done only on the client. To avoid the parsing overhead of the server, if the same SQL statement uses the Prepare API multiple times, it is recommended to set this configuration to `true`.
+`useServerPrepStmts` is set to `false` by default, that is, even if you use the Prepare API, the "prepare" operation will be done only on the client. To avoid the parsing overhead of the server, if the same SQL statement uses the Prepare API multiple times, it is recommended to set this configuration to `true`.
 
 To verify that this setting already takes effect, you can do:
 
-- Go to TiDB monitoring dashboard and view the request command type through **Query Summary** > **QPS By Instance**.
+- Go to TiDB monitoring dashboard and view the request command type through **Query Summary** > **CPS By Instance**.
 - If `COM_QUERY` is replaced by `COM_STMT_EXECUTE` or `COM_STMT_PREPARE` in the request, it means this setting already takes effect.
 
 ##### `cachePrepStmts`
@@ -97,10 +97,8 @@ Although `useServerPrepStmts=true` allows the server to execute Prepared Stateme
 
 To verify that this setting already takes effect, you can do:
 
-- Go to TiDB monitoring dashboard and view the request command type through **Query Summary** > **QPS By Instance**.
+- Go to TiDB monitoring dashboard and view the request command type through **Query Summary** > **CPS By Instance**.
 - If the number of `COM_STMT_EXECUTE` in the request is far more than the number of `COM_STMT_PREPARE`, it means this setting already takes effect.
-
-![QPS By Instance](/media/java-practice-2.png)
 
 In addition, configuring `useConfigs=maxPerformance` will configure multiple parameters at the same time, including `cachePrepStmts=true`.
 
@@ -112,7 +110,7 @@ The Prepared Statements that exceed this maximum length will not be cached, so t
 
 You need to check whether this setting is too small if you:
 
-- Go to TiDB monitoring dashboard and view the request command type through **Query Summary** > **QPS By Instance**.
+- Go to TiDB monitoring dashboard and view the request command type through **Query Summary** > **CPS By Instance**.
 - And find that `cachePrepStmts=true` has been configured, but `COM_STMT_PREPARE` is still mostly equal to `COM_STMT_EXECUTE` and `COM_STMT_CLOSE` exists.
 
 ##### `prepStmtCacheSize`
@@ -121,7 +119,7 @@ You need to check whether this setting is too small if you:
 
 To verify that this setting already takes effect, you can do:
 
-- Go to TiDB monitoring dashboard and view the request command type through **Query Summary** > **QPS By Instance**.
+- Go to TiDB monitoring dashboard and view the request command type through **Query Summary** > **CPS By Instance**.
 - If the number of `COM_STMT_EXECUTE` in the request is far more than the number of `COM_STMT_PREPARE`, it means this setting already takes effect.
 
 #### Batch-related parameters
@@ -129,7 +127,7 @@ To verify that this setting already takes effect, you can do:
 While processing batch writes, it is recommended to configure `rewriteBatchedStatements=true`. After using `addBatch()` or `executeBatch()`, JDBC still sends SQL one by one by default, for example:
 
 ```java
-pstmt = prepare(“insert into t (a) values(?)”);
+pstmt = prepare("insert into t (a) values(?)");
 pstmt.setInt(1, 10);
 pstmt.addBatch();
 pstmt.setInt(1, 11);
@@ -198,15 +196,7 @@ In addition, because of a [client bug](https://bugs.mysql.com/bug.php?id=96623),
 
 Through monitoring, you might notice that although the application only performs `INSERT` operations to the TiDB cluster, there are a lot of redundant `SELECT` statements. Usually this happens because JDBC sends some SQL statements to query the settings, for example, `select @@session.transaction_read_only`. These SQL statements are useless for TiDB, so it is recommended that you configure `useConfigs=maxPerformance` to avoid extra overhead.
 
-`useConfigs=maxPerformance` configuration includes a group of configurations：
-
-```ini
-cacheServerConfiguration=true
-useLocalSessionState=true
-elideSetAutoCommits=true
-alwaysSendSetIsolation=false
-enableQueryTimeouts=false
-```
+`useConfigs=maxPerformance` includes a group of configurations. To get the detailed configurations in MySQL Connector/J 8.0 and those in MySQL Connector/J 5.1, see [mysql-connector-j 8.0](https://github.com/mysql/mysql-connector-j/blob/release/8.0/src/main/resources/com/mysql/cj/configurations/maxPerformance.properties) and [mysql-connector-j 5.1](https://github.com/mysql/mysql-connector-j/blob/release/5.1/src/com/mysql/jdbc/configs/maxPerformance.properties) respectively.
 
 After it is configured, you can check the monitoring to see a decreased number of `SELECT` statements.
 
@@ -233,7 +223,7 @@ The application needs to return the connection after finishing using it. It is a
 
 ### Probe configuration
 
-The connection pool maintains persistent connections to TiDB. TiDB does not proactively close client connections by default (unless an error is reported), but generally there will be network proxies such as LVS or HAProxy between the client and TiDB. Usually, these proxies will proactively clean up connections that are idle for a certain period of time. In addition to paying attention to the idle configuration of the proxies, the connection pool also needs to keep alive or probe connections.
+The connection pool maintains persistent connections to TiDB. TiDB does not proactively close client connections by default (unless an error is reported), but generally there will be network proxies such as LVS or HAProxy between the client and TiDB. Usually, these proxies will proactively clean up connections that are idle for a certain period of time (controlled by the proxy's idle configuration). In addition to paying attention to the idle configuration of the proxies, the connection pool also needs to keep alive or probe connections.
 
 If you often see the following error in your Java application:
 
@@ -332,7 +322,7 @@ In the real world, applications might use [Spring Transaction](https://docs.spri
 
 By adding the `@Transactional` annotation to the method definition, AOP starts the transaction before the method is called, and commits the transaction before the method returns the result. If your application has a similar need, you can find `@Transactional` in code to determine when the transaction is started and closed.
 
-Pay attention to a special case of embedding. If it occurs, Spring will behave differently based on the [Propagation](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/transaction/annotation/Propagation.html) configuration. Because TiDB does not support savepoint, nested transactions are not supported yet.
+Pay attention to a special case of embedding. If it occurs, Spring will behave differently based on the [Propagation](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/transaction/annotation/Propagation.html) configuration.
 
 ## Misc
 

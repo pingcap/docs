@@ -1,18 +1,18 @@
 ---
-title: Data Migration Overview
+title: TiDB Data Migration Overview
 summary: Learn about the Data Migration tool, the architecture, the key components, and features.
-aliases: ['/docs/tidb-data-migration/dev/overview/']
+aliases: ['/docs/tidb-data-migration/dev/overview/','/docs/tidb-data-migration/dev/feature-overview/','/tidb/dev/dm-key-features']
 ---
 
 <!-- markdownlint-disable MD007 -->
 
-# Data Migration Overview
+# TiDB Data Migration Overview
 
 <!--
 ![star](https://img.shields.io/github/stars/pingcap/tiflow?style=for-the-badge&logo=github) ![license](https://img.shields.io/github/license/pingcap/tiflow?style=for-the-badge) ![forks](https://img.shields.io/github/forks/pingcap/tiflow?style=for-the-badge)
 -->
 
-[TiDB Data Migration](https://github.com/pingcap/dm) (DM) is an integrated data migration task management platform, which supports the full data migration and the incremental data replication from MySQL-compatible databases (such as MySQL, MariaDB, and Aurora MySQL) into TiDB. It can help to reduce the operation cost of data migration and simplify the troubleshooting process.
+[TiDB Data Migration](https://github.com/pingcap/tiflow/tree/master/dm) (DM) is an integrated data migration task management platform, which supports the full data migration and the incremental data replication from MySQL-compatible databases (such as MySQL, MariaDB, and Aurora MySQL) into TiDB. It can help to reduce the operation cost of data migration and simplify the troubleshooting process.
 
 ## Basic features
 
@@ -21,7 +21,7 @@ aliases: ['/docs/tidb-data-migration/dev/overview/']
 - **Migrating and merging MySQL shards.** DM supports migrating and merging multiple MySQL database instances upstream to one TiDB database downstream. It supports customizing replication rules for different migration scenarios. It can automatically detect and handle DDL changes of upstream MySQL shards, which greatly reduces the operational cost.
 - **Various types of filters.** You can predefine event types, regular expressions, and SQL expressions to filter out MySQL binlog events during the data migration process.
 - **Centralized management.** DM supports thousands of nodes in a cluster. It can run and manage a large number of data migration tasks concurrently.
-- **Optimization of the third-party Online Schema Change process.** In the MySQL ecosystem, tools such as gh-ost and pt-osc are widely used. DM optimizes its change process to avoid unnecessary migration of intermediate data. For details, see [online-ddl](/dm/dm-key-features.md#online-ddl-tools).
+- **Optimization of the third-party Online Schema Change process.** In the MySQL ecosystem, tools such as gh-ost and pt-osc are widely used. DM optimizes its change process to avoid unnecessary migration of intermediate data. For details, see [online-ddl](/dm/dm-online-ddl-tool-support.md).
 - **High availability.** DM supports data migration tasks to be scheduled freely on different nodes. The running tasks are not affected when a small number of nodes crash.
 
 ## Quick installation
@@ -68,14 +68,11 @@ You are welcome to participate in the DM open sourcing project. Your contributio
 
 ## Community support
 
-You can learn about DM through the online documentation. If you have any questions, contact us in one of the following ways.
-
-- [GitHub](https://github.com/pingcap/tiflow/tree/master/dm)
-- [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=sig-migrate&ref=pingcap-docs)
+You can learn about DM through the online documentation. If you have any questions, contact us on [GitHub](https://github.com/pingcap/tiflow/tree/master/dm).
 
 ## License
 
-DM complies with the Apache 2.0 license. For more details, see [LICENSE](https://github.com/pingcap/tiflow/blob/master/dm/LICENSE).
+DM complies with the Apache 2.0 license. For more details, see [LICENSE](https://github.com/pingcap/tiflow/blob/master/LICENSE).
 
 ## DM versions
 
@@ -83,7 +80,7 @@ Before v5.4, the DM documentation is independent of the TiDB documentation. To a
 
 - [DM v5.3 documentation](https://docs.pingcap.com/tidb-data-migration/v5.3)
 - [DM v2.0 documentation](https://docs.pingcap.com/tidb-data-migration/v2.0/)
-- [DM v1.0 documentation](https://docs.pingcap.com/tidb-data-migration/v1.0/) 
+- [DM v1.0 documentation](https://docs.pingcap.com/tidb-data-migration/v1.0/)
 
 > **Note:**
 >

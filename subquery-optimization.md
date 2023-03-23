@@ -58,8 +58,8 @@ explain select * from t1 where t1.a in (select t2.a from t2);
 | ├─HashAgg_21(Build)          | 7992.00 | root      |                        | group by:test.t2.a, funcs:firstrow(test.t2.a)->test.t2.a                   |
 | │ └─IndexReader_28           | 9990.00 | root      |                        | index:IndexFullScan_27                                                     |
 | │   └─IndexFullScan_27       | 9990.00 | cop[tikv] | table:t2, index:idx(a) | keep order:false, stats:pseudo                                             |
-| └─TableReader_11(Probe)      | 1.00    | root      |                        | data:TableRangeScan_10                                                     |
-|   └─TableRangeScan_10        | 1.00    | cop[tikv] | table:t1               | range: decided by [test.t2.a], keep order:false, stats:pseudo              |
+| └─TableReader_11(Probe)      | 7992.00 | root      |                        | data:TableRangeScan_10                                                     |
+|   └─TableRangeScan_10        | 7992.00 | cop[tikv] | table:t1               | range: decided by [test.t2.a], keep order:false, stats:pseudo              |
 +------------------------------+---------+-----------+------------------------+----------------------------------------------------------------------------+
 ```
 
@@ -75,7 +75,7 @@ At present, for a subquery in such scenarios, if the subquery is not a correlate
 create table t1(a int);
 create table t2(a int);
 insert into t2 values(1);
-explain select * from t where exists (select * from t2);
+explain select * from t1 where exists (select * from t2);
 ```
 
 ```sql
@@ -83,6 +83,14 @@ explain select * from t where exists (select * from t2);
 | id                     | estRows  | task      | access object | operator info                  |
 +------------------------+----------+-----------+---------------+--------------------------------+
 | TableReader_12         | 10000.00 | root      |               | data:TableFullScan_11          |
-| └─TableFullScan_11     | 10000.00 | cop[tikv] | table:t       | keep order:false, stats:pseudo |
+| └─TableFullScan_11     | 10000.00 | cop[tikv] | table:t1      | keep order:false, stats:pseudo |
 +------------------------+----------+-----------+---------------+--------------------------------+
 ```
+
+In the preceding optimization, the optimizer automatically optimizes the statement execution. In addition, you can also add the [`SEMI_JOIN_REWRITE`](/optimizer-hints.md#semi_join_rewrite) hint to further rewrite the statement.
+
+If this hint is not used to rewrite the query, when the hash join is selected in the execution plan, the semi-join query can only use the subquery to build a hash table. In this case, when the result of the subquery is bigger than that of the outer query, the execution speed might be slower than expected.
+
+Similarly, when the index join is selected in the execution plan, the semi-join query can only use the outer query as the driving table. In this case, when the result of the subquery is smaller than that of the outer query, the execution speed might be slower than expected.
+
+When `SEMI_JOIN_REWRITE()` is used to rewrite the query, the optimizer can extend the selection range to select a better execution plan.

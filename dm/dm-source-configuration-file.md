@@ -1,10 +1,10 @@
 ---
-title: Upstream Database Configuration File
+title: Upstream Database Configuration File of TiDB Data Migration
 summary: Learn the configuration file of the upstream database
 aliases: ['/docs/tidb-data-migration/dev/source-configuration-file/']
 ---
 
-# Upstream Database Configuration File
+# Upstream Database Configuration File of TiDB Data Migration
 
 This document introduces the configuration file of the upstream database, including a configuration file template and the description of each configuration parameter in this file.
 
@@ -22,7 +22,7 @@ enable-gtid: false
 enable-relay: false       # Since DM v2.0.2, this configuration item is deprecated. To enable the relay log feature, use the `start-relay` command instead.
 relay-binlog-name: ""     # The file name from which DM-worker starts to pull the binlog.
 relay-binlog-gtid: ""     # The GTID from which DM-worker starts to pull the binlog.
-relay-dir: "relay-dir"  # The directory used to store relay log. The default value is "relay-dir".
+# relay-dir: "relay-dir"  # The directory used to store relay log. The default value is "relay-dir". This configuration item is marked as deprecated since v6.1 and replaced by a parameter of the same name in the dm-worker configuration.
 
 
 from:
@@ -111,4 +111,4 @@ Starting from DM v2.0.2, you can configure binlog event filters in the source co
 | Parameter        | Description                                    |
 | :------------ | :--------------------------------------- |
 | `case-sensitive` | Determines whether the filtering rules are case-sensitive. The default value is `false`. |
-| `filters` | Sets binlog event filtering rules. For details, see [Binlog event filter parameter explanation](/dm/dm-key-features.md#parameter-explanation-2). |
+| `filters` | Sets binlog event filtering rules. For details, see [Binlog event filter parameter explanation](/dm/dm-binlog-event-filter.md#parameter-descriptions). |

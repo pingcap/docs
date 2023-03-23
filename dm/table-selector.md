@@ -1,10 +1,10 @@
 ---
-title: Table Selector
+title: Table Selector of TiDB Data Migration
 summary: Learn about Table Selector used by the table routing, binlog event filtering, and column mapping rule of Data Migration.
 aliases: ['/docs/tidb-data-migration/dev/table-selector/']
 ---
 
-# Table Selector
+# Table Selector of TiDB Data Migration
 
 Table selector provides a match rule based on [wildcard characters](https://en.wikipedia.org/wiki/Wildcard_character) for schema/table. To match a specified table, configure `schema-pattern`/`table-pattern`.
 
@@ -32,8 +32,8 @@ Table selector uses the following two wildcard characters in `schema-pattern`/`t
 - Matching all schemas and tables that have a `schema_` prefix in the schema name:
 
     ```yaml
-    schema-pattern： "schema_*"
-    table-pattern： ""
+    schema-pattern: "schema_*"
+    table-pattern: ""
     ```
 
 - Matching all tables that have a `schema_` prefix in the schema name and a `table_` prefix in the table name:

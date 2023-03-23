@@ -5,7 +5,7 @@ summary: Learn the concept, user scenarios, usages, and limitations of importing
 
 # Use TiDB Lightning to Import Data in Parallel
 
-Since v5.3.0, the [Local-backend mode](/tidb-lightning/tidb-lightning-backends.md#tidb-lightning-local-backend) of TiDB Lightning supports the parallel import of a single table or multiple tables. By simultaneously running multiple TiDB Lightning instances, you can import data in parallel from different single tables or multiple tables. In this way, TiDB Lightning provides the ability to scale horizontally, which can greatly reduce the time required to import large amounts of data.
+Since v5.3.0, the [physical import mode](/tidb-lightning/tidb-lightning-physical-import-mode.md) of TiDB Lightning supports the parallel import of a single table or multiple tables. By simultaneously running multiple TiDB Lightning instances, you can import data in parallel from different single tables or multiple tables. In this way, TiDB Lightning provides the ability to scale horizontally, which greatly reduces the time required to import large amount of data.
 
 In technical implementation, TiDB Lightning records the meta data of each instance and the data of each imported table in the target TiDB, and coordinates the Row ID allocation range of different instances, the record of global Checksum, and the configuration changes and recovery of TiKV and PD.
 
@@ -18,17 +18,9 @@ You can use TiDB Lightning to import data in parallel in the following scenarios
 >
 > - Parallel import only supports initialized empty tables in TiDB and does not support migrating data to tables with data written by existing services. Otherwise, data inconsistencies may occur.
 >
-> - Parallel import is usually used in local-backend mode.
+> - Parallel import is usually used in the physical import mode.
 >
-> - Apply only one backend at a time when using multiple TiDB Lightning instances to import data to the same target. For example, you cannot import data to the same TiDB cluster in both Local-backend and TiDB-backend modes at the same time.
-
-The following diagram shows how importing sharded schemas and sharded tables works. In this scenario, you can use multiple TiDB Lightning instances to import MySQL sharded tables to a downstream TiDB cluster.
-
-![Import sharded schemas and sharded tables](/media/parallel-import-shard-tables-en.png)
-
-The following diagram shows how importing single tables works. In this scenario, you can use multiple TiDB Lightning instances to split data from a single table and import it in parallel to a downstream TiDB cluster.
-
-![Import single tables](/media/parallel-import-single-tables-en.png)
+> - Apply only one backend at a time when using multiple TiDB Lightning instances to import data to the same target. For example, you cannot import data to the same TiDB cluster in both the physical and logical import modes at the same time.
 
 ## Considerations
 
@@ -41,7 +33,7 @@ But when migrating data in parallel, you need to take the following into conside
 
 ### Handle conflicts between primary keys or unique indexes
 
-When using [Local-backend mode](/tidb-lightning/tidb-lightning-backends.md#tidb-lightning-local-backend) to import in parallel, you need to ensure that there are no primary key or unique index conflicts between data sources, and between the tables in the target TiDB cluster. Ensure that there are no data writes in the target table during import. Otherwise, TiDB Lightning will not be able to guarantee the correctness of the imported data, and the target table will contain inconsistent indexes after the import is completed.
+When using [the physical import mode](/tidb-lightning/tidb-lightning-physical-import-mode.md) to import data in parallel, ensure that there are no primary key or unique index conflicts between data sources, and between the tables in the target TiDB cluster, and there are no data writes in the target table during import. Otherwise, TiDB Lightning will fail to guarantee the correctness of the imported data, and the target table will contain inconsistent indexes after the import is completed.
 
 ### Optimize import performance
 
@@ -110,16 +102,16 @@ backend = "local"
 
 # Specify the path for local sorting data.
 sorted-kv-dir = "/path/to/sorted-dir"
-
-# Specify the routes for shard schemas and tables.
-[[routes]]
-schema-pattern = "my_db"
-table-pattern = "my_table_*"
-target-schema = "my_db"
-target-table = "my_table"
 ```
 
-If the data source is stored in external storage such as Amazon S3 or GCS, see [External Storages](/br/backup-and-restore-storages.md).
+If the data source is stored in external storage such as Amazon S3 or GCS, you need to configure additional parameters for connection. You can specify parameters for such configuration. For example, the following example assumes that data is stored in Amazon S3:
+
+```
+./tidb-lightning --tidb-port=4000 --pd-urls=127.0.0.1:2379 --backend=local --sorted-kv-dir=/tmp/sorted-kvs \
+    -d 's3://my-bucket/sql-backup'
+```
+
+For more parameter descriptions, see [external storage URI](/br/backup-and-restore-storages.md#uri-format).
 
 ### Step 3: Start TiDB Lightning to import data
 
@@ -134,7 +126,7 @@ nohup tiup tidb-lightning -config tidb-lightning.toml > nohup.out &
 
 During parallel import, TiDB Lightning automatically performs the following checks after starting the task.
 
-- Check whether there is enough space on the local disk and on the TiKV cluster for importing data. TiDB Lightning samples the data sources and estimates the percentage of the index size from the sample result. Because indexes are included in the estimation, there may be cases where the size of the source data is less than the available space on the local disk, but still the check fails.
+- Check whether there is enough space on the local disk (controlled by the `sort-kv-dir` configuration) and on the TiKV cluster for importing data. To learn the required disk space, see [Downstream storage space requirements](/tidb-lightning/tidb-lightning-requirements.md#storage-space-of-the-target-database) and [Resource requirements](/tidb-lightning/tidb-lightning-physical-import-mode.md#environment-requirements). TiDB Lightning samples the data sources and estimates the percentage of the index size from the sample result. Because indexes are included in the estimation, there might be cases where the size of the source data is less than the available space on the local disk, but still the check fails.
 - Check whether the regions in the TiKV cluster are distributed evenly and whether there are too many empty regions. If the number of empty regions exceeds max(1000, number of tables * 3), i.e. greater than the bigger one of "1000" or "3 times the number of tables ", then the import cannot be executed.
 - Check whether the data is imported in order from the data sources. The size of `mydumper.batch-size` is automatically adjusted based on the result of the check. Therefore, the `mydumper.batch-size` configuration is no longer available.
 
@@ -151,7 +143,7 @@ Wait for all TiDB Lightning instances to finish, then the entire import is compl
 
 ## Example 2: Import single tables in parallel
 
-TiDB Lightning also supports parallel import of single tables. For example, import multiple single tables stored in Amazon S3 by different TiDB Lightning instances into the downstream TiDB cluster in parallel. This method can speed up the overall import speed. For more information on external storages, see [External Storages](/br/backup-and-restore-storages.md)).
+TiDB Lightning also supports parallel import of single tables. For example, import multiple single tables stored in Amazon S3 by different TiDB Lightning instances into the downstream TiDB cluster in parallel. This method can speed up the overall import speed. When remote storages such as Amazon S3 is used, the configuration parameters of TiDB Lightning are the same as those of BR. For more details, see [external storage URI](/br/backup-and-restore-storages.md#uri-format).
 
 > **Note:**
 >
