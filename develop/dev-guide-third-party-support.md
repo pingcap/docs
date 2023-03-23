@@ -123,7 +123,6 @@ If you encounter problems when connecting to TiDB using the tools listed in this
       </tr>
    </tbody>
 </table>
->>>>>>> 5e7d54a6a (develop: Develop Guide Python Examples - English Edition (#11742))
 
 ## ORM
 
