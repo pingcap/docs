@@ -13,15 +13,15 @@ summary: Learn how to use the resource control feature to control and schedule a
 
 </CustomContent>
 
-As a cluster administrator, you can use the resource control feature to create resource groups, set read and write quotas for resource groups, and bind users to those groups. This allows the TiDB layer to control the flow of user read and write requests based on the quotas set for the resource groups, and allows the TiKV layer to schedule the requests based on the priority mapped to the read and write quota. By doing this, you can ensure resource isolation for your applications and meet quality of service (QoS) requirements.
+As a cluster administrator, you can use the resource control feature to create resource groups, set read and write quotas for resource groups, and bind users to those groups.
 
-The TiDB resource control feature provides two layers of resource management capabilities: the flow control capability at the TiDB layer and the priority scheduling capability at the TiKV layer. The two capabilities can be enabled separately or simultaneously. See the [Parameters for resource control](#parameters-for-resource-control) for details.
+The TiDB resource control feature provides two layers of resource management capabilities: the flow control capability at the TiDB layer and the priority scheduling capability at the TiKV layer. The two capabilities can be enabled separately or simultaneously. See the [Parameters for resource control](#parameters-for-resource-control) for details. This allows the TiDB layer to control the flow of user read and write requests based on the quotas set for the resource groups, and allows the TiKV layer to schedule the requests based on the priority mapped to the read and write quota. By doing this, you can ensure resource isolation for your applications and meet quality of service (QoS) requirements.
 
 - TiDB flow control: TiDB flow control uses the [token bucket algorithm](https://en.wikipedia.org/wiki/Token_bucket). If there are not enough tokens in a bucket, and the resource group does not specify the `BURSTABLE` option, the requests to the resource group will wait for the token bucket to backfill the tokens and retry. The retry might fail due to timeout.
 
 <CustomContent platform="tidb">
 
-- TiKV scheduling: if you do not set the absolute priority [(`PRIORITY`)](/information-schema/information-schema-resource-groups.md#examples), TiKV uses the value of `RU_PER_SEC` of each resource group to determine the priority of the read and write requests for each resource group. Based on the priorities, the storage layer uses the priority queue to schedule and process requests. In addition, you can set the absolute priority as needed.
+- TiKV scheduling: You can set the absolute priority [(`PRIORITY`)](/information-schema/information-schema-resource-groups.md#examples) as needed. Different resources are scheduled according to the `PRIORITY` setting. Tasks with high `PRIORITY` are scheduled first. If you do not set the absolute priority, TiKV uses the value of `RU_PER_SEC` of each resource group to determine the priority of the read and write requests for each resource group. Based on the priorities, the storage layer uses the priority queue to schedule and process requests.
 
 </CustomContent>
 
@@ -138,13 +138,13 @@ TiDB supports three levels of resource group settings as follows.
 
 #### Bind users to a resource group
 
-The following example creates a user `usr1` and binds the user to the resource group `rg1`.
+The following example creates a user `usr1` and binds the user to the resource group `rg1`. `rg1` is the resource group created in the example in [Create Resource Group](#create-a-resource-group).
 
 ```sql
 CREATE USER 'usr1'@'%' IDENTIFIED BY '123' RESOURCE GROUP rg1;
 ```
 
-The following example uses `ALTER USER` to bind the user `usr2` to the resource group `rg2`.
+The following example uses `ALTER USER` to bind the user `usr2` to the resource group `rg2`. `rg2` is the resource group created in the example in [Create Resource Group](#create-a-resource-group).
 
 ```sql
 ALTER USER usr2 RESOURCE GROUP rg2;
