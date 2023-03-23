@@ -119,6 +119,28 @@ loaders:
     # - "ignore". Only supports the import mode "sql". It keeps the existing data, and ignores the new data.
     # - "error". Only supports the import mode "loader". It reports errors when inserting duplicated data, and then stops the replication task.
     on-duplicate: "replace"
+    # The local directory that is used to locally sort for physical import. The default value for this option is the same as the dir configuration item. See TiDB Lightning's storage requirements for details: https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode#environment-requirements
+    sorting-dir-physical: ". /dumped_data"
+    # Disk space limit, corresponding to the TiDB Lightning disk-quota configuration. See the documentation for details: https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode-usage#configure-disk-quota-new-in-v620
+    disk-quota-physical: "0"
+    # Only available for physical import. Specifies whether to perform `ADMIN CHECKSUM TABLE <table>` for each table to verify data integrity after importing.
+    # The following options are available:
+    # - "required" (default value): Perform admin checksum. If checksum fails, TiDB Lightning will exit with failure.
+    # - "optional": Perform admin checksum. If checksum fails, TiDB Lightning will report a WARN log but ignore any error.
+    # - "off": Do not perform checksum.
+    checksum-physical: "required"
+    # Only available for physical import. Specifies whether to perform the `ANALYZE TABLE <table>` for each table after CHECKSUM has finished.
+    # - "required" (default). Indicates that the Analyze operation will be performed after the import is complete, and if the analysis fails it will cause the task to pause and require manual processing by the user.
+    # - "optional". Indicates that the data will be analysed after the import is complete. If the analysis fails a warn log will be printed and the task will not be paused.
+    # - "off". Indicates that no data analysis will be performed after the import is complete.
+    # Analyze only affects statistics data and it is recommended that Analyze is set to off on in most scenarios.
+    analyze: "off"
+    # Only available for physical import. The concurrency of sending KVs data to TiKV. This can be increased when the direct network transfer speed between dm-worker and TiKV exceeds 10,000 Mb/s.
+    # range-concurrency: 16
+    # Physical Import Mode Whether to enable compression when sending KVs data to TiKV. Currently only Gzip compression is supported, either "gzip" or "gz" can be used. Compression is not enabled by default.
+    # compress-kv-pairs: ""
+    # pd-server address, just fill in one. If empty, the default is to use the pd address information from the TiDB query.
+    # pd-addr: "192.168.0.1:2379"
 
 # Configuration arguments of the sync processing unit.
 syncers:
