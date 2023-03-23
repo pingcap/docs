@@ -376,11 +376,11 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 * Error Number: 8158
 
-    The S3 path passed in is invalid. See [external storage](/br/backup-and-restore-storages.md) to set a valid path.
+    The S3 path is invalid. See [external storage](/br/backup-and-restore-storages.md) to set a valid path.
 
 * Error Number: 8159
 
-    TiDB cannot access the S3 path passed in the `LOAD DATA` statement. Make sure that the S3 bucket you entered exists, the TiDB server has access to S3, and you have privileges to access the corresponding bucket.
+    TiDB cannot access the S3 path provided in the `LOAD DATA` statement. Make sure that the S3 bucket exists, and you have entered the correct access key and secret access key to let TiDB access the bucket.
 
 * Error Number: 8160
 
