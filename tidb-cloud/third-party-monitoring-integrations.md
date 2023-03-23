@@ -7,10 +7,6 @@ summary: Learn how to use third-party monitoring integrations.
 
 You can integrate TiDB Cloud with third-party monitoring services to receive TiDB Cloud alerts and view the performance metrics of your TiDB cluster using the monitoring services.
 
-> **Note:**
->
-> For [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta), third-party monitoring integrations are not supported.
-
 ## Required access
 
 To edit third-party integration settings, you must have the `Owner` access to your organization or `Member` access to the target project.
@@ -24,6 +20,12 @@ To edit third-party integration settings, you must have the `Owner` access to yo
     - If you only have one project, click **Admin** > **Integrations**.
 
 The available third-party integrations are displayed.
+
+## Limitation
+
+1. For [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta), third-party monitoring integrations are not supported.
+
+2. Third-Party Monitoring Integrations are not available when the cluster status is CREATING, RESTORING, PAUSED, or RESUMING.
 
 ## Available integrations
 
