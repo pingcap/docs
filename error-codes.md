@@ -360,11 +360,11 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 * Error Number: 8154
 
-    Currently `LOAD DATA` does not support importing data locally from TiDB server. You can specify `LOCAL` to import from client, or upload data to S3 and then import it. See [`LOAD DATA`](/sql-statements/sql-statement-load-data.md).
+    Currently `LOAD DATA` does not support importing data locally from TiDB server. You can specify `LOCAL` to import from client, or upload data to S3 or GCS and then import it. See [`LOAD DATA`](/sql-statements/sql-statement-load-data.md).
 
 * Error Number: 8155
 
-    Currently, `LOAD DATA` only supports importing Parquet files from S3. You can upload Parquet files to S3 and then import it. See [`LOAD DATA`](/sql-statements/sql-statement-load-data.md).
+    Currently, `LOAD DATA` only supports importing Parquet files from S3 or GCS. You can upload Parquet files to S3 or GCS and then import them. See [`LOAD DATA`](/sql-statements/sql-statement-load-data.md).
 
 * Error Number: 8156
 
@@ -372,15 +372,15 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 * Error Number: 8157
 
-    Unsupported data formats. See [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) to check the supported data formats.
+    Unsupported data format. See [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) to check the supported data formats.
 
 * Error Number: 8158
 
-    The S3 path is invalid. See [external storage](/br/backup-and-restore-storages.md) to set a valid path.
+    The S3 or GCS path is invalid. See [external storage](/br/backup-and-restore-storages.md) to set a valid path.
 
 * Error Number: 8159
 
-    TiDB cannot access the S3 path provided in the `LOAD DATA` statement. Make sure that the S3 bucket exists, and you have entered the correct access key and secret access key to let TiDB access the bucket.
+    TiDB cannot access the S3 or GCS path provided in the `LOAD DATA` statement. Make sure that the S3 or GCS bucket exists, and that you have used the correct access key and secret access key to let TiDB access the bucket.
 
 * Error Number: 8160
 
@@ -388,7 +388,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 * Error Number: 8162
 
-    There is an error in the `LOAD DATA` statement. See [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) for supported options.
+    There is an error in the `LOAD DATA` statement. See [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) for supported features.
 
 * Error Number: 8163
 
@@ -412,11 +412,11 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 * Error Number: 8171
 
-    Perform operation and maintenance for unsupported `LOAD DATA` task status. Refer to the specific instructions for processing.
+    You cannot perform operation and maintenance for unsupported `LOAD DATA` task status. Refer to the specific error message for action.
 
 * Error Number: 8172
 
-    `LOAD DATA` specified with `LOCAL` cannot be run in the background. See [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) to change the SQL statement.
+    `LOAD DATA` specified with `LOCAL` cannot be run in the background. Only `LOAD DATA` specified with the S3 or GCS path can be run in the background. See [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) to change the SQL statement.
 
 * Error Number: 8200
 

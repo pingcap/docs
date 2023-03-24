@@ -36,7 +36,7 @@ LoadDataOption ::=
 
 ### `LOCAL`
 
-You can use `LOCAL` to specify to import data files located on the client, where the file parameter must be the file system path on the client.
+You can use `LOCAL` to specify data files on the client to be imported, where the file parameter must be the file system path on the client.
 
 ### S3 and GCS storage
 
@@ -66,11 +66,11 @@ You can use the `Fields` and `Lines` parameters to specify how to handle the dat
 
 You can use `DEFINED NULL BY` to specify how NULL values are represented in the data file.
 
-- Consistent with MySQL behavior, if `ESCAPED BY` is not null, for example, if the default value is `\`, then `\N` will be considered a NULL value.
-- If you use `DEFINED NULL BY`, for example `DEFINED NULL BY 'my-null'`, `my-null` will be considered a NULL value.
-- If you use `DEFINED NULL BY ... OPTIONALLY ENCLOSED`, such as `DEFINED NULL BY 'my-null' OPTIONALLY ENCLOSED`, `my-null` and `"my-null"` (assuming `ENCLOSED BY '"`) will be considered NULL values.
-- If you do not use `DEFINED NULL BY` or `DEFINED NULL BY ... OPTIONALLY ENCLOSED`, but use `ENCLOSED BY`, such as `ENCLOSED BY '"'`, then `NULL` will be considered a NULL value. This behavior is consistent with MySQL.
-- In other cases, it will not be considered a NULL value.
+- Consistent with MySQL behavior, if `ESCAPED BY` is not null, for example, if the default value `\` is used, then `\N` will be considered a NULL value.
+- If you use `DEFINED NULL BY`, such as `DEFINED NULL BY 'my-null'`, `my-null` is considered a NULL value.
+- If you use `DEFINED NULL BY ... OPTIONALLY ENCLOSED`, such as `DEFINED NULL BY 'my-null' OPTIONALLY ENCLOSED`, `my-null` and `"my-null"` (assuming `ENCLOSED BY '"`) are considered NULL values.
+- If you do not use `DEFINED NULL BY` or `DEFINED NULL BY ... OPTIONALLY ENCLOSED`, but use `ENCLOSED BY`, such as `ENCLOSED BY '"'`, then `NULL` is considered a NULL value. This behavior is consistent with MySQL.
+- In other cases, it is not considered a NULL value.
 
 Take the following data format as an example:
 
@@ -98,7 +98,7 @@ You can ignore the first `number` lines of a file by configuring the `IGNORE <nu
 
 If you do not specify the `LOCAL` parameter, you can use `WITH detached` to make `LOAD DATA` run in the background.
 
-You can view the created jobs with [SHOW LOAD DATA](/sql-statements/sql-statement-show-load-data.md) or you can use [OPERATE LOAD DATA JOB](/sql-statements/sql- statement-operate-load-data-job.md) to cancel or delete the created jobs.
+You can view the created jobs via [`SHOW LOAD DATA`](/sql-statements/sql-statement-show-load-data.md) or you can use [`[CANCEL|DROP] LOAD DATA`](/sql-statements/sql- statement-operate-load-data-job.md) to cancel or delete the created jobs.
 
 ### `WITH batch_size=<number>`
 
@@ -106,7 +106,7 @@ You can specify the number of rows to be written to TiDB in a batch with `WITH b
 
 ## Examples
 
-When the job is run in the background, the corresponding job id is output after execution.
+For a background job, the corresponding job id is output after the job execution.
 
 ```sql
 LOAD DATA INFILE 's3://bucket-name/test.csv?access_key=XXX&secret_access_key=XXX' INTO TABLE my_db.my_table FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '' LINES TERMINATED BY '\n' WITH detached;
@@ -136,7 +136,7 @@ SHOW LOAD DATA JOB 1;
 
 The following example imports data using `LOAD DATA`. Comma is specified as the field delimiter. The double quotation marks that enclose the data are ignored. The first line of the file is ignored.
 
-If you see the error message `ERROR 1148 (42000): the used command is not allowed with this TiDB version`, refer to [ERROR 1148 (42000): the used command is not allowed with this TiDB version](/error-codes.md#mysql-native-error-messages).
+If you see `ERROR 1148 (42000): the used command is not allowed with this TiDB version`, refer to [ERROR 1148 (42000): the used command is not allowed with this TiDB version](/error-codes.md#mysql-native-error-messages) for troubleshooting.
 
 ```sql
 LOAD DATA LOCAL INFILE '/mnt/evo970/data-sets/bikeshare-data/2017Q4-capitalbikeshare-tripdata.csv' INTO TABLE trips FIELDS TERMINATED BY ',' ENCLOSED BY '\"' LINES TERMINATED BY '\r\n' IGNORE 1 LINES (duration, start_date, end_date, start_station_number, start_station, end_station_number, end_station, bike_number, member_type);
@@ -161,9 +161,10 @@ This statement is understood to be fully compatible with MySQL, except for chara
 
 > **Note:**
 >
-> - In earlier releases of TiDB, `LOAD DATA` committed every 20000 rows. In later versions (version <= v6.6.0), TiDB commits all rows in one transaction by default.
+> - In earlier releases of TiDB, `LOAD DATA` committed every 20000 rows. 
+> - In later versions (version <= v6.6.0), TiDB commits all rows in one transaction by default.
 > - Starting from v7.0.0, the number of rows to be committed in a batch is controlled by the `WITH batch_size=<number>` parameter of the `LOAD DATA` statement, which defaults to 1000 rows per commit.
-> - After upgrading from TiDB v4.0.0 or earlier versions, an error might occur `ERROR 8004 (HY000) at line 1: Transaction is too large, size: 100000058`. The recommended way to resolve this error is to increase the [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit) value in your `tidb.toml` file. If you are unable to increase this limit, you can also restore the behavior before upgrade by setting [`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size) to `20000`.
+> - After upgrading from TiDB v4.0.0 or earlier versions, `ERROR 8004 (HY000) at line 1: Transaction is too large, size: 100000058` might occur. The recommended way to resolve this error is to increase the [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit) value in your `tidb.toml` file. If you are unable to increase this limit, you can also restore the behavior before the upgrade by setting [`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size) to `20000`.
 
 ## See also
 

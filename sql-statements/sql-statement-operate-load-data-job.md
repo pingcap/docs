@@ -5,9 +5,9 @@ summary: An overview of the usage of [CANCEL|DROP] LOAD DATA for the TiDB databa
 
 # [CANCEL|DROP] LOAD DATA
 
-The `CANCEL LOAD DATA` statement cancels the LOAD DATA JOB created in the system.
+The `CANCEL LOAD DATA` statement cancels a LOAD DATA job created in the system.
 
-The `DROP LOAD DATA` statement deletes the LOAD DATA JOB created in the system.
+The `DROP LOAD DATA` statement deletes a LOAD DATA job created in the system.
 
 ## Synopsis
 
