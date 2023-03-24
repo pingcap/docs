@@ -78,5 +78,5 @@ This statement is an extension of TiDB to MySQL syntax.
 
 ## See also
 
-* [LOAD DATA](/sql-statements/sql-statement-load-data.md)
-* [[CANCEL|DROP] LOAD DATA](/sql-statements/sql-statement-operate-load-data-job.md)
+* [`LOAD DATA`](/sql-statements/sql-statement-load-data.md)
+* [`CANCEL LOAD DATA` and `DROP LOAD DATA`](/sql-statements/sql-statement-operate-load-data-job.md)

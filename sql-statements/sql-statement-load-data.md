@@ -106,7 +106,7 @@ You can ignore the first `number` lines of a file by configuring the `IGNORE <nu
 
 If you do not specify the `LOCAL` parameter, you can use `WITH detached` to make `LOAD DATA` run in the background.
 
-You can view the created jobs via [`SHOW LOAD DATA`](/sql-statements/sql-statement-show-load-data.md) or you can use [`[CANCEL|DROP] LOAD DATA`](/sql-statements/sql- statement-operate-load-data-job.md) to cancel or delete the created jobs.
+You can view the created jobs via [`SHOW LOAD DATA`](/sql-statements/sql-statement-show-load-data.md) or you can use [`CANCEL LOAD DATA` and `DROP LOAD DATA`](/sql-statements/sql- statement-operate-load-data-job.md) to cancel or delete the created jobs.
 
 ### `WITH batch_size=<number>`
 
@@ -179,5 +179,5 @@ This statement is understood to be fully compatible with MySQL, except for chara
 * [INSERT](/sql-statements/sql-statement-insert.md)
 * [TiDB Optimistic Transaction Model](/optimistic-transaction.md)
 * [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)
-* [SHOW LOAD DATA](/sql-statements/sql-statement-show-load-data.md)
-* [[CANCEL|DROP] LOAD DATA](/sql-statements/sql-statement-operate-load-data-job.md)
+* [`SHOW LOAD DATA`](/sql-statements/sql-statement-show-load-data.md)
+* [`CANCEL LOAD DATA` and `DROP LOAD DATA`](/sql-statements/sql-statement-operate-load-data-job.md)
