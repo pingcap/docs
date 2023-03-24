@@ -329,7 +329,10 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 | TiDB Lightning | [`add-index-by-sql`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) | Newly added | Controls whether to use SQL to add indexes in physical import mode. The default value is automatically selected according to the TiDB version. The advantage of adding indexes using SQL is to separate the import of data and the import of indexes, which can quickly import data. Even if the index creation fails after the data is imported, the data consistency is not affected. |
 | TiCDC | [`enable-table-across-nodes`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters) | Newly added | Determines whether to divide a table into multiple sync ranges according to the number of Regions. These ranges can be replicated by multiple TiCDC nodes. |
 | TiCDC      | [`region-threshold`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters) | Newly added | When `enable-table-across-nodes` is enabled, this feature only takes effect on tables with more than `region-threshold` Regions.      |
-
+| DM | [`analyze`](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)  | Newly added | Configure whether to execute the `ANALYZE TABLE <table>` operation on each table after CHECKSUM is completed. It can be configured as `required`/`optional`/`off`. The default value is `optional`. |
+| DM | [`range-concurrency`](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)  | Newly added | Configure the concurrency of dm-worker writing KV data to TiKV. |
+| DM | [`compress-kv-pairs`](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)  | Newly added | Configure whether to enable compression when dm-worker sends KV data to TiKV. Currently, only Gzip is supported. The default value is none, which means no compression. |
+| DM | [`pd-addr`](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)  | Newly added | Configure the address of the downstream PD server when performing physical import. |
 ### Others
 
 ## Deprecated feature
@@ -354,8 +357,8 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
 + TiFlash
 
-    - note [#issue](链接) @[贡献者 GitHub ID](链接)
-    - note [#issue](链接) @[贡献者 GitHub ID](链接)
+    - Reduce TiFlash's memory usage on write path [#7144](https://github.com/pingcap/tiflash/issues/7144) @[hongyunyan](https://github.com/hongyunyan)
+    - Reduce TiFlash's restart time in scenarios with many tables [#7146](https://github.com/pingcap/tiflash/issues/7146) @[hongyunyan](https://github.com/hongyunyan)
 
 + Tools
 
