@@ -35,7 +35,9 @@ If you want to encrypt your data using the KMS owned in your own account, take t
     {
         "Version": "2012-10-17",
         "Id": "cmek-policy",
-        "Statement": [{
+        "Statement": [
+            // EBS-related policy
+            {
                 "Sid": "Allow access through EBS for all principals in the account that are authorized to use EBS",
                 "Effect": "Allow",
                 "Principal": {
