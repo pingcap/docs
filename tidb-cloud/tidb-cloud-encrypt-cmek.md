@@ -29,7 +29,7 @@ If you want to encrypt your data using the KMS owned in your own account, take t
 1. Create your CMEK Key on the AWS Key Management Service (KMS) console. Copy the KMS Key ARN. To learn how to create a key, see [Creating Keys](http://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html#create-symmetric-cmk) in the AWS documentation.
 2. Create an IAM role and configure the role's access policy to CMEK.
 
-    In order to make the TiDB cluster function as expected, the user needs to grant certain permissions to the TiDB account to access the KMS. Note that the feature is in the development stage and the requirement for policy could be subject to changes as future features could require more permissions. Here’re the required permissions for supported features for now:
+    To make the TiDB cluster function as expected, you need to grant certain permissions to the TiDB account for accessing KMS. Note that this feature is in the development stage and the policy requirement could be subject to change as future features might require more permissions. Here’re the required permissions for supported features at present:
 
     ```json
     {
