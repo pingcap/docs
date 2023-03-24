@@ -168,6 +168,8 @@ addr = "172.16.31.10:8287"
 # The benefit of adding indexes via SQL is that you can separately import data and import indexes, and import data more quickly. After the data is imported, even if the indexes fail to be added, it does not affect the consistency of the imported data.
 # add-index-by-sql = true
 
+When you use TiDB Lightning to import a multi-tenant TiDB cluster, use this parameter to specify the corresponding key space name. The default value is an empty string, which means TiDB Lightning will automatically get the key space name of the corresponding tenant to import data. If you specify a value, the specified key space name will be used to import data.
+# keyspace-name = ""
 [mydumper]
 # Block size for file reading. Keep it longer than the longest string of the data source.
 read-block-size = "64KiB" # default value
