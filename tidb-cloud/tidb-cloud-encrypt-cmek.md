@@ -93,7 +93,7 @@ If you want to encrypt your data using the KMS owned in your own account, take t
 
 > **Note:**
 >
-> Currently the configuration is not available on UI, user can configure the project using TiDB cloud’s OpenAPI restful interface.
+> Currently the configuration is not available on the TiDB Cloud console. You can only configure the project using TiDB Cloud API.
 
 ### Step 3. Create a cluster
 
