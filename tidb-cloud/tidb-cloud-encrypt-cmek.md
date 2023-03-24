@@ -22,7 +22,7 @@ After you configure the CMEK capability for a project, the static data in all cl
 
 ## Enable CMEK
 
-For user to encrypt their data using the KMS owned in their own account, here’re the steps to take:
+If you want to encrypt your data using the KMS owned in your own account, take the following steps.
 
 ### Step 1. Provision KMS and IAM in your Cloud
 
