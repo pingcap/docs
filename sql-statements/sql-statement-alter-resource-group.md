@@ -48,7 +48,7 @@ TiDB supports the following `DirectResourceGroupOption`, where [Request Unit (RU
 | Option     | Description                         | Example                |
 |---------------|-------------------------------------|------------------------|
 | `RU_PER_SEC` | Rate of RU backfilling per second | `RU_PER_SEC = 500` indicates that this resource group is backfilled with 500 RUs per second |
-| `PRIORITY`    | Priority of tasks processed by TiKV  | `PRIORITY = HIGH` indicates that the priority is high. If not specified, the default value is `MEDIUM`. |
+| `PRIORITY`    | The absolute priority of tasks to be processed on TiKV  | `PRIORITY = HIGH` indicates that the priority is high. If not specified, the default value is `MEDIUM`. |
 | `BURSTABLE`   | If the `BURSTABLE` attribute is set, TiDB allows the corresponding resource group to use the available system resources when the quota is exceeded. |
 
 > **Note:**
@@ -69,8 +69,8 @@ Query OK, 0 rows affected (0.22 sec)
 
 ```sql
 CREATE RESOURCE GROUP IF NOT EXISTS rg1
-RU_PER_SEC = 100
-BURSTABLE;
+  RU_PER_SEC = 100
+  BURSTABLE;
 ```
 
 ```sql
@@ -89,7 +89,8 @@ SELECT * FROM information_schema.resource_groups WHERE NAME ='rg1';
 
 ```sql
 ALTER RESOURCE GROUP rg1
-RU_PER_SEC = 200;
+  RU_PER_SEC = 200
+  PRIORITY = LOW;
 ```
 
 ```sql

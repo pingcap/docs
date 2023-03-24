@@ -5,7 +5,7 @@ summary: An overview of the usage of SET RESOURCE GROUP in the TiDB database.
 
 # SET RESOURCE GROUP
 
-`SET RESOURCE GROUP` is used to set the resource group for the current user session.
+`SET RESOURCE GROUP` is used to set the resource group for the current session.
 
 ## Synopsis
 
@@ -78,7 +78,7 @@ SELECT CURRENT_RESOURCE_GROUP();
 
 ## MySQL compatibility
 
-MySQL also supports [SET RESOURCE GROUP](https://dev.mysql.com/doc/refman/8.0/en/set-resource-group.html). But the accepted parameters are different from TiDB. They are not compatible.
+MySQL also supports [SET RESOURCE GROUP](https://dev.mysql.com/doc/refman/8.0/en/set-resource-group.html). But the accepted parameters are different from that of TiDB. They are not compatible.
 
 ## See also
 

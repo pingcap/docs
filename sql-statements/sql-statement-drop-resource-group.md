@@ -31,7 +31,7 @@ ResourceGroupName:
 > **Note:**
 >
 > - The `DROP RESOURCE GROUP` statement can only be executed when the global variable [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660) is set to `ON`.
-> - The `default` resource group cannot be dropped.
+> - The `default` resource group is reserved and cannot be dropped.
 
 ## Examples
 

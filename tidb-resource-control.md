@@ -81,7 +81,7 @@ The resource control feature introduces two new global variables.
 
 <CustomContent platform="tidb-cloud">
 
-* TiKV: For on-premises TiDB, you can use the `resource-control.enabled` parameter to control whether to use request scheduling based on resource group quotas. For TiDB Cloud, the value of the `resource-control.enabled` parameter is  `true` by default and does not support dynamic modification..
+* TiKV: For on-premises TiDB, you can use the `resource-control.enabled` parameter to control whether to use request scheduling based on resource group quotas. For TiDB Cloud, the value of the `resource-control.enabled` parameter is `true` by default and does not support dynamic modification.
 
 </CustomContent>
 
@@ -100,7 +100,7 @@ For more information about the resource control mechanism and parameters, see [R
 
 To create, modify, or delete a resource group, you need to have the `SUPER` or `RESOURCE_GROUP_ADMIN` privilege.
 
-You can create a resource group in the cluster by using [`CREATE RESOURCE GROUP`](/sql-statements/sql-statement-create-resource-group.md).
+You can create a resource group for a cluster by using [`CREATE RESOURCE GROUP`](/sql-statements/sql-statement-create-resource-group.md).
 
 For an existing resource group, you can modify the `RU_PER_SEC` option (the rate of RU backfilling per second) of the resource group by using [`ALTER RESOURCE GROUP`](/sql-statements/sql-statement-alter-resource-group.md). The changes to the resource group take effect immediately.
 
@@ -108,7 +108,7 @@ You can delete a resource group by using [`DROP RESOURCE GROUP`](/sql-statements
 
 ### Create a resource group
 
-The following is an example of how to create a resource group and bind users to it.
+The following is an example of how to create a resource group.
 
 1. Create a resource group `rg1`. The RU backfill rate is 500 RUs per second and allows applications in this resource group to overrun resources.
 
@@ -122,7 +122,7 @@ The following is an example of how to create a resource group and bind users to 
     CREATE RESOURCE GROUP IF NOT EXISTS rg2 RU_PER_SEC = 600;
     ```
 
-3. Create a resource group `rg3`. Set the absolute priority to `HIGH`. The absolute priority currently supports `LOW|MEDIUM|HIGH`. The default value is `MEDIUM`.
+3. Create a resource group `rg3` with the absolute priority set to `HIGH`. The absolute priority currently supports `LOW|MEDIUM|HIGH`. The default value is `MEDIUM`.
 
     ```sql
     CREATE RESOURCE GROUP IF NOT EXISTS rg3 RU_PER_SEC = 100 PRIORITY = HIGH;
@@ -132,9 +132,9 @@ The following is an example of how to create a resource group and bind users to 
 
 TiDB supports three levels of resource group settings as follows.
 
-- User level. Bind the user using the [`CREATE USER`](/sql-statements/sql-statement-create-user.md) or [`ALTER USER`](/sql-statements/sql-statement-alter-user.md) statements to a specific resource group. After binding a resource group to a user, sessions created by the user are automatically bound to the corresponding resource group.
-- Session level. Set the resource group used by the current session via [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md).
-- Statement level. Set the resource group used by the current statement via [`RESOURCE_GROUP()`](/optimizer-hints.md#resource_groupresource_group_name).
+- User level. Bind a user to a specific resource group via the [`CREATE USER`](/sql-statements/sql-statement-create-user.md) or [`ALTER USER`](/sql-statements/sql-statement-alter-user.md) statement. After a user is bound to a resource group, sessions created by the user are automatically bound to the corresponding resource group.
+- Session level. Set the resource group for the current session via [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md).
+- Statement level. Set the resource group for the current statement via [`RESOURCE_GROUP()`](/optimizer-hints.md#resource_groupresource_group_name).
 
 #### Bind users to a resource group
 
@@ -161,7 +161,7 @@ If there are too many requests that result in insufficient resources for the res
 
 #### Bind the current session to a resource group
 
-By binding a session to a resource group, the resource usage of the statements executed on the corresponding session is limited by the specified usage (RU).
+By binding a session to a resource group, the resource usage of the corresponding session is limited by the specified usage (RU).
 
 The following example binds the current session to the resource group `rg1`.
 
@@ -171,7 +171,7 @@ SET RESOURCE GROUP rg1;
 
 #### Bind the current statement to a resource group
 
-By using [`Optimizer Hint`](/optimizer-hints.md#resource_groupresource_group_name), you can specify the resource group to which the SQL statement is bound. This hint supports SELECT, INSERT, UPDATE, and DELETE statements.
+By adding the [`RESOURCE_GROUP(resource_group_name)`](/optimizer-hints.md#resource_groupresource_group_name) hint to a SQL statement, you can specify the resource group to which the statement is bound. This hint supports `SELECT`, `INSERT`, `UPDATE`, and `DELETE` statements.
 
 The following example binds the current statement to the resource group `rg1`.
 
@@ -183,13 +183,13 @@ SELECT /*+ RESOURCE_GROUP(rg1) */ * FROM t limit 10;
 
 <CustomContent platform="tidb">
 
-1. Execute the following statement to enable the resource control feature.
+1. Execute the following statement to disable the resource control feature.
 
     ```sql
     SET GLOBAL tidb_enable_resource_control = 'OFF';
     ```
 
-2. Set the TiKV parameter [`resource-control.enabled`](/tikv-configuration-file.md#resource-control) to `false`.
+2. Set the TiKV parameter [`resource-control.enabled`](/tikv-configuration-file.md#resource-control) to `false` to disable scheduling based on the RU of the resource group.
 
 </CustomContent>
 
@@ -201,7 +201,7 @@ SELECT /*+ RESOURCE_GROUP(rg1) */ * FROM t limit 10;
     SET GLOBAL tidb_enable_resource_control = 'OFF';
     ```
 
-2. For on-premises TiDB, you can use the `resource-control.enabled` parameter to control whether to use request scheduling based on resource group quotas. For TiDB Cloud, the value of the `resource-control.enabled` parameter is  `true` by default and does not support dynamic modification. If you need to disable it for TiDB Cloud Dedicated Tier clusters, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+2. For on-premises TiDB, you can use the `resource-control.enabled` parameter to control whether to use request scheduling based on resource group quotas. For TiDB Cloud, the value of the `resource-control.enabled` parameter is `true` by default and does not support dynamic modification. If you need to disable it for TiDB Cloud Dedicated Tier clusters, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 </CustomContent>
 

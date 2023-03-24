@@ -76,5 +76,5 @@ The descriptions of the columns in the `RESOURCE_GROUPS` table are as follows:
 
 * `NAME`: the name of the resource group.
 * `RU_PER_SEC`：the backfilling speed of the resource group. The unit is RU/second, in which RU means [Request Unit](/tidb-resource-control.md#what-is-request-unit-ru).
-* `PRIORITY`: resource groups are prioritized during execution. Different resources are scheduled according to the `PRIORITY` setting. Tasks with high `PRIORITY` are scheduled first. For resource groups with the same `PRIORITY`, the higher the `RU_PER_SEC`, the higher the priority. If `PRIORITY` is not specified, the default priority is `MEDIUM`.
+* `PRIORITY`: the absolute priority of tasks to be processed on TiKV. Different resources are scheduled according to the `PRIORITY` setting. Tasks with high `PRIORITY` are scheduled first. For resource groups with the same `PRIORITY`, tasks will be scheduled proportionally according to the `RU_PER_SEC` configuration. If `PRIORITY` is not specified, the default priority is `MEDIUM`.
 * `BURSTABLE`: whether to allow the resource group to overuse the available system resources.

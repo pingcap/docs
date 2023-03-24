@@ -456,11 +456,11 @@ Configuration items related to the replication mode of all Regions. See [Enable 
 
 ## Controllor
 
-This section describes the configuration items that are built into the PD for [Resource Control](/tidb-resource-control.md).
+This section describes the configuration items that are built into PD for [Resource Control](/tidb-resource-control.md).
 
 ### `degraded-mode-wait-duration`
 
-+ Time to wait to trigger the degradation mode. Degradation mode means that when the Local Token Bucket (LTB) and Global Token Bucket (GTB) are lost, the LTB falls back to the resource group configuration and no longer has a GTB authorization token, thus ensuring that the service is not affected in the event of network isolation or anomalies.
++ Time to wait to trigger the degradation mode. Degradation mode means that when the Local Token Bucket (LTB) and Global Token Bucket (GTB) are lost, the LTB falls back to the default resource group configuration and no longer has a GTB authorization token, thus ensuring that the service is not affected in the event of network isolation or anomalies.
 + Default value: 0s
 + The degradation mode is disabled by default.
 
