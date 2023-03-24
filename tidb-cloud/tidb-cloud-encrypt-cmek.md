@@ -118,7 +118,7 @@ If you need to temporarily revoke TiDB Cloud's access to CMEK, follow these step
 >
 > After you revoke CMEK on AWS KMS, your running clusters are not affected. However, when you pause a cluster and then restore the cluster, the cluster will not be able to restore normally because it cannot access CMEK.
 
-Steps to restore CMEK
+After revoking TiDB Cloud's access to CMEK, if you need to restore the access, follow these steps:
 
 1. You need to restore the CMEK access policy on the AWS KMS console.
 2. You need to restore all clusters under the project on the TiDB cloud console.
