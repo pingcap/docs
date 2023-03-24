@@ -11,7 +11,7 @@ After you configure the CMEK capability for a project, the static data in all cl
 
 > **Note:**
 >
-> Currently this feature is only available upon request. If you need to try out this feature, contact support.
+> Currently this feature is only available upon request. If you need to try out this feature, contact [support](/tidb-cloud/tidb-cloud-support.md).
 
 ## Restrictions
 
