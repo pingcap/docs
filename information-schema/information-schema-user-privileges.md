@@ -79,6 +79,8 @@ The output is as follows:
 
 <CustomContent platform="tidb-cloud">
 
+<!--Compared with on-premises TiDB, the root user in TiDB Cloud does not have the SHUTDOWN and CONFIG privileges.-->
+
 ```sql
 +------------+---------------+-------------------------+--------------+
 | GRANTEE    | TABLE_CATALOG | PRIVILEGE_TYPE          | IS_GRANTABLE |
