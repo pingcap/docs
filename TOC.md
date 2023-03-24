@@ -666,6 +666,7 @@
       - [`BACKUP`](/sql-statements/sql-statement-backup.md)
       - [`BATCH`](/sql-statements/sql-statement-batch.md)
       - [`BEGIN`](/sql-statements/sql-statement-begin.md)
+      - [`CANCEL LOAD DATA` and `DROP LOAD DATA`](/sql-statements/sql-statement-operate-load-data-job.md)
       - [`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)
       - [`COMMIT`](/sql-statements/sql-statement-commit.md)
       - [`CHANGE DRAINER`](/sql-statements/sql-statement-change-drainer.md)
@@ -790,7 +791,6 @@
       - [`UPDATE`](/sql-statements/sql-statement-update.md)
       - [`USE`](/sql-statements/sql-statement-use.md)
       - [`WITH`](/sql-statements/sql-statement-with.md)
-      - [`[CANCEL|DROP] LOAD DATA`](/sql-statements/sql-statement-operate-load-data-job.md)
     - Data Types
       - [Overview](/data-type-overview.md)
       - [Default Values](/data-type-default-values.md)
