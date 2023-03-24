@@ -102,11 +102,11 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
 * * Support resource control based on resource groups (GA) [#38825](https://github.com/pingcap/tidb/issues/38825) @[nolouch](https://github.com/nolouch) @[BornChanger](https://github.com/BornChanger) @[glorv](https://github.com/glorv) @[tiancaiamao](https://github.com/tiancaiamao) @[Connor1996](https://github.com/Connor1996) @[JmPotato](https://github.com/JmPotato) @[hnes](https://github.com/hnes) @[CabinfeverB](https://github.com/CabinfeverB) @[HuSharp](https://github.com/HuSharp) **tw:hfxsd**
 
-    TiDB officially releases a resource management feature based on resource groups. This feature significantly improves the resource utilization efficiency and performance of TiDB clusters. The introduction of the resource control feature is a milestone for TiDB. You can divide a distributed database cluster into multiple logical units, map different database users to corresponding resource groups, and set the quota for each resource group as needed. When the cluster resources are limited, all resources used by sessions in the same resource group will be limited to the quota. In this way, even if a resource group is over-consumed, the sessions in other resource groups are not affected.      
+    TiDB officially releases the resource control feature based on resource groups. This feature significantly improves the resource utilization efficiency and performance of TiDB clusters. The introduction of the resource control feature is a milestone for TiDB. You can divide a distributed database cluster into multiple logical units, map different database users to corresponding resource groups, and set the quota for each resource group as needed. When the cluster resources are limited, all resources used by sessions in the same resource group are limited to the quota. In this way, even if a resource group is over-consumed, the sessions in other resource groups are not affected.
    
     With this feature, you can combine multiple small and medium-sized applications from different systems into a single TiDB cluster. When the workload of an application grows larger, it does not affect the normal operation of other applications. When the system workload is low, busy applications can still be allocated the required system resources even if they exceed the set read and write quotas, so as to achieve the maximum utilization of resources. In addition, the rational use of the resource control feature can reduce the number of clusters, ease the difficulty of operation and maintenance, and save management costs.
 
-    This feature provides a built-in Resource Control Dashboard in Grafana to show the actual usage of resources, assisting you to allocate resources more rationally. It also supports dynamic resource management capabilities based on session and statement levels (Hint). The introduction of these features will help you gain more precise control over the resource usage of your TiDB cluster, and dynamically adjust quotas based on actual needs.
+    This feature provides a built-in Resource Control Dashboard for the actual usage of resources in Grafana, assisting you to allocate resources more rationally. It also supports dynamic resource management capabilities based on both session and statement levels (Hint). The introduction of this feature will help you gain more precise control over the resource usage of your TiDB cluster, and dynamically adjust quotas based on actual needs.
     
     You can use resource groups in the following ways:
 
@@ -185,7 +185,7 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
 ### DB operations
 
-*  TiCDC supports replicating change data to storage services (GA) [#6797](https://github.com/pingcap/tiflow/issues/6797) @[zhaoxinyu](https://github.com/zhaoxinyu) **tw:hfxsd**
+* TiCDC supports replicating change data to storage services (GA) [#6797](https://github.com/pingcap/tiflow/issues/6797) @[zhaoxinyu](https://github.com/zhaoxinyu) **tw:hfxsd**
   
     TiCDC supports replicating changed data to Amazon S3, GCS, Azure Blob Storage, NFS, and other S3-compatible storage services. Storage services are reasonably priced and easy to use. If you are not using Kafka, you can use storage services. TiCDC saves the changed logs to a file and then sends it to the storage services instead. From the storage services, your own consumer program can read the newly generated changed log files periodically. Currently, TiCDC supports replicating changed logs in canal-json and CSV formats to the storage service.
 
@@ -193,7 +193,7 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
 * TiCDC OpenAPI v2 GA @[sdojjy](https://github.com/sdojjy) **tw:hfxsd**
 
-    TiCDC provides OpenAPI v2. Compared to OpenAPI v1, OpenAPI v2 provides more complete support for replication tasks. The features provided by OpenAPI are a subset of [`cdc cli` tools](/ticdc/ticdc-manage-changefeed.md). You can use OpenAPI v2 to perform queries and operations on TiCDC clusters, such as getting TiCDC node status, checking cluster health status, and managing replication tasks.
+    TiCDC provides OpenAPI v2. Compared with OpenAPI v1, OpenAPI v2 provides more comprehensive support for replication tasks. The features provided by TiCDC OpenAPI are a subset of the [`cdc cli` tool](/ticdc/ticdc-manage-changefeed.md). You can query and operate TiCDC clusters via OpenAPI v2, such as getting TiCDC node status, checking cluster health status, and managing replication tasks.
 
     For more information, see [documentation](/ticdc/ticdc-open-api-v2.md).
 
