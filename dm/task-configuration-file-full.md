@@ -160,15 +160,15 @@ loaders:
     # If checksum fails, the import is abnormal, which means the data is inconsistent or lost.
     # Therefore, it is recommended to always enable checksum.
     checksum-physical: "required"
-    # Only available for physical import. Specifies whether to perform the `ANALYZE TABLE <table>` for each table after CHECKSUM has finished.
-    # - "required" (default). Indicates that the Analyze operation will be performed after the import is complete, and if the analysis fails it will cause the task to pause and require manual processing by the user.
-    # - "optional". Indicates that the data will be analysed after the import is complete. If the analysis fails a warn log will be printed and the task will not be paused.
+    # Only available for physical import. Determines whether to perform the `ANALYZE TABLE <table>` operation for each table after the CHECKSUM process is completed.
+    # - "required" (default). Indicates that the Analyze operation will be performed after the import is complete. If the analysis fails, the task will pause and require manual processing by the user.
+    # - "optional". Indicates that the data will be analyzed after the import is complete. If the analysis fails, a warning log will be printed and the task will not be paused.
     # - "off". Indicates that no data analysis will be performed after the import is complete.
-    # Analyze only affects statistics data and it is recommended that Analyze is set to off on in most scenarios.
+    # Analyze only affects statistics data and it is recommended that Analyze is set to off in most scenarios.
     analyze: "off"
     # Only available for physical import. The concurrency of sending KVs data to TiKV. This can be increased when the direct network transfer speed between dm-worker and TiKV exceeds 10,000 Mb/s.
     # range-concurrency: 16
-    # Physical Import Mode Whether to enable compression when sending KVs data to TiKV. Currently only Gzip compression is supported, either "gzip" or "gz" can be used. Compression is not enabled by default.
+    # Only available for physical import mode. Whether to enable compression when sending KV data to TiKV. Currently, only Gzip compression is supported and can be specified using either "gzip" or "gz". Compression is not enabled by default.
     # compress-kv-pairs: ""
     # pd-server address, just fill in one. If empty, the default is to use the pd address information from the TiDB query.
     # pd-addr: "192.168.0.1:2379"
