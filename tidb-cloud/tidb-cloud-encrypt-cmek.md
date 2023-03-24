@@ -109,7 +109,7 @@ You can configure [automatic CMEK rotation](http://docs.aws.amazon.com/kms/lates
 
 ## Revoke and restore CMEK
 
-In the case PingCAP’s access to the CMEK needs to be temporarily revoked, the user needs to follow these steps:
+If you need to temporarily revoke TiDB Cloud's access to CMEK, follow these steps:
 
 1. The user needs to revoke the corresponding permissions and update the KMS Key policy on the AWS KMS console.
 2. Pause all the clusters under the project on the TiDB Cloud console.
