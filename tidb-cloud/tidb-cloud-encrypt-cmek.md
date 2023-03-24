@@ -59,6 +59,7 @@ If you want to encrypt your data using the KMS owned in your own account, take t
                     }
                 }
             },
+            // S3-related policy
             {
                 "Sid": "Allow TiDB cloud role to use KMS to store encrypted backup to S3",
                 "Effect": "Allow",
