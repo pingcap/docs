@@ -8,6 +8,14 @@ aliases: ['/docs/dev/sql-statements/sql-statement-load-data/','/docs/dev/referen
 
 The `LOAD DATA` statement batch loads data into a TiDB table.
 
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> This feature is only available on [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta).
+
+</CustomContent>
+
 ## Synopsis
 
 ```ebnf+diagram
