@@ -400,8 +400,22 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
 + TiDB
 
-    - note [#issue](链接) @[贡献者 GitHub ID](链接)
-    - note [#issue](链接) @[贡献者 GitHub ID](链接)
+    - Fix the issue that TiFlash reports an error for generated columns during execution [#40663](https://github.com/pingcap/tidb/issues/40663) @[guo-shaoge](https://github.com/guo-shaoge)
+    - Fix the issue that TiDB might not be able to obtain statistics correctly when there is a time type [#41938](https://github.com/pingcap/tidb/issues/41938) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
+    - Fix the issue that full index scans might cause errors when prepare plan cache is enabled [#42150](https://github.com/pingcap/tidb/issues/42150) @[fzzf678](https://github.com/fzzf678)
+    - Fix the issue that `IFNULL(NOT NULL COLUMN, ...)` might return incorrect results [#41734](https://github.com/pingcap/tidb/issues/41734) @[LittleFall](https://github.com/LittleFall)
+    - Fix the issue that TiDB might produce incorrect results when all data in a partitioned table is in a single region [#41801](https://github.com/pingcap/tidb/issues/41801) @[Defined2014](https://github.com/Defined2014)
+    - Fix the issue that TiDB might produce incorrect results when different partitioned tables appear in a single SQL statement [#42135](https://github.com/pingcap/tidb/issues/42135) @[mjonss](https://github.com/mjonss)
+    - Fix the issue that statistics auto-collection might not trigger correctly on a partitioned table after adding a new index to the partitioned table [#41638](https://github.com/pingcap/tidb/issues/41638) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
+    - Fix the issue that TiDB might read incorrect column statistics information after collecting statistics twice in a row [#42073](https://github.com/pingcap/tidb/issues/42073) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
+    - Fix the issue that IndexMerge might produce incorrect results when prepare plan cache is enabled [#41828](https://github.com/pingcap/tidb/issues/41828) @[qw4990](https://github.com/qw4990)
+    - Fix the issue that IndexMerge might have goroutine leakage [#41605](https://github.com/pingcap/tidb/issues/41605) @[guo-shaoge](https://github.com/guo-shaoge)
+    - Fix the issue that non-BIGINT unsigned integers might produce incorrect results when compared with strings/decimals [#41736](https://github.com/pingcap/tidb/issues/41736) @[LittleFall](https://github.com/LittleFall)
+    - Fix the issue that killing a previous `ANALYZE` statement due to memory over-limit might cause the current `ANALYZE` statement in the same session to be killed [#41825](https://github.com/pingcap/tidb/issues/41825), @[XuHuaiyu](https://github.com/XuHuaiyu)
+    - Fix the issue that data racing might occur during the information collection process of the batch coprocessor [41412](https://github.com/pingcap/tidb/issues/41412) @[you06](https://github.com/you06)
+    - Fix the issue that an assertion error prevents printing MVCC information for partitioned tables [#40629](https://github.com/pingcap/tidb/issues/40629) @[ekexium](https://github.com/ekexium)
+    - Fix the issue that fair lock mode adds locking to non-existent keys [#41527](https://github.com/pingcap/tidb/issues/41527) @[ekexium](https://github.com/ekexium)
+    - Fix the issue that `INSERT IGNORE` and `REPLACE` statements do not lock keys that do not modify values [#42121](https://github.com/pingcap/tidb/issues/42121) @[zyguan](https://github.com/zyguan)
 
 + TiKV
 
@@ -415,8 +429,10 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
 + TiFlash
 
-    - note [#issue](链接) @[贡献者 GitHub ID](链接)
-    - note [#issue](链接) @[贡献者 GitHub ID](链接)
+    - Fix the issue that Decimal division does not round up the last digit in certain cases [#7022](https://github.com/pingcap/tiflash/issues/7022) @[LittleFall](https://github.com/LittleFall)
+    - Fix the issue that Decimal cast rounds up incorrectly in certain cases [#6994](https://github.com/pingcap/tiflash/issues/6994) @[windtalker](https://github.com/windtalker)
+    - Fix the issue that TopN/Sort operators produce incorrect results after enabling the new collation [#6807](https://github.com/pingcap/tiflash/issues/6807) @[xzhangxian1008](https://github.com/xzhangxian1008)
+    - Fix the issue that TiFlash reports an error when aggregating a result set larger than 12 million rows on a single TiFlash node [#6993](https://github.com/pingcap/tiflash/issues/6993) @[windtalker](https://github.com/windtalker)
 
 + Tools
 
