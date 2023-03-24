@@ -19,17 +19,7 @@ The TiDB resource control feature provides two layers of resource management cap
 
 - TiDB flow control: TiDB flow control uses the [token bucket algorithm](https://en.wikipedia.org/wiki/Token_bucket). If there are not enough tokens in a bucket, and the resource group does not specify the `BURSTABLE` option, the requests to the resource group will wait for the token bucket to backfill the tokens and retry. The retry might fail due to timeout.
 
-<CustomContent platform="tidb">
-
 - TiKV scheduling: You can set the absolute priority [(`PRIORITY`)](/information-schema/information-schema-resource-groups.md#examples) as needed. Different resources are scheduled according to the `PRIORITY` setting. Tasks with high `PRIORITY` are scheduled first. If you do not set the absolute priority, TiKV uses the value of `RU_PER_SEC` of each resource group to determine the priority of the read and write requests for each resource group. Based on the priorities, the storage layer uses the priority queue to schedule and process requests.
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-- TiKV scheduling: for on-premises TiDB, if the `resource-control.enabled` parameter is enabled, TiKV uses the value of `RU_PER_SEC` of each resource group to determine the priority of the read and write requests for each resource group. Based on the priorities, the storage layer uses the priority queue to schedule and process requests. For TiDB Cloud, the value of the `resource-control.enabled` parameter is `false` by default and does not support dynamic modification. If you need to enable it for TiDB Cloud Dedicated Tier clusters, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
-
-</CustomContent>
 
 ## Scenarios for resource control
 
