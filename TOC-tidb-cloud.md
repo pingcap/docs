@@ -305,6 +305,7 @@
       - [`GRANT <role>`](/sql-statements/sql-statement-grant-role.md)
       - [`INSERT`](/sql-statements/sql-statement-insert.md)
       - [`KILL [TIDB]`](/sql-statements/sql-statement-kill.md)
+      - [`LOAD DATA`](/sql-statements/sql-statement-load-data.md)
       - [`LOCK STATS`](/sql-statements/sql-statement-lock-stats.md)
       - [`MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md)
       - [`PREPARE`](/sql-statements/sql-statement-prepare.md)
