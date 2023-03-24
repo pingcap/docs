@@ -30,10 +30,10 @@ The meanings of the fields displayed by the `SHOW LOAD DATA` statement are as fo
 | Import_Mode      | The import mode. Currently it can only be `logical`.       |
 | Created_By       | The database username that created the task                |
 | Job_State        | Indicates the current state of the task. For the `logical` mode task, it can only be `loading`. |
-| Job_Status       | Indicates the status of the current task. The following statuses are available: <ul><li>`pending` indicates that the task has been created but not yet started running; </li><li>`running` indicates that it is running; </li><li>`canceled` indicates that the task has been cancelled; </li><li>`failed` indicates that the task has failed and exited; </li><li>`finished` indicates that the task has been completed. </li></ul>|
+| Job_Status       | Indicates the status of the current task. The following statuses are available: <ul><li>`pending` indicates that the task has been created but not yet started running; </li><li>`running` indicates that it is running; </li><li>`canceled` indicates that the task has been canceled; </li><li>`failed` indicates that the task has failed and exited; </li><li>`finished` indicates that the task has been completed. </li></ul>|
 | Source_File_Size | Size of the source file                                     |
 | Loaded_File_Size | Size of the amount of data that has been read and written to the target table        |
-| Result_Code      | When the task status is `finished`, it is `0`. When the task status is `failed`, it is the corresponding error code.  |
+| Result_Code      | When the task status is `running`, it is empty. When the task status is `finished`, it is `0` and a result message is returned. When the task status is `failed`, it is the corresponding error code.  |
 | Result_Message   | If the import succeeds, a summary message is returned. If the import fails, an error message is returned. |
 
 ## Examples
