@@ -17,7 +17,7 @@ After you configure the CMEK capability for a project, the static data in all cl
 
 - Currently, TiDB Cloud only supports using AWS KMS to provide CMEK.
 - To use the CMEK capability, you need to determine whether to enable the CMEK key during project creation and complete CMEK-related configurations before creating a cluster. Enabling CMEK capabilities in existing projects is not supported.
-- Currently, only AWS Dedicated Tier clusters can be created under CMEK-enabled projects, and GCP Dedicated Tier clusters and Serverless Tier clusters are not supported.
+- Currently, in CMEK-enabled projects, you can only create [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters hosted on AWS. Dedicated Tier clusters hosted on GCP and [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters are not supported.
 - Currently, for a particular project, CMEK can only be configured for one AWS region. Once configured, you cannot create clusters in other regions in the same project.
 
 ## Enable CMEK
