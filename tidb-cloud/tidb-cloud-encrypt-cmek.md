@@ -85,6 +85,10 @@ If you want to encrypt your data using the KMS owned by your account, take the f
 
 ### Step 2. Create a new project and enable CMEK
 
+> **Note:**
+>
+> Currently the configuration is not available on the TiDB Cloud console. You can only configure the project using TiDB Cloud API.
+
 1. Create a new project and enable AWS CMEK using the [Create a project](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Project/operation/CreateProject) endpoint of TiDB Cloud API.
 
     Make sure the `aws_cmek_enabled` field is set to `true`.
