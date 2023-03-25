@@ -79,7 +79,7 @@ If you want to encrypt your data using the KMS owned by your account, take the f
 
 > **Note:**
 >
-> - `<pingcap-account>` is the account where customer clusters run in. It will be provided to the customer separately through documentation or other means at the time of application.
+> - `<pingcap-account>` is the account where your clusters run in. If you do not already know the account, you can [contact the technical support staff](/tidb-cloud/tidb-cloud-support.md).
 > - For EBS-related policy in the first block, refer to [AWS documentation](https://docs.aws.amazon.com/kms/latest/developerguide/conditions-kms.html#conditions-kms-caller-account).
 > - For S3-related policy in the second block, refer to [AWS blog](https://repost.aws/knowledge-center/s3-bucket-access-default-encryption).
 
