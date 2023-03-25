@@ -105,7 +105,7 @@ Create a Dedicated Tier cluster hosted on AWS under the project created in Step 
 
 ## Rotate your CMEK
 
-You can configure [automatic CMEK rotation](http://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html) on AWS KMS. AWS automatic CMEK rotation does not require you to update the TiDB Cloud Encryption at Rest project settings, including the CMEK ID.
+You can configure [automatic CMEK rotation](http://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html) on AWS KMS. With this rotation enabled, you do not need to update the Encryption at Rest project settings in TiDB Cloud, including the CMEK ID.
 
 ## Revoke and restore CMEK
 
