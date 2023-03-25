@@ -5,9 +5,9 @@ summary: Learn about how to use CMEK in TiDB Cloud.
 
 # Encryption at Rest using Customer-Managemented Encryption Keys
 
-Customer-Managed Encryption Key (CMEK) allows you to protect your static data in a TiDB Cloud Dedicated Tier using a cryptographic key that is completely controlled by you. This key is called a CMEK key.
+Customer-Managed Encryption Key (CMEK) allows you to protect your static data in a TiDB Cloud Dedicated Tier using a cryptographic key that is completely controlled by you. This key is called as the CMEK key.
 
-After you configure the CMEK capability for a project, the static data in all clusters created in this project will be encrypted using this CMEK. At the same time, the backup data created by these clusters will also be encrypted using the same key. If you do not enable CMEK, TiDB Cloud will use an escrow key to encrypt all data of your cluster at rest.
+Once you have configured the CMEK capability for a project, all clusters created within this project will encrypt their static data using this CMEK. Additionally, any backup data created by these clusters will also be encrypted using the same key. If you do not enable CMEK, TiDB Cloud will use an escrow key to encrypt all data of your cluster at rest.
 
 > **Note:**
 >
