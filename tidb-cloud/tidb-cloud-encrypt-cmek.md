@@ -22,7 +22,7 @@ Once you have configured the CMEK capability for a project, all clusters created
 
 ## Enable CMEK
 
-If you want to encrypt your data using the KMS owned in your own account, take the following steps.
+If you want to encrypt your data using the KMS owned by your account, take the following steps.
 
 ### Step 1. Provision KMS and IAM in your cloud provider
 
