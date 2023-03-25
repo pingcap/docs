@@ -11,7 +11,7 @@ Once you have configured the CMEK capability for a project, all clusters created
 
 > **Note:**
 >
-> Currently this feature is only available upon request. If you need to try out this feature, contact [support](/tidb-cloud/tidb-cloud-support.md).
+> Currently, this feature is only available upon request. If you need to try out this feature, contact [support](/tidb-cloud/tidb-cloud-support.md).
 
 ## Restrictions
 
