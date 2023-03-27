@@ -1,6 +1,6 @@
 ---
 title: TiDB Cloud Documentation
-aliases: ['/tidbcloud/beta/privacy-policy', '/tidbcloud/beta/terms-of-service', '/tidbcloud/beta/service-level-agreement']
+aliases: ['/privacy-policy', '/terms-of-service', '/service-level-agreement']
 hide_sidebar: true
 hide_commit: true
 ---
