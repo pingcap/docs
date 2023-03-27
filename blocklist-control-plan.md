@@ -77,7 +77,7 @@ The blocklist of expression pushdown is one way to tune the expression pushdown,
 
 ### Expressions that are supported to be pushed down
 
-For more information about the expressions which are supported to be pushed down, see [Supported expressions for pushdown to TiKV](/functions-and-operators/expressions-pushed-down.md#supported-expressions-for-pushdown-to-tikv).
+For more information about the expressions that are supported to be pushed down, see [Supported expressions for pushdown to TiKV](/functions-and-operators/expressions-pushed-down.md#supported-expressions-for-pushdown-to-tikv).
 
 ### Disable the pushdown of specific expressions
 
