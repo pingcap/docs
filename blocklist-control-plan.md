@@ -75,7 +75,7 @@ You can use the blocklist of optimization rules to disable some of them if some 
 
 The blocklist of expression pushdown is one way to tune the expression pushdown, mainly used to manually disable some expressions of some specific data types.
 
-### Expressions which are supported to be pushed down
+### Expressions that are supported to be pushed down
 
 For more information about the expressions which are supported to be pushed down, see [Supported expressions for pushdown to TiKV](/functions-and-operators/expressions-pushed-down.md#supported-expressions-for-pushdown-to-tikv).
 
