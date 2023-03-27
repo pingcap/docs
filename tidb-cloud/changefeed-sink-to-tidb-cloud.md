@@ -11,7 +11,6 @@ This document describes how to stream data from TiDB Cloud Dedicated Tier cluste
 >
 > To use the Changefeed feature, make sure that your TiDB cluster version is v6.4.0 or later.
 >
-> Currently, TiDB Cloud only allows up to 5 changefeeds per cluster.
 
 ## Restrictions
 
