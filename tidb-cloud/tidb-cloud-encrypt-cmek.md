@@ -104,7 +104,7 @@ Create a Dedicated Tier cluster hosted on AWS under the project created in Step 
 >
 > When CMEK is enabled, the EBS volumes used by the nodes of the cluster and the S3 used for the cluster backups are encrypted using CMEK.
 
-## Rotate your CMEK
+## Rotate CMEK
 
 You can configure [automatic CMEK rotation](http://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html) on AWS KMS. With this rotation enabled, you do not need to update the Encryption at Rest project settings in TiDB Cloud, including the CMEK ID.
 
