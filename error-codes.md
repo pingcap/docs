@@ -392,19 +392,19 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 * Error Number: 8163
 
-    Unknown `LOAD DATA ... WITH ... ` option. See [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) for supported options.
+    Unknown `LOAD DATA...WITH...` option. See [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) for supported options.
 
 * Error Number: 8164
 
-    The `LOAD DATA ... WITH ... ` option takes an invalid value. See [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) for valid values.
+    The `LOAD DATA...WITH...` option takes an invalid value. See [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) for valid values.
 
 * Error Number: 8165
 
-    Specify duplicated `LOAD DATA ... WITH ... ` options. Each option can be specified only once.
+    Specify duplicated `LOAD DATA...WITH...` options. Each option can be specified only once.
 
 * Error Number: 8166
 
-    Some `LOAD DATA ... WITH ... ` options can only be used in certain import modes. See [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) to see the supported options.
+    Some `LOAD DATA...WITH...` options can only be used in certain import modes. See [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) to see the supported options.
 
 * Error Number: 8170
 
