@@ -48,7 +48,17 @@ You can use `LOCAL` to specify data files on the client to be imported, where th
 
 ### S3 and GCS storage
 
+<CustomContent platform="tidb">
+
 If you do not specify `LOCAL`, the file parameter must be a valid S3 or GCS path, as detailed in [external storage](/br/backup-and-restore-storages.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+If you do not specify `LOCAL`, the file parameter must be a valid S3 or GCS path, as detailed in [external storage](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages).
+
+</CustomContent>
 
 When the data files are stored on S3 or GCS, you can import individual files or use the wildcard character `*` to match multiple files to be imported. Note that wildcards do not recursively process files in subdirectories. The following are some examples:
 
@@ -106,7 +116,7 @@ You can ignore the first `number` lines of a file by configuring the `IGNORE <nu
 
 If you do not specify the `LOCAL` parameter, you can use `WITH detached` to make `LOAD DATA` run in the background.
 
-You can view the created jobs via [`SHOW LOAD DATA`](/sql-statements/sql-statement-show-load-data.md) or you can use [`CANCEL LOAD DATA` and `DROP LOAD DATA`](/sql-statements/sql- statement-operate-load-data-job.md) to cancel or delete the created jobs.
+You can view the created jobs via [`SHOW LOAD DATA`](/sql-statements/sql-statement-show-load-data.md) or you can use [`CANCEL LOAD DATA` and `DROP LOAD DATA`](/sql-statements/sql-statement-operate-load-data-job.md) to cancel or delete the created jobs.
 
 ### `WITH batch_size=<number>`
 
@@ -144,7 +154,17 @@ SHOW LOAD DATA JOB 1;
 
 The following example imports data using `LOAD DATA`. Comma is specified as the field delimiter. The double quotation marks that enclose the data are ignored. The first line of the file is ignored.
 
+<CustomContent platform="tidb">
+
 If you see `ERROR 1148 (42000): the used command is not allowed with this TiDB version`, refer to [ERROR 1148 (42000): the used command is not allowed with this TiDB version](/error-codes.md#mysql-native-error-messages) for troubleshooting.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+If you see `ERROR 1148 (42000): the used command is not allowed with this TiDB version`, refer to [ERROR 1148 (42000): the used command is not allowed with this TiDB version](https://docs.pingcap.com/tidb/stable/error-codes#mysql-native-error-messages) for troubleshooting.
+
+</CustomContent>
 
 ```sql
 LOAD DATA LOCAL INFILE '/mnt/evo970/data-sets/bikeshare-data/2017Q4-capitalbikeshare-tripdata.csv' INTO TABLE trips FIELDS TERMINATED BY ',' ENCLOSED BY '\"' LINES TERMINATED BY '\r\n' IGNORE 1 LINES (duration, start_date, end_date, start_station_number, start_station, end_station_number, end_station, bike_number, member_type);
@@ -167,17 +187,46 @@ In the above example, `x'2c'` is the hexadecimal representation of the `,` chara
 
 This statement is understood to be fully compatible with MySQL, except for character set options which are parsed but ignored. If you find any compatibility difference, you can [report it via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
 
+<CustomContent platform="tidb">
+
 > **Note:**
 >
-> - For versions earlier than TiDB v4.0.0, `LOAD DATA` committed every 20000 rows. 
+> - For versions earlier than TiDB v4.0.0, `LOAD DATA` committed every 20000 rows.
 > - For versions from TiDB v4.0.0 to v6.6.0, TiDB commits all rows in one transaction by default.
 > - Starting from TiDB v7.0.0, the number of rows to be committed in a batch is controlled by the `WITH batch_size=<number>` parameter of the `LOAD DATA` statement, which defaults to 1000 rows per commit.
 > - After upgrading from TiDB v4.0.0 or earlier versions, `ERROR 8004 (HY000) at line 1: Transaction is too large, size: 100000058` might occur. The recommended way to resolve this error is to increase the [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit) value in your `tidb.toml` file. If you are unable to increase this limit, you can also restore the behavior before the upgrade by setting [`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size) to `20000`.
 
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> - For versions earlier than TiDB v4.0.0, `LOAD DATA` committed every 20000 rows.
+> - For versions from TiDB v4.0.0 to v6.6.0, TiDB commits all rows in one transaction by default.
+> - Starting from TiDB v7.0.0, the number of rows to be committed in a batch is controlled by the `WITH batch_size=<number>` parameter of the `LOAD DATA` statement, which defaults to 1000 rows per commit.
+> - After upgrading from TiDB v4.0.0 or earlier versions, `ERROR 8004 (HY000) at line 1: Transaction is too large, size: 100000058` might occur. The recommended way to resolve this error is to increase the [`txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit) value in your `tidb.toml` file. If you are unable to increase this limit, you can also restore the behavior before the upgrade by setting [`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size) to `20000`.
+
+</CustomContent>
+
 ## See also
+
+<CustomContent platform="tidb">
 
 * [INSERT](/sql-statements/sql-statement-insert.md)
 * [TiDB Optimistic Transaction Model](/optimistic-transaction.md)
 * [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)
 * [`SHOW LOAD DATA`](/sql-statements/sql-statement-show-load-data.md)
 * [`CANCEL LOAD DATA` and `DROP LOAD DATA`](/sql-statements/sql-statement-operate-load-data-job.md)
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+* [INSERT](/sql-statements/sql-statement-insert.md)
+* [TiDB Optimistic Transaction Model](/optimistic-transaction.md)
+* [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview)
+* [`SHOW LOAD DATA`](/sql-statements/sql-statement-show-load-data.md)
+* [`CANCEL LOAD DATA` and `DROP LOAD DATA`](/sql-statements/sql-statement-operate-load-data-job.md)
+
+</CustomContent>
