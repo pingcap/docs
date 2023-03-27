@@ -166,9 +166,9 @@ addr = "172.16.31.10:8287"
 
 # Specifies whether Physical Import Mode adds indexes via SQL. The default value is `false`, which means that TiDB Lightning will encode both row data and index data into KV pairs and import them into TiKV together. This mechanism is consistent with that of the historical versions. If you set it to `true`, it means that TiDB Lightning adds indexes via SQL after importing the row data.
 # The benefit of adding indexes via SQL is that you can separately import data and import indexes, and import data more quickly. After the data is imported, even if the indexes fail to be added, it does not affect the consistency of the imported data.
-# add-index-by-sql = true
+# add-index-by-sql = false
 
-When you use TiDB Lightning to import a multi-tenant TiDB cluster, use this parameter to specify the corresponding key space name. The default value is an empty string, which means TiDB Lightning will automatically get the key space name of the corresponding tenant to import data. If you specify a value, the specified key space name will be used to import data.
+# When you use TiDB Lightning to import a multi-tenant TiDB cluster, use this parameter to specify the corresponding key space name. The default value is an empty string, which means TiDB Lightning will automatically get the key space name of the corresponding tenant to import data. If you specify a value, the specified key space name will be used to import data.
 # keyspace-name = ""
 [mydumper]
 # Block size for file reading. Keep it longer than the longest string of the data source.
