@@ -16,7 +16,7 @@ TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data servic
 
 To access the changefeed feature, navigate to the cluster overview page of your TiDB cluster, and then click **Changefeed** in the left navigation pane. The changefeed page is displayed.
 
-On the changefeed page, you can create a changefeed, view a lit of existing changefeeds, and operate the existing changefeeds (such as scaling, pausing, resuming, editing, and deleting a changefeed).
+On the changefeed page, you can create a changefeed, view a list of existing changefeeds, and operate the existing changefeeds (such as scaling, pausing, resuming, editing, and deleting a changefeed).
 
 ## Create a changefeed
 
