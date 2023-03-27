@@ -118,8 +118,6 @@ After completing the prerequisites, you can sink your data to the destination Se
 
 10. If you have [loaded the existing data](#load-existing-data-optional) using Dumpling, you need to restore the GC time to its original value (the default value is `10m`) after the sink is created:
 
-    {{< copyable "sql" >}}
-
     ```sql
     SET GLOBAL tidb_gc_life_time = '10m';
     ```
