@@ -9,7 +9,7 @@ This document describes how to create a changefeed to stream data from TiDB Clou
 
 > **Note:**
 >
-> Currently, Kafka sink is in **beta**. To use the Changefeed feature, make sure that your TiDB cluster version is v6.4.0 or later and the TiKV node size is at least 8 vCPU and 16 GiB.
+> Currently, Kafka sink is in **beta**. To use the changefeed feature, make sure that your TiDB cluster version is v6.4.0 or later and the TiKV node size is at least 8 vCPU and 16 GiB.
 >
 > For [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta), the changefeed feature is unavailable.
 
