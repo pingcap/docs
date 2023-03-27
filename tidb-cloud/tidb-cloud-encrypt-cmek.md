@@ -97,7 +97,7 @@ If you want to encrypt your data using the KMS owned by your account, take the f
 
 ### Step 3. Create a cluster
 
-Create a Dedicated Tier cluster hosted on AWS under the project created in Step 1. You need to ensure that the region where the cluster is located is the same as that in Step 2.
+Create a Dedicated Tier cluster hosted on AWS under the project created in Step 1. Ensure that the region where the cluster is located is the same as that in Step 2.
 
 > **Note:**
 >
