@@ -1,11 +1,11 @@
 ---
 title: Sink to TiDB Cloud Serverless Tier clusters
-Summary: Learn how to create a changefeed to stream data from TiDB Cloud Dedicated Tier clusters to TiDB Cloud Serverless Tier clusters.
+Summary: Learn how to create a changefeed to stream data from a TiDB Cloud Dedicated Tier cluster to a TiDB Cloud Serverless Tier cluster.
 ---
 
 # Sink to TiDB Cloud
 
-This document describes how to stream data from TiDB Cloud Dedicated Tier clusters to TiDB Cloud Serverless Tier clusters.
+This document describes how to stream data from a TiDB Cloud Dedicated Tier cluster to a TiDB Cloud Serverless Tier cluster.
 
 > **Note:**
 >
