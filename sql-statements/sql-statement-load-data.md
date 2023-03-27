@@ -191,7 +191,7 @@ This statement is understood to be fully compatible with MySQL, except for chara
 
 > **Note:**
 >
-> - For versions earlier than TiDB v4.0.0, `LOAD DATA` committed every 20000 rows.
+> - For versions earlier than TiDB v4.0.0, `LOAD DATA` commits every 20000 rows.
 > - For versions from TiDB v4.0.0 to v6.6.0, TiDB commits all rows in one transaction by default.
 > - Starting from TiDB v7.0.0, the number of rows to be committed in a batch is controlled by the `WITH batch_size=<number>` parameter of the `LOAD DATA` statement, which defaults to 1000 rows per commit.
 > - After upgrading from TiDB v4.0.0 or earlier versions, `ERROR 8004 (HY000) at line 1: Transaction is too large, size: 100000058` might occur. The recommended way to resolve this error is to increase the [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit) value in your `tidb.toml` file. If you are unable to increase this limit, you can also restore the behavior before the upgrade by setting [`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size) to `20000`.
@@ -202,10 +202,10 @@ This statement is understood to be fully compatible with MySQL, except for chara
 
 > **Note:**
 >
-> - For versions earlier than TiDB v4.0.0, `LOAD DATA` committed every 20000 rows.
+> - For versions earlier than TiDB v4.0.0, `LOAD DATA` commits every 20000 rows.
 > - For versions from TiDB v4.0.0 to v6.6.0, TiDB commits all rows in one transaction by default.
 > - Starting from TiDB v7.0.0, the number of rows to be committed in a batch is controlled by the `WITH batch_size=<number>` parameter of the `LOAD DATA` statement, which defaults to 1000 rows per commit.
-> - After upgrading from TiDB v4.0.0 or earlier versions, `ERROR 8004 (HY000) at line 1: Transaction is too large, size: 100000058` might occur. The recommended way to resolve this error is to increase the [`txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit) value in your `tidb.toml` file. If you are unable to increase this limit, you can also restore the behavior before the upgrade by setting [`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size) to `20000`.
+> - After upgrading from TiDB v4.0.0 or earlier versions, `ERROR 8004 (HY000) at line 1: Transaction is too large, size: 100000058` might occur. To resolve this error, you can restore the behavior before the upgrade by setting [`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size) to `20000`.
 
 </CustomContent>
 
