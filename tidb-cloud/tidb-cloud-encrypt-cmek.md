@@ -1,6 +1,6 @@
 ---
 title: Encryption at Rest Using Customer-Managed Encryption Keys
-summary: Learn about how to use CMEK in TiDB Cloud.
+summary: Learn about how to use Customer-Managed Encryption Key (CMEK) in TiDB Cloud.
 ---
 
 # Encryption at Rest using Customer-Managemented Encryption Keys
