@@ -93,7 +93,7 @@ If you want to encrypt your data using the KMS owned by your account, take the f
 
     Make sure the `aws_cmek_enabled` field is set to `true`.
 
-2. Configure the KMS Key ARN for the specified region (e.g., us-east-1) under this project using the [Configure AWS CMEK](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/CreateAwsCmek) endpoint of TiDB Cloud API.
+2. Configure the KMS Key ARN for the specified region (for example, us-east-1) under this project using the [Configure AWS CMEK](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/CreateAwsCmek) endpoint of TiDB Cloud API.
 
 ### Step 3. Create a cluster
 
