@@ -27,6 +27,12 @@
     - Go
       - [Go-MySQL-Driver](/develop/dev-guide-sample-application-golang-sql-driver.md)
       - [GORM](/develop/dev-guide-sample-application-golang-gorm.md)
+    - Python
+      - [mysqlclient](/develop/dev-guide-sample-application-python-mysqlclient.md)
+      - [MySQL Connect/Python](/develop/dev-guide-sample-application-python-mysql-connector.md)
+      - [pymysql](/develop/dev-guide-sample-application-python-pymysql.md)
+      - [sqlachemy](/develop/dev-guide-sample-application-python-sqlalchemy.md)
+      - [peewee](/develop/dev-guide-sample-application-python-peewee.md)
   - Third-Party Support
     - [Third-Party Tools Supported by TiDB](/develop/dev-guide-third-party-support.md)
     - [Known Incompatibility Issues with Third-Party Tools](/develop/dev-guide-third-party-tools-compatibility.md)

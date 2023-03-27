@@ -247,7 +247,7 @@ Support level: **Compatible**
 
 You can follow the [PyMySQL documentation](https://pypi.org/project/PyMySQL/) to download and configure the driver. It is recommended to use PyMySQL 1.0.2 or later versions.
 
-For an example of using PyMySQL to build a TiDB application, see [Build a Simple CRUD App with TiDB and Python](/develop/dev-guide-sample-application-python.md#step-2-get-the-code).
+For an example of using PyMySQL to build a TiDB application, see [Build a Simple CRUD App with TiDB and PyMySQL](/develop/dev-guide-sample-application-python-pymysql.md#step-2-get-the-code).
 
 </div>
 <div label="mysqlclient">
@@ -256,7 +256,7 @@ Support level: **Compatible**
 
 You can follow the [mysqlclient documentation](https://pypi.org/project/mysqlclient/) to download and configure the driver. It is recommended to use mysqlclient 2.1.1 or later versions.
 
-For an example of using mysqlclient to build a TiDB application, see [Build a Simple CRUD App with TiDB and Python](/develop/dev-guide-sample-application-python.md#step-2-get-the-code).
+For an example of using mysqlclient to build a TiDB application, see [Build a Simple CRUD App with TiDB and mysqlclient](/develop/dev-guide-sample-application-python-mysqlclient.md#step-2-get-the-code).
 
 </div>
 <div label="mysql-connector-python">
@@ -265,7 +265,7 @@ Support level: **Compatible**
 
 You can follow the [mysql-connector-python documentation](https://dev.mysql.com/doc/connector-python/en/connector-python-installation-binary.html) to download and configure the driver. It is recommended to use Connector/Python 8.0.31 or later versions.
 
-For an example of using mysql-connector-python to build a TiDB application, see [Build a Simple CRUD App with TiDB and Python](/develop/dev-guide-sample-application-python.md#step-2-get-the-code).
+For an example of using mysql-connector-python to build a TiDB application, see [Build a Simple CRUD App with TiDB and mysql-connector-python](/develop/dev-guide-sample-application-python-mysql-connector.md#step-2-get-the-code).
 
 </div>
 </SimpleTab>
@@ -279,7 +279,7 @@ Support level: **Compatible**
 
 [SQLAlchemy](https://www.sqlalchemy.org/) is a popular ORM framework for Python. To get all dependencies in your application, you can use the `pip install SQLAlchemy==1.4.44` command. It is recommended to use SQLAlchemy 1.4.44 or later versions.
 
-For an example of using SQLAlchemy to build a TiDB application, see [Build a Simple CRUD App with TiDB and Python](/develop/dev-guide-sample-application-python.md#step-2-get-the-code).
+For an example of using SQLAlchemy to build a TiDB application, see [Build a Simple CRUD App with TiDB and SQLAlchemy](/develop/dev-guide-sample-application-python-sqlalchemy.md#step-2-get-the-code).
 
 </div>
 <div label="peewee">
@@ -288,7 +288,7 @@ Support level: **Compatible**
 
 [peewee](http://docs.peewee-orm.com/en/latest/) is a popular ORM framework for Python. To get all dependencies in your application, you can use the `pip install peewee==3.15.4` command. It is recommended to use peewee 3.15.4 or later versions.
 
-For an example of using peewee to build a TiDB application, see [Build a Simple CRUD App with TiDB and Python](/develop/dev-guide-sample-application-python.md#step-2-get-the-code).
+For an example of using peewee to build a TiDB application, see [Build a Simple CRUD App with TiDB and peewee](/develop/dev-guide-sample-application-python-peewee.md#step-2-get-the-code).
 
 </div>
 </SimpleTab>
