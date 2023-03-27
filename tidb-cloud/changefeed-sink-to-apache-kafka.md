@@ -136,9 +136,15 @@ For example, if your Kafka cluster is in Confluent Cloud, you can see [Resources
    - **Replication Factor**: controls how many Kafka servers each Kafka message is replicated to.
    - **Partition Number**: controls how many partitions exist in a topic.
 
-8. Click **Next** to check the configurations you set and go to the next page.
+8. Click **Next**.
 
-## Step 4. Review the configurations
+## Step 4. Configure your changefeed specification
+
+1. In the **Changefeed Specification** area, specify the number of Replication Capacity Units (RCUs) to be used by the changefeed.
+2. In the **Changefeed Name** area, specify a name for the changefeed.
+3. Click **Next** to check the configurations you set and go to the next page.
+
+## Step 5. Review the configurations
 
 On this page, you can review all the changefeed configurations that you set.
 

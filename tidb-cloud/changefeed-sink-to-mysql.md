@@ -111,23 +111,28 @@ After completing the prerequisites, you can sink your data to MySQL.
     - **Tables to be replicated**: this column shows the tables to be replicated. But it does not show the new tables to be replicated in the future or the schemas to be fully replicated.
     - **Tables without valid keys**: this column shows tables without unique and primary keys. For these tables, because no unique identifier can be used by the downstream system to handle duplicate events, their data might be inconsistent during replication. To avoid such issues, it is recommended that you add unique keys or primary keys to these tables before the replication, or set filter rules to filter out these tables. For example, you can filter out the table `test.tbl1` using "!test.tbl1".
 
-6. In **Start Position**, configure the starting position for your MySQL sink.
+6. In **Start Position**, configure the starting position for your MySQL sink, and then click **Next**.
 
     - If you have [loaded the existing data](#load-existing-data-optional) using Dumpling, select **Start replication from a specific TSO** and fill in the TSO that you get from Dumpling exported metadata files.
     - If you do not have any data in the upstream TiDB cluster, select **Start replication from now on**.
     - Otherwise, you can customize the start time point by choosing **Start replication from a specific time**.
 
-7. Click **Next** to review the Changefeed configuration.
+7. Configure your changefeed specification.
+
+    - In the **Changefeed Specification** area, specify the number of Replication Capacity Units (RCUs) to be used by the changefeed.
+    - In the **Changefeed Name** area, specify a name for the changefeed.
+
+8. Click **Next** to review the Changefeed configuration.
 
     If you confirm all configurations are correct, check the compliance of cross-region replication, and click **Create**.
-    
+
     If you want to modify some configurations, click **Previous** to go back to the previous configuration page.
 
-8. The sink starts soon, and you can see the status of the sink changes from "**Creating**" to "**Running**".
+9. The sink starts soon, and you can see the status of the sink changes from "**Creating**" to "**Running**".
 
     Click the **Sink to MySQL** card, and you can see the Changfeed running status in a pop-up window, including checkpoint, replication latency, and other metrics.
 
-9. If you have [loaded the existing data](#load-existing-data-optional) using Dumpling, you need to restore the GC time to its original value (the default value is `10m`) after the sink is created:
+10. If you have [loaded the existing data](#load-existing-data-optional) using Dumpling, you need to restore the GC time to its original value (the default value is `10m`) after the sink is created:
 
 {{< copyable "sql" >}}
 
