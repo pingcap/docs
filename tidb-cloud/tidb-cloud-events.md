@@ -1,0 +1,54 @@
+---
+title: TiDB Cloud Cluster Events
+summary: Learn how to view the events for TiDB Cloud clusters using the Events page. 
+---
+
+# TiDB Cloud Cluster Events
+
+TiDB Cloud logs the historical events at the cluster level. An *event* indicates a change in your TiDB Cloud cluster. You can view the logged events on the **Events** page, including the event type, status, message, trigger time, and trigger user.
+
+This document describes how to view the events for TiDB Cloud clusters using the **Events** page and lists the supported event types.
+
+> **Note:**
+>
+> Currently, the Events page is only available for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters.
+
+## View the Events page
+
+To view the events on the Events page, take the following steps:
+
+1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+
+    > **Tip:**
+    >
+    > If you have multiple projects, you can switch to the target project from the ☰ hover menu in the upper-left corner.
+
+2. Click the name of the target cluster. The cluster overview page is displayed.
+3. Click **Events** in the left navigation pane.
+
+## Logged events
+
+TiDB Cloud logs the following types of cluster events:
+
+| Event Type| Description |  Available since |
+|:--- |:--- |:--- |
+| CreateCluster |  Events recorded for cluster creation actions.  |  2023-03-22   |
+| PauseCluster |   Events recorded for cluster pause actions. |  2023-03-22   |
+| ResumeCluster |   Events recorded for cluster resume actions. |  2023-03-22   |
+| ModifyClusterSize |   Events recorded for modifying cluster size actions. |  2023-03-22   |
+
+For each event, the following information is logged:
+
+- Event Type
+- Status
+- Message
+- Time
+- Triggered By
+
+> **Note:**
+>
+> Cluster events started before 2023-03-22 are not visible on the Events page. 
+
+## Event retention policy
+
+For Dedicated Tier clusters, the event data is kept for 7 days.

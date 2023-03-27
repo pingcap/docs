@@ -9,6 +9,8 @@ TiDB Cloud is powered by AI. You can use Chat2Query (beta), an AI-powered SQL ed
 
 In Chat2Query, you can either simply type `--` followed by your instructions to let AI generate SQL queries automatically or write SQL queries manually, and then run SQL queries against databases without a terminal. You can find the query results in tables intuitively and check the query logs easily.
 
+TiDB Cloud also provides the Chat2Query API, which is a RESTful interface. For more information, see [Get started with Chat2Query API](/tidb-cloud/use-chat2query-api.md).
+
 > **Note:**
 >
 > Chat2Query is only available for [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters.
@@ -99,9 +101,19 @@ In Chat2Query, you can save your SQL queries in different SQL files and manage S
 - To rename a SQL file, move your cursor on the filename, click **...** next to the filename, and then select **Rename**.
 - To delete a SQL file, move your cursor on the filename, click **...** next to the filename, and then select **Delete**. Note that when there is only one SQL file on the **SQL Files** tab, you cannot delete it.
 
+## Generate an endpoint from a SQL file
+
+TiDB Cloud provides a [Data Service (beta)](/tidb-cloud/data-service-overview.md) feature that enables you to access TiDB Cloud data via an HTTPS request using a custom API endpoint. In Chat2Query, you can generate an endpoint in Data Service (beta) from a SQL file by taking the following steps:
+
+1. Move your cursor on the filename, click **...** next to the filename, and then select **Generate endpoint**.
+2. In the **Generate endpoint** dialog box, select the Data App you want to generate the endpoint for and enter the endpoint name.
+3. Click **Generate**. The endpoint is generated and its details page is displayed.
+
+For more information, see [Manage an endpoint](/tidb-cloud/data-service-manage-endpoint.md).
+
 ## Manage Chat2Query settings
 
-By default, Chat2Query limits the maximum number of rows in query results to 500 and does not show system database schemas on the **Schemas** tab.
+By default, Chat2Query limits the maximum number of rows in query results to 500, does not show system database schemas, and disables [Chat2Query API](/tidb-cloud/use-chat2query-api.md) on the **Schemas** tab.
 
 To change the settings, take the following steps:
 

@@ -124,6 +124,14 @@
       - [Precheck Errors, Migration Errors, and Alerts for Data Migration](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md)
 - Explore Data
   - [Chat2Query (Beta)](/tidb-cloud/explore-data-with-chat2query.md)
+- Data Service (Beta)
+  - [Overview](/tidb-cloud/data-service-overview.md)
+  - [Get Started](/tidb-cloud/data-service-get-started.md)
+  - [Try Out Chat2Query API](/tidb-cloud/use-chat2query-api.md)
+  - [Manage Data App](/tidb-cloud/data-service-manage-data-app.md)
+  - [Manage Endpoint](/tidb-cloud/data-service-manage-endpoint.md)
+  - [API Key](/tidb-cloud/data-service-api-key.md)
+  - [Response and Status Code](/tidb-cloud/data-service-response-and-status-code.md)
 - Stream Data
   - [Changefeed Overview](/tidb-cloud/changefeed-overview.md)
   - [To MySQL Sink](/tidb-cloud/changefeed-sink-to-mysql.md)
@@ -136,6 +144,7 @@
   - [Overview](/tidb-cloud/monitor-tidb-cluster.md)
   - [Built-in Monitoring](/tidb-cloud/built-in-monitoring.md)
   - [Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md)
+  - [Cluster Events](/tidb-cloud/tidb-cloud-events.md) 
   - [Third-Party Monitoring Integrations](/tidb-cloud/third-party-monitoring-integrations.md)
 - Tune Performance
   - [Overview](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
@@ -240,7 +249,8 @@
     - [Storage](/tidb-storage.md)
     - [Computing](/tidb-computing.md)
     - [Scheduling](/tidb-scheduling.md)
-  - [TiDB Cloud Cluster Limits and Quotas](/tidb-cloud/limitations-and-quotas.md)
+  - [Dedicated Tier Limitations and Quotas](/tidb-cloud/limitations-and-quotas.md)
+  - [Serverless Tier Limitations](/tidb-cloud/serverless-tier-limitations.md)
   - [TiDB Limitations](/tidb-limitations.md)
   - SQL
     - [Explore SQL with TiDB](/basic-sql-operations.md)
@@ -513,7 +523,6 @@
   - [Dumpling](/dumpling-overview.md)
   - [Table Filter](/table-filter.md)
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
-  - [Serverless Tier Limitations](/tidb-cloud/serverless-tier-limitations.md)
 - FAQs
   - [TiDB Cloud FAQs](/tidb-cloud/tidb-cloud-faq.md)
   - [Serverless Tier FAQs](/tidb-cloud/serverless-tier-faqs.md)
