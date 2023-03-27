@@ -35,14 +35,16 @@ To create a changefeed, refer to the tutorials:
 
 You can change the TiCDC Replication Capacity Units (RCUs) of a changefeed by scaling up or down the changfeed.
 
+> **Note:**
+>
+> - Changefeeds created before March 28, 2023 cannot be scaled up or down. Similarly, newly created changefeeds within the same TiDB cluster cannot be scaled up or down.
+> - Only TiDB clusters without existing changefeeds support scaling up and down for newly created changefeeds.
+
 1. Navigate to the cluster overview page of the target TiDB cluster, and then click **Changefeed** in the left navigation pane.
 2. Locate the corresponding changefeed you want to scale, and click **...** > **Scale Up/Down** in the **Action** column.
 3. Select a new specification.
 4. Click **Submit**.
-```suggestion
-There are some limitations:
-1. Changefeeds created before March 28th 2023 cannot be scaled up or down. Similarly, newly created changefeeds within the same TiDB cluster cannot be scaled up or down.
-2. Only TiDB clusters without existing changefeeds support scaling up and down for newly created changefeeds.
+
 ## Pause or resume a changefeed
 
 1. Navigate to the cluster overview page of the target TiDB cluster, and then click **Changefeed** in the left navigation pane.
