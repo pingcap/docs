@@ -444,8 +444,10 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
     + Backup & Restore (BR)
 
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+        - Fix the issue of insufficient wait time for splitting Region retry during the PITR recovery process [#42001](https://github.com/pingcap/tidb/issues/42001) @[joccau](https://github.com/joccau)
+	- Fix the issue of recovery failure due to "memory is limited" error encountered during the PITR recovery process [#41983](https://github.com/pingcap/tidb/issues/41983) @[joccau](https://github.com/joccau)
+	- Fix the issue that PITR log backup progress does not advance when PD nodes are down [#14184](https://github.com/tikv/tikv/issues/14184) @[YuJuncen](https://github.com/YuJuncen)
+	- Alleviate the issue that the latency of the PITR log backup progress increases when Region leadership migration occurs [#13638](https://github.com/tikv/tikv/issues/13638) @[YuJuncen](https://github.com/YuJuncen)
 
     + TiCDC
 
