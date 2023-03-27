@@ -18,19 +18,20 @@ This document describes how to stream data from TiDB Cloud Dedicated Tier cluste
 - For each TiDB Cloud cluster, you can create up to 5 changefeeds.
 - Because TiDB Cloud uses TiCDC to establish changefeeds, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios).
 - If the table to be replicated does not have a primary key or a non-null unique index, the absence of a unique constraint during replication could result in duplicated data being inserted downstream in some retry scenarios.
-- The **Sink to TiDB Cloud** feature is only available to TiDB Cloud Dedicated Tier clusters that are in the following AWS regions and are created after November 9, 2022:
+- The **Sink to TiDB Cloud** feature is only available to TiDB Cloud Dedicated Tier clusters that are in the following AWS regions and created after November 9, 2022:
 
     - AWS Oregon (us-west-2)
     - AWS Frankfurt (eu-central-1)
     - AWS Singapore (ap-southeast-1)
     - AWS Tokyo (ap-northeast-1)
-- The only supported network connection method for TiDB Cloud changefeeds is Private link. When you create a TiDB Cloud changefeed, TiDB Cloud will automatically set up the Private link network connection for your changefeed.
+
+- The **Sink to TiDB Cloud** feature only supports network connection via private endpoints. When you create a changefeed to stream data from a TiDB Cloud Dedicated Tier cluster to a TiDB Cloud Serverless Tier cluster, TiDB Cloud will automatically set up the private endpoint network connection between the two clusters.
 
 ## Prerequisites
 
 Before creating a changefeed, you need to complete the following prerequisites:
 
-- Export the existing data from the source Dedicated Tier cluster and import to the target Serverless Tier cluster to the target  TiDB Cloud. For more information, see [](link).
+- [Export and load existing data to the target Serverless Tier cluster](#load-existing-data-recommended) (recommended).
 - Create corresponding target tables in the destination Serverless Tier cluster if you do not load the existing data and only want to replicate incremental data to the destination Serverless Tier cluster.
 
 ### Load existing data (recommended)
@@ -52,7 +53,7 @@ To load the existing data:
     SET GLOBAL tidb_gc_life_time = '720h';
     ```
 
-2. Use [Dumpling](/dumpling-overview.md) to export data from your TiDB Cloud Dedicated Tier cluster, then use community tools such as [mydumper/myloader](https://centminmod.com/mydumper.html) to load data to the destination Serverless Tier cluster.
+2. [Export data](/tidb-cloud/export-data-from-tidb-cloud.md) from your TiDB Cloud Dedicated Tier cluster, then use community tools such as [mydumper/myloader](https://centminmod.com/mydumper.html) to load data to the destination Serverless Tier cluster.
 
 3. From the [exported files of Dumpling](/dumpling-overview.md#format-of-exported-files), get the start position of TiDB Cloud sink from the metadata file:
 
@@ -113,12 +114,12 @@ After completing the prerequisites, you can sink your data to the destination Se
 
 9. The sink starts soon, and you can see the status of the sink changes from "**Creating**" to "**Running**".
 
-    Click the Changefeedname, and you can see the Changfeed running status on a detail page, including checkpoint, replication latency, and other metrics.
+    Click the Changefeed name, and you can see more details about the changefeed, such as the checkpoint, replication latency, and other metrics.
 
 10. If you have [loaded the existing data](#load-existing-data-optional) using Dumpling, you need to restore the GC time to its original value (the default value is `10m`) after the sink is created:
 
-{{< copyable "sql" >}}
+    {{< copyable "sql" >}}
 
-```sql
-SET GLOBAL tidb_gc_life_time = '10m';
-```
+    ```sql
+    SET GLOBAL tidb_gc_life_time = '10m';
+    ```
