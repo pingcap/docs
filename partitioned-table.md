@@ -902,7 +902,7 @@ ALTER TABLE members ADD PARTITION (PARTITION `p1990to2010` VALUES LESS THAN (201
 ALTER TABLE member_level ADD PARTITION (PARTITION l5_6 VALUES IN (5,6));
 ```
 
-For a Range partitioned table, `ADD PARTITION` will append new partitions after the last existing partition. Compared with the existing partitions, the value defined in `VALUES LESS THAN` for new partitions must be increasing. Otherwise, an error is reported:
+For a Range partitioned table, `ADD PARTITION` will append new partitions after the last existing partition. Compared with the existing partitions, the value defined in `VALUES LESS THAN` for new partitions must be greater. Otherwise, an error is reported:
 
 ```sql
 ALTER TABLE members ADD PARTITION (PARTITION p1990 VALUES LESS THAN (2000));
