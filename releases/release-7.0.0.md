@@ -103,18 +103,18 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 * * Support resource control based on resource groups (GA) [#38825](https://github.com/pingcap/tidb/issues/38825) @[nolouch](https://github.com/nolouch) @[BornChanger](https://github.com/BornChanger) @[glorv](https://github.com/glorv) @[tiancaiamao](https://github.com/tiancaiamao) @[Connor1996](https://github.com/Connor1996) @[JmPotato](https://github.com/JmPotato) @[hnes](https://github.com/hnes) @[CabinfeverB](https://github.com/CabinfeverB) @[HuSharp](https://github.com/HuSharp) **tw:hfxsd**
 
     TiDB officially releases the resource control feature based on resource groups. This feature significantly improves the resource utilization efficiency and performance of TiDB clusters. The introduction of the resource control feature is a milestone for TiDB. You can divide a distributed database cluster into multiple logical units, map different database users to corresponding resource groups, and set the quota for each resource group as needed. When the cluster resources are limited, all resources used by sessions in the same resource group are limited to the quota. In this way, even if a resource group is over-consumed, the sessions in other resource groups are not affected.
-   
+
     With this feature, you can combine multiple small and medium-sized applications from different systems into a single TiDB cluster. When the workload of an application grows larger, it does not affect the normal operation of other applications. When the system workload is low, busy applications can still be allocated the required system resources even if they exceed the set read and write quotas, so as to achieve the maximum utilization of resources. In addition, the rational use of the resource control feature can reduce the number of clusters, ease the difficulty of operation and maintenance, and save management costs.
 
     This feature provides a built-in Resource Control Dashboard for the actual usage of resources in Grafana, assisting you to allocate resources more rationally. It also supports dynamic resource management capabilities based on both session and statement levels (Hint). The introduction of this feature will help you gain more precise control over the resource usage of your TiDB cluster, and dynamically adjust quotas based on actual needs.
-    
+
     You can use resource groups in the following ways:
 
     - User level. Bind a user using the [`CREATE USER`](/sql-statements/sql-statement-create-user.md) or [`ALTER USER`](/sql-statements/sql-statement-alter-user.md) statements to a specific resource group. After binding a resource group to a user, sessions newly created by the user are automatically bound to the corresponding resource group.
     - Session level. Set the resource group used by the current session via [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md).
     - Statement level. Set the resource group used by the current statement via [`RESOURCE_GROUP()`](/optimizer-hints.md#resource_groupresource_group_name).
 
-    For more information, see [documentation](/tidb-resource-control.md). 
+    For more information, see [documentation](/tidb-resource-control.md).
 
 * Support a checkpoint mechanism for Fast Online DDL, improving fault tolerance and automatic recovery capability [#42164](https://github.com/pingcap/tidb/issues/42164) @[tangenta](https://github.com/tangenta) **tw:ran-huang**
 
@@ -186,7 +186,7 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 ### DB operations
 
 * TiCDC supports replicating change data to storage services (GA) [#6797](https://github.com/pingcap/tiflow/issues/6797) @[zhaoxinyu](https://github.com/zhaoxinyu) **tw:hfxsd**
-  
+
     TiCDC supports replicating changed data to Amazon S3, GCS, Azure Blob Storage, NFS, and other S3-compatible storage services. Storage services are reasonably priced and easy to use. If you are not using Kafka, you can use storage services. TiCDC saves the changed logs to a file and then sends it to the storage services instead. From the storage services, your own consumer program can read the newly generated changed log files periodically. Currently, TiCDC supports replicating changed logs in canal-json and CSV formats to the storage service.
 
     For more information, see [documentation](/ticdc/ticdc-sink-to-cloud-storage).
@@ -224,7 +224,7 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
     - Support source files in CSV, TSV, Parquet, and SQL (mydumper/dumpling) formats.
     - Support setting tasks as `Detached` to let tasks run in the background.
     - Support task management. You can query task status and progress details by `SHOW LOAD DATA jobid`, which is convenient for management and maintenance.
-    
+
     For more information, see [documentation](/sql-statements/sql-statement-load-data.md).
 
 * TiDB Lightning supports enabling compressed transfers when sending key-value pairs to TiKV (GA) [#41163](https://github.com/pingcap/tidb/issues/41163) @[gozssky](https://github.com/gozssky)
@@ -465,4 +465,17 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
 We would like to thank the following contributors from the TiDB community:
 
-- [Contributor GitHub ID]()
+- [AntiTopQuark](https://github.com/AntiTopQuark)
+- [blacktear23](https://github.com/blacktear23)
+- [BornChanger](https://github.com/BornChanger)
+- [Dousir9](https://github.com/Dousir9)
+- [erwadba](https://github.com/erwadba)
+- [HappyUncle](https://github.com/HappyUncle)
+- [jiyfhust](https://github.com/jiyfhust)
+- [L-maple](https://github.com/L-maple)
+- [lionelee](https://github.com/lionelee)
+- [liumengya94](https://github.com/liumengya94)
+- [nathan-edgar](https://github.com/nathan-edgar)
+- [sticnarf](https://github.com/sticnarf)
+- [woofyzhao](https://github.com/woofyzhao)
+- [xiaguan](https://github.com/xiaguan)
