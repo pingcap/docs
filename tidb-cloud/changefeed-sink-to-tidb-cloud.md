@@ -38,8 +38,6 @@ Before creating a changefeed, you need to export existing data from the source D
 
     For example:
 
-    {{< copyable "sql" >}}
-
     ```sql
     SET GLOBAL tidb_gc_life_time = '720h';
     ```
@@ -88,13 +86,13 @@ After completing the prerequisites, you can sink your data to the destination Se
 
 8. Click **Next** to review the Changefeed configuration.
 
-    If you confirm all configurations are correct, check the compliance of cross-region replication, and click **Create**.
+    If you confirm that all configurations are correct, check the compliance of cross-region replication, and click **Create**.
 
     If you want to modify some configurations, click **Previous** to go back to the previous configuration page.
 
-9. The sink starts soon, and you can see the status of the sink changes from "**Creating**" to "**Running**".
+9. The sink starts soon, and you can see the status of the sink changes from **Creating** to **Running**.
 
-    Click the Changefeed name, and you can see more details about the changefeed, such as the checkpoint, replication latency, and other metrics.
+    Click the changefeed name, and you can see more details about the changefeed, such as the checkpoint, replication latency, and other metrics.
 
 10. Restore [tidb_gc_life_time](https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50) to its original value (the default value is `10m`) after the sink is created:
 
