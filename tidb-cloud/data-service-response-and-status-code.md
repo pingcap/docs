@@ -49,14 +49,13 @@ An example response is as follows:
     ],
     "result": {
       "code": 200,
-      "message": "ok",
+      "message": "Query OK!",
       "start_ms": 1678965476709,
       "end_ms": 1678965476839,
       "latency": "130ms",
       "row_count": 1,
       "row_affect": 0,
-      "limit": 50,
-      "query": "Query OK!"
+      "limit": 50
     }
   }
 }
@@ -90,14 +89,13 @@ An example response is as follows:
     ],
     "result": {
       "code": 200,
-      "message": "ok",
+      "message": "Query OK!",
       "start_ms": 1678965476709,
       "end_ms": 1678965476839,
       "latency": "130ms",
       "row_count": 1,
       "row_affect": 0,
-      "limit": 50,
-      "query": "Query OK!",
+      "limit": 50
       "sql": "select id,type from sample_data.github_events limit 1;",
       "ai_latency": "30ms"
     }
@@ -130,8 +128,7 @@ An example response is as follows:
             "latency": "",
             "row_count": 0,
             "row_affect": 0,
-            "limit": 0,
-            "query": ""
+            "limit": 0
         }
     }
 }
@@ -157,8 +154,7 @@ An example response is as follows:
             "latency": "",
             "row_count": 0,
             "row_affect": 0,
-            "limit": 0,
-            "query": ""
+            "limit": 0
         }
     }
 }
@@ -184,8 +180,7 @@ An example response is as follows:
             "latency": "",
             "row_count": 0,
             "row_affect": 0,
-            "limit": 0,
-            "query": ""
+            "limit": 0
         }
     }
 }
@@ -211,8 +206,7 @@ An example response is as follows:
             "latency": "",
             "row_count": 0,
             "row_affect": 0,
-            "limit": 0,
-            "query": ""
+            "limit": 0
         }
     }
 }
@@ -238,8 +232,7 @@ An example response is as follows:
             "latency": "",
             "row_count": 0,
             "row_affect": 0,
-            "limit": 0,
-            "query": ""
+            "limit": 0
         }
     }
 }
@@ -265,8 +258,7 @@ An example response is as follows:
             "latency": "",
             "row_count": 0,
             "row_affect": 0,
-            "limit": 0,
-            "query": ""
+            "limit": 0
         }
     }
 }
@@ -295,8 +287,7 @@ An example response is as follows:
       "latency": "",
       "row_count": 0,
       "row_affect": 0,
-      "limit": 0,
-      "query": ""
+      "limit": 0
     }
   }
 }
@@ -320,8 +311,7 @@ An example response is as follows:
       "latency": "",
       "row_count": 0,
       "row_affect": 0,
-      "limit": 0,
-      "query": ""
+      "limit": 0
     }
   }
 }
@@ -352,8 +342,7 @@ An example response is as follows:
             "latency": "",
             "row_count": 0,
             "row_affect": 0,
-            "limit": 0,
-            "query": ""
+            "limit": 0
         }
     }
 }
@@ -375,8 +364,7 @@ This might also be related to the inability to connect the TiDB Cloud cluster. Y
             "latency": "",
             "row_count": 0,
             "row_affect": 0,
-            "limit": 0,
-            "query": ""
+            "limit": 0
         }
     }
 }

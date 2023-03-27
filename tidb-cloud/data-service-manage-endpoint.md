@@ -70,6 +70,8 @@ On the right pane of the endpoint details page, you can click the **Properties**
 
 On the SQL editor of the endpoint details page, you can write and run the SQL statements for an endpoint. You can also simply type `--` followed by your instructions to let AI generate SQL statements automatically.
 
+<!--TODO: add a drop-down list: Add Data Source-->
+
 1. Select a cluster.
 
     > **Note:**

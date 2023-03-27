@@ -33,11 +33,27 @@ In the left pane of the [**Data Service**](https://tidbcloud.com/console/dataser
     - **Public Key**: the public key of the API key.
     - **Private Key**: the private key of the API key.
     - **Description**: the description of the API key.
-    - **Action**: you can edit the description of the key or delete the key.
+    <!--TODO: add two new fields **Created Time** and **Role**-->
+    - **Created Time**: the creation time of the API key.
+    - **Role**: the role of the API key, which can be `ReadOnly` or `ReadAndWrite`.
+    <!--TODO: add the description of ReadOnly and ReadAndWrite-->
+    <!--TODO: edit the role of an API key-->
+    - **Action**: you can edit the description and the role of the key or delete the key.
+
+<!--TODO: add a new area **Data Source**-->
+- **Data Source**:
+
+    In this area, you can manage clusters that are linked to the Data App. A table lists all linked clusters with the following fields:
+
+    - **Cluster Name**: the name of the cluster.
+    - **Tier Type**: the cluster tier.
+    - **Cloud**: the cloud provider of the cluster.
+    - **Region**: the region of the cluster.
+    - **Action**: you can delete the cluster.
 
 ## Modify a Data App
 
-You can rename a Data App, and manage its endpoints and API keys.
+You can rename a Data App, and manage its API keys, data source, and endpoints.
 
 ### Rename a Data App
 
@@ -46,6 +62,34 @@ To rename a Data App, navigate to the [**Data Service**](https://tidbcloud.com/c
 - In the left pane, locate your target Data App, click **...** > **Rename**, and enter a new name.
 
 - In the left pane, click the name of your target Data App to view its details. In the **Basic Settings** area, modify the **Name** field and click **Save**.
+
+### Manage the data source
+
+<!--TODO: **Add Cluster**-->
+
+You can add or remove a cluster as a data source for a Data App. If a cluster in the data source is deleted, it is automatically removed from the Data App, but the endpoints in the Data App can still access other clusters in the data source.
+
+<!--TODO: add a Data Source-->
+
+To add a new cluster as the data source of a Data App, perform the following steps:
+
+1. Navigate to the [**Data Service**](https://tidbcloud.com/console/dataservice) page of your project.
+2. In the left pane, locate your target Data App and click the name of your target Data App to view its details.
+3. In the **Data Source** area, click **Add Cluster** and the **Link Cluster** dialog box is displayed.
+4. Select a cluster from the list and click **Confirm**.
+
+    The newly linked cluster is added to the data source list.
+
+<!--TODO: remove a Data Source-->
+
+To remove a cluster from the data source of a Data App, perform the following steps:
+
+1. Navigate to the [**Data Service**](https://tidbcloud.com/console/dataservice) page of your project.
+2. In the left pane, locate your target Data App and click the name of your target Data App to view its details.
+3. In the **Data Source** area, locate the target cluster you want to remove from the Data App, and click **Delete** in the **Action** column.
+4. The **Remove Data Source** dialog box is displayed. Click **I understand, remove** to confirm the removal.
+
+    After you remove a cluster from the data source, the cluster is not deleted, but the existing endpoints in the Data App cannot access it.
 
 ### Manage an API key
 

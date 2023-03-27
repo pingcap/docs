@@ -45,6 +45,7 @@ Before calling an endpoint, you need to create an API key. To create an API key 
 
 1. In the left pane of [**Data Service**](https://tidbcloud.com/console/dataservice), click the name of **Chat2Query System** to view its details.
 2. In the **API Key** area, click **Create API Key**.
+<!--TODO: add API key role (ReadOnly and ReadAndWrite)-->
 3. In the **Create API Key** dialog box, enter a description for your API key, and then click **Next**. The private key and public key are displayed.
 
     Make sure that you have copied and saved the private key in a secure location. After leaving this page, you will not be able to get the full private key again.
@@ -64,7 +65,7 @@ In the left pane of the [**Data Service**](https://tidbcloud.com/console/dataser
 - **Timeout(ms)**: the timeout for the Chat2Data endpoint.
 
     - Default value: `30000`
-    - Maximum value: `30000`
+    - Maximum value: `60000`
     - Minimum value: `1`
     - Unit: millisecond
 
@@ -135,14 +136,13 @@ The response is as follows:
         ],
         "result": {
             "code": 200,
-            "message": "ok",
+            "message": "Query OK!",
             "start_ms": 1678965476709,
             "end_ms": 1678965476839,
             "latency": "130ms",
             "row_count": 1,
             "row_affect": 0,
             "limit": 50,
-            "query": "Query OK!",
             "sql": "SELECT sample_data.github_events.`repo_name`, COUNT(*) AS count FROM sample_data.github_events GROUP BY sample_data.github_events.`repo_name` ORDER BY count DESC LIMIT 1;",
             "ai_latency": "30ms"
         }
@@ -165,8 +165,7 @@ If your API call is not successful, you will receive a status code other than `2
             "latency": "",
             "row_count": 0,
             "row_affect": 0,
-            "limit": 0,
-            "query": ""
+            "limit": 0
         }
     }
 }
