@@ -96,7 +96,7 @@ After completing the prerequisites, you can sink your data to the destination Se
 
     Click the Changefeed name, and you can see more details about the changefeed, such as the checkpoint, replication latency, and other metrics.
 
-10. If you have [loaded the existing data](#load-existing-data-optional) using Dumpling, you need to restore the GC time to its original value (the default value is `10m`) after the sink is created:
+10. Restore [tidb_gc_life_time](https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50) to its original value (the default value is `10m`) after the sink is created:
 
     ```sql
     SET GLOBAL tidb_gc_life_time = '10m';
