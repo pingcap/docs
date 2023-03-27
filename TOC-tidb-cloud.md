@@ -18,9 +18,10 @@
     - [Build a TiDB Cluster in TiDB Cloud (Serverless Tier)](/develop/dev-guide-build-cluster-in-cloud.md)
     - [CRUD SQL in TiDB](/develop/dev-guide-tidb-crud-sql.md)
   - Example Applications
-    - [Java](/develop/dev-guide-sample-application-java.md)
-    - [Java (Spring Boot)](/develop/dev-guide-sample-application-spring-boot.md)
     - [Golang](/develop/dev-guide-sample-application-golang.md)
+    - [Java (Spring Boot)](/develop/dev-guide-sample-application-spring-boot.md)
+    - [Java](/develop/dev-guide-sample-application-java.md)
+    - [Python](/develop/dev-guide-sample-application-python.md)
   - Connect to TiDB
     - [Choose Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)
     - [Connection Pools and Connection Parameters](/develop/dev-guide-connection-parameters.md)
@@ -47,7 +48,7 @@
       - [Follower Read](/develop/dev-guide-use-follower-read.md)
       - [Stale Read](/develop/dev-guide-use-stale-read.md)
     - [HTAP Queries](/develop/dev-guide-hybrid-oltp-and-olap-queries.md)
-    - [FastScan](/develop/dev-guide-use-fastscan.md)
+    - [FastScan](/tiflash/use-fastscan.md)
   - Transaction
     - [Overview](/develop/dev-guide-transaction-overview.md)
     - [Optimistic and Pessimistic Transactions](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)
@@ -94,6 +95,7 @@
     - [Use MPP Mode](/tiflash/use-tiflash-mpp-mode.md)
     - [Supported Push-down Calculations](/tiflash/tiflash-supported-pushdown-calculations.md)
     - [TiFlash Query Result Materialization](/tiflash/tiflash-results-materialization.md)
+    - [TiFlash Late Materialization](/tiflash/tiflash-late-materialization.md)
     - [Compatibility](/tiflash/tiflash-compatibility.md)
   - [Scale a TiDB Cluster](/tidb-cloud/scale-tidb-cluster.md)
   - [Pause or Resume a TiDB Cluster](/tidb-cloud/pause-or-resume-tidb-cluster.md)
@@ -163,6 +165,7 @@
         - [Partition Pruning](/partition-pruning.md)
         - [TopN and Limit Push Down](/topn-limit-push-down.md)
         - [Join Reorder](/join-reorder.md)
+        - [Derive TopN or Limit from Window Functions](/derive-topn-from-window.md)
       - Physical Optimization
         - [Overview](/sql-physical-optimization.md)
         - [Index Selection](/choose-index.md)
@@ -171,7 +174,8 @@
         - [Wrong Index Solution](/wrong-index-solution.md)
         - [Distinct Optimization](/agg-distinct-optimization.md)
         - [Cost Model](/cost-model.md)
-      - [Prepare Execution Plan Cache](/sql-prepared-plan-cache.md)
+      - [Prepared Execution Plan Cache](/sql-prepared-plan-cache.md)
+      - [Non-Prepared Execution Plan Cache](/sql-non-prepared-plan-cache.md)
     - Control Execution Plans
       - [Overview](/control-execution-plan.md)
       - [Optimizer Hints](/optimizer-hints.md)
@@ -261,6 +265,7 @@
       - [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)
       - [`BATCH`](/sql-statements/sql-statement-batch.md)
       - [`BEGIN`](/sql-statements/sql-statement-begin.md)
+      - [`CALIBRATE RESOURCE`](/sql-statements/sql-statement-calibrate-resource.md)
       - [`CANCEL LOAD DATA` and `DROP LOAD DATA`](/sql-statements/sql-statement-operate-load-data-job.md)
       - [`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)
       - [`COMMIT`](/sql-statements/sql-statement-commit.md)
@@ -322,6 +327,7 @@
       - [`SET DEFAULT ROLE`](/sql-statements/sql-statement-set-default-role.md)
       - [`SET [NAMES|CHARACTER SET]`](/sql-statements/sql-statement-set-names.md)
       - [`SET PASSWORD`](/sql-statements/sql-statement-set-password.md)
+      - [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md)
       - [`SET ROLE`](/sql-statements/sql-statement-set-role.md)
       - [`SET TRANSACTION`](/sql-statements/sql-statement-set-transaction.md)
       - [`SET [GLOBAL|SESSION] <variable>`](/sql-statements/sql-statement-set-variable.md)
@@ -481,6 +487,7 @@
         - [RocksDB Overview](/storage-engine/rocksdb-overview.md)
     - TiFlash
         - [TiFlash Overview](/tiflash/tiflash-overview.md)
+        - [Spill to Disk](/tiflash/tiflash-spill-disk.md)
   - [Dumpling](/dumpling-overview.md)
   - [Table Filter](/table-filter.md)
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)

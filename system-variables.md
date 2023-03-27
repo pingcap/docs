@@ -450,6 +450,18 @@ This variable is an alias for [`last_insert_id`](#last_insert_id).
 >
 > Unlike in MySQL, the `max_execution_time` system variable currently works on all kinds of statements in TiDB, not only restricted to the `SELECT` statement. The precision of the timeout value is roughly 100ms. This means the statement might not be terminated in accurate milliseconds as you specify.
 
+<CustomContent platform="tidb">
+
+For a SQL statement with the [`MAX_EXECUTION_TIME`](/optimizer-hints.md#max_execution_timen) hint, the maximum execution time of this statement is limited by the hint instead of this variable. The hint can also be used with SQL bindings as described [in the SQL FAQ](/faq/sql-faq.md#how-to-prevent-the-execution-of-a-particular-sql-statement).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+For a SQL statement with the [`MAX_EXECUTION_TIME`](/optimizer-hints.md#max_execution_timen) hint, the maximum execution time of this statement is limited by the hint instead of this variable. The hint can also be used with SQL bindings as described [in the SQL FAQ](https://docs.pingcap.com/tidb/stable/sql-faq).
+
+</CustomContent>
+
 ### max_prepared_stmt_count
 
 - Scope: GLOBAL
@@ -1127,13 +1139,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 > **Warning:**
 >
-> Currently, this feature is not fully compatible with adding a unique index. When adding a unique index, it is recommended to disable the index acceleration feature (set `tidb_ddl_enable_fast_reorg` to `OFF`).
->
-> When [PITR (Point-in-time recovery)](/br/backup-and-restore-overview.md) is disabled, the speed of adding indexes is expected to be about 10 times that in v6.1.0. However, there is no performance improvement when both PITR and index acceleration are enabled. To optimize performance, it is recommended that you disable PITR, add indexes in a quick way, then enable PITR and perform a full backup. Otherwise, the following behaviors might occur:
->
-> - When PITR starts working first, the index adding job automatically falls back to the legacy mode by default, even if the configuration is set to `ON`. The index is added slowly.
-> - When the index adding job starts first, it prevents the log backup job of PITR from starting by throwing an error, which does not affect the index adding job in progress. After the index adding job is completed, you need to restart the log backup job and perform a full backup manually.
-> - When a log backup job of PITR and an index adding job start at the same time, no error is prompted because the two jobs are unable to detect each other. PITR does not back up the newly added index. After the index adding job is completed, you still need to restart the log backup job and perform a full backup manually.
+> Currently, PITR recovery handles the indexes created by index acceleration during the log backup with extra processing to achieve compatibility. For details, see [Why is the acceleration of adding indexes feature incompatible with PITR?](/faq/backup-and-restore-faq.md#why-is-the-acceleration-of-adding-indexes-feature-incompatible-with-pitr).
 
 </CustomContent>
 
@@ -1143,11 +1149,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 >
 > Currently, this feature is not fully compatible with [altering multiple columns or indexes in a single `ALTER TABLE` statement](/sql-statements/sql-statement-alter-table.md). When adding a unique index with the index acceleration, you need to avoid altering other columns or indexes in the same statement.
 >
-> When [PITR (Point-in-time recovery)](/tidb-cloud/backup-and-restore.md) is disabled, the speed of adding indexes is expected to be about 10 times that in v6.1.0. However, there is no performance improvement when both PITR and index acceleration are enabled. To optimize performance, it is recommended that you disable PITR, add indexes in a quick way, then enable PITR and perform a full backup. Otherwise, the following expected behaviors might occur:
->
-> - When PITR starts working first, the index adding job automatically falls back to the legacy mode by default, even if the configuration is set to `ON`. The index is added slowly.
-> - When the index adding job starts first, it prevents the log backup job of PITR from starting by throwing an error, which does not affect the index adding job in progress. After the index adding job is completed, you need to restart the log backup job and perform a full backup manually.
-> - When a log backup job of PITR and an index adding job start at the same time, no error is prompted because the two jobs are unable to detect each other. PITR does not back up the newly added index. After the index adding job is completed, you still need to restart the log backup job and perform a full backup manually.
+> Currently, PITR recovery handles the indexes created by index acceleration during the log backup with extra processing to achieve compatibility. For details, see [Why is the acceleration of adding indexes feature incompatible with PITR?](https://docs.pingcap.com/tidb/v7.0/backup-and-restore-faq#why-is-the-acceleration-of-adding-indexes-feature-incompatible-with-pitr).
 
 </CustomContent>
 
@@ -1513,13 +1515,13 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 > **Warning:**
 >
-> The feature controlled by this variable is not fully functional in the current TiDB version. Do not change the default value.
+> The non-prepared execution plan cache is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
 - Default value: `OFF`
-- This variable controls whether to enable the General Plan Cache feature.
+- This variable controls whether to enable the [Non-prepared plan cache](/sql-non-prepared-plan-cache.md) feature.
 
 ### tidb_enable_gogc_tuner <span class="version-mark">New in v6.4.0</span>
 
@@ -1669,9 +1671,10 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
-- Default value: `OFF`
+- Default value: Before v7.0.0, the default value is `OFF`. Starting from v7.0.0, the default value is `ON`.
 - Type: Boolean
 - This variable controls whether TiDB applies Null Aware Hash Join when ANTI JOIN is generated by subqueries led by special set operators `NOT IN` and `!= ALL`.
+- When you upgrade from an earlier version to a v7.0.0 or later cluster, the feature is automatically enabled, meaning that this variable is set to `ON`.
 
 ### tidb_enable_outer_join_reorder <span class="version-mark">New in v6.1.0</span>
 
@@ -1684,6 +1687,14 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
     - If the TiDB version before the upgrade is earlier than v6.1.0, the default value of this variable after the upgrade is `ON`.
     - If the TiDB version before the upgrade is v6.1.0 or later, the default value of the variable after the upgrade follows the value before the upgrade.
+
+### `tidb_enable_inl_join_inner_multi_pattern` <span class="version-mark">New in v7.0.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `OFF`
+- This variable controls whether Index Join is supported when the inner table has `Selection` or `Projection` operators on it. The default value `OFF` means that Index Join is not supported in this scenario.
 
 ### tidb_enable_ordered_result_mode
 
@@ -1734,6 +1745,14 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Type: Boolean
 - Default value: `ON`
 - This variable controls whether Prepared Plan Cache caches execution plans with a variable as the `LIMIT` parameter (`LIMIT ?`). The default value is `ON`, which means Prepared Plan Cache supports caching such execution plans. Note that Prepared Plan Cache does not support caching execution plans with a variable that is greater than 10000.
+
+### tidb_enable_plan_cache_for_subquery <span class="version-mark">New in v7.0.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `ON`
+- This variable controls whether Prepared Plan Cache caches queries that contain subqueries.
 
 ### tidb_enable_plan_replayer_capture
 
@@ -1830,13 +1849,9 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 ### tidb_enable_resource_control <span class="version-mark">New in v6.6.0</span>
 
-> **Warning:**
->
-> This feature is experimental and its form and usage might change in subsequent versions.
-
 - Scope: GLOBAL
 - Persists to cluster: Yes
-- Default value: `OFF`
+- Default value: `ON`
 - Type: Boolean
 - This variable is a switch for [the resource control feature](/tidb-resource-control.md). When this variable is set to `ON`, the TiDB cluster can isolate application resources based on resource groups.
 
@@ -2277,14 +2292,14 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 > **Warning:**
 >
-> The feature controlled by this variable is not fully functional in the current TiDB version. Do not change the default value.
+> The non-prepared execution plan cache is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Type: Integer
 - Default value: `100`
 - Range: `[1, 100000]`
-- This variable controls the maximum number of execution plans that can be cached by General Plan Cache.
+- This variable controls the maximum number of execution plans that can be cached by [Non-prepared plan cache](/sql-non-prepared-plan-cache.md).
 
 ### tidb_generate_binary_plan <span class="version-mark">New in v6.2.0</span>
 
@@ -2560,6 +2575,87 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Range: `[0, 2147483647]`
 - Unit: Seconds
 - This variable is used to specify the maximum execution time of automatic `ANALYZE` tasks. When the execution time of an automatic `ANALYZE` task exceeds the specified time, the task will be terminated. When the value of this variable is `0`, there is no limit to the maximum execution time of automatic `ANALYZE` tasks.
+
+### tidb_max_bytes_before_tiflash_external_group_by <span class="version-mark">New in v7.0.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Integer
+- Default value: `-1`
+- Range: `[-1, 9223372036854775807]`
+- This variable is used to specify the maximum memory usage of the Hash Aggregation operator with `GROUP BY` in TiFlash, in bytes. When the memory usage exceeds the specified value, TiFlash triggers the Hash Aggregation operator to spill to disk. When the value of this variable is `-1`, TiDB does not pass this variable to TiFlash. Only when the value of this variable is greater than or equal to `0`, TiDB passes this variable to TiFlash. When the value of this variable is `0`, it means that the memory usage is unlimited, that is, TiFlash Hash Aggregation operator will not trigger spilling. For details, see [TiFlash Spill to Disk](/tiflash/tiflash-spill-disk.md).
+
+<CustomContent platform="tidb">
+
+> **Note:**
+>
+> - If a TiDB cluster has multiple TiFlash nodes, aggregation is usually distributedly executed on multiple TiFlash nodes. This variable controls the maximum memory usage of the aggregation operator on a single TiFlash node.
+> - When this variable is set to `-1`, TiFlash determines the maximum memory usage of the aggregation operator based on the value of its own configuration item [`max_bytes_before_external_group_by`](/tiflash/tiflash-configuration.md#tiflash-configuration-parameters).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> - If a TiDB cluster has multiple TiFlash nodes, aggregation is usually distributedly executed on multiple TiFlash nodes. This variable controls the maximum memory usage of the aggregation operator on a single TiFlash node.
+> - When this variable is set to `-1`, TiFlash determines the maximum memory usage of the aggregation operator based on the value of its own configuration item `max_bytes_before_external_group_by`.
+
+</CustomContent>
+
+### tidb_max_bytes_before_tiflash_external_join <span class="version-mark">New in v7.0.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Integer
+- Default value: `-1`
+- Range: `[-1, 9223372036854775807]`
+- This variable is used to specify the maximum memory usage of the Hash Join operator with `JOIN` in TiFlash, in bytes. When the memory usage exceeds the specified value, TiFlash triggers the Hash Join operator to spill to disk. When the value of this variable is `-1`, TiDB does not pass this variable to TiFlash. Only when the value of this variable is greater than or equal to `0`, TiDB passes this variable to TiFlash. When the value of this variable is `0`, it means that the memory usage is unlimited, that is, TiFlash Hash Join operator will not trigger spilling. For details, see [TiFlash Spill to Disk](/tiflash/tiflash-spill-disk.md).
+
+<CustomContent platform="tidb">
+
+> **Note:**
+>
+> - If a TiDB cluster has multiple TiFlash nodes, join is usually distributedly executed on multiple TiFlash nodes. This variable controls the maximum memory usage of the join operator on a single TiFlash node.
+> - When this variable is set to `-1`, TiFlash determines the maximum memory usage of the join operator based on the value of its own configuration item [`max_bytes_before_external_join`](/tiflash/tiflash-configuration.md#tiflash-configuration-parameters).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> - If a TiDB cluster has multiple TiFlash nodes, join is usually distributedly executed on multiple TiFlash nodes. This variable controls the maximum memory usage of the join operator on a single TiFlash node.
+> - When this variable is set to `-1`, TiFlash determines the maximum memory usage of the join operator based on the value of its own configuration item `max_bytes_before_external_join`.
+
+</CustomContent>
+
+### tidb_max_bytes_before_tiflash_external_sort <span class="version-mark">New in v7.0.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Integer
+- Default value: `-1`
+- Range: `[-1, 9223372036854775807]`
+- This variable is used to specify the maximum memory usage of the TopN and Sort operators in TiFlash, in bytes. When the memory usage exceeds the specified value, TiFlash triggers the TopN and Sort operators to spill to disk. When the value of this variable is `-1`, TiDB does not pass this variable to TiFlash. Only when the value of this variable is greater than or equal to `0`, TiDB passes this variable to TiFlash. When the value of this variable is `0`, it means that the memory usage is unlimited, that is, TiFlash TopN and Sort operators will not trigger spilling. For details, see [TiFlash Spill to Disk](/tiflash/tiflash-spill-disk.md).
+
+<CustomContent platform="tidb">
+
+> **Note:**
+>
+> - If a TiDB cluster has multiple TiFlash nodes, TopN and Sort are usually distributedly executed on multiple TiFlash nodes. This variable controls the maximum memory usage of the TopN and Sort operators on a single TiFlash node.
+> - When this variable is set to `-1`, TiFlash determines the maximum memory usage of the TopN and Sort operators based on the value of its own configuration item [`max_bytes_before_external_sort`](/tiflash/tiflash-configuration.md#tiflash-configuration-parameters).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> - If a TiDB cluster has multiple TiFlash nodes, TopN and Sort are usually distributedly executed on multiple TiFlash nodes. This variable controls the maximum memory usage of the TopN and Sort operators on a single TiFlash node.
+> - When this variable is set to `-1`, TiFlash determines the maximum memory usage of the TopN and Sort operators based on the value of its own configuration item `max_bytes_before_external_sort`.
+
+</CustomContent>
 
 ### tidb_max_chunk_size
 
@@ -2940,6 +3036,14 @@ As shown in this diagram, when [`tidb_enable_paging`](#tidb_enable_paging-new-in
 - Default value: `3.0`
 - Indicates the CPU cost for TiDB to process one row. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
+### `tidb_opt_derive_topn` <span class="version-mark">New in v7.0.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `OFF`
+- Controls whether to enable the optimization rule of [Deriving TopN or Limit from window functions](/derive-topn-from-window.md).
+
 ### tidb_opt_desc_factor
 
 - Scope: SESSION | GLOBAL
@@ -3002,6 +3106,15 @@ mysql> desc select count(distinct a) from test.t;
 - Default value: `ON`
 - This variable is used to control whether the optimizer estimates the number of rows based on column order correlation
 
+### tidb_opt_enable_late_materialization <span class="version-mark">New in v7.0.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `OFF`
+- This variable is used to control whether to enable the [TiFlash late materialization](/tiflash/tiflash-late-materialization.md) feature.
+- By default, when processing a `SELECT` statement with filter conditions (`WHERE` clause), TiFlash scans all the data of the required columns before filtering. When this variable is set to `ON` to enable the TiFlash late materialization feature, TiFlash can first scan the column data related to the filter conditions, filter the rows that meet the conditions, and then scan the data of other columns of these rows for further calculations, thereby reducing IO scans and computations of data processing.
+
 ### tidb_opt_force_inline_cte <span class="version-mark">New in v6.3.0</span>
 
 - Scope: SESSION | GLOBAL
@@ -3009,6 +3122,18 @@ mysql> desc select count(distinct a) from test.t;
 - Type: Boolean
 - Default value: `OFF`
 - This variable is used to control whether common table expressions (CTEs) in the entire session are inlined or not. The default value is `OFF`, which means that inlining CTE is not enforced by default. However, you can still inline CTE by specifying the `MERGE()` hint. If the variable is set to `ON`, all CTEs (except recursive CTE) in this session are forced to be inlined.
+
+### tidb_opt_advanced_join_hint <span class="version-mark">New in v7.0.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `ON`
+- This variable is used to control whether the Join Method hint, such as [`HASH_JOIN()` hint](/optimizer-hints.md#hash_joint1_name--tl_name-) and [`MERGE_JOIN()` hint](/optimizer-hints.md#merge_joint1_name--tl_name-), affects the Join Reorder optimization process, including the use of [`LEADING()` hint](/optimizer-hints.md#leadingt1_name--tl_name-). The default value is `ON`, which means that it does not affect. If it is set to `OFF`, there might be conflicts in some scenarios where both Join Method hint and `LEADING()` hint are used at the same time.
+
+> **Note:**
+>
+> The behavior of versions earlier than v7.0.0 is consistent with that of setting this variable to `OFF`. To ensure forward compatibility, when you upgrade from an earlier version to a v7.0.0 or later cluster, this variable is set to `OFF`. To obtain more flexible hint behavior, it is strongly recommended to switch this variable to `ON` under the condition that there is no performance regression.
 
 ### tidb_opt_insubq_to_join_and_agg
 
@@ -3080,6 +3205,46 @@ mysql> desc select count(distinct a) from test.t;
 - Range: `[0, 2147483647]`
 - Default value: `1.0`
 - Indicates the net cost of transferring 1 byte of data through the network. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
+
+### tidb_opt_ordering_index_selectivity_threshold <span class="version-mark">New in v7.0.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Float
+- Default value: `0`
+- Range: `[0, 1]`
+- This variable is used to control how the optimizer selects an index when there are `ORDER BY` and `LIMIT` clauses with filter conditions in a SQL statement.
+- For such queries, the optimizer considers selecting the corresponding index to satisfy the `ORDER BY` and `LIMIT` clauses (even if this index does not satisfy any filter conditions). However, due to the complexity of data distribution, the optimizer might select a suboptimal index in this scenario.
+- This variable represents a threshold. When an index exists that can satisfy filtering conditions and its selectivity estimate is lower than this threshold, the optimizer will avoid selecting an index used to satisfy `ORDER BY` and `LIMIT`. Instead, it prioritizes an index that satisfies the filtering conditions.
+- For example, when the variable is set to `0`, the optimizer maintains its default behavior; when it is set to `1`, the optimizer always prioritizes selecting indexes that satisfy the filter conditions and avoids selecting indexes that satisfy both `ORDER BY` and `LIMIT` clauses.
+- In the following example, table `t` has a total of 1,000,000 rows. When using an index on column `b`, its estimated row count is approximately 8,748, so its selectivity estimate value is about 0.0087. By default, the optimizer selects an index on column `a`. However, after setting this variable to 0.01, since the selectivity of an index on column `b` (0.0087) is less than 0.01, the optimizer selects an index on column `b`.
+
+```sql
+> EXPLAIN SELECT * FROM t WHERE b <= 9000 ORDER BY a LIMIT 1;
++-----------------------------------+---------+-----------+----------------------+--------------------+
+| id                                | estRows | task      | access object        | operator info      |
++-----------------------------------+---------+-----------+----------------------+--------------------+
+| Limit_12                          | 1.00    | root      |                      | offset:0, count:1  |
+| └─Projection_25                   | 1.00    | root      |                      | test.t.a, test.t.b |
+|   └─IndexLookUp_24                | 1.00    | root      |                      |                    |
+|     ├─IndexFullScan_21(Build)     | 114.30  | cop[tikv] | table:t, index:ia(a) | keep order:true    |
+|     └─Selection_23(Probe)         | 1.00    | cop[tikv] |                      | le(test.t.b, 9000) |
+|       └─TableRowIDScan_22         | 114.30  | cop[tikv] | table:t              | keep order:false   |
++-----------------------------------+---------+-----------+----------------------+--------------------+
+
+> SET SESSION tidb_opt_ordering_index_selectivity_threshold = 0.01;
+
+> EXPLAIN SELECT * FROM t WHERE b <= 9000 ORDER BY a LIMIT 1;
++----------------------------------+---------+-----------+----------------------+-------------------------------------+
+| id                               | estRows | task      | access object        | operator info                       |
++----------------------------------+---------+-----------+----------------------+-------------------------------------+
+| TopN_9                           | 1.00    | root      |                      | test.t.a, offset:0, count:1         |
+| └─IndexLookUp_20                 | 1.00    | root      |                      |                                     |
+|   ├─IndexRangeScan_17(Build)     | 8748.62 | cop[tikv] | table:t, index:ib(b) | range:[-inf,9000], keep order:false |
+|   └─TopN_19(Probe)               | 1.00    | cop[tikv] |                      | test.t.a, offset:0, count:1         |
+|     └─TableRowIDScan_18          | 8748.62 | cop[tikv] | table:t              | keep order:false                    |
++----------------------------------+---------+-----------+----------------------+-------------------------------------+
+```
 
 ### tidb_opt_prefer_range_scan <span class="version-mark">New in v5.0</span>
 
@@ -3402,18 +3567,20 @@ SHOW WARNINGS;
 - Default value: `ON`
 - This variable controls whether to enable the [ANALYZE configuration persistence](/statistics.md#persist-analyze-configurations) feature.
 
-### tidb_pessimistic_txn_aggressive_locking <span class="version-mark">New in v6.6.0</span>
+### tidb_pessimistic_txn_fair_locking <span class="version-mark">New in v7.0.0</span>
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
-- Default value: `OFF`
+- Default value: `ON`
 - Determines whether to use enhanced pessimistic locking wake-up model for pessimistic transactions. This model strictly controls the wake-up order of pessimistic transactions in the pessimistic locking single-point conflict scenarios to avoid unnecessary wake-ups. It greatly reduces the uncertainty brought by the randomness of the existing wake-up mechanism. If you encounter frequent single-point pessimistic locking conflicts in your business scenario (such as frequent updates to the same row of data), and thus cause frequent statement retries, high tail latency, or even occasional `pessimistic lock retry limit reached` errors, you can try to enable this variable to solve the problem.
+- This variable is disabled by default for TiDB clusters that are upgraded from versions earlier than v7.0.0 to v7.0.0 or later versions.
 
 > **Note:**
 >
 > - Depending on the specific business scenario, enabling this option might cause a certain degree of throughput reduction (average latency increase) for transactions with frequent lock conflicts.
 > - This option only takes effect on statements that need to lock a single key. If a statement needs to lock multiple rows at the same time, this option will not take effect on such statements.
+> - This feature is introduced in v6.6.0 by the [`tidb_pessimistic_txn_aggressive_locking`](https://docs.pingcap.com/tidb/v6.6/system-variables#tidb_pessimistic_txn_aggressive_locking-new-in-v660) variable, which is disabled by default.
 
 ### tidb_placement_mode <span class="version-mark">New in v6.0.0</span>
 
@@ -3514,6 +3681,7 @@ SHOW WARNINGS;
 >
 > - This feature is incompatible with [`replica-read`](#tidb_replica_read-new-in-v40). Do not enable `tidb_rc_read_check_ts` and `replica-read` at the same time.
 > - If your client uses a cursor, it is not recommended to enable `tidb_rc_read_check_ts` in case that the previous batch of returned data has already been used by the client and the statement eventually fails.
+> - Starting from v7.0.0, this variable is no longer valid for the cursor fetch read mode that uses the prepared statement protocol.
 
 - Scope: GLOBAL
 - Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
@@ -3876,7 +4044,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Scope: GLOBAL
 - Type: Boolean
 - Default value: `OFF`
-- This variable is read-only. It controls whether to enable [statements summary persistence](/statement-summary-tables.md#persist-statements-summary). 
+- This variable is read-only. It controls whether to enable [statements summary persistence](/statement-summary-tables.md#persist-statements-summary).
 
 <CustomContent platform="tidb">
 
@@ -3901,7 +4069,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Scope: GLOBAL
 - Type: String
 - Default value: `"tidb-statements.log"`
-- This variable is read-only. It specifies the file to which persistent data is written when [statements summary persistence](/statement-summary-tables.md#persist-statements-summary) is enabled. 
+- This variable is read-only. It specifies the file to which persistent data is written when [statements summary persistence](/statement-summary-tables.md#persist-statements-summary) is enabled.
 
 <CustomContent platform="tidb">
 
@@ -4208,99 +4376,76 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 ### tidb_ttl_delete_rate_limit <span class="version-mark">New in v6.5.0</span>
 
-> **Warning:**
->
-> [TTL](/time-to-live.md) is an experimental feature. This system variable might be changed or removed in future releases.
-
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Default value: `0`
 - Range: `[0, 9223372036854775807]`
-- This variable is used to limit the rate of `DELETE` statements in TTL jobs on each TiDB node. The value represents the maximum number of `DELETE` statements allowed per second in a single node in a TTL job. When this variable is set to `0`, no limit is applied.
+- This variable is used to limit the rate of `DELETE` statements in TTL jobs on each TiDB node. The value represents the maximum number of `DELETE` statements allowed per second in a single node in a TTL job. When this variable is set to `0`, no limit is applied. For more information, refer to [Time to Live](/time-to-live.md).
 
 ### tidb_ttl_delete_batch_size <span class="version-mark">New in v6.5.0</span>
-
-> **Warning:**
->
-> [TTL](/time-to-live.md) is an experimental feature. This system variable might be changed or removed in future releases.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Default value: `100`
 - Range: `[1, 10240]`
-- This variable is used to set the maximum number of rows that can be deleted in a single `DELETE` transaction in a TTL job.
+- This variable is used to set the maximum number of rows that can be deleted in a single `DELETE` transaction in a TTL job. For more information, refer to [Time to Live](/time-to-live.md).
 
 ### tidb_ttl_delete_worker_count <span class="version-mark">New in v6.5.0</span>
-
-> **Warning:**
->
-> [TTL](/time-to-live.md) is an experimental feature. This system variable might be changed or removed in future releases.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Default value: `4`
 - Range: `[1, 256]`
-- This variable is used to set the maximum concurrency of TTL jobs on each TiDB node.
+- This variable is used to set the maximum concurrency of TTL jobs on each TiDB node. For more information, refer to [Time to Live](/time-to-live.md).
 
 ### tidb_ttl_job_enable <span class="version-mark">New in v6.5.0</span>
-
-> **Warning:**
->
-> [TTL](/time-to-live.md) is an experimental feature. This system variable might be changed or removed in future releases.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Default value: `ON`
 - Type: Boolean
-- This variable is used to control whether TTL jobs are enabled. If it is set to `OFF`, all tables with TTL attributes automatically stop cleaning up expired data.
+- This variable is used to control whether TTL jobs are enabled. If it is set to `OFF`, all tables with TTL attributes automatically stop cleaning up expired data. For more information, refer to [Time to Live](/time-to-live.md).
 
 ### tidb_ttl_scan_batch_size <span class="version-mark">New in v6.5.0</span>
-
-> **Warning:**
->
-> [TTL](/time-to-live.md) is an experimental feature. This system variable might be changed or removed in future releases.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Default value: `500`
 - Range: `[1, 10240]`
-- This variable is used to set the `LIMIT` value of each `SELECT` statement used to scan expired data in a TTL job.
+- This variable is used to set the `LIMIT` value of each `SELECT` statement used to scan expired data in a TTL job. For more information, refer to [Time to Live](/time-to-live.md).
 
 ### tidb_ttl_scan_worker_count <span class="version-mark">New in v6.5.0</span>
-
-> **Warning:**
->
-> [TTL](/time-to-live.md) is an experimental feature. This system variable might be changed or removed in future releases.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Default value: `4`
 - Range: `[1, 256]`
-- This variable is used to set the maximum concurrency of TTL scan jobs on each TiDB node.
+- This variable is used to set the maximum concurrency of TTL scan jobs on each TiDB node. For more information, refer to [Time to Live](/time-to-live.md).
 
 ### tidb_ttl_job_schedule_window_start_time <span class="version-mark">New in v6.5.0</span>
-
-> **Warning:**
->
-> [TTL](/time-to-live.md) is an experimental feature. This system variable might be changed or removed in future releases.
 
 - Scope: GLOBAL
 - Type: Time
 - Persists to cluster: Yes
 - Default value: `00:00 +0000`
-- This variable is used to control the start time of the scheduling window of TTL jobs in the background. When you modify the value of this variable, be cautious that a small window might cause the cleanup of expired data to fail.
+- This variable is used to control the start time of the scheduling window of TTL jobs in the background. When you modify the value of this variable, be cautious that a small window might cause the cleanup of expired data to fail. For more information, refer to [Time to Live](/time-to-live.md).
 
 ### tidb_ttl_job_schedule_window_end_time <span class="version-mark">New in v6.5.0</span>
-
-> **Warning:**
->
-> [TTL](/time-to-live.md) is an experimental feature. This system variable might be changed or removed in future releases.
 
 - Scope: GLOBAL
 - Type: Time
 - Persists to cluster: Yes
 - Default value: `23:59 +0000`
-- This variable is used to control the end time of the scheduling window of TTL jobs in the background. When you modify the value of this variable, be cautious that a small window might cause the cleanup of expired data to fail.
+- This variable is used to control the end time of the scheduling window of TTL jobs in the background. When you modify the value of this variable, be cautious that a small window might cause the cleanup of expired data to fail. For more information, refer to [Time to Live](/time-to-live.md).
+
+### tidb_ttl_running_tasks <span class="version-mark">New in v7.0.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: Integer
+- Default value: `-1`
+- Range: `-1` and `[1, 256]`
+- Specifies the maximum number of running TTL tasks in the entire cluster. `-1` means the number of TTL tasks is equivalent to the number of TiKV nodes. For more information, refer to [Time to Live](/time-to-live.md).
 
 ### tidb_txn_assertion_level <span class="version-mark">New in v6.0.0</span>
 
@@ -4396,7 +4541,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Scope: SESSION | GLOBAL
 - Default value: `OFF`
 - Type: Boolean
-- If [FastScan](/develop/dev-guide-use-fastscan.md) is enabled (set to `ON`), TiFlash provides more efficient query performance, but does not guarantee the accuracy of the query results or data consistency.
+- If [FastScan](/tiflash/use-fastscan.md) is enabled (set to `ON`), TiFlash provides more efficient query performance, but does not guarantee the accuracy of the query results or data consistency.
 
 ### tiflash_fine_grained_shuffle_batch_size <span class="version-mark">New in v6.2.0</span>
 
