@@ -10,7 +10,6 @@ This document describes how to stream data from TiDB Cloud Dedicated Tier cluste
 > **Note:**
 >
 > To use the Changefeed feature, make sure that your TiDB cluster version is v6.4.0 or later.
->
 
 ## Restrictions
 
@@ -24,20 +23,13 @@ This document describes how to stream data from TiDB Cloud Dedicated Tier cluste
     - AWS Singapore (ap-southeast-1)
     - AWS Tokyo (ap-northeast-1)
 
-- The **Sink to TiDB Cloud** feature only supports network connection via private endpoints. When you create a changefeed to stream data from a TiDB Cloud Dedicated Tier cluster to a TiDB Cloud Serverless Tier cluster, TiDB Cloud will automatically set up the private endpoint network connection between the two clusters.
+- The **Sink to TiDB Cloud** feature only supports network connection via private endpoints. When you create a changefeed to stream data from a TiDB Cloud Dedicated Tier cluster to a TiDB Cloud Serverless Tier cluster, TiDB Cloud will automatically set up the private endpoint connection between the two clusters.
 
 ## Prerequisites
 
-Before creating a changefeed, you need to complete the following prerequisites:
+The **Sink to TiDB Cloud** connector can only sink incremental data from a TiDB Cloud Dedicated Tier cluster to a Serverless Tier cluster after a certain [TSO](https://docs.pingcap.com/tidb/stable/glossary#tso).
 
-- [Export and load existing data to the target Serverless Tier cluster](#load-existing-data-recommended) (recommended).
-- Create corresponding target tables in the destination Serverless Tier cluster if you do not load the existing data and only want to replicate incremental data to the destination Serverless Tier cluster.
-
-### Load existing data (recommended)
-
-The **Sink to TiDB Cloud** connector can only sink incremental data from a TiDB Cloud Dedicated Tier cluster to a Serverless Tier cluster after a certain [TSO](https://docs.pingcap.com/tidb/stable/glossary#tso). If you have existing data in your TiDB Cloud Dedicated Tier cluster, you can export and load them into the destination Serverless Tier cluster before enabling **Sink to TiDB Cloud**.
-
-To load the existing data:
+Before creating a changefeed, you need to export existing data from the source Dedicated Tier cluster and load the data to the destination Serverless Tier cluster.
 
 1. Extend the [tidb_gc_life_time](https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50) to be longer than the total time of the following two operations, so that historical data during the time is not garbage collected by TiDB.
 
@@ -66,10 +58,6 @@ To load the existing data:
     Finished dump at: 2023-03-28 10:40:20
     ```
 
-### Create target tables in the destination Serverless Tier cluster
-
-If you do not load the existing data, you need to create corresponding target tables in the destination Serverless Tier cluster manually to store the incremental data from the source Dedicated Tier cluster. Otherwise, the data will not be replicated.
-
 ## Create a TiDB Cloud sink
 
 After completing the prerequisites, you can sink your data to the destination Serverless Tier cluster.
@@ -91,14 +79,7 @@ After completing the prerequisites, you can sink your data to the destination Se
     - **Tables to be replicated**: this column shows the tables to be replicated. But it does not show the new tables to be replicated in the future or the schemas to be fully replicated.
     - **Tables without valid keys**: this column shows tables without unique and primary keys. For these tables, because no unique identifier can be used by the downstream system to handle duplicate events, their data might be inconsistent during replication. To avoid such issues, it is recommended that you add unique keys or primary keys to these tables before the replication, or set filter rules to filter out these tables. For example, you can filter out the table `test.tbl1` using "!test.tbl1".
 
-6. In **Start Position**, configure the starting position for your TiDB Cloud sink.
-
-    - If you have [loaded the existing data](#load-existing-data-optional) using Dumpling, select **Start replication from a specific TSO** and fill in the TSO that you get from Dumpling exported metadata files.
-
-    <!--
-    - If you do not have any data in the upstream TiDB cluster, select **Start replication from now on**.
-    - Otherwise, you can customize the start time point by choosing **Start replication from a specific time**.
-    -->
+6. In the **Start Replication Position** area, fill in the TSO that you get from Dumpling exported metadata files.
 
 7. Click **Next** to configure your changefeed specification.
 
