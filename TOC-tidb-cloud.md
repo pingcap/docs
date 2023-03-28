@@ -220,7 +220,6 @@
   - [dbt](/tidb-cloud/integrate-tidbcloud-with-dbt.md)
   - [n8n](/tidb-cloud/integrate-tidbcloud-with-n8n.md)
   - [Netlify](/tidb-cloud/integrate-tidbcloud-with-netlify.md)
-  <!--- [New Relic](/tidb-cloud/monitor-new-relic-integration.md)-->
   - [Prometheus and Grafana](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)
   - [ProxySQL](/develop/dev-guide-proxysql-integration.md)
   - Terraform
