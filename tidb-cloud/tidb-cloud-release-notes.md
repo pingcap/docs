@@ -12,7 +12,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- Add 2 RCUs, 4 RCUs, and 8 RCUs specifications for [changefeeds](/tidb-cloud/changefeed-overview.md), and support choosing your desired specification when you [create a changefeed](/tidb-cloud/changefeed-overview#create-a-changefeed.md).
+- Add 2 RCUs, 4 RCUs, and 8 RCUs specifications for [changefeeds](/tidb-cloud/changefeed-overview.md), and support choosing your desired specification when you [create a changefeed](/tidb-cloud/changefeed-overview.md#create-a-changefeed).
 
     Using these new specifications, the data replication costs can be reduced by up to 87.5% compared to scenarios where 16 RCUs were previously required.
 
@@ -20,7 +20,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     You can improve replication performance by choosing a higher specification or reduce replication costs by choosing a lower specification.
 
-    For more information, see [Scale a changefeed](/changefeed-overview.md#scale-a-changefeed).
+    For more information, see [Scale a changefeed](/tidb-cloud/changefeed-overview.md#scale-a-changefeed).
 
 - Support replicating incremental data in real-time from a [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) cluster in AWS to a [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) cluster in the same project and same region.
 
