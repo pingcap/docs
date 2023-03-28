@@ -31,6 +31,14 @@ This document describes some key monitoring metrics displayed on the Resource Co
 - Bytes Written: the amount of data written by each Resource Group, calculated in real time. `total` is the sum of the data written by all Resource Groups.
 - Bytes Written Per Query: the average amount of data written by each SQL statement per second. It is obtained by dividing the above Bytes Written metric by the number of SQL statements executed per second.
 - KV CPU Time: the KV layer CPU time consumed by each Resource Group, calculated in real time . `total` is the sum of the KV layer CPU time consumed by all Resource Groups.
-- KV CPU Time Per Query: the average KV layer CPU time consumed by each SQL statement per second. It is obtained by dividing the above KV CPU Time metric by the number of SQL statements executed per second.
 - SQL CPU Time: the SQL layer CPU time consumed by each Resource Group, calculated in real time. `total` is the sum of the SQL layer CPU time consumed by all Resource Groups.
-- SQL CPU Time Per Query: the average SQL layer CPU time consumed by each SQL statement per second. It is obtained by dividing the above SQL CPU Time metric by the number of SQL statements executed per second.
+
+## Metrics about Resource Controller Client
+
+- Active Resource Groups: the number of resource groups for each Resource Controller Client, calculated in real time.
+- Total KV Request Count: the number of KV requests for each Resource Controller Client, calculated in real time and on the basis of resource groups. `total` is the sum of the KV requests for all Resource Controller Clients.
+- Failed KV Request Count: the number of failed KV requests for each Resource Controller Client, calculated in real time and on the basis of resource groups. `total` is the sum of the failed KV requests for all Resource Controller Clients.
+- Successful KV Request Count: the number of successful KV requests for each Resource Controller Client, calculated in real time and on the basis of resource groups. `total` is the sum of the successful KV requests for all Resource Controller Clients.
+- Successful KV Request Wait Duration (99/90): the waiting time (different percentiles) for successful KV requests for each Resource Controller Client, calculated in real time and on the basis of resource groups.
+- Token Request Handle Duration (999/99): the waiting time (different percentiles) for token requests from the server side for each Resource Controller Client, calculated in real time and on the basis of resource groups.
+- Token Request Count: the number of token requests from the server side for each Resource Controller Client, calculated in real time and on the basis of resource groups. `seccessful` and `failed` are the sum of the successful and failed token requests for all Resource Controller Clients.
