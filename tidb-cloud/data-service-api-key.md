@@ -35,13 +35,12 @@ To create an API key for a Data App, perform the following steps:
 <!--TODO: add API key role (ReadOnly and ReadAndWrite)-->
 4. In the **Create API Key** dialog box, enter a description and select a role for your API key.
 
-    - The description field is optional and can help you identify an API key.
-    - The role is used to control the permission of the API key to access clusters linked to the Data App. You can select `ReadOnly` or `ReadAndWrite` as the role:<!--TODO: add the description of ReadOnly and ReadAndWrite-->
+    The role is used to control whether the API key can read or write data to the clusters linked to the Data App. You can select the `ReadOnly` or `ReadAndWrite` role:
 
-        - `ReadOnly`: only allows the API key to read data, such as a `SELECT` statement.
-        - `ReadAndWrite`: allows the API key to read and write data. You can use this API key to execute all SQL queries, such as DML and DDL statements.
+    - `ReadOnly`: only allows the API key to read data, such as a `SELECT` statement.
+    - `ReadAndWrite`: allows the API key to read and write data. You can use this API key to execute all SQL statements, such as DML and DDL statements.
 
-5. Click **Next**. The private key and public key are displayed.
+5. Click **Next**. The public key and private key are displayed.
 
     Make sure that you have copied and saved the private key in a secure location. After leaving this page, you will not be able to get the full private key again.
 
