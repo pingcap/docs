@@ -389,7 +389,7 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
     + TiDB Lightning
     
-           - TiDB Lightning Physical Import Mode supports separating data import and index import to improve import speed and stability [#42132](https://github.com/pingcap/tidb/issues/42132) @[gozssky](https://github.com/gozssky)
+        - TiDB Lightning Physical Import Mode supports separating data import and index import to improve import speed and stability [#42132](https://github.com/pingcap/tidb/issues/42132) @[gozssky](https://github.com/gozssky)
 
            Add the `add-index-by-sql` parameter. The default value is `false`, which means that TiDB Lightning encodes both row data and index data into KV pairs and import them into TiKV together. If you set it to `true`, it means that TiDB Lightning adds indexes via the `ADD INDEX` SQL statement after importing the row data to improve import speed and stability.
 
