@@ -9,7 +9,7 @@ This document describes how to create a changefeed to stream data from TiDB Clou
 
 > **Note:**
 >
-> Currently, Kafka sink is in **beta**. To use the Changefeed feature, make sure that your TiDB cluster version is v6.4.0 or later and the TiKV node size is at least 8 vCPU and 16 GiB.
+> Currently, Kafka sink is in **beta**. To use the changefeed feature, make sure that your TiDB cluster version is v6.4.0 or later and the TiKV node size is at least 8 vCPU and 16 GiB.
 >
 > For [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta), the changefeed feature is unavailable.
 
@@ -136,9 +136,15 @@ For example, if your Kafka cluster is in Confluent Cloud, you can see [Resources
    - **Replication Factor**: controls how many Kafka servers each Kafka message is replicated to.
    - **Partition Number**: controls how many partitions exist in a topic.
 
-8. Click **Next** to check the configurations you set and go to the next page.
+8. Click **Next**.
 
-## Step 4. Review the configurations
+## Step 4. Configure your changefeed specification
+
+1. In the **Changefeed Specification** area, specify the number of Replication Capacity Units (RCUs) to be used by the changefeed.
+2. In the **Changefeed Name** area, specify a name for the changefeed.
+3. Click **Next** to check the configurations you set and go to the next page.
+
+## Step 5. Review the configurations
 
 On this page, you can review all the changefeed configurations that you set.
 
