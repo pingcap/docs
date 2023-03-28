@@ -1279,9 +1279,13 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Default value: `0`
 - Range: `[0, 2147483647]`
 - Unit: Rows
-- When this value is greater than `0`, TiDB will batch commit statements such as `INSERT` or `LOAD DATA` into smaller transactions. This reduces memory usage and helps ensure that the `txn-total-size-limit` is not reached by bulk modifications.
+- When this value is greater than `0`, TiDB will batch commit statements such as `INSERT` into smaller transactions. This reduces memory usage and helps ensure that the `txn-total-size-limit` is not reached by bulk modifications.
 - Only the value `0` provides ACID compliance. Setting this to any other value will break the atomicity and isolation guarantees of TiDB.
 - To make this variable work, you also need to enable `tidb_enable_batch_dml` and at least one of `tidb_batch_insert` and `tidb_batch_delete`.
+
+> **Note:**
+>
+> Starting from v7.0.0, `tidb_dml_batch_size` no longer takes effect on the [`LOAD DATA` statement](/sql-statements/sql-statement-load-data.md). To control the batch size of `LOAD DATA`, you can use the parameter [`batch_size`](/sql-statements/sql-statement-load-data.md#with-batch_sizenumber).
 
 ### tidb_enable_1pc <span class="version-mark">New in v5.0</span>
 
@@ -1776,16 +1780,27 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 </CustomContent>
 
-### tidb_enable_plan_replayer_continues_capture
+### tidb_enable_plan_replayer_continuous_capture <span class="version-mark">New in v7.0.0</span>
 
-> **Warning:**
->
-> The feature controlled by this variable is not fully functional in the current TiDB version. Do not change the default value.
+<CustomContent platform="tidb-cloud">
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
 - Default value: `OFF`
+- This variable controls whether to enable the `PLAN REPLAYER CONTINUOUS CAPTURE` feature. The default value `OFF` means to disable the feature.
+
+</CustomContent>
+
+<CustomContent platform="tidb">
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `OFF`
+- This variable controls whether to enable the [`PLAN REPLAYER CONTINUOUS CAPTURE` feature](/sql-plan-replayer.md#use-plan-replayer-continuous-capture). The default value `OFF` means to disable the feature.
+
+</CustomContent>
 
 ### tidb_enable_prepared_plan_cache <span class="version-mark">New in v6.1.0</span>
 
