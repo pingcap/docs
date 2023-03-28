@@ -277,11 +277,13 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
     For more information, see [documentation](/partitioned-table.md#key-partitioning).
 
-### TiCDC compatibility
+### Behavior changes
 
 * TiCDC fixes the issue of incorrect encoding of `FLOAT` data in Avro [#8490](https://github.com/pingcap/tiflow/issues/8490) @[3AceShowHand](https://github.com/3AceShowHand) **tw:ran-huang**
 
     When upgrading the TiCDC cluster to v7.0.0, if a table replicated using Avro contains the `FLOAT` data type, you need to manually adjust the compatibility policy of Confluent Schema Registry to `None` before upgrading so that the changefeed can successfully update the schema. Otherwise, after upgrading, the changefeed will be unable to update the schema and enter an error state.
+
+* In v7.0.0, the [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) SQL statement adds the `batch_size` parameter to split transactions. The default value of the `batch_size` parameter is `1000`, which means that the data to be imported into TiDB is split into multiple transactions, and each transaction inserts up to 1000 rows of records into TiDB. Prior to v7.0.0, you can use the [`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size) system variable to control the transaction size, but this variable no longer takes effect on `LOAD DATA` starting from v7.0.0.
 
 ### System variables
 
