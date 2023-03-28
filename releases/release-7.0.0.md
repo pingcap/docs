@@ -346,12 +346,9 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
     - Introduce the `EXPAND` operator to optimize the performance of SQL queries with multiple `DISTINCT` in a single `SELECT` statement [#16581](https://github.com/pingcap/tidb/issues/16581) @[AilinKid](https://github.com/AilinKid)
     - Support more SQL formats for Index Join [#40505](https://github.com/pingcap/tidb/issues/40505) @[Yisaer](https://github.com/Yisaer)
-    - Hints for Join order and Join algorithm can now be applied together [#36600](https://github.com/pingcap/tidb/issues/36600) @[Reminiscent](https://github.com/Reminiscent)
     - Avoid globally sorting partitioned table data in TiDB in some cases [#26166](https://github.com/pingcap/tidb/issues/26166) @[Defined2014](https://github.com/Defined2014)
-    - Add a new system variable `tidb_opt_ordering_index_selectivity_threshold` to help the optimizer to generate optimal execution plans for queries in the form of `WHERE filters on index_1 ORDER BY index_2` [#42060](https://github.com/pingcap/tidb/issues/42060) @[time-and-fate](https://github.com/time-and-fate)
     - Support using `fair lock mode` and `lock only if exists` at the same time [#42068](https://github.com/pingcap/tidb/issues/42068) @[MyonKeminta](https://github.com/MyonKeminta)
     - Support printing transaction slow logs and transaction internal events [#41863](https://github.com/pingcap/tidb/issues/41863) @[ekexium](https://github.com/ekexium)
-    - The enhanced pessimistic lock wake-up model (controlled by `tidb_pessimistic_txn_fair_locking`) is now enabled by default in newly created clusters. This can fairly wake up blocked transactions in scenarios where pessimistic transactions have severe single-point conflicts, thus achieving more stable transaction latency and lower tail latency [#42147](https://github.com/pingcap/tidb/issues/42147) @[MyonKeminta](https://github.com/MyonKeminta)
 
 + TiKV
 
@@ -428,10 +425,10 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
 + PD
 
-    - Fix the issue that the Region Scatter might cause uneven distribution of leader [#6017](https://github.com/tikv/pd/issues/6017) @[HunDunDM](https://github.com/HunDunDM)
+    - Fix the issue that the Region Scatter operation might cause uneven distribution of leaders [#6017](https://github.com/tikv/pd/issues/6017) @[HunDunDM](https://github.com/HunDunDM)
     - Fix the issue that data race might occur when getting PD members during startup [#6069](https://github.com/tikv/pd/issues/6069) @[rleungx](https://github.com/rleungx)
     - Fix the issue that data race might occur when collecting hotspot statistics [#6069](https://github.com/tikv/pd/issues/6069) @[lhy1024](https://github.com/lhy1024)
-    - Fix the issue that switching placement rule might cause uneven distribution of leader [#6195](https://github.com/tikv/pd/issues/6195) @[bufferflies](https://github.com/bufferflies)
+    - Fix the issue that switching placement rule might cause uneven distribution of leaders [#6195](https://github.com/tikv/pd/issues/6195) @[bufferflies](https://github.com/bufferflies)
 
 + TiFlash
 
