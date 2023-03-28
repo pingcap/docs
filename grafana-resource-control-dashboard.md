@@ -30,7 +30,7 @@ This document describes some key monitoring metrics displayed on the Resource Co
 - Bytes Read Per Query: the average amount of data read by each SQL statement per second. It is obtained by dividing the above Bytes Read metric by the number of SQL statements executed per second.
 - Bytes Written: the amount of data written by each Resource Group, calculated in real time. `total` is the sum of the data written by all Resource Groups.
 - Bytes Written Per Query: the average amount of data written by each SQL statement per second. It is obtained by dividing the above Bytes Written metric by the number of SQL statements executed per second.
-- KV CPU Time: the KV layer CPU time consumed by each Resource Group, calculated in real time . `total` is the sum of the KV layer CPU time consumed by all Resource Groups.
+- KV CPU Time: the KV layer CPU time consumed by each Resource Group, calculated in real time. `total` is the sum of the KV layer CPU time consumed by all Resource Groups.
 - SQL CPU Time: the SQL layer CPU time consumed by each Resource Group, calculated in real time. `total` is the sum of the SQL layer CPU time consumed by all Resource Groups.
 
 ## Metrics about Resource Controller Client
