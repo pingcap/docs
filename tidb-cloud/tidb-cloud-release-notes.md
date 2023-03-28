@@ -1,7 +1,7 @@
 ---
 title: TiDB Cloud Release Notes in 2023
 summary: Learn about the release notes of TiDB Cloud in 2023.
-aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
+aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 ---
 
 # TiDB Cloud Release Notes in 2023
