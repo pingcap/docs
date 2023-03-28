@@ -8,6 +8,36 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2023.
 
+## March 28, 2023
+
+**General changes**
+
+- Add 2 RCUs, 4 RCUs, and 8 RCUs specifications for [changefeeds](/tidb-cloud/changefeed-overview.md), and support choosing your desired specification when you [create a changefeed](/tidb-cloud/changefeed-overview.md#create-a-changefeed).
+
+    Using these new specifications, the data replication costs can be reduced by up to 87.5% compared to scenarios where 16 RCUs were previously required.
+
+- Support scaling up or down specifications for [changefeeds](/tidb-cloud/changefeed-overview.md) created after March 28, 2023.
+
+    You can improve replication performance by choosing a higher specification or reduce replication costs by choosing a lower specification.
+
+    For more information, see [Scale a changefeed](/tidb-cloud/changefeed-overview.md#scale-a-changefeed).
+
+- Support replicating incremental data in real-time from a [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) cluster in AWS to a [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) cluster in the same project and same region.
+
+    For more information, see [Sink to TiDB Cloud](/tidb-cloud/changefeed-sink-to-tidb-cloud.md).
+
+- Support two new GCP regions for the [Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md) feature of [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters: `Singapore (asia-southeast1)` and `Oregon (us-west1)`.
+
+    With these new regions, you have more options for migrating your data to TiDB Cloud. If your upstream data is stored in or near these regions, you can now take advantage of faster and more reliable data migration from GCP to TiDB Cloud.
+
+    For more information, see [Migrate MySQL-compatible databases to TiDB Cloud using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md).
+
+**Console changes**
+
+- Release a new native web infrastructure for the [Slow Query](/tidb-cloud/tune-performance.md#slow-query) page of [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters.
+
+    With this new infrastructure, you can easily navigate through the [Slow Query](/tidb-cloud/tune-performance.md#slow-query) page and access the necessary information in a more intuitive and efficient manner. The new infrastructure also resolves many problems on UX, making the SQL diagnosis process more user-friendly.
+
 ## March 21, 2023
 
 **General changes**
