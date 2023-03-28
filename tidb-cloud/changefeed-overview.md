@@ -4,7 +4,7 @@ title: Changefeed
 
 # Changefeed
 
-TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data services. Currently, TiDB Cloud supports streaming data to Apache Kafka and MySQL.
+TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data services. Currently, TiDB Cloud supports streaming data to Apache Kafka, MySQL, and TiDB Cloud.
 
 > **Note:**
 >
@@ -14,12 +14,9 @@ TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data servic
 >
 > For [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta), the changefeed feature is unavailable.
 
-To access the changefeed feature, navigate to the cluster overview page of your TiDB cluster, and then click **Changefeed** in the left navigation pane. The changefeed list is displayed.
+To access the changefeed feature, navigate to the cluster overview page of your TiDB cluster, and then click **Changefeed** in the left navigation pane. The changefeed page is displayed.
 
-In the changefeed list, you can:
-
-- View the information of the created changefeed, including changefeed's id, checkpoint, and status.
-- Operate the changefeed, including creating, pausing, resuming, editing, and deleting the changefeed.
+On the changefeed page, you can create a changefeed, view a list of existing changefeeds, and operate the existing changefeeds (such as scaling, pausing, resuming, editing, and deleting a changefeed).
 
 ## Create a changefeed
 
@@ -27,11 +24,29 @@ To create a changefeed, refer to the tutorials:
 
 - [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md) (Beta)
 - [Sink to MySQL](/tidb-cloud/changefeed-sink-to-mysql.md)
+- [Sink to TiDB Cloud](/tidb-cloud/changefeed-sink-to-tidb-cloud.md)
 
-## Delete a changefeed
+## Query TiCDC RCUs
 
 1. Navigate to the cluster overview page of the target TiDB cluster, and then click **Changefeed** in the left navigation pane.
-2. Locate the corresponding changefeed you want to delete, and click **...** > **Delete** in the **Action** column.
+2. Locate the corresponding changefeed you want to query, and click **...** > **View** in the **Action** column.
+3. You can see the current TiCDC Replication Capacity Units (RCUs) in the **Specification** area of the page.
+
+## Scale a changefeed
+
+You can change the TiCDC Replication Capacity Units (RCUs) of a changefeed by scaling up or down the changfeed.
+
+> **Note:**
+>
+> - To scale a changefeed for a cluster, make sure that all changefeeds for this cluster are created after March 28, 2023.
+> - If a cluster has changefeeds created before March 28, 2023, neither the existing changefeeds nor newly created changefeeds for this cluster support scaling up or down.
+
+1. Navigate to the cluster overview page of the target TiDB cluster, and then click **Changefeed** in the left navigation pane.
+2. Locate the corresponding changefeed you want to scale, and click **...** > **Scale Up/Down** in the **Action** column.
+3. Select a new specification.
+4. Click **Submit**.
+
+It takes about 10 minutes to complete the scaling process (during which the changfeed works normally) and a few seconds to switch to the new specification (during which the changefeed will be paused and resumed automatically).
 
 ## Pause or resume a changefeed
 
@@ -55,10 +70,10 @@ To create a changefeed, refer to the tutorials:
 
 4. After editing the configuration, click **...** > **Resume** to resume the corresponding changefeed.
 
-## Query TiCDC RCUs
+## Delete a changefeed
 
 1. Navigate to the cluster overview page of the target TiDB cluster, and then click **Changefeed** in the left navigation pane.
-2. You can see the current TiCDC Replication Capacity Units (RCUs) in the upper-left corner of the page.
+2. Locate the corresponding changefeed you want to delete, and click **...** > **Delete** in the **Action** column.
 
 ## Changefeed billing
 
