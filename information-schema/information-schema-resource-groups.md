@@ -39,7 +39,7 @@ DESC resource_groups;
 ## Examples
 
 ```sql
-SELECT * FROM information_schema.resource_groups; -- View the `default` resource group
+SELECT * FROM information_schema.resource_groups; -- View all resource groups. TiDB has a `default` resource group.
 ```
 
 ```sql
@@ -93,4 +93,4 @@ The descriptions of the columns in the `RESOURCE_GROUPS` table are as follows:
 
 > **Note:**
 >
-> TiDB clusters automatically create a `default` resource group during initialization. For this resource group, the default value of `RU_PER_SEC` is `UNLIMITED` (equivalent to the maximum value of the `INT` type, that is, `2147483647`) and is in `BURSTABLE` mode. All requests that are not bound to a resource group will be automatically bound to this `default` resource group. When you create a new configuration for another resource group, it is recommended to modify the `default` resource group configuration as needed.
+> TiDB automatically creates a `default` resource group during cluster initialization. For this resource group, the default value of `RU_PER_SEC` is `UNLIMITED` (equivalent to the maximum value of the `INT` type, that is, `2147483647`) and it is in `BURSTABLE` mode. All requests that are not bound to any resource group are automatically bound to this `default` resource group. When you create a new configuration for another resource group, it is recommended to modify the `default` resource group configuration as needed.
