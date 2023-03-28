@@ -381,21 +381,13 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
         - note [#issue](链接) @[贡献者 GitHub ID](链接)
 
-    + TiDB Data Migration (DM)
-
-        - 优化 Data Migration（DM）检查下游数据库账号权限的前置检查项 [#issue](链接-待补充) @[maxshuang](https://github.com/maxshuang)
-
-            在之前的版本，Data Migration 进行前置检查，检查用户提供的下游数据库账号是具备所需的权限时，是非必须通过项，现改为必须通过项，避免该账号权限不足导致任务失败。
-
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
-
     + TiDB Lightning
+    
+           - TiDB Lightning Physical Import Mode supports separating data import and index import to improve import speed and stability [#42132](https://github.com/pingcap/tidb/issues/42132) @[gozssky](https://github.com/gozssky)
 
-        - TiDB Lightning local backend supports separating data import and index import to improve import speed and stability [#42132](https://github.com/pingcap/tidb/issues/42132) @[gozssky](https://github.com/gozssky) **tw:hfxsd**
+           Add the `add-index-by-sql` parameter. The default value is `false`, which means that TiDB Lightning encodes both row data and index data into KV pairs and import them into TiKV together. If you set it to `true`, it means that TiDB Lightning adds indexes via the `ADD INDEX` SQL statement after importing the row data to improve import speed and stability.
 
-            TiDB Lightning adds the `add-index-by-sql` parameter. The default value is `false`, which means that TiDB Lightning still encodes the row data and index data into KV pairs before importing them into TiKV. If you set it to `true`, it creates indexes with the add index SQL statement after the data is imported in physical import mode (local backend). In this way, it can improve the speed and stability of importing data.
-
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+        - Add the `tikv-importer.keyspace-name` parameter. The default value is an empty string, which means TiDB Lightning automatically gets the key space name of the corresponding tenant to import data. If you specify a value, the specified key space name will be used to import data. This parameter provides flexibility in the configuration of TiDB Lightning when you import data to a multi-tenant TiDB cluster. [#41915](https://github.com/pingcap/tidb/issues/41915) @[lichunzhu](https://github.com/lichunzhu)
 
     + TiUP
 
@@ -458,13 +450,13 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
     + TiDB Data Migration (DM)
 
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+        - Fix the issue that when a DM worker node uses GCP Cloud Storage, due to too frequent breakpoints, the request frequency limit of GCP Cloud Storage is reached and the DM worker cannot write the data into GCP Cloud Storage, thus causing the full data failing to load [#8482](https://github.com/pingcap/tiflow/issues/8482) @[maxshuang](https://github.com/maxshuang)
+        - Fix the issue that when multiple DM tasks replicate the same downstream data at the same time and all use the downstream metadata table to record the breakpoint information, the breakpoint information of all tasks is written to the same metadata table and uses the same task ID [#8500](https://github.com/pingcap/tiflow/issues/8500) @[maxshuang](https://github.com/maxshuang)
 
     + TiDB Lightning
 
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+        - Fix the issue that when importing data using Physical Import Mode, if there is an `auto_random` column in the composite primary key of the target table, but the value of the column is not specified in the source data, the related column does not generate data automatically [#41454](https://github.com/pingcap/tidb/issues/41454) @[D3Hunter](https://github.com/D3Hunter)
+        - Fix the issue that when importing data using Logical Import Mode, the import fails due to lack of the `CONFIG` permission for the target cluster [#41915](https://github.com/pingcap/tidb/issues/41915) @[lichunzhu](https://github.com/lichunzhu)
 
     + TiUP
 
