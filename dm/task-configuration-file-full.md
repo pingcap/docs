@@ -166,7 +166,7 @@ loaders:
     # - "off". Indicates that no data analysis will be performed after the import is complete.
     # Analyze only affects statistics data and it is recommended that Analyze is set to off in most scenarios.
     analyze: "off"
-    # Only available for physical import. The concurrency of sending KVs data to TiKV. This can be increased when the direct network transfer speed between dm-worker and TiKV exceeds 10,000 Mb/s.
+    # Only available for physical import. The concurrency of sending KV data to TiKV. This can be increased when the direct network transfer speed between dm-worker and TiKV exceeds 10,000 Mb/s.
     # range-concurrency: 16
     # Only available for physical import mode. Whether to enable compression when sending KV data to TiKV. Currently, only Gzip compression is supported and can be specified using either "gzip" or "gz". Compression is not enabled by default.
     # compress-kv-pairs: ""
