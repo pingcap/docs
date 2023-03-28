@@ -43,3 +43,7 @@ Currently, we maintain the following versions of TiDB documentation in different
 [<img src="media/contribution-map.png" alt="contribution-map" width="180"></img>](https://github.com/pingcap/docs/blob/master/credits.md)
 
 See [TiDB Documentation Contributing Guide](/CONTRIBUTING.md) to become a contributor! 🤓
+
+## License
+
+All documentation is available under the terms of a [Creative Commons License](https://creativecommons.org/licenses/by-sa/3.0/).
