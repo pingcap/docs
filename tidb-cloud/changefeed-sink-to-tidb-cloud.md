@@ -23,6 +23,7 @@ This document describes how to stream data from a TiDB Cloud Dedicated Tier clus
     - AWS Singapore (ap-southeast-1)
     - AWS Tokyo (ap-northeast-1)
 
+- The source Dedicated Tier cluster and the destination Serverless Tier cluster must be in the same project and the same region.
 - The **Sink to TiDB Cloud** feature only supports network connection via private endpoints. When you create a changefeed to stream data from a TiDB Cloud Dedicated Tier cluster to a TiDB Cloud Serverless Tier cluster, TiDB Cloud will automatically set up the private endpoint connection between the two clusters.
 
 ## Prerequisites
