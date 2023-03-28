@@ -45,7 +45,7 @@ hide_commit: true
 
 [Use an HTAP Cluster](https://docs.pingcap.com/tidbcloud/tiflash-overview)
 
-[Back Up and Restore](https://docs.pingcap.com/tidbcloud/backup-and-restore)
+[Back Up and Restore Data](https://docs.pingcap.com/tidbcloud/backup-and-restore)
 
 [Scale a Cluster](https://docs.pingcap.com/tidbcloud/scale-tidb-cluster)
 
