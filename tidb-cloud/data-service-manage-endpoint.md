@@ -70,15 +70,13 @@ On the right pane of the endpoint details page, you can click the **Properties**
 
 On the SQL editor of the endpoint details page, you can write and run the SQL statements for an endpoint. You can also simply type `--` followed by your instructions to let AI generate SQL statements automatically.
 
-<!--TODO: update the drop-down list: Select a cluster-->
-
 1. Select a cluster.
 
     > **Note:**
     >
     > Only clusters that are linked to the Data App are displayed in the drop-down list. To manage the linked clusters, see [Manage linked clusters](/tidb-cloud/data-service-manage-data-app.md#manage-linked-clusters).
 
-    On the upper part of the SQL editor, select a cluster on which the SQL statements are executed from the drop-down list. Then, you can view all databases of this cluster in the **Schema** tab on the right pane.
+    On the upper part of the SQL editor, select a cluster on which you want to execute SQL statements from the drop-down list. Then, you can view all databases of this cluster in the **Schema** tab on the right pane.
 
 2. Write SQL statements.
 

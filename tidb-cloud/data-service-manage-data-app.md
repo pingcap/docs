@@ -31,27 +31,21 @@ To rename a Data App, navigate to the [**Data Service**](https://tidbcloud.com/c
 
 ### Manage linked clusters
 
-<!--TODO: add a new area: **Linked Cluster**-->
+You can add or remove linked clusters for a Data App. After you remove a linked cluster, the endpoints in the Data App can still access other linked clusters.
 
-You can add or remove linked clusters for a Data App. After you remove a linked cluster from, the endpoints in the Data App can still access other linked clusters.
-
-<!--TODO: add a new button: **Add Cluster**-->
-
-To add a linked cluster to a Data App, perform the following steps:
+To link a cluster to a Data App, perform the following steps:
 
 1. Navigate to the [**Data Service**](https://tidbcloud.com/console/dataservice) page of your project.
 2. In the left pane, locate your target Data App and click the name of your target Data App to view its details.
 3. In the **Linked Cluster** area, click **Add Cluster**.
 4. In the displayed dialog box, select a cluster from the list and click **Add**.
 
-<!--TODO: add a new button: Linked Cluster > Action > Delete-->
-
 To remove a linked cluster from a Data App, perform the following steps:
 
 1. Navigate to the [**Data Service**](https://tidbcloud.com/console/dataservice) page of your project.
 2. In the left pane, locate your target Data App and click the name of your target Data App to view its details.
 3. In the **Linked Cluster** area, locate the target linked cluster you want to remove from the Data App, and click **Delete** in the **Action** column.
-4. In the displayed dialog box, click **I understand, remove** to confirm the removal.
+4. In the displayed dialog box, confirm the removal.
 
     After you remove a linked cluster, the cluster is not deleted, but the existing endpoints in the Data App cannot access it.
 
