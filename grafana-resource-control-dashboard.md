@@ -9,7 +9,9 @@ If you use TiUP to deploy the TiDB cluster, the monitoring system (Prometheus & 
 
 The Grafana dashboard is divided into a series of sub dashboards which include Overview, PD, TiDB, TiKV, Node\_exporter, Disk Performance, and Performance\_overview.
 
-If your cluster has used the [Resource Control](/tidb-resource-control.md) feature, you can get an overview of the resource consumption status from the Resource Control dashboard. 
+If your cluster has used the [Resource Control](/tidb-resource-control.md) feature, you can get an overview of the resource consumption status from the Resource Control dashboard.
+
+TiDB uses the [token bucket algorithm](https://en.wikipedia.org/wiki/Token_bucket) for flow control. As described in the ([RFC: Global Resource Control in TiDB](https://github.com/pingcap/tidb/blob/master/docs/design/2022-11-25-global-resource-control.md#distributed-token-buckets)), a TiDB node might have multiple Resource Groups, which will be flow controlled by GAC (Global Admission Control) on the PD side. The Local Token Bucket in each TiDB node periodically (5 seconds by default) communicates with the GAC on the PD side to reconfigure the local tokens. In this case, the Local Token Bucket is implemented as Resource Controller Client.
 
 This document describes some key monitoring metrics displayed on the Resource Control dashboard.
 
