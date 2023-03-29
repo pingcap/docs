@@ -252,7 +252,7 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
     - Supports highlighting TiDB keywords such as `PESSIMISTIC`, `OPTIMISTIC`, `AUTO_RANDOM`, `PLACEMENT`, `POLICY`, `REORGANIZE`, `EXCHANGE`, `CACHE`, `NONCLUSTERED`, and `CLUSTERED`.
     - Supports highlighting TiDB functions such as  `TIDB_BOUNDED_STALENESS`, `TIDB_DECODE_KEY`, `TIDB_DECODE_PLAN`, `TIDB_IS_DDL_OWNER`, `TIDB_PARSE_TSO`, `TIDB_VERSION`, `TIDB_DECODE_SQL_DIGESTS `, and `TIDB_SHARD`.
 
-  For more information, refer to [DBeaver documentation](https://github.com/dbeaver/dbeaver/wiki).
+  For more information, see [DBeaver documentation](https://github.com/dbeaver/dbeaver/wiki).
 
 ### Observability
 
