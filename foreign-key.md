@@ -341,4 +341,5 @@ SHOW CREATE TABLE child;
 |       | ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin |
 +-------+-------------------------------------------------------------+
 ```
+
 The above output of `SHOW CREATE TABLE` indicates that no foreign keys exist in the `child` table.
