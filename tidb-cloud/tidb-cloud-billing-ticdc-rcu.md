@@ -6,19 +6,22 @@ aliases: ['/tidbcloud/tidb-cloud-billing-tcu']
 
 # Changefeed Billing
 
-TiDB Cloud measures the capacity of changefeeds in TiCDC Replication Capacity Units (RCUs). When you create the first changefeed for a cluster, TiDB Cloud automatically sets up TiCDC RCUs for you, and you will be charged for these TiCDC RCUs. All changefeeds that are created in a single cluster share the same TiCDC RCUs.
+TiDB Cloud measures the capacity of [changefeeds](/tidb-cloud/changefeed-overview.md) in TiCDC Replication Capacity Units (RCUs). When you [create a changefeed](/tidb-cloud/changefeed-overview.md#create-a-changefeed) for a cluster, you can select an appropriate specification. The higher the RCU, the better the replication performance. You will be charged for these TiCDC changefeed RCUs.
 
 ## Number of TiCDC RCUs
 
-For each TiDB cluster, the number of TiCDC RCUs is set up by TiDB Cloud according to the total vCPU count of all TiKV nodes in your cluster as follows:
+The following table lists the specifications and corresponding replication performances for changefeeds:
 
-| Total vCPUs of all TiKV nodes | Number of RCUs |
-|------------------------------|----------------|
-| < 48                         | 16             |
-| >= 48, and < 120             | 24             |
-| >= 120, and <= 168           | 32             |
-| > 168                        | 40             |
+| Specification | Maximum replication performance |
+|---------------|---------------------------------|
+| 2 RCUs        | 5,000 rows/s                    |
+| 4 RCUs        | 10,000 rows/s                   |
+| 8 RCUs        | 20,000 rows/s                   |
+| 16 RCUs       | 40,000 rows/s                   |
+| 24 RCUs       | 60,000 rows/s                   |
+| 32 RCUs       | 80,000 rows/s                   |
+| 40 RCUs       | 100,000 rows/s                  |
 
 ## Price
 
-To learn about the supported regions and the price of TiDB Cloud for each TiCDC RCU, see [Changefeed Cost](https://www.pingcap.com/tidb-cloud-pricing-details/#changefeed-cost). 
+To learn about the supported regions and the price of TiDB Cloud for each TiCDC RCU, see [Changefeed Cost](https://www.pingcap.com/tidb-cloud-pricing-details/#changefeed-cost).
