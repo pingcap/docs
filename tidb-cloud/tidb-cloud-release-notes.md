@@ -8,6 +8,16 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2023.
 
+## March 29, 2023
+
+**General changes**
+
+- [Data Service (beta)](/tidb-cloud/data-service-overview.md) supports more fine-grained access control for Data Apps.
+
+    On the Data App details page, you can manage the linked clusters that your Data App can access and specify the role for each API key. The role controls whether the API key can read or write data to the linked clusters and can be set to ReadOnly or ReadAndWrite. This feature provides cluster-level and permission-level access control for Data Apps, giving you more flexibility for you to control the access scope according to your business needs.
+
+    For more details, see [Manage linked clusters](/tidb-cloud/data-service-manage-data-app.md#manage-linked-clusters) and [Manage API keys](/tidb-cloud/data-service-api-key.md).
+
 ## March 28, 2023
 
 **General changes**
