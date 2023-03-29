@@ -29,7 +29,7 @@ A Data App is a group of endpoints that you can use to access data for a specifi
 
 3. On the **Get started by creating your first data application** page, enter a name and select clusters that you want the Data App to access.
 
-4. Click **Create Data App**. The [**Data Service**](https://tidbcloud.com/console/dataservice) details page is displayed.
+4. Click **Create Data App**. The [**Data Service**](https://tidbcloud.com/console/data-service) details page is displayed.
 
 ## Step 2. Develop an endpoint
 
@@ -123,7 +123,7 @@ You can call the endpoint by sending an HTTPS request. Before calling an endpoin
 
 ### 1. Create an API key
 
-1. In the left pane of the [**Data Service**](https://tidbcloud.com/console/dataservice) page, click the name of your Data App to view its details.
+1. In the left pane of the [**Data Service**](https://tidbcloud.com/console/data-service) page, click the name of your Data App to view its details.
 2. In the **API Key** area, click **Create API Key**.
 3. In the **Create API Key** dialog box, enter a description and select a role for your API key.
 
@@ -142,7 +142,7 @@ You can call the endpoint by sending an HTTPS request. Before calling an endpoin
 
 TiDB Cloud generates code examples to help you call an endpoint. To get the code example, perform the following steps:
 
-1. In the left pane of the [**Data Service**](https://tidbcloud.com/console/dataservice) page, click the name of your endpoint, and then click **...** > **Code Example** in the upper-right corner. The **Code Example** dialog box is displayed.
+1. In the left pane of the [**Data Service**](https://tidbcloud.com/console/data-service) page, click the name of your endpoint, and then click **...** > **Code Example** in the upper-right corner. The **Code Example** dialog box is displayed.
 
 2. In the dialog box, select the cluster and database that you want to use to call the endpoint, and then copy the code example.
 
