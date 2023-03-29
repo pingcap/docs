@@ -21,7 +21,9 @@ This feature helps you migrate your source databases' existing data and ongoing 
     - AWS Tokyo (ap-northeast-1)
     - AWS Frankfurt (eu-central-1)
     - AWS Seoul (ap-northeast-2)
-    - GCP Tokyo (asia-northeast1) 
+    - GCP Oregon (us-west1)
+    - GCP Singapore (asia-southeast1)
+    - GCP Tokyo (asia-northeast1)
 
 - Amazon Aurora MySQL writer instances support both existing data and incremental data migration. Amazon Aurora MySQL reader instances only support existing data migration and do not support incremental data migration.
 

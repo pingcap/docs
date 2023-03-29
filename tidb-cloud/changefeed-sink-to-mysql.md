@@ -9,7 +9,7 @@ This document describes how to stream data from TiDB Cloud to MySQL using the **
 
 > **Note:**
 >
-> To use the Changefeed feature, make sure that your TiDB cluster version is v6.4.0 or later and the TiKV node size is at least 8 vCPU and 16 GiB.
+> To use the changefeed feature, make sure that your TiDB cluster version is v6.4.0 or later and the TiKV node size is at least 8 vCPU and 16 GiB.
 >
 > Currently, TiDB Cloud only allows up to 5 changefeeds per cluster.
 >
@@ -117,17 +117,22 @@ After completing the prerequisites, you can sink your data to MySQL.
     - If you do not have any data in the upstream TiDB cluster, select **Start replication from now on**.
     - Otherwise, you can customize the start time point by choosing **Start replication from a specific time**.
 
-7. Click **Next** to review the Changefeed configuration.
+7. Click **Next** to configure your changefeed specification.
+
+    - In the **Changefeed Specification** area, specify the number of Replication Capacity Units (RCUs) to be used by the changefeed.
+    - In the **Changefeed Name** area, specify a name for the changefeed.
+
+8. Click **Next** to review the changefeed configuration.
 
     If you confirm all configurations are correct, check the compliance of cross-region replication, and click **Create**.
-    
+
     If you want to modify some configurations, click **Previous** to go back to the previous configuration page.
 
-8. The sink starts soon, and you can see the status of the sink changes from "**Creating**" to "**Running**".
+9. The sink starts soon, and you can see the status of the sink changes from "**Creating**" to "**Running**".
 
-    Click the **Sink to MySQL** card, and you can see the Changfeed running status in a pop-up window, including checkpoint, replication latency, and other metrics.
+    Click the changefeed name, and you can see more details about the changefeed, such as the checkpoint, replication latency, and other metrics.
 
-9. If you have [loaded the existing data](#load-existing-data-optional) using Dumpling, you need to restore the GC time to its original value (the default value is `10m`) after the sink is created:
+10. If you have [loaded the existing data](#load-existing-data-optional) using Dumpling, you need to restore the GC time to its original value (the default value is `10m`) after the sink is created:
 
 {{< copyable "sql" >}}
 

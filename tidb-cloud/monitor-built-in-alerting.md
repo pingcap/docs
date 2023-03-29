@@ -74,7 +74,8 @@ If you no longer want to receive alert notification emails of clusters in your p
     - If you only have one project, click **Admin** > **Alert Subscription**.
 
 3. Locate your email address and click **Unsubscribe**.
-4. Click **Delete** to confirm the unsubscription.  
+
+4. Click **Delete** to confirm the unsubscription.
 
 ## TiDB Cloud built-in alert conditions
 
