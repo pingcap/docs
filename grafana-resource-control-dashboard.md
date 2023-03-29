@@ -36,9 +36,9 @@ This document describes some key monitoring metrics displayed on the Resource Co
 ## Metrics about Resource Controller Client
 
 - Active Resource Groups: the number of resource groups for each Resource Controller Client, calculated in real time.
-- Total KV Request Count: the number of KV requests for each Resource Controller Client, calculated in real time and on the basis of resource groups. `total` is the sum of the KV requests for all Resource Controller Clients.
-- Failed KV Request Count: the number of failed KV requests for each Resource Controller Client, calculated in real time and on the basis of resource groups. `total` is the sum of the failed KV requests for all Resource Controller Clients.
-- Successful KV Request Count: the number of successful KV requests for each Resource Controller Client, calculated in real time and on the basis of resource groups. `total` is the sum of the successful KV requests for all Resource Controller Clients.
-- Successful KV Request Wait Duration (99/90): the waiting time (different percentiles) for successful KV requests for each Resource Controller Client, calculated in real time and on the basis of resource groups.
-- Token Request Handle Duration (999/99): the waiting time (different percentiles) for token requests from the server side for each Resource Controller Client, calculated in real time and on the basis of resource groups.
-- Token Request Count: the number of token requests from the server side for each Resource Controller Client, calculated in real time and on the basis of resource groups. `successful` and `failed` are the sums of the successful and failed token requests for all Resource Controller Clients.
+- Total KV Request Count: the number of KV requests for each Resource Controller Client, calculated in real time and by resource groups. `total` is the sum of the KV requests for all Resource Controller Clients.
+- Failed KV Request Count: the number of failed KV requests for each Resource Controller Client, calculated in real time and by resource groups. `total` is the sum of the failed KV requests for all Resource Controller Clients.
+- Successful KV Request Count: the number of successful KV requests for each Resource Controller Client, calculated in real time and by resource groups. `total` is the sum of the successful KV requests for all Resource Controller Clients.
+- Successful KV Request Wait Duration (99/90): the waiting time (at different percentiles) for successful KV requests for each Resource Controller Client, calculated in real time and by resource groups.
+- Token Request Handle Duration (999/99): the waiting time (at different percentiles) for token requests from the server side for each Resource Controller Client, calculated in real time and by resource groups.
+- Token Request Count: the number of token requests from the server side for each Resource Controller Client, calculated in real time and by resource groups. `successful` and `failed` are the sums of the successful and failed token requests for all Resource Controller Clients.
