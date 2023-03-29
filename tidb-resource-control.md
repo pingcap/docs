@@ -223,7 +223,7 @@ TiKV also records the request QPS from different resource groups in Grafana's **
 
 ## Tool compatibility
 
-The resource control feature is still in its experimental stage and does not impact the regular usage of data import, export, and other replication tools. BR, TiDB Lightning, and TiCDC do not currently support processing DDL operations related to resource control, and their resource consumption is not limited by resource control.
+The resource control feature is still in its experimental stage. It does not impact the regular usage of data import, export, and other replication tools. BR, TiDB Lightning, and TiCDC do not currently support processing DDL operations related to resource control, and their resource consumption is not limited by resource control.
 
 ## See also
 
