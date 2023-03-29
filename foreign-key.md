@@ -331,7 +331,7 @@ CREATE TABLE child (
     pid INT REFERENCES parent(id)
 );
 
-show create table child;
+SHOW CREATE TABLE child;
 +-------+-------------------------------------------------------------+
 | Table | Create Table                                                |
 +-------+-------------------------------------------------------------+
