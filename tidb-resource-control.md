@@ -5,6 +5,10 @@ summary: Learn how to use the resource control feature to control and schedule a
 
 # Use Resource Control to Achieve Resource Isolation
 
+> **Warning:**
+>
+> This feature is experimental and its form and usage might change in subsequent versions.
+
 <CustomContent platform="tidb-cloud">
 
 > **Note:**
