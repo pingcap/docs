@@ -43,17 +43,24 @@ To enable the Chat2Query API, perform the following steps:
 
 Before calling an endpoint, you need to create an API key. To create an API key for the Chat2Query Data App, perform the following steps:
 
-1. In the left pane of [**Data Service**](https://tidbcloud.com/console/dataservice), click the name of **Chat2Query System** to view its details.
+1. In the left pane of [**Data Service**](https://tidbcloud.com/console/data-service), click the name of **Chat2Query System** to view its details.
 2. In the **API Key** area, click **Create API Key**.
-3. In the **Create API Key** dialog box, enter a description for your API key, and then click **Next**. The private key and public key are displayed.
+3. In the **Create API Key** dialog box, enter a description and select a role for your API key.
+
+    The role is used to control whether the API key can read or write data to the clusters linked to the Data App. You can select the `ReadOnly` or `ReadAndWrite` role:
+
+    - `ReadOnly`: only allows the API key to read data, such as `SELECT`, `SHOW`, `USE`, `DESC`, and `EXPLAIN` statements.
+    - `ReadAndWrite`: allows the API key to read and write data. You can use this API key to execute all SQL statements, such as DML and DDL statements.
+
+4. Click **Next**. The public key and private key are displayed.
 
     Make sure that you have copied and saved the private key in a secure location. After leaving this page, you will not be able to get the full private key again.
 
-4. Click **Done**.
+5. Click **Done**.
 
 ## Step 3. Call the Chat2Data endpoint
 
-In the left pane of the [**Data Service**](https://tidbcloud.com/console/dataservice) page, click **Chat2Query** > **/chat2data** to view the endpoint details. The **Properties** of Chat2Data are displayed:
+In the left pane of the [**Data Service**](https://tidbcloud.com/console/data-service) page, click **Chat2Query** > **/chat2data** to view the endpoint details. The **Properties** of Chat2Data are displayed:
 
 - **Endpoint Path**: (read-only) the path of the Chat2Data endpoint, which is `/chat2data`.
 
@@ -64,7 +71,7 @@ In the left pane of the [**Data Service**](https://tidbcloud.com/console/dataser
 - **Timeout(ms)**: the timeout for the Chat2Data endpoint.
 
     - Default value: `30000`
-    - Maximum value: `30000`
+    - Maximum value: `60000`
     - Minimum value: `1`
     - Unit: millisecond
 
@@ -135,14 +142,13 @@ The response is as follows:
         ],
         "result": {
             "code": 200,
-            "message": "ok",
+            "message": "Query OK!",
             "start_ms": 1678965476709,
             "end_ms": 1678965476839,
             "latency": "130ms",
             "row_count": 1,
             "row_affect": 0,
             "limit": 50,
-            "query": "Query OK!",
             "sql": "SELECT sample_data.github_events.`repo_name`, COUNT(*) AS count FROM sample_data.github_events GROUP BY sample_data.github_events.`repo_name` ORDER BY count DESC LIMIT 1;",
             "ai_latency": "30ms"
         }
@@ -165,8 +171,7 @@ If your API call is not successful, you will receive a status code other than `2
             "latency": "",
             "row_count": 0,
             "row_affect": 0,
-            "limit": 0,
-            "query": ""
+            "limit": 0
         }
     }
 }

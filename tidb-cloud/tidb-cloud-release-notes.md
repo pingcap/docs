@@ -8,6 +8,16 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2023.
 
+## March 29, 2023
+
+**General changes**
+
+- [Data Service (beta)](/tidb-cloud/data-service-overview.md) supports more fine-grained access control for Data Apps.
+
+    On the Data App details page, now you can link clusters to your Data App and specify the role for each API key. The role controls whether the API key can read or write data to the linked clusters and can be set to `ReadOnly` or `ReadAndWrite`. This feature provides cluster-level and permission-level access control for Data Apps, giving you more flexibility to control the access scope according to your business needs.
+
+    For more information, see [Manage linked clusters](/tidb-cloud/data-service-manage-data-app.md#manage-linked-clusters) and [Manage API keys](/tidb-cloud/data-service-api-key.md).
+
 ## March 28, 2023
 
 **General changes**
@@ -42,7 +52,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- Introduce [Data Service (beta)](https://tidbcloud.com/console/dataservice) for [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters, which enables you to access data via an HTTPS request using a custom API endpoint.
+- Introduce [Data Service (beta)](https://tidbcloud.com/console/data-service) for [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters, which enables you to access data via an HTTPS request using a custom API endpoint.
 
     With Data Service, you can seamlessly integrate TiDB Cloud with any application or service that is compatible with HTTPS. The following are some common scenarios:
 
@@ -53,7 +63,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     In addition, TiDB Cloud provides the [Chat2Query API](/tidb-cloud/use-chat2query-api.md), a RESTful interface that allows you to generate and execute SQL statements using AI.
 
-    To access Data Service, navigate to the [**Data Service**](https://tidbcloud.com/console/dataservice) page in the left navigation pane. For more information, see the following documentation:
+    To access Data Service, navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page in the left navigation pane. For more information, see the following documentation:
 
     - [Data Service Overview](/tidb-cloud/data-service-overview.md)
     - [Get Started with Data Service](/tidb-cloud/data-service-get-started.md)

@@ -34,8 +34,8 @@ The TiDB Cloud roadmap brings you what's coming in the near future, so you can s
     <td>In Chat2Query, you can either let AI generate SQL queries automatically or write SQL queries manually, and run SQL queries against databases without a terminal.</td>
   </tr>
   <tr>
-    <td>Support Data API.</td>
-    <td>Allow developers to read/write databases via data API.</td>
+    <td>✅ Support Data Service.</td>
+    <td>With Data Service (beta), you can read or write TiDB Cloud data via an HTTPS request using a custom API endpoint.</td>
   </tr>
   <tr>
     <td>Cloud provider marketplace</td>

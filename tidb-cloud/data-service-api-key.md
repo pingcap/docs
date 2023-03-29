@@ -29,23 +29,30 @@ The following sections describe how to create, edit, and delete an API key for a
 
 To create an API key for a Data App, perform the following steps:
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/console/dataservice) page of your project.
+1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
 2. In the left pane, click the name of your target Data App to view its details.
 3. In the **API Key** area, click **Create API Key**.
-4. In the **Create API Key** dialog box, enter a description for your API key, and then click **Next**. The private key and public key are displayed.
+4. In the **Create API Key** dialog box, enter a description and select a role for your API key.
+
+    The role is used to control whether the API key can read or write data to the clusters linked to the Data App. You can select the `ReadOnly` or `ReadAndWrite` role:
+
+    - `ReadOnly`: only allows the API key to read data, such as `SELECT`, `SHOW`, `USE`, `DESC`, and `EXPLAIN` statements.
+    - `ReadAndWrite`: allows the API key to read and write data. You can use this API key to execute all SQL statements, such as DML and DDL statements.
+
+5. Click **Next**. The public key and private key are displayed.
 
     Make sure that you have copied and saved the private key in a secure location. After leaving this page, you will not be able to get the full private key again.
 
-5. Click **Done**.
+6. Click **Done**.
 
 ### Edit an API key
 
 To edit the description of an API key, perform the following steps:
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/console/dataservice) page of your project.
+1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
 2. In the left pane, click the name of your target Data App to view its details.
 3. In the **API Key** area, locate the **Action** column, and then click **...** > **Edit** in the API key row that you want to change.
-4. Update the description of the API key.
+4. Update the description or the role of the API key.
 5. Click **Update**.
 
 ### Delete an API key
@@ -56,7 +63,7 @@ To edit the description of an API key, perform the following steps:
 
 To delete an API key for a Data App, perform the following steps:
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/console/dataservice) page of your project.
+1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
 2. In the left pane, click the name of your target Data App to view its details.
 3. In the **API Key** area, locate the **Action** column, and then click **...** > **Delete** in the API key row that you want to delete.
-4. Click **I understand, delete** to confirm the deletion.
+4. In the displayed dialog box, confirm the deletion.

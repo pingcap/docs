@@ -19,7 +19,7 @@ Before you call an endpoint, make sure that you have created an API key in the D
 
 To create an endpoint, perform the following steps:
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/console/dataservice) page of your project.
+1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
 2. In the left pane, click the name of your target Data App and click **...** > **Create Endpoint**. You can update the default name if necessary.
 
     > **Tip:**
@@ -74,9 +74,9 @@ On the SQL editor of the endpoint details page, you can write and run the SQL st
 
     > **Note:**
     >
-    > Only clusters in the **Available** state are displayed in the drop-down list.
+    > Only clusters that are linked to the Data App are displayed in the drop-down list. To manage the linked clusters, see [Manage linked clusters](/tidb-cloud/data-service-manage-data-app.md#manage-linked-clusters).
 
-    On the upper part of the SQL editor, select a cluster on which the SQL statements are executed from the drop-down list. Then, you can view all databases of this cluster in the **Schema** tab on the right pane.
+    On the upper part of the SQL editor, select a cluster on which you want to execute SQL statements from the drop-down list. Then, you can view all databases of this cluster in the **Schema** tab on the right pane.
 
 2. Write SQL statements.
 
@@ -127,7 +127,7 @@ In the **Deployments** tab, you can deploy a draft version and undeploy the onli
 
 To rename an endpoint, perform the following steps:
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/console/dataservice) page of your project.
+1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
 2. In the left pane, click the name of your target Data App to view its endpoints.
 3. Locate the endpoint you want to rename, click **...** > **Rename**., and enter a new name for the endpoint.
 
@@ -135,7 +135,7 @@ To rename an endpoint, perform the following steps:
 
 To test an endpoint, perform the following steps:
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/console/dataservice) page of your project.
+1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
 2. In the left pane, click the name of your target Data App to view its endpoints.
 3. Click the name of the endpoint you want to test to view its details.
 4. (Optional) If the endpoint contains parameters, you need to set test values before testing.
@@ -157,7 +157,7 @@ After testing the endpoint, you can see the response as JSON at the bottom of th
 
 To deploy an endpoint, perform the following steps:
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/console/dataservice) page of your project.
+1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
 2. In the left pane, click the name of your target Data App to view its endpoints.
 3. Locate the endpoint you want to deploy, click the endpoint name to view its details, and then click **Deploy** in the upper-right corner.
 
@@ -177,7 +177,7 @@ Before calling an endpoint, you need to create an API key. For more information,
 
 TiDB Cloud generates code examples to help you call an endpoint. To get the code example, perform the following steps:
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/console/dataservice) page of your project.
+1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
 2. In the left pane, click the name of your target Data App to view its endpoints.
 3. Locate the endpoint you want to call and click **...** > **Code Example**. The **Code Example** dialog box is displayed.
 
@@ -235,7 +235,7 @@ After calling an endpoint, you can see the response in JSON format. For more inf
 
 To undeploy an endpoint, perform the following steps:
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/console/dataservice) page of your project.
+1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
 2. In the left pane, click the name of your target Data App to view its endpoints.
 3. Click the name of the endpoint you want to undeploy to view its details.
 4. On the right pane of the endpoint details page, click the **Deployments** tab. The deployed version page is displayed.
@@ -249,7 +249,7 @@ To undeploy an endpoint, perform the following steps:
 
 To delete an endpoint, perform the following steps:
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/console/dataservice) page of your project.
+1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
 2. In the left pane, click the name of your target Data App to view its endpoints.
 3. Locate the endpoint you want to delete and click **...** > **Delete**. The **Confirm deletion of endpoint** dialog box is displayed.
 
