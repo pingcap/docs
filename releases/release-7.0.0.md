@@ -12,7 +12,58 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.0/quick-start-with-
 
 In v7.0.0-DMR, the key new features and improvements are as follows:
 
-@yiwen92
+<table>
+<thead>
+  <tr>
+    <th>Category</th>
+    <th>Feature</th>
+    <th>Description</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td rowspan="2">Scalability and Performance<br/></td>
+    <td>Session level non-prepared SQL plan cache (experimental)</td>
+    <td>Support automatically reusing plan cache at the session level to reduce compilation and shorten the query time for the same SQL patterns without manually setting prepare statements in advance.</td>
+  </tr>
+  <tr>
+    <td>TiFlash supports the disaggregated storage and compute architecture and S3 shared storage (experimental)</td>
+    <td>TiFlash introduces a cloud-native architecture as an option:
+      <ul>
+        <li>Disaggregates TiFlash's compute and storage, which is a milestone for elastic HTAP resource utilization.</li>
+        <li>Introduces S3-based storage engine, which can provide shared storage at a lower cost.</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td rowspan="2">Reliability and Availability<br/></td>
+    <td>Resource control enhancement (Experimental) </td>
+    <td>Support using resource groups to allocate and isolate resources for various applications or workloads within one cluster. In this release, TiDB adds support for different resource binding modes (user, session, and query level) and user-defined priorities. Additionally, you can also use commands to perform resource calibration (estimation for the whole resource amount).</td>
+  </tr>
+  <tr>
+    <td>TiFlash supports spill to disk</td>
+    <td>TiFlash supports intermediate result spill to disk to mitigate OOMs in data-intensive operations such as aggregations, sorts, and hash joins.</td>
+  </tr>
+  <tr>
+    <td rowspan="2">SQL</td>
+    <td>Row-level TTL (GA)</td>
+    <td>Support managing database size and improve performance by automatically expiring data of a certain age.</td>
+  </tr>
+  <tr>
+    <td>Reorganize <code>LIST</code>/<code>RANGE</code> partition</td>
+    <td>The <code>REORGANIZE PARTITION</code> statement can be used for merging adjacent partitions or splitting one partition into many, which provides better usability of partitioned tables.</td>
+  </tr>
+  <tr>
+    <td rowspan="2">DB Operations and Observability<br/></td>
+    <td>The <code>LOAD DATA</code> statement integrates with TiDB Lightning (experimental) </td>
+    <td>The <code>LOAD DATA</code> SQL statement becomes more powerful by integrating TiDB Lightning's logical import mode, such as supporting data import from S3/GCS and supporting task management.<br/></td>
+  </tr>
+  <tr>
+    <td>TiCDC supports object storage sink (GA)</td>
+    <td>TiCDC supports replicating row change events to object storage services, including Amazon S3, Azure Blob Storage, and NFS.<br/></td>
+  </tr>
+</tbody>
+</table>
 
 ## Feature details
 
@@ -379,7 +430,7 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
         - Support splitting and scheduling tables to TiCDC nodes based on upstream write throughput [#7720](https://github.com/pingcap/tiflow/issues/7720) @[overvenus](https://github.com/overvenus)
 
     + TiDB Lightning
-    
+
         - TiDB Lightning Physical Import Mode supports separating data import and index import to improve import speed and stability [#42132](https://github.com/pingcap/tidb/issues/42132) @[gozssky](https://github.com/gozssky)
 
            Add the `add-index-by-sql` parameter. The default value is `false`, which means that TiDB Lightning encodes both row data and index data into KV pairs and import them into TiKV together. If you set it to `true`, it means that TiDB Lightning adds indexes via the `ADD INDEX` SQL statement after importing the row data to improve import speed and stability.
