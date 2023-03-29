@@ -459,6 +459,12 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
 + TiDB
 
+    - Fix the issue of missing updates when upgrading TiDB from v6.5.1 to a later version [#41502](https://github.com/pingcap/tidb/issues/41502) @[chrysan](https://github.com/chrysan)
+    - Fix the issue that the default values of some system variables are not modified after upgrading [#41423](https://github.com/pingcap/tidb/issues/41423) @[crazycs520](https://github.com/crazycs520)
+    - Fix the issue that Coprocessor request types related to adding indexes are displayed as unknown [#41400](https://github.com/pingcap/tidb/issues/41400) @[tangenta](https://github.com/tangenta)
+    - Fix the issue of returning "PessimisticLockNotFound" when adding an index [#41515](https://github.com/pingcap/tidb/issues/41515) @[tangenta](https://github.com/tangenta)
+    - Fix the issue of mistakenly returning `found duplicate key` when adding a unique index [#41630](https://github.com/pingcap/tidb/issues/41630) @[tangenta](https://github.com/tangenta)
+    - Fix the panic issue when adding an index [#41880](https://github.com/pingcap/tidb/issues/41880) @[tangenta](https://github.com/tangenta)
     - Fix the issue that TiFlash reports an error for generated columns during execution [#40663](https://github.com/pingcap/tidb/issues/40663) @[guo-shaoge](https://github.com/guo-shaoge)
     - Fix the issue that TiDB might not be able to obtain statistics correctly when there is a time type [#41938](https://github.com/pingcap/tidb/issues/41938) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
     - Fix the issue that full index scans might cause errors when prepared plan cache is enabled [#42150](https://github.com/pingcap/tidb/issues/42150) @[fzzf678](https://github.com/fzzf678)
