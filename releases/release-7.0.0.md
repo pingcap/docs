@@ -89,7 +89,7 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
 * TiFlash supports null-aware semi join and null-aware anti semi join operators [#6674](https://github.com/pingcap/tiflash/issues/6674) @[gengliqi](https://github.com/gengliqi) **tw:Oreoxmt**
 
-    When using `IN`, `NOT IN`, `= ANY`, or `!= ALL` operators in correlated subqueries, TiDB optimizes the computing performance by converting them to semi join or anti semi join. If the join key column might be `NULL`, a null-aware join algorithm is required, such as [Null-aware semi join](/explain-subqueries.md#null-aware-semi-join-in-and--any-subqueries) and [Null-aware anti semi join](/explain-subqueries#null-aware-anti-semi-join-not-in-and--all-subqueries).
+    When using `IN`, `NOT IN`, `= ANY`, or `!= ALL` operators in correlated subqueries, TiDB optimizes the computing performance by converting them to semi join or anti semi join. If the join key column might be `NULL`, a null-aware join algorithm is required, such as [Null-aware semi join](/explain-subqueries.md#null-aware-semi-join-in-and--any-subqueries) and [Null-aware anti semi join](/explain-subqueries.md#null-aware-anti-semi-join-not-in-and--all-subqueries).
 
     Before v7.0.0, TiFlash does not support null-aware semi join and null-aware anti semi join operators, preventing these subqueries from being directly pushed down to TiFlash. Starting from v7.0.0, TiFlash supports null-aware semi join and null-aware anti semi join operators. If a SQL statement contains these correlated subqueries, the tables in the query have TiFlash replicas, and [MPP mode](/tiflash/use-tiflash-mpp-mode.md) is enabled, the optimizer automatically determines whether to push down null-aware semi join and null-aware anti semi join operators to TiFlash to improve overall performance.
 
@@ -135,7 +135,7 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
     This feature is disabled by default. To enable it, you can set the session variable [tidb_opt_derive_topn](/system-variables.md#tidb_opt_derive_topn-new-in-v700) to `ON`.
 
-    For more information, see [documentation](derive-topn-from-window.md).
+    For more information, see [documentation](/derive-topn-from-window.md).
 
 * Support creating unique indexes through Fast Online DDL [#40730](https://github.com/pingcap/tidb/issues/40730) @[tangenta](https://github.com/tangenta) **tw:ran-huang**
 
@@ -235,7 +235,7 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
     TiCDC supports replicating changed data to Amazon S3, GCS, Azure Blob Storage, NFS, and other S3-compatible storage services. Storage services are reasonably priced and easy to use. If you are not using Kafka, you can use storage services. TiCDC saves the changed logs to a file and then sends it to the storage services instead. From the storage services, your own consumer program can read the newly generated changed log files periodically. Currently, TiCDC supports replicating changed logs in canal-json and CSV formats to the storage service.
 
-    For more information, see [documentation](/ticdc/ticdc-sink-to-cloud-storage).
+    For more information, see [documentation](/ticdc/ticdc-sink-to-cloud-storage.md).
 
 * TiCDC OpenAPI v2 GA @[sdojjy](https://github.com/sdojjy) **tw:hfxsd**
 
@@ -378,14 +378,14 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 | PD | [`read-cpu-ms-cost`](/pd-configuration-file.md#read-cpu-ms-cost) | Newly added | A [Resource Control](/tidb-resource-control.md)-related configuration item. It controls the basis factor for conversion from CPU to RU. The default value is `1/3`. |
 | PD | [`write-base-cost`](/pd-configuration-file.md#write-base-cost) | Newly added | A [Resource Control](/tidb-resource-control.md)-related configuration item. It controls the basis factor for conversion from a write request to RU. The default value is `1`. |
 | PD | [`write-cost-per-byte`](/pd-configuration-file.md#write-cost-per-byte) | Newly added | A [Resource Control](/tidb-resource-control.md)-related configuration item. It controls the basis factor for conversion from write flow to RU. The default value is `1/1024`. |
-| TiFlash | [`flash.disaggregated_mode`](tiflash/tiflash-disaggregated-and-s3.md) | Newly added | In the disaggregated architecture of TiFlash, it indicates whether this TiFlash node is a write node or a compute node. The value can be `tiflash_write` or `tiflash_compute`. |
-| TiFlash | [`storage.s3.endpoint`](tiflash/tiflash-disaggregated-and-s3.md) | Newly added | The endpoint to connect to S3. |
-| TiFlash | [`storage.s3.bucket`](tiflash/tiflash-disaggregated-and-s3.md) | Newly added | The bucket where TiFlash stores all data. |
-| TiFlash | [`storage.s3.root`](tiflash/tiflash-disaggregated-and-s3.md) | Newly added | The root directory of data storage in S3 bucket. |
-| TiFlash | [`storage.s3.access_key_id`](tiflash/tiflash-disaggregated-and-s3.md) | Newly added | `ACCESS_KEY_ID` for accessing S3. |
-| TiFlash | [`storage.s3.secret_access_key`](tiflash/tiflash-disaggregated-and-s3.md) | Newly added | `SECRET_ACCESS_KEY` for accessing S3. |
-| TiFlash | [`storage.remote.cache.dir`](tiflash/tiflash-disaggregated-and-s3.md) | Newly added | The local data cache directory of TiFlash compute node. |
-| TiFlash | [`storage.remote.cache.capacity`](tiflash/tiflash-disaggregated-and-s3.md) | Newly added | The size of the local data cache directory of TiFlash compute node. |
+| TiFlash | [`flash.disaggregated_mode`](/tiflash/tiflash-disaggregated-and-s3.md) | Newly added | In the disaggregated architecture of TiFlash, it indicates whether this TiFlash node is a write node or a compute node. The value can be `tiflash_write` or `tiflash_compute`. |
+| TiFlash | [`storage.s3.endpoint`](/tiflash/tiflash-disaggregated-and-s3.md) | Newly added | The endpoint to connect to S3. |
+| TiFlash | [`storage.s3.bucket`](/tiflash/tiflash-disaggregated-and-s3.md) | Newly added | The bucket where TiFlash stores all data. |
+| TiFlash | [`storage.s3.root`](/tiflash/tiflash-disaggregated-and-s3.md) | Newly added | The root directory of data storage in S3 bucket. |
+| TiFlash | [`storage.s3.access_key_id`](/tiflash/tiflash-disaggregated-and-s3.md) | Newly added | `ACCESS_KEY_ID` for accessing S3. |
+| TiFlash | [`storage.s3.secret_access_key`](/tiflash/tiflash-disaggregated-and-s3.md) | Newly added | `SECRET_ACCESS_KEY` for accessing S3. |
+| TiFlash | [`storage.remote.cache.dir`](/tiflash/tiflash-disaggregated-and-s3.md) | Newly added | The local data cache directory of TiFlash compute node. |
+| TiFlash | [`storage.remote.cache.capacity`](/tiflash/tiflash-disaggregated-and-s3.md) | Newly added | The size of the local data cache directory of TiFlash compute node. |
 | TiDB Lightning | [`add-index-by-sql`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) | Newly added | Controls whether to use SQL to add indexes in physical import mode. The default value is `false`, which means that TiDB Lightning will encode both row data and index data into KV pairs and import them into TiKV together. The advantage of adding indexes using SQL is to separate the import of data and the import of indexes, which can quickly import data. Even if the index creation fails after the data is imported, the data consistency is not affected. |
 | TiCDC | [`enable-table-across-nodes`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters) | Newly added | Determines whether to divide a table into multiple sync ranges according to the number of Regions. These ranges can be replicated by multiple TiCDC nodes. |
 | TiCDC      | [`region-threshold`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters) | Newly added | When `enable-table-across-nodes` is enabled, this feature only takes effect on tables with more than `region-threshold` Regions.      |
