@@ -72,12 +72,6 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
     For more information, see [documentation](/sql-prepared-plan-cache.md).
 
-* TiKV enables Raft log recycling by default [#14379](https://github.com/tikv/tikv/issues/14379) @[LykxSassinator](https://github.com/LykxSassinator) **tw:ran-huang**
-
-    In v6.3.0, TiKV introduced the [Raft log recycling](/tikv-configuration-file.md#enable-log-recycle-new-in-v630) feature to reduce long-tail latency caused by write load. In v7.0.0, this feature is enabled by default.
-
-    For more information, see [documentation](/tikv-configuration-file.md#enable-log-recycle-new-in-v630).
-
 * TiKV supports automatically generating empty log files for log recycling [#14371](https://github.com/tikv/tikv/issues/14371) @[LykxSassinator](https://github.com/LykxSassinator) **tw:ran-huang**
 
     In v6.3.0, TiKV introduced the [Raft log recycling](/tikv-configuration-file.md#enable-log-recycle-new-in-v630) feature to reduce long-tail latency caused by write load. However, log recycling can only take effect when the number of Raft log files reaches a certain threshold, making it difficult for users to directly experience the throughput improvement brought by this feature.
