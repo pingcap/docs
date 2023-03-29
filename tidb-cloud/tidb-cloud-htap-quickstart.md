@@ -1,7 +1,6 @@
 ---
 title: TiDB Cloud HTAP Quick Start
 summary: Learn how to get started with HTAP in TiDB Cloud.
-aliases: ['/tidbcloud/use-htap-cluster']
 ---
 
 # TiDB Cloud HTAP Quick Start

@@ -1,7 +1,6 @@
 ---
 title: Slow Queries Page of TiDB Dashboard
 summary: Learn the Slow Queries page of TiDB Dashboard.
-aliases: ['/docs/dev/dashboard/dashboard-slow-query/']
 ---
 
 # Slow Queries Page of TiDB Dashboard
@@ -71,7 +70,7 @@ The following figure shows a visual execution plan.
 - The graph shows the execution from left to right, and from top to bottom.
 - Upper nodes are parent operators and lower nodes are child operators.
 - The color of the title bar indicates the component where the operator is executed: yellow stands for TiDB, blue stands for TiKV, and pink stands for TiFlash.
-- The title bar shows the operator name and the text shown below is the basic information of the operator. 
+- The title bar shows the operator name and the text shown below is the basic information of the operator.
 
 Click the node area, and the detailed operator information is displayed on the right sidebar.
 

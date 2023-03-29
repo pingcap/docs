@@ -1,7 +1,6 @@
 ---
 title: EXPLAIN ANALYZE | TiDB SQL Statement Reference
 summary: An overview of the usage of EXPLAIN ANALYZE for the TiDB database.
-aliases: ['/docs/dev/sql-statements/sql-statement-explain-analyze/','/docs/dev/reference/sql/statements/explain-analyze/']
 ---
 
 # EXPLAIN ANALYZE
@@ -233,13 +232,13 @@ The `TableFullScan` operator executed on a TiFlash node contains the following e
 ```sql
 tiflash_scan: {
   dtfile: {
-    total_scanned_packs: 2, 
-    total_skipped_packs: 1, 
-    total_scanned_rows: 16000, 
-    total_skipped_rows: 8192, 
-    total_rough_set_index_load_time: 2ms, 
+    total_scanned_packs: 2,
+    total_skipped_packs: 1,
+    total_scanned_rows: 16000,
+    total_skipped_rows: 8192,
+    total_rough_set_index_load_time: 2ms,
     total_read_time: 20ms
-  }, 
+  },
   total_create_snapshot_time: 1ms
 }
 ```

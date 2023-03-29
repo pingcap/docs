@@ -1,7 +1,6 @@
 ---
 title: TiDB Backup and Restore Use Cases
 summary: Learn the use cases of backing up and restoring data using br command-line tool.
-aliases: ['/docs/dev/br/backup-and-restore-use-cases/','/docs/dev/reference/tools/br/use-cases/','/tidb/dev/backup-and-restore-use-cases-for-maintain/']
 ---
 
 # TiDB Backup and Restore Use Cases

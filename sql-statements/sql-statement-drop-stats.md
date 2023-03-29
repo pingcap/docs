@@ -1,7 +1,6 @@
 ---
 title: DROP STATS
 summary: An overview of the usage of DROP STATS for the TiDB database.
-aliases: ['/docs/dev/sql-statements/sql-statement-drop-stats/']
 ---
 
 # DROP STATS
@@ -12,7 +11,7 @@ The `DROP STATS` statement is used to delete the statistics of the selected tabl
 
 ```ebnf+diagram
 DropStatsStmt ::=
-    'DROP' 'STATS' TableNameList 
+    'DROP' 'STATS' TableNameList
 
 TableNameList ::=
     TableName ( ',' TableName )*

@@ -1,7 +1,6 @@
 ---
 title: Statement Summary Tables
 summary: Learn about Statement Summary Table in TiDB.
-aliases: ['/docs/dev/statement-summary-tables/','/docs/dev/reference/performance/statement-summary/']
 ---
 
 # Statement Summary Tables
@@ -21,7 +20,7 @@ Therefore, starting from v4.0.0-rc.1, TiDB provides system tables in `informatio
 > **Note:**
 >
 > The following tables are unavailable for [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta): `statements_summary`, `statements_summary_history`, `cluster_statements_summary`, and `cluster_statements_summary_history`.
-  
+
 </CustomContent>
 
 This document details these tables and introduces how to use them to troubleshoot SQL performance issues.
