@@ -21,7 +21,11 @@ The following table lists the specifications and corresponding replication perfo
 | 24 RCUs       | 60,000 rows/s                   |
 | 32 RCUs       | 80,000 rows/s                   |
 | 40 RCUs       | 100,000 rows/s                  |
-The performance values are for reference only and might vary in different scenarios.
+
+> **Note:**
+>
+> The preceding performance data is for reference only and might vary in different scenarios.
+
 ## Price
 
 To learn about the supported regions and the price of TiDB Cloud for each TiCDC RCU, see [Changefeed Cost](https://www.pingcap.com/tidb-cloud-pricing-details/#changefeed-cost).
