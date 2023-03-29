@@ -46,4 +46,4 @@ See [TiDB Documentation Contributing Guide](/CONTRIBUTING.md) to become a contri
 
 ## License
 
-All documentation is available under the terms of [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/).
+All documentation starting from TiDB v7.0 is available under the terms of [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/).
