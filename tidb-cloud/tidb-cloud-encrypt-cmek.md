@@ -81,6 +81,7 @@ If you want to encrypt your data using the KMS owned by your account, take the f
 > **Note:**
 >
 > - `<pingcap-account>` is the account where your clusters run in. If you do not know the account, contact [support](/tidb-cloud/tidb-cloud-support.md).
+> - `<region>` is the region where you want to create your cluster, for example, `us-west-2`. If you do not want to specify a region, replace `<region>` with a wildcard `*`.
 > - For EBS-related policy in the preceding block, refer to [AWS documentation](https://docs.aws.amazon.com/kms/latest/developerguide/conditions-kms.html#conditions-kms-caller-account).
 > - For S3-related policy in the preceding block, refer to [AWS blog](https://repost.aws/knowledge-center/s3-bucket-access-default-encryption).
 
