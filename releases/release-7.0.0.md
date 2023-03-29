@@ -522,7 +522,7 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
     + TiDB Data Migration (DM)
 
-        - Fix the issue that when a DM worker node uses GCP Cloud Storage, due to too frequent breakpoints, the request frequency limit of GCP Cloud Storage is reached and the DM worker cannot write the data into GCP Cloud Storage, thus causing the full data to fail to load [#8482](https://github.com/pingcap/tiflow/issues/8482) @[maxshuang](https://github.com/maxshuang)
+        - Fix the issue that when a DM worker node uses Google Cloud Storage, due to too frequent breakpoints, the request frequency limit of Google Cloud Storage is reached and the DM worker cannot write the data into Google Cloud Storage, thus causing the full data to fail to load [#8482](https://github.com/pingcap/tiflow/issues/8482) @[maxshuang](https://github.com/maxshuang)
         - Fix the issue that when multiple DM tasks replicate the same downstream data at the same time and all use the downstream metadata table to record the breakpoint information, the breakpoint information of all tasks is written to the same metadata table and uses the same task ID [#8500](https://github.com/pingcap/tiflow/issues/8500) @[maxshuang](https://github.com/maxshuang)
 
     + TiDB Lightning
