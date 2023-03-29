@@ -243,14 +243,14 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
     For more information, see [documentation](/ticdc/ticdc-open-api-v2.md).
 
-* DBeaver v23.0.1 supports TiDB by default [#17396](https://github.com/dbeaver/dbeaver/issues/17396) @[Icemap](https://github.com/Icemap) **tw:ran-huang**
+* [DBeaver](https://dbeaver.io/) v23.0.1 supports TiDB by default [#17396](https://github.com/dbeaver/dbeaver/issues/17396) @[Icemap](https://github.com/Icemap) **tw:ran-huang**
 
-    - Independent TiDB module, icon, and logo.
-    - The default configuration supports [TiDB Cloud Serverless Tier](https://docs.pingcap.com/tidbcloud/select-cluster-tier#serverless-tier-beta), making it easier to connect to Serverless Tier;
-    - Supports identifying TiDB versions to display or hide foreign key tabs;
-    - Supports visualizing Explain SQL plans.
-    - Supports syntax highlighting for TiDB keywords such as `PESSIMISTIC`, `OPTIMISTIC`, `AUTO_RANDOM`, `PLACEMENT`, `POLICY`, `REORGANIZE`, `EXCHANGE`, `CACHE`, `NONCLUSTERED`, and `CLUSTERED`.
-    - Supports function highlighting for TiDB functions such as  `TIDB_BOUNDED_STALENESS`, `TIDB_DECODE_KEY`, `TIDB_DECODE_PLAN`, `TIDB_IS_DDL_OWNER`, `TIDB_PARSE_TSO`, `TIDB_VERSION`, `TIDB_DECODE_SQL_DIGESTS `, and `TIDB_SHARD`.
+    - Provides an independent TiDB module, icon, and logo.
+    - The default configuration supports [TiDB Cloud Serverless Tier](https://docs.pingcap.com/tidbcloud/select-cluster-tier#serverless-tier-beta), making it easier to connect to Serverless Tier.
+    - Supports identifying TiDB versions to display or hide foreign key tabs.
+    - Supports visualizing SQL execution plans in `EXPLAIN` results.
+    - Supports highlighting TiDB keywords such as `PESSIMISTIC`, `OPTIMISTIC`, `AUTO_RANDOM`, `PLACEMENT`, `POLICY`, `REORGANIZE`, `EXCHANGE`, `CACHE`, `NONCLUSTERED`, and `CLUSTERED`.
+    - Supports highlighting TiDB functions such as  `TIDB_BOUNDED_STALENESS`, `TIDB_DECODE_KEY`, `TIDB_DECODE_PLAN`, `TIDB_IS_DDL_OWNER`, `TIDB_PARSE_TSO`, `TIDB_VERSION`, `TIDB_DECODE_SQL_DIGESTS `, and `TIDB_SHARD`.
 
   For more information, refer to [DBeaver documentation](https://github.com/dbeaver/dbeaver/wiki).
 
