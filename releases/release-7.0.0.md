@@ -392,7 +392,7 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 | DM | [`analyze`](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)  | Newly added | Controls whether to execute the `ANALYZE TABLE <table>` operation on each table after CHECKSUM is completed. It can be configured as `"required"`/`"optional"`/`"off"`. The default value is `"optional"`. |
 | DM | [`range-concurrency`](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)  | Newly added | Controls the concurrency of dm-worker writing KV data to TiKV. |
 | DM | [`compress-kv-pairs`](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)  | Newly added | Controls whether to enable compression when dm-worker sends KV data to TiKV. Currently, only gzip is supported. The default value is empty, which means no compression. |
-| DM | [`pd-addr`](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)  | Newly added | Controls the address of the downstream PD server in the Physical Import mode. |
+| DM | [`pd-addr`](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)  | Newly added | Controls the address of the downstream PD server in the Physical Import mode. You can fill in either one or more PD servers. If this configuration item is empty, use the PD address information from the TiDB query by default. |
 
 ### Others
 
