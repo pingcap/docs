@@ -1,7 +1,6 @@
 ---
 title: Build a Simple CRUD App with TiDB and Golang
 summary: Learn how to build a simple CRUD application with TiDB and Golang.
-aliases: ['/tidb/dev/dev-guide-outdated-for-python-mysql-connector','/tidb/dev/dev-guide-outdated-for-sqlalchemy']
 ---
 
 <!-- markdownlint-disable MD024 -->
@@ -228,7 +227,7 @@ def simple_example() -> None:
     # print the number of players
     count = Player.select().count()
     print(f'number of players: {count}')
-    
+
     # print 3 players.
     three_players = Player.select().limit(3)
     for player in three_players:
@@ -873,7 +872,7 @@ In this case, you can modify the `connect` as follows:
 - When peewee uses PyMySQL as the driver:
 
     ```python
-    db = connect('mysql://2aEp24QWEDLqRFs.root:123456@xxx.tidbcloud.com:4000/test', 
+    db = connect('mysql://2aEp24QWEDLqRFs.root:123456@xxx.tidbcloud.com:4000/test',
         ssl_verify_cert=True, ssl_ca="<ca_path>")
     ```
 

@@ -1,7 +1,6 @@
 ---
 title: Partitioning
 summary: Learn how to use partitioning in TiDB.
-aliases: ['/docs/dev/partitioned-table/','/docs/dev/reference/sql/partitioning/']
 ---
 
 # Partitioning
@@ -200,7 +199,7 @@ Range INTERVAL partitioning is an extension of Range partitioning, which allows 
 
 > **Warning:**
 >
-> This is an experimental feature, which might be changed or removed without prior notice. The syntax and implementation may change before GA. If you find a bug, please open an issue in the [TiDB repository](https://github.com/pingcap/tidb/issues). 
+> This is an experimental feature, which might be changed or removed without prior notice. The syntax and implementation may change before GA. If you find a bug, please open an issue in the [TiDB repository](https://github.com/pingcap/tidb/issues).
 
 The sytax is as follows:
 
@@ -280,7 +279,7 @@ PARTITION BY RANGE COLUMNS(`report_date`)
  PARTITION `P_LT_2025-01-01` VALUES LESS THAN ('2025-01-01'))
 ```
 
-The optional parameter `NULL PARTITION` creates a partition with the definition as `PARTITION P_NULL VALUES LESS THAN (<minimum value of the column type>)`, only matching when the partitioning expression evaluates to `NULL`. See [Handling of NULL with Range partitioning](#handling-of-null-with-range-partitioning), which explains that `NULL` is considered to be less than any other value. 
+The optional parameter `NULL PARTITION` creates a partition with the definition as `PARTITION P_NULL VALUES LESS THAN (<minimum value of the column type>)`, only matching when the partitioning expression evaluates to `NULL`. See [Handling of NULL with Range partitioning](#handling-of-null-with-range-partitioning), which explains that `NULL` is considered to be less than any other value.
 
 The optional parameter `MAXVALUE PARTITION` creates the last partition as `PARTITION P_MAXVALUE VALUES LESS THAN (MAXVALUE)`.
 
@@ -815,8 +814,8 @@ For Key partitioning, the way of handling `NULL` value is consistent with that o
 
 For `RANGE`, `RANGE COLUMNS`, `LIST`, and `LIST COLUMNS` partitioned tables, you can manage the partitions as follows:
 
-- Add partitions using the `ALTER TABLE <table name> ADD PARTITION (<partition specification>)` statement. 
-- Drop partitions using the `ALTER TABLE <table name> DROP PARTITION <list of partitions>` statement. 
+- Add partitions using the `ALTER TABLE <table name> ADD PARTITION (<partition specification>)` statement.
+- Drop partitions using the `ALTER TABLE <table name> DROP PARTITION <list of partitions>` statement.
 - Remove all data from specified partitions using the `ALTER TABLE <table name> TRUNCATE PARTITION <list of partitions>` statement. The logic of `TRUNCATE PARTITION` is similar to [`TRUNCATE TABLE`](/sql-statements/sql-statement-truncate.md) but it is for partitions.
 - Merge, split, or make other changes to the partitions using the `ALTER TABLE <table name> REORGANIZE PARTITION <list of partitions> INTO (<new partition definitions>)` statement.
 

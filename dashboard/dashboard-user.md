@@ -1,7 +1,6 @@
 ---
 title: TiDB Dashboard User Management
 summary: Learn how to create SQL users to access TiDB Dashboard.
-aliases: ['/docs/dev/dashboard/dashboard-user/']
 ---
 
 # TiDB Dashboard User Management
@@ -58,7 +57,7 @@ If an SQL user does not meet the preceding privilege requirements, the user fail
 
     -- To modify the configuration items on the interface after signing in to TiDB Dashboard, the user-defined SQL user must be granted with the following privilege.
     GRANT SYSTEM_VARIABLES_ADMIN ON *.* TO 'dashboardAdmin'@'%';
-    
+
     -- To use the Fast Bind Executions Plan feature (https://docs.pingcap.com/tidb/dev/dashboard-statement-details#fast-plan-binding) on the interface after signing in to TiDB Dashboard, the user-defined SQL user must be granted with the following privileges.
     GRANT SYSTEM_VARIABLES_ADMIN ON *.* TO 'dashboardAdmin'@'%';
     GRANT SUPER ON *.* TO 'dashboardAdmin'@'%';
@@ -77,7 +76,7 @@ If an SQL user does not meet the preceding privilege requirements, the user fail
 
     -- To modify the configuration items on the interface after signing in to TiDB Dashboard, the user-defined SQL user must be granted with the following privilege.
     GRANT SYSTEM_VARIABLES_ADMIN ON *.* TO 'dashboardAdmin'@'%';
-    
+
     -- To use the Fast Bind Executions Plan feature (https://docs.pingcap.com/tidb/dev/dashboard-statement-details#fast-plan-binding) on the interface after signing in to TiDB Dashboard, the user-defined SQL user must be granted with the following privileges.
     GRANT SYSTEM_VARIABLES_ADMIN ON *.* TO 'dashboardAdmin'@'%';
     GRANT SUPER ON *.* TO 'dashboardAdmin'@'%';
@@ -95,7 +94,7 @@ The following example demonstrates how to create a role and a user to access TiD
     GRANT SHOW DATABASES ON *.* TO 'dashboard_access'@'%';
     GRANT DASHBOARD_CLIENT ON *.* TO 'dashboard_access'@'%';
     GRANT SYSTEM_VARIABLES_ADMIN ON *.* TO 'dashboard_access'@'%';
-    GRANT SUPER ON *.* TO 'dashboardAdmin'@'%';    
+    GRANT SUPER ON *.* TO 'dashboardAdmin'@'%';
     ```
 
 2. Grant the `dashboard_access` role to other users and set `dashboard_access` as the default role:

@@ -1,7 +1,6 @@
 ---
 title: Introduction to Statistics
 summary: Learn how the statistics collect table-level and column-level information.
-aliases: ['/docs/dev/statistics/','/docs/dev/reference/performance/statistics/']
 ---
 
 # Introduction to Statistics
