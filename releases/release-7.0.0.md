@@ -60,7 +60,7 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
   </tr>
   <tr>
     <td>TiCDC supports object storage sink (GA)</td>
-    <td>TiCDC supports replicating row change events to object storage services, including Amazon S3, Azure Blob Storage, and NFS.<br/></td>
+    <td>TiCDC supports replicating row change events to object storage services, including Amazon S3, GCS, Azure Blob Storage, and NFS.<br/></td>
   </tr>
 </tbody>
 </table>
@@ -152,7 +152,8 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
     With this feature, you can combine multiple small and medium-sized applications from different systems into a single TiDB cluster. When the workload of an application grows larger, it does not affect the normal operation of other applications. When the system workload is low, busy applications can still be allocated the required system resources even if they exceed the set read and write quotas, so as to achieve the maximum utilization of resources. In addition, the rational use of the resource control feature can reduce the number of clusters, ease the difficulty of operation and maintenance, and save management costs.
 
     This feature provides a built-in Resource Control Dashboard for the actual usage of resources in Grafana, assisting you to allocate resources more rationally. It also supports dynamic resource management capabilities based on both session and statement levels (Hint). The introduction of this feature will help you gain more precise control over the resource usage of your TiDB cluster, and dynamically adjust quotas based on actual needs.
-    In TiDB v7.0.0, you can set the absolute scheduling priority (PRIORITY) for resource groups to guarantee that important services can get resources. It also extends the way to set resource groups.
+
+    In TiDB v7.0.0, you can set the absolute scheduling priority (`PRIORITY`) for resource groups to guarantee that important services can get resources. It also extends the way to set resource groups.
 
     You can use resource groups in the following ways:
 
