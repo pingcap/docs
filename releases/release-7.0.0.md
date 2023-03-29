@@ -374,9 +374,9 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
         - Support distributing data changes of a single large table to multiple TiCDC nodes in scenarios where Kafka is the downstream, thus solving the scalability issue of single tables in data integration scenarios of large-scale TiDB clusters [#8247](https://github.com/pingcap/tiflow/issues/8247) @[overvenus](https://github.com/overvenus)
 
-            You can enable this feature by setting the TiCDC configuration item `enable_table_across_nodes` to `true`, and you can use `region_threshold` to specify that only when the number of Regions for a table exceeds this threshold, TiCDC starts distributing data changes of the corresponding table to multiple TiCDC nodes.
+            You can enable this feature by setting the TiCDC configuration item `enable_table_across_nodes` to `true`. You can use `region_threshold` to specify that when the number of Regions for a table exceeds this threshold, TiCDC starts distributing data changes of the corresponding table to multiple TiCDC nodes.
 
-        - Support splitting transactions in redo applier to improve apply throughput and reduce RTO in disaster recovery scenarios [#8318](https://github.com/pingcap/tiflow/issues/8318) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        - Support splitting transactions in the redo applier to improve its throughput and reduce RTO in disaster recovery scenarios [#8318](https://github.com/pingcap/tiflow/issues/8318) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - Improve the table scheduling to split a single table more evenly across various TiCDC nodes [#8247](https://github.com/pingcap/tiflow/issues/8247) @[overvenus](https://github.com/overvenus)
         - Add the Large Row monitoring metrics in MQ sink [#8286](https://github.com/pingcap/tiflow/issues/8286) @[hi-rustin](https://github.com/hi-rustin)
         - Reduce network traffic between TiKV and TiCDC nodes in scenarios where a Region contains data of multiple tables [#6346](https://github.com/pingcap/tiflow/issues/6346) @[overvenus](https://github.com/overvenus)
