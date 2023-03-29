@@ -27,7 +27,7 @@ A Data App is a group of endpoints that you can use to access data for a specifi
 
 2. In the left navigation pane, click <MDSvgIcon name="icon-left-data-service" /> **Data Service**.
 
-3. On the **Get started by creating your first data application** page, enter a name and select clusters that your Data App can access.
+3. On the **Get started by creating your first data application** page, enter a name and select clusters that you want the Data App to access.
 
 4. Click **Create Data App**. The [**Data Service**](https://tidbcloud.com/console/dataservice) details page is displayed.
 
