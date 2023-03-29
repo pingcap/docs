@@ -56,7 +56,7 @@ If you want to encrypt your data using the KMS owned by your account, take the f
                 "Condition": {
                     "StringEquals": {
                         "kms:CallerAccount": "<pingcap-account>",
-                        "kms:ViaService": "ec2.us-west-2.amazonaws.com"
+                        "kms:ViaService": "ec2.<region>.amazonaws.com"
                     }
                 }
             },
