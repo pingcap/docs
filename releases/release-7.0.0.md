@@ -448,8 +448,14 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
     + TiCDC
 
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+        - Fix the issue that the numerical precision of the `FLOAT` type is lost when the Kafka sink uses the `canal-json` protocol [#8490](https://github.com/pingcap/tiflow/issues/8490) @[3AceShowHand](https://github.com/3AceShowHand)
+        - Fix the issue that restarting the changefeed might cause data loss or that the checkpoint cannot advance [#8242](https://github.com/pingcap/tiflow/issues/8242) @[overvenus](https://github.com/overvenus)
+        - Fix the data race issue in DDL sink [#8238](https://github.com/pingcap/tiflow/issues/8238) @[3AceShowHand](https://github.com/3AceShowHand)
+        - Fix the issue that the changefeed with the `stopped` status might restart automatically [#8330](https://github.com/pingcap/tiflow/issues/8330) @[sdojjy](https://github.com/sdojjy)
+        - Fix the issue that the TiCDC server panics when all downstream Kafka servers are down [#8523](https://github.com/pingcap/tiflow/issues/8523) @[3AceShowHand](https://github.com/3AceShowHand)
+        - Fix the issue that data might be lost when the downstream is MySQL and the executed statement is incompatible with TiDB [#8453](https://github.com/pingcap/tiflow/issues/8453) @[asddongmen](https://github.com/asddongmen)
+        - Fix the issue that rolling upgrade might cause TiCDC OOM or that the checkpoint gets stuck [#8329](https://github.com/pingcap/tiflow/issues/8329) @[overvenus](https://github.com/overvenus)
+        - Fix the issue that graceful upgrade for TiCDC clusters fails on Kubernetes [#8484](https://github.com/pingcap/tiflow/issues/8484) @[overvenus](https://github.com/overvenus)
 
     + TiDB Data Migration (DM)
 
