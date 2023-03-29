@@ -116,9 +116,9 @@ protocol = "canal-json"
 # The following three configuration items are only used when you replicate data to storage sinks and can be ignored when replicating data to MQ or MySQL sinks.
 # Row terminator, used for separating two data change events. The default value is an empty string, which means "\r\n" is used.
 terminator = ''
-# Date separator type used in the file directory. Value options are `none`, `year`, `month`, and `day`. `none` is the default value and means that the date is not separated. For more information, see <https://docs.pingcap.com/tidb/dev/ticdc-sink-to-cloud-storage#data-change-records>.
+# Date separator type used in the file directory. Value options are `none`, `year`, `month`, and `day`. `none` is the default value and means that the date is not separated. For more information, see <https://docs.pingcap.com/tidb/v7.0/ticdc-sink-to-cloud-storage#data-change-records>.
 date-separator = 'none'
-# Whether to use partitions as the separation string. The default value is false, which means that partitions in a table are not stored in separate directories. For more information, see <https://docs.pingcap.com/tidb/dev/ticdc-sink-to-cloud-storage#data-change-records)>.
+# Whether to use partitions as the separation string. The default value is false, which means that partitions in a table are not stored in separate directories. For more information, see <https://docs.pingcap.com/tidb/v7.0/ticdc-sink-to-cloud-storage#data-change-records)>.
 enable-partition-separator = false
 
 # Since v6.5.0, TiCDC supports saving data changes to storage services in CSV format. Ignore the following configurations if you replicate data to MQ or MySQL sinks.
