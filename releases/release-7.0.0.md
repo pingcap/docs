@@ -451,21 +451,21 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
         - Fix the issue that the numerical precision of the `FLOAT` type is lost when the Kafka sink uses the `canal-json` protocol [#8490](https://github.com/pingcap/tiflow/issues/8490) @[3AceShowHand](https://github.com/3AceShowHand)
         - Fix the issue that restarting the changefeed might cause data loss or that the checkpoint cannot advance [#8242](https://github.com/pingcap/tiflow/issues/8242) @[overvenus](https://github.com/overvenus)
         - Fix the data race issue in DDL sink [#8238](https://github.com/pingcap/tiflow/issues/8238) @[3AceShowHand](https://github.com/3AceShowHand)
-        - Fix the issue that the changefeed with the `stopped` status might restart automatically [#8330](https://github.com/pingcap/tiflow/issues/8330) @[sdojjy](https://github.com/sdojjy)
-        - Fix the issue that the TiCDC server panics when all downstream Kafka servers are down [#8523](https://github.com/pingcap/tiflow/issues/8523) @[3AceShowHand](https://github.com/3AceShowHand)
+        - Fix the issue that the changefeed in the `stopped` status might restart automatically [#8330](https://github.com/pingcap/tiflow/issues/8330) @[sdojjy](https://github.com/sdojjy)
+        - Fix the issue that the TiCDC server panics when all downstream Kafka servers are unavailable [#8523](https://github.com/pingcap/tiflow/issues/8523) @[3AceShowHand](https://github.com/3AceShowHand)
         - Fix the issue that data might be lost when the downstream is MySQL and the executed statement is incompatible with TiDB [#8453](https://github.com/pingcap/tiflow/issues/8453) @[asddongmen](https://github.com/asddongmen)
         - Fix the issue that rolling upgrade might cause TiCDC OOM or that the checkpoint gets stuck [#8329](https://github.com/pingcap/tiflow/issues/8329) @[overvenus](https://github.com/overvenus)
         - Fix the issue that graceful upgrade for TiCDC clusters fails on Kubernetes [#8484](https://github.com/pingcap/tiflow/issues/8484) @[overvenus](https://github.com/overvenus)
 
     + TiDB Data Migration (DM)
 
-        - Fix the issue that when a DM worker node uses GCP Cloud Storage, due to too frequent breakpoints, the request frequency limit of GCP Cloud Storage is reached and the DM worker cannot write the data into GCP Cloud Storage, thus causing the full data failing to load [#8482](https://github.com/pingcap/tiflow/issues/8482) @[maxshuang](https://github.com/maxshuang)
+        - Fix the issue that when a DM worker node uses GCP Cloud Storage, due to too frequent breakpoints, the request frequency limit of GCP Cloud Storage is reached and the DM worker cannot write the data into GCP Cloud Storage, thus causing the full data to fail to load [#8482](https://github.com/pingcap/tiflow/issues/8482) @[maxshuang](https://github.com/maxshuang)
         - Fix the issue that when multiple DM tasks replicate the same downstream data at the same time and all use the downstream metadata table to record the breakpoint information, the breakpoint information of all tasks is written to the same metadata table and uses the same task ID [#8500](https://github.com/pingcap/tiflow/issues/8500) @[maxshuang](https://github.com/maxshuang)
 
     + TiDB Lightning
 
-        - Fix the issue that when importing data using Physical Import Mode, if there is an `auto_random` column in the composite primary key of the target table, but the value of the column is not specified in the source data, the related column does not generate data automatically [#41454](https://github.com/pingcap/tidb/issues/41454) @[D3Hunter](https://github.com/D3Hunter)
-        - Fix the issue that when importing data using Logical Import Mode, the import fails due to lack of the `CONFIG` permission for the target cluster [#41915](https://github.com/pingcap/tidb/issues/41915) @[lichunzhu](https://github.com/lichunzhu)
+        - Fix the issue that when Physical Import Mode is used for importing data, if there is an `auto_random` column in the composite primary key of the target table, but the value of the column is not specified in the source data, TiDB Lightning does not generate data for the `auto_random` column automatically [#41454](https://github.com/pingcap/tidb/issues/41454) @[D3Hunter](https://github.com/D3Hunter)
+        - Fix the issue that when Logical Import Mode is used for importing data, the import fails due to lack of the `CONFIG` permission for the target cluster [#41915](https://github.com/pingcap/tidb/issues/41915) @[lichunzhu](https://github.com/lichunzhu)
 
     + TiUP
 
