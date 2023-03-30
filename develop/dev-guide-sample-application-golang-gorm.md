@@ -276,11 +276,7 @@ func buyGoods(db *gorm.DB, sellID, buyID string, amount, price int) error {
 
 The following content introduces how to run the code step by step.
 
-### Step 3.1 Table initialization
-
-No need to initialize tables manually.
-
-### Step 3.2 Modify parameters for TiDB Cloud
+### Step 3.1 Modify parameters for TiDB Cloud
 
 If you are using a TiDB Cloud Serverless Tier cluster, modify the value of the `dsn` in `gorm.go`:
 
