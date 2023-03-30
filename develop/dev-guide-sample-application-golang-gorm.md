@@ -301,7 +301,7 @@ mysql.RegisterTLSConfig("register-tidb-tls", &tls.Config {
 dsn := "2aEp24QWEDLqRFs.root:123456@tcp(xxx.tidbcloud.com:4000)/test?charset=utf8mb4&tls=register-tidb-tls"
 ```
 
-### Step 3.3 Run
+### Step 3.2 Run the code
 
 To run the code, you can run `make build` and `make run` respectively:
 
