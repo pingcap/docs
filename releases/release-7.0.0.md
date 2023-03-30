@@ -268,7 +268,7 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
     - Support setting tasks as `Detached` to let tasks run in the background.
     - Support task management. You can query task status and progress details by `SHOW LOAD DATA jobid`, which is convenient for management and maintenance.
 
-    For more information, see [documentation](/sql-statements/sql-statement-load-data.md).
+  For more information, see [documentation](/sql-statements/sql-statement-load-data.md).
 
 * TiDB Lightning supports enabling compressed transfers when sending key-value pairs to TiKV (GA) [#41163](https://github.com/pingcap/tidb/issues/41163) @[gozssky](https://github.com/gozssky)
 
