@@ -11,7 +11,7 @@ This document describes how to deploy a fullstack app on Netlify with TiDB Cloud
 
 ## Prerequisites
 
-Before connecting, make sure the following prerequisites are met.
+Before the deployment, make sure the following prerequisites are met.
 
 ### A Netlify account and CLI
 
@@ -32,11 +32,11 @@ For Dedicated Tier clusters, make sure that the traffic filter of the cluster al
 
 Serverless Tier clusters allow all IP addresses for connection by default, so you do not need to configure any traffic filter.
 
-## Step 1. Get example projects and set the connection string
+## Step 1. Get the example project and the connection string
 
 To help you get started quickly, TiDB Cloud provides a fullstack example app in TypeScript with Next.js using React and Prisma Client. It is a simple blog site where you can post and delete your own blogs. All the content is stored in TiDB Cloud through Prisma.
 
-### Fork the example and clone it to your own space
+### Fork the example project and clone it to your own space
 
 1. Fork the [Fullstack Example with Next.js and Prisma](https://github.com/tidbcloud/nextjs-prisma-example) repository to your own GitHub repository.
 
@@ -49,45 +49,47 @@ To help you get started quickly, TiDB Cloud provides a fullstack example app in 
 
 ### Get the TiDB Cloud connection string
 
+For a Serverless Tier cluster, you can get the connection string either from [TiDB Cloud CLI](/tidb-cloud/cli-reference.md) or from [TiDB Cloud console](https://tidbcloud.com/). For a Dedicated Tier cluster, you can get the connection string only from the TiDB Cloud console.
+
 <SimpleTab>
 <div label="TiDB Cloud CLI">
 
-> **Note:**
+> **Tip:**
 >
-> Only Serverless Tier clusters support getting Prisma connection string from TiDB Cloud CLI. If you are using a Dedicated Tier cluster, you can get the connection string from the TiDB Cloud console.
+> If you have not installed Cloud CLI, refer to [TiDB Cloud CLI Quick Start](/tidb-cloud/get-started-with-cli.md) for quick installation before taking the following steps.
 
-Get the connection string of a cluster in interactive mode:
+1. Get the connection string of a cluster in interactive mode:
 
-```shell
-ticloud cluster connect-info
-```
+    ```shell
+    ticloud cluster connect-info
+    ```
 
-Then, follow the prompts to select your cluster and system, and select `Prisma` as the client.
+2. Follow the prompts to select your cluster and system, and then select `Prisma` as the client.
 
-```
-Choose the cluster
-> [x] Cluster0(13796194496)
-Choose the client
-> [x] Prisma
-Choose the operating system
-> [x] macOS/Alpine (Detected)
-```
-The output is as follows, where the connection string for Prisma can be found in the `url` value.
+    ```
+    Choose the cluster
+    > [x] Cluster0(13796194496)
+    Choose the client
+    > [x] Prisma
+    Choose the operating system
+    > [x] macOS/Alpine (Detected)
+    ```
 
-```
-datasource db {
-  provider = "mysql"
-  url      = "mysql://<User>:<Password>@<Endpoint>:<Port>/<Database>?sslaccept=strict"
-}
-```
+    The output is as follows, where you can find the connection string for Prisma in the `url` value.
 
-> **Note:**
-> 
-> - Make sure to replace the parameters in the connection string with actual values.
-> 
-> - This example requires a new database, so you need to replace `<Database>` with a name that does not exist.
+    ```
+    datasource db {
+    provider = "mysql"
+    url      = "mysql://<User>:<Password>@<Endpoint>:<Port>/<Database>?sslaccept=strict"
+    }
+    ```
 
-For more information about TiDB Cloud CLI, see [TiDB Cloud CLI Reference](/tidb-cloud/cli-reference.md).
+    > **Note:**
+    >
+    > When you use the connection string later, note the following:
+    >
+    > - Replace the parameters in the connection string with actual values.
+    > - The example app in this document requires a new database, so you need to replace `<Database>` with a name that does not exist.
 
 </div>
 <div label="TiDB Cloud console">
@@ -98,40 +100,40 @@ For more information about TiDB Cloud CLI, see [TiDB Cloud CLI Reference](/tidb-
     - `${port}`
     - `${user}`
     - `${password}`
-    
-2.  Fill the connection parameters in the following connection string:
 
-```
-mysql://<User>:<Password>@<Host>:<Port>/<Database>?sslaccept=strict
-```
+2. Fill the connection parameters in the following connection string:
 
-> **Note:**
->
-> - Make sure to replace the parameters in the connection string with actual values.
-> 
-> - This example requires a new database, so you need to replace `<Database>` with a name that does not exist.
+    ```
+    mysql://<User>:<Password>@<Host>:<Port>/<Database>?sslaccept=strict
+    ```
 
+    > **Note:**
+    >
+    > When you use the connection string later, note the following:
+    >
+    > - Replace the parameters in the connection string with actual values.
+    > - The example app in this document requires a new database, so you need to replace `<Database>` with a name that does not exist.
 
 </div>
 </SimpleTab>
 
-## Step 2. Deploy the App to Netlify
+## Step 2. Deploy the example app to Netlify
 
-1. Authenticate your Netlify account and obtain an access token.
+1. In Netlify CLI, authenticate your Netlify account and obtain an access token.
 
     ```shell
     netlify login
     ```
 
-2. Start the automatic setup. This step will connect your repository for continuous deployment, so Netlify CLI needs access to create a deploy key and a webhook on the repository.
+2. Start the automatic setup. This step connects your repository for continuous deployment, so Netlify CLI needs access to create a deploy key and a webhook on the repository.
 
     ```shell
     netlify init
     ```
-   
+
     When you are prompted, choose **Create & configure a new site**, and grant GitHub access. Use the default values for all other options.
 
-    ``` 
+    ```shell
     Adding local .netlify folder to .gitignore file...
     ? What would you like to do? +  Create & configure a new site
     ? Team: your_username’s team
@@ -170,31 +172,31 @@ mysql://<User>:<Password>@<Host>:<Port>/<Database>?sslaccept=strict
     netlify open   Open the Netlify admin URL of your site
     ```
 
-3. Set environment variables. To connect to your TiDB Cloud cluster from your own space and the Netlify space, you must set the `DATABASE_URL` as the connection string obtained from the previous step.
+3. Set environment variables. To connect to your TiDB Cloud cluster from your own space and the Netlify space, you need to set the `DATABASE_URL` as the connection string obtained from [Step 1](#step-1-get-the-example-project-and-the-connection-string).
 
     ```shell
     # set the environment variable for your own space
     export DATABASE_URL='mysql://<User>:<Password>@<Endpoint>:<Port>/<Database>?sslaccept=strict'
-    
+
     # set the environment variable for the Netlify space
     netlify env:set DATABASE_URL 'mysql://<User>:<Password>@<Endpoint>:<Port>/<Database>?sslaccept=strict'
     ```
-   
+
     Check your environment variables.
 
     ```shell
-    # set on your own space
+    # check the environment variable for your own space
     env | grep DATABASE_URL
-       
-    # set on Netlify space 
+
+    # check the environment variable for the Netlify space
     netlify env:list
     ```
 
-4. Build the application locally and migrate schema to the TiDB Cloud cluster.
+4. Build the app locally and migrate the schema to your TiDB Cloud cluster.
 
     > **Tips:**
-    > 
-    > If you want to direct deploy on Netlify instead of your own space, you can skip this step and go to step 6.
+    >
+    > If you want to skip the local deployment and directly deploy the app to Netlify, just go to step 6.
 
     ```shell
     npm install .
@@ -209,10 +211,10 @@ mysql://<User>:<Password>@<Host>:<Port>/<Database>?sslaccept=strict
 
     Then, go to `http://localhost:3000/` in your browser to explore its UI.
 
-6. Deploy the site. Once you are satisfied with the preview, you can deploy your site to Netlify using the following command. `--trigger` means deployment without uploading local files. If you make any changes, make sure that you have committed them to your GitHub repository.
+6. Deploy the app on Netlify. Once you are satisfied with the local preview, you can deploy your site to Netlify using the following command. `--trigger` means deployment without uploading local files. If you made any local changes, make sure that you have committed them to your GitHub repository.
 
     ```shell
     netlify deploy --prod --trigger
     ```
-    
-    Go to your Netlify console to check the deployment state. After the deployment is done, your site will have a public IP provided by Netlify so that everyone can access it.
+
+    Go to your Netlify console to check the deployment state. After the deployment is done, the site for the app will have a public IP provided by Netlify so that everyone can access it.
