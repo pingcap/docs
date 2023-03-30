@@ -239,7 +239,7 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
     For more information, see [documentation](/ticdc/ticdc-sink-to-cloud-storage.md).
 
-* TiCDC OpenAPI v2 (GA) [#8019](https://github.com/pingcap/tiflow/issues/8019) @[sdojjy](https://github.com/sdojjy)
+* TiCDC OpenAPI v2 [#8019](https://github.com/pingcap/tiflow/issues/8019) @[sdojjy](https://github.com/sdojjy)
 
     TiCDC provides OpenAPI v2. Compared with OpenAPI v1, OpenAPI v2 provides more comprehensive support for replication tasks. The features provided by TiCDC OpenAPI are a subset of the [`cdc cli` tool](/ticdc/ticdc-manage-changefeed.md). You can query and operate TiCDC clusters via OpenAPI v2, such as getting TiCDC node status, checking cluster health status, and managing replication tasks.
 
