@@ -258,7 +258,7 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
 ### Data migration
 
-* The `LOAD DATA` statement integrates with TiDB Lightning, so you can use the `LOAD DATA` statement to complete data import tasks that used to rely only on TiDB Lightning [#40499](https://github.com/pingcap/tidb/issues/40499) @[lance6716](https://github.com/lance6716)
+* The `LOAD DATA` statement integrates with TiDB Lightning, so you can use the `LOAD DATA` statement to complete data import tasks that used to rely only on TiDB Lightning (experimental) [#40499](https://github.com/pingcap/tidb/issues/40499) @[lance6716](https://github.com/lance6716)
 
     Before integrating TiDB Lightning, the `LOAD DATA` statement could only import data files from the client side. If you wanted to import data from cloud storage, you had to rely on TiDB Lightning. However, deploying TiDB Lightning separately would incur additional deployment and management costs. By integrating the TiDB Lightning logical import capability (TiDB Backend) into the `LOAD DATA` statement, you can not only eliminate the deployment and management costs of TiDB Lightning, but also greatly extend the capabilities of the `LOAD DATA` statement with the TiDB Lightning features. Some examples of the extended functionality are as follows:
 
