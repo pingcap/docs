@@ -7,7 +7,7 @@ summary: Learn how to connect your TiDB Cloud clusters to Netlify projects.
 
 [Netlify](https://netlify.com/) is an all-in-one platform for automating modern web projects. It replaces your hosting infrastructure, continuous integration, and deployment pipeline with a single workflow and integrates dynamic functionality like serverless functions, user authentication, and form handling as your projects grow.
 
-This guide will tell you how to deploy a fullstack app on Netlify with TiDB Cloud as database backend.
+This document describes how to deploy a fullstack app on Netlify with TiDB Cloud as the database backend.
 
 ## Prerequisites
 
@@ -17,7 +17,7 @@ Before connecting, make sure the following prerequisites are met.
 
 You are expected to have a Netlify account and CLI. If you do not have any, refer to the following links to create one:
 
-* [Sign up a new account](https://app.netlify.com/signup).
+* [Sign up for a Netlify account](https://app.netlify.com/signup).
 * [Get Netlify CLI](https://docs.netlify.com/cli/get-started/).
 
 ### A TiDB Cloud account and a TiDB cluster
@@ -32,36 +32,37 @@ For Dedicated Tier clusters, make sure that the traffic filter of the cluster al
 
 Serverless Tier clusters allow all IP addresses for connection by default, so you do not need to configure any traffic filter.
 
-## Get example projects and set connection string
+## Step 1. Get example projects and set the connection string
 
-We provide a fullstack app in TypeScript with Next.js using React and Prisma Client here. It's a simple blog site where you can post and delete your own blog. All the content is stored in TiDB cloud through prisma.
+To help you get started quickly, TiDB Cloud provides a fullstack example app in TypeScript with Next.js using React and Prisma Client. It is a simple blog site where you can post and delete your own blogs. All the content is stored in TiDB Cloud through Prisma.
 
-### Fork example and clone it to your own space
+### Fork the example and clone it to your own space
 
-Navigate to [Fullstack Example with Next.js and Prisma](https://github.com/tidbcloud/nextjs-prisma-example), fork it to your own GitHub repository.
+1. Fork the [Fullstack Example with Next.js and Prisma](https://github.com/tidbcloud/nextjs-prisma-example) repository to your own GitHub repository.
 
-Then, use the following command to clone it.
+2. Clone the forked repository to your own space:
 
-```shell
-git clone https://github.com/${your_username}/nextjs-prisma-example.git
-cd nextjs-prisma-example/
-```
+    ```shell
+    git clone https://github.com/${your_username}/nextjs-prisma-example.git
+    cd nextjs-prisma-example/
+    ```
 
-### Get TiDB Cloud database connection string
+### Get the TiDB Cloud connection string
 
 <SimpleTab>
 <div label="TiDB Cloud CLI">
 
 > **Note:**
 >
-> Only **Serverless Tier** can get Prisma connection string from TiDB Cloud CLI. If your database is Dedicated Tier, please use TiDB Cloud console to get.
->
+> Only Serverless Tier clusters support getting Prisma connection string from TiDB Cloud CLI. If you are using a Dedicated Tier cluster, you can get the connection string from the TiDB Cloud console.
+
+Get the connection string of a cluster in interactive mode:
 
 ```shell
 ticloud cluster connect-info
 ```
 
-Then, follow the prompts to select your cluster and system and select Prisma as client.
+Then, follow the prompts to select your cluster and system, and select `Prisma` as the client.
 
 ```
 Choose the cluster
@@ -70,7 +71,10 @@ Choose the client
 > [x] Prisma
 Choose the operating system
 > [x] macOS/Alpine (Detected)
+```
+The output is as follows, where the connection string for Prisma can be found in the `url` value.
 
+```
 datasource db {
   provider = "mysql"
   url      = "mysql://<User>:<Password>@<Endpoint>:<Port>/<Database>?sslaccept=strict"
@@ -79,18 +83,23 @@ datasource db {
 
 > **Note:**
 > 
-> Don't forget to replace the parameters in the connection string.
+> - Make sure to replace the parameters in the connection string with actual values.
 > 
-> This example must create a new database, so replace `<Database>` with a name that doesn't exist.
-
-The output is the connection string for Prisma connecting to TiDB Cloud.
+> - This example requires a new database, so you need to replace `<Database>` with a name that does not exist.
 
 For more information about TiDB Cloud CLI, see [TiDB Cloud CLI Reference](./cli-reference.md).
 
 </div>
 <div label="TiDB Cloud console">
 
-Navigate to [TiDB Cloud console](https://tidbcloud.com/). Get the following connection parameters `${host}`, `${port}`, `${user}` and `${password}` from the connection string in the [**Connect**](/tidb-cloud/connect-via-standard-connection.md) dialog and fill them into the following connection string.
+1. Navigate to the [TiDB Cloud console](https://tidbcloud.com/), and get the following connection parameters from the connection string in the [**Connect**](/tidb-cloud/connect-via-standard-connection.md) dialog.
+
+    - `${host}`
+    - `${port}`
+    - `${user}`
+    - `${password}`
+    
+2.  Fill the connection parameters in the following connection string:
 
 ```
 mysql://<User>:<Password>@<Host>:<Port>/<Database>?sslaccept=strict
@@ -98,15 +107,15 @@ mysql://<User>:<Password>@<Host>:<Port>/<Database>?sslaccept=strict
 
 > **Note:**
 >
-> Don't forget to replace the parameters in the connection string.
->
-> This example must create a new database, so replace `<Database>` with a name that doesn't exist.
+> - Make sure to replace the parameters in the connection string with actual values.
+> 
+> - This example requires a new database, so you need to replace `<Database>` with a name that does not exist.
 
 
 </div>
 </SimpleTab>
 
-## Deploy App to Netlify
+## Step 2. Deploy the App to Netlify
 
 1. Authenticate your Netlify account and obtain an access token.
 
@@ -114,13 +123,13 @@ mysql://<User>:<Password>@<Host>:<Port>/<Database>?sslaccept=strict
     netlify login
     ```
 
-2. Automated setup. This will connect your repository for continuous deployment, Netlify CLI will need access to create a deploy key and a webhook on the repository.
+2. Start the automatic setup. This step will connect your repository for continuous deployment, so Netlify CLI needs access to create a deploy key and a webhook on the repository.
 
     ```shell
     netlify init
     ```
    
-    Please choose **Create & configure a new site**, and grant GitHub access. Use the default values for all other options.
+    When you are prompted, choose **Create & configure a new site**, and grant GitHub access. Use the default values for all other options.
 
     ``` 
     Adding local .netlify folder to .gitignore file...
@@ -161,13 +170,13 @@ mysql://<User>:<Password>@<Host>:<Port>/<Database>?sslaccept=strict
     netlify open   Open the Netlify admin URL of your site
     ```
 
-3. Set environment variables. You must set the `DATABASE_URL`, a connection string, obtained from previous step to connect to your TiDB Cloud cluster on both your own space and Netlify space.
+3. Set environment variables. To connect to your TiDB Cloud cluster from your own space and the Netlify space, you must set the `DATABASE_URL` as the connection string obtained from the previous step.
 
     ```shell
-    # set on your own space
+    # set the environment variable for your own space
     export DATABASE_URL='mysql://<User>:<Password>@<Endpoint>:<Port>/<Database>?sslaccept=strict'
     
-    # set on Netlify space   
+    # set the environment variable for the Netlify space
     netlify env:set DATABASE_URL 'mysql://<User>:<Password>@<Endpoint>:<Port>/<Database>?sslaccept=strict'
     ```
    
@@ -181,35 +190,38 @@ mysql://<User>:<Password>@<Host>:<Port>/<Database>?sslaccept=strict
     netlify env:list
     ```
 
-4. Build application locally and migrate schema to TiDB Cloud cluster.
+4. Build the application locally and migrate schema to the TiDB Cloud cluster.
 
     > **Tips:**
     > 
-    > If you want to direct deploy on Netlify instead of own space, you can skip to step 6: Deploy site.
+    > If you want to direct deploy on Netlify instead of your own space, you can skip this step and go to step 6.
 
     ```shell
     npm install .
     npm run netlify-build
     ```
 
-5. Run application locally. You can start a local development server to preview your site.
+5. Run the application locally. You can start a local development server to preview your site.
 
     ```shell
     netlify dev
     ```
 
-    Then, navigate to http://localhost:3000/ in your browser to explore its UI.
+    Then, go to `http://localhost:3000/` in your browser to explore its UI.
 
-6. Deploy site. Once you're satisfied with the preview, you can deploy your site to Netlify using the following command.`--trigger` means deploy without uploading local files. If you make any changes, don't forget to commit them to your GitHub repository first.
+6. Deploy the site. Once you are satisfied with the preview, you can deploy your site to Netlify using the following command. `--trigger` means deployment without uploading local files. If you make any changes, make sure that you have committed them to your GitHub repository.
 
     ```shell
     netlify deploy --prod --trigger
     ```
     
-    Go to your Netlify console to check deploying statement. After deploying done, your site will have a public ip provided by Netlify so that everyone can access it.
+    Go to your Netlify console to check the deployment state. After the deployment is done, your site will have a public IP provided by Netlify so that everyone can access it.
 
 ## Conclusion
 
-This article describes how to deploy a next.js project in Netlify and connect to TiDB Cloud as a data storage service.
+This document shows you how to deploy a next.js project in Netlify and connect to TiDB Cloud as a data storage service.
 
-There are two point keys: One is to build the connection string to TiDB Cloud, which usually depends on the database driver used in the project. The second is to set the connection string in the Netlify environment variable. If you're using TiDB Serverless, you can easily use the [TiDB Cloud CLI](./ticloud-cluster-connect-info.md) to get the connection strings for the most common drivers.
+In this document, there are two point keys: 
+
+- Get the connection string of TiDB Cloud, which usually depends on the database driver used in the project. If you're using a TiDB Serverless Tier cluster, you can easily use the [TiDB Cloud CLI](./ticloud-cluster-connect-info.md) to get the connection strings for most of the common drivers.
+- Set the connection string in the Netlify environment variable. 
