@@ -115,7 +115,7 @@ The output is as follows:
 | 'root'@'%' | def           | REPLICATION CLIENT      | YES          |
 | 'root'@'%' | def           | REPLICATION SLAVE       | YES          |
 +------------+---------------+-------------------------+--------------+
-31 rows in set (0.00 sec)
+29 rows in set (0.00 sec)
 ```
 
 </CustomContent>
