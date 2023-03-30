@@ -10,7 +10,7 @@ The `LOAD DATA` statement batch loads data into a TiDB table.
 
 > **Warning:**
 >
-> For the current version, this feature is still experimental and it is not recommended to use it in a production environment.
+> For the current version, this feature is still experimental. It is not recommended to use it in a production environment.
 
 <CustomContent platform="tidb-cloud">
 
