@@ -216,12 +216,3 @@ mysql://<User>:<Password>@<Host>:<Port>/<Database>?sslaccept=strict
     ```
     
     Go to your Netlify console to check the deployment state. After the deployment is done, your site will have a public IP provided by Netlify so that everyone can access it.
-
-## Conclusion
-
-This document shows you how to deploy a next.js project in Netlify and connect to TiDB Cloud as a data storage service.
-
-In this document, there are two point keys: 
-
-- Get the connection string of TiDB Cloud, which usually depends on the database driver used in the project. If you're using a TiDB Serverless Tier cluster, you can easily use the [TiDB Cloud CLI](./ticloud-cluster-connect-info.md) to get the connection strings for most of the common drivers.
-- Set the connection string in the Netlify environment variable. 
