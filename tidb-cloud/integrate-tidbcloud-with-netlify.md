@@ -87,7 +87,7 @@ datasource db {
 > 
 > - This example requires a new database, so you need to replace `<Database>` with a name that does not exist.
 
-For more information about TiDB Cloud CLI, see [TiDB Cloud CLI Reference](./cli-reference.md).
+For more information about TiDB Cloud CLI, see [TiDB Cloud CLI Reference](/tidb-cloud/cli-reference.md).
 
 </div>
 <div label="TiDB Cloud console">
