@@ -191,7 +191,7 @@ This document lists the features supported in different TiDB versions, including
 | [Fast Importer (TiDB Lightning)](/tidb-lightning/tidb-lightning-overview.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | mydumper logical dumper | Deprecated | Deprecated | Deprecated | Deprecated | Deprecated | Deprecated | Deprecated | Deprecated | Deprecated | Deprecated |
 | [Dumpling logical dumper](/dumpling-overview.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [Transactional `LOAD DATA`](/sql-statements/sql-statement-load-data.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | N [^5] |
+| [Transactional `LOAD DATA`](/sql-statements/sql-statement-load-data.md) | E | Y | Y | Y | Y | Y | Y | Y | Y | N [^5] |
 | [Database migration toolkit (DM)](/migration-overview.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Change data capture (CDC)](/ticdc/ticdc-overview.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
