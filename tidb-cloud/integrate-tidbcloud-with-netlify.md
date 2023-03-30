@@ -64,7 +64,7 @@ For a Serverless Tier cluster, you can get the connection string either from [Ti
     ticloud cluster connect-info
     ```
 
-2. Follow the prompts to select your cluster and system, and then select `Prisma` as the client.
+2. Follow the prompts to select your cluster, client, and operating system. Note that the client used in this document is `Prisma`.
 
     ```
     Choose the cluster
@@ -211,7 +211,7 @@ For a Serverless Tier cluster, you can get the connection string either from [Ti
 
     Then, go to `http://localhost:3000/` in your browser to explore its UI.
 
-6. Deploy the app on Netlify. Once you are satisfied with the local preview, you can deploy your site to Netlify using the following command. `--trigger` means deployment without uploading local files. If you made any local changes, make sure that you have committed them to your GitHub repository.
+6. Deploy the app to Netlify. Once you are satisfied with the local preview, you can deploy your site to Netlify using the following command. `--trigger` means deployment without uploading local files. If you made any local changes, make sure that you have committed them to your GitHub repository.
 
     ```shell
     netlify deploy --prod --trigger
