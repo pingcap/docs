@@ -48,18 +48,26 @@ This section describes the naming conventions for data files. Depending on the t
 
 When you import CSV files, name the data files as follows:
 
-- `${db_name}.${table_name}[.XXXXXX].csv` ([.XXXXXX] is optional)
+`${db_name}.${table_name}${suffix}.csv`
 
-For example:
+`${suffix}` is optional and can be one of the following formats, where *`xxx`* can be any number:
+
+- *`.xxx`*, such as `.01`
+- *`._xxx_xxx_xxx`*, such as `._0_0_01`
+- *`_xxx_xxx_xxx`*, such as `_0_0_01`
+
+For example, the target database and table of all the following files are `import_db` and `test_table`:
 
 - `import_db.test_table.csv`
 - `import_db.test_table.01.csv`
+- `import_db.test_table._0_0_01.csv`
+- `import_db.test_table_0_0_01.csv`
 
 ### Parquet
 
 When you import Parquet files, name the data files as follows:
 
-- `${db_name}.${table_name}[.XXXXXX].parquet[.{snappy|gz|lzo}]` (`[.XXXXXXX]` and `[.{snappy|gz|lzo}]` are optional)
+- `${db_name}.${table_name}${suffix}.parquet{.snappy|.gz|.lzo}` (`${suffix}` and `{.snappy|.gz|.lzo}` are optional)
 
 For example:
 
@@ -82,7 +90,7 @@ For example:
 
 When you import SQL files, name the data files as follows:
 
-- `${db_name}.${table_name}[.XXXXXXX].sql` ([.XXXXXXX] is optional)
+- `${db_name}.${table_name}${suffix}.sql` (`${suffix}` is optional)
 
 For example:
 
