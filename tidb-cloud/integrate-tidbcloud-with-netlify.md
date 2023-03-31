@@ -219,4 +219,4 @@ For a Dedicated Tier cluster, you can get the connection string only from the Ti
     netlify deploy --prod --trigger
     ```
 
-    Go to your Netlify console to check the deployment state. After the deployment is done, the site for the app will have a public IP provided by Netlify so that everyone can access it.
+    Go to your Netlify console to check the deployment state. After the deployment is done, the site for the app will have a public IP address provided by Netlify so that everyone can access it.
