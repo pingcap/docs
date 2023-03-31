@@ -37,15 +37,16 @@ In TiDB Cloud, you can edit the alert rules by disabling or enabling the alerts 
 
 ## Subscribe to alert notification emails
 
-If you are a member of a project and you want to get alert notification emails of clusters in your project, take the following steps:
+To get alert notification emails of clusters in your project, take the following steps:
 
-1. In the **Alerts** page , click the "Subscribe Alerts" button. 
+1. On the **Alerts** page , click **Subscribe Alerts**. 
 2. Enter your email address, and then click **Subscribe**. 
+
     > **Tip:**
     >
-    > The alert subscription is for all the alerts in current project. If you have multiple clusters in the project, you just need to subscribe once. 
+    > The alert subscription is for all alerts in the current project. If you have multiple clusters in the project, you just need to subscribe once. 
 
-You can also add the subscription from the Alert Subscription page, take the following steps: 
+Alternatively, you can also add the subscription from the **Alert Subscription** page as follows:
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
 2. In the left navigation pane of the [**Clusters**](https://tidbcloud.com/console/clusters) page, do one of the following:
