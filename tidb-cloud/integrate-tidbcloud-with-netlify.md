@@ -49,7 +49,9 @@ To help you get started quickly, TiDB Cloud provides a fullstack example app in 
 
 ### Get the TiDB Cloud connection string
 
-For a Serverless Tier cluster, you can get the connection string either from [TiDB Cloud CLI](/tidb-cloud/cli-reference.md) or from [TiDB Cloud console](https://tidbcloud.com/). For a Dedicated Tier cluster, you can get the connection string only from the TiDB Cloud console.
+For a Serverless Tier cluster, you can get the connection string either from [TiDB Cloud CLI](/tidb-cloud/cli-reference.md) or from [TiDB Cloud console](https://tidbcloud.com/). 
+
+For a Dedicated Tier cluster, you can get the connection string only from the TiDB Cloud console.
 
 <SimpleTab>
 <div label="TiDB Cloud CLI">
