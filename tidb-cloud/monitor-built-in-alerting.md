@@ -5,14 +5,13 @@ summary: Learn how to monitor your TiDB cluster by getting alert notification em
 
 # TiDB Cloud Built-in Alerting
 
-The TiDB Cloud built-in alerting feature provides you with an easy way to view the alerts or be notified by emails whenever a TiDB Cloud cluster in your project triggers one of TiDB Cloud built-in alert conditions.
+TiDB Cloud provides you with an easy way to view alerts, edit alert rules, and subscribe to alert notification emails.
 
-This document describes how to view alerts on TiDB Cloud, how to subscribe to alert notification emails and also provides the TiDB Cloud built-in alert conditions for your reference.
+This document describes how to do these operations and provides the TiDB Cloud built-in alert conditions for your reference.
 
-## View active alerts and alert history 
+## View alerts
 
-The Alerts page allows you to view TiDB Cloud alerts for Dedicated clusters.
-To view the active alerts on the Alerts page, take the following steps:
+In TiDB Cloud, you can view both active and closed alerts on the Alerts page.
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
 
@@ -22,24 +21,19 @@ To view the active alerts on the Alerts page, take the following steps:
 
 2. Click the name of the target cluster. The cluster overview page is displayed.
 3. Click **Alerts** in the left navigation pane.
-4. You can view the Alert Name, Severity, Status , Current value, Trigger time ,Duration for each active alerts. 
+4. The **Alerts** page displays the active alerts by default. You can view the information of each active alert such as the alert name, trigger time, and duration. 
+5. If you also want to view the closed alerts, just click the **Status** drop-down list and select **Closed** or **All**.
 
-To view the closed alerts on the Alerts page, take the following steps:
-1. In the **Alerts** page , click the "Status" filter, select "Closed" or "All". 
-2. You can view the Alert Name, Severity, Status , Trigger time ,Duration for each closed alerts. 
+## Edit alert rules
 
-## Edit Alert Rules
-
-TiDB Cloud allows you to edit the rules for the Build-in Alerts. You can disable/enable the alerts or update the threshold. 
-
-To edit the alert rules on the Alerts page, take the following steps:
-1. In the **Alerts** page , click the "Edit Rules" button. 
-2. Click Switch button to disable or enable alert rules.
-3. Click the "Edit" button to update the threshold of alert rules. 
+In TiDB Cloud, you can edit the alert rules by disabling or enabling the alerts or updating the alert threshold.
+1. On the **Alerts** page, click **Edit Rules**. 
+2. Disable or enable alert rules as needed.
+3. Click **Edit** to update the threshold of an alert rule. 
 
     > **Tip:**
     >
-    > TiDB Cloud provide limited capability for alert rule editing . Some alert rules does not support to edit. If you would like to configure different trigger conditions, thresholds, or frequency, or have alerts automatically trigger actions in downstream services like [PagerDuty](https://www.pagerduty.com/docs/guides/datadog-integration-guide/), consider using a third-party monitoring and alerting integration. Currently, TiDB Cloud supports the [Datadog integration](/tidb-cloud/monitor-datadog-integration.md) and the [Prometheus and Grafana integration](/tidb-cloud/monitor-prometheus-and-grafana-integration.md).
+    > Currently, TiDB Cloud provides limited capabilities for alert rule editing. Some alert rules do not support editing. If you would like to configure different trigger conditions or frequency, or have alerts automatically trigger actions in downstream services like [PagerDuty](https://www.pagerduty.com/docs/guides/datadog-integration-guide/), consider using a [third-party monitoring and alerting integration](/tidb-cloud/third-party-monitoring-integrations.md).
 
 ## Subscribe to alert notification emails
 
