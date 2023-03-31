@@ -7,9 +7,10 @@ summary: Learn how to use Online Unsafe Recovery.
 
 > **Warning:**
 >
-> Online Unsafe Recovery is a type of lossy recovery. If you use this feature, the integrity of data and data indexes cannot be guaranteed.
+> - Online Unsafe Recovery is a type of lossy recovery. If you use this feature, the integrity of data and data indexes cannot be guaranteed. In case of any issues, you need to use other tools or steps to recover your data.
+> - Starting from v6.1.0, TiDB introduces Online Unsafe Recovery. For earlier versions, it is an experimental feature and behaves differently than described in this document. It is **NOT** recommended to use this feature in versions earlier than v6.1.0. When using this feature in a version other than v6.1, refer to the respective document.
 
-When permanently damaged replicas cause part of data on TiKV to be unreadable and unwritable, you can use the Online Unsafe Recovery feature to perform a lossy recovery operation.
+When permanently damaged replicas cause part of data on TiKV to be unreadable and unwritable, you can use the Online Unsafe Recovery feature to perform a lossy recovery operation and make TiKV continue providing services.
 
 ## Feature description
 
@@ -56,6 +57,8 @@ If the command returns `Failed`, PD Control has failed to register the task to P
 
 To specify the longest allowable duration of a recovery task, use the `--timeout <seconds>` option. If this option is not specified, the longest duration is 5 minutes by default. When the timeout occurs, the recovery is interrupted and returns an error.
 
+When using [`pd-recover`](/pd-recover.md) to recover the PD cluster and the store information of unrecoverable TiKV nodes is lost, making it impossible to confirm the store IDs of failed stores, you can use the `--auto-detect` parameter to pass an empty store ID list. In this mode, all store IDs not in the PD store list will be considered unrecoverable and removed.
+
 > **Note:**
 >
 > - Because this command needs to collect information from all peers, it might cause an increase in memory usage (100,000 peers are estimated to use 500 MiB of memory).
@@ -87,8 +90,11 @@ Each of the above stages is output in the JSON format, including information, ti
 ```json
 [
     {
-        "info": "Unsafe recovery enters collect report stage: failed stores 4, 5, 6",
-        "time": "......"
+        "info": "Unsafe recovery enters collect report stage",
+        "time": "......",
+        "details" : [
+            "failed stores 4, 5, 6",
+        ]
     },
     {
         "info": "Unsafe recovery enters force leader stage",
