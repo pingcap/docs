@@ -91,7 +91,7 @@ For a Dedicated Tier cluster, you can get the connection string only from the Ti
     > When you use the connection string later, note the following:
     >
     > - Replace the parameters in the connection string with actual values.
-    > - The example app in this document requires a new database, so you need to replace `<Database>` with a name that does not exist.
+    > - The example app in this document requires a new database, so you need to replace `<Database>` with a unique new name.
 
 </div>
 <div label="TiDB Cloud console">
@@ -114,7 +114,7 @@ For a Dedicated Tier cluster, you can get the connection string only from the Ti
     > When you use the connection string later, note the following:
     >
     > - Replace the parameters in the connection string with actual values.
-    > - The example app in this document requires a new database, so you need to replace `<Database>` with a name that does not exist.
+    > - The example app in this document requires a new database, so you need to replace `<Database>` with a unique new name.
 
 </div>
 </SimpleTab>
