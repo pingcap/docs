@@ -11,6 +11,10 @@ SQL Plan Management is a set of functions that execute SQL bindings to manually 
 
 An SQL binding is the basis of SPM. The [Optimizer Hints](/optimizer-hints.md) document introduces how to select a specific execution plan using hints. However, sometimes you need to interfere with execution selection without modifying SQL statements. With SQL bindings, you can select a specified execution plan without modifying SQL statements.
 
+> **Note:**
+>
+> To use SQL bindings, you need to have the `SUPER` privilege. If the system prompts that you do not have sufficient privileges, see [Privilege Management](/privilege-management.md) to add the required privileges.
+
 ### Create a binding
 
 {{< copyable "sql" >}}
