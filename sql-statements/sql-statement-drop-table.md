@@ -62,7 +62,7 @@ Query OK, 0 rows affected (0.23 sec)
 
 ## MySQL compatibility
 
-Currently `RESTRICT` and `CASCADE` are only supported syntactically.
+Currently, `RESTRICT` and `CASCADE` are only supported syntactically.
 
 ## See also
 
