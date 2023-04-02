@@ -44,8 +44,10 @@ Query OK, 0 rows affected (0.22 sec)
 
 mysql> DROP TABLE table_not_exists;
 ERROR 1051 (42S02): Unknown table 'test.table_not_exists'
+
 mysql> DROP TABLE IF EXISTS table_not_exists;
 Query OK, 0 rows affected, 1 warning (0.01 sec)
+
 mysql> SHOW WARNINGS;
 +-------+------+---------------------------------------+
 | Level | Code | Message                               |
