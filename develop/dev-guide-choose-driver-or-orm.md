@@ -259,13 +259,13 @@ You can follow the [mysqlclient documentation](https://pypi.org/project/mysqlcli
 For an example of using mysqlclient to build a TiDB application, see [Build a Simple CRUD App with TiDB and mysqlclient](/develop/dev-guide-sample-application-python-mysqlclient.md#step-2-get-the-code).
 
 </div>
-<div label="mysql-connector-python">
+<div label="MySQL Connector/Python">
 
 Support level: **Compatible**
 
-You can follow the [mysql-connector-python documentation](https://dev.mysql.com/doc/connector-python/en/connector-python-installation-binary.html) to download and configure the driver. It is recommended to use Connector/Python 8.0.31 or later versions.
+You can follow the [MySQL Connector/Python documentation](https://dev.mysql.com/doc/connector-python/en/connector-python-installation-binary.html) to download and configure the driver. It is recommended to use Connector/Python 8.0.31 or later versions.
 
-For an example of using mysql-connector-python to build a TiDB application, see [Build a Simple CRUD App with TiDB and mysql-connector-python](/develop/dev-guide-sample-application-python-mysql-connector.md#step-2-get-the-code).
+For an example of using MySQL Connector/Python to build a TiDB application, see [Build a Simple CRUD App with TiDB and MySQL Connector/Python](/develop/dev-guide-sample-application-python-mysql-connector.md#step-2-get-the-code).
 
 </div>
 </SimpleTab>

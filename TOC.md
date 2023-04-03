@@ -32,8 +32,8 @@
     - Python
       - [mysqlclient](/develop/dev-guide-sample-application-python-mysqlclient.md)
       - [MySQL Connect/Python](/develop/dev-guide-sample-application-python-mysql-connector.md)
-      - [pymysql](/develop/dev-guide-sample-application-python-pymysql.md)
-      - [sqlachemy](/develop/dev-guide-sample-application-python-sqlalchemy.md)
+      - [PyMySQL](/develop/dev-guide-sample-application-python-pymysql.md)
+      - [SQLAlchemy](/develop/dev-guide-sample-application-python-sqlalchemy.md)
       - [peewee](/develop/dev-guide-sample-application-python-peewee.md)
   - Connect to TiDB
     - [Choose Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)

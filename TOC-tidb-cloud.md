@@ -30,13 +30,13 @@
     - Python
       - [mysqlclient](/develop/dev-guide-sample-application-python-mysqlclient.md)
       - [MySQL Connect/Python](/develop/dev-guide-sample-application-python-mysql-connector.md)
-      - [pymysql](/develop/dev-guide-sample-application-python-pymysql.md)
-      - [sqlachemy](/develop/dev-guide-sample-application-python-sqlalchemy.md)
+      - [PyMySQL](/develop/dev-guide-sample-application-python-pymysql.md)
+      - [SQLAlchemy](/develop/dev-guide-sample-application-python-sqlalchemy.md)
       - [peewee](/develop/dev-guide-sample-application-python-peewee.md)
   - Third-Party Support
     - [Third-Party Tools Supported by TiDB](/develop/dev-guide-third-party-support.md)
     - [Known Incompatibility Issues with Third-Party Tools](/develop/dev-guide-third-party-tools-compatibility.md)
-  - Reference
+  - Development Reference
     - Design Database Schema
       - [Overview](/develop/dev-guide-schema-design-overview.md)
       - [Create a Database](/develop/dev-guide-create-database.md)
@@ -79,7 +79,7 @@
       - [SQL or Transaction Issues](/develop/dev-guide-troubleshoot-overview.md)
       - [Unstable Result Set](/develop/dev-guide-unstable-result-set.md)
       - [Timeouts](/develop/dev-guide-timeouts-in-tidb.md)
-    - Develop Guidelines
+    - Development Guidelines
       - [Object Naming Convention](/develop/dev-guide-object-naming-guidelines.md)
       - [SQL Development Specifications](/develop/dev-guide-sql-development-specification.md)
     - [Bookshop Example Application](/develop/dev-guide-bookshop-schema-design.md)

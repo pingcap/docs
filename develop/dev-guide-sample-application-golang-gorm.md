@@ -8,6 +8,8 @@ summary: Learn how to build a simple CRUD application with TiDB and GORM.
 
 # Build a Simple CRUD App with TiDB and GORM
 
+[GORM](https://gorm.io/) is a popular open-source ORM library for Golang. 
+
 This document describes how to use TiDB and GORM to build a simple CRUD application.
 
 > **Note:**
@@ -44,7 +46,7 @@ git clone https://github.com/pingcap-inc/tidb-example-golang.git
 
 Compared with GORM, the go-sql-driver/mysql implementation might be not a best practice, because you need to write error handling logic, close `*sql.Rows` manually and cannot reuse code easily, which makes your code slightly redundant.
 
-GORM is a popular open-source ORM library for Golang. The following instructions take `v1.23.5` as an example.
+The following instructions take `v1.23.5` as an example.
 
 To adapt TiDB transactions, write a toolkit [util](https://github.com/pingcap-inc/tidb-example-golang/tree/main/util) according to the following code:
 

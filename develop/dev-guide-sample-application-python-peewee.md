@@ -8,6 +8,8 @@ summary: Learn how to build a simple CRUD application with TiDB and peewee.
 
 # Build a Simple CRUD App with TiDB and peewee
 
+[peewee](http://docs.peewee-orm.com/en/latest/) is a popular open-source ORM library for Python. 
+
 This document describes how to use TiDB and peewee to build a simple CRUD application.
 
 > **Note:**
@@ -42,7 +44,7 @@ See [Create a Serverless Tier cluster](/develop/dev-guide-build-cluster-in-cloud
 git clone https://github.com/pingcap-inc/tidb-example-python.git
 ```
 
-[peewee](http://docs.peewee-orm.com/en/latest/) is a popular open-source ORM library for Python. The following uses peewee 3.15.4 as an example.
+The following uses peewee 3.15.4 as an example.
 
 ```python
 import os

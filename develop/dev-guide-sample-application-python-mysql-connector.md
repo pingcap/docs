@@ -1,13 +1,15 @@
 ---
 title: Build a Simple CRUD App with TiDB and MySQL Connector/Python
 summary: Learn how to build a simple CRUD application with TiDB and MySQL Connector/Python.
-aliases: ['/tidb/v6.5/dev-guide-outdated-for-python-mysql-connector']
+aliases: ['/tidb/v6.5/dev-guide-sample-application-python', '/tidbcloud/dev-guide-sample-application-python']
 ---
 
 <!-- markdownlint-disable MD024 -->
 <!-- markdownlint-disable MD029 -->
 
 # Build a Simple CRUD App with TiDB and MySQL Connector/Python
+
+[MySQL Connector/Python](https://dev.mysql.com/doc/connector-python/en/) is a popular open-source driver for Python. 
 
 This document describes how to use TiDB and MySQL Connector/Python to build a simple CRUD application.
 
@@ -43,7 +45,7 @@ See [Create a Serverless Tier cluster](/develop/dev-guide-build-cluster-in-cloud
 git clone https://github.com/pingcap-inc/tidb-example-python.git
 ```
 
-[mysql-connector-python](https://dev.mysql.com/doc/connector-python/en/) is a popular open-source driver for Python. The following uses mysql-connector-python 8.0.31 as an example. Drivers for Python are more convenient to use than other languages, but they do not shield the underlying implementation and require manual management of transactions. If there are not a lot of scenarios where SQL is required, it is recommended to use ORM, which can help reduce the coupling of your program.
+The following uses MySQL Connector/Python 8.0.31 as an example. Drivers for Python are more convenient to use than other languages, but they do not shield the underlying implementation and require manual management of transactions. If there are not a lot of scenarios where SQL is required, it is recommended to use ORM, which can help reduce the coupling of your program.
 
 ```python
 import uuid
@@ -197,7 +199,7 @@ trade_example()
 
 The driver has a lower level of encapsulation than ORM, so there are a lot of SQL statements in the program. Unlike ORM, there is no data object in drivers, so the `Player` queried by the driver is represented as a tuple.
 
-For more information about how to use mysql-connector-python, refer to [mysql-connector-python documentation](https://dev.mysql.com/doc/connector-python/en/).
+For more information about how to use MySQL Connector/Python, refer to [MySQL Connector/Python documentation](https://dev.mysql.com/doc/connector-python/en/).
 
 ## Step 3. Run the code
 
@@ -286,4 +288,4 @@ python3 mysql_connector_python_example.py
 
 ## Step 4. Expected output
 
-[mysql-connector-python Expected Output](https://github.com/pingcap-inc/tidb-example-python/blob/main/Expected-Output.md#mysql-connector-python)
+[MySQL Connector/Python Expected Output](https://github.com/pingcap-inc/tidb-example-python/blob/main/Expected-Output.md#mysql-connector-python)

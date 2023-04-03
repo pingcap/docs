@@ -9,7 +9,7 @@ aliases: ['/tidbcloud/dev-guide-sample-application-golang','/tidb/stable/dev-gui
 
 # Build a Simple CRUD App with TiDB and Go-MySQL-Driver
 
-This document describes how to use TiDB and Go-MySQL-Driver to build a simple CRUD application.
+This document describes how to use TiDB and [Go-MySQL-Driver](https://github.com/go-sql-driver/mysql) to build a simple CRUD application.
 
 > **Note:**
 >

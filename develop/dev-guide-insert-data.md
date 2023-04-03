@@ -220,7 +220,7 @@ For complete examples in Python, see:
 
 - [Use PyMySQL to build a simple CRUD application with TiDB and Python](/develop/dev-guide-sample-application-python-pymysql.md#step-2-get-the-code)
 - [Use mysqlclient to build a simple CRUD application with TiDB and Python](/develop/dev-guide-sample-application-python-mysqlclient.md#step-2-get-the-code)
-- [Use mysql-connector-python to build a simple CRUD application with TiDB and Python](/develop/dev-guide-sample-application-python-mysql-connector.md#step-2-get-the-code)
+- [Use MySQL Connector/Python to build a simple CRUD application with TiDB and Python](/develop/dev-guide-sample-application-python-mysql-connector.md#step-2-get-the-code)
 - [Use SQLAlchemy to build a simple CRUD application with TiDB and Python](/develop/dev-guide-sample-application-python-sqlalchemy.md#step-2-get-the-code)
 - [Use peewee to build a simple CRUD application with TiDB and Python](/develop/dev-guide-sample-application-python-peewee.md#step-2-get-the-code)
 
