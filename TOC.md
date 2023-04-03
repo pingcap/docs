@@ -4,7 +4,7 @@
 - [Docs Home](https://docs.pingcap.com/)
 - About TiDB
   - [TiDB Introduction](/overview.md)
-  - [TiDB 6.6 Release Notes](/releases/release-6.6.0.md)
+  - [TiDB 7.0 Release Notes](/releases/release-7.0.0.md)
   - [Features](/basic-features.md)
   - [MySQL Compatibility](/mysql-compatibility.md)
   - [TiDB Limitations](/tidb-limitations.md)
@@ -21,9 +21,10 @@
     - [Build a TiDB Cluster in TiDB Cloud (Serverless Tier)](/develop/dev-guide-build-cluster-in-cloud.md)
     - [CRUD SQL in TiDB](/develop/dev-guide-tidb-crud-sql.md)
   - Example Applications
-    - [Java](/develop/dev-guide-sample-application-java.md)
-    - [Java (Spring Boot)](/develop/dev-guide-sample-application-spring-boot.md)
     - [Golang](/develop/dev-guide-sample-application-golang.md)
+    - [Java (Spring Boot)](/develop/dev-guide-sample-application-spring-boot.md)
+    - [Java](/develop/dev-guide-sample-application-java.md)
+    - [Python](/develop/dev-guide-sample-application-python.md)
   - Connect to TiDB
     - [Choose Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)
     - [Connect to TiDB](/develop/dev-guide-connect-to-tidb.md)
@@ -51,7 +52,6 @@
       - [Follower Read](/develop/dev-guide-use-follower-read.md)
       - [Stale Read](/develop/dev-guide-use-stale-read.md)
     - [HTAP Queries](/develop/dev-guide-hybrid-oltp-and-olap-queries.md)
-    - [FastScan](/develop/dev-guide-use-fastscan.md)
   - Transaction
     - [Overview](/develop/dev-guide-transaction-overview.md)
     - [Optimistic and Pessimistic Transactions](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)
@@ -76,8 +76,6 @@
       - [SQL Development Specifications](/develop/dev-guide-sql-development-specification.md)
     - Legacy Docs
       - [For Django](/develop/dev-guide-outdated-for-django.md)
-      - [For SQLAlchemy](/develop/dev-guide-outdated-for-sqlalchemy.md)
-      - [For mysql-connector-python](/develop/dev-guide-outdated-for-python-mysql-connector.md)
   - Cloud Native Development Environment
     - [Gitpod](/develop/dev-guide-playground-gitpod.md)
   - Third-Party Support
@@ -247,6 +245,7 @@
         - [Partition Pruning](/partition-pruning.md)
         - [TopN and Limit Push Down](/topn-limit-push-down.md)
         - [Join Reorder](/join-reorder.md)
+        - [Derive TopN or Limit from Window Functions](/derive-topn-from-window.md)
       - Physical Optimization
         - [Overview](/sql-physical-optimization.md)
         - [Index Selection](/choose-index.md)
@@ -255,16 +254,17 @@
         - [Wrong Index Solution](/wrong-index-solution.md)
         - [Distinct Optimization](/agg-distinct-optimization.md)
         - [Cost Model](/cost-model.md)
-      - [Prepare Execution Plan Cache](/sql-prepared-plan-cache.md)
+      - [Prepared Execution Plan Cache](/sql-prepared-plan-cache.md)
+      - [Non-Prepared Execution Plan Cache](/sql-non-prepared-plan-cache.md)
     - Control Execution Plans
       - [Overview](/control-execution-plan.md)
       - [Optimizer Hints](/optimizer-hints.md)
       - [SQL Plan Management](/sql-plan-management.md)
       - [The Blocklist of Optimization Rules and Expression Pushdown](/blocklist-control-plan.md)
 - Tutorials
-  - [Multiple Data Centers in One City Deployment](/multi-data-centers-in-one-city-deployment.md)
-  - [Three Data Centers in Two Cities Deployment](/three-data-centers-in-two-cities-deployment.md)
-  - [Two Data Centers in One City Deployment](/two-data-centers-in-one-city-deployment.md)
+  - [Multiple Availability Zones in One Region Deployment](/multi-data-centers-in-one-city-deployment.md)
+  - [Three Availability Zones in Two Regions Deployment](/three-data-centers-in-two-cities-deployment.md)
+  - [Two Availability Zones in One Region Deployment](/two-data-centers-in-one-city-deployment.md)
   - Read Historical Data
     - Use Stale Read (Recommended)
       - [Usage Scenarios of Stale Read](/stale-read.md)
@@ -536,7 +536,8 @@
         - [TiCDC Canal-JSON Protocol](/ticdc/ticdc-canal-json.md)
         - [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
         - [TiCDC CSV Protocol](/ticdc/ticdc-csv.md)
-      - [TiCDC Open API](/ticdc/ticdc-open-api.md)
+      - [TiCDC Open API v2](/ticdc/ticdc-open-api-v2.md)
+      - [TiCDC Open API v1](/ticdc/ticdc-open-api.md)
       - [Guide for Developing a Storage Sink Consumer](/ticdc/ticdc-storage-consumer-dev-guide.md)
       - [Compatibility](/ticdc/ticdc-compatibility.md)
     - [Troubleshoot](/ticdc/troubleshoot-ticdc.md)
@@ -588,8 +589,12 @@
     - [Use TiDB to Read TiFlash Replicas](/tiflash/use-tidb-to-read-tiflash.md)
     - [Use TiSpark to Read TiFlash Replicas](/tiflash/use-tispark-to-read-tiflash.md)
     - [Use MPP Mode](/tiflash/use-tiflash-mpp-mode.md)
+    - [Use FastScan](/tiflash/use-fastscan.md)
+    - [Disaggregated Storage and Compute Architecture and S3 Support](/tiflash/tiflash-disaggregated-and-s3.md)
     - [Supported Push-down Calculations](/tiflash/tiflash-supported-pushdown-calculations.md)
     - [TiFlash Query Result Materialization](/tiflash/tiflash-results-materialization.md)
+    - [TiFlash Late Materialization](/tiflash/tiflash-late-materialization.md)
+    - [Spill to Disk](/tiflash/tiflash-spill-disk.md)
     - [Data Validation](/tiflash/tiflash-data-validation.md)
     - [Compatibility](/tiflash/tiflash-compatibility.md)
   - [System Variables](/system-variables.md)
@@ -666,6 +671,8 @@
       - [`BACKUP`](/sql-statements/sql-statement-backup.md)
       - [`BATCH`](/sql-statements/sql-statement-batch.md)
       - [`BEGIN`](/sql-statements/sql-statement-begin.md)
+      - [`CALIBRATE RESOURCE`](/sql-statements/sql-statement-calibrate-resource.md)
+      - [`CANCEL LOAD DATA` and `DROP LOAD DATA`](/sql-statements/sql-statement-operate-load-data-job.md)
       - [`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)
       - [`COMMIT`](/sql-statements/sql-statement-commit.md)
       - [`CHANGE DRAINER`](/sql-statements/sql-statement-change-drainer.md)
@@ -731,6 +738,7 @@
       - [`SET DEFAULT ROLE`](/sql-statements/sql-statement-set-default-role.md)
       - [`SET [NAMES|CHARACTER SET]`](/sql-statements/sql-statement-set-names.md)
       - [`SET PASSWORD`](/sql-statements/sql-statement-set-password.md)
+      - [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md)
       - [`SET ROLE`](/sql-statements/sql-statement-set-role.md)
       - [`SET TRANSACTION`](/sql-statements/sql-statement-set-transaction.md)
       - [`SET [GLOBAL|SESSION] <variable>`](/sql-statements/sql-statement-set-variable.md)
@@ -757,6 +765,7 @@
       - [`SHOW INDEX [FROM|IN]`](/sql-statements/sql-statement-show-index.md)
       - [`SHOW INDEXES [FROM|IN]`](/sql-statements/sql-statement-show-indexes.md)
       - [`SHOW KEYS [FROM|IN]`](/sql-statements/sql-statement-show-keys.md)
+      - [`SHOW LOAD DATA`](/sql-statements/sql-statement-show-load-data.md)
       - [`SHOW MASTER STATUS`](/sql-statements/sql-statement-show-master-status.md)
       - [`SHOW PLACEMENT`](/sql-statements/sql-statement-show-placement.md)
       - [`SHOW PLACEMENT FOR`](/sql-statements/sql-statement-show-placement-for.md)
@@ -950,6 +959,8 @@
   - [Release Timeline](/releases/release-timeline.md)
   - [TiDB Versioning](/releases/versioning.md)
   - [TiDB Installation Packages](/binary-package.md)
+  - v7.0
+    - [7.0.0-DMR](/releases/release-7.0.0.md)
   - v6.6
     - [6.6.0-DMR](/releases/release-6.6.0.md)
   - v6.5
