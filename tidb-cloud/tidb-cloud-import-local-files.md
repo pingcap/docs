@@ -46,7 +46,7 @@ Currently, this method supports importing one CSV file for one task into either 
 
     If the CSV file does not have a row for the column names, do not select **Use the first row as column name**. In this case:
 
-    - If the target table already exists, the columns in the CSV file will be imported into the target table in order. Extra columns will be truncated and missing columns will be filled with default values. And you can also check the "Skip first row" option to ignore the first row and start importing from the second row.
+    - If the target table already exists, the columns in the CSV file will be imported into the target table in order. Extra columns will be truncated and missing columns will be filled with default values. And you can also check the **Ignore the first row** option to ignore the first row and start importing from the second row.
 
     - If you need TiDB Cloud to create the target table, input the name for each column. The column name must start with letters (a-z and A-Z) or numbers (0-9), and can contain letters (a-z and A-Z), numbers (0-9), and the underscore (_) character. You can also change the data type if needed.
 
