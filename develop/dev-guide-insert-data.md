@@ -117,7 +117,7 @@ For complete examples in Java, see:
 
 - [Build a Simple CRUD App with TiDB and JDBC](/develop/dev-guide-sample-application-java-jdbc.md#step-2-get-the-code)
 - [Build a Simple CRUD App with TiDB and Hibernate](/develop/dev-guide-sample-application-java-hibernate.md#step-2-get-the-code)
-- [Build the TiDB Application using Spring Boot](/develop/dev-guide-sample-application-java-spring-boot.md)
+- [Build the TiDB App using Spring Boot](/develop/dev-guide-sample-application-java-spring-boot.md)
 
 </div>
 
