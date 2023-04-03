@@ -13,6 +13,12 @@ The information of each support plan is available on the support page of the TiD
 >
 > If you want to apply for a PoC, see [Perform a Proof of Concept (PoC) with TiDB Cloud](/tidb-cloud/tidb-cloud-poc.md).
 
+## Get help information
+
+Besides documentation, TiDB Cloud provides interactive tutorials and self-paced training to help you get stated quickly.
+
+To access the help information, click **?** in the upper-right corner of the [TiDB Cloud console](https://tidbcloud.com/).
+
 ## Request support
 
 You can request support for your clusters, projects, and organizations. After receiving your request, the support team will contact you via email.
