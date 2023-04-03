@@ -27,6 +27,7 @@ In TiDB Cloud, you can view both active and closed alerts on the Alerts page.
 ## Edit alert rules
 
 In TiDB Cloud, you can edit the alert rules by disabling or enabling the alerts or updating the alert threshold.
+
 1. On the **Alerts** page, click **Edit Rules**. 
 2. Disable or enable alert rules as needed.
 3. Click **Edit** to update the threshold of an alert rule. 
