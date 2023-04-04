@@ -94,18 +94,18 @@ The following sections illustrate the metrics on the Monitoring page for Dedicat
 | Metric name  | Labels | Description                                   |
 | :------------| :------| :-------------------------------------------- |
 | TiDB Uptime | node | The runtime of each TiDB node since last restart. |
-| TiDB CPU Usage | node | The statistics of CPU usage of each TiDB node. |
+| TiDB CPU Usage | node | The CPU usage statistics of each TiDB node. |
 | TiDB Memory Usage | node | The memory usage statistics of each TiDB node. |
 | TiKV Uptime | node | The runtime of each TiKV node since last restart. |
-| TiKV CPU Usage | node | The statistics of CPU usage of each TiKV node. |
+| TiKV CPU Usage | node | The CPU usage statistics of each TiKV node. |
 | TiKV Memory Usage | node | The memory usage statistics of each TiKV node. |
 | TiKV IO MBps | node-write, node-read | The total bytes of read and write in each TiKV node. |
-| TiKV Storage Usage | node | The storage size per TiKV node. |
+| TiKV Storage Usage | node | The storage usage statistics of each TiKV node. |
 | TiFlash Uptime | node | The runtime of each TiFlash node since last restart. |
-| TiFlash CPU Usage | node | The statistics of CPU usage of each TiFlash node. |
+| TiFlash CPU Usage | node | The CPU usage statistics of each TiFlash node. |
 | TiFlash Memory  | node | The memory usage statistics of each TiFlash node. |
 | TiFlash IO MBps | node-write, node-read | The total bytes of read and write in each TiFlash node. |
-| TiFlash Storage Usage | node | The storage size per TiFlash node. |
+| TiFlash Storage Usage | node | The storage usage statistics of each TiFlash node. |
 
 ## Monitoring metrics for Serverless Tier clusters
 
