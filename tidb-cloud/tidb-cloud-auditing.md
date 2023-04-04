@@ -9,7 +9,7 @@ TiDB Cloud provides you with a database audit logging feature to record a histor
 
 > **Note:**
 >
-> Currently, the database audit logging feature is only available upon request. To request this feature, click **?** > **Chat with Us** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), fill in "Apply for database audit logging" in the **Description** field, and then click **Send**.
+> Currently, the database audit logging feature is only available upon request. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Chat with Us**. Then, fill in "Apply for database audit logging" in the **Description** field and click **Send**.
 
 To assess the effectiveness of user access policies and other information security measures of your organization, it is a security best practice to conduct a periodic analysis of the database audit logs.
 
