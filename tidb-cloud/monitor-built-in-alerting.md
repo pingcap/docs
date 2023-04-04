@@ -9,6 +9,10 @@ TiDB Cloud provides you with an easy way to view alerts, edit alert rules, and s
 
 This document describes how to do these operations and provides the TiDB Cloud built-in alert conditions for your reference.
 
+> **Note:**
+>
+> Currently, the Alerts page is only available for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters.
+
 ## View alerts
 
 In TiDB Cloud, you can view both active and closed alerts on the Alerts page.
