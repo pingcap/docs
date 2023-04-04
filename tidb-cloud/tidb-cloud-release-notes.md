@@ -27,13 +27,13 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
     - Advanced filtering options to help you quickly find and sort alerts based on their severity, status, and other attributes. It also allows you to view the historical data for the last 7 days, which eases the alert history tracking.
     - The **Edit Rule** feature. You can customize alert rule settings to meet your cluster's specific needs.
 
-  For more information, see [TiDB Cloud Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md).
+  For more information, see [TiDB Cloud built-in alerts](/tidb-cloud/monitor-built-in-alerting.md).
 
 - Update the [Monitoring](/tidb-cloud/built-in-monitoring.md#view-the-monitoring-page) page for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters to use [node-level resource metrics](/tidb-loud/built-in-monitoring.md#server).
 
     With node-level resource metrics, you can see a more accurate representation of resource consumption to better understand the actual usage of purchased services.
 
-    To access these metrics, navigate to the [Monitoring](/tidb-cloud/built-in-monitoring.md#view-the-monitoring-page)  page of your cluster, and then check the **Server** category under the **Metrics** tab.
+    To access these metrics, navigate to the [Monitoring](/tidb-cloud/built-in-monitoring.md#view-the-monitoring-page) page of your cluster, and then check the **Server** category under the **Metrics** tab.
 
 - Consolidate the help-related information and actions of TiDB Cloud into a single place.
 
