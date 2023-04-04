@@ -8,7 +8,7 @@ category: quick start
 
 *Estimated completion time: 20 minutes*
 
-This tutorial guides you through an easy way to get started with your TiDB Cloud.
+This tutorial guides you through an easy way to get started with your TiDB Cloud. You can also navigate to the [**Getting Started**](https://tidbcloud.com/console/getting-started) page in the TiDB Cloud console to follow the tutorials step by step.
 
 ## Step 1. Create a TiDB cluster
 
