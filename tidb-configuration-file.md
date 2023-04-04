@@ -372,6 +372,22 @@ Configuration items related to security.
 - Set the JWKS refresh interval for the `tidb_auth_token` authentication method.
 - Default value: `1h`
 
+### `session-token-signing-cert` <span class="version-mark">New in v6.4.0</span>
+
+> **Warning:**
+>
+> The feature controlled by this parameter is under development. **Do not modify the default value**.
+
++ Default value: ""
+
+### `session-token-signing-key` <span class="version-mark">New in v6.4.0</span>
+
+> **Warning:**
+>
+> The feature controlled by this parameter is under development. **Do not modify the default value**.
+
++ Default value: ""
+
 ## Performance
 
 Configuration items related to performance.
