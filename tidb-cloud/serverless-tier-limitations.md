@@ -45,6 +45,7 @@ We are constantly filling in the feature gaps between Serverless Tier and Dedica
 
 - [Third-party Monitoring integrations](/tidb-cloud/third-party-monitoring-integrations.md) are currently not available for Serverless Tier.
 - [Cluster Events](/tidb-cloud/tidb-cloud-events.md) are currently not available for Serverless Tier.
+- [Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md) is currently not available for Serverless Tier.
 
 ## Diagnosis
 
