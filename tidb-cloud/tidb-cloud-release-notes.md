@@ -29,12 +29,6 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
   For more information, see [TiDB Cloud built-in alerts](/tidb-cloud/monitor-built-in-alerting.md).
 
-- Update the [Monitoring](/tidb-cloud/built-in-monitoring.md#view-the-monitoring-page) page for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters to use [node-level resource metrics](/tidb-loud/built-in-monitoring.md#server).
-
-    With node-level resource metrics, you can see a more accurate representation of resource consumption to better understand the actual usage of purchased services.
-
-    To access these metrics, navigate to the [Monitoring](/tidb-cloud/built-in-monitoring.md#view-the-monitoring-page) page of your cluster, and then check the **Server** category under the **Metrics** tab.
-
 - Consolidate the help-related information and actions of TiDB Cloud into a single place.
 
     Now, you can get all the [TiDB Cloud help information](/tidb-cloud/tidb-cloud-support.md#get-help-information) and contact support by clicking **?** in the lower-right corner of the TiDB Cloud console.
