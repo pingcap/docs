@@ -3697,7 +3697,7 @@ SHOW WARNINGS;
 - Default value: `80%`
 - Range:
     - You can set the value in the percentage format, which means the percentage of the memory usage relative to the total memory. The value range is `[1%, 99%]`.
-    - You can also set the value in memory size. The value range is `0` and  `[536870912, 9223372036854775807]` in bytes. The memory format with the units "KB|MB|GB|TB" is supported. `0` means no memory limit.
+    - You can also set the value in memory size. The value range is `0` and `[536870912, 9223372036854775807]` in bytes. The memory format with the units "KB|MB|GB|TB" is supported. `0` means no memory limit.
     - If this variable is set to a memory size that is less than 512 MB but not `0`, TiDB uses 512 MB as the actual size.
 - This variable specifies the memory limit for a TiDB instance. When the memory usage of TiDB reaches the limit, TiDB cancels the currently running SQL statement with the highest memory usage. After the SQL statement is successfully canceled, TiDB tries to call Golang GC to immediately reclaim memory to relieve memory stress as soon as possible.
 - Only the SQL statements with more memory usage than the [`tidb_server_memory_limit_sess_min_size`](/system-variables.md#tidb_server_memory_limit_sess_min_size-new-in-v640) limit are selected as the SQL statements to be canceled first.
