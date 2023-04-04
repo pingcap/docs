@@ -17,7 +17,7 @@ The information of each support plan is available on the support page of the TiD
 
 Besides documentation, TiDB Cloud provides interactive tutorials and self-paced training to help you get stated quickly.
 
-To access the help information, click **?** in the upper-right corner of the [TiDB Cloud console](https://tidbcloud.com/).
+To access the help information, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com/).
 
 ## Request support
 
