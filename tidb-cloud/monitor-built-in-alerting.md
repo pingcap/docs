@@ -11,7 +11,7 @@ This document describes how to do these operations and provides the TiDB Cloud b
 
 > **Note:**
 >
-> Currently, the Alerts page is only available for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters.
+> Currently, the alert feature is only available for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters.
 
 ## View alerts
 
