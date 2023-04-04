@@ -19,7 +19,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **Console changes**
 
-- Introduce the [Alerts](/tidb-cloud/monitor-built-in-alerting.md) page for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters, which provides both active and closed alerts for each Dedicated Tier cluster.
+- Introduce the [Alerts](/tidb-cloud/monitor-built-in-alerting.md) page for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters, which lists both active and closed alerts for each Dedicated Tier cluster.
 
     The **Alerts** page provides the following:
 
@@ -31,7 +31,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - Consolidate the help-related information and actions of TiDB Cloud into a single place.
 
-    Now, you can get all the [TiDB Cloud help information](/tidb-cloud/tidb-cloud-support.md#get-help-information) and contact support by clicking **?** in the lower-right corner of the TiDB Cloud console.
+    Now, you can get all the [TiDB Cloud help information](/tidb-cloud/tidb-cloud-support.md#get-help-information) and contact support by clicking **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com/).
 
 - Introduce the [Getting Started](https://tidbcloud.com/console/getting-started) page to help you learn about TiDB Cloud.
 
