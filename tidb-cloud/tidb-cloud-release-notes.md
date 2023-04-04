@@ -12,13 +12,6 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- Improve the load balance of TiDB and reduce connection drops when you scale TiDB nodes of [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters in AWS.
-
-    - Support automatically migrating existing connections to new TiDB nodes when you scale out TiDB nodes.
-    - Support automatically migrating connections to available TiDB nodes when you scale in TiDB nodes.
-
-  Currently, this feature is only provided in the AWS `Oregon (us-west-2)` region.
-
 - Remove the following two alerts from [TiDB Cloud built-in alerts](/tidb-cloud/monitor-built-in-alerting.md#tidb-cloud-built-in-alert-conditions) to prevent false positives. This is because temporary offline or out-of-memory (OOM) issues on one of the nodes do not significantly affect the overall health of a cluster.
 
     - At least one TiDB node in the cluster has run out of memory.
