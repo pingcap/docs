@@ -120,7 +120,7 @@ driver = "file"
 # "tidb": Logical import mode. You can use this mode for small dataset import, for example, smaller than 1 TiB. During the import, downstream TiDB is available to provide services.
 # backend = "local"
 # Whether to enable multiple TiDB Lightning instances (in physical import mode) to import data to one or more target tables in parallel. The default value is `false`.
-# When you use parallel import mode, you must set it to `true`. But on the condition that no data exists in the target table, that is, all data can only be imported by TiDB Lightning.
+# When you use parallel import mode, you must set it to `true`. But on the condition that no data exists in the target table, that is, all data can only be imported by TiDB Lightning. Note that this parameter **is not for incremental data import** and is only used in scenarios where the target table is empty.
 # incremental-import = false
 
 # The listening address of tikv-importer when backend is "importer". Change it to the actual address.
