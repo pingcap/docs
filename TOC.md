@@ -109,7 +109,7 @@
         -   [オペレーティング システムのチューニング](/tune-operating-system.md)
     -   ソフトウェアのチューニング
         -   コンフィグレーション
-            -   [TiDB メモリのチューニング](/configure-memory-usage.md)
+            -   [TiDB メモリの調整](/configure-memory-usage.md)
             -   [TiKV スレッドの調整](/tune-tikv-thread-performance.md)
             -   [TiKV メモリの調整](/tune-tikv-memory-performance.md)
             -   [TiKV Follower Readの調整](/follower-read.md)
@@ -612,7 +612,6 @@
             -   [`SPLIT REGION`](/sql-statements/sql-statement-split-region.md)
             -   [`START TRANSACTION`](/sql-statements/sql-statement-start-transaction.md)
             -   [`TABLE`](/sql-statements/sql-statement-table.md)
-            -   [`TRACE`](/sql-statements/sql-statement-trace.md)
             -   [`TRACE`](/sql-statements/sql-statement-trace.md)
             -   [`TRUNCATE`](/sql-statements/sql-statement-truncate.md)
             -   [`UPDATE`](/sql-statements/sql-statement-update.md)
