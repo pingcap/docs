@@ -820,7 +820,11 @@ For `RANGE`, `RANGE COLUMNS`, `LIST`, and `LIST COLUMNS` partitioned tables, you
 - Remove all data from specified partitions using the `ALTER TABLE <table name> TRUNCATE PARTITION <list of partitions>` statement. The logic of `TRUNCATE PARTITION` is similar to [`TRUNCATE TABLE`](/sql-statements/sql-statement-truncate.md) but it is for partitions.
 - Merge, split, or make other changes to the partitions using the `ALTER TABLE <table name> REORGANIZE PARTITION <list of partitions> INTO (<new partition definitions>)` statement.
 
-For `HASH` and `KEY` partitioned tables, only `ALTER TABLE ... TRUNCATE PARTITION` is supported, while `COALESCE PARTITION` and `ADD PARTITION` are not yet supported.
+For `HASH` and `KEY` partitioned tables, you can manage the partitions as follows:
+
+- Decrease the number of partitions `ALTER TABLE <table name> COALESCE PARTITION <number of partitions to decrease by>`. This will copy the whole table to the new number of partitions online.
+- Increase the number of partitions `ALTER TABLE <table name> ADD PARTITION <number of partitions to increase by | (additional partition definitions)>`. This will copy the whole table to the new number of partitions online.
+- Remove all data from specified partitions using the `ALTER TABLE <table name> TRUNCATE PARTITION <list of partitions>` statement. The logic of `TRUNCATE PARTITION` is similar to [`TRUNCATE TABLE`](/sql-statements/sql-statement-truncate.md) but it is for partitions.
 
 `EXCHANGE PARTITION` works by swapping a partition and a non-partitioned table, similar to how renaming a table like `RENAME TABLE t1 TO t1_tmp, t2 TO t1, t1_tmp TO t2` works.
 
@@ -987,43 +991,90 @@ When reorganizing partitions, you need to note the following key points:
     ERROR 1526 (HY000): Table has no partition for value 6
     ```
 
-### Manage Hash partitions
-
-Unlike Range partitioning, `DROP PARTITION` is not supported in Hash partitioning.
-
-Currently, `ALTER TABLE ... COALESCE PARTITION` is not supported in TiDB as well. For partition management statements that are not currently supported, TiDB returns an error.
-
-{{< copyable "sql" >}}
+- After reorganize partition, the statistics needs to be updated
 
 ```sql
-ALTER TABLE MEMBERS OPTIMIZE PARTITION p0;
++---------+------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Level   | Code | Message                                                                                                                                                |
++---------+------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Warning | 1105 | The statistics of related partitions will be outdated after reorganizing partitions. Please use 'ANALYZE TABLE' statement if you want to update it now |
++---------+------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
 ```
 
+### Manage Hash and Key partitions
+
+Example table:
+
 ```sql
-ERROR 8200 (HY000): Unsupported optimize partition
+CREATE TABLE example (id int primary key, data varchar(1024)) PARTITION BY HASH(id) PARTITIONS 2;
 ```
 
-### Key partition management
-
-Currently, Key partitioning only supports the `ALTER TABLE ... TRUNCATE PARTITION` partition management statement.
+Increase the number of partitions by 1:
 
 ```sql
-ALTER TABLE members TRUNCATE PARTITION p0;
+ALTER TABLE example ADD PARTITION PARTITIONS 1;
+```
+
+One can also specify partition options by adding partitions by partition definitions:
+
+```sql
+ALTER TABLE example ADD PARTITION
+(PARTITION pExample4 COMMENT = 'not p3, but pExample4 instead',
+ PARTITION pExample5 COMMENT = 'not p4, but pExample5 instead');
+```
+
+Unlike Range/List partitioning, `DROP PARTITION` is not supported in Hash/Key partitioning, but you can decrease the number of partitions with `COALESCE PARTITION` or delete all data from specific partitions with `TRUNCATE PARTITION`
+
+Decreasing number of partitions by 1:
+
+```sql
+ALTER TABLE example COALESCE PARTITION 1;
+```
+
+Notes:
+- Changing the number of partitions for Hash/Key partitioned tables will do an online reorganization/copy all data to the new number of partitions.
+- After changing the number of partitions, the statistics needs to be updated
+
+```sql
++---------+------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Level   | Code | Message                                                                                                                                                |
++---------+------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Warning | 1105 | The statistics of related partitions will be outdated after reorganizing partitions. Please use 'ANALYZE TABLE' statement if you want to update it now |
++---------+------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+```
+
+Result:
+```sql
+SHOW CREATE TABLE\G
+```
+
+```
+*************************** 1. row ***************************
+       Table: example
+Create Table: CREATE TABLE `example` (
+  `id` int(11) NOT NULL,
+  `data` varchar(1024) DEFAULT NULL,
+  PRIMARY KEY (`id`) /*T![clustered_index] CLUSTERED */
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
+PARTITION BY HASH (`id`)
+(PARTITION `p0`,
+ PARTITION `p1`,
+ PARTITION `p2`,
+ PARTITION `pExample4` COMMENT 'not p3, but pExample4 instead')
+1 row in set (0.01 sec)
+```
+
+Delete all data from a partition:
+```sql
+ALTER TABLE example TRUNCATE PARTITION p0;
 ```
 
 ```
 Query OK, 0 rows affected (0.03 sec)
 ```
 
-If you execute a Key partition management statement that is not yet supported, TiDB returns an error.
-
-```sql
-ALTER TABLE members OPTIMIZE PARTITION p0;
-```
-
-```sql
-ERROR 8200 (HY000): Unsupported optimize partition
-```
 
 ## Partition pruning
 
