@@ -34,7 +34,7 @@ This roadmap brings you what's coming in the future, so you can see the new feat
           <li>
             <b>Partitioned Raft KV storage engine</b><br /><i>
               Provide increased write velocity, faster scaling operations,
-              larger clusters
+              and larger clusters
             </i>
           </li>
           <br />
@@ -338,7 +338,7 @@ This roadmap brings you what's coming in the future, so you can see the new feat
           <br />
           <li>
             <b>Database encryption</b>
-            <br /><i>Encryption at rest with more granularity in table-level and column-level</i>
+            <br /><i>Encryption at rest with more granularity at the table level and column level</i>
           </li>
           <br />
           <li>
@@ -371,7 +371,7 @@ This roadmap brings you what's coming in the future, so you can see the new feat
   </tbody>
 </table>
 
-These are non-exhaustive plans and subject to change. Features may differ per service subscriptions.
+These are non-exhaustive plans and are subject to change. Features might differ per service subscriptions.
 
 ## Recently shipped
 
