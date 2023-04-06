@@ -1025,6 +1025,16 @@ ALTER TABLE members OPTIMIZE PARTITION p0;
 ERROR 8200 (HY000): Unsupported optimize partition
 ```
 
+## How to add or remove partitioning from an existing table
+
+Remove partitioning from an already partitioned table:
+
+- `ALTER TABLE t REMOVE PARTITIONING` which will alter a partitioned table to a non-partitioned table by copying all rows and recreate the indexes on-line.
+
+Add partitioning to an existing table:
+
+- `ALTER TABLE t PARTITION BY ...` which will alter a table to a partitioned table by copying all rows and recreate the indexes on-line according to the partitioning scheme.
+
 ## Partition pruning
 
 [Partition pruning](/partition-pruning.md) is an optimization which is based on a very simple idea - do not scan the partitions that do not match.
