@@ -38,7 +38,7 @@ This section describes how to set up a private endpoint with AWS PrivateLink.
 To connect to your Serverless Tier cluster via a private endpoint, follow these steps:
 
 1. [Choose a TiDB cluster](#step-1-choose-a-tidb-cluster)
-2. [Create an AWS interface endpoint](#step-2-create-an-aws-interface-endpoint-serverless)
+2. [Create an AWS interface endpoint](#step-2-create-an-aws-interface-endpoint)
 3. [Connect to your TiDB cluster](#step-3-connect-to-your-tidb-cluster)
 
 #### Step 1. Choose a TiDB cluster
