@@ -309,7 +309,7 @@ ALTER TABLE table_name LAST PARTITION LESS THAN (<expression>)
 
 ### List partitioning
 
-Before creating a List partitioned table, you need to set the value of the session variable `tidb_enable_list_partition` to `ON`.
+Before creating a List partitioned table, you need to set the value of the session variable `tidb_enable_list_partition` to the default value `ON`.
 
 {{< copyable "sql" >}}
 
@@ -402,6 +402,39 @@ test> select * from t;
 |    3 |    3 |
 +------+------+
 3 rows in set (0.01 sec)
+```
+
+New in v7.1 is the support of a DEFAULT list partition, which acts as a 'catch-all' partition, where all rows that does not match the defined sets of values will be placed.
+
+Enable this feature with `set tidb_enable_default_list_partition = ON`, it is OFF by default, since it is not supported by MySQL.
+
+Then add a default partition like:
+
+```sql
+ALTER TABLE t ADD PARTITION (PARTITION pDef DEFAULT);
+```
+
+or
+
+```sql
+ALTER TABLE t ADD PARTITION (PARTITION pDef VALUES IN (DEFAULT));
+```
+
+or use it when creating the table:
+
+```sql
+CREATE TABLE employees (
+    id INT NOT NULL,
+    hired DATE NOT NULL DEFAULT '1970-01-01',
+    store_id INT
+)
+PARTITION BY LIST (store_id) (
+    PARTITION pNorth VALUES IN (1, 2, 3, 4, 5),
+    PARTITION pEast VALUES IN (6, 7, 8, 9, 10),
+    PARTITION pWest VALUES IN (11, 12, 13, 14, 15),
+    PARTITION pCentral VALUES IN (16, 17, 18, 19, 20),
+    PARTITION pDefault DEFAULT
+);
 ```
 
 ### List COLUMNS partitioning
