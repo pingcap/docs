@@ -150,7 +150,7 @@ This document lists the features supported in different TiDB versions, including
 | [`REORGANIZE PARTITION`](/partitioned-table.md#reorganize-partitions) | Y | N | N | N | N | N | N | N | N | N |
 | [Dynamic pruning](/partitioned-table.md#dynamic-pruning-mode) | Y | Y | Y | Y | E | E | E | E | N | N |
 | [Range COLUMNS partitioning](/partitioned-table.md#range-columns-partitioning) | Y | Y | Y | N | N | N | N | N | N | N |
-| [Range INTERVAL partitioning](/partitioned-table.md#range-interval-partitioning) | Y | E | E | N | N | N | N | N | N | N |
+| [Range INTERVAL partitioning](/partitioned-table.md#range-interval-partitioning) | E | E | E | N | N | N | N | N | N | N |
 
 ## Statistics
 
