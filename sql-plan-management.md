@@ -14,7 +14,7 @@ An SQL binding is the basis of SPM. The [Optimizer Hints](/optimizer-hints.md) d
 
 > **Note:**
 >
-> To use SQL bindings, you need to have the `SUPER` privilege. If the system prompts that you do not have sufficient privileges, see [Privilege Management](/privilege-management.md) to add the required privileges.
+> To use SQL bindings, you need to have the `SUPER` privilege. If TiDB prompts that you do not have sufficient privileges, see [Privilege Management](/privilege-management.md) to add the required privileges.
 
 ### Create a binding
 
