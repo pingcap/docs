@@ -65,8 +65,8 @@ This roadmap brings you what's coming in the future, so you can see the new feat
           </li>
           <br />
           <li>
-            <b>Disaggregate TiFlash compute and storage (auto-scaling) </b
-            ><br /><i>Realize elastic HTAP resource utilization</i>
+            <b>Disaggregate TiFlash compute and storage (auto-scaling) </b><br />
+            <i>Realize elastic HTAP resource utilization</i>
           </li>
           <br />
           <li>
@@ -101,11 +101,9 @@ This roadmap brings you what's coming in the future, so you can see the new feat
       <td>
         <ul>
           <li>
-            <b
-              >Resource control: quotas and scheduling for resource groups
-              and background tasks</b
-            >
-            <br /><i>
+            <b>Resource control: quotas and scheduling for resource groups
+              and background tasks</b><br />
+            <i>
               Reliably and efficiently manage workloads and applications
               that share the same cluster
             </i>
