@@ -229,7 +229,7 @@ summary: Learn the alert rules in a TiDB cluster.
 
 -   アラート ルール:
 
-    `(sum(pd_regions_status{type="miss_peer_region_count"}) by (instance) > 100) and (sum(etcd_server_is_leader) by (instance) > 0)`
+    `(sum(pd_regions_status{type="miss-peer-region-count"}) by (instance) > 100) and (sum(etcd_server_is_leader) by (instance) > 0)`
 
 -   説明：
 
@@ -238,7 +238,7 @@ summary: Learn the alert rules in a TiDB cluster.
 -   解決：
 
     -   ダウンまたはオフラインになっている TiKV マシンがあるかどうかを確認して、問題の原因を見つけます。
-    -   リージョンのヘルス パネルを見て、 `miss_peer_region_count`が継続的に減少しているかどうかを確認します。
+    -   リージョンのヘルス パネルを見て、 `miss-peer-region-count`が継続的に減少しているかどうかを確認します。
 
 ### 警告レベルのアラート {#warning-level-alerts}
 
