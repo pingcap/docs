@@ -366,20 +366,20 @@ After creating the partitions as above, you can easily add or delete records rel
 
 You can also execute `ALTER TABLE employees DROP PARTITION pEast` to delete all related rows, but this statement also deletes the `pEast` partition from the table definition. In this situation, you must execute the `ALTER TABLE ... ADD PARTITION` statement to recover the original partitioning scheme of the table.
 
-Unlike Range partitioning, List partitioning does not have a similar `MAXVALUE` partition to store all values that do not belong to other partitions. Instead, all expected values of the partition expression must be included in the `PARTITION ... VALUES IN (...)` clause. If the value to be inserted in an `INSERT` statement does not match the column value set of any partition, the statement fails to execute and an error is reported. See the following example:
+If the new feature Default List Partition, controlled by `tidb_enable_default_list_partition` variable is not used, then unlike Range partitioning, List partitioning does not have a similar `MAXVALUE` partition to store all values that do not belong to other partitions. Instead, all expected values of the partition expression must be included in the `PARTITION ... VALUES IN (...)` clause. If the value to be inserted in an `INSERT` statement does not match the column value set of any partition, the statement fails to execute and an error is reported. See the following example:
 
 ```sql
-test> CREATE TABLE t (
-    ->   a INT,
-    ->   b INT
-    -> )
-    -> PARTITION BY LIST (a) (
-    ->   PARTITION p0 VALUES IN (1, 2, 3),
-    ->   PARTITION p1 VALUES IN (4, 5, 6)
-    -> );
+CREATE TABLE t (
+  a INT,
+  b INT
+)
+PARTITION BY LIST (a) (
+  PARTITION p0 VALUES IN (1, 2, 3),
+  PARTITION p1 VALUES IN (4, 5, 6)
+);
 Query OK, 0 rows affected (0.11 sec)
 
-test> INSERT INTO t VALUES (7, 7);
+INSERT INTO t VALUES (7, 7);
 ERROR 1525 (HY000): Table has no partition for value 7
 ```
 
@@ -420,7 +420,12 @@ or
 ALTER TABLE t ADD PARTITION (PARTITION pDef VALUES IN (DEFAULT));
 ```
 
-or use it when creating the table:
+Which then will allow values that does not match the column value set by any partition to go into the Default partition.
+INSERT INTO t VALUES (7, 7);
+Query OK, 1 row affected (0.01 sec)
+```
+
+One can also use it when creating the table:
 
 ```sql
 CREATE TABLE employees (
