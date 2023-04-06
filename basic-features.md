@@ -139,19 +139,18 @@ This document lists the features supported in different TiDB versions, including
 
 ## Partitioning
 
-| Partitioning | 7.1 | 7.0 | 6.6 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
+| Partitioning | 7.0 | 6.6 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
 |---|---|:---:|:---:|---|:---:|:---:|:---:|:---:|:---:|:---:|
-| [Range partitioning](/partitioned-table.md#range-partitioning) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [Hash partitioning](/partitioned-table.md#hash-partitioning) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [Key partitioning](/partitioned-table.md#key-partitioning) | Y | Y | N | N | N | N | N | N | N | N | N |
-| [List partitioning](/partitioned-table.md#list-partitioning) | Y | Y | Y | Y | Y | E | E | E | E | E | N |
-| [List COLUMNS partitioning](/partitioned-table.md) | Y | Y | Y | Y | Y | E | E | E | E | E | N |
-| [`EXCHANGE PARTITION`](/partitioned-table.md) | Y | Y | Y | Y | E | E | E | E | E | E | N |
-| [`REORGANIZE PARTITION`](/partitioned-table.md#reorganize-partitions) | Y | Y | N | N | N | N | N | N | N | N | N |
-| [Dynamic pruning](/partitioned-table.md#dynamic-pruning-mode) | Y | Y | Y | Y | Y | E | E | E | E | N | N |
-| [Range COLUMNS partitioning](/partitioned-table.md#range-columns-partitioning) | Y | Y | Y | Y | N | N | N | N | N | N | N |
-| [Range INTERVAL partitioning](/partitioned-table.md#range-interval-partitioning) | Y | E | E | E | N | N | N | N | N | N | N |
-| [`COALESCE PARTITION`](/partitioned-table.md#manage-hash-and-key-partitions) | Y | N | N | N | N | N | N | N | N | N | N |
+| [Range partitioning](/partitioned-table.md#range-partitioning) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| [Hash partitioning](/partitioned-table.md#hash-partitioning) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| [Key partitioning](/partitioned-table.md#key-partitioning) | Y | N | N | N | N | N | N | N | N | N |
+| [List partitioning](/partitioned-table.md#list-partitioning) | Y | Y | Y | Y | E | E | E | E | E | N |
+| [List COLUMNS partitioning](/partitioned-table.md) | Y | Y | Y | Y | E | E | E | E | E | N |
+| [`EXCHANGE PARTITION`](/partitioned-table.md) | Y | Y | Y | E | E | E | E | E | E | N |
+| [`REORGANIZE PARTITION`](/partitioned-table.md#reorganize-partitions) | Y | N | N | N | N | N | N | N | N | N |
+| [Dynamic pruning](/partitioned-table.md#dynamic-pruning-mode) | Y | Y | Y | Y | E | E | E | E | N | N |
+| [Range COLUMNS partitioning](/partitioned-table.md#range-columns-partitioning) | Y | Y | Y | N | N | N | N | N | N | N |
+| [Range INTERVAL partitioning](/partitioned-table.md#range-interval-partitioning) | E | E | E | N | N | N | N | N | N | N |
 
 ## Statistics
 
