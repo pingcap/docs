@@ -59,7 +59,6 @@ Before using the DM tool, note the following restrictions:
 
     - DM does not replicate view-related DDL statements and DML statements to the downstream TiDB cluster. It is recommended that you create the view in the downstream TiDB cluster manually.
 
-
 + GBK character set compatibility
 
     - DM does not support migrating `charset=GBK` tables to TiDB clusters earlier than v5.4.0.
