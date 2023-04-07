@@ -349,9 +349,21 @@ See [Index Selection - Use multi-valued indexes](/choose-index.md#use-a-multi-va
 
 Multi-valued index is an experimental feature. It has some known compatibility issues with TiDB tools or features:
 
+<CustomContent platform="tidb">
+
 - The [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) statement and [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) do not support importing data into tables with multi-valued indexes.
 - [DM](/dm/dm-overview.md) and [TiCDC](/ticdc/ticdc-overview.md) do not support migrating or replicating tables with multi-valued indexes.
 - [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md) does not support validating data for tables with multi-valued indexes.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- The [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) statement and TiDB Lightning do not support importing data into tables with multi-valued indexes.
+- DM and TiCDC do not support migrating or replicating tables with multi-valued indexes.
+- sync-diff-inspector does not support validating data for tables with multi-valued indexes.
+
+</CustomContent>
 
 ## Invisible index
 
