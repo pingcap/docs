@@ -19,7 +19,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-
 
 + TiDB
 
-    - Prepare Plan Cache 可以缓存 BatchPointGet 计划 [#42125](https://github.com/pingcap/tidb/issues/42125) @[qw4990](https://github.com/qw4990)
+    - Supports caching the execution plan for `BatchPointGet` in Prepared Plan Cache [#42125](https://github.com/pingcap/tidb/issues/42125) @[qw4990](https://github.com/qw4990)
     (dup: release-7.0.0.md > Improvements> TiDB)- Support more SQL formats for Index Join [#40505](https://github.com/pingcap/tidb/issues/40505) @[Yisaer](https://github.com/Yisaer) @[Yisaer](https://github.com/Yisaer)
 
 + TiKV
@@ -60,24 +60,26 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-
     (dup: release-6.5.1.md > Bug fixes> TiDB)- Fix the issue that Plan Cache might cache Shuffle operators and return incorrect results [#38335](https://github.com/pingcap/tidb/issues/38335) @[qw4990](https://github.com/qw4990) @[qw4990](https://github.com/qw4990)
     (dup: release-6.5.1.md > Bug fixes> TiDB)- Fix the issue that data race in time zone might cause data-index inconsistency [#40710](https://github.com/pingcap/tidb/issues/40710) @[wjhuang2016](https://github.com/wjhuang2016) @[wjhuang2016](https://github.com/wjhuang2016)
     (dup: release-6.5.1.md > Bug fixes> TiDB)- Fix the issue that goroutine leak might occur in `indexMerge` [#41545](https://github.com/pingcap/tidb/issues/41545) [#41605](https://github.com/pingcap/tidb/issues/41605) @[guo-shaoge](https://github.com/guo-shaoge) @[guo-shaoge](https://github.com/guo-shaoge)
-    - 修复在使用 Cursor Fetch 且在 Execute、Fetch、Close 之间运行其它语句后，Fetch 与 Close 命令可能会返回错误结果或造成 TiDB Panic 的问题 [#40094](https://github.com/pingcap/tidb/issues/40094) [@YangKeao](https://github.com/YangKeao)
-    - 修复了 DDL 在修改浮点类型，保持长度不变且减少小数位时旧数据仍然保持原样的问题 [#41281](https://github.com/pingcap/tidb/issues/41281) [@zimulala](https://github.com/zimulala)
-    - 修复了 Join `information_schema.columns` 表会造成 TiDB panic 的问题 [#32459](https://github.com/pingcap/tidb/issues/32459) [@tangenta](https://github.com/tangenta)
-    - 修复了生成执行计划过程中，因为获取的 Info Schema 不一致而导致的 TiDB panic [#41622](https://github.com/pingcap/tidb/issues/41622) [@tiancaiamao](https://github.com/tiancaiamao)
+    - Fix the issue that, when using Cursor Fetch and running other statements among Execute, Fetch, and Close, the Fetch and Close commands might return incorrect results or cause TiDB to panic [#40094](https://github.com/pingcap/tidb/issues/40094) [@YangKeao](https://github.com/YangKeao)
+    - Fix the issue that when modifying the floating-point type using DDL to keep the length unchanged and reduce the decimal places, the old data still remains the same [#41281](https://github.com/pingcap/tidb/issues/41281) [@zimulala](https://github.com/zimulala)
+    - Fix the issue that joining the `information_schema.columns` table causes TiDB to panic [#32459](https://github.com/pingcap/tidb/issues/32459) [@tangenta](https://github.com/tangenta)
+    - Fix the issue that TiDB panic occurs due to inconsistent Info Schema being obtained when generating the execution plan [#41622](https://github.com/pingcap/tidb/issues/41622) [@tiancaiamao](https://github.com/tiancaiamao)
     (dup: release-7.0.0.md > Bug fixes> TiDB)- Fix the issue that TiFlash reports an error for generated columns during execution [#40663](https://github.com/pingcap/tidb/issues/40663) @[guo-shaoge](https://github.com/guo-shaoge) @[guo-shaoge](https://github.com/guo-shaoge)
     (dup: release-7.0.0.md > Bug fixes> TiDB)- Fix the issue that TiDB might produce incorrect results when different partitioned tables appear in a single SQL statement [#42135](https://github.com/pingcap/tidb/issues/42135) @[mjonss](https://github.com/mjonss) @[mjonss](https://github.com/mjonss)
     (dup: release-6.5.1.md > Bug fixes> TiDB)- Fix the issue that Plan Cache might cache Shuffle operators and return incorrect results [#38335](https://github.com/pingcap/tidb/issues/38335) @[qw4990](https://github.com/qw4990) @[fzzf678](https://github.com/fzzf678)
-    - 修复使用 Index Merge 的方式读取包含 SET 类型的列的表时，结果可能出错的问题 [#41293](https://github.com/pingcap/tidb/issues/41293) @[time-and-fate](https://github.com/time-and-fate)
+    - Fix the issue that using Index Merge to read a table containing the `SET` type column might lead to incorrect results [#41293](https://github.com/pingcap/tidb/issues/41293) @[time-and-fate](https://github.com/time-and-fate)
     (dup: release-7.0.0.md > Bug fixes> TiDB)- Fix the issue that full index scans might cause errors when prepared plan cache is enabled [#42150](https://github.com/pingcap/tidb/issues/42150) @[fzzf678](https://github.com/fzzf678) @[fzzf678](https://github.com/fzzf678)
     - 修复当 DDL 执行过程中，使用 PointGet 读取表的 SQL 可能会在执行时抛出 panic 的问题 [#41622](https://github.com/pingcap/tidb/issues/41622) @[tiancaiamao](https://github.com/tiancaiamao)
-    - 修复事务内点更新之后，select 结果不正确的问题 [#28011](https://github.com/pingcap/tidb/issues/28011) @[zyguan](https://github.com/zyguan)
+    - Fix the issue that after executing `PointUpdate` within a transaction, TiDB returns incorrect results for the `SELECT` statement [#28011](https://github.com/pingcap/tidb/issues/28011) @[zyguan](https://github.com/zyguan)
     (dup: release-6.6.0.md > Improvements> TiDB)- Clear expired region cache regularly to avoid memory leak and performance degradation [#40461](https://github.com/pingcap/tidb/issues/40461) @[sticnarf](https://github.com/sticnarf) @[zyguan](https://github.com/zyguan)
     (dup: release-7.0.0.md > Bug fixes> TiDB)- Fix the issue that `INSERT IGNORE` and `REPLACE` statements do not lock keys that do not modify values [#42121](https://github.com/pingcap/tidb/issues/42121) @[zyguan](https://github.com/zyguan) @[zyguan](https://github.com/zyguan)
+
 + TiKV
 
     (dup: release-6.6.0.md > Bug fixes> TiKV)- Fix an error that occurs when casting the `const Enum` type to other types [#14156](https://github.com/tikv/tikv/issues/14156) @[wshwsh12](https://github.com/wshwsh12) @[wshwsh12](https://github.com/wshwsh12)
-    - 修复 CPU 配额限制问题 [13084](https://github.com/tikv/tikv/issues/13084) @[BornChanger](https://github.com/BornChanger)
-    - 修复 snapshot last index 不正确的问题 [12618](https://github.com/tikv/tikv/issues/12618) @[LintianShi](https://github.com/LintianShi)
+    - Fix the issue of CPU quota limitation [13084](https://github.com/tikv/tikv/issues/13084) @[BornChanger](https://github.com/BornChanger)
+    - Fix the issue of incorrect snapshot last index [12618](https://github.com/tikv/tikv/issues/12618) @[LintianShi](https://github.com/LintianShi)
+
 + PD
 
     (dup: release-6.5.1.md > Bug fixes> PD)- Fix the issue that the Region Scatter might cause uneven distribution of leader [#6017](https://github.com/tikv/pd/issues/6017) @[HunDunDM](https://github.com/HunDunDM)
