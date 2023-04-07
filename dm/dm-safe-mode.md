@@ -7,7 +7,7 @@ summary: Introduces the DM safe mode, its purpose, working principles and how to
 
 Safe mode is a special operation mode for DM to perform incremental replication. During safe mode, when the DM's incremental replication component replicates binlog events, DM forcibly rewrites all the `INSERT` and `UPDATE` statements before executing them in the downstream.
 
-During safe mode, the duplicate binlog event can be replicated repeatedly to the downstream and make sure the result is idempotent. Thus, the incremental replication is *safe*.
+During safe mode, a duplicate binlog event can be replicated repeatedly to the downstream with idempotence guaranteed. Thus, the incremental replication is *safe*.
 
 After resuming a data replication task from a checkpoint, DM might repeatedly execute some binlog events, which leads to the following issues:
 
@@ -30,8 +30,8 @@ Assume that a `dummydb.dummytbl` table has a primary key `id`. Execute the follo
 
 ```sql
 INSERT INTO dummydb.dummytbl (id, int_value, str_value) VALUES (123, 999, 'abc');
-UPDATE dummydb.dummytbl SET int_value = 888999 WHERE int_value = 999；   -- If there is no other record with int_value = 999
-UPDATE dummydb.dummytbl SET id = 999 WHERE id = 888；    -- Update the primary key
+UPDATE dummydb.dummytbl SET int_value = 888999 WHERE int_value = 999;   -- Suppose there is no other record with int_value = 999
+UPDATE dummydb.dummytbl SET id = 999 WHERE id = 888;    -- Update the primary key
 ```
 
 With safe mode enabled, when the preceding SQL statements are executed again in the downstream, they are rewritten as follows:
@@ -46,7 +46,7 @@ REPLACE INTO dummydb.dummytbl (id, int_value, str_value) VALUES (999, 888888, 'a
 
 In the preceding statements, `UPDATE` is rewritten as `DELETE` + `REPLACE`, rather than `DELETE` + `INSERT`. If `INSERT` is used here, when you insert a duplicate record with `id = 999`, the database reports a primary key conflict. This is why `REPLACE` is used instead. The new record will replace the existing record.
 
-By rewriting SQL statements, before duplicate insert or update operations, DM uses the new row data to overwrite the existing row data. This guarantees that insert and update operations are executed repeatedly.
+By rewriting SQL statements, DM overwrites the existing row data using the new row data when performing duplicate insert or update operations. This guarantees that insert and update operations are executed repeatedly.
 
 ## Enable safe mode
 
@@ -58,13 +58,13 @@ When DM resumes an incremental replication task from a checkpoint (DM worker res
 
 Whether to enable safe mode is related to `safemode_exit_point` in the checkpoint. When an incremental replication task is paused abnormally, DM tries to replicate all DML statements in the memory to the downstream and records the latest binlog position among the DML statements as `safemode_exit_point`, which is saved to the last checkpoint.
 
-When resuming an incremental replication task from the checkpoint, whether DM enables safe mode depends on the following logic:
+The detailed logic is as follows:
 
-- If the checkpoint contains `safemode_exit_point`, the incremental replication task is paused abnormally. When DM resumes the task, if DM detects that the binlog position of the checkpoint to be resumed is earlier than `safemode_exit_point`, the binlog events between the checkpoint and the `safemode_exit_point` might have been processed in the downstream. After the task is resumed, some binlog events are executed repeatedly. Therefore, DM determines that safe mode should be enabled for these binlog positions. After the binlog position exceeds the `safemode_exit_point`, if safe mode is not manually enabled, DM automatically disables safe mode.
+- If the checkpoint contains `safemode_exit_point`, the incremental replication task is paused abnormally. When DM resumes the task, the binlog position of the checkpoint to be resumed (**begin position**) is earlier than `safemode_exit_point`, which represents the binlog events between the begin position and the `safemode_exit_point` might have been processed in the downstream. So, during the resume process, some binlog events might be executed repeatedly. Therefore, enabling safe mode can make these binlog positions **safe**. After the binlog position exceeds the `safemode_exit_point`, DM automatically disables safe mode unless safe mode is enabled manually.
 
 - If the checkpoint does not contain `safemode_exit_point`, there are two cases:
 
-    1. This is a new task, or this task is exited as expected.
+    1. This is a new task, or this task is paused as expected.
     2. This task is paused abnormally but DM fails to record `safemode_exit_point`, or the DM process exits abnormally.
 
     In the second case, DM does not know which binlog events after the checkpoint are executed in the downstream. To ensure that repeatedly executed binlog events do not cause any problems, DM automatically enables safe mode during the first two checkpoint intervals. The default interval between two checkpoints is 30 seconds, which means when a normal incremental replication task starts, safe mode is enforced for the first 60 seconds (2 * 30 seconds).
