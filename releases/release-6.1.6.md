@@ -80,17 +80,17 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-
     - 修复 snapshot last index 不正确的问题 [12618](https://github.com/tikv/tikv/issues/12618) @[LintianShi](https://github.com/LintianShi)
 + PD
 
-    (dup: release-6.5.1.md > Bug fixes> PD)- Fix the issue that the Region Scatter might cause uneven distribution of leader [#6017](https://github.com/tikv/pd/issues/6017) @[HunDunDM](https://github.com/HunDunDM) @[HunDunDM](https://github.com/HunDunDM)
-    - 修复 Online recovery 超时不生效的问题 @[v01dstar](https://github.com/v01dstar)
+    (dup: release-6.5.1.md > Bug fixes> PD)- Fix the issue that the Region Scatter might cause uneven distribution of leader [#6017](https://github.com/tikv/pd/issues/6017) @[HunDunDM](https://github.com/HunDunDM)
+    - Fix the issue that the timeout mechanism of Online Unsafe Recovery does not work [#6107](https://github.com/tikv/pd/issues/6107) @[v01dstar](https://github.com/v01dstar)
 
 + TiFlash
 
-    (dup: release-6.6.0.md > Bug fixes> TiFlash)- Fix the issue that semi-joins use excessive memory when calculating Cartesian products [#6730](https://github.com/pingcap/tiflash/issues/6730) @[gengliqi](https://github.com/gengliqi) @[gengliqi](https://github.com/gengliqi)
-    (dup: release-6.5.1.md > Bug fixes> TiFlash)- Fix the issue that TiFlash log search is too slow [#6829](https://github.com/pingcap/tiflash/issues/6829) @[hehechen](https://github.com/hehechen) @[hehechen](https://github.com/hehechen)
-    - 修复 `CI Collation` 下聚合函数结果不正确的问题 [#7002](https://github.com/pingcap/tiflash/pull/7002) @[xzhangxian1008](https://github.com/xzhangxian1008)
-    - 修复 `Decimal Cast` 结果不正确的问题 [#7026](https://github.com/pingcap/tiflash/pull/7026) @[windtalker](https://github.com/windtalker)
-    - 修复不能识别生成列的问题 [#6801](https://github.com/pingcap/tiflash/issues/6801) @[guo-shaoge](https://github.com/guo-shaoge)
-    (dup: release-7.0.0.md > Bug fixes> TiFlash)- Fix the issue that Decimal division does not round up the last digit in certain cases [#7022](https://github.com/pingcap/tiflash/issues/7022) @[LittleFall](https://github.com/LittleFall) @[LittleFall](https://github.com/LittleFall)
+    (dup: release-6.6.0.md > Bug fixes> TiFlash)- Fix the issue that semi-joins use excessive memory when calculating Cartesian products [#6730](https://github.com/pingcap/tiflash/issues/6730) @[gengliqi](https://github.com/gengliqi)
+    (dup: release-6.5.1.md > Bug fixes> TiFlash)- Fix the issue that TiFlash log search is too slow [#6829](https://github.com/pingcap/tiflash/issues/6829) @[hehechen](https://github.com/hehechen)
+    (dup: release-7.0.0.md > Bug fixes> TiFlash)- Fix the issue that TopN/Sort operators produce incorrect results after enabling the new collation [#6807](https://github.com/pingcap/tiflash/issues/6807) @[xzhangxian1008](https://github.com/xzhangxian1008)
+    (dup: release-7.0.0.md > Bug fixes> TiFlash)- Fix the issue that Decimal cast rounds up incorrectly in certain cases [#6994](https://github.com/pingcap/tiflash/issues/6994) @[windtalker](https://github.com/windtalker)
+    - Fix the issue that TiFlash cannot recognize generated columns [#6801](https://github.com/pingcap/tiflash/issues/6801) @[guo-shaoge](https://github.com/guo-shaoge)
+    (dup: release-7.0.0.md > Bug fixes> TiFlash)- Fix the issue that Decimal division does not round up the last digit in certain cases [#7022](https://github.com/pingcap/tiflash/issues/7022) @[LittleFall](https://github.com/LittleFall)
 
 + Tools
 
