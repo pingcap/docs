@@ -11,7 +11,7 @@ During safe mode, a duplicate binlog event can be replicated repeatedly to the d
 
 After resuming a data replication task from a checkpoint, DM might repeatedly execute some binlog events, which leads to the following issues:
 
-- During incremental replication, the operation of executing DML and the operation of writing checkpoint are not simultaneous. The operation of writing checkpoints and writing data into the downstream database is not atomic. Therefore, **when DM exits abnormally, checkpoints might only record a restoration point before the exit point**.
+- During incremental replication, the operation of executing DML and the operation of writing checkpoint are not simultaneous. The operation of writing checkpoints and writing data into the downstream database is not atomic. Therefore, **when DM exits abnormally, checkpoints might only record the restoration point before the exit point**.
 - When DM restarts a replication task and resumes incremental replication from a checkpoint, some data between the checkpoint and the exit point might already be processed before the abnormal exit. This causes **some SQL statements executed repeatedly**.
 - If an `INSERT` statement is executed more than once, the primary key or the unique index might encounter a conflict, which leads to a replication failure. If an `UPDATE` statement is executed more than once, the filter condition might not be able to locate the previously updated records.
 
