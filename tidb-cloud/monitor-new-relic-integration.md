@@ -41,7 +41,7 @@ You cannot use the New Relic integration in [Serverless Tier clusters](/tidb-clo
 ### Step 2. Add TiDB Cloud Dashboard in New Relic
 
 1. Log in to [New Relic](https://one.newrelic.com/).
-2. Click **Add Data**, search for `TiDB Cloud dashboard`, and then go to the **TiDB Cloud dashboard** page.
+2. Click **Add Data**, search for `TiDB Cloud`, and then go to the **TiDB Cloud Monitoring** page. Alternatively, you can click on the [link](https://one.newrelic.com/marketplace?state=79bf274b-0c01-7960-c85c-3046ca96568e) to directly access the page.
 3. Choose your account ID and create the dashboard in New Relic.
 
 ## Pre-built dashboard
