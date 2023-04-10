@@ -5,24 +5,24 @@ summary: Introduces the DM safe mode, its purpose, working principles and how to
 
 # DM Safe Mode
 
-Safe mode is a special operation mode for DM to perform incremental replication. During safe mode, when the DM's incremental replication component replicates binlog events, DM forcibly rewrites all the `INSERT` and `UPDATE` statements before executing them in the downstream.
+Safe mode is a special operation mode for DM to perform incremental replication. In safe mode, when the DM incremental replication component replicates binlog events, DM forcibly rewrites all the `INSERT` and `UPDATE` statements before executing them in the downstream.
 
-During safe mode, a duplicate binlog event can be replicated repeatedly to the downstream with idempotence guaranteed. Thus, the incremental replication is *safe*.
+During safe mode, one binlog event can be replicated repeatedly to the downstream with idempotence guaranteed. Thus, the incremental replication is *safe*.
 
-After resuming a data replication task from a checkpoint, DM might repeatedly execute some binlog events, which leads to the following issues:
+After resuming a data replication task from a checkpoint, DM might repeatedly replicate some binlog events, which leads to the following issues:
 
-- During incremental replication, the operation of executing DML and the operation of writing checkpoint are not simultaneous. The operation of writing checkpoints and writing data into the downstream database is not atomic. Therefore, **when DM exits abnormally, checkpoints might only record the restoration point before the exit point**.
-- When DM restarts a replication task and resumes incremental replication from a checkpoint, some data between the checkpoint and the exit point might already be processed before the abnormal exit. This causes **some SQL statements executed repeatedly**.
-- If an `INSERT` statement is executed more than once, the primary key or the unique index might encounter a conflict, which leads to a replication failure. If an `UPDATE` statement is executed more than once, the filter condition might not be able to locate the previously updated records.
+- During incremental replication, the operation of executing DML and the operation of writing checkpoints are not simultaneous. The operation of writing checkpoints and writing data into the downstream database is not atomic. Therefore, **when DM exits abnormally, checkpoints might only record the restoration point before the exit point**.
+- When DM restarts a replication task and resumes incremental replication from a checkpoint, some data between the checkpoint and the exit point might already be processed before the abnormal exit. This causes **some SQL statements to be executed repeatedly**.
+- If an `INSERT` statement is executed repeatedly, the primary key or the unique index might encounter a conflict, which leads to a replication failure. If an `UPDATE` statement is executed repeatedly, the filter condition might not be able to locate the previously updated records.
 
-During safe mode, DM can rewrite SQL statements to resolve the preceding issues.
+In safe mode, DM can rewrite SQL statements to resolve the preceding issues.
 
 ## Working principle
 
-During safe mode, DM guarantees the idempotency of binlog events by rewriting SQL statements. Specifically, the following SQL statements are rewritten:
+In safe mode, DM guarantees the idempotency of binlog events by rewriting SQL statements. Specifically, the following SQL statements are rewritten:
 
-* `INSERT` is rewritten to `REPLACE`.
-* `UPDATE` is analyzed to obtain the value of the primary key or the unique index of the row updated. `UPDATE` is then rewritten to `DELETE` + `REPLACE` in the following two steps: DM deletes the old record using the primary key or unique index, and inserts the new record using the `REPLACE` statement.
+* `INSERT` statements are rewritten to `REPLACE` statements.
+* `UPDATE` statements are analyzed to obtain the value of the primary key or the unique index of the row updated. `UPDATE` statements are then rewritten to `DELETE` + `REPLACE` statements in the following two steps: DM deletes the old record using the primary key or unique index, and inserts the new record using the `REPLACE` statement.
 
 `REPLACE` is a MySQL-specific syntax for inserting data. When you insert data using `REPLACE`, and the new data and existing data have a primary key or unique constraint conflict, MySQL deletes all the conflicting records and executes the insert operation, which is equivalent to "force insert". For details, see [`REPLACE` statement](https://dev.mysql.com/doc/refman/8.0/en/replace.html) in MySQL documentation.
 
@@ -73,7 +73,9 @@ The detailed logic is as follows:
 
 ### Manually enable
 
-You can set the `safe-mode` item in the syncer configuration to enable safe mode during the entire replication process. `safe-mode` is a bool type parameter and is `false` by default. If it is set to `true`, DM enables safe mode for the whole incremental replication process. The following is a task configuration example with safe mode enabled:
+You can set the `safe-mode` item in the syncer configuration to enable safe mode during the entire replication process. `safe-mode` is a bool type parameter and is `false` by default. If it is set to `true`, DM enables safe mode for the whole incremental replication process. 
+
+The following is a task configuration example with safe mode enabled:
 
 ```
 syncers:                              # The running configurations of the sync processing unit.
@@ -95,6 +97,6 @@ If you want to enable safe mode during the entire replication process for safety
 
 - **Incremental replication in safe mode consumes extra overhead.** Frequent `DELETE` + `REPLACE` operations result in frequent changes to primary keys or unique indexes, which creates a greater performance overhead than executing `UPDATE` statements only.
 - **Safe mode forces the replacement of records with the same primary key, which might result in data loss in the downstream.** When you merge and migrate shards from the upstream to the downstream, incorrect configuration might lead to a large number of primary key or unique key conflicts. If safe mode is enabled in this situation, the downstream might lose lots of data without showing any exception, resulting in severe data inconsistency.
-- **Safe mode relies on the primary key or unique index to detect conflicts.** If the downstream table has no primary key or unique index, DM cannot use `REPLACE` to replace and insert records. In this case, even if safe mode is enabled and DM rewrites `INSERT` to `REPLACE`, duplicate records are still inserted into the downstream.
+- **Safe mode relies on the primary key or unique index to detect conflicts.** If the downstream table has no primary key or unique index, DM cannot use `REPLACE` to replace and insert records. In this case, even if safe mode is enabled and DM rewrites `INSERT` to `REPLACE` statements, duplicate records are still inserted into the downstream.
 
 In summary, if the upstream database has data with duplicate primary keys, and your application tolerates loss of duplicate records and performance overhead, you can enable safe mode to ignore data duplication.
