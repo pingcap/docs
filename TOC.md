@@ -9,6 +9,7 @@
   - [MySQL Compatibility](/mysql-compatibility.md)
   - [TiDB Limitations](/tidb-limitations.md)
   - [Credits](/credits.md)
+  - [Roadmap](/tidb-roadmap.md)
 - Quick Start
   - [Try Out TiDB](/quick-start-with-tidb.md)
   - [Try Out HTAP](/quick-start-with-htap.md)
@@ -622,7 +623,7 @@
     - [TiFlash](/tiflash/monitor-tiflash.md)
     - [TiCDC](/ticdc/monitor-ticdc.md)
     - [Resource Control](/grafana-resource-control-dashboard.md)
-  - Secure
+  - Security
     - [Enable TLS Between TiDB Clients and Servers](/enable-tls-between-clients-and-servers.md)
     - [Enable TLS Between TiDB Components](/enable-tls-between-components.md)
     - [Generate Self-signed Certificates](/generate-self-signed-certificates.md)
@@ -791,7 +792,6 @@
       - [`SPLIT REGION`](/sql-statements/sql-statement-split-region.md)
       - [`START TRANSACTION`](/sql-statements/sql-statement-start-transaction.md)
       - [`TABLE`](/sql-statements/sql-statement-table.md)
-      - [`TRACE`](/sql-statements/sql-statement-trace.md)
       - [`TRACE`](/sql-statements/sql-statement-trace.md)
       - [`TRUNCATE`](/sql-statements/sql-statement-truncate.md)
       - [`UNLOCK STATS`](/sql-statements/sql-statement-unlock-stats.md)

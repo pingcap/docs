@@ -210,6 +210,16 @@ The TiDB configuration file supports more options than command-line parameters. 
 + Default value: `false`
 + The table lock is used to coordinate concurrent access to the same table among multiple sessions. Currently, the `READ`, `WRITE`, and `WRITE LOCAL` lock types are supported. When the configuration item is set to `false`, executing the `LOCK TABLES` or `UNLOCK TABLES` statement does not take effect and returns the "LOCK/UNLOCK TABLES is not supported" warning. For more information, see [`LOCK TABLES` and `UNLOCK TABLES`](/sql-statements/sql-statement-lock-tables-and-unlock-tables.md).
 
+### `labels`
+
++ Specify server labels. For example, `{ zone = "us-west-1", dc = "dc1", rack = "rack1", host = "tidb1" }`.
++ Default value: `{}`
+
+> **Note:**
+>
+> - In TiDB, the `zone` label is specially used to specify the zone where a server is located. If `zone` is set to a non-null value, the corresponding value is automatically used by features such as [`txn-score`](/system-variables.md#txn_scope) and [`Follower read`](/follower-read.md).
+> - The `group` label has a special use in TiDB Operator. For clusters deployed using [TiDB Operator](/tidb-operator-overview.md), it is **NOT** recommended that you specify the `group` label manually.
+
 ## Log
 
 Configuration items related to log.
@@ -387,6 +397,22 @@ Configuration items related to security.
 - Default value: `true`
 - Optional values: `true`, `false`
 - If you set it to `true`, the client connection is disconnected when the password is expired. If you set it to `false`, the client connection is restricted to the "sandbox mode" and the user can only execute the password reset operation.
+
+### `session-token-signing-cert` <span class="version-mark">New in v6.4.0</span>
+
+> **Warning:**
+>
+> The feature controlled by this parameter is under development. **Do not modify the default value**.
+
++ Default value: ""
+
+### `session-token-signing-key` <span class="version-mark">New in v6.4.0</span>
+
+> **Warning:**
+>
+> The feature controlled by this parameter is under development. **Do not modify the default value**.
+
++ Default value: ""
 
 ## Performance
 
