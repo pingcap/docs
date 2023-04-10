@@ -81,7 +81,7 @@ Your service endpoint region is selected by default. Have a quick check and clic
 
 > **Note:**
 >
-> The endpoint service of each dedicated cluster will be automatically created for newly created after March 28, 2023.
+> For each Dedicated Tier cluster created after March 28, 2023, the corresponding endpoint service is automatically created 3 to 4 minutes after the cluster creation.
 
 TiDB Cloud begins creating an endpoint service, which takes 3 to 4 minutes.
 
