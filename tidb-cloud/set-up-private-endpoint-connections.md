@@ -199,7 +199,7 @@ When you use private endpoint connections, the statuses of private endpoints or 
 
 The possible statuses of a private endpoint are explained as follows:
 
-- **Not Configured**: The endpoint service is just created but have not yet created a private endpoint.
+- **Not Configured**: The endpoint service is created but the private endpoint is not created yet.
 - **Pending**: Waiting for processing.
 - **Active**: Your private endpoint is ready to use. You cannot edit the private endpoint of this status.
 - **Deleting**: The private endpoint is being deleted.
