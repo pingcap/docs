@@ -54,7 +54,7 @@ On the right pane of the endpoint details page, you can click the **Properties**
 - **Timeout(ms)**: the timeout for the endpoint.
 
     - Default value: `5000`
-    - Maximum value: `30000`
+    - Maximum value: `60000`
     - Minimum value: `1`
     - Unit: millisecond
 

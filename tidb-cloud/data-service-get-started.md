@@ -56,7 +56,7 @@ On the right pane, click the **Properties** tab and set properties for the endpo
     - `GET`: use this method to query data, such as a `SELECT` statement.
     - `POST`: use this method to insert data, such as an `INSERT` statement.
 
-- **Timeout(ms)**: the timeout for the endpoint. It ranges from `1` to `30000`. The default value is `5000` milliseconds. For more details, see [Configure properties](/tidb-cloud/data-service-manage-endpoint.md#configure-properties).
+- **Timeout(ms)**: the timeout for the endpoint. It ranges from `1` to `60000`. The default value is `5000` milliseconds. For more details, see [Configure properties](/tidb-cloud/data-service-manage-endpoint.md#configure-properties).
 
 - **Max Rows**: the maximum number of rows that the endpoint returns. It ranges from `1` to `2000`. The default value is `50` rows. For more details, see [Configure properties](/tidb-cloud/data-service-manage-endpoint.md#configure-properties).
 
