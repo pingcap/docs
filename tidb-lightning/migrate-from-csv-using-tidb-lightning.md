@@ -27,7 +27,7 @@ CSV files are schema-less. To import them into TiDB, a table schema must be prov
 
 ## Configuration
 
-The CSV format can be configured in `tidb-lightning.toml` under the `[mydumper.csv]` section. Most settings have a corresponding option in the MySQL [`LOAD DATA`] statement.
+The CSV format can be configured in `tidb-lightning.toml` under the `[mydumper.csv]` section. Most settings have a corresponding option in the MySQL [`LOAD DATA`](https://dev.mysql.com/doc/refman/8.0/en/load-data.html) statement.
 
 ```toml
 [mydumper.csv]
@@ -56,11 +56,7 @@ In all string fields such as `separator`, `delimiter` and `terminator`, if the i
 
 Additionally, you can use *single-quoted* strings (`'…'`) to suppress backslash escaping. For example, `terminator = '\n'` means using the two-character string: a backslash followed by the letter "n", as the terminator.
 
-See the [TOML v1.0.0 specification] for details.
-
-[`LOAD DATA`]: https://dev.mysql.com/doc/refman/8.0/en/load-data.html
-
-[TOML v1.0.0 specification]: https://toml.io/en/v1.0.0#string
+See the [TOML v1.0.0 specification](https://toml.io/en/v1.0.0#string) for details.
 
 ### `separator`
 
@@ -80,12 +76,10 @@ See the [TOML v1.0.0 specification] for details.
 - If `delimiter` is empty, all fields are unquoted.
 - Common values:
 
-    * `'"'` quote fields with double-quote, same as [RFC 4180]
+    * `'"'` quote fields with double-quote, same as [RFC 4180](https://tools.ietf.org/html/rfc4180)
     * `''` disable quoting
 
 - Corresponds to the `FIELDS ENCLOSED BY` option in the `LOAD DATA` statement.
-
-[RFC 4180]: https://tools.ietf.org/html/rfc4180
 
 ### `terminator`
 
