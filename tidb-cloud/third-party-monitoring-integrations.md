@@ -41,8 +41,8 @@ With the Prometheus and Grafana integration, you can get a scrape_config file fo
 
 For the detailed integration steps and a list of metrics that Prometheus tracks, see [Integrate TiDB Cloud with Prometheus and Grafana](/tidb-cloud/monitor-prometheus-and-grafana-integration.md).
 
-<!--- ### New Relic integration
+### New Relic integration
 
 With the New Relic integration, you can configure TiDB Cloud to send metric data about your TiDB clusters to [New Relic](https://newrelic.com/) and view these metrics in your New Relic dashboards.
 
-For the detailed integration steps and a list of metrics that New Relic tracks, refer to [Integrate TiDB Cloud with New Relic](/tidb-cloud/monitor-new-relic-integration.md). --->
+For the detailed integration steps and a list of metrics that New Relic tracks, refer to [Integrate TiDB Cloud with New Relic](/tidb-cloud/monitor-new-relic-integration.md).
