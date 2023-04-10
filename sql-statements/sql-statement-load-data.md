@@ -15,7 +15,7 @@ In TiDB v7.0.0, the LOAD DATA SQL statement becomes more powerful by integrating
 
 > **Warning:**
 >
-> For TiDB v7.0.0, the new clauses `FORMAT`, `FIELDS DEFINED NULL BY`, `With batch_size=<number>,detached`, and support for importing data from S3 and GCS, are experimental features.. It is not recommended to use it in a production environment.
+> For TiDB v7.0.0, the new features and parameters are experimental. It is not recommended to use it in a production environment.
 
 <CustomContent platform="tidb-cloud">
 
