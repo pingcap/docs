@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Link Checker
-        uses: lycheeverse/lychee-action@v1.1.1
+        uses: lycheeverse/lychee-action@v1.6.1
         with:
           # For parameter description, see https://github.com/lycheeverse/lychee#commandline-parameters
           # Accept 429 for now due to github rate limit.
