@@ -7,10 +7,34 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+<<<<<<< HEAD
+=======
+  tidb-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+      - name: Verify duplicated file names
+        run: ./scripts/verify-duplicated-file-name.sh
+      - name: Verify internal links and anchors - tidb only
+        run: |
+          npm i
+          node ./scripts/filterNonCloudDoc.js
+          cp -r ./scripts ./tmp
+          cp -r ./media ./tmp
+          cp .gitignore ./tmp/
+          cd ./tmp
+          ./scripts/verify-links.sh
+          ./scripts/verify-link-anchors.sh
+>>>>>>> bd5c9ad33 (ci: update specified actions to the latest version (#13201))
 
   pull:
     runs-on: ubuntu-latest
     steps:
+<<<<<<< HEAD
     - name: Check out
       uses: actions/checkout@v2
     - uses: actions/setup-node@v1
@@ -20,10 +44,34 @@ jobs:
       run: ./scripts/verify-links.sh
     - name: Verify internal link anchors
       run: ./scripts/verify-link-anchors.sh
+=======
+      - name: Check out
+        uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+      - name: Check TOC-tidb-cloud.md existence
+        id: check_cloud_toc
+        uses: andstor/file-existence-action@v2
+        with:
+          files: "TOC-tidb-cloud.md"
+      - name: Verify internal links - cloud only
+        if: steps.check_cloud_toc.outputs.files_exists == 'true'
+        run: |
+          npm i
+          node ./scripts/filterCloudDoc.js
+          cp -r ./scripts ./tmp
+          cp -r ./media ./tmp
+          cp .gitignore ./tmp/
+          cd ./tmp
+          ./scripts/verify-links.sh
+          ./scripts/verify-link-anchors.sh
+>>>>>>> bd5c9ad33 (ci: update specified actions to the latest version (#13201))
 
   vale:
     runs-on: ubuntu-latest
     steps:
+<<<<<<< HEAD
     - name: Checkout
       uses: actions/checkout@master
     - name: Vale Linter
@@ -32,6 +80,16 @@ jobs:
         # Optional
         # Specify file path to lint
         #files: .
+=======
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Vale Linter
+        uses: errata-ai/vale-action@v2.0.1
+        with:
+          # Optional
+          # Specify file path to lint
+          #files: .
+>>>>>>> bd5c9ad33 (ci: update specified actions to the latest version (#13201))
 
         # Optional
         onlyAnnotateModifiedLines: true
