@@ -1024,7 +1024,7 @@ ALTER TABLE example ADD PARTITION
  PARTITION pExample5 COMMENT = 'not p4, but pExample5 instead');
 ```
 
-Unlike Range/List partitioning, `DROP PARTITION` is not supported in Hash/Key partitioning, but you can decrease the number of partitions with `COALESCE PARTITION` or delete all data from specific partitions with `TRUNCATE PARTITION`
+Unlike Range and List partitioning, `DROP PARTITION` is not supported for Hash and Key partitioning, but you can decrease the number of partitions with `COALESCE PARTITION` or delete all data from specific partitions with `TRUNCATE PARTITION`
 
 Decreasing number of partitions by 1:
 
