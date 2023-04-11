@@ -19,7 +19,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
   Currently, this feature is only provided for Dedicated Tier clusters that are hosted on the AWS `Oregon (us-west-2)` region.
 
-- Support the [New Relic](https://newrelic.com/) integration.
+- Support the [New Relic](https://newrelic.com/) integration for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters.
 
     With the New Relic integration, you can configure TiDB Cloud to send metric data of your TiDB clusters to [New Relic](https://newrelic.com/). Then, you can monitor and analyze both your application performance and your TiDB database performance on [New Relic](https://newrelic.com/). This feature can help you quickly identify and troubleshoot potential issues and reduce the resolution time.
 
