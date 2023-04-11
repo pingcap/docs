@@ -1032,9 +1032,10 @@ Decreasing number of partitions by 1:
 ALTER TABLE example COALESCE PARTITION 1;
 ```
 
-Notes:
-- Changing the number of partitions for Hash/Key partitioned tables will do an online reorganization/copy all data to the new number of partitions.
-- After changing the number of partitions, the statistics needs to be updated
+> **Notes:**
+> 
+> - Changing the number of partitions for Hash or Key partitioned tables will do an online reorganization and copy all data to the new number of partitions.
+> - After changing the number of partitions, the statistics need to be updated.
 
 ```sql
 +---------+------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
