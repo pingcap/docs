@@ -7,7 +7,7 @@ summary: An overview of the usage of LOAD DATA for the TiDB database.
 
 The `LOAD DATA` statement batch loads data into a TiDB table.
 
-In TiDB v7.0.0, the LOAD DATA SQL statement becomes more powerful by integrating TiDB Lightning's logical import mode, including the following:
+In TiDB v7.0.0, the `LOAD DATA` SQL statement becomes more powerful by integrating TiDB Lightning's logical import mode, including the following:
 
 - Support importing data from S3 and GCS
 - Support importing Parquet format data
