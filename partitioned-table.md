@@ -996,7 +996,7 @@ Currently, `ALTER TABLE ... COALESCE PARTITION` is not supported in TiDB as well
 {{< copyable "sql" >}}
 
 ```sql
-ALTER TABLE MEMBERS OPTIMIZE PARTITION p0;
+ALTER TABLE members OPTIMIZE PARTITION p2000;
 ```
 
 ```sql
@@ -1018,7 +1018,7 @@ Query OK, 0 rows affected (0.03 sec)
 If you execute a Key partition management statement that is not yet supported, TiDB returns an error.
 
 ```sql
-ALTER TABLE members OPTIMIZE PARTITION p0;
+ALTER TABLE members OPTIMIZE PARTITION p2000;
 ```
 
 ```sql
@@ -1029,12 +1029,29 @@ ERROR 8200 (HY000): Unsupported optimize partition
 
 Remove partitioning from an already partitioned table:
 
-- `ALTER TABLE t REMOVE PARTITIONING` which will alter a partitioned table to a non-partitioned table by copying all rows and recreate the indexes on-line.
-## Convert a non-partitioned table to a partitioned table
+- `ALTER TABLE members REMOVE PARTITIONING` which will alter a partitioned table to a non-partitioned table by copying all rows and recreate the indexes on-line.
 
-Add partitioning to an existing table:
+## Partition an existing table
 
-- `ALTER TABLE t PARTITION BY ...` which will alter a table to a partitioned table by copying all rows and recreate the indexes on-line according to the partitioning scheme.
+Partition an existing table (regardless if it is already partitioned or not):
+
+- `ALTER TABLE t PARTITION BY ...` which will alter the table to a partitioned table by copying all rows and recreate the indexes on-line according to the partitioning scheme.
+
+Example:
+
+```sql
+ALTER TABLE members PARTITION BY HASH(id) PARTITIONS 10;
+```
+
+or
+
+```sql
+ALTER TABLE member_level PARTITION BY RANGE(level)
+(PARTITION pLow VALUES LESS THAN (1),
+ PARTITION pMid VALUES LESS THAN (3),
+ PARTITION pHigh VALUES LESS THAN (7)
+ PARTITION pMax VALUES LESS THAN (MAXVALUE));
+```
 
 ## Partition pruning
 
