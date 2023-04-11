@@ -1025,7 +1025,7 @@ ALTER TABLE members OPTIMIZE PARTITION p0;
 ERROR 8200 (HY000): Unsupported optimize partition
 ```
 
-## How to add or remove partitioning from an existing table
+## Convert a partitioned table to a non-partitioned table
 
 Remove partitioning from an already partitioned table:
 
