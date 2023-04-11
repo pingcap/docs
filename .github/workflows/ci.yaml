@@ -59,11 +59,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Vale Linter
-<<<<<<< HEAD
-        uses: errata-ai/vale-action@v1.4.3
-=======
         uses: errata-ai/vale-action@v2.0.1
->>>>>>> bd5c9ad33 (ci: update specified actions to the latest version (#13201))
         with:
           # Optional
           # Specify file path to lint
