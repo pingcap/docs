@@ -91,3 +91,9 @@ Prometheus tracks the following metric data for your TiDB clusters.
 | tidbcloud_node_cpu_capacity_cores | gauge | cluster_name: `<cluster name>`<br/>instance: `tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…`<br/>component: `tidb\|tikv\|tiflash` | The CPU limit cores of TiDB/TiKV/TiFlash nodes |
 | tidbcloud_node_memory_used_bytes | gauge | cluster_name: `<cluster name>`<br/>instance: `tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…`<br/>component: `tidb\|tikv\|tiflash` | The used memory bytes of TiDB/TiKV/TiFlash nodes |
 | tidbcloud_node_memory_capacity_bytes | gauge | cluster_name: `<cluster name>`<br/>instance: `tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…`<br/>component: `tidb\|tikv\|tiflash` | The memory capacity bytes of TiDB/TiKV/TiFlash nodes |
+
+## FAQ
+
+1. Why is there a difference in the value of the same metric at the same time between Grafana and Cloud UI?
+
+Due to the differences in aggregation calculation logic between Grafana and the Cloud UI, there may be differences in the aggregated values displayed. Users can adjust the `mini step` configuration in Grafana to obtain more granular metric values.
