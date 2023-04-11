@@ -5,10 +5,6 @@ summary: Learn about TiFlash disaggregated storage and compute architecture and 
 
 # TiFlash Disaggregated Storage and Compute Architecture and S3 Support
 
-> **Warning:**
->
-> Currently, TiFlash disaggregated storage and compute architecture is an experimental feature. It is not recommended for use in production environments. This feature might be modified or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tiflash/issues) on GitHub.
-
 By default, TiFlash is deployed using the coupled storage and compute architecture, in which each TiFlash node acts as both storage and compute node. Starting from TiDB v7.0.0, TiFlash supports the disaggregated storage and compute architecture and allows to store data in Amazon S3 or S3-compatible object storage (such as MinIO).
 
 ## Architecture overview
@@ -22,8 +18,6 @@ In the disaggregated storage and compute architecture, different functionalities
     The Write Node receives Raft logs data from TiKV, converts the data into the columnar format, and periodically packages and uploads all the updated data within a certain period to S3. In addition, the Write Node manages the data on S3, such as continuously organizing data to improve query performance and deleting useless data.
 
     The Write Node uses local disks (usually NVMe SSDs) to cache the latest written data to avoid excessive use of memory.
-
-    The Write Node has a faster scaling speed than the TiFlash node in the coupled storage and compute architecture. That is, after adding or removing Write Nodes, data can reach balance faster among Write Nodes. The reason is that the Write Node stores all the data in S3 and only needs to store a small amount of data locally at runtime. The scaling up and down process is essentially the migration of Region Peers among nodes. When migrating a Region Peer from one Write Node to another for management, the target Write node only needs to download a small amount of metadata about the Region from the latest files uploaded to S3 by the Region Peer's original Write Node, and synchronizes the latest Region updates from TiKV. Then, the target Write node can catch up with the Region Leader's progress and complete the migration of the Region Peers.
 
 - TiFlash Compute Node
 
