@@ -12,8 +12,17 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+<<<<<<< HEAD
       - name: Link Checker
         uses: lycheeverse/lychee-action@v1.1.1
+=======
+      - name: Download Exclude Path
+        run: |
+          curl https://raw.githubusercontent.com/pingcap/docs/master/.lycheeignore --output .lycheeignore
+
+      - name: Check Links
+        uses: lycheeverse/lychee-action@v1.6.1
+>>>>>>> bd5c9ad33 (ci: update specified actions to the latest version (#13201))
         with:
           # For parameter description, see https://github.com/lycheeverse/lychee#commandline-parameters
           # Accept 429 for now due to github rate limit.
