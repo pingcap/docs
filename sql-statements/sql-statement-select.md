@@ -143,6 +143,26 @@ mysql> SELECT * FROM t1;
 5 rows in set (0.00 sec)
 ```
 
+```
+mysql> SELECT AVG(s_quantity), COUNT(s_quantity) FROM stock TABLESAMPLE REGIONS();
++-----------------+-------------------+
+| AVG(s_quantity) | COUNT(s_quantity) |
++-----------------+-------------------+
+|         59.5000 |                 4 |
++-----------------+-------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT AVG(s_quantity), COUNT(s_quantity) FROM stock;
++-----------------+-------------------+
+| AVG(s_quantity) | COUNT(s_quantity) |
++-----------------+-------------------+
+|         54.9729 |           1000000 |
++-----------------+-------------------+
+1 row in set (0.52 sec)
+```
+
+The above example uses data generated with `tiup bench tpcc prepare`. The first query shows the use of `TABLESAMPLE`.
+
 ## MySQL compatibility
 
 - The syntax `SELECT ... INTO @variable` is not supported.
