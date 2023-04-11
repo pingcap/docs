@@ -1016,7 +1016,7 @@ Increase the number of partitions by 1:
 ALTER TABLE example ADD PARTITION PARTITIONS 1;
 ```
 
-One can also specify partition options by adding partitions by partition definitions:
+You can also specify partition options by adding partition definitions:
 
 ```sql
 ALTER TABLE example ADD PARTITION
