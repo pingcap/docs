@@ -34,7 +34,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **Console changes**
 
-- Update the [Monitoring](/tidb-cloud/built-in-monitoring.md#view-the-monitoring-page) page for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters to use [node-level resource metrics](/tidb-loud/built-in-monitoring.md#server).
+- Update the [Monitoring](/tidb-cloud/built-in-monitoring.md#view-the-monitoring-page) page for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters to use [node-level resource metrics](/tidb-cloud/built-in-monitoring.md#server).
 
     With node-level resource metrics, you can see a more accurate representation of resource consumption to better understand the actual usage of purchased services.
 
