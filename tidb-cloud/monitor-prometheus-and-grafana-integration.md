@@ -96,4 +96,4 @@ Prometheus tracks the following metric data for your TiDB clusters.
 
 - Why does the same metric have different values on Grafana and the TiDB Cloud console at the same time?
 
-    The aggregation calculation logic is different between Grafana and TiDB Cloud, so the displayed aggregated values might differ. You can adjust the `mini step` configuration in Grafana to get more granular metric values.
+    The aggregation calculation logic is different between Grafana and TiDB Cloud, so the displayed aggregated values might differ. You can adjust the `mini step` configuration in Grafana to get more fine-grained metric values.
