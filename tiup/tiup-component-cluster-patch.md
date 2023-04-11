@@ -27,8 +27,8 @@ Before running the `tiup cluster patch` command, you need to pack the binary pac
 
 1. Determine the following variables:
 
-    - `${component}`: the name of the component to be replaced (`tidb`, `tikv`, `pd` ...).
-    - `${version}`: the version of the component (`v7.0.0`, `v6.5.1` ...).
+    - `${component}`: the name of the component to be replaced (such as `tidb`, `tikv`, or `pd`).
+    - `${version}`: the version of the component (such as `v7.0.0` or `v6.5.1`).
     - `${os}`: the operating system (`linux`).
     - `${arch}`: the platform on which the component runs (`amd64`, `arm64`).
 
@@ -38,19 +38,19 @@ Before running the `tiup cluster patch` command, you need to pack the binary pac
     wget https://tiup-mirrors.pingcap.com/${component}-${version}-${os}-${arch}.tar.gz -O /tmp/${component}-${version}-${os}-${arch}.tar.gz
     ```
 
-3. Create a temporary directory to pack files:
+3. Create a temporary directory to pack files and change to it:
 
     ```shell
     mkdir -p /tmp/package && cd /tmp/package
     ```
 
-4. Unpack the original binary package:
+4. Extract the original binary package:
 
     ```shell
     tar xf /tmp/${component}-${version}-${os}-${arch}.tar.gz
     ```
 
-5. Check out the file structure in the temporary package directory:
+5. Check out the file structure in the temporary directory:
 
     ```shell
     find .
@@ -63,7 +63,7 @@ Before running the `tiup cluster patch` command, you need to pack the binary pac
     tar czf /tmp/${component}-hotfix-${os}-${arch}.tar.gz *
     ```
 
-After you have completed the above steps, you can use `/tmp/${component}-hotfix-${os}-${arch}.tar.gz` as the `<package-path>` in the `tiup cluster patch` command.
+After you have completed the preceding steps, you can use `/tmp/${component}-hotfix-${os}-${arch}.tar.gz` as the `<package-path>` in the `tiup cluster patch` command.
 
 ## Options
 
