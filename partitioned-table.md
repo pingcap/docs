@@ -1067,6 +1067,7 @@ PARTITION BY HASH (`id`)
 ```
 
 Delete all data from a partition:
+
 ```sql
 ALTER TABLE example TRUNCATE PARTITION p0;
 ```
