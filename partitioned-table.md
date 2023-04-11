@@ -1030,6 +1030,7 @@ ERROR 8200 (HY000): Unsupported optimize partition
 Remove partitioning from an already partitioned table:
 
 - `ALTER TABLE t REMOVE PARTITIONING` which will alter a partitioned table to a non-partitioned table by copying all rows and recreate the indexes on-line.
+## Convert a non-partitioned table to a partitioned table
 
 Add partitioning to an existing table:
 
