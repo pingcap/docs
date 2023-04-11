@@ -54,7 +54,7 @@ You can enable safe mode either automatically or manually. This section describe
 
 ### Automatically enable
 
-When DM resumes an incremental replication task from a checkpoint (DM worker restart or network reconnection), DM automatically enables safe mode for a period.
+When DM resumes an incremental replication task from a checkpoint (For example, DM worker restart or network reconnection), DM automatically enables safe mode for a period.
 
 Whether to enable safe mode is related to `safemode_exit_point` in the checkpoint. When an incremental replication task is paused abnormally, DM tries to replicate all DML statements in the memory to the downstream and records the latest binlog position among the DML statements as `safemode_exit_point`, which is saved to the last checkpoint.
 
