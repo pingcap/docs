@@ -27,7 +27,7 @@ You can download TiDB Toolkit from the following link:
 https://download.pingcap.org/tidb-community-toolkit-{version}-linux-amd64.tar.gz
 ```
 
-`{version}` in the link indicates the version number of TiDB. For example, the download link for `v6.1.5` is `https://download.pingcap.org/tidb-community-toolkit-v6.1.5-linux-amd64.tar.gz`.
+`{version}` in the link indicates the version number of TiDB. For example, the download link for `v6.1.6` is `https://download.pingcap.org/tidb-community-toolkit-v6.1.6-linux-amd64.tar.gz`.
 
 > **Note:**
 >

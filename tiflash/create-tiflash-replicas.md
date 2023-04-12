@@ -173,7 +173,7 @@ Before TiFlash replicas are added, each TiKV instance performs a full table scan
    > In the preceding command, you need to replace `<CLUSTER_VERSION>` with the actual cluster version and `<PD_ADDRESS>:2379` with the address of any PD node. For example:
    >
    > ```shell
-   > tiup ctl:v6.1.5 pd -u http://192.168.1.4:2379 store limit all engine tiflash 60 add-peer
+   > tiup ctl:v6.1.6 pd -u http://192.168.1.4:2379 store limit all engine tiflash 60 add-peer
    > ```
 
    Within a few minutes, you will observe a significant increase in CPU and disk IO resource usage of the TiFlash nodes, and TiFlash should create replicas faster. At the same time, the TiKV nodes' CPU and disk IO resource usage increases as well.

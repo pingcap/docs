@@ -118,12 +118,12 @@ tidb_servers:
 ...
 ```
 
-Save the file as `/tmp/topology.yaml`. If you want to use TiDB v6.1.5 and your cluster name is `prod-cluster`, run the following command:
+Save the file as `/tmp/topology.yaml`. If you want to use TiDB v6.1.6 and your cluster name is `prod-cluster`, run the following command:
 
 {{< copyable "shell-regular" >}}
 
 ```shell
-tiup cluster deploy -p prod-cluster v6.1.5 /tmp/topology.yaml
+tiup cluster deploy -p prod-cluster v6.1.6 /tmp/topology.yaml
 ```
 
 During the execution, TiUP asks you to confirm your topology again and requires the root password of the target machine (the `-p` flag means inputting password):
@@ -131,7 +131,7 @@ During the execution, TiUP asks you to confirm your topology again and requires 
 ```bash
 Please confirm your topology:
 TiDB Cluster: prod-cluster
-TiDB Version: v6.1.5
+TiDB Version: v6.1.6
 Type        Host          Ports        Directories
 ----        ----          -----        -----------
 pd          172.16.5.134  2379/2380    deploy/pd-2379,data/pd-2379
@@ -171,7 +171,7 @@ tiup cluster list
 Starting /root/.tiup/components/cluster/v1.10.0/cluster list
 Name          User  Version    Path                                               PrivateKey
 ----          ----  -------    ----                                               ----------
-prod-cluster  tidb  v6.1.5    /root/.tiup/storage/cluster/clusters/prod-cluster  /root/.tiup/storage/cluster/clusters/prod-cluster/ssh/id_rsa
+prod-cluster  tidb  v6.1.6    /root/.tiup/storage/cluster/clusters/prod-cluster  /root/.tiup/storage/cluster/clusters/prod-cluster/ssh/id_rsa
 ```
 
 ## Start the cluster
@@ -201,7 +201,7 @@ tiup cluster display prod-cluster
 ```
 Starting /root/.tiup/components/cluster/v1.10.0/cluster display prod-cluster
 TiDB Cluster: prod-cluster
-TiDB Version: v6.1.5
+TiDB Version: v6.1.6
 ID                  Role        Host          Ports        Status     Data Dir              Deploy Dir
 --                  ----        ----          -----        ------     --------              ----------
 172.16.5.134:3000   grafana     172.16.5.134  3000         Up         -                     deploy/grafana-3000
@@ -272,7 +272,7 @@ tiup cluster display prod-cluster
 ```
 Starting /root/.tiup/components/cluster/v1.10.0/cluster display prod-cluster
 TiDB Cluster: prod-cluster
-TiDB Version: v6.1.5
+TiDB Version: v6.1.6
 ID                  Role        Host          Ports        Status     Data Dir              Deploy Dir
 --                  ----        ----          -----        ------     --------              ----------
 172.16.5.134:3000   grafana     172.16.5.134  3000         Up         -                     deploy/grafana-3000
@@ -380,12 +380,12 @@ Global Flags:
   -y, --yes               Skip all confirmations and assumes 'yes'
 ```
 
-For example, the following command upgrades the cluster to v6.1.5:
+For example, the following command upgrades the cluster to v6.1.6:
 
 {{< copyable "shell-regular" >}}
 
 ```bash
-tiup cluster upgrade tidb-test v6.1.5
+tiup cluster upgrade tidb-test v6.1.6
 ```
 
 ## Update configuration
@@ -567,11 +567,11 @@ tiup cluster audit
 Starting component `cluster`: /home/tidb/.tiup/components/cluster/v1.10.0/cluster audit
 ID      Time                       Command
 --      ----                       -------
-4BLhr0  2023-02-28T23:55:09+08:00  /home/tidb/.tiup/components/cluster/v1.11.3/cluster deploy test v6.1.5 /tmp/topology.yaml
-4BKWjF  2023-02-28T23:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.11.3/cluster deploy test v6.1.5 /tmp/topology.yaml
-4BKVwH  2023-02-28T23:02:08+08:00  /home/tidb/.tiup/components/cluster/v1.11.3/cluster deploy test v6.1.5 /tmp/topology.yaml
+4BLhr0  2023-02-28T23:55:09+08:00  /home/tidb/.tiup/components/cluster/v1.11.3/cluster deploy test v6.1.6 /tmp/topology.yaml
+4BKWjF  2023-02-28T23:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.11.3/cluster deploy test v6.1.6 /tmp/topology.yaml
+4BKVwH  2023-02-28T23:02:08+08:00  /home/tidb/.tiup/components/cluster/v1.11.3/cluster deploy test v6.1.6 /tmp/topology.yaml
 4BKKH1  2023-02-28T16:39:04+08:00  /home/tidb/.tiup/components/cluster/v1.11.3/cluster destroy test
-4BKKDx  2023-02-28T16:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.11.3/cluster deploy test v6.1.5 /tmp/topology.yaml
+4BKKDx  2023-02-28T16:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.11.3/cluster deploy test v6.1.6 /tmp/topology.yaml
 ```
 
 The first column is `audit-id`. To view the execution log of a certain command, pass the `audit-id` of a command as the flag as follows:
