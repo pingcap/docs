@@ -1027,9 +1027,17 @@ ERROR 8200 (HY000): Unsupported optimize partition
 
 ## Convert a partitioned table to a non-partitioned table
 
-Remove partitioning from an already partitioned table:
+To convert a partitioned table to a non-partitioned table, you can use the following statement, which removes the partitioning, copies all rows of the table, and recreates the indexes online for the table:
 
-- `ALTER TABLE members REMOVE PARTITIONING` which will alter a partitioned table to a non-partitioned table by copying all rows and recreate the indexes on-line.
+```sql
+ALTER TABLE <table_name> REMOVE PARTITIONING
+```
+
+For example, to convert the `members` partitioned table to the non-partitioned table, you can execute the following statement:
+
+```sql
+ALTER TABLE members REMOVE PARTITIONING
+```
 
 ## Partition an existing table
 
