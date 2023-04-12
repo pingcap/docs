@@ -751,7 +751,7 @@ This section gives the alert rules for the TiKV component.
 
 * Solution:
 
-    Check which kind of tasks has a higher value at `Worker pending tasks` under [Task dashboard](/grafana-tikv-dashboard.md#task). You can normally find a solution to the coprocessor tasks and the apply worker tasks from other metrics.
+    Check which kind of tasks has a higher value from the `Worker pending tasks` metric in the [**TiKV-Details** > **Task** dashboard](/grafana-tikv-dashboard.md#task). If it is a coprocessor task, you can refer to [`TiKV_coprocessor_request_wait_seconds`](#tikv_coprocessor_request_wait_seconds).
 
 #### `TiKV_low_space`
 
