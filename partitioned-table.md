@@ -1047,7 +1047,9 @@ To partition an existing non-partitioned table or modify the partition type of a
 ALTER TABLE <table_name> PARTITION BY <new partition definitions>
 ```
 
-Example:
+Examples:
+
+To convert the existing `members` table to a HASH partitioned table with 10 partitions, you can execute the following statement:
 
 ```sql
 ALTER TABLE members PARTITION BY HASH(id) PARTITIONS 10;
