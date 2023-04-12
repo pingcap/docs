@@ -1055,7 +1055,7 @@ To convert the existing `members` table to a HASH partitioned table with 10 part
 ALTER TABLE members PARTITION BY HASH(id) PARTITIONS 10;
 ```
 
-or
+To convert the existing `member_level` table to a RANGE partitioned table, you can execute the following statement:
 
 ```sql
 ALTER TABLE member_level PARTITION BY RANGE(level)
