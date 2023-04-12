@@ -1041,9 +1041,11 @@ ALTER TABLE members REMOVE PARTITIONING
 
 ## Partition an existing table
 
-Partition an existing table (regardless if it is already partitioned or not):
+To partition an existing non-partitioned table or modify the partition type of an existing partitioned table, you can use the following statement, which copies all rows and recreates the indexes online according to the new partition definitions:
 
-- `ALTER TABLE t PARTITION BY ...` which will alter the table to a partitioned table by copying all rows and recreate the indexes on-line according to the partitioning scheme.
+```sql
+ALTER TABLE <table_name> PARTITION BY <new partition definitions>
+```
 
 Example:
 
