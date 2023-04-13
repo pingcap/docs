@@ -39,7 +39,7 @@ By the automatic backup, you can back up the Serverless Tier cluster data every 
 
     - In **Backup Time**, schedule a start time for the daily cluster backup.
 
-        If you do not specify a preferred backup time, TiDB Cloud assigns a default backup time, which is 00:00 AM in the time zone of the region where the cluster is located.
+        If you do not specify a preferred backup time, TiDB Cloud assigns a default backup time, which is 2:00 AM in the time zone of the region where the cluster is located.
 
     - In **Backup Retention**, configure the minimum backup data retention period.
 
