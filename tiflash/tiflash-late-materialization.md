@@ -5,13 +5,13 @@ summary: Describe how to use the TiFlash late materialization feature to acceler
 
 # TiFlash Late Materialization
 
-> **Warning:**
+> **Note:**
 >
-> Currently, this is an experimental feature. The form and usage might be modified in future releases.
+> TiFlash late materialization is not usable under [Disaggregated Storage and Compute Architecture](/tiflash/tiflash-disaggregated-and-s3.md) and [Fast Scan mode](/tiflash/use-fastscan.md).
 
 This document describes how to use the TiFlash late materialization feature to accelerate queries in OLAP scenarios.
 
-By default, when receiving a query request, TiFlash reads all the data from the columns required by the query, and then filters and aggregates the data based on the query conditions. Late materialization is an optimization method that supports pushing down part of the filter conditions to the TableScan operator. That is, TiFlash first scans the column data related to the filter conditions that are pushed down, filters the rows that meet the condition, and then scans the other column data of these rows for further calculation, thereby reducing IO scans and computations of data processing.
+By default, when receiving a query request, TiFlash reads all the data from the columns required by the query, and then filters and aggregates the data based on the query conditions. Late materialization is an optimization method that supports pushing down part of the filter conditions to the TableScan operator. That is, TiFlash first scans the column data related to the filter conditions that are pushed down to TableScan, filters the rows that meet the condition, and then scans the other column data of these rows for further calculation, thereby reducing IO scans and computations of data processing.
 
 If you want to improve the performance of certain queries in OLAP scenarios, you can enable the TiFlash late materialization feature at the session level or global level. By modifying the value of the [`tidb_opt_enable_late_materialization`](/system-variables.md#tidb_opt_enable_late_materialization-new-in-v700) system variable, you can choose to enable or disable the TiFlash late materialization feature.
 
