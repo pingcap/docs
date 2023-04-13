@@ -73,13 +73,13 @@ Once the stack has been created, you can use the demo as follows:
     - Get all books
         - `curl https://<your-api-endpoint>/book`
     - Get a book by ID
-      - `curl https://<your-api-endpoint>/book/<book-id>`
+        - `curl https://<your-api-endpoint>/book/<book-id>`
     - Create a book
-      - `curl -X POST -H "Content-Type: application/json" -d '{ "title": "Book Title", "type": "Test", "publishAt": "2022-12-15T21:01:49.000Z", "stock": 123, "price": 12.34, "authors": "Test Test" }' https://  <your-api-endpoint>/book`
+        - `curl -X POST -H "Content-Type: application/json" -d '{ "title": "Book Title", "type": "Test", "publishAt": "2022-12-15T21:01:49.000Z", "stock": 123, "price": 12.34, "authors": "Test Test" }' https://  <your-api-endpoint>/book`
     - Update a book
-      - `curl -X PUT -H "Content-Type: application/json" -d '{ "title": "Book Title(updated)" }' https://<your-api-endpoint>/book/<book-id>`
+        - `curl -X PUT -H "Content-Type: application/json" -d '{ "title": "Book Title(updated)" }' https://<your-api-endpoint>/book/<book-id>`
     - Delete a book
-      - `curl -X DELETE https://<your-api-endpoint>/book/<book-id>`
+        - `curl -X DELETE https://<your-api-endpoint>/book/<book-id>`
 
 ## Cleaning up
 
