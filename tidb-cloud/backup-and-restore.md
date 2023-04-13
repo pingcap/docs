@@ -19,7 +19,7 @@ This document describes how to back up and restore your TiDB cluster data on TiD
 >
 > For [Serverless Tier Clusters](/tidb-cloud/select-cluster-tier.md#dedicated-tier)
 >
-> - It is important to note that Serverless Tier clusters only support in-place restoring from backups. When a restore is performed, tables in the `mysql` schema are also impacted, hence any changes made in user permission or system variables will be rolled back to the state when the backup was taken.
+> - It is important to note that Serverless Tier clusters only support in-place restoring from backups. When a restore is performed, tables in the `mysql` schema are also impacted, hence any changes made in user credentials and permissions or system variables will be rolled back to the state when the backup was taken.
 > - Manual backup is not yet supported at this time.
 > - PITR(Point-in-time Recovery) is not yet supported at this time.
 
@@ -145,7 +145,7 @@ To delete a running backup job, it is similar as [**Delete backup files**](#dele
 
 - It is recommended that you perform backup operations at cluster idle time to minimize the impact on business.
 - Do not run the manual backup while importing data, or during cluster scaling.
-- After you delete a cluster, the existing manual backup files will be retained until you manually delete them, or your account is closed. Automatic backup files will be retained for 7 days from the date of cluster deletion. You need to delete the backup files accordingly.
+- After you delete a cluster, the existing manual backup files will be retained until you manually delete them, or your account is closed. Automatic backup files will be retained for 31 days from the date of cluster deletion. You need to delete the backup files accordingly.
 
 ## Restore
 
