@@ -143,7 +143,7 @@ mysql> SELECT * FROM t1;
 5 rows in set (0.00 sec)
 ```
 
-```
+```sql
 mysql> SELECT AVG(s_quantity), COUNT(s_quantity) FROM stock TABLESAMPLE REGIONS();
 +-----------------+-------------------+
 | AVG(s_quantity) | COUNT(s_quantity) |
