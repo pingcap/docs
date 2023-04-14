@@ -443,7 +443,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
     The complete error message is `ERROR 8252 (HY000) : Exceeded resource group quota limitation`。
 
-    This error is returned when the attempted consumption exceeds the resource group limit. This error is usually caused by a single transaction that is too large or too many concurrent transactions. You need to adjust the transaction size via [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit) or reduce the number of concurrent clients.
+    This error is returned when the attempted consumption exceeds the resource group limit. This error is usually caused by a single transaction that is too large or too many concurrent transactions. You need to adjust the transaction size by using [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit) or reduce the number of concurrent clients.
 
 * Error Number: 9001
 
