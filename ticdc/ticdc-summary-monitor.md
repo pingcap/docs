@@ -100,6 +100,6 @@ The **Redo** panel displays data only when the Redo Log feature is enabled.
 ![TiCDC Summary Dashboard - Transaction Sink metrics](/media/ticdc/ticdc-summary-monitor-redo.png)
 
 - **Redo Write rows/s**: the number of rows written per second by the Redo module. When the Redo feature is enabled, if the latency of a replication task increases, you can observe whether there is a significant difference between this metric and the value of Puller Output event/s. If so, the increase in latency might be due to the insufficient writing capacity of the Redo module.
-- **Redo Write Byte/s**: the speed at which data is written per second by the Redo module.
+- **Redo Write byte/s**: the speed at which data is written per second by the Redo module.
 - **Redo flush log duration**: the time taken for the Redo module to flush data to the downstream. If this metric value is high, this operation might affect the replication speed.
 - **Redo flushall duration**: the total time that data changes stay in the Redo module.
