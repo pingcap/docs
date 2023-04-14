@@ -172,7 +172,7 @@ SELECT USER, JSON_EXTRACT(User_attributes, "$.resource_group") FROM mysql.user W
 1 row in set (0.02 sec)
 ```
 
-Unbind the user to a resource group, that is, set the resource group to which the user is bound to be empty. After canceling, the user will be bound to the `default` resource group.
+Unbind the user to a resource group, that is, set the resource group to which the user is bound to be empty. After unbinding, the user will be bound to the `default` resource group.
 
 ```sql
 ALTER USER 'newuser' RESOURCE GROUP ``;
