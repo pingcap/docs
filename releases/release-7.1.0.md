@@ -95,12 +95,6 @@ In v7.1.0-LTS, the key new features and improvements are as follows:
 
     更多信息，请参考[用户文档]()。
 
-* 优化统计信息收集的对象 [#issue](https://github.com/pingcap/tidb/issues/issue) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes) **tw:hfxsd**
-
-    在 v7.1.0 中，TiDB 在收集优化器统计信息时，将会忽略一部分特殊的组件和列类型，从而加快了统计信息收集的速度，减少统计信息收集所消耗的系统资源。在一些特定场景，避免了统计信息收集造成的系统稳定性问题。
-
-    更多信息，请参考[用户文档]()。
-
 ### Availability
 
 ### SQL
