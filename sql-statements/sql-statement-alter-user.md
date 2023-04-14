@@ -47,7 +47,13 @@ mysql> SHOW CREATE USER 'newuser';
 | CREATE USER 'newuser'@'%' IDENTIFIED WITH 'mysql_native_password' AS '*5806E04BBEE79E1899964C6A04D68BCA69B1A879' REQUIRE NONE PASSWORD EXPIRE DEFAULT ACCOUNT UNLOCK |
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 1 row in set (0.00 sec)
+```
 
+### Modify basic user information
+
+Change the password for user `newuser`:
+
+```
 mysql> ALTER USER 'newuser' IDENTIFIED BY 'newnewpassword';
 Query OK, 0 rows affected (0.02 sec)
 
@@ -59,6 +65,8 @@ mysql> SHOW CREATE USER 'newuser';
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 1 row in set (0.00 sec)
 ```
+
+Lock the user `newuser`:
 
 ```sql
 ALTER USER 'newuser' ACCOUNT LOCK;
@@ -136,6 +144,8 @@ ALTER USER 'newuser' PASSWORD REUSE INTERVAL 90 DAY;
 Query OK, 0 rows affected (0.02 sec)
 ```
 
+### Modify the resource group bound to the user
+
 Use `ALTER USER ... RESOURCE GROUP` to modify the resource group of the user `newuser` to `rg1`.
 
 ```sql
@@ -144,6 +154,37 @@ ALTER USER 'newuser' RESOURCE GROUP rg1;
 
 ```
 Query OK, 0 rows affected (0.02 sec)
+```
+
+View the resource group bound to the current user:
+
+```sql
+SELECT USER, JSON_EXTRACT(User_attributes, "$.resource_group") FROM mysql.user WHERE user = "newuser";
+```
+
+```
++---------+---------------------------------------------------+
+| USER    | JSON_EXTRACT(User_attributes, "$.resource_group") |
++---------+---------------------------------------------------+
+| newuser | "rg1"                                             |
++---------+---------------------------------------------------+
+1 row in set (0.02 sec)
+```
+
+Unbind the user to a resource group, that is, set the resource group to which the user is bound to be empty. After unbinding, the user will be bound to the `default` resource group.
+
+```sql
+ALTER USER 'newuser' RESOURCE GROUP ``;
+SELECT USER, JSON_EXTRACT(User_attributes, "$.resource_group") FROM mysql.user WHERE user = "newuser";
+```
+
+```
++---------+---------------------------------------------------+
+| USER    | JSON_EXTRACT(User_attributes, "$.resource_group") |
++---------+---------------------------------------------------+
+| newuser | ""                                                |
++---------+---------------------------------------------------+
+1 row in set (0.02 sec)
 ```
 
 ## See also
