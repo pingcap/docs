@@ -495,7 +495,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
     `ERROR 8250 (HY000) : Resource control feature is disabled. Run "SET GLOBAL tidb_enable_resource_control='on'" to enable the feature`
 
-    This error is returned when you try to use the `Resource Control` feature but the resource control feature is not enabled. You can enable the global variable [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660) to enable resource control.
+    This error is returned when you try to use the resource control feature but it is not enabled. You can turn on the global variable [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660) to enable resource control.
 
 * Error Number: 8251
 
