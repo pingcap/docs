@@ -34,9 +34,9 @@ This document walks you through the quickest way to get started with TiDB Cloud.
     To create a new Serverless Tier cluster on your own, take the following operations:
 
     1. Click **Create Cluster**.
-    2. On the **Create Cluster** page, **Serverless Tier** is selected by default. Update the default cluster name if necessary, select a target region of your cluster, and then click **Create**. Your Serverless Tier cluster will be created in approximately 30 seconds.
+    2. On the **Create Cluster** page, **Serverless** is selected by default. Select a target region of your cluster, update the default cluster name if necessary, and then click **Create**. Your Serverless Tier cluster will be created in approximately 30 seconds.
 
-4. Click the target cluster name to go to its overview page, and then click **Connect** in the upper-right corner. A connection dialog box is displayed.
+4. On the cluster overview page, and then click **Connect** in the upper-right corner. A connection dialog box is displayed.
 
 5. In the dialog, select your preferred connection method and operating system to get the corresponding connection string. This document uses MySQL client as an example.
 
