@@ -28,7 +28,7 @@ TiDB Cloud [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-
     - To try creating a new Serverless Tier cluster on your own, take the following operations:
 
         1. Click **Create Cluster**.
-        2. On the **Create Cluster** page, **Serverless Tier** is selected by default. Update the default cluster name if necessary, select a target region of your cluster, and then click **Create**. Your Serverless Tier cluster will be created in approximately 30 seconds.
+        2. On the **Create Cluster** page, **Serverless** is selected by default. Select a target region of your cluster, update the default cluster name if necessary, and then click **Create**. Your Serverless Tier cluster will be created in approximately 30 seconds.
 
 ## Step 2. Try AI-powered Chat2Query (beta)
 
