@@ -253,7 +253,7 @@ You can delete a migration job in any status.
 
 If you encounter any problems during the migration, see [Migration errors and solutions](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions).
 
-## Scale the migration job
+## Scale a migration job
 
 TiDB Cloud supports scaling up and down a migration job to meet your performance and cost requirements in different scenarios.
 
