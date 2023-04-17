@@ -1031,7 +1031,7 @@ ALTER TABLE example ADD PARTITION
 
 Unlike Range and List partitioning, `DROP PARTITION` is not supported for Hash and Key partitioning, but you can decrease the number of partitions with `COALESCE PARTITION` or delete all data from specific partitions with `TRUNCATE PARTITION`.
 
-Decreasing number of partitions by 1:
+Decrease the number of partitions for the `example` table by 1 (from 5 to 4):
 
 ```sql
 ALTER TABLE example COALESCE PARTITION 1;
