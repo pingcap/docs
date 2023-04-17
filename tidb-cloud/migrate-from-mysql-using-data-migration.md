@@ -269,7 +269,8 @@ When scaling a migration job, note the following:
 - You can only scale a migration job in the **Running** or **Paused** status.
 - TiDB Cloud does not support scaling a migration job during the full data export stage.
 - Scaling a migration job will restart the task. If the task does not have a primary key, duplicate data might be inserted.
-During scaling, do not purge the binary log of the source database; otherwise, the job might fail because it cannot get the continuous binary log position. 
+- During scaling, do not purge the binary log of the source database; otherwise, the job might fail because it cannot get the continuous binary log position. 
+
 ### Scaling procedure
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
