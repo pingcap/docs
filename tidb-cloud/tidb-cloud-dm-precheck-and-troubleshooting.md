@@ -68,6 +68,19 @@ This error means that the binlogs to be migrated have been cleaned up and can on
 
 Ensure that the binlogs required for incremental migration exist. It is recommended to configure `expire_logs_days` to extend the duration of binlogs. Do not use `purge binary log` to clean up binlogs if it's needed by some migration job.
 
+In AWS RDS, the interval for archiving binary logs is controlled by the parameter `binlog_expire_logs_seconds`. This parameter defines how long binary logs should be kept before they are automatically deleted if they are not backed up. By default, this parameter is set to 259200 seconds (3 days).
+
+If you need to increase the archiving interval for AWS RDS binlogs, you can do so as follows:
+
+1. Log in to the AWS Management Console and go to the RDS console.
+2. Select the RDS instance you want to change the settings for and click **Modify**.
+3. Find the **Database Options Group** section and select the database option group associated with the instance.
+4. On the **Parameter Group** page, find the `binlog_expire_logs_seconds` parameter and click **Edit**.
+5. Modify the value of the parameter to set the archiving interval you need (in seconds). For example, if you need to set it to 7 days, set it to `604800` seconds.
+6. Click **Apply** to save the changes and then restart the RDS instance to make the changes take effect.
+
+Note that increasing the archiving interval may cause the RDS instance to use more storage space because more storage space is required to store more binary logs. Therefore, before adjusting the archiving interval, it is recommended that you evaluate the storage space usage of the instance to ensure that there is enough space to store the binary logs.
+
 ### Error message: "Failed to connect to the source database using given parameters. Please make sure the source database is up and can be connected using the given parameters."
 
 This error means that the connection to the source database failed. Check whether the source database is started and can be connected to using the specified parameters. After confirming that the source database is available, you can try to recover the task by clicking **Restart**.
