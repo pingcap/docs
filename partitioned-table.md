@@ -1021,7 +1021,7 @@ Increase the number of partitions for the `example` table by 1 (from 2 to 3):
 ALTER TABLE example ADD PARTITION PARTITIONS 1;
 ```
 
-You can also specify partition options by adding partition definitions:
+You can also specify partition options by adding partition definitions. For example, you can use the following statement to increase the number of partitions from 3 to 5 and specify the names of the newly added partitions as `pExample4` and `pExample5`:
 
 ```sql
 ALTER TABLE example ADD PARTITION
