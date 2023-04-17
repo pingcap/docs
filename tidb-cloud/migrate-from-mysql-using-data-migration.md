@@ -255,14 +255,13 @@ If you encounter any problems during the migration, see [Migration errors and so
 
 ## Scale a migration job
 
-TiDB Cloud supports scaling up and down a migration job to meet your performance and cost requirements in different scenarios.
+TiDB Cloud supports scaling up and down a migration job specification to meet your performance and cost requirements in different scenarios.
 
-Different migration specifications have different performances. Your performance requirements might vary at different stages as well. For example, during a full data migration, you want the performance to be as fast as possible, so you choose a migration job with a large specification, for example 8 RCU. When the full migration is completed, the incremental migration does not require such a high performance, so you can scale down the job, for example, from 8 RCU to 2 RUC, to save cost.
+Different migration specifications have different performances. Your performance requirements might vary at different stages as well. For example, during a full data migration, you want the performance to be as fast as possible, so you choose a migration job with a large specification, for example 8 RCU. When the full migration is completed, the incremental migration does not require such a high performance, so you can scale down the job specification, for example, from 8 RCU to 2 RUC, to save cost.
 
 When scaling a migration job, note the following:
 
-- It takes about 5 minutes to scale a migration job.
-- Resource specifications are calculated and billed by minute.
+- It takes about 5 to 10 minutes to scale a migration job.
 - If the scaling fails, the job specification remains the same as before the scaling.
 
 ### Limitations
@@ -270,6 +269,7 @@ When scaling a migration job, note the following:
 - You can only scale a migration job in the **Running** or **Paused** status.
 - TiDB Cloud does not support scaling a migration job during the full data export stage.
 - Scaling a migration job will restart the task. If the task does not have a primary key, duplicate data might be inserted.
+- During scaling, do not purge the binary log of the source database or increase `expire_logs_days` of the upstream database temporarily; otherwise, the job might fail because it cannot get the continuous binary log position. 
 
 ### Scaling procedure
 
