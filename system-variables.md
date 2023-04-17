@@ -894,7 +894,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Range: `[0, 9223372036854775807]`
 - Unit: Rows
 - If the objects of the join operation belong to a subquery, the optimizer cannot estimate the size of the subquery result set. In this situation, the size is determined by the number of rows in the result set. If the estimated number of rows in the subquery is less than the value of this variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used.
-- This variable will be invalid after [`tidb_prefer_broadcast_join_by_exchange_data_size`](/system-variables.md#tidb_prefer_broadcast_join_by_exchange_data_size-new-in-v71) enabled.
+- This variable will not take effect after [`tidb_prefer_broadcast_join_by_exchange_data_size`](/system-variables.md#tidb_prefer_broadcast_join_by_exchange_data_size-new-in-v71) is enabled.
 
 ### tidb_broadcast_join_threshold_size <span class="version-mark">New in v5.0</span>
 
@@ -905,7 +905,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Range: `[0, 9223372036854775807]`
 - Unit: Bytes
 - If the table size is less than the value of the variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used.
-- This variable will be invalid after [`tidb_prefer_broadcast_join_by_exchange_data_size`](/system-variables.md#tidb_prefer_broadcast_join_by_exchange_data_size-new-in-v71) enabled.
+- This variable will not take effect after [`tidb_prefer_broadcast_join_by_exchange_data_size`](/system-variables.md#tidb_prefer_broadcast_join_by_exchange_data_size-new-in-v71) is enabled.
 
 ### tidb_build_stats_concurrency
 
@@ -3667,9 +3667,9 @@ SHOW WARNINGS;
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
-- 默认值：`OFF`
-- This variable is used to control whether to minimize the overhead of network transmission when selecting [MPP Hash Join algorithm](/tiflash/use-tiflash-mpp-mode.md#algorithm-support-for-the-mpp-mode). If this variable is enabled, TiDB will estimate the approximate size of the data to be exchanged by network when using `Broadcast Hash Join` and `Shuffled Hash Join`, then choose the one with the smaller size.
-- [`tidb_broadcast_join_threshold_count`](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50) and [`tidb_broadcast_join_threshold_size`](/system-variables.md#tidb_broadcast_join_threshold_size-new-in-v50) will be invalid after this variable enabled.
+- Default value: `OFF`
+- This variable controls whether to use the algorithm with the minimum overhead of network transmission when TiDB selects the [MPP Hash Join algorithm](/tiflash/use-tiflash-mpp-mode.md#algorithm-support-for-the-mpp-mode). If this variable is enabled, TiDB estimates the size of the data to be exchanged in the network using `Broadcast Hash Join` and `Shuffled Hash Join` respectively, and then chooses the one with the smaller size.
+- [`tidb_broadcast_join_threshold_count`](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50) and [`tidb_broadcast_join_threshold_size`](/system-variables.md#tidb_broadcast_join_threshold_size-new-in-v50) will not take effect after this variable enabled.
 
 ### tidb_prepared_plan_cache_memory_guard_ratio <span class="version-mark">New in v6.1.0</span>
 
