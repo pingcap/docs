@@ -74,12 +74,7 @@ TiFlash disaggregated storage and compute architecture is suitable for cost-effe
         }
     }
     ```
-
-## Usage
-
-By default, TiUP deploys TiFlash in the coupled storage and computation architecture. If you need to deploy TiFlash in the disaggregated storage and compute architecture, take the following steps for manual configuration:
-
-1. Make sure that there are no TiFlash nodes in the TiDB cluster. If any, set the TiFlash replica count of all tables to `0` and then remove all TiFlash nodes. For example:
+3. Make sure that there are no TiFlash nodes in the TiDB cluster. If any, set the TiFlash replica count of all tables to `0` and then remove all TiFlash nodes. For example:
 
     ```sql
     SELECT * FROM INFORMATION_SCHEMA.TIFLASH_REPLICA; # Query all tables with TiFlash replicas
@@ -92,7 +87,11 @@ By default, TiUP deploys TiFlash in the coupled storage and computation architec
     tiup cluster prune mycluster              # Remove all TiFlash nodes in the Tombstone state
     ```
 
-2. Prepare a TiFlash topology configuration file, such as `scale-out.topo.yaml`, with the following configuration:
+## Usage
+
+By default, TiUP deploys TiFlash in the coupled storage and computation architecture. If you need to deploy TiFlash in the disaggregated storage and compute architecture, take the following steps for manual configuration:
+
+1. Prepare a TiFlash topology configuration file, such as `scale-out.topo.yaml`, with the following configuration:
 
     ```yaml
     tiflash_servers:
@@ -156,7 +155,7 @@ By default, TiUP deploys TiFlash in the coupled storage and computation architec
 
     * `storage.s3.endpoint` supports connecting to S3 using the `http` or `https` mode, and you can set the mode by directly modifying the URL. For example, `https://s3.{region}.amazonaws.com`.
 
-3. Add TiFlash nodes and reset the number of TiFlash replicas:
+2. Add TiFlash nodes and reset the number of TiFlash replicas:
 
     ```shell
     tiup cluster scale-out mycluster ./scale-out.topo.yaml
@@ -166,7 +165,7 @@ By default, TiUP deploys TiFlash in the coupled storage and computation architec
     ALTER TABLE table_name SET TIFLASH REPLICA 1;
     ```
 
-4. Modify the TiDB configuration to query TiFlash using the disaggregated storage and compute architecture.
+3. Modify the TiDB configuration to query TiFlash using the disaggregated storage and compute architecture.
 
     1. Open the TiDB configuration file in edit mode:
 
