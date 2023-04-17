@@ -1039,8 +1039,7 @@ ALTER TABLE example COALESCE PARTITION 1;
 
 > **Notes:**
 > 
-> - Changing the number of partitions for Hash or Key partitioned tables will do an online reorganization and copy all data to the new number of partitions.
-> - After changing the number of partitions, the statistics need to be updated.
+> The process of changing the number of partitions for Hash or Key partitioned tables reorganizes the tables by copying all data to the new number of partitions. Therefore, after changing the number of partitions for a Hash or Key partitioned table, you will get the following warning about the outdated statistics. In this case, you can use the [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) statement to update the statistics.
 
 ```sql
 +---------+------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
