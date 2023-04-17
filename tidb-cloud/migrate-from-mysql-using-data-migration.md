@@ -252,3 +252,31 @@ If a migration job has failed, you can resume it after solving the problem.
 You can delete a migration job in any status.
 
 If you encounter any problems during the migration, see [Migration errors and solutions](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions).
+
+## Scale the migration job
+
+TiDB Cloud supports scaling up and down a migration job to meet your performance and cost requirements in different scenarios.
+
+Different migration specifications have different performances. Your performance requirements might vary at different stages as well. For example, during a full data migration, you want the performance to be as fast as possible, so you choose a migration job with a large specification, for example 8 RCU. When the full migration is completed, the incremental migration does not require such a high performance, so you can scale down the job, for example, from 8 RCU to 2 RUC, to save cost.
+
+When scaling a migration job, note the following:
+
+- It takes about 5 minutes to scale a migration job.
+- Resource specifications are calculated and billed by minute.
+- If the scaling fails, the job specification remains the same as before the scaling.
+
+### Limitations
+
+- You can only scale a migration job in the **Running** or **Paused** status.
+- TiDB Cloud does not support scaling a migration job during the full data export stage.
+- Scaling a migration job will restart the task. If the task does not have a primary key, duplicate data might be inserted.
+
+### Scaling procedure
+
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+
+2. Click the name of your target cluster to go to its overview page, and then click **Data Migration** in the left navigation pane.
+
+3. On the **Migration Job Details** page, locate the migration job you want to scale. In the **Action** column, click **...**, and then click **Scale Up/Down**.
+
+4. On the **Scale Up/Down** window, select the new specification you want to use, and then click **Submit**. You can view the new price of the specification at the bottom of the window.
