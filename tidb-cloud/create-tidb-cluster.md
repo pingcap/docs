@@ -121,7 +121,7 @@ To create a Dedicated Tier cluster, take the following steps:
         >
         > When setting the project CIDR, avoid any conflicts with the CIDR of the VPC where your application is located. You cannot modify your project CIDR once it is set.
 
-4. Confirm the cluster and billing information on the right.
+4. Confirm the cluster and billing information on the right side.
 
 5. If you have not added a payment method, click **Add Credit Card** in the lower-right corner.
 
