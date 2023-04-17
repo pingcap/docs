@@ -110,9 +110,9 @@ To view this page, perform the following steps:
 
 ## Discounts
 
-If you are the owner or billing administrator of your organization, you can view the discount information of TiDB Cloud. Otherwise, skip this section.
+If you are the owner or billing administrator of your organization, you can view the discount information of TiDB Cloud on the **Discounts** page. Otherwise, skip this section.
 
-The detailed information of your discounts is available on the **Discounts** page, including all discounts that you have received, the status, the discount percentage, and the discount start and end date.
+The discount information includes all discounts that you have received, the status, the discount percentage, and the discount start and end date.
 
 To view this page, perform the following steps:
 
