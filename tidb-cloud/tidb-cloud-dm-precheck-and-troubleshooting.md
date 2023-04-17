@@ -68,7 +68,7 @@ This error means that the binlogs to be migrated have been cleaned up and can on
 
 Ensure that the binlogs required for incremental migration exist. It is recommended to configure `expire_logs_days` to extend the duration of binlogs. Do not use `purge binary log` to clean up binlogs if it's needed by some migration job.
 
-In Amazon RDS, the interval for archiving binary logs is controlled by the parameter `binlog_expire_logs_seconds`. This parameter defines how long binary logs should be kept before they are automatically deleted if they are not backed up. By default, this parameter is set to 259200 seconds (3 days).
+In Amazon RDS, the interval for archiving binary logs is controlled by the parameter `binlog_expire_logs_seconds`. This parameter defines how long binary logs should be kept before they are automatically deleted if they are not backed up. By default, this parameter is set to `259200` seconds (3 days).
 
 If you need to increase the archiving interval for AWS RDS binlogs, you can do so as follows:
 
