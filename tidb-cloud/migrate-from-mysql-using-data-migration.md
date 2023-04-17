@@ -277,6 +277,6 @@ When scaling a migration job, note the following:
 
 2. Click the name of your target cluster to go to its overview page, and then click **Data Migration** in the left navigation pane.
 
-3. On the **Migration Job Details** page, locate the migration job you want to scale. In the **Action** column, click **Scale Up/Down**.
+3. On the **Data Migration** page, locate the migration job you want to scale. In the **Action** column, click **Scale Up/Down**.
 
 4. On the **Scale Up/Down** window, select the new specification you want to use, and then click **Submit**. You can view the new price of the specification at the bottom of the window.
