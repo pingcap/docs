@@ -42,7 +42,7 @@ With the cached table feature, TiDB loads the data of an entire table into the m
 
 ### Coalesce Partition
 
-Coalesce partition is a way of decreasing the number of partitions in a Hash or Key partitioned table, see [Manage Hash and Key partitions](/partitioned-table.md#manage-hash-and-key-partitions).
+Coalesce Partition is a way of decreasing the number of partitions in a Hash or Key partitioned table. For more information, see [Manage Hash and Key partitions](/partitioned-table.md#manage-hash-and-key-partitions).
 
 ### Continuous Profiling
 
