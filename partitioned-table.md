@@ -822,8 +822,8 @@ For `RANGE`, `RANGE COLUMNS`, `LIST`, and `LIST COLUMNS` partitioned tables, you
 
 For `HASH` and `KEY` partitioned tables, you can manage the partitions as follows:
 
-- Decrease the number of partitions `ALTER TABLE <table name> COALESCE PARTITION <number of partitions to decrease by>`. This will copy the whole table to the new number of partitions online.
-- Increase the number of partitions `ALTER TABLE <table name> ADD PARTITION <number of partitions to increase by | (additional partition definitions)>`. This will copy the whole table to the new number of partitions online.
+- Decrease the number of partitions using the `ALTER TABLE <table name> COALESCE PARTITION <number of partitions to decrease by>` statement. This operation reorganizes the table by copying the whole table to the new number of partitions online.
+- Increase the number of partitions using the `ALTER TABLE <table name> ADD PARTITION <number of partitions to increase by | (additional partition definitions)>` statement. This operation reorganizes the table by copying the whole table to the new number of partitions online.
 - Remove all data from specified partitions using the `ALTER TABLE <table name> TRUNCATE PARTITION <list of partitions>` statement. The logic of `TRUNCATE PARTITION` is similar to [`TRUNCATE TABLE`](/sql-statements/sql-statement-truncate.md) but it is for partitions.
 
 `EXCHANGE PARTITION` works by swapping a partition and a non-partitioned table, similar to how renaming a table like `RENAME TABLE t1 TO t1_tmp, t2 TO t1, t1_tmp TO t2` works.
