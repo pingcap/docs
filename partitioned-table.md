@@ -991,7 +991,7 @@ When reorganizing partitions, you need to note the following key points:
     ERROR 1526 (HY000): Table has no partition for value 6
     ```
 
-- After reorganize partition, the statistics needs to be updated
+- After partitions are reorganized, the statistics of the corresponding partitions are outdated, so you get the following warning. In this case, you can use the [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) statement to update the statistics.
 
 ```sql
 +---------+------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
