@@ -1007,7 +1007,12 @@ When reorganizing partitions, you need to note the following key points:
 This section uses the partitioned table created by the following SQL statement as examples to show you how to manage Hash partitions. For Key partitions, you can use the same management statements as well. 
 
 ```sql
-CREATE TABLE example (id int primary key, data varchar(1024)) PARTITION BY HASH(id) PARTITIONS 2;
+CREATE TABLE example (
+  id INT PRIMARY KEY,
+  data VARCHAR(1024)
+)  
+PARTITION BY HASH(id) 
+PARTITIONS 2;  
 ```
 
 Increase the number of partitions by 1:
