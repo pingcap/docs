@@ -2559,16 +2559,12 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 ### tidb_load_based_replica_read_threshold <span class="version-mark">New in v7.0.0</span>
 
-> **Warning:**
->
-> The feature controlled by this variable is not fully functional in the current TiDB version. Do not change the default value.
-
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Default value: `"0s"`
 - Range: `[0s, 1h]`
 - Type: String
-- This variable is used to set the threshold for triggering load-based replica read. When the estimated queue time of the leader node exceeds the threshold, TiDB prioritizes reading data from the follower node. The format is a time duration, such as `"100ms"` or `"1s"`.
+- This variable is used to set the threshold for triggering load-based replica read. When the estimated queue time of the leader node exceeds the threshold, TiDB prioritizes reading data from the follower node. The format is a time duration, such as `"100ms"` or `"1s"`. For more details, see [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md#scatter-read-hotspots).
 
 ### tidb_log_file_max_days <span class="version-mark">New in v5.3.0</span>
 
