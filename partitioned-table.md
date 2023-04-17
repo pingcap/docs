@@ -1015,7 +1015,7 @@ PARTITION BY HASH(id)
 PARTITIONS 2;  
 ```
 
-Increase the number of partitions by 1:
+Increase the number of partitions for the `example` table by 1 (from 2 to 3):
 
 ```sql
 ALTER TABLE example ADD PARTITION PARTITIONS 1;
