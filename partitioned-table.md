@@ -1004,7 +1004,7 @@ When reorganizing partitions, you need to note the following key points:
 
 ### Manage Hash and Key partitions
 
-This section uses the partitioned tables created by the following SQL statements as examples to show you how to manage Hash and Key partitions.
+This section uses the partitioned table created by the following SQL statement as examples to show you how to manage Hash partitions. For Key partitions, you can use the same management statements as well. 
 
 ```sql
 CREATE TABLE example (id int primary key, data varchar(1024)) PARTITION BY HASH(id) PARTITIONS 2;
