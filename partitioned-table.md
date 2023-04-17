@@ -1050,7 +1050,7 @@ ALTER TABLE example COALESCE PARTITION 1;
 1 row in set (0.00 sec)
 ```
 
-Result:
+To better understand how the `example` table is organized now, you can show the SQL statement that is used to recreate the `example` table as follows:
 ```sql
 SHOW CREATE TABLE\G
 ```
