@@ -75,11 +75,11 @@ In v7.1.0-LTS, the key new features and improvements are as follows:
 
     更多信息，请参考[用户文档](/tidb-resource-control.md)。
 
-* 支持 [Fast Online DDL](/system-variables.md#tidb_ddl_enable_fast_reorg-从-v630-版本开始引入) 的检查点机制，提升容错性和自动恢复能力 [#issue](https://github.com/pingcap/tidb/issues/issue) @[tangenta](https://github.com/tangenta) **tw:ran-huang**
+* Support the checkpoint mechanism for [Fast Online DDL](/system-variables.md#tidb_ddl_enable_fast_reorg-introduced-since-v630) to improve fault tolerance and automatic recovery capability [#issue](https://github.com/pingcap/tidb/issues/issue) @[tangenta](https://github.com/tangenta)
 
-    TiDB v7.1.0 版本引入 [Fast Online DDL](/system-variables.md#tidb_ddl_enable_fast_reorg-从-v630-版本开始引入) 的检查点机制，可以大幅提升 [Fast Online DDL](/system-variables.md#tidb_ddl_enable_fast_reorg-从-v630-版本开始引入) 的容错性和自动恢复能力。即使在 TiDB DDL Owner 切换的情况下，也能够通过周期性记录并同步 DDL 进度，让新的 TiDB DDL Owner 仍能以 [Fast Online DDL](/system-variables.md#tidb_ddl_enable_fast_reorg-从-v630-版本开始引入) 方式执行切换前的 DDL 语句，无需手动取消和重新执行 DDL 语句，从而让 DDL 执行更加稳定高效。
+    TiDB v7.1.0 introduces a checkpoint mechanism for [Fast Online DDL](/system-variables.md#tidb_ddl_enable_fast_reorg-introduced-since-v630), whichs significantly improves the fault tolerance and automatic recovery capability of Fast Online DDL. Even in the case of TiDB DDL owner switching, TiDB can still periodically record and synchronize the progress of DDL statements, allowing the new TiDB DDL owner to execute the ongoing DDL statements in Fast Online DDL mode without manually canceling and re-executing the statements. The checkpoint mechanism makes the DDL execution more stable and efficient.
 
-    更多信息，请参考[用户文档](/ddl-introduction.md)。
+    For more information, see [documentation](/ddl-introduction.md).
 
 * BR 备份恢复工具支持断点恢复 [#issue](https://github.com/pingcap/tidb/issues/issue) @[Leavrth](https://github.com/Leavrth) **tw:Oreoxmt**
 
@@ -107,13 +107,13 @@ In v7.1.0-LTS, the key new features and improvements are as follows:
 
     更多信息，请参考[用户文档](/tiflash/tiflash-results-materialization.md)。
 
-* MySQL 兼容的多值索引 (Multi-Valued Index) GA [#39592](https://github.com/pingcap/tidb/issues/39592) @[xiongjiwei](https://github.com/xiongjiwei) @[qw4990](https://github.com/qw4990) @[YangKeao](https://github.com/YangKeao) **tw:ran-huang**
+* MySQL-compatible multi-valued index becomes generally available (GA) [#39592](https://github.com/pingcap/tidb/issues/39592) @[xiongjiwei](https://github.com/xiongjiwei) @[qw4990](https://github.com/qw4990) @[YangKeao](https://github.com/YangKeao)
 
-    过滤 JSON 列中某个数组的值是一个常见的操作，但普通索引起不到加速作用。在数组上创建多值索引能够大幅提升过滤的性能。如果 JSON 列中的某个数组上存在多值索引，那么函数 `MEMBER OF()`、`JSON_CONTAINS()`、`JSON_OVERLAPS()` 的检索条件可以利用多值索引过滤，从而减少大量的 I/O 消耗，提升执行速度。
+    Filtering the values of an array in a JSON column is a common operation, but normal indexes cannot help speed up such an operation. Creating a multi-valued index on an array can greatly improve filtering performance. If an array in the JSON column has a multi-valued index, you can use the multi-value index to filter the retrieval conditions with MEMBER OF(), JSON_CONTAINS(), JSON_OVERLAPS() functions, thereby reducing much I/O consumption and improving operation speed.
 
-    在 v7.1.0 中，TiDB 多值索引 (Multi-Valued Index) GA，支持更完整的数据类型，并与 TiDB 的工具链兼容。用户可以在生产环境利用“多值索引”加速对 JSON 数组的检索操作。
+    In v7.1.0, the multi-valued index becomes a generally available (GA) feature. It supports more complete data types and is compatible with TiDB tools. You can use the multi-valued indexes to speed up the search operations on JSON arrays in production environments.
 
-    更多信息，请参考[用户文档](/sql-statements/sql-statement-create-index.md#多值索引)
+    For more information, see [documentation](/sql-statements/sql-statement-create-index.md#multi-valued-index).
 
 * 支持完善的分区管理 [#42728](https://github.com/pingcap/tidb/issues/42728) @[mjonss](https://github.com/mjonss) **tw:qiancai**
 
@@ -147,33 +147,34 @@ In v7.1.0-LTS, the key new features and improvements are as follows:
 
     更多信息，请参考[用户文档](https://github.com/pingcap/docs-cn/pull/13676)。
 
-* 生成列 (Generated Columns) GA [#issue号](链接) @[bb7133](https://github.com/bb7133) **tw:ran-huang**
+* Generated columns become generally available (GA) [#issue号](链接) @[bb7133](https://github.com/bb7133) **tw:ran-huang**
 
-    生成列 (Generated Columns) 是 MySQL 数据库很有价值的一个功能。在创建表时定义一列的值由表中其他列的值计算而来，而不是由用户显式插入或更新，它可以是虚拟列 (Virtual Column) 或存储列(Stored Column)。TiDB 在早期版本就提供了 MySQL 兼容的生成列，在 v7.1.0 中将这个功能 GA。
+    Generated columns are a very valuable feature in MySQL. When creating a table, you can define that the value of a column is calculated from the values of other columns in the table, rather than being explicitly inserted or updated by the user. This generated column can be either a virtual column or a stored column. TiDB has provided generated columns compatible with MySQL since earlier versions, and this feature is officially GA in v7.1.0.
 
-    生成列提升了 TiDB 对 MySQL 的兼容性，方便用户从 MySQL 平滑迁移，同时也简化数据维护的复杂度、增强数据的一致性、提高查询效率。
+    Using generated columns can improve TiDB's compatibility with MySQL, simplifying the process of migrating from MySQL. It also reduces data maintenance complexity, improves data consistency and query efficiency.
 
-    更多信息，请参考[用户文档](/generated-columns.md)。
+    For more information, see [documentation](/generated-columns.md).
 
 ### DB operations
 
-* DDL 任务支持暂停和恢复操作 [#issue号](链接) @[godouxm](https://github.com/godouxm) **tw:ran-huang**
+* DDL tasks support pause and resume operations [#issue number](link) @[godouxm](https://github.com/godouxm) **tw:ran-huang**
 
-    TiDB v7.1.0 之前的版本中，当 DDL 任务执行期间遇到业务高峰时间点时，为了减少对业务的影响，用户只能手动取消 DDL 任务。为了减轻 DDL 操作对业务负载的影响，TiDB v7.1.0 引入了 DDL 任务的暂停和恢复操作，用户可以在高峰时间点暂停 DDL 任务，等到业务高峰时间结束后再恢复 DDL 任务，从而避免了对业务的影响。
+    Prior to TiDB v7.1.0, when a DDL task encountered a business peak period during execution, you could only manually cancel the DDL task to reduce its impact on the business. To mitigate the impact of DDL operations on application workloads, in v7.1.0, TiDB introduces pause and resume operations for DDL tasks. These operations let you pause DDL tasks during peak periods and resume them after the peak ends, thus avoiding any impact on your business.
 
-    例如，可以通过如下 [`ADMIN PAUSE DDL JOBS`](/sql-statements/sql-statement-admin-pause-ddl.md) 或 [`ADMIN RESUME DDL JOBS`](/sql-statements/sql-statement-admin-resume-ddl.md) 子句暂停或者恢复多个 DDL 任务：
+    For example, you can pause and resume multiple DDL tasks using [`ADMIN PAUSE DDL JOBS`](/sql-statements/sql-statement-admin-pause-ddl.md) or [`ADMIN RESUME DDL JOBS`](/sql-statements/sql-statement-admin-resume-ddl.md):
 
     ```sql
-    SQL> admin pause ddl jobs 1,2;
-
-    SQL> admin resume ddl jobs 1,2;
+    ADMIN PAUSE ddl jobs 1,2;
+    ADMIN RESUME ddl jobs 1,2;
     ```
 
-    更多信息，请参考 [`ADMIN PAUSE DDL JOBS`](/sql-statements/sql-statement-admin-pause-ddl.md) 和 [`ADMIN RESUME DDL JOBS`](/sql-statements/sql-statement-admin-resume-ddl.md)。
+    For more information, see [`ADMIN PAUSE DDL JOBS`](/sql-statements/sql-statement-admin-pause-ddl.md) and [`ADMIN RESUME DDL JOBS`](/sql-statements/sql-statement-admin-resume-ddl.md).
 
-* 无需取消 DDL 的平滑集群升级功能 [#issue号](链接) @[zimulala](https://github.com/zimulala) @[hawkingrei](https://github.com/hawkingrei) **tw:ran-huang**
+* Support smooth cluster upgrade without canceling DDL operations [#issue number](link) @[zimulala](https://github.com/zimulala) @[hawkingrei](https://github.com/hawkingrei)
 
-    TiDB v7.1.0 之前的版本在升级集群时需要先手动取消正在运行或排队的 DDL 任务，在升级完毕后再手动添加这些任务。为了让用户享受更加平滑的升级体验，TiDB v7.1.0 引入了自动暂停和恢复 DDL 任务的功能。从 v7.1.0 版本开始，用户可以在不需要手动取消 DDL 任务的情况下升级集群。系统会自动暂停正在执行或排队的 DDL 任务，等待整个集群完成滚动升级后再自动恢复这些任务，让用户可以更加轻松地升级 TiDB 集群。
+    Before TiDB v7.1.0, to upgrade a cluster, you must manually cancel the running or queued DDL tasks and then add them back after the upgrade is completed. 
+
+    To offer a smoother upgrade experience, TiDB v7.1.0 introduces automatic pausing and resuming of DDL tasks. Starting from v7.1.0, you can upgrade your clusters without manually canceling DDL tasks. TiDB will automatically pause any running or queued DDL tasks before the upgrade and resume these tasks after the cluster has completed rolling upgrade, making it easier for you to upgrade your TiDB clusters.
 
 ### Data migration
 
@@ -201,11 +202,9 @@ In v7.1.0-LTS, the key new features and improvements are as follows:
 
     更多信息，请参考[用户文档](/ticdc/ticdc-integrity-check.md)。
 
-* TiCDC 优化 DDL 同步操作 [#8686](https://github.com/pingcap/tiflow/issues/8686) @[nongfushanquan](https://github.com/nongfushanquan) **tw:ran-huang**
+* TiCDC Optimizes DDL replication operations [#8686](https://github.com/pingcap/tiflow/issues/8686) @[nongfushanquan](https://github.com/nongfushanquan)
 
-   在 v7.1.0 版本之前，当用户在一个大表上运行需要影响所有行的 DDL 操作，例如添加 / 删除列时，TiCDC 的同步延迟会显著增加。从 v7.1.0 版本开始，TiCDC 对于这种情况进行了优化，将同步延迟降低到不到 10 秒，以减轻 DDL 操作对下游延迟的影响。
-
-    更多信息，请参考[用户文档](链接)。
+    Prior to v7.1.0, when you performed a DDL operation that affected all rows on a large table (such as adding or deleting a column), the replication delay of TiCDC would significantly increase. Starting from v7.1.0, TiCDC optimizes this issue and reduces the replication delay to less than 10 seconds. This optimization mitigates the impact of DDL operations on downstream latency.
 
 * Lightning local backend (physical import mode) 支持在导入数据之前检测冲突的记录，并支持通过 insert ignore 和 replace 解决导入过程中的冲突记录 (实验特性) [#41629](https://github.com/pingcap/tidb/issues/41629) @[gozssky](https://github.com/gozssky) **tw:hfxsd**
 
