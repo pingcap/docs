@@ -8,6 +8,28 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2023.
 
+## April 18, 2023
+
+**General changes**
+
+- Support scaling up or down [Data Migration job specifications](/tidb-cloud/tidb-cloud-billing-dm.md#specifications-for-data-migration) for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters.
+
+    With this feature, you can improve migration performance by scaling up specifications or reduce costs by scaling down specifications.
+
+    For more information, see [Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md#scale-a-migration-job-specification).
+
+**Console changes**
+
+- Revamp the UI to make [cluster creation](https://tidbcloud.com/console/clusters/create-cluster) experience more user-friendly, enabling you to create and configure clusters with just a few clicks.
+
+    The new design focuses on simplicity, reducing visual clutter, and providing clear instructions. After clicking **Create** on the cluster creation page, you will be directed to the cluster overview page without having to wait for the cluster creation to be completed.
+
+    For more information, see [Create a cluster](/tidb-cloud/create-tidb-cluster.md).
+
+- Introduce the **Discounts** tab on the **Billing** page to show the discount information for organization owners and billing administrators.
+
+    For more information, see [Discounts](/tidb-cloud/tidb-cloud-billing.md#discounts).
+
 ## April 11, 2023
 
 **General changes**
