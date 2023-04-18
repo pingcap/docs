@@ -548,13 +548,13 @@ Configuration items related to performance.
 + Default value: `1000`
 + Currently, the valid value range is `[1, 100000]`.
 
-### `lite-init-stats` <span class="version-mark">New in v5.4.0 v7.1.0</span>
+### `lite-init-stats` <span class="version-mark">New in v7.1.0</span>
 
 > **Warning:**
 >
 > This variable is an experimental feature. It is not recommended to use it in production environments. If you find a bug, you can file an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
-+ Controls whether TiDB is initialized with lightweight statistics at startup.
++ Controls whether TiDB is initialized with lightweight statistics upon startup.
 + Default value: false
 
 ## opentracing
