@@ -991,7 +991,7 @@ When reorganizing partitions, you need to note the following key points:
     ERROR 1526 (HY000): Table has no partition for value 6
     ```
 
-- After partitions are reorganized, the statistics of the corresponding partitions are outdated, so you get the following warning. In this case, you can use the [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) statement to update the statistics.
+- After partitions are reorganized, the statistics of the corresponding partitions are outdated, so you will get the following warning. In this case, you can use the [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) statement to update the statistics.
 
 ```sql
 +---------+------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -1051,6 +1051,7 @@ ALTER TABLE example COALESCE PARTITION 1;
 ```
 
 To better understand how the `example` table is organized now, you can show the SQL statement that is used to recreate the `example` table as follows:
+
 ```sql
 SHOW CREATE TABLE\G
 ```
