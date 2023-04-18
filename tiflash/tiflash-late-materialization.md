@@ -7,7 +7,7 @@ summary: Describe how to use the TiFlash late materialization feature to acceler
 
 > **Note:**
 >
-> TiFlash late materialization does not take effect in the [disaggregated storage and compute architecture](/tiflash/tiflash-disaggregated-and-s3.md) and [fast scan mode](/tiflash/use-fastscan.md).
+> TiFlash late materialization does not take effect in the [fast scan mode](/tiflash/use-fastscan.md).
 
 This document describes how to use the TiFlash late materialization feature to accelerate queries in OLAP scenarios.
 
