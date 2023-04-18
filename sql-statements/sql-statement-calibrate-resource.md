@@ -41,6 +41,14 @@ WorkloadOption ::=
 
 ```
 
+## Privileges
+
+To execute this command, you need the following configuration and privileges:
+
+- You have enabled [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660).
+- You have `SUPER` or `RESOURCE_GROUP_ADMIN` privilege.
+- You have the `SELECT` privilege for all tables in the `METRICS_SCHEMA` schema.
+
 ## Examples
 
 Specify the start time `START_TIME` and the time window `DURATION` to view the RU capacity according to the actual workload.
