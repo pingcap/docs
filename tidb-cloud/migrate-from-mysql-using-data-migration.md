@@ -253,22 +253,22 @@ You can delete a migration job in any status.
 
 If you encounter any problems during the migration, see [Migration errors and solutions](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions).
 
-## Scale a migration job
+## Scale a migration job specification
 
 TiDB Cloud supports scaling up and down a migration job specification to meet your performance and cost requirements in different scenarios.
 
 Different migration specifications have different performances. Your performance requirements might vary at different stages as well. For example, during a full data migration, you want the performance to be as fast as possible, so you choose a migration job with a large specification, for example 8 RCU. When the full migration is completed, the incremental migration does not require such a high performance, so you can scale down the job specification, for example, from 8 RCU to 2 RUC, to save cost.
 
-When scaling a migration job, note the following:
+When scaling a migration job specification, note the following:
 
-- It takes about 5 to 10 minutes to scale a migration job.
+- It takes about 5 to 10 minutes to scale a migration job specification.
 - If the scaling fails, the job specification remains the same as before the scaling.
 
 ### Limitations
 
-- You can only scale a migration job in the **Running** or **Paused** status.
-- TiDB Cloud does not support scaling a migration job during the full data export stage.
-- Scaling a migration job will restart the task. If the task does not have a primary key, duplicate data might be inserted.
+- You can only scale a migration job specification in the **Running** or **Paused** status.
+- TiDB Cloud does not support scaling a migration job specification during the full data export stage.
+- Scaling a migration job specification will restart the task. If the task does not have a primary key, duplicate data might be inserted.
 - During scaling, do not purge the binary log of the source database or increase `expire_logs_days` of the upstream database temporarily; otherwise, the job might fail because it cannot get the continuous binary log position. 
 
 ### Scaling procedure
