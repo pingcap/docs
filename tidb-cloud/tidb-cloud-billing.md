@@ -108,6 +108,23 @@ To view this page, perform the following steps:
 > - If all your credits become expired before you add a payment method, you cannot create a new cluster. After 3 days, all your existing clusters will be recycled. After 7 days, all your backups will be recycled. To resume the process, you can add a payment method.
 > - If all your credits become expired after you add a payment method, your PoC process goes on, and fees are deducted from your payment method.
 
+## Discounts
+
+If you are the owner or billing administrator of your organization, you can view the discount information of TiDB Cloud on the **Discounts** page. Otherwise, skip this section.
+
+The discount information includes all discounts that you have received, the status, the discount percentage, and the discount start and end date.
+
+To view this page, perform the following steps:
+
+1. Click <MDSvgIcon name="icon-top-account-settings" /> **Account** in the upper-right corner of the TiDB Cloud console.
+
+    > **Note:**
+    >
+    > If you are in multiple organizations, select **Switch Organization** and switch your account to the target organization.
+
+2. Click **Billing**.
+3. Click **Discounts**. The discount details page is displayed.
+
 ## Payment method
 
 If you are the owner or billing administrator of your organization, you can manage the payment information of TiDB Cloud. Otherwise, skip this section.
