@@ -11,7 +11,7 @@ The `CALIBRATE RESOURCE` statement is used to estimate and output the ['Request 
     - The time window ranges from 10 minutes to 24 hours.
     - In the specified time window, if the CPU utilization of TiDB and TiKV is too low, you cannot estimate the capacity.
 
-- Method 2: specify `WORKLOAD` to view the RU capacity. The default value is TPCC. The following options are currently supported:
+- Method 2: specify `WORKLOAD` to view the RU capacity. The default value is `TPCC`. The following options are currently supported:
 
     - OLTP_READ_WRITE
     - OLTP_READ_ONLY
@@ -20,7 +20,7 @@ The `CALIBRATE RESOURCE` statement is used to estimate and output the ['Request 
 
 > **Note:**
 >
-> The RU capacity of a cluster varies with the topology of the cluster and the hardware and software configuration of each component, the actual RU that each cluster can consume is also related to the actual workload. The estimated value in Method 2 is for reference only and might differ from the actual maximum value. It is recommended to use Method 1 for estimation based on the actual workload.
+> The RU capacity of a cluster varies with the topology of the cluster and the hardware and software configuration of each component. The actual RU that each cluster can consume is also related to the actual workload. The estimated value in Method 2 is for reference only and might differ from the actual maximum value. It is recommended to use Method 1 for estimation based on the actual workload.
 
 <CustomContent platform="tidb-cloud">
 
