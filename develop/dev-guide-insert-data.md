@@ -43,8 +43,6 @@ Generally the `multi-line insertion statement` runs faster than the multiple `si
 <SimpleTab>
 <div label="SQL">
 
-{{< copyable "sql" >}}
-
 ```sql
 CREATE TABLE `player` (`id` INT, `coins` INT, `goods` INT);
 INSERT INTO `player` (`id`, `coins`, `goods`) VALUES (1, 1000, 1), (2, 230, 2);
@@ -55,8 +53,6 @@ For more information on how to use this SQL, see [Connecting to a TiDB Cluster](
 </div>
 
 <div label="Java">
-
-{{< copyable "" >}}
 
 ```java
 // ds is an entity of com.mysql.cj.jdbc.MysqlDataSource
@@ -97,8 +93,6 @@ Due to the default MySQL JDBC Driver settings, you need to change some parameter
 
 MySQL JDBC Driver also provides an integrated configuration: `useConfigs`. When it is configured with `maxPerformance`, it is equivalent to configuring a set of configurations. Taking `mysql:mysql-connector-java:8.0.28` as an example, `useConfigs=maxPerformance` contains:
 
-{{< copyable "" >}}
-
 ```properties
 cachePrepStmts=true
 cacheCallableStmts=true
@@ -115,17 +109,15 @@ You can check `mysql-connector-java-{version}.jar!/com/mysql/cj/configurations/m
 
 The following is a typical scenario of JDBC connection string configurations. In this example, Host: `127.0.0.1`, Port: `4000`, User name: `root`, Password: null, Default database: `test`:
 
-{{< copyable "" >}}
-
 ```
 jdbc:mysql://127.0.0.1:4000/test?user=root&useConfigs=maxPerformance&useServerPrepStmts=true&prepStmtCacheSqlLimit=2048&prepStmtCacheSize=256&rewriteBatchedStatements=true&allowMultiQueries=true
 ```
 
-For a complete example in Java, see:
+For complete examples in Java, see:
 
-- [Build a Simple CRUD App with TiDB and Java - Using JDBC](/develop/dev-guide-sample-application-java.md#step-2-get-the-code)
-- [Build a Simple CRUD App with TiDB and Java - Using Hibernate](/develop/dev-guide-sample-application-java.md#step-2-get-the-code)
-- [Build the TiDB Application using Spring Boot](/develop/dev-guide-sample-application-spring-boot.md)
+- [Build a simple CRUD application with TiDB and Java - using JDBC](/develop/dev-guide-sample-application-java.md#step-2-get-the-code)
+- [Build a simple CRUD application with TiDB and Java - using Hibernate](/develop/dev-guide-sample-application-java.md#step-2-get-the-code)
+- [Build the TiDB application using Spring Boot](/develop/dev-guide-sample-application-spring-boot.md)
 
 </div>
 
@@ -197,10 +189,40 @@ func buildBulkInsertSQL(amount int) string {
 }
 ```
 
-For a complete example in Golang, see:
+For complete examples in Golang, see:
 
-- [Use go-sql-driver/mysql to build a simple CRUD app with TiDB and Golang](/develop/dev-guide-sample-application-golang.md#step-2-get-the-code)
-- [Use GORM to build a simple CRUD app with TiDB and Golang](/develop/dev-guide-sample-application-java.md#step-2-get-the-code)
+- [Use go-sql-driver/mysql to build a simple CRUD application with TiDB and Golang](/develop/dev-guide-sample-application-golang.md#step-2-get-the-code)
+- [Use GORM to build a simple CRUD application with TiDB and Golang](/develop/dev-guide-sample-application-java.md#step-2-get-the-code)
+
+</div>
+
+<div label="Python">
+
+```python
+import MySQLdb
+connection = MySQLdb.connect(
+    host="127.0.0.1",
+    port=4000,
+    user="root",
+    password="",
+    database="bookshop",
+    autocommit=True
+)
+
+with get_connection(autocommit=True) as connection:
+    with connection.cursor() as cur:
+        player_list = random_player(1919)
+        for idx in range(0, len(player_list), 114):
+            cur.executemany("INSERT INTO player (id, coins, goods) VALUES (%s, %s, %s)", player_list[idx:idx + 114])
+```
+
+For complete examples in Python, see:
+
+- [Use PyMySQL to build a simple CRUD application with TiDB and Python](/develop/dev-guide-sample-application-python.md#step-2-get-the-code)
+- [Use mysqlclient to build a simple CRUD application with TiDB and Python](/develop/dev-guide-sample-application-python.md#step-2-get-the-code)
+- [Use mysql-connector-python to build a simple CRUD application with TiDB and Python](/develop/dev-guide-sample-application-python.md#step-2-get-the-code)
+- [Use SQLAlchemy to build a simple CRUD application with TiDB and Python](/develop/dev-guide-sample-application-python.md#step-2-get-the-code)
+- [Use peewee to build a simple CRUD application with TiDB and Python](/develop/dev-guide-sample-application-python.md#step-2-get-the-code)
 
 </div>
 
@@ -216,7 +238,7 @@ The following are the recommended tools for bulk-insert:
 
 <CustomContent platform="tidb">
 
-- Data import: [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md). You can import **Dumpling** exported data, a **CSV** file, or [Migrate Data from Amazon Aurora to TiDB](/migrate-aurora-to-tidb.md). It also supports reading data from a local disk or [Amazon S3 cloud disk](/br/backup-and-restore-storages.md).
+- Data import: [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md). You can import **Dumpling** exported data, a **CSV** file, or [Migrate Data from Amazon Aurora to TiDB](/migrate-aurora-to-tidb.md). It also supports reading data from a local disk or Amazon S3 cloud disk.
 - Data replication: [TiDB Data Migration](/dm/dm-overview.md). You can replicate MySQL, MariaDB, and Amazon Aurora databases to TiDB. It also supports merging and migrating the sharded instances and tables from the source databases.
 - Data backup and restore: [Backup & Restore (BR)](/br/backup-and-restore-overview.md). Compared to **Dumpling**, **BR** is more suitable for **_big data_** scenario.
 
@@ -245,8 +267,6 @@ For more information on how to handle hotspot issues, see [Troubleshoot Hotspot 
 If the primary key of the table you insert has the `AUTO_RANDOM` attribute, then by default the primary key cannot be specified. For example, in the [`bookshop`](/develop/dev-guide-bookshop-schema-design.md) database, you can see that the `id` field of the [`users` table](/develop/dev-guide-bookshop-schema-design.md#users-table) contains the `AUTO_RANDOM` attribute.
 
 In this case, you **cannot** use SQL like the following to insert:
-
-{{< copyable "sql" >}}
 
 ```sql
 INSERT INTO `bookshop`.`users` (`id`, `balance`, `nickname`) VALUES (1, 0.00, 'nicky');

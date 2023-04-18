@@ -5,7 +5,7 @@ summary: Learn how to use the physical import mode in TiDB Lightning.
 
 # Use Physical Import Mode
 
-This document introduces how to use the physical import mode in TiDB Lightning, including writing the configuration file, tuning performance, and configuring disk quota.
+This document introduces how to use the [physical import mode](/tidb-lightning/tidb-lightning-physical-import-mode.md) in TiDB Lightning, including writing the configuration file, tuning performance, and configuring disk quota.
 
 ## Configure and use the physical import mode
 
@@ -24,7 +24,7 @@ max-backups = 14
 check-requirements = true
 
 [mydumper]
-# The local data source directory or the external storage URL.
+# The local data source directory or the URI of the external storage. For more information about the URI of the external storage, see https://docs.pingcap.com/tidb/v6.6/backup-and-restore-storages#uri-format.
 data-source-dir = "/data/my_database"
 
 [tikv-importer]
@@ -40,6 +40,10 @@ sorted-kv-dir = "./some-dir"
 # Limits the bandwidth in which TiDB Lightning writes data into each TiKV
 # node in the physical import mode. 0 by default, which means no limit.
 # store-write-bwlimit = "128MiB"
+
+# Specifies whether Physical Import Mode adds indexes via SQL. The default value is `false`, which means that TiDB Lightning will encode both row data and index data into KV pairs and import them into TiKV together. This mechanism is consistent with that of the historical versions. If you set it to `true`, it means that TiDB Lightning adds indexes via SQL after importing the row data.
+# The benefit of adding indexes via SQL is that you can separately import data and import indexes, and import data more quickly. After the data is imported, even if the indexes fail to be added, it does not affect the consistency of the imported data.
+# add-index-by-sql = false
 
 [tidb]
 # The information of the target cluster. The address of any tidb-server from the cluster.
@@ -130,11 +134,9 @@ mysql> select table_name,index_name,key_data,row_data from conflict_error_v1 lim
 
 You can manually identify the records that need to be retained and insert these records into the table.
 
-## Import data into a cluster in production
+## Pause scheduling on the table level
 
-Starting from TiDB Lightning v6.2.0, you can import data into a cluster in production using the physical import mode. TiDB Lightning implements a new mechanism to limit the impact of the import on the online application.
-
-With the new mechanism, TiDB Lightning does not pause the global scheduling, but only pauses scheduling for the region that stores the target table data. This significantly reduces the impact of the import on the online application.
+Starting from v6.2.0, TiDB Lightning implements a mechanism to limit the impact of data import on online applications. With the new mechanism, TiDB Lightning does not pause the global scheduling, but only pauses scheduling for the region that stores the target table data. This significantly reduces the impact of the import on online applications.
 
 <Note>
 TiDB Lightning does not support importing data into a table that already contains data.

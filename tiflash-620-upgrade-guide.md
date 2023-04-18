@@ -14,7 +14,7 @@ To learn the standard upgrade process, see the following documents:
 
 > **Note:**
 >
-> - An experimental feature introduced in v6.2.0, [FastScan](/develop/dev-guide-use-fastscan.md) provides more efficient query performance at the cost of strong data consistency. Note that the form and usage of this feature might change in subsequent versions.
+> - [FastScan](/tiflash/use-fastscan.md) is introduced in v6.2.0 as an experimental feature and becomes generally available (GA) in v7.0.0. It provides more efficient query performance at the cost of strong data consistency.
 >
 > - It is not recommended that you upgrade TiDB that includes TiFlash across major versions, for example, from v4.x to v6.x. Instead, you need to upgrade from v4.x to v5.x first, and then to v6.x.
 >
@@ -25,7 +25,7 @@ To learn the standard upgrade process, see the following documents:
 > - To upgrade TiFlash from versions earlier than v5.3.0 to v5.3.0 or later, you should stop TiFlash and then upgrade it. The following steps help you upgrade TiFlash without interrupting other components:
 >
 >     - Stop the TiFlash instance: `tiup cluster stop <cluster-name> -R tiflash`
->     - Upgrade the TiDB cluster without restarting it (only updating the files): `tiup cluster upgrade <cluster-name> <version> --offline`
+>     - Upgrade the TiDB cluster without restarting it (only updating the files): `tiup cluster upgrade <cluster-name> <version> --offline`, such as `tiup cluster upgrade <cluster-name> v5.3.0 --offline`
 >     - Reload the TiDB cluster: `tiup cluster reload <cluster-name>`. After the reload, the TiFlash instance is started and you do not need to manually start it.
 
 ## From 5.x or v6.0 to v6.1

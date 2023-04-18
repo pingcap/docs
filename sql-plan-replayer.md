@@ -12,7 +12,7 @@ The features of `PLAN REPLAYER` are as follows:
 - Exports the information of a TiDB cluster at an on-site troubleshooting to a ZIP-formatted file for storage.
 - Imports into a cluster the ZIP-formatted file exported from another TiDB cluster. This file contains the information of the latter TiDB cluster at an on-site troubleshooting.
 
-## Use `PLAN REPLAER` to export cluster information
+## Use `PLAN REPLAYER` to export cluster information
 
 You can use `PLAN REPLAYER` to save the on-site information of a TiDB cluster. The export interface is as follows:
 
@@ -145,3 +145,117 @@ For example:
 ```sql
 PLAN REPLAYER LOAD 'plan_replayer.zip';
 ```
+
+After the cluster information is imported, the TiDB cluster is loaded with the required table schema, statistics and other information that affects the construction of the execution plan. You can view the execution plan and verify statistics in the following way:
+
+```sql
+mysql> desc t;
++-------+---------+------+------+---------+-------+
+| Field | Type    | Null | Key  | Default | Extra |
++-------+---------+------+------+---------+-------+
+| a     | int(11) | YES  |      | NULL    |       |
+| b     | int(11) | YES  |      | NULL    |       |
++-------+---------+------+------+---------+-------+
+2 rows in set (0.01 sec)
+
+mysql> explain select * from t where a = 1 or b =1;
++-------------------------+---------+-----------+---------------+--------------------------------------+
+| id                      | estRows | task      | access object | operator info                        |
++-------------------------+---------+-----------+---------------+--------------------------------------+
+| TableReader_7           | 0.01    | root      |               | data:Selection_6                     |
+| └─Selection_6           | 0.01    | cop[tikv] |               | or(eq(test.t.a, 1), eq(test.t.b, 1)) |
+|   └─TableFullScan_5     | 6.00    | cop[tikv] | table:t       | keep order:false, stats:pseudo       |
++-------------------------+---------+-----------+---------------+--------------------------------------+
+3 rows in set (0.00 sec)
+
+mysql> show stats_meta;
++---------+------------+----------------+---------------------+--------------+-----------+
+| Db_name | Table_name | Partition_name | Update_time         | Modify_count | Row_count |
++---------+------------+----------------+---------------------+--------------+-----------+
+| test    | t          |                | 2022-08-26 15:52:07 |            3 |         6 |
++---------+------------+----------------+---------------------+--------------+-----------+
+1 row in set (0.04 sec)
+```
+
+After the scene is loaded and restored, you can diagnose and improve the execution plan for the cluster.
+
+## Use `PLAN REPLAYER CAPTURE` to capture target plans
+
+When you locate the execution plan of TiDB in some scenarios, the target SQL statement and the target execution plan might only appear occasionally in the query, so you cannot directly capture the statement and the plan using `PLAN REPLAYER`. In such cases, you can use `PLAN REPLAYER CAPTURE` to help you capture the optimizer information of the target SQL statement and the target plan.
+
+`PLAN REPLAYER CAPTURE` has the following main features:
+
+- Registers the target SQL statement and the digest of the target execution plan in the TiDB cluster in advance, and starts matching the target query.
+- When the target query is matched successfully, directly captures its optimizer-related information and exports it as a ZIP file.
+- For each matched SQL and execution plan, the information is only captured once.
+- Displays the ongoing matching tasks and generated files through the system table.
+- Periodically cleans up historical files.
+
+### Enable `PLAN REPLAYER CAPTURE`
+
+`PLAN REPLAYER CAPTURE` is controlled by the system variable [`tidb_enable_plan_replayer_capture`](/system-variables.md#tidb_enable_plan_replayer_capture). To enable `PLAN REPLAYER CAPTURE`, set the value of the system variable to `ON`.
+
+### Use `PLAN REPLAYER CAPTURE`
+
+You can register the digest of the target SQL statement and execution plan in the TiDB cluster using the following statement:
+
+```sql
+PLAN REPLAYER CAPTURE 'sql_digest' 'plan_digest';
+```
+
+If the target SQL statement has multiple execution plans and you want to capture all execution plans, you can register all the execution plans at once using the following statement:
+
+```sql
+PLAN REPLAYER CAPTURE 'sql_digest' '*';
+```
+
+### View the capture tasks
+
+You can view the ongoing capture tasks of `PLAN REPLAYER CAPTURE` in the TiDB cluster using the following statement:
+
+```sql
+mysql> PLAN PLAYER CAPTURE 'example_sql' 'example_plan';
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT * FROM mysql.plan_replayer_task;
++-------------+--------------+---------------------+
+| sql_digest  | plan_digest  | update_time         |
++-------------+--------------+---------------------+
+| example_sql | example_plan | 2023-01-28 11:58:22 |
++-------------+--------------+---------------------+
+1 row in set (0.01 sec)
+```
+
+### View the capture results
+
+After `PLAN REPLAYER CAPTURE` successfully captures the result, you can view the token used for file download using the following SQL statement:
+
+```sql
+mysql> SELECT * FROM mysql.plan_replayer_status;
++------------------------------------------------------------------+------------------------------------------------------------------+------------+-----------------------------------------------------------+---------------------+-------------+-----------------+
+| sql_digest                                                       | plan_digest                                                      | origin_sql | token                                                     | update_time         | fail_reason | instance        |
++------------------------------------------------------------------+------------------------------------------------------------------+------------+-----------------------------------------------------------+---------------------+-------------+-----------------+
+| 086e3fbd2732f7671c17f299d4320689deeeb87ba031240e1e598a0ca14f808c | 042de2a6652a6d20afc629ff90b8507b7587a1c7e1eb122c3e0b808b1d80cc02 |            | replayer_Utah4nkz2sIEzkks7tIRog==_1668746293523179156.zip | 2022-11-18 12:38:13 | NULL        | 172.16.4.4:4022 |
+| b5b38322b7be560edb04f33f15b15a885e7c6209a22b56b0804622e397199b54 | 1770efeb3f91936e095f0344b629562bf1b204f6e46439b7d8f842319297c3b5 |            | replayer_Z2mUXNHDjU_WBmGdWQqifw==_1668746293560115314.zip | 2022-11-18 12:38:13 | NULL        | 172.16.4.4:4022 |
+| 96d00c0b3f08795fe94e2d712fa1078ab7809faf4e81d198f276c0dede818cf9 | 8892f74ac2a42c2c6b6152352bc491b5c07c73ac3ed66487b2c990909bae83e8 |            | replayer_RZcRHJB7BaCccxFfOIAhWg==_1668746293578282450.zip | 2022-11-18 12:38:13 | NULL        | 172.16.4.4:4022 |
++------------------------------------------------------------------+------------------------------------------------------------------+------------+-----------------------------------------------------------+---------------------+-------------+-----------------+
+3 rows in set (0.00 sec)
+```
+
+The method of downloading the file of `PLAN REPLAYER CAPTURE` is the same as that of `PLAN REPLAYER`. For details, see [Examples of exporting cluster information](#examples-of-exporting-cluster-information).
+
+> **Note:**
+>
+> The result file of `PLAN REPLAYER CAPTURE` is kept in the TiDB cluster for up to one hour. After one hour, TiDB deletes the file.
+
+## Use `PLAN REPLAYER CONTINUOUS CAPTURE`
+
+After `PLAN REPLAYER CONTINUOUS CAPTURE` is enabled, TiDB asynchronously records the applications' SQL statements with the `PLAN REPLAYER` method according to their `SQL DIGEST` and `PLAN DIGEST`. For SQL statements and execution plans that share the same DIGEST, `PLAN REPLAYER CONTINUOUS CAPTURE` does not record them repeatedly.
+
+### Enable `PLAN REPLAYER CONTINUOUS CAPTURE`
+
+`PLAN REPLAYER CONTINUOUS CAPTURE` is controlled by the system variable [`tidb_enable_plan_replayer_continuous_capture`](/system-variables.md#tidb_enable_plan_replayer_continuous_capture-new-in-v700). To enable `PLAN REPLAYER CONTINUOUS CAPTURE`, set the value of the system variable to `ON`.
+
+### View the capture results
+
+The method of viewing the capture results of `PLAN REPLAYER CONTINUOUS CAPTURE` is the same as that of [Viewing the capture results of `PLAN REPLAYER CAPTURE`](#view-the-capture-results).

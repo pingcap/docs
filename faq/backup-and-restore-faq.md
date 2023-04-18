@@ -8,7 +8,9 @@ aliases: ['/docs/dev/br/backup-and-restore-faq/','/tidb/dev/pitr-troubleshoot/',
 
 This document lists the frequently asked questions (FAQs) and the solutions of TiDB Backup & Restore (BR).
 
-## Performance issues of backup and restore
+## What should I do to quickly recover data after mistakenly deleting or updating data?
+
+TiDB v6.4.0 introduces the flashback feature. You can use this feature to quickly recover data within the GC time to a specified point in time. Therefore, if misoperations occur, you can use this feature to recover data. For details, see [Flashback Cluster](/sql-statements/sql-statement-flashback-to-timestamp.md) and [Flashback Database](/sql-statements/sql-statement-flashback-database.md).
 
 ## In TiDB v5.4.0 and later versions, when backup tasks are performed on the cluster under a heavy workload, why does the speed of backup tasks become slow?
 
@@ -27,6 +29,12 @@ When you perform backup tasks on an offline cluster, to speed up the backup, you
 
 ## PITR issues
 
+### What is the difference between [PITR](/br/br-pitr-guide.md) and [cluster flashback](/sql-statements/sql-statement-flashback-to-timestamp.md)?
+
+From the perspective of use cases, PITR is usually used to restore the data of a cluster to a specified point in time when the cluster is completely out of service or the data is corrupted and cannot be recovered using other solutions. To use PITR, you need a new cluster for data recovery. The cluster flashback feature is specifically designed for the data error scenarios caused by user mis-operations or other factors, which allows you to restore the data of a cluster in-place to the latest timestamp before the data errors occur.
+
+In most cases, flashback is a better recovery solution than PITR for data errors caused by human mistakes, as it has a much shorter RPO (close to zero) and RTO. However, when a cluster is completely unavailable, because flashback cannot run at this time, PITR is the only solution to recover the cluster in this case. Therefore, PITR is always a must-have solution when you develop database disaster recovery strategies, even though it has a longer RPO (up to 5 minutes) and RTO than flashback.
+
 ### When the upstream database imports data using TiDB Lightning in the physical import mode, the log backup feature becomes unavailable. Why?
 
 Currently, the log backup feature is not fully adapted to TiDB Lightning. Therefore, data imported in the physical mode of TiDB Lightning cannot be backed up into log data
@@ -37,11 +45,9 @@ In upstream clusters where you create log backup tasks, avoid using the TiDB Lig
 
 Issue: [#38045](https://github.com/pingcap/tidb/issues/38045)
 
-Currently, the [acceleration of adding indexes](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) feature is not compatible with PITR. When using index acceleration, you need to ensure that there are no PITR log backup tasks running in the background. Otherwise, unexpected behaviors might occur, including:
+Currently, index data created through the [index acceleration](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) feature cannot be backed up by PITR.
 
-- If you start a log backup task first, and then add an index. The adding index process is not accelerated even if index acceleration is enabled. But the index is added in a slow way.
-- If you start an index acceleration task first, and then start a log backup task. The log backup task returns an error. But the index acceleration is not affected.
-- If you start a log backup task and an index acceleration task at the same time, the two tasks might not be aware of each other. This might result in PITR failing to back up the newly added index.
+Therefore, after PITR recovery is complete, BR will delete the index data created by index acceleration, and then recreate it. If many indexes are created by index acceleration or the index data is large during the log backup, it is recommended to perform a full backup after creating the indexes.
 
 ### The cluster has recovered from the network partition failure, but the checkpoint of the log backup task progress still does not resume. Why?
 
@@ -163,7 +169,7 @@ To handle this issue, you can try to scale out the cluster resources, reduce the
 
 You can try to reduce the number of tables to be created in a batch by setting `--ddl-batch-size` to `128` or a smaller value.
 
-When using BR to restore the backup data with the value of [`--ddl-batch-size`](/br/br-batch-create-table.md#how to use) greater than `1`, TiDB writes a DDL job of table creation to the DDL jobs queue that is maintained by TiKV. At this time, the total size of all tables schema sent by TiDB at one time should not exceed 6 MB, because the maximum value of job messages is `6 MB` by default (it is **not recommended** to modify this value. For details, see [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50) and [`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size)). Therefore, if you set `--ddl-batch-size` to an excessively large value, the schema size of the tables sent by TiDB in a batch at one time exceeds the specified value, which causes BR to report the `entry too large, the max entry size is 6291456, the size of data is 7690800` error.
+When using BR to restore the backup data with the value of [`--ddl-batch-size`](/br/br-batch-create-table.md#use-batch-create-table) greater than `1`, TiDB writes a DDL job of table creation to the DDL jobs queue that is maintained by TiKV. At this time, the total size of all tables schema sent by TiDB at one time should not exceed 6 MB, because the maximum value of job messages is `6 MB` by default (it is **not recommended** to modify this value. For details, see [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50) and [`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size)). Therefore, if you set `--ddl-batch-size` to an excessively large value, the schema size of the tables sent by TiDB in a batch at one time exceeds the specified value, which causes BR to report the `entry too large, the max entry size is 6291456, the size of data is 7690800` error.
 
 ### Where are the backed up files stored when I use `local` storage?
 

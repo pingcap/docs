@@ -216,8 +216,8 @@ Solutions:
 * You can use the sub-command [`decoder`](/tidb-control.md#the-decoder-command) of TiDB Control to view the table id and rowid of the row corresponding to the specified key:
 
     ```sh
-    ./tidb-ctl decoder -f table_row -k "t\x00\x00\x00\x00\x00\x00\x00\x1c_r\x00\x00\x00\x00\x00\x00\x00\xfa"
-
+    ./tidb-ctl decoder "t\x00\x00\x00\x00\x00\x00\x00\x1c_r\x00\x00\x00\x00\x00\x00\x00\xfa"
+    format: table_row
     table_id: -9223372036854775780
     row_id: -9223372036854775558
     ```
@@ -271,8 +271,8 @@ Solutions:
     Checking the time interval using the PD control tool:
 
     ```shell
-    tiup ctl:<cluster-version> pd tso [start_ts]
-    tiup ctl:<cluster-version> pd tso [commit_ts]
+    tiup ctl:v<CLUSTER_VERSION> pd tso [start_ts]
+    tiup ctl:v<CLUSTER_VERSION> pd tso [commit_ts]
     ```
 
 * It is recommended to check whether the write performance is slow, which might cause that the efficiency of transaction commit is poor, and thus the lock is cleared.
@@ -306,6 +306,7 @@ err="pessimistic lock retry limit reached"
 Solutions:
 
 * If the above error occurs frequently, it is recommended to adjust from the application side.
+* If your business contains high concurrent locking on the same row (the same key) and encounters frequent conflicts, you can try to enable the system variable [`tidb_pessimistic_txn_fair_locking`](/system-variables.md#tidb_pessimistic_txn_fair_locking-new-in-v700). Note that enabling this variable might bring some cost of throughput reduction (average latency increase) for transactions with lock conflicts. For newly deployed clusters, this variable is enabled (`ON`) by default.
 
 ### Lock wait timeout exceeded
 

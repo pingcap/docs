@@ -35,6 +35,10 @@ When you encounter a DDL statement unsupported by TiDB, you need to manually han
 >
 > Currently, TiDB is not compatible with all the DDL statements that MySQL supports. See [MySQL Compatibility](/mysql-compatibility.md#ddl).
 
+## Does DM replicate view-related DDL statements and DML statements to TiDB?
+
+Currently, DM does not replicate view-related DDL statements to the downstream TiDB cluster, nor does it replicate view-related DML statements to the downstream TiDB cluster.
+
 ## How to reset the data migration task?
 
 When an exception occurs during data migration and the data migration task cannot be resumed, you need to reset the task and re-migrate the data:
@@ -186,7 +190,7 @@ Sometimes, the error message contains the `parse statement` information, for exa
 if the DDL is not needed, you can use a filter rule with \"*\" schema-pattern to ignore it.\n\t : parse statement: line 1 column 11 near \"EVENT `event_del_big_table` \r\nDISABLE\" %!!(MISSING)(EXTRA string=ALTER EVENT `event_del_big_table` \r\nDISABLE
 ```
 
-The reason for this type of error is that the TiDB parser cannot parse DDL statements sent by the upstream, such as `ALTER EVENT`, so `sql-skip` does not take effect as expected. You can add [binlog event filters](/dm/dm-key-features.md#binlog-event-filter) in the configuration file to filter those statements and set `schema-pattern: "*"`. Starting from DM v2.0.1, DM pre-filters statements related to `EVENT`.
+The reason for this type of error is that the TiDB parser cannot parse DDL statements sent by the upstream, such as `ALTER EVENT`, so `sql-skip` does not take effect as expected. You can add [binlog event filters](/dm/dm-binlog-event-filter.md) in the configuration file to filter those statements and set `schema-pattern: "*"`. Starting from DM v2.0.1, DM pre-filters statements related to `EVENT`.
 
 Since DM v6.0, `binlog` replaces `sql-skip` and `handle-error`. You can use the `binlog` command instead to avoid this issue.
 

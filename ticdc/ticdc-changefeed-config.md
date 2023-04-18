@@ -16,7 +16,7 @@ cdc cli changefeed create --server=http://10.0.10.25:8300 --sink-uri="mysql://ro
 ```shell
 Create changefeed successfully!
 ID: simple-replication-task
-Info: {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":"2020-03-12T22:04:08.103600025+08:00","start-ts":415241823337054209,"target-ts":0,"admin-job-type":0,"sort-engine":"unified","sort-dir":".","config":{"case-sensitive":true,"filter":{"rules":["*.*"],"ignore-txn-start-ts":null,"ddl-allow-list":null},"mounter":{"worker-num":16},"sink":{"dispatchers":null},"scheduler":{"type":"table-number","polling-time":-1}},"state":"normal","history":null,"error":null}
+Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-replication-task","sink_uri":"mysql://root:xxxxx@127.0.0.1:4000/?time-zone=","create_time":"2022-12-19T15:05:46.679218+08:00","start_ts":438156275634929669,"engine":"unified","config":{"case_sensitive":true,"enable_old_value":true,"force_replicate":false,"ignore_ineligible_table":false,"check_gc_safe_point":true,"enable_sync_point":true,"bdr_mode":false,"sync_point_interval":30000000000,"sync_point_retention":3600000000000,"filter":{"rules":["test.*"],"event_filters":null},"mounter":{"worker_num":16},"sink":{"protocol":"","schema_registry":"","csv":{"delimiter":",","quote":"\"","null":"\\N","include_commit_ts":false},"column_selectors":null,"transaction_atomicity":"none","encoder_concurrency":16,"terminator":"\r\n","date_separator":"none","enable_partition_separator":false},"consistent":{"level":"none","max_log_size":64,"flush_interval":2000,"storage":""}},"state":"normal","creator_version":"v6.5.0"}
 ```
 
 - `--changefeed-id`: The ID of the replication task. The format must match the `^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$` regular expression. If this ID is not specified, TiCDC automatically generates a UUID (the version 4 format) as the ID.
@@ -89,6 +89,14 @@ ignore-event = ["drop table"] # Ignore drop table events.
 ignore-sql = ["delete"] # Ignore delete DMLs.
 ignore-insert-value-expr = "price > 1000 and origin = 'no where'" # Ignore insert DMLs that contain the conditions "price > 1000" and "origin = 'no where'".
 
+[scheduler]
+# Splits a table into multiple replication ranges based on the number of Regions, and these ranges can be replicated by multiple TiCDC nodes.
+# Note: This parameter only takes effect on Kafka changefeeds and is not supported on MySQL changefeeds.
+# The value is "false" by default. Set it to "true" to enable this feature.
+enable-table-across-nodes = false
+# When you enable this feature, it only takes effect for tables with the number of regions greater than the `region-threshold` value.
+region-threshold = 100000
+
 [sink]
 # For the sink of MQ type, you can use dispatchers to configure the event dispatcher.
 # Since v6.1.0, TiDB supports two types of event dispatchers: partition and topic. For more information, see <partition and topic link>.
@@ -100,7 +108,27 @@ dispatchers = [
     {matcher = ['test6.*'], partition = "ts"}
 ]
 
-# For the sink of MQ type, you can specify the protocol format of the message.
-# Currently the following protocols are supported: canal-json, open-protocol, canal, avro, and maxwell.
+# The protocol configuration item specifies the protocol format of the messages sent to the downstream.
+# When the downstream is Kafka, the protocol can only be canal-json or avro.
+# When the downstream is a storage service, the protocol can only be canal-json or csv.
 protocol = "canal-json"
+
+# The following three configuration items are only used when you replicate data to storage sinks and can be ignored when replicating data to MQ or MySQL sinks.
+# Row terminator, used for separating two data change events. The default value is an empty string, which means "\r\n" is used.
+terminator = ''
+# Date separator type used in the file directory. Value options are `none`, `year`, `month`, and `day`. `none` is the default value and means that the date is not separated. For more information, see <https://docs.pingcap.com/tidb/dev/ticdc-sink-to-cloud-storage#data-change-records>.
+date-separator = 'none'
+# Whether to use partitions as the separation string. The default value is false, which means that partitions in a table are not stored in separate directories. For more information, see <https://docs.pingcap.com/tidb/dev/ticdc-sink-to-cloud-storage#data-change-records)>.
+enable-partition-separator = false
+
+# Since v6.5.0, TiCDC supports saving data changes to storage services in CSV format. Ignore the following configurations if you replicate data to MQ or MySQL sinks.
+[sink.csv]
+# The character used to separate fields in the CSV file. The value must be an ASCII character and defaults to `,`.
+delimiter = ','
+# The quotation character used to surround fields in the CSV file. The default value is `"`. If the value is empty, no quotation is used.
+quote = '"'
+# The character displayed when a CSV column is null. The default value is `\N`.
+null = '\N'
+# Whether to include commit-ts in CSV rows. The default value is false.
+include-commit-ts = false
 ```

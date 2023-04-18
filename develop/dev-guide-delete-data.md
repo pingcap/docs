@@ -5,7 +5,7 @@ summary: Learn about the SQL syntax, best practices, and examples for deleting d
 
 # Delete Data
 
-This document describes how to use the [DELETE](/sql-statements/sql-statement-delete.md) SQL statement to delete the data in TiDB.
+This document describes how to use the [DELETE](/sql-statements/sql-statement-delete.md) SQL statement to delete the data in TiDB. If you need to periodically delete expired data, use the [time to live](/time-to-live.md) feature.
 
 ## Before you start
 
@@ -18,8 +18,6 @@ Before reading this document, you need to prepare the following:
 ## SQL syntax
 
 The `DELETE` statement is generally in the following form:
-
-{{< copyable "sql" >}}
 
 ```sql
 DELETE FROM {table} WHERE {filter}
@@ -57,8 +55,6 @@ The following are some best practices to follow when you delete data:
 ## Example
 
 Suppose you find an application error within a specific time period and you need to delete all the data for the [ratings](/develop/dev-guide-bookshop-schema-design.md#ratings-table) within this period, for example, from `2022-04-15 00:00:00` to `2022-04-15 00:15:00`. In this case, you can use the `SELECT` statement to check the number of records to be deleted.
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT COUNT(*) FROM `ratings` WHERE `rated_at` >= "2022-04-15 00:00:00" AND `rated_at` <= "2022-04-15 00:15:00";
@@ -145,6 +141,33 @@ func main() {
 
 </div>
 
+<div label="Python" value="python">
+
+In Python, the example is as follows:
+
+```python
+import MySQLdb
+import datetime
+import time
+connection = MySQLdb.connect(
+    host="127.0.0.1",
+    port=4000,
+    user="root",
+    password="",
+    database="bookshop",
+    autocommit=True
+)
+with connection:
+    with connection.cursor() as cursor:
+        start_time = datetime.datetime(2022, 4, 15)
+        end_time = datetime.datetime(2022, 4, 15, 0, 15)
+        delete_sql = "DELETE FROM `bookshop`.`ratings` WHERE `rated_at` >= %s AND `rated_at` <= %s"
+        affect_rows = cursor.execute(delete_sql, (start_time, end_time))
+        print(f'delete {affect_rows} data')
+```
+
+</div>
+
 </SimpleTab>
 
 <CustomContent platform="tidb">
@@ -208,8 +231,6 @@ Suppose you find an application error within a specific time period. You need to
 
 In Java, the bulk-delete example is as follows:
 
-{{< copyable "" >}}
-
 ```java
 package com.pingcap.bulkDelete;
 
@@ -270,8 +291,6 @@ In each iteration, `DELETE` deletes up to 1000 rows from `2022-04-15 00:00:00` t
 
 In Golang, the bulk-delete example is as follows:
 
-{{< copyable "" >}}
-
 ```go
 package main
 
@@ -317,6 +336,38 @@ func deleteBatch(db *sql.DB, startTime, endTime time.Time) (int64, error) {
     fmt.Printf("delete %d data\n", affectedRows)
     return affectedRows, nil
 }
+```
+
+In each iteration, `DELETE` deletes up to 1000 rows from `2022-04-15 00:00:00` to `2022-04-15 00:15:00`.
+
+</div>
+
+<div label="Python" value="python">
+
+In Python, the bulk-delete example is as follows:
+
+```python
+import MySQLdb
+import datetime
+import time
+connection = MySQLdb.connect(
+    host="127.0.0.1",
+    port=4000,
+    user="root",
+    password="",
+    database="bookshop",
+    autocommit=True
+)
+with connection:
+    with connection.cursor() as cursor:
+        start_time = datetime.datetime(2022, 4, 15)
+        end_time = datetime.datetime(2022, 4, 15, 0, 15)
+        affect_rows = -1
+        while affect_rows != 0:
+            delete_sql = "DELETE FROM `bookshop`.`ratings` WHERE `rated_at` >= %s AND  `rated_at` <= %s LIMIT 1000"
+            affect_rows = cursor.execute(delete_sql, (start_time, end_time))
+            print(f'delete {affect_rows} data')
+            time.sleep(1)
 ```
 
 In each iteration, `DELETE` deletes up to 1000 rows from `2022-04-15 00:00:00` to `2022-04-15 00:15:00`.

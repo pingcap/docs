@@ -15,9 +15,10 @@ The detailed user scenarios are as follows:
 
 - Merge multiple databases of different applications to reduce the cost on database maintenance
 - Increase replica count for important data to improve the application availability and data reliability
-- Store new data into NVMe storage and store old data into SSDs to lower the cost on data archiving and storage 
+- Store new data into NVMe storage and store old data into SSDs to lower the cost on data archiving and storage
 - Schedule the leaders of hotspot data to high-performance TiKV instances
 - Separate cold data to lower-cost storage mediums to improve cost efficiency
+- Support the physical isolation of computing resources between different users, which meets the isolation requirements of different users in a cluster, and the isolation requirements of CPU, I/O, memory, and other resources with different mixed loads
 
 ## Specify placement rules
 
@@ -134,6 +135,7 @@ In addition to the placement options above, you can also use the advance configu
 | `FOLLOWER_CONSTRAINTS`     | A list of constraints that only apply to followers.                                   |
 | `LEARNER_CONSTRAINTS`      | A list of constraints that only apply to learners.                                     |
 | `LEARNERS`                 | The number of learners. |
+| `SURVIVAL_PREFERENCE`      | The replica placement priority according to the disaster tolerance level of the labels. For example, `SURVIVAL_PREFERENCE="[region, zone, host]"`. |
 
 ## Examples
 
@@ -247,6 +249,26 @@ In dictionary format, constraints also indicate a number of instances that apply
 >
 > Dictionary and list formats are based on the YAML parser, but the YAML syntax might be incorrectly parsed. For example, `"{+disk=ssd:1,+disk=nvme:2}"` is incorrectly parsed as `'{"+disk=ssd:1": null, "+disk=nvme:1": null}'`. But `"{+disk=ssd: 1,+disk=nvme: 1}"` is correctly parsed as `'{"+disk=ssd": 1, "+disk=nvme": 1}'`.
 
+### Survival preferences
+
+When you create or modify a placement policy, you can use the `SURVIVAL_PREFERENCES` option to set the preferred survivability for your data.
+
+For example, assuming that you have a TiDB cluster across 3 availability zones, with multiple TiKV instances deployed on each host in each zone. And when creating placement policies for this cluster, you have set the `SURVIVAL_PREFERENCES` as follows:
+
+``` sql
+CREATE PLACEMENT POLICY multiaz SURVIVAL_PREFERENCES="[zone, host]";
+CREATE PLACEMENT POLICY singleaz CONSTRAINTS="[+zone=zone1]" SURVIVAL_PREFERENCES="[host]";
+```
+
+After creating the placement policies, you can attach them to the corresponding tables as needed:
+
+- For tables attached with the `multiaz` placement policy, data will be placed in 3 replicas in different availability zones, prioritizing survival goals of data isolation cross zones, followed by survival goals of data isolation cross hosts.
+- For tables attached with the `singleaz` placement policy, data will be placed in 3 replicas in the `zone1` availability zone first, and then meet survival goals of data isolation cross hosts.
+
+> **Note:**
+>
+> `SURVIVAL_PREFERENCES` is equivalent to `location-labels` in PD. For more information, see [Schedule Replicas by Topology Labels](/schedule-replicas-by-topology-labels.md).
+
 ## Compatibility with tools
 
 | Tool Name | Minimum supported version | Description |
@@ -261,5 +283,5 @@ In dictionary format, constraints also indicate a number of instances that apply
 The following known limitations are as follows:
 
 * Temporary tables do not support placement options.
-* Syntactic sugar rules are permitted for setting `PRIMARY_REGION` and `REGIONS`. In the future, we plan to add varieties for `PRIMARY_RACK`, `PRIMARY_ZONE`, and `PRIMARY_HOST`. See [issue #18030](https://github.com/pingcap/tidb/issues/18030). 
+* Syntactic sugar rules are permitted for setting `PRIMARY_REGION` and `REGIONS`. In the future, we plan to add varieties for `PRIMARY_RACK`, `PRIMARY_ZONE`, and `PRIMARY_HOST`. See [issue #18030](https://github.com/pingcap/tidb/issues/18030).
 * Placement rules only ensure that data at rest resides on the correct TiKV store. The rules do not guarantee that data in transit (via either user queries or internal operations) only occurs in a specific region.

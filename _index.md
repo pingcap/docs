@@ -71,9 +71,7 @@ hide_commit: true
 
 [Scale a Cluster](https://docs.pingcap.com/tidb/dev/scale-tidb-using-tiup)
 
-[Back Up Cluster Data](https://docs.pingcap.com/tidb/dev/br-usage-backup)
-
-[Restore Cluster Data](https://docs.pingcap.com/tidb/dev/br-usage-restore)
+[Back Up and Restore Cluster Data](https://docs.pingcap.com/tidb/dev/backup-and-restore-overview)
 
 [Daily Check](https://docs.pingcap.com/tidb/dev/daily-check)
 
@@ -130,6 +128,14 @@ hide_commit: true
 </LearningPath>
 
 <LearningPath label="Reference" icon="cloud-dev">
+
+[TiDB Roadmap](https://docs.pingcap.com/tidb/dev/tidb-roadmap)
+
+[TiDB Configuration File Parameters](https://docs.pingcap.com/tidb/dev/tidb-configuration-file)
+
+[TiDB Command-line Flags](https://docs.pingcap.com/tidb/dev/command-line-flags-for-tidb-configuration)
+
+[TiDB Control](https://docs.pingcap.com/tidb/dev/tidb-control)
 
 [System Variables](https://docs.pingcap.com/tidb/dev/system-variables)
 

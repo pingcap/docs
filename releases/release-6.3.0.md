@@ -21,6 +21,7 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 - A new syntactic sugar is added to simplify Range partition definitions.
 - Range COLUMNS partitioning supports defining multiple columns.
 - The performance of adding indexes is tripled.
+- Reduce the impact of resource-consuming queries on the response time of lightweight queries by more than 50%.
 
 ## New features
 
@@ -81,7 +82,7 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
 * TiFlash changes the way of using FastScan (experimental) [#5252](https://github.com/pingcap/tiflash/issues/5252) @[hongyunyan](https://github.com/hongyunyan)
 
-    In v6.2.0, TiFlash introduces the FastScan feature, which brings expected performance improvements but lacks flexibility in use. Therefore, in v6.3.0, TiFlash changes [the way of using FastScan](/develop/dev-guide-use-fastscan.md): the `ALTER TABLE ... SET TIFLASH MODE ...` syntax to enable or disable FastScan is deprecated. Instead, you can use the system variable [`tiflash_fastscan`](/system-variables.md#tiflash_fastscan-new-in-v630) to easily control whether to enable FastScan.
+    In v6.2.0, TiFlash introduces the FastScan feature, which brings expected performance improvements but lacks flexibility in use. Therefore, in v6.3.0, TiFlash changes [the way of using FastScan](/tiflash/use-fastscan.md): the `ALTER TABLE ... SET TIFLASH MODE ...` syntax to enable or disable FastScan is deprecated. Instead, you can use the system variable [`tiflash_fastscan`](/system-variables.md#tiflash_fastscan-new-in-v630) to easily control whether to enable FastScan.
 
     When you upgrade from v6.2.0 to v6.3.0, all FastScan settings in v6.2.0 will become invalid, but will not affect the normal reading of data. You need to set the variable `tiflash_fastscan`. When you upgrade from v6.2.0 or an earlier version to v6.3.0, the FastScan feature is not enabled by default for all sessions to keep data consistency.
 
@@ -126,6 +127,10 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
     In the Read-Committed isolation level, the system variable [`tidb_rc_write_check_ts`](/system-variables.md#tidb_rc_write_check_ts-new-in-v630) is introduced to control how TSO is fetched. In the case of Plan Cache hit, TiDB improves the execution efficiency of batch DML statements by reducing the frequency of fetching TSO, and reduces the execution time of running tasks in batch.
 
 ### Stability
+
+* Reduce the impact of resource-consuming queries on the response time of lightweight queries [#13313](https://github.com/tikv/tikv/issues/13313) @[glorv](https://github.com/glorv)
+
+    When resource-consuming queries and lightweight queries are executed at the same time, the response time of lightweight queries is affected. In this case, to ensure the quality of transactional services, lightweight queries are expected to be processed by TiDB first. In v6.3.0, TiKV optimizes the scheduling mechanism of read requests, so that the execution time of resource-consuming queries in each round can meet expectations. This drastically reduces the impact of resource-consuming queries on the response time of lightweight queries and reduces P99 latency by more than 50% for mixed workload scenarios.
 
 * Modify the default policy of loading statistics when statistics become outdated [#27601](https://github.com/pingcap/tidb/issues/27601) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
 
@@ -210,14 +215,14 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 | [`tidb_ddl_flashback_concurrency`](/system-variables.md#tidb_ddl_flashback_concurrency-new-in-v630) | Newly added |  Controls the concurrency of `flashback cluster`. The feature controlled by this variable is not fully functional in TiDB v6.3.0. Do not change the default value.  |
 | [`tidb_enable_exchange_partition`](/system-variables.md#tidb_enable_exchange_partition) | Deprecated |  Controls whether to enable the [`exchange partitions with tables`](/partitioned-table.md#partition-management) feature. The default value is `ON`, that is, `exchange partitions with tables` is enabled by default.  |
 | [`tidb_enable_foreign_key`](/system-variables.md#tidb_enable_foreign_key-new-in-v630) | Newly added |  Controls whether to enable the `FOREIGN KEY` feature. The feature controlled by this variable is not fully functional in TiDB v6.3.0. Do not change the default value.  |
-| [`tidb_enable_general_plan_cache`](/system-variables.md#tidb_enable_general_plan_cache-new-in-v630) | Newly added |  Controls whether to enable the General Plan Cache feature. The feature controlled by this variable is not fully functional in TiDB v6.3.0. Do not change the default value.  |
+| `tidb_enable_general_plan_cache` | Newly added |  Controls whether to enable the General Plan Cache feature. The feature controlled by this variable is not fully functional in TiDB v6.3.0. Do not change the default value.  |
 | [`tidb_enable_metadata_lock`](/system-variables.md#tidb_enable_metadata_lock-new-in-v630)| Newly added | Specifies whether to enable the [Metadata lock](/metadata-lock.md) feature. |
 | [`tidb_enable_null_aware_anti_join`](/system-variables.md#tidb_enable_null_aware_anti_join-new-in-v630) | Newly added |  Controls whether TiDB applies Null-Aware Hash Join when Anti Join is generated by subqueries led by special set operators `NOT IN` and `!= ALL`. |
 | [`tidb_enable_pseudo_for_outdated_stats`](/system-variables.md#tidb_enable_pseudo_for_outdated_stats-new-in-v530) | Modified | Controls the behavior of the optimizer on using statistics of a table when the statistics are outdated. The default value changes from `ON` to `OFF`, which means the optimizer still keeps using the statistics of the table even if the statistics of this table are outdated. |
 | [`tidb_enable_rate_limit_action`](/system-variables.md#tidb_enable_rate_limit_action) | Modified | Controls whether to enable the dynamic memory control feature for the operator that reads data. When this variable is set to `ON`, the memory usage might not be under the control of [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query). Therefore, the default value is changed from `ON` to `OFF`. |
 | [`tidb_enable_tiflash_read_for_write_stmt`](/system-variables.md#tidb_enable_tiflash_read_for_write_stmt-new-in-v630) | Newly added |  Controls whether read requests in SQL write statements are pushed down to TiFlash. The feature controlled by this variable is not fully functional in TiDB v6.3.0. Do not change the default value.  |
 | [`tidb_enable_unsafe_substitute`](/system-variables.md#tidb_enable_unsafe_substitute-new-in-v630) | Newly added | Controls whether to replace expressions with generated columns in an unsafe way. |
-| [`tidb_general_plan_cache_size`](/system-variables.md#tidb_general_plan_cache_size-new-in-v630) | Newly added | Controls the maximum number of execution plans that can be cached by General Plan Cache. The feature controlled by this variable is not fully functional in TiDB v6.3.0. Do not change the default value.  |
+| `tidb_general_plan_cache_size` | Newly added | Controls the maximum number of execution plans that can be cached by General Plan Cache. The feature controlled by this variable is not fully functional in TiDB v6.3.0. Do not change the default value.  |
 | [`tidb_last_plan_replayer_token`](/system-variables.md#tidb_enable_unsafe_substitute-new-in-v630) | Newly added | Read-only and used to obtain the result of the last `PLAN REPLAYER DUMP` execution in the current session. |
 | [tidb_max_paging_size](/system-variables.md#tidb_max_paging_size-new-in-v630) | Newly added | This variable is used to set the minimum number of rows during the coprocessor paging request process. |
 | [`tidb_opt_force_inline_cte`](/system-variables.md#tidb_opt_force_inline_cte-new-in-v630) | Newly added | Controls whether common table expressions (CTEs) in the entire session are inlined or not. The default value is `OFF`, which means that inlining CTE is not enforced by default. |
@@ -225,7 +230,7 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 | [`tidb_partition_prune_mode`](/system-variables.md#tidb_partition_prune_mode-new-in-v51) | Modified | Specifies whether to enable dynamic pruning. Since v6.3.0, the default value changes to `dynamic`. |
 | [`tidb_rc_read_check_ts`](/system-variables.md#tidb_rc_read_check_ts-new-in-v600) | Modified | Used for optimizing the timestamp acquisition, which is suitable for scenarios with read-committed isolation level where read-write conflicts are rare. This feature is oriented to specific service workloads and might cause performance regression in other scenarios. For this reason, since v6.3.0, the scope of this variable changes from `GLOBAL \| SESSION` to `INSTANCE`. That means you can enable this feature for specific TiDB instances. |
 | [`tidb_rc_write_check_ts`](/system-variables.md#tidb_rc_write_check_ts-new-in-v630)  | Newly added | Used for optimizing the acquisition of timestamps and is suitable for scenarios with few point-write conflicts in RC isolation level of pessimistic transactions. Enabling this variable can avoid the latency and overhead brought by obtaining the global timestamps during the execution of point-write statements |
-| [`tiflash_fastscan`](/system-variables.md#tiflash_fastscan-new-in-v630) | Newly added | Controls whether to enable FastScan. If [FastScan](/develop/dev-guide-use-fastscan.md) is enabled (set to `ON`), TiFlash provides more efficient query performance, but does not guarantee the accuracy of the query results or data consistency. |
+| [`tiflash_fastscan`](/system-variables.md#tiflash_fastscan-new-in-v630) | Newly added | Controls whether to enable FastScan. If [FastScan](/tiflash/use-fastscan.md) is enabled (set to `ON`), TiFlash provides more efficient query performance, but does not guarantee the accuracy of the query results or data consistency. |
 
 ### Configuration file parameters
 
@@ -250,8 +255,8 @@ In v6.3.0-DMR, the key new features and improvements are as follows:
 
 * Log backup supports GCS and Azure Blob Storage as backup storage.
 * Log backup is now compatible with the `exchange partition` DDL.
-* The SQL statement `ALTER TABLE ...SET TiFLASH MODE ...` previously used for enabling [fastscan](/develop/dev-guide-use-fastscan.md) is deprecated, and replaced by the system variable [`tiflash_fastscan`](/system-variables.md#tiflash_fastscan-new-in-v630). When you upgrade from v6.2.0 to v6.3.0, all FastScan settings in v6.2.0 will become invalid, but will not affect the normal reading of data. In this case, you need to configure the variable [`tiflash_fastscan`](/system-variables.md#tiflash_fastscan-new-in-v630) to enable or disable FastScan. When you upgrade from an earlier version to v6.3.0, the FastScan feature is not enabled by default for all sessions to keep data consistent.
-* To deploy TiFlash under the Linux AMD64 architecture, the CPU must support AVX2 instruction sets. Use `cat /proc/cpuinfo | grep avx2` to confirm that there is output. By using such CPU instruction sets, TiFlash's vectorization engine can deliver better performance.
+* The SQL statement `ALTER TABLE ...SET TiFLASH MODE ...` previously used for enabling [fastscan](/tiflash/use-fastscan.md) is deprecated, and replaced by the system variable [`tiflash_fastscan`](/system-variables.md#tiflash_fastscan-new-in-v630). When you upgrade from v6.2.0 to v6.3.0, all FastScan settings in v6.2.0 will become invalid, but will not affect the normal reading of data. In this case, you need to configure the variable [`tiflash_fastscan`](/system-variables.md#tiflash_fastscan-new-in-v630) to enable or disable FastScan. When you upgrade from an earlier version to v6.3.0, the FastScan feature is not enabled by default for all sessions to keep data consistent.
+* To deploy TiFlash under the Linux AMD64 architecture, the CPU must support the AVX2 instruction set. Ensure that `cat /proc/cpuinfo | grep avx2` has output. To deploy TiFlash under the Linux ARM64 architecture, the CPU must support the ARMv8 instruction set architecture. Ensure that `cat /proc/cpuinfo | grep 'crc32' | grep 'asimd'` has output. By using the instruction set extensions, TiFlash's vectorization engine can deliver better performance.
 * The minimum version of HAProxy that works with TiDB is now v1.5. HAProxy versions between v1.5 and v2.1 now require the `post-41` configuration option to be set in `mysql-check`. It is recommended to use HAProxy v2.2 or newer.
 
 ## Removed feature

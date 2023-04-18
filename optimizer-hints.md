@@ -201,6 +201,32 @@ EXPLAIN SELECT * FROM t WHERE EXISTS (SELECT /*+ SEMI_JOIN_REWRITE() */ 1 FROM t
 
 From the preceding example, you can see that when using the `SEMI_JOIN_REWRITE()` hint, TiDB can select the execution method of IndexJoin based on the driving table `t1`.
 
+### SHUFFLE_JOIN(t1_name [, tl_name ...])
+
+The `SHUFFLE_JOIN(t1_name [, tl_name ...])` hint tells the optimizer to use the Shuffle Join algorithm on specified tables. This hint only takes effect in the MPP mode. For example:
+
+```sql
+SELECT /*+ SHUFFLE_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
+```
+
+> **Note:**
+>
+> - Before using this hint, make sure that the current TiDB cluster can support using TiFlash MPP mode in the query. For details, refer to [Use TiFlash MPP Mode](/tiflash/use-tiflash-mpp-mode.md).
+> - This hint can be used in combination with the [`HASH_JOIN_BUILD` hint](#hash_join_buildt1_name--tl_name-) and [`HASH_JOIN_PROBE` hint](#hash_join_probet1_name--tl_name-) to control the Build side and Probe side of the Shuffle Join algorithm.
+
+### BROADCAST_JOIN(t1_name [, tl_name ...])
+
+`BROADCAST_JOIN(t1_name [, tl_name ...])` hint tells the optimizer to use the Broadcast Join algorithm on specified tables. This hint only takes effect in the MPP mode. For example:
+
+```sql
+SELECT /*+ BROADCAST_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
+```
+
+> **Note:**
+>
+> - Before using this hint, make sure that the current TiDB cluster can support using TiFlash MPP mode in the query. For details, refer to [Use TiFlash MPP Mode](/tiflash/use-tiflash-mpp-mode.md).
+>- This hint can be used in combination with the [`HASH_JOIN_BUILD` hint](#hash_join_buildt1_name--tl_name-) and [`HASH_JOIN_PROBE` hint](#hash_join_probet1_name--tl_name-) to control the Build side and Probe side of the Broadcast Join algorithm.
+
 ### NO_DECORRELATE()
 
 The `NO_DECORRELATE()` hint tells the optimizer not to try to perform decorrelation for the correlated subquery in the specified query block. This hint is applicable to the `EXISTS`, `IN`, `ANY`, `ALL`, `SOME` subqueries and scalar subqueries that contain correlated columns (that is, correlated subqueries).
@@ -287,6 +313,30 @@ The `STREAM_AGG()` hint tells the optimizer to use the stream aggregation algori
 select /*+ STREAM_AGG() */ count(*) from t1, t2 where t1.a > 10 group by t1.id;
 ```
 
+### MPP_1PHASE_AGG()
+
+`MPP_1PHASE_AGG()` tells the optimizer to use the one-phase aggregation algorithm for all aggregate functions in the specified query block. This hint only takes effect in the MPP mode. For example:
+
+```sql
+SELECT /*+ MPP_1PHASE_AGG() */ COUNT(*) FROM t1, t2 WHERE t1.a > 10 GROUP BY t1.id;
+```
+
+> **Note:**
+>
+> Before using this hint, make sure that the current TiDB cluster can support using TiFlash MPP mode in the query. For details, refer to [Use TiFlash MPP Mode](/tiflash/use-tiflash-mpp-mode.md).
+
+### MPP_2PHASE_AGG()
+
+`MPP_2PHASE_AGG()` tells the optimizer to use the two-phase aggregation algorithm for all aggregate functions in the specified query block. This hint only takes effect in the MPP mode. For example:
+
+```sql
+SELECT /*+ MPP_2PHASE_AGG() */ COUNT(*) FROM t1, t2 WHERE t1.a > 10 GROUP BY t1.id;
+```
+
+> **Note:**
+>
+> Before using this hint, make sure that the current TiDB cluster can support using TiFlash MPP mode in the query. For details, refer to [Use TiFlash MPP Mode](/tiflash/use-tiflash-mpp-mode.md).
+
 ### USE_INDEX(t1_name, idx1_name [, idx2_name ...])
 
 The `USE_INDEX(t1_name, idx1_name [, idx2_name ...])` hint tells the optimizer to use only the given index(es) for a specified `t1_name` table. For example, applying the following hint has the same effect as executing the `select * from t t1 use index(idx1, idx2);` statement.
@@ -328,6 +378,63 @@ The `IGNORE_INDEX(t1_name, idx1_name [, idx2_name ...])` hint tells the optimize
 select /*+ IGNORE_INDEX(t1, idx1, idx2) */ * from t t1;
 ```
 
+### ORDER_INDEX(t1_name, idx1_name [, idx2_name ...])
+
+The `ORDER_INDEX(t1_name, idx1_name [, idx2_name ...])` hint tells the optimizer to use only the given index for a specified table and read the specified index in order.
+
+> **Warning:**
+>
+> This hint might cause SQL statements to fail. It is recommended to test it first. If an error occurs during the test, remove the hint. If the test runs normally, you can continue using it.
+
+This hint is usually applied in the following scenario:
+
+```sql
+CREATE TABLE t(a INT, b INT, key(a), key(b));
+EXPLAIN SELECT /*+ ORDER_INDEX(t, a) */ a FROM t ORDER BY a LIMIT 10;
+```
+
+```sql
++----------------------------+---------+-----------+---------------------+-------------------------------+
+| id                         | estRows | task      | access object       | operator info                 |
++----------------------------+---------+-----------+---------------------+-------------------------------+
+| Limit_10                   | 10.00   | root      |                     | offset:0, count:10            |
+| └─IndexReader_14           | 10.00   | root      |                     | index:Limit_13                |
+|   └─Limit_13               | 10.00   | cop[tikv] |                     | offset:0, count:10            |
+|     └─IndexFullScan_12     | 10.00   | cop[tikv] | table:t, index:a(a) | keep order:true, stats:pseudo |
++----------------------------+---------+-----------+---------------------+-------------------------------+
+```
+
+The optimizer generates two types of plan for this query: `Limit + IndexScan(keep order: true)` and `TopN + IndexScan(keep order: false)`. When the `ORDER_INDEX` hint is used, the optimizer chooses the first plan that reads the index in order.
+
+> **Note:**
+>
+> - If the query itself does not need to read the index in order (that is, without a hint, the optimizer does not generate a plan that reads the index in order in any situation), when the `ORDER_INDEX` hint is used, the error `Can't find a proper physical plan for this query` occurs. In this case, you need to remove the corresponding `ORDER_INDEX` hint.
+> - The index on a partitioned table cannot be read in order, so do not use the `ORDER_INDEX` hint on the partitioned table and its related indexes.
+
+### NO_ORDER_INDEX(t1_name, idx1_name [, idx2_name ...])
+
+The `NO_ORDER_INDEX(t1_name, idx1_name [, idx2_name ...])` hint tells the optimizer to use only the given index for a specified table and not to read the specified index in order. This hint is usually applied in the following scenario.
+
+The following example shows that the effect of the query statement is equivalent to `SELECT * FROM t t1 use index(idx1, idx2);`:
+
+```sql
+CREATE TABLE t(a INT, b INT, key(a), key(b));
+EXPLAIN SELECT /*+ NO_ORDER_INDEX(t, a) */ a FROM t ORDER BY a LIMIT 10;
+```
+
+```sql
++----------------------------+----------+-----------+---------------------+--------------------------------+
+| id                         | estRows  | task      | access object       | operator info                  |
++----------------------------+----------+-----------+---------------------+--------------------------------+
+| TopN_7                     | 10.00    | root      |                     | test.t.a, offset:0, count:10   |
+| └─IndexReader_14           | 10.00    | root      |                     | index:TopN_13                  |
+|   └─TopN_13                | 10.00    | cop[tikv] |                     | test.t.a, offset:0, count:10   |
+|     └─IndexFullScan_12     | 10000.00 | cop[tikv] | table:t, index:a(a) | keep order:false, stats:pseudo |
++----------------------------+----------+-----------+---------------------+--------------------------------+
+```
+
+The same as the example of `ORDER_INDEX` hint, the optimizer generates two types of plans for this query: `Limit + IndexScan(keep order: true)` and `TopN + IndexScan(keep order: false)`. When the `NO_ORDER_INDEX` hint is used, the optimizer will choose the latter plan to read the index out of order.
+
 ### AGG_TO_COP()
 
 The `AGG_TO_COP()` hint tells the optimizer to push down the aggregate operation in the specified query block to the coprocessor. If the optimizer does not push down some aggregate function that is suitable for pushdown, then it is recommended to use this hint. For example:
@@ -368,17 +475,7 @@ select /*+ READ_FROM_STORAGE(TIFLASH[t1], TIKV[t2]) */ t1.a from t t1, t t2 wher
 
 ### USE_INDEX_MERGE(t1_name, idx1_name [, idx2_name ...])
 
-<CustomContent platform="tidb">
-
 The `USE_INDEX_MERGE(t1_name, idx1_name [, idx2_name ...])` hint tells the optimizer to access a specific table with the index merge method. Index merge has two types: intersection type and union type. For details, see [Explain Statements Using Index Merge](/explain-index-merge.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-The `USE_INDEX_MERGE(t1_name, idx1_name [, idx2_name ...])` hint tells the optimizer to access a specific table with the index merge method. Index merge has two types: intersection type and union type.
-
-</CustomContent>
 
 If you explicitly specify the list of indexes, TiDB selects indexes from the list to build index merge; if you do not specify the list of indexes, TiDB selects indexes from all available indexes to build index merge.
 
@@ -687,3 +784,13 @@ SELECT /*+ NTH_PLAN(3) */ count(*) from t where a > 5;
 > **Note:**
 >
 > `NTH_PLAN(N)` is mainly used for testing, and its compatibility is not guaranteed in later versions. Use this hint **with caution**.
+
+### RESOURCE_GROUP(resource_group_name)
+
+`RESOURCE_GROUP(resource_group_name)` is used for [Resource Control](/tidb-resource-control.md) to isolate resources. This hint temporarily executes the current statement using the specified resource group. If the specified resource group does not exist, this hint will be ignored.
+
+Example:
+
+```sql
+SELECT /*+ RESOURCE_GROUP(rg1) */ * FROM t limit 10;
+```

@@ -230,7 +230,7 @@ This section gives the alert rules for the PD component.
 
 * Alert rule:
 
-    `(sum(pd_regions_status{type="miss_peer_region_count"}) by (instance) > 100) and (sum(etcd_server_is_leader) by (instance) > 0)`
+    `(sum(pd_regions_status{type="miss-peer-region-count"}) by (instance) > 100) and (sum(etcd_server_is_leader) by (instance) > 0)`
 
 * Description:
 
@@ -239,7 +239,7 @@ This section gives the alert rules for the PD component.
 * Solution:
 
     * Find the cause of the issue by checking whether there is any TiKV machine that is down or being made offline.
-    * Watch the Region health panel and see whether `miss_peer_region_count` is continuously decreasing.
+    * Watch the Region health panel and see whether `miss-peer-region-count` is continuously decreasing.
 
 ### Warning-level alerts
 
@@ -464,7 +464,7 @@ This section gives the alert rules for the TiKV component.
 
     1. Perform `SELECT VARIABLE_VALUE FROM mysql.tidb WHERE VARIABLE_NAME = "tikv_gc_leader_desc"` to locate the `tidb-server` corresponding to the GC leader;
     2. View the log of the `tidb-server`, and grep gc_worker tidb.log;
-    3. If you find that the GC worker has been resolving locks (the last log is "start resolve locks") or deleting ranges (the last log is "start delete {number} ranges") during this time, it means the GC process is running normally. Otherwise, contact [support@pingcap.com](mailto:support@pingcap.com) to resolve this issue.
+    3. If you find that the GC worker has been resolving locks (the last log is "start resolve locks") or deleting ranges (the last log is "start delete {number} ranges") during this time, it means the GC process is running normally. Otherwise, [get support](/support.md) from PingCAP or the community.
 
 ### Critical-level alerts
 
@@ -691,7 +691,7 @@ This section gives the alert rules for the TiKV component.
 
 * Alert rule:
 
-    `histogram_quantile(0.99, sum(rate(tikv_scheduler_command_duration_seconds_bucket[1m])) by (le, instance, type)  / 1000) > 1`
+    `histogram_quantile(0.99, sum(rate(tikv_scheduler_command_duration_seconds_bucket[1m])) by (le, instance, type)) > 1`
 
 * Description:
 
@@ -751,7 +751,7 @@ This section gives the alert rules for the TiKV component.
 
 * Solution:
 
-    Check which kind of tasks has a higher value. You can normally find a solution to the Coprocessor and apply worker tasks from other metrics.
+    Check which kind of tasks has a higher value from the `Worker pending tasks` metric in the [**TiKV-Details** > **Task** dashboard](/grafana-tikv-dashboard.md#task). If it is a coprocessor task, you can refer to [`TiKV_coprocessor_request_wait_seconds`](#tikv_coprocessor_request_wait_seconds).
 
 #### `TiKV_low_space`
 

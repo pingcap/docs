@@ -18,7 +18,7 @@ This document describes how to migrate large datasets from MySQL to TiDB. The wh
 - [Install Dumpling and TiDB Lightning](/migration-tools.md).
 - [Grant the source database and target database privileges required for DM](/dm/dm-worker-intro.md).
 - [Grant the target database privileges required for TiDB Lightning](/tidb-lightning/tidb-lightning-faq.md#what-are-the-privilege-requirements-for-the-target-database).
-- [Grant the source database privileges required for Dumpling](/dumpling-overview.md#export-data-from-tidbmysql).
+- [Grant the source database privileges required for Dumpling](/dumpling-overview.md#export-data-from-tidb-or-mysql).
 
 ## Resource requirements
 
@@ -72,7 +72,7 @@ The target TiKV cluster must have enough disk space to store the imported data. 
     |`-P` or `--port`       |MySQL port|
     |`-h` or `--host`       |MySQL IP address|
     |`-t` or `--thread`     |The number of threads used for export|
-    |`-o` or `--output`     |The directory that stores the exported file. Supports a local path or an [external storage URL](/br/backup-and-restore-storages.md)|
+    |`-o` or `--output`     |The directory that stores the exported file. Supports a local path or an [external storage URI](/br/backup-and-restore-storages.md#uri-format)|
     |`-r` or `--row`        |The maximum number of rows in a single file|
     |`-F`                   |The maximum size of a single file, in MiB. Recommended value: 256 MiB.|
     |-`B` or `--database`   |Specifies a database to be exported|

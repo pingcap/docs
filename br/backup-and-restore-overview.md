@@ -15,6 +15,34 @@ BR satisfies the following requirements:
 - Perform history data auditing to meet the requirements of judicial supervision.
 - Clone the production environment, which is convenient for troubleshooting, performance tuning, and simulation testing.
 
+## Before you use
+
+This section describes the prerequisites for using TiDB backup and restore, including restrictions, usage tips and compatibility issues.
+
+### Restrictions
+
+- PITR only supports restoring data to **an empty cluster**.
+- PITR only supports cluster-level restore and does not support database-level or table-level restore.
+- PITR does not support restoring the data of user tables or privilege tables from system tables.
+- BR does not support running multiple backup tasks on a cluster **at the same time**.
+- When a PITR is running, you cannot run a log backup task or use TiCDC to replicate data to a downstream cluster.
+
+### Some tips
+
+Snapshot backup:
+
+- It is recommended that you perform the backup operation during off-peak hours to minimize the impact on applications.
+- It is recommended that you execute multiple backup or restore tasks one by one. Running multiple backup tasks in parallel leads to low performance. Worse still, a lack of collaboration between multiple tasks might result in task failures and affect cluster performance.
+
+Snapshot restore:
+
+- BR uses resources of the target cluster as much as possible. Therefore, it is recommended that you restore data to a new cluster or an offline cluster. Avoid restoring data to a production cluster. Otherwise, your application will be affected inevitably.
+
+Backup storage and network configuration:
+
+- It is recommended that you store backup data to a storage system that is compatible with Amazon S3, GCS, or Azure Blob Storage.
+- You need to ensure that BR, TiKV, and the backup storage system have enough network bandwidth, and that the backup storage system can provide sufficient read and write performance (IOPS). Otherwise, they might become a performance bottleneck during backup and restore.
+
 ## Use backup and restore
 
 The way to use BR varies with the deployment method of TiDB. This document introduces how to use the br command-line tool to back up and restore TiDB cluster data in an on-premise deployment.
@@ -72,37 +100,12 @@ Corresponding to the backup features, you can perform two types of restore: full
 
 TiDB supports backing up data to Amazon S3, Google Cloud Storage (GCS), Azure Blob Storage, NFS, and other S3-compatible file storage services. For details, see the following documents:
 
-- [Specify backup storage in URL](/br/backup-and-restore-storages.md#url-format)
+- [Specify backup storage in URI](/br/backup-and-restore-storages.md#uri-format)
 - [Configure access privileges to backup storages](/br/backup-and-restore-storages.md#authentication)
 
-## Before you use
+## Compatibility
 
-This section describes the prerequisites for using TiDB backup and restore, including the usage tips and compatibility issues.
-
-### Some tips
-
-Snapshot backup:
-
-- It is recommended that you perform the backup operation during off-peak hours to minimize the impact on applications.
-- It is recommended that you execute multiple backup or restore operations one by one. Running backup operations in parallel leads to low performance. Worse still, lack of collaboration between multiple tasks might result in task failures and affect cluster performance.
-
-Snapshot restore:
-
-- BR uses resources of the target cluster as much as possible. Therefore, it is recommended that you restore data to a new cluster or an offline cluster. Avoid restoring data to a production cluster. Otherwise, your application might be affected. PITR only supports restoring data to an empty cluster.
-
-PITR:
-
-- You can only perform cluster-level PITR. Database-level and table-level PITR are not supported.
-- You cannot restore data in the user tables or the privilege tables.
-
-Backup storage and network configuration:
-
-- It is recommended that you store backup data to a storage system that is compatible with Amazon S3, GCS, or Azure Blob Storage.
-- You need to ensure that BR, TiKV, and the backup storage system have enough network bandwidth, and the storage system can provide sufficient read and write performance (IOPS). Otherwise, they might become a performance bottleneck during backup and restore.
-
-### Compatibility
-
-#### Compatibility with other features
+### Compatibility with other features
 
 Backup and restore might go wrong when some TiDB features are enabled or disabled. If these features are not consistently enabled or disabled during backup and restore, compatibility issues might occur.
 
@@ -114,17 +117,18 @@ Backup and restore might go wrong when some TiDB features are enabled or disable
 | Global temporary tables | | Make sure that you are using v5.3.0 or a later version of BR to back up and restore data. Otherwise, an error occurs in the definition of the backed global temporary tables. |
 | TiDB Lightning Physical Import| | If the upstream database uses the physical import mode of TiDB Lightning, data cannot be backed up in log backup. It is recommended to perform a full backup after the data import. For more information, see [When the upstream database imports data using TiDB Lightning in the physical import mode, the log backup feature becomes unavailable. Why?](/faq/backup-and-restore-faq.md#when-the-upstream-database-imports-data-using-tidb-lightning-in-the-physical-import-mode-the-log-backup-feature-becomes-unavailable-why).|
 
-#### Version compatibility
+### Version compatibility
 
 Before performing backup and restore, BR compares and checks the TiDB cluster version with its own. If there is a major-version mismatch, BR prompts a reminder to exit. To forcibly skip the version check, you can set `--check-requirements=false`. Note that skipping the version check might introduce incompatibility.
 
-| Backup version (vertical) \ Restore version (horizontal) | Restore to TiDB v6.0 | Restore to TiDB v6.1 | Restore to TiDB v6.2 | Restore to TiDB v6.3 |
-|  ----  |  ----  | ---- | ---- | ---- |
-| TiDB v6.0 snapshot backup | Compatible | Compatible | Compatible | Compatible |
-| TiDB v6.1 snapshot backup | Compatible (A known issue [#36379](https://github.com/pingcap/tidb/issues/36379): if backup data contains an empty schema, BR might report an error.) | Compatible | Compatible | Compatible |
-| TiDB v6.2 snapshot backup | Compatible (A known issue [#36379](https://github.com/pingcap/tidb/issues/36379): if backup data contains an empty schema, BR might report an error.) | Compatible | Compatible | Compatible |
-| TiDB v6.3 snapshot backup | Compatible (A known issue [#36379](https://github.com/pingcap/tidb/issues/36379): if backup data contains an empty schema, BR might report an error.) | Compatible | Compatible | Compatible |
-| TiDB v6.3 log backup| N/A | N/A | Incompatible | Compatible |
+> **Note:**
+>
+> When performing backup and restore, it is recommended that the BR and TiDB cluster are of the same version.
+
+| Backup version (vertical) \ Restore version (horizontal)   | Restore to TiDB v6.0 | Restore to TiDB v6.1 | Restore to TiDB v6.2 | Restore to TiDB v6.3, v6.4, or v6.5 | Restore to TiDB v6.6 |
+|  ----  |  ----  | ---- | ---- | ---- | ---- |
+| TiDB v6.0, v6.1, v6.2, v6.3, v6.4, or v6.5 snapshot backup | Compatible (known issue [#36379](https://github.com/pingcap/tidb/issues/36379): if backup data contains an empty schema, BR might report an error.) | Compatible | Compatible | Compatible | Compatible (BR must be v6.6 or later) |
+| TiDB v6.3, v6.4, v6.5, or v6.6 log backup| Incompatible | Incompatible | Incompatible | Compatible | Compatible |
 
 ## See also
 

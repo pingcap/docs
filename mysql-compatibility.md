@@ -41,7 +41,6 @@ In addition, TiDB does not support the MySQL replication protocol, but provides 
 + Triggers
 + Events
 + User-defined functions
-+ `FOREIGN KEY` constraints [#18209](https://github.com/pingcap/tidb/issues/18209)
 + `FULLTEXT` syntax and indexes [#1793](https://github.com/pingcap/tidb/issues/1793)
 + `SPATIAL` (also known as `GIS`/`GEOMETRY`) functions, data types and indexes [#6347](https://github.com/pingcap/tidb/issues/6347)
 + Character sets other than `ascii`, `latin1`, `binary`, `utf8`, `utf8mb4`, and `gbk`.
@@ -70,7 +69,9 @@ In addition, TiDB does not support the MySQL replication protocol, but provides 
 
 + TiDB does not support adding the `AUTO_INCREMENT` column attribute, and this attribute cannot be recovered once it is removed.
 
-+ See [`AUTO_INCREMENT`](/auto-increment.md) for more details.
++ For TiDB v6.6.0 and earlier versions, TiDB behaves the same as MySQL InnoDB, which requires auto-increment columns to be primary keys or index prefixes. Starting from v7.0.0, TiDB removes the restriction that auto-increment columns must be indexes or index prefixes, which allows you to define table primary keys more flexibly. [#40580](https://github.com/pingcap/tidb/issues/40580)
+
+For more details, see [`AUTO_INCREMENT`](/auto-increment.md).
 
 > **Note:**
 >
@@ -80,20 +81,27 @@ In addition, TiDB does not support the MySQL replication protocol, but provides 
 mysql> CREATE TABLE t(id INT UNIQUE KEY AUTO_INCREMENT);
 Query OK, 0 rows affected (0.05 sec)
 
-mysql> INSERT INTO t VALUES(),(),();
-Query OK, 3 rows affected (0.00 sec)
-Records: 3  Duplicates: 0  Warnings: 0
+mysql> INSERT INTO t VALUES();
+Query OK, 1 rows affected (0.00 sec)
+
+mysql> INSERT INTO t VALUES();
+Query OK, 1 rows affected (0.00 sec)
+
+mysql> INSERT INTO t VALUES();
+Query OK, 1 rows affected (0.00 sec)
 
 mysql> SELECT _tidb_rowid, id FROM t;
 +-------------+------+
 | _tidb_rowid | id   |
 +-------------+------+
-|           4 |    1 |
-|           5 |    2 |
-|           6 |    3 |
+|           2 |    1 |
+|           4 |    3 |
+|           6 |    5 |
 +-------------+------+
 3 rows in set (0.01 sec)
 ```
+
+As you can see, because of the shared allocator, the `id` increments by 2 each time. This behavior is changed in [MySQL compatibility mode](/auto-increment.md#mysql-compatibility-mode), where there is no shared allocator and therefore no skipping of numbers.
 
 <CustomContent platform="tidb">
 
@@ -149,14 +157,13 @@ In TiDB, all supported DDL changes are performed online. Compared with DDL opera
 * The `ALGORITHM={INSTANT,INPLACE,COPY}` syntax functions only as an assertion in TiDB, and does not modify the `ALTER` algorithm. See [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md) for further details.
 * Adding/Dropping the primary key of the `CLUSTERED` type is unsupported. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
 * Different types of indexes (`HASH|BTREE|RTREE|FULLTEXT`) are not supported, and will be parsed and ignored when specified.
-* Table Partitioning supports `HASH`, `RANGE`, and `LIST` partitioning types. For the unsupported partition type, the `Warning: Unsupported partition type %s, treat as normal table` error might be output, where `%s` is a specific partition type.
-* Table Partitioning also supports `ADD`, `DROP`, and `TRUNCATE` operations. Other partition operations are ignored. The following Table Partition syntaxes are not supported:
-    - `PARTITION BY KEY`
-    - `PARTITION BY LINEAR KEY`
-    - `SUBPARTITION`
-    - `{CHECK|TRUNCATE|OPTIMIZE|REPAIR|IMPORT|DISCARD|REBUILD|REORGANIZE|COALESCE} PARTITION`
+* TiDB supports `HASH`, `RANGE`, `LIST`, and `KEY` partitioning types. Currently, the `KEY` partition type does not support partition statements with an empty partition column list. For an unsupported partition type, TiDB returns `Warning: Unsupported partition type %s, treat as normal table`, where `%s` is the specific unsupported partition type.
+* Partitioned tables support `ADD`, `DROP`, `TRUNCATE`, and `REORGANIZE` operations. Other partition operations are ignored. The following syntaxes are not supported for partitioned tables:
 
-    For more details, see [Partitioning](/partitioned-table.md).
+    - `SUBPARTITION`
+    - `{CHECK|TRUNCATE|OPTIMIZE|REPAIR|IMPORT|DISCARD|REBUILD|COALESCE} PARTITION`
+
+  For more details, see [Partitioning](/partitioned-table.md).
 
 ### Analyze table
 
@@ -220,9 +227,6 @@ TiDB supports most [SQL modes](/sql-mode.md):
     - The default collation of `utf8mb4` in TiDB is `utf8mb4_bin`.
     - The default collation of `utf8mb4` in MySQL 5.7 is `utf8mb4_general_ci`.
     - The default collation of `utf8mb4` in MySQL 8.0 is `utf8mb4_0900_ai_ci`.
-- Default value of `foreign_key_checks`:
-    - The default value in TiDB is `OFF` and currently TiDB only supports `OFF`.
-    - The default value in MySQL 5.7 is `ON`.
 - Default SQL mode:
     - The default SQL mode in TiDB includes these modes: `ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION`.
     - The default SQL mode in MySQL:
@@ -231,9 +235,9 @@ TiDB supports most [SQL modes](/sql-mode.md):
 - Default value of `lower_case_table_names`:
     - The default value in TiDB is `2` and currently TiDB only supports `2`.
     - The default value in MySQL:
-        - On Linux: `0`
-        - On Windows: `1`
-        - On macOS: `2`
+        - On Linux: `0`. It means that table and database names are stored on disk using the lettercase specified in the `CREATE TABLE` or `CREATE DATABASE` statement. Name comparisons are case-sensitive.
+        - On Windows: `1`. It means that table names are stored in lowercase on disk and name comparisons are not case-sensitive. MySQL converts all table names to lowercase on storage and lookup. This behavior also applies to database names and table aliases.
+        - On macOS: `2`. It means that table and database names are stored on disk using the lettercase specified in the `CREATE TABLE` or `CREATE DATABASE` statement, but MySQL converts them to lowercase on lookup. Name comparisons are not case-sensitive.
 - Default value of `explicit_defaults_for_timestamp`:
     - The default value in TiDB is `ON` and currently TiDB only supports `ON`.
     - The default value in MySQL:
@@ -260,3 +264,11 @@ TiDB does not implement certain features that have been marked as deprecated in 
 
 * Specifying precision for floating point types. MySQL 8.0 [deprecates](https://dev.mysql.com/doc/refman/8.0/en/floating-point-types.html) this feature, and it is recommended to use the `DECIMAL` type instead.
 * The `ZEROFILL` attribute. MySQL 8.0 [deprecates](https://dev.mysql.com/doc/refman/8.0/en/numeric-type-attributes.html) this feature, and it is recommended to instead pad numeric values in your application.
+
+### `CREATE RESOURCE GROUP`, `DROP RESOURCE GROUP`, and `ALTER RESOURCE GROUP` statements
+
+For the statements of creating, modifying, and dropping resource groups, the supported parameters are different from that of MySQL. See the following documents for details:
+
+- [`CREATE RESOURCE GROUP`](/sql-statements/sql-statement-create-resource-group.md)
+- [`DROP RESOURCE GROUP`](/sql-statements/sql-statement-drop-resource-group.md)
+- [`ALTER RESOURCE GROUP`](/sql-statements/sql-statement-alter-resource-group.md)
