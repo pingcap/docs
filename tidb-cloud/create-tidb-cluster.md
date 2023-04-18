@@ -72,11 +72,15 @@ To create a Serverless Tier cluster, take the following steps:
 
 2. Click **Create Cluster**.
 
-3. On the **Create Cluster** page, select **Serverless Tier**, and update the default cluster name if necessary.
+3. On the **Create Cluster** page, **Serverless** is selected by default.
 
-4. Note that the cloud provider of Serverless Tier is AWS, and then select the region where you want to create your cluster.
+    > **Note:**
+    >
+    > For each TiDB Cloud account, you can create a maximum of five complimentary Serverless Tier clusters. After the limit is reached, **Dedicated** is selected by default.
 
-5. Click **Create**.
+4. The cloud provider of Serverless Tier is AWS. You can select an AWS region where you want to host your cluster.
+
+5. Update the default cluster name if necessary, and then click **Create**.
 
     The cluster creation process starts and your TiDB Cloud cluster will be created in approximately 30 seconds.
 
@@ -100,36 +104,38 @@ To create a Dedicated Tier cluster, take the following steps:
 
 2. Click **Create Cluster**.
 
-3. On the **Create Cluster** page, select **Dedicated Tier**, update the default cluster name and port number if necessary, choose a cloud provider and a region, and then click **Next**.
+3. On the **Create Cluster** page, select **Dedicated**, and then configure the cluster information as follows:
 
-    > **Note:**
-    >
-    > - If you signed up TiDB Cloud through [AWS Marketplace](https://aws.amazon.com/marketplace), the cloud provider is AWS, and you cannot change it in TiDB Cloud.
-    > - If you signed up TiDB Cloud through [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), the cloud provider is GCP, and you cannot change it in TiDB Cloud.
+    1. Choose a cloud provider and a region.
 
-4. If this is the first cluster of your current project and CIDR has not been configured for this project, you need to set the project CIDR, and then click **Next**. If you do not see the **Project CIDR** field, it means that CIDR has already been configured for this project.
+        > **Note:**
+        >
+        > - If you signed up for TiDB Cloud through [AWS Marketplace](https://aws.amazon.com/marketplace), the cloud provider is AWS, and you cannot change it in TiDB Cloud.
+        > - If you signed up for TiDB Cloud through [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), the cloud provider is GCP, and you cannot change it in TiDB Cloud.
 
-    > **Note:**
-    >
-    > When setting the project CIDR, avoid any conflicts with the CIDR of the VPC where your application is located. You cannot modify your project CIDR once it is set.
+    2. Configure the [cluster size](/tidb-cloud/size-your-cluster.md) for TiDB, TiKV, and TiFlash (optional) respectively.
+    3. Update the default cluster name and port number if necessary.
+    4. If this is the first cluster of your current project and CIDR has not been configured for this project, you need to set the project CIDR. If you do not see the **Project CIDR** field, it means that CIDR has already been configured for this project.
 
-5. Configure the [cluster size](/tidb-cloud/size-your-cluster.md) for TiDB, TiKV, and TiFlash (optional) respectively, and then click **Next**.
+        > **Note:**
+        >
+        > When setting the project CIDR, avoid any conflicts with the CIDR of the VPC where your application is located. You cannot modify your project CIDR once it is set.
 
-6. Confirm the cluster information on the page and the billing information in the lower-left corner.
+4. Confirm the cluster and billing information on the right side.
 
-7. If you have not added a payment method, click **Add Credit Card** in the lower-right corner.
+5. If you have not added a payment method, click **Add Credit Card** in the lower-right corner.
 
     > **Note:**
     >
     > If you signed up TiDB Cloud through [AWS Marketplace](https://aws.amazon.com/marketplace) or [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), you can pay through your AWS account or Google Cloud account directly but cannot add payment methods or download invoices in the TiDB Cloud console.
 
-8. Click **Create**.
+6. Click **Create**.
 
     Your TiDB Cloud cluster will be created in approximately 20 to 30 minutes.
 
-9. In the row of your target cluster, click **...** and select **Security Settings**.
+7. In the upper-right corner of your cluster overview page, click **...** and select **Security Settings**.
 
-10. Set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
+8. Set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
 
 </div>
 </SimpleTab>
