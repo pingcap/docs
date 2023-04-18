@@ -64,7 +64,7 @@ Slow query basics:
 * `Txn_start_ts`: The start timestamp and the unique ID of a transaction. You can use this value to search for the transaction-related logs.
 * `Is_internal`: Whether a SQL statement is TiDB internal. `true` indicates that a SQL statement is executed internally in TiDB and `false` indicates that a SQL statement is executed by the user.
 * `Index_names`: The index names used by the statement.
-* `Stats`: The health state of the involved tables. `pseudo` indicates that the state is unhealthy.
+* `Stats`: The health state, internal version, total row count, row count of modifications and load status of statistics that are used during this query. `pseudo` indicates that the state is unhealthy. If the optimizer tried to use some statistics that are not fully loaded, they will also be printed. For example, `t1:439478225786634241[105000;5000][col1:allEvicted][idx1:allEvicted]` means during this query, statistics on table `t1` are used, its internal version is `439478225786634241`, the total row count in the statistics is `105000`, `5000` rows of modification is recorded since the last time statistics are collected, and statistics on column `col1` and index `idx1` are not fully loaded.
 * `Succ`: Whether a statement is executed successfully.
 * `Backoff_time`: The waiting time before retry when a statement encounters errors that require a retry. The common errors as such include: `lock occurs`, `Region split`, and `tikv server is busy`.
 * `Plan`: The execution plan of a statement. Execute the `SELECT tidb_decode_plan('xxx...')` statement to parse the specific execution plan.
