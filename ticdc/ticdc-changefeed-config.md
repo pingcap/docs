@@ -133,7 +133,7 @@ null = '\N'
 include-commit-ts = false
 
 [integrity]
-# Whether to enable the checksum validation for single-row data. The default value is "none", which means to diable the feature. Value options are "none" and "correctness".
+# Whether to enable the checksum validation for single-row data. The default value is "none", which means to disable the feature. Value options are "none" and "correctness".
 integrity-check-level = "none"
 # Specifies the log level of the Changefeed when the checksum validation for single-row data fails. The default value is "warn". Value options are "warn" and "error".
 corruption-handle-level = "warn"
