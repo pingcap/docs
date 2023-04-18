@@ -71,12 +71,6 @@ Slow query basics:
     - `5000`: the number of rows of modification recorded since the last time statistics are collected
     - `col1:allEvicted`: statistics on the column `col1` are not fully loaded
     - `idx1:allEvicted`: statistics on the index `idx1` are not fully loaded
-    - `t1`: statistics on table `t1` are used during this query
-    - `439478225786634241`: its internal version
-    - `105000`: the total row count in the statistics
-    - `5000`: the number of rows of modification recorded since the last time statistics are collected
-    - `col1:allEvicted`: statistics on the column `col1` are not fully loaded
-    - `idx1:allEvicted`: statistics on the index `idx1` are not fully loaded
 * `Succ`: Whether a statement is executed successfully.
 * `Backoff_time`: The waiting time before retry when a statement encounters errors that require a retry. The common errors as such include: `lock occurs`, `Region split`, and `tikv server is busy`.
 * `Plan`: The execution plan of a statement. Execute the `SELECT tidb_decode_plan('xxx...')` statement to parse the specific execution plan.
