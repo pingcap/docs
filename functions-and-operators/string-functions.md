@@ -6,7 +6,13 @@ aliases: ['/docs/dev/functions-and-operators/string-functions/','/docs/dev/refer
 
 # String Functions
 
-TiDB supports most of the [string functions](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html) available in MySQL 5.7 and some of the [functions](https://docs.oracle.com/en/database/oracle/oracle-database/21/sqlqr/SQL-Functions.html#GUID-93EC62F8-415D-4A7E-B050-5D5B2C127009) available in Oracle 21.
+TiDB supports most of the [string functions](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html) available in MySQL 5.7, some of the [string functions](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html) available in MySQL 8.0, and some of the [functions](https://docs.oracle.com/en/database/oracle/oracle-database/21/sqlqr/SQL-Functions.html#GUID-93EC62F8-415D-4A7E-B050-5D5B2C127009) available in Oracle 21.
+
+<CustomContent platform="tidb">
+
+For comparisons between functions and syntax of Oracle and TiDB, see [Comparisons between Functions and Syntax of Oracle and TiDB](/oracle-functions-to-tidb.md).
+
+</CustomContent>
 
 ## Supported functions
 
@@ -47,6 +53,10 @@ TiDB supports most of the [string functions](https://dev.mysql.com/doc/refman/5.
 | [`POSITION()`](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_position)                                               | Synonym for `LOCATE()`                                                                                                                    |
 | [`QUOTE()`](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_quote)                                                     | Escape the argument for use in an SQL statement                                                                                           |
 | [`REGEXP`](https://dev.mysql.com/doc/refman/5.7/en/regexp.html#operator_regexp)                                                               | Pattern matching using regular expressions                                                                                                |
+| [`REGEXP_INSTR()`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#function_regexp-instr) | Return the starting index of the substring that matches the regular expression (Partly compatible with MySQL. For more details, see [Regular expression compatibility with MySQL](#regular-expression-compatibility-with-mysql)) |
+| [`REGEXP_LIKE()`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#function_regexp-like) | Whether the string matches the regular expression (Partly compatible with MySQL. For more details, see [Regular expression compatibility with MySQL](#regular-expression-compatibility-with-mysql)) |
+| [`REGEXP_REPLACE()`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#function_regexp-replace) | Replace substrings that match the regular expression (Partly compatible with MySQL. For more details, see [Regular expression compatibility with MySQL](#regular-expression-compatibility-with-mysql)) |
+| [`REGEXP_SUBSTR()`](https://dev.mysql.com/doc/refman/8.0/en/regexp.html#function_regexp-substr) | Return the substring that matches the regular expression (Partly compatible with MySQL. For more details, see [Regular expression compatibility with MySQL](#regular-expression-compatibility-with-mysql)) |
 | [`REPEAT()`](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_repeat)                                                   | Repeat a string the specified number of times                                                                                             |
 | [`REPLACE()`](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_replace)                                                 | Replace occurrences of a specified string                                                                                                 |
 | [`REVERSE()`](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_reverse)                                                 | Reverse the characters in a string                                                                                                        |
@@ -65,11 +75,45 @@ TiDB supports most of the [string functions](https://dev.mysql.com/doc/refman/5.
 | [`UCASE()`](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_ucase)                                                     | Synonym for `UPPER()`                                                                                                                     |
 | [`UNHEX()`](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_unhex)                                                     | Return a string containing hex representation of a number                                                                                 |
 | [`UPPER()`](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_upper)                                                     | Convert to uppercase                                                                                                                      |
+| [`WEIGHT_STRING()`](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_weight-string) | Return the weight string for the input string |
 
 ## Unsupported functions
 
 * `LOAD_FILE()`
-* `MATCH`
+* `MATCH()`
 * `SOUNDEX()`
-* `SOUNDS LIKE`
-* `WEIGHT_STRING()`
+
+## Regular expression compatibility with MySQL
+
+The following sections describe the regular expression compatibility with MySQL.
+
+### Syntax compatibility
+
+MySQL implements regular expression using International Components for Unicode (ICU), and TiDB uses RE2. To learn the syntax differences between the two libraries, you can refer to the [ICU documentation](https://unicode-org.github.io/icu/userguide/) and [RE2 Syntax](https://github.com/google/re2/wiki/Syntax).
+
+### `match_type` compatibility
+
+The value options of `match_type` between TiDB and MySQL are:
+
+- Value options in TiDB are `"c"`, `"i"`, `"m"`, and `"s"`, and value options in MySQL are `"c"`, `"i"`, `"m"`, `"n"`, and `"u"`.
+- The `"s"` in TiDB corresponds to `"n"` in MySQL. When `"s"` is set in TiDB, the `.` character also matches line terminators (`\n`).
+
+    For example, the `SELECT REGEXP_LIKE(a, b, "n") FROM t1` in MySQL is the same as the `SELECT REGEXP_LIKE(a, b, "s") FROM t1` in TiDB.
+
+- TiDB does not support `"u"`, which means Unix-only line endings in MySQL.
+
+### Data type compatibility
+
+The difference between TiDB and MySQL support for the binary string type:
+
+- MySQL does not support binary strings in regular expression functions since 8.0.22. For more details, refer to [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/regexp.html). But in practice, regular functions can work in MySQL when all parameters or return types are binary strings. Otherwise, an error will be reported.
+- Currently, TiDB prohibits using binary strings and an error will be reported under any circumstances.
+
+### Other compatibility
+
+The difference between TiDB and MySQL support in replacing empty strings:
+
+The following takes `REGEXP_REPLACE("", "^$", "123")` as an example:
+
+- MySQL does not replace the empty string and returns `""` as the result.
+- TiDB replaces the empty string and returns `"123"` as the result.

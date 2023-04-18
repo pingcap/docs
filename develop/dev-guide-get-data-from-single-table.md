@@ -1,34 +1,54 @@
 ---
-title: Query data from a single table
+title: Query Data from a Single Table
 summary: This document describes how to query data from a single table in a database.
 ---
 
 <!-- markdownlint-disable MD029 -->
 
-# Query data from a single table
+# Query Data from a Single Table
 
 This document describes how to use SQL and various programming languages to query data from a single table in a database.
 
 ## Before you begin
 
-The following content will take the [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application as an example to show how to query data from a single table in TiDB.
+The following content takes the [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application as an example to show how to query data from a single table in TiDB.
 
 Before querying data, make sure that you have completed the following steps:
 
+<CustomContent platform="tidb">
+
 1. Build a TiDB cluster (using [TiDB Cloud](/develop/dev-guide-build-cluster-in-cloud.md) or [TiUP](/production-deployment-using-tiup.md) is recommended).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+1. Build a TiDB cluster using [TiDB Cloud](/develop/dev-guide-build-cluster-in-cloud.md).
+
+</CustomContent>
+
 2. [Import table schema and sample data of the Bookshop application](/develop/dev-guide-bookshop-schema-design.md#import-table-structures-and-data).
+
+<CustomContent platform="tidb">
+
 3. [Connect to TiDB](/develop/dev-guide-connect-to-tidb.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+3. [Connect to TiDB](/tidb-cloud/connect-to-tidb-cluster.md).
+
+</CustomContent>
 
 ## Execute a simple query
 
 In the database of the Bookshop application, the `authors` table stores the basic information of authors. You can use the `SELECT ... FROM ...` statement to query data from the database.
 
-<SimpleTab>
-<div label="SQL" href="simple-sql">
+<SimpleTab groupId="language">
+<div label="SQL" value="sql">
 
 Execute the following SQL statement in a MySQL client:
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT id, name FROM authors;
@@ -56,17 +76,14 @@ The output is as follows:
 ```
 
 </div>
-<div label="Java" href="simple-java">
+<div label="Java" value="java">
 
-In Java, authors' basic information can be stored by declaring a class `Author`. You should choose appropriate Java data types according to the [type](/data-type-overview.md) and [value range](/data-type-numeric.md) in the database. For example:
+In Java, to store the basic information of authors, you can declare a class `Author`. You should choose appropriate Java data types according to the [Data types](/data-type-overview.md) and [Value range](/data-type-numeric.md) in the database. For example:
 
 - Use a variable of type `Int` to store data of type `int`.
 - Use a variable of type `Long` to store data of type `bigint`.
 - Use a variable of type `Short` to store data of type `tinyint`.
 - Use a variable of type `String` to store data of type `varchar`.
-- ...
-
-{{< copyable "java" >}}
 
 ```java
 public class Author {
@@ -82,12 +99,10 @@ public class Author {
 }
 ```
 
-{{< copyable "java" >}}
-
 ```java
 public class AuthorDAO {
 
-    // Omit initialization of instance variables...
+    // Omit initialization of instance variables.
 
     public List<Author> getAuthors() throws SQLException {
         List<Author> authors = new ArrayList<>();
@@ -97,7 +112,7 @@ public class AuthorDAO {
             ResultSet rs = stmt.executeQuery("SELECT id, name FROM authors");
             while (rs.next()) {
                 Author author = new Author();
-                author.setId( rs.getLong("id"));
+                author.setId(rs.getLong("id"));
                 author.setName(rs.getString("name"));
                 authors.add(author);
             }
@@ -107,40 +122,47 @@ public class AuthorDAO {
 }
 ```
 
+<CustomContent platform="tidb">
+
 - After [connecting to TiDB using the JDBC driver](/develop/dev-guide-connect-to-tidb.md#jdbc), you can create a `Statement` object with `conn.createStatus()`.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- After [connecting to TiDB using the JDBC driver](/develop/dev-guide-choose-driver-or-orm.md#java-drivers), you can create a `Statement` object with `conn.createStatus()`.
+
+</CustomContent>
+
 - Then call `stmt.executeQuery("query_sql")` to initiate a database query request to TiDB.
-- The query results will be stored in a `ResultSet` object. By traversing `ResultSet`, the returned results can be mapped to the `Author` object.
+- The query results are stored in a `ResultSet` object. By traversing `ResultSet`, the returned results can be mapped to the `Author` object.
 
 </div>
 </SimpleTab>
 
 ## Filter results
 
-You can use the `WHERE` statement to filter query results.
+To filter query results, you can use the `WHERE` statement.
 
-For example, the following command will query authors who were born in 1998 among all authors:
+For example, the following command queries authors who were born in 1998 among all authors:
 
-<SimpleTab>
-<div label="SQL" href="filter-sql">
+<SimpleTab groupId="language">
+<div label="SQL" value="sql">
 
 Add filter conditions in the `WHERE` statement:
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT * FROM authors WHERE birth_year = 1998;
 ```
 
 </div>
-<div label="Java" href="filter-java">
+<div label="Java" value="java">
 
 In Java, you can use the same SQL to handle data query requests with dynamic parameters.
 
-This can be done by concatenating parameters into a SQL statement. However, this method will pose a potential [SQL Injection](https://en.wikipedia.org/wiki/SQL_injection) risk to the security of the application.
+This can be done by concatenating parameters into a SQL statement. However, this method poses a potential [SQL Injection](https://en.wikipedia.org/wiki/SQL_injection) risk to the security of the application.
 
-To deal with such queries, use a [prepared statement](/develop/dev-guide-prepared-statement.md) instead of a normal statement.
-
-{{< copyable "java" >}}
+To deal with such queries, use a [Prepared statement](/develop/dev-guide-prepared-statement.md) instead of a normal statement.
 
 ```java
 public List<Author> getAuthorsByBirthYear(Short birthYear) throws SQLException {
@@ -153,7 +175,7 @@ public List<Author> getAuthorsByBirthYear(Short birthYear) throws SQLException {
         ResultSet rs = stmt.executeQuery();
         while (rs.next()) {
             Author author = new Author();
-            author.setId( rs.getLong("id"));
+            author.setId(rs.getLong("id"));
             author.setName(rs.getString("name"));
             authors.add(author);
         }
@@ -167,17 +189,48 @@ public List<Author> getAuthorsByBirthYear(Short birthYear) throws SQLException {
 
 ## Sort results
 
-With the `ORDER BY` statement, you can sort query results.
+To sort query results, you can use the `ORDER BY` statement.
 
 For example, the following SQL statement is to get a list of the youngest authors by sorting the `authors` table in descending order (`DESC`) according to the `birth_year` column.
 
-{{< copyable "sql" >}}
+<SimpleTab groupId="language">
+<div label="SQL" value="sql">
 
 ```sql
 SELECT id, name, birth_year
 FROM authors
 ORDER BY birth_year DESC;
 ```
+
+</div>
+
+<div label="Java" value="java">
+
+```java
+public List<Author> getAuthorsSortByBirthYear() throws SQLException {
+    List<Author> authors = new ArrayList<>();
+    try (Connection conn = ds.getConnection()) {
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery("""
+            SELECT id, name, birth_year
+            FROM authors
+            ORDER BY birth_year DESC;
+            """);
+
+        while (rs.next()) {
+            Author author = new Author();
+            author.setId(rs.getLong("id"));
+            author.setName(rs.getString("name"));
+            author.setBirthYear(rs.getShort("birth_year"));
+            authors.add(author);
+        }
+    }
+    return authors;
+}
+```
+
+</div>
+</SimpleTab>
 
 The result is as follows:
 
@@ -201,9 +254,10 @@ The result is as follows:
 
 ## Limit the number of query results
 
-You can use the `LIMIT` statement to limit the number of query results.
+To limit the number of query results, you can use the `LIMIT` statement.
 
-{{< copyable "java" >}}
+<SimpleTab groupId="language">
+<div label="SQL" value="sql">
 
 ```sql
 SELECT id, name, birth_year
@@ -211,6 +265,37 @@ FROM authors
 ORDER BY birth_year DESC
 LIMIT 10;
 ```
+
+</div>
+
+<div label="Java" value="java">
+
+```java
+public List<Author> getAuthorsWithLimit(Integer limit) throws SQLException {
+    List<Author> authors = new ArrayList<>();
+    try (Connection conn = ds.getConnection()) {
+        PreparedStatement stmt = conn.prepareStatement("""
+            SELECT id, name, birth_year
+            FROM authors
+            ORDER BY birth_year DESC
+            LIMIT ?;
+            """);
+        stmt.setInt(1, limit);
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()) {
+            Author author = new Author();
+            author.setId(rs.getLong("id"));
+            author.setName(rs.getString("name"));
+            author.setBirthYear(rs.getShort("birth_year"));
+            authors.add(author);
+        }
+    }
+    return authors;
+}
+```
+
+</div>
+</SimpleTab>
 
 The result is as follows:
 
@@ -240,7 +325,8 @@ To have a better understanding of the overall data situation, you can use the `G
 
 For example, if you want to know which years there are more authors born, you can group the `authors` table by the `birth_year` column, and then count for each year:
 
-{{< copyable "java" >}}
+<SimpleTab groupId="language">
+<div label="SQL" value="sql">
 
 ```sql
 SELECT birth_year, COUNT (DISTINCT id) AS author_count
@@ -248,6 +334,45 @@ FROM authors
 GROUP BY birth_year
 ORDER BY author_count DESC;
 ```
+
+</div>
+
+<div label="Java" value="java">
+
+```java
+public class AuthorCount {
+    private Short birthYear;
+    private Integer authorCount;
+
+    public AuthorCount() {}
+
+     // Skip the getters and setters.
+}
+
+public List<AuthorCount> getAuthorCountsByBirthYear() throws SQLException {
+    List<AuthorCount> authorCounts = new ArrayList<>();
+    try (Connection conn = ds.getConnection()) {
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery("""
+            SELECT birth_year, COUNT(DISTINCT id) AS author_count
+            FROM authors
+            GROUP BY birth_year
+            ORDER BY author_count DESC;
+            """);
+
+        while (rs.next()) {
+            AuthorCount authorCount = new AuthorCount();
+            authorCount.setBirthYear(rs.getShort("birth_year"));
+            authorCount.setAuthorCount(rs.getInt("author_count"));
+            authorCounts.add(authorCount);
+        }
+    }
+    return authorCount;
+}
+```
+
+</div>
+</SimpleTab>
 
 The result is as follows:
 

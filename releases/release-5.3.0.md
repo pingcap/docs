@@ -117,7 +117,7 @@ In v5.3, the key new features or improvements are as follows:
 
     Support the `ALTER TABLE [PARTITION] ATTRIBUTES` statement that allows you to set attributes for a table or partition. Currently, TiDB only supports setting the `merge_option` attribute. By adding this attribute, you can explicitly control the Region merge behavior.
 
-    User scenarios: When you perform the `SPLIT TABLE` operation, if no data is inserted after a certain period of time, the empty Regions are automatically merged by default. In this case, you can set the table attribute to `merge_option=deny` to avoid the automatic merging of Regions.
+    User scenarios: When you perform the `SPLIT TABLE` operation, if no data is inserted after a certain period of time (controlled by the PD parameter [`split-merge-interval`](/pd-configuration-file.md#split-merge-interval)), the empty Regions are automatically merged by default. In this case, you can set the table attribute to `merge_option=deny` to avoid the automatic merging of Regions.
 
     [User document](/table-attributes.md), [#3839](https://github.com/tikv/pd/issues/3839)
 
@@ -227,7 +227,7 @@ In v5.3, the key new features or improvements are as follows:
 
     This feature supports TiCDC to replicate incremental data from a TiDB cluster to the secondary relational database TiDB/Aurora/MySQL/MariaDB. In case the primary cluster crashes, TiCDC can recover the secondary cluster to a certain snapshot in the primary cluster within 5 minutes, given the condition that before disaster the replication status of TiCDC is normal and replication lag is small. It allows data loss of less than 30 minutes, that is, RTO <= 5min, and RPO <= 30min.
 
-    [User document](/ticdc/manage-ticdc.md)
+    [User document](/ticdc/ticdc-sink-to-mysql.md#eventually-consistent-replication-in-disaster-scenarios)
 
 - **TiCDC supports the HTTP protocol OpenAPI for managing TiCDC tasks**
 
@@ -330,7 +330,7 @@ Starting from TiCDC v5.3.0, the cyclic replication feature between TiDB clusters
     - Fix the issue that auto analyze might be triggered out of the specified time when a new index is added [#28698](https://github.com/pingcap/tidb/issues/28698)
     - Fix a bug that setting any session variable invalidates `tidb_snapshot` [#28683](https://github.com/pingcap/tidb/pull/28683)
     - Fix a bug that BR is not working for clusters with many missing-peer Regions [#27534](https://github.com/pingcap/tidb/issues/27534)
-    - Fix  the unexpected error like `tidb_cast to Int32 is not supported` when the unsupported `cast` is pushed down to TiFlash [#23907](https://github.com/pingcap/tidb/issues/23907)
+    - Fix the unexpected error like `tidb_cast to Int32 is not supported` when the unsupported `cast` is pushed down to TiFlash [#23907](https://github.com/pingcap/tidb/issues/23907)
     - Fix the issue that `DECIMAL overflow` is missing in the `%s value is out of range in '%s'`error message  [#27964](https://github.com/pingcap/tidb/issues/27964)
     - Fix a bug that the availability detection of MPP node does not work in some corner cases [#3118](https://github.com/pingcap/tics/issues/3118)
     - Fix the `DATA RACE` issue when assigning `MPP task ID` [#27952](https://github.com/pingcap/tidb/issues/27952)
@@ -407,4 +407,4 @@ Starting from TiCDC v5.3.0, the cyclic replication feature between TiDB clusters
 
     + TiDB Binlog
 
-        - Fix the issue that when most tables are filtered out, checkpoint can not be updated under some special load [#1075](https://github.com/pingcap/tidb-binlog/pull/1075)
+        - Fix the issue that when most tables are filtered out, checkpoint cannot be updated under some special load [#1075](https://github.com/pingcap/tidb-binlog/pull/1075)

@@ -59,6 +59,38 @@ ColumnOption ::=
 |   'STORAGE' StorageMedia
 |   'AUTO_RANDOM' OptFieldLen
 
+Constraint ::=
+    IndexDef
+|   ForeignKeyDef
+
+IndexDef ::=
+    ( 'INDEX' | 'KEY' ) IndexName? '(' KeyPartList ')' IndexOption?
+
+KeyPartList ::=
+    KeyPart ( ',' KeyPart )*
+
+KeyPart ::=
+    ColumnName ( '(' Length ')')? ( 'ASC' | 'DESC' )?
+|   '(' Expression ')' ( 'ASC' | 'DESC' )?
+
+IndexOption ::=
+    'COMMENT' String
+|   ( 'VISIBLE' | 'INVISIBLE' )
+
+ForeignKeyDef
+         ::= ( 'CONSTRAINT' Identifier )? 'FOREIGN' 'KEY'
+             Identifier? '(' ColumnName ( ',' ColumnName )* ')'
+             'REFERENCES' TableName '(' ColumnName ( ',' ColumnName )* ')'
+             ( 'ON' 'DELETE' ReferenceOption )?
+             ( 'ON' 'UPDATE' ReferenceOption )?
+
+ReferenceOption
+         ::= 'RESTRICT'
+           | 'CASCADE'
+           | 'SET' 'NULL'
+           | 'SET' 'DEFAULT'
+           | 'NO' 'ACTION'
+
 CreateTableOptionListOpt ::=
     TableOptionList?
 
@@ -83,9 +115,15 @@ TableOption ::=
 |   'SECONDARY_ENGINE' EqOpt ( 'NULL' | StringName )
 |   'UNION' EqOpt '(' TableNameListOpt ')'
 |   'ENCRYPTION' EqOpt EncryptionOpt
+|    'TTL' EqOpt TimeColumnName '+' 'INTERVAL' Expression TimeUnit (TTLEnable EqOpt ( 'ON' | 'OFF' ))? (TTLJobInterval EqOpt stringLit)?
+|   PlacementPolicyOption
 
 OnCommitOpt ::=
     ('ON' 'COMMIT' 'DELETE' 'ROWS')?
+
+PlacementPolicyOption ::=
+    "PLACEMENT" "POLICY" EqOpt PolicyName
+|   "PLACEMENT" "POLICY" (EqOpt | "SET") "DEFAULT"
 ```
 
 The following *table_options* are supported. Other options such as `AVG_ROW_LENGTH`, `CHECKSUM`, `COMPRESSION`, `CONNECTION`, `DELAY_KEY_WRITE`, `ENGINE`, `KEY_BLOCK_SIZE`, `MAX_ROWS`, `MIN_ROWS`, `ROW_FORMAT` and `STATS_PERSISTENT` are parsed but ignored.
@@ -100,9 +138,21 @@ The following *table_options* are supported. Other options such as `AVG_ROW_LENG
 | `CHARACTER SET` | To specify the [character set](/character-set-and-collation.md) for the table | `CHARACTER SET` =  'utf8mb4' |
 | `COMMENT` | The comment information | `COMMENT` = 'comment info' |
 
+<CustomContent platform="tidb">
+
 > **Note:**
 >
 > The `split-table` configuration option is enabled by default. When it is enabled, a separate Region is created for each newly created table. For details, see [TiDB configuration file](/tidb-configuration-file.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> TiDB creates a separate Region for each newly created table.
+
+</CustomContent>
 
 ## Examples
 
@@ -190,13 +240,24 @@ mysql> DESC t1;
 
 * All of the data types except spatial types are supported.
 * `FULLTEXT`, `HASH` and `SPATIAL` indexes are not supported.
+
+<CustomContent platform="tidb">
+
 * For compatibility, the `index_col_name` attribute supports the length option with a maximum length limit of 3072 bytes by default. The length limit can be changed through the `max-index-length` configuration option. For details, see [TiDB configuration file](/tidb-configuration-file.md#max-index-length).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+* For compatibility, the `index_col_name` attribute supports the length option with a maximum length limit of 3072 bytes.
+
+</CustomContent>
+
 * The `[ASC | DESC]` in `index_col_name` is currently parsed but ignored (MySQL 5.7 compatible behavior).
 * The `COMMENT` attribute does not support the `WITH PARSER` option.
-* TiDB supports at most 512 columns in a single table. The corresponding number limit in InnoDB is 1017, and the hard limit in MySQL is 4096. For details, see [TiDB Limitations](/tidb-limitations.md).
+* TiDB supports 1017 columns in a single table by default and 4096 columns at most. The corresponding number limit in InnoDB is 1017 columns, and the hard limit in MySQL is 4096 columns. For details, see [TiDB Limitations](/tidb-limitations.md).
 * For partitioned tables, only Range, Hash and Range Columns (single column) are supported. For details, see [partitioned table](/partitioned-table.md).
 * `CHECK` constraints are parsed but ignored (MySQL 5.7 compatible behavior). For details, see [Constraints](/constraints.md).
-* `FOREIGN KEY` constraints are parsed and stored, but not enforced by DML statements. For details, see [Constraints](/constraints.md).
 
 ## See also
 

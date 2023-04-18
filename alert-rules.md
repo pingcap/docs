@@ -230,16 +230,16 @@ This section gives the alert rules for the PD component.
 
 * Alert rule:
 
-    `(sum(pd_regions_status{type="miss_peer_region_count"}) by (instance) > 100) and (sum(etcd_server_is_leader) by (instance) > 0)`
+    `(sum(pd_regions_status{type="miss-peer-region-count"}) by (instance) > 100) and (sum(etcd_server_is_leader) by (instance) > 0)`
 
 * Description:
 
-    The number of Region replicas is smaller than the value of `max-replicas`. When a TiKV machine is down and its downtime exceeds `max-down-time`, it usually leads to missing replicas for some Regions during a period of time.
+    The number of Region replicas is smaller than the value of `max-replicas`.
 
 * Solution:
 
     * Find the cause of the issue by checking whether there is any TiKV machine that is down or being made offline.
-    * Watch the Region health panel and see whether `miss_peer_region_count` is continuously decreasing.
+    * Watch the Region health panel and see whether `miss-peer-region-count` is continuously decreasing.
 
 ### Warning-level alerts
 
@@ -260,6 +260,20 @@ This section gives the alert rules for the PD component.
     * If you confirm that the TiKV/TiFlash instance cannot be recovered, you can make it offline.
     * If you confirm that the TiKV/TiFlash instance can be recovered, but not in the short term, you can consider increasing the value of `max-down-time`. It will prevent the TiKV/TiFlash instance from being considered as irrecoverable and the data from being removed from the TiKV/TiFlash.
 
+#### `PD_cluster_unhealthy_tikv_nums`
+
+* Alert rule:
+
+    `(sum(pd_cluster_status{type="store_unhealth_count"}) by (instance) > 0) and (sum(etcd_server_is_leader) by (instance) > 0)`
+
+* Description:
+
+    Indicates that there are unhealthy stores. If the situation persists for some time (configured by [`max-store-down-time`](/pd-configuration-file.md#max-store-down-time), defaults to `30m`), the store is likely to change to `Offline` state, which triggers the [`PD_cluster_down_store_nums`](#pd_cluster_down_store_nums) alert.
+
+* Solution:
+
+    Check the state of the TiKV stores.
+
 #### `PD_cluster_low_space`
 
 * Alert rule:
@@ -274,7 +288,7 @@ This section gives the alert rules for the PD component.
 
     * Check whether the space in the cluster is generally insufficient. If so, increase its capacity.
     * Check whether there is any issue with Region balance scheduling. If so, it will lead to uneven data distribution.
-    * Check whether there is any file that occupies a large amount of disk space, such as the log, snapshot, core dump, etc.
+    * Check whether there is any file that occupies a large amount of disk space, such as the log, snapshot, and core dump.
     * Lower the Region weight of the node to reduce the data volume.
     * When it is not possible to release the space, consider proactively making the node offline. This prevents insufficient disk space that leads to downtime.
 
@@ -353,7 +367,7 @@ This section gives the alert rules for the PD component.
 
 * Solution:
 
-    * Exclude the human factors, such as restarting PD, manually transferring leader, adjusting leader priority, etc.
+    * Exclude the human factors, such as restarting PD, manually transferring leader, and adjusting leader priority.
     * Check the network and system load status.
     * If the problematic PD instance cannot be recovered due to environmental factors, make it offline and replace it.
 
@@ -370,7 +384,7 @@ This section gives the alert rules for the PD component.
 * Solution:
 
     * Check whether it is needed to increase capacity.
-    * Check whether there is any file that occupies a large amount of disk space, such as the log, snapshot, core dump, etc.
+    * Check whether there is any file that occupies a large amount of disk space, such as the log, snapshot, and core dump.
 
 #### `PD_system_time_slow`
 
@@ -400,6 +414,21 @@ This section gives the alert rules for the PD component.
 
     * Check whether there is enough space in the store.
     * Check whether there is any store for additional replicas according to the label configuration if it is configured.
+
+#### `PD_cluster_slow_tikv_nums`
+
+* Alert rule:
+
+    `sum(pd_cluster_status{type="store_slow_count"}) by (instance) > 0) and (sum(etcd_server_is_leader) by (instance) > 0`
+
+* Description:
+
+    There is a slow TiKV node. `raftstore.inspect-interval` controls the detection of TiKV slow nodes. For more information, see [`raftstore.inspect-interval`](/tikv-configuration-file.md#inspect-interval).
+
+* Solution:
+
+    * Check whether the performance of the store is proper.
+    * Set the `raftstore.inspect-interval` configuration item to a larger value to increase the timeout limit of latency.
 
 ## TiKV alert rules
 
@@ -435,7 +464,7 @@ This section gives the alert rules for the TiKV component.
 
     1. Perform `SELECT VARIABLE_VALUE FROM mysql.tidb WHERE VARIABLE_NAME = "tikv_gc_leader_desc"` to locate the `tidb-server` corresponding to the GC leader;
     2. View the log of the `tidb-server`, and grep gc_worker tidb.log;
-    3. If you find that the GC worker has been resolving locks (the last log is "start resolve locks") or deleting ranges (the last log is "start delete {number} ranges") during this time, it means the GC process is running normally. Otherwise, contact [support@pingcap.com](mailto:support@pingcap.com) to resolve this issue.
+    3. If you find that the GC worker has been resolving locks (the last log is "start resolve locks") or deleting ranges (the last log is "start delete {number} ranges") during this time, it means the GC process is running normally. Otherwise, [get support](/support.md) from PingCAP or the community.
 
 ### Critical-level alerts
 
@@ -662,7 +691,7 @@ This section gives the alert rules for the TiKV component.
 
 * Alert rule:
 
-    `histogram_quantile(0.99, sum(rate(tikv_scheduler_command_duration_seconds_bucket[1m])) by (le, instance, type)  / 1000) > 1`
+    `histogram_quantile(0.99, sum(rate(tikv_scheduler_command_duration_seconds_bucket[1m])) by (le, instance, type)) > 1`
 
 * Description:
 
@@ -722,7 +751,7 @@ This section gives the alert rules for the TiKV component.
 
 * Solution:
 
-    Check which kind of tasks has a higher value. You can normally find a solution to the Coprocessor and apply worker tasks from other metrics.
+    Check which kind of tasks has a higher value from the `Worker pending tasks` metric in the [**TiKV-Details** > **Task** dashboard](/grafana-tikv-dashboard.md#task). If it is a coprocessor task, you can refer to [`TiKV_coprocessor_request_wait_seconds`](#tikv_coprocessor_request_wait_seconds).
 
 #### `TiKV_low_space`
 

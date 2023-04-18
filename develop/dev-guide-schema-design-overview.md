@@ -47,17 +47,17 @@ There are two common types of indexes:
 
 #### Specialized indexes
 
-To improve query performance of various user scenarios, TiDB provides you with some specialized types of indexes. For details of each type, see the following links:
+<CustomContent platform="tidb">
 
-- [Expression indexes](/sql-statements/sql-statement-create-index.md#expression-index) (Experimental)
-- [Columnar storage (TiFlash)](/tiflash/tiflash-overview.md)
-- [RocksDB engine](/storage-engine/rocksdb-overview.md)
-- [Titan plugin](/storage-engine/titan-overview.md)
-- [Invisible indexes](/sql-statements/sql-statement-add-index.md)
-- [Composite `PRIMARY KEY`](/constraints.md#primary-key)
-- [Unique indexes](/constraints.md#unique-key)
-- [Clustered indexes on integer `PRIMARY KEY`](/constraints.md)
-- [Clustered indexes on composite or non-integer key](/constraints.md)
+To improve query performance of various user scenarios, TiDB provides you with some specialized types of indexes. For details of each type, see [Indexing and constraints](/basic-features.md#indexing-and-constraints).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+To improve query performance of various user scenarios, TiDB provides you with some specialized types of indexes. For details of each type, see [Indexing and constraints](https://docs.pingcap.com/tidb/stable/basic-features#indexing-and-constraints).
+
+</CustomContent>
 
 ### Other supported logical objects
 
@@ -69,7 +69,17 @@ TiDB supports the following logical objects at the same level as **table**:
 
 ## Access Control
 
+<CustomContent platform="tidb">
+
 TiDB supports both user-based and role-based access control. To allow users to view, modify, or delete data objects and data schemas, you can either grant [privileges](/privilege-management.md) to [users](/user-account-management.md) directly or grant [privileges](/privilege-management.md) to users through [roles](/role-based-access-control.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+TiDB supports both user-based and role-based access control. To allow users to view, modify, or delete data objects and data schemas, you can either grant [privileges](https://docs.pingcap.com/tidb/stable/privilege-management) to [users](https://docs.pingcap.com/tidb/stable/user-account-management) directly or grant [privileges](https://docs.pingcap.com/tidb/stable/privilege-management) to users through [roles](https://docs.pingcap.com/tidb/stable/role-based-access-control).
+
+</CustomContent>
 
 ## Database schema changes
 
@@ -77,40 +87,4 @@ As a best practice, it is recommended that you use a [MySQL client](https://dev.
 
 ## Object limitations
 
-This section lists the object limitations on identifier length, a single table, and string types. For more information, see [TiDB Limitations](/tidb-limitations.md).
-
-### Limitations on identifier length
-
-| Identifier type | Maximum length (number of characters allowed) |
-|:---------|:--------------|
-| Database | 64 |
-| Table    | 64 |
-| Column   | 64 |
-| Index    | 64 |
-| View     | 64 |
-| Sequence | 64 |
-
-### Limitations on a single table
-
-| Type       | Upper limit (default value)  |
-|:----------|:----------|
-| Columns   | Defaults to 1017 and can be adjusted up to 4096     |
-| Indexes   |  Defaults to 64 and can be adjusted up to 512        |
-| Partitions | 8192     |
-| Single Line Size | 6 MB by default. You can adjust the size limit via the [**txn-entry-size-limit**](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50) configuration item. |
-| Single Column in a Line Size | 6 MB       |
-
-### Limitations on string types
-
-| Type       | Upper limit   |
-|:----------|:----------|
-| CHAR       | 256 characters      |
-| BINARY     | 256 characters      |
-| VARBINARY  | 65535 characters    |
-| VARCHAR    | 16383 characters    |
-| TEXT       | 6 MB                |
-| BLOB       | 6 MB                |
-
-### Number of rows
-
-TiDB supports an **unlimited** number of rows by adding nodes to the cluster. For the relevant principles, see [TiDB Best Practices](/best-practices/tidb-best-practices.md).
+For more information, see [TiDB Limitations](/tidb-limitations.md).

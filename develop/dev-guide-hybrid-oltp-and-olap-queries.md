@@ -13,15 +13,13 @@ The [Create a table](/develop/dev-guide-create-table.md#use-htap-capabilities) s
 
 ## Data preparation
 
-Before starting, you can import more sample data [via the `tiup demo` command](/develop/dev-guide-bookshop-schema-design.md#via-tiup-demo). For example:
-
-{{< copyable "shell-regular" >}}
+Before starting, you can import more sample data [via the `tiup demo` command](/develop/dev-guide-bookshop-schema-design.md#method-1-via-tiup-demo). For example:
 
 ```shell
 tiup demo bookshop prepare --users=200000 --books=500000 --authors=100000 --ratings=1000000 --orders=1000000 --host 127.0.0.1 --port 4000 --drop-tables
 ```
 
-Or you can [use the Import function of TiDB Cloud](/develop/dev-guide-bookshop-schema-design.md#via-tidb-cloud-import) to import the pre-prepared sample data.
+Or you can [use the Import function of TiDB Cloud](/develop/dev-guide-bookshop-schema-design.md#method-2-via-tidb-cloud-import) to import the pre-prepared sample data.
 
 ## Window functions
 
@@ -43,8 +41,6 @@ FROM
 ### `ORDER BY` clause
 
 With the aggregate window function `sum()`, you can analyze the historical trend of the order amount of a particular book. For example:
-
-{{< copyable "sql" >}}
 
 ```sql
 WITH orders_group_by_month AS (
@@ -90,8 +86,6 @@ Visualize the above data through a line chart with time as the horizontal axis a
 Suppose that you want to analyze the historical ordering trend of different types of books, and visualize it in the same line chart with multiple series.
 
 You can use the `PARTITION BY` clause to group books by types and count history orders for each type separately.
-
-{{< copyable "sql" >}}
 
 ```sql
 WITH orders_group_by_month AS (
@@ -154,16 +148,12 @@ When using TiDB for real-time online analytical processing in hybrid load scenar
 
 TiDB uses the row-based storage engine, TiKV, by default. To use the columnar storage engine, TiFlash, see [Enable HTAP capability](/develop/dev-guide-create-table.md#use-htap-capabilities). Before querying data through TiFlash, you need to create TiFlash replicas for `books` and `orders` tables using the following statement:
 
-{{< copyable "sql" >}}
-
 ```sql
 ALTER TABLE books SET TIFLASH REPLICA 1;
 ALTER TABLE orders SET TIFLASH REPLICA 1;
 ```
 
 You can check the progress of the TiFlash replicas using the following statement:
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = 'bookshop' and TABLE_NAME = 'books';
@@ -228,8 +218,6 @@ To specify which engine to be used in a query, you can use the `/*+ read_from_st
 > - If a table has an alias, use the alias instead of the table name in the hint, otherwise, the hint does not work.
 > - The `read_from_storage` hint does not work for [common table expression](/develop/dev-guide-use-common-table-expression.md).
 
-{{< copyable "sql" >}}
-
 ```sql
 WITH orders_group_by_month AS (
     SELECT
@@ -254,11 +242,22 @@ SELECT * FROM acc;
 
 You can use the `EXPLAIN` statement to check the execution plan of the above SQL statement. If `cop[tiflash]` and `cop[tikv]` appear in the task column at the same time, it means that TiFlash and TiKV are both scheduled to complete this query. Note that TiFlash and TiKV storage engines usually use different TiDB nodes, so the two query types are not affected by each other.
 
-For more information about how TiDB chooses to use TiFlash, see [Use TiDB to read TiFlash replicas](/tiflash/use-tiflash.md#use-tidb-to-read-tiflash-replicas)
+For more information about how TiDB chooses to use TiFlash, see [Use TiDB to read TiFlash replicas](/tiflash/use-tidb-to-read-tiflash.md)
 
 ## Read more
 
+<CustomContent platform="tidb">
+
 - [Quick Start with HTAP](/quick-start-with-htap.md)
 - [Explore HTAP](/explore-htap.md)
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- [TiDB Cloud HTAP Quick Start](/tidb-cloud/tidb-cloud-htap-quickstart.md)
+
+</CustomContent>
+
 - [Window Functions](/functions-and-operators/window-functions.md)
-- [Use TiFlash](/tiflash/use-tiflash.md)
+- [Use TiFlash](/tiflash/tiflash-overview.md#use-tiflash)
