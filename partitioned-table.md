@@ -822,8 +822,8 @@ For `RANGE`, `RANGE COLUMNS`, `LIST`, and `LIST COLUMNS` partitioned tables, you
 
 For `HASH` and `KEY` partitioned tables, you can manage the partitions as follows:
 
-- Decrease the number of partitions using the `ALTER TABLE <table name> COALESCE PARTITION <number of partitions to decrease by>` statement. This operation reorganizes the table by copying the whole table to the new number of partitions online.
-- Increase the number of partitions using the `ALTER TABLE <table name> ADD PARTITION <number of partitions to increase by | (additional partition definitions)>` statement. This operation reorganizes the table by copying the whole table to the new number of partitions online.
+- Decrease the number of partitions using the `ALTER TABLE <table name> COALESCE PARTITION <number of partitions to decrease by>` statement. This operation reorganizes the partitions by copying the whole table to the new number of partitions online.
+- Increase the number of partitions using the `ALTER TABLE <table name> ADD PARTITION <number of partitions to increase by | (additional partition definitions)>` statement. This operation reorganizes the partitions by copying the whole table to the new number of partitions online.
 - Remove all data from specified partitions using the `ALTER TABLE <table name> TRUNCATE PARTITION <list of partitions>` statement. The logic of `TRUNCATE PARTITION` is similar to [`TRUNCATE TABLE`](/sql-statements/sql-statement-truncate.md) but it is for partitions.
 
 `EXCHANGE PARTITION` works by swapping a partition and a non-partitioned table, similar to how renaming a table like `RENAME TABLE t1 TO t1_tmp, t2 TO t1, t1_tmp TO t2` works.
@@ -1039,16 +1039,16 @@ ALTER TABLE example COALESCE PARTITION 1;
 
 > **Notes:**
 > 
-> The process of changing the number of partitions for Hash or Key partitioned tables reorganizes the tables by copying all data to the new number of partitions. Therefore, after changing the number of partitions for a Hash or Key partitioned table, you will get the following warning about the outdated statistics. In this case, you can use the [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) statement to update the statistics.
-
-```sql
-+---------+------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Level   | Code | Message                                                                                                                                                |
-+---------+------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Warning | 1105 | The statistics of related partitions will be outdated after reorganizing partitions. Please use 'ANALYZE TABLE' statement if you want to update it now |
-+---------+------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
-1 row in set (0.00 sec)
-```
+> The process of changing the number of partitions for Hash or Key partitioned tables reorganizes the partitions by copying all data to the new number of partitions. Therefore, after changing the number of partitions for a Hash or Key partitioned table, you will get the following warning about the outdated statistics. In this case, you can use the [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) statement to update the statistics.
+>
+> ```sql
+> +---------+------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
+> | Level   | Code | Message                                                                                                                                                |
+> +---------+------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
+> | Warning | 1105 | The statistics of related partitions will be outdated after reorganizing partitions. Please use 'ANALYZE TABLE' statement if you want to update it now |
+> +---------+------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
+> 1 row in set (0.00 sec)
+> ```
 
 To better understand how the `example` table is organized now, you can show the SQL statement that is used to recreate the `example` table as follows:
 
@@ -1081,7 +1081,6 @@ ALTER TABLE example TRUNCATE PARTITION p0;
 ```
 Query OK, 0 rows affected (0.03 sec)
 ```
-
 
 ## Partition pruning
 
