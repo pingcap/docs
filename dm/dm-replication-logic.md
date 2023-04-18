@@ -14,8 +14,8 @@ The Sync unit processes DML statements as follows:
 1. Read the binlog event from the MySQL, MariaDB, or relay log.
 2. Transform the binlog event read from the data source:
 
-    1. [Binlog filter](dm/dm-binlog-event-filter.md): filter binlog events according to binlog expressions, configured by `filters`.
-    2. [Table routing](dm/dm-table-routing.md): transform the "database/table" name according to the "database/table" routing rule, configured by `routes`.
+    1. [Binlog filter](/dm/dm-binlog-event-filter.md): filter binlog events according to binlog expressions, configured by `filters`.
+    2. [Table routing](/dm/dm-table-routing.md): transform the "database/table" name according to the "database/table" routing rule, configured by `routes`.
     3. [Expression filter](/filter-dml-event.md): filter binlog events according to SQL expressions, configured by `expression-filter`.
 
 3. Optimize the DML execution plan:
