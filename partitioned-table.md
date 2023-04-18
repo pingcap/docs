@@ -993,14 +993,14 @@ When reorganizing partitions, you need to note the following key points:
 
 - After partitions are reorganized, the statistics of the corresponding partitions are outdated, so you will get the following warning. In this case, you can use the [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) statement to update the statistics.
 
-```sql
-+---------+------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Level   | Code | Message                                                                                                                                                |
-+---------+------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Warning | 1105 | The statistics of related partitions will be outdated after reorganizing partitions. Please use 'ANALYZE TABLE' statement if you want to update it now |
-+---------+------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
-1 row in set (0.00 sec)
-```
+    ```sql
+    +---------+------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | Level   | Code | Message                                                                                                                                                |
+    +---------+------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | Warning | 1105 | The statistics of related partitions will be outdated after reorganizing partitions. Please use 'ANALYZE TABLE' statement if you want to update it now |
+    +---------+------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
+    1 row in set (0.00 sec)
+    ```
 
 ### Manage Hash and Key partitions
 
