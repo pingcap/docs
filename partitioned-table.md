@@ -1004,16 +1004,18 @@ When reorganizing partitions, you need to note the following key points:
 
 ### Manage Hash and Key partitions
 
-This section uses the partitioned table created by the following SQL statement as examples to show you how to manage Hash partitions. For Key partitions, you can use the same management statements as well. 
+This section uses the partitioned table created by the following SQL statement as examples to show you how to manage Hash partitions. For Key partitions, you can use the same management statements as well.
 
 ```sql
 CREATE TABLE example (
   id INT PRIMARY KEY,
   data VARCHAR(1024)
-)  
-PARTITION BY HASH(id) 
-PARTITIONS 2;  
+)
+PARTITION BY HASH(id)
+PARTITIONS 2;
 ```
+
+#### Increase the number of partitions
 
 Increase the number of partitions for the `example` table by 1 (from 2 to 3):
 
@@ -1031,6 +1033,8 @@ ALTER TABLE example ADD PARTITION
 
 Unlike Range and List partitioning, `DROP PARTITION` is not supported for Hash and Key partitioning, but you can decrease the number of partitions with `COALESCE PARTITION` or delete all data from specific partitions with `TRUNCATE PARTITION`.
 
+#### Decrease the number of partitions
+
 Decrease the number of partitions for the `example` table by 1 (from 5 to 4):
 
 ```sql
@@ -1038,7 +1042,7 @@ ALTER TABLE example COALESCE PARTITION 1;
 ```
 
 > **Notes:**
-> 
+>
 > The process of changing the number of partitions for Hash or Key partitioned tables reorganizes the partitions by copying all data to the new number of partitions. Therefore, after changing the number of partitions for a Hash or Key partitioned table, you will get the following warning about the outdated statistics. In this case, you can use the [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) statement to update the statistics.
 >
 > ```sql
@@ -1071,6 +1075,8 @@ PARTITION BY HASH (`id`)
  PARTITION `pExample4` COMMENT 'not p3, but pExample4 instead')
 1 row in set (0.01 sec)
 ```
+
+#### Truncate partitions
 
 Delete all data from a partition:
 
