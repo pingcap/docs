@@ -53,7 +53,7 @@ As an open-source distributed SQL database with high performance, TiDB can be de
 
 Library for running TiDB：glibc（2.28-151.el8 version）
 
-### Mirror dependencies
+### Docker image dependencies
 
 The following CPU architectures are required:
 
