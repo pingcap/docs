@@ -161,7 +161,7 @@ In TiDB, all supported DDL changes are performed online. Compared with DDL opera
 * Range, Range COLUMNS, List, and List COLUMNS partitioned tables support `ADD`, `DROP`, `TRUNCATE`, and `REORGANIZE` operations. Other partition operations are ignored.
 * Hash and Key partitioned tables support `ADD`, `COALESCE`, and `TRUNCATE` operations. Other partition operations are ignored.
 
-The following syntaxes are not supported for partitioned tables:
+* The following syntaxes are not supported for partitioned tables:
 
     - `SUBPARTITION`
     - `{CHECK|OPTIMIZE|REPAIR|IMPORT|DISCARD|REBUILD} PARTITION`
