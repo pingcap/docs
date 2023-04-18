@@ -2065,6 +2065,14 @@ Query OK, 0 rows affected (0.09 sec)
 - Default value: `ON`
 - This variable is used to control whether to enable the support for window functions. Note that window functions may use reserved keywords. This might cause SQL statements that could be executed normally cannot be parsed after upgrading TiDB. In this case, you can set `tidb_enable_window_function` to `OFF`.
 
+### `tidb_enable_row_level_checksum` <span class="version-mark">New in v7.1.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `OFF`
+- This variable is used to control whether to enable the [TiCDC data integrity validation](/ticdc/ticdc-integrity-check.md) feature.
+
 ### tidb_enforce_mpp <span class="version-mark">New in v5.1</span>
 
 - Scope: SESSION
