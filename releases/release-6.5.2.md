@@ -39,7 +39,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
 + TiFlash
 
     - Reduce CPU consumption of task scheduling during TiFlash reads [#6495](https://github.com/pingcap/tiflash/issues/6495) @[JinheLin](https://github.com/JinheLin)
-    - Significantly improve data import performance from BR and TiDB Lightning to TiFlash with default parameters [#7272](https://github.com/pingcap/tiflash/issues/7272) @[breezewish](https://github.com/breezewish)
+    - Improve data import performance from BR and TiDB Lightning to TiFlash with default parameters [#7272](https://github.com/pingcap/tiflash/issues/7272) @[breezewish](https://github.com/breezewish)
     - note 2
 
 + Tools
