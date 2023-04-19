@@ -170,12 +170,6 @@ In v7.1.0-LTS, the key new features and improvements are as follows:
 
     For more information, see [`ADMIN PAUSE DDL JOBS`](/sql-statements/sql-statement-admin-pause-ddl.md) and [`ADMIN RESUME DDL JOBS`](/sql-statements/sql-statement-admin-resume-ddl.md).
 
-* Support smooth cluster upgrade without canceling DDL operations [#issue number](link) @[zimulala](https://github.com/zimulala) @[hawkingrei](https://github.com/hawkingrei)
-
-    Before TiDB v7.1.0, to upgrade a cluster, you must manually cancel the running or queued DDL tasks and then add them back after the upgrade is completed. 
-
-    To offer a smoother upgrade experience, TiDB v7.1.0 introduces automatic pausing and resuming of DDL tasks. Starting from v7.1.0, you can upgrade your clusters without manually canceling DDL tasks. TiDB will automatically pause any running or queued DDL tasks before the upgrade and resume these tasks after the cluster has completed rolling upgrade, making it easier for you to upgrade your TiDB clusters.
-
 ### Data migration
 
 * 增加优化器诊断信息 [#issue号](链接) @[time-and-fate](https://github.com/time-and-fate) **tw:hfxsd**
