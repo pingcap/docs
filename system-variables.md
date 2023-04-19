@@ -3669,7 +3669,7 @@ SHOW WARNINGS;
 - Persists to cluster: Yes
 - Default value: `OFF`
 - This variable controls whether to use the algorithm with the minimum overhead of network transmission when TiDB selects the [MPP Hash Join algorithm](/tiflash/use-tiflash-mpp-mode.md#algorithm-support-for-the-mpp-mode). If this variable is enabled, TiDB estimates the size of the data to be exchanged in the network using `Broadcast Hash Join` and `Shuffled Hash Join` respectively, and then chooses the one with the smaller size.
-- [`tidb_broadcast_join_threshold_count`](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50) and [`tidb_broadcast_join_threshold_size`](/system-variables.md#tidb_broadcast_join_threshold_size-new-in-v50) will not take effect after this variable enabled.
+- [`tidb_broadcast_join_threshold_count`](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50) and [`tidb_broadcast_join_threshold_size`](/system-variables.md#tidb_broadcast_join_threshold_size-new-in-v50) will not take effect after this variable is enabled.
 
 ### tidb_prepared_plan_cache_memory_guard_ratio <span class="version-mark">New in v6.1.0</span>
 
