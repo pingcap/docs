@@ -15,13 +15,6 @@ In v7.1.0-LTS, the key new features and improvements are as follows:
 
 ### Scalability
 
-* TiFlash 支持存算分离和对象存储 (GA) [#6882](https://github.com/pingcap/tiflash/issues/6882) @[flowbehappy](https://github.com/flowbehappy) @[JaySon-Huang](https://github.com/JaySon-Huang) @[breezewish](https://github.com/breezewish) @[JinheLin](https://github.com/JinheLin) @[lidezhu](https://github.com/lidezhu) @[CalvinNeo](https://github.com/CalvinNeo) **tw:qiancai**
-
-    在 v7.0.0 版本中，TiFlash 在已有的存算一体架构之外，新增存算分离架构。在此架构下，TiFlash 节点分为 Compute Node（计算节点）和 Write Node（写入节点）两种类型，并支持兼容 S3 API 的对象存储。这两种节点都可以单独扩缩容，独立调整计算或数据存储能力。
-
-    从 v7.1.0 版本开始，TiFlash 存算分离架构正式 GA。TiFlash 的存算分离架构和存算一体架构不能混合使用、相互转换，需要在部署 TiFlash 时进行相应的配置指定使用其中的一种架构。
-
-    更多信息，请参考[用户文档](/tiflash/tiflash-disaggregated-and-s3.md)。
 
 ### Performance
 
@@ -261,7 +254,7 @@ In v7.1.0-LTS, the key new features and improvements are as follows:
 
 + TiFlash
 
-    - note [#issue](链接) @[贡献者 GitHub ID](链接)
+    - Improves TiFlash performance and stability in the disaggregated storage and compute architecture [#6882](https://github.com/pingcap/tiflash/issues/6882)  @[JaySon-Huang](https://github.com/JaySon-Huang) @[breezewish](https://github.com/breezewish) @[JinheLin](https://github.com/JinheLin) **tw:qiancai**
     - note [#issue](链接) @[贡献者 GitHub ID](链接)
 
 + Tools
