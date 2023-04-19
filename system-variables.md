@@ -3147,6 +3147,16 @@ mysql> desc select count(distinct a) from test.t;
 - This variable is used to control whether to enable the [TiFlash late materialization](/tiflash/tiflash-late-materialization.md) feature.
 - By default, when processing a `SELECT` statement with filter conditions (`WHERE` clause), TiFlash scans all the data of the required columns before filtering. When this variable is set to `ON` to enable the TiFlash late materialization feature, TiFlash can first scan the column data related to the filter conditions, filter the rows that meet the conditions, and then scan the data of other columns of these rows for further calculations, thereby reducing IO scans and computations of data processing.
 
+### tidb_opt_fix_control <span class="version-mark">New in v7.1.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: String
+- Default value: `""`
+- This variable is used to control some internal behavior of the optimizer.
+- To make the user able to control the optimizer in a more fine-grained style and prevent regression after upgrading caused by behavior changes in the optimizer, some details of the optimizer behavior will be exposed and controlled by this system variable.
+- Each fix control item corresponds to a GitHub Issue and can be set to a value. When setting multiple fix control items, they should be separated by comma. The format is like `"<#issue1>:<value1>,<#issue2>:<value2>"`, where `<#issueN>` is the GitHub Issue number and `<valueN>` is the expected value.
+
 ### tidb_opt_force_inline_cte <span class="version-mark">New in v6.3.0</span>
 
 - Scope: SESSION | GLOBAL
