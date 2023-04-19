@@ -50,7 +50,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
 
     + TiCDC
 
-        -  增加 API 2.0 功能   [#8743](https://github.com/pingcap/tiflow/issues/8743) @[sdojjy](https://github.com/sdojjy)
+        - Release TiCDC Open API v2.0 [#8743](https://github.com/pingcap/tiflow/issues/8743) @[sdojjy](https://github.com/sdojjy)
         - (dup): release-7.0.0.md > 改进提升> Tools> TiCDC - 支持在 redo applier 中拆分事务以提升 apply 吞吐，降低灾难场景的 RTO [#8318](https://github.com/pingcap/tiflow/issues/8318) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - (dup): release-7.0.0.md > 改进提升> Tools> TiCDC - 支持在 redo log 里 apply DDL 事件 [#8361](https://github.com/pingcap/tiflow/issues/8361) @[CharlesCheung96](https://github.com/CharlesCheung96)
 
@@ -106,17 +106,14 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
 
     + TiCDC
 
-
-        - 修复同步到对象存储时 partition 分隔符不生效问题 [#8581](https://github.com/pingcap/tiflow/issues/8581)
-        - 修复同步到对象存储场景下，发生表调度可能导致数据丢失问题  [#8256](https://github.com/pingcap/tiflow/issues/8256)
-        - 修复不可重入的 DDL 带来卡住的问题 [#8662](https://github.com/pingcap/tiflow/issues/8662)
-        - 修复同步到对象存储场景下，TiCDC 做扩缩容导致数据丢失问题 [#8666](https://github.com/pingcap/tiflow/issues/8666)
-        - 修复利用 cgroup 在部分场景内存限制不生效问题  [#8588](https://github.com/pingcap/tiflow/issues/8588)
-        - 修复同步到对象存储场景下，TiCDC 做扩缩容导致数据丢失问题 [#8666](https://github.com/pingcap/tiflow/issues/8666)
-        - 修复Redo log 在 apply 时，特殊场景可能出现数据丢失的问题 [#8591](https://github.com/pingcap/tiflow/issues/8591)
-        - 采用 gomemlimit 防止 TiCDC 出现 OOM 问题[#8675](https://github.com/pingcap/tiflow/issues/8675)
-        - 修复同步到 Kafka( canal-json) 场景下，同步 float 类型字段出现精度丢失问题 [#8490](https://github.com/pingcap/tiflow/issues/8490)
-        - 采用 multi-statement 的方式优化批量做 update 场景下的同步性能   [#8057](https://github.com/pingcap/tiflow/issues/8057)
+        - Fix the issue that the partition delimiter does not work when TiCDC replicates data to object storage [#8581](https://github.com/pingcap/tiflow/issues/8581) @[CharlesCheung96](https://github.com/CharlesCheung96) @[hi-rustin](https://github.com/hi-rustin)
+        - Fix the issue that table scheduling might cause data loss when TiCDC replicates data to object storage [#8256](https://github.com/pingcap/tiflow/issues/8256) @[zhaoxinyu](https://github.com/zhaoxinyu)
+        - Fix the issue that non-reentrant DDL statements get stuck [#8662](https://github.com/pingcap/tiflow/issues/8662) @[hicqu](https://github.com/hicqu)
+        - Fix the issue that TiCDC scaling might cause data loss when TiCDC replicates data to object storage [#8666](https://github.com/pingcap/tiflow/issues/8666) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        - Fix the issue that the memory limit of cgroup does not take effect in some scenarios  [#8588](https://github.com/pingcap/tiflow/issues/8588) @[amyangfei](https://github.com/amyangfei)
+        - Fix the issue that data loss might occur in special cases during the apply of Redo log [#8591](https://github.com/pingcap/tiflow/issues/8591) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        - Introduce gomemlimit to prevent TiCDC from experiencing OOM issues [#8675](https://github.com/pingcap/tiflow/issues/8675) @[amyangfei](https://github.com/amyangfei)
+        - Use the multi-statement approach to optimize the replication performance in scenarios involving batch execution of `UPDATE` statements [#8057](https://github.com/pingcap/tiflow/issues/8057) @[amyangfei](https://github.com/amyangfei)
         - (dup): release-6.1.6.md > Bug 修复> Tools> TiCDC - 修复 `db sorter` 使用内存时未受 `cgroup memory limit` 限制的问题 [#8588](https://github.com/pingcap/tiflow/issues/8588) @[amyangfei](https://github.com/amyangfei)
         - (dup): release-6.1.6.md > Bug 修复> Tools> TiCDC - 修复同步数据时由于 `UPDATE` 和 `INSERT` 语句乱序可能导致 `Duplicate entry` 错误的问题 [#8597](https://github.com/pingcap/tiflow/issues/8597) @[sdojjy](https://github.com/sojjy)
         - (dup): release-6.1.6.md > Bug 修复> Tools> TiCDC - 修复由于 PD 和 TiCDC 之间的网络隔离引起 TiCDC 程序异常退出的问题 [#8562](https://github.com/pingcap/tiflow/issues/8562) @[overvenus](https://github.com/overvenus)
