@@ -23,8 +23,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
 
     - (dup): release-6.1.6.md > 提升改进> TiDB - Prepared Plan Cache 支持缓存 BatchPointGet 计划 [#42125](https://github.com/pingcap/tidb/issues/42125) @[qw4990](https://github.com/qw4990)
     - (dup): release-7.0.0.md > 改进提升> TiDB - Index Join 支持更多的 SQL 格式 [#40505](https://github.com/pingcap/tidb/issues/40505) @[Yisaer](https://github.com/Yisaer)
-    - 将 Index Merge Reader 中的一些 Log 等级从 Info 降低为 Debug [#41949](https://github.com/pingcap/tidb/issues/41949) @[yibin87](https://github.com/yibin87)
-    - 优化带 limit 的 range partition table 的 distsql concurrency 设置，降低查询延迟 [#41500](https://github.com/pingcap/tidb/pull/41500) @[you06](https://github.com/you06)
+    - Change the level for some Index Merge Reader logs from `"info"` to `"debug"` [#41949](https://github.com/pingcap/tidb/issues/41949) @[yibin87](https://github.com/yibin87)
+    - Optimize the `distsql_concurrency` setting for Range partitioned tables with limits to reduce query latency [#41480](https://github.com/pingcap/tidb/issues/41480) @[you06](https://github.com/you06)
 
 + TiKV
 
@@ -67,7 +67,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
 ## Bug fixes
 
 + TiDB
-
+    - Fix the issue that after a new column is added in the cache table, the value is `NULL` instead of the default value of the column [#42928](https://github.com/pingcap/tidb/issues/42928) @[lqs](https://github.com/lqs)
+    - Fix the issue of DDL retry caused by write conflict when executing `TRUNCATE TABLE` for partitioned tables with many partitions and TiFlash copies [#42940](https://github.com/pingcap/tidb/issues/42940) @[mjonss](https://github.com/mjonss)
+    - Fix the issue of missing table names in the result of `ADMIN SHOW DDL JOBS` when the `DROP TABLE` operation is being executed [#42268](https://github.com/pingcap/tidb/issues/42268) @[tiancaiamao ](https://github.com/tiancaiamao)
+    - Fix the issue that TiDB Server cannot start due to an error in reading the cgroup information and reports the following error message "can't read file memory.stat from cgroup v1: open /sys/memory.stat no such file or directory" [#42659](https://github.com/pingcap/tidb/issues/42659) @[hawkingrei](https://github.com/hawkingrei)
+    - Fix the issue that data truncation does not give correct warnings when you modify columns on a partitioned table [#24427](https://github.com/pingcap/tidb/issues/24427) @[mjonss](https://github.com/mjonss)
     - (dup): release-6.1.6.md > Bug 修复> TiDB - 修复了生成执行计划过程中，因为获取的 InfoSchema 不一致而导致的 TiDB panic 的问题 [#41622](https://github.com/pingcap/tidb/issues/41622) [@tiancaiamao](https://github.com/tiancaiamao)
     - (dup): release-6.1.6.md > Bug 修复> TiDB - 修复了使用 DDL 修改浮点类型时，保持长度不变且减少小数位后，旧数据仍然保持原样的问题 [#41281](https://github.com/pingcap/tidb/issues/41281) [@zimulala](https://github.com/zimulala)
     - (dup): release-6.1.6.md > Bug 修复> TiDB - 修复事务内执行 PointUpdate 之后，`SELECT` 结果不正确的问题 [#28011](https://github.com/pingcap/tidb/issues/28011) @[zyguan](https://github.com/zyguan)
@@ -77,12 +81,12 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
     - (dup): release-7.0.0.md > 错误修复> TiDB - 修复当同一个 SQL 中出现多个不同的分区表时，TiDB 可能执行得到错误结果的问题 [#42135](https://github.com/pingcap/tidb/issues/42135) @[mjonss](https://github.com/mjonss)
     - (dup): release-7.0.0.md > 错误修复> TiDB - 修复在开启 Prepared Plan Cache 的情况下，索引全表扫可能会报错的问题 [#42150](https://github.com/pingcap/tidb/issues/42150) @[fzzf678](https://github.com/fzzf678)
     - (dup): release-7.0.0.md > 错误修复> TiDB - 修复在开启 Prepared Plan Cache 时 Index Merge 可能得到错误结果的问题 [#41828](https://github.com/pingcap/tidb/issues/41828) @[qw4990](https://github.com/qw4990)
-    - 修复全局内存控制可能 Kill 内存使用量小于 `tidb_server_memory_limit_sess_min_size` 的 SQL 的问题 [#42662](https://github.com/pingcap/tidb/issues/41828) @[XuHuaiyu](https://github.com/XuHuaiyu)
-    - 修复分区表动态裁剪模式下 Index Join 可能发生 Panic 的问题 [#40596](https://github.com/pingcap/tidb/issues/40596) @[tiancaiamao](https://github.com/tiancaiamao)
+    - Fix the issue that global memory control might incorrectly kill SQL with memory usage less than `tidb_server_memory_limit_sess_min_size` [#42662](https://github.com/pingcap/tidb/issues/41828) @[XuHuaiyu](https://github.com/XuHuaiyu)
+    - Fix the issue that Index Join might cause panic in dynamic trimming mode of partition tables [#40596](https://github.com/pingcap/tidb/issues/40596) @[tiancaiamao](https://github.com/tiancaiamao)
 
 + TiKV
 
-    - 修复 tikv 解析 cgroup path 没有正确处理 ":" 符号的问题 [#14535](https://github.com/tikv/tikv/pull/14535) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
+    - Fix the issue that TiKV does not resolve the `:` character correctly when parsing the cgroup path [#14538](https://github.com/tikv/tikv/issues/14538) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
 
 + PD
 
