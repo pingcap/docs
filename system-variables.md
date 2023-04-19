@@ -3153,9 +3153,9 @@ mysql> desc select count(distinct a) from test.t;
 - Persists to cluster: Yes
 - Type: String
 - Default value: `""`
-- This variable is used to control some internal behavior of the optimizer.
-- To make the user able to control the optimizer in a more fine-grained style and prevent regression after upgrading caused by behavior changes in the optimizer, some details of the optimizer behavior will be exposed and controlled by this system variable.
-- Each fix control item corresponds to a GitHub Issue and can be set to a value. When setting multiple fix control items, they should be separated by comma. The format is like `"<#issue1>:<value1>,<#issue2>:<value2>"`, where `<#issueN>` is the GitHub Issue number and `<valueN>` is the expected value.
+- This variable is used to control some internal behaviors of the optimizer.
+- Some optimizer behaviors depend on user scenarios or SQL writing. Using this variable, you can control the optimizer in a more fine-grained style and prevent regression after upgrading caused by behavior changes in the optimizer.
+- Each fix control item corresponds to a GitHub Issue. You can set it to a value. When setting multiple fix control items, separate them by comma. The format is `"<#issue1>:<value1>,<#issue2>:<value2>"`, where `<#issueN>` is the GitHub Issue number and `<valueN>` is the expected value.
 
 ### tidb_opt_force_inline_cte <span class="version-mark">New in v6.3.0</span>
 
