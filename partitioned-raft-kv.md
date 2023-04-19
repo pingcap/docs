@@ -35,7 +35,8 @@ To enable Partitioned Raft KV, set the configuration item [`storage.engine`](/ti
 
 Partitioned Raft KV has the following restrictions:
 
-* It does not support data import, replication, and backup tools, such as TiDB Lightning, TiCDC, BR, and Dumping.
+* It does not support EBS volume snapshot backup.
+* It does not support `FLASHBACK` operations, online unsafe recovery, and Titan.
 * It does not support the tikv-ctl command-line tool.
 * It cannot be used together with TiFlash.
-* You can only enable Partitioned Raft KV when creating a cluster and cannot change the type of engine after the cluster is created.
+* You cannot enable or disable this feature after the cluster is initialized.
