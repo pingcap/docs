@@ -37,7 +37,7 @@ In this example, the filter condition `a < 1` is pushed down to the TableScan op
 
 ## Enable or disable TiFlash late materialization
 
-By default,  the `tidb_opt_enable_late_materialization` system variable is `OFF` at both the session and global levels, which means that the TiFlash late materialization feature is not enabled. You can use the following statement to view the corresponding variable information:
+By default,  the `tidb_opt_enable_late_materialization` system variable is `ON` at both the session and global levels, which means that the TiFlash late materialization feature is enabled. You can use the following statement to view the corresponding variable information:
 
 ```sql
 SHOW VARIABLES LIKE 'tidb_opt_enable_late_materialization';
@@ -47,7 +47,7 @@ SHOW VARIABLES LIKE 'tidb_opt_enable_late_materialization';
 +--------------------------------------+-------+
 | Variable_name                        | Value |
 +--------------------------------------+-------+
-| tidb_opt_enable_late_materialization | OFF   |
+| tidb_opt_enable_late_materialization | ON    |
 +--------------------------------------+-------+
 ```
 
@@ -59,34 +59,34 @@ SHOW GLOBAL VARIABLES LIKE 'tidb_opt_enable_late_materialization';
 +--------------------------------------+-------+
 | Variable_name                        | Value |
 +--------------------------------------+-------+
-| tidb_opt_enable_late_materialization | OFF   |
+| tidb_opt_enable_late_materialization | ON    |
 +--------------------------------------+-------+
 ```
 
 You can modify the `tidb_opt_enable_late_materialization` variable at the session level or at the global level.
 
-- To enable TiFlash late materialization in the current session, use the following statement:
+- To disable TiFlash late materialization in the current session, use the following statement:
 
     ```sql
-    SET SESSION tidb_opt_enable_late_materialization=ON;
+    SET SESSION tidb_opt_enable_late_materialization=OFF;
     ```
 
-- To enable TiFlash late materialization at the global level, use the following statement:
+- To disable TiFlash late materialization at the global level, use the following statement:
 
     ```sql
-    SET GLOBAL tidb_opt_enable_late_materialization=ON;
+    SET GLOBAL tidb_opt_enable_late_materialization=OFF;
     ```
 
     After this setting, the `tidb_opt_enable_late_materialization` variable will be enabled by default for both session and global levels in new sessions.
 
-To disable TiFlash late materialization, use the following statements:
+To enable TiFlash late materialization, use the following statements:
 
 ```sql
-SET SESSION tidb_opt_enable_late_materialization=OFF;
+SET SESSION tidb_opt_enable_late_materialization=ON;
 ```
 
 ```sql
-SET GLOBAL tidb_opt_enable_late_materialization=OFF;
+SET GLOBAL tidb_opt_enable_late_materialization=ON;
 ```
 
 ## Implementation mechanism
