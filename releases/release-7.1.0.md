@@ -5,16 +5,11 @@ summary: Learn about the new features, compatibility changes, improvements, and 
 
 # TiDB 7.1.0 Release Notes
 
-TiDB version: 7.1.0-[DMR](/releases/versioning.md#development-milestone-releases)
-
-Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.0/quick-start-with-tidb) | [Installation package](https://www.pingcap.com/download/?version=v7.0.0#version-list)
-
-In v7.1.0-LTS, the key new features and improvements are as follows:
+In v7.1.0, the key new features and improvements are as follows:
 
 ## Feature details
 
 ### Scalability
-
 
 ### Performance
 
@@ -22,15 +17,15 @@ In v7.1.0-LTS, the key new features and improvements are as follows:
 
     TiDB v6.6.0 引入的全新的 TiKV 存储引擎 [`Partitioned Raft KV`](/partitioned-raft-kv.md) 在 TiDB v7.1.0 版本正式 GA。该引擎使用多个 RocksDB 实例存储 TiKV 的 Region 数据，为每个 Region 提供独立的 RocksDB 实例。此外，该引擎能够更好地管理 RocksDB 实例的文件数和层级，实现 Region 间的数据操作物理隔离，并支持更多数据的平滑扩展。与原 TiKV 存储引擎相比，使用该引擎在相同硬件条件和读写混合场景下，可实现约 2 倍的写入吞吐、3 倍的读取吞吐，并缩短约 4/5 的弹性伸缩时间。该引擎与 TiFlash 引擎兼容，支持 Lightning / BR / TiCDC 等周边工具。该引擎目前仅支持在新集群中使用，暂不支持从原 TiKV 存储引擎直接升级到该引擎。
 
-    更多信息，请参考[用户文档](/partitioned-raft-kv.md)。
+    For more information, see [documentation](/partitioned-raft-kv.md).
 
 * TiFlash supports late materialization (GA) [#5829](https://github.com/pingcap/tiflash/issues/5829) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger) **tw:qiancai**
 
-     In v7.0.0, TiFlash supports late materialization as an experiment feature for optimizing query performance. This feature is disabled by default (the [`tidb_opt_enable_late_materialization`] system variable(/system-variables.md#tidb_opt_enable_late_materialization-new-in-v700) defaults to `OFF`). when processing a `SELECT` statement with filter conditions (`WHERE` clause), TiFlash reads all the data from the columns required by the query, and then filters and aggregates the data based on the query conditions. When Late materialization is enabled, TiDB supports pushing down part of the filter conditions to the TableScan operator. That is, TiFlash first scans the column data related to the filter conditions that are pushed down to the TableScan operator, filters the rows that meet the condition, and then scans the other column data of these rows for further calculation, thereby reducing IO scans and computations of data processing.
+     In v7.0.0, TiFlash supports late materialization as an experiment feature for optimizing query performance. This feature is disabled by default (the [`tidb_opt_enable_late_materialization`](/system-variables.md#tidb_opt_enable_late_materialization-new-in-v700) system variable defaults to `OFF`). when processing a `SELECT` statement with filter conditions (`WHERE` clause), TiFlash reads all the data from the columns required by the query, and then filters and aggregates the data based on the query conditions. When Late materialization is enabled, TiDB supports pushing down part of the filter conditions to the TableScan operator. That is, TiFlash first scans the column data related to the filter conditions that are pushed down to the TableScan operator, filters the rows that meet the condition, and then scans the other column data of these rows for further calculation, thereby reducing IO scans and computations of data processing.
 
-    Starting from v7.1.0, the TiFlash late materialization feature is generally available and enabled by default (the [`tidb_opt_enable_late_materialization`] (/system-variables.md#tidb_opt_enable_late_materialization-new-in-v700) system variable defaults to `ON`). The TiDB optimizer decides which filters to be pushed down to the TableScan operator based on the statistics and the filter conditions of the query.
+    Starting from v7.1.0, the TiFlash late materialization feature is generally available and enabled by default (the [`tidb_opt_enable_late_materialization`](/system-variables.md#tidb_opt_enable_late_materialization-new-in-v700) system variable defaults to `ON`). The TiDB optimizer decides which filters to be pushed down to the TableScan operator based on the statistics and the filter conditions of the query.
 
-    For more information, see [documentation](/tiflash/tiflash-late-materialization.md)。
+    For more information, see [documentation](/tiflash/tiflash-late-materialization.md).
 
 * TiFlash supports automatically choosing MPP Join algorithm according to the overhead of network transmission [#7084](https://github.com/pingcap/tiflash/issues/7084) @[solotzg](https://github.com/solotzg) **tw:qiancai**
 
@@ -40,21 +35,21 @@ In v7.1.0-LTS, the key new features and improvements are as follows:
 
     For more information, see [documentation](/tiflash/use-tiflash-mpp-mode.md#algorithm-support-for-the-mpp-mode).
 
-* 自适应副本读来缓解读热点 [#14151](https://github.com/tikv/tikv/issues/14151) @[sticnarf](https://github.com/sticnarf) @[you06](https://github.com/you06) **tw:Oreoxmt**
+* Support load-based replica read to mitigate read hotspots [#14151](https://github.com/tikv/tikv/issues/14151) @[sticnarf](https://github.com/sticnarf) @[you06](https://github.com/you06) **tw:Oreoxmt**
 
-    发生读热点场景，其他 TiKV 节点可能仍存在闲置资源，与其在数据主节点持续排队等待，转而从其他节点读取副本可能带来更低的延迟。TiDB 在新版本开始支持负载自适应副本读，通过 [`tidb_load_based_replica_read_threshold`](/system-variables.md#tidb_load_based_replica_read_threshold-从-v700-版本开始引入) 参数来设置排队时间的临界值，当估算的排队时间超过设定时，TiDB 会尝试从副本节点读取数据。在读热点的情况下，相比于不打散有 70%-200% 的读取吞吐量提升。
+    In a read hotspot scenario, the hotspot TiKV node cannot process read requests in time, resulting in the read requests queuing. However, not all TiKV resources are exhausted at this time. To reduce latency, TiDB v7.1.0 introduces the load-based replica read feature, which allows TiDB to read data from other TiKV nodes without queuing on the hotspot TiKV node. You can control the queue length of read requests using the [`tidb_load_based_replica_read_threshold`](/system-variables.md#tidb_load_based_replica_read_threshold-new-in-v700) system variable. When the estimated queue time of the leader node exceeds this threshold, TiDB prioritizes reading data from follower nodes. This feature can improve read throughput by 70% to 200% in a read hotspot scenario compared to not scattering read hotspots.
 
-    更多信息，请参考[用户文档](/troubleshoot-hot-spot-issues.md#打散读热点)。
+    For more information, see [documentation](/troubleshoot-hot-spot-issues.md#scatter-read-hotspots).
 
-* 非 Prepare 语句的执行计划缓存 GA [#36598](https://github.com/pingcap/tidb/issues/36598) @[qw4990](https://github.com/qw4990) **tw:Oreoxmt**
+* Support caching execution plans for non-prepared statements (GA) [#36598](https://github.com/pingcap/tidb/issues/36598) @[qw4990](https://github.com/qw4990) **tw:Oreoxmt**
 
-    TiDB 在 v7.0.0 支持缓存非 Prepare 语句的执行计划，以提升在线交易场景的并发能力。v7.1.0 持续优化了这个能力，支持更多模式的 SQL 进入缓存，并正式将这个能力 GA。
+    TiDB v7.0.0 introduces non-prepared plan cache as an experimental feature to improve the load capacity of concurrent OLTP. In v7.1.0, this feature is generally available, enabled by default, and supports caching more SQL statements.
 
-    GA 之后，非 Prepare 与 Prepare SQL 的缓存池合并，以提升内存利用率，缓存大小通过变量 [`tidb_session_plan_cache_size`](/system-variables.md#tidb_session_plan_cache_size) 设置。原有的变量 [`tidb_prepared_plan_cache_size`](/system-variables.md#tidb_prepared_plan_cache_size) 和 [`tidb_non_prepared_plan_cache_size`](/system-variables.md#tidb_non_prepared_plan_cache_size) 将被废弃。
+    To improve memory utilization, TiDB v7.1.0 merges the cache pools of non-prepared and prepared plan caches. You can control the cache size using the system variable [`tidb_session_plan_cache_size`](/system-variables.md#tidb_session_plan_cache_size-new-in-v710). The [`tidb_prepared_plan_cache_size`](/system-variables.md#tidb_prepared_plan_cache_size-new-in-v610) and [`tidb_non_prepared_plan_cache_size`](/system-variables.md#tidb_non_prepared_plan_cache_size) system variables are deprecated.
 
-    为了保持设置向前兼容，对于从低版本升级到 v7.1.0 的客户，缓存池大小 `tidb_session_plan_cache_size` 将会继承 `tidb_prepared_plan_cache_size`的设置，非 Parepare 语句的缓存保持关闭。经过性能测试后，用户可通过 [`tidb_enable_non_prepared_plan_cache`](/system-variables.md#tidb_enable_non_prepared_plan_cache) 打开。对于新部署的客户，非 Parepare 语句的缓存则默认打开。
+    To maintain forward compatibility, when you upgrade from an earlier version to a v7.1.0 or later cluster, the cache size `tidb_session_plan_cache_size` remains the same value as `tidb_prepared_plan_cache_size`, and [`tidb_enable_non_prepared_plan_cache`](/system-variables.md#tidb_enable_non_prepared_plan_cache) remains the setting before the upgrade. After sufficient performance testing, you can enable non-prepared plan cache using `tidb_enable_non_prepared_plan_cache`. For a newly created cluster, non-prepared plan cache is enabled by default.
 
-    更多信息，请参考[用户文档](/sql-non-prepared-plan-cache.md)。
+    For more information, see [documentation](/sql-non-prepared-plan-cache.md).
 
 ### Reliability
 
@@ -66,27 +61,25 @@ In v7.1.0-LTS, the key new features and improvements are as follows:
 
     在 v7.1.0 中，TiDB 增加了基于实际负载来估算系统容量上限的能力，为客户的容量规划提供了更准确的参考，协助客户更好地管理 TiDB 的资源分配，从而满足企业级场景的稳定性需要。
 
-    更多信息，请参考[用户文档](/tidb-resource-control.md)。
+    For more information, see [documentation](/tidb-resource-control.md).
 
-* Support the checkpoint mechanism for [Fast Online DDL](/system-variables.md#tidb_ddl_enable_fast_reorg-introduced-since-v630) to improve fault tolerance and automatic recovery capability [#issue](https://github.com/pingcap/tidb/issues/issue) @[tangenta](https://github.com/tangenta)
+* Support the checkpoint mechanism for [Fast Online DDL](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) to improve fault tolerance and automatic recovery capability [#issue](https://github.com/pingcap/tidb/issues/issue) @[tangenta](https://github.com/tangenta) **tw:ran-huang**
 
-    TiDB v7.1.0 introduces a checkpoint mechanism for [Fast Online DDL](/system-variables.md#tidb_ddl_enable_fast_reorg-introduced-since-v630), whichs significantly improves the fault tolerance and automatic recovery capability of Fast Online DDL. Even in the case of TiDB DDL owner switching, TiDB can still periodically record and synchronize the progress of DDL statements, allowing the new TiDB DDL owner to execute the ongoing DDL statements in Fast Online DDL mode without manually canceling and re-executing the statements. The checkpoint mechanism makes the DDL execution more stable and efficient.
+    TiDB v7.1.0 introduces a checkpoint mechanism for [Fast Online DDL](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630), whichs significantly improves the fault tolerance and automatic recovery capability of Fast Online DDL. Even in the case of TiDB DDL owner switching, TiDB can still periodically record and synchronize the progress of DDL statements, allowing the new TiDB DDL owner to execute the ongoing DDL statements in Fast Online DDL mode without manually canceling and re-executing the statements. The checkpoint mechanism makes the DDL execution more stable and efficient.
 
     For more information, see [documentation](/ddl-introduction.md).
 
-* BR 备份恢复工具支持断点恢复 [#issue](https://github.com/pingcap/tidb/issues/issue) @[Leavrth](https://github.com/Leavrth) **tw:Oreoxmt**
+* Backup & Restore supports supports checkpoint restore [#issue](https://github.com/pingcap/tidb/issues/issue) @[Leavrth](https://github.com/Leavrth) **tw:Oreoxmt**
 
-    如果用户的 TiDB 集群规模较大，之前在进行数据库的快照恢复或日志恢复时，可能会出现一些意外情况导致恢复过程提前结束，例如硬盘空间占满、节点宕机等等。在 TiDB v7.1.0 之前的版本中，这些意外情况会导致之前恢复的进度作废，需要重新进行恢复，给用户带来大量额外成本和麻烦。
+    Snapshot restore or log restore might be interrupted due to recoverable errors, such as disk exhaustion and node crash. Before TiDB v7.1.0, the recovery progress before the interruption would be invalidated even after the error is addressed, and you need to start the restore from scratch. For large clusters, this incurs considerable extra cost. Starting from TiDB v7.1.0, Backup & Restore (BR) introduces the checkpoint restore feature, which enables you to continue an interrupted restore. This feature can retain most recovery progress of the interrupted restore.
 
-    为了解决这个问题，TiDB v7.1.0 引入了备份恢复的断点恢复功能。该功能可以在意外中断后保留上一次恢复的大部分进度，使得用户能够尽可能地继续上一次的恢复的进度，避免不必要的成本和麻烦。
-
-    更多信息，请参考[用户文档](/br/br-checkpoint-restore.md)。
+    For more information, see [documentation](/br/br-checkpoint-restore.md).
 
 * 统计信息缓存加载策略优化 [#issue](https://github.com/pingcap/tidb/issues/issue) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes) **tw:hfxsd**
 
     在开启[统计信息同步加载](/statistics.md#统计信息的加载)的前提下，TiDB 大幅减少了启动时必须载入的统计信息的数量，并且在加载完成前不接受用户连接。一方面提升了启动时统计信息的加载速度，另一方面，避免了在启动初始阶段由于统计信息不全而引起的性能回退。提升了 TiDB 在复杂运行环境下的稳定性，降低了个别 TiDB 节点重启对整体服务的影响。
 
-    更多信息，请参考[用户文档]()。
+    For more information, see [documentation]().
 
 ### Availability
 
@@ -98,9 +91,9 @@ In v7.1.0-LTS, the key new features and improvements are as follows:
 
     In v7.1.0, this feature is generally available. During the execution of the `SELECT` clause in the `INSERT INTO SELECT` statement, the optimizer can intelligently decide whether to push a query down to TiFlash based on the [SQL mode](/sql-mode.md) and the cost estimates of the TiFlash replica. Therefore, the `tidb_enable_tiflash_read_for_write_stmt` system variable introduced during the experimental phase is now deprecated. Note that the computation rules of `INSERT INTO SELECT` statements for TiFlash do not meet the `STRICT SQL Mode` requirement, so TiDB allows the `SELECT` clause in the `INSERT INTO SELECT` statement to be pushed down to TiFlash only when the [SQL Mode](/sql-mode.md) of the current session is not strict, which means that the `sql_mode` value does not contain `STRICT_TRANS_TABLES` and `STRICT_ALL_TABLES`.
 
-    For more information, see [documentation](/tiflash/tiflash-results-materialization.md)。
+    For more information, see [documentation](/tiflash/tiflash-results-materialization.md).
 
-* MySQL-compatible multi-valued index becomes generally available (GA) [#39592](https://github.com/pingcap/tidb/issues/39592) @[xiongjiwei](https://github.com/xiongjiwei) @[qw4990](https://github.com/qw4990) @[YangKeao](https://github.com/YangKeao)
+* MySQL-compatible multi-valued index becomes generally available (GA) [#39592](https://github.com/pingcap/tidb/issues/39592) @[xiongjiwei](https://github.com/xiongjiwei) @[qw4990](https://github.com/qw4990) @[YangKeao](https://github.com/YangKeao) **tw:ran-huang**
 
     Filtering the values of an array in a JSON column is a common operation, but normal indexes cannot help speed up such an operation. Creating a multi-valued index on an array can greatly improve filtering performance. If an array in the JSON column has a multi-valued index, you can use the multi-value index to filter the retrieval conditions with MEMBER OF(), JSON_CONTAINS(), JSON_OVERLAPS() functions, thereby reducing much I/O consumption and improving operation speed.
 
@@ -108,7 +101,7 @@ In v7.1.0-LTS, the key new features and improvements are as follows:
 
     For more information, see [documentation](/sql-statements/sql-statement-create-index.md#multi-valued-index).
 
-*  Improve the partition management for Hash and Key partitioned tables [#42728](https://github.com/pingcap/tidb/issues/42728) @[mjonss](https://github.com/mjonss) **tw:qiancai**
+* Improve the partition management for Hash and Key partitioned tables [#42728](https://github.com/pingcap/tidb/issues/42728) @[mjonss](https://github.com/mjonss) **tw:qiancai**
 
     Before v7.1.0, Hash and Key partitioned tables in TiDB only support the `TRUNCATE PARTITION` partition management statement. Starting from v7.1.0, Hash and Key partitioned tables also support `ADD PARTITION` and `COALESCE PARTITION` partition management statements. Therefore, you can flexibly adjust the number of partitions in Hash and Key partitioned tables as needed. For example, you can increase the number of partitions with the `ADD PARTITION` statement, or decrease the number of partitions with the `COALESCE PARTITION` statement.
 
@@ -126,19 +119,19 @@ In v7.1.0-LTS, the key new features and improvements are as follows:
     - 支持设置 detached，允许该 job 在后台运行。
     - 支持 show load data jobs, show load data jobid, drop load data jobid 来管理任务。
 
-    更多信息，请参考[用户文档](https://github.com/pingcap/docs-cn/pull/13344)。
+    For more information, see [documentation](https://github.com/pingcap/docs-cn/pull/13344).
 
 * `LOAD DATA` SQL 集成 Lightning local backend（physical import mode） 的导入功能，提升导入性能（实验特性）[#42930](https://github.com/pingcap/tidb/issues/42930) @[D3Hunter](https://github.com/D3Hunter) **tw:hfxsd**
 
     用户通过 `LOAD DATA` SQL 导入数据时，可以指定 import_mode = physical 来实现 Lightning local backend （physical 导入模式）的导入效果，相比 Load data 原先的 logical 导入模式，可成倍提升导入数据的性能。
 
-    更多信息，请参考[用户文档](链接)。
+    For more information, see [documentation](链接).
 
 * `LOAD DATA` SQL 支持并行导入，提升导入性能（实验特性）[#40499](https://github.com/pingcap/tidb/issues/40499) @[lance6716](https://github.com/lance6716) **tw:hfxsd**
 
     原先 load data sql 无法并行导入数据，性能较差。在该版本中支持设置并行导入的参数，通过提升并发，来提升导入的性能。在实验室环境，相比上个版本，测试逻辑导入性能有接近 4 倍的提升。
 
-    更多信息，请参考[用户文档](https://github.com/pingcap/docs-cn/pull/13676)。
+    For more information, see [documentation](https://github.com/pingcap/docs-cn/pull/13676).
 
 * Generated columns become generally available (GA) [#issue号](链接) @[bb7133](https://github.com/bb7133) **tw:ran-huang**
 
@@ -163,7 +156,7 @@ In v7.1.0-LTS, the key new features and improvements are as follows:
 
     For more information, see [`ADMIN PAUSE DDL JOBS`](/sql-statements/sql-statement-admin-pause-ddl.md) and [`ADMIN RESUME DDL JOBS`](/sql-statements/sql-statement-admin-resume-ddl.md).
 
-### Data migration
+### Observability
 
 * 增加优化器诊断信息 [#issue号](链接) @[time-and-fate](https://github.com/time-and-fate) **tw:hfxsd**
 
@@ -175,29 +168,23 @@ In v7.1.0-LTS, the key new features and improvements are as follows:
 
   更多信息，请参考[使用 `PLAN REPLAYER` 保存和恢复集群线程信息](/sql-plan-replayer.md#使用-plan-replayer-保存和恢复集群现场信息)，[使用 `EXPLAIN` 解读执行计划](/explain-walkthrough.md)和[`慢日志查询`](/identify-slow-queries.md)。
 
-### 安全
+### Security
 
 * Replace the interface used for querying TiFlash system table information [#6941](https://github.com/pingcap/tiflash/issues/6941) @[flowbehappy](https://github.com/flowbehappy) **tw:qiancai**
 
     Starting from v7.1.0, when providing the query service of [`INFORMATION_SCHEMA.TIFLASH_TABLES`](/information-schema/information-schema-tiflash-tables.md) and [`INFORMATION_SCHEMA.TIFLASH_SEGMENTS`](/information-schema/information-schema-tiflash-segments.md) system tables for TiDB, TiFlash uses the gRPC port instead of the HTTP port, which avoids the security risks of the HTTP service.
 
-### 数据迁移
+### Data migration
 
-* TiCDC 支持 E2E 单行数据正确性校验功能 [#issue号](链接) @[3AceShowHand](https://github.com/3AceShowHand) @[zyguan](https://github.com/zyguan) **tw:Oreoxmt**
+* TiCDC supports the integrity validation feature for single-row data [#8718](https://github.com/pingcap/tiflow/issues/8718) [#42747](https://github.com/pingcap/tidb/issues/42747) @[3AceShowHand](https://github.com/3AceShowHand) @[zyguan](https://github.com/zyguan) **tw:Oreoxmt**
 
-    从 v7.1.0 版本开始，TiCDC 新增了单行数据正确性校验功能，该功能基于 Checksum 算法对单行数据的正确性进行校验。通过该功能可以校验一行数据从 TiDB 写入、经由 TiCDC 流出，再写入到 Kafka 集群的过程中是否发生了数据错误。该功能仅支持下游是 Kafka Sink 的 Changefeed，支持 Canal-JSON / Avro / Open-Protocol 等协议。
+    Starting from v7.1.0, TiCDC introduces the data integrity validation feature, which uses a checksum algorithm to validate the integrity of single-row data. This feature helps verify whether any error occurs in the process of writing data from TiDB, replicating it through TiCDC, and then writing it to a Kafka cluster. The data integrity validation feature only supports changefeeds that use Kafka as the downstream and currently supports the Avro protocol.
 
-    更多信息，请参考[用户文档](/ticdc/ticdc-integrity-check.md)。
+    For more information, see [documentation](/ticdc/ticdc-integrity-check.md).
 
-* TiCDC Optimizes DDL replication operations [#8686](https://github.com/pingcap/tiflow/issues/8686) @[nongfushanquan](https://github.com/nongfushanquan)
+* TiCDC Optimizes DDL replication operations [#8686](https://github.com/pingcap/tiflow/issues/8686) @[nongfushanquan](https://github.com/nongfushanquan) **tw:ran-huang**
 
     Prior to v7.1.0, when you performed a DDL operation that affected all rows on a large table (such as adding or deleting a column), the replication delay of TiCDC would significantly increase. Starting from v7.1.0, TiCDC optimizes this issue and reduces the replication delay to less than 10 seconds. This optimization mitigates the impact of DDL operations on downstream latency.
-
-* Lightning local backend (physical import mode) 支持在导入数据之前检测冲突的记录，并支持通过 insert ignore 和 replace 解决导入过程中的冲突记录 (实验特性) [#41629](https://github.com/pingcap/tidb/issues/41629) @[gozssky](https://github.com/gozssky) **tw:hfxsd**
-
-    在之前的版本使用 Lightning local backend (physical import mode) 导入数据时，当遇到冲突的记录时，无法通过 insert ignore 和 replace 来处理导入过程中的 pk、uk 冲突记录，需要用户自行去重。而本次版本，支持在导入数据之前，检查冲突的记录，并通过 replace 和 insert ignore 的语义来处理 pk、uk 冲突的记录。简化用户的操作，提升处理冲突的性能。
-
-    更多信息，请参考[用户文档](链接)。
 
 ## Compatibility changes
 
