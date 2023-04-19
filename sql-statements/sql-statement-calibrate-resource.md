@@ -5,22 +5,7 @@ summary: An overview of the usage of CALIBRATE RESOURCE for the TiDB database.
 
 # `CALIBRATE RESOURCE`
 
-The `CALIBRATE RESOURCE` statement is used to estimate and output the ['Request Unit (RU)`](/tidb-resource-control#what-is-request-unit-ru) capacity of the current cluster. TiDB provides two methods for estimation:
-
-- Method 1: view the capacity within a specified time window depending on the actual workload. The following constraints apply to improve the accuracy of the estimation:
-    - The time window ranges from 10 minutes to 24 hours.
-    - In the specified time window, if the CPU utilization of TiDB and TiKV is too low, you cannot estimate the capacity.
-
-- Method 2: specify `WORKLOAD` to view the RU capacity. The default value is `TPCC`. The following options are currently supported:
-
-    - OLTP_READ_WRITE
-    - OLTP_READ_ONLY
-    - OLTP_WRITE_ONLY
-    - TPCC
-
-> **Note:**
->
-> The RU capacity of a cluster varies with the topology of the cluster and the hardware and software configuration of each component. The actual RU that each cluster can consume is also related to the actual workload. The estimated value in Method 2 is for reference only and might differ from the actual maximum value. It is recommended to use Method 1 for estimation based on the actual workload.
+The `CALIBRATE RESOURCE` statement is used to estimate and output the ['Request Unit (RU)`](/tidb-resource-control#what-is-request-unit-ru) capacity of the current cluster.
 
 <CustomContent platform="tidb-cloud">
 
@@ -48,6 +33,32 @@ To execute this command, you need the following configuration and privileges:
 - You have enabled [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660).
 - You have `SUPER` or `RESOURCE_GROUP_ADMIN` privilege.
 - You have the `SELECT` privilege for all tables in the `METRICS_SCHEMA` schema.
+
+## Parameters
+
+TiDB provides two methods for estimation:
+
+### Estimate capacity based on actual workload
+
+If your application is already running online, or you can run actual business tests, it is recommended to use the actual workload over a period of time to estimate the total capacity. Observe the following constraints to improve the accuracy of the estimation:
+
+- Use the `START_TIME` parameter to specify the time point at which the estimation starts, in the format of "2006-01-02 15:04:05". The default estimation end time is the current time.
+- After specifying the `START_TIME` parameter, you can use the `END_TIME` parameter to specify the estimation end time, or use the `DURATION` parameter to specify the estimation time window from `START_TIME`.
+- The time window ranges from 10 minutes to 24 hours.
+- In the specified time window, if the CPU utilization of TiDB and TiKV is too low, you cannot estimate the capacity.
+
+### Estimate capacity based on hardware deployment
+
+This approach is mainly based on the current cluster configuration, combined with the empirical values observed for different workloads for estimation. Because different types of workloads require different ratios of hardware, the output capacity of the same configuration of hardware might be different. The `WORKLOAD` parameter here provides the following different workload types. The default value is `TPCC`.
+
+- `tpcc`: applies to workloads with heavy data write. It is estimated based on a workload model similar to TPC-C.
+- `oltp_write_only`: applies to workloads with heavy data write. It is estimated based on a workload model similar to `sysbench oltp_write_only`.
+- `oltp_read_write`: applies to workloads with even data read and write. It is estimated based on a workload model similar to `sysbench oltp_read_write`.
+- `oltp_read_only`: applies to workloads with heavy data read. It is estimated based on a workload model similar to `sysbench oltp_read_only`.
+
+> **Note:**
+>
+> The RU capacity of a cluster varies with the topology of the cluster and the hardware and software configuration of each component. The actual RU that each cluster can consume is also related to the actual workload. The estimated value estimated based on hardware deployment is for reference only and might differ from the actual maximum value. It is recommended to [estimate capacity based on actual workload](#estimate-capacity-based-on-actual-workload).
 
 ## Examples
 
