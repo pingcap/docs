@@ -59,5 +59,4 @@ When `br` retries a restore, some data that has been restored might need to be r
 
 ### Avoid modifying cluster data during the restore
 
-- After a log restore failure, avoid writing, deleting, or creating tables in the cluster. This is because the log backup data might contain DDL operations for renaming tables. If you modify the cluster data, the checkpoint restore cannot confirm whether the deleted or existing table resulted from external operations, which affects the accuracy of the next restore retry.
-- After a snapshot restore failure, it is not recommended to delete tables.
+After a restore failure, avoid writing, deleting, or creating tables in the cluster. This is because the backup data might contain DDL operations for renaming tables. If you modify the cluster data, the checkpoint restore cannot confirm whether the deleted or existing table resulted from external operations, which affects the accuracy of the next restore retry.
