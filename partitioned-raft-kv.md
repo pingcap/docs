@@ -33,9 +33,9 @@ To enable Partitioned Raft KV, set the configuration item [`storage.engine`](/ti
 
 ## Restrictions
 
-Partitioned Raft KV has the following restrictions:
+Currently, partitioned Raft KV has the following restrictions:
 
-* It does not support EBS volume snapshot backup yet.
+* It does not support EBS volume snapshot backup.
 * It does not support `FLASHBACK` operations, online unsafe recovery, or Titan.
 * It does not support the tikv-ctl command-line tool.
 * It cannot be used together with TiFlash.
