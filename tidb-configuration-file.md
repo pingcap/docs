@@ -552,7 +552,7 @@ Configuration items related to performance.
 
 > **Warning:**
 >
-> This variable is an experimental feature. It is not recommended to use it in production environments. If you find a bug, you can file an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> This variable is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 + Controls whether TiDB is initialized with lightweight statistics upon startup.
 + Default value: false
