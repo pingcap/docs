@@ -34,7 +34,7 @@ To execute this command, you need the following configuration and privileges:
 - You have `SUPER` or `RESOURCE_GROUP_ADMIN` privilege.
 - You have the `SELECT` privilege for all tables in the `METRICS_SCHEMA` schema.
 
-## Parameters
+## Estimation methods
 
 TiDB provides two methods for estimation:
 
