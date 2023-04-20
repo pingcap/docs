@@ -79,7 +79,7 @@ If this causes performance issues, you can use the `ignore_plan_cache()` hint to
 Due to the preceding risks and the fact that the execution plan cache only provides significant benefits for simple queries (if a query is complex and takes a long time to execute, using the execution plan cache might not be very helpful), TiDB has strict restrictions on the scope of non-prepared plan cache. The restrictions are as follows:
 
 - Queries or plans that are not supported by the [Prepared plan cache](/sql-prepared-plan-cache.md) are also not supported by the non-prepared plan cache.
-- Queries that contain complex operators such as `Window` or `Sort` are not supported.
+- Queries that contain complex operators such as `Window` or `Having` are not supported.
 - Queries that contain three or more `Join` tables or subqueries are not supported.
 - Queries that contain numbers or expressions directly after `ORDER BY` or `GROUP BY` are not supported, such as `ORDER BY 1` and `GROUP BY a+1`. Only `ORDER BY column_name` and `GROUP BY column_name` are supported.
 - Queries that filter on columns of `JSON`, `ENUM`, `SET`, or `BIT` type are not supported, such as `SELECT * FROM t WHERE json_col = '{}'`.
@@ -92,7 +92,7 @@ After you enable this feature, the optimizer quickly assesses the query. If it d
 
 ## Performance benefits
 
-In internal tests, enabling the non-prepared plan cache feature can achieve significant performance benefits in most TP scenarios. However, it also introduces some additional performance overhead, including determining whether the query is supported and parameterizing the query. If this feature cannot support the majority of queries in your workload, enabling it might actually impact performance.
+In internal tests, enabling the non-prepared plan cache feature can achieve significant performance benefits in most TP scenarios. However, it also introduces some additional performance overhead, including determining whether the query is supported and parameterizing the query. If this feature cannot support the majority of queries in your workload, enabling it might actually adversely affect performance.
 
 In this case, you need to observe the `non-prepared` metric in the **Queries Using Plan Cache OPS** panel and the `non-prepared-unsupported` metric in the **Plan Cache Miss OPS** panel on Grafana. If most queries are not supported and only a few can hit the plan cache, you can disable this feature.
 
