@@ -554,7 +554,7 @@ Configuration items related to performance.
 >
 > This variable is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
-+ Controls whether TiDB is initialized with lightweight statistics upon startup.
++ Controls whether to use lightweight statistics initialization during TiDB startup.
 + Default value: false
 
 ## opentracing
