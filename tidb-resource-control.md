@@ -29,8 +29,8 @@ With this feature, you can:
 
 - Combine multiple small and medium-sized applications from different systems into a single TiDB cluster. When the workload of an application grows larger, it does not affect the normal operation of other applications. When the system workload is low, busy applications can still be allocated the required system resources even if they exceed the set read and write quotas, so as to achieve the maximum utilization of resources.
 - Choose to combine all test environments into a single TiDB cluster, or group the batch tasks that consume more resources into a single resource group. It can improve hardware utilization and reduce operating costs while ensuring that critical applications can always get the necessary resources.
-- When there are various business workloads in the system, you can put different workloads into different resource groups. By using the resource control feature, you can ensure that the response time of transactional business is not affected by data analysis or batch business.
-- When the cluster encounters an unexpected SQL performance problem, you can use SQL Binding and resource groups to temporarily limit the resource consumption of a SQL statement.
+- When there are mixed workloads in the same system, you can put different workloads into individual resource groups. By using the resource control feature, you can ensure that the response time of transactional applications is not affected by data analysis or batch applications.
+- When the cluster encounters an unexpected SQL performance problem, you can use SQL Binding along with resource groups to temporarily limit the resource consumption of a SQL statement.
 
 In addition, the rational use of the resource control feature can reduce the number of clusters, ease the difficulty of operation and maintenance, and save management costs.
 
@@ -88,7 +88,7 @@ For more information about the resource control mechanism and parameters, see [R
 
 ## How to use resource control
 
-This section describes how to use the resource control feature to manage resource groups and control the resource usage of each resource group.
+This section describes how to use the resource control feature to manage resource groups and control the resource allocation of each resource group.
 
 ### Methods for estimating capacity
 
@@ -242,11 +242,11 @@ The resource control feature does not impact the regular usage of data import, e
 
 2. Can a database user be bound to several resource groups?
 
-    No. A database user can only be bound to one resource group. However, during the session runtime, you can use [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md) to set the resource group used by the current session. You can also use the optimizer [`RESOURCE_GROUP()`](/optimizer-hints.md#resource_groupresource_group_name) Hint to set the resource group for the running statement.
+    No. A database user can only be bound to one resource group. However, during the session runtime, you can use [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md) to set the resource group used by the current session. You can also use the optimizer hint [`RESOURCE_GROUP()`](/optimizer-hints.md#resource_groupresource_group_name) to set the resource group for the running statement.
 
-3. What happens when the total usage (`RU_PER_SEC`) of all resource groups exceeds the system capacity?
+3. What happens when the total resource allocation (`RU_PER_SEC`) of all resource groups exceeds the system capacity?
 
-    TiDB does not check the capacity when you create a resource group. As long as the system has enough available resources, TiDB can meet the usage requirements of each resource group. When the system resources exceed the limit, TiDB will first meet the requests of the high-priority (PRIORITY) resource groups. If the requests of the same priority cannot be met, TiDB will allocate resources proportionally according to the usage (`RU_PER_SEC`).
+    TiDB does not verify the capacity when you create a resource group. As long as the system has enough available resources, TiDB can meet the resource requirements of each resource group. When the system is saturated, TiDB will first meet the requests coming from resource groups with higher priority. If the requests with the same priority cannot be met, TiDB will allocate resources proportionally according to the resource allocation (`RU_PER_SEC`).
 
 ## See also
 
