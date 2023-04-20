@@ -10,15 +10,15 @@ The `LOAD DATA` statement batch loads data into a TiDB table.
 
 Starting from TiDB v7.0.0, the `LOAD DATA` SQL statement becomes more powerful by integrating TiDB Lightning's logical import mode, including the following:
 
-- Support importing data from S3 and GCS
-- Support importing Parquet format data
-- Add new parameters `FORMAT`, `FIELDS DEFINED NULL BY`, and `With batch_size=<number>,detached`
+- Support importing data from S3 and GCS.
+- Support importing Parquet format data.
+- Add new parameters `FORMAT`, `FIELDS DEFINED NULL BY`, and `With batch_size=<number>,detached`.
 
 Starting from TiDB v7.1.0, `LOAD DATA` supports the following features:
 
-- Support importing compressed `DELIMITED DATA` and `SQL FILE` data files
-- Support parrallel import in logical import mode
-- Support specifying the encoding format of data files through `CharsetOpt`
+- Support importing compressed `DELIMITED DATA` and `SQL FILE` data files.
+- Support parrallel import in logical import mode.
+- Support specifying the encoding format of data files through `CharsetOpt`.
 - `LOAD DATA` integrates TiDB Lightning's physical import mode. This mode skips the SQL interface, and directly inserts data as key-value pairs into the TiKV nodes, which is an efficient and fast import mode.
 
 > **Warning:**
@@ -96,7 +96,7 @@ When the data files are stored on S3 or GCS, you can import individual files or 
 
 You can use the `FORMAT` parameter to specify the format of the data file. If you do not specify this parameter, you are using the format defined by `DELIMITED DATA`, which is the default data format of MySQL `LOAD DATA`.
 
-Data formats `DELIMITED DATA` and `SQL FILE` support compressed files. `LOAD DATA` automatically determines the compression format according to the suffix of the file name. The currently supported compression formats are as follows:
+Data formats `DELIMITED DATA` and `SQL FILE` support compressed files. `LOAD DATA` automatically determines the compression format according to the suffix of the file name. The following compression formats are supported:
 
 | File Name Suffix | Compression Format | Example |
 |:---|:---|:---|
@@ -108,7 +108,7 @@ Data formats `DELIMITED DATA` and `SQL FILE` support compressed files. `LOAD DAT
 
 This parameter is the same as that in MySQL. See [MySQL LOAD DATA documentation](https://dev.mysql.com/doc/refman/8.0/en/load-data.html#load-data-error-handling).
 
-This parameter only applies to the logical import mode and does not take effect for the physical import mode.
+This parameter only applies to logical import mode and does not take effect for physical import mode.
 
 ### `CharsetOpt`
 
@@ -160,9 +160,9 @@ You can ignore the first `number` lines of a file by configuring the `IGNORE <nu
 
 ### `WITH import_mode = ('LOGICAL' | 'PHYSICAL')`
 
-You can specify the mode of data import by `import_mode = ('LOGICAL' | 'PHYSICAL')`, the default value is `LOGICAL`, which means logical import mode. Starting from v7.1.0, `LOAD DATA` integrates with TiDB Lightning's physical import mode, which can be enabled with `WITH import_mode = 'PHYSICAL'`.
+You can specify the data import mode by `import_mode = ('LOGICAL' | 'PHYSICAL')`. The default value is `LOGICAL`, which means logical import mode. Starting from v7.1.0, `LOAD DATA` integrates with physical import mode, which can be enabled with `WITH import_mode = 'PHYSICAL'`.
 
-Physical import mode can only be used in non-`LOCAL` mode, with single thread execution. Currently, physical import mode is not integrated with [conflict detection](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#conflict-detection), so a checksum inconsistency error occurs when there is a data primary key or unique key conflict. It is recommended to check the data file to ensure that there are no key conflicts before importing. For other restrictions and requirements, see [TiDB Lightning Physical Import Mode](/tidb-lightning/tidb-lightning-physical-import-mode.md).
+Physical import mode can only be used in non-`LOCAL` mode, with single thread execution. Currently, physical import mode is not integrated with [conflict detection](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#conflict-detection), so a checksum inconsistency error occurs when there is a data primary key or unique key conflict. It is recommended that you check the data file to ensure that there are no key conflicts before importing. For other restrictions and requirements, see [TiDB Lightning Physical Import Mode](/tidb-lightning/tidb-lightning-physical-import-mode.md).
 
 In physical import mode, `LOAD DATA` writes the locally sorted data to the TiDB [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630) subdirectory. The subdirectory naming rule is `import-<tidb-port>/<job-id>`.
 
@@ -174,7 +174,7 @@ Currently this parameter only applies to logical import mode.
 
 You can specify the concurrency of the data import with `WITH thread=<number>`. The default value is related to `FORMAT`:
 
-- When `FORMAT` is `PARQUET`, the default value is 75% of the number of CPU cores.
+- If `FORMAT` is `PARQUET`, the default value is 75% of the number of CPU cores.
 - For other `FORMAT` options, the default value is the number of logical CPU cores.
 
 ### `WITH batch_size=<number>`
@@ -183,13 +183,13 @@ You can specify the number of rows to be written to TiDB in a batch with `WITH b
 
 ### `WITH max_write_speed = stringLit`
 
-When you use physical import mode, you can specify the rate limit for writing to a single TiKV with this parameter. The default value is `0`, which means no limit.
+When you use physical import mode, you can use this parameter to specify the rate limit for writing to a single TiKV. The default value is `0`, which means no limit.
 
 This parameter supports the [go-units](https://pkg.go.dev/github.com/docker/go-units#example-RAMInBytes) format. For example, `WITH max_write_speed = '1MB'` means that the maximum write rate to a single TiKV is `1MB/s`.
 
 ### `WITH detached`
 
-If you specify the S3 or GCS path, and do not specify the `LOCAL` parameter, you can use `WITH detached` to make `LOAD DATA` run in the background. In this case, `LOAD DATA` returns the task ID.
+If you specify an S3 or GCS path, and do not specify the `LOCAL` parameter, you can use `WITH detached` to make `LOAD DATA` run in the background. In this case, `LOAD DATA` returns the task ID.
 
 You can view the created jobs via [`SHOW LOAD DATA`](/sql-statements/sql-statement-show-load-data.md), or you can use [`CANCEL LOAD DATA` and `DROP LOAD DATA`](/sql-statements/sql-statement-operate-load-data-job.md) to cancel or delete the created jobs.
 
