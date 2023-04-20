@@ -42,23 +42,56 @@ Before getting started, ensure you have the following:
 - An AWS account
 - Access to [AWS CloudFormation](https://aws.amazon.com/cloudformation/), [Secrets Manager](https://aws.amazon.com/secrets-manager/), [API Gateway](https://aws.amazon.com/api-gateway/), [Lambda services](https://aws.amazon.com/lambda/), [S3](https://aws.amazon.com/s3/), and [IAM Roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)
 - A [TiDB Cloud](https://tidbcloud.com) account and a TiDB Cloud Serverless cluster
-- Get TiDB Connection Information
-
-    ![tidbcloud-connection-info](/media/develop/aws-lambda-tidbcloud-connection-info.png)
+    - Get TiDB Connection Information
+        ![tidbcloud-connection-info](/media/develop/aws-lambda-tidbcloud-connection-info.png)
+- API test tools like [`Postman`](https://www.postman.com/) or [`cURL`](https://curl.se/). Most of the examples in this document use `cURL`, if you are using MS Windows, `Postman` is recommended.
+- Download the [latest release assets](https://github.com/pingcap/TiDB-Lambda-integration/releases/latest) to your local machine, which includes `cloudformation_template.yml` and `cloudformation_template.json` files.
 
 <Note>
-When you create the TiDB Cloud Serverless Tier cluster, use `us-east-1` as your cluster region.
+When you create the AWS resources, use `us-east-1` as your cluster region is recommended. This is because the Lambda function code in this demo hardcodes the region as `us-east-1`, and the code bundle is stored in the `us-east-1` region.
+
+If you use a different region, you need to modify the Lambda function code, re-build and re-upload the code bundle to your own S3 bucket.
 </Note>
+
+### Modify and rebuild the Lambda Function Code if necessary
+
+If you use a different AWS region other than `us-east-1` to create the AWS resources, you need to modify the Lambda function code, re-build and re-upload the code bundle to your own S3 bucket.
+
+To avoid local development environment issues, we recommend you to cloudnative development environment, such as [Gitpod](https://www.gitpod.io/).
+
+- Initialize the development environment
+    - Open the [Gitpod](https://gitpod.io/#/https://github.com/pingcap/TiDB-Lambda-integration) workspace and login with your GitHub account
+- Modify the Lambda function code
+    - Open `aws-lambda-cloudformation/src/secretManager.ts` file in the left sidebar
+    - Modify the line#22 `region` variable to your own region
+- Re-build and re-upload the code bundle to your own S3 bucket
+    - Install the dependencies
+        - In Gitpod terminal
+        - Run `cd aws-lambda-cloudformation` to change the working directory
+        - Run `yarn` to install the dependencies
+    - Re-build the code bundle
+        - Run `yarn build` to build the code bundle
+        - Check the `aws-lambda-cloudformation/dist/index.zip` file
+        - Right click the `index.zip` file and select `Download`
+    - Upload the code bundle to your own S3 bucket
+        - Visit the [S3 service](https://console.aws.amazon.com/s3) in the AWS Management Console
+        - Create a new bucket in your selected region
+        - Upload the `index.zip` file to the bucket
+        - Note down the S3 bucket Name and Region
 
 ## Setting up the Demo using CloudFormation
 
 To set up the bookshop demo using CloudFormation, follow these steps:
 
-1. Download the [latest release assets](https://github.com/pingcap/TiDB-Lambda-integration/releases/latest) to your local machine, which includes `cloudformation_template.yml` and `cloudformation_template.json` files.
+1. Find `cloudformation_template.yml` or `cloudformation_template.json` file in previous download assets. The file contains the CloudFormation template that creates the necessary resources for the demo.
 2. Navigate to the AWS Management Console and access the [CloudFormation service](https://console.aws.amazon.com/cloudformation).
 3. Click **Create Stack** and upload the CloudFormation template file (either YAML or JSON).
 4. Complete the stack creation process.
-
+    - Create new stack by uploading a template file
+        ![aws-lambda-cf-create-stack](/media/develop/aws-lambda-cf-create-stack.png)
+    - Specify stack details
+        - If you use a different AWS region other than `us-east-1`, you should follow the [Modify and rebuild the Lambda Function Code if necessary](#modify-and-rebuild-the-lambda-function-code-if-necessary) section to modify the Lambda function code, re-build and re-upload the code bundle to your own S3 bucket. Then, you need to specify the S3 bucket name and region in the `S3Bucket` and `S3Key` parameters.
+        ![aws-lambda-cf-stack-details](/media/develop/aws-lambda-cf-stack-config.png)
 ## Using the Demo
 
 Once the stack has been created, you can use the demo as follows:
