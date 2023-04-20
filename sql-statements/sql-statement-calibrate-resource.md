@@ -51,7 +51,7 @@ If your application is already running online, or you can run actual business te
 
 This approach is mainly based on the current cluster configuration, combined with the empirical values observed for different workloads for estimation. Because different types of workloads require different ratios of hardware, the output capacity of the same configuration of hardware might be different. The `WORKLOAD` parameter here provides the following different workload types. The default value is `TPCC`.
 
-- `tpcc`: applies to workloads with heavy data write. It is estimated based on a workload model similar to TPC-C.
+- `tpcc`: applies to workloads with heavy data write. It is estimated based on a workload model similar to `TPC-C`.
 - `oltp_write_only`: applies to workloads with heavy data write. It is estimated based on a workload model similar to `sysbench oltp_write_only`.
 - `oltp_read_write`: applies to workloads with even data read and write. It is estimated based on a workload model similar to `sysbench oltp_read_write`.
 - `oltp_read_only`: applies to workloads with heavy data read. It is estimated based on a workload model similar to `sysbench oltp_read_only`.
