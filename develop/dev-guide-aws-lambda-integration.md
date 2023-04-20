@@ -13,11 +13,27 @@ The document is organized into the following sections:
 
 1. [Prerequisites](#prerequisites)
 2. [Solution Overview](#solution-overview)
-3. [Structure](#structure)
-4. [Setting up the Demo using CloudFormation](#setting-up-the-demo-using-cloudformation)
-5. [Using the Demo](#using-the-demo)
-6. [Cleaning up](#cleaning-up)
-7. [Conclusion](#conclusion)
+3. [Setting up the Demo using CloudFormation](#setting-up-the-demo-using-cloudformation)
+4. [Using the Demo](#using-the-demo)
+5. [Cleaning up](#cleaning-up)
+6. [Conclusion](#conclusion)
+
+## Solution Overview
+
+This guide demonstrates how to use AWS CloudFormation to create a fully-functional online bookshop using TiDB Cloud Serverless as the database-as-a-service (DBaaS). The Secrets Manager service stores database-related details, the API Gateway handles HTTP request routes, and Lambda Functions process requests and query data from the TiDB Cloud Serverless database.
+
+The project consists of the following components:
+
+- AWS Lambda Function: Handles requests and queries data from the TiDB Cloud Serverless database using Sequelize ORM and Fastify API framework
+- AWS Secrets Manager SDK: Retrieves and manages connection configurations for the TiDB Cloud Serverless database
+- AWS API Gateway: Handles HTTP request routes
+- TiDB Cloud Serverless: A cloud-native distributed SQL database
+
+CloudFormation is used to create the necessary resources for the demo, including the Secrets Manager, API Gateway, and Lambda Functions.
+
+Finally, the following diagram shows the structure of the demo:
+
+![aws-lambda-structure-overview](/media/develop/aws-lambda-structure-overview.png)
 
 ## Prerequisites
 
@@ -33,25 +49,6 @@ Before getting started, ensure you have the following:
 <Note>
 When you create the TiDB Cloud Serverless Tier cluster, use `us-east-1` as your cluster region.
 </Note>
-
-## Solution Overview
-
-This guide demonstrates how to use AWS CloudFormation to create a fully-functional online bookshop using TiDB Cloud Serverless as the database-as-a-service (DBaaS). The Secrets Manager service stores database-related details, the API Gateway handles HTTP request routes, and Lambda Functions process requests and query data from the TiDB Cloud Serverless database.
-
-## Structure
-
-The project consists of the following components:
-
-- AWS Lambda Function: Handles requests and queries data from the TiDB Cloud Serverless database using Sequelize ORM and Fastify API framework
-- AWS Secrets Manager SDK: Retrieves and manages connection configurations for the TiDB Cloud Serverless database
-- AWS API Gateway: Handles HTTP request routes
-- TiDB Cloud Serverless: A cloud-native distributed SQL database
-
-CloudFormation is used to create the necessary resources for the demo, including the Secrets Manager, API Gateway, and Lambda Functions.
-
-Finally, the following diagram shows the structure of the demo:
-
-![aws-lambda-structure-overview](/media/develop/aws-lambda-structure-overview.png)
 
 ## Setting up the Demo using CloudFormation
 
