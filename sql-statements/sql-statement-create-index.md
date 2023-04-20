@@ -341,7 +341,7 @@ See [Index Selection - Use multi-valued indexes](/choose-index.md#use-a-multi-va
 - The extra storage space used by a multi-valued index = the average number of array elements per row * the space used by a normal secondary index.
 - Compared with normal indexes, DML operations will modify more index records for multi-valued indexes, so multi-valued indexes will have a greater performance impact than normal indexes.
 - Because multi-valued indexes are a special type of expression index, multi-valued indexes have the same limitations as expression indexes.
-- If the table uses multi-valued indexes, you cannot back up, replicate, or import the table using BR, TiCDC, or TiDB Lightning to a TiDB cluster earlier than v6.6.0.
+- If a table uses multi-valued indexes, you cannot back up, replicate, or import the table using BR, TiCDC, or TiDB Lightning to a TiDB cluster earlier than v6.6.0.
 
 ## Invisible index
 
