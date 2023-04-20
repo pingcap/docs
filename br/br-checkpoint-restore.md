@@ -23,11 +23,11 @@ The implementation of snapshot restore is similar to [snapshot backup](/br/br-ch
 
 When `br` retries a restore, it reads the key ranges that have been restored from external storage, and matches them with the corresponding table ID. During the restore, `br` skips any key ranges that overlap with those recorded in the checkpoint restore, and that have the same table ID.
 
-If you delete tables before `br` retries the restore, the table IDs of newly created tables during the retry will be different from the previously recorded table IDs in the checkpoint restore. In this case, `br` bypasses the previous checkpoint restore information and restores the table again. This means that the same table with a new ID disregards the old ID's checkpoint restore information and records new checkpoint restore information corresponding to the new ID.
+If you delete tables before `br` retries the restore, the table ID of the newly created table during the retry will be different from the previously recorded table ID in the checkpoint restore. In this case, `br` bypasses the previous checkpoint restore information and restores the table again. This means that the same table with a new ID disregards the old ID's checkpoint restore information and records the new checkpoint restore information corresponding to the new ID.
 
 Due to the use of the MVCC (Multi-Version Concurrency Control) mechanism, data with specified timestamps can be written unordered and repeatedly.
 
-When restoring table DDLs using snapshot restore, the `ifExists` parameter is added. For existing tables that are already considered created, `br` automatically skips the restore.
+When restoring database or table DDLs using snapshot restore, the `ifExists` parameter is added. For existing databases or tables that are already considered created, `br` automatically skips the restore.
 
 ### Log restore
 
@@ -59,4 +59,4 @@ When `br` retries a restore, some data that has been restored might need to be r
 
 ### Avoid modifying cluster data during the restore
 
-After a restore failure, avoid writing, deleting, or creating tables in the cluster. This is because the backup data might contain DDL operations for renaming tables. If you modify the cluster data, the checkpoint restore cannot confirm whether the deleted or existing table resulted from external operations, which affects the accuracy of the next restore retry.
+After a restore failure, avoid writing, deleting, or creating tables in the cluster. This is because the backup data might contain DDL operations for renaming tables. If you modify the cluster data, the checkpoint restore cannot decide whether the deleted or existing table are resulted from external operations, which affects the accuracy of the next restore retry.
