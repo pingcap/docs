@@ -485,7 +485,7 @@
         - [Relay Log](/dm/relay-log.md)
         - [DDL Handling](/dm/dm-ddl-compatible.md)
       - Mechanism
-        - [DML Replication Mechanism](/dm/dm-replication-logic.md)        
+        - [DML Replication Mechanism](/dm/dm-replication-logic.md)
       - Command Line
         - [DM-master & DM-worker](/dm/dm-command-line-flags.md)
       - Configuration Files
@@ -944,6 +944,7 @@
   - [TiDB Versioning](/releases/versioning.md)
   - [TiDB Installation Packages](/binary-package.md)
   - v6.5
+    - [6.5.2](/releases/release-6.5.2.md)
     - [6.5.1](/releases/release-6.5.1.md)
     - [6.5.0](/releases/release-6.5.0.md)
   - v6.4
