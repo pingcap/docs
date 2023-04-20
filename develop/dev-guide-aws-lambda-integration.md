@@ -25,11 +25,13 @@ Before getting started, ensure you have the following:
 
 - An AWS account
 - Access to [AWS CloudFormation](https://aws.amazon.com/cloudformation/), [Secrets Manager](https://aws.amazon.com/secrets-manager/), [API Gateway](https://aws.amazon.com/api-gateway/), [Lambda services](https://aws.amazon.com/lambda/), [S3](https://aws.amazon.com/s3/), and [IAM Roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)
-- A [TiDB Cloud Serverless](https://tidbcloud.com) account and a TiDB Cloud Serverless cluster
-    - Get TiDB Connection Information ![tidbcloud-connection-info](/media/develop/aws-lambda-tidbcloud-connection-info.png)
+- A [TiDB Cloud](https://tidbcloud.com) account and a TiDB Cloud Serverless cluster
+- Get TiDB Connection Information
+
+    ![tidbcloud-connection-info](/media/develop/aws-lambda-tidbcloud-connection-info.png)
 
 <Note>
-Using `us-east-1` region as default.
+When you create the TiDB Cloud Serverless Tier cluster, use `us-east-1` as your cluster region.
 </Note>
 
 ## Solution Overview
@@ -55,10 +57,10 @@ Finally, the following diagram shows the structure of the demo:
 
 To set up the bookshop demo using CloudFormation, follow these steps:
 
-- Download the [latest release assets](https://github.com/pingcap/TiDB-Lambda-integration/releases/latest) to your local machine, which includes `cloudformation_template.yml` and `cloudformation_template.json` files
-- Navigate to the AWS Management Console and access the [CloudFormation service](https://console.aws.amazon.com/cloudformation)
-- Click "Create Stack" and upload the CloudFormation template file (either YAML or JSON)
-- Complete the stack creation process
+1. Download the [latest release assets](https://github.com/pingcap/TiDB-Lambda-integration/releases/latest) to your local machine, which includes `cloudformation_template.yml` and `cloudformation_template.json` files.
+2. Navigate to the AWS Management Console and access the [CloudFormation service](https://console.aws.amazon.com/cloudformation).
+3. Click **Create Stack** and upload the CloudFormation template file (either YAML or JSON).
+4. Complete the stack creation process.
 
 ## Using the Demo
 
