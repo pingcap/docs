@@ -11,7 +11,7 @@ TiCDC provides the OpenAPI feature for querying and operating the TiCDC cluster.
 
 > **Note:**
 >
-> - TiCDC supports OpenAPI v2 starting from v6.5.2. If your TiCDC version is v6.5.0 or v6.5.1, use [TiCDC OpenAPI v1](/ticdc/ticdc-open-api.md) instead.
+> - TiCDC supports OpenAPI v2 starting from v6.5.2 for v6.5.x release series. If your TiCDC version is v6.5.0 or v6.5.1, use [TiCDC OpenAPI v1](/ticdc/ticdc-open-api.md) instead.
 > - TiCDC OpenAPI v1 will be removed in future releases. It is recommended to use TiCDC OpenAPI v2.
 
 You can use the APIs to perform the following maintenance operations on the TiCDC cluster:
