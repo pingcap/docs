@@ -92,7 +92,7 @@ This section describes how to use the resource control feature to manage resourc
 
 ### Methods for estimating capacity
 
-Before resource planning, you need to know the overall capacity of the cluster. TiDB provides the command [`CALIBRATE RESOURCE`](/sql-statements/sql-statement-calibrate-resource.md) to estimate the cluster capacity. TiDB provides two estimation methods:
+Before resource planning, you need to know the overall capacity of the cluster. TiDB provides the statement [`CALIBRATE RESOURCE`](/sql-statements/sql-statement-calibrate-resource.md) to estimate the cluster capacity. TiDB provides two estimation methods:
 
 - [Estimate capacity based on actual workload](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-actual-workload)
 - [Estimate capacity based on hardware deployment](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-hardware-deployment)
