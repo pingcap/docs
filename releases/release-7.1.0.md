@@ -63,9 +63,9 @@ In v7.1.0, the key new features and improvements are as follows:
 
     For more information, see [documentation](/tidb-resource-control.md).
 
-* Support the checkpoint mechanism for [Fast Online DDL](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) to improve fault tolerance and automatic recovery capability [#issue](https://github.com/pingcap/tidb/issues/issue) @[tangenta](https://github.com/tangenta) **tw:ran-huang**
+* Support the checkpoint mechanism for [Fast Online DDL](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) to improve fault tolerance and automatic recovery capability [#42164](https://github.com/pingcap/tidb/issues/42164) @[tangenta](https://github.com/tangenta) **tw:ran-huang**
 
-    TiDB v7.1.0 introduces a checkpoint mechanism for [Fast Online DDL](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630), whichs significantly improves the fault tolerance and automatic recovery capability of Fast Online DDL. Even in the case of TiDB DDL owner switching, TiDB can still periodically record and synchronize the progress of DDL statements, allowing the new TiDB DDL owner to execute the ongoing DDL statements in Fast Online DDL mode without manually canceling and re-executing the statements. The checkpoint mechanism makes the DDL execution more stable and efficient.
+    TiDB v7.1.0 introduces a checkpoint mechanism for [Fast Online DDL](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630), which significantly improves the fault tolerance and automatic recovery capability of Fast Online DDL. Even in the case of TiDB DDL owner switching, TiDB can still periodically record and synchronize the progress of DDL statements, allowing the new TiDB DDL owner to execute the ongoing DDL statements in Fast Online DDL mode without manually canceling and re-executing the statements. The checkpoint mechanism makes the DDL execution more stable and efficient.
 
     For more information, see [documentation](/ddl-introduction.md).
 
@@ -93,11 +93,11 @@ In v7.1.0, the key new features and improvements are as follows:
 
     For more information, see [documentation](/tiflash/tiflash-results-materialization.md).
 
-* MySQL-compatible multi-valued index becomes generally available (GA) [#39592](https://github.com/pingcap/tidb/issues/39592) @[xiongjiwei](https://github.com/xiongjiwei) @[qw4990](https://github.com/qw4990) @[YangKeao](https://github.com/YangKeao) **tw:ran-huang**
+* MySQL-compatible multi-valued indexes become generally available (GA) [#39592](https://github.com/pingcap/tidb/issues/39592) @[xiongjiwei](https://github.com/xiongjiwei) @[qw4990](https://github.com/qw4990) @[YangKeao](https://github.com/YangKeao) **tw:ran-huang**
 
-    Filtering the values of an array in a JSON column is a common operation, but normal indexes cannot help speed up such an operation. Creating a multi-valued index on an array can greatly improve filtering performance. If an array in the JSON column has a multi-valued index, you can use the multi-value index to filter the retrieval conditions with MEMBER OF(), JSON_CONTAINS(), JSON_OVERLAPS() functions, thereby reducing much I/O consumption and improving operation speed.
+    Filtering the values of an array in a JSON column is a common operation, but normal indexes cannot help speed up such an operation. Creating a multi-valued index on an array can greatly improve filtering performance. If an array in the JSON column has a multi-valued index, you can use the multi-valued index to filter retrieval conditions in `MEMBER OF()`, `JSON_CONTAINS()`, and `JSON_OVERLAPS()` functions, thereby reducing I/O consumption and improving operation speed.
 
-    In v7.1.0, the multi-valued index becomes a generally available (GA) feature. It supports more complete data types and is compatible with TiDB tools. You can use the multi-valued indexes to speed up the search operations on JSON arrays in production environments.
+    In v7.1.0, the multi-valued index feature becomes generally available (GA). It supports more complete data types and is compatible with TiDB tools. You can use multi-valued indexes to speed up the search operations on JSON arrays in production environments.
 
     For more information, see [documentation](/sql-statements/sql-statement-create-index.md#multi-valued-index).
 
@@ -133,25 +133,25 @@ In v7.1.0, the key new features and improvements are as follows:
 
     For more information, see [documentation](https://github.com/pingcap/docs-cn/pull/13676).
 
-* Generated columns become generally available (GA) [#issue号](链接) @[bb7133](https://github.com/bb7133) **tw:ran-huang**
+* Generated columns become generally available (GA) @[bb7133](https://github.com/bb7133) **tw:ran-huang**
 
-    Generated columns are a very valuable feature in MySQL. When creating a table, you can define that the value of a column is calculated from the values of other columns in the table, rather than being explicitly inserted or updated by the user. This generated column can be either a virtual column or a stored column. TiDB has provided generated columns compatible with MySQL since earlier versions, and this feature is officially GA in v7.1.0.
+    Generated columns are a valuable feature for database. When creating a table, you can define that the value of a column is calculated based on the values of other columns in the table, rather than being explicitly inserted or updated by users. This generated column can be either a virtual column or a stored column. TiDB has supported MySQL-compatible generated columns since earlier versions, and this feature becomes GA in v7.1.0.
 
-    Using generated columns can improve TiDB's compatibility with MySQL, simplifying the process of migrating from MySQL. It also reduces data maintenance complexity, improves data consistency and query efficiency.
+    Using generated columns can improve MySQL compatibility for TiDB, simplifying the process of migrating from MySQL. It also reduces data maintenance complexity and improves data consistency and query efficiency.
 
     For more information, see [documentation](/generated-columns.md).
 
 ### DB operations
 
-* DDL tasks support pause and resume operations [#issue number](link) @[godouxm](https://github.com/godouxm) **tw:ran-huang**
+* DDL tasks support pause and resume operations (experimental) [#18015](https://github.com/pingcap/tidb/issues/18015) @[godouxm](https://github.com/godouxm) **tw:ran-huang**
 
-    Prior to TiDB v7.1.0, when a DDL task encountered a business peak period during execution, you could only manually cancel the DDL task to reduce its impact on the business. To mitigate the impact of DDL operations on application workloads, in v7.1.0, TiDB introduces pause and resume operations for DDL tasks. These operations let you pause DDL tasks during peak periods and resume them after the peak ends, thus avoiding any impact on your business.
+    Before TiDB v7.1.0, when a DDL task encounters a business peak period during execution, you can only manually cancel the DDL task to reduce its impact on the business. In v7.1.0, TiDB introduces pause and resume operations for DDL tasks. These operations let you pause DDL tasks during peak periods and resume them after the peak ends, thus avoiding any impact on your application workloads.
 
     For example, you can pause and resume multiple DDL tasks using [`ADMIN PAUSE DDL JOBS`](/sql-statements/sql-statement-admin-pause-ddl.md) or [`ADMIN RESUME DDL JOBS`](/sql-statements/sql-statement-admin-resume-ddl.md):
 
     ```sql
-    ADMIN PAUSE ddl jobs 1,2;
-    ADMIN RESUME ddl jobs 1,2;
+    ADMIN PAUSE DDL JOBS 1,2;
+    ADMIN RESUME DDL JOBS 1,2;
     ```
 
     For more information, see [`ADMIN PAUSE DDL JOBS`](/sql-statements/sql-statement-admin-pause-ddl.md) and [`ADMIN RESUME DDL JOBS`](/sql-statements/sql-statement-admin-resume-ddl.md).
@@ -182,9 +182,9 @@ In v7.1.0, the key new features and improvements are as follows:
 
     For more information, see [documentation](/ticdc/ticdc-integrity-check.md).
 
-* TiCDC Optimizes DDL replication operations [#8686](https://github.com/pingcap/tiflow/issues/8686) @[nongfushanquan](https://github.com/nongfushanquan) **tw:ran-huang**
+* TiCDC optimizes DDL replication operations [#8686](https://github.com/pingcap/tiflow/issues/8686) @[nongfushanquan](https://github.com/nongfushanquan) **tw:ran-huang**
 
-    Prior to v7.1.0, when you performed a DDL operation that affected all rows on a large table (such as adding or deleting a column), the replication delay of TiCDC would significantly increase. Starting from v7.1.0, TiCDC optimizes this issue and reduces the replication delay to less than 10 seconds. This optimization mitigates the impact of DDL operations on downstream latency.
+    Before v7.1.0, when you perform a DDL operation that affected all rows on a large table (such as adding or deleting a column), the replication latency of TiCDC would significantly increase. Starting from v7.1.0, TiCDC optimizes this replication operation and reduces the replication latency to less than 10 seconds. This optimization mitigates the impact of DDL operations on downstream latency.
 
 ## Compatibility changes
 
