@@ -577,10 +577,10 @@ Starting component `cluster`: /home/tidb/.tiup/components/cluster/v1.11.3/cluste
 ID      Time                       Command
 --      ----                       -------
 4BLhr0  2023-04-21T13:25:09+08:00  /home/tidb/.tiup/components/cluster/v1.11.3/cluster deploy test v6.5.2 /tmp/topology.yaml
-4BKWjF  2023-03-10T23:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.11.3/cluster deploy test v6.5.2 /tmp/topology.yaml
-4BKVwH  2023-03-10T23:02:08+08:00  /home/tidb/.tiup/components/cluster/v1.11.3/cluster deploy test v6.5.2 /tmp/topology.yaml
-4BKKH1  2023-03-10T16:39:04+08:00  /home/tidb/.tiup/components/cluster/v1.11.3/cluster destroy test
-4BKKDx  2023-03-10T16:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.11.3/cluster deploy test v6.5.2 /tmp/topology.yaml
+4BKWjF  2023-04-21T23:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.11.3/cluster deploy test v6.5.2 /tmp/topology.yaml
+4BKVwH  2023-04-21T23:02:08+08:00  /home/tidb/.tiup/components/cluster/v1.11.3/cluster deploy test v6.5.2 /tmp/topology.yaml
+4BKKH1  2023-04-21T16:39:04+08:00  /home/tidb/.tiup/components/cluster/v1.11.3/cluster destroy test
+4BKKDx  2023-04-21T16:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.11.3/cluster deploy test v6.5.2 /tmp/topology.yaml
 ```
 
 The first column is `audit-id`. To view the execution log of a certain command, pass the `audit-id` of a command as the flag as follows:
