@@ -19,7 +19,7 @@ Starting from TiDB v7.1.0, `LOAD DATA` supports the following features:
 - Support importing compressed `DELIMITED DATA` and `SQL FILE` data files.
 - Support specifying the concurrency of the data import in logical import mode.
 - Support specifying the encoding format of data files through `CharsetOpt`.
-- `LOAD DATA` integrates TiDB Lightning's physical import mode. This mode skips the SQL interface, and directly inserts data as key-value pairs into the TiKV nodes, which is an efficient and fast import mode.
+- `LOAD DATA` integrates TiDB Lightning's physical import mode. This mode skips the SQL interface, and directly inserts data as key-value pairs into the TiKV nodes, which is a more efficient and faster import mode compared to the logical import mode.
 
 > **Warning:**
 >
@@ -174,8 +174,8 @@ Currently this parameter only applies to logical import mode.
 
 You can specify the concurrency of the data import with `WITH thread=<number>`. The default value is related to `FORMAT`:
 
-- If `FORMAT` is `PARQUET`, the default value is 75% of the number of CPU cores.
-- For other `FORMAT` options, the default value is the number of logical CPU cores.
+- If `FORMAT` is `PARQUET`, the default value is 75% of the number of CPU cores in the TiDB node.
+- For other `FORMAT` options, the default value is the number of cores in the TiDB node.
 
 ### `WITH batch_size=<number>`
 
@@ -183,15 +183,15 @@ You can specify the number of rows to be written to TiDB in a batch with `WITH b
 
 ### `WITH max_write_speed = stringLit`
 
-When you use physical import mode, you can use this parameter to specify the rate limit for writing to a single TiKV. The default value is `0`, which means no limit.
+When using physical import mode, you can use this parameter to specify the rate limit for writing to a single TiKV. The default value is `0`, which means no limit.
 
-This parameter supports the [go-units](https://pkg.go.dev/github.com/docker/go-units#example-RAMInBytes) format. For example, `WITH max_write_speed = '1MB'` means that the maximum write rate to a single TiKV is `1MB/s`.
+This parameter supports the [go-units](https://pkg.go.dev/github.com/docker/go-units#example-RAMInBytes) format. For example, `WITH max_write_speed = '1MB'` specifies a maximum write rate of `1MB/s` to a single TiKV.
 
 ### `WITH detached`
 
 If you specify an S3 or GCS path, and do not specify the `LOCAL` parameter, you can use `WITH detached` to make `LOAD DATA` run in the background. In this case, `LOAD DATA` returns the task ID.
 
-You can view the created jobs via [`SHOW LOAD DATA`](/sql-statements/sql-statement-show-load-data.md), or you can use [`CANCEL LOAD DATA` and `DROP LOAD DATA`](/sql-statements/sql-statement-operate-load-data-job.md) to cancel or delete the created jobs.
+You can view the created jobs via [`SHOW LOAD DATA`](/sql-statements/sql-statement-show-load-data.md), or you can execute [`CANCEL LOAD DATA` and `DROP LOAD DATA`](/sql-statements/sql-statement-operate-load-data-job.md) to cancel or delete the created jobs.
 
 ## Examples
 
