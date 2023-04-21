@@ -331,7 +331,15 @@ Usage:
 
 - `enable-placement-rules` is used to enable placement rules, which is enabled by default in v5.0 and later versions.
 
-- `store-limit-mode` is used to control the mode of limiting the store speed. The optional modes are `auto` and `manual`. In `auto` mode, the stores are automatically balanced according to the load (experimental).
+- `store-limit-mode` is used to control the mode of limiting the store speed. The optional modes are `auto` and `manual`. In `auto` mode, the stores are automatically balanced according to the load (deprecated).
+
+- `store-limit-version` controls the version of the store limit controller formula. The value options are `v1` and `v2`, the version `v1` of the formula is the default value. If using `v2`, user don't need to care about the store limit value of some store to speed up the scale-out/in progress, because the limit has been auto adjusted through the snapshot executing details(experimental).
+    
+    {{< copyable "" >}}
+    
+    ```bash
+    config set store-limit-version v2       // using v2 strategy for store limit
+    ```
 
 - PD rounds the lowest digits of the flow number, which reduces the update of statistics caused by the changes of the Region flow information. This configuration item is used to specify the number of lowest digits to round for the Region flow information. For example, the flow `100512` will be rounded to `101000` because the default value is `3`. This configuration replaces `trace-region-flow`.
 

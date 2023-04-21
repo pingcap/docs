@@ -67,3 +67,7 @@ store limit 1 5                     // store 1 can at most add and delete 5 peer
 store limit 1 5 add-peer            // store 1 can at most add 5 peers per minute.
 store limit 1 5 remove-peer         // store 1 can at most delete 5 peers per minute.
 ```
+
+### Store limit v2 strategy 
+If using `v2`, the limit of operators follower the ability of the tikv. The faster tikv handling snapshot task, the more the operator sending to this snapshot. User don't need to care about how to set the store limit to speed up the scale-out/in progress. 
+The most potential reason to limit the scale-out/in progress is the speed of tikv sending snapshot, user can modify the tikv snapshot config(`snap_io_max_bytes_per_sec`) to control the IO bandwidth.
