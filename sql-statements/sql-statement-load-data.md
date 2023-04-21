@@ -17,13 +17,13 @@ Starting from TiDB v7.0.0, the `LOAD DATA` SQL statement becomes more powerful b
 Starting from TiDB v7.1.0, `LOAD DATA` supports the following features:
 
 - Support importing compressed `DELIMITED DATA` and `SQL FILE` data files.
-- Support parrallel import in logical import mode.
+- Support specifying the concurrency of the data import in logical import mode.
 - Support specifying the encoding format of data files through `CharsetOpt`.
 - `LOAD DATA` integrates TiDB Lightning's physical import mode. This mode skips the SQL interface, and directly inserts data as key-value pairs into the TiKV nodes, which is an efficient and fast import mode.
 
 > **Warning:**
 >
-> The physical import mode in TiDB v7.1.0 is experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> The concurrency of the data import and physical import mode in TiDB v7.1.0 are experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 <CustomContent platform="tidb-cloud">
 
