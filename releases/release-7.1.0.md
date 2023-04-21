@@ -100,9 +100,10 @@ In v7.1.0, the key new features and improvements are as follows:
     Before v7.1.0, Hash and Key partitioned tables in TiDB only support the `TRUNCATE PARTITION` partition management statement. Starting from v7.1.0, Hash and Key partitioned tables also support `ADD PARTITION` and `COALESCE PARTITION` partition management statements. Therefore, you can flexibly adjust the number of partitions in Hash and Key partitioned tables as needed. For example, you can increase the number of partitions with the `ADD PARTITION` statement, or decrease the number of partitions with the `COALESCE PARTITION` statement.
 
     For more information, see [documentation](/partitioned-table.md#manage-hash-and-key-partitions).
-* Range INTERVAL partitioning become generally available (GA) [#35683](https://github.com/pingcap/tidb/issues/35683) @[mjonss](https://github.com/mjonss) **tw:qiancai**
 
-    In v6.3.0, TiDB provides INTERVAL partitioning as a new way of defining Range partitions. You do not need to enumerate all partitions, which drastically reduces the length of Range partitioning DDL statements. The syntax is equivalent to that of the original Range partitioning.
+* The syntax of Range INTERVAL partitioning becomes generally available (GA) [#35683](https://github.com/pingcap/tidb/issues/35683) @[mjonss](https://github.com/mjonss) **tw:qiancai**
+
+    The syntax of Range INTERVAL partitioning (introduced in v6.3.0) becomes GA. With this syntax, you can define partitioning by a desired interval without enumerating all partitions, which drastically reduces the length of Range partitioning DDL statements. The syntax is equivalent to that of the original Range partitioning.
 
     In v7.1.0, Range INTERVAL partitioning is now GA.
 * `LOAD DATA` SQL 支持从 S3、GCS 导入数据，支持任务管理等功能 GA [#40499](https://github.com/pingcap/tidb/issues/40499) @[lance6716](https://github.com/lance6716) **tw:hfxsd**
