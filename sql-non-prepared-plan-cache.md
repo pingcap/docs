@@ -87,7 +87,7 @@ Due to the preceding risks and the fact that the execution plan cache only provi
 - Queries with more than 200 parameters after parameterization are not supported, such as `SELECT * FROM t WHERE a in (1, 2, 3, ... 201)`.
 - Queries that access partitioned tables, virtual columns, temporary tables, views, or memory tables are not supported, such as `SELECT * FROM INFORMATION_SCHEMA.COLUMNS`, where `COLUMNS` is a TiDB memory table.
 - Queries with hints or bindings are not supported.
-- DML statements or Select statements with `FOR UPDATE` clause. This restriction can be solved by `set tidb_enable_non_prepared_plan_cache_for_dml=ON`.
+- DML statements or `SELECT` statements with the `FOR UPDATE` clause are not supported by default. To remove this restriction, you can execute `SET tidb_enable_non_prepared_plan_cache_for_dml = ON`.
 
 After you enable this feature, the optimizer quickly assesses the query. If it does not meet the support conditions for non-prepared plan cache, the query goes through the regular optimization process.
 
