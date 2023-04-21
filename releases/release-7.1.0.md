@@ -105,7 +105,8 @@ In v7.1.0, the key new features and improvements are as follows:
 
     The syntax of Range INTERVAL partitioning (introduced in v6.3.0) becomes GA. With this syntax, you can define partitioning by a desired interval without enumerating all partitions, which drastically reduces the length of Range partitioning DDL statements. The syntax is equivalent to that of the original Range partitioning.
 
-    In v7.1.0, Range INTERVAL partitioning is now GA.
+    For more information, see [documentation](/partitioned-table#range-interval-partitioning).
+
 * `LOAD DATA` SQL 支持从 S3、GCS 导入数据，支持任务管理等功能 GA [#40499](https://github.com/pingcap/tidb/issues/40499) @[lance6716](https://github.com/lance6716) **tw:hfxsd**
 
     以下 `LOAD DATA` 新增的功能在 7.1 版本 GA：
