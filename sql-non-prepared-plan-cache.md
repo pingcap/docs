@@ -89,7 +89,7 @@ Due to the preceding risks and the fact that the execution plan cache only provi
 - Queries with hints or bindings are not supported.
 - DML statements or `SELECT` statements with the `FOR UPDATE` clause are not supported by default. To remove this restriction, you can execute `SET tidb_enable_non_prepared_plan_cache_for_dml = ON`.
 
-After you enable this feature, the optimizer quickly assesses the query. If it does not meet the support conditions for non-prepared plan cache, the query goes through the regular optimization process.
+After you enable this feature, the optimizer quickly evaluates the query. If it does not meet the support conditions for non-prepared plan cache, the query falls back to the regular optimization process.
 
 ## Performance benefits
 
