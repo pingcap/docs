@@ -22,6 +22,7 @@ This document describes how to back up and restore your TiDB cluster data on TiD
 > - It is important to note that Serverless Tier clusters only support in-place restoring from backups. When a restore is performed, tables in the `mysql` schema are also impacted, hence any changes made in user credentials and permissions or system variables will be rolled back to the state when the backup was taken.
 > - Manual backup is not yet supported at this time.
 > - PITR(Point-in-time Recovery) is not yet supported at this time.
+> - If TiFlash replica is enabled, it will be unavailable for a while after restore because data needs to be synchronized from TiKV.
 
 ## Backup
 
