@@ -1132,7 +1132,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Type: Boolean
 - Default value: `ON`
 - This variable controls whether to enable the acceleration of `ADD INDEX` and `CREATE INDEX` to improve the speed of backfilling for index creation. Setting this variable value to `ON` can bring performance improvement for index creation on tables with a large amount of data.
-- The checkpoint mechanism is introduced in TiDB v7.1.0. Even if TiDB owner is restarted or changed due to failure, it can recover progress from regularly updated checkpoints.
+- The checkpoint mechanism is introduced in TiDB v7.1.0. Even if TiDB owner is restarted or changed due to failure, it can recover progress from checkpoints that update automatically on a regular basis.
 - To verify whether a completed `ADD INDEX` operation is accelerated, you can execute the [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md#admin-show-ddl-jobs) statement to see whether `ingest` is displayed in the `JOB_TYPE` column.
 
 <CustomContent platform="tidb">
