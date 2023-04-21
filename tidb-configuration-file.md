@@ -556,6 +556,8 @@ Configuration items related to performance.
 
 + Controls whether to use lightweight statistics initialization during TiDB startup.
 + Default value: false
++ When the value of `lite-init-stats` is true, statistics initialization doesn't load any histogram, TopN, Count-Min Sketch of any index or column into memory. When the value of `lite-init-stats` is false, statistics initialization loads histograms, TopN, Count-Min Sketch of indexes and primary keys into memory but doesn't load any histogram, TopN, Count-Min Sketch of any non-primary key column into memory. When the optimizer needs the histogram, TopN, Count-Min Sketch of some index or column, those needed statistics will be loaded into memory synchronously(see [`tidb_stats_load_sync_wait`](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540)) or asynchronously.
++ Setting `lite-init-stats` to true speeds up statistics initialization and reduces TiDB's memory usage by avoiding unnecessary statistics loading. For details, see [Load statistics](/statistics.md#load-statistics).
 
 ## opentracing
 
