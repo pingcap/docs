@@ -113,7 +113,7 @@ You can delete a resource group by using [`DROP RESOURCE GROUP`](/sql-statements
 
 The following is an example of how to create a resource group.
 
-1. Create a resource group `rg1`. The RU backfill rate is 500 RUs per second and allows applications in this resource group to overrun resources.
+1. Create a resource group `rg1`. The resource limit is 500 RUs per second and allows applications in this resource group to overrun resources.
 
     ```sql
     CREATE RESOURCE GROUP IF NOT EXISTS rg1 RU_PER_SEC = 500 BURSTABLE;
