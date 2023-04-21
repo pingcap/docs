@@ -78,16 +78,16 @@ If this causes performance issues, you can use the `ignore_plan_cache()` hint to
 
 Due to the preceding risks and the fact that the execution plan cache only provides significant benefits for simple queries (if a query is complex and takes a long time to execute, using the execution plan cache might not be very helpful), TiDB has strict restrictions on the scope of non-prepared plan cache. The restrictions are as follows:
 
-1. Queries or plans that are not supported by the [Prepared plan cache](/sql-prepared-plan-cache.md) are also not supported by the non-prepared plan cache.
-2. Queries that contain complex operators such as `Window` or `Having` are not supported.
-3. Queries that contain three or more `Join` tables or subqueries are not supported.
-4. Queries that contain numbers or expressions directly after `ORDER BY` or `GROUP BY` are not supported, such as `ORDER BY 1` and `GROUP BY a+1`. Only `ORDER BY column_name` and `GROUP BY column_name` are supported.
-5. Queries that filter on columns of `JSON`, `ENUM`, `SET`, or `BIT` type are not supported, such as `SELECT * FROM t WHERE json_col = '{}'`.
-6. Queries that filter on `NULL` values are not supported, such as `SELECT * FROM t WHERE a is NULL`.
-7. Queries with more than 200 parameters after parameterization are not supported, such as `SELECT * FROM t WHERE a in (1, 2, 3, ... 201)`.
-8. Queries that access partitioned tables, virtual columns, temporary tables, views, or memory tables are not supported, such as `SELECT * FROM INFORMATION_SCHEMA.COLUMNS`, where `COLUMNS` is a TiDB memory table.
-9. Queries with hints or bindings are not supported.
-10. DML statements or Select statements with `FOR UPDATE` clause. This restriction can be solved by `set tidb_enable_non_prepared_plan_cache_for_dml=ON`.
+- Queries or plans that are not supported by the [Prepared plan cache](/sql-prepared-plan-cache.md) are also not supported by the non-prepared plan cache.
+- Queries that contain complex operators such as `Window` or `Having` are not supported.
+- Queries that contain three or more `Join` tables or subqueries are not supported.
+- Queries that contain numbers or expressions directly after `ORDER BY` or `GROUP BY` are not supported, such as `ORDER BY 1` and `GROUP BY a+1`. Only `ORDER BY column_name` and `GROUP BY column_name` are supported.
+- Queries that filter on columns of `JSON`, `ENUM`, `SET`, or `BIT` type are not supported, such as `SELECT * FROM t WHERE json_col = '{}'`.
+- Queries that filter on `NULL` values are not supported, such as `SELECT * FROM t WHERE a is NULL`.
+- Queries with more than 200 parameters after parameterization are not supported, such as `SELECT * FROM t WHERE a in (1, 2, 3, ... 201)`.
+- Queries that access partitioned tables, virtual columns, temporary tables, views, or memory tables are not supported, such as `SELECT * FROM INFORMATION_SCHEMA.COLUMNS`, where `COLUMNS` is a TiDB memory table.
+- Queries with hints or bindings are not supported.
+- DML statements or Select statements with `FOR UPDATE` clause. This restriction can be solved by `set tidb_enable_non_prepared_plan_cache_for_dml=ON`.
 
 After you enable this feature, the optimizer quickly assesses the query. If it does not meet the support conditions for non-prepared plan cache, the query goes through the regular optimization process.
 

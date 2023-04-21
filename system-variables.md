@@ -1524,7 +1524,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - This variable controls whether to enable the [Non-prepared plan cache](/sql-non-prepared-plan-cache.md) feature.
 - When you upgrade from an earlier version to a v7.1.0 or later version, this variable remains the setting before the upgrade.
 
-### tidb_enable_non_prepared_plan_cache_for_dml
+### tidb_enable_non_prepared_plan_cache_for_dml <span class="version-mark">New in v7.1.0</span>
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
