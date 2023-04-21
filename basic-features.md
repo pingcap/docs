@@ -60,7 +60,7 @@ This document lists the features supported in different TiDB versions, including
 | [Clustered index on composite or non-integer key](/constraints.md) | Y | Y | Y | Y | Y | Y | Y | Y | N |
 | [Multi-valued index](/sql-statements/sql-statement-create-index.md#multi-valued-index) | E | N | N | N | N | N | N | N | N |
 | [Foreign key](/constraints.md#foreign-key) | Y | N | N | N | N | N | N | N | N |
-| [TiFlash late materialization](/tiflash/tiflash-late-materialization.md) | E | N | N | N | N | N | N | N | N |
+| [TiFlash late materialization](/tiflash/tiflash-late-materialization.md) | Y | N | N | N | N | N | N | N | N |
 
 ## SQL statements
 
@@ -84,7 +84,7 @@ This document lists the features supported in different TiDB versions, including
 | [`BATCH [ON COLUMN] LIMIT INTEGER INSERT/UPDATE/REPLACE`](/sql-statements/sql-statement-batch.md) | Y | Y | N | N | N | N | N | N | N |
 | [`ALTER TABLE ... COMPACT`](/sql-statements/sql-statement-alter-table-compact.md) | Y | Y | E | N | N | N | N | N | N |
 | [Table Lock](/sql-statements/sql-statement-lock-tables-and-unlock-tables.md) | E | E | E | E | E | E | E | E | E |
-| [TiFlash Query Result Materialization](/tiflash/tiflash-results-materialization.md) | E | E | N | N | N | N | N | N | N |
+| [TiFlash Query Result Materialization](/tiflash/tiflash-results-materialization.md) | Y | E | N | N | N | N | N | N | N |
 
 ## Advanced SQL features
 
@@ -148,9 +148,10 @@ This document lists the features supported in different TiDB versions, including
 | [List COLUMNS partitioning](/partitioned-table.md) | Y | Y | Y | E | E | E | E | E | N |
 | [`EXCHANGE PARTITION`](/partitioned-table.md) | Y | Y | E | E | E | E | E | E | N |
 | [`REORGANIZE PARTITION`](/partitioned-table.md#reorganize-partitions) | Y | N | N | N | N | N | N | N | N |
+| [`COALESCE PARTITION`](/partitioned-table.md#decrease-the-number-of-partitions) | Y | N | N | N | N | N | N | N | N |
 | [Dynamic pruning](/partitioned-table.md#dynamic-pruning-mode) | Y | Y | Y | E | E | E | E | N | N |
 | [Range COLUMNS partitioning](/partitioned-table.md#range-columns-partitioning) | Y | Y | N | N | N | N | N | N | N |
-| [Range INTERVAL partitioning](/partitioned-table.md#range-interval-partitioning) | E | E | N | N | N | N | N | N | N |
+| [Range INTERVAL partitioning](/partitioned-table.md#range-interval-partitioning) | Y | E | N | N | N | N | N | N | N |
 
 ## Statistics
 
