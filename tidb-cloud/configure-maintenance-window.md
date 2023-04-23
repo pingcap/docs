@@ -5,54 +5,54 @@ summary: Learn how to configure maintenance window for your cluster.
 
 # Configure Maintenance Window
 
-A maintenance window is a designated timeframe during which scheduled maintenance activities, such as operating system updates, security patches, and infrastructure upgrades, are executed to ensure the reliability, security, and performance of the TiDB Cloud service.
+A maintenance window is a designated timeframe during which planned maintenance activities, such as operating system updates, security patches, and infrastructure upgrades, are performed automatically to ensure the reliability, security, and performance of the TiDB Cloud service.
 
-With the maintenance window feature, you can easily schedule and manage maintenance tasks, minimizing the impact on cluster availability.
+During a maintenance window, the maintenance is executed on TiDB clusters one by one so the overall performance impact is minimal. Although there might be temporary connection disruptions or QPS fluctuations, the clusters remain available, and the existing data import, backup, restore, migration, and replication tasks can still run normally.
+
+By configuring the maintenance window, you can easily schedule and manage maintenance activities to minimize the maintenance impact. For example, you can set the start time of the maintenance window to avoid peak hours of your application workloads.
 
 > **Note:**
 >
-> - The maintenance window feature is only available for [Dedicated Tier clusters](/tidb-cloud/select-cluster-tier.md#dedicated-tier) under the specified project (as multiple clusters are hosted in one EKS).
-> - When the schedule maintenance time comes, if a manual or daily backup is currently in progress, the maintenance might be delayed until the backup is successfully completed.
-
-During the maintenance window, you might experience temporary connection disruptions or QPS fluctuations, but the clusters remain accessible.
-
-- The existing data import, backup, restore, migration, and replication tasks can still run normally.
-- Maintenance tasks are executed on each eligible TiDB cluster one by one so the overall impact on the cluster performance is minimal.
+> - The maintenance window feature is only available for [Dedicated Tier clusters](/tidb-cloud/select-cluster-tier.md#dedicated-tier).
+> - If a TiDB Dedicated Tier cluster has only one TiDB node, it might be unavailable for a few minutes during maintenance.
 
 ## Allowed and disallowed operations during a maintenance window
 
-- The following operations are allowed during a maintenance window:
+During a maintenance window, some operations are allowed, while some are not.
 
-    - DDL operations
+- Allowed operations:
+
+    - SQL operations
     - Create clusters
     - Delete clusters
     - Create backup tasks
     - Restore clusters
-    - Access the cluster **Overview**, **Events**, **Backup** pages
+    - Access cluster pages other than **SQL Diagnosis**
 
-- The following operations are disallowed during a maintenance window (the corresponding features will be displayed in gray in the TiDB Cloud console):
+- Disallowed operations:
 
     - Modify, pause, or resume clusters
-    - Change security settings
+    - Change security settings in the TiDB Cloud console
     - Create private links or configure VPC peering
     - Create import tasks, migration jobs, or changefeeds
-    - Access the cluster **SQL Diagnosis**,**Monitoring**, and **Alerts** pages
+    - Scale specifications of migration jobs or changefeeds
+    - Access the cluster **SQL Diagnosis** page
 
-## Be notified by maintenance windows
+## Get notifications for maintenance activities
 
-It is important to be aware of the maintenance window schedule and plan your operations accordingly to avoid potential disruptions.
+To avoid potential disruptions, it is important to be aware of the maintenance schedules and plan your operations accordingly.
 
-For each maintenance window, all project members will receive three emails as notifications from TiDB Cloud at the following time points:
+For every maintenance window, TiDB Cloud sends three email notifications to all project members at the following time points:
 
-- 72 hours before the maintenance window starts.
-- The time when the maintenance tasks are started.
-- The time when the maintenance tasks are completed.
+- 72 hours before the maintenance window starts
+- The time when the maintenance tasks are started
+- The time when the maintenance tasks are completed
 
 ## View and configure maintenance windows
 
-Scheduling regular maintenance ensures that essential updates are performed and safeguards the TiDB Cloud service from security threats, performance issues, and unreliability. Therefore, the maintenance window is enabled by default and cannot be disabled.
+Regular maintenance ensures that essential updates are performed to safeguard TiDB Cloud from security threats, performance issues, and unreliability. Therefore, the maintenance window is enabled by default and cannot be disabled.
 
-The default maintenance window starts at 03:00 AM every Wednesday (based on the project time zone of your cluster). You can modify the start time of the maintenance window, or defer maintenance items until the deadline as follows:
+For each maintenance activity, the default start time is 03:00 Wednesday (based on the time zone of your project). You can modify the start time to your preferred time or defer maintenance activities until the deadline as follows:
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [Clusters](https://tidbcloud.com/console/clusters) page of your project.
 
@@ -64,36 +64,38 @@ The default maintenance window starts at 03:00 AM every Wednesday (based on the 
 
 3. On the **Admin** page, click **Maintenance** in the left navigation pane.
 
-     If a maintenance window is planned, the corresponding maintenance items are displayed on the **Maintenance** page 2 to 4 weeks before the deadline. For each maintenance item, you can view its descriptions, status, scheduled start time, and deadline, which is the latest time for execution.
+     - If any maintenance activities are displayed, check the descriptions, scheduled start time, and deadline. The maintenance activities will start at the designated time.
 
-4. (Optional) Click <svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="mantine-1o1jehl"><path d="M11 3.99998H6.8C5.11984 3.99998 4.27976 3.99998 3.63803 4.32696C3.07354 4.61458 2.6146 5.07353 2.32698 5.63801C2 6.27975 2 7.11983 2 8.79998V17.2C2 18.8801 2 19.7202 2.32698 20.362C2.6146 20.9264 3.07354 21.3854 3.63803 21.673C4.27976 22 5.11984 22 6.8 22H15.2C16.8802 22 17.7202 22 18.362 21.673C18.9265 21.3854 19.3854 20.9264 19.673 20.362C20 19.7202 20 18.8801 20 17.2V13M7.99997 16H9.67452C10.1637 16 10.4083 16 10.6385 15.9447C10.8425 15.8957 11.0376 15.8149 11.2166 15.7053C11.4184 15.5816 11.5914 15.4086 11.9373 15.0627L21.5 5.49998C22.3284 4.67156 22.3284 3.32841 21.5 2.49998C20.6716 1.67156 19.3284 1.67155 18.5 2.49998L8.93723 12.0627C8.59133 12.4086 8.41838 12.5816 8.29469 12.7834C8.18504 12.9624 8.10423 13.1574 8.05523 13.3615C7.99997 13.5917 7.99997 13.8363 7.99997 14.3255V16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg> to customize the start time.
+     - If there is no maintenance data, it means no maintenance activity is scheduled recently.
 
-5. If any scheduled maintenance items are displayed, the maintenance tasks will start at the designated time.
+4. (Optional) Click <svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="mantine-1o1jehl"><path d="M11 3.99998H6.8C5.11984 3.99998 4.27976 3.99998 3.63803 4.32696C3.07354 4.61458 2.6146 5.07353 2.32698 5.63801C2 6.27975 2 7.11983 2 8.79998V17.2C2 18.8801 2 19.7202 2.32698 20.362C2.6146 20.9264 3.07354 21.3854 3.63803 21.673C4.27976 22 5.11984 22 6.8 22H15.2C16.8802 22 17.7202 22 18.362 21.673C18.9265 21.3854 19.3854 20.9264 19.673 20.362C20 19.7202 20 18.8801 20 17.2V13M7.99997 16H9.67452C10.1637 16 10.4083 16 10.6385 15.9447C10.8425 15.8957 11.0376 15.8149 11.2166 15.7053C11.4184 15.5816 11.5914 15.4086 11.9373 15.0627L21.5 5.49998C22.3284 4.67156 22.3284 3.32841 21.5 2.49998C20.6716 1.67156 19.3284 1.67155 18.5 2.49998L8.93723 12.0627C8.59133 12.4086 8.41838 12.5816 8.29469 12.7834C8.18504 12.9624 8.10423 13.1574 8.05523 13.3615C7.99997 13.5917 7.99997 13.8363 7.99997 14.3255V16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg> to modify the start time of the maintenance window. Note that the maintenance is executed at the specified start time only when there are maintenance activities.
 
-6. To defer the start time of a maintenance item, click **Defer** and set a new time.
+5. To defer the start time of a scheduled maintenance activity, click **Defer** in the **Action** column and change it to the next feasible window before the deadline.
 
-    If deferring maintenance items beyond the deadline is required, you need to contact [TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md#tidb-cloud-support) to get help.
+    If you need to defer the maintenance activity beyond the deadline, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md#tidb-cloud-support) for assistance.
 
 ## FAQs
 
-- What is the frequency of triggering maintenance?
+- What are maintenance activities?
 
-    It is infrequently, usually once every few months. And the maintenance items will be displayed 2 to 4 weeks before the deadline, allowing you to make necessary preparations.
+    Maintenance activities typically include operating system updates, security patches, and infrastructure upgrades.
 
-- Are the clusters still be available during the maintenance window?
+- How often does maintenance occur?
 
-    TiDB clusters remain available during the maintenance window, and you can continue to perform SQL operations. You might experience brief connection disruptions or QPS fluctuations, which will be resolved after the maintenance is completed. Overall, the impact on the cluster is minimal.
+    Maintenance is infrequent, usually occurring once every few months. The maintenance activities will be displayed on the **Maintenance** page several days before the deadline and you will receive an email notification 72 hours in advance, allowing you to make necessary preparations.
 
-- How can I enable and disable the maintenance window?
+- Can I disable a maintenance window?
 
-    The maintenance window is enabled by default and cannot be disabled. You can modify the start time of the maintenance window or defer maintenance items as described in [View and configure maintenance windows](#view-and-configure-maintenance-windows).
+    The maintenance window is enabled by default and cannot be disabled. You can modify the start time of the maintenance window or defer a maintenance activity to 2 to 4 weeks until the deadline. For more information, see [View and configure maintenance windows](#view-and-configure-maintenance-windows).
 
 - How long does a maintenance window last?
 
-    For each project, the maintenance is executed on each eligible TiDB cluster one by one. The duration of maintenance varies depending on the number of clusters, cluster data size, and the maintenance items to be performed.
+    For each project, maintenance is executed on eligible TiDB clusters one by one. The duration of maintenance varies depending on the number of clusters, cluster data size, and the maintenance activities to be performed.
 
-- Will maintenance be performed on clusters in any state?
+- Will maintenance activities be performed on clusters in any status?
 
-    No. If clusters are in states such as **IMPORTING**, **MODIFYING**, **BACKUP**, **RESTORING**, or **RESUMING**, maintenance tasks will be triggered after these operations are completed. For clusters in the **CREATING** state, maintenance operations are not required.
+    No. TiDB Cloud will check the cluster status before performing a maintenance activity on a cluster.
 
-    Note that for clusters with large data volumes, the backup process might take a long time, such as 12 hours. If the scheduled maintenance time comes and a backup task is in progress, the maintenance will be triggered after the backup is completed. Therefore, it is recommended to carefully set the start time for backups and the maintenance window to minimize the impact on the clusters
+    - If the cluster is in the **Creating** or **Paused** status, maintenance activities are not required.
+    - If the cluster is in the **Backup** status, the maintenance will be delayed and triggered until the current backup is successfully completed. Note that for clusters with large data volumes, the backup process might take a long time, such as 12 hours. To minimize the impact on the clusters, it is recommended to carefully set the start time for backups and the maintenance window.
+    - If the cluster is in any other status, the maintenance activities will start as scheduled.
