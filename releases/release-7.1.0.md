@@ -5,6 +5,12 @@ summary: Learn about the new features, compatibility changes, improvements, and 
 
 # TiDB 7.1.0 Release Notes
 
+TiDB version: 7.1.0 (upcoming)
+
+> **Note:**
+>
+> TiDB v7.1.0 is not yet available. This preview of the release notes provides insights into an upcoming release and is subject to change. The features outlined here are not guaranteed to be included in the final release.
+
 In v7.1.0, the key new features and improvements are as follows:
 
 ## Feature details
@@ -194,24 +200,33 @@ In v7.1.0, the key new features and improvements are as follows:
 
     If you have upgraded TiFlash to v7.1.0, then during the TiDB upgrade to v7.1.0, TiDB cannot read the TiFlash system tables ([`INFORMATION_SCHEMA.TIFLASH_TABLES`](/information-schema/information- schema-tiflash-tables.md) and [`INFORMATION_SCHEMA.TIFLASH_SEGMENTS`](/information-schema/information-schema-tiflash-segments.md)).
 
+* [`SHOW LOAD DATA`](/sql-statements/sql-statement-show-load-data.md) 的返回值中废弃了参数 `Loaded_File_Size`，替换为参数 `Imported_Rows` **tw:hfxsd**
+
 ### System variables
 
 | Variable name  | Change type    | Description |
 |--------|------------------------------|------|
-| `tidb_ddl_distribute_reorg` | Deleted | Renamed to [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710). |
+| [`tidb_enable_tiflash_read_for_write_stmt`](/system-variables.md#tidb_enable_tiflash_read_for_write_stmt-new-in-v630) | Deprecated | Changes the default value from `OFF` to `ON`. When [`tidb_allow_mpp = ON`](/system-variables.md#tidb_allow_mpp-new-in-v50), the optimizer intelligently decides whether to push a query down to TiFlash based on the [SQL mode](/sql-mode.md) and the cost estimates of the TiFlash replica. |
+| [`tidb_non_prepared_plan_cache_size`](/system-variables.md#tidb_non_prepared_plan_cache_size) | Deprecated | Starting from v7.1.0, this system variable is deprecated. You can use [`tidb_session_plan_cache_size`](#tidb_session_plan_cache_size-new-in-v710) to control the maximum number of plans that can be cached. |
+| [`tidb_prepared_plan_cache_size`](/system-variables.md#tidb_prepared_plan_cache_size-new-in-v610) | Deprecated | Starting from v7.1.0, this system variable is deprecated. You can use [`tidb_session_plan_cache_size`](#tidb_session_plan_cache_size-new-in-v710) to control the maximum number of plans that can be cached. |
+| `tidb_ddl_distribute_reorg` | Deleted | This variable is renamed to [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710). |
+| [`tidb_enable_non_prepared_plan_cache`](/system-variables.md#tidb_enable_non_prepared_plan_cache) | Modified | Changes the default value from `OFF` to `ON` after further tests, meaning that non-prepared plan cache is enabled by default. |
+| [`tidb_load_based_replica_read_threshold`](/system-variables.md#tidb_load_based_replica_read_threshold-new-in-v700) | Modified | Takes effect starting from v7.1.0 and controls the threshold for triggering load-based replica read. Changes the default value from `"0s"` to `"1s"` after further tests. |
+| [`tidb_opt_enable_late_materialization`](/system-variables.md#tidb_opt_enable_late_materialization-new-in-v700) | Modified | Changes the default value from `OFF` to `ON`, meaning that the TiFlash late materialization feature is enabled by default. |
 | [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) | Newly added | Controls whether to enable [the distributed execution framework](/tidb-distributed-execution-framework.md). After enabling distributed execution, DDL, Import and other supported backend tasks will be jointly completed by multiple TiDB nodes in the cluster. This variable was renamed from `tidb_ddl_distribute_reorg`. |
-|        |                              |      |
-|        |                              |      |
-|        |                              |      |
+| [`tidb_enable_non_prepared_plan_cache_for_dml`](/system-variables.md#tidb_enable_non_prepared_plan_cache_for_dml-new-in-v710) | Newly added | Controls whether to enable the [Non-prepared plan cache](/sql-non-prepared-plan-cache.md) feature for DML statements. |
+| [`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v710) | Newly added | This variable provides a more fine-grained control over the optimizer and helps to prevent performance regression after upgrading caused by behavior changes in the optimizer. |
+| [`tidb_prefer_broadcast_join_by_exchange_data_size`](/system-variables.md#tidb_prefer_broadcast_join_by_exchange_data_size-new-in-v710) | Newly added | Controls whether to use the algorithm with the minimum overhead of network transmission. If this variable is enabled, TiDB estimates the size of the data to be exchanged in the network using `Broadcast Hash Join` and `Shuffled Hash Join` respectively, and then chooses the one with the smaller size. [`tidb_broadcast_join_threshold_count`](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50) and [`tidb_broadcast_join_threshold_size`](/system-variables.md#tidb_broadcast_join_threshold_size-new-in-v50) will not take effect after this variable is enabled. |
+| [`tidb_session_plan_cache_size`](/system-variables.md#tidb_session_plan_cache_size-new-in-v710) | Newly added | Controls the maximum number of plans that can be cached. Prepared plan cache and non-prepared plan cache share the same cache. |
 
 ### Configuration file parameters
 
 | Configuration file | Configuration parameter | Change type | Description |
 | -------- | -------- | -------- | -------- |
-| TiFlash | `http_port` | 删除 | 废弃 TiFlash HTTP 服务端口（默认 `8123`）。|
-|          |          |          |          |
-|          |          |          |          |
-|          |          |          |          |
+| TiDB | [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710) | Newly added | Controls whether to use lightweight statistics initialization during TiDB startup. |
+| PD | [`store-limit-version`](/pd-configuration-file.md#store-limit-version-new-in-v710) | Newly added | Controls the mode of store limit. Value options are `"v1"` and `"v2"`. |
+| TiFlash | `http_port` | Deleted | Deprecates the HTTP service port (default `8123`). |
+| TiCDC | [`sink.enable-partition-separator`](/ticdc/ticdc-changefeed-config.md#cli-and-configuration-parameters-of-ticdc-changefeeds) | Modified | Changes the default value from `false` to `true` after further tests, meaning that partitions in a table are stored in separate directories by default. It is recommended that you keep the value as `true` to avoid the data loss issue. |
 
 ### Others
 
@@ -318,3 +333,12 @@ In v7.1.0, the key new features and improvements are as follows:
 ## Contributors
 
 We would like to thank the following contributors from the TiDB community:
+
+- [ethercflow](https://github.com/ethercflow)
+- [hihihuhu](https://github.com/hihihuhu)
+- [jiyfhust](https://github.com/jiyfhust)
+- [L-maple](https://github.com/L-maple)
+- [lqs](https://github.com/lqs)
+- [pingandb](https://github.com/pingandb)
+- [yorkhellen](https://github.com/yorkhellen)
+- [yujiarista](https://github.com/yujiarista)
