@@ -36,7 +36,6 @@ During a maintenance window, some operations are allowed, while some are not.
     - Create private links or configure VPC peering
     - Create import tasks, migration jobs, or changefeeds
     - Scale specifications of migration jobs or changefeeds
-    
 
 ## Get notifications for maintenance activities
 
