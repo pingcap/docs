@@ -1,5 +1,5 @@
 ---
-title: Configure maintenance window
+title: Configure Maintenance Window
 summary: Learn how to configure maintenance window for your cluster.
 ---
 

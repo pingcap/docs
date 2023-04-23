@@ -15,14 +15,15 @@ You can see the current status of each running cluster on the cluster page.
 
 | Cluster status | Description |
 |:--|:--|
-| **AVAILABLE** | The cluster is healthy and available. |
-| **CREATING** | The cluster is being created. The cluster is inaccessible while it is being created. |
-| **IMPORTING** | Importing data into the cluster. |
-| **MODIFYING** | The cluster is being modified. |
-| **UNAVAILABLE** | The cluster has failed and TiDB cannot recover it. |
-| **PAUSED** | The cluster is paused. |
-| **RESUMING** | The cluster is resuming from a pause. |
-| **RESTORING** | The cluster is currently being restored from a backup. |
+| **Available** | The cluster is Healthy and available. |
+| **Creating** | The cluster is being created. The cluster is inaccessible while it is being created. |
+| **Importing** | Importing data into the cluster. |
+| **Maintaining** | The cluster is in maintenance. |
+| **Modifying** | The cluster is being modified. |
+| **Unavailable** | The cluster has failed and TiDB cannot recover it. |
+| **Paused** | The cluster is paused. |
+| **Resuming** | The cluster is resuming from a pause. |
+| **Restoring** | The cluster is currently being restored from a backup. |
 
 ### TiDB node status
 
