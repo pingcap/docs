@@ -51,7 +51,7 @@ For every maintenance window, TiDB Cloud sends three email notifications to all 
 
 Regular maintenance ensures that essential updates are performed to safeguard TiDB Cloud from security threats, performance issues, and unreliability. Therefore, the maintenance window is enabled by default and cannot be disabled.
 
-If a maintenance window is planned for a week, the default start time of the window is 03:00 Wednesday (based on the time zone of your TiDB Cloud organization). You can modify the start time to your preferred time or defer maintenance activities until the deadline as follows:
+Maintenance usually occurs once every few months. If a maintenance window is planned for a week, the default start time of the window is 03:00 Wednesday (based on the time zone of your TiDB Cloud organization). You can modify the start time to your preferred time or defer maintenance activities until the deadline as follows:
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [Clusters](https://tidbcloud.com/console/clusters) page of your project.
 
