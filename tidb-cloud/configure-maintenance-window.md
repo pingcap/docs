@@ -27,7 +27,7 @@ During a maintenance window, some operations are allowed, while some are not.
     - Delete clusters
     - Create backup tasks
     - Restore clusters
-    - Access cluster pages other than **SQL Diagnosis**
+    - Access cluster pages  
 
 - Disallowed operations:
 
@@ -36,7 +36,7 @@ During a maintenance window, some operations are allowed, while some are not.
     - Create private links or configure VPC peering
     - Create import tasks, migration jobs, or changefeeds
     - Scale specifications of migration jobs or changefeeds
-    - Access the cluster **SQL Diagnosis** page
+    
 
 ## Get notifications for maintenance activities
 
@@ -52,7 +52,7 @@ For every maintenance window, TiDB Cloud sends three email notifications to all 
 
 Regular maintenance ensures that essential updates are performed to safeguard TiDB Cloud from security threats, performance issues, and unreliability. Therefore, the maintenance window is enabled by default and cannot be disabled.
 
-For each maintenance activity, the default start time is 03:00 Wednesday (based on the time zone of your project). You can modify the start time to your preferred time or defer maintenance activities until the deadline as follows:
+For each maintenance activity, the default start time is 03:00 Wednesday (based on the time zone of your TiDB Cloud organization). You can modify the start time to your preferred time or defer maintenance activities until the deadline as follows:
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [Clusters](https://tidbcloud.com/console/clusters) page of your project.
 
@@ -82,7 +82,7 @@ For each maintenance activity, the default start time is 03:00 Wednesday (based 
 
 - How often does maintenance occur?
 
-    Maintenance is infrequent, usually occurring once every few months. The maintenance activities will be displayed on the **Maintenance** page several days before the deadline and you will receive an email notification 72 hours in advance, allowing you to make necessary preparations.
+    Maintenance is infrequent, usually occurring once every few months. The maintenance activities will be displayed on the **Maintenance** page several days before the scheduled time and you will receive an email notification 72 hours in advance, allowing you to make necessary preparations.
 
 - Can I disable a maintenance window?
 
