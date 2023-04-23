@@ -182,8 +182,7 @@ mysql> SELECT * FROM t1;
 ### datadir
 
 - Scope: NONE
-- Default value: /tmp/tidb
-- This variable indicates the location where data is stored. This location can be a local path or point to a PD server if the data is stored on TiKV.
+- Default value: ${ip_address:port}
 - A value in the format of `ip_address:port` indicates the PD server that TiDB connects to on startup.
 
 ### ddl_slow_threshold
@@ -2559,16 +2558,27 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 ### tidb_load_based_replica_read_threshold <span class="version-mark">New in v7.0.0</span>
 
-> **Warning:**
->
-> The feature controlled by this variable is not fully functional in the current TiDB version. Do not change the default value.
+<CustomContent platform="tidb">
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
-- Default value: `"0s"`
+- Default value: `"1s"`
 - Range: `[0s, 1h]`
 - Type: String
-- This variable is used to set the threshold for triggering load-based replica read. When the estimated queue time of the leader node exceeds the threshold, TiDB prioritizes reading data from the follower node. The format is a time duration, such as `"100ms"` or `"1s"`.
+- This variable is used to set the threshold for triggering load-based replica read. When the estimated queue time of the leader node exceeds the threshold, TiDB prioritizes reading data from the follower node. The format is a time duration, such as `"100ms"` or `"1s"`. For more details, see [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md#scatter-read-hotspots).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Default value: `"1s"`
+- Range: `[0s, 1h]`
+- Type: String
+- This variable is used to set the threshold for triggering load-based replica read. When the estimated queue time of the leader node exceeds the threshold, TiDB prioritizes reading data from the follower node. The format is a time duration, such as `"100ms"` or `"1s"`. For more details, see [Troubleshoot Hotspot Issues](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues#scatter-read-hotspots).
+
+</CustomContent>
 
 ### tidb_log_file_max_days <span class="version-mark">New in v5.3.0</span>
 
@@ -3146,6 +3156,16 @@ mysql> desc select count(distinct a) from test.t;
 - Default value: `OFF`
 - This variable is used to control whether to enable the [TiFlash late materialization](/tiflash/tiflash-late-materialization.md) feature.
 - By default, when processing a `SELECT` statement with filter conditions (`WHERE` clause), TiFlash scans all the data of the required columns before filtering. When this variable is set to `ON` to enable the TiFlash late materialization feature, TiFlash can first scan the column data related to the filter conditions, filter the rows that meet the conditions, and then scan the data of other columns of these rows for further calculations, thereby reducing IO scans and computations of data processing.
+
+### tidb_opt_fix_control <span class="version-mark">New in v7.1.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: String
+- Default value: `""`
+- This variable is used to control some internal behaviors of the optimizer.
+- The optimizer's behavior might vary depending on user scenarios or SQL statements. This variable provides a more fine-grained control over the optimizer and helps to prevent performance regression after upgrading caused by behavior changes in the optimizer.
+- This variable supports multiple control items, separated by commas (`,`). The format is `"<#issue1>:<value1>,<#issue2>:<value2>,...,<#issueN>:<valueN>"`, where `<#issueN>` represents the control number, corresponding to the link `https://github.com/pingcap/tidb/issues/<#issue>` that describes the control item, and `<valueN>` is the target value set for the control item.
 
 ### tidb_opt_force_inline_cte <span class="version-mark">New in v6.3.0</span>
 
