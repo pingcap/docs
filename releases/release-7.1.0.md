@@ -133,7 +133,7 @@ In v7.1.0, the key new features and improvements are as follows:
 
     For more information, see [documentation](/sql-statements/sql-statement-load-data.md).
 
-* `LOAD DATA` supports import concurrency to improve import performance (experimental) [#40499](https://github.com/pingcap/tidb/issues/40499) @[lance6716](https://github.com/lance6716) **tw:hfxsd**
+* `LOAD DATA` supports concurrent data import to improve import performance (experimental) [#40499](https://github.com/pingcap/tidb/issues/40499) @[lance6716](https://github.com/lance6716) **tw:hfxsd**
 
     Previously, `LOAD DATA` did not support concurrent data import, so the performance was poor. In TiDB v7.1.0, you can set the parameter `WITH thread=<number>` for concurrent import, which can improve the performance of import by increasing concurrency. In the lab environment, the performance of test logic import is nearly 4 times better than the previous version.
 
