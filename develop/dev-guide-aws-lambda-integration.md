@@ -92,6 +92,7 @@ To set up the bookshop demo using CloudFormation, follow these steps:
     - Specify stack details
         - If you use a different AWS region other than `us-east-1`, you should follow the [Modify and rebuild the Lambda Function Code if necessary](#modify-and-rebuild-the-lambda-function-code-if-necessary) section to modify the Lambda function code, re-build and re-upload the code bundle to your own S3 bucket. Then, you need to specify the S3 bucket name and region in the `S3Bucket` and `S3Key` parameters.
         ![aws-lambda-cf-stack-details](/media/develop/aws-lambda-cf-stack-config.png)
+
 ## Using the Demo
 
 Once the stack has been created, you can use the demo as follows:
