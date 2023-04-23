@@ -440,6 +440,8 @@ SHOW binding_cache status;
 
 Used for [preventing regression of execution plans during an upgrade](#prevent-regression-of-execution-plans-during-an-upgrade), this feature captures queries that meet capturing conditions and creates bindings for these queries.
 
+A plan baseline refers to a collection of approved plans that the optimizer can use for executing a SQL statement. Generally, a plan is added to the plan baseline by the database after confirming that it delivers satisfactory performance. A plan in this context encompasses all the necessary plan-related details (such as SQL plan identifier, hint set, bind values, and optimizer environment) that the optimizer requires to replicate an execution plan.
+
 ### Enable capturing
 
 To enable baseline capturing, set `tidb_capture_plan_baselines` to `on`. The default value is `off`.
