@@ -354,6 +354,11 @@ Configuration items related to scheduling
 >
 > If you have upgraded your cluster from a TiDB 4.0 version to the current version, the new formula version is automatically disabled by default to ensure consistent PD behavior before and after the upgrading. If you want to change the formula version, you need to manually switch through the `pd-ctl` setting. For details, refer to [PD Control](/pd-control.md#config-show--set-option-value--placement-rules).
 
+### `store-limit-version` <span class="version-mark">New in v7.1</span>
++ Controls the version of the store limit formula
++ Default value: `v1`
++ Optional values: `v1` and `v2`. Compared to v1, the changes in v2 is more smart, and the `store limit` will be auto adjusted by the snapshot excuting details.
+
 ### `enable-joint-consensus` <span class="version-mark">New in v5.0</span>
 
 + Controls whether to use Joint Consensus for replica scheduling. If this configuration is disabled, PD schedules one replica at a time.
