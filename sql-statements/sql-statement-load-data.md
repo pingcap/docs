@@ -162,11 +162,25 @@ You can ignore the first `number` lines of a file by configuring the `IGNORE <nu
 
 You can specify the data import mode by `import_mode = ('LOGICAL' | 'PHYSICAL')`. The default value is `LOGICAL`, which means logical import mode. Starting from v7.1.0, `LOAD DATA` integrates with physical import mode, which can be enabled with `WITH import_mode = 'PHYSICAL'`.
 
+<CustomContent platform="tidb">
+
 Physical import mode can only be used in non-`LOCAL` mode, with single thread execution. Currently, physical import mode is not integrated with [conflict detection](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#conflict-detection), so a checksum inconsistency error occurs when there is a data primary key or unique key conflict. It is recommended that you check the data file to ensure that there are no key conflicts before importing. For other restrictions and requirements, see [TiDB Lightning Physical Import Mode](/tidb-lightning/tidb-lightning-physical-import-mode.md).
 
 In physical import mode, `LOAD DATA` writes the locally sorted data to the TiDB [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630) subdirectory. The subdirectory naming rule is `import-<tidb-port>/<job-id>`.
 
 Physical import mode currently has not been integrated with [disk resource quota](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#configure-disk-quota-new-in-v620). Ensure that the corresponding disk has enough space. See [Requirements and restrictions](/tidb-lightning/tidb-lightning-physical-import-mode#requirements-and-restrictions).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Physical import mode can only be used in non-`LOCAL` mode, with single thread execution. Currently, physical import mode is not integrated with [conflict detection](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode-usage#conflict-detection), so a checksum inconsistency error occurs when there is a data primary key or unique key conflict. It is recommended that you check the data file to ensure that there are no key conflicts before importing. For other restrictions and requirements, see [TiDB Lightning Physical Import Mode](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode-usage).
+
+In physical import mode, `LOAD DATA` writes the locally sorted data to the TiDB [`temp-dir`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#temp-dir-new-in-v630) subdirectory. The subdirectory naming rule is `import-<tidb-port>/<job-id>`.
+
+Physical import mode currently has not been integrated with [disk resource quota](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode-usage#configure-disk-quota-new-in-v620). Ensure that the corresponding disk has enough space. See [Requirements and restrictions](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode#requirements-and-restrictions).
+
+</CustomContent>
 
 ### `WITH thread=<number>`
 
