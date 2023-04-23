@@ -3154,8 +3154,8 @@ mysql> desc select count(distinct a) from test.t;
 - Type: String
 - Default value: `""`
 - This variable is used to control some internal behaviors of the optimizer.
-- Some optimizer behaviors depend on user scenarios or SQL writing. Using this variable, you can control the optimizer in a more fine-grained style and prevent regression after upgrading caused by behavior changes in the optimizer.
-- Each fix control item corresponds to a GitHub Issue. You can set it to a value. When setting multiple fix control items, separate them by comma. The format is `"<#issue1>:<value1>,<#issue2>:<value2>"`, where `<#issueN>` is the GitHub Issue number and `<valueN>` is the expected value.
+- The optimizer's behavior might vary depending on user scenarios or SQL statements. This variable provides a more fine-grained control over the optimizer and helps to prevent performance regression after upgrading caused by behavior changes in the optimizer.
+- This variable supports multiple control items, separated by commas (`,`). The format is `"<#issue1>:<value1>,<#issue2>:<value2>,...,<#issueN>:<valueN>"`, where `<#issueN>` represents the control number, corresponding to the link `https://github.com/pingcap/tidb/issues/<#issue>` that describes the control item, and `<valueN>` is the target value set for the control item.
 
 ### tidb_opt_force_inline_cte <span class="version-mark">New in v6.3.0</span>
 
