@@ -42,7 +42,7 @@ During the maintenance window, you might experience temporary connection disrupt
 
 It is important to be aware of the maintenance window schedule and plan your operations accordingly to avoid potential disruptions.
 
-For each maintenance window, all project members will receive three emails as notifications from TiD Cloud at the following time points:
+For each maintenance window, all project members will receive three emails as notifications from TiDB Cloud at the following time points:
 
 - 72 hours before the maintenance window starts.
 - The time when the maintenance tasks are started.
