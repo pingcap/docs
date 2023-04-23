@@ -53,13 +53,13 @@ In v7.1.0, the key new features and improvements are as follows:
 
 ### Reliability
 
-* 资源管控 GA [#38825](https://github.com/pingcap/tidb/issues/38825) @[nolouch](https://github.com/nolouch) @[BornChanger](https://github.com/BornChanger) @[glorv](https://github.com/glorv) @[tiancaiamao](https://github.com/tiancaiamao) @[Connor1996](https://github.com/Connor1996) @[JmPotato](https://github.com/JmPotato) @[hnes](https://github.com/hnes) @[CabinfeverB](https://github.com/CabinfeverB) @[HuSharp](https://github.com/HuSharp) **tw:hfxsd**
+* Resource Control GA [#38825](https://github.com/pingcap/tidb/issues/38825) @[nolouch](https://github.com/nolouch) @[BornChanger](https://github.com/BornChanger) @[glorv](https://github.com/glorv) @[tiancaiamao](https://github.com/tiancaiamao) @[Connor1996](https://github.com/Connor1996) @[JmPotato](https://github.com/JmPotato) @[hnes](https://github.com/hnes) @[CabinfeverB](https://github.com/CabinfeverB) @[HuSharp](https://github.com/HuSharp) **tw:hfxsd**
 
-    TiDB 持续增强资源管控能力，并将这个特性 GA。该特性将会极大地提升 TiDB 集群的资源利用效率和性能表现。资源管控特性的引入对 TiDB 具有里程碑的意义，你可以将一个分布式数据库集群划分成多个逻辑单元，将不同的数据库用户映射到对应的资源组中，并根据需要设置每个资源组的配额。当集群资源紧张时，来自同一个资源组的会话所使用的全部资源将被限制在配额内，避免其中一个资源组过度消耗，从而影响其他资源组中的会话正常运行。
+    TiDB enhances the resource control feature based on resource groups. This feature becomes GA in v7.1.0. This feature significantly improves the resource utilization efficiency and performance of TiDB clusters. The introduction of the resource control feature is a milestone for TiDB. You can divide a distributed database cluster into multiple logical units, map different database users to corresponding resource groups, and set the quota for each resource group as needed. When the cluster resources are limited, all resources used by sessions in the same resource group are limited to the quota. In this way, even if a resource group is over-consumed, the sessions in other resource groups are not affected. 
 
-    该特性也可以将多个来自不同系统的中小型应用合入一个 TiDB 集群中，个别应用的负载提升，不会影响其他应用的正常运行。而在系统负载较低的时候，繁忙的应用即使超过设定的读写配额，也仍然可以被分配到所需的系统资源，达到资源的最大化利用。此外，合理利用资源管控特性可以减少集群数量，降低运维难度及管理成本。
+    With this feature, you can combine multiple small and medium-sized applications from different systems into a single TiDB cluster. When the workload of an application grows larger, it does not affect the normal operation of other applications. When the system workload is low, busy applications can still be allocated the required system resources even if they exceed the set read and write quotas, which can achieve the maximum utilization of resources. In addition, the rational use of the resource control feature can reduce the number of clusters, ease the difficulty of operation and maintenance, and save management costs.
 
-    在 v7.1.0 中，TiDB 增加了基于实际负载来估算系统容量上限的能力，为客户的容量规划提供了更准确的参考，协助客户更好地管理 TiDB 的资源分配，从而满足企业级场景的稳定性需要。
+    In TiDB v7.1.0, this feature adds the ability to estimate system capacity caps based on actual workload and hardware deployment. The estimation ability provides you with a more accurate reference for capacity planning and assists you in better managing TiDB resource allocation to meet the stability needs of enterprise-class scenarios.    
 
     For more information, see [documentation](/tidb-resource-control.md).
 
@@ -75,11 +75,11 @@ In v7.1.0, the key new features and improvements are as follows:
 
     For more information, see [documentation](/br/br-checkpoint-restore.md).
 
-* 统计信息缓存加载策略优化 [#issue](https://github.com/pingcap/tidb/issues/issue) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes) **tw:hfxsd**
+* Optimize the policy of loading statistical information cache [#42160](https://github.com/pingcap/tidb/issues/42160) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes) **tw:hfxsd**
 
-    在开启[统计信息同步加载](/statistics.md#统计信息的加载)的前提下，TiDB 大幅减少了启动时必须载入的统计信息的数量，并且在加载完成前不接受用户连接。一方面提升了启动时统计信息的加载速度，另一方面，避免了在启动初始阶段由于统计信息不全而引起的性能回退。提升了 TiDB 在复杂运行环境下的稳定性，降低了个别 TiDB 节点重启对整体服务的影响。
+    By enabling [synchronous loading of statistics](/statistics.md#load-statistics), TiDB can significantly reduce the number of statistics that must be loaded upon startup and improves the speed of loading statistics. This feature increases the stability of TiDB in complex runtime environments and reduces the impact of individual TiDB node restart on the overall service.
 
-    For more information, see [documentation]().
+    For more information, see [documentation](/statistics.md#load-statistics)。
 
 ### Availability
 
@@ -109,35 +109,35 @@ In v7.1.0, the key new features and improvements are as follows:
 
 * The syntax of Range INTERVAL partitioning becomes generally available (GA) [#35683](https://github.com/pingcap/tidb/issues/35683) @[mjonss](https://github.com/mjonss) **tw:qiancai**
 
-    The syntax of Range INTERVAL partitioning (introduced in v6.3.0) becomes GA. With this syntax, you can define partitioning by a desired interval without enumerating all partitions, which drastically reduces the length of Range partitioning DDL statements. The syntax is equivalent to that of the original Range partitioning.
+    The syntax of Range INTERVAL partitioning (introduced in v6.3.0) becomes GA. With this syntax, you can define Range partitioning by a desired interval without enumerating all partitions, which drastically reduces the length of Range partitioning DDL statements. The syntax is equivalent to that of the original Range partitioning.
 
     For more information, see [documentation](/partitioned-table#range-interval-partitioning).
 
-* `LOAD DATA` SQL 支持从 S3、GCS 导入数据，支持任务管理等功能 GA [#40499](https://github.com/pingcap/tidb/issues/40499) @[lance6716](https://github.com/lance6716) **tw:hfxsd**
+* `LOAD DATA` some features become GA. [#40499](https://github.com/pingcap/tidb/issues/40499) @[lance6716](https://github.com/lance6716) **tw:hfxsd**
 
-    以下 `LOAD DATA` 新增的功能在 7.1 版本 GA：
+    The following `LOAD DATA` features become GA in TiDB v7.1.0:
 
-    - 支持从 S3、GCS 导入数据
-    - 支持导入 Parquet 文件数据
-    - 支持解析源文件中 ascii、latin1、binary、gbk、utf8mbd 字符集
-    - 支持设置 FIELDS DEFINED NULL BY 将源文件的指定的值转换为 Null 写入目标表。
-    - 支持设置一个 bath_size 即 1 个 batch 插入到目标表的行数，提升写入性能。
-    - 支持设置 detached，允许该 job 在后台运行。
-    - 支持 show load data jobs, show load data jobid, drop load data jobid 来管理任务。
+    - Support importing data from SCS and GCS.
+    - Support importing data from Parquet files.
+    - Support parsing the following character sets in the source file: `ascii`, `latin1`, `binary`, `gbk`, `utf8mbd`. 
+    - Support setting `FIELDS DEFINED NULL BY` to convert the specified value of the source file to `NULL` for writing to the target table.
+    - Support setting 1 `bath_size` which is the number of rows inserted into the target table by 1 batch to improve write performance.
+    - Support setting `detached` to allow the job to run in the background.
+    - Support using `SHOW LOAD DATA` and `DROP LOAD DATA` to manage jobs.
 
-    For more information, see [documentation](https://github.com/pingcap/docs-cn/pull/13344).
+    For more information, see [documentation](/sql-statements/sql-statement-load-data.md).
 
-* `LOAD DATA` SQL 集成 Lightning local backend（physical import mode） 的导入功能，提升导入性能（实验特性）[#42930](https://github.com/pingcap/tidb/issues/42930) @[D3Hunter](https://github.com/D3Hunter) **tw:hfxsd**
+* `LOAD DATA` integrates with TiDB Lightning Physical Import Mode to improve import performance (experimental) [#42930](https://github.com/pingcap/tidb/issues/42930) @[D3Hunter](https://github.com/D3Hunter) **tw:hfxsd**
 
-    用户通过 `LOAD DATA` SQL 导入数据时，可以指定 import_mode = physical 来实现 Lightning local backend （physical 导入模式）的导入效果，相比 Load data 原先的 logical 导入模式，可成倍提升导入数据的性能。
+    `LOAD DATA` integrates with TiDB Lightning Physical Import Mode. You can enable it by setting `WITH import_mode = 'PHYSICAL'`. This feature can improve the performance of importing data exponentially compared to Logical Import Mode.
 
-    For more information, see [documentation](链接).
+    For more information, see [documentation](/sql-statements/sql-statement-load-data.md).
 
-* `LOAD DATA` SQL 支持并行导入，提升导入性能（实验特性）[#40499](https://github.com/pingcap/tidb/issues/40499) @[lance6716](https://github.com/lance6716) **tw:hfxsd**
+* `LOAD DATA` supports import concurrency to improve import performance (experimental) [#40499](https://github.com/pingcap/tidb/issues/40499) @[lance6716](https://github.com/lance6716) **tw:hfxsd**
 
-    原先 load data sql 无法并行导入数据，性能较差。在该版本中支持设置并行导入的参数，通过提升并发，来提升导入的性能。在实验室环境，相比上个版本，测试逻辑导入性能有接近 4 倍的提升。
+    Previously, `LOAD DATA` did not support concurrent data import, so the performance was poor. In TiDB v7.1.0, you can set the parameter `WITH thread=<number>` for concurrent import, which can improve the performance of import by increasing concurrency. In the lab environment, the performance of test logic import is nearly 4 times better than the previous version.
 
-    For more information, see [documentation](https://github.com/pingcap/docs-cn/pull/13676).
+    For more information, see [documentation](/sql-statements/sql-statement-load-data.md).
 
 * Generated columns become generally available (GA) @[bb7133](https://github.com/bb7133) **tw:ran-huang**
 
@@ -164,15 +164,16 @@ In v7.1.0, the key new features and improvements are as follows:
 
 ### Observability
 
-* 增加优化器诊断信息 [#issue号](链接) @[time-and-fate](https://github.com/time-and-fate) **tw:hfxsd**
+* Add optimizer diagnostics information [#43122](https://github.com/pingcap/tidb/issues/43122) @[time-and-fate](https://github.com/time-and-fate) **tw:hfxsd**
 
-    获取充足的信息是 SQL 性能诊断的关键，在 v7.1.0 中，TiDB 持续向各种诊断工具中添加优化器运行信息，可以更好地解释执行计划如何被选择，协助用户和技术支持对 SQL 性能问题进行定位。其中包括：
+    Having sufficient information is key to SQL performance diagnostics. In v7.1.0, TiDB continues to add optimizer operation information to various diagnostic tools that can better explain how execution plans are selected. Such information can assist in troubleshooting SQL performance issues. The information includes:
 
-    * [`PLAN REPLAYER`](/sql-plan-replayer.md#使用-plan-replayer-保存和恢复集群现场信息) 的输出中增加 `debug_trace.json` 文件。
-    * [`EXPLAIN`](/explain-walkthrough.md) 的输出中，为 `operator info` 添加部分统计信息详情。
-    * 为[`慢日志`](/identify-slow-queries.md)的 `Stats` 字段添加部分统计信息详情。
+    * The output of [`PLAN REPLAYER`](/sql-plan-replayer.md) adds `debug_trace.json`.
+    * The output of [`EXPLAIN`](/explain-walkthrough.md) adds partial details of the statistics for `operator info`.
+    * Add partial statistics details to the `Stats` field of [`slow-queries`](/identify-slow-queries.md).
 
-  更多信息，请参考[使用 `PLAN REPLAYER` 保存和恢复集群线程信息](/sql-plan-replayer.md#使用-plan-replayer-保存和恢复集群现场信息)，[使用 `EXPLAIN` 解读执行计划](/explain-walkthrough.md)和[`慢日志查询`](/identify-slow-queries.md)。
+  For more information, see [Use PLAN REPLAYER to Save and Restore the On-Site Information of a Cluster](/sql-plan-replayer.md), [EXPLAIN Walkthrough](/explain-walkthrough.md) and [Identify Slow Queries](/identify-slow-queries.md).
+
 
 ### Security
 
@@ -200,7 +201,7 @@ In v7.1.0, the key new features and improvements are as follows:
 
     If you have upgraded TiFlash to v7.1.0, then during the TiDB upgrade to v7.1.0, TiDB cannot read the TiFlash system tables ([`INFORMATION_SCHEMA.TIFLASH_TABLES`](/information-schema/information- schema-tiflash-tables.md) and [`INFORMATION_SCHEMA.TIFLASH_SEGMENTS`](/information-schema/information-schema-tiflash-segments.md)).
 
-* [`SHOW LOAD DATA`](/sql-statements/sql-statement-show-load-data.md) 的返回值中废弃了参数 `Loaded_File_Size`，替换为参数 `Imported_Rows` **tw:hfxsd**
+* The parameter `Loaded_File_Size` is deprecated in the return value of [`SHOW LOAD DATA`](/sql-statements/sql-statement-show-load-data.md) and replaced with the parameter `Imported_Rows` **tw:hfxsd**
 
 ### System variables
 
