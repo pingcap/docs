@@ -168,7 +168,7 @@ Physical import mode can only be used in non-`LOCAL` mode, with single thread ex
 
 In physical import mode, `LOAD DATA` writes the locally sorted data to the TiDB [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630) subdirectory. The subdirectory naming rule is `import-<tidb-port>/<job-id>`.
 
-Physical import mode currently has not been integrated with [disk resource quota](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#configure-disk-quota-new-in-v620). Ensure that the corresponding disk has enough space. See [Requirements and restrictions](/tidb-lightning/tidb-lightning-physical-import-mode#requirements-and-restrictions).
+Physical import mode currently has not been integrated with [disk resource quota](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#configure-disk-quota-new-in-v620). Ensure that the corresponding disk has enough space. See [Requirements and restrictions](/tidb-lightning/tidb-lightning-physical-import-mode.md#requirements-and-restrictions).
 
 </CustomContent>
 
