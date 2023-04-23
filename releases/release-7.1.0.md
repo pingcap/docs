@@ -198,7 +198,8 @@ In v7.1.0, the key new features and improvements are as follows:
 
 | Variable name  | Change type    | Description |
 |--------|------------------------------|------|
-|        |                              |      |
+| `tidb_ddl_distribute_reorg` | Deleted | Renamed to [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710). |
+| [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) | Newly added | Controls whether to enable [the distributed execution framework](/tidb-distributed-execution-framework.md). After enabling distributed execution, DDL, Import and other supported backend tasks will be jointly completed by multiple TiDB nodes in the cluster. This variable was renamed from `tidb_ddl_distribute_reorg`. |
 |        |                              |      |
 |        |                              |      |
 |        |                              |      |
