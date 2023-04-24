@@ -58,7 +58,7 @@ This document lists the features supported in different TiDB versions, including
 | [Unique indexes](/constraints.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Clustered index on integer `PRIMARY KEY`](/constraints.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Clustered index on composite or non-integer key](/constraints.md) | Y | Y | Y | Y | Y | Y | Y | Y | N |
-| [Multi-valued index](/sql-statements/sql-statement-create-index.md#multi-valued-index) | E | N | N | N | N | N | N | N | N |
+| [Multi-valued index](/sql-statements/sql-statement-create-index.md#multi-valued-index) | Y | N | N | N | N | N | N | N | N |
 | [Foreign key](/constraints.md#foreign-key) | Y | N | N | N | N | N | N | N | N |
 | [TiFlash late materialization](/tiflash/tiflash-late-materialization.md) | Y | N | N | N | N | N | N | N | N |
 
@@ -110,7 +110,7 @@ This document lists the features supported in different TiDB versions, including
 | Data definition language (DDL) | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | Basic `CREATE`, `DROP`, `ALTER`, `RENAME`, `TRUNCATE` | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [Generated columns](/generated-columns.md) | E | E | E | E | E | E | E | E | E |
+| [Generated columns](/generated-columns.md) | Y | E | E | E | E | E | E | E | E |
 | [Views](/views.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Sequences](/sql-statements/sql-statement-create-sequence.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Auto increment](/auto-increment.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y |
@@ -124,6 +124,7 @@ This document lists the features supported in different TiDB versions, including
 | [Acceleration of `ADD INDEX` and `CREATE INDEX`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) | Y | Y | N | N | N | N | N | N | N |
 | [Metadata lock](/metadata-lock.md) | Y | Y | N | N | N | N | N | N | N |
 | [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md) | Y | Y | N | N | N | N | N | N | N |
+| [Pause/Resume DDL](/ddl-introduction.md#ddl-related-commands) | E | N | N | N | N | N | N | N | N |
 
 ## Transactions
 
