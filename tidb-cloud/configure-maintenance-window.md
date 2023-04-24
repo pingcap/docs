@@ -96,5 +96,5 @@ Maintenance usually occurs once every few months. If a maintenance window is pla
     No. TiDB Cloud will check the cluster status before performing a maintenance activity on a cluster.
 
     - If the cluster is in the **Creating** or **Paused** status, maintenance activities are not required.
-    - If the cluster is in the **Backup** status, the maintenance will be delayed and triggered until the current backup is successfully completed. Note that for clusters with large data volumes, the backup process might take a long time, such as 12 hours. To minimize the impact on the clusters, it is recommended to carefully set the start time for backups and the maintenance window.
+    - If the cluster is running a daily or manual backup, the maintenance will be delayed and triggered until the current backup is successfully completed. Note that for clusters with large data volumes, the backup process might take a long time, such as 12 hours. To minimize the impact on the clusters, it is recommended to carefully set the start time for backups and the maintenance window.
     - If the cluster is in any other status, the maintenance activities will start as scheduled.
