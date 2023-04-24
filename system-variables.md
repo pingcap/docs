@@ -184,7 +184,7 @@ mysql> SELECT * FROM t1;
 - Scope: NONE
 - Default value: it depends on the component and the deployment method.
     - `/tmp/tidb`: when you set `"unistore"` for [`--store`](/command-line-flags-for-tidb-configuration.md#--store) or if you don't set `--store`.
-    - `${pd-ip}:${pd-port}`: when you use TiUP or Operator to deploy TiDB and set `"tikv"` for [`--store`](/command-line-flags-for-tidb-configuration.md#--store)
+    - `${pd-ip}:${pd-port}`: when you use TiKV, which is the default storage engine for TiUP and TiDB Operator for Kubernetes deployments.
 - This variable indicates the location where data is stored. This location can be a local path `/tmp/tidb` , or point to a PD server if the data is stored on TiKV. A value in the format of `${pd-ip}:${pd-port}` indicates the PD server that TiDB connects to on startup.
 
 ### ddl_slow_threshold
