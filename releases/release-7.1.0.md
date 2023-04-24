@@ -77,7 +77,7 @@ In v7.1.0, the key new features and improvements are as follows:
 
 * Optimize the policy of loading statistical information cache [#42160](https://github.com/pingcap/tidb/issues/42160) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes) **tw:hfxsd**
 
-    By enabling [synchronous loading of statistics](/statistics.md#load-statistics), TiDB can significantly reduce the number of statistics that must be loaded upon startup and improves the speed of loading statistics. This feature increases the stability of TiDB in complex runtime environments and reduces the impact of individual TiDB node restart on the overall service.
+    By enabling [synchronous loading of statistics](/statistics.md#load-statistics), you can significantly reduce the number of statistics that must be loaded upon startup and improve the speed of loading statistics. This feature increases the stability of TiDB in complex runtime environments and reduces the impact of individual TiDB node restart on the overall service.
 
     For more information, see [documentation](/statistics.md#load-statistics)。
 
@@ -113,7 +113,7 @@ In v7.1.0, the key new features and improvements are as follows:
 
     For more information, see [documentation](/partitioned-table#range-interval-partitioning).
 
-* `LOAD DATA` some features become GA. [#40499](https://github.com/pingcap/tidb/issues/40499) @[lance6716](https://github.com/lance6716) **tw:hfxsd**
+* Some `LOAD DATA` features become GA [#40499](https://github.com/pingcap/tidb/issues/40499) @[lance6716](https://github.com/lance6716) **tw:hfxsd**
 
     The following `LOAD DATA` features become GA in TiDB v7.1.0:
 
@@ -135,7 +135,7 @@ In v7.1.0, the key new features and improvements are as follows:
 
 * `LOAD DATA` supports concurrent data import to improve import performance (experimental) [#40499](https://github.com/pingcap/tidb/issues/40499) @[lance6716](https://github.com/lance6716) **tw:hfxsd**
 
-    Previously, `LOAD DATA` did not support concurrent data import, so the performance was poor. In TiDB v7.1.0, you can set the parameter `WITH thread=<number>` for concurrent import, which can improve the performance of import by increasing concurrency. In the lab environment, the performance of test logic import is nearly 4 times better than the previous version.
+    Previously, `LOAD DATA` did not support concurrent data import, so the performance was not as good as expected. In TiDB v7.1.0, you can set the parameter `WITH thread=<number>` for concurrent import, which can improve the performance of import by increasing concurrency. In the lab environment, the performance of test logic import is nearly 4 times better than the previous version.
 
     For more information, see [documentation](/sql-statements/sql-statement-load-data.md).
 
@@ -168,9 +168,9 @@ In v7.1.0, the key new features and improvements are as follows:
 
     Having sufficient information is key to SQL performance diagnostics. In v7.1.0, TiDB continues to add optimizer operation information to various diagnostic tools that can better explain how execution plans are selected. Such information can assist in troubleshooting SQL performance issues. The information includes:
 
-    * The output of [`PLAN REPLAYER`](/sql-plan-replayer.md) adds `debug_trace.json`.
-    * The output of [`EXPLAIN`](/explain-walkthrough.md) adds partial details of the statistics for `operator info`.
-    * Add partial statistics details to the `Stats` field of [`slow-queries`](/identify-slow-queries.md).
+    * In the output of [`PLAN REPLAYER`](/sql-plan-replayer.md), add `debug_trace.json`.
+    * In the output of [`EXPLAIN`](/explain-walkthrough.md), add partial details of the statistics for `operator info`.
+    * In the `Stats` field of [`slow-queries`](/identify-slow-queries.md), add partial statistics details.
 
   For more information, see [Use PLAN REPLAYER to Save and Restore the On-Site Information of a Cluster](/sql-plan-replayer.md), [EXPLAIN Walkthrough](/explain-walkthrough.md) and [Identify Slow Queries](/identify-slow-queries.md).
 
@@ -201,7 +201,7 @@ In v7.1.0, the key new features and improvements are as follows:
 
     If you have upgraded TiFlash to v7.1.0, then during the TiDB upgrade to v7.1.0, TiDB cannot read the TiFlash system tables ([`INFORMATION_SCHEMA.TIFLASH_TABLES`](/information-schema/information- schema-tiflash-tables.md) and [`INFORMATION_SCHEMA.TIFLASH_SEGMENTS`](/information-schema/information-schema-tiflash-segments.md)).
 
-* The parameter `Loaded_File_Size` is deprecated in the return value of [`SHOW LOAD DATA`](/sql-statements/sql-statement-show-load-data.md) and replaced with the parameter `Imported_Rows` **tw:hfxsd**
+* In the return value of [`SHOW LOAD DATA`](/sql-statements/sql-statement-show-load-data.md), the parameter `Loaded_File_Size` is deprecated and replaced with the parameter `Imported_Rows` **tw:hfxsd**
 
 ### System variables
 
