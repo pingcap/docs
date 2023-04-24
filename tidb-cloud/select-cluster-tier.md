@@ -17,7 +17,23 @@ TiDB Cloud provides the following two options of cluster tiers. Before creating 
 
 The TiDB Cloud Serverless Tier (previously called Developer Tier) is a fully managed service of TiDB. It's still in beta and should not be used in production. However, you can use Serverless Tier clusters for non-production workloads such as prototype applications, hackathons, academic courses, or to provide a temporary data service for your datasets.
 
-For each TiDB Cloud account, you can create a maximum of five complimentary Serverless Tier clusters to use during the beta phase.
+### Usage quota
+
+For each TiDB Cloud account, you can create a maximum of five complimentary Serverless Tier clusters during the beta phase.
+
+For each Serverless Tier cluster, TiDB Cloud provides a free usage quota as follows:
+
+- Row storage: 5 GiB
+- Column storage: 5 GiB
+- Request Unit: 50 MB per month
+
+The Request Unit (RU) is a unit of measurement used to track the resource consumption of a query or transaction. It is a metric that allows you to estimate the computational resources required to process a specific request in the database. The request unit is also the billing unit for TiDB Cloud Serverless service.
+
+Once the free quota limit of a cluster is reached, the cluster will be throttled to 100 RU/s until you get more usage quota or the current usage is reset after the next month.
+
+If you want to create a Serverless Tier cluster with an additional quota, you can edit the spend limit on the cluster creation page. For more information, see [Create a TiDB cluster](/tidb-cloud/create-tidb-cluster.md#step-4-create-a-tidb-cluster).
+
+After creating a Serverless Tier, you can still check and edit the spend limit on your cluster overview page. For more information, see [Manage Spend Limit for Serverless Tier Clusters](manage-serverless-spend-limit.md#manage-spend-limit-for-serverless-tier-clusters).
 
 ### User name prefix
 

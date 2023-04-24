@@ -80,11 +80,13 @@ To create a Serverless Tier cluster, take the following steps:
 
 4. The cloud provider of Serverless Tier is AWS. You can select an AWS region where you want to host your cluster.
 
-5. Update the default cluster name if necessary, and then click **Create**.
+5. (Optional) Change the spend limit if you plan to use more storage and compute resources than the free quota. If you have not added a payment method, you will need to add a credit card after editing the limit.
+
+6. Update the default cluster name if necessary, and then click **Create**.
 
     The cluster creation process starts and your TiDB Cloud cluster will be created in approximately 30 seconds.
 
-6. After the cluster is created, follow the instructions in [Connect via Standard Connection](/tidb-cloud/connect-via-standard-connection.md#serverless-tier) to create a password for your cluster.
+7. After the cluster is created, follow the instructions in [Connect via Standard Connection](/tidb-cloud/connect-via-standard-connection.md#serverless-tier) to create a password for your cluster.
 
     > **Note:**
     >
