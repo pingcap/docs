@@ -33,7 +33,7 @@ Serverless Tier is in beta while we continuously add new features and improve ex
 
 For each TiDB Cloud account, you can create a maximum of five complimentary Serverless Tier clusters during the beta phase.
 
-Some of TiDB Cloud features are partially supported or not supported on Serverless Tier. See [Serverless Tier Limitations](/tidb-cloud/serverless-tier-limitations.md) for details.
+Some of TiDB Cloud features are partially supported or not supported on Serverless Tier. See [Serverless Tier Limitations and Quotas](/tidb-cloud/serverless-tier-limitations.md) for details.
 
 ### What can Serverless Tier be used for?
 
