@@ -91,7 +91,7 @@ This document lists the features supported in different TiDB versions, including
 | Advanced SQL features | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | [Prepared statement cache](/sql-prepared-plan-cache.md) | Y | Y | Y | Y | Y | E | E | E | E |
-| [Non-prepared statement cache](/sql-non-prepared-plan-cache.md) | E | N | N | N | N | N | N | N | N |
+| [Non-prepared statement cache](/sql-non-prepared-plan-cache.md) | Y | N | N | N | N | N | N | N | N |
 | [SQL plan management (SPM)](/sql-plan-management.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Create bindings according to historical execution plans](/sql-plan-management.md#create-a-binding-according-to-a-historical-execution-plan) | Y | E | N | N | N | N | N | N | N |
 | [Coprocessor cache](/coprocessor-cache.md) | Y | Y | Y | Y | Y | Y | Y | Y | E |
@@ -194,7 +194,7 @@ This document lists the features supported in different TiDB versions, including
 | [Fast Importer (TiDB Lightning)](/tidb-lightning/tidb-lightning-overview.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | mydumper logical dumper | Deprecated | Deprecated | Deprecated | Deprecated | Deprecated | Deprecated | Deprecated | Deprecated | Deprecated |
 | [Dumpling logical dumper](/dumpling-overview.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [Transactional `LOAD DATA`](/sql-statements/sql-statement-load-data.md) | E [^5] | Y | Y | Y | Y | Y | Y | Y | N [^6] |
+| [Transactional `LOAD DATA`](/sql-statements/sql-statement-load-data.md) | Y [^5] | Y | Y | Y | Y | Y | Y | Y | N [^6] |
 | [Database migration toolkit (DM)](/migration-overview.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Change data capture (CDC)](/ticdc/ticdc-overview.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y |
@@ -232,7 +232,7 @@ This document lists the features supported in different TiDB versions, including
 | [Global memory control](/configure-memory-usage.md#configure-the-memory-usage-threshold-of-a-tidb-server-instance) | Y | Y | N | N | N | N | N | N | N |
 | [Cross-cluster RawKV replication](/tikv-configuration-file.md#api-version-new-in-v610) | E | E | N | N | N | N | N | N | N |
 | [Green GC](/system-variables.md#tidb_gc_scan_lock_mode-new-in-v50) | E | E | E | E | E | E | E | E | N |
-| [Resource control](/tidb-resource-control.md) | E | N | N | N | N | N | N | N | N |
+| [Resource control](/tidb-resource-control.md) | Y | N | N | N | N | N | N | N | N |
 | [TiFlash Disaggregated Storage and Compute Architecture and S3 Support](/tiflash/tiflash-disaggregated-and-s3.md) | E | N | N | N | N | N | N | N | N |
 
 [^1]: TiDB incorrectly treats latin1 as a subset of utf8. See [TiDB #18955](https://github.com/pingcap/tidb/issues/18955) for more details.
@@ -243,6 +243,6 @@ This document lists the features supported in different TiDB versions, including
 
 [^4]: Starting from [v6.4.0](/releases/release-6.4.0.md), TiDB supports [high-performance and globally monotonic `AUTO_INCREMENT` columns](/auto-increment.md#mysql-compatibility-mode)
 
-[^5]: For [TiDB v7.1.0](/releases/release-7.0.0.md), integrating with TiDB Lightning Physical Import Mode and supporting import concurrencyare are experimental features.
+[^5]: For [TiDB v7.1.0](/releases/release-7.1.0.md), supporting import concurrency and integrating with TiDB Lightning Physical Import Mode are experimental features.
 
 [^6]: For TiDB v4.0, the `LOAD DATA` transaction does not guarantee atomicity.
