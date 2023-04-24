@@ -80,6 +80,7 @@ TiFlash disaggregated storage and compute architecture is suitable for cost-effe
     ```
 3. Make sure that there are no TiFlash nodes in the TiDB cluster. If any, set the TiFlash replica count of all tables to `0` and then remove all TiFlash nodes. For example:
 
+
     ```sql
     SELECT * FROM INFORMATION_SCHEMA.TIFLASH_REPLICA; # Query all tables with TiFlash replicas
     ALTER TABLE table_name SET TIFLASH REPLICA 0;     # Set the TiFlash replica count of all tables to `0`
