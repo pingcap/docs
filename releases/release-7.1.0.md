@@ -173,8 +173,6 @@ In v7.1.0, the key new features and improvements are as follows:
     * Partial statistics details in the `Stats` field of [`slow-queries`](/identify-slow-queries.md).
 
   For more information, see [Use `PLAN REPLAYER` to save and restore the on-site information of a cluster](/sql-plan-replayer.md), [`EXPLAIN` walkthrough](/explain-walkthrough.md), and [Identify slow queries](/identify-slow-queries.md).
-
-
 ### Security
 
 * Replace the interface used for querying TiFlash system table information [#6941](https://github.com/pingcap/tiflash/issues/6941) @[flowbehappy](https://github.com/flowbehappy) **tw:qiancai**
@@ -252,8 +250,8 @@ In v7.1.0, the key new features and improvements are as follows:
 
 + TiFlash
 
-    - Improves TiFlash performance and stability in the disaggregated storage and compute architecture [#6882](https://github.com/pingcap/tiflash/issues/6882)  @[JaySon-Huang](https://github.com/JaySon-Huang) @[breezewish](https://github.com/breezewish) @[JinheLin](https://github.com/JinheLin) **tw:qiancai**
-    - note [#issue](链接) @[贡献者 GitHub ID](链接)
+    - Improve TiFlash performance and stability in the disaggregated storage and compute architecture [#6882](https://github.com/pingcap/tiflash/issues/6882)  @[JaySon-Huang](https://github.com/JaySon-Huang) @[breezewish](https://github.com/breezewish) @[JinheLin](https://github.com/JinheLin) **tw:qiancai**
+    - Support optimizing query performance in Semi Join or Anti Semi Join by selecting the smaller table as the build side of to improve query performance [#7280](https://github.com/pingcap/tiflash/issues/7280) @[yibin87](https://github.com/yibin87)
 
 + Tools
 
