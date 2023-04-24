@@ -74,13 +74,13 @@ To create a Serverless Tier cluster, take the following steps:
 
 3. On the **Create Cluster** page, **Serverless** is selected by default.
 
-    > **Note:**
-    >
-    > For each TiDB Cloud account, you can create a maximum of five complimentary Serverless Tier clusters. After the limit is reached, **Dedicated** is selected by default.
-
 4. The cloud provider of Serverless Tier is AWS. You can select an AWS region where you want to host your cluster.
 
-5. (Optional) Change the spend limit if you plan to use more storage and compute resources than the free quota. If you have not added a payment method, you will need to add a credit card after editing the limit.
+5. (Optional) Change the spend limit if you plan to use more storage and compute resources than the [free quota](/tidb-cloud/select-cluster-tier.md#usage-quota). If you have not added a payment method, you need to add a credit card after editing the limit.
+
+    > **Note:**
+    >
+    > For each organization in TiDB Cloud, you can create a maximum of five Serverless Tier clusters by default. To create more Serverless Tier clusters, you need to add a credit card and set a [spend limit](/tidb-cloud/tidb-cloud-glossary.md#spend-limit) for the usage.
 
 6. Update the default cluster name if necessary, and then click **Create**.
 

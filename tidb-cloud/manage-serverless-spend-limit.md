@@ -9,13 +9,19 @@ summary: Learn how to manage spend limit for your Serverless Tier clusters.
 >
 > The spend limit is only applicable to Serverless Tier clusters. For Dedicated Tier clusters, TiDB Cloud charges according to the resources that you consume.
 
+Spend limit refers to the maximum amount of money that you are willing to spend on a particular workload in a month. It is a cost-control mechanism that allows you to set a budget for your Serverless Tier clusters.
+
+For each organization in TiDB Cloud, you can create a maximum of five Serverless Tier clusters by default. To create more Serverless Tier clusters, you need to add a credit card and set a spend limit for the usage. But if you delete some of your previous clusters before creating more, the new cluster can still be created without a credit card.
+
 For each Serverless Tier cluster, TiDB Cloud provides a free usage quota as follows:
 
 - Row storage: 5 GiB
 - Column storage: 5 GiB
-- Request Units (RU): 50 MB per month
+- [Request Units](/tidb-cloud/tidb-cloud-glossary.md#request-unit) (RUs): 50 million RUs per month
 
-Once the free quota limit of a cluster is reached, the cluster will be throttled to 100 RU/s until you get more usage quota or the current usage is reset after the next month.
+Once the free quota of a cluster is reached, the read and write operation on this cluster will be throttled until you get more usage quota or the current usage is reset after the next month.
+
+To learn more about the RU consumption of different resources (including read, write, SQL CPU, and network egress), the pricing details, and the throttled information, see [TiDB Cloud Serverless Tier Pricing Details](https://www.pingcap.com/tidb-cloud-serverless-pricing-details).
 
 If you want to create a Serverless Tier cluster with an additional quota, you can edit the spend limit on the cluster creation page. For more information, see [Create a TiDB cluster](/tidb-cloud/create-tidb-cluster.md#step-4-create-a-tidb-cluster).
 

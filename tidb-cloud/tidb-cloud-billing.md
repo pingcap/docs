@@ -7,9 +7,12 @@ summary: Learn about TiDB Cloud billing.
 
 > **Note:**
 >
-> [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) are free until May 30, 2023, with a 0% discount on usage. After that, usage beyond the free quota will be charged.
+> [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) are free until May 30, 2023, with a 0% discount on usage. After that, usage beyond the [free quota](/tidb-cloud/select-cluster-tier.md#usage-quota) will be charged.
 
-TiDB Cloud charges according to the resources that you consume. You can visit [TiDB Cloud Pricing Details](https://en.pingcap.com/tidb-cloud-pricing-details/) to get more information.
+TiDB Cloud charges according to the resources that you consume. You can visit the following pages to get more information about the pricing.
+
+- [TiDB Cloud Serverless Tier Pricing Details](https://www.pingcap.com/tidb-cloud-serverless-pricing-details)
+- [TiDB Cloud Dedicated Tier Pricing Details](https://en.pingcap.com/tidb-cloud-pricing-details/)
 
 ## Invoices
 
