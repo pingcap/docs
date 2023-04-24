@@ -138,6 +138,17 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 - Data type: `BOOLEAN`
 - This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
 
+<<<<<<< HEAD
+=======
+> **Note:**
+>
+> `tiup cluster check` also supports repairing the `scale-out.yml` file for an existing cluster with the following command format:
+>
+>```shell
+> tiup cluster check <cluster-name> scale-out.yml --cluster --apply --user root [-p] [-i /home/root/.ssh/gcp_rsa]
+>```
+
+>>>>>>> d4713e770 (tiup: fix the scale-out yaml example (#13327))
 ### --cluster
 
 - Indicates that the check is for the deployed clusters.
@@ -146,6 +157,7 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 
 > **Note:**
 >
+<<<<<<< HEAD
 > tiup-cluster supports checking both un-deployed clusters and deployed clusters with the following command format:
 > 
 > ```shell
@@ -153,6 +165,14 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 > ```
 > 
 > If the `tiup cluster check <cluster-name>` command is used, you must add the `--cluster` option: `tiup cluster check <cluster-name> --cluster`.
+=======
+> - If the `tiup cluster check <cluster-name>` command is used, you must add the `--cluster` option: `tiup cluster check <cluster-name> --cluster`.
+> - `tiup cluster check` also supports checking the `scale-out.yml` file for an existing cluster with the following command format:
+>
+>   ```shell
+>   tiup cluster check <cluster-name> scale-out.yml --cluster --user root [-p] [-i /home/root/.ssh/gcp_rsa]
+>   ```
+>>>>>>> d4713e770 (tiup: fix the scale-out yaml example (#13327))
 
 ### -N, --node
 
