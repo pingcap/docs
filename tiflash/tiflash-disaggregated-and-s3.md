@@ -78,6 +78,7 @@ TiFlash disaggregated storage and compute architecture is suitable for cost-effe
         }
     }
     ```
+
 3. Make sure that there are no TiFlash nodes in the TiDB cluster. If any, set the TiFlash replica count of all tables to `0` and then remove all TiFlash nodes. For example:
 
 
