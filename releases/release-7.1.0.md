@@ -53,13 +53,13 @@ In v7.1.0, the key new features and improvements are as follows:
 
 ### Reliability
 
-* Resource Control GA [#38825](https://github.com/pingcap/tidb/issues/38825) @[nolouch](https://github.com/nolouch) @[BornChanger](https://github.com/BornChanger) @[glorv](https://github.com/glorv) @[tiancaiamao](https://github.com/tiancaiamao) @[Connor1996](https://github.com/Connor1996) @[JmPotato](https://github.com/JmPotato) @[hnes](https://github.com/hnes) @[CabinfeverB](https://github.com/CabinfeverB) @[HuSharp](https://github.com/HuSharp) **tw:hfxsd**
+* Resource Control becomes generally available (GA) [#38825](https://github.com/pingcap/tidb/issues/38825) @[nolouch](https://github.com/nolouch) @[BornChanger](https://github.com/BornChanger) @[glorv](https://github.com/glorv) @[tiancaiamao](https://github.com/tiancaiamao) @[Connor1996](https://github.com/Connor1996) @[JmPotato](https://github.com/JmPotato) @[hnes](https://github.com/hnes) @[CabinfeverB](https://github.com/CabinfeverB) @[HuSharp](https://github.com/HuSharp) **tw:hfxsd**
 
-    TiDB enhances the resource control feature based on resource groups. This feature becomes GA in v7.1.0. This feature significantly improves the resource utilization efficiency and performance of TiDB clusters. The introduction of the resource control feature is a milestone for TiDB. You can divide a distributed database cluster into multiple logical units, map different database users to corresponding resource groups, and set the quota for each resource group as needed. When the cluster resources are limited, all resources used by sessions in the same resource group are limited to the quota. In this way, even if a resource group is over-consumed, the sessions in other resource groups are not affected. 
+    TiDB enhances the resource control feature based on resource groups, which becomes GA in v7.1.0. This feature significantly improves the resource utilization efficiency and performance of TiDB clusters. The introduction of the resource control feature is a milestone for TiDB. You can divide a distributed database cluster into multiple logical units, map different database users to corresponding resource groups, and set the quota for each resource group as needed. When the cluster resources are limited, all resources used by sessions in the same resource group are limited to the quota. In this way, even if a resource group is over-consumed, the sessions in other resource groups are not affected. 
 
     With this feature, you can combine multiple small and medium-sized applications from different systems into a single TiDB cluster. When the workload of an application grows larger, it does not affect the normal operation of other applications. When the system workload is low, busy applications can still be allocated the required system resources even if they exceed the set read and write quotas, which can achieve the maximum utilization of resources. In addition, the rational use of the resource control feature can reduce the number of clusters, ease the difficulty of operation and maintenance, and save management costs.
 
-    In TiDB v7.1.0, this feature adds the ability to estimate system capacity based on actual workload and hardware deployment. The estimation ability provides you with a more accurate reference for capacity planning and assists you in better managing TiDB resource allocation to meet the stability needs of enterprise-class scenarios.    
+    In TiDB v7.1.0, this feature introduces the ability to estimate system capacity based on actual workload or hardware deployment. The estimation ability provides you with a more accurate reference for capacity planning and assists you in better managing TiDB resource allocation to meet the stability needs of enterprise-level scenarios.    
 
     For more information, see [documentation](/tidb-resource-control.md).
 
@@ -75,11 +75,11 @@ In v7.1.0, the key new features and improvements are as follows:
 
     For more information, see [documentation](/br/br-checkpoint-restore.md).
 
-* Optimize the policy of loading statistical information cache [#42160](https://github.com/pingcap/tidb/issues/42160) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes) **tw:hfxsd**
+* Optimize the strategy of loading statistics [#42160](https://github.com/pingcap/tidb/issues/42160) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes) **tw:hfxsd**
 
-    By enabling [synchronous loading of statistics](/statistics.md#load-statistics), you can significantly reduce the number of statistics that must be loaded upon startup and improve the speed of loading statistics. This feature increases the stability of TiDB in complex runtime environments and reduces the impact of individual TiDB node restart on the overall service.
+    Enabling synchronous loading of statistics can significantly reduce the number of statistics that must be loaded during startup, thus improving the speed of loading statistics. This feature increases the stability of TiDB in complex runtime environments and reduces the impact of individual TiDB nodes restart on the overall service.
 
-    For more information, see [documentation](/statistics.md#load-statistics)。
+    For more information, see [documentation](/statistics.md#load-statistics).
 
 ### Availability
 
@@ -115,17 +115,17 @@ In v7.1.0, the key new features and improvements are as follows:
 
 * Some `LOAD DATA` features become GA [#40499](https://github.com/pingcap/tidb/issues/40499) @[lance6716](https://github.com/lance6716) **tw:hfxsd**
 
-    The following `LOAD DATA` features become GA in TiDB v7.1.0:
+    In TiDB v7.1.0, the following `LOAD DATA` features become GA:
 
-    - Support importing data from SCS and GCS.
+    - Support importing data from S3 or GCS.
     - Support importing data from Parquet files.
-    - Support parsing the following character sets in the source file: `ascii`, `latin1`, `binary`, `gbk`, `utf8mbd`. 
-    - Support setting `FIELDS DEFINED NULL BY` to convert the specified value of the source file to `NULL` for writing to the target table.
-    - Support setting 1 `bath_size` which is the number of rows inserted into the target table by 1 batch to improve write performance.
+    - Support parsing the following character sets in the source file: `ascii`, `latin1`, `binary`, `gbk`, and `utf8mbd`. 
+    - Support setting `FIELDS DEFINED NULL BY` to convert the specified value in the source file to `NULL` for writing to the target table.
+    - Support setting `bath_size` which specifies the number of rows inserted into the target table per batch, to improve write performance.
     - Support setting `detached` to allow the job to run in the background.
     - Support using `SHOW LOAD DATA` and `DROP LOAD DATA` to manage jobs.
 
-    For more information, see [documentation](/sql-statements/sql-statement-load-data.md).
+  For more information, see [documentation](/sql-statements/sql-statement-load-data.md).
 
 * `LOAD DATA` integrates with TiDB Lightning Physical Import Mode to improve import performance (experimental) [#42930](https://github.com/pingcap/tidb/issues/42930) @[D3Hunter](https://github.com/D3Hunter) **tw:hfxsd**
 
@@ -135,7 +135,7 @@ In v7.1.0, the key new features and improvements are as follows:
 
 * `LOAD DATA` supports concurrent data import to improve import performance (experimental) [#40499](https://github.com/pingcap/tidb/issues/40499) @[lance6716](https://github.com/lance6716) **tw:hfxsd**
 
-    Previously, `LOAD DATA` did not support concurrent data import, so the performance was not as good as expected. In TiDB v7.1.0, you can set the parameter `WITH thread=<number>` for concurrent import, which can improve the performance of import by increasing concurrency. In the lab environment, the logical import performance of the test workload is nearly 4 times better than the previous version.
+    Before v7.1.0, `LOAD DATA` does not support concurrent data import, which limits its performance. Starting from TiDB v7.1.0, `LOAD DATA` supports concurrent data import. To enhance import performance, you can increase the concurrency using `WITH thread=<number>`. In internal tests, the logical import performance of the test workload is nearly four times better than that in v7.0.0.
 
     For more information, see [documentation](/sql-statements/sql-statement-load-data.md).
 
@@ -164,15 +164,15 @@ In v7.1.0, the key new features and improvements are as follows:
 
 ### Observability
 
-* Add optimizer diagnostics information [#43122](https://github.com/pingcap/tidb/issues/43122) @[time-and-fate](https://github.com/time-and-fate) **tw:hfxsd**
+* Enhance optimizer diagnostic information [#43122](https://github.com/pingcap/tidb/issues/43122) @[time-and-fate](https://github.com/time-and-fate) **tw:hfxsd**
 
-    Having sufficient information is key to SQL performance diagnostics. In v7.1.0, TiDB continues to add optimizer operation information to various diagnostic tools that can better explain how execution plans are selected. Such information can assist in troubleshooting SQL performance issues. The information includes:
+    Obtaining sufficient information is the key to SQL performance diagnostics. In v7.1.0, TiDB continues to add optimizer runtime information to various diagnostic tools, providing better insights into how execution plans are selected and assisting in troubleshooting SQL performance issues. The new information includes:
 
-    * In the output of [`PLAN REPLAYER`](/sql-plan-replayer.md), add `debug_trace.json`.
-    * In the output of [`EXPLAIN`](/explain-walkthrough.md), add partial details of the statistics for `operator info`.
-    * In the `Stats` field of [`slow-queries`](/identify-slow-queries.md), add partial statistics details.
+    * `debug_trace.json` in the output of [`PLAN REPLAYER`](/sql-plan-replayer.md).
+    * Partial statistics details for `operator info` in the output of [`EXPLAIN`](/explain-walkthrough.md).
+    * Partial statistics details in the `Stats` field of [`slow-queries`](/identify-slow-queries.md).
 
-  For more information, see [Use PLAN REPLAYER to Save and Restore the On-Site Information of a Cluster](/sql-plan-replayer.md), [EXPLAIN Walkthrough](/explain-walkthrough.md) and [Identify Slow Queries](/identify-slow-queries.md).
+  For more information, see [Use `PLAN REPLAYER` to save and restore the on-site information of a cluster](/sql-plan-replayer.md), [`EXPLAIN` walkthrough](/explain-walkthrough.md), and [Identify slow queries](/identify-slow-queries.md).
 
 
 ### Security
@@ -201,7 +201,7 @@ In v7.1.0, the key new features and improvements are as follows:
 
     If you have upgraded TiFlash to v7.1.0, then during the TiDB upgrade to v7.1.0, TiDB cannot read the TiFlash system tables ([`INFORMATION_SCHEMA.TIFLASH_TABLES`](/information-schema/information- schema-tiflash-tables.md) and [`INFORMATION_SCHEMA.TIFLASH_SEGMENTS`](/information-schema/information-schema-tiflash-segments.md)).
 
-* In the return value of [`SHOW LOAD DATA`](/sql-statements/sql-statement-show-load-data.md), the parameter `Loaded_File_Size` is deprecated and replaced with the parameter `Imported_Rows` **tw:hfxsd**
+* In the outputs of [`SHOW LOAD DATA`](/sql-statements/sql-statement-show-load-data.md), the `Loaded_File_Size` parameter is deprecated and replaced with the `Imported_Rows` parameter. **tw:hfxsd**
 
 ### System variables
 
