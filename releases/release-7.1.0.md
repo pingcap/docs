@@ -59,7 +59,7 @@ In v7.1.0, the key new features and improvements are as follows:
 
     With this feature, you can combine multiple small and medium-sized applications from different systems into a single TiDB cluster. When the workload of an application grows larger, it does not affect the normal operation of other applications. When the system workload is low, busy applications can still be allocated the required system resources even if they exceed the set read and write quotas, which can achieve the maximum utilization of resources. In addition, the rational use of the resource control feature can reduce the number of clusters, ease the difficulty of operation and maintenance, and save management costs.
 
-    In TiDB v7.1.0, this feature adds the ability to estimate system capacity caps based on actual workload and hardware deployment. The estimation ability provides you with a more accurate reference for capacity planning and assists you in better managing TiDB resource allocation to meet the stability needs of enterprise-class scenarios.    
+    In TiDB v7.1.0, this feature adds the ability to estimate system capacity based on actual workload and hardware deployment. The estimation ability provides you with a more accurate reference for capacity planning and assists you in better managing TiDB resource allocation to meet the stability needs of enterprise-class scenarios.    
 
     For more information, see [documentation](/tidb-resource-control.md).
 
