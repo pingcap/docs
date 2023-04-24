@@ -182,8 +182,10 @@ mysql> SELECT * FROM t1;
 ### datadir
 
 - Scope: NONE
-- Default value: ${ip_address:port}
-- A value in the format of `ip_address:port` indicates the PD server that TiDB connects to on startup.
+- Default value: it depends on the component and the deployment method.
+    - `/tmp/tidb` when you setting `unistore` for [`--store`](/command-line-flags-for-tidb-configuration.md#store)
+    - <ip>:<port>,... when you using TiUP or Operator to deploy TiDB
+- This variable indicates the location where data is stored. This location can be a local path `/tmp/tidb` , or point to a PD server if the data is stored on TiKV. A value in the format of `ip_address:port` indicates the PD server that TiDB connects to on startup.
 
 ### ddl_slow_threshold
 
