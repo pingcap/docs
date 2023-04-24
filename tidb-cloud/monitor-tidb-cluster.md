@@ -15,7 +15,7 @@ You can see the current status of each running cluster on the cluster page.
 
 | Cluster status | Description |
 |:--|:--|
-| **Available** | The cluster is Healthy and available. |
+| **Available** | The cluster is healthy and available. |
 | **Creating** | The cluster is being created. The cluster is inaccessible while it is being created. |
 | **Importing** | Importing data into the cluster. |
 | **Maintaining** | The cluster is in maintenance. |
