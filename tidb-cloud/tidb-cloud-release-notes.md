@@ -47,7 +47,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
     - Support automatically migrating existing connections to new TiDB nodes when you scale out TiDB nodes.
     - Support automatically migrating existing connections to available TiDB nodes when you scale in TiDB nodes.
 
-    Currently, this feature is provided for all Dedicated Tier clusters hosted on AWS.
+  Currently, this feature is provided for all Dedicated Tier clusters hosted on AWS.
 
 **Console changes**
 
