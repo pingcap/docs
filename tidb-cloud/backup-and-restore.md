@@ -27,6 +27,8 @@ This document describes how to back up and restore your TiDB cluster data on TiD
 
 ## Backup
 
+You can back up data for both [Serverless Tier](#serverless-tier) and [Dedicated Tier](#dedicated-tier).
+
 ### Serverless Tier
 
 Automatic backups are scheduled for your Serverless Tier clusters according to the backup setting, which can reduce your loss in extreme disaster situations.
@@ -45,7 +47,7 @@ By the automatic backup, you can back up the Serverless Tier cluster data every 
 
     - In **Backup Retention**, configure the minimum backup data retention period.
 
-        The backup retention period must be set within a range of 7 to 90 days in order to be considered valid.
+        The backup retention period must be set within a range of 7 to 90 days.
 
 3. Click **Confirm**.
 
@@ -153,7 +155,7 @@ To delete a running backup job, it is similar as [**Delete backup files**](#dele
 
 ### Serverless Tier
 
-TiDB Cloud's Serverless Tier only supports in-place restoration. To restore your Serverless Tier cluster from a backup, please follow the steps given below:
+TiDB Cloud's Serverless Tier only supports in-place restoration. To restore your Serverless Tier cluster from a backup, follow these steps:
 
 1. Navigate to the **Backup** tab of a cluster.
 
