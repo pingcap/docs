@@ -49,10 +49,10 @@ The following sections illustrate the metrics on the Monitoring page for Dedicat
 | Metric name  | Labels | Description                                   |
 | :------------| :------| :-------------------------------------------- |
 | Average Idle Connection Duration | avg-in-txn, avg-not-in-txn | The connection idle duration indicates the duration of a connection being idle.<br/> avg-in-txn: The average connection idle duration when a connection is within a transaction. <br/>avg-not-in-txn: The average connection idle duration when a connection is not within a transaction. |
-| Get Token Duration | avg, 99 | The average time or the 99th percentile of duration consumed in getting tokens of SQL statements. |
-| Parse Duration | avg, 99 | The average time or the 99th percentile of duration consumed in parsing SQL statements. |
-| Compile Duration | avg, 99 | The average time or the 99th percentile of duration consumed in compiling the parsed SQL AST to execution plans. |
-| Execute Duration | avg, 99 | The average time or the 99th percentile of duration consumed in executing execution plans of SQL statements. |
+| Get Token Duration | avg, 99 | The average or the 99th percentile duration consumed in getting tokens of SQL statements. |
+| Parse Duration | avg, 99 | The average or the 99th percentile duration consumed in parsing SQL statements. |
+| Compile Duration | avg, 99 | The average or the 99th percentile duration consumed in compiling the parsed SQL AST to execution plans. |
+| Execute Duration | avg, 99 | The average or the 99th percentile duration consumed in executing execution plans of SQL statements. |
 | Average TiDB KV Request Duration | Get, Prewirite, Commit, and PessimisticLock | The average time consumed in executing KV requests in all TiDB instances based on request types, including `Get`, `Prewrite`, and `Commit`. |
 | Average TiKV gRPC Duration | kv_get, kv_prewirite, kv_commit, and kv_pessimisticLock | The average time consumed in executing gRPC requests in all TiKV instances based on request types, including `kv_get`, `kv_prewrite`, and `kv_commit`. |
 | Average / P99 PD TSO Wait/RPC Duration | wait-avg/99, rpc-avg/99 | Wait: the average time or the 99th percentile of duration in waiting for PD to return TSO in all TiDB instances. <br/> RPC: the average time or the 99th percentile of duration from sending TSO requests to PD to receiving TSO in all TiDB instances. |
