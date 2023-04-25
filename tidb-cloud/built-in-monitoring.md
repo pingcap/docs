@@ -53,8 +53,8 @@ The following sections illustrate the metrics on the Monitoring page for Dedicat
 | Parse Duration | avg, 99 | The average or the 99th percentile duration consumed in parsing SQL statements. |
 | Compile Duration | avg, 99 | The average or the 99th percentile duration consumed in compiling the parsed SQL AST to execution plans. |
 | Execute Duration | avg, 99 | The average or the 99th percentile duration consumed in executing execution plans of SQL statements. |
-| Average TiDB KV Request Duration | Get, Prewirite, Commit, and PessimisticLock | The average time consumed in executing KV requests in all TiDB instances based on request types, including `Get`, `Prewrite`, and `Commit`. |
-| Average TiKV gRPC Duration | kv_get, kv_prewirite, kv_commit, and kv_pessimisticLock | The average time consumed in executing gRPC requests in all TiKV instances based on request types, including `kv_get`, `kv_prewrite`, and `kv_commit`. |
+| Average TiDB KV Request Duration | {Request Type} | The average time consumed in executing KV requests in all TiDB instances based on request types, e.g. `Get`, `Prewrite`, and `Commit`. |
+| Average TiKV gRPC Duration | {Request Type} | The average time consumed in executing gRPC requests in all TiKV instances based on request types, e.g. `kv_get`, `kv_prewrite`, and `kv_commit`. |
 | Average / P99 PD TSO Wait/RPC Duration | wait-avg/99, rpc-avg/99 | Wait: the average or the 99th percentile duration in waiting for PD to return TSO in all TiDB instances. <br/> RPC: the average time or the 99th percentile of duration from sending TSO requests to PD to receiving TSO in all TiDB instances. |
 | Average / P99 Storage Async Write Duration | avg, 99 | The average or the 99th percentile duration consumed in asynchronous writing. Average storage async write duration = Average store duration + Average apply duration. |
 | Average / P99 Store Duration | avg, 99 | The average or the 99th percentile duration consumed in storing loop during asynchronous writing. |
