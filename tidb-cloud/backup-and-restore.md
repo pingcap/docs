@@ -11,13 +11,13 @@ This document describes how to back up and restore your TiDB cluster data on TiD
 ## Limitations
 
 ### Dedicated Tier
-- TiDB Cloud does not support restoring tables in the `mysql` schema, including user permissions and system variables. You can use [Dumpling and Lightning](https://docs.pingcap.com/tidb/dev/backup-and-restore-using-dumpling-lightning) to manually back up and restore these data.
+- TiDB Cloud does not support restoring tables in the `mysql` schema, including user permissions and system variables. You can use [Dumpling and Lightning](https://docs.pingcap.com/tidb/stable/backup-and-restore-using-dumpling-lightning) to manually back up and restore these data.
 - If you turn on and off PITR (Point-in-time Recovery) multiple times, you can only choose a time point within the recoverable range after the most recent PITR is enabled. The earlier recoverable range is not accessible.
 
 ### Serverless Tier
-- It is important to note that Serverless Tier clusters only support in-place restoring from backups. When a restore is performed, tables in the `mysql` schema are also impacted, hence any changes made in user credentials and permissions or system variables will be rolled back to the state when the backup was taken.
-- Manual backup is not yet supported at this time.
-- PITR(Point-in-time Recovery) is not yet supported at this time.
+- It is important to note that Serverless Tier clusters only support in-place restoring from backups. When a restore is performed, tables in the `mysql` schema are also impacted. Hence, any changes made to user credentials and permissions or system variables will be rolled back to the state when the backup was taken.
+- Manual backup is not yet supported.
+- PITR (Point-in-time Recovery) is not yet supported.
 - The cluster will be unavailable during the restore process and existing connection will be cutoff. You can establish new connections once the restore is complete.
 - If TiFlash replica is enabled, it will be unavailable for a while after restore because data needs to be rebuilt.
 
@@ -160,7 +160,7 @@ TiDB Cloud's Serverless Tier only supports in-place restoration. To restore your
     1. Choose a backup from the **Backup Time** drop-down list.
     2. Click **Confirm** to begin the restoration process.
 
-   After initiating the restore process, the cluster status changes to **Restoring**. The cluster will be unavailable during the restore process and existing connection will be cutoff. Once the restore process completes successfully, you can access the cluster detail page.
+   After initiating the restore process, the cluster status changes to **Restoring**. The cluster will be unavailable during the restore process and existing connections will be terminated. Once the restore process completes successfully, you can access the cluster as usual.
 
 ### Dedicated Tier
 
