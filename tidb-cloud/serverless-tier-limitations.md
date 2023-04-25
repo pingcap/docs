@@ -51,7 +51,7 @@ We are constantly filling in the feature gaps between Serverless Tier and Dedica
 * [Changefeed](/tidb-cloud/changefeed-overview.md) is not supported for Serverless Tier currently.
 * [Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md) is not supported for Serverless Tier currently.
 
-## Usage quotas
+## Usage quota
 
 For each organization in TiDB Cloud, you can create a maximum of five Serverless Tier clusters by default. To create more Serverless Tier clusters, you need to add a credit card and set a [spend limit](/tidb-cloud/tidb-cloud-glossary.md#spend-limit) for the usage.
 

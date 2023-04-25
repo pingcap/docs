@@ -13,6 +13,8 @@ Spend limit refers to the maximum amount of money that you are willing to spend 
 
 For each organization in TiDB Cloud, you can create a maximum of five Serverless Tier clusters by default. To create more Serverless Tier clusters, you need to add a credit card and set a spend limit for the usage. But if you delete some of your previous clusters before creating more, the new cluster can still be created without a credit card.
 
+## Usage quota
+
 For each Serverless Tier cluster, TiDB Cloud provides a free usage quota as follows:
 
 - Row storage: 5 GiB
@@ -24,6 +26,8 @@ Once the free quota of a cluster is reached, the read and write operations on th
 To learn more about the RU consumption of different resources (including read, write, SQL CPU, and network egress), the pricing details, and the throttled information, see [TiDB Cloud Serverless Tier Pricing Details](https://www.pingcap.com/tidb-cloud-serverless-pricing-details).
 
 If you want to create a Serverless Tier cluster with an additional quota, you can edit the spend limit on the cluster creation page. For more information, see [Create a TiDB cluster](/tidb-cloud/create-tidb-cluster.md#step-4-create-a-tidb-cluster).
+
+## Update spend limit
 
 After creating a Serverless Tier, you can still check and edit the spend limit on your cluster overview page as follows:
 
