@@ -31,8 +31,6 @@ TiDB developers contribute to new feature development, performance improvement, 
 - [tidb-incubator/TiBigData](https://github.com/tidb-incubator/TiBigData/graphs/contributors)
 - [ti-community-infra](https://github.com/orgs/ti-community-infra/people)
 
-For the full list of contributors, see [SIG | TiDB DevGroup](https://contributor.tidb.io/sig).
-
 ## Writers and translators for TiDB documentation
 
 Writers and translators write and translate documents for TiDB and the related projects. The following is the list of contributors in TiDB documentation related repos:
@@ -40,5 +38,4 @@ Writers and translators write and translate documents for TiDB and the related p
 - [pingcap/docs-cn](https://github.com/pingcap/docs-cn/graphs/contributors)
 - [pingcap/docs](https://github.com/pingcap/docs/graphs/contributors)
 - [pingcap/docs-tidb-operator](https://github.com/pingcap/docs-tidb-operator/graphs/contributors)
-- [pingcap/docs-dm](https://github.com/pingcap/docs-dm/graphs/contributors)
 - [tikv/website](https://github.com/tikv/website/graphs/contributors)
