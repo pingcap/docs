@@ -359,7 +359,7 @@ Multi-valued index is an experimental feature. It has some known compatibility i
 
 <CustomContent platform="tidb-cloud">
 
-- The [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) statement and TiDB Lightning do not support importing data into tables with multi-valued indexes.
+- The `LOAD DATA` statement and TiDB Lightning do not support importing data into tables with multi-valued indexes.
 - DM and TiCDC do not support migrating or replicating tables with multi-valued indexes.
 - sync-diff-inspector does not support validating data for tables with multi-valued indexes.
 
