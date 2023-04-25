@@ -147,6 +147,7 @@ The console audit logs record various user activities on the TiDB Cloud console 
 | BindSupportPlan | Bind a support plan |
 | CancelSupportPlan | Cancel a support plan |
 | UpdateOrganizationName | Update the organization name |
+| SetSpendLimit | Edit the spend limit |
 
 ## Console audit log fields
 
