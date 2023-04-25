@@ -30,8 +30,6 @@ TiDB developers contribute to new feature development, performance improvement, 
 - [tidb-incubator/TiBigData](https://github.com/tidb-incubator/TiBigData/graphs/contributors)
 - [ti-community-infra](https://github.com/orgs/ti-community-infra/people)
 
-For the full list of contributors, see [SIG | TiDB DevGroup](https://contributor.tidb.io/sig).
-
 ## Writers and translators for TiDB documentation
 
 Writers and translators write and translate documents for TiDB and the related projects. The following is the list of contributors in TiDB documentation related repos:
