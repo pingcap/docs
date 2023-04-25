@@ -33,7 +33,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     A maintenance window is a designated timeframe during which planned maintenance activities, such as operating system updates, security patches, and infrastructure upgrades, are performed automatically to ensure the reliability, security, and performance of the TiDB Cloud service.
 
-    During a maintenance window, although temporary connection disruptions or QPS fluctuations might occur, the clusters remain available, and SQL operations, the existing data import, backup, restore, migration, and replication tasks can still run normally. See [a list of allowed and disallowed operations](/tidb-cloud/configure-maintenance-window.md#allowed-and-disallowed-operations-during-a-maintenance-window) during maintenance.
+    During a maintenance window, temporary connection disruptions or QPS fluctuations might occur, but the clusters remain available, and SQL operations, the existing data import, backup, restore, migration, and replication tasks can still run normally. See [a list of allowed and disallowed operations](/tidb-cloud/configure-maintenance-window.md#allowed-and-disallowed-operations-during-a-maintenance-window) during maintenance.
 
     We will strive to minimize the frequency of maintenance. If a maintenance window is planned, the default start time is 03:00 Wednesday (based on the time zone of your TiDB Cloud organization) of the target week. To avoid potential disruptions, it is important to be aware of the maintenance schedules and plan your operations accordingly.
 
