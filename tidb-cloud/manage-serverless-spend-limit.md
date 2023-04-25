@@ -20,7 +20,7 @@ For each Serverless Tier cluster, TiDB Cloud provides a free usage quota as foll
 - Row storage: 5 GiB
 - [Request Units](/tidb-cloud/tidb-cloud-glossary.md#request-unit) (RUs): 50 million RUs per month
 
-Once the free quota of a cluster is reached, the read and write operations on this cluster will be throttled until you get more usage quota or the current usage is reset after the next month.
+Once the free quota of a cluster is reached, the read and write operations on this cluster will be throttled until you get more usage quota or the current usage is reset after the next month. For example, once the storage exceeds 5 GiB, the maximum size limit of a single transaction is reduced from 10 MiB to 1 MiB.
 
 To learn more about the RU consumption of different resources (including read, write, SQL CPU, and network egress), the pricing details, and the throttled information, see [TiDB Cloud Serverless Tier Pricing Details](https://www.pingcap.com/tidb-cloud-serverless-pricing-details).
 
