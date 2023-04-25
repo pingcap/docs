@@ -12,7 +12,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- TiDB Cloud provides a free usage quota for each Serverless Tier cluster as follows:
+- For the first five Serverless Tier clusters in your organization, TiDB Cloud provides a free usage quota for each of them as follows:
 
     - Row storage: 5 GiB
     - [Request Units](/tidb-cloud/tidb-cloud-glossary.md#request-unit) (RUs): 50 million RUs per month
