@@ -180,7 +180,7 @@ When TiDB is adding an index, the phase of backfilling data will cause read and 
 
 - `ADMIN PAUSE DDL JOBS job_id [, job_id]`: Used to pause the DDL tasks that are being executed. After the command is executed, the SQL statement that executes the DDL task is displayed as being executed, and the background task is paused.
 
-    You can pause only DDL tasks that are in progress or still in queue. Otherwise, the `Job 3 can't be paused now` error is shown in the `RESULT` column.
+    You can pause only DDL tasks that are in progress or still in the queue. Otherwise, the `Job 3 can't be paused now` error is shown in the `RESULT` column.
 
 - `ADMIN RESUME DDL JOBS job_id [, job_id]`: Used to resume the DDL tasks that have been paused. After the command is executed, the SQL statement that executes the DDL task is displayed as being executed, and the background task is resumed.
 
