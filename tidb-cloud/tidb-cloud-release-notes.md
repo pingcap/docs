@@ -40,7 +40,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
     - To keep you informed, TiDB Cloud will send you three email notifications for every maintenance window: one before, one starting, and one after the maintenance tasks.
     - To minimize the maintenance impact, you can modify the maintenance start time to your preferred time or defer maintenance activities on the **Maintenance** page.
 
-    For more information, see [Configure Maintenance Window](tidb-cloud/configure-maintenance-window.md).
+  For more information, see [Configure maintenance window](tidb-cloud/configure-maintenance-window.md).
 
 - Improve load balancing of TiDB and reduce connection drops when you scale TiDB nodes of [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters hosted on AWS.
 
