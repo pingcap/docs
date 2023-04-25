@@ -20,10 +20,15 @@ This document describes how to back up and restore your TiDB cluster data on TiD
 > For [Serverless Tier Clusters](/tidb-cloud/select-cluster-tier.md#dedicated-tier)
 >
 > - It is important to note that Serverless Tier clusters only support in-place restoring from backups. When a restore is performed, tables in the `mysql` schema are also impacted, hence any changes made in user credentials and permissions or system variables will be rolled back to the state when the backup was taken.
-> - Manual backup is not yet supported at this time.
-> - PITR(Point-in-time Recovery) is not yet supported at this time.
-> - The cluster will be unavailable during the restore process and existing connections will be cutoff. You can rebuild connections once the restore is completed.
-> - If TiFlash replica is enabled, it will be unavailable for a while after restore because data needs to be rebuilt.
+
+## Limitations
+
+## Serverless Tier
+
+- Manual backup is not yet supported at this time.
+- PITR(Point-in-time Recovery) is not yet supported at this time.
+- The cluster will be unavailable during the restore process and existing connection will be cutoff. You can establish new connections once the restore is complete.
+- If TiFlash replica is enabled, it will be unavailable for a while after restore because data needs to be rebuilt.
 
 ## Backup
 
@@ -164,7 +169,7 @@ TiDB Cloud's Serverless Tier only supports in-place restoration. To restore your
     1. Choose a backup from the **Backup Time** drop-down list.
     2. Click **Confirm** to begin the restoration process.
 
-   After initiating the restore process, the cluster status changes to **Restoring**. Once the restore process completes successfully, you can access the cluster detail page.
+   After initiating the restore process, the cluster status changes to **Restoring**. The cluster will be unavailable during the restore process and existing connection will be cutoff. Once the restore process completes successfully, you can access the cluster detail page.
 
 ### Dedicated Tier
 
@@ -243,3 +248,4 @@ To restore a deleted cluster from recycle bin, take the following steps:
 > **Note:**
 >
 > You cannot restore a deleted cluster to any point in time. You can only select an automatic or manual backup to restore.
+
