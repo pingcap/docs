@@ -33,7 +33,7 @@ Automatic backups are scheduled for your Serverless Tier clusters according to t
 
 By the automatic backup, you can back up the Serverless Tier cluster data every day at the backup time you have set. To set the backup time, perform the following steps:
 
-1. Navigate to the **Backup** tab of a Serverless Tier cluster.
+1. Navigate to the **Backup** page of a Serverless Tier cluster.
 
 2. Click **Backup Settings**. This will open the **Backup Settings** window, where you can configure the automatic backup settings according to your requirements.
 
@@ -65,7 +65,7 @@ Automatic backups are scheduled for your Dedicated Tier clusters according to th
 
 By the automatic backup, you can back up the Dedicated Tier cluster data every day at the backup time you have set. To set the backup time, perform the following steps:
 
-1. Navigate to the **Backup** tab of a Dedicated Tier cluster.
+1. Navigate to the **Backup** page of a Dedicated Tier cluster.
 
 2. Click **Backup Settings**. The setting window displays.
 
@@ -151,9 +151,9 @@ To delete a running backup job, it is similar as [**Delete backup files**](#dele
 
 ### Serverless Tier
 
-TiDB Cloud's Serverless Tier only supports in-place restoration. To restore your Serverless Tier cluster from a backup, follow these steps:
+TiDB Cloud Serverless Tier only supports in-place restoration. To restore your Serverless Tier cluster from a backup, follow these steps:
 
-1. Navigate to the **Backup** tab of a cluster.
+1. Navigate to the **Backup** page of a cluster.
 
 2. Click **Restore**. This will open the **Restore** window.
 
