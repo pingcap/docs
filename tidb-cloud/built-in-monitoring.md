@@ -57,8 +57,8 @@ The following sections illustrate the metrics on the Monitoring page for Dedicat
 | Average TiKV gRPC Duration | kv_get, kv_prewirite, kv_commit, and kv_pessimisticLock | The average time consumed in executing gRPC requests in all TiKV instances based on request types, including `kv_get`, `kv_prewrite`, and `kv_commit`. |
 | Average / P99 PD TSO Wait/RPC Duration | wait-avg/99, rpc-avg/99 | Wait: the average time or the 99th percentile of duration in waiting for PD to return TSO in all TiDB instances. <br/> RPC: the average time or the 99th percentile of duration from sending TSO requests to PD to receiving TSO in all TiDB instances. |
 | Average / P99 Storage Async Write Duration | avg, 99 | The average time or the 99th percentile of duration consumed in asynchronous writing. Average storage async write duration = Average store duration + Average apply duration. |
-| Average / P99 Store Duration | avg, 99 | The average time or the 99th percentile of duration consumed in storing loop during asynchronously writing. |
-| Average / P99 Apply Duration | avg, 99 | The average time or the 99th percentile of duration consumed in applying loop during asynchronously writing. |
+| Average / P99 Store Duration | avg, 99 | The average time or the 99th percentile of duration consumed in storing loop during asynchronous writing. |
+| Average / P99 Apply Duration | avg, 99 | The average time or the 99th percentile of duration consumed in applying loop during asynchronous writing. |
 | Average / P99 Append Log Duration | avg, 99 | The average time or the 99th percentile of duration consumed by Raft to append logs. |
 | Average / P99 Commit Log Duration | avg, 99 | The average time or the 99th percentile of duration consumed by Raft to commit logs. |
 | Average / P99 Apply Log Duration | avg, 99 | The average time or the 99th percentile of duration consumed by Raft to apply logs. |
