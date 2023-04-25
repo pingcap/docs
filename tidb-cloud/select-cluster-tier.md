@@ -17,7 +17,20 @@ TiDB Cloud provides the following two options of cluster tiers. Before creating 
 
 The TiDB Cloud Serverless Tier (previously called Developer Tier) is a fully managed service of TiDB. It's still in beta and should not be used in production. However, you can use Serverless Tier clusters for non-production workloads such as prototype applications, hackathons, academic courses, or to provide a temporary data service for your datasets.
 
-For each TiDB Cloud account, you can create a maximum of five complimentary Serverless Tier clusters to use during the beta phase.
+### Usage quota
+
+For each organization in TiDB Cloud, you can create a maximum of five Serverless Tier clusters by default. To create more Serverless Tier clusters, you need to add a credit card and set a [spend limit](/tidb-cloud/tidb-cloud-glossary.md#spend-limit) for the usage.
+
+For the first five Serverless Tier clusters in your organization, TiDB Cloud provides a free usage quota for each of them as follows:
+
+- Row storage: 5 GiB
+- [Request Units](/tidb-cloud/tidb-cloud-glossary.md#request-unit) (RUs): 50 million RUs per month
+
+A Request Unit (RU) is a unit of measure used to represent the amount of resources consumed by a single request to the database. The amount of RUs consumed by a request depends on various factors, such as the operation type or the amount of data being retrieved or modified.
+
+Once the free quota of a cluster is reached, the read and write operations on this cluster will be throttled until you [increase the quota](/tidb-cloud/manage-serverless-spend-limit.md#update-spend-limit) or the usage is reset upon the start of a new month. For example, when the storage of a cluster exceeds 5 GiB, the maximum size limit of a single transaction is reduced from 10 MiB to 1 MiB.
+
+To learn more about the RU consumption of different resources (including read, write, SQL CPU, and network egress), the pricing details, and the throttled information, see [TiDB Cloud Serverless Tier Pricing Details](https://www.pingcap.com/tidb-cloud-serverless-pricing-details).
 
 ### User name prefix
 

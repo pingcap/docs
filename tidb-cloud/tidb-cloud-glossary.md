@@ -127,6 +127,16 @@ A separate database that can be located in the same or different region and cont
 
 The replication of changefeed is charged according to the computing resources, which is the TiCDC replication capacity unit.
 
+### Request Unit
+
+A Request Unit (RU) is a unit of measure used to represent the amount of resources consumed by a single request to the database. The amount of RUs consumed by a request depends on various factors, such as the operation type or the amount of data being retrieved or modified. For more information, see [TiDB Cloud Serverless Tier Pricing Details](https://www.pingcap.com/tidb-cloud-serverless-pricing-details).
+
+## S
+
+### Spend limit
+
+Spend limit refers to the maximum amount of money that you are willing to spend on a particular workload in a month. It is a cost-control mechanism that allows you to set a budget for your Serverless Tier clusters. When the spend limit of a cluster is greater than 0, the cluster is considered a paid cluster. Also, the paid cluster can have a free quota if it meets the qualifications. The paid cluster with a free quota will consume the free quota first.
+
 ## T
 
 ### TiDB cluster

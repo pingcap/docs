@@ -21,21 +21,19 @@ Get started with the 5-minute [TiDB Cloud Quick Start](/tidb-cloud/tidb-cloud-qu
 
 ### Is Serverless Tier free during beta?
 
-Yes. Serverless Tier is free to use during the beta phase. In the coming months, we intend to offer a usage-based billing plan for additional resources and higher performance, while still keeping offering the free starter plan.
+Until May 30, 2023, Serverless Tier clusters are still free, with a 100% discount off. After that, usage beyond the free quota will be charged. Once the free quota of a cluster is reached, the read and write operations on this cluster will be throttled until you [increase the quota](/tidb-cloud/manage-serverless-spend-limit.md#update-spend-limit) or the usage is reset upon the start of a new month.
+
+For more information, see [Serverless Tier usage quota](/tidb-cloud/select-cluster-tier.md#usage-quota).
 
 ### What does it mean for beta release?
 
 Serverless Tier is in beta while we continuously add new features and improve existing features before it becomes generally available. We do not provide SLA for beta products. Therefore, Serverless Tier should **NOT** be used in production currently.
 
-### What are the limitations of a Serverless Tier cluster in free beta?
+### What are the limitations of a Serverless Tier cluster in beta?
 
-- For each TiDB Cloud account, you can create a maximum of five complimentary Serverless Tier clusters during the beta phase.
-- Each Serverless Tier cluster has the following limitations:
-    - The storage size is limited to 5 GiB (logical size) of OLTP storage and 5 GiB of OLAP storage.
-    - The compute resource is limited to 1 vCPU and 1 GiB RAM.
-    - The total size of a single transaction is set to no more than 10 MB on Serverless Tier during the beta phase.
-    - **Note**: In the coming months, we intend to offer a usage-based billing plan for additional resources and higher performance, while still keeping offering the free starter plan. In the coming releases, the limitations of the free Serverless Tier might be changed.
-- Some of TiDB Cloud features are partially supported or not supported on Serverless Tier. See [Serverless Tier Limitations](/tidb-cloud/serverless-tier-limitations.md) for details.
+For each organization in TiDB Cloud, you can create a maximum of five Serverless Tier clusters by default. To create more Serverless Tier clusters, you need to add a credit card and set a [spend limit](/tidb-cloud/tidb-cloud-glossary.md#spend-limit) for the usage.
+
+Some of TiDB Cloud features are partially supported or not supported on Serverless Tier. See [Serverless Tier Limitations and Quotas](/tidb-cloud/serverless-tier-limitations.md) for details.
 
 ### What can Serverless Tier be used for?
 
@@ -43,7 +41,7 @@ You can use your Serverless Tier cluster for non-production workloads such as pr
 
 ### I created a Developer Tier cluster before Serverless Tier was available. Can I still use my cluster?
 
-Yes, your free Developer Tier cluster will be automatically migrated to the Serverless Tier cluster soon. Your ability to use your cluster should not be affected, and you will have the same improved Serverless Tier user experiences.
+Yes, your Developer Tier cluster will be automatically migrated to the Serverless Tier cluster soon. Your ability to use your cluster should not be affected, and you will have the same improved Serverless Tier user experiences.
 
 ## Security FAQs
 
