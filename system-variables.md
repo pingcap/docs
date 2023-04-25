@@ -3685,6 +3685,18 @@ SHOW WARNINGS;
 
 - It is intended to be used by logical dump/restore tools to ensure that tables can always be created even if invalid placement rules are assigned. This is similar to how mysqldump writes `SET FOREIGN_KEY_CHECKS=0;` to the start of every dump file.
 
+### `tidb_plan_cache_invalidation_on_fresh_stats` <span class="version-mark">从 v7.1.0 版本开始引入</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `ON`
+- This variable controls whether to invalidate the plan cache automatically when statistics on related tables are updated.
+- After enabling this variable, plan cache can make use of statistics more sufficiently to generate the execution plan. For example:
+    - Sometimes execution plans are generated before statistics are available for the plan cache. After enabling this variable, plan cache will re-generate the execution plan after the statistics are available.
+    - Sometimes the changes in data distribution of a table make the previously optimal execution plan become non-optimal. After enabling this variable, plan cache will re-generate the execution plan after the statistics are re-collected.
+- This variable is disabled by default for TiDB clusters that are upgraded from versions earlier than v7.1.0 to v7.1.0 or later versions.
+
 ### `tidb_plan_cache_max_plan_size` <span class="version-mark">New in v7.1.0</span>
 
 - Scope: SESSION | GLOBAL
