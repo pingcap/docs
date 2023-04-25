@@ -32,10 +32,6 @@ We are constantly filling in the feature gaps between Serverless Tier and Dedica
 - Only [Standard Connection](/tidb-cloud/connect-via-standard-connection.md) can be used. You cannot use [Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections.md) or [VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md) to connect to Serverless Tier clusters. 
 - No "IP Access List" support.
 
-### Backup and Restore
-
-- [Backup and Restore](/tidb-cloud/backup-and-restore.md) are not supported for Serverless Tier currently.
-
 ### Monitoring
 
 - [Third-party Monitoring integrations](/tidb-cloud/third-party-monitoring-integrations.md) are currently not available for Serverless Tier.
