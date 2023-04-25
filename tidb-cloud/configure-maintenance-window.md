@@ -13,8 +13,7 @@ By configuring the maintenance window, you can easily schedule and manage mainte
 
 > **Note:**
 >
-> - The maintenance window feature is only available for [Dedicated Tier clusters](/tidb-cloud/select-cluster-tier.md#dedicated-tier).
-> - If a TiDB Dedicated Tier cluster has only one TiDB node, it might be unavailable for a few minutes during maintenance.
+> The maintenance window feature is only available for [Dedicated Tier clusters](/tidb-cloud/select-cluster-tier.md#dedicated-tier).
 
 ## Allowed and disallowed operations during a maintenance window
 
