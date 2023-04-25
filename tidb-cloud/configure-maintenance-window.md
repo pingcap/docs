@@ -26,7 +26,7 @@ During a maintenance window, some operations are allowed, while some are not.
     - Delete clusters
     - Create backup tasks
     - Restore clusters
-    - Access cluster pages  
+    - Access cluster pages
 
 - Disallowed operations:
 
@@ -50,7 +50,7 @@ For every maintenance window, TiDB Cloud sends three email notifications to all 
 
 Regular maintenance ensures that essential updates are performed to safeguard TiDB Cloud from security threats, performance issues, and unreliability. Therefore, the maintenance window is enabled by default and cannot be disabled.
 
-Maintenance usually occurs once every few months. If a maintenance window is planned for a week, the default start time of the window is 03:00 Wednesday (based on the time zone of your TiDB Cloud organization). 
+If a maintenance window is planned, the default start time of the window is 03:00 Wednesday (based on the time zone of your TiDB Cloud organization) of the target week.
 
 You can modify the start time to your preferred time or defer maintenance activities until the deadline as follows:
 
@@ -79,10 +79,6 @@ You can modify the start time to your preferred time or defer maintenance activi
 - What are maintenance activities?
 
     Maintenance activities typically include operating system updates, security patches, and infrastructure upgrades.
-
-- How often does maintenance occur?
-
-    Maintenance is infrequent, usually occurring once every few months. The maintenance activities will be displayed on the **Maintenance** page several days before the scheduled time and you will receive an email notification 72 hours in advance, allowing you to make necessary preparations.
 
 - Can I disable a maintenance window?
 
