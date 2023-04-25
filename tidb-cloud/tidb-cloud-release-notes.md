@@ -12,12 +12,12 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- For the first five Serverless Tier clusters in your organization, TiDB Cloud provides a free usage quota for each of them as follows:
+- For the first five [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters in your organization, TiDB Cloud provides a free usage quota for each of them as follows:
 
     - Row storage: 5 GiB
     - [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit): 50 million RUs per month
 
-    Until May 30, 2023, Serverless Tier clusters are still free, with a 100% discount off. After that, usage beyond the free quota will be charged.
+  Until May 30, 2023, Serverless Tier clusters are still free, with a 100% discount off. After that, usage beyond the free quota will be charged.
 
     You can easily [monitor your cluster usage or increase your usage quota](/tidb-cloud/manage-serverless-spend-limit.md#manage-spend-limit-for-serverless-tier-clusters) in the **Usage This Month** area of your cluster **Overview** page. Once the free quota of a cluster is reached, the read and write operations on this cluster will be throttled until you increase the quota or the usage is reset upon the start of a new month.
 
