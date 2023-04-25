@@ -9,7 +9,7 @@ summary: Learn how to connect TiDB Cloud to 5000+ Apps with Zapier.
 
 Using the [TiDB Cloud app](https://zapier.com/apps/tidb-cloud/integrations) on Zapier enables you to:
 
-- Use TiDB, a MySQL-compatible HTAP database, for free. No need to build locally.
+- Use TiDB, a MySQL-compatible HTAP database. No need to build locally.
 - Make it easier to manage your TiDB Cloud.
 - Connect TiDB Cloud to 5000+ apps and automate your workflows.
 
@@ -161,7 +161,7 @@ The following table lists the actions supported by TiDB Cloud App. Note that som
 | Action | Description | Resource |
 |---|---|---|
 | Find Cluster | Finds an existing Serverless tier or Dedicated tier. | None |
-| Create Cluster | Creates a new cluster. Only supports creating a free Serverless Tier cluster. | None |
+| Create Cluster | Creates a new cluster. Only supports creating a Serverless Tier cluster. | None |
 | Find Database | Finds an existing database. | A Serverless Tier cluster |
 | Create Database | Creates a new database. | A Serverless Tier cluster |
 | Find Table | Finds an existing Table. | A Serverless Tier cluster and a database |

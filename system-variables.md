@@ -180,10 +180,25 @@ mysql> SELECT * FROM t1;
 
 ### datadir
 
+<CustomContent platform="tidb">
+
 - Scope: NONE
-- Default value: /tmp/tidb
-- This variable indicates the location where data is stored. This location can be a local path or point to a PD server if the data is stored on TiKV.
-- A value in the format of `ip_address:port` indicates the PD server that TiDB connects to on startup.
+- Default value: it depends on the component and the deployment method.
+    - `/tmp/tidb`: when you set `"unistore"` for [`--store`](/command-line-flags-for-tidb-configuration.md#--store) or if you don't set `--store`.
+    - `${pd-ip}:${pd-port}`: when you use TiKV, which is the default storage engine for TiUP and TiDB Operator for Kubernetes deployments.
+- This variable indicates the location where data is stored. This location can be a local path `/tmp/tidb`, or point to a PD server if the data is stored on TiKV. A value in the format of `${pd-ip}:${pd-port}` indicates the PD server that TiDB connects to on startup.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- Scope: NONE
+- Default value: it depends on the component and the deployment method.
+    - `/tmp/tidb`: when you set `"unistore"` for [`--store`](https://docs.pingcap.com/tidb/stable/command-line-flags-for-tidb-configuration#--store) or if you don't set `--store`.
+    - `${pd-ip}:${pd-port}`: when you use TiKV, which is the default storage engine for TiUP and TiDB Operator for Kubernetes deployments.
+- This variable indicates the location where data is stored. This location can be a local path `/tmp/tidb`, or point to a PD server if the data is stored on TiKV. A value in the format of `${pd-ip}:${pd-port}` indicates the PD server that TiDB connects to on startup.
+
+</CustomContent>
 
 ### ddl_slow_threshold
 
@@ -1683,6 +1698,14 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
     - If the TiDB version before the upgrade is earlier than v6.1.0, the default value of this variable after the upgrade is `ON`.
     - If the TiDB version before the upgrade is v6.1.0 or later, the default value of the variable after the upgrade follows the value before the upgrade.
+
+### `tidb_enable_inl_join_inner_multi_pattern` <span class="version-mark">New in v6.5.2</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `OFF`
+- This variable controls whether Index Join is supported when the inner table has `Selection` or `Projection` operators on it. The default value `OFF` means that Index Join is not supported in this scenario.
 
 ### tidb_enable_ordered_result_mode
 

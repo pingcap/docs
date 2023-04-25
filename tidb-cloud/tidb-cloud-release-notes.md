@@ -8,6 +8,62 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2023.
 
+## April 18, 2023
+
+**General changes**
+
+- Support scaling up or down [Data Migration job specifications](/tidb-cloud/tidb-cloud-billing-dm.md#specifications-for-data-migration) for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters.
+
+    With this feature, you can improve migration performance by scaling up specifications or reduce costs by scaling down specifications.
+
+    For more information, see [Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md#scale-a-migration-job-specification).
+
+**Console changes**
+
+- Revamp the UI to make [cluster creation](https://tidbcloud.com/console/clusters/create-cluster) experience more user-friendly, enabling you to create and configure clusters with just a few clicks.
+
+    The new design focuses on simplicity, reducing visual clutter, and providing clear instructions. After clicking **Create** on the cluster creation page, you will be directed to the cluster overview page without having to wait for the cluster creation to be completed.
+
+    For more information, see [Create a cluster](/tidb-cloud/create-tidb-cluster.md).
+
+- Introduce the **Discounts** tab on the **Billing** page to show the discount information for organization owners and billing administrators.
+
+    For more information, see [Discounts](/tidb-cloud/tidb-cloud-billing.md#discounts).
+
+## April 11, 2023
+
+**General changes**
+
+- Improve the load balance of TiDB and reduce connection drops when you scale TiDB nodes of [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters hosted on AWS.
+
+    - Support automatically migrating existing connections to new TiDB nodes when you scale out TiDB nodes.
+    - Support automatically migrating existing connections to available TiDB nodes when you scale in TiDB nodes.
+
+  Currently, this feature is only provided for Dedicated Tier clusters that are hosted on the AWS `Oregon (us-west-2)` region.
+
+- Support the [New Relic](https://newrelic.com/) integration for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters.
+
+    With the New Relic integration, you can configure TiDB Cloud to send metric data of your TiDB clusters to [New Relic](https://newrelic.com/). Then, you can monitor and analyze both your application performance and your TiDB database performance on [New Relic](https://newrelic.com/). This feature can help you quickly identify and troubleshoot potential issues and reduce the resolution time.
+
+    For integration steps and available metrics, see [Integrate TiDB Cloud with New Relic](/tidb-cloud/monitor-new-relic-integration.md).
+
+- Add the following [changefeed](/tidb-cloud/changefeed-overview.md) metrics to the Prometheus integration for Dedicated Tier clusters.
+
+    - `tidbcloud_changefeed_latency`
+    - `tidbcloud_changefeed_replica_rows`
+
+    If you have [integrated TiDB Cloud with Prometheus](/tidb-cloud/monitor-prometheus-and-grafana-integration.md), you can monitor the performance and health of changefeeds in real time using these metrics. Additionally, you can easily create alerts to monitor the metrics using Prometheus.
+
+**Console changes**
+
+- Update the [Monitoring](/tidb-cloud/built-in-monitoring.md#view-the-monitoring-page) page for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters to use [node-level resource metrics](/tidb-cloud/built-in-monitoring.md#server).
+
+    With node-level resource metrics, you can see a more accurate representation of resource consumption to better understand the actual usage of purchased services.
+
+    To access these metrics, navigate to the [Monitoring](/tidb-cloud/built-in-monitoring.md#view-the-monitoring-page) page of your cluster, and then check the **Server** category under the **Metrics** tab.
+
+- Optimize the [Billing](/tidb-cloud/tidb-cloud-billing.md#billing-details) page by reorganizing the billing items in **Summary by Project** and **Summary by Service**, which makes the billing information clearer.
+
 ## April 4, 2023
 
 **General changes**
