@@ -18,7 +18,6 @@ For each organization in TiDB Cloud, you can create a maximum of five Serverless
 For each Serverless Tier cluster, TiDB Cloud provides a free usage quota as follows:
 
 - Row storage: 5 GiB
-- Column storage: 5 GiB
 - [Request Units](/tidb-cloud/tidb-cloud-glossary.md#request-unit) (RUs): 50 million RUs per month
 
 Once the free quota of a cluster is reached, the read and write operations on this cluster will be throttled until you get more usage quota or the current usage is reset after the next month.
