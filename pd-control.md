@@ -333,12 +333,10 @@ Usage:
 
 - `store-limit-mode` is used to control the mode of limiting the store speed. The optional modes are `auto` and `manual`. In `auto` mode, the stores are automatically balanced according to the load (deprecated).
 
-- `store-limit-version` controls the version of the store limit controller formula. The value options are `v1` and `v2`, the version `v1` of the formula is the default value. If using `v2`, user don't need to care about the store limit value of some store to speed up the scale-out/in progress, because the limit has been auto adjusted through the snapshot executing details(experimental).
-    
-    {{< copyable "" >}}
+- `store-limit-version` controls the version of the store limit formula. In v1 mode, you can manually modify the `store limit` to limit the scheduling speed of a single TiKV. The v2 mode is an experimental feature. In v2 mode, you do not need to manually set the `store limit` value, as PD dynamically adjusted based on the capability of TiKV snapshots. For more details, refer to [Principles of store limit v2](/configure-store-limit.md#principles-of-store-limit-v2).
     
     ```bash
-    config set store-limit-version v2       // using v2 strategy for store limit
+    config set store-limit-version v2       // using store limit v2
     ```
 
 - PD rounds the lowest digits of the flow number, which reduces the update of statistics caused by the changes of the Region flow information. This configuration item is used to specify the number of lowest digits to round for the Region flow information. For example, the flow `100512` will be rounded to `101000` because the default value is `3`. This configuration replaces `trace-region-flow`.

@@ -68,6 +68,8 @@ store limit 1 5 add-peer            // store 1 can at most add 5 peers per minut
 store limit 1 5 remove-peer         // store 1 can at most delete 5 peers per minute.
 ```
 
-### Store limit v2 strategy 
-If using `v2`, the limit of operators follower the ability of the tikv. The faster tikv handling snapshot task, the more the operator sending to this snapshot. User don't need to care about how to set the store limit to speed up the scale-out/in progress. 
-The most potential reason to limit the scale-out/in progress is the speed of tikv sending snapshot, user can modify the tikv snapshot config(`snap_io_max_bytes_per_sec`) to control the IO bandwidth.
+### Principles of store limit v2
+
+When [`store-limit-version`](/pd-configuration-file.md#store-limit-version-new-in-v710) is set to `v2`, store limit v2 takes effect. In v2 mode, the limit of operators are dynamically adjusted based on the capability of TiKV snapshots. When TiKV has fewer pending tasks, PD increases its scheduling tasks. Otherwise, PD reduces the scheduling tasks for the node. Therefore, you do not need to manually set `store limit` to speed up the scheduling process.
+
+In v2 mode, the execution speed of TiKV becomes the main bottleneck during migration. You can check whether the current scheduling speed has reached the upper limit through the **TiKV DeTails** > **Snapshot** > **Snapshot Speed** panel. To increase or decrease the scheduling speed of a node, you can adjust the TiKV snapshot limit ([`snap-io-max-bytes-per-sec`](/tikv-configuration-file.md#snap-io-max-bytes-per-sec)).

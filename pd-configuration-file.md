@@ -354,10 +354,17 @@ Configuration items related to scheduling
 >
 > If you have upgraded your cluster from a TiDB 4.0 version to the current version, the new formula version is automatically disabled by default to ensure consistent PD behavior before and after the upgrading. If you want to change the formula version, you need to manually switch through the `pd-ctl` setting. For details, refer to [PD Control](/pd-control.md#config-show--set-option-value--placement-rules).
 
-### `store-limit-version` <span class="version-mark">New in v7.1</span>
+### `store-limit-version` <span class="version-mark">New in v7.1.0</span>
+
+> **Warning:**
+>
+> Setting this configuration item to `"v2"` is an experimental feature. It is not recommended to use it in production environments.
+
 + Controls the version of the store limit formula
 + Default value: `v1`
-+ Optional values: `v1` and `v2`. Compared to v1, the changes in v2 is more smart, and the `store limit` will be auto adjusted by the snapshot excuting details.
++ Value options:
+    + `v1`: In v1 mode, you can manually modify the `store limit` to limit the scheduling speed of a single TiKV.
+    + `v2`: (experimental feature) In v2 mode, you do not need to manually set the `store limit` value, as PD dynamically adjusted based on the capability of TiKV snapshots. For more details, refer to [Principles of store limit v2](/configure-store-limit.md#principles-of-store-limit-v2).
 
 ### `enable-joint-consensus` <span class="version-mark">New in v5.0</span>
 
