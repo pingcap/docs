@@ -13,9 +13,38 @@ TiDB version: 7.1.0 (upcoming)
 
 In v7.1.0, the key new features and improvements are as follows:
 
-## Feature details
+<table>
+<thead>
+  <tr>
+    <th>Category</th>
+    <th>Feature</th>
+    <th>Description</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td rowspan="2">Scalability and Performance</td>
+    <td>Session level non-prepared plan cache (GA)</td>
+    <td>Support automatically reusing plan cache at the session level to reduce compilation and shorten the query time for the same SQL patterns without manually setting prepare statements in advance.</td>
+  </tr>
+  <tr>
+    <td>Load-based replica read</td>
+    <td>In a read hotspot scenario, TiDB can redirect read requests from the hotspot TiKV node to its replicas. This feature efficiently scatters read hotspots and optimizes the use of cluster resources. To control the threshold for triggering load-based replica read, you can adjust the system variable <code>tidb_load_based_replica_read_threshold</code>.</td>
+  </tr>
+  <tr>
+    <td rowspan="2">SQL</td>
+    <td>Multi-valued index (GA)</td>
+    <td>Support MySQL-compatible multi-valued indexes and enhance the JSON type to improve the compatibility with MySQL 8.0. This feature improves the efficiency of membership checks on multi-valued columns.</td>
+  </tr>
+  <tr>
+    <td>Generated columns (GA)</td>
+    <td>The value of a generated column is calculated by the SQL expression in the column definition in real time. This feature pushes some application logic to the database level, thus improving efficiency.
+    </td>
+  </tr>
+</tbody>
+</table>
 
-### Scalability
+## Feature details
 
 ### Performance
 
@@ -55,11 +84,11 @@ In v7.1.0, the key new features and improvements are as follows:
 
 * Resource Control becomes generally available (GA) [#38825](https://github.com/pingcap/tidb/issues/38825) @[nolouch](https://github.com/nolouch) @[BornChanger](https://github.com/BornChanger) @[glorv](https://github.com/glorv) @[tiancaiamao](https://github.com/tiancaiamao) @[Connor1996](https://github.com/Connor1996) @[JmPotato](https://github.com/JmPotato) @[hnes](https://github.com/hnes) @[CabinfeverB](https://github.com/CabinfeverB) @[HuSharp](https://github.com/HuSharp) **tw:hfxsd**
 
-    TiDB enhances the resource control feature based on resource groups, which becomes GA in v7.1.0. This feature significantly improves the resource utilization efficiency and performance of TiDB clusters. The introduction of the resource control feature is a milestone for TiDB. You can divide a distributed database cluster into multiple logical units, map different database users to corresponding resource groups, and set the quota for each resource group as needed. When the cluster resources are limited, all resources used by sessions in the same resource group are limited to the quota. In this way, even if a resource group is over-consumed, the sessions in other resource groups are not affected. 
+    TiDB enhances the resource control feature based on resource groups, which becomes GA in v7.1.0. This feature significantly improves the resource utilization efficiency and performance of TiDB clusters. The introduction of the resource control feature is a milestone for TiDB. You can divide a distributed database cluster into multiple logical units, map different database users to corresponding resource groups, and set the quota for each resource group as needed. When the cluster resources are limited, all resources used by sessions in the same resource group are limited to the quota. In this way, even if a resource group is over-consumed, the sessions in other resource groups are not affected.
 
     With this feature, you can combine multiple small and medium-sized applications from different systems into a single TiDB cluster. When the workload of an application grows larger, it does not affect the normal operation of other applications. When the system workload is low, busy applications can still be allocated the required system resources even if they exceed the set read and write quotas, which can achieve the maximum utilization of resources. In addition, the rational use of the resource control feature can reduce the number of clusters, ease the difficulty of operation and maintenance, and save management costs.
 
-    In TiDB v7.1.0, this feature introduces the ability to estimate system capacity based on actual workload or hardware deployment. The estimation ability provides you with a more accurate reference for capacity planning and assists you in better managing TiDB resource allocation to meet the stability needs of enterprise-level scenarios.    
+    In TiDB v7.1.0, this feature introduces the ability to estimate system capacity based on actual workload or hardware deployment. The estimation ability provides you with a more accurate reference for capacity planning and assists you in better managing TiDB resource allocation to meet the stability needs of enterprise-level scenarios.
 
     For more information, see [documentation](/tidb-resource-control.md).
 
@@ -80,8 +109,6 @@ In v7.1.0, the key new features and improvements are as follows:
     Enabling synchronous loading of statistics can significantly reduce the number of statistics that must be loaded during startup, thus improving the speed of loading statistics. This feature increases the stability of TiDB in complex runtime environments and reduces the impact of individual TiDB nodes restart on the overall service.
 
     For more information, see [documentation](/statistics.md#load-statistics).
-
-### Availability
 
 ### SQL
 
@@ -119,7 +146,7 @@ In v7.1.0, the key new features and improvements are as follows:
 
     - Support importing data from S3 or GCS.
     - Support importing data from Parquet files.
-    - Support parsing the following character sets in the source file: `ascii`, `latin1`, `binary`, `gbk`, and `utf8mbd`. 
+    - Support parsing the following character sets in the source file: `ascii`, `latin1`, `binary`, `gbk`, and `utf8mbd`.
     - Support setting `FIELDS DEFINED NULL BY` to convert the specified value in the source file to `NULL` for writing to the target table.
     - Support setting `bath_size` which specifies the number of rows inserted into the target table per batch, to improve write performance.
     - Support setting `detached` to allow the job to run in the background.
@@ -173,17 +200,12 @@ In v7.1.0, the key new features and improvements are as follows:
     * Partial statistics details in the `Stats` field of [`slow-queries`](/identify-slow-queries.md).
 
   For more information, see [Use `PLAN REPLAYER` to save and restore the on-site information of a cluster](/sql-plan-replayer.md), [`EXPLAIN` walkthrough](/explain-walkthrough.md), and [Identify slow queries](/identify-slow-queries.md).
+
 ### Security
 
 * Replace the interface used for querying TiFlash system table information [#6941](https://github.com/pingcap/tiflash/issues/6941) @[flowbehappy](https://github.com/flowbehappy) **tw:qiancai**
 
     Starting from v7.1.0, when providing the query service of [`INFORMATION_SCHEMA.TIFLASH_TABLES`](/information-schema/information-schema-tiflash-tables.md) and [`INFORMATION_SCHEMA.TIFLASH_SEGMENTS`](/information-schema/information-schema-tiflash-segments.md) system tables for TiDB, TiFlash uses the gRPC port instead of the HTTP port, which avoids the security risks of the HTTP service.
-
-### Data migration
-
-* TiCDC optimizes DDL replication operations [#8686](https://github.com/pingcap/tiflow/issues/8686) @[nongfushanquan](https://github.com/nongfushanquan) **tw:ran-huang**
-
-    Before v7.1.0, when you perform a DDL operation that affected all rows on a large table (such as adding or deleting a column), the replication latency of TiCDC would significantly increase. Starting from v7.1.0, TiCDC optimizes this replication operation and reduces the replication latency to less than 10 seconds. This optimization mitigates the impact of DDL operations on downstream latency.
 
 ## Compatibility changes
 
