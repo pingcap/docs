@@ -58,7 +58,7 @@ For each organization in TiDB Cloud, you can create a maximum of five Serverless
 For the first five Serverless Tier clusters in your organization, TiDB Cloud provides a free usage quota for each of them as follows:
 
 - Row storage: 5 GiB
-- [Request Units](/tidb-cloud/tidb-cloud-glossary.md#request-unit) (RUs): 50 million RUs per month
+- [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit): 50 million RUs per month
 
 The Request Unit (RU) is a unit of measurement used to track the resource consumption of a query or transaction. It is a metric that allows you to estimate the computational resources required to process a specific request in the database. The request unit is also the billing unit for TiDB Cloud Serverless service.
 
