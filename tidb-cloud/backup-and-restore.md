@@ -11,10 +11,12 @@ This document describes how to back up and restore your TiDB cluster data on TiD
 ## Limitations
 
 ### Dedicated Tier
+
 - TiDB Cloud does not support restoring tables in the `mysql` schema, including user permissions and system variables. You can use [Dumpling and Lightning](https://docs.pingcap.com/tidb/stable/backup-and-restore-using-dumpling-lightning) to manually back up and restore these data.
 - If you turn on and off PITR (Point-in-time Recovery) multiple times, you can only choose a time point within the recoverable range after the most recent PITR is enabled. The earlier recoverable range is not accessible.
 
 ### Serverless Tier
+
 - It is important to note that Serverless Tier clusters only support in-place restoring from backups. When a restore is performed, tables in the `mysql` schema are also impacted. Hence, any changes made to user credentials and permissions or system variables will be rolled back to the state when the backup was taken.
 - Manual backup is not yet supported.
 - PITR (Point-in-time Recovery) is not yet supported.
