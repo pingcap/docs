@@ -120,13 +120,14 @@ The following table illustrates the cluster-level main metrics under the **Clust
 
 | Metric name  | Labels | Description                                   |
 | :------------| :------| :-------------------------------------------- |
+| Request Units | RU per second | The Request Unit (RU) is a unit of measurement used to track the resource consumption of a query or transaction. In addition to queries that you run, Request Units can be consumed by background activities, so when the QPS is 0, the Request Units per second might not be zero. |
+| Used Storage Size | Row-based storage, Columnar storage | The size of the row store and the size of the column store. |
 | Query Per Second | All, {SQL type} | The number of SQL statements executed per second, which are collected by SQL types, such as `SELECT`, `INSERT`, and `UPDATE`. |
 | Average Query Duration | All, {SQL type} | The duration from receiving a request from the client to the Serverless Tier cluster until the cluster executes the request and returns the result to the client. |
 | Failed Query | All | The number of SQL statement execution errors per second. |
 | Transaction Per Second | All | The number of transactions executed per second. |
 | Average Transaction Duration | All | The average execution duration of transactions. |
 | Total Connection | All | The number of connections to the Serverless Tier cluster. |
-| Used Storage Size | Row-Storage, Column-Storage | The size of the row store and the size of the column store. |
 
 ### Database Status
 
