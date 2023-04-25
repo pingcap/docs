@@ -55,7 +55,7 @@ We are constantly filling in the feature gaps between Serverless Tier and Dedica
 
 For each organization in TiDB Cloud, you can create a maximum of five Serverless Tier clusters by default. To create more Serverless Tier clusters, you need to add a credit card and set a [spend limit](/tidb-cloud/tidb-cloud-glossary.md#spend-limit) for the usage.
 
-For each Serverless Tier cluster, TiDB Cloud provides a free usage quota as follows:
+For the first five Serverless Tier clusters in your organization, TiDB Cloud provides a free usage quota for each of them as follows:
 
 - Row storage: 5 GiB
 - [Request Units](/tidb-cloud/tidb-cloud-glossary.md#request-unit) (RUs): 50 million RUs per month
