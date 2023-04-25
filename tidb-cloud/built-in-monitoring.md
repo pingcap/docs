@@ -73,7 +73,7 @@ The following sections illustrate the metrics on the Monitoring page for Dedicat
 | TiKV Uptime | node | The runtime of each TiKV node since last restart. |
 | TiKV CPU Usage | node | The CPU usage statistics of each TiKV node. |
 | TiKV Memory Usage | node | The memory usage statistics of each TiKV node. |
-| TiKV IO Bps | node-write, node-read | The total Input/Output bytes per second of read and write in each TiKV node. |
+| TiKV IO Bps | node-write, node-read | The total input/output bytes per second of read and write in each TiKV node. |
 | TiKV Storage Usage | node | The storage usage statistics of each TiKV node. |
 | TiFlash Uptime | node | The runtime of each TiFlash node since last restart. |
 | TiFlash CPU Usage | node | The CPU usage statistics of each TiFlash node. |
