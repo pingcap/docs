@@ -21,7 +21,7 @@ Get started with the 5-minute [TiDB Cloud Quick Start](/tidb-cloud/tidb-cloud-qu
 
 ### Is Serverless Tier free during beta?
 
-Until May 30th, 2023, Serverless Tier clusters are still free, with a 0% discount on usage. Starting from June 1st, 2023, usage beyond the free quota will be charged. Once the free quota limit of a cluster is reached, access to the cluster will be restricted until you [get more usage quota](/tidb-cloud/manage-serverless-spend-limit.md#manage-spend-limit-for-serverless-tier-clusters).
+Until May 30th, 2023, Serverless Tier clusters are still free, with a 0% discount on usage. Starting from June 1st, 2023, usage beyond the free quota will be charged. Once the free quota of a cluster is reached, the read and write operation on this cluster will be throttled until you [get more usage quota](/tidb-cloud/manage-serverless-spend-limit.md#manage-spend-limit-for-serverless-tier-clusters) or the current usage is reset after the next month.
 
 For more information, see [Serverless Tier usage quota](/tidb-cloud/select-cluster-tier.md#usage-quota).
 
