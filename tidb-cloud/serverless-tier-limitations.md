@@ -56,3 +56,7 @@ We are constantly filling in the feature gaps between Serverless Tier and Dedica
 
 * [Changefeed](/tidb-cloud/changefeed-overview.md) is not supported for Serverless Tier currently.
 * [Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md) is not supported for Serverless Tier currently.
+
+## Maintenance window
+
+- [Maintenance window](/tidb-cloud/configure-maintenance-window.md) is unavailable for Serverless Tier.
