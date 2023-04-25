@@ -7,7 +7,7 @@ summary: Learn how to manage spend limit for your Serverless Tier clusters.
 
 > **Note:**
 >
-> The spend limit is only applicable to Serverless Tier clusters. For Dedicated Tier clusters, TiDB Cloud charges according to the resources that you consume.
+> The spend limit is only applicable to Serverless Tier clusters.
 
 Spend limit refers to the maximum amount of money that you are willing to spend on a particular workload in a month. It is a cost-control mechanism that allows you to set a budget for your Serverless Tier clusters.
 
