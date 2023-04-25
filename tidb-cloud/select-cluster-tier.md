@@ -28,7 +28,7 @@ For the first five Serverless Tier clusters in your organization, TiDB Cloud pro
 
 A Request Unit (RU) is a unit of measure used to represent the amount of resources consumed by a single request to the database. The amount of RUs consumed by a request depends on various factors, such as the operation type or the amount of data being retrieved or modified.
 
-Once the free quota of a cluster is reached, the read and write operations on this cluster will be throttled until you increase the quota or the usage is reset upon the start of a new month. For example, once the storage exceeds 5 GiB, the maximum size limit of a single transaction is reduced from 10 MiB to 1 MiB.
+Once the free quota of a cluster is reached, the read and write operations on this cluster will be throttled until you [increase the quota](/tidb-cloud/manage-serverless-spend-limit.md#update-spend-limit) or the usage is reset upon the start of a new month. For example, once the storage exceeds 5 GiB, the maximum size limit of a single transaction is reduced from 10 MiB to 1 MiB.
 
 To learn more about the RU consumption of different resources (including read, write, SQL CPU, and network egress), the pricing details, and the throttled information, see [TiDB Cloud Serverless Tier Pricing Details](https://www.pingcap.com/tidb-cloud-serverless-pricing-details).
 

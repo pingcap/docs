@@ -20,7 +20,7 @@ For the first five Serverless Tier clusters in your organization, TiDB Cloud pro
 - Row storage: 5 GiB
 - [Request Units](/tidb-cloud/tidb-cloud-glossary.md#request-unit) (RUs): 50 million RUs per month
 
-Once the free quota of a cluster is reached, the read and write operations on this cluster will be throttled until you increase the quota or the usage is reset upon the start of a new month. For example, once the storage exceeds 5 GiB, the maximum size limit of a single transaction is reduced from 10 MiB to 1 MiB.
+Once the free quota of a cluster is reached, the read and write operations on this cluster will be throttled until you [increase the quota](#update-spend-limit) or the usage is reset upon the start of a new month. For example, once the storage exceeds 5 GiB, the maximum size limit of a single transaction is reduced from 10 MiB to 1 MiB.
 
 To learn more about the RU consumption of different resources (including read, write, SQL CPU, and network egress), the pricing details, and the throttled information, see [TiDB Cloud Serverless Tier Pricing Details](https://www.pingcap.com/tidb-cloud-serverless-pricing-details).
 
@@ -28,7 +28,7 @@ If you want to create a Serverless Tier cluster with an additional quota, you ca
 
 ## Update spend limit
 
-After creating a Serverless Tier, you can still check and edit the spend limit on your cluster overview page as follows:
+For an existing Serverless Tier cluster, you can increase the usage quota by updating the spend limit as follows:
 
 1. In the TiDB Cloud console, click the ☰ hover menu in the upper-left corner, and then click the name of your target cluster to go to its overview page.
 
