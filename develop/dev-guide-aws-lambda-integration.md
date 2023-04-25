@@ -13,9 +13,9 @@ The document is organized into the following sections:
 
 1. [Solution Overview](#solution-overview)
 2. [Prerequisites](#prerequisites)
-3. [Setting up the Demo using CloudFormation](#setting-up-the-demo-using-cloudformation)
-4. [Using the Demo](#using-the-demo)
-5. [Cleaning up](#cleaning-up)
+3. [Setting up the Demo using CloudFormation](#set-up-the-demo-using-cloudformation)
+4. [Using the Demo](#use-the-demo)
+5. [Cleaning up](#clean-up)
 6. [Conclusion](#conclusion)
 
 ## Solution Overview
