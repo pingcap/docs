@@ -201,8 +201,7 @@
 - Security
   - Identity Access Control
     - [Password Authentication](/tidb-cloud/tidb-cloud-password-authentication.md)
-    - [Basic SSO Authentication](/tidb-cloud/tidb-cloud-sso-authentication.md)
-    - [Organization SSO Authentication](/tidb-cloud/tidb-cloud-org-sso-authentication.md)
+    - [SSO Authentication](/tidb-cloud/tidb-cloud-sso-authentication.md)
     - [Identity Access Management](/tidb-cloud/manage-user-access.md)
   - Network Access Control
     - [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md)
