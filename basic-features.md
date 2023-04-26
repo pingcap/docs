@@ -113,7 +113,7 @@ This document lists the features supported in different TiDB versions, including
 | [Generated columns](/generated-columns.md) | Y | E | E | E | E | E | E | E | E |
 | [Views](/views.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Sequences](/sql-statements/sql-statement-create-sequence.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [Auto increment](/auto-increment.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| [Auto increment](/auto-increment.md) | Y | Y[^4] | Y | Y | Y | Y | Y | Y | Y |
 | [Auto random](/auto-random.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [TTL (Time to Live)](/time-to-live.md) | Y | E | N | N | N | N | N | N | N |
 | [DDL algorithm assertions](/sql-statements/sql-statement-alter-table.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y |
