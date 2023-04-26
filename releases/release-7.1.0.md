@@ -9,7 +9,7 @@ TiDB version: 7.1.0 (upcoming)
 
 > **Note:**
 >
-> TiDB v7.1.0 is not yet available. This preview of the release notes provides insights into an upcoming release and is subject to change. The features outlined here are not guaranteed to be included in the final release.
+> TiDB v7.1.0 is not yet available. This release note is a preview version to provide insights into upcoming features and is subject to change. The features outlined here are not guaranteed to be included in the final release.
 
 In v7.1.0, the key new features and improvements are as follows:
 
@@ -29,16 +29,16 @@ In v7.1.0, the key new features and improvements are as follows:
   </tr>
   <tr>
     <td>Load-based replica read</td>
-    <td>In a read hotspot scenario, TiDB can redirect read requests from the hotspot TiKV node to its replicas. This feature efficiently scatters read hotspots and optimizes the use of cluster resources. To control the threshold for triggering load-based replica read, you can adjust the system variable <code>tidb_load_based_replica_read_threshold</code>.</td>
+    <td>In a read hotspot scenario, TiDB can redirect read requests for a hotspot TiKV node to its replicas. This feature efficiently scatters read hotspots and optimizes the use of cluster resources. To control the threshold for triggering load-based replica read, you can adjust the system variable <code>tidb_load_based_replica_read_threshold</code>.</td>
   </tr>
   <tr>
     <td rowspan="2">SQL</td>
     <td>Multi-valued index (GA)</td>
-    <td>Support MySQL-compatible multi-valued indexes and enhance the JSON type to improve the compatibility with MySQL 8.0. This feature improves the efficiency of membership checks on multi-valued columns.</td>
+    <td>Support MySQL-compatible multi-valued indexes and enhance the JSON type to improve compatibility with MySQL 8.0. This feature improves the efficiency of membership checks on multi-valued columns.</td>
   </tr>
   <tr>
     <td>Generated columns (GA)</td>
-    <td>The value of a generated column is calculated by the SQL expression in the column definition in real time. This feature pushes some application logic to the database level, thus improving efficiency.
+    <td>The value of a generated column is calculated by the SQL expression in the column definition in real time. This feature pushes some application logic to the database level, thus improving query efficiency.
     </td>
   </tr>
 </tbody>
