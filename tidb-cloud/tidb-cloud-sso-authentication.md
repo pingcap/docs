@@ -1,13 +1,19 @@
 ---
-title: SSO Authentication
+title: Basic SSO Authentication
 summary: Learn how to log in to the TiDB Cloud console via your Google, GitHub, or Microsoft account.
 ---
 
-# SSO Authentication
+# Basic SSO Authentication
 
-This document describes how to log in to the [TiDB Cloud console](https://tidbcloud.com/) via Single Sign-on (SSO) authentication, which is quick and convenient.
+Single Sign-On (SSO) allows members of your TiDB Cloud organization to authenticate using an identity from an identity provider (IdP) instead of using an email address and password.
 
-TiDB Cloud supports SSO authentication for Google, GitHub, and Microsoft accounts. If you log in to TiDB Cloud via SSO authentication, because your ID and credentials are stored on the third-party Google, GitHub, and Microsoft platforms, you will not be able to modify your account password and enable multi-factor authentication (MFA) using the TiDB console. 
+- Basic SSO is enabled by default for each TiDB Cloud organization. Members can authenticate to TiDB Cloud Console with any GitHub, Google, or Microsoft identity or with a password, which is quick and convenient.
+
+- Cloud Organization SSO lets users sign in at a custom login page unique to your organization, and provides additional customization and capabilities to help your organization meet its security and compliance requirements. For example, it allows you to restrict the email addresses that can log in using a given method, and allows you to connect to your identity provider (IdP)  using OpenID Connect (OIDC) identity protocols.
+
+This document describes how to log in to the [TiDB Cloud console](https://tidbcloud.com/) via basic SSO authentication.
+
+TiDB Cloud supports basic SSO authentication for Google, GitHub, and Microsoft accounts. If you log in to TiDB Cloud via SSO authentication, because your ID and credentials are stored on the third-party Google, GitHub, and Microsoft platforms, you will not be able to modify your account password and enable multi-factor authentication (MFA) using the TiDB console. 
 
 > **Note:**
 >
