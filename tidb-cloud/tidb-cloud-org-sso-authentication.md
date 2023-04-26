@@ -5,33 +5,34 @@ summary: Learn how to log in to the TiDB Cloud console via your customized organ
 
 # Organization SSO Authentication
 
-Single Sign-On (SSO) is an authentication method that allows members in your TiDB Cloud organization to access TiDB Cloud with identities from an identity providers (IdP) instead of emails and passwords.
+Single Sign-On (SSO) is an authentication scheme that allows members in your TiDB Cloud organization to log into TiDB Cloud with identities from an identity providers (IdP) instead of emails and passwords.
 
-TiDB Cloud provides the following two types of SSO authentication:
+TiDB Cloud supports the following two types of SSO authentication:
 
-- Basic SSO: members can log in to the [TiDB Cloud console](https://tidbcloud.com/) using their GitHub, Google, or Microsoft accounts, which is quick and convenient. The basic SSO is enabled by default.
+- [Basic SSO](/tidb-cloud/tidb-cloud-org-sso-authentication.md): members can log in to the [TiDB Cloud console](https://tidbcloud.com/) using their GitHub, Google, or Microsoft authentication methods. The basic SSO is enabled by default for all organizations in TiDB Cloud.
 
-- Cloud Organization SSO: members can log in to a custom login page of TiDB Cloud using the authentication methods specified by your organization, which provides more flexibility and customization for your security and compliance requirements. The Cloud Organization SSO is disabled by default. After it is enabled, you can
-customize the authentication method displayed your organization, specify the allowed email address domains for login, and connect to your identity provider (IdP) using OpenID Connect (OIDC) identity protocols.
+- Cloud Organization SSO: members can log in to a custom login page of TiDB Cloud using the authentication methods specified by your organization. The Cloud Organization SSO is disabled by default.
 
-## Prerequisites
+Comparing with Basic SSO, Cloud Organization SSO provides more flexibility and customization so you can better meet your organization's security and compliance requirements. For example, you can customize which authentication methods are displayed on the login page, specify which email address domains are allowed for login, and let your members to log into TiDB Cloud with your identity provider (IdP) using OpenID Connect (OIDC) identity protocols.
 
-Before enabling organization SSO, you need to check and confirm the the following information.
+In this document, you will learn how to migrate the authentication scheme of your organization from basic SSO to Cloud Organization SSO.
 
 > **Note:**
 >
 > - Once Cloud Organization SSO is enabled, it cannot be disabled.
-> - If your current TiDB login URL is not `https://tidbcloud.com/`, it means that Cloud Organization SSO is already enabled for your organization.
+> - If your current TiDB login URL includes `enterprise`, it means that Cloud Organization SSO is already enabled for your organization.
 
-### Decide a custom URL for your organization's TiDB Cloud login page
+## Before you begin
 
-Once Cloud Organization SSO is enabled, your members must log into your TiDB Cloud organization using your customized URL instead of the public login URL at `https://tidbcloud.com`.
+Before migrating to Cloud Organization SSO, check and confirm the items in this section for your organization.
+
+### Decide a custom URL for the TiDB Cloud signin page your organization
+
+After Cloud Organization SSO is enabled, your members must use your customized URL instead of the public login URL at `https://tidbcloud.com` to log into TiDB Cloud.
 
 Because the custom URL cannot be changed after the enablement, you need to decide what URL to be used in advance.
 
-For example:
-
-`https://tidbcloud.com/your-company-name`
+The format of the custom URL is `https://tidbcloud.com/enterprise/signin/your-company-name`, in which you can customize your company name.
 
 ### Decide authentication methods for your organization members
 
@@ -44,7 +45,7 @@ TiDB Cloud provides the following authentication methods for Organization SSO.
 
 When you enable Cloud Organization SSO, the first three methods are enabled by default.
 
-Because the enabled authentication methods will be displayed on the customized TiDB Cloud login page, you need to decide which authentication methods to be enabled in advance.
+Because the enabled authentication methods will be displayed on the customized TiDB Cloud login page, you need to decide which authentication methods to be enabled or disabled in advance.
 
 As TiDB Cloud uses email address to identify your members, ensure that their email addresses in your TiDB Cloud organization match those in your IdPs. For members with multiple SSO authentication options, ensure that their email addresses match across all methods.
 
@@ -52,9 +53,9 @@ As TiDB Cloud uses email address to identify your members, ensure that their ema
 
 Auto provisioning is a feature that allows members to automatically join an organization without requiring an invitation from an existing member or organization owner. In TiDB Cloud, it is disabled by default for all the supported authentication methods.
 
-- When auto provisioning is enabled, new members are assigned a default `member` role within the organization. It makes it easier for new members to join an organization. For security consideration, if you choose to enable auto provisioning, it is recommended to limit the allowed email domains for authentication.
+- When auto provisioning is enabled for an authentication method, any users using this authentication method can log in to your custom URL. They are assigned a default `member` role within the organization. For security consideration, if you choose to enable auto provisioning, it is recommended to limit the allowed email domains for authentication.
 
-- When auto provisioning is disabled, to log in to TiDB Cloud using SSO,  a member's email address must exist in the SSO IdP and an Organization owner must have invited the member to the TiDB Cloud organization beforehand.
+- When auto provisioning is disabled, to log in to TiDB Cloud using SSO, a member's email address must exist in the SSO IdP and an Organization owner must have invited the member to the TiDB Cloud organization beforehand.
 
 ### Notify your members about the Cloud Organization SSO plan
 
