@@ -712,7 +712,7 @@
             -   [`LOAD DATA`](/sql-statements/sql-statement-load-data.md)
             -   [`LOAD STATS`](/sql-statements/sql-statement-load-stats.md)
             -   [`LOCK STATS`](/sql-statements/sql-statement-lock-stats.md)
-            -   [`LOCK TABLES`と<code>UNLOCK TABLES</code>](/sql-statements/sql-statement-lock-tables-and-unlock-tables.md)
+            -   [`LOCK TABLES`と`UNLOCK TABLES`](/sql-statements/sql-statement-lock-tables-and-unlock-tables.md)
             -   [`MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md)
             -   [`PREPARE`](/sql-statements/sql-statement-prepare.md)
             -   [`RECOVER TABLE`](/sql-statements/sql-statement-recover-table.md)
