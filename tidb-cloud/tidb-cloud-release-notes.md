@@ -42,7 +42,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
   For more information, see [Configure maintenance window](/tidb-cloud/configure-maintenance-window.md).
 
-- Improve load balancing of TiDB and reduce connection drops when you scale TiDB nodes of [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters hosted on AWS.
+- Improve load balancing of TiDB and reduce connection drops when you scale TiDB nodes of [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters that are hosted on AWS and created after April 25, 2023.
 
     - Support automatically migrating existing connections to new TiDB nodes when you scale out TiDB nodes.
     - Support automatically migrating existing connections to available TiDB nodes when you scale in TiDB nodes.
