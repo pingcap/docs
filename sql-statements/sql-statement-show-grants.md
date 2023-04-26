@@ -5,7 +5,7 @@ summary: An overview of the usage of SHOW GRANTS for the TiDB database.
 
 # 助成金を表示 {#show-grants}
 
-このステートメントは、ユーザーに関連付けられた権限のリストを表示します。 MySQL と同様に、 `USAGE`権限は TiDB にログインできることを示します。
+このステートメントは、ユーザーに関連付けられた権限のリストを表示します。 MySQL と同様に、 `USAGE`権限はTiDB にログインできることを示します。
 
 ## あらすじ {#synopsis}
 

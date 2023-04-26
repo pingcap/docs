@@ -34,7 +34,7 @@ summary: Learn about the TiDB system tables.
 -   `stats_extended` : 列間の順序相関などの拡張統計
 -   `stats_feedback` : 統計のクエリ フィードバック
 -   `stats_fm_sketch` : 統計列のヒストグラムの FMSketch 分布
--   `analyze_options` : 各テーブルのデフォルトの`analyze`のオプション
+-   `analyze_options` : 各テーブルのデフォルトの`analyze`オプション
 -   `column_stats_usage` : 列統計の使用
 -   `schema_index_usage` : インデックスの使用
 -   `analyze_jobs` : 進行中の統計収集タスクと過去 7 日間の履歴タスク レコード
@@ -51,7 +51,7 @@ summary: Learn about the TiDB system tables.
 
 ## キャッシュされたテーブルに関連するシステム テーブル {#system-tables-related-to-cached-tables}
 
--   `table_cache_meta`は、キャッシュされたテーブルのメタデータを格納します。
+-   `table_cache_meta`キャッシュされたテーブルのメタデータを格納します。
 
 ## その他のシステム テーブル {#miscellaneous-system-tables}
 

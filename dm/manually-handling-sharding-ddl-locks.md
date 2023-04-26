@@ -14,7 +14,7 @@ DM はシャーディング DDL ロックを使用して、操作が正しい順
 > -   コマンドによってもたらされる可能性のある影響を完全に認識しており、それを受け入れることができる場合を除き、 `shard-ddl-lock unlock`を使用しないでください。
 > -   異常な DDL ロックを手動で処理する前に、DM [シャード マージの原則](/dm/feature-shard-merge-pessimistic.md#principles)を既に読んでいることを確認してください。
 
-## 指示 {#command}
+## 指図 {#command}
 
 ### <code>shard-ddl-lock</code> {#code-shard-ddl-lock-code}
 
@@ -44,7 +44,7 @@ Use "dmctl shard-ddl-lock [command] --help" for more information about a command
 
 <!---->
 
--   `shard-ddl-lock [command]` : 指定された DDL ロックの解放を DM マスターに要求します。 `[command]`は値として`unlock`のみを受け入れます。
+-   `shard-ddl-lock [command]` : 指定された DDL ロックの解放を DM マスターに要求します。 `[command]`値として`unlock`のみを受け入れます。
 
 ## 使用例 {#usage-examples}
 
@@ -86,11 +86,11 @@ shard-ddl-lock test
 
 ### <code>shard-ddl-lock unlock</code> {#code-shard-ddl-lock-unlock-code}
 
-このコマンドは、所有者に DDL ステートメントを実行するように要求する、所有者ではない他のすべての DM-worker に DDL ステートメントをスキップするように要求する、および`DM-master`のロック情報を削除するなど、指定された DDL ロックのロックを解除するように`DM-master`をアクティブに要求します。
+このコマンドは、所有者に DDL ステートメントを実行するように要求する、所有者ではない他のすべての DM-worker に DDL ステートメントをスキップするように要求する、および`DM-master`ロック情報を削除するなど、指定された DDL ロックのロックを解除するように`DM-master`アクティブに要求します。
 
 > **ノート：**
 >
-> 現在、 `shard-ddl-lock unlock`は`pessimistic`モードのロックに対してのみ有効です。
+> 現在、 `shard-ddl-lock unlock` `pessimistic`モードのロックに対してのみ有効です。
 
 ```bash
 shard-ddl-lock unlock -h
@@ -114,11 +114,11 @@ Global Flags:
   -s, --source strings   MySQL Source ID.
 ```
 
-`shard-ddl-lock unlock`は次の引数を受け入れます。
+`shard-ddl-lock unlock`次の引数を受け入れます。
 
 -   `-o, --owner` :
 
-    -   国旗;ストリング;オプション
+    -   国旗;弦;オプション
     -   指定されていない場合、このコマンドは、デフォルトの所有者 ( `shard-ddl-lock`の結果の所有者) が DDL ステートメントを実行するように要求します。指定されている場合、このコマンドは MySQL ソース (デフォルトの所有者の代替) に DDL ステートメントを実行するように要求します。
     -   元の所有者がクラスターから既に削除されていない限り、新しい所有者を指定しないでください。
 
@@ -129,7 +129,7 @@ Global Flags:
 
 -   `lock-id` :
 
-    -   非フラグ;ストリング;必要
+    -   非フラグ;弦;必要
     -   ロックを解除する必要がある DDL ロックの ID ( `shard-ddl-lock`の結果の`ID` ) を指定します。
 
 以下は、 `shard-ddl-lock unlock`コマンドの例です。
@@ -228,14 +228,14 @@ MySQL と DM の操作プロセスは次のとおりです。
 
 4.  アプリケーションの需要により、 `mysql-replica-02`に対応するデータを下流の TiDB に移行する必要がなくなり、 `mysql-replica-02`が削除されます。
 
-5.  ID が``test-`shard_db`.`shard_table` `` on `DM-master`のロックは、 `mysql-replica-02`の DDL 情報を受け取ることができません。
+5.  ID が``test-`shard_db`.`shard_table` `` on `DM-master`ロックは、 `mysql-replica-02`の DDL 情報を受け取ることができません。
 
     -   返された結果`unsynced` by `shard-ddl-lock`には、常に`mysql-replica-02`の情報が含まれています。
 
-6.  `shard-ddl-lock unlock`を使用して`DM-master`を要求し、DDL ロックをアクティブにロック解除します。
+6.  `shard-ddl-lock unlock`を使用して`DM-master`要求し、DDL ロックをアクティブにロック解除します。
 
     -   DDL ロックの所有者がオフラインになった場合、パラメーター`--owner`を使用して、DDL を実行する新しい所有者として別の DM-worker を指定できます。
-    -   いずれかの MySQL ソースがエラーを報告した場合、 `result`は`false`に設定されます。この時点で、各 MySQL ソースのエラーが許容可能であり、想定内であるかどうかを慎重に確認する必要があります。
+    -   いずれかの MySQL ソースがエラーを報告した場合、 `result` `false`に設定されます。この時点で、各 MySQL ソースのエラーが許容可能であり、想定内であるかどうかを慎重に確認する必要があります。
 
         {{< copyable "" >}}
 
@@ -249,7 +249,7 @@ MySQL と DM の操作プロセスは次のとおりです。
             "msg": ""
         ```
 
-7.  `shard-ddl-lock`を使用して、DDL ロックが正常にロック解除されたかどうかを確認します。
+7.  `shard-ddl-lock`使用して、DDL ロックが正常にロック解除されたかどうかを確認します。
 
     ```bash
     » shard-ddl-lock test
@@ -276,7 +276,7 @@ MySQL と DM の操作プロセスは次のとおりです。
     +-------------+--------------------------------------------------+
     ```
 
-9.  `query-status`を使用して、移行タスクが正常かどうかを確認します。
+9.  `query-status`使用して、移行タスクが正常かどうかを確認します。
 
 #### 影響 {#impact}
 
@@ -360,7 +360,7 @@ MySQL と DM の操作プロセスは次のとおりです。
 
 3.  `shard-ddl-lock`を使用して、DDL ロックが正常にロック解除されたかどうかを確認します。
 
-4.  `query-status`を使用して、移行タスクが正常かどうかを確認します。
+4.  `query-status`使用して、移行タスクが正常かどうかを確認します。
 
 #### 影響 {#impact}
 

@@ -5,7 +5,7 @@ summary: An overview of the usage of ANALYZE for the TiDB database.
 
 # 分析する {#analyze}
 
-このステートメントは、TiDB がテーブルとインデックスで構築する統計を更新します。大規模なバッチ更新またはレコードのインポートを実行した後、またはクエリ実行プランが最適ではないことに気付いた場合は、 `ANALYZE`を実行することをお勧めします。
+このステートメントは、TiDB がテーブルとインデックスで構築する統計を更新します。大規模なバッチ更新またはレコードのインポートを実行した後、またはクエリ実行プランが最適ではないことに気付いた場合は、 `ANALYZE`実行することをお勧めします。
 
 また、TiDB は、統計が独自の見積もりと矛盾していることを発見すると、時間の経過とともに統計を自動的に更新します。
 
@@ -84,8 +84,8 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 
 TiDB は、収集する統計と、クエリ実行中に統計を利用する方法の**両方**で、MySQL とは異なります。このステートメントは構文的に MySQL と似ていますが、次の違いがあります。
 
-1.  TiDB は、実行時に最近コミットされた変更を含まない場合があります`ANALYZE TABLE` 。行のバッチ更新の後、これらの変更を統計の更新に反映させるために、 `ANALYZE TABLE`を実行する前に`sleep(1)`が必要になる場合があります。 [#16570](https://github.com/pingcap/tidb/issues/16570) .
-2.  `ANALYZE TABLE`は、MySQL よりも TiDB での実行にかなり時間がかかります。このパフォーマンスの違いは、 `SET GLOBAL tidb_enable_fast_analyze=1`で高速分析を有効にすることで部分的に軽減できます。高速分析ではサンプリングが使用されるため、統計の精度が低下します。その使用法はまだ実験的ものと考えられています。
+1.  TiDB は、実行時に最近コミットされた変更を含まない場合があります`ANALYZE TABLE` 。行のバッチ更新の後、これらの変更を統計の更新に反映させるために、 `ANALYZE TABLE`実行する前に`sleep(1)`が必要になる場合があります。 [#16570](https://github.com/pingcap/tidb/issues/16570) .
+2.  `ANALYZE TABLE` MySQL よりも TiDB での実行にかなり時間がかかります。このパフォーマンスの違いは、 `SET GLOBAL tidb_enable_fast_analyze=1`で高速分析を有効にすることで部分的に軽減できます。高速分析ではサンプリングが使用されるため、統計の精度が低下します。その使用法はまだ実験的と考えられています。
 
 MySQL は`ANALYZE INCREMENTAL TABLE`ステートメントをサポートしていません。 TiDB は、統計の増分収集をサポートしています。詳しい使い方は[増分コレクション](/statistics.md#incremental-collection)を参照してください。
 

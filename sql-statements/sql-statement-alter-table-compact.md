@@ -5,13 +5,13 @@ summary: An overview of the usage of ALTER TABLE ... COMPACT for the TiDB databa
 
 # ALTER TABLE ... コンパクト {#alter-table-compact}
 
-読み取りパフォーマンスを向上させ、ディスク使用量を削減するために、TiDB はバックグラウンドでストレージ ノードのデータ圧縮を自動的にスケジュールします。圧縮中、ストレージ ノードは物理データを書き換えます。これには、削除された行のクリーンアップや、更新によって発生した複数のバージョンのデータのマージが含まれます。 `ALTER TABLE ... COMPACT`ステートメントを使用すると、圧縮がバックグラウンドでトリガーされるまで待たずに、特定のテーブルの圧縮をすぐに開始できます。
+読み取りパフォーマンスを向上させ、ディスク使用量を削減するために、TiDB はバックグラウンドでstorageノードのデータ圧縮を自動的にスケジュールします。圧縮中、storageノードは物理データを書き換えます。これには、削除された行のクリーンアップや、更新によって発生した複数のバージョンのデータのマージが含まれます。 `ALTER TABLE ... COMPACT`ステートメントを使用すると、圧縮がバックグラウンドでトリガーされるまで待たずに、特定のテーブルの圧縮をすぐに開始できます。
 
 このステートメントの実行は、既存の SQL ステートメントをブロックしたり、トランザクション、DDL、GC などの TiDB 機能に影響を与えたりしません。 SQL文で選択できるデータも変更されません。このステートメントを実行すると、一部の IO および CPU リソースが消費されます。ビジネスに悪影響を及ぼさないように、リソースが使用可能になったときなど、実行の適切なタイミングを慎重に選択してください。
 
 テーブルのすべてのレプリカが圧縮されると、圧縮ステートメントが終了して返されます。実行プロセス中に、 [`KILL`](/sql-statements/sql-statement-kill.md)ステートメントを実行することで圧縮を安全に中断できます。圧縮を中断しても、データの一貫性が損なわれたり、データが失われたりすることはなく、その後の手動またはバックグラウンドの圧縮にも影響しません。
 
-このデータ圧縮ステートメントは現在、TiKV レプリカではなく、 TiFlashレプリカでのみサポートされています。
+このデータ圧縮ステートメントは現在、 TiFlashレプリカではなく、TiFlash レプリカでのみサポートされています。
 
 ## あらすじ {#synopsis}
 
@@ -20,13 +20,13 @@ AlterTableCompactStmt ::=
     'ALTER' 'TABLE' TableName 'COMPACT' ( 'PARTITION' PartitionNameList )? ( 'TIFLASH' 'REPLICA' )?
 ```
 
-v6.2.0 以降、構文の`TIFLASH REPLICA`の部分を省略できます。省略した場合、ステートメントのセマンティックは変更されず、 TiFlashに対してのみ有効になります。
+v6.2.0 以降、構文の`TIFLASH REPLICA`部分を省略できます。省略した場合、ステートメントのセマンティックは変更されず、 TiFlashに対してのみ有効になります。
 
 ## 例 {#examples}
 
-### テーブル内のコンパクトTiFlashレプリカ {#compact-tiflash-replicas-in-a-table}
+### テーブル内のコンパクトなTiFlashレプリカ {#compact-tiflash-replicas-in-a-table}
 
-以下は、2 つの TiFlashレプリカを持つ 4 つのパーティションを持つ`employees`のテーブルを例として取り上げています。
+以下は、2 つのTiFlashレプリカを持つ 4 つのパーティションを持つ`employees`のテーブルを例として取り上げています。
 
 ```sql
 CREATE TABLE employees (
@@ -43,7 +43,7 @@ PARTITION BY LIST (store_id) (
 ALTER TABLE employees SET TIFLASH REPLICA 2;
 ```
 
-次のステートメントを実行して、 `employees`のテーブル内のすべてのパーティションの 2 つのTiFlashレプリカの圧縮をすぐに開始できます。
+次のステートメントを実行して、 `employees`テーブル内のすべてのパーティションの 2 つのTiFlashレプリカの圧縮をすぐに開始できます。
 
 {{< copyable "" >}}
 
@@ -51,9 +51,9 @@ ALTER TABLE employees SET TIFLASH REPLICA 2;
 ALTER TABLE employees COMPACT TIFLASH REPLICA;
 ```
 
-### テーブル内の指定されたパーティションのコンパクトTiFlashレプリカ {#compact-tiflash-replicas-of-specified-partitions-in-a-table}
+### テーブル内の指定されたパーティションのコンパクトなTiFlashレプリカ {#compact-tiflash-replicas-of-specified-partitions-in-a-table}
 
-以下は、2 つの TiFlashレプリカを持つ 4 つのパーティションを持つ`employees`のテーブルを例として取り上げています。
+以下は、2 つのTiFlashレプリカを持つ 4 つのパーティションを持つ`employees`のテーブルを例として取り上げています。
 
 ```sql
 CREATE TABLE employees (
@@ -191,7 +191,7 @@ SELECT PARTITION_NAME, TOTAL_DELTA_ROWS, TOTAL_STABLE_ROWS
 
 > **ノート：**
 >
-> -   圧縮中にデータが更新された場合、圧縮が完了した後も`TOTAL_DELTA_ROWS`はゼロ以外の値である可能性があります。これは正常な動作であり、これらの更新が圧縮されていないことを示しています。これらの更新を圧縮するには、 `ALTER TABLE ... COMPACT`ステートメントを再度実行します。
+> -   圧縮中にデータが更新された場合、圧縮が完了した後も`TOTAL_DELTA_ROWS`ゼロ以外の値である可能性があります。これは正常な動作であり、これらの更新が圧縮されていないことを示しています。これらの更新を圧縮するには、 `ALTER TABLE ... COMPACT`ステートメントを再度実行します。
 >
 > -   `TOTAL_DELTA_ROWS`は行数ではなく、データのバージョンを示します。たとえば、行を挿入してから削除すると、 `TOTAL_DELTA_ROWS`が 2 増加します。
 

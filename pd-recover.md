@@ -9,7 +9,7 @@ PD Recover は PD のディザスタリカバリツールであり、正常に�
 
 ## ソースコードからコンパイル {#compile-from-source-code}
 
--   [行け](https://golang.org/) Go モジュールを使用するため、バージョン 1.19 以降が必要です。
+-   [行く](https://golang.org/) Go モジュールを使用するため、バージョン 1.19 以降が必要です。
 -   [PDプロジェクト](https://github.com/pingcap/pd)のルート ディレクトリで、 `make pd-recover`コマンドを使用して`bin/pd-recover`をコンパイルおよび生成します。
 
 > **ノート：**
@@ -98,13 +98,13 @@ cat {{/path/to}}/pd*.log | grep "idAllocator allocates a new id" |  awk -F'=' '{
 
 または、すべての PD サーバーで上記のコマンドを実行して、最大の PD サーバーを見つけることもできます。
 
-### 新しい PD クラスターをデプロイする {#deploy-a-new-pd-cluster}
+### 新しい PD クラスターをデプロイ {#deploy-a-new-pd-cluster}
 
 新しい PD クラスターをデプロイする前に、既存の PD クラスターを停止してから、以前のデータ ディレクトリを削除するか、 `--data-dir`を使用して新しいデータ ディレクトリを指定する必要があります。
 
 ### pd-recover を使用する {#use-pd-recover}
 
-1 つの PD ノードで`pd-recover`つだけ実行する必要があります。
+1 つの PD ノードで`pd-recover`だけ実行する必要があります。
 
 {{< copyable "" >}}
 
@@ -122,6 +122,6 @@ cat {{/path/to}}/pd*.log | grep "idAllocator allocates a new id" |  awk -F'=' '{
 
 PD クラスターが作成されると、新しいクラスター ID が生成されます。ログを表示することで、古いクラスターのクラスター ID を特定できます。
 
-### <code>pd-recover</code>を実行すると、エラー<code>dial tcp 10.0.1.13:2379: connect: connection refused</code>されました。 {#the-error-code-dial-tcp-10-0-1-13-2379-connect-connection-refused-code-is-returned-when-executing-code-pd-recover-code}
+### <code>pd-recover</code>を実行すると、エラー<code>dial tcp 10.0.1.13:2379: connect: connection refused</code> {#the-error-code-dial-tcp-10-0-1-13-2379-connect-connection-refused-code-is-returned-when-executing-code-pd-recover-code}
 
-`pd-recover`を実行する場合、PD サービスが必要です。 PD Recover を使用する前に、PD クラスターをデプロイして開始します。
+`pd-recover`を実行する場合、PD サービスが必要です。 PD Recover を使用する前に、PD クラスターをデプロイて開始します。

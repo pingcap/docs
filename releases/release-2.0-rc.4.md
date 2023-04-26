@@ -9,7 +9,7 @@ title: TiDB 2.0 RC4 Release Notes
 ## TiDB {#tidb}
 
 -   サポート`SHOW GRANTS FOR CURRENT_USER();`
--   `UnionScan`の`Expression`が複製されない問題を修正
+-   `UnionScan`分の`Expression`複製されない問題を修正
 -   `SET TRANSACTION`構文をサポート
 -   潜在的なゴルーチン リークの問題を`copIterator`で修正
 -   `admin check table`がnullを含むユニークインデックスを誤判定する問題を修正

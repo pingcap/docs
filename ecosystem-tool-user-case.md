@@ -7,21 +7,21 @@ summary: Learn the common use cases of TiDB tools and how to choose the tools.
 
 このドキュメントでは、TiDB ツールの一般的な使用例と、シナリオに適したツールを選択する方法を紹介します。
 
-## TiDB を物理マシンまたは仮想マシンにデプロイして操作する {#deploy-and-operate-tidb-on-physical-or-virtual-machines}
+## TiDB を物理マシンまたは仮想マシンにデプロイ操作する {#deploy-and-operate-tidb-on-physical-or-virtual-machines}
 
-TiDB を物理マシンまたは仮想マシンにデプロイして操作する必要がある場合は、 [TiUP](/tiup/tiup-overview.md)をインストールしてから、 TiUPを使用して TiDB、PD、TiKV などの TiDB コンポーネントを管理できます。
+TiDB を物理マシンまたは仮想マシンにデプロイして操作する必要がある場合は、 [TiUP](/tiup/tiup-overview.md)インストールしてから、 TiUPを使用して TiDB、PD、TiKV などの TiDB コンポーネントを管理できます。
 
-## TiDB を Kubernetes にデプロイして運用する {#deploy-and-operate-tidb-on-kubernetes}
+## TiDB を Kubernetes にデプロイて運用する {#deploy-and-operate-tidb-on-kubernetes}
 
-TiDB を Kubernetes にデプロイして操作する必要がある場合は、Kubernetes クラスターをデプロイしてから[TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable)をデプロイできます。その後、 TiDB Operatorを使用して TiDB クラスターをデプロイおよび操作できます。
+TiDB を Kubernetes にデプロイして操作する必要がある場合は、Kubernetes クラスターをデプロイしてから[TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable)をデプロイできます。その後、 TiDB Operator を使用して TiDB クラスターをデプロイおよび操作できます。
 
 ## CSV から TiDB にデータをインポートする {#import-data-from-csv-to-tidb}
 
-他のツールによってエクスポートされた互換性のある CSV ファイルを TiDB にインポートする必要がある場合は、 [TiDB Lightning](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)を使用します。
+他のツールによってエクスポートされた互換性のある CSV ファイルを TiDB にインポートする必要がある場合は、 [TiDB Lightning](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)使用します。
 
 ## MySQL/ Auroraから完全なデータをインポートする {#import-full-data-from-mysql-aurora}
 
-MySQL/ Auroraから完全なデータをインポートする必要がある場合は、最初に[Dumpling](/dumpling-overview.md)を使用してデータを SQL ダンプ ファイルとしてエクスポートし、次に[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用してデータを TiDB クラスターにインポートします。
+MySQL/ Auroraから完全なデータをインポートする必要がある場合は、最初に[Dumpling](/dumpling-overview.md)を使用してデータを SQL ダンプ ファイルとしてエクスポートし、次に[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)使用してデータを TiDB クラスターにインポートします。
 
 ## MySQL/ Auroraからデータを移行する {#migrate-data-from-mysql-aurora}
 
@@ -33,7 +33,7 @@ MySQL/ Auroraからフル データと増分データの両方を移行する必
 
 TiDB クラスターをバックアップするか、バックアップしたデータをクラスターに復元する必要がある場合は、 [BR](/br/backup-and-restore-overview.md) (バックアップと復元) を使用します。
 
-また、 BRを使用して、TiDB クラスター データの[増分バックアップ](/br/br-incremental-guide.md#back-up-incremental-data)と[増分復元](/br/br-incremental-guide.md#restore-incremental-data)を実行することもできます。
+また、 BR を使用して、TiDB クラスター データの[増分バックアップ](/br/br-incremental-guide.md#back-up-incremental-data)と[増分復元](/br/br-incremental-guide.md#restore-incremental-data)を実行することもできます。
 
 ## データを TiDB に移行する {#migrate-data-to-tidb}
 

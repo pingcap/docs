@@ -28,7 +28,7 @@ summary: Learn the architecture and working principles of TiCDC.
 -   Mounter: スキーマ情報に基づいて、TiCDC シンクが処理できる形式に変更を変換します。
 -   シンク: ダウンストリーム システムに変更をレプリケートします。
 
-高可用性を実現するために、各 TiCDC クラスターは複数の TiCDC ノードを実行します。これらのノードは定期的にそのステータスを PD の etcd クラスターに報告し、ノードの 1 つを TiCDC クラスターの所有者として選出します。所有者ノードは、etcd に保存されているステータスに基づいてデータをスケジュールし、スケジュール結果を etcd に書き込みます。プロセッサは、etcd のステータスに従ってタスクを完了します。プロセッサを実行しているノードに障害が発生した場合、クラスターはテーブルを他のノードにスケジュールします。所有者ノードに障害が発生すると、他のノードの Capture プロセスが新しい所有者を選出します。次の図を参照してください。
+高可用性を実現するために、各 TiCDC クラスターは複数の TiCDC ノードを実行します。これらのノードは定期的にそのステータスを PD の etcd クラスターに報告し、ノードの 1 つを TiCDC クラスターの所有者として選出します。所有者ノードは、etcd に保存されているステータスに基づいてデータをスケジュールし、スケジュール結果を etcd に書き込みます。プロセッサは、etcd のステータスに従ってタスクを完了します。プロセッサを実行しているノードに障害が発生した場合、クラスターはテーブルを他のノードにスケジュールします。所有者ノードに障害が発生すると、他のノードの Capture プロセスが新しい所有者を選択します。次の図を参照してください。
 
 ![TiCDC architecture](/media/ticdc/ticdc-architecture-3.PNG)
 
@@ -52,7 +52,7 @@ dispatchers = [
 ]
 ```
 
-上記の`cdc cli changefeed create`コマンドのパラメーターの詳細な説明については、 [TiCDC Changefeedコンフィグレーションパラメーター](/ticdc/ticdc-changefeed-config.md)を参照してください。
+上記の`cdc cli changefeed create`コマンドのパラメーターの詳細な説明については、 [TiCDC Changefeedコンフィグレーションパラメータ](/ticdc/ticdc-changefeed-config.md)を参照してください。
 
 上記の`cdc cli changefeed create`コマンドは、 `test1.tab1` 、 `test1.tab2` 、 `test3.tab3` 、および`test4.tab4`を Kafka クラスターにレプリケートする changefeed タスクを作成します。 TiCDC がこのコマンドを受信した後の処理の流れは次のとおりです。
 

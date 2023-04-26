@@ -7,7 +7,7 @@ summary: Introduce the concept, principles, and implementation details of metada
 
 このドキュメントでは、TiDB のメタデータ ロックについて紹介します。
 
-## 概念 {#concept}
+## コンセプト {#concept}
 
 TiDB は、オンライン非同期スキーマ変更アルゴリズムを使用して、メタデータ オブジェクトの変更をサポートします。トランザクションが実行されると、トランザクションの開始時に対応するメタデータ スナップショットが取得されます。トランザクション中にメタデータが変更された場合、データの一貫性を確保するために、TiDB は`Information schema is changed`エラーを返し、トランザクションはコミットに失敗します。
 
@@ -28,7 +28,7 @@ TiDB のメタデータ ロックは、次のようなすべての DDL ステー
 
 メタデータ ロックを有効にすると、TiDB での DDL タスクの実行にパフォーマンスに影響を与える可能性があります。影響を軽減するために、メタデータ ロックを必要としないいくつかのシナリオを次に示します。
 
--   自動コミットが有効になっている`SELECT`件のクエリ
+-   自動コミットが有効になっている`SELECT`クエリ
 -   ステイル読み取りが有効になっています
 -   一時テーブルへのアクセス
 
@@ -53,27 +53,27 @@ v6.5.0 以降、TiDB はデフォルトでメタデータ ロックを有効に�
 
     反復可能読み取り分離レベルでは、トランザクションの開始からテーブルのメタデータを決定する時点までに、インデックスの追加や列の型の変更など、データの変更を必要とする DDL が実行されると、DDL は次のようにエラーを返します。 :
 
-    | セッション1                                                     | セッション 2                                   |
-    | :--------------------------------------------------------- | :---------------------------------------- |
-    | `CREATE TABLE t (a INT);`                                  |                                           |
-    | `INSERT INTO t VALUES(1);`                                 |                                           |
-    | `BEGIN;`                                                   |                                           |
-    |                                                            | `ALTER TABLE t ADD INDEX idx(a);`         |
-    | `SELECT * FROM t;` (インデックス`idx`は使用できません)                   |                                           |
-    | `COMMIT;`                                                  |                                           |
-    | `BEGIN;`                                                   |                                           |
-    |                                                            | `ALTER TABLE t MODIFY COLUMN a CHAR(10);` |
-    | `SELECT * FROM t;` (エラー`Information schema is changed`を返す) |                                           |
+    | セッション1                                                               | セッション 2                                   |
+    | :------------------------------------------------------------------- | :---------------------------------------- |
+    | `CREATE TABLE t (a INT);`                                            |                                           |
+    | `INSERT INTO t VALUES(1);`                                           |                                           |
+    | `BEGIN;`                                                             |                                           |
+    |                                                                      | `ALTER TABLE t ADD INDEX idx(a);`         |
+    | `SELECT * FROM t;` (インデックス`idx`は使用できません)                             |                                           |
+    | `COMMIT;`                                                            |                                           |
+    | `BEGIN;`                                                             |                                           |
+    |                                                                      | `ALTER TABLE t MODIFY COLUMN a CHAR(10);` |
+    | `SELECT * FROM t;` ( `Error 8028: Information schema is changed`を返す) |                                           |
 
 ## 可観測性 {#observability}
 
-TiDB v6.3.0 では、現在ブロックされている DDL の情報を取得するのに役立つ`mysql.tidb_mdl_view`のビューが導入されています。
+TiDB v6.3.0 では、現在ブロックされている DDL の情報を取得するのに役立つ`mysql.tidb_mdl_view`ビューが導入されています。
 
 > **ノート：**
 >
-> `mysql.tidb_mdl_view`のビューを選択するには、 [`PROCESS`権限](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process)が必要です。
+> `mysql.tidb_mdl_view`ビューを選択するには、 [`PROCESS`権限](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process)が必要です。
 
-次の例では、テーブル`t`のインデックスを追加します。 DDL ステートメント`ALTER TABLE t ADD INDEX idx(a)`があるとします。
+次の例では、テーブル`t`のインデックスを追加します。 DDL ステートメント`ALTER TABLE t ADD INDEX idx(a)`あるとします。
 
 ```sql
 SELECT * FROM mysql.tidb_mdl_view\G
@@ -88,14 +88,14 @@ SQL_DIGESTS: ["begin","select * from `t`"]
 1 row in set (0.02 sec)
 ```
 
-前の出力から、 `SESSION ID`が`2199023255957`のトランザクションが`ADD INDEX`の DDL をブロックしていることがわかります。 `SQL_DIGEST`は、このトランザクションによって実行される SQL ステートメントを示しています。これは``["begin","select * from `t`"]``です。ブロックされた DDL を引き続き実行するには、次のグローバル`KILL`ステートメントを使用して`2199023255957`トランザクションを強制終了します。
+前の出力から、 `SESSION ID`が`2199023255957`トランザクションが`ADD INDEX` DDL をブロックしていることがわかります。 `SQL_DIGEST`このトランザクションによって実行される SQL ステートメントを示しています。これは``["begin","select * from `t`"]``です。ブロックされた DDL を引き続き実行するには、次のグローバル`KILL`ステートメントを使用して`2199023255957`トランザクションを強制終了します。
 
 ```sql
 mysql> KILL 2199023255957;
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-トランザクションを強制終了した後、 `mysql.tidb_mdl_view`のビューを再度選択できます。この時点で、前のトランザクションは出力に表示されません。これは、DDL がブロックされていないことを意味します。
+トランザクションを強制終了した後、 `mysql.tidb_mdl_view`ビューを再度選択できます。この時点で、前のトランザクションは出力に表示されません。これは、DDL がブロックされていないことを意味します。
 
 ```sql
 SELECT * FROM mysql.tidb_mdl_view\G

@@ -5,7 +5,7 @@ summary: An overview of the usage of TRUNCATE for the TiDB database.
 
 # トランケート {#truncate}
 
-`TRUNCATE`ステートメントは、非トランザクションの方法でテーブルからすべてのデータを削除します。 `TRUNCATE`は、前の定義の`DROP TABLE` + `CREATE TABLE`と意味的に同じと考えることができます。
+`TRUNCATE`ステートメントは、非トランザクションの方法でテーブルからすべてのデータを削除します。 `TRUNCATE`前の定義の`DROP TABLE` + `CREATE TABLE`と意味的に同じと考えることができます。
 
 `TRUNCATE TABLE tableName`と`TRUNCATE tableName`の両方が有効な構文です。
 

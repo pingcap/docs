@@ -16,7 +16,7 @@ title: TiDB 1.0.7 Release Notes
 -   [ゴルーチンリークの問題を修正](https://github.com/pingcap/tidb/pull/5624)
 -   [http ステータスサーバーのスキーマ情報 API を追加します。](https://github.com/pingcap/tidb/pull/5256)
 -   [`IndexJoin`に関する問題を修正する](https://github.com/pingcap/tidb/pull/5623)
--   [DDL で`RunWorker`が false の場合の動作を更新します](https://github.com/pingcap/tidb/pull/5604)
+-   [DDL で`RunWorker` false の場合の動作を更新します](https://github.com/pingcap/tidb/pull/5604)
 -   [統計におけるテスト結果の安定性の向上](https://github.com/pingcap/tidb/pull/5609)
 -   [`CREATE TABLE`ステートメントの<code>PACK_KEYS</code>構文をサポート](https://github.com/pingcap/tidb/pull/5602)
 -   [null プッシュダウン スキーマの`row_id`列を追加してパフォーマンスを最適化する](https://github.com/pingcap/tidb/pull/5447)

@@ -5,9 +5,9 @@ summary: Learn about how to use the TiDB prepared statements.
 
 # 準備されたステートメント {#prepared-statements}
 
-[プリペアドステートメント](/sql-statements/sql-statement-prepare.md)は、パラメーターのみが異なる複数の SQL ステートメントをテンプレート化します。これにより、SQL ステートメントがパラメーターから分離されます。これを使用して、SQL ステートメントの次の側面を改善できます。
+[プリペアドステートメント](/sql-statements/sql-statement-prepare.md)パラメーターのみが異なる複数の SQL ステートメントをテンプレート化します。これにより、SQL ステートメントがパラメーターから分離されます。これを使用して、SQL ステートメントの次の側面を改善できます。
 
--   **セキュリティ**: パラメータとステートメントが分離されているため、 [SQL インジェクション](https://en.wikipedia.org/wiki/SQL_injection)の攻撃のリスクが回避されます。
+-   **Security**: パラメータとステートメントが分離されているため、 [SQL インジェクション](https://en.wikipedia.org/wiki/SQL_injection)攻撃のリスクが回避されます。
 -   **パフォーマンス**: ステートメントは TiDBサーバーで事前に解析されるため、後続の実行ではパラメーターのみが渡され、SQL ステートメント全体の解析、SQL ステートメント文字列のスプライシング、およびネットワーク送信のコストが節約されます。
 
 ほとんどのアプリケーションでは、SQL ステートメントを列挙できます。限られた数の SQL ステートメントを使用して、アプリケーション全体のデータ クエリを完了することができます。そのため、プリペアドステートメントを使用するのがベスト プラクティスです。
@@ -27,7 +27,7 @@ PREPARE {prepared_statement_name} FROM '{prepared_statement_sql}';
 | `{prepared_statement_name}` |          プリペアドステートメントの名前         |
 |  `{prepared_statement_sql}` | プレースホルダーとして疑問符を含むプリペアドステートメントSQL |
 
-詳細については、 [PREPARE ステートメント](/sql-statements/sql-statement-prepare.md)を参照してください。
+詳細については[PREPARE ステートメント](/sql-statements/sql-statement-prepare.md)参照してください。
 
 ### プリペアドステートメントを使用する {#use-the-prepared-statement}
 
@@ -44,7 +44,7 @@ EXECUTE {prepared_statement_name} USING @{parameter_name};
 |     `{parameter_value}`     |                                           ユーザー変数値                                          |
 | `{prepared_statement_name}` | 前処理ステートメントの名前。これは、 [プリペアドステートメントを作成する](#create-a-prepared-statement)で定義された名前と同じでなければなりません。 |
 
-詳細については、 [`EXECUTE`ステートメント](/sql-statements/sql-statement-execute.md)を参照してください。
+詳細については[`EXECUTE`ステートメント](/sql-statements/sql-statement-execute.md)参照してください。
 
 ### プリペアドステートメントを削除する {#delete-the-prepared-statement}
 
@@ -56,7 +56,7 @@ DEALLOCATE PREPARE {prepared_statement_name};
 | :-------------------------: | :----------------------------------------------------------------------------------------: |
 | `{prepared_statement_name}` | 前処理ステートメントの名前。これは、 [プリペアドステートメントを作成する](#create-a-prepared-statement)で定義された名前と同じでなければなりません。 |
 
-詳細については、 [`DEALLOCATE`ステートメント](/sql-statements/sql-statement-deallocate.md)を参照してください。
+詳細については[`DEALLOCATE`ステートメント](/sql-statements/sql-statement-deallocate.md)参照してください。
 
 ## 例 {#examples}
 

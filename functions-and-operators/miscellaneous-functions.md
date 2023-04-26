@@ -11,7 +11,7 @@ TiDB は、 MySQL 5.7で利用可能な[その他の関数](https://dev.mysql.co
 
 | 名前                                                                                                                 | 説明                                     |
 | :----------------------------------------------------------------------------------------------------------------- | :------------------------------------- |
-| [`ANY_VALUE()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_any-value)           | `ONLY_FULL_GROUP_BY`の値の拒否を抑制           |
+| [`ANY_VALUE()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_any-value)           | `ONLY_FULL_GROUP_BY`値の拒否を抑制            |
 | [`BIN_TO_UUID()`](https://dev.mysql.com/doc/refman/8.0/en/miscellaneous-functions.html#function_bin-to-uuid)       | UUID をバイナリ形式からテキスト形式に変換する              |
 | [`DEFAULT()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_default)               | テーブル列のデフォルト値を返します                      |
 | [`INET_ATON()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_inet-aton)           | IP アドレスの数値を返す                          |

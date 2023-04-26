@@ -7,7 +7,7 @@ summary: An overview of the usage of SHOW DATABASES for the TiDB database.
 
 このステートメントは、現在のユーザーが権限を持つデータベースのリストを表示します。現在のユーザーがアクセスできないデータベースは、リストに表示されません。 `information_schema`データベースは、常にデータベースのリストの最初に表示されます。
 
-`SHOW SCHEMAS`は、このステートメントのエイリアスです。
+`SHOW SCHEMAS`は、このステートメントの別名です。
 
 ## あらすじ {#synopsis}
 

@@ -19,13 +19,13 @@ TiDB アンシブル バージョン: 4.0.0-beta.1
     -   PD [#14750](https://github.com/pingcap/tidb/pull/14750) [#14303](https://github.com/pingcap/tidb/pull/14303) [#14830](https://github.com/pingcap/tidb/pull/14830)から読み取った構成アイテムの動的な変更または更新をサポート
 
 -   TiKV
-    -   `readpool.unify-read-pool`の構成項目 (デフォルトでは`True` ) を追加して、ポイント クエリがコプロセッサーと同じスレッドを使用するかどうかを制御します[#6375](https://github.com/tikv/tikv/pull/6375) [#6401](https://github.com/tikv/tikv/pull/6401) [#6534](https://github.com/tikv/tikv/pull/6534) [#6582](https://github.com/tikv/tikv/pull/6582) [#6585](https://github.com/tikv/tikv/pull/6585) [#6593](https://github.com/tikv/tikv/pull/6593) [#6597](https://github.com/tikv/tikv/pull/6597) [#6677](https://github.com/tikv/tikv/pull/6677)
+    -   `readpool.unify-read-pool`構成項目 (デフォルトでは`True` ) を追加して、ポイント クエリがコプロセッサーと同じスレッドを使用するかどうかを制御します[#6375](https://github.com/tikv/tikv/pull/6375) [#6401](https://github.com/tikv/tikv/pull/6401) [#6534](https://github.com/tikv/tikv/pull/6534) [#6582](https://github.com/tikv/tikv/pull/6582) [#6585](https://github.com/tikv/tikv/pull/6585) [#6593](https://github.com/tikv/tikv/pull/6593) [#6597](https://github.com/tikv/tikv/pull/6597) [#6677](https://github.com/tikv/tikv/pull/6677)
 
 -   PD
     -   HTTP API を最適化して構成マネージャーと互換性を持たせる[#2080](https://github.com/pingcap/pd/pull/2080)
 
 -   TiDB Lightning
-    -   構成ファイルで構成されていない特定の項目については、ドキュメントで指定されている既定の構成を使用し[#255](https://github.com/pingcap/tidb-lightning/pull/255) 。
+    -   構成ファイルで構成されていない特定の項目については、ドキュメントで指定されている既定の構成を使用します[#255](https://github.com/pingcap/tidb-lightning/pull/255)
 
 -   TiDB アンシブル
     -   名前を`theflash`から`tiflash` [#1130](https://github.com/pingcap/tidb-ansible/pull/1130)に変更
@@ -49,8 +49,8 @@ TiDB アンシブル バージョン: 4.0.0-beta.1
     -   `information_schema.PARTITIONS`システム テーブルのクエリによるテーブル パーティションのチェックをサポート[#14347](https://github.com/pingcap/tidb/pull/14347)
     -   `json_objectagg`集計関数[#11154](https://github.com/pingcap/tidb/pull/11154)を追加します。
     -   拒否された接続試行を監査ログに記録するサポート[#14594](https://github.com/pingcap/tidb/pull/14594)
-    -   `max-server-connections`の構成項目 (デフォルトでは`4096` ) を追加して、単一サーバーへの接続数を制御します[#14409](https://github.com/pingcap/tidb/pull/14409)
-    -   サーバーレベル[#14440](https://github.com/pingcap/tidb/pull/14440)で複数のストレージ エンジンを指定する分離読み取りをサポートします。
+    -   `max-server-connections`構成項目 (デフォルトでは`4096` ) を追加して、単一サーバーへの接続数を制御します[#14409](https://github.com/pingcap/tidb/pull/14409)
+    -   サーバーレベル[#14440](https://github.com/pingcap/tidb/pull/14440)で複数のstorageエンジンを指定する分離読み取りをサポートします。
     -   `Apply`オペレーターと`Sort`オペレーターのコスト モデルを最適化して安定性を向上させる[#13550](https://github.com/pingcap/tidb/pull/13550) [#14708](https://github.com/pingcap/tidb/pull/14708)
 
 -   TiKV
@@ -63,15 +63,15 @@ TiDB アンシブル バージョン: 4.0.0-beta.1
     -   `member` API の返されるメッセージにデプロイ パスとコンポーネントバージョンの情報を追加します[#2130](https://github.com/pingcap/pd/pull/2130)
     -   pd-ctl に`component`サブコマンドを追加して、他のコンポーネントの構成を変更および確認します (実験的) [#2092](https://github.com/pingcap/pd/pull/2092)
 
--   Binlog
+-   TiDBBinlog
     -   コンポーネント間の TLS のサポート[#904](https://github.com/pingcap/tidb-binlog/pull/904) [#894](https://github.com/pingcap/tidb-binlog/pull/894)
-    -   Drainerに`kafka-client-id`の構成項目を追加して、Kafka のクライアント ID [#902](https://github.com/pingcap/tidb-binlog/pull/902)を構成します。
+    -   Drainerに`kafka-client-id`構成項目を追加して、Kafka のクライアント ID [#902](https://github.com/pingcap/tidb-binlog/pull/902)を構成します。
     -   Drainer [#885](https://github.com/pingcap/tidb-binlog/pull/885)での増分バックアップ データのパージのサポート
 
 -   TiDB アンシブル
     -   1 つのクラスターに複数の Grafana/Prometheus/Alertmanager をデプロイするサポート[#1142](https://github.com/pingcap/tidb-ansible/pull/1142)
-    -   TiFlash の構成ファイル[#1145](https://github.com/pingcap/tidb-ansible/pull/1145)に`metric_port`の構成項目 (デフォルトでは`8234` ) を追加します。
-    -   TiFlash の構成ファイル[#1141](https://github.com/pingcap/tidb-ansible/pull/1141)に`flash_proxy_status_port`の構成項目 (デフォルトでは`20292` ) を追加します。
+    -   TiFlash の構成ファイル[#1145](https://github.com/pingcap/tidb-ansible/pull/1145)に`metric_port`構成項目 (デフォルトでは`8234` ) を追加します。
+    -   TiFlash の構成ファイル[#1141](https://github.com/pingcap/tidb-ansible/pull/1141)に`flash_proxy_status_port`構成項目 (デフォルトでは`20292` ) を追加します。
     -   TiFlash監視ダッシュボードを追加する[#1147](https://github.com/pingcap/tidb-ansible/pull/1147) [#1151](https://github.com/pingcap/tidb-ansible/pull/1151)
 
 ## バグの修正 {#bug-fixes}
@@ -81,7 +81,7 @@ TiDB アンシブル バージョン: 4.0.0-beta.1
     -   `create or replace view`ステートメントが正しく処理されないため、 `information_schema.views`に重複データが存在する問題を修正します[#14832](https://github.com/pingcap/tidb/pull/14832)
     -   `plan cache`が有効な場合の`BatchPointGet`の誤った結果を修正します[#14855](https://github.com/pingcap/tidb/pull/14855)
     -   タイムゾーンが変更された後、データが間違ったパーティションテーブルに挿入される問題を修正します[#14370](https://github.com/pingcap/tidb/pull/14370)
-    -   外部結合簡略化時に`IsTrue`関数の無効な名前を使用して式を再構築するとpanicが発生する問題を修正[#14515](https://github.com/pingcap/tidb/pull/14515)
+    -   外部結合簡略化時に`IsTrue`関数の無効な名前を使用して式を再構築するとパニックが発生するpanicを修正[#14515](https://github.com/pingcap/tidb/pull/14515)
     -   `show binding`ステートメント[#14443](https://github.com/pingcap/tidb/pull/14443)の誤った特権チェックを修正します。
 
 -   TiKV

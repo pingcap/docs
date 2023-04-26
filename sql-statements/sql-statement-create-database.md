@@ -77,7 +77,7 @@ mysql> SHOW TABLES;
 
 ## こちらもご覧ください {#see-also}
 
--   [使用する](/sql-statements/sql-statement-use.md)
+-   [使用](/sql-statements/sql-statement-use.md)
 -   [データベースの変更](/sql-statements/sql-statement-alter-database.md)
 -   [データベースをドロップ](/sql-statements/sql-statement-drop-database.md)
 -   [データベースを表示](/sql-statements/sql-statement-show-databases.md)

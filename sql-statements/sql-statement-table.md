@@ -28,7 +28,7 @@ CREATE TABLE t1(id INT PRIMARY KEY);
 INSERT INTO t1 VALUES (1),(2),(3);
 ```
 
-表`t1`のデータをビューします。
+表`t1`のデータをビュー。
 
 ```sql
 TABLE t1;
@@ -45,7 +45,7 @@ TABLE t1;
 3 rows in set (0.01 sec)
 ```
 
-`t1`をクエリし、結果を`id`フィールドで降順に並べ替えます。
+`t1`クエリし、結果を`id`フィールドで降順に並べ替えます。
 
 ```sql
 TABLE t1 ORDER BY id DESC;

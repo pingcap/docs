@@ -71,11 +71,11 @@ DESC tidb_hot_regions_history;
 
 > **ノート：**
 >
-> `UPDATE_TIME` 、 `REGION_ID` 、 `STORE_ID` 、 `PEER_ID` 、 `IS_LEARNER` 、 `IS_LEADER` 、および`TYPE`フィールドは、実行のために PD サーバーにプッシュダウンされます。テーブルを使用するオーバーヘッドを減らすには、検索の時間範囲を指定し、できるだけ多くの条件を指定する必要があります。たとえば、 `select * from tidb_hot_regions_history where store_id = 11 and update_time > '2020-05-18 20:40:00' and update_time < '2020-05-18 21:40:00' and type='write'`です。
+> `UPDATE_TIME` 、 `REGION_ID` 、 `STORE_ID` 、 `PEER_ID` 、 `IS_LEARNER` 、 `IS_LEADER`および`TYPE`フィールドは、実行のために PD サーバーにプッシュダウンされます。テーブルを使用するオーバーヘッドを減らすには、検索の時間範囲を指定し、できるだけ多くの条件を指定する必要があります。たとえば、 `select * from tidb_hot_regions_history where store_id = 11 and update_time > '2020-05-18 20:40:00' and update_time < '2020-05-18 21:40:00' and type='write'`です。
 
 ## 一般的なユーザー シナリオ {#common-user-scenarios}
 
--   特定の期間内のホット リージョンをクエリします。 `update_time`を実際の時間に置き換えます。
+-   特定の期間内のホット リージョンをクエリします。 `update_time`実際の時間に置き換えます。
 
     {{< copyable "" >}}
 

@@ -39,7 +39,7 @@ TiDB Cloud API は HTTP ダイジェスト認証を使用します。秘密鍵�
 
 詳細な手順については、 [TiDB CloudAPI ドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management)を参照してください。
 
-## ステップTiDB Cloud Terraform プロバイダーをダウンロードする {#step-3-download-tidb-cloud-terraform-provider}
+## ステップ 3.TiDB TiDB Cloud Terraform プロバイダーをダウンロードする {#step-3-download-tidb-cloud-terraform-provider}
 
 1.  `main.tf`ファイルを作成します。
 
@@ -83,22 +83,20 @@ TiDB Cloud API は HTTP ダイジェスト認証を使用します。秘密鍵�
 
 ## ステップ 4. API キーを使用してTiDB Cloud Terraform プロバイダーを構成する {#step-4-configure-tidb-cloud-terraform-provider-with-the-api-key}
 
-次のように`main.tf`のファイルを構成できます。
+次のように`main.tf`ファイルを構成できます。
 
 ```
 terraform {
   required_providers {
     tidbcloud = {
       source = "tidbcloud/tidbcloud"
-      version = "~> 0.1.0"
     }
   }
-  required_version = ">= 1.0.0"
 }
 
 provider "tidbcloud" {
-  public_key = "fake_public_key"
-  private_key = "fake_private_key"
+  public_key = "your_public_key"
+  private_key = "your_private_key"
 }
 ```
 

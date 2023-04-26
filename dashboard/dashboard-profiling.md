@@ -9,11 +9,11 @@ summary: Learn how to collect performance data to analyze sophisticated problems
 >
 > この機能は、データベースの専門家向けに設計されています。専門家以外のユーザーには、PingCAP テクニカル サポートの指導の下でこの機能を使用することをお勧めします。
 
-手動プロファイリングにより、ユーザーはワンクリックで各 TiDB、TiKV、PD、およびTiFlashインスタンスの現在のパフォーマンス データ**をオンデマンド**で収集できます。収集されたパフォーマンス データは、FlameGraph または DAG として視覚化できます。
+手動プロファイリングにより、ユーザーはワンクリックで各 TiDB、TiKV、PD、およびTiFlashインスタンスの現在のパフォーマンス データを**オンデマンド**で収集できます。収集されたパフォーマンス データは、FlameGraph または DAG として視覚化できます。
 
 これらのパフォーマンス データを使用して、専門家はインスタンスの CPU やメモリなどの現在のリソース消費の詳細を分析し、高い CPU オーバーヘッド、高いメモリ使用量、プロセス ストールなどの進行中の高度なパフォーマンスの問題を特定するのに役立ちます。
 
-プロファイリングを開始した後、TiDB ダッシュボードは現在のパフォーマンス データを一定期間 (デフォルトでは 30 秒) 収集します。したがって、この機能は、クラスターが現在直面している進行中の問題を分析するためにのみ使用でき、過去の問題には大きな影響を与えません。**いつでも**パフォーマンス データを収集して分析したい場合は、 [継続的なプロファイリング](/dashboard/continuous-profiling.md) . を参照してください。
+プロファイリングを開始した後、TiDB ダッシュボードは現在のパフォーマンス データを一定期間 (デフォルトでは 30 秒) 収集します。したがって、この機能は、クラスターが現在直面している進行中の問題を分析するためにのみ使用でき、過去の問題には大きな影響を与えません。**いつでも**パフォーマンス データを収集して分析したい場合は、 [継続的なプロファイリング](/dashboard/continuous-profiling.md)を参照してください。
 
 ## 対応実績データ {#supported-performance-data}
 
@@ -33,7 +33,7 @@ summary: Learn how to collect performance data to analyze sophisticated problems
 
 次のいずれかの方法を使用して、インスタンス プロファイリング ページにアクセスできます。
 
--   TiDB ダッシュボードにログインした後、左側のナビゲーション バーで [ **Advanced Debugging** ] &gt; [ <strong>Profiling Instances</strong> ] &gt; [ <strong>Manual Profiling</strong> ] をクリックします。
+-   TiDB ダッシュボードにログインした後、左側のナビゲーション バーで**[Advanced Debugging]** &gt; <strong>[Profiling Instances]</strong> &gt; <strong>[Manual Profiling]</strong>をクリックします。
 
     ![Access instance profiling page](/media/dashboard/dashboard-profiling-access.png)
 
@@ -41,7 +41,7 @@ summary: Learn how to collect performance data to analyze sophisticated problems
 
 ## プロファイリングを開始 {#start-profiling}
 
-インスタンスのプロファイリング ページで、少なくとも 1 つのターゲット インスタンスを選択し、[**プロファイリング**の開始] をクリックしてインスタンスのプロファイリングを開始します。
+インスタンスのプロファイリング ページで、少なくとも 1 つのターゲット インスタンスを選択し、 **[プロファイリングの開始]**をクリックしてインスタンスのプロファイリングを開始します。
 
 ![Start instance profiling](/media/dashboard/dashboard-profiling-start.png)
 
@@ -59,7 +59,7 @@ summary: Learn how to collect performance data to analyze sophisticated problems
 
 ## 性能データのダウンロード {#download-performance-data}
 
-すべてのインスタンスのプロファイリングが完了したら、右上隅にある [**プロファイル結果のダウンロード**] をクリックして、すべてのパフォーマンス データをダウンロードできます。
+すべてのインスタンスのプロファイリングが完了したら、右上隅にある**[プロファイル結果のダウンロード]**をクリックして、すべてのパフォーマンス データをダウンロードできます。
 
 ![Download profiling result](/media/dashboard/dashboard-profiling-download.png)
 

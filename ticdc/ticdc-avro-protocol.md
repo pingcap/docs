@@ -69,9 +69,9 @@ TiCDC は DML イベントを Kafka イベントに変換し、イベントの�
 }
 ```
 
--   `{{TableName}}`は、イベントが発生したテーブルの名前を示します。
+-   `{{TableName}}`イベントが発生したテーブルの名前を示します。
 -   `{{Namespace}}`は Avro の名前空間です。
--   `{{ColumnValueBlock}}`は、データの各列の形式を定義します。
+-   `{{ColumnValueBlock}}`データの各列の形式を定義します。
 
 キーの`fields`には、主キー列または一意のインデックス列のみが含まれます。
 
@@ -153,9 +153,9 @@ TiCDC は DML イベントを Kafka イベントに変換し、イベントの�
 }
 ```
 
--   `{{ColumnName}}`は列名を示します。
--   `{{TIDB_TYPE}}`は、TiDB の型を示します。これは、SQL 型との 1 対 1 のマッピングではありません。
--   `{{AVRO_TYPE}}`は[アブロ仕様](https://avro.apache.org/docs/current/spec.html)のタイプを示します。
+-   `{{ColumnName}}`列名を示します。
+-   `{{TIDB_TYPE}}` TiDB の型を示します。これは、SQL 型との 1 対 1 のマッピングではありません。
+-   `{{AVRO_TYPE}}` [アブロスペック](https://avro.apache.org/docs/current/spec.html)のタイプを示します。
 
 | SQL タイプ   | TIDB_TYPE | AVRO_TYPE | 説明                                                                                                       |
 | --------- | --------- | --------- | -------------------------------------------------------------------------------------------------------- |
@@ -164,40 +164,40 @@ TiCDC は DML イベントを Kafka イベントに変換し、イベントの�
 | SMALLINT  | INT       | 整数        | unsigned の場合、TIDB_TYPE は INT UNSIGNED です。                                                                |
 | ミディアムミント  | INT       | 整数        | unsigned の場合、TIDB_TYPE は INT UNSIGNED です。                                                                |
 | INT       | INT       | 整数        | unsigned の場合、TIDB_TYPE は INT UNSIGNED で、AVRO_TYPE は long です。                                             |
-| BIGINT    | BIGINT    | 長いです      | 署名されていない場合、TIDB_TYPE は BIGINT UNSIGNED です。 `avro-bigint-unsigned-handling-mode`が文字列の場合、AVRO_TYPE は文字列です。 |
+| BIGINT    | BIGINT    | 長さ        | 署名されていない場合、TIDB_TYPE は BIGINT UNSIGNED です。 `avro-bigint-unsigned-handling-mode`が文字列の場合、AVRO_TYPE は文字列です。 |
 | 小さな塊      | BLOB      | バイト       | <li></li>                                                                                                |
 | BLOB      | BLOB      | バイト       | <li></li>                                                                                                |
 | ミディアムブロブ  | BLOB      | バイト       | <li></li>                                                                                                |
 | ロングブロブ    | BLOB      | バイト       | <li></li>                                                                                                |
 | バイナリ      | BLOB      | バイト       | <li></li>                                                                                                |
 | VARBINARY | BLOB      | バイト       | <li></li>                                                                                                |
-| 小さなテキスト   | TEXT      | ストリング     | <li></li>                                                                                                |
-| TEXT      | TEXT      | ストリング     | <li></li>                                                                                                |
-| 中文        | TEXT      | ストリング     | <li></li>                                                                                                |
-| ロングテキスト   | TEXT      | ストリング     | <li></li>                                                                                                |
-| CHAR      | TEXT      | ストリング     | <li></li>                                                                                                |
-| VARCHAR   | TEXT      | ストリング     | <li></li>                                                                                                |
+| 小さなテキスト   | TEXT      | 弦         | <li></li>                                                                                                |
+| TEXT      | TEXT      | 弦         | <li></li>                                                                                                |
+| 中文        | TEXT      | 弦         | <li></li>                                                                                                |
+| ロングテキスト   | TEXT      | 弦         | <li></li>                                                                                                |
+| CHAR      | TEXT      | 弦         | <li></li>                                                                                                |
+| VARCHAR   | TEXT      | 弦         | <li></li>                                                                                                |
 | 浮く        | 浮く        | ダブル       | <li></li>                                                                                                |
 | ダブル       | ダブル       | ダブル       | <li></li>                                                                                                |
-| 日にち       | 日にち       | ストリング     | <li></li>                                                                                                |
-| 日付時刻      | 日付時刻      | ストリング     | <li></li>                                                                                                |
-| タイムスタンプ   | タイムスタンプ   | ストリング     | <li></li>                                                                                                |
-| 時間        | 時間        | ストリング     | <li></li>                                                                                                |
+| 日にち       | 日にち       | 弦         | <li></li>                                                                                                |
+| 日付時刻      | 日付時刻      | 弦         | <li></li>                                                                                                |
+| タイムスタンプ   | タイムスタンプ   | 弦         | <li></li>                                                                                                |
+| 時間        | 時間        | 弦         | <li></li>                                                                                                |
 | 年         | 年         | 整数        | <li></li>                                                                                                |
 | 少し        | 少し        | バイト       | <li></li>                                                                                                |
-| JSON      | JSON      | ストリング     | <li></li>                                                                                                |
-| 列挙型       | 列挙型       | ストリング     | <li></li>                                                                                                |
-| 設定        | 設定        | ストリング     | <li></li>                                                                                                |
+| JSON      | JSON      | 弦         | <li></li>                                                                                                |
+| 列挙型       | 列挙型       | 弦         | <li></li>                                                                                                |
+| 設定        | 設定        | 弦         | <li></li>                                                                                                |
 | 小数        | 小数        | バイト       | `avro-decimal-handling-mode`が文字列の場合、AVRO_TYPE は文字列です。                                                    |
 
-Avro プロトコルでは、他の 2 つの`sink-uri`パラメーター ( `avro-decimal-handling-mode`および`avro-bigint-unsigned-handling-mode` ) もカラムデータ形式に影響を与える可能性があります。
+Avro プロトコルでは、他の 2 つの`sink-uri`パラメーター ( `avro-decimal-handling-mode`および`avro-bigint-unsigned-handling-mode`もカラムデータ形式に影響を与える可能性があります。
 
--   `avro-decimal-handling-mode`は、Avro が以下を含む小数フィールドを処理する方法を制御します。
+-   `avro-decimal-handling-mode` 、Avro が以下を含む小数フィールドを処理する方法を制御します。
 
     -   string: Avro は 10 進数フィールドを文字列として処理します。
     -   正確: Avro は 10 進数フィールドをバイトとして処理します。
 
--   `avro-bigint-unsigned-handling-mode`は、次のような BIGINT UNSIGNED フィールドを Avro が処理する方法を制御します。
+-   `avro-bigint-unsigned-handling-mode`次のような BIGINT UNSIGNED フィールドを Avro が処理する方法を制御します。
 
     -   string: Avro は BIGINT UNSIGNED フィールドを文字列として処理します。
     -   long: Avro は BIGINT UNSIGNED フィールドを 64 ビット符号付き整数として処理します。値が`9223372036854775807`より大きい場合、オーバーフローが発生します。
@@ -268,7 +268,7 @@ DECIMAL(10, 4)
 
 ## DDL イベントとスキーマの変更 {#ddl-events-and-schema-changes}
 
-Avro はダウンストリームの DDL イベントを生成しません。 DML イベントが発生するたびにスキーマが変更されているかどうかを確認します。スキーマが変更されると、Avro は新しいスキーマを生成し、スキーマ レジストリに登録します。スキーマの変更が互換性チェックに合格しない場合、登録は失敗します。 Avro はスキーマの互換性の問題を解決しません。
+Avro はダウンストリームの DDL イベントを生成しません。 DML イベントが発生するたびにスキーマが変更されているかどうかを確認します。スキーマが変更されると、Avro は新しいスキーマを生成し、スキーマ レジストリに登録します。スキーマの変更が互換性チェックに合格しない場合、登録は失敗します。 TiCDC は、スキーマの互換性の問題を解決しません。
 
 スキーマの変更が互換性チェックに合格し、新しいバージョンが登録された場合でも、データのプロデューサーとコンシューマーは、システムを正常に実行するためにアップグレードを実行する必要があることに注意してください。
 
@@ -278,4 +278,8 @@ Confluent Schema Registry のデフォルトの互換性ポリシーが`BACKWARD
 
 ## トピックの配布 {#topic-distribution}
 
-スキーマ レジストリは、TopicNameStrategy、RecordNameStrategy、および TopicRecordNameStrategy の 3 つ[サブジェクト名戦略](https://docs.confluent.io/platform/current/schema-registry/serdes-develop/index.html#subject-name-strategy)をサポートします。現在、TiCDC Avro は TopicNameStrategy のみをサポートしています。つまり、Kafka トピックは 1 つのデータ形式でしかデータを受信できません。したがって、TiCDC Avro では、複数のテーブルを同じトピックにマッピングすることを禁止しています。変更フィードを作成するときに、構成された配布ルールにトピック ルールに`{schema}`と`{table}`のプレースホルダーが含まれていない場合、エラーが報告されます。
+スキーマ レジストリは、TopicNameStrategy、RecordNameStrategy、および TopicRecordNameStrategy の 3 つ[サブジェクト名戦略](https://docs.confluent.io/platform/current/schema-registry/serdes-develop/index.html#subject-name-strategy)をサポートします。現在、TiCDC Avro は TopicNameStrategy のみをサポートしています。つまり、Kafka トピックは 1 つのデータ形式でしかデータを受信できません。したがって、TiCDC Avro では、複数のテーブルを同じトピックにマッピングすることを禁止しています。変更フィードを作成するときに、構成された配布ルールにトピック ルールに`{schema}`と`{table}`プレースホルダーが含まれていない場合、エラーが報告されます。
+
+## 互換性 {#compatibility}
+
+TiCDC クラスターを v6.5.2 以降の v6.5.x バージョンにアップグレードするときに、Avro を使用してレプリケートされたテーブルに`FLOAT`データ型が含まれている場合、アップグレードする前に Confluent Schema Registry の互換性ポリシーを手動で`None`に調整する必要があります。 changefeed はスキーマを正常に更新できます。そうしないと、アップグレード後に変更フィードがスキーマを更新できず、エラー状態になります。詳細については、 [#8490](https://github.com/pingcap/tiflow/issues/8490)を参照してください。

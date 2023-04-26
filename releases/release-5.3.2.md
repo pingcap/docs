@@ -27,7 +27,7 @@ TiDB バージョン: 5.3.2
 -   TiKV
 
     -   Raftクライアントによるシステム コールを減らし、CPU 効率を高める[#11309](https://github.com/tikv/tikv/issues/11309)
-    -   TiKV クライアントがリージョンキャッシュを時間内に更新できるように、ヘルス チェックを改善して利用できない[#12398](https://github.com/tikv/tikv/issues/12398)を検出します。
+    -   TiKV クライアントがリージョンキャッシュを時間[#12398](https://github.com/tikv/tikv/issues/12398)に更新できるように、ヘルス チェックを改善して利用できないRaftstoreを検出します。
     -   リーダーシップを CDC オブザーバーに移管し、レイテンシーのジッターを減らします[#12111](https://github.com/tikv/tikv/issues/12111)
     -   Raftログのガベージコレクションモジュールにメトリックを追加して、モジュール[#11374](https://github.com/tikv/tikv/issues/11374)のパフォーマンスの問題を特定します。
 
@@ -51,11 +51,11 @@ TiDB バージョン: 5.3.2
     -   以前は、ネットワーク接続の問題が発生した場合、TiDB は切断されたセッションによって保持されていたリソースを常に正しく解放するとは限りませんでした。この問題は修正され、開いているトランザクションをロールバックし、関連する他のリソースを解放できるようになりました。 [#34722](https://github.com/pingcap/tidb/issues/34722)
     -   TiDB Binlogを有効にして重複した値を挿入すると`data and columnID count not match`エラーが発生する問題を修正[#33608](https://github.com/pingcap/tidb/issues/33608)
     -   Plan Cache を RC 分離レベル[#34447](https://github.com/pingcap/tidb/issues/34447)で開始すると、クエリの結果が正しくない場合がある問題を修正します。
-    -   MySQL バイナリ プロトコル[#33509](https://github.com/pingcap/tidb/issues/33509)でテーブル スキーマ変更後にプリペアドステートメントを実行するとセッションpanicが発生する問題を修正
+    -   MySQL バイナリ プロトコル[#33509](https://github.com/pingcap/tidb/issues/33509)でテーブル スキーマ変更後にプリペアドステートメントを実行するとセッション パニックが発生するpanicを修正
     -   新しいパーティションが追加されたときにテーブルの属性がインデックス化されない問題と、パーティションが変更されたときにテーブルの範囲情報が更新されない問題を修正します[#33929](https://github.com/pingcap/tidb/issues/33929)
-    -   `INFORMATION_SCHEMA.CLUSTER_SLOW_QUERY`テーブルをクエリすると、TiDBサーバーがメモリになることがある問題を修正します。この問題は、Grafana ダッシュボードでスロー クエリを確認すると発生する可能性があります[#33893](https://github.com/pingcap/tidb/issues/33893)
-    -   クラスターの PD ノードが交換された後、一部の DDL ステートメントが一定期間停止する可能性がある問題を修正し[#33908](https://github.com/pingcap/tidb/issues/33908) 。
-    -   v4.0 からアップグレードされたクラスターで`all`特権の付与が失敗する可能性がある問題を修正し[#33588](https://github.com/pingcap/tidb/issues/33588) 。
+    -   `INFORMATION_SCHEMA.CLUSTER_SLOW_QUERY`テーブルをクエリすると、TiDBサーバーがメモリ不足になることがある問題を修正します。この問題は、Grafana ダッシュボードでスロー クエリを確認すると発生する可能性があります[#33893](https://github.com/pingcap/tidb/issues/33893)
+    -   クラスターの PD ノードが交換された後、一部の DDL ステートメントが一定期間停止する可能性がある問題を修正します[#33908](https://github.com/pingcap/tidb/issues/33908)
+    -   [#33588](https://github.com/pingcap/tidb/issues/33588)からアップグレードされたクラスターで`all`特権の付与が失敗する可能性がある問題を修正します。
     -   `left join` [#31321](https://github.com/pingcap/tidb/issues/31321)を使用して複数のテーブルのデータを削除したときの誤った結果を修正
     -   TiDB が重複したタスクをTiFlash [#32814](https://github.com/pingcap/tidb/issues/32814)にディスパッチする可能性があるバグを修正
     -   TiDB のバックグラウンド HTTP サービスが正常に終了せず、クラスターが異常な状態になることがある問題を修正します[#30571](https://github.com/pingcap/tidb/issues/30571)
@@ -64,16 +64,16 @@ TiDB バージョン: 5.3.2
 -   TiKV
 
     -   PD クライアントがエラー[#12345](https://github.com/tikv/tikv/issues/12345)に遭遇したときに発生する PD クライアントの再接続が頻繁に発生する問題を修正します。
-    -   `DATETIME`の値に分数と`Z` [#12739](https://github.com/tikv/tikv/issues/12739)が含まれている場合に発生する時間解析エラーの問題を修正します。
+    -   `DATETIME`値に分数と`Z` [#12739](https://github.com/tikv/tikv/issues/12739)が含まれている場合に発生する時間解析エラーの問題を修正します。
     -   空の文字列の型変換を実行すると TiKV がパニックになる問題を修正します[#12673](https://github.com/tikv/tikv/issues/12673)
-    -   非同期コミットが有効になっている場合に、悲観的トランザクションでコミット レコードが重複する可能性がある問題を修正し[#12615](https://github.com/tikv/tikv/issues/12615) 。
+    -   悲観的トランザクションでコミット レコードが重複する可能性がある問題を修正します[#12615](https://github.com/tikv/tikv/issues/12615)
     -   Follower Read [#12478](https://github.com/tikv/tikv/issues/12478)使用時に TiKV が`invalid store ID 0`エラーを報告するバグを修正
     -   ピアの破棄とリージョン[#12368](https://github.com/tikv/tikv/issues/12368)のバッチ分割の間の競合によって引き起こされる TiKVpanicの問題を修正します。
     -   ネットワークが貧弱な場合、楽観的トランザクションを正常にコミットしても`Write Conflict`エラーが報告される可能性がある問題を修正します[#34066](https://github.com/pingcap/tidb/issues/34066)
     -   マージする対象のリージョンが無効な場合、TiKV が予期せずパニックを起こし、ピアを破棄する問題を修正します[#12232](https://github.com/tikv/tikv/issues/12232)
     -   古いメッセージが原因で TiKV がpanicになるバグを修正[#12023](https://github.com/tikv/tikv/issues/12023)
-    -   メモリメトリック[#12160](https://github.com/tikv/tikv/issues/12160)のオーバーフローが原因で発生する断続的なパケット損失とメモリ(OOM) の問題を修正します。
-    -   [#9765](https://github.com/tikv/tikv/issues/9765)が Ubuntu 18.04 でプロファイリングを実行するときに発生する潜在的なpanicの問題を修正します。
+    -   メモリメトリック[#12160](https://github.com/tikv/tikv/issues/12160)のオーバーフローが原因で発生する断続的なパケット損失とメモリ不足 (OOM) の問題を修正します。
+    -   TiKV が Ubuntu [#9765](https://github.com/tikv/tikv/issues/9765)でプロファイリングを実行するときに発生する潜在的なpanicの問題を修正します。
     -   間違った文字列の一致が原因で tikv-ctl が間違った結果を返す問題を修正します[#12329](https://github.com/tikv/tikv/issues/12329)
     -   レプリカの読み取りが線形化可能性に違反する可能性があるバグを修正します[#12109](https://github.com/tikv/tikv/issues/12109)
     -   リージョン[#12048](https://github.com/tikv/tikv/issues/12048)のマージ時にターゲット ピアが初期化されずに破棄されたピアに置き換えられると発生する TiKVpanicの問題を修正します。
@@ -85,18 +85,18 @@ TiDB バージョン: 5.3.2
     -   PD リーダーの転送[#4769](https://github.com/tikv/pd/issues/4769)の直後にスケジュールを開始できない問題を修正します。
     -   PDリーダーの転送後、削除されたトゥームストーンストアが再び表示される問題を修正[#4941](https://github.com/tikv/pd/issues/4941)
     -   一部のまれなケースでの TSO フォールバックのバグを修正します[#4884](https://github.com/tikv/pd/issues/4884)
-    -   大容量(例えば2T)のストアが存在する場合、満杯に割り当てられた小さなストアが検出されず、バランス演算子が生成されない問題を修正し[#4805](https://github.com/tikv/pd/issues/4805) 。
+    -   大容量(例えば2T)のストアが存在する場合、満杯に割り当てられた小さなストアが検出されず、バランス演算子が生成されない問題を修正します[#4805](https://github.com/tikv/pd/issues/4805)
     -   `SchedulerMaxWaitingOperator`を`1` [#4946](https://github.com/tikv/pd/issues/4946)に設定するとスケジューラーが動作しない問題を修正
     -   ラベル分布がメトリクス[#4825](https://github.com/tikv/pd/issues/4825)に残留ラベルを持つ問題を修正します。
 
 -   TiFlash
 
-    -   無効なストレージ ディレクトリ構成が予期しない動作を引き起こすバグを修正します[#4093](https://github.com/pingcap/tiflash/issues/4093)
-    -   `NOT NULL`の列が追加されたときに報告された修正`TiFlash_schema_error` [#4596](https://github.com/pingcap/tiflash/issues/4596)
+    -   無効なstorageディレクトリ構成が予期しない動作を引き起こすバグを修正します[#4093](https://github.com/pingcap/tiflash/issues/4093)
+    -   `NOT NULL`列が追加されたときに報告された修正`TiFlash_schema_error` [#4596](https://github.com/pingcap/tiflash/issues/4596)
     -   `commit state jump backward`エラーが原因で繰り返されるクラッシュを修正[#2576](https://github.com/pingcap/tiflash/issues/2576)
     -   多数の INSERT 操作と DELETE 操作の後に発生する可能性のあるデータの不整合を修正します[#4956](https://github.com/pingcap/tiflash/issues/4956)
-    -   ローカル トンネルが有効になっている場合、MPP クエリをキャンセルすると、タスクが永久にハングする可能性があるというバグを修正し[#4229](https://github.com/pingcap/tiflash/issues/4229) 。
-    -   TiFlashがリモート読み取り[#3713](https://github.com/pingcap/tiflash/issues/3713)を使用する場合に、一貫性のないTiFlashバージョンの誤ったレポートを修正します。
+    -   ローカル トンネルが有効になっている場合、MPP クエリをキャンセルすると、タスクが[#4229](https://github.com/pingcap/tiflash/issues/4229)にハングする可能性があるというバグを修正します。
+    -   TiFlash がリモート読み取り[#3713](https://github.com/pingcap/tiflash/issues/3713)を使用する場合に、一貫性のないTiFlashバージョンの誤ったレポートを修正します。
     -   ランダムな gRPC キープアライブ タイムアウト[#4662](https://github.com/pingcap/tiflash/issues/4662)が原因で MPP クエリが失敗する可能性があるバグを修正します
     -   交換レシーバーで再試行がある場合、MPP クエリが永久にハングする可能性があるというバグを修正します[#3444](https://github.com/pingcap/tiflash/issues/3444)
     -   `DATETIME`から`DECIMAL` [#4151](https://github.com/pingcap/tiflash/issues/4151)をキャストしたときに発生する誤った結果を修正します
@@ -108,29 +108,29 @@ TiDB バージョン: 5.3.2
     -   `CastStringAsReal`動作がTiFlashと TiDB または TiKV [#3475](https://github.com/pingcap/tiflash/issues/3475)で一貫していない問題を修正
     -   文字列を日時[#3556](https://github.com/pingcap/tiflash/issues/3556)にキャストするときの誤った`microsecond`を修正
     -   削除操作が多いテーブルに対してクエリを実行するときに発生する可能性のあるエラーを修正します[#4747](https://github.com/pingcap/tiflash/issues/4747)
-    -   TiFlash が多数の &quot; TiFlash watchdog の起動&quot; エラーをランダムに報告するバグを修正[#4192](https://github.com/pingcap/tiflash/issues/4192)
+    -   TiFlashが多数の &quot;Keepalive watchdog の起動&quot; エラーをランダムに報告するバグを修正[#4192](https://github.com/pingcap/tiflash/issues/4192)
     -   どのリージョン範囲とも一致しないデータがTiFlashノード[#4414](https://github.com/pingcap/tiflash/issues/4414)に残るバグを修正
     -   MPP タスクがスレッドを永久にリークする可能性があるバグを修正します[#4238](https://github.com/pingcap/tiflash/issues/4238)
     -   GC [#4511](https://github.com/pingcap/tiflash/issues/4511)の後で空のセグメントをマージできないバグを修正
     -   TLS が有効になっているときに発生するpanicの問題を修正します[#4196](https://github.com/pingcap/tiflash/issues/4196)
     -   期限切れのデータがゆっくりとリサイクルされる問題を修正します[#4146](https://github.com/pingcap/tiflash/issues/4146)
-    -   無効なストレージ ディレクトリ構成が予期しない動作を引き起こすバグを修正します[#4093](https://github.com/pingcap/tiflash/issues/4093)
+    -   無効なstorageディレクトリ構成が予期しない動作を引き起こすバグを修正します[#4093](https://github.com/pingcap/tiflash/issues/4093)
     -   一部の例外が適切に処理されないバグを修正[#4101](https://github.com/pingcap/tiflash/issues/4101)
     -   重い読み取りワークロードの下で列を追加した後の潜在的なクエリ エラーを修正します[#3967](https://github.com/pingcap/tiflash/issues/3967)
     -   `STR_TO_DATE()`関数がマイクロ秒の解析時に先頭のゼロを正しく処理しないというバグを修正します[#3557](https://github.com/pingcap/tiflash/issues/3557)
-    -   TiFlashが再起動後に`EstablishMPPConnection`エラーを返す場合がある問題を修正[#3615](https://github.com/pingcap/tiflash/issues/3615)
+    -   TiFlash が再起動後に`EstablishMPPConnection`エラーを返す場合がある問題を修正[#3615](https://github.com/pingcap/tiflash/issues/3615)
 
 -   ツール
 
     -   バックアップと復元 (BR)
 
         -   増分復元後にテーブルにレコードを挿入するときに重複する主キーを修正する[#33596](https://github.com/pingcap/tidb/issues/33596)
-        -   BRまたはTiDB Lightningが異常終了した後、スケジューラが再開されない問題を修正します[#33546](https://github.com/pingcap/tidb/issues/33546)
+        -   BRまたはTiDB Lightning が異常終了した後、スケジューラが再開されない問題を修正します[#33546](https://github.com/pingcap/tidb/issues/33546)
         -   空のクエリを持つ DDL ジョブが原因で、 BR増分復元が誤ってエラーを返すバグを修正します[#33322](https://github.com/pingcap/tidb/issues/33322)
-        -   復元中にリージョンが一致しない場合、 BRが十分な回数再試行しないという問題を修正します[#33419](https://github.com/pingcap/tidb/issues/33419)
-        -   復元操作がいくつかの回復不能なエラーに遭遇したときにBRがスタックするバグを修正します[#33200](https://github.com/pingcap/tidb/issues/33200)
-        -   BRが RawKV [#32607](https://github.com/pingcap/tidb/issues/32607)のバックアップに失敗する問題を修正
-        -   BRが S3 内部エラーを処理できない問題を修正します[#34350](https://github.com/pingcap/tidb/issues/34350)
+        -   復元中にリージョンが一致しない場合、 BR が十分な回数再試行しないという問題を修正します[#33419](https://github.com/pingcap/tidb/issues/33419)
+        -   復元操作がいくつかの回復不能なエラーに遭遇したときにBR がスタックするバグを修正します[#33200](https://github.com/pingcap/tidb/issues/33200)
+        -   BR がRawKV [#32607](https://github.com/pingcap/tidb/issues/32607)のバックアップに失敗する問題を修正
+        -   BR がS3 内部エラーを処理できない問題を修正します[#34350](https://github.com/pingcap/tidb/issues/34350)
 
     -   TiCDC
 
@@ -153,7 +153,7 @@ TiDB バージョン: 5.3.2
         -   フィルタリングされた DDL をダウンストリームで手動で実行すると、タスクの再開に失敗する場合があるという問題を修正します[#5272](https://github.com/pingcap/tiflow/issues/5272)
         -   主キーが`SHOW CREATE TABLE`ステートメントによって返されるインデックスの先頭にない場合に発生する DM ワーカーpanicの問題を修正します[#5159](https://github.com/pingcap/tiflow/issues/5159)
         -   GTID有効時やタスク自動再開時にCPU使用率が上昇し、大量のログが出力されることがある問題を修正[#5063](https://github.com/pingcap/tiflow/issues/5063)
-        -   DM マスターの再起動後にリレー ログが無効になる可能性がある問題を修正し[#4803](https://github.com/pingcap/tiflow/issues/4803) 。
+        -   DM マスターの再起動後にリレー ログが無効になる可能性がある問題を修正します[#4803](https://github.com/pingcap/tiflow/issues/4803)
 
     -   TiDB Lightning
 

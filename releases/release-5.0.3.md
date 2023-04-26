@@ -60,7 +60,7 @@ TiDB バージョン: 5.0.3
     -   `STR_TO_DATE()`機能をサポート
     -   複数のスレッドを使用して、右外部結合で結合されていないデータを最適化する
     -   デカルト結合をサポート
-    -   `LEFT()`と`RIGHT()`の関数をサポート
+    -   `LEFT()`と`RIGHT()`関数をサポート
     -   MPP クエリで古いリージョンを自動的に無効にするサポート
     -   `ABS()`機能をサポート
 
@@ -81,8 +81,8 @@ TiDB バージョン: 5.0.3
     -   ウィンドウ関数クエリで`limit`を使用すると発生するpanicの問題を修正します[#25344](https://github.com/pingcap/tidb/issues/25344)
     -   `Limit` [#24636](https://github.com/pingcap/tidb/issues/24636)を使用してパーティションテーブルをクエリするときに返される間違った値を修正します
     -   `ENUM`または`SET`タイプの列[#24944](https://github.com/pingcap/tidb/issues/24944)で`IFNULL`が正しく反映されない問題を修正
-    -   結合サブクエリの`count`を`first_row` [#24865](https://github.com/pingcap/tidb/issues/24865)に変更することによって引き起こされる誤った結果を修正します。
-    -   `TopN`演算子[#24930](https://github.com/pingcap/tidb/issues/24930)の下で`ParallelApply`を使用すると発生するクエリ ハングの問題を修正します。
+    -   結合サブクエリの`count` `first_row` [#24865](https://github.com/pingcap/tidb/issues/24865)に変更することによって引き起こされる誤った結果を修正します。
+    -   `TopN`演算子[#24930](https://github.com/pingcap/tidb/issues/24930)の下で`ParallelApply`使用すると発生するクエリ ハングの問題を修正します。
     -   複数列のプレフィックス インデックス[#24356](https://github.com/pingcap/tidb/issues/24356)を使用して SQL ステートメントを実行すると、予想よりも多くの結果が返される問題を修正します。
     -   `<=>`オペレーターが正しく発効できない問題を修正[#24477](https://github.com/pingcap/tidb/issues/24477)
     -   並列`Apply`演算子[#23280](https://github.com/pingcap/tidb/issues/23280)のデータ競合の問題を修正します。
@@ -90,8 +90,8 @@ TiDB バージョン: 5.0.3
     -   `tidb_snapshot`変数を予想外に大きな値に設定すると、トランザクションの分離が損なわれる可能性がある問題を修正します[#25680](https://github.com/pingcap/tidb/issues/25680)
     -   ODBC スタイルの定数 (たとえば、 `{d '2020-01-01'}` ) を式[#25531](https://github.com/pingcap/tidb/issues/25531)として使用できないという問題を修正します。
     -   `SELECT DISTINCT`を`Batch Get`に変換すると誤った結果が生じる問題を修正[#25320](https://github.com/pingcap/tidb/issues/25320)
-    -   TiFlash からTiFlashへのバックオフ クエリがトリガーされない問題を修正します。 [#23665](https://github.com/pingcap/tidb/issues/23665) [#24421](https://github.com/pingcap/tidb/issues/24421)
-    -   `only_full_group_by` [#23839](https://github.com/pingcap/tidb/issues/23839)のチェック時に発生する`index-out-of-range`のエラーを修正します。
+    -   TiFlashから TiKV へのバックオフ クエリがトリガーされない問題を修正します。 [#23665](https://github.com/pingcap/tidb/issues/23665) [#24421](https://github.com/pingcap/tidb/issues/24421)
+    -   `only_full_group_by` [#23839](https://github.com/pingcap/tidb/issues/23839)のチェック時に発生する`index-out-of-range`エラーを修正します。
     -   相関サブクエリのインデックス結合の結果が間違っている問題を修正[#25799](https://github.com/pingcap/tidb/issues/25799)
 
 -   TiKV
@@ -111,15 +111,15 @@ TiDB バージョン: 5.0.3
 
 -   TiFlash
 
-    -   分割失敗によりTiFlashが再起動し続ける問題を修正
-    -   TiFlashが差分データを削除できない潜在的な問題を修正
+    -   分割失敗によりTiFlash が再起動し続ける問題を修正
+    -   TiFlash が差分データを削除できない潜在的な問題を修正
     -   TiFlashが`CAST`関数で非バイナリ文字に誤ったパディングを追加するバグを修正
     -   複雑な`GROUP BY`列の集計クエリを処理するときに誤った結果が生じる問題を修正
     -   書き込み圧力が高い場合に発生するTiFlashpanicの問題を修正します。
     -   右側の jon キーが nullalbe ではなく、左側の join キーが nullable の場合に発生するpanicを修正します。
     -   `read-index`リクエストに時間がかかる潜在的な問題を修正
     -   読み取り負荷が高い場合に発生するpanicの問題を修正
-    -   `Date_Format`の関数が`STRING`の型引数と`NULL`の値で呼び出されたときに発生する可能性があるpanicの問題を修正します。
+    -   `Date_Format`関数が`STRING`の型引数と`NULL`値で呼び出されたときに発生する可能性があるpanicの問題を修正します。
 
 -   ツール
 
@@ -129,7 +129,7 @@ TiDB バージョン: 5.0.3
         -   MySQL シンクがエラーに遭遇して一時停止した後、一部の MySQL 接続がリークする可能性があるというバグを修正します[#1946](https://github.com/pingcap/tiflow/pull/1946)
         -   TiCDC が`/proc/meminfo` [#2024](https://github.com/pingcap/tiflow/pull/2024)の読み取りに失敗したときに発生するpanicの問題を修正します。
         -   TiCDC の実行時のメモリ消費を削減する[#2012](https://github.com/pingcap/tiflow/pull/2012) [#1958](https://github.com/pingcap/tiflow/pull/1958)
-        -   解決された ts [#1576](https://github.com/pingcap/tiflow/issues/1576)の計算が遅れるため、TiCDCサーバーpanicを引き起こす可能性があるバグを修正します。
+        -   解決された ts [#1576](https://github.com/pingcap/tiflow/issues/1576)の計算が遅れるため、TiCDCサーバーを引き起こす可能性があるバグを修正します。
         -   プロセッサ[#2142](https://github.com/pingcap/tiflow/pull/2142)の潜在的なデッドロックの問題を修正します。
 
     -   バックアップと復元 (BR)
@@ -140,6 +140,6 @@ TiDB バージョン: 5.0.3
     -   TiDB Lightning
 
         -   一部の特殊なデータに対するTiDB Lightningpanicの問題を修正します[#1213](https://github.com/pingcap/br/issues/1213)
-        -   TiDB Lightningがインポートされた大きな CSV ファイルを分割するときに報告される EOF エラーを修正します[#1133](https://github.com/pingcap/br/issues/1133)
-        -   TiDB Lightningが`FLOAT`または`DOUBLE`タイプ[#1186](https://github.com/pingcap/br/pull/1186)の`auto_increment`列を持つテーブルをインポートすると、非常に大きなベース値が生成されるバグを修正します
+        -   TiDB Lightning がインポートされた大きな CSV ファイルを分割するときに報告される EOF エラーを修正します[#1133](https://github.com/pingcap/br/issues/1133)
+        -   TiDB Lightning が`FLOAT`または`DOUBLE`タイプ[#1186](https://github.com/pingcap/br/pull/1186)の`auto_increment`列を持つテーブルをインポートすると、非常に大きなベース値が生成されるバグを修正します
         -   TiDB が Parquet ファイルの`DECIMAL`型データの解析に失敗する問題を修正[#1277](https://github.com/pingcap/br/pull/1277)

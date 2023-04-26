@@ -40,7 +40,7 @@ Query OK, 0 rows affected (0.01 sec)
 
 ## MySQL の互換性 {#mysql-compatibility}
 
--   `START TRANSACTION`は、TiDB 内ですぐにトランザクションを開始します。これは、 `START TRANSACTION`が遅延してトランザクションを作成する MySQL とは異なります。しかし、TiDB の`START TRANSACTION`は MySQL の`START TRANSACTION WITH CONSISTENT SNAPSHOT`と同等です。
+-   `START TRANSACTION` 、TiDB 内ですぐにトランザクションを開始します。これは、 `START TRANSACTION`遅延してトランザクションを作成する MySQL とは異なります。しかし、TiDB の`START TRANSACTION` MySQL の`START TRANSACTION WITH CONSISTENT SNAPSHOT`と同等です。
 
 -   ステートメント`START TRANSACTION READ ONLY`は、MySQL との互換性のために解析されますが、書き込み操作は引き続き許可されます。
 

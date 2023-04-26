@@ -98,7 +98,7 @@ SELECT * FROM information_schema.user_attributes;
 1 rows in set (0.00 sec)
 ```
 
-`ALTER USER ... ATTRIBUTE`を使用して`newuser`のコメントを削除します。
+`ALTER USER ... ATTRIBUTE`使用して`newuser`のコメントを削除します。
 
 ```sql
 ALTER USER 'newuser' ATTRIBUTE '{"comment": null}';
@@ -124,7 +124,7 @@ ALTER USER 'newuser' PASSWORD EXPIRE NEVER;
 Query OK, 0 rows affected (0.02 sec)
 ```
 
-`newuser`のパスワード再利用ポリシーを変更して、 `ALTER USER ... PASSWORD REUSE INTERVAL ... DAY`を使用して過去 90 日間に使用されたパスワードの再利用を禁止します。
+`newuser`のパスワード再利用ポリシーを変更して、 `ALTER USER ... PASSWORD REUSE INTERVAL ... DAY`使用して過去 90 日間に使用されたパスワードの再利用を禁止します。
 
 ```sql
 ALTER USER 'newuser' PASSWORD REUSE INTERVAL 90 DAY;
@@ -138,7 +138,7 @@ Query OK, 0 rows affected (0.02 sec)
 
 <CustomContent platform="tidb">
 
--   [MySQL とのセキュリティの互換性](/security-compatibility-with-mysql.md)
+-   [MySQL とのSecurityの互換性](/security-compatibility-with-mysql.md)
 
 </CustomContent>
 

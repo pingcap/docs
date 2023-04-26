@@ -47,7 +47,7 @@ select * from tidb_cdc.syncpoint_v1;
 
 ## ステップ 2: スナップショットを構成する {#step-2-configure-snapshot}
 
-[ステップ1](#step-1-obtain-ts-map)で取得した`ts-map`の情報を利用して、上流データベースと下流データベースのスナップショット情報を設定します。
+[ステップ1](#step-1-obtain-ts-map)で取得した`ts-map`情報を利用して、上流データベースと下流データベースのスナップショット情報を設定します。
 
 `Datasource config`セクションの設定例を次に示します。
 
@@ -72,4 +72,4 @@ select * from tidb_cdc.syncpoint_v1;
 -   TiCDC が変更フィードを作成する前に、TiCDC 構成項目`enable-sync-point`の値が`true`に設定されていることを確認してください。このようにしてのみ、同期点が有効になり、 `ts-map`がダウンストリームに保存されます。完全な構成については、 [TiCDC タスク構成ファイル](/ticdc/ticdc-changefeed-config.md)を参照してください。
 -   TiKV のガベージ コレクション (GC) 時間を変更して、スナップショットに対応する履歴データがデータ チェック中に GC によって収集されないようにします。確認後、GC 時間を 1 時間に変更し、設定を元に戻すことをお勧めします。
 -   上記の例は、 `Datasource config`のセクションのみを示しています。完全な構成については、 [sync-diff-inspector ユーザーガイド](/sync-diff-inspector/sync-diff-inspector-overview.md)を参照してください。
--   v6.4.0 以降、TiCDC Syncpoint 機能を使用できるのは、 `SYSTEM_VARIABLES_ADMIN`または`SUPER`の特権を持つ changefeed のみです。
+-   v6.4.0 以降、TiCDC Syncpoint 機能を使用できるのは、 `SYSTEM_VARIABLES_ADMIN`または`SUPER`特権を持つ changefeed のみです。

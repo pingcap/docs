@@ -51,7 +51,7 @@ ERROR 1105 (HY000): FLUSH TABLES WITH READ LOCK is not supported.  Please use @@
 ## MySQL の互換性 {#mysql-compatibility}
 
 -   TiDB には、MySQL のようなテーブル キャッシュの概念がありません。したがって、 `FLUSH TABLES`は解析されますが、互換性のために TiDB では無視されます。
--   TiDB は現在テーブルのロックをサポートしていないため、ステートメント`FLUSH TABLES WITH READ LOCK`はエラーを生成します。代わりに、この目的のために[過去の読み取り](/read-historical-data.md)を使用することをお勧めします。
+-   TiDB は現在テーブルのロックをサポートしていないため、ステートメント`FLUSH TABLES WITH READ LOCK`エラーを生成します。代わりに、この目的のために[過去の読み取り](/read-historical-data.md)を使用することをお勧めします。
 
 ## こちらもご覧ください {#see-also}
 

@@ -24,14 +24,14 @@ IDC マシン:
 | :--: | :--------------------------------------------------: |
 |  OS  |                Linux (CentOS 7.3.1611)               |
 |  CPU | 40 個の vCPU、Intel(R) Xeon(R) CPU E5-2630 v4 @ 2.20GHz |
-|   羊  |                         128GB                        |
+|  RAM |                         128GB                        |
 | ディスク |                 Optane 500GB SSD * 1                 |
 
 シスベンチのバージョン: 1.1.0
 
 ## テスト計画 {#test-plan}
 
-Sysbench を使用**して、各テーブルに 10,000,000 行の 16 個のテーブル**をインポートします。 HAProxy を使用すると、リクエストは増分同時実行数でクラスターに送信されます。 1 つの同時テストは 5 分間続きます。
+Sysbench を使用して**、各テーブルに 10,000,000 行の 16 個のテーブル**をインポートします。 HAProxy を使用すると、リクエストは増分同時実行数でクラスターに送信されます。 1 つの同時テストは 5 分間続きます。
 
 ### TiDB のバージョン情報 {#tidb-version-information}
 
@@ -119,7 +119,7 @@ block-cache-size = "20GB"
 
 ![update non-index](/media/sysbench_v3_update_non_index.png)
 
-上記の統計によると、TiDB 2.1 と TiDB 2.0 の`Update Non-Index`の書き込みのパフォーマンスはほぼ同じです。
+上記の統計によると、TiDB 2.1 と TiDB 2.0 の`Update Non-Index`書き込みのパフォーマンスはほぼ同じです。
 
 ### <code>Update Index</code>テスト {#code-update-index-code-test}
 
@@ -138,4 +138,4 @@ block-cache-size = "20GB"
 
 ![update index](/media/sysbench_v3_update_index.png)
 
-上記の統計によると、TiDB 2.1 と TiDB 2.0 の`Update Index`の書き込みのパフォーマンスはほぼ同じです。
+上記の統計によると、TiDB 2.1 と TiDB 2.0 の`Update Index`書き込みのパフォーマンスはほぼ同じです。

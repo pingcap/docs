@@ -7,7 +7,7 @@ summary: Learn the CTE feature of TiDB, which help you write SQL statements more
 
 一部のトランザクション シナリオでは、アプリケーションが複雑なため、最大 2,000 行の単一の SQL ステートメントを記述する必要がある場合があります。ステートメントには、多くの集計と複数レベルのサブクエリのネストが含まれている可能性があります。このような長い SQL ステートメントを維持することは、開発者にとって悪夢になる可能性があります。
 
-このような長い SQL ステートメントを回避するには、 [ビュー](/develop/dev-guide-use-views.md)を使用してクエリを簡素化するか、 [一時テーブル](/develop/dev-guide-use-temporary-tables.md)を使用して中間クエリ結果をキャッシュします。
+このような長い SQL ステートメントを回避するには、 [ビュー](/develop/dev-guide-use-views.md)使用してクエリを簡素化するか、 [一時テーブル](/develop/dev-guide-use-temporary-tables.md)を使用して中間クエリ結果をキャッシュします。
 
 このドキュメントでは、クエリ結果を再利用するためのより便利な方法である、TiDB の Common Table Expression (CTE) 構文を紹介します。
 
@@ -162,7 +162,7 @@ FROM
 
 まず、CTE ブロック`books_authored_by_rm`で著者 (ID は`2299112019` ) によって書かれた本を調べます。次に、 `books_with_average_ratings`と`books_with_orders`でそれぞれの本の平均評価と注文を見つけます。最後に、 `JOIN`ステートメントで結果を集計します。
 
-1 のクエリは`books_authored_by_rm`回だけ実行され、TiDB はその結果をキャッシュするための一時スペースを作成することに注意してください。 `books_with_average_ratings`と`books_with_orders`のクエリが`books_authored_by_rm`を参照する場合、TiDB はこの一時スペースから直接結果を取得します。
+`books_authored_by_rm`のクエリは 1 回だけ実行され、TiDB はその結果をキャッシュするための一時スペースを作成することに注意してください。 `books_with_average_ratings`と`books_with_orders`のクエリが`books_authored_by_rm`を参照する場合、TiDB はこの一時スペースから直接結果を取得します。
 
 > **ヒント：**
 >

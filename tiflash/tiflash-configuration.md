@@ -3,13 +3,13 @@ title: Configure TiFlash
 summary: Learn how to configure TiFlash.
 ---
 
-# TiFlash の設定 {#configure-tiflash}
+# TiFlashの設定 {#configure-tiflash}
 
 このドキュメントでは、 TiFlashの展開と使用に関連する構成パラメーターを紹介します。
 
 ## PD スケジューリング パラメータ {#pd-scheduling-parameters}
 
-[pd-ctl](/pd-control.md)を使用して PD スケジューリング パラメータを調整できます。 tiup を使用してクラスターをデプロイおよび管理する場合、 `tiup ctl:<cluster-version> pd`を使用して`pd-ctl -u <pd_ip:pd_port>`を置き換えることができることに注意してください。
+[pd-ctl](/pd-control.md)を使用して PD スケジューリング パラメータを調整できます。 tiup を使用してクラスターをデプロイおよび管理する場合、 `tiup ctl:v<CLUSTER_VERSION> pd`使用して`pd-ctl -u <pd_ip:pd_port>`を置き換えることができることに注意してください。
 
 -   [`replica-schedule-limit`](/pd-configuration-file.md#replica-schedule-limit) : レプリカ関連のオペレーターが生成される速度を決定します。このパラメータは、ノードのオフライン化やレプリカの追加などの操作に影響します。
 
@@ -27,7 +27,7 @@ summary: Learn how to configure TiFlash.
     -   指定されたストアのリージョンのスケジュール レートを設定しない場合、このストアは`store-balance-rate`の設定を継承します。
     -   `pd-ctl -u <pd_ip:pd_port> store limit`コマンドを実行して、現在の設定値`store-balance-rate`を表示できます。
 
--   [`replication.location-labels`](/pd-configuration-file.md#location-labels) : TiKV インスタンスのトポロジー関係を示します。キーの順序は、異なるラベルの階層関係を示しています。 TiFlashが有効になっている場合、 [`pd-ctl config placement-rules`](/pd-control.md#config-show--set-option-value--placement-rules)を使用してデフォルト値を設定する必要があります。詳細については、 [地理的分散展開トポロジ](/geo-distributed-deployment-topology.md)を参照してください。
+-   [`replication.location-labels`](/pd-configuration-file.md#location-labels) : TiKV インスタンスのトポロジー関係を示します。キーの順序は、異なるラベルの階層関係を示しています。 TiFlashが有効になっている場合、 [`pd-ctl config placement-rules`](/pd-control.md#config-show--set-option-value--placement-rules)使用してデフォルト値を設定する必要があります。詳細については、 [地理的分散展開トポロジ](/geo-distributed-deployment-topology.md)を参照してください。
 
 ## TiFlash構成パラメータ {#tiflash-configuration-parameters}
 
@@ -148,8 +148,8 @@ delta_index_cache_size = 0
     advertise-status-addr = The external access address of status-addr. If it is left empty, "status-addr" is used by default.
 
 [logger]
-    ## log level (available options: trace, debug, information, warning, error). The default value is `debug`.
-    level = debug
+    ## log level (available options: "trace", "debug", "info", "warn", "error"). The default value is "debug".
+    level = "debug"
     log = TiFlash log path
     errorlog = TiFlash error log path
     ## Size of a single log file. The default value is "100M".
@@ -196,7 +196,10 @@ delta_index_cache_size = 0
     enable_elastic_threadpool = true
     ## Compression algorithm of the TiFlash storage engine. The value can be LZ4, zstd, or LZ4HC, and is case-insensitive. By default, LZ4 is used.
     dt_compression_method = "LZ4"
-    ## Compression level of the TiFlash storage engine. The default value is 1. It is recommended that you set this value to 1 if dt_compression_method is LZ4, -1 (smaller compression rate, but better read performance) or 1 if dt_compression_method is zstd, and 9 if dt_compression_method is LZ4HC.
+    ## Compression level of the TiFlash storage engine. The default value is 1.
+    ## It is recommended that you set this value to 1 if dt_compression_method is LZ4.
+    ## It is recommended that you set this value to -1 (smaller compression rate, but better read performance) or 1 if dt_compression_method is zstd.
+    ## It is recommended that you set this value to 9 if dt_compression_method is LZ4HC.
     dt_compression_level = 1
 
     ## New in v6.2.0. This item specifies the minimum ratio of valid data in a PageStorage data file. When the ratio of valid data in a PageStorage data file is less than the value of this configuration, GC is triggered to compact data in the file. The default value is 0.5.
@@ -262,7 +265,7 @@ delta_index_cache_size = 0
     ## Specifies the old master key when rotating the new master key. The configuration format is the same as that of `master-key`. To learn how to configure a master key, see  Configure encryption: https://docs.pingcap.com/tidb/dev/encryption-at-rest#configure-encryption .
 ```
 
-上記以外のパラメータはTiKVと同じです。キーが`engine`の`label`は予約済みであり、手動で設定することはできません。
+上記以外のパラメータはTiKVと同じです。キーが`engine` `label`予約済みであり、手動で設定することはできません。
 
 ### トポロジ ラベルごとにレプリカをスケジュールする {#schedule-replicas-by-topology-labels}
 
@@ -270,26 +273,26 @@ delta_index_cache_size = 0
 
 ### マルチディスク展開 {#multi-disk-deployment}
 
-TiFlashはマルチディスク展開をサポートしています。 TiFlashノードに複数のディスクがある場合は、次のセクションで説明するパラメーターを構成することで、それらのディスクを最大限に活用できます。 TiUP に使用するTiUPの構成テンプレートについては、 [TiFlashトポロジの複雑なテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/complex-tiflash.yaml)を参照してください。
+TiFlash はマルチディスク展開をサポートしています。 TiFlashノードに複数のディスクがある場合は、次のセクションで説明するパラメーターを構成することで、それらのディスクを最大限に活用できます。 TiUPに使用する TiFlash の構成テンプレートについては、 [TiFlashトポロジの複雑なテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/complex-tiflash.yaml)を参照してください。
 
 #### v4.0.9 より前のバージョンの TiDB を使用したマルチディスク展開 {#multi-disk-deployment-with-tidb-version-earlier-than-v4-0-9}
 
-v4.0.9 より前の TiDB クラスターの場合、 TiFlashはストレージ エンジンのメイン データを複数のディスクに格納することのみをサポートします。 `path` ( TiUPでは`data_dir` ) と`path_realtime_mode`の構成を指定することで、複数のディスクにTiFlashノードをセットアップできます。
+v4.0.9 より前の TiDB クラスターの場合、 TiFlash はstorageエンジンのメイン データを複数のディスクに格納することのみをサポートします。 `path` ( TiUPでは`data_dir` ) と`path_realtime_mode`構成を指定することで、複数のディスクにTiFlashノードをセットアップできます。
 
-`path`に複数のデータ格納ディレクトリがある場合は、それぞれをカンマで区切ります。たとえば、 `/nvme_ssd_a/data/tiflash,/sata_ssd_b/data/tiflash,/sata_ssd_c/data/tiflash`です。環境内に複数のディスクがある場合は、各ディレクトリを 1 つのディスクに対応させ、すべてのディスクのパフォーマンスを最大化するために、最高のパフォーマンスを持つディスクを前面に配置することをお勧めします。
+`path`に複数のデータstorageディレクトリがある場合は、それぞれをカンマで区切ります。たとえば、 `/nvme_ssd_a/data/tiflash,/sata_ssd_b/data/tiflash,/sata_ssd_c/data/tiflash`です。環境内に複数のディスクがある場合は、各ディレクトリを 1 つのディスクに対応させ、すべてのディスクのパフォーマンスを最大化するために、最高のパフォーマンスを持つディスクを前面に配置することをお勧めします。
 
-TiFlashノードに同様の I/O メトリクスを持つディスクが複数ある場合は、 `path_realtime_mode`パラメータをデフォルト値のままにしておくことができます (または明示的に`false`に設定できます)。これは、データがすべてのストレージ ディレクトリに均等に分散されることを意味します。ただし、最新のデータは最初のディレクトリにのみ書き込まれるため、対応するディスクは他のディスクよりもビジーです。
+TiFlashノードに同様の I/O メトリクスを持つディスクが複数ある場合は、 `path_realtime_mode`パラメータをデフォルト値のままにしておくことができます (または明示的に`false`に設定できます)。これは、データがすべてのstorageディレクトリに均等に分散されることを意味します。ただし、最新のデータは最初のディレクトリにのみ書き込まれるため、対応するディスクは他のディスクよりもビジーです。
 
 TiFlashノードに異なる I/O メトリックを持つ複数のディスクがある場合は、 `path_realtime_mode`から`true`に設定し、最高の I/O メトリックを持つディスクを`path`の前に配置することをお勧めします。つまり、最初のディレクトリには最新のデータのみが格納され、古いデータは他のディレクトリに均等に分散されます。この場合、最初のディレクトリの容量は、すべてのディレクトリの合計容量の 10% として計画する必要があることに注意してください。
 
 #### TiDB v4.0.9 以降を使用したマルチディスク展開 {#multi-disk-deployment-with-tidb-v4-0-9-or-later}
 
-v4.0.9 以降のバージョンの TiDB クラスターの場合、 TiFlashはストレージ エンジンのメイン データと最新データを複数のディスクに保存することをサポートします。複数のディスクにTiFlashノードをデプロイする場合は、ノードを最大限に活用するために、 `[storage]`セクションでストレージ ディレクトリを指定することをお勧めします。 v4.0.9 ( `path`および`path_realtime_mode` ) より前の構成は引き続きサポートされることに注意してください。
+v4.0.9 以降のバージョンの TiDB クラスターの場合、 TiFlash はstorageエンジンのメイン データと最新データを複数のディスクに保存することをサポートします。複数のディスクにTiFlashノードをデプロイする場合は、ノードを最大限に活用するために、 `[storage]`セクションでstorageディレクトリを指定することをお勧めします。 v4.0.9 ( `path`および`path_realtime_mode` ) より前の構成は引き続きサポートされることに注意してください。
 
-TiFlashノードに同様の I/O メトリックを持つ複数のディスクがある場合は、 `storage.main.dir`のリストで対応するディレクトリを指定し、 `storage.latest.dir`を空のままにすることをお勧めします。 TiFlashは、I/O プレッシャーとデータをすべてのディレクトリに分散します。
+TiFlashノードに同様の I/O メトリックを持つ複数のディスクがある場合は、 `storage.main.dir`リストで対応するディレクトリを指定し、 `storage.latest.dir`空のままにすることをお勧めします。 TiFlash は、 I/O プレッシャーとデータをすべてのディレクトリに分散します。
 
-TiFlashノードに異なる I/O メトリックを持つ複数のディスクがある場合は、 `storage.latest.dir`番目のリストでより高いメトリックを持つディレクトリを指定し、 `storage.main.dir`番目のリストでより低いメトリックを持つディレクトリを指定することをお勧めします。たとえば、1 つの NVMe-SSD と 2 つの SATA-SSD の場合、 `storage.latest.dir` ～ `["/nvme_ssd_a/data/tiflash"]`および`storage.main.dir` ～ `["/sata_ssd_b/data/tiflash", "/sata_ssd_c/data/tiflash"]`を設定できます。 TiFlashは、I/O プレッシャーとデータをこれら 2 つのディレクトリ リストにそれぞれ分散します。この場合、キャパシティ`storage.latest.dir`は、合計計画キャパシティの 10% として計画する必要があることに注意してください。
+TiFlashノードに異なる I/O メトリックを持つ複数のディスクがある場合は、 `storage.latest.dir`リストでより高いメトリックを持つディレクトリを指定し、 `storage.main.dir`のリストでより低いメトリックを持つディレクトリを指定することをお勧めします。たとえば、1 つの NVMe-SSD と 2 つの SATA-SSD の場合、 `storage.latest.dir` ～ `["/nvme_ssd_a/data/tiflash"]`および`storage.main.dir` ～ `["/sata_ssd_b/data/tiflash", "/sata_ssd_c/data/tiflash"]`を設定できます。 TiFlash は、 I/O プレッシャーとデータをこれら 2 つのディレクトリ リストにそれぞれ分散します。この場合、キャパシティ`storage.latest.dir`は、合計計画キャパシティの 10% として計画する必要があることに注意してください。
 
 > **警告：**
 >
-> `[storage]`構成は v1.2.5 以降のTiUPでサポートされています。 TiDB クラスターのバージョンが v4.0.9 以降の場合は、 TiUPのバージョンが v1.2.5 以降であることを確認してください。そうしないと、 `[storage]`で定義したデータ ディレクトリがTiUPによって管理されません。
+> `[storage]`構成は v1.2.5 以降のTiUPでサポートされています。 TiDB クラスターのバージョンが v4.0.9 以降の場合は、 TiUP のバージョンが v1.2.5 以降であることを確認してください。そうしないと、 `[storage]`で定義したデータ ディレクトリがTiUPによって管理されません。

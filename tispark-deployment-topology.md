@@ -7,7 +7,7 @@ summary: Learn the deployment topology of TiSpark using TiUP based on the minima
 
 > **警告：**
 >
-> TiUPクラスターでの TiSpark のサポートは廃止されました。使用することはお勧めし**ません**。
+> TiUPクラスターでの TiSpark のサポートは廃止されました。使用することは**お**勧めしません。
 
 このドキュメントでは、TiSpark の展開トポロジと、最小クラスター トポロジに基づいて TiSpark を展開する方法について説明します。
 
@@ -30,7 +30,7 @@ TiSparkアーキテクチャとその使用方法の詳細については、 [Ti
 -   [シンプルな TiSpark トポロジ テンプレート](https://github.com/pingcap/docs/blob/master/config-templates/simple-tispark.yaml)
 -   [複雑な TiSpark トポロジ テンプレート](https://github.com/pingcap/docs/blob/master/config-templates/complex-tispark.yaml)
 
-上記の TiDB クラスター トポロジ ファイルの構成項目の詳細な説明については、 [TiUP を使用してTiUPをデプロイするためのトポロジコンフィグレーションファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
+上記の TiDB クラスター トポロジ ファイルの構成項目の詳細な説明については、 [TiUPを使用して TiDB をデプロイするためのトポロジコンフィグレーションファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
 
 > **ノート：**
 >
@@ -41,6 +41,6 @@ TiSparkアーキテクチャとその使用方法の詳細については、 [Ti
 
 TiSpark は Apache Spark クラスターに基づいているため、TiSpark を含む TiDB クラスターを開始する前に、TiSpark をデプロイするサーバーにJavaランタイム環境 (JRE) 8 がインストールされていることを確認する必要があります。そうしないと、TiSpark を開始できません。
 
-TiUPは JRE の自動インストールをサポートしていません。自分でインストールする必要があります。詳細なインストール手順については、 [ビルド済みの OpenJDK パッケージをダウンロードしてインストールする方法](https://openjdk.java.net/install/)を参照してください。
+TiUP はJRE の自動インストールをサポートしていません。自分でインストールする必要があります。詳細なインストール手順については、 [ビルド済みの OpenJDK パッケージをダウンロードしてインストールする方法](https://openjdk.java.net/install/)を参照してください。
 
 JRE 8 がデプロイメント・サーバーに既にインストールされているが、システムのデフォルトのパッケージ管理ツールのパスにない場合、トポロジー構成で`java_home`パラメーターを設定することにより、使用する JRE 環境のパスを指定できます。このパラメーターは、 `JAVA_HOME`システム環境変数に対応します。

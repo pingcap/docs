@@ -5,7 +5,7 @@ summary: Use `openssl` to generate self-signed certificates.
 
 # TiDB データ移行用の自己署名証明書を生成する {#generate-self-signed-certificates-for-tidb-data-migration}
 
-このドキュメントでは、 `openssl`を使用して TiDB データ移行 (DM) 用の自己署名証明書を生成する例を示します。また、要求に応じて要件を満たす証明書と鍵を生成することもできます。
+このドキュメントでは、 `openssl`使用して TiDB データ移行 (DM) 用の自己署名証明書を生成する例を示します。また、要求に応じて要件を満たす証明書と鍵を生成することもできます。
 
 インスタンス クラスタのトポロジが次のようになっているとします。
 
@@ -70,9 +70,9 @@ summary: Use `openssl` to generate self-signed certificates.
 
 ### クラスターで使用される可能性のある証明書 {#certificates-that-might-be-used-in-the-cluster}
 
--   DM-master が他のコンポーネントの DM-master を認証するために使用する`master`の証明書。
--   DM-worker が他のコンポーネントに対して DM-worker を認証するために使用する`worker`の証明書。
--   DM-master および DM-worker のクライアントを認証するために dmctl によって使用される`client`の証明書。
+-   DM-master が他のコンポーネントの DM-master を認証するために使用する`master`証明書。
+-   DM-worker が他のコンポーネントに対して DM-worker を認証するために使用する`worker`証明書。
+-   DM-master および DM-worker のクライアントを認証するために dmctl によって使用される`client`証明書。
 
 ### DM-master の証明書を発行する {#issue-certificates-for-dm-master}
 
@@ -100,7 +100,7 @@ DM-master インスタンスに証明書を発行するには、次の手順を�
     find / -name openssl.cnf
     ```
 
-3.  `openssl.cnf`を編集し、 `[ req ]`フィールドの下に`req_extensions = v3_req`を追加し、 `[ v3_req ]`フィールドの下に`subjectAltName = @alt_names`を追加します。最後に、新しいフィールドを作成し、上記のクラスター トポロジの説明に従って`Subject Alternative Name` (SAN) の情報を編集します。
+3.  `openssl.cnf`を編集し、 `[ req ]`フィールドの下に`req_extensions = v3_req`追加し、 `[ v3_req ]`フィールドの下に`subjectAltName = @alt_names`を追加します。最後に、新しいフィールドを作成し、上記のクラスター トポロジの説明に従って`Subject Alternative Name` (SAN) の情報を編集します。
 
     ```
     [ alt_names ]

@@ -4,11 +4,11 @@ title: Identify Expensive Queries
 
 # 高価なクエリを特定する {#identify-expensive-queries}
 
-TiDB を使用すると、SQL 実行中にコストのかかるクエリを特定できるため、SQL 実行のパフォーマンスを診断して改善できます。具体的には、 出力 は、実行時間が[`tidb_expensive_query_time_threshold`](/system-variables.md#tidb_expensive_query_time_threshold) (デフォルトでは 60 秒) を超えるか、メモリ使用量が[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) (デフォルトでは 1 GB) を超えるステートメントに関する情報を[tidb サーバー ログ ファイル](/tidb-configuration-file.md#logfile) (デフォルトでは「tidb.log」) に出力します。
+TiDB を使用すると、SQL 実行中にコストのかかるクエリを特定できるため、SQL 実行のパフォーマンスを診断して改善できます。具体的には、TiDB は、実行時間が[`tidb_expensive_query_time_threshold`](/system-variables.md#tidb_expensive_query_time_threshold) (デフォルトでは 60 秒) を超えるか、メモリ使用量が[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) (デフォルトでは 1 GB) を超えるステートメントに関する情報を[tidb サーバー ログ ファイル](/tidb-configuration-file.md#logfile) (デフォルトでは「tidb.log」) に出力。
 
 > **ノート：**
 >
-> 高価なクエリ ログは、次の点で[遅いクエリ ログ](/identify-slow-queries.md)と異なります出力は、ステートメントがリソース使用量のしきい値 (実行時間またはメモリ使用量) を超える**とすぐに**、ステートメント情報を高価なクエリ ログに出力します。一方、TiDB は、ステートメントの実行<strong>後</strong>にスロー クエリ ログにステートメント情報を出力します。
+> 高価なクエリ ログは、次の点で[遅いクエリ ログ](/identify-slow-queries.md)と異なります。TiDB は、ステートメントがリソース使用量のしきい値 (実行時間またはメモリ使用量) を超える**とすぐに、**ステートメント情報を高価なクエリ ログに出力。一方、TiDB は、ステートメントの実行<strong>後に</strong>スロー クエリ ログにステートメント情報を出力。
 
 ## 高価なクエリ ログの例 {#expensive-query-log-example}
 
@@ -33,15 +33,15 @@ TiDB を使用すると、SQL 実行中にコストのかかるクエリを特�
 ユーザー関連フィールド:
 
 -   `user` : ステートメントを実行するユーザーの名前。
--   `conn_id` : 接続 ID (セッション ID)。たとえば、キーワード`con:60026`を使用して、セッション ID が`60026`のログを検索できます。
+-   `conn_id` : 接続 ID (セッション ID)。たとえば、キーワード`con:60026`使用して、セッション ID が`60026`のログを検索できます。
 -   `database` : ステートメントが実行されるデータベース。
 
 TiKVコプロセッサーのタスク関連フィールド:
 
--   `wait_time` : TiKV のステートメントのすべてのコプロセッサー要求の合計待ち時間。 TiKV のコプロセッサーは限られた数のスレッドを実行するため、コプロセッサープロセッサのすべてのスレッドが動作しているときにリクエストがキューに入ることがあります。キュー内のリクエストの処理に時間がかかると、後続のリクエストの待ち時間が長くなります。
+-   `wait_time` : TiKV のステートメントのすべてのコプロセッサー要求の合計待ち時間。 TiKV のコプロセッサーは限られた数のスレッドを実行するため、コプロセッサーのすべてのスレッドが動作しているときにリクエストがキューに入ることがあります。キュー内のリクエストの処理に時間がかかると、後続のリクエストの待ち時間が長くなります。
 -   `request_count` : ステートメントが送信するコプロセッサー要求の数。
 -   `total_keys` :コプロセッサーがスキャンしたキーの数。
--   `processed_keys` :コプロセッサーが処理したキーの数。 `total_keys`と比較して、 `processed_keys`には古いバージョンの MVCC が含まれていません。 `processed_keys`と`total_keys`の大きな違いは、多くの古いバージョンが存在することを示しています。
+-   `processed_keys` :コプロセッサーが処理したキーの数。 `total_keys`と比較して、 `processed_keys`は古いバージョンの MVCC が含まれていません。 `processed_keys`と`total_keys`の大きな違いは、多くの古いバージョンが存在することを示しています。
 -   `num_cop_tasks` : ステートメントが送信するコプロセッサー要求の数。
 -   `process_avg_time` :コプロセッサー・タスクの平均実行時間。
 -   `process_p90_time` :コプロセッサータスクの P90 実行時間。

@@ -4,11 +4,11 @@ title: tiup cluster import
 
 # tiup cluster import {#tiup-cluster-import}
 
-TiDB v4.0 より前は、TiDB クラスターは主に TiDB Ansible を使用してデプロイされていました。 TiDB v4.0 以降のリリースの場合、 TiUPクラスタは、管理のためにクラスターをtiup-clusterコンポーネントに転送するための`import`のコマンドを提供します。
+TiDB v4.0 より前は、TiDB クラスターは主に TiDB Ansible を使用してデプロイされていました。 TiDB v4.0 以降のリリースの場合、 TiUPクラスタは、管理のためにクラスターをtiup-clusterコンポーネントに転送するための`import`コマンドを提供します。
 
 > **ノート：**
 >
-> -   管理のために TiDB Ansible 構成をTiUPにインポートした後は、 **TiDB** Ansible をクラスター操作に使用しないでください。そうしないと、メタ情報が一致しないために競合が発生する可能性があります。
+> -   管理のために TiDB Ansible 構成をTiUPにインポートした後は、TiDB Ansible をクラスター操作に使用し**ないでください**。そうしないと、メタ情報が一致しないために競合が発生する可能性があります。
 > -   TiDB Ansible を使用してデプロイされたクラスターが次のいずれかの状況にある場合は、 `import`コマンドを使用しないでください。
 >     -   TLS 暗号化が有効になっているクラスター
 >     -   Pure KV クラスター (TiDB インスタンスのないクラスター)
@@ -16,7 +16,7 @@ TiDB v4.0 より前は、TiDB クラスターは主に TiDB Ansible を使用し
 >     -   Spark が有効なクラスター
 >     -   TiDB Lightning/TiKV Importer が有効になっているクラスター
 >     -   監視メトリクスを収集するためにまだ古い`push`モードを使用しているクラスター (デフォルト モード`pull`を変更しない場合、 `import`コマンドの使用がサポートされます)
->     -   `node_exporter_port` / `blackbox_exporter_port`を使用して、デフォルト以外のポート ( `group_vars`のディレクトリで構成されたポートに互換性がある) が`inventory.ini`の構成ファイルで個別に構成されているクラスター
+>     -   `node_exporter_port` / `blackbox_exporter_port`を使用して、デフォルト以外のポート ( `group_vars`ディレクトリで構成されたポートに互換性がある) が`inventory.ini`の構成ファイルで個別に構成されているクラスター
 > -   TiDB Ansible を使用してデプロイされたクラスター内の一部のノードが監視コンポーネントなしでデプロイされている場合、まず TiDB Ansible を使用して対応するノード情報を`inventory.ini`ファイルの`monitored_servers`セクションに追加し、次に`deploy.yaml`プレイブックを使用して監視コンポーネントを完全にデプロイする必要があります。そうしないと、クラスターがTiUPにインポートされた後に保守操作を実行するときに、監視コンポーネントの不足が原因でエラーが発生する可能性があります。
 
 ## 構文 {#syntax}
@@ -61,7 +61,7 @@ tiup cluster import [flags]
 
 -   ヘルプ情報を出力します。
 -   データ型: `BOOLEAN`
--   このオプションはデフォルトで無効になっており、値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加し、値`true`を渡すか、値を何も渡さないでください。
+-   このオプションはデフォルトで無効になっており、値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加し、値`true`渡すか、値を何も渡さないでください。
 
 ## 出力 {#output}
 

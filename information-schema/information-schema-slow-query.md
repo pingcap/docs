@@ -1,11 +1,19 @@
 ---
 title: SLOW_QUERY
-summary: Learn the `SLOW_QUERY` information_schema table.
+summary: Learn the `SLOW_QUERY` INFORMATION_SCHEMA table.
 ---
 
 # SLOW_QUERY {#slow-query}
 
-`SLOW_QUERY`番目のテーブルは、現在のノードのスロー クエリ情報を提供します。これは、TiDB スロー ログ ファイルの解析結果です。表の列名は、スロー ログのフィールド名に対応しています。
+`SLOW_QUERY`のテーブルは、現在のノードのスロー クエリ情報を提供します。これは、TiDB スロー ログ ファイルの解析結果です。表の列名は、スロー ログのフィールド名に対応しています。
+
+<CustomContent platform="tidb-cloud">
+
+> **ノート：**
+>
+> `SLOW_QUERY`テーブルは[Serverless Tierクラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)では使用できません。
+
+</CustomContent>
 
 <CustomContent platform="tidb">
 
@@ -13,14 +21,14 @@ summary: Learn the `SLOW_QUERY` information_schema table.
 
 </CustomContent>
 
-{{< copyable "" >}}
+```sql
+USE INFORMATION_SCHEMA;
+DESC SLOW_QUERY;
+```
+
+出力は次のとおりです。
 
 ```sql
-USE information_schema;
-DESC slow_query;
-```
-
-```
 +-------------------------------+---------------------+------+------+---------+-------+
 | Field                         | Type                | Null | Key  | Default | Extra |
 +-------------------------------+---------------------+------+------+---------+-------+
@@ -103,7 +111,7 @@ DESC slow_query;
 
 ## CLUSTER_SLOW_QUERY テーブル {#cluster-slow-query-table}
 
-`CLUSTER_SLOW_QUERY`番目のテーブルは、クラスター内のすべてのノードのスロー クエリ情報を提供します。これは、TiDB スロー ログ ファイルの解析結果です。 `SLOW_QUERY`と同じように`CLUSTER_SLOW_QUERY`テーブルを使用できます。 `CLUSTER_SLOW_QUERY`テーブルのテーブル スキーマは、 `INSTANCE`カラムが`CLUSTER_SLOW_QUERY`に追加されているという点で、 `SLOW_QUERY`テーブルのテーブル スキーマとは異なります。 `INSTANCE`列目はスロークエリの行情報のTiDBノードアドレスを表しています。
+`CLUSTER_SLOW_QUERY`のテーブルは、クラスター内のすべてのノードのスロー クエリ情報を提供します。これは、TiDB スロー ログ ファイルの解析結果です。 `SLOW_QUERY`と同じように`CLUSTER_SLOW_QUERY`テーブルを使用できます。 `CLUSTER_SLOW_QUERY`のテーブル スキーマは、 `INSTANCE`カラムが`CLUSTER_SLOW_QUERY`に追加されているという点で、 `SLOW_QUERY`テーブルのテーブル スキーマとは異なります。 `INSTANCE`列目はスロークエリの行情報のTiDBノードアドレスを表しています。
 
 <CustomContent platform="tidb">
 
@@ -111,11 +119,11 @@ DESC slow_query;
 
 </CustomContent>
 
-{{< copyable "" >}}
-
 ```sql
-desc cluster_slow_query;
+DESC CLUSTER_SLOW_QUERY;
 ```
+
+出力は次のとおりです。
 
 ```sql
 +-------------------------------+---------------------+------+------+---------+-------+
@@ -201,30 +209,28 @@ desc cluster_slow_query;
 
 クラスター システム テーブルがクエリされると、TiDB はすべてのノードからデータを取得するのではなく、関連する計算を他のノードにプッシュ ダウンします。実行計画は次のとおりです。
 
-{{< copyable "" >}}
+```sql
+DESC SELECT COUNT(*) FROM CLUSTER_SLOW_QUERY WHERE user = 'u1';
+```
+
+出力は次のとおりです。
 
 ```sql
-desc SELECT count(*) FROM cluster_slow_query WHERE user = 'u1';
++----------------------------+----------+-----------+--------------------------+------------------------------------------------------+
+| id                         | estRows  | task      | access object            | operator info                                        |
++----------------------------+----------+-----------+--------------------------+------------------------------------------------------+
+| StreamAgg_7                | 1.00     | root      |                          | funcs:count(1)->Column#75                            |
+| └─TableReader_13       | 10.00    | root      |                          | data:Selection_12                                    |
+|   └─Selection_12       | 10.00    | cop[tidb] |                          | eq(INFORMATION_SCHEMA.cluster_slow_query.user, "u1") |
+|     └─TableFullScan_11 | 10000.00 | cop[tidb] | table:CLUSTER_SLOW_QUERY | keep order:false, stats:pseudo                       |
++----------------------------+----------+-----------+--------------------------+------------------------------------------------------+
+4 rows in set (0.00 sec)
 ```
 
-```
-+--------------------------+----------+-----------+--------------------------+------------------------------------------------------+
-| id                       | estRows  | task      | access object            | operator info                                        |
-+--------------------------+----------+-----------+--------------------------+------------------------------------------------------+
-| StreamAgg_20             | 1.00     | root      |                          | funcs:count(Column#53)->Column#51                    |
-| └─TableReader_21         | 1.00     | root      |                          | data:StreamAgg_9                                     |
-|   └─StreamAgg_9          | 1.00     | cop[tidb] |                          | funcs:count(1)->Column#53                            |
-|     └─Selection_19       | 10.00    | cop[tidb] |                          | eq(information_schema.cluster_slow_query.user, "u1") |
-|       └─TableFullScan_18 | 10000.00 | cop[tidb] | table:CLUSTER_SLOW_QUERY | keep order:false, stats:pseudo                       |
-+--------------------------+----------+-----------+--------------------------+------------------------------------------------------+
-```
-
-上記の実行計画では、 `user = u1`条件が他の ( `cop` ) TiDB ノードにプッシュ ダウンされ、集計演算子もプッシュ ダウンされます (グラフの`StreamAgg`演算子)。
+前の実行計画では、 `user = u1`条件が他の ( `cop` ) TiDB ノードにプッシュ ダウンされ、集計演算子もプッシュ ダウンされます (グラフの`StreamAgg`演算子)。
 
 現在、システム テーブルの統計が収集されていないため、一部の集計演算子をプッシュ ダウンできず、実行が遅くなることがあります。この場合、SQL HINT を手動で指定して集計演算子をプッシュダウンできます。例えば：
 
-{{< copyable "" >}}
-
 ```sql
-SELECT /*+ AGG_TO_COP() */ count(*) FROM cluster_slow_query GROUP BY user;
+SELECT /*+ AGG_TO_COP() */ COUNT(*) FROM CLUSTER_SLOW_QUERY GROUP BY user;
 ```

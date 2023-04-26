@@ -4,7 +4,7 @@ title: tiup mirror
 
 # tiup mirror {#tiup-mirror}
 
-TiUPでは、 [鏡](/tiup/tiup-mirror-reference.md)は重要な概念です。 TiUPは現在、2 つの形式のミラーリングをサポートしています。
+TiUPでは、 [鏡](/tiup/tiup-mirror-reference.md)は重要な概念です。 TiUP は現在、2 つの形式のミラーリングをサポートしています。
 
 -   ローカル ミラー: TiUPクライアントとミラーは同じマシン上にあり、クライアントはファイル システムを介してミラーにアクセスします。
 -   リモート ミラー: TiUPクライアントとミラーは同じマシン上になく、クライアントはネットワーク経由でミラーにアクセスします。
@@ -17,7 +17,7 @@ TiUPでは、 [鏡](/tiup/tiup-mirror-reference.md)は重要な概念です。 T
 tiup mirror <command> [flags]
 ```
 
-`<command>`はサブコマンドを表します。サポートされているサブコマンドのリストについては、以下の[コマンド一覧](#command-list)を参照してください。
+`<command>`サブコマンドを表します。サポートされているサブコマンドのリストについては、以下の[コマンド一覧](#command-list)を参照してください。
 
 ## オプション {#option}
 

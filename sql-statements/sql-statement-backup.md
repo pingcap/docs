@@ -9,13 +9,13 @@ summary: An overview of the usage of BACKUP for the TiDB database.
 
 `BACKUP`ステートメントは[BRツール](/br/backup-and-restore-overview.md)ステートメントと同じエンジンを使用しますが、バックアップ プロセスが別のBRツールではなく TiDB 自体によって駆動される点が異なります。 BRのすべての利点と警告は、このステートメントにも適用されます。
 
-`BACKUP`を実行するには、 `BACKUP_ADMIN`または`SUPER`のいずれかの特権が必要です。さらに、バックアップを実行する TiDB ノードとクラスター内のすべての TiKV ノードの両方に、宛先への読み取りまたは書き込み権限が必要です。 [セキュリティ強化モード](/system-variables.md#tidb_enable_enhanced_security)が有効になっている場合、ローカル ストレージ ( `local://`で始まるストレージ パス) は許可されません。
+`BACKUP`を実行するには、 `BACKUP_ADMIN`または`SUPER`のいずれかの特権が必要です。さらに、バックアップを実行する TiDB ノードとクラスター内のすべての TiKV ノードの両方に、宛先への読み取りまたは書き込み権限が必要です。 [Security強化モード](/system-variables.md#tidb_enable_enhanced_security)が有効な場合、ローカルstorage( `local://`で始まるstorageパス) は許可されません。
 
 `BACKUP`ステートメントは、バックアップ タスク全体が終了、失敗、またはキャンセルされるまでブロックされます。 `BACKUP`を実行するには、持続的な接続を準備する必要があります。タスクは[`KILL TIDB QUERY`](/sql-statements/sql-statement-kill.md)ステートメントを使用してキャンセルできます。
 
-一度に実行できるタスクは`BACKUP`と[`RESTORE`](/sql-statements/sql-statement-restore.md)の 1 つだけです。 `BACKUP`または`RESTORE`のステートメントが同じ TiDBサーバーで既に実行されている場合、新しい`BACKUP`の実行は、前のすべてのタスクが完了するまで待機します。
+一度に実行できるタスクは`BACKUP`と[`RESTORE`](/sql-statements/sql-statement-restore.md)つだけです。 `BACKUP`または`RESTORE`ステートメントが同じ TiDBサーバーで既に実行されている場合、新しい`BACKUP`実行は、前のすべてのタスクが完了するまで待機します。
 
-`BACKUP`は「tikv」ストレージ エンジンでのみ使用できます。 「unistore」エンジンで`BACKUP`を使用すると失敗します。
+`BACKUP`は「tikv」storageエンジンでのみ使用できます。 「unistore」エンジンで`BACKUP`使用すると失敗します。
 
 ## あらすじ {#synopsis}
 
@@ -99,7 +99,7 @@ BACKUP DATABASE * TO 'local:///mnt/backup/full/';
 
 ### 外部ストレージ {#external-storages}
 
-BRは、S3 または GCS へのデータのバックアップをサポートしています。
+BR は、 S3 または GCS へのデータのバックアップをサポートしています。
 
 {{< copyable "" >}}
 
@@ -107,7 +107,7 @@ BRは、S3 または GCS へのデータのバックアップをサポートし�
 BACKUP DATABASE `test` TO 's3://example-bucket-2020/backup-05/?access-key={YOUR_ACCESS_KEY}&secret-access-key={YOUR_SECRET_KEY}';
 ```
 
-URL 構文については、 [外部ストレージ](/br/backup-and-restore-storages.md)で詳しく説明しています。
+URL 構文については、 [外部storageURL](/br/backup-and-restore-storages.md#url-format)で詳しく説明しています。
 
 認証情報を配布してはならないクラウド環境で実行する場合は、 `SEND_CREDENTIALS_TO_TIKV`オプションを`FALSE`に設定します。
 
@@ -124,7 +124,7 @@ BACKUP DATABASE `test` TO 's3://example-bucket-2020/backup-05/'
 
 デフォルトでは、すべての TiKV ノードが 4 つのバックアップ スレッドを実行します。この値は`CONCURRENCY`オプションで調整できます。
 
-バックアップが完了する前に、クラスタ`BACKUP`のデータに対してチェックサムを実行して、正確性を確認します。これが不要であることが確実な場合は、オプション`CHECKSUM`を使用してこのステップを無効にすることができます。
+バックアップが完了する前に、クラスタ上のデータに対してチェック`BACKUP`を実行して、正確性を確認します。これが不要であることが確実な場合は、オプション`CHECKSUM`を使用してこのステップを無効にすることができます。
 
 {{< copyable "" >}}
 
@@ -158,7 +158,7 @@ BACKUP DATABASE `test` TO 'local:///mnt/backup/hist03'
 相対時間でサポートされている単位は次のとおりです。
 
 -   マイクロ秒
--   2番目
+-   2番
 -   分
 -   時間
 -   日

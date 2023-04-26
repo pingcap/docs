@@ -27,7 +27,7 @@ title: TiDB 2.1 RC3 Release Notes
     -   `information_schema.schemata` [#7751](https://github.com/pingcap/tidb/pull/7751)で`charset/collation`の結果が正しくない問題を修正
     -   `hostname`システム変数の値が空である問題を修正[#7750](https://github.com/pingcap/tidb/pull/7750)
 -   式
-    -   `AES_ENCRYPT` / `AES_DECRYPT`組み込み関数[#7425](https://github.com/pingcap/tidb/pull/7425)で`init_vecter`の引数をサポート
+    -   `AES_ENCRYPT` / `AES_DECRYPT`組み込み関数[#7425](https://github.com/pingcap/tidb/pull/7425)で`init_vecter`引数をサポート
     -   一部の式で`Format`の結果が正しくない問題を修正[#7770](https://github.com/pingcap/tidb/pull/7770)
     -   `JSON_LENGTH`内蔵機能をサポート[#7739](https://github.com/pingcap/tidb/pull/7739)
     -   符号なし整数型を 10 進数型にキャストするときの誤った結果の問題を修正します[#7792](https://github.com/pingcap/tidb/pull/7792)
@@ -45,7 +45,7 @@ title: TiDB 2.1 RC3 Release Notes
 -   改善
     -   リージョン API [#1252](https://github.com/pingcap/pd/pull/1252)でより詳細な情報を返す
 -   バグ修正
-    -   PD がリーダーを切り替えると`adjacent-region-scheduler`がクラッシュする可能性がある問題を修正します[#1250](https://github.com/pingcap/pd/pull/1250)
+    -   PD がリーダーを切り替えると`adjacent-region-scheduler`クラッシュする可能性がある問題を修正します[#1250](https://github.com/pingcap/pd/pull/1250)
 
 ## TiKV {#tikv}
 

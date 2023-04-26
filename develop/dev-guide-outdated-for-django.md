@@ -13,7 +13,7 @@ summary: Learn how to build a simple Python application using TiDB and Django.
 
 ## ステップ 1. TiDB クラスターを開始する {#step-1-start-a-tidb-cluster}
 
-ローカル ストレージで疑似 TiDB クラスターを開始します。
+ローカルstorageで疑似 TiDB クラスターを開始します。
 
 ```bash
 docker run -p 127.0.0.1:$LOCAL_PORT:4000 pingcap/tidb:v5.1.0
@@ -23,16 +23,16 @@ docker run -p 127.0.0.1:$LOCAL_PORT:4000 pingcap/tidb:v5.1.0
 
 > **ノート：**
 >
-> 実本番用の「実際の」TiDB クラスターをデプロイするには、次のガイドを参照してください。
+> 本番用の「実際の」TiDB クラスターをデプロイするには、次のガイドを参照してください。
 >
-> -   [TiUP for On-Premises を使用して TiDB をデプロイ](https://docs.pingcap.com/tidb/v5.1/production-deployment-using-tiup)
+> -   [TiUP for On-Premises を使用して TiDBをデプロイ](https://docs.pingcap.com/tidb/v5.1/production-deployment-using-tiup)
 > -   [TiDB を Kubernetes にデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/stable)
 >
 > [TiDB Cloudを使用する](https://pingcap.com/products/tidbcloud/) 、TiDB のフルマネージド Database-as-a-Service (DBaaS) も可能です。
 
 ## ステップ 2. データベースを作成する {#step-2-create-a-database}
 
-1.  SQL シェルで、アプリケーションが使用する`django`のデータベースを作成します。
+1.  SQL シェルで、アプリケーションが使用する`django`データベースを作成します。
 
     {{< copyable "" >}}
 
@@ -60,7 +60,7 @@ docker run -p 127.0.0.1:$LOCAL_PORT:4000 pingcap/tidb:v5.1.0
 
 ## ステップ 3. 仮想環境を設定してプロジェクトを初期化する {#step-3-set-virtual-environments-and-initialize-the-project}
 
-1.  Python の依存関係およびパッケージ マネージャーである[詩](https://python-poetry.org/docs/)を使用して、仮想環境を設定し、プロジェクトを初期化します。
+1.  Python の依存関係およびパッケージ マネージャーである[詩](https://python-poetry.org/docs/)使用して、仮想環境を設定し、プロジェクトを初期化します。
 
     詩は、システムの依存関係を他の依存関係から分離し、依存関係の汚染を回避できます。次のコマンドを使用して、Poetry をインストールします。
 
@@ -228,7 +228,7 @@ docker run -p 127.0.0.1:$LOCAL_PORT:4000 pingcap/tidb:v5.1.0
 
 ## ステップ 5. Django アプリケーションをセットアップして実行する {#step-5-set-up-and-run-the-django-application}
 
-`tidb_example`上のディレクトリで、 [`manage.py`](https://docs.djangoproject.com/en/3.1/ref/django-admin/)スクリプトを使用して、アプリケーションのデータベースを初期化する[Django の移行](https://docs.djangoproject.com/en/3.1/topics/migrations/)を作成します。
+`tidb_example`番上のディレクトリで、 [`manage.py`](https://docs.djangoproject.com/en/3.1/ref/django-admin/)スクリプトを使用して、アプリケーションのデータベースを初期化する[Django の移行](https://docs.djangoproject.com/en/3.1/topics/migrations/)を作成します。
 
 ```bash
 python manage.py makemigrations tidb_example

@@ -75,8 +75,8 @@ TiDB バージョン: 5.1.4
     -   ベクトル化された式の`microsecond`および`hour`関数の誤った結果を修正する[#29244](https://github.com/pingcap/tidb/issues/29244) [#28643](https://github.com/pingcap/tidb/issues/28643)
     -   場合によっては`ALTER TABLE.. ADD INDEX`ステートメントを実行すると TiDBpanicが発生する問題を修正[#27687](https://github.com/pingcap/tidb/issues/27687)
     -   一部のまれなケースで MPP ノードの可用性検出が機能しないバグを修正します[#3118](https://github.com/pingcap/tics/issues/3118)
-    -   `MPP task ID` [#27952](https://github.com/pingcap/tidb/issues/27952)を割り当てる際の`DATA RACE`の問題を修正
-    -   空の`dual table` [#28250](https://github.com/pingcap/tidb/issues/28250)を削除した後の MPP クエリの`INDEX OUT OF RANGE`エラーを修正
+    -   `MPP task ID` [#27952](https://github.com/pingcap/tidb/issues/27952)を割り当てる際の`DATA RACE`問題を修正
+    -   空`dual table` [#28250](https://github.com/pingcap/tidb/issues/28250)を削除した後の MPP クエリの`INDEX OUT OF RANGE`エラーを修正
     -   MPP クエリ[#1791](https://github.com/pingcap/tics/issues/1791)の誤検知エラー ログ`invalid cop task execution summaries length`の問題を修正します。
     -   SET GLOBAL tidb_skip_isolation_level_check=1 が新しいセッション設定に影響しない問題を修正[#27897](https://github.com/pingcap/tidb/issues/27897)
     -   `index out of range` `tiup bench`長時間実行すると発生する問題を修正[#26832](https://github.com/pingcap/tidb/issues/26832)
@@ -121,16 +121,16 @@ TiDB バージョン: 5.1.4
     -   メモリ制限が有効な場合のTiFlashクラッシュの問題を修正
     -   入力時刻が 1970-01-01 00:00:01 UTC より前の場合、 `unix_timestamp`の動作が TiDB や MySQL の動作と一致しない問題を修正
     -   主キーがハンドルの場合に主キー列を拡張することによって発生する潜在的なデータの不整合を修正します
-    -   オーバーフローのバグと、 `DECIMAL`のデータ型のデータを比較するときに`Can't compare`のエラーが報告される問題を修正します。
+    -   オーバーフローのバグと、 `DECIMAL`のデータ型のデータを比較するときに`Can't compare`エラーが報告される問題を修正します。
     -   `3rd arguments of function substringUTF8 must be constants.`の予期しないエラーを修正します
-    -   ライブラリが`nsl`つないプラットフォームでTiFlashが起動しない問題を修正
+    -   ライブラリが`nsl`つないプラットフォームでTiFlash が起動しない問題を修正
     -   データを`DECIMAL`データ型にキャストする際のオーバーフロー バグを修正
     -   `castStringAsReal`動作がTiFlashと TiDB/TiKV で一致しない問題を修正
-    -   再起動後にTiFlashが`EstablishMPPConnection`エラーを返すことがある問題を修正
+    -   再起動後にTiFlash が`EstablishMPPConnection`エラーを返すことがある問題を修正
     -   TiFlashレプリカの数を 0 に設定した後、古いデータを再利用できないという問題を修正します。
     -   `CastStringAsDecimal`動作がTiFlashと TiDB/TiKV で一致しない問題を修正
     -   `where <string>`句を含むクエリが間違った結果を返す問題を修正
-    -   MPP クエリが停止したときにTiFlashがpanicになる問題を修正
+    -   MPP クエリが停止したときにTiFlash がpanicになる問題を修正
     -   `Unexpected type of column: Nullable(Nothing)`の予期しないエラーを修正します
 
 -   ツール
@@ -160,7 +160,7 @@ TiDB バージョン: 5.1.4
         -   DDL [#3174](https://github.com/pingcap/ticdc/issues/3174)の処理後のメモリリークの問題を修正します。
         -   ErrGCTTLExceeded エラーが発生したときに changefeed が十分な速さで失敗しないという問題を修正します[#3111](https://github.com/pingcap/ticdc/issues/3111)
         -   アップストリームの TiDB インスタンスが予期せず終了すると、TiCDC レプリケーション タスクが終了する可能性がある問題を修正します[#3061](https://github.com/pingcap/tiflow/issues/3061)
-        -   TiKV が同じリージョン[#2386](https://github.com/pingcap/tiflow/issues/2386)に重複したリクエストを送信すると、TiCDC プロセスがpanicになる可能性がある問題を修正します。
+        -   TiKV が同じリージョン[#2386](https://github.com/pingcap/tiflow/issues/2386)に重複したリクエストを送信すると、TiCDC プロセスがパニックになる可能panicがある問題を修正します。
         -   デフォルト値を`max-message-bytes`から`10M` [#3081](https://github.com/pingcap/tiflow/issues/3081)に設定することにより、Kafka が過度に大きなメッセージを送信する可能性がある問題を修正します。
         -   Kafka メッセージの書き込み中にエラーが発生すると、TiCDC 同期タスクが一時停止することがある問題を修正します[#2978](https://github.com/pingcap/tiflow/issues/2978)
 
@@ -168,10 +168,10 @@ TiDB バージョン: 5.1.4
 
         -   復元操作の完了後にリージョンが不均一に分散される可能性があるという潜在的な問題を修正します[#30425](https://github.com/pingcap/tidb/issues/30425) [#31034](https://github.com/pingcap/tidb/issues/31034)
 
-    -   Binlog
+    -   TiDBBinlog
 
         -   CSV ファイルのサイズが約 256MB で`strict-format`が`true` [#27763](https://github.com/pingcap/tidb/issues/27763)の場合、DBaaS の CSV インポートが InvalidRange で失敗する問題を修正します。
 
     -   TiDB Lightning
 
-        -   S3 ストレージ パスが存在しない場合にTiDB Lightningがエラーを報告しない問題を修正[#28031](https://github.com/pingcap/tidb/issues/28031) [#30709](https://github.com/pingcap/tidb/issues/30709)
+        -   S3storageパスが存在しない場合にTiDB Lightning がエラーを報告しない問題を修正[#28031](https://github.com/pingcap/tidb/issues/28031) [#30709](https://github.com/pingcap/tidb/issues/30709)

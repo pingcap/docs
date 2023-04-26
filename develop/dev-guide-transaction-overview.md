@@ -60,7 +60,7 @@ BEGIN;
 START TRANSACTION;
 ```
 
-TiDB のデフォルトのトランザクション モードは悲観的です。 [楽観的取引モデル](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)を明示的に指定することもできます。
+TiDB のデフォルトのトランザクション モードは悲観的です。 [楽観的取引モデル](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)明示的に指定することもできます。
 
 ```sql
 BEGIN OPTIMISTIC;

@@ -16,13 +16,13 @@ summary: Learn about the release notes of TiDB Cloud in 2021.
 バグの修正：
 
 -   1000 を超えるファイルをTiDB Cloudにインポートするときに発生するインポート エラーを修正します。
--   TiDB Cloudがデータを既に持っている既存のテーブルにデータをインポートできるようにする問題を修正します。
+-   TiDB Cloud がデータを既に持っている既存のテーブルにデータをインポートできるようにする問題を修正します。
 
 ## 2021 年 11 月 30 日 {#november-30-2021}
 
 一般的な変更:
 
--   TiDB CloudをDeveloper Tier用に[TiDB v5.3.0](https://docs.pingcap.com/tidb/stable/release-5.3.0)にアップグレードする
+-   TiDB Cloud をDeveloper Tier用に[TiDB v5.3.0](https://docs.pingcap.com/tidb/stable/release-5.3.0)にアップグレードする
 
 新機能：
 
@@ -40,13 +40,13 @@ summary: Learn about the release notes of TiDB Cloud in 2021.
 
 ## 2021 年 11 月 8 日 {#november-8-2021}
 
--   Launch [Developer Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) TiDB Cloudの 1 年間の無料トライアルを提供します。
+-   Launch [Developer Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) 。TiDB TiDB Cloudの 1 年間の無料トライアルを提供します。
 
     各Developer Tierクラスターはフル機能の TiDB クラスターであり、以下が付属しています。
 
     -   1 つの TiDB 共有ノード
-    -   1 つの TiKV 共有ノード (500 MiB の OLTP ストレージを使用)
-    -   1 つのTiFlash共有ノード (500 MiB の OLAP ストレージを使用)
+    -   1 つの TiKV 共有ノード (500 MiB の OLTPstorageを使用)
+    -   1 つのTiFlash共有ノード (500 MiB の OLAPstorageを使用)
 
     始めましょう[ここ](/tidb-cloud/tidb-cloud-quickstart.md) .
 
@@ -66,7 +66,7 @@ summary: Learn about the release notes of TiDB Cloud in 2021.
 
 ## 2021 年 9 月 2 日 {#september-2-2021}
 
--   新しくデプロイされたクラスターのデフォルトの TiDB バージョンを 5.0.2 から 5.2.0 にアップグレードします。 TiDB 5.1.0 および 5.2.0 の機能の詳細については、 [5.2.0](https://docs.pingcap.com/tidb/stable/release-5.2.0)および[5.1.0](https://docs.pingcap.com/tidb/stable/release-5.1.0)のリリース ノートを参照してください。
+-   新しくデプロイされたクラスターのデフォルトの TiDB バージョンを 5.0.2 から 5.2.0 にアップグレードします。 TiDB 5.1.0 および 5.2.0 の機能の詳細については、 [5.2.0](https://docs.pingcap.com/tidb/stable/release-5.2.0)および[5.1.0](https://docs.pingcap.com/tidb/stable/release-5.1.0)リリース ノートを参照してください。
 -   TiDB Cloud内部機能のいくつかの問題を修正します。
 
 ## 2021 年 8 月 19 日 {#august-19-2021}
@@ -91,7 +91,7 @@ summary: Learn about the release notes of TiDB Cloud in 2021.
 
 ## 2021 年 6 月 25 日 {#june-25-2021}
 
--   [TiDB Cloudの価格](https://en.pingcap.com/products/tidbcloud/pricing/)ページで**リージョンの選択**が機能しない問題を修正
+-   [TiDB Cloudの価格](https://en.pingcap.com/products/tidbcloud/pricing/)ページで**リージョンの選択が**機能しない問題を修正
 
 ## 2021 年 6 月 24 日 {#june-24-2021}
 
@@ -100,7 +100,7 @@ summary: Learn about the release notes of TiDB Cloud in 2021.
 
 ## 2021 年 6 月 16 日 {#june-16-2021}
 
--   アカウントにサインアップすると、**国/リージョン**のドロップダウン リストに<strong>中国</strong>が追加されます
+-   アカウントにサインアップすると、**国/リージョンの**ドロップダウン リストに<strong>中国</strong>が追加されます
 
 ## 2021 年 6 月 14 日 {#june-14-2021}
 
@@ -110,7 +110,7 @@ summary: Learn about the release notes of TiDB Cloud in 2021.
 
 全般的
 
--   TiDB Cloudは現在、パブリック プレビュー段階にあります。 [サインアップ](https://tidbcloud.com/signup)試用オプションのいずれかを選択できます。
+-   TiDB Cloud は現在、パブリック プレビュー段階にあります。 [サインアップ](https://tidbcloud.com/signup)試用オプションのいずれかを選択できます。
 
     -   48時間無料トライアル
     -   2 週間の PoC 無料トライアル
@@ -123,6 +123,6 @@ summary: Learn about the release notes of TiDB Cloud in 2021.
 -   コンソールで申請フォームに記入して[PoC](/tidb-cloud/tidb-cloud-poc.md)に申請できます
 -   UI を介してサンプル データをTiDB Cloudクラスターにインポートできます
 -   混乱を避けるため、同じ名前のクラスターは使用できません
--   [**サポート**] メニューの [<strong>フィードバック</strong>を送信] をクリックすると、フィードバックを送信できます。
+-   **[サポート]**メニューの<strong>[フィードバックを送信]</strong>をクリックすると、フィードバックを送信できます。
 -   データのバックアップと復元機能は、PoC とオンデマンドの試用オプションで利用できます
--   無料トライアルと PoC のポイント計算機とポイント使用ダッシュボードが追加されました。すべての試用オプションで、データの保存と転送の費用が免除されます
+-   無料トライアルと PoC のポイント計算機とポイント使用ダッシュボードが追加されました。すべての試用オプションで、データのstorageと転送の費用が免除されます

@@ -47,11 +47,11 @@ Query OK, 1 row affected (0.03 sec)
 
 -   `AUTO_INCREMENT`列に`NULL`を代入できるため、最初の`INSERT`ステートメントは成功します。 TiDB はシーケンス番号を自動的に生成します。
 -   `age`列が`NOT NULL`として定義されているため、2 番目の`INSERT`ステートメントは失敗します。
--   `last_login`列が`NOT NULL`として明示的に定義されていないため、3 番目の`INSERT`ステートメントは成功します。デフォルトでは NULL 値が許可されています。
+-   3 列が`NOT NULL`として明示的に定義されていないため、 `last_login`番目の`INSERT`ステートメントは成功します。デフォルトでは NULL 値が許可されています。
 
-## 小切手 {#check}
+## チェック {#check}
 
-TiDB は解析しますが、 `CHECK`の制約を無視します。これはMySQL 5.7互換の動作です。
+TiDB は解析しますが、 `CHECK`制約を無視します。これはMySQL 5.7互換の動作です。
 
 例えば：
 
@@ -160,7 +160,7 @@ ERROR 1062 (23000): Duplicate entry 'bill' for key 'users.username'
 
 ### 悲観的な取引 {#pessimistic-transactions}
 
-悲観的トランザクションでは、一意のインデックスを挿入または更新する必要がある SQL ステートメントが実行されると、TiDB はデフォルトで`UNIQUE`の制約をチェックします。
+悲観的トランザクションでは、一意のインデックスを挿入または更新する必要がある SQL ステートメントが実行されると、TiDB はデフォルトで`UNIQUE`制約をチェックします。
 
 ```sql
 DROP TABLE IF EXISTS users;
@@ -192,7 +192,7 @@ ERROR 1062 (23000): Duplicate entry 'bill' for key 'users.username'
     SELECT * FROM users FOR UPDATE;
     ```
 
-    次の出力例のように、TiDB のクエリ結果には 2 つの`bills`が含まれており、一意性制約を満たしていません。
+    次の出力例のように、TiDB のクエリ結果には 2 つの`bills`含まれており、一意性制約を満たしていません。
 
     ```sql
     +----+----------+
@@ -217,7 +217,7 @@ ERROR 1062 (23000): Duplicate entry 'bill' for key 'users.username'
     ERROR 1062 (23000): Duplicate entry 'bill' for key 'users.username'
     ```
 
--   この変数が無効になっている場合、データの書き込みが必要悲観的トランザクションをコミットすると、 `Write conflict`エラーが返される場合があります。このエラーが発生すると、TiDB は現在のトランザクションをロールバックします。
+-   この変数が無効になっている場合、データの書き込みが必要な悲観的トランザクションをコミットすると、 `Write conflict`エラーが返される場合があります。このエラーが発生すると、TiDB は現在のトランザクションをロールバックします。
 
     次の例のように、2 つの同時トランザクションが同じテーブルにデータを挿入する必要がある場合、悲観的ロックをスキップすると、トランザクションをコミットするときに TiDB が`Write conflict`エラーを返します。そして、トランザクションはロールバックされます。
 
@@ -269,7 +269,7 @@ ERROR 1062 (23000): Duplicate entry 'bill' for key 'users.username'
     ERROR 8147 (23000): transaction aborted because lazy uniqueness check is enabled and an error occurred: [kv:1062]Duplicate entry 'bill' for key 'users.username'
     ```
 
--   この変数が無効になっている場合、 `1062 Duplicate entry`のエラーは現在の SQL ステートメントからのものではない可能性があります。したがって、トランザクションが同じ名前のインデックスを持つ複数のテーブルで動作する場合は、エラー メッセージ`1062`をチェックして、実際にどのインデックスからエラーが発生したかを確認する必要があります。
+-   この変数が無効になっている場合、 `1062 Duplicate entry`エラーは現在の SQL ステートメントからのものではない可能性があります。したがって、トランザクションが同じ名前のインデックスを持つ複数のテーブルで動作する場合は、エラー メッセージ`1062`をチェックして、実際にどのインデックスからエラーが発生したかを確認する必要があります。
 
 ## 主キー {#primary-key}
 
@@ -311,7 +311,7 @@ Query OK, 0 rows affected (0.10 sec)
 
 -   列`a`が主キーとして定義されており、NULL 値が許可されていないため、表`t2`を作成できませんでした。
 -   テーブルには 1 つの主キーしか持てないため、テーブル`t3`を作成できませんでした。
--   主キーは 1 つしか存在できませんが、TiDB は複数の列を複合主キーとして定義することをサポートしているため、表`t4`は正常に作成されました。
+-   主キーは 1 つしか存在できませんが、TiDB は複数の列を複合主キーとして定義することをサポートしているため、表`t4`正常に作成されました。
 
 上記のルールに加えて、TiDB は現在、 `NONCLUSTERED`種類の主キーの追加と削除のみをサポートしています。例えば：
 

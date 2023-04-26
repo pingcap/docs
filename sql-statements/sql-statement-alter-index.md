@@ -51,7 +51,7 @@ SHOW CREATE TABLE t1;
 1 row in set (0.00 sec)
 ```
 
-オプティマイザは`c1`の非表示**インデックス**を使用できません。
+オプティマイザは`c1`の**非表示インデックス**を使用できません。
 
 {{< copyable "" >}}
 
@@ -117,8 +117,8 @@ Query OK, 0 rows affected (0.02 sec)
 ## MySQL の互換性 {#mysql-compatibility}
 
 -   TiDB の不可視インデックスは、MySQL 8.0 の同等の機能をモデルにしています。
--   MySQL と同様に、TiDB では`PRIMARY KEY`のインデックスを非表示にすることはできません。
--   MySQL は、オプティマイザ スイッチ`use_invisible_indexes=on`を提供して、すべての非表示のインデックスを再び*表示できるよう*にします。この機能は TiDB では利用できません。
+-   MySQL と同様に、TiDB では`PRIMARY KEY`インデックスを非表示にすることはできません。
+-   MySQL は、オプティマイザ スイッチ`use_invisible_indexes=on`を提供して、すべての非表示のインデックスを再び*表示できる*ようにします。この機能は TiDB では利用できません。
 
 ## こちらもご覧ください {#see-also}
 

@@ -34,8 +34,8 @@ summary: Learn how to use CSV configurations for the Import Data service on TiDB
 
 -   一般的な値:
 
-    -   `'"'`は、二重引用符でフィールドを引用します。上のスクリーンショットに示すように、 `"Michael","male"`は 2 つのフィールドを表します。 2 つのフィールドの間に`,`がなければならないことに注意してください。データが`"Michael""male"` ( `,`なし) の場合、インポート タスクは解析に失敗します。データが`"Michael,male"`の場合 (二重引用符が 1 つだけ)、1 つのフィールドとして解析されます。
-    -   `''`は引用を無効にします。
+    -   `'"'`二重引用符でフィールドを引用します。上のスクリーンショットに示すように、 `"Michael","male"` 2 つのフィールドを表します。 2 つのフィールドの間に`,`なければならないことに注意してください。データが`"Michael""male"` ( `,`なし) の場合、インポート タスクは解析に失敗します。データが`"Michael,male"`の場合 (二重引用符が 1 つだけ)、1 つのフィールドとして解析されます。
+    -   `''`引用を無効にします。
 
 -   デフォルト: `"`
 
@@ -56,10 +56,10 @@ summary: Learn how to use CSV configurations for the Import Data service on TiDB
 
     例として、次のフィールドを取り上げます。
 
-    -   値が`True`の場合、 `"nick name is \"Mike\""`は`nick name is "Mike"`として解析され、ターゲット テーブルに書き込まれます。
+    -   値が`True`の場合、 `"nick name is \"Mike\""` `nick name is "Mike"`として解析され、ターゲット テーブルに書き込まれます。
     -   値が`False`の場合、 `"nick name is \"` 、 `Mike\` 、および`""`の 3 つのフィールドとして解析されます。しかし、フィールドが互いに分離されていないため、正しく解析できません。
 
-    標準の CSV ファイルの場合、記録するフィールドに二重引用符が含まれている場合は、二重引用符を 2 つ使用してエスケープする必要があります。この場合、 `Backslash escape = True`を使用すると解析エラーが発生しますが、 `Backslash escape = False`を使用すると正しく解析されます。一般的なシナリオは、インポートされたフィールドに JSON コンテンツが含まれている場合です。標準の CSV JSON フィールドは通常、次のように格納されます。
+    標準の CSV ファイルの場合、記録するフィールドに二重引用符が含まれている場合は、二重引用符を 2 つ使用してエスケープする必要があります。この場合、 `Backslash escape = True`を使用すると解析エラーが発生しますが、 `Backslash escape = False`使用すると正しく解析されます。一般的なシナリオは、インポートされたフィールドに JSON コンテンツが含まれている場合です。標準の CSV JSON フィールドは通常、次のように格納されます。
 
     `"{""key1"":""val1"", ""key2"": ""val2""}"`
 
@@ -75,7 +75,7 @@ summary: Learn how to use CSV configurations for the Import Data service on TiDB
 
 ## 最後の区切りをトリム {#trim-last-separator}
 
--   定義: `Separator`を行末記号として扱い、末尾の区切り文字をすべて削除するかどうか。
+-   定義: `Separator`行末記号として扱い、末尾の区切り文字をすべて削除するかどうか。
 
     たとえば、次の CSV ファイルでは次のようになります。
 

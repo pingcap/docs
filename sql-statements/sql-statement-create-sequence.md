@@ -68,7 +68,7 @@ CREATE [TEMPORARY] SEQUENCE [IF NOT EXISTS] sequence_name
 
 -   `NEXTVAL`または`NEXT VALUE FOR`
 
-    基本的に、どちらもシーケンス オブジェクトの次の有効な値を取得する`nextval()`の関数です。 `nextval()`関数のパラメーターは、シーケンスの`identifier`です。
+    基本的に、どちらもシーケンス オブジェクトの次の有効な値を取得する`nextval()`関数です。 `nextval()`関数のパラメーターは、シーケンスの`identifier`です。
 
 -   `LASTVAL`
 
@@ -299,7 +299,7 @@ CREATE [TEMPORARY] SEQUENCE [IF NOT EXISTS] sequence_name
 
 このステートメントは TiDB 拡張機能です。実装は、MariaDB で利用可能なシーケンスをモデルにしています。
 
-`SETVAL`の関数を除いて、他のすべての関数は MariaDB と同じ*進行*を持ちます。ここで「進行」とは、数列内の数が、数列によって定義された特定の算術進行規則に従うことを意味します。 `SETVAL`を使用してシーケンスの現在の値を設定できますが、シーケンスの後続の値は元の進行規則に従います。
+`SETVAL`の関数を除いて、他のすべての関数はMariaDB と同じ*進行を*持ちます。ここで「進行」とは、数列内の数が、数列によって定義された特定の算術進行規則に従うことを意味します。 `SETVAL`を使用してシーケンスの現在の値を設定できますが、シーケンスの後続の値は元の進行規則に従います。
 
 例えば：
 

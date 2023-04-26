@@ -17,12 +17,12 @@ summary: This document describes how to use multi-table join queries.
 
 ![Inner Join](/media/develop/inner-join.png)
 
-たとえば、最も多作な著者を知りたい場合は、 `authors`という名前の author テーブルと`book_authors`という名前の書籍の author テーブルを結合する必要があります。
+たとえば、最も多作な著者を知りたい場合は、 `authors`という名前の author テーブルと`book_authors`名前の書籍の author テーブルを結合する必要があります。
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
 
-次の SQL ステートメントでは、キーワード`JOIN`を使用して、左のテーブル`authors`と右のテーブル`book_authors`の行を結合条件`a.id = ba.author_id`で内部結合として結合することを宣言します。結果セットには、結合条件を満たす行のみが含まれます。著者が本を書いていない場合、テーブル`authors`のレコードは結合条件を満たさないため、結果セットには表示されません。
+次の SQL ステートメントでは、キーワード`JOIN`を使用して、左のテーブル`authors`と右のテーブル`book_authors`行を結合条件`a.id = ba.author_id`で内部結合として結合することを宣言します。結果セットには、結合条件を満たす行のみが含まれます。著者が本を書いていない場合、テーブル`authors`のレコードは結合条件を満たさないため、結果セットには表示されません。
 
 ```sql
 SELECT ANY_VALUE(a.id) AS author_id, ANY_VALUE(a.name) AS author_name, COUNT(ba.book_id) AS books
@@ -134,7 +134,7 @@ LIMIT 10;
 DELETE FROM ratings WHERE book_id = 3438991610;
 ```
 
-再度クエリします。 The *Documentary of lion*という本はまだ結果セットに表示されていますが、右側のテーブル`ratings`の`score`から計算された`average_score`列は`NULL`で埋められています。
+再度クエリします。 *The Documentary of lion という*本はまだ結果セットに表示されていますが、右側のテーブル`ratings`の`score`から計算された`average_score`列は`NULL`で埋められています。
 
 ```
 +------------+---------------------------------+---------------+
@@ -195,11 +195,11 @@ public List<Book> getLatestBooksWithAverageScore() throws SQLException {
 
 ### クロスジョイン {#cross-join}
 
-結合条件が一定の場合、2 つのテーブル間の内部結合は[交差結合](https://en.wikipedia.org/wiki/Join_(SQL)#Cross_join)と呼ばれます。クロス結合は、左側のテーブルのすべてのレコードを右側のテーブルのすべてのレコードに結合します。左側のテーブルのレコード数が`m`で、右側のテーブルのレコード数が`n`の場合、結果セットには`m \* n`のレコードが生成されます。
+結合条件が一定の場合、2 つのテーブル間の内部結合は[交差結合](https://en.wikipedia.org/wiki/Join_(SQL)#Cross_join)と呼ばれます。クロス結合は、左側のテーブルのすべてのレコードを右側のテーブルのすべてのレコードに結合します。左側のテーブルのレコード数が`m`で、右側のテーブルのレコード数が`n`の場合、結果セットには`m \* n`レコードが生成されます。
 
 ### 左セミジョイン {#left-semi-join}
 
-TiDB は、SQL 構文レベルで`LEFT SEMI JOIN table_name`をサポートしていません。ただし、実行計画レベルでは、 [サブクエリ関連の最適化](/subquery-optimization.md)は、書き換えられた同等の JOIN クエリのデフォルトの結合方法として`semi join`を使用します。
+TiDB は、SQL 構文レベルで`LEFT SEMI JOIN table_name`サポートしていません。ただし、実行計画レベルでは、 [サブクエリ関連の最適化](/subquery-optimization.md) 、書き換えられた同等の JOIN クエリのデフォルトの結合方法として`semi join`を使用します。
 
 ## 暗黙の結合 {#implicit-join}
 
@@ -217,7 +217,7 @@ TiDB は、次の一般的なテーブル結合アルゴリズムをサポート
 
 TiDB のオプティマイザが最適な結合アルゴリズムに従って実行されない場合は、 [オプティマイザーのヒント](/optimizer-hints.md)を使用して、TiDB がより適切な結合アルゴリズムを使用するように強制できます。
 
-たとえば、上記の左結合クエリの例が、オプティマイザによって選択されないハッシュ結合アルゴリズムを使用して高速に実行されると仮定すると、 `SELECT`キーワードの後にヒント`/*+ HASH_JOIN(b, r) */`を追加できます。テーブルにエイリアスがある場合は、ヒントでエイリアスを使用することに注意してください。
+たとえば、上記の左結合クエリの例が、オプティマイザによって選択されないハッシュ結合アルゴリズムを使用して高速に実行されると仮定すると、 `SELECT`キーワードの後にヒント`/*+ HASH_JOIN(b, r) */`追加できます。テーブルにエイリアスがある場合は、ヒントでエイリアスを使用することに注意してください。
 
 ```sql
 EXPLAIN SELECT /*+ HASH_JOIN(b, r) */ b.id AS book_id, ANY_VALUE(b.title) AS book_title, AVG(r.score) AS average_score
@@ -237,7 +237,7 @@ LIMIT 10;
 
 ## 結合注文 {#join-orders}
 
-実際のビジネス シナリオでは、複数のテーブルの結合ステートメントは非常に一般的です。ジョインの実行効率は、ジョイン内の各テーブルの順序に関係しています。 TiDB は結合したテーブルの再配置 Reorder アルゴリズムを使用して、複数のテーブルを結合する順序を決定します。
+実際のビジネス シナリオでは、複数のテーブルの結合ステートメントは非常に一般的です。ジョインの実行効率は、ジョイン内の各テーブルの順序に関係しています。 TiDB は結合したテーブルの再配置アルゴリズムを使用して、複数のテーブルを結合する順序を決定します。
 
 オプティマイザによって選択された結合順序が期待どおりに最適でない場合は、 `STRAIGHT_JOIN`を使用して、 `FROM`節で使用されるテーブルの順序でクエリを結合するように TiDB を強制できます。
 

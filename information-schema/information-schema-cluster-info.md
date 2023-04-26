@@ -25,8 +25,9 @@ desc cluster_info;
 | GIT_HASH       | varchar(64) | YES  |      | NULL    |       |
 | START_TIME     | varchar(32) | YES  |      | NULL    |       |
 | UPTIME         | varchar(32) | YES  |      | NULL    |       |
+| SERVER_ID      | bigint(21)  | YES  |      | NULL    |       |
 +----------------+-------------+------+------+---------+-------+
-7 rows in set (0.00 sec)
+8 rows in set (0.01 sec)
 ```
 
 フィールドの説明:
@@ -38,6 +39,7 @@ desc cluster_info;
 -   `GIT_HASH` : インスタンス バージョンをコンパイルするときの Git コミット ハッシュ。これは、2 つのインスタンスが完全に一貫したバージョンであるかどうかを識別するために使用されます。
 -   `START_TIME` : 対応するインスタンスの開始時刻。
 -   `UPTIME` : 対応するインスタンスの稼働時間。
+-   `SERVER_ID` : 対応するインスタンスのサーバーID。
 
 {{< copyable "" >}}
 

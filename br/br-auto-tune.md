@@ -3,11 +3,11 @@ title: Backup Auto-Tune
 summary: Learn about the auto-tune feature of TiDB backup and restore, which automatically limits the resources used by backups to reduce the impact on the cluster in case of high cluster resource usage.
 ---
 
-# バックアップの自動<span class="version-mark">調整 v5.4.0 の新機能</span> {#backup-auto-tune-span-class-version-mark-new-in-v5-4-0-span}
+# バックアップの自動調整<span class="version-mark">v5.4.0 の新機能</span> {#backup-auto-tune-span-class-version-mark-new-in-v5-4-0-span}
 
 TiDB v5.4.0 より前では、Backup &amp; Restore (BR) を使用してデータをバックアップすると、バックアップに使用されるスレッドの数が論理 CPU コアの 75% を占めていました。速度制限がない場合、バックアップ プロセスは大量のクラスター リソースを消費する可能性があり、オンライン クラスターのパフォーマンスに大きな影響を与えます。スレッド プールのサイズを調整することでバックアップの影響を軽減できますが、CPU 負荷を観察して手動でスレッド プール サイズを調整するのは面倒な作業です。
 
-クラスターに対するバックアップ タスクの影響を軽減するために、TiDB v5.4.0 では自動調整機能が導入されており、これはデフォルトで有効になっています。クラスター リソースの使用率が高い場合、 BRはバックアップ タスクで使用されるリソースを自動的に制限し、クラスターへの影響を軽減します。自動調整機能はデフォルトで有効になっています。
+クラスターに対するバックアップ タスクの影響を軽減するために、TiDB v5.4.0 では自動調整機能が導入されており、これはデフォルトで有効になっています。クラスター リソースの使用率が高い場合、 BR はバックアップ タスクで使用されるリソースを自動的に制限し、クラスターへの影響を軽減します。自動調整機能はデフォルトで有効になっています。
 
 ## 利用シーン {#usage-scenario}
 
@@ -47,7 +47,7 @@ tikv-ctl modify-tikv-config -n backup.enable-auto-tune -v <true|false>
 
         バックアップ プロセスには、CPU リソースを消費する多数の SST デコード、エンコード、圧縮、および圧縮解除が含まれます。さらに、以前のテスト ケースでは、バックアップ プロセス中に、バックアップに使用されるスレッド プールの CPU 使用率が 100% に近いことが示されています。これは、バックアップ タスクが多くの CPU リソースを消費することを意味します。バックアップ タスクで使用されるスレッドの数を調整することで、TiKV はバックアップ タスクで使用される CPU コアを制限できるため、バックアップ タスクがクラスターのパフォーマンスに与える影響を軽減できます。
 
--   問題 2: ホットスポットのある**クラスターの場合、ホットスポット**のある TiKV ノードでのバックアップ タスクが過度に制限され、バックアップ プロセス全体が遅くなる可能性があります。
+-   問題 2:**ホットスポットのあるクラスター**の場合、ホットスポットのある TiKV ノードでのバックアップ タスクが過度に制限され、バックアップ プロセス全体が遅くなる可能性があります。
 
     -   解決策: ホットスポット ノードを削除するか、ホットスポット ノードの自動調整を無効にします (これにより、クラスターのパフォーマンスが低下する可能性があります)。
 
@@ -63,7 +63,7 @@ tikv-ctl modify-tikv-config -n backup.enable-auto-tune -v <true|false>
 
 -   `backup.auto-tune-remain-threads` :
 
-    -   自動調整は、バックアップ タスクによって使用されるリソースを制御し、少なくとも`backup.auto-tune-remain-threads`のコアが同じノード上の他のタスクに使用できるようにします。
+    -   自動調整は、バックアップ タスクによって使用されるリソースを制御し、少なくとも`backup.auto-tune-remain-threads`コアが同じノード上の他のタスクに使用できるようにします。
     -   デフォルト値: `round(0.2 * vCPU)`
 
 -   `backup.auto-tune-refresh-interval` :
@@ -71,7 +71,7 @@ tikv-ctl modify-tikv-config -n backup.enable-auto-tune -v <true|false>
     -   自動調整は`backup.auto-tune-refresh-interval`分ごとに統計を更新し、バックアップ タスクが使用できる CPU コアの最大数を再計算します。
     -   デフォルト値: `1m`
 
-以下は、自動調整がどのように機能するかの例です。 `*`は、バックアップ タスクによって使用される CPU コアを示します。 `^`は他のタスクが使用するＣＰＵコアである。 `-`は、アイドル状態の CPU コアを示します。
+以下は、自動調整がどのように機能するかの例です。 `*`バックアップ タスクによって使用される CPU コアを示します。 `^`他のタスクが使用するＣＰＵコアである。 `-`アイドル状態の CPU コアを示します。
 
 ```
 |--------| The server has 8 logical CPU cores.
@@ -80,7 +80,7 @@ tikv-ctl modify-tikv-config -n backup.enable-auto-tune -v <true|false>
 |^^^^**--| Because the cluster workload gets higher, auto-tune adjusts the size of the thread pool to `2`. After that, the cluster still has 2 idle CPU cores.
 ```
 
-[**バックアップ CPU 使用率**] パネルで、自動調整によって調整されたスレッド プールのサイズを確認できます。
+**[バックアップ CPU 使用率]**パネルで、自動調整によって調整されたスレッド プールのサイズを確認できます。
 
 ![Grafana dashboard example of backup auto-tune metrics](/media/br/br-auto-throttle.png)
 

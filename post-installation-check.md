@@ -37,7 +37,7 @@ tiup cluster display tidb-test
 
 1.  `${Grafana-ip}:3000`で Grafana モニタリングにログインします。デフォルトのユーザー名とパスワードは両方とも`admin`です。
 
-2.  TiDB ポートのステータスと負荷監視情報を確認するには、[**概要**] をクリックします。
+2.  TiDB ポートのステータスと負荷監視情報を確認するには、 **[概要]**をクリックします。
 
     ![Grafana-overview](/media/tiup/grafana-overview.png)
 
@@ -55,7 +55,7 @@ tiup cluster display tidb-test
 mysql -u root -h ${tidb_server_host_IP_address} -P 4000
 ```
 
-`${tidb_server_host_IP_address}`は、 `10.0.1.7`などの[クラスタ トポロジ ファイルを初期化する](/production-deployment-using-tiup.md#step-3-initialize-cluster-topology-file)のときに`tidb_servers`に設定された IP アドレスの 1 つです。
+`${tidb_server_host_IP_address}` 、 `10.0.1.7`などの[クラスタ トポロジ ファイルを初期化する](/production-deployment-using-tiup.md#step-3-initialize-cluster-topology-file)のときに`tidb_servers`に設定された IP アドレスの 1 つです。
 
 次の情報は、ログインが成功したことを示します。
 
@@ -159,7 +159,7 @@ Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
     Query OK, 1 row affected (0.03 sec)
     ```
 
--   `tab_tidb`のエントリをビューします。
+-   `tab_tidb`のエントリをビュー。
 
     {{< copyable "" >}}
 
@@ -178,7 +178,7 @@ Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
     1 row in set (0.00 sec)
     ```
 
--   ストアの状態`store_id` 、容量、および TiKV の稼働時間をビューします。
+-   ストアの状態`store_id` 、容量、および TiKV の稼働時間をビュー。
 
     {{< copyable "" >}}
 

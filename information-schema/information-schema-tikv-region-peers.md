@@ -1,20 +1,20 @@
 ---
 title: TIKV_REGION_PEERS
-summary: Learn the `TIKV_REGION_PEERS` information_schema table.
+summary: Learn the `TIKV_REGION_PEERS` INFORMATION_SCHEMA table.
 ---
 
 # TIKV_REGION_PEERS {#tikv-region-peers}
 
 `TIKV_REGION_PEERS`テーブルには、学習者かリーダーかなど、TiKV の単一のリージョンノードの詳細情報が表示されます。
 
-{{< copyable "" >}}
+```sql
+USE INFORMATION_SCHEMA;
+DESC TIKV_REGION_PEERS;
+```
+
+出力は次のとおりです。
 
 ```sql
-USE information_schema;
-DESC tikv_region_peers;
-```
-
-```
 +--------------+-------------+------+------+---------+-------+
 | Field        | Type        | Null | Key  | Default | Extra |
 +--------------+-------------+------+------+---------+-------+
@@ -33,17 +33,17 @@ DESC tikv_region_peers;
 
 ```sql
 SELECT
- address,
- tikv.address,
- region.region_id
+  address,
+  tikv.address,
+  region.region_id
 FROM
- tikv_store_status tikv,
- tikv_region_peers peer,
- (SELECT * FROM tikv_region_status ORDER BY written_bytes DESC LIMIT 3) region
+  TIKV_STORE_STATUS tikv,
+  TIKV_REGION_PEERS peer,
+  (SELECT * FROM tikv_region_status ORDER BY written_bytes DESC LIMIT 3) region
 WHERE
   region.region_id = peer.region_id
- AND peer.is_leader = 1
- AND peer.store_id = tikv.store_id;
+  AND peer.is_leader = 1
+  AND peer.store_id = tikv.store_id;
 ```
 
 `TIKV_REGION_PEERS`テーブルのフィールドは次のとおりです。

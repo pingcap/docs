@@ -5,7 +5,7 @@ summary: Learn seven tips for efficiently using Grafana to monitor TiDB.
 
 # Grafana を使用して TiDB を監視するためのベスト プラクティス {#best-practices-for-monitoring-tidb-using-grafana}
 
-トポロジー構成に Grafana と Prometheus を[TiUP を使用してTiUPクラスターをデプロイする](/production-deployment-using-tiup.md)追加すると、TiDB クラスター内のさまざまなコンポーネントとマシンのメトリックを収集して表示するために、 [Grafana + Prometheus 監視プラットフォーム](/tidb-monitoring-framework.md)のセットが同時にデプロイされます。このドキュメントでは、Grafana を使用して TiDB を監視するためのベスト プラクティスについて説明します。メトリックを使用して TiDB クラスターのステータスを分析し、問題を診断するのに役立つことを目的としています。
+トポロジー構成に Grafana と Prometheus を[TiUPを使用して TiDB クラスターをデプロイする](/production-deployment-using-tiup.md)追加すると、TiDB クラスター内のさまざまなコンポーネントとマシンのメトリックを収集して表示するために、 [Grafana + Prometheus 監視プラットフォーム](/tidb-monitoring-framework.md)のセットが同時にデプロイされます。このドキュメントでは、Grafana を使用して TiDB を監視するためのベスト プラクティスについて説明します。メトリックを使用して TiDB クラスターのステータスを分析し、問題を診断するのに役立つことを目的としています。
 
 ## 監視アーキテクチャ {#monitoring-architecture}
 
@@ -23,7 +23,7 @@ TiDB 2.1.3 以降のバージョンでは、TiDB モニタリングはプル方�
 
 TiDB の 3 つのコア コンポーネント (TiDBサーバー、TiKVサーバー、および PDサーバー) は、HTTP インターフェイスを介してメトリックを取得します。これらのメトリックはプログラム コードから収集され、ポートは次のとおりです。
 
-| 成分       | 港     |
+| 成分       | ポート   |
 | :------- | :---- |
 | TiDBサーバー | 10080 |
 | TiKVサーバー | 20181 |
@@ -48,11 +48,11 @@ tidb_executor_statement_total{type="Show"} 500531
 tidb_executor_statement_total{type="Use"} 466016
 ```
 
-上記のデータは Prometheus に保存され、Grafana に表示されます。パネルを右クリックし、次の図に示す [**編集**] ボタンをクリックします (または<kbd>E</kbd>キーを直接押します)。
+上記のデータは Prometheus に保存され、Grafana に表示されます。パネルを右クリックし、次の図に示す**[編集]**ボタンをクリックします (または<kbd>E</kbd>キーを直接押します)。
 
 ![The Edit entry for the Metrics tab](/media/best-practices/metric-board-edit-entry.png)
 
-[**編集**] ボタンをクリックすると、[メトリック] タブに`tidb_executor_statement_total`メトリック名のクエリ式が表示されます。パネル上の一部の項目の意味は次のとおりです。
+**[編集]**ボタンをクリックすると、[メトリック] タブに`tidb_executor_statement_total`メトリック名のクエリ式が表示されます。パネル上の一部の項目の意味は次のとおりです。
 
 -   `rate[1m]` : 1 分間の成長率。カウンタ型のデータにのみ使用できます。
 -   `sum` : 値の合計。
@@ -60,7 +60,7 @@ tidb_executor_statement_total{type="Use"} 466016
 -   `Legend format` : メトリック名の形式。
 -   `Resolution` : ステップ幅のデフォルトは 15 秒です。解像度とは、複数のピクセルに対して 1 つのデータ ポイントを生成するかどうかを意味します。
 
-[**メトリクス**] タブのクエリ式は次のとおりです。
+**[メトリクス]**タブのクエリ式は次のとおりです。
 
 ![The query expression on the Metrics tab](/media/best-practices/metric-board-expression.jpeg)
 
@@ -76,7 +76,7 @@ Prometheus は、多くのクエリ式と関数をサポートしています。
 
 ![Edit query expression and check all dimensions](/media/best-practices/edit-expression-check-dimensions.jpg)
 
-次に、 `type`の後に`instance`ディメンションを追加し、 `Legend format`フィールドに`{{instance}}`を追加して、クエリ式を変更できます。このようにして、各 TiDBサーバーで実行されるさまざまなタイプの SQL ステートメントの QPS を確認できます。
+次に、 `type`後に`instance`ディメンションを追加し、 `Legend format`フィールドに`{{instance}}`を追加して、クエリ式を変更できます。このようにして、各 TiDBサーバーで実行されるさまざまなタイプの SQL ステートメントの QPS を確認できます。
 
 ![Add an instance dimension to the query expression](/media/best-practices/add-instance-dimension.jpeg)
 
@@ -96,7 +96,7 @@ Y 軸を線形スケールに切り替えます。
 
 > **ヒント：**
 >
-> ヒント 2 とヒント 1 を組み合わせると、 `SELECT`番目のステートメントと`UPDATE`番目のステートメントのどちらが遅いかをすぐに分析するのに役立つ`sql_type`次元を見つけることができます。遅い SQL ステートメントを使用してインスタンスを見つけることもできます。
+> ヒント 2 とヒント 1 を組み合わせると、 `SELECT`ステートメントと`UPDATE`番目のステートメントのどちらが遅いかをすぐに分析するのに役立つ`sql_type`次元を見つけることができます。遅い SQL ステートメントを使用してインスタンスを見つけることもできます。
 
 ### ヒント 3: Y 軸のベースラインを変更して変化を増幅する {#tip-3-modify-the-baseline-of-the-y-axis-to-amplify-changes}
 
@@ -112,11 +112,11 @@ Y 軸を線形スケールに切り替えます。
 
 ### ヒント 4: 共有十字線またはツールチップを使用する {#tip-4-use-shared-crosshair-or-tooltip}
 
-**[設定]**パネルには、デフォルトで [<strong>デフォルト</strong>] に設定されている [<strong>グラフ ツールチップ</strong>] パネル オプションがあります。
+**[設定]**パネルには、デフォルトで<strong>[デフォルト]</strong>に設定されている<strong>[グラフ ツールチップ]</strong>パネル オプションがあります。
 
 ![Graphic presentation tools](/media/best-practices/graph-tooltip.jpeg)
 
-次の図に示すように、**共有十字線**と<strong>共有ツールチップ</strong>をそれぞれ使用して効果をテストできます。すると、スケールが連動して表示されるので、問題を診断する際に 2 つの指標の相関関係を確認するのに便利です。
+次の図に示すように、**共有十字線**と<strong>共有ツールチップを</strong>それぞれ使用して効果をテストできます。すると、スケールが連動して表示されるので、問題を診断する際に 2 つの指標の相関関係を確認するのに便利です。
 
 グラフィック プレゼンテーション ツールを**Shared crosshair**に設定します。
 
@@ -126,9 +126,9 @@ Y 軸を線形スケールに切り替えます。
 
 ![Set the graphic presentation tool to Shared Tooltip](/media/best-practices/graph-tooltip-shared-tooltip.jpg)
 
-### ヒント 5: <code>IP address:port number</code>を入力して、履歴のメトリックを確認します {#tip-5-enter-code-ip-address-port-number-code-to-check-the-metrics-in-history}
+### ヒント 5: <code>IP address:port number</code>入力して、履歴のメトリックを確認します {#tip-5-enter-code-ip-address-port-number-code-to-check-the-metrics-in-history}
 
-PD のダッシュボードには、現在のリーダーの指標のみが表示されます。履歴の PD リーダーのステータスを確認したいが、 `instance`フィールドのドロップダウン リストに存在しない場合は、手動で`IP address:2379`を入力してリーダーのデータを確認できます。
+PD のダッシュボードには、現在のリーダーの指標のみが表示されます。履歴の PD リーダーのステータスを確認したいが、 `instance`フィールドのドロップダウン リストに存在しない場合は、手動で`IP address:2379`入力してリーダーのデータを確認できます。
 
 ![Check the metrics in history](/media/best-practices/manually-input-check-metric.jpeg)
 
@@ -136,7 +136,7 @@ PD のダッシュボードには、現在のリーダーの指標のみが表�
 
 通常、凡例ではデフォルトで`Max`つと`Current`の関数のみが使用可能です。メトリックが大きく変動する場合は、 `Avg`関数などの他の集計関数を凡例に追加して、期間の全体的な傾向を確認できます。
 
-`Avg`関数を追加します。
+`Avg`関数などの集計関数を追加します。
 
 ![Add summary functions such as Avg](/media/best-practices/add-avg-function.jpeg)
 
@@ -200,6 +200,6 @@ curl -u user:pass 'http://__grafana_ip__:3000/api/datasources/proxy/1/api/v1/que
 }
 ```
 
-## 概要 {#summary}
+## まとめ {#summary}
 
 Grafana + Prometheus 監視プラットフォームは非常に強力なツールです。これをうまく活用すると、効率が向上し、TiDB クラスターのステータスを分析する時間を大幅に節約できます。さらに重要なことは、問題の診断に役立つことです。このツールは、特に大量のデータがある場合に、TiDB クラスターの運用と保守に非常に役立ちます。

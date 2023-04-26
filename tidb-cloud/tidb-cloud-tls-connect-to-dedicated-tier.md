@@ -5,17 +5,17 @@ summary: Introduce TLS connections in TiDB Dedicated Tier.
 
 # Dedicated Tierへの TLS 接続 {#tls-connections-to-dedicated-tier}
 
-TiDB Cloudでは、TLS 接続の確立は、 Dedicated Tierクラスターに接続するための基本的なセキュリティ プラクティスの 1 つです。クライアント、アプリケーション、および開発ツールからDedicated Tierクラスターへの複数の TLS 接続を構成して、データ転送のセキュリティを保護できます。セキュリティ上の理由から、 TiDB Cloud Dedicated Tierは TLS 1.2 と TLS 1.3 のみをサポートし、TLS 1.0 と TLS 1.1 のバージョンはサポートしていません。
+TiDB Cloudでは、TLS 接続の確立は、 Dedicated Tierクラスターに接続するための基本的なセキュリティ プラクティスの 1 つです。クライアント、アプリケーション、および開発ツールからDedicated Tierクラスターへの複数の TLS 接続を構成して、データ転送のセキュリティを保護できます。セキュリティ上の理由から、 TiDB Cloud Dedicated Tier はTLS 1.2 と TLS 1.3 のみをサポートし、TLS 1.0 と TLS 1.1 のバージョンはサポートしていません。
 
-データのセキュリティを確保するために、 Dedicated Tierクラスターの TiDB クラスター CA は[AWS 証明書マネージャー (ACM)](https://aws.amazon.com/certificate-manager/)でホストされ、TiDB クラスターの秘密鍵は[FIPS 140-2 レベル 3](https://csrc.nist.gov/projects/cryptographic-module-validation-program/Certificate/3139)のセキュリティ基準を満たす AWS マネージド ハードウェア セキュリティ モジュール (HSM) に保存されます。
+データのセキュリティを確保するために、 Dedicated Tierクラスターの TiDB クラスター CA は[AWS 証明書マネージャー (ACM)](https://aws.amazon.com/certificate-manager/)でホストされ、TiDB クラスターの秘密鍵は[FIPS 140-2 レベル 3](https://csrc.nist.gov/projects/cryptographic-module-validation-program/Certificate/3139)セキュリティ基準を満たす AWS マネージド ハードウェア セキュリティ モジュール (HSM) に保存されます。
 
 ## 前提条件 {#prerequisites}
 
--   [パスワード認証](/tidb-cloud/tidb-cloud-password-authentication.md)または[SSO 認証](/tidb-cloud/tidb-cloud-sso-authentication.md)を介してTiDB Cloudにログインし、次に[TiDB Cloud Dedicated Tierクラスターを作成する](/tidb-cloud/create-tidb-cluster.md)を介してログインします。
+-   [パスワード認証](/tidb-cloud/tidb-cloud-password-authentication.md)または[SSO 認証](/tidb-cloud/tidb-cloud-sso-authentication.md)を介してTiDB Cloudにログインし、次に[TiDB Cloud Dedicated Tierクラスターを作成する](/tidb-cloud/create-tidb-cluster.md)介してログインします。
 
 -   安全な設定でクラスターにアクセスするためのパスワードを設定します。
 
-    これを行うには、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、 Dedicated Tierクラスターの行で [ **...** ] をクリックして、 [ <strong>Security Settings]</strong>を選択します。セキュリティ設定で、[<strong>生成</strong>] をクリックして、数字、大文字と小文字、および特殊文字を含む 16 文字の長さのルート パスワードを自動的に生成できます。
+    これを行うには、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、 Dedicated Tierクラスターの行で**[...]**をクリックして、 <strong>[Security Settings]</strong>を選択します。セキュリティ設定で、 <strong>[生成]</strong>をクリックして、数字、大文字と小文字、および特殊文字を含む 16 文字の長さのルート パスワードを自動的に生成できます。
 
 ## Dedicated Tierクラスターへのセキュリティ接続 {#secure-connection-to-a-dedicated-tier-cluster}
 
@@ -23,22 +23,22 @@ TiDB Cloudでは、TLS 接続の確立は、 Dedicated Tierクラスターに接
 
 1.  プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、 Dedicated Tierクラスターの名前をクリックして概要ページに移動します。
 
-2.  右上隅にある [**接続]**をクリックします。ダイアログが表示されます。
+2.  右上隅にある**[接続]**をクリックします。ダイアログが表示されます。
 
-3.  このダイアログの [**標準接続**] タブで、3 つの手順に従って TLS 接続をセットアップします。
+3.  このダイアログの**[標準接続]**タブで、3 つの手順に従って TLS 接続をセットアップします。
     -   ステップ 1：トラフィック フィルターを作成する
     -   ステップ 2：TiDB クラスター CA のダウンロード
     -   ステップ 3：SQL クライアントに接続する
 
-4.  ダイアログの [**ステップ 1: トラフィック フィルターの作成**] で、クラスターへのアクセスを許可する IP アドレスを構成します。詳細については、 [標準接続で IP アクセス リストを構成する](/tidb-cloud/configure-ip-access-list.md#configure-an-ip-access-list-in-standard-connection)を参照してください。
+4.  ダイアログの**[ステップ 1: トラフィック フィルターの作成]**で、クラスターへのアクセスを許可する IP アドレスを構成します。詳細については、 [標準接続で IP アクセス リストを構成する](/tidb-cloud/configure-ip-access-list.md#configure-an-ip-access-list-in-standard-connection)を参照してください。
 
-5.  [**ステップ 2: TiDB クラスター CA**のダウンロード] で、[ <strong>TiDB クラスター CA のダウンロード</strong>] をクリックして、クライアント TLS 構成用にローカルにダウンロードします。 TiDB クラスター CA は、TLS 接続が安全で信頼できるものであることを保証します。
+5.  **[ステップ 2: TiDB クラスター CA のダウンロード] で**、 <strong>[TiDB クラスター CA のダウンロード</strong>] をクリックして、クライアント TLS 構成用にローカルにダウンロードします。 TiDB クラスター CA は、TLS 接続が安全で信頼できるものであることを保証します。
 
     > **ノート：**
     >
-    > Dedicated Tierクラスター CA をダウンロードしたら、オペレーティング システムの既定のストレージ パスに保存するか、別のストレージ パスを指定できます。以降の手順では、コード例の CA パスを独自のクラスター CA パスに置き換える必要があります。
+    > Dedicated Tierクラスター CA をダウンロードしたら、オペレーティング システムの既定のstorageパスに保存するか、別のstorageパスを指定できます。以降の手順では、コード例の CA パスを独自のクラスター CA パスに置き換える必要があります。
 
-6.  ダイアログの [**ステップ 3: SQL クライアントに接続**する] で、希望する接続方法のタブをクリックし、タブの接続文字列とサンプル コードを参照してクラスターに接続します。
+6.  ダイアログの**[ステップ 3: SQL クライアントに接続する]**で、希望する接続方法のタブをクリックし、タブの接続文字列とサンプル コードを参照してクラスターに接続します。
 
 次の例は、MySQL、MyCLI、JDBC、Python、Go、および Node.js の接続文字列を示しています。
 
@@ -61,7 +61,7 @@ mysql --connect-timeout 15 --ssl-mode=VERIFY_IDENTITY --ssl-ca=ca.pem --tls-vers
 
 <div label="MyCLI">
 
-[MyCLI](https://www.mycli.net/)は、TLS 関連のパラメーターを使用するときに TLS を自動的に有効にします。 TiDB Dedicated Tierクラスターに接続する場合は、 `ssl-ca`と`ssl-verify-server-cert`を設定する必要があります。
+[MyCLI](https://www.mycli.net/) TLS 関連のパラメーターを使用するときに TLS を自動的に有効にします。 TiDB Dedicated Tierクラスターに接続する場合は、 `ssl-ca`と`ssl-verify-server-cert`を設定する必要があります。
 
 ```shell
 mycli --ssl-ca=ca.pem --ssl-verify-server-cert -u root -h tidb.eqlfbdgthh8.clusters.staging.tidb-cloud.com -P 4000 -D test
@@ -86,7 +86,7 @@ TiDB クラスター CA をダウンロードした後、それをオペレー�
 jdbc:mysql://tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com:4000/test?user=root&password=<your_password>&sslMode=VERIFY_IDENTITY&tlsVersions=TLSv1.2&trustCertificateKeyStoreUrl=file:<your_custom_truststore_path>&trustCertificateKeyStorePassword=<your_truststore_password>
 ```
 
-[**使用例**の表示] をクリックして、詳細なコード例を表示できます。
+**[使用例の表示]**をクリックして、詳細なコード例を表示できます。
 
 ```
 import com.mysql.jdbc.Driver;
@@ -130,7 +130,7 @@ class Main {
 host="tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com", user="root", password="<your_password>", port=4000, database="test", ssl_mode="VERIFY_IDENTITY", ssl={"ca": "ca.pem"}
 ```
 
-[**使用例**の表示] をクリックして、詳細なコード例を表示できます。
+**[使用例の表示]**をクリックして、詳細なコード例を表示できます。
 
 ```
 import MySQLdb
@@ -173,7 +173,7 @@ mysql.RegisterTLSConfig("tidb", &tls.Config{
 db, err := sql.Open("mysql", "root:<your_password>@tcp(tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com:4000)/test?tls=tidb")
 ```
 
-[**使用例**の表示] をクリックして、詳細なコード例を表示できます。
+**[使用例の表示]**をクリックして、詳細なコード例を表示できます。
 
 ```
 package main
@@ -218,7 +218,7 @@ func main() {
 
 パラメータの説明：
 
--   TLS 接続構成に`tls.Config`を登録して、TLS を有効にし、TiDB Dedicated Tierクラスターを検証します。
+-   TLS 接続構成に`tls.Config`登録して、TLS を有効にし、TiDB Dedicated Tierクラスターを検証します。
 -   TLS プロトコルのバージョンを制限するには、 `MinVersion: tls.VersionTLS12`を設定します。
 -   TiDB Dedicated Tier のホスト名を確認するには、 `ServerName: "<host>"`を設定します。
 -   新しい TLS 構成を登録したくない場合は、接続文字列に`tls=true`を設定するだけです。
@@ -244,7 +244,7 @@ var connection = mysql.createConnection({
 });
 ```
 
-[**使用例**の表示] をクリックして、詳細なコード例を表示できます。
+**[使用例の表示]**をクリックして、詳細なコード例を表示できます。
 
 ```
 var mysql = require('mysql2');
@@ -285,16 +285,16 @@ connection.connect(function(err) {
 
 ## Dedicated Tierのルート証明書を管理する {#manage-root-certificates-for-dedicated-tier}
 
-TiDB Dedicated Tierは、クライアントと TiDB Dedicated Tierクラスター間の TLS 接続の認証局 (CA) として[AWS 証明書マネージャー (ACM)](https://aws.amazon.com/certificate-manager/)からの証明書を使用します。通常、ACM のルート証明書は、 [FIPS 140-2 レベル 3](https://csrc.nist.gov/projects/cryptographic-module-validation-program/Certificate/3139)のセキュリティ基準を満たす AWS 管理のハードウェア セキュリティ モジュール (HSM) に安全に保存されます。
+TiDB Dedicated Tier は、クライアントと TiDB Dedicated Tierクラスター間の TLS 接続の認証局 (CA) として[AWS 証明書マネージャー (ACM)](https://aws.amazon.com/certificate-manager/)からの証明書を使用します。通常、ACM のルート証明書は、 [FIPS 140-2 レベル 3](https://csrc.nist.gov/projects/cryptographic-module-validation-program/Certificate/3139)セキュリティ基準を満たす AWS 管理のハードウェア セキュリティ モジュール (HSM) に安全に保存されます。
 
 ## よくある質問 {#faqs}
 
 ### TiDB Cloud Dedicated Tierクラスターに接続するためにサポートされている TLS バージョンはどれですか? {#which-tls-versions-are-supported-to-connect-to-my-tidb-cloud-dedicated-tier-cluster}
 
-セキュリティ上の理由から、 TiDB Cloud Dedicated Tierは TLS 1.2 と TLS 1.3 のみをサポートし、TLS 1.0 と TLS 1.1 のバージョンはサポートしていません。詳細については、IETF [TLS 1.0 と TLS 1.1 の廃止](https://datatracker.ietf.org/doc/rfc8996/)を参照してください。
+セキュリティ上の理由から、 TiDB Cloud Dedicated Tier はTLS 1.2 と TLS 1.3 のみをサポートし、TLS 1.0 と TLS 1.1 のバージョンはサポートしていません。詳細については、IETF [TLS 1.0 と TLS 1.1 の廃止](https://datatracker.ietf.org/doc/rfc8996/)を参照してください。
 
 ### クライアントとTiDB Cloud Dedicated Tier間の双方向 TLS 認証はサポートされていますか? {#is-two-way-tls-authentication-between-my-client-and-tidb-cloud-dedicated-tier-supported}
 
 いいえ。
 
-TiDB Cloud Dedicated Tierは一方向の TLS 認証のみをサポートし、現在双方向の TLS 認証をサポートしていません。双方向の TLS 認証が必要な場合は、 [TiDB Cloudのサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
+TiDB Cloud Dedicated Tier は一方向の TLS 認証のみをサポートし、現在双方向の TLS 認証をサポートしていません。双方向の TLS 認証が必要な場合は、 [TiDB Cloudのサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。

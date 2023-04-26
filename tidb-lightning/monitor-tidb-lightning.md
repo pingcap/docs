@@ -5,7 +5,7 @@ summary: Learn about the monitor configuration and monitoring metrics of TiDB Li
 
 # TiDB Lightningモニタリング {#tidb-lightning-monitoring}
 
-`tidb-lightning`は[プロメテウス](https://prometheus.io/)を介したメトリクス コレクションをサポートします。このドキュメントでは、 TiDB Lightningの監視構成と監視メトリクスを紹介します。
+`tidb-lightning` [プロメテウス](https://prometheus.io/)を介したメトリクス コレクションをサポートします。このドキュメントでは、 TiDB Lightningの監視構成と監視メトリクスを紹介します。
 
 ## モニター構成 {#monitor-configuration}
 
@@ -84,12 +84,12 @@ scrape_configs:
 | パネル     | シリーズ        | 説明                                                                                                                                                 |
 | :------ | :---------- | :------------------------------------------------------------------------------------------------------------------------------------------------- |
 | アイドル労働者 | いお          | 未使用の数`io-concurrency` 、通常は設定値 (デフォルト 5) に近く、0 に近い場合はディスクが遅すぎることを意味します                                                                              |
-| アイドル労働者 | クローズドエンジン   | 閉じられているがまだクリーンアップされていないエンジンの数。通常はインデックス + テーブル同時実行数 (デフォルト 8) に近く、0 に近い場合はTiDB Lightningが TiKV Importer よりも高速であることを意味し、 TiDB Lightningが停止する原因となります |
+| アイドル労働者 | クローズドエンジン   | 閉じられているがまだクリーンアップされていないエンジンの数。通常はインデックス + テーブル同時実行数 (デフォルト 8) に近く、0 に近い場合はTiDB Lightning がTiKV Importer よりも高速であることを意味し、 TiDB Lightningが停止する原因となります |
 | アイドル労働者 | テーブル        | 未使用数`table-concurrency` 、通常は処理終了まで 0                                                                                                               |
 | アイドル労働者 | 索引          | 未使用数`index-concurrency` 、通常は処理終了まで 0                                                                                                               |
 | アイドル労働者 | 領域          | 未使用数`region-concurrency` 、通常は処理終了まで 0                                                                                                              |
 | 外部リソース  | KVエンコーダー    | アクティブな KV エンコーダーをカウントします。通常、プロセスの終了までは`region-concurrency`と同じです。                                                                                   |
-| 外部リソース  | インポーター エンジン | 開いているエンジン ファイルをカウントします`max-open-engines`の設定を超えてはいけません                                                                                              |
+| 外部リソース  | インポーター エンジン | 開いているエンジン ファイルをカウントします。1 `max-open-engines`設定を超えてはいけません                                                                                            |
 
 ### 行 5: 読み取り速度 {#row-5-read-speed}
 
@@ -160,11 +160,11 @@ scrape_configs:
 
 -   **`tikv_import_write_chunk_bytes`** (ヒストグラム)
 
-    TiDB TiDB Lightningから受信した KV ペアのブロックの圧縮されていないサイズのバケット化されたヒストグラム。
+    TiDB Lightningから受信した KV ペアのブロックの圧縮されていないサイズのバケット化されたヒストグラム。
 
 -   **`tikv_import_write_chunk_duration`** (ヒストグラム)
 
-    TiDB TiDB Lightningから KV ペアのブロックを受信するのに必要な時間のバケット化されたヒストグラム。
+    TiDB Lightningから KV ペアのブロックを受信するのに必要な時間のバケット化されたヒストグラム。
 
 -   **`tikv_import_upload_chunk_bytes`** (ヒストグラム)
 
@@ -235,7 +235,7 @@ scrape_configs:
         -   `index` : `index-concurrency`の余り、通常はプロセスの最後まで 0
         -   `region` : `region-concurrency`の余り、通常はプロセスの最後まで 0
         -   `io` : `io-concurrency`の余り。通常は構成された値 (デフォルトの 5) に近く、0 に近い場合はディスクが遅すぎることを意味します。
-        -   `closed-engine` : クローズされたがまだクリーンアップされていないエンジンの数。通常は index + table-concurrency (デフォルト 8) に近い値です。 0 に近い値は、 TiDB Lightningが TiKV Importer よりも高速であることを意味し、 TiDB Lightningが停止する可能性があります
+        -   `closed-engine` : クローズされたがまだクリーンアップされていないエンジンの数。通常は index + table-concurrency (デフォルト 8) に近い値です。 0 に近い値は、 TiDB Lightning がTiKV Importer よりも高速であることを意味し、 TiDB Lightningが停止する可能性があります
 
 -   **`lightning_kv_encoder`** (カウンター)
 

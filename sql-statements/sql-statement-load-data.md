@@ -77,7 +77,7 @@ Query OK, 0 rows affected (0.14 sec)
 
 次の例では、 `LOAD DATA`を使用してデータをインポートします。区切り文字としてカンマを指定します。データを囲む二重引用符は無視されます。ファイルの最初の行は無視されます。
 
-エラー メッセージ`ERROR 1148 (42000): the used command is not allowed with this TiDB version`が表示された場合は、 [エラー 1148 (42000): 使用されたコマンドは、この TiDB バージョンでは許可されていません](/error-codes.md#mysql-native-error-messages)を参照してください。
+エラー メッセージ`ERROR 1148 (42000): the used command is not allowed with this TiDB version`表示された場合は、 [エラー 1148 (42000): 使用されたコマンドは、この TiDB バージョンでは許可されていません](/error-codes.md#mysql-native-error-messages)を参照してください。
 
 {{< copyable "" >}}
 
@@ -90,7 +90,7 @@ Query OK, 815264 rows affected (39.63 sec)
 Records: 815264  Deleted: 0  Skipped: 0  Warnings: 0
 ```
 
-`LOAD DATA`は、 `FIELDS ENCLOSED BY`および`FIELDS TERMINATED BY`のパラメータとして、16 進 ASCII 文字式またはバイナリ ASCII 文字式の使用もサポートします。次の例を参照してください。
+`LOAD DATA` `FIELDS ENCLOSED BY`および`FIELDS TERMINATED BY`のパラメータとして、16 進 ASCII 文字式またはバイナリ ASCII 文字式の使用もサポートします。次の例を参照してください。
 
 {{< copyable "" >}}
 
@@ -108,7 +108,7 @@ LOAD DATA LOCAL INFILE '/mnt/evo970/data-sets/bikeshare-data/2017Q4-capitalbikes
 >
 > TiDB の以前のリリースでは、20000 行ごとに`LOAD DATA`コミットされていました。デフォルトでは、TiDB はすべての行を 1 つのトランザクションでコミットするようになりました。これにより、TiDB 4.0 以前のバージョンからアップグレードした後にエラー`ERROR 8004 (HY000) at line 1: Transaction is too large, size: 100000058`が発生する可能性があります。
 >
-> このエラーを解決するための推奨される方法は、 `tidb.toml`ファイルの`txn-total-size-limit`の値を増やすことです。この制限を増やすことができない場合は、 [`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size)から`20000`に設定することで以前の動作を復元することもできます。
+> このエラーを解決するための推奨される方法は、 `tidb.toml`ファイルの`txn-total-size-limit`値を増やすことです。この制限を増やすことができない場合は、 [`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size)から`20000`に設定することで以前の動作を復元することもできます。
 
 ## こちらもご覧ください {#see-also}
 

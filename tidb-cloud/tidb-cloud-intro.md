@@ -6,27 +6,27 @@ category: intro
 
 # TiDB Cloudの紹介 {#tidb-cloud-introduction}
 
-[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)は、オープンソースの Hybrid Transactional and Analytical Processing (HTAP) データベースである[TiDB](https://docs.pingcap.com/tidb/stable/overview)をクラウドにもたらす、完全に管理された Database-as-a-Service (DBaaS) です。 TiDB Cloudは、データベースの複雑さではなく、アプリケーションに集中できるように、データベースを展開および管理する簡単な方法を提供します。 TiDB Cloudクラスターを作成して、Google Cloud Platform (GCP) および Amazon Web Services (AWS) でミッション クリティカルなアプリケーションをすばやく構築できます。
+[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)は、オープンソースの Hybrid Transactional and Analytical Processing (HTAP) データベースである[TiDB](https://docs.pingcap.com/tidb/stable/overview)クラウドにもたらす、完全に管理された Database-as-a-Service (DBaaS) です。 TiDB Cloud は、データベースの複雑さではなく、アプリケーションに集中できるように、データベースを展開および管理する簡単な方法を提供します。 TiDB Cloudクラスターを作成して、Google Cloud Platform (GCP) および Amazon Web Services (AWS) でミッション クリティカルなアプリケーションをすばやく構築できます。
 
 ![TiDB Cloud Overview](/media/tidb-cloud/tidb-cloud-overview.png)
 
 ## TiDB Cloudを選ぶ理由 {#why-tidb-cloud}
 
-TiDB Cloudを使用すると、トレーニングをほとんどまたはまったく受けなくても、インフラストラクチャ管理やクラスター展開などの複雑なタスクを簡単に処理できます。
+TiDB Cloud を使用すると、トレーニングをほとんどまたはまったく受けなくても、インフラストラクチャ管理やクラスター展開などの複雑なタスクを簡単に処理できます。
 
 -   開発者とデータベース管理者 (DBA) は、大量のオンライン トラフィックを簡単に処理し、複数のデータセットにまたがる大量のデータを迅速に分析できます。
 
--   あらゆる規模の企業がTiDB Cloudを簡単に展開および管理して、前払いなしでビジネスの成長に適応できます。
+-   あらゆる規模の企業がTiDB Cloud を簡単に展開および管理して、前払いなしでビジネスの成長に適応できます。
 
 TiDB Cloudの詳細については、次のビデオをご覧ください。
 
-<iframe width="600" height="450" src="https://www.youtube.com/embed/skCV9BEmjbo" title="TiDB クラウドを選ぶ理由" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="600" height="450" src="https://www.youtube.com/embed/skCV9BEmjbo?enablejsapi=1" title="TiDB クラウドを選ぶ理由" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 TiDB Cloudを使用すると、次の主要な機能を利用できます。
 
 -   **高速でカスタマイズされたスケーリング**
 
-    ACIDトランザクションを維持しながら、重要なワークロード用に数百のノードに柔軟かつ透過的にスケーリングします。シャーディングを気にする必要はありません。また、ビジネス ニーズに応じて、パフォーマンス ノードとストレージ ノードを個別にスケーリングできます。
+    ACIDトランザクションを維持しながら、重要なワークロード用に数百のノードに柔軟かつ透過的にスケーリングします。シャーディングを気にする必要はありません。また、ビジネス ニーズに応じて、パフォーマンス ノードとstorageノードを個別にスケーリングできます。
 
 -   **MySQL の互換性**
 
@@ -38,11 +38,11 @@ TiDB Cloudを使用すると、次の主要な機能を利用できます。
 
 -   **リアルタイム分析**
 
-    組み込みの分析エンジンを使用して、リアルタイムの分析クエリ結果を取得します。 TiDB Cloudは、ミッション クリティカルなアプリケーションに影響を与えることなく、現在のデータに対して一貫した分析クエリを実行します。データをロードしたり、クライアントに接続したりすることなく、TiDB Cloud の速度を[遊び場](/tidb-cloud/tidb-cloud-glossary.md#playground)で気軽に体験してください。
+    組み込みの分析エンジンを使用して、リアルタイムの分析クエリ結果を取得します。 TiDB Cloud は、ミッション クリティカルなアプリケーションに影響を与えることなく、現在のデータに対して一貫した分析クエリを実行します。データをロードしたり、クライアントに接続したりすることなく、TiDB Cloud の速度を[遊び場](/tidb-cloud/tidb-cloud-glossary.md#playground)で気軽に体験してください。
 
--   **エンタープライズ グレードのセキュリティ**
+-   **エンタープライズ グレードのSecurity**
 
-    飛行中と保管中の両方の暗号化をサポートして、専用のネットワークとマシンでデータをセキュリティします。 TiDB Cloudは、SOC 2 Type 2、ISO 27001:2013、ISO 27701 によって認定されており、GDPR に完全に準拠しています。
+    飛行中と保管中の両方の暗号化をサポートして、専用のネットワークとマシンでデータをセキュリティ。 TiDB Cloud は、SOC 2 Type 2、ISO 27001:2013、ISO 27701 によって認定されており、GDPR に完全に準拠しています。
 
 -   **フルマネージド サービス**
 
@@ -66,11 +66,11 @@ TiDB Cloudを使用すると、次の主要な機能を利用できます。
 
 -   TiDB VPC (仮想プライベート クラウド)
 
-    各TiDB Cloudクラスターでは、 TiDB Operatorノードとログ ノードを含むすべての TiDB ノードと補助ノードが独立した VPC にデプロイされます。
+    各TiDB Cloudクラスターでは、TiDBTiDB Operatorノードと補助ノードが独立した VPC にデプロイされます。
 
 -   TiDB Cloudセントラル サービス
 
-    請求、アラート、メタ ストレージ、ダッシュボード UI などのセントラル サービスは、個別に展開されます。ダッシュボード UI にアクセスして、インターネット経由で TiDB クラスターを操作できます。
+    課金、アラート、メタstorage、ダッシュボード UI などのセントラル サービスは、個別にデプロイされます。ダッシュボード UI にアクセスして、インターネット経由で TiDB クラスターを操作できます。
 
 -   あなたの VPC
 

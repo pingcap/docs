@@ -93,7 +93,7 @@ PlacementPolicyOption ::=
 |   "PLACEMENT" "POLICY" (EqOpt | "SET") "DEFAULT"
 ```
 
-次の*table_options*がサポートされています。 `AVG_ROW_LENGTH` 、 `CHECKSUM` 、 `COMPRESSION` 、 `CONNECTION` 、 `DELAY_KEY_WRITE` 、 `ENGINE` 、 `KEY_BLOCK_SIZE` 、 `MAX_ROWS` 、 `MIN_ROWS` 、 `ROW_FORMAT` 、 `STATS_PERSISTENT`などのその他のオプションは解析されますが、無視されます。
+次の*table_options が*サポートされています。 `AVG_ROW_LENGTH` 、 `CHECKSUM` 、 `COMPRESSION` 、 `CONNECTION` 、 `DELAY_KEY_WRITE` 、 `ENGINE` 、 `KEY_BLOCK_SIZE` 、 `MAX_ROWS` 、 `MIN_ROWS` 、 `ROW_FORMAT` 、 `STATS_PERSISTENT`などのその他のオプションは解析されますが、無視されます。
 
 | オプション                                        | 説明                                                                                 | 例                                   |
 | -------------------------------------------- | ---------------------------------------------------------------------------------- | ----------------------------------- |
@@ -102,7 +102,7 @@ PlacementPolicyOption ::=
 | `PRE_SPLIT_REGIONS`                          | テーブルの作成時に`2^(PRE_SPLIT_REGIONS)`リージョンを事前に分割するには                                    | `PRE_SPLIT_REGIONS` = 4             |
 | `AUTO_ID_CACHE`                              | TiDB インスタンスで自動 ID キャッシュ サイズを設定するには。デフォルトでは、TiDB は自動 ID の割り当て速度に応じてこのサイズを自動的に変更します。 | `AUTO_ID_CACHE` = 200               |
 | `AUTO_RANDOM_BASE`                           | auto_random の増分部分の初期値を設定します。このオプションは、内部インターフェースの一部と見なすことができます。ユーザーはこのパラメータを無視できます  | `AUTO_RANDOM_BASE` = 0              |
-| `CHARACTER SET`                              | テーブルに[キャラクターセット](/character-set-and-collation.md)を指定するには                           | `CHARACTER SET` = &#39;utf8mb4&#39; |
+| `CHARACTER SET`                              | テーブルに[キャラクターセット](/character-set-and-collation.md)指定するには                            | `CHARACTER SET` = &#39;utf8mb4&#39; |
 | `COMMENT`                                    | コメント情報                                                                             | `COMMENT` = &#39;コメント情報&#39;        |
 
 <CustomContent platform="tidb">
@@ -206,7 +206,7 @@ mysql> DESC t1;
 ## MySQL の互換性 {#mysql-compatibility}
 
 -   空間型を除くすべてのデータ型がサポートされています。
--   `FULLTEXT` 、 `HASH`および`SPATIAL`のインデックスはサポートされていません。
+-   `FULLTEXT` 、 `HASH`および`SPATIAL`インデックスはサポートされていません。
 
 <CustomContent platform="tidb">
 
@@ -220,9 +220,9 @@ mysql> DESC t1;
 
 </CustomContent>
 
--   `index_col_name`の`[ASC | DESC]`は現在解析されていますが、無視されます (MySQL 5.7互換の動作)。
+-   `index_col_name`分の`[ASC | DESC]`現在解析されていますが、無視されます (MySQL 5.7互換の動作)。
 -   `COMMENT`属性は`WITH PARSER`オプションをサポートしません。
--   TiDB は、1 つのテーブルで最大 512 列をサポートします。 InnoDB での対応する数の制限は 1017 で、MySQL でのハード リミットは 4096 です。詳細については、 [TiDB の制限事項](/tidb-limitations.md)を参照してください。
+-   TiDB は、デフォルトで 1 つのテーブルで 1017 列をサポートし、最大で 4096 列をサポートします。 InnoDB での対応する数の制限は 1017 列であり、MySQL でのハード リミットは 4096 列です。詳細については、 [TiDB の制限事項](/tidb-limitations.md)を参照してください。
 -   分割されたテーブルでは、範囲、ハッシュ、および範囲列 (単一列) のみがサポートされます。詳細については、 [パーティションテーブル](/partitioned-table.md)を参照してください。
 -   `CHECK`制約は解析されますが無視されます (MySQL 5.7互換の動作)。詳細については、 [制約](/constraints.md)を参照してください。
 -   `FOREIGN KEY`制約は解析および保存されますが、DML ステートメントによって適用されません。詳細については、 [制約](/constraints.md)を参照してください。

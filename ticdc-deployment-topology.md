@@ -28,7 +28,7 @@ TiCDC は、TiDB 4.0 で導入された、TiDB の増分データを複製する
 -   [TiCDC トポロジーの単純なテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/simple-cdc.yaml)
 -   [TiCDC トポロジの複雑なテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/complex-cdc.yaml)
 
-上記の TiDB クラスター トポロジ ファイルの構成項目の詳細な説明については、 [TiUP を使用してTiUPをデプロイするためのトポロジコンフィグレーションファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
+上記の TiDB クラスター トポロジ ファイルの構成項目の詳細な説明については、 [TiUPを使用して TiDB をデプロイするためのトポロジコンフィグレーションファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
 
 > **ノート：**
 >

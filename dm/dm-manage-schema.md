@@ -5,11 +5,11 @@ summary: Learn how to manage the schema of the table to be migrated in DM.
 
 # TiDB データ移行を使用して移行するテーブルのテーブル スキーマを管理する {#manage-table-schemas-of-tables-to-be-migrated-using-tidb-data-migration}
 
-このドキュメントでは、 [dmctl](/dm/dmctl-introduction.md)を使用して移行中に DM でテーブルのスキーマを管理する方法について説明します。
+このドキュメントでは、 [dmctl](/dm/dmctl-introduction.md)使用して移行中に DM でテーブルのスキーマを管理する方法について説明します。
 
-DM が増分レプリケーションを実行する場合、最初にアップストリームのバイナリログを読み取り、次に SQL ステートメントを作成してダウンストリームで実行します。ただし、上流の binlog には完全なテーブル スキーマが含まれていません。 SQL ステートメントを生成するために、DM は移行するテーブルのスキーマ情報を内部的に保持します。これは、内部テーブル スキーマと呼ばれます。
+DM が増分レプリケーションを実行する場合、最初にアップストリームのbinlogを読み取り、次に SQL ステートメントを作成してダウンストリームで実行します。ただし、上流のbinlog には完全なテーブル スキーマが含まれていません。 SQL ステートメントを生成するために、DM は移行するテーブルのスキーマ情報を内部的に保持します。これは、内部テーブル スキーマと呼ばれます。
 
-特別な場合に対処するため、またはテーブル スキーマの不一致による移行の中断を処理するために、DM は、内部テーブル スキーマを取得、変更、および削除するための`binlog-schema`のコマンドを提供します。
+特別な場合に対処するため、またはテーブル スキーマの不一致による移行の中断を処理するために、DM は、内部テーブル スキーマを取得、変更、および削除するための`binlog-schema`コマンドを提供します。
 
 ## 実施原則 {#implementation-principles}
 
@@ -24,19 +24,19 @@ DM が増分レプリケーションを実行する場合、最初にアップ�
 ![schema](/media/dm/operate-schema.png)
 
 -   `schema-U`として識別される、現時点でのアップストリーム テーブル スキーマ。
--   `schema-B`として識別される、現在 DM によって消費されている binlog イベントのテーブル スキーマ。このスキーマは、過去の時点での上流のテーブル スキーマに対応しています。
+-   `schema-B`として識別される、現在 DM によって消費されているbinlogイベントのテーブル スキーマ。このスキーマは、過去の時点での上流のテーブル スキーマに対応します。
 -   `schema-I`として識別される、DM (スキーマ トラッカーコンポーネント) で現在維持されているテーブル スキーマ。
 -   `schema-D`として識別される、ダウンストリーム TiDB クラスター内のテーブル スキーマ。
 
 ほとんどの場合、前述の 4 つのテーブル スキーマは一貫しています。
 
-アップストリーム データベースが DDL 操作を実行してテーブル スキーマを変更すると、 `schema-U`が変更されます。 DDL 操作を内部スキーマ トラッカーコンポーネントとダウンストリームの TiDB クラスターに適用することにより、DM は`schema-I`と`schema-D`を順番に更新して`schema-U`との一貫性を保ちます。したがって、DM は通常、 `schema-B`テーブル スキーマに対応する binlog イベントを使用できます。つまり、DDL 操作が正常に移行された後でも、 `schema-U` 、 `schema-B` 、 `schema-I` 、および`schema-D`は一貫しています。
+アップストリーム データベースが DDL 操作を実行してテーブル スキーマを変更すると、 `schema-U`が変更されます。 DDL 操作を内部スキーマ トラッカーコンポーネントとダウンストリームの TiDB クラスターに適用することにより、DM は`schema-I`と`schema-D`を順番に更新して`schema-U`との一貫性を保ちます。したがって、DM は通常、 `schema-B`テーブル スキーマに対応するbinlogイベントを使用できます。つまり、DDL 操作が正常に移行された後でも、 `schema-U` 、 `schema-B` 、 `schema-I` 、および`schema-D`は一貫しています。
 
 不整合の原因となる可能性がある次の状況に注意してください。
 
--   [楽観的モード シャーディング DDL サポート](/dm/feature-shard-merge-optimistic.md)を有効にして移行中に、ダウンストリーム テーブルの`schema-D`が、一部のアップストリーム シャード テーブルの`schema-B`および`schema-I`と一致しない場合があります。このような場合でも、DM は`schema-I`と`schema-B`の一貫性を保ち、DML に対応する binlog イベントを正常に解析できるようにします。
+-   [楽観的モード シャーディング DDL サポート](/dm/feature-shard-merge-optimistic.md)を有効にして移行中に、ダウンストリーム テーブルの`schema-D` 、一部のアップストリーム シャード テーブルの`schema-B`および`schema-I`と一致しない場合があります。このような場合でも、DM は`schema-I`と`schema-B`の一貫性を保ち、DML に対応するbinlogイベントを正常に解析できるようにします。
 
--   下流のテーブルに上流のテーブルよりも多くの列がある場合、 `schema-D`は`schema-B`および`schema-I`と矛盾する可能性があります。完全なデータ移行 ( `task-mode=all` ) では、DM は不整合を自動的に処理します。増分移行 ( `task-mode=incremental` ) では、タスクが最初に開始され、内部スキーマ情報がまだないため、DM は自動的にダウンストリーム スキーマを読み取り ( `schema-D` )、更新`schema-I`します (この動作は DM のバージョンによって異なります)。その後、DM が`schema-I`を使用して`schema-B`の binlog を解析すると、 `Column count doesn't match value count`エラーが報告されます。詳しくは[より多くの列を持つ下流の TiDB テーブルにデータを移行する](/migrate-with-more-columns-downstream.md)をご参照ください。
+-   下流のテーブルに上流のテーブルよりも多くの列がある場合、 `schema-D` `schema-B`および`schema-I`と矛盾する可能性があります。完全なデータ移行 ( `task-mode=all` ) では、DM は不整合を自動的に処理します。増分移行 ( `task-mode=incremental` ) では、タスクが最初に開始され、内部スキーマ情報がまだないため、DM は自動的にダウンストリーム スキーマを読み取り ( `schema-D` )、更新`schema-I`します (この動作は DM のバージョンによって異なります)。その後、DM が`schema-I`使用して`schema-B`のbinlogを解析すると、 `Column count doesn't match value count`エラーが報告されます。詳しくは[より多くの列を持つ下流の TiDB テーブルにデータを移行する](/migrate-with-more-columns-downstream.md)をご参照ください。
 
 `binlog-schema`コマンドを実行して、DM で管理されている`schema-I`テーブル スキーマを取得、変更、または削除できます。
 
@@ -44,7 +44,7 @@ DM が増分レプリケーションを実行する場合、最初にアップ�
 >
 > `binlog-schema`コマンドは、DM v6.0 以降のバージョンでのみサポートされています。以前のバージョンでは、 `operate-schema`コマンドを使用する必要があります。
 
-## 指示 {#command}
+## 指図 {#command}
 
 {{< copyable "" >}}
 
@@ -75,7 +75,7 @@ Use "dmctl binlog-schema [command] --help" for more information about a command.
 > **ノート：**
 >
 > -   テーブル スキーマはデータ移行中に変更される可能性があるため、予測可能なテーブル スキーマを取得するために、現在、データ移行タスクが`Paused`状態にある場合にのみ`binlog-schema`コマンドを使用できます。
-> -   誤った取り扱いによるデータ損失を避けるために、スキーマを変更する前に、まずテーブル スキーマを取得してバックアップすることを**強くお勧め**します。
+> -   誤った取り扱いによるデータ損失を避けるために、スキーマを変更する前に、まずテーブル スキーマを取得してバックアップすることを**強くお勧めします**。
 
 ## パラメーター {#parameters}
 
@@ -83,7 +83,7 @@ Use "dmctl binlog-schema [command] --help" for more information about a command.
 -   `list` : テーブル スキーマを一覧表示します。
 -   `update` : テーブル スキーマを更新します。
 -   `-s`または`--source` :
-    -   必須。
+    -   必要。
     -   操作が適用される MySQL ソースを指定します。
 
 ## 使用例 {#usage-example}
@@ -109,7 +109,7 @@ Global Flags:
   -s, --source strings   MySQL Source ID.
 ```
 
-`db_single`番目のタスクで`mysql-replica-01`番目の MySQL ソースに対応する`` `db_single`.`t1` ``番目のテーブルのテーブル スキーマを取得する場合は、次のコマンドを実行します。
+`db_single`番目のタスクで`mysql-replica-01`の MySQL ソースに対応する`` `db_single`.`t1` ``のテーブルのテーブル スキーマを取得する場合は、次のコマンドを実行します。
 
 {{< copyable "" >}}
 

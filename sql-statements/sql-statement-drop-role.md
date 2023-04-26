@@ -47,7 +47,7 @@ Query OK, 0 rows affected (0.01 sec)
 mysql -h 127.0.0.1 -P 4000 -u jennifer
 ```
 
-`analyticsteam`ロールに関連付けられた権限を使用できるようにするには、デフォルトで`jennifer`が`SET ROLE analyticsteam`を実行する必要があることに注意してください。
+`analyticsteam`ロールに関連付けられた権限を使用できるようにするには、デフォルトで`jennifer` `SET ROLE analyticsteam`実行する必要があることに注意してください。
 
 ```sql
 SHOW GRANTS;
@@ -89,7 +89,7 @@ SHOW TABLES IN test;
 mysql -h 127.0.0.1 -P 4000 -u root
 ```
 
-ステートメント`SET DEFAULT ROLE`を使用して、ロール`analyticsteam`を`jennifer`に関連付けることができます。
+ステートメント`SET DEFAULT ROLE`使用して、ロール`analyticsteam`を`jennifer`に関連付けることができます。
 
 ```sql
 SET DEFAULT ROLE analyticsteam TO jennifer;
@@ -102,7 +102,7 @@ Query OK, 0 rows affected (0.02 sec)
 mysql -h 127.0.0.1 -P 4000 -u jennifer
 ```
 
-この後、ユーザー`jennifer`はロール`analyticsteam`に関連付けられた権限を持ち、 `jennifer`はステートメント`SET ROLE`を実行する必要はありません。
+この後、ユーザー`jennifer`ロール`analyticsteam`に関連付けられた権限を持ち、 `jennifer`ステートメント`SET ROLE`を実行する必要はありません。
 
 ```sql
 SHOW GRANTS;
@@ -137,7 +137,7 @@ DROP ROLE analyticsteam;
 Query OK, 0 rows affected (0.02 sec)
 ```
 
-`jennifer`には関連付けられているデフォルトのロール`analyticsteam`がなくなり、ロールを`analyticsteam`に設定することもできなくなりました。
+`jennifer`は関連付けられているデフォルトのロール`analyticsteam`なくなり、ロールを`analyticsteam`に設定することもできなくなりました。
 
 `jennifer`人のユーザーとして TiDB に接続します。
 

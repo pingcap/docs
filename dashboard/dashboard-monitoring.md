@@ -9,7 +9,7 @@ summary: Learn how to view the Performance Overview dashboard on TiDB Dashboard 
 
 ## ページにアクセスする {#access-the-page}
 
-TiDB ダッシュボードにログインし、左側のナビゲーション バーから [**監視**] をクリックします。パフォーマンス概要ダッシュボードが表示されます。
+TiDB ダッシュボードにログインし、左側のナビゲーション バーから**[監視]**をクリックします。パフォーマンス概要ダッシュボードが表示されます。
 
 ![Monitoring page](/media/dashboard/dashboard-monitoring.png)
 
@@ -149,7 +149,7 @@ Connection Idle Duration は、接続がアイドル状態である期間を示�
 
 これら 3 つのメトリクスにはすべて、すべての TiKV インスタンスの平均期間と P99 期間が含まれます。
 
-平均ストレージ非同期書き込み時間 = 平均ストア時間 + 平均適用時間
+平均storage非同期書き込み時間 = 平均ストア時間 + 平均適用時間
 
 ### ログ期間の追加、ログ期間のコミット、およびログ期間の適用 {#append-log-duration-commit-log-duration-and-apply-log-duration}
 

@@ -60,7 +60,7 @@ TiDB バージョン: 5.1.2
 
         -   ユニファイド ソーターがデータの並べ替えにメモリを使用している場合のメモリ管理を最適化する[#2553](https://github.com/pingcap/tiflow/issues/2553)
         -   同時実行性が高い場合、より少ないゴルーチンのためにワーカープールを最適化します[#2211](https://github.com/pingcap/tiflow/issues/2211)
-        -   テーブルのリージョンが TiKV ノードから移動するときのゴルーチンの使用量を減らす[#2284](https://github.com/pingcap/tiflow/issues/2284)
+        -   テーブルのリージョンがTiKV ノードから移動するときのゴルーチンの使用量を減らす[#2284](https://github.com/pingcap/tiflow/issues/2284)
         -   グローバル gRPC 接続プールを追加し、KV クライアント間で gRPC 接続を共有する[#2534](https://github.com/pingcap/tiflow/pull/2534)
         -   メジャー バージョンとマイナー バージョンをまたがる TiCDC クラスタの動作を禁止する[#2599](https://github.com/pingcap/tiflow/pull/2599)
 
@@ -78,30 +78,30 @@ TiDB バージョン: 5.1.2
     -   TiDB が`pd is timeout`エラー[#26147](https://github.com/pingcap/tidb/issues/26147)を返すはずなのに`unknow`エラーを返す問題を修正
     -   `case when`式[#26662](https://github.com/pingcap/tidb/issues/26662)の間違った文字セットと照合順序を修正します
     -   MPP クエリの潜在的な`can not found column in Schema column`エラーを修正します[#28148](https://github.com/pingcap/tidb/pull/28148)
-    -   TiFlash のシャットダウン時にTiFlashがpanicすることがあるバグを修正[#28096](https://github.com/pingcap/tidb/issues/28096)
+    -   TiFlashのシャットダウン時に TiDB がpanicことがあるバグを修正[#28096](https://github.com/pingcap/tidb/issues/28096)
     -   `enum like 'x%'` [#27130](https://github.com/pingcap/tidb/issues/27130)を使用することによって引き起こされる間違った範囲の問題を修正します
     -   IndexLookupJoin [#27410](https://github.com/pingcap/tidb/issues/27410)で使用した場合の Common Table Expression (CTE) デッド ロックの問題を修正します。
     -   再試行可能なデッドロックが誤って`INFORMATION_SCHEMA.DEADLOCKS`テーブルに記録されるバグを修正[#27400](https://github.com/pingcap/tidb/issues/27400)
     -   `TABLESAMPLE`分割されたテーブルからのクエリ結果が期待どおりにソートされない問題を修正します[#27349](https://github.com/pingcap/tidb/issues/27349)
     -   未使用の`/debug/sub-optimal-plan` HTTP API を削除する[#27265](https://github.com/pingcap/tidb/pull/27265)
-    -   ハッシュパーティションテーブルが署名されていないデータを処理する場合、クエリが間違った結果を返すことがあるというバグを修正します[#26569](https://github.com/pingcap/tidb/issues/26569)
+    -   ハッシュパーティションテーブルていないデータを処理する場合、クエリが間違った結果を返すことがあるというバグを修正します[#26569](https://github.com/pingcap/tidb/issues/26569)
     -   `NO_UNSIGNED_SUBTRACTION`を[#26765](https://github.com/pingcap/tidb/issues/26765)に設定するとパーティション作成に失敗する不具合を修正
     -   `Apply`を`Join` [#26958](https://github.com/pingcap/tidb/issues/26958)に変換すると`distinct`フラグが欠落する問題を修正
     -   新しく復旧したTiFlashノードのブロック期間を設定して、この時間中にクエリがブロックされないようにします[#26897](https://github.com/pingcap/tidb/pull/26897)
     -   CTE が複数回参照された場合に発生する可能性があるバグを修正します[#26212](https://github.com/pingcap/tidb/issues/26212)
     -   MergeJoin 使用時の CTE バグを修正[#25474](https://github.com/pingcap/tidb/issues/25474)
-    -   通常のテーブルがパーティションテーブルされたテーブルを結合するときに、 `SELECT FOR UPDATE`ステートメントがデータを正しくロックしないというバグを修正します[#26251](https://github.com/pingcap/tidb/issues/26251)
-    -   通常のテーブルがパーティションテーブルされたテーブルを結合するときに`SELECT FOR UPDATE`ステートメントがエラーを返す問題を修正します[#26250](https://github.com/pingcap/tidb/issues/26250)
+    -   通常のテーブルがパーティションテーブルを結合するときに、 `SELECT FOR UPDATE`ステートメントがデータを正しくロックしないというバグを修正します[#26251](https://github.com/pingcap/tidb/issues/26251)
+    -   通常のテーブルがパーティションテーブルを結合するときに`SELECT FOR UPDATE`ステートメントがエラーを返す問題を修正します[#26250](https://github.com/pingcap/tidb/issues/26250)
     -   `PointGet`が解決ロック[#26562](https://github.com/pingcap/tidb/pull/26562)のライトバージョンを使用しない問題を修正
 
 -   TiKV
 
-    -   TiKV を v3.x からそれ以降のバージョンにアップグレードした後に発生するpanicの問題を修正し[#10902](https://github.com/tikv/tikv/issues/10902) 。
+    -   TiKV を v3.x から[#10902](https://github.com/tikv/tikv/issues/10902)以降のバージョンにアップグレードした後に発生するpanicの問題を修正します。
     -   破損したスナップショット ファイルが原因で発生する可能性のあるディスクがいっぱいになる問題を修正します[#10813](https://github.com/tikv/tikv/issues/10813)
     -   TiKV コプロセッサーのスローログを、リクエストの処理に費やされた時間のみを考慮するようにします[#10841](https://github.com/tikv/tikv/issues/10841)
     -   slogger スレッドが過負荷になり、キューがいっぱいになったときに、スレッドをブロックする代わりにログを削除します[#10841](https://github.com/tikv/tikv/issues/10841)
     -   コプロセッサー要求の処理がタイムアウトしたときに発生するpanicの問題を修正します[#10852](https://github.com/tikv/tikv/issues/10852)
-    -   Titan を有効にして 5.0 より前のバージョンからアップグレードするときに発生する[#10842](https://github.com/tikv/tikv/pull/10842)panicの問題を修正します。
+    -   Titan を有効にして 5.0 より前のバージョンからアップグレードするときに発生する TiKVpanicの問題を修正します[#10842](https://github.com/tikv/tikv/pull/10842)
     -   新しいバージョンの TiKV が v5.0.x にロールバックできない問題を修正[#10842](https://github.com/tikv/tikv/pull/10842)
     -   TiKV が RocksDB にデータを取り込む前にファイルを削除する可能性がある問題を修正します[#10438](https://github.com/tikv/tikv/issues/10438)
     -   左悲観的ロックによる解析エラーを修正[#26404](https://github.com/pingcap/tidb/issues/26404)
@@ -115,15 +115,15 @@ TiDB バージョン: 5.1.2
 
 -   TiFlash
 
-    -   TiFlashが MPP 接続の確立に失敗したときの予期しない結果の問題を修正
-    -   TiFlashが複数のディスクに展開されている場合に発生する可能性のあるデータの不整合の問題を修正します。
+    -   TiFlash がMPP 接続の確立に失敗したときの予期しない結果の問題を修正
+    -   TiFlash が複数のディスクに展開されている場合に発生する可能性のあるデータの不整合の問題を修正します。
     -   TiFlashサーバーの負荷が高い場合に MPP クエリが間違った結果になるバグを修正
     -   MPP クエリが永久にハングする潜在的なバグを修正します
     -   ストアの初期化と DDL を同時に操作する際のpanicの問題を修正
     -   クエリに`CONSTANT` 、 `<` 、 `<=` 、 `>` 、 `>=` 、または`COLUMN`などのフィルターが含まれている場合に発生する誤った結果のバグを修正します
-    -   複数の DDL 操作で`Snapshot`が同時に適用された場合に発生する可能性のあるpanicの問題を修正します
+    -   複数の DDL 操作で`Snapshot`同時に適用された場合に発生する可能性のpanicの問題を修正します
     -   負荷の高い書き込みでメトリクスのストア サイズが不正確になる問題を修正
-    -   長時間実行した後、 TiFlashがデルタ データをガベージ コレクションできないという潜在的な問題を修正します。
+    -   長時間実行した後、 TiFlash がデルタ データをガベージ コレクションできないという潜在的な問題を修正します。
     -   新しい照合順序が有効になっている場合に間違った結果が表示される問題を修正
     -   ロックを解決するときに発生する潜在的なpanicの問題を修正します
     -   メトリクスが間違った値を表示する潜在的なバグを修正
@@ -136,12 +136,12 @@ TiDB バージョン: 5.1.2
 
     -   Dumpling
 
-        -   一部の MySQL バージョン (8.0.3 および`show table status` ) で誤った結果が返された場合にDumplingが保留中になる問題を修正し[#322](https://github.com/pingcap/dumpling/issues/322) 。
+        -   一部の MySQL バージョン (8.0.3 および 8.0.23) で誤った結果が返された場合にDumplingが`show table status`中になる問題を修正します[#322](https://github.com/pingcap/dumpling/issues/322)
         -   デフォルト`sort-engine`オプション[#2373](https://github.com/pingcap/tiflow/issues/2373)での 4.0.x クラスターの CLI 互換性の問題を修正します。
 
     -   TiCDC
 
-        -   `string`または`[]byte`の文字列型の値を処理するときに、JSON エンコーディングがpanicを引き起こす可能性があるというバグを修正し[#2758](https://github.com/pingcap/tiflow/issues/2758) 。
+        -   `string`または`[]byte` [#2758](https://github.com/pingcap/tiflow/issues/2758)列型の値を処理するときに、JSON エンコーディングがpanicを引き起こす可能性があるというバグを修正します。
         -   OOM [#2673](https://github.com/pingcap/tiflow/issues/2673)を回避するために gRPC ウィンドウ サイズを小さくする
         -   高いメモリプレッシャ下での gRPC `keepalive`エラーを修正します[#2202](https://github.com/pingcap/tiflow/issues/2202)
         -   署名されていない`tinyint`が TiCDC をpanic[#2648](https://github.com/pingcap/tiflow/issues/2648)にするバグを修正

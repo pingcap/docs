@@ -5,7 +5,7 @@ summary: An overview of the usage of REVOKE <privileges> for the TiDB database.
 
 # <code>REVOKE &#x3C;privileges></code> {#code-revoke-x3c-privileges-code}
 
-このステートメントは、既存のユーザーから権限を削除します。このステートメントを実行するには、 `GRANT OPTION`の特権と、取り消すすべての権限が必要です。
+このステートメントは、既存のユーザーから権限を削除します。このステートメントを実行するには、 `GRANT OPTION`特権と、取り消すすべての権限が必要です。
 
 ## あらすじ {#synopsis}
 

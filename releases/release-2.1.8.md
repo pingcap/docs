@@ -18,7 +18,7 @@ TiDB アンシブル バージョン: 2.1.8
     -   [#9938](https://github.com/pingcap/tidb/pull/9938)
     -   [#10114](https://github.com/pingcap/tidb/pull/10114)
 -   フィルタリング条件に相関列が含まれている場合、行数の推定が不正確になる問題を修正します[#9937](https://github.com/pingcap/tidb/pull/9937)
--   `DATE_ADD`と`DATE_SUB`の関数間の互換性の問題を修正します。
+-   `DATE_ADD`と`DATE_SUB`関数間の互換性の問題を修正します。
     -   [#9963](https://github.com/pingcap/tidb/pull/9963)
     -   [#9966](https://github.com/pingcap/tidb/pull/9966)
 -   互換性を向上させるために`STR_TO_DATE`機能の`%H`形式をサポートします[#9964](https://github.com/pingcap/tidb/pull/9964)
@@ -30,7 +30,7 @@ TiDB アンシブル バージョン: 2.1.8
 -   `time_zone` [＃10000](https://github.com/pingcap/tidb/pull/10000)の値を検証する
 -   `2019.01.01`時間フォーマット[#10001](https://github.com/pingcap/tidb/pull/10001)をサポート
 -   `EXPLAIN`ステートメントが返す結果で、行数の見積もりが正しく表示されない場合がある問題を修正します[#10044](https://github.com/pingcap/tidb/pull/10044)
--   場合によってはステートメントの実行を[#9976](https://github.com/pingcap/tidb/pull/9976)に停止できない問題を修正し`KILL TIDB [session id]` 。
+-   場合によってはステートメントの実行を`KILL TIDB [session id]`に停止できない問題を修正します[#9976](https://github.com/pingcap/tidb/pull/9976)
 -   場合によっては一定のフィルタリング条件の述語プッシュダウンの問題を修正します[#10049](https://github.com/pingcap/tidb/pull/10049)
 -   場合によっては読み取り専用ステートメントが正しく処理されない問題を修正します[#10048](https://github.com/pingcap/tidb/pull/10048)
 
@@ -50,11 +50,11 @@ TiDB アンシブル バージョン: 2.1.8
 ## ツール {#tools}
 
 -   Lightning 用にテーブルをインポートする順序を最適化して、インポート プロセス中にクラスターで`Checksum`と`Analyze`を実行する大きなテーブルの影響を減らし、 `Checksum`と`Analyze`の成功率を向上させます[#156](https://github.com/pingcap/tidb-lightning/pull/156)
--   KV エンコーダーの追加の解析作業を回避するために、データ ソース ファイルのコンテンツを TiDB の`types.Datum`に直接解析することにより、Lightning のエンコーディング SQL パフォーマンスを 50% 向上させ[#145](https://github.com/pingcap/tidb-lightning/pull/145) 。
--   TiDB Binlog Pumpに`storage.sync-log`の構成項目を追加して、 Pump [#529](https://github.com/pingcap/tidb-binlog/pull/529)で非同期にローカル ストレージのディスクをフラッシュすることをサポートします。
--   TiDB Binlog PumpとDrainer とDrainer [#530](https://github.com/pingcap/tidb-binlog/pull/530)間の通信のトラフィック圧縮をサポート
--   TiDB Binlogに`syncer.sql-mode`の構成項目を追加して、異なる`sql-mode`を使用して DDL クエリを解析することをサポートします[#513](https://github.com/pingcap/tidb-binlog/pull/513)
--   レプリケートされないテーブルのフィルタリングをサポートするために、TiDB Binlogに`syncer.ignore-table`の構成項目を追加し[#526](https://github.com/pingcap/tidb-binlog/pull/526) 。
+-   KV エンコーダーの追加の解析作業を回避するために、データ ソース ファイルのコンテンツを TiDB の`types.Datum`に直接解析することにより、Lightning のエンコーディング SQL パフォーマンスを 50% 向上させます[#145](https://github.com/pingcap/tidb-lightning/pull/145)
+-   TiDB Binlog Pumpに`storage.sync-log`構成項目を追加して、 Pump [#529](https://github.com/pingcap/tidb-binlog/pull/529)で非同期にローカルstorageのディスクをフラッシュすることをサポートします。
+-   TiDB Binlog PumpとDrainer [#530](https://github.com/pingcap/tidb-binlog/pull/530)間の通信のトラフィック圧縮をサポート
+-   TiDB Binlog Drainerに`syncer.sql-mode`構成項目を追加して、異なる`sql-mode`を使用して DDL クエリを解析することをサポートします[#513](https://github.com/pingcap/tidb-binlog/pull/513)
+-   レプリケートされないテーブルのフィルタリングをサポートするために、TiDB Binlog Drainerに`syncer.ignore-table`構成項目を追加します[#526](https://github.com/pingcap/tidb-binlog/pull/526)
 
 ## TiDB アンシブル {#tidb-ansible}
 

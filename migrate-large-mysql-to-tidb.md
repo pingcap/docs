@@ -22,15 +22,15 @@ summary: Learn how to migrate MySQL of large datasets to TiDB.
 
 ## リソース要件 {#resource-requirements}
 
-**オペレーティング システム**: このドキュメントの例では、新しい CentOS 7 インスタンスを使用しています。仮想マシンは、ローカル ホストまたはクラウドにデプロイできます。 TiDB Lightningはデフォルトで必要なだけ多くの CPU リソースを消費するため、専用サーバーにデプロイすることをお勧めします。これが不可能な場合は、他の TiDB コンポーネント (たとえば`tikv-server` ) と一緒に単一のサーバーにデプロイし、 `region-concurrency`を構成してTiDB Lightningからの CPU 使用を制限できます。通常、サイズは論理 CPU の 75% に設定できます。
+**オペレーティング システム**: このドキュメントの例では、新しい CentOS 7 インスタンスを使用しています。仮想マシンは、ローカル ホストまたはクラウドにデプロイできます。 TiDB Lightning はデフォルトで必要なだけ多くの CPU リソースを消費するため、専用サーバーにデプロイすることをお勧めします。これが不可能な場合は、他の TiDB コンポーネント (たとえば`tikv-server` ) と一緒に単一のサーバーにデプロイし、 `region-concurrency`を構成してTiDB Lightningからの CPU 使用を制限できます。通常、サイズは論理 CPU の 75% に設定できます。
 
-**メモリと CPU** : TiDB Lightningは大量のリソースを消費するため、64 GiB を超えるメモリと 32 を超える CPU コアを割り当てることをお勧めします。最高のパフォーマンスを得るには、CPU コアとメモリ(GiB) の比率が 1:2 を超えていることを確認してください。
+**メモリと CPU** : TiDB Lightning は大量のリソースを消費するため、64 GiB を超えるメモリと 32 を超える CPU コアを割り当てることをお勧めします。最高のパフォーマンスを得るには、CPU コアとメモリ(GiB) の比率が 1:2 を超えていることを確認してください。
 
 **ディスク容量**:
 
--   Dumplingには、データ ソース全体を格納できる (またはエクスポートするすべてのアップストリーム テーブルを格納できる) ディスク領域が必要です。 SSD推奨です。必要なスペースを計算するには、 [ダウンストリームのストレージ容量要件](/tidb-lightning/tidb-lightning-requirements.md#storage-space-of-the-target-database)を参照してください。
--   インポート中、 TiDB Lightningはソートされたキーと値のペアを保存するための一時的なスペースを必要とします。ディスク領域は、データ ソースから最大の単一テーブルを保持するのに十分なはずです。
--   完全なデータ ボリュームが大きい場合は、アップストリームでバイナリログの保存時間を増やすことができます。これは、増分レプリケーション中にバイナリログが失われないようにするためです。
+-   Dumpling には、データ ソース全体を格納できる (またはエクスポートするすべてのアップストリーム テーブルを格納できる) ディスク領域が必要です。 SSD推奨です。必要なスペースを計算するには、 [ダウンストリームのstorage容量要件](/tidb-lightning/tidb-lightning-requirements.md#storage-space-of-the-target-database)を参照してください。
+-   インポート中、 TiDB Lightning はソートされたキーと値のペアを保存するための一時的なスペースを必要とします。ディスク領域は、データ ソースから最大の単一テーブルを保持するのに十分なはずです。
+-   完全なデータ ボリュームが大きい場合は、アップストリームでbinlogのstorage時間を増やすことができます。これは、増分レプリケーション中にバイナリログが失われないようにするためです。
 
 **注**: Dumplingによって MySQL からエクスポートされた正確なデータ ボリュームを計算することは困難ですが、次の SQL ステートメントを使用して`information_schema.tables`テーブルの`data-length`フィールドを要約することにより、データ ボリュームを見積もることができます。
 
@@ -46,7 +46,7 @@ SELECT table_name,table_schema,SUM(data_length)/1024/1024 AS data_length,SUM(ind
 
 ### ターゲット TiKV クラスターのディスク容量 {#disk-space-for-the-target-tikv-cluster}
 
-ターゲットの TiKV クラスターには、インポートされたデータを保存するのに十分なディスク容量が必要です。 [標準のハードウェア要件](/hardware-and-software-requirements.md)に加えて、ターゲット TiKV クラスターのストレージ容量は**、データ ソースのサイズ x <a href="/faq/manage-cluster-faq.md#is-the-number-of-replicas-in-each-region-configurable-if-yes-how-to-configure-it">レプリカの数</a>x 2**より大きくなければなりません。たとえば、クラスターがデフォルトで 3 つのレプリカを使用する場合、ターゲット TiKV クラスターには、データ ソースのサイズの 6 倍を超えるストレージ スペースが必要です。次の理由により、式は`x 2`になります。
+ターゲットの TiKV クラスターには、インポートされたデータを保存するのに十分なディスク容量が必要です。 [標準のハードウェア要件](/hardware-and-software-requirements.md)に加えて、ターゲット TiKV クラスターのstorage容量は**、データ ソースのサイズ x <a href="/faq/manage-cluster-faq.md#is-the-number-of-replicas-in-each-region-configurable-if-yes-how-to-configure-it">レプリカの数</a>x 2**より大きくなければなりません。たとえば、クラスターがデフォルトで 3 つのレプリカを使用する場合、ターゲット TiKV クラスターには、データ ソースのサイズの 6 倍を超えるstorageスペースが必要です。次の理由により、式は`x 2`になります。
 
 -   インデックスには余分なスペースが必要になる場合があります。
 -   RocksDB には空間増幅効果があります。
@@ -61,26 +61,26 @@ SELECT table_name,table_schema,SUM(data_length)/1024/1024 AS data_length,SUM(ind
     tiup dumpling -h ${ip} -P 3306 -u root -t 16 -r 200000 -F 256MiB -B my_db1 -f 'my_db1.table[12]' -o 's3://my-bucket/sql-backup'
     ```
 
-    Dumplingは、デフォルトで SQL ファイルにデータをエクスポートします。 `--filetype`オプションを追加すると、別のファイル形式を指定できます。
+    Dumpling は、デフォルトで SQL ファイルにデータをエクスポートします。 `--filetype`オプションを追加すると、別のファイル形式を指定できます。
 
     上記で使用したパラメータは次のとおりです。 Dumplingパラメータの詳細については、 [Dumplingの概要](/dumpling-overview.md)を参照してください。
 
-    | パラメーター               | 説明                                                                                        |
-    | -------------------- | ----------------------------------------------------------------------------------------- |
-    | `-u`または`--user`      | MySQL ユーザー                                                                                |
-    | `-p`または`--password`  | MySQL ユーザーのパスワード                                                                          |
-    | `-P`または`--port`      | MySQL ポート                                                                                 |
-    | `-h`または`--host`      | MySQL IP アドレス                                                                             |
-    | `-t`または`--thread`    | エクスポートに使用されるスレッドの数                                                                        |
-    | `-o`または`--output`    | エクスポートされたファイルを格納するディレクトリ。ローカル パスまたは[外部ストレージ URL](/br/backup-and-restore-storages.md)をサポート |
-    | `-r`または`--row`       | 1 つのファイルの最大行数                                                                             |
-    | `-F`                 | 1 つのファイルの最大サイズ (MiB 単位)。推奨値: 256 MiB。                                                     |
-    | - `B`または`--database` | エクスポートするデータベースを指定します                                                                      |
-    | `-f`または`--filter`    | パターンに一致するテーブルをエクスポートします。構文については、 [テーブルフィルター](/table-filter.md)を参照してください。                  |
+    | パラメーター               | 説明                                                                                                    |
+    | -------------------- | ----------------------------------------------------------------------------------------------------- |
+    | `-u`または`--user`      | MySQL ユーザー                                                                                            |
+    | `-p`または`--password`  | MySQL ユーザーのパスワード                                                                                      |
+    | `-P`または`--port`      | MySQL ポート                                                                                             |
+    | `-h`または`--host`      | MySQL IP アドレス                                                                                         |
+    | `-t`または`--thread`    | エクスポートに使用されるスレッドの数                                                                                    |
+    | `-o`または`--output`    | エクスポートされたファイルを格納するディレクトリ。ローカル パスまたは[外部storageURL](/br/backup-and-restore-storages.md#url-format)をサポート |
+    | `-r`または`--row`       | 1 つのファイルの最大行数                                                                                         |
+    | `-F`                 | 1 つのファイルの最大サイズ (MiB 単位)。推奨値: 256 MiB。                                                                 |
+    | - `B`または`--database` | エクスポートするデータベースを指定します                                                                                  |
+    | `-f`または`--filter`    | パターンに一致するテーブルをエクスポートします。構文については、 [テーブルフィルター](/table-filter.md)を参照してください。                              |
 
-    エクスポートされたすべてのアップストリーム テーブルを格納するためのスペースが`${data-path}`にあることを確認してください。必要なスペースを計算するには、 [ダウンストリームのストレージ容量要件](/tidb-lightning/tidb-lightning-requirements.md#storage-space-of-the-target-database)を参照してください。すべてのスペースを消費する大きなテーブルによってエクスポートが中断されるのを防ぐために、 `-F`オプションを使用して 1 つのファイルのサイズを制限することを強くお勧めします。
+    エクスポートされたすべてのアップストリーム テーブルを格納するためのスペースが`${data-path}`にあることを確認してください。必要なスペースを計算するには、 [ダウンストリームのstorage容量要件](/tidb-lightning/tidb-lightning-requirements.md#storage-space-of-the-target-database)を参照してください。すべてのスペースを消費する大きなテーブルによってエクスポートが中断されるのを防ぐために、 `-F`オプションを使用して 1 つのファイルのサイズを制限することを強くお勧めします。
 
-2.  `${data-path}`ディレクトリの`metadata`ファイルをビューします。これは Dumpling によって生成されたメタデータ ファイルです。ステップ 3 の増分レプリケーションに必要な binlog 位置情報を記録します。
+2.  `${data-path}`ディレクトリの`metadata`ファイルをビュー。これは Dumpling によって生成されたメタデータ ファイルです。ステップ 3 の増分レプリケーションに必要なbinlog位置情報を記録します。
 
     ```
     SHOW MASTER STATUS:
@@ -91,7 +91,7 @@ SELECT table_name,table_schema,SUM(data_length)/1024/1024 AS data_length,SUM(ind
 
 ## ステップ 2. 完全なデータを TiDB にインポートする {#step-2-import-full-data-to-tidb}
 
-1.  `tidb-lightning.toml`の構成ファイルを作成します。
+1.  `tidb-lightning.toml`構成ファイルを作成します。
 
     {{< copyable "" >}}
 
@@ -126,7 +126,7 @@ SELECT table_name,table_schema,SUM(data_length)/1024/1024 AS data_length,SUM(ind
 
 2.  `tidb-lightning`を実行してインポートを開始します。コマンド ラインでプログラムを直接起動すると、プロセスが SIGHUP シグナルの受信後に予期せず終了することがあります。この場合、 `nohup`または`screen`ツールを使用してプログラムを実行することをお勧めします。例えば：
 
-    S3 からデータをインポートする場合は、S3 ストレージ パスにアクセスできる SecretKey と AccessKey を環境変数としてTiDB Lightningノードに渡します。 `~/.aws/credentials`から資格情報を読み取ることもできます。
+    S3 からデータをインポートする場合は、S3storageパスにアクセスできる SecretKey と AccessKey を環境変数としてTiDB Lightningノードに渡します。 `~/.aws/credentials`から資格情報を読み取ることもできます。
 
     {{< copyable "" >}}
 
@@ -142,11 +142,11 @@ SELECT table_name,table_schema,SUM(data_length)/1024/1024 AS data_length,SUM(ind
     -   [監視ダッシュボード](/tidb-lightning/monitor-tidb-lightning.md)で進行状況を確認します。
     -   [TiDB Lightning Web インターフェイス](/tidb-lightning/tidb-lightning-web-interface.md)で進行状況を確認します。
 
-4.  TiDB Lightningがインポートを完了すると、自動的に終了します。 `tidb-lightning.log`の最後の行に`the whole procedure completed`が含まれているかどうかを確認します。はいの場合、インポートは成功です。 「いいえ」の場合、インポートでエラーが発生します。エラー メッセージの指示に従って、エラーに対処します。
+4.  TiDB Lightning がインポートを完了すると、自動的に終了します。 `tidb-lightning.log`最後の行に`the whole procedure completed`含まれているかどうかを確認します。はいの場合、インポートは成功です。 「いいえ」の場合、インポートでエラーが発生します。エラー メッセージの指示に従って、エラーに対処します。
 
 > **ノート：**
 >
-> インポートが成功したかどうかに関係なく、ログの最後の行に`tidb lightning exit`が表示されます。これは、 TiDB Lightningが正常に終了したことを意味しますが、必ずしもインポートが成功したことを意味するわけではありません。
+> インポートが成功したかどうかに関係なく、ログの最後の行に`tidb lightning exit`が表示されます。これは、 TiDB Lightning が正常に終了したことを意味しますが、必ずしもインポートが成功したことを意味するものではありません。
 
 インポートに失敗した場合は、トラブルシューティングについて[TiDB LightningFAQ](/tidb-lightning/tidb-lightning-faq.md)を参照してください。
 
@@ -257,7 +257,7 @@ SELECT table_name,table_schema,SUM(data_length)/1024/1024 AS data_length,SUM(ind
 
 ### 移行タスクのステータスを確認する {#check-the-migration-task-status}
 
-DM クラスターに進行中の移行タスクがあるかどうかを確認し、タスクのステータスを表示するには、 `tiup dmctl`を使用して`query-status`コマンドを実行します。
+DM クラスターに進行中の移行タスクがあるかどうかを確認し、タスクのステータスを表示するには、 `tiup dmctl`使用して`query-status`コマンドを実行します。
 
 {{< copyable "" >}}
 
@@ -271,7 +271,7 @@ tiup dmctl --master-addr ${advertise-addr} query-status ${task-name}
 
 移行タスクの履歴ステータスとその他の内部メトリックを表示するには、次の手順を実行します。
 
-TiUP を使用して DM をデプロイしたときに Prometheus、Alertmanager、および Grafana をデプロイした場合は、デプロイ中に指定された IP アドレスとポートを使用してTiUPにアクセスできます。次に、DM ダッシュボードを選択して、DM 関連のモニタリング メトリックを表示できます。
+TiUPを使用して DM をデプロイしたときに Prometheus、Alertmanager、および Grafana をデプロイした場合は、デプロイ中に指定された IP アドレスとポートを使用して Grafana にアクセスできます。次に、DM ダッシュボードを選択して、DM 関連のモニタリング メトリックを表示できます。
 
 DM が実行されている場合、DM-worker、DM-master、および dmctl は関連情報をログに出力します。これらのコンポーネントのログ ディレクトリは次のとおりです。
 

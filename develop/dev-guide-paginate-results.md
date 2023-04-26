@@ -15,7 +15,7 @@ TiDB では、 `LIMIT`ステートメントを使用してクエリ結果をペ�
 SELECT * FROM table_a t ORDER BY gmt_modified DESC LIMIT offset, row_count;
 ```
 
-`offset`はレコードの開始数を示し、 `row_count`はページあたりのレコード数を示します。 TiDB は`LIMIT row_count OFFSET offset`の構文もサポートしています。
+`offset`はレコードの開始数を示し、 `row_count`ページあたりのレコード数を示します。 TiDB は`LIMIT row_count OFFSET offset`構文もサポートしています。
 
 ページネーションを使用する場合、データをランダムに表示する必要がない限り、クエリ結果を`ORDER BY`ステートメントで並べ替えることが推奨されます。
 
@@ -112,7 +112,7 @@ ORDER BY page_num;
 
 次に、 `WHERE id BETWEEN start_key AND end_key`ステートメントを使用して、各スライスのデータをクエリします。データをより効率的に更新するために、データを変更するときに上記のスライス情報を使用できます。
 
-ページ 1 のすべての書籍の基本情報を削除するには、上記の結果の`start_key`と`end_key`をページ 1 の値に置き換えます。
+ページ 1 のすべての書籍の基本情報を削除するには、上記の結果の`start_key`と`end_key`ページ 1 の値に置き換えます。
 
 ```sql
 DELETE FROM books
@@ -138,7 +138,7 @@ public class PageMeta<K> {
 }
 ```
 
-ページのメタ情報一覧を取得するメソッドを`getPageMetaList()`つ定義し、ページのメタ情報に従ってデータを一括削除するメソッドを`deleteBooksByPageMeta()`定義します。
+ページのメタ情報一覧を取得するメソッドを`getPageMetaList()`定義し、ページのメタ情報に従ってデータを一括削除するメソッドを`deleteBooksByPageMeta()`つ定義します。
 
 ```java
 public class BookDAO {
@@ -259,7 +259,7 @@ ORDER BY page_num;
 
 クラスター化されたインデックス テーブル (&quot;インデックス構成テーブル&quot; とも呼ばれます) の場合、 `concat`関数を使用して複数の列の値をキーとして連結し、ウィンドウ関数を使用してページング情報をクエリできます。
 
-現時点では、キーは文字列であり、 `min`と`max`の集計関数によってスライス内の正しい`start_key`と`end_key`を取得するには、文字列の長さが常に同じであることを確認する必要があることに注意してください。文字列連結のフィールドの長さが固定されていない場合は、 `LPAD`関数を使用して埋め込むことができます。
+現時点では、キーは文字列であり、 `min`と`max`集計関数によってスライス内の正しい`start_key`と`end_key`を取得するには、文字列の長さが常に同じであることを確認する必要があることに注意してください。文字列連結のフィールドの長さが固定されていない場合は、 `LPAD`関数を使用して埋め込むことができます。
 
 たとえば、次のように`ratings`テーブルのデータのページング バッチを実装できます。
 
@@ -283,7 +283,7 @@ ORDER BY page_num;
 
 > **ノート：**
 >
-> 前の SQL ステートメントは`TableFullScan`として実行されます。データ量が多いとクエリが遅くなるため、高速化することができ[TiFlashを使う](/tiflash/tiflash-overview.md#use-tiflash) 。
+> 前の SQL ステートメントは`TableFullScan`として実行されます。データ量が多いとクエリが遅くなるため、 [TiFlashを使う](/tiflash/tiflash-overview.md#use-tiflash)化することができます。
 
 結果は次のとおりです。
 
@@ -303,7 +303,7 @@ ORDER BY page_num;
 30 rows in set (0.28 sec)
 ```
 
-ページ 1 のすべての評価レコードを削除するには、上記の結果の`start_key`と`end_key`をページ 1 の値に置き換えます。
+ページ 1 のすべての評価レコードを削除するには、上記の結果の`start_key`と`end_key`ページ 1 の値に置き換えます。
 
 ```sql
 SELECT * FROM ratings

@@ -37,7 +37,7 @@ TiCDC Open Protocol は、イベントを基本単位として使用して、デ
 | :--------- | :-- | :-------- | :-- | :----- |
 | パラメータ      | 長さ1 | イベント値1    | 長さN | イベント値N |
 
--   `LengthN`は`N`番目のキー/値の長さを表します。
+-   `LengthN` `N`番目のキー/値の長さを表します。
 -   長さとプロトコルバージョンはビッグエンディアンの`int64`型です。
 -   現在のプロトコルのバージョンは`1`です。
 
@@ -274,12 +274,12 @@ COMMIT;
 
 現在、TiCDC は TiCDC Open Protocol の標準解析ライブラリを提供していませんが、解析例のGolangバージョンとJavaバージョンが提供されています。このドキュメントで提供されているデータ形式と次の例を参照して、コンシューマー向けのプロトコル解析を実装できます。
 
--   [Golangの例](https://github.com/pingcap/tiflow/tree/master/cmd/kafka-consumer)
+-   [Golang の例](https://github.com/pingcap/tiflow/tree/master/cmd/kafka-consumer)
 -   [Javaの例](https://github.com/pingcap/tiflow/tree/master/examples/java)
 
 ## カラムタイプ コード {#column-type-code}
 
-`Column Type Code`は、行変更イベントの列データ型を表します。
+`Column Type Code`行変更イベントの列データ型を表します。
 
 | タイプ                   | コード    | 出力例                                                                                                                       | 説明                                                                |
 | :-------------------- | :----- | :------------------------------------------------------------------------------------------------------------------------ | :---------------------------------------------------------------- |
@@ -311,7 +311,7 @@ COMMIT;
 
 ## DDL タイプ コード {#ddl-type-code}
 
-`DDL Type Code`は、DDL イベントの DDL ステートメント タイプを表します。
+`DDL Type Code` DDL イベントの DDL ステートメント タイプを表します。
 
 | タイプ                  | コード |
 | :------------------- | :-- |
@@ -349,7 +349,7 @@ COMMIT;
 | 主キーを追加               | 32  |
 | 主キーを削除               | 33  |
 | シーケンスを作成             | 34  |
-| シーケンス                | 35  |
+| シーケンスの変更             | 35  |
 | ドロップシーケンス            | 36  |
 
 ## 列のビット フラグ {#bit-flags-of-columns}
@@ -385,5 +385,5 @@ COMMIT;
 
 > **ノート：**
 >
-> -   `BinaryFlag`は、列の型が BLOB/ TEXT (TINYBLOB/TINYTEXT および BINARY/CHAR を含む) の場合のみ意味があります。上流の列が BLOB 型の場合、 `BinaryFlag`の値は`1`に設定されます。上流列がTEXTタイプの場合、 `BinaryFlag`の値は`0`に設定されます。
-> -   アップストリームからテーブルを複製するために、TiCDC はハンドル インデックスとして[有効なインデックス](/ticdc/ticdc-overview.md#best-practices)を選択します。ハンドル インデックス列の`HandleKeyFlag`の値は`1`に設定されます。
+> -   `BinaryFlag`列の型が BLOB/ TEXT (TINYBLOB/TINYTEXT および BINARY/CHAR を含む) の場合のみ意味があります。上流の列が BLOB 型の場合、 `BinaryFlag`値は`1`に設定されます。上流列がTEXTタイプの場合、 `BinaryFlag`値は`0`に設定されます。
+> -   アップストリームからテーブルを複製するために、TiCDC はハンドル インデックスとして[有効なインデックス](/ticdc/ticdc-overview.md#best-practices)を選択します。ハンドル インデックス列の`HandleKeyFlag`値は`1`に設定されます。

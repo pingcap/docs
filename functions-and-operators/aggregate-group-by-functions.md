@@ -26,16 +26,16 @@ summary: Learn about the supported aggregate functions in TiDB.
 | [`STDDEV_SAMP()`](https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_stddev-samp)                                   | サンプル標準偏差を返します                          |
 | [`JSON_OBJECTAGG(key, value)`](https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_json-objectagg)                   | キーと値のペアを含む単一の JSON オブジェクトとして結果セットを返します |
 
--   特に明記しない限り、グループ関数は`NULL`の値を無視します。
+-   特に明記しない限り、グループ関数は`NULL`値を無視します。
 -   `GROUP BY`句を含まないステートメントでグループ関数を使用すると、すべての行をグループ化することと同じになります。
 
 さらに、TiDB は次の集計関数も提供します。
 
 -   `APPROX_PERCENTILE(expr, constant_integer_expr)`
 
-    この関数は`expr`のパーセンタイルを返します。 `constant_integer_expr`引数は、 `[1,100]`の範囲の定数整数であるパーセンテージ値を示します。パーセンタイル P <sub>k</sub> ( `k`はパーセンテージを表す) は、データ セット内に P <sub>k</sub>以下の値が少なくとも`k%`あることを示します。
+    この関数は`expr`のパーセンタイルを返します。 `constant_integer_expr`引数は、 `[1,100]`の範囲の定数整数であるパーセンテージ値を示します。パーセンタイル P <sub>k</sub> ( `k`パーセンテージを表す) は、データ セット内に P <sub>k</sub>以下の値が少なくとも`k%`あることを示します。
 
-    この関数は、返される`expr`の型として[数値型](/data-type-numeric.md)と[日時型](/data-type-date-and-time.md)のみをサポートします。他の返される型の場合、 `APPROX_PERCENTILE`は`NULL`のみを返します。
+    この関数は、返される`expr`の型として[数値型](/data-type-numeric.md)と[日時型](/data-type-date-and-time.md)のみをサポートします。他の返される型の場合、 `APPROX_PERCENTILE` `NULL`のみを返します。
 
     次の例は、 `INT`列の 50 パーセンタイルを計算する方法を示しています。
 
@@ -62,7 +62,7 @@ summary: Learn about the supported aggregate functions in TiDB.
     1 row in set (0.00 sec)
     ```
 
-`GROUP_CONCAT()`と`APPROX_PERCENTILE()`の関数を除いて、先行するすべての関数は[ウィンドウ関数](/functions-and-operators/window-functions.md)として機能します。
+`GROUP_CONCAT()`と`APPROX_PERCENTILE()`関数を除いて、先行するすべての関数は[ウィンドウ関数](/functions-and-operators/window-functions.md)として機能します。
 
 ## GROUP BY 修飾子 {#group-by-modifiers}
 
@@ -70,7 +70,7 @@ TiDB は現在、 `WITH ROLLUP`などの`GROUP BY`修飾子をサポートして
 
 ## SQL モードのサポート {#sql-mode-support}
 
-TiDB は SQL モード`ONLY_FULL_GROUP_BY`をサポートし、有効にすると、TiDB はあいまいな非集計列を含むクエリを拒否します。たとえば、次のクエリは`ONLY_FULL_GROUP_BY`が有効な場合は無効です。これは、 `SELECT`リストの集計されていない列 &quot;b&quot; が`GROUP BY`ステートメントに表示されないためです。
+TiDB は SQL モード`ONLY_FULL_GROUP_BY`をサポートし、有効にすると、TiDB はあいまいな非集計列を含むクエリを拒否します。たとえば、次のクエリは`ONLY_FULL_GROUP_BY`有効な場合は無効です。これは、 `SELECT`リストの集計されていない列 &quot;b&quot; が`GROUP BY`ステートメントに表示されないためです。
 
 ```sql
 drop table if exists t;
@@ -109,7 +109,7 @@ select distinct a, b from t order by c;
 
 結果を順序付けるには、最初に重複を排除する必要があります。しかし、そうするには、どの行を保持する必要がありますか?この選択は、保持される &quot;c&quot; の値に影響を与えます。これは順番に影響を与え、同様に任意にします。
 
-MySQL では、 `ORDER BY`式が次の条件の少なくとも 1 つを満たさない場合、 `DISTINCT`と`ORDER BY`を持つクエリは無効として拒否されます。
+MySQL では、 `ORDER BY`式が次の条件の少なくとも 1 つを満たさない場合、 `DISTINCT`と`ORDER BY`持つクエリは無効として拒否されます。
 
 -   式は`SELECT`リストの 1 つと等しい
 -   式によって参照され、クエリの選択されたテーブルに属するすべての列は、 `SELECT`リストの要素です

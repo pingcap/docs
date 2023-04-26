@@ -7,7 +7,7 @@ summary: Use the encrypted connection to ensure data security.
 
 TiDB のサーバーとクライアント間の暗号化されていない接続はデフォルトで許可されています。これにより、チャネル トラフィックを監視するサード パーティは、クエリの内容やクエリの結果など、サーバーとクライアントの間で送受信されるデータを知ることができます。チャネルが信頼できない場合 (クライアントがパブリック ネットワーク経由で TiDBサーバーに接続されている場合など)、暗号化されていない接続は情報漏えいを起こしやすくなります。この場合、セキュリティ上の理由から、暗号化された接続を要求することをお勧めします。
 
-TiDBサーバーは、TLS (Transport Layer Security) に基づく暗号化接続をサポートしています。このプロトコルは、MySQL 暗号化接続と一致しており、MySQL クライアント、MySQL シェル、MySQL ドライバーなどの既存の MySQL クライアントによって直接サポートされています。 TLS は、SSL (セキュリティ Sockets Layer) と呼ばれることもあります。 SSL プロトコルには[既知のセキュリティの脆弱性](https://en.wikipedia.org/wiki/Transport_Layer_Security)があるため、TiDB は SSL をサポートしていません。 TiDB は、TLSv1.0、TLSv1.1、TLSv1.2、および TLSv1.3 のプロトコルをサポートしています。
+TiDBサーバーは、 TLS (Transport Layer Security) に基づく暗号化接続をサポートしています。このプロトコルは、MySQL 暗号化接続と一致しており、MySQL クライアント、MySQL シェル、MySQL ドライバーなどの既存の MySQL クライアントによって直接サポートされています。 TLS は、SSL (セキュリティ Sockets Layer) と呼ばれることもあります。 SSL プロトコルには[既知のセキュリティの脆弱性](https://en.wikipedia.org/wiki/Transport_Layer_Security)あるため、TiDB は SSL をサポートしていません。 TiDB は、TLSv1.0、TLSv1.1、TLSv1.2、および TLSv1.3 のプロトコルをサポートしています。
 
 暗号化された接続を使用する場合、接続には次のセキュリティ プロパティがあります。
 
@@ -20,7 +20,7 @@ TLS で保護された接続を使用するには、まず TiDBサーバーを�
 MySQL と同様に、TiDB は同じ TCP ポートで TLS 接続と非 TLS 接続を許可します。 TLS が有効になっている TiDBサーバーの場合、暗号化された接続を介して TiDBサーバーに安全に接続するか、暗号化されていない接続を使用するかを選択できます。次の方法を使用して、安全な接続の使用を要求できます。
 
 -   システム変数`require_secure_transport`を構成して、すべてのユーザーに対して TiDBサーバーへの安全な接続を要求します。
--   ユーザーを作成するとき ( `create user` )、または既存のユーザーを変更するとき ( `alter user` ) に`REQUIRE SSL`を指定します。これは、指定されたユーザーが暗号化された接続を使用して TiDB にアクセスする必要があることを指定します。以下は、ユーザーを作成する例です。
+-   ユーザーを作成するとき ( `create user` )、または既存のユーザーを変更するとき ( `alter user` ) に`REQUIRE SSL`指定します。これは、指定されたユーザーが暗号化された接続を使用して TiDB にアクセスする必要があることを指定します。以下は、ユーザーを作成する例です。
 
     {{< copyable "" >}}
 
@@ -30,7 +30,7 @@ MySQL と同様に、TiDB は同じ TCP ポートで TLS 接続と非 TLS 接続
 
 > **ノート：**
 >
-> ログイン ユーザーが[ログインのための TiDB 証明書ベースの認証](/certificate-authentication.md#configure-the-user-certificate-information-for-login-verification)を使用して構成した場合、ユーザーは暗黙的に TiDB への暗号化された接続を有効にする必要があります。
+> ログイン ユーザーが[ログインのための TiDB 証明書ベースの認証](/certificate-authentication.md#configure-the-user-certificate-information-for-login-verification)使用して構成した場合、ユーザーは暗黙的に TiDB への暗号化された接続を有効にする必要があります。
 
 ## 安全な接続を使用するように TiDBサーバーを構成する {#configure-tidb-server-to-use-secure-connections}
 
@@ -42,9 +42,9 @@ MySQL と同様に、TiDB は同じ TCP ポートで TLS 接続と非 TLS 接続
 -   [`ssl-ca`](/tidb-configuration-file.md#ssl-ca) : (オプション) 信頼できる CA 証明書のファイル パスを指定します。
 -   [`tls-version`](/tidb-configuration-file.md#tls-version) : (オプション) 最小の TLS バージョンを指定します (例: &quot;TLSv1.2&quot;)。
 
-`auto-tls`は安全な接続を許可しますが、クライアント証明書の検証は提供しません。証明書の検証、および証明書の生成方法を制御するには、以下の`ssl-cert` 、 `ssl-key` 、および`ssl-ca`変数の構成に関するアドバイスを参照してください。
+`auto-tls`安全な接続を許可しますが、クライアント証明書の検証は提供しません。証明書の検証、および証明書の生成方法を制御するには、以下の`ssl-cert` 、 `ssl-key` 、および`ssl-ca`変数の構成に関するアドバイスを参照してください。
 
-TiDB サーバーで独自の証明書を使用して安全な接続を有効にするには、TiDBサーバーを起動するときに、構成ファイルで`ssl-cert`と`ssl-key`の両方のパラメーターを指定する必要がありサーバー。クライアント認証に`ssl-ca`パラメーターを指定することもできます ( [認証を有効にする](#enable-authentication)を参照)。
+TiDBサーバーで独自の証明書を使用して安全な接続を有効にするには、TiDBサーバーを起動するときに、構成ファイルで`ssl-cert`と`ssl-key`の両方のパラメーターを指定する必要があります。クライアント認証に`ssl-ca`パラメーターを指定することもできます ( [認証を有効にする](#enable-authentication)を参照)。
 
 パラメータで指定されたすべてのファイルは PEM (Privacy Enhanced Mail) 形式です。現在、TiDB はパスワードで保護された秘密鍵のインポートをサポートしていないため、パスワードなしで秘密鍵ファイルを提供する必要があります。証明書または秘密鍵が無効な場合、TiDBサーバーは通常どおり起動しますが、クライアントは暗号化された接続を介して TiDBサーバーに接続できません。
 
@@ -56,7 +56,7 @@ v5.2.0 より前の TiDB バージョンでは、 `mysql_ssl_rsa_setup --datadir
 
 MySQL 5.7以降のバージョンのクライアントは、デフォルトで暗号化された接続を確立しようとします。サーバーが暗号化された接続をサポートしていない場合は、自動的に暗号化されていない接続に戻ります。バージョン 5.7 より前の MySQL のクライアントは、デフォルトで暗号化されていない接続を使用します。
 
-次の`--ssl-mode`つのパラメーターを使用して、クライアントの接続動作を変更できます。
+次の`--ssl-mode`パラメーターを使用して、クライアントの接続動作を変更できます。
 
 -   `--ssl-mode=REQUIRED` : クライアントは暗号化された接続を必要とします。サーバー側が暗号化された接続をサポートしていない場合、接続を確立できません。
 -   `--ssl-mode`パラメータがない場合: クライアントは暗号化された接続を使用しようとしますが、サーバー側が暗号化された接続をサポートしていない場合、暗号化された接続を確立できません。次に、クライアントは暗号化されていない接続を使用します。
@@ -74,14 +74,14 @@ MySQL 8.0 クライアントには、このパラメーターに加えて 2 つ�
 TiDBサーバーまたは MySQL クライアントで`ssl-ca`パラメータが指定されていない場合、クライアントまたはサーバーはデフォルトで認証を実行せず、中間者攻撃を防ぐことができません。たとえば、クライアントは偽装されたクライアントに「安全に」接続する場合があります。サーバーとクライアントで認証用の`ssl-ca`パラメータを設定できます。通常、サーバーを認証するだけで済みますが、クライアントを認証してセキュリティをさらに強化することもできます。
 
 -   MySQL クライアントから TiDBサーバーを認証するには:
-    1.  TiDBサーバーで`ssl-cert`と`ssl-key`のパラメーターを指定します。
+    1.  TiDBサーバーで`ssl-cert`と`ssl-key`パラメーターを指定します。
     2.  MySQL クライアントで`--ssl-ca`パラメータを指定します。
     3.  MySQL クライアントでは、少なくとも`--ssl-mode` ～ `VERIFY_CA`を指定します。
     4.  TiDBサーバーで構成された証明書 ( `ssl-cert` ) が client `--ssl-ca`パラメーターで指定された CA によって署名されていることを確認してください。そうでない場合、認証は失敗します。
 
 -   TiDBサーバーから MySQL クライアントを認証するには:
-    1.  TiDBサーバーで`ssl-cert` 、および`ssl-key`パラメーターを指定し`ssl-ca` 。
-    2.  クライアントで`--ssl-cert`と`--ssl-key`のパラメーターを指定します。
+    1.  TiDBサーバーで`ssl-cert` 、および`ssl-ca`パラメーター`ssl-key`指定します。
+    2.  クライアントで`--ssl-cert`と`--ssl-key`パラメーターを指定します。
     3.  サーバー構成の証明書とクライアント構成の証明書の両方が、サーバーによって指定された`ssl-ca`によって署名されていることを確認してください。
 
 <!---->
@@ -98,7 +98,7 @@ create user 'u1'@'%'  require x509;
 
 > **ノート：**
 >
-> ログイン ユーザーが[ログインのための TiDB 証明書ベースの認証](/certificate-authentication.md#configure-the-user-certificate-information-for-login-verification)を使用して構成した場合、ユーザーは暗黙的に TiDB への暗号化された接続を有効にする必要があります。
+> ログイン ユーザーが[ログインのための TiDB 証明書ベースの認証](/certificate-authentication.md#configure-the-user-certificate-information-for-login-verification)使用して構成した場合、ユーザーは暗黙的に TiDB への暗号化された接続を有効にする必要があります。
 
 ## 現在の接続が暗号化を使用しているかどうかを確認する {#check-whether-the-current-connection-uses-encryption}
 

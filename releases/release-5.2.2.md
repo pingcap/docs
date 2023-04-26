@@ -49,25 +49,25 @@ TiDB バージョン: 5.2.2
     -   ハッシュ列のタイプが列挙型[#27893](https://github.com/pingcap/tidb/issues/27893)の場合の間違ったインデックス ハッシュ結合を修正
     -   アイドル状態の接続をリサイクルすると、まれにリクエストの送信がブロックされる可能性があるというバッチ クライアントのバグを修正します[#27688](https://github.com/pingcap/tidb/pull/27688)
     -   ターゲット クラスタでチェックサムの実行に失敗した場合のTiDB Lightningpanicの問題を修正します[#27686](https://github.com/pingcap/tidb/pull/27686)
-    -   場合によっては`date_add`と`date_sub`の関数の誤った結果を修正します[#27232](https://github.com/pingcap/tidb/issues/27232)
+    -   場合によっては`date_add`と`date_sub`関数の誤った結果を修正します[#27232](https://github.com/pingcap/tidb/issues/27232)
     -   ベクトル化された式[#28643](https://github.com/pingcap/tidb/issues/28643)の`hour`関数の間違った結果を修正
     -   MySQL 5.1 またはそれ以前のクライアント バージョン[#27855](https://github.com/pingcap/tidb/issues/27855)に接続する際の認証の問題を修正します。
     -   新しいインデックスが追加されたときに、指定された時間外にauto analyzeがトリガーされる可能性がある問題を修正します[#28698](https://github.com/pingcap/tidb/issues/28698)
     -   セッション変数を設定すると無効になるバグを修正`tidb_snapshot` [#28683](https://github.com/pingcap/tidb/pull/28683)
     -   不足しているピア リージョンが多数あるクラスタでBRが機能しないバグを修正します[#27534](https://github.com/pingcap/tidb/issues/27534)
-    -   サポートされていない`cast`をTiFlash [#23907](https://github.com/pingcap/tidb/issues/23907)に押し下げると`tidb_cast to Int32 is not supported`のような予期しないエラーが発生する問題を修正
+    -   サポートされていない`cast` TiFlash [#23907](https://github.com/pingcap/tidb/issues/23907)に押し下げると`tidb_cast to Int32 is not supported`のような予期しないエラーが発生する問題を修正
     -   `%s value is out of range in '%s'`エラー メッセージ[#27964](https://github.com/pingcap/tidb/issues/27964)で`DECIMAL overflow`が欠落している問題を修正します。
     -   一部のまれなケースで MPP ノードの可用性検出が機能しないバグを修正します[#3118](https://github.com/pingcap/tics/issues/3118)
-    -   `MPP task ID` [#27952](https://github.com/pingcap/tidb/issues/27952)を割り当てる際の`DATA RACE`の問題を修正
-    -   空の`dual table`を削除した後の MPP クエリの`INDEX OUT OF RANGE`エラーを修正します。 [#28250](https://github.com/pingcap/tidb/issues/28250)
+    -   `MPP task ID` [#27952](https://github.com/pingcap/tidb/issues/27952)を割り当てる際の`DATA RACE`問題を修正
+    -   空`dual table`削除した後の MPP クエリの`INDEX OUT OF RANGE`エラーを修正します。 [#28250](https://github.com/pingcap/tidb/issues/28250)
     -   MPP クエリ[#1791](https://github.com/pingcap/tics/issues/1791)の誤検知エラー ログ`invalid cop task execution summaries length`の問題を修正します。
     -   MPP クエリ[#28149](https://github.com/pingcap/tidb/pull/28149)のエラー ログ`cannot found column in Schema column`の問題を修正します。
-    -   TiFlash のシャットダウン時にTiFlashがpanicになる問題を修正[#28096](https://github.com/pingcap/tidb/issues/28096)
+    -   TiFlashのシャットダウン時に TiDB がpanicになる問題を修正[#28096](https://github.com/pingcap/tidb/issues/28096)
     -   安全でない 3DES (Triple Data Encryption Algorithm) ベースの TLS 暗号スイートのサポートを削除します[#27859](https://github.com/pingcap/tidb/pull/27859)
     -   事前チェック中に Lightning がオフラインの TiKV ノードに接続し、インポートの失敗を引き起こす問題を修正します[#27826](https://github.com/pingcap/tidb/pull/27826)
     -   テーブルに多数のファイルをインポートする場合、事前チェックに時間がかかりすぎる問題を修正します[#27605](https://github.com/pingcap/tidb/issues/27605)
-    -   式を書き換えると`between`が間違った照合順序を推論する問題を修正[#27146](https://github.com/pingcap/tidb/issues/27146)
-    -   `group_concat`の関数が照合順序[#27429](https://github.com/pingcap/tidb/issues/27429)を考慮していなかった問題を修正
+    -   式を書き換えると`between`間違った照合順序を推論する問題を修正[#27146](https://github.com/pingcap/tidb/issues/27146)
+    -   `group_concat`関数が照合順序[#27429](https://github.com/pingcap/tidb/issues/27429)を考慮していなかった問題を修正
     -   `extract`関数の引数が負の期間[#27236](https://github.com/pingcap/tidb/issues/27236)の場合に発生する結果の誤りを修正します。
     -   `NO_UNSIGNED_SUBTRACTION`を[#26765](https://github.com/pingcap/tidb/issues/26765)に設定するとパーティションの作成に失敗する問題を修正
     -   列の刈り込みと集計のプッシュダウンで副作用のある式を避ける[#27106](https://github.com/pingcap/tidb/issues/27106)
@@ -84,7 +84,7 @@ TiDB バージョン: 5.2.2
     -   Raftクライアント実装[#9714](https://github.com/tikv/tikv/issues/9714)でバッチ メッセージが大きすぎる問題を修正
     -   `resolved_ts` [#10965](https://github.com/tikv/tikv/issues/10965)で一部のコルーチンがリークする問題を修正
     -   応答のサイズが 4 GiB を超えるとコプロセッサーに発生するpanicの問題を修正します[#9012](https://github.com/tikv/tikv/issues/9012)
-    -   スナップショット ファイルをガベージ コレクションできない場合に、スナップショット ガベージ コレクション (GC) で GC スナップショット ファイルが失われる問題を修正し[#10813](https://github.com/tikv/tikv/issues/10813) 。
+    -   スナップショット ファイルをガベージ コレクションできない場合に、スナップショット ガベージ コレクション (GC) で GC スナップショット ファイルが失われる問題を修正します[#10813](https://github.com/tikv/tikv/issues/10813)
     -   コプロセッサー要求を処理する際のタイムアウトによって引き起こされるpanicの問題を修正します[#10852](https://github.com/tikv/tikv/issues/10852)
 
 -   PD
@@ -98,21 +98,21 @@ TiDB バージョン: 5.2.2
 
 -   TiFlash
 
-    -   ライブラリ`nsl`が存在しないため、一部のプラットフォームでTiFlashが起動しない問題を修正
+    -   ライブラリ`nsl`が存在しないため、一部のプラットフォームでTiFlash が起動しない問題を修正
 
 -   ツール
 
     -   TiCDC
         -   アップストリームの TiDB インスタンスが予期せず終了すると、TiCDC レプリケーション タスクが終了する可能性がある問題を修正します[#3061](https://github.com/pingcap/tiflow/issues/3061)
-        -   TiKV が同じリージョン[#2386](https://github.com/pingcap/tiflow/issues/2386)に重複したリクエストを送信すると、TiCDC プロセスがpanicになる可能性がある問題を修正します。
+        -   TiKV が同じリージョン[#2386](https://github.com/pingcap/tiflow/issues/2386)に重複したリクエストを送信すると、TiCDC プロセスがパニックになる可能panicがある問題を修正します。
         -   ダウンストリームの TiDB/MySQL の可用性を検証する際の不要な CPU 消費を修正します[#3073](https://github.com/pingcap/tiflow/issues/3073)
         -   TiCDC によって生成される Kafka メッセージの量が`max-message-size` [#2962](https://github.com/pingcap/tiflow/issues/2962)によって制限されないという問題を修正します
         -   Kafka メッセージの書き込み中にエラーが発生すると、TiCDC 同期タスクが一時停止することがある問題を修正します[#2978](https://github.com/pingcap/tiflow/issues/2978)
         -   `force-replicate`が有効な場合、有効なインデックスのない一部のパーティション テーブルが無視される可能性があるという問題を修正します[#2834](https://github.com/pingcap/tiflow/issues/2834)
-        -   株式データのスキャンに時間がかかりすぎると、 [#2470](https://github.com/pingcap/tiflow/issues/2470)が GC を実行するために株式データのスキャンが失敗する可能性がある問題を修正します。
+        -   株式データのスキャンに時間がかかりすぎると、TiKV が GC を実行するために株式データのスキャンが失敗する可能性がある問題を修正します[#2470](https://github.com/pingcap/tiflow/issues/2470)
         -   一部のタイプの列を Open Protocol フォーマット[#2758](https://github.com/pingcap/tiflow/issues/2758)にエンコードする際に発生する可能性があったpanicの問題を修正
         -   一部のタイプの列を Avro フォーマット[#2648](https://github.com/pingcap/tiflow/issues/2648)にエンコードする際に発生する可能性があったpanicの問題を修正
 
-    -   Binlog
+    -   TiDBBinlog
 
         -   ほとんどのテーブルが除外されている場合、特定の負荷がかかるとチェックポイントを更新できないという問題を修正します[#1075](https://github.com/pingcap/tidb-binlog/pull/1075)

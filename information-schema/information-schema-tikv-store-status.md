@@ -1,18 +1,18 @@
 ---
 title: TIKV_STORE_STATUS
-summary: Learn the `TIKV_STORE_STATUS` information_schema table.
+summary: Learn the `TIKV_STORE_STATUS` INFORMATION_SCHEMA table.
 ---
 
 # TIKV_STORE_STATUS {#tikv-store-status}
 
-`TIKV_STORE_STATUS`番目のテーブルは、PD の API を介して TiKV ノードのいくつかの基本情報を示します。たとえば、クラスターに割り当てられた ID、アドレスとポート、ステータス、容量、現在のノードのリージョンリーダーの数などです。
-
-{{< copyable "" >}}
+`TIKV_STORE_STATUS`テーブルは、PD の API を介して TiKV ノードのいくつかの基本情報を示します。たとえば、クラスターに割り当てられた ID、アドレスとポート、ステータス、容量、現在のノードのリージョンリーダーの数などです。
 
 ```sql
-USE information_schema;
-DESC tikv_store_status;
+USE INFORMATION_SCHEMA;
+DESC TIKV_STORE_STATUS;
 ```
+
+出力は次のとおりです。
 
 ```sql
 +-------------------+-------------+------+------+---------+-------+
@@ -49,8 +49,8 @@ DESC tikv_store_status;
 -   `STORE_STATE_NAME` : Store 状態の名前。名前は`Up` 、 `Offline` 、または`Tombstone`です。
 -   `LABEL` : ストアに設定されたラベル。
 -   `VERSION` : ストアのバージョン番号。
--   `CAPACITY` : ストアのストレージ容量。
--   `AVAILABLE` : ストアの残りのストレージ容量。
+-   `CAPACITY` : ストアのstorage容量。
+-   `AVAILABLE` : ストアの残りのstorage容量。
 -   `LEADER_COUNT` : ストアのリーダーの数。
 -   `LEADER_WEIGHT` : ストアのリーダーの重み。
 -   `LEADER_SCORE` : ストアのリーダー スコア。

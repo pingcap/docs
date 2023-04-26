@@ -5,7 +5,7 @@ summary: Learn how to configure Titan.
 
 # タイタンのコンフィグレーション {#titan-configuration}
 
-このドキュメントでは、対応する構成アイテムを使用して[巨人](/storage-engine/titan-overview.md)を有効または無効にする方法、および関連するパラメーターとレベル マージ機能を紹介します。
+このドキュメントでは、対応する構成アイテムを使用して[巨人](/storage-engine/titan-overview.md)有効または無効にする方法、および関連するパラメーターとレベル マージ機能を紹介します。
 
 ## タイタンを有効にする {#enable-titan}
 
@@ -30,7 +30,7 @@ Titan は RocksDB と互換性があるため、RocksDB を使用する既存の
 
     詳細なコマンドについては、 [TiUPを使用して構成を変更する](/maintain-tidb-using-tiup.md#modify-the-configuration)を参照してください。
 
--   方法 2: TiKV 構成ファイルを直接編集して Titan を有効にします (本番環境にはお勧めし**ません**)。
+-   方法 2: TiKV 構成ファイルを直接編集して Titan を有効にします (本番環境には**お勧めしません**)。
 
     {{< copyable "" >}}
 
@@ -45,15 +45,15 @@ Titan を有効にしても、RocksDB に保存されている既存のデータ
 
 > **ノート：**
 >
-> Titan が無効になっている場合、RocksDB は Titan に移行されたデータを読み取ることができません。 Titan が既に有効になっている TiKV インスタンスで誤って無効にされた場合 (誤って`rocksdb.titan.enabled`から`false`に設定された場合)、TiKV は起動に失敗し、TiKV ログに`You have disabled titan when its data directory is not empty`エラーが表示されます。 Titan を正しく無効にするには、 [タイタンを無効にする](#disable-titan)を参照してください。
+> Titan が無効になっている場合、RocksDB は Titan に移行されたデータを読み取ることができません。 Titan が既に有効になっている TiKV インスタンスで誤って無効にされた場合 (誤って`rocksdb.titan.enabled`から`false`に設定された場合)、TiKV は起動に失敗し、TiKV ログに`You have disabled titan when its data directory is not empty`エラーが表示されます。 Titan を正しく無効にするには、 [タイタンを無効にする](#disable-titan)参照してください。
 
 ## パラメーター {#parameters}
 
-TiUPを使用して Titan 関連のパラメータを調整するには、 [構成を変更する](/maintain-tidb-using-tiup.md#modify-the-configuration)を参照してください。
+TiUP を使用して Titan 関連のパラメータを調整するには、 [構成を変更する](/maintain-tidb-using-tiup.md#modify-the-configuration)を参照してください。
 
 -   Titan GC スレッド数。
 
-    **TiKV の [詳細]** -&gt; [<strong>スレッド CPU</strong> ] -&gt; [ <strong>RocksDB CPU</strong> ] パネルから、Titan GC スレッドが長時間フル容量になっていることがわかった場合は、Titan GC スレッド プールのサイズを増やすことを検討してください。
+    **TiKV の [詳細]** -&gt; <strong>[スレッド CPU]</strong> -&gt; <strong>[RocksDB CPU]</strong>パネルから、Titan GC スレッドが長時間フル容量になっていることがわかった場合は、Titan GC スレッド プールのサイズを増やすことを検討してください。
 
     {{< copyable "" >}}
 
@@ -80,7 +80,7 @@ TiUPを使用して Titan 関連のパラメータを調整するには、 [構�
 
 -   Titan の値キャッシュのサイズ。
 
-    キャッシュ サイズが大きいほど、Titan の読み取りパフォーマンスが高くなります。ただし、キャッシュ サイズが大きすぎると、メモリ不足 (OOM) が発生します。データベースが安定して実行されている場合は、ストア サイズから BLOB ファイル サイズを引いた値を`storage.block-cache.capacity`に設定し、監視メトリックに従って`blob-cache-size` ～ `memory size * 50% - block cache size`を設定することをお勧めします。これにより、ブロックキャッシュが RocksDB エンジン全体に対して十分な大きさである場合に、ブロブ キャッシュのサイズが最大化されます。
+    キャッシュ サイズが大きいほど、Titan の読み取りパフォーマンスが高くなります。ただし、キャッシュ サイズが大きすぎると、メモリ不足 (OOM) が発生します。データベースが安定して実行されている場合は、ストア サイズから BLOB ファイル サイズを引いた値を`storage.block-cache.capacity`に設定し、監視メトリックに従って`blob-cache-size` ～ `memory size * 50% - block cache size`を設定することをお勧めします。これにより、ブロックキャッシュがRocksDB エンジン全体に対して十分な大きさである場合に、ブロブ キャッシュのサイズが最大化されます。
 
     ```toml
     [rocksdb.defaultcf.titan]

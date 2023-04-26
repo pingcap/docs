@@ -27,20 +27,20 @@ title: tiup mirror init
 tiup mirror init <path> [flags]
 ```
 
-`<path>`は、 TiUPがミラー ファイルを生成および保存するローカル ディレクトリを指定するために使用されます。ローカル ディレクトリは相対パスにすることができます。指定したディレクトリがすでに存在する場合は、空にする必要があります。存在しない場合は、 TiUPが自動的に作成します。
+`<path>`は、 TiUP がミラー ファイルを生成および保存するローカル ディレクトリを指定するために使用されます。ローカル ディレクトリは相対パスにすることができます。指定したディレクトリがすでに存在する場合は、空にする必要があります。存在しない場合は、 TiUP が自動的に作成します。
 
 ## オプション {#options}
 
 ### -k, --key-dir {#k-key-dir}
 
--   TiUPが秘密鍵ファイルを生成するディレクトリを指定します。指定したディレクトリが存在しない場合は、 TiUPが自動的に作成します。
+-   TiUP が秘密鍵ファイルを生成するディレクトリを指定します。指定したディレクトリが存在しない場合は、 TiUP が自動的に作成します。
 -   データ型: `STRING`
--   コマンドでこのオプションが指定されていない場合、 TiUPはデフォルトで秘密鍵ファイルを`{path}/keys`に生成します。
+-   コマンドでこのオプションが指定されていない場合、 TiUP はデフォルトで秘密鍵ファイルを`{path}/keys`に生成します。
 
 ### 出力 {#outputs}
 
 -   コマンドが正常に実行された場合、出力はありません。
--   指定された`<path>`が空でない場合、 TiUPはエラー`Error: the target path '%s' is not an empty directory`を報告します。
--   指定された`<path>`がディレクトリでない場合、 TiUPはエラー`Error: fdopendir: not a directory`を報告します。
+-   指定された`<path>`が空でない場合、 TiUP はエラー`Error: the target path '%s' is not an empty directory`を報告します。
+-   指定された`<path>`ディレクトリでない場合、 TiUP はエラー`Error: fdopendir: not a directory`を報告します。
 
 [&lt;&lt; 前のページに戻る - TiUP Mirror コマンド一覧](/tiup/tiup-command-mirror.md#command-list)

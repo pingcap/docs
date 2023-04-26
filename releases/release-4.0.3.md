@@ -50,13 +50,13 @@ TiDB バージョン: 4.0.3
     -   `tidb_decode_plan`結果[#18501](https://github.com/pingcap/tidb/pull/18501)のヘッダーを追加します
     -   構成チェッカーを以前のバージョンの構成ファイルと互換性を持たせる[#18046](https://github.com/pingcap/tidb/pull/18046)
     -   デフォルトで実行情報の収集を有効にする[#18518](https://github.com/pingcap/tidb/pull/18518)
-    -   `tiflash_tables`と`tiflash_segments`のシステム テーブルを追加します[#18536](https://github.com/pingcap/tidb/pull/18536)
+    -   `tiflash_tables`と`tiflash_segments`システム テーブルを追加します[#18536](https://github.com/pingcap/tidb/pull/18536)
     -   実験的機能から`AUTO RANDOM`移動し、一般提供を発表します。改善点と互換性の変更は次のとおりです。
-        -   構成ファイルで`experimental.allow-auto-random`を非推奨にします。この項目がどのように構成されていても、列の`AUTO RANDOM`の機能をいつでも定義できます。 [#18613](https://github.com/pingcap/tidb/pull/18613) [#18623](https://github.com/pingcap/tidb/pull/18623)
-        -   `tidb_allow_auto_random_explicit_insert`のセッション変数を追加して、 `AUTO RANDOM`の列への明示的な書き込みを制御します。デフォルト値は`false`です。これは、列への明示的な書き込みによって引き起こされる予期しない`AUTO_RANDOM_BASE`の更新を回避するためです。 [#18508](https://github.com/pingcap/tidb/pull/18508)
-        -   `BIGINT`列と`UNSIGNED BIGINT`列でのみ`AUTO_RANDOM`を定義できるようにし、シャード ビットの最大数を`15`に制限します。これにより、割り当て可能な領域が急速に消費されるのを回避します[#18538](https://github.com/pingcap/tidb/pull/18538)
+        -   構成ファイルで`experimental.allow-auto-random`非推奨にします。この項目がどのように構成されていても、列の`AUTO RANDOM`機能をいつでも定義できます。 [#18613](https://github.com/pingcap/tidb/pull/18613) [#18623](https://github.com/pingcap/tidb/pull/18623)
+        -   `tidb_allow_auto_random_explicit_insert`セッション変数を追加して、 `AUTO RANDOM`列への明示的な書き込みを制御します。デフォルト値は`false`です。これは、列への明示的な書き込みによって引き起こされる予期しない`AUTO_RANDOM_BASE`更新を回避するためです。 [#18508](https://github.com/pingcap/tidb/pull/18508)
+        -   `BIGINT`と`UNSIGNED BIGINT`列でのみ`AUTO_RANDOM`を定義できるようにし、シャード ビットの最大数を`15`に制限します。これにより、割り当て可能な領域が急速に消費されるのを回避します[#18538](https://github.com/pingcap/tidb/pull/18538)
         -   `BIGINT`列に`AUTO_RANDOM`属性を定義し、主キー[#17987](https://github.com/pingcap/tidb/pull/17987)に負の値を挿入するときに`AUTO_RANDOM_BASE`更新をトリガーしない
-        -   `UNSIGNED BIGINT`の列に`AUTO_RANDOM`属性を定義する場合は、ID の割り当てに整数の最上位ビットを使用します。これにより、より多くの割り当て可能なスペースが得られます[#18404](https://github.com/pingcap/tidb/pull/18404)
+        -   `UNSIGNED BIGINT`列に`AUTO_RANDOM`属性を定義する場合は、ID の割り当てに整数の最上位ビットを使用します。これにより、より多くの割り当て可能なスペースが得られます[#18404](https://github.com/pingcap/tidb/pull/18404)
         -   `SHOW CREATE TABLE` [#18316](https://github.com/pingcap/tidb/pull/18316)の結果の`AUTO_RANDOM`属性の更新をサポート
 
 -   TiKV
@@ -72,7 +72,7 @@ TiDB バージョン: 4.0.3
 -   TiDB ダッシュボード
 
     -   コールド論理範囲[#674](https://github.com/pingcap-incubator/tidb-dashboard/pull/674)のキー ビジュアライザー バケット マージを改善する
-    -   一貫性のために`disable-telemetry`から`enable-telemetry`の構成アイテムの名前を変更します[#684](https://github.com/pingcap-incubator/tidb-dashboard/pull/684)
+    -   一貫性のために`disable-telemetry`から`enable-telemetry`構成アイテムの名前を変更します[#684](https://github.com/pingcap-incubator/tidb-dashboard/pull/684)
     -   ページ切り替え時にプログレスバーを表示する[#661](https://github.com/pingcap-incubator/tidb-dashboard/pull/661)
     -   スペース区切り文字がある場合、低速ログ検索がログ検索と同じ動作に従うようになりました[#682](https://github.com/pingcap-incubator/tidb-dashboard/pull/682)
 
@@ -96,23 +96,23 @@ TiDB バージョン: 4.0.3
 
     -   TiDB Lightning
 
-        -   より新しく、より理解しやすいフィルター形式で`black-white-list`を非推奨にする[#332](https://github.com/pingcap/tidb-lightning/pull/332)
+        -   より新しく、より理解しやすいフィルター形式で`black-white-list`非推奨にする[#332](https://github.com/pingcap/tidb-lightning/pull/332)
 
 ## バグの修正 {#bug-fixes}
 
 -   TiDB
 
-    -   実行中にエラーが発生した場合、 `IndexHashJoin`の空のセットの代わりにエラーを返す[#18586](https://github.com/pingcap/tidb/pull/18586)
+    -   実行中にエラーが発生した場合、 `IndexHashJoin`空のセットの代わりにエラーを返す[#18586](https://github.com/pingcap/tidb/pull/18586)
     -   gRPC transportReader が壊れているときに繰り返されるpanicを修正します[#18562](https://github.com/pingcap/tidb/pull/18562)
     -   Green GC がオフライン ストアのロックをスキャンしないため、データが不完全になる可能性がある問題を修正します[#18550](https://github.com/pingcap/tidb/pull/18550)
     -   TiFlashエンジン[#18534](https://github.com/pingcap/tidb/pull/18534)を使用した非読み取り専用ステートメントの処理を禁止する
     -   クエリ接続がパニックになったときに実際のエラー メッセージを返す[#18500](https://github.com/pingcap/tidb/pull/18500)
-    -   `ADMIN REPAIR TABLE`の実行で TiDB ノード[#18323](https://github.com/pingcap/tidb/pull/18323)のテーブル メタデータのリロードに失敗する問題を修正します。
+    -   `ADMIN REPAIR TABLE`実行で TiDB ノード[#18323](https://github.com/pingcap/tidb/pull/18323)のテーブル メタデータのリロードに失敗する問題を修正します。
     -   [#18291](https://github.com/pingcap/tidb/pull/18291)つのトランザクションで書き込まれ、削除された主キーのロックが別のトランザクションによって解決されるために発生したデータの不整合の問題を修正します。
     -   こぼれるディスクをうまく機能させる[#18288](https://github.com/pingcap/tidb/pull/18288)
     -   生成された列[#17907](https://github.com/pingcap/tidb/pull/17907)を含むテーブルで`REPLACE INTO`ステートメントが機能するときに報告されるエラーを修正します。
-    -   `IndexHashJoin`と`IndexMergeJoin`のワーカーがpanicに陥ったときに OOM エラーを返す[#18527](https://github.com/pingcap/tidb/pull/18527)
-    -   `Index Join`で使用されるインデックスに整数の主キー[#18565](https://github.com/pingcap/tidb/pull/18565)が含まれている場合、特殊なケースで`Index Join`の実行が間違った結果を返す可能性があるというバグを修正します
+    -   `IndexHashJoin`と`IndexMergeJoin`ワーカーがpanicたときに OOM エラーを返す[#18527](https://github.com/pingcap/tidb/pull/18527)
+    -   `Index Join`で使用されるインデックスに整数の主キー[#18565](https://github.com/pingcap/tidb/pull/18565)含まれている場合、特殊なケースで`Index Join`の実行が間違った結果を返す可能性があるというバグを修正します
     -   クラスターで新しい照合順序が有効になっている場合、トランザクションで新しい照合順序を使用して列で更新されたデータを一意のインデックス[#18703](https://github.com/pingcap/tidb/pull/18703)から読み取ることができないという問題を修正します。
 
 -   TiKV
@@ -123,7 +123,7 @@ TiDB バージョン: 4.0.3
 -   PD
 
     -   サーバーがクラッシュした場合、TSO ストリームの作成がしばらくブロックされる可能性がある問題を修正します[#2648](https://github.com/pingcap/pd/pull/2648)
-    -   `getSchedulers`でデータ競合が発生する可能性がある問題を修正[#2638](https://github.com/pingcap/pd/pull/2638)
+    -   `getSchedulers`データ競合が発生する可能性がある問題を修正[#2638](https://github.com/pingcap/pd/pull/2638)
     -   スケジューラを削除するとデッドロックが発生する可能性がある問題を修正します[#2637](https://github.com/pingcap/pd/pull/2637)
     -   `balance-leader-scheduler`が有効の場合、配置ルールが考慮されないバグを修正[#2636](https://github.com/pingcap/pd/pull/2636)
     -   サービス`safepoint`が正しく設定されず、 BRと餃子が失敗する場合がある問題を修正します[#2635](https://github.com/pingcap/pd/pull/2635)
@@ -144,7 +144,7 @@ TiDB バージョン: 4.0.3
 
 -   TiFlash
 
-    -   主キー列の名前を変更するとTiFlashがクラッシュする問題を修正
+    -   主キー列の名前を変更するとTiFlash がクラッシュする問題を修正
     -   `Learner Read`と`Remove Region`の同時実行でデッドロックが発生する可能性がある問題を修正
 
 -   ツール
@@ -161,13 +161,13 @@ TiDB バージョン: 4.0.3
 
     -   Dumpling
 
-        -   Dumplingで`--r`を指定すると`NULL`の値が省略される問題を修正[#119](https://github.com/pingcap/dumpling/pull/119)
+        -   Dumpling で`--r`を指定すると`NULL`値が省略される問題を修正[#119](https://github.com/pingcap/dumpling/pull/119)
         -   ダンプするテーブルに対してテーブルのフラッシュが機能しない可能性があるバグを修正します[#117](https://github.com/pingcap/dumpling/pull/117)
 
     -   TiDB Lightning
 
         -   `--log-file`が効かない問題を修正[#345](https://github.com/pingcap/tidb-lightning/pull/345)
 
-    -   Binlog
+    -   TiDBBinlog
 
-        -   TiDB Binlogが TLS を有効にしてダウンストリームにデータをレプリケートすると、チェックポイント[#988](https://github.com/pingcap/tidb-binlog/pull/988)の更新に使用されるデータベース ドライバーで TLS が有効になっていないために発生するDrainerを開始できない問題を修正します。
+        -   TiDB Binlog がTLS を有効にしてダウンストリームにデータをレプリケートすると、チェックポイント[#988](https://github.com/pingcap/tidb-binlog/pull/988)の更新に使用されるデータベース ドライバーで TLS が有効になっていないために発生するDrainerを開始できない問題を修正します。

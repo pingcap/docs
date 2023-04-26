@@ -31,7 +31,7 @@ SHOW COLLATION WHERE CHARSET = 'gbk';
 
 ### 照合 {#collations}
 
-MySQL の GBK 文字セットのデフォルトの照合順序は`gbk_chinese_ci`です。 MySQL とは異なり、TiDB の GBK 文字セットのデフォルトの照合順序は`gbk_bin`です。さらに、TiDB は GBK を UTF8MB4 に変換してからバイナリ照合順序を使用するため、TiDB の`gbk_bin`照合順序は MySQL の`gbk_bin`照合順序と同じではありません。
+MySQL の GBK 文字セットのデフォルトの照合順序は`gbk_chinese_ci`です。 MySQL とは異なり、TiDB の GBK 文字セットのデフォルトの照合順序は`gbk_bin`です。さらに、TiDB は GBK を UTF8MB4 に変換してからバイナリ照合順序を使用するため、TiDB の`gbk_bin`照合順序はMySQL の`gbk_bin`照合順序と同じではありません。
 
 <CustomContent platform="tidb">
 
@@ -41,7 +41,7 @@ TiDB を MySQL GBK 文字セットの照合と互換性を持たせるには、�
 
 <CustomContent platform="tidb-cloud">
 
-TiDB を MySQL GBK 文字セットの照合と互換性を持たせるために、最初に TiDB クラスターを初期化するときに、 TiDB Cloudはデフォルトで[照合のための新しいフレームワーク](/character-set-and-collation.md#new-framework-for-collations)を有効にします。
+TiDB を MySQL GBK 文字セットの照合と互換性を持たせるために、最初に TiDB クラスターを初期化するときに、 TiDB Cloud はデフォルトで[照合のための新しいフレームワーク](/character-set-and-collation.md#new-framework-for-collations)を有効にします。
 
 </CustomContent>
 
@@ -76,7 +76,7 @@ SHOW COLLATION WHERE CHARSET = 'gbk';
 
 例えば`SET NAMES gbk`の後、MySQL と TiDB でそれぞれ`CREATE TABLE gbk_table(a VARCHAR(32) CHARACTER SET gbk)`ステートメントを使用してテーブルを作成し、次の表の SQL ステートメントを実行すると、詳細な違いを確認できます。
 
-| データベース | 構成された SQL モードに`STRICT_ALL_TABLES`または`STRICT_TRANS_TABLES`が含まれている場合                                                | 構成された SQL モードに`STRICT_ALL_TABLES`も`STRICT_TRANS_TABLES`も含まれていない場合                                                                    |
+| データベース | 構成された SQL モードに`STRICT_ALL_TABLES`または`STRICT_TRANS_TABLES`が含まれている場合                                                | 構成された SQL モードに`STRICT_ALL_TABLES`も`STRICT_TRANS_TABLES`含まれていない場合                                                                     |
 | ------ | ----------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
 | MySQL  | `SELECT HEX('一a');`<br/> `e4b88061`<br/><br/> `INSERT INTO gbk_table values('一a');`<br/> `Incorrect Error`        | `SELECT HEX('一a');`<br/> `e4b88061`<br/><br/> `INSERT INTO gbk_table VALUES('一a');`<br/> `SELECT HEX(a) FROM gbk_table;`<br/> `e4b8` |
 | TiDB   | `SELECT HEX('一a');`<br/> `Incorrect Error`<br/><br/> `INSERT INTO gbk_table VALUES('一a');`<br/> `Incorrect Error` | `SELECT HEX('一a');`<br/> `e4b83f`<br/><br/> `INSERT INTO gbk_table VALUES('一a');`<br/> `SELECT HEX(a) FROM gbk_table;`<br/> `e4b83f` |
@@ -104,12 +104,12 @@ SHOW COLLATION WHERE CHARSET = 'gbk';
 
 ## コンポーネントの互換性 {#component-compatibility}
 
--   現在、 TiFlashは GBK 文字セットをサポートしていません。
+-   現在、 TiFlash はGBK 文字セットをサポートしていません。
 
 -   TiDB データ移行 (DM) は、v5.4.0 より前の TiDB クラスターへの`charset=GBK`テーブルの移行をサポートしていません。
 
--   TiDB Lightningは、v5.4.0 より前の TiDB クラスターへの`charset=GBK`テーブルのインポートをサポートしていません。
+-   TiDB Lightning は、 v5.4.0 より前の TiDB クラスターへの`charset=GBK`テーブルのインポートをサポートしていません。
 
--   v6.1.0 より前の TiCDC バージョンは、 `charset=GBK`テーブルの複製をサポートしていません。 v6.1.0 より前の TiDB クラスターへの`charset=GBK`のテーブルのレプリケートをサポートする TiCDC のバージョンはありません。
+-   v6.1.0 より前の TiCDC バージョンは、 `charset=GBK`テーブルの複製をサポートしていません。 v6.1.0 より前の TiDB クラスターへの`charset=GBK`テーブルのレプリケートをサポートする TiCDC のバージョンはありません。
 
--   v5.4.0 より前のバージョンのバックアップと復元 (BR) は、 `charset=GBK`テーブルの復元をサポートしていません。 v5.4.0 より前の TiDB クラスターへの`charset=GBK`のテーブルの復元をサポートするBRのバージョンはありません。
+-   v5.4.0 より前のバージョンのバックアップと復元 (BR) は、 `charset=GBK`テーブルの復元をサポートしていません。 v5.4.0 より前の TiDB クラスターへの`charset=GBK`テーブルの復元をサポートするBRのバージョンはありません。

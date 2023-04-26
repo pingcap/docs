@@ -14,7 +14,7 @@ title: TiDB 2.0.5 Release Notes
     -   `Selection`のコスト計算を最適化して結果をより正確にする[#6989](https://github.com/pingcap/tidb/pull/6989)
     -   ユニークインデックスまたは主キーに完全一致するクエリ条件を直接クエリパスとして選択[#6966](https://github.com/pingcap/tidb/pull/6966)
     -   サービスの起動に失敗した場合に必要なクリーンアップを実行する[#6964](https://github.com/pingcap/tidb/pull/6964)
-    -   `Load Data`ステートメント[#6962](https://github.com/pingcap/tidb/pull/6962)で`\N`を NULL として処理する
+    -   `Load Data`ステートメント[#6962](https://github.com/pingcap/tidb/pull/6962)で`\N` NULL として処理する
     -   CBO [#6953](https://github.com/pingcap/tidb/pull/6953)のコード構造を最適化する
     -   サービス[#6931](https://github.com/pingcap/tidb/pull/6931)の開始時にモニタリング メトリックを早期に報告する
     -   SQL ステートメントの改行を削除し、ユーザー情報を追加して、スロー クエリの形式を最適化する[#6920](https://github.com/pingcap/tidb/pull/6920)

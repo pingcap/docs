@@ -7,11 +7,11 @@ summary: Learn how to connect TiDB Cloud to 5000+ Apps with Zapier.
 
 [ザピア](https://zapier.com)は、何千ものアプリやサービスを含むワークフローを簡単に作成できる、コード不要の自動化ツールです。
 
-Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)を使用すると、次のことが可能になります。
+Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)使用すると、次のことが可能になります。
 
--   MySQL 互換の HTAP データベースである TiDB を無料で使用できます。ローカルでビルドする必要はありません。
--   TiDB Cloudの管理を容易にします。
--   TiDB Cloudを 5000 以上のアプリに接続し、ワークフローを自動化します。
+-   MySQL 互換の HTAP データベースである TiDB を使用します。ローカルでビルドする必要はありません。
+-   TiDB Cloud の管理を容易にします。
+-   TiDB Cloud を5000 以上のアプリに接続し、ワークフローを自動化します。
 
 このガイドでは、Zapier のTiDB Cloudアプリの概要と使用方法の例を紹介します。
 
@@ -19,7 +19,7 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 
 [Zap テンプレート](https://platform.zapier.com/partners/zap-templates)は、公開されている Zapier 統合用に、アプリとコア フィールドが事前に選択された既製の統合または Zap です。
 
-このセクションでは、ワークフローを作成する例として、**新しい Github グローバル イベントを TiDB 行に追加**するテンプレートを使用します。このワークフローでは、GitHub アカウントから新しいグローバル イベント (任意のレポで、任意の[GitHub イベント](https://docs.github.com/en/developers/webhooks-and-events/events/github-event-types)が発生します) が作成されるたびに、Zapier がTiDB Cloudクラスターに新しい行を追加します。
+このセクションでは、ワークフローを作成する例として**、新しい Github グローバル イベントを TiDB 行に追加する**テンプレートを使用します。このワークフローでは、GitHub アカウントから新しいグローバル イベント (任意のレポで、任意の[GitHub イベント](https://docs.github.com/en/developers/webhooks-and-events/events/github-event-types)が発生します) が作成されるたびに、Zapier がTiDB Cloudクラスターに新しい行を追加します。
 
 ### 前提条件 {#prerequisites}
 
@@ -27,11 +27,11 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 
 -   [ザピアアカウント](https://zapier.com/app/login) .
 -   [GitHub アカウント](https://github.com/login) .
--   TiDB Cloud上の[TiDB Cloudアカウント](https://tidbcloud.com/signup)および Serverless Serverless Tierクラスター。詳細については、 [TiDB Cloudクイック スタート](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-tidb-cluster)を参照してください。
+-   TiDB Cloud上の[TiDB Cloudアカウント](https://tidbcloud.com/signup)およびServerless Tierクラスター。詳細については、 [TiDB Cloudクイック スタート](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-tidb-cluster)を参照してください。
 
 ### ステップ 1: テンプレートを取得する {#step-1-get-the-template}
 
-[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)に進みます。 **Add new Github global events to TiDB rows**テンプレートを選択し、 <strong>Try it</strong>をクリックします。次に、エディターページに入ります。
+[Zapier 上のTiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)に進みます。 **Add new Github global events to TiDB rows**テンプレートを選択し、 <strong>Try it を</strong>クリックします。次に、エディターページに入ります。
 
 ### ステップ 2: トリガーを設定する {#step-2-set-up-the-trigger}
 
@@ -39,31 +39,31 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 
 1.  アプリとイベントを選択
 
-    テンプレートにはデフォルトでアプリとイベントが設定されているため、ここでは何もする必要はありません。 [**続行]**をクリックします。
+    テンプレートにはデフォルトでアプリとイベントが設定されているため、ここでは何もする必要はありません。 **[続行]**をクリックします。
 
 2.  アカウントを選択
 
-    TiDB Cloudに接続する GitHub アカウントを選択します。新しいアカウントを接続するか、既存のアカウントを選択できます。設定したら、[**続行**] をクリックします。
+    TiDB Cloudに接続する GitHub アカウントを選択します。新しいアカウントを接続するか、既存のアカウントを選択できます。設定したら、 **[続行]**をクリックします。
 
 3.  トリガーを設定する
 
-    テンプレートには、デフォルトでトリガーが設定されています。 [**続行]**をクリックします。
+    テンプレートには、デフォルトでトリガーが設定されています。 **[続行]**をクリックします。
 
 4.  テストトリガー
 
-    [**トリガーのテスト] を**クリックします。トリガーが正常にセットアップされると、GitHub アカウントから新しいグローバル イベントのデータを確認できます。 [<strong>続行]</strong>をクリックします。
+    **[トリガーのテスト]**をクリックします。トリガーが正常にセットアップされると、GitHub アカウントから新しいグローバル イベントのデータを確認できます。 <strong>[続行]</strong>をクリックします。
 
 ### ステップ 3: <code>Find Table in TiDB Cloud</code>設定する {#step-3-set-up-the-code-find-table-in-tidb-cloud-code-action}
 
 1.  アプリとイベントを選択
 
-    テンプレートによって設定されたデフォルト値`Find Table`を保持します。 [**続行]**をクリックします。
+    テンプレートによって設定されたデフォルト値`Find Table`保持します。 **[続行]**をクリックします。
 
 2.  アカウントを選択
 
-    1.  [**サインイン**] ボタンをクリックすると、新しいログイン ページにリダイレクトされます。
+    1.  **[サインイン]**ボタンをクリックすると、新しいログイン ページにリダイレクトされます。
     2.  ログイン ページで、公開鍵と秘密鍵を入力します。 TiDB Cloud API キーを取得するには、 [TiDB CloudAPI ドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management)の手順に従います。
-    3.  [**続行]**をクリックします。
+    3.  **[続行]**をクリックします。
 
     ![Account](/media/tidb-cloud/zapier/zapier-tidbcloud-account.png)
 
@@ -83,7 +83,7 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 
         Zapier は、入力したパスワードを使用してTiDB Cloudからデータベースにクエリを実行します。クラスター内にデータベースが見つからない場合は、パスワードを再入力してページを更新してください。
 
-    4.  **[検索するテーブル]**ボックスに`github_global_event`と入力します。テーブルが存在しない場合、テンプレートは次の DDL を使用してテーブルを作成します。 [<strong>続行]</strong>をクリックします。
+    4.  **[検索するテーブル] ボックス**に`github_global_event`と入力します。テーブルが存在しない場合、テンプレートは次の DDL を使用してテーブルを作成します。 <strong>[続行]</strong>をクリックします。
 
         ![The create table DDL](/media/tidb-cloud/zapier/zapier-tidbcloud-create-table-ddl.png)
 
@@ -95,11 +95,11 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 
 1.  アプリとイベントを選択
 
-    テンプレートによって設定されたデフォルト値を保持します。 [**続行]**をクリックします。
+    テンプレートによって設定されたデフォルト値を保持します。 **[続行]**をクリックします。
 
 2.  アカウントを選択
 
-    `Find Table in TiDB Cloud`アクションの設定時に選択したアカウントを選択します。 [**続行]**をクリックします。
+    `Find Table in TiDB Cloud`アクションの設定時に選択したアカウントを選択します。 **[続行]**をクリックします。
 
     ![Choose account](/media/tidb-cloud/zapier/zapier-tidbcloud-choose-account.png)
 
@@ -107,17 +107,17 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 
     1.  前の手順と同様に、 **Project Name** 、 <strong>クラスタ Name</strong> 、 <strong>TiDB Password</strong> 、および<strong>Database Name</strong>を入力します。
 
-    2.  [**テーブル名]**で、ドロップダウン リストから<strong>github_global_event</strong>テーブルを選択します。テーブルの列が表示されます。
+    2.  **[テーブル名]**で、ドロップダウン リストから<strong>github_global_event</strong>テーブルを選択します。テーブルの列が表示されます。
 
         ![Table columns](/media/tidb-cloud/zapier/zapier-set-up-tidbcloud-columns.png)
 
-    3.  [**列]**ボックスで、トリガーから対応するデータを選択します。すべての列に入力し、[<strong>続行</strong>] をクリックします。
+    3.  **[列]**ボックスで、トリガーから対応するデータを選択します。すべての列に入力し、 <strong>[続行]</strong>をクリックします。
 
         ![Fill in Columns](/media/tidb-cloud/zapier/zapier-fill-in-tidbcloud-triggers-data.png)
 
 4.  テスト アクション
 
-    [**アクションのテスト]**をクリックして、テーブルに新しい行を作成します。 TiDB Cloudクラスターを確認すると、データが正常に書き込まれていることがわかります。
+    **[アクションのテスト]**をクリックして、テーブルに新しい行を作成します。 TiDB Cloudクラスターを確認すると、データが正常に書き込まれていることがわかります。
 
     ```sql
     mysql> SELECT * FROM test.github_global_event;
@@ -131,7 +131,7 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 
 ### ステップ 5: Zap を公開する {#step-5-publish-your-zap}
 
-[**公開]**をクリックして Zap を公開します。 [ホームページ](https://zapier.com/app/zaps)で zap が実行されていることがわかります。
+**[公開]**をクリックして Zap を公開します。 [ホームページ](https://zapier.com/app/zaps)で zap が実行されていることがわかります。
 
 ![Publish the zap](/media/tidb-cloud/zapier/zapier-tidbcloud-publish.png)
 
@@ -158,22 +158,22 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 
 次の表に、 TiDB Cloud App でサポートされているアクションを示します。一部のアクションには追加のリソースが必要であり、アクションを使用する前に対応するリソースを準備する必要があることに注意してください。
 
-| アクション           | 説明                                                   | リソース                                |
-| --------------- | ---------------------------------------------------- | ----------------------------------- |
-| クラスタを検索         | 既存のサーバーレス層または専用層を検索します。                              | なし                                  |
-| クラスタの作成         | 新しいクラスターを作成します。無料のServerless Tierクラスターの作成のみをサポートします。 | なし                                  |
-| データベースを探す       | 既存のデータベースを検索します。                                     | Serverless Tierクラスター                |
-| データベースの作成       | 新しいデータベースを作成します。                                     | Serverless Tierクラスター                |
-| テーブルを検索         | 既存のテーブルを検索します。                                       | Serverless Tierクラスターとデータベース         |
-| テーブルの作成         | 新しいテーブルを作成します。                                       | Serverless Tierクラスターとデータベース         |
-| 行を作成            | 新しい行を作成します。                                          | Serverless Tierクラスター、データベース、およびテーブル |
-| 行の更新            | 既存の行を更新します。                                          | Serverless Tierクラスター、データベース、およびテーブル |
-| 行を検索            | ルックアップ列を介してテーブル内の行を検索します。                            | Serverless Tierクラスター、データベース、およびテーブル |
-| 行の検索 (カスタム クエリ) | 指定したカスタム クエリを使用して、テーブル内の行を検索します。                     | Serverless Tierクラスター、データベース、およびテーブル |
+| アクション           | 説明                                                 | リソース                                |
+| --------------- | -------------------------------------------------- | ----------------------------------- |
+| クラスタを検索         | 既存のサーバーレス層または専用層を検索します。                            | なし                                  |
+| クラスタの作成         | 新しいクラスターを作成します。 Serverless Tierクラスターの作成のみをサポートします。 | なし                                  |
+| データベースを探す       | 既存のデータベースを検索します。                                   | Serverless Tierクラスター                |
+| データベースの作成       | 新しいデータベースを作成します。                                   | Serverless Tierクラスター                |
+| テーブルを検索         | 既存のテーブルを検索します。                                     | Serverless Tierクラスターとデータベース         |
+| テーブルの作成         | 新しいテーブルを作成します。                                     | Serverless Tierクラスターとデータベース         |
+| 行を作成            | 新しい行を作成します。                                        | Serverless Tierクラスター、データベース、およびテーブル |
+| 行の更新            | 既存の行を更新します。                                        | Serverless Tierクラスター、データベース、およびテーブル |
+| 行を検索            | ルックアップ列を介してテーブル内の行を検索します。                          | Serverless Tierクラスター、データベース、およびテーブル |
+| 行の検索 (カスタム クエリ) | 指定したカスタム クエリを使用して、テーブル内の行を検索します。                   | Serverless Tierクラスター、データベース、およびテーブル |
 
 ## TiDB Cloudアプリ テンプレート {#tidb-cloud-app-templates}
 
-TiDB Cloudには、Zapier で直接使用できるいくつかのテンプレートが用意されています。 [TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)ページですべてのテンプレートを見つけることができます。
+TiDB Cloud には、 Zapier で直接使用できるいくつかのテンプレートが用意されています。 [TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)ページですべてのテンプレートを見つけることができます。
 
 ここではいくつかの例を示します。
 
@@ -187,7 +187,7 @@ TiDB Cloudには、Zapier で直接使用できるいくつかのテンプレー
 
 ### Zapier でTiDB Cloudアカウントを設定するにはどうすればよいですか? {#how-can-i-set-up-the-tidb-cloud-account-in-zapier}
 
-Zapier がTiDB Cloudアカウントに接続するには、 **TiDB Cloud API キー**が必要です。 Zapier はTiDB Cloudのログイン アカウントを必要としません。
+Zapier が TiDB TiDB Cloudアカウントに接続するには、 **TiDB Cloud API キー**が必要です。 Zapier はTiDB Cloudのログイン アカウントを必要としません。
 
 TiDB Cloud API キーを取得するには、 [TiDB CloudAPI ドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management)に従ってください。
 
@@ -199,7 +199,7 @@ TiDB Cloudトリガーは、多くの結果を返すポーリング API 呼び�
 
 API 内のアイテムが複数の異なるポーリングに存在する場合、アクションを複数回トリガーしたくないため、 TiDB Cloudトリガーは`id`フィールドでデータを重複排除します。
 
-`New Cluster`および`New Table`トリガーは、単純に`cluster_id`または`table_id`を`id`フィールドとして使用して重複排除を行います。 2 つのトリガーに対して何もする必要はありません。
+`New Cluster`および`New Table`トリガーは、単純に`cluster_id`または`table_id` `id`フィールドとして使用して重複排除を行います。 2 つのトリガーに対して何もする必要はありません。
 
 **新しい行トリガー**
 
@@ -210,7 +210,7 @@ API 内のアイテムが複数の異なるポーリングに存在する場合�
 `New Row`トリガーも柔軟な戦略を使用して、重複排除を行うための`id`フィールドを生成します。トリガーは、次の順序で`id`フィールドを生成します。
 
 1.  結果に`id`列が含まれる場合は、 `id`列を使用します。
-2.  トリガー構成で`Dedupe Key`を指定する場合は、 `Dedupe Key`を使用します。
+2.  トリガー構成で`Dedupe Key`指定する場合は、 `Dedupe Key`を使用します。
 3.  テーブルに主キーがある場合は、主キーを使用します。複数の主キーがある場合は、最初の列を使用します。
 4.  テーブルに一意のキーがある場合は、一意のキーを使用します。
 5.  表の最初の列を使用します。
@@ -227,7 +227,7 @@ API 内のアイテムが複数の異なるポーリングに存在する場合�
 
 `Find or create`アクションを使用すると、リソースが存在しない場合にリソースを作成できます。次に例を示します。
 
-1.  `Find Table`のアクションを選択してください
+1.  `Find Table`アクションを選択してください
 
 2.  ステップ`set up action`で、ボックス`Create TiDB Cloud Table if it doesn’t exist yet?`にチェックを入れて`find and create`を有効にします。
 

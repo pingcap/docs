@@ -7,14 +7,14 @@ summary: Learn the `USER_PRIVILEGES` information_schema table.
 
 表`USER_PRIVILEGES`は、グローバル権限に関する情報を提供します。この情報は、 `mysql.user`システム テーブルから取得されます。
 
-{{< copyable "" >}}
+```sql
+USE INFORMATION_SCHEMA;
+DESC USER_PRIVILEGES;
+```
+
+出力は次のとおりです。
 
 ```sql
-USE information_schema;
-DESC user_privileges;
-```
-
-```
 +----------------+--------------+------+------+---------+-------+
 | Field          | Type         | Null | Key  | Default | Extra |
 +----------------+--------------+------+------+---------+-------+
@@ -26,35 +26,40 @@ DESC user_privileges;
 4 rows in set (0.00 sec)
 ```
 
-{{< copyable "" >}}
+`USER_PRIVILEGES`テーブルの情報をビュー。
 
 ```sql
-SELECT * FROM user_privileges;
+SELECT * FROM USER_PRIVILEGES;
 ```
 
-```
+出力は次のとおりです。
+
+<CustomContent platform="tidb">
+
+```sql
 +------------+---------------+-------------------------+--------------+
 | GRANTEE    | TABLE_CATALOG | PRIVILEGE_TYPE          | IS_GRANTABLE |
 +------------+---------------+-------------------------+--------------+
-| 'root'@'%' | def           | Select                  | YES          |
-| 'root'@'%' | def           | Insert                  | YES          |
-| 'root'@'%' | def           | Update                  | YES          |
-| 'root'@'%' | def           | Delete                  | YES          |
-| 'root'@'%' | def           | Create                  | YES          |
-| 'root'@'%' | def           | Drop                    | YES          |
-| 'root'@'%' | def           | Process                 | YES          |
-| 'root'@'%' | def           | References              | YES          |
-| 'root'@'%' | def           | Alter                   | YES          |
-| 'root'@'%' | def           | Show Databases          | YES          |
-| 'root'@'%' | def           | Super                   | YES          |
-| 'root'@'%' | def           | Execute                 | YES          |
-| 'root'@'%' | def           | Index                   | YES          |
-| 'root'@'%' | def           | Create User             | YES          |
-| 'root'@'%' | def           | Trigger                 | YES          |
-| 'root'@'%' | def           | Create View             | YES          |
-| 'root'@'%' | def           | Show View               | YES          |
-| 'root'@'%' | def           | Create Role             | YES          |
-| 'root'@'%' | def           | Drop Role               | YES          |
+| 'root'@'%' | def           | SELECT                  | YES          |
+| 'root'@'%' | def           | INSERT                  | YES          |
+| 'root'@'%' | def           | UPDATE                  | YES          |
+| 'root'@'%' | def           | DELETE                  | YES          |
+| 'root'@'%' | def           | CREATE                  | YES          |
+| 'root'@'%' | def           | DROP                    | YES          |
+| 'root'@'%' | def           | PROCESS                 | YES          |
+| 'root'@'%' | def           | REFERENCES              | YES          |
+| 'root'@'%' | def           | ALTER                   | YES          |
+| 'root'@'%' | def           | SHOW DATABASES          | YES          |
+| 'root'@'%' | def           | SUPER                   | YES          |
+| 'root'@'%' | def           | EXECUTE                 | YES          |
+| 'root'@'%' | def           | INDEX                   | YES          |
+| 'root'@'%' | def           | CREATE USER             | YES          |
+| 'root'@'%' | def           | CREATE TABLESPACE       | YES          |
+| 'root'@'%' | def           | TRIGGER                 | YES          |
+| 'root'@'%' | def           | CREATE VIEW             | YES          |
+| 'root'@'%' | def           | SHOW VIEW               | YES          |
+| 'root'@'%' | def           | CREATE ROLE             | YES          |
+| 'root'@'%' | def           | DROP ROLE               | YES          |
 | 'root'@'%' | def           | CREATE TEMPORARY TABLES | YES          |
 | 'root'@'%' | def           | LOCK TABLES             | YES          |
 | 'root'@'%' | def           | CREATE ROUTINE          | YES          |
@@ -64,9 +69,56 @@ SELECT * FROM user_privileges;
 | 'root'@'%' | def           | RELOAD                  | YES          |
 | 'root'@'%' | def           | FILE                    | YES          |
 | 'root'@'%' | def           | CONFIG                  | YES          |
+| 'root'@'%' | def           | REPLICATION CLIENT      | YES          |
+| 'root'@'%' | def           | REPLICATION SLAVE       | YES          |
 +------------+---------------+-------------------------+--------------+
-28 rows in set (0.00 sec)
+31 rows in set (0.00 sec)
 ```
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+<!--Compared with on-premises TiDB, the root user in TiDB Cloud does not have the SHUTDOWN and CONFIG privileges.-->
+
+```sql
++------------+---------------+-------------------------+--------------+
+| GRANTEE    | TABLE_CATALOG | PRIVILEGE_TYPE          | IS_GRANTABLE |
++------------+---------------+-------------------------+--------------+
+| 'root'@'%' | def           | SELECT                  | YES          |
+| 'root'@'%' | def           | INSERT                  | YES          |
+| 'root'@'%' | def           | UPDATE                  | YES          |
+| 'root'@'%' | def           | DELETE                  | YES          |
+| 'root'@'%' | def           | CREATE                  | YES          |
+| 'root'@'%' | def           | DROP                    | YES          |
+| 'root'@'%' | def           | PROCESS                 | YES          |
+| 'root'@'%' | def           | REFERENCES              | YES          |
+| 'root'@'%' | def           | ALTER                   | YES          |
+| 'root'@'%' | def           | SHOW DATABASES          | YES          |
+| 'root'@'%' | def           | SUPER                   | YES          |
+| 'root'@'%' | def           | EXECUTE                 | YES          |
+| 'root'@'%' | def           | INDEX                   | YES          |
+| 'root'@'%' | def           | CREATE USER             | YES          |
+| 'root'@'%' | def           | CREATE TABLESPACE       | YES          |
+| 'root'@'%' | def           | TRIGGER                 | YES          |
+| 'root'@'%' | def           | CREATE VIEW             | YES          |
+| 'root'@'%' | def           | SHOW VIEW               | YES          |
+| 'root'@'%' | def           | CREATE ROLE             | YES          |
+| 'root'@'%' | def           | DROP ROLE               | YES          |
+| 'root'@'%' | def           | CREATE TEMPORARY TABLES | YES          |
+| 'root'@'%' | def           | LOCK TABLES             | YES          |
+| 'root'@'%' | def           | CREATE ROUTINE          | YES          |
+| 'root'@'%' | def           | ALTER ROUTINE           | YES          |
+| 'root'@'%' | def           | EVENT                   | YES          |
+| 'root'@'%' | def           | RELOAD                  | YES          |
+| 'root'@'%' | def           | FILE                    | YES          |
+| 'root'@'%' | def           | REPLICATION CLIENT      | YES          |
+| 'root'@'%' | def           | REPLICATION SLAVE       | YES          |
++------------+---------------+-------------------------+--------------+
+29 rows in set (0.00 sec)
+```
+
+</CustomContent>
 
 `USER_PRIVILEGES`テーブルのフィールドは次のとおりです。
 

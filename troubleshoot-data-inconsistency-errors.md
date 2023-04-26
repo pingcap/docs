@@ -5,9 +5,19 @@ summary: Learn how to deal with errors reported by the consistency check between
 
 # データとインデックス間の不一致のトラブルシューティング {#troubleshoot-inconsistency-between-data-and-indexes}
 
-TiDB は、トランザクションまたは[`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md)のステートメントを実行するときに、データとインデックスの間の整合性をチェックします。チェックにより、レコードのキー値と対応するインデックスのキー値が矛盾していることが判明した場合、つまり、行データを格納するキーと値のペアとそのインデックスを格納する対応するキーと値のペアが矛盾している場合 (たとえば、より多くのインデックスまたはインデックスが見つからない)、TiDB はデータの不整合エラーを報告し、関連するエラーをエラー ログに出力します。
+TiDB は、トランザクションまたは[`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md)ステートメントを実行するときに、データとインデックスの間の整合性をチェックします。チェックにより、レコードのキー値と対応するインデックスのキー値が矛盾していることが判明した場合、つまり、行データを格納するキーと値のペアとそのインデックスを格納する対応するキーと値のペアが矛盾している場合 (たとえば、より多くのインデックスまたはインデックスが見つからない)、TiDB はデータの不整合エラーを報告し、関連するエラーをエラー ログに出力。
 
-このドキュメントでは、データ不整合エラーの意味について説明し、整合性チェックをバイパスするいくつかの方法を提供します。データ整合性エラーが発生した場合は、PingCAP テクニカル サポートに連絡してトラブルシューティングを依頼してください。
+<CustomContent platform="tidb">
+
+このドキュメントでは、データ不整合エラーの意味について説明し、整合性チェックをバイパスするいくつかの方法を提供します。データ整合性エラーが発生した場合は、PingCAP またはコミュニティから[支持を得ます](/support.md)を入手できます。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+このドキュメントでは、データ不整合エラーの意味について説明し、整合性チェックをバイパスするいくつかの方法を提供します。データ整合性エラーが発生した場合は、次のことができます[TiDB Cloudサポートに連絡する](/tidb-cloud/tidb-cloud-support.md) 。
+
+</CustomContent>
 
 ## エラーの説明 {#error-explanation}
 
@@ -39,7 +49,7 @@ TiDB は、トランザクションまたは[`ADMIN CHECK [TABLE|INDEX]`](/sql-s
 
 `ERROR 8140 (HY000): writing inconsistent data in table: t, index: i2, col: c1, indexed-value:{KindString hellp} != record-value:{KindString hello}`
 
-このエラーは、トランザクションによって書き込まれる行のデータがインデックスのデータと一致しないことを示しています。テーブル`t`のインデックス`i2`の場合、トランザクションによって書き込まれる行には、インデックスのキーと値のペアにデータ`hellp`があり、レコードのキーと値のペアにデータ`hello`があります。この行のデータは書き込まれません。
+このエラーは、トランザクションによって書き込まれる行のデータがインデックスのデータと一致しないことを示しています。テーブル`t`のインデックス`i2`の場合、トランザクションによって書き込まれる行には、インデックスのキーと値のペアにデータ`hellp`があり、レコードのキーと値のペアにデータ`hello`あります。この行のデータは書き込まれません。
 
 #### エラー 8141 {#error-8141}
 
@@ -70,11 +80,21 @@ TiDB は、トランザクションまたは[`ADMIN CHECK [TABLE|INDEX]`](/sql-s
 
 `ERROR 8223 (HY000): data inconsistency in table: t2, index: i1, handle: {hello, hello}, index-values:"" != record-values:"handle: {hello, hello}, values: [KindString hello KindString hello]"`
 
-このエラーは、 `index-values`が null で`record-values`が null ではないことを示します。つまり、行に対応するインデックスがないことを意味します。
+このエラーは、 `index-values`が null で`record-values` null ではないことを示します。つまり、行に対応するインデックスがないことを意味します。
 
 ## ソリューション {#solutions}
 
-データの不一致エラーが発生した場合は、自分でエラーに対処するのではなく、すぐに PingCAP テクニカル サポートに連絡してトラブルシューティングを依頼してください。アプリケーションでこのようなエラーを緊急にスキップする必要がある場合は、次の方法を使用してチェックをバイパスできます。
+<CustomContent platform="tidb">
+
+データ不整合エラーが発生し[支持を得ます](/support.md)場合は、自分でエラーに対処するのではなく、すぐに PingCAP からトラブルシューティングを依頼してください。アプリケーションでこのようなエラーを緊急にスキップする必要がある場合は、次の方法を使用してチェックをバイパスできます。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+データの不整合エラーが発生した場合は、自分でエラーに対処[TiDB Cloudサポートに連絡する](/tidb-cloud/tidb-cloud-support.md)のではなく、すぐにトラブルシューティングを行います。アプリケーションでこのようなエラーを緊急にスキップする必要がある場合は、次の方法を使用してチェックをバイパスできます。
+
+</CustomContent>
 
 ### SQLを書き換える {#rewrite-sql}
 

@@ -5,14 +5,14 @@ summary: Learn the `METRICS_TABLES` system table.
 
 # METRICS_TABLES {#metrics-tables}
 
-`METRICS_TABLES`テーブルは、 [metrics_schema](/metrics-schema.md)データベースの各ビューの PromQL (Prometheus Query Language) 定義を提供します。
-
-{{< copyable "" >}}
+`METRICS_TABLES`テーブルは、 [`METRICS_SCHEMA`](/metrics-schema.md)データベースの各ビューの PromQL (Prometheus Query Language) 定義を提供します。
 
 ```sql
-USE information_schema;
-DESC metrics_tables;
+USE INFORMATION_SCHEMA;
+DESC METRICS_TABLES;
 ```
+
+出力は次のとおりです。
 
 ```sql
 +------------+--------------+------+------+---------+-------+
@@ -28,17 +28,17 @@ DESC metrics_tables;
 
 フィールドの説明:
 
--   `TABLE_NAME` : `metrics_schema`のテーブル名に対応します。
+-   `TABLE_NAME` : `METRICS_SCHEMA`のテーブル名に対応します。
 -   `PROMQL` : 監視テーブルの動作原理は、SQL ステートメントを`PromQL`にマップし、Prometheus の結果を SQL クエリの結果に変換することです。このフィールドは`PromQL`の式テンプレートです。監視テーブルのデータをクエリすると、クエリ条件を使用してこのテンプレートの変数が書き換えられ、最終的なクエリ式が生成されます。
--   `LABELS` : 監視項目のラベル。各ラベルは、監視テーブルの列に対応しています。 SQL ステートメントに対応する列のフィルターが含まれている場合、対応する`PromQL`はそれに応じて変更されます。
+-   `LABELS` : 監視項目のラベル。各ラベルは、監視テーブルの列に対応しています。 SQL ステートメントに対応する列のフィルターが含まれている場合、対応する`PromQL`それに応じて変更されます。
 -   `QUANTILE` : パーセンタイル。ヒストグラム タイプのモニタリング データの場合、デフォルトのパーセンタイルが指定されます。このフィールドの値が`0`の場合、監視テーブルに対応する監視項目がヒストグラムではないことを意味します。
 -   `COMMENT` : 監視テーブルに関するコメント。
-
-{{< copyable "" >}}
 
 ```sql
 SELECT * FROM metrics_tables LIMIT 5\G
 ```
+
+出力は次のとおりです。
 
 ```sql
 *************************** 1. row ***************************
@@ -46,7 +46,7 @@ TABLE_NAME: abnormal_stores
     PROMQL: sum(pd_cluster_status{ type=~"store_disconnected_count|store_unhealth_count|store_low_space_count|store_down_count|store_offline_count|store_tombstone_count"})
     LABELS: instance,type
   QUANTILE: 0
-   COMMENT: 
+   COMMENT:
 *************************** 2. row ***************************
 TABLE_NAME: etcd_disk_wal_fsync_rate
     PROMQL: delta(etcd_disk_wal_fsync_duration_seconds_count{$LABEL_CONDITIONS}[$RANGE_DURATION])

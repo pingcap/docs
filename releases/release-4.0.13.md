@@ -24,7 +24,7 @@ TiDB バージョン: 4.0.13
 -   TiKV
 
     -   `store used size`の計算過程をより正確にする[#9904](https://github.com/tikv/tikv/pull/9904)
-    -   `EpochNotMatch`のメッセージでより多くのリージョンを設定して、リージョンのミスを減らします[#9731](https://github.com/tikv/tikv/pull/9731)
+    -   `EpochNotMatch`メッセージでより多くのリージョンを設定して、リージョンのミスを減らします[#9731](https://github.com/tikv/tikv/pull/9731)
     -   長時間実行クラスタに蓄積されたメモリの解放を高速化する[#10035](https://github.com/tikv/tikv/pull/10035)
 
 -   PD
@@ -58,7 +58,7 @@ TiDB バージョン: 4.0.13
     -   データ読み取りに複数列インデックスを使用すると、クエリ結果が重複する問題を修正します[#24634](https://github.com/pingcap/tidb/pull/24634)
     -   DIV 式[#24266](https://github.com/pingcap/tidb/pull/24266)の除数として`BIT`型定数を使用すると、間違ったクエリ結果が発生する問題を修正します。
     -   1 DDL ステートメントで設定されたデフォルトのカラム値に対して`NO_ZERO_IN_DATE` SQL モードが有効にならない問題を修正します[#24185](https://github.com/pingcap/tidb/pull/24185)
-    -   `BIT`型の列と`INTEGER`型の列の間で`UNION`を使用すると、間違ったクエリ結果が返される問題を修正します[#24026](https://github.com/pingcap/tidb/pull/24026)
+    -   `BIT`型の列と`INTEGER`型の列の間で`UNION`使用すると、間違ったクエリ結果が返される問題を修正します[#24026](https://github.com/pingcap/tidb/pull/24026)
     -   `BINARY`型と`CHAR`型[#23917](https://github.com/pingcap/tidb/pull/23917)を比較する際、誤って`TableDual`型が作成される問題を修正
     -   `insert ignore on duplicate`ステートメントが予期せずテーブル レコードを削除する可能性がある問題を修正します[#23825](https://github.com/pingcap/tidb/pull/23825)
     -   Audit プラグインが TiDBpanic[#23819](https://github.com/pingcap/tidb/pull/23819)を引き起こす問題を修正
@@ -73,7 +73,7 @@ TiDB バージョン: 4.0.13
     -   `UPDATE`ステートメントに`HAVING`句[#23575](https://github.com/pingcap/tidb/pull/23575)の結合クエリが含まれている場合に発生するクエリpanicの問題を修正します。
     -   比較式[#23474](https://github.com/pingcap/tidb/pull/23474)で定数`NULL`を使用すると、 TiFlashが間違った結果を返す問題を修正します。
     -   `YEAR`型列と`STRING`定数[#23335](https://github.com/pingcap/tidb/pull/23335)を比較すると間違った結果になる問題を修正
-    -   `session.group_concat_max_len`が小さすぎると`group_concat`がパニックになる問題を修正[#23257](https://github.com/pingcap/tidb/pull/23257)
+    -   `session.group_concat_max_len`小さすぎると`group_concat`パニックになる問題を修正[#23257](https://github.com/pingcap/tidb/pull/23257)
     -   `TIME`型列[#23233](https://github.com/pingcap/tidb/pull/23233)に`BETWEEN`式を使用した場合に発生する間違ったクエリ結果の問題を修正します。
     -   `DELETE`文の権限チェックの問題を修正[#23215](https://github.com/pingcap/tidb/pull/23215)
     -   `DECIMAL`型の列[#23196](https://github.com/pingcap/tidb/pull/23196)に無効な文字列を挿入してもエラーが報告されない問題を修正
@@ -81,18 +81,18 @@ TiDB バージョン: 4.0.13
     -   `USE_INDEX_MERGE`ヒントが有効にならない問題を修正[#22924](https://github.com/pingcap/tidb/pull/22924)
     -   `WHERE`節で`ENUM`列または`SET`列をフィルターとして使用すると、クエリが間違った結果を返すというバグを修正します[#22814](https://github.com/pingcap/tidb/pull/22814)
     -   クラスター化インデックスと新しい照合順序を同時に使用すると、クエリが間違った結果を返すというバグを修正します[#21408](https://github.com/pingcap/tidb/pull/21408)
-    -   `enable_new_collation`を有効にして`ANALYZE`を実行するとpanicが発生する問題を修正[#21299](https://github.com/pingcap/tidb/pull/21299)
+    -   `enable_new_collation`を有効にして`ANALYZE`実行するとpanicを修正[#21299](https://github.com/pingcap/tidb/pull/21299)
     -   SQL ビューが、SQL DEFINER [#24531](https://github.com/pingcap/tidb/pull/24531)に関連付けられたデフォルトのロールを正しく処理しないという問題を修正します。
     -   DDL ジョブのキャンセルがスタックする問題を修正します[#24445](https://github.com/pingcap/tidb/pull/24445)
     -   `concat`関数が照合順序[#24300](https://github.com/pingcap/tidb/pull/24300)を正しく処理しない問題を修正
     -   `SELECT`フィールドに`IN`サブクエリがあり、サブクエリの外側に`NULL`タプルが含まれている場合、クエリが間違った結果を返すというバグを修正します[#24022](https://github.com/pingcap/tidb/pull/24022)
-    -   `TableScan`が降順[#23974](https://github.com/pingcap/tidb/pull/23974)の場合、オプティマイザーがTiFlashを誤って選択するバグを修正
+    -   `TableScan`が降順[#23974](https://github.com/pingcap/tidb/pull/23974)の場合、オプティマイザーがTiFlash を誤って選択するバグを修正
     -   `point_get`プランがMySQL [#23970](https://github.com/pingcap/tidb/pull/23970)と矛盾するカラム名を返すバグを修正
     -   大文字の名前を持つデータベースで`show table status`ステートメントを実行すると、間違った結果が返される問題を修正します[#23958](https://github.com/pingcap/tidb/pull/23958)
-    -   テーブルに対して`INSERT`と`DELETE`の権限を同時に持っていないユーザーが`REPLACE`の操作を実行できるというバグを修正[#23938](https://github.com/pingcap/tidb/pull/23938)
+    -   テーブルに対して`INSERT`と`DELETE`権限を同時に持っていないユーザーが`REPLACE`操作を実行できるというバグを修正[#23938](https://github.com/pingcap/tidb/pull/23938)
     -   照合順序が正しく処理されないため、 `concat` / `make_set` / `insert`式の結果が間違っている問題を修正します[#23878](https://github.com/pingcap/tidb/pull/23878)
     -   `RANGE`パーティション[#23689](https://github.com/pingcap/tidb/pull/23689)を持つテーブルでクエリを実行すると発生するpanicを修正します。
-    -   問題を修正: 以前のバージョンのクラスターでは、変数`tidb_enable_table_partition`が`false`に設定されている場合、パーティションを含むテーブルは非パーティション テーブルとして処理されます。このテーブルで`batch point get`のクエリを実行すると、クラスターが新しいバージョンにアップグレードされると、接続panicが発生します。 [#23682](https://github.com/pingcap/tidb/pull/23682)
+    -   問題を修正: 以前のバージョンのクラスターでは、変数`tidb_enable_table_partition`が`false`に設定されている場合、パーティションを含むテーブルは非パーティション テーブルとして処理されます。このテーブルで`batch point get`クエリを実行すると、クラスターが新しいバージョンにアップグレードされると、接続panicが発生します。 [#23682](https://github.com/pingcap/tidb/pull/23682)
     -   TiDB が TCP および UNIX ソケットでリッスンするように構成されている場合、TCP 接続を介したリモート ホストが接続[#23513](https://github.com/pingcap/tidb/pull/23513)に対して正しく検証されないという問題を修正します。
     -   デフォルト以外の照合順序が間違ったクエリ結果を引き起こすバグを修正します[#22923](https://github.com/pingcap/tidb/pull/22923)
     -   Grafana の**コプロセッサー Cache**パネルが動作しない不具合を修正[#22617](https://github.com/pingcap/tidb/pull/22617)
@@ -113,11 +113,11 @@ TiDB バージョン: 4.0.13
     -   Prometheus に`delta-merge-tasks`の数が報告されない問題を修正
     -   `Segment Split`で発生するTiFlashpanicの問題を修正します。
     -   Grafana の`Region write Duration (write blocks)`パネルが間違った場所に表示される問題を修正
-    -   ストレージ エンジンがデータの削除に失敗する潜在的な問題を修正します。
+    -   storageエンジンがデータの削除に失敗する潜在的な問題を修正します。
     -   `TIME`型を`INTEGER`型にキャストしたときの結果が正しくない問題を修正
     -   `bitwise`オペレータの挙動がTiDBと異なる不具合を修正
     -   `STRING`型を`INTEGER`型にキャストしたときの結果が正しくない問題を修正
-    -   連続した高速書き込みによってTiFlashがメモリになる問題を修正
+    -   連続した高速書き込みによってTiFlash がメモリ不足になる問題を修正
     -   テーブル GC 中に null ポインターの例外が発生する可能性がある潜在的な問題を修正します。
     -   削除されたテーブルにデータを書き込むときに発生するTiFlashpanicの問題を修正します
     -   BR復元中に発生するTiFlashpanicの問題を修正

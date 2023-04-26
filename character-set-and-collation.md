@@ -109,11 +109,11 @@ SHOW COLLATION;
 
 > **警告：**
 >
-> TiDB は、latin1 を utf8 のサブセットとして誤って扱います。これにより、latin1 エンコーディングと utf8 エンコーディングが異なる文字を保存すると、予期しない動作が発生する可能性があります。 utf8mb4 文字セットに強くお勧めします。詳細については、 [TiDB #18955](https://github.com/pingcap/tidb/issues/18955)を参照してください。
+> TiDB は、latin1 を utf8 のサブセットとして誤って扱います。これにより、latin1 エンコーディングと utf8 エンコーディングが異なる文字を保存すると、予期しない動作が発生する可能性があります。 utf8mb4 文字セットに強くお勧めします。詳細については[TiDB #18955](https://github.com/pingcap/tidb/issues/18955)参照してください。
 
 > **ノート：**
 >
-> TiDB のデフォルトの照合 (バイナリ照合、サフィックス`_bin`付き) は[MySQL のデフォルトの照合](https://dev.mysql.com/doc/refman/8.0/en/charset-charsets.html) (通常、サフィックス`_general_ci`付きの一般的な照合) とは異なります。これにより、明示的な文字セットを指定しているが、暗黙的なデフォルトの照合順序の選択に依存している場合に、互換性のない動作が発生する可能性があります。
+> TiDB のデフォルトの照合 (バイナリ照合、サフィックス`_bin`付き) は[MySQL のデフォルトの照合](https://dev.mysql.com/doc/refman/8.0/en/charset-charsets.html) (通常、サフィックス`_general_ci`付きの一般的な照合) とは異なります。これにより、明示的な文字セットを指定しているが、暗黙的なデフォルトの照合照合順序の選択に依存している場合に、互換性のない動作が発生する可能性があります。
 
 次のステートメントを使用して、文字セットに対応する照合 ( [照合のための新しいフレームワーク](#new-framework-for-collations)の下) を表示できます。
 
@@ -136,7 +136,7 @@ SHOW COLLATION WHERE Charset = 'utf8mb4';
 
 GBK 文字セットの TiDB サポートの詳細については、 [GBK](/character-set-gbk.md)を参照してください。
 
-## <code>utf8mb4</code>の<code>utf8</code>と utf8mb4 {#code-utf8-code-and-code-utf8mb4-code-in-tidb}
+## TiDB の<code>utf8</code>と<code>utf8mb4</code> {#code-utf8-code-and-code-utf8mb4-code-in-tidb}
 
 MySQL では、文字セット`utf8`は最大 3 バイトに制限されています。これは、Basic Multilingual Plane (BMP) に文字を格納するには十分ですが、絵文字などの文字を格納するには十分ではありません。このため、代わりに文字セット`utf8mb4`を使用することをお勧めします。
 
@@ -219,7 +219,7 @@ ALTER DATABASE db_name
     [[DEFAULT] COLLATE collation_name]
 ```
 
-ここで`DATABASE`を`SCHEMA`に置き換えることができます。
+ここで`DATABASE` `SCHEMA`に置き換えることができます。
 
 異なるデータベースでは、異なる文字セットと照合順序を使用できます。 `character_set_database`と`collation_database`を使用して、現在のデータベースの文字セットと照合順序を確認します。
 
@@ -369,8 +369,8 @@ SELECT _utf8mb4'string' COLLATE utf8mb4_general_ci;
 ルール:
 
 -   ルール 1: `CHARACTER SET charset_name`と`COLLATE collation_name`を指定すると、 `charset_name`文字セットと`collation_name`照合順序が直接使用されます。
--   規則 2: `CHARACTER SET charset_name`を指定して`COLLATE collation_name`を指定しない場合、 `charset_name`文字セットとデフォルトの照合順序`charset_name`が使用されます。
--   ルール 3: `CHARACTER SET charset_name`も`COLLATE collation_name`も指定しない場合、システム変数`character_set_connection`および`collation_connection`によって指定された文字セットと照合順序が使用されます。
+-   規則 2: `CHARACTER SET charset_name`を指定して`COLLATE collation_name`指定しない場合、 `charset_name`文字セットとデフォルトの照合順序`charset_name`が使用されます。
+-   ルール 3: `CHARACTER SET charset_name`も`COLLATE collation_name`指定しない場合、システム変数`character_set_connection`および`collation_connection`によって指定された文字セットと照合順序が使用されます。
 
 ### クライアント接続文字セットと照合順序 {#client-connection-character-set-and-collation}
 
@@ -386,7 +386,7 @@ SELECT _utf8mb4'string' COLLATE utf8mb4_general_ci;
 
 -   `SET NAMES 'charset_name' [COLLATE 'collation_name']`
 
-    `SET NAMES`は、クライアントが SQL ステートメントをサーバーに送信するために使用する文字セットを示します。 `SET NAMES utf8mb4`は、クライアントからのすべての要求が utf8mb4 を使用し、サーバーからの結果も使用することを示します。
+    `SET NAMES`クライアントが SQL ステートメントをサーバーに送信するために使用する文字セットを示します。 `SET NAMES utf8mb4`クライアントからのすべての要求が utf8mb4 を使用し、サーバーからの結果も使用することを示します。
 
     `SET NAMES 'charset_name'`ステートメントは、次のステートメントの組み合わせと同等です。
 
@@ -396,7 +396,7 @@ SELECT _utf8mb4'string' COLLATE utf8mb4_general_ci;
     SET character_set_connection = charset_name;
     ```
 
-    `COLLATE`はオプションです。存在しない場合、 `charset_name`のデフォルトの照合順序が使用されて`collation_connection`が設定されます。
+    `COLLATE`はオプションです。存在しない場合、 `charset_name`のデフォルトの照合順序が使用されて`collation_connection`設定されます。
 
 -   `SET CHARACTER SET 'charset_name'`
 
@@ -416,14 +416,14 @@ SELECT _utf8mb4'string' COLLATE utf8mb4_general_ci;
 ## 文字セットと照合順序の選択に関する一般規則 {#general-rules-on-selecting-character-sets-and-collation}
 
 -   ルール 1: `CHARACTER SET charset_name`と`COLLATE collation_name`を指定すると、 `charset_name`文字セットと`collation_name`照合順序が直接使用されます。
--   ルール 2: `CHARACTER SET charset_name`を指定して`COLLATE collation_name`を指定しない場合、 `charset_name`文字セットとデフォルトの照合順序`charset_name`が使用されます。
--   ルール 3: `CHARACTER SET charset_name`も`COLLATE collation_name`も指定しない場合は、最適化レベルが高い文字セットと照合順序が使用されます。
+-   ルール 2: `CHARACTER SET charset_name`を指定して`COLLATE collation_name`指定しない場合、 `charset_name`文字セットとデフォルトの照合順序`charset_name`が使用されます。
+-   ルール 3: `CHARACTER SET charset_name`も`COLLATE collation_name`指定しない場合は、最適化レベルが高い文字セットと照合順序が使用されます。
 
 ## 文字の有効性チェック {#validity-check-of-characters}
 
 指定された文字セットが`utf8`または`utf8mb4`の場合、TiDB は有効な`utf8`文字のみをサポートします。無効な文字の場合、TiDB は`incorrect utf8 value`エラーを報告します。この TiDB の文字の有効性チェックは、MySQL 8.0 と互換性がありますが、 MySQL 5.7以前のバージョンとは互換性がありません。
 
-このエラー報告を無効にするには、 `set @@tidb_skip_utf8_check=1;`を使用して文字チェックをスキップします。
+このエラー報告を無効にするには、 `set @@tidb_skip_utf8_check=1;`使用して文字チェックをスキップします。
 
 > **ノート：**
 >
@@ -489,7 +489,7 @@ TiDB v4.0 以降、照合のための完全なフレームワークが導入さ�
 
 <CustomContent platform="tidb">
 
-この新しいフレームワークは、照合の意味解析をサポートし、クラスターが最初に初期化されるときに新しいフレームワークを有効にするかどうかを決定する`new_collations_enabled_on_first_bootstrap`の構成項目を導入します。新しいフレームワークを有効にするには、 `new_collations_enabled_on_first_bootstrap`を`true`に設定します。詳細については、 [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)を参照してください。構成アイテムを有効にした後にクラスターを初期化すると、新しい照合順序が有効になっているかどうかを`mysql`の`new_collation_enabled`変数で確認できます。 `tidb`テーブル:
+この新しいフレームワークは、照合の意味解析をサポートし、クラスターが最初に初期化されるときに新しいフレームワークを有効にするかどうかを決定する`new_collations_enabled_on_first_bootstrap`構成項目を導入します。新しいフレームワークを有効にするには、 `new_collations_enabled_on_first_bootstrap`を`true`に設定します。詳細については、 [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)を参照してください。構成アイテムを有効にした後にクラスターを初期化すると、新しい照合順序が有効になっているかどうかを`mysql`の`new_collation_enabled`変数で確認できます。 `tidb`テーブル:
 
 {{< copyable "" >}}
 
@@ -516,7 +516,7 @@ SELECT VARIABLE_VALUE FROM mysql.tidb WHERE VARIABLE_NAME='new_collation_enabled
 
 新しいフレームワークの下で、TiDB は MySQL と互換性のある`utf8_general_ci` 、 `utf8mb4_general_ci` 、 `utf8_unicode_ci` 、 `utf8mb4_unicode_ci` 、 `gbk_chinese_ci` 、および`gbk_bin`照合をサポートします。
 
-`utf8_general_ci` 、 `utf8mb4_general_ci` 、 `utf8_unicode_ci` 、 `utf8mb4_unicode_ci` 、および`gbk_chinese_ci`のいずれかが使用される場合、文字列比較では大文字と小文字およびアクセントが区別されません。同時に、TiDB は照合の`PADDING`の動作も修正します。
+`utf8_general_ci` 、 `utf8mb4_general_ci` 、 `utf8_unicode_ci` 、 `utf8mb4_unicode_ci` 、および`gbk_chinese_ci`のいずれかが使用される場合、文字列比較では大文字と小文字およびアクセントが区別されません。同時に、TiDB は照合の`PADDING`動作も修正します。
 
 {{< copyable "" >}}
 
@@ -568,7 +568,7 @@ ERROR 1062 (23000): Duplicate entry 'a ' for key 't.PRIMARY' # TiDB modifies the
 -   数値または中間変数の強制力値は`5`です。
 -   `NULL`または`NULL`から派生した式の強制力値は`6`です。
 
-照合を推論するとき、TiDB はより低い強制力の値を持つ式の照合順序を使用することを好みます。 2 つの句の強制力の値が同じ場合、照合順序は次の優先順位に従って決定されます。
+照合を推論するとき、TiDB はより低い強制力の値を照合順序を使用することを好みます。 2 つの句の強制力の値が同じ場合、照合順序は次の優先順位に従って決定されます。
 
 バイナリ &gt; utf8mb4_bin &gt; (utf8mb4_general_ci = utf8mb4_unicode_ci) &gt; utf8_bin &gt; (utf8_general_ci = utf8_unicode_ci) &gt; latin1_bin &gt; ascii_bin
 

@@ -1,11 +1,15 @@
 ---
-title: TiCDC OpenAPI
+title: TiCDC OpenAPI v1
 summary: Learn how to use the OpenAPI interface to manage the cluster status and data replication.
 ---
 
-# TiCDC OpenAPI {#ticdc-openapi}
+# TiCDC OpenAPI v1 {#ticdc-openapi-v1}
 
 <!-- markdownlint-disable MD024 -->
+
+> **ノート**
+>
+> TiCDC OpenAPI v1 は非推奨であり、将来削除される予定です。 [TiCDC OpenAPI v2](/ticdc/ticdc-open-api-v2.md)を使用することをお勧めします。
 
 TiCDC は、TiCDC クラスターを照会および操作するための OpenAPI 機能を提供します。これは[`cdc cli`ツール](/ticdc/ticdc-manage-changefeed.md)の機能に似ています。
 
@@ -55,7 +59,7 @@ API リクエストの送信後にエラーが発生した場合、次の形式�
 
 ### 例 {#example}
 
-次のリクエストは、IP アドレスが`127.0.0.1`でポート番号が`8300`の TiCDC ノードのステータス情報を取得します。
+次のリクエストは、IP アドレスが`127.0.0.1`でポート番号が`8300` TiCDC ノードのステータス情報を取得します。
 
 {{< copyable "" >}}
 
@@ -139,7 +143,7 @@ curl -X GET http://127.0.0.1:8300/api/v1/health
 }
 ```
 
-`dispatchers` : MQ タイプのシンクの場合、ディスパッチャーを使用してイベント ディスパッチャーを構成できます。 `default` 、 `ts` 、 `rowid` 、および`table`の 4 つのディスパッチャがサポートされています。ディスパッチャのルールは次のとおりです。
+`dispatchers` : MQ タイプのシンクの場合、ディスパッチャーを使用してイベント ディスパッチャーを構成できます。 `default` 、 `ts` 、 `rowid` 、および`table` 4 つのディスパッチャがサポートされています。ディスパッチャのルールは次のとおりです。
 
 -   `default` : 複数の一意のインデックス (主キーを含む) が存在する場合、または古い値機能が有効になっている場合、イベントは`table`モードでディスパッチされます。一意のインデックス (または主キー) が 1 つだけ存在する場合、イベントは`rowid`モードで送出されます。
 -   `ts` : 行変更の commitTs を使用してハッシュ値を作成し、イベントをディスパッチします。
@@ -218,7 +222,7 @@ changefeed 構成を変更するには、 `pause the replication task -> modify 
 
 ### 例 {#example}
 
-次のリクエストは、レプリケーション タスクの`mounter_worker_num`を ID `test1`から`32`に更新します。
+次のリクエストは、レプリケーション タスクの`mounter_worker_num` ID `test1`から`32`に更新します。
 
 {{< copyable "" >}}
 
@@ -582,7 +586,7 @@ curl -X POST -H "'Content-type':'application/json'" http://127.0.0.1:8300/api/v1
 | :---------- | :---------- |
 | `log_level` | 設定するログ レベル。 |
 
-`log_level`は[zap によって提供されるログ レベル](https://godoc.org/go.uber.org/zap#UnmarshalText)をサポートします: &quot;debug&quot;、&quot;info&quot;、&quot;warn&quot;、&quot;error&quot;、&quot;dpanic&quot;、&quot;panic&quot;、および &quot;fatal&quot;。
+`log_level` [zap によって提供されるログ レベル](https://godoc.org/go.uber.org/zap#UnmarshalText)サポートします: &quot;debug&quot;、&quot;info&quot;、&quot;warn&quot;、&quot;error&quot;、&quot;dpanic&quot;、&quot;panic&quot;、および &quot;fatal&quot;。
 
 ### 例 {#example}
 

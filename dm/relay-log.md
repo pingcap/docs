@@ -7,13 +7,13 @@ summary: Learn the directory structure, initial migration rules and data purge o
 
 データ移行 (DM) リレー ログは、データベースの変更を説明するイベントを含む番号付きファイルのいくつかのセットと、使用されたすべてのリレー ログ ファイルの名前を含むインデックス ファイルで構成されます。
 
-リレー ログを有効にすると、DM-worker はアップストリームの binlog をローカル構成ディレクトリに自動的に移行します (DM がTiUPを使用してデプロイされている場合、デフォルトの移行ディレクトリは`<deploy_dir>/<relay_log>`です)。 `<relay_log>`のデフォルト値は`relay-dir`で、 [アップストリーム データベースコンフィグレーションファイル](/dm/dm-source-configuration-file.md)で変更できます。 v5.4.0 以降、 [DM-worker 構成ファイル](/dm/dm-worker-configuration-file.md)の`relay-dir`までローカル構成ディレクトリを構成できます。これは、アップストリーム データベースの構成ファイルよりも優先されます。
+リレー ログを有効にすると、DM-worker はアップストリームのbinlog をローカル構成ディレクトリに自動的に移行します (DM がTiUPを使用してデプロイされている場合、デフォルトの移行ディレクトリは`<deploy_dir>/<relay_log>`です)。 `<relay_log>`のデフォルト値は`relay-dir`で、 [アップストリーム データベースコンフィグレーションファイル](/dm/dm-source-configuration-file.md)で変更できます。 v5.4.0 以降、 [DM-worker 構成ファイル](/dm/dm-worker-configuration-file.md)の`relay-dir`までローカル構成ディレクトリを構成できます。これは、アップストリーム データベースの構成ファイルよりも優先されます。
 
 > **警告：**
 >
-> アップストリーム データベース構成ファイルの`relay-dir`は、v6.1 で非推奨としてマークされており、将来のリリースで削除される可能性があります。関連するコマンドの出力に、次の`` `relay-dir` in source config will be deprecated soon, please use `relay-dir` in worker config instead``が表示されます。
+> アップストリーム データベース構成ファイルの`relay-dir` 、v6.1 で非推奨としてマークされており、将来のリリースで削除される可能性があります。関連するコマンドの出力に、 `` `relay-dir` in source config will be deprecated soon, please use `relay-dir` in worker config instead``のプロンプトが表示されます。
 
-DM-worker が実行されている場合、上流の binlog をリアルタイムでローカル ファイルに移行します。 DM-worker の同期処理ユニットは、ローカル リレー ログの binlog イベントをリアルタイムで読み取り、これらのイベントを SQL ステートメントに変換してから、これらのステートメントを下流のデータベースに移行します。
+DM-worker が実行されている場合、上流のbinlog をリアルタイムでローカル ファイルに移行します。 DM-worker の同期処理ユニットは、ローカル リレー ログのbinlogイベントをリアルタイムで読み取り、これらのイベントを SQL ステートメントに変換してから、これらのステートメントを下流のデータベースに移行します。
 
 このドキュメントでは、DM リレー ログのディレクトリ構造と初期移行ルール、およびリレー ログの一時停止、再開、パージの方法について説明します。
 
@@ -23,7 +23,7 @@ DM-worker が実行されている場合、上流の binlog をリアルタイ�
 
 ## ディレクトリ構造 {#directory-structure}
 
-リレー ログのローカル ストレージのディレクトリ構造の例:
+リレー ログのローカルstorageのディレクトリ構造の例:
 
 ```
 <deploy_dir>/<relay_log>/
@@ -41,17 +41,17 @@ DM-worker が実行されている場合、上流の binlog をリアルタイ�
 
 -   `subdir` :
 
-    -   DM-worker は、アップストリーム データベースから移行された binlog を同じディレクトリに保存します。各ディレクトリは`subdir`です。
+    -   DM-worker は、アップストリーム データベースから移行されたbinlog を同じディレクトリに保存します。各ディレクトリは`subdir`です。
 
     -   `subdir`は`<Upstream database UUID>.<Local subdir serial number>`という名前です。
 
     -   アップストリームでプライマリ インスタンスとセカンダリ インスタンスを切り替えた後、DM-worker は増分シリアル番号を持つ新しい`subdir`ディレクトリを生成します。
 
-        -   上記の例では、 `7e427cc0-091c-11e9-9e45-72b7c59d52d7.000001`ディレクトリの場合、 `7e427cc0-091c-11e9-9e45-72b7c59d52d7`はアップストリーム データベースの UUID であり、 `000001`はローカル`subdir`シリアル番号です。
+        -   上記の例では、 `7e427cc0-091c-11e9-9e45-72b7c59d52d7.000001`ディレクトリの場合、 `7e427cc0-091c-11e9-9e45-72b7c59d52d7`アップストリーム データベースの UUID であり、 `000001`はローカル`subdir`シリアル番号です。
 
--   `server-uuid.index` : 現在使用可能な`subdir`のディレクトリの名前のリストを記録します。
+-   `server-uuid.index` : 現在使用可能な`subdir`ディレクトリの名前のリストを記録します。
 
--   `relay.meta` : 移行された binlog の情報を`subdir`ごとに格納します。例えば、
+-   `relay.meta` : 移行されたbinlogの情報を`subdir`ごとに格納します。例えば、
 
     ```bash
     $ cat c0149e17-dff1-11e8-b6a8-0242ac110004.000001/relay.meta
@@ -71,16 +71,16 @@ DM-worker が実行されている場合、上流の binlog をリアルタイ�
 
 -   ダウンストリーム同期ユニットのチェックポイントから、DM は最初に、移行タスクがデータ ソースからレプリケートする必要がある最も早い位置を取得します。ポジションが次のいずれかのポジションより遅い場合、DM-worker はこのポジションから移行を開始します。
 
--   有効なローカル リレー ログが存在する場合 (有効なリレー ログとは、有効な`server-uuid.index` 、および`subdir`ファイルを含むリレー ログです)、DM-worker は`relay.meta`によって記録された位置から移行を再開し`relay.meta` 。
+-   有効なローカル リレー ログが存在する場合 (有効なリレー ログとは、有効な`server-uuid.index` `subdir`および`relay.meta`ファイルを含むリレー ログです)、DM-worker は`relay.meta`によって記録された位置から移行を再開します。
 
 -   有効なローカル リレー ログが存在しないが、ソース構成ファイルで`relay-binlog-name`または`relay-binlog-gtid`が指定されている場合:
 
-    -   非 GTID モードで`relay-binlog-name`を指定すると、DM-worker は指定された binlog ファイルからマイグレーションを開始します。
+    -   非 GTID モードで`relay-binlog-name`を指定すると、DM-worker は指定されたbinlogファイルからマイグレーションを開始します。
     -   GTID モードで`relay-binlog-gtid`を指定すると、DM-worker は指定された GTID からマイグレーションを開始します。
 
 -   有効なローカル リレー ログが存在せず、DM 構成ファイルで`relay-binlog-name`または`relay-binlog-gtid`が指定されていない場合:
 
-    -   非 GTID モードでは、DM-worker は最初の上流の binlog から移行を開始し、すべての上流の binlog ファイルを最新のものに順次移行します。
+    -   非 GTID モードでは、DM-worker は最初の上流のbinlogから移行を開始し、すべての上流のbinlogファイルを最新のものに順次移行します。
 
     -   GTID モードでは、DM-worker は最初のアップストリーム GTID から移行を開始します。
 
@@ -127,7 +127,7 @@ v5.4.0 以降のバージョンでは、 `enable-relay` ～ `true`を設定す�
 
 > **警告：**
 >
-> この起動方法は、v6.1 で非推奨としてマークされており、将来のリリースで削除される可能性があります。関連するコマンドの出力に、次のプロンプトが表示され`start-relay/stop-relay with worker name will be deprecated soon. You can try stopping relay first and use start-relay without worker name instead` 。
+> この起動方法は、v6.1 で非推奨としてマークされており、将来のリリースで削除される可能性があります。関連するコマンドの出力に、 `start-relay/stop-relay with worker name will be deprecated soon. You can try stopping relay first and use start-relay without worker name instead`のプロンプトが表示されます。
 
 コマンド`start-relay`では、指定されたデータ ソースのリレー ログを移行するように 1 つ以上の DM-worker を構成できますが、パラメーターで指定された DM-worker は解放されているか、上流のデータ ソースにバインドされている必要があります。例は次のとおりです。
 
@@ -231,7 +231,7 @@ v2.0.2 より前の DM バージョン (v2.0.2 を除く) では、DM ワーカ�
 
 ## リレー ログ機能の一時停止と再開 {#pause-and-resume-the-relay-log-feature}
 
-コマンド`pause-relay`を使用してリレー ログのプル プロセスを一時停止し、コマンド`resume-relay`を使用してプロセスを再開できます。これら 2 つのコマンドを実行するときは、アップストリーム データ ソースの`source-id`を指定する必要があります。次の例を参照してください。
+コマンド`pause-relay`を使用してリレー ログのプル プロセスを一時停止し、コマンド`resume-relay`を使用してプロセスを再開できます。これら 2 つのコマンドを実行するときは、アップストリーム データ ソースの`source-id`指定する必要があります。次の例を参照してください。
 
 {{< copyable "" >}}
 
@@ -315,7 +315,7 @@ purge:
 
 ### 手動データ消去 {#manual-data-purge}
 
-手動データ消去とは、dmctl が提供する`purge-relay`コマンドを使用して`subdir`と binlog 名を指定し、指定された binlog**より前**のすべてのリレー ログを消去することを意味します。コマンドの`-subdir`オプションが指定されていない場合、現在のリレー ログ サブディレクトリ<strong>より前</strong>のすべてのリレー ログが消去されます。
+手動データ消去とは、dmctl が提供する`purge-relay`コマンドを使用して`subdir`とbinlog名を指定し、指定されたbinlog**より前の**すべてのリレー ログを消去することを意味します。コマンドの`-subdir`オプションが指定されていない場合、現在のリレー ログ サブディレクトリ<strong>より前の</strong>すべてのリレー ログが消去されます。
 
 現在のリレーログのディレクトリ構造が次のとおりであると仮定します。
 
@@ -341,7 +341,7 @@ e4e0e8ab-09cc-11e9-9220-82cc35207219.000002
 deb76a2b-09cc-11e9-9129-5242cf3bb246.000003
 ```
 
--   dmctl で次の`purge-relay`コマンドを実行すると、 `e4e0e8ab-09cc-11e9-9220-82cc35207219.000002/mysql-bin.000001`**より前**のすべてのリレー ログ ファイルがパージされます。これは、 `deb76a2b-09cc-11e9-9129-5242cf3bb246.000001`のすべてのリレー ログ ファイルです。
+-   dmctl で次の`purge-relay`コマンドを実行すると、 `e4e0e8ab-09cc-11e9-9220-82cc35207219.000002/mysql-bin.000001`**より前の**すべてのリレー ログ ファイルがパージされます。これは、 `deb76a2b-09cc-11e9-9129-5242cf3bb246.000001`のすべてのリレー ログ ファイルです。
 
     {{< copyable "" >}}
 
@@ -349,7 +349,7 @@ deb76a2b-09cc-11e9-9129-5242cf3bb246.000003
     » purge-relay -s mysql-replica-01 --filename mysql-bin.000001 --sub-dir e4e0e8ab-09cc-11e9-9220-82cc35207219.000002
     ```
 
--   dmctl で次の`purge-relay`コマンドを実行する**と、現在の**( `deb76a2b-09cc-11e9-9129-5242cf3bb246.000003` ) ディレクトリの`mysql-bin.000001`より前のすべてのリレー ログ ファイルが削除されます。これは、 `deb76a2b-09cc-11e9-9129-5242cf3bb246.000001`と`e4e0e8ab-09cc-11e9-9220-82cc35207219.000002`のすべてのリレー ログ ファイルです。
+-   dmctl で次の`purge-relay`コマンドを実行すると、**現在の**( `deb76a2b-09cc-11e9-9129-5242cf3bb246.000003` ) ディレクトリの`mysql-bin.000001`より前のすべてのリレー ログ ファイルが削除されます。これは、 `deb76a2b-09cc-11e9-9129-5242cf3bb246.000001`と`e4e0e8ab-09cc-11e9-9220-82cc35207219.000002`のすべてのリレー ログ ファイルです。
 
     {{< copyable "" >}}
 

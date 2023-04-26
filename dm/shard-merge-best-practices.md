@@ -9,9 +9,9 @@ summary: Learn the best practices of data migration in the shard merge scenario.
 
 ## 別のデータ移行タスクを使用する {#use-a-separate-data-migration-task}
 
-[シャード テーブルからのデータのマージと移行](/dm/feature-shard-merge-pessimistic.md#principles)番目のドキュメントでは、「シャーディング グループ」の定義が示されています。シャーディング グループは、マージして同じダウンストリーム テーブルに移行する必要があるすべてのアップストリーム テーブルで構成されます。
+[シャード テーブルからのデータのマージと移行](/dm/feature-shard-merge-pessimistic.md#principles)のドキュメントでは、「シャーディング グループ」の定義が示されています。シャーディング グループは、マージして同じダウンストリーム テーブルに移行する必要があるすべてのアップストリーム テーブルで構成されます。
 
-現在のシャーディング DDL メカニズムには、さまざまなシャード テーブルでの DDL 操作によってもたらされるスキーマの変更を調整するための機能がいくつかあり[利用制限](/dm/feature-shard-merge-pessimistic.md#restrictions) 。予期しない理由でこれらの制限に違反した場合は、データ移行タスク全体を[DM でシャーディング DDL ロックを手動で処理する](/dm/manually-handling-sharding-ddl-locks.md)実行するか、やり直す必要があります。
+現在のシャーディング DDL メカニズムには、さまざまなシャード テーブルでの DDL 操作によってもたらされるスキーマの変更を調整するための機能が[利用制限](/dm/feature-shard-merge-pessimistic.md#restrictions)かあります。予期しない理由でこれらの制限に違反した場合は、データ移行タスク全体を[DM でシャーディング DDL ロックを手動で処理する](/dm/manually-handling-sharding-ddl-locks.md)実行するか、やり直す必要があります。
 
 例外が発生した場合のデータ移行への影響を軽減するには、各シャーディング グループを個別のデータ移行タスクとしてマージおよび移行することをお勧めします。**これにより、少数のデータ移行タスクのみを手動で処理する必要があり、他のタスクは影響を受けないままにすることができます。**
 
@@ -19,12 +19,12 @@ summary: Learn the best practices of data migration in the shard merge scenario.
 
 DM のシャーディング DDL ロックは、アップストリームの複数のシャード テーブルからダウンストリームへの DDL 操作の実行を調整するためのメカニズムであることは、 [シャード テーブルからのデータのマージと移行](/dm/feature-shard-merge-pessimistic.md#principles)から簡単に結論付けることができます。
 
-したがって、コマンド`DM-master` ～ `shard-ddl-lock`でシャーディング DDL ロックが検出された場合、または一部の DM-worker でコマンド`query-status`から`unresolvedGroups`または`blockingDDLs`が検出された場合は、急いで`shard-ddl-lock unlock`コマンドを使用してシャーディング DDL ロックを手動で解放しないでください。
+したがって、コマンド`DM-master` ～ `shard-ddl-lock`でシャーディング DDL ロックが検出された場合、または一部の DM-worker でコマンド`query-status`から`unresolvedGroups`または`blockingDDLs`検出された場合は、急いで`shard-ddl-lock unlock`コマンドを使用してシャーディング DDL ロックを手動で解放しないでください。
 
 代わりに、次のことができます。
 
--   シャーディング DDL ロックの自動解放の失敗が 1 の[列挙された異常なシナリオ](/dm/manually-handling-sharding-ddl-locks.md#supported-scenarios)つである場合は、対応する手動の解決策に従ってシナリオを処理します。
--   サポートされていないシナリオの場合は、データ移行タスク全体をやり直します。まず、ダウンストリーム データベースのデータと、移行タスクに関連付けられた`dm_meta`の情報を空にします。次に、完全および増分データ複製を再実行します。
+-   シャーディング DDL ロックの自動解放の失敗が[列挙された異常なシナリオ](/dm/manually-handling-sharding-ddl-locks.md#supported-scenarios)つである場合は、対応する手動の解決策に従ってシナリオを処理します。
+-   サポートされていないシナリオの場合は、データ移行タスク全体をやり直します。まず、ダウンストリーム データベースのデータと、移行タスクに関連付けられた`dm_meta`情報を空にします。次に、完全および増分データ複製を再実行します。
 
 ## 複数のシャード テーブル間で主キーまたは一意のインデックス間の競合を処理する {#handle-conflicts-between-primary-keys-or-unique-indexes-across-multiple-sharded-tables}
 
@@ -57,7 +57,7 @@ CREATE TABLE `tbl_no_pk` (
 -   `auto_pk_c1`列はアプリケーションに影響を与えず、列の`PRIMARY KEY`属性に依存しません。
 -   `uk_c2`列には`UNIQUE KEY`属性があり、上流のすべてのシャード テーブルでグローバルに一意です。
 
-次に、次の手順を実行して、シャード テーブルをマージするときに`auto_pk_c1`列が原因である可能性がある`ERROR 1062 (23000): Duplicate entry '***' for key 'PRIMARY'`のエラーを修正できます。
+次に、次の手順を実行して、シャード テーブルをマージするときに`auto_pk_c1`列が原因である可能性がある`ERROR 1062 (23000): Duplicate entry '***' for key 'PRIMARY'`エラーを修正できます。
 
 1.  完全なデータ移行の前に、ダウンストリーム データベースにデータのマージと移行用のテーブルを作成し、 `auto_pk_c1`列の`PRIMARY KEY`属性を通常のインデックスに変更します。
 
@@ -97,12 +97,12 @@ CREATE TABLE `tbl_multi_pk` (
 次の要件が満たされている場合:
 
 -   アプリケーションは、 `auto_pk_c1`列の`PRIMARY KEY`属性に依存しません。
--   `auto_pk_c1`列と`uuid_c2`列で構成される複合主キーは、グローバルに一意です。
+-   `auto_pk_c1`と`uuid_c2`列で構成される複合主キーは、グローバルに一意です。
 -   アプリケーションで複合主キーを使用することは許容されます。
 
-次に、次の手順を実行して、シャード テーブルをマージするときに`auto_pk_c1`列が原因である可能性がある`ERROR 1062 (23000): Duplicate entry '***' for key 'PRIMARY'`のエラーを修正できます。
+次に、次の手順を実行して、シャード テーブルをマージするときに`auto_pk_c1`列が原因である可能性がある`ERROR 1062 (23000): Duplicate entry '***' for key 'PRIMARY'`エラーを修正できます。
 
-1.  完全なデータ移行の前に、データのマージと移行のためにダウンストリーム データベースにテーブルを作成します。 `auto_pk_c1`列には`PRIMARY KEY`属性を指定せず、 `auto_pk_c1`列と`uuid_c2`列を使用して複合主キーを構成します。
+1.  完全なデータ移行の前に、データのマージと移行のためにダウンストリーム データベースにテーブルを作成します。 `auto_pk_c1`列には`PRIMARY KEY`属性を指定せず、 `auto_pk_c1`と`uuid_c2`列を使用して複合主キーを構成します。
 
     ```sql
     CREATE TABLE `tbl_multi_pk_c2` (
@@ -119,11 +119,11 @@ CREATE TABLE `tbl_multi_pk` (
 
 ## アップストリーム RDS にシャード テーブルが含まれている場合の特別な処理 {#special-processing-when-the-upstream-rds-contains-sharded-tables}
 
-アップストリーム データ ソースが RDS であり、シャード テーブルが含まれている場合、SQL クライアントに接続するときに、MySQL binlog のテーブル名が表示されないことがあります。たとえば、アップストリームが UCloud 分散データベースである場合、binlog のテーブル名には追加のプレフィックス`_0001`が含まれる場合があります。したがって、SQL クライアントのテーブル名ではなく、binlog のテーブル名に基づいて[テーブル ルーティング](/dm/dm-table-routing.md)を構成する必要があります。
+アップストリーム データ ソースが RDS であり、シャード テーブルが含まれている場合、SQL クライアントに接続するときに、MySQL binlogのテーブル名が表示されないことがあります。たとえば、アップストリームが UCloud 分散データベースである場合、 binlogのテーブル名には追加のプレフィックス`_0001`が含まれる場合があります。したがって、SQL クライアントのテーブル名ではなく、 binlogのテーブル名に基づいて[テーブル ルーティング](/dm/dm-table-routing.md)を構成する必要があります。
 
 ## アップストリームでのテーブルの作成/削除 {#create-drop-tables-in-the-upstream}
 
-[シャード テーブルからのデータのマージと移行](/dm/feature-shard-merge-pessimistic.md#principles)では、シャーディング DDL ロックの調整が、ダウンストリーム データベースがすべてのアップストリーム シャード テーブルの DDL ステートメントを受信するかどうかに依存することは明らかです。さらに、DM は現在、アップストリームでシャード テーブルを動的に作成または削除することを**サポートしていません**。したがって、アップストリームでシャード テーブルを作成または削除するには、次の手順を実行することをお勧めします。
+[シャード テーブルからのデータのマージと移行](/dm/feature-shard-merge-pessimistic.md#principles)では、シャーディング DDL ロックの調整が、ダウンストリーム データベースがすべてのアップストリーム シャード テーブルの DDL ステートメントを受信するかどうかに依存することは明らかです。さらに、DM は現在、アップストリームでシャード テーブルを動的に作成または削除すること**をサポートしていません**。したがって、アップストリームでシャード テーブルを作成または削除するには、次の手順を実行することをお勧めします。
 
 ### アップストリームでシャード テーブルを作成する {#create-sharded-tables-in-the-upstream}
 
@@ -145,9 +145,9 @@ CREATE TABLE `tbl_multi_pk` (
 
 アップストリームでシャード テーブルを削除する必要がある場合は、次の手順を実行します。
 
-1.  分割されたテーブルを削除し、 [`SHOW BINLOG EVENTS`](https://dev.mysql.com/doc/refman/5.7/en/show-binlog-events.html)を実行して binlog イベントの`DROP TABLE`ステートメントに対応する`End_log_pos`をフェッチし、それを*Pos-M*としてマークします。
+1.  分割されたテーブルを削除し、 [`SHOW BINLOG EVENTS`](https://dev.mysql.com/doc/refman/5.7/en/show-binlog-events.html)を実行してbinlogイベントの`DROP TABLE`ステートメントに対応する`End_log_pos`をフェッチし、それを*Pos-M*としてマークします。
 
-2.  `query-status`を実行して、DM によって処理された binlog イベントに対応する位置 ( `syncerBinlog` ) をフェッチし、それを*Pos-S*としてマークします。
+2.  `query-status`を実行して、DM によって処理されたbinlogイベントに対応する位置 ( `syncerBinlog` ) をフェッチし、それを*Pos-S*としてマークします。
 
 3.  *Pos-S*が<em>Pos-M</em>より大きい場合は、DM が`DROP TABLE`のステートメントをすべて処理したことを意味し、ドロップ前のテーブルのデータはダウンストリームに移行されているため、後続の操作を実行できます。それ以外の場合は、DM がデータの移行を完了するまで待ちます。
 

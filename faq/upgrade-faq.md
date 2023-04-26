@@ -17,15 +17,15 @@ summary: Learn about some FAQs and the solutions during and after upgrading TiDB
 
 ### DDL の実行中に TiDB クラスターをアップグレードできますか? {#can-i-upgrade-the-tidb-cluster-during-the-ddl-execution}
 
-DDL ステートメントがクラスターで実行されているときは、 **TiDB**クラスターをアップグレードしないでください (通常、 `ADD INDEX`のような時間のかかる DDL ステートメントや列の型の変更のため)。
+DDL ステートメントがクラスターで実行されているときは、TiDB クラスターをアップグレード**しないでください**(通常、 `ADD INDEX`のような時間のかかる DDL ステートメントや列の型の変更のため)。
 
 アップグレードの前に、 [`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md)コマンドを使用して、TiDB クラスターに進行中の DDL ジョブがあるかどうかを確認することをお勧めします。クラスターに DDL ジョブがある場合、クラスターをアップグレードするには、DDL の実行が完了するまで待つか、 [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)コマンドを使用して DDL ジョブをキャンセルしてからクラスターをアップグレードします。
 
-また、クラスターのアップグレード中は、DDL ステートメントを実行し**ない**でください。そうしないと、未定義の動作の問題が発生する可能性があります。
+また、クラスターのアップグレード中は、DDL ステートメントを実行し**ないでください**。そうしないと、未定義の動作の問題が発生する可能性があります。
 
 ### バイナリを使用して TiDB をアップグレードするには? {#how-to-upgrade-tidb-using-the-binary}
 
-バイナリを使用して TiDB をアップグレードすることはお勧めしません。代わりに、バージョンの一貫性と互換性の両方を保証する[TiUP を使用してTiUPをアップグレードする](/upgrade-tidb-using-tiup.md)または[Kubernetes で TiDB クラスターをアップグレードする](https://docs.pingcap.com/tidb-in-kubernetes/stable/upgrade-a-tidb-cluster)にすることをお勧めします。
+バイナリを使用して TiDB をアップグレードすることはお勧めしません。代わりに、バージョンの一貫性と互換性の両方を保証する[TiUPを使用して TiDB をアップグレードする](/upgrade-tidb-using-tiup.md)または[Kubernetes で TiDB クラスターをアップグレードする](https://docs.pingcap.com/tidb-in-kubernetes/stable/upgrade-a-tidb-cluster)にすることをお勧めします。
 
 ## アップグレード後のよくある質問 {#after-upgrade-faqs}
 
@@ -173,7 +173,7 @@ alter table t change column a a varchar(22) character set utf8;
     +-------+-------------------------------------------------------+
     ```
 
-    上記の例では、 `show create table`はテーブルの文字セットのみを示していますが、実際には列の文字セットは UTF8MB4 であり、HTTP API を介してスキーマを取得することで確認できます。ただし、新しいテーブルが作成された場合、列の文字セットはテーブルの文字セットと一致している必要があります。このバグは v2.1.3 で修正されています。
+    上記の例では、 `show create table`テーブルの文字セットのみを示していますが、実際には列の文字セットは UTF8MB4 であり、HTTP API を介してスキーマを取得することで確認できます。ただし、新しいテーブルが作成された場合、列の文字セットはテーブルの文字セットと一致している必要があります。このバグは v2.1.3 で修正されています。
 
 -   バージョンアップ後、v2.1.3以降では以下の操作を行います。
 

@@ -51,7 +51,7 @@ NUM ::= intLit
 
 **TiDB Binlogレプリケーション中のエラーのトラブルシューティング**
 
-TiDB Binlogレプリケーション中に上流の TiDB で`RECOVER TABLE`を使用すると、次の 3 つの状況で TiDB Binlogが中断される可能性があります。
+TiDB Binlogレプリケーション中に上流の TiDB で`RECOVER TABLE`使用すると、次の 3 つの状況で TiDB Binlog が中断される可能性があります。
 
 -   ダウンストリーム データベースは`RECOVER TABLE`ステートメントをサポートしていません。エラー インスタンス: `check the manual that corresponds to your MySQL server version for the right syntax to use near 'RECOVER TABLE table_name'` 。
 
@@ -79,11 +79,11 @@ TiDB Binlogレプリケーション中に上流の TiDB で`RECOVER TABLE`を使
     RECOVER TABLE t;
     ```
 
-    このメソッドは、最近の DDL ジョブ履歴を検索し、 `DROP TABLE`のタイプの最初の DDL 操作を見つけてから、 `RECOVER TABLE`ステートメントで指定された 1 つのテーブル名と同じ名前の削除されたテーブルを回復します。
+    このメソッドは、最近の DDL ジョブ履歴を検索し、 `DROP TABLE`タイプの最初の DDL 操作を見つけてから、 `RECOVER TABLE`ステートメントで指定された 1 つのテーブル名と同じ名前の削除されたテーブルを回復します。
 
 -   使用されたテーブルの`DDL JOB ID`に従って、削除されたテーブルを回復します。
 
-    テーブル`t`を削除して別の`t`を作成し、新しく作成した`t`を再度削除したとします。そして、そもそも削除した`t`を復元したい場合は、 `DDL JOB ID`を指定する方法を使用する必要があります。
+    テーブル`t`削除して別の`t`を作成し、新しく作成した`t`再度削除したとします。そして、そもそも削除した`t`を復元したい場合は、 `DDL JOB ID`指定する方法を使用する必要があります。
 
     {{< copyable "" >}}
 

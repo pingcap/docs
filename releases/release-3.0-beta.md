@@ -16,7 +16,7 @@ title: TiDB 3.0 Beta Release Notes
 -   SQL オプティマイザー
     -   `AggregationElimination` [#7676](https://github.com/pingcap/tidb/pull/7676)の最適化ルールを再サポート
     -   `NOT EXISTS`サブクエリを最適化し、アンチ セミ ジョイン[#7842](https://github.com/pingcap/tidb/pull/7842)に変換する
-    -   新しい Cascades オプティマイザーをサポートするために`tidb_enable_cascades_planner`の変数を追加します。現在、Cascades オプティマイザはまだ完全には実装されておらず、デフォルトでオフになっています[#7879](https://github.com/pingcap/tidb/pull/7879)
+    -   新しい Cascades オプティマイザーをサポートするために`tidb_enable_cascades_planner`変数を追加します。現在、Cascades オプティマイザはまだ完全には実装されておらず、デフォルトでオフになっています[#7879](https://github.com/pingcap/tidb/pull/7879)
     -   トランザクションでの Index Join の使用のサポート[#7877](https://github.com/pingcap/tidb/pull/7877)
     -   外部結合の定数伝播を最適化し、結合結果の外部テーブルに関連するフィルタリング条件が外部結合を介して外部テーブルにプッシュダウンできるようにし、外部結合の無駄な計算を減らし、実行パフォーマンスを向上させます[#7794](https://github.com/pingcap/tidb/pull/7794)
     -   冗長な演算子を避けるために、射影消去の最適化ルールを集計消去の後の位置に調整します。 `Project`演算子[#7909](https://github.com/pingcap/tidb/pull/7909)
@@ -26,7 +26,7 @@ title: TiDB 3.0 Beta Release Notes
     -   `DO`ステートメントでのサブクエリの使用のサポート[#8343](https://github.com/pingcap/tidb/pull/8343)
     -   外部結合除去の最適化ルールを追加して、不要なテーブル スキャンと結合操作を削減し、実行パフォーマンスを向上させます[#8021](https://github.com/pingcap/tidb/pull/8021)
     -   `TIDB_INLJ`オプティマイザの Hint の動作を変更すると、オプティマイザは Hint で指定されたテーブルを Index Join [#8243](https://github.com/pingcap/tidb/pull/8243)の内部テーブルとして使用します
-    -   `PointGet`ステートメントの実行計画キャッシュが有効になったときに使用できるように、広い範囲で 1 を使用し[#8108](https://github.com/pingcap/tidb/pull/8108) `Prepare`
+    -   `Prepare`ステートメントの実行計画キャッシュが有効になったときに使用できるように、広い範囲で`PointGet`を使用します[#8108](https://github.com/pingcap/tidb/pull/8108)
     -   複数のテーブルを結合する際の結合順序の選択を最適化するために貪欲`Join Reorder`アルゴリズムを導入する[#8394](https://github.com/pingcap/tidb/pull/8394)
     -   サポートビュー[#8757](https://github.com/pingcap/tidb/pull/8757)
     -   サポートウィンドウ機能[#8630](https://github.com/pingcap/tidb/pull/8630)
@@ -44,7 +44,7 @@ title: TiDB 3.0 Beta Release Notes
     -   改善`shard_row_id_bits`と自動インクリメント ID のクロスチェック[#8936](https://github.com/pingcap/tidb/pull/8936)
 -   `Prepare`ステートメント
     -   サブクエリを含む`Prepare`ステートメントをクエリ プラン キャッシュに追加することを禁止して、異なるユーザー変数が入力されたときにクエリ プランが正しいことを保証する[#8064](https://github.com/pingcap/tidb/pull/8064)
-    -   クエリ プラン キャッシュを最適化して、ステートメントに非決定論関数が含まれている場合にプランを確実にキャッシュできるようにする[#8105](https://github.com/pingcap/tidb/pull/8105)
+    -   クエリ プラン キャッシュを最適化して、ステートメントに非決定論的関数が含まれている場合にプランを確実にキャッシュできるようにする[#8105](https://github.com/pingcap/tidb/pull/8105)
     -   クエリ プラン キャッシュを最適化して、 `DELETE` / `UPDATE` / `INSERT`のクエリ プランを確実にキャッシュできるようにする[#8107](https://github.com/pingcap/tidb/pull/8107)
     -   クエリ プラン キャッシュを最適化して、 `DEALLOCATE`ステートメントの実行時に対応するプランを削除する[#8332](https://github.com/pingcap/tidb/pull/8332)
     -   クエリ プラン キャッシュを最適化して、メモリ使用量を制限することで、あまりにも多くのプランをキャッシュすることによって発生する TiDB OOM の問題を回避します[#8339](https://github.com/pingcap/tidb/pull/8339)
@@ -89,7 +89,7 @@ title: TiDB 3.0 Beta Release Notes
 -   スケジューリング パラメーター関連のメトリックを追加する[#1406](https://github.com/pingcap/pd/pull/1406)
 -   クラスター ラベル関連のメトリックを追加する[#1402](https://github.com/pingcap/pd/pull/1402)
 -   インポート データ シミュレーター[#1263](https://github.com/pingcap/pd/pull/1263)を追加する
--   リーダー選挙に関する`Watch`の問題を修正[#1396](https://github.com/pingcap/pd/pull/1396)
+-   リーダー選挙に関する`Watch`問題を修正[#1396](https://github.com/pingcap/pd/pull/1396)
 
 ## TiKV {#tikv}
 
@@ -99,8 +99,8 @@ title: TiDB 3.0 Beta Release Notes
 -   HTTP を使用したモニタリング情報取得のサポート[#3855](https://github.com/tikv/tikv/pull/3855)
 -   DST をよりよくサポート[#3786](https://github.com/tikv/tikv/pull/3786)
 -   バッチ[#3931](https://github.com/tikv/tikv/pull/3913)でRaftメッセージの送受信をサポート
--   新しいストレージ エンジン Titan [#3985](https://github.com/tikv/tikv/pull/3985)の導入
+-   新しいstorageエンジン Titan [#3985](https://github.com/tikv/tikv/pull/3985)の導入
 -   gRPC を v1.17.2 にアップグレードする[#4023](https://github.com/tikv/tikv/pull/4023)
 -   バッチ[#4043](https://github.com/tikv/tikv/pull/4043)でのクライアント要求の受信と応答の送信をサポート
 -   マルチスレッド適用[#4044](https://github.com/tikv/tikv/pull/4044)をサポート
--   マルチスレッド Raftstore [#4066](https://github.com/tikv/tikv/pull/4066)をサポート
+-   マルチスレッドRaftstore [#4066](https://github.com/tikv/tikv/pull/4066)をサポート

@@ -9,15 +9,15 @@ summary: Learn about optimistic and pessimistic transactions in TiDB.
 
 楽観的トランザクション モデルは、直接コミットが成功する可能性が高いため、競合率が低いシナリオに適しています。ただし、トランザクションの競合が発生すると、ロールバックのコストが比較的高くなります。
 
-悲観的トランザクション モデルの利点は、競合率が高いシナリオでは、先にロックするコストが後でロールバックするコストよりも少ないことです。さらに、複数の同時トランザクションが競合のためにコミットに失敗するという問題を解決できます。ただし、競合率が低いシナリオでは、悲観的トランザクション モデルは楽観的トランザクション モデルほど効率的ではありません。
+悲観的トランザクション モデルの利点は、競合率が高いシナリオでは、先にロックするコストが後でロールバックするコストよりも少ないことです。さらに、複数の同時トランザクションが競合のためにコミットに失敗するという問題を解決できます。ただし、競合率が低いシナリオでは、悲観的楽観的モデルは楽観的なトランザクション モデルほど効率的ではありません。
 
 悲観的トランザクション モデルは、アプリケーション側での実装がより直感的で簡単です。楽観的トランザクション モデルには、複雑なアプリケーション側の再試行メカニズムが必要です。
 
-以下は[書店](/develop/dev-guide-bookshop-schema-design.md)の例です。本の購入を例に、楽観的な取引と悲観的取引の長所と短所を示します。本を購入するプロセスは、主に次のとおりです。
+以下は[書店](/develop/dev-guide-bookshop-schema-design.md)の例です。本の購入を例に、楽観的取引と悲観的取引の長所と短所を示します。本を購入するプロセスは、主に次のとおりです。
 
 1.  在庫数を更新する
 2.  注文を作成する
-3.  支払いを行う
+3.  支払いをする
 
 これらの操作は、すべて成功するか、すべて失敗する必要があります。同時トランザクションの場合に過剰販売が発生しないようにする必要があります。
 
@@ -35,7 +35,7 @@ summary: Learn about optimistic and pessimistic transactions in TiDB.
 
 <div label="Golang" value="golang">
 
-Golangの`sql.DB`は同時実行セーフであるため、サードパーティのパッケージをインポートする必要はありません。
+Golangの`sql.DB`同時実行セーフであるため、サードパーティのパッケージをインポートする必要はありません。
 
 TiDB トランザクションを適応させるには、次のコードに従ってツールキット[ユーティリティ](https://github.com/pingcap-inc/tidb-example-golang/tree/main/util)を作成します。
 
@@ -88,6 +88,12 @@ func (tx *TiDBSqlTx) Rollback() error {
     return tx.Tx.Rollback()
 }
 ```
+
+</div>
+
+<div label="Python" value="python">
+
+スレッドの安全性を確保するために、mysqlclient ドライバーを使用して、スレッド間で共有されない複数の接続を開くことができます。
 
 </div>
 
@@ -328,7 +334,7 @@ public class TxnExample {
 
 <div label="Golang" value="golang">
 
-必要なデータベース操作を含む`helper.go`のファイルを作成します。
+必要なデータベース操作を含む`helper.go`ファイルを作成します。
 
 ```go
 package main
@@ -576,7 +582,7 @@ func createUser(txn *util.TiDBSqlTx, id int, nickname string, balance decimal.De
 }
 ```
 
-次に、 `main`関数で`txn.go`を書き込んで`helper.go`を呼び出し、着信コマンド ライン引数を処理します。
+次に、 `main`関数で`txn.go`書き込んで`helper.go`を呼び出し、着信コマンド ライン引数を処理します。
 
 ```go
 package main
@@ -642,7 +648,188 @@ func parseParams() (optimistic bool, alice, bob int) {
 }
 ```
 
-Golangの例には、楽観的トランザクションが既に含まれています。
+Golang の例には、楽観的トランザクションが既に含まれています。
+
+</div>
+
+<div label="Python" value="python">
+
+```python
+import time
+
+import MySQLdb
+import os
+import datetime
+from threading import Thread
+
+REPEATABLE_ERROR_CODE_SET = {
+    9007,  # Transactions in TiKV encounter write conflicts.
+    8028,  # table schema changes
+    8002,  # "SELECT FOR UPDATE" commit conflict
+    8022   # The transaction commit fails and has been rolled back
+}
+
+
+def create_connection():
+    return MySQLdb.connect(
+        host="127.0.0.1",
+        port=4000,
+        user="root",
+        password="",
+        database="bookshop",
+        autocommit=False
+    )
+
+
+def prepare_data() -> None:
+    connection = create_connection()
+    with connection:
+        with connection.cursor() as cursor:
+            cursor.execute("INSERT INTO `books` (`id`, `title`, `type`, `published_at`, `price`, `stock`) "
+                           "values (%s, %s, %s, %s, %s, %s)",
+                           (1, "Designing Data-Intensive Application", "Science & Technology",
+                            datetime.datetime(2018, 9, 1), 100, 10))
+
+            cursor.executemany("INSERT INTO `users` (`id`, `nickname`, `balance`) VALUES (%s, %s, %s)",
+                               [(1, "Bob", 10000), (2, "ALICE", 10000)])
+            connection.commit()
+
+
+def buy_optimistic(thread_id: int, order_id: int, book_id: int, user_id: int, amount: int,
+                   optimistic_retry_times: int = 5) -> None:
+    connection = create_connection()
+
+    txn_log_header = f"/* txn {thread_id} */"
+    if thread_id != 1:
+        txn_log_header = "\t" + txn_log_header
+
+    with connection:
+        with connection.cursor() as cursor:
+            cursor.execute("BEGIN OPTIMISTIC")
+            print(f'{txn_log_header} BEGIN OPTIMISTIC')
+            time.sleep(1)
+
+            try:
+                # read the price of book
+                select_book_for_update = "SELECT `price`, `stock` FROM books WHERE id = %s FOR UPDATE"
+                cursor.execute(select_book_for_update, (book_id,))
+                book = cursor.fetchone()
+                if book is None:
+                    raise Exception("book_id not exist")
+                price, stock = book
+                print(f'{txn_log_header} {select_book_for_update} successful')
+
+                if stock < amount:
+                    raise Exception("book not enough, rollback")
+
+                # update book
+                update_stock = "update `books` set stock = stock - %s where id = %s and stock - %s >= 0"
+                rows_affected = cursor.execute(update_stock, (amount, book_id, amount))
+                print(f'{txn_log_header} {update_stock} successful')
+
+                if rows_affected == 0:
+                    raise Exception("stock not enough, rollback")
+
+                # insert order
+                insert_order = "insert into `orders` (`id`, `book_id`, `user_id`, `quality`) values (%s, %s, %s, %s)"
+                cursor.execute(insert_order, (order_id, book_id, user_id, amount))
+                print(f'{txn_log_header} {insert_order} successful')
+
+                # update user
+                update_user = "update `users` set `balance` = `balance` - %s where id = %s"
+                cursor.execute(update_user, (amount * price, user_id))
+                print(f'{txn_log_header} {update_user} successful')
+
+            except Exception as err:
+                connection.rollback()
+
+                print(f'something went wrong: {err}')
+            else:
+                # important here! you need deal the Exception from the TiDB
+                try:
+                    connection.commit()
+                except MySQLdb.MySQLError as db_err:
+                    code, desc = db_err.args
+                    if code in REPEATABLE_ERROR_CODE_SET and optimistic_retry_times > 0:
+                        print(f'retry, rest {optimistic_retry_times - 1} times, for {code} {desc}')
+                        buy_optimistic(thread_id, order_id, book_id, user_id, amount, optimistic_retry_times - 1)
+
+
+def buy_pessimistic(thread_id: int, order_id: int, book_id: int, user_id: int, amount: int) -> None:
+    connection = create_connection()
+
+    txn_log_header = f"/* txn {thread_id} */"
+    if thread_id != 1:
+        txn_log_header = "\t" + txn_log_header
+
+    with connection:
+        with connection.cursor() as cursor:
+            cursor.execute("BEGIN PESSIMISTIC")
+            print(f'{txn_log_header} BEGIN PESSIMISTIC')
+            time.sleep(1)
+
+            try:
+                # read the price of book
+                select_book_for_update = "SELECT `price` FROM books WHERE id = %s FOR UPDATE"
+                cursor.execute(select_book_for_update, (book_id,))
+                book = cursor.fetchone()
+                if book is None:
+                    raise Exception("book_id not exist")
+                price = book[0]
+                print(f'{txn_log_header} {select_book_for_update} successful')
+
+                # update book
+                update_stock = "update `books` set stock = stock - %s where id = %s and stock - %s >= 0"
+                rows_affected = cursor.execute(update_stock, (amount, book_id, amount))
+                print(f'{txn_log_header} {update_stock} successful')
+
+                if rows_affected == 0:
+                    raise Exception("stock not enough, rollback")
+
+                # insert order
+                insert_order = "insert into `orders` (`id`, `book_id`, `user_id`, `quality`) values (%s, %s, %s, %s)"
+                cursor.execute(insert_order, (order_id, book_id, user_id, amount))
+                print(f'{txn_log_header} {insert_order} successful')
+
+                # update user
+                update_user = "update `users` set `balance` = `balance` - %s where id = %s"
+                cursor.execute(update_user, (amount * price, user_id))
+                print(f'{txn_log_header} {update_user} successful')
+
+            except Exception as err:
+                connection.rollback()
+                print(f'something went wrong: {err}')
+            else:
+                connection.commit()
+
+
+optimistic = os.environ.get('OPTIMISTIC')
+alice = os.environ.get('ALICE')
+bob = os.environ.get('BOB')
+
+if not (optimistic and alice and bob):
+    raise Exception("please use \"OPTIMISTIC=<is_optimistic> ALICE=<alice_num> "
+                    "BOB=<bob_num> python3 txn_example.py\" to start this script")
+
+prepare_data()
+
+if bool(optimistic) is True:
+    buy_func = buy_optimistic
+else:
+    buy_func = buy_pessimistic
+
+bob_thread = Thread(target=buy_func, kwargs={
+    "thread_id": 1, "order_id": 1000, "book_id": 1, "user_id": 1, "amount": int(bob)})
+alice_thread = Thread(target=buy_func, kwargs={
+    "thread_id": 2, "order_id": 1001, "book_id": 1, "user_id": 2, "amount": int(alice)})
+
+bob_thread.start()
+alice_thread.start()
+bob_thread.join(timeout=10)
+alice_thread.join(timeout=10)
+```
+
+Python の例には、楽観的トランザクションが既に含まれています。
 
 </div>
 
@@ -668,6 +855,14 @@ java -jar target/plain-java-txn-0.0.1-jar-with-dependencies.jar ALICE_NUM=4 BOB_
 ```shell
 go build -o bin/txn
 ./bin/txn -a 4 -b 6
+```
+
+</div>
+
+<div label="Python" value="python">
+
+```shell
+OPTIMISTIC=False ALICE=4 BOB=6 python3 txn_example.py
 ```
 
 </div>
@@ -747,6 +942,14 @@ go build -o bin/txn
 
 </div>
 
+<div label="Python" value="python">
+
+```shell
+OPTIMISTIC=False ALICE=4 BOB=7 python3 txn_example.py
+```
+
+</div>
+
 </SimpleTab>
 
 ```sql
@@ -762,7 +965,7 @@ go build -o bin/txn
 /* txn 1 */ ROLLBACK
 ```
 
-`txn 2`はロック資源を先制して取得し、在庫を更新するため、 `affected_rows` in `txn 1`の戻り値は0となり、 `rollback`の処理に入ります。
+`txn 2`ロック資源を先制して取得し、在庫を更新するため、 `affected_rows` in `txn 1`の戻り値は0となり、 `rollback`処理に入ります。
 
 オーダー作成、ユーザー残高控除、書籍在庫控除について確認してみましょう。 Alice は 4 本の注文に成功し、Bob は 7 本の注文に失敗しました。残りの 6 本は予定どおり在庫があります。
 
@@ -795,7 +998,7 @@ mysql> SELECT * FROM users;
 
 ## 楽観的な取引 {#optimistic-transactions}
 
-次のコードは、2 つのスレッドを使用して、悲観的トランザクションの例と同様に、楽観的トランザクションで 2 人のユーザーが同じ本を購入するプロセスをシミュレートします。在庫は残り10冊です。 Bob は 6 を購入し、Alice は 4 を購入します。2 人はほぼ同時に注文を完了します。結局、本は在庫に残っていません。
+次のコードは、2 つのスレッドを使用して、楽観的トランザクションの例と同様に、悲観的トランザクションで 2 人のユーザーが同じ本を購入するプロセスをシミュレートします。在庫は残り10冊です。 Bob は 6 を購入し、Alice は 4 を購入します。2 人はほぼ同時に注文を完了します。結局、本は在庫に残っていません。
 
 ### 楽観的トランザクションの例を書く {#write-an-optimistic-transaction-example}
 
@@ -983,6 +1186,12 @@ public class TxnExample {
 
 </div>
 
+<div label="Python" value="python">
+
+[悲観的トランザクションの例を書く](#write-a-pessimistic-transaction-example)セクションの Python の例は、すでに楽観的トランザクションをサポートしており、変更なしで直接使用できます。
+
+</div>
+
 </SimpleTab>
 
 ### 過剰販売を伴わない例 {#an-example-that-does-not-involve-overselling}
@@ -1005,6 +1214,14 @@ java -jar target/plain-java-txn-0.0.1-jar-with-dependencies.jar ALICE_NUM=4 BOB_
 ```shell
 go build -o bin/txn
 ./bin/txn -a 4 -b 6 -o true
+```
+
+</div>
+
+<div label="Python" value="python">
+
+```shell
+OPTIMISTIC=True ALICE=4 BOB=6 python3 txn_example.py
 ```
 
 </div>
@@ -1036,7 +1253,7 @@ retry 1 times for 9007 Write conflict, txnStartTS=432618733006225412, conflictSt
 
 楽観的トランザクションモードでは、中間状態が必ずしも正しいとは限らないため、悲観的トランザクションモードのように`affected_rows`を通じてステートメントが正常に実行されたかどうかを判断することはできません。トランザクション全体を考慮し、最後の`COMMIT`のステートメントが例外を返すかどうかをチェックして、現在のトランザクションに書き込み競合があるかどうかを判断する必要があります。
 
-上記のSQLログからわかるように、2つのトランザクションが同時に実行され、同じレコードが変更されるため、 `txn 1`のCOMMITの後に`9007 Write conflict`の例外がスローされます。楽観的トランザクション モードでの書き込み競合については、アプリケーション側で安全に再試行できます。 1 回再試行すると、データは正常にコミットされます。最終的な実行結果は期待どおりです。
+上記のSQLログからわかるように、2つのトランザクションが同時に実行され、同じレコードが変更されるため、 `txn 1` COMMITの後に`9007 Write conflict`例外がスローされます。楽観的トランザクション モードでの書き込み競合については、アプリケーション側で安全に再試行できます。 1 回再試行すると、データは正常にコミットされます。最終的な実行結果は期待どおりです。
 
 ```sql
 mysql> SELECT * FROM books;
@@ -1092,6 +1309,14 @@ go build -o bin/txn
 
 </div>
 
+<div label="Python" value="python">
+
+```shell
+OPTIMISTIC=True ALICE=4 BOB=7 python3 txn_example.py
+```
+
+</div>
+
 </SimpleTab>
 
 ```sql
@@ -1113,7 +1338,7 @@ Fail -> out of stock
 /* txn 1 */ ROLLBACK
 ```
 
-上記の SQL ログから、最初の実行で書き込み競合が発生したため、アプリケーション側で`txn 1`が再試行されていることがわかります。最新のスナップショットを比較すると、在庫が不足していることがわかります。アプリケーション側は`out of stock`をスローし、異常終了します。
+上記の SQL ログから、最初の実行で書き込み競合が発生したため、アプリケーション側で`txn 1`が再試行されていることがわかります。最新のスナップショットを比較すると、在庫が不足していることがわかります。アプリケーション側は`out of stock`スローし、異常終了します。
 
 ```sql
 mysql> SELECT * FROM books;

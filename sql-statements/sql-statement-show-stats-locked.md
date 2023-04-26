@@ -5,7 +5,7 @@ summary: An overview of the usage of SHOW STATS_LOCKED for the TiDB database.
 
 # SHOW STATS_LOCKED {#show-stats-locked}
 
-`SHOW STATS_LOCKED`は、統計がロックされているテーブルを示します。
+`SHOW STATS_LOCKED` 、統計がロックされているテーブルを示します。
 
 > **警告：**
 >

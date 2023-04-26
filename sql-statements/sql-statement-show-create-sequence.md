@@ -5,7 +5,7 @@ summary: An overview of the usage of SHOW CREATE SEQUENCE for the TiDB database.
 
 # 作成シーケンスを表示 {#show-create-sequence}
 
-`SHOW CREATE SEQUENCE`は`SHOW CREATE TABLE`と同様にシーケンスの詳細情報を示します。
+`SHOW CREATE SEQUENCE` `SHOW CREATE TABLE`と同様にシーケンスの詳細情報を示します。
 
 ## あらすじ {#synopsis}
 

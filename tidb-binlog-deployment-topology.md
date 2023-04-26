@@ -5,9 +5,9 @@ summary: Learn the deployment topology of TiDB Binlog based on the minimal TiDB 
 
 # TiDB Binlog展開トポロジ {#tidb-binlog-deployment-topology}
 
-このドキュメントでは、最小限の TiDB トポロジに基づく[Binlog](/tidb-binlog/tidb-binlog-overview.md)の展開トポロジについて説明します。
+このドキュメントでは、最小限の TiDB トポロジに基づく[TiDBBinlog](/tidb-binlog/tidb-binlog-overview.md)の展開トポロジについて説明します。
 
-TiDB Binlogは、増分データを複製するために広く使用されているコンポーネントです。ほぼリアルタイムのバックアップとレプリケーションを提供します。
+TiDB Binlog は、増分データを複製するために広く使用されているコンポーネントです。ほぼリアルタイムのバックアップとレプリケーションを提供します。
 
 ## トポロジ情報 {#topology-information}
 
@@ -25,7 +25,7 @@ TiDB Binlogは、増分データを複製するために広く使用されてい
 -   [TiDB Binlogトポロジの単純なテンプレート (ダウンストリーム タイプとして`file`を使用)](https://github.com/pingcap/docs/blob/master/config-templates/simple-file-binlog.yaml)
 -   [TiDB Binlogトポロジの複雑なテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/complex-tidb-binlog.yaml)
 
-上記の TiDB クラスター トポロジ ファイルの構成項目の詳細な説明については、 [TiUP を使用してTiUPをデプロイするためのトポロジコンフィグレーションファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
+上記の TiDB クラスター トポロジ ファイルの構成項目の詳細な説明については、 [TiUPを使用して TiDB をデプロイするためのトポロジコンフィグレーションファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
 
 ### 主なパラメータ {#key-parameters}
 
@@ -33,14 +33,14 @@ TiDB Binlogは、増分データを複製するために広く使用されてい
 
 -   `server_configs.tidb.binlog.enable: true`
 
-    -   binlog サービスを有効にします。
+    -   binlogサービスを有効にします。
     -   デフォルト値: `false` 。
 
 -   `server_configs.tidb.binlog.ignore-error: true`
 
     -   高可用性シナリオでは、この構成を有効にすることをお勧めします。
-    -   `true`に設定すると、エラーが発生すると、TiDB は binlog へのデータの書き込みを停止し、 `tidb_server_critical_error_total`モニタリング メトリックの値に`1`を追加します。
-    -   `false`に設定すると、TiDB が binlog へのデータの書き込みに失敗すると、TiDB サービス全体が停止します。
+    -   `true`に設定すると、エラーが発生すると、TiDB はbinlogへのデータの書き込みを停止し、 `tidb_server_critical_error_total`モニタリング メトリックの値に`1`を追加します。
+    -   `false`に設定すると、TiDB がbinlogへのデータの書き込みに失敗すると、TiDB サービス全体が停止します。
 
 -   `drainer_servers.config.syncer.db-type`
 

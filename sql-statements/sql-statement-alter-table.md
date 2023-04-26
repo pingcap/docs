@@ -7,7 +7,7 @@ summary: An overview of the usage of ALTER TABLE for the TiDB database.
 
 このステートメントは、新しいテーブル構造に準拠するように既存のテーブルを変更します。ステートメント`ALTER TABLE`は、次の目的で使用できます。
 
--   [`ADD`](/sql-statements/sql-statement-add-index.md) 、 [`DROP`](/sql-statements/sql-statement-drop-index.md) 、または[`RENAME`](/sql-statements/sql-statement-rename-index.md)のインデックス
+-   [`ADD`](/sql-statements/sql-statement-add-index.md) 、 [`DROP`](/sql-statements/sql-statement-drop-index.md) 、または[`RENAME`](/sql-statements/sql-statement-rename-index.md)インデックス
 -   [`ADD`](/sql-statements/sql-statement-add-column.md) 、 [`DROP`](/sql-statements/sql-statement-drop-column.md) 、 [`MODIFY`](/sql-statements/sql-statement-modify-column.md)または[`CHANGE`](/sql-statements/sql-statement-change-column.md)列
 -   [`COMPACT`](/sql-statements/sql-statement-alter-table-compact.md)テーブル データ
 
@@ -97,7 +97,7 @@ EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 3 rows in set (0.00 sec)
 ```
 
-ステートメント[`ALTER TABLE .. ADD INDEX`](/sql-statements/sql-statement-add-index.md)を使用して、テーブル t1 にインデックスを追加できます。 `EXPLAIN`は、元のクエリがより効率的なインデックス レンジ スキャンを使用するようになったことを確認します。
+ステートメント[`ALTER TABLE .. ADD INDEX`](/sql-statements/sql-statement-add-index.md)使用して、テーブル t1 にインデックスを追加できます。 `EXPLAIN` 、元のクエリがより効率的なインデックス レンジ スキャンを使用するようになったことを確認します。
 
 {{< copyable "" >}}
 
@@ -142,7 +142,7 @@ ALTER TABLE t1 ADD INDEX (c1), ALGORITHM=INSTANT;
 ERROR 1846 (0A000): ALGORITHM=INSTANT is not supported. Reason: Cannot alter table by INSTANT. Try ALGORITHM=INPLACE.
 ```
 
-ただし、 `INPLACE`操作に`ALGORITHM=COPY`アサーションを使用すると、エラーではなく警告が生成されます。これは、TiDB がアサーションを*このアルゴリズム以上のものとして解釈するためです*。 TiDB が使用するアルゴリズムは MySQL とは異なる可能性があるため、この動作の違いは MySQL の互換性に役立ちます。
+ただし、 `INPLACE`操作に`ALGORITHM=COPY`アサーションを使用すると、エラーではなく警告が生成されます。これは、TiDB がアサーションを*このアルゴリズム以上のもの*として解釈するためです。 TiDB が使用するアルゴリズムは MySQL とは異なる可能性があるため、この動作の違いは MySQL の互換性に役立ちます。
 
 {{< copyable "" >}}
 
@@ -169,7 +169,7 @@ Query OK, 0 rows affected, 1 warning (0.25 sec)
 -   単一の`ALTER TABLE`ステートメントで複数のスキーマ オブジェクトを変更する場合:
 
     -   複数の変更で同じオブジェクトを変更することはサポートされていません。
-    -   TiDB は、**実行前**にテーブル スキーマに従ってステートメントを検証します。たとえば、インデックス`i`がテーブルに存在しないため、 `ALTER TABLE ADD INDEX i(b), DROP INDEX i;`を実行するとエラーが返されます。
+    -   TiDB は、**実行前に**テーブル スキーマに従ってステートメントを検証します。たとえば、インデックス`i`テーブルに存在しないため、 `ALTER TABLE ADD INDEX i(b), DROP INDEX i;`実行するとエラーが返されます。
     -   `ALTER TABLE`ステートメントの場合、TiDB での実行順序は左から右に次々と変更されます。これは、場合によっては MySQL と互換性がありません。
 
 -   主キー列の[再編成データ](/sql-statements/sql-statement-modify-column.md#reorg-data-change)型の変更はサポートされていません。

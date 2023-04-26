@@ -1,18 +1,18 @@
 ---
 title: TIDB_TRX
-summary: Learn the `TIDB_TRX` information_schema table.
+summary: Learn the `TIDB_TRX` INFORMATION_SCHEMA table.
 ---
 
 # TIDB_TRX {#tidb-trx}
 
 `TIDB_TRX`テーブルは、TiDB ノードで現在実行されているトランザクションに関する情報を提供します。
 
-{{< copyable "" >}}
-
 ```sql
-USE information_schema;
-DESC tidb_trx;
+USE INFORMATION_SCHEMA;
+DESC TIDB_TRX;
 ```
+
+出力は次のとおりです。
 
 ```sql
 +-------------------------+-----------------------------------------------------------------+------+------+---------+-------+
@@ -30,6 +30,7 @@ DESC tidb_trx;
 | USER                    | varchar(16)                                                     | YES  |      | NULL    |       |
 | DB                      | varchar(64)                                                     | YES  |      | NULL    |       |
 | ALL_SQL_DIGESTS         | text                                                            | YES  |      | NULL    |       |
+| RELATED_TABLE_IDS       | text                                                            | YES  |      | NULL    |       |
 +-------------------------+-----------------------------------------------------------------+------+------+---------+-------+
 ```
 
@@ -52,21 +53,24 @@ DESC tidb_trx;
 -   `USER` : トランザクションを実行するユーザーの名前。
 -   `DB` : トランザクションが実行されるセッションの現在のデフォルト データベース名。
 -   `ALL_SQL_DIGESTS` : トランザクションによって実行されたステートメントのダイジェスト リスト。リストは、JSON 形式の文字列配列として表示されます。各トランザクションは、最大で最初の 50 ステートメントを記録します。 [`TIDB_DECODE_SQL_DIGESTS`](/functions-and-operators/tidb-functions.md#tidb_decode_sql_digests)関数を使用すると、この列の情報を対応する正規化された SQL ステートメントのリストに変換できます。
+-   `RELATED_TABLE_IDS` : トランザクションがアクセスするテーブル、ビュー、およびその他のオブジェクトの ID。
 
 > **ノート：**
 >
-> -   この表の完全な情報を取得できるのは、 [処理する](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process)特権を持つユーザーのみです。 PROCESS 権限を持たないユーザーは、現在のユーザーが実行したトランザクションの情報のみをクエリできます。
-> -   `CURRENT_SQL_DIGEST`列目と`ALL_SQL_DIGESTS`列目の情報(SQLダイジェスト)は、正規化されたSQL文から計算されたハッシュ値です。 `CURRENT_SQL_DIGEST_TEXT`列の情報と`TIDB_DECODE_SQL_DIGESTS`関数から返された結果は、ステートメントの要約テーブルから内部的に照会されるため、対応するステートメントが内部的に見つからない可能性があります。 SQL ダイジェストとステートメント要約表の詳細な説明については、 [ステートメント要約表](/statement-summary-tables.md)を参照してください。
-> -   [`TIDB_DECODE_SQL_DIGESTS`](/functions-and-operators/tidb-functions.md#tidb_decode_sql_digests)の関数呼び出しのオーバーヘッドは高くなっています。多数のトランザクションの履歴 SQL ステートメントをクエリするために関数が呼び出されると、クエリに時間がかかる場合があります。クラスタが大規模で多数の同時トランザクションがある場合は、 `TIDB_TRX`のテーブル全体をクエリする際に`ALL_SQL_DIGEST`列でこの関数を直接使用しないでください。これは、 `select *, tidb_decode_sql_digests(all_sql_digests) from tidb_trx`のような SQL ステートメントを避けることを意味します。
+> -   この表の完全な情報を取得できるのは、 [プロセス](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process)特権を持つユーザーだけです。 PROCESS 権限を持たないユーザーは、現在のユーザーが実行したトランザクションの情報のみをクエリできます。
+> -   `CURRENT_SQL_DIGEST`目と`ALL_SQL_DIGESTS`列目の情報(SQLダイジェスト)は、正規化されたSQL文から計算されたハッシュ値です。 `CURRENT_SQL_DIGEST_TEXT`列の情報と`TIDB_DECODE_SQL_DIGESTS`関数から返された結果は、ステートメントの要約テーブルから内部的に照会されるため、対応するステートメントが内部的に見つからない可能性があります。 SQL ダイジェストとステートメント要約表の詳細な説明については、 [ステートメント要約表](/statement-summary-tables.md)を参照してください。
+> -   [`TIDB_DECODE_SQL_DIGESTS`](/functions-and-operators/tidb-functions.md#tidb_decode_sql_digests)関数呼び出しのオーバーヘッドは高くなっています。多数のトランザクションの履歴 SQL ステートメントをクエリするために関数が呼び出されると、クエリに時間がかかる場合があります。クラスタが大規模で多数の同時トランザクションがある場合は、 `TIDB_TRX`のテーブル全体をクエリする際に`ALL_SQL_DIGEST`列でこの関数を直接使用しないでください。これは、 `SELECT *, tidb_decode_sql_digests(all_sql_digests) FROM TIDB_TRX`のような SQL ステートメントを避けることを意味します。
 > -   現在、 `TIDB_TRX`テーブルは TiDB 内部トランザクションの情報の表示をサポートしていません。
 
 ## 例 {#example}
 
-{{< copyable "" >}}
+`TIDB_TRX`テーブルをビュー。
 
 ```sql
-select * from information_schema.tidb_trx\G
+SELECT * FROM INFORMATION_SCHEMA.TIDB_TRX\G
 ```
+
+出力は次のとおりです。
 
 ```sql
 *************************** 1. row ***************************
@@ -98,13 +102,13 @@ CURRENT_SQL_DIGEST_TEXT: update `t` set `v` = `v` + ? where `id` = ?
 2 rows in set (0.01 sec)
 ```
 
-この例のクエリ結果から、現在のノードには 2 つの進行中のトランザクションがあることがわかります。 1 つのトランザクションがアイドル状態 ( `STATE`は`Idle`は`NULL` ) で、このトランザクションは 3 `CURRENT_SQL_DIGEST`のステートメントを実行しました ( `ALL_SQL_DIGESTS`リストには、実行された 3 つの SQL ステートメントのダイジェストである 3 つのレコードがあります)。別のトランザクションがステートメントを実行し、ロックを待機しています ( `STATE`は`LockWaiting`は`WAITING_START_TIME`中のロックの開始時刻を示します)。トランザクションは 2 つのステートメントを実行しました。現在実行中のステートメントは``"update `t` set `v` = `v` + ? where `id` = ?"``の形式です。
-
-{{< copyable "" >}}
+この例のクエリ結果から、現在のノードには 2 つの進行中のトランザクションがあることがわかります。 1 つのトランザクションがアイドル状態 ( `STATE`は`Idle` `CURRENT_SQL_DIGEST` `NULL` ) で、このトランザクションは 3 つのステートメントを実行しました ( `ALL_SQL_DIGESTS`リストには、実行された 3 つの SQL ステートメントのダイジェストである 3 つのレコードがあります)。別のトランザクションがステートメントを実行し、ロックを待機しています ( `STATE`は`LockWaiting` `WAITING_START_TIME`待機中のロックの開始時刻を示します)。トランザクションは 2 つのステートメントを実行しました。現在実行中のステートメントは``"update `t` set `v` = `v` + ? where `id` = ?"``の形式です。
 
 ```sql
-select id, all_sql_digests, tidb_decode_sql_digests(all_sql_digests) as all_sqls from information_schema.tidb_trx\G
+SELECT id, all_sql_digests, tidb_decode_sql_digests(all_sql_digests) AS all_sqls FROM INFORMATION_SCHEMA.TIDB_TRX\G
 ```
+
+出力は次のとおりです。
 
 ```sql
 *************************** 1. row ***************************
@@ -123,15 +127,14 @@ all_sql_digests: ["e6f07d43b5c21db0fbb9a31feac2dc599787763393dd5acbfad80e247eb02
 
 `TIDB_TRX`テーブルは、単一の TiDB ノードで実行されているトランザクションに関する情報のみを提供します。クラスター全体のすべての TiDB ノードで実行されているトランザクションの情報を表示する場合は、 `CLUSTER_TIDB_TRX`テーブルにクエリを実行する必要があります。 `TIDB_TRX`テーブルのクエリ結果と比較すると、 `CLUSTER_TIDB_TRX`テーブルのクエリ結果には余分な`INSTANCE`フィールドが含まれています。 `INSTANCE`フィールドには、クラスター内の各ノードの IP アドレスとポートが表示されます。これは、トランザクションが配置されている TiDB ノードを区別するために使用されます。
 
-{{< copyable "" >}}
-
 ```sql
-USE information_schema;
-DESC cluster_tidb_trx;
+USE INFORMATION_SCHEMA;
+DESC CLUSTER_TIDB_TRX;
 ```
 
+出力は次のとおりです。
+
 ```sql
-mysql> desc cluster_tidb_trx;
 +-------------------------+-----------------------------------------------------------------+------+------+---------+-------+
 | Field                   | Type                                                            | Null | Key  | Default | Extra |
 +-------------------------+-----------------------------------------------------------------+------+------+---------+-------+
@@ -148,5 +151,7 @@ mysql> desc cluster_tidb_trx;
 | USER                    | varchar(16)                                                     | YES  |      | NULL    |       |
 | DB                      | varchar(64)                                                     | YES  |      | NULL    |       |
 | ALL_SQL_DIGESTS         | text                                                            | YES  |      | NULL    |       |
+| RELATED_TABLE_IDS       | text                                                            | YES  |      | NULL    |       |
 +-------------------------+-----------------------------------------------------------------+------+------+---------+-------+
+14 rows in set (0.00 sec)
 ```

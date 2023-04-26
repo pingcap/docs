@@ -4,7 +4,7 @@ title: tiup mirror modify
 
 # tiup mirror modify {#tiup-mirror-modify}
 
-`tiup mirror modify`コマンドは、パブリッシュされたコンポーネントを変更するために使用されます。有効なコンポーネント所有者のみが、独自に公開したコンポーネントを変更できます。コンポーネントの公開方法については、 [`publish`コマンド](/tiup/tiup-command-mirror-publish.md) .を参照してください。
+`tiup mirror modify`コマンドは、パブリッシュされたコンポーネントを変更するために使用されます。有効なコンポーネント所有者のみが、独自に公開したコンポーネントを変更できます。コンポーネントの公開方法については、 [`publish`コマンド](/tiup/tiup-command-mirror-publish.md)を参照してください。
 
 ## 構文 {#syntax}
 
@@ -32,13 +32,13 @@ tiup mirror modify <component>[:version] [flags]
 -   コンポーネントが使用不可としてマークされた後、結果リスト`tiup list`に表示されず、コンポーネントの新しいバージョンをインストールすることもできません。
 -   コンポーネントバージョンが使用不可としてマークされると、結果リスト`tiup list <component>`に表示されず、このバージョンをインストールすることもできません。
 -   データ型: `BOOLEAN`
--   このオプションはデフォルトで無効になっており、デフォルト値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加して、値`true`を渡すか、値を何も渡さないようにします。
+-   このオプションはデフォルトで無効になっており、デフォルト値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加して、値`true`渡すか、値を何も渡さないようにします。
 
 ### - 隠れる {#hide}
 
 -   コンポーネントを非表示にするかどうかを指定します 。コンポーネントが非表示の場合、 `tiup list`の結果リストには表示されません。非表示のコンポーネントを表示するには、 `tiup list --all`を使用できます。
 -   データ型: `BOOLEAN`
--   このオプションはデフォルトで無効になっており、デフォルト値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加して、値`true`を渡すか、値を何も渡さないようにします。
+-   このオプションはデフォルトで無効になっており、デフォルト値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加して、値`true`渡すか、値を何も渡さないようにします。
 
 > **ノート：**
 >
@@ -48,7 +48,7 @@ tiup mirror modify <component>[:version] [flags]
 
 -   コンポーネントをスタンドアロンで実行できるかどうかを制御します。このオプションは現在**利用できません**。
 -   データ型: `BOOLEAN`
--   このオプションはデフォルトで無効になっており、デフォルト値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加して、値`true`を渡すか、値を何も渡さないようにします。
+-   このオプションはデフォルトで無効になっており、デフォルト値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加して、値`true`渡すか、値を何も渡さないようにします。
 
 > **ノート：**
 >
@@ -58,7 +58,7 @@ tiup mirror modify <component>[:version] [flags]
 
 -   コマンドが正常に実行された場合、出力はありません。
 -   コンポーネントの所有者がターゲットコンポーネントの変更を許可されていない場合:
-    -   ミラーがリモート ミラーの場合、 TiUPはエラー`Error: The server refused, make sure you have access to this component`を報告します。
-    -   ミラーがローカル ミラーの場合、 TiUPはエラー`Error: the signature is not correct`を報告します。
+    -   ミラーがリモート ミラーの場合、 TiUP はエラー`Error: The server refused, make sure you have access to this component`を報告します。
+    -   ミラーがローカル ミラーの場合、 TiUP はエラー`Error: the signature is not correct`を報告します。
 
 [&lt;&lt; 前のページに戻る - TiUP Mirror コマンド一覧](/tiup/tiup-command-mirror.md#command-list)

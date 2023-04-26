@@ -7,11 +7,11 @@ summary: Learn best practice and strategy for using UUIDs with TiDB.
 
 ## UUID の概要 {#overview-of-uuids}
 
-Universally Unique Identifier (UUID) を`AUTO_INCREMENT`の整数値の代わりに主キーとして使用すると、次の利点があります。
+Universally Unique Identifier (UUID) を`AUTO_INCREMENT`整数値の代わりに主キーとして使用すると、次の利点があります。
 
 -   UUID は、競合の危険を冒さずに複数のシステムで生成できます。場合によっては、これは TiDB へのネットワーク トリップの回数を減らすことができ、パフォーマンスの向上につながることを意味します。
 -   UUID は、ほとんどのプログラミング言語とデータベース システムでサポートされています。
--   URL の一部として使用される場合、UUID は列挙攻撃に対して脆弱ではありません。これに対し、数字が`auto_increment`の場合は、請求書 ID やユーザー ID を推測できます。
+-   URL の一部として使用される場合、UUID は列挙攻撃に対して脆弱ではありません。これに対し、数字が`auto_increment`場合は、請求書 ID やユーザー ID を推測できます。
 
 ## ベストプラクティス {#best-practices}
 
@@ -25,19 +25,19 @@ Universally Unique Identifier (UUID) を`AUTO_INCREMENT`の整数値の代わり
 
 <CustomContent platform="tidb">
 
-[ホットスポット](/best-practices/high-concurrency-best-practices.md)を回避するために、TiDB で`swap_flag`を設定しないことをお勧めします。
+[ホットスポット](/best-practices/high-concurrency-best-practices.md)を回避するために、TiDB で`swap_flag`設定しないことをお勧めします。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-ホットスポットを避けるために、TiDB で`swap_flag`を設定しないことをお勧めします。
+ホットスポットを避けるために、TiDB で`swap_flag`設定しないことをお勧めします。
 
 </CustomContent>
 
 ホットスポットを回避するために、UUID ベースの主キーに明示的に[`CLUSTERED`オプション](/clustered-indexes.md)を設定することもできます。
 
-`swap_flag`の効果を示すために、同じ構造を持つ 2 つのテーブルを次に示します。違いは、 `uuid_demo_1`に挿入されたデータが`UUID_TO_BIN(?, 0)`を使用し、 `uuid_demo_2`が`UUID_TO_BIN(?, 1)`を使用することです。
+`swap_flag`の効果を示すために、同じ構造を持つ 2 つのテーブルを次に示します。違いは、 `uuid_demo_1`に挿入されたデータが`UUID_TO_BIN(?, 0)`を使用し、 `uuid_demo_2` `UUID_TO_BIN(?, 1)`を使用することです。
 
 <CustomContent platform="tidb">
 
@@ -71,4 +71,4 @@ CREATE TABLE `uuid_demo_2` (
 
 ## MySQL の互換性 {#mysql-compatibility}
 
-UUID は MySQL でも使用できます。 `BIN_TO_UUID()`および`UUID_TO_BIN()`関数は、MySQL 8.0 で導入されました。 `UUID()`関数は、以前の MySQL バージョンでも使用できます。
+UUID は MySQL でも使用できます。 `BIN_TO_UUID()`および`UUID_TO_BIN()`関数は、 MySQL 8.0 で導入されました。 `UUID()`関数は、以前の MySQL バージョンでも使用できます。

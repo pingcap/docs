@@ -100,4 +100,4 @@ TiDB バージョン: 4.0.7
 
     -   Dumpling
 
-        -   一部の変数が`NULL` [#150](https://github.com/pingcap/dumpling/pull/150)の場合にDumplingがメタデータの解析に失敗する問題を修正します
+        -   一部の変数が`NULL` [#150](https://github.com/pingcap/dumpling/pull/150)の場合にDumpling がメタデータの解析に失敗する問題を修正します

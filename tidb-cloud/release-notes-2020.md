@@ -34,7 +34,7 @@ summary: Learn about the release notes of TiDB Cloud in 2020.
 -   サインアップ ページの利用規約とプライバシーの場所を更新する
 -   フィードバック フォーム エントランス ウィジェットを追加する
 -   メンバーが [設定] タブで所有者を削除できないようにする
--   TiFlashおよび TiKV ストレージ チャートの指標を変更する
+-   TiFlashおよび TiKVstorageチャートの指標を変更する
 -   デフォルトの TiDB クラスター バージョンを 4.0.8 にアップグレードする
 
 ## 2020年10月12日 {#october-12-2020}
@@ -45,7 +45,7 @@ summary: Learn about the release notes of TiDB Cloud in 2020.
 
 ## 2020年10月2日 {#october-2-2020}
 
--   TiFlashディスク ストレージ構成の修正
+-   TiFlashディスクstorage構成の修正
 
 ## 2020年9月14日 {#september-14-2020}
 

@@ -7,7 +7,7 @@ summary: Learn the deployment topology of TiFlash based on the minimal TiDB topo
 
 このドキュメントでは、最小限の TiDB トポロジに基づく[TiFlash](/tiflash/tiflash-overview.md)の展開トポロジについて説明します。
 
-TiFlashは柱状ストレージ エンジンであり、徐々に標準のクラスタ トポロジになります。リアルタイム HTAP アプリケーションに適しています。
+TiFlashは柱状storageエンジンであり、徐々に標準のクラスタ トポロジになります。リアルタイム HTAP アプリケーションに適しています。
 
 ## トポロジ情報 {#topology-information}
 
@@ -24,13 +24,13 @@ TiFlashは柱状ストレージ エンジンであり、徐々に標準のクラ
 -   [TiFlashトポロジのシンプルなテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/simple-tiflash.yaml)
 -   [TiFlashトポロジの複雑なテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/complex-tiflash.yaml)
 
-上記の TiDB クラスター トポロジ ファイルの構成項目の詳細な説明については、 [TiUP を使用してTiUPをデプロイするためのトポロジコンフィグレーションファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
+上記の TiDB クラスター トポロジ ファイルの構成項目の詳細な説明については、 [TiUPを使用して TiDB をデプロイするためのトポロジコンフィグレーションファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
 
 ### 主なパラメータ {#key-parameters}
 
 -   PD の[配置ルール](/configure-placement-rules.md)機能を有効にするには、構成テンプレートで`replication.enable-placement-rules`の値を`true`に設定します。
 -   `tiflash_servers`のインスタンス レベル`"-host"`構成は、IP のみをサポートし、ドメイン名はサポートしません。
--   詳細なTiFlashパラメータの説明については、 [TiFlash のコンフィグレーション](/tiflash/tiflash-configuration.md)を参照してください。
+-   詳細なTiFlashパラメータの説明については、 [TiFlashのコンフィグレーション](/tiflash/tiflash-configuration.md)を参照してください。
 
 > **ノート：**
 >

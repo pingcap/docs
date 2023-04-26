@@ -11,12 +11,12 @@ summary: Learn how to create a migration task after the DM cluster is deployed.
 
 次のサンプル シナリオに基づいてデータ移行タスクを作成するとします。
 
--   デプロイを有効にした 2 つの MySQL インスタンスと 1 つの TiDB インスタンスをローカルにデプロイする
+-   binlogを有効にした 2 つの MySQL インスタンスと 1 つの TiDB インスタンスをローカルにデプロイ
 -   DM クラスターの DM マスターを使用して、クラスターとデータ移行タスクを管理します。
 
 各ノードの情報は以下の通りです。
 
-| 実例     | サーバーアドレス  | 港    |
+| 実例     | サーバーアドレス  | ポート  |
 | :----- | :-------- | :--- |
 | MySQL1 | 127.0.0.1 | 3306 |
 | MySQL2 | 127.0.0.1 | 3307 |
@@ -73,7 +73,7 @@ TiDBサーバーを実行するには、次のコマンドを使用します。
 {{< copyable "" >}}
 
 ```bash
-wget https://download.pingcap.org/tidb-community-server-v6.5.0-linux-amd64.tar.gz
+wget https://download.pingcap.org/tidb-community-server-v6.5.2-linux-amd64.tar.gz
 tar -xzvf tidb-latest-linux-amd64.tar.gz
 mv tidb-latest-linux-amd64/bin/tidb-server ./
 ./tidb-server
@@ -81,7 +81,7 @@ mv tidb-latest-linux-amd64/bin/tidb-server ./
 
 > **警告：**
 >
-> このドキュメントの TiDB の展開方法は、本番環境または開発環境に**は適用されません**。
+> このドキュメントの TiDB の展開方法は、本番環境または開発環境には**適用されません**。
 
 ## MySQL データ ソースを構成する {#configure-the-mysql-data-source}
 
@@ -192,7 +192,7 @@ MySQL2 の場合、上記のコマンドの構成ファイルを MySQL2 の構�
         target-schema: db_target
     ```
 
-2.  dmctl を使用してタスクを作成するには、上記の構成を`conf/task.yaml`のファイルに書き込みます。
+2.  dmctl を使用してタスクを作成するには、上記の構成を`conf/task.yaml`ファイルに書き込みます。
 
     {{< copyable "" >}}
 

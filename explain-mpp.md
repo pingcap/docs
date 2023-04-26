@@ -5,7 +5,7 @@ summary: Learn about the execution plan information returned by the EXPLAIN stat
 
 # MPP モードの Explain ステートメント {#explain-statements-in-the-mpp-mode}
 
-TiDB は、 [MPP モード](/tiflash/use-tiflash-mpp-mode.md)を使用してクエリを実行することをサポートしています。 MPP モードでは、TiDB オプティマイザーが MPP の実行計画を生成します。 MPP モードは、レプリカが[TiFlash](/tiflash/tiflash-overview.md)にあるテーブルでのみ使用できることに注意してください。
+TiDB は、 [MPP モード](/tiflash/use-tiflash-mpp-mode.md)を使用してクエリを実行することをサポートしています。 MPP モードでは、TiDB オプティマイザーが MPP の実行計画を生成します。 MPP モードは、レプリカが[TiFlash](/tiflash/tiflash-overview.md)あるテーブルでのみ使用できることに注意してください。
 
 このドキュメントの例は、次のサンプル データに基づいています。
 
@@ -33,7 +33,7 @@ EXPLAIN SELECT COUNT(*) FROM t1 GROUP BY id;
 
 ## 交換業者 {#exchange-operators}
 
-`ExchangeReceiver`と`ExchangeSender`は、MPP 実行計画に固有の 2 つの交換演算子です。 `ExchangeReceiver`オペレーターはダウンストリーム クエリ フラグメントからデータを読み取り、 `ExchangeSender`オペレーターはダウンストリーム クエリ フラグメントからアップストリーム クエリ フラグメントにデータを送信します。 MPP モードでは、各 MPP クエリ フラグメントのルート演算子は`ExchangeSender`です。これは、クエリ フラグメントが`ExchangeSender`演算子で区切られていることを意味します。
+`ExchangeReceiver`と`ExchangeSender` 、MPP 実行計画に固有の 2 つの交換演算子です。 `ExchangeReceiver`オペレーターはダウンストリーム クエリ フラグメントからデータを読み取り、 `ExchangeSender`オペレーターはダウンストリーム クエリ フラグメントからアップストリーム クエリ フラグメントにデータを送信します。 MPP モードでは、各 MPP クエリ フラグメントのルート演算子は`ExchangeSender`です。これは、クエリ フラグメントが`ExchangeSender`子で区切られていることを意味します。
 
 以下は、単純な MPP 実行計画です。
 
@@ -146,7 +146,7 @@ EXPLAIN SELECT COUNT(*) FROM t1 a JOIN t1 b ON a.id = b.id;
 
 `EXPLAIN ANALYZE`ステートメントは`EXPLAIN`に似ていますが、ランタイム情報も出力します。
 
-以下は、単純な`EXPLAIN ANALYZE`の例の出力です。
+以下は、単純な`EXPLAIN ANALYZE`例の出力です。
 
 {{< copyable "" >}}
 
@@ -169,4 +169,4 @@ EXPLAIN ANALYZE SELECT COUNT(*) FROM t1 GROUP BY id;
 +------------------------------------+---------+---------+-------------------+---------------+---------------------------------------------------------------------------------------------------+----------------------------------------------------------------+--------+------+
 ```
 
-`EXPLAIN`の出力と比較すると、演算子`ExchangeSender`の`operator info`列にも`tasks`が表示されます。これは、クエリ フラグメントがインスタンス化される MPP タスクの ID を記録します。さらに、各 MPP オペレーターには`execution info`列に`threads`フィールドがあり、TiDB がこのオペレーターを実行するときの操作の並行性を記録します。クラスターが複数のノードで構成されている場合、この同時実行数は、すべてのノードの同時実行数を合計した結果です。
+`EXPLAIN`の出力と比較すると、演算子`ExchangeSender`の`operator info`列にも`tasks`表示されます。これは、クエリ フラグメントがインスタンス化される MPP タスクの ID を記録します。さらに、各 MPP オペレーターには`execution info`列に`threads`フィールドがあり、TiDB がこのオペレーターを実行するときの操作の並行性を記録します。クラスターが複数のノードで構成されている場合、この同時実行数は、すべてのノードの同時実行数を合計した結果です。

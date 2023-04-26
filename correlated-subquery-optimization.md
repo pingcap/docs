@@ -5,13 +5,13 @@ summary: Understand how to decorrelate correlated subqueries.
 
 # 相関サブクエリの非相関 {#decorrelation-of-correlated-subquery}
 
-[サブクエリ関連の最適化](/subquery-optimization.md)は、相関列がない場合に TiDB がサブクエリを処理する方法を示します。相関サブクエリの非相関は複雑であるため、この記事ではいくつかの簡単なシナリオと、最適化ルールが適用される範囲を紹介します。
+[サブクエリ関連の最適化](/subquery-optimization.md)相関列がない場合に TiDB がサブクエリを処理する方法を示します。相関サブクエリの非相関は複雑であるため、この記事ではいくつかの簡単なシナリオと、最適化ルールが適用される範囲を紹介します。
 
 ## 序章 {#introduction}
 
 例として`select * from t1 where t1.a < (select sum(t2.a) from t2 where t2.b = t1.b)`を取り上げます。ここでサブクエリ`t1.a < (select sum(t2.a) from t2 where t2.b = t1.b)`は、クエリ条件`t2.b=t1.b`の相関列を参照しています。この条件はたまたま同等の条件であるため、クエリは`select t1.* from t1, (select b, sum(a) sum_a from t2 group by b) t2 where t1.b = t2.b and t1.a < t2.sum_a;`のように書き換えることができます。このように、相関サブクエリは`JOIN`に書き換えられます。
 
-TiDB がこの書き換えを行う必要がある理由は、サブクエリが実行されるたびに、相関サブクエリが外部クエリの結果にバインドされるためです。上記の例では、 `t1.a`に 1000 万の値がある場合、条件`t2.b=t1.b`は`t1.a`の値によって変化するため、このサブクエリは 1000 万回繰り返されます。何らかの形で相関が解除されると、このサブクエリは 1 回だけ実行されます。
+TiDB がこの書き換えを行う必要がある理由は、サブクエリが実行されるたびに、相関サブクエリが外部クエリの結果にバインドされるためです。上記の例では、 `t1.a`に 1000 万の値がある場合、条件`t2.b=t1.b` `t1.a`の値によって変化するため、このサブクエリは 1000 万回繰り返されます。何らかの形で相関が解除されると、このサブクエリは 1 回だけ実行されます。
 
 ## 制限 {#restrictions}
 
@@ -46,7 +46,7 @@ explain select * from t1 where t1.a < (select sum(t2.a) from t2 where t2.b = t1.
 
 ```
 
-上記は、最適化が有効になる例です。 `HashJoin_11`は通常の`inner join`です。
+上記は、最適化が有効になる例です。 `HashJoin_11`通常の`inner join`です。
 
 次に、 `NO_DECORRELATE`オプティマイザー ヒントを使用して、オプティマイザーにサブクエリの非相関を実行しないように指示できます。
 

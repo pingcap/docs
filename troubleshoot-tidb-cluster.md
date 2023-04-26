@@ -44,7 +44,7 @@ summary: Learn how to diagnose and resolve issues when you use TiDB.
 
 -   ポートが占有されています。
 
-    `lsof -i:port`コマンドを使用して、特定のポートに関連するすべてのネットワークを表示し、 `tidb-server`を開始するポートが占有されていないことを確認します。
+    `lsof -i:port`コマンドを使用して、特定のポートに関連するすべてのネットワークを表示し、 `tidb-server`開始するポートが占有されていないことを確認します。
 
 <!---->
 
@@ -59,7 +59,7 @@ summary: Learn how to diagnose and resolve issues when you use TiDB.
 
 -   起動パラメータのエラー: [TiKV の構成とオプション](/command-line-flags-for-tikv-configuration.md)を参照してください。
 
--   ポートが占有されている: `lsof -i:port`コマンドを使用して、特定のポートに関連するすべてのネットワークを表示し、 `tikv-server`を開始するポートが占有されていないことを確認します。
+-   ポートが占有されている: `lsof -i:port`コマンドを使用して、特定のポートに関連するすべてのネットワークを表示し、 `tikv-server`開始するポートが占有されていないことを確認します。
 
 <!---->
 
@@ -85,13 +85,13 @@ summary: Learn how to diagnose and resolve issues when you use TiDB.
 
 -   ポートが占有されています。
 
-    `lsof -i:port`コマンドを使用して、特定のポートに関連するすべてのネットワークを表示し、 `pd-server`を開始するポートが占有されていないことを確認します。
+    `lsof -i:port`コマンドを使用して、特定のポートに関連するすべてのネットワークを表示し、 `pd-server`開始するポートが占有されていないことを確認します。
 
 ## TiDB/TiKV/PD プロセスが予期せず中断する {#the-tidb-tikv-pd-process-aborts-unexpectedly}
 
 -   プロセスはフォアグラウンドで開始されていますか?クライアントが異常終了するため、プロセスが終了する可能性があります。
 
--   `nohup+&`はコマンド ラインで実行されますか?これにより、hup シグナルを受信するため、プロセスが異常終了する可能性があります。スクリプトに起動コマンドを記述して実行することをお勧めします。
+-   `nohup+&`コマンド ラインで実行されますか?これにより、hup シグナルを受信するため、プロセスが異常終了する可能性があります。スクリプトに起動コマンドを記述して実行することをお勧めします。
 
 ## TiDBpanic {#tidb-panic}
 
@@ -101,16 +101,16 @@ panicログと[問題を作成する](https://github.com/pingcap/tidb/issues/new
 
 オペレーティング システムのネットワーク パラメータが正しいことを確認してください。
 
--   接続文字列のポートは、 `tidb-server`番目の開始ポートと一致しています。
+-   接続文字列のポートは、 `tidb-server`の開始ポートと一致しています。
 -   ファイアウォールが正しく構成されている。
 
 ## 開いているファイルが多すぎる {#open-too-many-files}
 
-プロセスを開始する前に、 `ulimit -n`の結果が十分に大きいことを確認してください。値を`unlimited`以上に設定することをお勧めし`1000000` 。
+プロセスを開始する前に、 `ulimit -n`の結果が十分に大きいことを確認してください。値を`unlimited`以上に設定することをお`1000000`します。
 
 ## データベース アクセスがタイムアウトし、システム負荷が高すぎる {#database-access-times-out-and-the-system-load-is-too-high}
 
-まず、 [遅いクエリ ログ](/identify-slow-queries.md)を確認して、不適切な SQL ステートメントによるものかどうかを確認します。
+まず、 [遅いクエリ ログ](/identify-slow-queries.md)確認して、不適切な SQL ステートメントによるものかどうかを確認します。
 
 問題を解決できなかった場合は、次の情報を提供してください。
 

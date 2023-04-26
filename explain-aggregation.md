@@ -51,7 +51,7 @@ SHOW TABLE t1 REGIONS;
 4 rows in set (0.00 sec)
 ```
 
-次の集計ステートメントで`EXPLAIN`を使用すると、TiKV 内の各リージョンで最初に`└─StreamAgg_8`が実行されることがわかります。次に、各 TiKVリージョンは 1 行を TiDB に送り返し、TiDB は各リージョンからのデータを`StreamAgg_16`に集約します。
+次の集計ステートメントで`EXPLAIN`を使用すると、TiKV 内の各リージョンで最初に`└─StreamAgg_8`が実行されることがわかります。次に、各 TiKVリージョンは1 行を TiDB に送り返し、TiDB は各リージョンからのデータを`StreamAgg_16`に集約します。
 
 {{< copyable "" >}}
 
@@ -71,7 +71,7 @@ EXPLAIN SELECT COUNT(*) FROM t1;
 4 rows in set (0.00 sec)
 ```
 
-これは`EXPLAIN ANALYZE`で観察するのが最も簡単です。ここでは、 `TableFullScan`が使用されており、セカンダリ インデックスがないため、 `actRows`は`SHOW TABLE REGIONS`のリージョンの数と一致します。
+これは`EXPLAIN ANALYZE`で観察するのが最も簡単です。ここでは、 `TableFullScan`が使用されており、セカンダリ インデックスがないため、 `actRows` `SHOW TABLE REGIONS`のリージョンの数と一致します。
 
 ```sql
 EXPLAIN ANALYZE SELECT COUNT(*) FROM t1;
@@ -113,7 +113,7 @@ EXPLAIN SELECT /*+ HASH_AGG() */ count(*) FROM t1;
 4 rows in set (0.00 sec)
 ```
 
-`operator info`は、データの集計に使用されるハッシュ関数が`funcs:count(1)->Column#6`であることを示しています。
+`operator info`データの集計に使用されるハッシュ関数が`funcs:count(1)->Column#6`であることを示しています。
 
 ## ストリーム集計 {#stream-aggregation}
 

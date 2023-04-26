@@ -35,7 +35,7 @@ v6.3.0-DMR の主な新機能と改善点は次のとおりです。
 
     TiDB は[範囲列による分割 (column_list)](/partitioned-table.md#range-columns-partitioning)をサポートしています。 `column_list`は、単一の列に制限されなくなりました。基本的な機能はMySQLと同じです。
 
--   [交換パーティション](/partitioned-table.md#partition-management)は GA [#35996](https://github.com/pingcap/tidb/issues/35996) @ [ymkzpx](https://github.com/ymkzpx)になります
+-   [交換パーティション](/partitioned-table.md#partition-management) GA [#35996](https://github.com/pingcap/tidb/issues/35996) @ [ymkzpx](https://github.com/ymkzpx)になります
 
 -   TiFlash [#5579](https://github.com/pingcap/tiflash/issues/5579) @ [シーライズ](https://github.com/SeaRise)への 2 つ以上の[ウィンドウ関数](/tiflash/tiflash-supported-pushdown-calculations.md)のプッシュダウンをサポート
 
@@ -50,7 +50,7 @@ v6.3.0-DMR の主な新機能と改善点は次のとおりです。
 
     インデックス作成時のバックフィルの速度を向上させるために、TiDB v6.3.0 は、 [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)システム変数が有効になっている場合に`ADD INDEX`および`CREATE INDEX` DDL 操作を高速化します。この機能を有効にすると、インデックスを追加するパフォーマンスが約 3 倍になります。
 
-### 安全 {#security}
+### Security {#security}
 
 -   TiKV は保存時の暗号化に SM4 アルゴリズムをサポートします[#13041](https://github.com/tikv/tikv/issues/13041) @ [嘉陽正](https://github.com/jiayang-zheng)
 
@@ -80,25 +80,25 @@ v6.3.0-DMR の主な新機能と改善点は次のとおりです。
 
 ### パフォーマンス {#performance}
 
--   TiFlashは FastScan の使用方法を変更します (実験的) [#5252](https://github.com/pingcap/tiflash/issues/5252) @ [ホンユニャン](https://github.com/hongyunyan)
+-   TiFlash はFastScan の使用方法を変更します (実験的) [#5252](https://github.com/pingcap/tiflash/issues/5252) @ [ホンユニャン](https://github.com/hongyunyan)
 
-    v6.2.0 では、 TiFlashに FastScan 機能が導入されました。これにより、期待されるパフォーマンスの向上がもたらされますが、使用時の柔軟性に欠けます。したがって、v6.3.0 では、 TiFlashは[FastScanの使い方](/develop/dev-guide-use-fastscan.md)を変更します。FastScan を有効または無効にする`ALTER TABLE ... SET TIFLASH MODE ...`構文は非推奨です。代わりに、システム変数[`tiflash_fastscan`](/system-variables.md#tiflash_fastscan-new-in-v630)を使用して、FastScan を有効にするかどうかを簡単に制御できます。
+    v6.2.0 では、 TiFlashに FastScan 機能が導入されました。これにより、期待されるパフォーマンスの向上がもたらされますが、使用時の柔軟性に欠けます。したがって、v6.3.0 では、 TiFlash は[FastScanの使い方](/develop/dev-guide-use-fastscan.md)を変更します。FastScan を有効または無効にする`ALTER TABLE ... SET TIFLASH MODE ...`構文は非推奨です。代わりに、システム変数[`tiflash_fastscan`](/system-variables.md#tiflash_fastscan-new-in-v630)を使用して、FastScan を有効にするかどうかを簡単に制御できます。
 
     v6.2.0 から v6.3.0 にアップグレードすると、v6.2.0 のすべての FastScan 設定が無効になりますが、データの通常の読み取りには影響しません。変数`tiflash_fastscan`を設定する必要があります。 v6.2.0 以前のバージョンから v6.3.0 にアップグレードする場合、データの一貫性を保つために、デフォルトではすべてのセッションで FastScan 機能が有効になっていません。
 
--   TiFlashは、複数の同時実行タスクのシナリオでデータ スキャンのパフォーマンスを最適化します[#5376](https://github.com/pingcap/tiflash/issues/5376) @ [リン・ジンヘ](https://github.com/JinheLin)
+-   TiFlash は、複数の同時実行タスクのシナリオでデータ スキャンのパフォーマンスを最適化します[#5376](https://github.com/pingcap/tiflash/issues/5376) @ [リン・ジンヘ](https://github.com/JinheLin)
 
-    TiFlashは、同じデータの読み取り操作を組み合わせることで、同じデータの重複読み取りを減らします。リソースのオーバーヘッドと[同時タスクの場合のデータ スキャンのパフォーマンスが向上します。](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)を最適化します。複数の同時タスクの場合、各タスクが同じデータを個別に読み取る必要がある状況を回避し、同時に同じデータを複数読み取る可能性を回避します。
+    TiFlash は、同じデータの読み取り操作を組み合わせることで、同じデータの重複読み取りを減らします。リソースのオーバーヘッドと[同時タスクの場合のデータ スキャンのパフォーマンスが向上します。](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)を最適化します。複数の同時タスクの場合、各タスクが同じデータを個別に読み取る必要がある状況を回避し、同じデータを同時に複数読み取る可能性を回避します。
 
     この機能は v6.2.0 で実験的であり、v6.3.0 で GA になります。
 
--   TiFlashはデータ複製のパフォーマンスを向上させます[#5237](https://github.com/pingcap/tiflash/issues/5237) @ [そよ風](https://github.com/breezewish)
+-   TiFlash はデータ複製のパフォーマンスを向上させます[#5237](https://github.com/pingcap/tiflash/issues/5237) @ [そよ風](https://github.com/breezewish)
 
-    TiFlashは、TiKV からのデータ複製にRaftプロトコルを使用します。 v6.3.0 より前のバージョンでは、大量のレプリカ データをレプリケートするには長い時間がかかることがよくありました。 TiDB v6.3.0 は、 TiFlashデータ複製メカニズムを最適化し、複製速度を大幅に改善します。 BRを使用してデータを回復したり、 TiDB Lightningを使用してデータをインポートしたり、新しいTiFlashレプリカを追加したりすると、 TiFlashレプリカをより迅速に複製できます。よりタイムリーにTiFlashを使用してクエリを実行できます。さらに、 TiFlashレプリカの数をスケールアップ、スケールダウン、または変更すると、 TiFlashレプリカは安全でバランスのとれた状態により速く到達します。
+    TiFlash は、 TiKV からのデータ複製にRaftプロトコルを使用します。 v6.3.0 より前のバージョンでは、大量のレプリカ データをレプリケートするには長い時間がかかることがよくありました。 TiDB v6.3.0 は、 TiFlashデータ複製メカニズムを最適化し、複製速度を大幅に改善します。 BRを使用してデータを回復したり、 TiDB Lightningを使用してデータをインポートしたり、新しいTiFlashレプリカを追加したりすると、 TiFlashレプリカをより迅速に複製できます。よりタイムリーにTiFlashを使用してクエリを実行できます。さらに、 TiFlashレプリカの数をスケールアップ、スケールダウン、または変更すると、 TiFlashレプリカは安全でバランスのとれた状態により速く到達します。
 
--   TiFlashは、個々の`COUNT(DISTINCT)` [#37202](https://github.com/pingcap/tidb/issues/37202) @ [fixdb](https://github.com/fixdb)の 3 段階の集約をサポートします。
+-   TiFlash は、個々の`COUNT(DISTINCT)` [#37202](https://github.com/pingcap/tidb/issues/37202) @ [fixdb](https://github.com/fixdb)の 3 段階の集約をサポートします。
 
-    TiFlashは、 `COUNT(DISTINCT)`を 1 つだけ含むクエリを[三段集計](/system-variables.md#tidb_opt_three_stage_distinct_agg-new-in-v630)に書き換えることをサポートしています。これにより、同時実行性とパフォーマンスが向上します。
+    TiFlash は、 `COUNT(DISTINCT)`を 1 つだけ含むクエリを[三段集計](/system-variables.md#tidb_opt_three_stage_distinct_agg-new-in-v630)に書き換えることをサポートしています。これにより、同時実行性とパフォーマンスが向上します。
 
 -   TiKV はログのリサイクルをサポートします[#214](https://github.com/tikv/raft-engine/issues/214) @ [Lykxサシネーター](https://github.com/LykxSassinator)
 
@@ -106,7 +106,7 @@ v6.3.0-DMR の主な新機能と改善点は次のとおりです。
 
 -   TiDB は null 認識のアンチ結合[#37525](https://github.com/pingcap/tidb/issues/37525) @ [アレナトルクス](https://github.com/Arenatlx)をサポートします
 
-    TiDB v6.3.0 では、新しい結合タイプ[Null 認識アンチ結合 (NAAJ)](/explain-subqueries.md#null-aware-anti-semi-join-not-in-and--all-subqueries)が導入されました。 NAAJ は、コレクション操作を処理するときに、コレクションが空か`NULL`かを認識することができます。これにより、 `IN`や`= ANY`などの操作の実行効率が最適化され、SQL のパフォーマンスが向上します。
+    TiDB v6.3.0 では、新しい結合タイプ[Null 認識アンチ結合 (NAAJ)](/explain-subqueries.md#null-aware-anti-semi-join-not-in-and--all-subqueries)が導入されました。 NAAJ は、コレクション操作を処理するときに、コレクションが空か`NULL`を認識することができます。これにより、 `IN`や`= ANY`などの操作の実行効率が最適化され、SQL のパフォーマンスが向上します。
 
 -   Hash Join [#35439](https://github.com/pingcap/tidb/issues/35439) @ [思い出す](https://github.com/Reminiscent)のビルド終了を制御するためのオプティマイザー ヒントを追加します。
 
@@ -140,7 +140,7 @@ v6.3.0-DMR の主な新機能と改善点は次のとおりです。
 
     オンラインの TiKV ノードに対して[タイタンを無効にする](/storage-engine/titan-configuration.md#disable-titan)を実行できます。
 
--   GlobalStats の準備ができていない場合は、 `static`つのパーティション プルーニングを使用する[#37535](https://github.com/pingcap/tidb/issues/37535) @ [イサール](https://github.com/Yisaer)
+-   GlobalStats の準備ができていない場合は、 `static`パーティション プルーニングを使用する[#37535](https://github.com/pingcap/tidb/issues/37535) @ [イサール](https://github.com/Yisaer)
 
     [`dynamic pruning`](/partitioned-table.md#dynamic-pruning-mode)が有効な場合、オプティマイザは[グローバル統計](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode)に基づいて実行計画を選択します。 GlobalStats が完全に収集される前に、疑似統計を使用すると、パフォーマンスが低下する可能性があります。 v6.3.0 では、GlobalStats が収集される前に動的プルーニングを有効にする場合、 `static`モードを維持することでこの問題に対処しています。 GlobalStats が収集されるまで、TiDB は`static`モードのままです。これにより、パーティションのプルーニング設定を変更する際のパフォーマンスの安定性が確保されます。
 
@@ -152,7 +152,7 @@ v6.3.0-DMR の主な新機能と改善点は次のとおりです。
 
 ### MySQL の互換性 {#mysql-compatibility}
 
--   `REGEXP_INSTR()` 、および`REGEXP_REPLACE()` [#23881](https://github.com/pingcap/tidb/issues/23881) @ `REGEXP_SUBSTR()`の`REGEXP_LIKE()`つの正規表現関数のサポートを追加することにより、MySQL 8.0 の互換性を向上させます[風の語り手](https://github.com/windtalker)
+-   `REGEXP_INSTR()` 、および`REGEXP_REPLACE()` `REGEXP_SUBSTR()` @ [風の語り手](https://github.com/windtalker)の 4 つの正規表現関数のサポート`REGEXP_LIKE()`追加することにより、MySQL 8.0 [#23881](https://github.com/pingcap/tidb/issues/23881)互換性を向上させます。
 
     MySQL との互換性の詳細については、 [MySQL との正規表現の互換性](/functions-and-operators/string-functions.md#regular-expression-compatibility-with-mysql)を参照してください。
 
@@ -162,11 +162,11 @@ v6.3.0-DMR の主な新機能と改善点は次のとおりです。
 
     [`ALTER USER`](/sql-statements/sql-statement-alter-user.md)ステートメントの`ACCOUNT LOCK/UNLOCK`オプションを使用して、既存のユーザーのロック状態を変更できます。
 
--   JSON データ型と JSON関数は GA [#36993](https://github.com/pingcap/tidb/issues/36993) @ [ションジウェイ](https://github.com/xiongjiwei)になります
+-   JSON データ型と JSON関数はGA [#36993](https://github.com/pingcap/tidb/issues/36993) @ [ションジウェイ](https://github.com/xiongjiwei)になります
 
     JSON は、多数のプログラムで採用されている一般的なデータ形式です。 TiDB は、以前のバージョンから実験的機能として[JSON のサポート](/data-type-json.md)を導入しており、MySQL の JSON データ型および一部の JSON関数と互換性があります。
 
-    TiDB v6.3.0 では、JSON データ型と関数が GA になり、TiDB のデータ型が充実し、 [式インデックス](/sql-statements/sql-statement-create-index.md#expression-index)と[生成列](/generated-columns.md)で JSON関数の使用がサポートされ、TiDB と MySQL との互換性がさらに向上します。
+    TiDB v6.3.0 では、JSON データ型と関数がGA になり、TiDB のデータ型が充実し、 [式インデックス](/sql-statements/sql-statement-create-index.md#expression-index)と[生成列](/generated-columns.md)で JSON関数の使用がサポートされ、TiDB と MySQL との互換性がさらに向上します。
 
 ### バックアップと復元 {#backup-and-restore}
 
@@ -174,13 +174,13 @@ v6.3.0-DMR の主な新機能と改善点は次のとおりです。
 
     TiDB クラスターが GCP または Azure にデプロイされている場合は、クラスターを v6.3.0 にアップグレードした後に PITR 機能を使用できます。
 
--   BRは AWS S3 オブジェクト ロック[#13442](https://github.com/tikv/tikv/issues/13442) @ [3ポインター](https://github.com/3pointer)をサポートします
+-   BR はAWS S3 オブジェクト ロック[#13442](https://github.com/tikv/tikv/issues/13442) @ [3ポインター](https://github.com/3pointer)をサポートします
 
     [S3 オブジェクト ロック](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html)を有効にすることで、AWS 上のバックアップ データを改ざんや削除から保護できます。
 
 ### データ移行 {#data-migration}
 
--   TiDB Lightningは[Apache Hive によってエクスポートされた Parquet ファイルを TiDB にインポートする](/tidb-lightning/tidb-lightning-data-source.md#parquet) [#37536](https://github.com/pingcap/tidb/issues/37536) @ [ぶちゅとでごう](https://github.com/buchuitoudegou)をサポート
+-   TiDB Lightning は[Apache Hive によってエクスポートされた Parquet ファイルを TiDB にインポートする](/tidb-lightning/tidb-lightning-data-source.md#parquet) [#37536](https://github.com/pingcap/tidb/issues/37536) @ [ぶちゅとでごう](https://github.com/buchuitoudegou)をサポート
 
 -   DM が新しい構成アイテムを追加します`safe-mode-duration` [#6224](https://github.com/pingcap/tiflow/issues/6224) @ [オクジャン](https://github.com/okJiang)
 
@@ -190,7 +190,7 @@ v6.3.0-DMR の主な新機能と改善点は次のとおりです。
 
 -   TiCDC は、複数の地理的に分散されたデータ ソースからデータを複製できる展開トポロジをサポートします[#5301](https://github.com/pingcap/tiflow/issues/5301) @ [スドジ](https://github.com/sdojjy)
 
-    v6.3.0 以降、単一の[複数のIDCにTiCDCを展開できます](/ticdc/deploy-ticdc.md)クラスターから複数の地理的に分散されたデータ システムへのデータの複製をサポートするには、各 IDC のデータを複製します。この機能は、地理的に分散されたデータ レプリケーションおよび展開トポロジの機能を提供するのに役立ちます。
+    v6.3.0 以降、単一の TiDB クラスターから複数の地理的[複数のIDCにTiCDCを展開できます](/ticdc/deploy-ticdc.md)分散されたデータ システムへのデータの複製をサポートするには、各 IDC のデータを複製します。この機能は、地理的に分散されたデータ レプリケーションおよび展開トポロジの機能を提供するのに役立ちます。
 
 -   TiCDC は、アップストリームとダウンストリーム (同期ポイント) の間でスナップショットの一貫性を維持することをサポートします[#6977](https://github.com/pingcap/tiflow/issues/6977) @ [アスドンメン](https://github.com/asddongmen)
 
@@ -198,7 +198,7 @@ v6.3.0-DMR の主な新機能と改善点は次のとおりです。
 
 -   TiCDC はグレースフル アップグレードをサポート[#4757](https://github.com/pingcap/tiflow/issues/4757) @ [大静脈](https://github.com/overvenus) @ [3AceShowHand](https://github.com/3AceShowHand)
 
-    [TiUP](/ticdc/deploy-ticdc.md#upgrade-cautions) (&gt;=v1.11.0) または[TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/v1.3/configure-a-tidb-cluster#configure-graceful-upgrade-for-ticdc-cluster) (&gt;=v1.3.8) を使用して TiCDC をデプロイすると、TiCDC クラスターを適切にアップグレードできます。アップグレード中、データ レプリケーションのレイテンシーは 30 秒に抑えられます。これにより安定性が向上し、TiCDC がレイテンシーの影響を受けやすいアプリケーションをより適切にサポートできるようになります。
+    [TiUP](/ticdc/deploy-ticdc.md#upgrade-cautions) (&gt;=v1.11.0) または[TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/v1.3/configure-a-tidb-cluster#configure-graceful-upgrade-for-ticdc-cluster) (&gt;=v1.3.8) を使用して TiCDC をデプロイすると、TiCDC クラスターを適切にアップグレードできます。アップグレード中、データ レプリケーションのレイテンシーは30 秒に抑えられます。これにより安定性が向上し、TiCDC がレイテンシーの影響を受けやすいアプリケーションをより適切にサポートできるようになります。
 
 ## 互換性の変更 {#compatibility-changes}
 
@@ -207,10 +207,10 @@ v6.3.0-DMR の主な新機能と改善点は次のとおりです。
 | 変数名                                                                                                                         | タイプを変更 | 説明                                                                                                                                                                                                                                               |
 | --------------------------------------------------------------------------------------------------------------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | [`default_authentication_plugin`](/system-variables.md#default_authentication_plugin)                                       | 修正済み   | 新しいオプション`tidb_sm3_password`を追加します。この変数が`tidb_sm3_password`に設定されている場合、SM3 が暗号化アルゴリズムとして使用されます。                                                                                                                                                    |
-| [`sql_require_primary_key`](/system-variables.md#sql_require_primary_key-new-in-v630)                                       | 新規追加   | テーブルに主キーがあるという要件を適用するかどうかを制御します。この変数を有効にした後、主キーなしでテーブルを作成または変更しようとすると、エラーが発生します。                                                                                                                                                                 |
-| [`tidb_adaptive_closest_read_threshold`](/system-variables.md#tidb_adaptive_closest_read_threshold-new-in-v630)             | 新規追加   | [`tidb_replica_read`](/system-variables.md#tidb_replica_read-new-in-v40)が`closest-adaptive`に設定されている場合に、TiDBサーバーが TiDBサーバーと同じリージョン内のレプリカに読み取り要求を送信することを好むしきい値を制御します。                                                                              |
+| [`sql_require_primary_key`](/system-variables.md#sql_require_primary_key-new-in-v630)                                       | 新規追加   | テーブルに主キーがあるという要件を強制するかどうかを制御します。この変数を有効にした後、主キーなしでテーブルを作成または変更しようとすると、エラーが発生します。                                                                                                                                                                 |
+| [`tidb_adaptive_closest_read_threshold`](/system-variables.md#tidb_adaptive_closest_read_threshold-new-in-v630)             | 新規追加   | [`tidb_replica_read`](/system-variables.md#tidb_replica_read-new-in-v40)が`closest-adaptive`に設定されている場合に、TiDBサーバーがTiDBサーバーと同じリージョン内のレプリカに読み取り要求を送信することを好むしきい値を制御します。                                                                               |
 | [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630) | 新規追加   | 悲観的トランザクションで TiDB が[一意の制約](/constraints.md#pessimistic-transactions)をチェックするタイミングを制御します。                                                                                                                                                          |
-| [`tidb_ddl_disk_quota`](/system-variables.md#tidb_ddl_disk_quota-new-in-v630)                                               | 新規追加   | [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)が有効な場合にのみ有効です。インデックス作成時のバックフィル時のローカル ストレージの使用制限を設定します。                                                                                                |
+| [`tidb_ddl_disk_quota`](/system-variables.md#tidb_ddl_disk_quota-new-in-v630)                                               | 新規追加   | [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)が有効な場合にのみ有効です。インデックス作成時のバックフィル時のローカルstorageの使用制限を設定します。                                                                                               |
 | [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)                                 | 新規追加   | `ADD INDEX`および`CREATE INDEX` DDL 操作のアクセラレーションを有効にして、インデックス作成時のバックフィルの速度を向上させるかどうかを制御します。                                                                                                                                                         |
 | [`tidb_ddl_flashback_concurrency`](/system-variables.md#tidb_ddl_flashback_concurrency-new-in-v630)                         | 新規追加   | `flashback cluster`の並行性を制御します。この変数によって制御される機能は、TiDB v6.3.0 では完全には機能しません。デフォルト値を変更しないでください。                                                                                                                                                       |
 | [`tidb_enable_exchange_partition`](/system-variables.md#tidb_enable_exchange_partition)                                     | 非推奨    | [`exchange partitions with tables`](/partitioned-table.md#partition-management)機能を有効にするかどうかを制御します。デフォルト値は`ON`です。つまり、デフォルトで`exchange partitions with tables`が有効になっています。                                                                           |
@@ -223,20 +223,20 @@ v6.3.0-DMR の主な新機能と改善点は次のとおりです。
 | [`tidb_enable_tiflash_read_for_write_stmt`](/system-variables.md#tidb_enable_tiflash_read_for_write_stmt-new-in-v630)       | 新規追加   | SQL 書き込みステートメントの読み取り要求をTiFlashにプッシュするかどうかを制御します。この変数によって制御される機能は、TiDB v6.3.0 では完全には機能しません。デフォルト値を変更しないでください。                                                                                                                                     |
 | [`tidb_enable_unsafe_substitute`](/system-variables.md#tidb_enable_unsafe_substitute-new-in-v630)                           | 新規追加   | 安全でない方法で式を生成された列に置き換えるかどうかを制御します。                                                                                                                                                                                                                |
 | [`tidb_general_plan_cache_size`](/system-variables.md#tidb_general_plan_cache_size-new-in-v630)                             | 新規追加   | 一般プラン キャッシュでキャッシュできる実行プランの最大数を制御します。この変数によって制御される機能は、TiDB v6.3.0 では完全には機能しません。デフォルト値を変更しないでください。                                                                                                                                                 |
-| [`tidb_last_plan_replayer_token`](/system-variables.md#tidb_enable_unsafe_substitute-new-in-v630)                           | 新規追加   | 読み取り専用で、現在のセッションの最後の`PLAN REPLAYER DUMP`の実行の結果を取得するために使用されます。                                                                                                                                                                                    |
+| [`tidb_last_plan_replayer_token`](/system-variables.md#tidb_enable_unsafe_substitute-new-in-v630)                           | 新規追加   | 読み取り専用で、現在のセッションの最後の`PLAN REPLAYER DUMP`回の実行の結果を取得するために使用されます。                                                                                                                                                                                   |
 | [tidb_max_paging_size](/system-variables.md#tidb_max_paging_size-new-in-v630)                                               | 新規追加   | この変数は、コプロセッサーのページング要求プロセス中に行の最小数を設定するために使用されます。                                                                                                                                                                                                  |
 | [`tidb_opt_force_inline_cte`](/system-variables.md#tidb_opt_force_inline_cte-new-in-v630)                                   | 新規追加   | セッション全体で共通テーブル式 (CTE) をインライン化するかどうかを制御します。デフォルト値は`OFF`です。これは、インライン CTE がデフォルトで強制されないことを意味します。                                                                                                                                                    |
 | [`tidb_opt_three_stage_distinct_agg`](/system-variables.md#tidb_opt_three_stage_distinct_agg-new-in-v630)                   | 新規追加   | MPP モードで`COUNT(DISTINCT)`集約を 3 段階集約に書き換えるかどうかを指定します。デフォルト値は`ON`です。                                                                                                                                                                               |
 | [`tidb_partition_prune_mode`](/system-variables.md#tidb_partition_prune_mode-new-in-v51)                                    | 修正済み   | 動的プルーニングを有効にするかどうかを指定します。 v6.3.0 以降、デフォルト値は`dynamic`に変更されました。                                                                                                                                                                                    |
 | [`tidb_rc_read_check_ts`](/system-variables.md#tidb_rc_read_check_ts-new-in-v600)                                           | 修正済み   | タイムスタンプの取得を最適化するために使用されます。これは、読み取りと書き込みの競合がまれな読み取りコミット分離レベルのシナリオに適しています。この機能は、特定のサービス ワークロードを対象としており、他のシナリオでパフォーマンスの低下を引き起こす可能性があります。このため、v6.3.0 以降、この変数のスコープが`GLOBAL \| SESSION`から`INSTANCE`に変更されました。つまり、特定の TiDB インスタンスに対してこの機能を有効にできるということです。 |
 | [`tidb_rc_write_check_ts`](/system-variables.md#tidb_rc_write_check_ts-new-in-v630)                                         | 新規追加   | タイムスタンプの取得を最適化するために使用され、悲観的トランザクションの RC 分離レベルでポイント書き込み競合がほとんどないシナリオに適しています。この変数を有効にすると、ポイント書き込みステートメントの実行中にグローバル タイムスタンプを取得することによって生じるレイテンシーとオーバーヘッドを回避できます。                                                                                     |
-| [`tiflash_fastscan`](/system-variables.md#tiflash_fastscan-new-in-v630)                                                     | 新規追加   | FastScan を有効にするかどうかを制御します。 [ファストスキャン](/develop/dev-guide-use-fastscan.md)が有効になっている ( `ON`に設定されている) 場合、 TiFlashはより効率的なクエリ パフォーマンスを提供しますが、クエリ結果の精度やデータの一貫性は保証されません。                                                                                |
+| [`tiflash_fastscan`](/system-variables.md#tiflash_fastscan-new-in-v630)                                                     | 新規追加   | FastScan を有効にするかどうかを制御します。 [ファストスキャン](/develop/dev-guide-use-fastscan.md)が有効になっている ( `ON`に設定されている) 場合、 TiFlash はより効率的なクエリ パフォーマンスを提供しますが、クエリ結果の精度やデータの一貫性は保証されません。                                                                               |
 
 ### コンフィグレーションファイルのパラメーター {#configuration-file-parameters}
 
 | コンフィグレーションファイル | コンフィグレーション                                                                                            | タイプを変更 | 説明                                                                                                                                                                                                                          |
 | -------------- | ----------------------------------------------------------------------------------------------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| TiDB           | [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630)                                        | 新規追加   | 一時データを格納するために TiDB が使用するファイル システムの場所を指定します。機能が TiDB ノードのローカル ストレージを必要とする場合、TiDB は対応する一時データをこの場所に格納します。デフォルト値は`/tmp/tidb`です。                                                                                                 |
+| TiDB           | [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630)                                        | 新規追加   | 一時データを格納するために TiDB が使用するファイル システムの場所を指定します。機能が TiDB ノードのローカルstorageを必要とする場合、TiDB は対応する一時データをこの場所に保存します。デフォルト値は`/tmp/tidb`です。                                                                                                |
 | TiKV           | [`auto-adjust-pool-size`](/tikv-configuration-file.md#auto-adjust-pool-size-new-in-v630)              | 新規追加   | スレッド プール サイズを自動的に調整するかどうかを制御します。有効にすると、現在の CPU 使用率に基づいて UnifyReadPool スレッド プール サイズを自動的に調整することで、TiKV の読み取りパフォーマンスが最適化されます。                                                                                                   |
 | TiKV           | [`data-encryption-method`](/tikv-configuration-file.md#data-encryption-method)                        | 修正済み   | 新しい値オプション`sm4-ctr`を導入します。この設定項目が`sm4-ctr`に設定されている場合、データは保存前に SM4 を使用して暗号化されます。                                                                                                                                              |
 | TiKV           | [`enable-log-recycle`](/tikv-configuration-file.md#enable-log-recycle-new-in-v630)                    | 新規追加   | Raft Engineで古いログ ファイルをリサイクルするかどうかを決定します。有効にすると、論理的にパージされたログ ファイルがリサイクル用に予約されます。これにより、書き込みワークロードのロングテールレイテンシーが短縮されます。この構成アイテムは、 [フォーマットバージョン](/tikv-configuration-file.md#format-version-new-in-v630)が &gt;= 2 の場合にのみ使用できます。 |
@@ -244,7 +244,7 @@ v6.3.0-DMR の主な新機能と改善点は次のとおりです。
 | TiKV           | [`log-backup.enable`](/tikv-configuration-file.md#enable-new-in-v620)                                 | 修正済み   | v6.3.0 以降、デフォルト値が`false`から`true`に変更されました。                                                                                                                                                                                   |
 | TiKV           | [`log-backup.max-flush-interval`](/tikv-configuration-file.md#max-flush-interval-new-in-v620)         | 修正済み   | v6.3.0 以降、デフォルト値が`5min`から`3min`に変更されました。                                                                                                                                                                                    |
 | PD             | [有効化診断](/pd-configuration-file.md#enable-diagnostic-new-in-v630)                                      | 新規追加   | 診断機能を有効にするかどうかを制御します。デフォルト値は`false`です。                                                                                                                                                                                      |
-| TiFlash        | [`dt_enable_read_thread`](/tiflash/tiflash-configuration.md#configure-the-tiflash-learnertoml-file)   | 非推奨    | v6.3.0 以降、この構成アイテムは廃止されました。スレッド プールは、デフォルトでストレージ エンジンからの読み取り要求を処理するために使用され、無効にすることはできません。                                                                                                                                   |
+| TiFlash        | [`dt_enable_read_thread`](/tiflash/tiflash-configuration.md#configure-the-tiflash-learnertoml-file)   | 非推奨    | v6.3.0 以降、この構成アイテムは廃止されました。スレッド プールは、デフォルトでstorageエンジンからの読み取り要求を処理するために使用され、無効にすることはできません。                                                                                                                                  |
 | DM             | [`safe-mode-duration`](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced) | 新規追加   | 自動セーフ モードの期間を指定します。                                                                                                                                                                                                         |
 | TiCDC          | [`enable-sync-point`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)          | 新規追加   | 同期点機能を有効にするかどうかを指定します。                                                                                                                                                                                                      |
 | TiCDC          | [`sync-point-interval`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)        | 新規追加   | 同期点が上流と下流のスナップショットを調整する間隔を指定します。                                                                                                                                                                                            |
@@ -253,15 +253,15 @@ v6.3.0-DMR の主な新機能と改善点は次のとおりです。
 
 ### その他 {#others}
 
--   ログ バックアップは、GCS と Azure Blob Storage をバックアップ ストレージとしてサポートします。
+-   ログ バックアップは、GCS と Azure Blob Storage をバックアップstorageとしてサポートします。
 -   ログ バックアップが`exchange partition` DDL と互換性を持つようになりました。
--   [ファストスキャン](/develop/dev-guide-use-fastscan.md)を有効にするために以前に使用された SQL ステートメント`ALTER TABLE ...SET TiFLASH MODE ...`は廃止され、システム変数[`tiflash_fastscan`](/system-variables.md#tiflash_fastscan-new-in-v630)に置き換えられました。 v6.2.0 から v6.3.0 にアップグレードすると、v6.2.0 のすべての FastScan 設定が無効になりますが、データの通常の読み取りには影響しません。この場合、変数[`tiflash_fastscan`](/system-variables.md#tiflash_fastscan-new-in-v630)を構成して FastScan を有効または無効にする必要があります。以前のバージョンから v6.3.0 にアップグレードする場合、FastScan 機能は、データの一貫性を保つためにすべてのセッションに対してデフォルトで有効になっていません。
--   Linux AMD64アーキテクチャでTiFlashを展開するには、CPU が AVX2 命令セットをサポートしている必要があります。 `cat /proc/cpuinfo | grep avx2`を使用して、出力があることを確認します。このような CPU 命令セットを使用することで、TiFlash のベクトル化エンジンはパフォーマンスを向上させることができます。
+-   [ファストスキャン](/develop/dev-guide-use-fastscan.md)を有効にするために以前に使用された SQL ステートメント`ALTER TABLE ...SET TiFLASH MODE ...`廃止され、システム変数[`tiflash_fastscan`](/system-variables.md#tiflash_fastscan-new-in-v630)に置き換えられました。 v6.2.0 から v6.3.0 にアップグレードすると、v6.2.0 のすべての FastScan 設定が無効になりますが、データの通常の読み取りには影響しません。この場合、変数[`tiflash_fastscan`](/system-variables.md#tiflash_fastscan-new-in-v630)を構成して FastScan を有効または無効にする必要があります。以前のバージョンから v6.3.0 にアップグレードする場合、FastScan 機能は、データの一貫性を保つためにすべてのセッションに対してデフォルトで有効になっていません。
+-   Linux AMD64アーキテクチャでTiFlashを展開するには、CPU が AVX2 命令セットをサポートしている必要があります。 `cat /proc/cpuinfo | grep avx2`に出力があることを確認します。 Linux ARM64アーキテクチャでTiFlashを展開するには、CPU が ARMv8 命令セットアーキテクチャをサポートしている必要があります。 `cat /proc/cpuinfo | grep 'crc32' | grep 'asimd'`に出力があることを確認します。命令セットの拡張機能を使用することで、TiFlash のベクトル化エンジンはパフォーマンスを向上させることができます。
 -   TiDB で動作する HAProxy の最小バージョンは v1.5 になりました。 v1.5 から v2.1 までの HAProxy バージョンでは、 `post-41`構成オプションを`mysql-check`に設定する必要があります。 HAProxy v2.2 以降を使用することをお勧めします。
 
 ## 削除された機能 {#removed-feature}
 
-v6.3.0 以降、TiCDC は Pulsar シンクの構成をサポートしなくなりました。 StreamNative が提供する[コップ](https://github.com/streamnative/kop)を代替として使用できます。
+v6.3.0 以降、TiCDC は Pulsar シンクの構成をサポートしなくなりました。 StreamNative が提供する[コップ](https://github.com/streamnative/kop)代替として使用できます。
 
 ## 改良点 {#improvements}
 
@@ -277,7 +277,7 @@ v6.3.0 以降、TiCDC は Pulsar シンクの構成をサポートしなくな�
 
 -   TiKV
 
-    -   1 つのピアが到達不能になった後に Raftstore があまりにも多くのメッセージをブロードキャストするのを避けるために、 `unreachable_backoff`のアイテムの構成をサポートします[#13054](https://github.com/tikv/tikv/issues/13054) @ [5kbps](https://github.com/5kbpers)
+    -   `unreachable_backoff`つのピアが到達不能になった後にRaftstore があまりにも多くのメッセージをブロードキャストするのを避けるために、1 つのアイテムの構成をサポートします[#13054](https://github.com/tikv/tikv/issues/13054) @ [5kbps](https://github.com/5kbpers)
     -   TSO サービス[#12794](https://github.com/tikv/tikv/issues/12794) @ [ピンギュ](https://github.com/pingyu)の耐障害性の向上
     -   RocksDB で同時に実行されるサブ圧縮操作の数を動的に変更するサポート ( `rocksdb.max-sub-compactions` ) [#13145](https://github.com/tikv/tikv/issues/13145) @ [イーサフロー](https://github.com/ethercflow)
     -   空のリージョン[#12421](https://github.com/tikv/tikv/issues/12421) @ [タボキー](https://github.com/tabokie)をマージするパフォーマンスを最適化する
@@ -323,7 +323,7 @@ v6.3.0 以降、TiCDC は Pulsar シンクの構成をサポートしなくな�
 
     -   TiDB Lightning
 
-        -   S3 外部ストレージ URL のクエリ パラメータを追加して、特定のロール[#36891](https://github.com/pingcap/tidb/issues/36891) @ [dsdashun](https://github.com/dsdashun)を引き受けることで、別のアカウントの S3 データへのアクセスをサポートします
+        -   S3 外部storageURL のクエリ パラメータを追加して、特定のロール[#36891](https://github.com/pingcap/tidb/issues/36891) @ [dsdashun](https://github.com/dsdashun)を引き受けることで、別のアカウントの S3 データへのアクセスをサポートします
 
 ## バグの修正 {#bug-fixes}
 
@@ -338,8 +338,8 @@ v6.3.0 以降、TiCDC は Pulsar シンクの構成をサポートしなくな�
     -   一時テーブル[#37201](https://github.com/pingcap/tidb/issues/37201) @ [ルクァンチャオ](https://github.com/lcwangchao)での予期しない`EXCHANGE PARTITION`の動作を修正します
     -   `INFORMATION_SCHEMA.TIKV_REGION_STATUS`をクエリすると間違った結果が返される問題を修正 @ [ジムラーラ](https://github.com/zimulala)
     -   ビューの`EXPLAIN`クエリが権限[#34326](https://github.com/pingcap/tidb/issues/34326) @ [ホーキングレイ](https://github.com/hawkingrei)をチェックしない問題を修正
-    -   JSON `null`を`NULL` [#37852](https://github.com/pingcap/tidb/issues/37852) @ [ヤンケアオ](https://github.com/YangKeao)に更新できない問題を修正
-    -   DDL ジョブの`row_count`つが不正確であるという問題を修正[#25968](https://github.com/pingcap/tidb/issues/25968) @ [定義済み2014](https://github.com/Defined2014)
+    -   JSON `null` `NULL` [#37852](https://github.com/pingcap/tidb/issues/37852) @ [ヤンケアオ](https://github.com/YangKeao)に更新できない問題を修正
+    -   DDL ジョブの`row_count`が不正確であるという問題を修正[#25968](https://github.com/pingcap/tidb/issues/25968) @ [定義済み2014](https://github.com/Defined2014)
     -   `FLASHBACK TABLE`が正しく動作しない問題を修正[#37386](https://github.com/pingcap/tidb/issues/37386) @ [ティアンカイマオ](https://github.com/tiancaiamao)
     -   一般的な MySQL プロトコル[#36731](https://github.com/pingcap/tidb/issues/36731) @ [ドヴィーデン](https://github.com/dveeden)で`prepared`ステートメント フラグの処理に失敗する問題を修正します。
     -   いくつかの極端なケースで、起動時に誤った TiDB ステータスが表示される問題を修正します[#36791](https://github.com/pingcap/tidb/issues/36791) @ [xhebox](https://github.com/xhebox)
@@ -347,13 +347,13 @@ v6.3.0 以降、TiCDC は Pulsar シンクの構成をサポートしなくな�
     -   `UNION` [#31678](https://github.com/pingcap/tidb/issues/31678) @ [cbcwestwolf](https://github.com/cbcwestwolf)のクエリで文字列から文字列へのキャストがうまくいかない問題を修正
     -   TiFlash [#37254](https://github.com/pingcap/tidb/issues/37254) @ [wshwsh12](https://github.com/wshwsh12)のパーティション テーブルで動的モードを有効にしたときに発生する間違った結果を修正します。
     -   TiDB のバイナリ文字列と JSON のキャストと比較が MySQL と互換性がない問題を修正[#31918](https://github.com/pingcap/tidb/issues/31918) [#25053](https://github.com/pingcap/tidb/issues/25053) @ [ヤンケアオ](https://github.com/YangKeao)
-    -   TiDB の`JSON_OBJECTAGG`と`JSON_ARRAYAGG`がバイナリ値[#25053](https://github.com/pingcap/tidb/issues/25053) @ [ヤンケアオ](https://github.com/YangKeao)で MySQL と互換性がない問題を修正
+    -   TiDB の`JSON_OBJECTAGG`と`JSON_ARRAYAGG`バイナリ値[#25053](https://github.com/pingcap/tidb/issues/25053) @ [ヤンケアオ](https://github.com/YangKeao)で MySQL と互換性がない問題を修正
     -   JSON opaque 値の比較でpanic[#37315](https://github.com/pingcap/tidb/issues/37315) @ [ヤンケアオ](https://github.com/YangKeao)が発生する問題を修正
     -   JSON集計関数[#37287](https://github.com/pingcap/tidb/issues/37287) @ [ヤンケアオ](https://github.com/YangKeao)で単精度浮動小数点が使えない問題を修正
     -   `UNION`演算子が予期しない空の結果[#36903](https://github.com/pingcap/tidb/issues/36903) @ [ティアンカイマオ](https://github.com/tiancaiamao)を返す可能性がある問題を修正します
     -   `castRealAsTime`式の結果がMySQL [#37462](https://github.com/pingcap/tidb/issues/37462) @ [mengxin9014](https://github.com/mengxin9014)と矛盾する問題を修正
     -   悲観的DML 操作が一意でないインデックス キー[#36235](https://github.com/pingcap/tidb/issues/36235) @ [エキキシウム](https://github.com/ekexium)をロックする問題を修正します。
-    -   `auto-commit`の変更がトランザクションのコミット動作に影響する問題を修正[#36581](https://github.com/pingcap/tidb/issues/36581) @ [cfzjywxk](https://github.com/cfzjywxk)
+    -   `auto-commit`変更がトランザクションのコミット動作に影響する問題を修正[#36581](https://github.com/pingcap/tidb/issues/36581) @ [cfzjywxk](https://github.com/cfzjywxk)
     -   トランザクション コミットが完了する前に、DML executor を含む`EXPLAIN ANALYZE`ステートメントが結果を返す可能性があるという問題を修正します[#37373](https://github.com/pingcap/tidb/issues/37373) @ [cfzjywxk](https://github.com/cfzjywxk)
     -   UPDATE ステートメントが誤ってプロジェクションを除外する場合があり、これにより`Can't find column`エラー[#37568](https://github.com/pingcap/tidb/issues/37568) @ [アイリンキッド](https://github.com/AilinKid)が発生する問題を修正します。
     -   結合したテーブルの再配置操作が Outer Join 条件[#37238](https://github.com/pingcap/tidb/issues/37238) @ [アイリンキッド](https://github.com/AilinKid)を誤ってプッシュ ダウンする問題を修正します。
@@ -368,7 +368,7 @@ v6.3.0 以降、TiCDC は Pulsar シンクの構成をサポートしなくな�
     -   PD クライアントがデッドロックを引き起こす可能性がある問題を修正します[#13191](https://github.com/tikv/tikv/issues/13191) @ [バタフライ](https://github.com/bufferflies) [#12933](https://github.com/tikv/tikv/issues/12933) @ [バートンチン](https://github.com/BurtonQin)
     -   暗号化を無効にすると TiKV がpanicになることがある問題を修正[#13081](https://github.com/tikv/tikv/issues/13081) @ [嘉陽正](https://github.com/jiayang-zheng)
     -   ダッシュボード[#13086](https://github.com/tikv/tikv/issues/13086) @ [栄光](https://github.com/glorv)の`Unified Read Pool CPU`の間違った表現を修正
-    -   TiKV インスタンスが隔離されたネットワーク環境にある場合、数分間 TiKV サービスが利用できない問題を修正します[#12966](https://github.com/tikv/tikv/issues/12966) @ [コスヴェン](https://github.com/cosven)
+    -   TiKV インスタンスが隔離されたネットワーク環境にある場合、数分間 TiKV サービスが利用できない問題を修正します[#12966](https://github.com/tikv/tikv/issues/12966) @ [コスベン](https://github.com/cosven)
     -   TiKV が誤って`PessimisticLockNotFound`エラー[#13425](https://github.com/tikv/tikv/issues/13425) @ [スティックナーフ](https://github.com/sticnarf)を報告する問題を修正
     -   状況によっては PITR がデータ損失を引き起こす可能性がある問題を修正します[#13281](https://github.com/tikv/tikv/issues/13281) @ [ユジュンセン](https://github.com/YuJuncen)
     -   長い悲観的トランザクション[#13304](https://github.com/tikv/tikv/issues/13304) @ [ユジュンセン](https://github.com/YuJuncen)がある場合にチェックポイントが進められない問題を修正します。
@@ -386,7 +386,7 @@ v6.3.0 以降、TiCDC は Pulsar シンクの構成をサポートしなくな�
     -   ウィンドウ関数により、クエリがキャンセルされたときにTiFlashがクラッシュする可能性がある問題を修正します[#5814](https://github.com/pingcap/tiflash/issues/5814) @ [シーライズ](https://github.com/SeaRise)
     -   `CAST(value AS DATETIME)`の間違ったデータ入力が原因でTiFlash sys CPU [#5097](https://github.com/pingcap/tiflash/issues/5097) @ [xzhangxian1008](https://github.com/xzhangxian1008)が高くなる問題を修正
     -   `CAST(Real/Decimal AS time)`の結果がMySQL [#3779](https://github.com/pingcap/tiflash/issues/3779) @ [mengxin9014](https://github.com/mengxin9014)と矛盾する問題を修正
-    -   ストレージ内の一部の古いデータを削除できない問題を修正[#5570](https://github.com/pingcap/tiflash/issues/5570) @ [ジェイソン・ファン](https://github.com/JaySon-Huang)
+    -   storage内の一部の古いデータを削除できない問題を修正[#5570](https://github.com/pingcap/tiflash/issues/5570) @ [ジェイソン・ファン](https://github.com/JaySon-Huang)
     -   ページ GC がテーブル[#5697](https://github.com/pingcap/tiflash/issues/5697) @ [ジェイソン・ファン](https://github.com/JaySon-Huang)の作成をブロックする可能性がある問題を修正します
     -   `NULL`値[#5859](https://github.com/pingcap/tiflash/issues/5859) @ [ジェイソン・ファン](https://github.com/JaySon-Huang)を含む列でプライマリ インデックスを作成した後に発生するpanicを修正します。
 
@@ -397,7 +397,7 @@ v6.3.0 以降、TiCDC は Pulsar シンクの構成をサポートしなくな�
         -   チェックポイントの情報が古い[#36423](https://github.com/pingcap/tidb/issues/36423) @ [ユジュンセン](https://github.com/YuJuncen)になる問題を修正
         -   復元時に同時実行数が大きすぎるため、リージョンのバランスが取れていない問題を修正します[#37549](https://github.com/pingcap/tidb/issues/37549) @ [3ポインター](https://github.com/3pointer)
         -   クラスタ[#37822](https://github.com/pingcap/tidb/issues/37822) @ [ユジュンセン](https://github.com/YuJuncen)に TiCDC が存在する場合、ログ バックアップ チェックポイント TS が停止する可能性がある問題を修正します。
-        -   外部ストレージの認証キーに特殊文字が含まれているとバックアップや復元に失敗することがある問題を修正[#37469](https://github.com/pingcap/tidb/issues/37469) [@MoCuishle28](https://github.com/MoCuishle28)
+        -   外部storageの認証キーに特殊文字が含まれているとバックアップや復元に失敗することがある問題を修正[#37469](https://github.com/pingcap/tidb/issues/37469) [@MoCuishle28](https://github.com/MoCuishle28)
 
     -   TiCDC
 
@@ -405,21 +405,21 @@ v6.3.0 以降、TiCDC は Pulsar シンクの構成をサポートしなくな�
         -   `cdc cause cli changefeed list`コマンドが失敗した変更フィード[#6334](https://github.com/pingcap/tiflow/issues/6334) @ [アスドンメン](https://github.com/asddongmen)を返さない問題を修正します。
         -   changefeed の初期化が失敗したときに TiCDC が使用できない問題を修正します[#6859](https://github.com/pingcap/tiflow/issues/6859) @ [アスドンメン](https://github.com/asddongmen)
 
-    -   Binlog
+    -   TiDBBinlog
 
-        -   コンプレッサーが gzip [#1152](https://github.com/pingcap/tidb-binlog/issues/1152) @ [リチュンジュ](https://github.com/lichunzhu)に設定されている場合、 DrainerがリクエストをPumpに正しく送信できない問題を修正します。
+        -   コンプレッサーが gzip [#1152](https://github.com/pingcap/tidb-binlog/issues/1152) @ [リチュンジュ](https://github.com/lichunzhu)に設定されている場合、 Drainer がリクエストをPumpに正しく送信できない問題を修正します。
 
     -   TiDB データ移行 (DM)
 
         -   DM が`Specified key was too long`エラー[#5315](https://github.com/pingcap/tiflow/issues/5315) @ [ランス6716](https://github.com/lance6716)を報告する問題を修正
         -   リレーがエラー[#6193](https://github.com/pingcap/tiflow/issues/6193) @ [ランス6716](https://github.com/lance6716)に遭遇したときのゴルーチン リークを修正
         -   `collation_compatible`が`"strict"`に設定されている場合、DM が重複した照合順序[#6832](https://github.com/pingcap/tiflow/issues/6832) @ [ランス6716](https://github.com/lance6716)で SQL を生成する可能性があるという問題を修正します。
-        -   DM-worker ログ[#6628](https://github.com/pingcap/tiflow/issues/6628) @ [lyzx2001](https://github.com/lyzx2001)で「binlog status_vars からタイムゾーンを取得するときにエラーが見つかりました」という警告メッセージの表示を減らします
+        -   DM-worker ログ[#6628](https://github.com/pingcap/tiflow/issues/6628) @ [lyzx2001](https://github.com/lyzx2001)で「 binlog status_vars からタイムゾーンを取得するときにエラーが見つかりました」という警告メッセージの表示を減らします
         -   レプリケーション[#7028](https://github.com/pingcap/tiflow/issues/7028) @ [ランス6716](https://github.com/lance6716)中に latin1 データが破損する可能性がある問題を修正します。
 
     -   TiDB Lightning
 
-        -   TiDB Lightningが、Parquet ファイル[#36980](https://github.com/pingcap/tidb/issues/36980) @ [D3ハンター](https://github.com/D3Hunter)でスラッシュ、数字、または非 ASCII 文字で始まる列をサポートしていないという問題を修正します
+        -   TiDB Lightning が、 Parquet ファイル[#36980](https://github.com/pingcap/tidb/issues/36980) @ [D3ハンター](https://github.com/D3Hunter)でスラッシュ、数字、または非 ASCII 文字で始まる列をサポートしていないという問題を修正します
 
 ## 寄稿者 {#contributors}
 
@@ -438,7 +438,7 @@ TiDB コミュニティの次の貢献者に感謝します。
 -   @ [joycse06](https://github.com/joycse06)
 -   @ [モルゴ](https://github.com/morgo)
 -   @ [猫のみ](https://github.com/onlyacat)
--   @ [ピークジ](https://github.com/peakji)
+-   @ [ピークジー](https://github.com/peakji)
 -   @ [ルズリミアク](https://github.com/rzrymiak)
 -   @ [ティソンクン](https://github.com/tisonkun)
 -   @ [ホワイトキープワーク](https://github.com/whitekeepwork)

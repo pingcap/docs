@@ -5,7 +5,7 @@ summary: Learn to analyze and resolve lock conflicts in TiDB.
 
 # ロック競合のトラブルシューティング {#troubleshoot-lock-conflicts}
 
-TiDB は完全な分散トランザクションをサポートします。 v3.0 以降、TiDB は楽観的トランザクション モードと悲観的的トランザクション モードを提供します。このドキュメントでは、Lock ビューを使用してロックの問題をトラブルシューティングする方法と、楽観的および悲観的トランザクションにおける一般的なロック競合の問題に対処する方法について説明します。
+TiDB は完全な分散トランザクションをサポートします。 v3.0 以降、TiDB は楽観的トランザクション モードと悲観的トランザクション モードを提供します。このドキュメントでは、Lock ビューを使用してロックの問題をトラブルシューティングする方法と、楽観的および悲観的トランザクションにおける一般的なロック競合の問題に対処する方法について説明します。
 
 ## Lock ビューを使用してロックの問題をトラブルシューティングする {#use-lock-view-to-troubleshoot-lock-issues}
 
@@ -77,9 +77,9 @@ select `key`, count(*) as `count` from information_schema.data_lock_waits group 
 
 不測の事態を避けるために、複数のクエリを作成する必要がある場合があります。
 
-頻繁に問題が発生しているキーがわかっている場合は、そのキーをロックしようとするトランザクションの情報を`TIDB_TRX`または`CLUSTER_TIDB_TRX`のテーブルから取得してみることができます。
+頻繁に問題が発生しているキーがわかっている場合は、そのキーをロックしようとするトランザクションの情報を`TIDB_TRX`または`CLUSTER_TIDB_TRX`テーブルから取得してみることができます。
 
-`TIDB_TRX`と`CLUSTER_TIDB_TRX`のテーブルに表示される情報は、クエリが実行された時点で実行されているトランザクションの情報でもあることに注意してください。これらのテーブルには、完了したトランザクションの情報は表示されません。多数の同時トランザクションがある場合、クエリの結果セットも大きくなる可能性があります。 `limit`句または`where`句を使用して、ロック待機時間が長いトランザクションをフィルタリングできます。 Lock ビューで複数のテーブルを結合すると、異なるテーブルのデータが同時に取得されない可能性があるため、異なるテーブルの情報が一致しない可能性があることに注意してください。
+`TIDB_TRX`と`CLUSTER_TIDB_TRX`テーブルに表示される情報は、クエリが実行された時点で実行されているトランザクションの情報でもあることに注意してください。これらのテーブルには、完了したトランザクションの情報は表示されません。多数の同時トランザクションがある場合、クエリの結果セットも大きくなる可能性があります。 `limit`句または`where`句を使用して、ロック待機時間が長いトランザクションをフィルタリングできます。 Lock ビューで複数のテーブルを結合すると、異なるテーブルのデータが同時に取得されない可能性があるため、異なるテーブルの情報が一致しない可能性があることに注意してください。
 
 たとえば、 `where`句を使用してロック待機時間が長いトランザクションをフィルタリングするには、次の SQL ステートメントを実行できます。
 
@@ -155,9 +155,9 @@ CURRENT_SQL_DIGEST_TEXT: update `t` set `v` = `v` + ? where `id` = ? ;
 
 上記のクエリでは、 `CLUSTER_TIDB_TRX`テーブルの`ALL_SQL_DIGESTS`列に対して[`TIDB_DECODE_SQL_DIGESTS`](/functions-and-operators/tidb-functions.md#tidb_decode_sql_digests)関数が使用されています。この関数は、この列 (値は SQL ダイジェストのセット) を正規化された SQL ステートメントに変換しようとします。これにより、読みやすさが向上します。
 
-現在のトランザクションの`start_ts`が不明な場合は、 `TIDB_TRX` / `CLUSTER_TIDB_TRX`テーブルまたは[`PROCESSLIST` / <code>CLUSTER_PROCESSLIST</code>](/information-schema/information-schema-processlist.md)テーブルの情報から見つけることができます。
+現在のトランザクションの`start_ts`不明な場合は、 `TIDB_TRX` / `CLUSTER_TIDB_TRX`テーブルまたは[`PROCESSLIST` / <code>CLUSTER_PROCESSLIST</code>](/information-schema/information-schema-processlist.md)テーブルの情報から見つけることができます。
 
-## 楽観的ロックの競合のトラブルシューティング {#troubleshoot-optimistic-lock-conflicts}
+## 楽観的の競合のトラブルシューティング {#troubleshoot-optimistic-lock-conflicts}
 
 このセクションでは、楽観的トランザクション モードでの一般的なロック競合の問題の解決策を示します。
 
@@ -175,7 +175,7 @@ Txn0 はプリライト フェーズを完了し、コミット フェーズに�
 
     -   Grafana によるデータの監視
 
-        TiDB ダッシュボードの`KV Errors`パネルでは、 `Lock Resolve OPS`の`not_expired` / `resolve`と`KV Backoff OPS`の`tikvLockFast`が、トランザクションでの読み取りと書き込みの競合を確認するために使用できるモニタリング メトリックです。すべてのメトリックの値が増加する場合は、多くの読み取りと書き込みの競合が発生している可能性があります。 `not_expired`の項目は、トランザクションのロックがタイムアウトしていないことを意味します。 `resolve`の項目は、他のトランザクションがロックをクリーンアップしようとしていることを意味します。 `tikvLockFast`の項目は、読み取りと書き込みの競合が発生することを意味します。
+        TiDB ダッシュボードの`KV Errors`パネルでは、 `Lock Resolve OPS`の`not_expired` / `resolve`と`KV Backoff OPS`の`tikvLockFast`が、トランザクションでの読み取りと書き込みの競合を確認するために使用できるモニタリング メトリックです。すべてのメトリックの値が増加する場合は、多くの読み取りと書き込みの競合が発生している可能性があります。 `not_expired`項目は、トランザクションのロックがタイムアウトしていないことを意味します。 `resolve`項目は、他のトランザクションがロックをクリーンアップしようとしていることを意味します。 `tikvLockFast`項目は、読み取りと書き込みの競合が発生することを意味します。
 
         ![KV-backoff-txnLockFast-optimistic](/media/troubleshooting-lock-pic-09.png) ![KV-Errors-resolve-optimistic](/media/troubleshooting-lock-pic-08.png)
 
@@ -215,8 +215,8 @@ Txn0 はプリライト フェーズを完了し、コミット フェーズに�
 -   TiDB コントロールのサブコマンド[`decoder`](/tidb-control.md#the-decoder-command)を使用して、指定したキーに対応する行のテーブル ID と行 ID を表示できます。
 
     ```sh
-    ./tidb-ctl decoder -f table_row -k "t\x00\x00\x00\x00\x00\x00\x00\x1c_r\x00\x00\x00\x00\x00\x00\x00\xfa"
-
+    ./tidb-ctl decoder "t\x00\x00\x00\x00\x00\x00\x00\x1c_r\x00\x00\x00\x00\x00\x00\x00\xfa"
+    format: table_row
     table_id: -9223372036854775780
     row_id: -9223372036854775558
     ```
@@ -227,7 +227,7 @@ Txn0 はプリライト フェーズを完了し、コミット フェーズに�
 
 Grafana の TiDB モニタリングで「KeyIsLocked」エラーがあるかどうかを確認できます。
 
-TiDB ダッシュボードの`KV Errors`パネルには、2 つのモニタリング メトリック`Lock Resolve OPS`と`KV Backoff OPS`があり、トランザクションによって発生した書き込みと書き込みの競合を確認するために使用できます。 `Lock Resolve OPS`を下回った`resolve`項目と`KV Backoff OPS`を下回った`txnLock`項目が明らかに上昇傾向にある場合、「KeyIsLocked」エラーが発生します。 `resolve`はロックをクリアしようとする操作を表し、 `txnLock`は書き込み競合を表します。
+TiDB ダッシュボードの`KV Errors`パネルには、2 つのモニタリング メトリック`Lock Resolve OPS`と`KV Backoff OPS`があり、トランザクションによって発生した書き込みと書き込みの競合を確認するために使用できます。 `Lock Resolve OPS`を下回った`resolve`項目と`KV Backoff OPS`を下回った`txnLock`項目が明らかに上昇傾向にある場合、「KeyIsLocked」エラーが発生します。 `resolve`ロックをクリアしようとする操作を表し、 `txnLock`書き込み競合を表します。
 
 ![KV-backoff-txnLockFast-optimistic-01](/media/troubleshooting-lock-pic-07.png) ![KV-Errors-resolve-optimistic-01](/media/troubleshooting-lock-pic-08.png)
 
@@ -243,7 +243,7 @@ TiDB ダッシュボードの`KV Errors`パネルには、2 つのモニタリ�
 
 次の方法で、「LockNotFound」エラーがあるかどうかを確認できます。
 
-1.  TiDBサーバーのログをビューする
+1.  TiDBサーバーのログをビュー
 
     「TxnLockNotFound」エラーが発生した場合、TiDB ログ メッセージは次のようになります。
 
@@ -254,7 +254,7 @@ TiDB ダッシュボードの`KV Errors`パネルには、2 つのモニタリ�
     -   start_ts: 他のトランザクションによってロックがロールバックされたために`TxnLockNotFound`エラーを出力したトランザクションの start_ts。上記のログでは、 `412720515987275779`が start_ts です。
     -   commit_ts: `TxnLockNotFound`エラーを出力したトランザクションの commit_ts。上記のログでは、 `412720519984971777`が commit_ts です。
 
-2.  TiKVサーバーのログをビューする
+2.  TiKVサーバーのログをビュー
 
     「TxnLockNotFound」エラーが発生した場合、TiKV ログ メッセージは次のようになります。
 
@@ -269,8 +269,8 @@ TiDB ダッシュボードの`KV Errors`パネルには、2 つのモニタリ�
     PD 制御ツールを使用した時間間隔の確認:
 
     ```shell
-    tiup ctl:<cluster-version> pd tso [start_ts]
-    tiup ctl:<cluster-version> pd tso [commit_ts]
+    tiup ctl:v<CLUSTER_VERSION> pd tso [start_ts]
+    tiup ctl:v<CLUSTER_VERSION> pd tso [commit_ts]
     ```
 
 -   トランザクションコミットの効率が悪く、ロックが解除されている可能性があるため、書き込みパフォーマンスが遅いかどうかを確認することをお勧めします。
@@ -291,9 +291,9 @@ TiDB ダッシュボードの`KV Errors`パネルには、2 つのモニタリ�
 
 ### 悲観的ロックの再試行制限に達しました {#pessimistic-lock-retry-limit-reached}
 
-トランザクションの競合が非常に深刻な場合、または書き込みの競合が発生した場合、楽観的トランザクションは直接終了され、悲観的トランザクションは、書き込みの競合がなくなるまで、ストレージから最新のデータを使用してステートメントを再試行します。
+トランザクションの競合が非常に深刻な場合、または書き込みの競合が発生した場合、楽観的トランザクションは直接終了され、悲観的トランザクションは、書き込みの競合がなくなるまで、storageから最新のデータを使用してステートメントを再試行します。
 
-TiDB のロック操作は書き込み操作であり、操作のプロセスは最初に読み取り、次に書き込みであるため、2 つの RPC 要求があります。トランザクションの途中で書き込み競合が発生した場合、TiDB はターゲット キーのロックを再試行し、各再試行は TiDB ログに出力されます。再試行回数は[悲観的-txn.最大再試行回数](/tidb-configuration-file.md#max-retry-count)で決まります。
+TiDB のロック操作は書き込み操作であり、操作のプロセスは最初に読み取り、次に書き込みであるため、2 つの RPC 要求があります。トランザクションの途中で書き込み競合が発生した場合、TiDB はターゲット キーのロックを再試行し、各再試行は TiDB ログに出力されます。再試行回数は[pessimistic-txn.max-retry-count](/tidb-configuration-file.md#max-retry-count)で決まります。
 
 悲観的トランザクション モードでは、書き込み競合が発生し、再試行回数が上限に達すると、次のキーワードを含むエラー メッセージが TiDB ログに表示されます。
 
@@ -346,5 +346,5 @@ TTL manager has timed out, pessimistic locks may expire, please commit or rollba
 
 ソリューション:
 
--   v5.1以降のバージョンでデッドロックの原因を確認することが難しい場合は、 `INFORMATION_SCHEMA.DEADLOCKS`または`INFORMATION_SCHEMA.CLUSTER_DEADLOCKS`のシステムテーブルをクエリして、デッドロック待ちチェーンの情報を取得することをお勧めします。詳細については、 [デッドロック エラー](#deadlock-errors)節および[`DEADLOCKS`テーブル](/information-schema/information-schema-deadlocks.md)文書を参照してください。
+-   v5.1以降のバージョンでデッドロックの原因を確認することが難しい場合は、 `INFORMATION_SCHEMA.DEADLOCKS`または`INFORMATION_SCHEMA.CLUSTER_DEADLOCKS`システムテーブルをクエリして、デッドロック待ちチェーンの情報を取得することをお勧めします。詳細については、 [デッドロック エラー](#deadlock-errors)節および[`DEADLOCKS`テーブル](/information-schema/information-schema-deadlocks.md)文書を参照してください。
 -   デッドロックが頻繁に発生する場合は、アプリケーションのトランザクション クエリ ロジックを調整して、そのような発生を減らす必要があります。

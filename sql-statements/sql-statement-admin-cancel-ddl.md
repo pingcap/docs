@@ -6,7 +6,9 @@ category: reference
 
 # 管理者キャンセル DDL {#admin-cancel-ddl}
 
-`ADMIN CANCEL DDL`ステートメントを使用すると、実行中の DDL ジョブをキャンセルできます。 `job_id`は[`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md)を実行することで見つけることができます。
+`ADMIN CANCEL DDL`ステートメントを使用すると、実行中の DDL ジョブをキャンセルできます。 `job_id` [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md)を実行することで見つけることができます。
+
+`ADMIN CANCEL DDL`ステートメントを使用すると、コミットされているがまだ実行が完了していない DDL ジョブをキャンセルすることもできます。キャンセル後、DDL ジョブを実行する SQL ステートメントは`ERROR 8214 (HY000): Cancelled DDL job`エラーを返します。すでに完了している DDL ジョブをキャンセルすると、 `RESULT`列に`DDL Job:90 not found`エラーが表示されます。これは、ジョブが DDL 待機キューから削除されたことを示します。
 
 ## あらすじ {#synopsis}
 

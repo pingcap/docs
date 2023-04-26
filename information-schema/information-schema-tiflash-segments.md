@@ -64,7 +64,7 @@ DESC tiflash_segments;
 -   `TIDB_DATABASE` : TiDB のデータベース名。セグメントは、このデータベースのテーブルに属しています。
 -   `TIDB_TABLE` : TiDB のテーブル名。セグメントはこのテーブルに属します。
 -   `TABLE_ID` : セグメントが属するテーブルの内部 ID。この ID は、TiDB クラスター内で一意です。
--   `IS_TOMBSTONE` : セグメントが属するテーブルをリサイクルできるかどうかを示します。 `1`は、表をリサイクルできることを示します。 `0`は、テーブルが正常な状態であることを示します。
+-   `IS_TOMBSTONE` : セグメントが属するテーブルをリサイクルできるかどうかを示します。 `1` 、表をリサイクルできることを示します。 `0` 、テーブルが正常な状態であることを示します。
 -   `SEGMENT_ID` : テーブル内で一意のセグメント ID。
 -   `RANGE` : セグメントに含まれるデータの範囲。
 -   `EPOCH` : セグメントの更新されたバージョン。各セグメントのバージョン番号は単調に増加します。
@@ -82,11 +82,11 @@ DESC tiflash_segments;
 -   `DELTA_PERSISTED_DELETE_RANGES` : デルタレイヤーに保持されている削除範囲の数。
 -   `DELTA_CACHE_SIZE` : デルタレイヤーのキャッシュのサイズ (バイト単位)。
 -   `DELTA_INDEX_SIZE` : デルタレイヤーのインデックスのサイズ (バイト単位)。
--   `STABLE_PAGE_ID` : 安定レイヤーのデータのディスク ストレージ ID。
+-   `STABLE_PAGE_ID` : 安定レイヤーのデータのディスクstorageID。
 -   `STABLE_ROWS` : 安定レイヤーの行の総数。
 -   `STABLE_SIZE` : Stableレイヤーのデータの合計サイズ (バイト単位)。
 -   `STABLE_DMFILES` : 安定レイヤーの DMFile の数。
--   `STABLE_DMFILES_ID_0` : 安定レイヤーの最初の DMFile のディスク ストレージ ID。
+-   `STABLE_DMFILES_ID_0` : 安定レイヤーの最初の DMFile のディスクstorageID。
 -   `STABLE_DMFILES_ROWS` : 安定レイヤーの DMFile の合計行数。
 -   `STABLE_DMFILES_SIZE` : 安定レイヤーの DMFile 内のデータの合計サイズ (バイト単位)。
 -   `STABLE_DMFILES_SIZE_ON_DISK` : 安定レイヤーで DMFile が占有するディスク容量 (バイト単位)。

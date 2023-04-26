@@ -9,6 +9,8 @@ TiDB でのウィンドウ関数の使用法は、MySQL 8.0 での使用法と�
 
 ウィンドウ関数はパーサーで追加の単語を予約するため、TiDB はウィンドウ関数を無効にするオプションを提供します。アップグレード後に SQL ステートメントの解析中にエラーが発生した場合は、 `tidb_enable_window_function=0`を設定してみてください。
 
+ウィンドウ関数[ここに記載](/tiflash/tiflash-supported-pushdown-calculations.md) TiFlashにプッシュ ダウンできます。
+
 `GROUP_CONCAT()`と`APPROX_PERCENTILE()`を除いて、TiDB は[`GROUP BY`集計関数](/functions-and-operators/aggregate-group-by-functions.md)をすべてサポートします。さらに、TiDB は次のウィンドウ関数をサポートしています。
 
 | 関数名                                                                                                                 | 機能説明                                                                     |

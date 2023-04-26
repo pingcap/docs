@@ -5,9 +5,9 @@ summary: Learn about TiDB installation packages and the specific components incl
 
 # TiDB インストール パッケージ {#tidb-installation-packages}
 
-[TiUP のオフライン展開](/production-deployment-using-tiup.md#deploy-tiup-offline)の前に、 [公式ダウンロードページ](https://en.pingcap.com/download/)で TiDB のバイナリ パッケージをダウンロードする必要があります。
+[TiUPのオフライン展開](/production-deployment-using-tiup.md#deploy-tiup-offline)の前に、 [公式ダウンロードページ](https://en.pingcap.com/download/)で TiDB のバイナリ パッケージをダウンロードする必要があります。
 
-TiDB バイナリ パッケージは、amd64 および arm64 アーキテクチャで利用できます。どちらのアーキテクチャでも、TiDB は`TiDB-community-server`と`TiDB-community-toolkit`の 2 つのバイナリ パッケージを提供します。
+TiDB バイナリ パッケージは、amd64 および arm64 アーキテクチャで利用できます。どちらのアーキテクチャでも、TiDB は`TiDB-community-server`と`TiDB-community-toolkit` 2 つのバイナリ パッケージを提供します。
 
 `TiDB-community-server`包の内容は以下の通りです。
 
@@ -34,7 +34,7 @@ TiDB バイナリ パッケージは、amd64 および arm64 アーキテクチ�
 
 > **ノート：**
 >
-> `{version}`は、インストールするコンポーネントまたはサーバーのバージョンによって異なります。 `{arch}`はシステムのアーキテクチャに依存し、 `amd64`または`arm64`の場合があります。
+> `{version}`インストールするコンポーネントまたはサーバーのバージョンによって異なります。 `{arch}`システムのアーキテクチャに依存し、 `amd64`または`arm64`の場合があります。
 
 `TiDB-community-toolkit`包の内容は以下の通りです。
 
@@ -62,7 +62,7 @@ TiDB バイナリ パッケージは、amd64 および arm64 アーキテクチ�
 | dba-{バージョン}-linux-{アーチ}.tar.gz                |             |
 | PCC-{バージョン}-linux-{アーキテクチャ}.tar.gz            |             |
 | pump-{バージョン}-linux-{arch}.tar.gz              |             |
-| ドレーン -{バージョン} drainer{アーチ}.tar.gz             |             |
+| drainer-{バージョン}-linux-{アーチ}.tar.gz            |             |
 | binlogctl                                     | v6.0.0 の新機能 |
 | sync_diff_inspector                           |             |
 | レパロ                                           |             |
@@ -77,7 +77,7 @@ TiDB バイナリ パッケージは、amd64 および arm64 アーキテクチ�
 
 > **ノート：**
 >
-> `{version}`は、インストールするツールのバージョンによって異なります。 `{arch}`はシステムのアーキテクチャに依存し、 `amd64`または`arm64`の場合があります。
+> `{version}`インストールするツールのバージョンによって異なります。 `{arch}`システムのアーキテクチャに依存し、 `amd64`または`arm64`の場合があります。
 
 ## こちらもご覧ください {#see-also}
 

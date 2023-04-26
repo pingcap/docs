@@ -10,7 +10,7 @@ title: TiDB 2.1.5 Release Notes
 
 -   SQL オプティマイザー/エグゼキューター
     -   MySQL [#9306](https://github.com/pingcap/tidb/pull/9306)との`SHOW CREATE TABLE`の互換性を向上させるために、列の文字セット情報がテーブルの文字セット情報と同じ場合、 `SHOW CREATE TABLE`で列の文字セット情報を出力しないようにします。
-    -   `Sort` [#9319](https://github.com/pingcap/tidb/pull/9319)の計算ロジックを単純化するために、 `Sort`から`Projection`の演算子から`ScalarFunc`を抽出して計算することにより、場合によっては`Sort`演算子のpanicまたは誤った結果を修正します。
+    -   `Sort` [#9319](https://github.com/pingcap/tidb/pull/9319)の計算panicを単純化するために、 `Sort`から`Projection`演算子から`ScalarFunc`抽出して計算することにより、場合によっては`Sort`演算子のパニックまたは誤った結果を修正します。
     -   `Sort`演算子[#9335](https://github.com/pingcap/tidb/pull/9335) , [#9440](https://github.com/pingcap/tidb/pull/9440)の定数値を持つ並べ替えフィールドを削除します
     -   符号なし整数列にデータを挿入するときのデータ オーバーフローの問題を修正します[#9339](https://github.com/pingcap/tidb/pull/9339)
     -   対象のバイナリの長さが`max_allowed_packet` [#9349](https://github.com/pingcap/tidb/pull/9349)を超える場合は`cast_as_binary` ～ `NULL`を設定します。
@@ -30,7 +30,7 @@ title: TiDB 2.1.5 Release Notes
     -   MySQL クライアントと TiDB 間の接続確立に時間がかかる場合がある問題を修正[#9451](https://github.com/pingcap/tidb/pull/9451)
 -   DDL
     -   `DROP COLUMN`操作[#9352](https://github.com/pingcap/tidb/pull/9352)をキャンセルする際の問題を修正
-    -   `DROP`分割または`ADD`パーティションテーブル操作をキャンセルする際の問題を修正[#9376](https://github.com/pingcap/tidb/pull/9376)
+    -   `DROP`または`ADD`パーティションテーブル操作をキャンセルする際の問題を修正[#9376](https://github.com/pingcap/tidb/pull/9376)
     -   `ADMIN CHECK TABLE`場合によってはデータ インデックスの不整合が誤って報告される問題を修正します[#9399](https://github.com/pingcap/tidb/pull/9399)
     -   `TIMESTAMP`デフォルト値[#9108](https://github.com/pingcap/tidb/pull/9108)のタイムゾーンの問題を修正
 
@@ -49,5 +49,5 @@ title: TiDB 2.1.5 Release Notes
 
 -   雷
     -   クラスター[#4223](https://github.com/tikv/tikv/pull/4223)に廃棄ストアが存在する場合、エラーを報告したり終了したりしません。
--   Binlog
-    -   DDL binlog レプリケーション プランを更新して、DDL イベント レプリケーションの正確性を保証します[#9304](https://github.com/pingcap/tidb/issues/9304)
+-   TiDBBinlog
+    -   DDL binlogレプリケーション プランを更新して、DDL イベント レプリケーションの正確性を保証します[#9304](https://github.com/pingcap/tidb/issues/9304)

@@ -22,12 +22,12 @@ TiUPバージョン: 0.0.3
 
 -   TiKV
 
-    -   TPC-C のパフォーマンスを 20% 向上させる悲観的トランザクションの`pipelined`つの機能をサポートします。リスクは、実行中のロックの失敗により、トランザクションのコミットが失敗する可能性があることです[#6984](https://github.com/tikv/tikv/pull/6984)
+    -   TPC-C のパフォーマンスを 20% 向上させる悲観的トランザクションの`pipelined`機能をサポートします。リスクは、実行中のロックの失敗により、トランザクションのコミットが失敗する可能性があることです[#6984](https://github.com/tikv/tikv/pull/6984)
     -   デフォルトで新しいクラスターで`unify-read-pool`構成項目を有効にし、古いクラスターでこの項目の以前の設定を使用します[#7059](https://github.com/tikv/tikv/pull/7059)
 
 -   ツール
 
-    -   Binlog
+    -   TiDBBinlog
 
         -   Common Name [#934](https://github.com/pingcap/tidb-binlog/pull/934)を検証するための構成アイテムを追加します。
 
@@ -55,7 +55,7 @@ TiUPバージョン: 0.0.3
 
 -   TiKV
 
-    -   TPC-C のパフォーマンスを 20% 向上させる悲観的トランザクションの`pipelined`つの機能をサポートします。リスクは、実行中のロックの失敗により、トランザクションのコミットが失敗する可能性があることです[#6984](https://github.com/tikv/tikv/pull/6984)
+    -   TPC-C のパフォーマンスを 20% 向上させる悲観的トランザクションの`pipelined`機能をサポートします。リスクは、実行中のロックの失敗により、トランザクションのコミットが失敗する可能性があることです[#6984](https://github.com/tikv/tikv/pull/6984)
     -   HTTP ポート[#5393](https://github.com/tikv/tikv/pull/5393)での TLS のサポート
     -   デフォルトで新しいクラスターで`unify-read-pool`構成項目を有効にし、古いクラスターでこの項目の以前の設定を使用します[#7059](https://github.com/tikv/tikv/pull/7059)
 
@@ -65,7 +65,7 @@ TiUPバージョン: 0.0.3
 
 -   ツール
 
-    -   Binlog
+    -   TiDBBinlog
 
         -   Common Name [#934](https://github.com/pingcap/tidb-binlog/pull/934)を検証するための構成アイテムを追加します。
 
@@ -79,7 +79,7 @@ TiUPバージョン: 0.0.3
 
     -   `PREPARE`ステートメントでDDLジョブを実行すると、内部レコードのジョブクエリが正しくないため、アップストリームとダウンストリーム間のレプリケーションが失敗する可能性がある問題を修正[#15435](https://github.com/pingcap/tidb/pull/15435)
     -   サブクエリの結果が`Read Commited`分離レベル[#15471](https://github.com/pingcap/tidb/pull/15471)になる問題を修正
-    -   `INSERT ... VALUES`を使用して`BIT(N)`のデータ型[#15350](https://github.com/pingcap/tidb/pull/15350)を指定すると、誤った動作が発生する可能性がある問題を修正します。
+    -   `INSERT ... VALUES`を使用して`BIT(N)`データ型[#15350](https://github.com/pingcap/tidb/pull/15350)を指定すると、誤った動作が発生する可能性がある問題を修正します。
     -   `ErrorCount`の値が正しく合計されないため、DDL ジョブの内部再試行が期待される結果を完全に達成しないという問題を修正します[#15373](https://github.com/pingcap/tidb/pull/15373)
     -   TiDB がTiFlash [#15505](https://github.com/pingcap/tidb/pull/15505)に接続するとガベージ コレクションが異常に動作することがある問題を修正
     -   Inline Projection の最適化[#15411](https://github.com/pingcap/tidb/pull/15411)が原因で誤った結果が生じる問題を修正
@@ -87,7 +87,7 @@ TiUPバージョン: 0.0.3
     -   負の数がこれらの列に明示的に書き込まれると、 `AutoRandom`属性を持つ列がリベースされる問題を修正します[#15397](https://github.com/pingcap/tidb/pull/15397)
 
 -   TiKV
-    -   Follower Read機能が有効になっているときにリーダーを転送することによって引き起こされる可能性のあるpanicを修正します[#7101](https://github.com/tikv/tikv/pull/7101)
+    -   Follower Readpanicが有効になっているときにリーダーを転送することによって引き起こされる可能性のあるパニックを修正します[#7101](https://github.com/tikv/tikv/pull/7101)
 
 -   ツール
 

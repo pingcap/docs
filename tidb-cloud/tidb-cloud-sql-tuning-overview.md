@@ -17,9 +17,9 @@ SQL ステートメントのパフォーマンスを向上させるには、次�
 -   スキャンしたデータの範囲を最小限に抑えます。最小限の範囲のデータのみをスキャンし、すべてのデータをスキャンしないようにすることが常にベスト プラクティスです。
 -   適切な索引を使用してください。 SQL ステートメントの`WHERE`句の各列について、対応するインデックスがあることを確認してください。そうしないと、 `WHERE`句がテーブル全体をスキャンし、パフォーマンスが低下します。
 -   適切な結合タイプを使用してください。クエリ内の各テーブルのサイズと相関関係に応じて、適切な結合タイプを選択することが非常に重要です。一般に、TiDB のコストベースのオプティマイザは、最適な Join タイプを自動的に選択します。ただし、場合によっては、結合タイプを手動で指定する必要があります。詳細については、 [テーブル結合を使用するステートメントの説明](/explain-joins.md)を参照してください。
--   適切なストレージ エンジンを使用します。 Hybrid Transactional and Analytical Processing (HTAP) ワークロードには、 TiFlashストレージ エンジンを使用することをお勧めします。 [HTAP クエリ](/develop/dev-guide-hybrid-oltp-and-olap-queries.md)を参照してください。
+-   適切なstorageエンジンを使用します。 Hybrid Transactional and Analytical Processing (HTAP) ワークロードには、 TiFlashstorageエンジンを使用することをお勧めします。 [HTAP クエリ](/develop/dev-guide-hybrid-oltp-and-olap-queries.md)を参照してください。
 
-TiDB Cloudは、クラスター上の低速クエリを分析するのに役立ついくつかのツールを提供します。次のセクションでは、スロー クエリを最適化するためのいくつかのアプローチについて説明します。
+TiDB Cloud は、クラスター上の低速クエリを分析するのに役立ついくつかのツールを提供します。次のセクションでは、スロー クエリを最適化するためのいくつかのアプローチについて説明します。
 
 ### [診断] タブでステートメントを使用する {#use-statement-on-the-diagnosis-tab}
 
@@ -69,9 +69,9 @@ SQL クエリが遅くなる最も一般的な理由は、 `SELECT`ステート�
 
 ### インデックスのベスト プラクティス {#index-best-practices}
 
-[インデックス作成のベスト プラクティス](/develop/dev-guide-index-best-practice.md)には、インデックスの作成とインデックスの使用に関するベスト プラクティスが含まれています。
+[インデックス作成のベスト プラクティス](/develop/dev-guide-index-best-practice.md)は、インデックスの作成とインデックスの使用に関するベスト プラクティスが含まれています。
 
-インデックス作成の速度はデフォルトでは控えめであり、一部のシナリオではインデックス作成プロセスを[変数の変更](/develop/dev-guide-optimize-sql-best-practices.md#add-index-best-practices)倍高速化できます。
+インデックス作成の速度はデフォルトでは控えめであり、一部のシナリオではインデックス作成プロセスを[変数の変更](/develop/dev-guide-optimize-sql-best-practices.md#add-index-best-practices)高速化できます。
 
 <!--
 ### Use the slow log memory mapping table
@@ -99,7 +99,7 @@ The recommended analysis process for slow queries is as follows.
 
 Key Visualizer を使用して、TiDB クラスターの使用パターンを分析し、トラフィックのホットスポットをトラブルシューティングできます。このページでは、TiDB クラスターのトラフィックを経時的に視覚的に表現しています。
 
-Key Visualizer で次の情報を確認できます。最初にいくつかの[基本概念](https://docs.pingcap.com/tidb/stable/dashboard-key-visualizer#basic-concepts)を理解する必要があるかもしれません。
+Key Visualizer で次の情報を確認できます。最初にいくつかの[基本概念](https://docs.pingcap.com/tidb/stable/dashboard-key-visualizer#basic-concepts)理解する必要があるかもしれません。
 
 -   時間の経過に伴う全体的なトラフィックを示す大きなヒート マップ
 -   ヒートマップの座標に関する詳細情報

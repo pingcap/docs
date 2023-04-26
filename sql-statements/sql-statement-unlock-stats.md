@@ -5,7 +5,7 @@ summary: An overview of the usage of UNLOCK STATS for the TiDB database.
 
 # 統計のロックを解除 {#unlock-stats}
 
-`UNLOCK STATS`は、1 つまたは複数のテーブルの統計をロック解除するために使用されます。
+`UNLOCK STATS` 1 つまたは複数のテーブルの統計をロック解除するために使用されます。
 
 > **警告：**
 >

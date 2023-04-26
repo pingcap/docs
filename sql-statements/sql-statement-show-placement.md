@@ -5,7 +5,7 @@ summary: The usage of SHOW PLACEMENT in TiDB.
 
 # 配置を表示 {#show-placement}
 
-`SHOW PLACEMENT`は、配置ポリシーからのすべての配置オプションを要約し、標準形式で表示します。
+`SHOW PLACEMENT`配置ポリシーからのすべての配置オプションを要約し、標準形式で表示します。
 
 このステートメントは、配置Driver(PD) が配置のスケジューリングで行った現在の進行状況を`Scheduling_State`フィールドが示す結果セットを返します。
 

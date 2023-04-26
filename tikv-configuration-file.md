@@ -26,7 +26,7 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 
 -   スローログを保存するファイル
 -   この構成項目を設定せずに`log.file.filename`を設定すると、 `log.file.filename`で指定されたログ ファイルにスロー ログが出力されます。
--   `slow-log-file`も`log.file.filename`も設定されていない場合、すべてのログはデフォルトで「stderr」に出力されます。
+-   `slow-log-file`も`log.file.filename`設定されていない場合、すべてのログはデフォルトで「stderr」に出力されます。
 -   両方の設定項目が設定されている場合、通常のログは`log.file.filename`で指定されたログ ファイルに出力され、slow ログは`slow-log-file`で指定されたログ ファイルに出力されます。
 -   デフォルト値: `""`
 
@@ -58,7 +58,7 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 -   オプションの値: `"debug"` 、 `"info"` 、 `"warn"` 、 `"error"` 、 `"fatal"`
 -   デフォルト値: `"info"`
 
-### <code>format</code> <span class="version-mark">v5.4.0 の新機能</span> {#code-format-code-span-class-version-mark-new-in-v5-4-0-span}
+### <code>format</code> <span class="version-mark">v5.4.0 の新</span>機能 {#code-format-code-span-class-version-mark-new-in-v5-4-0-span}
 
 -   ログ形式
 -   オプションの値: `"json"` 、 `"text"`
@@ -70,7 +70,7 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 -   オプションの値: `true` 、 `false`
 -   デフォルト値: `true`
 
-## log.file v5.4.0<span class="version-mark">の新機能</span> {#log-file-span-class-version-mark-new-in-v5-4-0-span}
+## log.file <span class="version-mark">v5.4.0 の新機能</span> {#log-file-span-class-version-mark-new-in-v5-4-0-span}
 
 -   ログファイルに関するコンフィグレーション項目です。
 
@@ -79,14 +79,14 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 -   ログファイル。この設定項目が設定されていない場合、デフォルトで「stderr」にログが出力されます。この設定項目が設定されている場合、ログは対応するファイルに出力されます。
 -   デフォルト値: `""`
 
-### <code>max-size</code><span class="version-mark">新機能</span> {#code-max-size-code-span-class-version-mark-new-in-v5-4-0-span}
+### <span class="version-mark">v5.4.0 の新</span><code>max-size</code> {#code-max-size-code-span-class-version-mark-new-in-v5-4-0-span}
 
 -   1 つのログ ファイルの最大サイズ。ファイル サイズがこの構成項目で設定された値よりも大きい場合、システムは単一のファイルを複数のファイルに自動的に分割します。
 -   デフォルト値: `300`
 -   最大値: `4096`
 -   単位：MiB
 
-### <code>max-days</code><span class="version-mark">新機能</span> {#code-max-days-code-span-class-version-mark-new-in-v5-4-0-span}
+### <span class="version-mark">v5.4.0 の新</span><code>max-days</code> {#code-max-days-code-span-class-version-mark-new-in-v5-4-0-span}
 
 -   TiKV がログ ファイルを保持する最大日数。
     -   構成項目が設定されていない場合、またはその値がデフォルト値`0`に設定されている場合、TiKV はログ ファイルを消去しません。
@@ -100,7 +100,7 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
     -   構成項目が`0`以外の値に設定されている場合、TiKV は最大で`max-backups`で指定された数の古いログ ファイルを保持します。たとえば、値が`7`に設定されている場合、TiKV は最大 7 つの古いログ ファイルを保持します。
 -   デフォルト値: `0`
 
-### <code>pd.enable-forwarding</code><span class="version-mark">新機能</span> {#code-pd-enable-forwarding-code-span-class-version-mark-new-in-v5-0-0-span}
+### <code>pd.enable-forwarding</code> <span class="version-mark">v5.0.0 の新機能</span> {#code-pd-enable-forwarding-code-span-class-version-mark-new-in-v5-0-0-span}
 
 -   ネットワーク分離の可能性がある場合に、TiKV の PD クライアントがフォロワー経由でリーダーにリクエストを転送するかどうかを制御します。
 -   デフォルト値: `false`
@@ -124,7 +124,7 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 
 ### <code>status-addr</code> {#code-status-addr-code}
 
--   構成アイテムは、 `HTTP`のアドレスを介して直接 TiKV ステータスを報告します
+-   構成アイテムは、 `HTTP`アドレスを介して直接 TiKV ステータスを報告します
 
     > **警告：**
     >
@@ -136,7 +136,7 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 
 ### <code>status-thread-pool-size</code> {#code-status-thread-pool-size-code}
 
--   `HTTP`の API サービスのワーカー スレッドの数
+-   `HTTP` API サービスのワーカー スレッドの数
 -   デフォルト値: `1`
 -   最小値: `1`
 
@@ -145,7 +145,6 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 -   gRPC メッセージの圧縮アルゴリズム
 -   オプションの値: `"none"` 、 `"deflate"` 、 `"gzip"`
 -   デフォルト値: `"none"`
--   注: 値が`gzip`の場合、場合によっては対応する圧縮アルゴリズムが完了しない可能性があるため、TiDB ダッシュボードに表示エラーが発生します。値をデフォルトの`none`に戻すと、TiDB ダッシュボードは正常に表示されます。
 
 ### <code>grpc-concurrency</code> {#code-grpc-concurrency-code}
 
@@ -187,7 +186,7 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 
 ### <code>grpc-keepalive-time</code> {#code-grpc-keepalive-time-code}
 
--   その gRPC が`keepalive`の Ping メッセージを送信する時間間隔
+-   その gRPC が`keepalive` Ping メッセージを送信する時間間隔
 -   デフォルト値: `"10s"`
 -   最小値: `"1s"`
 
@@ -254,7 +253,7 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 -   TiKV のRaftメッセージのキュー サイズを指定します。時間内に送信されなかったメッセージが多すぎてバッファがいっぱいになったり、メッセージが破棄されたりする場合は、より大きな値を指定してシステムの安定性を向上させることができます。
 -   デフォルト値: `8192`
 
-### simple <code>simplify-metrics</code> <span class="version-mark">v6.2.0 の新機能</span> {#code-simplify-metrics-code-span-class-version-mark-new-in-v6-2-0-span}
+### <code>simplify-metrics</code> <span class="version-mark">v6.2.0 の新機能</span> {#code-simplify-metrics-code-span-class-version-mark-new-in-v6-2-0-span}
 
 -   返されたモニタリング メトリックを単純化するかどうかを指定します。値を`true`に設定すると、TiKV は一部のメトリックを除外することで、各リクエストに対して返されるデータの量を減らします。
 -   デフォルト値: `false`
@@ -266,7 +265,7 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 
 ## readpool.unified {#readpool-unified}
 
-読み取り要求を処理する単一のスレッド プールに関連するコンフィグレーション項目。このスレッド プールは、4.0 バージョン以降、元のストレージ スレッド プールとコプロセッサ スレッド プールに取って代わります。
+読み取り要求を処理する単一のスレッド プールに関連するコンフィグレーション項目。このスレッド プールは、4.0 バージョン以降、元のstorageスレッド プールとコプロセッサ スレッド プールに取って代わります。
 
 ### <code>min-thread-count</code> {#code-min-thread-count-code}
 
@@ -276,8 +275,12 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 ### <code>max-thread-count</code> {#code-max-thread-count-code}
 
 -   統合読み取りプールまたは UnifyReadPool スレッド プールの最大作業スレッド数。このスレッド プールのサイズを変更する場合は、 [TiKV スレッド プールのパフォーマンス チューニング](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools)を参照してください。
--   値の範囲: `[min-thread-count, MAX(4, CPU)]` 。 `MAX(4, CPU)`で、 `CPU`は CPU コアの数を意味します。 `MAX(4, CPU)`は`4`と`CPU`のうち大きい方の値を取ります。
+-   値の範囲: `[min-thread-count, MAX(4, CPU quota * 10)]` 。 `MAX(4, CPU quota * 10)` `4`と`CPU quota * 10`のうち大きい方の値を取ります。
 -   デフォルト値: MAX(4, CPU * 0.8)
+
+> **ノート：**
+>
+> スレッド数を増やすと、コンテキストの切り替えが多くなり、パフォーマンスが低下する可能性があります。この構成項目の値を変更することはお勧めしません。
 
 ### <code>stack-size</code> {#code-stack-size-code}
 
@@ -299,30 +302,30 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 -   スレッド プール サイズを自動的に調整するかどうかを制御します。有効にすると、現在の CPU 使用率に基づいて UnifyReadPool スレッド プール サイズを自動的に調整することで、TiKV の読み取りパフォーマンスが最適化されます。スレッドプールの可能な範囲は`[max-thread-count, MAX(4, CPU)]`です。最大値は[`max-thread-count`](#max-thread-count)の値と同じです。
 -   デフォルト値: `false`
 
-## readpool.storage {#readpool-storage}
+## 読み取りプール。storage {#readpool-storage}
 
-ストレージ スレッド プールに関連するコンフィグレーションアイテム。
+storageスレッド プールに関連するコンフィグレーションアイテム。
 
 ### <code>use-unified-pool</code> {#code-use-unified-pool-code}
 
--   ストレージ要求に統合スレッド プール ( [`readpool.unified`](#readpoolunified)で構成) を使用するかどうかを決定します。このパラメーターの値が`false`の場合、別のスレッド プールが使用されます。これは、このセクションの残りのパラメーター ( `readpool.storage` ) によって構成されます。
+-   storage要求に統合スレッド プール ( [`readpool.unified`](#readpoolunified)で構成) を使用するかどうかを決定します。このパラメーターの値が`false`の場合、別のスレッド プールが使用されます。これは、このセクションの残りのパラメーター ( `readpool.storage` ) によって構成されます。
 -   デフォルト値: このセクション ( `readpool.storage` ) に他の構成がない場合、デフォルト値は`true`です。それ以外の場合、下位互換性のために、デフォルト値は`false`です。このオプションを有効にする前に、必要に応じて[`readpool.unified`](#readpoolunified)の構成を変更してください。
 
 ### <code>high-concurrency</code> {#code-high-concurrency-code}
 
--   高優先度`read`の要求を処理する同時スレッドの許容数
+-   高優先度`read`要求を処理する同時スレッドの許容数
 -   `8` ≤ `cpu num` ≤ `16`の場合、デフォルト値は`cpu_num * 0.5`です。 `cpu num`が`8`より小さい場合、デフォルト値は`4`です。 `cpu num`が`16`より大きい場合、デフォルト値は`8`です。
 -   最小値: `1`
 
 ### <code>normal-concurrency</code> {#code-normal-concurrency-code}
 
--   通常優先度`read`の要求を処理する同時スレッドの許容数
+-   通常優先度`read`要求を処理する同時スレッドの許容数
 -   `8` ≤ `cpu num` ≤ `16`の場合、デフォルト値は`cpu_num * 0.5`です。 `cpu num`が`8`より小さい場合、デフォルト値は`4`です。 `cpu num`が`16`より大きい場合、デフォルト値は`8`です。
 -   最小値: `1`
 
 ### <code>low-concurrency</code> {#code-low-concurrency-code}
 
--   低優先度`read`の要求を処理する同時スレッドの許容数
+-   低優先度`read`要求を処理する同時スレッドの許容数
 -   `8` ≤ `cpu num` ≤ `16`の場合、デフォルト値は`cpu_num * 0.5`です。 `cpu num`が`8`より小さい場合、デフォルト値は`4`です。 `cpu num`が`16`より大きい場合、デフォルト値は`8`です。
 -   最小値: `1`
 
@@ -407,13 +410,13 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 -   最小値: `"2MB"`
 -   最大値：システムで実行された`ulimit -sH`コマンドの結果として出力される K バイト数。
 
-## 保管所 {#storage}
+## storage {#storage}
 
-ストレージに関するコンフィグレーション項目。
+storageに関するコンフィグレーション項目。
 
 ### <code>data-dir</code> {#code-data-dir-code}
 
--   RocksDB ディレクトリのストレージ パス
+-   RocksDB ディレクトリのstorageパス
 -   デフォルト値: `"./"`
 
 ### <code>scheduler-concurrency</code> {#code-scheduler-concurrency-code}
@@ -426,7 +429,7 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 
 -   スケジューラ スレッド プール内のスレッドの数。スケジューラ スレッドは、主にデータ書き込み前のトランザクションの一貫性をチェックするために使用されます。 CPU コアの数が`16`以上の場合、デフォルト値は`8`です。それ以外の場合、デフォルト値は`4`です。スケジューラ スレッド プールのサイズを変更する場合は、 [TiKV スレッド プールのパフォーマンス チューニング](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools)を参照してください。
 -   デフォルト値: `4`
--   値の範囲: `[1, MAX(4, CPU)]` 。 `MAX(4, CPU)`で、 `CPU`は CPU コアの数を意味します。 `MAX(4, CPU)`は`4`と`CPU`のうち大きい方の値を取ります。
+-   値の範囲: `[1, MAX(4, CPU)]` 。 `MAX(4, CPU)`で、 `CPU` CPU コアの数を意味します。 `MAX(4, CPU)` `4`と`CPU`のうち大きい方の値を取ります。
 
 ### <code>scheduler-pending-write-threshold</code> {#code-scheduler-pending-write-threshold-code}
 
@@ -441,7 +444,7 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 
 ### <code>reserve-space</code> {#code-reserve-space-code}
 
--   TiKV が開始されると、ディスク保護としてディスク上にいくらかのスペースが確保されます。残りのディスク容量が予約容量よりも少ない場合、TiKV は一部の書き込み操作を制限します。予約領域は 2 つの部分に分けられます。予約領域の 80% は、ディスク領域が不足している場合に操作に必要な追加のディスク領域として使用され、残りの 20% は一時ファイルを格納するために使用されます。スペースを再利用するプロセスで、余分なディスク スペースを使用しすぎてストレージが使い果たされた場合、この一時ファイルは、サービスを復元するための最後の保護として機能します。
+-   TiKV が開始されると、ディスク保護としてディスク上にいくらかのスペースが確保されます。残りのディスク容量が予約容量よりも少ない場合、TiKV は一部の書き込み操作を制限します。予約領域は 2 つの部分に分けられます。予約領域の 80% は、ディスク領域が不足している場合に操作に必要な追加のディスク領域として使用され、残りの 20% は一時ファイルを格納するために使用されます。スペースを再利用するプロセスで、余分なディスク スペースを使用しすぎてstorageが使い果たされた場合、この一時ファイルは、サービスを復元するための最後の保護として機能します。
 -   一時ファイルの名前は`space_placeholder_file`で、 `storage.data-dir`ディレクトリにあります。ディスク容量が不足して TiKV がオフラインになった場合、TiKV を再起動すると、一時ファイルは自動的に削除され、TiKV は容量を再利用しようとします。
 -   残りのスペースが不足している場合、TiKV は一時ファイルを作成しません。保護の有効性は、予約済みスペースのサイズに関連しています。予約領域のサイズは、ディスク容量の 5% とこの構成値の間の大きい方の値です。この構成項目の値が`"0MB"`の場合、TiKV はこのディスク保護機能を無効にします。
 -   デフォルト値: `"5GB"`
@@ -451,8 +454,8 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 
 > **警告：**
 >
-> -   新しい TiKV クラスターをデプロイする場合に**のみ**、 `enable-ttl`から`true`または`false`を設定します。既存の TiKV クラスターでこの構成項目の値を変更し<strong>ない</strong>でください。異なる`enable-ttl`値を持つ TiKV クラスターは、異なるデータ形式を使用します。したがって、既存の TiKV クラスターでこの項目の値を変更すると、クラスターはデータをさまざまな形式で保存し、TiKV クラスターを再起動するときに「非 ttl で TTL を有効にできません」というエラーが発生します。
-> -   TiKV クラスターで**のみ**`enable-ttl`を使用します。 <strong>TiDB</strong>ノードを持つクラスターでは、この構成項目を使用しないでください (そのようなクラスターでは`enable-ttl`から`true`を設定することを意味します)。そうしないと、データの破損や TiDB クラスターのアップグレードの失敗などの重大な問題が発生します。
+> -   新しい TiKV クラスターをデプロイする**場合にのみ、** `enable-ttl`から`true`または`false`を設定します。既存の TiKV クラスターでこの構成項目の値を変更<strong>しないでください</strong>。異なる`enable-ttl`値を持つ TiKV クラスターは、異なるデータ形式を使用します。したがって、既存の TiKV クラスターでこの項目の値を変更すると、クラスターはデータをさまざまな形式で保存し、TiKV クラスターを再起動するときに「非 ttl で TTL を有効にできません」というエラーが発生します。
+> -   TiKV クラスター**でのみ**`enable-ttl`を使用します。 TiDB ノードを持つクラスターでは、この構成項目を使用し<strong>ないでください</strong>(そのようなクラスターでは`enable-ttl`から`true`を設定することを意味します)。そうしないと、データの破損や TiDB クラスターのアップグレードの失敗などの重大な問題が発生します。
 
 -   TTL は「Time to live」の略です。この項目を有効にすると、TiKV は TTL に達したデータを自動的に削除します。 TTL の値を設定するには、クライアント経由でデータを書き込むときにリクエストで指定する必要があります。 TTL が指定されていない場合、TiKV は対応するデータを自動的に削除しないことを意味します。
 -   デフォルト値: `false`
@@ -472,13 +475,13 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 
 ### <code>api-version</code> <span class="version-mark">v6.1.0 の新機能</span> {#code-api-version-code-span-class-version-mark-new-in-v6-1-0-span}
 
--   TiKV が RawKV ストアとして機能するときに TiKV が使用するストレージ形式とインターフェイス バージョン。
+-   TiKV が RawKV ストアとして機能するときに TiKV が使用するstorage形式とインターフェイス バージョン。
 -   値のオプション:
     -   `1` : API V1 を使用し、クライアントから渡されたデータをエンコードせず、データをそのまま格納します。 v6.1.0 より前のバージョンでは、TiKV はデフォルトで API V1 を使用します。
     -   `2` : API V2 を使用:
         -   データは Multi-Version Concurrency Control (MVCC) 形式で保存され、タイムスタンプは tikv-server によって PD (TSO) から取得されます。
         -   データはさまざまな用途に応じてスコープが設定され、API V2 は、単一のクラスター内での TiDB、トランザクション KV、および RawKV アプリケーションの共存をサポートします。
-        -   API V2 を使用する場合は、同時に`storage.enable-ttl = true`を設定する必要があります。 API V2 は TTL 機能をサポートしているため、 `enable-ttl`を明示的にオンにする必要があります。そうしないと、 `storage.enable-ttl`がデフォルトで`false`になるため、競合が発生します。
+        -   API V2 を使用する場合は、同時に`storage.enable-ttl = true`を設定する必要があります。 API V2 は TTL 機能をサポートしているため、 `enable-ttl`明示的にオンにする必要があります。そうしないと、 `storage.enable-ttl`デフォルトで`false`になるため、競合が発生します。
         -   API V2 が有効になっている場合は、少なくとも 1 つの tidb-server インスタンスをデプロイして、古いデータを再利用する必要があります。この tidb-server インスタンスは、読み取りサービスと書き込みサービスを同時に提供できます。高可用性を確保するために、複数の tidb-server インスタンスをデプロイできます。
         -   API V2 にはクライアント サポートが必要です。詳細については、API V2 のクライアントの対応する命令を参照してください。
         -   v6.2.0 以降、RawKV の変更データ キャプチャ (CDC) がサポートされています。 [RawKV CDC](https://tikv.org/docs/latest/concepts/explore-tikv-features/cdc/cdc)を参照してください。
@@ -486,7 +489,7 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 
 > **警告：**
 
-> -   API V1 と API V2 では、格納形式が異なります。 TiKV に TiDB データのみが含まれている場合に**のみ**、API V2 を直接有効または無効にできます。他のシナリオでは、新しいクラスターをデプロイし、 [RawKV のバックアップと復元](https://tikv.org/docs/latest/concepts/explore-tikv-features/backup-restore/)を使用してデータを移行する必要があります。
+> -   API V1 と API V2 では、storage形式が異なります。 TiKV に TiDB データのみが含まれている場合に**のみ**、API V2 を直接有効または無効にできます。他のシナリオでは、新しいクラスターをデプロイし、 [RawKV のバックアップと復元](https://tikv.org/docs/latest/concepts/explore-tikv-features/backup-restore/)使用してデータを移行する必要があります。
 > -   API V2 が有効になった後、TiKV クラスターを v6.1.0 より前のバージョンにダウングレードする**ことはできません**。そうしないと、データが破損する可能性があります。
 
 ## storage.block-cache {#storage-block-cache}
@@ -506,7 +509,7 @@ TiKV 構成ファイルは、コマンドライン パラメーターよりも�
 
 ## storage.flow-control {#storage-flow-control}
 
-TiKVにおけるフロー制御機構に関するコンフィグレーション項目です。このメカニズムは、RocksDB の書き込みストール メカニズムに取って代わり、スケジューラレイヤーでフローを制御します。
+TiKVにおけるフロー制御機構に関するコンフィグレーション項目です。このメカニズムは、RocksDB の書き込みストール メカニズムに取って代わり、Raftstoreレイヤーでフローを制御します。
 
 ### <code>enable</code> {#code-enable-code}
 
@@ -539,7 +542,7 @@ I/Oレートリミッターに関するコンフィグレーション項目で�
 
 ### <code>max-bytes-per-sec</code> {#code-max-bytes-per-sec-code}
 
--   サーバーが 1 秒間にディスクに書き込みまたはディスクから読み取ることができる最大 I/O バイトを制限します (以下の`mode`つの構成項目によって決定されます)。この制限に達すると、TiKV はフォアグラウンド操作よりもバックグラウンド操作を調整することを優先します。この構成項目の値は、ディスクの最適な I/O 帯域幅 (たとえば、クラウド ディスク ベンダーによって指定された最大 I/O 帯域幅) に設定する必要があります。この構成値がゼロに設定されている場合、ディスク I/O 操作は制限されません。
+-   サーバーが1 秒間にディスクに書き込みまたはディスクから読み取ることができる最大 I/O バイトを制限します (以下の`mode`の構成項目によって決定されます)。この制限に達すると、TiKV はフォアグラウンド操作よりもバックグラウンド操作を調整することを優先します。この構成項目の値は、ディスクの最適な I/O 帯域幅 (たとえば、クラウド ディスク ベンダーによって指定された最大 I/O 帯域幅) に設定する必要があります。この構成値がゼロに設定されている場合、ディスク I/O 操作は制限されません。
 -   デフォルト値: `"0MB"`
 
 ### <code>mode</code> {#code-mode-code}
@@ -574,7 +577,7 @@ I/Oレートリミッターに関するコンフィグレーション項目で�
 
 ## いかだ屋 {#raftstore}
 
-Raftstore に関連するコンフィグレーション項目。
+Raftstoreに関連するコンフィグレーション項目。
 
 ### <code>prevote</code> {#code-prevote-code}
 
@@ -583,7 +586,7 @@ Raftstore に関連するコンフィグレーション項目。
 
 ### <code>capacity</code> {#code-capacity-code}
 
--   データを保存できる最大サイズであるストレージ容量。 `capacity`を指定しない場合、現在のディスクの容量が優先されます。複数の TiKV インスタンスを同じ物理ディスクにデプロイするには、このパラメーターを TiKV 構成に追加します。詳細については、 [ハイブリッド展開の主要なパラメーター](/hybrid-deployment-topology.md#key-parameters)を参照してください。
+-   データを保存できる最大サイズであるstorage容量。 `capacity`を指定しない場合、現在のディスクの容量が優先されます。複数の TiKV インスタンスを同じ物理ディスクにデプロイするには、このパラメーターを TiKV 構成に追加します。詳細については、 [ハイブリッド展開の主要なパラメーター](/hybrid-deployment-topology.md#key-parameters)を参照してください。
 -   デフォルト値: `0`
 -   単位: KB|MB|GB
 
@@ -680,7 +683,7 @@ Raftstore に関連するコンフィグレーション項目。
 
 ### <code>raft-log-gc-tick-interval</code> {#code-raft-log-gc-tick-interval-code}
 
--   Raftログを削除するポーリング タスクがスケジュールされる時間間隔。 `0`は、この機能が無効であることを意味します。
+-   Raftログを削除するポーリング タスクがスケジュールされる時間間隔。 `0` 、この機能が無効であることを意味します。
 -   デフォルト値: `"3s"`
 -   最小値: `"0s"`
 
@@ -726,7 +729,7 @@ Raftstore に関連するコンフィグレーション項目。
 
 ### <code>split-region-check-tick-interval</code> {#code-split-region-check-tick-interval-code}
 
--   リージョン分割が必要かどうかを確認する間隔を指定します。 `0`は、この機能が無効であることを意味します。
+-   リージョン分割が必要かどうかを確認する間隔を指定します。 `0` 、この機能が無効であることを意味します。
 -   デフォルト値: `"10s"`
 -   最小値: `0`
 
@@ -738,7 +741,7 @@ Raftstore に関連するコンフィグレーション項目。
 
 ### <code>region-compact-check-interval</code> {#code-region-compact-check-interval-code}
 
--   RocksDB 圧縮を手動でトリガーする必要があるかどうかを確認する時間間隔。 `0`は、この機能が無効であることを意味します。
+-   RocksDB 圧縮を手動でトリガーする必要があるかどうかを確認する時間間隔。 `0` 、この機能が無効であることを意味します。
 -   デフォルト値: `"5m"`
 -   最小値: `0`
 
@@ -763,19 +766,19 @@ Raftstore に関連するコンフィグレーション項目。
 
 ### <code>pd-heartbeat-tick-interval</code> {#code-pd-heartbeat-tick-interval-code}
 
--   PD へのリージョンのハートビートがトリガーされる時間間隔。 `0`は、この機能が無効であることを意味します。
+-   PD へのリージョンのハートビートがトリガーされる時間間隔。 `0` 、この機能が無効であることを意味します。
 -   デフォルト値: `"1m"`
 -   最小値: `0`
 
 ### <code>pd-store-heartbeat-tick-interval</code> {#code-pd-store-heartbeat-tick-interval-code}
 
--   PD へのストアのハートビートがトリガーされる時間間隔。 `0`は、この機能が無効であることを意味します。
+-   PD へのストアのハートビートがトリガーされる時間間隔。 `0` 、この機能が無効であることを意味します。
 -   デフォルト値: `"10s"`
 -   最小値: `0`
 
 ### <code>snap-mgr-gc-tick-interval</code> {#code-snap-mgr-gc-tick-interval-code}
 
--   期限切れのスナップショット ファイルのリサイクルがトリガーされる時間間隔。 `0`は、この機能が無効であることを意味します。
+-   期限切れのスナップショット ファイルのリサイクルがトリガーされる時間間隔。 `0` 、この機能が無効であることを意味します。
 -   デフォルト値: `"1m"`
 -   最小値: `0`
 
@@ -795,7 +798,6 @@ Raftstore に関連するコンフィグレーション項目。
 ### <code>lock-cf-compact-interval</code> {#code-lock-cf-compact-interval-code}
 
 -   TiKV が Lock カラム Family の手動圧縮をトリガーする時間間隔
--   デフォルト値: `"256MB"`
 -   デフォルト値: `"10m"`
 -   最小値: `0`
 
@@ -865,9 +867,9 @@ Raftstore に関連するコンフィグレーション項目。
 
 > **警告：**
 >
-> クラスターのパフォーマンスに影響し、TiDB のガベージコレクションと互換性がないため、本番環境で整合性チェックを有効にすることはお勧めし**ません**。
+> クラスターのパフォーマンスに影響し、TiDB のガベージコレクションと互換性がないため、本番環境で整合性チェックを有効にすることは**お**勧めしません。
 
--   整合性チェックがトリガーされる時間間隔。 `0`は、この機能が無効であることを意味します。
+-   整合性チェックがトリガーされる時間間隔。 `0` 、この機能が無効であることを意味します。
 -   デフォルト値: `"0s"`
 -   最小値: `0`
 
@@ -876,6 +878,11 @@ Raftstore に関連するコンフィグレーション項目。
 -   Raftリーダーの最長信頼期間
 -   デフォルト値: `"9s"`
 -   最小値: `0`
+
+### <code>right-derive-when-split</code> {#code-right-derive-when-split-code}
+
+-   リージョンが分割されたときに、新しいリージョンの開始キーを指定します。この構成項目が`true`に設定されている場合、開始キーは最大分割キーになります。この構成項目が`false`に設定されている場合、開始キーは元のリージョンの開始キーです。
+-   デフォルト値: `true`
 
 ### <code>merge-max-log-gap</code> {#code-merge-max-log-gap-code}
 
@@ -896,7 +903,7 @@ Raftstore に関連するコンフィグレーション項目。
 
 ### <code>cleanup-import-sst-interval</code> {#code-cleanup-import-sst-interval-code}
 
--   期限切れの SST ファイルがチェックされる時間間隔。 `0`は、この機能が無効であることを意味します。
+-   期限切れの SST ファイルがチェックされる時間間隔。 `0` 、この機能が無効であることを意味します。
 -   デフォルト値: `"10m"`
 -   最小値: `0`
 
@@ -924,7 +931,7 @@ Raftstore に関連するコンフィグレーション項目。
 
 -   データをディスクにフラッシュするプール内のスレッドの許容数。これは、適用スレッド プールのサイズです。このスレッド プールのサイズを変更する場合は、 [TiKV スレッド プールのパフォーマンス チューニング](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools)を参照してください。
 -   デフォルト値: `2`
--   値の範囲: `[1, CPU * 10]` 。 `CPU`は、CPU コアの数を意味します。
+-   値の範囲: `[1, CPU * 10]` 。 `CPU` CPU コアの数を意味します。
 
 ### <code>store-max-batch-size</code> {#code-store-max-batch-size-code}
 
@@ -935,9 +942,9 @@ Raftstore に関連するコンフィグレーション項目。
 
 ### <code>store-pool-size</code> {#code-store-pool-size-code}
 
--   Raftを処理するプール内のスレッドの許容数。これは Raftstore スレッド プールのサイズです。このスレッド プールのサイズを変更する場合は、 [TiKV スレッド プールのパフォーマンス チューニング](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools)を参照してください。
+-   Raftを処理するプール内のスレッドの許容数。これはRaftstoreスレッド プールのサイズです。このスレッド プールのサイズを変更する場合は、 [TiKV スレッド プールのパフォーマンス チューニング](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools)を参照してください。
 -   デフォルト値: `2`
--   値の範囲: `[1, CPU * 10]` 。 `CPU`は、CPU コアの数を意味します。
+-   値の範囲: `[1, CPU * 10]` 。 `CPU` CPU コアの数を意味します。
 
 ### <code>store-io-pool-size</code> <span class="version-mark">v5.3.0 の新機能</span> {#code-store-io-pool-size-code-span-class-version-mark-new-in-v5-3-0-span}
 
@@ -958,7 +965,7 @@ Raftstore に関連するコンフィグレーション項目。
 
 ### <code>inspect-interval</code> {#code-inspect-interval-code}
 
--   一定の間隔で、TiKV は Raftstoreコンポーネントのレイテンシーを検査します。このパラメーターは、検査の間隔を指定します。レイテンシーがこの値を超えると、この検査はタイムアウトとしてマークされます。
+-   一定の間隔で、TiKV はRaftstoreコンポーネントのレイテンシーを検査します。このパラメーターは、検査の間隔を指定します。レイテンシーがこの値を超えると、この検査はタイムアウトとしてマークされます。
 -   タイムアウト検査の割合からTiKVノードが遅いかどうかを判断します。
 -   デフォルト値: `"500ms"`
 -   最小値: `"1ms"`
@@ -969,13 +976,20 @@ Raftstore に関連するコンフィグレーション項目。
 -   デフォルト値: `1MB`
 -   最小値: `0`
 
+### <code>report-min-resolved-ts-interval</code> {#code-report-min-resolved-ts-interval-code}
+
+-   解決されたタイムスタンプが PD リーダーに報告される最小間隔を決定します。この値が`0`に設定されている場合、レポートが無効になっていることを意味します。
+-   デフォルト値: `"1s"` 、これは最小の正の値です
+-   最小値: `0`
+-   単位：秒
+
 ## コプロセッサー {#coprocessor}
 
 コプロセッサーに関連するコンフィグレーション項目。
 
 ### <code>split-region-on-table</code> {#code-split-region-on-table-code}
 
--   リージョンをテーブルごとに分割するかどうかを決定します。この機能は TiDB モードでのみ使用することをお勧めします。
+-   リージョン をテーブルごとに分割するかどうかを決定します。この機能は TiDB モードでのみ使用することをお勧めします。
 -   デフォルト値: `false`
 
 ### <code>batch-split-limit</code> {#code-batch-split-limit-code}
@@ -1022,7 +1036,7 @@ Raftstore に関連するコンフィグレーション項目。
 
 ### <code>enable-region-bucket</code> <span class="version-mark">v6.1.0 の新機能</span> {#code-enable-region-bucket-code-span-class-version-mark-new-in-v6-1-0-span}
 
--   リージョンをバケットと呼ばれる小さな範囲に分割するかどうかを決定します。バケットは、同時実行クエリの単位として使用され、スキャンの同時実行性を向上させます。バケットの設計について詳しくは、 [動的サイズリージョン](https://github.com/tikv/rfcs/blob/master/text/0082-dynamic-size-region.md)を参照してください。
+-   リージョン をバケットと呼ばれる小さな範囲に分割するかどうかを決定します。バケットは、同時実行クエリの単位として使用され、スキャンの同時実行性を向上させます。バケットの設計について詳しくは、 [動的サイズリージョン](https://github.com/tikv/rfcs/blob/master/text/0082-dynamic-size-region.md)を参照してください。
 -   デフォルト値: false
 
 > **警告：**
@@ -1049,7 +1063,7 @@ Raftstore に関連するコンフィグレーション項目。
 -   `enable-region-bucket`が true の場合、TiKV がバケット情報を PD に報告する間隔。
 -   デフォルト値: `10s`
 
-## RocksDB {#rocksdb}
+## rocksdb {#rocksdb}
 
 RocksDBに関するコンフィグレーション項目
 
@@ -1155,7 +1169,7 @@ RocksDBに関するコンフィグレーション項目
 
 ### <code>use-direct-io-for-flush-and-compaction</code> {#code-use-direct-io-for-flush-and-compaction-code}
 
--   バックグラウンド フラッシュと圧縮で読み取りと書き込みの両方に`O_DIRECT`を使用するかどうかを決定します。このオプションのパフォーマンスへの影響: `O_DIRECT`のバイパスを有効にして OS バッファー キャッシュの汚染を防ぎますが、その後のファイル読み取りではバッファー キャッシュの内容を再度読み取る必要があります。
+-   バックグラウンド フラッシュと圧縮で読み取りと書き込みの両方に`O_DIRECT`を使用するかどうかを決定します。このオプションのパフォーマンスへの影響: `O_DIRECT`バイパスを有効にして OS バッファー キャッシュの汚染を防ぎますが、その後のファイル読み取りではバッファー キャッシュの内容を再度読み取る必要があります。
 -   デフォルト値: `false`
 
 ### <code>rate-bytes-per-sec</code> {#code-rate-bytes-per-sec-code}
@@ -1176,7 +1190,7 @@ RocksDBに関するコンフィグレーション項目
 -   オプションの値: `"read-only"` 、 `"write-only"` 、 `"all-io"`
 -   デフォルト値: `"write-only"`
 
-### <code>rate-limiter-auto-tuned</code> <span class="version-mark">v5.0 の新</span>機能 {#code-rate-limiter-auto-tuned-code-span-class-version-mark-new-in-v5-0-span}
+### <code>rate-limiter-auto-tuned</code> <span class="version-mark">v5.0 の新機能</span> {#code-rate-limiter-auto-tuned-code-span-class-version-mark-new-in-v5-0-span}
 
 -   最近のワークロードに基づいて、RocksDB の圧縮レート リミッターの構成を自動的に最適化するかどうかを決定します。この構成が有効になっている場合、圧縮保留中のバイトは通常よりわずかに高くなります。
 -   デフォルト値: `true`
@@ -1255,7 +1269,7 @@ Titan関連のコンフィグレーション項目。
 
 ## rocksdb.defaultcf | rocksdb.writecf | rocksdb.lockcf {#rocksdb-defaultcf-rocksdb-writecf-rocksdb-lockcf}
 
-`rocksdb.defaultcf`に`rocksdb.lockcf`するコンフィグレーション項目`rocksdb.writecf` 。
+`rocksdb.defaultcf` `rocksdb.writecf`関連するコンフィグレーション項目`rocksdb.lockcf` 。
 
 ### <code>block-size</code> {#code-block-size-code}
 
@@ -1334,7 +1348,7 @@ Titan関連のコンフィグレーション項目。
 ### <code>bottommost-level-compression</code> {#code-bottommost-level-compression-code}
 
 -   最レイヤーの圧縮アルゴリズムを設定します。この構成項目は`compression-per-level`の設定をオーバーライドします。
--   データが LSM ツリーに書き込まれて以来、RocksDB は最レイヤーの`compression-per-level`配列で指定された最後の圧縮アルゴリズムを直接採用しません。 `bottommost-level-compression`の場合、最初から最レイヤーで最も圧縮効果の高い圧縮アルゴリズムを使用できます。
+-   データが LSM ツリーに書き込まれて以来、RocksDB は最レイヤーの`compression-per-level`配列で指定された最後の圧縮アルゴリズムを直接採用しません。 `bottommost-level-compression`場合、最初から最レイヤーで最も圧縮効果の高い圧縮アルゴリズムを使用できます。
 -   最レイヤーの圧縮アルゴリズムを設定しない場合は、この構成項目の値を`disable`に設定します。
 -   デフォルト値: `"zstd"`
 
@@ -1348,7 +1362,7 @@ Titan関連のコンフィグレーション項目。
 
 ### <code>max-write-buffer-number</code> {#code-max-write-buffer-number-code}
 
--   memtable の最大数。 `storage.flow-control.enable`が`true`に設定されている場合、 `storage.flow-control.memtables-threshold`はこの構成項目をオーバーライドします。
+-   memtable の最大数。 `storage.flow-control.enable`が`true`に設定されている場合、 `storage.flow-control.memtables-threshold`この構成項目をオーバーライドします。
 -   デフォルト値: `5`
 -   最小値: `0`
 
@@ -1365,11 +1379,11 @@ Titan関連のコンフィグレーション項目。
 -   `lockcf`のデフォルト値: `"128MB"`
 -   最小値: `0`
 -   単位: KB|MB|GB
--   不必要な圧縮を減らすために、値`max-bytes-for-level-base`を L0 のデータ量とほぼ同じに設定することをお勧めします。たとえば、圧縮方法が「no:no:lz4:lz4:lz4: `write-buffer-size * 4` : `max-bytes-for-level-base` 」の場合、L0 と L1 の圧縮がなく、L0 の圧縮のトリガー条件がSST ファイルの数が 4 (デフォルト値) に達することを確認します。 L0 と L1 の両方が圧縮を採用する場合、Memtable から圧縮された SST ファイルのサイズを理解するために RocksDB ログを分析する必要があります。たとえば、ファイル サイズが 32 MB の場合、 `max-bytes-for-level-base` ～ 128 MB の値を設定することをお勧めします ( `32 MB * 4` )。
+-   不必要な圧縮を減らすために、値`max-bytes-for-level-base`を L0 のデータ量とほぼ同じに設定することをお勧めします。たとえば、圧縮方法`write-buffer-size * 4` 「no:no:lz4:lz4:lz4:lz4:lz4」の場合、L0 と`max-bytes-for-level-base`の圧縮がなく、L0 の圧縮のトリガー条件がSST ファイルの数が 4 (デフォルト値) に達することを確認します。 L0 と L1 の両方が圧縮を採用する場合、Memtable から圧縮された SST ファイルのサイズを理解するために RocksDB ログを分析する必要があります。たとえば、ファイル サイズが 32 MB の場合、 `max-bytes-for-level-base` ～ 128 MB の値を設定することをお勧めします ( `32 MB * 4` )。
 
 ### <code>target-file-size-base</code> {#code-target-file-size-base-code}
 
--   ベース レベルでのターゲット ファイルのサイズ。 `enable-compaction-guard`の値が`true`の場合、この値は`compaction-guard-max-output-file-size`で上書きされます。
+-   ベース レベルでのターゲット ファイルのサイズ。 `enable-compaction-guard`値が`true`の場合、この値は`compaction-guard-max-output-file-size`でオーバーライドされます。
 -   デフォルト値: `"8MB"`
 -   最小値: `0`
 -   単位: KB|MB|GB
@@ -1383,7 +1397,7 @@ Titan関連のコンフィグレーション項目。
 
 ### <code>level0-slowdown-writes-trigger</code> {#code-level0-slowdown-writes-trigger-code}
 
--   書き込みストールをトリガーする L0 のファイルの最大数。 `storage.flow-control.enable`が`true`に設定されている場合、 `storage.flow-control.l0-files-threshold`はこの構成項目をオーバーライドします。
+-   書き込みストールをトリガーする L0 のファイルの最大数。 `storage.flow-control.enable`が`true`に設定されている場合、 `storage.flow-control.l0-files-threshold`この構成項目をオーバーライドします。
 -   デフォルト値: `20`
 -   最小値: `0`
 
@@ -1403,7 +1417,11 @@ Titan関連のコンフィグレーション項目。
 ### <code>compaction-pri</code> {#code-compaction-pri-code}
 
 -   圧縮の優先タイプ
--   オプションの値: `"by-compensated-size"` 、 `"oldest-largest-seq-first"` 、 `"oldest-smallest-seq-first"` 、 `"min-overlapping-ratio"`
+-   オプションの値:
+    -   `"by-compensated-size"` : ファイル サイズの順に圧縮し、大きなファイルは優先的に圧縮します。
+    -   `"oldest-largest-seq-first"` : 更新時刻が最も古いファイルの圧縮を優先します。この値は、狭い範囲でホット キーを更新する場合に**のみ**使用してください。
+    -   `"oldest-smallest-seq-first"` : 次のレベルに長期間圧縮されていない範囲を持つファイルの圧縮を優先します。キー スペース全体でホット キーをランダムに更新する場合、この値によって書き込み増幅がわずかに減少する可能性があります。
+    -   `"min-overlapping-ratio"` : オーバーラップ率の高いファイルの圧縮を優先します。ファイルがさまざまなレベルで小さい場合 ( `the file size in the next level` ÷ `the file size in this level`の結果が小さい場合)、TiKV はこのファイルを最初に圧縮します。多くの場合、この値は効果的に書き込み増幅を減らすことができます。
 -   `defaultcf`および`writecf`のデフォルト値: `"min-overlapping-ratio"`
 -   `lockcf`のデフォルト値: `"by-compensated-size"`
 
@@ -1435,13 +1453,13 @@ Titan関連のコンフィグレーション項目。
 
 ### <code>soft-pending-compaction-bytes-limit</code> {#code-soft-pending-compaction-bytes-limit-code}
 
--   保留中の圧縮バイトのソフト制限。 `storage.flow-control.enable`が`true`に設定されている場合、 `storage.flow-control.soft-pending-compaction-bytes-limit`はこの構成項目をオーバーライドします。
+-   保留中の圧縮バイトのソフト制限。 `storage.flow-control.enable`が`true`に設定されている場合、 `storage.flow-control.soft-pending-compaction-bytes-limit`この構成項目をオーバーライドします。
 -   デフォルト値: `"192GB"`
 -   単位: KB|MB|GB
 
 ### <code>hard-pending-compaction-bytes-limit</code> {#code-hard-pending-compaction-bytes-limit-code}
 
--   保留中の圧縮バイトのハード制限。 `storage.flow-control.enable`が`true`に設定されている場合、 `storage.flow-control.hard-pending-compaction-bytes-limit`はこの構成項目をオーバーライドします。
+-   保留中の圧縮バイトのハード制限。 `storage.flow-control.enable`が`true`に設定されている場合、 `storage.flow-control.hard-pending-compaction-bytes-limit`この構成項目をオーバーライドします。
 -   デフォルト値: `"256GB"`
 -   単位: KB|MB|GB
 
@@ -1582,7 +1600,7 @@ Titan関連のコンフィグレーション項目。
 
 ### <code>wal-dir</code> {#code-wal-dir-code}
 
--   Raft RocksDB WAL ファイルが格納されるディレクトリ。これは、WAL の絶対ディレクトリ パスです。この構成項目を[`rocksdb.wal-dir`](#wal-dir)と同じ値に設定**しないでください**。
+-   Raft RocksDB WAL ファイルが格納されるディレクトリ。これは、WAL の絶対ディレクトリ パスです。この構成項目を[`rocksdb.wal-dir`](#wal-dir)と同じ値に設定し**ないでください**。
 -   この構成項目が設定されていない場合、ログ ファイルはデータと同じディレクトリに保存されます。
 -   マシンに 2 つのディスクがある場合、RocksDB データと WAL ログを別々のディスクに格納すると、パフォーマンスが向上する可能性があります。
 -   デフォルト値: `""`
@@ -1623,7 +1641,7 @@ Titan関連のコンフィグレーション項目。
 
 ### <code>use-direct-io-for-flush-and-compaction</code> {#code-use-direct-io-for-flush-and-compaction-code}
 
--   バックグラウンド フラッシュと圧縮で読み取りと書き込みの両方に`O_DIRECT`を使用するかどうかを決定します。このオプションのパフォーマンスへの影響: `O_DIRECT`のバイパスを有効にして OS バッファー キャッシュの汚染を防ぎますが、その後のファイル読み取りではバッファー キャッシュの内容を再度読み取る必要があります。
+-   バックグラウンド フラッシュと圧縮で読み取りと書き込みの両方に`O_DIRECT`を使用するかどうかを決定します。このオプションのパフォーマンスへの影響: `O_DIRECT`バイパスを有効にして OS バッファー キャッシュの汚染を防ぎますが、その後のファイル読み取りではバッファー キャッシュの内容を再度読み取る必要があります。
 -   デフォルト値: `false`
 
 ### <code>enable-pipelined-write</code> {#code-enable-pipelined-write-code}
@@ -1675,7 +1693,7 @@ Titan関連のコンフィグレーション項目。
 
 ### <code>info-log-level</code> {#code-info-log-level-code}
 
--   RocksDB のログレベル
+-   RaftDB のログレベル
 -   デフォルト値: `"info"`
 
 ## いかだエンジン {#raft-engine}
@@ -1684,8 +1702,8 @@ Raft Engineに関連するコンフィグレーション項目。
 
 > **ノート：**
 >
-> -   初めてRaft Engineを有効にすると、TiKV はそのデータを RocksDB からRaft Engineに転送します。そのため、TiKV が起動するまでさらに数十秒待つ必要があります。
-> -   TiDB v5.4.0 のRaft Engineのデータ形式は、以前の TiDB バージョンと互換性がありません。したがって、TiDB クラスターを v5.4.0 から以前のバージョンにダウングレードする必要がある場合は、ダウングレードする**前**に、 `enable`から`false`に設定してRaft Engineを無効にし、TiKV を再起動して構成を有効にします。
+> -   初めてRaft Engine を有効にすると、TiKV はそのデータを RocksDB からRaft Engineに転送します。そのため、TiKV が起動するまでさらに数十秒待つ必要があります。
+> -   TiDB v5.4.0 のRaft Engineのデータ形式は、以前の TiDB バージョンと互換性がありません。したがって、TiDB クラスターを v5.4.0 から以前のバージョンにダウングレードする必要がある場合は、ダウングレードする**前に**、 `enable`から`false`に設定してRaft Engine を無効にし、TiKV を再起動して構成を有効にします。
 
 ### <code>enable</code> {#code-enable-code}
 
@@ -1749,11 +1767,11 @@ Raft Engineに関連するコンフィグレーション項目。
 
 > **ノート：**
 >
-> `format-version`を`2`に設定した後、TiKV クラスターを v6.3.0 から以前のバージョンにダウングレードする必要がある場合は、ダウングレードする**前**に次の手順を実行します。
+> `format-version`を`2`に設定した後、TiKV クラスターを v6.3.0 から以前のバージョンにダウングレードする必要がある場合は、ダウングレードする**前に**次の手順を実行します。
 >
-> 1.  [`enable`](/tikv-configuration-file.md#enable-1)から`false`を設定してRaft Engineを無効にし、TiKV を再起動して構成を有効にします。
+> 1.  [`enable`](/tikv-configuration-file.md#enable-1)から`false`設定してRaft Engine を無効にし、TiKV を再起動して構成を有効にします。
 > 2.  `format-version` ～ `1`を設定します。
-> 3.  `enable`から`true`を設定してRaft Engineを有効にし、TiKV を再起動して構成を有効にします。
+> 3.  `enable`から`true`設定してRaft Engine を有効にし、TiKV を再起動して構成を有効にします。
 
 -   Raft Engineのログ ファイルのバージョンを指定します。
 -   値のオプション:
@@ -1818,20 +1836,20 @@ Raft Engineに関連するコンフィグレーション項目。
 ### <code>enable-file-dictionary-log</code> {#code-enable-file-dictionary-log-code}
 
 -   TiKV が暗号化メタデータを管理するときに、I/O とミューテックスの競合を減らすための最適化を有効にします。
--   この構成パラメーターが (デフォルトで) 有効になっている場合に起こりうる互換性の問題を回避するには、詳細について[保存保存時の暗号化- TiKV バージョン間の互換性](/encryption-at-rest.md#compatibility-between-tikv-versions)を参照してください。
+-   この構成パラメーターが (デフォルトで) 有効になっている場合に起こりうる互換性の問題を回避するには、詳細について[保存時の暗号化- TiKV バージョン間の互換性](/encryption-at-rest.md#compatibility-between-tikv-versions)を参照してください。
 -   デフォルト値: `true`
 
 ### <code>master-key</code> {#code-master-key-code}
 
--   暗号化が有効な場合、マスター キーを指定します。マスター鍵の構成方法については、 [保存保存時の暗号化化 - 暗号化の構成](/encryption-at-rest.md#configure-encryption)を参照してください。
+-   暗号化が有効な場合、マスター キーを指定します。マスター鍵の構成方法については、 [保存時の暗号化- 暗号化の構成](/encryption-at-rest.md#configure-encryption)を参照してください。
 
 ### <code>previous-master-key</code> {#code-previous-master-key-code}
 
--   新しいマスター キーをローテーションするときに、古いマスター キーを指定します。設定フォーマットは`master-key`と同じです。マスター キーの構成方法については、 [保存保存時の暗号化化 - 暗号化の構成](/encryption-at-rest.md#configure-encryption)を参照してください。
+-   新しいマスター キーをローテーションするときに、古いマスター キーを指定します。設定フォーマットは`master-key`と同じです。マスター キーの構成方法については、 [保存時の暗号化- 暗号化の構成](/encryption-at-rest.md#configure-encryption)を参照してください。
 
-## <code>import</code> {#code-import-code}
+## 輸入 {#import}
 
-TiDB LightningのインポートとBRの復元に関するコンフィグレーション項目です。
+TiDB Lightning のインポートとBRの復元に関するコンフィグレーション項目です。
 
 ### <code>num-threads</code> {#code-num-threads-code}
 
@@ -1844,11 +1862,11 @@ TiDB LightningのインポートとBRの復元に関するコンフィグレー�
 -   ストリーム チャネルのウィンドウ サイズ。チャネルがいっぱいになると、ストリームはブロックされます。
 -   デフォルト値: `128`
 
-### <code>memory-use-ratio</code><span class="version-mark">新機能</span> {#code-memory-use-ratio-code-span-class-version-mark-new-in-v6-5-0-span}
+### <span class="version-mark">v6.5.0 の新</span><code>memory-use-ratio</code> {#code-memory-use-ratio-code-span-class-version-mark-new-in-v6-5-0-span}
 
 -   v6.5.0 以降、PITR はメモリ内のバックアップ ログ ファイルへの直接アクセスとデータの復元をサポートします。この構成項目は、TIKV の合計メモリに対する PITR で使用可能なメモリの比率を指定します。
 -   値の範囲: [0.0, 0.5]
--   デフォルト値: `0.3` 。これは、システムメモリの 30% が PITR に使用できることを意味します。値が`0.0`の場合、PITR はログ ファイルをローカル ディレクトリにダウンロードすることによって実行されます。
+-   デフォルト値: `0.3` 。これは、システムメモリの 30% が PITR に使用できることを意味します。値が`0.0`場合、PITR はログ ファイルをローカル ディレクトリにダウンロードすることによって実行されます。
 
 > **ノート：**
 >
@@ -1896,7 +1914,7 @@ BRバックアップに関するコンフィグレーション項目です。
 ### <code>sst-max-size</code> {#code-sst-max-size-code}
 
 -   バックアップ SST ファイル サイズのしきい値。 TiKVリージョン内のバックアップ ファイルのサイズがこのしきい値を超える場合、ファイルは複数のファイルにバックアップされ、TiKVリージョンは複数のリージョン範囲に分割されます。分割されたリージョン内の各ファイルは、 `sst-max-size`と同じサイズ (またはわずかに大きい) です。
--   たとえば、リージョン`[a,e)`の`[a,b)`ファイルのサイズが`sst-max-size`より大きい場合、ファイルは`[d,e)` `[a,b)` `[c,d)`のファイルに`[c,d)`され、 `[b,c)`の`[b,c)`は同じです。 `sst-max-size`のように (またはわずかに大きい)。
+-   たとえば、リージョン`[a,e)` `[b,c)`バックアップ ファイルのサイズが`sst-max-size`より大きい場合、ファイルは`[b,c)` `[a,b)` `[c,d)`および`[d,e)` `[c,d)`複数のファイルにバックアップされ、 `[a,b)`のサイズは同じです。 `sst-max-size`のように (またはわずかに大きい)。
 -   デフォルト値: `"144MB"`
 
 ### <code>enable-auto-tune</code> <span class="version-mark">v5.4.0 の新機能</span> {#code-enable-auto-tune-code-span-class-version-mark-new-in-v5-4-0-span}
@@ -1908,13 +1926,13 @@ BRバックアップに関するコンフィグレーション項目です。
 
 > **ノート：**
 >
-> この構成は、S3 レート制限によって引き起こされるバックアップの失敗に対処するために導入されました。この問題は[バックアップ データ ストレージ構造の改善](/br/br-snapshot-architecture.md#structure-of-backup-files)で修正されました。したがって、この構成は v6.1.1 から廃止され、推奨されなくなりました。
+> この構成は、S3 レート制限によって引き起こされるバックアップの失敗に対処するために導入されました。この問題は[バックアップ データstorage構造の改善](/br/br-snapshot-architecture.md#structure-of-backup-files)で修正されました。したがって、この構成は v6.1.1 から廃止され、推奨されなくなりました。
 
 -   バックアップ中に S3 へのマルチパート アップロードを実行するときに使用されるパート サイズ。この設定の値を調整して、S3 に送信されるリクエストの数を制御できます。
 -   データが S3 にバックアップされ、バックアップ ファイルがこの構成項目の値よりも大きい場合、 [マルチパートアップロード](https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html)が自動的に有効になります。圧縮率に基づくと、96 MiBリージョンによって生成されるバックアップ ファイルは、約 10 MiB から 30 MiB です。
 -   デフォルト値: 5MiB
 
-## バックアップ.hadoop {#backup-hadoop}
+## backup.hadoop {#backup-hadoop}
 
 ### <code>home</code> {#code-home-code}
 
@@ -1931,7 +1949,7 @@ BRバックアップに関するコンフィグレーション項目です。
 
 ログバックアップに関するコンフィグレーション項目です。
 
-### <code>enable</code><span class="version-mark">の新機能</span> {#code-enable-code-span-class-version-mark-new-in-v6-2-0-span}
+### <span class="version-mark">v6.2.0 の新</span><code>enable</code> {#code-enable-code-span-class-version-mark-new-in-v6-2-0-span}
 
 -   ログのバックアップを有効にするかどうかを決定します。
 -   デフォルト値: `true`
@@ -1940,7 +1958,7 @@ BRバックアップに関するコンフィグレーション項目です。
 
 -   保存するバックアップ ログ データのサイズ制限。
 -   デフォルト値: 256MiB
--   注: 通常、値`file-size-limit`は、外部ストレージに表示されるバックアップ ファイルのサイズよりも大きくなります。これは、バックアップ ファイルが外部ストレージにアップロードされる前に圧縮されるためです。
+-   注: 通常、 `file-size-limit`の値は、外部storageに表示されるバックアップ ファイルのサイズよりも大きくなります。これは、バックアップ ファイルが外部storageにアップロードされる前に圧縮されるためです。
 
 ### <code>initial-scan-pending-memory-quota</code> <span class="version-mark">v6.2.0 の新機能</span> {#code-initial-scan-pending-memory-quota-code-span-class-version-mark-new-in-v6-2-0-span}
 
@@ -1954,10 +1972,10 @@ BRバックアップに関するコンフィグレーション項目です。
 
 ### <code>max-flush-interval</code> <span class="version-mark">v6.2.0 の新機能</span> {#code-max-flush-interval-code-span-class-version-mark-new-in-v6-2-0-span}
 
--   ログバックアップでバックアップデータを外部ストレージに書き込む最大間隔。
+-   ログバックアップでバックアップデータを外部storageに書き込む最大間隔。
 -   デフォルト値: 3 分
 
-### <code>num-threads</code><span class="version-mark">新機能</span> {#code-num-threads-code-span-class-version-mark-new-in-v6-2-0-span}
+### <span class="version-mark">v6.2.0 の新</span><code>num-threads</code> {#code-num-threads-code-span-class-version-mark-new-in-v6-2-0-span}
 
 -   ログ バックアップで使用されるスレッドの数。
 -   デフォルト値: CPU * 0.5
@@ -1965,7 +1983,7 @@ BRバックアップに関するコンフィグレーション項目です。
 
 ### <code>temp-path</code> <span class="version-mark">v6.2.0 の新機能</span> {#code-temp-path-code-span-class-version-mark-new-in-v6-2-0-span}
 
--   外部ストレージにフラッシュされる前にログ ファイルが書き込まれる一時パス。
+-   外部storageにフラッシュされる前にログ ファイルが書き込まれる一時パス。
 -   デフォルト値: `${deploy-dir}/data/log-backup-temp`
 
 ## CDC {#cdc}
@@ -2003,7 +2021,7 @@ TiCDC に関連するコンフィグレーション項目。
 -   デフォルト値: `6` 。これは、最大で 6 つのタスクを同時に実行できることを意味します。
 -   注: `incremental-scan-concurrency`の値は`incremental-scan-threads`の値以上である必要があります。そうしないと、TiKV は起動時にエラーを報告します。
 
-## 解決済み-TS {#resolved-ts}
+## resolved-ts {#resolved-ts}
 
 ステイル読み取り要求を処理するための解決済み TS の維持に関連するコンフィグレーション項目。
 
@@ -2015,14 +2033,16 @@ TiCDC に関連するコンフィグレーション項目。
 ### <code>advance-ts-interval</code> {#code-advance-ts-interval-code}
 
 -   Resolved TS が計算されて転送される間隔。
--   デフォルト値: `"1s"`
+-   デフォルト値:
+    -   TiDB v6.5.0 の場合、デフォルト値は`"1s"`です。
+    -   TiDB v6.5.1 以降の v6.5.x バージョンの場合、デフォルト値は`"20s"`です。
 
 ### <code>scan-lock-pool-size</code> {#code-scan-lock-pool-size-code}
 
 -   解決済み TS を初期化するときに、TiKV が MVCC (マルチバージョン同時実行制御) ロック データをスキャンするために使用するスレッドの数。
 -   デフォルト値: `2` 。これは 2 つのスレッドを意味します。
 
-## 悲観的-txn {#pessimistic-txn}
+## pessimistic-txn {#pessimistic-txn}
 
 悲観的トランザクションの使用法については、 [TiDB ペシミスティックトランザクションモード](/pessimistic-transaction.md)を参照してください。
 
@@ -2042,11 +2062,11 @@ TiCDC に関連するコンフィグレーション項目。
 -   この構成アイテムは、悲観的ロックを追加するパイプライン プロセスを有効にします。この機能を有効にすると、データをロックできることを検出した後、TiKV は直ちに TiDB に通知して後続のリクエストを実行し、悲観的ロックを非同期で書き込みます。これにより、ほとんどのレイテンシーが短縮され、悲観的トランザクションのパフォーマンスが大幅に向上します。しかし、悲観的ロックの非同期書き込みが失敗する可能性はまだ低く、悲観的トランザクション コミットの失敗を引き起こす可能性があります。
 -   デフォルト値: `true`
 
-### <code>in-memory</code><span class="version-mark">新機能</span> {#code-in-memory-code-span-class-version-mark-new-in-v6-0-0-span}
+### <span class="version-mark">v6.0.0 の新</span><code>in-memory</code> {#code-in-memory-code-span-class-version-mark-new-in-v6-0-0-span}
 
 -   インメモリの悲観的ロック機能を有効にします。この機能を有効にすると、悲観的トランザクションは、ロックをディスクに書き込んだり、ロックを他のレプリカに複製したりする代わりに、ロックをメモリに保存しようとします。これにより、悲観的トランザクションのパフォーマンスが向上します。ただし、悲観的ロックが失われ、悲観的トランザクションのコミットが失敗する可能性はまだ低いです。
 -   デフォルト値: `true`
--   `in-memory`は`pipelined`の値が`true`の場合にのみ有効であることに注意してください。
+-   `in-memory` `pipelined`の値が`true`の場合にのみ有効であることに注意してください。
 
 ## クォータ {#quota}
 
@@ -2056,7 +2076,7 @@ Quota Limiter に関連するコンフィグレーション項目。
 
 -   単一の読み取りまたは書き込み要求が、フォアグラウンドで処理されるまで強制的に待機される最大時間。
 -   デフォルト値: `500ms`
--   推奨設定: ほとんどの場合、デフォルト値を使用することをお勧めします。インスタンスでメモリ(OOM) または激しいパフォーマンス ジッターが発生した場合、値を 1S に設定して、リクエストの待機時間を 1 秒未満にすることができます。
+-   推奨設定: ほとんどの場合、デフォルト値を使用することをお勧めします。インスタンスでメモリ不足 (OOM) または激しいパフォーマンス ジッターが発生した場合、値を 1S に設定して、リクエストの待機時間を 1 秒未満にすることができます。
 
 ### フォアグラウンド クォータ リミッター {#foreground-quota-limiter}
 
@@ -2068,20 +2088,20 @@ TiKV がデプロイされているマシンのリソースが限られている
 
 -   TiKV フォアグラウンドが読み取りおよび書き込み要求を処理するために使用する CPU リソースのソフト制限。
 -   デフォルト値: `0` (制限なし)
--   単位: millicpu (たとえば、 `1500`は、フォアグラウンド リクエストが 1.5v CPU を消費することを意味します)
+-   単位: millicpu (たとえば、 `1500` 、フォアグラウンド リクエストが 1.5v CPU を消費することを意味します)
 -   推奨設定: コアが 4 つを超えるインスタンスの場合は、デフォルト値`0`を使用します。 4 コアのインスタンスの場合、値を`1000`から`1500`の範囲に設定すると、バランスを取ることができます。 2 コアのインスタンスの場合は、値を`1200`より小さくしてください。
 
 #### <code>foreground-write-bandwidth</code> <span class="version-mark">v6.0.0 の新機能</span> {#code-foreground-write-bandwidth-code-span-class-version-mark-new-in-v6-0-0-span}
 
 -   トランザクションがデータを書き込む帯域幅のソフト リミット。
 -   デフォルト値: `0KB` (制限なし)
--   推奨される設定: `foreground-cpu-time`の設定では書き込み帯域幅を制限するのに十分でない場合を除き、ほとんどの場合、デフォルト値の`0`を使用します。このような例外のため、コア数が 4 以下のインスタンスでは`50MB`より小さい値を設定することをお勧めします。
+-   推奨される設定: `foreground-cpu-time`設定では書き込み帯域幅を制限するのに十分でない場合を除き、ほとんどの場合、デフォルト値の`0`を使用します。このような例外のため、コア数が 4 以下のインスタンスでは`50MB`より小さい値を設定することをお勧めします。
 
 #### <code>foreground-read-bandwidth</code> <span class="version-mark">v6.0.0 の新機能</span> {#code-foreground-read-bandwidth-code-span-class-version-mark-new-in-v6-0-0-span}
 
 -   トランザクションとコプロセッサーがデータを読み取る帯域幅のソフト制限。
 -   デフォルト値: `0KB` (制限なし)
--   推奨される設定: `foreground-cpu-time`の設定が読み取り帯域幅を制限するのに十分でない場合を除き、ほとんどの場合、既定値の`0`を使用します。このような例外のため、コア数が 4 以下のインスタンスでは`20MB`より小さい値を設定することをお勧めします。
+-   推奨される設定: `foreground-cpu-time`設定が読み取り帯域幅を制限するのに十分でない場合を除き、ほとんどの場合、既定値の`0`を使用します。このような例外のため、コア数が 4 以下のインスタンスでは`20MB`より小さい値を設定することをお勧めします。
 
 ### バックグラウンド クォータ リミッター {#background-quota-limiter}
 
@@ -2091,14 +2111,14 @@ TiKV がデプロイされているマシンのリソースが限られている
 
 > **警告：**
 >
-> -   バックグラウンド クォータ リミッターは、TiDB v6.2.0 で導入された実験的機能であり、本番環境で使用することはお勧めし**ません**。
+> -   バックグラウンド クォータ リミッターは、TiDB v6.2.0 で導入された実験的機能であり、本番環境で使用することは**お**勧めしません。
 > -   この機能は、TiKV がこれらの環境で安定して実行できるように、リソースが限られている環境にのみ適しています。リソースが豊富な環境でこの機能を有効にすると、リクエスト量がピークに達したときにパフォーマンスが低下する可能性があります。
 
 #### <code>background-cpu-time</code> <span class="version-mark">v6.2.0 の新機能</span> {#code-background-cpu-time-code-span-class-version-mark-new-in-v6-2-0-span}
 
 -   TiKV バックグラウンドが読み取りおよび書き込み要求を処理するために使用する CPU リソースのソフト制限。
 -   デフォルト値: `0` (制限なし)
--   単位: millicpu (たとえば、 `1500`はバックグラウンド要求が 1.5v CPU を消費することを意味します)
+-   単位: millicpu (たとえば、 `1500`バックグラウンド要求が 1.5v CPU を消費することを意味します)
 
 #### <code>background-write-bandwidth</code> <span class="version-mark">v6.2.0 の新機能</span> {#code-background-write-bandwidth-code-span-class-version-mark-new-in-v6-2-0-span}
 
@@ -2132,7 +2152,7 @@ TiKV API V2 が有効な場合のタイムスタンプの取得に関連する�
 ### <code>alloc-ahead-buffer</code> <span class="version-mark">v6.4.0 の新機能</span> {#code-alloc-ahead-buffer-code-span-class-version-mark-new-in-v6-4-0-span}
 
 -   事前に割り当てられた TSO キャッシュ サイズ (期間)。
--   この構成項目で指定された期間に基づいて、TiKV が TSO キャッシュを事前に割り当てることを示します。 TiKV は、前の期間に基づいて TSO の使用量を推定し、 `alloc-ahead-buffer`を満たす TSO をローカルに要求してキャッシュします。
+-   この構成項目で指定された期間に基づいて、TiKV が TSO キャッシュを事前に割り当てることを示します。 TiKV は、前の期間に基づいて TSO の使用量を推定し、 `alloc-ahead-buffer`満たす TSO をローカルに要求してキャッシュします。
 -   この構成項目は、TiKV API V2 が有効になっている場合に PD 障害の許容度を高めるためによく使用されます ( `storage.api-version = 2` )。
 -   この構成項目の値を大きくすると、TSO の消費量と TiKV のメモリオーバーヘッドが増える可能性があります。十分な TSO を取得するには、PD の構成項目を[`tso-update-physical-interval`](/pd-configuration-file.md#tso-update-physical-interval)減らすことをお勧めします。
 -   テストによると、 `alloc-ahead-buffer`がデフォルト値であり、PD リーダーに障害が発生して別のノードに切り替わると、書き込み要求でレイテンシーが短期間増加し、QPS が減少します (約 15%)。
@@ -2152,11 +2172,11 @@ TiKV API V2 が有効な場合のタイムスタンプの取得に関連する�
 
 -   タイムスタンプ要求の TSO の最小数。
 -   TiKV は、前の期間のタイムスタンプの消費に応じて、キャッシュされたタイムスタンプの数を調整します。少数の TSO のみが必要な場合、TiKV は、数が`renew-batch-min-size`に達するまで、要求された TSO を減らします。アプリケーションで大量のバースト書き込みトラフィックが頻繁に発生する場合は、必要に応じてこのパラメーターをより大きな値に設定できます。このパラメーターは、単一の tikv サーバーのキャッシュ サイズであることに注意してください。パラメーターを大きすぎる値に設定し、クラスターに多くの tikv サーバーが含まれている場合、TSO の消費が速すぎます。
--   Grafana の**TiKV-RAW** &gt; <strong>Causal timestamp</strong>パネルでは、 <strong>TSO バッチ サイズ</strong>は、アプリケーションのワークロードに従って動的に調整された、ローカルにキャッシュされたタイムスタンプの数です。このメトリックを参照して調整できます`renew-batch-min-size` 。
+-   Grafana の**TiKV-RAW** &gt; <strong>Causal timestamp</strong>パネルでは、 <strong>TSO バッチ サイズは</strong>、アプリケーションのワークロードに従って動的に調整された、ローカルにキャッシュされたタイムスタンプの数です。このメトリックを参照して調整できます`renew-batch-min-size` 。
 -   デフォルト値: `100`
 
 ### <code>renew-batch-max-size</code> <span class="version-mark">v6.4.0 の新機能</span> {#code-renew-batch-max-size-code-span-class-version-mark-new-in-v6-4-0-span}
 
 -   タイムスタンプ要求の TSO の最大数。
--   デフォルトの TSO 物理時間更新間隔 ( `50ms` ) では、PD は最大 262144 個の TSO を提供します。要求された TSO がこの数を超えると、PD はそれ以上 TSO を提供しません。この構成項目は、TSO の枯渇と、TSO の枯渇が他のビジネスに及ぼす逆の影響を回避するために使用されます。高可用性を改善するためにこの構成項目の値を増やす場合は、十分な TSO を得るために同時に値[`tso-update-physical-interval`](/pd-configuration-file.md#tso-update-physical-interval)を減らす必要があります。
+-   デフォルトの TSO 物理時間更新間隔 ( `50ms` ) では、PD は最大 262144 個の TSO を提供します。要求された TSO がこの数を超えると、PD はそれ以上 TSO を提供しません。この構成項目は、TSO の枯渇と、TSO の枯渇が他のビジネスに及ぼす逆の影響を回避するために使用されます。高可用性を改善するためにこの構成項目の値を増やす場合は、十分な TSO を得るために同時に値[`tso-update-physical-interval`](/pd-configuration-file.md#tso-update-physical-interval)減らす必要があります。
 -   デフォルト値: `8192`

@@ -1,11 +1,11 @@
 ---
 title: TiDB Cloud Documentation
-aliases: ['/tidbcloud/beta/privacy-policy', '/tidbcloud/beta/terms-of-service', '/tidbcloud/beta/service-level-agreement']
+aliases: ['/tidbcloud/privacy-policy', '/tidbcloud/terms-of-service', '/tidbcloud/service-level-agreement']
 hide_sidebar: true
 hide_commit: true
 ---
 
-<LearningPathContainer platform="tidb-cloud" title="TiDB Cloud" subTitle="TiDB Cloudは、完全に管理された Database-as-a-Service (DBaaS) であり、TiDB のすべての優れた機能をクラウドにもたらします。 TiDB Cloudを使用するために必要なガイド、サンプル、リファレンスを見つけてください。">
+<LearningPathContainer platform="tidb-cloud" title="TiDB クラウド" subTitle="TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings everything great about TiDB to your cloud. Find the guide, samples, and references you need to use TiDB Cloud.">
 
 <LearningPath label="Learn" icon="cloud1">
 
@@ -37,7 +37,7 @@ hide_commit: true
 
 </LearningPath>
 
-<LearningPath label="Use" icon="cloud7">
+<LearningPath label="Maintain" icon="cloud7">
 
 [クラスタを作成する](https://docs.pingcap.com/tidbcloud/create-tidb-cluster)
 
@@ -45,11 +45,17 @@ hide_commit: true
 
 [HTAPクラスタを使用する](https://docs.pingcap.com/tidbcloud/tiflash-overview)
 
+[データのバックアップと復元](https://docs.pingcap.com/tidbcloud/backup-and-restore)
+
 [クラスタのスケーリング](https://docs.pingcap.com/tidbcloud/scale-tidb-cluster)
 
 [TiDBクラスタを一時停止または再開する](https://docs.pingcap.com/tidbcloud/pause-or-resume-tidb-cluster)
 
-[API (ベータ) を使用する](https://docs.pingcap.com/tidbcloud/api-overview)
+[ストリーム データ](http://docs.pingcap.com/tidbcloud/changefeed-overview)
+
+[API を使用する (ベータ)](https://docs.pingcap.com/tidbcloud/api-overview)
+
+[TiDB CloudCLI を使用する](https://docs.pingcap.com/tidbcloud/get-started-with-cli)
 
 </LearningPath>
 
@@ -103,7 +109,7 @@ hide_commit: true
 
 [役割の構成](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-role-access)
 
-[セキュリティ設定の構成](https://docs.pingcap.com/tidbcloud/configure-security-settings)
+[Security設定の構成](https://docs.pingcap.com/tidbcloud/configure-security-settings)
 
 </LearningPath>
 
@@ -121,27 +127,15 @@ hide_commit: true
 
 [エアバイト](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-airbyte)
 
-[Amazon AppFlow](https://docs.pingcap.com/tidbcloud/dev-guide-aws-appflow-integration)
-
-[クラウドフレア](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-cloudflare)
-
 [データドッグ](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration)
 
-[dbt](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-dbt)
-
-[n8n](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-n8n)
-
-[ネットリファイ](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-netlify)
-
-[プロメテウスとグラファナ](https://docs.pingcap.com/tidbcloud/monitor-prometheus-and-grafana-integration)
-
-[プロキシSQL](https://docs.pingcap.com/tidbcloud/dev-guide-proxysql-integration)
-
-[テラフォーム](https://docs.pingcap.com/tidbcloud/terraform-tidbcloud-provider-overview)
+[ザピア](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-zapier)
 
 [ヴェルセル](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-vercel)
 
-[ザピア](https://docs.pingcap.com/tidbcloud/integrate-tidbcloud-with-zapier)
+[テラフォーム](https://docs.pingcap.com/tidbcloud/terraform-tidbcloud-provider-overview)
+
+[Amazon AppFlow](https://docs.pingcap.com/tidbcloud/dev-guide-aws-appflow-integration)
 
 </LearningPath>
 

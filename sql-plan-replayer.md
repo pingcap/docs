@@ -9,10 +9,10 @@ TiDB クラスターの問題を特定してトラブルシューティングす
 
 `PLAN REPLAYER`の特徴は以下の通りです。
 
--   オンサイト トラブルシューティングでの TiDB クラスターの情報を保存用の ZIP 形式のファイルにエクスポートします。
+-   オンサイト トラブルシューティングでの TiDB クラスターの情報をstorage用の ZIP 形式のファイルにエクスポートします。
 -   別の TiDB クラスターからエクスポートされた ZIP 形式のファイルをクラスターにインポートします。このファイルには、オンサイト トラブルシューティングでの後者の TiDB クラスターの情報が含まれています。
 
-## <code>PLAN REPLAYER</code>を使用してクラスター情報をエクスポートする {#use-code-plan-replayer-code-to-export-cluster-information}
+## <code>PLAN REPLAYER</code>使用してクラスター情報をエクスポートする {#use-code-plan-replayer-code-to-export-cluster-information}
 
 `PLAN REPLAYER`を使用して、TiDB クラスターのオンサイト情報を保存できます。エクスポート インターフェイスは次のとおりです。
 
@@ -34,7 +34,7 @@ PLAN REPLAYER DUMP EXPLAIN [ANALYZE] sql-statement;
 
 > **ノート：**
 >
-> `PLAN REPLAYER`はテーブル データをエクスポートし**ません**。
+> `PLAN REPLAYER`はテーブル データをエクスポート**しません**。
 
 ### クラスター情報のエクスポートの例 {#examples-of-exporting-cluster-information}
 
@@ -49,11 +49,11 @@ analyze table t;
 plan replayer dump explain select * from t;
 ```
 
-`PLAN REPLAYER DUMP`は、上記のテーブル情報を`ZIP`ファイルにパッケージ化し、ファイル識別子を実行結果として返します。このファイルは 1 回限りのファイルです。ファイルがダウンロードされると、TiDB はそのファイルを削除します。
+`PLAN REPLAYER DUMP` 、上記のテーブル情報を`ZIP`ファイルにパッケージ化し、ファイル識別子を実行結果として返します。このファイルは 1 回限りのファイルです。ファイルがダウンロードされると、TiDB はそのファイルを削除します。
 
 > **ノート：**
 >
-> `ZIP`のファイルは、最大 1 時間 TiDB クラスターに保存されます。 1 時間後、TiDB はそれを削除します。
+> `ZIP`ファイルは、最大 1 時間 TiDB クラスターに保存されます。 1 時間後、TiDB はそれを削除します。
 
 ```sql
 MySQL [test]> plan replayer dump explain select * from t;
@@ -68,7 +68,7 @@ MySQL [test]> plan replayer dump explain select * from t;
 1 row in set (0.015 sec)
 ```
 
-または、セッション変数[`tidb_last_plan_replayer_token`](/system-variables.md#tidb_last_plan_replayer_token-new-in-v630)を使用して、最後の`PLAN REPLAYER DUMP`の実行結果を取得できます。
+または、セッション変数[`tidb_last_plan_replayer_token`](/system-variables.md#tidb_last_plan_replayer_token-new-in-v630)を使用して、最後の`PLAN REPLAYER DUMP`回の実行結果を取得できます。
 
 ```sql
 SELECT @@tidb_last_plan_replayer_token;
@@ -122,7 +122,7 @@ http://${tidb-server-ip}:${tidb-server-status-port}/plan_replayer/dump/${file_to
 curl http://127.0.0.1:10080/plan_replayer/dump/replayer_JOGvpu4t7dssySqJfTtS4A==_1635750890568691080.zip > plan_replayer.zip
 ```
 
-## <code>PLAN REPLAYER</code>を使用してクラスター情報をインポートする {#use-code-plan-replayer-code-to-import-cluster-information}
+## <code>PLAN REPLAYER</code>使用してクラスター情報をインポートする {#use-code-plan-replayer-code-to-import-cluster-information}
 
 > **警告：**
 >
@@ -136,7 +136,7 @@ curl http://127.0.0.1:10080/plan_replayer/dump/replayer_JOGvpu4t7dssySqJfTtS4A==
 PLAN REPLAYER LOAD 'file_name';
 ```
 
-上記のステートメントで、 `file_name`はエクスポートする`ZIP`ファイルの名前です。
+上記のステートメントで、 `file_name`エクスポートする`ZIP`ファイルの名前です。
 
 例えば：
 

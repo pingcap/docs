@@ -15,13 +15,13 @@ TiDB アンシブル バージョン: 3.0.3
 -   SQL オプティマイザー
     -   `opt_rule_blacklist`テーブルを追加して、 `aggregation_eliminate`や`column_prune` [#11658](https://github.com/pingcap/tidb/pull/11658)などのロジック最適化ルールを無効にします。
     -   結合キーがプレフィックス インデックスまたは負の値[#11759](https://github.com/pingcap/tidb/pull/11759)に等しい符号なしインデックス カラムを使用する場合、 `Index Join`に対して誤った結果が返される可能性がある問題を修正します。
-    -   `create … binding ...`の`SELECT`のステートメントの`”`または`\`が解析エラーになる可能性がある問題を修正します[#11726](https://github.com/pingcap/tidb/pull/11726)
+    -   `create … binding ...`の`SELECT`のステートメントの`”`または`\`解析エラーになる可能性がある問題を修正します[#11726](https://github.com/pingcap/tidb/pull/11726)
 -   SQL 実行エンジン
     -   Quote関数でnull値を扱う際に戻り値に型エラーが発生することがある問題を修正[#11619](https://github.com/pingcap/tidb/pull/11619)
     -   Max/Min を使用して`NotNullFlag`保持[#11641](https://github.com/pingcap/tidb/pull/11641)の型推論を行うと、 `ifnull`に対して誤った結果が返されることがある問題を修正します。
     -   文字列形式[#11660](https://github.com/pingcap/tidb/pull/11660)のビット型データを比較するときに発生する潜在的なエラーを修正します。
     -   OOM [#11679](https://github.com/pingcap/tidb/pull/11679)の可能性を下げるために、シーケンシャル読み取りが必要なデータの同時実行数を減らします
-    -   一部の組み込み関数(たとえば、 `if`および`coalesce` ) で複数のパラメーターが符号なしの場合、誤った型推論が発生する可能性がある問題を修正します[#11621](https://github.com/pingcap/tidb/pull/11621)
+    -   一部の組み込み関数 (たとえば、 `if`および`coalesce` ) で複数のパラメーターが符号なしの場合、誤った型関数が発生する可能性がある問題を修正します[#11621](https://github.com/pingcap/tidb/pull/11621)
     -   `Div`関数が符号なし 10 進数型を処理する場合の MySQL との非互換性を修正します[#11813](https://github.com/pingcap/tidb/pull/11813)
     -   Pump/ Drainer [#11827](https://github.com/pingcap/tidb/pull/11827)のステータスを変更する SQL ステートメントを実行すると、panicが発生することがある問題を修正します。
     -   Autocommit = 1 で`begin`ステートメントがない場合、 `select ... for update`に対してpanicが発生する可能性がある問題を修正[#11736](https://github.com/pingcap/tidb/pull/11736)
@@ -47,7 +47,7 @@ TiDB アンシブル バージョン: 3.0.3
 
 ## TiKV {#tikv}
 
--   コンテキストが重複しているため、 ReadIndexが要求に応答しない場合がある問題を修正します[#5256](https://github.com/tikv/tikv/pull/5256)
+-   コンテキストが重複しているため、 ReadIndex が要求に応答しない場合がある問題を修正します[#5256](https://github.com/tikv/tikv/pull/5256)
 -   時期尚早によって引き起こされる可能性のあるスケジューリング ジッタを修正します`PutStore` [#5277](https://github.com/tikv/tikv/pull/5277)
 -   リージョンハートビートから報告された誤ったタイムスタンプを修正します[#5296](https://github.com/tikv/tikv/pull/5296)
 -   コア ダンプから共有ブロックキャッシュを除外して、コア ダンプのサイズを縮小します[#5322](https://github.com/tikv/tikv/pull/5322)
@@ -55,7 +55,7 @@ TiDB アンシブル バージョン: 3.0.3
 -   デッドロック検出器[#5317](https://github.com/tikv/tikv/pull/5317)のリーダー変更チェックの高速化
 -   `grpc env`を使用したデッドロック クライアントの作成のサポート[#5346](https://github.com/tikv/tikv/pull/5346)
 -   `config-check`を追加して、構成が正しいかどうかを確認します[#5349](https://github.com/tikv/tikv/pull/5349)
--   リーダーがない場合、 ReadIndexが何も返さない問題を修正します[#5351](https://github.com/tikv/tikv/pull/5351)
+-   リーダーがない場合、 ReadIndex が何も返さない問題を修正します[#5351](https://github.com/tikv/tikv/pull/5351)
 
 ## PD {#pd}
 
@@ -63,8 +63,8 @@ TiDB アンシブル バージョン: 3.0.3
 
 ## ツール {#tools}
 
--   Binlog
-    -   Drainerのデフォルト値`defaultBinlogItemCount`を 65536 から 512 に変更して、 Drainerの起動時の OOM の可能性を減らします[#721](https://github.com/pingcap/tidb-binlog/pull/721)
+-   TiDBBinlog
+    -   Drainerのデフォルト値`defaultBinlogItemCount`を 65536 から 512 に変更して、 Drainer の起動時の OOM の可能性を減らします[#721](https://github.com/pingcap/tidb-binlog/pull/721)
     -   潜在的なオフラインの輻輳を回避するために、ポンプサーバーのオフライン ロジックを最適化します[#701](https://github.com/pingcap/tidb-binlog/pull/701)
 -   TiDB Lightning:
     -   [#225](https://github.com/pingcap/tidb-lightning/pull/225)をインポートするときに、デフォルトでシステム データベース`mysql` 、 `information_schema` 、 `performance_schema` 、および`sys`をスキップします。

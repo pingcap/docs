@@ -43,8 +43,17 @@ Query OK, 0 rows affected (0.22 sec)
 
 mysql> DROP TABLE table_not_exists;
 ERROR 1051 (42S02): Unknown table 'test.table_not_exists'
+
 mysql> DROP TABLE IF EXISTS table_not_exists;
-Query OK, 0 rows affected (0.01 sec)
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+
+mysql> SHOW WARNINGS;
++-------+------+---------------------------------------+
+| Level | Code | Message                               |
++-------+------+---------------------------------------+
+| Note  | 1051 | Unknown table 'test.table_not_exists' |
++-------+------+---------------------------------------+
+1 row in set (0.01 sec)
 
 mysql> CREATE VIEW v1 AS SELECT 1;
 Query OK, 0 rows affected (0.10 sec)
@@ -55,8 +64,7 @@ Query OK, 0 rows affected (0.23 sec)
 
 ## MySQL の互換性 {#mysql-compatibility}
 
--   存在しないテーブルを削除しようとしても、 `IF EXISTS`を指定してテーブルを削除しても警告は返されません。 [問題＃7867](https://github.com/pingcap/tidb/issues/7867)
--   現在、 `RESTRICT`と`CASCADE`は構文的にのみサポートされています。
+現在、 `RESTRICT`と`CASCADE`は構文的にのみサポートされています。
 
 ## こちらもご覧ください {#see-also}
 

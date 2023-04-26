@@ -7,7 +7,7 @@ summary: Learn how to solve the wrong index issue.
 
 一部のクエリの実行速度が期待に達していないことがわかった場合、オプティマイザはクエリを実行するために間違ったインデックスを選択する可能性があります。
 
-最初に統計で[テーブルのヘルス状態](/statistics.md#health-state-of-tables)を表示してから、さまざまな健康状態に応じてこの問題を解決できます。
+最初に統計で[テーブルのヘルス状態](/statistics.md#health-state-of-tables)表示してから、さまざまな健康状態に応じてこの問題を解決できます。
 
 ## 低健康状態 {#low-health-state}
 
@@ -15,11 +15,11 @@ summary: Learn how to solve the wrong index issue.
 
 ## ほぼ 100% の健康状態 {#near-100-health-state}
 
-ほぼ 100% の正常性状態は、 `ANALYZE`のステートメントが完了したばかりか、少し前に完了したことを示しています。この場合、間違ったインデックスの問題は、TiDB の行数の見積もりロジックに関連している可能性があります。
+ほぼ 100% の正常性状態は、 `ANALYZE`ステートメントが完了したばかりか、少し前に完了したことを示しています。この場合、間違ったインデックスの問題は、TiDB の行数の見積もりロジックに関連している可能性があります。
 
 等価クエリの場合、原因は[カウントミンスケッチ](/statistics.md#count-min-sketch)である可能性があります。 Count-Min Sketch が原因であるかどうかを確認し、対応する解決策を講じることができます。
 
-上記の原因が問題に当てはまらない場合は、 `USE_INDEX`または`use index`のオプティマイザー ヒントを使用してインデックスを強制選択できます (詳細については、 [USE_INDEX](/optimizer-hints.md#use_indext1_name-idx1_name--idx2_name-)を参照してください)。また、邪魔にならない方法で[SQL計画管理](/sql-plan-management.md)を使用して、クエリの動作を変更することもできます。
+上記の原因が問題に当てはまらない場合は、 `USE_INDEX`または`use index`オプティマイザー ヒントを使用してインデックスを強制選択できます (詳細については、 [USE_INDEX](/optimizer-hints.md#use_indext1_name-idx1_name--idx2_name-)参照してください)。また、邪魔にならない方法で[SQL計画管理](/sql-plan-management.md)を使用して、クエリの動作を変更することもできます。
 
 ## その他の状況 {#other-situations}
 

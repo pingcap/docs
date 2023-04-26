@@ -32,7 +32,7 @@ CREATE ROLE 'app_developer', 'app_read', 'app_write';
 
 ロールは`mysql.user`テーブルに格納され、ロール名のホスト名部分 (省略された場合) はデフォルトで`'%'`になります。作成しようとしているロールの名前は一意である必要があります。そうでない場合、エラーが報告されます。
 
-ロールを作成するには、 `CREATE ROLE`または`CREATE USER`の権限が必要です。
+ロールを作成するには、 `CREATE ROLE`または`CREATE USER`権限が必要です。
 
 ### ロールに権限を付与する {#grant-a-privilege-to-a-role}
 
@@ -64,7 +64,7 @@ GRANT ALL ON app_db.* TO 'app_developer';
 
 ### ユーザーにロールを付与する {#grant-a-role-to-a-user}
 
-ユーザー`dev1`が、 `app_db`に対するすべての権限を持つ開発者ロールを持っているとします。 2 人のユーザー`read_user1`と`read_user2`は`app_db`に対する読み取り専用権限を持っています。また、ユーザー`rw_user1`は`app_db`に対する読み取り権限と書き込み権限を持っています。
+ユーザー`dev1`が、 `app_db`に対するすべての権限を持つ開発者ロールを持っているとします。 2 人のユーザー`read_user1`と`read_user2` `app_db`に対する読み取り専用権限を持っています。また、ユーザー`rw_user1`は`app_db`に対する読み取り権限と書き込み権限を持っています。
 
 `CREATE USER`を使用してユーザーを作成します。
 
@@ -77,7 +77,7 @@ CREATE USER 'read_user2'@'localhost' IDENTIFIED BY 'read_user2pass';
 CREATE USER 'rw_user1'@'localhost' IDENTIFIED BY 'rw_user1pass';
 ```
 
-次に、 `GRANT`を使用してユーザーにロールを付与します
+次に、 `GRANT`使用してユーザーにロールを付与します
 
 ```sql
 GRANT 'app_developer' TO 'dev1'@'localhost';
@@ -175,9 +175,9 @@ SHOW GRANTS FOR 'read_user1'@'localhost' USING 'app_read';
 +--------------------------------------------------------+
 ```
 
-`SHOW GRANTS`または`SHOW GRANTS FOR CURRENT_USER()`を使用して、現在のユーザーの権限を確認できます。 `SHOW GRANTS`と`SHOW GRANTS FOR CURRENT_USER()`は、次の点で異なります。
+`SHOW GRANTS`または`SHOW GRANTS FOR CURRENT_USER()`を使用して、現在のユーザーの権限を確認できます。 `SHOW GRANTS`と`SHOW GRANTS FOR CURRENT_USER()` 、次の点で異なります。
 
--   `SHOW GRANTS`は、現在のユーザーの有効なロールの特権を示します。
+-   `SHOW GRANTS`現在のユーザーの有効なロールの特権を示します。
 -   `SHOW GRANTS FOR CURRENT_USER()`は、有効な役割の特権を示しません。
 
 ### デフォルトの役割を設定する {#set-the-default-role}
@@ -236,7 +236,7 @@ SET ROLE {
 }
 ```
 
-たとえば、 `rw_user1`がログインした後、次のステートメントを使用して、現在のセッションでのみ有効なロール`app_read`と`app_write`を有効にできます。
+たとえば、 `rw_user1`ログインした後、次のステートメントを使用して、現在のセッションでのみ有効なロール`app_read`と`app_write`を有効にできます。
 
 {{< copyable "" >}}
 
@@ -292,7 +292,7 @@ SET ROLE ALL EXCEPT 'app_read'
 SET DEFAULT ROLE ALL TO 'rw_user1'@'localhost';
 ```
 
-`rw_user1@localhost`人がログインした後、次のステートメントを実行できます。
+`rw_user1@localhost`がログインした後、次のステートメントを実行できます。
 
 {{< copyable "" >}}
 
@@ -344,7 +344,7 @@ REVOKE 'app_read', 'app_write' FROM 'rw_user1'@'localhost';
 
 ### 特権を取り消す {#revoke-a-privilege}
 
-`REVOKE`ステートメントは`GRANT`の逆です。 `REVOKE`を使用して`app_write`の権限を取り消すことができます。
+`REVOKE`ステートメントは`GRANT`の逆です。 `REVOKE`使用して`app_write`の権限を取り消すことができます。
 
 {{< copyable "" >}}
 
@@ -366,7 +366,7 @@ DROP ROLE 'app_read', 'app_write';
 
 この操作により、 `mysql.user`テーブルの`app_read`と`app_write`のロール レコードと、権限テーブルの関連レコードが削除され、2 つのロールに関連する権限が終了します。
 
-ロールを削除するには、 `DROP ROLE`または`DROP USER`の権限が必要です。
+ロールを削除するには、 `DROP ROLE`または`DROP USER`権限が必要です。
 
 ### 認可表 {#authorization-table}
 
@@ -394,12 +394,12 @@ SELECT * FROM mysql.role_edges;
 1 row in set (0.00 sec)
 ```
 
--   `FROM_HOST`と`FROM_USER`は、それぞれ役割のホスト名とユーザー名を示します。
--   `TO_HOST`と`TO_USER`は、ロールが付与されたユーザーのホスト名とユーザー名を示します。
+-   `FROM_HOST`と`FROM_USER` 、それぞれ役割のホスト名とユーザー名を示します。
+-   `TO_HOST`と`TO_USER` 、ロールが付与されたユーザーのホスト名とユーザー名を示します。
 
 #### <code>mysql.default_roles</code> {#code-mysql-default-roles-code}
 
-`mysql.default_roles`は、各ユーザーに対してデフォルトで有効になっているロールを示します。
+`mysql.default_roles`各ユーザーに対してデフォルトで有効になっているロールを示します。
 
 {{< copyable "" >}}
 
@@ -417,8 +417,8 @@ SELECT * FROM mysql.default_roles;
 2 rows in set (0.00 sec)
 ```
 
--   `HOST`と`USER`は、それぞれユーザーのホスト名とユーザー名を示します。
--   `DEFAULT_ROLE_HOST`と`DEFAULT_ROLE_USER`は、それぞれデフォルト ロールのホスト名とユーザー名を示します。
+-   `HOST`と`USER` 、それぞれユーザーのホスト名とユーザー名を示します。
+-   `DEFAULT_ROLE_HOST`と`DEFAULT_ROLE_USER` 、それぞれデフォルト ロールのホスト名とユーザー名を示します。
 
 ### 参考文献 {#references}
 

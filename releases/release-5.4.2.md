@@ -21,7 +21,7 @@ TiDB バージョン: 5.4.2
 -   TiKV
 
     -   更新ごとに TLS 証明書を自動的にリロードして、可用性を向上させます[#12546](https://github.com/tikv/tikv/issues/12546)
-    -   TiKV クライアントがリージョンキャッシュを時間内に更新できるように、ヘルス チェックを改善して利用できない[#12398](https://github.com/tikv/tikv/issues/12398)を検出します。
+    -   TiKV クライアントがリージョンキャッシュを時間[#12398](https://github.com/tikv/tikv/issues/12398)に更新できるように、ヘルス チェックを改善して利用できないRaftstoreを検出します。
     -   リーダーシップを CDC オブザーバーに移管し、レイテンシーのジッターを減らします[#12111](https://github.com/tikv/tikv/issues/12111)
 
 -   PD
@@ -58,9 +58,9 @@ TiDB バージョン: 5.4.2
     -   ソース ピアがリージョンマージ プロセスでスナップショットによってログをキャッチするときに発生する可能性があるpanicの問題を修正します[#12663](https://github.com/tikv/tikv/issues/12663)
     -   ピアの分割と破棄が同時に行われると発生する可能性があるpanicの問題を修正します[#12825](https://github.com/tikv/tikv/issues/12825)
     -   PD クライアントがエラー[#12345](https://github.com/tikv/tikv/issues/12345)に遭遇したときに発生する PD クライアントの再接続が頻繁に発生する問題を修正します。
-    -   `DATETIME`の値に分数と`Z` [#12739](https://github.com/tikv/tikv/issues/12739)が含まれている場合に発生する時間解析エラーの問題を修正します。
+    -   `DATETIME`値に分数と`Z` [#12739](https://github.com/tikv/tikv/issues/12739)が含まれている場合に発生する時間解析エラーの問題を修正します。
     -   空の文字列の型変換を実行すると TiKV がパニックになる問題を修正します[#12673](https://github.com/tikv/tikv/issues/12673)
-    -   非同期コミットが有効になっている場合に、悲観的トランザクションでコミット レコードが重複する可能性がある問題を修正し[#12615](https://github.com/tikv/tikv/issues/12615) 。
+    -   悲観的トランザクションでコミット レコードが重複する可能性がある問題を修正します[#12615](https://github.com/tikv/tikv/issues/12615)
     -   Follower Read [#12478](https://github.com/tikv/tikv/issues/12478)の使用時に TiKV が`invalid store ID 0`エラーを報告する問題を修正
     -   ピアの破棄とリージョン[#12368](https://github.com/tikv/tikv/issues/12368)のバッチ分割の間の競合によって引き起こされる TiKVpanicの問題を修正します。
     -   間違った文字列の一致が原因で tikv-ctl が間違った結果を返す問題を修正します[#12329](https://github.com/tikv/tikv/issues/12329)
@@ -75,7 +75,7 @@ TiDB バージョン: 5.4.2
 
 -   TiFlash
 
-    -   状況によっては、クラスター化されたインデックスを含むテーブルの列を削除した後にTiFlashがクラッシュする問題を修正します[#5154](https://github.com/pingcap/tiflash/issues/5154)
+    -   状況によっては、クラスター化されたインデックスを含むテーブルの列を削除した後にTiFlash がクラッシュする問題を修正します[#5154](https://github.com/pingcap/tiflash/issues/5154)
     -   多数の INSERT 操作と DELETE 操作の後に発生する可能性のあるデータの不整合を修正します[#4956](https://github.com/pingcap/tiflash/issues/4956)
     -   コーナーケースで間違った小数比較結果を修正する[#4512](https://github.com/pingcap/tiflash/issues/4512)
 
@@ -83,11 +83,11 @@ TiDB バージョン: 5.4.2
 
     -   バックアップと復元 (BR)
 
-        -   RawKV モード[#35279](https://github.com/pingcap/tidb/issues/35279)でBRが`ErrRestoreTableIDMismatch`を報告するバグを修正
+        -   RawKV モード[#35279](https://github.com/pingcap/tidb/issues/35279)でBR が`ErrRestoreTableIDMismatch`を報告するバグを修正
         -   ファイル保存エラー時にBRがリトライしない不具合を修正[#34865](https://github.com/pingcap/tidb/issues/34865)
         -   BR実行中のpanicの問題を修正[#34956](https://github.com/pingcap/tidb/issues/34956)
-        -   BRが S3 内部エラーを処理できない問題を修正します[#34350](https://github.com/pingcap/tidb/issues/34350)
-        -   復元操作がいくつかの回復不能なエラーに遭遇したときにBRがスタックするバグを修正します[#33200](https://github.com/pingcap/tidb/issues/33200)
+        -   BR がS3 内部エラーを処理できない問題を修正します[#34350](https://github.com/pingcap/tidb/issues/34350)
+        -   復元操作がいくつかの回復不能なエラーに遭遇したときにBR がスタックするバグを修正します[#33200](https://github.com/pingcap/tidb/issues/33200)
 
     -   TiCDC
 

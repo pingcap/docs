@@ -17,7 +17,7 @@ title: TiDB RC1 Release Notes
 ## プレースメントDriver(PD) {#placement-driver-pd}
 
 -   スケジューリング戦略のフレームワークが最適化され、戦略がより柔軟で合理的になりました。
--   Cross Data Center スケジューリングをサポートするために、 `label`のサポートが追加されました。
+-   Cross Data Center スケジューリングをサポートするために、 `label`サポートが追加されました。
 -   PD クラスターをより簡単に操作するために、PD コントローラーが提供されます。
 
 ## TiDB {#tidb}

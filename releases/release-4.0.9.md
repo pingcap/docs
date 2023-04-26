@@ -22,13 +22,13 @@ TiDB バージョン: 4.0.9
 
 -   TiFlash
 
-    -   複数のディスクへのストレージ エンジンの最新データの保存をサポート (実験的)
+    -   複数のディスクへのstorageエンジンの最新データの保存をサポート (実験的)
 
 -   TiDB ダッシュボード
 
     -   **SQL ステートメント**ページ[#749](https://github.com/pingcap/tidb-dashboard/pull/749)のすべてのフィールドによる表示と並べ替えをサポートします。
     -   トポロジ グラフのズームとパンをサポート[#772](https://github.com/pingcap/tidb-dashboard/pull/772)
-    -   [ **SQL ステートメント**] ページと [<strong>スロー クエリ]</strong>ページでのディスク使用情報の表示のサポート[#777](https://github.com/pingcap/tidb-dashboard/pull/777)
+    -   **[SQL ステートメント]**ページと<strong>[スロー クエリ]</strong>ページでのディスク使用情報の表示のサポート[#777](https://github.com/pingcap/tidb-dashboard/pull/777)
     -   **SQL ステートメント**および<strong>スロー クエリ</strong>ページでのリスト データのエクスポートのサポート[#778](https://github.com/pingcap/tidb-dashboard/pull/778)
     -   Prometheus アドレスのカスタマイズをサポート[#808](https://github.com/pingcap/tidb-dashboard/pull/808)
     -   クラスター統計のページを追加する[#815](https://github.com/pingcap/tidb-dashboard/pull/815)
@@ -61,7 +61,7 @@ TiDB バージョン: 4.0.9
     -   パイプライン化された悲観的ロックの成功率を高める[#9086](https://github.com/tikv/tikv/pull/9086)
     -   `apply-max-batch-size`と`store-max-batch-size`のデフォルト値を`1024` [#9020](https://github.com/tikv/tikv/pull/9020)に変更します
     -   `max-background-flushes`構成アイテム[#8947](https://github.com/tikv/tikv/pull/8947)を追加
-    -   パフォーマンスを向上させるためにデフォルトで`force-consistency-checks`を無効にします[#9029](https://github.com/tikv/tikv/pull/9029)
+    -   パフォーマンスを向上させるためにデフォルトで`force-consistency-checks`無効にします[#9029](https://github.com/tikv/tikv/pull/9029)
     -   リージョンサイズのクエリを`pd heartbeat worker`から`split check worker` [#9185](https://github.com/tikv/tikv/pull/9185)にオフロードします
 
 -   PD
@@ -73,7 +73,7 @@ TiDB バージョン: 4.0.9
 
     -   SQL文[#775](https://github.com/pingcap/tidb-dashboard/pull/775)の「展開」をクリックすると展開し続ける
     -   **SQL ステートメント**と<strong>スロー クエリ</strong>の詳細ページを新しいウィンドウで開く[#816](https://github.com/pingcap/tidb-dashboard/pull/816)
-    -   **スロー クエリ**の詳細の時間関連フィールドの説明を改善する[#817](https://github.com/pingcap/tidb-dashboard/pull/817)
+    -   **スロー クエリの**詳細の時間関連フィールドの説明を改善する[#817](https://github.com/pingcap/tidb-dashboard/pull/817)
     -   詳細なエラー メッセージを表示する[#794](https://github.com/pingcap/tidb-dashboard/pull/794)
 
 -   TiFlash
@@ -88,14 +88,14 @@ TiDB バージョン: 4.0.9
     -   バックアップと復元 (BR)
 
         -   コマンド ラインであいまいな`--checksum false`引数を許可しないようにします。これにより、チェックサムが正しく無効になりません。 `--checksum=false`だけ受け付けます。 [#588](https://github.com/pingcap/br/pull/588)
-        -   BRが誤って存在した後に PD が元の構成を回復できるように、一時的に PD 構成を変更することをサポートし[#596](https://github.com/pingcap/br/pull/596) 。
+        -   BR が誤って存在した後に PD が元の構成を回復できるように、 [#596](https://github.com/pingcap/br/pull/596)的に PD 構成を変更することをサポートします。
         -   復元後のテーブル分析のサポート[#622](https://github.com/pingcap/br/pull/622)
-        -   `read index not ready`と`proposal in merging mode`のエラーの再試行[#626](https://github.com/pingcap/br/pull/626)
+        -   `read index not ready`と`proposal in merging mode`エラーの再試行[#626](https://github.com/pingcap/br/pull/626)
 
     -   TiCDC
 
         -   TiKV の Hibernate リージョン機能を有効にするためのアラートを追加します[#1120](https://github.com/pingcap/tiflow/pull/1120)
-        -   スキーマ ストレージのメモリ使用量を減らす[#1127](https://github.com/pingcap/tiflow/pull/1127)
+        -   スキーマstorageのメモリ使用量を減らす[#1127](https://github.com/pingcap/tiflow/pull/1127)
         -   インクリメンタルスキャンのデータサイズが大きい場合にレプリケーションを高速化するユニファイドソーターの機能を追加 (実験的) [#1122](https://github.com/pingcap/tiflow/pull/1122)
         -   TiCDC Open Protocol メッセージでの最大メッセージ サイズと最大メッセージ バッチの設定をサポート (Kafka シンクのみ) [#1079](https://github.com/pingcap/tiflow/pull/1079)
 
@@ -114,7 +114,7 @@ TiDB バージョン: 4.0.9
         -   範囲プロパティを使用して、ローカル バックエンド[#422](https://github.com/pingcap/tidb-lightning/pull/422)で範囲分割をより正確にします
         -   `tikv-importer.region-split-size` 、 `mydumper.read-block-size` 、 `mydumper.batch-size` 、および`mydumper.max-region-size` [#471](https://github.com/pingcap/tidb-lightning/pull/471)で人間が読める形式 (「2.5 GiB」など) をサポートする
 
-    -   Binlog
+    -   TiDBBinlog
 
         -   アップストリーム PD がダウンしている場合、またはダウンストリームへの DDL または DML ステートメントの適用が失敗した場合は、 [#1012](https://github.com/pingcap/tidb-binlog/pull/1012)以外のコードでDrainerプロセスを終了します。
 
@@ -129,11 +129,11 @@ TiDB バージョン: 4.0.9
     -   ハッシュ型パーティションがパーティション名が一意かどうかをチェックしないバグを修正[#21257](https://github.com/pingcap/tidb/pull/21257)
     -   非`INT`型の値をハッシュパーティションテーブルに挿入した後に返される間違った結果を修正します[#21238](https://github.com/pingcap/tidb/pull/21238)
     -   場合によっては`INSERT`ステートメントでインデックス結合を使用すると予期しないエラーが発生する問題を修正[#21249](https://github.com/pingcap/tidb/pull/21249)
-    -   `CASE WHEN`演算子の`BigInt`符号なし列値が`BigInt`符号付き値[#21236](https://github.com/pingcap/tidb/pull/21236)に誤って変換される問題を修正します
+    -   `CASE WHEN`演算子の`BigInt`符号なし列値が`BigInt`付き値[#21236](https://github.com/pingcap/tidb/pull/21236)に誤って変換される問題を修正します
     -   インデックス ハッシュ結合とインデックス マージ結合が照合順序[#21219](https://github.com/pingcap/tidb/pull/21219)を考慮しないバグを修正
-    -   パーティションテーブルが`CREATE TABLE`と`SELECT`の構文で照合順序を考慮しないバグを修正[#21181](https://github.com/pingcap/tidb/pull/21181)
+    -   パーティションテーブルが`CREATE TABLE`と`SELECT`構文で照合順序を考慮しないバグを修正[#21181](https://github.com/pingcap/tidb/pull/21181)
     -   `slow_query`のクエリ結果が一部の行を欠落する可能性がある問題を修正します[#21211](https://github.com/pingcap/tidb/pull/21211)
-    -   データベース[#21206](https://github.com/pingcap/tidb/pull/21206)が純粋な下位表現でない場合、データが正しく削除されない可能性がある問題を修正`DELETE`
+    -   データベース名が純粋な下位表現でない場合、データが正しく削除されない可能性が`DELETE`問題を修正[#21206](https://github.com/pingcap/tidb/pull/21206)
     -   DML 操作後にスキーマの変更を引き起こすバグを修正します[#21050](https://github.com/pingcap/tidb/pull/21050)
     -   結合[#21021](https://github.com/pingcap/tidb/pull/21021)を使用すると、結合された列をクエリできないというバグを修正します。
     -   一部の準結合クエリの誤った結果を修正する[#21019](https://github.com/pingcap/tidb/pull/21019)
@@ -148,10 +148,10 @@ TiDB バージョン: 4.0.9
     -   新しく追加された`Enum`型の列のデフォルト値が正しくない問題を修正します[#20998](https://github.com/pingcap/tidb/pull/20998)
     -   `adddate`関数が無効な文字を挿入する問題を修正[#21176](https://github.com/pingcap/tidb/pull/21176)
     -   一部の状況で間違った`PointGet`プランが生成され、間違った結果が生じる問題を修正[#21244](https://github.com/pingcap/tidb/pull/21244)
-    -   MySQL [#20888](https://github.com/pingcap/tidb/pull/20888)と互換性を持たせるために、 `ADD_DATE`の関数で夏時間の変換を無視します。
+    -   MySQL [#20888](https://github.com/pingcap/tidb/pull/20888)と互換性を持たせるために、 `ADD_DATE`関数で夏時間の変換を無視します。
     -   `varchar`または`char`の長さ制限[#21282](https://github.com/pingcap/tidb/pull/21282)を超える末尾にスペースがある文字列を挿入できないバグを修正します。
     -   `int`と`year` [#21283](https://github.com/pingcap/tidb/pull/21283)を比較するとき、整数を`[1, 69]`から`[2001, 2069]`または`[70, 99]`から`[1970, 1999]`に変換しないバグを修正します
-    -   `Double`型フィールド[#21272](https://github.com/pingcap/tidb/pull/21272)の計算時に`sum()`関数の結果がオーバーフローしてpanicが発生する問題を修正
+    -   `Double`型フィールド[#21272](https://github.com/pingcap/tidb/pull/21272)の計算時に`sum()`関数の結果がオーバーフローしてパニックが発生するpanicを修正
     -   `DELETE`ユニークキーのロック追加に失敗するバグを修正[#20705](https://github.com/pingcap/tidb/pull/20705)
     -   スナップショットの読み込みがロックキャッシュにヒットするバグを修正[#21539](https://github.com/pingcap/tidb/pull/21539)
     -   存続期間の長いトランザクションで大量のデータを読み取った後の潜在的なメモリリークの問題を修正します[#21129](https://github.com/pingcap/tidb/pull/21129)
@@ -160,18 +160,18 @@ TiDB バージョン: 4.0.9
 
 -   TiKV
 
-    -   列数が 255 を超えると、 コプロセッサーが間違った結果を返すことがある問題を修正します[#9131](https://github.com/tikv/tikv/pull/9131)
+    -   列数が 255 を超えると、 コプロセッサー が間違った結果を返すことがある問題を修正します[#9131](https://github.com/tikv/tikv/pull/9131)
     -   リージョンマージがネットワーク パーティション[#9108](https://github.com/tikv/tikv/pull/9108)中にデータ損失を引き起こす可能性がある問題を修正します
     -   `latin1`文字セット[#9082](https://github.com/tikv/tikv/pull/9082)を使用すると、 `ANALYZE`ステートメントでpanicが発生する可能性がある問題を修正します。
     -   数値型を時間型に変換するときに返される間違った結果を修正します[#9031](https://github.com/tikv/tikv/pull/9031)
-    -   透過的データ暗号化 (TDE) が有効になっている場合、 TiDB Lightningが Importer-backend または Local-backend を使用して SST ファイルを TiKV に取り込めないというバグを修正します[#8995](https://github.com/tikv/tikv/pull/8995)
+    -   透過的データ暗号化 (TDE) が有効になっている場合、 TiDB Lightning がImporter-backend または Local-backend を使用して SST ファイルを TiKV に取り込めないというバグを修正します[#8995](https://github.com/tikv/tikv/pull/8995)
     -   無効な`advertise-status-addr`値を修正 ( `0.0.0.0` ) [#9036](https://github.com/tikv/tikv/pull/9036)
     -   コミットされたトランザクションでキーがロックされ、削除されている場合、キーが存在することを示すエラーが返される問題を修正します[#8930](https://github.com/tikv/tikv/pull/8930)
     -   RocksDB キャッシュ マッピング エラーが原因でデータが破損する問題を修正します[#9029](https://github.com/tikv/tikv/pull/9029)
-    -   リーダーが転送された後、 Follower Readが古いデータを返す可能性があるバグを修正します[#9240](https://github.com/tikv/tikv/pull/9240)
+    -   リーダーが転送された後、 Follower Read が古いデータを返す可能性があるバグを修正します[#9240](https://github.com/tikv/tikv/pull/9240)
     -   悲観的ロック[#9282](https://github.com/tikv/tikv/pull/9282)で古い値が読み取られる可能性がある問題を修正します。
     -   リーダーの転送後にレプリカの読み取りで古いデータが取得される可能性があるバグを修正します[#9240](https://github.com/tikv/tikv/pull/9240)
-    -   プロファイリング[#9229](https://github.com/tikv/tikv/pull/9229)後に`SIGPROF`を受信すると TiKV がクラッシュする問題を修正
+    -   プロファイリング[#9229](https://github.com/tikv/tikv/pull/9229)後に`SIGPROF`受信すると TiKV がクラッシュする問題を修正
 
 -   PD
 
@@ -203,22 +203,22 @@ TiDB バージョン: 4.0.9
         -   所有者のキャンペーン キーを削除すると複数の所有者が存在する可能性がある問題を修正します[#1104](https://github.com/pingcap/tiflow/pull/1104)
         -   TiKV ノードがクラッシュまたはクラッシュから回復したときに、TiCDC がデータの複製を続行できない可能性があるというバグを修正します。このバグは v4.0.8 にのみ存在します。 [#1198](https://github.com/pingcap/tiflow/pull/1198)
         -   テーブルが初期化される前に、メタデータが etcd に繰り返しフラッシュされる問題を修正します[#1191](https://github.com/pingcap/tiflow/pull/1191)
-        -   スキーマ ストレージが TiDB テーブルをキャッシュしている場合に、初期の GC または更新のレイテンシー`TableInfo`によって引き起こされるレプリケーションの中断の問題を修正します[#1114](https://github.com/pingcap/tiflow/pull/1114)
-        -   DDL 操作が頻繁に行われると、スキーマ ストレージがメモリを消費しすぎる問題を修正します[#1127](https://github.com/pingcap/tiflow/pull/1127)
+        -   スキーマstorageがTiDB テーブルをキャッシュしている場合に、初期の GC または更新のレイテンシー`TableInfo`によって引き起こされるレプリケーションの中断の問題を修正します[#1114](https://github.com/pingcap/tiflow/pull/1114)
+        -   DDL 操作が頻繁に行われると、スキーマstorageがメモリを消費しすぎる問題を修正します[#1127](https://github.com/pingcap/tiflow/pull/1127)
         -   変更フィードが一時停止または停止されたときのゴルーチン リークを修正します[#1075](https://github.com/pingcap/tiflow/pull/1075)
         -   Kafka プロデューサーで最大再試行タイムアウトを 600 秒に増やして、ダウンストリーム Kafka [#1118](https://github.com/pingcap/tiflow/pull/1118)でのサービスまたはネットワーク ジッターによって引き起こされるレプリケーションの中断を防ぎます。
         -   Kafkaのバッチサイズが反映されないバグを修正[#1112](https://github.com/pingcap/tiflow/pull/1112)
-        -   TiCDC と PD 間のネットワークにジッターがあり、一時停止中の変更フィードが同時に再開されると、一部のテーブルの行の変更が失われる可能性があるというバグを修正し[#1213](https://github.com/pingcap/tiflow/pull/1213) 。
-        -   TiCDC と PD 間のネットワークが安定していない場合、 [#1218](https://github.com/pingcap/tiflow/pull/1218)プロセスが終了する可能性があるバグを修正します。
+        -   TiCDC と PD 間のネットワークにジッターがあり、 [#1213](https://github.com/pingcap/tiflow/pull/1213)停止中の変更フィードが同時に再開されると、一部のテーブルの行の変更が失われる可能性があるというバグを修正します。
+        -   TiCDC と PD 間のネットワークが安定していない場合、TiCDC プロセスが終了する可能性があるバグを修正します[#1218](https://github.com/pingcap/tiflow/pull/1218)
         -   TiCDC でシングルトン PD クライアントを使用し、TiCDC が誤って PD クライアントを閉じてレプリケーション ブロック[#1217](https://github.com/pingcap/tiflow/pull/1217)が発生するバグを修正します。
         -   TiCDC 所有者が etcd ウォッチ クライアントでメモリを消費しすぎる可能性があるバグを修正します[#1224](https://github.com/pingcap/tiflow/pull/1224)
 
     -   Dumpling
 
-        -   MySQL データベースサーバーへの接続が閉じられたときにDumplingがブロックされる可能性がある問題を修正し[#190](https://github.com/pingcap/dumpling/pull/190) 。
+        -   MySQL データベースサーバーへの接続が閉じられたときにDumpling がブロックされる可能性がある問題を修正します[#190](https://github.com/pingcap/dumpling/pull/190)
 
     -   TiDB Lightning
 
         -   間違ったフィールド情報を使用してキーがエンコードされる問題を修正します[#437](https://github.com/pingcap/tidb-lightning/pull/437)
         -   GC ライフタイム TTL が有効にならない問題を修正[#448](https://github.com/pingcap/tidb-lightning/pull/448)
-        -   ローカル バックエンド モード[#484](https://github.com/pingcap/tidb-lightning/pull/484)で実行中のTiDB Lightningを手動で停止すると、panicが発生する問題を修正します。
+        -   ローカル バックエンド モード[#484](https://github.com/pingcap/tidb-lightning/pull/484)で実行中のTiDB Lightning を手動で停止すると、panicが発生する問題を修正します。

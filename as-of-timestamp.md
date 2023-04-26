@@ -5,18 +5,18 @@ summary: Learn how to read historical data using the `AS OF TIMESTAMP` statement
 
 # <code>AS OF TIMESTAMP</code>句を使用した履歴データの読み取り {#read-historical-data-using-the-code-as-of-timestamp-code-clause}
 
-このドキュメントでは、 `AS OF TIMESTAMP`句を使用して[ステイル読み取り](/stale-read.md)の機能を実行し、TiDB の履歴データを読み取る方法について説明します。これには、具体的な使用例と履歴データを保存するための戦略が含まれます。
+このドキュメントでは、 `AS OF TIMESTAMP`句を使用して[ステイル読み取り](/stale-read.md)機能を実行し、TiDB の履歴データを読み取る方法について説明します。これには、具体的な使用例と履歴データを保存するための戦略が含まれます。
 
 > **警告：**
 >
-> 現在、 Stale ステイル読み取りをTiFlashと一緒に使用することはできません。 SQL クエリに`AS OF TIMESTAMP`句が含まれており、TiDB がTiFlashレプリカからデータを読み取る可能性がある場合、 `ERROR 1105 (HY000): stale requests require tikv backend`のようなメッセージでエラーが発生する可能性があります。
+> 現在、 ステイル読み取り をTiFlashと一緒に使用することはできません。 SQL クエリに`AS OF TIMESTAMP`句が含まれており、TiDB がTiFlashレプリカからデータを読み取る可能性がある場合、 `ERROR 1105 (HY000): stale requests require tikv backend`ようなメッセージでエラーが発生する可能性があります。
 >
-> この問題を解決するには、Stale ステイル読み取りクエリのTiFlashレプリカを無効にします。これを行うには、次の操作のいずれかを実行します。
+> この問題を解決するには、 ステイル読み取りクエリのTiFlashレプリカを無効にします。これを行うには、次の操作のいずれかを実行します。
 >
 > -   `set session tidb_isolation_read_engines='tidb,tikv'`変数を使用します。
 > -   [ヒント](/optimizer-hints.md#read_from_storagetiflasht1_name--tl_name--tikvt2_name--tl_name-)を使用して、TiDB に TiKV からのデータの読み取りを強制します。
 
-TiDB は、特別なクライアントやドライバーを必要とせずに、 `AS OF TIMESTAMP`の SQL 句である標準 SQL インターフェイスを介した履歴データの読み取りをサポートしています。データが更新または削除された後、この SQL インターフェースを使用して、更新または削除前の履歴データを読み取ることができます。
+TiDB は、特別なクライアントやドライバーを必要とせずに、 `AS OF TIMESTAMP` SQL 句である標準 SQL インターフェイスを介した履歴データの読み取りをサポートしています。データが更新または削除された後、この SQL インターフェースを使用して、更新または削除前の履歴データを読み取ることができます。
 
 > **ノート：**
 >
@@ -30,7 +30,7 @@ TiDB は、特別なクライアントやドライバーを必要とせずに、
 -   [`START TRANSACTION READ ONLY AS OF TIMESTAMP`](/sql-statements/sql-statement-start-transaction.md)
 -   [`SET TRANSACTION READ ONLY AS OF TIMESTAMP`](/sql-statements/sql-statement-set-transaction.md)
 
-正確な時点を指定する場合は、datetime 値を設定するか、 `AS OF TIMESTAMP`句で時間関数を使用できます。 datetime の形式は &quot;2016-10-08 16:45:26.999&quot; のようなもので、ミリ秒が最小の時間単位ですが、ほとんどの場合、&quot;2016&quot; のように日時を指定するには秒の時間単位で十分です。 -10-08 16:45:26&quot;.関数`NOW(3)`を使用して、現在の時刻をミリ秒単位で取得することもできます。数秒前のデータを読み込みたい場合は、 `NOW() - INTERVAL 10 SECOND`などの式を使用することを**お勧め**します。
+正確な時点を指定する場合は、datetime 値を設定するか、 `AS OF TIMESTAMP`句で時間関数を使用できます。 datetime の形式は &quot;2016-10-08 16:45:26.999&quot; のようなもので、ミリ秒が最小の時間単位ですが、ほとんどの場合、&quot;2016&quot; のように日時を指定するには秒の時間単位で十分です。 -10-08 16:45:26&quot;.関数`NOW(3)`を使用して、現在の時刻をミリ秒単位で取得することもできます。数秒前のデータを読み込みたい場合は、 `NOW() - INTERVAL 10 SECOND`などの式を使用することを**お勧めし**ます。
 
 時間範囲を指定する場合は、句で`TIDB_BOUNDED_STALENESS()`関数を使用できます。この関数を使用すると、TiDB は指定された時間範囲内で適切なタイムスタンプを選択します。 「適切」とは、このタイムスタンプより前に開始され、アクセスされたレプリカでコミットされていないトランザクションがないことを意味します。つまり、TiDB はアクセスされたレプリカで読み取り操作を実行でき、読み取り操作はブロックされません。この関数を呼び出すには、 `TIDB_BOUNDED_STALENESS(t1, t2)`を使用する必要があります。 `t1`と`t2`は時間範囲の両端であり、datetime 値または time 関数を使用して指定できます。
 
@@ -45,7 +45,9 @@ TiDB は、特別なクライアントやドライバーを必要とせずに、
 >
 > タイムスタンプの指定に加えて、 `AS OF TIMESTAMP`句の最も一般的な用途は、数秒前のデータを読み取ることです。このアプローチを使用する場合は、5 秒より古い履歴データを読み取ることをお勧めします。
 >
-> Stale ステイル読み取りを使用する場合は、TiDB および PD ノードに NTP サービスをデプロイする必要があります。これにより、TiDB によって使用される指定されたタイムスタンプが、最新の TSO 割り当ての進行状況よりも進んでいる (タイムスタンプが数秒進んでいるなど)、または GC セーフ ポイントのタイムスタンプよりも遅れているという状況が回避されます。指定されたタイムスタンプがサービス範囲を超えると、TiDB はエラーを返します。
+> ステイル読み取りを使用する場合は、TiDB および PD ノードに NTP サービスをデプロイする必要があります。これにより、TiDB によって使用される指定されたタイムスタンプが、最新の TSO 割り当ての進行状況よりも進んでいる (タイムスタンプが数秒進んでいるなど)、または GC セーフ ポイントのタイムスタンプよりも遅れているという状況が回避されます。指定されたタイムスタンプがサービス範囲を超えると、TiDB はエラーを返します。
+>
+> レイテンシーを短縮し、ステイル読み取りデータの適時性を向上させるために、TiKV `advance-ts-interval`構成アイテムを変更できます。詳細は[ステイル読み取りのレイテンシーを減らす](/stale-read.md#reduce-stale-read-latency)参照してください。
 
 ## 使用例 {#usage-examples}
 
@@ -71,7 +73,7 @@ insert into t values (1), (2), (3);
 Query OK, 3 rows affected (0.00 sec)
 ```
 
-テーブル内のデータをビューします。
+テーブル内のデータをビュー。
 
 ```sql
 select * from t;
@@ -88,7 +90,7 @@ select * from t;
 3 rows in set (0.00 sec)
 ```
 
-現在の時刻をビューする:
+現在の時刻をビュー:
 
 ```sql
 select now();

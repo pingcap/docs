@@ -39,7 +39,7 @@ title: TiDB 2.1 RC5 Release Notes
     -   オーバーバウンド スキャンを回避するために、ticlient の`Scan`コマンドに上限を追加します[#8081](https://github.com/pingcap/tidb/pull/8081) , [#8247](https://github.com/pingcap/tidb/pull/8247)
 -   DDL
     -   トランザクションで DDL ステートメントを実行すると、場合によってはエラーが発生する問題を修正します[#8056](https://github.com/pingcap/tidb/pull/8056)
-    -   パーティションテーブルで`truncate table`を実行しても有効にならない問題を修正[#8103](https://github.com/pingcap/tidb/pull/8103)
+    -   パーティションテーブルで`truncate table`実行しても有効にならない問題を修正[#8103](https://github.com/pingcap/tidb/pull/8103)
     -   場合によっては DDL 操作がキャンセルされた後、正しくロールバックされない問題を修正します[#8057](https://github.com/pingcap/tidb/pull/8057)
     -   `admin show next_row_id`コマンドを追加して、次に利用可能な行 ID [#8268](https://github.com/pingcap/tidb/pull/8268)を返します。
 
@@ -62,4 +62,4 @@ title: TiDB 2.1 RC5 Release Notes
 
 ## ツール {#tools}
 
--   古いバージョンの binlog と互換性がない TiDB-Binlog クラスターをサポートします[#8093](https://github.com/pingcap/tidb/pull/8093) 、 [ドキュメンテーション](/tidb-binlog/tidb-binlog-overview.md)
+-   古いバージョンのbinlogと互換性がない TiDB-Binlog クラスターをサポートします[#8093](https://github.com/pingcap/tidb/pull/8093) 、 [ドキュメンテーション](/tidb-binlog/tidb-binlog-overview.md)

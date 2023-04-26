@@ -3,7 +3,7 @@ title: Security Compatibility with MySQL
 summary: Learn TiDB's security compatibilities with MySQL.
 ---
 
-# MySQL とのセキュリティの互換性 {#security-compatibility-with-mysql}
+# MySQL とのSecurityの互換性 {#security-compatibility-with-mysql}
 
 TiDB はMySQL 5.7と同様のセキュリティ機能をサポートしており、MySQL 8.0 の一部のセキュリティ機能もサポートしています。 TiDB のセキュリティ機能は、MySQL とは実装が異なります。
 
@@ -28,7 +28,7 @@ TiDB と MySQL のパスワード有効期限ポリシーには、次の違い�
 TiDB の有効期限メカニズムは、次の点で MySQL とは異なります。
 
 -   MySQL v5.7 および v8.0 では、クライアントとサーバーを組み合わせた構成によって、クライアント接続の「サンドボックス モード」を有効にするかどうかが決まります。
--   TiDB では、 [`security.disconnect-on-expired-password`](/tidb-configuration-file.md#disconnect-on-expired-password-new-in-v650)の構成項目だけで、クライアント接続の「サンドボックス モード」を有効にするかどうかが決まります。
+-   TiDB では、 [`security.disconnect-on-expired-password`](/tidb-configuration-file.md#disconnect-on-expired-password-new-in-v650)構成項目だけで、クライアント接続の「サンドボックス モード」を有効にするかどうかが決まります。
 
 ### パスワードの複雑さに関するポリシー {#password-complexity-policy}
 
@@ -100,10 +100,10 @@ TiDB と MySQL のパスワード再利用ポリシーには、次の違いが�
 
 実装メカニズムは、TiDB と MySQL の間で一貫しています。どちらも`mysql.password_history`システム テーブルを使用して、パスワード再利用管理機能を実装します。ただし、 `mysql.user`システム テーブルに存在しないユーザーを削除する場合、TiDB と MySQL では動作が異なります。
 
--   シナリオ: ユーザー ( `user01` ) は通常の方法では作成されません。代わりに、 `INSERT INTO mysql.password_history VALUES (...)`ステートメントを使用して`user01`のレコードを`mysql.password_history`システム テーブルに追加することによって作成されます。このような場合、 `mysql.user`のシステム テーブルに`user01`のレコードが存在しないため、 `user01`で`DROP USER`を実行すると、TiDB と MySQL の動作が異なります。
+-   シナリオ: ユーザー ( `user01` ) は通常の方法では作成されません。代わりに、 `INSERT INTO mysql.password_history VALUES (...)`ステートメントを使用して`user01`のレコードを`mysql.password_history`システム テーブルに追加することによって作成されます。このような場合、 `mysql.user`システム テーブルに`user01`のレコードが存在しないため、 `user01`で`DROP USER`実行すると、TiDB と MySQL の動作が異なります。
 
-    -   MySQL: `DROP USER user01`を実行すると、MySQL は`mysql.user`と`mysql.password_history`で`user01`を見つけようとします。いずれかのシステム テーブルに`user01`が含まれている場合、 `DROP USER`ステートメントは正常に実行され、エラーは報告されません。
-    -   TiDB: `DROP USER user01`を実行すると、TiDB は`mysql.user`でのみ`user01`を見つけようとします。関連するレコードが見つからない場合、 `DROP USER`ステートメントは失敗し、エラーが報告されます。ステートメントを正常に実行して`mysql.password_history`から`user01`レコードを削除するには、代わりに`DROP USER IF EXISTS user01`を使用します。
+    -   MySQL: `DROP USER user01`を実行すると、MySQL は`mysql.user`と`mysql.password_history`で`user01`見つけようとします。いずれかのシステム テーブルに`user01`含まれている場合、 `DROP USER`ステートメントは正常に実行され、エラーは報告されません。
+    -   TiDB: `DROP USER user01`を実行すると、TiDB は`mysql.user`でのみ`user01`を見つけようとします。関連するレコードが見つからない場合、 `DROP USER`ステートメントは失敗し、エラーが報告されます。ステートメントを正常に実行して`mysql.password_history`から`user01`レコードを削除するには、代わりに`DROP USER IF EXISTS user01`使用します。
 
 ## 認証プラグインのステータス {#authentication-plugin-status}
 

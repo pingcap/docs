@@ -7,7 +7,7 @@ summary: Learn the concept, user scenarios, usages, limitations, and compatibili
 
 TiDB は v5.0 以降、クラスター化インデックス機能をサポートしています。この機能は、主キーを含むテーブルにデータを格納する方法を制御します。特定のクエリのパフォーマンスを向上させる方法でテーブルを編成する機能を TiDB に提供します。
 
-このコンテキストでの*クラスタ化*という用語<em>は、データの格納方法の編成を</em>指し、<em>連携して動作するデータベース サーバーのグループを</em>指すわけではありません。一部のデータベース管理システムでは、クラスター化インデックスを<em>インデックス構成テーブル</em>(IOT) と呼んでいます。
+このコンテキストでの*クラスタ化という*用語は、<em>データの格納方法の編成を</em>指し、<em>連携して動作するデータベース サーバーのグループを</em>指すわけではありません。一部のデータベース管理システムでは、クラスター化インデックスを<em>インデックス構成テーブル</em>(IOT) と呼んでいます。
 
 現在、TiDB の主キーを含むテーブルは、次の 2 つのカテゴリに分類されます。
 
@@ -19,7 +19,7 @@ TiDB は v5.0 以降、クラスター化インデックス機能をサポート
 
 > **ノート：**
 >
-> TiDB は、テーブルの`PRIMARY KEY`によるクラスタリングのみをサポートします。クラスター化インデックスを有効にすると*、* `PRIMARY KEY`と<em>クラスター化インデックス</em>という用語が同じ意味で使用される場合があります。 `PRIMARY KEY`は制約 (論理プロパティ) を参照し、クラスター化インデックスはデータの格納方法の物理的な実装を記述します。
+> TiDB は、テーブルの`PRIMARY KEY`によるクラスタリングのみをサポートします。クラスター化インデックスを有効にすると、 *5*と<em>クラスター化インデックスという</em>用語が同じ意味で使用される`PRIMARY KEY`があります。 `PRIMARY KEY`は制約 (論理プロパティ) を参照し、クラスター化インデックスはデータの格納方法の物理的な実装を記述します。
 
 ## ユーザー シナリオ {#user-scenarios}
 
@@ -33,7 +33,7 @@ TiDB は v5.0 以降、クラスター化インデックス機能をサポート
 一方、クラスター化されたインデックスを持つテーブルには、特定の欠点があります。以下を参照してください。
 
 -   近い値を持つ多数の主キーを挿入すると、書き込みホットスポットの問題が発生する可能性があります。
--   主キーのデータ型が 64 ビットより大きい場合、特に複数のセカンダリ インデックスがある場合、テーブル データはより多くのストレージ領域を占有します。
+-   主キーのデータ型が 64 ビットより大きい場合、特に複数のセカンダリ インデックスがある場合、テーブル データはより多くのstorage領域を占有します。
 
 ## 用途 {#usages}
 
@@ -61,11 +61,11 @@ CREATE TABLE t (a BIGINT, b VARCHAR(255), PRIMARY KEY(a, b) /*T![clustered_index
 CREATE TABLE t (a BIGINT, b VARCHAR(255), PRIMARY KEY(a, b) /*T![clustered_index] NONCLUSTERED */);
 ```
 
-キーワード`CLUSTERED`を明示的に指定しないステートメントの場合、デフォルトの動作はシステム変数`NONCLUSTERED`によって制御され`@@global.tidb_enable_clustered_index` 。この変数でサポートされている値は次のとおりです。
+キーワード`CLUSTERED`を明示的に指定しないステートメントの場合、デフォルトの動作`NONCLUSTERED`システム変数[`@@global.tidb_enable_clustered_index`](/system-variables.md#tidb_enable_clustered_index-new-in-v50)によって制御されます。この変数でサポートされている値は次のとおりです。
 
--   `OFF`は、主キーが既定で非クラスター化インデックスとして作成されることを示します。
--   `ON`は、主キーが既定でクラスター化インデックスとして作成されることを示します。
--   `INT_ONLY`は、動作が構成アイテム`alter-primary-key`によって制御されることを示します。 `alter-primary-key`が`true`に設定されている場合、主キーはデフォルトで非クラスター化インデックスとして作成されます。 `false`に設定すると、整数列で構成される主キーのみがクラスター化インデックスとして作成されます。
+-   `OFF` 、主キーが既定で非クラスター化インデックスとして作成されることを示します。
+-   `ON` 、主キーが既定でクラスター化インデックスとして作成されることを示します。
+-   `INT_ONLY` 、動作が構成アイテム`alter-primary-key`によって制御されることを示します。 `alter-primary-key`が`true`に設定されている場合、主キーはデフォルトで非クラスター化インデックスとして作成されます。 `false`に設定すると、整数列で構成される主キーのみがクラスター化インデックスとして作成されます。
 
 `@@global.tidb_enable_clustered_index`のデフォルト値は`ON`です。
 
@@ -81,7 +81,7 @@ ALTER TABLE t DROP INDEX `PRIMARY`; -- If the primary key is a clustered index, 
 
 ### 非クラスター化インデックスを追加または削除する {#add-or-drop-non-clustered-indexes}
 
-TiDB は、テーブル作成後の非クラスター化インデックスの追加または削除をサポートしています。キーワード`NONCLUSTERED`を明示的に指定することも、省略することもできます。例えば：
+TiDB は、テーブル作成後の非クラスター化インデックスの追加または削除をサポートしています。キーワード`NONCLUSTERED`明示的に指定することも、省略することもできます。例えば：
 
 ```sql
 ALTER TABLE t ADD PRIMARY KEY(b, a) NONCLUSTERED;
@@ -98,7 +98,7 @@ ALTER TABLE t DROP INDEX `PRIMARY`;
 -   コマンド`SHOW INDEX FROM`を実行します。
 -   システム テーブル`information_schema.tables`の`TIDB_PK_TYPE`列をクエリします。
 
-コマンド`SHOW CREATE TABLE`を実行すると、 `PRIMARY KEY`の属性が`CLUSTERED`か`NONCLUSTERED`ます。例えば：
+コマンド`SHOW CREATE TABLE`を実行すると、 `PRIMARY KEY`の属性が`CLUSTERED`か`NONCLUSTERED`かがわかります。例えば：
 
 ```sql
 mysql> SHOW CREATE TABLE t;
@@ -126,7 +126,7 @@ mysql> SHOW INDEX FROM t;
 1 row in set (0.01 sec)
 ```
 
-システム テーブル`information_schema.tables`の列`TIDB_PK_TYPE`をクエリして、結果が`CLUSTERED`か`NONCLUSTERED`かを確認することもできます。例えば：
+システム テーブル`information_schema.tables`の列`TIDB_PK_TYPE`クエリして、結果が`CLUSTERED`か`NONCLUSTERED`かを確認することもできます。例えば：
 
 ```sql
 mysql> SELECT TIDB_PK_TYPE FROM information_schema.tables WHERE table_schema = 'test' AND table_name = 't';
@@ -143,12 +143,12 @@ mysql> SELECT TIDB_PK_TYPE FROM information_schema.tables WHERE table_schema = '
 現在、クラスター化インデックス機能にはいくつかの異なる種類の制限があります。以下を参照してください。
 
 -   サポートされておらず、サポート プランにも含まれていない状況:
-    -   クラスター化インデックスを属性[`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)と一緒に使用することはサポートされていません。また、属性[`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions)は、クラスター化インデックスを持つテーブルでは有効になりません。
+    -   クラスター化インデックスを属性[`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)と一緒に使用することはサポートされていません。また、属性[`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions) 、クラスター化インデックスを持つテーブルでは有効になりません。
     -   クラスター化インデックスを含むテーブルのダウングレードはサポートされていません。そのようなテーブルをダウングレードする必要がある場合は、代わりに論理バックアップ ツールを使用してデータを移行してください。
 -   まだサポートされていないが、サポート プランに含まれる状況:
     -   `ALTER TABLE`ステートメントを使用したクラスター化インデックスの追加、削除、および変更はサポートされていません。
 -   特定のバージョンの制限:
-    -   v5.0 では、クラスター化インデックス機能を TiDB Binlogと一緒に使用することはサポートされていません。 TiDB Binlogが有効になった後、TiDB は主キーのクラスター化インデックスとして単一の整数列の作成のみを許可します。 TiDB Binlogは、クラスター化されたインデックスを持つ既存のテーブルのデータ変更 (挿入、削除、更新など) をダウンストリームに複製しません。クラスター化されたインデックスを含むテーブルをダウンストリームにレプリケートする必要がある場合は、クラスターを v5.1 にアップグレードするか、代わりにレプリケーションに[TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview)を使用してください。
+    -   v5.0 では、クラスター化インデックス機能を TiDB Binlogと一緒に使用することはサポートされていません。 TiDB Binlogが有効になった後、TiDB は主キーのクラスター化インデックスとして単一の整数列の作成のみを許可します。 TiDB Binlog は、クラスター化されたインデックスを持つ既存のテーブルのデータ変更 (挿入、削除、更新など) をダウンストリームに複製しません。クラスター化されたインデックスを含むテーブルをダウンストリームにレプリケートする必要がある場合は、クラスターを v5.1 にアップグレードするか、代わりにレプリケーションに[TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview)を使用してください。
 
 TiDB Binlogを有効にした後、作成したクラスター化インデックスが単一の整数の主キーでない場合、TiDB は次のエラーを返します。
 
@@ -172,7 +172,7 @@ TiDB は、クラスター化インデックスを持つテーブルのアップ
 
 クラスター化インデックス機能は、TiDB v3.0 および v4.0 で部分的にサポートされています。次の要件が完全に満たされると、デフォルトで有効になります。
 
--   テーブルには`PRIMARY KEY`が含まれています。
+-   テーブルには`PRIMARY KEY`含まれています。
 -   `PRIMARY KEY`は 1 つの列のみで構成されます。
 -   `PRIMARY KEY`は`INTEGER`です。
 
@@ -218,7 +218,7 @@ mysql> split table t by (0, ''), (50000, ''), (100000, '');
 1 row in set (0.01 sec)
 ```
 
-属性[`AUTO_RANDOM`](/auto-random.md)は、クラスター化インデックスでのみ使用できます。それ以外の場合、TiDB は次のエラーを返します。
+属性[`AUTO_RANDOM`](/auto-random.md) 、クラスター化インデックスでのみ使用できます。それ以外の場合、TiDB は次のエラーを返します。
 
 ```sql
 mysql> create table t (a bigint primary key nonclustered auto_random);

@@ -1,6 +1,6 @@
 ---
 title: CLIENT_ERRORS_SUMMARY_BY_USER
-summary: Learn about the `CLIENT_ERRORS_SUMMARY_BY_USER` information_schema table.
+summary: Learn about the `CLIENT_ERRORS_SUMMARY_BY_USER` INFORMATION_SCHEMA table.
 ---
 
 # CLIENT_ERRORS_SUMMARY_BY_USER {#client-errors-summary-by-user}
@@ -13,9 +13,9 @@ summary: Learn about the `CLIENT_ERRORS_SUMMARY_BY_USER` information_schema tabl
 -   許可エラー。
 -   存在しないテーブル。
 
-クライアント エラーは、MySQLサーバープロトコルを介してクライアントに返され、そこでアプリケーションは適切なアクションを実行することが期待されます。 `information_schema` 。表`CLIENT_ERRORS_SUMMARY_BY_USER`は、アプリケーションが TiDBサーバーから返されたエラーを正しく処理 (またはログ記録) していないシナリオで、エラーを検査するための便利な方法を提供します。
+クライアント エラーは、MySQLサーバープロトコルを介してクライアントに返され、そこでアプリケーションは適切なアクションを実行することが期待されます。 `INFORMATION_SCHEMA.CLIENT_ERRORS_SUMMARY_BY_USER`テーブルは、アプリケーションが TiDBサーバーによって返されたエラーを正しく処理 (またはログ記録) していないシナリオでエラーを検査するための便利な方法を提供します。
 
-`CLIENT_ERRORS_SUMMARY_BY_USER`はユーザーごとにエラーを要約するため、あるユーザーサーバーが他のサーバーよりも多くのエラーを生成しているシナリオを診断するのに役立ちます。考えられるシナリオは次のとおりです。
+`CLIENT_ERRORS_SUMMARY_BY_USER`ユーザーごとにエラーを要約するため、あるユーザーサーバーが他のサーバーよりも多くのエラーを生成しているシナリオを診断するのに役立ちます。考えられるシナリオは次のとおりです。
 
 -   許可エラー。
 -   テーブルまたはリレーショナル オブジェクトがありません。
@@ -23,12 +23,12 @@ summary: Learn about the `CLIENT_ERRORS_SUMMARY_BY_USER` information_schema tabl
 
 集計されたカウントは、ステートメント`FLUSH CLIENT_ERRORS_SUMMARY`でリセットできます。要約は各 TiDBサーバーにローカルであり、メモリにのみ保持されます。 TiDBサーバーが再起動すると、サマリーは失われます。
 
-{{< copyable "" >}}
-
 ```sql
-USE information_schema;
+USE INFORMATION_SCHEMA;
 DESC CLIENT_ERRORS_SUMMARY_BY_USER;
 ```
+
+出力は次のとおりです。
 
 ```sql
 +---------------+---------------+------+------+---------+-------+
@@ -57,14 +57,14 @@ DESC CLIENT_ERRORS_SUMMARY_BY_USER;
 
 次の例は、クライアントがローカル TiDBサーバーに接続するときに生成される警告を示しています。サマリーは`FLUSH CLIENT_ERRORS_SUMMARY`を実行した後にリセットされます:
 
-{{< copyable "" >}}
-
 ```sql
 SELECT 0/0;
 SELECT * FROM CLIENT_ERRORS_SUMMARY_BY_USER;
 FLUSH CLIENT_ERRORS_SUMMARY;
 SELECT * FROM CLIENT_ERRORS_SUMMARY_BY_USER;
 ```
+
+出力は次のとおりです。
 
 ```sql
 +-----+

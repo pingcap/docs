@@ -11,9 +11,9 @@ title: TiDB 2.0 RC5 Release Notes
 -   `Top-N`プッシュダウン ルールの適用に関する問題を修正
 -   NULL 値を含む列の行数の見積もりを修正
 -   Binary 型のゼロ値を修正
--   トランザクション内で`BatchGet`の問題を修正する
--   `Add Index`の操作をロールバックしながら、書き込まれたデータをクリーンアップして、消費スペースを削減します。
--   `insert on duplicate key update`のステートメントを最適化して、パフォーマンスを 10 倍向上させる
+-   トランザクション内で`BatchGet`問題を修正する
+-   `Add Index`回の操作をロールバックしながら、書き込まれたデータをクリーンアップして、消費スペースを削減します。
+-   `insert on duplicate key update`ステートメントを最適化して、パフォーマンスを 10 倍向上させる
 -   `UNIX_TIMESTAMP`関数によって返される結果のタイプに関する問題を修正します
 -   NOT NULL 列を追加する際に NULL 値が挿入される問題を修正
 -   `Show Process List`のステートメントで実行中のステートメントのメモリ使用量を表示するサポート
@@ -30,7 +30,7 @@ title: TiDB 2.0 RC5 Release Notes
 
 ## TiKV {#tikv}
 
--   `tikv-ctl`の`compact`で指定されたリージョンをサポート
+-   `tikv-ctl`分の`compact`で指定されたリージョンをサポート
 -   RawKVClient でバッチ プット、バッチ ゲット、バッチ削除、バッチ スキャンをサポート
 -   スナップショットが多すぎるために発生する OOM の問題を修正
 -   コプロセッサーでより詳細なエラー情報を返す
@@ -42,4 +42,4 @@ title: TiDB 2.0 RC5 Release Notes
 -   コプロセッサーの各`scan range`によってスキャンされた行数に関する統計を提供します
 -   macOS システムでのコンパイルの問題を修正
 -   RocksDB メトリクスの誤用の問題を修正
--   コプロセッサーで`overflow as warning`のオプションをサポート
+-   コプロセッサーで`overflow as warning`オプションをサポート

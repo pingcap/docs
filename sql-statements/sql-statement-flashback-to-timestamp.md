@@ -17,7 +17,7 @@ TiDB v6.4.0 では`FLASHBACK CLUSTER TO TIMESTAMP`構文が導入されていま
 
 > **ノート：**
 >
-> `FLASHBACK CLUSTER TO TIMESTAMP`の動作原理は、特定の時点の古いデータを最新のタイムスタンプで書き込むことであり、現在のデータは削除しません。したがって、この機能を使用する前に、古いデータと現在のデータ用の十分なストレージ容量があることを確認する必要があります.
+> `FLASHBACK CLUSTER TO TIMESTAMP`の動作原理は、特定の時点の古いデータを最新のタイムスタンプで書き込むことであり、現在のデータは削除しません。したがって、この機能を使用する前に、古いデータと現在のデータ用の十分なstorage容量があることを確認する必要があります.
 
 ## 構文 {#syntax}
 
@@ -40,9 +40,9 @@ FlashbackToTimestampStmt ::=
     SELECT * FROM mysql.tidb WHERE variable_name = 'tikv_gc_safe_point';
     ```
 
--   `FLASHBACK CLUSTER`の SQL ステートメントを実行できるのは、 `SUPER`の権限を持つユーザーだけです。
+-   `FLASHBACK CLUSTER` SQL ステートメントを実行できるのは、 `SUPER`権限を持つユーザーだけです。
 
--   `FLASHBACK`の文で指定した時刻から`FLASHBACK`の文を実行する時刻までの間に、関連するテーブル構造を変更するDDL文があってはなりません。そのような DDL が存在する場合、TiDB はそれを拒否します。
+-   `FLASHBACK`文で指定した時刻から`FLASHBACK`文を実行する時刻までの間に、関連するテーブル構造を変更するDDL文があってはなりません。そのような DDL が存在する場合、TiDB はそれを拒否します。
 
 -   `FLASHBACK CLUSTER TO TIMESTAMP`を実行する前に、TiDB は関連するすべての接続を切断し、 `FLASHBACK`ステートメントが完了するまでこれらのテーブルに対する読み取りおよび書き込み操作を禁止します。
 

@@ -13,7 +13,7 @@ summary: Learn how to migrate MySQL of small datasets to TiDB.
 
 ## 前提条件 {#prerequisites}
 
--   [TiUPを使用して DMクラスタをデプロイする](/dm/deploy-a-dm-cluster-using-tiup.md)
+-   [TiUPを使用して DMクラスタをデプロイ](/dm/deploy-a-dm-cluster-using-tiup.md)
 -   [DM のソース データベースとターゲット データベースに必要な権限を付与します。](/dm/dm-worker-intro.md)
 
 ## 手順 1. データ ソースを作成する {#step-1-create-the-data-source}
@@ -120,7 +120,7 @@ tiup dmctl --master-addr ${advertise-addr} start-task task.yaml
 
 ## ステップ 4: 移行タスクのステータスを確認する {#step-4-check-the-migration-task-status}
 
-DM クラスターに進行中の移行タスクがあるかどうか、タスクのステータス、およびその他の情報を確認するには、 `tiup dmctl`を使用して`query-status`コマンドを実行します。
+DM クラスターに進行中の移行タスクがあるかどうか、タスクのステータス、およびその他の情報を確認するには、 `tiup dmctl`使用して`query-status`コマンドを実行します。
 
 {{< copyable "" >}}
 
@@ -134,10 +134,10 @@ tiup dmctl --master-addr ${advertise-addr} query-status ${task-name}
 
 移行タスクの履歴ステータスとその他の内部メトリックを表示するには、次の手順を実行します。
 
-TiUP を使用して DM を展開するときに Prometheus、Alertmanager、および Grafana を展開した場合は、展開中に指定された IP アドレスとポートを使用してTiUPにアクセスできます。次に、DM ダッシュボードを選択して、DM 関連のモニタリング メトリックを表示できます。
+TiUPを使用して DM を展開するときに Prometheus、Alertmanager、および Grafana を展開した場合は、展開中に指定された IP アドレスとポートを使用して Grafana にアクセスできます。次に、DM ダッシュボードを選択して、DM 関連のモニタリング メトリックを表示できます。
 
--   DM-master のログ ディレクトリ: DM-master プロセス パラメータ`--log-file`によって指定されます。 TiUPを使用して DM をデプロイした場合、ログ ディレクトリはデフォルトで`/dm-deploy/dm-master-8261/log/`です。
--   DM-worker のログ ディレクトリ: DM-worker プロセス パラメータ`--log-file`で指定されます。 TiUPを使用して DM をデプロイした場合、ログ ディレクトリはデフォルトで`/dm-deploy/dm-worker-8262/log/`です。
+-   DM-master のログ ディレクトリ: DM-master プロセス パラメータ`--log-file`によって指定されます。 TiUP を使用して DM をデプロイした場合、ログ ディレクトリはデフォルトで`/dm-deploy/dm-master-8261/log/`です。
+-   DM-worker のログ ディレクトリ: DM-worker プロセス パラメータ`--log-file`で指定されます。 TiUP を使用して DM をデプロイした場合、ログ ディレクトリはデフォルトで`/dm-deploy/dm-worker-8262/log/`です。
 
 ## 次は何ですか {#what-s-next}
 

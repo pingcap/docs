@@ -12,7 +12,7 @@ TiDB バージョン: 3.0.18
 
 -   ツール
 
-    -   Binlog
+    -   TiDBBinlog
 
         -   PumpGC 構成[#996](https://github.com/pingcap/tidb-binlog/pull/996)の Go の期間形式をサポートします。
 
@@ -23,7 +23,7 @@ TiDB バージョン: 3.0.18
     -   `Hash`関数で`decimal`型を誤って処理すると、HashJoin の結果が正しくない問題を修正[#19185](https://github.com/pingcap/tidb/pull/19185)
     -   `Hash`関数で`set`型と`enum`型を誤って処理すると、HashJoin の結果が正しくない問題を修正[#19175](https://github.com/pingcap/tidb/pull/19175)
     -   悲観的ロックモード[#19236](https://github.com/pingcap/tidb/pull/19236)で重複キーのチェックが失敗する問題を修正します。
-    -   `Apply`と`Union Scan`の演算子が間違った実行結果を引き起こす問題を修正します[#19297](https://github.com/pingcap/tidb/pull/19297)
+    -   `Apply`と`Union Scan`演算子が間違った実行結果を引き起こす問題を修正します[#19297](https://github.com/pingcap/tidb/pull/19297)
     -   キャッシュされた実行計画の一部がトランザクション[#19274](https://github.com/pingcap/tidb/pull/19274)で正しく実行されない問題を修正
 
 -   TiKV

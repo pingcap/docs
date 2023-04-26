@@ -11,7 +11,7 @@ summary: View the running status of TiDB, TiKV, PD, TiFlash components in the en
 
 次の 2 つの方法のいずれかを使用して、クラスター情報ページにアクセスできます。
 
--   TiDB ダッシュボードにログインした後、左側のナビゲーション メニューで [**クラスタ情報**] をクリックします。
+-   TiDB ダッシュボードにログインした後、左側のナビゲーション メニューで**[クラスタ情報]**をクリックします。
 
     ![Access cluster information page](/media/dashboard/dashboard-cluster-info-access-v650.png)
 
@@ -46,14 +46,14 @@ summary: View the running status of TiDB, TiKV, PD, TiFlash components in the en
 
 > **ノート：**
 >
-> -   TiDB ダッシュボードでは`Leaving` 、PD API によって返される`Offline` 、 TiUPでは`Pending Offline`は同じステータスを示します。
+> -   TiDB ダッシュボードでは`Leaving` 、PD API によって返される`Offline` 、 TiUPでは`Pending Offline`同じステータスを示します。
 > -   テーブルの一部の列は、インスタンスが起動している場合にのみ表示できます。
 
 インスタンスのステータスは、PD スケジューリング情報から取得されます。詳細については、 [情報収集](/tidb-scheduling.md#information-collection)を参照してください。
 
 ## ホスト一覧 {#host-list}
 
-[**ホスト**] をクリックして、ホストのリストを表示します。
+**[ホスト]**をクリックして、ホストのリストを表示します。
 
 ![Host list](/media/dashboard/dashboard-cluster-info-hosts-v650.png)
 
@@ -73,7 +73,7 @@ summary: View the running status of TiDB, TiKV, PD, TiFlash components in the en
 
 ## ディスク一覧 {#disk-list}
 
-[**ディスク**] をクリックして、ディスクのリストを表示します。
+**[ディスク]**をクリックして、ディスクのリストを表示します。
 
 ![Disk list](/media/dashboard/dashboard-cluster-info-disks-v650.png)
 

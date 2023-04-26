@@ -29,7 +29,7 @@ summary: Learn how to build a simple CRUD application with TiDB and Java.
 
 **ローカル クラスターを使用する**
 
-詳細な手順については、 [ローカル テスト クラスターをデプロイする](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[TiUP を使用してTiUPクラスタをデプロイする](/production-deployment-using-tiup.md)を参照してください。
+詳細な手順については、 [ローカル テスト クラスターをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[TiUPを使用して TiDBクラスタをデプロイ](/production-deployment-using-tiup.md)を参照してください。
 
 </CustomContent>
 
@@ -51,7 +51,7 @@ git clone https://github.com/pingcap-inc/tidb-example-java.git
 
 [マイバティス](https://mybatis.org/mybatis-3/index.html)と比較すると、JDBC 実装はベスト プラクティスではない可能性があります。これは、エラー処理ロジックを手動で記述する必要があり、コードを簡単に再利用できないため、コードがわずかに冗長になるためです。
 
-Mybatis は、人気のあるオープンソースのJavaクラス永続化フレームワークです。以下は、 [MyBatis ジェネレーター](https://mybatis.org/generator/quickstart.html)を Maven プラグインとして使用して、永続化レイヤーコードを生成します。
+Mybatis は、人気のあるオープンソースのJavaクラス永続化フレームワークです。以下は、 [MyBatis ジェネレーター](https://mybatis.org/generator/quickstart.html) Maven プラグインとして使用して、永続化レイヤーコードを生成します。
 
 `plain-java-mybatis`ディレクトリに移動します。
 
@@ -201,7 +201,7 @@ cd plain-java-mybatis
 </plugin>
 ```
 
-Maven プラグインに含めたら、生成された古いファイルを削除し、 `mvn mybatis-generate`を使用して新しいファイルを作成できます。または、 `make gen`を使用して古いファイルを削除し、同時に新しいファイルを生成することもできます。
+Maven プラグインに含めたら、生成された古いファイルを削除し、 `mvn mybatis-generate`使用して新しいファイルを作成できます。または、 `make gen`使用して古いファイルを削除し、同時に新しいファイルを生成することもできます。
 
 > **ノート：**
 >
@@ -369,7 +369,7 @@ CREATE TABLE player (
 );
 ```
 
-インターフェイス`PlayerMapperEx`をさらに分割して`PlayerMapper`から拡張し、一致する`PlayerMapperEx.xml`のファイルを書き込みます。 `PlayerMapper.java`と`PlayerMapper.xml`を直接変更することは避けてください。これは、Mybatis Generator による上書きを避けるためです。
+インターフェイス`PlayerMapperEx`さらに分割して`PlayerMapper`から拡張し、一致する`PlayerMapperEx.xml`ファイルを書き込みます。 `PlayerMapper.java`と`PlayerMapper.xml`を直接変更することは避けてください。これは、Mybatis Generator による上書きを避けるためです。
 
 `PlayerMapperEx.java`で追加されたインターフェースを定義します。
 
@@ -426,7 +426,7 @@ public interface PlayerMapperEx extends PlayerMapper {
 </mapper>
 ```
 
-`PlayerDAO.java`はデータを管理するためのクラスで、 `DAO`は[データ アクセス オブジェクト](https://en.wikipedia.org/wiki/Data_access_object)を意味します。このクラスは、データを書き込むための一連のデータ操作メソッドを定義します。その中で、Mybatis はオブジェクト マッピングや基本オブジェクトの CRUD などの多数の操作をカプセル化し、コードを大幅に簡素化します。
+`PlayerDAO.java`はデータを管理するためのクラスで、 `DAO` [データ アクセス オブジェクト](https://en.wikipedia.org/wiki/Data_access_object)を意味します。このクラスは、データを書き込むための一連のデータ操作メソッドを定義します。その中で、Mybatis はオブジェクト マッピングや基本オブジェクトの CRUD などの多数の操作をカプセル化し、コードを大幅に簡素化します。
 
 ```java
 package com.pingcap.dao;
@@ -675,7 +675,7 @@ cd plain-java-hibernate
 
 `HibernateExample.java`は`plain-java-hibernate`の本体です。 JDBC と比較して、Hibernate を使用する場合は、構成ファイルのパスを記述するだけで済みます。これは、Hibernate が異なるデータベース間のデータベース作成の違いを回避するためです。
 
-`PlayerDAO`はデータを管理するためのクラスで、 `DAO`は[データ アクセス オブジェクト](https://en.wikipedia.org/wiki/Data_access_object)を意味します。このクラスは、データを書き込むための一連のデータ操作メソッドを定義します。 JDBC と比較して、Hibernate はオブジェクト マッピングや基本オブジェクトの CRUD などの多数の操作をカプセル化するため、コードが大幅に簡素化されます。
+`PlayerDAO`はデータを管理するためのクラスで、 `DAO` [データ アクセス オブジェクト](https://en.wikipedia.org/wiki/Data_access_object)を意味します。このクラスは、データを書き込むための一連のデータ操作メソッドを定義します。 JDBC と比較して、Hibernate はオブジェクト マッピングや基本オブジェクトの CRUD などの多数の操作をカプセル化するため、コードが大幅に簡素化されます。
 
 `PlayerBean`は、テーブルのマッピングであるデータ エンティティ クラスです。 `PlayerBean`の各プロパティは、 `player`テーブルのフィールドに対応します。 JDBC と比較して、Hibernate の`PlayerBean`は、詳細なマッピング関係を示すアノテーションを追加します。
 
@@ -948,9 +948,9 @@ CREATE TABLE player (
 );
 ```
 
-`JDBCExample.java`は`plain-java-jdbc`の本体です。 TiDB は MySQL プロトコルとの互換性が高いため、MySQL ソース インスタンス`MysqlDataSource`を初期化して TiDB に接続する必要があります。次に、オブジェクト管理用に`PlayerDAO`を初期化し、それを使用してデータの読み取り、編集、追加、および削除を行うことができます。
+`JDBCExample.java`は`plain-java-jdbc`の本体です。 TiDB は MySQL プロトコルとの互換性が高いため、MySQL ソース インスタンス`MysqlDataSource`を初期化して TiDB に接続する必要があります。次に、オブジェクト管理用に`PlayerDAO`初期化し、それを使用してデータの読み取り、編集、追加、および削除を行うことができます。
 
-`PlayerDAO`はデータを管理するためのクラスで、 `DAO`は[データ アクセス オブジェクト](https://en.wikipedia.org/wiki/Data_access_object)を意味します。このクラスは、データを書き込む機能を提供する一連のデータ操作メソッドを定義します。
+`PlayerDAO`はデータを管理するためのクラスで、 `DAO` [データ アクセス オブジェクト](https://en.wikipedia.org/wiki/Data_access_object)を意味します。このクラスは、データを書き込む機能を提供する一連のデータ操作メソッドを定義します。
 
 `PlayerBean`は、テーブルのマッピングであるデータ エンティティ クラスです。 `PlayerBean`の各プロパティは、 `player`テーブルのフィールドに対応します。
 
@@ -1435,7 +1435,7 @@ mysql --host 127.0.0.1 --port 4000 -u root<src/main/resources/dbinit.sql
 
 <CustomContent platform="tidb-cloud">
 
-JDBC を使用する場合、クラスターに接続し、 `src/main/resources/dbinit.sql`のファイルでステートメントを実行して、データベース テーブルを手動で初期化する必要があります。
+JDBC を使用する場合、クラスターに接続し、 `src/main/resources/dbinit.sql`ファイルでステートメントを実行して、データベース テーブルを手動で初期化する必要があります。
 
 </CustomContent>
 
@@ -1498,7 +1498,7 @@ TiDB Cloud Serverless Tierクラスターを使用している場合は、 `myba
 -   ポート: `4000`
 -   ユーザー: `2aEp24QWEDLqRFs.root`
 
-この場合、次のように`dataSource`のノードでパラメーターを変更できます。
+この場合、次のように`dataSource`ノードでパラメーターを変更できます。
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -1660,7 +1660,7 @@ mvn clean package
 java -jar target/plain-java-mybatis-0.0.1-jar-with-dependencies.jar
 ```
 
-または、 `make prepare` 、 `make gen` 、 `make build` 、および`make run`の組み合わせである`make`コマンドを直接実行します。
+または`make prepare` 、 `make gen` 、 `make build`および`make run`の組み合わせである`make`コマンドを直接実行します。
 
 </div>
 

@@ -15,7 +15,7 @@ TiDB アンシブル バージョン: 2.1.10
 -   `tidb_snapshot`を使用して履歴データを読み取ると、一部の異常によりテーブル スキーマが正しくなくなる問題を修正します[#10359](https://github.com/pingcap/tidb/pull/10359)
 -   `NOT`関数で読み取り結果がおかしくなることがある問題を修正[#10363](https://github.com/pingcap/tidb/pull/10363)
 -   `Replace`または`Insert on duplicate update`ステートメントの`Generated Column`の間違った動作を修正します[#10385](https://github.com/pingcap/tidb/pull/10385)
--   `DATE`比較`DATETIME`で`BETWEEN`機能の不具合を[#10407](https://github.com/pingcap/tidb/pull/10407)
+-   `DATE`比較[#10407](https://github.com/pingcap/tidb/pull/10407)で`BETWEEN`機能の不具合`DATETIME`修正
 -   `SLOW_QUERY`テーブルを使用してスロー ログ[#10412](https://github.com/pingcap/tidb/pull/10412)をクエリすると、スロー ログの 1 行が長すぎるとエラー レポートが表示される問題を修正します。
 -   `DATETIME`たす`INTERVAL`の結果が MySQL の結果と一致しない場合がある問題を修正[#10416](https://github.com/pingcap/tidb/pull/10416) 、 [#10418](https://github.com/pingcap/tidb/pull/10418)
 -   うるう年の 2 月の無効時間のチェックを追加します[#10417](https://github.com/pingcap/tidb/pull/10417)
@@ -44,15 +44,15 @@ TiDB アンシブル バージョン: 2.1.10
 -   転送の失敗を避けるために、最近構成が変更されたリージョンでリーダーの転送を拒否する[#4684](https://github.com/tikv/tikv/pull/4684)
 -   コプロセッサーメトリック[#4643](https://github.com/tikv/tikv/pull/4643)の優先順位ラベルを追加します。
 -   リーダー[#4724](https://github.com/tikv/tikv/pull/4724)の転送中に発生する可能性のあるダーティ リードの問題を修正します。
--   `CommitMerge`の再起動に失敗する場合がある問題を修正[#4615](https://github.com/tikv/tikv/pull/4615) .
+-   1.TiKVの再起動に失敗する場合が`CommitMerge`問題を修正[#4615](https://github.com/tikv/tikv/pull/4615)
 -   不明なログの修正[#4730](https://github.com/tikv/tikv/pull/4730)
 
 ## ツール {#tools}
 
 -   TiDB Lightning
-    -   TiDB Lightningが`importer` [#176](https://github.com/pingcap/tidb-lightning/pull/176)へのデータ送信に失敗した場合のリトライ機能を追加
--   Binlog
-    -   トラブルシューティングを容易にするためにPumpストレージ ログを最適化する[#607](https://github.com/pingcap/tidb-binlog/pull/607)
+    -   TiDB Lightning が`importer` [#176](https://github.com/pingcap/tidb-lightning/pull/176)へのデータ送信に失敗した場合のリトライ機能を追加
+-   TiDBBinlog
+    -   トラブルシューティングを容易にするためにPumpstorageログを最適化する[#607](https://github.com/pingcap/tidb-binlog/pull/607)
 
 ## TiDB アンシブル {#tidb-ansible}
 

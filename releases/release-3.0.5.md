@@ -23,11 +23,11 @@ TiDB アンシブル バージョン: 3.0.5
     -   日付文字列とフォーマット文字列が一致しない場合、TiDB の`str_to_date`関数が MySQL とは異なる結果を返す問題を修正します[#12725](https://github.com/pingcap/tidb/pull/12725)
 -   SQL 実行エンジン
     -   `from_unixtime`関数が null [#12551](https://github.com/pingcap/tidb/pull/12551)を処理するときのpanicの問題を修正
-    -   DDL ジョブのキャンセル時に報告された`invalid list index`のエラーを修正[#12671](https://github.com/pingcap/tidb/pull/12671)
+    -   DDL ジョブのキャンセル時に報告された`invalid list index`エラーを修正[#12671](https://github.com/pingcap/tidb/pull/12671)
     -   ウィンドウ関数使用時に配列が範囲外になる問題を修正[#12660](https://github.com/pingcap/tidb/pull/12660)
     -   `AutoIncrement`列が暗黙的に割り当てられた場合の動作を改善し、MySQL 自動インクリメント ロックのデフォルト モードとの一貫性を保ちます ( [「連続」ロックモード](https://dev.mysql.com/doc/refman/5.7/en/innodb-auto-increment-handling.html) ): 1 行の`Insert`ステートメントで複数の`AutoIncrement` ID を暗黙的に割り当てる場合、TiDB は割り当てられた値の連続性。この改善により、JDBC `getGeneratedKeys()`メソッドがどのシナリオでも正しい結果を得ることが保証されます。 [#12602](https://github.com/pingcap/tidb/pull/12602)
-    -   `HashAgg`が`Apply` [#12766](https://github.com/pingcap/tidb/pull/12766)の子ノードになるとクエリがハングアップする問題を修正
-    -   型変換時に`AND`と`OR`の論理式が間違った結果を返す問題を修正[#12811](https://github.com/pingcap/tidb/pull/12811)
+    -   `HashAgg` `Apply` [#12766](https://github.com/pingcap/tidb/pull/12766)の子ノードになるとクエリがハングアップする問題を修正
+    -   型変換時に`AND`と`OR`論理式が間違った結果を返す問題を修正[#12811](https://github.com/pingcap/tidb/pull/12811)
 -   サーバ
     -   後で大規模なトランザクションをサポートできるようにトランザクション TTL を変更するインターフェイス関数を実装する[#12397](https://github.com/pingcap/tidb/pull/12397)
     -   悲観的トランザクションをサポートするために、必要に応じてトランザクション TTL を延長するサポート (最大 10 分) [#12579](https://github.com/pingcap/tidb/pull/12579)
@@ -41,11 +41,11 @@ TiDB アンシブル バージョン: 3.0.5
     -   `tikvSnapshot`が`BatchGet()` [#12872](https://github.com/pingcap/tidb/pull/12872)の KV 結果を適切にキャッシュしないため、 `INSERT IGNORE`ステートメントのパフォーマンスが低下する問題を修正します。
     -   一部の KV サービスへの接続が遅いため、TiDB の応答速度が比較的遅かった問題を修正しました[#12814](https://github.com/pingcap/tidb/pull/12814)
 -   DDL
-    -   `Create Table`の操作で Set 列[#12267](https://github.com/pingcap/tidb/pull/12267)の Int 型のデフォルト値が正しく設定されない問題を修正
+    -   `Create Table`操作で Set 列[#12267](https://github.com/pingcap/tidb/pull/12267)の Int 型のデフォルト値が正しく設定されない問題を修正
     -   `Create Table`ステートメントで一意のインデックスを作成するときに複数の`unique`をサポートします[#12463](https://github.com/pingcap/tidb/pull/12463)
-    -   `Alter Table` [#12489](https://github.com/pingcap/tidb/pull/12489)を使用してビット タイプの列を追加するときに、既存の行にこの列の既定値を入力するとエラーが発生する可能性があるという問題を修正します。
+    -   `Alter Table` [#12489](https://github.com/pingcap/tidb/pull/12489)使用してビット タイプの列を追加するときに、既存の行にこの列の既定値を入力するとエラーが発生する可能性があるという問題を修正します。
     -   範囲パーティションテーブルが日付型または日時型の列を分割キーとして使用している場合に、分割を追加できない問題を修正します[#12815](https://github.com/pingcap/tidb/pull/12815)
-    -   Date または Datetime 型の列をパーティション キーとして使用する Rangeパーティションテーブルについて、テーブルの作成時またはパーティションの追加時に、パーティションの種類とパーティション キーの種類の整合性チェックをサポートし[#12792](https://github.com/pingcap/tidb/pull/12792) 。
+    -   Date または Datetime 型の列をパーティション キーとして使用する Range パーティションパーティションテーブルについて、テーブルの作成時またはパーティションの追加時に、パーティションの種類とパーティション キーの種類の整合性チェックをサポートします[#12792](https://github.com/pingcap/tidb/pull/12792)
     -   レンジパーティションテーブル[#12718](https://github.com/pingcap/tidb/pull/12718)を作成するときに、一意のキー列セットがパーティション分割された列セット以上である必要があるというチェックを追加します。
 -   モニター
     -   コミットおよびロールバック操作のモニタリング メトリックをダッシュボードに追加する`Transaction OPS` [#12505](https://github.com/pingcap/tidb/pull/12505)
@@ -57,18 +57,18 @@ TiDB アンシブル バージョン: 3.0.5
     -   悲観的トランザクションの新機能を追加: トランザクション クリーンアップ インターフェイスは、TTL が古いロックのクリーンアップのみをサポートします[#5589](https://github.com/tikv/tikv/pull/5589)
     -   トランザクションのロールバック主キーが崩れる問題を修正[#5646](https://github.com/tikv/tikv/pull/5646) , [#5671](https://github.com/tikv/tikv/pull/5671)
     -   悲観的ロックの下で、ポイント クエリが以前のバージョンのデータを返す可能性があるという問題を修正します[#5634](https://github.com/tikv/tikv/pull/5634)
--   ラフトストア
-    -   Raftstore でのメッセージ フラッシュ操作を減らしてパフォーマンスを改善し、CPU 使用率を削減する[#5617](https://github.com/tikv/tikv/pull/5617)
+-   Raftstore
+    -   Raftstoreでのメッセージ フラッシュ操作を減らしてパフォーマンスを改善し、CPU 使用率を削減する[#5617](https://github.com/tikv/tikv/pull/5617)
     -   リージョンサイズとキーの推定数を取得するコストを最適化し、ハートビートのオーバーヘッドと CPU 使用率を削減します[#5620](https://github.com/tikv/tikv/pull/5620)
-    -   無効なデータを取得すると、Raftstore がエラー ログを出力してpanicが発生する問題を修正します[#5643](https://github.com/tikv/tikv/pull/5643)
+    -   無効なデータを取得すると、 Raftstore がエラー ログを出力panicが発生する問題を修正します[#5643](https://github.com/tikv/tikv/pull/5643)
 -   エンジン
-    -   RocksDB `force_consistency_checks`を有効にしてデータの安全性を向上させる[#5662](https://github.com/tikv/tikv/pull/5662)
+    -   RocksDB `force_consistency_checks`有効にしてデータの安全性を向上させる[#5662](https://github.com/tikv/tikv/pull/5662)
     -   Titan での同時フラッシュ操作がデータ損失を引き起こす可能性があるという問題を修正します[#5672](https://github.com/tikv/tikv/pull/5672)
-    -   L0 内圧縮による[#5710](https://github.com/tikv/tikv/pull/5710)のクラッシュと再起動の問題を回避するために、rust-rocksdb のバージョンを更新します。
+    -   [#5710](https://github.com/tikv/tikv/pull/5710)内圧縮による TiKV のクラッシュと再起動の問題を回避するために、rust-rocksdb のバージョンを更新します。
 
 ## PD {#pd}
 
--   リージョン[#1782](https://github.com/pingcap/pd/pull/1782)が占有するストレージの精度を向上させる
+-   リージョン[#1782](https://github.com/pingcap/pd/pull/1782)が占有するstorageの精度を向上させる
 -   `--help`コマンド[#1763](https://github.com/pingcap/pd/pull/1763)の出力を改善する
 -   TLS が有効になった後、HTTP 要求がリダイレクトに失敗する問題を修正します[#1777](https://github.com/pingcap/pd/pull/1777)
 -   pd-ctl が`store shows limit`コマンド[#1808](https://github.com/pingcap/pd/pull/1808)を使用するときに発生したpanicの問題を修正します。
@@ -76,10 +76,10 @@ TiDB アンシブル バージョン: 3.0.5
 
 ## ツール {#tools}
 
--   Binlog
+-   TiDBBinlog
     -   `ALTER DATABASE`関連する DDL 操作によってDrainerが異常終了する問題を修正[#769](https://github.com/pingcap/tidb-binlog/pull/769)
-    -   コミット バイナリログのトランザクション ステータス情報のクエリをサポートして、レプリケーションの効率を向上させます[#757](https://github.com/pingcap/tidb-binlog/pull/757)
-    -   Drainer の`start_ts`が Pump の最大の`commit_ts` [#758](https://github.com/pingcap/tidb-binlog/pull/758)より大きい場合、 Pumppanicが発生する可能性がある問題を修正します。
+    -   コミットbinlogのトランザクション ステータス情報のクエリをサポートして、レプリケーションの効率を向上させます[#757](https://github.com/pingcap/tidb-binlog/pull/757)
+    -   Drainer の`start_ts` Pump の最大の`commit_ts` [#758](https://github.com/pingcap/tidb-binlog/pull/758)より大きい場合、 Pumppanicが発生する可能性がある問題を修正します。
 -   TiDB Lightning
     -   ローダーの完全なロジック インポート機能を統合し、バックエンド モードの構成をサポートします[#221](https://github.com/pingcap/tidb-lightning/pull/221)
 

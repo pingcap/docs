@@ -1,18 +1,18 @@
 ---
 title: COLUMNS
-summary: Learn the `COLUMNS` information_schema table.
+summary: Learn the `COLUMNS` INFORMATION_SCHEMA table.
 ---
 
 # 列 {#columns}
 
 `COLUMNS`テーブルは、テーブル内の列に関する詳細情報を提供します。
 
-{{< copyable "" >}}
-
 ```sql
-USE information_schema;
-DESC columns;
+USE INFORMATION_SCHEMA;
+DESC COLUMNS;
 ```
+
+出力は次のとおりです。
 
 ```sql
 +--------------------------+---------------+------+------+---------+-------+
@@ -43,14 +43,16 @@ DESC columns;
 21 rows in set (0.00 sec)
 ```
 
-{{< copyable "" >}}
+テーブル`test.t1`を作成し、テーブル`COLUMNS`の情報を照会します。
 
 ```sql
 CREATE TABLE test.t1 (a int);
-SELECT * FROM columns WHERE table_schema='test' AND TABLE_NAME='t1'\G
+SELECT * FROM COLUMNS WHERE table_schema='test' AND TABLE_NAME='t1'\G
 ```
 
-```
+输出結果は以下の通り：
+
+```sql
 *************************** 1. row ***************************
            TABLE_CATALOG: def
             TABLE_SCHEMA: test
@@ -68,11 +70,11 @@ CHARACTER_MAXIMUM_LENGTH: NULL
       CHARACTER_SET_NAME: NULL
           COLLATION_NAME: NULL
              COLUMN_TYPE: int(11)
-              COLUMN_KEY: 
-                   EXTRA: 
+              COLUMN_KEY:
+                   EXTRA:
               PRIVILEGES: select,insert,update,references
-          COLUMN_COMMENT: 
-   GENERATION_EXPRESSION: 
+          COLUMN_COMMENT:
+   GENERATION_EXPRESSION:
 1 row in set (0.02 sec)
 ```
 
@@ -106,13 +108,13 @@ CHARACTER_MAXIMUM_LENGTH: NULL
 
 対応する`SHOW`ステートメントは次のとおりです。
 
-{{< copyable "" >}}
-
 ```sql
 SHOW COLUMNS FROM t1 FROM test;
 ```
 
-```
+出力は次のとおりです。
+
+```sql
 +-------+---------+------+------+---------+-------+
 | Field | Type    | Null | Key  | Default | Extra |
 +-------+---------+------+------+---------+-------+

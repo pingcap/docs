@@ -39,7 +39,7 @@ CPU、メモリ、およびディスクの使用状況を表示できます。�
 
 -   `miss-peer-region-count` : 十分なレプリカがないリージョンの数。この値は常に`0`より大きいとは限りません。
 -   `extra-peer-region-count` : 追加のレプリカを持つリージョンの数。これらのリージョンは、スケジューリング プロセス中に生成されます。
--   `empty-region-count` : `TRUNCATE TABLE` / `DROP TABLE`ステートメントの実行によって生成された空のリージョンの数。この数が大きい場合は、 `Region Merge`を有効にして、テーブル間でリージョンをマージすることを検討できます。
+-   `empty-region-count` : `TRUNCATE TABLE` / `DROP TABLE`ステートメントの実行によって生成された空のリージョンの数。この数が大きい場合は、 `Region Merge`有効にして、テーブル間でリージョンをマージすることを検討できます。
 -   `pending-peer-region-count` : Raftログが古いリージョンの数。スケジューリング プロセスでいくつかの保留中のピアが生成されるのは正常です。ただし、この値が一定時間（30 分以上）大きい場合は正常ではありません。
 -   `down-peer-region-count` : Raftリーダーによって報告された応答のないピアを持つリージョンの数。
 -   `offline-peer-region-count` : オフライン プロセス中のリージョンの数。
@@ -52,7 +52,7 @@ CPU、メモリ、およびディスクの使用状況を表示できます。�
 
 TiKV での KV 要求期間 99。継続時間が長いノードが見つかった場合は、ホット スポットがあるかどうか、またはパフォーマンスの低いノードがあるかどうかを確認します。
 
-### PD TSO 待機時間 {#pd-tso-wait-duration}
+### PD TSO 待機期間 {#pd-tso-wait-duration}
 
 ![TiDB TSO Wait Duration](/media/pd-duration-panel.png)
 

@@ -9,9 +9,13 @@ TiDB は MySQL プロトコルと高い互換性があります。クライア�
 
 TiDB は[MySQL クライアント/サーバー プロトコル](https://dev.mysql.com/doc/internals/en/client-server-protocol.html)をサポートします。これにより、ほとんどのクライアント ドライバーと ORM フレームワークは、MySQL に接続するのと同じように TiDB に接続できます。
 
+## MySQL {#mysql}
+
 個人の好みに応じて、MySQL クライアントまたは MySQL シェルを使用することを選択できます。
 
-## MySQL クライアント {#mysql-client}
+<SimpleTab>
+
+<div label="MySQL Client">
 
 TiDB のコマンドライン ツールとして使用できる MySQL クライアントを使用して TiDB に接続できます。 MySQL クライアントをインストールするには、以下の YUM ベースの Linux ディストリビューションの手順に従ってください。
 
@@ -25,13 +29,19 @@ sudo yum install mysql
 mysql --host <tidb_server_host> --port 4000 -u root -p --comments
 ```
 
-## MySQL シェル {#mysql-shell}
+</div>
+
+<div label="MySQL Shell">
 
 TiDB のコマンドライン ツールとして使用できる MySQL Shell を使用して TiDB に接続できます。 MySQL Shell をインストールするには、 [MySQL シェルのドキュメント](https://dev.mysql.com/doc/mysql-shell/8.0/en/mysql-shell-install.html)の手順に従います。インストール後、次のコマンドを使用して TiDB に接続できます。
 
 ```shell
 mysqlsh --sql mysql://root@<tidb_server_host>:4000
 ```
+
+</div>
+
+</SimpleTab>
 
 ## JDBC {#jdbc}
 
@@ -70,9 +80,9 @@ TiDB SQLユーザーの詳細については、 [TiDB ユーザー アカウン�
 
 ## 休止状態 {#hibernate}
 
-[休止状態の ORM](https://hibernate.org/orm/)を使用して TiDB に接続できます。これを行うには、Hibernate 構成ファイルで`hibernate.connection.url`を有効な TiDB 接続文字列に設定する必要があります。
+[休止状態の ORM](https://hibernate.org/orm/)を使用して TiDB に接続できます。これを行うには、Hibernate 構成ファイルで`hibernate.connection.url`有効な TiDB 接続文字列に設定する必要があります。
 
-たとえば、 `hibernate.cfg.xml`の構成ファイルを使用する場合は、次のように`hibernate.connection.url`を設定します。
+たとえば、 `hibernate.cfg.xml`構成ファイルを使用する場合は、次のように`hibernate.connection.url`を設定します。
 
 ```xml
 <?xml version='1.0' encoding='utf-8'?>
@@ -88,7 +98,7 @@ TiDB SQLユーザーの詳細については、 [TiDB ユーザー アカウン�
 </hibernate-configuration>
 ```
 
-構成が完了したら、次のコマンドを使用して構成ファイルを読み取り、 `SessionFactory`のオブジェクトを取得できます。
+構成が完了したら、次のコマンドを使用して構成ファイルを読み取り、 `SessionFactory`オブジェクトを取得できます。
 
 ```java
 SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
@@ -96,8 +106,8 @@ SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml
 
 次の点に注意してください。
 
--   `hibernate.cfg.xml`の構成ファイルは XML 形式であり、 `&`は XML の特殊文字であるため、ファイルを構成するときに`&`を`&amp;`に変更する必要があります。たとえば、接続文字列`hibernate.connection.url`を`jdbc:mysql://{host}:{port}/{database}?user={user}&password={password}`から`jdbc:mysql://{host}:{ port}/{database}?user={user}&amp;password={password}`に変更する必要があります。
--   方言`TiDB`を`hibernate.dialect` ～ `org.hibernate.dialect.TiDBDialect`に設定して使用することをお勧めします。
+-   `hibernate.cfg.xml`構成ファイルは XML 形式であり、 `&`は XML の特殊文字であるため、ファイルを構成するときに`&`を`&amp;`に変更する必要があります。たとえば、接続文字列`hibernate.connection.url` `jdbc:mysql://{host}:{port}/{database}?user={user}&password={password}`から`jdbc:mysql://{host}:{ port}/{database}?user={user}&amp;password={password}`に変更する必要があります。
+-   方言`TiDB` `hibernate.dialect` ～ `org.hibernate.dialect.TiDBDialect`に設定して使用することをお勧めします。
 -   Hibernate は`6.0.0.Beta2`から始まる TiDB ダイアレクトをサポートするため、Hibernate `6.0.0.Beta2`以降のバージョンを使用して TiDB に接続することをお勧めします。
 
 Hibernate 接続パラメーターの詳細については、 [休止状態のドキュメント](https://hibernate.org/orm/documentation)を参照してください。

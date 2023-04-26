@@ -7,7 +7,7 @@ summary: Learn how to import CSV files via TiDB Lightning.
 
 このドキュメントでは、 TiDB Lightningを使用して CSV ファイルから TiDB にデータを移行する方法について説明します。 MySQL から CSV ファイルを生成する方法については、 [Dumplingを使用して CSV ファイルにエクスポートする](/dumpling-overview.md#export-to-csv-files)を参照してください。
 
-TiDB Lightningは、CSV (カンマ区切り値) データ ソースの読み取りと、TSV (タブ区切り値) などの他の区切り形式をサポートしています。
+TiDB Lightning は、 CSV (カンマ区切り値) データ ソースの読み取りと、TSV (タブ区切り値) などの他の区切り形式をサポートしています。
 
 ## ファイル名 {#file-name}
 
@@ -26,7 +26,7 @@ CSV ファイルはスキーマレスです。それらを TiDB にインポー�
 
 ## コンフィグレーション {#configuration}
 
-CSV 形式は、 `[mydumper.csv]`セクションの`tidb-lightning.toml`で設定できます。ほとんどの設定には、MySQL [`LOAD DATA`]ステートメントに対応するオプションがあります。
+CSV 形式は、 `[mydumper.csv]`セクションの`tidb-lightning.toml`で構成できます。ほとんどの設定には、MySQL [`LOAD DATA`]ステートメントに対応するオプションがあります。
 
 ```toml
 [mydumper.csv]
@@ -51,9 +51,9 @@ backslash-escape = true
 trim-last-separator = false
 ```
 
-`separator` 、 `delimiter` 、 `terminator`などのすべての文字列フィールドで、入力に特殊文字が含まれている場合は、バックスラッシュ エスケープ シーケンスを使用して、それらを*二重引用符で囲まれ*た文字列 ( `"…"` ) で表すことができます。たとえば、 `separator = "\u001f"`は ASCII 文字 0x1F をセパレータとして使用することを意味します。
+`separator` 、 `delimiter` 、 `terminator`などのすべての文字列フィールドで、入力に特殊文字が含まれている場合は、バックスラッシュ エスケープ シーケンスを使用して、それらを*二重引用*符で囲まれた文字列 ( `"…"` ) で表すことができます。たとえば、 `separator = "\u001f"` ASCII 文字 0x1F をセパレータとして使用することを意味します。
 
-さらに、*単一引用符で囲まれ*た文字列 ( `'…'` ) を使用して、バックスラッシュのエスケープを抑制することができます。たとえば、 `terminator = '\n'`は 2 文字の文字列を使用することを意味します: バックスラッシュの後に文字 &quot;n&quot; がターミネータとして続きます。
+さらに、*単一引用*符で囲まれた文字列 ( `'…'` ) を使用して、バックスラッシュのエスケープを抑制することができます。たとえば、 `terminator = '\n'` 2 文字の文字列を使用することを意味します: バックスラッシュの後に文字 &quot;n&quot; がターミネータとして続きます。
 
 詳細は[TOML v1.0.0 specification]を参照してください。
 
@@ -83,7 +83,7 @@ trim-last-separator = false
 
 -   一般的な値:
 
-    -   二重引用符で囲まれた`'"'`個の引用フィールド、 [RFC 4180]個と同じ
+    -   二重引用符で囲まれた`'"'`引用フィールド、 [RFC 4180]と同じ
     -   `''`引用を無効にする
 
 -   `LOAD DATA`ステートメントの`FIELDS ENCLOSED BY`オプションに対応します。
@@ -139,7 +139,7 @@ trim-last-separator = false
 
 ### <code>trim-last-separator</code> {#code-trim-last-separator-code}
 
--   フィールド`separator`をターミネータとして扱い、末尾のセパレータをすべて削除します。
+-   フィールド`separator`ターミネータとして扱い、末尾のセパレータをすべて削除します。
 
     たとえば、CSV ファイルの場合:
 
@@ -167,7 +167,7 @@ trim-last-separator = false
 
 ### 構成不可能なオプション {#non-configurable-options}
 
-TiDB Lightningは、 `LOAD DATA`ステートメントでサポートされているすべてのオプションをサポートしているわけではありません。いくつかの例：
+TiDB Lightning は、 `LOAD DATA`ステートメントでサポートされているすべてのオプションをサポートしているわけではありません。いくつかの例：
 
 -   行のプレフィックス ( `LINES STARTING BY` ) は使用できません。
 -   ヘッダーを単純にスキップすることはできません ( `IGNORE n LINES` )。存在する場合は、有効な列名でなければなりません。
@@ -188,7 +188,7 @@ strict-format = true
 -   区切り文字が空であるか、または
 -   すべてのフィールドにターミネータ自体が含まれているわけではありません。デフォルトの構成では、これはすべてのフィールドに CR ( `\r` ) または LF ( `\n` ) が含まれていないことを意味します。
 
-CSV ファイルが厳密ではなく、 `strict-format`が誤って`true`に設定されている場合、複数行にまたがるフィールドが半分に分割されて 2 つのチャンクになり、解析が失敗するか、さらに悪いことに、破損したデータが静かにインポートされる可能性があります。
+CSV ファイルが厳密ではなく、 `strict-format`誤って`true`に設定されている場合、複数行にまたがるフィールドが半分に分割されて 2 つのチャンクになり、解析が失敗するか、さらに悪いことに、破損したデータが静かにインポートされる可能性があります。
 
 ## 一般的な構成 {#common-configurations}
 

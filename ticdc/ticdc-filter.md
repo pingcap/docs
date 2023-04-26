@@ -22,13 +22,13 @@ rules = ['*.*', '!test.*']
 -   `rules = ['*.*']`
     -   すべてのテーブルをレプリケート (システム テーブルを除く)
 -   `rules = ['test1.*']`
-    -   `test1`のデータベース内のすべてのテーブルをレプリケートする
+    -   `test1`データベース内のすべてのテーブルをレプリケートする
 -   `rules = ['*.*', '!scm1.tbl2']`
     -   `scm1.tbl2`のテーブルを除くすべてのテーブルをレプリケートする
 -   `rules = ['scm1.tbl2', 'scm1.tbl3']`
     -   テーブル`scm1.tbl2`と`scm1.tbl3`のみをレプリケートする
 -   `rules = ['scm1.tidb_*']`
-    -   名前が`tidb_`で始まる`scm1`のデータベース内のすべてのテーブルをレプリケートします。
+    -   名前が`tidb_`で始まる`scm1`データベース内のすべてのテーブルをレプリケートします。
 
 詳細については、 [テーブル フィルタの構文](/table-filter.md#syntax)を参照してください。
 
@@ -57,25 +57,25 @@ ignore-update-new-value-expr = "gender = 'male' and age > 18" # Ignore update DM
 -   `matcher` : このイベント フィルター規則が適用されるデータベースとテーブル。構文は[テーブル フィルター](/table-filter.md)と同じです。
 -   `ignore-event` : 無視するイベント タイプ。このパラメーターは、文字列の配列を受け入れます。複数のイベント タイプを設定できます。現在、次のイベント タイプがサポートされています。
 
-| イベント              | タイプ | エイリアス       | 説明                                                                               |
-| ----------------- | --- | ----------- | -------------------------------------------------------------------------------- |
-| すべてのdml           |     |             | すべての DML イベントに一致                                                                 |
-| すべての ddl          |     |             | すべての DDL イベントに一致                                                                 |
-| 入れる               | DML |             | `insert`の DML イベントに一致                                                            |
-| アップデート            | DML |             | `update`の DML イベントに一致                                                            |
-| 消去                | DML |             | `delete`の DML イベントに一致                                                            |
-| スキーマを作成する         | DDL | データベースを作成する | `create database`のイベントに一致                                                        |
-| スキーマを削除           | DDL | データベースをドロップ | `drop database`のイベントに一致                                                          |
-| テーブルを作成           | DDL |             | `create table`のイベントに一致                                                           |
-| ドロップテーブル          | DDL |             | `drop table`のイベントに一致                                                             |
-| テーブルの名前を変更        | DDL |             | `rename table`のイベントに一致                                                           |
-| テーブルを切り捨てる        | DDL |             | `truncate table`のイベントに一致                                                         |
-| 他の机               | DDL |             | `alter table` 、 `create index` 、および`drop index`のすべての節を含む`alter table`のイベントに一致します |
-| テーブルパーティションを追加    | DDL |             | `add table partition`のイベントに一致                                                    |
-| テーブル パーティションの削除   | DDL |             | `drop table partition`のイベントに一致                                                   |
-| テーブル パーティションの切り捨て | DDL |             | `truncate table partition`のイベントに一致                                               |
-| ビューを作成            | DDL |             | `create view`のイベントに一致                                                            |
-| ビューをドロップ          | DDL |             | `drop view`のイベントに一致                                                              |
+| イベント              | タイプ | エイリアス       | 説明                                                                              |
+| ----------------- | --- | ----------- | ------------------------------------------------------------------------------- |
+| すべてのdml           |     |             | すべての DML イベントに一致                                                                |
+| すべての ddl          |     |             | すべての DDL イベントに一致                                                                |
+| 入れる               | DML |             | `insert` DML イベントに一致                                                            |
+| アップデート            | DML |             | `update` DML イベントに一致                                                            |
+| 消去                | DML |             | `delete` DML イベントに一致                                                            |
+| スキーマを作成する         | DDL | データベースを作成する | `create database`イベントに一致                                                        |
+| スキーマを削除           | DDL | データベースをドロップ | `drop database`イベントに一致                                                          |
+| テーブルを作成           | DDL |             | `create table`イベントに一致                                                           |
+| ドロップテーブル          | DDL |             | `drop table`イベントに一致                                                             |
+| テーブルの名前を変更        | DDL |             | `rename table`イベントに一致                                                           |
+| テーブルを切り捨てる        | DDL |             | `truncate table`イベントに一致                                                         |
+| 他の机               | DDL |             | `alter table` 、 `create index` 、および`drop index`のすべての節を含む`alter table`イベントに一致します |
+| テーブルパーティションを追加    | DDL |             | `add table partition`イベントに一致                                                    |
+| テーブル パーティションの削除   | DDL |             | `drop table partition`イベントに一致                                                   |
+| テーブル パーティションの切り捨て | DDL |             | `truncate table partition`イベントに一致                                               |
+| ビューを作成            | DDL |             | `create view`イベントに一致                                                            |
+| ビューをドロップ          | DDL |             | `drop view`イベントに一致                                                              |
 
 -   `ignore-sql` : 無視される DDL ステートメント。このパラメーターは、複数の正規表現を構成できる文字列の配列を受け入れます。このルールは、DDL イベントにのみ適用されます。
 -   `ignore-delete-value-expr` : このパラメーターは SQL 式を受け入れます。このルールは、指定された値を持つ DML イベントの削除にのみ適用されます。

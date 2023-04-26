@@ -14,7 +14,7 @@ TiDB バージョン: 4.0.0-rc.1
 
     -   デフォルトで Hibernate リージョン機能を無効にする[#7618](https://github.com/tikv/tikv/pull/7618)
 
--   Binlog
+-   TiDBBinlog
 
     -   Drainer [#950](https://github.com/pingcap/tidb-binlog/pull/950)でのシーケンス DDL 操作のサポート
 
@@ -33,12 +33,12 @@ TiDB バージョン: 4.0.0-rc.1
 
 -   TiFlash
 
-    -   複数のデータ パスが構成されている場合に`rename table`の操作が原因で発生するデータ損失の問題を修正します。
+    -   複数のデータ パスが構成されている場合に`rename table`操作が原因で発生するデータ損失の問題を修正します。
     -   マージされたリージョンからデータを読み取るとエラーが発生する問題を修正
     -   異常な状態のリージョンからデータを読み取るとエラーが発生する問題を修正
     -   `recover table` / `flashback table`を正しくサポートするように、 TiFlashのテーブル名のマッピングを変更します。
-    -   ストレージ パスを変更して、テーブルの名前を変更するときに発生する潜在的なデータ損失の問題を修正します。
-    -   Super Batch が有効な場合に TiDB がpanicになる可能性を修正
+    -   storageパスを変更して、テーブルの名前を変更するときに発生する潜在的なデータ損失の問題を修正します。
+    -   Super Batch が有効な場合に TiDB がパニックになる可能panicを修正
     -   オンライン更新シナリオの読み取りモードを変更して、読み取りパフォーマンスを向上させます
 
 -   TiCDC
@@ -90,12 +90,12 @@ TiDB バージョン: 4.0.0-rc.1
     -   Kafka シンク モジュール[#426](https://github.com/pingcap/tiflow/pull/426)でメッセージのバッチ送信をサポート
     -   プロセッサ[#477](https://github.com/pingcap/tiflow/pull/477)でファイルの並べ替えをサポート
     -   自動`resolve lock` [#459](https://github.com/pingcap/tiflow/pull/459)をサポート
-    -   PD1に[#487](https://github.com/pingcap/tiflow/pull/487)サービスのGCセーフポイントを自動更新する機能を追加
+    -   [#487](https://github.com/pingcap/tiflow/pull/487)にTiCDCサービスのGCセーフポイントを自動更新する機能を追加
     -   データ レプリケーション[#498](https://github.com/pingcap/tiflow/pull/498)のタイムゾーン設定を追加します。
 
 -   バックアップと復元 (BR)
 
-    -   ストレージ URL [#246](https://github.com/pingcap/br/pull/246)での S3/GCS の構成のサポート
+    -   storageURL [#246](https://github.com/pingcap/br/pull/246)での S3/GCS の構成のサポート
 
 ## バグの修正 {#bug-fixes}
 
@@ -109,14 +109,14 @@ TiDB バージョン: 4.0.0-rc.1
 -   プランキャッシュが有効な場合に`explain for connection`の実行中に発生するpanicを修正します[#16285](https://github.com/pingcap/tidb/pull/16285)
 -   `tidb_capture_plan_baselines`システム変数の結果が正しく表示されない問題を修正[#16048](https://github.com/pingcap/tidb/pull/16048)
 -   `prepare`ステートメントの`group by`句が正しく解析されない問題を修正します[#16377](https://github.com/pingcap/tidb/pull/16377)
--   `analyze primary key`ステートメントの実行中に発生する可能性のあるpanicを修正します[#16081](https://github.com/pingcap/tidb/pull/16081)
+-   `analyze primary key`ステートメントの実行中に発生する可能性のpanicを修正します[#16081](https://github.com/pingcap/tidb/pull/16081)
 -   `cluster_info`システムテーブルのTiFlashストア情報が間違っている問題を修正[#16024](https://github.com/pingcap/tidb/pull/16024)
--   インデックス マージ プロセス中に発生する可能性のあるpanicを修正します[#16360](https://github.com/pingcap/tidb/pull/16360)
+-   インデックス マージ プロセス中に発生する可能性のpanicを修正します[#16360](https://github.com/pingcap/tidb/pull/16360)
 -   インデックス マージ リーダーが生成された列を読み取ると、誤った結果が発生する可能性がある問題を修正します[#16359](https://github.com/pingcap/tidb/pull/16359)
 -   `show create table`ステートメント[#16526](https://github.com/pingcap/tidb/pull/16526)のデフォルト シーケンス値の誤った表示を修正します。
 -   主キー[#16510](https://github.com/pingcap/tidb/pull/16510)のデフォルト値にシーケンスを使用しているため`not-null`エラーが返る問題を修正
 -   TiKV が`StaleCommand`エラー[#16530](https://github.com/pingcap/tidb/pull/16530)を返し続けると、ブロックされた SQL 実行に対してエラーが報告されない問題を修正します。
--   データベースの作成時に`COLLATE`のみを指定するとエラーが報告される問題を修正します。欠落している`COLLATE`の部分を`SHOW CREATE DATABASE` [#16540](https://github.com/pingcap/tidb/pull/16540)の結果に追加します
+-   データベースの作成時に`COLLATE`のみを指定するとエラーが報告される問題を修正します。欠落している`COLLATE`部分を`SHOW CREATE DATABASE` [#16540](https://github.com/pingcap/tidb/pull/16540)の結果に追加します
 -   プラン キャッシュが有効な場合のパーティション プルーニングの失敗を修正します[#16723](https://github.com/pingcap/tidb/pull/16723)
 -   オーバーフローの処理で`PointGet`が間違った結果を返すバグを修正[#16755](https://github.com/pingcap/tidb/pull/16755)
 -   `slow_query`システム テーブルを等しい時間値[#16806](https://github.com/pingcap/tidb/pull/16806)でクエリすると、間違った結果が返される問題を修正します。
@@ -132,7 +132,7 @@ TiDB バージョン: 4.0.0-rc.1
     -   学習者を削除しても学習者が削除されない問題を修正[#7518](https://github.com/tikv/tikv/pull/7518)
     -   raft-rs [#7408](https://github.com/tikv/tikv/pull/7408)でフォロワーの読み取りがpanicを引き起こす可能性がある問題を修正します。
     -   `group by constant`エラーが原因で SQL 操作が失敗する可能性があるバグを修正[#7383](https://github.com/tikv/tikv/pull/7383)
-    -   対応するプライマリ ロックが悲観的ロック[#7328](https://github.com/tikv/tikv/pull/7328)の場合、楽観的ロックが読み取りをブロックする可能性がある問題を修正します。
+    -   対応する楽観的ロックがペシミスティック ロック[#7328](https://github.com/tikv/tikv/pull/7328)の場合、オプティ悲観的ロックが読み取りをブロックする可能性がある問題を修正します。
 
 -   PD
 
@@ -143,7 +143,7 @@ TiDB バージョン: 4.0.0-rc.1
 
 -   TiFlash
 
-    -   ストレージ エンジンの粗粒度インデックス最適化を無効にする
+    -   storageエンジンの粗粒度インデックス最適化を無効にする
     -   リージョンのロックを解決するときに例外がスローされ、一部のロックをスキップする必要があるというバグを修正します
     -   コプロセッサーの統計を収集するときのヌルポインター例外 (NPE) を修正します。
     -   リージョンメタのチェックを修正して、リージョンスプリット/リージョンマージのプロセスが正しいことを確認します

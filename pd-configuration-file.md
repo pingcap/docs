@@ -7,7 +7,7 @@ summary: Learn the PD configuration file.
 
 <!-- markdownlint-disable MD001 -->
 
-PD 構成ファイルは、コマンドライン パラメーターよりも多くのオプションをサポートしています。デフォルトの構成ファイルは[ここ](https://github.com/pingcap/pd/blob/master/conf/config.toml)にあります。
+PD 構成ファイルは、コマンドライン パラメーターよりも多くのオプションをサポートしています。デフォルトの構成ファイルは[ここ](https://github.com/pingcap/pd/blob/master/conf/config.toml)あります。
 
 このドキュメントでは、コマンド ライン パラメーターに含まれていないパラメーターについてのみ説明します。コマンド ライン パラメータの[ここ](/command-line-flags-for-pd-configuration.md)を確認します。
 
@@ -53,7 +53,7 @@ PD 構成ファイルは、コマンドライン パラメーターよりも多�
 -   ブートストラップ用の初期クラスター構成
 -   デフォルト値: `"{name}=http://{advertise-peer-url}"`
 -   たとえば、 `name`が &quot;pd&quot; で`advertise-peer-urls`が`"http://192.168.100.113:2380"`の場合、 `initial-cluster`は`"pd=http://192.168.100.113:2380"`です。
--   3 つの PD サーバーを開始する必要がある場合、 `initial-cluster`つは次のようになります。
+-   3 つの PD サーバーを開始する必要がある場合、 `initial-cluster`は次のようになります。
 
     ```
     pd1=http://192.168.100.113:2380, pd2=http://192.168.100.114:2380, pd3=192.168.100.115:2380
@@ -78,7 +78,7 @@ PD 構成ファイルは、コマンドライン パラメーターよりも多�
 
 ### <code>quota-backend-bytes</code> {#code-quota-backend-bytes-code}
 
--   メタ情報データベースのストレージ サイズ。デフォルトでは 8GiB です。
+-   メタ情報データベースのstorageサイズ。デフォルトでは 8GiB です。
 -   デフォルト値: `8589934592`
 
 ### <code>auto-compaction-mod</code> {#code-auto-compaction-mod-code}
@@ -101,9 +101,22 @@ PD 構成ファイルは、コマンドライン パラメーターよりも多�
 
 -   PD が TSO の物理時間を更新する間隔。
 -   TSO 物理時間のデフォルトの更新間隔では、PD は最大 262144 個の TSO を提供します。より多くの TSO を取得するには、この構成項目の値を減らすことができます。最小値は`1ms`です。
--   この構成項目を減らすと、PD の CPU 使用率が増加する可能性があります。テストによると、間隔が`50ms`の場合と比較して、間隔が`1ms`の場合、PD の[CPU使用率](https://man7.org/linux/man-pages/man1/top.1.html)は約 10% 増加します。
+-   この構成項目を減らすと、PD の CPU 使用率が増加する可能性があります。テストによると、間隔が`50ms`の場合と比較して、間隔が`1ms`の場合、PD の[CPU使用率](https://man7.org/linux/man-pages/man1/top.1.html)約 10% 増加します。
 -   デフォルト値: `50ms`
 -   最小値: `1ms`
+
+## pd サーバー {#pd-server}
+
+pd-serverに関するコンフィグレーション項目
+
+### <span class="version-mark">TiDB 5.1 の新</span><code>flow-round-by-digit</code> {#code-flow-round-by-digit-code-span-class-version-mark-new-in-tidb-5-1-span}
+
+-   デフォルト値: 3
+-   PD は、フロー番号の最下位桁を四捨五入します。これにより、リージョンフロー情報の変更によって引き起こされる統計の更新が減少します。この構成項目は、リージョンフロー情報を丸める最小桁数を指定するために使用されます。たとえば、デフォルト値が`3`であるため、フロー`100512` `101000`に丸められます。この構成は`trace-region-flow`を置き換えます。
+
+> **ノート：**
+>
+> クラスターを TiDB 4.0 バージョンから現在のバージョンにアップグレードした場合、アップグレード後の`flow-round-by-digit`の動作とアップグレード前の`trace-region-flow`の動作はデフォルトで一貫しています。これは、アップグレード前に`trace-region-flow`の値が false の場合、アップグレード後の`flow-round-by-digit`の値は 127 であることを意味します。アップグレード前の`trace-region-flow`の値が`true`の場合、アップグレード後の`flow-round-by-digit`の値は`3`です。
 
 ## 安全 {#security}
 
@@ -157,7 +170,7 @@ PD 構成ファイルは、コマンドライン パラメーターよりも多�
 
 ### <code>max-size</code> {#code-max-size-code}
 
--   1 つのログ ファイルの最大サイズ。この値を超えると、システムは自動的にログをいくつかのファイルに分割します。
+-   1 つのログ ファイルの最大サイズ。この値を超えると、システムは自動的にログを複数のファイルに分割します。
 -   デフォルト値: `300`
 -   単位：MiB
 -   最小値: `1`
@@ -189,7 +202,7 @@ PD 構成ファイルは、コマンドライン パラメーターよりも多�
 
 ### <code>max-merge-region-size</code> {#code-max-merge-region-size-code}
 
--   `Region Merge`のサイズ制限を制御します。 リージョンサイズが指定された値より大きい場合、PD はそのリージョンとマージしません。
+-   `Region Merge`のサイズ制限を制御します。 リージョンサイズが指定された値より大きい場合、PD はそのリージョンを隣接する Region とマージしません。
 -   デフォルト値: `20`
 -   単位：MiB
 
@@ -205,7 +218,7 @@ PD 構成ファイルは、コマンドライン パラメーターよりも多�
 
 ### <code>split-merge-interval</code> {#code-split-merge-interval-code}
 
--   同じリージョンでの`split`回目と`merge`目の操作の間の時間間隔を制御します。つまり、新しく分割されたリージョンはしばらくマージされません。
+-   同じリージョンでの`split`目と`merge`の操作の間の時間間隔を制御します。つまり、新しく分割されたリージョンはしばらくマージされません。
 -   デフォルト値: `1h`
 
 ### <code>max-snapshot-count</code> {#code-max-snapshot-count-code}
@@ -260,7 +273,7 @@ PD 構成ファイルは、コマンドライン パラメーターよりも多�
 
 ### <code>merge-schedule-limit</code> {#code-merge-schedule-limit-code}
 
--   同時に実行される`Region Merge`のスケジューリング タスクの数。 `Region Merge`を無効にするには、このパラメーターを`0`に設定します。
+-   同時に実行される`Region Merge`スケジューリング タスクの数。 `Region Merge`を無効にするには、このパラメーターを`0`に設定します。
 -   デフォルト値: `8`
 
 ### <code>high-space-ratio</code> {#code-high-space-ratio-code}
@@ -292,11 +305,11 @@ PD 構成ファイルは、コマンドライン パラメーターよりも多�
 
 -   リージョンスコア式のバージョンを制御します
 -   デフォルト値: `v2`
--   オプションの値: `v1`および`v2` 。 v1 と比較して、v2 の変化はよりスムーズであり、スペースの再利用によって引き起こされるスケジューリングのジッターが改善されます。
+-   オプションの値: `v1`および`v2` 。 v1 と比較して、v2 の変化はよりスムーズであり、スペースの再利用によって引き起こされるスケジューリングのジッターが改善されています。
 
 > **ノート：**
 >
-> クラスターを TiDB 4.0 バージョンから現在のバージョンにアップグレードした場合、新しいフォーミュラ バージョンはデフォルトで自動的に無効になり、アップグレードの前後で一貫した PD 動作が保証されます。式のバージョンを変更する場合は、 `pd-ctl`の設定を手動で切り替える必要があります。詳細は[PD Control](/pd-control.md#config-show--set-option-value--placement-rules)を参照してください。
+> クラスターを TiDB 4.0 バージョンから現在のバージョンにアップグレードした場合、新しいフォーミュラ バージョンはデフォルトで自動的に無効になり、アップグレードの前後で一貫した PD 動作が保証されます。式のバージョンを変更する場合は、 `pd-ctl`設定を手動で切り替える必要があります。詳細は[PD Control](/pd-control.md#config-show--set-option-value--placement-rules)を参照してください。
 
 ### <code>enable-joint-consensus</code> <span class="version-mark">v5.0 の新機能</span> {#code-enable-joint-consensus-code-span-class-version-mark-new-in-v5-0-span}
 
@@ -323,7 +336,7 @@ PD 構成ファイルは、コマンドライン パラメーターよりも多�
 
 ### <code>max-replicas</code> {#code-max-replicas-code}
 
--   レプリカの数、つまりリーダーとフォロワーの数の合計。デフォルト値`3`は、1 人のリーダーと 2 人のフォロワーを意味します。この構成が動的に変更されると、レプリカの数がこの構成と一致するように、PD はバックグラウンドでリージョンをスケジュールします。
+-   レプリカの数、つまりリーダーとフォロワーの数の合計。デフォルト値`3` 1 人のリーダーと 2 人のフォロワーを意味します。この構成が動的に変更されると、レプリカの数がこの構成と一致するように、PD はバックグラウンドでリージョンをスケジュールします。
 -   デフォルト値: `3`
 
 ### <code>location-labels</code> {#code-location-labels-code}
@@ -348,15 +361,6 @@ PD 構成ファイルは、コマンドライン パラメーターよりも多�
 -   `placement-rules`を有効にします。
 -   デフォルト値: `true`
 -   [配置ルール](/configure-placement-rules.md)を参照してください。
-
-### <code>flow-round-by-digit</code> <span class="version-mark">5.1 の新機能</span> {#code-flow-round-by-digit-code-span-class-version-mark-new-in-tidb-5-1-span}
-
--   デフォルト値: 3
--   PD は、フロー番号の最下位桁を四捨五入します。これにより、リージョンフロー情報の変更によって引き起こされる統計の更新が減少します。この構成項目は、リージョンフロー情報を丸める最小桁数を指定するために使用されます。たとえば、デフォルト値が`3`であるため、フロー`100512`は`101000`に丸められます。この構成は`trace-region-flow`を置き換えます。
-
-> **ノート：**
->
-> クラスターを TiDB 4.0 バージョンから現在のバージョンにアップグレードした場合、アップグレード後の`flow-round-by-digit`の動作とアップグレード前の`trace-region-flow`の動作はデフォルトで一貫しています。これは、アップグレード前に`trace-region-flow`の値が false の場合、アップグレード後の`flow-round-by-digit`の値は 127 であることを意味します。アップグレード前の`trace-region-flow`の値が`true`の場合、アップグレード後の`flow-round-by-digit`の値は`3`です。
 
 ## <code>label-property</code> {#code-label-property-code}
 
@@ -395,12 +399,12 @@ PD 構成ファイルは、コマンドライン パラメーターよりも多�
 
 -   TiDB ダッシュボードがリバース プロキシの背後でアクセスされる場合、この項目はすべての Web リソースのパブリック URL パス プレフィックスを設定します。
 -   デフォルト値: `/dashboard`
--   TiDB ダッシュボードがリバース プロキシの背後でアクセスされていない場合は、この構成項目を変更し**ない**でください。そうしないと、アクセスの問題が発生する可能性があります。詳細は[リバース プロキシの背後で TiDB ダッシュボードを使用する](/dashboard/dashboard-ops-reverse-proxy.md)を参照してください。
+-   TiDB ダッシュボードがリバース プロキシの背後でアクセスされていない場合は、この構成項目を変更し**ないで**ください。そうしないと、アクセスの問題が発生する可能性があります。詳細は[リバース プロキシの背後で TiDB ダッシュボードを使用する](/dashboard/dashboard-ops-reverse-proxy.md)参照してください。
 
 ### <code>enable-telemetry</code> {#code-enable-telemetry-code}
 
 -   TiDB ダッシュボードでテレメトリ収集機能を有効にするかどうかを決定します。
--   デフォルト値: `true`
+-   デフォルト値: v6.5.0 の場合は`true` 。 v6.5.1 以降の v6.5.x バージョンの場合は`false`
 -   詳細は[テレメトリー](/telemetry.md)を参照してください。
 
 ## <code>replication-mode</code> {#code-replication-mode-code}

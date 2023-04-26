@@ -18,7 +18,7 @@ summary: Learn about how to insert data.
 
 ## 行を挿入する {#insert-rows}
 
-複数行のデータを挿入するには、2 つの方法があります。たとえば、 **3**人のプレーヤーのデータを挿入する必要がある場合。
+複数行のデータを挿入するには、2 つの方法があります。たとえば、 **3 人**のプレーヤーのデータを挿入する必要がある場合。
 
 -   **複数行の挿入ステートメント**:
 
@@ -28,7 +28,7 @@ summary: Learn about how to insert data.
     INSERT INTO `player` (`id`, `coins`, `goods`) VALUES (1, 1000, 1), (2, 230, 2), (3, 300, 5);
     ```
 
--   複数**の単一行挿入ステートメント**:
+-   複数の**単一行挿入ステートメント**:
 
     {{< copyable "" >}}
 
@@ -38,7 +38,7 @@ summary: Learn about how to insert data.
     INSERT INTO `player` (`id`, `coins`, `goods`) VALUES (3, 300, 5);
     ```
 
-一般に、 `multi-line insertion statement`は複数の`single-line insertion statements`よりも高速に実行されます。
+一般に、 `multi-line insertion statement`複数の`single-line insertion statements`よりも高速に実行されます。
 
 <SimpleTab>
 <div label="SQL">
@@ -82,16 +82,16 @@ try (Connection connection = ds.getConnection()) {
 
 デフォルトの MySQL JDBCDriver設定により、一括挿入のパフォーマンスを向上させるには、いくつかのパラメーターを変更する必要があります。
 
-|            パラメータ           |                 意味                 |                                                                   推奨シナリオ                                                                  |          推奨コンフィグレーション         |
-| :------------------------: | :--------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------: |
-|    `useServerPrepStmts`    |   サーバー側を使用して準備済みステートメントを有効にするかどうか  |                                                        プリペアドステートメントを複数回使用する必要がある場合                                                        |             `true`            |
-|      `cachePrepStmts`      |   クライアントが準備済みステートメントをキャッシュするかどうか   |                                                         `useServerPrepStmts=true`時                                                        |             `true`            |
-|   `prepStmtCacheSqlLimit`  | プリペアドステートメントの最大サイズ (デフォルトで 256 文字) |                                                          プリペアドステートメントが256文字を超える場合                                                         | プリペアドステートメントの実際のサイズに従って構成されます |
-|     `prepStmtCacheSize`    | プリペアドステートメントキャッシュの最大数 (デフォルトでは 25) |                                                          準備済みステートメントの数が 25 を超える場合                                                         |  準備されたステートメントの実際の数に従って構成されます  |
-| `rewriteBatchedStatements` |      **バッチ**ステートメントを書き換えるかどうか      |                                                                 一括操作が必要な場合                                                                |             `true`            |
-|     `allowMultiQueries`    |             バッチ操作を開始する             | [クライアントのバグ](https://bugs.mysql.com/bug.php?id=96623)は、 `rewriteBatchedStatements = true`と`useServerPrepStmts = true`のときにこれを設定する必要があるためです。 |             `true`            |
+|            パラメータ           |                 意味                 |                                                                  推奨シナリオ                                                                 |          推奨コンフィグレーション         |
+| :------------------------: | :--------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------: |
+|    `useServerPrepStmts`    |   サーバー側を使用して準備済みステートメントを有効にするかどうか  |                                                       プリペアドステートメントを複数回使用する必要がある場合                                                       |             `true`            |
+|      `cachePrepStmts`      |   クライアントが準備済みステートメントをキャッシュするかどうか   |                                                        `useServerPrepStmts=true`時                                                       |             `true`            |
+|   `prepStmtCacheSqlLimit`  | プリペアドステートメントの最大サイズ (デフォルトで 256 文字) |                                                         プリペアドステートメントが256文字を超える場合                                                        | プリペアドステートメントの実際のサイズに従って構成されます |
+|     `prepStmtCacheSize`    | プリペアドステートメントキャッシュの最大数 (デフォルトでは 25) |                                                         準備済みステートメントの数が 25 を超える場合                                                        |  準備されたステートメントの実際の数に従って構成されます  |
+| `rewriteBatchedStatements` |      **バッチ**ステートメントを書き換えるかどうか      |                                                                一括操作が必要な場合                                                               |             `true`            |
+|     `allowMultiQueries`    |             バッチ操作を開始する             | [クライアントのバグ](https://bugs.mysql.com/bug.php?id=96623) `rewriteBatchedStatements = true`と`useServerPrepStmts = true`のときにこれを設定する必要があるためです。 |             `true`            |
 
-MySQL JDBCDriverは、統合された構成も提供し`useConfigs` 。 `maxPerformance`で構成されている場合は、一連の構成を構成することと同じです。 `mysql:mysql-connector-java:8.0.28`を例にとると、 `useConfigs=maxPerformance`には以下が含まれます。
+MySQL JDBCDriverは、 `useConfigs`された構成も提供します。 `maxPerformance`で構成されている場合は、一連の構成を構成することと同じです。 `mysql:mysql-connector-java:8.0.28`例にとると、 `useConfigs=maxPerformance`には以下が含まれます。
 
 ```properties
 cachePrepStmts=true
@@ -115,8 +115,8 @@ jdbc:mysql://127.0.0.1:4000/test?user=root&useConfigs=maxPerformance&useServerPr
 
 Javaでの完全な例については、以下を参照してください。
 
--   [TiDB とJavaを使用して単純な CRUD アプリを構築する - JDBC を使用する](/develop/dev-guide-sample-application-java.md#step-2-get-the-code)
--   [TiDB とJavaを使用して単純な CRUD アプリを構築する - Hibernate を使用する](/develop/dev-guide-sample-application-java.md#step-2-get-the-code)
+-   [TiDB とJavaで単純な CRUD アプリケーションを構築する - JDBC を使用](/develop/dev-guide-sample-application-java.md#step-2-get-the-code)
+-   [Hibernate を使用して、TiDB とJavaで単純な CRUD アプリケーションを構築する](/develop/dev-guide-sample-application-java.md#step-2-get-the-code)
 -   [Spring Boot を使用して TiDB アプリケーションをビルドする](/develop/dev-guide-sample-application-spring-boot.md)
 
 </div>
@@ -191,8 +191,38 @@ func buildBulkInsertSQL(amount int) string {
 
 Golangでの完全な例については、以下を参照してください。
 
--   [go-sql-driver/mysql を使用して、TiDB とGolangで単純な CRUD アプリを構築する](/develop/dev-guide-sample-application-golang.md#step-2-get-the-code)
--   [GORM を使用して、TiDB とGolangで単純な CRUD アプリを構築する](/develop/dev-guide-sample-application-java.md#step-2-get-the-code)
+-   [go-sql-driver/mysql を使用して、TiDB とGolangで単純な CRUD アプリケーションを構築する](/develop/dev-guide-sample-application-golang.md#step-2-get-the-code)
+-   [GORM を使用して、TiDB とGolangで単純な CRUD アプリケーションを構築する](/develop/dev-guide-sample-application-java.md#step-2-get-the-code)
+
+</div>
+
+<div label="Python">
+
+```python
+import MySQLdb
+connection = MySQLdb.connect(
+    host="127.0.0.1",
+    port=4000,
+    user="root",
+    password="",
+    database="bookshop",
+    autocommit=True
+)
+
+with get_connection(autocommit=True) as connection:
+    with connection.cursor() as cur:
+        player_list = random_player(1919)
+        for idx in range(0, len(player_list), 114):
+            cur.executemany("INSERT INTO player (id, coins, goods) VALUES (%s, %s, %s)", player_list[idx:idx + 114])
+```
+
+Python での完全な例については、以下を参照してください。
+
+-   [PyMySQL を使用して、TiDB と Python で単純な CRUD アプリケーションを構築する](/develop/dev-guide-sample-application-python.md#step-2-get-the-code)
+-   [mysqlclient を使用して、TiDB と Python で単純な CRUD アプリケーションを構築する](/develop/dev-guide-sample-application-python.md#step-2-get-the-code)
+-   [mysql-connector-python を使用して、TiDB と Python で単純な CRUD アプリケーションを構築する](/develop/dev-guide-sample-application-python.md#step-2-get-the-code)
+-   [SQLAlchemy を使用して、TiDB と Python で単純な CRUD アプリケーションを構築する](/develop/dev-guide-sample-application-python.md#step-2-get-the-code)
+-   [peewee を使用して、TiDB と Python で単純な CRUD アプリケーションを構築する](/develop/dev-guide-sample-application-python.md#step-2-get-the-code)
 
 </div>
 
@@ -208,17 +238,17 @@ Golangでの完全な例については、以下を参照してください。
 
 <CustomContent platform="tidb">
 
--   データのインポート: [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) . **Dumpling**のエクスポート データ、 <strong>CSV</strong>ファイル、または[Amazon Auroraから TiDB にデータを移行する](/migrate-aurora-to-tidb.md)をインポートできます。また、ローカル ディスクまたは[Amazon S3 クラウド ディスク](/br/backup-and-restore-storages.md)からのデータの読み取りもサポートしています。
+-   データのインポート: [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) . **Dumpling の**エクスポート データ、 <strong>CSV</strong>ファイル、または[Amazon Auroraから TiDB にデータを移行する](/migrate-aurora-to-tidb.md)をインポートできます。また、ローカル ディスクまたは Amazon S3 クラウド ディスクからのデータの読み取りもサポートしています。
 -   データの複製: [TiDB データ移行](/dm/dm-overview.md) . MySQL、MariaDB、および Amazon Auroraデータベースを TiDB に複製できます。また、シャードされたインスタンスとテーブルをソース データベースからマージおよび移行することもサポートしています。
--   データのバックアップと復元: [バックアップと復元 (BR)](/br/backup-and-restore-overview.md) . **Dumpling**と比較して、 <strong>BR</strong>は*<strong>ビッグデータ</strong>*のシナリオにより適しています。
+-   データのバックアップと復元: [バックアップと復元 (BR)](/br/backup-and-restore-overview.md) . **Dumpling**と比較して、 <strong>BR は</strong>*<strong>ビッグデータの</strong>*シナリオにより適しています。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
--   データのインポート: TiDB Cloudコンソールの[データ インポート タスク](/tidb-cloud/import-sample-data.md)ページ。 **Dumpling**のエクスポート データ、 <strong>CSV</strong>ファイル、または[Amazon Auroraから TiDB にデータを移行する](/tidb-cloud/migrate-from-aurora-bulk-import.md)をインポートできます。また、ローカル ディスク、Amazon S3 クラウド ディスク、または GCS クラウド ディスクからのデータの読み取りもサポートしています。
+-   データのインポート: TiDB Cloudコンソールの[データ インポート タスク](/tidb-cloud/import-sample-data.md)ページ。 **Dumpling の**エクスポート データ、 <strong>CSV</strong>ファイル、または[Amazon Auroraから TiDB にデータを移行する](/tidb-cloud/migrate-from-aurora-bulk-import.md)をインポートできます。また、ローカル ディスク、Amazon S3 クラウド ディスク、または GCS クラウド ディスクからのデータの読み取りもサポートしています。
 -   データの複製: [TiDB データ移行](https://docs.pingcap.com/tidb/stable/dm-overview) . MySQL、MariaDB、および Amazon Auroraデータベースを TiDB に複製できます。また、シャードされたインスタンスとテーブルをソース データベースからマージおよび移行することもサポートしています。
--   データのバックアップと復元: TiDB Cloudコンソールの[バックアップ](/tidb-cloud/backup-and-restore.md)ページ。 **Dumpling**と比較して、バックアップと復元は*<strong>ビッグ データ</strong>*のシナリオにより適しています。
+-   データのバックアップと復元: TiDB Cloudコンソールの[バックアップ](/tidb-cloud/backup-and-restore.md)ページ。 **Dumpling**と比較して、バックアップと復元は*<strong>ビッグ データの</strong>*シナリオにより適しています。
 
 </CustomContent>
 
@@ -252,7 +282,7 @@ ERROR 8216 (HY000): Invalid auto random: Explicit insertion on auto_random colum
 
 このエラーを処理するには、次の 2 つの解決策があります。
 
--   (推奨) この列を挿入ステートメントから削除し、TiDB が初期化した`AUTO_RANDOM`の値を使用します。これは`AUTO_RANDOM`のセマンティクスに適合します。
+-   (推奨) この列を挿入ステートメントから削除し、TiDB が初期化した`AUTO_RANDOM`値を使用します。これは`AUTO_RANDOM`のセマンティクスに適合します。
 
     {{< copyable "" >}}
 
@@ -260,7 +290,7 @@ ERROR 8216 (HY000): Invalid auto random: Explicit insertion on auto_random colum
     INSERT INTO `bookshop`.`users` (`balance`, `nickname`) VALUES (0.00, 'nicky');
     ```
 
--   この列を指定する***必要***があることが確実な場合は、 [`SET`ステートメント](https://docs.pingcap.com/zh/tidb/stable/sql-statement-set-variable)を使用して、ユーザー変数を変更することにより、挿入時に`AUTO_RANDOM`列を指定できるようにすることができます。
+-   この列を指定する***必要がある***ことが確実な場合は、 [`SET`ステートメント](https://docs.pingcap.com/zh/tidb/stable/sql-statement-set-variable)使用して、ユーザー変数を変更することにより、挿入時に`AUTO_RANDOM`列を指定できるようにすることができます。
 
     {{< copyable "" >}}
 
@@ -271,4 +301,4 @@ ERROR 8216 (HY000): Invalid auto random: Explicit insertion on auto_random colum
 
 ## HTAP を使用する {#use-htap}
 
-TiDB では、HTAP 機能により、データを挿入するときに追加の操作を実行する必要がなくなります。追加の挿入ロジックはありません。 TiDB はデータの整合性を自動的に保証します。テーブルを作成した後、列指向の[列指向のレプリカ同期をオンにする](/develop/dev-guide-create-table.md#use-htap-capabilities)を使用してクエリを直接高速化するだけです。
+TiDB では、HTAP 機能により、データを挿入するときに追加の操作を実行する必要がなくなります。追加の挿入ロジックはありません。 TiDB はデータの整合性を自動的に保証します。テーブルを作成した後、列指向のレプリカを使用してクエリ[列指向のレプリカ同期をオンにする](/develop/dev-guide-create-table.md#use-htap-capabilities)直接高速化するだけです。

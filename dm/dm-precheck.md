@@ -105,10 +105,10 @@ tiup dmctl check-task ./task.yaml
 
     -   プライマリとセカンダリのレプリケーションの失敗を回避するために、アップストリーム データベースにデータベース ID `server_id`を指定することをお勧めします (AWS Aurora以外の環境では GTID をお勧めします)。
 
--   (必須) MySQL バイナリログ構成
+-   (必須) MySQLbinlog構成
 
-    -   Binlog が有効になっているかどうかを確認します (DM で必要)。
-    -   `binlog_format=ROW`が構成されているかどうかを確認します (DM は ROW 形式の binlog の移行のみをサポートします)。
+    -   binlogが有効になっているかどうかを確認します (DM で必要)。
+    -   `binlog_format=ROW`が構成されているかどうかを確認します (DM は ROW 形式のbinlogの移行のみをサポートします)。
     -   `binlog_row_image=FULL`が構成されているかどうかを確認します (DM は`binlog_row_image=FULL`のみをサポートします)。
     -   `binlog_do_db`または`binlog_ignore_db`が設定されている場合、移行するデータベーステーブルが`binlog_do_db`および`binlog_ignore_db`の条件を満たしているかどうかを確認します。
 
@@ -122,16 +122,17 @@ tiup dmctl check-task ./task.yaml
 
 事前チェックにより、環境内の潜在的なリスクを見つけることができます。チェック項目を無視することはお勧めできません。データ移行タスクに特別なニーズがある場合は、 [`ignore-checking-items`構成アイテム](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)を使用して一部のチェック項目をスキップできます。
 
-| チェック項目                   | 説明                                                     |
-| :----------------------- | :----------------------------------------------------- |
-| `dump_privilege`         | 上流の MySQL インスタンスでユーザーのダンプ権限を確認します。                     |
-| `replication_privilege`  | 上流の MySQL インスタンスでユーザーのレプリケーション権限を確認します。                |
-| `version`                | アップストリーム データベースのバージョンを確認します。                           |
-| `server_id`              | アップストリーム データベースで server_id が設定されているかどうかを確認します。         |
-| `binlog_enable`          | アップストリーム データベースで binlog が有効になっているかどうかを確認します。           |
-| `table_schema`           | アップストリーム MySQL テーブルのテーブル スキーマの互換性をチェックします。             |
-| `schema_of_shard_tables` | アップストリームの MySQL マルチインスタンス シャード内のテーブル スキーマの一貫性をチェックします。 |
-| `auto_increment_ID`      | 上流の MySQL マルチインスタンス シャードで自動インクリメント主キーが競合するかどうかを確認します。  |
+| チェック項目                   | 説明                                                                 |
+| :----------------------- | :----------------------------------------------------------------- |
+| `dump_privilege`         | 上流の MySQL インスタンスでユーザーのダンプ権限を確認します。                                 |
+| `replication_privilege`  | 上流の MySQL インスタンスでユーザーのレプリケーション権限を確認します。                            |
+| `version`                | アップストリーム データベースのバージョンを確認します。                                       |
+| `server_id`              | アップストリーム データベースで server_id が設定されているかどうかを確認します。                     |
+| `binlog_enable`          | アップストリーム データベースでbinlogが有効になっているかどうかを確認します。                         |
+| `table_schema`           | アップストリーム MySQL テーブルのテーブル スキーマの互換性をチェックします。                         |
+| `schema_of_shard_tables` | アップストリームの MySQL マルチインスタンス シャード内のテーブル スキーマの一貫性をチェックします。             |
+| `auto_increment_ID`      | 上流の MySQL マルチインスタンス シャードで自動インクリメント主キーが競合するかどうかを確認します。              |
+| `online_ddl`             | アップストリームが[オンライン DDL](/dm/feature-online-ddl.md)のプロセスにあるかどうかを確認します。 |
 
 > **ノート：**
 >
@@ -154,4 +155,4 @@ mydumpers:                           # Configuration arguments of the dump proce
 
 > **ノート：**
 >
-> 値`threads`は、アップストリーム データベースと DM 間の物理接続の数を決定します。 `threads`の値が大きすぎると、アップストリームの負荷が増加する可能性があります。したがって、 `threads`を適切な値に設定する必要があります。
+> 値`threads`は、アップストリーム データベースと DM 間の物理接続の数を決定します。 `threads`値が大きすぎると、アップストリームの負荷が増加する可能性があります。したがって、 `threads`適切な値に設定する必要があります。

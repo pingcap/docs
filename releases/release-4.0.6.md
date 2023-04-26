@@ -40,8 +40,8 @@ TiDB バージョン: 4.0.6
     -   ブロードキャスト ジョイン[#19664](https://github.com/pingcap/tidb/pull/19664)のアウト ジョインをサポート
     -   プロセス リスト[#19829](https://github.com/pingcap/tidb/pull/19829)の SQL ダイジェストを追加します。
     -   autocommit ステートメントの再試行[#19796](https://github.com/pingcap/tidb/pull/19796)の悲観的トランザクション モードに切り替えます
-    -   `Str_to_date()` [#19693](https://github.com/pingcap/tidb/pull/19693)で`%r`と`%T`のデータ形式をサポート
-    -   ファイル特権を要求するために`SELECT INTO OUTFILE`を有効にします[#19577](https://github.com/pingcap/tidb/pull/19577)
+    -   `Str_to_date()` [#19693](https://github.com/pingcap/tidb/pull/19693)で`%r`と`%T`データ形式をサポート
+    -   ファイル特権を要求するために`SELECT INTO OUTFILE`有効にします[#19577](https://github.com/pingcap/tidb/pull/19577)
     -   `stddev_pop`機能[#19541](https://github.com/pingcap/tidb/pull/19541)をサポート
     -   `TiDB-Runtime`ダッシュボードを追加する[#19396](https://github.com/pingcap/tidb/pull/19396)
     -   `ALTER TABLE`アルゴリズムの互換性を向上[#19364](https://github.com/pingcap/tidb/pull/19364)
@@ -91,7 +91,7 @@ TiDB バージョン: 4.0.6
 
         -   リージョンをより正確なサイズに分割して取り込む[#369](https://github.com/pingcap/tidb-lightning/pull/369)
 
-    -   Binlog
+    -   TiDBBinlog
 
         -   `go time`パッケージ形式で GC 時間の設定をサポート[#996](https://github.com/pingcap/tidb-binlog/pull/996)
 
@@ -102,15 +102,15 @@ TiDB バージョン: 4.0.6
     -   メトリック プロファイル[#19881](https://github.com/pingcap/tidb/pull/19881)で`tikv_cop_wait`回を収集する問題を修正します。
     -   `SHOW GRANTS` [#19834](https://github.com/pingcap/tidb/pull/19834)の間違った結果を修正
     -   `!= ALL (subq)` [#19831](https://github.com/pingcap/tidb/pull/19831)の誤ったクエリ結果を修正
-    -   `enum`型と`set`型の変換のバグを修正[#19778](https://github.com/pingcap/tidb/pull/19778)
+    -   `enum`と`set`型の変換のバグを修正[#19778](https://github.com/pingcap/tidb/pull/19778)
     -   `SHOW STATS_META`と`SHOW STATS_BUCKET` [#19760](https://github.com/pingcap/tidb/pull/19760)の権限チェックを追加
     -   `builtinGreatestStringSig`と`builtinLeastStringSig` [#19758](https://github.com/pingcap/tidb/pull/19758)が原因で列の長さが一致しないというエラーを修正
     -   不要なエラーまたは警告が発生した場合、ベクトル化された制御式はスカラー実行にフォールバックします[#19749](https://github.com/pingcap/tidb/pull/19749)
     -   相関列のタイプが`Bit` [#19692](https://github.com/pingcap/tidb/pull/19692)の場合の`Apply`演算子のエラーを修正します。
-    -   ユーザーが MySQL 8.0 クライアント[#19690](https://github.com/pingcap/tidb/pull/19690)で`processlist`と`cluster_log`をクエリしたときに発生する問題を修正します。
+    -   ユーザーが MySQL 8.0 クライアント[#19690](https://github.com/pingcap/tidb/pull/19690)で`processlist`と`cluster_log`クエリしたときに発生する問題を修正します。
     -   同じタイプのプランが異なるプラン ダイジェストを持つ問題を修正します[#19684](https://github.com/pingcap/tidb/pull/19684)
     -   列タイプを`Decimal`から`Int` [#19682](https://github.com/pingcap/tidb/pull/19682)に変更することを禁止します
-    -   `SELECT ... INTO OUTFILE`が実行時エラー[#19672](https://github.com/pingcap/tidb/pull/19672)を返す問題を修正
+    -   `SELECT ... INTO OUTFILE`実行時エラー[#19672](https://github.com/pingcap/tidb/pull/19672)を返す問題を修正
     -   `builtinRealIsFalseSig` [#19670](https://github.com/pingcap/tidb/pull/19670)の間違った実装を修正
     -   パーティション式チェックでかっこ式[#19614](https://github.com/pingcap/tidb/pull/19614)が欠落する問題を修正
     -   `HashJoin` [#19611](https://github.com/pingcap/tidb/pull/19611)に`Apply`演算子がある場合のクエリ エラーを修正
@@ -124,7 +124,7 @@ TiDB バージョン: 4.0.6
     -   統計が削除されたときに`TopN`統計が削除されないバグを修正します[#19465](https://github.com/pingcap/tidb/pull/19465)
     -   batch point get [#19460](https://github.com/pingcap/tidb/pull/19460)の誤った使用による間違った結果を修正
     -   仮想生成カラムで`indexLookupJoin`にカラムが見つからない不具合を修正[#19439](https://github.com/pingcap/tidb/pull/19439)
-    -   `select`と`update`のクエリの異なるプランがデータ[#19403](https://github.com/pingcap/tidb/pull/19403)を比較するエラーを修正
+    -   `select`と`update`クエリの異なるプランがデータ[#19403](https://github.com/pingcap/tidb/pull/19403)を比較するエラーを修正
     -   リージョンキャッシュ[#19362](https://github.com/pingcap/tidb/pull/19362)のTiFlashワーク インデックスのデータ競合を修正
     -   `logarithm`関数で警告が表示されない不具合を修正[#19291](https://github.com/pingcap/tidb/pull/19291)
     -   TiDB がデータをディスクに永続化するときに発生する予期しないエラーを修正します[#19272](https://github.com/pingcap/tidb/pull/19272)
@@ -142,23 +142,23 @@ TiDB バージョン: 4.0.6
     -   情報に`tikv/tiflash` [#19159](https://github.com/pingcap/tidb/pull/19159)が含まれている場合、 `information_schema.statements_summary`と`explain`の間の計画の矛盾を修正します
     -   `select into outfile` [#19725](https://github.com/pingcap/tidb/pull/19725)のファイルが存在しないというテストのエラーを修正
     -   `INFORMATION_SCHEMA.CLUSTER_HARDWARE`にraidデバイス情報がない問題を修正[#19457](https://github.com/pingcap/tidb/pull/19457)
-    -   構文解析エラー[#19395](https://github.com/pingcap/tidb/pull/19395)が発生した場合、 `case-when`式で生成された列を持つ`add index`操作を正常に終了できるようにします。
+    -   構文解析エラー[#19395](https://github.com/pingcap/tidb/pull/19395)が発生した場合、 `case-when`で生成された列を持つ`add index`操作を正常に終了できるようにします。
     -   DDL操作の再試行に時間がかかりすぎるバグを修正[#19488](https://github.com/pingcap/tidb/pull/19488)
     -   `alter table db.t1 add constraint fk foreign key (c2) references t2(c1)`のようなステートメントを最初に実行せずに実行する`use db` [#19471](https://github.com/pingcap/tidb/pull/19471)
-    -   サーバー・ログ・ファイルのディスパッチ・エラーを`Error`から`Info`のメッセージに変更します[#19454](https://github.com/pingcap/tidb/pull/19454)
+    -   サーバー・ログ・ファイルのディスパッチ・エラーを`Error`から`Info`メッセージに変更します[#19454](https://github.com/pingcap/tidb/pull/19454)
 
 -   TiKV
 
     -   照合順序が有効になっている場合の非インデックス列の推定エラーを修正します[#8620](https://github.com/tikv/tikv/pull/8620)
     -   リージョン転送[#8460](https://github.com/tikv/tikv/pull/8460)のプロセス中に Green GC がロックを見逃す可能性がある問題を修正します。
     -   Raftメンバーシップの変更中に TiKV の実行が非常に遅くなると発生するpanicの問題を修正します[#8497](https://github.com/tikv/tikv/pull/8497)
-    -   PD 同期要求を呼び出すときに PD クライアント スレッドと他のスレッド間で発生するデッドロックの問題を修正し[#8612](https://github.com/tikv/tikv/pull/8612) 。
+    -   PD 同期要求を呼び出すときに PD クライアント スレッドと他のスレッド間で発生するデッドロックの問題を修正します[#8612](https://github.com/tikv/tikv/pull/8612)
     -   jemalloc を v5.2.1 にアップグレードして、ヒュージ ページ[#8463](https://github.com/tikv/tikv/pull/8463)でのメモリ割り当ての問題に対処します。
     -   実行時間の長いクエリで統合スレッド プールがハングする問題を修正します[#8427](https://github.com/tikv/tikv/pull/8427)
 
 -   PD
 
-    -   `initial-cluster-token`の構成を追加して、ブートストラップ中に異なるクラスターが相互に通信するのを防ぎます[#2922](https://github.com/pingcap/pd/pull/2922)
+    -   `initial-cluster-token`構成を追加して、ブートストラップ中に異なるクラスターが相互に通信するのを防ぎます[#2922](https://github.com/pingcap/pd/pull/2922)
     -   モードが`auto` [#2826](https://github.com/pingcap/pd/pull/2826)のときのストアリミットレートの単位を修正
     -   一部のスケジューラーがエラーを解決せずに構成を保持する問題を修正します[#2818](https://github.com/tikv/pd/pull/2818)
     -   スケジューラーの空の HTTP 応答を修正します[#2871](https://github.com/tikv/pd/pull/2871) [#2874](https://github.com/tikv/pd/pull/2874)
@@ -170,8 +170,8 @@ TiDB バージョン: 4.0.6
     -   テーブルのレプリケーション ステータスの計算によって発生するクラッシュを修正します
     -   ユーザーがサポートされていない DDL 操作を適用した後、データの読み取りにTiFlashを使用できないという問題を修正します。
     -   `utf8mb4_bin`として扱われるサポートされていない照合によって発生する例外を修正します。
-    -   Grafana でTiFlashコプロセッサ エグゼキュータの QPS パネルに常に`0`が表示される問題を修正
-    -   入力が`NULL`の場合の`FROM_UNIXTIME`関数の間違った結果を修正
+    -   Grafana でTiFlashコプロセッサ エグゼキュータの QPS パネルに常に`0`表示される問題を修正
+    -   入力が`NULL`場合の`FROM_UNIXTIME`関数の間違った結果を修正
 
 -   ツール
 

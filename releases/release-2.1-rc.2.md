@@ -26,14 +26,14 @@ title: TiDB 2.1 RC2 Release Notes
     -   自動分析作業が統計を繰り返し分析する問題を修正します[#7550](https://github.com/pingcap/tidb/pull/7550)
     -   統計の変更がない場合に発生する統計更新エラーを修正します[#7530](https://github.com/pingcap/tidb/pull/7530)
     -   RC 分離レベルと低優先度を使用して`Analyze`リクエストを構築する[#7496](https://github.com/pingcap/tidb/pull/7496)
-    -   [#7570](https://github.com/pingcap/tidb/pull/7570)の特定の期間に統計の自動分析を有効にするサポート
+    -   [#7570](https://github.com/pingcap/tidb/pull/7570)日の特定の期間に統計の自動分析を有効にするサポート
     -   統計情報をログに記録するときのpanicの問題を修正します[#7588](https://github.com/pingcap/tidb/pull/7588)
     -   `ANALYZE TABLE WITH BUCKETS`ステートメント[#7619](https://github.com/pingcap/tidb/pull/7619)を使用したヒストグラム内のバケット数の構成をサポート
     -   空のヒストグラムを更新するときのpanicの問題を修正します[#7640](https://github.com/pingcap/tidb/pull/7640)
     -   統計情報を使用した更新`information_schema.tables.data_length` [#7657](https://github.com/pingcap/tidb/pull/7657)
 -   サーバ
     -   Trace 関連の依存関係の追加[#7532](https://github.com/pingcap/tidb/pull/7532)
-    -   Golang [#7512](https://github.com/pingcap/tidb/pull/7512)の`mutex profile`つの機能を有効にする
+    -   Golang [#7512](https://github.com/pingcap/tidb/pull/7512)の`mutex profile`機能を有効にする
     -   `Admin`ステートメントには`Super_priv`特権[#7486](https://github.com/pingcap/tidb/pull/7486)が必要です
     -   `Drop`重要なシステム テーブルへのユーザーのアクセスを禁止する[#7471](https://github.com/pingcap/tidb/pull/7471)
     -   `juju/errors`から`pkg/errors`に切り替える[#7151](https://github.com/pingcap/tidb/pull/7151)
@@ -63,7 +63,7 @@ title: TiDB 2.1 RC2 Release Notes
     -   内蔵機能をサポート`json_contains` [#7443](https://github.com/pingcap/tidb/pull/7443)
     -   内蔵機能をサポート`json_contains_path` [#7596](https://github.com/pingcap/tidb/pull/7596)
     -   内蔵機能をサポート`encode/decode` [#7622](https://github.com/pingcap/tidb/pull/7622)
-    -   一部の時間関連の関数が MySQL の動作と互換性がない場合がある問題を修正します[#7636](https://github.com/pingcap/tidb/pull/7636)
+    -   一部の時間関連の関数がMySQL の動作と互換性がない場合がある問題を修正します[#7636](https://github.com/pingcap/tidb/pull/7636)
     -   文字列[#7654](https://github.com/pingcap/tidb/pull/7654)のデータの時刻型を解析する際の互換性の問題を修正します
     -   `DateTime`データのデフォルト値を計算するときにタイム ゾーンが考慮されない問題を修正します[#7655](https://github.com/pingcap/tidb/pull/7655)
 -   DML
@@ -80,7 +80,7 @@ title: TiDB 2.1 RC2 Release Notes
     -   DDL キュー[#7608](https://github.com/pingcap/tidb/pull/7608)のチェック`CREATE TABLE/DATABASE`の間隔を減らす
     -   `ddl/owner/resign` HTTP インターフェイスを使用して DDL 所有者を解放し、新しい所有者の選択を開始します[#7649](https://github.com/pingcap/tidb/pull/7649)
 -   TiKV Go クライアント
-    -   `Seek`の操作で`Key` [#7419](https://github.com/pingcap/tidb/pull/7419)しか得られない問題をサポート
+    -   `Seek`回の操作で`Key` [#7419](https://github.com/pingcap/tidb/pull/7419)しか得られない問題をサポート
 -   [テーブル パーティション](https://github.com/pingcap/tidb/projects/6) (Experimental)
     -   `Bigint`タイプがパーティションキーとして使用できない問題を修正[#7520](https://github.com/pingcap/tidb/pull/7520)
     -   パーティションテーブルにインデックスを追加する際に問題が発生した場合のロールバック操作をサポートします[#7437](https://github.com/pingcap/tidb/pull/7437)
@@ -109,10 +109,10 @@ title: TiDB 2.1 RC2 Release Notes
 -   改良点
     -   多数の組み込み関数のプッシュダウン サポートを追加します。
     -   特定のシナリオでのリーダー スケジューリングの失敗の問題を修正するために`leader-transfer-max-log-lag`の構成を追加します[#3507](https://github.com/tikv/tikv/pull/3507)
-    -   `max-open-engines`の構成を追加して、同時に開くエンジンの数を`tikv-importer`に制限します[#3496](https://github.com/tikv/tikv/pull/3496)
+    -   `max-open-engines`構成を追加して、同時に開くエンジンの数を`tikv-importer`に制限します[#3496](https://github.com/tikv/tikv/pull/3496)
     -   ガベージ データのクリーンアップ速度を制限して、 `snapshot apply` [#3547](https://github.com/tikv/tikv/pull/3547)への影響を軽減します。
     -   不必要な遅延を避けるために重要なRaftメッセージのコミット メッセージをブロードキャストする[#3592](https://github.com/tikv/tikv/pull/3592)
 -   バグの修正
-    -   新しく分割されたリージョン[#3557](https://github.com/tikv/tikv/pull/3557)の`PreVote`のメッセージを破棄することによって引き起こされるリーダー選出の問題を修正します。
+    -   新しく分割されたリージョン[#3557](https://github.com/tikv/tikv/pull/3557)の`PreVote`メッセージを破棄することによって引き起こされるリーダー選出の問題を修正します。
     -   Regions [#3573](https://github.com/tikv/tikv/pull/3573)のマージ後にフォロワー関連の統計を修正
     -   ローカル リーダーが古いリージョン情報を使用する問題を修正します[#3565](https://github.com/tikv/tikv/pull/3565)

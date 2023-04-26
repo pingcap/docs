@@ -15,12 +15,12 @@ summary: Learn how to configure TiDB Lightning using command line flags.
 
 | パラメータ                         | 説明                                                                                                                                                                                     | 対応する構成アイテム                     |
 | :---------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------------- |
-| `--config <file>`             | ファイルからグローバル構成を読み取ります。このパラメータが指定されていない場合、 TiDB Lightningはデフォルト設定を使用します。                                                                                                                 |                                |
+| `--config <file>`             | ファイルからグローバル構成を読み取ります。このパラメータが指定されていない場合、 TiDB Lightning はデフォルト設定を使用します。                                                                                                                |                                |
 | `-V`                          | プログラムのバージョンを印刷します。                                                                                                                                                                     |                                |
-| `-d <directory>`              | ローカル ディレクトリまたはデータ ファイルの[外部ストレージ URL](/br/backup-and-restore-storages.md)つ。                                                                                                             | `mydumper.data-source-dir`     |
-| `-L <level>`                  | ログ レベル: `debug` 、 `info` 、 `warn` 、 `error` 、または`fatal` 。デフォルトでは`info`です。                                                                                                              | `lightning.level`              |
+| `-d <directory>`              | ローカル ディレクトリまたはデータ ファイルの[外部storageURL](/br/backup-and-restore-storages.md#url-format) 。                                                                                                 | `mydumper.data-source-dir`     |
+| `-L <level>`                  | ログ レベル: `debug` 、 `info` 、 `warn` 、 `error` 、または`fatal` 。デフォルトでは`info` 。                                                                                                               | `lightning.level`              |
 | `-f <rule>`                   | [テーブル フィルター ルール](/table-filter.md) .複数回指定できます。                                                                                                                                         | `mydumper.filter`              |
-| `--backend <backend>`         | インポート モードを選択します。 `local`は[物理インポート モード](/tidb-lightning/tidb-lightning-physical-import-mode.md)を指します。 `tidb`は[論理インポート モード](/tidb-lightning/tidb-lightning-logical-import-mode.md)を指します。 | `tikv-importer.backend`        |
+| `--backend <backend>`         | インポート モードを選択します。 `local` [物理インポート モード](/tidb-lightning/tidb-lightning-physical-import-mode.md)を指します。 `tidb` [論理インポート モード](/tidb-lightning/tidb-lightning-logical-import-mode.md)を指します。 | `tikv-importer.backend`        |
 | `--log-file <file>`           | ログ ファイルのパス。デフォルトでは`/tmp/lightning.log.{timestamp}`です。 「-」に設定すると、ログ ファイルが stdout に出力されることを意味します。                                                                                        | `lightning.log-file`           |
 | `--status-addr <ip:port>`     | TiDB Lightningサーバーのリッスン アドレス                                                                                                                                                           | `lightning.status-port`        |
 | `--importer <host:port>`      | TiKV インポーターの住所                                                                                                                                                                         | `tikv-importer.addr`           |
@@ -57,4 +57,4 @@ summary: Learn how to configure TiDB Lightning using command line flags.
 | `--checkpoint-error-ignore <table_name>`  | 指定されたテーブルに関連するチェックポイントに記録されたエラーを無視します。              |
 | `--checkpoint-remove <table_name>`        | テーブルのチェックポイントを無条件に削除します。                            |
 
-`<table_name>`は、フォーム`` `db`.`tbl` `` (逆引用符を含む) の修飾テーブル名か、キーワード`all`のいずれかでなければなりません。
+`<table_name>`フォーム`` `db`.`tbl` `` (逆引用符を含む) の修飾テーブル名か、キーワード`all`いずれかでなければなりません。

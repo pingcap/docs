@@ -5,19 +5,19 @@ summary: Learn how to use the PingCAP Clinic Diagnostic Service to troubleshoot 
 
 # PingCAPクリニックを使用したクラスターのトラブルシューティング {#troubleshoot-clusters-using-pingcap-clinic}
 
-TiUPを使用してデプロイされた TiDB クラスターおよび DM クラスターの場合、 PingCAPクリニック Diagnostic Service (PingCAPクリニック) を使用してクラスターの問題をリモートでトラブルシューティングし、Diag クライアント (Diag) および Clinic Server を使用してローカルでクラスターの状態をすばやく確認できます。
+TiUPを使用してデプロイされた TiDB クラスターおよび DM クラスターの場合、 PingCAPクリニック Diagnostic Service (PingCAPクリニック) を使用してクラスターの問題をリモートでトラブルシューティングし、 [Diag クライアント (Diag)](https://github.com/pingcap/diag)および Clinic Server を使用してローカルでクラスターの状態をすばやく確認できます。
 
 > **ノート：**
 >
-> -   このドキュメントは、オンプレミス環境でTiUPを使用してデプロイされたクラスターに**のみ**適用されます。 TiDB Operatorを使用して Kubernetes にデプロイされたクラスターについては、 [TiDB TiDB Operator環境向けのPingCAPクリニック](https://docs.pingcap.com/tidb-in-kubernetes/stable/clinic-user-guide)を参照してください。
+> -   このドキュメントは、オンプレミス環境でTiUP を使用してデプロイされたクラスターに**のみ**適用されます。 TiDB Operatorを使用して Kubernetes にデプロイされたクラスターについては、 [TiDB Operator環境向けのPingCAPクリニック](https://docs.pingcap.com/tidb-in-kubernetes/stable/clinic-user-guide)を参照してください。
 >
-> -   PingCAPクリニックは、TiDB Ansible を使用してデプロイされたクラスターからのデータ収集**をサポートしていません**。
+> -   PingCAPクリニック は、 TiDB Ansible を使用してデプロイされたクラスターからのデータ収集を**サポートしていません**。
 
 ## ユーザー シナリオ {#user-scenarios}
 
 -   [クラスターの問題をリモートでトラブルシューティングする](#troubleshoot-cluster-problems-remotely)
 
-    -   クラスターに問題が発生し、PingCAP テクニカル サポートに連絡する必要がある場合は、次の操作を実行して、リモート トラブルシューティングを容易にすることができます: Diag を使用して診断データを収集し、収集したデータを Clinic Server にアップロードし、データ アクセス リンクを提供します。テクニカルサポートスタッフ。
+    -   クラスターに問題が発生した場合、PingCAP から[支持を得ます](/support.md)する必要がある場合は、次の操作を実行してリモート トラブルシューティングを容易にすることができます: Diag を使用して診断データを収集し、収集したデータを Clinic Server にアップロードし、データ アクセス リンクをテクニカルサポートスタッフ。
     -   クラスターに何らかの問題があり、すぐに問題を分析できない場合は、Diag を使用してデータを収集し、後で分析できるように保存できます。
 
 -   [クラスターのステータスをローカルで簡単に確認する](#perform-a-quick-check-on-the-cluster-status-locally)
@@ -69,7 +69,7 @@ PingCAPクリニックを利用する前に、Diag（ PingCAPクリニックが�
 
         </SimpleTab>
 
-    -   クラスタページの右下隅にあるアイコンをクリックし、[ **Get Access Token For Diag Tool** ] を選択して、ポップアップ ウィンドウで [ <strong>+</strong> ] をクリックします。表示されたトークンをコピーして保存したことを確認してください。
+    -   クラスタページの右下隅にあるアイコンをクリックし、 **[Get Access Token For Diag Tool]**を選択して、ポップアップ ウィンドウで<strong>[+]</strong>をクリックします。表示されたトークンをコピーして保存したことを確認してください。
 
         ![Get the Token](/media/clinic-get-token.png)
 
@@ -87,7 +87,7 @@ PingCAPクリニックを利用する前に、Diag（ PingCAPクリニックが�
 
 3.  Diag に`region`を設定します。
 
-    `region`は、データのパッキングに使用される暗号化証明書と、データのアップロード時のターゲット サービスを決定します。例えば：
+    `region`データのパッキングに使用される暗号化証明書と、データのアップロード時のターゲット サービスを決定します。例えば：
 
     > **ノート：**
     >
@@ -175,7 +175,7 @@ Diag を使用すると、 TiUPを使用してデプロイされた TiDB クラ�
     -   `--include` : 特定のタイプのデータのみを収集します。オプションの値は`system` 、 `monitor` 、 `log` 、 `config` 、および`db_vars`です。 2 つ以上のタイプを含めるには、タイプ間のセパレータとして`,`を使用できます。
     -   `--exclude` : 特定の種類のデータを収集しません。オプションの値は`system` 、 `monitor` 、 `log` 、 `config` 、および`db_vars`です。 2 つ以上のタイプを除外するには、タイプ間のセパレーターとして`,`を使用できます。
 
-    コマンドを実行した後、Diag はデータの収集をすぐには開始しません。代わりに、Diag は推定データ サイズとターゲット データ ストレージ パスを出力で提供し、続行するかどうかを確認します。例えば：
+    コマンドを実行した後、Diag はデータの収集をすぐには開始しません。代わりに、Diag は推定データ サイズとターゲット データstorageパスを出力で提供し、続行するかどうかを確認します。例えば：
 
     ```bash
     Estimated size of data to collect:
@@ -200,9 +200,9 @@ Diag を使用すると、 TiUPを使用してデプロイされた TiDB クラ�
     Collected data are stored in /home/user/diag-fNTnz5MGhr6
     ```
 
-### ステップ 3. ローカルでデータをビューする (オプション) {#step-3-view-data-locally-optional}
+### ステップ 3. ローカルでデータをビュー(オプション) {#step-3-view-data-locally-optional}
 
-収集されたデータは、データ ソースに基づいて個別のサブディレクトリに保存されます。これらのサブディレクトリの名前は、マシン名とポート番号に基づいています。各ノードの構成、ログ、およびその他のファイルの保存場所は、TiDB クラスターの実サーバー内の相対的な保存パスと同じです。
+収集されたデータは、データ ソースに基づいて個別のサブディレクトリに保存されます。これらのサブディレクトリの名前は、マシン名とポート番号に基づいています。各ノードの構成、ログ、およびその他のファイルのstorage場所は、TiDB クラスターの実サーバー内の相対的なstorageパスと同じです。
 
 -   システムとハードウェアの基本情報: `insight.json`
 -   システム内コンテンツ`/etc/security/limits.conf` : in `limits.conf`
@@ -219,12 +219,12 @@ Diag を使用すると、 TiUPを使用してデプロイされた TiDB クラ�
 
 クラスターのネットワーク接続に応じて、次のいずれかの方法を選択してデータをアップロードできます。
 
--   方法 1: クラスターが配置されているネットワークがインターネットにアクセスできる場合は、次のことができ[アップロード コマンドを使用してデータを直接アップロードする](#method-1-upload-directly) 。
--   方法 2: クラスターが配置されているネットワークがインターネットにアクセスできない場合は、次のことを行う必要があり[データをパックしてアップロードする](#method-2-pack-and-upload-data) 。
+-   方法 1: クラスターが配置されているネットワークがインターネットにアクセスできる場合は、 [アップロード コマンドを使用してデータを直接アップロードする](#method-1-upload-directly)ことができます。
+-   方法 2: クラスターが配置されているネットワークがインターネットにアクセスできない場合は、 [データをパックしてアップロードする](#method-2-pack-and-upload-data)を行う必要があります。
 
 > **ノート：**
 >
-> データをアップロードする前に Diag でトークンまたは`region`を設定しなかった場合、Diag はアップロードの失敗を報告し、トークンまたは`region`を設定するよう通知します。トークンを設定するには、 [前提条件の 2 番目のステップ](#prerequisites)を参照してください。
+> データをアップロードする前に Diag でトークンまたは`region`設定しなかった場合、Diag はアップロードの失敗を報告し、トークンまたは`region`を設定するよう通知します。トークンを設定するには、 [前提条件の 2 番目のステップ](#prerequisites)を参照してください。
 
 #### 方法 1. 直接アップロードする {#method-1-upload-directly}
 
@@ -293,9 +293,9 @@ Diag を使用して、クラスターの状態をローカルで簡単に確認
     tiup diag check ${subdir-in-output-data}
     ```
 
-    上記のコマンドの`${subdir-in-output-data}`は、収集されたデータを格納するパスであり、このパスには`meta.yaml`のファイルがあります。
+    上記のコマンドの`${subdir-in-output-data}`は、収集されたデータを格納するパスであり、このパスには`meta.yaml`ファイルがあります。
 
-3.  診断結果をビューします。
+3.  診断結果をビュー。
 
     診断結果はコマンド ラインで返されます。例えば：
 

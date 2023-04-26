@@ -12,7 +12,7 @@ TiDB バージョン: 3.0.13
 
 -   TiDB
 
-    -   ユーザーが重複データの複数の行を挿入する必要がある場合、トランザクション内でステートメントが正しく実行されない可能性があるという未チェック`MemBuffer`によって引き起こされる問題を修正し[#16690](https://github.com/pingcap/tidb/pull/16690) `INSERT ... ON DUPLICATE KEY UPDATE`
+    -   ユーザーが重複データの複数の行を挿入する必要がある場合、トランザクション内`INSERT ... ON DUPLICATE KEY UPDATE`ステートメントが正しく実行されない可能性があるという未チェック`MemBuffer`によって引き起こされる問題を修正します[#16690](https://github.com/pingcap/tidb/pull/16690)
 
 -   TiKV
 

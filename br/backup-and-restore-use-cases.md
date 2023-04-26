@@ -6,7 +6,7 @@ aliases: ['/tidb/stable/backup-and-restore-use-cases-for-maintain/']
 
 # TiDB のバックアップと復元の使用例 {#tidb-backup-and-restore-use-cases}
 
-[TiDB スナップショットのバックアップと復元ガイド](/br/br-snapshot-guide.md)と[TiDB ログのバックアップと PITR ガイド](/br/br-pitr-guide.md)は、TiDB が提供するバックアップと復元のソリューション、つまり、スナップショット (完全) バックアップと復元、ログ バックアップ、およびポイント イン タイム リカバリ (PITR) を紹介します。このドキュメントは、特定のユース ケースで TiDB のバックアップおよび復元ソリューションをすばやく開始するのに役立ちます。
+[TiDB スナップショットのバックアップと復元ガイド](/br/br-snapshot-guide.md)と[TiDB ログのバックアップと PITR ガイド](/br/br-pitr-guide.md) 、TiDB が提供するバックアップと復元のソリューション、つまり、スナップショット (完全) バックアップと復元、ログ バックアップ、およびポイント イン タイム リカバリ (PITR) を紹介します。このドキュメントは、特定のユース ケースで TiDB のバックアップおよび復元ソリューションをすばやく開始するのに役立ちます。
 
 AWS に TiDB本番クラスターをデプロイし、ビジネス チームが次の要件を要求したとします。
 
@@ -17,7 +17,7 @@ PITR を使用すると、前述の要件を満たすことができます。
 
 ## TiDB クラスターとBRをデプロイ {#deploy-the-tidb-cluster-and-br}
 
-PITR を使用するには、TiDB クラスター &gt;= v6.2.0 をデプロイし、 BRを TiDB クラスターと同じバージョンに更新する必要があります。このドキュメントでは、例として v6.5.0 を使用しています。
+PITR を使用するには、TiDB クラスター &gt;= v6.2.0 をデプロイし、 BR をTiDB クラスターと同じバージョンに更新する必要があります。このドキュメントでは、例として v6.5.2 を使用しています。
 
 次の表は、TiDB クラスターで PITR を使用するために推奨されるハードウェア リソースを示しています。
 
@@ -31,31 +31,31 @@ PITR を使用するには、TiDB クラスター &gt;= v6.2.0 をデプロイ�
 
 > **ノート：**
 >
-> -   BRがバックアップおよび復元タスクを実行するとき、PD および TiKV にアクセスする必要があります。 BRがすべての PD および TiKV ノードに接続できることを確認します。
-> -   BRサーバーと PD サーバーは同じタイム ゾーンを使用する必要があります。
+> -   BR がバックアップおよび復元タスクを実行するとき、PD および TiKV にアクセスする必要があります。 BR がすべての PD および TiKV ノードに接続できることを確認します。
+> -   BRと PD サーバーは同じタイム ゾーンを使用する必要があります。
 
-TiUP を使用してTiUPクラスターをデプロイまたはアップグレードします。
+TiUPを使用して TiDB クラスターをデプロイまたはアップグレードします。
 
--   新しい TiDB クラスターをデプロイするには、 [TiDB クラスターをデプロイする](/production-deployment-using-tiup.md)を参照してください。
+-   新しい TiDB クラスターをデプロイするには、 [TiDB クラスターをデプロイ](/production-deployment-using-tiup.md)を参照してください。
 -   TiDB クラスターが v6.2.0 より前の場合は、 [TiDB クラスターをアップグレードする](/upgrade-tidb-using-tiup.md)を参照してアップグレードします。
 
-TiUPを使用してBRをインストールまたはアップグレードします。
+TiUPを使用してBR をインストールまたはアップグレードします。
 
 -   インストール：
 
     ```shell
-    tiup install br:v6.5.0
+    tiup install br:v6.5.2
     ```
 
 -   アップグレード:
 
     ```shell
-    tiup update br:v6.5.0
+    tiup update br:v6.5.2
     ```
 
-## バックアップ ストレージの構成 (Amazon S3) {#configure-backup-storage-amazon-s3}
+## バックアップstorageの構成 (Amazon S3) {#configure-backup-storage-amazon-s3}
 
-バックアップ タスクを開始する前に、次の点を含めてバックアップ ストレージを準備します。
+バックアップ タスクを開始する前に、次の側面を含むバックアップstorageを準備します。
 
 1.  バックアップデータを格納する S3 バケットとディレクトリを準備します。
 2.  S3 バケットにアクセスする権限を設定します。
@@ -70,8 +70,8 @@ TiUPを使用してBRをインストールまたはアップグレードしま�
 
 2.  S3 ディレクトリにアクセスするためのBRと TiKV のアクセス許可を構成します。 S3 バケットにアクセスする最も安全な方法であるIAMメソッドを使用してアクセス許可を付与することをお勧めします。詳細な手順については、 [AWS ドキュメント: ユーザー ポリシーによるバケットへのアクセスの制御](https://docs.aws.amazon.com/AmazonS3/latest/userguide/walkthrough1.html)を参照してください。必要な権限は次のとおりです。
 
-    -   バックアップ クラスター内の TiKV およびBRには、 `s3://tidb-pitr-bucket/backup-data`ディレクトリの`s3:ListBucket` 、 `s3:PutObject` 、および`s3:AbortMultipartUpload`のアクセス許可が必要です。
-    -   復元クラスター内の TiKV とBRには、 `s3://tidb-pitr-bucket/backup-data`ディレクトリの`s3:ListBucket`と`s3:GetObject`のアクセス許可が必要です。
+    -   バックアップ クラスター内の TiKV およびBRには、 `s3://tidb-pitr-bucket/backup-data`ディレクトリの`s3:ListBucket` 、 `s3:PutObject` 、および`s3:AbortMultipartUpload`アクセス許可が必要です。
+    -   復元クラスター内の TiKV とBRには、 `s3://tidb-pitr-bucket/backup-data`ディレクトリの`s3:ListBucket`と`s3:GetObject`アクセス許可が必要です。
 
 3.  スナップショット (完全) バックアップとログ バックアップを含む、バックアップ データを格納するディレクトリ構造を計画します。
 
@@ -88,7 +88,7 @@ TiUPを使用してBRをインストールまたはアップグレードしま�
 
 ## ログのバックアップを実行する {#run-log-backup}
 
-ログ バックアップ タスクが開始されると、TiKV クラスターでログ バックアップ プロセスが実行され、データベース内のデータ変更が S3 ストレージに継続的に送信されます。ログ バックアップ タスクを開始するには、次のコマンドを実行します。
+ログ バックアップ タスクが開始されると、TiKV クラスターでログ バックアップ プロセスが実行され、データベース内のデータ変更が S3storageに継続的に送信されます。ログ バックアップ タスクを開始するには、次のコマンドを実行します。
 
 ```shell
 tiup br log start --task-name=pitr --pd="${PD_IP}:2379" \

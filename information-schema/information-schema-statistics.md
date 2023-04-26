@@ -3,7 +3,7 @@ title: STATISTICS
 summary: Learn the `STATISTICS` information_schema table.
 ---
 
-# 統計学 {#statistics}
+# 統計 {#statistics}
 
 `STATISTICS`テーブルは、テーブル インデックスに関する情報を提供します。
 
@@ -54,7 +54,7 @@ DESC statistics;
 -   `CARDINALITY` : TiDB はこのフィールドを使用しません。フィールド値は常に`0`です。
 -   `SUB_PART` : インデックスのプレフィックス。列の接頭辞の一部のみが索引付けされている場合、値は索引付けされた文字数になります。列全体が索引付けされている場合、値は`NULL`です。
 -   `PACKED` : TiDB はこのフィールドを使用しません。この値は常に`NULL`です。
--   `NULLABLE` : 列に`NULL`の値が含まれる可能性がある場合、値は`YES`です。そうでない場合、値は`''`です。
+-   `NULLABLE` : 列に`NULL`値が含まれる可能性がある場合、値は`YES`です。そうでない場合、値は`''`です。
 -   `INDEX_TYPE` : インデックスのタイプ。
 -   `COMMENT` : インデックスに関連するその他の情報。
 -   `INDEX_COMMENT` : インデックスの作成時にインデックスに指定されたコメント属性を持つ任意のコメント。

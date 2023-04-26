@@ -15,11 +15,11 @@ TiDB クラスターに接続していることを確認してください。そ
 
 > **ノート：**
 >
-> このドキュメントでは、 [TiDB で SQL を調べる](/basic-sql-operations.md)を参照して簡略化しています。詳細については、 [TiDB で SQL を調べる](/basic-sql-operations.md)を参照してください。
+> このドキュメントでは、 [TiDB で SQL を調べる](/basic-sql-operations.md)参照して簡略化しています。詳細については、 [TiDB で SQL を調べる](/basic-sql-operations.md)を参照してください。
 
 TiDB は MySQL と互換性があり、ほとんどの場合、MySQL ステートメントを直接使用できます。サポートされていない機能については、 [MySQL との互換性](/mysql-compatibility.md#unsupported-features)を参照してください。
 
-SQL を試して、TiDB と MySQL クエリとの互換性をテストするには、次のことができ[TiDB をインストールせずに Web ブラウザーで直接実行する](https://tour.tidb.io/) 。最初に TiDB クラスターをデプロイしてから、そこで SQL ステートメントを実行することもできます。
+SQL を試して、TiDB と MySQL クエリとの互換性をテストするには、 [TiDB をインストールせずに Web ブラウザーで直接実行する](https://tour.tidb.io/)ことができます。最初に TiDB クラスターをデプロイしてから、そこで SQL ステートメントを実行することもできます。
 
 このページでは、DDL、DML、CRUD 操作などの基本的なTiDB SQLステートメントについて説明します。 TiDB ステートメントの完全なリストについては、 [TiDB SQL構文図](https://pingcap.github.io/sqlgram/)を参照してください。
 
@@ -41,7 +41,7 @@ SQL は、その関数によって次の 4 つのタイプに分けられます�
 
 一般的な DML 機能は、テーブル レコードの追加、変更、および削除です。対応するコマンドは`INSERT` 、 `UPDATE` 、および`DELETE`です。
 
-テーブルにデータを挿入するには、次の`INSERT`ステートメントを使用します。
+テーブルにデータを挿入するには、 `INSERT`ステートメントを使用します。
 
 ```sql
 INSERT INTO person VALUES(1,'tom','20170912');
@@ -59,7 +59,7 @@ INSERT INTO person(id,name) VALUES('2','bob');
 UPDATE person SET birthday='20180808' WHERE id=2;
 ```
 
-テーブル内のデータを削除するには、次の`DELETE`ステートメントを使用します。
+テーブル内のデータを削除するには、 `DELETE`ステートメントを使用します。
 
 ```sql
 DELETE FROM person WHERE id=2;

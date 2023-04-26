@@ -11,7 +11,7 @@ summary: This document describes how to query data from a single table in a data
 
 ## あなたが始める前に {#before-you-begin}
 
-次のコンテンツでは、 [書店](/develop/dev-guide-bookshop-schema-design.md)のアプリケーションを例として、TiDB の単一のテーブルからデータをクエリする方法を示します。
+次のコンテンツでは、 [書店](/develop/dev-guide-bookshop-schema-design.md)アプリケーションを例として、TiDB の単一のテーブルからデータをクエリする方法を示します。
 
 データのクエリを実行する前に、次の手順を完了していることを確認してください。
 
@@ -135,7 +135,7 @@ public class AuthorDAO {
 </CustomContent>
 
 -   次に`stmt.executeQuery("query_sql")`を呼び出して、TiDB へのデータベース クエリ要求を開始します。
--   クエリ結果は`ResultSet`のオブジェクトに格納されます。 `ResultSet`をトラバースすることで、返された結果を`Author`オブジェクトにマップできます。
+-   クエリ結果は`ResultSet`のオブジェクトに格納されます。 `ResultSet`トラバースすることで、返された結果を`Author`オブジェクトにマップできます。
 
 </div>
 </SimpleTab>
@@ -160,7 +160,7 @@ SELECT * FROM authors WHERE birth_year = 1998;
 
 Javaでは、同じ SQL を使用して、動的パラメーターを持つデータ クエリ要求を処理できます。
 
-これは、パラメーターを SQL ステートメントに連結することによって実行できます。ただし、この方法は、アプリケーションのセキュリティに[SQL インジェクション](https://en.wikipedia.org/wiki/SQL_injection)のリスクをもたらす可能性があります。
+これは、パラメーターを SQL ステートメントに連結することによって実行できます。ただし、この方法は、アプリケーションのセキュリティに[SQL インジェクション](https://en.wikipedia.org/wiki/SQL_injection)リスクをもたらす可能性があります。
 
 このようなクエリを処理するには、通常のステートメントの代わりに[作成済みステートメント](/develop/dev-guide-prepared-statement.md)を使用します。
 
@@ -323,7 +323,7 @@ public List<Author> getAuthorsWithLimit(Integer limit) throws SQLException {
 
 全体的なデータ状況をよりよく理解するために、 `GROUP BY`ステートメントを使用してクエリ結果を集計できます。
 
-たとえば、より多くの著者が生まれた年を知りたい場合は、 `authors`のテーブルを`birth_year`列でグループ化し、各年をカウントできます。
+たとえば、より多くの著者が生まれた年を知りたい場合は、 `authors`テーブルを`birth_year`列でグループ化し、各年をカウントできます。
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">

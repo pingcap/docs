@@ -38,9 +38,9 @@ DESC metrics_summary;
 
 -   `METRICS_NAME` : 監視テーブル名。
 -   `QUANTILE` : パーセンタイル。 SQL ステートメントを使用して`QUANTILE`を指定できます。例えば：
-    -   `select * from metrics_summary where quantile=0.99`は、0.99 パーセンタイルのデータを表示することを指定します。
-    -   `select * from metrics_summary where quantile in (0.80, 0.90, 0.99, 0.999)`は、0.8、0.90、0.99、0.999 パーセンタイルのデータを同時に表示することを指定します。
--   `SUM_VALUE`は`MIN_VALUE` `AVG_VALUE` 、平均値、最小値、最大値を意味し`MAX_VALUE` 。
+    -   `select * from metrics_summary where quantile=0.99` 0.99 パーセンタイルのデータを表示することを指定します。
+    -   `select * from metrics_summary where quantile in (0.80, 0.90, 0.99, 0.999)` 0.8、0.90、0.99、0.999 パーセンタイルのデータを同時に表示することを指定します。
+-   `SUM_VALUE` `MIN_VALUE`それぞれ合計、平均値`AVG_VALUE`最小`MAX_VALUE` 、最大値を意味します。
 -   `COMMENT` : 対応する監視テーブルのコメント。
 
 例えば：
@@ -86,7 +86,7 @@ MAX_VALUE    | 0.013
 COMMENT      | The quantile of kv requests durations by store
 ```
 
-同様に、次の例では、 `metrics_summary_by_label`の監視サマリー テーブルをクエリします。
+同様に、次の例では、 `metrics_summary_by_label`監視サマリー テーブルをクエリします。
 
 {{< copyable "" >}}
 
@@ -185,6 +185,6 @@ ORDER BY ratio DESC LIMIT 10;
 -   期間 t2 の`tikv_cop_total_response_size` (TiKVコプロセッサー要求結果のサイズ) は、期間 t1 の 192 倍です。
 -   期間 t2 (TiKV コプロセッサーによって要求されたスキャン) の`tikv_cop_scan_details`は、期間 t1 の 105 倍です。
 
-上記の結果から、期間 t2 のコプロセッサー要求は、期間 t1 の要求よりもはるかに多いことがわかります。これにより、TiKVコプロセッサーが過負荷になり、 `cop task`は待機する必要があります。期間 t2 にいくつかの大きなクエリが表示され、より多くの負荷がかかる可能性があります。
+上記の結果から、期間 t2 のコプロセッサー要求は、期間 t1 の要求よりもはるかに多いことがわかります。これにより、TiKVコプロセッサーが過負荷になり、 `cop task`待機する必要があります。期間 t2 にいくつかの大きなクエリが表示され、より多くの負荷がかかる可能性があります。
 
-実際、t1 から t2 までの期間全体で、 `go-ycsb`番目の圧力テストが実行されています。次に、期間 t2 の間に 20 `tpch`のクエリが実行されます。したがって、多くのコプロセッサー要求を引き起こすのは`tpch`の照会です。
+実際、t1 から t2 までの期間全体で、 `go-ycsb`圧力テストが実行されています。次に、期間 t2 の間に 20 `tpch`のクエリが実行されます。したがって、多くのコプロセッサー要求を引き起こすのは`tpch`照会です。

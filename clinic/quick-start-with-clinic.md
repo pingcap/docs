@@ -7,7 +7,7 @@ summary: Learn how to use PingCAP Clinic to collect, upload, and view cluster di
 
 このドキュメントでは、 PingCAPクリニック診断サービス (PingCAPクリニック) を使用してクラスター診断データを迅速に収集、アップロード、および表示する方法について説明します。
 
-PingCAPクリニックは、Diag クライアント (略して Diag) と Clinic Server クラウド サービス (略して Clinic Server) の 2 つのコンポーネントで構成されています。これら 2 つのコンポーネントの詳細については、 [PingCAPクリニックの概要](/clinic/clinic-introduction.md)を参照してください。
+PingCAPクリニック は、 [診断クライアント](https://github.com/pingcap/diag) (略して Diag) と Clinic Server クラウド サービス (略して Clinic Server) の 2 つのコンポーネントで構成されています。これら 2 つのコンポーネントの詳細については、 [PingCAPクリニックの概要](/clinic/clinic-introduction.md)を参照してください。
 
 ## ユーザー シナリオ {#user-scenarios}
 
@@ -16,7 +16,7 @@ PingCAPクリニックは、Diag クライアント (略して Diag) と Clinic 
 
 > **ノート：**
 >
-> -   データを収集してアップロードする次の方法は、 [TiUPを使用してデプロイされたクラスター](/production-deployment-using-tiup.md)に**のみ**適用されます。 TiDB Operatorを使用して Kubernetes にデプロイされたクラスターについては、 [TiDB TiDB Operator環境向けのPingCAPクリニック](https://docs.pingcap.com/tidb-in-kubernetes/stable/clinic-user-guide)を参照してください。
+> -   データを収集してアップロードする次の方法は、 [TiUPを使用してデプロイされたクラスター](/production-deployment-using-tiup.md)に**のみ**適用されます。 TiDB Operatorを使用して Kubernetes にデプロイされたクラスターについては、 [TiDB Operator環境向けのPingCAPクリニック](https://docs.pingcap.com/tidb-in-kubernetes/stable/clinic-user-guide)を参照してください。
 > -   PingCAPクリニックによって収集された診断データは、クラスターの問題のトラブルシューティングに**のみ**使用されます。
 
 ## 前提条件 {#prerequisites}
@@ -34,7 +34,7 @@ PingCAPクリニックを利用する前に、Diag をインストールし、�
     <SimpleTab groupId="clinicServer">
      <div label="Clinic Server for international users" value="clinic-us">
 
-    [海外ユーザー向けクリニックサーバー](https://clinic.pingcap.com)に移動し、[ **TiDB アカウントでサインイン]**を選択して、 TiDB Cloudのログイン ページに入ります。 TiDB Cloudアカウントをお持ちでない場合は、そのページで作成してください。
+    [海外ユーザー向けクリニックサーバー](https://clinic.pingcap.com)に移動し、 **[TiDB アカウントでサインイン]**を選択して、 TiDB Cloudのログイン ページに入ります。 TiDB Cloudアカウントをお持ちでない場合は、そのページで作成してください。
 
     > **ノート：**
     >
@@ -44,7 +44,7 @@ PingCAPクリニックを利用する前に、Diag をインストールし、�
 
     <div label="Clinic Server for users in the Chinese mainland" value="clinic-cn">
 
-    [中国本土のユーザー向けクリニックサーバー](https://clinic.pingcap.com.cn)に移動し、[ **AskTUG でサインイン] を**選択して、AskTUG コミュニティのログイン ページに入ります。 AskTUG アカウントをお持ちでない場合は、そのページでアカウントを作成してください
+    [中国本土のユーザー向けクリニックサーバー](https://clinic.pingcap.com.cn)に移動し、 **[AskTUG でサインイン]**を選択して、AskTUG コミュニティのログイン ページに入ります。 AskTUG アカウントをお持ちでない場合は、そのページでアカウントを作成してください
 
     </div>
      </SimpleTab>
@@ -53,7 +53,7 @@ PingCAPクリニックを利用する前に、Diag をインストールし、�
 
 4.  データをアップロードするためのアクセス トークンを取得します。収集したデータを Diag を介してアップロードする場合、データが安全に分離されるように、ユーザー認証用のトークンが必要です。 Clinic Server から既にトークンを取得している場合は、そのトークンを再利用できます。
 
-    トークンを取得するには、[クラスタ] ページの右下隅にあるアイコンをクリックし、[**診断ツールのアクセス トークンを取得**] を選択し、ポップアップ ウィンドウで [ <strong>+</strong> ] をクリックします。表示されたトークンをコピーして保存したことを確認してください。
+    トークンを取得するには、 [クラスタ]ページの右下隅にあるアイコンをクリックし、 **[診断ツールのアクセス トークンを取得]**を選択し、ポップアップ ウィンドウで<strong>[+]</strong>をクリックします。表示されたトークンをコピーして保存したことを確認してください。
 
     ![An example of a token](/media/clinic-get-token.png)
 
@@ -72,7 +72,7 @@ PingCAPクリニックを利用する前に、Diag をインストールし、�
 
     -   次のコマンドを実行して`clinic.region`を設定します。
 
-    `region`は、データのパッキングに使用される暗号化証明書と、データのアップロード時のターゲット サービスを決定します。例えば：
+    `region`データのパッキングに使用される暗号化証明書と、データのアップロード時のターゲット サービスを決定します。例えば：
 
     > **ノート：**
     >
@@ -115,7 +115,7 @@ PingCAPクリニックを利用する前に、Diag をインストールし、�
     tiup diag collect ${cluster-name} -f="-4h" -t="-2h"
     ```
 
-    コマンドを実行した後、Diag はデータの収集をすぐには開始しません。代わりに、Diag は推定データ サイズとターゲット データ ストレージ パスを出力で提供し、続行するかどうかを確認します。データの収集を開始することを確認するには、 `Y`を入力します。
+    コマンドを実行した後、Diag はデータの収集をすぐには開始しません。代わりに、Diag は推定データ サイズとターゲット データstorageパスを出力で提供し、続行するかどうかを確認します。データの収集を開始することを確認するには、 `Y`を入力します。
 
     収集が完了すると、Diag は、収集されたデータが配置されているフォルダー パスを提供します。
 

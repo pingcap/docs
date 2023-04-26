@@ -38,7 +38,7 @@ TiDB アカウントは次の 2 つの方法で作成できます。
 CREATE USER [IF NOT EXISTS] user [IDENTIFIED BY 'auth_string'];
 ```
 
-パスワードを割り当てた後、TiDB は`auth_string`を暗号化して`mysql.user`テーブルに格納します。
+パスワードを割り当てた後、TiDB は`auth_string`暗号化して`mysql.user`テーブルに格納します。
 
 {{< copyable "" >}}
 
@@ -50,7 +50,7 @@ TiDB アカウントの名前は、ユーザー名とホスト名で構成され
 
 -   `user_name`は大文字と小文字が区別されます。
 
--   `host_name`は、ワイルドカード`%`または`_`をサポートするホスト名または IP アドレスです。たとえば、ホスト名`'%'`はすべてのホストに一致し、ホスト名`'192.168.1.%'`はサブネット内のすべてのホストに一致します。
+-   `host_name`は、ワイルドカード`%`または`_`をサポートするホスト名または IP アドレスです。たとえば、ホスト名`'%'`すべてのホストに一致し、ホスト名`'192.168.1.%'`サブネット内のすべてのホストに一致します。
 
 ホストはあいまい一致をサポートしています。
 
@@ -80,7 +80,7 @@ CREATE USER 'test'@'%' IDENTIFIED BY '';
 
 指定されたユーザーが存在しない場合、ユーザーの自動作成の動作は`sql_mode`に依存します。 `sql_mode`に`NO_AUTO_CREATE_USER`が含まれている場合、 `GRANT`ステートメントはユーザーを作成せず、エラーが返されます。
 
-たとえば、 `sql_mode`に`NO_AUTO_CREATE_USER`が含まれず、次の`CREATE USER`および`GRANT`ステートメントを使用して 4 つのアカウントを作成するとします。
+たとえば、 `sql_mode`に`NO_AUTO_CREATE_USER`含まれず、次の`CREATE USER`および`GRANT`ステートメントを使用して 4 つのアカウントを作成するとします。
 
 {{< copyable "" >}}
 
@@ -124,7 +124,7 @@ GRANT RELOAD,PROCESS ON *.* TO 'admin'@'localhost';
 CREATE USER 'dummy'@'localhost';
 ```
 
-アカウントに付与された権限を確認するには、次の`SHOW GRANTS`ステートメントを使用します。
+アカウントに付与された権限を確認するには、 `SHOW GRANTS`ステートメントを使用します。
 
 {{< copyable "" >}}
 
@@ -142,7 +142,7 @@ SHOW GRANTS FOR 'admin'@'localhost';
 
 ## ユーザー アカウントを削除する {#remove-user-accounts}
 
-ユーザー アカウントを削除するには、次の`DROP USER`ステートメントを使用します。
+ユーザー アカウントを削除するには、 `DROP USER`ステートメントを使用します。
 
 {{< copyable "" >}}
 
@@ -154,7 +154,7 @@ DROP USER 'test'@'localhost';
 
 ## 予約済みユーザー アカウント {#reserved-user-accounts}
 
-TiDB は、データベースの初期化中に`'root'@'%'`のデフォルト アカウントを作成します。
+TiDB は、データベースの初期化中に`'root'@'%'`デフォルト アカウントを作成します。
 
 ## アカウントのリソース制限を設定する {#set-account-resource-limits}
 
@@ -162,9 +162,9 @@ TiDB は、データベースの初期化中に`'root'@'%'`のデフォルト �
 
 ## アカウントのパスワードを割り当てる {#assign-account-passwords}
 
-TiDB はパスワードを`mysql.user`システム データベースに格納します。パスワードを割り当てたり更新したりする操作は、 `CREATE USER`の権限、または`mysql`データベースの権限( `INSERT`の新しいアカウントを作成する権限、 `UPDATE`の既存のアカウントを更新する権限) を持つユーザーにのみ許可されます。
+TiDB はパスワードを`mysql.user`システム データベースに格納します。パスワードを割り当てたり更新したりする操作は、 `CREATE USER`権限、または`mysql`データベースの権限( `INSERT`新しいアカウントを作成する権限、 `UPDATE`既存のアカウントを更新する権限) を持つユーザーにのみ許可されます。
 
--   新しいアカウントを作成するときにパスワードを割り当てるには、 `CREATE USER`を使用し、 `IDENTIFIED BY`句を含めます。
+-   新しいアカウントを作成するときにパスワードを割り当てるには、 `CREATE USER`使用し、 `IDENTIFIED BY`句を含めます。
 
     ```sql
     CREATE USER 'test'@'localhost' IDENTIFIED BY 'mypass';
@@ -184,20 +184,47 @@ TiDB はパスワードを`mysql.user`システム データベースに格納�
 
 ## <code>root</code>パスワードを忘れる {#forget-the-code-root-code-password}
 
-1.  `security`の部分に`skip-grant-table`を追加して、構成ファイルを変更します。
+1.  構成ファイルを変更します。
 
-    ```
-    [security]
-    skip-grant-table = true
-    ```
+    1.  tidb-server インスタンスの 1 つが配置されているマシンにログインします。
+    2.  TiDB ノード展開ディレクトリの下にある`conf`ディレクトリに入り、 `tidb.toml`構成ファイルを見つけます。
+    3.  構成ファイルの`security`セクションに構成項目`skip-grant-table`を追加します。 `security`セクションがない場合は、次の 2 行を tidb.toml 構成ファイルの末尾に追加します。
 
-2.  変更した構成で TiDB を起動します。 `root`を使用してログインし、パスワードを変更します。
+        ```
+        [security]
+        skip-grant-table = true
+        ```
 
-    ```bash
-    mysql -h 127.0.0.1 -P 4000 -u root
-    ```
+2.  tidb-server プロセスを停止します。
 
-`skip-grant-table`が設定されている場合、TiDB プロセスを開始すると、ユーザーがオペレーティング システムの管理者であるかどうかがチェックされ、オペレーティング システムの`root`ユーザーのみが TiDB プロセスを開始できます。
+    1.  tidb-server プロセスをビュー。
+
+        ```bash
+        ps aux | grep tidb-server
+        ```
+
+    2.  tidb-server に対応するプロセス ID (PID) を見つけ、 `kill`コマンドを使用してプロセスを停止します。
+
+        ```bash
+        kill -9 <pid>
+        ```
+
+3.  変更した構成を使用して TiDB を開始します。
+
+    > **ノート：**
+    >
+    > TiDB プロセスを開始する前に`skip-grant-table`を設定すると、オペレーティング システム ユーザーのチェックが開始されます。オペレーティング システムの`root`ユーザーのみが TiDB プロセスを開始できます。
+
+    1.  TiDB ノードの配置ディレクトリの下にある`scripts`ディレクトリを入力します。
+    2.  オペレーティング システムの`root`アカウントに切り替えます。
+    3.  フォアグラウンドのディレクトリで`run_tidb.sh`スクリプトを実行します。
+    4.  新しいターミナル ウィンドウで`root`としてログインし、パスワードを変更します。
+
+        ```bash
+        mysql -h 127.0.0.1 -P 4000 -u root
+        ```
+
+4.  `run_tidb.sh`スクリプトの実行を停止し、ステップ 1 で TiDB 構成ファイルに追加されたコンテンツを削除し、tidb-server が自動的に開始するのを待ちます。
 
 ## <code>FLUSH PRIVILEGES</code> {#code-flush-privileges-code}
 

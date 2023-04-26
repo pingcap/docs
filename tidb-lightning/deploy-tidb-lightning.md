@@ -18,9 +18,9 @@ summary: Deploy TiDB Lightning to quickly import large amounts of new data.
     curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
     ```
 
-    このコマンドは、 TiUPを`PATH`環境変数に自動的に追加します。 TiUPを使用する前に、新しいターミナル セッションを開始するか、 `source ~/.bashrc`を実行する必要があります。 (環境によっては、 `source ~/.profile`を実行する必要がある場合があります。具体的なコマンドについては、 TiUPの出力を確認してください。)
+    このコマンドは、 TiUP を`PATH`環境変数に自動的に追加します。 TiUPを使用する前に、新しいターミナル セッションを開始するか、 `source ~/.bashrc`を実行する必要があります。 (環境によっては、 `source ~/.profile`実行する必要がある場合があります。具体的なコマンドについては、 TiUPの出力を確認してください。)
 
-2.  TiUP を使用してTiUP TiDB Lightningをインストールします。
+2.  TiUPを使用してTiDB Lightningをインストールします。
 
     ```shell
     tiup install tidb-lightning
@@ -30,9 +30,9 @@ summary: Deploy TiDB Lightning to quickly import large amounts of new data.
 
 ### TiDB Lightningバイナリをダウンロード {#download-tidb-lightning-binaries}
 
-[TiDB ツールをダウンロード](/download-ecosystem-tools.md)を参照して、 TiDB Lightningバイナリをダウンロードします。 TiDB Lightningは、TiDB の初期バージョンと完全に互換性があります。最新バージョンのTiDB Lightningを使用することをお勧めします。
+[TiDB ツールをダウンロード](/download-ecosystem-tools.md)を参照して、 TiDB Lightningバイナリをダウンロードします。 TiDB Lightning は、 TiDB の初期バージョンと完全に互換性があります。最新バージョンのTiDB Lightningを使用することをお勧めします。
 
-TiDB Lightningバイナリ パッケージを解凍して、 `tidb-lightning`の実行可能ファイルを取得します。
+TiDB Lightningバイナリ パッケージを解凍して、 `tidb-lightning`実行可能ファイルを取得します。
 
 ```bash
 tar -zxvf tidb-lightning-${version}-linux-amd64.tar.gz
@@ -42,7 +42,7 @@ chmod +x tidb-lightning
 このコマンドでは、
 
 -   `-B test` : データが`test`データベースからエクスポートされることを意味します。
--   `-f test.t[12]` : `test.t1`と`test.t2`のテーブルのみがエクスポートされることを意味します。
+-   `-f test.t[12]` : `test.t1`と`test.t2`テーブルのみがエクスポートされることを意味します。
 -   `-t 16` : データのエクスポートに 16 個のスレッドが使用されることを意味します。
 -   `-F 256MB` : テーブルがチャンクに分割され、1 つのチャンクが 256 MB であることを意味します。
 
@@ -50,11 +50,11 @@ chmod +x tidb-lightning
 
 ## TiDB Lightningをデプロイ {#deploy-tidb-lightning}
 
-このセクションでは、方法について説明し[TiDB Lightningを手動でデプロイする](#deploy-tidb-lightning-manually) 。
+このセクションでは、 [TiDB Lightning を手動でデプロイする](#deploy-tidb-lightning-manually)について説明します。
 
-### TiDB Lightningを手動でデプロイ {#deploy-tidb-lightning-manually}
+### TiDB Lightning を手動でデプロイ {#deploy-tidb-lightning-manually}
 
-#### ステップ 1: TiDB クラスターをデプロイする {#step-1-deploy-a-tidb-cluster}
+#### ステップ 1: TiDB クラスターをデプロイ {#step-1-deploy-a-tidb-cluster}
 
 データをインポートする前に、TiDB クラスターをデプロイする必要があります。最新の安定版を使用することを強くお勧めします。
 
@@ -66,7 +66,7 @@ chmod +x tidb-lightning
 
 > **ノート：**
 >
-> TiDB Lightningは、以前のバージョンの TiDB クラスターと互換性があります。 TiDB Lightningインストール パッケージの最新の安定バージョンをダウンロードすることをお勧めします。
+> TiDB Lightning は、以前のバージョンの TiDB クラスターと互換性があります。 TiDB Lightningインストール パッケージの最新の安定バージョンをダウンロードすることをお勧めします。
 
 #### ステップ 3: <code>tidb-lightning</code>を開始する {#step-3-start-code-tidb-lightning-code}
 
@@ -74,9 +74,9 @@ chmod +x tidb-lightning
 
 2.  データ ソースを同じマシンにマウントします。
 
-3.  構成する`tidb-lightning.toml` .以下のテンプレートに表示されない構成の場合、 TiDB Lightningは構成エラーをログ ファイルに書き込み、終了します。
+3.  構成する`tidb-lightning.toml` .以下のテンプレートに表示されない構成の場合、 TiDB Lightning は構成エラーをログ ファイルに書き込み、終了します。
 
-    `sorted-kv-dir`は、ソートされた Key-Value ファイルの一時ストレージ ディレクトリを設定します。ディレクトリは空である必要があり、ストレージ スペース**はインポートするデータセットのサイズより大きくなければなりません**。詳細は[ダウンストリームのストレージ容量要件](/tidb-lightning/tidb-lightning-requirements.md#storage-space-of-the-target-database)を参照してください。
+    `sorted-kv-dir`ソートされた Key-Value ファイルの一時storageディレクトリを設定します。ディレクトリは空である必要があり、storageスペース**はインポートするデータセットのサイズより大きくなければなりません**。詳細は[ダウンストリームのstorage容量要件](/tidb-lightning/tidb-lightning-requirements.md#storage-space-of-the-target-database)を参照してください。
 
     ```toml
     [lightning]
@@ -121,6 +121,6 @@ chmod +x tidb-lightning
 
 ## TiDB Lightningのアップグレード {#upgrade-tidb-lightning}
 
-バイナリを置き換えるだけで、それ以上の構成を行わなくてもTiDB Lightningをアップグレードできます。アップグレード後、 TiDB Lightningを再起動する必要があります。詳細については、 [TiDB Lightningを適切に再起動する方法](/tidb-lightning/tidb-lightning-faq.md#how-to-properly-restart-tidb-lightning)を参照してください。
+バイナリを置き換えるだけで、それ以上の構成を行わなくてもTiDB Lightningをアップグレードできます。アップグレード後、 TiDB Lightningを再起動する必要があります。詳細については、 [TiDB Lightning を適切に再起動する方法](/tidb-lightning/tidb-lightning-faq.md#how-to-properly-restart-tidb-lightning)を参照してください。
 
 インポート タスクが実行中の場合は、完了するまで待ってからTiDB Lightningをアップグレードすることをお勧めします。そうしないと、チェックポイントがバージョン間で機能するという保証がないため、最初から再インポートする必要が生じる可能性があります。

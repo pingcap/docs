@@ -5,16 +5,16 @@ summary: Learn the common operations to operate and maintain a TiDB cluster usin
 
 # TiUP共通操作 {#tiup-common-operations}
 
-このドキュメントでは、TiUP を使用してTiUPクラスターを運用および保守する場合の、次の一般的な操作について説明します。
+このドキュメントでは、 TiUP を使用して TiDB クラスターを運用および保守する場合の、次の一般的な操作について説明します。
 
--   クラスタ リストをビューする
+-   クラスタ リストをビュー
 -   クラスターを開始する
--   クラスターの状態をビューする
+-   クラスターの状態をビュー
 -   構成を変更する
 -   クラスターを停止する
 -   クラスターを破棄する
 
-## クラスタ リストをビューする {#view-the-cluster-list}
+## クラスタ リストをビュー {#view-the-cluster-list}
 
 TiUPクラスターコンポーネントを使用して、複数の TiDB クラスターを管理できます。 TiDB クラスターがデプロイされると、そのクラスターがTiUPクラスター リストに表示されます。
 
@@ -42,9 +42,9 @@ tiup cluster start ${cluster-name}
 
 > **ノート：**
 >
-> `${cluster-name}`をクラスターの名前に置き換えます。クラスター名を忘れた場合は、 `tiup cluster list`を実行して確認してください。
+> `${cluster-name}`クラスターの名前に置き換えます。クラスター名を忘れた場合は、 `tiup cluster list`を実行して確認してください。
 
-コマンドに`-R`つまたは`-N`のパラメーターを追加することで、一部のコンポーネントのみを開始できます。例えば：
+コマンドに`-R`または`-N`パラメーターを追加することで、一部のコンポーネントのみを開始できます。例えば：
 
 -   このコマンドは、PDコンポーネントのみを開始します。
 
@@ -54,7 +54,7 @@ tiup cluster start ${cluster-name}
     tiup cluster start ${cluster-name} -R pd
     ```
 
--   このコマンドは、 `1.2.3.4`および`1.2.3.5`のホストで PD コンポーネントのみを開始します。
+-   このコマンドは、 `1.2.3.4`および`1.2.3.5`ホストで PD コンポーネントのみを開始します。
 
     {{< copyable "" >}}
 
@@ -66,9 +66,9 @@ tiup cluster start ${cluster-name}
 >
 > `-R`または`-N`パラメーターを使用して指定されたコンポーネントを開始する場合は、開始順序が正しいことを確認してください。たとえば、TiKVコンポーネントの前に PDコンポーネントを開始します。そうしないと、起動に失敗する可能性があります。
 
-## クラスターの状態をビューする {#view-the-cluster-status}
+## クラスターの状態をビュー {#view-the-cluster-status}
 
-クラスタを起動したら、各コンポーネントのステータスをチェックして、正常に動作していることを確認します。 TiUPは`display`のコマンドを提供するため、コンポーネントのステータスを表示するためにすべてのマシンにログインする必要はありません。
+クラスタを起動したら、各コンポーネントのステータスをチェックして、正常に動作していることを確認します。 TiUP は`display`コマンドを提供するため、コンポーネントのステータスを表示するためにすべてのマシンにログインする必要はありません。
 
 {{< copyable "" >}}
 
@@ -110,7 +110,7 @@ tiup cluster display ${cluster-name}
 
     パラメータの形式については、 [TiUPパラメータ テンプレート](https://github.com/pingcap/tiup/blob/master/embed/examples/cluster/topology.example.yaml)を参照してください。
 
-    **を使用し`.`構成アイテムの階層を表します**。
+    **を使用します`.`構成アイテムの階層を表します**。
 
     コンポーネントの構成パラメーターの詳細については、 [TiDB `config.toml.example`](https://github.com/pingcap/tidb/blob/master/config/config.toml.example) 、 [TiKV `config.toml.example`](https://github.com/tikv/tikv/blob/master/etc/config-template.toml) 、および[PD `config.toml.example`](https://github.com/tikv/pd/blob/master/conf/config.toml)を参照してください。
 
@@ -136,7 +136,7 @@ server_configs:
 
 ## ホットフィックス パッケージに置き換える {#replace-with-a-hotfix-package}
 
-通常のアップグレードについては、 [TiUP を使用してTiUPをアップグレードする](/upgrade-tidb-using-tiup.md)を参照してください。ただし、デバッグなどの一部のシナリオでは、現在実行中のコンポーネントを一時パッケージに置き換える必要がある場合があります。これを実現するには、 `patch`コマンドを使用します。
+通常のアップグレードについては、 [TiUPを使用して TiDB をアップグレードする](/upgrade-tidb-using-tiup.md)を参照してください。ただし、デバッグなどの一部のシナリオでは、現在実行中のコンポーネントを一時パッケージに置き換える必要がある場合があります。これを実現するには、 `patch`コマンドを使用します。
 
 {{< copyable "" >}}
 
@@ -183,7 +183,7 @@ tiup cluster patch test-cluster /tmp/tidb-hotfix.tar.gz -N 172.16.4.5:4000
 
 ## クラスターの名前を変更する {#rename-the-cluster}
 
-クラスターをデプロイして開始したら、次の`tiup cluster rename`コマンドを使用してクラスターの名前を変更できます。
+クラスターをデプロイして開始したら、 `tiup cluster rename`コマンドを使用してクラスターの名前を変更できます。
 
 {{< copyable "" >}}
 
@@ -230,7 +230,7 @@ tiup cluster stop ${cluster-name}
 
 ## クラスタ データのクリーンアップ {#clean-up-cluster-data}
 
-クラスター データをクリーンアップする操作は、すべてのサービスを停止し、データ ディレクトリまたはログ ディレクトリをクリーンアップします。操作を元に戻すことはできないため**、慎重に進めてください**。
+クラスター データをクリーンアップする操作は、すべてのサービスを停止し、データ ディレクトリまたはログ ディレクトリをクリーンアップします。操作を元に戻すことはできないため、**慎重に**進めてください。
 
 -   クラスター内のすべてのサービスのデータをクリーンアップしますが、ログは保持します。
 
@@ -264,7 +264,7 @@ tiup cluster stop ${cluster-name}
     tiup cluster clean ${cluster-name} --all --ignore-role prometheus
     ```
 
--   `172.16.13.11:9000`つのインスタンスを除くすべてのサービスのログとデータをクリーンアップします。
+-   `172.16.13.11:9000`インスタンスを除くすべてのサービスのログとデータをクリーンアップします。
 
     {{< copyable "" >}}
 
@@ -272,7 +272,7 @@ tiup cluster stop ${cluster-name}
     tiup cluster clean ${cluster-name} --all --ignore-node 172.16.13.11:9000
     ```
 
--   `172.16.13.12`のノードを除くすべてのサービスのログとデータをクリーンアップします。
+-   `172.16.13.12`ノードを除くすべてのサービスのログとデータをクリーンアップします。
 
     {{< copyable "" >}}
 
@@ -282,7 +282,7 @@ tiup cluster stop ${cluster-name}
 
 ## クラスターを破棄する {#destroy-the-cluster}
 
-破棄操作は、サービスを停止し、データ ディレクトリと展開ディレクトリをクリアします。操作を元に戻すことはできないため**、慎重に進めてください**。
+破棄操作は、サービスを停止し、データ ディレクトリと展開ディレクトリをクリアします。操作を元に戻すことはできないため、**慎重に**進めてください。
 
 {{< copyable "" >}}
 

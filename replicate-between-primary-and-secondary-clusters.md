@@ -15,9 +15,9 @@ summary: Learn how to replicate data from a primary cluster to a secondary clust
 
 ## ステップ 1. 環境をセットアップする {#step-1-set-up-the-environment}
 
-1.  TiDB クラスターをデプロイします。
+1.  TiDB クラスターをデプロイ。
 
-    デプロイ Playground を使用して、2 つの TiDB クラスター (1 つはアップストリーム、もう 1 つはダウンストリーム) をTiUPします。本番環境の場合は、 [TiUPを使用してオンライン TiDBクラスタをデプロイおよび管理する](/tiup/tiup-cluster.md)を参照してクラスターをデプロイします。
+    TiUP Playground を使用して、2 つの TiDB クラスター (1 つはアップストリーム、もう 1 つはダウンストリーム)をデプロイ。本番環境の場合は、 [TiUPを使用してオンライン TiDBクラスタをデプロイおよび管理](/tiup/tiup-cluster.md)を参照してクラスターをデプロイします。
 
     このドキュメントでは、2 つのクラスターを 2 台のマシンにデプロイします。
 
@@ -65,9 +65,9 @@ summary: Learn how to replicate data from a primary cluster to a secondary clust
     sysbench oltp_write_only --config-file=./tidb-config --tables=3 run
     ```
 
-4.  外部ストレージを準備します。
+4.  外部storageを準備します。
 
-    フル データ バックアップでは、アップストリーム クラスタとダウンストリーム クラスタの両方がバックアップ ファイルにアクセスする必要があります。 [外部記憶装置](/br/backup-and-restore-storages.md)を使用してバックアップ ファイルを保存することをお勧めします。この例では、Minio を使用して S3 互換のストレージ サービスをシミュレートします。
+    フル データ バックアップでは、アップストリーム クラスタとダウンストリーム クラスタの両方がバックアップ ファイルにアクセスする必要があります。 [外部storage](/br/backup-and-restore-storages.md)を使用してバックアップ ファイルを保存することをお勧めします。この例では、Minio を使用して S3 互換のstorageサービスをシミュレートします。
 
     ```shell
     wget https://dl.min.io/server/minio/release/linux-amd64/minio
@@ -152,7 +152,7 @@ summary: Learn how to replicate data from a primary cluster to a secondary clust
     1 row in set (2.11 sec)
     ```
 
-    `BACKUP`コマンドの実行後、TiDB はバックアップ データに関するメタデータを返します。バックアップされる前に生成されたデータであるため、 `BackupTS`に注意してください。このドキュメントでは**、データ チェックの終了と**<strong>TiCDC による増分移行スキャンの開始</strong>として`BackupTS`を使用します。
+    `BACKUP`コマンドの実行後、TiDB はバックアップ データに関するメタデータを返します。バックアップされる前に生成されたデータであるため、 `BackupTS`に注意してください。このドキュメントでは、**データ チェックの終了**と<strong>TiCDC による増分移行スキャンの開始</strong>として`BackupTS`使用します。
 
 3.  データを復元します。
 
@@ -173,7 +173,7 @@ summary: Learn how to replicate data from a primary cluster to a secondary clust
 
 4.  (オプション) データを検証します。
 
-    特定の時点で上流と下流の間のデータの整合性をチェックするには、 [同期差分インスペクター](/sync-diff-inspector/sync-diff-inspector-overview.md)を使用します。前の`BACKUP`の出力は、上流のクラスターが`RESTORE`でバックアップを終了したことを示しています。
+    特定の時点で上流と下流の間のデータの整合性をチェックするには、 [同期差分インスペクター](/sync-diff-inspector/sync-diff-inspector-overview.md)を使用します。前の`BACKUP`出力は、上流のクラスターが`RESTORE`でバックアップを終了したことを示しています。
 
     ```shell
     sync_diff_inspector -C ./config.yaml
@@ -213,9 +213,9 @@ summary: Learn how to replicate data from a primary cluster to a secondary clust
 
 ## ステップ 3. 増分データを移行する {#step-3-migrate-incremental-data}
 
-1.  TiCDC をデプロイします。
+1.  TiCDCをデプロイ。
 
-    完全なデータ移行が完了したら、TiCDC を展開して構成し、増分データをレプリケートします。本番環境では、 [TiCDC をデプロイ](/ticdc/deploy-ticdc.md)の指示に従って TiCDC をデプロイします。このドキュメントでは、テスト クラスターの作成時に TiCDC ノードが開始されています。したがって、TiCDC をデプロイするステップをスキップして、changefeed 構成に進みます。
+    完全なデータ移行が完了したら、TiCDC を展開して構成し、増分データをレプリケートします。本番環境では、 [TiCDCをデプロイ](/ticdc/deploy-ticdc.md)の指示に従って TiCDC をデプロイします。このドキュメントでは、テスト クラスターの作成時に TiCDC ノードが開始されています。したがって、TiCDC をデプロイするステップをスキップして、changefeed 構成に進みます。
 
 2.  チェンジフィードを作成します。
 
@@ -290,15 +290,15 @@ tiup cdc redo apply --storage "s3://redo?access-key=minio&secret-access-key=mini
 
 ## ステップ 6. 主クラスターとそのサービスをリカバリーする {#step-6-recover-the-primary-cluster-and-its-services}
 
-前のステップの後、ダウンストリーム (セカンダリ) クラスターには、特定の時点でアップストリーム (プライマリ) クラスターと一致するデータがあります。データの信頼性を確保するために、新しいプライマリ クラスタとセカンダリ クラスタを設定する必要があります。
+前のステップの後、ダウンストリーム (セカンダリ) クラスターには、特定の時点でアップストリーム (プライマリ) クラスターと一致するデータがあります。データの信頼性を確保するために、新しいプライマリ クラスタとセカンダリ クラスタをセットアップする必要があります。
 
-1.  ノード A に新しい TiDB クラスターを新しい主クラスターとしてデプロイします。
+1.  ノード A に新しい TiDB クラスターを新しい主クラスターとしてデプロイ。
 
     ```shell
     tiup --tag upstream playground v5.4.0 --host 0.0.0.0 --db 1 --pd 1 --kv 1 --tiflash 0 --ticdc 1
     ```
 
-2.  BRを使用して、二次クラスターから一次クラスターにデータを完全にバックアップおよび復元します。
+2.  BR を使用して、二次クラスターから一次クラスターにデータを完全にバックアップおよび復元します。
 
     ```shell
     # Back up full data of the secondary cluster

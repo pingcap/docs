@@ -15,19 +15,19 @@ TiDB DM では、binlog は TiDB データベースで生成されたバイナ�
 
 ### Binlogイベント {#binlog-event}
 
-Binlogイベントは、MySQL または MariaDBサーバーインスタンスに対して行われたデータ変更に関する情報です。これらの binlog イベントは binlog ファイルに保存されます。詳細は[MySQLBinlogイベント](https://dev.mysql.com/doc/internals/en/binlog-event.html)と[MariaDB Binlogイベント](https://mariadb.com/kb/en/library/1-binlog-events/)を参照してください。
+Binlogイベントは、MySQL または MariaDBサーバーインスタンスに対して行われたデータ変更に関する情報です。これらのbinlogイベントはbinlogファイルに保存されます。詳細は[MySQLBinlogイベント](https://dev.mysql.com/doc/internals/en/binlog-event.html)と[MariaDB Binlogイベント](https://mariadb.com/kb/en/library/1-binlog-events/)を参照してください。
 
 ### Binlogイベント フィルター {#binlog-event-filter}
 
-[Binlogイベント フィルター](/dm/dm-binlog-event-filter.md)は、ブロックおよび許可リストのフィルタリング ルールよりもきめ細かいフィルタリング機能です。詳細は[binlog イベント フィルタ](/dm/dm-binlog-event-filter.md)を参照してください。
+[Binlogイベント フィルター](/dm/dm-binlog-event-filter.md)は、ブロックおよび許可リストのフィルタリング ルールよりもきめ細かいフィルタリング機能です。詳細は[binlogイベント フィルタ](/dm/dm-binlog-event-filter.md)を参照してください。
 
 ### Binlogの位置 {#binlog-position}
 
-binlog 位置は、binlog ファイル内の binlog イベントのオフセット情報です。詳細は[MySQL `SHOW BINLOG EVENTS`](https://dev.mysql.com/doc/refman/8.0/en/show-binlog-events.html)と[MariaDB `SHOW BINLOG EVENTS`](https://mariadb.com/kb/en/library/show-binlog-events/)を参照してください。
+binlog位置は、 binlogファイル内のbinlogイベントのオフセット情報です。詳細は[MySQL `SHOW BINLOG EVENTS`](https://dev.mysql.com/doc/refman/8.0/en/show-binlog-events.html)と[MariaDB `SHOW BINLOG EVENTS`](https://mariadb.com/kb/en/library/show-binlog-events/)を参照してください。
 
 ### Binlogレプリケーション処理ユニット/同期ユニット {#binlog-replication-processing-unit-sync-unit}
 
-Binlogレプリケーション処理ユニットは、上流のバイナリ ログまたはローカル リレー ログを読み取り、これらのログを下流に移行するために DM-worker で使用される処理ユニットです。各サブタスクは、バイナリログ レプリケーション処理ユニットに対応します。現在のドキュメントでは、バイナリログ レプリケーション処理ユニットは同期処理ユニットとも呼ばれます。
+Binlogレプリケーション処理ユニットは、上流のバイナリ ログまたはローカル リレー ログを読み取り、これらのログを下流に移行するために DM-worker で使用される処理ユニットです。各サブタスクは、binlogレプリケーション処理ユニットに対応します。現在のドキュメントでは、binlogレプリケーション処理ユニットは同期処理ユニットとも呼ばれます。
 
 ### ブロック &amp; 許可テーブル リスト {#block-x26-allow-table-list}
 
@@ -40,9 +40,9 @@ Binlogレプリケーション処理ユニットは、上流のバイナリ ロ�
 チェックポイントは、完全なデータ インポートまたは増分レプリケーション タスクが一時停止されてから再開されるか、または停止されてから再開される位置を示します。
 
 -   フル インポート タスクでは、チェックポイントは、インポート中のファイル内の正常にインポートされたデータのオフセットおよびその他の情報に対応します。チェックポイントは、データ インポート タスクと同期して更新されます。
--   増分レプリケーションでは、チェックポイントは、正常に解析されてダウンストリームに移行される[バイナリログイベント](#binlog-event)の[ビンログ位置](#binlog-position)およびその他の情報に対応します。 DDL 操作が正常に移行された後、または最後の更新から 30 秒後に、チェックポイントが更新されます。
+-   増分レプリケーションでは、チェックポイントは、正常に解析されてダウンストリームに移行される[binlogイベント](#binlog-event)の[binlog位置](#binlog-position)およびその他の情報に対応します。 DDL 操作が正常に移行された後、または最後の更新から 30 秒後に、チェックポイントが更新されます。
 
-また、 [中継処理ユニット](#relay-processing-unit)に対応する`relay.meta`の情報は、チェックポイントと同様に機能します。中継処理部は上流から[バイナリログイベント](#binlog-event)を引っ張ってこのイベントを[中継ログ](#relay-log)に書き込み、 [ビンログ位置](#binlog-position)またはこのイベントに対応する GTID 情報を`relay.meta`に書き込みます。
+また、 [中継処理ユニット](#relay-processing-unit)に対応する`relay.meta`情報は、チェックポイントと同様に機能します。中継処理部は上流から[binlogイベント](#binlog-event)引っ張ってこのイベントを[中継ログ](#relay-log)に書き込み、 [binlog位置](#binlog-position)またはこのイベントに対応する GTID 情報を`relay.meta`に書き込みます。
 
 ## D {#d}
 
@@ -54,7 +54,7 @@ Binlogレプリケーション処理ユニットは、上流のバイナリ ロ�
 
 ### GTID {#gtid}
 
-GTID は、MySQL または MariaDB のグローバル トランザクション ID です。この機能を有効にすると、GTID 情報が binlog ファイルに記録されます。複数の GTID が GTID セットを形成します。詳細は[MySQL GTID のフォーマットとストレージ](https://dev.mysql.com/doc/refman/5.7/en/replication-gtids-concepts.html)と[MariaDB グローバルトランザクションID](https://mariadb.com/kb/en/library/gtid/)を参照してください。
+GTID は、MySQL または MariaDB のグローバル トランザクション ID です。この機能を有効にすると、GTID 情報がbinlogファイルに記録されます。複数の GTID が GTID セットを形成します。詳細は[MySQL GTID のフォーマットとストレージ](https://dev.mysql.com/doc/refman/5.7/en/replication-gtids-concepts.html)と[MariaDB グローバルトランザクションID](https://mariadb.com/kb/en/library/gtid/)を参照してください。
 
 ## L {#l}
 
@@ -66,7 +66,7 @@ GTID は、MySQL または MariaDB のグローバル トランザクション I
 
 ### 移行/移行 {#migrate-migration}
 
-TiDB データ移行ツールを使用して、アップストリーム データベースの**完全なデータ**をダウンストリーム データベースにコピーするプロセス。
+TiDB データ移行ツールを使用して、アップストリーム データベースの**完全なデータを**ダウンストリーム データベースにコピーするプロセス。
 
 「完全」と明確に言及し、「完全または増分」と明確に言及せず、「完全 + 増分」と明確に言及する場合は、複製/複製の代わりに移行/移行を使用します。
 
@@ -74,17 +74,17 @@ TiDB データ移行ツールを使用して、アップストリーム デー�
 
 ### 中継ログ {#relay-log}
 
-リレー ログは、DM-worker がアップストリームの MySQL または MariaDB から取得し、ローカル ディスクに保存する binlog ファイルを参照します。リレー ログの形式は標準の binlog ファイルで、互換性のあるバージョンの[mysqlbinlog](https://dev.mysql.com/doc/refman/8.0/en/mysqlbinlog.html)などのツールで解析できます。その役割は[MySQL リレー ログ](https://dev.mysql.com/doc/refman/5.7/en/replica-logs-relaylog.html)および[MariaDB リレー ログ](https://mariadb.com/kb/en/library/relay-log/)に似ています。
+リレー ログは、DM-worker がアップストリームの MySQL または MariaDB から取得し、ローカル ディスクに保存するbinlogファイルを参照します。リレー ログの形式は標準のbinlogファイルで、互換性のあるバージョンの[mysqlbinlog](https://dev.mysql.com/doc/refman/8.0/en/mysqlbinlog.html)などのツールで解析できます。その役割は[MySQL リレー ログ](https://dev.mysql.com/doc/refman/5.7/en/replica-logs-relaylog.html)および[MariaDB リレー ログ](https://mariadb.com/kb/en/library/relay-log/)に似ています。
 
 リレー ログのディレクトリ構造、初期移行ルール、TiDB DM でのデータ パージなどの詳細については、 [TiDB DMリレーログ](/dm/relay-log.md)を参照してください。
 
 ### 中継処理ユニット {#relay-processing-unit}
 
-リレー処理ユニットは、DM-worker でバイナリログ ファイルを上流からプルし、リレー ログにデータを書き込むために使用される処理ユニットです。各 DM-worker インスタンスには、リレー処理ユニットが 1 つだけあります。
+リレー処理ユニットは、DM-worker でbinlogファイルを上流からプルし、リレー ログにデータを書き込むために使用される処理ユニットです。各 DM-worker インスタンスには、リレー処理ユニットが 1 つだけあります。
 
 ### 複製/複製 {#replicate-replication}
 
-TiDB データ移行ツールを使用して、アップストリーム データベースの**増分データ**をダウンストリーム データベースにコピーするプロセス。
+TiDB データ移行ツールを使用して、アップストリーム データベースの**増分データを**ダウンストリーム データベースにコピーするプロセス。
 
 「増分」と明示する場合は、migrate/migration ではなく、replicate/replication を使用してください。
 
@@ -96,9 +96,9 @@ TiDB データ移行ツールを使用して、アップストリーム デー�
 
 このモードは、次のいずれかの状況で有効になります。
 
--   タスク構成ファイルの`safe-mode`パラメーターが`true`に設定されている場合、セーフ モードは有効なままになります。
+-   タスク構成ファイルの`safe-mode`パラメーターが`true`に設定されている場合、セーフ モードは有効なままです。
 -   シャード マージのシナリオでは、DDL ステートメントがすべてのシャード テーブルで複製される前に、セーフ モードが有効なままになります。
--   引数`--consistency none`がフル マイグレーション タスクのダンプ処理単位に設定されている場合、エクスポートの開始時の binlog の変更がエクスポートされたデータに影響するかどうかを判断できません。したがって、これらのバイナリログの変更の増分レプリケーションでは、セーフ モードが有効なままになります。
+-   引数`--consistency none`がフル マイグレーション タスクのダンプ処理単位に設定されている場合、エクスポートの開始時のbinlog の変更がエクスポートされたデータに影響するかどうかを判断できません。したがって、これらのbinlogの変更の増分レプリケーションでは、セーフ モードが有効なままになります。
 -   タスクがエラーによって一時停止され、再開された場合、一部のデータに対する操作が 2 回実行される可能性があります。
 
 ### シャード DDL {#shard-ddl}

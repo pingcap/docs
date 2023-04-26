@@ -12,7 +12,7 @@ title: TiDB 2.0.3 Release Notes
 -   `COM_CHANGE_USER`コマンドをサポート
 -   バイナリ プロトコルでの`TIME`型パラメータの使用をサポート
 -   `BETWEEN`式でクエリ条件のコスト見積もりを最適化する
--   `SHOW CREATE TABLE`の結果に`FOREIGN KEY`の情報を表示しない
+-   `SHOW CREATE TABLE`の結果に`FOREIGN KEY`情報を表示しない
 -   `LIMIT`句を使用したクエリのコスト見積もりを最適化する
 -   一意のインデックスとして`YEAR`の型に関する問題を修正します。
 -   ユニークインデックスのない条件での`ON DUPLICATE KEY UPDATE`に関する問題を修正
@@ -21,7 +21,7 @@ title: TiDB 2.0.3 Release Notes
 -   `ADMIN CHECK TABLE`の誤警報を修正
 -   特定の式パラメーターの下で`MAX` / `MIN`のpanicの問題を修正します。
 -   特殊な条件で`JOIN`の結果がnullになる問題を修正
--   Range を構築およびクエリするときの`IN`の式の問題を修正します。
+-   Range を構築およびクエリするときの`IN`式の問題を修正します。
 -   クエリに`Prepare`を使用し、 `Plan Cache`が有効になっている場合の範囲計算の問題を修正します。
 -   スキーマ情報が異常時に頻繁にロードされる問題を修正
 

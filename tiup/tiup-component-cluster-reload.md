@@ -46,7 +46,7 @@ tiup cluster reload <cluster-name> [flags]
 
 > **ノート：**
 >
-> -   `-R, --role`のオプションを同時に指定した場合、 `-N, --node`と`-R, --role`の両方の指定に一致するサービスノードのみが再起動されます。
+> -   `-R, --role`オプションを同時に指定した場合、 `-N, --node`と`-R, --role`の両方の指定に一致するサービスノードのみが再起動されます。
 > -   オプション`--skip-restart`を指定した場合、オプション`-N, --node`は無効です。
 
 ### -R, --role {#r-role}
@@ -57,7 +57,7 @@ tiup cluster reload <cluster-name> [flags]
 
 > **ノート：**
 >
-> 1.  `-N, --node`のオプションを同時に指定した場合、 `-N, --node`と`-R, --role`の両方の指定に一致するサービスノードのみが再起動されます。
+> 1.  `-N, --node`オプションを同時に指定した場合、 `-N, --node`と`-R, --role`の両方の指定に一致するサービスノードのみが再起動されます。
 > 2.  オプション`--skip-restart`を指定した場合、オプション`-R, --role`は無効です。
 
 ### --skip-restart {#skip-restart}

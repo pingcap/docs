@@ -5,7 +5,7 @@ summary: Learn to use Reparo.
 
 # Reparoユーザーガイド {#reparo-user-guide}
 
-Reparoは、増分データを回復するために使用される TiDB Binlogツールです。増分データをバックアップするには、TiDB DrainerのBinlogを使用して、binlog データを protobuf 形式でファイルに出力できます。増分データを復元するには、Reparo を使用してファイル内のReparoデータを解析し、binlog を TiDB/MySQL に適用します。
+Reparo は、増分データを回復するために使用される TiDB Binlogツールです。増分データをバックアップするには、TiDB BinlogのDrainer を使用して、 binlogデータを protobuf 形式でファイルに出力できます。増分データを復元するには、 Reparoを使用してファイル内のbinlogデータを解析し、 binlog をTiDB/MySQL に適用します。
 
 Reparoインストール パッケージ ( `reparo` ) は、 TiDB Toolkitに含まれています。 TiDB Toolkitをダウンロードするには、 [TiDB ツールをダウンロード](/download-ecosystem-tools.md)を参照してください。
 
@@ -121,12 +121,12 @@ password = ""
 
 > **ノート：**
 >
-> -   `data-dir`は、Drainer が出力するDrainerファイルのディレクトリを指定します。
-> -   `start-datatime`と`start-tso`はどちらもリカバリを開始する時点を指定するために使用されますが、時刻の形式が異なります。設定されていない場合、リカバリ プロセスはデフォルトで最も古い binlog ファイルから開始されます。
-> -   `stop-datetime`と`stop-tso`はどちらもリカバリを終了する時点を指定するために使用されますが、時刻の形式が異なります。それらが設定されていない場合、回復プロセスはデフォルトで最後の binlog ファイルで終了します。
-> -   `dest-type`は宛先タイプを指定します。その値は「mysql」および「print」です。
+> -   `data-dir` Drainer が出力するbinlogファイルのディレクトリを指定します。
+> -   `start-datatime`と`start-tso`はどちらもリカバリを開始する時点を指定するために使用されますが、時刻の形式が異なります。設定されていない場合、リカバリ プロセスはデフォルトで最も古いbinlogファイルから開始されます。
+> -   `stop-datetime`と`stop-tso`はどちらもリカバリを終了する時点を指定するために使用されますが、時刻の形式が異なります。それらが設定されていない場合、回復プロセスはデフォルトで最後のbinlogファイルで終了します。
+> -   `dest-type`宛先タイプを指定します。その値は「mysql」および「print」です。
 >
 >     -   `mysql`に設定すると、MySQL プロトコルを使用するか、MySQL プロトコルと互換性のある MySQL または TiDB にデータを復元できます。この場合、構成情報の`[dest-db]`にデータベース情報を指定する必要があります。
->     -   `print`に設定すると、binlog 情報のみが出力されます。これは通常、バイナリログ情報のデバッグと確認に使用されます。この場合、 `[dest-db]`を指定する必要はありません。
-> -   `replicate-do-db`は、回復用のデータベースを指定します。設定されていない場合は、すべてのデータベースが回復されます。
-> -   `replicate-do-table`はリカバリ用のテーブルを指定します。設定されていない場合は、すべてのテーブルが回復されます。
+>     -   `print`に設定すると、 binlog情報のみが出力されます。これは通常、binlog情報のデバッグと確認に使用されます。この場合、 `[dest-db]`を指定する必要はありません。
+> -   `replicate-do-db`回復用のデータベースを指定します。設定されていない場合は、すべてのデータベースが回復されます。
+> -   `replicate-do-table`リカバリ用のテーブルを指定します。設定されていない場合は、すべてのテーブルが回復されます。

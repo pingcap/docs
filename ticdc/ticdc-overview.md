@@ -17,6 +17,7 @@ summary: Learn what TiCDC is, what features TiCDC provides, and how to install a
 ### 主な機能 {#key-capabilities}
 
 -   2 番目のレベルの RPO と分レベルの RTO を使用して、1 つの TiDB クラスターから別の TiDB クラスターに増分データをレプリケートします。
+-   TiCDC を使用してマルチアクティブ TiDB ソリューションを作成できることに基づいて、TiDB クラスター間で双方向にデータを複製します。
 -   TiDB クラスターから MySQL データベース (またはその他の MySQL 互換データベース) に、低レイテンシーで増分データをレプリケートします。
 -   TiDB クラスターから Kafka クラスターに増分データを複製します。推奨されるデータ形式には[Canal-JSON](/ticdc/ticdc-canal-json.md)と[アブロ](/ticdc/ticdc-avro-protocol.md)が含まれます。
 -   データベース、テーブル、DML、および DDL をフィルタリングする機能を使用してテーブルをレプリケートします。
@@ -25,14 +26,14 @@ summary: Learn what TiCDC is, what features TiCDC provides, and how to install a
 
 ### 複製順序 {#replication-order}
 
--   すべての DDL または DML ステートメントについて、TiCDC はそれら**を少なくとも 1 回**出力します。
+-   すべての DDL または DML ステートメントについて、TiCDC はそれらを**少なくとも 1 回**出力します。
 -   TiKV または TiCDC クラスターで障害が発生すると、TiCDC は同じ DDL/DML ステートメントを繰り返し送信する場合があります。重複する DDL/DML ステートメントの場合:
 
     -   MySQL シンクは、DDL ステートメントを繰り返し実行できます。 `truncate table`など、ダウンストリームで繰り返し実行できる DDL ステートメントの場合、ステートメントは正常に実行されます。 `create table`のように繰り返し実行できないものについては、実行は失敗し、TiCDC はエラーを無視してレプリケーションを続行します。
     -   カフカシンク
         -   Kafka シンクは、データ分散のためのさまざまな戦略を提供します。テーブル、主キー、またはタイムスタンプに基づいて、さまざまな Kafka パーティションにデータを分散できます。これにより、行の更新されたデータが同じパーティションに順番に送信されます。
         -   これらのすべての配布戦略は、解決済み TS メッセージをすべてのトピックとパーティションに定期的に送信します。これは、解決済み TS より前のすべてのメッセージがトピックとパーティションに送信されたことを示します。 Kafka コンシューマーは、解決済み TS を使用して、受信したメッセージを並べ替えることができます。
-        -   Kafka シンクは重複したメッセージを送信することがありますが、これらの重複したメッセージは`Resolved Ts`の制約には影響しません。たとえば、変更フィードが一時停止されてから再開された場合、Kafka シンクは`msg1` 、 `msg2` 、 `msg3` 、 `msg2` 、および`msg3`を順番に送信する可能性があります。 Kafka コンシューマーからの重複メッセージをフィルタリングできます。
+        -   Kafka シンクは重複したメッセージを送信することがありますが、これらの重複したメッセージは`Resolved Ts`の制約には影響しません。たとえば、変更フィードが一時停止されてから再開された場合、Kafka シンクは`msg1` 、 `msg2` 、 `msg3` 、 `msg2` 、および`msg3`順番に送信する可能性があります。 Kafka コンシューマーからの重複メッセージをフィルタリングできます。
 
 ### レプリケーションの一貫性 {#replication-consistency}
 
@@ -40,7 +41,7 @@ summary: Learn what TiCDC is, what features TiCDC provides, and how to install a
 
     -   TiCDC は REDO ログを有効にして、データ レプリケーションの結果整合性を保証します。
 
-    -   TiCDC は、単一行の更新の順序がアップストリームの順序と一致することを**保証**します。
+    -   TiCDC は、単一行の更新の順序がアップストリームの順序と一致することを**保証します**。
 
     -   TiCDC は、ダウンストリーム トランザクションの実行順序がアップストリーム トランザクションの実行順序と同じであることを**保証しません**。
 
@@ -70,9 +71,9 @@ TiCDC のアーキテクチャを次の図に示します。
 
 ## ベストプラクティス {#best-practices}
 
--   TiCDC を使用して 2 つの TiDB クラスター間でデータをレプリケートし、クラスター間のネットワークレイテンシー時間が 100 ミリ秒を超える場合は、下流の TiDB クラスターが配置されているリージョン (IDC) に TiCDC をデプロイすることをお勧めします。
+-   TiCDC を使用して 2 つの TiDB クラスター間でデータをレプリケートし、クラスター間のネットワークレイテンシーが 100 ミリ秒を超える場合は、下流の TiDB クラスターが配置されているリージョン (IDC) に TiCDC をデプロイすることをお勧めします。
 
--   TiCDC は、少なくとも 1 つの**有効なインデックス**を持つテーブルのみを複製します。<strong>有効なインデックス</strong>は次のように定義されます。
+-   TiCDC は、少なくとも 1 つの**有効なインデックスを**持つテーブルのみを複製します。<strong>有効なインデックスは</strong>次のように定義されます。
 
     -   主キー ( `PRIMARY KEY` ) は有効なインデックスです。
     -   一意のインデックス ( `UNIQUE INDEX` ) は、インデックスのすべての列が null 非許容として明示的に定義され ( `NOT NULL` )、インデックスに仮想生成列 ( `VIRTUAL GENERATED COLUMNS` ) がない場合に有効です。
@@ -83,17 +84,13 @@ TiCDC のアーキテクチャを次の図に示します。
 
 > **ノート：**
 >
-> v4.0.8 以降、TiCDC は、タスク構成を変更することにより**、有効なインデックスなしで**テーブルを複製することをサポートします。ただし、これにより、データの一貫性の保証がある程度損なわれます。詳細については、 [有効なインデックスのないテーブルをレプリケートする](/ticdc/ticdc-manage-changefeed.md#replicate-tables-without-a-valid-index)を参照してください。
+> v4.0.8 以降、TiCDC は、タスク構成を変更することにより、**有効なインデックスなしで**テーブルを複製することをサポートします。ただし、これにより、データの一貫性の保証がある程度損なわれます。詳細については、 [有効なインデックスのないテーブルをレプリケートする](/ticdc/ticdc-manage-changefeed.md#replicate-tables-without-a-valid-index)を参照してください。
 
 ### サポートされていないシナリオ {#unsupported-scenarios}
 
 現在、次のシナリオはサポートされていません。
 
 -   RawKV のみを使用する TiKV クラスター。
--   TiDB の[DDL 操作`CREATE SEQUENCE`](/sql-statements/sql-statement-create-sequence.md)と[SEQUENCE関数](/sql-statements/sql-statement-create-sequence.md#sequence-function) 。アップストリームの TiDB が`SEQUENCE`を使用する場合、TiCDC はアップストリームで実行された`SEQUENCE`の DDL 操作/関数を無視します。ただし、 `SEQUENCE`の関数を使用する DML 操作は正しくレプリケートできます。
+-   TiDB の[DDL 操作`CREATE SEQUENCE`](/sql-statements/sql-statement-create-sequence.md)と[SEQUENCE関数](/sql-statements/sql-statement-create-sequence.md#sequence-function) 。アップストリームの TiDB が`SEQUENCE`使用する場合、TiCDC はアップストリームで実行された`SEQUENCE` DDL 操作/関数を無視します。ただし、 `SEQUENCE`関数を使用する DML 操作は正しくレプリケートできます。
 
 TiCDC は、アップストリームでの大規模なトランザクションのシナリオに対して部分的なサポートのみを提供します。詳細については、 [TiCDC は大規模なトランザクションの複製をサポートしていますか?リスクはありますか？](/ticdc/ticdc-faq.md#does-ticdc-support-replicating-large-transactions-is-there-any-risk)を参照してください。
-
-> **ノート：**
->
-> v5.3.0 以降、TiCDC は循環レプリケーション機能をサポートしなくなりました。

@@ -34,7 +34,7 @@ summary: Learn the non-transactional DML statements in TiDB. At the expense of a
 
 非トランザクション DML ステートメントは、特定のシナリオで大規模なトランザクションのサイズ制限を回避するために使用されます。 1 つのステートメントを使用して、トランザクションを手動で分割する必要があるタスクを完了し、実行効率を高め、リソース消費を抑えます。
 
-たとえば、期限切れのデータを削除する場合、アプリケーションが期限切れのデータにアクセスしないようにする場合は、非トランザクション DML ステートメントを使用して`DELETE`のパフォーマンスを向上させることができます。
+たとえば、期限切れのデータを削除する場合、アプリケーションが期限切れのデータにアクセスしないようにする場合は、非トランザクション DML ステートメントを使用して`DELETE`パフォーマンスを向上させることができます。
 
 ## 前提条件 {#prerequisites}
 
@@ -51,12 +51,12 @@ summary: Learn the non-transactional DML statements in TiDB. At the expense of a
     -   非トランザクション`INSERT INTO ... SELECT`ステートメント内で同じテーブルから選択して変更する場合は、シャード列を変更しないでください。そうしないと、複数のバッチが同じ行を読み取り、データを複数回挿入する可能性があります。
         -   `BATCH ON test.t.id LIMIT 10000 INSERT INTO t SELECT id+1, value FROM t;`の使用はお勧めしません。
         -   `BATCH ON test.t.id LIMIT 10000 INSERT INTO t SELECT id, value FROM t;`を使用することをお勧めします。
-        -   シャード列`id`に`AUTO_INCREMENT`属性がある場合は、 `BATCH ON test.t.id LIMIT 10000 INSERT INTO t(value) SELECT value FROM t;`を使用することをお勧めします。
+        -   シャード列`id`に`AUTO_INCREMENT`属性がある場合は、 `BATCH ON test.t.id LIMIT 10000 INSERT INTO t(value) SELECT value FROM t;`使用することをお勧めします。
     -   非トランザクション`UPDATE` 、 `INSERT ... ON DUPLICATE KEY UPDATE` 、または`REPLACE INTO`ステートメントでシャード列を更新しないようにします。
         -   たとえば、非トランザクション`UPDATE`ステートメントの場合、分割 SQL ステートメントは順番に実行されます。前のバッチの変更は、前のバッチがコミットされた後に次のバッチによって読み取られるため、同じデータ行が複数回変更されます。
         -   これらのステートメントは`BATCH ON test.t.id LIMIT 10000 UPDATE t SET test.t.id = test.t.id-1;`をサポートしていません。
         -   `BATCH ON test.t.id LIMIT 1 INSERT INTO t SELECT id+1, value FROM t ON DUPLICATE KEY UPDATE id = id + 1;`の使用はお勧めしません。
-    -   シャード列は結合キーとして使用しないでください。たとえば、次の例では、シャード列`test.t.id`を結合キーとして使用します。これにより、非トランザクション`UPDATE`ステートメントが同じ行を複数回変更します。
+    -   シャード列は結合キーとして使用しないでください。たとえば、次の例では、シャード列`test.t.id`結合キーとして使用します。これにより、非トランザクション`UPDATE`ステートメントが同じ行を複数回変更します。
 
         ```sql
         CREATE TABLE t(id int, v int, key(id));
@@ -146,7 +146,7 @@ CREATE TABLE t2(id int, v int, key(id));
 INSERT INTO t2 VALUES (1,1), (3,3), (5,5);
 ```
 
-次に、テーブル`t`とテーブル`t2`を結合して、テーブル`t2`のデータを更新します。完全なデータベース名、テーブル名、列名 ( `test.t.id` ) と共にシャード列を指定する必要があることに注意してください。
+次に、テーブル`t`と`t2`を結合して、テーブル`t2`のデータを更新します。完全なデータベース名、テーブル名、列名 ( `test.t.id` ) と共にシャード列を指定する必要があることに注意してください。
 
 ```sql
 BATCH ON test.t._tidb_rowid LIMIT 1 UPDATE t JOIN t2 ON t.id = t2.id SET t2.id = t2.id+1;
@@ -273,10 +273,10 @@ BATCH ON id LIMIT 2 DELETE /*+ USE_INDEX(t)*/ FROM t WHERE v < 6;
 
 非トランザクション DML ステートメントは、シャード列であるデータ バッチ処理の基礎として列を使用します。実行効率を上げるために、インデックスを使用するにはシャード列が必要です。異なるインデックスとシャード列によってもたらされる実行効率は、何十倍も異なる場合があります。シャード列を選択するときは、次の提案を考慮してください。
 
--   アプリケーションデータの分布がわかっている場合は、 `WHERE`の条件に従って、バッチ処理後にデータをより狭い範囲で分割する列を選択します。
+-   アプリケーションデータの分布がわかっている場合は、 `WHERE`条件に従って、バッチ処理後にデータをより狭い範囲で分割する列を選択します。
     -   理想的には、条件`WHERE`でシャード列のインデックスを利用して、バッチごとにスキャンするデータの量を減らすことができます。たとえば、各トランザクションの開始時刻と終了時刻を記録するトランザクション テーブルがあり、終了時刻が 1 か月より前のすべてのトランザクション レコードを削除したいとします。トランザクションの開始時間にインデックスがあり、トランザクションの開始時間と終了時間が比較的近い場合は、開始時間列をシャード列として選択できます。
     -   理想的とは言えないケースでは、シャード列のデータ分散は`WHERE`条件から完全に独立しており、シャード列のインデックスを使用してデータ スキャンの範囲を縮小することはできません。
--   クラスター化インデックスが存在する場合、実行効率が高くなるように、主キー ( `INT`主キーと`_tidb_rowid`を含む) をシャード列として使用することをお勧めします。
+-   クラスター化インデックスが存在する場合、実行効率が高くなるように、主キー ( `INT`主キーと`_tidb_rowid`含む) をシャード列として使用することをお勧めします。
 -   重複値が少ない列を選択します。
 
 シャード列を指定しないことも選択できます。次に、TiDB はデフォルトで`handle`の最初の列をシャード列として使用します。ただし、クラスター化インデックスの主キーの最初の列が、非トランザクション DML ステートメント ( `ENUM` 、 `BIT` 、 `SET` 、 `JSON` ) でサポートされていないデータ型である場合、TiDB はエラーを報告します。アプリケーションのニーズに応じて、適切なシャード列を選択できます。
@@ -291,7 +291,7 @@ BATCH ON id LIMIT 2 DELETE /*+ USE_INDEX(t)*/ FROM t WHERE v < 6;
 
 以下は、非トランザクション DML ステートメントに対する厳しい制限です。これらの制限が満たされていない場合、TiDB はエラーを報告します。
 
--   DML ステートメントに`ORDER BY`つまたは`LIMIT`の句を含めることはできません。
+-   DML ステートメントに`ORDER BY`または`LIMIT`の句を含めることはできません。
 -   サブクエリまたはセット操作はサポートされていません。
 -   シャード列にはインデックスを付ける必要があります。インデックスは、単一列のインデックスにすることも、結合インデックスの最初の列にすることもできます。
 -   [`autocommit`](/system-variables.md#autocommit)モードで使用する必要があります。
@@ -343,19 +343,29 @@ batch-dml は、DML ステートメントの実行中にトランザクション
 
 さらに、他の同時書き込みが発生すると、各バッチで処理される行数が、指定されたバッチ サイズと異なる場合があります。
 
-### <code>Failed to restore the delete statement, probably because of unsupported type of the shard column</code>実行中にエラーが発生する {#the-code-failed-to-restore-the-delete-statement-probably-because-of-unsupported-type-of-the-shard-column-code-error-occurs-during-execution}
+### <code>Failed to restore the delete statement, probably because of unsupported type of the shard column</code>ました 実行中にエラーが発生する {#the-code-failed-to-restore-the-delete-statement-probably-because-of-unsupported-type-of-the-shard-column-code-error-occurs-during-execution}
 
 シャード列は`ENUM` 、 `BIT` 、 `SET` 、 `JSON`タイプをサポートしていません。新しいシャード列を指定してみてください。整数型または文字列型の列を使用することをお勧めします。
 
-選択したシャード列がこれらのサポートされていないタイプのいずれでもないときにエラーが発生した場合は、PingCAP テクニカル サポートに連絡してください。
+<CustomContent platform="tidb">
 
-### 非トランザクション<code>DELETE</code>には、通常の<code>DELETE</code>と同等ではない「例外的な」動作があります。 {#non-transactional-code-delete-code-has-exceptional-behavior-that-is-not-equivalent-to-ordinary-code-delete-code}
+選択したシャード列がこれらのサポートされていないタイプのいずれでもないときにエラーが発生した場合は、PingCAP またはコミュニティから[支持を得ます](/support.md) .
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+選択したシャード列がこれらのサポートされていないタイプのいずれでもないときにエラーが発生した場合は、 [TiDB Cloudサポートに連絡する](/tidb-cloud/tidb-cloud-support.md) .
+
+</CustomContent>
+
+### 非トランザクション<code>DELETE</code>は、通常の<code>DELETE</code>と同等ではない「例外的な」動作があります。 {#non-transactional-code-delete-code-has-exceptional-behavior-that-is-not-equivalent-to-ordinary-code-delete-code}
 
 非トランザクション DML ステートメントは、この DML ステートメントの元の形式と同等ではありません。これには、次の理由が考えられます。
 
 -   他の同時書き込みがあります。
 -   非トランザクション DML ステートメントは、ステートメント自体が読み取る値を変更します。
--   各バッチで実行される SQL ステートメントは、 `WHERE`の条件が変更されるため、実行計画と式の計算順序が異なる可能性があります。したがって、実行結果は元のステートメントとは異なる場合があります。
+-   各バッチで実行される SQL ステートメントは、 `WHERE`条件が変更されるため、実行計画と式の計算順序が異なる可能性があります。したがって、実行結果は元のステートメントとは異なる場合があります。
 -   DML ステートメントに非決定論的操作が含まれています。
 
 ## MySQL の互換性 {#mysql-compatibility}

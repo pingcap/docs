@@ -22,12 +22,12 @@ br backup full --pd "${PD_IP}:2379" \
 
 -   `backup` : `br`のサブコマンド。
 -   `full` : `br backup`のサブコマンド。
--   `-s` (または`--storage` ): バックアップ ファイルが格納されるパスを指定するオプション。 `"s3://backup-data/snapshot-202209081330/"`は`-s`のパラメータです。
--   `--pd` : PD サービス アドレスを指定するオプション。 `"${PD_IP}:2379"`は`--pd`のパラメータです。
+-   `-s` (または`--storage` ): バックアップ ファイルが格納されるパスを指定するオプション。 `"s3://backup-data/snapshot-202209081330/"` `-s`のパラメータです。
+-   `--pd` : PD サービス アドレスを指定するオプション。 `"${PD_IP}:2379"` `--pd`のパラメータです。
 
 ### コマンドとサブコマンド {#commands-and-sub-commands}
 
-`br`のコマンドは、サブコマンドの複数のレイヤーで構成されます。現在、br コマンドライン ツールには次のサブコマンドがあります。
+`br`コマンドは、サブコマンドの複数のレイヤーで構成されます。現在、br コマンドライン ツールには次のサブコマンドがあります。
 
 -   `br backup` : TiDB クラスターのデータをバックアップするために使用されます。
 -   `br log` : ログ バックアップ タスクの開始と管理に使用されます。
@@ -46,7 +46,7 @@ br backup full --pd "${PD_IP}:2379" \
 -   `--ca` : 信頼できる CA 証明書へのパスを PEM 形式で指定します。
 -   `--cert` : SSL 証明書へのパスを PEM 形式で指定します。
 -   `--key` : SSL 証明書キーへのパスを PEM 形式で指定します。
--   `--status-addr` : `br`が Prometheus に統計を提供するためのリスニング アドレスを指定します。
+-   `--status-addr` : `br` Prometheus に統計を提供するためのリスニング アドレスを指定します。
 
 ## フルバックアップのコマンド {#commands-of-full-backup}
 
@@ -67,7 +67,7 @@ br backup full --pd "${PD_IP}:2379" \
 -   [ログ バックアップ タスクの一時停止と再開](/br/br-pitr-manual.md#pause-and-resume-a-backup-task)
 -   [ログ バックアップ タスクを停止して再開する](/br/br-pitr-manual.md#stop-and-restart-a-backup-task)
 -   [バックアップ データのクリーンアップ](/br/br-pitr-manual.md#clean-up-backup-data)
--   [バックアップ メタデータをビューする](/br/br-pitr-manual.md#view-the-backup-metadata)
+-   [バックアップ メタデータをビュー](/br/br-pitr-manual.md#view-the-backup-metadata)
 
 ## バックアップデータを復元するコマンド {#commands-of-restoring-backup-data}
 

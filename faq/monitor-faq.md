@@ -24,7 +24,7 @@ TiDB の監視システムは、Prometheus と Grafana で構成されていま�
 
 ## リージョンヘルス モニター {#region-health-monitor}
 
-TiDB 2.0 では、リージョンの正常性は PD メトリック監視ページで監視されます。このページでは、 `Region Health`の監視項目にすべてのリージョンレプリカ ステータスの統計が表示されます。 `miss`はレプリカが不足していることを意味し、 `extra`は余分なレプリカが存在することを意味します。また、 `Region Health`は`label`による分離レベルも示しています。 `level-1`は、リージョンのレプリカが最初の`label`レベルで物理的に分離されていることを意味します。 `location label`が設定されていない場合、すべてのリージョンは`level-0`にあります。
+TiDB 2.0 では、リージョンの正常性は PD メトリック監視ページで監視されます。このページでは、 `Region Health`監視項目にすべてのリージョンレプリカ ステータスの統計が表示されます。 `miss`レプリカが不足していることを意味し、 `extra`余分なレプリカが存在することを意味します。また、 `Region Health` `label`による分離レベルも示しています。 `level-1`リージョンのレプリカが最初の`label`レベルで物理的に分離されていることを意味します。 `location label`が設定されていない場合、すべてのリージョンは`level-0`にあります。
 
 ## Statement Count モニターでの<code>selectsimplefull</code>の意味は何ですか? {#what-is-the-meaning-of-code-selectsimplefull-code-in-statement-count-monitor}
 
@@ -32,6 +32,6 @@ TiDB 2.0 では、リージョンの正常性は PD メトリック監視ペー�
 
 ## モニターにおける<code>QPS</code>と<code>Statement OPS</code>の違いは何ですか? {#what-is-the-difference-between-code-qps-code-and-code-statement-ops-code-in-the-monitor}
 
-`QPS`統計は、 `use database` 、 `load data` 、 `begin` 、 `commit` 、 `set` 、 `show` 、 `insert` 、および`select`を含むすべての SQL ステートメントに関するものです。
+`QPS`統計は`use database` 、 `load data` 、 `begin` 、 `commit` 、 `set` 、 `show` 、 `insert`および`select`を含むすべての SQL ステートメントに関するものです。
 
-`Statement OPS`の統計は、 `select` 、 `update` 、および`insert`を含むアプリケーション関連の SQL ステートメントのみに関するものであるため、 `Statement OPS`の統計はアプリケーションとよりよく一致します。
+`Statement OPS`統計は、 `select` 、 `update` 、および`insert`を含むアプリケーション関連の SQL ステートメントのみに関するものであるため、 `Statement OPS`統計はアプリケーションとよりよく一致します。

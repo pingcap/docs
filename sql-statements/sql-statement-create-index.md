@@ -147,7 +147,7 @@ DROP INDEX idx1 ON t1;
 json_array, json_array_append, json_array_insert, json_contains, json_contains_path, json_depth, json_extract, json_insert, json_keys, json_length, json_merge_patch, json_merge_preserve, json_object, json_pretty, json_quote, json_remove, json_replace, json_search, json_set, json_storage_size, json_type, json_unquote, json_valid, lower, md5, reverse, tidb_shard, upper, vitess_hash
 ```
 
-上記のリストに含まれていない関数については、それらの関数は完全にはテストされておらず、本番環境には推奨されません。これは実験的ものと見なすことができます。演算子、 `cast` 、および`case when`などの他の式も実験的ものと見なされ、本番環境では推奨されません。
+上記のリストに含まれていない関数については、それらの関数は完全にはテストされておらず、本番環境には推奨されません。これは実験的ものと見なすことができます。演算子、 `cast` 、および`case when`などの他の式も実験的ものと見なされ、本番では推奨されません。
 
 <CustomContent platform="tidb">
 
@@ -223,7 +223,7 @@ SELECT max(lower(col1)) FROM t;
 SELECT min(col1) FROM t GROUP BY lower(col1);
 ```
 
-式インデックスに対応する式を確認するには、 `show index`を実行するか、システム テーブル`information_schema.tidb_indexes`およびテーブル`information_schema.STATISTICS`を確認します。出力の`Expression`列は、対応する式を示します。非式インデックスの場合、列には`NULL`が表示されます。
+式インデックスに対応する式を確認するには、 `show index`実行するか、システム テーブル`information_schema.tidb_indexes`およびテーブル`information_schema.STATISTICS`を確認します。出力の`Expression`列は、対応する式を示します。非式インデックスの場合、列には`NULL`が表示されます。
 
 行が挿入または更新されるたびに式の値を計算する必要があるため、式インデックスを維持するコストは他のインデックスを維持するコストよりも高くなります。式の値はすでにインデックスに格納されているため、オプティマイザが式のインデックスを選択するときに、この値を再計算する必要はありません。
 
@@ -244,7 +244,7 @@ CREATE UNIQUE INDEX c1 ON t1 (c1) INVISIBLE;
 
 ## 関連するシステム変数 {#associated-system-variables}
 
-`CREATE INDEX`ステートメントに関連付けられているシステム変数は、 `tidb_ddl_enable_fast_reorg` 、 `tidb_ddl_reorg_worker_cnt` 、 `tidb_ddl_reorg_batch_size` 、 `tidb_enable_auto_increment_in_generated` 、および`tidb_ddl_reorg_priority`です。詳細は[システム変数](/system-variables.md#tidb_ddl_reorg_worker_cnt)を参照。
+`CREATE INDEX`ステートメントに関連付けられているシステム変数は`tidb_ddl_enable_fast_reorg` 、 `tidb_ddl_reorg_worker_cnt` 、 `tidb_ddl_reorg_batch_size` 、 `tidb_enable_auto_increment_in_generated` 、および`tidb_ddl_reorg_priority`です。詳細は[システム変数](/system-variables.md#tidb_ddl_reorg_worker_cnt)を参照。
 
 ## MySQL の互換性 {#mysql-compatibility}
 

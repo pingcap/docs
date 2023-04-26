@@ -13,7 +13,7 @@ TiDB は、 [悲観的](/pessimistic-transaction.md)または[楽観的](/optimi
 
 > **ノート：**
 >
-> [`tidb_disable_txn_auto_retry`](/system-variables.md#tidb_disable_txn_auto_retry)と[`tidb_retry_limit`](/system-variables.md#tidb_retry_limit)の変数は楽観的トランザクションにのみ適用され、悲観的なトランザクションには適用されません。
+> [`tidb_disable_txn_auto_retry`](/system-variables.md#tidb_disable_txn_auto_retry)と[`tidb_retry_limit`](/system-variables.md#tidb_retry_limit)変数は楽観的トランザクションにのみ適用され、悲観的トランザクションには適用されません。
 
 ## 一般的なステートメント {#common-statements}
 
@@ -51,7 +51,7 @@ START TRANSACTION WITH CAUSAL CONSISTENCY ONLY;
 
 > **ノート：**
 >
-> MySQL とは異なり、TiDB は上記のステートメントを実行した後に現在のデータベースのスナップショットを作成します。 MySQL の`BEGIN`と`START TRANSACTION`は、トランザクションの開始後に InnoDB からデータを読み取る最初の`SELECT`ステートメント ( `SELECT FOR UPDATE`ではない) を実行した後にスナップショットを取得します。 `START TRANSACTION WITH CONSISTENT SNAPSHOT`は、ステートメントの実行中にスナップショットを取得します。その結果、 `BEGIN` 、 `START TRANSACTION` 、および`START TRANSACTION WITH CONSISTENT SNAPSHOT`は MySQL の`START TRANSACTION WITH CONSISTENT SNAPSHOT`に相当します。
+> MySQL とは異なり、TiDB は上記のステートメントを実行した後に現在のデータベースのスナップショットを取得します。 MySQL の`BEGIN`と`START TRANSACTION` 、トランザクションの開始後に InnoDB からデータを読み取る最初の`SELECT`ステートメント ( `SELECT FOR UPDATE`ではない) を実行した後にスナップショットを取得します。 `START TRANSACTION WITH CONSISTENT SNAPSHOT`ステートメントの実行中にスナップショットを取得します。その結果、 `BEGIN` 、 `START TRANSACTION` 、および`START TRANSACTION WITH CONSISTENT SNAPSHOT` MySQL の`START TRANSACTION WITH CONSISTENT SNAPSHOT`に相当します。
 
 ### トランザクションのコミット {#committing-a-transaction}
 
@@ -288,9 +288,9 @@ mysql> SELECT * FROM test;
 
 ## トランザクションサイズ制限 {#transaction-size-limit}
 
-基盤となるストレージ エンジンの制限により、TiDB では 1 行が 6 MB を超えないようにする必要があります。行のすべての列は、データ型に従ってバイトに変換され、合計されて 1 つの行のサイズが推定されます。
+基盤となるstorageエンジンの制限により、TiDB では 1 行が 6 MB を超えないようにする必要があります。行のすべての列は、データ型に従ってバイトに変換され、合計されて 1 つの行のサイズが推定されます。
 
-TiDB は楽観的的トランザクションと悲観的トランザクションの両方をサポートしており、楽観的トランザクションは悲観的トランザクションの基礎です。楽観的トランザクションは最初に変更をプライベートメモリにキャッシュするため、TiDB は 1 つのトランザクションのサイズを制限します。
+TiDB は楽観的トランザクションと悲観的トランザクションの両方をサポートしており、楽観的トランザクションは悲観的トランザクションの基礎です。楽観的トランザクションは最初に変更をプライベートメモリにキャッシュするため、TiDB は 1 つのトランザクションのサイズを制限します。
 
 デフォルトでは、TiDB は 1 つのトランザクションの合計サイズを 100 MB 以下に設定します。このデフォルト値は、構成ファイルの`txn-total-size-limit`で変更できます。 `txn-total-size-limit`の最大値は 1 TB です。個々のトランザクション サイズの制限は、サーバーで使用可能な残りのメモリのサイズにも依存します。これは、トランザクションが実行されると、TiDB プロセスのメモリ使用量がトランザクション サイズと比較して、最大でトランザクション サイズの 2 ～ 3 倍以上になるためです。
 
@@ -298,9 +298,9 @@ TiDB は以前、1 つのトランザクションのキーと値のペアの総�
 
 > **ノート：**
 >
-> 通常、TiDB Binlogを有効にしてデータをダウンストリームに複製します。一部のシナリオでは、Kafka などのメッセージ ミドルウェアを使用して、ダウンストリームにレプリケートされるバイナリログを使用します。
+> 通常、TiDB Binlog を有効にしてデータをダウンストリームに複製します。一部のシナリオでは、Kafka などのメッセージ ミドルウェアを使用して、ダウンストリームにレプリケートされるバイナリログを使用します。
 >
-> Kafka を例にとると、Kafka の単一メッセージ処理能力の上限は 1 GB です。したがって、 `txn-total-size-limit`が 1 GB を超える値に設定されている場合、TiDB でトランザクションが正常に実行されても、下流の Kafka がエラーを報告することがあります。このような状況を回避するには、最終消費者の制限に応じて`txn-total-size-limit`の実際の値を決定する必要があります。たとえば、Kafka がダウンストリームで使用される場合、 `txn-total-size-limit`は 1 GB を超えてはなりません。
+> Kafka を例にとると、Kafka の単一メッセージ処理能力の上限は 1 GB です。したがって、 `txn-total-size-limit`が 1 GB を超える値に設定されている場合、TiDB でトランザクションが正常に実行されても、下流の Kafka がエラーを報告することがあります。このような状況を回避するには、最終消費者の制限に応じて`txn-total-size-limit`の実際の値を決定する必要があります。たとえば、Kafka がダウンストリームで使用される場合、 `txn-total-size-limit` 1 GB を超えてはなりません。
 
 ## 因果の一貫性 {#causal-consistency}
 
@@ -337,7 +337,7 @@ START TRANSACTION WITH CAUSAL CONSISTENCY ONLY;
 |                                             | UPDATE t SET v = 2 WHERE id = 1 |
 |                                             | 専念                              |
 
-上記の例では、トランザクション 1 が`id = 1`レコードをロックし、トランザクション 2 が`id = 1`レコードを変更します。したがって、トランザクション 1 とトランザクション 2 には潜在的な因果関係があります。因果整合性が有効になっている場合でも、トランザクション 1 が正常にコミットされた後にトランザクション 2 がコミットされる限り、論理的には、トランザクション 2 はトランザクション 1 の後に発生する必要があり`id = 1` 。 `id = 2`レコードの 1 の変更。
+上記の例では、トランザクション 1 が`id = 1`レコードをロックし、トランザクション 2 が`id = 1`レコードを変更します。したがって、トランザクション 1 とトランザクション 2 には潜在的な因果関係があります。因果整合性が有効になっている場合でも、トランザクション 1 が正常にコミットされた後にトランザクション 2 がコミットされる限り、論理的には、トランザクション 2 はトランザクション`id = 1`の後に発生する必要があります。 `id = 2`レコードの 1 の変更。
 
 ### 因果関係のないトランザクションは、一貫した論理的順序と物理的コミット順序を保証しません {#transactions-with-no-causal-relationship-do-not-guarantee-consistent-logical-order-and-physical-commit-order}
 
@@ -355,7 +355,7 @@ START TRANSACTION WITH CAUSAL CONSISTENCY ONLY;
 
 上記の例では、トランザクション 1 は`id = 1`レコードを読み取っていないため、トランザクション 1 とトランザクション 2 には、データベースが認識している因果関係はありません。トランザクションの因果整合性が有効になっている場合、物理的な時間順でトランザクション 1 がコミットされた後にトランザクション 2 がコミットされたとしても、TiDB はトランザクション 2 がトランザクション 1 の後に論理的に発生することを保証しません。
 
-トランザクション 1 がコミットされる前にトランザクション 3 が開始され、トランザクション 2 がコミットされた後にトランザクション 3 が`id = 1`と`id = 2`のレコードを読み取る場合、トランザクション 3 は`id = 1`の値を`2`として読み取り、 `id = 2`の値を`0`として読み取る可能性があります。
+トランザクション 1 がコミットされる前にトランザクション 3 が開始され、トランザクション 2 がコミットされた後にトランザクション 3 が`id = 1`と`id = 2`レコードを読み取る場合、トランザクション 3 は`id = 1`の値を`2`として読み取り、 `id = 2`の値を`0`として読み取る可能性があります。
 
 ### ロックなしの読み取りは因果関係を作成しません {#reads-without-lock-do-not-create-causal-relationship}
 

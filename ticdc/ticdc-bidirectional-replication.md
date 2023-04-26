@@ -9,13 +9,13 @@ v6.5.0 以降、TiCDC は 2 つの TiDB クラスター間の双方向レプリ�
 
 このセクションでは、2 つの TiDB クラスターを例として、双方向レプリケーションを使用する方法について説明します。
 
-## 双方向レプリケーションをデプロイする {#deploy-bi-directional-replication}
+## 双方向レプリケーションをデプロイ {#deploy-bi-directional-replication}
 
 TiCDC は、指定されたタイムスタンプの後に発生した増分データ変更のみをダウンストリーム クラスターにレプリケートします。双方向レプリケーションを開始する前に、次の手順を実行する必要があります。
 
 1.  (オプション) 必要に応じて、データ エクスポート ツール[Dumpling](/dumpling-overview.md)とデータ インポート ツール[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用して、2 つの TiDB クラスターのデータを相互にインポートします。
 
-2.  2 つの TiDB クラスターの間に 2 つの TiCDC クラスターをデプロイします。クラスタ トポロジは次のとおりです。図の矢印は、データ フローの方向を示します。
+2.  2 つの TiDB クラスターの間に 2 つの TiCDC クラスターをデプロイ。クラスタ トポロジは次のとおりです。図の矢印は、データ フローの方向を示します。
 
     ![TiCDC bidirectional replication](/media/ticdc/ticdc-bidirectional-replication.png)
 

@@ -5,7 +5,7 @@ summary: An overview of the usage of ADMIN for the TiDB database.
 
 # 管理者 {#admin}
 
-このステートメントは TiDB 拡張構文であり、TiDB のステータスを表示し、TiDB 内のテーブルのデータを確認するために使用されます。このドキュメントでは、次の`ADMIN`の関連ステートメントを紹介します。
+このステートメントは TiDB 拡張構文であり、TiDB のステータスを表示し、TiDB 内のテーブルのデータを確認するために使用されます。このドキュメントでは、次の`ADMIN`関連ステートメントを紹介します。
 
 -   [`ADMIN RELOAD`](#admin-reload-statement)
 -   [`ADMIN PLUGINS`](#admin-plugins-related-statement)
@@ -128,7 +128,7 @@ ADMIN REPAIR TABLE tbl_name CREATE TABLE STATEMENT;
 
 <CustomContent platform="tidb">
 
-ここで「信頼できない」とは、元のテーブルのメタデータが`CREATE TABLE STATEMENT`の操作でカバーできることを手動で確認する必要があることを意味します。この`REPAIR`ステートメントを使用するには、 [`repair-mode`](/tidb-configuration-file.md#repair-mode)構成項目を有効にし、修復するテーブルが[`repair-table-list`](/tidb-configuration-file.md#repair-table-list)にリストされていることを確認します。
+ここで「信頼できない」とは、元のテーブルのメタデータが`CREATE TABLE STATEMENT`操作でカバーできることを手動で確認する必要があることを意味します。この`REPAIR`ステートメントを使用するには、 [`repair-mode`](/tidb-configuration-file.md#repair-mode)構成項目を有効にし、修復するテーブルが[`repair-table-list`](/tidb-configuration-file.md#repair-table-list)にリストされていることを確認します。
 
 </CustomContent>
 
@@ -225,21 +225,21 @@ ADMIN SHOW DDL JOBS 5 WHERE state != 'synced' AND db_name = 'test';
 +--------+---------+------------+---------------------+----------------+-----------+----------+-----------+-----------------------------------+-----------------------------------+---------------+
 ```
 
--   `JOB_ID` : 各 DDL 操作は 1 つの DDL ジョブに対応します。 `JOB_ID`は世界的にユニークです。
+-   `JOB_ID` : 各 DDL 操作は 1 つの DDL ジョブに対応します。 `JOB_ID`世界的にユニークです。
 -   `DB_NAME` : DDL 操作が実行されるデータベースの名前。
 -   `TABLE_NAME` : DDL 操作が実行されるテーブルの名前。
 -   `JOB_TYPE` : DDL 操作のタイプ。
 -   `SCHEMA_STATE` : スキーマの現在の状態。 `JOB_TYPE`が`add index`の場合、それはインデックスの状態です。 `JOB_TYPE`が`add column`の場合、それは列の状態です。 `JOB_TYPE`が`create table`の場合、それはテーブルの状態です。一般的な状態には次のものがあります。
-    -   `none` : 存在しないことを示します。 `drop`または`create`の操作が失敗してロールバックすると、通常は`none`の状態になります。
-    -   `delete only` 、 `write only` 、 `delete reorganization` 、 `write reorganization` : これら 4 つの状態は中間状態です。これらの状態は、中間状態からの変換が非常に迅速であるため、一般的な操作では表示されません。 `write reorganization`の状態は`add index`の操作でのみ確認できます。これは、インデックス データが追加されていることを意味します。
-    -   `public` : 既存で使用可能であることを示します。 `create table`と`add index/column`のような操作が完了すると、通常は`public`の状態になります。これは、作成されたテーブル/列/インデックスが正常に読み書きできるようになったことを意味します。
+    -   `none` : 存在しないことを示します。 `drop`または`create`操作が失敗してロールバックすると、通常は`none`状態になります。
+    -   `delete only` 、 `write only` 、 `delete reorganization` 、 `write reorganization` : これら 4 つの状態は中間状態です。これらの状態は、中間状態からの変換が非常に迅速であるため、一般的な操作では表示されません。 `write reorganization`状態は`add index`の操作でのみ確認できます。これは、インデックス データが追加されていることを意味します。
+    -   `public` : 既存で使用可能であることを示します。 `create table`と`add index/column`のような操作が完了すると、通常は`public`状態になります。これは、作成されたテーブル/列/インデックスが正常に読み書きできるようになったことを意味します。
 -   `SCHEMA_ID` : DDL 操作が実行されるデータベースの ID。
 -   `TABLE_ID` : DDL 操作が実行されるテーブルの ID。
 -   `ROW_COUNT` : `add index`操作の実行時に追加されたデータ行の数。
 -   `START_TIME` : DDL 操作の開始時刻。
 -   `END_TIME` : DDL 操作の終了時刻。
 -   `STATE` : DDL 操作の状態。一般的な状態には次のものがあります。
-    -   `none` : 操作タスクが DDL ジョブ キューに入れられましたが、前のタスクが完了するのを待っているため、まだ実行されていないことを示します。もう 1 つの理由は、ドロップ操作を実行した後に`none`の状態になる可能性がありますが、すぐに`synced`の状態に更新されます。これは、すべての TiDB インスタンスがこの状態に同期されたことを意味します。
+    -   `none` : 操作タスクが DDL ジョブ キューに入れられましたが、前のタスクが完了するのを待っているため、まだ実行されていないことを示します。もう 1 つの理由は、ドロップ操作を実行した後に`none`状態になる可能性がありますが、すぐに`synced`状態に更新されます。これは、すべての TiDB インスタンスがこの状態に同期されたことを意味します。
     -   `running` : 操作が実行されていることを示します。
     -   `synced` : 操作が正常に実行され、すべての TiDB インスタンスがこの状態に同期されたことを示します。
     -   `rollback done` : 操作が失敗し、ロールバックが完了したことを示します。

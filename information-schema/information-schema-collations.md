@@ -52,4 +52,4 @@ SELECT * FROM collations WHERE character_set_name='utf8mb4';
 -   `ID` :照合順序の ID。
 -   `IS_DEFAULT` : この照合順序が、それが属する文字セットのデフォルトの照合順序であるかどうか。
 -   `IS_COMPILED` : 文字セットがサーバーにコンパイルされるかどうか。
--   `SORTLEN` :照合順序で文字をソートするときに割り当てられるメモリの最小長。
+-   `SORTLEN` :照合順序順序で文字をソートするときに割り当てられるメモリの最小長。

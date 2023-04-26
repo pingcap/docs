@@ -21,7 +21,7 @@ summary: TiDB implements the ANSI-standard information_schema for viewing system
 | [`COLUMNS`](/information-schema/information-schema-columns.md)                                                             | すべてのテーブルの列のリストを提供します。                                                             |
 | `COLUMN_PRIVILEGES`                                                                                                        | TiDB では実装されていません。ゼロ行を返します。                                                        |
 | `COLUMN_STATISTICS`                                                                                                        | TiDB では実装されていません。ゼロ行を返します。                                                        |
-| [`ENGINES`](/information-schema/information-schema-engines.md)                                                             | サポートされているストレージ エンジンのリストを提供します。                                                    |
+| [`ENGINES`](/information-schema/information-schema-engines.md)                                                             | サポートされているstorageエンジンのリストを提供します。                                                   |
 | `EVENTS`                                                                                                                   | TiDB では実装されていません。ゼロ行を返します。                                                        |
 | `FILES`                                                                                                                    | TiDB では実装されていません。ゼロ行を返します。                                                        |
 | `GLOBAL_STATUS`                                                                                                            | TiDB では実装されていません。ゼロ行を返します。                                                        |
@@ -62,7 +62,7 @@ summary: TiDB implements the ANSI-standard information_schema for viewing system
 | [`COLUMNS`](/information-schema/information-schema-columns.md)                                                             | すべてのテーブルの列のリストを提供します。                                                             |
 | `COLUMN_PRIVILEGES`                                                                                                        | TiDB では実装されていません。ゼロ行を返します。                                                        |
 | `COLUMN_STATISTICS`                                                                                                        | TiDB では実装されていません。ゼロ行を返します。                                                        |
-| [`ENGINES`](/information-schema/information-schema-engines.md)                                                             | サポートされているストレージ エンジンのリストを提供します。                                                    |
+| [`ENGINES`](/information-schema/information-schema-engines.md)                                                             | サポートされているstorageエンジンのリストを提供します。                                                   |
 | `EVENTS`                                                                                                                   | TiDB では実装されていません。ゼロ行を返します。                                                        |
 | `FILES`                                                                                                                    | TiDB では実装されていません。ゼロ行を返します。                                                        |
 | `GLOBAL_STATUS`                                                                                                            | TiDB では実装されていません。ゼロ行を返します。                                                        |
@@ -133,7 +133,7 @@ summary: TiDB implements the ANSI-standard information_schema for viewing system
 | [`SLOW_QUERY`](/information-schema/information-schema-slow-query.md)                             | 現在の TiDBサーバーでのスロー クエリに関する情報を提供します。                    |
 | [`STATEMENTS_SUMMARY`](/statement-summary-tables.md)                                             | MySQL の performance_schema ステートメントの概要に似ています。          |
 | [`STATEMENTS_SUMMARY_HISTORY`](/statement-summary-tables.md)                                     | MySQL の performance_schema ステートメントの要約履歴に似ています。        |
-| [`TABLE_STORAGE_STATS`](/information-schema/information-schema-table-storage-stats.md)           | ストレージ内のテーブル サイズに関する詳細を提供します。                          |
+| [`TABLE_STORAGE_STATS`](/information-schema/information-schema-table-storage-stats.md)           | storage内のテーブル サイズに関する詳細を提供します。                        |
 | [`TIDB_HOT_REGIONS`](/information-schema/information-schema-tidb-hot-regions.md)                 | ホットな地域に関する統計を提供します。                                   |
 | [`TIDB_HOT_REGIONS_HISTORY`](/information-schema/information-schema-tidb-hot-regions-history.md) | どのリージョンがホットであるかに関する履歴統計を提供します。                        |
 | [`TIDB_INDEXES`](/information-schema/information-schema-tidb-indexes.md)                         | TiDB テーブルに関するインデックス情報を提供します。                          |
@@ -184,7 +184,7 @@ summary: TiDB implements the ANSI-standard information_schema for viewing system
 | [`SLOW_QUERY`](/information-schema/information-schema-slow-query.md)                               | 現在の TiDBサーバーでのスロー クエリに関する情報を提供します。                                          |
 | [`STATEMENTS_SUMMARY`](/statement-summary-tables.md)                                               | MySQL の performance_schema ステートメントの概要に似ています。                                |
 | [`STATEMENTS_SUMMARY_HISTORY`](/statement-summary-tables.md)                                       | MySQL の performance_schema ステートメントの要約履歴に似ています。                              |
-| [`TABLE_STORAGE_STATS`](/information-schema/information-schema-table-storage-stats.md)             | ストレージ内のテーブル サイズに関する詳細を提供します。                                                |
+| [`TABLE_STORAGE_STATS`](/information-schema/information-schema-table-storage-stats.md)             | storage内のテーブル サイズに関する詳細を提供します。                                              |
 | [`TIDB_HOT_REGIONS`](https://docs.pingcap.com/tidb/stable/information-schema-tidb-hot-regions)     | ホットな地域に関する統計を提供します。この表はTiDB Cloudには適用されません。                                 |
 | [`TIDB_HOT_REGIONS_HISTORY`](/information-schema/information-schema-tidb-hot-regions-history.md)   | どのリージョンがホットであるかに関する履歴統計を提供します。                                              |
 | [`TIDB_INDEXES`](/information-schema/information-schema-tidb-indexes.md)                           | TiDB テーブルに関するインデックス情報を提供します。                                                |

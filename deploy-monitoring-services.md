@@ -9,7 +9,7 @@ summary: Learn how to deploy monitoring services for the TiDB cluster.
 
 TiUPを使用して TiDB クラスターをデプロイすると、監視サービスとアラート サービスが自動的にデプロイされるため、手動でデプロイする必要はありません。
 
-## Prometheus と Grafana をデプロイ {#deploy-prometheus-and-grafana}
+## Prometheus と Grafanaをデプロイ {#deploy-prometheus-and-grafana}
 
 TiDB クラスターのトポロジーが次のようになっているとします。
 
@@ -42,7 +42,7 @@ tar -xzf node_exporter-v1.3.1-linux-amd64.tar.gz
 tar -xzf grafana-7.5.11.linux-amd64.tar.gz
 ```
 
-### ステップ 2: Node1、Node2、Node3、および Node4 で<code>node_exporter</code>を開始する {#step-2-start-code-node-exporter-code-on-node1-node2-node3-and-node4}
+### ステップ 2: Node1、Node2、Node3、および Node4 で<code>node_exporter</code>開始する {#step-2-start-code-node-exporter-code-on-node1-node2-node3-and-node4}
 
 {{< copyable "" >}}
 
@@ -204,20 +204,20 @@ Grafana サービスを開始します。
 
     > **ノート：**
     >
-    > [**パスワードの変更]**ステップでは、[<strong>スキップ]</strong>を選択できます。
+    > **[パスワードの変更]**ステップでは、 <strong>[スキップ]</strong>を選択できます。
 
-2.  Grafana サイドバー メニューで、[**コンフィグレーション**] 内の [<strong>データ ソース</strong>] をクリックします。
+2.  Grafana サイドバー メニューで、 **[コンフィグレーション]**内の<strong>[データ ソース]</strong>をクリックします。
 
-3.  [**データ ソースの追加] を**クリックします。
+3.  **[データ ソースの追加]**をクリックします。
 
 4.  データ ソース情報を指定します。
 
     -   データ ソースの**名前**を指定します。
-    -   [**タイプ]**で [ <strong>Prometheus]</strong>を選択します。
+    -   **[タイプ]**で<strong>[Prometheus]</strong>を選択します。
     -   **URL**には、Prometheus アドレスを指定します。
     -   必要に応じて他のフィールドを指定します。
 
-5.  [**追加]**をクリックして、新しいデータ ソースを保存します。
+5.  **[追加]**をクリックして、新しいデータ ソースを保存します。
 
 ### ステップ 2: Grafana ダッシュボードをインポートする {#step-2-import-a-grafana-dashboard}
 
@@ -225,23 +225,23 @@ PDサーバー、TiKVサーバー、および TiDBサーバーの Grafana ダッ
 
 1.  Grafana ロゴをクリックして、サイドバー メニューを開きます。
 
-2.  サイドバー メニューで、[**ダッシュボード**] -&gt; [<strong>インポート</strong>] をクリックして、[ダッシュボードの<strong>インポート</strong>] ウィンドウを開きます。
+2.  サイドバー メニューで、 **[ダッシュボード**] -&gt; <strong>[インポート]</strong>をクリックして、 <strong>[ダッシュボードのインポート]</strong>ウィンドウを開きます。
 
-3.  [ **.json ファイルのアップロード]**をクリックして、JSON ファイルをアップロードします ( [pingcap/tidb](https://github.com/pingcap/tidb/tree/master/metrics/grafana) 、 [tikv/tikv](https://github.com/tikv/tikv/tree/master/metrics/grafana) 、および[tikv/pd](https://github.com/tikv/pd/tree/master/metrics/grafana)から TiDB Grafana 構成ファイルをダウンロードします)。
+3.  **[.json ファイルのアップロード]**をクリックして、JSON ファイルをアップロードします ( [pingcap/tidb](https://github.com/pingcap/tidb/tree/master/metrics/grafana) 、 [tikv/tikv](https://github.com/tikv/tikv/tree/master/metrics/grafana) 、および[tikv/pd](https://github.com/tikv/pd/tree/master/metrics/grafana)から TiDB Grafana 構成ファイルをダウンロードします)。
 
     > **ノート：**
     >
     > TiKV、PD、および TiDB ダッシュボードの場合、対応する JSON ファイルは`tikv_summary.json` 、 `tikv_details.json` 、 `tikv_trouble_shooting.json` 、 `pd.json` 、 `tidb.json` 、および`tidb_summary.json`です。
 
-4.  [**ロード]**をクリックします。
+4.  **[ロード]**をクリックします。
 
 5.  Prometheus データ ソースを選択します。
 
-6.  [**インポート]**をクリックします。 Prometheus ダッシュボードがインポートされます。
+6.  **[インポート]**をクリックします。 Prometheus ダッシュボードがインポートされます。
 
-## コンポーネントメトリックをビューする {#view-component-metrics}
+## コンポーネントメトリックをビュー {#view-component-metrics}
 
-上部のメニューで [**新しいダッシュボード**] をクリックし、表示するダッシュボードを選択します。
+上部のメニューで**[新しいダッシュボード]**をクリックし、表示するダッシュボードを選択します。
 
 ![view dashboard](/media/view-dashboard.png)
 
@@ -267,7 +267,7 @@ PDサーバー、TiKVサーバー、および TiDBサーバーの Grafana ダッ
     -   ガベージ コレクション (GC) の監視
     -   TiKV コマンドが実行された合計回数
     -   スケジューラがコマンドを実行する期間
-    -   Raftの提案コマンドの合計回数
+    -   Raft の提案コマンドの合計回数
     -   Raftがコマンドを実行する期間
     -   Raftコマンドが失敗した合計回数
-    -   Raftが準備完了状態を処理した合計回数
+    -   Raft が準備完了状態を処理した合計回数

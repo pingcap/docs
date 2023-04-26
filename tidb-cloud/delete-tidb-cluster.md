@@ -11,13 +11,13 @@ summary: Learn how to delete a TiDB cluster.
 
 1.  プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
-2.  削除するターゲット クラスターの行で、[ **...** ] をクリックします。
+2.  削除するターゲット クラスターの行で、 **[...]**をクリックします。
 
     > **ヒント：**
     >
-    > または、ターゲット クラスタの名前をクリックしてその概要ページに移動し、右上隅の [ **...** ] をクリックすることもできます。
+    > または、ターゲット クラスタの名前をクリックしてその概要ページに移動し、右上隅の**[...]**をクリックすることもできます。
 
-3.  ドロップダウン メニューで [**削除]**をクリックします。
+3.  ドロップダウン メニューで**[削除]**をクリックします。
 
 4.  クラスターの削除ウィンドウで、クラスター名を入力します。
 
@@ -25,9 +25,9 @@ summary: Learn how to delete a TiDB cluster.
 
     > **ノート：**
     >
-    > [Serverless Tierクラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)の場合、バックアップおよび復元機能は使用できません。 [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)を使用して、データをバックアップとしてエクスポートできます。
+    > [Serverless Tierクラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)の場合、バックアップおよび復元機能は使用できません。 [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)使用して、データをバックアップとしてエクスポートできます。
 
-5.  [**結果を理解しました] をクリックします。このクラスターを削除します**。
+5.  **[結果を理解しました] をクリックします。このクラスターを削除します**。
 
 バックアップされたDedicated Tierクラスターが削除されると、クラスターの既存のバックアップ ファイルはごみ箱に移動されます。
 

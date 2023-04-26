@@ -20,13 +20,13 @@ summary: Learn about GC configuration parameters.
 
 > **ノート：**
 >
-> このセクションは、オンプレミスの TiDB にのみ適用されます。 TiDB Cloudにはデフォルトで GC I/O 制限がありません。
+> このセクションは、オンプレミスの TiDB にのみ適用されます。 TiDB Cloud にはデフォルトで GC I/O 制限がありません。
 
 </CustomContent>
 
-TiKV は GC I/O 制限をサポートしています。 `gc.max-write-bytes-per-sec`を設定して 1 秒あたりの GC ワーカーの書き込みを制限し、通常のリクエストへの影響を減らすことができます。
+TiKV は GC I/O 制限をサポートしています。 1 を設定して`gc.max-write-bytes-per-sec`秒あたりの GC ワーカーの書き込みを制限し、通常のリクエストへの影響を減らすことができます。
 
-`0`は、この機能を無効にすることを示します。
+`0` 、この機能を無効にすることを示します。
 
 tikv-ctl を使用して、この構成を動的に変更できます。
 

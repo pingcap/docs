@@ -18,7 +18,7 @@ title: TiDB 2.0.8 Release Notes
     -   `TIMESTAMP`インデックス[#7812](https://github.com/pingcap/tidb/pull/7812)を追加すると、タイム ゾーンが正しく処理されない問題を修正します。
     -   一部の条件で統計モジュールが原因で発生するメモリリークの問題を修正します[#7864](https://github.com/pingcap/tidb/pull/7864)
     -   一部の異常状態で`ANALYZE`の結果が得られない問題を修正[#7871](https://github.com/pingcap/tidb/pull/7871)
-    -   返される結果が正しいことを確認するために、関数を[#7894](https://github.com/pingcap/tidb/pull/7894)ないでください`SYSDATE` 。
+    -   返される結果が正しいことを確認するために、関数を折りたたまないでください`SYSDATE` [#7894](https://github.com/pingcap/tidb/pull/7894)
     -   一部の条件での`substring_index`panicの問題を修正[#7896](https://github.com/pingcap/tidb/pull/7896)
     -   一部条件で`OUTER JOIN`が`INNER JOIN`に変換されてしまう問題を修正[#7899](https://github.com/pingcap/tidb/pull/7899)
 

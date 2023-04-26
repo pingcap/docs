@@ -35,7 +35,7 @@ ERROR 1062 (23000): Duplicate entry '1' for key 't.a'
 [2020/10/20 11:45:49.539 +08:00] [INFO] [conn.go:800] ["command dispatched failed"] [conn=5] [connInfo="id:5, addr:127.0.0.1:57222 status:10, collation:utf8_general_ci,  user:root"] [command=Query] [status="inTxn:0, autocommit:1"] [sql="insert into t values ( ? ) , ( ? )"] [txn_mode=OPTIMISTIC] [err="[kv:1062]Duplicate entry '?' for key 't.a'"]
 ```
 
-上記のエラー ログから、すべての機密情報が`?`を使用してシールドされ、 `tidb_redact_log`が有効になっていることがわかります。このようにして、データセキュリティのリスクが回避されます。
+上記のエラー ログから、すべての機密情報が`?`使用してシールドされ、 `tidb_redact_log`が有効になっていることがわかります。このようにして、データセキュリティのリスクが回避されます。
 
 ## TiKV 側でのログ編集 {#log-redaction-in-tikv-side}
 

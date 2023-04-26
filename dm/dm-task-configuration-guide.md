@@ -90,15 +90,15 @@ target-database:       # Configuration of target TiDB database.
         block-allow-list:  "bw-rule-2" # The name of the block and allow list rule. If the DM version is earlier than v2.0.0-beta.2, use `black-white-list` instead.
     ```
 
-## binlog イベントを移行するように構成する {#configure-binlog-events-to-be-migrated}
+## binlogイベントを移行するように構成する {#configure-binlog-events-to-be-migrated}
 
 > **ノート：**
 >
-> 特定のスキーマまたはテーブルの特定の binlog イベントをフィルタリングする必要がない場合は、この構成をスキップしてください。
+> 特定のスキーマまたはテーブルの特定のbinlogイベントをフィルタリングする必要がない場合は、この構成をスキップしてください。
 
-データ移行タスクの binlog イベントのフィルターを構成するには、次の手順を実行します。
+データ移行タスクのbinlogイベントのフィルターを構成するには、次の手順を実行します。
 
-1.  タスク構成ファイルで binlog イベントのグローバル フィルター規則セットを構成します。
+1.  タスク構成ファイルでbinlogイベントのグローバル フィルター規則セットを構成します。
 
     ```yaml
     filters:                                        # The filter rule set of data source binlog events. You can set multiple rules at the same time.
@@ -115,7 +115,7 @@ target-database:       # Configuration of target TiDB database.
 
     詳細な構成規則については、 [Binlogイベント フィルター](/dm/dm-binlog-event-filter.md)を参照してください。
 
-2.  データ ソース構成で binlog イベント フィルタリング ルールを参照して、データ ソース内の指定されたテーブルまたはスキーマの指定された binlog イベントをフィルター処理します。
+2.  データ ソース構成でbinlogイベント フィルタリング ルールを参照して、データ ソース内の指定されたテーブルまたはスキーマの指定されたbinlogイベントをフィルター処理します。
 
     ```yaml
     mysql-instances:
@@ -133,7 +133,7 @@ target-database:       # Configuration of target TiDB database.
 >
 > -   データ ソースの特定のテーブルを、ダウンストリームの TiDB インスタンスで別の名前のテーブルに移行する必要がない場合は、この構成をスキップしてください。
 >
-> -   シャード マージ タスクの場合は、タスク構成ファイルでマッピング ルールを設定する**必要**があります。
+> -   シャード マージ タスクの場合は、タスク構成ファイルでマッピング ルールを設定する**必要があります**。
 
 データ ソース テーブルを指定されたダウンストリーム TiDB テーブルに移行するためのルーティング マッピング ルールを構成するには、次の手順を実行します。
 
@@ -170,9 +170,9 @@ target-database:       # Configuration of target TiDB database.
 
 > **ノート：**
 >
-> -   シャード マージ シナリオでシャーディング DDL ステートメントを移行する必要がある場合は、 `shard-mode`フィールドを明示的に構成する**必要**があります。それ以外の場合は、 `shard-mode`をまったく構成し<strong>ない</strong>でください。
+> -   シャード マージ シナリオでシャーディング DDL ステートメントを移行する必要がある場合は、 `shard-mode`フィールドを明示的に構成する**必要があります**。それ以外の場合は、 `shard-mode`まったく構成し<strong>ないでください</strong>。
 >
-> -   シャーディング DDL ステートメントを移行すると、多くの問題が発生する可能性があります。この機能を使用する前に、DDL ステートメントを移行する DM の原則と制限を理解していることを確認し、この機能を慎重に使用する**必要**があります。
+> -   シャーディング DDL ステートメントを移行すると、多くの問題が発生する可能性があります。この機能を使用する前に、DDL ステートメントを移行する DM の原則と制限を理解していることを確認し、この機能を慎重に使用する**必要があります**。
 
 次の例は、タスクをシャード マージ タスクとして構成する方法を示しています。
 

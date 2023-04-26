@@ -34,7 +34,7 @@ DELETE FROM {table} WHERE {filter}
 
 データを削除するときに従うべきいくつかのベスト プラクティスを次に示します。
 
--   `DELETE`文には必ず`WHERE`節を指定してください。 `WHERE`句が指定されていない場合、TiDB はテーブル内の***すべて***の行を削除します。
+-   `DELETE`文には必ず`WHERE`節を指定してください。 `WHERE`句が指定されていない場合、TiDB はテーブル内の***すべての行を***削除します。
 
 <CustomContent platform="tidb">
 
@@ -50,7 +50,7 @@ DELETE FROM {table} WHERE {filter}
 
 -   テーブル内のすべてのデータを削除する場合は、 `DELETE`ステートメントを使用しないでください。代わりに、 [`TRUNCATE`](/sql-statements/sql-statement-truncate.md)ステートメントを使用してください。
 -   パフォーマンスに関する考慮事項については、 [パフォーマンスに関する考慮事項](#performance-considerations)を参照してください。
--   大量のデータ バッチを削除する必要があるシナリオでは、 [非トランザクションの一括削除](#non-transactional-bulk-delete)を使用するとパフォーマンスが大幅に向上します。ただし、これにより削除のトランザクションが失われるため、ロールバックでき**ません**。正しい操作を選択していることを確認してください。
+-   大量のデータ バッチを削除する必要があるシナリオでは、 [非トランザクションの一括削除](#non-transactional-bulk-delete)使用するとパフォーマンスが大幅に向上します。ただし、これにより削除のトランザクションが失われるため、ロールバックでき**ません**。正しい操作を選択していることを確認してください。
 
 ## 例 {#example}
 
@@ -141,6 +141,33 @@ func main() {
 
 </div>
 
+<div label="Python" value="python">
+
+Python では、例は次のとおりです。
+
+```python
+import MySQLdb
+import datetime
+import time
+connection = MySQLdb.connect(
+    host="127.0.0.1",
+    port=4000,
+    user="root",
+    password="",
+    database="bookshop",
+    autocommit=True
+)
+with connection:
+    with connection.cursor() as cursor:
+        start_time = datetime.datetime(2022, 4, 15)
+        end_time = datetime.datetime(2022, 4, 15, 0, 15)
+        delete_sql = "DELETE FROM `bookshop`.`ratings` WHERE `rated_at` >= %s AND `rated_at` <= %s"
+        affect_rows = cursor.execute(delete_sql, (start_time, end_time))
+        print(f'delete {affect_rows} data')
+```
+
+</div>
+
 </SimpleTab>
 
 <CustomContent platform="tidb">
@@ -163,7 +190,7 @@ func main() {
 
 ### TiDB GC メカニズム {#tidb-gc-mechanism}
 
-TiDB は、 `DELETE`ステートメントを実行した直後にデータを削除しません。代わりに、データを削除の準備ができているとマークします。次に、TiDB GC (ガベージ コレクション) が古いデータをクリーンアップするのを待ちます。したがって、 `DELETE`ステートメントは、ディスク使用量をすぐには削減し***ません***。
+TiDB は、 `DELETE`ステートメントを実行した直後にデータを削除しません。代わりに、データを削除の準備ができているとマークします。次に、TiDB GC (ガベージ コレクション) が古いデータをクリーンアップするのを待ちます。したがって、 `DELETE`ステートメントは、ディスク使用量をすぐには削減***しません***。
 
 デフォルトでは、GC は 10 分ごとに 1 回トリガーされます。各 GC は、 **safe_point**と呼ばれる時点を計算します。この時点より前のデータは再使用されないため、TiDB は安全にクリーンアップできます。
 
@@ -171,15 +198,15 @@ TiDB は、 `DELETE`ステートメントを実行した直後にデータを削
 
 ### 統計情報の更新 {#update-statistical-information}
 
-TiDB は[統計情報](/statistics.md)を使用してインデックスの選択を決定します。大量のデータを削除すると、インデックスが正しく選択されない可能性が高くなります。 [手動収集](/statistics.md#manual-collection)を使用して統計を更新できます。これは、TiDB オプティマイザーに SQL パフォーマンス最適化のためのより正確な統計情報を提供します。
+TiDB は[統計情報](/statistics.md)を使用してインデックスの選択を決定します。大量のデータを削除すると、インデックスが正しく選択されない可能性が高くなります。 [手動収集](/statistics.md#manual-collection)使用して統計を更新できます。これは、TiDB オプティマイザーに SQL パフォーマンス最適化のためのより正確な統計情報を提供します。
 
 ## 一括削除 {#bulk-delete}
 
-テーブルから複数行のデータを削除する必要がある場合は、 [`DELETE`例](#example)句を選択し、 `WHERE`句を使用して、削除する必要があるデータをフィルタリングできます。
+テーブルから複数行のデータを削除する必要がある場合は、 [`DELETE`例](#example)を選択し、 `WHERE`句を使用して、削除する必要があるデータをフィルタリングできます。
 
 <CustomContent platform="tidb">
 
-ただし、多数の行 (1 万行以上) を削除する必要がある場合は、データを繰り返し削除することをお勧めします。つまり、削除が完了するまで繰り返しごとにデータの一部を削除します。これは、TiDB が[`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit)つのトランザクションのサイズを制限しているためです (デフォルトでは 1、100 MB)。プログラムまたはスクリプトでループを使用して、このような操作を実行できます。
+ただし、多数の行 (1 万行以上) を削除する必要がある場合は、データを繰り返し削除することをお勧めします。つまり、削除が完了するまで繰り返しごとにデータの一部を削除します。これは、TiDB が 1 つのトランザクションのサイズを制限しているためです (デフォルトでは[`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit) MB)。プログラムまたはスクリプトでループを使用して、このような操作を実行できます。
 
 </CustomContent>
 
@@ -256,7 +283,7 @@ public class BatchDeleteExample
 }
 ```
 
-各反復で、 `DELETE`は`2022-04-15 00:00:00`から`2022-04-15 00:15:00`までの最大 1000 行を削除します。
+各反復で、 `DELETE` `2022-04-15 00:00:00`から`2022-04-15 00:15:00`までの最大 1000 行を削除します。
 
 </div>
 
@@ -311,7 +338,39 @@ func deleteBatch(db *sql.DB, startTime, endTime time.Time) (int64, error) {
 }
 ```
 
-各反復で、 `DELETE`は`2022-04-15 00:00:00`から`2022-04-15 00:15:00`までの最大 1000 行を削除します。
+各反復で、 `DELETE` `2022-04-15 00:00:00`から`2022-04-15 00:15:00`までの最大 1000 行を削除します。
+
+</div>
+
+<div label="Python" value="python">
+
+Python での一括削除の例は次のとおりです。
+
+```python
+import MySQLdb
+import datetime
+import time
+connection = MySQLdb.connect(
+    host="127.0.0.1",
+    port=4000,
+    user="root",
+    password="",
+    database="bookshop",
+    autocommit=True
+)
+with connection:
+    with connection.cursor() as cursor:
+        start_time = datetime.datetime(2022, 4, 15)
+        end_time = datetime.datetime(2022, 4, 15, 0, 15)
+        affect_rows = -1
+        while affect_rows != 0:
+            delete_sql = "DELETE FROM `bookshop`.`ratings` WHERE `rated_at` >= %s AND  `rated_at` <= %s LIMIT 1000"
+            affect_rows = cursor.execute(delete_sql, (start_time, end_time))
+            print(f'delete {affect_rows} data')
+            time.sleep(1)
+```
+
+各反復で、 `DELETE` `2022-04-15 00:00:00`から`2022-04-15 00:15:00`までの最大 1000 行を削除します。
 
 </div>
 

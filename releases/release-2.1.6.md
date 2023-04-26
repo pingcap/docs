@@ -10,12 +10,12 @@ title: TiDB 2.1.6 Release Notes
 
 -   SQL オプティマイザー/エグゼキューター
     -   Hint of `TIDB_INLJ` [#9615](https://github.com/pingcap/tidb/pull/9615)で両方のテーブルが指定されている場合、コストに基づいて外側のテーブルを選択するように Planner を最適化します。
-    -   `IndexScan`が正しく選択できない場合がある問題を修正[#9587](https://github.com/pingcap/tidb/pull/9587)
+    -   `IndexScan`正しく選択できない場合がある問題を修正[#9587](https://github.com/pingcap/tidb/pull/9587)
     -   サブクエリ[#9551](https://github.com/pingcap/tidb/pull/9551)のチェックイン`agg`関数の MySQL との非互換性を修正
-    -   パニックを避けるために、有効な列のみを`show stats_histograms`するようにします[#9502](https://github.com/pingcap/tidb/pull/9502)
+    -   パニックを避けるために、有効な列`show stats_histograms`を出力するようにします[#9502](https://github.com/pingcap/tidb/pull/9502)
 
 -   サーバ
-    -   Binlog [#9634](https://github.com/pingcap/tidb/pull/9634)を有効/無効にする`log_bin`の変数をサポート
+    -   Binlog [#9634](https://github.com/pingcap/tidb/pull/9634)を有効/無効にする`log_bin`変数をサポート
     -   トランザクションのサニティ チェックを追加して、誤ったトランザクション コミットを回避する[#9559](https://github.com/pingcap/tidb/pull/9559)
     -   変数を設定するとpanic[#9539](https://github.com/pingcap/tidb/pull/9539)が発生する可能性がある問題を修正します
 
@@ -25,12 +25,12 @@ title: TiDB 2.1.6 Release Notes
 
 ## TiKV {#tikv}
 
--   `protobuf`の解析エラーが場合によっては`StoreNotMatch`エラー[#4303](https://github.com/tikv/tikv/pull/4303)を引き起こす問題を修正します。
+-   `protobuf`解析エラーが場合によっては`StoreNotMatch`エラー[#4303](https://github.com/tikv/tikv/pull/4303)を引き起こす問題を修正します。
 
 ## ツール {#tools}
 
 -   雷
-    -   インポーターのデフォルト`region-split-size`を 512 MiB [#4369](https://github.com/tikv/tikv/pull/4369)に変更
+    -   インポーターのデフォルト`region-split-size` 512 MiB [#4369](https://github.com/tikv/tikv/pull/4369)に変更
     -   以前にメモリにキャッシュされた中間 SST をローカル ディスクに保存して、メモリ使用量を削減します[#4369](https://github.com/tikv/tikv/pull/4369)
     -   RocksDB [#4369](https://github.com/tikv/tikv/pull/4369)のメモリ使用量を制限する
     -   スケジューリングが完了する前にリージョンが分散する問題を修正します[#4369](https://github.com/tikv/tikv/pull/4369)

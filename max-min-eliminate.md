@@ -5,7 +5,7 @@ summary: Introduce the rules for eliminating Max/Min functions.
 
 # 最大/最小を削除 {#eliminate-max-min}
 
-SQL ステートメントに`max`関数が含まれている場合、クエリ オプティマイザーは、 `max` / `min`最適化ルールを適用して、 `min` / `min`集計関数を TopN 演算子に変換しようとし`max` 。このようにして、TiDB はインデックスを介してより効率的にクエリを実行できます。
+SQL ステートメントに`max`関数が含まれている場合、クエリ オプティマイザーは、 `max` / `min`最適化`min`を適用して、 `max` / `min`集計関数を TopN 演算子に変換しようとします。このようにして、TiDB はインデックスを介してより効率的にクエリを実行できます。
 
 この最適化ルールは、 `select`ステートメントの`max` / `min`関数の数に応じて、次の 2 つのタイプに分けられます。
 
@@ -53,11 +53,11 @@ mysql> explain select max(a) from t;
 5 rows in set (0.00 sec)
 ```
 
-## 複数<code>max</code> / <code>min</code>関数 {#multiple-code-max-code-code-min-code-functions}
+## 複数の<code>max</code> / <code>min</code>関数 {#multiple-code-max-code-code-min-code-functions}
 
 SQL ステートメントが次の条件を満たす場合、このルールが適用されます。
 
--   ステートメントには複数の集計関数が含まれています。これらはすべて`max`つまたは`min`の関数です。
+-   ステートメントには複数の集計関数が含まれています。これらはすべて`max`または`min`の関数です。
 -   関連する`group by`節を持たない集約関数はありません。
 -   各`max` / `min`関数の列には、順序を保持するためのインデックスがあります。
 
@@ -80,7 +80,7 @@ from
     (select min(a) as min_a from t) t2
 ```
 
-書き換えにより、オプティマイザは`min`関数を`max`つしか持たないステートメントのルールを 2 つのサブクエリにそれぞれ適用できます。その後、ステートメントは次のように書き直されます。
+書き換えにより、オプティマイザは`max`関数を`min`つしか持たないステートメントのルールを 2 つのサブクエリにそれぞれ適用できます。その後、ステートメントは次のように書き直されます。
 
 {{< copyable "" >}}
 

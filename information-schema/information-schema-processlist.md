@@ -79,7 +79,7 @@ TxnStart:
 
 ## CLUSTER_PROCESSLIST {#cluster-processlist}
 
-`CLUSTER_PROCESSLIST`は`PROCESSLIST`に対応するクラスタ システム テーブルです。クラスター内のすべての TiDB ノードの`PROCESSLIST`の情報を照会するために使用されます。 `CLUSTER_PROCESSLIST`のテーブル スキーマには、 `PROCESSLIST`よりも 1 つ多い列 ( `INSTANCE`列) があり、このデータ行の元の TiDB ノードのアドレスが格納されます。
+`CLUSTER_PROCESSLIST`は`PROCESSLIST`に対応するクラスタ システム テーブルです。クラスター内のすべての TiDB ノードの`PROCESSLIST`情報を照会するために使用されます。 `CLUSTER_PROCESSLIST`のテーブル スキーマには、 `PROCESSLIST`よりも 1 つ多い列`INSTANCE`列) があり、このデータ行の元の TiDB ノードのアドレスが格納されます。
 
 {{< copyable "" >}}
 

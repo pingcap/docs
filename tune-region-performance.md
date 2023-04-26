@@ -15,7 +15,7 @@ TiKV 自動的に[シャード最下層データ](/best-practices/tidb-best-prac
 
 多くのリージョンのパフォーマンス オーバーヘッドを削減するために、 [休止リージョン](/best-practices/massive-regions-best-practices.md#method-4-increase-the-number-of-tikv-instances)または[`Region Merge`](/best-practices/massive-regions-best-practices.md#method-5-adjust-raft-base-tick-interval)を有効にすることもできます。
 
-## <code>region-split-size</code>を使用してリージョンサイズを調整します {#use-code-region-split-size-code-to-adjust-region-size}
+## <code>region-split-size</code>使用してリージョンサイズを調整します {#use-code-region-split-size-code-to-adjust-region-size}
 
 > **警告：**
 >
@@ -25,7 +25,7 @@ TiKV 自動的に[シャード最下層データ](/best-practices/tidb-best-prac
 > -   特に広範囲のデータを処理するクエリの場合、クエリのパフォーマンスが低下する可能性があります。
 > -   リージョンのスケジューリングが遅くなります。
 
-リージョンサイズを調整するには、 [`coprocessor.region-split-size`](/tikv-configuration-file.md#region-split-size)構成アイテムを使用できます。推奨されるサイズは、96 MiB、128 MiB、または 256 MiB です。 `region-split-size`の値が大きいほど、パフォーマンスがより不安定になります。リージョンサイズを 1 GiB より大きく設定することはお勧めしません。サイズを 10 GiB より大きく設定しないでください。 TiFlashを使用する場合、リージョンサイズは 256 MiB を超えてはなりません。
+リージョンサイズを調整するには、 [`coprocessor.region-split-size`](/tikv-configuration-file.md#region-split-size)構成アイテムを使用できます。推奨されるサイズは、96 MiB、128 MiB、または 256 MiB です。 `region-split-size`値が大きいほど、パフォーマンスがより不安定になります。リージョンサイズを 1 GiB より大きく設定することはお勧めしません。サイズを 10 GiB より大きく設定しないでください。 TiFlashを使用する場合、リージョンサイズは 256 MiB を超えてはなりません。
 
 Dumplingツールを使用する場合、リージョンサイズは 1 GiB を超えてはなりません。この場合、リージョンサイズを増やした後で同時実行数を減らす必要があります。そうしないと、TiDB のメモリが不足する可能性があります。
 

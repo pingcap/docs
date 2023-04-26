@@ -76,7 +76,7 @@ Performance Overview ダッシュボードは、TiDB、PD、および TiKV の�
 ### ソース別 KV 要求時間 {#kv-request-time-by-source}
 
 -   kv リクエストの合計時間: すべての TiDB インスタンスでの 1 秒あたりの KV およびTiFlashリクエストの処理時間の合計
--   各 KV リクエストと対応するリクエスト ソースは積み上げ棒グラフを形成し、 `external`は通常のビジネス リクエストを識別し、 `internal`は内部アクティビティ リクエスト (DDL やauto analyzeリクエストなど) を識別します。
+-   各 KV リクエストと対応するリクエスト ソースは積み上げ棒グラフを形成し、 `external`通常のビジネス リクエストを識別し、 `internal`内部アクティビティ リクエスト (DDL やauto analyzeリクエストなど) を識別します。
 
 ### TiDB CPU {#tidb-cpu}
 
@@ -106,7 +106,7 @@ Performance Overview ダッシュボードは、TiDB、PD、および TiKV の�
 
 -   avg by type: すべての TiDB インスタンスですべてのリクエストを実行する平均時間。タイプ別に収集: `SELECT` 、 `INSERT` 、および`UPDATE`
 
-### 接続アイドル時間 {#connection-idle-duration}
+### 接続アイドル期間 {#connection-idle-duration}
 
 Connection Idle Duration は、接続がアイドル状態である期間を示します。
 
@@ -153,7 +153,7 @@ Connection Idle Duration は、接続がアイドル状態である期間を示�
 
 これら 3 つのメトリクスにはすべて、すべての TiKV インスタンスの平均期間と P99 期間が含まれます。
 
-平均ストレージ非同期書き込み時間 = 平均ストア時間 + 平均適用時間
+平均storage非同期書き込み時間 = 平均ストア時間 + 平均適用時間
 
 ### ログ期間の追加、ログ期間のコミット、およびログ期間の適用 {#append-log-duration-commit-log-duration-and-apply-log-duration}
 
@@ -180,7 +180,7 @@ Connection Idle Duration は、接続がアイドル状態である期間を示�
     -   `cop` : コプロセッサー・インターフェースを介して直接送信されたコプロセッサー要求の数。
     -   `cop_dag` : すべてのコプロセッサー要求における DAG 要求の数。
     -   `super_batch` : スーパー バッチ機能を有効にする要求の数。
--   エグゼキュータ QPS: すべてのTiFlashインスタンスによって受信されたリクエスト内の各タイプの DAG エグゼキュータの数。 `table_scan`は、テーブル スキャン エグゼキュータです。 `selection`は選択エグゼキュータです。 `aggregation`は集計エグゼキュータです。 `top_n`は`TopN`のエグゼキュータです。 `limit`は制限実行者です。
+-   エグゼキュータ QPS: すべてのTiFlashインスタンスによって受信されたリクエスト内の各タイプの DAG エグゼキュータの数。 `table_scan`は、テーブル スキャン エグゼキュータです。 `selection`は選択エグゼキュータです。 `aggregation`は集計エグゼキュータです。 `top_n` `TopN`エグゼキュータです。 `limit`は制限実行者です。
 -   リクエスト期間の概要: すべてのTiFlashインスタンスのすべてのリクエスト タイプの 1 秒あたりの合計処理時間の積み上げグラフを提供します。
 -   Request Duration: すべてのTiFlashインスタンスにおける各 MPP およびコプロセッサー要求タイプの合計処理時間。これは、コプロセッサー要求が受信されてから、要求の応答が完了するまでの時間であり、これには平均レイテンシーと p99レイテンシーが含まれます。
 -   Request Handle Duration: すべてのTiFlashインスタンスにおける各 MPP およびコプロセッサー要求タイプの実際の処理時間。これは、コプロセッサー要求の実行開始から実行完了までであり、これには平均レイテンシーと p99レイテンシーが含まれます。

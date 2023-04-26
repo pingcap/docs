@@ -20,7 +20,7 @@ summary: Learn the geo-distributed deployment topology of TiDB.
 
 -   [地理的に分散したトポロジ テンプレート](https://github.com/pingcap/docs/blob/master/config-templates/geo-redundancy-deployment.yaml)
 
-上記の TiDB クラスター トポロジ ファイルの構成項目の詳細な説明については、 [TiUP を使用してTiUPをデプロイするためのトポロジコンフィグレーションファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
+上記の TiDB クラスター トポロジ ファイルの構成項目の詳細な説明については、 [TiUPを使用して TiDB をデプロイするためのトポロジコンフィグレーションファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
 
 ### 主なパラメータ {#key-parameters}
 

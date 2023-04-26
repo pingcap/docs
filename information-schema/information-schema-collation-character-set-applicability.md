@@ -1,18 +1,18 @@
 ---
 title: COLLATION_CHARACTER_SET_APPLICABILITY
-summary: Learn the `COLLATION_CHARACTER_SET_APPLICABILITY` information_schema table.
+summary: Learn the `COLLATION_CHARACTER_SET_APPLICABILITY` INFORMATION_SCHEMA table.
 ---
 
 # COLLATION_CHARACTER_SET_APPLICABILITY {#collation-character-set-applicability}
 
 `COLLATION_CHARACTER_SET_APPLICABILITY`テーブルは、照合順序を該当する文字セット名にマップします。 `COLLATIONS`テーブルと同様に、MySQL との互換性のためにのみ含まれています。
 
-{{< copyable "" >}}
-
 ```sql
-USE information_schema;
-DESC collation_character_set_applicability;
+USE INFORMATION_SCHEMA;
+DESC COLLATION_CHARACTER_SET_APPLICABILITY;
 ```
+
+出力は次のとおりです。
 
 ```sql
 +--------------------+-------------+------+------+---------+-------+
@@ -24,19 +24,23 @@ DESC collation_character_set_applicability;
 2 rows in set (0.00 sec)
 ```
 
-{{< copyable "" >}}
+`COLLATION_CHARACTER_SET_APPLICABILITY`テーブルの`utf8mb4`文字セットの照合順序マッピングをビュー。
 
 ```sql
-SELECT * FROM collation_character_set_applicability WHERE character_set_name='utf8mb4';
+SELECT * FROM COLLATION_CHARACTER_SET_APPLICABILITY WHERE character_set_name='utf8mb4';
 ```
 
+出力は次のとおりです。
+
 ```sql
-+----------------+--------------------+
-| COLLATION_NAME | CHARACTER_SET_NAME |
-+----------------+--------------------+
-| utf8mb4_bin    | utf8mb4            |
-+----------------+--------------------+
-1 row in set (0.00 sec)
++--------------------+--------------------+
+| COLLATION_NAME     | CHARACTER_SET_NAME |
++--------------------+--------------------+
+| utf8mb4_bin        | utf8mb4            |
+| utf8mb4_general_ci | utf8mb4            |
+| utf8mb4_unicode_ci | utf8mb4            |
++--------------------+--------------------+
+3 rows in set (0.00 sec)
 ```
 
 `COLLATION_CHARACTER_SET_APPLICABILITY`テーブルの列の説明は次のとおりです。

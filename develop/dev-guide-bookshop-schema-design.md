@@ -18,7 +18,7 @@ Bookshop のテーブル構造とデータをインポートできます[TiUP経
 
 <CustomContent platform="tidb-cloud">
 
-TiDB Cloudの場合、 [方法 1: `tiup demo`経由](#method-1-via-tiup-demo)をスキップして Bookshop テーブル構造をインポートできます[TiDB Cloudのインポート機能経由](#method-2-via-tidb-cloud-import) 。
+TiDB Cloudの場合、 [方法 1: `tiup demo`経由](#method-1-via-tiup-demo)スキップして Bookshop テーブル構造をインポートできます[TiDB Cloudのインポート機能経由](#method-2-via-tidb-cloud-import) 。
 
 </CustomContent>
 
@@ -88,9 +88,9 @@ tiup demo bookshop prepare --users=200000 --books=500000 --authors=100000 --rati
 
 ### 方法 2: TiDB Cloudインポート経由 {#method-2-via-tidb-cloud-import}
 
-TiDB Cloudのクラスター詳細ページで、[インポート] 領域の [**データ**の<strong>インポート</strong>] をクリックして、[<strong>データのインポート</strong>] ページに入ります。このページで、次の手順を実行して Bookshop サンプル データを AWS S3 からTiDB Cloudにインポートします。
+TiDB Cloudのクラスター詳細ページで、 **[インポート]**領域の<strong>[データのインポート]</strong>をクリックして、 <strong>[データのインポート]</strong>ページに入ります。このページで、次の手順を実行して Bookshop サンプル データを AWS S3 からTiDB Cloudにインポートします。
 
-1.  [**データ形式]**で [ <strong>SQL ファイル</strong>] を選択します。
+1.  **[データ形式]**で<strong>[SQL ファイル]</strong>を選択します。
 
 2.  次の**バケット URI**と<strong>ロール ARN</strong>を対応する入力ボックスにコピーします。
 
@@ -106,9 +106,9 @@ TiDB Cloudのクラスター詳細ページで、[インポート] 領域の [**
     arn:aws:iam::494090988690:role/s3-tidb-cloud-developer-access
     ```
 
-3.  [**次へ**] をクリックして、 <strong>[ファイルとフィルター]</strong>の手順に進み、インポートするファイルの情報を確認します。
+3.  **[次へ]**をクリックして、 <strong>[ファイルとフィルター]</strong>の手順に進み、インポートするファイルの情報を確認します。
 
-4.  [**次へ]**を再度クリックして [<strong>プレビュー]</strong>手順に進み、インポートするデータのプレビューを確認します。
+4.  **[次へ]**を再度クリックして<strong>[プレビュー]</strong>手順に進み、インポートするデータのプレビューを確認します。
 
     この例では、次のデータが事前に生成されます。
 
@@ -118,11 +118,11 @@ TiDB Cloudのクラスター詳細ページで、[インポート] 領域の [**
     -   1,000,000 行の評価レコード
     -   1,000,000 行の注文レコード
 
-5.  [**インポートの開始]**をクリックしてインポート プロセスを開始し、 TiDB Cloudがインポートを完了するまで待ちます。
+5.  **[インポートの開始]**をクリックしてインポート プロセスを開始し、 TiDB Cloud がインポートを完了するまで待ちます。
 
 データをTiDB Cloudにインポートまたは移行する方法の詳細については、 [TiDB Cloud移行の概要](https://docs.pingcap.com/tidbcloud/tidb-cloud-migration-overview)を参照してください。
 
-### データのインポート ステータスをビューする {#view-data-import-status}
+### データのインポート ステータスをビュー {#view-data-import-status}
 
 インポートが完了したら、次の SQL ステートメントを実行して、各テーブルのデータ ボリューム情報を表示できます。
 
@@ -165,9 +165,9 @@ WHERE table_schema LIKE 'bookshop';
 | フィールド名       | タイプ          | 説明                  |
 | ------------ | ------------ | ------------------- |
 | ID           | bigint(20)   | 書籍の一意の ID           |
-| 題名           | varchar(100) | 本のタイトル              |
+| タイトル         | varchar(100) | 本のタイトル              |
 | タイプ          | 列挙           | 書籍の種類 (雑誌、アニメ、教材など) |
-| 株式           | bigint(20)   | 株式                  |
+| ストック         | bigint(20)   | ストック                |
 | 価格           | 10 進数 (15,2) | 価格                  |
 | published_at | 日付時刻         | 発行日                 |
 
@@ -190,7 +190,7 @@ WHERE table_schema LIKE 'bookshop';
 | フィールド名 | タイプ          | 説明          |
 | ------ | ------------ | ----------- |
 | ID     | bigint(20)   | ユーザーの一意の ID |
-| 残高     | 10 進数 (15,2) | バランス        |
+| バランス   | 10 進数 (15,2) | バランス        |
 | ニックネーム | varchar(100) | ニックネーム      |
 
 ### <code>ratings</code>表 {#code-ratings-code-table}

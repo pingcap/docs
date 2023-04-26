@@ -5,7 +5,7 @@ summary: Learn the `KEY_COLUMN_USAGE` information_schema table.
 
 # KEY_COLUMN_USAGE {#key-column-usage}
 
-`KEY_COLUMN_USAGE`の表は、主キー制約など、列のキー制約について説明しています。
+`KEY_COLUMN_USAGE`表は、主キー制約など、列のキー制約について説明しています。
 
 {{< copyable "" >}}
 

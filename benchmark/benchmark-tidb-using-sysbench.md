@@ -18,7 +18,7 @@ server_configs:
     log.level: "error"
 ```
 
-また、 [`tidb_enable_prepared_plan_cache`](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610)が有効になっていることを確認し、 `--db-ps-mode=disabled`を使用*せず*に sysbench が準備済みステートメントを使用できるようにすることもお勧めします。 SQL プラン キャッシュの機能とその監視方法に関するドキュメントについては、 [SQL 準備済み実行計画キャッシュ](/sql-prepared-plan-cache.md)を参照してください。
+また[`tidb_enable_prepared_plan_cache`](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610)が有効になっていることを確認し、 `--db-ps-mode=disabled`使用せ*ず*に sysbench が準備済みステートメントを使用できるようにすることもお勧めします。 SQL プラン キャッシュの機能とその監視方法に関するドキュメントについては、 [SQL 準備済み実行計画キャッシュ](/sql-prepared-plan-cache.md)を参照してください。
 
 ### TiKV構成 {#tikv-configuration}
 
@@ -28,7 +28,7 @@ TiKV クラスターには複数のカラムファミリーがあり、主にデ
 
 デフォルト CF : 書き込み CF = 4 : 1
 
-TiKV 上の RocksDB のブロックキャッシュの構成は、メモリを最大限に活用するために、マシンのメモリサイズに基づいている必要がありメモリ。 40 GB の仮想マシンに TiKV クラスターをデプロイするには、次のようにブロックキャッシュを構成することをお勧めします。
+TiKV 上の RocksDB のブロックキャッシュの構成は、メモリを最大限に活用するために、マシンのメモリサイズに基づいている必要があります。 40 GB の仮想マシンに TiKV クラスターをデプロイするには、次のようにブロックキャッシュを構成することをお勧めします。
 
 ```yaml
 server_configs:
@@ -165,13 +165,13 @@ sysbench --config-file=config oltp_read_only --tables=32 --table-size=10000000 r
 
 この問題は、多くの場合、プロキシの使用に関係しています。単一の TiDBサーバーに圧力を加え、各結果を合計し、合計した結果をプロキシを使用した結果と比較できます。
 
-例として HAproxy を取り上げます。パラメーター`nbproc`は、最大で開始できるプロセスの数を増やすことができます。 HAproxy の新しいバージョンでは、 `nbthread`および`cpu-map`もサポートされています。これらはすべて、プロキシの使用によるパフォーマンスへの悪影響を軽減できます。
+例として HAproxy を取り上げます。パラメーター`nbproc`最大で開始できるプロセスの数を増やすことができます。 HAproxy の新しいバージョンでは、 `nbthread`および`cpu-map`もサポートされています。これらはすべて、プロキシの使用によるパフォーマンスへの悪影響を軽減できます。
 
 ### 高い並行性の下で、TiKV の CPU 使用率がまだ低いのはなぜですか? {#under-high-concurrency-why-is-the-cpu-utilization-rate-of-tikv-still-low}
 
 TiKV の全体的な CPU 使用率は低いですが、クラスター内の一部のモジュールの CPU 使用率が高い場合があります。
 
-ストレージ readpool、コプロセッサ、gRPC など、TiKV の他のモジュールの最大同時実行制限は、TiKV 構成ファイルを使用して調整できます。
+storagereadpool、コプロセッサ、gRPC など、TiKV の他のモジュールの最大同時実行制限は、TiKV 構成ファイルを使用して調整できます。
 
 実際の CPU 使用率は、Grafana の TiKV Thread CPU モニター パネルで確認できます。モジュールにボトルネックがある場合は、モジュールの同時実行性を高めることで調整できます。
 
@@ -179,4 +179,4 @@ TiKV の全体的な CPU 使用率は低いですが、クラスター内の一�
 
 NUMAアーキテクチャの CPU は、リモートメモリへのクロス CPU アクセスによってパフォーマンスが大幅に低下する一部のハイエンド機器で使用されます。デフォルトでは、TiDB はサーバーのすべての CPU を使用し、ゴルーチン スケジューリングは必然的にクロス CPUメモリアクセスにつながります。
 
-したがって、NUMAアーキテクチャのサーバーに*n 個の TiDB (n*<em>は</em>NUMA CPU の数) をデプロイし、TiDB パラメーター`max-procs`を NUMA CPU コアの数と同じ値に設定することをお勧めします。
+したがって、NUMAアーキテクチャのサーバーに*n 個の*TiDB ( <em>n</em>は NUMA CPU の数) をデプロイし、TiDB パラメーター`max-procs`を NUMA CPU コアの数と同じ値に設定することをお勧めします。

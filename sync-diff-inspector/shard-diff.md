@@ -75,7 +75,7 @@ target-table = "table-0"     # The name of the target table
     target-check-tables = ["test.table-0"]
 ```
 
-アップストリームのシャード テーブルが多数あり、以下に示すように、すべてのシャード テーブルの命名規則にパターンがある場合は、構成に`table-rules`を使用できます。
+アップストリームのシャード テーブルが多数あり、以下に示すように、すべてのシャード テーブルの命名規則にパターンがある場合は、構成に`table-rules`使用できます。
 
 ![shard-table-replica-2](/media/shard-table-replica-2.png)
 
@@ -133,4 +133,4 @@ target-table = "table-0"     # The name of the target table
 
 ## ノート {#note}
 
-上流データベースに`test.table-0`が存在する場合、下流データベースもこのテーブルを比較します。
+上流データベースに`test.table-0`存在する場合、下流データベースもこのテーブルを比較します。

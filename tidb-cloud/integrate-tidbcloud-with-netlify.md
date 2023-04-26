@@ -38,7 +38,7 @@ Serverless Tierクラスターでは、デフォルトですべての IP アド�
 
     > **ノート：**
     >
-    > Dedicated Tierクラスターの場合は、このステップで**[どこからでもアクセスを許可**する] トラフィック フィルターも設定していることを確認してください。
+    > Dedicated Tierクラスターの場合は、このステップで**[どこからでもアクセスを許可する]**トラフィック フィルターも設定していることを確認してください。
 
 2.  **Netlify ダッシュボード**&gt; <strong>Netlify プロジェクト</strong>&gt;<strong>サイト設定</strong>&gt;<strong>環境変数</strong>に移動し、TiDB クラスターの接続情報に従って[変数を更新する](https://docs.netlify.com/environment-variables/get-started/#update-variables-with-the-netlify-ui)に進みます。
 

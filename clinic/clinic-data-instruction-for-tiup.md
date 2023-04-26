@@ -5,18 +5,18 @@ summary: Learn what diagnostic data can be collected by PingCAP Clinic Diagnosti
 
 # PingCAPクリニックの診断データ {#pingcap-clinic-diagnostic-data}
 
-このドキュメントでは、 TiUPを使用して展開された TiDB および DM クラスターから PingCAP PingCAPクリニック Diagnostic Service (PingCAPクリニック ) によって収集できる診断データの種類について説明します。また、ドキュメントには、各データ型に対応するデータ収集用のパラメーターがリストされています。コマンドを[Diag クライアント (Diag) を使用してデータを収集する](/clinic/clinic-user-guide-for-tiup.md)に実行する場合、収集するデータの種類に応じて、コマンドに必要なパラメーターを追加できます。
+このドキュメントでは、 TiUPを使用して展開された TiDB および DM クラスターからPingCAPクリニック Diagnostic Service (PingCAPクリニック ) によって収集できる診断データの種類について説明します。また、ドキュメントには、各データ型に対応するデータ収集用のパラメーターがリストされています。コマンドを[Diag クライアント (Diag) を使用してデータを収集する](/clinic/clinic-user-guide-for-tiup.md)に実行する場合、収集するデータの種類に応じて、コマンドに必要なパラメーターを追加できます。
 
 PingCAPクリニックによって収集された診断データは、クラスターの問題のトラブルシューティングに**のみ**使用されます。
 
-クラウドに展開された診断サービスである Clinic Server は、データ ストレージの場所に応じて 2 つの独立したサービスを提供します。
+クラウドに展開された診断サービスである Clinic Server は、データstorageの場所に応じて 2 つの独立したサービスを提供します。
 
 -   [海外ユーザー向けクリニックサーバー](https://clinic.pingcap.com) : 収集したデータを国際ユーザー向けの Clinic Server にアップロードすると、データは PingCAP によって AWS 米国リージョンにデプロイされた Amazon S3 サービスに保存されます。 PingCAP は厳格なデータ アクセス ポリシーを使用しており、承認されたテクニカル サポートのみがデータにアクセスできます。
 -   [中国本土のユーザー向けクリニックサーバー](https://clinic.pingcap.com.cn) : 収集したデータを中国本土のユーザー向けの Clinic Server にアップロードすると、データは中国 (北京) リージョンの PingCAP によってデプロイされた Amazon S3 サービスに保存されます。 PingCAP は厳格なデータ アクセス ポリシーを使用しており、承認されたテクニカル サポートのみがデータにアクセスできます。
 
 ## TiDB クラスター {#tidb-clusters}
 
-このセクションでは、 TiUPを使用してデプロイされた TiDB クラスターから Diag によって収集できる診断データのタイプをリストします。
+このセクションでは、 TiUPを使用してデプロイされた TiDB クラスターから[診断](https://github.com/pingcap/diag)で収集できる診断データの種類を示します。
 
 ### TiDB クラスター情報 {#tidb-cluster-information}
 
@@ -46,14 +46,14 @@ PingCAPクリニックによって収集された診断データは、クラス�
 
 ### PD診断データ {#pd-diagnostic-data}
 
-| データ・タイプ                                                                                       | エクスポートされたファイル         | PingCAPクリニックによるデータ収集のパラメータ |
-| :-------------------------------------------------------------------------------------------- | :-------------------- | :------------------------- |
-| ログ                                                                                            | `pd.log`              | `--include=log`            |
-| エラーログ                                                                                         | `pd_stderr.log`       | `--include=log`            |
-| コンフィグレーションファイル                                                                                | `pd.toml`             | `--include=config`         |
-| リアルタイム構成                                                                                      | `config.json`         | `--include=config`         |
-| コマンド`tiup ctl:<cluster-version> pd -u http://${pd IP}:${PORT} store`の出力                       | `store.json`          | `--include=config`         |
-| コマンド`tiup ctl:<cluster-version> pd -u http://${pd IP}:${PORT} config placement-rules show`の出力 | `placement-rule.json` | `--include=config`         |
+| データ・タイプ                                                                                        | エクスポートされたファイル         | PingCAPクリニックによるデータ収集のパラメータ |
+| :--------------------------------------------------------------------------------------------- | :-------------------- | :------------------------- |
+| ログ                                                                                             | `pd.log`              | `--include=log`            |
+| エラーログ                                                                                          | `pd_stderr.log`       | `--include=log`            |
+| コンフィグレーションファイル                                                                                 | `pd.toml`             | `--include=config`         |
+| リアルタイム構成                                                                                       | `config.json`         | `--include=config`         |
+| コマンド`tiup ctl:v<CLUSTER_VERSION> pd -u http://${pd IP}:${PORT} store`の出力                       | `store.json`          | `--include=config`         |
+| コマンド`tiup ctl:v<CLUSTER_VERSION> pd -u http://${pd IP}:${PORT} config placement-rules show`の出力 | `placement-rule.json` | `--include=config`         |
 
 ### TiFlash診断データ {#tiflash-diagnostic-data}
 

@@ -9,9 +9,9 @@ summary: Learn how to read historical data using the `tidb_external_ts` variable
 
 > **警告：**
 >
-> 現在、 Stale ステイル読み取りをTiFlashと一緒に使用することはできません。クエリで[`tidb_enable_external_ts_read`](/system-variables.md#tidb_enable_external_ts_read-new-in-v640)を有効にし、TiDB がTiFlashレプリカからデータを読み取る可能性がある場合、エラー メッセージ`ERROR 1105 (HY000): stale requests require tikv backend`が発生する可能性があります。
+> 現在、 ステイル読み取り をTiFlashと一緒に使用することはできません。クエリで[`tidb_enable_external_ts_read`](/system-variables.md#tidb_enable_external_ts_read-new-in-v640)を有効にし、TiDB がTiFlashレプリカからデータを読み取る可能性がある場合、エラー メッセージ`ERROR 1105 (HY000): stale requests require tikv backend`が発生する可能性があります。
 >
-> この問題を解決するには、次の操作のいずれかを実行して、Stale ステイル読み取りクエリのTiFlashレプリカを無効にします。
+> この問題を解決するには、次の操作のいずれかを実行して、 ステイル読み取りクエリのTiFlashレプリカを無効にします。
 >
 > -   `tidb_isolation_read_engines`変数を使用して、 TiFlashレプリカを無効にします: `SET SESSION tidb_isolation_read_engines='tidb,tikv'` 。
 > -   ヒント[READ_FROM_STORAGE](/optimizer-hints.md#read_from_storagetiflasht1_name--tl_name--tikvt2_name--tl_name-)を使用して、TiDB が TiKV からデータを読み取るように強制します。
@@ -22,9 +22,9 @@ summary: Learn how to read historical data using the `tidb_external_ts` variable
 
 ## 機能説明 {#feature-description}
 
-システム変数[`tidb_external_ts`](/system-variables.md#tidb_external_ts-new-in-v640)は、 `tidb_enable_external_ts_read`が有効な場合に読み取られる履歴データのタイムスタンプを指定します。
+システム変数[`tidb_external_ts`](/system-variables.md#tidb_external_ts-new-in-v640)は、 `tidb_enable_external_ts_read`有効な場合に読み取られる履歴データのタイムスタンプを指定します。
 
-システム変数[`tidb_enable_external_ts_read`](/system-variables.md#tidb_enable_external_ts_read-new-in-v640)は、現在のセッションまたはグローバルのどちらで履歴データを読み取るかを制御します。デフォルト値は`OFF`です。これは、履歴データの読み取り機能が無効になっていることを意味し、値`tidb_external_ts`は無視されます。 `tidb_enable_external_ts_read`がグローバルに`ON`に設定されている場合、すべてのクエリは`tidb_external_ts`で指定された時間より前の履歴データを読み取ります。特定のセッションに対してのみ`tidb_enable_external_ts_read`が`ON`に設定されている場合、そのセッションのクエリのみが履歴データを読み取ります。
+システム変数[`tidb_enable_external_ts_read`](/system-variables.md#tidb_enable_external_ts_read-new-in-v640)は、現在のセッションまたはグローバルのどちらで履歴データを読み取るかを制御します。デフォルト値は`OFF`です。これは、履歴データの読み取り機能が無効になっていることを意味し、値`tidb_external_ts`は無視されます。 `tidb_enable_external_ts_read`がグローバルに`ON`に設定されている場合、すべてのクエリは`tidb_external_ts`で指定された時間より前の履歴データを読み取ります。特定のセッションに対してのみ`tidb_enable_external_ts_read` `ON`に設定されている場合、そのセッションのクエリのみが履歴データを読み取ります。
 
 `tidb_enable_external_ts_read`を有効にすると、TiDB は読み取り専用になります。すべての書き込みクエリは`ERROR 1836 (HY000): Running in read-only mode`のようなエラーで失敗します。
 
@@ -50,7 +50,7 @@ summary: Learn how to read historical data using the `tidb_external_ts` variable
     Query OK, 3 rows affected (0.00 sec)
     ```
 
-2.  テーブル内のデータをビューします。
+2.  テーブル内のデータをビュー。
 
     ```sql
     SELECT * FROM t;
@@ -101,7 +101,7 @@ summary: Learn how to read historical data using the `tidb_external_ts` variable
     4 rows in set (0.00 sec)
     ```
 
-5.  `tidb_enable_external_ts_read`から`ON`を設定してから、テーブルのデータを表示します。
+5.  `tidb_enable_external_ts_read`から`ON`設定してから、テーブルのデータを表示します。
 
     ```sql
     SET tidb_enable_external_ts_read=ON;

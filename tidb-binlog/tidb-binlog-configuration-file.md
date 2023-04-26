@@ -43,7 +43,7 @@ summary: Learn the configuration items of TiDB Binlog.
 
 ### gen-binlog-interval {#gen-binlog-interval}
 
--   データが偽の binlog に書き込まれる間隔 (秒単位) を指定します。
+-   データが fake binlogに書き込まれる間隔 (秒単位) を指定します。
 -   デフォルト値: `3`
 
 ### GC {#gc}
@@ -85,13 +85,13 @@ summary: Learn the configuration items of TiDB Binlog.
 -   PEM 形式でエンコードされた X509 キー ファイルのパスを指定します。たとえば、 `/path/to/pump-key.pem`です。
 -   デフォルト値: &quot;&quot;
 
-### 保管所 {#storage}
+### storage {#storage}
 
-ストレージに関する設定項目を紹介します。
+storageに関する設定項目を紹介します。
 
 #### 同期ログ {#sync-log}
 
--   データの安全性を確保するために、binlog への各**バッチ**書き込みの後に`fsync`を使用するかどうかを指定します。
+-   データの安全性を確保するために、 binlogへの各**バッチ**書き込みの後に`fsync`を使用するかどうかを指定します。
 -   デフォルト値: `true`
 
 #### kv_chan_cap {#kv-chan-cap}
@@ -101,17 +101,17 @@ summary: Learn the configuration items of TiDB Binlog.
 
 #### slow_write_threshold {#slow-write-threshold}
 
--   しきい値 (秒単位)。この指定されたしきい値よりも 1 つの binlog ファイルの書き込みに時間がかかる場合、書き込みは低速書き込みと見なされ、ログに`"take a long time to write binlog"`が出力されます。
+-   しきい値 (秒単位)。この指定されたしきい値よりも 1 つのbinlogファイルの書き込みに時間がかかる場合、書き込みは低速書き込みと見なされ、ログに`"take a long time to write binlog"`が出力されます。
 -   デフォルト値: `1`
 
 #### 使用可能なスペースで書き込みを停止 {#stop-write-at-available-space}
 
--   使用可能なストレージ容量がこの指定値を下回ると、 Binlog書き込みリクエストは受け入れられなくなります。 `900 MB` 、 `5 GB` 、 `12 GiB`などの形式を使用して、ストレージ領域を指定できます。クラスター内に複数のPumpノードがある場合、容量不足のためにPumpノードが書き込み要求を拒否すると、TiDB はバイナリログを他のPumpノードに自動的に書き込みます。
+-   使用可能なstorage容量がこの指定値を下回ると、 Binlog書き込みリクエストは受け入れられなくなります。 `900 MB` 、 `5 GB` 、 `12 GiB`などの形式を使用して、storage領域を指定できます。クラスター内に複数のPumpノードがある場合、容量不足のためにPumpノードが書き込み要求を拒否すると、TiDB はバイナリログを他のPumpノードに自動的に書き込みます。
 -   デフォルト値: `10 GiB`
 
 #### kv {#kv}
 
-現在、 Pumpのストレージは[GoLevelDB](https://github.com/syndtr/goleveldb)に基づいて実装されています。 `storage`の下には、GoLevel 構成を調整するために使用される`kv`サブグループもあります。サポートされている構成アイテムは次のとおりです。
+現在、 Pumpのstorageは[GoLevelDB](https://github.com/syndtr/goleveldb)に基づいて実装されています。 `storage`の下には、GoLevel 構成を調整するために使用される`kv`サブグループもあります。サポートされている構成アイテムは次のとおりです。
 
 -   ブロックキャッシュ容量
 -   ブロック再起動間隔
@@ -173,15 +173,15 @@ Drainerの設定項目を紹介します。完全なDrainer構成ファイルの
 ### 初期コミット ts {#initial-commit-ts}
 
 -   レプリケーション プロセスを開始するトランザクションのコミット タイムスタンプを指定します。この構成は、初めてレプリケーション プロセスにあるDrainerノードにのみ適用されます。ダウンストリームにチェックポイントがすでに存在する場合、チェックポイントに記録された時間に従ってレプリケーションが実行されます。
--   commit ts (コミット タイムスタンプ) は、TiDB での[取引](/transaction-overview.md#transactions)コミットの特定の時点です。これは、現在のトランザクションの一意の ID として PD からグローバルに一意で増加するタイムスタンプです。次の一般的な方法で`initial-commit-ts`の構成を取得できます。
+-   commit ts (コミット タイムスタンプ) は、TiDB での[取引](/transaction-overview.md#transactions)コミットの特定の時点です。これは、現在のトランザクションの一意の ID として PD からグローバルに一意で増加するタイムスタンプです。次の一般的な方法で`initial-commit-ts`構成を取得できます。
     -   BRを使用した場合、 BRがバックアップするメタデータ (backupmeta) に記録されているバックアップ TS から`initial-commit-ts`取得できます。
     -   Dumplingを利用した場合、 Dumplingがバックアップするメタデータ(メタデータ)に記録されているPosから`initial-commit-ts`取得でき、
     -   PD Controlが使用されている場合、 `initial-commit-ts`は`tso`コマンドの出力になります。
--   デフォルト値: `-1` 。 Drainerは、開始時刻として PD から新しいタイムスタンプを取得します。これは、レプリケーション プロセスが現在の時刻から開始されることを意味します。
+-   デフォルト値: `-1` 。 Drainer は、開始時刻として PD から新しいタイムスタンプを取得します。これは、レプリケーション プロセスが現在の時刻から開始されることを意味します。
 
 ### 同期チェック時刻 {#synced-check-time}
 
--   HTTP API 経由で`/status`のパスにアクセスして、 Drainerレプリケーションのステータスを照会できます。 `synced-check-time`は、最後に複製が成功してから何分後に`synced`と見なされるかを指定します。つまり、複製が完了したと見なされます。
+-   HTTP API 経由で`/status`パスにアクセスして、 Drainerレプリケーションのステータスを照会できます。 `synced-check-time`最後に複製が成功してから何分後に`synced`と見なされるかを指定します。つまり、複製が完了したと見なされます。
 -   デフォルト値: `5`
 
 ### コンプレッサー {#compressor}
@@ -230,12 +230,12 @@ Drainerの設定項目を紹介します。完全なDrainer構成ファイルの
 
 #### 無視-txn-コミット-ts {#ignore-txn-commit-ts}
 
--   binlog が無視されるコミット タイムスタンプ ( `[416815754209656834, 421349811963822081]`など) を指定します。
+-   binlogが無視されるコミット タイムスタンプ ( `[416815754209656834, 421349811963822081]`など) を指定します。
 -   デフォルト値: `[]`
 
 #### 無視スキーマ {#ignore-schemas}
 
--   レプリケーション中に無視するデータベースを指定します。無視するデータベースが複数ある場合は、カンマで区切ります。 binlog ファイル内のすべての変更がフィルター処理された場合、binlog ファイル全体が無視されます。
+-   レプリケーション中に無視するデータベースを指定します。無視するデータベースが複数ある場合は、カンマで区切ります。 binlogファイル内のすべての変更がフィルター処理された場合、 binlogファイル全体が無視されます。
 -   デフォルト値: `INFORMATION_SCHEMA,PERFORMANCE_SCHEMA,mysql`
 
 #### 無視テーブル {#ignore-table}
@@ -254,7 +254,7 @@ db-name = "test"
 tbl-name = "audit"
 ```
 
-binlog ファイル内のすべての変更がフィルター処理された場合、binlog ファイル全体が無視されます。
+binlogファイル内のすべての変更がフィルター処理された場合、 binlogファイル全体が無視されます。
 
 デフォルト値: `[]`
 
@@ -298,7 +298,7 @@ tbl-name = "~^a.*"
 
 #### セーフモード {#safe-mode}
 
-セーフ モードが有効になっている場合、 Drainerはレプリケーションの更新を次のように変更します。
+セーフ モードが有効になっている場合、 Drainer はレプリケーションの更新を次のように変更します。
 
 -   `Insert`は`Replace Into`に変更されます
 -   `Update`は`Delete`プラス`Replace Into`に変更されます
@@ -313,15 +313,15 @@ tbl-name = "~^a.*"
 
 次の構成項目は、ダウンストリーム データベースへの接続に関連しています。
 
--   `host` : この項目が設定されていない場合、TiDB Binlogはデフォルトで`localhost`である`MYSQL_HOST`環境変数をチェックしようとします。
--   `port` : この項目が設定されていない場合、TiDB Binlogはデフォルトで`3306`である`MYSQL_PORT`環境変数をチェックしようとします。
--   `user` : この項目が設定されていない場合、TiDB Binlogはデフォルトで`root`である`MYSQL_USER`環境変数をチェックしようとします。
--   `password` : この項目が設定されていない場合、TiDB Binlogはデフォルトで`""`である`MYSQL_PSWD`環境変数をチェックしようとします。
--   `read-timeout` : ダウンストリーム データベース接続の I/O 読み取りタイムアウトを指定します。デフォルト値は`1m`です。時間がかかる一部の DDL でDrainerが失敗し続ける場合は、この構成をより大きな値に設定できます。
+-   `host` : この項目が設定されていない場合、TiDB Binlog はデフォルトで`localhost`である`MYSQL_HOST`環境変数をチェックしようとします。
+-   `port` : この項目が設定されていない場合、TiDB Binlog はデフォルトで`3306`である`MYSQL_PORT`環境変数をチェックしようとします。
+-   `user` : この項目が設定されていない場合、TiDB Binlog はデフォルトで`root`である`MYSQL_USER`環境変数をチェックしようとします。
+-   `password` : この項目が設定されていない場合、TiDB Binlog はデフォルトで`""`である`MYSQL_PSWD`環境変数をチェックしようとします。
+-   `read-timeout` : ダウンストリーム データベース接続の I/O 読み取りタイムアウトを指定します。デフォルト値は`1m`です。時間がかかる一部の DDL でDrainer が失敗し続ける場合は、この構成をより大きな値に設定できます。
 
 #### ファイル {#file}
 
--   `dir` : binlog ファイルが保存されるディレクトリを指定します。この項目が設定されていない場合は、 `data-dir`が使用されます。
+-   `dir` : binlogファイルが保存されるディレクトリを指定します。この項目が設定されていない場合は、 `data-dir`が使用されます。
 
 #### カフカ {#kafka}
 

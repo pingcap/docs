@@ -83,7 +83,7 @@ WITH RECURSIVE cte(a) AS (SELECT 1 UNION SELECT a+1 FROM cte WHERE a < 5) SELECT
 
 -   厳密モードでは、再帰的に計算されたデータ長がシード部分のデータ長を超えると、TiDB は警告を返しますが、MySQL はエラーを返します。非厳密モードでは、TiDB の動作は MySQL の動作と一致します。
 -   再帰 CTE のデータ型は、シード部分によって決まります。シード部分のデータ型は、MySQL と完全に一致しない場合があります (関数など)。
--   複数の`UNION` / `UNION ALL`演算子の場合、MySQL は`UNION`の後に`UNION ALL`が続くことを許可しませんが、TiDB は許可します。
+-   複数の`UNION` / `UNION ALL`演算子の場合、MySQL は`UNION`後に`UNION ALL`が続くことを許可しませんが、TiDB は許可します。
 -   CTE の定義に問題がある場合、TiDB はエラーを報告しますが、CTE が参照されていない場合、MySQL はエラーを報告しません。
 
 ## こちらもご覧ください {#see-also}

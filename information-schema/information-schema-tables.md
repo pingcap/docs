@@ -97,12 +97,12 @@ SHOW TABLES
 -   `TABLE_SCHEMA` : テーブルが属するスキーマの名前。
 -   `TABLE_NAME` : テーブルの名前。
 -   `TABLE_TYPE` : テーブルのタイプ。
--   `ENGINE` : ストレージ エンジンのタイプ。値は現在`InnoDB`です。
+-   `ENGINE` :storageエンジンのタイプ。値は現在`InnoDB`です。
 -   `VERSION` : バージョン。デフォルトの値は`10`です。
 -   `ROW_FORMAT` : 行フォーマット。値は現在`Compact`です。
 -   `TABLE_ROWS` : 統計のテーブル内の行数。
 -   `AVG_ROW_LENGTH` : テーブルの平均行長。 `AVG_ROW_LENGTH` = `DATA_LENGTH` / `TABLE_ROWS` .
--   `DATA_LENGTH` : データ長。 `DATA_LENGTH` = `TABLE_ROWS` * タプル内の列のストレージ長の合計。 TiKV のレプリカは考慮されません。
+-   `DATA_LENGTH` : データ長。 `DATA_LENGTH` = `TABLE_ROWS` * タプル内の列のstorage長の合計。 TiKV のレプリカは考慮されません。
 -   `MAX_DATA_LENGTH` : 最大データ長。値は現在`0`です。これは、データ長に上限がないことを意味します。
 -   `INDEX_LENGTH` : インデックスの長さ。 `INDEX_LENGTH` = `TABLE_ROWS` * インデックス タプルの列の長さの合計。 TiKV のレプリカは考慮されません。
 -   `DATA_FREE` : データフラグメント。値は現在`0`です。

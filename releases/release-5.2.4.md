@@ -25,7 +25,7 @@ TiDB バージョン: 5.2.4
 
     -   TiDB Lightning
 
-        -   デフォルト値の`regionMaxKeyCount`を 1_440_000 から 1_280_000 に変更して、データのインポート後に空のリージョンが多くなりすぎないようにします[#30018](https://github.com/pingcap/tidb/issues/30018)
+        -   デフォルト値の`regionMaxKeyCount` 1_440_000 から 1_280_000 に変更して、データのインポート後に空のリージョンが多くなりすぎないようにします[#30018](https://github.com/pingcap/tidb/issues/30018)
 
 ## 改良点 {#improvements}
 
@@ -64,7 +64,7 @@ TiDB バージョン: 5.2.4
     -   トランザクションを使用する場合と使用しない場合で、ウィンドウ関数が異なる結果を返すことがある問題を修正します[#29947](https://github.com/pingcap/tidb/issues/29947)
     -   SQL ステートメントに自然結合[#25041](https://github.com/pingcap/tidb/issues/25041)が含まれていると、予期せず`Column 'col_name' in field list is ambiguous`エラーが報告される問題を修正します。
     -   `Decimal`から`String` [#29417](https://github.com/pingcap/tidb/issues/29417)をキャストするとき、長さの情報が間違っている問題を修正
-    -   `tidb_enable_vectorized_expression`の異なる値 ( `on`または`off`に設定) が原因で`GREATEST`関数が一貫性のない結果を返す問題を修正します。 [#29434](https://github.com/pingcap/tidb/issues/29434)
+    -   `tidb_enable_vectorized_expression`の異なる値 ( `on`または`off`に設定) が原因で`GREATEST`関数が一貫性のない結果を返す問題を修正します[#29434](https://github.com/pingcap/tidb/issues/29434)
     -   `left join` [#31321](https://github.com/pingcap/tidb/issues/31321)を使用して複数のテーブルのデータを削除したときの誤った結果を修正
     -   TiDB が重複したタスクをTiFlash [#32814](https://github.com/pingcap/tidb/issues/32814)にディスパッチする可能性があるバグを修正
     -   クエリ実行時の MPP タスク リストの空エラーを修正します[#31636](https://github.com/pingcap/tidb/issues/31636)
@@ -92,24 +92,24 @@ TiDB バージョン: 5.2.4
     -   データ[#29711](https://github.com/pingcap/tidb/issues/29711)のクエリにプレフィックス列インデックスが使用されている場合、1 つのステートメントで`ORDER BY`と`LIMIT`を一緒に使用すると間違った結果が出力される可能性があるという問題を修正します。
     -   楽観的トランザクションが[#29892](https://github.com/pingcap/tidb/issues/29892)をリトライすると、DOUBLE 型の自動インクリメント カラムが変更される可能性がある問題を修正します。
     -   STR_TO_DATE 関数がマイクロ秒部分の前のゼロを正しく処理できない問題を修正します[#30078](https://github.com/pingcap/tidb/issues/30078)
-    -   TiFlash を使用して空の範囲を持つテーブルをスキャンすると、 TiFlashが間違った結果を取得する問題を修正しますが、 TiFlashはまだ空の範囲を持つテーブルの読み取りをサポートしていません[#33083](https://github.com/pingcap/tidb/issues/33083)
+    -   TiFlashを使用して空の範囲を持つテーブルをスキャンすると、TiDB が間違った結果を取得する問題を修正しますが、 TiFlash はまだ空の範囲を持つテーブルの読み取りをサポートしていません[#33083](https://github.com/pingcap/tidb/issues/33083)
 
 -   TiKV
 
     -   古いメッセージが原因で TiKV がpanicになるバグを修正[#12023](https://github.com/tikv/tikv/issues/12023)
-    -   メモリメトリック[#12160](https://github.com/tikv/tikv/issues/12160)のオーバーフローが原因で発生する断続的なパケット損失とメモリ(OOM) の問題を修正します。
-    -   [#9765](https://github.com/tikv/tikv/issues/9765)が Ubuntu 18.04 でプロファイリングを実行するときに発生する潜在的なpanicの問題を修正します。
+    -   メモリメトリック[#12160](https://github.com/tikv/tikv/issues/12160)のオーバーフローが原因で発生する断続的なパケット損失とメモリ不足 (OOM) の問題を修正します。
+    -   TiKV が Ubuntu [#9765](https://github.com/tikv/tikv/issues/9765)でプロファイリングを実行するときに発生する潜在的なpanicの問題を修正します。
     -   間違った文字列の一致が原因で tikv-ctl が間違った結果を返す問題を修正します[#12329](https://github.com/tikv/tikv/issues/12329)
     -   レプリカの読み取りが線形化可能性に違反する可能性があるバグを修正します[#12109](https://github.com/tikv/tikv/issues/12109)
     -   TiKVが2年以上稼働しているとpanicになることがあるバグを修正[#11940](https://github.com/tikv/tikv/issues/11940)
-    -   フロー制御が有効で、 `level0_slowdown_trigger`が明示的に設定されている場合の QPS ドロップの問題を修正し[#11424](https://github.com/tikv/tikv/issues/11424) 。
+    -   フロー制御が有効で、 `level0_slowdown_trigger`が明示的に設定され[#11424](https://github.com/tikv/tikv/issues/11424)いる場合の QPS ドロップの問題を修正します。
     -   cgroup コントローラーがマウントされていない場合に発生するpanicの問題を修正します[#11569](https://github.com/tikv/tikv/issues/11569)
     -   遅れているリージョンピア[#11526](https://github.com/tikv/tikv/issues/11526)でのリージョンマージによって発生する可能性のあるメタデータの破損を修正します。
     -   TiKVの動作停止後、Resolved TSのレイテンシーが増加する問題を修正[#11351](https://github.com/tikv/tikv/issues/11351)
     -   極端な状況でリージョンのマージ、ConfChange、およびスナップショットが同時に発生したときに発生するpanicの問題を修正します[#11475](https://github.com/tikv/tikv/issues/11475)
     -   tikv-ctl が正しいリージョン関連の情報を返せないバグを修正[#11393](https://github.com/tikv/tikv/issues/11393)
     -   10 進数の除算結果がゼロ[#29586](https://github.com/pingcap/tidb/issues/29586)の場合の負号の問題を修正
-    -   悲観的トランザクション モードでプリライト リクエストを再試行すると、まれにデータの不整合が発生する可能性がある問題を修正し[#11187](https://github.com/tikv/tikv/issues/11187) 。
+    -   悲観的トランザクション モードでプリライト リクエストを再試行すると、まれにデータの不整合が発生する可能性がある問題を修正します[#11187](https://github.com/tikv/tikv/issues/11187)
     -   統計スレッド[#11195](https://github.com/tikv/tikv/issues/11195)のデータを監視することによって引き起こされるメモリリークを修正します。
     -   インスタンスごとの gRPC リクエストの平均レイテンシーが TiKV メトリクスで不正確である問題を修正します[#11299](https://github.com/tikv/tikv/issues/11299)
     -   ピア ステータスが`Applying` [#11746](https://github.com/tikv/tikv/issues/11746)のときにスナップショット ファイルを削除すると発生するpanicの問題を修正します。
@@ -134,7 +134,7 @@ TiDB バージョン: 5.2.4
     -   多値式で`IN`の結果が正しくない問題を修正[#4016](https://github.com/pingcap/tiflash/issues/4016)
     -   日付形式が`'\n'`を無効な区切り文字として識別する問題を修正します[#4036](https://github.com/pingcap/tiflash/issues/4036)
     -   重い読み取りワークロードの下で列を追加した後の潜在的なクエリ エラーを修正します[#3967](https://github.com/pingcap/tiflash/issues/3967)
-    -   無効なストレージ ディレクトリ構成が予期しない動作を引き起こすバグを修正します[#4093](https://github.com/pingcap/tiflash/issues/4093)
+    -   無効なstorageディレクトリ構成が予期しない動作を引き起こすバグを修正します[#4093](https://github.com/pingcap/tiflash/issues/4093)
     -   一部の例外が適切に処理されないバグを修正[#4101](https://github.com/pingcap/tiflash/issues/4101)
     -   `STR_TO_DATE()`関数がマイクロ秒の解析時に先頭のゼロを正しく処理しないというバグを修正します[#3557](https://github.com/pingcap/tiflash/issues/3557)
     -   `INT`から`DECIMAL`をキャストするとオーバーフロー[#3920](https://github.com/pingcap/tiflash/issues/3920)が発生する可能性がある問題を修正
@@ -142,7 +142,7 @@ TiDB バージョン: 5.2.4
     -   `FLOAT`から`DECIMAL` [#3998](https://github.com/pingcap/tiflash/issues/3998)へのキャスト時に発生するオーバーフローを修正
     -   `CastStringAsReal`動作がTiFlashと TiDB または TiKV [#3475](https://github.com/pingcap/tiflash/issues/3475)で一貫していない問題を修正
     -   `CastStringAsDecimal`動作がTiFlashと TiDB または TiKV [#3619](https://github.com/pingcap/tiflash/issues/3619)で一貫していない問題を修正
-    -   TiFlashが再起動後に`EstablishMPPConnection`エラーを返す場合がある問題を修正[#3615](https://github.com/pingcap/tiflash/issues/3615)
+    -   TiFlash が再起動後に`EstablishMPPConnection`エラーを返す場合がある問題を修正[#3615](https://github.com/pingcap/tiflash/issues/3615)
     -   TiFlashレプリカの数を 0 [#3659](https://github.com/pingcap/tiflash/issues/3659)に設定した後、古いデータを再利用できないという問題を修正します。
     -   主キーが`handle` [#3569](https://github.com/pingcap/tiflash/issues/3569)の場合に主キー列を拡張すると、データの不整合が発生する可能性がある問題を修正
     -   SQL ステートメントに非常に長いネストされた式が含まれている場合に発生する可能性がある解析エラーを修正します[#3354](https://github.com/pingcap/tiflash/issues/3354)
@@ -150,17 +150,17 @@ TiDB バージョン: 5.2.4
     -   `new_collations_enabled_on_first_bootstrap`が有効になっている場合に発生する可能性のある誤った結果を修正します[#3388](https://github.com/pingcap/tiflash/issues/3388) , [#3391](https://github.com/pingcap/tiflash/issues/3391)
     -   TLS が有効になっているときに発生するpanicの問題を修正します[#4196](https://github.com/pingcap/tiflash/issues/4196)
     -   メモリ制限が有効になっているときに発生するpanicの問題を修正します[#3902](https://github.com/pingcap/tiflash/issues/3902)
-    -   MPP クエリを停止するとTiFlashがクラッシュすることがある問題を修正します[#3401](https://github.com/pingcap/tiflash/issues/3401)
+    -   MPP クエリを停止するとTiFlash がクラッシュすることがある問題を修正します[#3401](https://github.com/pingcap/tiflash/issues/3401)
     -   `Unexpected type of column: Nullable(Nothing)` [#3351](https://github.com/pingcap/tiflash/issues/3351)の予期しないエラーを修正
     -   遅れているリージョンピア[#4437](https://github.com/pingcap/tiflash/issues/4437)でのリージョンマージによって発生する可能性のあるメタデータの破損を修正します。
-    -   エラーが発生した場合に`JOIN`を含むクエリがハングする可能性がある問題を修正します[#4195](https://github.com/pingcap/tiflash/issues/4195)
+    -   エラーが発生した場合に`JOIN`含むクエリがハングする可能性がある問題を修正します[#4195](https://github.com/pingcap/tiflash/issues/4195)
     -   不適切な実行計画が原因で MPP クエリに対して返される可能性のある誤った結果を修正します[#3389](https://github.com/pingcap/tiflash/issues/3389)
 
 -   ツール
 
     -   バックアップと復元 (BR)
 
-        -   BRが RawKV [#32607](https://github.com/pingcap/tidb/issues/32607)のバックアップに失敗する問題を修正
+        -   BR がRawKV [#32607](https://github.com/pingcap/tidb/issues/32607)のバックアップに失敗する問題を修正
 
     -   TiCDC
 
@@ -194,8 +194,8 @@ TiDB バージョン: 5.2.4
 
     -   TiDB Lightning
 
-        -   TiDB Lightningが`mysql.tidb`テーブルへのアクセス権限を持っていない場合に発生する間違ったインポート結果の問題を修正[#31088](https://github.com/pingcap/tidb/issues/31088)
+        -   TiDB Lightning が`mysql.tidb`テーブルへのアクセス権限を持っていない場合に発生する間違ったインポート結果の問題を修正[#31088](https://github.com/pingcap/tidb/issues/31088)
         -   チェックサム エラー「GC ライフ タイムがトランザクション期間よりも短い」を修正します[#32733](https://github.com/pingcap/tidb/issues/32733)
-        -   一部のインポート タスクにソース ファイルが含まれていない場合、 TiDB Lightningがメタデータ スキーマを削除しないことがあるというバグを修正します[#28144](https://github.com/pingcap/tidb/issues/28144)
-        -   S3 ストレージ パスが存在しない場合にTiDB Lightningがエラーを報告しない問題を修正[#28031](https://github.com/pingcap/tidb/issues/28031) [#30709](https://github.com/pingcap/tidb/issues/30709)
+        -   一部のインポート タスクにソース ファイルが含まれていない場合、 TiDB Lightning がメタデータ スキーマを削除しないことがあるというバグを修正します[#28144](https://github.com/pingcap/tidb/issues/28144)
+        -   S3storageパスが存在しない場合にTiDB Lightning がエラーを報告しない問題を修正[#28031](https://github.com/pingcap/tidb/issues/28031) [#30709](https://github.com/pingcap/tidb/issues/30709)
         -   GCS [#30377](https://github.com/pingcap/tidb/issues/30377)で 1000 を超えるキーを反復するときに発生するエラーを修正

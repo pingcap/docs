@@ -24,7 +24,7 @@ MySQL 互換データベースからデータを移行する場合、完全デ�
 
 -   MySQL シャードの移行とマージ
 
-    アプリケーションがデータ ストレージに MySQL シャードを使用している場合、これらのシャードを 1 つのテーブルとしてTiDB Cloudに移行できます。詳細については、 [大規模なデータセットの MySQL シャードをTiDB Cloudに移行およびマージする](/tidb-cloud/migrate-sql-shards.md)を参照してください。
+    アプリケーションがデータstorageに MySQL シャードを使用している場合、これらのシャードを 1 つのテーブルとしてTiDB Cloudに移行できます。詳細については、 [大規模なデータセットの MySQL シャードをTiDB Cloudに移行およびマージする](/tidb-cloud/migrate-sql-shards.md)を参照してください。
 
 -   オンプレミスの TiDB から移行する
 
@@ -40,7 +40,7 @@ SQL、CSV、Parquet、またはAuroraスナップショット形式のデータ 
 
 -   サンプルデータ (SQL ファイル) をTiDB Cloudにインポートする
 
-    サンプル データ (SQL ファイル) をTiDB Cloudにインポートして、 TiDB Cloudインターフェイスとインポート プロセスにすぐに慣れることができます。詳細については、 [サンプルデータをTiDB Cloudにインポートする](/tidb-cloud/import-sample-data.md)を参照してください。
+    サンプル データ (SQL ファイル) をTiDB Cloudにインポートして、TiDB Cloudインターフェイスとインポート プロセスにすぐに慣れることができます。詳細については、 [サンプルデータをTiDB Cloudにインポートする](/tidb-cloud/import-sample-data.md)を参照してください。
 
 -   Amazon S3 または GCS からTiDB Cloudに CSV ファイルをインポートする
 

@@ -9,7 +9,7 @@ summary: Learn the terms used in TiDB Binlog.
 
 ## Binlog {#binlog}
 
-TiDB Binlogでは、binlog は TiDB からのバイナリ ログ データを参照します。また、 Drainerが Kafka またはファイルに書き込むバイナリ ログ データも参照します。前者と後者では形式が異なります。さらに、TiDB のバイナリログと MySQL のバイナリログも異なる形式です。
+TiDB Binlogでは、binlog は TiDB からのバイナリ ログ データを参照します。また、 Drainer がKafka またはファイルに書き込むバイナリ ログ データも参照します。前者と後者では形式が異なります。さらに、TiDB のバイナリログと MySQL のバイナリログも異なる形式です。
 
 ## Binlogイベント {#binlog-event}
 
@@ -17,7 +17,7 @@ TiDB の DML バイナリログには、 `INSERT` 、 `UPDATE` 、および`DELE
 
 ## チェックポイント {#checkpoint}
 
-チェックポイントは、レプリケーション タスクが一時停止されてから再開されるか、または停止されてから再開される位置を示します。 Drainerがダウンストリームにレプリケートする commit-ts を記録します。再起動すると、 Drainerはチェックポイントを読み取り、対応する commit-ts からデータの複製を開始します。
+チェックポイントは、レプリケーション タスクが一時停止されてから再開されるか、または停止されてから再開される位置を示します。 Drainerがダウンストリームにレプリケートする commit-ts を記録します。再起動すると、 Drainer はチェックポイントを読み取り、対応する commit-ts からデータの複製を開始します。
 
 ## セーフモード {#safe-mode}
 

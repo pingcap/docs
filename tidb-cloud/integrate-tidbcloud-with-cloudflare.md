@@ -3,7 +3,7 @@ title: Integrate TiDB Cloud with Cloudflare
 summary: Learn how deploy Cloudflare Workers with TiDB Cloud.
 ---
 
-# TiDB Cloudを Cloudflare ワーカーと統合する {#integrate-tidb-cloud-with-cloudflare-workers}
+# TiDB CloudをCloudflare ワーカーと統合する {#integrate-tidb-cloud-with-cloudflare-workers}
 
 [Cloudflare ワーカー](https://workers.cloudflare.com/)は、HTTP 要求やデータベースへの変更など、特定のイベントに応答してコードを実行できるプラットフォームです。 Cloudflare Workers は使いやすく、カスタム API、サーバーレス関数、マイクロサービスなど、さまざまなアプリケーションの構築に使用できます。これは、低レイテンシーのパフォーマンスを必要とするアプリケーションや、迅速にスケーリングする必要があるアプリケーションに特に役立ちます。
 
@@ -15,13 +15,13 @@ summary: Learn how deploy Cloudflare Workers with TiDB Cloud.
 
 > **ノート：**
 >
-> ローカルにデプロイされた TiDB を Cloudflare ワーカーに接続する場合は、Cloudflare トンネルをプロキシとして使用する[ワーカー tidb](https://github.com/shiyuhang0/worker-tidb)を試すことができます。ただし、worker-tidb は本番環境での使用はお勧めしません。
+> ローカルにデプロイされた TiDB を Cloudflare ワーカーに接続する場合は、Cloudflare トンネルをプロキシとして使用する[ワーカー tidb](https://github.com/shiyuhang0/worker-tidb)を試すことができます。ただし、worker-tidb は本番での使用はお勧めしません。
 
 ## あなたが始める前に {#before-you-begin}
 
 この記事の手順を試す前に、次のことを準備する必要があります。
 
--   TiDB CloudアカウントとTiDB Cloud Serverless Tierクラスター。詳細については、 [TiDB Cloudクイック スタート](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster)を参照してください。
+-   TiDB CloudアカウントとTiDB Cloud上のServerless Tierクラスター。詳細については、 [TiDB Cloudクイック スタート](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster)を参照してください。
 -   [Cloudflare ワーカー アカウント](https://dash.cloudflare.com/login) .
 -   [Prisma Data Platform アカウント](https://cloud.prisma.io/) .
 -   [GitHub アカウント](https://github.com/login) .
@@ -62,7 +62,7 @@ summary: Learn how deploy Cloudflare Workers with TiDB Cloud.
 
     これにより、 Prisma スキーマが`prisma/schema.prisma`に作成されます。
 
-3.  `prisma/schema.prisma`内で、TiDB のテーブルに従ってスキーマを追加します。 TiDB に`table1`と`table2`があると仮定すると、次のスキーマを追加できます。
+3.  `prisma/schema.prisma`内で、TiDB のテーブルに従ってスキーマを追加します。 TiDB に`table1`と`table2`あると仮定すると、次のスキーマを追加できます。
 
     ```
     generator client {
@@ -104,23 +104,23 @@ summary: Learn how deploy Cloudflare Workers with TiDB Cloud.
 
 Cloudflare Workers では、TCP がサポートされていないため、データベースに直接アクセスできません。代わりに、上記のように Prisma Data Proxy を使用できます。
 
-1.  開始するには、 [Prisma データ プラットフォーム](https://cloud.prisma.io/)にサインインして [**新しいプロジェクト**] をクリックします。
+1.  開始するには、 [Prisma データ プラットフォーム](https://cloud.prisma.io/)にサインインして**[新しいプロジェクト]**をクリックします。
 
 2.  **接続文字列**にこのパターンを入力します`mysql://USER:PASSWORD@HOST:PORT/DATABASE?sslaccept=strict` 。接続情報は[TiDB Cloudコンソール](https://tidbcloud.com/console/clusters)にあります。
 
-3.  TiDB Cloud Serverless Tierは任意の IP アドレスからアクセスできるため、**静的 IP**は無効のままにします。
+3.  TiDB Cloud Serverless Tier は任意の IP アドレスからアクセスできるため、**静的 IP は**無効のままにします。
 
-4.  TiDB Cloudクラスターの場所に地理的に近いデータ プロキシ リージョンを選択します。次に、[**プロジェクトの作成**] をクリックします。
+4.  TiDB Cloudクラスターの場所に地理的に近いデータ プロキシ リージョンを選択します。次に、 **[プロジェクトの作成]**をクリックします。
 
     ![Configure project settings](/media/tidb-cloud/cloudflare/cloudflare-project.png)
 
 5.  リポジトリに入力し、 **Get Started**ページで<strong>Link Prisma schema</strong>をクリックします。
 
-6.  [**新しい接続文字列を作成する] を**クリックすると、 `prisma://.`で始まる新しい接続文字列が作成されます。この接続文字列をコピーして後で使用するために保存します。
+6.  **[新しい接続文字列を作成する]**をクリックすると、 `prisma://.`で始まる新しい接続文字列が作成されます。この接続文字列をコピーして後で使用するために保存します。
 
     ![Create new connection string](/media/tidb-cloud/cloudflare/cloudflare-start.png)
 
-7.  [**スキップしてデータ プラットフォーム**に進む] をクリックして、データ プラットフォームに移動します。
+7.  **[スキップしてデータ プラットフォームに進む]**をクリックして、データ プラットフォームに移動します。
 
 ## ステップ 5: 環境にデータ プロキシ接続文字列を設定する {#step-5-set-the-data-proxy-connection-string-in-your-environment}
 
@@ -140,7 +140,7 @@ Cloudflare Workers では、TCP がサポートされていないため、デー
 
 > **ノート：**
 >
-> Cloudflare Workers ダッシュボードから`DATABASE_URL`のシークレットを編集することもできます。
+> Cloudflare Workers ダッシュボードから`DATABASE_URL`シークレットを編集することもできます。
 
 ## ステップ 6: Prisma クライアントを生成する {#step-6-generate-a-prisma-client}
 
@@ -210,7 +210,7 @@ npx wrangler publish
 
 ### サーバーレス機能の変更 {#change-the-serverless-function}
 
-サーバーレス機能を変更したい場合は、 `src/index.ts`をアップデートして再度Cloudflare Workersに公開してください。
+サーバーレス機能を変更したい場合は、 `src/index.ts`アップデートして再度Cloudflare Workersに公開してください。
 
 ### 新しいテーブルを作成する {#create-a-new-table}
 

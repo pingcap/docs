@@ -5,7 +5,7 @@ summary: Learn steps, rules, and examples to create a database.
 
 # データベースを作成する {#create-a-database}
 
-このドキュメントでは、SQL とさまざまなプログラミング言語を使用してデータベースを作成する方法について説明し、データベース作成のルールを一覧表示します。このドキュメントでは、 [書店](/develop/dev-guide-bookshop-schema-design.md)のアプリケーションを例として、データベース作成の手順を説明します。
+このドキュメントでは、SQL とさまざまなプログラミング言語を使用してデータベースを作成する方法について説明し、データベース作成のルールを一覧表示します。このドキュメントでは、 [書店](/develop/dev-guide-bookshop-schema-design.md)アプリケーションを例として、データベース作成の手順を説明します。
 
 ## 始める前に {#before-you-start}
 
@@ -16,7 +16,7 @@ summary: Learn steps, rules, and examples to create a database.
 
 ## データベースとは {#what-is-database}
 
-TiDB の[データベース](/develop/dev-guide-schema-design-overview.md)個のオブジェクトには、**テーブル**、<strong>ビュー</strong>、<strong>シーケンス</strong>、およびその他のオブジェクトが含まれています。
+TiDB の[データベース](/develop/dev-guide-schema-design-overview.md)のオブジェクトには、**テーブル**、<strong>ビュー</strong>、<strong>シーケンス</strong>、およびその他のオブジェクトが含まれています。
 
 ## データベースを作成する {#create-databases}
 

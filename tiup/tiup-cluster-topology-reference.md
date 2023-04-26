@@ -2,9 +2,9 @@
 title: Topology Configuration File for TiDB Deployment Using TiUP
 ---
 
-# TiUP を使用したTiUP展開用のトポロジコンフィグレーションファイル {#topology-configuration-file-for-tidb-deployment-using-tiup}
+# TiUPを使用した TiDB 展開用のトポロジコンフィグレーションファイル {#topology-configuration-file-for-tidb-deployment-using-tiup}
 
-TiUP を使用してTiUPをデプロイまたはスケーリングするには、クラスター トポロジーを記述するトポロジー ファイル ( [サンプル](https://github.com/pingcap/tiup/blob/master/embed/examples/cluster/topology.example.yaml) ) を提供する必要があります。
+TiUP を使用して TiDB をデプロイまたはスケーリングするには、クラスター トポロジーを記述するトポロジー ファイル ( [サンプル](https://github.com/pingcap/tiup/blob/master/embed/examples/cluster/topology.example.yaml) ) を提供する必要があります。
 
 同様に、クラスタ トポロジを変更するには、トポロジ ファイルを変更する必要があります。違いは、クラスターがデプロイされた後は、トポロジー ファイル内のフィールドの一部しか変更できないことです。このドキュメントでは、トポロジ ファイルの各セクションと、各セクションの各フィールドについて説明します。
 
@@ -24,7 +24,7 @@ TiUPを使用した TiDB 展開のトポロジ構成ファイルには、次の�
 -   [cdc_servers](#cdc_servers) : TiCDC インスタンスの構成。この構成は、TiCDCコンポーネントがデプロイされるマシンを指定します。
 -   [tispark_masters](#tispark_masters) : TiSpark マスター インスタンスの構成。この構成は、TiSpark マスターコンポーネントがデプロイされるマシンを指定します。 TiSpark マスターの 1 つのノードのみをデプロイできます。
 -   [tispark_workers](#tispark_workers) : TiSpark ワーカー インスタンスの構成。この構成は、TiSpark ワーカーコンポーネントがデプロイされるマシンを指定します。
--   [監視サーバー](#monitoring_servers) : Prometheus と NGMonitoring がデプロイされるマシンを指定します。 TiUPは複数の Prometheus インスタンスのデプロイをサポートしていますが、最初のインスタンスのみが使用されます。
+-   [監視サーバー](#monitoring_servers) : Prometheus と NGMonitoring がデプロイされるマシンを指定します。 TiUP は複数の Prometheus インスタンスのデプロイをサポートしていますが、最初のインスタンスのみが使用されます。
 -   [grafana_servers](#grafana_servers) : Grafana インスタンスの構成。この構成は、Grafana がデプロイされるマシンを指定します。
 -   [alertmanager_servers](#alertmanager_servers) : Alertmanager インスタンスの構成。この構成は、Alertmanager がデプロイされるマシンを指定します。
 
@@ -60,7 +60,7 @@ TiUPを使用した TiDB 展開のトポロジ構成ファイルには、次の�
 
 -   `log_dir` : ログ ディレクトリ。デフォルト値: `"log"` 。その適用規則は次のとおりです。
 
-    -   絶対パス`log_dir`がインスタンス レベルで設定されている場合、実際のログ ディレクトリはインスタンス用に設定された`log_dir`になります。
+    -   絶対パス`log_dir`がインスタンス レベルで設定されている場合、実際のログ ディレクトリはインスタンス用に設定された`log_dir`なります。
 
     -   インスタンスごとに、 `log_dir`を構成しない場合、デフォルト値は`<global.log_dir>`です。
 
@@ -82,7 +82,7 @@ TiUPを使用した TiDB 展開のトポロジ構成ファイルには、次の�
 
     -   `limit_core` : コア ダンプのサイズを制御します。
 
-`global`の構成例は次のとおりです。
+`global`構成例は次のとおりです。
 
 ```yaml
 global:
@@ -107,7 +107,7 @@ global:
 
 -   `log_dir` : ログ ディレクトリを指定します。指定しない場合や相対ディレクトリで指定した場合は、 `global`で設定した`log_dir`ディレクトリに従ってログが生成されます。
 
-`monitored`の構成例は次のとおりです。
+`monitored`構成例は次のとおりです。
 
 ```yaml
 monitored:
@@ -115,11 +115,11 @@ monitored:
   blackbox_exporter_port: 9115
 ```
 
-上記の設定では、 `node_exporter`が`9100`ポートを使用し、 `blackbox_exporter`が`9115`ポートを使用するように指定されています。
+上記の設定では、 `node_exporter` `9100`ポートを使用し、 `blackbox_exporter` `9115`ポートを使用するように指定されています。
 
 ### <code>server_configs</code> {#code-server-configs-code}
 
-`server_configs`は、サービスを構成し、各コンポーネントの構成ファイルを生成するために使用されます。 `global`セクションと同様に、このセクションの構成は、インスタンス内の同じ名前の構成によって上書きできます。 `server_configs`には、主に次のフィールドが含まれます。
+`server_configs`は、サービスを構成し、各コンポーネントの構成ファイルを生成するために使用されます。 `global`セクションと同様に、このセクションの構成は、インスタンス内の同じ名前の構成によって上書きできます。 `server_configs`は、主に次のフィールドが含まれます。
 
 -   `tidb` : TiDB サービス関連の構成。完全な構成については、 [TiDB 構成ファイル](/tidb-configuration-file.md)を参照してください。
 
@@ -135,9 +135,9 @@ monitored:
 
 -   `drainer` : Drainerサービス関連の構成。完全な構成については、 [TiDB Binlog構成ファイル](/tidb-binlog/tidb-binlog-configuration-file.md#drainer)を参照してください。
 
--   `cdc` : TiCDC サービス関連の構成。完全な構成については、 [TiCDC をデプロイ](/ticdc/deploy-ticdc.md)を参照してください。
+-   `cdc` : TiCDC サービス関連の構成。完全な構成については、 [TiCDCをデプロイ](/ticdc/deploy-ticdc.md)を参照してください。
 
-`server_configs`の構成例は次のとおりです。
+`server_configs`構成例は次のとおりです。
 
 ```yaml
 server_configs:
@@ -155,11 +155,11 @@ server_configs:
 
 ### <code>pd_servers</code> {#code-pd-servers-code}
 
-`pd_servers`は、PD サービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します。 `pd_servers`は配列で、配列の各要素には次のフィールドが含まれます。
+`pd_servers` PD サービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します。 `pd_servers`は配列で、配列の各要素には次のフィールドが含まれます。
 
 -   `host` : PD サービスがデプロイされるマシンを指定します。フィールド値は IP アドレスで、必須です。
 
--   `listen_host` : マシンに複数の IP アドレスがある場合、 `listen_host`はサービスのリッスン IP アドレスを指定します。デフォルト値は`0.0.0.0`です。
+-   `listen_host` : マシンに複数の IP アドレスがある場合、 `listen_host`サービスのリッスン IP アドレスを指定します。デフォルト値は`0.0.0.0`です。
 
 -   `ssh_port` : 操作対象のマシンに接続する SSH ポートを指定します。指定されていない場合は、 `global`セクションの`ssh_port`が使用されます。
 
@@ -179,11 +179,11 @@ server_configs:
 
 -   `config` : このフィールドの構成規則は、 `server_configs`の`pd`構成規則と同じです。このフィールドが設定されている場合、フィールド コンテンツは`pd`コンテンツ イン`server_configs`とマージされます (2 つのフィールドが重複する場合、このフィールドのコンテンツが有効になります)。次に、構成ファイルが生成され、 `host`で指定されたマシンに送信されます。
 
--   `os` : `host`で指定されたマシンのオペレーティング システム。このフィールドが指定されていない場合、デフォルト値は`global`の`os`の値です。
+-   `os` : `host`で指定されたマシンのオペレーティング システム。このフィールドが指定されていない場合、デフォルト値は`global`の`os`値です。
 
--   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`の値です。
+-   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`値です。
 
--   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`resource_control`の内容を`global`つにマージされます (2 つのフィールドが重複する場合、このフィールドの内容が有効になります)。次に、systemd 構成ファイルが生成され、 `host`で指定されたマシンに送信されます。 `resource_control`の構成ルールは`global`の`resource_control`の内容と同じです。
+-   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`resource_control`内容を`global`つにマージされます (2 つのフィールドが重複する場合、このフィールドの内容が有効になります)。次に、systemd 構成ファイルが生成され、 `host`で指定されたマシンに送信されます。 `resource_control`の構成ルールは`global`の`resource_control`内容と同じです。
 
 上記のフィールドについては、展開後にこれらの構成済みフィールドを変更することはできません。
 
@@ -198,7 +198,7 @@ server_configs:
 -   `arch`
 -   `os`
 
-`pd_servers`の構成例は次のとおりです。
+`pd_servers`構成例は次のとおりです。
 
 ```yaml
 pd_servers:
@@ -213,11 +213,11 @@ pd_servers:
 
 ### <code>tidb_servers</code> {#code-tidb-servers-code}
 
-`tidb_servers`は、TiDB サービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します。 `tidb_servers`は配列で、配列の各要素には次のフィールドが含まれます。
+`tidb_servers` 、TiDB サービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します。 `tidb_servers`は配列で、配列の各要素には次のフィールドが含まれます。
 
 -   `host` : TiDB サービスがデプロイされるマシンを指定します。フィールド値は IP アドレスで、必須です。
 
--   `listen_host` : マシンに複数の IP アドレスがある場合、 `listen_host`はサービスのリッスン IP アドレスを指定します。デフォルト値は`0.0.0.0`です。
+-   `listen_host` : マシンに複数の IP アドレスがある場合、 `listen_host`サービスのリッスン IP アドレスを指定します。デフォルト値は`0.0.0.0`です。
 
 -   `ssh_port` : 操作対象のマシンに接続する SSH ポートを指定します。指定されていない場合は、 `global`セクションの`ssh_port`が使用されます。
 
@@ -233,11 +233,11 @@ pd_servers:
 
 -   `config` : このフィールドの構成規則は、 `server_configs`の`tidb`構成規則と同じです。このフィールドが設定されている場合、フィールド コンテンツは`tidb`コンテンツ イン`server_configs`とマージされます (2 つのフィールドが重複する場合、このフィールドのコンテンツが有効になります)。次に、構成ファイルが生成され、 `host`で指定されたマシンに送信されます。
 
--   `os` : `host`で指定されたマシンのオペレーティング システム。このフィールドが指定されていない場合、デフォルト値は`global`の`os`の値です。
+-   `os` : `host`で指定されたマシンのオペレーティング システム。このフィールドが指定されていない場合、デフォルト値は`global`の`os`値です。
 
--   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`の値です。
+-   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`値です。
 
--   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`resource_control`の内容を`global`つにマージされます (2 つのフィールドが重複する場合、このフィールドの内容が有効になります)。次に、systemd 構成ファイルが生成され、 `host`で指定されたマシンに送信されます。 `resource_control`の構成ルールは`global`の`resource_control`の内容と同じです。
+-   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`resource_control`内容を`global`つにマージされます (2 つのフィールドが重複する場合、このフィールドの内容が有効になります)。次に、systemd 構成ファイルが生成され、 `host`で指定されたマシンに送信されます。 `resource_control`の構成ルールは`global`の`resource_control`内容と同じです。
 
 上記のフィールドについては、展開後にこれらの構成済みフィールドを変更することはできません。
 
@@ -250,7 +250,7 @@ pd_servers:
 -   `arch`
 -   `os`
 
-`tidb_servers`の構成例は次のとおりです。
+`tidb_servers`構成例は次のとおりです。
 
 ```yaml
 tidb_servers:
@@ -263,11 +263,11 @@ tidb_servers:
 
 ### <code>tikv_servers</code> {#code-tikv-servers-code}
 
-`tikv_servers`は、TiKV サービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します。 `tikv_servers`は配列で、配列の各要素には次のフィールドが含まれます。
+`tikv_servers` 、TiKV サービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します。 `tikv_servers`は配列で、配列の各要素には次のフィールドが含まれます。
 
 -   `host` : TiKV サービスがデプロイされるマシンを指定します。フィールド値は IP アドレスで、必須です。
 
--   `listen_host` : マシンに複数の IP アドレスがある場合、 `listen_host`はサービスのリッスン IP アドレスを指定します。デフォルト値は`0.0.0.0`です。
+-   `listen_host` : マシンに複数の IP アドレスがある場合、 `listen_host`サービスのリッスン IP アドレスを指定します。デフォルト値は`0.0.0.0`です。
 
 -   `ssh_port` : 操作対象のマシンに接続する SSH ポートを指定します。指定されていない場合は、 `global`セクションの`ssh_port`が使用されます。
 
@@ -285,11 +285,11 @@ tidb_servers:
 
 -   `config` : このフィールドの構成規則は、 `server_configs`の`tikv`構成規則と同じです。このフィールドが設定されている場合、フィールド コンテンツは`tikv`コンテンツ イン`server_configs`とマージされます (2 つのフィールドが重複する場合、このフィールドのコンテンツが有効になります)。次に、構成ファイルが生成され、 `host`で指定されたマシンに送信されます。
 
--   `os` : `host`で指定されたマシンのオペレーティング システム。このフィールドが指定されていない場合、デフォルト値は`global`の`os`の値です。
+-   `os` : `host`で指定されたマシンのオペレーティング システム。このフィールドが指定されていない場合、デフォルト値は`global`の`os`値です。
 
--   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`の値です。
+-   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`値です。
 
--   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`resource_control`の内容を`global`つにマージされます (2 つのフィールドが重複する場合、このフィールドの内容が有効になります)。次に、systemd 構成ファイルが生成され、 `host`で指定されたマシンに送信されます。 `resource_control`の構成ルールは`global`の`resource_control`の内容と同じです。
+-   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`resource_control`内容を`global`つにマージされます (2 つのフィールドが重複する場合、このフィールドの内容が有効になります)。次に、systemd 構成ファイルが生成され、 `host`で指定されたマシンに送信されます。 `resource_control`の構成ルールは`global`の`resource_control`内容と同じです。
 
 上記のフィールドについては、展開後にこれらの構成済みフィールドを変更することはできません。
 
@@ -303,7 +303,7 @@ tidb_servers:
 -   `arch`
 -   `os`
 
-`tikv_servers`の構成例は次のとおりです。
+`tikv_servers`構成例は次のとおりです。
 
 ```yaml
 tikv_servers:
@@ -317,7 +317,7 @@ tikv_servers:
 
 ### <code>tiflash_servers</code> {#code-tiflash-servers-code}
 
-`tiflash_servers`は、 TiFlashサービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します。このセクションは配列であり、配列の各要素には次のフィールドが含まれます。
+`tiflash_servers` 、 TiFlashサービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します。このセクションは配列であり、配列の各要素には次のフィールドが含まれます。
 
 -   `host` : TiFlashサービスがデプロイされるマシンを指定します。フィールド値は IP アドレスで、必須です。
 
@@ -337,11 +337,11 @@ tikv_servers:
 
 -   `deploy_dir` : デプロイ ディレクトリを指定します。指定がない場合、または相対ディレクトリで指定した場合は、 `global`で設定した`deploy_dir`ディレクトリに従ってディレクトリが生成されます。
 
--   `data_dir` : データ ディレクトリを指定します。指定がない場合、または相対ディレクトリで指定した場合は、 `global`で設定した`data_dir`ディレクトリに従ってディレクトリが生成されます。 TiFlashは、コンマで区切られた複数の`data_dir`のディレクトリをサポートしています。
+-   `data_dir` : データ ディレクトリを指定します。指定がない場合、または相対ディレクトリで指定した場合は、 `global`で設定した`data_dir`ディレクトリに従ってディレクトリが生成されます。 TiFlash は、コンマで区切られた複数の`data_dir`ディレクトリをサポートしています。
 
 -   `log_dir` : ログ ディレクトリを指定します。指定しない場合や相対ディレクトリで指定した場合は、 `global`で設定した`log_dir`ディレクトリに従ってログが生成されます。
 
--   `tmp_path` : TiFlash一時ファイルのストレージ パス。デフォルト値は [ `path`または`storage.latest.dir`の最初のディレクトリ] + &quot;/tmp&quot; です。
+-   `tmp_path` : TiFlash一時ファイルのstorageパス。デフォルト値は [ `path`または`storage.latest.dir`の最初のディレクトリ] + &quot;/tmp&quot; です。
 
 -   `numa_node` : NUMA ポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲット マシンに[numactl](https://linux.die.net/man/8/numactl)がインストールされていることを確認する必要があります。このフィールドが指定されている場合、 cpubind および membind ポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などの NUMA ノードの ID です。
 
@@ -349,11 +349,11 @@ tikv_servers:
 
 -   `learner_config` : 各TiFlashノードには、特別なビルトイン TiKV があります。この構成項目は、この特別な TiKV を構成するために使用されます。通常、この構成項目の内容を変更することはお勧めしません。
 
--   `os` : `host`で指定されたマシンのオペレーティング システム。このフィールドが指定されていない場合、デフォルト値は`global`の`os`の値です。
+-   `os` : `host`で指定されたマシンのオペレーティング システム。このフィールドが指定されていない場合、デフォルト値は`global`の`os`値です。
 
--   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`の値です。
+-   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`値です。
 
--   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`resource_control`の内容を`global`つにマージされます (2 つのフィールドが重複する場合、このフィールドの内容が有効になります)。次に、systemd 構成ファイルが生成され、 `host`で指定されたマシンに送信されます。 `resource_control`の構成ルールは`global`の`resource_control`の内容と同じです。
+-   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`resource_control`内容を`global`つにマージされます (2 つのフィールドが重複する場合、このフィールドの内容が有効になります)。次に、systemd 構成ファイルが生成され、 `host`で指定されたマシンに送信されます。 `resource_control`の構成ルールは`global`の`resource_control`内容と同じです。
 
 展開後、上記のフィールドでは、ディレクトリを`data_dir`にのみ追加できます。以下のフィールドについては、これらのフィールドを変更できません。
 
@@ -370,7 +370,7 @@ tikv_servers:
 -   `arch`
 -   `os`
 
-`tiflash_servers`の構成例は次のとおりです。
+`tiflash_servers`構成例は次のとおりです。
 
 ```yaml
 tiflash_servers:
@@ -380,7 +380,7 @@ tiflash_servers:
 
 ### <code>pump_servers</code> {#code-pump-servers-code}
 
-`pump_servers`は、TiDB BinlogのPumpサービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します。 `pump_servers`は配列で、配列の各要素には次のフィールドが含まれます。
+`pump_servers` 、TiDB BinlogのPumpサービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します。 `pump_servers`は配列で、配列の各要素には次のフィールドが含まれます。
 
 -   `host` : Pumpサービスがデプロイされるマシンを指定します。フィールド値は IP アドレスで、必須です。
 
@@ -398,11 +398,11 @@ tiflash_servers:
 
 -   `config` : このフィールドの構成規則は、 `server_configs`の`pump`構成規則と同じです。このフィールドが設定されている場合、フィールド コンテンツは`pump`コンテンツ イン`server_configs`とマージされます (2 つのフィールドが重複する場合、このフィールドのコンテンツが有効になります)。次に、構成ファイルが生成され、 `host`で指定されたマシンに送信されます。
 
--   `os` : `host`で指定されたマシンのオペレーティング システム。このフィールドが指定されていない場合、デフォルト値は`global`の`os`の値です。
+-   `os` : `host`で指定されたマシンのオペレーティング システム。このフィールドが指定されていない場合、デフォルト値は`global`の`os`値です。
 
--   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`の値です。
+-   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`値です。
 
--   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`resource_control`の内容を`global`つにマージされます (2 つのフィールドが重複する場合、このフィールドの内容が有効になります)。次に、systemd 構成ファイルが生成され、 `host`で指定されたマシンに送信されます。 `resource_control`の構成ルールは`global`の`resource_control`の内容と同じです。
+-   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`resource_control`内容を`global`つにマージされます (2 つのフィールドが重複する場合、このフィールドの内容が有効になります)。次に、systemd 構成ファイルが生成され、 `host`で指定されたマシンに送信されます。 `resource_control`の構成ルールは`global`の`resource_control`内容と同じです。
 
 上記のフィールドについては、展開後にこれらの構成済みフィールドを変更することはできません。
 
@@ -414,7 +414,7 @@ tiflash_servers:
 -   `arch`
 -   `os`
 
-`pump_servers`の構成例は次のとおりです。
+`pump_servers`構成例は次のとおりです。
 
 ```yaml
 pump_servers:
@@ -426,7 +426,7 @@ pump_servers:
 
 ### <code>drainer_servers</code> {#code-drainer-servers-code}
 
-`drainer_servers`は、TiDB BinlogDrainerがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します。 `drainer_servers`は配列です。各配列要素には、次のフィールドが含まれます。
+`drainer_servers` 、TiDB BinlogのDrainerサービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します。 `drainer_servers`は配列です。各配列要素には、次のフィールドが含まれます。
 
 -   `host` : Drainerサービスがデプロイされるマシンを指定します。フィールド値は IP アドレスで、必須です。
 
@@ -440,17 +440,17 @@ pump_servers:
 
 -   `log_dir` : ログ ディレクトリを指定します。指定しない場合や相対ディレクトリで指定した場合は、 `global`で設定した`log_dir`ディレクトリに従ってログが生成されます。
 
--   `commit_ts` (非推奨): Drainerの開始時に、チェックポイントを読み取ります。 Drainerがチェックポイントを取得しない場合、このフィールドを最初の起動のレプリケーション時点として使用します。このフィールドのデフォルトは`-1`です (Drainerは常に PD から最新のタイムスタンプを commit_ts として取得します)。
+-   `commit_ts` (非推奨): Drainer の開始時に、チェックポイントを読み取ります。 Drainer がチェックポイントを取得しない場合、このフィールドを最初の起動のレプリケーション時点として使用します。このフィールドのデフォルトは`-1`です (Drainer は常に PD から最新のタイムスタンプを commit_ts として取得します)。
 
 -   `numa_node` : NUMA ポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲット マシンに[numactl](https://linux.die.net/man/8/numactl)がインストールされていることを確認する必要があります。このフィールドが指定されている場合、 cpubind および membind ポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などの NUMA ノードの ID です。
 
 -   `config` : このフィールドの構成規則は、 `server_configs`の`drainer`構成規則と同じです。このフィールドが設定されている場合、フィールド コンテンツは`drainer`コンテンツ イン`server_configs`とマージされます (2 つのフィールドが重複する場合、このフィールドのコンテンツが有効になります)。次に、構成ファイルが生成され、 `host`で指定されたマシンに送信されます。
 
--   `os` : `host`で指定されたマシンのオペレーティング システム。このフィールドが指定されていない場合、デフォルト値は`global`の`os`の値です。
+-   `os` : `host`で指定されたマシンのオペレーティング システム。このフィールドが指定されていない場合、デフォルト値は`global`の`os`値です。
 
--   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`の値です。
+-   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`値です。
 
--   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`resource_control`の内容を`global`つにマージされます (2 つのフィールドが重複する場合、このフィールドの内容が有効になります)。次に、systemd 構成ファイルが生成され、 `host`で指定されたマシンに送信されます。 `resource_control`の構成ルールは`global`の`resource_control`の内容と同じです。
+-   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`resource_control`内容を`global`つにマージされます (2 つのフィールドが重複する場合、このフィールドの内容が有効になります)。次に、systemd 構成ファイルが生成され、 `host`で指定されたマシンに送信されます。 `resource_control`の構成ルールは`global`の`resource_control`内容と同じです。
 
 上記のフィールドについては、展開後にこれらの構成済みフィールドを変更することはできません。
 
@@ -464,7 +464,7 @@ pump_servers:
 
 `commit_ts`フィールドはTiUP v1.9.2 以降非推奨であり、 Drainerの開始スクリプトには記録されません。このフィールドを引き続き使用する必要がある場合は、次の例を参照して`config`の`initial-commit-ts`フィールドを構成してください。
 
-`drainer_servers`の構成例は次のとおりです。
+`drainer_servers`構成例は次のとおりです。
 
 ```yaml
 drainer_servers:
@@ -485,7 +485,7 @@ drainer_servers:
 
 ### <code>cdc_servers</code> {#code-cdc-servers-code}
 
-`cdc_servers`は、TiCDC サービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します。 `cdc_servers`は配列です。各配列要素には、次のフィールドが含まれます。
+`cdc_servers` 、TiCDC サービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します。 `cdc_servers`は配列です。各配列要素には、次のフィールドが含まれます。
 
 -   `host` : TiCDC サービスがデプロイされるマシンを指定します。フィールド値は IP アドレスで、必須です。
 
@@ -505,13 +505,13 @@ drainer_servers:
 
 -   `numa_node` : NUMA ポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲット マシンに[numactl](https://linux.die.net/man/8/numactl)がインストールされていることを確認する必要があります。このフィールドが指定されている場合、 cpubind および membind ポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などの NUMA ノードの ID です。
 
--   `config` : フィールドの内容は`server_configs`つの`cdc`つの内容とマージされます (2 つのフィールドが重複する場合、このフィールドの内容が有効になります)。次に、構成ファイルが生成され、 `host`で指定されたマシンに送信されます。
+-   `config` : フィールドの内容は`server_configs`の`cdc`内容とマージされます (2 つのフィールドが重複する場合、このフィールドの内容が有効になります)。次に、構成ファイルが生成され、 `host`で指定されたマシンに送信されます。
 
--   `os` : `host`で指定されたマシンのオペレーティング システム。このフィールドが指定されていない場合、デフォルト値は`global`の`os`の値です。
+-   `os` : `host`で指定されたマシンのオペレーティング システム。このフィールドが指定されていない場合、デフォルト値は`global`の`os`値です。
 
--   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`の値です。
+-   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`値です。
 
--   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`resource_control`の内容を`global`つにマージされます (2 つのフィールドが重複する場合、このフィールドの内容が有効になります)。次に、systemd 構成ファイルが生成され、 `host`で指定されたマシンに送信されます。 `resource_control`の構成ルールは`global`の`resource_control`の内容と同じです。
+-   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`resource_control`内容を`global`つにマージされます (2 つのフィールドが重複する場合、このフィールドの内容が有効になります)。次に、systemd 構成ファイルが生成され、 `host`で指定されたマシンに送信されます。 `resource_control`の構成ルールは`global`の`resource_control`内容と同じです。
 
 -   `ticdc_cluster_id` : サービスに対応する TiCDC クラスター ID を指定します。このフィールドが指定されていない場合、サービスはデフォルトの TiCDC クラスターに参加します。このフィールドは、TiDB v6.3.0 以降のバージョンでのみ有効です。
 
@@ -526,7 +526,7 @@ drainer_servers:
 -   `os`
 -   `ticdc_cluster_id`
 
-`cdc_servers`の構成例は次のとおりです。
+`cdc_servers`構成例は次のとおりです。
 
 ```yaml
 cdc_servers:
@@ -540,11 +540,11 @@ cdc_servers:
 
 ### <code>tispark_masters</code> {#code-tispark-masters-code}
 
-`tispark_masters`は、TiSpark のマスター ノードがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します。 `tispark_masters`は配列です。各配列要素には、次のフィールドが含まれます。
+`tispark_masters` 、TiSpark のマスター ノードがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します。 `tispark_masters`は配列です。各配列要素には、次のフィールドが含まれます。
 
 -   `host` : TiSpark マスターがデプロイされるマシンを指定します。フィールド値は IP アドレスで、必須です。
 
--   `listen_host` : マシンに複数の IP アドレスがある場合、 `listen_host`はサービスのリッスン IP アドレスを指定します。デフォルト値は`0.0.0.0`です。
+-   `listen_host` : マシンに複数の IP アドレスがある場合、 `listen_host`サービスのリッスン IP アドレスを指定します。デフォルト値は`0.0.0.0`です。
 
 -   `ssh_port` : 操作対象のマシンに接続する SSH ポートを指定します。指定されていない場合は、 `global`セクションの`ssh_port`が使用されます。
 
@@ -560,9 +560,9 @@ cdc_servers:
 
 -   `spark_env` : Spark の起動時に環境変数を構成します。
 
--   `os` : `host`で指定されたマシンのオペレーティング システム。このフィールドが指定されていない場合、デフォルト値は`global`の`os`の値です。
+-   `os` : `host`で指定されたマシンのオペレーティング システム。このフィールドが指定されていない場合、デフォルト値は`global`の`os`値です。
 
--   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`の値です。
+-   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`値です。
 
 上記のフィールドについては、展開後にこれらの構成済みフィールドを変更することはできません。
 
@@ -574,7 +574,7 @@ cdc_servers:
 -   `arch`
 -   `os`
 
-`tispark_masters`の構成例は次のとおりです。
+`tispark_masters`構成例は次のとおりです。
 
 ```yaml
 tispark_masters:
@@ -597,11 +597,11 @@ tispark_masters:
 
 ### <code>tispark_workers</code> {#code-tispark-workers-code}
 
-`tispark_workers`は、TiSpark のワーカー ノードがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します。 `tispark_workers`は配列です。各配列要素には、次のフィールドが含まれます。
+`tispark_workers` 、TiSpark のワーカー ノードがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します。 `tispark_workers`は配列です。各配列要素には、次のフィールドが含まれます。
 
 -   `host` : TiSpark ワーカーがデプロイされるマシンを指定します。フィールド値は IP アドレスで、必須です。
 
--   `listen_host` : マシンに複数の IP アドレスがある場合、 `listen_host`はサービスのリッスン IP アドレスを指定します。デフォルト値は`0.0.0.0`です。
+-   `listen_host` : マシンに複数の IP アドレスがある場合、 `listen_host`サービスのリッスン IP アドレスを指定します。デフォルト値は`0.0.0.0`です。
 
 -   `ssh_port` : 操作対象のマシンに接続する SSH ポートを指定します。指定されていない場合は、 `global`セクションの`ssh_port`が使用されます。
 
@@ -613,9 +613,9 @@ tispark_masters:
 
 -   `java_home` : 使用する JRE 環境が存在するパスを指定します。このパラメーターは、 `JAVA_HOME`システム環境変数に対応します。
 
--   `os` : `host`で指定されたマシンのオペレーティング システム。このフィールドが指定されていない場合、デフォルト値は`global`の`os`の値です。
+-   `os` : `host`で指定されたマシンのオペレーティング システム。このフィールドが指定されていない場合、デフォルト値は`global`の`os`値です。
 
--   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`の値です。
+-   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`値です。
 
 上記のフィールドについては、展開後にこれらの構成済みフィールドを変更することはできません。
 
@@ -627,7 +627,7 @@ tispark_masters:
 -   `arch`
 -   `os`
 
-`tispark_workers`の構成例は次のとおりです。
+`tispark_workers`構成例は次のとおりです。
 
 ```yaml
 tispark_workers:
@@ -637,7 +637,7 @@ tispark_workers:
 
 ### <code>monitoring_servers</code> {#code-monitoring-servers-code}
 
-`monitoring_servers`は、Prometheus サービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します。 `monitoring_servers`は配列です。各配列要素には、次のフィールドが含まれます。
+`monitoring_servers` Prometheus サービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します。 `monitoring_servers`は配列です。各配列要素には、次のフィールドが含まれます。
 
 -   `host` : 監視サービスがデプロイされるマシンを指定します。フィールド値は IP アドレスで、必須です。
 
@@ -665,11 +665,11 @@ tispark_workers:
 
 -   `external_alertmanagers` : `external_alertmanagers`フィールドが構成されている場合、Prometheus は構成動作をクラスター外の Alertmanager にアラートします。このフィールドは配列であり、その各要素は外部 Alertmanager であり、 `host`および`web_port`フィールドで構成されています。
 
--   `os` : `host`で指定されたマシンのオペレーティング システム。このフィールドが指定されていない場合、デフォルト値は`global`の`os`の値です。
+-   `os` : `host`で指定されたマシンのオペレーティング システム。このフィールドが指定されていない場合、デフォルト値は`global`の`os`値です。
 
--   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`の値です。
+-   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`値です。
 
--   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`resource_control`の内容を`global`つにマージされます (2 つのフィールドが重複する場合、このフィールドの内容が有効になります)。次に、systemd 構成ファイルが生成され、 `host`で指定されたマシンに送信されます。 `resource_control`の構成ルールは`global`の`resource_control`の内容と同じです。
+-   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`resource_control`内容を`global`つにマージされます (2 つのフィールドが重複する場合、このフィールドの内容が有効になります)。次に、systemd 構成ファイルが生成され、 `host`で指定されたマシンに送信されます。 `resource_control`の構成ルールは`global`の`resource_control`内容と同じです。
 
 上記のフィールドについては、展開後にこれらの構成済みフィールドを変更することはできません。
 
@@ -681,7 +681,7 @@ tispark_workers:
 -   `arch`
 -   `os`
 
-`monitoring_servers`の構成例は次のとおりです。
+`monitoring_servers`構成例は次のとおりです。
 
 ```yaml
 monitoring_servers:
@@ -706,7 +706,7 @@ monitoring_servers:
 
 ### <code>grafana_servers</code> {#code-grafana-servers-code}
 
-`grafana_servers`は、Grafana サービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します。 `grafana_servers`は配列です。各配列要素には、次のフィールドが含まれます。
+`grafana_servers` 、Grafana サービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します。 `grafana_servers`は配列です。各配列要素には、次のフィールドが含まれます。
 
 -   `host` : Grafana サービスがデプロイされるマシンを指定します。フィールド値は IP アドレスで、必須です。
 
@@ -716,9 +716,9 @@ monitoring_servers:
 
 -   `deploy_dir` : デプロイ ディレクトリを指定します。指定がない場合、または相対ディレクトリで指定した場合は、 `global`で設定した`deploy_dir`ディレクトリに従ってディレクトリが生成されます。
 
--   `os` : `host`で指定されたマシンのオペレーティング システム。このフィールドが指定されていない場合、デフォルト値は`global`の`os`の値です。
+-   `os` : `host`で指定されたマシンのオペレーティング システム。このフィールドが指定されていない場合、デフォルト値は`global`の`os`値です。
 
--   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`の値です。
+-   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`値です。
 
 -   `username` : Grafana ログイン インターフェイスのユーザー名。
 
@@ -726,7 +726,7 @@ monitoring_servers:
 
 -   `dashboard_dir` : 完全な`dashboard(*.json)`のファイルを含む必要があるローカル ディレクトリを指定します。これらのファイルは、クラスター構成の初期化フェーズ中に、Grafana のダッシュボードとしてターゲット マシンに転送されます。
 
--   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`resource_control`の内容を`global`つにマージされます (2 つのフィールドが重複する場合、このフィールドの内容が有効になります)。次に、systemd 構成ファイルが生成され、 `host`で指定されたマシンに送信されます。 `resource_control`の構成ルールは`global`の`resource_control`の内容と同じです。
+-   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`resource_control`内容を`global`つにマージされます (2 つのフィールドが重複する場合、このフィールドの内容が有効になります)。次に、systemd 構成ファイルが生成され、 `host`で指定されたマシンに送信されます。 `resource_control`の構成ルールは`global`の`resource_control`内容と同じです。
 
 > **ノート：**
 >
@@ -743,7 +743,7 @@ monitoring_servers:
 -   `arch`
 -   `os`
 
-`grafana_servers`の構成例は次のとおりです。
+`grafana_servers`構成例は次のとおりです。
 
 ```yaml
 grafana_servers:
@@ -753,7 +753,7 @@ grafana_servers:
 
 ### <code>alertmanager_servers</code> {#code-alertmanager-servers-code}
 
-`alertmanager_servers`は、Alertmanager サービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します。 `alertmanager_servers`は配列です。各配列要素には、次のフィールドが含まれます。
+`alertmanager_servers` Alertmanager サービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します。 `alertmanager_servers`は配列です。各配列要素には、次のフィールドが含まれます。
 
 -   `host` : Alertmanager サービスがデプロイされるマシンを指定します。フィールド値は IP アドレスで、必須です。
 
@@ -773,11 +773,11 @@ grafana_servers:
 
 -   `config_file` : Alertmanager の構成として、クラスター構成の初期化フェーズ中にターゲット マシンに転送されるローカル ファイルを指定します。
 
--   `os` : `host`で指定されたマシンのオペレーティング システム。このフィールドが指定されていない場合、デフォルト値は`global`の`os`の値です。
+-   `os` : `host`で指定されたマシンのオペレーティング システム。このフィールドが指定されていない場合、デフォルト値は`global`の`os`値です。
 
--   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`の値です。
+-   `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`値です。
 
--   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`resource_control`の内容を`global`つにマージされます (2 つのフィールドが重複する場合、このフィールドの内容が有効になります)。次に、systemd 構成ファイルが生成され、 `host`で指定されたマシンに送信されます。 `resource_control`の構成ルールは`global`の`resource_control`の内容と同じです。
+-   `resource_control` : サービスのリソース制御。このフィールドが設定されている場合、フィールドの内容は`resource_control`内容を`global`つにマージされます (2 つのフィールドが重複する場合、このフィールドの内容が有効になります)。次に、systemd 構成ファイルが生成され、 `host`で指定されたマシンに送信されます。 `resource_control`の構成ルールは`global`の`resource_control`内容と同じです。
 
 上記のフィールドについては、展開後にこれらの構成済みフィールドを変更することはできません。
 
@@ -790,7 +790,7 @@ grafana_servers:
 -   `arch`
 -   `os`
 
-`alertmanager_servers`の構成例は次のとおりです。
+`alertmanager_servers`構成例は次のとおりです。
 
 ```yaml
 alertmanager_servers:

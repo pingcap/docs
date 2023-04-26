@@ -39,7 +39,7 @@ summary: Learn about the operators precedence, comparison functions and operator
 | [&lt;&lt;](https://dev.mysql.com/doc/refman/5.7/en/bit-functions.html#operator_left-shift)                 | 左方移動                                                                                                                                                                              |
 | [&lt;](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_less-than)               | 小なり演算子                                                                                                                                                                            |
 | [&lt;=](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_less-than-or-equal)     | 以下演算子                                                                                                                                                                             |
-| [お気に入り](https://dev.mysql.com/doc/refman/5.7/en/string-comparison-functions.html#operator_like)            | シンプルなパターンマッチング                                                                                                                                                                    |
+| [好き](https://dev.mysql.com/doc/refman/5.7/en/string-comparison-functions.html#operator_like)               | シンプルなパターンマッチング                                                                                                                                                                    |
 | [-](https://dev.mysql.com/doc/refman/5.7/en/arithmetic-functions.html#operator_minus)                      | マイナス演算子                                                                                                                                                                           |
 | [％、 モッド](https://dev.mysql.com/doc/refman/5.7/en/arithmetic-functions.html#operator_mod)                   | モジュロ演算子                                                                                                                                                                           |
 | [いいえ、 ！](https://dev.mysql.com/doc/refman/5.7/en/logical-operators.html#operator_not)                      | 値を否定します                                                                                                                                                                           |
@@ -52,10 +52,13 @@ summary: Learn about the operators precedence, comparison functions and operator
 | [正規表現](https://dev.mysql.com/doc/refman/5.7/en/regexp.html#operator_regexp)                                | 正規表現を使用したパターン マッチング                                                                                                                                                               |
 | [&gt;&gt;](https://dev.mysql.com/doc/refman/5.7/en/bit-functions.html#operator_right-shift)                | 右シフト                                                                                                                                                                              |
 | [好き](https://dev.mysql.com/doc/refman/5.7/en/regexp.html#operator_regexp)                                  | REGEXP の同義語                                                                                                                                                                       |
-| [のように聞こえる](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html#operator_sounds-like)             | 音を比較する                                                                                                                                                                            |
 | [*](https://dev.mysql.com/doc/refman/5.7/en/arithmetic-functions.html#operator_times)                      | 乗算演算子                                                                                                                                                                             |
 | [-](https://dev.mysql.com/doc/refman/5.7/en/arithmetic-functions.html#operator_unary-minus)                | 引数の符号を変更する                                                                                                                                                                        |
 | [XOR](https://dev.mysql.com/doc/refman/5.7/en/logical-operators.html#operator_xor)                         | 論理 XOR                                                                                                                                                                            |
+
+## サポートされていない演算子 {#unsupported-operators}
+
+-   [`SOUNDS LIKE`](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html#operator_sounds-like)
 
 ## 演算子の優先順位 {#operator-precedence}
 
@@ -94,7 +97,7 @@ OR, ||
 | [&gt;](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_greater-than)            | 大なり演算子                   |
 | [&gt;=](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_greater-than-or-equal)  | 以上演算子                    |
 | [最高の（）](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#function_greatest)               | 最大の引数を返す                 |
-| [の（）](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#function_in)                       | 値が一連の値の範囲内にあるかどうかを確認する   |
+| [の（）](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_in)                       | 値が一連の値の範囲内にあるかどうかを確認する   |
 | [間隔（）](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#function_interval)                | 最初の引数より小さい引数のインデックスを返します |
 | [は](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_is)                         | ブール値に対して値をテストする          |
 | [ではありません](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_is-not)               | ブール値に対して値をテストする          |
@@ -104,10 +107,10 @@ OR, ||
 | [少しでも（）](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#function_least)                 | 最小の引数を返します               |
 | [&lt;](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_less-than)               | 小なり演算子                   |
 | [&lt;=](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_less-than-or-equal)     | 以下演算子                    |
-| [お気に入り](https://dev.mysql.com/doc/refman/5.7/en/string-comparison-functions.html#operator_like)            | シンプルなパターンマッチング           |
+| [好き](https://dev.mysql.com/doc/refman/5.7/en/string-comparison-functions.html#operator_like)               | シンプルなパターンマッチング           |
 | [... と ... の間ではない](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_not-between) | 値が値の範囲内にないかどうかを確認します     |
 | [!=, `&lt;&gt;`](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_not-equal)     | 等しくない演算子                 |
-| [ありませんで（）](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#function_not-in)              | 値が値のセット内にないかどうかを確認します    |
+| [ありませんで（）](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_not-in)              | 値が値のセット内にないかどうかを確認します    |
 | [みたいではなく](https://dev.mysql.com/doc/refman/5.7/en/string-comparison-functions.html#operator_not-like)      | 単純なパターン マッチングの否定         |
 | [STRCMP()](https://dev.mysql.com/doc/refman/5.7/en/string-comparison-functions.html#function_strcmp)       | 2 つの文字列を比較する             |
 

@@ -13,18 +13,18 @@ summary: Learn about Table Selector used by the table routing, binlog event filt
 
 -   アスタリスク文字 ( `*` 、「スター」とも呼ばれます)
 
-    -   `*`は 0 個以上の文字に一致します。たとえば、 `doc*`は`doc`と`document`に一致しますが、 `dodo`には一致しません。
-    -   `*`は単語の末尾にのみ配置できます。たとえば、 `doc*`はサポートされていますが、 `do*c`はサポートされていません。
+    -   `*` 0 個以上の文字に一致します。たとえば、 `doc*` `doc`と`document`一致しますが、 `dodo`には一致しません。
+    -   `*`単語の末尾にのみ配置できます。たとえば、 `doc*`はサポートされていますが、 `do*c`はサポートされていません。
 
 -   クエスチョンマーク ( `?` )
 
-    `?`は、空の文字を除く 1 文字に一致します。
+    `?`空の文字を除く 1 文字に一致します。
 
 ## マッチルール {#match-rules}
 
--   `schema-pattern`を空にすることはできません。
--   `table-pattern`は空にすることができます。空として構成すると、 `schema-pattern`に従って`schema`のみが一致します。
--   `table-pattern`が空でない場合、 `schema`は`schema-pattern`に従って一致し、 `table`は`table-pattern`に従って一致します。 `schema`と`table`の両方が一致した場合にのみ、一致結果を取得できます。
+-   `schema-pattern`空にすることはできません。
+-   `table-pattern`空にすることができます。空として構成すると、 `schema-pattern`に従って`schema`のみが一致します。
+-   `table-pattern`が空でない場合、 `schema`は`schema-pattern`に従って一致し、 `table`は`table-pattern`に従って一致します。 `schema`と`table`両方が一致した場合にのみ、一致結果を取得できます。
 
 ## 使用例 {#usage-examples}
 

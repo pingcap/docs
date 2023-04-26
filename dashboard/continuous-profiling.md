@@ -9,7 +9,7 @@ summary: Learn how to collect performance data from TiDB, TiKV and PD continuous
 >
 > この機能は、データベースの専門家向けに設計されています。専門家以外のユーザーには、PingCAP テクニカル サポートの指導の下でこの機能を使用することをお勧めします。
 
-継続的なプロファイリングにより、各 TiDB、TiKV、および PD インスタンスから**継続的**にパフォーマンス データを収集できます。収集されたパフォーマンス データは、FlameGraph または DAG として視覚化できます。
+継続的なプロファイリングにより、各 TiDB、TiKV、および PD インスタンスから**継続的に**パフォーマンス データを収集できます。収集されたパフォーマンス データは、FlameGraph または DAG として視覚化できます。
 
 これらのパフォーマンス データを使用して、専門家はインスタンスの CPU やメモリなどのリソース消費の詳細を分析し、高い CPU オーバーヘッド、高いメモリ使用量、プロセス ストールなどの高度なパフォーマンスの問題をいつでも特定できます。再現できない問題でも、専門家はその時点で収集された過去のパフォーマンス データを参照することで、問題を深く掘り下げることができます。このようにして、MTTRを効果的に削減できます。
 
@@ -38,7 +38,7 @@ summary: Learn how to collect performance data from TiDB, TiKV and PD continuous
 
 次のいずれかの方法を使用して、Continuous Profiling ページにアクセスできます。
 
--   TiDB ダッシュボードにログインした後、左側のナビゲーション バーで [ **Advanced Debugging** ] &gt; [ <strong>Profiling Instances</strong> ] &gt; [ <strong>Continuous Profiling</strong> ] をクリックします。
+-   TiDB ダッシュボードにログインした後、左側のナビゲーション バーで**[Advanced Debugging** ] &gt; <strong>[Profiling Instances]</strong> &gt; <strong>[Continuous Profiling]</strong>をクリックします。
 
     ![Access page](/media/dashboard/dashboard-conprof-access.png)
 
@@ -50,21 +50,21 @@ summary: Learn how to collect performance data from TiDB, TiKV and PD continuous
 >
 > 継続的プロファイリングを使用するには、 TiUP (v1.9.0 以降) またはTiDB Operator (v1.3.0 以降) の最新バージョンを使用してクラスターをデプロイまたはアップグレードする必要があります。以前のバージョンのTiUPまたはTiDB Operatorを使用してクラスターをアップグレードした場合は、手順について[FAQ](/dashboard/dashboard-faq.md#a-required-component-ngmonitoring-is-not-started-error-is-shown)を参照してください。
 
-TiDB v6.1.0 以降、継続的なプロファイリングはデフォルトで有効になっています。これを有効にすると、Web ページを常にアクティブにしなくても、バックグラウンドで継続的にパフォーマンス データを収集できます。収集したデータは一定期間保持でき、期限切れのデータは自動的に消去されます。
+継続的なプロファイリングを有効にすると、Web ページを常にアクティブにしなくても、パフォーマンス データをバックグラウンドで継続的に収集できます。収集したデータは一定期間保持でき、期限切れのデータは自動的に消去されます。
 
 この機能を有効にするには:
 
-1.  [継続的なプロファイリング ページ](#access-the-page)をご覧ください。
-2.  [**設定を開く]**をクリックします。右側の<strong>[設定]</strong>領域で、[<strong>機能を有効</strong>にする] をオンにし、必要に応じて [<strong>保持期間</strong>] のデフォルト値を変更します。
-3.  [**保存]**をクリックします。
+1.  [継続的なプロファイリング ページ](#access-the-page)ご覧ください。
+2.  **[設定を開く]**をクリックします。右側の<strong>[設定]</strong>領域で、 <strong>[機能を有効にする</strong>] をオンにし、必要に応じて<strong>[保持期間]</strong>のデフォルト値を変更します。
+3.  **[保存]**をクリックします。
 
 ![Enable feature](/media/dashboard/dashboard-conprof-start.png)
 
-## 現在のパフォーマンス データをビューする {#view-current-performance-data}
+## 現在のパフォーマンス データをビュー {#view-current-performance-data}
 
 手動プロファイリングは、継続的プロファイリングが有効になっているクラスターでは開始できません。現時点でのパフォーマンス データを表示するには、最新のプロファイリング結果をクリックします。
 
-## 過去のパフォーマンス データをビューする {#view-historical-performance-data}
+## 過去のパフォーマンス データをビュー {#view-historical-performance-data}
 
 リスト ページでは、この機能を有効にしてから収集されたすべてのパフォーマンス データを確認できます。
 
@@ -72,7 +72,7 @@ TiDB v6.1.0 以降、継続的なプロファイリングはデフォルトで�
 
 ## 性能データのダウンロード {#download-performance-data}
 
-プロファイリング結果ページで、右上隅にある [**プロファイリング結果のダウンロード**] をクリックして、すべてのプロファイリング結果をダウンロードできます。
+プロファイリング結果ページで、右上隅にある**[プロファイリング結果のダウンロード]**をクリックして、すべてのプロファイリング結果をダウンロードできます。
 
 ![Download profiling result](/media/dashboard/dashboard-conprof-download.png)
 
@@ -82,10 +82,10 @@ TiDB v6.1.0 以降、継続的なプロファイリングはデフォルトで�
 
 ## 継続的なプロファイリングを無効にする {#disable-continuous-profiling}
 
-1.  [継続的なプロファイリング ページ](#access-the-page)をご覧ください。
-2.  右上隅の歯車アイコンをクリックして、設定ページを開きます。**機能の有効**化をオフに切り替えます。
-3.  [**保存]**をクリックします。
-4.  表示されたダイアログ ボックスで、[**無効**にする] をクリックします。
+1.  [継続的なプロファイリング ページ](#access-the-page)ご覧ください。
+2.  右上隅の歯車アイコンをクリックして、設定ページを開きます。**機能の有効化**をオフに切り替えます。
+3.  **[保存]**をクリックします。
+4.  表示されたダイアログ ボックスで、 **[無効にする]**をクリックします。
 
 ![Disable feature](/media/dashboard/dashboard-conprof-stop.png)
 

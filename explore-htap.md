@@ -13,7 +13,7 @@ summary: Learn how to explore and use the features of TiDB HTAP.
 
 ## ユースケース {#use-cases}
 
-TiDB HTAPは、急速に増加する大量のデータを処理し、DevOps のコストを削減し、オンプレミスまたはクラウド環境に簡単にデプロイできるため、データ資産の価値をリアルタイムでもたらします。
+TiDB HTAP は、急速に増加する大量のデータを処理し、DevOps のコストを削減し、オンプレミスまたはクラウド環境に簡単にデプロイできるため、データ資産の価値をリアルタイムでもたらします。
 
 以下は、HTAP の一般的な使用例です。
 
@@ -33,21 +33,21 @@ TiDB HTAPの使用例の詳細については、 [PingCAP Web サイトの HTAP 
 
 ## アーキテクチャ {#architecture}
 
-TiDB では、オンライン トランザクション処理 (OLTP) 用の行ベース ストレージ エンジン[TiKV](/tikv-overview.md)と、オンライン分析処理 (OLAP) 用の列型ストレージ エンジン[TiFlash](/tiflash/tiflash-overview.md)が共存し、データを自動的に複製し、強力な整合性を維持します。
+TiDB では、オンライン トランザクション処理 (OLTP) 用の行ベースstorageエンジン[TiKV](/tikv-overview.md)と、オンライン分析処理 (OLAP) 用の列型storageエンジン[TiFlash](/tiflash/tiflash-overview.md)が共存し、データを自動的に複製し、強力な整合性を維持します。
 
 アーキテクチャの詳細については、 [TiDB HTAPのアーキテクチャ](/tiflash/tiflash-overview.md#architecture)を参照してください。
 
 ## 環境の準備 {#environment-preparation}
 
-TiDB HTAPの機能を調べる前に、データ量に応じて TiDB と対応するストレージ エンジンを展開する必要があります。データ量が大きい場合 (たとえば 100 T) は、 TiFlash Massively Parallel Processing (MPP) を主なソリューションとして使用し、TiSpark を補助的なソリューションとして使用することをお勧めします。
+TiDB HTAPの機能を調べる前に、データ量に応じて TiDB と対応するstorageエンジンをデプロイする必要があります。データ量が大きい場合 (たとえば 100 T) は、 TiFlash Massively Parallel Processing (MPP) を主なソリューションとして使用し、TiSpark を補助的なソリューションとして使用することをお勧めします。
 
 -   TiFlash
 
-    -   TiFlashTiFlashを追加します。詳細については、 [TiFlashクラスターをスケールアウトする](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster)を参照してください。
-    -   TiDB クラスターをデプロイしていない場合は、 [TiUP を使用してTiUPクラスタをデプロイする](/production-deployment-using-tiup.md)を参照してください。最小限の TiDB トポロジに基づいて、 [TiFlashのトポロジー](/tiflash-deployment-topology.md)もデプロイする必要があります。
+    -   TiFlashノードのない TiDB クラスターをデプロイした場合は、現在の TiDB クラスターにTiFlashノードを追加します。詳細については、 [TiFlashクラスターをスケールアウトする](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster)を参照してください。
+    -   TiDB クラスターをデプロイしていない場合は、 [TiUPを使用して TiDBクラスタをデプロイ](/production-deployment-using-tiup.md)を参照してください。最小限の TiDB トポロジに基づいて、 [TiFlashのトポロジー](/tiflash-deployment-topology.md)もデプロイする必要があります。
     -   TiFlashノードの数を選択する方法を決定するときは、次のシナリオを考慮してください。
 
-        -   小規模な分析処理とアドホック クエリを使用する OLTP がユース ケースに必要な場合は、1 つまたは複数のTiFlashノードをデプロイします。分析クエリの速度を劇的に向上させることができます。
+        -   小規模な分析処理とアドホック クエリを使用する OLTP がユース ケースに必要な場合は、1 つまたは複数のTiFlashノードを展開します。分析クエリの速度を劇的に向上させることができます。
         -   OLTP スループットがTiFlashノードの I/O 使用率に大きな圧力をかけない場合、各TiFlashノードはより多くのリソースを計算に使用するため、 TiFlashクラスタはほぼ線形のスケーラビリティを持つことができます。 TiFlashノードの数は、予想されるパフォーマンスと応答時間に基づいて調整する必要があります。
         -   OLTP のスループットが比較的高い場合 (たとえば、書き込みまたは更新のスループットが 1,000 万行/時を超える場合)、ネットワークおよび物理ディスクの書き込み容量が限られているため、TiKV とTiFlash間の I/O がボトルネックになり、また、ホットスポットを読み書きする傾向があります。この場合、 TiFlashノードの数は解析処理の計算量と複雑な非線形関係にあるため、システムの実際の状況に基づいてTiFlashノードの数を調整する必要があります。
 
@@ -96,9 +96,9 @@ TiDB の使用中に問題が発生した場合は、次のドキュメントを
 -   [TiDB クラスターのトラブルシューティング ガイド](/troubleshoot-tidb-cluster.md)
 -   [TiFlashクラスタのトラブルシューティング](/tiflash/troubleshoot-tiflash.md)
 
-また、 [Github の問題](https://github.com/pingcap/tiflash/issues)を作成したり、 [アスクトゥグ](https://asktug.com/)で質問を送信したりすることもできます。
+また[Github の問題](https://github.com/pingcap/tiflash/issues)を作成したり、 [アスクトゥグ](https://asktug.com/)で質問を送信したりすることもできます。
 
 ## 次は何ですか {#what-s-next}
 
--   TiFlashのバージョン、重要なログ、システム テーブルを確認するには、 [TiFlashクラスターを管理する](/tiflash/maintain-tiflash.md)を参照してください。
+-   TiFlashのバージョン、重要なログ、システム テーブルを確認するには、 [TiFlashクラスターを管理](/tiflash/maintain-tiflash.md)を参照してください。
 -   特定のTiFlashノードを削除するには、 [TiFlashクラスターをスケールアウトする](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster)を参照してください。

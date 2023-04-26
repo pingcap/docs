@@ -45,7 +45,7 @@ summary: Learn how to query the status of a data replication task.
 次の手順で`query-status`を使用することをお勧めします。
 
 1.  `query-status`を使用して、進行中の各タスクが正常な状態にあるかどうかを確認します。
-2.  タスクでエラーが発生した場合は、 `query-status <taskName>`コマンドを使用して詳細なエラー情報を表示します。このコマンドの`<taskName>`は、エラーが発生したタスクの名前を示します。
+2.  タスクでエラーが発生した場合は、 `query-status <taskName>`コマンドを使用して詳細なエラー情報を表示します。このコマンドの`<taskName>`エラーが発生したタスクの名前を示します。
 
 ## タスクのステータス {#task-status}
 

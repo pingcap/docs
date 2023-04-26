@@ -13,18 +13,18 @@ summary: Learn how to quickly get started with the TiDB HTAP.
 
 ## 基本概念 {#basic-concepts}
 
-TiDB HTAPを使用する前に、 [TiKV](/tikv-overview.md) 、TiDB Online Transactional Processing (OLTP) 用の行ベースのストレージ エンジン、および[TiFlash](/tiflash/tiflash-overview.md) 、TiDB Online Analytical Processing (OLAP) 用の列型ストレージ エンジンに関する基本的な知識が必要です。
+TiDB HTAPを使用する前に、 [TiKV](/tikv-overview.md) 、TiDB Online Transactional Processing (OLTP) 用の行ベースのstorageエンジン、および[TiFlash](/tiflash/tiflash-overview.md) 、TiDB Online Analytical Processing (OLAP) 用の列型storageエンジンに関する基本的な知識が必要です。
 
--   HTAP のストレージ エンジン: HTAP では、行ベースのストレージ エンジンと列ベースのストレージ エンジンが共存します。どちらのストレージ エンジンもデータを自動的にレプリケートし、強力な整合性を維持できます。行ベースのストレージ エンジンは OLTP のパフォーマンスを最適化し、列ベースのストレージ エンジンは OLAP のパフォーマンスを最適化します。
--   HTAP のデータ整合性: 分散型のトランザクション キー値データベースとして、TiKV はACID準拠のトランザクション インターフェイスを提供し、複数のレプリカ間のデータ整合性と[Raftコンセンサスアルゴリズム](https://raft.github.io/raft.pdf)の実装による高可用性を保証します。 TiKV のカラムナ ストレージ拡張として、 TiFlashはRaft Learnerコンセンサス アルゴリズムに従ってリアルタイムでTiFlashからデータをレプリケートします。
--   HTAP のデータ分離: HTAP リソースの分離の問題を解決するために、必要に応じて TiKV とTiFlashを異なるマシンに展開できます。
--   MPP コンピューティング エンジン: [MPP](/tiflash/use-tiflash-mpp-mode.md#control-whether-to-select-the-mpp-mode)は、TiDB 5.0 以降のTiFlashエンジンによって提供される分散コンピューティング フレームワークであり、ノード間のデータ交換を可能にし、高性能で高スループットの SQL アルゴリズムを提供します。 MPP モードでは、分析クエリの実行時間を大幅に短縮できます。
+-   HTAP のストレージ エンジン: HTAP では、行ベースのstorageエンジンと列ベースのstorageエンジンが共存します。どちらのstorageエンジンもデータを自動的にレプリケートし、強力な整合性を維持できます。行ベースのstorageエンジンは OLTP のパフォーマンスを最適化し、列ベースのstorageエンジンは OLAP のパフォーマンスを最適化します。
+-   HTAP のデータ整合性: 分散型のトランザクション キー値データベースとして、TiKV はACID準拠のトランザクション インターフェイスを提供し、複数のレプリカ間のデータ整合性と[Raftコンセンサスアルゴリズム](https://raft.github.io/raft.pdf)の実装による高可用性を保証します。 TiKV のカラムナstorage拡張として、 TiFlash はRaft Learnerコンセンサス アルゴリズムに従ってリアルタイムでTiFlashからデータをレプリケートします。
+-   HTAP のデータ分離: HTAP リソースの分離の問題を解決するために、必要に応じて TiKV とTiFlash を異なるマシンに展開できます。
+-   MPP コンピューティング エンジン: [MPP](/tiflash/use-tiflash-mpp-mode.md#control-whether-to-select-the-mpp-mode) 、TiDB 5.0 以降のTiFlashエンジンによって提供される分散コンピューティング フレームワークであり、ノード間のデータ交換を可能にし、高性能で高スループットの SQL アルゴリズムを提供します。 MPP モードでは、分析クエリの実行時間を大幅に短縮できます。
 
 ## 手順 {#steps}
 
-このドキュメントでは、 [TPC-H](http://www.tpc.org/tpch/)のデータセットでサンプル テーブルをクエリすることにより、 TiDB HTAPの利便性と高性能を体験できます。 TPC-H は、大量のデータと非常に複雑な一連のビジネス指向のアドホック クエリで構成される、一般的な意思決定支援ベンチマークです。 TPC-H を使用して 22 個の完全な SQL クエリを体験するには、 [tidb-bench リポジトリ](https://github.com/pingcap/tidb-bench/tree/master/tpch/queries)または[TPC-H](http://www.tpc.org/tpch/)にアクセスして、クエリ ステートメントとデータを生成する方法を確認してください。
+このドキュメントでは、 [TPC-H](http://www.tpc.org/tpch/)データセットでサンプル テーブルをクエリすることにより、 TiDB HTAPの利便性と高性能を体験できます。 TPC-H は、大量のデータと非常に複雑な一連のビジネス指向のアドホック クエリで構成される、一般的な意思決定支援ベンチマークです。 TPC-H を使用して 22 個の完全な SQL クエリを体験するには、 [tidb-bench リポジトリ](https://github.com/pingcap/tidb-bench/tree/master/tpch/queries)または[TPC-H](http://www.tpc.org/tpch/)にアクセスして、クエリ ステートメントとデータを生成する方法を確認してください。
 
-### ステップ 1. ローカル テスト環境をデプロイする {#step-1-deploy-a-local-test-environment}
+### ステップ 1. ローカル テスト環境をデプロイ {#step-1-deploy-a-local-test-environment}
 
 TiDB HTAPを使用する前に、 [TiDB データベース プラットフォームのクイック スタート ガイド](/quick-start-with-tidb.md)の手順に従ってローカル テスト環境を準備し、次のコマンドを実行して TiDB クラスターをデプロイします。
 
@@ -40,11 +40,11 @@ tiup playground
 
 ### ステップ 2. テスト データの準備 {#step-2-prepare-test-data}
 
-次の手順では、 TiDB HTAPを使用するためのテスト データとして[TPC-H](http://www.tpc.org/tpch/)のデータセットを作成できます。 TPC-H に興味がある場合は、 [一般的な実装ガイドライン](http://tpc.org/tpc_documents_current_versions/pdf/tpc-h_v3.0.0.pdf)を参照してください。
+次の手順では、 TiDB HTAPを使用するためのテスト データとして[TPC-H](http://www.tpc.org/tpch/)データセットを作成できます。 TPC-H に興味がある場合は、 [一般的な実装ガイドライン](http://tpc.org/tpc_documents_current_versions/pdf/tpc-h_v3.0.0.pdf)参照してください。
 
 > **ノート：**
 >
-> 分析クエリに既存のデータを使用する場合は、次のことができ[データを TiDB に移行する](/migration-overview.md) 。独自のテスト データを設計して作成する場合は、SQL ステートメントを実行するか、関連ツールを使用して作成できます。
+> 分析クエリに既存のデータを使用する場合は、 [データを TiDB に移行する](/migration-overview.md)ことができます。独自のテスト データを設計して作成する場合は、SQL ステートメントを実行するか、関連ツールを使用して作成できます。
 
 1.  次のコマンドを実行して、テスト データ生成ツールをインストールします。
 
@@ -62,7 +62,7 @@ tiup playground
     tiup bench tpch --sf=1 prepare
     ```
 
-    このコマンドの出力に`Finished`が表示された場合、データが作成されたことを示します。
+    このコマンドの出力に`Finished`表示された場合、データが作成されたことを示します。
 
 3.  次の SQL ステートメントを実行して、生成されたデータを表示します。
 
@@ -101,9 +101,9 @@ tiup playground
 
     商用発注システムのデータベースです。 `test.nation`表は国に関する情報を示し、 `test.region`表は地域に関する情報を示し、 `test.part`表は部品に関する情報を示し、 `test.supplier`表はサプライヤーに関する情報を示し、 `test.partsupp`表はサプライヤーの部品に関する情報を示し、表`test.customer`は顧客に関する情報、表`test.customer`は注文に関する情報、表`test.lineitem`はオンライン アイテムに関する情報を示します。
 
-### ステップ 3. 行ベースのストレージ エンジンを使用してデータをクエリする {#step-3-query-data-with-the-row-based-storage-engine}
+### ステップ 3. 行ベースのstorageエンジンを使用してデータをクエリする {#step-3-query-data-with-the-row-based-storage-engine}
 
-行ベースのストレージ エンジンのみを使用した TiDB のパフォーマンスを確認するには、次の SQL ステートメントを実行します。
+行ベースのstorageエンジンのみを使用した TiDB のパフォーマンスを確認するには、次の SQL ステートメントを実行します。
 
 {{< copyable "" >}}
 
@@ -137,7 +137,7 @@ limit 10;
 
 これは出荷優先度クエリで、指定された日付までに出荷されなかった最高収益の注文の優先度と潜在的な収益を提供します。潜在的な収益は`l_extendedprice * (1-l_discount)`の合計として定義されます。注文は収益の降順でリストされます。この例では、このクエリは未出荷の注文を上位 10 位までリストします。
 
-### 手順 4. テスト データを列指向ストレージ エンジンにレプリケートする {#step-4-replicate-the-test-data-to-the-columnar-storage-engine}
+### 手順 4. テスト データを列指向storageエンジンにレプリケートする {#step-4-replicate-the-test-data-to-the-columnar-storage-engine}
 
 TiFlashがデプロイされた後、TiKV はデータをすぐにTiFlashに複製しません。レプリケートする必要があるテーブルを指定するには、TiDB の MySQL クライアントで次の DDL ステートメントを実行する必要があります。その後、TiDB はそれに応じて指定されたレプリカをTiFlashに作成します。
 
@@ -161,8 +161,8 @@ SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = 'test' and
 
 上記のステートメントの結果:
 
--   `AVAILABLE`は、特定のテーブルのTiFlashレプリカが使用可能かどうかを示します。 `1`は利用可能であることを意味し、 `0`は利用できないことを意味します。 `AVAILABLE`フィールドが`1`になると、このステータスは変更されなくなります。
--   `PROGRESS`は、レプリケーションの進行状況を意味します。値は 0.0 ～ 1.0 です。 1 は、 TiFlashレプリカの複製の進行が完了したことを意味します。
+-   `AVAILABLE`特定のテーブルのTiFlashレプリカが使用可能かどうかを示します。 `1`利用可能であることを意味し、 `0`利用できないことを意味します。 `AVAILABLE`フィールドが`1`になると、このステータスは変更されなくなります。
+-   `PROGRESS`レプリケーションの進行状況を意味します。値は 0.0 ～ 1.0 です。 1 は、 TiFlashレプリカの複製の進行が完了したことを意味します。
 
 ### ステップ 5. HTAP を使用してデータをより迅速に分析する {#step-5-analyze-data-faster-using-htap}
 
@@ -200,7 +200,7 @@ ORDER BY
 limit 10;
 ```
 
-`EXPLAIN`ステートメントの結果が`ExchangeSender`つと`ExchangeReceiver`の演算子を示している場合、MPP モードが有効になっていることを示します。
+`EXPLAIN`ステートメントの結果が`ExchangeSender`つと`ExchangeReceiver`演算子を示している場合、MPP モードが有効になっていることを示します。
 
 さらに、クエリ全体の各部分がTiFlashエンジンのみを使用して計算されるように指定できます。詳細については、 [TiDB を使用してTiFlashレプリカを読み取る](/tiflash/use-tidb-to-read-tiflash.md)を参照してください。
 

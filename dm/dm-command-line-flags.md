@@ -35,13 +35,13 @@ summary: Learn about the command-line flags in DM.
 
 ### <code>--initial-cluster</code> {#code-initial-cluster-code}
 
--   DM-master クラスタのブートストラップに使用される`"{node name}={external address}"`のリスト
+-   DM-master クラスタのブートストラップに使用される`"{node name}={external address}"`リスト
 -   デフォルト値は`"{name}={advertise-peer-urls}"`です
 -   `join`フラグを指定しない場合は、このフラグを指定する必要があります。 3ノードクラスタの構成例は`"dm-master-1=http://172.16.15.11:8291,dm-master-2=http://172.16.15.12:8291,dm-master-3=http://172.16.15.13:8291"`
 
 ### <code>--join</code> {#code-join-code}
 
--   DM マスター ノードがこのクラスターに参加するときの既存のクラスターの`advertise-addr`のリスト
+-   DM マスター ノードがこのクラスターに参加するときの既存のクラスターの`advertise-addr`リスト
 -   デフォルト値は`""`です
 -   `initial-cluster`フラグを指定しない場合は、このフラグを指定する必要があります。 2 つのノードを持つクラスターに新しいノードが参加するとします。構成例は`"172.16.15.11:8261,172.16.15.12:8261"`です。
 

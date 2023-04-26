@@ -17,11 +17,11 @@ summary: Understand optimizations related to subqueries.
 
 サブクエリには、 `select * from t where t.a in (select * from t2 where t.b=t2.b)`などのサブクエリ以外の列が含まれる場合があります。サブクエリの`t.b`列目はサブクエリに属さず、サブクエリの外部から導入されます。このようなサブクエリは通常「相関サブクエリ」と呼ばれ、外部から導入された列は「相関列」と呼ばれます。相関サブクエリに関する最適化については、 [相関サブクエリの非相関](/correlated-subquery-optimization.md)を参照してください。この記事では、相関列を含まないサブクエリに焦点を当てています。
 
-デフォルトでは、サブクエリは[TiDB 実行計画について](/explain-overview.md)の`semi join`を実行方法として使用します。一部の特別なサブクエリでは、TiDB はパフォーマンスを向上させるために論理的な書き直しを行います。
+デフォルトでは、サブクエリは[TiDB 実行計画について](/explain-overview.md)の`semi join`実行方法として使用します。一部の特別なサブクエリでは、TiDB はパフォーマンスを向上させるために論理的な書き直しを行います。
 
 ## <code>... &lt; ALL (SELECT ... FROM ...)</code>または<code>... &gt; ANY (SELECT ... FROM ...)</code> {#code-x3c-all-select-from-code-or-code-any-select-from-code}
 
-この場合、 `ALL`と`ANY`を`MAX`と`MIN`に置き換えることができます。テーブルが空の場合、 `MAX(EXPR)`と`MIN(EXPR)`の結果は NULL です。 `EXPR`の結果に`NULL`が含まれる場合も同様です。 `EXPR`の結果に`NULL`が含まれるかどうかは、式の最終結果に影響を与える可能性があるため、完全な書き直しは次の形式で与えられます。
+この場合、 `ALL`と`ANY` `MAX`と`MIN`に置き換えることができます。テーブルが空の場合、 `MAX(EXPR)`と`MIN(EXPR)`の結果は NULL です。 `EXPR`の結果に`NULL`含まれる場合も同様です。 `EXPR`の結果に`NULL`が含まれるかどうかは、式の最終結果に影響を与える可能性があるため、完全な書き直しは次の形式で与えられます。
 
 -   `t.id < all (select s.id from s)`は`t.id < min(s.id) and if(sum(s.id is null) != 0, null, true)`に書き換えられます
 -   `t.id < any (select s.id from s)`は`t.id < max(s.id) or if(sum(s.id is null) != 0, null, false)`に書き換えられます
@@ -63,7 +63,7 @@ explain select * from t1 where t1.a in (select t2.a from t2);
 +------------------------------+---------+-----------+------------------------+----------------------------------------------------------------------------+
 ```
 
-`IN`サブクエリが比較的小さく、外部クエリが比較的大きい場合、この書き換えによりパフォーマンスが向上します。これは、書き換えなしでは、駆動テーブルとして t2 で`index join`を使用することが不可能であるためです。ただし、不利な点は、再書き込み中に`t2`を自動的に削除できず、テーブルが比較的大きい場合、この再書き込みがクエリのパフォーマンスに影響を与えることです。現在、この最適化を制御するために変数[tidb_opt_insubq_to_join_and_agg](/system-variables.md#tidb_opt_insubq_to_join_and_agg)が使用されています。この最適化が適切でない場合は、手動で無効にすることができます。
+`IN`サブクエリが比較的小さく、外部クエリが比較的大きい場合、この書き換えによりパフォーマンスが向上します。これは、書き換えなしでは、駆動テーブルとして t2 で`index join`使用することが不可能であるためです。ただし、不利な点は、再書き込み中に集計を自動的に削除できず、 `t2`が比較的大きい場合、この再書き込みがクエリのパフォーマンスに影響を与えることです。現在、この最適化を制御するために変数[tidb_opt_insubq_to_join_and_agg](/system-variables.md#tidb_opt_insubq_to_join_and_agg)が使用されています。この最適化が適切でない場合は、手動で無効にすることができます。
 
 ## <code>EXISTS</code>サブクエリと<code>... &gt;/&gt;=/&lt;/&lt;=/=/!= (SELECT ... FROM ...)</code> {#code-exists-code-subquery-and-code-x3c-x3c-select-from-code}
 

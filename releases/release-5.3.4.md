@@ -46,13 +46,13 @@ TiDB バージョン: 5.3.4
 -   TiFlash
 
     -   引数の型が UInt8 [#6127](https://github.com/pingcap/tiflash/issues/6127)の場合、論理演算子が間違った結果を返す問題を修正
-    -   整数のデフォルト値として`0.0`を使用すると、 TiFlashブートストラップが失敗する問題を修正します (例: `` `i` int(11) NOT NULL DEFAULT '0.0'`` [#3157](https://github.com/pingcap/tiflash/issues/3157) )。
+    -   整数のデフォルト値として`0.0`を使用すると、 TiFlashブートストラップが失敗する問題を修正します (例: `` `i` int(11) NOT NULL DEFAULT '0.0'`` [#3157](https://github.com/pingcap/tiflash/issues/3157) 。
 
 -   ツール
 
     -   Dumpling
 
-        -   `--compress`オプションと S3 出力ディレクトリを同時に設定するとDumplingできない問題を修正[#30534](https://github.com/pingcap/tidb/issues/30534)
+        -   `--compress`オプションと S3 出力ディレクトリを同時に設定するとDumpling がデータをダンプできない問題を修正[#30534](https://github.com/pingcap/tidb/issues/30534)
 
     -   TiCDC
 

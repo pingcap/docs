@@ -5,7 +5,7 @@ summary: An overview of the usage of GRANT <privileges> for the TiDB database.
 
 # <code>GRANT &#x3C;privileges></code> {#code-grant-x3c-privileges-code}
 
-このステートメントは、TiDB の既存のユーザーに権限を割り当てます。 TiDB の権限システムは MySQL に従い、資格情報はデータベース/テーブル パターンに基づいて割り当てられます。このステートメントを実行するには、割り当てた`GRANT OPTION`の特権とすべての権限が必要です。
+このステートメントは、TiDB の既存のユーザーに権限を割り当てます。 TiDB の権限システムは MySQL に従い、資格情報はデータベース/テーブル パターンに基づいて割り当てられます。このステートメントを実行するには、割り当てた`GRANT OPTION`特権とすべての権限が必要です。
 
 ## あらすじ {#synopsis}
 

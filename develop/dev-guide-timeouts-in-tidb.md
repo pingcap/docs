@@ -13,7 +13,7 @@ TiDB のトランザクション実装は、MVCC (Multiple Version Concurrency C
 
 デフォルトでは、各 MVCC バージョン (整合性スナップショット) は 10 分間保持されます。読み取りに 10 分以上かかるトランザクションは、エラー`GC life time is shorter than transaction duration`を受け取ります。
 
-たとえば、フル バックアップに**Mydumper**を使用している場合 ( <strong>Mydumper</strong>は一貫性のあるスナップショットをバックアップする場合)、より長い読み取り時間が必要な場合は、TiDB の`mysql.tidb`テーブルの値`tikv_gc_life_time`を調整して、MVCC バージョンの保持時間を長くすることができます。 `tikv_gc_life_time`はグローバルかつ即時に有効になることに注意してください。値を大きくすると、既存のすべてのスナップショットの寿命が長くなり、値を小さくすると、すべてのスナップショットの寿命がすぐに短くなります。 MVCC のバージョンが多すぎると、TiKV の処理効率に影響します。そのため、 <strong>Mydumper</strong>で完全バックアップを行った後、 `tikv_gc_life_time`を以前の設定に戻す必要があります。
+たとえば、フル バックアップに**Mydumper を**使用している場合 ( <strong>Mydumper は</strong>一貫性のあるスナップショットをバックアップする場合)、より長い読み取り時間が必要な場合は、TiDB の`mysql.tidb`テーブルの値`tikv_gc_life_time`を調整して、MVCC バージョンの保持時間を長くすることができます。 `tikv_gc_life_time`グローバルかつ即時に有効になることに注意してください。値を大きくすると、既存のすべてのスナップショットの寿命が長くなり、値を小さくすると、すべてのスナップショットの寿命がすぐに短くなります。 MVCC のバージョンが多すぎると、TiKV の処理効率に影響します。そのため、 <strong>Mydumper</strong>で完全バックアップを行った後、 `tikv_gc_life_time`以前の設定に戻す必要があります。
 
 GC の詳細については、 [GC の概要](/garbage-collection-overview.md)を参照してください。
 
@@ -21,15 +21,15 @@ GC の詳細については、 [GC の概要](/garbage-collection-overview.md)�
 
 GC は進行中のトランザクションには影響しません。ただし、実行できる悲観的トランザクションの数には上限があり、トランザクション タイムアウトの制限とトランザクションが使用するメモリの制限があります。トランザクション タイムアウトは、TiDB プロファイルの`[performance]`カテゴリで`max-txn-ttl`ずつ変更できます。デフォルトでは`60`分です。
 
-`INSERT INTO t10 SELECT * FROM t1`などの SQL ステートメントは GC の影響を受けませんが、 `max-txn-ttl`を超えるとタイムアウトによりロールバックされます。
+`INSERT INTO t10 SELECT * FROM t1`などの SQL ステートメントは GC の影響を受けませんが、 `max-txn-ttl`超えるとタイムアウトによりロールバックされます。
 
 ## SQL 実行タイムアウト {#sql-execution-timeout}
 
-TiDB は、単一の SQL ステートメントの実行時間を制限するためのシステム変数 (デフォルトでは`max_execution_time` 、 `0`で、制限がないことを示します) も提供します。 `max_execution_time`は現在、 `SELECT`のステートメントだけでなく、すべてのタイプのステートメントに対して有効です。単位は`ms`ですが、実際の精度はミリ秒レベルではなく`100ms`レベルです。
+TiDB は、単一の SQL ステートメントの実行時間を制限するためのシステム変数 (デフォルトでは`max_execution_time` 、 `0`で、制限がないことを示します) も提供します。 `max_execution_time`現在、 `SELECT`のステートメントだけでなく、すべてのタイプのステートメントに対して有効です。単位は`ms`ですが、実際の精度はミリ秒レベルではなく`100ms`レベルです。
 
 ## JDBC クエリのタイムアウト {#jdbc-query-timeout}
 
-MySQL JDBC のクエリ タイムアウト設定の`setQueryTimeout()`は、TiDB では機能し***ません***。これは、クライアントがタイムアウトを検出すると、データベースに`KILL`コマンドを送信するためです。ただし、tidb-server は負荷分散されており、間違った tidb-server での接続の終了を避けるために、この`KILL`コマンドを実行しません。クエリのタイムアウト効果を確認するには、 `MAX_EXECUTION_TIME`を使用する必要があります。
+MySQL JDBC のクエリ タイムアウト設定の`setQueryTimeout()` TiDB では機能しませ***ん***。これは、クライアントがタイムアウトを検出すると、データベースに`KILL`コマンドを送信するためです。ただし、tidb-server は負荷分散されており、間違った tidb-server での接続の終了を避けるために、この`KILL`コマンドを実行しません。クエリのタイムアウト効果を確認するには、 `MAX_EXECUTION_TIME`を使用する必要があります。
 
 TiDB は、次の MySQL 互換のタイムアウト制御パラメーターを提供します。
 

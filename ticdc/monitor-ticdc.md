@@ -78,7 +78,7 @@ TiCDC ダッシュボードには、4 つの監視パネルが含まれていま
 
 ![TiCDC Dashboard - Events metrics 2](/media/ticdc/ticdc-dashboard-events-1.png) ![TiCDC Dashboard - Events metrics 2](/media/ticdc/ticdc-dashboard-events-2.png) ![TiCDC Dashboard - Events metrics 2](/media/ticdc/ticdc-dashboard-events-3.png)
 
-[**イベント**] パネルの各メトリックの説明は次のとおりです。
+**[イベント]**パネルの各メトリックの説明は次のとおりです。
 
 -   Eventfeed count: TiCDC ノードの Eventfeed RPC リクエストの数
 -   イベント サイズ パーセンタイル: TiCDC が TiKV から 1 秒以内に受け取るイベント サイズ (P95、P99、および P999)

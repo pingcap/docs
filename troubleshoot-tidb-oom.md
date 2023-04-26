@@ -15,8 +15,8 @@ summary: Learn how to diagnose and resolve TiDB OOM (Out of Memory) issues.
 
 -   Grafana ダッシュボードには以下が表示されます。
     -   **TiDB** &gt;<strong>サーバー</strong>&gt;<strong>メモリ使用量</strong>は、 `process/heapInUse`メトリックが上昇し続け、しきい値に達すると突然ゼロに低下することを示しています。
-    -   **TiDB** &gt;<strong>サーバー</strong>&gt; アップ<strong>タイム</strong>が突然ゼロになりました。
-    -   **TiDB-Runtime** &gt; <strong>Memory Usage</strong>は、 `estimate-inuse`のメトリックが上昇し続けていることを示しています。
+    -   **TiDB** &gt;<strong>サーバー</strong>&gt;<strong>アップタイムが</strong>突然ゼロになりました。
+    -   **TiDB-Runtime** &gt; <strong>Memory Usage は、</strong> `estimate-inuse`のメトリックが上昇し続けていることを示しています。
 
 -   `tidb.log`を確認すると、次のログ エントリが見つかります。
     -   OOM に関するアラーム: `[WARN] [memory_usage_alarm.go:139] ["tidb-server has the risk of OOM. Running SQLs and heap profile will be recorded in record path"]` 。詳細については、 [`memory-usage-alarm-ratio`](/system-variables.md#tidb_memory_usage_alarm_ratio)を参照してください。
@@ -28,7 +28,7 @@ OOM の問題をトラブルシューティングするときは、次のプロ�
 
 1.  OOM の問題かどうかを確認します。
 
-    次のコマンドを実行して、オペレーティング システムのログを確認します。問題が発生した時刻付近に`oom-killer`のログがあれば、OOM の問題であることが確認できます。
+    次のコマンドを実行して、オペレーティング システムのログを確認します。問題が発生した時刻付近に`oom-killer`ログがあれば、OOM の問題であることが確認できます。
 
     ```shell
     dmesg -T | grep tidb-server
@@ -73,7 +73,7 @@ OOM の問題をトラブルシューティングするときは、次のプロ�
 
 -   オペレーティング システムのメモリ容量が小さすぎます。
 -   TiUP構成[`resource_control`](/tiup/tiup-cluster-topology-reference.md#global)は適切ではありません。
--   ハイブリッド展開 (TiDB と他のアプリケーションが同じサーバーに展開されていることを意味します) の場合、 `oom-killer`はリソース不足のために誤って強制終了されます。
+-   ハイブリッド展開 (TiDB と他のアプリケーションが同じサーバーに展開されていることを意味します) の場合、TiDB はリソース不足のために`oom-killer`て強制終了されます。
 
 ### データベースの問題 {#database-issues}
 
@@ -93,7 +93,7 @@ OOM の問題のさまざまな原因に応じて、SQL ステートメントの
     -   テーブル間の JOIN 順序を調整します。
     -   ヒントを使用して SQL ステートメントを最適化します。
 
--   一部の演算子と関数は、ストレージ レベルへのプッシュ ダウンがサポートされていないため、中間結果セットが大量に蓄積されます。この場合、SQL ステートメントを改良するか、ヒントを使用して最適化し、プッシュ ダウンをサポートする関数または演算子を使用する必要があります。
+-   一部の演算子と関数は、storageレベルへのプッシュ ダウンがサポートされていないため、中間結果セットが大量に蓄積されます。この場合、SQL ステートメントを改良するか、ヒントを使用して最適化し、プッシュ ダウンをサポートする関数または演算子を使用する必要があります。
 
 -   実行計画には、演算子 HashAgg が含まれています。 HashAgg は複数のスレッドによって同時に実行されます。これは高速ですが、より多くのメモリを消費します。代わりに、 `STREAM_AGG()`を使用できます。
 
@@ -132,7 +132,7 @@ TiDB ノードは、起動後に統計をメモリにロードする必要があ
 
 #### <code>tidb_enable_rate_limit_action</code>が正しく構成されていません {#code-tidb-enable-rate-limit-action-code-is-not-configured-properly}
 
-システム変数[`tidb_enable_rate_limit_action`](/system-variables.md#tidb_enable_rate_limit_action)は、SQL ステートメントがデータの読み取りのみを行う場合に、メモリの使用を効果的に制御します。この変数が有効で、計算操作 (結合操作や集計操作など) が必要な場合、メモリ使用量が[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)の制御下にない可能性があり、OOM のリスクが高まります。
+システム変数[`tidb_enable_rate_limit_action`](/system-variables.md#tidb_enable_rate_limit_action)は、SQL ステートメントがデータの読み取りのみを行う場合に、メモリの使用を効果的に制御します。この変数が有効で、計算操作 (結合操作や集計操作など) が必要な場合、メモリ使用量が[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)制御下にない可能性があり、OOM のリスクが高まります。
 
 このシステム変数を無効にすることをお勧めします。 TiDB v6.3.0 以降、このシステム変数はデフォルトで無効になっています。
 
@@ -140,7 +140,7 @@ TiDB ノードは、起動後に統計をメモリにロードする必要があ
 
 クライアント側で OOM が発生した場合は、次の点を調査してください。
 
--   **Grafana TiDB の [詳細]** &gt; [<strong>サーバー]</strong> &gt; [<strong>クライアント データ トラフィック</strong>] で傾向と速度を確認し、ネットワークがブロックされているかどうかを確認します。
+-   **Grafana TiDB の [詳細]** &gt; <strong>[サーバー]</strong> &gt; <strong>[クライアント データ トラフィック]</strong>で傾向と速度を確認し、ネットワークがブロックされているかどうかを確認します。
 -   間違った JDBC 構成パラメーターが原因でアプリケーション OOM が発生していないかどうかを確認してください。たとえば、ストリーミング読み取りの`defaultFetchSize`パラメータが正しく構成されていない場合、クライアント側にデータが大量に蓄積される可能性があります。
 
 ## OOM の問題をトラブルシューティングするために収集される診断情報 {#diagnostic-information-to-be-collected-to-troubleshoot-oom-issues}
@@ -169,12 +169,12 @@ OOM の問題の根本原因を突き止めるには、次の情報を収集す�
     -   `tmp-storage-quota`
     -   `tidb_analyze_version`
 
--   Grafana ダッシュボード ( **TiDB** &gt; <strong>Server</strong> &gt; <strong>Memory Usage</strong> ) で TiDBメモリの毎日の使用量を確認します。
+-   Grafana ダッシュボード ( **TiDB** &gt; <strong>Server</strong> &gt; <strong>Memory Usage )</strong>で TiDBメモリの毎日の使用量を確認します。
 
 -   より多くのメモリを消費する SQL ステートメントを確認します。
 
-    -   ビューダッシュボードで SQL ステートメント分析、スロー クエリ、およびメモリ使用量を表示します。
-    -   `INFORMATION_SCHEMA`の`SLOW_QUERY`と`CLUSTER_SLOW_QUERY`を確認してください。
+    -   TiDB ダッシュボードで SQL ステートメント分析、スロー クエリ、およびメモリ使用量をビュー。
+    -   `INFORMATION_SCHEMA`の`SLOW_QUERY`と`CLUSTER_SLOW_QUERY`確認してください。
     -   各 TiDB ノードで`tidb_slow_query.log`をチェックします。
     -   `grep "expensive_query" tidb.log`を実行して、対応するログ エントリを確認します。
     -   `EXPLAIN ANALYZE`を実行して、演算子のメモリ使用量を確認します。

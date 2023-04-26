@@ -15,13 +15,13 @@ TiUPを使用してインストールするか、ソース コードからコン
 >
 > 使用するコントロール ツールのバージョンは、クラスターのバージョンと一致していることが推奨されます。
 
-### TiUP を使用してTiUPコントロールをインストールする {#install-tidb-control-using-tiup}
+### TiUPを使用して TiDB コントロールをインストールする {#install-tidb-control-using-tiup}
 
-TiUPをインストールすると、コマンド`tiup ctl:<cluster-version> tidb`つで TiDB Control を取得して実行できます。
+TiUPをインストールすると、コマンド`tiup ctl:v<CLUSTER_VERSION> tidb` TiDB Control を取得して実行できます。
 
 ### ソースコードからコンパイル {#compile-from-source-code}
 
--   コンパイル環境要件： [行け](https://golang.org/)バージョン 1.19 以降
+-   コンパイル環境要件： [行く](https://golang.org/)バージョン 1.19 以降
 -   コンパイル手順: [TiDB コントロール プロジェクト](https://github.com/pingcap/tidb-ctl)のルート ディレクトリに移動し、 `make`コマンドを使用してコンパイルし、 `tidb-ctl`を生成します。
 -   コンパイル ドキュメント: ヘルプ ファイルは`doc`ディレクトリにあります。ヘルプ ファイルが失われた場合、またはそれらを更新したい場合は、 `make doc`コマンドを使用してヘルプ ファイルを生成します。
 
@@ -61,7 +61,7 @@ TiDB Control は、複数のコマンド層で構成されています。各コ�
 
 次の例は、スキーマ情報を取得する方法を示しています。
 
-使用状況の詳細を取得するには、 `tidb-ctl schema -h`を使用します。 `schema`コマンド自体には、 `in`と`tid`の 2 つのサブコマンドがあります。
+使用状況の詳細を取得するには、 `tidb-ctl schema -h`を使用します。 `schema`コマンド自体には、 `in`と`tid` 2 つのサブコマンドがあります。
 
 -   `in`は、データベース名からデータベース内のすべてのテーブルのテーブル スキーマを取得するために使用されます。
 -   `tid`は、データベース全体で一意の`table_id`を使用してテーブル スキーマを取得するために使用されます。
@@ -116,7 +116,7 @@ tidb-ctl schema in <database name>
 
 -   テーブル名を指定する場合は、 `tidb-ctl schema in <database> -n <table name>`を使用してフィルタリングします。
 
-    たとえば、 `tidb-ctl schema in mysql -n db`は`mysql`データベースの`db`テーブルのテーブル スキーマを返します。
+    たとえば、 `tidb-ctl schema in mysql -n db` `mysql`データベースの`db`テーブルのテーブル スキーマを返します。
 
     ```json
     {
@@ -132,13 +132,13 @@ tidb-ctl schema in <database name>
 
     (上記の出力も切り捨てられます。)
 
-    デフォルトの TiDB サービス アドレスとポートを使用したくない場合は、 `--host`と`--port`のオプションを使用して構成します。たとえば、 `tidb-ctl --host 172.16.55.88 --port 8898 schema in mysql -n db`です。
+    デフォルトの TiDB サービス アドレスとポートを使用したくない場合は、 `--host`と`--port`オプションを使用して構成します。たとえば、 `tidb-ctl --host 172.16.55.88 --port 8898 schema in mysql -n db`です。
 
 #### <code>tid</code>サブコマンド {#the-code-tid-code-subcommand}
 
 `tid`は、データベース全体で一意の`table_id`を使用してテーブル スキーマを取得するために使用されます。 `in`サブコマンドを使用して特定のスキーマのすべてのテーブル ID を取得し、 `tid`サブコマンドを使用して詳細なテーブル情報を取得できます。
 
-たとえば、テーブル ID `mysql.stat_meta`は`21`です。 `tidb-ctl schema tid -i 21`を使用して`mysql.stat_meta`の詳細を取得できます。
+たとえば、テーブル ID `mysql.stat_meta`は`21`です。 `tidb-ctl schema tid -i 21`使用して`mysql.stat_meta`の詳細を取得できます。
 
 ```json
 {
@@ -263,7 +263,7 @@ tidb-ctl base64decode [table_id] [base64_data]
 
     実際、KEY が`/tidb/ddl/all_schema_versions/foo`で VALUE が`bar`のキーと値のペアが etcd に追加されます。
 
--   `tidb-ctl etcd delkey`は etcd の KEY を削除します。プレフィックスが`/tidb/ddl/fg/owner/`または`/tidb/ddl/all_schema_versions/`の KEY のみを削除できます。
+-   `tidb-ctl etcd delkey` etcd の KEY を削除します。プレフィックスが`/tidb/ddl/fg/owner/`または`/tidb/ddl/all_schema_versions/`の KEY のみを削除できます。
 
     ```shell
     tidb-ctl etcd delkey "/tidb/ddl/fg/owner/foo"
@@ -272,7 +272,7 @@ tidb-ctl base64decode [table_id] [base64_data]
 
 ### <code>log</code>コマンド {#the-code-log-code-command}
 
-TiDB エラーログのスタック情報は 1 行形式です。 `tidb-ctl log`を使用して、その形式を複数行に変更できます。
+TiDB エラーログのスタック情報は 1 行形式です。 `tidb-ctl log`使用して、その形式を複数行に変更できます。
 
 ### <code>keyrange</code>コマンド {#the-code-keyrange-code-command}
 

@@ -5,7 +5,7 @@ summary: Learn about default values for data types in TiDB.
 
 # デフォルト値 {#default-values}
 
-データ型仕様の`DEFAULT`値句は、列のデフォルト値を示します。デフォルト値は定数でなければならず、関数または式にすることはできません。ただし、時間型の場合、 `TIMESTAMP`列と`DATETIME`列のデフォルトとして`NOW` 、 `CURRENT_TIMESTAMP` 、 `LOCALTIME` 、および`LOCALTIMESTAMP`関数を指定できます。
+データ型仕様の`DEFAULT`値句は、列のデフォルト値を示します。デフォルト値は定数でなければならず、関数または式にすることはできません。ただし、時間型の場合、 `TIMESTAMP`と`DATETIME`列のデフォルトとして`NOW` 、 `CURRENT_TIMESTAMP` 、 `LOCALTIME` 、および`LOCALTIMESTAMP`関数を指定できます。
 
 `BLOB` 、 `TEXT` 、および`JSON`列にデフォルト値を割り当てる**ことはできません**。
 

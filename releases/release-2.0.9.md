@@ -42,4 +42,4 @@ title: TiDB 2.0.9 Release Notes
 
 -   `kv_scan`インターフェイス[#3749](https://github.com/tikv/tikv/pull/3749)に`end-key`制限を追加します。
 -   `max-tasks-xxx`構成を放棄して`max-tasks-per-worker-xxx` [#3093](https://github.com/tikv/tikv/pull/3093)を追加
--   RocksDB [#3789](https://github.com/tikv/tikv/pull/3789)の`CompactFiles`の問題を修正
+-   RocksDB [#3789](https://github.com/tikv/tikv/pull/3789)の`CompactFiles`問題を修正

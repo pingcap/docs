@@ -1,6 +1,6 @@
 ---
 title: CLIENT_ERRORS_SUMMARY_BY_HOST
-summary: Learn about the `CLIENT_ERRORS_SUMMARY_BY_HOST` information_schema table.
+summary: Learn about the `CLIENT_ERRORS_SUMMARY_BY_HOST` INFORMATION_SCHEMA table.
 ---
 
 # CLIENT_ERRORS_SUMMARY_BY_HOST {#client-errors-summary-by-host}
@@ -13,9 +13,9 @@ summary: Learn about the `CLIENT_ERRORS_SUMMARY_BY_HOST` information_schema tabl
 -   許可エラー。
 -   存在しないテーブル。
 
-これらのエラーは、MySQLサーバープロトコルを介してクライアントに返され、そこでアプリケーションは適切なアクションを実行することが期待されます。 `information_schema` 。表`CLIENT_ERRORS_SUMMARY_BY_HOST`は、アプリケーションが TiDBサーバーから返されたエラーを正しく処理 (またはログ記録) していないシナリオで、エラーを検査するための便利な方法を提供します。
+これらのエラーは、MySQLサーバープロトコルを介してクライアントに返され、そこでアプリケーションは適切なアクションを実行することが期待されます。 `INFORMATION_SCHEMA.CLIENT_ERRORS_SUMMARY_BY_HOST`テーブルは、アプリケーションが TiDBサーバーによって返されたエラーを正しく処理 (またはログ記録) していないシナリオでエラーを検査するための便利な方法を提供します。
 
-`CLIENT_ERRORS_SUMMARY_BY_HOST`はリモート ホストごとにエラーを要約しているため、1 つのアプリケーションサーバーが他のサーバーよりも多くのエラーを生成しているシナリオを診断するのに役立ちます。考えられるシナリオは次のとおりです。
+`CLIENT_ERRORS_SUMMARY_BY_HOST`リモート ホストごとにエラーを要約しているため、1 つのアプリケーションサーバーが他のサーバーよりも多くのエラーを生成しているシナリオを診断するのに役立ちます。考えられるシナリオは次のとおりです。
 
 -   古い MySQL クライアント ライブラリ。
 -   古いアプリケーション (おそらく、このサーバーは、新しい展開をロールアウトするときに見落とされたものです)。
@@ -24,12 +24,12 @@ summary: Learn about the `CLIENT_ERRORS_SUMMARY_BY_HOST` information_schema tabl
 
 集計されたカウントは、ステートメント`FLUSH CLIENT_ERRORS_SUMMARY`を使用してリセットできます。要約は各 TiDBサーバーにローカルであり、メモリにのみ保持されます。 TiDBサーバーが再起動すると、サマリーは失われます。
 
-{{< copyable "" >}}
-
 ```sql
-USE information_schema;
+USE INFORMATION_SCHEMA;
 DESC CLIENT_ERRORS_SUMMARY_BY_HOST;
 ```
+
+出力は次のとおりです。
 
 ```sql
 +---------------+---------------+------+------+---------+-------+
@@ -58,14 +58,14 @@ DESC CLIENT_ERRORS_SUMMARY_BY_HOST;
 
 次の例は、クライアントがローカル TiDBサーバーに接続するときに生成される警告を示しています。サマリーは`FLUSH CLIENT_ERRORS_SUMMARY`を実行した後にリセットされます:
 
-{{< copyable "" >}}
-
 ```sql
 SELECT 0/0;
 SELECT * FROM CLIENT_ERRORS_SUMMARY_BY_HOST;
 FLUSH CLIENT_ERRORS_SUMMARY;
 SELECT * FROM CLIENT_ERRORS_SUMMARY_BY_HOST;
 ```
+
+出力は次のとおりです。
 
 ```sql
 +-----+

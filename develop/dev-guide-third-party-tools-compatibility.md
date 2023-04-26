@@ -19,9 +19,11 @@ summary: Describes TiDB compatibility issues with third-party tools found during
 >
 > 上記のサポートされていない機能は予想される動作であり、このドキュメントには記載されていません。詳細については、 [MySQL の互換性](/mysql-compatibility.md)を参照してください。
 
+このドキュメントに記載されている非互換性の問題は、いくつかの[TiDB がサポートするサードパーティ ツール](/develop/dev-guide-third-party-tools-compatibility.md)に見られます。
+
 ## 一般的な非互換性 {#general-incompatibility}
 
-### <code>SELECT CONNECTION_ID()</code>は TiDB で 64 ビット整数を返します {#code-select-connection-id-code-returns-a-64-bit-integer-in-tidb}
+### <code>SELECT CONNECTION_ID()</code> TiDB で 64 ビット整数を返します {#code-select-connection-id-code-returns-a-64-bit-integer-in-tidb}
 
 **説明**
 
@@ -29,13 +31,13 @@ summary: Describes TiDB compatibility issues with third-party tools found during
 
 **回避方法**
 
-TiDB アプリケーションでは、データのオーバーフローを回避するために、64 ビット整数型または文字列型を使用して`SELECT CONNECTION_ID()`の結果を格納する必要があります。たとえば、 Java`Long`または`String`を使用し、JavaScript または TypeScript では`string`を使用できます。
+TiDB アプリケーションでは、データのオーバーフローを回避するために、64 ビット整数型または文字列型を使用して`SELECT CONNECTION_ID()`の結果を格納する必要があります。たとえば、 Javaでは`Long`または`String`使用し、JavaScript または TypeScript では`string`を使用できます。
 
 ### TiDB は<code>Com_*</code>カウンターを維持しない {#tidb-does-not-maintain-code-com-code-counters}
 
 **説明**
 
-MySQL は一連の[`Com_`で始まるサーバーステータス変数](https://dev.mysql.com/doc/refman/8.0/en/server-status-variables.html#statvar_Com_xxx)を維持して、データベースで実行した操作の総数を追跡します。たとえば、 `Com_select`は、MySQL が最後に開始されてから開始された`SELECT`のステートメントの合計数を記録します (ステートメントが正常にクエリされなかった場合でも)。 TiDB はこれらの変数を維持しません。ステートメント[`SHOW GLOBAL STATUS LIKE 'Com_%'`](/sql-statements/sql-statement-show-status.md)を使用して、TiDB と MySQL の違いを確認できます。
+MySQL は一連の[`Com_`で始まるサーバーステータス変数](https://dev.mysql.com/doc/refman/8.0/en/server-status-variables.html#statvar_Com_xxx)を維持して、データベースで実行した操作の総数を追跡します。たとえば、 `Com_select` 、MySQL が最後に開始されてから開始された`SELECT`のステートメントの合計数を記録します (ステートメントが正常にクエリされなかった場合でも)。 TiDB はこれらの変数を維持しません。ステートメント[`SHOW GLOBAL STATUS LIKE 'Com_%'`](/sql-statements/sql-statement-show-status.md)使用して、TiDB と MySQL の違いを確認できます。
 
 **回避方法**
 
@@ -91,7 +93,7 @@ TiDB のエラー メッセージでは`TIMESTAMP`と`DATETIME`が区別され�
 
 MySQL Connector/J の照合順序はクライアント側に保存され、サーバーのバージョンによって区別されます。
 
-次の表に、文字セットにおける既知のクライアント側とサーバー側の照合順序の不一致を示します。
+次の表に、文字セットにおける既知のクライアント側とサーバー側の照合順序順序の不一致を示します。
 
 | キャラクター    | クライアント側のデフォルトの照合順序   | サーバー側のデフォルトの照合順序 |
 | --------- | -------------------- | ---------------- |
@@ -101,7 +103,7 @@ MySQL Connector/J の照合順序はクライアント側に保存され、サ�
 
 **回避方法**
 
-照合順序を手動で設定し、クライアント側のデフォルトの照合順序に依存しないでください。クライアント側のデフォルトの照合順序は、MySQL Connector/J 構成ファイルによって保存されます。
+照合順序を手動で設定し、クライアント側のデフォルトの照合順序に依存しないでください。クライアント側のデフォルトの照合順序は、 MySQL Connector/J 構成ファイルによって保存されます。
 
 ### <code>NO_BACKSLASH_ESCAPES</code>パラメータが有効にならない {#the-code-no-backslash-escapes-code-parameter-does-not-take-effect}
 
@@ -111,7 +113,7 @@ TiDB では、 `\`文字をエスケープせずに`NO_BACKSLASH_ESCAPES`パラ�
 
 **回避方法**
 
-TiDB では`NO_BACKSLASH_ESCAPES`と`\`を使用しないでください。ただし、SQL ステートメントでは`\\`を使用してください。
+TiDB では`NO_BACKSLASH_ESCAPES`と`\`使用しないでください。ただし、SQL ステートメントでは`\\`使用してください。
 
 ### <code>INDEX_USED</code>関連のパラメーターはサポートされていません {#the-code-index-used-code-related-parameters-are-not-supported}
 
@@ -124,13 +126,13 @@ TiDB は、プロトコルで`SERVER_QUERY_NO_GOOD_INDEX_USED`および`SERVER_Q
 
 **回避方法**
 
-TiDB で`noIndexUsed()`と`noGoodIndexUsed()`の関数を使用しないでください。
+TiDB で`noIndexUsed()`と`noGoodIndexUsed()`関数を使用しないでください。
 
 ### <code>enablePacketDebug</code>パラメータはサポートされていません {#the-code-enablepacketdebug-code-parameter-is-not-supported}
 
 **説明**
 
-TiDB は[enablePacketDebug](https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-connp-props-debugging-profiling.html)パラメータをサポートしていません。これは、データ パケットのバッファを保持するデバッグに使用される MySQL Connector/J パラメータです。これにより、接続が予期せず閉じられる可能性があります。電源を入れ**ない**でください。
+TiDB は[enablePacketDebug](https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-connp-props-debugging-profiling.html)パラメータをサポートしていません。これは、データ パケットのバッファを保持するデバッグに使用される MySQL Connector/J パラメータです。これにより、接続が予期せず閉じられる可能性があります。電源を入れ**ないでください**。
 
 **回避方法**
 
@@ -140,11 +142,11 @@ TiDB で`enablePacketDebug`パラメータを設定しないでください。
 
 **説明**
 
-TiDB は`UpdatableResultSet`をサポートしていません。 `ResultSet.CONCUR_UPDATABLE`パラメータを指定したり、 `ResultSet`内のデータを更新したりし**ない**で<strong>ください</strong>。
+TiDB は`UpdatableResultSet`をサポートしていません。 `ResultSet.CONCUR_UPDATABLE`パラメータを指定したり、 `ResultSet`内のデータを更新し**たりしないで**<strong>ください</strong>。
 
 **回避方法**
 
-トランザクションごとのデータの整合性を確保するために、 `UPDATE`のステートメントを使用してデータを更新できます。
+トランザクションごとのデータの整合性を確保するために、 `UPDATE`ステートメントを使用してデータを更新できます。
 
 ## MySQL JDBC のバグ {#mysql-jdbc-bugs}
 
@@ -160,13 +162,13 @@ TiDB は`UpdatableResultSet`をサポートしていません。 `ResultSet.CONC
 >
 > このバグは MySQL JDBC に報告されています。プロセスを追跡するには、この[バグレポート](https://bugs.mysql.com/bug.php?id=108643)に従うことができます。
 
-トランザクションがコミットまたはロールバックされなくなる可能性があるため、 `useLocalTransactionState`をオンにし**ない**でください。
+トランザクションがコミットまたはロールバックされなくなる可能性があるため、 `useLocalTransactionState`をオンに**しないでください**。
 
 ### コネクタは、5.7.5 より前のサーバーバージョンと互換性がありません {#connector-is-incompatible-with-the-server-version-earlier-than-5-7-5}
 
 **説明**
 
-MySQLサーバー&lt; 5.7.5 または MySQLサーバー&lt; 5.7.5 プロトコル (v6.3.0 より前の TiDB など) を使用するデータベースで MySQL Connector/J 8.0.29 を使用すると、特定の条件下でデータベース接続がハングすることがあります。詳細については、 [バグレポート](https://bugs.mysql.com/bug.php?id=106252)を参照してください。
+MySQLサーバー&lt; 5.7.5 または MySQLサーバー&lt; 5.7.5 プロトコル (v6.3.0 より前の TiDB など) を使用するデータベースで MySQL Connector/J 8.0.29 を使用すると、特定の条件下でデータベース接続がハングすることがあります。詳細については、 [バグレポート](https://bugs.mysql.com/bug.php?id=106252)参照してください。
 
 **回避方法**
 
@@ -174,14 +176,14 @@ MySQLサーバー&lt; 5.7.5 または MySQLサーバー&lt; 5.7.5 プロトコ�
 
 TiDB は次の方法でこれを修正します。
 
--   クライアント側: このバグは**pingcap/mysql-connector-j**で修正されており、公式の MySQL Connector/J の代わりに[pingcap/mysql-connector-j](https://github.com/pingcap/mysql-connector-j)を使用できます。
--   サーバー側: この互換性の問題は TiDB v6.3.0 以降で修正されており、サーバーを v6.3.0 以降のバージョンにアップグレードできます。
+-   クライアント側: このバグは**pingcap/mysql-connector-j**で修正されており、公式の MySQL Connector/J の代わりに[pingcap/mysql-connector-j](https://github.com/pingcap/mysql-connector-j)使用できます。
+-   サーバー側: この互換性の問題は TiDB v6.3.0 以降で修正されており、サーバーをv6.3.0 以降のバージョンにアップグレードできます。
 
 ## Sequelize との互換性 {#compatibility-with-sequelize}
 
 このセクションで説明する互換性情報は、 [Sequelize v6.21.4](https://www.npmjs.com/package/sequelize/v/6.21.4)に基づいています。
 
-テスト結果によると、TiDB はほとんどの Sequelize 機能をサポートしています ( [`MySQL`を方言として使用する](https://sequelize.org/docs/v6/other-topics/dialect-specific-things/#mysql) )。
+テスト結果によると、TiDB はほとんどの Sequelize 機能をサポートしています ( [`MySQL`方言として使用する](https://sequelize.org/docs/v6/other-topics/dialect-specific-things/#mysql) )。
 
 サポートされていない機能は次のとおりです。
 
@@ -191,7 +193,7 @@ TiDB は次の方法でこれを修正します。
 -   `PROCEDURE`はサポートされていません。
 -   `READ-UNCOMMITTED`と`SERIALIZABLE` [分離レベル](/system-variables.md#transaction_isolation)はサポートされていません。
 -   デフォルトでは、列の`AUTO_INCREMENT`属性の変更は許可されていません。
--   `FULLTEXT` 、 `HASH` 、および`SPATIAL`のインデックスはサポートされていません。
+-   `FULLTEXT` 、 `HASH` 、および`SPATIAL`インデックスはサポートされていません。
 
 ### 整数の主キーの変更はサポートされていません {#modification-of-integer-primary-key-is-not-supported}
 
@@ -227,4 +229,4 @@ TiDB を、分離レベル`SERIALIZABLE`を設定するが`SERIALIZABLE`に依�
 
 **説明**
 
-`FULLTEXT` 、 `HASH` 、および`SPATIAL`のインデックスはサポートされていません。
+`FULLTEXT` 、 `HASH` 、および`SPATIAL`インデックスはサポートされていません。

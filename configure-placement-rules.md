@@ -9,7 +9,7 @@ summary: Learn how to configure Placement Rules.
 >
 > このドキュメントでは、配置Driver(PD) で配置ルールを手動で指定する方法を紹介します。 [SQL の配置規則](/placement-rules-in-sql.md)の使用が推奨されるようになりました。これにより、テーブルとパーティションの配置を構成するためのより便利な方法が提供されます。
 
-v5.0 で導入された Placement Rules は、PD がさまざまなタイプのデータに対応するスケジュールを生成するように導くレプリカ ルール システムです。さまざまなスケジューリング ルールを組み合わせることで、レプリカの数、ストレージの場所、ホストの種類、 Raft選出に参加するかどうか、 Raftリーダーとして機能するかどうかなど、連続するデータ範囲の属性を細かく制御できます。
+v5.0 で導入された Placement Rules は、PD がさまざまなタイプのデータに対応するスケジュールを生成するように導くレプリカ ルール システムです。さまざまなスケジューリング ルールを組み合わせることで、レプリカの数、storageの場所、ホストの種類、 Raft選出に参加するかどうか、 Raftリーダーとして機能するかどうかなど、連続するデータ範囲の属性を細かく制御できます。
 
 配置ルール機能は、v5.0 以降のバージョンの TiDB ではデフォルトで有効になっています。無効にするには、 [配置ルールを無効にする](#disable-placement-rules)を参照してください。
 
@@ -41,16 +41,16 @@ v5.0 で導入された Placement Rules は、PD がさまざまなタイプの�
 | `LocationLabels`  | `[]string`       | 物理的な分離に使用されます。                     |
 | `IsolationLevel`  | `string`         | 最小の物理的分離レベルを設定するために使用されます          |
 
-`LabelConstraint`は、次の 4 つのプリミティブ ( `in` 、 `notIn` 、 `exists` 、および`notExists` ) に基づいてラベルをフィルタリングする Kubernetes の関数に似ています。これら 4 つのプリミティブの意味は次のとおりです。
+`LabelConstraint`次の 4 つのプリミティブ ( `in` 、 `notIn` 、 `exists` 、および`notExists` ) に基づいてラベルをフィルタリングする Kubernetes の関数に似ています。これら 4 つのプリミティブの意味は次のとおりです。
 
 -   `in` : 指定されたキーのラベル値が指定されたリストに含まれます。
 -   `notIn` : 指定されたキーのラベル値は、指定されたリストに含まれていません。
 -   `exists` : 指定されたラベル キーを含めます。
 -   `notExists` : 指定されたラベル キーを含めません。
 
-`LocationLabels`の意味と機能は、v4.0 より前のものと同じです。たとえば、3 層トポロジーを定義する`[zone,rack,host]`をデプロイした場合: クラスターには複数のゾーン (アベイラビリティーゾーン) があり、各ゾーンには複数のラックがあり、各ラックには複数のホストがあります。スケジュールを実行するとき、PD は最初にリージョンのピアを異なるゾーンに配置しようとします。この試行が失敗した場合 (レプリカが 3 つあるのに合計で 2 つのゾーンしかないなど)、PD はこれらのレプリカを異なるラックに配置することを保証します。ラックの数が分離を保証するのに十分でない場合、PD はホスト レベルの分離を試みます。
+`LocationLabels`の意味と機能は、v4.0 より前のものと同じです。たとえば、3 層トポロジーを定義する`[zone,rack,host]`デプロイした場合: クラスターには複数のゾーン (アベイラビリティーゾーン) があり、各ゾーンには複数のラックがあり、各ラックには複数のホストがあります。スケジュールを実行するとき、PD は最初にリージョンのピアを異なるゾーンに配置しようとします。この試行が失敗した場合 (レプリカが 3 つあるのに合計で 2 つのゾーンしかないなど)、PD はこれらのレプリカを異なるラックに配置することを保証します。ラックの数が分離を保証するのに十分でない場合、PD はホスト レベルの分離を試みます。
 
-`IsolationLevel`の意味と機能は[クラスタトポロジ構成](/schedule-replicas-by-topology-labels.md)で詳述されています。たとえば、 `LocationLabels`で 3 層トポロジを定義する`[zone,rack,host]`をデプロイし、 `IsolationLevel`を`zone`に設定した場合、PD は、スケジューリング中に各リージョンのすべてのピアが異なるゾーンに配置されるようにします。 `IsolationLevel`の最小分離レベル制限を満たすことができない場合 (たとえば、3 つのレプリカが構成されているが、合計で 2 つのデータ ゾーンしかない場合)、PD はこの制限を満たすために補おうとはしません。デフォルト値の`IsolationLevel`は空の文字列で、無効になっていることを意味します。
+`IsolationLevel`の意味と機能は[クラスタトポロジ構成](/schedule-replicas-by-topology-labels.md)で詳述されています。たとえば、 `LocationLabels`で 3 層トポロジを定義する`[zone,rack,host]`デプロイし、 `IsolationLevel`を`zone`に設定した場合、PD は、スケジューリング中に各リージョンのすべてのピアが異なるゾーンに配置されるようにします。 `IsolationLevel`の最小分離レベル制限を満たすことができない場合 (たとえば、3 つのレプリカが構成されているが、合計で 2 つのデータ ゾーンしかない場合)、PD はこの制限を満たすために補おうとはしません。デフォルト値の`IsolationLevel`空の文字列で、無効になっていることを意味します。
 
 ### ルール グループのフィールド {#fields-of-the-rule-group}
 
@@ -77,7 +77,7 @@ v5.0 で導入された Placement Rules は、PD がさまざまなタイプの�
 enable-placement-rules = true
 ```
 
-このように、クラスターが正常にブートストラップされた後、PD はこの機能を有効にし、 `max-replicas`と`location-labels`の構成に従って対応するルールを生成します。
+このように、クラスターが正常にブートストラップされた後、PD はこの機能を有効にし、 `max-replicas`と`location-labels`構成に従って対応するルールを生成します。
 
 {{< copyable "" >}}
 
@@ -102,11 +102,11 @@ enable-placement-rules = true
 pd-ctl config placement-rules enable
 ```
 
-PD は、 `max-replicas`と`location-labels`の構成に基づいてデフォルトのルールも生成します。
+PD は、 `max-replicas`と`location-labels`構成に基づいてデフォルトのルールも生成します。
 
 > **ノート：**
 >
-> 配置ルールを有効にすると、以前に構成した`max-replicas`と`location-labels`は無効になります。レプリカ ポリシーを調整するには、配置ルールに関連するインターフェイスを使用します。
+> 配置ルールを有効にすると、以前に構成した`max-replicas`と`location-labels`無効になります。レプリカ ポリシーを調整するには、配置ルールに関連するインターフェイスを使用します。
 
 ### 配置ルールを無効にする {#disable-placement-rules}
 
@@ -120,7 +120,7 @@ pd-ctl config placement-rules disable
 
 > **ノート：**
 >
-> 配置ルールを無効にした後、PD は元の`max-replicas`と`location-labels`の構成を使用します。ルールを変更しても (配置ルールが有効になっている場合)、これら 2 つの構成はリアルタイムで更新されません。さらに、構成されたすべてのルールは PD に残り、次に配置ルールを有効にするときに使用されます。
+> 配置ルールを無効にした後、PD は元の`max-replicas`と`location-labels`構成を使用します。ルールを変更しても (配置ルールが有効になっている場合)、これら 2 つの構成はリアルタイムで更新されません。さらに、構成されたすべてのルールは PD に残り、次に配置ルールを有効にするときに使用されます。
 
 ### pd-ctl を使用してルールを設定する {#set-rules-using-pd-ctl}
 
@@ -226,7 +226,7 @@ pd-ctl config placement save --in=rules.json
     pd-ctl config placement-rules rule-group show pd
     ```
 
--   ルール グループの`index`と`override`の属性を設定するには、次のようにします。
+-   ルール グループの`index`と`override`属性を設定するには、次のようにします。
 
     {{< copyable "" >}}
 
@@ -294,7 +294,7 @@ pd-ctl config placement-rules rule-bundle set pd --in="group.json"
 
 pd-ctl を使用して、すべての構成を表示および変更することもできます。これを行うには、すべての構成をファイルに保存し、構成ファイルを編集してから、ファイルを PDサーバーに保存して、以前の構成を上書きします。この操作も`rule-bundle`サブコマンドを使用します。
 
-たとえば、すべての設定を`rules.json`のファイルに保存するには、次のコマンドを実行します。
+たとえば、すべての設定を`rules.json`ファイルに保存するには、次のコマンドを実行します。
 
 {{< copyable "" >}}
 
@@ -361,7 +361,7 @@ table ttt ranges: (NOTE: key range might be changed after DDL)
 }
 ```
 
-### シナリオ 2: 3 つのデータ センターに 5 つのレプリカを 2:2:1 の比率で配置し、Leaderは 3 番目のデータ センターに配置しない {#scenario-2-place-five-replicas-in-three-data-centers-in-the-proportion-of-2-2-1-and-the-leader-should-not-be-in-the-third-data-center}
+### シナリオ 2: 3 つのデータ センターに 5 つのレプリカを 2:2:1 の比率で配置し、Leaderは3 番目のデータ センターに配置しない {#scenario-2-place-five-replicas-in-three-data-centers-in-the-proportion-of-2-2-1-and-the-leader-should-not-be-in-the-third-data-center}
 
 3 つのルールを作成します。レプリカの数をそれぞれ`2` 、 `2` 、および`1`に設定します。レプリカを、各ルールで`label_constraints`までの対応するデータ センターに制限します。さらに、Leaderを必要としないデータセンターの場合は、 `role`を`follower`に変更します。
 
@@ -431,7 +431,7 @@ table ttt ranges: (NOTE: key range might be changed after DDL)
 
 ### シナリオ 4: 高性能ディスクを備えた北京ノードのテーブルに 2 つのフォロワー レプリカを追加する {#scenario-4-add-two-follower-replicas-for-a-table-in-the-beijing-node-with-high-performance-disks}
 
-次の例は、より複雑な`label_constraints`構成を示しています。このルールでは、レプリカは`bj1`または`bj2`のマシン ルームに配置する必要があり、ディスク タイプは`nvme`である必要があります。
+次の例は、より複雑な`label_constraints`構成を示しています。このルールでは、レプリカは`bj1`または`bj2`マシン ルームに配置する必要があり、ディスク タイプは`nvme`である必要があります。
 
 {{< copyable "" >}}
 

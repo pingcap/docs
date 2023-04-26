@@ -1,18 +1,18 @@
 ---
 title: SESSION_VARIABLES
-summary: Learn the `SESSION_VARIABLES` information_schema table.
+summary: Learn the `SESSION_VARIABLES` INFORMATION_SCHEMA table.
 ---
 
 # セッション変数 {#session-variables}
 
 `SESSION_VARIABLES`テーブルは、セッション変数に関する情報を提供します。テーブル データは、 `SHOW SESSION VARIABLES`ステートメントの結果と同様です。
 
-{{< copyable "" >}}
-
 ```sql
-USE information_schema;
-DESC session_variables;
+USE INFORMATION_SCHEMA;
+DESC SESSION_VARIABLES;
 ```
+
+出力は次のとおりです。
 
 ```sql
 +----------------+---------------+------+------+---------+-------+
@@ -24,25 +24,27 @@ DESC session_variables;
 2 rows in set (0.00 sec)
 ```
 
-{{< copyable "" >}}
+`SESSION_VARIABLES`テーブルの最初の 10 行をクエリします。
 
 ```sql
-SELECT * FROM session_variables ORDER BY variable_name LIMIT 10;
+SELECT * FROM SESSION_VARIABLES ORDER BY variable_name LIMIT 10;
 ```
+
+出力は次のとおりです。
 
 ```sql
 +-----------------------------------+------------------+
 | VARIABLE_NAME                     | VARIABLE_VALUE   |
 +-----------------------------------+------------------+
-| allow_auto_random_explicit_insert | off              |
+| allow_auto_random_explicit_insert | OFF              |
 | auto_increment_increment          | 1                |
 | auto_increment_offset             | 1                |
-| autocommit                        | 1                |
+| autocommit                        | ON               |
 | automatic_sp_privileges           | 1                |
-| avoid_temporal_upgrade            | 0                |
+| avoid_temporal_upgrade            | OFF              |
 | back_log                          | 80               |
 | basedir                           | /usr/local/mysql |
-| big_tables                        | 0                |
+| big_tables                        | OFF              |
 | bind_address                      | *                |
 +-----------------------------------+------------------+
 10 rows in set (0.00 sec)

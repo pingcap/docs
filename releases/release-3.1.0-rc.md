@@ -22,7 +22,7 @@ TiDB アンシブル バージョン: 3.1.0-rc
     -   切り捨てられたテーブルを復元するための`RECOVER`構文の使用のサポート[#15460](https://github.com/pingcap/tidb/pull/15460)
     -   ステートメントの再試行とテーブルのリカバリのために`AUTO_RANDOM` ID キャッシュを追加します[#15393](https://github.com/pingcap/tidb/pull/15393)
     -   `recover table`ステートメント[#15393](https://github.com/pingcap/tidb/pull/15393)を使用した`AUTO_RANDOM` ID アロケーターの状態の復元をサポート
-    -   サポート`YEAR` 、および`MONTH`は、ハッシュパーティションテーブル[#15619](https://github.com/pingcap/tidb/pull/15619)の分割キーとして関数し`TO_DAY` 。
+    -   サポート`YEAR` `MONTH`および`TO_DAY`ハッシュパーティションテーブル[#15619](https://github.com/pingcap/tidb/pull/15619)の分割キーとして関数。
     -   `SELECT... FOR UPDATE`ステートメントでキーをロックする必要がある場合にのみ、スキーマ変更関連のテーブルにテーブル ID を追加します[#15708](https://github.com/pingcap/tidb/pull/15708)
     -   負荷分散ポリシーに従って異なるロールからデータを自動的に読み取る機能を追加し、この機能を有効にする`leader-and-follower`システム変数を追加します[#15721](https://github.com/pingcap/tidb/pull/15721)
     -   RPC クライアント側を再起動せずに期限切れのクライアント証明書を更新するために TiDB が新しい接続を確立するたびに TLS 証明書を動的に更新するサポート[#15163](https://github.com/pingcap/tidb/pull/15163)
@@ -45,10 +45,10 @@ TiDB アンシブル バージョン: 3.1.0-rc
 
 -   ツール
 
-    -   Binlog
+    -   TiDBBinlog
 
         -   コンポーネント間の TLS 認証をサポートする[#931](https://github.com/pingcap/tidb-binlog/pull/931) [#937](https://github.com/pingcap/tidb-binlog/pull/937) [#939](https://github.com/pingcap/tidb-binlog/pull/939)
-        -   Drainerに`kafka-client-id`の構成項目を追加して、Kafka のクライアント ID [#929](https://github.com/pingcap/tidb-binlog/pull/929)を構成します。
+        -   Drainerに`kafka-client-id`構成項目を追加して、Kafka のクライアント ID [#929](https://github.com/pingcap/tidb-binlog/pull/929)を構成します。
 
     -   TiDB Lightning
 
@@ -72,21 +72,21 @@ TiDB アンシブル バージョン: 3.1.0-rc
     -   TiFlashレプリカ[#14884](https://github.com/pingcap/tidb/pull/14884)を頻繁に更新することによって発生する情報スキーマ エラーを修正します。
     -   `AUTO_RANDOM` [#15149](https://github.com/pingcap/tidb/pull/15149)適用時に`last_insert_id`が誤って生成される問題を修正
     -   TiFlashレプリカのステータスを更新すると、DDL 操作が停止する可能性がある問題を修正します[#15161](https://github.com/pingcap/tidb/pull/15161)
-    -   [#15141](https://github.com/pingcap/tidb/pull/15141)プッシュダウンできない述語がある場合、 `Aggregation`プッシュダウンと`TopN`プッシュダウンを禁止する
+    -   [#15141](https://github.com/pingcap/tidb/pull/15141)ダウンできない述語がある場合、 `Aggregation`プッシュダウンと`TopN`プッシュダウンを禁止する
     -   ネストされた`view`作成を禁止する[#15440](https://github.com/pingcap/tidb/pull/15440)
-    -   `SET ROLE ALL` [#15570](https://github.com/pingcap/tidb/pull/15570)の後に`SELECT CURRENT_ROLE()`を実行するとエラーが発生するのを修正
+    -   `SET ROLE ALL` [#15570](https://github.com/pingcap/tidb/pull/15570)の後に`SELECT CURRENT_ROLE()`実行するとエラーが発生するのを修正
     -   `select view_name.col_name from view_name`ステートメント[#15573](https://github.com/pingcap/tidb/pull/15573)の実行時に`view`名の識別に失敗する問題を修正
-    -   バイナリログ情報の書き込み時にDDL文を前処理するとエラーが発生することがある問題を修正[#15444](https://github.com/pingcap/tidb/pull/15444)
-    -   `view`とパーティション化されたテーブルの両方にアクセスするとpanicが発生する問題を修正しました[#15560](https://github.com/pingcap/tidb/pull/15560)
+    -   binlog情報の書き込み時にDDL文を前処理するとエラーが発生することがある問題を修正[#15444](https://github.com/pingcap/tidb/pull/15444)
+    -   `view`とパーティション化されたテーブルの両方にアクセスするとpanicを修正しました[#15560](https://github.com/pingcap/tidb/pull/15560)
     -   `bit(n)`データ型[#15487](https://github.com/pingcap/tidb/pull/15487)を含む`update duplicate key`ステートメントで`VALUES`関数を実行したときに発生したエラーを修正します。
     -   一部のシナリオで指定された最大実行時間が有効にならない問題を修正します[#15616](https://github.com/pingcap/tidb/pull/15616)
-    -   `Index Scan` [#15773](https://github.com/pingcap/tidb/pull/15773)を使用して実行計画を生成するときに、現在の`ReadEngine`に TiKVサーバーが含まれているかどうかがチェックされない問題を修正します。
+    -   `Index Scan` [#15773](https://github.com/pingcap/tidb/pull/15773)使用して実行計画を生成するときに、現在の`ReadEngine` TiKVサーバーが含まれているかどうかがチェックされない問題を修正します。
 
 -   TiKV
 
-    -   整合性チェック パラメーター[#7112](https://github.com/tikv/tikv/pull/7112)を無効にするときに、既存のキーをトランザクションに挿入し、すぐに削除することによって発生する、競合チェックの失敗またはデータ インデックスの不整合の問題を修正します。
-    -   `TopN`が符号なし整数を比較するときの計算エラーを修正します[#7199](https://github.com/tikv/tikv/pull/7199)
-    -   Raftstore にフロー制御メカニズムを導入して、フロー制御がないとログの追跡が遅くなり、クラスターがスタックする可能性があるという問題を解決します。トランザクションサイズが大きいと、TiKV サーバー間の再接続が頻繁に発生する可能性があるという問題[#7087](https://github.com/tikv/tikv/pull/7087) [#7078](https://github.com/tikv/tikv/pull/7078)
+    -   整合性チェック パラメーター[#7112](https://github.com/tikv/tikv/pull/7112)無効にするときに、既存のキーをトランザクションに挿入し、すぐに削除することによって発生する、競合チェックの失敗またはデータ インデックスの不整合の問題を修正します。
+    -   `TopN`符号なし整数を比較するときの計算エラーを修正します[#7199](https://github.com/tikv/tikv/pull/7199)
+    -   Raftstoreにフロー制御メカニズムを導入して、フロー制御がないとログの追跡が遅くなり、クラスターがスタックする可能性があるという問題を解決します。トランザクションサイズが大きいと、TiKV サーバー間の再接続が頻繁に発生する可能性があるという問題[#7087](https://github.com/tikv/tikv/pull/7087) [#7078](https://github.com/tikv/tikv/pull/7078)
     -   レプリカに送信された保留中の読み取り要求が永久にブロックされる可能性がある問題を修正します[#6543](https://github.com/tikv/tikv/pull/6543)
     -   スナップショットを適用するとレプリカの読み取りがブロックされる可能性がある問題を修正します[#7249](https://github.com/tikv/tikv/pull/7249)
     -   リーダーを転送すると TiKV がpanicになる可能性がある問題を修正します[#7240](https://github.com/tikv/tikv/pull/7240)
@@ -109,4 +109,4 @@ TiDB アンシブル バージョン: 3.1.0-rc
 
     -   バックアップと復元 (BR)
 
-        -   BRがTiFlashクラスタ データを復元できない問題を修正します[#194](https://github.com/pingcap/br/pull/194)
+        -   BR がTiFlashクラスタ データを復元できない問題を修正します[#194](https://github.com/pingcap/br/pull/194)

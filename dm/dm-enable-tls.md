@@ -83,7 +83,7 @@ Common Name は発信者の確認に使用されます。一般に、呼び出�
 
 証明書とキーを再ロードするために、DM-master、DM-worker、および dmctl は、新しい接続が作成されるたびに現在の証明書とキー ファイルを再読み込みします。
 
-`ssl-ca` 、または`ssl-cert`で指定されたファイルが更新されたら、DM コンポーネントを再起動して、証明書とキー ファイルを再読み込みし、相互に再接続し`ssl-key` 。
+`ssl-ca` `ssl-cert`または`ssl-key`で指定されたファイルが更新されたら、DM コンポーネントを再起動して、証明書とキー ファイルを再読み込みし、相互に再接続します。
 
 ## DM コンポーネントとアップストリームまたはダウンストリーム データベース間の暗号化されたデータ転送を有効にする {#enable-encrypted-data-transmission-between-dm-components-and-the-upstream-or-downstream-database}
 

@@ -25,7 +25,7 @@
 -   [コード コメント スタイル](https://github.com/pingcap/community/blob/master/contributors/code-comment-style.md)
 -   図のスタイル: [figmaクイックスタートガイド](https://github.com/pingcap/community/blob/master/contributors/figma-quick-start-guide.md)
 
-    図の一貫したスタイルを維持するために、 [フィグマ](https://www.figma.com/)を使用して図を描画または設計することをお勧めします。図を描く必要がある場合は、ガイドを参照し、テンプレートで提供されている形や色を使用してください。
+    図の一貫したスタイルを維持するために、 [フィグマ](https://www.figma.com/)使用して図を描画または設計することをお勧めします。図を描く必要がある場合は、ガイドを参照し、テンプレートで提供されている形や色を使用してください。
 
 ### ドキュメントのバージョンについて学ぶ {#learn-about-docs-versions}
 
@@ -77,7 +77,7 @@
 
 ## 貢献する方法 {#how-to-contribute}
 
-このリポジトリへのプル リクエストを作成するには、次の手順を実行してください。コマンドを使いたくない場合は、簡単に開始できる[GitHub デスクトップ](https://desktop.github.com/)を使用することもできます。
+このリポジトリへのプル リクエストを作成するには、次の手順を実行してください。コマンドを使いたくない場合は、簡単に開始できる[GitHub デスクトップ](https://desktop.github.com/)使用することもできます。
 
 > **ノート：**
 >
@@ -92,7 +92,7 @@
 1.  プロジェクトにアクセス: [https://github.com/pingcap/docs](https://github.com/pingcap/docs)
 2.  右上の**Fork**ボタンをクリックして、完了するまで待ちます。
 
-### ステップ 2: フォークされたリポジトリをローカル ストレージに複製する {#step-2-clone-the-forked-repository-to-local-storage}
+### ステップ 2: フォークされたリポジトリをローカルstorageに複製する {#step-2-clone-the-forked-repository-to-local-storage}
 
 ```
 cd $working_dir # Comes to the directory that you want put the fork in, for example, "cd ~/Documents/GitHub"
@@ -122,7 +122,7 @@ git remote -v # Confirms that your remote makes sense
 
 ### ステップ 4: 何かをする {#step-4-do-something}
 
-`new-branch-name`ブランチでいくつかのファイルを編集し、変更を保存します。 Visual Studio Code などのエディターを使用して、 `.md`のファイルを開いて編集できます。
+`new-branch-name`ブランチでいくつかのファイルを編集し、変更を保存します。 Visual Studio Code などのエディターを使用して、 `.md`ファイルを開いて編集できます。
 
 ### ステップ 5: 変更をコミットする {#step-5-commit-your-changes}
 
@@ -150,7 +150,7 @@ git push -u origin new-branch-name # "-u" is used to track the remote branch fro
 
 ### ステップ 8: プル リクエストを作成する {#step-8-create-a-pull-request}
 
-1.  フォークの[https://github.com/$user/docs](https://github.com/$user/docs)にアクセスします ( `$user`を GitHub ID に置き換えます)。
+1.  フォークの[https://github.com/$user/docs](https://github.com/$user/docs)にアクセスします ( `$user` GitHub ID に置き換えます)。
 2.  `new-branch-name`ブランチの横にある`Compare & pull request`ボタンをクリックして、PR を作成します。 [プル リクエストのタイトル スタイル](https://github.com/pingcap/community/blob/master/contributors/commit-message-pr-style.md#pull-request-title-style)を参照してください。
 
 これで、PR が正常に送信されました。この PR がマージされた後、あなたは自動的に TiDB ドキュメントへの寄稿者になります。
@@ -159,13 +159,13 @@ git push -u origin new-branch-name # "-u" is used to track the remote branch fro
 
 プル リクエストを作成するときは、プル リクエスト ページの説明テンプレートで、ドキュメントの変更が適用されるリリース バージョンを選択する必要があります。
 
-変更が次のいずれかの状況に当てはまる場合は、**マスター ブランチのみ**を選択することをお勧めします。 PR がマージされると、すぐに変更が[PingCAP ドキュメント Web サイトの開発ページ](https://docs.pingcap.com/tidb/dev/)に表示されます。 TiDB の次のメジャーまたはマイナー バージョンがリリースされた後、変更は新しいバージョンの Web サイト ページにも表示されます。
+変更が次のいずれかの状況に当てはまる場合は、**マスター ブランチのみを選択する**ことをお勧めします。 PR がマージされると、すぐに変更が[PingCAP ドキュメント Web サイトの開発ページ](https://docs.pingcap.com/tidb/dev/)に表示されます。 TiDB の次のメジャーまたはマイナー バージョンがリリースされた後、変更は新しいバージョンの Web サイト ページにも表示されます。
 
 -   不足または不完全なドキュメントの内容を補足するなど、ドキュメントの機能強化に関連しています。
 -   値、説明、例、タイプミスなど、不正確または不適切なドキュメント コンテンツを修正します。
 -   特定のトピック モジュールにドキュメントのリファクタリングが含まれます。
 
-変更が次のいずれかの状況に当てはまる場合は、影響を**受けるリリース ブランチとマスター**を選択してください。
+変更が次のいずれかの状況に当てはまる場合は、**影響を受けるリリース ブランチとマスターを選択してください**。
 
 -   特定のバージョンに関連する機能の動作の変更が含まれます。
 -   構成項目またはシステム変数のデフォルト値の変更を含む、互換性の変更を伴います。

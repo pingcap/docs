@@ -36,7 +36,7 @@ TiDB悲観的トランザクション モードで、2 つのクライアント�
 | UPDATE 本 SET stock=stock-1 WHERE id=2; -- 実行がブロックされます |                                                           |
 |                                                       | UPDATE 本 SET stock=stock-1 WHERE id=1; -- デッドロック エラーが発生する |
 
-クライアント B でデッドロック エラーが発生すると、TiDB はクライアント B のトランザクションを自動的にロールバックします。 client-A の更新`id=2`は正常に実行されます。その後、 `COMMIT`を実行してトランザクションを終了できます。
+クライアント B でデッドロック エラーが発生すると、TiDB はクライアント B のトランザクションを自動的にロールバックします。 client-A の更新`id=2`正常に実行されます。その後、 `COMMIT`実行してトランザクションを終了できます。
 
 ### 解決策 1: デッドロックを回避する {#solution-1-avoid-deadlocks}
 
@@ -83,13 +83,13 @@ MySQL などの従来のデータベースとは異なり、TiDB では楽観的
 
 再試行ロジックは、次の規則に従う必要があります。
 
--   再試行の失敗回数が`max_retries`の制限に達すると、エラーがスローされます。
+-   再試行の失敗回数が`max_retries`回の制限に達すると、エラーがスローされます。
 -   SQL 実行例外をキャッチするには、 `try ... catch ...`を使用します。次のエラーが発生した場合は、再試行してください。他のエラーが発生した場合はロールバックします。
     -   `Error 8002: can not retry select for update statement` : SELECT FOR UPDATE 書き込み競合エラー
     -   `Error 8022: Error: KV error safe to retry` : トランザクション コミット失敗エラー。
     -   `Error 8028: Information schema is changed during the execution of the statement` : テーブル スキーマが DDL 操作によって変更されたため、トランザクション コミットでエラーが発生しました。
     -   `Error 9007: Write conflict` : 書き込み競合エラー。通常、楽観的トランザクション モードが使用されている場合に、複数のトランザクションが同じデータ行を変更することによって発生します。
--   try ブロックの最後のトランザクションを`COMMIT`にします。
+-   try ブロックの最後のトランザクションを`COMMIT` 。
 
 <CustomContent platform="tidb">
 
@@ -127,7 +127,7 @@ while True:
 
 > **ノート：**
 >
-> `Error 9007: Write conflict`が頻繁に発生する場合は、スキーマ設計とワークロードのデータ アクセス パターンを確認して、競合の根本原因を見つけ、より適切な設計で競合を回避する必要があります。
+> `Error 9007: Write conflict`頻繁に発生する場合は、スキーマ設計とワークロードのデータ アクセス パターンを確認して、競合の根本原因を見つけ、より適切な設計で競合を回避する必要があります。
 
 <CustomContent platform="tidb">
 

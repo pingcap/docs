@@ -5,7 +5,7 @@ summary: Learn common operations when you troubleshoot a TiFlash cluster.
 
 # TiFlashクラスタのトラブルシューティング {#troubleshoot-a-tiflash-cluster}
 
-このセクションでは、 TiFlashの使用時によく発生する問題、その理由、および解決策について説明します。
+このセクションでは、 TiFlash の使用時によく発生する問題、その理由、および解決策について説明します。
 
 ## TiFlashが起動しない {#tiflash-fails-to-start}
 
@@ -13,7 +13,7 @@ summary: Learn common operations when you troubleshoot a TiFlash cluster.
 
 1.  システムが RedHat Enterprise Linux 8 であるかどうかを確認します。
 
-    RedHat Enterprise Linux 8 には`libnsl.so`のシステム ライブラリがありません。次のコマンドを使用して手動でインストールできます。
+    RedHat Enterprise Linux 8 には`libnsl.so`システム ライブラリがありません。次のコマンドを使用して手動でインストールできます。
 
     {{< copyable "" >}}
 
@@ -29,15 +29,15 @@ summary: Learn common operations when you troubleshoot a TiFlash cluster.
     ulimit -n 1000000
     ```
 
-3.  PD Controlツールを使用して、ノード (同じ IP とポート) でオフラインにできなかったTiFlashインスタンスがあるかどうかを確認し、インスタンスを強制的にオフラインにします。詳細な手順については、 [スケールインクラスターのTiFlash](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster)を参照してください。
+3.  PD Controlツールを使用して、ノード (同じ IP とポート) でオフラインにできなかったTiFlashインスタンスがあるかどうかを確認し、インスタンスを強制的にオフラインにします。詳細な手順については、 [TiFlashクラスターのスケールイン](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster)を参照してください。
 
-上記の方法で問題を解決できない場合は、 TiFlashログ ファイルを保存し、詳細について[info@pingcap.com](mailto:info@pingcap.com)に電子メールを送信してください。
+上記の方法で問題を解決できない場合は、 TiFlashログ ファイルと[支持を得ます](/support.md) PingCAP またはコミュニティから保存してください。
 
 ## TiFlashレプリカは常に利用できません {#tiflash-replica-is-always-unavailable}
 
 これは、設定エラーまたは環境の問題によって、 TiFlashが異常な状態にあるためです。次の手順を実行して、障害のあるコンポーネントを特定します。
 
-1.  PD が`Placement Rules`つの機能を有効にするかどうかを確認します。
+1.  PD が`Placement Rules`機能を有効にするかどうかを確認します。
 
     {{< copyable "" >}}
 
@@ -46,7 +46,7 @@ summary: Learn common operations when you troubleshoot a TiFlash cluster.
     ```
 
     -   `true`が返された場合は、次のステップに進みます。
-    -   `false`が返された場合は、 [配置ルール機能を有効にする](/configure-placement-rules.md#enable-placement-rules)を返し、次のステップに進みます。
+    -   `false`が返された場合は、 [配置ルール機能を有効にする](/configure-placement-rules.md#enable-placement-rules)返し、次のステップに進みます。
 
 2.  TiFlash -Summary モニタリング パネルで`UpTime`を表示して、 TiFlashプロセスが正しく機能しているかどうかを確認します。
 
@@ -58,7 +58,7 @@ summary: Learn common operations when you troubleshoot a TiFlash cluster.
     echo "store" | /path/to/pd-ctl -u http://${pd-ip}:${pd-port}
     ```
 
-    TiFlashプロキシの`store.labels`には、 `{"key": "engine", "value": "tiflash"}`などの情報が含まれます。この情報を確認して、 TiFlashプロキシを確認できます。
+    TiFlashプロキシの`store.labels` `{"key": "engine", "value": "tiflash"}`などの情報が含まれます。この情報を確認して、 TiFlashプロキシを確認できます。
 
 4.  `pd buddy`がログを正しく出力できるかどうかを確認します (ログ パスは、[flash.flash_cluster] 構成アイテムの`log`の値です。デフォルトのログ パスは、 TiFlash構成ファイルで構成された`tmp`ディレクトリの下にあります)。
 
@@ -74,9 +74,9 @@ summary: Learn common operations when you troubleshoot a TiFlash cluster.
 
     > **ノート：**
     >
-    > [配置ルール](/configure-placement-rules.md)の機能が有効になると、以前に構成された`max-replicas`と`location-labels`は無効になります。レプリカ ポリシーを調整するには、配置ルールに関連するインターフェイスを使用します。
+    > [配置ルール](/configure-placement-rules.md)機能が有効になると、以前に構成された`max-replicas`と`location-labels`無効になります。レプリカ ポリシーを調整するには、配置ルールに関連するインターフェイスを使用します。
 
-6.  マシンの残りのディスク容量 ( TiFlashノードの`store`がある場所) が十分かどうかを確認します。デフォルトでは、残りのディスク容量が`store`の容量の 20% 未満の場合 (これは`low-space-ratio`パラメーターによって制御されます)、PD はこのTiFlashノードにデータをスケジュールできません。
+6.  マシンの残りのディスク容量 ( TiFlashノードの`store`ある場所) が十分かどうかを確認します。デフォルトでは、残りのディスク容量が`store`容量の 20% 未満の場合 (これは`low-space-ratio`パラメーターによって制御されます)、PD はこのTiFlashノードにデータをスケジュールできません。
 
 ## 一部のクエリが<code>Region Unavailable</code>エラーを返す {#some-queries-return-the-code-region-unavailable-code-error}
 
@@ -126,14 +126,14 @@ TiFlashノードをデプロイし、(ALTER 操作を実行して) レプリケ�
     -   出力がある場合は、次のステップに進みます。
     -   出力がない場合は、 `SELECT * FROM information_schema.tiflash_replica`コマンドを実行して、 TiFlashレプリカが作成されているかどうかを確認します。そうでない場合は、 `ALTER table ${tbl_name} set tiflash replica ${num}`コマンドを再度実行し、他のステートメント ( `add index`など) が実行されたかどうかを確認するか、DDL の実行が成功したかどうかを確認します。
 
-2.  TiFlashプロセスが正しく実行されるかどうかを確認します。
+2.  TiFlashリージョンのレプリケーションが正しく実行されるかどうかを確認します。
 
-    `progress` 、 `tiflash_cluster_manager.log`ファイルの`flash_region_count`パラメーター、および Grafana 監視項目`Uptime`に変更がないかどうかを確認します。
+    `progress`に変更があるかどうかを確認します。
 
-    -   はいの場合、 TiFlashプロセスは正しく実行されます。
-    -   いいえの場合、 TiFlashプロセスは異常です。詳細については、 `tiflash`ログを確認してください。
+    -   はいの場合、 TiFlashレプリケーションは正しく実行されます。
+    -   いいえの場合、 TiFlashレプリケーションは異常です。 `tidb.log`で、 `Tiflash replica is not available`言ってログを検索します。該当テーブルの`progress`更新されているか確認します。そうでない場合は、詳細について`tiflash log`確認してください。たとえば、 `tiflash log`中`lag_region_info`検索して、どのリージョンが遅れているかを調べます。
 
-3.  pd-ctl を使用して、 [配置ルール](/configure-placement-rules.md)の機能が有効になっているかどうかを確認します。
+3.  pd-ctl を使用して、 [配置ルール](/configure-placement-rules.md)機能が有効になっているかどうかを確認します。
 
     {{< copyable "" >}}
 
@@ -142,13 +142,13 @@ TiFlashノードをデプロイし、(ALTER 操作を実行して) レプリケ�
     ```
 
     -   `true`が返された場合は、次のステップに進みます。
-    -   `false`が返された場合は、 [配置ルール機能を有効にする](/configure-placement-rules.md#enable-placement-rules)を返し、次のステップに進みます。
+    -   `false`が返された場合は、 [配置ルール機能を有効にする](/configure-placement-rules.md#enable-placement-rules)返し、次のステップに進みます。
 
 4.  `max-replicas`の構成が正しいかどうかを確認します。
 
     -   `max-replicas`の値がクラスター内の TiKV ノードの数を超えていない場合は、次の手順に進みます。
 
-    -   値`max-replicas`がクラスター内の TiKV ノードの数より大きい場合、PD はデータをTiFlashノードに複製しません。この問題に対処するには、 `max-replicas`をクラスター内の TiKV ノードの数以下の整数に変更します。
+    -   値`max-replicas`がクラスター内の TiKV ノードの数より大きい場合、PD はデータをTiFlashノードに複製しません。この問題に対処するには、 `max-replicas`クラスター内の TiKV ノードの数以下の整数に変更します。
 
     > **ノート：**
     >
@@ -170,40 +170,23 @@ TiFlashノードをデプロイし、(ALTER 操作を実行して) レプリケ�
         }' <http://172.16.x.xxx:2379/pd/api/v1/config/rule>
     ```
 
-5.  TiDB または PD とTiFlashの接続が正常かどうかを確認します。
+5.  TiDB がテーブルの配置ルールを作成したかどうかを確認します。
 
-    `flash_cluster_manager.log`ファイルで`ERROR`キーワードを検索します。
-
-    -   `ERROR`が見つからない場合、接続は正常です。次のステップに進みます。
-    -   `ERROR`が見つかった場合、接続は異常です。以下のチェックを行ってください。
-
-        -   ログに PD キーワードが記録されているかどうかを確認します。
-
-            PD キーワードが見つかった場合は、 TiFlash構成ファイルの`raft.pd_addr`が有効かどうかを確認します。具体的には、 `curl '{pd-addr}/pd/api/v1/config/rules'`コマンドを実行し、5 秒で出力があるかどうかを確認します。
-
-        -   ログに TiDB 関連のキーワードが記録されているかどうかを確認します。
-
-            TiDB キーワードが見つかった場合は、 TiFlash構成ファイルの`flash.tidb_status_addr`が有効かどうかを確認します。具体的には、 `curl '{tidb-status-addr}/tiflash/replica'`コマンドを実行し、5 秒で出力があるかどうかを確認します。
-
-        -   ノードが相互に ping できるかどうかを確認します。
-
-    > **ノート：**
-    >
-    > 問題が解決しない場合は、対応するコンポーネントのログを収集してトラブルシューティングを行います。
-
-6.  テーブルに`placement-rule`が作成されているかどうかを確認します。
-
-    `flash_cluster_manager.log`ファイルで`Set placement rule … table-<table_id>-r`キーワードを検索します。
+    TiDB DDL Owner のログを検索し、TiDB が配置ルールを追加するように PD に通知したかどうかを確認します。分割されていないテーブルの場合は、 `ConfigureTiFlashPDForTable`を検索します。分割されたテーブルの場合は、 `ConfigureTiFlashPDForPartitions`を検索します。
 
     -   キーワードが見つかった場合は、次の手順に進みます。
     -   そうでない場合は、トラブルシューティングのために、対応するコンポーネントのログを収集します。
+
+6.  PD がテーブルの配置ルールを構成しているかどうかを確認します。
+
+    `curl http://<pd-ip>:<pd-port>/pd/api/v1/config/rules/group/tiflash`コマンドを実行して、現在の PD のすべてのTiFlash配置ルールを表示します。 ID が`table-<table_id>-r`ルールが見つかった場合、PD は配置ルールを正常に構成しています。
 
 7.  PD が正しくスケジュールされているかどうかを確認します。
 
     `pd.log`ファイルで`table-<table_id>-r`キーワードとスケジューリング動作 ( `add operator`など) を検索します。
 
     -   キーワードが見つかった場合、PD は適切にスケジュールします。
-    -   そうでない場合、PD は適切にスケジュールされません。 PingCAP テクニカル サポートに問い合わせてください。
+    -   そうでない場合、PD は適切にスケジュールされません。
 
 ## データの複製が停止する {#data-replication-gets-stuck}
 
@@ -216,33 +199,17 @@ TiFlashでのデータ複製が正常に開始された後、一定時間経過�
     -   ディスク使用率が`low-space-ratio`以上の場合、ディスク容量が不足しています。ディスク容量を解放するには、 `${data}/flash/`フォルダーの下にある`space_placeholder_file` (必要に応じて、ファイルを削除した後に`reserve-space`を 0MB に設定) などの不要なファイルを削除します。
     -   ディスク使用率が値`low-space-ratio`未満の場合、ディスク容量は十分です。次のステップに進みます。
 
-2.  TiKV、 TiFlash、および PD 間のネットワーク接続を確認します。
+2.  `down peer`があるかどうかを確認します ( `down peer`場合、レプリケーションが停止する可能性があります)。
 
-    `flash_cluster_manager.log`で、スタックしたテーブルに対応する`flash_region_count`への新しい更新があるかどうかを確認します。
-
-    -   いいえの場合は、次のステップに進みます。
-    -   はいの場合は、 `down peer`を検索します (停止しているピアがある場合、レプリケーションは停止します)。
-
-        -   `pd-ctl region check-down-peer`を実行して`down peer`を検索します。
-        -   `down peer`が見つかった場合は、 `pd-ctl operator add remove-peer\<region-id> \<tiflash-store-id>`を実行して削除します。
-
-3.  CPU 使用率を確認します。
-
-    Grafana で、 **TiFlash-Proxy-Details** &gt; <strong>Thread CPU</strong> &gt; <strong>リージョン task worker pre-handle/generate snapshot CPU</strong>を選択します。 `<instance-ip>:<instance-port>-region-worker`の CPU 使用率を確認します。
-
-    曲線が直線の場合、 TiFlashノードはスタックしています。 TiFlashプロセスを終了して再起動するか、PingCAP テクニカル サポートに連絡してください。
+    `pd-ctl region check-down-peer`コマンドを実行して、 `down peer`があるかどうかを確認します。存在する場合は、 `pd-ctl operator add remove-peer <region-id> <tiflash-store-id>`コマンドを実行して削除します。
 
 ## データ複製が遅い {#data-replication-is-slow}
 
 原因はさまざまです。次の手順を実行することで、この問題に対処できます。
 
-1.  スケジューリング パラメータの値を調整します。
+1.  レプリケーションを高速化するには、 [`store limit`](/configure-store-limit.md#usage)を増やします。
 
-    -   レプリケーションを高速化するには、 [`store limit`](/configure-store-limit.md#usage)を増やします。
-    -   TiKV でリージョンのチェッカー スキャンをより頻繁に行うには、 [`config set patrol-region-interval 10ms`](/pd-control.md#command)を減らします。
-    -   [`region merge`](/pd-control.md#command)を増やして領域の数を減らします。つまり、スキャンが少なくなり、チェック頻度が高くなります。
-
-2.  TiFlsh の負荷を調整します。
+2.  TiFlashの負荷を調整します。
 
     TiFlashの負荷が高すぎると、レプリケーションが遅くなる可能性もあります。 Grafana の**TiFlash -Summary**パネルでTiFlashインジケータの負荷を確認できます。
 

@@ -11,7 +11,7 @@ summary: Learn the `AUTO_INCREMENT` column attribute of TiDB.
 
 > **ノート：**
 >
-> `AUTO_INCREMENT`属性は、本番環境でホットスポットを引き起こす可能性があります。詳細は[ホットスポットの問題のトラブルシューティング](/troubleshoot-hot-spot-issues.md)を参照してください。代わりに[`AUTO_RANDOM`](/auto-random.md)を使用することをお勧めします。
+> `AUTO_INCREMENT`属性は、本番環境でホットスポットを引き起こす可能性があります。詳細は[ホットスポットの問題のトラブルシューティング](/troubleshoot-hot-spot-issues.md)参照してください。代わりに[`AUTO_RANDOM`](/auto-random.md)を使用することをお勧めします。
 
 </CustomContent>
 
@@ -19,19 +19,19 @@ summary: Learn the `AUTO_INCREMENT` column attribute of TiDB.
 
 > **ノート：**
 >
-> `AUTO_INCREMENT`属性は、本番環境でホットスポットを引き起こす可能性があります。詳細は[ホットスポットの問題のトラブルシューティング](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues#handle-auto-increment-primary-key-hotspot-tables-using-auto_random)を参照してください。代わりに[`AUTO_RANDOM`](/auto-random.md)を使用することをお勧めします。
+> `AUTO_INCREMENT`属性は、本番環境でホットスポットを引き起こす可能性があります。詳細は[ホットスポットの問題のトラブルシューティング](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues#handle-auto-increment-primary-key-hotspot-tables-using-auto_random)参照してください。代わりに[`AUTO_RANDOM`](/auto-random.md)を使用することをお勧めします。
 
 </CustomContent>
 
-## 概念 {#concept}
+## コンセプト {#concept}
 
 `AUTO_INCREMENT`は、デフォルトの列値を自動的に入力するために使用される列属性です。 `INSERT`ステートメントで`AUTO_INCREMENT`列の値が指定されていない場合、システムは自動的にこの列に値を割り当てます。
 
-パフォーマンス上の理由から、値のバッチで`AUTO_INCREMENT`の数値 (デフォルトでは 30,000) が各 TiDBサーバーに割り当てられます。これは、 `AUTO_INCREMENT`の数値が一意であることが保証されている一方で、 `INSERT`のステートメントに割り当てられた値は、TiDBサーバーごとに単調にしかならないことを意味します。
+パフォーマンス上の理由から、値のバッチで`AUTO_INCREMENT`の数値 (デフォルトでは 30,000) が各 TiDBサーバーに割り当てられます。これは、 `AUTO_INCREMENT`数値が一意であることが保証されている一方で、 `INSERT`のステートメントに割り当てられた値は、TiDBサーバーごとに単調にしかならないことを意味します。
 
 > **ノート：**
 >
-> すべての TiDB サーバーで`AUTO_INCREMENT`の数字を単調にしたい場合で、TiDB のバージョンが v6.5.0 以降の場合は、 [MySQL 互換モード](#mysql-compatibility-mode)を有効にすることをお勧めします。
+> すべての TiDB サーバーで`AUTO_INCREMENT`数字を単調にしたい場合で、TiDB のバージョンが v6.5.0 以降の場合は、 [MySQL 互換モード](#mysql-compatibility-mode)を有効にすることをお勧めします。
 
 以下は`AUTO_INCREMENT`の基本的な例です。
 
@@ -63,7 +63,7 @@ mysql> SELECT * FROM t;
 5 rows in set (0.01 sec)
 ```
 
-さらに、 `AUTO_INCREMENT`は、列の値を明示的に指定する`INSERT`のステートメントもサポートします。そのような場合、TiDB は明示的に指定された値を格納します。
+さらに、 `AUTO_INCREMENT` 、列の値を明示的に指定する`INSERT`ステートメントもサポートします。そのような場合、TiDB は明示的に指定された値を格納します。
 
 {{< copyable "" >}}
 
@@ -90,9 +90,9 @@ mysql> SELECT * FROM t;
 
 ## 実施原則 {#implementation-principles}
 
-TiDB は、次の方法で`AUTO_INCREMENT`の暗黙的な代入を実装します。
+TiDB は、次の方法で`AUTO_INCREMENT`暗黙的な代入を実装します。
 
-自動インクリメント列ごとに、割り当てられた最大 ID を記録するために、グローバルに表示されるキーと値のペアが使用されます。分散環境では、ノード間の通信にいくらかのオーバーヘッドがあります。したがって、書き込み増幅の問題を回避するために、各 TiDB ノードは、ID を割り当てるときにキャッシュとして連続する ID のバッチに適用し、最初のバッチが割り当てられた後に次の ID のバッチに適用します。そのため、毎回 ID を割り当てる際に、TiDB ノードは ID 用のストレージ ノードに適用されません。例えば：
+自動インクリメント列ごとに、割り当てられた最大 ID を記録するために、グローバルに表示されるキーと値のペアが使用されます。分散環境では、ノード間の通信にいくらかのオーバーヘッドがあります。したがって、書き込み増幅の問題を回避するために、各 TiDB ノードは、ID を割り当てるときにキャッシュとして連続する ID のバッチに適用し、最初のバッチが割り当てられた後に次の ID のバッチに適用します。そのため、毎回 ID を割り当てる際に、TiDB ノードは ID 用のstorageノードに適用されません。例えば：
 
 ```sql
 CREATE TABLE t(id int UNIQUE KEY AUTO_INCREMENT, c int);
@@ -104,7 +104,7 @@ CREATE TABLE t(id int UNIQUE KEY AUTO_INCREMENT, c int);
 INSERT INTO t (c) VALUES (1)
 ```
 
-インスタンス`A`は`[1,30000]`の自動インクリメント ID をキャッシュし、インスタンス`B`は`[30001,60000]`の自動インクリメント ID をキャッシュする場合があります。実行される`INSERT`のステートメントでは、各インスタンスのこれらのキャッシュされた ID がデフォルト値として`AUTO_INCREMENT`列に割り当てられます。
+インスタンス`A` `[1,30000]`の自動インクリメント ID をキャッシュし、インスタンス`B`は`[30001,60000]`の自動インクリメント ID をキャッシュする場合があります。実行される`INSERT`ステートメントでは、各インスタンスのこれらのキャッシュされた ID がデフォルト値として`AUTO_INCREMENT`列に割り当てられます。
 
 ## 基本的な機能 {#basic-features}
 
@@ -118,11 +118,11 @@ INSERT INTO t (c) VALUES (1)
 
 1.  クライアントはステートメント`INSERT INTO t VALUES (2, 1)`をインスタンス`B`に挿入し、インスタンス 3 は`id`を`2`に設定します。ステートメントは正常に実行されます。
 
-2.  クライアントはステートメント`INSERT INTO t (c) (1)`をインスタンス`A`に送信します。このステートメントでは値`id`が指定されていないため、ID は`A`によって割り当てられます。現在、 `A`は`[1, 30000]`の ID をキャッシュしているため、自動インクリメント ID の値として`2`を割り当て、ローカル カウンターを`1`増やします。このとき、ID が`2`のデータはすでにデータベースに存在するため、 `Duplicated Error`のエラーが返されます。
+2.  クライアントはステートメント`INSERT INTO t (c) (1)`をインスタンス`A`に送信します。このステートメントでは値`id`指定されていないため、ID は`A`によって割り当てられます。現在、 `A` `[1, 30000]`の ID をキャッシュしているため、自動インクリメント ID の値として`2`割り当て、ローカル カウンターを`1`増やします。このとき、ID が`2`のデータはすでにデータベースに存在するため、 `Duplicated Error`エラーが返されます。
 
 ### 単調性 {#monotonicity}
 
-TiDB は、サーバーごとに`AUTO_INCREMENT`の値が単調 (常に増加) であることを保証します。 1 ～ 3 の連続した`AUTO_INCREMENT`の値が生成される次の例を考えてみましょう。
+TiDB は、サーバーごとに`AUTO_INCREMENT`値が単調 (常に増加) であることを保証します。 1 ～ 3 の連続した`AUTO_INCREMENT`値が生成される次の例を考えてみましょう。
 
 {{< copyable "" >}}
 
@@ -187,11 +187,11 @@ Records: 2  Duplicates: 1  Warnings: 0
 3 rows in set (0.00 sec)
 ```
 
-この例では、 `3`の値`AUTO_INCREMENT`が`INSERT INTO t (a) VALUES ('A'), ('C') ON DUPLICATE KEY UPDATE cnt = cnt + 1;`のキー`A`の`INSERT`に割り当てられますが、この`INSERT`ステートメントに重複キー`A`が含まれているため、使用されることはありません。これにより、シーケンスが連続しないギャップが生じます。 MySQL とは異なりますが、この動作は正当であると見なされます。 MySQL では、トランザクションの中止やロールバックなど、他のシナリオでもシーケンスにギャップがあります。
+この例では、 `3`の値`AUTO_INCREMENT`が`INSERT INTO t (a) VALUES ('A'), ('C') ON DUPLICATE KEY UPDATE cnt = cnt + 1;`のキー`A`の`INSERT`に割り当てられますが、この`INSERT`ステートメントに重複キー`A`含まれているため、使用されることはありません。これにより、シーケンスが連続しないギャップが生じます。 MySQL とは異なりますが、この動作は正当であると見なされます。 MySQL では、トランザクションの中止やロールバックなど、他のシナリオでもシーケンスにギャップがあります。
 
 ## AUTO_ID_CACHE {#auto-id-cache}
 
-`INSERT`操作が別の TiDBサーバーに対して実行されると、 `AUTO_INCREMENT`シーケンスが劇的に*ジャンプ*するように見えることがあります。これは、各サーバーが独自の`AUTO_INCREMENT`の値のキャッシュを持っていることが原因です。
+`INSERT`操作が別の TiDBサーバーに対して実行されると、 `AUTO_INCREMENT`シーケンスが劇的に*ジャンプする*ように見えることがあります。これは、各サーバーが独自の`AUTO_INCREMENT`の値のキャッシュを持っていることが原因です。
 
 {{< copyable "" >}}
 
@@ -235,7 +235,7 @@ mysql> SELECT * FROM t ORDER BY b;
 5 rows in set (0.00 sec)
 ```
 
-`AUTO_INCREMENT`キャッシュは、TiDBサーバーの再起動後は維持されません。最初の TiDBサーバーが再起動された後、次の`INSERT`のステートメントが実行されます。
+`AUTO_INCREMENT`キャッシュは、TiDBサーバーの再起動後は保持されません。最初の TiDBサーバーが再起動された後、次の`INSERT`ステートメントが実行されます。
 
 ```sql
 mysql> INSERT INTO t (a) VALUES (NULL);
@@ -255,9 +255,9 @@ mysql> SELECT * FROM t ORDER BY b;
 6 rows in set (0.00 sec)
 ```
 
-TiDBサーバーの再起動の頻度が高いと、 `AUTO_INCREMENT`の値が枯渇する可能性があります。上記の例では、最初の TiDBサーバーのキャッシュにはまだ値`[5-30000]`の空きがあります。これらの値は失われ、再割り当てされません。
+TiDBサーバーの再起動の頻度が高いと、 `AUTO_INCREMENT`値が枯渇する可能性があります。上記の例では、最初の TiDBサーバーのキャッシュにはまだ値`[5-30000]`の空きがあります。これらの値は失われ、再割り当てされません。
 
-`AUTO_INCREMENT`の値が連続していることに依存することはお勧めしません。 TiDBサーバーに値`[2000001-2030000]`のキャッシュがある次の例を考えてみましょう。値`2029998`を手動で挿入すると、新しいキャッシュ範囲が取得されるときの動作を確認できます。
+`AUTO_INCREMENT`値が連続していることに依存することはお勧めしません。 TiDBサーバーに値`[2000001-2030000]`のキャッシュがある次の例を考えてみましょう。値`2029998`手動で挿入すると、新しいキャッシュ範囲が取得されるときの動作を確認できます。
 
 ```sql
 mysql> INSERT INTO t (a) VALUES (2029998);
@@ -366,10 +366,10 @@ CREATE TABLE t(a int AUTO_INCREMENT key) AUTO_ID_CACHE 1;
 >
 > TiDB では、 `AUTO_ID_CACHE`から`1`に設定すると、TiDB が ID をキャッシュしないことを意味します。ただし、実装は TiDB のバージョンによって異なります。
 >
-> -   TiDB v6.4.0 より前では、ID を割り当てるには TiKV トランザクションが要求ごとに`AUTO_INCREMENT`の値を保持する必要があるため、 `AUTO_ID_CACHE`から`1`に設定するとパフォーマンスが低下します。
+> -   TiDB v6.4.0 より前では、ID を割り当てるには TiKV トランザクションが要求ごとに`AUTO_INCREMENT`値を保持する必要があるため、 `AUTO_ID_CACHE`から`1`に設定するとパフォーマンスが低下します。
 > -   TiDB v6.4.0 以降、集中割り当てサービスが導入されたため、 `AUTO_INCREMENT`値の変更は TiDB プロセスでのインメモリ操作にすぎないため、より高速になりました。
 
-MySQL 互換モードを有効にすると、割り当てられた ID は**一意**で<strong>単調に増加</strong>し、動作は MySQL とほぼ同じになります。 TiDB インスタンス間でアクセスしても、ID は単調に保たれます。一元化されたサービスのプライマリ インスタンスがクラッシュした場合にのみ、いくつかの ID が連続していない可能性があります。これは、ID の一意性を確保するために、フェールオーバー中にプライマリ インスタンスによって割り当てられたはずの一部の ID がセカンダリ インスタンスによって破棄されるためです。
+MySQL 互換モードを有効にすると、割り当てられた ID は**一意**で<strong>単調に増加し</strong>、動作は MySQL とほぼ同じになります。 TiDB インスタンス間でアクセスしても、ID は単調に保たれます。一元化されたサービスのプライマリ インスタンスがクラッシュした場合にのみ、いくつかの ID が連続していない可能性があります。これは、ID の一意性を確保するために、フェールオーバー中にプライマリ インスタンスによって割り当てられたはずの一部の ID がセカンダリ インスタンスによって破棄されるためです。
 
 ## 制限 {#restrictions}
 
@@ -380,5 +380,5 @@ MySQL 互換モードを有効にすると、割り当てられた ID は**一�
 -   `DEFAULT`列の値と同じ列には指定できません。
 -   `ALTER TABLE`を使用して`AUTO_INCREMENT`属性を追加することはできません。
 -   `ALTER TABLE`を使用して`AUTO_INCREMENT`属性を削除できます。ただし、v2.1.18 および v3.0.4 以降、TiDB はセッション変数`@@tidb_allow_remove_auto_inc`を使用して、 `ALTER TABLE MODIFY`または`ALTER TABLE CHANGE`を使用して列の`AUTO_INCREMENT`属性を削除できるかどうかを制御します。デフォルトでは、 `ALTER TABLE MODIFY`または`ALTER TABLE CHANGE`を使用して`AUTO_INCREMENT`属性を削除することはできません。
--   `ALTER TABLE`の場合、 `FORCE`オプションを使用して`AUTO_INCREMENT`の値をより小さい値に設定する必要があります。
+-   `ALTER TABLE`の場合、 `FORCE`オプションを使用して`AUTO_INCREMENT`値をより小さい値に設定する必要があります。
 -   `AUTO_INCREMENT`を`MAX(<auto_increment_column>)`より小さい値に設定すると、既存の値がスキップされないため、重複キーが発生します。

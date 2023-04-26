@@ -27,10 +27,10 @@ summary: Learn basic concepts, state definitions, and state transfer of changefe
 -   ② `changefeed resume`コマンドを実行してレプリケーションタスクを再開します。
 -   ③ `changefeed`動作中に回復可能なエラーが発生し、自動的に動作が再開されます。
 -   ④ `changefeed resume`コマンドを実行してレプリケーションタスクを再開します。
--   ⑤ `changefeed`目の操作で回復不可能なエラーが発生した。
--   ⑥ `changefeed`がプリセット`TargetTs`に到達し、レプリケーションが自動的に停止されます。
--   ⑦ `changefeed`は`gc-ttl`で指定された期間を超えて停止し、再開することはできません。
--   ⑧ `changefeed`は、自動回復を実行しようとしたときに、回復不能なエラーが発生しました。
+-   ⑤ `changefeed`回目の操作で回復不可能なエラーが発生した。
+-   ⑥ `changefeed`プリセット`TargetTs`に到達し、レプリケーションが自動的に停止されます。
+-   ⑦ `changefeed` `gc-ttl`で指定された期間を超えて停止し、再開することはできません。
+-   ⑧ `changefeed`自動回復を実行しようとしたときに、回復不能なエラーが発生しました。
 
 ## チェンジフィードを操作する {#operate-changefeeds}
 
@@ -38,4 +38,4 @@ summary: Learn basic concepts, state definitions, and state transfer of changefe
 
 HTTP インターフェイス (TiCDC OpenAPI 機能) を使用して、TiCDC クラスターとそのレプリケーション タスクを管理することもできます。詳細については、 [TiCDC OpenAPI](/ticdc/ticdc-open-api.md)を参照してください。
 
-TiCDC がTiUPを使用してデプロイされている場合は、 `tiup ctl:<version> cdc`コマンドを実行して`cdc cli`を開始できます。 `<version>`を TiCDC クラスターのバージョンに置き換えます。 `cdc cli`を直接実行することもできます。
+TiCDC がTiUPを使用してデプロイされている場合は、 `tiup ctl:v<CLUSTER_VERSION> cdc`コマンドを実行して`cdc cli`を開始できます。 `v<CLUSTER_VERSION>` TiCDC クラスターのバージョン ( `v6.5.2`など) に置き換えます。 `cdc cli`直接実行することもできます。

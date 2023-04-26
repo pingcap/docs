@@ -3,7 +3,7 @@ title: Maintain DM Clusters Using OpenAPI
 summary: Learn about how to use OpenAPI interface to manage the cluster status and data replication.
 ---
 
-# OpenAPI を使用して DM クラスターを管理する {#maintain-dm-clusters-using-openapi}
+# OpenAPI を使用して DM クラスターを管理 {#maintain-dm-clusters-using-openapi}
 
 DM は、DM クラスタのクエリと操作を簡単にするための OpenAPI 機能を提供します。これは[dmctl ツール](/dm/dmctl-introduction.md)の機能に似ています。
 
@@ -25,7 +25,7 @@ OpenAPI を有効にするには、次の操作のいずれかを実行します
 
 > **ノート：**
 >
-> -   DM は、OpenAPI 3.0.0 標準を満たすものを提供し[仕様書](https://github.com/pingcap/tiflow/blob/master/dm/openapi/spec/dm.yaml) 。このドキュメントには、すべてのリクエスト パラメータと戻り値が含まれています。ドキュメント yaml をコピーして[Swagger エディター](https://editor.swagger.io/)でプレビューできます。
+> -   DM は、OpenAPI 3.0.0 標準を満たす[仕様書](https://github.com/pingcap/tiflow/blob/master/dm/openapi/spec/dm.yaml)を提供します。このドキュメントには、すべてのリクエスト パラメータと戻り値が含まれています。ドキュメント yaml をコピーして[Swagger エディター](https://editor.swagger.io/)でプレビューできます。
 >
 > -   DM-master ノードをデプロイした後、 `http://{master-addr}/api/v1/docs`にアクセスしてドキュメントをオンラインでプレビューできます。
 
@@ -1234,7 +1234,7 @@ curl -X 'PUT' \
 
 ## レプリケーション タスクを開始する {#start-a-replication-task}
 
-この API は非同期インターフェースです。リクエストが成功した場合、返される本文のステータス コードは 204 です。タスクの最新のステータスを知るには、次のことができ[複製タスクの情報を取得する](#get-the-information-of-a-replication-task) 。
+この API は非同期インターフェースです。リクエストが成功した場合、返される本文のステータス コードは 204 です。タスクの最新のステータスを知るには、 [複製タスクの情報を取得する](#get-the-information-of-a-replication-task)ことができます。
 
 ### リクエストURI {#request-uri}
 
@@ -1252,7 +1252,7 @@ curl -X 'POST' \
 
 ## レプリケーション タスクを停止する {#stop-a-replication-task}
 
-この API は非同期インターフェースです。リクエストが成功した場合、返される本文のステータス コードは 200 です。タスクの最新のステータスを知るには、次のことができ[複製タスクの情報を取得する](#get-the-information-of-a-replication-task) 。
+この API は非同期インターフェースです。リクエストが成功した場合、返される本文のステータス コードは 200 です。タスクの最新のステータスを知るには、 [複製タスクの情報を取得する](#get-the-information-of-a-replication-task)ことができます。
 
 ### リクエストURI {#request-uri}
 

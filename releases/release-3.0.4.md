@@ -11,9 +11,9 @@ TiDB バージョン: 3.0.4
 TiDB アンシブル バージョン: 3.0.4
 
 -   新機能
-    -   `performance_schema.events_statements_summary_by_digest`のシステム テーブルを追加して、SQL レベルでパフォーマンスの問題をトラブルシューティングします。
+    -   `performance_schema.events_statements_summary_by_digest`システム テーブルを追加して、SQL レベルでパフォーマンスの問題をトラブルシューティングします。
     -   TiDB の`SHOW TABLE REGIONS`構文に`WHERE`句を追加します
-    -   Reparoに`worker-count`と`txn-batch`の構成項目を追加して、回復速度を制御します
+    -   Reparoに`worker-count`と`txn-batch`構成項目を追加して、回復速度を制御します
 -   改良点
     -   分割パフォーマンスを向上させるために、TiKV でバッチリージョン分割コマンドと空の分割コマンドをサポートします
     -   リバース スキャンのパフォーマンスを向上させるために、TiKV で RocksDB の二重リンク リストをサポートします。
@@ -42,7 +42,7 @@ TiDB アンシブル バージョン: 3.0.4
 
 -   SQL オプティマイザー
     -   フィードバック[#12170](https://github.com/pingcap/tidb/pull/12170)で分割すると、無効なクエリ範囲が返される可能性がある問題を修正します。
-    -   結果に無効なキーが含まれている場合にエラーを返すのではなく、 `SHOW STATS_BUCKETS`ステートメントの返されたエラーを 16 進数で表示し[#12094](https://github.com/pingcap/tidb/pull/12094) 。
+    -   結果に無効なキーが含まれている場合にエラーを返すのではなく、 `SHOW STATS_BUCKETS`ステートメントの返されたエラーを[#12094](https://github.com/pingcap/tidb/pull/12094)進数で表示します。
     -   クエリに`SLEEP`関数 (たとえば、 `select 1 from (select sleep(1)) t;)` ) が含まれている場合、クエリ[#11953](https://github.com/pingcap/tidb/pull/11953)で列のプルーニングによって無効な`sleep(1)`が発生する問題を修正します。
     -   クエリがテーブル データではなく列数のみに関係する場合は、インデックス スキャンを使用して IO を削減します[#12112](https://github.com/pingcap/tidb/pull/12112)
     -   MySQL [#12100](https://github.com/pingcap/tidb/pull/12100)との互換性を保つために、 `use index()`でインデックスが指定されていない場合は、インデックスを使用しないでください。
@@ -52,17 +52,17 @@ TiDB アンシブル バージョン: 3.0.4
 -   SQL 実行エンジン
     -   `PREPARED`ステートメントが誤って実行された場合、ログに SQL ステートメントを出力します[#12191](https://github.com/pingcap/tidb/pull/12191)
     -   `UNIX_TIMESTAMP`関数を使用してパーティショニング[#12169](https://github.com/pingcap/tidb/pull/12169)を実装する場合、パーティションのプルーニングをサポートします。
-    -   `AUTO_INCREMENT`が`MAX int64`と`MAX uint64` [#12162](https://github.com/pingcap/tidb/pull/12162)を誤って割り当てた場合にエラーが報告されない問題を修正
-    -   `SHOW TABLE … REGIONS`と`SHOW TABLE .. INDEX … REGIONS`の構文に`WHERE`句を追加します[#12123](https://github.com/pingcap/tidb/pull/12123)
+    -   `AUTO_INCREMENT` `MAX int64`と`MAX uint64` [#12162](https://github.com/pingcap/tidb/pull/12162)を誤って割り当てた場合にエラーが報告されない問題を修正
+    -   `SHOW TABLE … REGIONS`と`SHOW TABLE .. INDEX … REGIONS`構文に`WHERE`句を追加します[#12123](https://github.com/pingcap/tidb/pull/12123)
     -   SQL 実行がメモリ制限を超えた場合、リンクを切断する代わりに`Out Of Memory Quota`エラーを返します[#12127](https://github.com/pingcap/tidb/pull/12127)
     -   `JSON_UNQUOTE`関数が JSON テキスト[#11955](https://github.com/pingcap/tidb/pull/11955)を処理すると、誤った結果が返される問題を修正
     -   1 行目の`AUTO_INCREMENT`列に値を代入すると`LAST INSERT ID`が正しくない問題を修正 (例: `insert into t (pk, c) values (1, 2), (NULL, 3)` ) [#12002](https://github.com/pingcap/tidb/pull/12002)
     -   `PREPARE`文[#12351](https://github.com/pingcap/tidb/pull/12351)で`GROUPBY`構文解析規則が正しくない問題を修正
     -   ポイントクエリで権限チェックが正しくない問題を修正[#12340](https://github.com/pingcap/tidb/pull/12340)
-    -   `PREPARE`ステートメントの期間が`sql_type`ずつ監視レコードに表示されない問題を修正します[#12331](https://github.com/pingcap/tidb/pull/12331)
+    -   `PREPARE`ステートメントの期間が`sql_type`監視レコードに表示されない問題を修正します[#12331](https://github.com/pingcap/tidb/pull/12331)
     -   ポイント クエリでのテーブルのエイリアスの使用をサポート (例: `select * from t tmp where a = "aa"` ) [#12282](https://github.com/pingcap/tidb/pull/12282)
     -   BIT型カラムに負数を挿入する際、負数を符号なしとして扱わないとエラーが発生する問題を修正[#12423](https://github.com/pingcap/tidb/pull/12423)
-    -   時間の誤った丸めを修正します (たとえば、 `2019-09-11 11:17:47.999999666`を`2019-09-11 11:17:48`に丸める必要があります)。 [#12258](https://github.com/pingcap/tidb/pull/12258)
+    -   時間の誤った丸めを修正します (たとえば、 `2019-09-11 11:17:47.999999666` `2019-09-11 11:17:48`に丸める必要があります)。 [#12258](https://github.com/pingcap/tidb/pull/12258)
     -   式ブロックリストの使用法を改善します (たとえば、 `<`は`It`に相当します。) [#11975](https://github.com/pingcap/tidb/pull/11975)
     -   存在しない関数エラーのメッセージにデータベース接頭辞を追加します (例: `[expression:1305]FUNCTION test.std_samp does not exist` ) [#12111](https://github.com/pingcap/tidb/pull/12111)
 -   サーバ
@@ -80,13 +80,13 @@ TiDB アンシブル バージョン: 3.0.4
     -   コメント化されていない TiDB 固有の構文`PRE_SPLIT_REGIONS`が、データ レプリケーション中にダウンストリーム データベースでエラーを引き起こす可能性があるという問題を修正します[#12120](https://github.com/pingcap/tidb/pull/12120)
     -   構成ファイルに`split-region-max-num`変数を追加して、リージョンの最大許容数を調整できるようにします[#12097](https://github.com/pingcap/tidb/pull/12079)
     -   リージョンを複数のリージョンに分割することをサポートし、リージョンの分散中のタイムアウトの問題を修正します[#12343](https://github.com/pingcap/tidb/pull/12343)
-    -   `AUTO_INCREMENT`列を含むインデックスが 2 つのインデックスから参照されると、 `drop index`ステートメントが失敗する問題を修正し[#12344](https://github.com/pingcap/tidb/pull/12344) 。
+    -   `AUTO_INCREMENT`列を含むインデックスが 2 つのインデックスから参照されると、 `drop index`ステートメントが失敗する問題を修正します[#12344](https://github.com/pingcap/tidb/pull/12344)
 -   モニター
-    -   `connection_transient_failure_count`のモニタリング メトリックを追加して、 `tikvclient` [#12093](https://github.com/pingcap/tidb/pull/12093)の gRPC 接続エラーの数をカウントします
+    -   `connection_transient_failure_count`モニタリング メトリックを追加して、 `tikvclient` [#12093](https://github.com/pingcap/tidb/pull/12093)の gRPC 接続エラーの数をカウントします
 
 ## TiKV {#tikv}
 
--   ラフトストア
+-   Raftstore
     -   Raftstore が空のリージョン[#5414](https://github.com/tikv/tikv/pull/5414)のキーの数を不正確にカウントする問題を修正します。
     -   リバース スキャンのパフォーマンスを向上させるために、RocksDB の二重リンク リストをサポートします[#5368](https://github.com/tikv/tikv/pull/5368)
     -   バッチリージョン分割コマンドと空の分割コマンドをサポートして、分割パフォーマンスを向上させます[#5470](https://github.com/tikv/tikv/pull/5470)
@@ -95,7 +95,7 @@ TiDB アンシブル バージョン: 3.0.4
     -   Titan を 3.0 ブランチ[#5517](https://github.com/tikv/tikv/pull/5517)の最新バージョンにアップグレードします。
     -   grpcio を v0.4.5 にアップグレード[#5523](https://github.com/tikv/tikv/pull/5523)
     -   gRPC コアダンプの問題を修正し、共有メモリをサポートして OOM [#5524](https://github.com/tikv/tikv/pull/5524)を回避します
-    -   プロセスが長時間実行されている場合、アイドル状態のクラスターでのファイル記述子のリークにより、TiKV プロセスが異常終了する可能性があるという[#5567](https://github.com/tikv/tikv/pull/5567)の問題を修正します。
+    -   プロセスが長時間実行されている場合、アイドル状態のクラスターでのファイル記述子のリークにより、TiKV プロセスが異常終了する可能性があるという TiKV の問題を修正します[#5567](https://github.com/tikv/tikv/pull/5567)
 -   保管所
     -   `txn_heart_beat` TiDB の悲観的ロックを MySQL の悲観的ロックと可能な限り一致させる API をサポートします[#5507](https://github.com/tikv/tikv/pull/5507)
     -   一部の状況でポイント クエリのパフォーマンスが低下する問題を修正します。 [#5495](https://github.com/tikv/tikv/pull/5495) [#5463](https://github.com/tikv/tikv/pull/5463)
@@ -109,11 +109,11 @@ TiDB アンシブル バージョン: 3.0.4
 
 ## ツール {#tools}
 
--   Binlog
-    -   Reparoに`worker-count`と`txn-batch`の設定項目を追加して、回復速度を制御します[#746](https://github.com/pingcap/tidb-binlog/pull/746)
+-   TiDBBinlog
+    -   Reparoに`worker-count`と`txn-batch`設定項目を追加して、回復速度を制御します[#746](https://github.com/pingcap/tidb-binlog/pull/746)
     -   Drainerのメモリ使用量を最適化して同時実行の効率を高める[#737](https://github.com/pingcap/tidb-binlog/pull/737)
 -   TiDB Lightning
-    -   チェックポイントからデータを再インポートすると、 TiDB Lightningがpanicになる可能性がある問題を修正します[#237](https://github.com/pingcap/tidb-lightning/pull/237)
+    -   チェックポイントからデータを再インポートすると、 TiDB Lightning がpanicになる可能性がある問題を修正します[#237](https://github.com/pingcap/tidb-lightning/pull/237)
     -   `AUTO_INCREMENT`のアルゴリズムを最適化して、 `AUTO_INCREMENT`列がオーバーフローするリスクを減らします[#227](https://github.com/pingcap/tidb-lightning/pull/227)
 
 ## TiDB アンシブル {#tidb-ansible}

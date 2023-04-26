@@ -13,7 +13,7 @@ tiup dm deploy <cluster-name> <version> <topology.yaml> [flags]
 ```
 
 -   `<cluster-name>` : 新しいクラスターの名前。既存のクラスター名と同じにすることはできません。
--   `<version>` : デプロイする DM クラスターのバージョン番号 ( `v2.0.0`など)。
+-   `<version>` : デプロイする DM クラスターのバージョン番号`v2.0.0`など)。
 -   `<topology.yaml>` : 準備された[トポロジ ファイル](/tiup/tiup-dm-topology-reference.md) 。
 
 ## オプション {#options}

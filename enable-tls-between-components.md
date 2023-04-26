@@ -143,7 +143,7 @@ summary: Learn how to enable TLS authentication between TiDB components.
     {{< copyable "" >}}
 
     ```bash
-    tiup ctl:<cluster-version> pd -u https://127.0.0.1:2379 --cacert /path/to/ca.pem --cert /path/to/client.pem --key /path/to/client-key.pem
+    tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert /path/to/ca.pem --cert /path/to/client.pem --key /path/to/client-key.pem
     ```
 
     {{< copyable "" >}}
@@ -156,7 +156,7 @@ summary: Learn how to enable TLS authentication between TiDB components.
 
 Common Name は発信者の確認に使用されます。一般に、呼び出し先は、呼び出し元から提供されたキー、証明書、および CA の確認に加えて、呼び出し元の身元を確認する必要があります。たとえば、TiKV は TiDB からのみアクセスでき、他の訪問者は正当な証明書を持っていてもブロックされます。
 
-コンポーネントの呼び出し元の ID を確認するには、証明書の生成時に`Common Name`を使用して証明書のユーザー ID をマークし、呼び出し先の`Common Name`リストを構成して呼び出し元の ID を確認する必要があります。
+コンポーネントの呼び出し元の ID を確認するには、証明書の生成時に`Common Name`使用して証明書のユーザー ID をマークし、呼び出し先の`Common Name`リストを構成して呼び出し元の ID を確認する必要があります。
 
 -   TiDB
 
@@ -192,7 +192,7 @@ Common Name は発信者の確認に使用されます。一般に、呼び出�
 
 -   TiFlash (v4.0.5 の新機能)
 
-    `tiflash.toml`のファイルまたはコマンドライン引数で構成します。
+    `tiflash.toml`ファイルまたはコマンドライン引数で構成します。
 
     ```toml
     [security]
@@ -208,7 +208,7 @@ Common Name は発信者の確認に使用されます。一般に、呼び出�
 
 ## 証明書のリロード {#reload-certificates}
 
--   TiDB クラスターがローカル データ センターにデプロイされている場合、証明書とキーをリロードするために、TiDB、PD、TiKV、およびすべての種類のクライアントは、新しい接続が作成されるたびに現在の証明書とキー ファイルを再読み込みします。TiDB クラスターを再起動する必要はありません。 .
+-   TiDB クラスターがローカル データ センターにデプロイされている場合、証明書とキーをリロードするために、TiDB、PD、TiKV、TiCDC、およびすべての種類のクライアントは、新しい接続が作成されるたびに、TiDB を再起動せずに現在の証明書とキー ファイルを再読み取りします。集まる。
 
 -   TiDB クラスターが独自のマネージド クラウドにデプロイされている場合は、TLS 証明書の発行がクラウド プロバイダーの証明書管理サービスと統合されていることを確認してください。 TiDB、PD、TiKV、および TiCDC コンポーネントの TLS 証明書は、TiDB クラスターを再起動せずに自動的にローテーションできます。
 

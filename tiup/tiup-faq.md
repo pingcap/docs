@@ -7,9 +7,9 @@ summary: Provide answers to common questions asked by TiUP users.
 
 このドキュメントは、 TiUPに関するよくある質問 (FAQ) をまとめたものです。
 
-## TiUPは公式のミラーソースを使用できませんか? {#can-tiup-not-use-the-official-mirror-source}
+## TiUP は公式のミラーソースを使用できませんか? {#can-tiup-not-use-the-official-mirror-source}
 
-TiUPは、 `TIUP_MIRRORS`環境変数によるミラー ソースの指定をサポートしています。ミラー ソースのアドレスは、ローカル ディレクトリまたは HTTPサーバーアドレスにすることができます。環境がネットワークにアクセスできない場合は、独自のオフライン ミラー ソースを作成してTiUPを使用できます。
+TiUP は、 `TIUP_MIRRORS`環境変数によるミラー ソースの指定をサポートしています。ミラー ソースのアドレスは、ローカル ディレクトリまたは HTTPサーバーアドレスにすることができます。環境がネットワークにアクセスできない場合は、独自のオフライン ミラー ソースを作成してTiUPを使用できます。
 
 非公式ミラーを使用した後、公式ミラーに戻して使用したい場合は、次のいずれかの方法を実行してください。
 
@@ -46,7 +46,7 @@ TiUPクラスターコンポーネントを使用して、同じホスト上に�
 
 複数の異なるクラスターが同じTiUPコントロール マシンによって展開されている場合、これらのクラスター間のポートとディレクトリの競合は、展開とスケーリング中に検出されます。クラスターが異なるTiUP制御マシンによって展開されている場合、競合検出は現在サポートされていません。
 
-## クラスターの展開中に、 TiUPが<code>ssh: handshake failed: read tcp 10.10.10.34:38980 -&gt; 10.10.10.34:3600: read: connection reset by peer</code>エラーを受け取りました {#during-cluster-deployment-tiup-received-an-code-ssh-handshake-failed-read-tcp-10-10-10-34-38980-10-10-10-34-3600-read-connection-reset-by-peer-code-error}
+## クラスターの展開中に、 TiUP <code>ssh: handshake failed: read tcp 10.10.10.34:38980 -&gt; 10.10.10.34:3600: read: connection reset by peer</code>エラーを受け取りました {#during-cluster-deployment-tiup-received-an-code-ssh-handshake-failed-read-tcp-10-10-10-34-38980-10-10-10-34-3600-read-connection-reset-by-peer-code-error}
 
 TiUPのデフォルトの同時スレッド数が SSH 接続のデフォルトの最大数を超えているために、エラーが発生する可能性があります。この問題を解決するには、SSH 接続のデフォルト数を増やしてから、sshd サービスを再起動します。
 

@@ -52,7 +52,7 @@ cert-allowed-cn = ["dm"]
 | `peer-urls`           | DM マスター ノードのピア URL を指定します。                                                                                                    |
 | `advertise-peer-urls` | DM-master が外部にアドバタイズするピア URL を指定します。 `advertise-peer-urls`の値はデフォルトで`peer-urls`の値と同じです。                                        |
 | `initial-cluster`     | `initial-cluster`の値は、初期クラスター内のすべての DM マスター ノードの`advertise-peer-urls`の値の組み合わせです。                                               |
-| `join`                | `join`の値は、クラスター内の既存の DM マスター ノードの`advertise-peer-urls`の値の組み合わせです。 DM-master ノードが新しく追加された場合は、 `initial-cluster`を`join`に置き換えます。 |
+| `join`                | `join`の値は、クラスター内の既存の DM マスター ノードの`advertise-peer-urls`の値の組み合わせです。 DM-master ノードが新しく追加された場合は、 `initial-cluster` `join`に置き換えます。 |
 | `ssl-ca`              | DM-master が他のコンポーネントと接続するための信頼できる SSL CA のリストを含むファイルのパス。                                                                      |
 | `ssl-cert`            | DM マスターが他のコンポーネントと接続するための PEM 形式の X509 証明書を含むファイルのパス。                                                                         |
 | `ssl-key`             | DM マスターが他のコンポーネントと接続するための PEM 形式の X509 キーを含むファイルのパス。                                                                          |

@@ -37,7 +37,7 @@ wget <mirror-addr>/root.json -O /path/to/local/root.json
 tiup mirror set <mirror-addr> -r /path/to/local/root.json
 ```
 
-上記の手順で、 `wget`コマンドの前にミラーが攻撃された場合、ルート証明書が正しくないことがわかります。 `wget`コマンドの後にミラーが攻撃されると、 TiUPはミラーがルート証明書と一致しないことを検出します。
+上記の手順で、 `wget`コマンドの前にミラーが攻撃された場合、ルート証明書が正しくないことがわかります。 `wget`コマンドの後にミラーが攻撃されると、 TiUP はミラーがルート証明書と一致しないことを検出します。
 
 -   データ型: `String`
 -   デフォルト: `{mirror-dir}/root.json`

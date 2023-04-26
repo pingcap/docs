@@ -5,7 +5,7 @@ summary: Learn the `MEMORY_USAGE_OPS_HISTORY` information_schema system table.
 
 # MEMORY_USAGE_OPS_HISTORY {#memory-usage-ops-history}
 
-`MEMORY_USAGE_OPS_HISTORY`番目のテーブルは、メモリ関連の操作の履歴と、現在の TiDB インスタンスの実行ベースを示しています。
+`MEMORY_USAGE_OPS_HISTORY`のテーブルは、メモリ関連の操作の履歴と、現在の TiDB インスタンスの実行ベースを示しています。
 
 ```sql
 USE information_schema;

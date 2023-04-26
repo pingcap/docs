@@ -35,14 +35,14 @@ S3 バケットとTiDB Cloudクラスターを同じリージョンに配置す�
 
 ### Dumpling {#dumpling}
 
-[Dumpling](https://docs.pingcap.com/tidb/dev/dumpling-overview)は、TiDB または MySQL から SQL または CSV ファイルにデータをエクスポートするツールです。 Dumplingを使用して、OP TiDB から完全なデータをエクスポートできます。
+[Dumpling](https://docs.pingcap.com/tidb/dev/dumpling-overview)は、TiDB または MySQL から SQL または CSV ファイルにデータをエクスポートするツールです。 Dumpling を使用して、OP TiDB から完全なデータをエクスポートできます。
 
 Dumplingをデプロイする前に、次の点に注意してください。
 
 -   TiDB Cloudの TiDB クラスターと同じ VPC 内の新しい EC2 インスタンスにDumplingをデプロイすることをお勧めします。
 -   推奨される EC2 インスタンス タイプは**c6g.4xlarge** (16 vCPU および 32 GiBメモリ) です。必要に応じて、他の EC2 インスタンス タイプを選択できます。 Amazon マシン イメージ (AMI) には、Amazon Linux、Ubuntu、または Red Hat を使用できます。
 
-Dumplingは、 TiUPまたはインストール パッケージを使用して展開できます。
+Dumpling は、 TiUPまたはインストール パッケージを使用して展開できます。
 
 #### TiUPを使用してDumplingをデプロイ {#deploy-dumpling-using-tiup}
 
@@ -63,7 +63,7 @@ tiup update --self && tiup update dumpling
 
 1.  [ツールキット パッケージ](https://docs.pingcap.com/tidb/stable/download-ecosystem-tools)をダウンロードします。
 
-2.  ターゲット マシンに抽出します。 `tiup install dumpling`を実行すると、 TiUPを使用してDumplingを取得できます。その後、 `tiup dumpling ...`を使用してDumplingを実行できます。詳細については、 [Dumpling紹介](https://docs.pingcap.com/tidb/stable/dumpling-overview#dumpling-introduction)を参照してください。
+2.  ターゲット マシンに抽出します。 `tiup install dumpling`を実行すると、 TiUPを使用してDumpling を取得できます。その後、 `tiup dumpling ...`使用してDumplingを実行できます。詳細については、 [Dumpling紹介](https://docs.pingcap.com/tidb/stable/dumpling-overview#dumpling-introduction)を参照してください。
 
 #### Dumplingの権限を構成する {#configure-privileges-for-dumpling}
 
@@ -73,30 +73,30 @@ tiup update --self && tiup update dumpling
 -   リロード
 -   ロックテーブル
 -   複製クライアント
--   処理する
+-   プロセス
 
-### TiCDC をデプロイ {#deploy-ticdc}
+### TiCDCをデプロイ {#deploy-ticdc}
 
 アップストリームの TiDB クラスターからTiDB Cloudに増分データをレプリケートするには、 [TiCDC をデプロイする](https://docs.pingcap.com/tidb/dev/deploy-ticdc)が必要です。
 
-1.  現在の TiDB バージョンが TiCDC をサポートしているかどうかを確認します。 TiDB v4.0.8.rc.1 以降のバージョンは TiCDC をサポートしています。 TiDB クラスターで`select tidb_version();`を実行すると、TiDB のバージョンを確認できます。アップグレードする必要がある場合は、 [TiUP を使用してTiUPをアップグレードする](https://docs.pingcap.com/tidb/dev/deploy-ticdc#upgrade-ticdc-using-tiup)を参照してください。
+1.  現在の TiDB バージョンが TiCDC をサポートしているかどうかを確認します。 TiDB v4.0.8.rc.1 以降のバージョンは TiCDC をサポートしています。 TiDB クラスターで`select tidb_version();`を実行すると、TiDB のバージョンを確認できます。アップグレードする必要がある場合は、 [TiUPを使用して TiDB をアップグレードする](https://docs.pingcap.com/tidb/dev/deploy-ticdc#upgrade-ticdc-using-tiup)を参照してください。
 
-2.  TiCDCコンポーネントを TiDB クラスターに追加します。 [TiUP を使用してTiUPを既存の TiDB クラスターに追加またはスケールアウトする](https://docs.pingcap.com/tidb/dev/deploy-ticdc#add-or-scale-out-ticdc-to-an-existing-tidb-cluster-using-tiup)を参照してください。 `scale-out.yaml`ファイルを編集して TiCDC を追加します。
+2.  TiCDCコンポーネントをTiDB クラスターに追加します。 [TiUPを使用して TiCDC を既存の TiDB クラスターに追加またはスケールアウトする](https://docs.pingcap.com/tidb/dev/deploy-ticdc#add-or-scale-out-ticdc-to-an-existing-tidb-cluster-using-tiup)を参照してください。 `scale-out.yml`ファイルを編集して TiCDC を追加します。
 
     ```yaml
     cdc_servers:
     - host: 10.0.1.3
       gc-ttl: 86400
-      data_dir: /data/deploy/install/data/cdc-8300
+      data_dir: /tidb-data/cdc-8300
     - host: 10.0.1.4
       gc-ttl: 86400
-      data_dir: /data/deploy/install/data/cdc-8300
+      data_dir: /tidb-data/cdc-8300
     ```
 
 3.  TiCDCコンポーネントを追加し、ステータスを確認します。
 
     ```shell
-    tiup cluster scale-out <cluster-name> scale-out.yaml
+    tiup cluster scale-out <cluster-name> scale-out.yml
     tiup cluster display <cluster-name>
     ```
 
@@ -111,7 +111,7 @@ OP TiDB クラスターからTiDB Cloudにデータを移行するには、次�
 
 Dumplingを使用して、OP TiDB クラスターから Amazon S3 にデータを移行する必要があります。
 
-TiDB クラスターがローカル IDC にある場合、またはDumplingサーバーと Amazon S3 の間のネットワークが接続されていない場合は、最初にファイルをローカル ストレージにエクスポートしてから、後で Amazon S3 にアップロードできます。
+TiDB クラスターがローカル IDC にある場合、またはDumplingサーバーと Amazon S3 の間のネットワークが接続されていない場合は、最初にファイルをローカルstorageにエクスポートしてから、後で Amazon S3 にアップロードできます。
 
 #### ステップ 1. アップストリーム OP TiDB クラスターの GC メカニズムを一時的に無効にする {#step-1-disable-the-gc-mechanism-of-the-upstream-op-tidb-cluster-temporarily}
 
@@ -123,7 +123,7 @@ TiDB クラスターがローカル IDC にある場合、またはDumplingサ�
 SET GLOBAL tidb_gc_enable = FALSE;
 ```
 
-以下は出力例で、 `0`は無効であることを示します。
+以下は出力例で、 `0`無効であることを示します。
 
 ```sql
 SELECT @@global.tidb_gc_enable;
@@ -141,9 +141,9 @@ AWS コンソールでアクセス キーを作成します。詳細は[アク�
 
 1.  AWS アカウント ID またはアカウント エイリアス、 IAMユーザー名、およびパスワードを使用して[IAMコンソール](https://console.aws.amazon.com/iam/home#/security_credentials)にサインインします。
 
-2.  右上のナビゲーション バーでユーザー名を選択し、[**セキュリティ資格情報**] をクリックします。
+2.  右上のナビゲーション バーでユーザー名を選択し、 **[Security資格情報]**をクリックします。
 
-3.  アクセス キーを作成するには、[**アクセス キーの作成**] をクリックします。次に、[. <strong>csv ファイルのダウンロード]</strong>を選択して、アクセス キー ID とシークレット アクセス キーをコンピューター上の CSV ファイルに保存します。ファイルを安全な場所に保管します。このダイアログ ボックスを閉じると、シークレット アクセス キーにアクセスできなくなります。 CSV ファイルをダウンロードしたら、 <strong>[Close]</strong>を選択します。アクセス キーを作成すると、キー ペアはデフォルトでアクティブになり、すぐに使用できます。
+3.  アクセス キーを作成するには、 **[アクセス キーの作成]**をクリックします。次に、 <strong>[.csv ファイルのダウンロード]</strong>を選択して、アクセス キー ID とシークレット アクセス キーをコンピューター上の CSV ファイルに保存します。ファイルを安全な場所に保管します。このダイアログ ボックスを閉じると、シークレット アクセス キーにアクセスできなくなります。 CSV ファイルをダウンロードしたら、 <strong>[Close]</strong>を選択します。アクセス キーを作成すると、キー ペアはデフォルトでアクティブになり、すぐに使用できます。
 
     ![Create access key](/media/tidb-cloud/op-to-cloud-create-access-key01.png)
 
@@ -279,11 +279,11 @@ OP TiDB クラスターから Amazon S3 にデータをエクスポートした�
 
     ![Start Time in Metadata](/media/tidb-cloud/start_ts_in_metadata.png)
 
-2.  TiCDC にTiDB Cloudへの接続を許可します。 [TiDB Cloudコンソール](https://tidbcloud.com/console/clusters)でクラスターを見つけ、[**概要]** &gt; [<strong>接続]</strong> &gt; [<strong>標準接続</strong>] &gt; [<strong>トラフィック フィルターの作成]</strong>に移動します。 [<strong>編集]</strong> &gt; [<strong>項目の追加] を</strong>クリックします。 [ <strong>IP アドレス</strong>] フィールドに TiCDCコンポーネントのパブリック IP アドレスを入力し、[<strong>フィルターの更新</strong>] をクリックして保存します。これで、TiCDC はTiDB Cloudにアクセスできるようになりました。
+2.  TiCDC にTiDB Cloudへの接続を許可します。 [TiDB Cloudコンソール](https://tidbcloud.com/console/clusters)でクラスターを見つけ、 **[概要**] &gt; <strong>[接続]</strong> &gt; <strong>[標準接続]</strong> &gt; <strong>[トラフィック フィルターの作成]</strong>に移動します。 <strong>[編集]</strong> &gt; <strong>[項目の追加]</strong>をクリックします。 <strong>[IP アドレス]</strong>フィールドに TiCDCコンポーネントのパブリック IP アドレスを入力し、 <strong>[フィルターの更新]</strong>をクリックして保存します。これで、TiCDC はTiDB Cloudにアクセスできるようになりました。
 
     ![Update Filter](/media/tidb-cloud/edit_traffic_filter_rules.png)
 
-3.  下流のTiDB Cloudクラスターの接続情報を取得します。 [TiDB Cloudコンソール](https://tidbcloud.com/console/clusters)で、[ **Overview]** &gt; [ <strong>Connect]</strong> &gt; [ <strong>Standard Connection]</strong> &gt; [ <strong>Connect with a SQL Client] に</strong>移動します。接続情報から、クラスターのホスト IP アドレスとポートを取得できます。詳細については、 [標準接続で接続](/tidb-cloud/connect-via-standard-connection.md)を参照してください。
+3.  下流のTiDB Cloudクラスターの接続情報を取得します。 [TiDB Cloudコンソール](https://tidbcloud.com/console/clusters)で、 **[Overview]** &gt; <strong>[Connect]</strong> &gt; <strong>[Standard Connection]</strong> &gt; <strong>[Connect with a SQL Client]</strong>に移動します。接続情報から、クラスターのホスト IP アドレスとポートを取得できます。詳細については、 [標準接続で接続](/tidb-cloud/connect-via-standard-connection.md)を参照してください。
 
 4.  増分レプリケーション タスクを作成して実行します。アップストリーム クラスターで、次を実行します。
 
@@ -295,9 +295,9 @@ OP TiDB クラスターから Amazon S3 にデータをエクスポートした�
     --start-ts="431434047157698561"
     ```
 
-    -   `--pd` : アップストリーム クラスタの PD アドレス。形式は次のとおりです`[upstream_pd_ip]:[pd_port]`
+    -   `--pd` : アップストリーム クラスタの PD アドレス。形式は`[upstream_pd_ip]:[pd_port]`のとおりです。2
 
-    -   `--sink-uri` : レプリケーション タスクのダウンストリーム アドレス。 `--sink-uri`を次の形式に従って構成します。現在、スキームは`mysql` 、 `tidb` 、 `kafka` 、 `s3` 、および`local`をサポートしています。
+    -   `--sink-uri` : レプリケーション タスクのダウンストリーム アドレス。 `--sink-uri`次の形式に従って構成します。現在、スキームは`mysql` 、 `tidb` 、 `kafka` 、 `s3` 、および`local`をサポートしています。
 
         ```shell
         [scheme]://[userinfo@][host]:[port][/path]?[query_parameters]

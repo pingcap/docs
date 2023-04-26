@@ -12,11 +12,11 @@ TiDB バージョン: 4.0.10
 
 -   PD
 
-    -   ログ[#3266](https://github.com/pingcap/pd/pull/3266)からユーザー データを秘匿化する`enable-redact-log`の構成項目を追加します。
+    -   ログ[#3266](https://github.com/pingcap/pd/pull/3266)からユーザー データを秘匿化する`enable-redact-log`構成項目を追加します。
 
 -   TiFlash
 
-    -   ログからユーザー データを編集するための`security.redact_info_log`の構成項目を追加します。
+    -   ログからユーザー データを編集するための`security.redact_info_log`構成項目を追加します。
 
 ## 改良点 {#improvements}
 
@@ -27,7 +27,7 @@ TiDB バージョン: 4.0.10
 -   PD
 
     -   `store-state-filter`メトリクスを最適化して、より多くの情報を表示する[#3100](https://github.com/tikv/pd/pull/3100)
-    -   `go.etcd.io/bbolt`の依存関係を v1.3.5 にアップグレードする[#3331](https://github.com/tikv/pd/pull/3331)
+    -   `go.etcd.io/bbolt`依存関係を v1.3.5 にアップグレードする[#3331](https://github.com/tikv/pd/pull/3331)
 
 -   ツール
 
@@ -54,7 +54,7 @@ TiDB バージョン: 4.0.10
     -   リージョンのマージが発生したときに GC ロックを正しく解放する[#22267](https://github.com/pingcap/tidb/pull/22267)
     -   `datetime`タイプ[#22143](https://github.com/pingcap/tidb/pull/22143)のユーザー変数の正しい値を返す
     -   複数のテーブル フィルターがある場合にインデックス マージを使用する際の問題を修正します[#22124](https://github.com/pingcap/tidb/pull/22124)
-    -   `prepare`プラン キャッシュが原因で発生したTiFlashの`wrong precision`の問題を修正[#21960](https://github.com/pingcap/tidb/pull/21960)
+    -   `prepare`プラン キャッシュが原因で発生したTiFlashの`wrong precision`問題を修正[#21960](https://github.com/pingcap/tidb/pull/21960)
     -   スキーマの変更[#21596](https://github.com/pingcap/tidb/pull/21596)による誤った結果の問題を修正します。
     -   `ALTER TABLE` [#21474](https://github.com/pingcap/tidb/pull/21474)で不要な列フラグの変更を避ける
     -   オプティマイザ ヒントで使用されるクエリ ブロックのテーブル エイリアスのデータベース名を設定します[#21380](https://github.com/pingcap/tidb/pull/21380)
@@ -72,17 +72,17 @@ TiDB バージョン: 4.0.10
 
 -   TiFlash
 
-    -   TiFlashの起動に失敗する問題を修正
-    -   RedHat システムで`cpu_time`の処理が正しくないためにTiFlashが起動しない問題を修正
+    -   TiFlashが旧バージョンの TiDB スキーマの処理に失敗するため、 TiFlashの起動に失敗する問題を修正
+    -   RedHat システムで`cpu_time`の処理が正しくないためにTiFlash が起動しない問題を修正
     -   `path_realtime_mode`を`true`に設定するとTiFlashが起動しない問題を修正
     -   3 つのパラメーターを指定して`substr`関数を呼び出すと、誤った結果が返される問題を修正
-    -   変更がロスレスであっても、 TiFlashが`Enum`のタイプの変更をサポートしていない問題を修正します。
+    -   変更がロスレスであっても、 TiFlash が`Enum`タイプの変更をサポートしていない問題を修正します。
 
 -   ツール
 
     -   TiCDC
 
-        -   `base64`データ出力の問題と TSO を unix タイムスタンプに出力する問題を含む`maxwell`プロトコルの問題を修正し[#1173](https://github.com/pingcap/tiflow/pull/1173) 。
+        -   `base64`データ出力の問題と TSO を unix タイムスタンプに出力する問題を含む`maxwell`プロトコルの問題を修正します[#1173](https://github.com/pingcap/tiflow/pull/1173)
         -   古いメタデータにより、新しく作成された変更フィードが異常になる可能性があるバグを修正します[#1184](https://github.com/pingcap/tiflow/pull/1184)
         -   クローズされたノーティファイアー[#1199](https://github.com/pingcap/tiflow/pull/1199)でレシーバーを作成する問題を修正します。
         -   TiCDC 所有者が etcd ウォッチ クライアントでメモリを消費しすぎる可能性があるバグを修正します[#1227](https://github.com/pingcap/tiflow/pull/1227)
@@ -92,17 +92,17 @@ TiDB バージョン: 4.0.10
 
     -   Dumpling
 
-        -   デフォルトの動作を[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) [#233](https://github.com/pingcap/dumpling/pull/233)に設定して、TiDB のメモリ(OOM) を回避します。
+        -   デフォルトの動作を[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) [#233](https://github.com/pingcap/dumpling/pull/233)に設定して、TiDB のメモリ不足 (OOM) を回避します。
 
     -   バックアップと復元 (BR)
 
         -   GCS [#688](https://github.com/pingcap/br/pull/688)でBR v4.0.8 を使用してバックアップしたファイルをBR v4.0.9 で復元できない問題を修正します。
-        -   GCS ストレージ URL にプレフィックス[#673](https://github.com/pingcap/br/pull/673)がない場合にBRがパニックになる問題を修正します
+        -   GCSstorageURL にプレフィックス[#673](https://github.com/pingcap/br/pull/673)がない場合にBR がパニックになる問題を修正します
         -   BR OOM [#693](https://github.com/pingcap/br/pull/693)を回避するために、デフォルトでバックアップ統計を無効にします
 
-    -   Binlog
+    -   TiDBBinlog
 
-        -   `AMEND TRANSACTION`機能が有効になっている場合、 Drainerが誤ったスキーマ バージョンを選択して SQL ステートメントを生成する可能性があるという問題を修正します[#1033](https://github.com/pingcap/tidb-binlog/pull/1033)
+        -   `AMEND TRANSACTION`機能が有効になっている場合、 Drainer が誤ったスキーマ バージョンを選択して SQL ステートメントを生成する可能性があるという問題を修正します[#1033](https://github.com/pingcap/tidb-binlog/pull/1033)
 
     -   TiDB Lightning
 

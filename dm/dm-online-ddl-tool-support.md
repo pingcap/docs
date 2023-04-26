@@ -14,7 +14,7 @@ MySQL エコシステムでは、gh-ost や pt-osc などのツールが広く�
 ## 制限 {#restrictions}
 
 -   DM は gh-ost と pt-osc のみをサポートします。
--   `online-ddl`が有効な場合、増分レプリケーションに対応するチェックポイントは、オンライン DDL 実行のプロセスにあってはなりません。たとえば、アップストリームのオンライン DDL 操作がバイナリログの`position-A`で開始し、 `position-B`で終了する場合、増分レプリケーションの開始点は`position-A`より前または`position-B`より後である必要があります。そうしないと、エラーが発生します。詳細は[FAQ](/dm/dm-faq.md#how-to-handle-the-error-returned-by-the-ddl-operation-related-to-the-gh-ost-table-after-online-ddl-scheme-gh-ost-is-set)を参照してください。
+-   `online-ddl`が有効な場合、増分レプリケーションに対応するチェックポイントは、オンライン DDL 実行のプロセスにあってはなりません。たとえば、アップストリームのオンライン DDL 操作がbinlogの`position-A`で開始し、 `position-B`で終了する場合、増分レプリケーションの開始点は`position-A`より前または`position-B`より後である必要があります。そうしないと、エラーが発生します。詳細は[FAQ](/dm/dm-faq.md#how-to-handle-the-error-returned-by-the-ddl-operation-related-to-the-gh-ost-table-after-online-ddl-scheme-gh-ost-is-set)を参照してください。
 
 ## パラメータの構成 {#configure-parameters}
 
@@ -31,7 +31,7 @@ online-ddl: true
 
 > **ノート：**
 >
-> v2.0.5 以降、 `online-ddl-scheme`は廃止されたため、 `online-ddl-scheme`の代わりに`online-ddl`を使用する必要があります。つまり、設定`online-ddl: true`は`online-ddl-scheme`を上書きし、設定`online-ddl-scheme: "pt"`または`online-ddl-scheme: "gh-ost"`は`online-ddl: true`に変換されます。
+> v2.0.5 以降、 `online-ddl-scheme`廃止されたため、 `online-ddl-scheme`の代わりに`online-ddl`使用する必要があります。つまり、設定`online-ddl: true` `online-ddl-scheme`を上書きし、設定`online-ddl-scheme: "pt"`または`online-ddl-scheme: "gh-ost"`は`online-ddl: true`に変換されます。
 
 </div>
 

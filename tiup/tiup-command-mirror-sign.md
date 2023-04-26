@@ -43,7 +43,7 @@ tiup mirror sign <manifest-file> [flags]
 ## 出力 {#output}
 
 -   コマンドが正常に実行された場合、出力はありません。
--   ファイルが指定されたキーによって署名されている場合、 TiUPはエラー`Error: this manifest file has already been signed by specified key`を報告します。
--   ファイルが有効なマニフェストでない場合、 TiUPはエラー`Error: unmarshal manifest: %s`を報告します。
+-   ファイルが指定されたキーによって署名されている場合、 TiUP はエラー`Error: this manifest file has already been signed by specified key`を報告します。
+-   ファイルが有効なマニフェストでない場合、 TiUP はエラー`Error: unmarshal manifest: %s`を報告します。
 
 [&lt;&lt; 前のページに戻る - TiUP Mirror コマンド一覧](/tiup/tiup-command-mirror.md#command-list)

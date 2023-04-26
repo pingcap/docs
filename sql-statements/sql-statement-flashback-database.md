@@ -5,7 +5,7 @@ summary: Learn the usage of FLASHBACK DATABASE in TiDB databases.
 
 # フラッシュバック データベース {#flashback-database}
 
-TiDB v6.4.0 では`FLASHBACK DATABASE`構文が導入されています。 `FLASHBACK DATABASE`を使用して、ガベージ コレクション (GC) の有効期間内に`DROP`ステートメントによって削除されたデータベースとそのデータを復元できます。
+TiDB v6.4.0 では`FLASHBACK DATABASE`構文が導入されています。 `FLASHBACK DATABASE`使用して、ガベージ コレクション (GC) の有効期間内に`DROP`ステートメントによって削除されたデータベースとそのデータを復元できます。
 
 [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50)システム変数を構成することにより、履歴データの保持期間を設定できます。デフォルト値は`10m0s`です。次の SQL ステートメントを使用して、現在の`safePoint` 、つまり GC が実行された時点までクエリを実行できます。
 
@@ -39,12 +39,12 @@ FlashbackToNewName ::=
 -   TiDB Binlogが有効になっている場合、 `FLASHBACK DATABASE`を使用するときは次の点に注意してください。
 
     -   ダウンストリーム セカンダリ データベースは`FLASHBACK DATABASE`をサポートする必要があります。
-    -   セカンダリ データベースの GC ライフ タイムは、プライマリ データベースの GC ライフ タイムよりも長くする必要があります。そうしないと、アップストリームとダウンストリームの間のレイテンシーにより、ダウンストリームでデータの復元が失敗する可能性があります。
+    -   セカンダリ データベースの GC ライフ タイムは、プライマリ データベースの GC ライフ タイムよりも長くする必要があります。そうしないと、アップストリームとダウンストリームの間のレイテンシー、ダウンストリームでデータの復元が失敗する可能性があります。
     -   TiDB Binlogレプリケーションでエラーが発生した場合は、TiDB Binlogでデータベースを除外してから、このデータベースの完全なデータを手動でインポートする必要があります。
 
 ## 例 {#example}
 
--   `DROP`によって削除された`test`のデータベースを復元します。
+-   `DROP`によって削除された`test`データベースを復元します。
 
     ```sql
     DROP DATABASE test;

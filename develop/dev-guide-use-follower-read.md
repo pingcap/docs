@@ -5,13 +5,13 @@ summary: Learn how to use Follower Read to optimize query performance.
 
 # Follower Read {#follower-read}
 
-このドキュメントでは、 Follower Readを使用してクエリのパフォーマンスを最適化する方法を紹介します。
+このドキュメントでは、 Follower Read を使用してクエリのパフォーマンスを最適化する方法を紹介します。
 
 ## 序章 {#introduction}
 
 TiDB は、クラスター内のすべてのノードにデータを分散するための基本単位として[リージョン](/tidb-storage.md#region)を使用します。リージョンは複数のレプリカを持つことができ、レプリカはリーダーと複数のフォロワーに分割されます。リーダーのデータが変更されると、TiDB はフォロワーのデータを同期的に更新します。
 
-デフォルトでは、TiDB は同じリージョンのリーダーでのみデータの読み取りと書き込みを行います。 リージョンリージョンがシステム全体の読み取りボトルネックになる可能性があります。このような状況では、Follower Read機能を有効にすると、リーダーの負荷が大幅に軽減され、複数のフォロワー間で負荷が分散されるため、システム全体のスループットが向上します。
+デフォルトでは、TiDB は同じリージョンのリーダーでのみデータの読み取りと書き込みを行います。 リージョンで読み取りホットスポットが発生すると、 リージョンリーダーがシステム全体の読み取りボトルネックになる可能性があります。このような状況では、Follower Read機能を有効にすると、リーダーの負荷が大幅に軽減され、複数のフォロワー間で負荷が分散されるため、システム全体のスループットが向上します。
 
 ## いつ使用するか {#when-to-use}
 
@@ -37,7 +37,7 @@ TiDB は、クラスター内のすべてのノードにデータを分散する
 
 ### 地理的に分散した展開のレイテンシーを短縮 {#reduce-latency-for-geo-distributed-deployments}
 
-TiDB クラスターが複数の地区またはデータ センターにデプロイされている場合、リージョンの異なるレプリカが異なる地区またはデータ センターに分散されます。この場合、 Follower Readを`closest-adaptive`または`closest-replicas`として構成して、TiDB が現在のデータ センターからの読み取りを優先できるようにすることができます。これにより、読み取り操作のレイテンシーとトラフィック オーバーヘッドを大幅に削減できます。実装の詳細については、 [Follower Read](/follower-read.md)を参照してください。
+TiDB クラスターが複数の地区またはデータ センターにデプロイされている場合、リージョンの異なるレプリカが異なる地区またはデータ センターに分散されます。この場合、 Follower Read を`closest-adaptive`または`closest-replicas`として構成して、TiDB が現在のデータ センターからの読み取りを優先できるようにすることができます。これにより、読み取り操作のレイテンシーとトラフィック オーバーヘッドを大幅に削減できます。実装の詳細については、 [Follower Read](/follower-read.md)を参照してください。
 
 ## Follower Readを有効にする {#enable-follower-read}
 
@@ -55,7 +55,7 @@ SET [GLOBAL] tidb_replica_read = 'follower';
 </div>
 <div label="Java" value="java">
 
-JavaでFollower Readを有効にするには、 `FollowerReadHelper`クラスを定義します。
+JavaでFollower Read を有効にするには、 `FollowerReadHelper`クラスを定義します。
 
 ```java
 public enum FollowReadMode {

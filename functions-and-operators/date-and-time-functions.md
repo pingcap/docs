@@ -96,7 +96,7 @@ TiDB は、 MySQL 5.7で利用可能な[日付と時刻関数](https://dev.mysql
 | &quot;％バツ&quot; | 日曜日が週の最初の日である週の年、数値、4 桁。                      |
 | &quot;％バツ&quot; | 週の年。月曜が週の最初の日で、4 桁の数字です。                      |
 
-詳細については、 [問題 #30082](https://github.com/pingcap/tidb/issues/30082)を参照してください。
+詳細については[問題 #30082](https://github.com/pingcap/tidb/issues/30082)参照してください。
 
 ## 関連するシステム変数 {#related-system-variables}
 

@@ -4,7 +4,7 @@ title: tiup cluster help
 
 # tiup cluster help {#tiup-cluster-help}
 
-tiup-clusterは、コマンド ライン インターフェイスでユーザーに豊富なヘルプ情報を提供します。 `help`コマンドまたは`--help`オプションで取得できます。 `tiup cluster help <command>`は基本的に`tiup cluster <command> --help`と同等です。
+tiup-cluster は、コマンド ライン インターフェイスでユーザーに豊富なヘルプ情報を提供します。 `help`コマンドまたは`--help`オプションで取得できます。 `tiup cluster help <command>`は基本的に`tiup cluster <command> --help`と同等です。
 
 ## 構文 {#syntax}
 

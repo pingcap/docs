@@ -130,9 +130,9 @@ Query OK, 1 row affected (0.02 sec)
 
 ## MySQL の互換性 {#mysql-compatibility}
 
-次の`CREATE USER`のオプションは TiDB ではまだサポートされておらず、解析されますが無視されます。
+次の`CREATE USER`オプションは TiDB ではまだサポートされておらず、解析されますが無視されます。
 
--   TiDB は、 `WITH MAX_QUERIES_PER_HOUR` 、 `WITH MAX_UPDATES_PER_HOUR` 、および`WITH MAX_USER_CONNECTIONS`のオプションをサポートしていません。
+-   TiDB は、 `WITH MAX_QUERIES_PER_HOUR` 、 `WITH MAX_UPDATES_PER_HOUR` 、および`WITH MAX_USER_CONNECTIONS`オプションをサポートしていません。
 -   TiDB は`DEFAULT ROLE`オプションをサポートしていません。
 -   TiDB は、パスワードに関連する`PASSWORD EXPIRE` 、 `PASSWORD HISTORY`またはその他のオプションをサポートしていません。
 
@@ -140,7 +140,7 @@ Query OK, 1 row affected (0.02 sec)
 
 <CustomContent platform="tidb">
 
--   [MySQL とのセキュリティの互換性](/security-compatibility-with-mysql.md)
+-   [MySQL とのSecurityの互換性](/security-compatibility-with-mysql.md)
 -   [権限管理](/privilege-management.md)
 
 </CustomContent>

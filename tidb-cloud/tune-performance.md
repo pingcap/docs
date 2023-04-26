@@ -5,7 +5,7 @@ summary: Learn how to analyze and tune performance of your TiDB Cloud cluster.
 
 # パフォーマンスの分析と調整 {#analyze-and-tune-performance}
 
-TiDB Cloudは、パフォーマンスを分析するために[ステートメント分析](#statement-analysis) 、 [スロークエリ](#slow-query) 、および[キー ビジュアライザー](#key-visualizer)を提供します。
+TiDB Cloud は、パフォーマンスを分析するために[ステートメント分析](#statement-analysis) 、 [スロークエリ](#slow-query) 、および[キー ビジュアライザー](#key-visualizer)を提供します。
 
 -   ステートメント分析を使用すると、ページでの SQL の実行を直接観察し、システム テーブルを照会せずにパフォーマンスの問題を簡単に特定できます。
 
@@ -13,13 +13,21 @@ TiDB Cloudは、パフォーマンスを分析するために[ステートメン
 
 -   Key Visualizer は、TiDB のデータ アクセス パターンとデータ ホットスポットを観察するのに役立ちます。
 
+> **ノート：**
+>
+> 現在、 **Statement Analysis**と<strong>Key Visualizer</strong>は[Serverless Tierクラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)では利用できません。
+
 ## ステートメント分析 {#statement-analysis}
+
+> **ノート：**
+>
+> ステートメント分析は[Dedicated Tierクラスター](/tidb-cloud/select-cluster-tier.md#dedicated-tier)でのみ使用できます。
 
 ステートメント分析を使用するには、次の手順を実行します。
 
-1.  クラスターの [ **SQL 診断**] タブに移動します。
+1.  クラスターの**[SQL 診断]**タブに移動します。
 
-2.  [ **SQL ステートメント**] タブをクリックします。
+2.  **[SQL ステートメント]**タブをクリックします。
 
 3.  時間間隔ボックスで分析する期間を選択します。その後、この期間のすべてのデータベースの SQL ステートメントの実行統計を取得できます。
 
@@ -37,9 +45,9 @@ TiDB Cloudは、パフォーマンスを分析するために[ステートメン
 
 クラスター内のスロー クエリを表示するには、次の手順を実行します。
 
-1.  クラスターの [ **SQL 診断**] タブに移動します。
+1.  クラスターの**[SQL 診断]**タブに移動します。
 
-2.  [**スロー クエリ**] タブをクリックします。
+2.  **[スロー クエリ]**タブをクリックします。
 
 3.  リスト内のスロー クエリをクリックすると、詳細な実行情報が表示されます。
 
@@ -53,11 +61,15 @@ TiDB Cloudは、パフォーマンスを分析するために[ステートメン
 
 ## キー ビジュアライザー {#key-visualizer}
 
+> **ノート：**
+>
+> Key Visualizer は[Dedicated Tierクラスター](/tidb-cloud/select-cluster-tier.md#dedicated-tier)のみ使用できます。
+
 主要な分析を表示するには、次の手順を実行します。
 
-1.  クラスターの [ **SQL 診断**] タブに移動します。
+1.  クラスターの**[SQL 診断]**タブに移動します。
 
-2.  [**キー ビジュアライザー**] タブをクリックします。
+2.  **[キー ビジュアライザー]**タブをクリックします。
 
 ![Key Visualizer](/media/tidb-cloud/key-visualizer.png)
 

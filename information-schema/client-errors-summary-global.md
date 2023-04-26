@@ -1,6 +1,6 @@
 ---
 title: CLIENT_ERRORS_SUMMARY_GLOBAL
-summary: Learn about the `CLIENT_ERRORS_SUMMARY_GLOBAL` information_schema table.
+summary: Learn about the `CLIENT_ERRORS_SUMMARY_GLOBAL` INFORMATION_SCHEMA table.
 ---
 
 # CLIENT_ERRORS_SUMMARY_GLOBAL {#client-errors-summary-global}
@@ -13,16 +13,16 @@ summary: Learn about the `CLIENT_ERRORS_SUMMARY_GLOBAL` information_schema table
 -   許可エラー。
 -   テーブルが存在しません。
 
-クライアント エラーは、MySQLサーバープロトコルを介してクライアントに返され、そこでアプリケーションは適切なアクションを実行することが期待されます。 `information_schema` 。表`CLIENT_ERRORS_SUMMARY_GLOBAL`は概要を示したもので、アプリケーションが TiDBサーバーから返されたエラーを正しく処理 (またはログ記録) していない場合に役立ちます。
+クライアント エラーは、MySQLサーバープロトコルを介してクライアントに返され、そこでアプリケーションは適切なアクションを実行することが期待されます。 `INFORMATION_SCHEMA.CLIENT_ERRORS_SUMMARY_GLOBAL`表は高レベルの概要を提供し、アプリケーションが TiDBサーバーによって返されたエラーを正しく処理 (またはログ記録) していないシナリオで役立ちます。
 
 集計されたカウントは、ステートメント`FLUSH CLIENT_ERRORS_SUMMARY`でリセットできます。要約は各 TiDBサーバーにローカルであり、メモリにのみ保持されます。 TiDBサーバーが再起動すると、サマリーは失われます。
 
-{{< copyable "" >}}
-
 ```sql
-USE information_schema;
+USE INFORMATION_SCHEMA;
 DESC CLIENT_ERRORS_SUMMARY_GLOBAL;
 ```
+
+出力は次のとおりです。
 
 ```sql
 +---------------+---------------+------+------+---------+-------+
@@ -49,14 +49,14 @@ DESC CLIENT_ERRORS_SUMMARY_GLOBAL;
 
 次の例は、ローカル TiDBサーバーに接続するときに生成される警告を示しています。サマリーは`FLUSH CLIENT_ERRORS_SUMMARY`を実行した後にリセットされます:
 
-{{< copyable "" >}}
-
 ```sql
 SELECT 0/0;
 SELECT * FROM CLIENT_ERRORS_SUMMARY_GLOBAL;
 FLUSH CLIENT_ERRORS_SUMMARY;
 SELECT * FROM CLIENT_ERRORS_SUMMARY_GLOBAL;
 ```
+
+出力は次のとおりです。
 
 ```sql
 +-----+

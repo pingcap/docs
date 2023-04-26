@@ -25,13 +25,13 @@ summary: View the execution details of a single SQL statement in TiDB Dashboard.
 
 ### 基本タブ {#basic-tab}
 
-SQL 実行の基本情報には、テーブル名、インデックス名、実行回数、および合計レイテンシーが含まれます。 [**説明**] 列には、各フィールドの詳細な説明が表示されます。
+SQL 実行の基本情報には、テーブル名、インデックス名、実行回数、および合計レイテンシーが含まれます。 **[説明]**列には、各フィールドの詳細な説明が表示されます。
 
 ![Basic information](/media/dashboard/dashboard-statement-plans-basic.png)
 
 ### 時間タブ {#time-tab}
 
-[**時間**] タブをクリックすると、実行計画の各段階の継続時間を確認できます。
+**[時間]**タブをクリックすると、実行計画の各段階の継続時間を確認できます。
 
 > **ノート：**
 >
@@ -47,13 +47,13 @@ SQL 実行の基本情報には、テーブル名、インデックス名、実�
 
 ### トランザクションタブ {#transaction-tab}
 
-[**トランザクション**] タブをクリックすると、平均書き込みキー数や最大書き込みキー数など、実行計画やトランザクションに関する情報が表示されます。
+**[トランザクション]**タブをクリックすると、平均書き込みキー数や最大書き込みキー数など、実行計画やトランザクションに関する情報が表示されます。
 
 ![Transaction](/media/dashboard/dashboard-statement-plans-transaction.png)
 
 ### スロークエリタブ {#slow-query-tab}
 
-実行プランの実行が遅すぎる場合、関連するスロー クエリ レコードが [**スロー クエリ**] タブに表示されます。
+実行プランの実行が遅すぎる場合、関連するスロー クエリ レコードが**[スロー クエリ]**タブに表示されます。
 
 ![Slow Query](/media/dashboard/dashboard-statement-plans-slow-queries.png)
 

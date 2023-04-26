@@ -5,7 +5,7 @@ summary: Introduce the `distinct` optimization in the TiDB query optimizer.
 
 # クエリの最適化 {#distinct-optimization}
 
-このドキュメントでは、集計関数の`SELECT DISTINCT`と`DISTINCT`を含む、TiDB クエリ オプティマイザの`distinct`の最適化を紹介します。
+このドキュメントでは、集計関数の`SELECT DISTINCT`と`DISTINCT`を含む、TiDB クエリ オプティマイザの`distinct`最適化を紹介します。
 
 ## <code>SELECT</code>ステートメントの<code>DISTINCT</code>修飾子 {#code-distinct-code-modifier-in-code-select-code-statements}
 
@@ -39,7 +39,7 @@ TiDB の[`tidb_opt_distinct_agg_push_down`](/system-variables.md#tidb_opt_distin
 
 </CustomContent>
 
-この最適化の例として、次のクエリを取り上げます。 `tidb_opt_distinct_agg_push_down`はデフォルトで無効になっています。これは、集計関数が TiDBレイヤーで実行されることを意味します。値を`1`に設定してこの最適化を有効にした後、 `count(distinct a)`の`distinct a`の部分が TiKV またはTiFlash コプロセッサーにプッシュされます。TiKV コプロセッサーの列 a の重複した値を削除する HashAgg_5 があります。これにより、TiDBレイヤーで`HashAgg_8`の計算オーバーヘッドが削減される可能性があります。
+この最適化の例として、次のクエリを取り上げます。 `tidb_opt_distinct_agg_push_down`はデフォルトで無効になっています。これは、集計関数がTiDBレイヤーで実行されることを意味します。値を`1`に設定してこの最適化を有効にした後、 `count(distinct a)`の`distinct a`部分が TiKV またはTiFlash コプロセッサーにプッシュされます。TiKV コプロセッサーの列 a の重複した値を削除する HashAgg_5 があります。これにより、TiDBレイヤーで`HashAgg_8`の計算オーバーヘッドが削減される可能性があります。
 
 ```sql
 mysql> desc select count(distinct a) from test.t;

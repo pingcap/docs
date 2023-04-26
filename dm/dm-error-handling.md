@@ -45,7 +45,7 @@ summary: Learn about the error system and how to handle common errors when you u
 
 -   `scope` : エラー範囲。
 
-    エラーが発生したときに、DM オブジェクトのスコープとソースをマークするために使用されます。 `scope`には、 `not-set` 、 `upstream` 、 `downstream` 、および`internal`の 4 つのタイプが含まれます。
+    エラーが発生したときに、DM オブジェクトのスコープとソースをマークするために使用されます。 `scope` `not-set` 、 `upstream` 、 `downstream` 、および`internal`の 4 つのタイプが含まれます。
 
     エラーのロジックがアップストリーム データベースとダウンストリーム データベースの間の要求に直接関係している場合、スコープは`upstream`または`downstream`に設定されます。それ以外の場合、現在は`internal`に設定されています。
 
@@ -59,7 +59,7 @@ summary: Learn about the error system and how to handle common errors when you u
 
 -   `message` : エラーの説明。
 
-    エラーの詳細な説明。エラー コール チェーンのエラー メッセージのすべての追加レイヤーをラップして格納するには、 [エラー。ラップ](https://godoc.org/github.com/pkg/errors#hdr-Adding_context_to_an_error)モードが採用されます。最外層でラップされたメッセージの説明は DM のエラーを示し、最レイヤーでラップされたメッセージの説明はエラーのソースを示します。
+    エラーの詳細な説明。エラー コール チェーンのエラー メッセージのすべての追加レイヤーをラップして格納するには、 [エラー。ラップ](https://godoc.org/github.com/pkg/errors#hdr-Adding_context_to_an_error)モードが採用されます。レイヤーでラップされたメッセージの説明は DM のエラーを示し、最レイヤーでラップされたメッセージの説明はエラーのソースを示します。
 
 -   `workaround` : エラー処理方法 (オプション)
 
@@ -79,7 +79,7 @@ DM の実行中にエラーが発生した場合は、次の手順に従って�
 
 2.  エラーに関連するログ ファイルを確認します。ログ ファイルは、DM-master ノードと DM-worker ノードにあります。エラーに関する重要な情報を取得するには、 [エラーシステム](#error-system)を参照してください。次に、 [一般的なエラーを処理する](#handle-common-errors)セクションを確認して解決策を見つけます。
 
-3.  エラーがこのドキュメントでカバーされておらず、ログを確認したりメトリックを監視したりしても問題を解決できない場合は、R&amp;D に連絡できます。
+3.  エラーがこのドキュメントでカバーされておらず、ログを確認したりメトリックを監視したりしても問題を解決できない場合は、PingCAP またはコミュニティから[支持を得ます](/support.md) .
 
 4.  エラーが解決したら、dmctl を使用してタスクを再開します。
 
@@ -96,8 +96,8 @@ DM の実行中にエラーが発生した場合は、次の手順に従って�
 | エラーコード       | エラーの説明                                                                                                                                                                         | 処理する方法                                                                                                                                                                                                                                                                        |
 | :----------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `code=10001` | データベースの異常動作。                                                                                                                                                                   | エラー メッセージとエラー スタックをさらに分析します。                                                                                                                                                                                                                                                  |
-| `code=10002` | 基になるデータベースからの`bad connection`のエラー。これは通常、DM とダウンストリームの TiDB インスタンス間の接続が異常であり (ネットワーク障害または TiDB の再起動が原因である可能性があります)、現在要求されているデータが TiDB に送信されていないことを示しています。                       | DM は、このようなエラーの自動回復を提供します。リカバリが長時間成功しない場合は、ネットワークまたは TiDB のステータスを確認してください。                                                                                                                                                                                                     |
-| `code=10003` | 基になるデータベースからの`invalid connection`のエラー。これは通常、DM とダウンストリームの TiDB インスタンス間の接続が異常であり (ネットワーク障害または TiDB の再起動が原因である可能性があります)、現在要求されているデータの一部が TiDB に送信されていることを示しています。                 | DM は、このようなエラーの自動回復を提供します。リカバリが長時間成功しない場合は、エラー メッセージをさらに確認し、実際の状況に基づいて情報を分析します。                                                                                                                                                                                                |
+| `code=10002` | 基になるデータベースからの`bad connection`エラー。これは通常、DM とダウンストリームの TiDB インスタンス間の接続が異常であり (ネットワーク障害または TiDB の再起動が原因である可能性があります)、現在要求されているデータが TiDB に送信されていないことを示しています。                        | DM は、このようなエラーの自動回復を提供します。リカバリが長時間成功しない場合は、ネットワークまたは TiDB のステータスを確認してください。                                                                                                                                                                                                     |
+| `code=10003` | 基になるデータベースからの`invalid connection`エラー。これは通常、DM とダウンストリームの TiDB インスタンス間の接続が異常であり (ネットワーク障害または TiDB の再起動が原因である可能性があります)、現在要求されているデータの一部が TiDB に送信されていることを示しています。                  | DM は、このようなエラーの自動回復を提供します。リカバリが長時間成功しない場合は、エラー メッセージをさらに確認し、実際の状況に基づいて情報を分析します。                                                                                                                                                                                                |
 | `code=10005` | `QUERY`型SQL文実行時に発生します。                                                                                                                                                         |                                                                                                                                                                                                                                                                               |
 | `code=10006` | `EXECUTE`タイプの SQL ステートメント (DDL ステートメントおよび`INSERT` 、 `UPDATE`または`DELETE`タイプの DML ステートメントを含む) を実行するときに発生します。詳細なエラー情報については、通常、データベース操作に対して返されるエラー コードとエラー情報を含むエラー メッセージを確認してください。 |                                                                                                                                                                                                                                                                               |
 |              |                                                                                                                                                                                |                                                                                                                                                                                                                                                                               |
@@ -130,39 +130,39 @@ DM には、移行タスクでデータを下流に同時に移行する機能�
 
 DM の現在のバージョンでは、エラーが発生すると自動的に再試行されます。自動再試行をサポートしていない以前のバージョンを使用している場合は、 `stop-task`コマンドを実行してタスクを停止できます。その後、 `start-task`を実行してタスクを再開します。
 
-### リレー ユニットが<code>event from * in * diff from passed-in event *</code>スローするか、バイナリ ログの<code>get binlog error ERROR 1236 (HY000)</code>や<code>binlog checksum mismatch, data may be corrupted</code>などのバイナリ ログ エラーの取得または解析に失敗して移行タスクが中断されます。 {#the-relay-unit-throws-error-code-event-from-in-diff-from-passed-in-event-code-or-a-migration-task-is-interrupted-with-failing-to-get-or-parse-binlog-errors-like-code-get-binlog-error-error-1236-hy000-code-and-code-binlog-checksum-mismatch-data-may-be-corrupted-code-returned}
+### リレー ユニットが<code>event from * in * diff from passed-in event *</code>スローするか、 <code>get binlog error ERROR 1236 (HY000)</code>や<code>binlog checksum mismatch, data may be corrupted</code>などのbinlogエラーの取得または解析に失敗して移行タスクが中断されます。 {#the-relay-unit-throws-error-code-event-from-in-diff-from-passed-in-event-code-or-a-migration-task-is-interrupted-with-failing-to-get-or-parse-binlog-errors-like-code-get-binlog-error-error-1236-hy000-code-and-code-binlog-checksum-mismatch-data-may-be-corrupted-code-returned}
 
 #### 理由 {#reason}
 
-リレー ログのプルまたは増分レプリケーションの DM プロセス中に、上流の binlog ファイルのサイズが**4 GB**を超えると、この 2 つのエラーが発生する可能性があります。
+リレー ログのプルまたは増分レプリケーションの DM プロセス中に、上流のbinlogファイルのサイズが**4 GB**を超えると、この 2 つのエラーが発生する可能性があります。
 
-**原因:**リレー ログを書き込むとき、DM は binlog の位置と binlog ファイルのサイズに基づいてイベント検証を実行し、レプリケートされた binlog の位置をチェックポイントとして保存する必要があります。ただし、公式の MySQL は`uint32`を使用してバイナリログの位置を保存します。これは、binlog ファイルの binlog 位置が 4 GB を超えてオーバーフローし、上記のエラーが発生することを意味します。
+**原因:**リレー ログを書き込むとき、DM はbinlog の位置とbinlogファイルのサイズに基づいてイベント検証を実行し、レプリケートされたbinlog の位置をチェックポイントとして保存する必要があります。ただし、公式の MySQL は`uint32`を使用してbinlogの位置を保存します。これは、 binlogファイルのbinlog位置が 4 GB を超えてオーバーフローし、上記のエラーが発生することを意味します。
 
 #### ソリューション {#solutions}
 
 リレー ユニットの場合は、次の解決策を使用して移行を手動で回復します。
 
-1.  エラーが発生した時点で、対応する binlog ファイルのサイズが 4GB を超えていることをアップストリームで特定します。
+1.  エラーが発生した時点で、対応するbinlogファイルのサイズが 4GB を超えていることをアップストリームで特定します。
 
 2.  DM ワーカーを停止します。
 
-3.  アップストリームの対応する binlog ファイルをリレー ログ ファイルとしてリレー ログ ディレクトリにコピーします。
+3.  アップストリームの対応するbinlogファイルをリレー ログ ファイルとしてリレー ログ ディレクトリにコピーします。
 
-4.  リレー ログ ディレクトリで、対応する`relay.meta`ファイルを更新して、次の binlog ファイルからプルします。 DM-worker に`enable_gtid` ～ `true`を指定した場合は、 `relay.meta`ファイルの更新時に次の binlog ファイルに対応する GTID を変更する必要があります。それ以外の場合、GTID を変更する必要はありません。
+4.  リレー ログ ディレクトリで、対応する`relay.meta`ファイルを更新して、次のbinlogファイルからプルします。 DM-worker に`enable_gtid` ～ `true`指定した場合は、 `relay.meta`ファイルの更新時に次のbinlogファイルに対応する GTID を変更する必要があります。それ以外の場合、GTID を変更する必要はありません。
 
     例: エラーが発生した場合、 `binlog-name = "mysql-bin.004451"`と`binlog-pos = 2453` .それらをそれぞれ`binlog-name = "mysql-bin.004452"`と`binlog-pos = 4`に更新し、 `binlog-gtid`を`f0e914ef-54cf-11e7-813d-6c92bf2fa791:1-138218058`に更新します。
 
 5.  DM-worker を再起動します。
 
-バイナリログ レプリケーション処理ユニットの場合、次のソリューションを使用して移行を手動で回復します。
+binlogレプリケーション処理ユニットの場合、次のソリューションを使用して移行を手動で回復します。
 
-1.  エラーが発生した時点で、対応する binlog ファイルのサイズが 4GB を超えていることをアップストリームで特定します。
+1.  エラーが発生した時点で、対応するbinlogファイルのサイズが 4GB を超えていることをアップストリームで特定します。
 
 2.  `stop-task`を使用して移行タスクを停止します。
 
-3.  グローバル チェックポイントおよびダウンストリーム`dm_meta`データベースの各テーブル チェックポイントの`binlog_name`を、エラーが発生した binlog ファイルの名前に更新します。 `binlog_pos`を、移行が完了した有効な位置の値 (4 など) に更新します。
+3.  グローバル チェックポイントおよびダウンストリーム`dm_meta`データベースの各テーブル チェックポイントの`binlog_name`を、エラーが発生したbinlogファイルの名前に更新します。 `binlog_pos`移行が完了した有効な位置の値 (4 など) に更新します。
 
-    例: エラーのあるタスクの名前は`dm_test` 、対応する s `source-id`は`replica-1` 、対応する binlog ファイルは`mysql-bin|000001.004451`です。次のコマンドを実行します。
+    例: エラーのあるタスクの名前は`dm_test` 、対応する s `source-id`は`replica-1` 、対応するbinlogファイルは`mysql-bin|000001.004451`です。次のコマンドを実行します。
 
     {{< copyable "" >}}
 
@@ -174,19 +174,19 @@ DM の現在のバージョンでは、エラーが発生すると自動的に�
 
 5.  `start-task`を使用して移行タスクを開始します。
 
-6.  `query-status`を使用して、移行タスクのステータスをビューします。元のエラー トリガー リレー ログ ファイルの移行が完了したら、 `safe-mode`を元の値に復元し、移行タスクを再開できます。
+6.  `query-status`を使用して、移行タスクのステータスをビュー。元のエラー トリガー リレー ログ ファイルの移行が完了したら、 `safe-mode`元の値に復元し、移行タスクを再開できます。
 
-### <code>Access denied for user &#39;root&#39;@&#39;172.31.43.27&#39; (using password: YES)</code>は、タスクを照会するか、ログを確認すると表示されます {#code-access-denied-for-user-root-172-31-43-27-using-password-yes-code-shows-when-you-query-the-task-or-check-the-log}
+### <code>Access denied for user &#39;root&#39;@&#39;172.31.43.27&#39; (using password: YES)</code>タスクを照会するか、ログを確認すると表示されます {#code-access-denied-for-user-root-172-31-43-27-using-password-yes-code-shows-when-you-query-the-task-or-check-the-log}
 
 すべての DM 構成ファイルのデータベース関連のパスワードについては、 `dmctl`で暗号化されたパスワードを使用することをお勧めします。データベースのパスワードが空の場合、暗号化する必要はありません。平文パスワードを暗号化する方法については、 [dmctl を使用してデータベース パスワードを暗号化する](/dm/dm-manage-source.md#encrypt-the-database-password)を参照してください。
 
-さらに、アップストリーム データベースとダウンストリーム データベースのユーザーには、対応する読み取り権限と書き込み権限が必要です。データ移行タスクの開始中にデータ移行も[対応する権限を自動的に事前チェックします](/dm/dm-precheck.md)になります。
+さらに、アップストリーム データベースとダウンストリーム データベースのユーザーには、対応する読み取り権限と書き込み権限が必要です。データ移行タスクの開始中にデータ移行も[対応する権限を自動的に事前チェックします](/dm/dm-precheck.md)なります。
 
-### <code>load</code>処理ユニットは、 <code>packet for query is too large. Try adjusting the &#39;max_allowed_packet&#39; variable</code> {#the-code-load-code-processing-unit-reports-the-error-code-packet-for-query-is-too-large-try-adjusting-the-max-allowed-packet-variable-code}
+### <code>load</code>処理ユニットは<code>packet for query is too large. Try adjusting the &#39;max_allowed_packet&#39; variable</code> {#the-code-load-code-processing-unit-reports-the-error-code-packet-for-query-is-too-large-try-adjusting-the-max-allowed-packet-variable-code}
 
 #### 理由 {#reasons}
 
--   MySQL クライアントと MySQL/TiDBサーバーの両方に`max_allowed_packet`のクォータ制限があります。いずれかの`max_allowed_packet`が制限を超えると、クライアントはエラー メッセージを受け取ります。現在、DM および TiDBサーバーの最新バージョンでは、デフォルト値の`max_allowed_packet`は`64M`です。
+-   MySQL クライアントと MySQL/TiDBサーバーの両方に`max_allowed_packet`のクォータ制限があります。いずれかの`max_allowed_packet`制限を超えると、クライアントはエラー メッセージを受け取ります。現在、DM および TiDBサーバーの最新バージョンでは、デフォルト値の`max_allowed_packet`は`64M`です。
 
 -   DM のフル データ インポート処理ユニットは、DM の Dump 処理ユニットによってエクスポートされた SQL ファイルの分割をサポートしていません。
 
@@ -196,7 +196,7 @@ DM の現在のバージョンでは、エラーが発生すると自動的に�
 
     デフォルトの`--statement-size`設定によれば、Dump 処理ユニットによって生成されるデフォルトのサイズ`Insert Statement`は約`1M`です。このデフォルト設定では、ほとんどの場合、ロード処理ユニットはエラー`packet for query is too large. Try adjusting the 'max_allowed_packet' variable`を報告しません。
 
-    データ ダンプ中に次の`WARN`のログを受け取る場合があります。この`WARN`ログは、ダンプ プロセスには影響しません。これは、幅の広いテーブルがダンプされることを意味するだけです。
+    データ ダンプ中に次の`WARN`ログを受け取る場合があります。この`WARN`ログは、ダンプ プロセスには影響しません。これは、幅の広いテーブルがダンプされることを意味するだけです。
 
     ```
     Row bigger than statement_size for xxx

@@ -27,10 +27,10 @@ TiDB バージョン: 3.0.15
 
 -   TiDB
 
-    -   ディープ コピーを使用して、 `enum`型と`set`型のデータを`Hash`集計関数にコピーします。正確性の問題を修正する[#16890](https://github.com/pingcap/tidb/pull/16890)
+    -   ディープ コピーを使用して、 `enum`と`set`型のデータを`Hash`集計関数にコピーします。正確性の問題を修正する[#16890](https://github.com/pingcap/tidb/pull/16890)
     -   整数オーバーフローの処理ロジックが間違っているため、 `PointGet`が誤った結果を返す問題を修正[#16753](https://github.com/pingcap/tidb/pull/16753)
     -   クエリ述語[#16557](https://github.com/pingcap/tidb/pull/16557)で`CHAR()`関数が使用されている場合に、処理ロジックが正しくないために結果が正しくない問題を修正します。
-    -   `IsTrue`と`IsFalse`関数の記憶レイヤーと計算レイヤーで結果が一致しない問題を修正[#16627](https://github.com/pingcap/tidb/pull/16627)
+    -   `IsTrue`と`IsFalse`関数のstorageレイヤーと計算レイヤーで結果が一致しない問題を修正[#16627](https://github.com/pingcap/tidb/pull/16627)
     -   `case when` [#16993](https://github.com/pingcap/tidb/pull/16993)など、一部の式の誤った`NotNull`フラグを修正します。
     -   一部のシナリオでオプティマイザーが`TableDual`の物理計画を見つけられない問題を修正します[#17014](https://github.com/pingcap/tidb/pull/17014)
     -   ハッシュパーティションテーブルでパーティション選択の構文が正しく反映されない問題を修正します[#17051](https://github.com/pingcap/tidb/pull/17051)

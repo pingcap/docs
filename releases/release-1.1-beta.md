@@ -13,7 +13,7 @@ title: TiDB 1.1 Beta Release Notes
 -   テーブル作成時間の表示を`information_schema`でサポート
 -   `MaxOneRow`演算子を含むクエリを最適化する
 -   Join によって生成される中間結果セットのサイズを構成して、Join によって使用されるメモリをさらに削減します。
--   `tidb_config`のセッション変数を追加して、現在の TiDB 構成を出力します
+-   `tidb_config`セッション変数を追加して、現在の TiDB 構成を出力します
 -   `Union`および`Index Join`オペレーターのpanicの問題を修正します。
 -   一部のシナリオでの`Sort Merge Join`演算子の間違った結果の問題を修正
 -   `Show Index`ステートメントで追加中のインデックスが表示される問題を修正

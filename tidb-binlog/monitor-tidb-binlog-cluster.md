@@ -3,46 +3,46 @@ title: TiDB Binlog Monitoring
 summary: Learn how to monitor the cluster version of TiDB Binlog.
 ---
 
-# Binlogバイナリログ監視 {#tidb-binlog-monitoring}
+# TiDBBinlog監視 {#tidb-binlog-monitoring}
 
-TiDB Binlogを正常にデプロイしたら、Grafana Web (デフォルトのアドレス: [http://grafana_ip:3000](http://grafana_ip:3000) 、デフォルトのアカウント: admin、パスワード: admin) にアクセスして、 PumpとDrainer とDrainer の状態を確認できます。
+TiDB Binlogを正常にデプロイしたら、Grafana Web (デフォルトのアドレス: [http://grafana_ip:3000](http://grafana_ip:3000) 、デフォルトのアカウント: admin、パスワード: admin) にアクセスして、 PumpとDrainerの状態を確認できます。
 
 ## 指標のモニタリング {#monitoring-metrics}
 
-TiDB Binlogは、 PumpとDrainer とDrainer の 2 つのコンポーネントで構成されています。このセクションでは、 PumpとDrainerの監視メトリクスを示します。
+TiDB Binlog は、 PumpとDrainerの 2 つのコンポーネントで構成されています。このセクションでは、 PumpとDrainerの監視メトリクスを示します。
 
 ### Pump監視指標 {#pump-monitoring-metrics}
 
 Pumpモニタリング メトリックを理解するには、次の表を確認してください。
 
-| Pump監視指標                  | 説明                                                                                                |
-| ------------------------- | ------------------------------------------------------------------------------------------------- |
-| 収納サイズ                     | 合計ディスク容量 (容量) と使用可能なディスク容量 (使用可能) を記録します。                                                         |
-| メタデータ                     | 各Pumpノードが削除できるバイナリログの最大の TSO ( `gc_tso` ) と、保存されたバイナリ ログの最大のコミット TSO ( `max_commit_tso` ) を記録します。 |
-| インスタンスごとにBinlog QPS を書き込む | 各Pumpノードが受信した binlog リクエストの書き込みの QPS を表示します                                                       |
-| Binlogレイテンシーの書き込み         | バイナリログを書き込む各Pumpノードのレイテンシーを記録します。                                                                 |
-| ストレージ書き込みBinlogサイズ        | Pumpによって書き込まれた binlog データのサイズを表示します                                                               |
-| ストレージ書き込みBinlogレイテンシ      | Pumpストレージモジュールのバイナリログ書き込みのレイテンシーを記録します                                                            |
-| タイプPump保管エラー              | エラーの種類に基づいてカウントされた、 Pumpで発生したエラーの数を記録します                                                          |
-| TiKV のクエリ                 | Pumpが TiKV を介してトランザクション ステータスを照会する回数                                                              |
+| Pump監視指標                  | 説明                                                                                               |
+| ------------------------- | ------------------------------------------------------------------------------------------------ |
+| 収納サイズ                     | 合計ディスク容量 (容量) と使用可能なディスク容量 (使用可能) を記録します。                                                        |
+| メタデータ                     | 各Pumpノードが削除できるbinlogの最大の TSO ( `gc_tso` ) と、保存されたbinlogの最大のコミット TSO ( `max_commit_tso` ) を記録します。 |
+| インスタンスごとにBinlog QPS を書き込む | 各Pumpノードが受信したbinlogリクエストの書き込みの QPS を表示します                                                        |
+| Binlogレイテンシーの書き込み         | binlogを書き込む各Pumpノードのレイテンシーを記録します。                                                                |
+| ストレージ書き込みBinlogサイズ        | Pumpによって書き込まれたbinlogデータのサイズを表示します                                                                |
+| ストレージ書き込みBinlogレイテンシ      | Pumpstorageモジュールのbinlog書き込みのレイテンシーを記録します                                                         |
+| タイプ別Pump保管エラー             | エラーの種類に基づいてカウントされた、 Pumpで発生したエラーの数を記録します                                                         |
+| TiKV のクエリ                 | Pump がTiKV を介してトランザクション ステータスを照会する回数                                                             |
 
 ### Drainerモニタリング指標 {#drainer-monitoring-metrics}
 
 Drainerモニタリング メトリックを理解するには、次の表を確認してください。
 
-| Drainerモニタリング指標               | 説明                                                                                                                                                            |
-| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| チェックポイント TSO                  | Drainerがすでにダウンストリームにレプリケートしたバイナリログの最大 TSO 時間を示します。現在の時刻を使用してバイナリログのタイムスタンプを差し引くことで、ラグを取得できます。ただし、タイムスタンプはマスター クラスタの PD によって割り当てられ、PD の時刻によって決定されることに注意してください。 |
-| Pumpハンドル TSO                  | Drainer が各Pumpノードから取得したDrainerファイルの中で最大の TSO 時間を記録します                                                                                                         |
-| Pump NodeID によるBinlog QPS のプル | Drainer が各PumpノードからDrainerを取得したときの QPS を表示します                                                                                                                 |
-| Pumpによる 95%の Binlogリーチ期間      | binlog がPumpに書き込まれてから Drainer がDrainerを取得するまでの遅延を記録します。                                                                                                       |
-| タイプ別エラー                       | Drainerで発生したエラーの数を、エラーの種類に基づいてカウントして表示します                                                                                                                     |
-| SQL クエリ時間                     | Drainerがダウンストリームで SQL ステートメントを実行するのにかかる時間を記録します                                                                                                               |
-| Drainerイベント                   | 「ddl」、「insert」、「delete」、「update」、「flush」、「savepoint」など、さまざまなタイプのイベントの数を表示します                                                                                  |
-| 実行時間                          | binlog をダウンストリーム同期モジュールに書き込むのにかかる時間を記録します                                                                                                                     |
-| 95%のBinlogサイズ                 | Drainer が各Pumpノードから取得するDrainerデータのサイズを表示します                                                                                                                   |
-| DDL ジョブ数                      | Drainerによって処理された DDL ステートメントの数を記録します                                                                                                                          |
-| キューサイズ                        | ワーク キューのサイズをDrainerに記録する                                                                                                                                      |
+| Drainerモニタリング指標               | 説明                                                                                                                                                             |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| チェックポイント TSO                  | Drainer がすでにダウンストリームにレプリケートしたbinlogの最大 TSO 時間を示します。現在の時刻を使用してbinlogのタイムスタンプを差し引くことで、ラグを取得できます。ただし、タイムスタンプはマスター クラスタの PD によって割り当てられ、PD の時刻によって決定されることに注意してください。 |
+| Pumpハンドル TSO                  | Drainer が各Pumpノードから取得したbinlogファイルの中で最大の TSO 時間を記録します                                                                                                           |
+| Pump NodeID によるBinlog QPS のプル | Drainer が各Pumpノードからbinlog を取得したときの QPS を表示します                                                                                                                  |
+| Pumpによる 95% のBinlogリーチ期間      | binlogがPumpに書き込まれてからDrainerがbinlogを取得するまでの遅延を記録します。                                                                                                            |
+| タイプ別エラー                       | Drainerで発生したエラーの数を、エラーの種類に基づいてカウントして表示します                                                                                                                      |
+| SQL クエリ時間                     | Drainerがダウンストリームで SQL ステートメントを実行するのにかかる時間を記録します                                                                                                                |
+| Drainerイベント                   | 「ddl」、「insert」、「delete」、「update」、「flush」、「savepoint」など、さまざまなタイプのイベントの数を表示します                                                                                   |
+| 実行時間                          | binlog をダウンストリーム同期モジュールに書き込むのにかかる時間を記録します                                                                                                                      |
+| 95% のBinlogサイズ                | Drainer が各Pumpノードから取得するbinlogデータのサイズを表示します                                                                                                                     |
+| DDL ジョブ数                      | Drainerによって処理された DDL ステートメントの数を記録します                                                                                                                           |
+| キューサイズ                        | ワーク キューのサイズをDrainerに記録する                                                                                                                                       |
 
 ## アラート ルール {#alert-rules}
 
@@ -60,11 +60,11 @@ Drainerモニタリング メトリックを理解するには、次の表を確
 
 -   説明：
 
-    Pumpはバイナリログ データをローカル ストレージに書き込むことができません。
+    Pumpはbinlogデータをローカルstorageに書き込むことができません。
 
 -   解決：
 
-    `pump_storage_error`の監視に異常がないか確認し、 Pumpのログを確認して原因を突き止めてください。
+    `pump_storage_error`監視に異常がないか確認し、 Pump のログを確認して原因を突き止めてください。
 
 ### 重大レベルのアラート {#critical-level-alerts}
 
@@ -88,10 +88,10 @@ Drainerモニタリング メトリックを理解するには、次の表を確
 
     -   Drainer `event`とDrainer `execute latency`に基づいて、ダウンストリームでデータをレプリケートするのが遅すぎるかどうかを確認します。
 
-        -   Drainer `execute time`が大きすぎる場合は、 Drainerがデプロイされたマシンとターゲット データベースがデプロイされたマシンの間のネットワーク帯域幅とレイテンシー時間、およびターゲット データベースの状態を確認します。
+        -   Drainer `execute time`が大きすぎる場合は、Drainer がDrainerされたマシンとターゲット データベースがデプロイされたマシンの間のネットワーク帯域幅とレイテンシー、およびターゲット データベースの状態を確認します。
         -   Drainer`execute time`が大きすぎず、Drainer`event`が小さすぎる場合は、 `work count`と`batch`を追加して再試行します。
 
-    -   上記の 2 つの解決策がうまくいかない場合は、 [support@pingcap.com](mailto:support@pingcap.com)にお問い合わせください。
+    -   上記の 2 つの解決策が機能しない場合は、PingCAP またはコミュニティから[支持を得ます](/support.md) 。
 
 ### 警告レベルのアラート {#warning-level-alerts}
 
@@ -105,12 +105,12 @@ Drainerモニタリング メトリックを理解するには、次の表を確
 
 -   説明：
 
-    Pumpが binlog を書き込む TiDB 要求を処理するのに時間がかかりすぎます。
+    Pump がbinlogを書き込む TiDB 要求を処理するには時間がかかりすぎます。
 
 -   解決：
 
     -   ディスク パフォーマンスのプレッシャーを確認し、 `node exported`でディスク パフォーマンスの監視を確認します。
-    -   `disk latency`と`util`の両方が低い場合は、 [support@pingcap.com](mailto:support@pingcap.com)に連絡してください。
+    -   `disk latency`と`util`両方が低い場合、PingCAP またはコミュニティからの[支持を得ます](/support.md) 。
 
 #### <code>binlog_pump_storage_write_binlog_duration_time_bucket</code> {#code-binlog-pump-storage-write-binlog-duration-time-bucket-code}
 
@@ -120,7 +120,7 @@ Drainerモニタリング メトリックを理解するには、次の表を確
 
 -   説明：
 
-    Pumpがローカル binlog をローカル ディスクに書き込むのにかかる時間。
+    Pump がローカルbinlog をローカル ディスクに書き込むのにかかる時間。
 
 -   解決：
 
@@ -138,7 +138,7 @@ Drainerモニタリング メトリックを理解するには、次の表を確
 
 -   解決：
 
-    Pump`gc_tso`が正常かどうかを確認します。そうでない場合は、 Pumpの GC 時間構成を調整するか、対応するPumpをオフラインにします。
+    Pump`gc_tso`が正常かどうかを確認します。そうでない場合は、 Pumpの GC 時間構成を調整するか、対応するPump をオフラインにします。
 
 #### <code>binlog_drainer_checkpoint_tso_no_change_for_1m</code> {#code-binlog-drainer-checkpoint-tso-no-change-for-1m-code}
 
@@ -162,7 +162,7 @@ Drainerモニタリング メトリックを理解するには、次の表を確
 
 -   説明：
 
-    Drainer がデータをDrainerにレプリケートするのにかかるトランザクション時間。大きすぎると、データのDrainerレプリケーションが影響を受けます。
+    Drainer がデータを TiDB にレプリケートするのにかかるトランザクション時間。大きすぎると、データのDrainerレプリケーションが影響を受けます。
 
 -   解決：
 

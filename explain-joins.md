@@ -70,7 +70,7 @@ EXPLAIN SELECT /*+ INL_JOIN(t1, t2) */ * FROM t1 INNER JOIN t2 ON t1.id = t2.t1_
 SELECT * FROM t1 INNER JOIN t2 ON t1.id=t2.t1_id WHERE t1.pad1 = 'value' and t2.pad1='value';
 ```
 
-内部結合操作では、TiDB は結合の並べ替えを実装し、最初に`t1`または`t2`にアクセスする可能性があります。 TiDB が`build`のステップを適用する最初のテーブルとして`t1`を選択すると仮定すると、TiDB はテーブルをプローブする前に述語`t1.col = 'value'`でフィルタリングできる`t2` 。述語`t2.col='value'`のフィルターは、テーブル`t2`の各プローブに適用されますが、これは他の結合方法よりも効率が悪い可能性があります。
+内部結合操作では、TiDB は結合の並べ替えを実装し、最初に`t1`または`t2`にアクセスする可能性があります。 TiDB が`build`ステップを適用する最初のテーブルとして`t1`を選択すると仮定すると、TiDB はテーブルをプローブする前に述語`t1.col = 'value'`でフィルタリングできる`t2` 。述語`t2.col='value'`のフィルターは、テーブル`t2`の各プローブに適用されますが、これは他の結合方法よりも効率が悪い可能性があります。
 
 インデックス結合は、ビルド側が小さく、プローブ側がインデックス済みで大きい場合に有効です。インデックス結合がハッシュ結合よりもパフォーマンスが悪く、SQL オプティマイザーによって選択されない次のクエリを検討してください。
 
@@ -169,7 +169,7 @@ EXPLAIN ANALYZE SELECT * FROM t1 INNER JOIN t2 ON t1.id = t2.t1_id WHERE t1.int_
 
 > **ノート：**
 >
-> 上記の例では、SQL オプティマイザーは、インデックス結合よりもパフォーマンスの悪いハッシュ結合プランを選択します。クエリの最適化は[NP完全問題](https://en.wikipedia.org/wiki/NP-completeness)であり、最適ではない計画が選択される可能性があります。これが頻繁なクエリである場合は、 [SQL計画管理](/sql-plan-management.md)を使用してヒントをクエリにバインドすることをお勧めします。これは、アプリケーションが TiDB に送信するクエリにヒントを挿入するよりも管理が容易になる可能性があります。
+> 上記の例では、SQL オプティマイザーは、インデックス結合よりもパフォーマンスの悪いハッシュ結合プランを選択します。クエリの最適化は[NP完全問題](https://en.wikipedia.org/wiki/NP-completeness)であり、最適ではない計画が選択される可能性があります。これが頻繁なクエリである場合は、 [SQL計画管理](/sql-plan-management.md)使用してヒントをクエリにバインドすることをお勧めします。これは、アプリケーションが TiDB に送信するクエリにヒントを挿入するよりも管理が容易になる可能性があります。
 
 ### インデックス結合のバリエーション {#variations-of-index-join}
 
@@ -219,7 +219,7 @@ EXPLAIN SELECT /*+ HASH_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 
 ### ランタイム統計 {#runtime-statistics}
 
-[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) (デフォルト値: 1 GB) を超え、 [`tidb_enable_tmp_storage_on_oom`](/system-variables.md#tidb_enable_tmp_storage_on_oom)の値が`ON` (デフォルト) の場合、TiDB は一時ストレージの使用を試み、ディスク上に`Build`演算子 (ハッシュ結合の一部として使用) を作成する可能性があります。メモリ使用量などのランタイム統計は、 `EXPLAIN ANALYZE`個の結果テーブルのうちの`execution info`個に記録されます。次の例は、 `tidb_mem_quota_query`に 1 GB (デフォルト) と 500 MB のクォータを指定した`EXPLAIN ANALYZE`の出力を示しています。 500 MB では、ディスクは一時ストレージに使用されます。
+[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) (デフォルト値: 1 GB) を超え、 [`tidb_enable_tmp_storage_on_oom`](/system-variables.md#tidb_enable_tmp_storage_on_oom)値が`ON` (デフォルト) の場合、TiDB は一時storageの使用を試み、ディスク上に`Build`演算子 (ハッシュ結合の一部として使用) を作成する可能性があります。メモリ使用量などのランタイム統計は、 `EXPLAIN ANALYZE`の結果テーブルのうちの`execution info`に記録されます。次の例は、 `tidb_mem_quota_query`に 1 GB (デフォルト) と 500 MB のクォータを指定した`EXPLAIN ANALYZE`の出力を示しています。 500 MB では、ディスクは一時storageに使用されます。
 
 ```sql
 EXPLAIN ANALYZE SELECT /*+ HASH_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
@@ -262,7 +262,7 @@ Query OK, 0 rows affected (0.00 sec)
 
 ## マージ ジョイン {#merge-join}
 
-マージ結合は、結合の両側がソートされた順序で読み取られる場合に適用される特別な種類の結合です。これは、*効率的なジッパー マージ*に似ていると言えます。結合の`Build`側と`Probe`側の両方でデータが読み取られるため、結合操作はストリーミング操作のように機能します。マージ結合は、ハッシュ結合よりもはるかに少ないメモリしか必要としませんが、並列には実行されません。
+マージ結合は、結合の両側がソートされた順序で読み取られる場合に適用される特別な種類の結合です。これは、*効率的なジッパー マージ*に似ていると言えます。結合の`Build`と`Probe`側の両方でデータが読み取られるため、結合操作はストリーミング操作のように機能します。マージ結合は、ハッシュ結合よりもはるかに少ないメモリしか必要としませんが、並列には実行されません。
 
 次に例を示します。
 

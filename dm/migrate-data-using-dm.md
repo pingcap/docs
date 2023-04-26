@@ -9,7 +9,7 @@ summary: Use the Data Migration tool to migrate the full data and the incrementa
 
 ## ステップ 1: DM クラスターをデプロイ {#step-1-deploy-the-dm-cluster}
 
-[TiUPを使用して DM クラスターをデプロイする](/dm/deploy-a-dm-cluster-using-tiup.md)におすすめです。トライアルまたはテスト用に[バイナリを使用して DM クラスターをデプロイする](/dm/deploy-a-dm-cluster-using-binary.md)を使用することもできます。
+[TiUPを使用して DM クラスターを展開する](/dm/deploy-a-dm-cluster-using-tiup.md)におすすめです。トライアルまたはテスト用に[バイナリを使用して DM クラスターを展開する](/dm/deploy-a-dm-cluster-using-binary.md)使用することもできます。
 
 > **ノート：**
 >
@@ -22,7 +22,7 @@ TiUPを使用して DM クラスターをデプロイすると、構成情報は
 
 -   DM クラスター内の関連コンポーネントの構成情報:
 
-    | 成分         | ホスト          | 港    |
+    | 成分         | ホスト          | ポート  |
     | ---------- | ------------ | ---- |
     | dm_worker1 | 172.16.10.72 | 8262 |
     | dm_worker2 | 172.16.10.73 | 8262 |
@@ -30,7 +30,7 @@ TiUPを使用して DM クラスターをデプロイすると、構成情報は
 
 -   上流および下流のデータベース インスタンスの情報:
 
-    | データベース インスタンス    | ホスト          | 港    | ユーザー名 | 暗号化パスワード                         |
+    | データベース インスタンス    | ホスト          | ポート  | ユーザー名 | 暗号化パスワード                         |
     | ---------------- | ------------ | ---- | ----- | -------------------------------- |
     | アップストリーム MySQL-1 | 172.16.10.81 | 3306 | 根     | VjX8cEeTX+qcvZ3bPaO4h0C80pe/1aU= |
     | アップストリーム MySQL-2 | 172.16.10.82 | 3306 | 根     | VjX8cEeTX+qcvZ3bPaO4h0C80pe/1aU= |
@@ -70,7 +70,7 @@ MySQL ホストで必要な権限のリストは、 [事前チェック](/dm/dm-
 
 次の例では、上流の MySQL-1 と MySQL-2 の両方のインスタンスの`test_db`データベースにあるすべての`test_table`テーブル データを、フル データと増分データで、TiDB の`test_db`データベースにある下流の`test_table`テーブルに移行する必要があると想定しています。モード。
 
-`task.yaml`のタスク構成ファイルを次のように編集します。
+`task.yaml`タスク構成ファイルを次のように編集します。
 
 ```yaml
 # The task name. You need to use a different name for each of the multiple tasks that
@@ -182,7 +182,7 @@ tiup dmctl --master-addr 172.16.10.71:8261 stop-task test
 
 ## ステップ 8: タスクを監視してログを確認する {#step-8-monitor-the-task-and-check-logs}
 
-Prometheus、Alertmanager、および Grafana がTiUPを使用して DM クラスターのデプロイと共に正常にデプロイされ、Grafana アドレスが`172.16.10.71`であると仮定します。 DM に関連するアラート情報を表示するには、ブラウザーで[http://172.16.10.71:9093](http://172.16.10.71:9093)を開いて Alertmanager に入ります。モニタリング指標を確認するには、 [http://172.16.10.71:3000](http://172.16.10.71:3000)に進み、DM ダッシュボードを選択します。
+Prometheus、Alertmanager、および Grafana がTiUP を使用して DM クラスターのデプロイと共に正常にデプロイされ、Grafana アドレスが`172.16.10.71`であると仮定します。 DM に関連するアラート情報を表示するには、ブラウザーで[http://172.16.10.71:9093](http://172.16.10.71:9093)を開いて Alertmanager に入ります。モニタリング指標を確認するには、 [http://172.16.10.71:3000](http://172.16.10.71:3000)に進み、DM ダッシュボードを選択します。
 
 DM クラスターが実行されている間、DM-master、DM-worker、および dmctl はログを介して監視メトリック情報を出力します。各コンポーネントのログ ディレクトリは次のとおりです。
 

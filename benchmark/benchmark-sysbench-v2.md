@@ -24,7 +24,7 @@ TiDB バージョン: v1.0.8 対 v2.0.0-rc6
 | ---- | ---------------------------------------------------- |
 | OS   | Linux (CentOS 7.3.1611)                              |
 | CPU  | 40 個の vCPU、Intel(R) Xeon(R) CPU E5-2630 v4 @ 2.20GHz |
-| 羊    | 128GB                                                |
+| RAM  | 128GB                                                |
 | ディスク | Optane 500GB SSD * 1                                 |
 
 ## テスト計画 {#test-plan}

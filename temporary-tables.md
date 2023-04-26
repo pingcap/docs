@@ -58,7 +58,7 @@ CREATE TABLE users (
 );
 ```
 
-セッション A では、ローカル一時表の作成`users`は通常の表と競合しません`users` 。セッション A が`users`テーブルにアクセスすると、ローカル一時テーブル`users`にアクセスします。
+セッション A では、ローカル一時表の作成`users`通常の表と競合しません`users` 。セッション A が`users`テーブルにアクセスすると、ローカル一時テーブル`users`にアクセスします。
 
 {{< copyable "" >}}
 
@@ -152,7 +152,7 @@ TiDB ローカル一時テーブルの次の機能と制限は、MySQL 一時テ
 
 -   ローカル一時テーブルを作成または削除すると、現在のトランザクションは自動的にコミットされません。
 -   ローカル一時テーブルが配置されているスキーマを削除した後、一時テーブルは削除されず、引き続き読み取りと書き込みが可能です。
--   ローカル一時テーブルを作成するには、 `CREATE TEMPORARY TABLES`権限が必要です。テーブルに対する後続のすべての操作には、権限は必要ありません。
+-   ローカル一時テーブルを作成するには`CREATE TEMPORARY TABLES`権限が必要です。テーブルに対する後続のすべての操作には、権限は必要ありません。
 -   ローカル一時テーブルは、外部キーとパーティション テーブルをサポートしていません。
 -   ローカル一時テーブルに基づくビューの作成はサポートされていません。
 -   `SHOW [FULL] TABLES`は、ローカル一時テーブルを表示しません。
@@ -161,8 +161,8 @@ TiDB のローカル一時テーブルは、次の点で MySQL 一時テーブ�
 
 -   TiDB ローカル一時テーブルは`ALTER TABLE`をサポートしていません。
 -   TiDB ローカル一時テーブルは`ENGINE`テーブル オプションを無視し、常に一時テーブル データを TiDBメモリに[メモリ制限](#limit-the-memory-usage-of-temporary-tables)で格納します。
--   `MEMORY`がストレージ エンジンとして宣言されている場合、TiDB ローカル一時テーブルは`MEMORY`ストレージ エンジンによって制限されません。
--   `INNODB`または`MYISAM`がストレージ エンジンとして宣言されている場合、TiDB ローカル一時テーブルは InnoDB 一時テーブルに固有のシステム変数を無視します。
+-   `MEMORY`がstorageエンジンとして宣言されている場合、TiDB ローカル一時テーブルは`MEMORY`storageエンジンによって制限されません。
+-   `INNODB`または`MYISAM`がstorageエンジンとして宣言されている場合、TiDB ローカル一時テーブルは InnoDB 一時テーブルに固有のシステム変数を無視します。
 -   MySQL では、同じ SQL ステートメントで同じ一時テーブルを複数回参照することは許可されていません。 TiDB ローカル一時テーブルには、この制限はありません。
 -   MySQL の一時テーブルを示すシステム テーブル`information_schema.INNODB_TEMP_TABLE_INFO`は、TiDB には存在しません。現在、TiDB には、ローカルの一時テーブルを表示するシステム テーブルがありません。
 -   TiDB には内部一時テーブルがありません。内部一時テーブルの MySQL システム変数は、TiDB では有効になりません。
@@ -278,9 +278,9 @@ Empty set (0.00 sec)
 
 ## 一時テーブルのメモリ使用量を制限する {#limit-the-memory-usage-of-temporary-tables}
 
-テーブルを定義するときにどのストレージ エンジンが`ENGINE`として宣言されても、ローカル一時テーブルとグローバル一時テーブルのデータは TiDB インスタンスのメモリにのみ格納されます。このデータは保持されません。
+テーブルを定義するときにどのstorageエンジンが`ENGINE`として宣言されても、ローカル一時テーブルとグローバル一時テーブルのデータは TiDB インスタンスのメモリにのみ格納されます。このデータは保持されません。
 
-メモリオーバーフローを回避するために、 [`tidb_tmp_table_max_size`](/system-variables.md#tidb_tmp_table_max_size-new-in-v530)システム変数を使用して各一時テーブルのサイズを制限できます。一時テーブルが`tidb_tmp_table_max_size`のしきい値を超えると、TiDB はエラーを報告します。デフォルト値の`tidb_tmp_table_max_size`は`64MB`です。
+メモリオーバーフローを回避するために、 [`tidb_tmp_table_max_size`](/system-variables.md#tidb_tmp_table_max_size-new-in-v530)システム変数を使用して各一時テーブルのサイズを制限できます。一時テーブルが`tidb_tmp_table_max_size`しきい値を超えると、TiDB はエラーを報告します。デフォルト値の`tidb_tmp_table_max_size`は`64MB`です。
 
 たとえば、一時テーブルの最大サイズを`256MB`に設定します。
 
@@ -292,7 +292,7 @@ SET GLOBAL tidb_tmp_table_max_size=268435456;
 
 ## 他の TiDB 機能との互換性の制限 {#compatibility-restrictions-with-other-tidb-features}
 
-TiDB のローカル一時テーブルとグローバル一時テーブルは、次の TiDB 機能と互換性があり**ません**。
+TiDB のローカル一時テーブルとグローバル一時テーブルは、次の TiDB 機能と互換性**がありません**。
 
 -   `AUTO_RANDOM`列
 -   `SHARD_ROW_ID_BITS`および`PRE_SPLIT_REGIONS`テーブル オプション

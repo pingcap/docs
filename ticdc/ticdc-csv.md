@@ -5,7 +5,7 @@ summary: Learn the concept of TiCDC CSV Protocol and how to use it.
 
 # TiCDC CSV プロトコル {#ticdc-csv-protocol}
 
-クラウド ストレージ サービスをダウンストリーム シンクとして使用する場合、DML イベントをクラウド ストレージ サービスに CSV 形式で送信できます。
+クラウドstorageサービスをダウンストリーム シンクとして使用する場合、DML イベントをクラウドstorageサービスに CSV 形式で送信できます。
 
 ## CSV を使用 {#use-csv}
 
@@ -39,7 +39,7 @@ include-commit-ts = true
 
 CSV ファイルでは、各列は次のように定義されています。
 
--   カラム1: `I` 、 `U` 、および`D`を含む操作タイプのインジケーター。 `I`は`INSERT`を意味し、 `U`は`UPDATE`を意味し、 `D`は`DELETE`を意味します。
+-   カラム1: `I` 、 `U` 、および`D`を含む操作タイプのインジケーター。 `I` `INSERT`を意味し、 `U` `UPDATE`を意味し、 `D` `DELETE`を意味します。
 -   カラム2: テーブル名。
 -   カラム3: スキーマ名。
 -   カラム4: ソース トランザクションの`commit-ts` 。この列はオプションです。

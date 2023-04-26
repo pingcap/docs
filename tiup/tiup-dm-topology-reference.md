@@ -16,7 +16,7 @@ TiUPを使用した DM クラスター展開のトポロジ構成ファイルに
 -   [サーバー構成](#server_configs) : コンポーネントのグローバル構成。各コンポーネントを個別に構成できます。インスタンスに同じキーを持つ構成アイテムがある場合、インスタンスの構成アイテムが有効になります。
 -   [master_servers](#master_servers) : DM-master インスタンスの構成。構成は、DMコンポーネントのマスター サービスがデプロイされるマシンを指定します。
 -   [worker_servers](#worker_servers) : DM-worker インスタンスの構成。構成は、DMコンポーネントのワーカー サービスがデプロイされるマシンを指定します。
--   [監視サーバー](#monitoring_servers) : Prometheus インスタンスがデプロイされるマシンを指定します。 TiUPは複数の Prometheus インスタンスのデプロイをサポートしていますが、最初のインスタンスのみが使用されます。
+-   [監視サーバー](#monitoring_servers) : Prometheus インスタンスがデプロイされるマシンを指定します。 TiUP は複数の Prometheus インスタンスのデプロイをサポートしていますが、最初のインスタンスのみが使用されます。
 -   [grafana_servers](#grafana_servers) : Grafana インスタンスの構成。構成は、Grafana インスタンスがデプロイされるマシンを指定します。
 -   [alertmanager_servers](#alertmanager_servers) : Alertemanager インスタンスの構成。構成は、Alertmanager インスタンスがデプロイされるマシンを指定します。
 
@@ -24,21 +24,21 @@ TiUPを使用した DM クラスター展開のトポロジ構成ファイルに
 
 `global`セクションはクラスターのグローバル構成に対応し、次のフィールドがあります。
 
--   `user` : デプロイされたクラスターを開始するユーザー。デフォルト値は「tidb」です。 `<user>`フィールドで指定されたユーザーがターゲット マシンに存在しない場合、 TiUPは自動的にユーザーの作成を試みます。
+-   `user` : デプロイされたクラスターを開始するユーザー。デフォルト値は「tidb」です。 `<user>`フィールドで指定されたユーザーがターゲット マシンに存在しない場合、 TiUP は自動的にユーザーの作成を試みます。
 -   `group` : ユーザーが自動作成されたときにユーザーが属するユーザーグループ。デフォルト値は`<user>`フィールドと同じです。指定したグループが存在しない場合は、自動的に作成されます。
 -   `ssh_port` : 操作のためにターゲット マシンに接続するための SSH ポート。デフォルト値は「22」です。
 -   `deploy_dir` : 各コンポーネントのデプロイメント ディレクトリ。デフォルト値は「デプロイ」です。構築規則は次のとおりです。
-    -   絶対パス`deploy_dir`がインスタンス レベルで設定されている場合、実際のデプロイ ディレクトリはインスタンス用に設定された`deploy_dir`になります。
+    -   絶対パス`deploy_dir`がインスタンス レベルで設定されている場合、実際のデプロイ ディレクトリはインスタンス用に設定された`deploy_dir`なります。
     -   インスタンスごとに、構成しない場合`deploy_dir` 、デフォルト値は相対パス`<component-name>-<component-port>`です。
     -   `global.deploy_dir`を絶対パスに設定すると、コンポーネントは`<global.deploy_dir>/<instance.deploy_dir>`ディレクトリにデプロイされます。
     -   `global.deploy_dir`が相対パスに設定されている場合、コンポーネントは`/home/<global.user>/<global.deploy_dir>/<instance.deploy_dir>`ディレクトリにデプロイされます。
 -   `data_dir` : データ ディレクトリ。デフォルト値は「データ」です。構築ルールは以下の通りです。
-    -   絶対パス`data_dir`がインスタンス レベルで設定されている場合、実際のデータ ディレクトリはインスタンス用に設定された`data_dir`になります。
+    -   絶対パス`data_dir`がインスタンス レベルで設定されている場合、実際のデータ ディレクトリはインスタンス用に設定された`data_dir`なります。
     -   インスタンスごとに、 `data_dir`が構成されていない場合、デフォルト値は`<global.data_dir>`です。
     -   `data_dir`が相対パスに設定されている場合、コンポーネントデータは`<deploy_dir>/<data_dir>`に格納されます。 `<deploy_dir>`の構成規則については、 `deploy_dir`フィールドの構成規則を参照してください。
 -   `log_dir` : データ ディレクトリ。デフォルト値は「ログ」です。構築ルールは以下の通りです。
-    -   `log_dir`の絶対パスがインスタンス レベルで構成されている場合、実際のログ ディレクトリはインスタンス用に構成された`log_dir`になります。
-    -   インスタンスごとに、ユーザーが`log_dir`を構成していない場合、デフォルト値は`<global.log_dir>`です。
+    -   `log_dir`の絶対パスがインスタンス レベルで構成されている場合、実際のログ ディレクトリはインスタンス用に構成された`log_dir`なります。
+    -   インスタンスごとに、ユーザーが`log_dir`構成していない場合、デフォルト値は`<global.log_dir>`です。
     -   `log_dir`が相対パスの場合、コンポーネントログは`<deploy_dir>/<log_dir>`に格納されます。 `<deploy_dir>`の構成規則については、 `deploy_dir`フィールドの構成規則を参照してください。
 -   `os` : ターゲット マシンのオペレーティング システム。このフィールドは、ターゲット マシンにプッシュされたコンポーネントをどのオペレーティング システムに適応させるかを制御します。デフォルト値は「linux」です。
 -   `arch` : ターゲット マシンの CPUアーキテクチャ。このフィールドは、ターゲット マシンにプッシュされるバイナリ パッケージに適応するプラットフォームを制御します。サポートされている値は「amd64」と「arm64」です。デフォルト値は「amd64」です。
@@ -62,12 +62,12 @@ global:
 
 ### <code>server_configs</code> {#code-server-configs-code}
 
-`server_configs`は、サービスを構成し、各コンポーネントの構成ファイルを生成するために使用されます。 `global`セクションと同様に、 `server_configs`セクションの構成は、インスタンス内の同じキーを持つ構成によって上書きできます。 `server_configs`には、主に次のフィールドが含まれます。
+`server_configs`は、サービスを構成し、各コンポーネントの構成ファイルを生成するために使用されます。 `global`セクションと同様に、 `server_configs`セクションの構成は、インスタンス内の同じキーを持つ構成によって上書きできます。 `server_configs`は、主に次のフィールドが含まれます。
 
 -   `master` : DM-master サービスに関連する構成。サポートされているすべての構成アイテムについては、 [DMマスターコンフィグレーションファイル](/dm/dm-master-configuration-file.md)を参照してください。
 -   `worker` : DM-worker サービスに関連する構成。サポートされているすべての構成項目については、 [DM-workerコンフィグレーションファイル](/dm/dm-worker-configuration-file.md)を参照してください。
 
-`server_configs`の構成例は次のとおりです。
+`server_configs`構成例は次のとおりです。
 
 ```yaml
 server_configs:
@@ -82,7 +82,7 @@ server_configs:
 
 ## <code>master_servers</code> {#code-master-servers-code}
 
-`master_servers`は、DMコンポーネントのマスター ノードがデプロイされるマシンを指定します。各マシンでサービス構成を指定することもできます。 `master_servers`は配列です。各配列要素には、次のフィールドが含まれます。
+`master_servers` 、DMコンポーネントのマスター ノードがデプロイされるマシンを指定します。各マシンでサービス構成を指定することもできます。 `master_servers`は配列です。各配列要素には、次のフィールドが含まれます。
 
 -   `host` : デプロイ先のマシンを指定します。フィールド値は IP アドレスで、必須です。
 -   `ssh_port` : 操作のためにターゲット マシンに接続するための SSH ポートを指定します。フィールドが指定されていない場合は、 `global`セクションの`ssh_port`が使用されます。
@@ -94,8 +94,8 @@ server_configs:
 -   `log_dir` : ログ ディレクトリを指定します。フィールドが指定されていない場合、または相対ディレクトリとして指定されている場合、ログ ディレクトリは`global`セクションの`log_dir`構成に従って生成されます。
 -   `numa_node` : NUMA ポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲット マシンに[numactl](https://linux.die.net/man/8/numactl)がインストールされていることを確認する必要があります。このフィールドが指定されている場合、 cpubind および membind ポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などの NUMA ノードの ID です。
 -   `config` : このフィールドの構成規則は、 `server_configs`セクションの`master`と同じです。 `config`を指定すると、 `config`の構成が`server_configs`の`master`の構成とマージされ (2 つのフィールドが重複する場合は、このフィールドの構成が有効になります)、構成ファイルが生成され、指定されたマシンに配布されます。 `host`フィールド。
--   `os` : `host`フィールドで指定されたマシンのオペレーティング システム。フィールドが指定されていない場合、デフォルト値は`global`セクションで設定された`os`の値です。
--   `arch` : `host`フィールドで指定されたマシンのアーキテクチャ。フィールドが指定されていない場合、デフォルト値は`global`セクションで設定された`arch`の値です。
+-   `os` : `host`フィールドで指定されたマシンのオペレーティング システム。フィールドが指定されていない場合、デフォルト値は`global`セクションで設定された`os`値です。
+-   `arch` : `host`フィールドで指定されたマシンのアーキテクチャ。フィールドが指定されていない場合、デフォルト値は`global`セクションで設定された`arch`値です。
 -   `resource_control` : このサービスのリソース制御。このフィールドを指定すると、このフィールドの設定が`global`セクションの`resource_control`の設定とマージされ (2 つのフィールドが重複する場合は、このフィールドの設定が有効になります)、systemd の設定ファイルが生成され、配布されます。 `host`フィールドで指定されたマシンに。このフィールドの構成ルールは、 `global`セクションの`resource_control`と同じです。
 -   `v1_source_path` : v1.0.x からアップグレードする場合、V1 ソースの構成ファイルが置かれているディレクトリをこのフィールドに指定できます。
 
@@ -112,7 +112,7 @@ server_configs:
 -   `os`
 -   `v1_source_path`
 
-`master_servers`の構成例は次のとおりです。
+`master_servers`構成例は次のとおりです。
 
 ```yaml
 master_servers:
@@ -139,7 +139,7 @@ master_servers:
 
 ## <code>worker_servers</code> {#code-worker-servers-code}
 
-`worker_servers`は、DMコンポーネントのマスター ノードがデプロイされるマシンを指定します。各マシンでサービス構成を指定することもできます。 `worker_servers`は配列です。各配列要素には、次のフィールドが含まれます。
+`worker_servers` 、DMコンポーネントのマスター ノードがデプロイされるマシンを指定します。各マシンでサービス構成を指定することもできます。 `worker_servers`は配列です。各配列要素には、次のフィールドが含まれます。
 
 -   `host` : デプロイ先のマシンを指定します。フィールド値は IP アドレスで、必須です。
 -   `ssh_port` : 操作のためにターゲット マシンに接続するための SSH ポートを指定します。フィールドが指定されていない場合は、 `global`セクションの`ssh_port`が使用されます。
@@ -150,8 +150,8 @@ master_servers:
 -   `log_dir` : ログ ディレクトリを指定します。フィールドが指定されていない場合、または相対ディレクトリとして指定されている場合、ログ ディレクトリは`global`セクションの`log_dir`構成に従って生成されます。
 -   `numa_node` : NUMA ポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲット マシンに[numactl](https://linux.die.net/man/8/numactl)がインストールされていることを確認する必要があります。このフィールドが指定されている場合、 cpubind および membind ポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などの NUMA ノードの ID です。
 -   `config` : このフィールドの構成規則は、 `server_configs`セクションの`worker`と同じです。 `config`を指定すると、 `config`の構成が`server_configs`の`worker`の構成とマージされ (2 つのフィールドが重複する場合は、このフィールドの構成が有効になります)、構成ファイルが生成され、指定されたマシンに配布されます。 `host`フィールド。
--   `os` : `host`フィールドで指定されたマシンのオペレーティング システム。フィールドが指定されていない場合、デフォルト値は`global`セクションで設定された`os`の値です。
--   `arch` : `host`フィールドで指定されたマシンのアーキテクチャ。フィールドが指定されていない場合、デフォルト値は`global`セクションで設定された`arch`の値です。
+-   `os` : `host`フィールドで指定されたマシンのオペレーティング システム。フィールドが指定されていない場合、デフォルト値は`global`セクションで設定された`os`値です。
+-   `arch` : `host`フィールドで指定されたマシンのアーキテクチャ。フィールドが指定されていない場合、デフォルト値は`global`セクションで設定された`arch`値です。
 -   `resource_control` : このサービスのリソース制御。このフィールドを指定すると、このフィールドの設定が`global`セクションの`resource_control`の設定とマージされ (2 つのフィールドが重複する場合は、このフィールドの設定が有効になります)、systemd の設定ファイルが生成され、配布されます。 `host`フィールドで指定されたマシンに。このフィールドの構成ルールは、 `global`セクションの`resource_control`と同じです。
 
 `worker_servers`セクションでは、デプロイの完了後に次のフィールドを変更できません。
@@ -165,7 +165,7 @@ master_servers:
 -   `arch`
 -   `os`
 
-`worker_servers`の構成例は次のとおりです。
+`worker_servers`構成例は次のとおりです。
 
 ```yaml
 worker_servers:
@@ -183,7 +183,7 @@ worker_servers:
 
 ### <code>monitoring_servers</code> {#code-monitoring-servers-code}
 
-`monitoring_servers`は、Prometheus サービスがデプロイされるマシンを指定します。マシンでサービス構成を指定することもできます。 `monitoring_servers`は配列です。各配列要素には、次のフィールドが含まれます。
+`monitoring_servers` Prometheus サービスがデプロイされるマシンを指定します。マシンでサービス構成を指定することもできます。 `monitoring_servers`は配列です。各配列要素には、次のフィールドが含まれます。
 
 -   `host` : デプロイ先のマシンを指定します。フィールド値は IP アドレスで、必須です。
 -   `ssh_port` : 操作のためにターゲット マシンに接続するための SSH ポートを指定します。フィールドが指定されていない場合は、 `global`セクションの`ssh_port`が使用されます。
@@ -198,8 +198,8 @@ worker_servers:
     -   `remote_write` : Prometheus ドキュメント[`&#x3C;remote_write>`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_write)を参照してください。
     -   `remote_read` : Prometheus ドキュメント[`&#x3C;remote_read>`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_read)を参照してください。
 -   `external_alertmanagers` : `external_alertmanagers`フィールドが構成されている場合、Prometheus は構成動作をクラスター外の Alertmanager にアラートします。このフィールドは配列であり、その各要素は外部 Alertmanager であり、 `host`および`web_port`フィールドで構成されています。
--   `os` : `host`フィールドで指定されたマシンのオペレーティング システム。フィールドが指定されていない場合、デフォルト値は`global`セクションで設定された`os`の値です。
--   `arch` : `host`フィールドで指定されたマシンのアーキテクチャ。フィールドが指定されていない場合、デフォルト値は`global`セクションで設定された`arch`の値です。
+-   `os` : `host`フィールドで指定されたマシンのオペレーティング システム。フィールドが指定されていない場合、デフォルト値は`global`セクションで設定された`os`値です。
+-   `arch` : `host`フィールドで指定されたマシンのアーキテクチャ。フィールドが指定されていない場合、デフォルト値は`global`セクションで設定された`arch`値です。
 -   `resource_control` : このサービスのリソース制御。このフィールドを指定すると、このフィールドの設定が`global`セクションの`resource_control`の設定とマージされ (2 つのフィールドが重複する場合は、このフィールドの設定が有効になります)、systemd の設定ファイルが生成され、配布されます。 `host`フィールドで指定されたマシンに。このフィールドの構成ルールは、 `global`セクションの`resource_control`と同じです。
 
 `monitoring_servers`セクションでは、デプロイの完了後に次のフィールドを変更できません。
@@ -212,7 +212,7 @@ worker_servers:
 -   `arch`
 -   `os`
 
-`monitoring_servers`の構成例は次のとおりです。
+`monitoring_servers`構成例は次のとおりです。
 
 ```yaml
 monitoring_servers:
@@ -237,14 +237,14 @@ monitoring_servers:
 
 ### <code>grafana_servers</code> {#code-grafana-servers-code}
 
-`grafana_servers`は、Grafana サービスがデプロイされるマシンを指定します。マシンでサービス構成を指定することもできます。 `grafana_servers`は配列です。各配列要素には、次のフィールドが含まれます。
+`grafana_servers` 、Grafana サービスがデプロイされるマシンを指定します。マシンでサービス構成を指定することもできます。 `grafana_servers`は配列です。各配列要素には、次のフィールドが含まれます。
 
 -   `host` : デプロイ先のマシンを指定します。フィールド値は IP アドレスで、必須です。
 -   `ssh_port` : 操作のためにターゲット マシンに接続するための SSH ポートを指定します。フィールドが指定されていない場合は、 `global`セクションの`ssh_port`が使用されます。
 -   `port` : Grafana がサービスを提供するポートを指定します。デフォルト値は「3000」です。
 -   `deploy_dir` : デプロイメント ディレクトリを指定します。フィールドが指定されていない場合、または相対ディレクトリとして指定されている場合、展開ディレクトリは`global`セクションの`deploy_dir`構成に従って生成されます。
--   `os` : `host`フィールドで指定されたマシンのオペレーティング システム。フィールドが指定されていない場合、デフォルト値は`global`セクションで設定された`os`の値です。
--   `arch` : `host`フィールドで指定されたマシンのアーキテクチャ。フィールドが指定されていない場合、デフォルト値は`global`セクションで設定された`arch`の値です。
+-   `os` : `host`フィールドで指定されたマシンのオペレーティング システム。フィールドが指定されていない場合、デフォルト値は`global`セクションで設定された`os`値です。
+-   `arch` : `host`フィールドで指定されたマシンのアーキテクチャ。フィールドが指定されていない場合、デフォルト値は`global`セクションで設定された`arch`値です。
 -   `username` : Grafana ログイン画面のユーザー名を指定します。
 -   `password` : Grafana の対応するパスワードを指定します。
 -   `dashboard_dir` : 完全な`dashboard(*.json)`のファイルが配置されているローカル ディレクトリを指定します。指定したディレクトリ内のファイルは、クラスター構成の初期化フェーズ中に Grafana ダッシュボードとしてターゲット マシンに送信されます。
@@ -265,7 +265,7 @@ monitoring_servers:
 -   `arch`
 -   `os`
 
-`grafana_servers`の構成例は次のとおりです。
+`grafana_servers`構成例は次のとおりです。
 
 ```yaml
 grafana_servers:
@@ -275,7 +275,7 @@ grafana_servers:
 
 ### <code>alertmanager_servers</code> {#code-alertmanager-servers-code}
 
-`alertmanager_servers`は、Alertmanager サービスがデプロイされるマシンを指定します。各マシンでサービス構成を指定することもできます。 `alertmanager_servers`は配列です。各配列要素には、次のフィールドが含まれます。
+`alertmanager_servers` Alertmanager サービスがデプロイされるマシンを指定します。各マシンでサービス構成を指定することもできます。 `alertmanager_servers`は配列です。各配列要素には、次のフィールドが含まれます。
 
 -   `host` : デプロイ先のマシンを指定します。フィールド値は IP アドレスで、必須です。
 -   `ssh_port` : 操作のためにターゲット マシンに接続するための SSH ポートを指定します。フィールドが指定されていない場合は、 `global`セクションの`ssh_port`が使用されます。
@@ -286,8 +286,8 @@ grafana_servers:
 -   `log_dir` : ログ ディレクトリを指定します。フィールドが指定されていない場合、または相対ディレクトリとして指定されている場合、ログ ディレクトリは`global`セクションの`log_dir`構成に従って生成されます。
 -   `numa_node` : NUMA ポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲット マシンに[numactl](https://linux.die.net/man/8/numactl)がインストールされていることを確認する必要があります。このフィールドが指定されている場合、 cpubind および membind ポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などの NUMA ノードの ID です。
 -   `config_file` : ローカル ファイルを指定します。指定したファイルは、クラスター構成の初期化フェーズ中に、Alertmanager の構成としてターゲット マシンに送信されます。
--   `os` : `host`フィールドで指定されたマシンのオペレーティング システム。フィールドが指定されていない場合、デフォルト値は`global`セクションで設定された`os`の値です。
--   `arch` : `host`フィールドで指定されたマシンのアーキテクチャ。フィールドが指定されていない場合、デフォルト値は`global`セクションで設定された`arch`の値です。
+-   `os` : `host`フィールドで指定されたマシンのオペレーティング システム。フィールドが指定されていない場合、デフォルト値は`global`セクションで設定された`os`値です。
+-   `arch` : `host`フィールドで指定されたマシンのアーキテクチャ。フィールドが指定されていない場合、デフォルト値は`global`セクションで設定された`arch`値です。
 -   `resource_control` : このサービスのリソース制御。このフィールドを指定すると、このフィールドの設定が`global`セクションの`resource_control`の設定とマージされ (2 つのフィールドが重複する場合は、このフィールドの設定が有効になります)、systemd の設定ファイルが生成され、配布されます。 `host`フィールドで指定されたマシンに。このフィールドの構成ルールは、 `global`セクションの`resource_control`と同じです。
 
 `alertmanager_servers`では、デプロイの完了後に次のフィールドを変更できません。
@@ -301,7 +301,7 @@ grafana_servers:
 -   `arch`
 -   `os`
 
-`alertmanager_servers`の構成例は次のとおりです。
+`alertmanager_servers`構成例は次のとおりです。
 
 ```yaml
 alertmanager_servers:

@@ -27,7 +27,7 @@ summary: This document gives an overview of Data Migration configuration files.
 
 このセクションでは、いくつかの重要な概念について説明します。
 
-| 概念          | 説明                                                                                    | コンフィグレーションファイル                                           |
+| コンセプト       | 説明                                                                                    | コンフィグレーションファイル                                           |
 | :---------- | :------------------------------------------------------------------------------------ | :------------------------------------------------------- |
 | `source-id` | MySQL または MariaDB インスタンス、またはプライマリ - セカンダリ構造を持つ移行グループを一意に表します。 `source-id`の最大長は 32 です。 | `source.yaml`の`source_id` ;<br/> `source-id` `task.yaml` |
 | DMマスターID    | DM マスターを一意に表します ( `dm-master.toml`の`master-addr`パラメーターによって)                           | `master-addr`の`dm-master.toml`                           |

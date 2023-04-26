@@ -14,9 +14,9 @@ summary: Learn how to migrate data from TiDB to MySQL-compatible databases.
 
 ## ステップ 1. 環境をセットアップする {#step-1-set-up-the-environment}
 
-1.  TiDB クラスターをアップストリームにデプロイします。
+1.  TiDB クラスターをアップストリームにデプロイ。
 
-    TiUP Playground を使用して TiDB クラスターをデプロイします。詳細については、 [TiUPを使用してオンライン TiDBクラスタをデプロイおよび管理する](/tiup/tiup-cluster.md)を参照してください。
+    TiUP Playground を使用して TiDB クラスターをデプロイ。詳細については、 [TiUPを使用してオンライン TiDBクラスタをデプロイおよび管理](/tiup/tiup-cluster.md)を参照してください。
 
     ```shell
     # Create a TiDB cluster
@@ -25,7 +25,7 @@ summary: Learn how to migrate data from TiDB to MySQL-compatible databases.
     tiup status
     ```
 
-2.  MySQL インスタンスをダウンストリームにデプロイします。
+2.  MySQL インスタンスをダウンストリームにデプロイ。
 
     -   ラボ環境では、次のコマンドを実行することで、Docker を使用して MySQL インスタンスをすばやくデプロイできます。
 
@@ -33,11 +33,11 @@ summary: Learn how to migrate data from TiDB to MySQL-compatible databases.
         docker run --name some-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -p 3306:3306 -d mysql
         ```
 
-    -   本番環境では、 [MySQL のインストール](https://dev.mysql.com/doc/refman/8.0/en/installing.html)の手順に従って MySQL インスタンスをデプロイできます。
+    -   本番環境では、 [MySQL のインストール](https://dev.mysql.com/doc/refman/8.0/en/installing.html)手順に従って MySQL インスタンスをデプロイできます。
 
 3.  サービスのワークロードをシミュレートします。
 
-    ラボ環境では、 `go-tpc`を使用して上流の TiDB クラスターにデータを書き込むことができます。これは、TiDB クラスターでイベントの変更を生成するためです。次のコマンドを実行して、TiDB クラスターに`tpcc`という名前のデータベースを作成し、 TiUPベンチを使用してこのデータベースにデータを書き込みます。
+    ラボ環境では、 `go-tpc`使用して上流の TiDB クラスターにデータを書き込むことができます。これは、TiDB クラスターでイベントの変更を生成するためです。次のコマンドを実行して、TiDB クラスターに`tpcc`という名前のデータベースを作成し、 TiUPベンチを使用してこのデータベースにデータを書き込みます。
 
     ```shell
     tiup bench tpcc -H 127.0.0.1 -P 4000 -D tpcc --warehouses 4 prepare
@@ -149,16 +149,16 @@ summary: Learn how to migrate data from TiDB to MySQL-compatible databases.
 
 ## ステップ 3. 増分データを移行する {#step-3-migrate-incremental-data}
 
-1.  TiCDC をデプロイします。
+1.  TiCDCをデプロイ。
 
-    完全なデータ移行が完了したら、TiCDC クラスターをデプロイして構成し、増分データをレプリケートします。本番環境では、 [TiCDC をデプロイ](/ticdc/deploy-ticdc.md)の指示に従って TiCDC をデプロイします。このドキュメントでは、テスト クラスターの作成時に TiCDC ノードが開始されています。したがって、TiCDC をデプロイするステップをスキップして、次のステップに進んで変更フィードを作成できます。
+    完全なデータ移行が完了したら、TiCDC クラスターをデプロイして構成し、増分データをレプリケートします。本番環境では、 [TiCDCをデプロイ](/ticdc/deploy-ticdc.md)の指示に従って TiCDC をデプロイします。このドキュメントでは、テスト クラスターの作成時に TiCDC ノードが開始されています。したがって、TiCDC をデプロイするステップをスキップして、次のステップに進んで変更フィードを作成できます。
 
 2.  チェンジフィードを作成します。
 
     アップストリーム クラスターで、次のコマンドを実行して、アップストリーム クラスターからダウンストリーム クラスターへの変更フィードを作成します。
 
     ```shell
-    tiup ctl:<cluster-version> cdc changefeed create --server=http://127.0.0.1:8300 --sink-uri="mysql://root:@127.0.0.1:3306" --changefeed-id="upstream-to-downstream" --start-ts="434217889191428107"
+    tiup ctl:v<CLUSTER_VERSION> cdc changefeed create --server=http://127.0.0.1:8300 --sink-uri="mysql://root:@127.0.0.1:3306" --changefeed-id="upstream-to-downstream" --start-ts="434217889191428107"
     ```
 
     このコマンドでは、パラメーターは次のとおりです。

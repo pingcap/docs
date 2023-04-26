@@ -16,7 +16,7 @@ TiDB アンシブル バージョン: 2.1.9
 -   場合によっては定数フォールディングによって引き起こされるスタック オーバーフローを修正します[#10189](https://github.com/pingcap/tidb/pull/10189)
 -   場合によってはエイリアスが存在する場合の`Update`の権限チェックの問題を修正します[#10157](https://github.com/pingcap/tidb/pull/10157) 、 [#10326](https://github.com/pingcap/tidb/pull/10326)
 -   DistSQL [#10197](https://github.com/pingcap/tidb/pull/10197)でのメモリ使用量の追跡と制御
--   照合順序指定を`utf8mb4_0900_ai_ci` [#10201](https://github.com/pingcap/tidb/pull/10201)としてサポート
+-   照合順序を`utf8mb4_0900_ai_ci` [#10201](https://github.com/pingcap/tidb/pull/10201)としてサポート
 -   主キーが Unsigned タイプ[#10209](https://github.com/pingcap/tidb/pull/10209)の場合の`MAX`関数の間違った結果の問題を修正
 -   非厳密な SQL モード[#10254](https://github.com/pingcap/tidb/pull/10254)で、NOT NULL 列に NULL 値を挿入できる問題を修正します。
 -   `DISTINCT` [#10270](https://github.com/pingcap/tidb/pull/10270)に複数の列が存在する場合の`COUNT`関数の間違った結果の問題を修正
@@ -49,9 +49,9 @@ TiDB アンシブル バージョン: 2.1.9
 
 ## ツール {#tools}
 
--   Binlog
+-   TiDBBinlog
     -   主キー列のunsigned int型のデータがマイナス[#574](https://github.com/pingcap/tidb-binlog/pull/574)でデータ複製が中断される問題を修正
-    -   ダウンストリームが`pb`の場合の圧縮オプションを削除し、ダウンストリーム名を`pb`から`file` [#597](https://github.com/pingcap/tidb-binlog/pull/575)に変更します。
+    -   ダウンストリームが`pb`場合の圧縮オプションを削除し、ダウンストリーム名を`pb`から`file` [#597](https://github.com/pingcap/tidb-binlog/pull/575)に変更します。
     -   2.1.7 で導入されたReparoが間違った`UPDATE`ステートメントを生成するバグを修正[#576](https://github.com/pingcap/tidb-binlog/pull/576)
 -   TiDB Lightning
     -   列データのビット型がパーサーで正しく解析されないバグを修正[#164](https://github.com/pingcap/tidb-lightning/pull/164)

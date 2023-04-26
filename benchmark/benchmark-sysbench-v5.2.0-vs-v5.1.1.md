@@ -77,11 +77,11 @@ set global tidb_enable_clustered_index = 1;
 
 ## テスト計画 {#test-plan}
 
-1.  TiUP を使用してTiUP v5.2.0 および v5.1.1 をデプロイします。
+1.  TiUPを使用して TiDB v5.2.0 および v5.1.1をデプロイ。
 2.  Sysbench を使用して、各テーブルに 1,000 万行のデータがある 16 個のテーブルをインポートします。
-3.  各テーブルで`analyze table`のステートメントを実行します。
+3.  各テーブルで`analyze table`ステートメントを実行します。
 4.  異なる同時実行テストの前に、復元に使用されるデータをバックアップします。これにより、各テストのデータの一貫性が確保されます。
-5.  Sysbench クライアントを起動して、 `point_select` 、 `read_write` 、 `update_index` 、および`update_non_index`のテストを実行します。 HAProxy を介して TiDB でストレス テストを実行します。テストには 5 分かかります。
+5.  Sysbench クライアントを起動して、 `point_select` 、 `read_write` 、 `update_index` 、および`update_non_index`テストを実行します。 HAProxy を介して TiDB でストレス テストを実行します。テストには 5 分かかります。
 6.  各タイプのテストが完了したら、クラスターを停止し、手順 4 のバックアップ データでクラスターを上書きし、クラスターを再起動します。
 
 ### テストデータの準備 {#prepare-test-data}

@@ -8,7 +8,7 @@ title: tiup dm edit-config
 
 > **ノート：**
 >
-> -   構成を変更すると、マシンを追加または削除できなくなります。マシンを追加する方法については、 [クラスターをスケールアウトする](/tiup/tiup-component-dm-scale-out.md)を参照してください。マシンの削除方法については、 [クラスターでのスケーリング](/tiup/tiup-component-dm-scale-in.md)を参照してください。
+> -   構成を変更すると、マシンを追加または削除できなくなります。マシンを追加する方法については、 [クラスターをスケールアウトする](/tiup/tiup-component-dm-scale-out.md)を参照してください。マシンの削除方法については、 [クラスターでのスケールイン](/tiup/tiup-component-dm-scale-in.md)参照してください。
 > -   `tiup dm edit-config`コマンドを実行すると、構成は制御マシンでのみ変更されます。次に、 `tiup dm reload`コマンドを実行して構成をリロードする必要があります。
 
 ## 構文 {#syntax}

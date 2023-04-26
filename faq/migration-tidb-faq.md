@@ -68,7 +68,7 @@ iperf Done.
 
 出力が低いネットワーク帯域幅と高い帯域幅の変動を示している場合、多数の再試行と EOF エラーが各コンポーネントログに表示される可能性があります。この場合、ネットワーク サービス プロバイダーに相談して、ネットワーク品質を改善する必要があります。
 
-各指標の出力に問題がなければ、各コンポーネントを更新してみてください。更新後も問題が解決しない場合は、次のことができ[お問い合わせ](https://tidbcommunity.slack.com/archives/CH7TTLL7P) 。
+各指標の出力に問題がなければ、各コンポーネントを更新してみてください。更新後も問題が解決しない場合は、PingCAP またはコミュニティから[支持を得ます](/support.md) .
 
 ### 誤って MySQL ユーザー テーブルを TiDB にインポートしたり、パスワードを忘れてログインできなくなったりした場合の対処方法を教えてください。 {#if-i-accidentally-import-the-mysql-user-table-into-tidb-or-forget-the-password-and-cannot-log-in-how-to-deal-with-it}
 
@@ -92,9 +92,9 @@ TiDB サービスを再起動し、構成ファイルに`-skip-grant-table=true`
 
 現在、OGG を使用することをお勧めします。
 
-### エラー: <code>java.sql.BatchUpdateExecption:statement count 5001 exceeds the transaction limitation</code> Sqoop を使用して<code>batches</code>で TiDB にデータを書き込むときに、トランザクションの制限を超えています {#error-code-java-sql-batchupdateexecption-statement-count-5001-exceeds-the-transaction-limitation-code-while-using-sqoop-to-write-data-into-tidb-in-code-batches-code}
+### エラー: java.sql.BatchUpdateExecption:statement count 5001 は、Sqoop を使用して<code>batches</code>で TiDB にデータを書き込むときに<code>java.sql.BatchUpdateExecption:statement count 5001 exceeds the transaction limitation</code> {#error-code-java-sql-batchupdateexecption-statement-count-5001-exceeds-the-transaction-limitation-code-while-using-sqoop-to-write-data-into-tidb-in-code-batches-code}
 
-Sqoop では、 `--batch`は各バッチで 100 の`statement`をコミットすることを意味しますが、既定では各`statement`には 100 の SQL ステートメントが含まれます。したがって、100 * 100 = 10000 SQL ステートメントとなり、1 つの TiDB トランザクションで許可されるステートメントの最大数である 5000 を超えます。
+Sqoop では、 `--batch`各バッチで 100 の`statement`をコミットすることを意味しますが、既定では各`statement`には 100 の SQL ステートメントが含まれます。したがって、100 * 100 = 10000 SQL ステートメントとなり、1 つの TiDB トランザクションで許可されるステートメントの最大数である 5000 を超えます。
 
 2 つのソリューション:
 
@@ -115,14 +115,14 @@ Sqoop では、 `--batch`は各バッチで 100 の`statement`をコミットす
 
 -   1 つの TiDB トランザクション内のステートメントの制限数を増やすこともできますが、これはより多くのメモリを消費します。
 
-### テーブルをエクスポートするときにDumplingが<code>The local disk space is insufficient</code>なエラーを返したり、アップストリーム データベースのメモリ不足を引き起こしたりするのはなぜですか? {#why-does-dumpling-return-code-the-local-disk-space-is-insufficient-code-error-or-cause-the-upstream-database-to-run-out-of-memory-when-exporting-a-table}
+### テーブルをエクスポートするときにDumpling が<code>The local disk space is insufficient</code>エラーを返したり、アップストリーム データベースのメモリ不足を引き起こしたりするのはなぜですか? {#why-does-dumpling-return-code-the-local-disk-space-is-insufficient-code-error-or-cause-the-upstream-database-to-run-out-of-memory-when-exporting-a-table}
 
 この問題には、次の原因が考えられます。
 
 -   データベースの主キーは均等に分散されません (たとえば、 [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)を有効にした場合)。
 -   上流のデータベースは TiDB で、エクスポートされたテーブルはパーティションテーブルです。
 
-上記の場合、Dumplingはエクスポート用に非常に大きなデータ チャンクを分割し、非常に大きな結果を含むクエリを送信します。この問題に対処するには、 [お問い合わせ](https://tidbcommunity.slack.com/archives/CH7TTLL7P)ナイトリー バージョンのDumplingを入手します。
+上記の場合、Dumplingはエクスポート用に非常に大きなデータ チャンクを分割し、非常に大きな結果を含むクエリを送信します。この問題に対処するには、最新バージョンのDumplingを入手してください。
 
 ### TiDB には Oracle の Flashback Query のような機能がありますか? DDLをサポートしていますか? {#does-tidb-have-a-function-like-the-flashback-query-in-oracle-does-it-support-ddl}
 
@@ -138,7 +138,7 @@ Sqoop では、 `--batch`は各バッチで 100 の`statement`をコミットす
 
 ### トラフィックをすばやく移行するには? {#how-to-migrate-the-traffic-quickly}
 
-[TiDB データ移行](/dm/dm-overview.md)のツールを使用して、アプリケーション データを MySQL から TiDB に移行することをお勧めします。必要に応じてネットワーク構成を編集することで、読み取りトラフィックと書き込みトラフィックをバッチで移行できます。ネットワーク構成を直接編集してシームレスな移行を実現するために、安定したネットワーク LB (HAproxy、LVS、F5、DNS など) を上位レイヤーにデプロイします。
+[TiDB データ移行](/dm/dm-overview.md)ツールを使用して、アプリケーション データを MySQL から TiDB に移行することをお勧めします。必要に応じてネットワーク構成を編集することで、読み取りトラフィックと書き込みトラフィックをバッチで移行できます。ネットワーク構成を直接編集してシームレスな移行を実現するために、安定したネットワーク LB (HAproxy、LVS、F5、DNS など) を上位レイヤーにデプロイ。
 
 ### TiDB の合計書き込みおよび読み取り容量に制限はありますか? {#is-there-a-limit-for-the-total-write-and-read-capacity-in-tidb}
 
@@ -146,7 +146,7 @@ Sqoop では、 `--batch`は各バッチで 100 の`statement`をコミットす
 
 ### エラー メッセージ<code>transaction too large</code>が表示される {#the-error-message-code-transaction-too-large-code-is-displayed}
 
-基礎となるストレージ エンジンの制限により、TiDB の各キー値エントリ (1 行) は 6MB を超えないようにする必要があります。 [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50)の構成値を 120MB まで調整できます。
+基礎となるstorageエンジンの制限により、TiDB の各キー値エントリ (1 行) は 6MB を超えないようにする必要があります。 [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50)構成値を 120MB まで調整できます。
 
 分散トランザクションには 2 フェーズ コミットが必要で、最レイヤーはRaftレプリケーションを実行します。トランザクションが非常に大きい場合、コミット プロセスは非常に遅くなり、書き込みの競合が発生する可能性が高くなります。さらに、失敗したトランザクションのロールバックは、不必要なパフォーマンスの低下につながります。これらの問題を回避するために、デフォルトでは、トランザクション内のキー値エントリの合計サイズを 100MB 以下に制限しています。より大きなトランザクションが必要な場合は、TiDB 構成ファイルで値`txn-total-size-limit`を変更します。この構成アイテムの最大値は 10G までです。実際の制限は、マシンの物理メモリの影響も受けます。
 
@@ -158,7 +158,7 @@ Google Cloud Spanner には[同様の制限](https://cloud.google.com/spanner/do
 
 ### TiDB はデータを削除した直後にスペースを解放しますか? {#does-tidb-release-space-immediately-after-deleting-data}
 
-`DELETE` 、 `TRUNCATE` 、および`DROP`の操作のいずれも、データをすぐに解放しません。 `TRUNCATE`と`DROP`の操作では、TiDB GC (ガベージ コレクション) 時間 (既定では 10 分) の後、データが削除され、スペースが解放されます。 `DELETE`の操作では、データは削除されますが、TiDB GCによるとスペースは解放されません。後続のデータが RocksDB に書き込まれ、 `COMPACT`が実行されると、スペースが再利用されます。
+`DELETE` 、 `TRUNCATE` 、および`DROP`操作のいずれも、データをすぐに解放しません。 `TRUNCATE`と`DROP`の操作では、TiDB GC (ガベージ コレクション) 時間 (既定では 10 分) の後、データが削除され、スペースが解放されます。 `DELETE`操作では、データは削除されますが、TiDB GCによるとスペースは解放されません。後続のデータが RocksDB に書き込まれ、 `COMPACT`実行されると、スペースが再利用されます。
 
 ### データをロードするときに、ターゲット テーブルで DDL 操作を実行できますか? {#can-i-execute-ddl-operations-on-the-target-table-when-loading-data}
 

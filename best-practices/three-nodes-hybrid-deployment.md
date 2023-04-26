@@ -83,11 +83,11 @@ tikv:
 
 #### <code>rocksdb.max-background-jobs</code>および<code>rocksdb.max-sub-compactions</code> {#code-rocksdb-max-background-jobs-code-and-code-rocksdb-max-sub-compactions-code}
 
-RocksDB スレッド プールは、圧縮およびフラッシュ ジョブの実行に使用されます。デフォルト値の`rocksdb.max-background-jobs`は`8`で、明らかに必要なリソースを超えています。したがって、値を調整してリソースの使用を制限する必要があります。
+RocksDB スレッド プールは、圧縮およびフラッシュ ジョブの実行に使用されます。デフォルト値の`rocksdb.max-background-jobs` `8`で、明らかに必要なリソースを超えています。したがって、値を調整してリソースの使用を制限する必要があります。
 
-`rocksdb.max-sub-compactions`は、1 つの圧縮ジョブで許可される同時サブタスクの数を示します。デフォルトは`3`です。書き込みトラフィックが高くない場合は、この値を下げることができます。
+`rocksdb.max-sub-compactions` 1 つの圧縮ジョブで許可される同時サブタスクの数を示します。デフォルトは`3`です。書き込みトラフィックが高くない場合は、この値を下げることができます。
 
-テストでは、 `rocksdb.max-background-jobs`の値は`3`に設定され、 `rocksdb.max-sub-compactions`の値は`1`に設定されます。 TPC-C 負荷での 12 時間のテスト中に、書き込みストールは発生しません。実際の負荷に応じて 2 つのパラメーター値を最適化する場合、モニタリング メトリックに基づいて値を徐々に下げることができます。
+テストでは、 `rocksdb.max-background-jobs`値は`3`に設定され、 `rocksdb.max-sub-compactions`値は`1`に設定されます。 TPC-C 負荷での 12 時間のテスト中に、書き込みストールは発生しません。実際の負荷に応じて 2 つのパラメーター値を最適化する場合、モニタリング メトリックに基づいて値を徐々に下げることができます。
 
 -   書き込みストールが発生した場合は、 `rocksdb.max-background-jobs`の値を増やします。
 -   書き込みストールが続く場合は、値`rocksdb.max-sub-compactions`を`2`または`3`に設定します。
@@ -109,7 +109,7 @@ TiDB はマルチバージョン同時実行制御 (MVCC) モデルを使用す�
 {{< copyable "" >}}
 
 ```shell
-tiup ctl:<cluster-version> tikv --host=${ip:port} modify-tikv-config -n gc.max_write_bytes_per_sec -v ${limit}
+tiup ctl:v<CLUSTER_VERSION> tikv --host=${ip:port} modify-tikv-config -n gc.max_write_bytes_per_sec -v ${limit}
 ```
 
 > **ノート：**

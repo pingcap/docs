@@ -19,7 +19,7 @@ Serverless Tierクラスターの場合、標準接続またはTiDB Cloudコン�
 
 -   [Chat2Query (ベータ版) 経由で接続する](/tidb-cloud/explore-data-with-chat2query.md)
 
-    TiDB Cloudは人工知能 (AI) を利用しています。 [TiDB Cloudコンソール](https://tidbcloud.com/)の AI 搭載 SQL エディターである Chat2Query (ベータ版) を使用して、データの価値を最大化できます。
+    TiDB Cloud は人工知能 (AI) を利用しています。 [TiDB Cloudコンソール](https://tidbcloud.com/)の AI 搭載 SQL エディターである Chat2Query (ベータ版) を使用して、データの価値を最大化できます。
 
     Chat2Query では、単に`--`を入力してから命令を入力し、AI に SQL クエリを自動的に生成させるか、SQL クエリを手動で記述してから、ターミナルを使用せずにデータベースに対して SQL クエリを実行することができます。クエリ結果をテーブルで直感的に検索し、クエリ ログを簡単に確認できます。
 
@@ -43,4 +43,4 @@ Dedicated Tierクラスターの場合、次のいずれかの方法でクラス
 
 ## 次は何ですか {#what-s-next}
 
-TiDB クラスターに正常に接続したら、次のことができ[TiDB で SQL ステートメントを調べる](/basic-sql-operations.md) 。
+TiDB クラスターに正常に接続したら、 [TiDB で SQL ステートメントを調べる](/basic-sql-operations.md)ことができます。

@@ -5,7 +5,7 @@ summary: An overview of the usage of ALTER DATABASE for the TiDB database.
 
 # データベースの変更 {#alter-database}
 
-`ALTER DATABASE`は、現在のデータベースのデフォルトの文字セットと照合順序を指定または変更するために使用されます。 `ALTER SCHEMA`は`ALTER DATABASE`と同じ効果があります。
+`ALTER DATABASE`は、現在のデータベースのデフォルトの文字セットと照合順序を指定または変更するために使用されます。 `ALTER SCHEMA` `ALTER DATABASE`と同じ効果があります。
 
 ## あらすじ {#synopsis}
 

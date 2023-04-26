@@ -23,7 +23,7 @@ TiDB アンシブル バージョン: 2.1.12
 -   テーブルの文字セットを変更しながら列の文字セットを変更する[#10714](https://github.com/pingcap/tidb/pull/10714)
 -   場合によっては[#10730](https://github.com/pingcap/tidb/pull/10730)進数を浮動小数点数に変換する際のオーバーフローの問題を修正します。
 -   TiDB および TiKV [#10710](https://github.com/pingcap/tidb/pull/10710)の gRPC で送受信されるメッセージの最大サイズの不一致が原因で、一部の非常に大きなメッセージで「grpc: received message large than max」エラーが報告される問題を修正します。
--   `ORDER BY`場合によっては NULL をフィルタリングしないことによって引き起こされるpanicの問題を修正します[#10488](https://github.com/pingcap/tidb/pull/10488)
+-   `ORDER BY`場合によっては NULL をフィルタリングしないことによって引き起こさpanicの問題を修正します[#10488](https://github.com/pingcap/tidb/pull/10488)
 -   複数のノードが存在する場合、 `UUID`関数によって返される値が重複する可能性がある問題を修正します[#10711](https://github.com/pingcap/tidb/pull/10711)
 -   `CAST(-num as datetime)`が返す値を`error`から NULL [#10703](https://github.com/pingcap/tidb/pull/10703)に変更します
 -   場合によっては、符号なしヒストグラムが符号付き範囲を満たす問題を修正します[#10695](https://github.com/pingcap/tidb/pull/10695)

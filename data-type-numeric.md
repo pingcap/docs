@@ -13,7 +13,7 @@ TiDB は、以下を含むすべての MySQL 数値型をサポートしてい�
 
 ## 整数型 {#integer-types}
 
-TiDB は、 `INTEGER` / `INT` 、 `TINYINT` 、 `SMALLINT` 、 `MEDIUMINT` 、および`BIGINT`を含むすべての MySQL 整数型をサポートしています。詳細については、 [MySQL の整数データ型の構文](https://dev.mysql.com/doc/refman/5.7/en/integer-types.html)を参照してください。
+TiDB は、 `INTEGER` / `INT` 、 `TINYINT` 、 `SMALLINT` 、 `MEDIUMINT` 、および`BIGINT`を含むすべての MySQL 整数型をサポートしています。詳細については、 [MySQL の整数データ型の構文](https://dev.mysql.com/doc/refman/5.7/en/integer-types.html)参照してください。
 
 次の表は、フィールドの説明をまとめたものです。
 
@@ -23,7 +23,7 @@ TiDB は、 `INTEGER` / `INT` 、 `TINYINT` 、 `SMALLINT` 、 `MEDIUMINT` 、�
 | 未署名   | 未署名。省略した場合は SIGNED です。                               |
 | ゼロフィル | 数値列に ZEROFILL を指定すると、TiDB は UNSIGNED 属性を列に自動的に追加します。 |
 
-次の表は、TiDB でサポートされている整数型に必要なストレージと範囲をまとめたものです。
+次の表は、TiDB でサポートされている整数型に必要なstorageと範囲をまとめたものです。
 
 | データ・タイプ     | 必要なストレージ (バイト) | 最小値 (符号付き/符号なし)          | 最大値 (符号あり/符号なし)                            |
 | ----------- | -------------- | ------------------------ | ------------------------------------------ |
@@ -35,7 +35,7 @@ TiDB は、 `INTEGER` / `INT` 、 `TINYINT` 、 `SMALLINT` 、 `MEDIUMINT` 、�
 
 ### <code>BIT</code>タイプ {#code-bit-code-type}
 
-BIT データ型。 BIT(M) の型は、M ビット値の格納を有効にします。 M は 1 ～ 64 の範囲で指定でき、デフォルト値は 1 です。
+BIT データ型。 BIT(M) の型は、M ビット値のstorageを有効にします。 M は 1 ～ 64 の範囲で指定でき、デフォルト値は 1 です。
 
 ```sql
 BIT[(M)]
@@ -43,7 +43,7 @@ BIT[(M)]
 
 ### <code>BOOLEAN</code>型 {#code-boolean-code-type}
 
-`BOOLEAN`型とそのエイリアス`BOOL`は`TINYINT(1)`と同等です。値が`0`の場合、 `False`と見なされます。それ以外の場合は、 `True`と見なされます。 MySQL と同様に、 `True`は`1`で、 `False`は`0`です。
+`BOOLEAN`型とそのエイリアス`BOOL` `TINYINT(1)`と同等です。値が`0`の場合、 `False`と見なされます。それ以外の場合は、 `True`と見なされます。 MySQL と同様に、 `True` `1`で、 `False`は`0`です。
 
 ```sql
 BOOLEAN
@@ -75,7 +75,7 @@ MEDIUMINT[(M)] [UNSIGNED] [ZEROFILL]
 
 ### <code>INTEGER</code>型 {#code-integer-code-type}
 
-`INTEGER`型とそのエイリアス`INT`は、範囲 [-2147483648, 2147483647] の符号付きの値と、範囲 [0, 4294967295] の符号なしの値を格納します。
+`INTEGER`型とそのエイリアス`INT` 、範囲 [-2147483648, 2147483647] の符号付きの値と、範囲 [0, 4294967295] の符号なしの値を格納します。
 
 ```sql
 INT[(M)] [UNSIGNED] [ZEROFILL]
@@ -108,7 +108,7 @@ TiDB は、 `FLOAT`および`DOUBLE`を含むすべての MySQL 浮動小数点�
 | 未署名   | 未署名。省略した場合は SIGNED です。                               |
 | ゼロフィル | 数値列に ZEROFILL を指定すると、TiDB は UNSIGNED 属性を列に自動的に追加します。 |
 
-次の表は、TiDB でサポートされる浮動小数点型に必要なストレージをまとめたものです。
+次の表は、TiDB でサポートされる浮動小数点型に必要なstorageをまとめたものです。
 
 | データ・タイプ    | 必要なストレージ (バイト)                                              |
 | ---------- | ----------------------------------------------------------- |
@@ -161,7 +161,7 @@ TiDB は、DECIMAL や NUMERIC を含むすべての MySQL 浮動小数点型を
 
 ### <code>DECIMAL</code>型 {#code-decimal-code-type}
 
-`DECIMAL`とそのエイリアス`NUMERIC`は、パックされた「正確な」固定小数点数を格納します。 M は 10 進数の合計桁数 (精度)、D は小数点以下の桁数 (位取り) です。小数点と (負の数の場合) - 記号は M ではカウントされません。D が 0 の場合、値には小数点または小数部分がありません。 DECIMAL の最大桁数 (M) は 65 です。サポートされている小数 (D) の最大数は 30 です。D が省略された場合、デフォルトは 0 です。M が省略された場合、デフォルトは 10 です。
+`DECIMAL`とそのエイリアス`NUMERIC` 、パックされた「正確な」固定小数点数を格納します。 M は 10 進数の合計桁数 (精度)、D は小数点以下の桁数 (位取り) です。小数点と (負の数の場合) - 記号は M ではカウントされません。D が 0 の場合、値には小数点または小数部分がありません。 DECIMAL の最大桁数 (M) は 65 です。サポートされている小数 (D) の最大数は 30 です。D が省略された場合、デフォルトは 0 です。M が省略された場合、デフォルトは 10 です。
 
 ```sql
 DECIMAL[(M[,D])] [UNSIGNED] [ZEROFILL]

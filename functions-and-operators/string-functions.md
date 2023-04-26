@@ -5,7 +5,7 @@ summary: Learn about the string functions in TiDB.
 
 # 文字列関数 {#string-functions}
 
-TiDB は、 MySQL 5.7で利用可能な[文字列関数](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html)のほとんど、MySQL 8.0 で利用可能な[文字列関数](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html)のいくつか、および Oracle 21 で利用可能な[関数](https://docs.oracle.com/en/database/oracle/oracle-database/21/sqlqr/SQL-Functions.html#GUID-93EC62F8-415D-4A7E-B050-5D5B2C127009)のいくつかをサポートしています。
+TiDB は、 MySQL 5.7で利用可能な[文字列関数](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html)のほとんど、MySQL 8.0 で利用可能な[文字列関数](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html)のいくつか、および Oracle 21 で利用可能な[関数](https://docs.oracle.com/en/database/oracle/oracle-database/21/sqlqr/SQL-Functions.html#GUID-93EC62F8-415D-4A7E-B050-5D5B2C127009)つのいくつかをサポートしています。
 
 <CustomContent platform="tidb">
 
@@ -79,9 +79,8 @@ Oracle と TiDB の関数と構文の比較については、 [Oracle と TiDB �
 ## サポートされていない関数 {#unsupported-functions}
 
 -   `LOAD_FILE()`
--   `MATCH`
+-   `MATCH()`
 -   `SOUNDEX()`
--   `SOUNDS LIKE`
 
 ## MySQL との正規表現の互換性 {#regular-expression-compatibility-with-mysql}
 
@@ -95,11 +94,11 @@ MySQL は International Components for Unicode (ICU) を使用して正規表現
 
 TiDB と MySQL の間の`match_type`の値のオプションは次のとおりです。
 
--   `"i"`の値オプションは`"c"` 、および`"m"`であり、 `"i"`の値`"m"`は`"c"` 、 `"n"` `"s"` `"u"` 。
+-   TiDB の値オプションは`"c"` `"m"`および`"s"` `"i"` `"i"` 、MySQL の値オプション`"m"` `"c"` `"n"`および`"u"`です。
 
--   TiDB の`"s"`は、MySQL の`"n"`に対応します。 TiDB で`"s"`が設定されている場合、 `.`文字は改行記号 ( `\n` ) にも一致します。
+-   TiDB の`"s"` MySQL の`"n"`に対応します。 TiDB で`"s"`が設定されている場合、 `.`文字は改行記号 ( `\n` ) にも一致します。
 
-    たとえば、MySQL の`SELECT REGEXP_LIKE(a, b, "n") FROM t1`は TiDB の`SELECT REGEXP_LIKE(a, b, "s") FROM t1`と同じです。
+    たとえば、MySQL の`SELECT REGEXP_LIKE(a, b, "n") FROM t1` TiDB の`SELECT REGEXP_LIKE(a, b, "s") FROM t1`と同じです。
 
 -   TiDB は`"u"`をサポートしていません。これは、MySQL での Unix のみの行末を意味します。
 
@@ -107,7 +106,7 @@ TiDB と MySQL の間の`match_type`の値のオプションは次のとおり�
 
 バイナリ文字列型に対する TiDB と MySQL のサポートの違い:
 
--   MySQL は、8.0.22 以降、正規表現関数でバイナリ文字列をサポートしていません。詳細については、 [MySQL ドキュメント](https://dev.mysql.com/doc/refman/8.0/en/regexp.html)を参照してください。しかし実際には、すべてのパラメータまたは戻り値の型がバイナリ文字列の場合、通常の関数は MySQL で機能します。そうしないと、エラーが報告されます。
+-   MySQL は、8.0.22 以降、正規表現関数でバイナリ文字列をサポートしていません。詳細については、 [MySQL ドキュメント](https://dev.mysql.com/doc/refman/8.0/en/regexp.html)を参照してください。しかし実際には、すべてのパラメータまたは戻り値の型がバイナリ文字列の場合、通常の関数はMySQL で機能します。そうしないと、エラーが報告されます。
 -   現在、TiDB はバイナリ文字列の使用を禁止しており、どのような状況でもエラーが報告されます。
 
 ### その他の互換性 {#other-compatibility}

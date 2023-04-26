@@ -16,7 +16,7 @@ TiDB バージョン: 4.0.8
 
 -   TiFlash
 
-    -   `CAST`の関数を押し下げるサポート
+    -   `CAST`関数を押し下げるサポート
 
 -   ツール
 
@@ -39,7 +39,7 @@ TiDB バージョン: 4.0.8
     -   TiDB エラー ログを、クライアントの接続/切断アクティビティのレベル`DEBUG`に調整します[#20321](https://github.com/pingcap/tidb/pull/20321)
     -   コプロセッサー・キャッシュ[#20293](https://github.com/pingcap/tidb/pull/20293)のモニター・メトリックを追加します
     -   悲観的ロックキーのランタイム情報を追加[#20199](https://github.com/pingcap/tidb/pull/20199)
-    -   ランタイム情報に時間消費情報のセクションを 2 つ追加し、スパン[#20187](https://github.com/pingcap/tidb/pull/20187)を`trace`つ追加します。
+    -   ランタイム情報に時間消費情報のセクションを 2 つ追加し、スパン[#20187](https://github.com/pingcap/tidb/pull/20187)を`trace`追加します。
     -   トランザクション コミットのランタイム情報をスロー ログ[#20185](https://github.com/pingcap/tidb/pull/20185)に追加します。
     -   インデックス マージ結合を無効にする[#20599](https://github.com/pingcap/tidb/pull/20599)
     -   ISO 8601 および一時文字列リテラルのタイムゾーン サポートを追加します[#20670](https://github.com/pingcap/tidb/pull/20670)
@@ -47,7 +47,7 @@ TiDB バージョン: 4.0.8
 -   TiKV
 
     -   **Fast-Tune**パネル ページを追加して、パフォーマンス診断を支援します[#8804](https://github.com/tikv/tikv/pull/8804)
-    -   ログ[#8746](https://github.com/tikv/tikv/pull/8746)からユーザー データをリダクションする`security.redact-info-log`の構成項目を追加します。
+    -   ログ[#8746](https://github.com/tikv/tikv/pull/8746)からユーザー データをリダクションする`security.redact-info-log`構成項目を追加します。
     -   エラー コード[#8877](https://github.com/tikv/tikv/pull/8877)のメタファイルを再フォーマットします。
     -   `pessimistic-txn.pipelined`構成の動的変更を有効にする[#8853](https://github.com/tikv/tikv/pull/8853)
     -   デフォルトでメモリプロファイリング機能を有効にする[#8801](https://github.com/tikv/tikv/pull/8801)
@@ -60,10 +60,10 @@ TiDB バージョン: 4.0.8
 -   TiFlash
 
     -   Raftログの監視メトリクスを追加
-    -   `cop`のタスクのメモリ使用量の監視メトリクスを追加
-    -   データ削除時の`min` `max`をより正確にする
+    -   `cop`タスクのメモリ使用量の監視メトリクスを追加
+    -   データ削除時の`min`指数`max`より正確にする
     -   データ量が少ない場合のクエリ パフォーマンスの向上
-    -   標準エラー コードをサポートする`errors.toml`のファイルを追加します。
+    -   標準エラー コードをサポートする`errors.toml`ファイルを追加します。
 
 -   ツール
 
@@ -71,7 +71,7 @@ TiDB バージョン: 4.0.8
 
         -   `split`と`ingest` [#427](https://github.com/pingcap/br/pull/427)をパイプライン処理して復元プロセスを高速化する
         -   PD スケジューラの手動復元をサポート[#530](https://github.com/pingcap/br/pull/530)
-        -   `remove`のスケジューラの代わりに`pause`のスケジューラを使用する[#551](https://github.com/pingcap/br/pull/551)
+        -   `remove`スケジューラの代わりに`pause`スケジューラを使用する[#551](https://github.com/pingcap/br/pull/551)
 
     -   TiCDC
 
@@ -95,7 +95,7 @@ TiDB バージョン: 4.0.8
 
     -   パーティション化されたテーブルを使用するときに発生する予期しないpanicを修正します[#20565](https://github.com/pingcap/tidb/pull/20565)
     -   インデックス マージ ジョイン[#20427](https://github.com/pingcap/tidb/pull/20427)を使用してアウター サイドをフィルター処理すると、アウター ジョインの誤った結果が返される問題を修正
-    -   データが長すぎる場合、データを`BIT`型に変換すると`NULL`の値が返される問題を修正[#20363](https://github.com/pingcap/tidb/pull/20363)
+    -   データが長すぎる場合、データを`BIT`型に変換すると`NULL`値が返される問題を修正[#20363](https://github.com/pingcap/tidb/pull/20363)
     -   `BIT`型列[#20340](https://github.com/pingcap/tidb/pull/20340)の破損した既定値を修正します。
     -   `BIT`型を`INT64`型に変換する際に発生する可能性があったオーバーフローエラーを修正[#20312](https://github.com/pingcap/tidb/pull/20312)
     -   ハイブリッド型列[#20297](https://github.com/pingcap/tidb/pull/20297)の列最適化の伝播で発生する可能性のある間違った結果を修正します。
@@ -106,7 +106,7 @@ TiDB バージョン: 4.0.8
     -   最大符号なし整数を`BatchPointGet` [#20205](https://github.com/pingcap/tidb/pull/20205)でソートしたときに返される間違った結果を修正
     -   `Enum`と`Set`の保磁力が違うバグを修正[#20364](https://github.com/pingcap/tidb/pull/20364)
     -   あいまいな`YEAR`変換[#20292](https://github.com/pingcap/tidb/pull/20292)の問題を修正します。
-    -   **KV 持続時間**パネルに`store0` [#20260](https://github.com/pingcap/tidb/pull/20260)が含まれている場合に発生する間違ったレポート結果の問題を修正します。
+    -   **KV 持続時間**パネルに`store0` [#20260](https://github.com/pingcap/tidb/pull/20260)含まれている場合に発生する間違ったレポート結果の問題を修正します。
     -   `out of range`エラー[#20252](https://github.com/pingcap/tidb/pull/20252)にもかかわらず`Float`型データが誤って挿入される問題を修正
     -   生成された列が不正な`NULL`値を処理しないバグを修正[#20216](https://github.com/pingcap/tidb/pull/20216)
     -   範囲外の`YEAR`型データの不正確なエラー情報を修正[#20170](https://github.com/pingcap/tidb/pull/20170)
@@ -121,7 +121,7 @@ TiDB バージョン: 4.0.8
 
     -   暗号化におけるミューテックスの競合により、pd-worker のハートビートの処理が遅くなるというバグを修正します[#8869](https://github.com/tikv/tikv/pull/8869)
     -   メモリプロファイルが誤って生成される問題を修正[#8790](https://github.com/tikv/tikv/pull/8790)
-    -   ストレージ クラスが[#8763](https://github.com/tikv/tikv/pull/8763)に指定されている場合に、GCS でデータベースをバックアップできない問題を修正しました。
+    -   storageクラスが[#8763](https://github.com/tikv/tikv/pull/8763)に指定されている場合に、GCS でデータベースをバックアップできない問題を修正しました。
     -   リージョンが再起動または新しく分割されたときに、学習者がリーダーを見つけられないバグを修正します[#8864](https://github.com/tikv/tikv/pull/8864)
 
 -   PD
@@ -133,7 +133,7 @@ TiDB バージョン: 4.0.8
 
     -   ログ メッセージの間違ったタイムスタンプの問題を修正
     -   マルチディスクTiFlashの展開中に、間違った容量が原因でTiFlashレプリカの作成が失敗する問題を修正します。
-    -   TiFlashが再起動後に破損したデータ ファイルに関するエラーをスローする可能性があるバグを修正します。
+    -   TiFlash が再起動後に破損したデータ ファイルに関するエラーをスローする可能性があるバグを修正します。
     -   TiFlash がクラッシュした後、壊れたファイルがディスクに残る可能性がある問題を修正します。
     -   プロキシが最新のRaftリース情報に追いつかない場合、学習者の読み取り中にインデックスの待機に時間がかかることがあるというバグを修正します
     -   古くなったRaftログを再生しているときに、プロキシが Key-Value エンジンに過剰なリージョン状態情報を書き込むバグを修正

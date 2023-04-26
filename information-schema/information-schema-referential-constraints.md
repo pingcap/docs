@@ -1,18 +1,18 @@
 ---
 title: REFERENTIAL_CONSTRAINTS
-summary: Learn the `REFERENTIAL_CONSTRAINTS` information_schema table.
+summary: Learn the `REFERENTIAL_CONSTRAINTS` INFORMATION_SCHEMA table.
 ---
 
 # REFERENTIAL_CONSTRAINTS {#referential-constraints}
 
-`REFERENTIAL_CONSTRAINTS`のテーブルは、テーブル間の`FOREIGN KEY`の関係に関する情報を提供します。現在、TiDB は`FOREIGN KEY`の制約を強制したり、 `ON DELETE CASCADE`などのアクションを実行したりしないことに注意してください。
-
-{{< copyable "" >}}
+`REFERENTIAL_CONSTRAINTS`テーブルは、テーブル間の`FOREIGN KEY`関係に関する情報を提供します。現在、TiDB は`FOREIGN KEY`制約を強制したり、 `ON DELETE CASCADE`などのアクションを実行したりしないことに注意してください。
 
 ```sql
-USE information_schema;
-DESC referential_constraints;
+USE INFORMATION_SCHEMA;
+DESC REFERENTIAL_CONSTRAINTS;
 ```
+
+出力は次のとおりです。
 
 ```sql
 +---------------------------+--------------+------+------+---------+-------+
@@ -33,26 +33,26 @@ DESC referential_constraints;
 11 rows in set (0.00 sec)
 ```
 
-{{< copyable "" >}}
-
 ```sql
 CREATE TABLE test.parent (
- id INT NOT NULL AUTO_INCREMENT,
- PRIMARY KEY (id)
+  id INT NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (id)
 );
 
 CREATE TABLE test.child (
- id INT NOT NULL AUTO_INCREMENT,
- name varchar(255) NOT NULL,
- parent_id INT DEFAULT NULL,
- PRIMARY KEY (id),
- CONSTRAINT fk_parent FOREIGN KEY (parent_id) REFERENCES parent (id) ON UPDATE CASCADE ON DELETE RESTRICT
+  id INT NOT NULL AUTO_INCREMENT,
+  name varchar(255) NOT NULL,
+  parent_id INT DEFAULT NULL,
+  PRIMARY KEY (id),
+  CONSTRAINT fk_parent FOREIGN KEY (parent_id) REFERENCES parent (id) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
-SELECT * FROM referential_constraints\G
+SELECT * FROM REFERENTIAL_CONSTRAINTS\G
 ```
 
-```
+出力は次のとおりです。
+
+```sql
 *************************** 1. row ***************************
        CONSTRAINT_CATALOG: def
         CONSTRAINT_SCHEMA: test

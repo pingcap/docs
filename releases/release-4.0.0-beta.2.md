@@ -13,7 +13,7 @@ TiDB アンシブル バージョン: 4.0.0-beta.2
 ## 互換性の変更 {#compatibility-changes}
 
 -   ツール
-    -   Binlog
+    -   TiDBBinlog
         -   Drainer [#915](https://github.com/pingcap/tidb-binlog/pull/915)で`disable-dispatch`と`disable-causality`が構成されている場合、システムがエラーを返し、終了する問題を修正します。
 
 ## 新機能 {#new-features}
@@ -25,7 +25,7 @@ TiDB アンシブル バージョン: 4.0.0-beta.2
     -   動的に更新された構成をハードウェア ディスクに保持するサポート[#2153](https://github.com/pingcap/pd/pull/2153)
 
 -   ツール
-    -   Binlog
+    -   TiDBBinlog
         -   TiDB クラスタ間の双方向データ複製をサポート[#879](https://github.com/pingcap/tidb-binlog/pull/879) [#903](https://github.com/pingcap/tidb-binlog/pull/903)
     -   TiDB Lightning
         -   TLS 構成のサポート[#40](https://github.com/tikv/importer/pull/40) [#270](https://github.com/pingcap/tidb-lightning/pull/270)

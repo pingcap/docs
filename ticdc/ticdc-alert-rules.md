@@ -35,7 +35,7 @@ summary: Learn about TiCDC alert rules and how to handle the alerts.
 
 -   説明：
 
-    レプリケーション タスクの解決済み TS が 10 分以上遅れています。
+    レプリケーション タスクの解決済み TS が 5 分以上遅れています。
 
 -   解決：
 

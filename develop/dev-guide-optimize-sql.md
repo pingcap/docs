@@ -57,7 +57,7 @@ EXPLAIN SELECT * FROM books WHERE title = 'Marian Yost';
 +---------------------+------------+-----------+---------------+-----------------------------------------+
 ```
 
-実行計画の`TableFullScan_5`からわかるように、TiDB は`books`のテーブルに対してフル テーブル スキャンを実行し、 `title`が各行の条件を満たすかどうかをチェックします。 `TableFullScan_5`の`estRows`の値は`1000000.00`です。これは、オプティマイザーが、この全表スキャンに`1000000.00`行のデータが必要であると見積もることを意味します。
+実行計画の`TableFullScan_5`からわかるように、TiDB は`books`テーブルに対してフル テーブル スキャンを実行し、 `title`各行の条件を満たすかどうかをチェックします。 `TableFullScan_5`の`estRows`値は`1000000.00`です。これは、オプティマイザーが、この全表スキャンに`1000000.00`行のデータが必要であると見積もることを意味します。
 
 `EXPLAIN`の使用方法の詳細については、 [`EXPLAIN`ウォークスルー](/explain-walkthrough.md)を参照してください。
 
@@ -89,7 +89,7 @@ SELECT * FROM books WHERE title = 'Marian Yost';
 Time: 0.007s
 ```
 
-パフォーマンスが向上した理由を理解するには、 `EXPLAIN`を使用して新しい実行計画を表示します。
+パフォーマンスが向上した理由を理解するには、 `EXPLAIN`使用して新しい実行計画を表示します。
 
 ```sql
 EXPLAIN SELECT * FROM books WHERE title = 'Marian Yost';
@@ -105,9 +105,9 @@ EXPLAIN SELECT * FROM books WHERE title = 'Marian Yost';
 +---------------------------+---------+-----------+-------------------------------------+-------------------------------------------------------+
 ```
 
-実行計画の`IndexLookup_10`からわかるように、TiDB は`title_idx`のインデックスでデータをクエリします。その`estRows`の値は`1.27`です。これは、オプティマイザが`1.27`行のみがスキャンされると見積もることを意味します。スキャンされた推定行数は、全表スキャンの`1000000.00`行のデータよりもはるかに少なくなっています。
+実行計画の`IndexLookup_10`からわかるように、TiDB は`title_idx`インデックスでデータをクエリします。その`estRows`値は`1.27`です。これは、オプティマイザが`1.27`行のみがスキャンされると見積もることを意味します。スキャンされた推定行数は、全表スキャンの`1000000.00`行のデータよりもはるかに少なくなっています。
 
-`IndexLookup_10`の実行計画は、最初に`IndexRangeScan_8`演算子を使用して`title_idx`インデックスを介して条件を満たすインデックス データを読み取り、次に`TableLookup_9`演算子を使用して、インデックス データに格納されている行 ID に従って対応する行をクエリします。
+`IndexLookup_10`実行計画は、最初に`IndexRangeScan_8`演算子を使用して`title_idx`インデックスを介して条件を満たすインデックス データを読み取り、次に`TableLookup_9`演算子を使用して、インデックス データに格納されている行 ID に従って対応する行をクエリします。
 
 TiDB 実行計画の詳細については、 [TiDB クエリ実行計画の概要](/explain-overview.md)を参照してください。
 
@@ -135,7 +135,7 @@ SELECT title, price FROM books WHERE title = 'Marian Yost';
 Time: 0.007s
 ```
 
-`title_idx`番目のインデックスには`title`列のデータしか含まれていないため、TiDB は最初にインデックス データをスキャンしてから、テーブルの`price`列をクエリする必要があります。
+`title_idx`インデックスには`title`列のデータしか含まれていないため、TiDB は最初にインデックス データをスキャンしてから、テーブルの`price`列をクエリする必要があります。
 
 ```sql
 EXPLAIN SELECT title, price FROM books WHERE title = 'Marian Yost';
@@ -161,7 +161,7 @@ ALTER TABLE books DROP INDEX title_idx;
 CREATE INDEX title_price_idx ON books (title, price);
 ```
 
-`price`番目のデータは`title_price_idx`番目のインデックスに格納されているため、次のクエリではインデックス データをスキャンするだけで済みます。
+`price`データは`title_price_idx`インデックスに格納されているため、次のクエリではインデックス データをスキャンするだけで済みます。
 
 ```sql
 EXPLAIN SELECT title, price FROM books WHERE title = 'Marian Yost';
@@ -234,7 +234,7 @@ EXPLAIN SELECT * FROM books WHERE id = 896;
 +-------------+---------+------+---------------+---------------+
 ```
 
-`Point_Get`は非常に高速な実行プランです。
+`Point_Get`非常に高速な実行プランです。
 
 ## 適切な結合タイプを使用する {#use-the-right-join-type}
 

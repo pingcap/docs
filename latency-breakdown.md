@@ -26,7 +26,7 @@ avg = ${metric_name}_sum / ${metric_name}_count
 
 ## 一般的な SQLレイヤー {#general-sql-layer}
 
-この一般的な SQLレイヤーのレイテンシーは TiDB の最上位に存在し、すべての SQL クエリで共有されます。以下は、一般的な SQLレイヤー操作の時間コスト図です。
+この一般的な SQLレイヤーのレイテンシーはTiDB の最上位に存在し、すべての SQL クエリで共有されます。以下は、一般的な SQLレイヤー操作の時間コスト図です。
 
 ```railroad+diagram
 Diagram(
@@ -54,7 +54,7 @@ Diagram(
 )
 ```
 
-一般的な SQLレイヤーのレイテンシーは`e2e duration`のメトリックとして観察でき、次のように計算されます。
+一般的な SQLレイヤーのレイテンシーは`e2e duration`メトリックとして観察でき、次のように計算されます。
 
 ```text
 e2e duration =
@@ -64,10 +64,10 @@ e2e duration =
     tidb_session_execute_duration_seconds{type="general"}
 ```
 
--   `tidb_server_get_token_duration_seconds`は、トークン待機の期間を記録します。これは通常 1 ミリ秒未満であり、無視できるほど小さいです。
--   `tidb_session_parse_duration_seconds`は、SQL クエリを抽象構文木 (AST) に解析する期間を記録します。これは[`PREPARE/EXECUTE`ステートメント](/develop/dev-guide-optimize-sql-best-practices.md#use-prepare)でスキップできます。
--   `tidb_session_compile_duration_seconds`は、AST を実行計画にコンパイルする期間を記録します。これは[SQL準備実行計画キャッシュ](/sql-prepared-plan-cache.md)でスキップできます。
--   `tidb_session_execute_duration_seconds{type="general"}`は実行期間を記録し、すべてのタイプのユーザー クエリが混在します。パフォーマンスの問題やボトルネックを分析するには、これを細かい期間に分割する必要があります。
+-   `tidb_server_get_token_duration_seconds`トークン待機の期間を記録します。これは通常 1 ミリ秒未満であり、無視できるほど小さいです。
+-   `tidb_session_parse_duration_seconds` 、SQL クエリを抽象構文木 (AST) に解析する期間を記録します。これは[`PREPARE/EXECUTE`ステートメント](/develop/dev-guide-optimize-sql-best-practices.md#use-prepare)でスキップできます。
+-   `tidb_session_compile_duration_seconds` AST を実行計画にコンパイルする期間を記録します。これは[SQL準備実行計画キャッシュ](/sql-prepared-plan-cache.md)でスキップできます。
+-   `tidb_session_execute_duration_seconds{type="general"}`実行期間を記録し、すべてのタイプのユーザー クエリが混在します。パフォーマンスの問題やボトルネックを分析するには、これを細かい期間に分割する必要があります。
 
 一般に、OLTP (オンライン トランザクション処理) のワークロードは、いくつかの重要なコードを共有する読み取りクエリと書き込みクエリに分けることができます。次のセクションでは、実行方法が異なる[クエリを読む](#read-queries)と[クエリを書く](#write-queries)のレイテンシーについて説明します。
 
@@ -104,7 +104,7 @@ tidb_session_execute_duration_seconds{type="general"} =
     read value duration
 ```
 
-`pd_client_cmd_handle_cmds_duration_seconds{type="wait"}`は、PD から[TSO (タイムスタンプ Oracle)](/glossary.md#tso)をフェッチする期間を記録します。クラスター化されたプライマリ インデックスを使用して、またはスナップショットから自動コミット トランザクション モードで読み取る場合、値はゼロになります。
+`pd_client_cmd_handle_cmds_duration_seconds{type="wait"}` PD から[TSO (タイムスタンプ Oracle)](/glossary.md#tso)フェッチする期間を記録します。クラスター化されたプライマリ インデックスを使用して、またはスナップショットから自動コミット トランザクション モードで読み取る場合、値はゼロになります。
 
 `read handle duration`と`read value duration`は次のように計算されます。
 
@@ -119,7 +119,7 @@ read handle duration = read value duration =
     tidb_tikvclient_rpc_net_latency_seconds{store="?"}
 ```
 
-`tidb_tikvclient_request_seconds{type="Get"}`は、バッチ化された gRPC ラッパーを介して TiKV に直接送信される取得リクエストの期間を記録します。 `tidb_tikvclient_batch_wait_duration` 、 `tidb_tikvclient_batch_send_latency` 、および`tidb_tikvclient_rpc_net_latency_seconds{store="?"}`などの前述のバッチ クライアント期間の詳細については、 [バッチ クライアント](#batch-client)セクションを参照してください。
+`tidb_tikvclient_request_seconds{type="Get"}` 、バッチ化された gRPC ラッパーを介して TiKV に直接送信される取得リクエストの期間を記録します。 `tidb_tikvclient_batch_wait_duration` 、 `tidb_tikvclient_batch_send_latency` 、および`tidb_tikvclient_rpc_net_latency_seconds{store="?"}`などの前述のバッチ クライアント期間の詳細については、 [バッチ クライアント](#batch-client)セクションを参照してください。
 
 `tikv_grpc_msg_duration_seconds{type="kv_get"}`期間は次のように計算されます。
 
@@ -140,7 +140,7 @@ read value duration(from disk) =
     sum(rate(tikv_storage_rocksdb_perf{metric="block_read_time",req="get/batch_get_command"})) / sum(rate(tikv_storage_rocksdb_perf{metric="block_read_count",req="get/batch_get_command"}))
 ```
 
-TiKV は RocksDB をストレージ エンジンとして使用します。必要な値がブロックキャッシュにない場合、TiKV はディスクから値を読み込む必要があります。 `tikv_storage_rocksdb_perf`の場合、get リクエストは`get`または`batch_get_command`のいずれかになります。
+TiKV は RocksDB をstorageエンジンとして使用します。必要な値がブロックキャッシュにない場合、TiKV はディスクから値を読み込む必要があります。 `tikv_storage_rocksdb_perf`の場合、get リクエストは`get`または`batch_get_command`のいずれかになります。
 
 ### バッチポイント取得 {#batch-point-get}
 
@@ -319,7 +319,7 @@ Diagram(
 -   ロック フェーズ: 実行結果に対して悲観的ロックを取得します。
 -   コミット フェーズ: 2 フェーズ コミット プロトコル (2PC) を介してトランザクションをコミットします。
 
-実行フェーズでは、TiDB がメモリのデータを操作し、主なレイテンシーは必要なデータの読み取りから発生します。更新クエリと削除クエリの場合、TiDB はまず TiKV からデータを読み取り、次にメモリの行を更新または削除します。
+実行フェーズでは、TiDB がメモリ内のデータを操作し、主なレイテンシーは必要なデータの読み取りから発生します。更新クエリと削除クエリの場合、TiDB はまず TiKV からデータを読み取り、次にメモリ内の行を更新または削除します。
 
 例外は、単一のリモート プロシージャ コール (RPC) で読み取りとロックを実行するポイント get とバッチ ポイント get を使用したロック時の読み取り操作 ( `SELECT FOR UPDATE` ) です。
 
@@ -342,7 +342,7 @@ Diagram(
 )
 ```
 
-lock-time point get の間、 `execution(clustered PK)`および`execution(non-clustered PK or UK)`の期間は次のように計算されます。
+lock-time point get の間、 `execution(clustered PK)`および`execution(non-clustered PK or UK)`期間は次のように計算されます。
 
 ```text
 execution(clustered PK) =
@@ -421,7 +421,7 @@ tikv_grpc_msg_duration_seconds{type="kv_pessimistic_lock"} =
     lock write duration
 ```
 
--   TiDB v6.0 以降、TiKV はデフォルトで[インメモリ悲観的ロック](/pessimistic-transaction.md#in-memory-pessimistic-lock)を使用します。インメモリ悲観的ロックは、非同期書き込みプロセスをバイパスします。
+-   TiDB v6.0 以降、TiKV はデフォルトで[インメモリ悲観的ロック](/pessimistic-transaction.md#in-memory-pessimistic-lock)を使用します。インメモリ ペシ悲観的ロックは、非同期書き込みプロセスをバイパスします。
 
 -   `tikv_storage_engine_async_request_duration_seconds{type="snapshot"}`はスナップショット タイプの期間です。詳細については、 [TiKV スナップショット](#tikv-snapshot)セクションを参照してください。
 
@@ -522,14 +522,14 @@ Commit_time =
 
 コミット期間は、次の 4 つのメトリックに分類できます。
 
--   `Get_latest_ts_time`は、非同期コミットまたは単一フェーズ コミット (1PC) トランザクションで最新の TSO を取得する期間を記録します。
--   `Prewrite_time`は、事前書き込みフェーズの期間を記録します。
--   `Get_commit_ts_time`は、一般的な 2PC トランザクションの期間を記録します。
--   `Commit_time`は、コミット フェーズの期間を記録します。 async-commit または 1PC トランザクションにはこのフェーズがないことに注意してください。
+-   `Get_latest_ts_time`非同期コミットまたは単一フェーズ コミット (1PC) トランザクションで最新の TSO を取得する期間を記録します。
+-   `Prewrite_time`事前書き込みフェーズの期間を記録します。
+-   `Get_commit_ts_time`一般的な 2PC トランザクションの期間を記録します。
+-   `Commit_time`コミット フェーズの期間を記録します。 async-commit または 1PC トランザクションにはこのフェーズがないことに注意してください。
 
 悲観的ロックと同様に、フロー制御はレイテンシーの増幅として機能します (前の式の`prewrite_round`と`commit_round` )。
 
-`tidb_tikvclient_request_seconds{type="Prewrite"}`と`tidb_tikvclient_request_seconds{type="Commit"}`の期間は次のように計算されます。
+`tidb_tikvclient_request_seconds{type="Prewrite"}`と`tidb_tikvclient_request_seconds{type="Commit"}`期間は次のように計算されます。
 
 ```text
 tidb_tikvclient_request_seconds{type="Prewrite"} =
@@ -614,7 +614,7 @@ Diagram(
 -   バッチ リクエスト チャネルのサイズは[`tikv-client.max-batch-size`](/tidb-configuration-file.md#max-batch-size) (デフォルトは`128` ) で、エンキューの期間は`tidb_tikvclient_batch_wait_duration`として観察されます。
 -   ストリーム要求には`CmdBatchCop` 、 `CmdCopStream` 、および`CmdMPPConn`の 3 種類があり、ストリームから最初の応答を取得するために追加の`recv()`呼び出しが必要です。
 
-見逃されたレイテンシーがまだいくらかありますが、 `tidb_tikvclient_request_seconds`はおおよそ次のように計算できます。
+見逃されたレイテンシーがまだいくらかありますが、 `tidb_tikvclient_request_seconds`おおよそ次のように計算できます。
 
 ```text
 tidb_tikvclient_request_seconds{type="?"} =
@@ -624,10 +624,10 @@ tidb_tikvclient_request_seconds{type="?"} =
     tidb_tikvclient_rpc_net_latency_seconds{store="?"}
 ```
 
--   `tidb_tikvclient_batch_wait_duration`は、バッチ システムでの待機時間を記録します。
--   `tidb_tikvclient_batch_send_latency`は、バッチ システムでのエンコード期間を記録します。
+-   `tidb_tikvclient_batch_wait_duration`バッチ システムでの待機時間を記録します。
+-   `tidb_tikvclient_batch_send_latency`バッチ システムでのエンコード期間を記録します。
 -   `tikv_grpc_msg_duration_seconds{type="kv_?"}`は TiKV 処理期間です。
--   `tidb_tikvclient_rpc_net_latency_seconds`はネットワークレイテンシーを記録します。
+-   `tidb_tikvclient_rpc_net_latency_seconds`ネットワークレイテンシーを記録します。
 
 ## TiKV スナップショット {#tikv-snapshot}
 
@@ -759,7 +759,7 @@ async io enabled commit = max(
 )
 ```
 
-v5.3.0 以降、TiKV は Async IO Raft (StoreWriter スレッド プールによるRaftログの書き込み) をサポートします。 Async IO Raftは、 [`store-io-pool-size`](/tikv-configuration-file.md#store-io-pool-size-new-in-v530)が正の値に設定されている場合にのみ有効になり、コミットのプロセスが変更されます。 `persist log locally duration`と`wait by write worker duration`は次のように計算されます。
+v5.3.0 以降、TiKV は Async IO Raft (StoreWriter スレッド プールによるRaftログの書き込み) をサポートします。 Async IO Raft は、 [`store-io-pool-size`](/tikv-configuration-file.md#store-io-pool-size-new-in-v530)が正の値に設定されている場合にのみ有効になり、コミットのプロセスが変更されます。 `persist log locally duration`と`wait by write worker duration`は次のように計算されます。
 
 ```text
 persist log locally duration =
@@ -827,7 +827,7 @@ raft db write duration(raft engine disabled) =
 
 `commit log wait duration`はクォーラム ピアの最長期間であるため、 `raft db write duration`より大きい場合があります。
 
-v6.1.0 以降、TiKV はデフォルトのログ ストレージ エンジンとして[Raft Engine](/glossary.md#raft-engine)を使用し、ログの書き込みプロセスを変更します。
+v6.1.0 以降、TiKV はデフォルトのログstorageエンジンとして[Raft Engine](/glossary.md#raft-engine)を使用し、ログの書き込みプロセスを変更します。
 
 ### KV DB {#kv-db}
 
@@ -863,7 +863,7 @@ tikv_raftstore_apply_log_duration_seconds =
 
 ### 遅い読み取りクエリ {#slow-read-queries}
 
-`SELECT`のステートメントがデータベース時間のかなりの部分を占めている場合、TiDB の読み取りクエリが遅いと見なすことができます。
+`SELECT`ステートメントがデータベース時間のかなりの部分を占めている場合、TiDB の読み取りクエリが遅いと見なすことができます。
 
 低速クエリの実行計画は、TiDB ダッシュボードの[Top SQLステートメント](/dashboard/dashboard-overview.md#top-sql-statements)パネルで確認できます。低速読み取りクエリの時間コストを調査するには、前述の説明に従って[ポイントゲット](#point-get) 、 [バッチポイント取得](#batch-point-get) 、およびいくつかの[単純なコプロセッサー照会](#table-scan--index-scan)を分析できます。
 

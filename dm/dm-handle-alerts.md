@@ -32,7 +32,7 @@ summary: Understand how to deal with the alert information in DM.
 
     アラートを処理するには、次の手順を実行できます。
 
-    1.  対応する DM-worker ノードの動作ステータスをビューします。
+    1.  対応する DM-worker ノードの動作ステータスをビュー。
     2.  ノードが接続されているかどうかを確認します。
     3.  ログを使用してエラーをトラブルシューティングします。
 
@@ -92,7 +92,7 @@ summary: Understand how to deal with the alert information in DM.
 
     -   不要なデータを手動で削除して、ディスクの空き容量を増やします。
     -   [リレー ログの自動データ パージ戦略](/dm/relay-log.md#automatic-data-purge)または[データを手動で消去する](/dm/relay-log.md#manual-data-purge)を再設定します。
-    -   コマンド`pause-relay`を実行して、リレー ログのプル プロセスを一時停止します。十分な空きディスク領域ができたら、コマンド`resume-relay`を実行してプロセスを再開します。リレー ログのプル プロセスが一時停止された後は、プルされていないアップストリームの binlog ファイルを削除しないでください。
+    -   コマンド`pause-relay`を実行して、リレー ログのプル プロセスを一時停止します。十分な空きディスク領域ができたら、コマンド`resume-relay`を実行してプロセスを再開します。リレー ログのプル プロセスが一時停止された後は、プルされていないアップストリームのbinlogファイルを削除しないでください。
 
 ### <code>DM_relay_log_data_corruption</code> {#code-dm-relay-log-data-corruption-code}
 
@@ -108,7 +108,7 @@ summary: Understand how to deal with the alert information in DM.
 
 -   説明：
 
-    リレー ログ処理ユニットが上流から binlog イベントを読み込もうとしてエラーが発生した場合、このユニットは`Paused`状態に移行し、すぐにアラートがトリガーされます。
+    リレー ログ処理ユニットが上流からbinlogイベントを読み込もうとしてエラーが発生した場合、このユニットは`Paused`状態に移行し、すぐにアラートがトリガーされます。
 
 -   解決：
 
@@ -118,7 +118,7 @@ summary: Understand how to deal with the alert information in DM.
 
 -   説明：
 
-    リレー ログ処理ユニットが binlog イベントをリレー ログ ファイルに書き込もうとしたときにエラーが発生した場合、このユニットは状態`Paused`に移行し、すぐにアラートがトリガーされます。
+    リレー ログ処理ユニットがbinlogイベントをリレー ログ ファイルに書き込もうとしたときにエラーが発生した場合、このユニットは状態`Paused`に移行し、すぐにアラートがトリガーされます。
 
 -   解決：
 
@@ -128,7 +128,7 @@ summary: Understand how to deal with the alert information in DM.
 
 -   説明：
 
-    現在の上流の MySQL/MariaDB 内の binlog ファイルの数が、リレー ログ処理ユニットによってプルされた最新の binlog ファイルの数を 10 分間で 1**つ以上超える**と、アラートがトリガーされます。
+    現在の上流の MySQL/MariaDB 内のbinlogファイルの数が、リレー ログ処理ユニットによってプルされた最新のbinlogファイルの数を 10 分間で 1**つ以上**超えると、アラートがトリガーされます。
 
 -   解決：
 
@@ -156,13 +156,13 @@ summary: Understand how to deal with the alert information in DM.
 
     [DM のトラブルシューティング](/dm/dm-error-handling.md#troubleshooting)を参照してください。
 
-## binlog レプリケーションに関連するアラート ルール {#alert-rules-related-to-binlog-replication}
+## binlogレプリケーションに関連するアラート ルール {#alert-rules-related-to-binlog-replication}
 
 ### <code>DM_sync_process_exists_with_error</code> {#code-dm-sync-process-exists-with-error-code}
 
 -   説明：
 
-    binlog レプリケーション処理ユニットでエラーが発生すると、このユニットは`Paused`状態に移行し、アラートがすぐにトリガーされます。
+    binlogレプリケーション処理ユニットでエラーが発生すると、このユニットは`Paused`状態に移行し、アラートがすぐにトリガーされます。
 
 -   解決：
 
@@ -172,7 +172,7 @@ summary: Understand how to deal with the alert information in DM.
 
 -   説明：
 
-    現在の上流の MySQL/MariaDB 内の binlog ファイルの数が、リレー ログ処理ユニットによって処理された最新の binlog ファイルの数を 10 分間**以上**1 つ超えると、アラートがトリガーされます。
+    現在の上流の MySQL/MariaDB 内のbinlogファイルの数が、リレー ログ処理ユニットによって処理された最新のbinlogファイルの数を 10 分間**以上**1 つ超えると、アラートがトリガーされます。
 
 -   解決：
 
@@ -182,7 +182,7 @@ summary: Understand how to deal with the alert information in DM.
 
 -   説明：
 
-    現在のリレー ログ処理ユニット内のバイナリ ログ ファイルの数が、バイナリ ログ レプリケーション処理ユニットによって処理された最新のバイナリ ログ ファイルの数を 10 分間**以上**1 つ超えると、アラートがトリガーされます。
+    現在のリレー ログ処理ユニット内のbinlogファイルの数が、binlogレプリケーション処理ユニットによって処理された最新のbinlogファイルの数を 10 分間**以上**1 つ超えると、アラートがトリガーされます。
 
 -   解決：
 

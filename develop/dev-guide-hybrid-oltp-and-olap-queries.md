@@ -7,7 +7,7 @@ summary: Introduce the HTAP queries in TiDB.
 
 HTAP は Hybrid Transactional and Analytical Processing の略です。従来、データベースは多くの場合、トランザクションまたは分析のシナリオ向けに設計されているため、データ プラットフォームは多くの場合、トランザクション処理と分析処理に分割する必要があり、データをトランザクション データベースから分析データベースに複製して、分析クエリに迅速に応答する必要があります。 TiDB データベースはトランザクション タスクと分析タスクの両方を実行できるため、データ プラットフォームの構築が大幅に簡素化され、ユーザーはより新しいデータを分析に使用できるようになります。
 
-TiDB は、オンライン トランザクション処理 (OLTP) 用に行ベースのストレージ エンジンであるTiFlashを使用し、オンライン分析処理 (OLAP) 用に列型ストレージ エンジンである TiFlash を使用します。 HTAP では、行ベースのストレージ エンジンと列指向のストレージ エンジンが共存します。どちらのストレージ エンジンもデータを自動的にレプリケートし、強力な整合性を維持できます。行ベースのストレージ エンジンは OLTP のパフォーマンスを最適化し、列ベースのストレージ エンジンは OLAP のパフォーマンスを最適化します。
+TiDB は、オンライン トランザクション処理 (OLTP) 用に行ベースのstorageエンジンである TiKV を使用し、オンライン分析処理 (OLAP) 用に列型storageエンジンであるTiFlashを使用します。 HTAP では、行ベースのstorageエンジンと列指向のstorageエンジンが共存します。どちらのstorageエンジンもデータを自動的にレプリケートし、強力な整合性を維持できます。行ベースのstorageエンジンは OLTP のパフォーマンスを最適化し、列ベースのstorageエンジンは OLAP のパフォーマンスを最適化します。
 
 [テーブルを作成する](/develop/dev-guide-create-table.md#use-htap-capabilities)番目のセクションでは、TiDB の HTAP 機能を有効にする方法を紹介します。以下では、HTAP を使用してデータをより高速に分析する方法について説明します。
 
@@ -19,13 +19,13 @@ TiDB は、オンライン トランザクション処理 (OLTP) 用に行ベー
 tiup demo bookshop prepare --users=200000 --books=500000 --authors=100000 --ratings=1000000 --orders=1000000 --host 127.0.0.1 --port 4000 --drop-tables
 ```
 
-または、事前に準備されたサンプル データをインポートすることもでき[TiDB Cloudのインポート機能を利用する](/develop/dev-guide-bookshop-schema-design.md#method-2-via-tidb-cloud-import) 。
+または[TiDB Cloudのインポート機能を利用する](/develop/dev-guide-bookshop-schema-design.md#method-2-via-tidb-cloud-import)事前に準備されたサンプル データをインポートすることもできます。
 
 ## ウィンドウ関数 {#window-functions}
 
 データベースを使用する場合、データを保存し、アプリケーション機能 (書籍の注文や評価など) を提供するだけでなく、データベース内のデータを分析して、さらなる操作や決定を下す必要がある場合もあります。
 
-[1 つのテーブルからデータをクエリする](/develop/dev-guide-get-data-from-single-table.md)のドキュメントでは、集計クエリを使用してデータ全体を分析する方法を紹介しています。より複雑なシナリオでは、複数の集計クエリの結果を 1 つのクエリに集計したい場合があります。特定の書籍の注文金額の過去の傾向を知りたい場合は、各月のすべての注文データを`sum`集計し、 `sum`の結果を集計して過去の傾向を取得できます。
+[1 つのテーブルからデータをクエリする](/develop/dev-guide-get-data-from-single-table.md)ドキュメントでは、集計クエリを使用してデータ全体を分析する方法を紹介しています。より複雑なシナリオでは、複数の集計クエリの結果を 1 つのクエリに集計したい場合があります。特定の書籍の注文金額の過去の傾向を知りたい場合は、各月のすべての注文データを`sum`集計し、 `sum`結果を集計して過去の傾向を取得できます。
 
 このような分析を容易にするために、TiDB v3.0 以降、TiDB はウィンドウ関数をサポートしています。データの行ごとに、この関数は複数の行にまたがるデータにアクセスする機能を提供します。ウィンドウ関数は、通常の集計クエリとは異なり、結果セットを 1 つの行にマージせずに行を集計します。
 
@@ -146,7 +146,7 @@ TiDB は、より多くの分析ステートメントのために、いくつか
 
 ### TiFlashレプリカの作成 {#create-tiflash-replicas}
 
-TiDB は、デフォルトで行ベースのストレージ エンジン TiKV を使用します。カラムナ ストレージ エンジンTiFlashを使用するには、 [HTAP 機能を有効にする](/develop/dev-guide-create-table.md#use-htap-capabilities)を参照してください。 TiFlashを介してデータをクエリする前に、次のステートメントを使用して、 `books`および`orders`のテーブルのTiFlashレプリカを作成する必要があります。
+TiDB は、デフォルトで行ベースのstorageエンジン TiKV を使用します。カラムナstorageエンジンTiFlashを使用するには、 [HTAP 機能を有効にする](/develop/dev-guide-create-table.md#use-htap-capabilities)を参照してください。 TiFlashを介してデータをクエリする前に、次のステートメントを使用して、 `books`および`orders`テーブルのTiFlashレプリカを作成する必要があります。
 
 ```sql
 ALTER TABLE books SET TIFLASH REPLICA 1;
@@ -177,7 +177,7 @@ SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = 'bookshop'
 1 row in set (0.07 sec)
 ```
 
-レプリカが追加されたら、 `EXPLAIN`ステートメントを使用して、上記のウィンドウ関数[`PARTITION BY`句](#partition-by-clause)の実行計画を確認できます。実行計画に`cop[tiflash]`が表示された場合は、 TiFlashエンジンが動作を開始したことを意味します。
+レプリカが追加されたら、 `EXPLAIN`ステートメントを使用して、上記のウィンドウ関数[`PARTITION BY`句](#partition-by-clause)の実行計画を確認できます。実行計画に`cop[tiflash]`表示された場合は、 TiFlashエンジンが動作を開始したことを意味します。
 
 その後、 [`PARTITION BY`句](#partition-by-clause)のサンプルSQL文を再度実行してください。結果は次のとおりです。
 
@@ -240,7 +240,7 @@ WITH orders_group_by_month AS (
 SELECT * FROM acc;
 ```
 
-`EXPLAIN`ステートメントを使用して、上記の SQL ステートメントの実行計画を確認できます。タスク列に`cop[tiflash]`と`cop[tikv]`が同時に表示される場合は、 TiFlashと TiKV の両方がこのクエリを完了するようにスケジュールされていることを意味します。通常、 TiFlashと TiKV ストレージ エンジンは異なる TiDB ノードを使用するため、2 つのクエリ タイプは互いに影響を受けないことに注意してください。
+`EXPLAIN`ステートメントを使用して、上記の SQL ステートメントの実行計画を確認できます。タスク列に`cop[tiflash]`と`cop[tikv]`同時に表示される場合は、 TiFlashと TiKV の両方がこのクエリを完了するようにスケジュールされていることを意味します。通常、 TiFlashと TiKVstorageエンジンは異なる TiDB ノードを使用するため、2 つのクエリ タイプは互いに影響を受けないことに注意してください。
 
 TiDB がどのようにTiFlashを使用するかについての詳細は、 [TiDB を使用してTiFlashレプリカを読み取る](/tiflash/use-tidb-to-read-tiflash.md)を参照してください。
 

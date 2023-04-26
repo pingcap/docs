@@ -9,7 +9,7 @@ hide_leftNav: true
 
 <DocHomeSection label="TiDB Cloud" anchor="tidb-cloud" id="tidb-cloud">
 
-TiDB Cloudは、完全に管理されたサービスとしてのデータベース (DBaaS) であり、TiDB のすべての優れた機能をクラウドにもたらし、データベースの複雑さではなく、アプリケーションに集中できるようにします。
+TiDB Cloud は、完全に管理されたサービスとしてのデータベース (DBaaS) であり、TiDB のすべての優れた機能をクラウドにもたらし、データベースの複雑さではなく、アプリケーションに集中できるようにします。
 
 <DocHomeCardContainer>
 

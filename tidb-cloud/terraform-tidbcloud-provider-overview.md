@@ -21,19 +21,20 @@ summary: Create, manage, and update your TiDB Cloud resources through Terraform.
 
 -   [TiDB Cloudアカウント](https://tidbcloud.com/free-trial)
 -   [Terraform バージョン](https://www.terraform.io/downloads.html) &gt;= 1.0
--   [バージョンを行く](https://golang.org/doc/install) &gt;= 1.18 ( [TiDB Cloud Terraform プロバイダー](https://github.com/tidbcloud/terraform-provider-tidbcloud)をローカルでビルドする場合にのみ必要)
+-   [バージョンを行く](https://golang.org/doc/install) &gt;= 1.18 ( [TiDB Cloud Terraform プロバイダー](https://github.com/tidbcloud/terraform-provider-tidbcloud)ローカルでビルドする場合にのみ必要)
 
 ## サポートされているリソースとデータ ソース {#supported-resources-and-data-sources}
 
-[資力](https://www.terraform.io/language/resources)と[データ ソース](https://www.terraform.io/language/data-sources)は、Terraform 言語で最も重要な 2 つの要素です。
+[資力](https://www.terraform.io/language/resources)と[データソース](https://www.terraform.io/language/data-sources)は、Terraform 言語で最も重要な 2 つの要素です。
 
-TiDB Cloudは、次のリソースとデータ ソースをサポートしています。
+TiDB Cloud は、次のリソースとデータ ソースをサポートしています。
 
 -   資力
 
     -   `tidbcloud_cluster`
-    -   `tidbcloud_backup` (更新はサポートされていません)
-    -   `tidbcloud_restore` (更新と削除はサポートされていません)
+    -   `tidbcloud_backup`
+    -   `tidbcloud_restore`
+    -   `tidbcloud_import`
 
 -   データソース
 
@@ -43,7 +44,7 @@ TiDB Cloudは、次のリソースとデータ ソースをサポートしてい
     -   `tidbcloud_restores`
     -   `tidbcloud_backups`
 
-リソースとデータ ソースで使用可能なすべての構成を取得するには、この[構成ドキュメント](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs)を参照してください。
+リソースとデータ ソースで使用可能なすべての構成を取得するには、この[構成ドキュメント](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs)参照してください。
 
 ## 次のステップ {#next-step}
 

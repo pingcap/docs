@@ -12,11 +12,11 @@ summary: Learn the mechanism of user password management in TiDB.
 -   パスワード再利用ポリシー: ユーザーが古いパスワードを再利用できないようにします。
 -   失敗したログインの追跡と一時的なアカウント ロック ポリシー: ユーザー アカウントを一時的にロックして、間違ったパスワードが原因で何度もログインに失敗した後、同じユーザーがログインを試みないようにします。
 
-## TiDB 認証資格情報ストレージ {#tidb-authentication-credential-storage}
+## TiDB 認証資格情報storage {#tidb-authentication-credential-storage}
 
 ユーザー ID の信頼性を確保するために、TiDB はパスワードを資格情報として使用して、ユーザーが TiDBサーバーにログインするときにユーザーを認証します。
 
-このドキュメントで説明されている*パスワード*は、TiDB によって生成、保存、および検証された内部資格情報を指します。 TiDB は、ユーザーのパスワードを`mysql.user`システム テーブルに格納します。
+このドキュメントで説明されている*パスワードは*、TiDB によって生成、保存、および検証された内部資格情報を指します。 TiDB は、ユーザーのパスワードを`mysql.user`システム テーブルに格納します。
 
 次の認証プラグインは、TiDB のパスワード管理に関連しています。
 
@@ -98,7 +98,7 @@ SET GLOBAL validate_password.mixed_case_count = 1;
 SET GLOBAL validate_password.special_char_count = 1;
 ```
 
-パスワードに`mysql`や`abcd`などの単語が含まれないようにする辞書チェックを有効にします。
+パスワードに`mysql`や`abcd`の単語が含まれないようにする辞書チェックを有効にします。
 
 ```sql
 SET GLOBAL validate_password.dictionary = 'mysql;abcd';
@@ -178,9 +178,9 @@ TiDB は、パスワードのセキュリティを向上させるためにユー
 
 パスワードの有効期限ポリシーを設定する権限は次のとおりです。
 
--   `SUPER`つまたは`CREATE USER`の権限を持つデータベース管理者は、手動でパスワードを期限切れにすることができます。
--   `SUPER`つまたは`CREATE USER`の権限を持つデータベース管理者は、アカウント レベルのパスワード有効期限ポリシーを設定できます。
--   `SUPER`つまたは`SYSTEM_VARIABLES_ADMINR`の権限を持つデータベース管理者は、グローバル レベルのパスワード有効期限ポリシーを設定できます。
+-   `SUPER`または`CREATE USER`権限を持つデータベース管理者は、手動でパスワードを期限切れにすることができます。
+-   `SUPER`つまたは`CREATE USER`権限を持つデータベース管理者は、アカウント レベルのパスワード有効期限ポリシーを設定できます。
+-   `SUPER`つまたは`SYSTEM_VARIABLES_ADMINR`権限を持つデータベース管理者は、グローバル レベルのパスワード有効期限ポリシーを設定できます。
 
 ### 手動有効期限 {#manual-expiration}
 
@@ -209,7 +209,7 @@ mysql> SELECT user,password_expired,Account_locked FROM mysql.user WHERE user = 
 
 ### 自動有効期限 {#automatic-expiration}
 
-パスワードの自動有効期限は、パスワードの経過時間とパスワードの有効**期間**に基づいてい<strong>ます</strong>。
+パスワードの自動有効期限は、**パスワードの経過時間**と<strong>パスワードの有効期間</strong>に基づいています。
 
 -   パスワード経過時間: パスワードの最終変更日から現在の日付までの時間間隔。最後にパスワードが変更された時刻は、 `mysql.user`システム テーブルに記録されます。
 -   パスワードの有効期間: パスワードを使用して TiDB にログインできる日数。
@@ -266,7 +266,7 @@ TiDB は、グローバル レベルおよびアカウント レベルでの自�
 
 パスワードの有効期限に対する TiDBサーバーの動作を制御できます。パスワードの有効期限が切れると、サーバーはクライアントを切断するか、クライアントを「サンドボックス モード」に制限します。 「サンドボックス モード」では、TiDBサーバーは期限切れのアカウントからの接続を許可します。ただし、このような接続では、ユーザーはパスワードのリセットのみが許可されます。
 
-TiDBサーバーは、「サンドボックス モード」で有効期限が切れたパスワードを持つユーザーを制限するかどうかを制御できます。パスワードの有効期限が切れたときの TiDBサーバーの動作を制御するには、TiDB 構成ファイルで[`security.disconnect-on-expired-password`](/tidb-configuration-file.md#disconnect-on-expired-password-new-in-v650)パラメーターを構成します。
+TiDBサーバーは、 「サンドボックス モード」で有効期限が切れたパスワードを持つユーザーを制限するかどうかを制御できます。パスワードの有効期限が切れたときの TiDBサーバーの動作を制御するには、TiDB 構成ファイルで[`security.disconnect-on-expired-password`](/tidb-configuration-file.md#disconnect-on-expired-password-new-in-v650)パラメーターを構成します。
 
 ```toml
 [security]
@@ -372,15 +372,15 @@ TiDB は、アカウントのログイン試行の失敗回数を追跡できま
 
 `CREATE USER`または`ALTER USER`ステートメントで`FAILED_LOGIN_ATTEMPTS`および`PASSWORD_LOCK_TIME`オプションを使用して、ログイン試行の失敗回数と各アカウントのロック時間を構成できます。使用可能な値のオプションは次のとおりです。
 
--   `FAILED_LOGIN_ATTEMPTS` : N。ログインに`N`回連続して失敗すると、アカウントは一時的にロックされます。 N の値の範囲は 0 ～ 32767 です。
+-   `FAILED_LOGIN_ATTEMPTS` : N。ログインに`N`連続して失敗すると、アカウントは一時的にロックされます。 N の値の範囲は 0 ～ 32767 です。
 -   `PASSWORD_LOCK_TIME` : N |無制限。
     -   N は、連続してログインに失敗すると、アカウントが`N`日間一時的にロックされることを意味します。 N の値の範囲は 0 ～ 32767 です。
-    -   `UNBOUNDED`は、ロック時間が無制限であり、アカウントを手動でロック解除する必要があることを意味します。 N の値の範囲は 0 ～ 32767 です。
+    -   `UNBOUNDED` 、ロック時間が無制限であり、アカウントを手動でロック解除する必要があることを意味します。 N の値の範囲は 0 ～ 32767 です。
 
 > **ノート：**
 >
-> -   1 つの SQL ステートメントで構成できるのは`FAILED_LOGIN_ATTEMPTS`つまたは`PASSWORD_LOCK_TIME`だけです。この場合、アカウントのロックは有効になりません。
-> -   アカウントのロックは、 `FAILED_LOGIN_ATTEMPTS`と`PASSWORD_LOCK_TIME`の両方が 0 でない場合にのみ有効です。
+> -   1 つの SQL ステートメントで構成できるのは`FAILED_LOGIN_ATTEMPTS`または`PASSWORD_LOCK_TIME`だけです。この場合、アカウントのロックは有効になりません。
+> -   アカウントのロックは、 `FAILED_LOGIN_ATTEMPTS`と`PASSWORD_LOCK_TIME`両方が 0 でない場合にのみ有効です。
 
 アカウント ロック ポリシーは次のように構成できます。
 
@@ -418,5 +418,5 @@ ALTER USER 'test3'@'localhost' FAILED_LOGIN_ATTEMPTS 0 PASSWORD_LOCK_TIME 0;
 >
 > 連続してログインに失敗したためにアカウントがロックされた場合、アカウント ロック ポリシーを変更すると、次のような影響があります。
 >
-> -   `FAILED_LOGIN_ATTEMPTS`を変更しても、アカウントのロック状態は変わりません。変更された`FAILED_LOGIN_ATTEMPTS`は、アカウントのロックが解除され、再度ログインが試行された後に有効になります。
-> -   `PASSWORD_LOCK_TIME`を変更しても、アカウントのロック状態は変わりません。アカウントが再度ログインを試みると、変更された`PASSWORD_LOCK_TIME`が有効になります。その際、TiDB は新しいロック時間に達したかどうかをチェックします。はいの場合、TiDB はユーザーのロックを解除します。
+> -   `FAILED_LOGIN_ATTEMPTS`を変更しても、アカウントのロック状態は変わりません。変更された`FAILED_LOGIN_ATTEMPTS`アカウントのロックが解除され、再度ログインが試行された後に有効になります。
+> -   `PASSWORD_LOCK_TIME`を変更しても、アカウントのロック状態は変わりません。アカウントが再度ログインを試みると、変更された`PASSWORD_LOCK_TIME`有効になります。その際、TiDB は新しいロック時間に達したかどうかをチェックします。はいの場合、TiDB はユーザーのロックを解除します。

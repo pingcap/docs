@@ -49,7 +49,7 @@ PD は、コマンドライン フラグと環境変数を使用して構成で�
 -   ブートストラップ用の初期クラスター構成
 -   デフォルト: `"{name}=http://{advertise-peer-url}"`
 -   たとえば、 `name`が &quot;pd&quot; で`advertise-peer-urls`が`"http://192.168.100.113:2380"`の場合、 `initial-cluster`は`"pd=http://192.168.100.113:2380"`です。
--   3 つの PD サーバーを開始する必要がある場合、 `initial-cluster`つは次のようになります。
+-   3 つの PD サーバーを開始する必要がある場合、 `initial-cluster`は次のようになります。
 
     ```
     pd1=http://192.168.100.113:2380, pd2=http://192.168.100.114:2380, pd3=192.168.100.115:2380
@@ -59,7 +59,7 @@ PD は、コマンドライン フラグと環境変数を使用して構成で�
 
 -   クラスターに動的に参加する
 -   デフォルト: `""`
--   既存のクラスターに参加する場合は、 `--join="${advertise-client-urls}"`を使用できます`advertise-client-url`は既存の PD であり、複数のクライアント URL をコンマで区切ってアドバタイズします。
+-   既存のクラスターに参加する場合は、 `--join="${advertise-client-urls}"`使用できます`advertise-client-url`は既存の PD であり、複数のクライアント URL をコンマで区切ってアドバタイズします。
 
 ## <code>-L</code> {#code-l-code}
 

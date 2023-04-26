@@ -3,19 +3,19 @@ title: Deploy a DM Cluster Using TiUP
 summary: Learn how to deploy TiDB Data Migration using TiUP DM.
 ---
 
-# TiUPを使用して DMクラスタをデプロイする {#deploy-a-dm-cluster-using-tiup}
+# TiUPを使用して DMクラスタをデプロイ {#deploy-a-dm-cluster-using-tiup}
 
-[TiUP](https://github.com/pingcap/tiup)は、TiDB 4.0 で導入されたクラスター運用保守ツールです。 TiUPは、 Golangで記述されたクラスター管理コンポーネントである[TiUP DM](/dm/maintain-dm-using-tiup.md)を提供します。 TiUP DMを使用すると、DM クラスターのデプロイ、開始、停止、破棄、スケーリング、およびアップグレードを含む、毎日の TiDB データ マイグレーション (DM) 操作を簡単に実行し、DM クラスター パラメーターを管理できます。
+[TiUP](https://github.com/pingcap/tiup)は、TiDB 4.0 で導入されたクラスター運用保守ツールです。 TiUP は、 Golangで記述されたクラスター管理コンポーネントである[TiUP DM](/dm/maintain-dm-using-tiup.md)提供します。 TiUP DMを使用すると、DM クラスターのデプロイ、開始、停止、破棄、スケーリング、およびアップグレードを含む、毎日の TiDB データ マイグレーション (DM) 操作を簡単に実行し、DM クラスター パラメーターを管理できます。
 
-TiUPは、DM v2.0 以降の DM バージョンの展開をサポートしています。このドキュメントでは、さまざまなトポロジの DM クラスターを展開する方法を紹介します。
+TiUP は、 DM v2.0 以降の DM バージョンの展開をサポートしています。このドキュメントでは、さまざまなトポロジの DM クラスターをデプロイする方法を紹介します。
 
 > **ノート：**
 >
-> ターゲット マシンのオペレーティング システムが SELinux をサポートしている場合は、SELinux が**無効**になっていることを確認してください。
+> ターゲット マシンのオペレーティング システムが SELinux をサポートしている場合は、SELinux が**無効になっている**ことを確認してください。
 
 ## 前提条件 {#prerequisites}
 
-DM が完全なデータ レプリケーション タスクを実行する場合、DM-worker は 1 つのアップストリーム データベースのみにバインドされます。 DM-worker は、最初に全量のデータをローカルにエクスポートし、次にそのデータをダウンストリーム データベースにインポートします。したがって、ワーカーのホスト スペースは、エクスポートするすべてのアップストリーム テーブルを格納するのに十分な大きさである必要があります。ストレージ パスは、後でタスクを作成するときに指定します。
+DM が完全なデータ レプリケーション タスクを実行する場合、DM-worker は 1 つのアップストリーム データベースのみにバインドされます。 DM-worker は、最初に全量のデータをローカルにエクスポートし、次にそのデータをダウンストリーム データベースにインポートします。したがって、ワーカーのホスト スペースは、エクスポートするすべてのアップストリーム テーブルを格納するのに十分な大きさである必要があります。storageパスは、後でタスクを作成するときに指定します。
 
 また、DM クラスターをデプロイする場合は、 [ハードウェアとソフトウェアの要件](/dm/dm-hardware-and-software-requirements.md)を満たす必要があります。
 
@@ -31,7 +31,7 @@ DM が完全なデータ レプリケーション タスクを実行する場合
     curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
     ```
 
-    インストール後、 `~/.bashrc`は PATH にTiUPを追加するように変更されているため、新しいターミナルを開くか、グローバル環境変数`source ~/.bashrc`を再宣言して使用する必要があります。
+    インストール後、 `~/.bashrc` PATH にTiUP を追加するように変更されているため、新しいターミナルを開くか、グローバル環境変数`source ~/.bashrc`を再宣言して使用する必要があります。
 
 2.  TiUP DMコンポーネントをインストールします。
 
@@ -138,9 +138,9 @@ alertmanager_servers:
 >
 > -   次のコンポーネント間のポートが相互接続されていることを確認してください。
 >     -   DM-master ノードの`peer_port` (デフォルトでは`8291` ) は相互接続されています。
->     -   各 DM-master ノードは、すべての DM-worker ノードの`port`つ (デフォルトでは`8262` ) に接続できます。
->     -   各 DM-worker ノードは、すべての DM-master ノードの`port`つ (デフォルトでは`8261` ) に接続できます。
->     -   TiUPノードは、すべての DM マスター ノードの`port`つ (デフォルトでは`8261` ) に接続できます。
+>     -   各 DM-master ノードは、すべての DM-worker ノードの`port` (デフォルトでは`8262` ) に接続できます。
+>     -   各 DM-worker ノードは、すべての DM-master ノードの`port` (デフォルトでは`8261` ) に接続できます。
+>     -   TiUPノードは、すべての DM マスター ノードの`port` (デフォルトでは`8261` ) に接続できます。
 >     -   TiUPノードは、すべての DM-worker ノードの`port` (デフォルトでは`8262` ) に接続できます。
 
 その他の`master_servers.host.config`パラメータの説明については、 [マスター パラメータ](https://github.com/pingcap/dm/blob/master/dm/master/dm-master.toml)を参照してください。 `worker_servers.host.config`パラメータの詳細については、 [ワーカー パラメータ](https://github.com/pingcap/dm/blob/master/dm/worker/dm-worker.toml)を参照してください。
@@ -149,7 +149,7 @@ alertmanager_servers:
 
 > **ノート：**
 >
-> TiUP を使用してTiUPをデプロイする場合、セキュリティ認証に秘密鍵または対話型パスワードを使用できます。
+> TiUPを使用して TiDB をデプロイする場合、セキュリティ認証に秘密鍵または対話型パスワードを使用できます。
 >
 > -   秘密鍵を使用する場合は、 `-i`または`--identity_file`で鍵のパスを指定できます。
 > -   パスワードを使用する場合は、 `-p`フラグを追加してパスワード インタラクション ウィンドウに入ります。
@@ -182,7 +182,7 @@ tiup dm deploy ${name} ${version} ./topology.yaml -u ${ssh_user} [-p] [-i /home/
 tiup dm list
 ```
 
-TiUPは、複数の DM クラスターの管理をサポートしています。上記のコマンドは、現在TiUPによって管理されているすべてのクラスターの情報を出力します。これには、名前、デプロイ ユーザー、バージョン、秘密鍵の情報が含まれます。
+TiUP は、複数の DM クラスターの管理をサポートしています。上記のコマンドは、現在TiUPによって管理されているすべてのクラスターの情報を出力します。これには、名前、デプロイ ユーザー、バージョン、秘密鍵の情報が含まれます。
 
 ```log
 Name  User  Version  Path                                  PrivateKey
@@ -226,6 +226,6 @@ tiup dm display dm-test
 
 ## ステップ 8: dmctl を使用した移行タスクの管理 {#step-8-managing-migration-tasks-using-dmctl}
 
-dmctl は、DM クラスターを制御するために使用されるコマンドライン ツールです。あなたは[TiUP経由でTiUPを使用](/dm/maintain-dm-using-tiup.md#dmctl)に推薦されます。
+dmctl は、DM クラスターを制御するために使用されるコマンドライン ツールです。あなたは[TiUP経由でdmctlを使用](/dm/maintain-dm-using-tiup.md#dmctl)に推薦されます。
 
 dmctl は、コマンド モードと対話モードの両方をサポートします。詳細については、 [dmctl を使用した DM クラスタの管理](/dm/dmctl-introduction.md#maintain-dm-clusters-using-dmctl)を参照してください。

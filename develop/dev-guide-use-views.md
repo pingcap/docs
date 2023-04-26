@@ -24,7 +24,7 @@ CREATE VIEW view_name AS query;
 
 既存のビューまたはテーブルと同じ名前のビューを作成できないことに注意してください。
 
-たとえば、 [複数テーブル結合クエリ](/develop/dev-guide-join-tables.md)は、 `JOIN`ステートメントを使用して`books`テーブルと`ratings`テーブルを結合することにより、平均評価の書籍のリストを取得します。
+たとえば、 [複数テーブル結合クエリ](/develop/dev-guide-join-tables.md) 、 `JOIN`ステートメントを使用して`books`テーブルと`ratings`テーブルを結合することにより、平均評価の書籍のリストを取得します。
 
 後続のクエリの便宜上、次のステートメントを使用してクエリをビューとして定義できます。
 
@@ -44,11 +44,11 @@ GROUP BY b.id;
 SELECT * FROM book_with_ratings LIMIT 10;
 ```
 
-TiDB がビューにクエリを実行すると、ビューに関連付けられた`SELECT`のステートメントがクエリされます。
+TiDB がビューにクエリを実行すると、ビューに関連付けられた`SELECT`ステートメントがクエリされます。
 
 ## ビューの更新 {#update-views}
 
-現在、TiDB のビューは`ALTER VIEW view_name AS query;`をサポートしていません。次の 2 つの方法でビューを「更新」できます。
+現在、TiDB のビューは`ALTER VIEW view_name AS query;`サポートしていません。次の 2 つの方法でビューを「更新」できます。
 
 -   `DROP VIEW view_name;`ステートメントで古いビューを削除してから、 `CREATE VIEW view_name AS query;`ステートメントで新しいビューを作成してビューを更新します。
 -   `CREATE OR REPLACE VIEW view_name AS query;`ステートメントを使用して、既存のビューを同じ名前で上書きします。
@@ -120,5 +120,5 @@ TiDB でのビューの制限については、 [ビューの制限](/views.md#l
 -   [ビュー](/views.md)
 -   [CREATE VIEW ステートメント](/sql-statements/sql-statement-create-view.md)
 -   [DROP VIEW ステートメント](/sql-statements/sql-statement-drop-view.md)
--   [ビューを使用しEXPLAINステートメント](/explain-views.md)
+-   [ビューを使用したEXPLAINステートメント](/explain-views.md)
 -   [TiFlink: TiKV と Flink を使用した強整合性のマテリアライズド ビュー](https://github.com/tiflink/tiflink)

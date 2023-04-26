@@ -5,7 +5,7 @@ summary: Learns about how to perform incremental backup and restore in TiDB.
 
 # TiDB 増分バックアップおよび復元ガイド {#tidb-incremental-backup-and-restore-guide}
 
-TiDB クラスターの増分データは、期間の開始スナップショットと終了スナップショットの間の差分データと、この期間中に生成された DDL です。フル (スナップショット) バックアップ データと比較して、増分データは小さいため、バックアップ データの量を減らすスナップショット バックアップを補完します。増分バックアップを実行するには、指定された期間内に生成された MVCC データが[TiDB GC メカニズム](/garbage-collection-overview.md)によってガベージ コレクションされていないことを確認してください。たとえば、1 時間ごとに増分バックアップを実行するには、 [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50)を 1 時間より大きい値に設定する必要があります。
+TiDB クラスターの増分データは、期間の開始スナップショットと終了スナップショットの間の差分データと、この期間中に生成された DDL です。フル (スナップショット) バックアップ データと比較して、増分データは小さいため、バックアップ データの量を減らすスナップショット バックアップを補完します。増分バックアップを実行するには、指定された期間内に生成された MVCC データが[TiDB GC メカニズム](/garbage-collection-overview.md)によってガベージ コレクションされていないことを確認してください。たとえば、1 時間ごとに増分バックアップを実行するには、 [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) 1 時間より大きい値に設定する必要があります。
 
 > **警告：**
 >
@@ -13,7 +13,7 @@ TiDB クラスターの増分データは、期間の開始スナップショッ
 
 ## 増分データのバックアップ {#back-up-incremental-data}
 
-増分データをバックアップするに**は、最後のバックアップ タイムスタンプ**`--lastbackupts`を指定して`br backup`コマンドを実行します。このように、br コマンドライン ツールは、 `lastbackupts`から現在までの間に生成された増分データを自動的にバックアップします。 `--lastbackupts`を取得するには、 `validate`コマンドを実行します。次に例を示します。
+増分データをバックアップするには、**最後のバックアップ タイムスタンプ**`--lastbackupts`を指定して`br backup`コマンドを実行します。このように、br コマンドライン ツールは、 `lastbackupts`から現在までの間に生成された増分データを自動的にバックアップします。 `--lastbackupts`取得するには、 `validate`コマンドを実行します。次に例を示します。
 
 ```shell
 LAST_BACKUP_TS=`tiup br validate decode --field="end-version" --storage "s3://backup-101/snapshot-202209081330?access-key=${access-key}&secret-access-key=${secret-access-key}"| tail -n1`
@@ -29,8 +29,8 @@ tiup br backup full --pd "${PD_IP}:2379" \
 ```
 
 -   `--lastbackupts` : 最後のバックアップのタイムスタンプ。
--   `--ratelimit` : バックアップ タスクを実行する**TiKV ごと**の最大速度 (MiB/秒)。
--   `storage` : バックアップ データの保存パス。増分バックアップ データは、以前のスナップショット バックアップとは別のパスに保存する必要があります。前の例では、増分バックアップ データは、フル バックアップ データの下の`incr`ディレクトリに保存されます。詳細については、 [バックアップ ストレージ URL の構成](/br/backup-and-restore-storages.md#url-format)を参照してください。
+-   `--ratelimit` : バックアップ タスクを実行する**TiKV ごとの**最大速度 (MiB/秒)。
+-   `storage` : バックアップ データのstorageパス。増分バックアップ データは、以前のスナップショット バックアップとは別のパスに保存する必要があります。前の例では、増分バックアップ データは、フル バックアップ データの下の`incr`ディレクトリに保存されます。詳細については、 [バックアップstorageURL の構成](/br/backup-and-restore-storages.md#url-format)を参照してください。
 
 ## 増分データの復元 {#restore-incremental-data}
 

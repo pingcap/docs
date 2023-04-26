@@ -29,7 +29,7 @@ gh-ost が online-schema-change を実装すると、3 種類のテーブルが�
 
 gh-ost で主に使用される SQL ステートメントと、対応する DM の操作は次のとおりです。
 
-1.  `_ghc`のテーブルを作成します。
+1.  `_ghc`テーブルを作成します。
 
     ```sql
     Create /* gh-ost */ table `test`.`_test4_ghc` (
@@ -44,13 +44,13 @@ gh-ost で主に使用される SQL ステートメントと、対応する DM �
 
     DM は`_test4_ghc`テーブルを作成しません。
 
-2.  `_gho`のテーブルを作成します。
+2.  `_gho`テーブルを作成します。
 
     ```sql
     Create /* gh-ost */ table `test`.`_test4_gho` like `test`.`test4` ;
     ```
 
-    DM は`_test4_gho`テーブルを作成しません。 DM は、 `server_id` `ghost_schema` `ghost_table` `dm_worker`の`dm_meta.{task_name}_onlineddl`レコードを削除し、メモリの関連情報をクリアします。
+    DM は`_test4_gho`テーブルを作成しません。 DM は`ghost_table` `dm_worker`の`ghost_schema` 、および`server_id`に従って、下流の`dm_meta.{task_name}_onlineddl`レコードを削除し、メモリ内の関連情報をクリアします。
 
     ```
     DELETE FROM dm_meta.{task_name}_onlineddl WHERE id = {server_id} and ghost_schema = {ghost_schema} and ghost_table = {ghost_table};
@@ -80,7 +80,7 @@ gh-ost で主に使用される SQL ステートメントと、対応する DM �
 
     DM は、 **realtable**用ではない DML ステートメントを実行しません。
 
-5.  移行が完了すると、元のテーブルと`_gho`のテーブルの名前が変更され、オンライン DDL 操作が完了します。
+5.  移行が完了すると、元のテーブルと`_gho`テーブルの名前が変更され、オンライン DDL 操作が完了します。
 
     ```sql
     Rename /* gh-ost */ table `test`.`test4` to `test`.`_test4_del`, `test`.`_test4_gho` to `test`.`test4`;
@@ -88,7 +88,7 @@ gh-ost で主に使用される SQL ステートメントと、対応する DM �
 
     DM は次の 2 つの操作を実行します。
 
-    -   DM は、上記の`rename`つの操作を 2 つの SQL ステートメントに分割します。
+    -   DM は、上記の`rename`操作を 2 つの SQL ステートメントに分割します。
 
         ```sql
         rename test.test4 to test._test4_del;
@@ -98,7 +98,7 @@ gh-ost で主に使用される SQL ステートメントと、対応する DM �
     -   DM は実行しません`rename to _test4_del` 。 `rename ghost_table to origin table`を実行すると、DM は次の手順を実行します。
 
         -   手順 3 でメモリに記録された DDL を読み取る
-        -   `ghost_table`と`ghost_schema`を`origin_table`とそれに対応するスキーマに置き換えます
+        -   `ghost_table`と`ghost_schema` `origin_table`とそれに対応するスキーマに置き換えます
         -   置き換えたDDLを実行
 
         ```sql
@@ -127,14 +127,14 @@ pt-osc が online-schema-change を実装すると、2 種類のテーブルが�
 
 主に pt-osc で使用される SQL ステートメントと、対応する DM の操作は次のとおりです。
 
-1.  `_new`のテーブルを作成します。
+1.  `_new`テーブルを作成します。
 
     ```sql
     CREATE TABLE `test`.`_test4_new` ( id int(11) NOT NULL AUTO_INCREMENT,
     date date DEFAULT NULL, account_id bigint(20) DEFAULT NULL, conversion_price decimal(20,3) DEFAULT NULL, ocpc_matched_conversions bigint(20) DEFAULT NULL, ad_cost decimal(20,3) DEFAULT NULL,cl2 varchar(20) COLLATE utf8mb4_bin NOT NULL,cl1 varchar(20) COLLATE utf8mb4_bin NOT NULL,PRIMARY KEY (id) ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ;
     ```
 
-    DM は`_test4_new`テーブルを作成しません。 DM は、 `server_id` `ghost_schema` `ghost_table` `dm_worker`の`dm_meta.{task_name}_onlineddl`レコードを削除し、メモリの関連情報をクリアします。
+    DM は`_test4_new`テーブルを作成しません。 DM は`ghost_table` `dm_worker`の`ghost_schema` 、および`server_id`に従って、下流の`dm_meta.{task_name}_onlineddl`レコードを削除し、メモリ内の関連情報をクリアします。
 
     ```sql
     DELETE FROM dm_meta.{task_name}_onlineddl WHERE id = {server_id} and ghost_schema = {ghost_schema} and ghost_table = {ghost_table};
@@ -162,7 +162,7 @@ pt-osc が online-schema-change を実装すると、2 種類のテーブルが�
 
     DM は、TiDB でサポートされていないトリガー操作を実行しません。
 
-4.  元のテーブル データを`_new`のテーブルに複製します。
+4.  元のテーブル データを`_new`テーブルに複製します。
 
     ```sql
     INSERT LOW_PRIORITY IGNORE INTO `test`.`_test4_new` (`id`, `date`, `account_id`, `conversion_price`, `ocpc_matched_conversions`, `ad_cost`, `cl2`, `cl1`) SELECT `id`, `date`, `account_id`, `conversion_price`, `ocpc_matched_conversions`, `ad_cost`, `cl2`, `cl1` FROM `test`.`test4` LOCK IN SHARE MODE /*pt-online-schema-change 3227 copy table*/
@@ -170,7 +170,7 @@ pt-osc が online-schema-change を実装すると、2 種類のテーブルが�
 
     DM は、 **realtable**用ではない DML ステートメントを実行しません。
 
-5.  データの移行が完了すると、元のテーブルと`_new`のテーブルの名前が変更され、オンライン DDL 操作が完了します。
+5.  データの移行が完了すると、元のテーブルと`_new`テーブルの名前が変更され、オンライン DDL 操作が完了します。
 
     ```sql
     RENAME TABLE `test`.`test4` TO `test`.`_test4_old`, `test`.`_test4_new` TO `test`.`test4`
@@ -178,7 +178,7 @@ pt-osc が online-schema-change を実装すると、2 種類のテーブルが�
 
     DM は次の 2 つの操作を実行します。
 
-    -   DM は、上記の`rename`つの操作を 2 つの SQL ステートメントに分割します。
+    -   DM は、上記の`rename`操作を 2 つの SQL ステートメントに分割します。
 
         ```sql
          rename test.test4 to test._test4_old;
@@ -188,7 +188,7 @@ pt-osc が online-schema-change を実装すると、2 種類のテーブルが�
     -   DM は実行しません`rename to _test4_old` 。 `rename ghost_table to origin table`を実行すると、DM は次の手順を実行します。
 
         -   手順 2 でメモリに記録された DDL を読み取る
-        -   `ghost_table`と`ghost_schema`を`origin_table`とそれに対応するスキーマに置き換えます
+        -   `ghost_table`と`ghost_schema` `origin_table`とそれに対応するスキーマに置き換えます
         -   置き換えたDDLを実行
 
         ```sql
@@ -197,7 +197,7 @@ pt-osc が online-schema-change を実装すると、2 種類のテーブルが�
         ALTER TABLE `test`.`test4` add column c3 int;
         ```
 
-6.  オンライン DDL 操作の`_old`のテーブルと 3 つのトリガーを削除します。
+6.  オンライン DDL 操作の`_old`テーブルと 3 つのトリガーを削除します。
 
     ```sql
     DROP TABLE IF EXISTS `test`.`_test4_old`;
@@ -218,9 +218,9 @@ pt-osc が online-schema-change を実装すると、2 種類のテーブルが�
 
 このようなカスタマイズされたニーズを実現するには、 `ghost table`と`trash table`の名前に一致する正規表現を記述する必要があります。
 
-v2.0.7 から、DM は実験的に変更されたオンライン スキーマ変更ツールをサポートします。 DM タスク構成で`online-ddl=true`を設定し、 `shadow-table-rules`と`trash-table-rules`を構成することで、変更された一時テーブルを正規表現と照合できます。
+v2.0.7 から、DM は実験的に変更されたオンライン スキーマ変更ツールをサポートします。 DM タスク構成で`online-ddl=true`設定し、 `shadow-table-rules`と`trash-table-rules`を構成することで、変更された一時テーブルを正規表現と照合できます。
 
-たとえば、 `ghost table`の名前が`_{origin_table}_pcnew`で`trash table`の名前が`_{origin_table}_pcold`であるカスタマイズされた pt-osc を使用する場合、次のようにカスタム ルールを設定できます。
+たとえば、 `ghost table`名前が`_{origin_table}_pcnew`で`trash table`の名前が`_{origin_table}_pcold`であるカスタマイズされた pt-osc を使用する場合、次のようにカスタム ルールを設定できます。
 
 ```yaml
 online-ddl: true

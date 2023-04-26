@@ -8,7 +8,7 @@ summary: Learn about the naming conventions for CSV, Parquet, Aurora Snapshot, a
 次のファイル形式でTiDB Cloudにデータをインポートできます: CSV、Parquet、 Auroraスナップショット、および SQL。データが正常にインポートされるようにするには、次の 2 種類のファイルを準備する必要があります。
 
 -   **スキーマ ファイル**.データベース スキーマ ファイル (オプション) とテーブル スキーマ ファイルを両方とも SQL 形式で準備します ( `.sql` )。テーブル スキーマ ファイルが提供されていない場合は、事前にターゲット データベースに対応するテーブルを手動で作成する必要があります。
--   **データ ファイル**.データをインポートするための命名規則に準拠したデータ ファイルを準備します。データ ファイル名が要件を満たさない場合は、 [**ファイル パターン**](#file-pattern)を使用してインポート タスクを実行することをお勧めします。そうしないと、インポート タスクは、インポートするデータ ファイルをスキャンできません。
+-   **データ ファイル**.データをインポートするための命名規則に準拠したデータ ファイルを準備します。データ ファイル名が要件を満たさない場合は、 [**ファイル パターン**](#file-pattern)使用してインポート タスクを実行することをお勧めします。そうしないと、インポート タスクは、インポートするデータ ファイルをスキャンできません。
 
 ## スキーマ ファイルの命名規則 {#naming-conventions-for-schema-files}
 
@@ -48,18 +48,26 @@ summary: Learn about the naming conventions for CSV, Parquet, Aurora Snapshot, a
 
 CSV ファイルをインポートするときは、次のようにデータ ファイルに名前を付けます。
 
--   `${db_name}.${table_name}[.XXXXXX].csv` ([.XXXXXX] はオプション)
+`${db_name}.${table_name}${suffix}.csv`
 
-例えば：
+`${suffix}`はオプションで、次のいずれかの形式になります*`xxx`*任意の数字です。
+
+-   *`.xxx`* 、 `.01`など
+-   *`._xxx_xxx_xxx`* 、 `._0_0_01`など
+-   *`_xxx_xxx_xxx`* 、 `_0_0_01`など
+
+たとえば、次のすべてのファイルのターゲット データベースとテーブルは`import_db`と`test_table`です。
 
 -   `import_db.test_table.csv`
 -   `import_db.test_table.01.csv`
+-   `import_db.test_table._0_0_01.csv`
+-   `import_db.test_table_0_0_01.csv`
 
 ### 寄木細工 {#parquet}
 
 Parquet ファイルをインポートするときは、次のようにデータ ファイルに名前を付けます。
 
--   `${db_name}.${table_name}[.XXXXXX].parquet[.{snappy|gz|lzo}]` ( `[.XXXXXXX]`と`[.{snappy|gz|lzo}]`はオプション)
+-   `${db_name}.${table_name}${suffix}.parquet{.snappy|.gz|.lzo}` ( `${suffix}`と`{.snappy|.gz|.lzo}`はオプション)
 
 例えば：
 
@@ -82,14 +90,14 @@ Auroraスナップショット ファイルの場合、 `${db_name}.${table_name
 
 SQL ファイルをインポートするときは、次のようにデータ ファイルに名前を付けます。
 
--   `${db_name}.${table_name}[.XXXXXXX].sql` ([.XXXXXXX] はオプション)
+-   `${db_name}.${table_name}${suffix}.sql` ( `${suffix}`はオプション)
 
 例えば：
 
 -   `import_db.test_table.sql`
 -   `import_db.test_table.01.sql`
 
-デフォルト設定で TiDB Dumplingを介して SQL ファイルをエクスポートすると、デフォルトで命名規則に準拠します。
+デフォルト設定で TiDB Dumpling を介して SQL ファイルをエクスポートすると、デフォルトで命名規則に準拠します。
 
 ## ファイルパターン {#file-pattern}
 

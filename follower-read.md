@@ -5,7 +5,7 @@ summary: This document describes the use and implementation of Follower Read.
 
 # Follower Read {#follower-read}
 
-リージョンリージョンがシステム全体の読み取りボトルネックになる可能性があります。この状況では、Follower Read機能を有効にすると、リーダーの負荷が大幅に軽減され、複数のフォロワー間で負荷が分散されるため、システム全体のスループットが向上します。このドキュメントでは、 Follower Readの使用と実装メカニズムを紹介します。
+リージョンに読み取りホットスポットが現れると、 リージョンリーダーがシステム全体の読み取りボトルネックになる可能性があります。この状況では、Follower Read機能を有効にすると、リーダーの負荷が大幅に軽減され、複数のフォロワー間で負荷が分散されるため、システム全体のスループットが向上します。このドキュメントでは、 Follower Readの使用と実装メカニズムを紹介します。
 
 ## 概要 {#overview}
 
@@ -44,7 +44,7 @@ set [session | global] tidb_replica_read = '<target value>';
 
 > **ノート：**
 >
-> `tidb_replica_read`の値が`closest-replicas`または`closest-adaptive`に設定されている場合は、指定された構成に従って可用性ゾーン全体にレプリカが分散されるようにクラスターを構成する必要があります。 PD 用に`location-labels`を構成し、TiDB および TiKV 用に正しい`labels`を設定するには、 [トポロジ ラベルごとにレプリカをスケジュールする](/schedule-replicas-by-topology-labels.md)を参照してください。 TiDB は、同じアベイラビリティ ゾーン内の TiKV ノードと一致する`zone`ラベルに依存するため、 `zone`ラベルが PD の`location-labels`に含まれ、 `zone`が各 TiDB および TiKV ノードの構成に含まれていることを確認する必要があります。クラスターがTiDB Operatorを使用してデプロイされている場合は、 [データの高可用性](https://docs.pingcap.com/tidb-in-kubernetes/v1.4/configure-a-tidb-cluster#high-availability-of-data)を参照してください。
+> `tidb_replica_read`の値が`closest-replicas`または`closest-adaptive`に設定されている場合は、指定された構成に従って可用性ゾーン全体にレプリカが分散されるようにクラスターを構成する必要があります。 PD 用に`location-labels`構成し、TiDB および TiKV 用に正しい`labels`を設定するには、 [トポロジ ラベルごとにレプリカをスケジュールする](/schedule-replicas-by-topology-labels.md)を参照してください。 TiDB は、同じアベイラビリティ ゾーン内の TiKV ノードと一致する`zone`ラベルに依存するため、 `zone`ラベルが PD の`location-labels`に含まれ、 `zone`が各 TiDB および TiKV ノードの構成に含まれていることを確認する必要があります。クラスターがTiDB Operatorを使用してデプロイされている場合は、 [データの高可用性](https://docs.pingcap.com/tidb-in-kubernetes/v1.4/configure-a-tidb-cluster#high-availability-of-data)を参照してください。
 
 </CustomContent>
 
@@ -56,7 +56,7 @@ Follower Read機能が導入される前は、TiDB は強力なリーダーの�
 
 ### 強力な一貫性のある読み取り {#strongly-consistent-reads}
 
-フォロワー ノードが読み取り要求を処理するとき、最初にRaftプロトコルの`ReadIndex`つを使用してリージョンのリーダーと対話し、現在のRaftグループの最新のコミット インデックスを取得します。リーダーの最新のコミット インデックスがフォロワーにローカルに適用された後、読み取り要求の処理が開始されます。
+フォロワー ノードが読み取り要求を処理するとき、最初にRaftプロトコルの`ReadIndex`を使用してリージョンのリーダーと対話し、現在のRaftグループの最新のコミット インデックスを取得します。リーダーの最新のコミット インデックスがフォロワーにローカルに適用された後、読み取り要求の処理が開始されます。
 
 ### Followerレプリカ選択戦略 {#follower-replica-selection-strategy}
 

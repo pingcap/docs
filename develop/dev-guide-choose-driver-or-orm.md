@@ -9,8 +9,8 @@ summary: Learn how to choose a driver or ORM framework to connect to TiDB.
 >
 > TiDB は、ドライバーと ORM に対して次の 2 つのサポート レベルを提供します。
 >
-> -   **完全**: このドライバーまたは ORM を使用しても、既知の問題がないことを示します。
-> -   **検証済み**: TiDB と MySQL の互換性の違いにより、このドライバーまたは ORM を使用するとエラーが発生する可能性があることを示します。
+> -   **Full** : TiDB がツールのほとんどの機能と互換性があり、新しいバージョンとの互換性を維持していることを示します。 PingCAP は、最新バージョンの[TiDB がサポートするサードパーティ ツール](/develop/dev-guide-third-party-support.md)との互換性テストを定期的に実施します。
+> -   **互換性**: 対応するサードパーティ製ツールが MySQL に適合しており、TiDB は MySQL プロトコルとの互換性が高いため、TiDB はツールのほとんどの機能を使用できることを示します。ただし、PingCAP はツールのすべての機能について完全なテストを完了していないため、予期しない動作が発生する可能性があります。
 >
 > 詳細については、 [TiDB がサポートするサードパーティ ツール](/develop/dev-guide-third-party-support.md)を参照してください。
 
@@ -31,7 +31,7 @@ TiDB は MySQL プロトコルと高い互換性がありますが、一部の�
 
 > **ヒント：**
 >
-> 8.0.32 より前の Connector/J 8.0 バージョンには[バグ](https://bugs.mysql.com/bug.php?id=106252)があり、v6.3.0 より前の TiDB バージョンを使用するとスレッドがハングする可能性があります。この問題を回避するには、MySQL Connector/J 8.0.32 以降のバージョン、または TiDB JDBC を使用することをお勧めします (「 *TiDB-JDBC* 」タブを参照)。
+> 8.0.32 より前の Connector/J 8.0 バージョンには[バグ](https://bugs.mysql.com/bug.php?id=106252)あり、v6.3.0 より前の TiDB バージョンを使用するとスレッドがハングする可能性があります。この問題を回避するには、MySQL Connector/J 8.0.32 以降のバージョン、または TiDB JDBC を使用することをお勧めします ( *「TiDB-JDBC」*タブを参照)。
 
 完全なアプリケーションを構築する方法の例については、 [TiDB と JDBC を使用して単純な CRUD アプリを構築する](/develop/dev-guide-sample-application-java.md)を参照してください。
 
@@ -100,7 +100,7 @@ implementation group: 'org.bouncycastle', name: 'bcpkix-jdk15on', version: '1.67
 
 アプリケーションの異なる依存関係間の複雑な関係を手動で管理することを避けるために、 [グラドル](https://gradle.org/install)または[メイヴン](https://maven.apache.org/install.html)を使用して、間接的なものを含むアプリケーションのすべての依存関係を取得できます。 Hibernate `6.0.0.Beta2`以降のみが TiDB ダイアレクトをサポートすることに注意してください。
 
-**Maven**を使用している場合は、次を`<dependencies></dependencies>`に追加します。
+**Maven を**使用している場合は、次を`<dependencies></dependencies>`に追加します。
 
 ```xml
 <dependency>
@@ -116,7 +116,7 @@ implementation group: 'org.bouncycastle', name: 'bcpkix-jdk15on', version: '1.67
 </dependency>
 ```
 
-**Gradle**を使用している場合は、以下を`dependencies`に追加します。
+**Gradle を**使用している場合は、以下を`dependencies`に追加します。
 
 ```gradle
 implementation 'org.hibernate:hibernate-core:6.0.0.CR2'
@@ -234,8 +234,67 @@ go get -u gorm.io/driver/mysql
 
 GORM を使用して TiDB アプリケーションを構築する例については、 [TiDB とGolangを使用して単純な CRUD アプリを構築する](/develop/dev-guide-sample-application-golang.md)を参照してください。
 
+## パイソン {#python}
+
+このセクションでは、Python でドライバーと ORM フレームワークを使用する方法について説明します。
+
+### Python ドライバー {#python-drivers}
+
+<SimpleTab>
+<div label="PyMySQL">
+
+サポートレベル：**対応**
+
+[PyMySQL ドキュメント](https://pypi.org/project/PyMySQL/)に従って、ドライバーをダウンロードして構成できます。 PyMySQL 1.0.2 以降のバージョンを使用することをお勧めします。
+
+PyMySQL を使用して TiDB アプリケーションを構築する例については、 [TiDB と Python を使用して単純な CRUD アプリを構築する](/develop/dev-guide-sample-application-python.md#step-2-get-the-code)を参照してください。
+
+</div>
+<div label="mysqlclient">
+
+サポートレベル：**対応**
+
+[mysqlclient ドキュメント](https://pypi.org/project/mysqlclient/)に従って、ドライバーをダウンロードして構成できます。 mysqlclient 2.1.1 以降のバージョンを使用することをお勧めします。
+
+mysqlclient を使用して TiDB アプリケーションを構築する例については、 [TiDB と Python を使用して単純な CRUD アプリを構築する](/develop/dev-guide-sample-application-python.md#step-2-get-the-code)を参照してください。
+
+</div>
+<div label="mysql-connector-python">
+
+サポートレベル：**対応**
+
+[mysql-connector-python ドキュメント](https://dev.mysql.com/doc/connector-python/en/connector-python-installation-binary.html)に従って、ドライバーをダウンロードして構成できます。 Connector/Python 8.0.31 以降のバージョンを使用することをお勧めします。
+
+mysql-connector-python を使用して TiDB アプリケーションを構築する例については、 [TiDB と Python を使用して単純な CRUD アプリを構築する](/develop/dev-guide-sample-application-python.md#step-2-get-the-code)を参照してください。
+
+</div>
+</SimpleTab>
+
+### Python ORM フレームワーク {#python-orm-frameworks}
+
+<SimpleTab>
+<div label="SQLAlchemy">
+
+サポートレベル：**対応**
+
+[SQL錬金術](https://www.sqlalchemy.org/)は、Python の一般的な ORM フレームワークです。アプリケーションのすべての依存関係を取得するには、 `pip install SQLAlchemy==1.4.44`コマンドを使用できます。 SQLAlchemy 1.4.44 以降のバージョンを使用することをお勧めします。
+
+SQLAlchemy を使用して TiDB アプリケーションを構築する例については、 [TiDB と Python を使用して単純な CRUD アプリを構築する](/develop/dev-guide-sample-application-python.md#step-2-get-the-code)を参照してください。
+
+</div>
+<div label="peewee">
+
+サポートレベル：**対応**
+
+[ピーウィー](http://docs.peewee-orm.com/en/latest/)は、Python の一般的な ORM フレームワークです。アプリケーションのすべての依存関係を取得するには、 `pip install peewee==3.15.4`コマンドを使用できます。 peewee 3.15.4 以降のバージョンを使用することをお勧めします。
+
+peewee を使用して TiDB アプリケーションを構築する例については、 [TiDB と Python を使用して単純な CRUD アプリを構築する](/develop/dev-guide-sample-application-python.md#step-2-get-the-code)を参照してください。
+
+</div>
+</SimpleTab>
+
 <CustomContent platform="tidb-cloud">
 
-ドライバーまたは ORM を決定したら、次のことができ[TiDB クラスターに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster) 。
+ドライバーまたは ORM を決定したら、 [TiDB クラスターに接続する](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)ができます。
 
 </CustomContent>

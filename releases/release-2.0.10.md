@@ -9,7 +9,7 @@ title: TiDB 2.0.10 Release Notes
 ## TiDB {#tidb}
 
 -   DDL ジョブのキャンセルによって発生する可能性のある問題を修正します[#8513](https://github.com/pingcap/tidb/pull/8513)
--   `ORDER BY`句と`UNION`句がテーブル名を含む列を引用できない問題を修正します[#8514](https://github.com/pingcap/tidb/pull/8514)
+-   `ORDER BY`と`UNION`句がテーブル名を含む列を引用できない問題を修正します[#8514](https://github.com/pingcap/tidb/pull/8514)
 -   `UNCOMPRESS`関数が間違った入力長[#8607](https://github.com/pingcap/tidb/pull/8607)を判定しない問題を修正
 -   TiDB [#8575](https://github.com/pingcap/tidb/pull/8575)のアップグレード時に`ANSI_QUOTES SQL_MODE`で発生した問題を修正
 -   `select`場合によっては間違った結果を返す問題を修正[#8570](https://github.com/pingcap/tidb/pull/8570)

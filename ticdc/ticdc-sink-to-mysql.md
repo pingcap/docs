@@ -24,11 +24,11 @@ ID: simple-replication-task
 Info: {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":"2020-03-12T22:04:08.103600025+08:00","start-ts":415241823337054209,"target-ts":0,"admin-job-type":0,"sort-engine":"unified","sort-dir":".","config":{"case-sensitive":true,"filter":{"rules":["*.*"],"ignore-txn-start-ts":null,"ddl-allow-list":null},"mounter":{"worker-num":16},"sink":{"dispatchers":null},"scheduler":{"type":"table-number","polling-time":-1}},"state":"normal","history":null,"error":null}
 ```
 
--   `--changefeed-id` : レプリケーション タスクの ID。形式は`^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$`の正規表現と一致する必要があります。この ID が指定されていない場合、TiCDC は ID として UUID (バージョン 4 形式) を自動的に生成します。
+-   `--changefeed-id` : レプリケーション タスクの ID。形式は`^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$`正規表現と一致する必要があります。この ID が指定されていない場合、TiCDC は ID として UUID (バージョン 4 形式) を自動的に生成します。
 -   `--sink-uri` : レプリケーション タスクのダウンストリーム アドレス。詳細については、 [`mysql` / <code>tidb</code>でシンク URI を構成する](#configure-sink-uri-for-mysql-or-tidb)を参照してください。
 -   `--start-ts` : 変更フィードの開始 TSO を指定します。この TSO から、TiCDC クラスターはデータのプルを開始します。デフォルト値は現在の時刻です。
 -   `--target-ts` : changefeed の終了 TSO を指定します。この TSO に対して、TiCDC クラスターはデータのプルを停止します。デフォルト値は空です。これは、TiCDC がデータのプルを自動的に停止しないことを意味します。
--   `--config` : changefeed 構成ファイルを指定します。詳細については、 [TiCDC Changefeedコンフィグレーションパラメーター](/ticdc/ticdc-changefeed-config.md)を参照してください。
+-   `--config` : changefeed 構成ファイルを指定します。詳細については、 [TiCDC Changefeedコンフィグレーションパラメータ](/ticdc/ticdc-changefeed-config.md)を参照してください。
 
 ## MySQL または TiDB のシンク URI を構成する {#configure-sink-uri-for-mysql-or-tidb}
 
@@ -37,6 +37,10 @@ Info: {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":
 ```
 [scheme]://[userinfo@][host]:[port][/path]?[query_parameters]
 ```
+
+> **ノート：**
+>
+> `/path`は MySQL シンクには使用されません。
 
 MySQL の設定例:
 
@@ -58,7 +62,7 @@ MySQL の設定例:
 | `ssl-cert`              | ダウンストリームの MySQL インスタンスに接続するために必要な証明書ファイルのパス (オプション)。                                                                                                                                                                                   |
 | `ssl-key`               | ダウンストリームの MySQL インスタンスに接続するために必要な証明書キー ファイルのパス (オプション)。                                                                                                                                                                                |
 | `time-zone`             | ダウンストリームの MySQL インスタンスに接続するときに使用されるタイム ゾーン。v4.0.8 以降で有効です。これはオプションのパラメーターです。このパラメーターが指定されていない場合、TiCDC サービス プロセスのタイム ゾーンが使用されます。このパラメータが空の値に設定されている場合、TiCDC がダウンストリームの MySQL インスタンスに接続するときにタイム ゾーンが指定されず、ダウンストリームのデフォルトのタイム ゾーンが使用されます。 |
-| `transaction-atomicity` | トランザクションの原子性レベル。これはオプションのパラメーターで、デフォルト値は`none`です。値が`table`の場合、TiCDC は単一テーブル トランザクションの原子性を保証します。値が`none`の場合、TiCDC は単一テーブル トランザクションを分割します。                                                                                               |
+| `transaction-atomicity` | トランザクションの原子性レベル。これはオプションのパラメーターで、デフォルト値は`none`です。値が`table`場合、TiCDC は単一テーブル トランザクションの原子性を保証します。値が`none`の場合、TiCDC は単一テーブル トランザクションを分割します。                                                                                                |
 
 Base64 を使用してシンク URI のデータベース パスワードをエンコードするには、次のコマンドを使用します。
 
@@ -78,9 +82,9 @@ MTIzNDU2
 
 ## 災害シナリオにおける結果整合性レプリケーション {#eventually-consistent-replication-in-disaster-scenarios}
 
-v6.1.1 以降、この機能は GA になります。 v5.3.0 以降、TiCDC はアップストリーム TiDB クラスターから Amazon S3 ストレージまたはダウンストリーム クラスターの NFS ファイル システムへの増分データのバックアップをサポートします。アップストリーム クラスターが災害に遭遇して利用できなくなった場合、TiCDC はダウンストリーム データを最新の結果整合性のある状態に復元できます。これは、TiCDC が提供する結果整合性のあるレプリケーション機能です。この機能を使用すると、アプリケーションをダウンストリーム クラスターにすばやく切り替えて、長時間のダウンタイムを回避し、サービスの継続性を向上させることができます。
+v6.1.1 以降、この機能は GA になります。 v5.3.0 以降、TiCDC はアップストリーム TiDB クラスターからオブジェクトstorageまたはダウンストリーム クラスターの NFS への増分データのバックアップをサポートします。アップストリーム クラスターが災害に遭遇して利用できなくなった場合、TiCDC はダウンストリーム データを最新の結果整合性のある状態に復元できます。これは、TiCDC が提供する結果整合性のあるレプリケーション機能です。この機能を使用すると、アプリケーションをダウンストリーム クラスターにすばやく切り替えて、長時間のダウンタイムを回避し、サービスの継続性を向上させることができます。
 
-現在、TiCDC は、TiDB クラスターから別の TiDB クラスターまたは MySQL 互換データベース システム ( Aurora、MySQL、および MariaDB を含む) に増分データを複製できます。アップストリーム クラスターがクラッシュした場合、災害前の TiCDC のレプリケーション ステータスが正常であり、レプリケーション ラグが小さいという条件を考えると、TiCDC は 5 分以内にダウンストリーム クラスターのデータを復元できます。最大で 10 秒のデータ損失が許容されます。つまり、RTO &lt;= 5 分、および P95 RPO &lt;= 10 秒です。
+現在、TiCDC は、TiDB クラスターから別の TiDB クラスターまたは MySQL 互換データベース システム ( Aurora、MySQL、および MariaDB を含む) に増分データを複製できます。アップストリーム クラスターがクラッシュした場合、クラッシュ前に TiCDC がデータを正常にレプリケートし、レプリケーション ラグが小さいという条件があれば、TiCDC は 5 分以内にダウンストリーム クラスターのデータを復元できます。最大で 10 秒のデータ損失が許容されます。つまり、RTO &lt;= 5 分、および P95 RPO &lt;= 10 秒です。
 
 次のシナリオでは、TiCDC のレプリケーション ラグが増加します。
 
@@ -88,11 +92,15 @@ v6.1.1 以降、この機能は GA になります。 v5.3.0 以降、TiCDC は�
 -   アップストリームで大規模または長いトランザクションが発生します。
 -   アップストリームの TiKV または TiCDC クラスターがリロードまたはアップグレードされます。
 -   `add index`などの時間のかかる DDL ステートメントは、アップストリームで実行されます。
--   PD は積極的なスケジューリング戦略で構成されているため、リージョンのリーダーが頻繁に移動したり、リージョンの合併や分割が頻繁に発生したりしリージョン。
+-   PD は積極的なスケジューリング戦略で構成されているため、リージョンのリーダーが頻繁に移動したり、リージョンのリージョンや分割が頻繁に発生したりします。
+
+> **ノート：**
+>
+> v6.1.1 以降、TiCDC の結果整合性レプリケーション機能は、Amazon S3 互換のオブジェクトstorageをサポートします。 v6.1.4 以降、この機能は GCS および Azure 互換のオブジェクトstorageをサポートします。
 
 ### 前提条件 {#prerequisites}
 
--   TiCDC のリアルタイム増分データ バックアップ ファイルを格納するために、高可用性 Amazon S3 ストレージまたは NFS システムを準備します。これらのファイルには、プライマリ クラスタの障害が発生した場合にアクセスできます。
+-   TiCDC のリアルタイム増分データ バックアップ ファイルを格納するために、高可用性オブジェクトstorageまたは NFS を準備します。これらのファイルは、上流で災害が発生した場合にアクセスできます。
 -   災害シナリオで結果整合性を確保する必要がある変更フィードに対して、この機能を有効にします。これを有効にするには、changefeed 構成ファイルに次の構成を追加します。
 
 ```toml
@@ -108,8 +116,8 @@ max-log-size = 64
 # The interval for flushing or uploading redo logs to Amazon S3, in milliseconds. It is recommended that this configuration be equal to or greater than 2000.
 flush-interval = 2000
 
-# Form of storing redo log, including nfs (NFS directory) and Amazon S3 (uploading to S3).
-storage = "s3://logbucket/test-changefeed?endpoint=http://$S3_ENDPOINT/"
+# The path under which redo log backup is stored. The scheme can be nfs (NFS directory), or Amazon S3, GCS, and Azure (uploaded to object storage).
+storage = "$SCHEME://logbucket/test-changefeed?endpoint=http://$ENDPOINT/"
 ```
 
 ### 災害からの回復 {#disaster-recovery}
@@ -128,5 +136,5 @@ cdc redo apply --tmp-dir="/tmp/cdc/redo/apply" \
 このコマンドでは:
 
 -   `tmp-dir` : TiCDC 増分データ バックアップ ファイルをダウンロードするための一時ディレクトリを指定します。
--   `storage` : Amazon S3 ストレージまたは NFS ディレクトリのいずれかで、TiCDC 増分データ バックアップ ファイルを保存するためのアドレスを指定します。
+-   `storage` : TiCDC 増分データ バックアップ ファイルを格納するためのアドレスを、オブジェクトstorageの URI または NFS ディレクトリのいずれかで指定します。
 -   `sink-uri` : データを復元するセカンダリ クラスタ アドレスを指定します。スキームは`mysql`のみです。

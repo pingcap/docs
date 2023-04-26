@@ -11,7 +11,7 @@ summary: Introduces a way to speed up querying in OLAP scenarios by using FastSc
 
 このドキュメントでは、オンライン分析処理 (OLAP) シナリオで FastScan を使用してクエリを高速化する方法について説明します。
 
-デフォルトでは、 TiFlashはクエリ結果の精度とデータの一貫性を保証します。 FastScan 機能を使用すると、 TiFlashはより効率的なクエリ パフォーマンスを提供しますが、クエリ結果の精度とデータの一貫性を保証するものではありません。
+デフォルトでは、 TiFlash はクエリ結果の精度とデータの一貫性を保証します。 FastScan 機能を使用すると、 TiFlash はより効率的なクエリ パフォーマンスを提供しますが、クエリ結果の精度とデータの一貫性を保証するものではありません。
 
 一部の OLAP シナリオでは、クエリ結果の精度に対してある程度の許容範囲が許容されます。このような場合、より高いクエリ パフォーマンスが必要な場合は、FastScan 機能をセッション レベルまたはグローバル レベルで有効にすることができます。変数`tiflash_fastscan`を構成することにより、FastScan 機能を有効にするかどうかを選択できます。
 
@@ -60,7 +60,7 @@ set global tiflash_fastscan=OFF;
 
 ## FastScanの仕組み {#mechanism-of-fastscan}
 
-TiFlashのストレージレイヤーのデータは、Deltaレイヤーと Stableレイヤーの 2 つの層に格納されます。
+TiFlashのstorageレイヤーのデータは、Deltaレイヤーと Stableレイヤーの2 つの層に格納されます。
 
 デフォルトでは、FastScan は有効になっておらず、TableScan オペレーターは次の手順でデータを処理します。
 

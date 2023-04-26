@@ -11,9 +11,9 @@ summary: Learn how to migrate incremental data from MySQL-compatible databases t
 
 増分データ移行を実行する前に、MySQL 互換データベースからTiDB Cloudへの完全なデータ移行を完了しておく必要があります。詳細については、 [MySQL 互換データベースからデータを移行する](/tidb-cloud/migrate-data-into-tidb.md)を参照してください。
 
-## ステップ 1.DM クラスターをデプロイする {#step-1-deploy-a-dm-cluster}
+## ステップ 1.DM クラスターをデプロイ {#step-1-deploy-a-dm-cluster}
 
-TiDB Cloudコンソールは、増分データ移行機能をまだ提供していません。 TiDB Cloudへの増分移行を実行するには、手動で[TiDB データ移行](https://docs.pingcap.com/tidb/stable/dm-overview) (DM) をデプロイする必要があります。インストール手順については、 [TiUPを使用して DMクラスタをデプロイする](https://docs.pingcap.com/tidb/stable/deploy-a-dm-cluster-using-tiup)を参照してください。
+TiDB Cloudコンソールは、増分データ移行機能をまだ提供していません。 TiDB Cloudへの増分移行を実行するには、手動で[TiDB データ移行](https://docs.pingcap.com/tidb/stable/dm-overview) (DM) をデプロイする必要があります。インストール手順については、 [TiUPを使用して DMクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/deploy-a-dm-cluster-using-tiup)を参照してください。
 
 ## 手順 2. データ ソース構成ファイルを作成する {#step-2-create-a-data-source-configuration-file}
 
@@ -209,7 +209,7 @@ Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /roo
 
 ## ステップ 5. 移行タスクのステータスを確認する {#step-5-check-the-migration-task-status}
 
-DM クラスターに進行中の移行タスクがあるかどうかを確認し、タスクのステータスを表示するには、 `tiup dmctl`を使用して`query-status`コマンドを実行します。
+DM クラスターに進行中の移行タスクがあるかどうかを確認し、タスクのステータスを表示するには、 `tiup dmctl`使用して`query-status`コマンドを実行します。
 
 ```shell
 [root@localhost ~]# tiup dmctl --master-addr ${advertise-addr} query-status ${task-name}

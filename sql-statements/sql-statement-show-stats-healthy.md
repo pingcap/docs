@@ -5,9 +5,9 @@ summary: An overview of the usage of SHOW STATS_HEALTHY for TiDB database.
 
 # STATS_HEALTHY を表示 {#show-stats-healthy}
 
-`SHOW STATS_HEALTHY`のステートメントは、統計がどの程度正確であると考えられているかの推定を示しています。正常性のパーセンテージが低いテーブルでは、最適ではないクエリ実行プランが生成される可能性があります。
+`SHOW STATS_HEALTHY`ステートメントは、統計がどの程度正確であると考えられているかの推定を示しています。正常性のパーセンテージが低いテーブルでは、最適ではないクエリ実行プランが生成される可能性があります。
 
-`ANALYZE` table コマンドを実行すると、テーブルの状態を改善できます。 `ANALYZE`は、ヘルスが[`tidb_auto_analyze_ratio`](/system-variables.md#tidb_auto_analyze_ratio)のしきい値を下回ると自動的に実行されます。
+`ANALYZE` table コマンドを実行すると、テーブルの状態を改善できます。 `ANALYZE`ヘルスが[`tidb_auto_analyze_ratio`](/system-variables.md#tidb_auto_analyze_ratio)しきい値を下回ると自動的に実行されます。
 
 ## あらすじ {#synopsis}
 

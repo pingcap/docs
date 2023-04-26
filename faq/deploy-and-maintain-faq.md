@@ -15,7 +15,7 @@ TiDB がサポートするオペレーティング システムについては�
 
 ### 開発、テスト、または本番環境で TiDB クラスターに推奨されるハードウェア構成は何ですか? {#what-is-the-recommended-hardware-configuration-for-a-tidb-cluster-in-the-development-test-or-production-environment}
 
-TiDB は、Intel x86-64アーキテクチャの 64 ビット汎用ハードウェアサーバープラットフォーム、または ARMアーキテクチャのハードウェアサーバープラットフォームにデプロイして実行できます。開発、テスト、および本番環境のサーバーハードウェア構成に関する要件と推奨事項については、 [ソフトウェアおよびハードウェアの推奨事項 - サーバーの推奨事項](/hardware-and-software-requirements.md#server-recommendations)を参照してください。
+TiDB は、Intel x86-64アーキテクチャの 64 ビット汎用ハードウェアサーバープラットフォーム、または ARMアーキテクチャのハードサーバープラットフォームにデプロイして実行できます。開発、テスト、および本番環境のサーバーハードウェア構成に関する要件と推奨事項については、 [ソフトウェアおよびハードウェアの推奨事項 - サーバーの推奨事項](/hardware-and-software-requirements.md#server-recommendations)を参照してください。
 
 ### 10 ギガビットの 2 枚のネットワーク カードの目的は何ですか? {#what-s-the-purposes-of-2-network-cards-of-10-gigabit}
 
@@ -35,11 +35,11 @@ PD は一意のタイムスタンプを配布する必要があるため、分�
 
 ## インストールと展開 {#installation-and-deployment}
 
-本番環境では、 [TiUP](/tiup/tiup-overview.md)を使用して TiDB クラスターをデプロイすることをお勧めします。 [TiUP を使用してTiUPクラスタをデプロイする](/production-deployment-using-tiup.md)を参照してください。
+本番環境では、 [TiUP](/tiup/tiup-overview.md)を使用して TiDB クラスターをデプロイすることをお勧めします。 [TiUPを使用して TiDBクラスタをデプロイ](/production-deployment-using-tiup.md)を参照してください。
 
 ### TiKV/PD の変更された<code>toml</code>構成が有効にならないのはなぜですか? {#why-the-modified-code-toml-code-configuration-for-tikv-pd-does-not-take-effect}
 
-`toml`の設定を有効にするには、TiKV/PD で`--config`のパラメータを設定する必要があります。デフォルトでは、TiKV/PD は構成を読み取りません。現在、この問題は Binary を使用してデプロイする場合にのみ発生します。 TiKV の場合は、構成を編集してサービスを再起動します。 PD の場合、設定ファイルは PD が初めて起動されたときにのみ読み込まれます。その後、pd-ctl を使用して設定を変更できます。詳細については、 [PD Controlユーザー ガイド](/pd-control.md)を参照してください。
+`toml`設定を有効にするには、TiKV/PD で`--config`パラメータを設定する必要があります。デフォルトでは、TiKV/PD は構成を読み取りません。現在、この問題は Binary を使用してデプロイする場合にのみ発生します。 TiKV の場合は、構成を編集してサービスを再起動します。 PD の場合、設定ファイルは PD が初めて起動されたときにのみ読み込まれます。その後、pd-ctl を使用して設定を変更できます。詳細については、 [PD Controlユーザー ガイド](/pd-control.md)を参照してください。
 
 ### TiDB 監視フレームワーク (Prometheus + Grafana) をスタンドアロン マシンまたは複数のマシンにデプロイする必要がありますか?推奨される CPU とメモリは? {#should-i-deploy-the-tidb-monitoring-framework-prometheus-grafana-on-a-standalone-machine-or-on-multiple-machines-what-is-the-recommended-cpu-and-memory}
 
@@ -63,14 +63,14 @@ PD は一意のタイムスタンプを配布する必要があるため、分�
 | `tidb_version`          | TiDB のバージョン                                                                                                          |
 | `deployment_method`     | デプロイの方法、デフォルトではバイナリ、オプションの Docker                                                                                    |
 | `process_supervision`   | プロセスの監視方法、デフォルトで systemd、supervise オプション                                                                             |
-| `timezone`              | 管理対象ノードのタイムゾーン、調整可能、デフォルトで`Asia/Shanghai`変数で`set_timezone`                                                           |
+| `timezone`              | 管理対象ノード`set_timezone` `Asia/Shanghai`で使用                                                                             |
 | `set_timezone`          | 管理対象ノードのタイムゾーンを編集します。デフォルトは True です。 False は閉じることを意味します                                                              |
 | `enable_elk`            | 現在サポートされていません                                                                                                        |
 | `enable_firewalld`      | デフォルトで閉じられているファイアウォールを有効にする                                                                                          |
 | `enable_ntpd`           | 管理対象ノードの NTP サービスを監視するには、デフォルトで True。閉じないでください                                                                       |
 | `machine_benchmark`     | 管理対象ノードのディスク IOPS を監視するには、デフォルトで True。閉じないでください                                                                      |
 | `set_hostname`          | IP に基づいて管理対象ノードのホスト名を編集するには、デフォルトで False                                                                             |
-| `enable_binlog`         | Pumpをデプロイして binlog を有効にするかどうか。デフォルトでは False で、Kafka クラスターに依存します。 `zookeeper_addrs`変数を参照してください                        |
+| `enable_binlog`         | Pumpをデプロイしてbinlogを有効にするかどうか。デフォルトでは False で、Kafka クラスターに依存します。 `zookeeper_addrs`変数を参照してください                          |
 | `zookeeper_addrs`       | binlog Kafka クラスターの ZooKeeper アドレス                                                                                   |
 | `enable_slow_query_log` | TiDB のスロー クエリ ログを 1 つのファイル ({{ deploy_dir }}/log/tidb_slow_query.log) に記録します。デフォルトでは False で、TiDB ログに記録します           |
 | `deploy_without_tidb`   | Key-Value モードでは、PD、TiKV、および監視サービスのみを展開し、TiDB は展開しません。 `inventory.ini`のファイルで tidb_servers ホスト グループの IP を null に設定します。 |
@@ -79,13 +79,13 @@ PD は一意のタイムスタンプを配布する必要があるため、分�
 
 1.  TiDB のスロー クエリの定義は、TiDB 構成ファイルにあります。 `slow-threshold: 300`パラメータは、スロー クエリのしきい値を設定するために使用されます (単位: ミリ秒)。
 
-2.  スロー クエリが発生した場合、Grafana を使用してスロー クエリが発生した`tidb-server`つのインスタンスとスロー クエリの時点を特定し、該当するノードのログに記録された SQL ステートメント情報を見つけることができます。
+2.  スロー クエリが発生した場合、Grafana を使用してスロー クエリが発生した`tidb-server`インスタンスとスロー クエリの時点を特定し、該当するノードのログに記録された SQL ステートメント情報を見つけることができます。
 
 3.  ログに加えて、 `ADMIN SHOW SLOW`コマンドを使用してスロー クエリを表示することもできます。詳細については、 [`ADMIN SHOW SLOW`コマンド](/identify-slow-queries.md#admin-show-slow-command)を参照してください。
 
-### 初めて TiDB クラスターをデプロイしたときに TiKV の<code>label</code>が構成されていなかった場合、 <code>label</code>構成を追加する方法を教えてください。 {#how-to-add-the-code-label-code-configuration-if-code-label-code-of-tikv-was-not-configured-when-i-deployed-the-tidb-cluster-for-the-first-time}
+### 初めて TiDB クラスターをデプロイしたときに TiKV の<code>label</code>構成されていなかった場合、 <code>label</code>構成を追加する方法を教えてください。 {#how-to-add-the-code-label-code-configuration-if-code-label-code-of-tikv-was-not-configured-when-i-deployed-the-tidb-cluster-for-the-first-time}
 
-TiDB `label`の構成は、クラスター展開アーキテクチャに関連しています。これは、PD がグローバルな管理とスケジューリングを実行するための重要な基盤です。以前にクラスターを展開するときに`label`を構成しなかった場合は、PD 管理ツール`pd-ctl`を使用して手動で`location-labels`の情報を追加することにより、展開構造を調整する必要があります 7 、たとえば、 `config set location-labels "zone,rack,host"` (実用的な`label`レベル名に基づいて構成する必要があります)。
+TiDB `label`の構成は、クラスター展開アーキテクチャに関連しています。これは、PD がグローバルな管理とスケジューリングを実行するための重要な基盤です。以前にクラスターを展開するときに`label`構成しなかった場合は、PD 管理ツール`pd-ctl`を使用して手動で`location-labels`情報を追加することにより、展開構造を調整する必要があります 7 、たとえば、 `config set location-labels "zone,rack,host"` (実用的な`label`レベル名に基づいて構成する必要があります)。
 
 `pd-ctl`の使い方は[PD Controlユーザー ガイド](/pd-control.md)を参照。
 

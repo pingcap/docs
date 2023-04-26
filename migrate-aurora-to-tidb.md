@@ -19,15 +19,15 @@ summary: Learn how to migrate data from Amazon Aurora to TiDB using DB snapshot.
 
 ## 完全なデータを TiDB にインポートする {#import-full-data-to-tidb}
 
-### ステップAuroraスナップショットを Amazon S3 にエクスポートする {#step-1-export-an-aurora-snapshot-to-amazon-s3}
+### ステップ 1.Aurora スナップショットをAmazon S3 にエクスポートする {#step-1-export-an-aurora-snapshot-to-amazon-s3}
 
-1.  Auroraで、次のコマンドを実行して現在の binlog の位置を照会します。
+1.  Auroraで、次のコマンドを実行して現在のbinlog の位置を照会します。
 
     ```sql
     mysql> SHOW MASTER STATUS;
     ```
 
-    出力は次のようになります。後で使用するためにバイナリログの名前と位置を記録します。
+    出力は次のようになります。後で使用するためにbinlogの名前と位置を記録します。
 
     ```
     +------------------+----------+--------------+------------------+-------------------+
@@ -40,18 +40,18 @@ summary: Learn how to migrate data from Amazon Aurora to TiDB using DB snapshot.
 
 2.  Auroraスナップショットをエクスポートします。詳細な手順については、 [DB スナップショット データを Amazon S3 にエクスポートする](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_ExportSnapshot.html)を参照してください。
 
-binlog の位置を取得したら、5 分以内にスナップショットをエクスポートします。そうしないと、記録されたバイナリログの位置が古くなり、増分レプリケーション中にデータの競合が発生する可能性があります。
+binlog の位置を取得したら、5 分以内にスナップショットをエクスポートします。そうしないと、記録されたbinlogの位置が古くなり、増分レプリケーション中にデータの競合が発生する可能性があります。
 
 上記の 2 つの手順を実行したら、次の情報が準備できていることを確認してください。
 
--   スナップショット作成時のAuroraバイナリログの名前と位置。
+-   スナップショット作成時のAurorabinlogの名前と位置。
 -   スナップショットが保存されている S3 パス、および S3 パスにアクセスできる SecretKey と AccessKey。
 
 ### ステップ 2. スキーマのエクスポート {#step-2-export-schema}
 
-Auroraのスナップショット ファイルには DDL ステートメントが含まれていないため、Dumpleing を使用してスキーマをエクスポートし、 Dumpling TiDB Lightningを使用してターゲット データベースにスキーマを作成する必要があります。スキーマを手動で作成する場合は、この手順を省略できます。
+Auroraのスナップショット ファイルには DDL ステートメントが含まれていないため、 Dumplingを使用してスキーマをエクスポートし、 TiDB Lightningを使用してターゲット データベースにスキーマを作成する必要があります。スキーマを手動で作成する場合は、この手順を省略できます。
 
-次のコマンドを実行して、 Dumplingを使用してスキーマをエクスポートします。このコマンドには、目的のテーブル スキーマのみをエクスポートするための`--filter`つのパラメーターが含まれています。
+次のコマンドを実行して、 Dumplingを使用してスキーマをエクスポートします。このコマンドには、目的のテーブル スキーマのみをエクスポートするための`--filter`パラメーターが含まれています。
 
 {{< copyable "" >}}
 
@@ -68,7 +68,7 @@ tiup dumpling --host ${host} --port 3306 --user root --password ${password} --fi
 | `-P`または`--port`        | MySQL ポート                                                                                         |
 | `-h`または`--host`        | MySQL IP アドレス                                                                                     |
 | `-t`または`--thread`      | エクスポートに使用されるスレッドの数                                                                                |
-| `-o`または`--output`      | エクスポートされたファイルを格納するディレクトリ。ローカル パスまたは[外部ストレージ URL](/br/backup-and-restore-storages.md)をサポート         |
+| `-o`または`--output`      | エクスポートされたファイルを格納するディレクトリ。ローカル パスまたは[外部storageURL](/br/backup-and-restore-storages.md)をサポート        |
 | `-r`または`--row`         | 1 つのファイルの最大行数                                                                                     |
 | `-F`                   | 1 つのファイルの最大サイズ (MiB 単位)。推奨値: 256 MiB。                                                             |
 | `-B`または`--database`    | エクスポートするデータベースを指定します                                                                              |
@@ -78,7 +78,7 @@ tiup dumpling --host ${host} --port 3306 --user root --password ${password} --fi
 
 ### ステップ 3. TiDB Lightning構成ファイルを作成する {#step-3-create-the-tidb-lightning-configuration-file}
 
-次のように`tidb-lightning.toml`の構成ファイルを作成します。
+次のように`tidb-lightning.toml`構成ファイルを作成します。
 
 {{< copyable "" >}}
 
@@ -133,7 +133,7 @@ TiDB クラスターで TLS を有効にする必要がある場合は、 [TiDB 
 
 2.  `tidb-lightning`を実行してインポートを開始します。コマンド ラインでプログラムを直接起動すると、プロセスが SIGHUP シグナルの受信後に予期せず終了することがあります。この場合、 `nohup`または`screen`ツールを使用してプログラムを実行することをお勧めします。例えば：
 
-    S3 ストレージ パスにアクセスできる SecretKey と AccessKey を環境変数としてDumplingノードに渡します。 `~/.aws/credentials`から資格情報を読み取ることもできます。
+    S3storageパスにアクセスできる SecretKey と AccessKey を環境変数としてDumplingノードに渡します。 `~/.aws/credentials`から資格情報を読み取ることもできます。
 
     {{< copyable "" >}}
 
@@ -149,11 +149,11 @@ TiDB クラスターで TLS を有効にする必要がある場合は、 [TiDB 
     -   [監視ダッシュボード](/tidb-lightning/monitor-tidb-lightning.md)で進行状況を確認します。
     -   [TiDB Lightning Web インターフェイス](/tidb-lightning/tidb-lightning-web-interface.md)で進行状況を確認します。
 
-4.  TiDB Lightningがインポートを完了すると、自動的に終了します。 `tidb-lightning.log`の最後の行に`the whole procedure completed`が含まれているかどうかを確認します。はいの場合、インポートは成功です。 「いいえ」の場合、インポートでエラーが発生します。エラー メッセージの指示に従って、エラーに対処します。
+4.  TiDB Lightning がインポートを完了すると、自動的に終了します。 `tidb-lightning.log`最後の行に`the whole procedure completed`含まれているかどうかを確認します。はいの場合、インポートは成功です。 「いいえ」の場合、インポートでエラーが発生します。エラー メッセージの指示に従って、エラーに対処します。
 
 > **ノート：**
 >
-> インポートが成功したかどうかに関係なく、ログの最後の行に`tidb lightning exit`が表示されます。これは、 TiDB Lightningが正常に終了したことを意味しますが、必ずしもインポートが成功したことを意味するものではありません。
+> インポートが成功したかどうかに関係なく、ログの最後の行に`tidb lightning exit`が表示されます。これは、 TiDB Lightning が正常に終了したことを意味しますが、必ずしもインポートが成功したことを意味するものではありません。
 
 インポート中に問題が発生した場合は、トラブルシューティングについて[TiDB LightningFAQ](/tidb-lightning/tidb-lightning-faq.md)を参照してください。
 
@@ -276,7 +276,7 @@ tiup dmctl --master-addr ${advertise-addr} start-task task.yaml
 
 ### ステップ 4. 移行タスクのステータスを確認する {#step-4-check-the-migration-task-status}
 
-DM クラスターに進行中の移行タスクとタスクのステータスがあるかどうかを確認するには、 `tiup dmctl`を使用して`query-status`コマンドを実行します。
+DM クラスターに進行中の移行タスクとタスクのステータスがあるかどうかを確認するには、 `tiup dmctl`使用して`query-status`コマンドを実行します。
 
 {{< copyable "" >}}
 
@@ -290,7 +290,7 @@ tiup dmctl --master-addr ${advertise-addr} query-status ${task-name}
 
 移行タスクの履歴ステータスとその他の内部メトリックを表示するには、次の手順を実行します。
 
-TiUP を使用して DM をデプロイしたときに Prometheus、Alertmanager、および Grafana をデプロイした場合は、デプロイ中に指定された IP アドレスとポートを使用してTiUPにアクセスできます。次に、DM ダッシュボードを選択して、DM 関連のモニタリング メトリックを表示できます。
+TiUPを使用して DM をデプロイしたときに Prometheus、Alertmanager、および Grafana をデプロイした場合は、デプロイ中に指定された IP アドレスとポートを使用して Grafana にアクセスできます。次に、DM ダッシュボードを選択して、DM 関連のモニタリング メトリックを表示できます。
 
 DM が実行されている場合、DM-worker、DM-master、および dmctl は関連情報をログに出力します。これらのコンポーネントのログ ディレクトリは次のとおりです。
 

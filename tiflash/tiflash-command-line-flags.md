@@ -5,7 +5,7 @@ summary: Learn the command-line startup flags of TiFlash.
 
 # TiFlashコマンドライン フラグ {#tiflash-command-line-flags}
 
-このドキュメントでは、 TiFlashを起動するときに使用できるコマンドライン フラグを紹介します。
+このドキュメントでは、 TiFlash を起動するときに使用できるコマンドライン フラグを紹介します。
 
 ## <code>server --config-file</code> {#code-server-config-file-code}
 
@@ -19,8 +19,8 @@ summary: Learn the command-line startup flags of TiFlash.
 
 -   ユーザー シナリオ:
 
-    -   データ検証が有効になっているバージョン &gt;= TiFlashからバージョン &lt; v5.4.0 に TiFlash をダウングレードする必要がある場合は、このツールを使用して DTFile のデータ形式をダウングレードできます。
-    -   TiFlashをバージョン &gt;= v5.4.0 にアップグレードし、既存のデータのデータ検証を有効にしたい場合は、このツールを使用して DTFile のデータ形式をアップグレードできます。
+    -   データ検証が有効になっているバージョン &gt;= v5.4.0 からバージョン &lt; v5.4.0 にTiFlashをダウングレードする必要がある場合は、このツールを使用して DTFile のデータ形式をダウングレードできます。
+    -   TiFlash をバージョン &gt;= v5.4.0 にアップグレードし、既存のデータのデータ検証を有効にしたい場合は、このツールを使用して DTFile のデータ形式をアップグレードできます。
     -   さまざまな構成で DTFile のスペース使用量と読み取り速度をテストします。
 
 -   パラメーター：
@@ -34,11 +34,11 @@ summary: Learn the command-line startup flags of TiFlash.
     -   `--file-id` : DTFile の ID。たとえば、DTFile `dmf_123`の ID は`123`です。
     -   `--workdir` : `dmf_xxx`の親ディレクトリ。
     -   `--dry` : 予行演習モード。移行プロセスのみが出力されます。
-    -   `--nokeep` : 元のデータを保持しません。このオプションが有効でない場合、 `dmf_xxx.old`のファイルが作成されます。
+    -   `--nokeep` : 元のデータを保持しません。このオプションが有効でない場合、 `dmf_xxx.old`ファイルが作成されます。
 
 > **警告：**
 >
-> TiFlashは、カスタムの圧縮アルゴリズムと圧縮レベルを使用する DTFile を読み取ることができます。ただし、公式には圧縮レベルがデフォルトの`lz4`アルゴリズムのみがサポートされています。カスタム圧縮パラメータは十分にテストされておらず、実験的です。
+> TiFlash は、カスタムの圧縮アルゴリズムと圧縮レベルを使用する DTFile を読み取ることができます。ただし、公式には圧縮レベルがデフォルトの`lz4`アルゴリズムのみがサポートされています。カスタム圧縮パラメータは十分にテストされておらず、実験的なものです。
 
 > **ノート：**
 >
@@ -51,9 +51,9 @@ summary: Learn the command-line startup flags of TiFlash.
 -   DTFile の基本的な I/O 速度テストを提供します。
 -   パラメーター：
 
-    -   `--version` : DTFile のバージョン。 [`--version` <code>dttool migrate</code>のバージョン](#dttool-migrate)を参照してください。
-    -   `--algorithm` : データ検証に使用されるハッシュ アルゴリズム。 [`--algorithm` <code>dttool migrate</code>のアルゴリズム](#dttool-migrate)を参照してください。
-    -   `--frame` : 検証フレームのサイズ。 [`--frame` <code>dttool migrate</code>のフレーム](#dttool-migrate)を参照してください。
+    -   `--version` : DTFile のバージョン。 [`dttool migrate`の<code>--version</code>](#dttool-migrate)を参照してください。
+    -   `--algorithm` : データ検証に使用されるハッシュ アルゴリズム。 [`dttool migrate`の<code>--algorithm</code>](#dttool-migrate)を参照してください。
+    -   `--frame` : 検証フレームのサイズ。 [`dttool migrate`の<code>--frame</code>](#dttool-migrate)を参照してください。
     -   `--column` : テストするテーブルの列。デフォルト値は`100`です。
     -   `--size` : テストするテーブルの行。デフォルト値は`1000`です。
     -   `--field` : テストするテーブルのフィールド長制限。デフォルト値は`1024`です。
@@ -75,6 +75,6 @@ summary: Learn the command-line startup flags of TiFlash.
 
     -   `--config-file` : `dttool bench`の構成ファイル。 [`--config-file` in <code>dttool migrate</code>](#dttool-migrate)を参照してください。
     -   `--check` : ハッシュ検証を実行します。
-    -   `--file-id` : DTFile の ID。 [--dttool `dttool migrate`のファイル<code>--file-id</code>](#dttool-migrate)を参照してください。
-    -   `--imitative` : データベース コンテキストを模倣します。 [`--imitative` <code>dttool migrate</code>の模倣](#dttool-migrate)を参照してください。
-    -   `--workdir` : データ ディレクトリ。 [`--workdir` <code>dttool migrate</code>の workdir](#dttool-migrate)を参照してください。
+    -   `--file-id` : DTFile の ID。 [`dttool migrate`の<code>--file-id</code>](#dttool-migrate)を参照してください。
+    -   `--imitative` : データベース コンテキストを模倣します。 [-- `dttool migrate`の<code>--imitative</code>](#dttool-migrate)を参照してください。
+    -   `--workdir` : データ ディレクトリ。 [`dttool migrate`の<code>--workdir</code>](#dttool-migrate)を参照してください。

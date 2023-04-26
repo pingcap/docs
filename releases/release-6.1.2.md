@@ -18,7 +18,7 @@ TiDB バージョン: 6.1.2
 
 -   TiKV
 
-    -   1 つのピアが到達不能になった後に Raftstore があまりにも多くのメッセージをブロードキャストするのを避けるために、 `unreachable_backoff`のアイテムの構成をサポートします[#13054](https://github.com/tikv/tikv/issues/13054) @ [5kbps](https://github.com/5kbpers)
+    -   `unreachable_backoff`つのピアが到達不能になった後にRaftstore があまりにも多くのメッセージをブロードキャストするのを避けるために、1 つのアイテムの構成をサポートします[#13054](https://github.com/tikv/tikv/issues/13054) @ [5kbps](https://github.com/5kbpers)
     -   フロー制御しきい値[#13467](https://github.com/tikv/tikv/issues/13467) @ [タボキー](https://github.com/tabokie)より小さい値への RocksDB 書き込みストール設定の構成をサポート
 
 -   ツール
@@ -45,7 +45,7 @@ TiDB バージョン: 6.1.2
     -   トランザクション コミットが完了する前に、DML executor を含む`EXPLAIN ANALYZE`ステートメントが結果を返す可能性があるという問題を修正します[#37373](https://github.com/pingcap/tidb/issues/37373) @ [cfzjywxk](https://github.com/cfzjywxk)
     -   `ORDER BY`句に相関サブクエリ[#18216](https://github.com/pingcap/tidb/issues/18216) @ [ウィノロス](https://github.com/winoros)が含まれている場合、 `GROUP CONCAT` with `ORDER BY`が失敗する可能性がある問題を修正します。
     -   `UPDATE`ステートメントに共通テーブル式 (CTE) [#35758](https://github.com/pingcap/tidb/issues/35758) @ [アイリンキッド](https://github.com/AilinKid)が含まれている場合に`Can't find column`が報告される問題を修正します。
-    -   特定のシナリオ[#37187](https://github.com/pingcap/tidb/issues/37187) @ [思い出す](https://github.com/Reminiscent)で`EXECUTE`が予期しないエラーをスローする可能性がある問題を修正します。
+    -   特定のシナリオ[#37187](https://github.com/pingcap/tidb/issues/37187) @ [思い出す](https://github.com/Reminiscent)で`EXECUTE`予期しないエラーをスローする可能性がある問題を修正します。
 
 -   TiKV
 
@@ -84,7 +84,7 @@ TiDB バージョン: 6.1.2
 
     -   TiCDC
 
-        -   cdcサーバーが完全に起動する前に HTTP 要求を受信すると、cdcサーバーがpanicになる可能性がある問題を修正します[#6838](https://github.com/pingcap/tiflow/issues/6838) @ [アスドンメン](https://github.com/asddongmen)
+        -   cdcサーバーが完全に起動する前に HTTP 要求を受信すると、cdcサーバーがpanic可能性がある問題を修正します[#6838](https://github.com/pingcap/tiflow/issues/6838) @ [アスドンメン](https://github.com/asddongmen)
         -   アップグレード[#7235](https://github.com/pingcap/tiflow/issues/7235) @ [ハイラスチン](https://github.com/hi-rustin)中のログ フラッディングの問題を修正します。
         -   changefeed の REDO ログファイルが誤って削除されることがある問題を修正[#6413](https://github.com/pingcap/tiflow/issues/6413) @ [ハイラスチン](https://github.com/hi-rustin)
         -   etcd トランザクションであまりにも多くの操作がコミットされた場合に TiCDC が使用できなくなる可能性がある問題を修正します[#7131](https://github.com/pingcap/tiflow/issues/7131) @ [ハイラスチン](https://github.com/hi-rustin)
@@ -93,4 +93,4 @@ TiDB バージョン: 6.1.2
     -   バックアップと復元 (BR)
 
         -   復元時に同時実行数が大きすぎるため、リージョンのバランスが取れていない問題を修正します[#37549](https://github.com/pingcap/tidb/issues/37549) @ [3ポインター](https://github.com/3pointer)
-        -   外部ストレージ[#37469](https://github.com/pingcap/tidb/issues/37469) @ [MoCuishle28](https://github.com/MoCuishle28)の認証キーに特殊文字が含まれていると、バックアップと復元に失敗する可能性がある問題を修正
+        -   外部storage[#37469](https://github.com/pingcap/tidb/issues/37469) @ [MoCuishle28](https://github.com/MoCuishle28)の認証キーに特殊文字が含まれていると、バックアップと復元に失敗する可能性がある問題を修正

@@ -23,7 +23,7 @@ TiDB アンシブル バージョン: 3.0.0-rc.2
     -   `Order By`節[#10488](https://github.com/pingcap/tidb/pull/10488)の NULL 値を無視する
     -   列情報を簡略化する際に`UnionAll`論理演算子の間違ったスキーマ情報計算を修正[#10384](https://github.com/pingcap/tidb/pull/10384)
     -   `Not`演算子[#10363](https://github.com/pingcap/tidb/pull/10363/files)を押し下げるときは、元の式を変更しないでください
-    -   ヒストグラムの`dump`相関を[#10573](https://github.com/pingcap/tidb/pull/10573) `load`
+    -   ヒストグラム`load` `dump`相関をサポート[#10573](https://github.com/pingcap/tidb/pull/10573)
 
 -   実行エンジン
     -   `batchChecker` [#10370](https://github.com/pingcap/tidb/pull/10370)で重複する行をフェッチするときに、一意のインデックスを持つ仮想列を適切に処理する
@@ -34,7 +34,7 @@ TiDB アンシブル バージョン: 3.0.0-rc.2
 
 -   サーバ
     -   TiKV [#10301](https://github.com/pingcap/tidb/pull/10301)で障害が発生した場合、TiDB が TiKV への新しい接続を継続的に作成する問題を修正します。
-    -   書き込み競合エラー[#10339](https://github.com/pingcap/tidb/pull/10339)だけではなく、 `tidb_disable_txn_auto_retry`をすべての再試行可能なエラーに影響を与えるようにします。
+    -   書き込み競合エラー[#10339](https://github.com/pingcap/tidb/pull/10339)だけではなく、 `tidb_disable_txn_auto_retry`すべての再試行可能なエラーに影響を与えるようにします。
     -   `prepare` / `execute` [#10144](https://github.com/pingcap/tidb/pull/10144)を使用して、パラメーターのない DDL ステートメントの実行を許可する
     -   `tidb_back_off_weight`変数を追加して、バックオフ時間を制御します[#10266](https://github.com/pingcap/tidb/pull/10266)
     -   デフォルト値を`tidb_disable_txn_auto_retry`から`on` [#10266](https://github.com/pingcap/tidb/pull/10266)に設定することにより、TiDB がデフォルト条件で自動コミットされていないトランザクションを再試行することを禁止する
@@ -45,7 +45,7 @@ TiDB アンシブル バージョン: 3.0.0-rc.2
     -   `tidb_low_resolution_tso`変数を追加して、バッチで取得される TSO の数を制御し、TSO を取得するトランザクションの時間を短縮して、データの一貫性がそれほど厳密に必要とされないシナリオに適応します[#10428](https://github.com/pingcap/tidb/pull/10428)
 
 -   DDL
-    -   古いバージョンの TiDB [#10272](https://github.com/pingcap/tidb/pull/10272)のストレージ内の文字セット名の大文字の問題を修正します。
+    -   古いバージョンの TiDB [#10272](https://github.com/pingcap/tidb/pull/10272)のstorage内の文字セット名の大文字の問題を修正します。
     -   テーブルの作成後に書き込みホットスポットを回避するために、テーブルの作成時にテーブル リージョンを事前に割り当てるテーブル パーティションのサポート`preSplit` [#10221](https://github.com/pingcap/tidb/pull/10221)
     -   TiDB が PD のバージョン情報を誤って更新することがある問題を修正[#10324](https://github.com/pingcap/tidb/pull/10324)
     -   `ALTER DATABASE`ステートメント[#10393](https://github.com/pingcap/tidb/pull/10393)を使用した文字セットと照合順序の変更をサポート
@@ -58,7 +58,7 @@ TiDB アンシブル バージョン: 3.0.0-rc.2
 
 ## PD {#pd}
 
--   デフォルトでリージョンストレージを有効にして、リージョンメタデータを保存します[#1524](https://github.com/pingcap/pd/pull/1524)
+-   デフォルトでリージョンstorageを有効にして、リージョンメタデータを保存します[#1524](https://github.com/pingcap/pd/pull/1524)
 -   ホットリージョンスケジューリングが別のスケジューラによってプリエンプトされる問題を修正します[#1522](https://github.com/pingcap/pd/pull/1522)
 -   リーダーの優先度が反映されない問題を修正[#1533](https://github.com/pingcap/pd/pull/1533)
 -   `ScanRegions` [#1535](https://github.com/pingcap/pd/pull/1535)の gRPC インターフェイスを追加する
@@ -75,7 +75,7 @@ TiDB アンシブル バージョン: 3.0.0-rc.2
     -   削除`TxnScheduler` [#4098](https://github.com/tikv/tikv/pull/4098)
     -   悲観的ロック トランザクションのサポート[#4698](https://github.com/tikv/tikv/pull/4698)
 
--   ラフトストア
+-   Raftstore
     -   raftstore CPU [#4591](https://github.com/tikv/tikv/pull/4591)の消費を削減するための休止状態リージョンのサポート
     -   リーダーが学習者の`ReadIndex`要求に応答しない問題を修正[#4653](https://github.com/tikv/tikv/pull/4653)
     -   場合によってはリーダーの転送に失敗する問題を修正[#4684](https://github.com/tikv/tikv/pull/4684)
@@ -112,7 +112,7 @@ TiDB アンシブル バージョン: 3.0.0-rc.2
 
 ## ツール {#tools}
 
--   Binlog
+-   TiDBBinlog
     -   メトリクスを追加して、ダウンストリーム[#594](https://github.com/pingcap/tidb-binlog/pull/594)のデータ レプリケーションの遅延を追跡します
 
 -   TiDB Lightning

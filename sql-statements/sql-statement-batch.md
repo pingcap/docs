@@ -5,9 +5,9 @@ summary: An overview of the usage of BATCH for the TiDB database.
 
 # バッチ {#batch}
 
-`BATCH`構文は、実行のために DML ステートメントを TiDB の複数のステートメントに分割します。これは、トランザクションの原子性と分離が**保証されないこと**を意味します。したがって、これは「非トランザクション」ステートメントです。
+`BATCH`構文は、実行のために DML ステートメントを TiDB の複数のステートメントに分割します。これは、トランザクションの原子性と分離**が保証されないこと**を意味します。したがって、これは「非トランザクション」ステートメントです。
 
-現在、 `INSERT` 、 `REPLACE` 、 `UPDATE` 、および`DELETE`が`BATCH`でサポートされています。
+現在、 `INSERT` 、 `REPLACE` 、 `UPDATE` 、および`DELETE` `BATCH`でサポートされています。
 
 `BATCH`構文は、列に基づいて、DML ステートメントを複数の実行範囲に分割します。各範囲で、単一の SQL ステートメントが実行されます。
 
@@ -19,7 +19,7 @@ summary: An overview of the usage of BATCH for the TiDB database.
 BATCH ON test.t2.id LIMIT 1 INSERT INTO t SELECT t2.id, t2.v, t3.v FROM t2 JOIN t3 ON t2.k = t3.k;
 ```
 
-前のステートメントでは、分割する列を`test.t2.id`として指定していますが、これは明確です。 `id`を次のように使用すると、エラーが報告されます。
+前のステートメントでは、分割する列を`test.t2.id`として指定していますが、これは明確です。 `id`次のように使用すると、エラーが報告されます。
 
 ```sql
 BATCH ON id LIMIT 1 INSERT INTO t SELECT t2.id, t2.v, t3.v FROM t2 JOIN t3 ON t2.k = t3.k;

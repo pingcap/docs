@@ -9,7 +9,7 @@ summary: An overview of the usage of SHOW COLLATION for the TiDB database.
 
 > **ノート：**
 >
-> [「新しい照合順序フレームワーク」](/character-set-and-collation.md#new-framework-for-collations)が有効な場合、 `SHOW COLLATION`の結果は異なります。新しい照合順序フレームワークの詳細については、 [文字セットと照合順序](/character-set-and-collation.md)を参照してください。
+> [「新しい照合順序ワーク」](/character-set-and-collation.md#new-framework-for-collations)が有効な場合、 `SHOW COLLATION`の結果は異なります。新しい照合順序フレームワークの詳細については、 [文字セットと照合順序](/character-set-and-collation.md)を参照してください。
 
 ## あらすじ {#synopsis}
 

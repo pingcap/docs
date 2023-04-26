@@ -5,9 +5,15 @@ summary: Learn how to use the cluster resource to create and modify a TiDB Cloud
 
 # クラスタリソースを使用する {#use-cluster-resource}
 
-このドキュメントの`tidbcloud_cluster`のリソースを使用して、 TiDB Cloudクラスターを作成および変更する方法を学習できます。
+このドキュメントの`tidbcloud_cluster`リソースを使用して、 TiDB Cloudクラスターを管理する方法を学習できます。
 
-さらに、 `tidbcloud_projects`と`tidbcloud_cluster_specs`のデータ ソースを使用して必要な情報を取得する方法についても学習します。
+さらに、 `tidbcloud_projects`と`tidbcloud_cluster_specs`データ ソースを使用して必要な情報を取得する方法についても学習します。
+
+`tidbcloud_cluster`リソースの機能は次のとおりです。
+
+-   Serverless TierとDedicated Tierクラスターを作成します。
+-   Dedicated Tierクラスターを変更します。
+-   Serverless TierおよびDedicated Tierクラスターを削除します。
 
 ## 前提条件 {#prerequisites}
 
@@ -17,7 +23,7 @@ summary: Learn how to use the cluster resource to create and modify a TiDB Cloud
 
 各 TiDB クラスターはプロジェクト内にあります。 TiDB クラスターを作成する前に、クラスターを作成するプロジェクトの ID を取得する必要があります。
 
-利用可能なすべてのプロジェクトの情報を表示するには、次のように`tidbcloud_projects`のデータ ソースを使用できます。
+利用可能なすべてのプロジェクトの情報を表示するには、次のように`tidbcloud_projects`データ ソースを使用できます。
 
 1.  [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md)のときに作成される`main.tf`ファイルに、次のように`data`および`output`ブロックを追加します。
 
@@ -26,15 +32,13 @@ summary: Learn how to use the cluster resource to create and modify a TiDB Cloud
       required_providers {
         tidbcloud = {
           source = "tidbcloud/tidbcloud"
-          version = "~> 0.1.0"
         }
       }
-      required_version = ">= 1.0.0"
     }
 
     provider "tidbcloud" {
-      public_key = "fake_public_key"
-      private_key = "fake_private_key"
+      public_key = "your_public_key"
+      private_key = "your_private_key"
     }
 
     data "tidbcloud_projects" "example_project" {
@@ -55,11 +59,11 @@ summary: Learn how to use the cluster resource to create and modify a TiDB Cloud
 
     -   `output`ブロックを使用して、出力に表示されるデータ ソース情報を定義し、他の Terraform 構成で使用する情報を公開します。
 
-        `output`ブロックは、プログラミング言語の戻り値と同様に機能します。詳細については、 [Terraform ドキュメント](https://www.terraform.io/language/values/outputs)を参照してください。
+        `output`ブロックは、プログラミング言語の戻り値と同様に機能します。詳細については、 [Terraform ドキュメント](https://www.terraform.io/language/values/outputs)参照してください。
 
-    リソースとデータ ソースで使用可能なすべての構成を取得するには、この[構成ドキュメント](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs)を参照してください。
+    リソースとデータ ソースで使用可能なすべての構成を取得するには、この[構成ドキュメント](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs)参照してください。
 
-2.  `terraform apply`コマンドを実行して構成を適用します。続行するには、確認プロンプトで`yes`を入力する必要があります。
+2.  `terraform apply`コマンドを実行して構成を適用します。続行するには、確認プロンプトで`yes`入力する必要があります。
 
     プロンプトをスキップするには、 `terraform apply --auto-approve`を使用します。
 
@@ -127,14 +131,12 @@ summary: Learn how to use the cluster resource to create and modify a TiDB Cloud
       required_providers {
         tidbcloud = {
           source = "tidbcloud/tidbcloud"
-          version = "~> 0.1.0"
         }
       }
-      required_version = ">= 1.0.0"
     }
     provider "tidbcloud" {
-      public_key = "fake_public_key"
-      private_key = "fake_private_key"
+      public_key = "your_public_key"
+      private_key = "your_private_key"
     }
     data "tidbcloud_cluster_specs" "example_cluster_spec" {
     }
@@ -274,9 +276,9 @@ summary: Learn how to use the cluster resource to create and modify a TiDB Cloud
 
 -   `cloud_provider`は、TiDB クラスターをホストできるクラウド プロバイダーです。
 -   `region`は`cloud_provider`の領域です。
--   `node_quantity_range`は、最小ノード数とノードをスケーリングするステップを示します。
+-   `node_quantity_range`最小ノード数とノードをスケーリングするステップを示します。
 -   `node_size`はノードのサイズです。
--   `storage_size_gib_range`は、ノードに設定できる最小および最大のストレージ サイズを示します。
+-   `storage_size_gib_range`ノードに設定できる最小および最大のstorageサイズを示します。
 
 ## クラスター リソースを使用してクラスターを作成する {#create-a-cluster-using-the-cluster-resource}
 
@@ -297,15 +299,13 @@ summary: Learn how to use the cluster resource to create and modify a TiDB Cloud
      required_providers {
        tidbcloud = {
          source = "tidbcloud/tidbcloud"
-         version = "~> 0.1.0"
        }
      }
-     required_version = ">= 1.0.0"
     }
 
     provider "tidbcloud" {
-     public_key = "fake_public_key"
-     private_key = "fake_private_key"
+     public_key = "your_public_key"
+     private_key = "your_private_key"
     }
 
     resource "tidbcloud_cluster" "example_cluster" {
@@ -338,7 +338,7 @@ summary: Learn how to use the cluster resource to create and modify a TiDB Cloud
     -   リソース名については、必要に応じて定義できます。たとえば、 `example_cluster`です。
     -   リソースの詳細については、プロジェクト ID とクラスターの仕様情報に従って構成できます。
 
-3.  `terraform apply`コマンドを実行します。リソースを適用するときに`terraform apply --auto-approve`を使用することはお勧めしません。
+3.  `terraform apply`コマンドを実行します。リソースを適用するときに`terraform apply --auto-approve`使用することはお勧めしません。
 
     ```shell
     $ terraform apply
@@ -390,7 +390,7 @@ summary: Learn how to use the cluster resource to create and modify a TiDB Cloud
 
     -   構成と状態の違いを確認できます。
     -   この`apply`の結果も見ることができます。新しいリソースが追加され、リソースが変更または破棄されることはありません。
-    -   `known after apply`は、 `apply`の後に値を取得することを示しています。
+    -   `known after apply` `apply`の後に値を取得することを示しています。
 
 4.  計画に問題がなければ、 `yes`と入力して続行します。
 
@@ -496,7 +496,7 @@ Dedicated Tierクラスターの場合、Terraform を使用してクラスタ�
 
 ### TiFlashコンポーネントを追加する {#add-a-tiflash-component}
 
-1.  [クラスターを作成する](#create-a-cluster-using-the-cluster-resource)のときに使用される`cluster.tf`ファイルで、 `tiflash`の構成を`components`フィールドに追加します。
+1.  [クラスターを作成する](#create-a-cluster-using-the-cluster-resource)のときに使用される`cluster.tf`ファイルで、 `tiflash`構成を`components`フィールドに追加します。
 
     例えば：
 
@@ -613,7 +613,7 @@ Dedicated Tierクラスターの場合、Terraform を使用してクラスタ�
     }
     ```
 
-`MODIFYING`のステータスは、クラスターが現在変更中であることを示します。ちょっと待って。ステータスは`AVAILABLE`に変更されます。
+`MODIFYING`ステータスは、クラスターが現在変更中であることを示します。ちょっと待って。ステータスは`AVAILABLE`に変更されます。
 
 ### TiDB クラスターをスケーリングする {#scale-a-tidb-cluster}
 
@@ -697,12 +697,12 @@ Dedicated Tierクラスターの場合、Terraform を使用してクラスタ�
 
 ### クラスターを一時停止または再開する {#pause-or-resume-a-cluster}
 
-ステータスが`AVAILABLE`の場合はクラスターを一時停止でき、ステータスが`PAUSED`の場合はクラスターを再開できます。
+ステータスが`AVAILABLE`場合はクラスターを一時停止でき、ステータスが`PAUSED`の場合はクラスターを再開できます。
 
 -   クラスターを一時停止するには、 `paused = true`を設定します。
 -   クラスターを再開するには、 `paused = false`を設定します。
 
-1.  [クラスターを作成する](#create-a-cluster-using-the-cluster-resource)のときに使用される`cluster.tf`のファイルで、 `config`の構成に`pause = true`を追加します。
+1.  [クラスターを作成する](#create-a-cluster-using-the-cluster-resource)のときに使用される`cluster.tf`ファイルで、 `config`構成に`pause = true`を追加します。
 
     ```
     config = {
@@ -850,7 +850,7 @@ Dedicated Tierクラスターの場合、Terraform を使用してクラスタ�
 
 Terraform で管理されていない TiDB クラスターの場合は、Terraform を使用してインポートするだけで管理できます。
 
-たとえば、Terraform によって作成されていないクラスターをインポートしたり、 [復元リソースで作成](/tidb-cloud/terraform-use-restore-resource.md#create-a-restore-task-with-the-restore-resource)のクラスターをインポートしたりできます。
+たとえば、Terraform によって作成されていないクラスターをインポートしたり、 [復元リソースで作成](/tidb-cloud/terraform-use-restore-resource.md#create-a-restore-task)のクラスターをインポートしたりできます。
 
 1.  次のように`import_cluster.tf`ファイルを作成します。
 
@@ -859,10 +859,8 @@ Terraform で管理されていない TiDB クラスターの場合は、Terrafo
      required_providers {
        tidbcloud = {
          source = "tidbcloud/tidbcloud"
-         version = "~> 0.1.0"
        }
      }
-     required_version = ">= 1.0.0"
     }
     resource "tidbcloud_cluster" "import_cluster" {}
     ```

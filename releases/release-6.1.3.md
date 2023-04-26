@@ -16,7 +16,7 @@ TiDB バージョン: 6.1.3
 
     -   TiCDC
 
-        -   デフォルト値の[`transaction-atomicity`](/ticdc/ticdc-sink-to-mysql.md#configure-sink-uri-for-mysql-or-tidb)を`table`から`none`に変更します。これにより、レプリケーションのレイテンシー時間が短縮され、OOM のリスクが軽減され、すべてのトランザクションではなく少数のトランザクション (1 つのトランザクションのサイズが 1024 行を超える) のみが分割されるようになります[#7505](https://github.com/pingcap/tiflow/issues/7505) [#5231](https://github.com/pingcap/tiflow/issues/5231) @ [アスドンメン](https://github.com/asddongmen)
+        -   デフォルト値の[`transaction-atomicity`](/ticdc/ticdc-sink-to-mysql.md#configure-sink-uri-for-mysql-or-tidb) `table`から`none`に変更します。これにより、レプリケーションのレイテンシーが短縮され、OOM のリスクが軽減され、すべてのトランザクションではなく少数のトランザクション (1 つのトランザクションのサイズが 1024 行を超える) のみが分割されるようになります[#7505](https://github.com/pingcap/tiflow/issues/7505) [#5231](https://github.com/pingcap/tiflow/issues/5231) @ [アスドンメン](https://github.com/asddongmen)
 
 ## 改良点 {#improvements}
 

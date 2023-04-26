@@ -4,7 +4,7 @@ hide_sidebar: true
 hide_commit: true
 ---
 
-<LearningPathContainer platform="tidb" title="TiDB" subTitle="TiDBは、HTAP（Hybrid Transactional and Analytical Processing）ワークロードをサポートするオープンソースの分散型SQLデータベースです。TiDBを使用するために必要なガイド、サンプル、およびリファレンスをご参照ください。">
+<LearningPathContainer platform="tidb" title="TiDB" subTitle="TiDB is an open-source distributed SQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. Find the guide, samples, and references you need to use TiDB.">
 
 <!-- Localization note for TiDB:
 
@@ -48,9 +48,9 @@ hide_commit: true
 
 [ソフトウェアとハードウェアの要件](https://docs.pingcap.com/tidb/v6.5/hardware-and-software-requirements)
 
-[TiUP を使用してTiUPクラスタをデプロイする](https://docs.pingcap.com/tidb/v6.5/production-deployment-using-tiup)
+[TiUPを使用して TiDBクラスタをデプロイ](https://docs.pingcap.com/tidb/v6.5/production-deployment-using-tiup)
 
-[TiDBクラスタを Kubernetes にデプロイする](https://docs.pingcap.com/tidb/v6.5/tidb-in-kubernetes)
+[TiDBクラスタをKubernetes にデプロイ](https://docs.pingcap.com/tidb/v6.5/tidb-in-kubernetes)
 
 </LearningPath>
 
@@ -74,7 +74,7 @@ hide_commit: true
 
 [毎日のチェック](https://docs.pingcap.com/tidb/v6.5/daily-check)
 
-[TiUP を使用してTiUPを管理する](https://docs.pingcap.com/tidb/v6.5/maintain-tidb-using-tiup)
+[TiUPを使用して TiDBを管理](https://docs.pingcap.com/tidb/v6.5/maintain-tidb-using-tiup)
 
 </LearningPath>
 
@@ -127,6 +127,8 @@ hide_commit: true
 </LearningPath>
 
 <LearningPath label="Reference" icon="cloud-dev">
+
+[TiDB ロードマップ](https://docs.pingcap.com/tidb/dev/tidb-roadmap)
 
 [TiDBコンフィグレーションファイルのパラメーター](https://docs.pingcap.com/tidb/v6.5/tidb-configuration-file)
 

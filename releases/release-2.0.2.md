@@ -10,7 +10,7 @@ title: TiDB 2.0.2 Release Notes
 
 -   Decimal 除算式を押し下げる問題を修正
 -   `Delete`ステートメントでの`USE INDEX`構文の使用のサポート
--   `Auto-Increment`の列で`shard_row_id_bits`の機能を使用することを禁止する
+-   `Auto-Increment`列で`shard_row_id_bits`機能を使用することを禁止する
 -   Binlogを書き込むためのタイムアウト メカニズムを追加します。
 
 ## PD {#pd}

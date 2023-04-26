@@ -7,7 +7,7 @@ summary: Keywords and Reserved Words
 
 この記事では、TiDB のキーワード、予約語と非予約語の違いを紹介し、クエリのすべてのキーワードをまとめます。
 
-キーワードは、 `SELECT` 、 `UPDATE` 、 `DELETE`など、SQL ステートメントで特別な意味を持つ単語です。それらの一部は、**非予約キーワード**と呼ばれる識別子として直接使用できます。一部のキーワードは、<strong>予約済みキーワード</strong>と呼ばれる識別子として使用する前に特別な処理が必要です。
+キーワードは、 `SELECT` 、 `UPDATE` 、 `DELETE`など、SQL ステートメントで特別な意味を持つ単語です。それらの一部は、**非予約キーワード**と呼ばれる識別子として直接使用できます。一部のキーワードは、<strong>予約済みキーワード</strong>と呼ばれる識別子として使用する前に特別な処理が必要です。ただし、特別な処理が必要な場合がある、予約されていない特別なキーワードがあります。これらは予約済みキーワードとして扱うことをお勧めします。
 
 予約済みキーワードを識別子として使用するには、それらをバッククォート`` ` ``で囲む必要があります。
 
@@ -55,7 +55,9 @@ CREATE TABLE test.select (BEGIN int, END int);
 Query OK, 0 rows affected (0.08 sec)
 ```
 
-次のリストは、TiDB のキーワードを示しています。予約済みキーワードは`(R)`でマークされます。 [ウィンドウ関数](/functions-and-operators/window-functions.md)の予約済みキーワードは`(R-Window)`でマークされています。
+## キーワード一覧 {#keyword-list}
+
+次のリストは、TiDB のキーワードを示しています。予約済みキーワードは`(R)`でマークされます。 [ウィンドウ関数](/functions-and-operators/window-functions.md)の予約済みキーワードは`(R-Window)`でマークされています。バッククォート`` ` ``でエスケープする必要がある特別な非予約キーワードは、 `(S)`でマークされています。
 
 <TabsPanel letters="ABCDEFGHIJKLMNOPQRSTUVWXYZ" />
 
@@ -75,7 +77,7 @@ Query OK, 0 rows affected (0.08 sec)
 -   いつも
 -   アナライズ(R)
 -   と (R)
--   どれか
+-   どれでも
 -   AS(R)
 -   ASC(R)
 -   アスキー
@@ -110,11 +112,11 @@ Query OK, 0 rows affected (0.08 sec)
 -   BY (R)
 -   バイト
 
-<a id="C" class="letter" href="#C">ハ</a>
+<a id="C" class="letter" href="#C">C</a>
 
 -   キャッシュ
 -   キャンセル (R)
--   キャプチャー
+-   捕獲
 -   カスケード(R)
 -   カスケード
 -   ケース(R)
@@ -147,7 +149,7 @@ Query OK, 0 rows affected (0.08 sec)
 -   繋がり
 -   一貫性のある
 -   制約 (R)
--   環境
+-   コンテクスト
 -   変換 (R)
 -   CPU
 -   クリエイト(R)
@@ -199,7 +201,7 @@ Query OK, 0 rows affected (0.08 sec)
 -   DISTINCT (R)
 -   DISTINCTROW(R)
 -   DIV (右)
--   行う
+-   する
 -   ダブル(R)
 -   ドレイナー(R)
 -   ドロップ(R)
@@ -220,13 +222,13 @@ Query OK, 0 rows affected (0.08 sec)
 -   列挙型
 -   エラー
 -   エラー
--   逃れる
+-   エスケープ
 -   エスケープ (R)
 -   イベント
 -   イベント
 -   進化
 -   例外 (R)
--   両替
+-   交換
 -   エクスクルーシブ
 -   実行する
 -   存在する (R)
@@ -241,9 +243,9 @@ Query OK, 0 rows affected (0.08 sec)
 -   故障
 -   田畑
 -   ファイル
--   最初
+-   初め
 -   FIRST_VALUE (R ウィンドウ)
--   修繕
+-   修理済み
 -   フロート(R)
 -   流す
 -   続く
@@ -331,7 +333,7 @@ Query OK, 0 rows affected (0.08 sec)
 -   ラベル
 -   LAG (R-ウィンドウ)
 -   言語
--   過去
+-   最後
 -   ラストヴァル
 -   LAST_BACKUP
 -   LAST_VALUE (R ウィンドウ)
@@ -346,7 +348,7 @@ Query OK, 0 rows affected (0.08 sec)
 -   LINES(R)
 -   リスト
 -   ロード (R)
--   ローカル
+-   地元
 -   ローカルタイム (R)
 -   ローカルタイムスタンプ (R)
 -   位置
@@ -359,7 +361,7 @@ Query OK, 0 rows affected (0.08 sec)
 
 <a id="M" class="letter" href="#M">M</a>
 
--   主人
+-   マスター
 -   マッチ(R)
 -   MAXVALUE (R)
 -   MAX_CONNECTIONS_PER_HOUR
@@ -395,7 +397,7 @@ Query OK, 0 rows affected (0.08 sec)
 -   一度もない
 -   次
 -   ネクストヴァル
--   番号
+-   いいえ
 -   ノカシェ
 -   ノサイクル
 -   ノードグループ
@@ -403,7 +405,7 @@ Query OK, 0 rows affected (0.08 sec)
 -   NODE_STATE (R)
 -   NOMAXVALUE
 -   名目値
--   無し
+-   なし
 -   ない (R)
 -   今すぐ
 -   NO_WRITE_TO_BINLOG (R)
@@ -421,7 +423,7 @@ Query OK, 0 rows affected (0.08 sec)
 -   オンライン
 -   それだけ
 -   ON_DUPLICATE
--   開いた
+-   開ける
 -   オプティミスティック(R)
 -   最適化 (R)
 -   オプション(R)
@@ -446,6 +448,7 @@ Query OK, 0 rows affected (0.08 sec)
 -   PER_DB
 -   PER_TABLE
 -   ペシミスティック(R)
+-   配置 (S)
 -   プラグイン
 -   前に
 -   プレシジョン(R)
@@ -454,7 +457,7 @@ Query OK, 0 rows affected (0.08 sec)
 -   プライマリー (R)
 -   特典
 -   手順 (R)
--   処理する
+-   プロセス
 -   プロセスリスト
 -   プロフィール
 -   プロファイル
@@ -475,7 +478,7 @@ Query OK, 0 rows affected (0.08 sec)
 -   読み取り (R)
 -   リアル(R)
 -   再構築
--   回復する
+-   回復
 -   冗長
 -   参考文献 (R)
 -   REGEXP (R)
@@ -483,7 +486,7 @@ Query OK, 0 rows affected (0.08 sec)
 -   地域 (R)
 -   リリース (R)
 -   リロード
--   削除する
+-   削除
 -   リネーム(R)
 -   再編成する
 -   修理
@@ -493,7 +496,7 @@ Query OK, 0 rows affected (0.08 sec)
 -   レプリカ
 -   複製
 -   要求する (R)
--   尊敬する
+-   尊敬
 -   戻す
 -   復元する
 -   制限 (R)
@@ -514,7 +517,7 @@ Query OK, 0 rows affected (0.08 sec)
 <a id="S" class="letter" href="#S">S</a>
 
 -   サンプル (R)
--   2番目
+-   2番
 -   SECONDARY_ENGINE
 -   SECONDARY_LOAD
 -   SECONDARY_UNLOAD
@@ -538,7 +541,7 @@ Query OK, 0 rows affected (0.08 sec)
 -   単純
 -   SKIP_SCHEMA_FILES
 -   スレーブ
--   スロー
+-   遅い
 -   SMALLINT(R)
 -   スナップショット
 -   いくつかの
@@ -625,7 +628,7 @@ Query OK, 0 rows affected (0.08 sec)
 -   ユニコード
 -   ユニオン(R)
 -   ユニーク(R)
--   わからない
+-   知らない
 -   アンロック (R)
 -   未署名 (R)
 -   更新 (R)
@@ -647,7 +650,7 @@ Query OK, 0 rows affected (0.08 sec)
 -   VARCHARACTER(R)
 -   変数
 -   可変 (R)
--   見る
+-   意見
 -   バーチャル(R)
 -   見える
 

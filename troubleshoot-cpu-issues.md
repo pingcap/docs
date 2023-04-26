@@ -26,7 +26,7 @@ summary: Learn how to troubleshoot the issue of increased read and write latency
 #### トラブルシューティング方法 {#troubleshooting-methods}
 
 -   統計情報の更新
-    -   `analyze table`を手動で実行し、 `analyze`を`crontab`コマンドで定期的に実行して、統計を正確に保ちます。
+    -   `analyze table`手動で実行し、 `analyze` `crontab`コマンドで定期的に実行して、統計を正確に保ちます。
     -   `auto analyze`を自動的に実行します。 `analyze ratio`のしきい値を下げ、情報収集の頻度を増やし、実行の開始時刻と終了時刻を設定します。次の例を参照してください。
         -   `set global tidb_auto_analyze_ratio=0.2;`
         -   `set global tidb_auto_analyze_start_time='00:00 +0800';`
@@ -46,9 +46,9 @@ PD TSO の`wait duration`メトリックの異常な増加があります。こ�
 
 -   ディスクの問題。 PD ノードが配置されているディスクの I/O 負荷が最大になっています。 I/O 要求が高く、ディスクの状態が良好な他のコンポーネントと共に PD が展開されているかどうかを調査します。 **Grafana** -&gt; <strong>disk performance</strong> -&gt; <strong>レイテンシー</strong> / <strong>load</strong>でモニター メトリックを表示することで、原因を確認できます。必要に応じて、FIO ツールを使用してディスクのチェックを実行することもできます。
 
--   PD ピア間のネットワークの問題。 PD ログには`lost the TCP streaming connection`が表示されます。 PD ノード間のネットワークに問題があるかどうかを確認し、モニター**Grafana** -&gt; <strong>PD</strong> -&gt; <strong>etcd</strong>で`round trip`を表示して原因を確認する必要があります。
+-   PD ピア間のネットワークの問題。 PD ログには`lost the TCP streaming connection`が表示されます。 PD ノード間のネットワークに問題があるかどうかを確認し、モニター**Grafana** -&gt; <strong>PD</strong> -&gt; <strong>etcd</strong>で`round trip`表示して原因を確認する必要があります。
 
--   サーバーの負荷が高い。ログには`server is likely overloaded`が表示されます。
+-   サーバーの負荷が高い。ログには`server is likely overloaded`表示されます。
 
 -   PD がLeaderを選出できない: PD ログは`lease is not expired`を示します。 v3.0.x と v2.1.19 で[この問題](https://github.com/etcd-io/etcd/issues/10355)が修正されました。
 
@@ -58,7 +58,7 @@ PD TSO の`wait duration`メトリックの異常な増加があります。こ�
 
 -   PD は`FATAL`エラーを報告し、ログには`range failed to find revision pair`が表示されます。この問題は v3.0.8 ( [#2040](https://github.com/pingcap/pd/pull/2040) ) で修正されています。
 
--   `/api/v1/regions`のインターフェイスを使用する場合、リージョンが多すぎると PD OOM が発生する可能性があります。この問題は v3.0.8 で修正されています ( [#1986](https://github.com/pingcap/pd/pull/1986) )。
+-   `/api/v1/regions`インターフェイスを使用する場合、リージョンが多すぎると PD OOM が発生する可能性があります。この問題は v3.0.8 で修正されています ( [#1986](https://github.com/pingcap/pd/pull/1986) )。
 
 -   ローリング アップグレード中の PD OOM。 gRPC メッセージのサイズは制限されておらず、モニターは`TCP InSegs`が比較的大きいことを示しています。この問題は v3.0.6 で修正されています ( [#1952](https://github.com/pingcap/pd/pull/1952) )。
 
@@ -70,11 +70,11 @@ PD TSO の`wait duration`メトリックの異常な増加があります。こ�
 
 #### 現象 {#phenomenon}
 
-モニターの`KV Cmd Duration`のメトリックが異常に増加します。このメトリクスは、TiDB が TiKV にリクエストを送信してから TiDB がレスポンスを受信するまでの時間を表します。
+モニターの`KV Cmd Duration`メトリックが異常に増加します。このメトリクスは、TiDB が TiKV にリクエストを送信してから TiDB がレスポンスを受信するまでの時間を表します。
 
 #### 考えられる理由 {#possible-reasons}
 
--   `gRPC duration`メトリックを確認します。このメトリクスは、TiKV での gRPC リクエストの合計時間を表します。 TiKV の`gRPC duration`つと TiDB の`KV duration`つを比較することで、潜在的なネットワークの問題を見つけることができます。たとえば、gRPC 期間は短いが、TiDB の KV 期間が長い場合、TiDB と TiKV の間のネットワークレイテンシーが高い可能性があるか、TiDB と TiKV の間の NIC 帯域幅が完全に占有されている可能性があることを示しています。
+-   `gRPC duration`メトリックを確認します。このメトリクスは、TiKV での gRPC リクエストの合計時間を表します。 TiKV の`gRPC duration` TiDB の`KV duration`を比較することで、潜在的なネットワークの問題を見つけることができます。たとえば、gRPC 期間は短いが、TiDB の KV 期間が長い場合、TiDB と TiKV の間のネットワークレイテンシーが高い可能性があるか、TiDB と TiKV の間の NIC 帯域幅が完全に占有されている可能性があることを示しています。
 
 -   TiKV再始動のため再選。
     -   TiKV がパニックした後、 `systemd`でプルアップされ、正常に実行されます。panicが発生したかどうかは、TiKV ログを表示することで確認できます。この問題は予期しないものであるため、発生した場合は[バグを報告](https://github.com/tikv/tikv/issues/new?template=bug-report.md) 。
@@ -82,19 +82,19 @@ PD TSO の`wait duration`メトリックの異常な増加があります。こ�
     -   TiKV は OOM であり、再起動を引き起こします。
     -   `THP` (Transparent Hugepage) を動的に調整するため、TiKV がハングします。
 
--   チェック モニター: TiKV RocksDB で書き込みストールが発生し、再選択されます。モニター**Grafana** -&gt; <strong>TiKV-details</strong> -&gt; <strong>errors</strong>が`server is busy`を示しているかどうかを確認できます。
+-   チェック モニター: TiKV RocksDB で書き込みストールが発生し、再選択されます。モニター**Grafana** -&gt; <strong>TiKV-details</strong> -&gt; <strong>errors が</strong>`server is busy`示しているかどうかを確認できます。
 
 -   ネットワーク分離による再選。
 
--   `block-cache`の構成が大きすぎると、TiKV OOM が発生する可能性があります。問題の原因を確認するには、モニター**Grafana** -&gt; <strong>TiKV-details</strong>で該当するインスタンスを選択して、RocksDB の`block cache size`を確認します。その間、パラメータ`[storage.block-cache] capacity = # "1GB"`が正しく設定されているかどうかを確認します。デフォルトでは、TiKV の`block-cache`は、マシンの合計メモリの`45%`に設定されています。 TiKV はコンテナーのメモリ制限を超える可能性がある物理マシンのメモリを取得するため、コンテナーに TiKV をデプロイするときに、このパラメーターを明示的に指定する必要があります。
+-   `block-cache`構成が大きすぎると、TiKV OOM が発生する可能性があります。問題の原因を確認するには、モニター**Grafana** -&gt; <strong>TiKV-details</strong>で該当するインスタンスを選択して、RocksDB の`block cache size`を確認します。その間、パラメータ`[storage.block-cache] capacity = # "1GB"`が正しく設定されているかどうかを確認します。デフォルトでは、TiKV の`block-cache`マシンの合計メモリの`45%`に設定されています。 TiKV はコンテナーのメモリ制限を超える可能性がある物理マシンのメモリを取得するため、コンテナーに TiKV をデプロイするときに、このパラメーターを明示的に指定する必要があります。
 
--   コプロセッサーは多数の大きなクエリを受け取り、大量のデータを返します。 gRPC は、コプロセッサがデータを返すのと同じ速さでデータを送信できず、OOM が発生します。原因を確認するには、モニター**Grafana** -&gt; <strong>TiKV-details</strong> -&gt; <strong>coprocessor overview</strong>を表示して、 `response size`が`network outbound`のトラフィックを超えているかどうかを確認できます。
+-   コプロセッサー は多数の大きなクエリを受け取り、大量のデータを返します。 gRPC は、コプロセッサがデータを返すのと同じ速さでデータを送信できず、OOM が発生します。原因を確認するには、モニター**Grafana** -&gt; <strong>TiKV-details</strong> -&gt; <strong>coprocessor overview</strong>を表示して、 `response size` `network outbound`トラフィックを超えているかどうかを確認できます。
 
 ### シングル TiKV スレッドのボトルネック {#bottleneck-of-a-single-tikv-thread}
 
 TiKV には、ボトルネックになる可能性のあるシングル スレッドがいくつかあります。
 
--   TiKV インスタンス内のリージョンが多すぎると、単一の gRPC スレッドがボトルネックになります ( **Grafana** -&gt; <strong>TiKV-details</strong> -&gt; <strong>Thread CPU/gRPC CPU Per Thread</strong>メトリックを確認してください)。 v3.x 以降のバージョンでは、 `Hibernate Region`を有効にして問題を解決できます。
+-   TiKV インスタンス内のリージョンが多すぎると、単一の gRPC スレッドがボトルネックになります ( **Grafana** -&gt; <strong>TiKV-details</strong> -&gt; <strong>Thread CPU/gRPC CPU Per Thread</strong>メトリックを確認してください)。 v3.x 以降のバージョンでは、 `Hibernate Region`有効にして問題を解決できます。
 -   v3.0 より前のバージョンでは、raftstore スレッドまたは適用スレッドがボトルネックになる場合 ( **Grafana** -&gt; <strong>TiKV-details</strong> -&gt; <strong>Thread CPU/raft store CPU</strong>および<strong>Async apply CPU</strong>メトリクスが`80%`を超える)、TiKV (v2 .x) インスタンスまたはマルチスレッドで v3.x にアップグレードします。
 
 ### CPU 負荷が増加する {#cpu-load-increases}
@@ -134,6 +134,6 @@ CPU リソースの使用量がボトルネックになります。
 
 TiDB のトランザクションは、Multi-Version Concurrency Control (MVCC) メカニズムを採用しています。新しく書き込まれたデータが古いデータを上書きする場合、古いデータは置き換えられず、両方のバージョンのデータが保存されます。タイムスタンプは、異なるバージョンをマークするために使用されます。 GC のタスクは、古いデータを消去することです。
 
--   Resolve Locks のフェーズでは、大量の`scan_lock`リクエストが TiKV で作成されます。これは gRPC 関連のメトリックで確認できます。これら`scan_lock`のリクエストは、すべてのリージョンを呼び出します。
+-   Resolve Locks のフェーズでは、大量の`scan_lock`リクエストが TiKV で作成されます。これは gRPC 関連のメトリックで確認できます。これら`scan_lock`リクエストは、すべてのリージョンを呼び出します。
 -   範囲の削除のフェーズでは、いくつかの (またはまったくない) `unsafe_destroy_range`リクエストが TiKV に送信されます。これは、gRPC 関連のメトリックと**GC タスク**パネルで確認できます。
 -   Do GC のフェーズでは、デフォルトで各 TiKV がマシン上のリーダー リージョンをスキャンし、各リーダーに対して GC を実行します。これは**GC タスク**パネルで確認できます。

@@ -1,27 +1,27 @@
 ---
 title: VIEWS
-summary: Learn the `VIEWS` information_schema table.
+summary: Learn the `VIEWS` INFORMATION_SCHEMA table.
 ---
 
 # ビュー {#views}
 
 `VIEWS`テーブルは、SQL ビューに関する情報を提供します。
 
-{{< copyable "" >}}
+```sql
+USE INFORMATION_SCHEMA;
+DESC VIEWS;
+```
+
+出力は次のとおりです。
 
 ```sql
-USE information_schema;
-DESC views;
-```
-
-```
 +----------------------+--------------+------+------+---------+-------+
 | Field                | Type         | Null | Key  | Default | Extra |
 +----------------------+--------------+------+------+---------+-------+
 | TABLE_CATALOG        | varchar(512) | NO   |      | NULL    |       |
 | TABLE_SCHEMA         | varchar(64)  | NO   |      | NULL    |       |
 | TABLE_NAME           | varchar(64)  | NO   |      | NULL    |       |
-| VIEW_DEFINITION      | longblob     | NO   |      | NULL    |       |
+| VIEW_DEFINITION      | longtext     | NO   |      | NULL    |       |
 | CHECK_OPTION         | varchar(8)   | NO   |      | NULL    |       |
 | IS_UPDATABLE         | varchar(3)   | NO   |      | NULL    |       |
 | DEFINER              | varchar(77)  | NO   |      | NULL    |       |
@@ -32,14 +32,16 @@ DESC views;
 10 rows in set (0.00 sec)
 ```
 
-{{< copyable "" >}}
+ビューを作成し、 `VIEWS`テーブルに対してクエリを実行します。
 
 ```sql
 CREATE VIEW test.v1 AS SELECT 1;
-SELECT * FROM views\G
+SELECT * FROM VIEWS\G
 ```
 
-```
+出力は次のとおりです。
+
+```sql
 *************************** 1. row ***************************
        TABLE_CATALOG: def
         TABLE_SCHEMA: test

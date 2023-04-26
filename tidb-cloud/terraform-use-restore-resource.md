@@ -5,16 +5,20 @@ summary: Learn how to use restore resource.
 
 # 復元リソースを使用 {#use-restore-resource}
 
-このドキュメントの`tidbcloud_restore`のリソースを使用して、復元タスクを作成する方法を学習できます。復元タスクは、バックアップに従って復元されたクラスターを作成します。
+このドキュメントの`tidbcloud_restore`リソースを使用して、復元タスクを管理する方法を学習できます。
+
+`tidbcloud_restore`リソースの機能は次のとおりです。
+
+-   バックアップに従ってDedicated Tierクラスターの復元タスクを作成します。
 
 ## 前提条件 {#prerequisites}
 
 -   [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) .
 -   バックアップと復元の機能は、Serverless Tierクラスターでは使用できません。復元リソースを使用するには、 Dedicated Tierクラスターを作成済みであることを確認してください。
 
-## 復元リソースを使用して復元タスクを作成する {#create-a-restore-task-with-the-restore-resource}
+## 復元タスクを作成する {#create-a-restore-task}
 
-クラスターのバックアップを作成した後、 `tidbcloud_restore`のリソースで復元タスクを作成することにより、クラスターを復元できます。
+クラスターのバックアップを作成した後、 `tidbcloud_restore`リソースで復元タスクを作成することにより、クラスターを復元できます。
 
 > **ノート：**
 >
@@ -31,15 +35,13 @@ summary: Learn how to use restore resource.
      required_providers {
        tidbcloud = {
          source = "tidbcloud/tidbcloud"
-         version = "~> 0.1.0"
        }
      }
-     required_version = ">= 1.0.0"
     }
 
     provider "tidbcloud" {
-     public_key = "fake_public_key"
-     private_key = "fake_private_key"
+     public_key = "your_public_key"
+     private_key = "your_private_key"
     }
     resource "tidbcloud_restore" "example_restore" {
       project_id = tidbcloud_cluster.example_cluster.project_id
@@ -175,11 +177,15 @@ summary: Learn how to use restore resource.
 
     復元タスクのステータスが`PENDING`で、クラスターのステータスが`INITIALIZING`であることがわかります。
 
-5.  数分待ちます。次に、 `terraform refersh`を使用してステータスを更新します。
+5.  数分待ちます。次に、 `terraform refersh`使用してステータスを更新します。
 
-6.  クラスターのステータスが`AVAILABLE`に変わった後、復元タスクは`RUNNING`になり、最後に`SUCCESS`になります。
+6.  クラスターのステータスが`AVAILABLE`に変わった後、復元タスクは`RUNNING`なり、最後に`SUCCESS`になります。
 
 復元されたクラスターは Terraform によって管理されないことに注意してください。復元されたクラスターを[それをインポートする](/tidb-cloud/terraform-use-cluster-resource.md#import-a-cluster)で管理できます。
+
+## 復元タスクを更新する {#update-a-restore-task}
+
+復元タスクは更新できません。
 
 ## 復元タスクを削除する {#delete-a-restore-task}
 

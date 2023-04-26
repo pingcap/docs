@@ -10,7 +10,7 @@ summary: Learn how to locate and analyze slow queries.
 1.  多くのクエリの中で、どのタイプのクエリが遅いかを特定します。
 2.  このタイプのクエリが遅い理由を分析します。
 
-[遅いクエリ ログ](/dashboard/dashboard-slow-query.md)と[ステートメント要約表](/statement-summary-tables.md)の機能を使用して、ステップ 1 を簡単に実行できます。 [TiDB ダッシュボード](/dashboard/dashboard-intro.md)を使用することをお勧めします。これは、2 つの機能を統合し、ブラウザーにスロー クエリを直接表示します。
+[遅いクエリ ログ](/dashboard/dashboard-slow-query.md)と[ステートメント要約表](/statement-summary-tables.md)機能を使用して、ステップ 1 を簡単に実行できます。 [TiDB ダッシュボード](/dashboard/dashboard-intro.md)を使用することをお勧めします。これは、2 つの機能を統合し、ブラウザーにスロー クエリを直接表示します。
 
 このドキュメントでは、ステップ 2 を実行する方法に焦点を当てます - このタイプのクエリが遅い理由を分析します。
 
@@ -41,7 +41,7 @@ summary: Learn how to locate and analyze slow queries.
 上記の方法は、次の点で異なります。
 
 -   スローログは、解析から結果を返すまでの SQL 実行のほぼすべての段階の期間を記録し、比較的包括的です (TiDB ダッシュボードで直感的な方法でスローログを照会および分析できます)。
--   `EXPLAIN ANALYZE`を実行することで、実際の SQL 実行における各演算子の消費時間を知ることができます。結果には、実行時間のより詳細な統計が含まれています。
+-   `EXPLAIN ANALYZE`を実行することで、実際の SQL 実行における各演算子の消費時間を知ることができます。結果には、実行時間のより詳細な統計が含まれます。
 
 要約すると、slow log と`EXPLAIN ANALYZE`ステートメントは、実行のどの段階で、どのコンポーネント(TiDB または TiKV) で SQL クエリが遅いかを判断するのに役立ちます。したがって、クエリのパフォーマンスのボトルネックを正確に特定できます。
 
@@ -59,7 +59,7 @@ summary: Learn how to locate and analyze slow queries.
 
 ### TiKV はデータ処理が遅い {#tikv-is-slow-in-data-processing}
 
-TiKV のデータ処理が遅い場合は、 `EXPLAIN ANALYZE`の結果で簡単に識別できます。次の例では、 `StreamAgg_8`と`TableFullScan_15` 、2 つの`tikv-task` ( `task`列の`cop[tikv]`で示されている) を実行するには`170ms`が必要です。 `170ms`を引いた後、TiDB オペレーターの実行時間は、合計実行時間のごく一部を占めます。これは、ボトルネックが TiKV にあることを示しています。
+TiKV のデータ処理が遅い場合は、 `EXPLAIN ANALYZE`の結果で簡単に識別できます。次の例では、 `StreamAgg_8`と`TableFullScan_15` 、2 つの`tikv-task` ( `task`列の`cop[tikv]`で示されている) を実行するには`170ms`必要です。 `170ms`を引いた後、TiDB オペレーターの実行時間は、合計実行時間のごく一部を占めます。これは、ボトルネックが TiKV にあることを示しています。
 
 ```sql
 +----------------------------+---------+---------+-----------+---------------+------------------------------------------------------------------------------+---------------------------------+-----------+------+
@@ -133,7 +133,7 @@ TiDB 側のリージョン情報が古い可能性があります。この場合
 
 #### サブクエリは事前に実行されます {#subqueries-are-executed-in-advance}
 
-非相関サブクエリを含むステートメントの場合、サブクエリ部分が事前に実行される場合があります。たとえば、 `select * from t1 where a = (select max(a) from t2)`では、 `select max(a) from t2`の部分が最適化段階で事前に実行される場合があります。 `EXPLAIN ANALYZE`の結果は、このタイプのサブクエリの期間を示しません。
+非相関サブクエリを含むステートメントの場合、サブクエリ部分が事前に実行される場合があります。たとえば、 `select * from t1 where a = (select max(a) from t2)`では、 `select max(a) from t2`部分が最適化段階で事前に実行される場合があります。 `EXPLAIN ANALYZE`の結果は、このタイプのサブクエリの期間を示しません。
 
 ```sql
 mysql> explain analyze select count(*) from t where a=(select max(t1.a) from t t1, t t2 where t1.a=t2.a);
@@ -157,7 +157,7 @@ mysql> explain analyze select count(*) from t where a=(select max(t1.a) from t t
 # Rewrite_time: 7.765673663 Preproc_subqueries: 1 Preproc_subqueries_time: 7.765231874
 ```
 
-上記のログ レコードから、サブクエリが事前に実行され、 `7.76s`がかかることがわかります。
+上記のログ レコードから、サブクエリが事前に実行され、 `7.76s`かかることがわかります。
 
 ### TiDB の実行が遅い {#tidb-is-slow-in-execution}
 
@@ -187,7 +187,7 @@ mysql> explain analyze select sum(t1.a) from t t1, t t2 where t1.a=t2.a;
 9 rows in set (9.67 sec)
 ```
 
-上記のように、 `HashJoin_14`と`Projection_24`は実行時間の多くを消費します。実行を高速化するために、SQL 変数を使用して同時実行数を増やすことを検討してください。
+上記のように、 `HashJoin_14`と`Projection_24`実行時間の多くを消費します。実行を高速化するために、SQL 変数を使用して同時実行数を増やすことを検討してください。
 
 すべてのシステム変数は[システム変数](/system-variables.md)に記載されています。 `HashJoin_14`の同時実行性を高めるには、システム変数`tidb_hash_join_concurrency`を変更します。
 
@@ -240,7 +240,7 @@ mysql> explain select * from t t1, t t2 where t1.a>t2.a;
 
 1.  `select * from t` : フィルター条件はなく、テーブル全体のスキャンが実行されます。したがって、データの読み取りには`TableFullScan`演算子が使用されます。
 2.  `select a from t where a=2` : フィルター条件があり、インデックス列のみが読み取られるため、データの読み取りには`IndexReader`演算子が使用されます。
-3.  `select * from t where a=2` : `a`のフィルター条件がありますが、 `a`のインデックスでは読み取るデータを完全にカバーできないため、 `IndexLookup`の演算子が使用されます。
+3.  `select * from t where a=2` : `a`のフィルター条件がありますが、 `a`インデックスでは読み取るデータを完全にカバーできないため、 `IndexLookup`演算子が使用されます。
 4.  `select b from t where c=3` : プレフィクス条件がない場合、複数列インデクスは使用できません。したがって、 `IndexFullScan`が使用されます。
 5.  ...
 

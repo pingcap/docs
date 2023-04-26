@@ -14,7 +14,7 @@ TiDB バージョン: 5.3.1
 
     -   TiDB Lightning
 
-        -   デフォルト値の`regionMaxKeyCount`を 1_440_000 から 1_280_000 に変更して、データのインポート後に空のリージョンが多くなりすぎないようにします[#30018](https://github.com/pingcap/tidb/issues/30018)
+        -   デフォルト値の`regionMaxKeyCount` 1_440_000 から 1_280_000 に変更して、データのインポート後に空のリージョンが多くなりすぎないようにします[#30018](https://github.com/pingcap/tidb/issues/30018)
 
 ## 改良点 {#improvements}
 
@@ -37,7 +37,7 @@ TiDB バージョン: 5.3.1
     -   TiCDC
 
         -   Kafka プロデューサーの構成パラメーターを公開して、TiCDC [#4385](https://github.com/pingcap/tiflow/issues/4385)で構成可能にする
-        -   S3 がバックエンド ストレージとして使用されている場合、TiCDC の起動時に事前クリーンアップ プロセスを追加します[#3878](https://github.com/pingcap/tiflow/issues/3878)
+        -   S3 がバックstorageとして使用されている場合、TiCDC の起動時に事前クリーンアップ プロセスを追加します[#3878](https://github.com/pingcap/tiflow/issues/3878)
         -   TiCDC クライアントは、証明書名が指定されていない場合に機能します[#3627](https://github.com/pingcap/tiflow/issues/3627)
         -   テーブルごとにシンク チェックポイントを管理して、予期しないチェックポイント タイムスタンプの進行を回避する[#3545](https://github.com/pingcap/tiflow/issues/3545)
         -   変更フィードを再開するための指数バックオフ メカニズムを追加します。 [#3329](https://github.com/pingcap/tiflow/issues/3329)
@@ -55,14 +55,14 @@ TiDB バージョン: 5.3.1
 
 -   TiDB
 
-    -   TiDB の`date_format`が MySQL と互換性のない方法で`'\n'`を処理する問題を修正します[#32232](https://github.com/pingcap/tidb/issues/32232)
+    -   TiDB の`date_format`が MySQL と互換性のない方法で`'\n'`処理する問題を修正します[#32232](https://github.com/pingcap/tidb/issues/32232)
     -   `alter column set default`テーブル スキーマを誤って更新する問題を修正します[#31074](https://github.com/pingcap/tidb/issues/31074)
     -   `tidb_restricted_read_only`を有効にすると`tidb_super_read_only`が自動的に有効にならない不具合を修正[#31745](https://github.com/pingcap/tidb/issues/31745)
     -   照合順序を伴う`greatest`または`least`関数が間違った結果を取得する問題を修正します[#31789](https://github.com/pingcap/tidb/issues/31789)
     -   クエリ実行時の MPP タスク リストの空エラーを修正します[#31636](https://github.com/pingcap/tidb/issues/31636)
     -   innerWorkerpanic[#31494](https://github.com/pingcap/tidb/issues/31494)によって引き起こされたインデックス結合の誤った結果を修正
     -   列の種類を`FLOAT`から`DOUBLE`に変更した後の誤ったクエリ結果を修正する[#31372](https://github.com/pingcap/tidb/issues/31372)
-    -   インデックス ルックアップ ジョイン[#30468](https://github.com/pingcap/tidb/issues/30468)を使用してクエリを実行するときの`invalid transaction`のエラーを修正します。
+    -   インデックス ルックアップ ジョイン[#30468](https://github.com/pingcap/tidb/issues/30468)を使用してクエリを実行するときの`invalid transaction`エラーを修正します。
     -   `Order By` [#30271](https://github.com/pingcap/tidb/issues/30271)の最適化による間違ったクエリ結果を修正
     -   `MaxDays`と`MaxBackups`の設定がスローログ[#25716](https://github.com/pingcap/tidb/issues/25716)に反映されない問題を修正
     -   `INSERT ... SELECT ... ON DUPLICATE KEY UPDATE`ステートメントを実行するとpanic[#28078](https://github.com/pingcap/tidb/issues/28078)が発生する問題を修正します。
@@ -70,7 +70,7 @@ TiDB バージョン: 5.3.1
 -   TiKV
 
     -   ピア ステータスが`Applying` [#11746](https://github.com/tikv/tikv/issues/11746)のときにスナップショット ファイルを削除すると発生するpanicの問題を修正します。
-    -   フロー制御が有効で、 `level0_slowdown_trigger`が明示的に設定されている場合の QPS ドロップの問題を修正し[#11424](https://github.com/tikv/tikv/issues/11424) 。
+    -   フロー制御が有効で、 `level0_slowdown_trigger`が明示的に設定され[#11424](https://github.com/tikv/tikv/issues/11424)いる場合の QPS ドロップの問題を修正します。
     -   cgroup コントローラーがマウントされていない場合に発生するpanicの問題を修正します[#11569](https://github.com/tikv/tikv/issues/11569)
     -   TiKVの動作停止後、Resolved TSのレイテンシーが増加する問題を修正[#11351](https://github.com/tikv/tikv/issues/11351)
     -   TiKV が GC ワーカがビジー状態の場合、データの範囲を削除できない ( `unsafe_destroy_range`を実行できない) バグを修正[#11903](https://github.com/tikv/tikv/issues/11903)
@@ -97,16 +97,16 @@ TiDB バージョン: 5.3.1
 
 -   TiFlash
 
-    -   入力引数`arg`が`decimal(x,y)`の範囲を超えると`cast(arg as decimal(x,y))`が間違った結果を返す問題を修正
+    -   入力引数`arg` `decimal(x,y)`の範囲を超えると`cast(arg as decimal(x,y))`間違った結果を返す問題を修正
     -   `max_memory_usage`と`max_memory_usage_for_all_queries`が有効になっているときに発生するTiFlashクラッシュの問題を修正します。
     -   `cast(string as real)`が間違った結果を返す問題を修正
     -   `cast(string as decimal)`が間違った結果を返す問題を修正
     -   主キー列をより大きな int データ型に変更した後の潜在的なデータ不整合を修正
-    -   `in`が`select (arg0, arg1) in (x,y)`のようなステートメントで複数の引数を持っている場合、 `in`が間違った結果を返すというバグを修正します
-    -   MPP クエリが停止したときにTiFlashがpanicになる問題を修正
+    -   `in` `select (arg0, arg1) in (x,y)`のようなステートメントで複数の引数を持っている場合、 `in`間違った結果を返すというバグを修正します
+    -   MPP クエリが停止したときにTiFlash がpanicになる問題を修正
     -   入力引数の先頭にゼロがある場合に`str_to_date`が間違った結果を返す問題を修正
     -   フィルターが`where <string>`形式の場合、クエリが間違った結果を返す問題を修正します。
-    -   入力引数`string`が`%Y-%m-%d\n%H:%i:%s`の形式の場合、 `cast(string as datetime)`が間違った結果を返す問題を修正
+    -   入力引数`string` `%Y-%m-%d\n%H:%i:%s`形式の場合、 `cast(string as datetime)`が間違った結果を返す問題を修正
 
 -   ツール
 
@@ -126,7 +126,7 @@ TiDB バージョン: 5.3.1
         -   ローディングタスクを停止するとタスクが予期せず転送されるバグを修正[#3771](https://github.com/pingcap/tiflow/issues/3771)
         -   ローダー[#3252](https://github.com/pingcap/tiflow/issues/3252)の`query-status`コマンドに対して間違った進行状況が返される問題を修正します。
         -   クラスタ内に異なるバージョンの TiCDC ノードがある場合、HTTP API が機能しない問題を修正します[#3483](https://github.com/pingcap/tiflow/issues/3483)
-        -   S3 ストレージが TiCDC Redo Log [#3523](https://github.com/pingcap/tiflow/issues/3523)で構成されている場合、TiCDC が異常終了する問題を修正します。
+        -   S3storageがTiCDC Redo Log [#3523](https://github.com/pingcap/tiflow/issues/3523)で構成されている場合、TiCDC が異常終了する問題を修正します。
         -   デフォルト値をレプリケートできない問題を修正[#3793](https://github.com/pingcap/tiflow/issues/3793)
         -   `batch-replace-enable`が無効になっている場合、MySQL シンクが重複した`replace` SQL ステートメントを生成するバグを修正します[#4501](https://github.com/pingcap/tiflow/issues/4501)
         -   ステータス[#4281](https://github.com/pingcap/tiflow/issues/4281)を照会した場合にのみ syncer メトリクスが更新される問題を修正します。
@@ -148,7 +148,7 @@ TiDB バージョン: 5.3.1
 
     -   TiDB データ移行 (DM)
 
-        -   DM-master と DM-worker を特定の順序で再起動した後、DM [#3478](https://github.com/pingcap/tiflow/issues/3478) master のリレー ステータスが間違っているというバグを修正します。
+        -   DM-master と DM-worker を特定の順序で再起動した後、DM-master のリレー ステータスが間違っているというバグを修正します[#3478](https://github.com/pingcap/tiflow/issues/3478)
         -   再起動後に DM-worker が起動しないバグを修正[#3344](https://github.com/pingcap/tiflow/issues/3344)
         -   PARTITION DDL の実行に時間がかかりすぎると DM タスクが失敗するバグを修正します[#3854](https://github.com/pingcap/tiflow/issues/3854)
         -   アップストリームが MySQL 8.0 [#3847](https://github.com/pingcap/tiflow/issues/3847)の場合に DM が`invalid sequence`を報告することがあるバグを修正
@@ -158,7 +158,7 @@ TiDB バージョン: 5.3.1
 
     -   TiDB Lightning
 
-        -   一部のインポート タスクにソース ファイルが含まれていない場合、 TiDB Lightningがメタデータ スキーマを削除しないことがあるというバグを修正します[#28144](https://github.com/pingcap/tidb/issues/28144)
-        -   ストレージ URL のプレフィックスが「gcs://xxx」ではなく「gs://xxx」の場合、 TiDB Lightningがエラーを返すバグを修正[#32742](https://github.com/pingcap/tidb/issues/32742)
+        -   一部のインポート タスクにソース ファイルが含まれていない場合、 TiDB Lightning がメタデータ スキーマを削除しないことがあるというバグを修正します[#28144](https://github.com/pingcap/tidb/issues/28144)
+        -   storageURL のプレフィックスが「gcs://xxx」ではなく「gs://xxx」の場合、 TiDB Lightning がエラーを返すバグを修正[#32742](https://github.com/pingcap/tidb/issues/32742)
         -   --log-file=&quot;-&quot; を設定してもログが stdout [#29876](https://github.com/pingcap/tidb/issues/29876)に出力されない問題を修正します。
-        -   S3 ストレージ パスが存在しない場合にTiDB Lightningがエラーを報告しない問題を修正します[#30709](https://github.com/pingcap/tidb/issues/30709)
+        -   S3storageパスが存在しない場合にTiDB Lightning がエラーを報告しない問題を修正します[#30709](https://github.com/pingcap/tidb/issues/30709)

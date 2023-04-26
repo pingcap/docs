@@ -17,14 +17,14 @@ TiDB アンシブル バージョン: 3.0.11
 ## 互換性の変更 {#compatibility-changes}
 
 -   TiDB
-    -   3.0.7 より前の TiDB バージョンまたは MySQL [#15057](https://github.com/pingcap/tidb/pull/15057)の動作と互換性のある、最大インデックス長を制御する`max-index-length`の構成項目を追加します。
+    -   3.0.7 より前の TiDB バージョンまたは MySQL [#15057](https://github.com/pingcap/tidb/pull/15057)の動作と互換性のある、最大インデックス長を制御する`max-index-length`構成項目を追加します。
 
 ## 新機能 {#new-features}
 
 -   TiDB
     -   `information_schema.PARTITIONS`テーブル[#14849](https://github.com/pingcap/tidb/pull/14849)で分割されたテーブルのメタ情報を表示するサポート
 
--   Binlog
+-   TiDBBinlog
     -   TiDB クラスタ間の双方向データ複製をサポート[#884](https://github.com/pingcap/tidb-binlog/pull/884) [#909](https://github.com/pingcap/tidb-binlog/pull/909)
 
 -   TiDB Lightning
@@ -36,10 +36,10 @@ TiDB アンシブル バージョン: 3.0.11
 ## バグの修正 {#bug-fixes}
 
 -   TiDB
-    -   `Union`を使用するクエリは読み取り専用とマークされていないため、楽観的トランザクションを再試行するときにゴルーチン リークが発生する問題を修正します[#15076](https://github.com/pingcap/tidb/pull/15076)
-    -   `SET SESSION tidb_snapshot = 'xxx';`ステートメントの実行時に`tidb_snapshot`パラメーターの値が正しく使用されていないため、 `SHOW TABLE STATUS`がスナップショット時のテーブルステータスを正しく出力できない問題を修正[#14391](https://github.com/pingcap/tidb/pull/14391)
+    -   `Union`使用するクエリは読み取り専用とマークされていないため、楽観的トランザクションを再試行するときにゴルーチン リークが発生する問題を修正します[#15076](https://github.com/pingcap/tidb/pull/15076)
+    -   `SET SESSION tidb_snapshot = 'xxx';`ステートメントの実行時に`tidb_snapshot`パラメーターの値が正しく使用されていないため、 `SHOW TABLE STATUS`スナップショット時のテーブルステータスを正しく出力できない問題を修正[#14391](https://github.com/pingcap/tidb/pull/14391)
     -   `Sort Merge Join`と`ORDER BY DESC`を同時に含む SQL ステートメントによって引き起こされる誤った結果を修正する[#14664](https://github.com/pingcap/tidb/pull/14664)
-    -   サポートされていない式を使用してパーティション テーブルを作成すると、TiDBサーバーがpanicになる問題を修正しました。このpanicを修正すると、エラー情報`This partition function is not allowed`が返されます。 [#14769](https://github.com/pingcap/tidb/pull/14769)
+    -   サポートされていない式を使用してパーティション テーブルを作成すると、TiDBサーバーがパニックにpanicを修正しました。このpanicを修正すると、エラー情報`This partition function is not allowed`が返されます。 [#14769](https://github.com/pingcap/tidb/pull/14769)
     -   `Union` [#14944](https://github.com/pingcap/tidb/pull/14944)を含むサブクエリで`select max() from subquery`ステートメントを実行すると、誤った結果が発生した問題を修正しました。
     -   実行バインディングをドロップする`DROP BINDING`を実行した後に`SHOW BINDINGS`ステートメントを実行すると、エラー メッセージが返される問題を修正します[#14865](https://github.com/pingcap/tidb/pull/14865)
     -   MySQL プロトコルではクエリのエイリアスの最大長が 256 文字であるために接続が切断される問題を修正しますが、TiDB はこのプロトコルによるクエリ結果で[エイリアスをカット](https://dev.mysql.com/doc/refman/8.0/en/identifier-length.html)を実行しません[#14940](https://github.com/pingcap/tidb/pull/14940)

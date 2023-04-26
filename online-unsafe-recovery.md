@@ -38,7 +38,7 @@ TiDB では、ユーザーが定義したレプリカ ルールに従って、�
 
 ### 手順 1. 復元できないストアを指定する {#step-1-specify-the-stores-that-cannot-be-recovered}
 
-PD Controlを使用して、回復できない TiKV ノードを指定し、 [`unsafe remove-failed-stores &#x3C;store_id>[,&#x3C;store_id>,...]`](/pd-control.md#unsafe-remove-failed-stores-store-ids--show)を実行して自動回復をトリガーします。
+自動回復をトリガーするには、 PD Controlを使用して[`unsafe remove-failed-stores &#x3C;store_id>[,&#x3C;store_id>,...]`](/pd-control.md#unsafe-remove-failed-stores-store-ids--show)実行し、回復できない**すべての**TiKV ノードをカンマで区切って指定します。
 
 {{< copyable "" >}}
 
@@ -46,7 +46,7 @@ PD Controlを使用して、回復できない TiKV ノードを指定し、 [`u
 pd-ctl -u <pd_addr> unsafe remove-failed-stores <store_id1,store_id2,...>
 ```
 
-コマンドが`Success`を返した場合、 PD Controlはタスクを PD に正常に登録しています。これは、リクエストが受け入れられたことを意味するだけであり、リカバリが正常に実行されたことを意味するものではありません。リカバリ タスクはバックグラウンドで実行されます。回復の進行状況を確認するには、 [`show`](#step-2-check-the-recovery-progress-and-wait-for-the-completion)を使用します。
+コマンドが`Success`を返した場合、 PD Controlはタスクを PD に正常に登録しています。これは、リクエストが受け入れられたことを意味するだけであり、リカバリが正常に実行されたことを意味するものではありません。リカバリ タスクはバックグラウンドで実行されます。回復の進行状況を確認するには、 [`show`](#step-2-check-the-recovery-progress-and-wait-for-the-completion)使用します。
 
 コマンドが`Failed`を返した場合、 PD Controlはタスクを PD に登録できませんでした。考えられるエラーは次のとおりです。
 
@@ -65,7 +65,7 @@ pd-ctl -u <pd_addr> unsafe remove-failed-stores <store_id1,store_id2,...>
 
 ### ステップ 2. 回復の進行状況を確認し、完了するまで待ちます {#step-2-check-the-recovery-progress-and-wait-for-the-completion}
 
-上記のストア削除コマンドが正常に実行されたら、 PD Controlを使用して[`unsafe remove-failed-stores show`](/pd-control.md#config-show--set-option-value--placement-rules)を実行して削除の進行状況を確認できます。
+上記のストア削除コマンドが正常に実行されたら、 PD Control を使用して[`unsafe remove-failed-stores show`](/pd-control.md#config-show--set-option-value--placement-rules)を実行して削除の進行状況を確認できます。
 
 {{< copyable "" >}}
 
@@ -76,7 +76,7 @@ pd-ctl -u <pd_addr> unsafe remove-failed-stores show
 回復プロセスには複数の段階があります。
 
 -   `collect report` : PD が TiKV からレポートを収集し、グローバルな情報を取得する初期段階。
--   `tombstone tiflash learner` : 異常なリージョンの中で、他の正常なピアよりも新しいTiFlashを削除して、このような極端な状況とpanicの可能性を防ぎます。
+-   `tombstone tiflash learner` : 異常なリージョンの中で、他の正常なピアよりも新しいTiFlashラーナーを削除して、このような極端な状況とpanicの可能性を防ぎます。
 -   `force leader for commit merge` : スペシャルステージ。未完了のコミット マージがある場合、極端な状況では、コミット マージのあるリージョンで`force leader`が最初に実行されます。
 -   `force leader` : 異常なリージョンに、残りの正常なピアの中からRaftリーダーを割り当てるように強制します。
 -   `demote failed voter` : リージョンの失敗した有権者を学習者に降格し、リージョンは通常どおりRaftリーダーを選択できます。
@@ -129,7 +129,7 @@ pd-ctl -u <pd_addr> unsafe remove-failed-stores show
 
 PD が復旧計画を正常にディスパッチした後、TiKV が実行結果を報告するのを待ちます。上記の出力の最後の段階である`Collecting reports from alive stores`でわかるように、出力のこの部分には、PD のディスパッチ リカバリ プランと TiKV からのレポートの受信の詳細なステータスが表示されます。
 
-回復プロセス全体には複数の段階があり、1 つの段階が複数回再試行される場合があります。通常、見積もられる期間はストア ハートビートの 3 ～ 10 周期です (ストアハートビートハートビートの 1 周期はデフォルトで 10 秒です)。リカバリが完了すると、コマンド出力の最後のステージに`"Unsafe recovery finished"` 、影響を受けるリージョンが属するテーブル ID (存在しない場合、または RawKV が使用されている場合、出力にはテーブル ID は表示されません)、および影響を受ける SQL メタが表示されます。地域。例えば：
+回復プロセス全体には複数の段階があり、1 つの段階が複数回再試行される場合があります。通常、見積もられる期間はストアハートビートの 3 ～ 10 周期です (ストアハートビートの 1 周期はデフォルトで 10 秒です)。リカバリが完了すると、コマンド出力の最後のステージに`"Unsafe recovery finished"` 、影響を受けるリージョンが属するテーブル ID (存在しない場合、または RawKV が使用されている場合、出力にはテーブル ID は表示されません)、および影響を受ける SQL メタが表示されます。地域。例えば：
 
 ```json
 {
@@ -140,6 +140,12 @@ PD が復旧計画を正常にディスパッチした後、TiKV が実行結果
         "Affected meta regions: 1001",
     ]
 }
+```
+
+影響を受けるテーブル ID を取得したら、 `INFORMATION_SCHEMA.TABLES`クエリして、影響を受けるテーブル名を表示できます。
+
+```sql
+SELECT TABLE_SCHEMA, TABLE_NAME, TIDB_TABLE_ID FROM INFORMATION_SCHEMA.TABLES WHERE TIDB_TABLE_ID IN (64, 27);
 ```
 
 > **ノート：**
@@ -158,11 +164,35 @@ PD が復旧計画を正常にディスパッチした後、TiKV が実行結果
 
 ### ステップ 3. データとインデックスの一貫性を確認する (RawKV では不要) {#step-3-check-the-consistency-of-data-and-index-not-required-for-rawkv}
 
-リカバリが完了した後、データとインデックスが矛盾している可能性があります。 SQL コマンド[`ADMIN CHECK`](/sql-statements/sql-statement-admin-check-table-index.md) 、 `ADMIN RECOVER` 、および`ADMIN CLEANUP`を使用して、データの一貫性とインデックスの一貫性について、影響を受けるテーブルの一貫性をチェックし ( `"Unsafe recovery finished"`の出力から ID を取得できます)、テーブルを復旧します。
-
 > **ノート：**
 >
 > データは読み書きできますが、データの損失がないわけではありません。
+
+リカバリが完了した後、データとインデックスが矛盾している可能性があります。 SQL コマンド[`ADMIN CHECK`](/sql-statements/sql-statement-admin-check-table-index.md)を使用して、影響を受けるテーブルのデータとインデックスの一貫性を確認します。
+
+```sql
+ADMIN CHECK TABLE table_name;
+```
+
+一貫性のないインデックスがある場合は、古いインデックスの名前を変更し、新しいインデックスを作成してから古いインデックスを削除することで、インデックスの不整合を修正できます。
+
+1.  古いインデックスの名前を変更します。
+
+    ```sql
+    ALTER TABLE table_name RENAME INDEX index_name TO index_name_lame_duck;
+    ```
+
+2.  新しいインデックスを作成します。
+
+    ```sql
+    ALTER TABLE table_name ADD INDEX index_name (column_name);
+    ```
+
+3.  古いインデックスを削除します。
+
+    ```sql
+    ALTER TABLE table_name DROP INDEX index_name_lame_duck;
+    ```
 
 ### 手順 4: 回復不能なストアを削除する (オプション) {#step-4-remove-unrecoverable-stores-optional}
 

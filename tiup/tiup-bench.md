@@ -5,7 +5,7 @@ summary: Learn how to stress test TiDB with TPC-C, TPC-H, CH, RawSQL, and YCSB w
 
 # TiUPベンチ コンポーネントを使用した TiDB のストレス テスト {#stress-test-tidb-using-tiup-bench-component}
 
-データベースのパフォーマンスをテストする場合、多くの場合、データベースのストレス テストが必要になります。これを容易にするために、 TiUPはストレス テスト用の複数のワークロードを提供するベンチコンポーネントを統合しました。これらのワークロードには、次のコマンドでアクセスできます。
+データベースのパフォーマンスをテストする場合、多くの場合、データベースのストレス テストが必要になります。これを容易にするために、 TiUP はストレス テスト用の複数のワークロードを提供するベンチコンポーネントを統合しました。これらのワークロードには、次のコマンドでアクセスできます。
 
 ```bash
 tiup bench tpcc   # Benchmark a database using TPC-C
@@ -15,7 +15,7 @@ tiup bench ycsb   # Benchmark a database using YCSB
 tiup bench rawsql # Benchmark a database using arbitrary SQL files
 ```
 
-`tpcc` 、 `tpch` 、 `ch` 、および`rawsql`は、次の共通コマンド フラグを共有します。ただし、 `ycsb`は主に`.properties`ファイルで構成されており、その[使い方ガイド](https://github.com/pingcap/go-ycsb#usage)に記述されています。
+`tpcc` 、 `tpch` 、 `ch` 、および`rawsql` 、次の共通コマンド フラグを共有します。ただし、 `ycsb`は主に`.properties`ファイルで構成されており、その[使い方ガイド](https://github.com/pingcap/go-ycsb#usage)に記述されています。
 
 ```
   -t, --acThreads int         OLAP client concurrency, only for CH-benCHmark (default to 1)
@@ -43,16 +43,16 @@ tiup bench rawsql # Benchmark a database using arbitrary SQL files
 ```
 
 -   カンマ区切りの値を`--host`と`--port`に渡して、クライアント側の負荷分散を有効にすることができます。たとえば、 `--host 172.16.4.1,172.16.4.2 --port 4000,4001`を指定すると、プログラムはラウンドロビン方式で選択された 172.16.4.1:4000、172.16.4.1:4001、172.16.4.2:4000、および 172.16.4.2:4001 に接続します。
--   `--conn-params`は[クエリ文字列](https://en.wikipedia.org/wiki/Query_string)の形式に従う必要があります。データベースが異なれば、パラメータも異なる場合があります。例えば：
-    -   `--conn-params tidb_isolation_read_engines='tiflash'`は TiDB に TiFlash からの読み取りをTiFlashします。
-    -   `--conn-params sslmode=disable`は、PostgreSQL への接続時に SSL を無効にします。
+-   `--conn-params` [クエリ文字列](https://en.wikipedia.org/wiki/Query_string)の形式に従う必要があります。データベースが異なれば、パラメータも異なる場合があります。例えば：
+    -   `--conn-params tidb_isolation_read_engines='tiflash'` TiDB にTiFlashからの読み取りを強制します。
+    -   `--conn-params sslmode=disable` PostgreSQL への接続時に SSL を無効にします。
 -   CH-benCHmark を実行する場合、 `--ap-host` 、 `--ap-port` 、および`--ap-conn-params`を使用して、OLAP クエリ用のスタンドアロン TiDBサーバーを指定できます。
 
-次のセクションでは、TiUP を使用して TPC-C、TPC-H、 TiUPテストを実行する方法について説明します。
+次のセクションでは、 TiUPを使用して TPC-C、TPC-H、YCSB テストを実行する方法について説明します。
 
 ## TiUPを使用して TPC-C テストを実行する {#run-tpc-c-test-using-tiup}
 
-TiUPベンチコンポーネントは、TPC-C テストを実行するために次のコマンドとフラグをサポートしています。
+TiUPベンチコンポーネントは、 TPC-C テストを実行するために次のコマンドとフラグをサポートしています。
 
 ```bash
 Available Commands:
@@ -126,7 +126,7 @@ Flags:
 
 ## TiUPを使用して TPC-H テストを実行する {#run-tpc-h-test-using-tiup}
 
-TiUPベンチコンポーネントは、TPC-H テストを実行するために、次のコマンドとパラメーターをサポートしています。
+TiUPベンチコンポーネントは、 TPC-H テストを実行するために、次のコマンドとパラメーターをサポートしています。
 
 ```bash
 Available Commands:
@@ -177,7 +177,7 @@ Flags:
     tiup bench tpch cleanup
     ```
 
-## TiUP を使用してTiUPテストを実行する {#run-ycsb-test-using-tiup}
+## TiUPを使用して YCSB テストを実行する {#run-ycsb-test-using-tiup}
 
 YCSB を介して TiDB と TiKV の両方のストレス テストを実行できます。
 
@@ -211,7 +211,7 @@ YCSB を介して TiDB と TiKV の両方のストレス テストを実行で�
     tiup bench ycsb run tikv -p tikv.pd="127.0.0.1:2379" -p operationcount=10000
     ```
 
-## TiUP を使用してTiUPテストを実行する {#run-rawsql-test-using-tiup}
+## TiUPを使用して RawSQL テストを実行する {#run-rawsql-test-using-tiup}
 
 SQL ファイルに任意のクエリを記述し、次のように`tiup bench rawsql`を実行してテストに使用できます。
 

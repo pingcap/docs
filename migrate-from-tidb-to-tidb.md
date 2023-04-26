@@ -23,9 +23,9 @@ summary: Learn how to migrate data from one TiDB cluster to another TiDB cluster
 
 ## ステップ 1. 環境をセットアップする {#step-1-set-up-the-environment}
 
-1.  TiDB クラスターをデプロイします。
+1.  TiDB クラスターをデプロイ。
 
-    デプロイ Playground を使用して、2 つの TiDB クラスター (1 つはアップストリーム、もう 1 つはダウンストリーム) をTiUPします。詳細については、 [TiUPを使用してオンライン TiDBクラスタをデプロイおよび管理する](/tiup/tiup-cluster.md)を参照してください。
+    TiUP Playground を使用して、2 つの TiDB クラスター (1 つはアップストリーム、もう 1 つはダウンストリーム)をデプロイ。詳細については、 [TiUPを使用してオンライン TiDBクラスタをデプロイおよび管理](/tiup/tiup-cluster.md)を参照してください。
 
     ```shell
     # Create an upstream cluster
@@ -67,9 +67,9 @@ summary: Learn how to migrate data from one TiDB cluster to another TiDB cluster
     sysbench oltp_write_only --config-file=./tidb-config --tables=3 run
     ```
 
-4.  外部ストレージを準備します。
+4.  外部storageを準備します。
 
-    フル データ バックアップでは、アップストリーム クラスタとダウンストリーム クラスタの両方がバックアップ ファイルにアクセスする必要があります。 [外部記憶装置](/br/backup-and-restore-storages.md)を使用してバックアップ ファイルを保存することをお勧めします。このドキュメントでは、Minio を使用して S3 互換のストレージ サービスをシミュレートします。
+    フル データ バックアップでは、アップストリーム クラスタとダウンストリーム クラスタの両方がバックアップ ファイルにアクセスする必要があります。 [外部storage](/br/backup-and-restore-storages.md)を使用してバックアップ ファイルを保存することをお勧めします。このドキュメントでは、Minio を使用して S3 互換のstorageサービスをシミュレートします。
 
     ```shell
     wget https://dl.min.io/server/minio/release/linux-amd64/minio
@@ -153,7 +153,7 @@ summary: Learn how to migrate data from one TiDB cluster to another TiDB cluster
     1 row in set (2.11 sec)
     ```
 
-    `BACKUP`コマンドの実行後、TiDB はバックアップ データに関するメタデータを返します。バックアップされる前に生成されたデータであるため、 `BackupTS`に注意してください。このドキュメントでは**、データ チェックの終了と**<strong>TiCDC による増分移行スキャンの開始</strong>として`BackupTS`を使用します。
+    `BACKUP`コマンドの実行後、TiDB はバックアップ データに関するメタデータを返します。バックアップされる前に生成されたデータであるため、 `BackupTS`に注意してください。このドキュメントでは、**データ チェックの終了**と<strong>TiCDC による増分移行スキャンの開始</strong>として`BackupTS`使用します。
 
 3.  データを復元します。
 
@@ -174,7 +174,7 @@ summary: Learn how to migrate data from one TiDB cluster to another TiDB cluster
 
 4.  (オプション) データを検証します。
 
-    [同期差分インスペクター](/sync-diff-inspector/sync-diff-inspector-overview.md)を使用して、特定の時点で上流と下流の間のデータの整合性を確認できます。前の`BACKUP`の出力は、上流のクラスターが`RESTORE`でバックアップを終了したことを示しています。
+    [同期差分インスペクター](/sync-diff-inspector/sync-diff-inspector-overview.md)を使用して、特定の時点で上流と下流の間のデータの整合性を確認できます。前の`BACKUP`出力は、上流のクラスターが`RESTORE`でバックアップを終了したことを示しています。
 
     ```shell
     sync_diff_inspector -C ./config.yaml
@@ -208,9 +208,9 @@ summary: Learn how to migrate data from one TiDB cluster to another TiDB cluster
 
 ## ステップ 3. 増分データを移行する {#step-3-migrate-incremental-data}
 
-1.  TiCDC をデプロイします。
+1.  TiCDCをデプロイ。
 
-    完全なデータ移行が完了したら、TiCDC を展開して構成し、増分データをレプリケートします。本番環境では、 [TiCDC をデプロイ](/ticdc/deploy-ticdc.md)の指示に従って TiCDC をデプロイします。このドキュメントでは、テスト クラスターの作成時に TiCDC ノードが開始されています。したがって、TiCDC をデプロイするステップをスキップして、changefeed 構成に進むことができます。
+    完全なデータ移行が完了したら、TiCDC を展開して構成し、増分データをレプリケートします。本番環境では、 [TiCDCをデプロイ](/ticdc/deploy-ticdc.md)の指示に従って TiCDC をデプロイします。このドキュメントでは、テスト クラスターの作成時に TiCDC ノードが開始されています。したがって、TiCDC をデプロイするステップをスキップして、changefeed 構成に進むことができます。
 
 2.  チェンジフィードを作成します。
 

@@ -46,7 +46,7 @@ explain analyze select count(*) from test.t;
 +--------------------------+---------+---------+--------------+---------------+----------------------------------------------------------------------+--------------------------------+-----------+------+
 ```
 
-`cop[tiflash]`は、タスクが処理のためにTiFlashに送信されることを意味します。 TiFlashレプリカを選択していない場合は、 `analyze table`ステートメントを使用して統計を更新してから、 `explain analyze`ステートメントを使用して結果を確認できます。
+`cop[tiflash]` 、タスクが処理のためにTiFlashに送信されることを意味します。 TiFlashレプリカを選択していない場合は、 `analyze table`ステートメントを使用して統計を更新してから、 `explain analyze`ステートメントを使用して結果を確認できます。
 
 テーブルにTiFlashレプリカが 1 つしかなく、関連するノードがサービスを提供できない場合、CBO モードのクエリは繰り返し再試行されることに注意してください。この状況では、エンジンを指定するか、手動ヒントを使用して TiKV レプリカからデータを読み取る必要があります。
 
@@ -129,13 +129,13 @@ select /*+ read_from_storage(tiflash[table_name]) */ ... from table_name;
 select /*+ read_from_storage(tiflash[alias_a,alias_b]) */ ... from table_name_1 as alias_a, table_name_2 as alias_b where alias_a.column_1 = alias_b.column_2;
 ```
 
-上記のステートメントで、 `tiflash[]`はオプティマイザーにTiFlashレプリカを読み取るように促します。 `tikv[]`を使用して、オプティマイザーに必要に応じて TiKV レプリカを読み取るように指示することもできます。ヒント構文の詳細については、 [READ_FROM_STORAGE](/optimizer-hints.md#read_from_storagetiflasht1_name--tl_name--tikvt2_name--tl_name-)を参照してください。
+上記のステートメントで、 `tiflash[]`オプティマイザーにTiFlashレプリカを読み取るように促します。 `tikv[]`使用して、オプティマイザーに必要に応じて TiKV レプリカを読み取るように指示することもできます。ヒント構文の詳細については、 [READ_FROM_STORAGE](/optimizer-hints.md#read_from_storagetiflasht1_name--tl_name--tikvt2_name--tl_name-)を参照してください。
 
 ヒントで指定されたテーブルに指定されたエンジンのレプリカがない場合、ヒントは無視され、警告が報告されます。また、ヒントはエンジン分離前提でのみ有効です。ヒントで指定されたエンジンがエンジン分離リストにない場合、ヒントも無視され、警告が報告されます。
 
 > **ノート：**
 >
-> 5.7.7 以前のバージョンの MySQL クライアントは、デフォルトでオプティマイザ ヒントをクリアします。これらの初期バージョンでヒント構文を使用するには、クライアントを`--comments`オプション (例: `mysql -h 127.0.0.1 -P 4000 -uroot --comments` ) で起動します。
+> 5.7.7 以前のバージョンの MySQL クライアントは、デフォルトでオプティマイザ ヒントをクリアします。これらの初期バージョンでヒント構文を使用するには、クライアントを`--comments`オプション (例: `mysql -h 127.0.0.1 -P 4000 -uroot --comments`で起動します。
 
 ## スマートセレクション、エンジンアイソレーション、マニュアルヒントの関係 {#the-relationship-of-smart-selection-engine-isolation-and-manual-hint}
 
@@ -143,4 +143,4 @@ select /*+ read_from_storage(tiflash[alias_a,alias_b]) */ ... from table_name_1 
 
 > **ノート：**
 >
-> v4.0.3 より前では、読み取り専用ではない SQL ステートメント (たとえば、 `INSERT INTO ... SELECT` 、 `SELECT ... FOR UPDATE` 、 `UPDATE ...` 、 `DELETE ...` ) でのTiFlashレプリカからの読み取りの動作は定義されていません。 v4.0.3 以降のバージョンでは、データの正確性を保証するために、TiDB は非読み取り専用 SQL ステートメントのTiFlashレプリカを内部的に無視します。つまり、 [スマートセレクション](#smart-selection)の場合、TiDB は非TiFlashレプリカを自動的に選択します。 TiFlashレプリカ**のみ**を指定する[エンジン分離](#engine-isolation)の場合、TiDB はエラーを報告します。 [手動ヒント](#manual-hint)の場合、TiDB はヒントを無視します。
+> v4.0.3 より前では、読み取り専用ではない SQL ステートメント (たとえば、 `INSERT INTO ... SELECT` 、 `SELECT ... FOR UPDATE` 、 `UPDATE ...` 、 `DELETE ...` ) でのTiFlashレプリカからの読み取りの動作は定義されていません。 v4.0.3 以降のバージョンでは、データの正確性を保証するために、TiDB は非読み取り専用 SQL ステートメントのTiFlashレプリカを内部的に無視します。つまり、 [スマートセレクション](#smart-selection)場合、TiDB は非TiFlashレプリカを自動的に選択します。 TiFlashレプリカ**のみ**を指定する[エンジン分離](#engine-isolation)の場合、TiDB はエラーを報告します。 [手動ヒント](#manual-hint)の場合、TiDB はヒントを無視します。

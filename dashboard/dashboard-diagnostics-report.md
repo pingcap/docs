@@ -27,12 +27,12 @@ summary: Learn the TiDB Dashboard diagnostic report.
 このレポートでは、いくつかの小さなボタンについて次のように説明しています。
 
 -   **i**アイコン: <strong>i</strong>アイコンにマウスを移動すると、その行の説明文が表示されます。
--   **expand** : [<strong>展開</strong>] をクリックして、このモニタリング メトリックの詳細を表示します。たとえば、上の画像の`tidb_get_token`の詳細情報には、各 TiDB インスタンスのレイテンシーの監視情報が含まれています。
+-   **expand** : <strong>[展開]</strong>をクリックして、このモニタリング メトリックの詳細を表示します。たとえば、上の画像の`tidb_get_token`の詳細情報には、各 TiDB インスタンスのレイテンシーの監視情報が含まれています。
 -   **collapse** : <strong>expand</strong>とは対照的に、ボタンは詳細な監視情報を折りたたむために使用されます。
 
 すべてのモニタリング メトリックは、基本的に TiDB Grafana モニタリング ダッシュボードのメトリックに対応しています。モジュールが異常であることが判明した後、TiDB Grafana で詳細な監視情報を表示できます。
 
-さらに、このレポートの`TOTAL_TIME`と`TOTAL_COUNT`のメトリックは、Prometheus から読み込まれたデータを監視しているため、計算の不正確さが統計に存在する可能性があります。
+さらに、このレポートの`TOTAL_TIME`と`TOTAL_COUNT`メトリックは、Prometheus から読み込まれたデータを監視しているため、計算の不正確さが統計に存在する可能性があります。
 
 以下、本報告書の各部を紹介する。
 
@@ -44,7 +44,7 @@ summary: Learn the TiDB Dashboard diagnostic report.
 
 ![Report time range](/media/dashboard/dashboard-diagnostics-report-time-range.png)
 
-#### クラスタハードウェア情報 {#cluster-hardware-info}
+#### クラスタウェア情報 {#cluster-hardware-info}
 
 クラスタハードウェア情報には、クラスター内の各サーバーの CPU、メモリ、ディスクなどの情報が含まれます。
 
@@ -53,15 +53,15 @@ summary: Learn the TiDB Dashboard diagnostic report.
 上記の表のフィールドは、次のように説明されています。
 
 -   `HOST` :サーバーの IP アドレス。
--   `INSTANCE` :サーバーにデプロイされたインスタンスの数。たとえば、 `pd * 1`は、このサーバーに 1 つの PD インスタンスが展開されていることを意味します。 `tidb * 2 pd * 1`は、このサーバーに 2 つの TiDB インスタンスと 1 つの PD インスタンスがデプロイされていることを意味します。
--   `CPU_CORES` : サーバーの CPU コア (物理コアまたは論理コア) の数を示しサーバー。
+-   `INSTANCE` :サーバーにデプロイされたインスタンスの数。たとえば、 `pd * 1` 、このサーバーに1 つの PD インスタンスが展開されていることを意味します。 `tidb * 2 pd * 1`このサーバーに2 つの TiDB インスタンスと 1 つの PD インスタンスがデプロイされていることを意味します。
+-   `CPU_CORES` :サーバーの CPU コア (物理コアまたは論理コア) の数を示します。
 -   `MEMORY` :サーバーのメモリサイズを示します。単位はGBです。
 -   `DISK` :サーバーのディスク サイズを示します。単位はGBです。
 -   `UPTIME` :サーバーの稼働時間。単位は日です。
 
 #### クラスタトポロジ情報 {#cluster-topology-info}
 
-`Cluster Info`の表は、クラスターのトポロジー情報を示しています。このテーブルの情報は、TiDB [information_schema.cluster_info](/information-schema/information-schema-cluster-info.md)システム テーブルからのものです。
+`Cluster Info`表は、クラスターのトポロジー情報を示しています。このテーブルの情報は、TiDB [information_schema.cluster_info](/information-schema/information-schema-cluster-info.md)システム テーブルからのものです。
 
 ![Cluster info](/media/dashboard/dashboard-diagnostics-cluster-info.png)
 
@@ -87,7 +87,7 @@ TiDB には、自動診断結果が組み込まれています。各フィール
 
 -   CPU 使用率 (最大値は`100%`です)
 -   メモリ使用量
--   ディスク I/O 使用率
+-   ディスク I/O 使用量
 -   ディスク書き込みレイテンシー
 -   ディスク読み取りレイテンシー
 -   1 秒あたりのディスク読み取りバイト数
@@ -107,13 +107,13 @@ TiDB には、自動診断結果が組み込まれています。各フィール
 
 #### インスタンスのメモリ使用量 {#instance-memory-usage}
 
-`Instance Memory Usage`の表は、各TiDB/PD/TiKVプロセスが占有するメモリバイトの平均値(AVG)、最大値(MAX)、最小値(MIN)を示しています。
+`Instance Memory Usage`表は、各TiDB/PD/TiKVプロセスが占有するメモリバイトの平均値(AVG)、最大値(MAX)、最小値(MIN)を示しています。
 
 ![Instance memory usage report](/media/dashboard/dashboard-diagnostics-process-memory-usage.png)
 
 #### TiKV スレッドの CPU 使用率 {#tikv-thread-cpu-usage}
 
-`TiKV Thread CPU Usage`の表は、TiKVにおける各モジュールスレッドのCPU使用率の平均値(AVG)、最大値(MAX)、最小値(MIN)を示しています。プロセスの最大 CPU 使用率は`100% * the thread count of the corresponding configuration`です。
+`TiKV Thread CPU Usage`表は、TiKVにおける各モジュールスレッドのCPU使用率の平均値(AVG)、最大値(MAX)、最小値(MIN)を示しています。プロセスの最大 CPU 使用率は`100% * the thread count of the corresponding configuration`です。
 
 ![TiKV Thread CPU Usage report](/media/dashboard/dashboard-diagnostics-thread-cpu-usage.png)
 
@@ -143,7 +143,7 @@ TiDB には、自動診断結果が組み込まれています。各フィール
 上記の表の列のフィールドは、次のように説明されています。
 
 -   `METRIC_NAME` : モニタリング メトリックの名前。
--   `Label` : モニタリング メトリックのラベル情報。**展開**をクリックして、メトリックの各ラベルの詳細な監視情報を表示します。
+-   `Label` : モニタリング メトリックのラベル情報。**展開を**クリックして、メトリックの各ラベルの詳細な監視情報を表示します。
 -   `TIME_RATIO` : 監視行の合計時間に対する、この監視メトリックによって消費された合計時間の比率`TIME_RATIO`は`1`です。たとえば、 `kv_request`による合計消費時間は、 `tidb_query`の`1.65` (つまり、 `38325.58` / `23223.86` ) 倍です。 KV 要求は同時に実行されるため、すべての KV 要求の合計時間がクエリの合計実行時間 ( `tidb_query` ) を超える場合があります。
 -   `TOTAL_TIME` : このモニタリング メトリックによって消費された合計時間。
 -   `TOTAL_COUNT` : このモニタリング メトリックが実行された合計回数。
@@ -190,7 +190,7 @@ TiDB には、自動診断結果が組み込まれています。各フィール
         -   `tikv_scheduler_latch_wait` : ラッチの待機にかかった時間。
         -   `tikv_storage_async_request`の書き込みの消費時間 (書き込みは、このモニタリング メトリックのラベルです)。
 
-上記のメトリクスのうち、 `tikv_storage_async_request`の書き込みの消費時間は、次の部分を含むRaft KV の書き込みにかかる時間の消費を指します。
+上記のメトリクスのうち、 `tikv_storage_async_request`書き込みの消費時間は、次の部分を含むRaft KV の書き込みにかかる時間の消費を指します。
 
 -   `tikv_raft_propose_wait`
 -   `tikv_raft_process` 、主に`tikv_raft_append_log`を含む
@@ -208,7 +208,7 @@ TiDB には、自動診断結果が組み込まれています。各フィール
 
 #### 各コンポーネントで発生したエラー {#errors-occurred-in-each-component}
 
-`Errors Occurred in Each Component`番目の表は、binlog の書き込み失敗など、TiDB と TiKV で発生したエラーの合計数、 `tikv server is busy` 、 `TiKV channel full` 、 `tikv write stall`を示しています。各エラーの具体的な意味については、行のコメントを参照してください。
+`Errors Occurred in Each Component`の表は、TiDB と TiKV でのbinlogの書き込み失敗などの合計エラー数、 `tikv server is busy` 、 `TiKV channel full` 、 `tikv write stall`を示しています。各エラーの具体的な意味については、行のコメントを参照してください。
 
 ![Errors Occurred in Each Component report](/media/dashboard/dashboard-diagnostics-error.png)
 
@@ -247,7 +247,7 @@ TiDB には、自動診断結果が組み込まれています。各フィール
 
 ![TiDB DDL Owner Report](/media/dashboard/dashboard-diagnostics-tidb-ddl.png)
 
-上の表は、 `2020-05-21 14:40:00`から、クラスターの`DDL OWNER`が`10.0.1.13:10080`ノードにあることを示しています。所有者が変更された場合、上記の表には複数行のデータが存在します`Min_Time`列は、対応する既知の所有者の最小時間を示します。
+上の表は、 `2020-05-21 14:40:00`から、クラスターの`DDL OWNER` `10.0.1.13:10080`ノードにあることを示しています。所有者が変更された場合、上記の表には複数行のデータが存在します`Min_Time`列は、対応する既知の所有者の最小時間を示します。
 
 > **ノート：**
 >
@@ -266,7 +266,7 @@ PD モジュールの監視情報に関連するテーブルは次のとおり�
 
 -   `Time Consumed by PD Component` : PD 内の関連モジュールのモニタリング メトリックに費やされた時間。
 -   `Blance Leader/Region` : `balance-region`と`balance leader`の監視情報が、レポートの時間範囲内にクラスタで発生しました。たとえば、 `tikv_note_1`から予定されているリーダーの数または予定されているリーダーの数です。
--   `Cluster Status` : TiKV ノードの合計数、クラスターの合計ストレージ容量、リージョンの数、オフラインの TiKV ノードの数を含む、クラスターのステータス情報。
+-   `Cluster Status` : TiKV ノードの合計数、クラスターの合計storage容量、リージョンの数、オフラインの TiKV ノードの数を含む、クラスターのステータス情報。
 -   `Store Status` :リージョンスコア、リーダー スコア、リージョン/リーダーの数など、各 TiKV ノードのステータス情報を記録します。
 -   `Etcd Status` : PD の etcd 関連情報。
 
@@ -306,7 +306,7 @@ TiKV モジュールの監視情報に関連するテーブルは次のとおり
 
 ![Scheduler Config Change History report](/media/dashboard/dashboard-diagnostics-config-change.png)
 
-上の表は、レポートの時間範囲内で`leader-schedule-limit`の構成パラメーターが変更されたことを示しています。
+上の表は、レポートの時間範囲内で`leader-schedule-limit`構成パラメーターが変更されたことを示しています。
 
 -   `2020-05-22T20:00:00+08:00` : レポートの開始時に、構成値`leader-schedule-limit`は`4`です。これは構成が変更されたことを意味するのではなく、レポートの時間範囲の開始時にその構成値が`4`であることを意味します。
 -   `2020-05-22T20:07:00+08:00` : `leader-schedule-limit`構成値は`8`です。これは、この構成の値が`2020-05-22T20:07:00+08:00`付近で変更されたことを示します。
@@ -340,14 +340,14 @@ TiKV モジュールの監視情報に関連するテーブルは次のとおり
 ![Compare Instance CPU Usage report](/media/dashboard/dashboard-diagnostics-compare-instance-cpu-usage.png)
 
 -   `t1.AVG` 、 `t1.MAX` 、 `t1.Min`は`t1`の CPU 使用率の平均値、最大値、および最小値です。
--   `t2.AVG`は`t2.MAX`期間`t2.Min`の CPU 使用率の平均値、最大値、最小値`t2` 。
--   `AVG_DIFF_RATIO`は`t1`と`t2`の間の平均値の`DIFF_RATIO`つです。
--   `MAX_DIFF_RATIO`は`t1`と`t2`の間の最大値の`DIFF_RATIO`つです。
--   `MIN_DIFF_RATIO`は`t1`と`t2`の間の最小値の`DIFF_RATIO`つです。
+-   `t2.AVG` `t2.Min` `t2.MAX` `t2`中の CPU 使用率の平均値、最大値、最小値です。
+-   `AVG_DIFF_RATIO` `t1`と`t2`の間の平均値の`DIFF_RATIO`です。
+-   `MAX_DIFF_RATIO` `t1`と`t2`の間の最大値の`DIFF_RATIO`です。
+-   `MIN_DIFF_RATIO` `t1`と`t2`の間の最小値の`DIFF_RATIO`です。
 
 `DIFF_RATIO` : 2 つの時間範囲の差の値を示します。次の値があります。
 
--   モニタリング メトリックの値が`t2`の範囲内にのみあり、 `t1`の範囲内に値がない場合、 `DIFF_RATIO`の値は`1`です。
+-   モニタリング メトリックの値が`t2`範囲内にのみあり、 `t1`範囲内に値がない場合、 `DIFF_RATIO`の値は`1`です。
 -   モニタリング メトリックの値が`t1`内にのみあり、 `t2`時間範囲内に値がない場合、 `DIFF_RATIO`の値は`-1`です。
 -   `t2`の値が`t1`の値より大きい場合、 `DIFF_RATIO` = `(t2.value / t1.value)-1`
 -   `t2`の値が`t1`の値より小さい場合、 `DIFF_RATIO` = `1-(t1.value / t2.value)`
@@ -356,11 +356,11 @@ TiKV モジュールの監視情報に関連するテーブルは次のとおり
 
 ### 最大異項目テーブル {#maximum-different-item-table}
 
-`Maximum Different Item`の表は、2 つの時間範囲のモニタリング メトリックを比較し、モニタリング メトリックの違いに従って並べ替えます。この表を使用すると、2 つの時間範囲でどのモニタリング メトリックに最大の違いがあるかをすばやく見つけることができます。次の例を参照してください。
+`Maximum Different Item`表は、2 つの時間範囲のモニタリング メトリックを比較し、モニタリング メトリックの違いに従って並べ替えます。この表を使用すると、2 つの時間範囲でどのモニタリング メトリックに最大の違いがあるかをすばやく見つけることができます。次の例を参照してください。
 
 ![Maximum Different Item table](/media/dashboard/dashboard-diagnostics-maximum-different-item.png)
 
--   `Table` : このモニタリング メトリックが比較レポートのどのテーブルから取得されたかを示します。たとえば、 `TiKV, coprocessor_info`は TiKVコンポーネントの`coprocessor_info`テーブルを示します。
+-   `Table` : このモニタリング メトリックが比較レポートのどのテーブルから取得されたかを示します。たとえば、 `TiKV, coprocessor_info` TiKVコンポーネントの`coprocessor_info`テーブルを示します。
 -   `METRIC_NAME` : モニタリング メトリック名。 `expand`をクリックして、指標のさまざまなラベルの比較を表示します。
 -   `LABEL` : モニタリング メトリックに対応するラベル。たとえば、モニタリング メトリック`TiKV Coprocessor scan`には`instance` 、 `req` 、 `tag` 、 `sql_type`という 2 つのラベルがあり、TiKV アドレス、リクエスト タイプ、操作タイプ、および操作カラムファミリーです。
 -   `MAX_DIFF` : `t1.VALUE`と`t2.VALUE`の`DIFF_RATIO`の計算である差分値。

@@ -5,7 +5,7 @@ summary: Learn the `METRICS_SCHEMA` schema.
 
 # メトリクス スキーマ {#metrics-schema}
 
-`METRICS_SCHEMA`は、Prometheus に格納されている TiDB メトリックの上にある一連のビューです。各テーブルの PromQL (Prometheus Query Language) のソースは[`INFORMATION_SCHEMA.METRICS_TABLES`](/information-schema/information-schema-metrics-tables.md)で利用できます。
+`METRICS_SCHEMA` 、Prometheus に格納されている TiDB メトリックの上にある一連のビューです。各テーブルの PromQL (Prometheus Query Language) のソースは[`INFORMATION_SCHEMA.METRICS_TABLES`](/information-schema/information-schema-metrics-tables.md)で利用できます。
 
 {{< copyable "" >}}
 
@@ -93,7 +93,7 @@ SHOW TABLES;
 626 rows in set (0.00 sec)
 ```
 
-`METRICS_SCHEMA`は、( [`metrics_summary`](/information-schema/information-schema-metrics-summary.md) 、 [`metrics_summary_by_label`](/information-schema/information-schema-metrics-summary.md) 、および[`inspection_summary`](/information-schema/information-schema-inspection-summary.md)などの) 監視関連の要約テーブルのデータ ソースとして使用されます。
+`METRICS_SCHEMA` ( [`metrics_summary`](/information-schema/information-schema-metrics-summary.md) 、 [`metrics_summary_by_label`](/information-schema/information-schema-metrics-summary.md) 、および[`inspection_summary`](/information-schema/information-schema-inspection-summary.md)などの) 監視関連の要約テーブルのデータ ソースとして使用されます。
 
 ## 追加の例 {#additional-examples}
 
@@ -119,7 +119,7 @@ SELECT * FROM information_schema.metrics_tables WHERE table_name='tidb_query_dur
 
 -   `TABLE_NAME` : `metrics_schema`のテーブル名に対応します。この例では、テーブル名は`tidb_query_duration`です。
 -   `PROMQL` : 監視テーブルの動作原理は、最初に SQL ステートメントを`PromQL`にマップし、次に Prometheus からデータを要求し、Prometheus の結果を SQL クエリの結果に変換することです。このフィールドは`PromQL`の式テンプレートです。監視テーブルのデータをクエリすると、クエリ条件を使用してこのテンプレートの変数が書き換えられ、最終的なクエリ式が生成されます。
--   `LABELS` : 監視項目のラベル。 `tidb_query_duration`には`instance`と`sql_type`の 2 つのラベルがあります。
+-   `LABELS` : 監視項目のラベル。 `tidb_query_duration`には`instance`と`sql_type` 2 つのラベルがあります。
 -   `QUANTILE` : パーセンタイル。ヒストグラム タイプのモニタリング データの場合、デフォルトのパーセンタイルが指定されます。このフィールドの値が`0`の場合、監視テーブルに対応する監視項目がヒストグラムではないことを意味します。
 -   `COMMENT` : 監視テーブルの説明。 `tidb_query_duration`テーブルは、P999/P99/P90 のクエリ時間など、TiDB クエリ実行のパーセンタイル時間をクエリするために使用されていることがわかります。単位は秒です。
 
@@ -146,8 +146,8 @@ SHOW CREATE TABLE metrics_schema.tidb_query_duration;
 ```
 
 -   `time` : 監視項目の時間。
--   `instance`と`sql_type` : `tidb_query_duration`の監視項目のラベル。 `instance`は監視アドレスを意味します。 `sql_type`は、実行された SQL ステートメントのタイプを意味します。
--   `quantile` : パーセンタイル。ヒストグラム型の監視項目にはこの列があり、クエリのパーセンタイル時間を示します。たとえば、 `quantile = 0.9`は P90 の時刻を照会することを意味します。
+-   `instance`と`sql_type` : `tidb_query_duration`の監視項目のラベル。 `instance`監視アドレスを意味します。 `sql_type`実行された SQL ステートメントのタイプを意味します。
+-   `quantile` : パーセンタイル。ヒストグラム型の監視項目にはこの列があり、クエリのパーセンタイル時間を示します。たとえば、 `quantile = 0.9` P90 の時刻を照会することを意味します。
 -   `value` : 監視項目の値。
 
 次のステートメントは、[ `2020-03-25 23:40:00` , `2020-03-25 23:42:00` ] の範囲内で P99 時刻を照会します。
@@ -200,7 +200,7 @@ DESC SELECT * FROM metrics_schema.tidb_query_duration WHERE value is not null AN
 
 [ `2020-03-25 23:40:00` , `2020-03-25 23:42:00` ] の範囲では、各ラベルに 3 つの時間値しかないことに気付くかもしれません。実行計画では、値`step`は 1 分です。これは、これらの値の間隔が 1 分であることを意味します。 `step`は、次の 2 つのセッション変数によって決定されます。
 
--   `tidb_metric_query_step` : クエリ解決のステップ幅。 Prometheus から`query_range`のデータを取得するには、 `start_time` 、 `end_time` 、および`step`を指定する必要があります。 `step`は、この変数の値を使用します。
+-   `tidb_metric_query_step` : クエリ解決のステップ幅。 Prometheus から`query_range`データを取得するには、 `start_time` 、 `end_time` 、および`step`を指定する必要があります。 `step`この変数の値を使用します。
 -   `tidb_metric_query_range_duration` : 監視データが照会されると、 `PROMQL`の`$ RANGE_DURATION`フィールドの値がこの変数の値に置き換えられます。デフォルト値は 60 秒です。
 
 粒度の異なる監視項目の値を表示するには、監視テーブルをクエリする前に、上記の 2 つのセッション変数を変更します。例えば：
@@ -218,7 +218,7 @@ DESC SELECT * FROM metrics_schema.tidb_query_duration WHERE value is not null AN
     set @@tidb_metric_query_range_duration=30;
     ```
 
-2.  以下のように`tidb_query_duration`の監視項目を問い合わせます。結果から、3 分の時間範囲内で、各ラベルに 6 つの時間値があり、各値の間隔が 30 秒であることがわかります。
+2.  以下のように`tidb_query_duration`監視項目を問い合わせます。結果から、3 分の時間範囲内で、各ラベルに 6 つの時間値があり、各値の間隔が 30 秒であることがわかります。
 
     {{< copyable "" >}}
 
@@ -248,7 +248,7 @@ DESC SELECT * FROM metrics_schema.tidb_query_duration WHERE value is not null AN
     +---------------------+-------------------+----------+----------+-----------------+
     ```
 
-3.  実行計画をビューします。結果から、実行計画の`PromQL`と`step`の値が 30 秒に変更されていることもわかります。
+3.  実行計画をビュー。結果から、実行計画の`PromQL`と`step`の値が 30 秒に変更されていることもわかります。
 
     {{< copyable "" >}}
 

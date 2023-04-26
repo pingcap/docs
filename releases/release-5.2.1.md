@@ -16,4 +16,4 @@ TiDB バージョン: 5.2.1
 
 -   TiKV
 
-    -   リージョンの移行時に Raftstore のデッドロックが原因で TiKV が使用できない問題を修正します。回避策は、スケジューリングを無効にして、利用できない TiKV を再起動することです。 [#10909](https://github.com/tikv/tikv/issues/10909)
+    -   リージョンの移行時にRaftstore のデッドロックが原因で TiKV が使用できない問題を修正します。回避策は、スケジューリングを無効にして、利用できない TiKV を再起動することです。 [#10909](https://github.com/tikv/tikv/issues/10909)

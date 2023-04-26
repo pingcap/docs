@@ -20,19 +20,19 @@ TiDB バージョン: 3.0.17
 
 -   TiKV
 
-    -   ローリング更新のパフォーマンスを向上させるためにリージョンの休止状態を遅らせる`hibernate-timeout`の構成を追加します[#8207](https://github.com/tikv/tikv/pull/8207)
+    -   ローリング更新のパフォーマンスを向上させるためにリージョンの休止状態を遅らせる`hibernate-timeout`構成を追加します[#8207](https://github.com/tikv/tikv/pull/8207)
 
 -   ツール
 
     -   TiDB Lightning
 
-        -   `[black-white-list]`は、より新しく理解しやすいフィルター形式[#332](https://github.com/pingcap/tidb-lightning/pull/332)で廃止されました。
+        -   `[black-white-list]`より新しく理解しやすいフィルター形式[#332](https://github.com/pingcap/tidb-lightning/pull/332)で廃止されました。
 
 ## バグの修正 {#bug-fixes}
 
 -   TiDB
 
-    -   `IndexHashJoin`または`IndexMergeJoin`を含むクエリでpanic[#18498](https://github.com/pingcap/tidb/pull/18498)が発生した場合、空のセットではなく実際のエラー メッセージを返します。
+    -   `IndexHashJoin`または`IndexMergeJoin`含むクエリでpanic[#18498](https://github.com/pingcap/tidb/pull/18498)が発生した場合、空のセットではなく実際のエラー メッセージを返します。
     -   `SELECT a FROM t HAVING t.a` [#18432](https://github.com/pingcap/tidb/pull/18432)などの SQL ステートメントの不明な列エラーを修正します。
     -   テーブルに主キーがない場合、またはテーブルに整数の主キーが既にある場合に、テーブルの主キーを追加することを禁止する[#18342](https://github.com/pingcap/tidb/pull/18342)
     -   `EXPLAIN FORMAT="dot" FOR CONNECTION` [#17157](https://github.com/pingcap/tidb/pull/17157)の実行時に空のセットを返す

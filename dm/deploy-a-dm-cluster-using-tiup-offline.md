@@ -3,7 +3,7 @@ title: Deploy a DM Cluster Offline Using TiUP
 summary: Introduce how to deploy a DM cluster offline using TiUP.
 ---
 
-# TiUPを使用してオフラインで DMクラスタをデプロイする {#deploy-a-dm-cluster-offline-using-tiup}
+# TiUPを使用してオフラインで DMクラスタをデプロイ {#deploy-a-dm-cluster-offline-using-tiup}
 
 このドキュメントでは、 TiUPを使用して DM クラスターをオフラインで展開する方法について説明します。
 
@@ -125,15 +125,15 @@ alertmanager_servers:
 >
 > -   特定のノードで有効にする必要があるパラメーターについては、このノードの`config`つでこれらのパラメーターを構成します。
 >
-> -   `.`を使用して、構成のサブカテゴリ ( `log.slow-threshold`など) を示します。その他の形式については、 [TiUP構成テンプレート](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml)を参照してください。
+> -   `.`を使用して、構成のサブカテゴリ`log.slow-threshold`など) を示します。その他の形式については、 [TiUP構成テンプレート](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml)を参照してください。
 >
 > -   パラメータの詳細については、 [マスター`config.toml.example`](https://github.com/pingcap/dm/blob/master/dm/master/dm-master.toml)および[ワーカー`config.toml.example`](https://github.com/pingcap/dm/blob/master/dm/worker/dm-worker.toml)を参照してください。
 >
 > -   次のコンポーネント間のポートが相互接続されていることを確認してください。
 >     -   DM-master ノードの`peer_port` (デフォルトでは`8291` ) は相互接続されています。
->     -   各 DM-master ノードは、すべての DM-worker ノードの`port`つ (デフォルトでは`8262` ) に接続できます。
->     -   各 DM-worker ノードは、すべての DM-master ノードの`port`つ (デフォルトでは`8261` ) に接続できます。
->     -   TiUPノードは、すべての DM マスター ノードの`port`つ (デフォルトでは`8261` ) に接続できます。
+>     -   各 DM-master ノードは、すべての DM-worker ノードの`port` (デフォルトでは`8262` ) に接続できます。
+>     -   各 DM-worker ノードは、すべての DM-master ノードの`port` (デフォルトでは`8261` ) に接続できます。
+>     -   TiUPノードは、すべての DM マスター ノードの`port` (デフォルトでは`8261` ) に接続できます。
 >     -   TiUPノードは、すべての DM-worker ノードの`port` (デフォルトでは`8262` ) に接続できます。
 
 ## ステップ 4: デプロイ コマンドを実行する {#step-4-execute-the-deployment-command}
@@ -157,9 +157,9 @@ tiup dm deploy dm-test ${version} ./topology.yaml --user root [-p] [-i /home/roo
 -   デプロイされた DM クラスターの名前は`dm-test`です。
 -   DM クラスターのバージョンは`${version}`です。 `tiup list dm-master`を実行すると、 TiUPでサポートされている最新バージョンを表示できます。
 -   初期設定ファイルは`topology.yaml`です。
--   `--user root` : `root`キーを使用してターゲット マシンにログインし、クラスターのデプロイを完了します。または、 `ssh`および`sudo`の権限を持つ他のユーザーを使用してデプロイを完了できます。
--   `[-i]`および`[-p]` : オプション。パスワードなしでターゲット マシンへのログインを構成した場合、これらのパラメータは必要ありません。そうでない場合は、2 つのパラメーターのいずれかを選択します。 `[-i]`は、ターゲット マシンにアクセスできる`root`ユーザー (または`--user`で指定された他のユーザー) の秘密鍵です。 `[-p]`は、対話的にユーザーパスワードを入力するために使用されます。
--   TiUP DMは組み込みの SSH クライアントを使用します。制御マシン システムにネイティブな SSH クライアントを使用する場合は、 [システムのネイティブ SSH クライアントを使用してクラスターに接続する](/dm/maintain-dm-using-tiup.md#use-the-systems-native-ssh-client-to-connect-to-cluster)に従って構成を編集します。
+-   `--user root` : `root`キーを使用してターゲット マシンにログインし、クラスターのデプロイを完了します。または、 `ssh`および`sudo`権限を持つ他のユーザーを使用してデプロイを完了できます。
+-   `[-i]`および`[-p]` : オプション。パスワードなしでターゲット マシンへのログインを構成した場合、これらのパラメーターは必要ありません。そうでない場合は、2 つのパラメーターのいずれかを選択します。 `[-i]`ターゲット マシンにアクセスできる`root`ユーザー (または`--user`で指定された他のユーザー) の秘密鍵です。 `[-p]`対話的にユーザーパスワードを入力するために使用されます。
+-   TiUP DM は組み込みの SSH クライアントを使用します。制御マシン システムにネイティブな SSH クライアントを使用する場合は、 [システムのネイティブ SSH クライアントを使用してクラスターに接続する](/dm/maintain-dm-using-tiup.md#use-the-systems-native-ssh-client-to-connect-to-cluster)に従って構成を編集します。
 
 出力ログの最後に、 ``Deployed cluster `dm-test` successfully``が表示されます。これは、デプロイが成功したことを示します。
 
@@ -171,7 +171,7 @@ tiup dm deploy dm-test ${version} ./topology.yaml --user root [-p] [-i /home/roo
 tiup dm list
 ```
 
-TiUPは、複数の DM クラスターの管理をサポートしています。上記のコマンドは、現在TiUPによって管理されているすべてのクラスターの情報を出力します。これには、名前、デプロイ ユーザー、バージョン、秘密鍵の情報が含まれます。
+TiUP は、複数の DM クラスターの管理をサポートしています。上記のコマンドは、現在TiUPによって管理されているすべてのクラスターの情報を出力します。これには、名前、デプロイ ユーザー、バージョン、秘密鍵の情報が含まれます。
 
 ```log
 Name  User  Version  Path                                  PrivateKey

@@ -5,7 +5,7 @@ summary: An overview of the usage of SET [NAMES|CHARACTER SET] for the TiDB data
 
 # [名前|キャラクターセット]を設定 {#set-names-character-set}
 
-ステートメント`SET NAMES` 、 `SET CHARACTER SET` 、および`SET CHARSET`は、現在の接続の変数`character_set_client` 、 `character_set_results` 、および`character_set_connection`を変更します。
+ステートメント`SET NAMES` 、 `SET CHARACTER SET` 、および`SET CHARSET` 、現在の接続の変数`character_set_client` 、 `character_set_results` 、および`character_set_connection`を変更します。
 
 ## あらすじ {#synopsis}
 

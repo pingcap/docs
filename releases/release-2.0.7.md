@@ -17,8 +17,8 @@ title: TiDB 2.0.7 Release Notes
     -   一意のインデックスの追加を高速化する[#7562](https://github.com/pingcap/tidb/pull/7562)
     -   DDL 同時実行数を制御するオプションを追加します[#7563](https://github.com/pingcap/tidb/pull/7563)
 -   バグの修正
-    -   主キーが整数[#7298](https://github.com/pingcap/tidb/pull/7298)のテーブルで`USE INDEX(PRIMARY)`を使用できない問題を修正
-    -   内側の行が`NULL` [#7301](https://github.com/pingcap/tidb/pull/7301)の場合、 `Merge Join`と`Index Join`が誤った結果を出力する問題を修正
+    -   主キーが整数[#7298](https://github.com/pingcap/tidb/pull/7298)テーブルで`USE INDEX(PRIMARY)`を使用できない問題を修正
+    -   内側の行が`NULL` [#7301](https://github.com/pingcap/tidb/pull/7301)の場合、 `Merge Join`と`Index Join`誤った結果を出力する問題を修正
     -   チャンクサイズの設定が小さすぎる場合に誤った結果を`Join`する問題を修正[#7315](https://github.com/pingcap/tidb/pull/7315)
     -   `range column` [#7379](https://github.com/pingcap/tidb/pull/7379)を含むテーブルを作成するステートメントによって引き起こされるpanicの問題を修正します。
     -   `admin check table`が時刻型の列のエラーを誤って報告する問題を修正[#7457](https://github.com/pingcap/tidb/pull/7457)
@@ -30,6 +30,6 @@ title: TiDB 2.0.7 Release Notes
 ## TiKV {#tikv}
 
 -   改善
-    -   スペース増幅を減らすために、デフォルトで空のクラスターで`dynamic-level-bytes`つのパラメーターを開きます
+    -   スペース増幅を減らすために、デフォルトで空のクラスターで`dynamic-level-bytes`パラメーターを開きます
 -   バグ修正
     -   リージョンのマージ後のリージョンの更新`approximate size`と`approximate keys count`

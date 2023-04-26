@@ -5,7 +5,7 @@ summary: An overview of the usage of SHOW WARNINGS for the TiDB database.
 
 # 警告を表示 {#show-warnings}
 
-このステートメントは、現在のクライアント接続で以前に実行されたステートメントに対して発生した警告のリストを表示します。 MySQL と同様に、 `sql_mode`はどのステートメントがエラーと警告を引き起こすかに大きく影響します。
+このステートメントは、現在のクライアント接続で以前に実行されたステートメントに対して発生した警告のリストを表示します。 MySQL と同様に、 `sql_mode`どのステートメントがエラーと警告を引き起こすかに大きく影響します。
 
 ## あらすじ {#synopsis}
 

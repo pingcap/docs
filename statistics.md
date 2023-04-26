@@ -7,21 +7,12 @@ summary: Learn how the statistics collect table-level and column-level informati
 
 TiDB は統計を使用して決定します[どのインデックスを選択するか](/choose-index.md) 。 `tidb_analyze_version`変数は、TiDB によって収集される統計を制御します。現在、 `tidb_analyze_version = 1`と`tidb_analyze_version = 2`の 2 つのバージョンの統計がサポートされています。
 
-<CustomContent platform="tidb">
-
-v5.1.0 より前のバージョンでは、この変数のデフォルト値は`1`です。 v5.3.0 以降のバージョンでは、この変数のデフォルト値は`2`です。クラスターが v5.3.0 より前のバージョンから v5.3.0 以降にアップグレードされた場合、デフォルト値の`tidb_analyze_version`は変更されません。
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-TiDB Cloudの場合、この変数のデフォルト値は`1`です。
-
-</CustomContent>
+-   オンプレミス TiDB の場合、この変数のデフォルト値は v5.1.0 より前は`1`です。 v5.3.0 以降のバージョンでは、この変数のデフォルト値は`2`です。クラスターが v5.3.0 より前のバージョンから v5.3.0 以降にアップグレードされた場合、デフォルト値の`tidb_analyze_version`は変更されません。
+-   TiDB Cloudの場合、この変数のデフォルト値は`1`です。
 
 > **ノート：**
 >
-> `tidb_analyze_version = 2`の場合、 `ANALYZE`の実行後にメモリオーバーフローが発生した場合は、 `tidb_analyze_version = 1`を設定して次のいずれかの操作を実行する必要があります。
+> `tidb_analyze_version = 2`の場合、 `ANALYZE`実行後にメモリオーバーフローが発生した場合は、 `tidb_analyze_version = 1`設定して次のいずれかの操作を実行する必要があります。
 >
 > -   `ANALYZE`ステートメントを手動で実行する場合は、分析するすべてのテーブルを手動で分析します。
 >
@@ -74,12 +65,12 @@ TiDB Cloudの場合、この変数のデフォルト値は`1`です。
 
 ## カウントミンスケッチ {#count-min-sketch}
 
-Count-Min Sketch はハッシュ構造です。等価クエリに`a = 1`つまたは`IN`のクエリ (たとえば、 `a in (1, 2, 3)` ) が含まれている場合、TiDB はこのデータ構造を使用して推定します。
+Count-Min Sketch はハッシュ構造です。等価クエリに`a = 1`または`IN`クエリ (たとえば、 `a in (1, 2, 3)` ) が含まれている場合、TiDB はこのデータ構造を使用して推定します。
 
 Count-Min Sketch はハッシュ構造であるため、ハッシュ衝突が発生する可能性があります。 `EXPLAIN`ステートメントにおいて、同等のクエリの見積もりが実際の値から大きく外れている場合は、大きい値と小さい値が一緒にハッシュされていると見なすことができます。この場合、次のいずれかの方法でハッシュの衝突を回避できます。
 
 -   `WITH NUM TOPN`パラメータを変更します。 TiDB は高頻度 (上位 x) データを個別に保存し、その他のデータは Count-Min Sketch に保存します。したがって、大きい値と小さい値が一緒にハッシュされるのを防ぐために、 `WITH NUM TOPN`の値を増やすことができます。 TiDB では、デフォルト値は 20 です。最大値は 1024 です。このパラメーターの詳細については、 [フルコレクション](#full-collection)を参照してください。
--   2 つのパラメーター`WITH NUM CMSKETCH DEPTH`と`WITH NUM CMSKETCH WIDTH`を変更します。どちらもハッシュ バケットの数と衝突確率に影響します。実際のシナリオに従って 2 つのパラメーターの値を適切に増やして、ハッシュ衝突の可能性を減らすことができますが、統計のメモリ使用量が高くなります。 TiDB では、5 のデフォルト値は`WITH NUM CMSKETCH DEPTH`で、 `WITH NUM CMSKETCH WIDTH`のデフォルト値は 2048 です。2 つのパラメーターの詳細については、 [フルコレクション](#full-collection)を参照してください。
+-   2 つのパラメーター`WITH NUM CMSKETCH DEPTH`と`WITH NUM CMSKETCH WIDTH`を変更します。どちらもハッシュ バケットの数と衝突確率に影響します。実際のシナリオに従って 2 つのパラメーターの値を適切に増やして、ハッシュ衝突の可能性を減らすことができますが、統計のメモリ使用量が高くなります。 TiDB では、 `WITH NUM CMSKETCH DEPTH`のデフォルト値は 5 で、 `WITH NUM CMSKETCH WIDTH`のデフォルト値は 2048 です。2 つのパラメーターの詳細については、 [フルコレクション](#full-collection)参照してください。
 
 ## 上位 N の値 {#top-n-values}
 
@@ -93,7 +84,7 @@ Count-Min Sketch はハッシュ構造であるため、ハッシュ衝突が発
 
 > **ノート：**
 >
-> TiDB での`ANALYZE TABLE`の実行時間は、MySQL や InnoDB よりも長くなります。 InnoDB では少数のページのみがサンプリングされますが、TiDB では包括的な統計セットが完全に再構築されます。 MySQL 用に作成されたスクリプトは、単純に`ANALYZE TABLE`が短時間の操作であると想定している可能性があります。
+> TiDB での`ANALYZE TABLE`の実行時間は、MySQL や InnoDB よりも長くなります。 InnoDB では少数のページのみがサンプリングされますが、TiDB では包括的な統計セットが完全に再構築されます。 MySQL 用に作成されたスクリプトは、単純に`ANALYZE TABLE`短時間の操作であると想定している可能性があります。
 >
 > 迅速な分析のために、 `tidb_enable_fast_analyze` ～ `1`を設定してクイック分析機能を有効にすることができます。このパラメーターのデフォルト値は`0`です。
 >
@@ -113,32 +104,32 @@ Count-Min Sketch はハッシュ構造であるため、ハッシュ衝突が発
     ANALYZE TABLE TableNameList [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
     ```
 
--   `WITH NUM BUCKETS`は、生成されたヒストグラムのバケットの最大数を指定します。
+-   `WITH NUM BUCKETS`生成されたヒストグラムのバケットの最大数を指定します。
 
--   `WITH NUM TOPN`は、生成される`TOPN`の最大数を指定します。
+-   `WITH NUM TOPN`生成される`TOPN`の最大数を指定します。
 
--   `WITH NUM CMSKETCH DEPTH`は、CM スケッチの深さを指定します。
+-   `WITH NUM CMSKETCH DEPTH` CM スケッチの深さを指定します。
 
--   `WITH NUM CMSKETCH WIDTH`は、CM スケッチの幅を指定します。
+-   `WITH NUM CMSKETCH WIDTH` CM スケッチの幅を指定します。
 
--   `WITH NUM SAMPLES`はサンプル数を指定します。
+-   `WITH NUM SAMPLES`サンプル数を指定します。
 
--   `WITH FLOAT_NUM SAMPLERATE`はサンプリング レートを指定します。
+-   `WITH FLOAT_NUM SAMPLERATE`サンプリング レートを指定します。
 
-`WITH NUM SAMPLES`と`WITH FLOAT_NUM SAMPLERATE`は、サンプルを収集する 2 つの異なるアルゴリズムに対応します。
+`WITH NUM SAMPLES`と`WITH FLOAT_NUM SAMPLERATE`サンプルを収集する 2 つの異なるアルゴリズムに対応します。
 
--   `WITH NUM SAMPLES`は、TiDB のリザーバー サンプリング メソッドで実装されるサンプリング セットのサイズを指定します。テーブルが大きい場合、この方法を使用して統計を収集することはお勧めしません。リザーバ サンプリングの中間結果セットには冗長な結果が含まれているため、メモリなどのリソースにさらに負荷がかかります。
+-   `WITH NUM SAMPLES` 、TiDB のリザーバー サンプリング メソッドで実装されるサンプリング セットのサイズを指定します。テーブルが大きい場合、この方法を使用して統計を収集することはお勧めしません。リザーバ サンプリングの中間結果セットには冗長な結果が含まれているため、メモリなどのリソースにさらに負荷がかかります。
 -   `WITH FLOAT_NUM SAMPLERATE`は v5.3.0 で導入されたサンプリング方法です。値の範囲が`(0, 1]`の場合、このパラメーターはサンプリング レートを指定します。これは、TiDB のベルヌーイ サンプリングの方法で実装されています。これは、より大きなテーブルのサンプリングに適していて、収集効率とリソース使用率が優れています。
 
 v5.3.0 より前の TiDB は、リザーバー サンプリング メソッドを使用して統計を収集します。 v5.3.0 以降、TiDB バージョン 2 統計は、デフォルトでベルヌーイ サンプリング法を使用して統計を収集します。リザーバー サンプリング法を再利用するには、 `WITH NUM SAMPLES`ステートメントを使用できます。
 
-現在のサンプリング レートは、適応アルゴリズムに基づいて計算されます。 [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md)を使用してテーブル内の行数を観測できる場合、この行数を使用して 100,000 行に対応するサンプリング レートを計算できます。この数を確認できない場合は、 [`TABLE_STORAGE_STATS`](/information-schema/information-schema-table-storage-stats.md)番目の表の`TABLE_KEYS`列を別の参照として使用して、サンプリング レートを計算できます。
+現在のサンプリング レートは、適応アルゴリズムに基づいて計算されます。 [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md)を使用してテーブル内の行数を観測できる場合、この行数を使用して 100,000 行に対応するサンプリング レートを計算できます。この数を確認できない場合は、 [`TABLE_STORAGE_STATS`](/information-schema/information-schema-table-storage-stats.md)の表の`TABLE_KEYS`列を別の参照として使用して、サンプリング レートを計算できます。
 
 <CustomContent platform="tidb">
 
 > **ノート：**
 >
-> 通常、 `STATS_META`は`TABLE_KEYS`より信頼性が高くなります。ただし、 [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview)のような方法でデータをインポートすると、 `STATS_META`の結果は`0`になります。この状況に対処するために、 `STATS_META`の結果が`TABLE_KEYS`の結果よりもはるかに小さい場合、 `TABLE_KEYS`を使用してサンプリング レートを計算できます。
+> 通常、 `STATS_META`は`TABLE_KEYS`より信頼性が高くなります。ただし、 [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview)のような方法でデータをインポートすると、 `STATS_META`の結果は`0`になります。この状況に対処するために、 `STATS_META`の結果が`TABLE_KEYS`の結果よりもはるかに小さい場合、 `TABLE_KEYS`使用してサンプリング レートを計算できます。
 
 </CustomContent>
 
@@ -146,7 +137,7 @@ v5.3.0 より前の TiDB は、リザーバー サンプリング メソッド�
 
 > **ノート：**
 >
-> 通常、 `STATS_META`は`TABLE_KEYS`より信頼性が高くなります。ただし、 TiDB Cloudコンソール ( [サンプル データのインポート](/tidb-cloud/import-sample-data.md)を参照) を介してデータをインポートした後、 `STATS_META`の結果は`0`になります。この状況に対処するために、 `STATS_META`の結果が`TABLE_KEYS`の結果よりもはるかに小さい場合、 `TABLE_KEYS`を使用してサンプリング レートを計算できます。
+> 通常、 `STATS_META`は`TABLE_KEYS`より信頼性が高くなります。ただし、 TiDB Cloudコンソール ( [サンプル データのインポート](/tidb-cloud/import-sample-data.md)を参照) を介してデータをインポートした後、 `STATS_META`の結果は`0`になります。この状況に対処するために、 `STATS_META`の結果が`TABLE_KEYS`の結果よりもはるかに小さい場合、 `TABLE_KEYS`使用してサンプリング レートを計算できます。
 
 </CustomContent>
 
@@ -154,7 +145,7 @@ v5.3.0 より前の TiDB は、リザーバー サンプリング メソッド�
 
 ほとんどの場合、SQL ステートメントを実行するとき、オプティマイザーは一部の列 ( `WHERE` 、 `JOIN` 、 `ORDER BY` 、および`GROUP BY`ステートメントの列など) の統計のみを使用します。これらの列は`PREDICATE COLUMNS`と呼ばれます。
 
-テーブルに多数の列がある場合、すべての列の統計を収集すると、大きなオーバーヘッドが発生する可能性があります。オーバーヘッドを削減するために、オプティマイザが使用する特定の列または`PREDICATE COLUMNS`つの列のみに関する統計を収集できます。
+テーブルに多数の列がある場合、すべての列の統計を収集すると、大きなオーバーヘッドが発生する可能性があります。オーバーヘッドを削減するために、オプティマイザが使用する特定の列または`PREDICATE COLUMNS`の列のみに関する統計を収集できます。
 
 > **ノート：**
 >
@@ -168,11 +159,11 @@ v5.3.0 より前の TiDB は、リザーバー サンプリング メソッド�
     ANALYZE TABLE TableName COLUMNS ColumnNameList [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
     ```
 
-    構文で、 `ColumnNameList`はターゲット列の名前リストを指定します。複数の列を指定する必要がある場合は、コンマ`,`を使用して列名を区切ります。たとえば、 `ANALYZE table t columns a, b`です。この構文は、特定のテーブル内の特定の列に関する統計を収集するだけでなく、そのテーブル内のインデックス付きの列とすべてのインデックスに関する統計を同時に収集します。
+    構文で、 `ColumnNameList`ターゲット列の名前リストを指定します。複数の列を指定する必要がある場合は、コンマ`,`を使用して列名を区切ります。たとえば、 `ANALYZE table t columns a, b`です。この構文は、特定のテーブル内の特定の列に関する統計を収集するだけでなく、そのテーブル内のインデックス付きの列とすべてのインデックスに関する統計を同時に収集します。
 
     > **ノート：**
     >
-    > 上記の構文は完全なコレクションです。たとえば、この構文を使用して列`a`と`b`の統計を収集した後、列`c`の統計も収集する場合は、 `ANALYZE TABLE t COLUMNS c`を使用して追加の列`c`のみを指定するのではなく、 `ANALYZE table t columns a, b, c`を使用して 3 つの列すべてを指定する必要があります。
+    > 上記の構文は完全なコレクションです。たとえば、この構文を使用して列`a`と`b`統計を収集した後、列`c`の統計も収集する場合は、 `ANALYZE TABLE t COLUMNS c`を使用して追加の列`c`のみを指定するのではなく、 `ANALYZE table t columns a, b, c`を使用して 3 つの列すべてを指定する必要があります。
 
 -   `PREDICATE COLUMNS`に関する統計を収集するには、次の手順を実行します。
 
@@ -184,13 +175,13 @@ v5.3.0 より前の TiDB は、リザーバー サンプリング メソッド�
 
         <CustomContent platform="tidb">
 
-        設定後、TiDB は 100 * [`stats-lease`](/tidb-configuration-file.md#stats-lease)ごとに`PREDICATE COLUMNS`の情報を`mysql.column_stats_usage`のシステム テーブルに書き込みます。
+        設定後、TiDB は 100 * [`stats-lease`](/tidb-configuration-file.md#stats-lease)ごとに`PREDICATE COLUMNS`情報を`mysql.column_stats_usage`システム テーブルに書き込みます。
 
         </CustomContent>
 
         <CustomContent platform="tidb-cloud">
 
-        設定後、TiDBは300秒ごとに`PREDICATE COLUMNS`の情報を`mysql.column_stats_usage`のシステムテーブルに書き込みます。
+        設定後、TiDBは300秒ごとに`PREDICATE COLUMNS`情報を`mysql.column_stats_usage`システムテーブルに書き込みます。
 
         </CustomContent>
 
@@ -241,7 +232,7 @@ SHOW COLUMN_STATS_USAGE [ShowLikeOrWhere];
 | `Last_used_at`     | クエリの最適化で列統計が最後に使用された時刻 |
 | `Last_analyzed_at` | 列統計が最後に収集された時刻         |
 
-次の例では、 `ANALYZE TABLE t PREDICATE COLUMNS;`を実行した後、TiDB は列`b` 、 `c` 、および`d`の統計を収集します。ここで、列`b`は`PREDICATE COLUMN`であり、列`c`および`d`はインデックス列です。
+次の例では、 `ANALYZE TABLE t PREDICATE COLUMNS;`実行した後、TiDB は列`b` 、 `c` 、および`d`の統計を収集します。ここで、列`b`は`PREDICATE COLUMN`であり、列`c`および`d`はインデックス列です。
 
 {{< copyable "" >}}
 
@@ -396,9 +387,9 @@ TiDB v6.0 以降、TiDB は`KILL`ステートメントを使用して、バッ�
     SHOW ANALYZE STATUS
     ```
 
-    結果の`instance`列目と`process_id`列目を確認すると、TiDBインスタンスのアドレスとバックグラウンド`ANALYZE`タスクのタスク`ID`が取得できます。
+    結果の`instance`列目と`process_id`列目を確認すると、TiDBインスタンスのアドレスとバックグラウンド`ANALYZE`タスクのタスク`ID`取得できます。
 
-2.  バックグラウンドで実行されている`ANALYZE`のタスクを終了します。
+2.  バックグラウンドで実行されている`ANALYZE`タスクを終了します。
 
     <CustomContent platform="tidb">
 
@@ -433,9 +424,9 @@ TiDB v6.0 以降、TiDB は`KILL`ステートメントを使用して、バッ�
 
 ### ANALYZE 構成を保持する {#persist-analyze-configurations}
 
-v5.4.0 以降、 `ANALYZE`は一部の構成の永続化をサポートしています。この機能を使用すると、既存の構成を将来の統計収集に簡単に再利用できます。
+v5.4.0 以降、TiDB は`ANALYZE`の構成の永続化をサポートしています。この機能を使用すると、既存の構成を将来の統計収集に簡単に再利用できます。
 
-以下は、永続性をサポートする`ANALYZE`の構成です。
+以下は、永続性をサポートする`ANALYZE`構成です。
 
 | 構成            | 対応する ANALYZE 構文                                                                                                    |
 | ------------- | ------------------------------------------------------------------------------------------------------------------ |
@@ -450,7 +441,7 @@ v5.4.0 以降、 `ANALYZE`は一部の構成の永続化をサポートしてい
 
 <CustomContent platform="tidb">
 
-`ANALYZE`構成永続化機能は、デフォルトで有効になっています (システム変数`tidb_analyze_version`はデフォルトで`2`で、 `tidb_persist_analyze_options`は`ON`です)。
+`ANALYZE`構成永続化機能は、デフォルトで有効になっています (システム変数`tidb_analyze_version`デフォルトで`2`で、 `tidb_persist_analyze_options`は`ON`です)。
 
 </CustomContent>
 
@@ -482,7 +473,7 @@ v5.4.0 以降、 `ANALYZE`は一部の構成の永続化をサポートしてい
 
 TiDB v6.1.0 以降、システム変数[`tidb_mem_quota_analyze`](/system-variables.md#tidb_mem_quota_analyze-new-in-v610)を使用して、TiDB で統計を収集するためのメモリクォータを制御できます。
 
-適切な値`tidb_mem_quota_analyze`を設定するには、クラスターのデータ サイズを考慮してください。デフォルトのサンプリング レートを使用する場合、主な考慮事項は、列の数、列の値のサイズ、および TiDB のメモリ構成です。最大値と最小値を構成するときは、次の提案を考慮してください。
+適切な値`tidb_mem_quota_analyze`設定するには、クラスターのデータ サイズを考慮してください。デフォルトのサンプリング レートを使用する場合、主な考慮事項は、列の数、列の値のサイズ、および TiDB のメモリ構成です。最大値と最小値を構成するときは、次の提案を考慮してください。
 
 > **ノート：**
 >
@@ -501,7 +492,7 @@ TiDB v6.1.0 以降、システム変数[`tidb_mem_quota_analyze`](/system-variab
 SHOW ANALYZE STATUS [ShowLikeOrWhere]
 ```
 
-このステートメントは`ANALYZE`の状態を返します。 `ShowLikeOrWhere`を使用して、必要な情報をフィルタリングできます。
+このステートメントは`ANALYZE`の状態を返します。 `ShowLikeOrWhere`使用して、必要な情報をフィルタリングできます。
 
 現在、 `SHOW ANALYZE STATUS`ステートメントは次の 11 列を返します。
 
@@ -520,7 +511,7 @@ SHOW ANALYZE STATUS [ShowLikeOrWhere]
 
 TiDB v6.1.0 以降、 `SHOW ANALYZE STATUS`ステートメントはクラスターレベルのタスクの表示をサポートしています。 TiDB の再起動後でも、このステートメントを使用して再起動前のタスク レコードを表示できます。 TiDB v6.1.0 より前では、 `SHOW ANALYZE STATUS`ステートメントはインスタンス レベルのタスクのみを表示でき、タスク レコードは TiDB の再起動後にクリアされます。
 
-`SHOW ANALYZE STATUS`は、最新のタスク レコードのみを表示します。 TiDB v6.1.0 から、システム テーブルを介して過去 7 日間の履歴タスクを表示できます`mysql.analyze_jobs` 。
+`SHOW ANALYZE STATUS`最新のタスク レコードのみを表示します。 TiDB v6.1.0 から、システム テーブルを介して過去 7 日間の履歴タスクを表示できます`mysql.analyze_jobs` 。
 
 [`tidb_mem_quota_analyze`](/system-variables.md#tidb_mem_quota_analyze-new-in-v610)が設定され、TiDB バックグラウンドで実行されている自動`ANALYZE`タスクがこのしきい値よりも多くのメモリを使用すると、タスクが再試行されます。 `SHOW ANALYZE STATUS`ステートメントの出力で、失敗したタスクと再試行されたタスクを確認できます。
 
@@ -566,7 +557,7 @@ SHOW STATS_META [ShowLikeOrWhere];
 
 > **ノート：**
 >
-> TiDB が DML ステートメントに従って総行数と変更された行数を自動的に更新すると、 `update_time`も更新されます。したがって、 `update_time`は、 `ANALYZE`ステートメントが最後に実行された時刻を示すとは限りません。
+> TiDB が DML ステートメントに従って総行数と変更された行数を自動的に更新すると、 `update_time`も更新されます。したがって、 `update_time` 、 `ANALYZE`ステートメントが最後に実行された時刻を示すとは限りません。
 
 ### テーブルのヘルス状態 {#health-state-of-tables}
 
@@ -605,7 +596,7 @@ SHOW STATS_HEALTHY [ShowLikeOrWhere];
 SHOW STATS_HISTOGRAMS [ShowLikeOrWhere]
 ```
 
-このステートメントは、異なる値の数と、すべての列の`NULL`の数を返します。 `ShowLikeOrWhere`を使用して、必要な情報をフィルタリングできます。
+このステートメントは、異なる値の数と、すべての列の`NULL`の数を返します。 `ShowLikeOrWhere`使用して、必要な情報をフィルタリングできます。
 
 現在、 `SHOW STATS_HISTOGRAMS`ステートメントは次の 10 列を返します。
 
@@ -638,23 +629,23 @@ SHOW STATS_BUCKETS [ShowLikeOrWhere]
 
 ![SHOW STATS\_BUCKETS](/media/sqlgram/SHOW_STATS_BUCKETS.png)
 
-このステートメントは、すべてのバケットに関する情報を返します。 `ShowLikeOrWhere`を使用して、必要な情報をフィルタリングできます。
+このステートメントは、すべてのバケットに関する情報を返します。 `ShowLikeOrWhere`使用して、必要な情報をフィルタリングできます。
 
 現在、 `SHOW STATS_BUCKETS`ステートメントは次の 11 列を返します。
 
-| カラム名             | 説明                                                                         |
-| :--------------- | :------------------------------------------------------------------------- |
-| `db_name`        | データベース名                                                                    |
-| `table_name`     | テーブル名                                                                      |
-| `partition_name` | パーティション名                                                                   |
-| `column_name`    | 列名 ( `is_index`が`0`の場合) またはインデックス名 ( `is_index`が`1`の場合)                    |
-| `is_index`       | インデックス列かどうか                                                                |
-| `bucket_id`      | バケットの ID                                                                   |
-| `count`          | バケットと前のバケットに該当するすべての値の数                                                    |
-| `repeats`        | 最大値の出現回数                                                                   |
-| `lower_bound`    | 最小値                                                                        |
-| `upper_bound`    | 最大値                                                                        |
-| `ndv`            | バケット内の異なる値の数。 `tidb_analyze_version` = `1`の場合、 `ndv`は常に`0`であり、実際の意味はありません。 |
+| カラム名             | 説明                                                                        |
+| :--------------- | :------------------------------------------------------------------------ |
+| `db_name`        | データベース名                                                                   |
+| `table_name`     | テーブル名                                                                     |
+| `partition_name` | パーティション名                                                                  |
+| `column_name`    | 列名 ( `is_index`が`0`の場合) またはインデックス名 ( `is_index`が`1`の場合)                   |
+| `is_index`       | インデックス列かどうか                                                               |
+| `bucket_id`      | バケットの ID                                                                  |
+| `count`          | バケットと前のバケットに該当するすべての値の数                                                   |
+| `repeats`        | 最大値の出現回数                                                                  |
+| `lower_bound`    | 最小値                                                                       |
+| `upper_bound`    | 最大値                                                                       |
+| `ndv`            | バケット内の異なる値の数。 `tidb_analyze_version` = `1`の場合、 `ndv`常に`0`であり、実際の意味はありません。 |
 
 ### トップN情報 {#top-n-information}
 

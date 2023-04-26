@@ -31,12 +31,12 @@ TiDB クラスターを起動すると、コマンドライン オプション�
 
 ## <code>--cors</code> {#code-cors-code}
 
--   TiDB HTTP ステータス サービスの Cross-Origin Request Sharing (CORS) リクエストに`Access-Control-Allow-Origin`の値を指定します
+-   TiDB HTTP ステータス サービスの Cross-Origin Request Sharing (CORS) リクエストに`Access-Control-Allow-Origin`値を指定します
 -   デフォルト: `""`
 
 ## <code>--enable-binlog</code> {#code-enable-binlog-code}
 
--   TiDB バイナリログ生成を有効または無効にします
+-   TiDBbinlog生成を有効または無効にします
 -   デフォルト: `false`
 
 ## <code>--host</code> {#code-host-code}
@@ -44,7 +44,7 @@ TiDB クラスターを起動すると、コマンドライン オプション�
 -   TiDBサーバーが監視するホスト アドレス
 -   デフォルト: `"0.0.0.0"`
 -   TiDBサーバーはこのアドレスを監視します。
--   `"0.0.0.0"`のアドレスは、デフォルトですべてのネットワーク カードを監視します。複数のネットワーク カードがある場合は、サービスを提供するネットワーク カードを`192.168.100.113`などで指定します。
+-   `"0.0.0.0"`アドレスは、デフォルトですべてのネットワーク カードを監視します。複数のネットワーク カードがある場合は、サービスを提供するネットワーク カードを`192.168.100.113`などで指定します。
 
 ## <code>--initialize-insecure</code> {#code-initialize-insecure-code}
 
@@ -55,6 +55,11 @@ TiDB クラスターを起動すると、コマンドライン オプション�
 
 -   セキュア モードで tidb-server をブートストラップします。
 -   デフォルト: `false`
+
+## <code>--initialize-sql-file</code> {#code-initialize-sql-file-code}
+
+-   TiDB クラスターの初回起動時に実行する SQL スクリプト。詳細は[構成項目`initialize-sql-file`](/tidb-configuration-file.md#initialize-sql-file-new-in-v651)を参照
+-   デフォルト: `""`
 
 ## <code>-L</code> {#code-l-code}
 
@@ -100,22 +105,27 @@ TiDB クラスターを起動すると、コマンドライン オプション�
 
 ## <code>--path</code> {#code-path-code}
 
--   「unistore」などのローカル ストレージ エンジンのデータ ディレクトリへのパス
+-   「unistore」などのローカルstorageエンジンのデータ ディレクトリへのパス
 -   `--store = tikv`の場合、パスを指定する必要があります。 `--store = unistore`の場合、パスを指定しない場合はデフォルト値が使用されます。
--   TiKV のような分散ストレージ エンジンの場合、 `--path`は実際の PD アドレスを指定します。 PDサーバーを 192.168.100.113:2379、192.168.100.114:2379、および 192.168.100.115:2379 にデプロイすると仮定すると、 `--path`の値は「192.168.100.113:2379、192.168.100.114:22079、8.195」です。 .
+-   TiKV のような分散storageエンジンの場合、 `--path`実際の PD アドレスを指定します。 PDサーバーを 192.168.100.113:2379、192.168.100.114:2379、および 192.168.100.115:2379 にデプロイすると仮定すると、 `--path`の値は「192.168.100.113:2379、192.168.100.114:23200. 379&quot; .
 -   デフォルト: `"/tmp/tidb"`
--   `tidb-server --store=unistore --path=""`を使用して、純粋なメモリ内 TiDB を有効にすることができます。
+-   `tidb-server --store=unistore --path=""`使用して、純粋なメモリ内 TiDB を有効にすることができます。
+
+## <code>--proxy-protocol-fallbackable</code> {#code-proxy-protocol-fallbackable-code}
+
+-   PROXY プロトコル フォールバック モードを有効にするかどうかを制御します。このパラメーターが`true`に設定されている場合、TiDB は PROXY クライアント接続と、PROXY プロトコル ヘッダーなしのクライアント接続を受け入れます。デフォルトでは、TiDB は PROXY プロトコル ヘッダーを持つクライアント接続のみを受け入れます。
+-   デフォルト値: `false`
 
 ## <code>--proxy-protocol-networks</code> {#code-proxy-protocol-networks-code}
 
 -   [プロキシ プロトコル](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt)を使用して TiDB に接続できるプロキシ サーバーの IP アドレスのリスト。
 -   デフォルト: `""`
 -   一般に、リバース プロキシの背後にある TiDB にアクセスすると、TiDB はリバース プロキシサーバーの IP アドレスをクライアントの IP アドレスとして取得します。 PROXY プロトコルを有効にすることで、HAProxy などのこのプロトコルをサポートするリバース プロキシは、実際のクライアント IP アドレスを TiDB に渡すことができます。
--   このフラグを構成した後、TiDB は、構成されたソース IP アドレスが PROXY プロトコルを使用して TiDB に接続できるようにします。 PROXY 以外のプロトコルが使用されている場合、この接続は拒否されます。このフラグを空のままにすると、PROXY プロトコルを使用して IP アドレスが TiDB に接続できなくなります。値は、IP アドレス (192.168.1.50) または CIDR (192.168.1.0/24) で、区切り記号として`,`を使用できます。 `*`は任意の IP アドレスを意味します。
+-   このフラグを構成した後、TiDB は、構成されたソース IP アドレスが PROXY プロトコルを使用して TiDB に接続できるようにします。 PROXY 以外のプロトコルが使用されている場合、この接続は拒否されます。このフラグを空のままにすると、PROXY プロトコルを使用して IP アドレスが TiDB に接続できなくなります。値は、IP アドレス (192.168.1.50) または CIDR (192.168.1.0/24) で、区切り記号として`,`を使用できます。 `*`任意の IP アドレスを意味します。
 
 > **警告：**
 >
-> `*`を使用すると、任意の IP アドレスのクライアントがその IP アドレスを報告できるようになり、セキュリティ上のリスクが生じる可能性があるため、注意して使用してください。さらに、 `*`を使用すると、TiDB に直接接続する内部コンポーネント(TiDB ダッシュボードなど) が使用できなくなる可能性もあります。
+> `*`を使用すると、任意の IP アドレスのクライアントがその IP アドレスを報告できるようになり、セキュリティ上のリスクが生じる可能性があるため、注意して使用してください。また、すべての IP アドレスからのプロキシ接続を許可するように`*`を設定しても、TiDB に直接接続する内部コンポーネント (TiDB ダッシュボードなど) は TiDBサーバーに接続できなくなります。 `--proxy-protocol-fallbackable` ～ `true`に設定することをお勧めします。
 
 > **ノート：**
 >
@@ -144,7 +154,7 @@ TiDB クラスターを起動すると、コマンドライン オプション�
 
 -   `tidb-server`が DDL ステートメントを実行するかどうかを確認し、クラスター内で`tidb-server`の数が 2 つを超える場合に設定します
 -   デフォルト: `true`
--   値は (true) または (false) です。 (true) は、 `tidb-server`が DDL 自体を実行することを示します。 (false) は、 `tidb-server`が DDL 自体を実行しないことを示します。
+-   値は (true) または (false) です。 (true) は、 `tidb-server` DDL 自体を実行することを示します。 (false) は、 `tidb-server` DDL 自体を実行しないことを示します。
 
 ## <code>--socket string</code> {#code-socket-string-code}
 
@@ -167,9 +177,9 @@ TiDB クラスターを起動すると、コマンドライン オプション�
 
 ## <code>--store</code> {#code-store-code}
 
--   最レイヤーで TiDB が使用するストレージ エンジンを指定します。
+-   最レイヤーで TiDB が使用するstorageエンジンを指定します。
 -   デフォルト: `"unistore"`
--   「unistore」または「tikv」を選択できます。 (「unistore」はローカル ストレージ エンジン、「tikv」は分散ストレージ エンジン)
+-   「unistore」または「tikv」を選択できます。 (「unistore」はローカルstorageエンジン、「tikv」は分散storageエンジン)
 
 ## <code>--temp-dir</code> {#code-temp-dir-code}
 
@@ -189,7 +199,7 @@ TiDB クラスターを起動すると、コマンドライン オプション�
 
 ## <code>--plugin-dir</code> {#code-plugin-dir-code}
 
--   プラグインの格納ディレクトリ。
+-   プラグインのstorageディレクトリ。
 -   デフォルト: `"/data/deploy/plugin"`
 
 ## <code>--plugin-load</code> {#code-plugin-load-code}

@@ -7,7 +7,7 @@ summary: Learn the `INSPECTION_RESULT` diagnostic result table.
 
 TiDB には、システム内の障害や隠れた問題を検出するための診断ルールが組み込まれています。
 
-`INSPECTION_RESULT`の診断機能により、問題を迅速に発見し、反復的な手作業を減らすことができます。 `select * from information_schema.inspection_result`ステートメントを使用して、内部診断をトリガーできます。
+`INSPECTION_RESULT`診断機能により、問題を迅速に発見し、反復的な手作業を減らすことができます。 `select * from information_schema.inspection_result`ステートメントを使用して、内部診断をトリガーできます。
 
 `information_schema.inspection_result`診断結果テーブル`information_schema.inspection_result`の構造は次のとおりです。
 
@@ -38,9 +38,9 @@ DESC inspection_result;
 フィールドの説明:
 
 -   `RULE` : 診断ルールの名前。現在、次のルールが利用可能です。
-    -   `config` : 構成が一貫して適切かどうかを確認します。同じ構成が異なるインスタンスで矛盾している場合、 `warning`の診断結果が生成されます。
-    -   `version` : バージョンの整合性チェック。同じバージョンが異なるインスタンスで矛盾している場合、 `warning`の診断結果が生成されます。
-    -   `node-load` :サーバーの負荷をチェックします。現在のシステム負荷が高すぎる場合、対応する`warning`の診断結果が生成されます。
+    -   `config` : 構成が一貫して適切かどうかを確認します。同じ構成が異なるインスタンスで矛盾している場合、 `warning`診断結果が生成されます。
+    -   `version` : バージョンの整合性チェック。同じバージョンが異なるインスタンスで矛盾している場合、 `warning`診断結果が生成されます。
+    -   `node-load` :サーバーの負荷をチェックします。現在のシステム負荷が高すぎる場合、対応する`warning`診断結果が生成されます。
     -   `critical-error` : システムの各モジュールが重大なエラーを定義します。重大なエラーが対応する期間内にしきい値を超えると、警告の診断結果が生成されます。
     -   `threshold-check` : 診断システムは主要メトリックのしきい値をチェックします。しきい値を超えると、対応する診断情報が生成されます。
 -   `ITEM` : 各ルールは異なる項目を診断します。このフィールドは、各ルールに対応する特定の診断項目を示します。
@@ -138,8 +138,8 @@ DETAILS   | max duration of 172.16.5.40:10089 tidb get-token-duration is too slo
 
 上記の診断結果から、次の問題を検出できます。
 
--   最初の行は、 `172.16.5.40:4009`の TiDB インスタンスが`2020/03/26 00:05:45.670`で再起動されることを示しています。
--   2 行目は、 `172.16.5.40:10089`の TiDB インスタンスの最大`get-token-duration`時間は 0.234 秒ですが、予想される時間は 0.001 秒未満であることを示しています。
+-   最初の行は、 `172.16.5.40:4009` TiDB インスタンスが`2020/03/26 00:05:45.670`で再起動されることを示しています。
+-   2 行目は、 `172.16.5.40:10089` TiDB インスタンスの最大`get-token-duration`時間は 0.234 秒ですが、予想される時間は 0.001 秒未満であることを示しています。
 
 たとえば、条件を指定して、 `critical`レベルの診断結果を照会することもできます。
 
@@ -183,7 +183,7 @@ select * from information_schema.inspection_rules where type='inspection';
 
 ### <code>config</code>診断ルール {#code-config-code-diagnostic-rule}
 
-`config`番目の診断ルールでは、次の 2 つの診断ルールが`CLUSTER_CONFIG`システム テーブルをクエリすることによって実行されます。
+`config`診断ルールでは、次の 2 つの診断ルールが`CLUSTER_CONFIG`システム テーブルをクエリすることによって実行されます。
 
 -   同じコンポーネントの構成値が一致しているかどうかを確認してください。すべての構成アイテムにこの一貫性チェックがあるわけではありません。整合性チェックの許可リストは次のとおりです。
 
@@ -229,7 +229,7 @@ select * from information_schema.inspection_rules where type='inspection';
 
 ### <code>version</code>診断ルール {#code-version-code-diagnostic-rule}
 
-`version`の診断ルールは、 `CLUSTER_INFO`システム テーブルを照会することによって、同じコンポーネントのバージョン ハッシュが一貫しているかどうかを確認します。次の例を参照してください。
+`version`診断ルールは、 `CLUSTER_INFO`システム テーブルを照会することによって、同じコンポーネントのバージョン ハッシュが一貫しているかどうかを確認します。次の例を参照してください。
 
 {{< copyable "" >}}
 
@@ -251,14 +251,14 @@ DETAILS   | the cluster has 2 different tidb versions, execute the sql to see mo
 
 ### <code>critical-error</code>診断ルール {#code-critical-error-code-diagnostic-rule}
 
-`critical-error`つの診断ルールで、次の 2 つの診断ルールが実行されます。
+`critical-error`診断ルールで、次の 2 つの診断ルールが実行されます。
 
 -   メトリクス スキーマ内の関連する監視システム テーブルをクエリして、クラスターに次のエラーがあるかどうかを検出します。
 
     | 成分   | エラー名                    | 監視テーブル                               | エラーの説明                                       |
     | ---- | ----------------------- | ------------------------------------ | -------------------------------------------- |
     | TiDB | パニックカウント                | tidb_panic_count_total_count         | TiDB でパニックが発生します。                            |
-    | TiDB | binlog エラー              | tidb_binlog_error_total_count        | TiDB が binlog を書き込むときにエラーが発生します。             |
+    | TiDB | binlog エラー              | tidb_binlog_error_total_count        | TiDB がbinlogを書き込むときにエラーが発生します。               |
     | TiKV | クリティカル・エラー              | tikv_critical_error_total_coun       | TiKVの致命的なエラー。                                |
     | TiKV | スケジューラーはビジーです           | tikv_scheduler_is_busy_total_count   | TiKV スケジューラがビジー状態であるため、TiKV が一時的に利用できなくなります。 |
     | TiKV | コプロセッサがビジーです            | tikv_coprocessor_is_busy_total_count | TiKVコプロセッサーがビジー状態です。                         |
@@ -269,7 +269,7 @@ DETAILS   | the cluster has 2 different tidb versions, execute the sql to see mo
 
 ### <code>threshold-check</code>診断ルール {#code-threshold-check-code-diagnostic-rule}
 
-`threshold-check`の診断ルールは、メトリック スキーマ内の関連する監視システム テーブルをクエリすることによって、クラスター内の次のメトリックがしきい値を超えているかどうかを確認します。
+`threshold-check`診断ルールは、メトリック スキーマ内の関連する監視システム テーブルをクエリすることによって、クラスター内の次のメトリックがしきい値を超えているかどうかを確認します。
 
 | 成分   | モニタリング指標                    | 監視テーブル                              | 期待値        | 説明                                                                                                                   |
 | :--- | :-------------------------- | :---------------------------------- | :--------- | :------------------------------------------------------------------------------------------------------------------- |
@@ -289,7 +289,7 @@ DETAILS   | the cluster has 2 different tidb versions, execute the sql to see mo
 | TiKV | データ ブロック キャッシュ ヒット          | tikv_block_data_cache_hit           | 0.80       | TiKVのデータブロックキャッシュのヒット率。                                                                                              |
 | TiKV | リーダースコアバランス                 | pd_scheduler_store_status           | &lt; 0.05  | 各 TiKV インスタンスのリーダー スコアが均衡しているかどうかを確認します。インスタンス間の予想差は 5% 未満です。                                                        |
 | TiKV | 地域スコアバランス                   | pd_scheduler_store_status           | &lt; 0.05  | 各 TiKV インスタンスのリージョンスコアが均衡しているかどうかを確認します。インスタンス間の予想差は 5% 未満です。                                                        |
-| TiKV | 店舗利用可能残高                    | pd_scheduler_store_status           | &lt; 0.2   | 各 TiKV インスタンスの使用可能なストレージのバランスが取れているかどうかを確認します。インスタンス間の予想差は 20% 未満です。                                                 |
+| TiKV | 店舗利用可能残高                    | pd_scheduler_store_status           | &lt; 0.2   | 各 TiKV インスタンスの使用可能なstorageのバランスが取れているかどうかを確認します。インスタンス間の予想差は 20% 未満です。                                               |
 | TiKV | 地域数                         | pd_scheduler_store_status           | &lt; 20000 | 各 TiKV インスタンスのリージョン数を確認します。 1 つのインスタンスで予想されるリージョン数は 20,000 未満です。                                                     |
 | PD   | 地域の健康                       | pd_region_health                    | &lt; 100   | クラスター内でスケジューリング中のリージョンの数を検出します。予想数は合計で 100 未満です。                                                                     |
 

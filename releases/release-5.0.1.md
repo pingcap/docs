@@ -38,7 +38,7 @@ TiDB バージョン: 5.0.1
 -   TiDB
 
     -   射影結果が空の場合、プロジェクト消去の実行結果がおかしくなることがある問題を修正[#24093](https://github.com/pingcap/tidb/pull/24093)
-    -   場合によっては列に`NULL`の値が含まれている場合に、間違ったクエリ結果が返される問題を修正し[#24063](https://github.com/pingcap/tidb/pull/24063) 。
+    -   場合によっては列に`NULL`値が含まれている場合に、間違ったクエリ結果が返される問題を修正します[#24063](https://github.com/pingcap/tidb/pull/24063)
     -   スキャンに仮想列が含まれている場合、MPP プランの生成を禁止する[#24058](https://github.com/pingcap/tidb/pull/24058)
     -   Plan Cache [#24043](https://github.com/pingcap/tidb/pull/24043)での`PointGet`と`TableDual`の間違った再利用を修正
     -   オプティマイザーがクラスター化インデックス[#24042](https://github.com/pingcap/tidb/pull/24042)の`IndexMerge`プランを構築するときに発生するエラーを修正します。
@@ -48,7 +48,7 @@ TiDB バージョン: 5.0.1
     -   バイナリ リテラル定数のインデックス範囲が正しく構築されていない問題を修正します[#24041](https://github.com/pingcap/tidb/pull/24041)
     -   場合によっては`IN`句の潜在的な間違った結果を修正します[#24023](https://github.com/pingcap/tidb/pull/24023)
     -   一部の文字列関数の間違った結果を修正します[#23879](https://github.com/pingcap/tidb/pull/23879)
-    -   ユーザーが`REPLACE`の操作を実行するには、テーブルに対して`INSERT`と`DELETE`の両方の権限が必要です[#23939](https://github.com/pingcap/tidb/pull/23939)
+    -   ユーザーが`REPLACE`操作を実行するには、テーブルに対して`INSERT`と`DELETE`両方の権限が必要です[#23939](https://github.com/pingcap/tidb/pull/23939)
     -   ポイント クエリ[#24070](https://github.com/pingcap/tidb/pull/24070)を実行するときのパフォーマンスの低下を修正します。
     -   間違った`TableDual`バイナリとバイトの比較によって引き起こされた計画を修正します[#23918](https://github.com/pingcap/tidb/pull/23918)
 
@@ -61,19 +61,19 @@ TiDB バージョン: 5.0.1
 
 -   TiFlash
 
-    -   ストレージ エンジンが一部の範囲のデータを削除できない問題を修正
+    -   storageエンジンが一部の範囲のデータを削除できない問題を修正
     -   時刻型を整数型にキャストすると、結果が正しくなくなる問題を修正
     -   `receiver`が 10 秒以内に対応するタスクを見つけられないバグを修正
     -   `cancelMPPQuery`に無効なイテレータが存在する可能性がある問題を修正
     -   `bitwise`オペレータの挙動がTiDBと異なる不具合を修正
     -   `prefix key`を使用するときに範囲が重複することによって引き起こされるアラートの問題を修正します。
     -   文字列型を整数型にキャストしたときに誤った結果が返される問題を修正
-    -   連続した高速書き込みによってTiFlashがメモリになる問題を修正
-    -   列名が重複しているとTiFlashでエラーが発生する問題を修正
-    -   TiFlashが MPP プランの解析に失敗する問題を修正
+    -   連続した高速書き込みによってTiFlash がメモリ不足になる問題を修正
+    -   列名が重複しているとTiFlash でエラーが発生する問題を修正
+    -   TiFlash がMPP プランの解析に失敗する問題を修正
     -   テーブル GC 中に null ポインターの例外が発生する可能性がある潜在的な問題を修正します。
     -   削除されたテーブルにデータを書き込むときに発生するTiFlashpanicの問題を修正します
-    -   BR復元中にTiFlashがpanicすることがある問題を修正
+    -   BR復元中にTiFlash がpanicすることがある問題を修正
 
 -   ツール
 

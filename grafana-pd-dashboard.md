@@ -14,10 +14,10 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
 以下は、PD ダッシュボード メトリック アイテムの説明です。
 
 -   PD ロール: 現在の PD インスタンスのロール
--   ストレージ容量: この TiDB クラスターの合計ストレージ容量
--   現在のストレージ サイズ: TiDB クラスターによって現在使用されているストレージ サイズ
--   現在のストレージ使用率: 現在のストレージ使用率
--   通常のストア: 正常なストレージ インスタンスの数
+-   ストレージ容量: この TiDB クラスターの合計storage容量
+-   現在のstorageサイズ: TiDB クラスターによって現在使用されているstorageサイズ
+-   現在のstorage使用率: 現在のstorage使用率
+-   通常のストア: 正常なstorageインスタンスの数
 -   Number of Regions: クラスタ リージョンの合計数
 -   異常な店舗: 異常な店舗の数。通常の値は`0`です。数値が`0`より大きい場合、少なくとも 1 つのインスタンスが異常であることを意味します。
 -   リージョンの正常性: 保留中のピア、ダウンしているピア、余分なピア、オフラインのピア、欠落しているピア、学習者のピア、不適切な名前空間など、異常なリージョンの数によって示されるリージョンの正常性ステータス。通常、保留中のピアの数は`100`未満にする必要があります。不足しているピアが永続的に`0`を超えないようにする必要があります。空のリージョンが多数存在する場合は、時間内にリージョンマージを有効にします。
@@ -49,7 +49,7 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
 
 ![PD Dashboard - Operator metrics](/media/pd-dashboard-operator-v4.png)
 
-## 統計- 残高 {#statistics-balance}
+## 統計- バランス {#statistics-balance}
 
 -   ストア容量: TiKV インスタンスあたりの容量サイズ
 -   Store available: TiKV インスタンスあたりの利用可能な容量サイズ
@@ -120,9 +120,9 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
 
 -   トランザクション数の処理: etcd がトランザクションを処理する割合
 -   99% 取引処理時間: 取引処理率 (P99)
--   99% WAL fsync 期間: WAL を永続ストレージに書き込むのにかかった時間。 `1s`未満です（P99）
+-   99% WAL fsync 期間: WAL を永続storageに書き込むのにかかった時間。 `1s`未満です（P99）
 -   99% ピア ラウンド トリップ時間 (秒): etcd のネットワークレイテンシー(P99) |値が`1s`未満です
--   etcd disk WAL fsync rate: WAL を永続ストレージに書き込む速度
+-   etcd disk WAL fsync rate: WAL を永続storageに書き込む速度
 -   Raft term: Raftの現在の用語
 -   Raftコミット インデックス: Raftの最後にコミットされたインデックス
 -   Raft適用インデックス: Raftの最後の適用インデックス
@@ -142,13 +142,13 @@ Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter�
 -   ハートビート リージョン イベントの QPS: キャッシュの更新やデータの永続化を含む、ハートビートメッセージの処理の QPS
 -   リージョンハートビートレポート: インスタンスごとに PD に報告されたハートビートの数
 -   リージョンハートビートレポート エラー: ステータスが`error`のハートビートの数
--   リージョン ハートビート report active: ステータスが`ok`のハートビートの数
+-   リージョン ハートビート report active: ステータスが`ok`ハートビートの数
 -   リージョンスケジュール プッシュ: PD から送信された、TiKV インスタンスごとの対応するスケジュール コマンドの数
 -   99%リージョンハートビートレイテンシー: TiKV インスタンスごとのハートビートレイテンシー(P99)
 
 ![PD Dashboard - Heartbeat metrics](/media/pd-dashboard-heartbeat-v4.png)
 
-## リージョンストレージ {#region-storage}
+## リージョンstorage {#region-storage}
 
 -   Syncer Index: リーダーが記録したリージョン変更履歴の最大インデックス
 -   history last index:リージョンの変更履歴がフォロワーと正常に同期された最後のインデックス

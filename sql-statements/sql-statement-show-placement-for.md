@@ -5,7 +5,7 @@ summary: The usage of SHOW PLACEMENT FOR in TiDB.
 
 # のプレースメントを表示 {#show-placement-for}
 
-`SHOW PLACEMENT FOR`は、すべての配置オプションを要約し、特定のテーブル、データベース スキーマ、またはパーティションの標準形式で表示します。
+`SHOW PLACEMENT FOR` 、すべての配置オプションを要約し、特定のテーブル、データベース スキーマ、またはパーティションの標準形式で表示します。
 
 このステートメントは、配置Driver(PD) が配置のスケジューリングで行った現在の進行状況を`Scheduling_State`フィールドが示す結果セットを返します。
 

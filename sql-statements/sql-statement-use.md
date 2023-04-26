@@ -3,7 +3,7 @@ title: USE | TiDB SQL Statement Reference
 summary: An overview of the usage of USE for the TiDB database.
 ---
 
-# 使用する {#use}
+# 使用 {#use}
 
 `USE`ステートメントは、ユーザー セッションの現在のデータベースを選択します。
 

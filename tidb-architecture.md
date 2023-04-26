@@ -24,7 +24,7 @@ summary: The key architecture components of the TiDB platform
 
 ## TiDBサーバー {#tidb-server}
 
-[TiDBサーバー](/tidb-computing.md)は、MySQL プロトコルの接続エンドポイントを外部に公開するステートレス SQLレイヤーです。 TiDBサーバーは SQL 要求を受け取り、SQL の解析と最適化を実行し、最終的に分散実行計画を生成します。水平方向にスケーラブルであり、Linux Virtual Server (LVS)、HAProxy、F5 などの負荷分散コンポーネントを介して、外部への統合インターフェイスを提供します。データを保存せず、計算と SQL 分析のみを行い、実際のデータ読み取り要求を TiKV ノード (またはTiFlashノード) に送信します。
+[TiDBサーバー](/tidb-computing.md) 、MySQL プロトコルの接続エンドポイントを外部に公開するステートレス SQLレイヤーです。 TiDBサーバーはSQL 要求を受け取り、SQL の解析と最適化を実行し、最終的に分散実行計画を生成します。水平方向にスケーラブルであり、Linux Virtual Server (LVS)、HAProxy、F5 などの負荷分散コンポーネントを介して、外部への統合インターフェイスを提供します。データを保存せず、計算と SQL 分析のみを行い、実際のデータ読み取り要求を TiKV ノード (またはTiFlashノード) に送信します。
 
 ## 配置Driver(PD)サーバー {#placement-driver-pd-server}
 
@@ -34,22 +34,22 @@ summary: The key architecture components of the TiDB platform
 
 ### TiKVサーバー {#tikv-server}
 
-[TiKVサーバー](/tidb-storage.md)はデータの保存を担当します。 TiKV は、分散トランザクション キー値ストレージ エンジンです。
+[TiKVサーバー](/tidb-storage.md)はデータの保存を担当します。 TiKV は、分散トランザクション キー値storageエンジンです。
 
 <CustomContent platform="tidb">
 
-[リージョン](/glossary.md#regionpeerraft-group)はデータを格納する基本単位です。各リージョンには、StartKey から EndKey までの左が閉じて右が開いた間隔である特定のキー範囲のデータが格納されます。
+[リージョン](/glossary.md#regionpeerraft-group)はデータを格納する基本単位です。各リージョンには、 StartKey から EndKey までの左が閉じて右が開いた間隔である特定のキー範囲のデータが格納されます。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[リージョン](/tidb-cloud/tidb-cloud-glossary.md#region)はデータを格納する基本単位です。各リージョンには、StartKey から EndKey までの左が閉じて右が開いた間隔である特定のキー範囲のデータが格納されます。
+[リージョン](/tidb-cloud/tidb-cloud-glossary.md#region)はデータを格納する基本単位です。各リージョンには、 StartKey から EndKey までの左が閉じて右が開いた間隔である特定のキー範囲のデータが格納されます。
 
 </CustomContent>
 
-各 TiKV ノードには複数のリージョンが存在します。 TiKV API は、キーと値のペア レベルで分散トランザクションをネイティブにサポートし、デフォルトでスナップショット分離レベルの分離をサポートします。これは、TiDB が SQL レベルで分散トランザクションをサポートする方法の中核です。 SQL ステートメントを処理した後、TiDBサーバーは SQL 実行計画を TiKV API への実際の呼び出しに変換します。したがって、データはTiKVに保存されます。 TiKV のすべてのデータは、複数のレプリカ (デフォルトでは 3 つのレプリカ) で自動的に維持されるため、TiKV はネイティブの高可用性を備え、自動フェイルオーバーをサポートします。
+各 TiKV ノードには複数のリージョンが存在します。 TiKV API は、キーと値のペア レベルで分散トランザクションをネイティブにサポートし、デフォルトでスナップショット分離レベルの分離をサポートします。これは、TiDB が SQL レベルで分散トランザクションをサポートする方法の中核です。 SQL ステートメントを処理した後、TiDBサーバーはSQL 実行計画を TiKV API への実際の呼び出しに変換します。したがって、データはTiKVに保存されます。 TiKV のすべてのデータは、複数のレプリカ (デフォルトでは 3 つのレプリカ) で自動的に維持されるため、TiKV はネイティブの高可用性を備え、自動フェイルオーバーをサポートします。
 
 ### TiFlashサーバー {#tiflash-server}
 
-[TiFlashサーバー](/tiflash/tiflash-overview.md)は特殊なタイプのストレージサーバーです。通常の TiKV ノードとは異なり、 TiFlashは主に分析処理を高速化するように設計された列ごとにデータを保存します。
+[TiFlashサーバー](/tiflash/tiflash-overview.md)は特殊なタイプのstorageサーバーです。通常の TiKV ノードとは異なり、 TiFlash は主に分析処理を高速化するように設計された列ごとにデータを保存します。

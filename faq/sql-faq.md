@@ -26,7 +26,7 @@ summary: Learn about the FAQs related to TiDB SQL.
 
 ## 適切なクエリ プランを選択する方法ヒントを使用する必要がありますか?または、ヒントを使用できますか？ {#how-to-choose-the-right-query-plan-do-i-need-to-use-hints-or-can-i-use-hints}
 
-TiDB には、コストベースのオプティマイザが含まれています。ほとんどの場合、オプティマイザーが最適なクエリ プランを選択します。オプティマイザがうまく機能しない場合でも、 [オプティマイザーのヒント](/optimizer-hints.md)を使用してオプティマイザに介入できます。
+TiDB には、コストベースのオプティマイザが含まれています。ほとんどの場合、オプティマイザーが最適なクエリ プランを選択します。オプティマイザがうまく機能しない場合でも、 [オプティマイザーのヒント](/optimizer-hints.md)使用してオプティマイザに介入できます。
 
 さらに、 [SQL バインディング](/sql-plan-management.md#sql-binding)を使用して、特定の SQL ステートメントのクエリ プランを修正することもできます。
 
@@ -58,7 +58,7 @@ DROP GLOBAL BINDING for
 
 [システム変数](/system-variables.md)を参照してください。
 
-## <code>ORDER BY</code>を省略した場合、結果の順序が MySQL とは異なります {#the-order-of-results-is-different-from-mysql-when-code-order-by-code-is-omitted}
+## <code>ORDER BY</code>省略した場合、結果の順序が MySQL とは異なります {#the-order-of-results-is-different-from-mysql-when-code-order-by-code-is-omitted}
 
 これはバグではありません。レコードのデフォルトの順序は、さまざまな状況に依存し、一貫性は保証されません。
 
@@ -124,7 +124,7 @@ TiDB では、システム変数[`tidb_enable_ordered_result_mode`](/system-vari
 
 ## TiDB は<code>SELECT FOR UPDATE</code>をサポートしていますか? {#does-tidb-support-code-select-for-update-code}
 
-はい。悲観的ロック (TiDB v3.0 以降のデフォルト) を使用する場合、 `SELECT FOR UPDATE`の実行は MySQL と同様に動作します。
+はい。悲観的ロック (TiDB v3.0.8 以降のデフォルト) を使用する場合、 `SELECT FOR UPDATE`回の実行は MySQL と同様に動作します。
 
 楽観的ロックを使用する場合、 `SELECT FOR UPDATE`はトランザクションの開始時にデータをロックしませんが、トランザクションのコミット時に競合をチェックします。チェックで競合が明らかになった場合、コミットしているトランザクションはロールバックします。
 
@@ -138,22 +138,22 @@ TiDB はデフォルトで UTF-8 文字セットを使用し、現在は UTF-8 �
 
 トランザクション内のステートメントの最大数は、デフォルトで 5000 です。
 
-楽観的トランザクション モードでは、トランザクションの再試行が有効になっている場合、デフォルトの上限は 5000 です[`stmt-count-limit`](/tidb-configuration-file.md#stmt-count-limit)パラメータを使用して制限を調整できます。
+楽観的トランザクション モードでは、トランザクションの再試行が有効に[`stmt-count-limit`](/tidb-configuration-file.md#stmt-count-limit)ている場合、デフォルトの上限は 5000 です。1 パラメータを使用して制限を調整できます。
 
 ## 後で挿入されたデータの自動インクリメント ID が、以前に TiDB に挿入されたデータよりも小さいのはなぜですか? {#why-does-the-auto-increment-id-of-the-later-inserted-data-is-smaller-than-that-of-the-earlier-inserted-data-in-tidb}
 
 TiDB の自動インクリメント ID 機能は、自動的にインクリメンタルで一意であることのみが保証されていますが、順次割り当てられることは保証されていません。現在、TiDB は ID をバッチで割り当てています。データが複数の TiDB サーバーに同時に挿入される場合、割り当てられる ID は連続しません。複数のスレッドが同時に複数の`tidb-server`インスタンスにデータを挿入すると、後で挿入されるデータの自動インクリメント ID が小さくなることがあります。 TiDB では、整数フィールドに`AUTO_INCREMENT`を指定できますが、1 つのテーブルに`AUTO_INCREMENT`フィールドを 1 つだけ指定できます。詳細については、 [自動インクリメント ID](/mysql-compatibility.md#auto-increment-id)および[AUTO_INCREMENT 属性](/auto-increment.md)を参照してください。
 
-## <code>sql_mode</code>で sql_mode を変更するにはどうすればよいですか? {#how-do-i-modify-the-code-sql-mode-code-in-tidb}
+## TiDB で<code>sql_mode</code>を変更するにはどうすればよいですか? {#how-do-i-modify-the-code-sql-mode-code-in-tidb}
 
 TiDB は、SESSION または GLOBAL ベースでの[`sql_mode`](/system-variables.md#sql_mode)システム変数の変更をサポートしています。
 
--   [`GLOBAL`](/sql-statements/sql-statement-set-variable.md)のスコープ変数への変更は、クラスターの残りのサーバーに伝達され、再起動後も保持されます。これは、各 TiDBサーバーで`sql_mode`の値を変更する必要がないことを意味します。
+-   [`GLOBAL`](/sql-statements/sql-statement-set-variable.md)スコープ変数への変更は、クラスターの残りのサーバーに伝達され、再起動後も保持されます。これは、各 TiDBサーバーで`sql_mode`値を変更する必要がないことを意味します。
 -   `SESSION`のスコープ変数への変更は、現在のクライアント セッションにのみ影響します。サーバーを再起動すると、変更が失われます。
 
-## エラー: <code>java.sql.BatchUpdateExecption:statement count 5001 exceeds the transaction limitation</code>ます {#error-code-java-sql-batchupdateexecption-statement-count-5001-exceeds-the-transaction-limitation-code-while-using-sqoop-to-write-data-into-tidb-in-batches}
+## エラー: <code>java.sql.BatchUpdateExecption:statement count 5001 exceeds the transaction limitation</code> {#error-code-java-sql-batchupdateexecption-statement-count-5001-exceeds-the-transaction-limitation-code-while-using-sqoop-to-write-data-into-tidb-in-batches}
 
-Sqoop では、 `--batch`は各バッチで 100 個のステートメントをコミットすることを意味しますが、デフォルトでは各ステートメントには 100 個の SQL ステートメントが含まれます。したがって、100 * 100 = 10000 SQL ステートメントとなり、1 つの TiDB トランザクションで許可されるステートメントの最大数である 5000 を超えます。
+Sqoop では、 `--batch`各バッチで 100 個のステートメントをコミットすることを意味しますが、デフォルトでは各ステートメントには 100 個の SQL ステートメントが含まれます。したがって、100 * 100 = 10000 SQL ステートメントとなり、1 つの TiDB トランザクションで許可されるステートメントの最大数である 5000 を超えます。
 
 2 つのソリューション:
 
@@ -180,30 +180,32 @@ Sqoop では、 `--batch`は各バッチで 100 個のステートメントを�
 
 ## TiDB はデータを削除した直後にスペースを解放しますか? {#does-tidb-release-space-immediately-after-deleting-data}
 
-`DELETE` 、 `TRUNCATE` 、および`DROP`の操作のいずれも、データをすぐに解放しません。 `TRUNCATE`と`DROP`の操作では、TiDB GC (ガベージ コレクション) 時間 (既定では 10 分) の後、データが削除され、スペースが解放されます。 `DELETE`回の操作では、データは削除されますが、圧縮が実行されるまでスペースはすぐには解放されません。
+`DELETE` 、 `TRUNCATE` 、および`DROP`操作のいずれも、データをすぐに解放しません。 `TRUNCATE`と`DROP`の操作では、TiDB GC (ガベージ コレクション) 時間 (既定では 10 分) の後、データが削除され、スペースが解放されます。 `DELETE`の操作では、データは削除されますが、圧縮が実行されるまでスペースはすぐには解放されません。
 
 ## データが削除された後、クエリの速度が遅くなるのはなぜですか? {#why-does-the-query-speed-get-slow-after-data-is-deleted}
 
-大量のデータを削除すると、多くの不要なキーが残り、クエリの効率に影響します。この問題を解決するには、 [リージョンマージ](/best-practices/massive-regions-best-practices.md#method-3-enable-region-merge)の機能を使用できます。詳細は[TiDB ベスト プラクティスのデータ セクションの削除](https://en.pingcap.com/blog/tidb-best-practice/#write)を参照してください。
+大量のデータを削除すると、多くの不要なキーが残り、クエリの効率に影響します。この問題を解決するには、 [リージョンマージ](/best-practices/massive-regions-best-practices.md#method-3-enable-region-merge)機能を使用できます。詳細は[TiDB ベスト プラクティスのデータ セクションの削除](https://en.pingcap.com/blog/tidb-best-practice/#write)を参照してください。
 
-## データを削除した後、ストレージ スペースを再利用するのが遅い場合はどうすればよいですか? {#what-should-i-do-if-it-is-slow-to-reclaim-storage-space-after-deleting-data}
+## データを削除した後、storageスペースを再利用するのが遅い場合はどうすればよいですか? {#what-should-i-do-if-it-is-slow-to-reclaim-storage-space-after-deleting-data}
 
 TiDB はマルチバージョン同時実行制御 (MVCC) を使用するため、古いデータが新しいデータで上書きされる場合、古いデータは置き換えられず、新しいデータと共に保持されます。タイムスタンプは、データのバージョンを識別するために使用されます。データを削除しても、すぐにスペースが再利用されるわけではありません。同時トランザクションが以前のバージョンの行を参照できるように、ガベージ コレクションが遅延されます。これは[`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) (デフォルト: `10m0s` ) システム変数で設定できます。
 
-## <code>SHOW PROCESSLIST</code>はシステム プロセス ID を表示しますか? {#does-code-show-processlist-code-display-the-system-process-id}
+## <code>SHOW PROCESSLIST</code>システム プロセス ID を表示しますか? {#does-code-show-processlist-code-display-the-system-process-id}
 
 TiDB `SHOW PROCESSLIST`の表示内容は MySQL `SHOW PROCESSLIST`とほぼ同じです。 TiDB `SHOW PROCESSLIST`はシステム プロセス ID を表示しません。表示される ID は、現在のセッション ID です。 TiDB `SHOW PROCESSLIST`と MySQL `SHOW PROCESSLIST`の違いは次のとおりです。
 
--   TiDB は分散データベースであるため、 `tidb-server`つのインスタンスは SQL ステートメントを解析および実行するためのステートレス エンジンです (詳細については、 [TiDBアーキテクチャ](/tidb-architecture.md)を参照してください)。 `SHOW PROCESSLIST`は、クラスターで実行されているすべてのセッションのリストではなく、ユーザーが MySQL クライアントからログインする`tidb-server`インスタンスで実行されたセッションのリストを表示します。しかし、MySQL はスタンドアロン データベースであり、その`SHOW PROCESSLIST`には MySQL で実行されたすべての SQL ステートメントが表示されます。
+-   TiDB は分散データベースであるため、 `tidb-server`のインスタンスは SQL ステートメントを解析および実行するためのステートレス エンジンです (詳細については、 [TiDBアーキテクチャ](/tidb-architecture.md)参照してください)。 `SHOW PROCESSLIST`クラスターで実行されているすべてのセッションのリストではなく、ユーザーが MySQL クライアントからログインする`tidb-server`インスタンスで実行されたセッションのリストを表示します。しかし、MySQL はスタンドアロン データベースであり、その`SHOW PROCESSLIST`には MySQL で実行されたすべての SQL ステートメントが表示されます。
 -   TiDB の`State`列は、クエリの実行中に継続的に更新されるわけではありません。 TiDB は並列クエリをサポートしているため、各ステートメントは一度に複数の*状態*になる可能性があるため、単一の値に単純化することは困難です。
 
 ## SQLコミットの実行優先度を制御または変更する方法は? {#how-to-control-or-change-the-execution-priority-of-sql-commits}
 
-TiDB は、 [グローバル](/system-variables.md#tidb_force_priority)つまたは個々のステートメント単位での優先度の変更をサポートしています。プライオリティには次の意味があります。
+TiDB は、 [グローバル](/system-variables.md#tidb_force_priority)または個々のステートメント単位での優先度の変更をサポートしています。プライオリティには次の意味があります。
 
 -   `HIGH_PRIORITY` : このステートメントの優先度が高い。つまり、TiDB はこのステートメントに優先順位を与え、最初に実行します。
 
 -   `LOW_PRIORITY` : このステートメントの優先度は低いです。つまり、実行期間中、TiDB はこのステートメントの優先度を下げます。
+
+-   `DELAYED` : このステートメントは通常の優先度を持ち、 `tidb_force_priority`に対する`NO_PRIORITY`設定と同じです。
 
 上記の 2 つのパラメーターを TiDB の DML と組み合わせて使用できます。例えば：
 
@@ -212,18 +214,18 @@ TiDB は、 [グローバル](/system-variables.md#tidb_force_priority)つまた
     {{< copyable "" >}}
 
     ```sql
-    select HIGH_PRIORITY | LOW_PRIORITY count(*) from table_name;
-    insert HIGH_PRIORITY | LOW_PRIORITY into table_name insert_values;
-    delete HIGH_PRIORITY | LOW_PRIORITY from table_name;
-    update HIGH_PRIORITY | LOW_PRIORITY table_reference set assignment_list where where_condition;
-    replace HIGH_PRIORITY | LOW_PRIORITY into table_name;
+    SELECT HIGH_PRIORITY | LOW_PRIORITY | DELAYED COUNT(*) FROM table_name;
+    INSERT HIGH_PRIORITY | LOW_PRIORITY | DELAYED INTO table_name insert_values;
+    DELETE HIGH_PRIORITY | LOW_PRIORITY | DELAYED FROM table_name;
+    UPDATE HIGH_PRIORITY | LOW_PRIORITY | DELAYED table_reference SET assignment_list WHERE where_condition;
+    REPLACE HIGH_PRIORITY | LOW_PRIORITY | DELAYED INTO table_name;
     ```
 
-2.  フル テーブル スキャン ステートメントは、自動的に低い優先度に調整されます。デフォルトでは、 `analyze`の優先度は低くなります。
+2.  フル テーブル スキャン ステートメントは、自動的に低い優先度に調整されます。デフォルトでは、 [`ANALYZE`](/sql-statements/sql-statement-analyze-table.md)優先度は低くなります。
 
 ## TiDB での<code>auto analyze</code>のトリガー戦略は何ですか? {#what-s-the-trigger-strategy-for-code-auto-analyze-code-in-tidb}
 
-トリガー戦略: `auto analyze`は、新しいテーブルの行数が 1000 に達し、このテーブルに 1 分間書き込み操作がない場合に自動的にトリガーされます。
+トリガー戦略: `auto analyze` 、新しいテーブルの行数が 1000 に達し、このテーブルに 1 分間書き込み操作がない場合に自動的にトリガーされます。
 
 比率 (変更された行数 / 現在の合計行数) が`tidb_auto_analyze_ratio`より大きい場合、 `analyze`ステートメントが自動的にトリガーされます。デフォルト値の`tidb_auto_analyze_ratio`は 0.5 で、この機能がデフォルトで有効になっていることを示します。安全性を確保するために、この機能が有効になっているときの最小値は 0.3 であり、デフォルト値が 0.8 である`pseudo-estimate-ratio`よりも小さくする必要があります。そうしないと、一定期間疑似統計が使用されます。 `tidb_auto_analyze_ratio` ～ 0.5 に設定することをお勧めします。
 
@@ -237,37 +239,97 @@ TiDB は、 [ヒント](/optimizer-hints.md)や[SQL計画管理](/sql-plan-manag
 SELECT column_name FROM table_name USE INDEX（index_name）WHERE where_condition;
 ```
 
-## <code>Information schema is changed</code>エラーが報告されるのはなぜですか? {#why-the-code-information-schema-is-changed-code-error-is-reported}
+## DDL の実行 {#ddl-execution}
 
-TiDB は、時間の`schema`を使用して SQL ステートメントを処理し、オンラインの非同期 DDL 変更をサポートします。 DML ステートメントと DDL ステートメントは同時に実行される可能性があり、各ステートメントが同じ`schema`を使用して実行されるようにする必要があります。したがって、DML 操作が進行中の DDL 操作と一致すると、 `Information schema is changed`エラーが報告されることがあります。 DML 操作中のエラー報告が多すぎるのを防ぐために、いくつかの改善が行われました。
+このセクションでは、DDL ステートメントの実行に関連する問題をリストします。 DDL 実行の原則に関する詳細な説明については、 [DDL ステートメントの実行原則とベスト プラクティス](/ddl-introduction.md)を参照してください。
+
+### さまざまな DDL 操作を実行するのにどのくらいの時間がかかりますか? {#how-long-does-it-take-to-perform-various-ddl-operations}
+
+DDL 操作がブロックされておらず、各 TiDBサーバーがスキーマ バージョンを正常に更新でき、DDL 所有者ノードが正常に動作しているとします。この場合、さまざまな DDL 操作の推定時間は次のようになります。
+
+| DDL操作タイプ                                                                                                                                                                                                    | 予定時刻                               |
+| :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------- |
+| `ADD INDEX` 、 `MODIFY COLUMN`などの再編成 DDL (再編成タイプのデータ変更)                                                                                                                                                      | データ量、システム負荷、DDL パラメータの設定によって異なります。 |
+| `CREATE DATABASE` 、 `CREATE TABLE` 、 `DROP DATABASE` 、 `DROP TABLE` 、 `TRUNCATE TABLE` 、 `ALTER TABLE ADD` 、 `ALTER TABLE DROP` 、 `MODIFY COLUMN` (メタデータの変更のみ)、 `DROP INDEX`などの一般的な DDL (Reorg 以外の DDL タイプ) | 約1秒                                |
+
+> **ノート：**
+>
+> 上記は施術時間の目安です。実際の時間は異なる場合があります。
+
+### DDL の実行が遅い考えられる理由 {#possible-reasons-why-ddl-execution-is-slow}
+
+-   ユーザー セッションで、DDL ステートメントの前に非自動コミット DML ステートメントがあり、非自動コミット DML ステートメントのコミット操作が遅いと、DDL ステートメントの実行が遅くなります。つまり、TiDB は DDL ステートメントを実行する前に、コミットされていない DML ステートメントをコミットします。
+
+-   複数の DDL ステートメントが一緒に実行されると、後の DDL ステートメントの実行は、キューで待機する必要がある可能性があるため、遅くなる可能性があります。キューイングのシナリオは次のとおりです。
+
+    -   同じタイプの DDL ステートメントをキューに入れる必要があります。たとえば、 `CREATE TABLE`と`CREATE DATABASE`はどちらも一般的な DDL ステートメントであるため、両方の操作を同時に実行する場合は、キューに入れる必要があります。 TiDB v6.2.0 以降では、並列 DDL ステートメントがサポートされていますが、あまりにも多くの TiDB コンピューティング リソースを使用して DDL を実行することを避けるために、同時実行制限もあります。 DDL が同時実行制限を超えると、キューイングが発生します。
+    -   同じテーブルに対して実行される DDL 操作には、それらの間に依存関係があります。後の DDL ステートメントは、前の DDL 操作が完了するまで待機する必要があります。
+
+-   クラスターが正常に開始された後、DDL モジュールが DDL 所有者を選択しているため、最初の DDL 操作の実行時間が比較的長くなる場合があります。
+
+-   TiDB が終了し、TiDB が PD と正常に通信できなくなります (電源オフ状態を含む)。または、TiDB は`kill -9`コマンドによって終了されます。これにより、TiDB は PD から登録データをタイムリーにクリアしません。
+
+-   クラスタ内の特定の TiDB ノードと PD または TiKV との間で通信障害が発生し、TiDB が最新のバージョン情報を取得できなくなります。
+
+### 何が<code>Information schema is changed</code>エラーを引き起こしますか? {#what-triggers-the-code-information-schema-is-changed-code-error}
+
+SQL ステートメントを実行すると、TiDB は分離レベルに基づいてオブジェクトのスキーマ バージョンを判断し、それに応じて SQL ステートメントを処理します。 TiDB は、オンラインの非同期 DDL 変更もサポートしています。 DML ステートメントを実行すると、同時に実行される DDL ステートメントが存在する可能性があり、各 SQL ステートメントが同じスキーマで実行されるようにする必要があります。したがって、DML の実行時に DDL 操作が進行中の場合、TiDB は`Information schema is changed`エラーを報告することがあります。
+
+v6.4.0 から、TiDB は[メタデータ ロック メカニズム](/metadata-lock.md)を実装しました。これにより、DML ステートメントと DDL スキーマ変更の調整された実行が可能になり、ほとんどの`Information schema is changed`エラーが回避されます。
 
 現在、このエラー報告にはまだいくつかの原因があります。
 
 -   原因 1: DML 操作に含まれるいくつかのテーブルは、進行中の DDL 操作に含まれるテーブルと同じです。進行中の DDL 操作を確認するには、 `ADMIN SHOW DDL`ステートメントを使用します。
--   原因 2: DML 操作が長時間続いています。この期間中、多くの DDL ステートメントが実行され、1024 を超えるバージョン変更が発生し`schema`た。このデフォルト値は、変数`tidb_max_delta_schema_count`を変更することで変更できます。
--   原因 3: DML 要求を受け入れる TiDBサーバーが長時間`schema information`をロードできません (TiDB と PD または TiKV の間の接続障害が原因である可能性があります)。この期間中、多くの`schema`ステートメントが実行され、100 以上のバージョン変更が発生しました。
--   原因 4: TiDB の再起動後、最初の DDL 操作が実行される前に、DML 操作が実行され、最初の DDL 操作が発生します (つまり、最初の DDL 操作が実行される前に、DML に対応するトランザクションが開始されます。 DDL の最初の`schema`のバージョンが変更され、DML に対応するトランザクションがコミットされます)、この DML 操作はこのエラーを報告します。
+-   原因 2: DML 操作が長時間続いています。この期間中、多くの DDL ステートメントが実行され、1024 を`schema`バージョン変更が発生しました。このデフォルト値は、変数`tidb_max_delta_schema_count`を変更することで変更できます。
+-   原因 3: DML 要求を受け入れる TiDBサーバーが長時間`schema information`をロードできません (TiDB と PD または TiKV の間の接続障害が原因である可能性があります)。この期間中、多くの DDL ステートメントが実行され、 `schema`以上のバージョン変更が発生しました。
+-   原因 4: TiDB の再起動後、最初の DDL 操作が実行される前に、DML 操作が実行され、最初の DDL 操作が発生します (つまり、最初の DDL 操作が実行される前に、DML に対応するトランザクションが開始されます。 DDL の最初の`schema`バージョンが変更され、DML に対応するトランザクションがコミットされます)、この DML 操作はこのエラーを報告します。
 
 上記の原因のうち、原因 1 のみがテーブルに関連しています。関連する DML 操作は失敗後に再試行されるため、原因 1 と原因 2 はアプリケーションに影響しません。原因 3 については、TiDB と TiKV/PD 間のネットワークを確認する必要があります。
 
 > **ノート：**
 >
 > -   現在、TiDB は`schema`のバージョン変更をすべてキャッシュするわけではありません。
-> -   DDL 操作ごとに、 `schema`のバージョン変更の数は、対応する`schema state`のバージョン変更の数と同じです。
-> -   DDL 操作が異なれば、 `schema`のバージョン変更の数も異なります。たとえば、 `CREATE TABLE`ステートメントでは`schema`のバージョン変更が 1 回行われますが、 `ADD COLUMN`ステートメントでは 4 回のバージョン変更が行われます。
+> -   DDL 操作ごとに、 `schema`バージョン変更の数は、対応する`schema state`バージョン変更の数と同じです。
+> -   DDL 操作が異なれば、 `schema`バージョン変更の数も異なります。たとえば、 `CREATE TABLE`ステートメントでは`schema`バージョン変更が 1 回行われますが、 `ADD COLUMN`ステートメントでは 4 回のバージョン変更が行われます。
 
-## 「情報スキーマが古くなっています」エラーの原因は何ですか? {#what-are-the-causes-of-the-information-schema-is-out-of-date-error}
+### 「情報スキーマが古くなっています」エラーの原因は何ですか? {#what-are-the-causes-of-the-information-schema-is-out-of-date-error}
 
-DML ステートメントの実行時に、TiDB が DDL リース (デフォルトでは 45 秒) 内で最新のスキーマをロードできなかった場合、 `Information schema is out of date`エラーが発生する可能性があります。考えられる原因は次のとおりです。
+TiDB v6.5.0 より前では、DML ステートメントを実行するときに、TiDB が DDL リース (デフォルトでは 45 秒) 内で最新のスキーマをロードできなかった場合、 `Information schema is out of date`エラーが発生する可能性がありました。考えられる原因は次のとおりです。
 
 -   この DML を実行した TiDB インスタンスが強制終了され、この DML ステートメントに対応するトランザクションの実行に DDL リースよりも時間がかかりました。トランザクションがコミットされたときに、エラーが発生しました。
 -   TiDB は、この DML ステートメントの実行中に PD または TiKV に接続できませんでした。その結果、キープアライブ設定が原因で、TiDB が DDL リース内のスキーマのロードに失敗したか、PD から切断されました。
 
-## 高い同時実行性の下で DDL ステートメントを実行するとエラーが報告されますか? {#error-is-reported-when-executing-ddl-statements-under-high-concurrency}
+### 高い同時実行性の下で DDL ステートメントを実行するとエラーが報告されますか? {#error-is-reported-when-executing-ddl-statements-under-high-concurrency}
 
 高い並行性で DDL ステートメント (バッチでのテーブルの作成など) を実行すると、同時実行中のキーの競合が原因で、これらのステートメントのごく一部が失敗する可能性があります。
 
 同時 DDL ステートメントの数を 20 未満に保つことをお勧めします。それ以外の場合は、失敗したステートメントをクライアントから再試行する必要があります。
+
+### DDL の実行がブロックされるのはなぜですか? {#why-is-ddl-execution-blocked}
+
+TiDB v6.2.0 より前では、TiDB は、DDL ステートメントのタイプに基づいて、DDL ステートメントを 2 つの先入れ先出しキューに割り当てます。具体的には、Reorg DDL は Reorg キューに移動し、General DDL は一般キューに移動します。先入れ先出しの制限と、同じテーブルで DDL ステートメントを順次実行する必要があるため、実行中に複数の DDL ステートメントがブロックされる場合があります。
+
+たとえば、次の DDL ステートメントについて考えてみます。
+
+-   DDL 1: `CREATE INDEX idx on t(a int);`
+-   DDL2: `ALTER TABLE t ADD COLUMN b int;`
+-   DDL3: `CREATE TABLE t1(a int);`
+
+先入れ先出しキューの制限により、DDL 3 は DDL 2 の実行を待機する必要があります。また、同じテーブルの DDL ステートメントはシリアルで実行する必要があるため、DDL 2 は DDL 1 が実行されるまで待機する必要があります。したがって、DDL 3 は、異なるテーブルで動作する場合でも、DDL 1 が最初に実行されるまで待機する必要があります。
+
+TiDB v6.2.0 以降、TiDB DDL モジュールは並行フレームワークを使用します。並行フレームワークでは、先入れ先出しキューの制限がなくなりました。代わりに、TiDB はすべての DDL タスクから実行可能な DDL タスクを取得します。さらに、Reorg ワーカーの数が拡張され、ノードあたり約`CPU/4`になりました。これにより、TiDB は並行フレームワークで同時に複数のテーブルのインデックスを構築できます。
+
+クラスターが新しいクラスターであるか、以前のバージョンからアップグレードされたクラスターであるかに関係なく、TiDB は TiDB v6.2 以降のバージョンで並行フレームワークを自動的に使用します。手動で調整する必要はありません。
+
+### スタックした DDL 実行の原因を特定する {#identify-the-cause-of-stuck-ddl-execution}
+
+1.  DDL ステートメントの実行を遅くするその他の理由を排除します。
+2.  次のいずれかの方法を使用して、DDL 所有者ノードを識別します。
+    -   `curl http://{TiDBIP}:10080/info/all`を使用して、現在のクラスターの所有者を取得します。
+    -   監視ダッシュボード**DDL** &gt; <strong>DDL META OPM</strong>から特定の期間の所有者をビュー。
+
+-   所有者が存在しない場合は、 `curl -X POST http://{TiDBIP}:10080/ddl/owner/resign`を使用して手動で所有者の選択をトリガーしてみてください。
+-   所有者が存在する場合は、Goroutine スタックをエクスポートし、スタックしている可能性のある場所を確認します。
 
 ## SQL 最適化 {#sql-optimization}
 
@@ -281,7 +343,7 @@ DML ステートメントの実行時に、TiDB が DDL リース (デフォル�
 
 ### <code>select count(1)</code>を最適化する方法は? {#how-to-optimize-code-select-count-1-code}
 
-`count(1)`ステートメントは、テーブル内の行の総数をカウントします。並行性の程度を向上させると、速度が大幅に向上する可能性があります。同時実行数を変更するには、 [`tidb_distsql_scan_concurrency`ドキュメント](/system-variables.md#tidb_distsql_scan_concurrency)を参照してください。ただし、CPU および I/O リソースにも依存します。 TiDB はすべてのクエリで TiKV にアクセスします。データ量が少ない場合、MySQL はすべてメモリにあり、TiDB はネットワーク アクセスを行う必要があります。
+`count(1)`ステートメントは、テーブル内の行の総数をカウントします。並行性の程度を向上させると、速度が大幅に向上する可能性があります。同時実行数を変更するには、 [`tidb_distsql_scan_concurrency`ドキュメント](/system-variables.md#tidb_distsql_scan_concurrency)を参照してください。ただし、CPU および I/O リソースにも依存します。 TiDB はすべてのクエリで TiKV にアクセスします。データ量が少ない場合、MySQL はすべてメモリ内にあり、TiDB はネットワーク アクセスを行う必要があります。
 
 推奨事項:
 
@@ -307,7 +369,7 @@ RUNNING_JOBS: ID:121, Type:add index, State:running, SchemaState:write reorganiz
      SELF_ID: 1a1c4174-0fcd-4ba0-add9-12d08c4077dc
 ```
 
-上記の結果から、 `ADD INDEX`の操作が現在処理中であることがわかります。 `RUNNING_JOBS`列の`RowCount`フィールドから、 `ADD INDEX`操作で 77312 行のインデックスが追加されたことを取得することもできます。
+上記の結果から、 `ADD INDEX`操作が現在処理中であることがわかります。 `RUNNING_JOBS`列の`RowCount`フィールドから、 `ADD INDEX`操作で 77312 行のインデックスが追加されたことを取得することもできます。
 
 ### DDL ジョブを表示する方法 {#how-to-view-the-ddl-job}
 
@@ -319,9 +381,9 @@ RUNNING_JOBS: ID:121, Type:add index, State:running, SchemaState:write reorganiz
 
 はい。 TiDB はコストベースのオプティマイザーを使用します。コスト モデルと統計は常に最適化されています。 TiDB は、ハッシュ結合やソートマージ結合などの結合アルゴリズムもサポートしています。
 
-### テーブルで<code>analyze</code>を実行する必要があるかどうかを判断するにはどうすればよいですか? {#how-to-determine-whether-i-need-to-execute-code-analyze-code-on-a-table}
+### テーブルで<code>analyze</code>実行する必要があるかどうかを判断するにはどうすればよいですか? {#how-to-determine-whether-i-need-to-execute-code-analyze-code-on-a-table}
 
-`SHOW STATS_HEALTHY`を使用して`Healthy`フィールドをビューし、通常、フィールド値が 60 より小さい場合、テーブルで`ANALYZE`を実行する必要があります。
+`SHOW STATS_HEALTHY`使用して`Healthy`フィールドをビュー、通常、フィールド値が 60 より小さい場合、テーブルで`ANALYZE`を実行する必要があります。
 
 ### クエリ プランをツリーとして表示する場合の ID ルールは何ですか?このツリーの実行順序は? {#what-is-the-id-rule-when-a-query-plan-is-presented-as-a-tree-what-is-the-execution-order-for-this-tree}
 
@@ -333,7 +395,7 @@ RUNNING_JOBS: ID:121, Type:add index, State:running, SchemaState:write reorganiz
 
 `cop task`は、分散実行のために KV エンドにプッシュされるコンピューティング タスクです。 `root task`は、TiDB 側でのシングル ポイント実行のコンピューティング タスクです。
 
-通常、 `root task`の入力データは`cop task`から取得されます。 `root task`台がデータを処理すると、TiKVの`cop task`台が同時にデータを処理でき、TiDBの`root task`台のプルを待ちます。したがって、 `cop`のタスクは`root task`と同時に実行されると見なすことができます。しかし、彼らのデータには上流と下流の関係があります。実行プロセス中、それらはしばらくの間同時に実行されます。たとえば、最初の`cop task`は [100, 200] のデータを処理し、2 番目の`cop task`は [1, 100] のデータを処理しています。詳しくは[TiDB クエリ プランを理解する](/explain-overview.md)をご覧ください。
+通常、 `root task`の入力データは`cop task`から取得されます。 `root task`データを処理すると、TiKVの`cop task`が同時にデータを処理でき、TiDBの`root task`のプルを待ちます。したがって、 `cop`タスクは`root task`と同時に実行されると見なすことができます。しかし、彼らのデータには上流と下流の関係があります。実行プロセス中、それらはしばらくの間同時に実行されます。たとえば、最初の`cop task` [100, 200] のデータを処理し、2 番目の`cop task` [1, 100] のデータを処理しています。詳しくは[TiDB クエリ プランを理解する](/explain-overview.md)をご覧ください。
 
 ## データベースの最適化 {#database-optimization}
 

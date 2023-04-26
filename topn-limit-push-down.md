@@ -17,7 +17,7 @@ TiDB 実行計画ツリーでは、SQL の`LIMIT`句が Limit 演算子ノード
 
 このセクションでは、いくつかの例を通じて TopN プッシュダウンを示します。
 
-### 例 1: ストレージレイヤーのコプロセッサーにプッシュダウンする {#example-1-push-down-to-the-coprocessors-in-the-storage-layer}
+### 例 1:storageレイヤーのコプロセッサーにプッシュダウンする {#example-1-push-down-to-the-coprocessors-in-the-storage-layer}
 
 {{< copyable "" >}}
 
@@ -66,7 +66,7 @@ explain select * from t left join s on t.a = s.a order by t.a limit 10;
 8 rows in set (0.01 sec)
 ```
 
-このクエリでは、TopN 演算子の並べ替え規則は外部テーブル`t`の列のみに依存するため、TopN を Join にプッシュする前に計算を実行して、Join 操作の計算コストを削減できます。その上、TiDB はまた TopN をストレージレイヤーにプッシュします。
+このクエリでは、TopN 演算子の並べ替え規則は外部テーブル`t`の列のみに依存するため、TopN を Join にプッシュする前に計算を実行して、Join 操作の計算コストを削減できます。その上、TiDB はまた TopN をstorageレイヤーにプッシュします。
 
 ### 例 3: Join の前に TopN をプッシュダウンすることはできません {#example-3-topn-cannot-be-pushed-down-before-join}
 

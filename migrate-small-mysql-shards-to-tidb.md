@@ -11,7 +11,7 @@ summary: Learn how to migrate and merge small datasets of shards from MySQL to T
 
 このドキュメントでは、移行手順を説明するために簡単な例を取り上げます。この例の 2 つのデータ ソース MySQL インスタンスの MySQL シャードは、ダウンストリームの TiDB クラスターに移行されます。
 
-この例では、MySQL インスタンス 1 と MySQL インスタンス 2 の両方に次のスキーマとテーブルが含まれています。この例では、 `store_01`および`store_02`のスキーマからテーブルを移行し、両方のインスタンスで`sale`のプレフィックスを付けて、 `store`スキーマの下流の`sale`テーブルにマージします。
+この例では、MySQL インスタンス 1 と MySQL インスタンス 2 の両方に次のスキーマとテーブルが含まれています。この例では、 `store_01`および`store_02`スキーマからテーブルを移行し、両方のインスタンスで`sale`プレフィックスを付けて、 `store`スキーマの下流の`sale`テーブルにマージします。
 
 | スキーマ     | テーブル          |
 | :------- | :------------ |
@@ -22,20 +22,20 @@ summary: Learn how to migrate and merge small datasets of shards from MySQL to T
 
 | スキーマ | テーブル |
 | :--- | :--- |
-| お店   | セール  |
+| 店    | セール  |
 
 ## 前提条件 {#prerequisites}
 
 移行を開始する前に、次のタスクが完了していることを確認してください。
 
--   [TiUPを使用して DMクラスタをデプロイする](/dm/deploy-a-dm-cluster-using-tiup.md)
+-   [TiUPを使用して DMクラスタをデプロイ](/dm/deploy-a-dm-cluster-using-tiup.md)
 -   [DM-worker に必要な権限](/dm/dm-worker-intro.md)
 
 ### シャード テーブルの競合を確認する {#check-conflicts-for-the-sharded-tables}
 
 移行に異なるシャード テーブルからのデータのマージが含まれる場合、マージ中に主キーまたは一意のインデックスの競合が発生する可能性があります。したがって、移行の前に、ビジネスの観点から現在のシャーディング スキームを詳しく調べ、競合を回避する方法を見つける必要があります。詳細については、 [複数のシャード テーブル間で主キーまたは一意のインデックス間の競合を処理する](/dm/shard-merge-best-practices.md#handle-conflicts-between-primary-keys-or-unique-indexes-across-multiple-sharded-tables)を参照してください。以下は簡単な説明です。
 
-この例では、 `sale_01`と`sale_02`は次のように同じテーブル構造になっています。
+この例では、 `sale_01`と`sale_02`次のように同じテーブル構造になっています。
 
 {{< copyable "" >}}
 
@@ -50,7 +50,7 @@ CREATE TABLE `sale_01` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
 ```
 
-`id`列目は主キー、 `sid`列目はシャーディングキーです。 `id`列は自動増分であり、複数のシャード テーブル範囲が重複すると、データの競合が発生します。 `sid`は、インデックスがグローバルに一意であることを保証できるため、 [自動インクリメント主キーの主キー属性を削除します](/dm/shard-merge-best-practices.md#remove-the-primary-key-attribute-from-the-column)の手順に従って`id`列をバイパスできます。
+`id`列目は主キー、 `sid`列目はシャーディングキーです。 `id`列は自動増分であり、複数のシャード テーブル範囲が重複すると、データの競合が発生します。 `sid`インデックスがグローバルに一意であることを保証できるため、 [自動インクリメント主キーの主キー属性を削除します](/dm/shard-merge-best-practices.md#remove-the-primary-key-attribute-from-the-column)の手順に従って`id`列をバイパスできます。
 
 {{< copyable "" >}}
 
@@ -178,7 +178,7 @@ block-allow-list:           # filter or only migrate all operations of some data
 
 上記の例は、移行タスクを実行するための最小構成です。詳細については、 [DM 拡張タスクコンフィグレーションファイル](/dm/task-configuration-file-full.md)を参照してください。
 
-`routes` 、 `filters` 、およびタスク ファイル内のその他の構成の詳細については、次のドキュメントを参照してください。
+`routes` 、 `filters`およびタスク ファイル内のその他の構成の詳細については、次のドキュメントを参照してください。
 
 -   [テーブル ルーティング](/dm/dm-table-routing.md)
 -   [ブロック &amp; 許可テーブル リスト](/dm/dm-block-allow-table-lists.md)
@@ -220,7 +220,7 @@ tiup dmctl --master-addr ${advertise-addr} start-task task.yaml
 tiup dmctl --master-addr ${advertise-addr} query-status ${task-name}
 ```
 
-エラーが発生した場合は、 `query-status ${task-name}`を使用してより詳細な情報を表示します。 `query-status`コマンドのクエリ結果、タスクの状態、サブタスクの状態の詳細については、 [TiDB データ移行クエリのステータス](/dm/dm-query-status.md)を参照してください。
+エラーが発生した場合は、 `query-status ${task-name}`使用してより詳細な情報を表示します。 `query-status`コマンドのクエリ結果、タスクの状態、サブタスクの状態の詳細については、 [TiDB データ移行クエリのステータス](/dm/dm-query-status.md)を参照してください。
 
 ## ステップ 5. タスクを監視し、ログを確認する (オプション) {#step-5-monitor-tasks-and-check-logs-optional}
 
@@ -228,7 +228,7 @@ Grafana またはログを使用して、移行タスクの履歴と内部運用
 
 -   グラファナ経由
 
-    TiUP を使用して DM クラスターをデプロイするときに、Prometheus、Alertmanager、および Grafana が正しくデプロイされている場合は、 TiUPで DM 監視メトリックを表示できます。具体的には、Grafana でのデプロイ時に指定した IP アドレスとポートを入力し、DM ダッシュボードを選択します。
+    TiUPを使用して DM クラスターをデプロイするときに、Prometheus、Alertmanager、および Grafana が正しくデプロイされている場合は、Grafana で DM 監視メトリックを表示できます。具体的には、Grafana でのデプロイ時に指定した IP アドレスとポートを入力し、DM ダッシュボードを選択します。
 
 -   ログ経由
 

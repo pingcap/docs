@@ -12,7 +12,7 @@ TiDB Ansible バージョン: 4.0.0-beta
 
 ## TiDB {#tidb}
 
--   `INSERT` / `REPLACE` / `DELETE` / `UPDATE`の実行中に使用されたメモリが`MemQuotaQuery`構成項目で指定された制限を超えた場合、ログを出力するか、SQL の実行をキャンセルします。実際の動作は、 `OOMAction`の構成によって異なります。 [#14179](https://github.com/pingcap/tidb/pull/14179) [#14289](https://github.com/pingcap/tidb/pull/14289) [#14299](https://github.com/pingcap/tidb/pull/14299)
+-   `INSERT` / `REPLACE` / `DELETE` / `UPDATE`の実行中に使用されたメモリが`MemQuotaQuery`構成項目で指定された制限を超えた場合、ログを出力するか、SQL の実行をキャンセルします。実際の動作は、 `OOMAction`構成によって異なります。 [#14179](https://github.com/pingcap/tidb/pull/14179) [#14289](https://github.com/pingcap/tidb/pull/14289) [#14299](https://github.com/pingcap/tidb/pull/14299)
 -   駆動表と被駆動表の両方の行数を考慮して、 `Index Join`のコスト計算の精度を上げる[#12085](https://github.com/pingcap/tidb/pull/12085)
 -   15 個の SQL ヒントを追加して、オプティマイザーの動作を制御し、オプティマイザーをより安定させます
     -   [#11253](https://github.com/pingcap/tidb/pull/11253) [#11364](https://github.com/pingcap/tidb/pull/11364) [#11673](https://github.com/pingcap/tidb/pull/11673) [#11740](https://github.com/pingcap/tidb/pull/11740) [#11746](https://github.com/pingcap/tidb/pull/11746)
@@ -22,10 +22,10 @@ TiDB Ansible バージョン: 4.0.0-beta
 -   インデックス マージ機能をサポートすることにより、テーブル クエリのパフォーマンスを向上させる[#10121](https://github.com/pingcap/tidb/pull/10121) [#10512](https://github.com/pingcap/tidb/pull/10512) [#11245](https://github.com/pingcap/tidb/pull/11245) [#12225](https://github.com/pingcap/tidb/pull/12225) [#12248](https://github.com/pingcap/tidb/pull/12248) [#12305](https://github.com/pingcap/tidb/pull/12305) [#12843](https://github.com/pingcap/tidb/pull/12843)
 -   インデックス結果をキャッシュし、重複する結果を排除することで、Range 計算のパフォーマンスを向上させ、CPU オーバーヘッドを削減します[#12856](https://github.com/pingcap/tidb/pull/12856)
 -   低速ログのレベルを通常のログのレベルから分離する[#12359](https://github.com/pingcap/tidb/pull/12359)
--   `oom-use-tmp-storage`つのパラメーター (デフォルトでは`true` ) を追加して、単一の SQL ステートメントの実行のメモリ使用量が`mem-quota-query`を超え、SQL に`Hash Join` [#11832](https://github.com/pingcap/tidb/pull/11832) [#11937](https://github.com/pingcap/tidb/pull/11937) [#12116](https://github.com/pingcap/tidb/pull/12116) [#12067](https://github.com/pingcap/tidb/pull/12067)が含まれている場合に、一時ファイルを使用して中間結果をキャッシュするかどうかを制御します。
+-   `oom-use-tmp-storage`のパラメーター (デフォルトでは`true` ) を追加して、単一の SQL ステートメントの実行のメモリ使用量が`mem-quota-query`を超え、SQL に`Hash Join` [#11832](https://github.com/pingcap/tidb/pull/11832) [#11937](https://github.com/pingcap/tidb/pull/11937) [#12116](https://github.com/pingcap/tidb/pull/12116) [#12067](https://github.com/pingcap/tidb/pull/12067)が含まれている場合に、一時ファイルを使用して中間結果をキャッシュするかどうかを制御します。
 -   `create index` / `alter table`を使用して式インデックスを作成し、 `drop index`を使用して式インデックスを削除する[#14117](https://github.com/pingcap/tidb/pull/14117)をサポート
 -   `query-log-max-len`パラメータのデフォルト値を`4096`に増やして、切り捨てられた SQL 出力の数を減らします。このパラメータは動的に調整できます。 [#12491](https://github.com/pingcap/tidb/pull/12491)
--   column 属性に`AutoRandom`キーワードを追加して、システムがランダムな整数を主キーに自動的に割り当てるかどうかを制御できるようになりました。これにより、主キー`AUTO_INCREMENT`によって引き起こされるホットスポットの問題が回避され[#13127](https://github.com/pingcap/tidb/pull/13127)
+-   column 属性に`AutoRandom`キーワードを追加して、システムがランダムな整数を主キーに自動的に割り当てるかどうかを制御できるようになりました[#13127](https://github.com/pingcap/tidb/pull/13127)これにより、主キー`AUTO_INCREMENT`によって引き起こされるホットスポットの問題が回避されます
 -   サポート テーブル ロック[#11038](https://github.com/pingcap/tidb/pull/11038)
 -   条件付きフィルタリングのための`ADMIN SHOW DDL JOBS`の`LIKE`または`WHERE`節の使用のサポート[#12484](https://github.com/pingcap/tidb/pull/12484)
 -   `information_schema.tables`テーブルに`TIDB_ROW_ID_SHARDING_INFO`列を追加して`RowID`散乱情報を出力します (たとえば、テーブル`A`の`SHARD_ROW_ID_BITS`列の値は`"SHARD_BITS={bit_number}"`です) [#13418](https://github.com/pingcap/tidb/pull/13418)
@@ -34,13 +34,13 @@ TiDB Ansible バージョン: 4.0.0-beta
     -   [#13540](https://github.com/pingcap/tidb/pull/13540) [#13366](https://github.com/pingcap/tidb/pull/13366) [#13329](https://github.com/pingcap/tidb/pull/13329) [#13300](https://github.com/pingcap/tidb/pull/13300) [#13233](https://github.com/pingcap/tidb/pull/13233)
     -   [#13033](https://github.com/pingcap/tidb/pull/13033) [#12866](https://github.com/pingcap/tidb/pull/12866) [#14054](https://github.com/pingcap/tidb/pull/14054)
 -   離散型の狭いデータ範囲を`point set`に変換し、CM-Sketchを使用して行数の推定時に推定精度を向上させます[#11524](https://github.com/pingcap/tidb/pull/11524)
--   CM-Sketch から`TopN`の情報を通常の`Analyze`に抽出し、頻繁に発生する値を個別に保持する[#11409](https://github.com/pingcap/tidb/pull/11409)
+-   CM-Sketch から`TopN`情報を通常の`Analyze`に抽出し、頻繁に発生する値を個別に保持する[#11409](https://github.com/pingcap/tidb/pull/11409)
 -   CM-Sketch の深さと幅、および`TopN`情報[#11278](https://github.com/pingcap/tidb/pull/11278)の数を動的に調整するサポート
 -   SQL Binding の自動キャプチャと展開をサポート[#13199](https://github.com/pingcap/tidb/pull/13199) [#12434](https://github.com/pingcap/tidb/pull/12434)
 -   `Chunk`を使用して TiKV との通信のエンコード形式を最適化し、通信パフォーマンスを向上させます[#12023](https://github.com/pingcap/tidb/pull/12023) [#12536](https://github.com/pingcap/tidb/pull/12536) [#12613](https://github.com/pingcap/tidb/pull/12613) [#12621](https://github.com/pingcap/tidb/pull/12621) [#12899](https://github.com/pingcap/tidb/pull/12899) [#13060](https://github.com/pingcap/tidb/pull/13060) [#13349](https://github.com/pingcap/tidb/pull/13349)
 -   ワイド テーブル[#12634](https://github.com/pingcap/tidb/pull/12634)のパフォーマンスを向上させる新しい行ストア形式をサポートします。
 -   `Recover Binlog`インターフェースを最適化して、すべてのトランザクションがコミットされるのを待ってからクライアント[#13740](https://github.com/pingcap/tidb/pull/13740)に戻るようにする
--   HTTP `info/all`インターフェイス[#13025](https://github.com/pingcap/tidb/pull/13025)を介して、クラスター内の TiDB サーバーによって有効にされた binlog ステータスのクエリをサポートします。
+-   HTTP `info/all`インターフェイス[#13025](https://github.com/pingcap/tidb/pull/13025)を介して、クラスター内の TiDB サーバーによって有効にされたbinlogステータスのクエリをサポートします。
 -   悲観的トランザクション モードを使用する場合、MySQL 互換の`Read Committed`トランザクション分離レベルをサポートします[#14087](https://github.com/pingcap/tidb/pull/14087)
 -   大規模なトランザクションをサポートします。トランザクション サイズは、物理メモリのサイズによって制限されます。
     -   [#11999](https://github.com/pingcap/tidb/pull/11999) [#11986](https://github.com/pingcap/tidb/pull/11986) [#11974](https://github.com/pingcap/tidb/pull/11974) [#11817](https://github.com/pingcap/tidb/pull/11817) [#11807](https://github.com/pingcap/tidb/pull/11807)
@@ -59,7 +59,7 @@ TiDB Ansible バージョン: 4.0.0-beta
 -   TiKV RPC の詳細`backoff`情報をスローログに出力して、トラブルシューティングを容易にします[#13770](https://github.com/pingcap/tidb/pull/13770)
 -   高価なログ[#12809](https://github.com/pingcap/tidb/pull/12809)のメモリ統計のフォーマットを最適化および統一する
 -   `EXPLAIN`の明示的な形式を最適化し、オペレーターのメモリとディスクの使用状況に関する情報の出力をサポートします[#13914](https://github.com/pingcap/tidb/pull/13914) [#13692](https://github.com/pingcap/tidb/pull/13692) [#13686](https://github.com/pingcap/tidb/pull/13686) [#11415](https://github.com/pingcap/tidb/pull/11415) [#13927](https://github.com/pingcap/tidb/pull/13927) [#13764](https://github.com/pingcap/tidb/pull/13764) [#13720](https://github.com/pingcap/tidb/pull/13720)
--   トランザクション サイズに基づいて`LOAD DATA`の重複値のチェックを最適化し、 `tidb_dml_batch_size`パラメータ[#11132](https://github.com/pingcap/tidb/pull/11132)を構成してトランザクション サイズの設定をサポートします。
+-   トランザクション サイズに基づいて`LOAD DATA`重複値のチェックを最適化し、 `tidb_dml_batch_size`パラメータ[#11132](https://github.com/pingcap/tidb/pull/11132)を構成してトランザクション サイズの設定をサポートします。
 -   データ準備ルーチンとコミット ルーチンを分離し、ワークロードを異なるワーカーに割り当てることで、 `LOAD DATA`のパフォーマンスを最適化します[#11533](https://github.com/pingcap/tidb/pull/11533) [#11284](https://github.com/pingcap/tidb/pull/11284)
 
 ## TiKV {#tikv}
@@ -90,9 +90,9 @@ TiDB Ansible バージョン: 4.0.0-beta
 
 ## PD {#pd}
 
--   ストレージノードの負荷情報に応じたホットスポットスケジューリングの最適化をサポート
+-   storageノードの負荷情報に応じたホットスポットスケジューリングの最適化をサポート
     -   [#1870](https://github.com/pingcap/pd/pull/1870) [#1982](https://github.com/pingcap/pd/pull/1982) [#1998](https://github.com/pingcap/pd/pull/1998) [#1843](https://github.com/pingcap/pd/pull/1843) [#1750](https://github.com/pingcap/pd/pull/1750)
--   さまざまなスケジューリング ルールを組み合わせて、任意のデータ範囲のレプリカの数、ストレージの場所、ストレージ ホストの種類、および役割を制御できる配置ルール機能を追加します。
+-   さまざまなスケジューリング ルールを組み合わせて、任意のデータ範囲のレプリカの数、storageの場所、storageホストの種類、および役割を制御できる配置ルール機能を追加します。
     -   [#2051](https://github.com/pingcap/pd/pull/2051) [#1999](https://github.com/pingcap/pd/pull/1999) [#2042](https://github.com/pingcap/pd/pull/2042) [#1917](https://github.com/pingcap/pd/pull/1917) [#1904](https://github.com/pingcap/pd/pull/1904)
     -   [#1897](https://github.com/pingcap/pd/pull/1897) [#1894](https://github.com/pingcap/pd/pull/1894) [#1865](https://github.com/pingcap/pd/pull/1865) [#1855](https://github.com/pingcap/pd/pull/1855) [#1834](https://github.com/pingcap/pd/pull/1834)
 -   プラグインを使用したサポート (実験的) [#1799](https://github.com/pingcap/pd/pull/1799)

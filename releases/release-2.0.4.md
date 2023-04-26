@@ -33,7 +33,7 @@ title: TiDB 2.0.4 Release Notes
 ## TiKV {#tikv}
 
 -   デバッグ用に RocksDB `PerfContext`インターフェイスを追加する
--   `import-mode`つのパラメータを削除します
+-   `import-mode`パラメータを削除します
 -   `tikv-ctl`の`region-properties`コマンドを追加します。
 -   RocksDB tombstone が多数存在する場合に`reverse-seek`が遅くなる問題を修正
 -   `do_sub`によって引き起こされたクラッシュの問題を修正

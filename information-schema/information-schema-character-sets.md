@@ -1,18 +1,18 @@
 ---
 title: CHARACTER_SETS
-summary: Learn the `CHARACTER_SETS` information_schema table.
+summary: Learn the `CHARACTER_SETS` INFORMATION_SCHEMA table.
 ---
 
 # CHARACTER_SETS {#character-sets}
 
 `CHARACTER_SETS`テーブルは[文字セット](/character-set-and-collation.md)に関する情報を提供します。現在、TiDB は一部の文字セットのみをサポートしています。
 
-{{< copyable "" >}}
-
 ```sql
-USE information_schema;
-DESC character_sets;
+USE INFORMATION_SCHEMA;
+DESC CHARACTER_SETS;
 ```
+
+出力は次のとおりです。
 
 ```
 +----------------------+-------------+------+------+---------+-------+
@@ -26,23 +26,26 @@ DESC character_sets;
 4 rows in set (0.00 sec)
 ```
 
-{{< copyable "" >}}
+`CHARACTER_SETS`テーブルをビュー。
 
 ```sql
-SELECT * FROM `character_sets`;
+SELECT * FROM `CHARACTER_SETS`;
 ```
 
-```
-+--------------------+----------------------+---------------+--------+
-| CHARACTER_SET_NAME | DEFAULT_COLLATE_NAME | DESCRIPTION   | MAXLEN |
-+--------------------+----------------------+---------------+--------+
-| utf8               | utf8_bin             | UTF-8 Unicode |      3 |
-| utf8mb4            | utf8mb4_bin          | UTF-8 Unicode |      4 |
-| ascii              | ascii_bin            | US ASCII      |      1 |
-| latin1             | latin1_bin           | Latin1        |      1 |
-| binary             | binary               | binary        |      1 |
-+--------------------+----------------------+---------------+--------+
-5 rows in set (0.00 sec)
+出力は次のとおりです。
+
+```sql
++--------------------+----------------------+-------------------------------------+--------+
+| CHARACTER_SET_NAME | DEFAULT_COLLATE_NAME | DESCRIPTION                         | MAXLEN |
++--------------------+----------------------+-------------------------------------+--------+
+| ascii              | ascii_bin            | US ASCII                            |      1 |
+| binary             | binary               | binary                              |      1 |
+| gbk                | gbk_chinese_ci       | Chinese Internal Code Specification |      2 |
+| latin1             | latin1_bin           | Latin1                              |      1 |
+| utf8               | utf8_bin             | UTF-8 Unicode                       |      3 |
+| utf8mb4            | utf8mb4_bin          | UTF-8 Unicode                       |      4 |
++--------------------+----------------------+-------------------------------------+--------+
+6 rows in set (0.00 sec)
 ```
 
 `CHARACTER_SETS`テーブルの列の説明は次のとおりです。

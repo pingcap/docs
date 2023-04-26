@@ -11,7 +11,7 @@ title: TiDB 1.0.2 Release Notes
 -   インデックス ポイント クエリのコスト見積もりを最適化する
 -   `Alter Table Add Column (ColumnDef ColumnPosition)`構文をサポート
 -   `where`の条件が矛盾するクエリを最適化する
--   `Add Index`の操作を最適化して進捗を修正し、繰り返し操作を減らす
+-   `Add Index`操作を最適化して進捗を修正し、繰り返し操作を減らす
 -   `Index Look Join`演算子を最適化して、小さなデータ サイズのクエリ速度を加速する
 -   プレフィックスインデックス判定の問題を修正
 
@@ -25,4 +25,4 @@ title: TiDB 1.0.2 Release Notes
 -   キーの長さを 4 KB 以下に制限する
 -   より正確な読み取りトラフィック統計
 -   コプロセッサー・スタックに強力な保護を実装する
--   `LIKE`の動作と`do_div_mod`のバグを修正
+-   `LIKE`動作と`do_div_mod`バグを修正

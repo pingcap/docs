@@ -26,7 +26,7 @@ SHOW MASTER STATUS;
 
 ## MySQL の互換性 {#mysql-compatibility}
 
-`SHOW MASTER STATUS`の出力は、MySQL と一致するように設計されています。ただし、実行結果は、MySQL の結果が binlog の場所情報であり、TiDB の結果が最新の TSO 情報であるという点で異なります。
+`SHOW MASTER STATUS`の出力は、MySQL と一致するように設計されています。ただし、実行結果は、MySQL の結果がbinlog の場所情報であり、TiDB の結果が最新の TSO 情報であるという点で異なります。
 
 ## こちらもご覧ください {#see-also}
 

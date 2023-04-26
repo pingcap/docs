@@ -17,7 +17,7 @@ summary: Learn the use cases of dbt in TiDB Cloud.
 pip install dbt-tidb
 ```
 
-dbt を個別にインストールすることもできます。 dbt ドキュメントの[インストール方法](https://docs.getdbt.com/docs/get-started/installation)を参照してください。
+dbt を個別にインストールすることもできます。 dbt ドキュメントの[インストール方法](https://docs.getdbt.com/docs/get-started/installation)参照してください。
 
 ## ステップ 2: デモ プロジェクトを作成する {#step-2-create-a-demo-project}
 
@@ -61,7 +61,7 @@ cd jaffle_shop
 
 -   `models`ディレクトリには、プロジェクトの SQL モデルとテーブル スキーマが含まれています。データ アナリストがこのセクションを作成することに注意してください。モデルの詳細については、 [SQL モデル](https://docs.getdbt.com/docs/build/sql-models)を参照してください。
 
--   `seeds`ディレクトリには、データベース エクスポート ツールによってダンプされた CSV ファイルが格納されます。たとえば、 Dumplingを使用して CSV ファイルに変換でき[TiDB Cloudデータをエクスポートする](https://docs.pingcap.com/tidbcloud/export-data-from-tidb-cloud) 。 `jaffle_shop`プロジェクトでは、これらの CSV ファイルを処理対象の生データとして使用します。
+-   `seeds`ディレクトリには、データベース エクスポート ツールによってダンプされた CSV ファイルが格納されます。たとえば、 Dumplingを使用して CSV ファイルに[TiDB Cloudデータをエクスポートする](https://docs.pingcap.com/tidbcloud/export-data-from-tidb-cloud)できます。 `jaffle_shop`プロジェクトでは、これらの CSV ファイルを処理対象の生データとして使用します。
 
 ## ステップ 3: プロジェクトを構成する {#step-3-configure-the-project}
 
@@ -319,19 +319,19 @@ dbt を使用すると、プロジェクトの全体構造を表示し、すべ�
 
 ## プロファイル フィールドの説明 {#description-of-profile-fields}
 
-| オプション      | 説明                                    | 必須？   | 例                                                 |
+| オプション      | 説明                                    | 必要？   | 例                                                 |
 | ---------- | ------------------------------------- | ----- | ------------------------------------------------- |
-| `type`     | 使用する特定のアダプター                          | 必須    | `tidb`                                            |
-| `server`   | 接続先のTiDB Cloudクラスターのエンドポイント           | 必須    | `gateway01.ap-southeast-1.prod.aws.tidbcloud.com` |
-| `port`     | 使用するポート                               | 必須    | `4000`                                            |
-| `schema`   | データを正規化するスキーマ (データベース)                | 必須    | `analytics`                                       |
-| `username` | TiDB Cloudクラスターへの接続に使用するユーザー名         | 必須    | `xxxxxxxxxxx.root`                                |
-| `password` | TiDB Cloudクラスターへの認証に使用するパスワード         | 必須    | `"your_password"`                                 |
+| `type`     | 使用する特定のアダプター                          | 必要    | `tidb`                                            |
+| `server`   | 接続先のTiDB Cloudクラスターのエンドポイント           | 必要    | `gateway01.ap-southeast-1.prod.aws.tidbcloud.com` |
+| `port`     | 使用するポート                               | 必要    | `4000`                                            |
+| `schema`   | データを正規化するスキーマ (データベース)                | 必要    | `analytics`                                       |
+| `username` | TiDB Cloudクラスターへの接続に使用するユーザー名         | 必要    | `xxxxxxxxxxx.root`                                |
+| `password` | TiDB Cloudクラスターへの認証に使用するパスワード         | 必要    | `"your_password"`                                 |
 | `retries`  | TiDB Cloudクラスターへの接続の再試行回数 (デフォルトでは 1) | オプション | `2`                                               |
 
 ## 対応関数 {#supported-functions}
 
-次の関数を dbt-tidb で直接使用できます。それらの使用方法については、 [dbt-util](https://github.com/dbt-labs/dbt-utils)を参照してください。
+次の関数をdbt-tidb で直接使用できます。それらの使用方法については、 [dbt-util](https://github.com/dbt-labs/dbt-utils)を参照してください。
 
 次の関数がサポートされています。
 

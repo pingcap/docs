@@ -51,7 +51,7 @@ TiDB バージョン: 4.0.5
     -   `StrToInt`と`StrToFloat`の動作を改良し、JSON を`date` 、 `time` 、および`timestamp`型に変換することをサポートします[#18159](https://github.com/pingcap/tidb/pull/18159)
     -   `TableReader`オペレーター[#18392](https://github.com/pingcap/tidb/pull/18392)のメモリ使用量の制限をサポート
     -   `batch cop`リクエスト[#18999](https://github.com/pingcap/tidb/pull/18999)を再試行するときにバックオフが何度も発生しないようにする
-    -   `ALTER TABLE`アルゴリズムの互換性を向上[#19270](https://github.com/pingcap/tidb/pull/19270)
+    -   `ALTER TABLE`アルゴリズムの互換性を改善[#19270](https://github.com/pingcap/tidb/pull/19270)
     -   内側にシングルパーティションテーブルサポート`IndexJoin`を作成する[#19151](https://github.com/pingcap/tidb/pull/19151)
     -   ログに無効な行が含まれている場合でも、ログ ファイルの検索をサポート[#18579](https://github.com/pingcap/tidb/pull/18579)
 
@@ -62,22 +62,22 @@ TiDB バージョン: 4.0.5
     -   リージョン分散後のリーダー分布を改善する[#2684](https://github.com/tikv/pd/pull/2684)
     -   TSO 要求[#2678](https://github.com/tikv/pd/pull/2678)のテストとログをさらに追加します。
     -   リージョンのリーダーが変更された後の無効なキャッシュ更新を回避する[#2672](https://github.com/tikv/pd/pull/2672)
-    -   `store.GetLimit`が廃棄済みストアを返すことを許可するオプションを追加します[#2743](https://github.com/tikv/pd/pull/2743)
+    -   `store.GetLimit`廃棄済みストアを返すことを許可するオプションを追加します[#2743](https://github.com/tikv/pd/pull/2743)
     -   PD リーダーとフォロワー間のリージョンリーダーの変更の同期をサポートします[#2795](https://github.com/tikv/pd/pull/2795)
     -   GC safepoint サービスをクエリするコマンドを追加します[#2797](https://github.com/tikv/pd/pull/2797)
-    -   フィルター内の`region.Clone`の呼び出しを置き換えて、パフォーマンスを向上させます[#2801](https://github.com/tikv/pd/pull/2801)
+    -   フィルター内の`region.Clone`呼び出しを置き換えて、パフォーマンスを向上させます[#2801](https://github.com/tikv/pd/pull/2801)
     -   リージョンフロー キャッシュの更新を無効にするオプションを追加して、大規模なクラスター[#2848](https://github.com/tikv/pd/pull/2848)のパフォーマンスを向上させます。
 
 -   TiFlash
 
-    -   CPU、I/O、RAM 使用量のメトリックとストレージ エンジンのメトリックを表示するための Grafana パネルを追加します。
+    -   CPU、I/O、RAM 使用量のメトリックとstorageエンジンのメトリックを表示するための Grafana パネルを追加します。
     -   Raftログの処理ロジックを最適化して I/O 操作を削減する
-    -   ブロックされた`add partition`の DDL ステートメントのリージョンスケジューリングを高速化する
+    -   ブロックされた`add partition` DDL ステートメントのリージョンスケジューリングを高速化する
     -   DeltaTree のデルタ データの圧縮を最適化して、読み取りと書き込みの増幅を減らします
     -   複数のスレッドを使用してスナップショットを前処理することにより、リージョンのスナップショットを適用するパフォーマンスを最適化します
     -   TiFlashの読み取り負荷が低いときにファイル記述子を開く数を最適化して、システム リソースの消費を削減します。
     -   TiFlash の再起動時に作成される不要な小さなファイルの数を最適化します
-    -   データ ストレージの保存時の暗号化をサポート
+    -   データstorageの保存時の暗号化をサポート
     -   データ転送用の TLS をサポート
 
 -   ツール
@@ -118,17 +118,17 @@ TiDB バージョン: 4.0.5
     -   悲観的トランザクションの既存のチェックを修正します[#19004](https://github.com/pingcap/tidb/pull/19004)
     -   `union select for update`を実行すると同時競合[#19006](https://github.com/pingcap/tidb/pull/19006)が発生する可能性がある問題を修正
     -   `apply`に`PointGet`演算子[#19046](https://github.com/pingcap/tidb/pull/19046)の子がある場合の間違ったクエリ結果を修正
-    -   `IndexLookUp`が`Apply`演算子[#19496](https://github.com/pingcap/tidb/pull/19496)の内側にある場合に発生する誤った結果を修正します。
+    -   `IndexLookUp` `Apply`演算子[#19496](https://github.com/pingcap/tidb/pull/19496)の内側にある場合に発生する誤った結果を修正します。
     -   `anti-semi-join`クエリの誤った結果を修正する[#19472](https://github.com/pingcap/tidb/pull/19472)
     -   `BatchPointGet` [#19456](https://github.com/pingcap/tidb/pull/19456)の誤った使用による誤った結果を修正
-    -   `UnionScan`が`Apply`演算子[#19496](https://github.com/pingcap/tidb/pull/19496)の内側にある場合に発生する誤った結果を修正します。
+    -   `UnionScan` `Apply`演算子[#19496](https://github.com/pingcap/tidb/pull/19496)の内側にある場合に発生する誤った結果を修正します。
     -   `EXECUTE`ステートメントを使用して高価なクエリ ログ[#17419](https://github.com/pingcap/tidb/pull/17419)を出力することによって引き起こされるpanicを修正します。
     -   結合キーが`ENUM`または`SET` [#19235](https://github.com/pingcap/tidb/pull/19235)の場合のインデックス結合エラーを修正
-    -   インデックス列[#19358](https://github.com/pingcap/tidb/pull/19358)に`NULL`の値が存在する場合、クエリ範囲を構築できない問題を修正
+    -   インデックス列[#19358](https://github.com/pingcap/tidb/pull/19358)に`NULL`値が存在する場合、クエリ範囲を構築できない問題を修正
     -   グローバル構成の更新によって発生するデータ競合の問題を修正します[#17964](https://github.com/pingcap/tidb/pull/17964)
     -   大文字のスキーマで文字セットを変更するときに発生するpanicの問題を修正します[#19286](https://github.com/pingcap/tidb/pull/19286)
     -   ディスク スピル アクション中に一時ディレクトリを変更することによって発生する予期しないエラーを修正します[#18970](https://github.com/pingcap/tidb/pull/18970)
-    -   10 [#19131](https://github.com/pingcap/tidb/pull/19131)型の間違ったハッシュ キーを修正します。
+    -   [#19131](https://github.com/pingcap/tidb/pull/19131)進数型の間違ったハッシュ キーを修正します。
     -   `PointGet`および`BatchPointGet`演算子がパーティション選択構文を考慮せず、誤った結果が得られる問題を修正します[#19141](https://github.com/pingcap/tidb/issues/19141)
     -   `Apply`演算子を`UnionScan`演算子[#19104](https://github.com/pingcap/tidb/issues/19104)と一緒に使用した場合の誤った結果を修正します。
     -   インデックス付き仮想生成列が間違った値[#17989](https://github.com/pingcap/tidb/issues/17989)を返すバグを修正
@@ -138,18 +138,18 @@ TiDB バージョン: 4.0.5
 
     -   Hibernate リージョンが有効な場合にリーダー選出を高速化する[#8292](https://github.com/tikv/tikv/pull/8292)
     -   スケジュール[#8357](https://github.com/tikv/tikv/pull/8357)中のメモリリークの問題を修正します。
-    -   リーダーがあまりにも早く休止状態になるのを防ぐために、 `hibernate-timeout`の構成項目を追加します[#8208](https://github.com/tikv/tikv/pull/8208)
+    -   リーダーがあまりにも早く休止状態になるのを防ぐために、 `hibernate-timeout`構成項目を追加します[#8208](https://github.com/tikv/tikv/pull/8208)
 
 -   PD
 
     -   リーダー交代時にTSOリクエストが失敗する場合がある不具合を修正[#2666](https://github.com/tikv/pd/pull/2666)
-    -   配置ルールが有効になっている場合、リージョンレプリカを最適な状態にスケジュールできないことがある問題を修正し[#2720](https://github.com/tikv/pd/pull/2720) 。
+    -   配置ルールが有効になっている場合、リージョンレプリカを最適な状態にスケジュールできないことがある問題を修正します[#2720](https://github.com/tikv/pd/pull/2720)
     -   配置ルールが有効な場合に`Balance Leader`が機能しない問題を修正します[#2726](https://github.com/tikv/pd/pull/2726)
     -   異常なストアがストア負荷統計から除外されない問題を修正します[#2805](https://github.com/tikv/pd/pull/2805)
 
 -   TiFlash
 
-    -   データベースまたはテーブルの名前に特殊文字が含まれている場合、以前のバージョンからアップグレードした後、 TiFlashが正常に起動できない問題を修正します。
+    -   データベースまたはテーブルの名前に特殊文字が含まれている場合、以前のバージョンからアップグレードした後、 TiFlash が正常に起動できない問題を修正します。
     -   初期化中に例外がスローされると、 TiFlashプロセスが終了できない問題を修正します。
 
 -   ツール

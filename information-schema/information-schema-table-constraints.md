@@ -5,7 +5,7 @@ summary: Learn the `TABLE_CONSTRAINTS` information_schema table.
 
 # TABLE_CONSTRAINTS {#table-constraints}
 
-`TABLE_CONSTRAINTS`の表は、どの表に制約があるかを示しています。
+`TABLE_CONSTRAINTS`表は、どの表に制約があるかを示しています。
 
 {{< copyable "" >}}
 
@@ -55,4 +55,4 @@ SELECT * FROM table_constraints WHERE constraint_type='UNIQUE';
 -   `CONSTRAINT_SCHEMA` : 制約が属するデータベースの名前。
 -   `CONSTRAINT_NAME` : 制約の名前。
 -   `TABLE_NAME` : テーブルの名前。
--   `CONSTRAINT_TYPE` : 制約のタイプ。値は`UNIQUE` 、 `PRIMARY KEY`または`FOREIGN KEY`です。 `UNIQUE`と`PRIMARY KEY`の情報は、 `SHOW INDEX`ステートメントの実行結果と同様です。
+-   `CONSTRAINT_TYPE` : 制約のタイプ。値は`UNIQUE` 、 `PRIMARY KEY`または`FOREIGN KEY`です。 `UNIQUE`と`PRIMARY KEY`情報は、 `SHOW INDEX`ステートメントの実行結果と同様です。

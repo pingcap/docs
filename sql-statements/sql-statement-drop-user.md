@@ -5,7 +5,7 @@ summary: An overview of the usage of DROP USER for the TiDB database.
 
 # ユーザーをドロップ {#drop-user}
 
-このステートメントは、TiDB システム データベースからユーザーを削除します。オプションのキーワード`IF EXISTS`を使用すると、ユーザーが存在しない場合にエラーを黙らせることができます。このステートメントには`CREATE USER`特権が必要です。
+このステートメントは、TiDB システム データベースからユーザーを削除します。オプションのキーワード`IF EXISTS`使用すると、ユーザーが存在しない場合にエラーを黙らせることができます。このステートメントには`CREATE USER`特権が必要です。
 
 ## あらすじ {#synopsis}
 

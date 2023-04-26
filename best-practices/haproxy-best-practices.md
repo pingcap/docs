@@ -17,7 +17,7 @@ summary: This document describes best practices for configuration and usage of H
 
 HAProxy は、C 言語で記述された無料のオープンソース ソフトウェアで、TCP および HTTP ベースのアプリケーションに高可用性のロード バランサーとプロキシサーバーを提供します。 CPU とメモリを高速かつ効率的に使用するため、HAProxy は現在、GitHub、Bitbucket、Stack Overflow、Reddit、Tumblr、Twitter、Tuenti、AWS (Amazon Web Services) など、多くの有名な Web サイトで広く使用されています。
 
-HAProxy は 2000 年に Linux カーネルの中心的貢献者である Willy Tarreau によって書かれました。Willy Tarreau は今でもプロジェクトの保守を担当しており、オープンソース コミュニティで無料のソフトウェア アップデートを提供しています。このガイドでは、HAProxy [2.6](https://www.haproxy.com/blog/announcing-haproxy-2-6/)を使用します。最新の安定版を使用することをお勧めします。詳細は[HAProxy のリリース バージョン](http://www.haproxy.org/)を参照してください。
+HAProxy は 2000 年に Linux カーネルの中心的貢献者である Willy Tarreau によって書かれました。Willy Tarreau は今でもプロジェクトの保守を担当しており、オープンソース コミュニティで無料のソフトウェア アップデートを提供しています。このガイドでは、HAProxy [2.6](https://www.haproxy.com/blog/announcing-haproxy-2-6/)を使用します。最新の安定版を使用することをお勧めします。詳細は[HAProxy のリリース バージョン](http://www.haproxy.org/)参照してください。
 
 ## 基本的な機能 {#basic-features}
 
@@ -25,7 +25,7 @@ HAProxy は 2000 年に Linux カーネルの中心的貢献者である Willy T
 -   [負荷分散](http://cbonte.github.io/haproxy-dconv/2.6/configuration.html#4.2-balance) : 2 つの主要なプロキシ モードがサポートされています。レイヤー4 とも呼ばれる TCP と、レイヤー7 とも呼ばれる HTTP です。roundrobin、leastconn、random など、9 つ以上の負荷分散アルゴリズムがサポートされています。
 -   [健康診断](http://cbonte.github.io/haproxy-dconv/2.6/configuration.html#5.2-check) : HAProxy はサーバーの HTTP または TCP モードのステータスを定期的にチェックします。
 -   [スティッキー セッション](http://cbonte.github.io/haproxy-dconv/2.6/intro.html#3.3.6) : HAProxy は、アプリケーションがスティッキー セッションをサポートしていない間、クライアントを特定のサーバーに固定できます。
--   [SSL](http://cbonte.github.io/haproxy-dconv/2.6/intro.html#3.3.2) : HTTPS 通信と解決がサポートされています。
+-   [SSL](http://cbonte.github.io/haproxy-dconv/2.6/intro.html#3.3.2) : HTTPS 通信と解決がサポートされます。
 -   [モニタリングと統計](http://cbonte.github.io/haproxy-dconv/2.6/intro.html#3.3.3) : Web ページを通じて、サービスの状態とトラフィック フローをリアルタイムで監視できます。
 
 ## あなたが始める前に {#before-you-begin}
@@ -74,7 +74,7 @@ HAProxy をデプロイする前に、ハードウェアとソフトウェアの
 yum -y install epel-release gcc systemd-devel
 ```
 
-## HAProxy をデプロイ {#deploy-haproxy}
+## HAProxyをデプロイ {#deploy-haproxy}
 
 HAProxy を使用すると、負荷分散されたデータベース環境を簡単に構成およびセットアップできます。このセクションでは、一般的な展開操作について説明します。実際のシナリオに基づいて[構成ファイル](http://cbonte.github.io/haproxy-dconv/2.6/configuration.html)をカスタマイズできます。
 

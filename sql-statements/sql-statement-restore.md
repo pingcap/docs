@@ -7,19 +7,19 @@ summary: An overview of the usage of RESTORE for the TiDB database.
 
 このステートメントは、以前に[`BACKUP`ステートメント](/sql-statements/sql-statement-backup.md)によって作成されたバックアップ アーカイブから分散復元を実行します。
 
-`RESTORE`ステートメントは[BRツール](/br/backup-and-restore-overview.md)と同じエンジンを使用しますが、復元プロセスが別のBRツールではなく TiDB 自体によって駆動される点が異なります。 BRのすべての利点と注意事項がここにも適用されます。特に、 **`RESTORE`は現在ACIDに準拠していません**。 `RESTORE`を実行する前に、次の要件が満たされていることを確認してください。
+`RESTORE`ステートメントは[BRツール](/br/backup-and-restore-overview.md)と同じエンジンを使用しますが、復元プロセスが別のBRツールではなく TiDB 自体によって駆動される点が異なります。 BRのすべての利点と注意事項がここにも適用されます。特に、 **`RESTORE`現在ACIDに準拠していません**。 `RESTORE`を実行する前に、次の要件が満たされていることを確認してください。
 
 -   クラスターは「オフライン」であり、現在の TiDB セッションは、復元中のすべてのテーブルにアクセスできる唯一のアクティブな SQL 接続です。
 -   既存のデータが上書きされ、データとインデックスの間で不整合が生じる可能性があるため、完全復元が実行されている場合、復元されるテーブルはまだ存在していてはなりません。
 -   増分復元が実行されている場合、テーブルは、バックアップが作成されたときのタイムスタンプ`LAST_BACKUP`とまったく同じ状態である必要があります。
 
-`RESTORE`を実行するには、 `RESTORE_ADMIN`または`SUPER`の特権が必要です。さらに、復元を実行する TiDB ノードとクラスター内のすべての TiKV ノードの両方に、復元先からの読み取り権限が必要です。
+`RESTORE`を実行するには、 `RESTORE_ADMIN`または`SUPER`特権が必要です。さらに、復元を実行する TiDB ノードとクラスター内のすべての TiKV ノードの両方に、復元先からの読み取り権限が必要です。
 
 `RESTORE`ステートメントはブロックされており、復元タスク全体が終了、失敗、またはキャンセルされた後にのみ終了します。 `RESTORE`を実行するには、持続的な接続を準備する必要があります。タスクは[`KILL TIDB QUERY`](/sql-statements/sql-statement-kill.md)ステートメントを使用してキャンセルできます。
 
-一度に実行できるタスクは`BACKUP`と`RESTORE`の 1 つだけです。 `BACKUP`または`RESTORE`のタスクが同じ TiDBサーバーで既に実行されている場合、新しい`RESTORE`の実行は、前のすべてのタスクが完了するまで待機します。
+一度に実行できるタスクは`BACKUP`と`RESTORE`つだけです。 `BACKUP`または`RESTORE`タスクが同じ TiDBサーバーで既に実行されている場合、新しい`RESTORE`実行は、前のすべてのタスクが完了するまで待機します。
 
-`RESTORE`は「tikv」ストレージ エンジンでのみ使用できます。 「unistore」エンジンで`RESTORE`を使用すると失敗します。
+`RESTORE`は「tikv」storageエンジンでのみ使用できます。 「unistore」エンジンで`RESTORE`使用すると失敗します。
 
 ## あらすじ {#synopsis}
 
@@ -74,7 +74,7 @@ RESTORE DATABASE * FROM 'local:///mnt/backup/2020/04/';
 
 ### 部分復元 {#partial-restore}
 
-復元するデータベースまたはテーブルを指定できます。一部のデータベースまたはテーブルがバックアップ アーカイブにない場合、それらは無視されるため、 `RESTORE`は何もせずに完了します。
+復元するデータベースまたはテーブルを指定できます。一部のデータベースまたはテーブルがバックアップ アーカイブにない場合、それらは無視されるため、 `RESTORE`何もせずに完了します。
 
 {{< copyable "" >}}
 
@@ -90,7 +90,7 @@ RESTORE TABLE `test`.`sbtest01`, `test`.`sbtest02` FROM 'local:///mnt/backup/202
 
 ### 外部ストレージ {#external-storages}
 
-BRは、S3 または GCS からのデータの復元をサポートしています。
+BR は、 S3 または GCS からのデータの復元をサポートしています。
 
 {{< copyable "" >}}
 
@@ -98,7 +98,7 @@ BRは、S3 または GCS からのデータの復元をサポートしていま�
 RESTORE DATABASE * FROM 's3://example-bucket-2020/backup-05/';
 ```
 
-URL 構文については、 [外部ストレージ](/br/backup-and-restore-storages.md)で詳しく説明しています。
+URL 構文については、 [外部storageURL](/br/backup-and-restore-storages.md#url-format)で詳しく説明しています。
 
 認証情報を配布してはならないクラウド環境で実行する場合は、 `SEND_CREDENTIALS_TO_TIKV`オプションを`FALSE`に設定します。
 
@@ -115,7 +115,7 @@ RESTORE DATABASE * FROM 's3://example-bucket-2020/backup-05/'
 
 デフォルトでは、TiDB ノードは 128 の復元スレッドを実行します。この値は`CONCURRENCY`オプションで調整できます。
 
-復元が完了する前に、アーカイブからのデータに対してチェックサムを実行して、正確性を検証し`RESTORE` 。これが不要であることが確実な場合は、オプション`CHECKSUM`を使用してこのステップを無効にすることができます。
+復元が完了する前に、アーカイブからのデータに対してチェック`RESTORE`を実行して、正確性を検証します。これが不要であることが確実な場合は、オプション`CHECKSUM`を使用してこのステップを無効にすることができます。
 
 {{< copyable "" >}}
 

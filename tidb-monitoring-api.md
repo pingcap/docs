@@ -7,7 +7,7 @@ summary: Learn the API of TiDB monitoring services.
 
 次のタイプのインターフェイスを使用して、TiDB クラスターのステータスを監視できます。
 
--   [ステータス インターフェイス](#use-the-status-interface) : このインターフェースは HTTP インターフェースを使用してコンポーネント情報を取得します。このインターフェイスを使用すると、現在の TiDBサーバーの[走行状態](#running-status)とテーブルの[保管情報](#storage-information)を取得できます。
+-   [ステータス インターフェイス](#use-the-status-interface) : このインターフェースは HTTP インターフェースを使用してコンポーネント情報を取得します。このインターフェイスを使用すると、現在の TiDBサーバーの[走行状態](#running-status)とテーブルの[storage情報](#storage-information)を取得できます。
 -   [メトリクス インターフェース](#use-the-metrics-interface) : このインターフェイスは、Prometheus を使用してコンポーネントのさまざまな操作の詳細情報を記録し、Grafana を使用してこれらのメトリックを表示します。
 
 ## ステータス インターフェイスを使用する {#use-the-status-interface}
@@ -34,7 +34,7 @@ curl http://127.0.0.1:10080/status
 
 #### 保管情報 {#storage-information}
 
-次の例では、 `http://${host}:${port}/schema_storage/${db}/${table}`を使用して、特定のデータ テーブルのストレージ情報を取得します。結果は**JSON**形式で返されます。
+次の例では、 `http://${host}:${port}/schema_storage/${db}/${table}`を使用して、特定のデータ テーブルのstorage情報を取得します。結果は**JSON**形式で返されます。
 
 {{< copyable "" >}}
 

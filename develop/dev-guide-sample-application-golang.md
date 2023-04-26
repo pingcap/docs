@@ -27,7 +27,7 @@ summary: Learn how to build a simple CRUD application with TiDB and Golang.
 
 **ローカル クラスターを使用する**
 
-詳細な手順については、 [ローカル テスト クラスターをデプロイする](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[TiUP を使用してTiUPクラスタをデプロイする](/production-deployment-using-tiup.md)を参照してください。
+詳細な手順については、 [ローカル テスト クラスターをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[TiUPを使用して TiDBクラスタをデプロイ](/production-deployment-using-tiup.md)を参照してください。
 
 </CustomContent>
 
@@ -47,7 +47,7 @@ git clone https://github.com/pingcap-inc/tidb-example-golang.git
 
 <div label="Using GORM (Recommended)" value="gorm">
 
-GORM と比較すると、go-sql-driver/mysql の実装はベスト プラクティスではない可能性があります。これは、エラー処理ロジックを記述し、 `*sql.Rows`を手動で閉じる必要があり、コードを簡単に再利用できないため、コードがわずかに冗長になるためです。
+GORM と比較すると、go-sql-driver/mysql の実装はベスト プラクティスではない可能性があります。これは、エラー処理ロジックを記述し、 `*sql.Rows`手動で閉じる必要があり、コードを簡単に再利用できないため、コードがわずかに冗長になるためです。
 
 GORM は、 Golang向けの人気のあるオープンソース ORM ライブラリです。次の手順では、例として`v1.23.5`を取り上げます。
 
@@ -468,7 +468,7 @@ func (tx *TiDBSqlTx) Rollback() error {
 }
 ```
 
-`dao.go`は、データを書き込む機能を提供する一連のデータ操作メソッドを定義します。これは、この例の核心部分でもあります。
+`dao.go`データを書き込む機能を提供する一連のデータ操作メソッドを定義します。これは、この例の核心部分でもあります。
 
 ```go
 package main
@@ -700,7 +700,7 @@ func randomPlayers(amount int) []Player {
 }
 ```
 
-`sql.go`は、SQL ステートメントを定数として定義します。
+`sql.go` 、SQL ステートメントを定数として定義します。
 
 ```go
 package main
@@ -755,7 +755,7 @@ mysql --host 127.0.0.1 --port 4000 -u root<sql/dbinit.sql
 
 <CustomContent platform="tidb-cloud">
 
-go-sql-driver/mysql を使用する場合、クラスターに接続し、 `sql/dbinit.sql`のファイルでステートメントを実行して、データベース テーブルを手動で初期化する必要があります。
+go-sql-driver/mysql を使用する場合、クラスターに接続し、 `sql/dbinit.sql`ファイルでステートメントを実行して、データベース テーブルを手動で初期化する必要があります。
 
 </CustomContent>
 

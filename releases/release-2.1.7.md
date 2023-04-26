@@ -22,7 +22,7 @@ TiDB アンシブル バージョン: 2.1.7
 -   `DO`ステートメントでのサブクエリの使用のサポート[#9877](https://github.com/pingcap/tidb/pull/9877)
 -   `week`関数[#9753](https://github.com/pingcap/tidb/pull/9753)で`default_week_format`変数が有効にならない問題を修正
 -   プラグイン フレームワークのサポート[#9880](https://github.com/pingcap/tidb/pull/9880) 、 [#9888](https://github.com/pingcap/tidb/pull/9888)
--   `log_bin`システム変数[#9634](https://github.com/pingcap/tidb/pull/9634)を使用した binlog の有効化状態のチェックをサポート
+-   `log_bin`システム変数[#9634](https://github.com/pingcap/tidb/pull/9634)を使用したbinlogの有効化状態のチェックをサポート
 -   SQL ステートメントを使用したPump/Drainerステータスの確認のサポート[#9896](https://github.com/pingcap/tidb/pull/9896)
 -   TiDB [#9887](https://github.com/pingcap/tidb/pull/9887)をアップグレードする際の utf8 での mb4 文字のチェックに関する互換性の問題を修正
 -   場合によっては集計関数が JSON データを計算するときのpanicの問題を修正します[#9927](https://github.com/pingcap/tidb/pull/9927)
@@ -33,7 +33,7 @@ TiDB アンシブル バージョン: 2.1.7
 
 ## ツール {#tools}
 
--   binlog を使用して生成された列の複製をサポートする
+-   binlogを使用して生成された列の複製をサポートする
 
 ## TiDB アンシブル {#tidb-ansible}
 

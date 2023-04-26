@@ -5,7 +5,7 @@ summary: Time to live (TTL) is a feature that allows you to manage TiDB data lif
 
 # TTL (Time to Live) を使用して期限切れのデータを定期的に削除する {#periodically-delete-expired-data-using-ttl-time-to-live}
 
-Time to Live (TTL) は、TiDB データの有効期間を行レベルで管理できるようにする機能です。 TTL 属性を持つテーブルの場合、TiDB はデータの有効期間を自動的にチェックし、期限切れのデータを行レベルで削除します。この機能により、ストレージ スペースを効果的に節約し、一部のシナリオでパフォーマンスを向上させることができます。
+Time to Live (TTL) は、TiDB データの有効期間を行レベルで管理できるようにする機能です。 TTL 属性を持つテーブルの場合、TiDB はデータの有効期間を自動的にチェックし、期限切れのデータを行レベルで削除します。この機能により、storageスペースを効果的に節約し、一部のシナリオでパフォーマンスを向上させることができます。
 
 次に、TTL の一般的なシナリオをいくつか示します。
 
@@ -34,7 +34,7 @@ TTL は、ユーザーがオンラインの読み取りおよび書き込みワ�
     ) TTL = `created_at` + INTERVAL 3 MONTH;
     ```
 
-    前の例では、テーブル`t1`を作成し、データの作成時刻を示す TTL タイムスタンプ列として`created_at`を指定します。この例では、行がテーブルに存在できる最長期間を 3 か月から`INTERVAL 3 MONTH`か月に設定しています。この値よりも長く存続するデータは後で削除されます。
+    前の例では、テーブル`t1`を作成し、データの作成時刻を示す TTL タイムスタンプ列として`created_at`を指定します。この例では、行がテーブルに存在できる最長期間を 3 か月から`INTERVAL 3 MONTH`に設定しています。この値よりも長く存続するデータは後で削除されます。
 
 -   `TTL_ENABLE`属性を設定して、期限切れデータのクリーンアップ機能を有効または無効にします。
 
@@ -98,7 +98,7 @@ TTL は[データ型のデフォルト値](/data-type-default-values.md)と一�
     ```sql
     CREATE TABLE t1 (
         id int PRIMARY KEY,
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
     ) TTL = `created_at` + INTERVAL 3 MONTH;
     ```
 
@@ -144,7 +144,7 @@ TTL ジョブの実行を無効にするには、 `TTL_ENABLE='OFF'`テーブル
 SET @@global.tidb_ttl_job_enable = OFF;
 ```
 
-シナリオによっては、特定の時間枠でのみ TTL ジョブの実行を許可したい場合があります。この場合、 [`tidb_ttl_job_schedule_window_start_time`](/system-variables.md#tidb_ttl_job_schedule_window_start_time-new-in-v650)と[`tidb_ttl_job_schedule_window_end_time`](/system-variables.md#tidb_ttl_job_schedule_window_end_time-new-in-v650)のグローバル変数を設定して時間枠を指定できます。例えば：
+シナリオによっては、特定の時間枠でのみ TTL ジョブの実行を許可したい場合があります。この場合、 [`tidb_ttl_job_schedule_window_start_time`](/system-variables.md#tidb_ttl_job_schedule_window_start_time-new-in-v650)と[`tidb_ttl_job_schedule_window_end_time`](/system-variables.md#tidb_ttl_job_schedule_window_end_time-new-in-v650)グローバル変数を設定して時間枠を指定できます。例えば：
 
 ```sql
 SET @@global.tidb_ttl_job_schedule_window_start_time = '01:00 +0000';
@@ -159,7 +159,7 @@ SET @@global.tidb_ttl_job_schedule_window_end_time = '05:00 +0000';
 
 > **ノート：**
 >
-> このセクションは、オンプレミスの TiDB にのみ適用されます。現在、 TiDB Cloudは TTL メトリックを提供していません。
+> このセクションは、オンプレミスの TiDB にのみ適用されます。現在、 TiDB Cloud はTTL メトリックを提供していません。
 
 </CustomContent>
 

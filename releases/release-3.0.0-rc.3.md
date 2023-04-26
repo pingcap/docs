@@ -31,13 +31,13 @@ TiDB アンシブル バージョン: 3.0.0-rc.3
     -   逆順でのデータのスキャンをサポートすることにより、 `admin show ddl jobs`のパフォーマンスを向上させます[#10687](https://github.com/pingcap/tidb/pull/10687)
     -   このステートメントに`current_user`フィールド[#10684](https://github.com/pingcap/tidb/pull/10684)がある場合、RBAC の`show grants`ステートメントの結果が MySQL の結果と互換性がない問題を修正します。
     -   UUID が複数のノードで重複した値を生成する可能性がある問題を修正します[#10712](https://github.com/pingcap/tidb/pull/10712)
-    -   `explain` [#10635](https://github.com/pingcap/tidb/pull/10635)で`show view`の権限が考慮されない問題を修正
-    -   `split table region`のステートメントを追加して、テーブルリージョンを手動で分割し、ホットスポットの問題を軽減します[#10765](https://github.com/pingcap/tidb/pull/10765)
+    -   `explain` [#10635](https://github.com/pingcap/tidb/pull/10635)で`show view`権限が考慮されない問題を修正
+    -   `split table region`ステートメントを追加して、テーブルリージョンを手動で分割し、ホットスポットの問題を軽減します[#10765](https://github.com/pingcap/tidb/pull/10765)
     -   `split index region`ステートメントを追加して、インデックスリージョンを手動で分割し、ホットスポットの問題を軽減します[#10764](https://github.com/pingcap/tidb/pull/10764)
     -   `create user` 、 `grant` 、または`revoke`などの複数のステートメントを連続して実行すると、正しく実行されない問題を修正します[#10737](https://github.com/pingcap/tidb/pull/10737)
     -   コプロセッサー[#10791](https://github.com/pingcap/tidb/pull/10791)への式のプッシュ ダウンを禁止するブロックリストを追加します。
     -   クエリがメモリ構成の制限を超えたときに`expensive query`ログを出力する機能を追加します[#10849](https://github.com/pingcap/tidb/pull/10849)
-    -   `bind-info-lease`の構成項目を追加して、変更されたバインディング実行プランの更新時間を制御します[#10727](https://github.com/pingcap/tidb/pull/10727)
+    -   `bind-info-lease`構成項目を追加して、変更されたバインディング実行プランの更新時間を制御します[#10727](https://github.com/pingcap/tidb/pull/10727)
     -   `execdetails.ExecDetails`ポインター[#10832](https://github.com/pingcap/tidb/pull/10832)が原因で、コプロセッサーリソースを迅速に解放できなかったことが原因で発生した同時実行の多いシナリオでの OOM の問題を修正します。
     -   場合によっては`kill`ステートメントによって引き起こされるpanicの問題を修正します[#10876](https://github.com/pingcap/tidb/pull/10876)
 
@@ -48,7 +48,7 @@ TiDB アンシブル バージョン: 3.0.0-rc.3
     -   RBAC [#10738](https://github.com/pingcap/tidb/pull/10738)で`skip-grant-table`オプションを有効にするためのサポートを修正
     -   `pessimistic-txn`構成が無効になる問題を修正[#10825](https://github.com/pingcap/tidb/pull/10825)
     -   アクティブにキャンセルされた ticlient リクエストがまだ再試行される問題を修正します[#10850](https://github.com/pingcap/tidb/pull/10850)
-    -   悲観的トランザクションと楽観的なトランザクションが競合する場合のパフォーマンスを改善する[#10881](https://github.com/pingcap/tidb/pull/10881)
+    -   悲観悲観的なトランザクションと楽観的トランザクションが競合する場合のパフォーマンスを改善する[#10881](https://github.com/pingcap/tidb/pull/10881)
 
 -   DDL
     -   `alter table`を使用して charset を変更すると`blob`型が変更される問題を修正します[#10698](https://github.com/pingcap/tidb/pull/10698)
@@ -58,7 +58,7 @@ TiDB アンシブル バージョン: 3.0.0-rc.3
 
 ## PD {#pd}
 
--   `enable-two-way-merge`つの構成アイテムを追加して、一方向のマージのみを許可する[#1583](https://github.com/pingcap/pd/pull/1583)
+-   `enable-two-way-merge`構成アイテムを追加して、一方向のマージのみを許可する[#1583](https://github.com/pingcap/pd/pull/1583)
 -   `AddLightLearner`と`AddLightPeer`のスケジューリング操作を追加して、 リージョン Scatter スケジューリングが制限メカニズムによって制限されないようにする[#1563](https://github.com/pingcap/pd/pull/1563)
 -   システムの起動時にデータのレプリカ複製が 1 つしかない可能性があるため、信頼性が不十分になる問題を修正します[#1581](https://github.com/pingcap/pd/pull/1581)
 -   構成チェック ロジックを最適化して構成アイテム エラーを回避する[#1585](https://github.com/pingcap/pd/pull/1585)
@@ -76,7 +76,7 @@ TiDB アンシブル バージョン: 3.0.0-rc.3
     -   追加`READ_INDEX`関連の監視指標[#4830](https://github.com/tikv/tikv/pull/4830)
     -   GC ワーカー関連のモニタリング指標を追加する[#4922](https://github.com/tikv/tikv/pull/4922)
 
--   ラフトストア
+-   Raftstore
     -   ローカル リーダーのキャッシュが正しくクリアされない問題を修正します[#4778](https://github.com/tikv/tikv/pull/4778)
     -   リーダーの転送と変更時にリクエストの遅延が増加する可能性がある問題を修正`conf` [#4734](https://github.com/tikv/tikv/pull/4734)
     -   古いコマンドが誤って報告される問題を修正[#4682](https://github.com/tikv/tikv/pull/4682)
@@ -96,8 +96,8 @@ TiDB アンシブル バージョン: 3.0.0-rc.3
     -   ベクトル計算[#4808](https://github.com/tikv/tikv/pull/4808)で`UnaryNot`式をサポート
 
 -   トランザクション
-    -   悲観的なトランザクションで非悲観的的なロック競合が原因でエラーが発生する問題を修正[#4801](https://github.com/tikv/tikv/pull/4801) 、 [#4883](https://github.com/tikv/tikv/pull/4883)
-    -   悲観的なトランザクションを有効にした後、楽観的トランザクションの不要な計算を減らしてパフォーマンスを向上させます[#4813](https://github.com/tikv/tikv/pull/4813)
+    -   悲観的トランザクションで非悲観的なロック競合が原因でエラーが発生する問題を修正[#4801](https://github.com/tikv/tikv/pull/4801) 、 [#4883](https://github.com/tikv/tikv/pull/4883)
+    -   楽観的トランザクションを有効にした後、悲観的トランザクションの不要な計算を減らしてパフォーマンスを向上させます[#4813](https://github.com/tikv/tikv/pull/4813)
     -   単一ステートメントのロールバックの機能を追加して、デッドロック状況でトランザクション全体がロールバック操作を必要としないようにします[#4848](https://github.com/tikv/tikv/pull/4848)
     -   悲観的トランザクション関連の監視項目を追加[#4852](https://github.com/tikv/tikv/pull/4852)
     -   `ResolveLockLite`コマンドを使用して軽量ロックを解決し、重大な競合が存在する場合のパフォーマンスを向上させるサポート[#4882](https://github.com/tikv/tikv/pull/4882)
@@ -111,9 +111,9 @@ TiDB アンシブル バージョン: 3.0.0-rc.3
 
 ## ツール {#tools}
 
--   Binlog
+-   TiDBBinlog
     -   データの書き込みに失敗したときにPumpが戻り値をチェックしないことによって引き起こされる間違ったオフセットの問題を修正します[#640](https://github.com/pingcap/tidb-binlog/pull/640)
-    -   Drainerに`advertise-addr`の構成を追加して、コンテナー環境でブリッジ モードをサポートする[#634](https://github.com/pingcap/tidb-binlog/pull/634)
+    -   Drainerに`advertise-addr`構成を追加して、コンテナー環境でブリッジ モードをサポートする[#634](https://github.com/pingcap/tidb-binlog/pull/634)
     -   Pumpに`GetMvccByEncodeKey`関数を追加して、トランザクション ステータスのクエリを高速化します[#632](https://github.com/pingcap/tidb-binlog/pull/632)
 
 ## TiDB アンシブル {#tidb-ansible}

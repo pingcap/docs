@@ -4,7 +4,7 @@ TiDB ドキュメントへようこそ!
 
 このリポジトリには[PingCAP Web サイトの TiDB ドキュメント](https://docs.pingcap.com/tidb/stable)のすべてのソース ファイルが格納され、 [pingcap/docs-cn](https://github.com/pingcap/docs-cn)リポジトリには[中国語の TiDB ドキュメント](https://docs.pingcap.com/zh/tidb/stable)のすべてのソース ファイルが格納されます。
 
-ドキュメントの問題を見つけた場合は、お気軽に[問題を作成する](https://github.com/pingcap/docs/issues/new/choose)までご連絡いただくか、直接[プルリクエストを作成する](/CONTRIBUTING.md#how-to-contribute)までご連絡ください。修正または更新にご協力ください。
+ドキュメントの問題を見つけた場合は、お気軽に[問題を作成する](https://github.com/pingcap/docs/issues/new/choose)までご連絡いただくか、直接[プルリクエストを作成する](/CONTRIBUTING.md#how-to-contribute)ご連絡ください。修正または更新にご協力ください。
 
 現在、公式ドキュメントは 2 つの言語をサポートしています。
 
@@ -42,4 +42,4 @@ Google 翻訳を使用して、さまざまな言語でドキュメントを表�
 
 [<img src="media/contribution-map.png" alt="コントリビューション マップ" width="180">](https://github.com/pingcap/docs/blob/master/credits.md)
 
-貢献者になるには[TiDB ドキュメンテーション寄稿ガイド](/CONTRIBUTING.md)を参照してください。 🤓
+貢献者になるには[TiDB ドキュメンテーション寄稿ガイド](/CONTRIBUTING.md)参照してください。 🤓

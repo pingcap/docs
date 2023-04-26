@@ -7,9 +7,9 @@ summary: An overview of the usage of SHOW [BACKUPS|RESTORES] for the TiDB databa
 
 これらのステートメントは、TiDB インスタンスで実行された、キューに入れられた、実行中の、および最近終了した[`BACKUP`](/sql-statements/sql-statement-backup.md)および[`RESTORE`](/sql-statements/sql-statement-restore.md)のすべてのタスクのリストを表示します。
 
-両方のステートメントを実行するには、 `SUPER`の特権が必要です。
+両方のステートメントを実行するには、 `SUPER`特権が必要です。
 
-`SHOW BACKUPS`を使用して`BACKUP`のタスクを照会し、 `SHOW RESTORES`を使用して`RESTORE`のタスクを照会します。
+`SHOW BACKUPS`を使用して`BACKUP`タスクを照会し、 `SHOW RESTORES`を使用して`RESTORE`タスクを照会します。
 
 `br`コマンドライン ツールで開始されたバックアップと復元は表示されません。
 

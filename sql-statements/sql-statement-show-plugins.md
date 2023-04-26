@@ -5,7 +5,7 @@ summary: An overview of the usage of SHOW PLUGINS for the TiDB database.
 
 # プラグインを表示 {#show-plugins}
 
-`SHOW PLUGINS`は、各プラグインのステータスとバージョン情報を含め、TiDB にインストールされているすべてのプラグインを表示します。
+`SHOW PLUGINS` 、各プラグインのステータスとバージョン情報を含め、TiDB にインストールされているすべてのプラグインを表示します。
 
 ## あらすじ {#synopsis}
 

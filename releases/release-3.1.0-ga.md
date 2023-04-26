@@ -14,13 +14,13 @@ TiDB Ansible バージョン: 3.1.0 GA
 
 -   TiDB
 
-    -   `report-status`の構成項目が有効になっているときに HTTP リスニング ポートが使用できない場合、TiDB の開始を直接停止することをサポートし[#16291](https://github.com/pingcap/tidb/pull/16291) 。
+    -   `report-status` [#16291](https://github.com/pingcap/tidb/pull/16291)構成項目が有効になっているときに HTTP リスニング ポートが使用できない場合、TiDB の開始を直接停止することをサポートします。
 
 -   ツール
 
     -   バックアップと復元 (BR)
 
-        -   BRは、3.1 GA [#233](https://github.com/pingcap/br/pull/233)より前の TiKV クラスターからのデータの復元をサポートしていません
+        -   BR は、 3.1 GA [#233](https://github.com/pingcap/br/pull/233)より前の TiKV クラスターからのデータの復元をサポートしていません
 
 ## 新機能 {#new-features}
 
@@ -61,11 +61,11 @@ TiDB Ansible バージョン: 3.1.0 GA
     -   `TypeNull`クラスが可変長型[#15739](https://github.com/pingcap/tidb/pull/15739)と間違えられるため、左結合の`sort`演算子のpanicの問題を修正します。
     -   監視セッションの再試行エラーの不正確なカウントの問題を修正します[#16120](https://github.com/pingcap/tidb/pull/16120)
     -   `ALLOW_INVALID_DATES`モード[#16171](https://github.com/pingcap/tidb/pull/16171)で`weekday`の結果が間違っていた問題を修正
-    -   クラスターにTiFlashノードがある場合、ガベージ コレクション (GC) が正常に機能しない場合がある問題を修正し[#15761](https://github.com/pingcap/tidb/pull/15761) 。
-    -   ユーザーがハッシュパーティションテーブルを作成するときに大きなパーティション数を設定すると、TiDB がメモリ(OOM) になる問題を修正します[#16219](https://github.com/pingcap/tidb/pull/16219)
+    -   クラスターにTiFlashノードがある場合、ガベージ コレクション (GC) が正常に機能しない場合がある問題を修正します[#15761](https://github.com/pingcap/tidb/pull/15761)
+    -   ユーザーがハッシュパーティションテーブルを作成するときに大きなパーティション数を設定すると、TiDB がメモリ不足 (OOM) になる問題を修正します[#16219](https://github.com/pingcap/tidb/pull/16219)
     -   警告がエラーと誤認される問題を修正し、 `UNION`ステートメントを`SELECT`ステートメントと同じ動作にする[#16138](https://github.com/pingcap/tidb/pull/16138)
     -   mocktikv [#16200](https://github.com/pingcap/tidb/pull/16200)に`TopN`をpushした時の実行エラーを修正
-    -   `runtime.growslice` [#16142](https://github.com/pingcap/tidb/pull/16142)の不要なオーバーヘッドを回避するために、初期の長さ`chunk.column.nullBitMap`を増やします。
+    -   `runtime.growslice` [#16142](https://github.com/pingcap/tidb/pull/16142)の不要なオーバーヘッドを回避するために、初期の長さ`chunk.column.nullBitMap`増やします。
 
 -   TiKV
 
@@ -76,13 +76,13 @@ TiDB Ansible バージョン: 3.1.0 GA
 -   TiFlash
 
     -   TiDB からスキーマを複製する際の`rename table`操作の潜在的な問題を修正します。
-    -   複数のデータ パス構成で`rename table`の操作が原因で発生するデータ損失の問題を修正します。
-    -   一部のシナリオでTiFlashが誤ったストレージ容量を報告する問題を修正
+    -   複数のデータ パス構成で`rename table`操作が原因で発生するデータ損失の問題を修正します。
+    -   一部のシナリオでTiFlash が誤ったstorage容量を報告する問題を修正
     -   リージョンマージが有効な場合にTiFlashからの読み取りによって引き起こされる潜在的な問題を修正します。
 
 -   ツール
 
-    -   Binlog
+    -   TiDBBinlog
 
         -   TiFlash関連の DDL ジョブがDrainer [#948](https://github.com/pingcap/tidb-binlog/pull/948) [#942](https://github.com/pingcap/tidb-binlog/pull/942)のレプリケーションを中断する可能性がある問題を修正します。
 

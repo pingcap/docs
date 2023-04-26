@@ -21,7 +21,7 @@ TiDB アンシブル バージョン: 2.1.19
     -   `minAutoAnalyzeRatio`制約を削除して、自動`ANALYZE`をよりタイムリーにします[#14013](https://github.com/pingcap/tidb/pull/14013)
     -   `WHERE`句に一意キー[#13385](https://github.com/pingcap/tidb/pull/13385)の等しい条件が含まれている場合、推定行数が`1`より大きい問題を修正します。
 -   SQL 実行エンジン
-    -   `ConvertJSONToInt` [#13036](https://github.com/pingcap/tidb/pull/13036)の`unit64`の中間結果として`int64`を使用する場合の精度オーバーフローを修正します。
+    -   `ConvertJSONToInt` [#13036](https://github.com/pingcap/tidb/pull/13036)の`unit64`の中間結果として`int64`使用する場合の精度オーバーフローを修正します。
     -   `SLEEP`関数がクエリ内にある場合 (たとえば、 `select 1 from (select sleep(1)) t;)` )、列のプルーニングによってクエリ内の`sleep(1)`が無効になるという問題を修正します[#13039](https://github.com/pingcap/tidb/pull/13039)
     -   `INSERT ON DUPLICATE UPDATE`ステートメント[#12999](https://github.com/pingcap/tidb/pull/12999)で`Chunk`を再利用することにより、メモリオーバーヘッドを削減します。
     -   `slow_query`テーブル[#13129](https://github.com/pingcap/tidb/pull/13129)にトランザクション関連のフィールドを追加します。
@@ -48,16 +48,16 @@ TiDB アンシブル バージョン: 2.1.19
     -   `builtinIntervalRealSig` [#13768](https://github.com/pingcap/tidb/pull/13768)の実装で`binSearch`関数がエラーを返さないため、結果が正しくない場合がある問題を修正
     -   `INSERT`文実行[#14009](https://github.com/pingcap/tidb/pull/14009)で文字列型を浮動小数点型に変換するとエラーになることがある問題を修正
     -   `sum(distinct)`関数[#13041](https://github.com/pingcap/tidb/pull/13041)から返された誤った結果を修正します
-    -   関数の返される型の長さが正しくない値が与えられるため、同じ場所の`union`のデータをマージされた型に変換すると`CAST`が`data too long`を返す問題を修正し[#13645](https://github.com/pingcap/tidb/pull/13645) `jsonUnquoteFunction`
+    -   関数の返される型の長さが正しくない値が与えられるため、同じ場所の`data too long` `union`データをマージされた型に変換すると`CAST`が`jsonUnquoteFunction`を返す問題を修正します[#13645](https://github.com/pingcap/tidb/pull/13645)
     -   権限チェックが厳しすぎてパスワードが設定できない問題を修正[#13805](https://github.com/pingcap/tidb/pull/13805)
 -   サーバ
     -   `KILL CONNECTION`ゴルーチンリークが発生する可能性がある問題を修正[#13252](https://github.com/pingcap/tidb/pull/13252)
-    -   HTTP API [#13188](https://github.com/pingcap/tidb/pull/13188)の`info/all`インターフェースを介してすべての TiDB ノードの binlog ステータスを取得するサポート
+    -   HTTP API [#13188](https://github.com/pingcap/tidb/pull/13188)の`info/all`インターフェースを介してすべての TiDB ノードのbinlogステータスを取得するサポート
     -   Windows [#13650](https://github.com/pingcap/tidb/pull/13650)で TiDB プロジェクトをビルドできない問題を修正
-    -   TiDBサーバー[#13904](https://github.com/pingcap/tidb/pull/13904)のバージョンを制御および変更するための`server-version`の構成項目を追加します。
+    -   TiDBサーバー[#13904](https://github.com/pingcap/tidb/pull/13904)のバージョンを制御および変更するための`server-version`構成項目を追加します。
     -   Go1.13でコンパイルしたバイナリ`plugin`が正常に動作しない問題を修正[#13527](https://github.com/pingcap/tidb/pull/13527)
 -   DDL
-    -   テーブルが作成され、テーブルに`COLLATE` [#13190](https://github.com/pingcap/tidb/pull/13190)が含まれている場合、列のシステムのデフォルト文字セットの代わりにテーブルの`COLLATE`を使用します
+    -   テーブルが作成され、テーブルに`COLLATE` [#13190](https://github.com/pingcap/tidb/pull/13190)含まれている場合、列のシステムのデフォルト文字セットの代わりにテーブルの`COLLATE`使用します
     -   テーブルの作成時にインデックス名の長さを制限する[#13311](https://github.com/pingcap/tidb/pull/13311)
     -   テーブルの名前を変更するときにテーブル名の長さがチェックされない問題を修正します[#13345](https://github.com/pingcap/tidb/pull/13345)
     -   `BIT`列[#13511](https://github.com/pingcap/tidb/pull/13511)の幅の範囲を確認します
@@ -66,8 +66,8 @@ TiDB アンシブル バージョン: 2.1.19
 
 ## TiKV {#tikv}
 
--   ラフトストア
-    -   TiKV の再起動時に発生したpanicを修正し、リージョンをマージしてコンパクト ログ[#5884](https://github.com/tikv/tikv/pull/5884)を適用するプロセスで`is_merging`に誤った値が与えられる
+-   Raftstore
+    -   TiKV の再起動時に発生したpanicを修正し、リージョンをマージしてコンパクト ログ[#5884](https://github.com/tikv/tikv/pull/5884)を適用するプロセスで`is_merging`誤った値が与えられる
 -   輸入業者
     -   gRPC メッセージ長の制限を削除します[#5809](https://github.com/tikv/tikv/pull/5809)
 
@@ -78,15 +78,15 @@ TiDB アンシブル バージョン: 2.1.19
 
 ## ツール {#tools}
 
--   Binlog
+-   TiDBBinlog
     -   binlogctl [#777](https://github.com/pingcap/tidb-binlog/pull/777)を介して出力されるノード ステータス情報を最適化します。
-    -   Drainerフィルター構成[#802](https://github.com/pingcap/tidb-binlog/pull/802)の値が`nil`であるために発生したpanicを修正します。
+    -   Drainerフィルター構成[#802](https://github.com/pingcap/tidb-binlog/pull/802)の値が`nil`あるために発生したpanicを修正します。
     -   Pump[#825](https://github.com/pingcap/tidb-binlog/pull/825)の`Graceful`の出口を最適化する
-    -   Pumpが binlog データを書き込むときに、より詳細な監視メトリックを追加します[#830](https://github.com/pingcap/tidb-binlog/pull/830)
+    -   Pump がbinlogデータを書き込むときに、より詳細な監視メトリックを追加します[#830](https://github.com/pingcap/tidb-binlog/pull/830)
     -   Drainerが DDL 操作を実行した後にテーブル情報を更新するように Drainer のロジックを最適化する[#836](https://github.com/pingcap/tidb-binlog/pull/836)
-    -   Pumpがこのバイナリログを受信しない場合、DDL 操作のコミット バイナリログが無視される問題を修正します[#855](https://github.com/pingcap/tidb-binlog/pull/855)
+    -   Pumpがこのbinlogを受信しない場合、DDL 操作のコミットbinlogが無視される問題を修正します[#855](https://github.com/pingcap/tidb-binlog/pull/855)
 
 ## TiDB アンシブル {#tidb-ansible}
 
--   TiDB サービスの`Uncommon Error OPM`の監視項目の名前を`Write Binlog Error`に変更し、対応するアラート メッセージ[#1038](https://github.com/pingcap/tidb-ansible/pull/1038)を追加します。
+-   TiDB サービスの`Uncommon Error OPM`監視項目の名前を`Write Binlog Error`に変更し、対応するアラート メッセージ[#1038](https://github.com/pingcap/tidb-ansible/pull/1038)を追加します。
 -   TiSpark を 2.1.8 にアップグレードする[#1063](https://github.com/pingcap/tidb-ansible/pull/1063)

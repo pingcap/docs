@@ -14,7 +14,7 @@ title: TiDB 2.1 GA Release Notes
 
     -   外部表の選択を`Index Join`に最適化し、Row Count の推定値が小さい方の表を外部表として使用する
 
-    -   Join Hint `TIDB_SMJ`を最適化して、適切なインデックスがなくても Merge Join を使用できるようにする
+    -   Join Hint `TIDB_SMJ`最適化して、適切なインデックスがなくても Merge Join を使用できるようにする
 
     -   結合する内部テーブルを指定する最適化結合ヒント`TIDB_INLJ`
 
@@ -24,13 +24,13 @@ title: TiDB 2.1 GA Release Notes
 
     -   より多くの関数を押し下げるサポート： `ABS` / `CEIL` / `FLOOR` / `IS TRUE` / `IS FALSE`
 
-    -   組み込み関数`IF`および`IFNULL`の定数畳み込みアルゴリズムを最適化する
+    -   組み込み関数`IF`および`IFNULL`定数畳み込みアルゴリズムを最適化する
 
     -   `EXPLAIN`ステートメントの出力を最適化し、階層構造を使用して演算子間の関係を示す
 
 -   SQL エグゼキュータ
 
-    -   すべての集計関数をリファクタリングし、 `Stream`番目と`Hash`番目の集計演算子の実行効率を改善します
+    -   すべての集計関数をリファクタリングし、 `Stream`と`Hash`の集計演算子の実行効率を改善します
 
     -   並列`Hash Aggregate`演算子を実装し、いくつかのシナリオで計算パフォーマンスを 350% 向上させます
 
@@ -110,7 +110,7 @@ title: TiDB 2.1 GA Release Notes
 
     -   `ADD INDEX`の実行速度を最適化し、一部のシナリオで大幅に改善
 
-    -   TiDB が`DDL Owner`かどうかの判断を容易にする`select tidb_is_ddl_owner()`のステートメントをサポートする
+    -   TiDB が`DDL Owner`かどうかの判断を容易にする`select tidb_is_ddl_owner()`ステートメントをサポートする
 
     -   `ALTER TABLE FORCE`構文をサポート
 
@@ -142,13 +142,13 @@ title: TiDB 2.1 GA Release Notes
 
     -   バージョン管理メカニズムを導入し、互換性のあるクラスターのローリング アップデートをサポートします。
 
-    -   ネットワーク分離後にネットワークが回復したときにリーダーの再選択を避けるため、PD ノード間で[`Raft PreVote`有効にする](https://github.com/pingcap/pd/blob/5c7b18cf3af91098f07cf46df0b59fbf8c7c5462/conf/config.toml#L22)
+    -   ネットワーク分離後にネットワークが回復したときにリーダーの再選択を避けるため、PD ノード間で[`Raft PreVote`を有効にする](https://github.com/pingcap/pd/blob/5c7b18cf3af91098f07cf46df0b59fbf8c7c5462/conf/config.toml#L22)
 
     -   デフォルトで`raft learner`を有効にして、スケジューリング中のマシン障害によってデータが使用できなくなるリスクを軽減します
 
     -   TSO 割り当ては、システム クロックが逆行しても影響を受けなくなりました。
 
-    -   メタデータによってもたらされるオーバーヘッドを削減する`Region merge`つの機能をサポート
+    -   メタデータによってもたらされるオーバーヘッドを削減する`Region merge`機能をサポート
 
 -   スケジューラを最適化する
 
@@ -193,7 +193,7 @@ title: TiDB 2.1 GA Release Notes
 
     <!---->
 
-    -   [pd-回復](/pd-recover.md)は`max-replica`パラメーターを提供する必要はありません
+    -   [pd-回復](/pd-recover.md) `max-replica`パラメーターを提供する必要はありません
 
 -   指標
 
@@ -233,7 +233,7 @@ title: TiDB 2.1 GA Release Notes
 
     -   `kv_scan`コマンドに`upper bound`サポートを追加
 
--   ラフトストア
+-   Raftstore
 
     -   スナップショットの書き込みプロセスを改善して、RocksDB のストールを回避します
 
@@ -241,17 +241,17 @@ title: TiDB 2.1 GA Release Notes
 
     -   [`BatchSplit`をサポートして、大量の書き込みによってもたらされる大きなリージョンを回避します](https://github.com/tikv/rfcs/pull/6)
 
-    -   統計によると、I/O オーバーヘッドを削減するために`Region Split`をサポート
+    -   統計によると、I/O オーバーヘッドを削減するために`Region Split`サポート
 
-    -   キーの数に応じて`Region Split`をサポートし、インデックス スキャンの同時実行性を向上させます
+    -   キーの数に応じて`Region Split`サポートし、インデックス スキャンの同時実行性を向上させます
 
     -   `Region Split`によってもたらされる不必要な遅延を回避するために、 Raftメッセージ プロセスを改善します。
 
-    -   `PreVote`つの機能をデフォルトで有効にして、サービスに対するネットワーク分離の影響を軽減します
+    -   `PreVote`機能をデフォルトで有効にして、サービスに対するネットワーク分離の影響を軽減します
 
 -   ストレージ エンジン
 
-    -   RocksDB の`CompactFiles`のバグを修正し、Lightning を使用したデータのインポートへの影響を軽減します
+    -   RocksDB の`CompactFiles`バグを修正し、Lightning を使用したデータのインポートへの影響を軽減します
 
     -   RocksDB を v5.15 にアップグレードして、スナップショット ファイルが破損する可能性がある問題を修正します。
 
@@ -267,11 +267,11 @@ title: TiDB 2.1 GA Release Notes
 
 -   大量データの高速完全インポート: [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)
 
--   新しい[Binlog](/tidb-binlog/tidb-binlog-overview.md)をサポート
+-   新しい[TiDBBinlog](/tidb-binlog/tidb-binlog-overview.md)をサポート
 
 ## アップグレードの注意事項 {#upgrade-caveat}
 
--   新しいストレージ エンジンが採用されているため、TiDB 2.1 は v2.0.x 以前へのダウングレードをサポートしていません。
+-   新しいstorageエンジンが採用されているため、TiDB 2.1 は v2.0.x 以前へのダウングレードをサポートしていません。
 
 <!---->
 
@@ -282,4 +282,4 @@ title: TiDB 2.1 GA Release Notes
 
 <!---->
 
--   TiDB 2.0.6 以前から TiDB 2.1 にアップグレードする場合、進行中の DDL 操作、特に時間のかかる`Add Index`の操作があるかどうかを確認してください。これは、DDL 操作によってアップグレード プロセスが遅くなるためです。進行中の DDL 操作がある場合は、DDL 操作が完了するまで待ってから、更新をロールします。
+-   TiDB 2.0.6 以前から TiDB 2.1 にアップグレードする場合、進行中の DDL 操作、特に時間のかかる`Add Index`操作があるかどうかを確認してください。これは、DDL 操作によってアップグレード プロセスが遅くなるためです。進行中の DDL 操作がある場合は、DDL 操作が完了するまで待ってから、更新をロールします。

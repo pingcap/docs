@@ -44,7 +44,7 @@ airbyte-server      | --------------------------------------
 
 便利なことに、TiDB をソースと宛先として設定する手順は同じです。
 
-1.  サイドバーの [**ソース**] または [<strong>宛先]</strong>をクリックし、TiDB タイプを選択して新しい TiDB コネクタを作成します。
+1.  サイドバーの**[ソース]**または<strong>[宛先]</strong>をクリックし、TiDB タイプを選択して新しい TiDB コネクタを作成します。
 
 2.  次のパラメータを入力します。接続文字列から接続情報を取得するには、 [標準接続で接続](/tidb-cloud/connect-via-standard-connection.md)を参照してください。
 
@@ -58,11 +58,11 @@ airbyte-server      | --------------------------------------
 
     > ノート：
     >
-    > -   TiDB Cloudは TLS 接続をサポートしています。 **TLSv1.2**および<strong>TLSv1.3</strong>で TLS プロトコルを選択できます (例: `enabledTLSProtocols=TLSv1.2` )。
+    > -   TiDB Cloud はTLS 接続をサポートしています。 **TLSv1.2**および<strong>TLSv1.3</strong>で TLS プロトコルを選択できます (例: `enabledTLSProtocols=TLSv1.2` )。
     > -   JDBC 経由でTiDB Cloudへの TLS 接続を無効にする場合は、特に JDBC URL Params で useSSL を`false`に設定し、SSL 接続を閉じる必要があります (例: `useSSL=false` )。
-    > -   TiDBServerless Tierは TLS 接続のみをサポートします。
+    > -   TiDBServerless TierはTLS 接続のみをサポートします。
 
-4.  [ソースまたは**宛先**の<strong>セットアップ] を</strong>クリックして、コネクタの作成を完了します。次のスクリーンショットは、ソースとしての TiDB の構成を示しています。
+4.  [ソースまたは**宛先の**<strong>セットアップ]</strong>をクリックして、コネクタの作成を完了します。次のスクリーンショットは、ソースとしての TiDB の構成を示しています。
 
 ![TiDB source configuration](/media/tidb-cloud/integration-airbyte-parameters.jpg)
 
@@ -76,17 +76,17 @@ TiDB コネクタの詳細については、 [TiDB ソース](https://docs.airby
 
 次の手順では、TiDB をソースと宛先の両方として使用します。他のコネクタには異なるパラメータがある場合があります。
 
-1.  サイドバーの [**接続**] をクリックし、[<strong>新しい接続</strong>] をクリックします。
+1.  サイドバーの**[接続]**をクリックし、 <strong>[新しい接続]</strong>をクリックします。
 
 2.  以前に確立されたソースと宛先を選択します。
 
-3.  [接続の**セットアップ**] パネルに移動し、 `${source_name} - ${destination-name}`などの接続の名前を作成します。
+3.  [接続**のセットアップ]**パネルに移動し、 `${source_name} - ${destination-name}`などの接続の名前を作成します。
 
-4.  [**レプリケーションの頻度**] を [ <strong>24 時間ごと</strong>] に設定します。これは、接続が 1 日に 1 回データをレプリケートすることを意味します。
+4.  **[レプリケーションの頻度]**を<strong>[24 時間ごと]</strong>に設定します。これは、接続が 1 日に 1 回データをレプリケートすることを意味します。
 
-5.  **Destination Namespace**を<strong>Custom format</strong>に設定し、 <strong>Namespace Custom Format</strong>を<strong>test</strong>に設定して、すべてのデータを`test`データベースに保存します。
+5.  **Destination Namespace を**<strong>Custom format</strong>に設定し、 <strong>Namespace Custom Format を</strong><strong>test</strong>に設定して、すべてのデータを`test`データベースに保存します。
 
-6.  **同期モード**を<strong>フル リフレッシュ |</strong>に選択します。<strong>上書きし</strong>ます。
+6.  **同期モード**を<strong>フル リフレッシュ |</strong>に選択します。<strong>上書きします</strong>。
 
     > **ヒント：**
     >
@@ -97,11 +97,11 @@ TiDB コネクタの詳細については、 [TiDB ソース](https://docs.airby
 
     ![Set up connection](/media/tidb-cloud/integration-airbyte-connection.jpg)
 
-7.  [**正規化と変換**] を [<strong>正規化された表形式データ</strong>] に設定して、既定の正規化モードを使用するか、ジョブの dbt ファイルを設定できます。正規化の詳細については、 [変換と正規化](https://docs.airbyte.com/operator-guides/transformation-and-normalization/transformations-with-dbt)を参照してください。
+7.  **[正規化と変換] を**<strong>[正規化された表形式データ]</strong>に設定して、既定の正規化モードを使用するか、ジョブの dbt ファイルを設定できます。正規化の詳細については、 [変換と正規化](https://docs.airbyte.com/operator-guides/transformation-and-normalization/transformations-with-dbt)を参照してください。
 
-8.  [**接続のセットアップ] を**クリックします。
+8.  **[接続のセットアップ]**をクリックします。
 
-9.  接続が確立されたら、[ **ENABLED** ] をクリックして同期タスクを有効にします。 [<strong>今</strong>すぐ同期] をクリックして、すぐに同期することもできます。
+9.  接続が確立されたら、 **[ENABLED]**をクリックして同期タスクを有効にします。 <strong>[今すぐ同期] を</strong>クリックして、すぐに同期することもできます。
 
 ![Sync data](/media/tidb-cloud/integration-airbyte-sync.jpg)
 

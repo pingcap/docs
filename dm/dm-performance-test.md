@@ -13,11 +13,11 @@ MySQL -&gt; DM -&gt; TiDB という単純な移行データ フローを使用�
 
 ## テスト環境をデプロイ {#deploy-test-environment}
 
--   すべてのデフォルト構成でTiUPを使用して TiDB テスト クラスターをデプロイします。
--   MySQL サービスをデプロイします。 binlog の`ROW`モードを有効にし、他の構成項目には既定の構成を使用します。
--   DM-worker と DM-master を使用して DM クラスターをデプロイします。
+-   すべてのデフォルト構成でTiUPを使用して TiDB テスト クラスターをデプロイ。
+-   MySQL サービスをデプロイ。 binlogの`ROW`モードを有効にし、他の構成項目にはデフォルト構成を使用します。
+-   DM-worker と DM-master を使用して DM クラスターをデプロイ。
 
-## 性能試験 {#performance-test}
+## 性能テスト {#performance-test}
 
 ### テーブル スキーマ {#table-schema}
 
@@ -40,7 +40,7 @@ CREATE TABLE `sbtest` (
 
 #### テストデータの生成 {#generate-test-data}
 
-アップストリームでテスト テーブルを作成し、フル インポート用のテスト データを生成するには、 `sysbench`を使用します。次の`sysbench`のコマンドを実行して、テスト データを生成します。
+アップストリームでテスト テーブルを作成し、フル インポート用のテスト データを生成するには、 `sysbench`を使用します。次の`sysbench`コマンドを実行して、テスト データを生成します。
 
 {{< copyable "" >}}
 
@@ -89,7 +89,7 @@ mydumpers:
 > **ノート：**
 >
 > -   マルチスレッドを使用して単一のテーブルから同時にデータをエクスポートできるようにするには、 `mydumpers`構成項目で`rows`オプションを使用できます。これにより、データのエクスポートが高速化されます。
-> -   異なる構成でパフォーマンスをテストするには、構成`mysql-instances`で`loader-thread`を調整し、構成`mydumpers`で`rows`と`threads`を調整します。
+> -   異なる構成でパフォーマンスをテストするには、構成`mysql-instances`で`loader-thread`調整し、構成`mydumpers`で`rows`と`threads`調整します。
 
 #### テスト結果を取得する {#get-test-results}
 
@@ -109,7 +109,7 @@ DM-worker ログを観察します。 `all data files have been finished`が表�
 
 #### データ移行タスクを作成する {#create-a-data-migration-task}
 
-1.  アップストリーム MySQL のソースを作成します。 `source-id` ～ `source-1`を設定します（ [全輸入ベンチマークケース](#full-import-benchmark-case)でソースを作成した場合は、再度作成する必要はありません）。詳細については、 [データ ソース構成の読み込み](/dm/dm-manage-source.md#operate-data-source)を参照してください。
+1.  アップストリーム MySQL のソースを作成します。 `source-id` ～ `source-1`を設定します（ [全輸入ベンチマークケース](#full-import-benchmark-case)でソースを作成した場合は、再度作成する必要はありません）。詳細については、 [データ ソース構成のロード](/dm/dm-manage-source.md#operate-data-source)を参照してください。
 
 2.  DM 移行タスクを作成します ( `all`モードで)。以下は、タスク構成ファイルの例です。
 
@@ -150,7 +150,7 @@ syncers:
 
 #### 増分データの生成 {#generate-incremental-data}
 
-アップストリームで増分データを継続的に生成するには、次の`sysbench`コマンドを実行します。
+アップストリームで増分データを継続的に生成するには、 `sysbench`コマンドを実行します。
 
 {{< copyable "" >}}
 

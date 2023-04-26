@@ -24,9 +24,9 @@ Gitpod は、コードを直接作成する開発環境向けのオープンソ�
 
 ## デフォルトの Gitpod 構成と環境を使用する {#use-the-default-gitpod-configuration-and-environment}
 
-[クイックスタート](#quick-start)のステップを完了した後、Gitpod がワークスペースをセットアップするのにしばらく時間がかかります。
+[クイックスタート](#quick-start)ステップを完了した後、Gitpod がワークスペースをセットアップするのにしばらく時間がかかります。
 
-例として[スプリング ブート Web](/develop/dev-guide-sample-application-spring-boot.md)のアプリケーションを取り上げます。 `https://gitpod.io/#targetFile=spring-jpa-hibernate_Makefile,targetMode=spring-jpa-hibernate/https://github.com/pingcap-inc/tidb-example-java` URL で新しいワークスペースを作成できます。
+例として[スプリング ブート Web](/develop/dev-guide-sample-application-spring-boot.md)アプリケーションを取り上げます。 `https://gitpod.io/#targetFile=spring-jpa-hibernate_Makefile,targetMode=spring-jpa-hibernate/https://github.com/pingcap-inc/tidb-example-java` URL で新しいワークスペースを作成できます。
 
 その後、次のようなページが表示されます。
 
@@ -34,13 +34,13 @@ Gitpod は、コードを直接作成する開発環境向けのオープンソ�
 
 ページ内のこのシナリオでは、 [TiUP](https://docs.pingcap.com/zh/tidb/stable/tiup-overview)を使用して TiDB Playground を構築します。ターミナルエリアの左側で進行状況を確認できます。
 
-TiDB Playground の準備が整うと、別の`Spring JPA Hibernate`つのタスクが実行されます。ターミナルエリアの右側で進行状況を確認できます。
+TiDB Playground の準備が整うと、別の`Spring JPA Hibernate`のタスクが実行されます。ターミナルエリアの右側で進行状況を確認できます。
 
-これらのタスクがすべて完了すると、次のようなページが表示されます。このページで、左側のナビゲーション ペインの`REMOTE EXPLORER`エリアを確認し (Gitpod は URL ベースのポート転送をサポートしています)、ポート`8080`の URL を見つけます。
+これらのタスクがすべて完了すると、次のようなページが表示されます。このページで、左側のナビゲーション ペインの`REMOTE EXPLORER`領域を確認し (Gitpod は URL ベースのポート転送をサポートしています)、ポート`8080`の URL を見つけます。
 
 ![playground gitpod workspace ready](/media/develop/playground-gitpod-workspace-ready.png)
 
-[HTTP リクエストの送信](/develop/dev-guide-sample-application-spring-boot.md#step-6-http-requests)で API をテストできます。 `http://localhost:8080`の URL を`REMOTE EXPLORER`の領域で見つけた URL に置き換えてください。
+[HTTP リクエストの送信](/develop/dev-guide-sample-application-spring-boot.md#step-6-http-requests)で API をテストできます。 `http://localhost:8080` URL を`REMOTE EXPLORER`領域で見つけた URL に置き換えてください。
 
 ## カスタム Gitpod 構成と Docker イメージの使用 {#using-custom-gitpod-configuration-and-docker-image}
 
@@ -156,13 +156,13 @@ ports:
 
 ### 変更を適用 {#apply-changes}
 
-`.gitpod.yml`のファイルの構成が完了したら、対応する GitHub リポジトリで最新のコードが利用可能であることを確認してください。
+`.gitpod.yml`ファイルの構成が完了したら、対応する GitHub リポジトリで最新のコードが利用可能であることを確認してください。
 
 `https://gitpod.io/#<YOUR_REPO_URL>`にアクセスして、最新のコードが適用された新しい Gitpod ワークスペースを作成します。
 
 確立されたすべてのワークスペースについては、 `https://gitpod.io/workspaces`にアクセスしてください。
 
-## 概要 {#summary}
+## まとめ {#summary}
 
 Gitpod は、完全で自動化された事前構成済みのクラウドネイティブ開発環境を提供します。ローカル構成なしで、ブラウザーでコードを直接開発、実行、およびテストできます。
 

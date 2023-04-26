@@ -13,16 +13,16 @@ title: TiDB 2.0 RC3 Release Notes
 -   境界条件の`uint`と`int`の比較エラーを修正
 -   MySQL との互換性を向上させるために、浮動小数点型の長さと精度のチェックを最適化します。
 -   時刻タイプの解析エラー ログを改善し、エラー情報を追加します
--   メモリ制御を改善し、 `IndexLookupExecutor`のメモリに関する統計を追加します
+-   メモリ制御を改善し、 `IndexLookupExecutor`メモリに関する統計を追加します
 -   `ADD INDEX`の実行速度を最適化して、一部のシナリオで速度を大幅に向上させます
 -   サブステートメント`GROUP BY`が空の場合に Stream 集計演算子を使用して速度を上げる
--   `STRAIGHT_JOIN`を使用してオプティマイザーで`Join Reorder`の最適化を閉じるサポート
+-   `STRAIGHT_JOIN`を使用してオプティマイザーで`Join Reorder`最適化を閉じるサポート
 -   DDLジョブのより詳細なステータス情報を`ADMIN SHOW DDL JOBS`で出力
 -   `ADMIN SHOW DDL JOB QUERIES`を使用して、現在実行中の DDL ジョブの元のステートメントのクエリをサポート
 -   ディザスタ リカバリ用に`ADMIN RECOVER INDEX`を使用したインデックス データのリカバリをサポート
--   オンライン ビジネスへの影響を軽減するために、 `ADD INDEX`番目の操作の優先度を下げます。
+-   オンライン ビジネスへの影響を軽減するために、 `ADD INDEX`の操作の優先度を下げます。
 -   `SUM/AVG`などの JSON 型パラメーターを使用した集計関数をサポートします。
--   OGG データ レプリケーション ツールをサポートするために、構成ファイル内の`lower_case_table_names`のシステム変数の変更をサポートします。
+-   OGG データ レプリケーション ツールをサポートするために、構成ファイル内の`lower_case_table_names`システム変数の変更をサポートします。
 -   Navicat 管理ツールとの互換性を改善する
 -   CRUD 操作での暗黙的な RowID の使用をサポート
 

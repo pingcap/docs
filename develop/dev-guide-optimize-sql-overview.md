@@ -17,7 +17,7 @@ summary: Provides an overview of SQL performance tuning for TiDB application dev
 -   できるだけ少ない行をスキャンします。必要なデータのみをスキャンし、余分なデータをスキャンしないことをお勧めします。
 -   適切なインデックスを使用してください。 SQL の`WHERE`句の列に対応するインデックスがあることを確認してください。そうでない場合、ステートメントは全表スキャンを伴うため、パフォーマンスが低下します。
 -   正しい結合タイプを使用してください。クエリに含まれるテーブルの相対的なサイズに基づいて、適切な結合の種類を選択することが重要です。一般に、TiDB のコストベースのオプティマイザーは、最もパフォーマンスの高い結合タイプを選択します。ただし、場合によっては、より適切な結合タイプを手動で指定する必要があります。
--   適切なストレージ エンジンを使用します。 OLTP と OLAP のハイブリッド ワークロードには、 TiFlashエンジンをお勧めします。詳細については、 [HTAP クエリ](/develop/dev-guide-hybrid-oltp-and-olap-queries.md)を参照してください。
+-   適切なstorageエンジンを使用します。 OLTP と OLAP のハイブリッド ワークロードには、 TiFlashエンジンをお勧めします。詳細については、 [HTAP クエリ](/develop/dev-guide-hybrid-oltp-and-olap-queries.md)を参照してください。
 
 ## スキーマ設計 {#schema-design}
 

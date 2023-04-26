@@ -46,14 +46,14 @@ TiDB バージョン: 4.0.16
 
 -   TiDB
 
-    -   コスト見積もりのために範囲をポイントに変換するときに、統計モジュールのオーバーフローによって引き起こされるクエリpanicを修正します[#23625](https://github.com/pingcap/tidb/issues/23625)
+    -   コストpanicのために範囲をポイントに変換するときに、統計モジュールのオーバーフローによって引き起こされるクエリ パニックを修正します[#23625](https://github.com/pingcap/tidb/issues/23625)
     -   制御関数( `IF`や`CASE WHEN`など) のような関数のパラメーターとして`ENUM`型のデータを使用する場合の誤った結果を修正します[#23114](https://github.com/pingcap/tidb/issues/23114)
     -   `tidb_enable_vectorized_expression` ( `on`または`off` ) [#29434](https://github.com/pingcap/tidb/issues/29434)の値が異なるために`GREATEST`関数が一貫性のない結果を返す問題を修正します。
     -   場合によっては、プレフィックス インデックスにインデックス結合を適用する際のpanicを修正します[#24547](https://github.com/pingcap/tidb/issues/24547)
     -   Planner が`join`の無効なプランをキャッシュする場合がある問題を修正します[#28087](https://github.com/pingcap/tidb/issues/28087)
     -   `sql_mode`が空の場合、TiDB が null 以外の列に`null`を挿入できないバグを修正[#11648](https://github.com/pingcap/tidb/issues/11648)
     -   `GREATEST`および`LEAST`関数の誤った結果タイプを修正します[#29019](https://github.com/pingcap/tidb/issues/29019)
-    -   `grant`および`revoke`の操作を実行してグローバル レベルの権限を付与および取り消すときの`privilege check fail`のエラーを修正します[#29675](https://github.com/pingcap/tidb/issues/29675)
+    -   `grant`および`revoke`操作を実行してグローバル レベルの権限を付与および取り消すときの`privilege check fail`エラーを修正します[#29675](https://github.com/pingcap/tidb/issues/29675)
     -   `ENUM`データ型[#29357](https://github.com/pingcap/tidb/issues/29357)で`CASE WHEN`関数を使用したときのpanicを修正
     -   ベクトル化された式[#29244](https://github.com/pingcap/tidb/issues/29244)の`microsecond`関数の間違った結果を修正
     -   ベクトル化された式[#28643](https://github.com/pingcap/tidb/issues/28643)の`hour`関数の間違った結果を修正
@@ -64,7 +64,7 @@ TiDB バージョン: 4.0.16
     -   同じパーティションを同時に切り捨てると DDL ステートメントがスタックする問題を修正します[#26229](https://github.com/pingcap/tidb/issues/26229)
     -   `Decimal`を`String` [#29417](https://github.com/pingcap/tidb/issues/29417)に変換するときに長さ情報が間違っている問題を修正
     -   `NATURAL JOIN`を使用して複数のテーブルを結合する場合に、クエリ結果に余分な列が含まれる問題を修正します[#29481](https://github.com/pingcap/tidb/issues/29481)
-    -   `IndexScan`がプレフィックス インデックス[#29711](https://github.com/pingcap/tidb/issues/29711)を使用すると、 `TopN`が誤って`indexPlan`にプッシュ ダウンされる問題を修正します。
+    -   `IndexScan`プレフィックス インデックス[#29711](https://github.com/pingcap/tidb/issues/29711)を使用すると、 `TopN`が誤って`indexPlan`にプッシュ ダウンされる問題を修正します。
     -   タイプ`DOUBLE`の自動インクリメント列でトランザクションを再試行するとデータが破損する問題を修正します[#29892](https://github.com/pingcap/tidb/issues/29892)
 
 -   TiKV
@@ -85,11 +85,11 @@ TiDB バージョン: 4.0.16
 
 -   TiFlash
 
-    -   ライブラリ`nsl`が存在しないため、一部のプラットフォームでTiFlashが起動しない問題を修正
+    -   ライブラリ`nsl`が存在しないため、一部のプラットフォームでTiFlash が起動しない問題を修正
 
 -   ツール
 
-    -   Binlog
+    -   TiDBBinlog
 
         -   1 GB を超えるトランザクションを転送するとDrainerが終了するバグを修正します[#28659](https://github.com/pingcap/tidb/issues/28659)
 
@@ -101,12 +101,12 @@ TiDB バージョン: 4.0.16
         -   DDL [#3174](https://github.com/pingcap/tiflow/issues/3174)の処理後のメモリリークの問題を修正します。
         -   ErrGCTTLExceeded エラーが発生したときに changefeed が十分な速さで失敗しないという問題を修正します[#3111](https://github.com/pingcap/tiflow/issues/3111)
         -   アップストリームの TiDB インスタンスが予期せず終了すると、TiCDC レプリケーション タスクが終了する可能性がある問題を修正します[#3061](https://github.com/pingcap/tiflow/issues/3061)
-        -   TiKV が同じリージョン[#2386](https://github.com/pingcap/tiflow/issues/2386)に重複したリクエストを送信すると、TiCDC プロセスがpanicになる可能性がある問題を修正します。
+        -   TiKV が同じリージョン[#2386](https://github.com/pingcap/tiflow/issues/2386)に重複したリクエストを送信すると、TiCDC プロセスがパニックになる可能panicがある問題を修正します。
         -   TiCDC によって生成される Kafka メッセージの量が`max-message-size` [#2962](https://github.com/pingcap/tiflow/issues/2962)によって制限されないという問題を修正します
         -   `tikv_cdc_min_resolved_ts_no_change_for_1m`変更フィードがないときにアラートが鳴り続ける問題を修正[#11017](https://github.com/tikv/tikv/issues/11017)
         -   Kafka メッセージの書き込み中にエラーが発生すると、TiCDC 同期タスクが一時停止することがある問題を修正します[#2978](https://github.com/pingcap/tiflow/issues/2978)
         -   `force-replicate`が有効な場合、有効なインデックスのない一部のパーティション テーブルが無視される可能性があるという問題を修正します[#2834](https://github.com/pingcap/tiflow/issues/2834)
         -   新しい変更フィード[#2389](https://github.com/pingcap/tiflow/issues/2389)を作成するときのメモリリークの問題を修正します。
         -   シンク コンポーネントが解決済みの ts を早期に進めることにより、データの不整合が発生する可能性がある問題を修正します[#3503](https://github.com/pingcap/tiflow/issues/3503)
-        -   株式データのスキャンに時間がかかりすぎると、 [#2470](https://github.com/pingcap/tiflow/issues/2470)が GC を実行するために株式データのスキャンが失敗する可能性がある問題を修正します。
+        -   株式データのスキャンに時間がかかりすぎると、TiKV が GC を実行するために株式データのスキャンが失敗する可能性がある問題を修正します[#2470](https://github.com/pingcap/tiflow/issues/2470)
         -   changefeed update コマンドがグローバル コマンド ライン パラメーターを認識しない問題を修正します[#2803](https://github.com/pingcap/tiflow/issues/2803)

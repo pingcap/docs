@@ -85,7 +85,7 @@ DESC tiflash_tables;
 -   `TIDB_DATABASE` : TiDB でテーブルが属するデータベースの名前。
 -   `TIDB_TABLE` : TiDB のテーブルの名前。
 -   `TABLE_ID` : テーブルの内部 ID。TiDB クラスター内で一意です。
--   `IS_TOMBSTONE` : テーブルをリサイクルできるかどうかを示します。 `1`は表を再利用できることを示し、 `0`は表が正常な状態であることを示します。
+-   `IS_TOMBSTONE` : テーブルをリサイクルできるかどうかを示します。 `1`表を再利用できることを示し、 `0`表が正常な状態であることを示します。
 -   `SEGMENT_COUNT` : テーブル内のセグメント数。セグメントは、 TiFlashにおけるデータ管理単位です。
 -   `TOTAL_ROWS` : テーブル内の行の総数。
 -   `TOTAL_SIZE` : テーブルの合計サイズ (バイト単位)。
@@ -114,8 +114,8 @@ DESC tiflash_tables;
 -   `TOTAL_PACK_COUNT_IN_DELTA` : すべてのデルタ レイヤーのカラムファイルの総数。
 -   `MAX_PACK_COUNT_IN_DELTA` : 1 つのデルタレイヤー内のカラムファイルの最大数。
 -   `AVG_PACK_COUNT_IN_DELTA` : すべてのデルタ レイヤーのカラムファイルの平均数。
--   `AVG_PACK_ROWS_IN_DELTA` : すべてのデルタ レイヤーのすべてのカラムファイルの平均行数。
--   `AVG_PACK_SIZE_IN_DELTA` : すべてのデルタ レイヤーのすべてのカラムファイルのデータの平均サイズ (バイト単位)。
+-   `AVG_PACK_ROWS_IN_DELTA` : すべてのカラムレイヤーのすべての列ファイルの平均行数。
+-   `AVG_PACK_SIZE_IN_DELTA` : すべてのカラムレイヤーのすべての列ファイルのデータの平均サイズ (バイト単位)。
 -   `TOTAL_PACK_COUNT_IN_STABLE` : すべての安定層のパックの総数。
 -   `AVG_PACK_COUNT_IN_STABLE` : すべての安定層のパックの平均数。
 -   `AVG_PACK_ROWS_IN_STABLE` : すべての安定層のすべてのパックの平均行数。

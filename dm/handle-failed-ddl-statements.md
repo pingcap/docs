@@ -35,9 +35,9 @@ dmctl を使用して失敗した DDL ステートメントを手動で処理す
 
 `query-status`コマンドは、各 MySQL インスタンスのサブタスクや中継ユニットなどのアイテムの現在のステータスを照会するために使用されます。詳細については、 [クエリ ステータス](/dm/dm-query-status.md)を参照してください。
 
-### ビンログ {#binlog}
+### binlog {#binlog}
 
-`binlog`コマンドは、binlog 操作を管理および表示するために使用されます。このコマンドは、DM v6.0 以降のバージョンでのみサポートされています。以前のバージョンでは、 `handle-error`コマンドを使用します。
+`binlog`コマンドは、 binlog操作を管理および表示するために使用されます。このコマンドは、DM v6.0 以降のバージョンでのみサポートされています。以前のバージョンでは、 `handle-error`コマンドを使用します。
 
 `binlog`の使い方は以下の通りです。
 
@@ -68,21 +68,21 @@ Global Flags:
 Use "dmctl binlog [command] --help" for more information about a command.
 ```
 
-`binlog`は次のサブコマンドをサポートします。
+`binlog`次のサブコマンドをサポートします。
 
--   `inject` : DDL ステートメントを現在のエラー イベントまたは特定の binlog 位置に挿入します。バイナリログの位置を指定するには、 `-b, --binlog-pos`を参照してください。
--   `list` : 現在のバイナリログ位置または現在のバイナリログ位置の後にある有効な`inject` 、 `skip` 、および`replace`操作をすべてリストします。バイナリログの位置を指定するには、 `-b, --binlog-pos`を参照してください。
--   `replace` : 特定の binlog 位置にある DDL ステートメントを別の DDL ステートメントに置き換えます。バイナリログの位置を指定するには、 `-b, --binlog-pos`を参照してください。
--   `revert` : 前の操作が有効にならない場合にのみ、指定された binlog 操作で`inject` 、 `skip`または`replace`操作を元に戻します。バイナリログの位置を指定するには、 `-b, --binlog-pos`を参照してください。
--   `skip` : 特定のバイナリログ位置で DDL ステートメントをスキップします。バイナリログの位置を指定するには、 `-b, --binlog-pos`を参照してください。
+-   `inject` : DDL ステートメントを現在のエラー イベントまたは特定のbinlog位置に挿入します。binlogの位置を指定するには、 `-b, --binlog-pos`を参照してください。
+-   `list` : 現在のbinlog位置または現在のbinlog位置の後にある有効な`inject` 、 `skip` 、および`replace`操作をすべてリストします。binlogの位置を指定するには、 `-b, --binlog-pos`を参照してください。
+-   `replace` : 特定のbinlog位置にある DDL ステートメントを別の DDL ステートメントに置き換えます。binlogの位置を指定するには、 `-b, --binlog-pos`を参照してください。
+-   `revert` : 前の操作が有効にならない場合にのみ、指定されたbinlog操作で`inject` 、 `skip`または`replace`操作を元に戻します。binlogの位置を指定するには、 `-b, --binlog-pos`を参照してください。
+-   `skip` : 特定のbinlog位置で DDL ステートメントをスキップします。binlogの位置を指定するには、 `-b, --binlog-pos`を参照してください。
 
-`binlog`は次のフラグをサポートします。
+`binlog`次のフラグをサポートします。
 
 -   `-b, --binlog-pos` :
     -   タイプ: 文字列。
-    -   バイナリログの位置を指定します。 binlog イベントの位置が`binlog-pos`に一致すると、操作が実行されます。指定されていない場合、DM は現在失敗している DDL ステートメントに`binlog-pos`を自動的に設定します。
+    -   binlogの位置を指定します。 binlogイベントの位置が`binlog-pos`に一致すると、操作が実行されます。指定されていない場合、DM は現在失敗している DDL ステートメントに`binlog-pos`自動的に設定します。
     -   形式: `binlog-filename:binlog-pos` 、たとえば`mysql-bin|000001.000003:3270` 。
-    -   マイグレーションがエラーを返した後、binlog の位置は`query-status`によって返された`position` in `startLocation`から取得できます。移行でエラーが返される前に、上流の MySQL インスタンスで[`SHOW BINLOG EVENTS`](https://dev.mysql.com/doc/refman/5.7/en/show-binlog-events.html)を使用して binlog の位置を取得できます。
+    -   マイグレーションがエラーを返した後、 binlog の位置は`query-status`によって返された`position` in `startLocation`から取得できます。移行でエラーが返される前に、上流の MySQL インスタンスで[`SHOW BINLOG EVENTS`](https://dev.mysql.com/doc/refman/5.7/en/show-binlog-events.html)使用してbinlog の位置を取得できます。
 
 -   `-s, --source` :
     -   タイプ: 文字列。
@@ -234,8 +234,8 @@ ERROR 8200 (HY000): Unsupported modify column: can't change decimal column preci
 
 アップストリームの次の 4 つのテーブルをマージして、ダウンストリームの 1 つの同じテーブル`` `shard_db`.`shard_table` ``に移行する必要があるとします。タスクモードは「悲観的」です。
 
--   MySQL インスタンス 1 には、 `shard_table_1`と`shard_table_2`のテーブルを含む`shard_db_1`スキーマが含まれています。
--   MySQL インスタンス 2 には、 `shard_table_1`と`shard_table_2`のテーブルを含む`shard_db_2`スキーマが含まれています。
+-   MySQL インスタンス 1 には、 `shard_table_1`と`shard_table_2`テーブルを含む`shard_db_1`スキーマが含まれています。
+-   MySQL インスタンス 2 には、 `shard_table_1`と`shard_table_2`テーブルを含む`shard_db_2`スキーマが含まれています。
 
 初期テーブル スキーマは次のとおりです。
 
@@ -840,4 +840,4 @@ ALTER TABLE `shard_db_*`.`shard_table_*` ADD COLUMN new_col INT UNIQUE;
 
 ### その他のコマンド {#other-commands}
 
-`binlog`の他のコマンドの使用法については、上記の`binlog skip`と`binlog replace`の例を参照してください。
+`binlog`の他のコマンドの使用法については、上記の`binlog skip`と`binlog replace`例を参照してください。

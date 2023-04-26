@@ -30,7 +30,7 @@ Use "dmctl config [command] --help" for more information about a command.
 
 ## クラスターのデータ ソースとタスク構成をエクスポートする {#export-the-data-source-and-task-configuration-of-clusters}
 
-`export`のコマンドを使用して、クラスターのデータ ソースとタスク構成を指定したファイルにエクスポートできます。
+`export`コマンドを使用して、クラスターのデータ ソースとタスク構成を指定したファイルにエクスポートできます。
 
 {{< copyable "" >}}
 
@@ -59,7 +59,7 @@ export configs to directory `/tmp/configs` succeed
 
 ## クラスターのデータ ソースとタスク構成をインポートする {#import-the-data-source-and-task-configuration-of-clusters}
 
-`import`のコマンドを使用して、指定したファイルからクラスターのデータ ソースとタスク構成をインポートできます。
+`import`コマンドを使用して、指定したファイルからクラスターのデータ ソースとタスク構成をインポートできます。
 
 {{< copyable "" >}}
 
@@ -69,7 +69,7 @@ config import [--dir directory]
 
 > **ノート：**
 >
-> v2.0.2以降のクラスタでは、現在、Relay Workerに関連する設定の自動インポートはサポートされていません。 `start-relay`のコマンドを使用して、手動で[リレーログを開始](/dm/relay-log.md#start-and-stop-the-relay-log-feature)を実行できます。
+> v2.0.2以降のクラスタでは、現在、Relay Workerに関連する設定の自動インポートはサポートされていません。 `start-relay`コマンドを使用して、手動で[リレーログを開始](/dm/relay-log.md#start-and-stop-the-relay-log-feature)実行できます。
 
 ### パラメータの説明 {#parameter-explanation}
 

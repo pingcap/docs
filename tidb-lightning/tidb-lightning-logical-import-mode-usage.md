@@ -55,7 +55,7 @@ log-level = "error"
 
 競合するデータとは、PK または UK 列に同じデータを持つ 2 つ以上のレコードを指します。データ ソースに競合するデータが含まれている場合、テーブル内の実際の行数は、一意のインデックスを使用したクエリによって返される合計行数とは異なります。
 
-論理インポート モードでは、 `on-duplicate`の構成アイテムを設定することで、競合するデータを解決するための戦略を構成できます。この戦略に基づいて、 TiDB Lightningはさまざまな SQL ステートメントでデータをインポートします。
+論理インポート モードでは、 `on-duplicate`構成アイテムを設定することで、競合するデータを解決するための戦略を構成できます。この戦略に基づいて、 TiDB Lightning はさまざまな SQL ステートメントでデータをインポートします。
 
 | ストラテジー    | 競合するデータのデフォルトの動作         | 対応する SQL ステートメント         |
 | :-------- | :----------------------- | :----------------------- |
@@ -67,7 +67,7 @@ log-level = "error"
 
 -   論理インポートモードでは、 TiDB Lightningのパフォーマンスは対象の TiDB クラスターの書き込みパフォーマンスに大きく依存します。クラスターがパフォーマンスのボトルネックに達した場合は、 [高度な同時書き込みのベスト プラクティス](/best-practices/high-concurrency-best-practices.md)を参照してください。
 
--   ターゲットの TiDB クラスターが書き込みのボトルネックに達しない場合は、 TiDB Lightning構成で値`region-concurrency`を増やすことを検討してください。デフォルト値の`region-concurrency`は、CPU コアの数です。物理インポートモードと論理インポートモードでは、 `region-concurrency`の意味が異なります。論理インポート モードでは、 `region-concurrency`は書き込み同時実行数です。
+-   ターゲットの TiDB クラスターが書き込みのボトルネックに達しない場合は、 TiDB Lightning構成で値`region-concurrency`を増やすことを検討してください。デフォルト値の`region-concurrency` 、CPU コアの数です。物理インポートモードと論理インポートモードでは、 `region-concurrency`の意味が異なります。論理インポート モードでは、 `region-concurrency`は書き込み同時実行数です。
 
     構成例:
 
@@ -76,4 +76,4 @@ log-level = "error"
     region-concurrency = 32
     ```
 
--   ターゲットの TiDB クラスターで`raftstore.apply-pool-size`と`raftstore.store-pool-size`の構成項目を調整すると、インポート速度が向上する場合があります。
+-   ターゲットの TiDB クラスターで`raftstore.apply-pool-size`と`raftstore.store-pool-size`構成項目を調整すると、インポート速度が向上する場合があります。

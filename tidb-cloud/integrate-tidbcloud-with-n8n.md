@@ -3,18 +3,18 @@ title: Integrate TiDB Cloud with n8n
 summary: Learn the use of TiDB Cloud node in n8n.
 ---
 
-# TiDB Cloudを n8n と統合する {#integrate-tidb-cloud-with-n8n}
+# TiDB Cloudをn8n と統合する {#integrate-tidb-cloud-with-n8n}
 
-[n8n](https://n8n.io/)は、拡張可能なワークフロー自動化ツールです。 [フェアコード](https://faircode.io/)の配布モデルでは、n8n は常にソース コードを表示し、セルフホストに使用でき、カスタム関数、ロジック、およびアプリを追加できます。
+[n8n](https://n8n.io/)は、拡張可能なワークフロー自動化ツールです。 [フェアコード](https://faircode.io/)配布モデルでは、n8n は常にソース コードを表示し、セルフホストに使用でき、カスタム関数、ロジック、およびアプリを追加できます。
 
-このドキュメントでは、自動ワークフローを構築する方法を紹介しますTiDB Cloud Serverless Tierクラスターを作成し、Hacker News RSS を収集し、それを TiDB に保存して、ブリーフィング メールを送信します。
+このドキュメントでは、自動ワークフローを構築する方法を紹介します。TiDB TiDB Cloud Serverless Tierクラスターを作成し、Hacker News RSS を収集し、それを TiDB に保存して、ブリーフィング メールを送信します。
 
 ## 前提条件: TiDB Cloud API キーを取得する {#prerequisites-get-tidb-cloud-api-key}
 
 1.  TiDB Cloudダッシュボードにアクセスします。
-2.  クリック<mdsvgicon name="icon-top-organization">右上隅にある [**組織**<strong>]</strong> &gt; [組織の設定]。</mdsvgicon>
-3.  [ **API キー**] タブをクリックします。
-4.  [ **API キーの作成**] ボタンをクリックして、新しい API キーを作成します。
+2.  クリック<mdsvgicon name="icon-top-organization">右上隅にある**[組織]** &gt; <strong>[組織の設定]</strong> 。</mdsvgicon>
+3.  **[API キー]**タブをクリックします。
+4.  **[API キーの作成]**ボタンをクリックして、新しい API キーを作成します。
 5.  後で n8n で使用するために、作成した API キーを保存します。
 
 詳細については、 [TiDB CloudAPI の概要](/tidb-cloud/api-overview.md)を参照してください。
@@ -53,16 +53,16 @@ n8n を起動したら、 [ローカルホスト:5678](http://localhost:5678)に
 TiDB Cloudノードは、npm リポジトリで`n8n-nodes-tidb-cloud`という名前です。 n8n でTiDB Cloudを制御するには、このノードを手動でインストールする必要があります。
 
 1.  [ローカルホスト:5678](http://localhost:5678)ページで、セルフホスティング n8n の所有者アカウントを作成します。
-2.  **[設定]** &gt; [<strong>コミュニティ ノード</strong>] に移動します。
-3.  [**コミュニティ ノードのインストール] を**クリックします。
+2.  **[設定]** &gt; <strong>[コミュニティ ノード]</strong>に移動します。
+3.  **[コミュニティ ノードのインストール]**をクリックします。
 4.  **npm パッケージ名**フィールドに`n8n-nodes-tidb-cloud`と入力します。
-5.  [**インストール] を**クリックします。
+5.  **[インストール]**をクリックします。
 
-その後、[**ワークフロー**] &gt; [検索バー] で<strong>TiDB Cloud</strong>ノードを検索し、TiDB TiDB Cloudノードをワークスペースにドラッグして使用できます。
+その後、 **[ワークフロー]** &gt; [検索バー] で<strong>TiDB Cloud</strong>ノードを検索し、 TiDB Cloudノードをワークスペースにドラッグして使用できます。
 
 ## ステップ 3: ワークフローを構築する {#step-3-build-your-workflow}
 
-このステップでは、[**実行**] ボタンをクリックしたときに TiDB にデータを挿入するための新しいワークフローを作成します。
+このステップでは、 **[実行]**ボタンをクリックしたときに TiDB にデータを挿入するための新しいワークフローを作成します。
 
 この使用ワークフローの例では、次のノードを使用します。
 
@@ -80,16 +80,16 @@ TiDB Cloudノードは、npm リポジトリで`n8n-nodes-tidb-cloud`という�
 
 TiDB Cloud Serverless Tierクラスターがない場合は、このノードを使用して作成できます。それ以外の場合は、この操作をスキップしてかまいません。
 
-1.  [**ワークフロー**] パネルに移動し、[<strong>ワークフローを追加</strong>] をクリックします。
-2.  新しいワークフロー ワークスペースで、右上隅の [ **+** ] をクリックし、[<strong>すべての</strong>フィールド] を選択します。
-3.  `TiDB Cloud`を検索し、ワークスペースにドラッグします。
+1.  **[ワークフロー]**パネルに移動し、 <strong>[ワークフローを追加]</strong>をクリックします。
+2.  新しいワークフロー ワークスペースで、右上隅の**[+]**をクリックし、 <strong>[すべての</strong>フィールド] を選択します。
+3.  `TiDB Cloud`検索し、ワークスペースにドラッグします。
 4.  TiDB Cloudノードの資格情報 ( TiDB Cloud API キー) を入力します。
-5.  [**プロジェクト]**リストで、プロジェクトを選択します。
-6.  [**操作]**リストで、 `Create Serverless Cluster`を選択します。
-7.  [**クラスタ名]**ボックスに、クラスター名を入力します。
+5.  **[プロジェクト]**リストで、プロジェクトを選択します。
+6.  **[操作]**リストで、 `Create Serverless Cluster`を選択します。
+7.  **[クラスタ名]**ボックスに、クラスター名を入力します。
 8.  **リージョン**リストで、リージョンを選択します。
-9.  [**パスワード**] ボックスに、TiDB クラスターへのログインに使用するパスワードを入力します。
-10. [ノードの**実行] をクリックして、ノード**を実行します。
+9.  **[パスワード]**ボックスに、TiDB クラスターへのログインに使用するパスワードを入力します。
+10. **[ノードの実行]**をクリックして、ノードを実行します。
 
 > **ノート：**
 >
@@ -99,9 +99,9 @@ TiDB Cloud Serverless Tierクラスターがない場合は、このノードを
 
 #### ワークフローのスターターとして手動トリガーを使用する {#use-a-manual-trigger-as-the-workflow-s-starter}
 
-1.  ワークフローがまだない場合は、[**ワークフロー**] パネルに移動し、[<strong>最初から開始</strong>] をクリックします。それ以外の場合は、この手順をスキップしてください。
+1.  ワークフローがまだない場合は、 **[ワークフロー]**パネルに移動し、 <strong>[最初から開始]</strong>をクリックします。それ以外の場合は、この手順をスキップしてください。
 2.  右上隅の**+**をクリックして検索します`schedule trigger` 。
-3.  手動トリガー ノードをワークスペースにドラッグし、ノードをダブルクリックします。 [**パラメータ**] ダイアログが表示されます。
+3.  手動トリガー ノードをワークスペースにドラッグし、ノードをダブルクリックします。 **[パラメータ]**ダイアログが表示されます。
 4.  ルールを次のように構成します。
 
     -   **トリガー間隔**: `Days`
@@ -115,51 +115,51 @@ TiDB Cloud Serverless Tierクラスターがない場合は、このノードを
 
 1.  手動トリガー ノードの右側にある**+**をクリックします。
 
-2.  `TiDB Cloud`を検索してワークスペースに追加します。
+2.  `TiDB Cloud`検索してワークスペースに追加します。
 
-3.  [**パラメーター**] ダイアログで、 TiDB Cloudノードの資格情報を入力します。資格情報は、 TiDB Cloud API キーです。
+3.  **[パラメーター]**ダイアログで、 TiDB Cloudノードの資格情報を入力します。資格情報は、 TiDB Cloud API キーです。
 
-4.  [**プロジェクト]**リストで、プロジェクトを選択します。
+4.  **[プロジェクト]**リストで、プロジェクトを選択します。
 
-5.  [**操作]**リストで、 `Execute SQL`を選択します。
+5.  **[操作]**リストで、 `Execute SQL`を選択します。
 
 6.  クラスターを選択します。リストに新しいクラスターが表示されていない場合は、クラスターの作成が完了するまで数分待つ必要があります。
 
-7.  **[ユーザー]**リストで、ユーザーを選択します。 TiDB Cloudは常にデフォルト ユーザーを作成するため、手動で作成する必要はありません。
+7.  **[ユーザー]**リストで、ユーザーを選択します。 TiDB Cloud は常にデフォルト ユーザーを作成するため、手動で作成する必要はありません。
 
-8.  [**データベース]**ボックスに`test`と入力します。
+8.  **[データベース]**ボックスに`test`と入力します。
 
 9.  データベースのパスワードを入力します。
 
-10. [ **SQL** ] ボックスに、次の SQL を入力します。
+10. **[SQL]**ボックスに、次の SQL を入力します。
 
     ```sql
     CREATE TABLE IF NOT EXISTS hacker_news_briefing (creator VARCHAR (200), title TEXT,  link VARCHAR(200), pubdate VARCHAR(200), comments VARCHAR(200), content TEXT, guid VARCHAR (200), isodate VARCHAR(200));
     ```
 
-11. [**ノードの実行]**をクリックして、テーブルを作成します。
+11. **[ノードの実行]**をクリックして、テーブルを作成します。
 
 #### ハッカー ニュースの RSS を入手する {#get-the-hacker-news-rss}
 
 1.  TiDB Cloudノードの右側にある**+**をクリックします。
-2.  `RSS Read`を検索してワークスペースに追加します。
+2.  `RSS Read`検索してワークスペースに追加します。
 3.  **URL**ボックスに`https://hnrss.org/frontpage`と入力します。
 
 #### TiDB にデータを挿入する {#insert-data-to-tidb}
 
 1.  RSS Read ノードの右側にある**+**をクリックします。
-2.  `TiDB Cloud`を検索してワークスペースに追加します。
+2.  `TiDB Cloud`検索してワークスペースに追加します。
 3.  前のTiDB Cloudノードで入力した資格情報を選択します。
-4.  [**プロジェクト]**リストで、プロジェクトを選択します。
-5.  [**操作]**リストで、 `Insert`を選択します。
+4.  **[プロジェクト]**リストで、プロジェクトを選択します。
+5.  **[操作]**リストで、 `Insert`を選択します。
 6.  **クラスタ** 、 <strong>User</strong> 、 <strong>Database</strong> 、および<strong>Password</strong>ボックスに、対応する値を入力します。
-7.  [**テーブル]**ボックスに、 `hacker_news_briefing`テーブルを入力します。
-8.  [**列]**ボックスに`creator, title, link, pubdate, comments, content, guid, isodate`と入力します。
+7.  **[テーブル]**ボックスに、 `hacker_news_briefing`テーブルを入力します。
+8.  **[列]**ボックスに`creator, title, link, pubdate, comments, content, guid, isodate`と入力します。
 
 #### ビルド メッセージ {#build-message}
 
 1.  RSS Feed Read ノードの右にある**+**をクリックします。
-2.  `code`を検索してワークスペースに追加します。
+2.  `code`検索してワークスペースに追加します。
 3.  `Run Once for All Items`モードを選択します。
 4.  **JavaScript**ボックスに、次のコードをコピーして貼り付けます。
 
@@ -194,15 +194,15 @@ TiDB Cloud Serverless Tierクラスターがない場合は、このノードを
 
 #### Gmail でメッセージを送信する {#send-message-by-gmail}
 
-1.  コード ノードの右側にある [ **+]**をクリックします。
-2.  `gmail`を検索してワークスペースに追加します。
+1.  コード ノードの右側にある**[+]**をクリックします。
+2.  `gmail`検索してワークスペースに追加します。
 3.  Gmail ノードの資格情報を入力します。詳細な手順については、 [n8n ドキュメント](https://docs.n8n.io/integrations/builtin/credentials/google/oauth-single-service/)を参照してください。
-4.  [**リソース]**リストで、 `Message`を選択します。
-5.  [**操作]**リストで、 `Send`を選択します。
-6.  [**宛先**] ボックスに、メールアドレスを入力します。
-7.  [**件名]**ボックスに`Hacker News Briefing`と入力します。
-8.  [**電子メールの種類]**ボックスで、 `HTML`を選択します。
-9.  [**メッセージ**] ボックスで、 `Expression`をクリックして`{{ $json["response"] }}`と入力します。
+4.  **[リソース]**リストで、 `Message`を選択します。
+5.  **[操作]**リストで、 `Send`を選択します。
+6.  **[宛先]**ボックスに、メールアドレスを入力します。
+7.  **[件名]**ボックスに`Hacker News Briefing`と入力します。
+8.  **[電子メールの種類]**ボックスで、 `HTML`を選択します。
+9.  **[メッセージ]**ボックスで、 `Expression`をクリックして`{{ $json["response"] }}`と入力します。
 
     > **ノート：**
     >
@@ -210,7 +210,7 @@ TiDB Cloud Serverless Tierクラスターがない場合は、このノードを
 
 ## ステップ 4: ワークフローを実行する {#step-4-run-your-workflow}
 
-ワークフローを構築したら、[**ワークフローの実行**] をクリックしてテスト実行できます。
+ワークフローを構築したら、 **[ワークフローの実行] を**クリックしてテスト実行できます。
 
 ワークフローが期待どおりに実行されると、Hacker News のブリーフィング メールが届きます。これらのニュース コンテンツはTiDB Cloud Serverless Tierクラスターに記録されるため、失われる心配はありません。
 
@@ -285,7 +285,7 @@ TiDB Cloudノードは[通常のノード](https://docs.n8n.io/workflows/nodes/#
 
 -   **TiDB Cloud API の認証情報**: TiDB Cloud API キーのみをサポートします。 API キーの作成方法については、 [TiDB CloudAPI キーを取得する](#prerequisites-get-tidb-cloud-api-key)を参照してください。
 -   **Project** : TiDB Cloudのプロジェクト名。
--   **Operation** : このノードの操作。サポートされているすべての操作については、 [サポートオペレーション](#supported-operations)を参照してください。
+-   **Operation** : このノードの操作。サポートされているすべての操作については、 [サポート操作](#supported-operations)を参照してください。
 -   **クラスタ** : TiDB Cloudのクラスター名。既存のクラスターを 1 つ選択する必要があります。
 -   **Password** : TiDB Cloudクラスターのパスワード。
 -   **User** : TiDB Cloudクラスターのユーザー名。
@@ -299,6 +299,6 @@ TiDB Cloudノードは[通常のノード](https://docs.n8n.io/workflows/nodes/#
 
 ### 制限事項 {#limitations}
 
--   通常、 **SQL 実行**操作で使用できる SQL ステートメントは 1 つだけです。 1 回の操作で複数のステートメントを実行する場合は、手動で[`tidb_multi_statement_mode`](https://docs.pingcap.com/tidbcloud/system-variables#tidb_multi_statement_mode-new-in-v4011)を有効にする必要があります。
--   **削除**操作と<strong>更新</strong>操作では、1 つのフィールドをキーとして指定する必要があります。たとえば、 `Delete Key`は`id`に設定され、これは`DELETE FROM table WHERE id = ${item.id}`を実行することと同じです。現在、<strong>削除</strong>操作と<strong>更新</strong>操作では、1 つのキーの指定のみがサポートされています。
--   **挿入**操作と<strong>更新</strong>操作では、[<strong>列]</strong>フィールドにカンマ区切りのリストを指定する必要があり、フィールド名は入力項目のプロパティと同じである必要があります。
+-   通常、 **SQL 実行**操作で使用できる SQL ステートメントは 1 つだけです。 1 回の操作で複数のステートメントを実行する場合は、手動で[`tidb_multi_statement_mode`](https://docs.pingcap.com/tidbcloud/system-variables#tidb_multi_statement_mode-new-in-v4011)有効にする必要があります。
+-   **削除**操作と<strong>更新</strong>操作では、1 つのフィールドをキーとして指定する必要があります。たとえば、 `Delete Key`は`id`に設定され、これは`DELETE FROM table WHERE id = ${item.id}`を実行することと同じです。現在、<strong>削除操作</strong>と<strong>更新</strong>操作では、1 つのキーの指定のみがサポートされています。
+-   **挿入**操作と<strong>更新</strong>操作では、 <strong>[列</strong>] フィールドにカンマ区切りのリストを指定する必要があり、フィールド名は入力項目のプロパティと同じである必要があります。

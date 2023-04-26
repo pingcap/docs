@@ -22,7 +22,7 @@ SELECT 1 UNION SELECT 2;
 2 rows in set (0.00 sec)
 ```
 
-TiDB は、 `UNION DISTINCT`演算子と`UNION ALL`演算子の両方をサポートしています。 `UNION DISTINCT`は結果セットから重複レコードを削除しますが、 `UNION ALL`は重複を含むすべてのレコードを保持します。 TiDB ではデフォルトで`UNION DISTINCT`が使用されます。
+TiDB は、 `UNION DISTINCT`と`UNION ALL`演算子の両方をサポートしています。 `UNION DISTINCT`結果セットから重複レコードを削除しますが、 `UNION ALL`重複を含むすべてのレコードを保持します。 TiDB ではデフォルトで`UNION DISTINCT`が使用されます。
 
 ```sql
 CREATE TABLE t1 (a int);
@@ -31,7 +31,7 @@ INSERT INTO t1 VALUES (1),(2);
 INSERT INTO t2 VALUES (1),(3);
 ```
 
-`UNION DISTINCT`と`UNION ALL`のクエリの例は、それぞれ次のとおりです。
+`UNION DISTINCT`と`UNION ALL`クエリの例は、それぞれ次のとおりです。
 
 ```sql
 SELECT * FROM t1 UNION DISTINCT SELECT * FROM t2;
@@ -116,7 +116,7 @@ TiDB は、集合操作の優先順位を指定するための括弧の使用を
 
 ## <code>ORDER BY</code>と<code>LIMIT</code>を使用する {#use-code-order-by-code-and-code-limit-code}
 
-TiDB は、集合操作での[`ORDER BY`](/media/sqlgram/OrderByOptional.png)つまたは[`LIMIT`](/media/sqlgram/LimitClause.png)の句の使用をサポートしています。これら 2 つの句は、ステートメント全体の最後にある必要があります。
+TiDB は、集合操作での[`ORDER BY`](/media/sqlgram/OrderByOptional.png)または[`LIMIT`](/media/sqlgram/LimitClause.png)句の使用をサポートしています。これら 2 つの句は、ステートメント全体の最後にある必要があります。
 
 ```sql
 (SELECT * FROM t1 UNION ALL SELECT * FROM t1 INTERSECT SELECT * FROM t2) ORDER BY a LIMIT 2;

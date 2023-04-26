@@ -24,7 +24,7 @@ TiDB バージョン: 4.0.15
         -   `group_concat`関数の列に非ビン照合順序がある場合に発生する誤った実行結果を修正します[#27429](https://github.com/pingcap/tidb/issues/27429)
         -   `Apply`演算子を`Join` [#27233](https://github.com/pingcap/tidb/issues/27233)に変換すると列情報が欠落する問題を修正
         -   無効な文字列を`DATE` [#26762](https://github.com/pingcap/tidb/issues/26762)にキャストすると予期しない動作が発生する問題を修正
-        -   新しい照合順序が有効になっている場合、複数の列の`count distinct`の結果が間違っているというバグを修正します[#27091](https://github.com/pingcap/tidb/issues/27091)
+        -   新しい照合順序が有効になっている場合、複数の列の`count distinct`結果が間違っているというバグを修正します[#27091](https://github.com/pingcap/tidb/issues/27091)
 
 ## 機能強化 {#feature-enhancement}
 
@@ -40,7 +40,7 @@ TiDB バージョン: 4.0.15
 
 -   TiKV
 
-    -   読み取り待機レイテンシーを短縮するために、読み取り準備完了と書き込み準備完了を別々に処理する[#10475](https://github.com/tikv/tikv/issues/10475)
+    -   読み取りレイテンシーを短縮するために、読み取り準備完了と書き込み準備完了を別々に処理する[#10475](https://github.com/tikv/tikv/issues/10475)
     -   TiKV コプロセッサーのスローログでは、リクエストの処理に費やされた時間のみが考慮されます。 [#10841](https://github.com/tikv/tikv/issues/10841)
     -   slogger スレッドが過負荷になり、キューがいっぱいになったときに、スレッドをブロックする代わりにログを削除します[#10841](https://github.com/tikv/tikv/issues/10841)
     -   解決済み TS メッセージのサイズを縮小してネットワーク帯域幅を節約する[#2448](https://github.com/pingcap/tiflow/issues/2448)
@@ -62,7 +62,7 @@ TiDB バージョン: 4.0.15
 
         -   `SHOW TABLE STATUS` [#337](https://github.com/pingcap/dumpling/pull/337)のフィルタリング効率を向上させるために、テーブル情報を取得する前に、スキップされたデータベースをフィルタリングします。
         -   一部の MySQL バージョンでは`SHOW TABLE STATUS`が正しく機能しないため、エクスポートするテーブルのテーブル情報を取得するには`SHOW FULL TABLES`を使用します[#322](https://github.com/pingcap/dumpling/issues/322)
-        -   `START TRANSACTION ... WITH CONSISTENT SNAPSHOT`または`SHOW CREATE TABLE`の構文をサポートしていない MySQL 互換データベースのバックアップのサポート[#309](https://github.com/pingcap/dumpling/issues/309)
+        -   `START TRANSACTION ... WITH CONSISTENT SNAPSHOT`または`SHOW CREATE TABLE`構文をサポートしていない MySQL 互換データベースのバックアップのサポート[#309](https://github.com/pingcap/dumpling/issues/309)
         -   Dumpling警告ログを改良して、ダンプが失敗したという誤解を招く情報を回避します[#340](https://github.com/pingcap/dumpling/pull/340)
 
     -   TiDB Lightning
@@ -90,7 +90,7 @@ TiDB バージョン: 4.0.15
 
     -   範囲を構築するときに、バイナリ リテラルに対して照合順序が正しく設定されないバグを修正します[#23672](https://github.com/pingcap/tidb/issues/23672)
 
-    -   クエリに`GROUP BY`と`UNION`の両方が含まれている場合に発生する「範囲外のインデックス」エラーを修正し[#26553](https://github.com/pingcap/tidb/pull/26553) 。
+    -   クエリに`GROUP BY`と`UNION` [#26553](https://github.com/pingcap/tidb/pull/26553)両方が含まれている場合に発生する「範囲外のインデックス」エラーを修正します。
 
     -   TiKV にトゥームストーン ストアがある場合、TiDB がリクエストの送信に失敗する可能性がある問題を修正します[#23676](https://github.com/pingcap/tidb/issues/23676) [#24648](https://github.com/pingcap/tidb/issues/24648)
 
@@ -100,7 +100,7 @@ TiDB バージョン: 4.0.15
 
 -   TiKV
 
-    -   データの復元中に TDE が有効になっていると、 BRが「ファイルが既に存在します」というエラーを報告する問題を修正します[#1179](https://github.com/pingcap/br/issues/1179)
+    -   データの復元中に TDE が有効になっていると、 BR が「ファイルが既に存在します」というエラーを報告する問題を修正します[#1179](https://github.com/pingcap/br/issues/1179)
     -   破損したスナップショット ファイルが原因で発生する可能性のあるディスクがいっぱいになる問題を修正します[#10813](https://github.com/tikv/tikv/issues/10813)
     -   TiKV が古いリージョンを頻繁に削除する問題を修正[#10680](https://github.com/tikv/tikv/issues/10680)
     -   TiKV が頻繁に PD クライアントに再接続する問題を修正[#9690](https://github.com/tikv/tikv/issues/9690)
@@ -113,11 +113,11 @@ TiDB バージョン: 4.0.15
 
 -   TiFlash
 
-    -   TiFlashが複数のディスクに展開されている場合に発生する可能性のあるデータの不整合の問題を修正します。
+    -   TiFlash が複数のディスクに展開されている場合に発生する可能性のあるデータの不整合の問題を修正します。
     -   クエリに`CONSTANT` 、 `<` 、 `<=` 、 `>` 、 `>=` 、または`COLUMN`などのフィルターが含まれている場合に発生する誤った結果のバグを修正します
     -   負荷の高い書き込みでメトリクスのストア サイズが不正確になる問題を修正
-    -   複数のディスクに展開されたときにTiFlashがデータを復元できないという潜在的なバグを修正します
-    -   長時間実行した後、 TiFlashがデルタ データをガベージ コレクションできないという潜在的な問題を修正します。
+    -   複数のディスクに展開されたときにTiFlash がデータを復元できないという潜在的なバグを修正します
+    -   長時間実行した後、 TiFlash がデルタ データをガベージ コレクションできないという潜在的な問題を修正します。
 
 -   ツール
 
@@ -127,7 +127,7 @@ TiDB バージョン: 4.0.15
 
     -   TiCDC
 
-        -   統合テスト[#2422](https://github.com/pingcap/tiflow/issues/2422)で DDL ジョブの重複が発生した場合に発生する`ErrSchemaStorageTableMiss`のエラーを修正します。
+        -   統合テスト[#2422](https://github.com/pingcap/tiflow/issues/2422)で DDL ジョブの重複が発生した場合に発生する`ErrSchemaStorageTableMiss`エラーを修正します。
         -   `ErrGCTTLExceeded`エラーが発生するとチェンジフィードを削除できない不具合を修正[#2391](https://github.com/pingcap/tiflow/issues/2391)
         -   `capture list`コマンド[#2388](https://github.com/pingcap/tiflow/issues/2388)の出力に古いキャプチャが表示されることがある問題を修正します。
         -   TiCDC プロセッサ[#2017](https://github.com/pingcap/tiflow/pull/2017)のデッドロックの問題を修正します。
@@ -136,7 +136,7 @@ TiDB バージョン: 4.0.15
         -   DDL シンク エラー[#2552](https://github.com/pingcap/tiflow/issues/2552)により、変更フィードを停止できない問題を修正します。
         -   TiCDC Open Protocol の問題を修正: トランザクションに変更がない場合、TiCDC が空の値を出力する[#2612](https://github.com/pingcap/tiflow/issues/2612)
         -   unsigned `TINYINT` type [#2648](https://github.com/pingcap/tiflow/issues/2648)で TiCDC がpanicになるバグを修正
-        -   TiCDC がキャプチャするリージョンが多すぎる場合に発生する OOM を回避するために、 [#2202](https://github.com/pingcap/tiflow/issues/2202)ウィンドウ サイズを小さくします。
+        -   TiCDC がキャプチャするリージョンが多すぎる場合に発生する OOM を回避するために、gRPC ウィンドウ サイズを小さくします[#2202](https://github.com/pingcap/tiflow/issues/2202)
         -   TiCDC がキャプチャするリージョンが多すぎる場合に発生する OOM の問題を修正します[#2673](https://github.com/pingcap/tiflow/issues/2673)
         -   `mysql.TypeString, mysql.TypeVarString, mysql.TypeVarchar`などのデータ型を JSON にエンコードする際にプロセスpanicが発生する問題を修正[#2758](https://github.com/pingcap/tiflow/issues/2758)
         -   新しい変更フィード[#2389](https://github.com/pingcap/tiflow/issues/2389)を作成するときに発生する可能性があるメモリリークの問題を修正します。

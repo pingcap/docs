@@ -32,7 +32,7 @@ TiDB は、次の 2 種類の統計を収集できます。
 
 ### 拡張統計を有効にする {#enable-extended-statistics}
 
-拡張統計を有効にするには、システム変数`tidb_enable_extended_stats`を`ON`に設定します。
+拡張統計を有効にするには、システム変数`tidb_enable_extended_stats` `ON`に設定します。
 
 ```sql
 SET GLOBAL tidb_enable_extended_stats = ON;
@@ -52,10 +52,10 @@ ALTER TABLE table_name ADD STATS_EXTENDED IF NOT EXISTS stats_name stats_type(co
 
 構文では、収集する拡張統計の表名、統計名、統計タイプ、および列名を指定できます。
 
--   `table_name`は、拡張統計が収集されるテーブルの名前を指定します。
--   `stats_name`は、統計オブジェクトの名前を指定します。これは、テーブルごとに一意である必要があります。
--   `stats_type`は、統計のタイプを指定します。現在、相関タイプのみがサポートされています。
--   `column_name`は列グループを指定します。これには複数の列が含まれる場合があります。現在、指定できる列名は 2 つだけです。
+-   `table_name`拡張統計が収集されるテーブルの名前を指定します。
+-   `stats_name`統計オブジェクトの名前を指定します。これは、テーブルごとに一意である必要があります。
+-   `stats_type`統計のタイプを指定します。現在、相関タイプのみがサポートされています。
+-   `column_name`列グループを指定します。これには複数の列が含まれる場合があります。現在、指定できる列名は 2 つだけです。
 
 <details><summary>使い方</summary>
 
@@ -69,7 +69,7 @@ TiDB は定期的に`mysql.stats_extended`をロードして、キャッシュ�
 >
 > `mysql.stats_extended`システム テーブルを直接操作することは**お勧めしません**。そうしないと、異なる TiDB ノードで一貫性のないキャッシュが発生します。
 >
-> テーブルを誤って操作してしまった場合は、各 TiDB ノードで次のステートメントを実行できます。次に、現在のキャッシュがクリアされ、 `mysql.stats_extended`のテーブルが完全にリロードされます。
+> テーブルを誤って操作してしまった場合は、各 TiDB ノードで次のステートメントを実行できます。次に、現在のキャッシュがクリアされ、 `mysql.stats_extended`テーブルが完全にリロードされます。
 >
 > ```sql
 > ADMIN RELOAD STATS_EXTENDED;
@@ -95,7 +95,7 @@ ALTER TABLE table_name DROP STATS_EXTENDED stats_name;
 >
 > `mysql.stats_extended`システム テーブルを直接操作することは**お勧めしません**。そうしないと、異なる TiDB ノードで一貫性のないキャッシュが発生します。
 >
-> テーブルを誤って操作した場合は、各 TiDB ノードで次のステートメントを使用できます。次に、現在のキャッシュがクリアされ、 `mysql.stats_extended`のテーブルが完全にリロードされます。
+> テーブルを誤って操作した場合は、各 TiDB ノードで次のステートメントを使用できます。次に、現在のキャッシュがクリアされ、 `mysql.stats_extended`テーブルが完全にリロードされます。
 >
 > ```sql
 > ADMIN RELOAD STATS_EXTENDED;
@@ -105,7 +105,7 @@ ALTER TABLE table_name DROP STATS_EXTENDED stats_name;
 
 ### 拡張統計のエクスポートとインポート {#export-and-import-extended-statistics}
 
-拡張統計をエクスポートまたはインポートする方法は、基本統計をエクスポートまたはインポートする方法と同じです。詳細は[統計の概要 -統計のインポートとエクスポート](/statistics.md#import-and-export-statistics)を参照してください。
+拡張統計をエクスポートまたはインポートする方法は、基本統計をエクスポートまたはインポートする方法と同じです。詳細は[統計の概要 - 統計のインポートとエクスポート](/statistics.md#import-and-export-statistics)を参照してください。
 
 ## 相関型拡張統計の使用例 {#usage-examples-for-correlation-type-extended-statistics}
 
@@ -113,13 +113,13 @@ ALTER TABLE table_name DROP STATS_EXTENDED stats_name;
 
 ### ステップ 1. テーブルを定義する {#step-1-define-the-table}
 
-テーブル`t`を次のように定義します。
+テーブル`t`次のように定義します。
 
 ```sql
 CREATE TABLE t(col1 INT, col2 INT, KEY(col1), KEY(col2));
 ```
 
-表`t`の`col1`と`col2`の両方が、行順の単調増加制約に従うとします。これは、値`col1`と`col2`が順番に厳密に相関しており、相関係数が`1`であることを意味します。
+表`t`の`col1`と`col2`両方が、行順の単調増加制約に従うとします。これは、値`col1`と`col2`が順番に厳密に相関しており、相関係数が`1`であることを意味します。
 
 ### 手順 2. 拡張統計なしでサンプル クエリを実行する {#step-2-execute-an-example-query-without-extended-statistics}
 
@@ -134,7 +134,7 @@ SELECT * FROM t WHERE col1 > 1 ORDER BY col2 LIMIT 1;
 -   `col1`のインデックスを使用してテーブル`t`にアクセスし、結果を`col2`で並べ替えて`Top-1`を計算します。
 -   `col2`のインデックスを使用して、 `col1 > 1`を満たす最初の行を見つけます。このアクセス方法のコストは主に、TiDB が`col2`の順序でテーブルをスキャンするときに除外される行の数によって異なります。
 
-拡張統計がない場合、TiDB オプティマイザーは`col1`と`col2`が独立していると仮定するだけであり、これ**が重大な推定エラーにつながります**。
+拡張統計がない場合、TiDB オプティマイザーは`col1`と`col2`が独立していると仮定するだけであり、これが**重大な推定エラーにつながります**。
 
 ### ステップ 3. 拡張統計を有効にする {#step-3-enable-extended-statistics}
 
@@ -144,18 +144,18 @@ SELECT * FROM t WHERE col1 > 1 ORDER BY col2 LIMIT 1;
 ALTER TABLE t ADD STATS_EXTENDED s1 correlation(col1, col2);
 ```
 
-登録後に`ANALYZE`を実行すると、TiDB は表`t`の`col`と`col2`の[ピアソン相関係数](https://en.wikipedia.org/wiki/Pearson_correlation_coefficient)を計算し、オブジェクトを`mysql.stats_extended`の表に書き込みます。
+登録後に`ANALYZE`を実行すると、TiDB は表`t`の`col`と`col2`の[ピアソン相関係数](https://en.wikipedia.org/wiki/Pearson_correlation_coefficient)計算し、オブジェクトを`mysql.stats_extended`の表に書き込みます。
 
 ### ステップ 4. 拡張統計がどのように違いを生むかを確認する {#step-4-see-how-extended-statistics-make-a-difference}
 
 TiDB が相関のための拡張統計を取得した後、オプティマイザはスキャンする行数をより正確に見積もることができます。
 
-このとき、 [ステージ 2. 拡張統計なしでサンプル クエリを実行する](#step-2-execute-an-example-query-without-extended-statistics)のクエリに対して、 `col1`と`col2`の順序が厳密に関連付けられます。 TiDB が`col2`のインデックスを使用して`col1 > 1`を満たす最初の行に一致するようにテーブル`t`にアクセスする場合、TiDB オプティマイザーは行数の見積もりを次のクエリに同等に変換します。
+このとき、 [ステージ 2. 拡張統計なしでサンプル クエリを実行する](#step-2-execute-an-example-query-without-extended-statistics)のクエリに対して、 `col1`と`col2`順序が厳密に関連付けられます。 TiDB が`col2`のインデックスを使用して`col1 > 1`を満たす最初の行に一致するようにテーブル`t`にアクセスする場合、TiDB オプティマイザーは行数の見積もりを次のクエリに同等に変換します。
 
 ```sql
 SELECT * FROM t WHERE col1 <= 1 OR col1 IS NULL;
 ```
 
-前のクエリ結果に 1 を加えた値が、行数の最終的な見積もりになります。この方法では、独立した仮定を使用する必要がなく**、重大な推定エラーが回避**されます。
+前のクエリ結果に 1 を加えた値が、行数の最終的な見積もりになります。この方法では、独立した仮定を使用する必要がなく、**重大な推定エラーが回避されます**。
 
 相関係数 (この例では`1` ) がシステム変数`tidb_opt_correlation_threshold`の値より小さい場合、オプティマイザーは独立した仮定を使用しますが、ヒューリスティックに推定値を増やします。 `tidb_opt_correlation_exp_factor`の値が大きいほど、推定結果が大きくなります。相関係数の絶対値が大きいほど、推定結果が大きくなります。

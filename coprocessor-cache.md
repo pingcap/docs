@@ -11,7 +11,7 @@ v4.0 以降、TiDB インスタンスは、TiKV (コプロセッサーキャッ�
 
 <CustomContent platform="tidb">
 
-コプロセッサー Cache は、TiDB 構成ファイルの`tikv-client.copr-cache`構成項目を介して構成できます。コプロセッサー・キャッシュを有効にして構成する方法の詳細については、 [TiDBコンフィグレーションファイル](/tidb-configuration-file.md#tikv-clientcopr-cache-new-in-v400)を参照してください。
+コプロセッサー Cache は、TiDB 構成ファイルの`tikv-client.copr-cache`構成項目を介して構成できます。コプロセッサー・キャッシュを有効にして構成する方法の詳細については、 [TiDBコンフィグレーションファイル](/tidb-configuration-file.md#tikv-clientcopr-cache-new-in-v400)参照してください。
 
 </CustomContent>
 
@@ -31,7 +31,7 @@ v4.0 以降、TiDB インスタンスは、TiKV (コプロセッサーキャッ�
 
 -   プッシュダウンの計算結果のみキャッシュされます。キャッシュにヒットした場合でも、TiDB は引き続き後続の計算を実行する必要があります。
 
--   キャッシュはリージョン単位です。リージョンリージョンが無効になります。このため、コプロセッサーキャッシュ機能は、ほとんど変更されないデータに対して主に効果を発揮します。
+-   キャッシュはリージョン単位です。リージョンにデータを書き込むと、リージョンキャッシュが無効になります。このため、コプロセッサーキャッシュ機能は、ほとんど変更されないデータに対して主に効果を発揮します。
 
 -   プッシュダウン計算要求が同じ場合、キャッシュにヒットします。通常、次のシナリオでは、プッシュダウン計算要求は同じか、部分的に同じです。
     -   SQL ステートメントは同じです。たとえば、同じ SQL ステートメントが繰り返し実行されます。
@@ -68,8 +68,8 @@ EXPLAIN ANALYZE SELECT * FROM t USE INDEX(a);
 3 rows in set (0.62 sec)
 ```
 
-実行結果の列`execution info`には、コプロセッサーキャッシュのヒット率を示す`copr_cache_hit_ratio`の情報が表示されます。上記の例の`0.75`は、ヒット率が約 75% であることを意味します。
+実行結果の列`execution info`には、コプロセッサーキャッシュのヒット率を示す`copr_cache_hit_ratio`情報が表示されます。上記の例の`0.75`ヒット率が約 75% であることを意味します。
 
-### Grafana モニタリング パネルをビューする {#view-the-grafana-monitoring-panel}
+### Grafana モニタリング パネルをビュー {#view-the-grafana-monitoring-panel}
 
 Grafana では、 `tidb`名前空間の下の`distsql`サブシステムに**copr-cache**パネルが表示されます。このパネルは、クラスター全体のコプロセッサー・キャッシュのヒット、ミス、およびキャッシュ破棄の数をモニターします。

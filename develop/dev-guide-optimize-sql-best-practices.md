@@ -102,9 +102,9 @@ SELECT title, price FROM books WHERE title = 'Marian Yost';
 
 大量のデータを更新する場合は、 [一括更新](/develop/dev-guide-update-data.md#bulk-update)を使用することをお勧めします。
 
-### 完全なテーブル データには、 <code>DELETE</code>の代わりに<code>TRUNCATE</code>を使用します {#use-code-truncate-code-instead-of-code-delete-code-for-full-table-data}
+### 完全なテーブル データには、 <code>DELETE</code>の代わりに<code>TRUNCATE</code>使用します {#use-code-truncate-code-instead-of-code-delete-code-for-full-table-data}
 
-テーブルからすべてのデータを削除する必要がある場合は、次の`TRUNCATE`ステートメントを使用することをお勧めします。
+テーブルからすべてのデータを削除する必要がある場合は、 `TRUNCATE`ステートメントを使用することをお勧めします。
 
 ```sql
 TRUNCATE TABLE t;
@@ -130,7 +130,7 @@ DELETE FROM t;
 
 ### インデックスのベスト プラクティスを追加する {#add-index-best-practices}
 
-TiDB は、オンラインのインデックス追加操作をサポートしています。 [インデックスを追加](/sql-statements/sql-statement-add-index.md)つまたは[インデックスを作成](/sql-statements/sql-statement-create-index.md)のステートメントを使用してインデックスを追加できます。テーブルでのデータの読み取りと書き込みはブロックされません。次のシステム変数を変更することで、インデックス追加操作の`re-organize`フェーズ中に同時実行数とバッチ サイズを調整できます。
+TiDB は、オンラインのインデックス追加操作をサポートしています。 [インデックスを追加](/sql-statements/sql-statement-add-index.md)つまたは[インデックスを作成](/sql-statements/sql-statement-create-index.md)ステートメントを使用してインデックスを追加できます。テーブルでのデータの読み取りと書き込みはブロックされません。次のシステム変数を変更することで、インデックス追加操作の`re-organize`フェーズ中に同時実行数とバッチ サイズを調整できます。
 
 -   [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt)
 -   [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size)

@@ -30,7 +30,7 @@ TiDB バージョン: 3.0.20
 
     -   悲観的トランザクション[#21706](https://github.com/pingcap/tidb/pull/21706)のトランザクション ステータスの誤ったキャッシュを修正します。
     -   `INFORMATION_SCHEMA.TIDB_HOT_REGIONS` [#21319](https://github.com/pingcap/tidb/pull/21319)のクエリ時に発生する不正確な統計の問題を修正します。
-    -   データベース[#21205](https://github.com/pingcap/tidb/pull/21205)が純粋な下位表現でない場合、データが正しく削除されない可能性がある問題を修正`DELETE`
+    -   データベース名が純粋な下位表現でない場合、データが正しく削除されない可能性が`DELETE`問題を修正[#21205](https://github.com/pingcap/tidb/pull/21205)
     -   再帰ビュー[#21000](https://github.com/pingcap/tidb/pull/21000)のビルド時に発生するスタック オーバーフローの問題を修正します。
     -   TiKV クライアント[#20863](https://github.com/pingcap/tidb/pull/20863)のゴルーチン リークの問題を修正
     -   `year`タイプ[#20828](https://github.com/pingcap/tidb/pull/20828)の誤ったデフォルトのゼロ値を修正
@@ -46,7 +46,7 @@ TiDB バージョン: 3.0.20
     -   新しく追加された`Enum`列[#20999](https://github.com/pingcap/tidb/pull/20999)に正しいデフォルト値を設定します
     -   `SELECT DATE_ADD('2007-03-28 22:08:28',INTERVAL "-2.-2" SECOND)`のような SQL ステートメントの結果を MySQL [#20627](https://github.com/pingcap/tidb/pull/20627)と互換性があるように修正します。
     -   列タイプを変更するときの誤ったデフォルト値を修正します[#20532](https://github.com/pingcap/tidb/pull/20532)
-    -   入力引数が`float`または`decimal`の型[#20469](https://github.com/pingcap/tidb/pull/20469)の場合、 `timestamp`関数が間違った結果になる問題を修正
+    -   入力引数が`float`または`decimal`型[#20469](https://github.com/pingcap/tidb/pull/20469)の場合、 `timestamp`関数が間違った結果になる問題を修正
     -   統計[#20424](https://github.com/pingcap/tidb/pull/20424)の潜在的なデッドロックの問題を修正
     -   オーバーフローした float 型のデータが挿入される問題を修正[#20251](https://github.com/pingcap/tidb/pull/20251)
 
