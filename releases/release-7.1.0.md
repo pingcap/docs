@@ -182,14 +182,14 @@ In v7.1.0, the key new features and improvements are as follows:
 
     Before TiDB v7.1.0, when a DDL task encounters a business peak period during execution, you can only manually cancel the DDL task to reduce its impact on the business. In v7.1.0, TiDB introduces pause and resume operations for DDL tasks. These operations let you pause DDL tasks during peak periods and resume them after the peak ends, thus avoiding any impact on your application workloads.
 
-    For example, you can pause and resume multiple DDL tasks using [`ADMIN PAUSE DDL JOBS`](/sql-statements/sql-statement-admin-pause-ddl.md) or [`ADMIN RESUME DDL JOBS`](/sql-statements/sql-statement-admin-resume-ddl.md):
+    For example, you can pause and resume multiple DDL tasks using `ADMIN PAUSE DDL JOBS` or `ADMIN RESUME DDL JOBS`:
 
     ```sql
     ADMIN PAUSE DDL JOBS 1,2;
     ADMIN RESUME DDL JOBS 1,2;
     ```
 
-    For more information, see [`ADMIN PAUSE DDL JOBS`](/sql-statements/sql-statement-admin-pause-ddl.md) and [`ADMIN RESUME DDL JOBS`](/sql-statements/sql-statement-admin-resume-ddl.md).
+    For more information, see [documentation](/ddl-introduction.md#ddl-related-commands).
 
 ### Observability
 
