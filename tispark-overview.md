@@ -104,7 +104,7 @@ TiSpark 2.4.4、2.5.2、3.0.2、および 3.1.1 は最新の安定バージョ�
 
 次のいずれかの方法を使用して、TiSpark jar を取得できます。
 
--   [セントラル](https://search.maven.org/)から取得してGroupId [<img src="https://img.shields.io/badge/com.pingcap/tispark-green.svg" alt="Maven検索">](http://search.maven.org/#search%7Cga%7C1%7Cpingcap)で検索
+-   [セントラル](https://search.maven.org/)から取得してGroupId [![Maven Search](https://img.shields.io/badge/com.pingcap/tispark-green.svg)](http://search.maven.org/#search%7Cga%7C1%7Cpingcap)で検索
 -   [TiSpark リリース](https://github.com/pingcap/tispark/releases)から取得
 -   以下の手順でソースからビルドします
 
