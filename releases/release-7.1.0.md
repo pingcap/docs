@@ -139,7 +139,7 @@ In v7.1.0, the key new features and improvements are as follows:
 
     The syntax of Range INTERVAL partitioning (introduced in v6.3.0) becomes GA. With this syntax, you can define Range partitioning by a desired interval without enumerating all partitions, which drastically reduces the length of Range partitioning DDL statements. The syntax is equivalent to that of the original Range partitioning.
 
-    For more information, see [documentation](/partitioned-table#range-interval-partitioning).
+    For more information, see [documentation](/partitioned-table.md#range-interval-partitioning).
 
 * Some `LOAD DATA` features become GA [#40499](https://github.com/pingcap/tidb/issues/40499) @[lance6716](https://github.com/lance6716)
 
