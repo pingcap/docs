@@ -35,7 +35,7 @@ Before migrating to Cloud Organization SSO, check and confirm the items in this 
 
 When Cloud Organization SSO is enabled, your members must use your custom URL instead of the public login URL (`https://tidbcloud.com`) to log into TiDB Cloud.
 
-The custom URL cannot be changed after the enablement, so you need to decide what URL to be used in advance.
+The custom URL cannot be changed after the enablement, so you need to decide which URL to be used in advance.
 
 The format of the custom URL is `https://tidbcloud.com/enterprise/signin/your-company-name`, in which you can customize your company name.
 
@@ -57,13 +57,13 @@ All the enabled authentication methods will be displayed on your custom TiDB Clo
 Auto-provision is a feature that allows members to automatically join an organization without requiring an invitation from an existing member or organization owner. In TiDB Cloud, it is disabled by default for all the supported authentication methods.
 
 - When auto-provision is disabled for an authentication method, only users who have been invited by an organization owner can log in to your custom URL.
-- When auto-provision is enabled for an authentication method, any users using this authentication method can log in to your custom URL. After login, they are assigned a default **Member** role within the organization.
+- When auto-provision is enabled for an authentication method, any users using this authentication method can log in to your custom URL. After login, they are automatically assigned the default **Member** role within the organization.
 
 For security considerations, if you choose to enable auto-provision, it is recommended to limit the allowed email domains for authentication when you [configure the authentication method details](#step-2-configure-authentication-methods).
 
 ### Notify your members about the Cloud Organization SSO migration plan
 
-Before enabling Cloud Organization SSO, make sure to communicate with your members about the following:
+Before enabling Cloud Organization SSO, make sure to inform your members about the following:
 
 - The custom login URL of TiDB Cloud
 - The time when to start using the custom login URL instead of `https://tidbcloud.com` for login
@@ -83,7 +83,7 @@ To enable Cloud Organization SSO, take the following steps:
     >
     > The URL cannot be changed once Cloud Organization SSO is enabled. Members in your organization will only be able to log into TiDB Cloud using your custom URL. If you need to change the configured URL later, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for assistance.
 
-5. If the dialog includes a list of users to be re-invited and re-join the organization once Cloud organization SSO is enabled, take note of the list. You will need to re-invite them after the enablement if auto-provision is disabled.
+5. If the dialog includes a list of users to be re-invited and re-join the organization once Cloud Organization SSO is enabled, take note of the list. You will need to re-invite them after the enablement if auto-provision is disabled.
 6. Click the **I understand and confirm** check box, and then click **Enable**.
 
 ## Step 2. Configure authentication methods
@@ -100,7 +100,7 @@ After enabling Cloud Organization Cloud, you can configure Google, GitHub, or Mi
 
     - [**Auto-provision Accounts**](#decide-whether-to-enable-auto-provision)
 
-        It is disabled by default. You can enable it according to your need. For security considerations, if you choose to enable auto-provisioning, it is recommended to limit the allowed email domains for authentication.
+        It is disabled by default. You can enable it according to your need. For security considerations, if you choose to enable auto-provision, it is recommended to limit the allowed email domains for authentication.
 
     - **Allowed Email Domains**
 
@@ -138,7 +138,7 @@ In TiDB Cloud, the OIDC authentication method is disabled by default. After enab
 
     - [**Auto-provision Accounts**](#decide-whether-to-enable-auto-provision)
 
-        It is disabled by default. You can enable it according to your need. For security considerations, if you choose to enable auto-provisioning, it is recommended to limit the allowed email domains for authentication.
+        It is disabled by default. You can enable it according to your need. For security considerations, if you choose to enable auto-provision, it is recommended to limit the allowed email domains for authentication.
 
     - **Allowed Email Domains**
 
