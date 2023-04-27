@@ -5,7 +5,7 @@ summary: Learn how to log in to the TiDB Cloud console via your customized organ
 
 # Organization SSO Authentication
 
-Single Sign-On (SSO) is an authentication scheme that allows members in your TiDB Cloud [organization](/tidb-cloud/tidb-cloud-glossary.md#organization) to log into TiDB Cloud with identities from an identity providers (IdP) instead of emails and passwords.
+Single Sign-On (SSO) is an authentication scheme that enables members in your TiDB Cloud [organization](/tidb-cloud/tidb-cloud-glossary.md#organization) to log into TiDB Cloud using identities from an identity provider (IdP) instead of email addresses and passwords.
 
 TiDB Cloud supports the following two types of SSO authentication:
 
@@ -13,7 +13,7 @@ TiDB Cloud supports the following two types of SSO authentication:
 
 - Cloud Organization SSO: members can log in to a custom login page of TiDB Cloud using the authentication methods specified by your organization. The Cloud Organization SSO is disabled by default.
 
-Compared with basic SSO, Cloud Organization SSO provides more flexibility and customization so you can better meet your organization's security and compliance requirements. For example, you can specify which authentication methods are displayed on the login page, limit which email address domains are allowed for login, and let your members to log into TiDB Cloud with your identity provider (IdP) that uses OpenID Connect (OIDC) identity protocols.
+Compared with basic SSO, Cloud Organization SSO provides more flexibility and customization so you can better meet your organization's security and compliance requirements. For example, you can specify which authentication methods are displayed on the login page, limit which email address domains are allowed for login, and let your members log into TiDB Cloud with your identity provider (IdP) that uses OpenID Connect (OIDC) identity protocols.
 
 In this document, you will learn how to migrate the authentication scheme of your organization from basic SSO to Cloud Organization SSO.
 
@@ -33,7 +33,7 @@ Before migrating to Cloud Organization SSO, check and confirm the items in this 
 
 ### Decide a custom URL for the TiDB Cloud login page of your organization
 
-When Cloud Organization SSO is enabled, your members must use your custom URL instead of the public login URL at `https://tidbcloud.com` to log into TiDB Cloud.
+When Cloud Organization SSO is enabled, your members must use your custom URL instead of the public login URL (`https://tidbcloud.com`) to log into TiDB Cloud.
 
 The custom URL cannot be changed after the enablement, so you need to decide what URL to be used in advance.
 
@@ -57,13 +57,13 @@ All the enabled authentication methods will be displayed on your custom TiDB Clo
 Auto-provision is a feature that allows members to automatically join an organization without requiring an invitation from an existing member or organization owner. In TiDB Cloud, it is disabled by default for all the supported authentication methods.
 
 - When auto-provision is disabled for an authentication method, only users who have been invited by an organization owner can log in to your custom URL.
-- When auto-provision is enabled for an authentication method, any users using this authentication method can log in to your custom URL. After login, they are assigned a default `member` role within the organization.
+- When auto-provision is enabled for an authentication method, any users using this authentication method can log in to your custom URL. After login, they are assigned a default **Member** role within the organization.
 
-For security consideration, if you choose to enable auto-provision, it is recommended to limit the allowed email domains for authentication when you [configure the authentication method details](#step-2-configure-authentication-methods).
+For security considerations, if you choose to enable auto-provision, it is recommended to limit the allowed email domains for authentication when you [configure the authentication method details](#step-2-configure-authentication-methods).
 
 ### Notify your members about the Cloud Organization SSO migration plan
 
-Before enabling Cloud Organization SSO, make sure to communicate your members about the following:
+Before enabling Cloud Organization SSO, make sure to communicate with your members about the following:
 
 - The custom login URL
 - The time when to start using the custom login URL instead of `https://tidbcloud.com` for login
@@ -72,13 +72,13 @@ Before enabling Cloud Organization SSO, make sure to communicate your members ab
 
 ### Ensure that at least one organization owner belongs to no other TiDB Cloud organization
 
-To ensure the success migration from basic SSO or organization SSO, make sure that at least one organization owner belongs exclusively to the TiDB Cloud organization to be migrated.
+To ensure the successful migration from basic SSO or organization SSO, make sure that at least one organization owner belongs exclusively to the TiDB Cloud organization to be migrated.
 
-If all organization owners belong to multiple organizations, the migration will fail, and you will get the `Cloud Organization SSO cannot be enabled` error.
+If all organization owners are in multiple organizations, the migration will fail, and you will get the `Cloud Organization SSO cannot be enabled` error.
 
 ## Step 1. Enable Cloud Organization SSO
 
-To enable Cloud Organization SSO:
+To enable Cloud Organization SSO, take the following steps:
 
 1. Log in to [TiDB Cloud console](https://tidbcloud.com) as a user with the organization owner role.
 2. In the upper-right corner of the TiDB Cloud console, click <MDSvgIcon name="icon-top-organization" /> > **Organization Settings**.
@@ -106,11 +106,11 @@ After enabling Cloud Organization Cloud, you can configure Google, GitHub, or Mi
 
     - [**Auto-provision Accounts**](#decide-whether-to-enable-autoprovisioning)
 
-        It is disabled by default. You can enable it according to your need. For security consideration, if you choose to enable auto provisioning, it is recommended to limit the allowed email domains for authentication.
+        It is disabled by default. You can enable it according to your need. For security considerations, if you choose to enable auto provisioning, it is recommended to limit the allowed email domains for authentication.
 
     - **Allowed Email Domains**
 
-        After this field is configured, only the specified email domains of this authentication method can log into the custom URL the TiDB Cloud. When filling in domain names, you need to exclude the @ symbol and separate them with commas. For example, `company1.com,company2.com`.
+        After this field is configured, only the specified email domains of this authentication method can log into the custom URL of the TiDB Cloud. When filling in domain names, you need to exclude the @ symbol and separate them with commas. For example, `company1.com,company2.com`.
 
         > **Note:**
         >
@@ -144,11 +144,11 @@ In TiDB Cloud, the OIDC authentication method is disabled by default. After enab
 
     - [**Auto-provision Accounts**](#decide-whether-to-enable-autoprovisioning)
 
-        It is disabled by default. You can enable it according to your need. For security consideration, if you choose to enable auto provisioning, it is recommended to limit the allowed email domains for authentication.
+        It is disabled by default. You can enable it according to your need. For security considerations, if you choose to enable auto provisioning, it is recommended to limit the allowed email domains for authentication.
 
     - **Allowed Email Domains**
 
-        After this field is configured, only the specified email domains of this authentication method can log into the custom URL the TiDB Cloud. When filling in domain names, you need to exclude the @ symbol and separate them with commas. For example, `company1.com,company2.com`.
+        After this field is configured, only the specified email domains of this authentication method can log into the custom URL of the TiDB Cloud. When filling in domain names, you need to exclude the @ symbol and separate them with commas. For example, `company1.com,company2.com`.
 
         > **Note:**
         >
@@ -178,4 +178,4 @@ After receiving the invitation email, the member needs to click the link in the 
 
 > **Note:**
 >
-> The verification link in the email expires in 24 hours. If a invited member does not receive the email, click Resend.
+> The verification link in the email expires in 24 hours. If an invited member does not receive the email, click **Resend**.
