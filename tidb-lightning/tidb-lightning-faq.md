@@ -248,8 +248,8 @@ If you want to copy both the schema definition and table data from one schema to
 
     In this configuration file, set `schema = 'test2'` as you want to use a different schema name than the one used in the original dump. The filename is used to determine the name of the table.
 
-Then we use this config file to run the import.
+3. Use this configuration file to run the import.
 
-```
-tiup tidb-lightning -config /tmp/tidb-lightning.toml
-```
+    ```
+    tiup tidb-lightning -config /tmp/tidb-lightning.toml
+    ```
