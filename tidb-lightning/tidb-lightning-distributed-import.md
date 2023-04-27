@@ -187,13 +187,13 @@ If one or more TiDB Lightning nodes exit abnormally during a parallel import, id
 
 - If the error has no impact on data accuracy, for example, network timeout, perform the following steps:
 
-    1. Run the [`checkpoint-error-ignore`](/tidb-lightning/tidb-lightning-checkpoints.md#--checkpoint-error-ignore) command by using tidb-lightning-ctl on all failed nodes to clean errors in the checkpoint source data.
+    1. Run the [`checkpoint-error-ignore`](/tidb-lightning/tidb-lightning-checkpoints.md#--checkpoint-error-ignore) command on all failed nodes to clean errors in the checkpoint source data.
 
     2. Restart these nodes to continue importing data from checkpoints.
 
 - If you see errors in the log that result in data inaccuracies, such as a checksum mismatch indicating invalid data in the source file, you can perform the following steps to resolve this issue:
 
-    1. Run the [`checkpoint-error-destroy`](/tidb-lightning/tidb-lightning-checkpoints.md#--checkpoint-error-destroy) command by using tidb-lightning-ctl on all Lightning nodes, including successful nodes.
+    1. Run the [`checkpoint-error-destroy`](/tidb-lightning/tidb-lightning-checkpoints.md#--checkpoint-error-destroy) command on all Lightning nodes, including successful nodes, to clean up the imported data and the checkpoint source data.
 
         This command removes the data imported to the failed tables downstream, the corresponding checkpoint, and the Meta table information of multiple parallel import tasks.
 
