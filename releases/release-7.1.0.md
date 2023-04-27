@@ -24,13 +24,18 @@ In v7.1.0, the key new features and improvements are as follows:
 <tbody>
   <tr>
     <td rowspan="2">Scalability and Performance</td>
-    <td>Session level <a href="https://docs.pingcap.com/tidb/dev/sql-non-prepared-plan-cache" target="_blank">non-prepared plan cache</a> (GA)</td>
-    <td>Support automatically reusing plan cache at the session level to reduce compilation and shorten the query time for the same SQL patterns without manually setting prepare statements in advance.</td>
+    <td><a href="https://docs.pingcap.com/tidb/dev/sql-non-prepared-plan-cache" target="_blank">Session-level plan cache for non-prepared plans</a> (GA)</td>
+    <td>Support automatically reusing plan cache at the session level to remove query planning time, reducing query time for repeat SQL patterns without manually setting prepare statements in advance.</td>
   </tr>
   <tr>
     <td><a href="https://docs.pingcap.com/tidb/dev/troubleshoot-hot-spot-issues#scatter-read-hotspots" target="_blank">Load-based replica read</a></td>
     <td>In a read hotspot scenario, TiDB can redirect read requests for a hotspot TiKV node to its replicas. This feature efficiently scatters read hotspots and optimizes the use of cluster resources. To control the threshold for triggering load-based replica read, you can adjust the system variable <a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_load_based_replica_read_threshold-new-in-v700" target="_blank"><code>tidb_load_based_replica_read_threshold</code></a>.</td>
   </tr>
+  <tr>
+    <td rowspan="1">Reliability and availability</td>
+    <td><a href="https://docs.pingcap.com/tidb/dev/tidb-resource-control" target="_blank">Resource control by Resource Groups</a> (GA)</td>
+   <td>Support resource management based on resource groups, which maps database users to the corresponding resource groups and sets quotas for each resource group based on actual needs.</td>
+ </tr>
   <tr>
     <td rowspan="2">SQL</td>
     <td><a href="https://docs.pingcap.com/tidb/dev/sql-statement-create-index#multi-valued-index" target="_blank">Multi-valued index</a> (GA)</td>
@@ -38,7 +43,7 @@ In v7.1.0, the key new features and improvements are as follows:
   </tr>
   <tr>
     <td><a href="https://docs.pingcap.com/tidb/dev/generated-columns" target="_blank">Generated columns</a> (GA)</td>
-    <td>The value of a generated column is calculated by the SQL expression in the column definition in real time. This feature pushes some application logic to the database level, thus improving query efficiency.</td>
+    <td>Values in a generated column are calculated by a SQL expression in the column definition in real time. This feature pushes some application logic to the database level, thus improving query efficiency.</td>
   </tr>
 </tbody>
 </table>
