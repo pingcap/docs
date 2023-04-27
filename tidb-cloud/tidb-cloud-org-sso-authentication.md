@@ -19,7 +19,9 @@ In this document, you will learn how to migrate the authentication scheme of you
 
 > **Note:**
 >
+>
 > - Once Cloud Organization SSO is enabled, it cannot be disabled.
+> - To enable Cloud Organization SSO, you need to have the owner role in your TiDB Cloud organization. For more information about roles, see [Manage role access](/tidb-cloud/manage-user-access.md#manage-role-access).
 > - If your current TiDB login URL starts with `https://tidbcloud.com/enterprise/`, it means that Cloud Organization SSO is already enabled for your organization.
 
 ## Before you begin
@@ -28,7 +30,7 @@ Before migrating to Cloud Organization SSO, check and confirm the items in this 
 
 ### Decide a custom URL for the TiDB Cloud login page of your organization
 
-When Cloud Organization SSO is enabled, your members must use your customized URL instead of the public login URL at `https://tidbcloud.com` to log into TiDB Cloud.
+When Cloud Organization SSO is enabled, your members must use your custom URL instead of the public login URL at `https://tidbcloud.com` to log into TiDB Cloud.
 
 The custom URL cannot be changed after the enablement, so you need to decide what URL to be used in advance.
 
@@ -45,7 +47,7 @@ TiDB Cloud provides the following authentication methods for Organization SSO.
 
 When you enable Cloud Organization SSO, the first three methods are enabled by default.
 
-All the enabled authentication methods will be displayed on your customized TiDB Cloud login page, so you need to decide which authentication methods to be enabled or disabled in advance.
+All the enabled authentication methods will be displayed on your custom TiDB Cloud login page, so you need to decide which authentication methods to be enabled or disabled in advance.
 
 ### Decide whether to enable auto-provision
 
@@ -65,11 +67,11 @@ Before enabling Cloud Organization SSO, make sure to communicate your members ab
 - The available authentication methods
 - Whether members need invitations to log in to the custom URL
 
-### Ensure that at least one organization Owner belongs to no other TiDB Cloud organization
+### Ensure that at least one organization owner belongs to no other TiDB Cloud organization
 
-To ensure the success migration from basic SSO or organization SSO, make sure that at least one Organization Owner belongs exclusively to the TiDB Cloud organization to be migrated.
+To ensure the success migration from basic SSO or organization SSO, make sure that at least one organization owner belongs exclusively to the TiDB Cloud organization to be migrated.
 
-If all organization Owners belong to multiple organizations, the migration will fail, and you will get the `Cloud Organization SSO cannot be enabled` error.
+If all organization owners belong to multiple organizations, the migration will fail, and you will get the `Cloud Organization SSO cannot be enabled` error.
 
 ## Step 1. Enable Cloud Organization SSO
 
@@ -82,22 +84,22 @@ To enable Cloud Organization SSO:
 
     > **Note:**
     >
-    > The URL cannot be changed once Cloud Organization SSO is enabled. Members in your organization will only be able to log into TiDB Cloud using your custom URL. If you need to change the configured URL later, contact TiDB Cloud Support for assistance.
+    > The URL cannot be changed once Cloud Organization SSO is enabled. Members in your organization will only be able to log into TiDB Cloud using your custom URL. If you need to change the configured URL later, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for assistance.
 
-5. If the dialog includes a list of users to be re-invited and re-join the organization once Cloud organization SSO is enabled, take note of the list. You will need to re-invite them after the enablement.
+5. If the dialog includes a list of users to be re-invited and re-join the organization once Cloud organization SSO is enabled, take note of the list. You will need to re-invite them after the enablement if auto-provision is disabled.
 6. Click the **I understand and confirm** check box, and then click **Enable**.
 
 ## Step 2. Configure authentication methods
 
-### Configure Google, GitHub, or Microsoft authentication methods
-
 Enabling an authentication method in TiDB Cloud allows members to log in using that method. Members can use any enabled authentication method as long as they use the same email address across all enabled methods.
+
+### Configure Google, GitHub, or Microsoft authentication methods
 
 After enabling Cloud Organization Cloud, you can configure Google, GitHub, or Microsoft authentication methods as follows:
 
 1. On the **Organization Settings** page, enable or disable the Google, GitHub, or Microsoft authentication methods according to your need.
 2. For an enabled authentication method, you can click <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 20H21M3.00003 20H4.67457C5.16376 20 5.40835 20 5.63852 19.9447C5.84259 19.8957 6.03768 19.8149 6.21663 19.7053C6.41846 19.5816 6.59141 19.4086 6.93732 19.0627L19.5001 6.49998C20.3285 5.67156 20.3285 4.32841 19.5001 3.49998C18.6716 2.67156 17.3285 2.67156 16.5001 3.49998L3.93729 16.0627C3.59139 16.4086 3.41843 16.5816 3.29475 16.7834C3.18509 16.9624 3.10428 17.1574 3.05529 17.3615C3.00003 17.5917 3.00003 17.8363 3.00003 18.3255V20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg> to configure the method details.
-3. In the method details, you can configure the following if needed:
+3. In the method details, you can configure the following:
 
     - [**Auto-provision Accounts**](#decide-whether-to-enable-autoprovisioning)
 
@@ -105,13 +107,13 @@ After enabling Cloud Organization Cloud, you can configure Google, GitHub, or Mi
 
     - **Allowed Email Domains**
 
-        After this field is configured, only the specified email domains of this authentication method can log into the custom URL the TiDB Cloud. When filling in domain names, you need to exclude the @ symbol and separate them with commas. For example, `pingcap.com,tikv.com`.
+        After this field is configured, only the specified email domains of this authentication method can log into the custom URL the TiDB Cloud. When filling in domain names, you need to exclude the @ symbol and separate them with commas. For example, `company1.com,company2.com`.
 
         > **Note:**
         >
-        > If you have configured domain names, before confirming the settings, make sure that you add the email domain that you currently use for login, to avoid that you are locked out by TiDB Cloud.
+        > If you have configured email domains, before saving the settings, make sure that you add the email domain that you currently use for login, to avoid that you are locked out by TiDB Cloud.
 
-4. Click **Confirm**.
+4. Click **Save**.
 
 ### Configure the OIDC authentication method
 
@@ -131,7 +133,7 @@ In TiDB Cloud, the OIDC authentication method is disabled by default. After enab
 
     - **Name**
 
-        Specify a name the OIDC authentication method to be displayed on your custom login page.
+        Specify a name for the OIDC authentication method to be displayed on your custom login page.
 
     - **Issuer URL**, **Client ID**, and **Client Secret**
 
@@ -143,15 +145,17 @@ In TiDB Cloud, the OIDC authentication method is disabled by default. After enab
 
     - **Allowed Email Domains**
 
-        After this field is configured, only the specified email domains of this authentication method can log into the custom URL the TiDB Cloud. When you fill in domain names, you need to exclude the @ symbol and separate them with commas. For example, `pingcap.com,tikv.com`.
+        After this field is configured, only the specified email domains of this authentication method can log into the custom URL the TiDB Cloud. When filling in domain names, you need to exclude the @ symbol and separate them with commas. For example, `company1.com,company2.com`.
 
         > **Note:**
         >
-        > If you have configured domain names, before confirming the settings, make sure that you add the email domain that you use to sign in, to avoid that you are locked out by TiDB Cloud.
+        > If you have configured email domains, before saving the settings, make sure that you add the email domain that you currently use for login, to avoid that you are locked out by TiDB Cloud.
 
 5. Click **Save**.
 
 ## Step 3. Invite your organization members
+
+If auto-provision is enabled, users who log in to your custom URL are automatically granted the member role. You can change their roles according to the instructions in [Manage role access](/tidb-cloud/manage-user-access.md#manage-role-access).
 
 If auto-provision is not enabled, you need to re-invite your organization members according to the email list you get in [Step 1. Enable Cloud Organization SSO](#step-1-enable-cloud-organization-sso).
 
@@ -163,11 +167,11 @@ To invite a member, take the following steps:
 
     > **Note:**
     >
-    > For a member who has the organization owner, billing admin, or audit Admin role before the migration, you need to re-grant the corresponding role to the member again.
+    > For a member who has the organization owner, billing admin, or audit Admin role before the migration, you need to re-grant the corresponding role to the member.
 
 4. Click **Confirm**. An email is sent to the invited email address with a verification link.
 
-After receiving this email, the member needs to click the link in the email to verify the identity, and the custom login page shows.
+After receiving the invitation email, the member needs to click the link in the email to verify the identity, and the custom login page shows.
 
 > **Note:**
 >
