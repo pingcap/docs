@@ -70,12 +70,6 @@ Before enabling Cloud Organization SSO, make sure to communicate with your membe
 - The available authentication methods
 - Whether members need invitations to log in to the custom URL
 
-### Ensure that at least one organization owner belongs to no other TiDB Cloud organization
-
-To ensure the successful migration from basic SSO or organization SSO, make sure that at least one organization owner belongs exclusively to the TiDB Cloud organization to be migrated.
-
-If all organization owners are in multiple organizations, the migration will fail, and you will get an error indicating that Cloud Organization SSO cannot be enabled.
-
 ## Step 1. Enable Cloud Organization SSO
 
 To enable Cloud Organization SSO, take the following steps:
