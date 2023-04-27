@@ -4,7 +4,7 @@
 - [Docs Home](https://docs.pingcap.com/)
 - About TiDB
   - [TiDB Introduction](/overview.md)
-  - [TiDB 7.0 Release Notes](/releases/release-7.0.0.md)
+  - [TiDB 7.1 (upcoming) Release Notes](/releases/release-7.1.0.md)
   - [Features](/basic-features.md)
   - [MySQL Compatibility](/mysql-compatibility.md)
   - [TiDB Limitations](/tidb-limitations.md)
@@ -154,7 +154,8 @@
       - BR Features
         - [Backup Auto-Tune](/br/br-auto-tune.md)
         - [Batch Create Table](/br/br-batch-create-table.md)
-        - [Checkpoint Backup](/br/br-checkpoint.md)
+        - [Checkpoint Backup](/br/br-checkpoint-backup.md)
+        - [Checkpoint Restore](/br/br-checkpoint-restore.md)
       - [Back up and Restore Data Using Dumpling and TiDB Lightning](/backup-and-restore-using-dumpling-lightning.md)
       - [Back Up and Restore RawKV](/br/rawkv-backup-and-restore.md)
       - [Incremental Backup and Restore](/br/br-incremental-guide.md)
@@ -488,7 +489,7 @@
         - [Relay Log](/dm/relay-log.md)
         - [DDL Handling](/dm/dm-ddl-compatible.md)
       - Mechanism
-        - [DML Replication Mechanism](/dm/dm-replication-logic.md)        
+        - [DML Replication Mechanism](/dm/dm-replication-logic.md)
       - Command Line
         - [DM-master & DM-worker](/dm/dm-command-line-flags.md)
       - Configuration Files
@@ -963,11 +964,14 @@
   - [Release Timeline](/releases/release-timeline.md)
   - [TiDB Versioning](/releases/versioning.md)
   - [TiDB Installation Packages](/binary-package.md)
+  - v7.1 (upcoming)
+    - [7.1.0](/releases/release-7.1.0.md)
   - v7.0
     - [7.0.0-DMR](/releases/release-7.0.0.md)
   - v6.6
     - [6.6.0-DMR](/releases/release-6.6.0.md)
   - v6.5
+    - [6.5.2](/releases/release-6.5.2.md)
     - [6.5.1](/releases/release-6.5.1.md)
     - [6.5.0](/releases/release-6.5.0.md)
   - v6.4
