@@ -13,7 +13,7 @@ TiDB Cloud supports the following two types of SSO authentication:
 
 - Cloud Organization SSO: members can log in to a custom login page of TiDB Cloud using the authentication methods specified by your organization. The Cloud Organization SSO is disabled by default.
 
-Comparing with Basic SSO, Cloud Organization SSO provides more flexibility and customization so you can better meet your organization's security and compliance requirements. For example, you can specify which authentication methods are displayed on the login page, limit which email address domains are allowed for login, and let your members to log into TiDB Cloud with your identity provider (IdP) that uses OpenID Connect (OIDC) identity protocols.
+Compared with Basic SSO, Cloud Organization SSO provides more flexibility and customization so you can better meet your organization's security and compliance requirements. For example, you can specify which authentication methods are displayed on the login page, limit which email address domains are allowed for login, and let your members to log into TiDB Cloud with your identity provider (IdP) that uses OpenID Connect (OIDC) identity protocols.
 
 In this document, you will learn how to migrate the authentication scheme of your organization from basic SSO to Cloud Organization SSO.
 
@@ -63,7 +63,7 @@ Before enabling Cloud Organization SSO, make sure to communicate your members ab
 - The custom login URL
 - The time when to start using the custom login URL instead of `https://tidbcloud.com` for login
 - The available authentication methods
-- Whether members needs invitation to log in to the custom URL
+- Whether members need invitations to log in to the custom URL
 
 ### Ensure that at least one organization Owner belongs to no other TiDB Cloud organization
 
