@@ -163,7 +163,7 @@ To invite a member, take the following steps:
 
     > **Note:**
     >
-    > For a member who has the organization owner, billing admin, or audit Admin role before the migration, you need to re-grant the corresponding roles the member again.
+    > For a member who has the organization owner, billing admin, or audit Admin role before the migration, you need to re-grant the corresponding role to the member again.
 
 4. Click **Confirm**. An email is sent to the invited email address with a verification link.
 
