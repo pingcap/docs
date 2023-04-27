@@ -197,9 +197,9 @@ If one or more TiDB Lightning nodes exit abnormally during a parallel import, id
 
         This command removes the data imported to the failed tables downstream, the corresponding checkpoint, and the Meta table information of multiple parallel import tasks.
 
-    2. Reconfigure and import the data of failed tables by using the `filters` parameter on all TiDB Lightning nodes, including normally exiting nodes.
+    2. Reconfigure and import the data of failed tables by using the [`filter`](/table-filter.md) parameter on all TiDB Lightning nodes, including normally exiting nodes.
 
-        When you reconfigure the Lightning parallel import task, do not include the `checkpoint-error-destroy` command in the startup script of each Lightning node. Otherwise, the Meta table corresponding to the current parallel task is deleted again, causing issues when the newly created Lightning parallel import task tries to import data.
+        When you reconfigure the Lightning parallel import task, do not include the `checkpoint-error-destroy` command in the startup script of each Lightning node. Otherwise, the Meta table corresponding to the parallel import task is deleted multiple times, causing issues when the newly created Lightning parallel import task tries to import data.
 
 ### During an import, an error "Target table is calculating checksum. Please wait until the checksum is finished and try again" is reported
 
