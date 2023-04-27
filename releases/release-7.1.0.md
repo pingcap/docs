@@ -24,7 +24,7 @@ In v7.1.0, the key new features and improvements are as follows:
 <tbody>
   <tr>
     <td rowspan="2">Scalability and Performance</td>
-    <td><a href="https://docs.pingcap.com/tidb/dev/sql-non-prepared-plan-cache" target="_blank">Session-level plan cache for non-prepared plans</a> (GA)</td>
+    <td><a href="https://docs.pingcap.com/tidb/dev/sql-non-prepared-plan-cache" target="_blank">Session-level plan cache for non-prepared statements</a> (GA)</td>
     <td>Support automatically reusing plan cache at the session level to remove query planning time, reducing query time for repeat SQL patterns without manually setting prepare statements in advance.</td>
   </tr>
   <tr>
