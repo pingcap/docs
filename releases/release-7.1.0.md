@@ -33,7 +33,7 @@ In v7.1.0, the key new features and improvements are as follows:
   </tr>
   <tr>
     <td rowspan="1">Reliability and availability</td>
-    <td><a href="https://docs.pingcap.com/tidb/dev/tidb-resource-control" target="_blank">Resource control by Resource Groups</a> (GA)</td>
+    <td><a href="https://docs.pingcap.com/tidb/dev/tidb-resource-control" target="_blank">Resource control by resource groups</a> (GA)</td>
    <td>Support resource management based on resource groups, which maps database users to the corresponding resource groups and sets quotas for each resource group based on actual needs.</td>
  </tr>
   <tr>
@@ -122,7 +122,7 @@ In v7.1.0, the key new features and improvements are as follows:
 
     Starting from v6.5.0, TiDB supports pushing down the `SELECT` clause (analytical query) of the `INSERT INTO SELECT` statement to TiFlash. In this way, you can easily save the TiFlash query result to a TiDB table specified by `INSERT INTO` for further analysis, which takes effect as result caching (that is, result materialization).
 
-    In v7.1.0, this feature is generally available. During the execution of the `SELECT` clause in the `INSERT INTO SELECT` statement, the optimizer can intelligently decide whether to push a query down to TiFlash based on the [SQL mode](/sql-mode.md) and the cost estimates of the TiFlash replica. Therefore, the `tidb_enable_tiflash_read_for_write_stmt` system variable introduced during the experimental phase is now deprecated. Note that the computation rules of `INSERT INTO SELECT` statements for TiFlash do not meet the `STRICT SQL Mode` requirement, so TiDB allows the `SELECT` clause in the `INSERT INTO SELECT` statement to be pushed down to TiFlash only when the [SQL Mode](/sql-mode.md) of the current session is not strict, which means that the `sql_mode` value does not contain `STRICT_TRANS_TABLES` and `STRICT_ALL_TABLES`.
+    In v7.1.0, this feature is generally available. During the execution of the `SELECT` clause in the `INSERT INTO SELECT` statement, the optimizer can intelligently decide whether to push a query down to TiFlash based on the [SQL mode](/sql-mode.md) and the cost estimates of the TiFlash replica. Therefore, the `tidb_enable_tiflash_read_for_write_stmt` system variable introduced during the experimental phase is now deprecated. Note that the computation rules of `INSERT INTO SELECT` statements for TiFlash do not meet the `STRICT SQL Mode` requirement, so TiDB allows the `SELECT` clause in the `INSERT INTO SELECT` statement to be pushed down to TiFlash only when the [SQL mode](/sql-mode.md) of the current session is not strict, which means that the `sql_mode` value does not contain `STRICT_TRANS_TABLES` and `STRICT_ALL_TABLES`.
 
     For more information, see [documentation](/tiflash/tiflash-results-materialization.md).
 
@@ -203,7 +203,7 @@ In v7.1.0, the key new features and improvements are as follows:
 
     * `debug_trace.json` in the output of [`PLAN REPLAYER`](/sql-plan-replayer.md).
     * Partial statistics details for `operator info` in the output of [`EXPLAIN`](/explain-walkthrough.md).
-    * Partial statistics details in the `Stats` field of [`slow-queries`](/identify-slow-queries.md).
+    * Partial statistics details in the `Stats` field of [slow queries](/identify-slow-queries.md).
 
   For more information, see [Use `PLAN REPLAYER` to save and restore the on-site information of a cluster](/sql-plan-replayer.md), [`EXPLAIN` walkthrough](/explain-walkthrough.md), and [Identify slow queries](/identify-slow-queries.md).
 
