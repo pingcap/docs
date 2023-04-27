@@ -190,13 +190,13 @@ If one or more TiDB Lightning nodes exit abnormally during a parallel import, id
 
 - If you see errors in the log that result in data inaccuracies, such as a checksum mismatch indicating invalid data in the source file, you can perform the following steps to resolve this issue:
 
-    1. Run the [`checkpoint-error-destroy`](/tidb-lightning/tidb-lightning-checkpoints.md#--checkpoint-error-destroy) command on all Lightning nodes, including successful nodes, to clean up the imported data and the checkpoint source data.
+    1. Run the [`checkpoint-error-destroy`](/tidb-lightning/tidb-lightning-checkpoints.md#--checkpoint-error-destroy) command on all Lightning nodes, including successful nodes, to remove the imported data from failed tables and reset the checkpoint status of these tables to "not yet started".
 
-        This command removes the data imported to the failed tables downstream, the corresponding checkpoint, and the Meta table information of multiple parallel import tasks.
+ 
 
     2. Reconfigure and import the data of failed tables by using the [`filter`](/table-filter.md) parameter on all TiDB Lightning nodes, including normally exiting nodes.
 
-        When you reconfigure the Lightning parallel import task, do not include the `checkpoint-error-destroy` command in the startup script of each Lightning node. Otherwise, the Meta table corresponding to the parallel import task is deleted multiple times, causing issues when the newly created Lightning parallel import task tries to import data.
+        When you reconfigure the Lightning parallel import task, do not include the `checkpoint-error-destroy` command in the startup script of each Lightning node. Otherwise, this command deletes shared metadata used by multiple parallel import tasks, which might cause issues during data import. For example, if a second Lightning import task is started, it will delete the metadata written by the first task, leading to abnormal data import.
 
 ### During an import, an error "Target table is calculating checksum. Please wait until the checksum is finished and try again" is reported
 
