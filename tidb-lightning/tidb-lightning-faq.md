@@ -246,7 +246,7 @@ If you want to copy both the schema definition and table data from one schema to
     type = 'table-schema'
     ```
 
-Here we set `schema = 'test2'` as we want to use a different schema name than the one that we had in the original dump. The name of the table is taken from the filename.
+    In this configuration file, set `schema = 'test2'` as you want to use a different schema name than the one used in the original dump. The filename is used to determine the name of the table.
 
 Then we use this config file to run the import.
 
