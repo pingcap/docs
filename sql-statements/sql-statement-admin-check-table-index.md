@@ -6,7 +6,24 @@ category: reference
 
 # ADMIN CHECK [TABLE|INDEX]
 
-The `ADMIN CHECK [TABLE|INDEX]` statement checks for data consistency of tables and indexes. It does not support checking [FOREIGN KEY constraints](/foreign-key.md).
+The `ADMIN CHECK [TABLE|INDEX]` statement checks for data consistency of tables and indexes. 
+
+It does not support:
+
+- checking [FOREIGN KEY constraints](/foreign-key.md).
+- checking the PRIMARY KEY index if a [clustered primary key](/clustered-indexes.md) is used.
+
+If `ADMIN CHECK [TABLE|INDEX]` finds any issues these can be fixed by recreating the index by dropping the index and adding it again. 
+
+## Steps
+
+The `ADMIN CHECK TABLE` statement takes the following steps to check the table:
+
+1. For each index it checks if the number of records in the index is the same as the number of records in the table.
+
+2. For each index it loops over the values in each row and compare the values with the values in the table.
+
+If `ADMIN CHECK INDEX` is used it only checks the specified index.
 
 ## Synopsis
 
