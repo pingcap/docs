@@ -205,7 +205,7 @@ The steps are as follows:
 3. Create the placement rule policy and apply the created policy to the target table.
 4. Use TiDB Lightning to import data into the target table.
 
-## How can I use lightning and dumpling to copy a schema
+## How can I use TiDB Lightning and Dumpling to copy a schema
 
 This is to copy both the schema definition and the table data from one schema to a new schema. For this example we will make a copy of the `test` schema into a new schema called `test2`.
 
