@@ -358,6 +358,70 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
     When [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630) is set to `OFF`, to ensure the correctness of transactions, any errors in the SQL statement execution might cause TiDB to return this `8147` error and abort the current transaction. For specific causes of the error, refer to the error message. For more information, see [Constraints](/constraints.md#pessimistic-transactions).
 
+* Error Number: 8154
+
+    Currently `LOAD DATA` does not support importing data locally from TiDB server. You can specify `LOCAL` to import from client, or upload data to S3 or GCS and then import it. See [`LOAD DATA`](/sql-statements/sql-statement-load-data.md).
+
+* Error Number: 8155
+
+    Currently, `LOAD DATA` only supports importing Parquet files from S3 or GCS. You can upload Parquet files to S3 or GCS and then import them. See [`LOAD DATA`](/sql-statements/sql-statement-load-data.md).
+
+* Error Number: 8156
+
+    The file path of the `LOAD DATA` statement cannot be empty. You need to set the correct path before importing. See [`LOAD DATA`](/sql-statements/sql-statement-load-data.md).
+
+* Error Number: 8157
+
+    Unsupported data format. See [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) to check the supported data formats.
+
+* Error Number: 8158
+
+    The S3 or GCS path is invalid. See [external storage](/br/backup-and-restore-storages.md) to set a valid path.
+
+* Error Number: 8159
+
+    TiDB cannot access the S3 or GCS path provided in the `LOAD DATA` statement. Make sure that the S3 or GCS bucket exists, and that you have used the correct access key and secret access key to let TiDB access the bucket.
+
+* Error Number: 8160
+
+    `LOAD DATA` fails to read the data file. Refer to the specific error message for action.
+
+* Error Number: 8162
+
+    There is an error in the `LOAD DATA` statement. See [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) for supported features.
+
+* Error Number: 8163
+
+    Unknown `LOAD DATA...WITH...` option. See [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) for supported options.
+
+* Error Number: 8164
+
+    The `LOAD DATA...WITH...` option takes an invalid value. See [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) for valid values.
+
+* Error Number: 8165
+
+    Specify duplicated `LOAD DATA...WITH...` options. Each option can be specified only once.
+
+* Error Number: 8166
+
+    Some `LOAD DATA...WITH...` options can only be used in certain import modes. See [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) to see the supported options.
+
+* Error Number: 8170
+
+    The specified `LOAD DATA` job does not exist or is not created by the current user. Currently you can only view jobs that you created.
+
+* Error Number: 8171
+
+    You cannot perform operation and maintenance for unsupported `LOAD DATA` task status. Refer to the specific error message for action.
+
+* Error Number: 8172
+
+    If you have specified `LOCAL`, you cannot specify specific options, such as `DETACHED` or `import_mode='PHYSICAL'`. See [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) to change the SQL statement.
+
+* Error Number: 8173
+
+    In Physical Import Mode, TiDB checks the current environment, such as checking if the downstream table is empty. Follow the prompts to resolve the issue.
+
 * Error Number: 8200
 
     The DDL syntax is not yet supported.
@@ -421,6 +485,34 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 * Error Number: 8230
 
     TiDB currently does not support using Sequence as the default value on newly added columns, and reports this error if you use it.
+
+* Error Number: 8248
+
+    The resource group already exists. This error is returned when a resource group is repeatedly created.
+
+* Error Number: 8249
+
+    The resource group does not exist. This error is returned when you modify or bind a resource group that does not exist. See [Create a resource group](/tidb-resource-control.md#create-a-resource-group).
+
+* Error Number: 8250
+
+    The complete error message is as follows:
+
+    `ERROR 8250 (HY000) : Resource control feature is disabled. Run "SET GLOBAL tidb_enable_resource_control='on'" to enable the feature`
+
+    This error is returned when you try to use the resource control feature but it is not enabled. You can turn on the global variable [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660) to enable resource control.
+
+* Error Number: 8251
+
+    The `Resource Control` component is initialized upon TiDB startup. The associated configuration is fetched from the `Resource Manager` on the server side of `Resource Control`. This error is returned if there is an error during this process.
+
+* Error Number: 8252
+
+    The complete error message is as follows: 
+    
+    `ERROR 8252 (HY000) : Exceeded resource group quota limitation`
+
+    This error is returned when the attempted consumption exceeds the resource group limit. This error is usually caused by a single transaction that is too large or too many concurrent transactions. You need to adjust the transaction size or reduce the number of concurrent clients.
 
 * Error Number: 9001
 

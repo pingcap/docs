@@ -157,14 +157,15 @@ In TiDB, all supported DDL changes are performed online. Compared with DDL opera
 * The `ALGORITHM={INSTANT,INPLACE,COPY}` syntax functions only as an assertion in TiDB, and does not modify the `ALTER` algorithm. See [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md) for further details.
 * Adding/Dropping the primary key of the `CLUSTERED` type is unsupported. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
 * Different types of indexes (`HASH|BTREE|RTREE|FULLTEXT`) are not supported, and will be parsed and ignored when specified.
-* Table Partitioning supports `HASH`, `RANGE`, `LIST`, and `KEY` partitioning types. Currently, the `KEY` partition type does not support partition statements with an empty partition column list. For an unsupported partition type, TiDB returns `Warning: Unsupported partition type %s, treat as normal table`, where `%s` is the specific partition type.
-* Table Partitioning also supports `ADD`, `DROP`, and `TRUNCATE` operations. Other partition operations are ignored. The following Table Partition syntaxes are not supported:
-    - `PARTITION BY KEY`
-    - `PARTITION BY LINEAR KEY`
-    - `SUBPARTITION`
-    - `{CHECK|TRUNCATE|OPTIMIZE|REPAIR|IMPORT|DISCARD|REBUILD|REORGANIZE|COALESCE} PARTITION`
+* TiDB supports `HASH`, `RANGE`, `LIST`, and `KEY` partitioning types. Currently, the `KEY` partition type does not support partition statements with an empty partition column list. For an unsupported partition type, TiDB returns `Warning: Unsupported partition type %s, treat as normal table`, where `%s` is the specific unsupported partition type.
+* Range, Range COLUMNS, List, and List COLUMNS partitioned tables support `ADD`, `DROP`, `TRUNCATE`, and `REORGANIZE` operations. Other partition operations are ignored.
+* Hash and Key partitioned tables support `ADD`, `COALESCE`, and `TRUNCATE` operations. Other partition operations are ignored.
+* The following syntaxes are not supported for partitioned tables:
 
-    For more details, see [Partitioning](/partitioned-table.md).
+    - `SUBPARTITION`
+    - `{CHECK|OPTIMIZE|REPAIR|IMPORT|DISCARD|REBUILD} PARTITION`
+
+  For more details, see [Partitioning](/partitioned-table.md).
 
 ### Analyze table
 

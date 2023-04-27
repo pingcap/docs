@@ -230,7 +230,7 @@ This section gives the alert rules for the PD component.
 
 * Alert rule:
 
-    `(sum(pd_regions_status{type="miss_peer_region_count"}) by (instance) > 100) and (sum(etcd_server_is_leader) by (instance) > 0)`
+    `(sum(pd_regions_status{type="miss-peer-region-count"}) by (instance) > 100) and (sum(etcd_server_is_leader) by (instance) > 0)`
 
 * Description:
 
@@ -239,7 +239,7 @@ This section gives the alert rules for the PD component.
 * Solution:
 
     * Find the cause of the issue by checking whether there is any TiKV machine that is down or being made offline.
-    * Watch the Region health panel and see whether `miss_peer_region_count` is continuously decreasing.
+    * Watch the Region health panel and see whether `miss-peer-region-count` is continuously decreasing.
 
 ### Warning-level alerts
 
@@ -751,7 +751,7 @@ This section gives the alert rules for the TiKV component.
 
 * Solution:
 
-    Check which kind of tasks has a higher value. You can normally find a solution to the Coprocessor and apply worker tasks from other metrics.
+    Check which kind of tasks has a higher value from the `Worker pending tasks` metric in the [**TiKV-Details** > **Task** dashboard](/grafana-tikv-dashboard.md#task). If it is a coprocessor task, you can refer to [`TiKV_coprocessor_request_wait_seconds`](#tikv_coprocessor_request_wait_seconds).
 
 #### `TiKV_low_space`
 

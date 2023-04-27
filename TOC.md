@@ -4,11 +4,12 @@
 - [Docs Home](https://docs.pingcap.com/)
 - About TiDB
   - [TiDB Introduction](/overview.md)
-  - [TiDB 6.6 Release Notes](/releases/release-6.6.0.md)
+  - [TiDB 7.1 (upcoming) Release Notes](/releases/release-7.1.0.md)
   - [Features](/basic-features.md)
   - [MySQL Compatibility](/mysql-compatibility.md)
   - [TiDB Limitations](/tidb-limitations.md)
   - [Credits](/credits.md)
+  - [Roadmap](/tidb-roadmap.md)
 - Quick Start
   - [Try Out TiDB](/quick-start-with-tidb.md)
   - [Try Out HTAP](/quick-start-with-htap.md)
@@ -153,7 +154,8 @@
       - BR Features
         - [Backup Auto-Tune](/br/br-auto-tune.md)
         - [Batch Create Table](/br/br-batch-create-table.md)
-        - [Checkpoint Backup](/br/br-checkpoint.md)
+        - [Checkpoint Backup](/br/br-checkpoint-backup.md)
+        - [Checkpoint Restore](/br/br-checkpoint-restore.md)
       - [Back up and Restore Data Using Dumpling and TiDB Lightning](/backup-and-restore-using-dumpling-lightning.md)
       - [Back Up and Restore RawKV](/br/rawkv-backup-and-restore.md)
       - [Incremental Backup and Restore](/br/br-incremental-guide.md)
@@ -245,6 +247,7 @@
         - [Partition Pruning](/partition-pruning.md)
         - [TopN and Limit Push Down](/topn-limit-push-down.md)
         - [Join Reorder](/join-reorder.md)
+        - [Derive TopN or Limit from Window Functions](/derive-topn-from-window.md)
       - Physical Optimization
         - [Overview](/sql-physical-optimization.md)
         - [Index Selection](/choose-index.md)
@@ -482,8 +485,11 @@
     - Reference
       - Architecture
         - [DM-worker](/dm/dm-worker-intro.md)
+        - [Safe Mode](/dm/dm-safe-mode.md)
         - [Relay Log](/dm/relay-log.md)
         - [DDL Handling](/dm/dm-ddl-compatible.md)
+      - Mechanism
+        - [DML Replication Mechanism](/dm/dm-replication-logic.md)
       - Command Line
         - [DM-master & DM-worker](/dm/dm-command-line-flags.md)
       - Configuration Files
@@ -524,7 +530,8 @@
       - [Log Filter](/ticdc/ticdc-filter.md)
       - [Bidirectional Replication](/ticdc/ticdc-bidirectional-replication.md)
     - Monitor and Alert
-      - [Monitoring Metrics](/ticdc/monitor-ticdc.md)
+      - [Monitoring Metrics Summary](/ticdc/ticdc-summary-monitor.md)
+      - [Monitoring Metrics Details](/ticdc/monitor-ticdc.md)
       - [Alert Rules](/ticdc/ticdc-alert-rules.md)
     - Reference
       - [Architecture](/ticdc/ticdc-architecture.md)
@@ -621,7 +628,7 @@
     - [TiFlash](/tiflash/monitor-tiflash.md)
     - [TiCDC](/ticdc/monitor-ticdc.md)
     - [Resource Control](/grafana-resource-control-dashboard.md)
-  - Secure
+  - Security
     - [Enable TLS Between TiDB Clients and Servers](/enable-tls-between-clients-and-servers.md)
     - [Enable TLS Between TiDB Components](/enable-tls-between-components.md)
     - [Generate Self-signed Certificates](/generate-self-signed-certificates.md)
@@ -670,6 +677,8 @@
       - [`BACKUP`](/sql-statements/sql-statement-backup.md)
       - [`BATCH`](/sql-statements/sql-statement-batch.md)
       - [`BEGIN`](/sql-statements/sql-statement-begin.md)
+      - [`CALIBRATE RESOURCE`](/sql-statements/sql-statement-calibrate-resource.md)
+      - [`CANCEL LOAD DATA` and `DROP LOAD DATA`](/sql-statements/sql-statement-operate-load-data-job.md)
       - [`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)
       - [`COMMIT`](/sql-statements/sql-statement-commit.md)
       - [`CHANGE DRAINER`](/sql-statements/sql-statement-change-drainer.md)
@@ -735,6 +744,7 @@
       - [`SET DEFAULT ROLE`](/sql-statements/sql-statement-set-default-role.md)
       - [`SET [NAMES|CHARACTER SET]`](/sql-statements/sql-statement-set-names.md)
       - [`SET PASSWORD`](/sql-statements/sql-statement-set-password.md)
+      - [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md)
       - [`SET ROLE`](/sql-statements/sql-statement-set-role.md)
       - [`SET TRANSACTION`](/sql-statements/sql-statement-set-transaction.md)
       - [`SET [GLOBAL|SESSION] <variable>`](/sql-statements/sql-statement-set-variable.md)
@@ -761,6 +771,7 @@
       - [`SHOW INDEX [FROM|IN]`](/sql-statements/sql-statement-show-index.md)
       - [`SHOW INDEXES [FROM|IN]`](/sql-statements/sql-statement-show-indexes.md)
       - [`SHOW KEYS [FROM|IN]`](/sql-statements/sql-statement-show-keys.md)
+      - [`SHOW LOAD DATA`](/sql-statements/sql-statement-show-load-data.md)
       - [`SHOW MASTER STATUS`](/sql-statements/sql-statement-show-master-status.md)
       - [`SHOW PLACEMENT`](/sql-statements/sql-statement-show-placement.md)
       - [`SHOW PLACEMENT FOR`](/sql-statements/sql-statement-show-placement-for.md)
@@ -786,7 +797,6 @@
       - [`SPLIT REGION`](/sql-statements/sql-statement-split-region.md)
       - [`START TRANSACTION`](/sql-statements/sql-statement-start-transaction.md)
       - [`TABLE`](/sql-statements/sql-statement-table.md)
-      - [`TRACE`](/sql-statements/sql-statement-trace.md)
       - [`TRACE`](/sql-statements/sql-statement-trace.md)
       - [`TRUNCATE`](/sql-statements/sql-statement-truncate.md)
       - [`UNLOCK STATS`](/sql-statements/sql-statement-unlock-stats.md)
@@ -954,9 +964,14 @@
   - [Release Timeline](/releases/release-timeline.md)
   - [TiDB Versioning](/releases/versioning.md)
   - [TiDB Installation Packages](/binary-package.md)
+  - v7.1 (upcoming)
+    - [7.1.0](/releases/release-7.1.0.md)
+  - v7.0
+    - [7.0.0-DMR](/releases/release-7.0.0.md)
   - v6.6
     - [6.6.0-DMR](/releases/release-6.6.0.md)
   - v6.5
+    - [6.5.2](/releases/release-6.5.2.md)
     - [6.5.1](/releases/release-6.5.1.md)
     - [6.5.0](/releases/release-6.5.0.md)
   - v6.4
@@ -966,6 +981,7 @@
   - v6.2
     - [6.2.0-DMR](/releases/release-6.2.0.md)
   - v6.1
+    - [6.1.6](/releases/release-6.1.6.md)
     - [6.1.5](/releases/release-6.1.5.md)
     - [6.1.4](/releases/release-6.1.4.md)
     - [6.1.3](/releases/release-6.1.3.md)
