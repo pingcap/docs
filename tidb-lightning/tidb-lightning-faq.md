@@ -213,11 +213,11 @@ The steps are as follows:
 
 If you want to copy both the schema definition and table data from one schema to a new schema, follow the steps in this section. In this example, you'll learn how to make a copy of the `test` schema into a new schema called `test2`.
 
-We first create a backup with `-B test` to only select the schema that we need.
+1. Create a backup of the original schema with `-B test` to select only the schema that you need.
 
-```
-tiup dumpling -B test -o /tmp/bck1
-```
+    ```
+    tiup dumpling -B test -o /tmp/bck1
+    ```
 
 Then we create a `/tmp/tidb-lightning.toml` file with the following content:
 
