@@ -102,7 +102,7 @@ In v7.1.0, the key new features and improvements are as follows:
 
     For more information, see [documentation](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630).
 
-* Backup & Restore supports checkpoint restore [#issue](https://github.com/pingcap/tidb/issues/issue) @[Leavrth](https://github.com/Leavrth)
+* Backup & Restore supports checkpoint restore [#42339](https://github.com/pingcap/tidb/issues/42339) @[Leavrth](https://github.com/Leavrth)
 
     Snapshot restore or log restore might be interrupted due to recoverable errors, such as disk exhaustion and node crash. Before TiDB v7.1.0, the recovery progress before the interruption would be invalidated even after the error is addressed, and you need to start the restore from scratch. For large clusters, this incurs considerable extra cost.
 
