@@ -207,7 +207,7 @@ The steps are as follows:
 
 ## How can I use TiDB Lightning and Dumpling to copy a schema
 
-This is to copy both the schema definition and the table data from one schema to a new schema. For this example we will make a copy of the `test` schema into a new schema called `test2`.
+If you want to copy both the schema definition and table data from one schema to a new schema, follow the steps in this section. In this example, you'll learn how to make a copy of the `test` schema into a new schema called `test2`.
 
 We first create a backup with `-B test` to only select the schema that we need.
 
