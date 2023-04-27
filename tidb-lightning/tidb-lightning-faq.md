@@ -215,32 +215,32 @@ If you want to copy both the schema definition and table data from one schema to
     tiup dumpling -B test -o /tmp/bck1
     ```
 
-Then we create a `/tmp/tidb-lightning.toml` file with the following content:
+2. Create a `/tmp/tidb-lightning.toml` file with the following content:
 
-```
-[tidb]
-host = "127.0.0.1"
-port = 4000
-user = "root"
-
-[tikv-importer]
-backend = "tidb"
-
-[mydumper]
-data-source-dir = "/tmp/bck1"
-
-[[mydumper.files]]
-pattern = '^[a-z]*\.(.*)\.[0-9]*\.sql$'
-schema = 'test2'
-table = '$1'
-type = 'sql'
-
-[[mydumper.files]]
-pattern = '^[a-z]*\.(.*)\-schema\.sql$'
-schema = 'test2'
-table = '$1'
-type = 'table-schema'
-```
+    ```toml
+    [tidb]
+    host = "127.0.0.1"
+    port = 4000
+    user = "root"
+    
+    [tikv-importer]
+    backend = "tidb"
+    
+    [mydumper]
+    data-source-dir = "/tmp/bck1"
+    
+    [[mydumper.files]]
+    pattern = '^[a-z]*\.(.*)\.[0-9]*\.sql$'
+    schema = 'test2'
+    table = '$1'
+    type = 'sql'
+    
+    [[mydumper.files]]
+    pattern = '^[a-z]*\.(.*)\-schema\.sql$'
+    schema = 'test2'
+    table = '$1'
+    type = 'table-schema'
+    ```
 
 Here we set `schema = 'test2'` as we want to use a different schema name than the one that we had in the original dump. The name of the table is taken from the filename.
 
