@@ -195,8 +195,6 @@ If one or more TiDB Lightning nodes exit abnormally during a parallel import, id
 
     1. Run the [`checkpoint-error-destroy`](/tidb-lightning/tidb-lightning-checkpoints.md#--checkpoint-error-destroy) command on all Lightning nodes, including successful nodes, to remove the imported data from failed tables and reset the checkpoint status of these tables to "not yet started".
 
- 
-
     2. Reconfigure and import the data of failed tables by using the [`filter`](/table-filter.md) parameter on all TiDB Lightning nodes, including normally exiting nodes.
 
         When you reconfigure the Lightning parallel import task, do not include the `checkpoint-error-destroy` command in the startup script of each Lightning node. Otherwise, this command deletes shared metadata used by multiple parallel import tasks, which might cause issues during data import. For example, if a second Lightning import task is started, it will delete the metadata written by the first task, leading to abnormal data import.
