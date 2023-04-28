@@ -18,7 +18,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     Alternatively, you can also request the global domain `data.tidbcloud.com` without specifying the region information. In this way, TiDB Cloud will internally redirect the request to the target region, but this might result in additional latency. If you choose this way, make sure to add the `--location-trusted` option to your curl code when calling an endpoint.
 
-    For more information, see [Call an endpoint](data-service-manage-endpoint.md#call-an-endpoint).
+    For more information, see [Call an endpoint](/tidb-cloud/data-service-manage-endpoint.md#call-an-endpoint).
 
 ## April 25, 2023
 
