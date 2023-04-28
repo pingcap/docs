@@ -5,9 +5,9 @@ summary: Learn how to log in to the TiDB Cloud console via your Google, GitHub, 
 
 # SSO Authentication
 
-This document describes how to log in to the [TiDB Cloud console](https://tidbcloud.com/) via Single Sign-on (SSO) authentication, which is quick and convenient.
+This document describes how to log in to the [TiDB Cloud console](https://tidbcloud.com/) via basic Single Sign-on (SSO) authentication, which is quick and convenient.
 
-TiDB Cloud supports SSO authentication for Google, GitHub, and Microsoft accounts. If you log in to TiDB Cloud via SSO authentication, because your ID and credentials are stored on the third-party Google, GitHub, and Microsoft platforms, you will not be able to modify your account password and enable multi-factor authentication (MFA) using the TiDB console. 
+TiDB Cloud supports SSO authentication for Google, GitHub, and Microsoft accounts. If you log in to TiDB Cloud via SSO authentication, because your ID and credentials are stored on the third-party Google, GitHub, and Microsoft platforms, you will not be able to modify your account password and enable multi-factor authentication (MFA) using the TiDB console.
 
 > **Note:**
 >
