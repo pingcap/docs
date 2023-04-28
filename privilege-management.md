@@ -192,12 +192,25 @@ Dynamic privileges include:
 
 * `BACKUP_ADMIN`
 * `RESTORE_ADMIN`
+* `SYSTEM_USER`
+* `SYSTEM_VARIABLES_ADMIN`
 * `ROLE_ADMIN`
 * `CONNECTION_ADMIN`
-* `SYSTEM_VARIABLES_ADMIN`
+* `PLACEMENT_ADMIN` allows privilege owners to create, modify, and remove placement policies.
+* `DASHBOARD_CLIENT` allows privilege owners to log in to TiDB Dashboard.
+* `RESTRICTED_TABLES_ADMIN` allows privilege owners to view system tables when SEM is enabled.
+* `RESTRICTED_STATUS_ADMIN` allows privilege owners to view all status variables in [`SHOW [GLOBAL|SESSION] STATUS`](/sql-statements/sql-statement-show-status.md) when SEM is enabled.
+* `RESTRICTED_VARIABLES_ADMIN` allows privilege owners to view all system variables when SEM is enabled.
+* `RESTRICTED_USER_ADMIN` prohibits privilege owners to have their access revoked by SUPER users when SEM is enabled.
+* `RESTRICTED_CONNECTION_ADMIN` allows privilege owners to kill connections of `RESTRICTED_USER_ADMIN` users. This privilege affects `KILL` and `KILL TIDB` statements.
 * `RESTRICTED_REPLICA_WRITER_ADMIN` allows privilege owners to perform write or update operations without being affected when the read-only mode is enabled in the TiDB cluster. For details, see [`tidb_restricted_read_only`](/system-variables.md#tidb_restricted_read_only-new-in-v520).
 
 To see the full set of dynamic privileges, execute the `SHOW PRIVILEGES` statement. Because plugins are permitted to add new privileges, the list of privileges that are assignable might differ based on your TiDB installation.
+
+## `SUPER` privilege
+
+- The `SUPER` privilege allows the user to perform almost any operation. By default, only the `root` user is granted with this privilege. Be careful when granting this privilege to other users.
+- The `SUPER` privilege is considered [deprecated in MySQL 8.0](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#dynamic-privileges-migration-from-super) and can be replaced by [dynamic privileges](#dynamic-privileges) to provide more fine-grained access control.
 
 ## Privileges required for TiDB operations
 
@@ -363,6 +376,22 @@ Requires `SUPER` privilege.
 ### KILL
 
 Requires `SUPER` or `CONNECTION_ADMIN` privilege to kill other user sessions.
+
+### CREATE RESOURCE GROUP
+
+Requires `SUPER` or `RESOURCE_GROUP_ADMIN` privilege.
+
+### ALTER RESOURCE GROUP
+
+Requires `SUPER` or `RESOURCE_GROUP_ADMIN` privilege.
+
+### DROP RESOURCE GROUP
+
+Requires `SUPER` or `RESOURCE_GROUP_ADMIN` privilege.
+
+### CALIBRATE RESOURCE
+
+Requires `SUPER` or `RESOURCE_GROUP_ADMIN` privilege.
 
 ## Implementation of the privilege system
 

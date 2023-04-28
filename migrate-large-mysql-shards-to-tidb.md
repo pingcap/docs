@@ -30,7 +30,7 @@ Before getting started, see the following documents to prepare for the migration
 
 - [Deploy a DM Cluster Using TiUP](/dm/deploy-a-dm-cluster-using-tiup.md)
 - [Use TiUP to Deploy Dumpling and Lightning](/migration-tools.md)
-- [Downstream privilege requirements for Dumpling](/dumpling-overview.md#export-data-from-tidbmysql)
+- [Downstream privilege requirements for Dumpling](/dumpling-overview.md#export-data-from-tidb-or-mysql)
 - [Downstream privilege requirements for TiDB Lightning](/tidb-lightning/tidb-lightning-requirements.md)
 - [Downstream storage space for TiDB Lightning](/tidb-lightning/tidb-lightning-requirements.md)
 - [Privileges required by DM-worker](/dm/dm-worker-intro.md)
@@ -94,7 +94,7 @@ The following table describes parameters in the command above. For more informat
 | `-p` or `--port`       |   Specifies the port to be used.|
 | `-h` or `--host`       |   Specifies the IP address of the data source.  |
 | `-t` or `--thread`     |   Specifies the number of threads for the export. Increasing the number of threads improves the concurrency of Dumpling and the export speed, and increases the database's memory consumption. Therefore, it is not recommended to set the number too large. Usually, it's less than 64.|
-| `-o` or `--output`     |  Specifies the export directory of the storage, which supports a local file path or a [URL of an external storage](/br/backup-and-restore-storages.md).|
+| `-o` or `--output`     |  Specifies the export directory of the storage, which supports a local file path or an [external storage URI](/br/backup-and-restore-storages.md#uri-format).|
 | `-r` or `--row`        | Specifies the maximum number of rows in a single file. If you use this parameter, Dumpling enables the in-table concurrency to speed up the export and reduce the memory usage.|
 | `-F` |  Specifies the maximum size of a single file. The unit is `MiB`. It is recommended to keep the value to 256 MiB. |
 | `-B` or `--database`   | Specifies databases to be exported. |
@@ -316,7 +316,7 @@ mysql-instances:
     block-allow-list: "bw-rule-1"     # Use the block and allow list configuration above. Replicate `my_db1` in instance 1.
     route-rules: ["route-rule-1"]     # Use the configured routing rule above to merge upstream tables.
 #       syncer-config-name: "global"  # Use the syncers configuration below.
-    meta:                             # The migration starting point of binlog when task-mode is incremental and there is no checkpoint in the downstream database. If there is a checkpoint, the checkpoint will be used.
+    meta:                             # The position where the binlog replication starts when `task-mode` is `incremental` and the downstream database checkpoint does not exist. If the checkpoint exists, the checkpoint is used. If neither the `meta` configuration item nor the downstream database checkpoint exists, the migration starts from the latest binlog position of the upstream.
       binlog-name: "${binlog-name}"   # The log location recorded in ${data-path}/my_db1/metadata in Step 1. You can either specify binlog-name + binlog-pos or binlog-gtid. When the upstream database service is configured to switch master between different nodes automatically, use binlog GTID here.
       binlog-pos: ${binlog-position}
       # binlog-gtid:                  " For example: 09bec856-ba95-11ea-850a-58f2b4af5188:1-9"

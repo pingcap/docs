@@ -175,7 +175,7 @@ You can detect the read-write conflict in your TiDB cluster by the following way
 
     * Monitoring data through Grafana
 
-        On the `KV Errors` panel in the TiDB dashboard, there are two monitoring metrics `Lock Resolve OPS` and `KV Backoff OPS` which can be used to check read-write conflicts in the transactions. If the values of both `not_expired` and `resolve` under `Lock Resolve OPS` increase, there might be many read-write conflicts. The `not_expired` item means that the transaction's lock has not timed out. The `resolve` item means that the other transaction tries to clean up the locks. If the value of another `txnLockFast` item under `KV Backoff OPS` increases, there might also be read-write conflicts.
+        In the `KV Errors` panel in the TiDB dashboard, `not_expired`/`resolve` in `Lock Resolve OPS` and `tikvLockFast` in `KV Backoff OPS` are monitoring metrics that can be used to check read-write conflicts in transactions. If the values of all the metrics increase, there might be many read-write conflicts. The `not_expired` item means that the transaction's lock has not timed out. The `resolve` item means that the other transaction tries to clean up the locks. The `tikvLockFast` item means that read-write conflicts occur.
 
         ![KV-backoff-txnLockFast-optimistic](/media/troubleshooting-lock-pic-09.png)
         ![KV-Errors-resolve-optimistic](/media/troubleshooting-lock-pic-08.png)
@@ -216,8 +216,8 @@ Solutions:
 * You can use the sub-command [`decoder`](/tidb-control.md#the-decoder-command) of TiDB Control to view the table id and rowid of the row corresponding to the specified key:
 
     ```sh
-    ./tidb-ctl decoder -f table_row -k "t\x00\x00\x00\x00\x00\x00\x00\x1c_r\x00\x00\x00\x00\x00\x00\x00\xfa"
-
+    ./tidb-ctl decoder "t\x00\x00\x00\x00\x00\x00\x00\x1c_r\x00\x00\x00\x00\x00\x00\x00\xfa"
+    format: table_row
     table_id: -9223372036854775780
     row_id: -9223372036854775558
     ```
@@ -241,7 +241,7 @@ Solutions:
 
 ### LockNotFound error
 
-The error log of "TxnLockNotFound" means that transaction commit time is longer than the the TTL time, and when the transaction is going to commit, its lock has been rolled back by other transactions. If the TiDB server enables transaction commit retry, this transaction is re-executed according to [tidb_retry_limit](/system-variables.md#tidb_retry_limit). (Note about the difference between explicit and implicit transactions.)
+The error log of "TxnLockNotFound" means that transaction commit time is longer than the TTL time, and when the transaction is going to commit, its lock has been rolled back by other transactions. If the TiDB server enables transaction commit retry, this transaction is re-executed according to [tidb_retry_limit](/system-variables.md#tidb_retry_limit). (Note about the difference between explicit and implicit transactions.)
 
 You can check whether there is any "LockNotFound" error in the following ways:
 
@@ -271,8 +271,8 @@ Solutions:
     Checking the time interval using the PD control tool:
 
     ```shell
-    tiup ctl pd tso [start_ts]
-    tiup ctl pd tso [commit_ts]
+    tiup ctl:v<CLUSTER_VERSION> pd tso [start_ts]
+    tiup ctl:v<CLUSTER_VERSION> pd tso [commit_ts]
     ```
 
 * It is recommended to check whether the write performance is slow, which might cause that the efficiency of transaction commit is poor, and thus the lock is cleared.
@@ -306,6 +306,7 @@ err="pessimistic lock retry limit reached"
 Solutions:
 
 * If the above error occurs frequently, it is recommended to adjust from the application side.
+* If your business contains high concurrent locking on the same row (the same key) and encounters frequent conflicts, you can try to enable the system variable [`tidb_pessimistic_txn_fair_locking`](/system-variables.md#tidb_pessimistic_txn_fair_locking-new-in-v700). Note that enabling this variable might bring some cost of throughput reduction (average latency increase) for transactions with lock conflicts. For newly deployed clusters, this variable is enabled (`ON`) by default.
 
 ### Lock wait timeout exceeded
 
@@ -323,7 +324,7 @@ Solutions:
 
 ### TTL manager has timed out
 
-The transaction execution time can not exceed the GC time limit. In addition, the TTL time of pessimistic transactions has an upper limit, whose default value is 1 hour. Therefore, a pessimistic transaction executed for more than 1 hour will fail to commit. This timeout threshold is controlled by the TiDB parameter [performance.max-txn-ttl](https://github.com/pingcap/tidb/blob/master/config/config.toml.example).
+The transaction execution time cannot exceed the GC time limit. In addition, the TTL time of pessimistic transactions has an upper limit, whose default value is 1 hour. Therefore, a pessimistic transaction executed for more than 1 hour will fail to commit. This timeout threshold is controlled by the TiDB parameter [performance.max-txn-ttl](https://github.com/pingcap/tidb/blob/master/config/config.toml.example).
 
 When the execution time of a pessimistic transaction exceeds the TTL time, the following error message occurs in the TiDB log:
 

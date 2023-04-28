@@ -1,9 +1,9 @@
 ---
-title: Handle Performance Issues
+title: Handle Performance Issues of TiDB Data Migration
 summary: Learn about common performance issues that might exist in DM and how to deal with them.
 ---
 
-# Handle Performance Issues
+# Handle Performance Issues of TiDB Data Migration
 
 This document introduces common performance issues that might exist in DM and how to deal with them.
 
@@ -72,7 +72,7 @@ The Binlog replication unit decides whether to read the binlog event from the up
 
 ### binlog event conversion
 
-The Binlog replication unit constructs DML, parses DDL, and performs [table router](/dm/dm-key-features.md#table-routing) conversion from binlog event data. The related metric is `transform binlog event duration`.
+The Binlog replication unit constructs DML, parses DDL, and performs [table router](/dm/dm-table-routing.md) conversion from binlog event data. The related metric is `transform binlog event duration`.
 
 The duration is mainly affected by the write operations upstream. Take the `INSERT INTO` statement as an example, the time consumed to convert a single `VALUES` greatly differs from that to convert a lot of `VALUES`. The time consumed might range from tens of microseconds to hundreds of microseconds. However, usually this is not a bottleneck of the system.
 

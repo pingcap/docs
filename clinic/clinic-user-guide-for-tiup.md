@@ -1,15 +1,15 @@
 ---
-title: Troubleshoot TiDB Cluster Using PingCAP Clinic
-summary: Learn how to use the PingCAP Clinic Diagnostic Service to troubleshoot cluster problems remotely and perform a quick check of the cluster status on a cluster deployed using TiUP.
+title: Troubleshoot Clusters Using PingCAP Clinic
+summary: Learn how to use the PingCAP Clinic Diagnostic Service to troubleshoot cluster problems remotely and perform a quick check of the cluster status on a TiDB cluster or DM cluster deployed using TiUP.
 ---
 
-# Troubleshoot TiDB Cluster Using PingCAP Clinic
+# Troubleshoot Clusters Using PingCAP Clinic
 
-For TiDB clusters and DM clusters deployed using TiUP, you can use PingCAP Clinic Diagnostic Service (PingCAP Clinic) to troubleshoot cluster problems remotely and perform a quick check on cluster status locally using Diag client (Diag) and Clinic Server.
+For TiDB clusters and DM clusters deployed using TiUP, you can use PingCAP Clinic Diagnostic Service (PingCAP Clinic) to troubleshoot cluster problems remotely and perform a quick check on cluster status locally using [Diag client (Diag)](https://github.com/pingcap/diag) and Clinic Server.
 
 > **Note:**
 >
-> - This document **only** applies to clusters deployed using TiUP in an on-premises environment. For clusters deployed using TiDB Operator in Kubernetes, see [PingCAP Clinic for TiDB Operator environments](https://docs.pingcap.com/tidb-in-kubernetes/stable/clinic-user-guide).
+> - This document **only** applies to clusters deployed using TiUP in an on-premises environment. For clusters deployed using TiDB Operator on Kubernetes, see [PingCAP Clinic for TiDB Operator environments](https://docs.pingcap.com/tidb-in-kubernetes/stable/clinic-user-guide).
 >
 > - PingCAP Clinic **does not support** collecting data from clusters deployed using TiDB Ansible.
 
@@ -17,7 +17,7 @@ For TiDB clusters and DM clusters deployed using TiUP, you can use PingCAP Clini
 
 - [Troubleshoot cluster problems remotely](#troubleshoot-cluster-problems-remotely)
 
-    - When your cluster has some problems, if you need to contact PingCAP technical support, you can perform the following operations to facilitate the remote troubleshooting: collect diagnostic data with Diag, upload the collected data to the Clinic Server, and provide the data access link to the technical support staff.
+    - When your cluster has some problems, if you need to [get support](/support.md) from PingCAP, you can perform the following operations to facilitate the remote troubleshooting: collect diagnostic data with Diag, upload the collected data to the Clinic Server, and provide the data access link to the technical support staff.
     - When your cluster has some problems, if you cannot analyze the problems immediately, you can use Diag to collect and save the data for later analysis.
 
 - [Perform a quick check on the cluster status locally](#perform-a-quick-check-on-the-cluster-status-locally)
@@ -56,14 +56,14 @@ Before using PingCAP Clinic, you need to install Diag (a component to collect da
     - Log in to the Clinic Server.
 
         <SimpleTab groupId="clinicServer">
-        <div label="Clinic Server in the US" value="clinic-us">
+        <div label="Clinic Server for international users" value="clinic-us">
 
-        [Clinic Server in the US](https://clinic.pingcap.com): Data is stored in AWS in US.
+        [Clinic Server for international users](https://clinic.pingcap.com): Data is stored in AWS in US.
 
         </div>
-        <div label="Clinic Server in the Chinese mainland" value="clinic-cn">
+        <div label="Clinic Server for users in the Chinese mainland" value="clinic-cn">
 
-        [Clinic Server in the Chinese mainland](https://clinic.pingcap.com.cn): Data is stored in AWS in China (Beijing) regions.
+        [Clinic Server for users in the Chinese mainland](https://clinic.pingcap.com.cn): Data is stored in AWS in China (Beijing) regions.
 
         </div>
 
@@ -75,7 +75,7 @@ Before using PingCAP Clinic, you need to install Diag (a component to collect da
 
     > **Note:**
     >
-    > - When accessing Clinic Server for the first time, before getting a token, you need to log in to [Clinic Server](https://clinic.pingcap.com.cn) using your AskTUG account and create an organization first.
+    > - When accessing Clinic Server for the first time, before getting a token, you need to prepare the environment by referring to [Quick Start with PingCAP Clinic](/clinic/quick-start-with-clinic.md#prerequisites).
     > - For data security, TiDB only displays the token upon the token creation. If you have lost the token, delete the old token and create a new one.
     > - A token is only used for uploading data.
 
@@ -95,18 +95,18 @@ Before using PingCAP Clinic, you need to install Diag (a component to collect da
     > - For versions earlier than Diag v0.9.0, data is uploaded to Clinic Server in the Chinese region by default. To set `region` in these versions, run the `tiup update diag` command to upgrade Diag to the latest version and then set `region` in Diag.
 
     <SimpleTab groupId="clinicServer">
-    <div label="Clinic Server in the US" value="clinic-us">
+    <div label="Clinic Server for international users" value="clinic-us">
 
-    For Clinic Server in the US, set `region` to `US` using the following command:
+    When using Clinic Server for international users, set `region` to `US` using the following command:
 
     ```bash
     tiup diag config clinic.region US
     ```
 
     </div>
-    <div label="Clinic Server in the Chinese mainland" value="clinic-cn">
+    <div label="Clinic Server for users in the Chinese mainland" value="clinic-cn">
 
-    For Clinic Server in the Chinese mainland, set `region` to `CN` using the following command:
+    When using Clinic Server for users in the Chinese mainland, set `region` to `CN` using the following command:
 
     ```bash
     tiup diag config clinic.region CN
@@ -128,21 +128,32 @@ You can use Diag to quickly collect diagnostic data from TiDB clusters and DM cl
 
 For a full list of data that can be collected by Diag, see [PingCAP Clinic Diagnostic Data](/clinic/clinic-data-instruction-for-tiup.md).
 
-To improve the efficiency of the later diagnosis, you are recommended to collect full diagnostic data including monitoring data and configuration information. For details, see [Collect data from TiDB clusters](#collect-data-from-tidb-clusters).
+To improve the efficiency of the later diagnosis, you are recommended to collect full diagnostic data including monitoring data and configuration information. For details, see [Collect data from clusters](#step-2-collect-data).
 
 ### Step 2. Collect data
 
 With Diag, you can collect data from the TiDB clusters and the DM clusters deployed using TiUP.
 
-#### Collect data from TiDB clusters
-
 1. Run the data collection command of Diag.
 
     For example, to collect the diagnostic data from 4 hours ago to 2 hours ago based on the current time, run the following command:
 
+    <SimpleTab>
+    <div label="TiDB Cluster">
+
     ```bash
     tiup diag collect ${cluster-name} -f="-4h" -t="-2h"
     ```
+
+    </div>
+    <div label="DM Cluster">
+
+    ```bash
+    tiup diag collectdm ${dm-cluster-name} -f="-4h" -t="-2h"
+    ```
+
+    </div>
+    </SimpleTab>
 
     Descriptions of the parameters for data collection:
 
@@ -151,7 +162,7 @@ With Diag, you can collect data from the TiDB clusters and the DM clusters deplo
 
     Parameter usage tips:
 
-    In addition to specifying the data collection time, you can use Diag to specify more parameters. To get all parameters, run the `tiup diag collect -h` command.
+    In addition to specifying the data collection time, you can use Diag to specify more parameters. To get all parameters, run the `tiup diag collect -h` or `tiup diag collectdm -h` command.
 
     > **Note:**
     >
@@ -175,7 +186,7 @@ With Diag, you can collect data from the TiDB clusters and the DM clusters deplo
     ... ...
     172.16.7.179       325 B      /tidb-deploy/tikv-20160/conf/tikv.toml
     Total              2.01 GB    (inaccurate)
-    These data will be stored in /home/qiaodan/diag-fNTnz5MGhr6
+    These data will be stored in /home/user/diag-fNTnz5MGhr6
     Do you want to continue? [y/N]: (default=N)
     ```
 
@@ -186,31 +197,7 @@ With Diag, you can collect data from the TiDB clusters and the DM clusters deplo
     After the collection is complete, Diag provides the folder path where the collected data is located. For example:
 
     ```bash
-    Collected data are stored in /home/qiaodan/diag-fNTnz5MGhr6
-    ```
-
-#### Collect data from DM clusters
-
-1. Run the data collection command of Diag.
-
-    For example, to collect the diagnostic data from 4 hours ago to 2 hours ago based on the current time, run the following command:
-
-    ```bash
-    tiup diag collectdm ${cluster-name} -f="-4h" -t="-2h"
-    ```
-
-    For descriptions of the parameters used in the above commands or other parameters that you might use with Diag, refer to [Collect data from TiDB clusters](#collect-data-from-tidb-clusters).
-
-    After you run the command, Diag does not start collecting data immediately. Instead, Diag provides the estimated data size and the target data storage path in the output for you to confirm whether to continue.
-
-2. Enter `Y` to confirm that you want to start collecting data.
-
-    Collecting data takes a certain amount of time. The time varies according to the volume of data to be collected. For example, in a test environment, collecting 1 GB of data takes about 10 minutes.
-
-    After the collection is complete, Diag provides the folder path where the collected data is located. For example:
-
-    ```bash
-    Collected data are stored in /home/qiaodan/diag-fNTnz5MGhr6
+    Collected data are stored in /home/user/diag-fNTnz5MGhr6
     ```
 
 ### Step 3. View data locally (optional)
@@ -265,7 +252,7 @@ If the network where your cluster is located cannot access the internet, you nee
 
     ```bash
     Starting component `diag`: /root/.tiup/components/diag/v0.7.0/diag package diag-fNTnz5MGhr6
-    packaged data set saved to /home/qiaodan/diag-fNTnz5MGhr6.diag
+    packaged data set saved to /home/user/diag-fNTnz5MGhr6.diag
     ```
 
     After the packaging is complete, the data is packaged to the `.diag` format. The `.diag` file can only be decrypted and viewed after being uploaded to the Clinic Server. If you want to directly forward the collected data instead of uploading it to the Clinic Server, you can compress the data by your own method and forward it.
@@ -279,8 +266,8 @@ If the network where your cluster is located cannot access the internet, you nee
     The following is an example output:
 
     ```bash
-    [root@Copy-of-VM-EE-CentOS76-v1 qiaodan]# tiup diag upload /home/qiaodan/diag-fNTnz5MGhr6
-    Starting component `diag`: /root/.tiup/components/diag/v0.7.0/diag upload /home/qiaodan/diag-fNTnz5MGhr6
+    [root@Copy-of-VM-EE-CentOS76-v1 user]# tiup diag upload /home/user/diag-fNTnz5MGhr6
+    Starting component `diag`: /root/.tiup/components/diag/v0.7.0/diag upload /home/user/diag-fNTnz5MGhr6
     >>>>>>>>>>>>>>>>>>>>>>>>>>>>>><>>>>>>>>>
     Completed!
     Download URL: "https://clinic.pingcap.com.cn/portal/#/orgs/4/clusters/XXXX"

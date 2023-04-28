@@ -104,7 +104,14 @@ backend = "local"
 sorted-kv-dir = "/path/to/sorted-dir"
 ```
 
-If the data source is stored in external storage such as Amazon S3 or GCS, see [External Storages](/br/backup-and-restore-storages.md).
+If the data source is stored in external storage such as Amazon S3 or GCS, you need to configure additional parameters for connection. You can specify parameters for such configuration. For example, the following example assumes that data is stored in Amazon S3:
+
+```
+./tidb-lightning --tidb-port=4000 --pd-urls=127.0.0.1:2379 --backend=local --sorted-kv-dir=/tmp/sorted-kvs \
+    -d 's3://my-bucket/sql-backup'
+```
+
+For more parameter descriptions, see [external storage URI](/br/backup-and-restore-storages.md#uri-format).
 
 ### Step 3: Start TiDB Lightning to import data
 
@@ -136,7 +143,7 @@ Wait for all TiDB Lightning instances to finish, then the entire import is compl
 
 ## Example 2: Import single tables in parallel
 
-TiDB Lightning also supports parallel import of single tables. For example, import multiple single tables stored in Amazon S3 by different TiDB Lightning instances into the downstream TiDB cluster in parallel. This method can speed up the overall import speed. For more information on external storages, see [External Storages](/br/backup-and-restore-storages.md)).
+TiDB Lightning also supports parallel import of single tables. For example, import multiple single tables stored in Amazon S3 by different TiDB Lightning instances into the downstream TiDB cluster in parallel. This method can speed up the overall import speed. When remote storages such as Amazon S3 is used, the configuration parameters of TiDB Lightning are the same as those of BR. For more details, see [external storage URI](/br/backup-and-restore-storages.md#uri-format).
 
 > **Note:**
 >
@@ -178,9 +185,19 @@ If one or more TiDB Lightning nodes exit abnormally during a parallel import, id
 
 - If the error shows normal exit (for example, exit in response to a kill command) or termination by the operating system due to OOM, adjust the configuration and then restart the TiDB Lightning nodes.
 
-- If the error has no impact on data accuracy, for example, network timeout, run `checkpoint-error-ignore` by using tidb-lightning-ctl on all failed nodes to clean errors in the checkpoint source data. Then restart these nodes to continue importing data from checkpoints. For details, see [checkpoint-error-ignore](/tidb-lightning/tidb-lightning-checkpoints.md#--checkpoint-error-ignore).
+- If the error has no impact on data accuracy, for example, network timeout, perform the following steps:
 
-- If the log reports errors resulting in data inaccuracy, for example, checksum mismatched, which indicates invalid data in the source file, run `checkpoint-error-destroy` by using tidb-lightning-ctl on all failed nodes to clean data imported to the failed tables as well as the checkpoint source data. For details, see [checkpoint-error-destroy](/tidb-lightning/tidb-lightning-checkpoints.md#--checkpoint-error-destroy). This command removes the data imported to the failed tables downstream. Therefore, you need to re-configure and import the data of the failed tables on all TiDB Lightning nodes (including those that exit normally) by using the `filters` parameter.
+    1. Run the [`checkpoint-error-ignore`](/tidb-lightning/tidb-lightning-checkpoints.md#--checkpoint-error-ignore) command with the setting `--checkpoint-error-ignore=all` on all failed nodes to clean errors in the checkpoint source data.
+
+    2. Restart these nodes to continue importing data from checkpoints.
+
+- If you see errors in the log that result in data inaccuracies, such as a checksum mismatch indicating invalid data in the source file, you can perform the following steps to resolve this issue:
+
+    1. Run the [`checkpoint-error-destroy`](/tidb-lightning/tidb-lightning-checkpoints.md#--checkpoint-error-destroy) command on all Lightning nodes, including successful nodes. This command removes the imported data from failed tables and resets the checkpoint status of these tables to "not yet started".
+
+    2. Reconfigure and import the data of failed tables by using the [`filter`](/table-filter.md) parameter on all TiDB Lightning nodes, including normally exiting nodes.
+
+        When you reconfigure the Lightning parallel import task, do not include the `checkpoint-error-destroy` command in the startup script of each Lightning node. Otherwise, this command deletes shared metadata used by multiple parallel import tasks, which might cause issues during data import. For example, if a second Lightning import task is started, it will delete the metadata written by the first task, leading to abnormal data import.
 
 ### During an import, an error "Target table is calculating checksum. Please wait until the checksum is finished and try again" is reported
 

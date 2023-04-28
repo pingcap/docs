@@ -6,28 +6,59 @@ aliases: ['/docs/dev/hardware-and-software-requirements/','/docs/dev/how-to/depl
 
 # Software and Hardware Recommendations
 
-As an open source distributed NewSQL database with high performance, TiDB can be deployed in the Intel architecture server, ARM architecture server, and major virtualization environments and runs well. TiDB supports most of the major hardware networks and Linux operating systems.
+<!-- Localization note for TiDB:
 
-## Linux OS version requirements
+- English: use distributed SQL, and start to emphasize HTAP
+- Chinese: can keep "NewSQL" and emphasize one-stop real-time HTAP ("一栈式实时 HTAP")
+- Japanese: use NewSQL because it is well-recognized
 
-| Linux OS        | Version      |
-| :-----------------------:| :----------: |
-| Red Hat Enterprise Linux | 7.3 or later 7.x releases |
-| CentOS                   | 7.3 or later 7.x releases |
-| Oracle Enterprise Linux  | 7.3 or later 7.x releases |
-| Amazon Linux             | 2 |
-| Ubuntu LTS               | 16.04 or later |
+-->
+
+As an open-source distributed SQL database with high performance, TiDB can be deployed in the Intel architecture server, ARM architecture server, and major virtualization environments and runs well. TiDB supports most of the major hardware networks and Linux operating systems.
+
+## OS and platform requirements
+
+|  Operating systems   |   Supported CPU architectures   |
+|   :---   |   :---   |
+| Red Hat Enterprise Linux 8.4 or a later 8.x version  |  <ul><li>x86_64</li><li>ARM 64</li></ul>  |
+| <ul><li>Red Hat Enterprise Linux 7.3 or a later 7.x version</li><li>CentOS 7.3 or a later 7.x version</li></ul>  |  <ul><li>x86_64</li><li>ARM 64</li></ul>   |
+| Amazon Linux 2 | <ul><li>x86_64</li><li>ARM 64</li></ul> |
+| Kylin Euler V10 SP1/SP2   |   <ul><li>x86_64</li><li>ARM 64</li></ul>   |
+| UOS V20                 |   <ul><li>x86_64</li><li>ARM 64</li></ul>   |
+|   macOS Catalina or later   |  <ul><li>x86_64</li><li>ARM 64</li></ul>  |
+|  Oracle Enterprise Linux 7.3 or a later 7.x version  |  x86_64           |
+|   Ubuntu LTS 18.04 or later   |  x86_64           |
+| CentOS 8 Stream | <ul><li>x86_64</li><li>ARM 64</li></ul> |
+|  Debian 9 (Stretch) or later |  x86_64           |
+|  Fedora 35 or later   |  x86_64           |
+|  openSUSE Leap later than v15.3 (not including Tumbleweed) |  x86_64           |
+|  SUSE Linux Enterprise Server 15  |  x86_64                        |
 
 > **Note:**
 >
 > - For Oracle Enterprise Linux, TiDB supports the Red Hat Compatible Kernel (RHCK) and does not support the Unbreakable Enterprise Kernel provided by Oracle Enterprise Linux.
-> - A large number of TiDB tests have been run on the CentOS 7.3 system, and in our community there are a lot of best practices in which TiDB is deployed on the Linux operating system. Therefore, it is recommended to deploy TiDB on CentOS 7.3 or later.
-> - The support for the Linux operating systems above includes the deployment and operation in physical servers as well as in major virtualized environments like VMware, KVM and XEN.
-> - Red Hat Enterprise Linux 8.0, CentOS 8 Stream, and Oracle Enterprise Linux 8.0 are not supported yet as the testing of these platforms is in progress.
-> - Support for CentOS 8 Linux is not planned because its upstream support ends on December 31, 2021.
+> - According to [CentOS Linux EOL](https://www.centos.org/centos-linux-eol/), the upstream support for CentOS Linux 8 ended on December 31, 2021. CentOS Stream 8 continues to be supported by the CentOS organization.
 > - Support for Ubuntu 16.04 will be removed in future versions of TiDB. Upgrading to Ubuntu 18.04 or later is strongly recommended.
+> - If you are using the 32-bit version of an operating system listed in the preceding table, TiDB **is not guaranteed** to be compilable, buildable or deployable on the 32-bit operating system and the corresponding CPU architecture, or TiDB does not actively adapt to the 32-bit operating system.
+> - Other operating system versions not mentioned above might work but are not officially supported.
 
-Other Linux OS versions such as Debian Linux and Fedora Linux might work but are not officially supported.
+### Libraries required for compiling and running TiDB
+
+|  Libraries required for compiling and running TiDB |  Version   |
+|   :---   |   :---   |
+|   Golang  |  1.18.5 or later  |
+|   Rust    |   nightly-2022-07-31 or later  |
+|  GCC      |   7.x      |
+|  LLVM     |  13.0 or later  |
+
+Library for running TiDB：glibc（2.28-151.el8 version）
+
+### Docker image dependencies
+
+The following CPU architectures are supported:
+
+- x86_64. Starting from TiDB v6.6.0, the [x84-64-v2 instruction set](https://developers.redhat.com/blog/2021/01/05/building-red-hat-enterprise-linux-9-for-the-x86-64-v2-microarchitecture-level) is required.
+- ARM 64
 
 ## Software recommendations
 
@@ -71,12 +102,13 @@ You can deploy and run TiDB on the 64-bit generic hardware server platform in th
 > - For the TiKV server, it is recommended to use NVMe SSDs to ensure faster reads and writes.
 > - If you only want to test and verify the features, follow [Quick Start Guide for TiDB](/quick-start-with-tidb.md) to deploy TiDB on a single machine.
 > - The TiDB server uses the disk to store server logs, so there are no special requirements for the disk type and capacity in the test environment.
+> - Starting from v6.3.0, to deploy TiFlash under the Linux AMD64 architecture, the CPU must support the AVX2 instruction set. Ensure that `cat /proc/cpuinfo | grep avx2` has output. To deploy TiFlash under the Linux ARM64 architecture, the CPU must support the ARMv8 instruction set architecture. Ensure that `cat /proc/cpuinfo | grep 'crc32' | grep 'asimd'` has output. By using the instruction set extensions, TiFlash's vectorization engine can deliver better performance.
 
 ### Production environment
 
 | Component | CPU | Memory | Hard Disk Type | Network | Instance Number (Minimum Requirement) |
 | :-----: | :------: | :------: | :------: | :------: | :-----: |
-|  TiDB  | 16 core+ | 48 GB+ | SAS | 10 Gigabit network card (2 preferred) | 2 |
+| TiDB  | 16 core+ | 48 GB+ | SSD | 10 Gigabit network card (2 preferred) | 2 |
 | PD | 8 core+ | 16 GB+ | SSD | 10 Gigabit network card (2 preferred) | 3 |
 | TiKV | 16 core+ | 64 GB+ | SSD | 10 Gigabit network card (2 preferred) | 3 |
 | TiFlash | 48 core+ | 128 GB+ | 1 or more SSDs | 10 Gigabit network card (2 preferred) | 2 |
@@ -100,7 +132,15 @@ Before you deploy TiCDC, note that it is recommended to deploy TiCDC on PCIe-SSD
 
 ## Network requirements
 
-As an open source distributed NewSQL database, TiDB requires the following network port configuration to run. Based on the TiDB deployment in actual environments, the administrator can open relevant ports in the network side and host side.
+<!-- Localization note for TiDB:
+
+- English: use distributed SQL, and start to emphasize HTAP
+- Chinese: can keep "NewSQL" and emphasize one-stop real-time HTAP ("一栈式实时 HTAP")
+- Japanese: use NewSQL because it is well-recognized
+
+-->
+
+As an open-source distributed SQL database, TiDB requires the following network port configuration to run. Based on the TiDB deployment in actual environments, the administrator can open relevant ports in the network side and host side.
 
 | Component | Default Port | Description |
 | :--:| :--: | :-- |
@@ -111,7 +151,6 @@ As an open source distributed NewSQL database, TiDB requires the following netwo
 | PD | 2379 | the communication port between TiDB and PD |
 | PD | 2380 | the inter-node communication port within the PD cluster |
 | TiFlash | 9000 | the TiFlash TCP service port |
-| TiFlash | 8123 | the TiFlash HTTP service port |
 | TiFlash | 3930 | the TiFlash RAFT and Coprocessor service port |
 | TiFlash | 20170 |the TiFlash Proxy service port |
 | TiFlash | 20292 | the port for Prometheus to pull TiFlash Proxy metrics |
@@ -120,7 +159,7 @@ As an open source distributed NewSQL database, TiDB requires the following netwo
 | Drainer | 8249 | the Drainer communication port |
 | TiCDC | 8300 | the TiCDC communication port |
 | Monitoring | 9090 | the communication port for the Prometheus service|
-| Monitoring | 20120 | the communication port for the NgMonitoring service|
+| Monitoring | 12020 | the communication port for the NgMonitoring service|
 | Node_exporter | 9100 | the communication port to report the system information of every TiDB cluster node |
 | Blackbox_exporter | 9115 | the Blackbox_exporter communication port, used to monitor the ports in the TiDB cluster |
 | Grafana | 3000 | the port for the external Web monitoring service and client (Browser) access|

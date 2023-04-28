@@ -10,7 +10,7 @@ PD Recover is a disaster recovery tool of PD, used to recover the PD cluster whi
 
 ## Compile from source code
 
-+ [Go](https://golang.org/) Version 1.16 or later is required because the Go modules are used.
++ [Go](https://golang.org/) Version 1.19 or later is required because the Go modules are used.
 + In the root directory of the [PD project](https://github.com/pingcap/pd), use the `make pd-recover` command to compile and generate `bin/pd-recover`.
 
 > **Note:**
@@ -101,7 +101,7 @@ Or you can simply run the above command in all PD servers to find the largest on
 
 ### Deploy a new PD cluster
 
-Before deploying a new PD cluster, you need to stop the the existing PD cluster and then delete the previous data directory or specify a new data directory using `--data-dir`.
+Before deploying a new PD cluster, you need to stop the existing PD cluster and then delete the previous data directory or specify a new data directory using `--data-dir`.
 
 ### Use pd-recover
 

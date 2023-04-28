@@ -13,13 +13,13 @@ aliases: ['/docs/dev/sql-statements/sql-statement-recover-table/','/docs/dev/ref
 {{< copyable "sql" >}}
 
 ```sql
-RECOVER TABLE table_name
+RECOVER TABLE table_name;
 ```
 
 {{< copyable "sql" >}}
 
 ```sql
-RECOVER TABLE BY JOB ddl_job_id
+RECOVER TABLE BY JOB JOB_ID;
 ```
 
 ## Synopsis
@@ -60,7 +60,7 @@ When you use `RECOVER TABLE` in the upstream TiDB during TiDB Binlog replication
 
 + Latency occurs during replication between upstream and downstream databases. An error instance: `snapshot is older than GC safe point 2019-07-10 13:45:57 +0800 CST`.
 
-For the above three situations, you can resume data replication from TiDB Binlog with a [full import of the deleted table](/ecosystem-tool-user-guide.md#backup-and-restore).
+For the above three situations, you can resume data replication from TiDB Binlog with a [full import of the deleted table](/ecosystem-tool-user-guide.md#backup-and-restore---backup--restore-br).
 
 </CustomContent>
 

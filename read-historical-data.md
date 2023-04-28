@@ -136,7 +136,7 @@ Pay special attention to the following:
     3 rows in set (0.00 sec)
     ```
 
-7. Set the  `tidb_snapshot` variable to be "" (empty string) and you can read the data from the latest version:
+7. Set the `tidb_snapshot` variable to be "" (empty string) and you can read the data from the latest version:
 
     ```sql
     mysql> set @@tidb_snapshot="";
@@ -175,4 +175,4 @@ To restore data from an older version, you can use one of the following methods:
 
 - For simple cases, use `SELECT` after setting the `tidb_snapshot` variable and copy-paste the output, or use `SELECT ... INTO LOCAL OUTFLE` and use `LOAD DATA` to import the data later on.
 
-- Use [Dumpling](/dumpling-overview.md#export-historical-data-snapshot-of-tidb) to export a historical snapshot. Dumpling performs well in exporting larger sets of data.
+- Use [Dumpling](/dumpling-overview.md#export-historical-data-snapshots-of-tidb) to export a historical snapshot. Dumpling performs well in exporting larger sets of data.

@@ -5,13 +5,20 @@ summary: Learn how to configure the root password and allowed IP addresses to co
 
 # Configure Cluster Security Settings
 
-When you create a cluster, the TiDB Cloud console will automatically guide you to configure the root password and allowed IP addresses to connect to your cluster.
+For Dedicated Tier clusters, you can configure the root password and allowed IP addresses to connect to your cluster.
 
-If you do not configure the root password or allowed IP addresses at that time, or if you want to modify the cluster security settings, take the following steps:
+> **Note:**
+>
+> For Serverless Tier clusters, this document is inapplicable and you can refer to [Secure Connections to Serverless Tier Clusters](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md) instead.
 
-1. In the TiDB Cloud console, navigate to the **Active Clusters** page of your project, and then find the area of your cluster.
-2. Click **Security Settings** in the upper-right corner of the area. The **Security Settings** dialog is displayed.
-3. In the dialog, configure the root password and allowed IP addresses.
+1. In the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+
+    > **Tip:**
+    >
+    > If you have multiple projects, you can switch to the target project in the left navigation pane of the **Clusters** page.
+
+2. In the row of your target cluster, click **...** and select **Security Settings**.
+3. In the **Security Settings** dialog, configure the root password and allowed IP addresses.
 
     To allow your cluster to be accessible by any IP addresses, click **Allow Access from Anywhere**.
 
@@ -19,4 +26,4 @@ If you do not configure the root password or allowed IP addresses at that time, 
 
 > **Tip:**
 >
-> If you are viewing the overview page of your cluster, you can click the **Security Settings** in the upper-right corner of the page and configure these settings, too.
+> If you are viewing the overview page of your cluster, you can click the **...** in the upper-right corner of the page, select **Security Settings**, and configure these settings, too.

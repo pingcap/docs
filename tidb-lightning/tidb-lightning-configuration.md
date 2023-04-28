@@ -56,7 +56,7 @@ table-concurrency = 6
 # The concurrency number of data. It is set to the number of logical CPU
 # cores by default. When deploying together with other components, you can
 # set it to 75% of the size of logical CPU cores to limit the CPU usage.
-#region-concurrency =
+# region-concurrency =
 
 # The maximum I/O concurrency. Excessive I/O concurrency causes an increase in
 # I/O latency because the disk's internal buffer is frequently refreshed,
@@ -68,6 +68,7 @@ io-concurrency = 5
 # Non-fatal errors are localized to a few rows, and ignoring those rows allows the import process to continue.
 # Setting this to N means that TiDB Lightning will stop as soon as possible when the (N+1)-th error is encountered.
 # The skipped rows will be inserted into tables inside the "task info" schema on the target TiDB, which can be configured below.
+# The default value is `MaxInt64` bytes, that is, 9223372036854775807 bytes.
 max-error = 0
 # task-info-schema-name is the name of the schema or database that stores TiDB Lightning execution results.
 # To disable error recording, set this to an empty string.
@@ -119,13 +120,13 @@ driver = "file"
 # "local": Physical import mode, used by default. It applies to large dataset import, for example, greater than 1 TiB. However, during the import, downstream TiDB is not available to provide services.
 # "tidb": Logical import mode. You can use this mode for small dataset import, for example, smaller than 1 TiB. During the import, downstream TiDB is available to provide services.
 # backend = "local"
-# Whether to allow importing data to tables with data. The default value is `false`.
-# When you use parallel import mode, you must set it to `true`, because multiple TiDB Lightning instances are importing the same table at the same time.
+# Whether to enable multiple TiDB Lightning instances (in physical import mode) to import data to one or more target tables in parallel. The default value is `false`.
+# When you use parallel import mode, you must set the parameter to `true`, but the premise is that no data exists in the target table, that is, all data can only be imported by TiDB Lightning. Note that this parameter **is not for incremental data import** and is only used in scenarios where the target table is empty.
 # incremental-import = false
 
 # The listening address of tikv-importer when backend is "importer". Change it to the actual address.
 addr = "172.16.31.10:8287"
-# Action to do when trying to insert a duplicated entry in the logical import mode.
+# Action to do when trying to insert a conflicting record in the logical import mode. For more information on the conflict detection, see the document: https://docs.pingcap.com/tidb/dev/tidb-lightning-logical-import-mode-usage#conflict-detection
 #  - replace: use new entry to replace the existing entry
 #  - ignore: keep the existing entry, and ignore the new entry
 #  - error: report error and quit the program
@@ -133,15 +134,14 @@ addr = "172.16.31.10:8287"
 
 # Whether to detect and resolve duplicate records (unique key conflict) in the physical import mode.
 # The following resolution algorithms are supported:
-#  - record: only records duplicate records to the `lightning_task_info.conflict_error_v1` table on the target TiDB. Note that the
-#    required version of the target TiKV is no earlier than v5.2.0; otherwise it falls back to 'none'.
-#  - none: does not detect duplicate records, which has the best performance of the three algorithms, but might lead to
-#    inconsistent data in the target TiDB.
-#  - remove: records all duplicate records to the lightning_task_info database, like the 'record' algorithm. But it removes all duplicate records from the target table to ensure a consistent
-#    state in the target TiDB.
+#  - record: After the data is written to the target table, add the duplicate records from the target table to the `lightning_task_info.conflict_error_v1` table in the target TiDB. Note that the required version of the target TiKV is no earlier than v5.2.0; otherwise it falls back to 'none'.
+#  - none: does not detect duplicate records, which has the best performance of the three algorithms. But if there are duplicate records in the data source, it might lead to inconsistent data in the target TiDB.
+#  - remove: records all duplicate records in the target table to the lightning_task_info database, like the 'record' algorithm. But it removes all duplicate records from the target table to ensure a consistent state in the target TiDB.
 # duplicate-resolution = 'none'
 # The number of KV pairs sent in one request in the physical import mode.
 # send-kv-pairs = 32768
+# Whether to enable compression when sending KV pairs to TiKV in the physical import mode. Currently, only the Gzip compression algorithm is supported. To use this algorithm, you can fill in either "gzip" or "gz" for this parameter. By default, the compression is not enabled.
+# compress-kv-pairs = ""
 # The directory of local KV sorting in the physical import mode. If the disk
 # performance is low (such as in HDD), it is recommended to set the directory
 # on a different disk from `data-source-dir` to improve import speed.
@@ -154,6 +154,20 @@ addr = "172.16.31.10:8287"
 # node in the physical import mode. 0 by default, which means no limit.
 # store-write-bwlimit = "128MiB"
 
+# Specifies the disk quota for local temporary files when physical import mode is used.
+# When the disk quota is insufficient, TiDB Lightning stops reading source data and writing temporary files,
+# but prioritizes writing the already sorted key-value pairs to TiKV.
+# After TiDB Lightning deletes the local temporary files, the import process continues.
+# This option takes effect only when you set the `backend` option to `local`.
+# The default value is `MaxInt64` bytes, that is, 9223372036854775807 bytes.
+# disk-quota = "10GB"
+
+# Specifies whether Physical Import Mode adds indexes via SQL. The default value is `false`, which means that TiDB Lightning will encode both row data and index data into KV pairs and import them into TiKV together. This mechanism is consistent with that of the historical versions. If you set it to `true`, it means that TiDB Lightning adds indexes via SQL after importing the row data.
+# The benefit of adding indexes via SQL is that you can separately import data and import indexes, and import data more quickly. After the data is imported, even if the indexes fail to be added, it does not affect the consistency of the imported data.
+# add-index-by-sql = false
+
+# When you use TiDB Lightning to import a multi-tenant TiDB cluster, use this parameter to specify the corresponding key space name. The default value is an empty string, which means TiDB Lightning will automatically get the key space name of the corresponding tenant to import data. If you specify a value, the specified key space name will be used to import data.
+# keyspace-name = ""
 [mydumper]
 # Block size for file reading. Keep it longer than the longest string of the data source.
 read-block-size = "64KiB" # default value
@@ -171,7 +185,7 @@ read-block-size = "64KiB" # default value
 # This value should be in the range (0 <= batch-import-ratio < 1).
 batch-import-ratio = 0.75
 
-# Local source data directory or the URL of the external storage.
+# Local source data directory or the URI of the external storage. For more information about the URI of the external storage, see https://docs.pingcap.com/tidb/v6.6/backup-and-restore-storages#uri-format.
 data-source-dir = "/data/my_database"
 
 # The character set of the schema files, containing CREATE TABLE statements;
@@ -226,8 +240,15 @@ delimiter = '"'
 # Line terminator. Empty value means both "\n" (LF) and "\r\n" (CRLF) are line terminators.
 terminator = ''
 # Whether the CSV files contain a header.
-# If `header` is true, the first line will be skipped.
+# If `header` is true, TiDB Lightning treats the first row as a table header and does not import it as data. If `header` is false, the first row is also imported as CSV data.
 header = true
+# Whether the column names in the CSV file header are matched to those defined in the target table.
+# The default value is `true`, which means that you have confirmed that the column names in the CSV header are consistent with those in the target table, so that even if the order of the columns is different between the two, TiDB Lightning can still import the data successfully by mapping the column names.
+# If the column names between the CSV table header and the target table do not match (for example, some column names in the CSV table header cannot be found in the target table) but the column order is the same, set this configuration to `false`.
+# In this scenario, TiDB Lightning will ignore the CSV header to avoid errors and import the data directly in the order of the columns in the target table.
+# Therefore, if the columns are not in the same order, you need to manually adjust the order of the columns in the CSV file to be consistent with that in the target table before importing; otherwise data discrepancies might occur.
+# It is important to note that this parameter only applies if the `header` parameter is set to `true`. If `header` is set to `false`, it means that the CSV file does not contain a header, so this parameter is not relevant.
+header-schema-match = true
 # Whether the CSV contains any NULL value.
 # If `not-null` is true, all columns from CSV cannot be NULL.
 not-null = false
@@ -265,9 +286,9 @@ log-level = "error"
 # See https://pingcap.com/docs/dev/reference/performance/statistics/#control-analyze-concurrency
 # for the meaning of each setting
 build-stats-concurrency = 20
-distsql-scan-concurrency = 100
+distsql-scan-concurrency = 15
 index-serial-scan-concurrency = 20
-checksum-table-concurrency = 16
+checksum-table-concurrency = 2
 
 # The default SQL mode used to parse and execute the SQL statements.
 sql-mode = "ONLY_FULL_GROUP_BY,NO_ENGINE_SUBSTITUTION"
@@ -331,6 +352,9 @@ compact = false
 switch-mode = "5m"
 # Duration between which an import progress is printed to the log.
 log-progress = "5m"
+# The time interval for checking the local disk quota when you use the physical import mode.
+# The default value is 60 seconds.
+# check-disk-quota = "60s"
 ```
 
 ## Command line parameters
@@ -341,7 +365,7 @@ log-progress = "5m"
 |:----|:----|:----|
 | --config *file* | Reads global configuration from *file*. If not specified, the default configuration would be used. | |
 | -V | Prints program version | |
-| -d *directory* | Directory or [external storage URL](/br/backup-and-restore-storages.md) of the data dump to read from | `mydumper.data-source-dir` |
+| -d *directory* | Directory or [external storage URI](/br/backup-and-restore-storages.md#uri-format) of the data dump to read from | `mydumper.data-source-dir` |
 | -L *level* | Log level: debug, info, warn, error, fatal (default = info) | `lightning.log-level` |
 | -f *rule* | [Table filter rules](/table-filter.md) (can be specified multiple times) | `mydumper.filter` |
 | --backend *[backend](/tidb-lightning/tidb-lightning-overview.md)* | Select an import mode. `local` refers to the physical import mode; `tidb` refers to the logical import mode. | `local` |

@@ -1,11 +1,19 @@
 ---
 title: SLOW_QUERY
-summary: Learn the `SLOW_QUERY` information_schema table.
+summary: Learn the `SLOW_QUERY` INFORMATION_SCHEMA table.
 ---
 
 # SLOW_QUERY
 
 The `SLOW_QUERY` table provides the slow query information of the current node, which is the parsing result of the TiDB slow log file. The column names in the table are corresponding to the field names in the slow log.
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> The `SLOW_QUERY` table is unavailable for [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta).
+  
+</CustomContent>
 
 <CustomContent platform="tidb">
 
@@ -13,14 +21,14 @@ For how to use this table to identify problematic statements and improve query p
 
 </CustomContent>
 
-{{< copyable "sql" >}}
-
 ```sql
-USE information_schema;
-DESC slow_query;
+USE INFORMATION_SCHEMA;
+DESC SLOW_QUERY;
 ```
 
-```
+The output is as follows:
+
+```sqlsql
 +-------------------------------+---------------------+------+------+---------+-------+
 | Field                         | Type                | Null | Key  | Default | Extra |
 +-------------------------------+---------------------+------+------+---------+-------+
@@ -84,6 +92,7 @@ DESC slow_query;
 | Backoff_total                 | double              | YES  |      | NULL    |       |
 | Write_sql_response_total      | double              | YES  |      | NULL    |       |
 | Result_rows                   | bigint(22)          | YES  |      | NULL    |       |
+| Warnings                      | longtext            | YES  |      | NULL    |       |
 | Backoff_Detail                | varchar(4096)       | YES  |      | NULL    |       |
 | Prepared                      | tinyint(1)          | YES  |      | NULL    |       |
 | Succ                          | tinyint(1)          | YES  |      | NULL    |       |
@@ -98,7 +107,7 @@ DESC slow_query;
 | Prev_stmt                     | longtext            | YES  |      | NULL    |       |
 | Query                         | longtext            | YES  |      | NULL    |       |
 +-------------------------------+---------------------+------+------+---------+-------+
-73 rows in set (0.000 sec)
+74 rows in set (0.001 sec)
 ```
 
 ## CLUSTER_SLOW_QUERY table
@@ -111,11 +120,11 @@ For how to use this table to identify problematic statements and improve query p
 
 </CustomContent>
 
-{{< copyable "sql" >}}
-
 ```sql
-desc cluster_slow_query;
+DESC CLUSTER_SLOW_QUERY;
 ```
+
+The output is as follows:
 
 ```sql
 +-------------------------------+---------------------+------+------+---------+-------+
@@ -182,6 +191,7 @@ desc cluster_slow_query;
 | Backoff_total                 | double              | YES  |      | NULL    |       |
 | Write_sql_response_total      | double              | YES  |      | NULL    |       |
 | Result_rows                   | bigint(22)          | YES  |      | NULL    |       |
+| Warnings                      | longtext            | YES  |      | NULL    |       |
 | Backoff_Detail                | varchar(4096)       | YES  |      | NULL    |       |
 | Prepared                      | tinyint(1)          | YES  |      | NULL    |       |
 | Succ                          | tinyint(1)          | YES  |      | NULL    |       |
@@ -196,35 +206,33 @@ desc cluster_slow_query;
 | Prev_stmt                     | longtext            | YES  |      | NULL    |       |
 | Query                         | longtext            | YES  |      | NULL    |       |
 +-------------------------------+---------------------+------+------+---------+-------+
-74 rows in set (0.000 sec)
+75 rows in set (0.001 sec)
 ```
 
 When the cluster system table is queried, TiDB does not obtain data from all nodes, but pushes down the related calculation to other nodes. The execution plan is as follows:
 
-{{< copyable "sql" >}}
+```sql
+DESC SELECT COUNT(*) FROM CLUSTER_SLOW_QUERY WHERE user = 'u1';
+```
+
+The output is as follows:
 
 ```sql
-desc SELECT count(*) FROM cluster_slow_query WHERE user = 'u1';
++----------------------------+----------+-----------+--------------------------+------------------------------------------------------+
+| id                         | estRows  | task      | access object            | operator info                                        |
++----------------------------+----------+-----------+--------------------------+------------------------------------------------------+
+| StreamAgg_7                | 1.00     | root      |                          | funcs:count(1)->Column#75                            |
+| └─TableReader_13       | 10.00    | root      |                          | data:Selection_12                                    |
+|   └─Selection_12       | 10.00    | cop[tidb] |                          | eq(INFORMATION_SCHEMA.cluster_slow_query.user, "u1") |
+|     └─TableFullScan_11 | 10000.00 | cop[tidb] | table:CLUSTER_SLOW_QUERY | keep order:false, stats:pseudo                       |
++----------------------------+----------+-----------+--------------------------+------------------------------------------------------+
+4 rows in set (0.00 sec)
 ```
 
-```
-+--------------------------+----------+-----------+--------------------------+------------------------------------------------------+
-| id                       | estRows  | task      | access object            | operator info                                        |
-+--------------------------+----------+-----------+--------------------------+------------------------------------------------------+
-| StreamAgg_20             | 1.00     | root      |                          | funcs:count(Column#53)->Column#51                    |
-| └─TableReader_21         | 1.00     | root      |                          | data:StreamAgg_9                                     |
-|   └─StreamAgg_9          | 1.00     | cop[tidb] |                          | funcs:count(1)->Column#53                            |
-|     └─Selection_19       | 10.00    | cop[tidb] |                          | eq(information_schema.cluster_slow_query.user, "u1") |
-|       └─TableFullScan_18 | 10000.00 | cop[tidb] | table:CLUSTER_SLOW_QUERY | keep order:false, stats:pseudo                       |
-+--------------------------+----------+-----------+--------------------------+------------------------------------------------------+
-```
-
-In the above execution plan, the `user = u1` condition is pushed down to other (`cop`) TiDB nodes, and the aggregate operator is also pushed down (the `StreamAgg` operator in the graph).
+In the preceding execution plan, the `user = u1` condition is pushed down to other (`cop`) TiDB nodes, and the aggregate operator is also pushed down (the `StreamAgg` operator in the graph).
 
 Currently, because statistics of the system tables are not collected, sometimes some aggregation operators cannot be pushed down, which results in slow execution. In this case, you can manually specify the SQL HINT to push down the aggregation operators. For example:
 
-{{< copyable "sql" >}}
-
 ```sql
-SELECT /*+ AGG_TO_COP() */ count(*) FROM cluster_slow_query GROUP BY user;
+SELECT /*+ AGG_TO_COP() */ COUNT(*) FROM CLUSTER_SLOW_QUERY GROUP BY user;
 ```

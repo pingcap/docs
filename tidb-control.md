@@ -18,11 +18,11 @@ You can get TiDB Control by installing it using TiUP or by compiling it from sou
 
 ### Install TiDB Control using TiUP
 
-After installing TiUP, you can use `tiup ctl tidb` command to get and execute TiDB Control.
+After installing TiUP, you can use `tiup ctl:v<CLUSTER_VERSION> tidb` command to get and execute TiDB Control.
 
 ### Compile from source code
 
-- Compilation environment requirement: [Go](https://golang.org/) Version 1.13 or later
+- Compilation environment requirement: [Go](https://golang.org/) Version 1.19 or later
 - Compilation procedures: Go to the root directory of the [TiDB Control project](https://github.com/pingcap/tidb-ctl), use the `make` command to compile, and generate `tidb-ctl`.
 - Compilation documentation: you can find the help files in the `doc` directory; if the help files are lost or you want to update them, use the `make doc` command to generate the help files.
 

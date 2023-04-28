@@ -6,10 +6,6 @@ aliases: ['/docs/dev/generated-columns/','/docs/dev/reference/sql/generated-colu
 
 # Generated Columns
 
-> **Warning:**
->
-> This is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
-
 This document introduces the concept and usage of generated columns.
 
 ## Basic concepts
@@ -24,7 +20,7 @@ You can create an index on a generated column whether it is virtual or stored.
 
 One of the main usage of generated columns is to extract data from the JSON data type and indexing the data.
 
-In both MySQL 5.7 and TiDB, columns of type JSON can not be indexed directly. That is, the following table schema is **not supported**:
+In both MySQL 5.7 and TiDB, columns of type JSON cannot be indexed directly. That is, the following table schema is **not supported**:
 
 {{< copyable "sql" >}}
 

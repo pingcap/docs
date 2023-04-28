@@ -39,8 +39,6 @@ Because you use multiple threads to simulate the situation that multiple users i
 
 To adapt TiDB transactions, write a toolkit [util](https://github.com/pingcap-inc/tidb-example-golang/tree/main/util) according to the following code:
 
-{{< copyable "" >}}
-
 ```go
 package util
 
@@ -93,6 +91,12 @@ func (tx *TiDBSqlTx) Rollback() error {
 
 </div>
 
+<div label="Python" value="python">
+
+To ensure thread safety, you can use the mysqlclient driver to open multiple connections that are not shared between threads.
+
+</div>
+
 </SimpleTab>
 
 ### Write a pessimistic transaction example
@@ -104,8 +108,6 @@ func (tx *TiDBSqlTx) Rollback() error {
 **Configuration file**
 
 If you use Maven to manage the package, in the `<dependencies>` node in `pom.xml`, add the following dependencies to import `HikariCP`, and set the packaging target, and the main class of the JAR package startup. The following is an example of `pom.xml`.
-
-{{< copyable "" >}}
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -184,8 +186,6 @@ If you use Maven to manage the package, in the `<dependencies>` node in `pom.xml
 **Coding**
 
 Then write the code:
-
-{{< copyable "" >}}
 
 ```java
 package com.pingcap.txn;
@@ -335,8 +335,6 @@ public class TxnExample {
 <div label="Golang" value="golang">
 
 Write a `helper.go` file that contains the required database operations:
-
-{{< copyable "" >}}
 
 ```go
 package main
@@ -586,8 +584,6 @@ func createUser(txn *util.TiDBSqlTx, id int, nickname string, balance decimal.De
 
 Then write a `txn.go` with a `main` function to call `helper.go` and handle the incoming command line arguments:
 
-{{< copyable "" >}}
-
 ```go
 package main
 
@@ -656,6 +652,187 @@ The Golang example already includes optimistic transactions.
 
 </div>
 
+<div label="Python" value="python">
+
+```python
+import time
+
+import MySQLdb
+import os
+import datetime
+from threading import Thread
+
+REPEATABLE_ERROR_CODE_SET = {
+    9007,  # Transactions in TiKV encounter write conflicts.
+    8028,  # table schema changes
+    8002,  # "SELECT FOR UPDATE" commit conflict
+    8022   # The transaction commit fails and has been rolled back
+}
+
+
+def create_connection():
+    return MySQLdb.connect(
+        host="127.0.0.1",
+        port=4000,
+        user="root",
+        password="",
+        database="bookshop",
+        autocommit=False
+    )
+
+
+def prepare_data() -> None:
+    connection = create_connection()
+    with connection:
+        with connection.cursor() as cursor:
+            cursor.execute("INSERT INTO `books` (`id`, `title`, `type`, `published_at`, `price`, `stock`) "
+                           "values (%s, %s, %s, %s, %s, %s)",
+                           (1, "Designing Data-Intensive Application", "Science & Technology",
+                            datetime.datetime(2018, 9, 1), 100, 10))
+
+            cursor.executemany("INSERT INTO `users` (`id`, `nickname`, `balance`) VALUES (%s, %s, %s)",
+                               [(1, "Bob", 10000), (2, "ALICE", 10000)])
+            connection.commit()
+
+
+def buy_optimistic(thread_id: int, order_id: int, book_id: int, user_id: int, amount: int,
+                   optimistic_retry_times: int = 5) -> None:
+    connection = create_connection()
+
+    txn_log_header = f"/* txn {thread_id} */"
+    if thread_id != 1:
+        txn_log_header = "\t" + txn_log_header
+
+    with connection:
+        with connection.cursor() as cursor:
+            cursor.execute("BEGIN OPTIMISTIC")
+            print(f'{txn_log_header} BEGIN OPTIMISTIC')
+            time.sleep(1)
+
+            try:
+                # read the price of book
+                select_book_for_update = "SELECT `price`, `stock` FROM books WHERE id = %s FOR UPDATE"
+                cursor.execute(select_book_for_update, (book_id,))
+                book = cursor.fetchone()
+                if book is None:
+                    raise Exception("book_id not exist")
+                price, stock = book
+                print(f'{txn_log_header} {select_book_for_update} successful')
+
+                if stock < amount:
+                    raise Exception("book not enough, rollback")
+
+                # update book
+                update_stock = "update `books` set stock = stock - %s where id = %s and stock - %s >= 0"
+                rows_affected = cursor.execute(update_stock, (amount, book_id, amount))
+                print(f'{txn_log_header} {update_stock} successful')
+
+                if rows_affected == 0:
+                    raise Exception("stock not enough, rollback")
+
+                # insert order
+                insert_order = "insert into `orders` (`id`, `book_id`, `user_id`, `quality`) values (%s, %s, %s, %s)"
+                cursor.execute(insert_order, (order_id, book_id, user_id, amount))
+                print(f'{txn_log_header} {insert_order} successful')
+
+                # update user
+                update_user = "update `users` set `balance` = `balance` - %s where id = %s"
+                cursor.execute(update_user, (amount * price, user_id))
+                print(f'{txn_log_header} {update_user} successful')
+
+            except Exception as err:
+                connection.rollback()
+
+                print(f'something went wrong: {err}')
+            else:
+                # important here! you need deal the Exception from the TiDB
+                try:
+                    connection.commit()
+                except MySQLdb.MySQLError as db_err:
+                    code, desc = db_err.args
+                    if code in REPEATABLE_ERROR_CODE_SET and optimistic_retry_times > 0:
+                        print(f'retry, rest {optimistic_retry_times - 1} times, for {code} {desc}')
+                        buy_optimistic(thread_id, order_id, book_id, user_id, amount, optimistic_retry_times - 1)
+
+
+def buy_pessimistic(thread_id: int, order_id: int, book_id: int, user_id: int, amount: int) -> None:
+    connection = create_connection()
+
+    txn_log_header = f"/* txn {thread_id} */"
+    if thread_id != 1:
+        txn_log_header = "\t" + txn_log_header
+
+    with connection:
+        with connection.cursor() as cursor:
+            cursor.execute("BEGIN PESSIMISTIC")
+            print(f'{txn_log_header} BEGIN PESSIMISTIC')
+            time.sleep(1)
+
+            try:
+                # read the price of book
+                select_book_for_update = "SELECT `price` FROM books WHERE id = %s FOR UPDATE"
+                cursor.execute(select_book_for_update, (book_id,))
+                book = cursor.fetchone()
+                if book is None:
+                    raise Exception("book_id not exist")
+                price = book[0]
+                print(f'{txn_log_header} {select_book_for_update} successful')
+
+                # update book
+                update_stock = "update `books` set stock = stock - %s where id = %s and stock - %s >= 0"
+                rows_affected = cursor.execute(update_stock, (amount, book_id, amount))
+                print(f'{txn_log_header} {update_stock} successful')
+
+                if rows_affected == 0:
+                    raise Exception("stock not enough, rollback")
+
+                # insert order
+                insert_order = "insert into `orders` (`id`, `book_id`, `user_id`, `quality`) values (%s, %s, %s, %s)"
+                cursor.execute(insert_order, (order_id, book_id, user_id, amount))
+                print(f'{txn_log_header} {insert_order} successful')
+
+                # update user
+                update_user = "update `users` set `balance` = `balance` - %s where id = %s"
+                cursor.execute(update_user, (amount * price, user_id))
+                print(f'{txn_log_header} {update_user} successful')
+
+            except Exception as err:
+                connection.rollback()
+                print(f'something went wrong: {err}')
+            else:
+                connection.commit()
+
+
+optimistic = os.environ.get('OPTIMISTIC')
+alice = os.environ.get('ALICE')
+bob = os.environ.get('BOB')
+
+if not (optimistic and alice and bob):
+    raise Exception("please use \"OPTIMISTIC=<is_optimistic> ALICE=<alice_num> "
+                    "BOB=<bob_num> python3 txn_example.py\" to start this script")
+
+prepare_data()
+
+if bool(optimistic) is True:
+    buy_func = buy_optimistic
+else:
+    buy_func = buy_pessimistic
+
+bob_thread = Thread(target=buy_func, kwargs={
+    "thread_id": 1, "order_id": 1000, "book_id": 1, "user_id": 1, "amount": int(bob)})
+alice_thread = Thread(target=buy_func, kwargs={
+    "thread_id": 2, "order_id": 1001, "book_id": 1, "user_id": 2, "amount": int(alice)})
+
+bob_thread.start()
+alice_thread.start()
+bob_thread.join(timeout=10)
+alice_thread.join(timeout=10)
+```
+
+The Python example already includes optimistic transactions.
+
+</div>
+
 </SimpleTab>
 
 ### An example that does not involve overselling
@@ -666,8 +843,6 @@ Run the sample program:
 
 <div label="Java" value="java">
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 mvn clean package
 java -jar target/plain-java-txn-0.0.1-jar-with-dependencies.jar ALICE_NUM=4 BOB_NUM=6
@@ -677,8 +852,6 @@ java -jar target/plain-java-txn-0.0.1-jar-with-dependencies.jar ALICE_NUM=4 BOB_
 
 <div label="Golang" value="golang">
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 go build -o bin/txn
 ./bin/txn -a 4 -b 6
@@ -686,11 +859,17 @@ go build -o bin/txn
 
 </div>
 
+<div label="Python" value="python">
+
+```shell
+OPTIMISTIC=False ALICE=4 BOB=6 python3 txn_example.py
+```
+
+</div>
+
 </SimpleTab>
 
 SQL logs:
-
-{{< copyable "sql" >}}
 
 ```sql
 /* txn 1 */ BEGIN PESSIMISTIC
@@ -747,8 +926,6 @@ Run the sample program:
 
 <div label="Java" value="java">
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 mvn clean package
 java -jar target/plain-java-txn-0.0.1-jar-with-dependencies.jar ALICE_NUM=4 BOB_NUM=7
@@ -758,8 +935,6 @@ java -jar target/plain-java-txn-0.0.1-jar-with-dependencies.jar ALICE_NUM=4 BOB_
 
 <div label="Golang" value="golang">
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 go build -o bin/txn
 ./bin/txn -a 4 -b 7
@@ -767,9 +942,15 @@ go build -o bin/txn
 
 </div>
 
-</SimpleTab>
+<div label="Python" value="python">
 
-{{< copyable "sql" >}}
+```shell
+OPTIMISTIC=False ALICE=4 BOB=7 python3 txn_example.py
+```
+
+</div>
+
+</SimpleTab>
 
 ```sql
 /* txn 1 */ BEGIN PESSIMISTIC
@@ -821,13 +1002,11 @@ The following code uses two threads to simulate the process that two users buy t
 
 ### Write an optimistic transaction example
 
-<SimpleTab  groupId="language">
+<SimpleTab groupId="language">
 
 <div label="Java" value="java">
 
 **Coding**
-
-{{< copyable "" >}}
 
 ```java
 package com.pingcap.txn.optimistic;
@@ -989,15 +1168,11 @@ public class TxnExample {
 
 Change the startup class in `pom.xml`:
 
-{{< copyable "" >}}
-
 ```xml
 <mainClass>com.pingcap.txn.TxnExample</mainClass>
 ```
 
 Change it to the following to point to the optimistic transaction example.
-
-{{< copyable "" >}}
 
 ```xml
 <mainClass>com.pingcap.txn.optimistic.TxnExample</mainClass>
@@ -1011,6 +1186,12 @@ The Golang example in the [Write a pessimistic transaction example](#write-a-pes
 
 </div>
 
+<div label="Python" value="python">
+
+The Python example in the [Write a pessimistic transaction example](#write-a-pessimistic-transaction-example) section already supports optimistic transactions and can be used directly without changes.
+
+</div>
+
 </SimpleTab>
 
 ### An example that does not involve overselling
@@ -1021,8 +1202,6 @@ Run the sample program:
 
 <div label="Java" value="java">
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 mvn clean package
 java -jar target/plain-java-txn-0.0.1-jar-with-dependencies.jar ALICE_NUM=4 BOB_NUM=6
@@ -1032,8 +1211,6 @@ java -jar target/plain-java-txn-0.0.1-jar-with-dependencies.jar ALICE_NUM=4 BOB_
 
 <div label="Golang" value="golang">
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 go build -o bin/txn
 ./bin/txn -a 4 -b 6 -o true
@@ -1041,11 +1218,17 @@ go build -o bin/txn
 
 </div>
 
+<div label="Python" value="python">
+
+```shell
+OPTIMISTIC=True ALICE=4 BOB=6 python3 txn_example.py
+```
+
+</div>
+
 </SimpleTab>
 
 SQL statement execution process:
-
-{{< copyable "sql" >}}
 
 ```sql
     /* txn 2 */ BEGIN OPTIMISTIC
@@ -1110,8 +1293,6 @@ Run the sample program:
 
 <div label="Java" value="java">
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 mvn clean package
 java -jar target/plain-java-txn-0.0.1-jar-with-dependencies.jar ALICE_NUM=4 BOB_NUM=7
@@ -1121,8 +1302,6 @@ java -jar target/plain-java-txn-0.0.1-jar-with-dependencies.jar ALICE_NUM=4 BOB_
 
 <div label="Golang" value="golang">
 
-{{< copyable "shell-regular" >}}
-
 ```shell
 go build -o bin/txn
 ./bin/txn -a 4 -b 7 -o true
@@ -1130,9 +1309,15 @@ go build -o bin/txn
 
 </div>
 
-</SimpleTab>
+<div label="Python" value="python">
 
-{{< copyable "sql" >}}
+```shell
+OPTIMISTIC=True ALICE=4 BOB=7 python3 txn_example.py
+```
+
+</div>
+
+</SimpleTab>
 
 ```sql
 /* txn 1 */ BEGIN OPTIMISTIC

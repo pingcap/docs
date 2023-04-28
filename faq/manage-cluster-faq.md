@@ -57,15 +57,9 @@ By default, TiDB/PD/TiKV outputs standard error in the logs. If a log file is sp
 
 TiDB currently supports two timeouts, [`wait_timeout`](/system-variables.md#wait_timeout) and [`interactive_timeout`](/system-variables.md#interactive_timeout).
 
-### What is the TiDB version management strategy for production environment? How to avoid frequent upgrade?
+### What is the TiDB version management strategy?
 
-Currently, TiDB has a standard management of various versions. Each release contains a detailed change log and [release notes](/releases/release-notes.md). Whether it is necessary to upgrade in the production environment depends on the application system. It is recommended to learn the details about the functional differences between the previous and later versions before upgrading.
-
-Take `Release Version: v1.0.3-1-ga80e796` as an example of version number description:
-
-- `v1.0.3` indicates the standard GA version.
-- `-1` indicates the current version has one commit.
-- `ga80e796` indicates the version `git-hash`.
+For details about TiDB version management, see [TiDB versioning](/releases/versioning.md).
 
 ### How about the operating cost of deploying and maintaining a TiDB cluster?
 
@@ -77,9 +71,9 @@ TiDB provides a few features and [tools](/ecosystem-tool-user-guide.md), with wh
 
 ### What's the difference between various TiDB master versions?
 
-The TiDB community is highly active. The engineers have been keeping optimizing and fixing bugs. Therefore, the TiDB version is updated quite fast. If you want to keep informed of the latest version, see [TiDB Release Timeline](/releases/release-timeline.md).
+The TiDB community is highly active. The engineers have been keeping optimizing features and fixing bugs. Therefore, the TiDB version is updated quite fast. If you want to keep informed of the latest version, see [TiDB Release Timeline](/releases/release-timeline.md).
 
-It is recommeneded to [deploy TiDB using TiUP](/production-deployment-using-tiup.md). TiDB has a unified management of the version number. You can view the version number using the following two methods:
+It is recommeneded to deploy TiDB [using TiUP](/production-deployment-using-tiup.md) or [using TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable). TiDB has a unified management of the version number. You can view the version number using one of the following methods:
 
 - `select tidb_version()`
 - `tidb-server -V`
@@ -93,7 +87,7 @@ Currently no.
 You can scale out your TiDB cluster without interrupting the online services.
 
 - If your cluster is deployed using [TiUP](/production-deployment-using-tiup.md), refer to [Scale a TiDB Cluster Using TiUP](/scale-tidb-using-tiup.md).
-- If your cluster is deployed using [TiDB Operator](/tidb-operator-overview.md) in Kubernetes, refer to [Manually Scale TiDB in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/scale-a-tidb-cluster).
+- If your cluster is deployed using [TiDB Operator](/tidb-operator-overview.md) on Kubernetes, refer to [Manually Scale TiDB on Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/scale-a-tidb-cluster).
 
 ### How to scale TiDB horizontally?
 
@@ -232,7 +226,7 @@ The TiClient Region Error indicator describes the error types and metrics that a
 
 ### What's the maximum number of concurrent connections that TiDB supports?
 
-By default, there is no limit on the maximum number of connections per TiDB server. If too large concurrency leads to an increase of response time, it is recommended to increase the capacity by adding TiDB nodes.
+By default, there is no limit on the maximum number of connections per TiDB server. If needed, you can limit the maximum number of connections by setting `instance.max_connections` in the `config.toml` file, or changing the value of the system variable [`max_connections`](/system-variables.md#max_connections). If too large concurrency leads to an increase of response time, it is recommended to increase the capacity by adding TiDB nodes.
 
 ### How to view the creation time of a table?
 
@@ -340,7 +334,7 @@ TiKV implements the Column Family (CF) feature of RocksDB. By default, the KV da
 ### Why is the TiKV channel full?
 
 - The Raftstore thread is too slow or blocked by I/O. You can view the CPU usage status of Raftstore.
-- TiKV is too busy (CPU, disk I/O, etc.) and cannot manage to handle it.
+- TiKV is too busy (such as CPU and disk I/O) and cannot manage to handle it.
 
 ### Why does TiKV frequently switch Region leader?
 
@@ -450,7 +444,7 @@ This section describes common problems you may encounter during backup and resto
 
 Currently, for the backup of a large volume of data (more than 1 TB), the preferred method is using [Backup & Restore (BR)](/br/backup-and-restore-overview.md). Otherwise, the recommended tool is [Dumpling](/dumpling-overview.md). Although the official MySQL tool `mysqldump` is also supported in TiDB to back up and restore data, its performance is no better than BR and it needs much more time to back up and restore large volumes of data.
 
-For more FAQs about BR, see [BR FAQs](/br/backup-and-restore-faq.md).
+For more FAQs about BR, see [BR FAQs](/faq/backup-and-restore-faq.md).
 
 ### How is the speed of backup and restore?
 

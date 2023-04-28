@@ -27,14 +27,14 @@ sync-point-retention = "1h"
 
 ## Step 1: obtain `ts-map`
 
-To obtain `ts-map`, execute the following SQL statement in the downstream TiDB cluster:
+You can execute the following SQL statement in the downstream TiDB cluster to obtain the upstream TSO (`primary_ts`) and downstream TSO (`secondary_ts`):
 
 ```sql
 select * from tidb_cdc.syncpoint_v1;
 +------------------+----------------+--------------------+--------------------+---------------------+
 | ticdc_cluster_id | changefeed     | primary_ts         | secondary_ts       | created_at          |
 +------------------+----------------+--------------------+--------------------+---------------------+
-| default          | default_test-2 | 435953225454059520 | 435953235516456963 | 2022-09-13 08:40:15 |
+| default          | test-2 | 435953225454059520 | 435953235516456963 | 2022-09-13 08:40:15 |
 +------------------+----------------+--------------------+--------------------+---------------------+
 ```
 
@@ -68,9 +68,9 @@ Here is a configuration example of the `Datasource config` section:
     snapshot = "435953235516456963"
 ```
 
-> **Note:**
->
-> - Before TiCDC creates a changefeed, make sure that the value of the TiCDC configuration item `enable-sync-point` is set to `true`. Only in this way, Syncpoint is enabled and the `ts-map` is saved in the downstream. For the complete configuration, see [TiCDC task configuration file](/ticdc/manage-ticdc.md#task-configuration-file).
-> - Modify the Garbage Collection (GC) time of TiKV to ensure that the historical data corresponding to snapshot is not collected by GC during the data check. It is recommended that you modify the GC time to 1 hour and recover the setting after the check.
-> - In some versions of TiDB Binlog, `master-ts` and `slave-ts` are stored in `ts-map`. `master-ts` is equivalent to `primary-ts` and `slave-ts` is equivalent to `secondary-ts`.
-> - The above example only shows the section of `Datasource config`. For complete configuration, refer to [sync-diff-inspector User Guide](/sync-diff-inspector/sync-diff-inspector-overview.md).
+## Notes
+
+- Before TiCDC creates a changefeed, make sure that the value of the TiCDC configuration item `enable-sync-point` is set to `true`. Only in this way, Syncpoint is enabled and the `ts-map` is saved in the downstream. For the complete configuration, see [TiCDC task configuration file](/ticdc/ticdc-changefeed-config.md).
+- Modify the Garbage Collection (GC) time of TiKV to ensure that the historical data corresponding to snapshot is not collected by GC during the data check. It is recommended that you modify the GC time to 1 hour and recover the setting after the check.
+- The above example only shows the section of `Datasource config`. For complete configuration, refer to [sync-diff-inspector User Guide](/sync-diff-inspector/sync-diff-inspector-overview.md).
+- Since v6.4.0, only the changefeed with the `SYSTEM_VARIABLES_ADMIN` or `SUPER` privilege can use the TiCDC Syncpoint feature.

@@ -17,7 +17,7 @@ Assume that the TiDB cluster topology is as follows:
 | Name  | Host IP | Services |
 | :-- | :-- | :-------------- |
 | Node1 | 192.168.199.113| PD1, TiDB, node_export, Prometheus, Grafana |
-| Node2 | 192.168.199.114| PD2, node_export |
+| Node2 | 192.168.199.114| PD2, node_export  |
 | Node3 | 192.168.199.115| PD3, node_export |
 | Node4 | 192.168.199.116| TiKV1, node_export |
 | Node5 | 192.168.199.117| TiKV2, node_export |
@@ -31,7 +31,7 @@ Assume that the TiDB cluster topology is as follows:
 # Downloads the package.
 wget https://download.pingcap.org/prometheus-2.27.1.linux-amd64.tar.gz
 wget https://download.pingcap.org/node_exporter-v1.3.1-linux-amd64.tar.gz
-wget https://download.pingcap.org/grafana-6.1.6.linux-amd64.tar.gz
+wget https://download.pingcap.org/grafana-7.5.11.linux-amd64.tar.gz
 ```
 
 {{< copyable "shell-regular" >}}
@@ -40,7 +40,7 @@ wget https://download.pingcap.org/grafana-6.1.6.linux-amd64.tar.gz
 # Extracts the package.
 tar -xzf prometheus-2.27.1.linux-amd64.tar.gz
 tar -xzf node_exporter-v1.3.1-linux-amd64.tar.gz
-tar -xzf grafana-6.1.6.linux-amd64.tar.gz
+tar -xzf grafana-7.5.11.linux-amd64.tar.gz
 ```
 
 ### Step 2: Start `node_exporter` on Node1, Node2, Node3, and Node4
@@ -135,7 +135,7 @@ Edit the Grafana configuration file:
 {{< copyable "shell-regular" >}}
 
 ```ini
-cd grafana-6.1.6 &&
+cd grafana-7.5.11 &&
 vi conf/grafana.ini
 
 ...

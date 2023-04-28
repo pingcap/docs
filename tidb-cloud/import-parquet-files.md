@@ -1,5 +1,5 @@
 ---
-title:  Import Apache Parquet Files from Amazon S3 or GCS into TiDB Cloud
+title: Import Apache Parquet Files from Amazon S3 or GCS into TiDB Cloud
 summary: Learn how to import Apache Parquet files from Amazon S3 or GCS into TiDB Cloud.
 ---
 
@@ -9,7 +9,8 @@ You can import both uncompressed and Snappy compressed [Apache Parquet](https://
 
 > **Note:**
 >
-> TiDB Cloud only supports importing Parquet files into empty tables. To import data into an existing table that already contains data, you can use TiDB Cloud to import the data into a temporary empty table by following this document, and then use the `INSERT SELECT` statement to copy the data to the target existing table.
+> - TiDB Cloud only supports importing Parquet files into empty tables. To import data into an existing table that already contains data, you can use TiDB Cloud to import the data into a temporary empty table by following this document, and then use the `INSERT SELECT` statement to copy the data to the target existing table.
+> - If there is a changefeed in a Dedicated Tier cluster, you cannot import data to the cluster (the **Import Data** button will be disabled), because the current import data feature uses the [physical import mode](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode). In this mode, the imported data does not generate change logs, so the changefeed cannot detect the imported data.
 
 ## Step 1. Prepare the Parquet files
 
@@ -34,7 +35,7 @@ You can import both uncompressed and Snappy compressed [Apache Parquet](https://
 
     > **Note:**
     >
-    > If you cannot update the Parquet filenames according to the preceding rules in some cases (for example, the Parquet file links are also used by your other programs), you can keep the filenames unchanged and use the **Custom Pattern** in [Step 4](#step-4-import-parquet-files-to-tidb-cloud) to import your source data to a single target table.
+    > If you cannot update the Parquet filenames according to the preceding rules in some cases (for example, the Parquet file links are also used by your other programs), you can keep the filenames unchanged and use the **File Pattern** in [Step 4](#step-4-import-parquet-files-to-tidb-cloud) to import your source data to a single target table.
 
 ## Step 2. Create the target table schemas
 
@@ -83,71 +84,80 @@ Because Parquet files do not contain schema information, before importing data f
 
 To allow TiDB Cloud to access the Parquet files in the Amazon S3 or GCS bucket, do one of the following:
 
-- If your Parquet files are located in Amazon S3, [configure cross-account access to Amazon S3](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access).
+- If your Parquet files are located in Amazon S3, [configure Amazon S3 access](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access).
 
     Once finished, make a note of the Role ARN value as you will need it in [Step 4](#step-4-import-parquet-files-to-tidb-cloud).
 
-- If your Parquet files are located in GCS, [configure cross-account access to GCS](/tidb-cloud/config-s3-and-gcs-access.md#configure-gcs-access).
+- If your Parquet files are located in GCS, [configure GCS access](/tidb-cloud/config-s3-and-gcs-access.md#configure-gcs-access).
 
 ## Step 4. Import Parquet files to TiDB Cloud
 
 To import the Parquet files to TiDB Cloud, take the following steps:
 
-1. Navigate to the **Active Clusters** page.
-2. Find the area of your target cluster and click **Import Data** in the upper-right corner of the area. The **Data Import Task** page is displayed.
+1. Open the **Import** page for your target cluster.
 
-    > **Tip:**
-    >
-    > Alternatively, you can also click the name of your target cluster on the **Active Clusters** page and click **Import Data** in the upper-right corner.
+    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
 
-3. On the **Data Import Task** page, provide the following information.
+        > **Tip:**
+        >
+        > If you have multiple projects, you can switch to the target project in the left navigation pane of the **Clusters** page.
 
-    - **Data Source Type**: select the type of the data source.
-    - **Bucket URL**: select the bucket URL where your Parquet files are located.
-    - **Data Format**: select **Parquet**.
-    - **Setup Credentials** (This field is visible only for AWS S3): enter the Role ARN value for **Role-ARN**.
-    - **Target Cluster**: fill in the **Username** and **Password** fields.
-    - **DB/Tables Filter**: if you want to filter which tables to be imported, you can specify one or more table filters in this field, separated by `,`.
+    2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
 
-        For example:
+2. On the **Import** page:
+   - For a Dedicated Tier cluster, click **Import Data** in the upper-right corner.
+   - For a Serverless Tier cluster, click the **import data from S3** link above the upload area.
 
-        - `db01.*`: all tables in the `db01` database will be imported.
-        - `db01.table01*,db01.table02*`: all tables starting with `table01` and `table02` in the `db01` database will be imported.
-        - `!db02.*`: except the tables in the `db02` database, all other tables will be imported. `!` is used to exclude tables that do not need to be imported.
-        - `*.*` : all tables will be imported.
+3. Provide the following information for the source Parquet files:
 
-        For more information, see [table filter snytax](/table-filter.md#syntax).
+    - **Data format**: select **Parquet**.
+    - **Bucket URI**: select the bucket URI where your Parquet files are located.
+    - **Role ARN**: (This field is visible only for AWS S3): enter the Role ARN value for **Role ARN**.
 
-    - **Custom Pattern**: enable the **Custom Pattern** feature if you want to import Parquet files whose filenames match a certain pattern to a single target table.
+    If the region of the bucket is different from your cluster, confirm the compliance of cross region. Click **Next**.
+
+    TiDB Cloud starts validating whether it can access your data in the specified bucket URI. After validation, TiDB Cloud tries to scan all the files in the data source using the default file naming pattern, and returns a scan summary result on the left side of the next page. If you get the `AccessDenied` error, see [Troubleshoot Access Denied Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-access-denied-error.md).
+
+4. Modify the file patterns and add the table filter rules if needed.
+
+    - **File Pattern**: modify the file pattern if you want to import Parquet files whose filenames match a certain pattern to a single target table.
 
         > **Note:**
         >
-        > After enabling this feature, one import task can only import data to a single table at a time. If you want to use this feature to import data into different tables, you need to import several times, each time specifying a different target table.
+        > When you use this feature, one import task can only import data to a single table at a time. If you want to use this feature to import data into different tables, you need to import several times, each time specifying a different target table.
 
-        When **Custom Pattern** is enabled, you are required to specify a custom mapping rule between Parquet files and a single target table in the following fields:
+        To modify the file pattern, click **Modify**, specify a custom mapping rule between Parquet files and a single target table in the following fields, and then click **Scan**. After that, the data source files will be re-scanned using the provided custom mapping rule.
 
-        - **Object Name Pattern**: enter a pattern that matches the names of the Parquet files to be imported. If you have one Parquet file only, you can enter the filename here directly.
+        - **Source file name**: enter a pattern that matches the names of the Parquet files to be imported. If you have one Parquet file only, you can enter the filename here directly. Note that the names of the Parquet files must include the suffix `.parquet`.
 
             For example:
 
             - `my-data?.parquet`: all Parquet files starting with `my-data` and one character (such as `my-data1.parquet` and `my-data2.parquet`) will be imported into the same target table.
             - `my-data*.parquet`: all Parquet files starting with `my-data` will be imported into the same target table.
 
-        - **Target Table Name**: enter the name of the target table in TiDB Cloud, which must be in the `${db_name}.${table_name}` format. For example, `mydb.mytable`. Note that this field only accepts one specific table name, so wildcards are not supported.
+        - **Target table name**: enter the name of the target table in TiDB Cloud, which must be in the `${db_name}.${table_name}` format. For example, `mydb.mytable`. Note that this field only accepts one specific table name, so wildcards are not supported.
 
-4. Click **Import**.
+    - **Tables Filter**: if you want to filter which tables to be imported, you can specify table filter rules in this area.
 
-    A warning message about the database resource consumption is displayed.
+        For example:
 
-5. Click **Confirm**.
+        - `db01.*`: all tables in the `db01` database will be imported.
+        - `!db02.*`: except the tables in the `db02` database, all other tables will be imported. `!` is used to exclude tables that do not need to be imported.
+        - `*.*` : all tables will be imported.
 
-    TiDB Cloud starts validating whether it can access your data in the specified bucket URL. After the validation is completed and successful, the import task starts automatically. If you get the `AccessDenied` error, see [Troubleshoot Access Denied Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-access-denied-error.md).
+        For more information, see [table filter syntax](/table-filter.md#syntax).
 
-6. When the import progress shows success, check the number after **Total Files:**.
+5. Click **Next**.
 
-    If the number is zero, it means no data files matched the value you entered in the **Object Name Pattern** field. In this case, check whether there are any typos in the **Object Name Pattern** field and try again.
+6. On the **Preview** page, confirm the data to be imported and then click **Start Import**.
 
-When running an import task, if any unsupported or invalid conversions are detected, TiDB Cloud terminates the import job automatically and reports an importing error.
+7. When the import progress shows **Finished**, check the imported tables.
+
+    If the number is zero, it means no data files matched the value you entered in the **Source file name** field. In this case, check whether there are any typos in the **Source file name** field and try again.
+
+8. After the import task is completed, you can click **Query Data** on the **Import** page to query your imported data. For more information about how to use Chat2Qury, see [Explore Your Data with AI-Powered Chat2Query](/tidb-cloud/explore-data-with-chat2query.md).
+
+When you run an import task, if any unsupported or invalid conversions are detected, TiDB Cloud terminates the import job automatically and reports an importing error.
 
 If you get an importing error, do the following:
 

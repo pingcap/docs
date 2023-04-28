@@ -9,27 +9,45 @@ TiDB is highly compatible with the MySQL protocol. For a full list of client lin
 
 TiDB supports the [MySQL Client/Server Protocol](https://dev.mysql.com/doc/internals/en/client-server-protocol.html), which allows most client drivers and ORM frameworks to connect to TiDB just as they connect to MySQL.
 
-## MySQL Shell
+## MySQL
 
-You can connect to TiDB using MySQL Shell, which can be used as a command-line tool for TiDB. To install MySQL Shell, follow the instructions in the [MySQL Shell documentation](https://dev.mysql.com/doc/mysql-shell/8.0/en/mysql-shell-install.html). After the installation, you can connect to TiDB using the following command:
+You can choose to use MySQL Client or MySQL Shell based on your personal preferences.
 
-{{< copyable "shell-regular" >}}
+<SimpleTab>
+
+<div label="MySQL Client">
+
+You can connect to TiDB using MySQL Client, which can be used as a command-line tool for TiDB. To install MySQL Client, follow the instructions below for YUM based Linux distributions.
+
+```shell
+sudo yum install mysql
+```
+
+After the installation, you can connect to TiDB using the following command:
 
 ```shell
 mysql --host <tidb_server_host> --port 4000 -u root -p --comments
 ```
 
-> **Note:**
->
-> The MySQL Shell earlier than version 5.7.7 clears [Optimizer Hints](/optimizer-hints.md#optimizer-hints) by default. If you need to use the Hint syntax in an earlier MySQL Shell version, add the `--comments` option when starting the client.
+</div>
+
+<div label="MySQL Shell">
+
+You can connect to TiDB using MySQL Shell, which can be used as a command-line tool for TiDB. To install MySQL Shell, follow the instructions in the [MySQL Shell documentation](https://dev.mysql.com/doc/mysql-shell/8.0/en/mysql-shell-install.html). After the installation, you can connect to TiDB using the following command:
+
+```shell
+mysqlsh --sql mysql://root@<tidb_server_host>:4000
+```
+
+</div>
+
+</SimpleTab>
 
 ## JDBC
 
 You can connect to TiDB using the [JDBC](https://dev.mysql.com/doc/connector-j/8.0/en/) driver. To do that, you need to create a `MysqlDataSource` or `MysqlConnectionPoolDataSource` object (both objects support the `DataSource` interface), and then set the connection string using the `setURL` function.
 
 For example:
-
-{{< copyable "" >}}
 
 ```java
 MysqlDataSource mysqlDataSource = new MysqlDataSource();
@@ -66,8 +84,6 @@ You can connect to TiDB using the [Hibernate ORM](https://hibernate.org/orm/). T
 
 For example, if you use a `hibernate.cfg.xml` configuration file, set `hibernate.connection.url` as follows:
 
-{{< copyable "" >}}
-
 ```xml
 <?xml version='1.0' encoding='utf-8'?>
 <!DOCTYPE hibernate-configuration PUBLIC
@@ -83,8 +99,6 @@ For example, if you use a `hibernate.cfg.xml` configuration file, set `hibernate
 ```
 
 After the configuration is done, you can use the following command to read the configuration file and get the `SessionFactory` object:
-
-{{< copyable "" >}}
 
 ```java
 SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();

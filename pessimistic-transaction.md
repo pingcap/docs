@@ -178,7 +178,7 @@ This feature is enabled by default. To disable it, modify the TiKV configuration
 pipelined = false
 ```
 
-If the TiKV cluster is v4.0.9 or later, you can also dynamically disable this feature by [modifying TiKV configuration online](/dynamic-config.md#modify-tikv-configuration-online):
+If the TiKV cluster is v4.0.9 or later, you can also dynamically disable this feature by [modifying TiKV configuration dynamically](/dynamic-config.md#modify-tikv-configuration-dynamically):
 
 {{< copyable "sql" >}}
 
@@ -190,7 +190,7 @@ set config tikv pessimistic-txn.pipelined='false';
 
 <CustomContent platform="tidb-cloud">
 
-If the application logic relies on the locking or lock waiting mechanisms, or if you want to guarantee as much as possible the success rate of transaction commits even in the case of TiKV cluster anomalies, you can contact <a href="mailto:tidbcloud-support@pingcap.com">PingCAP Support</a> to disable the pipelined locking feature.
+If the application logic relies on the locking or lock waiting mechanisms, or if you want to guarantee as much as possible the success rate of transaction commits even in the case of TiKV cluster anomalies, you can [contact TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) to disable the pipelined locking feature.
 
 </CustomContent>
 
@@ -211,7 +211,7 @@ This feature is enabled by default. To disable it, modify the TiKV configuration
 in-memory = false
 ```
 
-To dynamically disable this feature, modify the TiKV configuration online:
+To dynamically disable this feature, modify the TiKV configuration dynamically:
 
 {{< copyable "sql" >}}
 

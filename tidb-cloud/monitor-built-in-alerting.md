@@ -17,10 +17,13 @@ You cannot customize the TiDB Cloud built-in alerting. If you would like to conf
 
 If you are a member of a project and you want to get alert notification emails of clusters in your project, take the following steps:
 
-1. Log into TiDB Cloud console.
-2. On the TiDB Cloud console, choose a target project on which you want to receive alert notification emails, and then click the **Project Settings** tab.
-3. In the left pane, click **Alerts**.
-4. Enter your email address, and then click **Subscribe**.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
+2. In the left navigation pane of the [**Clusters**](https://tidbcloud.com/console/clusters) page, do one of the following:
+
+    - If you have multiple projects, switch to the target project, and then click **Admin** > **Alerts**.
+    - If you only have one project, click **Admin** > **Alerts**.
+
+3. Enter your email address, and then click **Subscribe**.
 
 To minimize the number of alert emails sent to subscribers, TiDB Cloud aggregates alerts into a single email that is sent every 3 hours.
 
@@ -28,10 +31,13 @@ To minimize the number of alert emails sent to subscribers, TiDB Cloud aggregate
 
 If you no longer want to receive alert notification emails of clusters in your project, take the following steps:
 
-1. Log into TiDB Cloud console.
-2. On the TiDB Cloud console, choose the project on which you no longer want to receive alert notification emails.
-3. In the left pane, click **Alerts**.
-4. In the right pane, locate your email address and click **Delete**.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
+2. In the left navigation pane of the [**Clusters**](https://tidbcloud.com/console/clusters) page, do one of the following:
+
+    - If you have multiple projects, switch to the target project, and then click **Admin** > **Alerts**.
+    - If you only have one project, click **Admin** > **Alerts**.
+
+3. In the right pane, locate your email address and click **Delete**.
 
 ## TiDB Cloud built-in alert conditions
 
@@ -50,11 +56,11 @@ The following table provides the TiDB Cloud built-in alert conditions and the co
 | Total TiDB node CPU utilization exceeded 80% for 10 minutes | Total TiDB node CPU utilization of cluster ABC in project XYZ has exceeded 80% for 10 minutes. If you expect this to continue, it is recommended that you add additional TiDB nodes. To monitor node CPU utilization, see [Monitoring metrics](/tidb-cloud/monitor-tidb-cluster.md#monitoring-metrics). |
 | Total TiKV node CPU utilization exceeded 80% for 10 minutes | Total TiKV node CPU utilization of cluster ABC in project XYZ has exceeded 80% for 10 minutes. If you expect this to continue, it is recommended that you add additional TiKV nodes. To monitor node CPU utilization, see [Monitoring metrics](/tidb-cloud/monitor-tidb-cluster.md#monitoring-metrics). |
 | Total TiFlash node CPU utilization exceeded 80% for 10 minutes | Total TiFlash node CPU utilization of cluster ABC in project XYZ has exceeded 80% for 10 minutes. If you expect this to continue, it is recommended that you add additional TiFlash nodes. To monitor node CPU utilization, see [Monitoring metrics](/tidb-cloud/monitor-tidb-cluster.md#monitoring-metrics). |
-|`*`  TiKV storage utilization exceeds 80% | Total TiKV storage utilization of cluster ABC in project XYZ exceeds 80%. It is recommended that you add additional TiKV nodes to increase your storage capacity. To monitor storage utilization, see [Monitoring metrics](/tidb-cloud/monitor-tidb-cluster.md#monitoring-metrics). |
-|`*`  TiFlash storage utilization exceeds 80% | Total TiFlash storage utilization of cluster ABC in project XYZ exceeds 80%. It is recommended that you add additional TiFlash nodes to increase your storage capacity. To monitor storage utilization, see [Monitoring metrics](/tidb-cloud/monitor-tidb-cluster.md#monitoring-metrics). |
-| Cluster nodes are offline | Some or all nodes in cluster ABC in project XYZ  are offline. The TiDB Cloud Operations team is aware and working to resolve the issue. Refer to [TiDB Cloud Status](https://status.tidbcloud.com/) for the latest information. To monitor node status, see [Cluster status and node status](/tidb-cloud/monitor-tidb-cluster.md#cluster-status-and-node-status).  |
+|`*` TiKV storage utilization exceeds 80% | Total TiKV storage utilization of cluster ABC in project XYZ exceeds 80%. It is recommended that you add additional TiKV nodes to increase your storage capacity. To monitor storage utilization, see [Monitoring metrics](/tidb-cloud/monitor-tidb-cluster.md#monitoring-metrics). |
+|`*` TiFlash storage utilization exceeds 80% | Total TiFlash storage utilization of cluster ABC in project XYZ exceeds 80%. It is recommended that you add additional TiFlash nodes to increase your storage capacity. To monitor storage utilization, see [Monitoring metrics](/tidb-cloud/monitor-tidb-cluster.md#monitoring-metrics). |
+| Cluster nodes are offline | Some or all nodes in cluster ABC in project XYZ are offline. The TiDB Cloud Operations team is aware and working to resolve the issue. Refer to [TiDB Cloud Status](https://status.tidbcloud.com/) for the latest information. To monitor node status, see [Cluster status and node status](/tidb-cloud/monitor-tidb-cluster.md#cluster-status-and-node-status).  |
 
 > **Note:**
 >
-> - [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier) only support a subset of alert conditions that are marked with `*` in the **Condition** column.
+> - [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) only support a subset of alert conditions that are marked with `*` in the **Condition** column.
 > - "cluster ABC" and "project XYZ" in the **Recommended Action** column are example names for reference.

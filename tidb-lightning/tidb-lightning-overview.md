@@ -1,12 +1,12 @@
 ---
 title: TiDB Lightning Overview
 summary: Learn about Lightning and the whole architecture.
-aliases: ['/docs/dev/tidb-lightning/tidb-lightning-overview/','/docs/dev/reference/tools/tidb-lightning/overview/','/docs/dev/tidb-lightning/tidb-lightning-tidb-backend/','/docs/dev/reference/tools/tidb-lightning/tidb-backend/','/tidb/dev/tidb-lightning-tidb-backend','/docs/dev/loader-overview/','/docs/dev/reference/tools/loader/','/docs/dev/load-misuse-handling/','/docs/dev/reference/tools/error-case-handling/load-misuse-handling/','/tidb/dev/load-misuse-handling','/tidb/dev/loader-overview/','/dev/tidb/tidb-lightning-backends']
+aliases: ['/docs/dev/tidb-lightning/tidb-lightning-overview/','/docs/dev/reference/tools/tidb-lightning/overview/','/docs/dev/tidb-lightning/tidb-lightning-tidb-backend/','/docs/dev/reference/tools/tidb-lightning/tidb-backend/','/tidb/dev/tidb-lightning-tidb-backend','/docs/dev/loader-overview/','/docs/dev/reference/tools/loader/','/docs/dev/load-misuse-handling/','/docs/dev/reference/tools/error-case-handling/load-misuse-handling/','/tidb/dev/load-misuse-handling','/tidb/dev/loader-overview/','/tidb/dev/tidb-lightning-backends']
 ---
 
 # TiDB Lightning Overview
 
-[TiDB Lightning](https://github.com/pingcap/tidb-lightning) is a tool used for importing data at TB scale to TiDB clusters. It is often used for initial data import to TiDB clusters.
+[TiDB Lightning](https://github.com/pingcap/tidb/tree/master/br/pkg/lightning) is a tool used for importing data at TB scale to TiDB clusters. It is often used for initial data import to TiDB clusters.
 
 TiDB Lightning supports the following file formats:
 
@@ -17,8 +17,8 @@ TiDB Lightning supports the following file formats:
 TiDB Lightning can read data from the following sources:
 
 - Local
-- [Amazon S3](/br/backup-and-restore-storages.md#s3-url-parameters)
-- [Google Cloud Storage](/br/backup-and-restore-storages.md#gcs-url-parameters)
+- [Amazon S3](/br/backup-and-restore-storages.md#uri-format)
+- [Google Cloud Storage](/br/backup-and-restore-storages.md#uri-format)
 
 ## TiDB Lightning architecture
 
@@ -26,12 +26,13 @@ TiDB Lightning can read data from the following sources:
 
 TiDB Lightning supports two import modes, configured by `backend`. The import mode determines the way data is imported into TiDB.
 
-- [Physical Import Mode](/tidb-lightning/tidb-lightning-physical-import-mode.md): TiDB Lightning first encodes data into key-value pairs and stores them in a local temporary directory, then uploads these key-value pairs to each TiKV node, and finally calls the TiKV Ingest interface to insert data into TiKV's RocksDB. If you need to perform initial import, consider the physical import mode, which has higher import speed.
+- [Physical Import Mode](/tidb-lightning/tidb-lightning-physical-import-mode.md): TiDB Lightning first encodes data into key-value pairs and stores them in a local temporary directory, then uploads these key-value pairs to each TiKV node, and finally calls the TiKV Ingest interface to insert data into TiKV's RocksDB. If you need to perform initial import, consider the physical import mode, which has higher import speed. The backend for the physical import mode is `local`.
 
-- [Logical Import Mode](/tidb-lightning/tidb-lightning-logical-import-mode.md): TiDB Lightning first encodes the data into SQL statements and then runs these SQL statements directly for data import. If the cluster to be imported is in production, or if the target table to be imported already contains data, use the logical import mode.
+- [Logical Import Mode](/tidb-lightning/tidb-lightning-logical-import-mode.md): TiDB Lightning first encodes the data into SQL statements and then runs these SQL statements directly for data import. If the cluster to be imported is in production, or if the target table to be imported already contains data, use the logical import mode. The backend for the logical import mode is `tidb`.
 
 | Import mode | Physical Import Mode | Logical Import Mode |
 |:---|:---|:---|
+| Backend | `local` | `tidb` |
 | Speed | Fast (100~500 GiB/hour) | Low (10~50 GiB/hour)|
 | Resource consumption| High | Low |
 | Network bandwidth consumption | High | Low |

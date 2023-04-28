@@ -5,7 +5,15 @@ hide_sidebar: true
 hide_commit: true
 ---
 
-<LearningPathContainer platform="tidb" title="TiDB" subTitle="TiDB is an open-source NewSQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. Find the guide, samples, and references you need to use TiDB.">
+<LearningPathContainer platform="tidb" title="TiDB" subTitle="TiDB is an open-source distributed SQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. Find the guide, samples, and references you need to use TiDB.">
+
+<!-- Localization note for TiDB:
+
+- English: use distributed SQL, and start to emphasize HTAP
+- Chinese: can keep "NewSQL" and emphasize one-stop real-time HTAP ("一栈式实时 HTAP")
+- Japanese: use NewSQL because it is well-recognized
+
+-->
 
 <LearningPath label="Learn" icon="cloud1">
 
@@ -41,9 +49,9 @@ hide_commit: true
 
 [Software and Hardware Requirements](https://docs.pingcap.com/tidb/dev/hardware-and-software-requirements)
 
-[Deploy a TiDB Cluster Using TiUP (Recommended)](https://docs.pingcap.com/tidb/dev/production-deployment-using-tiup)
+[Deploy a TiDB Cluster Using TiUP](https://docs.pingcap.com/tidb/dev/production-deployment-using-tiup)
 
-[Deploy a TiDB Cluster in Kubernetes](https://docs.pingcap.com/tidb/dev/tidb-in-kubernetes)
+[Deploy a TiDB Cluster on Kubernetes](https://docs.pingcap.com/tidb/dev/tidb-in-kubernetes)
 
 </LearningPath>
 
@@ -63,9 +71,7 @@ hide_commit: true
 
 [Scale a Cluster](https://docs.pingcap.com/tidb/dev/scale-tidb-using-tiup)
 
-[Back Up Cluster Data](https://docs.pingcap.com/tidb/dev/br-usage-backup)
-
-[Restore Cluster Data](https://docs.pingcap.com/tidb/dev/br-usage-restore)
+[Back Up and Restore Cluster Data](https://docs.pingcap.com/tidb/dev/backup-and-restore-overview)
 
 [Daily Check](https://docs.pingcap.com/tidb/dev/daily-check)
 
@@ -119,15 +125,23 @@ hide_commit: true
 
 [TiSpark](https://docs.pingcap.com/tidb/dev/tispark-overview)
 
+</LearningPath>
+
 <LearningPath label="Reference" icon="cloud-dev">
+
+[TiDB Roadmap](https://docs.pingcap.com/tidb/dev/tidb-roadmap)
+
+[TiDB Configuration File Parameters](https://docs.pingcap.com/tidb/dev/tidb-configuration-file)
+
+[TiDB Command-line Flags](https://docs.pingcap.com/tidb/dev/command-line-flags-for-tidb-configuration)
+
+[TiDB Control](https://docs.pingcap.com/tidb/dev/tidb-control)
 
 [System Variables](https://docs.pingcap.com/tidb/dev/system-variables)
 
 [Release Notes](https://docs.pingcap.com/tidb/dev/release-notes)
 
 [FAQ Summary](https://docs.pingcap.com/tidb/dev/faq-overview)
-
-</LearningPath>
 
 </LearningPath>
 

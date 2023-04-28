@@ -1,94 +1,46 @@
 ---
 title: Connect to Your TiDB Cluster
-summary: Connect to your TiDB cluster via a SQL client or SQL shell.
+summary: Learn how to connect to your TiDB cluster via different methods.
 ---
 
 # Connect to Your TiDB Cluster
 
-After your TiDB cluster is created on TiDB Cloud, you can use one of the following three methods to connect to your TiDB cluster. You can access your cluster via a SQL client, or quickly via SQL Shell in the TiDB Cloud Console.
+After your TiDB cluster is created on TiDB Cloud, you can connect to your TiDB cluster. Depending on whether you are using a Serverless Tier cluster or a Dedicated Tier cluster, you can find the available connection methods as follows:
 
-+ Connect via a SQL client
+## Serverless Tier
 
-    - [Connect via standard connection](#connect-via-standard-connection): The standard connection exposes a public endpoint with traffic filters, so you can connect to your TiDB cluster from your laptop.
-    - [Connect via VPC peering](#connect-via-vpc-peering): If you want lower latency and more security, set up VPC peering and connect via a private endpoint using a VM instance on the corresponding cloud provider in your cloud account. Note that you cannot connect to [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier) using VPC peering.
+For Serverless Tier clusters, you can connect to your cluster via standard connection or via Chat2Query (Beta) in the TiDB Cloud console.
 
-- [Connect via SQL shell](#connect-via-sql-shell): to try TiDB SQL and test out TiDB's compatibility with MySQL quickly, or administer user privileges
+- [Connect via standard connection](/tidb-cloud/connect-via-standard-connection.md#serverless-tier)
 
-## Connect via standard connection
+    The standard connection exposes a public endpoint with traffic filters, so you can connect to your TiDB cluster via a SQL client from your laptop.
 
-To connect to your TiDB cluster via standard connection, perform the following steps:
+    Serverless Tier only [supports TLS connections](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md), which ensures the security of data transmission from your applications to TiDB clusters.
 
-1. Navigate to the **Active Clusters** page.
+- Connect via [Chat2Query (beta)](/tidb-cloud/explore-data-with-chat2query.md)
 
-2. Find the area of your cluster, and click **Connect** in the upper-right corner of the area. A connection dialog box is displayed.
+    TiDB Cloud is powered by artificial intelligence (AI). You can use Chat2Query (beta), an AI-powered SQL editor in the [TiDB Cloud console](https://tidbcloud.com/), to maximize your data value.
 
-    > **Tip:**
-    >
-    > Alternatively, you can also click the name of your cluster on the **Active Clusters** page and click **Connect** in the upper-right corner.
+    In Chat2Query, you can either simply type `--` followed by your instructions to let AI generate SQL queries automatically or write SQL queries manually, and then run SQL queries against databases without a terminal. You can find the query results in tables intuitively and check the query logs easily.
 
-3. Create the traffic filter for the cluster. Traffic filter is a list of IPs and CIDR addresses that are allowed to access TiDB Cloud via a SQL client.
+## Dedicated Tier
 
-    If the traffic filter is already set, skip the following sub-steps. If the traffic filter is empty, take the following sub-steps to add one.
+For Dedicated Tier clusters, you can connect to your cluster via one of the following methods:
 
-    1. Click one of the buttons to add some rules quickly.
+- [Connect via standard connection](/tidb-cloud/connect-via-standard-connection.md#dedicated-tier)
 
-        - **Add My Current IP Address**
-        - **Allow Access from Anywhere**
+    The standard connection exposes a public endpoint with traffic filters, so you can connect to your TiDB cluster via a SQL client from your laptop. You can connect to your TiDB clusters using TLS, which ensures the security of data transmission from your applications to TiDB clusters.
 
-    2. Provide an optional description for the newly added IP address or CIDR range.
+- [Connect via private endpoint](/tidb-cloud/set-up-private-endpoint-connections.md) (recommended)
 
-    3. Click **Create Filter** to confirm the changes.
+    Private endpoint connection provides a private endpoint to allow SQL clients in your VPC to securely access services over AWS PrivateLink, which provides highly secure and one-way access to database services with simplified network management.
 
-4. Under **Step 2: Connect with a SQL client** in the dialog box, click the tab of your preferred connection method, and then connect to your cluster with the connection string.
+- [Connect via VPC peering](/tidb-cloud/set-up-vpc-peering-connections.md)
 
-> **Note:**
->
-> For [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier), when you connect to your cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
+    If you want lower latency and more security, set up VPC peering and connect via a private endpoint using a VM instance on the corresponding cloud provider in your cloud account.
 
-## Connect via VPC peering
-
-> **Note:**
->
-> This method does not work for Developer Tier clusters because you cannot connect to [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier) using VPC peering.
-
-To connect to your TiDB cluster via VPC peering, perform the following steps:
-
-1. Navigate to the **Active Clusters** page.
-
-2. Find the area of your cluster, click **Connect** in the upper-right corner of the area, and select the **VPC Peering** tab in the connection dialog.
-
-    > **Tip:**
-    >
-    > Alternatively, you can also click the name of your cluster on the **Active Clusters** page and click **Connect** in the upper-right corner.
-
-3. Set up VPC peering. See [Set up VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md) for details.
-
-4. Click **Get Endpoint** and wait for a few minutes. Then the connection command displays in the dialog.
-
-5. Use a SQL client to connect to TiDB from your server which has set up VPC peering with TiDB Cloud.
-
-    {{< copyable "shell" >}}
-
-    ```shell
-    mysql -u root -h <endpoint> -P <port number> -p
-    ```
-
-## Connect via SQL Shell
-
-To connect to your TiDB cluster using SQL shell, perform the following steps:
-
-1. Navigate to the **Active Clusters** page.
-
-2. Find the area of your cluster, click **Connect** in the upper-right corner of the area, and select the **Web SQL Shell** tab in the connection dialog.
-
-    > **Tip:**
-    >
-    > Alternatively, you can also click the name of your cluster on the **Active Clusters** page and click **Connect** in the upper-right corner.
-
-3. Click **Open SQL Shell**.
-
-4. On the prompted **TiDB password** line, enter the root password of the current cluster. Then your application is connected to the TiDB cluster.
+- [Connect via SQL Shell](/tidb-cloud/connect-via-sql-shell.md): to try TiDB SQL and test out TiDB's compatibility with MySQL quickly, or administer user privileges.
 
 ## What's next
 
-After you have successfully connected to your TiDB cluster, you can [explore SQL statements with TiDB](https://docs.pingcap.com/tidb/stable/basic-sql-operations).
+After you have successfully connected to your TiDB cluster, you can [explore SQL statements with TiDB](/basic-sql-operations.md).

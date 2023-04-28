@@ -41,25 +41,6 @@ The following errors are always fatal, and cannot be skipped by changing `max-er
 
 Unique/Primary key conflict in the physical import mode is handled separately and explained in the next section.
 
-## Duplicate resolution in the physical import mode
-
-In the physical import mode, TiDB Lightning imports data by first converting them to KV pairs and ingesting the pairs into TiKV in batches. Unlike the logical import mode, duplicate rows are not detected until the end of a task. Therefore, duplicate errors in the physical import mode are not controlled by `max-error`, but rather by a separate configuration `duplicate-resolution`.
-
-{{< copyable "" >}}
-
-```toml
-[tikv-importer]
-duplicate-resolution = 'none'
-```
-
-The value options of `duplicate-resolution` are as follows:
-
-* **'none'**: Does not detect duplicate data. If a unique/primary key conflict does exist, the imported table will have inconsistent data and index, and will fail checksum check.
-* **'record'**: Detects duplicate data, but does not attempt to fix it. If a unique/primary key conflict does exist, the imported table will have inconsistent data and index, and will skip checksum and report the count of the conflict errors.
-* **'remove'**: Detects duplicate data, and removes *all* duplicated rows. The imported table will be consistent, but the involved rows are ignored and have to be added back manually.
-
-TiDB Lightning duplicate resolution can detect duplicate data only within the data source. This feature cannot handle conflict with existing data before running TiDB Lightning.
-
 ## Error report
 
 If TiDB Lightning encounters errors during the import, it outputs a statistics summary about these errors in both your terminal and the log file when it exits.
@@ -131,12 +112,12 @@ CREATE TABLE conflict_error_v1 (
 
 **type_error_v1** records all [type errors](#type-error) managed by the `max-error` configuration. There is one row per error.
 
-**conflict_error_v1** records all [unique/primary key conflict in the Local-backend](#duplicate-resolution-in-the-physical-import-mode). There are 2 rows per pair of conflicts.
+**conflict_error_v1** records all unique/primary key conflict in the Local-backend. There are 2 rows per pair of conflicts.
 
 | Column       | Syntax | Type | Conflict | Description                                                                                                                         |
 | ------------ | ------ | ---- | -------- | ----------------------------------------------------------------------------------------------------------------------------------- |
 | task_id      | ✓      | ✓    | ✓        | The TiDB Lightning task ID that generates this error                                                                                    |
-| create_table | ✓      | ✓    | ✓        | The time at which the error is recorded                                                                                                         |
+| create_time | ✓      | ✓    | ✓        | The time at which the error is recorded                                                                                                         |
 | table_name   | ✓      | ✓    | ✓        | The name of the table that contains the error, in the form of ``'`db`.`tbl`'``                                                                |
 | path         | ✓      | ✓    |          | The path of the file that contains the error                                                                                               |
 | offset       | ✓      | ✓    |          | The byte position in the file where the error is found                                                                                  |
@@ -198,7 +179,7 @@ In this example, a data source is prepared with some known errors.
         (54, 'fifty-four'),     -- conflicts with the other 'fifty-four' below
         (77, 'seventy-seven'),  -- the string is longer than 12 characters
         (600, 'six hundred'),   -- the number overflows TINYINT
-        (40, 'fourty'),         -- conflicts with the other 40 above
+        (40, 'forty'),         -- conflicts with the other 40 above
         (42, 'fifty-four');     -- conflicts with the other 'fifty-four' above
 
     EOF
@@ -307,7 +288,7 @@ In this example, a data source is prepared with some known errors.
      table_name: `example`.`t`
      index_name: PRIMARY
        key_data: 40
-       row_data: (40, "fourty")
+       row_data: (40, "forty")
         raw_key: 0x7480000000000000C15F728000000000000028
       raw_value: 0x800001000000020600666F75727479
      raw_handle: 0x7480000000000000C15F728000000000000028

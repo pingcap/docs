@@ -7,7 +7,7 @@ summary: Learn how to use PingCAP Clinic to collect, upload, and view cluster di
 
 This document describes how to use PingCAP Clinic diagnosis service (PingCAP Clinic) to collect, upload, and view cluster diagnosis data quickly.
 
-PingCAP Clinic consists of two components: Diag client (shorten as Diag) and Clinic Server cloud service (shorten as Clinic Server). For details of these two components, refer to [PingCAP Clinic Overview](/clinic/clinic-introduction.md).
+PingCAP Clinic consists of two components: [Diag client](https://github.com/pingcap/diag) (shorten as Diag) and Clinic Server cloud service (shorten as Clinic Server). For details of these two components, refer to [PingCAP Clinic Overview](/clinic/clinic-introduction.md).
 
 ## User scenarios
 
@@ -16,7 +16,7 @@ PingCAP Clinic consists of two components: Diag client (shorten as Diag) and Cli
 
 > **Note:**
 >
-> - The following methods to collect and upload data are **only** applicable to [clusters deployed using TiUP](/production-deployment-using-tiup.md). For clusters deployed using TiDB Operator in Kubernetes, see [PingCAP Clinic for TiDB Operator environments](https://docs.pingcap.com/tidb-in-kubernetes/stable/clinic-user-guide).
+> - The following methods to collect and upload data are **only** applicable to [clusters deployed using TiUP](/production-deployment-using-tiup.md). For clusters deployed using TiDB Operator on Kubernetes, see [PingCAP Clinic for TiDB Operator environments](https://docs.pingcap.com/tidb-in-kubernetes/stable/clinic-user-guide).
 > - The diagnostic data collected by PingCAP Clinic is **only** used for troubleshooting cluster problems.
 
 ## Prerequisites
@@ -32,9 +32,9 @@ Before using PingCAP Clinic, you need to install Diag and prepare an environment
 2. Log in to Clinic Server.
 
     <SimpleTab groupId="clinicServer">
-    <div label="Clinic Server in the US" value="clinic-us">
+    <div label="Clinic Server for international users" value="clinic-us">
 
-    Go to the [Clinic Server in the US](https://clinic.pingcap.com) and select **Sign in with TiDB Account** to enter the TiDB Cloud login page. If you do not have a TiDB Cloud account, create one on that page.
+    Go to the [Clinic Server for international users](https://clinic.pingcap.com) and select **Sign in with TiDB Account** to enter the TiDB Cloud login page. If you do not have a TiDB Cloud account, create one on that page.
 
     > **Note:**
     >
@@ -42,9 +42,9 @@ Before using PingCAP Clinic, you need to install Diag and prepare an environment
 
     </div>
 
-    <div label="Clinic Server in the Chinese mainland" value="clinic-cn">
+    <div label="Clinic Server for users in the Chinese mainland" value="clinic-cn">
 
-    Go to the [Clinic Server in the Chinese mainland](https://clinic.pingcap.com.cn) and select **Sign in with AskTUG** to enter the AskTUG community login page. If you do not have an AskTUG account, create one on that page
+    Go to the [Clinic Server for users in the Chinese mainland](https://clinic.pingcap.com.cn) and select **Sign in with AskTUG** to enter the AskTUG community login page. If you do not have an AskTUG account, create one on that page
 
     </div>
     </SimpleTab>
@@ -80,18 +80,18 @@ Before using PingCAP Clinic, you need to install Diag and prepare an environment
     > - For versions earlier than Diag v0.9.0, data is uploaded to Clinic Server in the Chinese region by default. To set `region` in these versions, run the `tiup update diag` command to upgrade Diag to the latest version and then set `region` in Diag.
 
     <SimpleTab groupId="clinicServer">
-    <div label="Clinic Server in the US" value="clinic-us">
+    <div label="Clinic Server for international users" value="clinic-us">
 
-    For Clinic Server in the US, set `region` to `US` using the following command:
+    When using Clinic Server for international users, set `region` to `US` using the following command:
 
     ```bash
     tiup diag config clinic.region US
     ```
 
     </div>
-    <div label="Clinic Server in the Chinese mainland" value="clinic-cn">
+    <div label="Clinic Server for users in the Chinese mainland" value="clinic-cn">
 
-    For Clinic Server in the Chinese mainland, set `region` to `CN` using the following command:
+    When using Clinic Server for users in the Chinese mainland, set `region` to `CN` using the following command:
 
     ```bash
     tiup diag config clinic.region CN
@@ -154,5 +154,5 @@ Before using PingCAP Clinic, you need to install Diag and prepare an environment
 ## What's next
 
 - [PingCAP Clinic Overview](/clinic/clinic-introduction.md)
-- [Troubleshoot TiDB Cluster Using PingCAP Clinic](/clinic/clinic-user-guide-for-tiup.md)
+- [Troubleshoot Clusters Using PingCAP Clinic](/clinic/clinic-user-guide-for-tiup.md)
 - [PingCAP Clinic Diagnostic Data](/clinic/clinic-data-instruction-for-tiup.md)

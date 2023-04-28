@@ -9,9 +9,9 @@ PingCAP Clinic Diagnostic Service (PingCAP Clinic) is a diagnostic service provi
 
 PingCAP Clinic provides the following two components to diagnose cluster problems:
 
-- Diag client:
+- [Diag client](https://github.com/pingcap/diag):
 
-    Diag client (Diag) is a diagnostic tool deployed on the cluster side. Diag is used to collect cluster diagnostic data, upload diagnostic data to the Clinic Server, and perform a quick health check locally on your cluster. For a full list of diagnostic data that can be collected by Diag, see [PingCAP Clinic Diagnostic Data](/clinic/clinic-data-instruction-for-tiup.md).
+    Diag client (Diag) is an open-source diagnostic tool deployed on the cluster side. Diag is used to collect cluster diagnostic data, upload diagnostic data to the Clinic Server, and perform a quick health check locally on your cluster. For a full list of diagnostic data that can be collected by Diag, see [PingCAP Clinic Diagnostic Data](/clinic/clinic-data-instruction-for-tiup.md).
 
     > **Note:**
     >
@@ -21,14 +21,14 @@ PingCAP Clinic provides the following two components to diagnose cluster problem
 
     Clinic Server is a cloud service deployed in the cloud. By providing diagnostic services in the SaaS model, the Clinic Server can not only receive uploaded diagnostic data but also work as an online diagnostic environment to store data, view data, and provide cluster diagnostic reports. Clinic Server provides two independent services depending on the storage location:
 
-    - [Clinic Server in the US](https://clinic.pingcap.com): Data is stored in AWS in US.
-    - [Clinic Server in the Chinese mainland](https://clinic.pingcap.com.cn): Data is stored in AWS in China (Beijing) regions.
+    - [Clinic Server for international users](https://clinic.pingcap.com): Data is stored in AWS in US.
+    - [Clinic Server for users in the Chinese mainland](https://clinic.pingcap.com.cn): Data is stored in AWS in China (Beijing) regions.
 
 ## User scenarios
 
 - Troubleshoot cluster problems remotely
 
-    When your cluster has some problems that cannot be fixed quickly, you can ask for help at [TiDB Community slack channel](https://tidbcommunity.slack.com/archives/CH7TTLL7P) or contact PingCAP technical support. When contacting technical support for remote assistance, you need to save various diagnostic data from the cluster and forward the data to the support staff. In this case, you can use Diag to collect diagnostic data with one click. Diag helps you to collect complete diagnostic data quickly, which can avoid complex manual data collection operations. After collecting data, you can upload the data to the Clinic Server for PingCAP technical support staff to troubleshoot cluster problems. The Clinic Server provides secure storage for uploaded diagnostic data and supports the online diagnosis, which greatly improves the troubleshooting efficiency.
+    When your cluster has some problems that cannot be fixed quickly, you can [get support](/support.md) from PingCAP or the community. When contacting technical support for remote assistance, you need to save various diagnostic data from the cluster and forward the data to the support staff. In this case, you can use Diag to collect diagnostic data with one click. Diag helps you to collect complete diagnostic data quickly, which can avoid complex manual data collection operations. After collecting data, you can upload the data to the Clinic Server for PingCAP technical support staff to troubleshoot cluster problems. The Clinic Server provides secure storage for uploaded diagnostic data and supports the online diagnosis, which greatly improves the troubleshooting efficiency.
 
 - Quickly check cluster status
 
@@ -61,8 +61,8 @@ First, Diag gets cluster topology information from the deployment tool TiUP (tiu
 
 > **Note:**
 >
-> - Clinic Server is free from July 15, 2022 to Jan 14, 2023. You will be notified through email before Jan 14, 2023 if the service starts charging fee afterwards.
-> - If you want to adjust the usage limitations, contact PingCAP technical support.
+> - Clinic Server is free from July 15, 2022 to July 14, 2023. You will be notified through email before July 14, 2023 if the service starts charging fee afterwards.
+> - If you want to adjust the usage limitations, [get support](/support.md) from PingCAP.
 
 | Service Type| Limitation |
 | :------ | :------ |
@@ -76,9 +76,9 @@ First, Diag gets cluster topology information from the deployment tool TiUP (tiu
 
 - Use PingCAP Clinic in an on-premise environment
     - [Quick Start with PingCAP Clinic](/clinic/quick-start-with-clinic.md)
-    - [Troubleshoot TiDB Cluster using PingCAP Clinic](/clinic/clinic-user-guide-for-tiup.md)
+    - [Troubleshoot Clusters using PingCAP Clinic](/clinic/clinic-user-guide-for-tiup.md)
     - [PingCAP Clinic Diagnostic Data](/clinic/clinic-data-instruction-for-tiup.md)
 
-- Use PingCAP Clinic in Kubernetes
+- Use PingCAP Clinic on Kubernetes
     - [Troubleshoot TiDB Cluster using PingCAP Clinic](https://docs.pingcap.com/tidb-in-kubernetes/stable/clinic-user-guide)
     - [PingCAP Clinic Diagnostic Data](https://docs.pingcap.com/tidb-in-kubernetes/stable/clinic-data-collection)

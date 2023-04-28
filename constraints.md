@@ -114,7 +114,7 @@ COMMIT;
 ```
 
 ```
-ERROR 1062 (23000): Duplicate entry 'bill' for key 'username'
+ERROR 1062 (23000): Duplicate entry 'bill' for key 'users.username'
 ```
 
 In the preceding optimistic example, the unique check was deferred until the transaction is committed. This resulted in a duplicate key error, because the value `bill` was already present.
@@ -154,10 +154,10 @@ INSERT INTO users (username) VALUES ('jane'), ('chris'), ('bill');
 ```
 
 ```
-ERROR 1062 (23000): Duplicate entry 'bill' for key 'username'
+ERROR 1062 (23000): Duplicate entry 'bill' for key 'users.username'
 ```
 
-The first  `INSERT` statement caused a duplicate key error. This causes additional network communication overhead and may reduce the throughput of insert operations.
+The first `INSERT` statement caused a duplicate key error. This causes additional network communication overhead and may reduce the throughput of insert operations.
 
 ### Pessimistic transactions
 
@@ -177,7 +177,7 @@ INSERT INTO users (username) VALUES ('jane'), ('chris'), ('bill');
 ```
 
 ```
-ERROR 1062 (23000): Duplicate entry 'bill' for key 'username'
+ERROR 1062 (23000): Duplicate entry 'bill' for key 'users.username'
 ```
 
 To achieve better performance of pessimistic transactions, you can set the [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630) variable to `OFF`, which allows TiDB to defer the unique constraint check of a unique index (to the next time when this index requires a lock or to the time when the transaction is committed) and skip the corresponding pessimistic lock. When using this variable, pay attention to the following:
@@ -215,7 +215,7 @@ To achieve better performance of pessimistic transactions, you can set the [`tid
     ```
 
     ```
-    ERROR 1062 (23000): Duplicate entry 'bill' for key 'username'
+    ERROR 1062 (23000): Duplicate entry 'bill' for key 'users.username'
     ```
 
 - When this variable is disabled, committing a pessimistic transaction that needs to write data might return a `Write conflict` error. When this error occurs, TiDB rolls back the current transaction.
@@ -267,8 +267,10 @@ To achieve better performance of pessimistic transactions, you can set the [`tid
     ```
 
     ```
-    ERROR 8147 (23000): transaction aborted because lazy uniqueness check is enabled and an error occurred: [kv:1062]Duplicate entry 'bill' for key 'username'
+    ERROR 8147 (23000): transaction aborted because lazy uniqueness check is enabled and an error occurred: [kv:1062]Duplicate entry 'bill' for key 'users.username'
     ```
+
+- When this variable is disabled, the `1062 Duplicate entry` error might be not from the current SQL statement. Therefore, when a transaction operates on multiple tables that have indexes with the same name, you need to check the `1062` error message to find which index the error is actually from.
 
 ## PRIMARY KEY
 
@@ -338,7 +340,7 @@ For more details about the primary key of the `CLUSTERED` type, refer to [cluste
 
 > **Note:**
 >
-> TiDB has limited support for foreign key constraints.
+> Starting from v6.6.0, TiDB supports the [FOREIGN KEY constraints](/foreign-key.md) feature. Before v6.6.0, TiDB supports creating and deleting foreign key constraints, but the constraints are not actually effective. After upgrading TiDB to v6.6.0, you can delete the invalid foreign key and create a new one to make the foreign key constraints effective.
 
 TiDB supports creating `FOREIGN KEY` constraints in DDL commands.
 
@@ -379,15 +381,3 @@ TiDB also supports the syntax to `DROP FOREIGN KEY` and `ADD FOREIGN KEY` via th
 ALTER TABLE orders DROP FOREIGN KEY fk_user_id;
 ALTER TABLE orders ADD FOREIGN KEY fk_user_id (user_id) REFERENCES users(id);
 ```
-
-### Notes
-
-* TiDB supports foreign keys to avoid errors caused by this syntax when you migrate data from other databases to TiDB.
-
-    However, TiDB does not perform constraint checking on foreign keys in DML statements. For example, even if there is no record with id=123 in the users table, the following transactions can be submitted successfully.
-
-    ```sql
-    START TRANSACTION;
-    INSERT INTO orders (user_id, doc) VALUES (123, NULL);
-    COMMIT;
-    ```

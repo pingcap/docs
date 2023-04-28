@@ -18,7 +18,7 @@ With TiDB Cloud, you can create an HTAP cluster easily by specifying one or more
 
 ## Architecture
 
-![TiFlash Architecture](/media/tidb-storage-architecture.png)
+![TiFlash Architecture](/media/tidb-storage-architecture-1.png)
 
 The above figure is the architecture of TiDB in its HTAP form, including TiFlash nodes.
 
@@ -26,7 +26,13 @@ TiFlash provides the columnar storage, with a layer of coprocessors efficiently 
 
 TiFlash conducts real-time replication of data in the TiKV nodes at a low cost that does not block writes in TiKV. Meanwhile, it provides the same read consistency as in TiKV and ensures that the latest data is read. The Region replica in TiFlash is logically identical to those in TiKV, and is split and merged along with the Leader replica in TiKV at the same time.
 
+To deploy TiFlash under the Linux AMD64 architecture, the CPU must support the AVX2 instruction set. Ensure that `cat /proc/cpuinfo | grep avx2` has output. To deploy TiFlash under the Linux ARM64 architecture, the CPU must support the ARMv8 instruction set architecture. Ensure that `cat /proc/cpuinfo | grep 'crc32' | grep 'asimd'` has output. By using the instruction set extensions, TiFlash's vectorization engine can deliver better performance.
+
+<CustomContent platform="tidb">
+
 TiFlash is compatible with both TiDB and TiSpark, which enables you to freely choose between these two computing engines.
+
+</CustomContent>
 
 It is recommended that you deploy TiFlash in different nodes from TiKV to ensure workload isolation. It is also acceptable to deploy TiFlash and TiKV in the same node if no business isolation is required.
 
@@ -79,7 +85,17 @@ TiFlash shares the computing workload in the same way as the TiKV Coprocessor do
 
 After TiFlash is deployed, data replication does not automatically begin. You need to manually specify the tables to be replicated.
 
+<CustomContent platform="tidb">
+
 You can either use TiDB to read TiFlash replicas for medium-scale analytical processing, or use TiSpark to read TiFlash replicas for large-scale analytical processing, which is based on your own needs. See the following sections for details:
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+You can use TiDB to read TiFlash replicas for analytical processing. See the following sections for details:
+
+</CustomContent>
 
 - [Create TiFlash Replicas](/tiflash/create-tiflash-replicas.md)
 - [Use TiDB to Read TiFlash Replicas](/tiflash/use-tidb-to-read-tiflash.md)
