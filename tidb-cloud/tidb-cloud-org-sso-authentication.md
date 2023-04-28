@@ -9,7 +9,7 @@ Single Sign-On (SSO) is an authentication scheme that enables members in your Ti
 
 TiDB Cloud supports the following two types of SSO authentication:
 
-- [Basic SSO](/tidb-cloud/tidb-cloud-org-sso-authentication.md): members can log in to the [TiDB Cloud console](https://tidbcloud.com/) using their GitHub, Google, or Microsoft authentication methods. The basic SSO is enabled by default for all organizations in TiDB Cloud.
+- [Basic SSO](/tidb-cloud/tidb-cloud-sso-authentication.md): members can log in to the [TiDB Cloud console](https://tidbcloud.com/) using their GitHub, Google, or Microsoft authentication methods. The basic SSO is enabled by default for all organizations in TiDB Cloud.
 
 - Cloud Organization SSO: members can log in to a custom login page of TiDB Cloud using the authentication methods specified by your organization. The Cloud Organization SSO is disabled by default.
 
