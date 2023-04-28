@@ -224,8 +224,8 @@ TiDB Cloud generates code examples to help you call an endpoint. To get the code
 
     > **Note:**
     >
-    > - By including `<region>` in the endpoint URL, you can directly access the data API in the region where the TiDB cluster is hosted.
-    > - Alternatively, you can choose not to include `<region>` in the endpoint URL. If so, TiDB Cloud will internally redirect the request to the region where the TiDB cluster is located, which might cause additional latency. If you go with this way, you need to add `--location-trusted` option in your code.
+    > - By requesting the regional domain `<region>.data.tidbcloud.com`, you can directly access the data API in the region where the TiDB cluster is located.
+    > - Alternatively, you can also request the global domain `data.tidbcloud.com` without specifying the region information. In this way, TiDB Cloud will internally redirect the request to the target region, but this might result in additional latency. If you choose this way, make sure to add the `--location-trusted` option to your curl code when calling an endpoint.
 
 5. Paste the code example in your application and run it.
 
