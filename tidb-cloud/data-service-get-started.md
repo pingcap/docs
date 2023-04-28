@@ -49,7 +49,7 @@ On the right pane, click the **Properties** tab and set properties for the endpo
     - Only letters, numbers, underscores (`_`), and slashes (`/`) are allowed in the path, which must start with a slash (`/`). For example, `/my_endpoint/get_id`.
     - The length of the path must be less than 64 characters.
 
-- **Endpoint URL**: (read-only) the URL is automatically generated based on the service URL of the Data App and the path of the endpoint. For example, if the path of the endpoint is `/my_endpoint/get_id`, the endpoint URL is `https://data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id`.
+- **Endpoint URL**: (read-only) the URL is automatically generated based on the region where the corresponding cluster is hosted, the service URL of the Data App, and the path of the endpoint. For example, if the path of the endpoint is `/my_endpoint/get_id`, the endpoint URL is `https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id`.
 
 - **Request Method**: the HTTP method of the endpoint. The following methods are supported:
 
@@ -155,7 +155,7 @@ TiDB Cloud generates code examples to help you call an endpoint. To get the code
 
     ```bash
     curl --digest --user '<Public Key>:<Private Key>' \
-      --request GET 'https://data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/<Endpoint Path>' \
+      --request GET 'https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/<Endpoint Path>' \
       --header 'endpoint-type: draft'
     ```
 
@@ -169,11 +169,16 @@ TiDB Cloud generates code examples to help you call an endpoint. To get the code
 
     ```bash
     curl --digest --user '<Public Key>:<Private Key>' \
-      --request GET 'https://data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/<Endpoint Path>'
+      --request GET 'https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/<Endpoint Path>'
     ```
 
     </div>
     </SimpleTab>
+
+    > **Note:**
+    >
+    > - By including `<region>` in the endpoint URL, you can directly access the data API in the region where the TiDB cluster is hosted.
+    > - Alternatively, you can choose not to include `<region>` in the endpoint URL. If so, TiDB Cloud will internally redirect the request to the region where the TiDB cluster is located, which might cause additional latency. If you go with this way, you need to add `--location-trusted` option in your code.
 
 ### 3. Use the code example
 

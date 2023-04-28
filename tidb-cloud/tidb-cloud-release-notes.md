@@ -8,6 +8,18 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2023.
 
+## May 5, 2023
+
+**General changes**
+
+- Support directly accessing the data API in the region where a TiDB cluster is located.
+
+    For newly created [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters, the default endpoint URL now includes the cluster region information. By requesting the regional domain URL `{region}.data.tidbcloud.com`, you can directly access the data API in the region where the TiDB cluster is located.
+
+    Alternatively, you can skip the region and use the global URL `data.tidbcloud.com` directly. If so, TiDB Cloud will internally redirect the request to the region where the TiDB cluster is located, which might cause additional latency. If you go with this way, you need to add `--location-trusted` option when you call an endpoint.
+
+    For more information, see [Call an endpoint](data-service-manage-endpoint.md#call-an-endpoint).
+
 ## April 25, 2023
 
 **General changes**
