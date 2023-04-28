@@ -14,9 +14,9 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - Support directly accessing the data API in the region where a TiDB cluster is located.
 
-    For newly created [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters, the default endpoint URL now includes the cluster region information. By requesting the regional domain URL `{region}.data.tidbcloud.com`, you can directly access the data API in the region where the TiDB cluster is located.
+    For newly created [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters, the default endpoint URL now includes the cluster region information. By requesting the regional domain `{region}.data.tidbcloud.com`, you can directly access the data API in the region where the TiDB cluster is located.
 
-    Alternatively, you can also use the global URL `data.tidbcloud.com` without specifying the region information. If so, TiDB Cloud will internally redirect the request to the region where the TiDB cluster is located, which might cause additional latency. If you go with this way, you need to add `--location-trusted` option when you call an endpoint.
+    Alternatively, if you prefer to request the global domain `data.tidbcloud.com` without specifying the region information, TiDB Cloud can internally redirect the request to the region where the corresponding TiDB cluster is located, but this might result in additional latency. If you choose this way, you need to add the `--location-trusted` option to your code when calling an endpoint.
 
     For more information, see [Call an endpoint](data-service-manage-endpoint.md#call-an-endpoint).
 
