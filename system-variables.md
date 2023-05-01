@@ -1144,7 +1144,13 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 > To improve the speed for index creation using this variable, make sure that your TiDB cluster is hosted on AWS and your TiDB node size is at least 8 vCPU. For [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters, this feature is unavailable.
 
 </CustomContent>
+<CustomContent platform="tidb">
 
+> **Note:**
+>
+> Index accelleration requires a [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630) to be able to function. If the `temp-dir` isn't usable TiDB will fall back to non-accelrated index building.
+
+</CustomContent>
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
