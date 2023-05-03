@@ -1148,7 +1148,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 > **Note:**
 >
-> Index accelleration requires a [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630) to be able to function. If the `temp-dir` isn't usable TiDB will fall back to non-accelrated index building.
+> Index accelleration requires a [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630) that is writable and has enough free space to be able to function. If the `temp-dir` is unusable TiDB will fall back to non-accelerated index building.
 
 </CustomContent>
 - Scope: GLOBAL
