@@ -39,6 +39,12 @@ For Dedicated Tier clusters, you can connect to your cluster via one of the foll
 
     If you want lower latency and more security, set up VPC peering and connect via a private endpoint using a VM instance on the corresponding cloud provider in your cloud account.
 
+- [Connect via Chat2Query (beta)](/tidb-cloud/explore-data-with-chat2query.md)
+
+    TiDB Cloud is powered by artificial intelligence (AI). If your Dedicated Tier is hosted on AWS and the TiDB version of the cluster is v6.5.0 or later, you can use Chat2Query (beta), an AI-powered SQL editor in the [TiDB Cloud console](https://tidbcloud.com/), to maximize your data value.
+
+    In Chat2Query, you can either simply type `--` followed by your instructions to let AI generate SQL queries automatically or write SQL queries manually, and then run SQL queries against databases without a terminal. You can find the query results in tables intuitively and check the query logs easily.
+
 - [Connect via SQL Shell](/tidb-cloud/connect-via-sql-shell.md): to try TiDB SQL and test out TiDB's compatibility with MySQL quickly, or administer user privileges.
 
 ## What's next
