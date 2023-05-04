@@ -37,7 +37,7 @@ In this example, the filter condition `a < 1` is pushed down to the TableScan op
 
 ## Enable or disable TiFlash late materialization
 
-By default,  the `tidb_opt_enable_late_materialization` system variable is `OFF` at both the session and global levels, which means that the TiFlash late materialization feature is not enabled. You can use the following statement to view the corresponding variable information:
+By default, the `tidb_opt_enable_late_materialization` system variable is `OFF` at both the session and global levels, which means that the TiFlash late materialization feature is not enabled. You can use the following statement to view the corresponding variable information:
 
 ```sql
 SHOW VARIABLES LIKE 'tidb_opt_enable_late_materialization';
