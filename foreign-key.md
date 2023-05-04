@@ -7,6 +7,10 @@ summary: An overview of the usage of FOREIGN KEY constraints for the TiDB databa
 
 Starting from v6.6.0, TiDB supports the foreign key feature, which allows cross-table referencing of related data, and foreign key constraints to maintain data consistency.
 
+> **Note:**
+>
+> The foreign key feature is only applicable to small or medium data sizes and non-distributed systems. For large data sizes or distributed systems, using foreign keys might cause serious performance issues and could have an unpredictable impact on the system. If you plan to use foreign keys, use with caution after conducting sufficient validation.
+
 The foreign key is defined in the child table. The syntax is as follows:
 
 ```ebnf+diagram
