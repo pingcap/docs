@@ -1312,6 +1312,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 > To improve the speed for index creation using this variable, make sure that your TiDB cluster is hosted on AWS and your TiDB node size is at least 8 vCPU. For [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless-beta) clusters, this feature is unavailable.
 
 </CustomContent>
+
 <CustomContent platform="tidb">
 
 > **Note:**
