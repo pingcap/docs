@@ -9,7 +9,7 @@ Starting from v6.6.0, TiDB supports the foreign key feature, which allows cross-
 
 > **Note:**
 >
-> The foreign key feature is usually used for providing integrity and consistency constraint checks for data in small or medium volumes. However, for large data volumes in distributed database systems, the use of foreign keys might lead to serious performance issues and could have unpredictable effects on the systems. If you plan to use foreign keys, conduct thorough validation first and use them with caution.
+> The foreign key feature is usually used for providing integrity and consistency constraint checks for data in small or medium volumes. However, for large data volumes in a distributed database system, the use of foreign keys might lead to serious performance issues and could have unpredictable effects on the system. If you plan to use foreign keys, conduct thorough validation first and use them with caution.
 
 The foreign key is defined in the child table. The syntax is as follows:
 
