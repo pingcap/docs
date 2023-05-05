@@ -30,12 +30,21 @@ To view the events on the Events page, take the following steps:
 
 TiDB Cloud logs the following types of cluster events:
 
-| Event Type| Description |  Available since |
+| Event Type| Description | 
 |:--- |:--- |:--- |
-| CreateCluster |  Events recorded for cluster creation actions.  |  2023-03-22   |
-| PauseCluster |   Events recorded for cluster pause actions. |  2023-03-22   |
-| ResumeCluster |   Events recorded for cluster resume actions. |  2023-03-22   |
-| ModifyClusterSize |   Events recorded for modifying cluster size actions. |  2023-03-22   |
+| CreateCluster |  Events recorded the actions of creating cluster.  |  
+| PauseCluster |   Events recorded the actions of pausing cluster. |  
+| ResumeCluster |   Events recorded the actions of resuming cluster. | 
+| ModifyClusterSize |   Events recorded the actions of modifying cluster size. | 
+| BackupCluster |   Events recorded the actions of backing up cluster. |  
+| RestoreFromCluster |   Events recorded the actions of restoring cluster. |  
+| CreateChangefeed |   Events recorded the actions of creating changefeed. |  
+| PauseChangefeed |   Events recorded the actions of pausing changefeed. | 
+| ResumeChangefeed |   Events recorded the actions of resuming changefeed. | 
+| DeleteChangefeed |   Events recorded the actions of deleting changefeed. |  
+| EditChangefeed |   Events recorded the actions of editing changefeed.|  
+| ScaleChangefeed |   Events recorded the actions of scaling changefeed. |  
+| FailedChangefeed |   Events recorded the failure of the changefeed. |  
 
 For each event, the following information is logged:
 
