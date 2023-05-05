@@ -1,6 +1,7 @@
 ---
 title: Migrate Data from CSV Files to TiDB
 summary: Learn how to migrate data from CSV files to TiDB.
+aliases: ['/tidb/v6.6/migrate-from-csv-using-tidb-lightning']
 ---
 
 # Migrate Data from CSV Files to TiDB
@@ -181,4 +182,4 @@ trim-last-separator = true
 
 ## What's next
 
-- [CSV Support and Restrictions](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md).
+- [CSV Support and Restrictions](/tidb-lightning/tidb-lightning-data-source.md#csv).
