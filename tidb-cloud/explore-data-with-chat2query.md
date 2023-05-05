@@ -41,7 +41,7 @@ The recommended use cases of Chat2Query are as follows:
     > In the following cases, the **Chat2Query** entry is displayed in grey and not clickable.
     >
     > - Your Dedicated Tier cluster is earlier than v6.5.0. To use Chat2Query, you need to contract [TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md) to upgrade your clusters.
-    > - Your Dedicated Tier cluster is just created and Chat2Query environment is still in preparation. In this case, wait for a few minutes and Chat2Query will be available.
+    > - Your Dedicated Tier cluster is just created and the running environment for Chat2Query is still in preparation. In this case, wait for a few minutes and Chat2Query will be available.
     > - Your Dedicated Tier cluster is [paused](/tidb-cloud/pause-or-resume-tidb-cluster.md).
 
 
