@@ -25,7 +25,7 @@ To view slow queries in a cluster, perform the following steps:
 
 1. Navigate to the **SQL Diagnosis** page of a cluster.
 
-2. Click the **Slow Query** tab.
+2. Click the **Slow Query** page.
 
 3. Click any slow query in the list to display its detailed execution information.
 
@@ -43,7 +43,7 @@ To use the statement analysis, perform the following steps:
 
 1. Navigate to the **SQL Diagnosis** page of a cluster.
 
-2. Click the **SQL Statement** tab.
+2. Click the **SQL Statement** page.
 
 3. Select the time period to be analyzed in the time interval box. Then you can get the execution statistics of SQL statements of all databases in this period.
 
