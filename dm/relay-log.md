@@ -11,21 +11,23 @@ After relay log is enabled, DM-worker automatically migrates the upstream binlog
 
 ## User scenarios
 
-In MySQL, storage space is limited, so the binlog is automatically purged when the maximum retention time is reached. After the upstream database purges the binlog, DM fails to pull the purged binlog and the replication task fails. For each replication task, DM creates a connection in the upstream to pull binlog. Too many connections might cause a heavy load on the upstream database.
+In MySQL, storage space is limited, so the binlog is automatically purged when the maximum retention time is reached. After the upstream database purges the binlog, DM fails to pull the purged binlog and the migration task fails. For each migration task, DM creates a connection in the upstream to pull binlog. Too many connections might cause a heavy load on the upstream database.
 
-When the relay log is enabled, multiple replication task with the same upstream database can reuse the relay log that has been pulled to the local disk. This **relieves the pressure on the upstream database**.
+When the relay log is enabled, multiple migration task with the same upstream database can reuse the relay log that has been pulled to the local disk. This **relieves the pressure on the upstream database**.
 
-For full and incremental data migration tasks, DM needs to migrate full data and then perform incremental data based on binlog. If the full migration phase takes long, the upstream binlog might be purged, which results in incremental migration failure. To avoid this situation, you can enable the relay log feature so that DM automatically retains enough log in the local disk and **ensures the incremental migration task can be performed normally**.
+For full and incremental data migration tasks, DM needs to first migrate full data and then perform incremental migration based on binlog. If the full migration phase takes long, the upstream binlog might be purged, which results in incremental migration failure. To avoid this situation, you can enable the relay log feature so that DM automatically retains enough log in the local disk and **ensures the incremental migration task can be performed normally**.
 
-It is generally recommended to enable relay log, but be aware of the following potential issues:
+It is generally recommended to enable relay log, but be aware of the following potential issue:
 
-Because relay log must be written to the disk, it might consume external IO and CPU resources. This prolongs the whole data replication link and increases the data replication latency. For latency-sensitive scenarios, it is not recommended to enable relay log.
+Because relay log must be written to the disk, it consumes external IO and CPU resources. This prolongs the whole data replication link and increases the data replication latency. For **latency-sensitive** scenarios, it is not recommended to enable relay log.
 
 > **Note:**
 >
-> In DM v2.0.7 and later versions, relay log writes are optimized. The latency and CPU resources are relatively low.
+> In DM v2.0.7 and later versions, relay log writes are optimized. The latency and CPU resource consumption is relatively low.
 
 ## Use relay log
+
+This section describes how to enable and disable relay log, query relay log status, and purge relay log.
 
 ### Enable and disable relay log
 
@@ -107,7 +109,7 @@ See [Upstream Database Configuration File](/dm/dm-source-configuration-file.md) 
 </div>
 </SimpleTab>
 
-### Query relay logs
+### Query relay log status
 
 You can use the command `query-status -s` to query the status of the relay log:
 
@@ -241,7 +243,7 @@ DM provides two ways to purge relay logs: manual purge and automatic purge. Neit
 >
 > - Expired relay log: The difference between the last modification time of the relay log file and the current time is greater than the value of the `expires` field in the configuration file.
 
-#### Automatic data purge
+#### Automatic purge
 
 You can enable automatic data purge and configure its strategy in the source configuration file. See the following example:
 
@@ -263,9 +265,9 @@ purge:
 
 + `purge.remain-space`
     - The amount of remaining disk space in GB less than which the specified DM-worker machine tries to purge the relay log that can be purged securely in the automatic background purge. If it is set to `0`, data purge is not performed according to the remaining disk space.
-    - "15" by default, indicating when the available disk space is less than 15GB, DM-master tries to purge the relay log securely.
+    - "15" by default, indicating when the available disk space is less than 15 GB, DM-master tries to purge the relay log securely.
 
-#### Manual data purge
+#### Manual purge
 
 Manual data purge means using the `purge-relay` command provided by dmctl to specify `subdir` and the binlog name thus to purge all the relay logs **before** the specified binlog. If the `-subdir` option in the command is not specified, all relay logs **before** the current relay log sub-directory are purged.
 
@@ -311,6 +313,8 @@ deb76a2b-09cc-11e9-9129-5242cf3bb246.000003
 
 ## Internal mechanism of relay log
 
+This section introduces the internal mechanism of relay log.
+
 ### Directory structure
 
 An example of the directory structure of the local storage for a relay log:
@@ -333,15 +337,15 @@ An example of the directory structure of the local storage for a relay log:
 
     - DM-worker stores the binlog migrated from the upstream database in the same directory. Each directory is a `subdir`.
 
-    - `subdir` is named `<Upstream database UUID>.<Local subdir serial number>`.
+    - `subdir` is named in the format of `<Upstream database UUID>.<Local subdir serial number>`.
 
     - After a switch between primary and secondary instances in the upstream, DM-worker generates a new `subdir` directory with an incremental serial number.
 
-        - In the above example, for the `7e427cc0-091c-11e9-9e45-72b7c59d52d7.000001` directory, `7e427cc0-091c-11e9-9e45-72b7c59d52d7` is the upstream database UUID and `000001` is the local `subdir` serial number.
+    - In the above example, for the `7e427cc0-091c-11e9-9e45-72b7c59d52d7.000001` directory, `7e427cc0-091c-11e9-9e45-72b7c59d52d7` is the upstream database UUID and `000001` is the local `subdir` serial number.
 
-- `server-uuid.index`: Records a list of names of currently available `subdir` directory.
+- `server-uuid.index`: records a list of the currently available `subdir` directories.
 
-- `relay.meta`: Stores the information of the migrated binlog in each `subdir`. For example,
+- `relay.meta`: stores the information of the migrated binlog in each `subdir`. For example,
 
     ```bash
     cat c0149e17-dff1-11e8-b6a8-0242ac110004.000001/relay.meta
