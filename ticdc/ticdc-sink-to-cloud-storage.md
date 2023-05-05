@@ -35,7 +35,7 @@ Info: {"upstream_id":7171388873935111376,"namespace":"default","id":"simple-repl
 
 ## Configure sink URI
 
-This section describes how to configure storage services in the Sink URI, including Amazon S3, GCS, Azure Blob Storage, and NFS. The Sink URI is used to specify the connection information for TiCDC downstream systems and its format is as follows:
+This section describes how to configure Sink URI for storage services, including Amazon S3, GCS, Azure Blob Storage, and NFS. The Sink URI is used to specify the connection information for TiCDC downstream systems and its format is as follows:
 
 ```shell
 [scheme]://[host]/[path]?[query_parameters]
