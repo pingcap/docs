@@ -64,7 +64,7 @@ If you encounter problems when connecting to TiDB using the tools listed in this
       </tr>
       <tr>
          <td>Go</td>
-         <td><a href="https://github.com/go-sql-driver/mysql" target="_blank" referrerpolicy="no-referrer-when-downgrade">go-sql-driver/mysql</a></td>
+         <td><a href="https://github.com/go-sql-driver/mysql" target="_blank" referrerpolicy="no-referrer-when-downgrade">Go-MySQL-Driver</a></td>
          <td>v1.6.0</td>
          <td>Full</td>
          <td>N/A</td>
@@ -101,7 +101,7 @@ If you encounter problems when connecting to TiDB using the tools listed in this
       </tr>
       <tr>
          <td rowspan="3">Python</td>
-         <td><a href="https://dev.mysql.com/doc/connector-python/en/" target="_blank" referrerpolicy="no-referrer-when-downgrade">mysql-connector-python</a></td>
+         <td><a href="https://dev.mysql.com/doc/connector-python/en/" target="_blank" referrerpolicy="no-referrer-when-downgrade">MySQL Connector/Python</a></td>
          <td>8.0</td>
          <td>Compatible</td>
          <td>N/A</td>
