@@ -52,6 +52,7 @@ enable-old-value = true
 
 # Specifies whether to enable the Syncpoint feature, which is supported since v6.3.0 and is disabled by default.
 # Since v6.4.0, only the changefeed with the SYSTEM_VARIABLES_ADMIN or SUPER privilege can use the TiCDC Syncpoint feature.
+# NOTE: ignore this field when the downstream type is not the DB.
 # enable-sync-point = false
 
 # bdr-mode = true
@@ -59,11 +60,13 @@ enable-old-value = true
 # Specifies the interval at which Syncpoint aligns the upstream and downstream snapshots.
 # The format is in h m s. For example, "1h30m30s".
 # The default value is "10m" and the minimum value is "30s".
+# NOTE: ignore this field when the downstream type is not the DB.
 # sync-point-interval = "5m"
 
 # Specifies how long the data is retained by Syncpoint in the downstream table. When this duration is exceeded, the data is cleaned up.
 # The format is in h m s. For example, "24h30m30s".
 # The default value is "24h".
+# NOTE: ignore this field when the downstream type is not the DB.
 # sync-point-retention = "1h"
 
 [mounter]
@@ -119,7 +122,7 @@ write-key-threshold = 0
 # For the sink of MQ type, you can use  dispatchers to configure the event dispatcher.
 # Since v6.1.0, TiDB supports two types of event dispatchers: partition and topic. For more information, see <partition and topic link>.
 # The matching syntax of matcher is the same as the filter rule syntax. For details about the matcher rules, see <>.
-# NOTE: ignore this field when replicating data to the downstream other than MQ.  
+# NOTE: ignore this field when the downstream type is not the MQ.  
 dispatchers = [
     {matcher = ['test1.*', 'test2.*'], topic = "Topic expression 1", partition = "ts" },
     {matcher = ['test3.*', 'test4.*'], topic = "Topic expression 2", partition = "index-value" },
@@ -130,7 +133,7 @@ dispatchers = [
 # The protocol configuration item specifies the protocol format of the messages sent to the downstream.
 # When the downstream is Kafka, the protocol can only be canal-json or avro.
 # When the downstream is a storage service, the protocol can only be canal-json or csv.
-# NOTE: ignore this field when replicating data to the DB downstream.
+# NOTE: ignore this field when the downstream type is the DB.
 protocol = "canal-json"
 
 # The following three configuration items are only used when you replicate data to storage sinks and can be ignored when replicating data to MQ or MySQL sinks.
@@ -145,11 +148,11 @@ enable-partition-separator = true
 # schema-registry = "http://localhost:80801/subjects/{subject-name}/versions/{version-number}/schema"
 
 # Indicates number of encoder thread used when encoding data.
-# NOTE: ignore this field when replicating data to the downstream with type other than MQ.
+# NOTE: ignore this field when the downstream type is not the MQ.
 # encoder-concurrency = 16
 
 # Indicates if enabling kafka-sink-v2 which uses kafka-go sink library.
-# NOTE: ignore this field when replicating data to the downstream types other than MQ.
+# NOTE: ignore this field when the downstream type is not the MQ.
 # enable-kafka-sink-v2 = false
 
 # If set only output the updated column.
@@ -166,4 +169,27 @@ quote = '"'
 null = '\N'
 # Whether to include commit-ts in CSV rows. The default value is false.
 include-commit-ts = false
+
+# Represents the replication consistency config for a changefeed when using the redo log, for more information, please refer to https://docs.pingcap.com/tidb/stable/ticdc-sink-to-mysql#eventually-consistent-replication-in-disaster-scenarios. NOTE: Ignore the following configurations if downstream is MQ or Storage.
+[sink.consistent]
+# The data consistency level, available options are `none` and `eventual`, none means the redo log is disabled.  
+level = "none"
+# The max redo log size in megabytes.
+max-log-size = 64
+# The flush interval for redo log. Default value is 2000 milliseconds.
+flush-interval = 2000 
+# The storage uri to the redo log.
+storage = "" 
+# Indicates if store the redo log in memory or the file.
+use-file-backend = false
+
+# Specify the data integrity check. NOTE: Ignore the following configurations if downstream is DB or Storage.
+[sink.integrity]
+# The integrity level, available options are `none` and `correctness`, none 
+# means no integrity check, correctness means check the integrity of each row.
+integrity-check-level = "none"
+# Define what happen when detect data corruption, available options are `warn` 
+# and `error`, warn means log, mark the corrupted event and send it to the 
+# downstream, error means log the corrupted event and stopped the changefeed.  
+corruption-handle-level = "warn"
 ```
