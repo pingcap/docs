@@ -5,7 +5,7 @@ summary: Learn how to analyze and tune performance of your TiDB Cloud cluster.
 
 # Analyze and Tune Performance
 
-TiDB Cloud provides [Statement Analysis](#statement-analysis), [Slow Query](#slow-query), and [Key Visualizer](#key-visualizer) to analyze performance.
+TiDB Cloud provides [Slow Query](#slow-query), [Statement Analysis](#statement-analysis), and [Key Visualizer](#key-visualizer) to analyze performance.
 
 - Slow Query lets you search and view all slow queries in your TiDB cluster, and explore the bottlenecks of each slow query by viewing its execution plan, SQL execution information, and other details.
 
@@ -23,7 +23,7 @@ By default, SQL queries that take more than 300 milliseconds are considered as s
 
 To view slow queries in a cluster, perform the following steps:
 
-1. Navigate to the **SQL Diagnosis** tab of a cluster.
+1. Navigate to the **SQL Diagnosis** page of a cluster.
 
 2. Click the **Slow Query** tab.
 
@@ -41,7 +41,7 @@ For more information, see [Slow Queries in TiDB Dashboard](https://docs.pingcap.
 
 To use the statement analysis, perform the following steps:
 
-1. Navigate to the **SQL Diagnosis** tab of a cluster.
+1. Navigate to the **SQL Diagnosis** page of a cluster.
 
 2. Click the **SQL Statement** tab.
 
