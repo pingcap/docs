@@ -1,7 +1,7 @@
 ---
 title: Build a Simple CRUD App with TiDB and MySQL Connector/Python
 summary: Learn how to build a simple CRUD application with TiDB and MySQL Connector/Python.
-aliases: ['/tidb/v6.5/dev-guide-sample-application-python', '/tidbcloud/dev-guide-sample-application-python']
+aliases: ['/tidb/v6.5/dev-guide-sample-application-python','/tidb/stable/dev-guide-sample-application-python','/tidbcloud/dev-guide-sample-application-python','/tidb/v6.5/dev-guide-outdated-for-python-mysql-connector']
 ---
 
 <!-- markdownlint-disable MD024 -->
