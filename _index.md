@@ -109,21 +109,19 @@ hide_commit: true
 
 [TiUP](https://docs.pingcap.com/tidb/dev/tiup-overview)
 
-[Dumpling](https://docs.pingcap.com/tidb/dev/dumpling-overview)
-
-[TiDB Lightning](https://docs.pingcap.com/tidb/dev/tidb-lightning-overview)
+[TiDB Operator](https://docs.pingcap.com/tidb/dev/tidb-operator-overview)
 
 [Data Migration](https://docs.pingcap.com/tidb/dev/dm-overview)
 
-[Backup & Restore (BR)](https://docs.pingcap.com/tidb/dev/backup-and-restore-overview)
+[TiDB Lightning](https://docs.pingcap.com/tidb/dev/tidb-lightning-overview)
+
+[Dumpling](https://docs.pingcap.com/tidb/dev/dumpling-overview)
 
 [TiCDC](https://docs.pingcap.com/tidb/dev/ticdc-overview)
 
+[Backup & Restore (BR)](https://docs.pingcap.com/tidb/dev/backup-and-restore-overview)
+
 [PingCAP Clinic](https://docs.pingcap.com/tidb/dev/clinic-introduction)
-
-[TiDB Operator](https://docs.pingcap.com/tidb/dev/tidb-operator-overview)
-
-[TiSpark](https://docs.pingcap.com/tidb/dev/tispark-overview)
 
 </LearningPath>
 
