@@ -44,7 +44,7 @@ On the right pane of the endpoint details page, you can click the **Properties**
     - Only letters, numbers, underscores (`_`), and slashes (`/`) are allowed in the path, which must start with a slash (`/`). For example, `/my_endpoint/get_id`.
     - The length of the path must be less than 64 characters.
 
-- **Endpoint URL**: (read-only) the URL is automatically generated based on the service URL of the Data App and the path of the endpoint. For example, if the path of the endpoint is `/my_endpoint/get_id`, the endpoint URL is `https://data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id`.
+- **Endpoint URL**: (read-only) the URL is automatically generated based on the region where the corresponding cluster is located, the service URL of the Data App, and the path of the endpoint. For example, if the path of the endpoint is `/my_endpoint/get_id`, the endpoint URL is `https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id`.
 
 - **Request Method**: the HTTP method of the endpoint. The following methods are supported:
 
@@ -202,7 +202,7 @@ TiDB Cloud generates code examples to help you call an endpoint. To get the code
 
     ```bash
     curl --digest --user '<Public Key>:<Private Key>' \
-      --request GET 'https://data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/<Endpoint Path>' \
+      --request GET 'https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/<Endpoint Path>' \
       --header 'endpoint-type: draft'
     ```
 
@@ -216,11 +216,16 @@ TiDB Cloud generates code examples to help you call an endpoint. To get the code
 
     ```bash
     curl --digest --user '<Public Key>:<Private Key>' \
-      --request GET 'https://data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/<Endpoint Path>'
+      --request GET 'https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/<Endpoint Path>'
     ```
 
     </div>
     </SimpleTab>
+
+    > **Note:**
+    >
+    > - By requesting the regional domain `<region>.data.tidbcloud.com`, you can directly access the endpoint in the region where the TiDB cluster is located.
+    > - Alternatively, you can also request the global domain `data.tidbcloud.com` without specifying a region. In this way, TiDB Cloud will internally redirect the request to the target region, but this might result in additional latency. If you choose this way, make sure to add the `--location-trusted` option to your curl command when calling an endpoint.
 
 5. Paste the code example in your application and run it.
 
