@@ -29,7 +29,7 @@ This document describes how to import the sample data into TiDB Cloud via the UI
 
     Fill in the following parameters:
 
-    - **Data format**: select **SQL File**.
+    - **Data format**: select **SQL File**. TiDB Cloud supports importing the following compressed file formats: `.gz`, `.lz4`, `.zstd`, `.xz`, `.lzo` and `.snappy`. If you want to import compressed SQL files, name the files in the `${db_name}.${table_name}.sql.${compress}` format. For example, if you want to import the `trips.sql.gz` file to the `bikeshare.trips` table, you can name the file as `bikeshare.trips.sql.gz`.
     - **Bucket URI**: enter the sample data URI `s3://tidbcloud-sample-data/data-ingestion/`
     - **Bucket Access**: for the sample data, you can only use a Role ARN to access its bucket. For your own data, you can use either an AWS access key or a Role ARN to access your bucket.
         - **AWS Access Keys**: Skip this option for the sample data.
