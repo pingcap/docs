@@ -4,7 +4,7 @@
 - [Docs Home](https://docs.pingcap.com/)
 - About TiDB
   - [TiDB Introduction](/overview.md)
-  - [TiDB 7.0 Release Notes](/releases/release-7.0.0.md)
+  - [TiDB 7.1 (upcoming) Release Notes](/releases/release-7.1.0.md)
   - [Features](/basic-features.md)
   - [MySQL Compatibility](/mysql-compatibility.md)
   - [TiDB Limitations](/tidb-limitations.md)
@@ -396,9 +396,8 @@
   - TiDB Lightning
     - [Overview](/tidb-lightning/tidb-lightning-overview.md)
     - [Get Started](/get-started-with-tidb-lightning.md)
-    - Prechecks and requirements
-      - [Prechecks](/tidb-lightning/tidb-lightning-prechecks.md)
-      - [Target Database Requirements](/tidb-lightning/tidb-lightning-requirements.md)
+    - [Deploy TiDB Lightning](/tidb-lightning/deploy-tidb-lightning.md)
+    - [Target Database Requirements](/tidb-lightning/tidb-lightning-requirements.md)
     - Data Sources
       - [Data Match Rules](/tidb-lightning/tidb-lightning-data-source.md)
       - [CSV](/tidb-lightning/tidb-lightning-data-source.md#csv)
@@ -411,18 +410,17 @@
     - Logical Import Mode
       - [Requirements and Limitations](/tidb-lightning/tidb-lightning-logical-import-mode.md)
       - [Use Logical Import Mode](/tidb-lightning/tidb-lightning-logical-import-mode-usage.md)
-    - Key Features
-      - [Checkpoints](/tidb-lightning/tidb-lightning-checkpoints.md)
-      - [Table Filter](/table-filter.md)
-      - [Import Data in Parallel](/tidb-lightning/tidb-lightning-distributed-import.md)
-      - [Error Resolution](/tidb-lightning/tidb-lightning-error-resolution.md)
-      - [Web Interface](/tidb-lightning/tidb-lightning-web-interface.md)
-    - [Deploy](/tidb-lightning/deploy-tidb-lightning.md)
+    - [Prechecks](/tidb-lightning/tidb-lightning-prechecks.md)
+    - [Table Filter](/table-filter.md)
+    - [Checkpoints](/tidb-lightning/tidb-lightning-checkpoints.md)
+    - [Import Data in Parallel](/tidb-lightning/tidb-lightning-distributed-import.md)
+    - [Error Resolution](/tidb-lightning/tidb-lightning-error-resolution.md)
     - [Troubleshooting](/tidb-lightning/troubleshoot-tidb-lightning.md)
     - Reference
       - [Configuration File](/tidb-lightning/tidb-lightning-configuration.md)
       - [Command Line Flags](/tidb-lightning/tidb-lightning-command-line-full.md)
-      - [Monitor](/tidb-lightning/monitor-tidb-lightning.md)
+      - [Monitoring](/tidb-lightning/monitor-tidb-lightning.md)
+      - [Web Interface](/tidb-lightning/tidb-lightning-web-interface.md)
       - [FAQ](/tidb-lightning/tidb-lightning-faq.md)
       - [Glossary](/tidb-lightning/tidb-lightning-glossary.md)
   - TiDB Data Migration
@@ -964,6 +962,8 @@
   - [Release Timeline](/releases/release-timeline.md)
   - [TiDB Versioning](/releases/versioning.md)
   - [TiDB Installation Packages](/binary-package.md)
+  - v7.1 (upcoming)
+    - [7.1.0](/releases/release-7.1.0.md)
   - v7.0
     - [7.0.0-DMR](/releases/release-7.0.0.md)
   - v6.6
