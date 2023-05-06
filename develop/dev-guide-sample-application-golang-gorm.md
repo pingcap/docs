@@ -8,7 +8,7 @@ summary: Learn how to build a simple CRUD application with TiDB and GORM.
 
 # Build a Simple CRUD App with TiDB and GORM
 
-[GORM](https://gorm.io/) is a popular open-source ORM library for Golang. 
+[GORM](https://gorm.io/) is a popular open-source ORM library for Golang.
 
 This document describes how to use TiDB and GORM to build a simple CRUD application.
 

@@ -9,7 +9,7 @@ aliases: ['/tidb/v6.5/dev-guide-outdated-for-sqlalchemy']
 
 # Build a Simple CRUD App with TiDB and SQLAlchemy
 
-[SQLAlchemy](https://www.sqlalchemy.org/) is a popular open-source ORM library for Python. 
+[SQLAlchemy](https://www.sqlalchemy.org/) is a popular open-source ORM library for Python.
 
 This document describes how to use TiDB and SQLAlchemy to build a simple CRUD application.
 

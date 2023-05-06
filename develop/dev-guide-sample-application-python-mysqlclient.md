@@ -8,7 +8,7 @@ summary: Learn how to build a simple CRUD application with TiDB and mysqlclient.
 
 # Build a Simple CRUD App with TiDB and mysqlclient
 
-[mysqlclient](https://pypi.org/project/mysqlclient/) is a popular open-source driver for Python. 
+[mysqlclient](https://pypi.org/project/mysqlclient/) is a popular open-source driver for Python.
 
 This document describes how to use TiDB and mysqlclient to build a simple CRUD application.
 

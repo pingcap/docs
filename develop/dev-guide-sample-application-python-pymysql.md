@@ -8,7 +8,7 @@ summary: Learn how to build a simple CRUD application with TiDB and PyMySQL.
 
 # Build a Simple CRUD App with TiDB and PyMySQL
 
-[PyMySQL](https://pypi.org/project/PyMySQL/) is a popular open-source driver for Python. 
+[PyMySQL](https://pypi.org/project/PyMySQL/) is a popular open-source driver for Python.
 
 This document describes how to use TiDB and PyMySQL to build a simple CRUD application.
 

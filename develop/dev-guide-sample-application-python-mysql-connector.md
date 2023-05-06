@@ -9,7 +9,7 @@ aliases: ['/tidb/v6.5/dev-guide-sample-application-python','/tidb/stable/dev-gui
 
 # Build a Simple CRUD App with TiDB and MySQL Connector/Python
 
-[MySQL Connector/Python](https://dev.mysql.com/doc/connector-python/en/) is a popular open-source driver for Python. 
+[MySQL Connector/Python](https://dev.mysql.com/doc/connector-python/en/) is a popular open-source driver for Python.
 
 This document describes how to use TiDB and MySQL Connector/Python to build a simple CRUD application.
 
