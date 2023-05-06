@@ -390,6 +390,7 @@
     - [Overview](/clinic/clinic-introduction.md)
     - [Quick Start](/clinic/quick-start-with-clinic.md)
     - [Troubleshoot Clusters Using PingCAP Clinic](/clinic/clinic-user-guide-for-tiup.md)
+    - [Collect SQL Query Plan Related Information](/clinic/clinic-collect-sql-query-plan.md)
     - [PingCAP Clinic Diagnostic Data](/clinic/clinic-data-instruction-for-tiup.md)
   - [TiDB Operator](/tidb-operator-overview.md)
   - [Dumpling](/dumpling-overview.md)
