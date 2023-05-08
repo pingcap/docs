@@ -23,7 +23,7 @@ This document describes how to import uncompressed CSV files from Amazon Simple 
 
     - If a CSV file contains all data of an entire table, name the file in the `${db_name}.${table_name}.csv` format, which maps to the `${db_name}.${table_name}` table when you import the data.
     - If the data of one table is separated into multiple CSV files, append a numeric suffix to these CSV files. For example, `${db_name}.${table_name}.000001.csv` and `${db_name}.${table_name}.000002.csv`. The numeric suffixes can be inconsecutive but must be in ascending order. You also need to add extra zeros before the number to ensure all the suffixes are in the same length.
-    - TiDB Cloud supports importing the following compressed file formats: `.gz`, `.lz4`, `.zstd`, `.xz`, `.lzo` and `.snappy`. If you want to import compressed CSV files, name the files in the `${db_name}.${table_name}.000001.csv.${compress}` format. For example, if you want to import the `trips.000001.csv.gz` file to the `bikeshare.trips` table, you can rename the file as `bikeshare.trips.000001.csv.gz`.
+    - TiDB Cloud supports importing the following compressed file formats: `.gzip`, `.gz`, `.zstd`, and `.snappy`. If you want to import compressed CSV files, name the files in the `${db_name}.${table_name}.000001.csv.${compress}` format. For example, if you want to import the `trips.000001.csv.gz` file to the `bikeshare.trips` table, you can rename the file as `bikeshare.trips.000001.csv.gz`.
 
     > **Note:**
     >
