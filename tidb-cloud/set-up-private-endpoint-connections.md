@@ -163,7 +163,7 @@ TiDB Cloud begins creating an endpoint service, which takes 3 to 4 minutes.
 When the endpoint service is created, take a note of your endpoint service name from the command in the lower area of the console.
 
 ```bash
-aws ec2 create-vpc-endpoint --vpc-id <your_vpc_id> --region <your_region> --service-name <your_endpoint_service_name> --vpc-endpoint-type Interface --subnet-ids <your_application_subnet_ids>
+aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${your_region} --service-name ${your_endpoint_service_name} --vpc-endpoint-type Interface --subnet-ids ${your_application_subnet_ids}
 ```
 
 Then create an AWS interface endpoint either using the AWS Management Console or using the AWS CLI.
@@ -245,7 +245,7 @@ To enable private DNS in your AWS Management Console:
 To enable private DNS using your AWS CLI, copy the command and run it in your AWS CLI.
 
 ```bash
-aws ec2 modify-vpc-endpoint --vpc-endpoint-id <your_vpc_endpoint_id> --private-dns-enabled
+aws ec2 modify-vpc-endpoint --vpc-endpoint-id ${your_vpc_endpoint_id} --private-dns-enabled
 ```
 
 </div>
