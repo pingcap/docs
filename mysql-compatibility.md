@@ -110,7 +110,13 @@ In TiDB, all supported DDL changes are performed online. Compared with DDL opera
     - `PARTITION BY LIST`
     - `PARTITION BY KEY`
     - `SUBPARTITION`
+<<<<<<< HEAD
     - `{CHECK|EXCHANGE|TRUNCATE|OPTIMIZE|REPAIR|IMPORT|DISCARD|REBUILD|REORGANIZE} PARTITION`
+=======
+    - `{CHECK|OPTIMIZE|REPAIR|IMPORT|DISCARD|REBUILD|COALESCE} PARTITION`
+
+  For more details, see [Partitioning](/partitioned-table.md).
+>>>>>>> 06d13b372 (Remove TRUNCATE PARTITION as non-supported (#13439))
 
 ### Analyze table
 
