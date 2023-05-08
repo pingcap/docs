@@ -98,7 +98,7 @@ aws ec2 create-vpc-endpoint --vpc-id <your_vpc_id> --region <region_id> --servic
 </div>
 </SimpleTab>
 
-Then you can connect to the endpoint service with private DNS name.
+Then you can connect to the endpoint service with the private DNS name.
 
 #### Step 3: Connect to your TiDB cluster
 
