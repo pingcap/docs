@@ -98,6 +98,7 @@ In TiDB, all supported DDL changes are performed online. Compared with DDL opera
 
 * Multiple operations cannot be completed in a single `ALTER TABLE` statement. For example, it is not possible to add multiple columns or indexes in a single statement. Otherwise, the `Unsupported multi schema change` error might be output.
 * Different types of indexes (`HASH|BTREE|RTREE|FULLTEXT`) are not supported, and will be parsed and ignored when specified.
+<<<<<<< HEAD
 * Adding/Dropping the primary key is unsupported unless [`alter-primary-key`](/tidb-configuration-file.md#alter-primary-key) is enabled.
 * Changing the field type to its superset is unsupported. For example, TiDB does not support changing the field type from `INTEGER` to `VARCHAR`, or from `TIMESTAMP` to `DATETIME`. Otherwise, the error information `Unsupported modify column: type %d not match origin %d` might be output.
 * Change/Modify data type does not currently support "lossy changes", such as changing from BIGINT to INT.
@@ -110,6 +111,13 @@ In TiDB, all supported DDL changes are performed online. Compared with DDL opera
     - `PARTITION BY KEY`
     - `SUBPARTITION`
     - `{CHECK|EXCHANGE|OPTIMIZE|REPAIR|IMPORT|DISCARD|REBUILD|REORGANIZE|COALESCE} PARTITION`
+=======
+* TiDB supports `HASH`, `RANGE`, and `LIST` partitioning types. For an unsupported partition type, TiDB returns `Warning: Unsupported partition type, treat as normal table`.
+* Table partitioning supports `ADD`, `DROP`, and `TRUNCATE` operations. Other partition operations are ignored. The following table partition syntaxes are not supported:
+    - `PARTITION BY KEY`
+    - `SUBPARTITION`
+    - `{CHECK|OPTIMIZE|REPAIR|IMPORT|DISCARD|REBUILD|REORGANIZE|COALESCE} PARTITION`
+>>>>>>> a0dd3beb2 (Remove TRUNCATE PARTITION as non-supported (#13439) (#13459))
 
 ### Analyze table
 
