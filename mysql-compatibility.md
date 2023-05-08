@@ -143,7 +143,7 @@ In TiDB DDL does not block reads or writes to tables while in operation. However
     - `PARTITION BY LIST`
     - `PARTITION BY KEY`
     - `SUBPARTITION`
-    - `{CHECK|EXCHANGE|TRUNCATE|OPTIMIZE|REPAIR|IMPORT|DISCARD|REBUILD|REORGANIZE} PARTITION`
+    - `{CHECK|EXCHANGE|OPTIMIZE|REPAIR|IMPORT|DISCARD|REBUILD|REORGANIZE|COALESCE} PARTITION`
 
 For more information, see [Online Schema Changes](/key-features.md#online-schema-changes).
 
