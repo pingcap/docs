@@ -110,22 +110,39 @@ hide_commit: true
 
 [TiUP](https://docs.pingcap.com/tidb/v6.1/tiup-overview)
 
+<<<<<<< HEAD
 [Dumpling](https://docs.pingcap.com/tidb/v6.1/dumpling-overview)
+=======
+[TiDB Operator](https://docs.pingcap.com/tidb/dev/tidb-operator-overview)
+
+[TiDB Data Migration (DM)](https://docs.pingcap.com/tidb/dev/dm-overview)
+>>>>>>> a5c13fc2e (*: sort tools; remove binlog recommendation (#13446))
 
 [TiDB Lightning](https://docs.pingcap.com/tidb/v6.1/tidb-lightning-overview)
 
+<<<<<<< HEAD
 [Data Migration](https://docs.pingcap.com/tidb/v6.1/dm-overview)
 
 [Backup & Restore (BR)](https://docs.pingcap.com/tidb/v6.1/backup-and-restore-overview)
+=======
+[Dumpling](https://docs.pingcap.com/tidb/dev/dumpling-overview)
+>>>>>>> a5c13fc2e (*: sort tools; remove binlog recommendation (#13446))
 
 [TiCDC](https://docs.pingcap.com/tidb/v6.1/ticdc-overview)
 
+<<<<<<< HEAD
 [PingCAP Clinic](https://docs.pingcap.com/tidb/v6.1/clinic-introduction)
 
 [TiDB Operator](https://docs.pingcap.com/tidb/v6.1/tidb-operator-overview)
 
 [TiSpark](https://docs.pingcap.com/tidb/v6.1/tispark-overview)
 
+=======
+[Backup & Restore (BR)](https://docs.pingcap.com/tidb/dev/backup-and-restore-overview)
+
+[PingCAP Clinic](https://docs.pingcap.com/tidb/dev/clinic-introduction)
+
+>>>>>>> a5c13fc2e (*: sort tools; remove binlog recommendation (#13446))
 </LearningPath>
 
 <LearningPath label="Reference" icon="cloud-dev">
