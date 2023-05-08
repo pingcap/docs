@@ -43,7 +43,7 @@ This document describes how to import the sample data into TiDB Cloud via the UI
 
     If your TiDB cluster is hosted by GCP, click **Import Data** in the upper-right corner, and then fill in the following parameters:
 
-    - **Data format**: select **SQL File**.
+    - **Data format**: select **SQL File**. TiDB Cloud supports importing compressed files in the following formats: `.gzip`, `.gz`, `.zstd`, `.zst` and `.snappy`. If you want to import compressed SQL files, name the files in the `${db_name}.${table_name}.${suffix}.sql.${compress}` format, in which `${suffix}` is optional and can be any integer such as '000001'. For example, if you want to import the `trips.000001.sql.gz` file to the `bikeshare.trips` table, you can rename the file as `bikeshare.trips.000001.sql.gz`. Note that you only need to compress the data files, not the database or table schema files.
     - **Bucket URI**: enter the sample data URI `gs://tidbcloud-samples-us-west1`.
 
     If the region of the bucket is different from your cluster, confirm the compliance of cross region. Click **Next**.
