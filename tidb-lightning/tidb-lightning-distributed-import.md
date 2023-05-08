@@ -18,13 +18,13 @@ You can use TiDB Lightning to import data in parallel in the following scenarios
 >
 > - Parallel import only supports initialized empty tables in TiDB and does not support migrating data to tables with data written by existing services. Otherwise, data inconsistencies may occur.
 >
-> - Parallel import is usually used in the physical import mode.
+> - Parallel import is usually used in the physical import mode. You need to configure `incremental-import = true`.
 >
 > - Apply only one backend at a time when using multiple TiDB Lightning instances to import data to the same target. For example, you cannot import data to the same TiDB cluster in both the physical and logical import modes at the same time.
 
 ## Considerations
 
-No additional configuration is required for parallel import using TiDB Lightning. When TiDB Lightning is started, it registers meta data in the downstream TiDB cluster and automatically detects whether there are other instances migrating data to the target cluster at the same time. If there is, it automatically enters the parallel import mode.
+To use parallel import, you need to configure `incremental-import = true`. When TiDB Lightning is started, it registers meta data in the downstream TiDB cluster and automatically detects whether there are other instances migrating data to the target cluster at the same time. If there is, it automatically enters the parallel import mode.
 
 But when migrating data in parallel, you need to take the following into consideration:
 
@@ -171,6 +171,11 @@ pattern = '(?i)^(?:[^/]*/)*my_db\.my_table\.(0[0-4][0-9][0-9][0-9]|05000)\.sql'
 schema = "my_db"
 table = "my_table"
 type = "sql"
+
+[tikv-importer]
+# Whether to allow importing data into tables that already have data. The default value is false.
+# When using parallel import, because multiple TiDB Lightning instances import a table at the same time, this configuration item must be set to true.
+incremental-import = true
 ```
 
 You can modify the configuration of the other instance to only import the `05001 ~ 10000` data files.
