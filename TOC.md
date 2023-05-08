@@ -413,7 +413,7 @@
         - [Relay Log](/dm/relay-log.md)
         - [DDL Handling](/dm/dm-ddl-compatible.md)
       - Mechanism
-        - [DML Replication Mechanism](/dm/dm-replication-logic.md)        
+        - [DML Replication Mechanism](/dm/dm-replication-logic.md)
       - Command Line
         - [DM-master & DM-worker](/dm/dm-command-line-flags.md)
       - Configuration Files
@@ -433,35 +433,6 @@
         - [Alert Rules](/dm/dm-alert-rules.md)
       - [Error Codes](/dm/dm-error-handling.md#handle-common-errors)
       - [Glossary](/dm/dm-glossary.md)
-<<<<<<< HEAD
-    - Example
-      - [Migrate Data Using DM](/dm/migrate-data-using-dm.md)
-      - [Create a Data Migration Task](/dm/quick-start-create-task.md)
-      - [Best Practices of Data Migration in the Shard Merge Scenario](/dm/shard-merge-best-practices.md)
-    - Troubleshoot
-      - [FAQ](/dm/dm-faq.md)
-      - [Handle Errors](/dm/dm-error-handling.md)
-    - [Release Notes](/dm/dm-release-notes.md)
-  - Backup & Restore (BR)
-    - [BR Overview](/br/backup-and-restore-overview.md)
-    - [Deploy and Use BR](/br/br-deployment.md)
-    - [Use BR to Back Up Cluster Data](/br/br-usage-backup.md)
-    - [Use BR to Restore Cluster Data](/br/br-usage-restore.md)
-    - [BR Use Cases](/br/backup-and-restore-use-cases.md)
-    - BR Features
-      - [Auto Tune](/br/br-auto-tune.md)
-      - [Batch Create Table](/br/br-batch-create-table.md)
-    - References
-      - [BR Design Principles](/br/backup-and-restore-design.md)
-      - [BR Command-line](/br/use-br-command-line-tool.md)
-      - [External Storages](/br/backup-and-restore-storages.md)
-      - [Back Up and Restore Data on Amazon S3 Using BR](/br/backup-storage-S3.md)
-      - [Back Up and Restore Data on Azure Blob Storage Using BR](/br/backup-storage-azblob.md)
-      - [Back Up and Restore Data on Google Cloud Storage Using BR](/br/backup-storage-gcs.md)
-      - [Back Up and Restore RawKV](/br/rawkv-backup-and-restore.md)
-      - [Back up and Restore Data Using Dumpling and TiDB Lightning](/backup-and-restore-using-dumpling-lightning.md)
-      - [BR FAQs](/br/backup-and-restore-faq.md)
-=======
       - Example
         - [Migrate Data Using DM](/dm/migrate-data-using-dm.md)
         - [Create a Data Migration Task](/dm/quick-start-create-task.md)
@@ -503,37 +474,38 @@
   - [Dumpling](/dumpling-overview.md)
   - TiCDC
     - [Overview](/ticdc/ticdc-overview.md)
-    - [Deploy and Maintain](/ticdc/deploy-ticdc.md)
-    - Changefeed
-      - [Overview](/ticdc/ticdc-changefeed-overview.md)
-      - Create Changefeeds
-        - [Replicate Data to MySQL-compatible Databases](/ticdc/ticdc-sink-to-mysql.md)
-        - [Replicate Data to Kafka](/ticdc/ticdc-sink-to-kafka.md)
-        - [Replicate Data to Storage Services](/ticdc/ticdc-sink-to-cloud-storage.md)
-      - [Manage Changefeeds](/ticdc/ticdc-manage-changefeed.md)
-      - [Log Filter](/ticdc/ticdc-filter.md)
-      - [Bidirectional Replication](/ticdc/ticdc-bidirectional-replication.md)
+    - [Deploy](/ticdc/deploy-ticdc.md)
+    - [Maintain](/ticdc/manage-ticdc.md)
     - Monitor and Alert
-      - [Monitoring Metrics Summary](/ticdc/ticdc-summary-monitor.md)
-      - [Monitoring Metrics Details](/ticdc/monitor-ticdc.md)
+      - [Monitoring Metrics](/ticdc/monitor-ticdc.md)
       - [Alert Rules](/ticdc/ticdc-alert-rules.md)
-    - Reference
-      - [Architecture](/ticdc/ticdc-architecture.md)
-      - [TiCDC Server Configurations](/ticdc/ticdc-server-config.md)
-      - [TiCDC Changefeed Configurations](/ticdc/ticdc-changefeed-config.md)
-      - Output Protocols
-        - [TiCDC Avro Protocol](/ticdc/ticdc-avro-protocol.md)
-        - [TiCDC Canal-JSON Protocol](/ticdc/ticdc-canal-json.md)
-        - [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
-        - [TiCDC CSV Protocol](/ticdc/ticdc-csv.md)
-      - [TiCDC Open API v2](/ticdc/ticdc-open-api-v2.md)
-      - [TiCDC Open API v1](/ticdc/ticdc-open-api.md)
-      - [Guide for Developing a Storage Sink Consumer](/ticdc/ticdc-storage-consumer-dev-guide.md)
-      - [Compatibility](/ticdc/ticdc-compatibility.md)
     - [Troubleshoot](/ticdc/troubleshoot-ticdc.md)
+    - Reference
+      - [TiCDC OpenAPI](/ticdc/ticdc-open-api.md)
+      - [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
+      - [TiCDC Avro Protocol](/ticdc/ticdc-avro-protocol.md)
+      - [TiCDC Canal-JSON Protocol](/ticdc/ticdc-canal-json.md)
     - [FAQs](/ticdc/ticdc-faq.md)
     - [Glossary](/ticdc/ticdc-glossary.md)
->>>>>>> a5c13fc2e (*: sort tools; remove binlog recommendation (#13446))
+  - Backup & Restore (BR)
+    - [BR Overview](/br/backup-and-restore-overview.md)
+    - [Deploy and Use BR](/br/br-deployment.md)
+    - [Use BR to Back Up Cluster Data](/br/br-usage-backup.md)
+    - [Use BR to Restore Cluster Data](/br/br-usage-restore.md)
+    - [BR Use Cases](/br/backup-and-restore-use-cases.md)
+    - BR Features
+      - [Auto Tune](/br/br-auto-tune.md)
+      - [Batch Create Table](/br/br-batch-create-table.md)
+    - References
+      - [BR Design Principles](/br/backup-and-restore-design.md)
+      - [BR Command-line](/br/use-br-command-line-tool.md)
+      - [External Storages](/br/backup-and-restore-storages.md)
+      - [Back Up and Restore Data on Amazon S3 Using BR](/br/backup-storage-S3.md)
+      - [Back Up and Restore Data on Azure Blob Storage Using BR](/br/backup-storage-azblob.md)
+      - [Back Up and Restore Data on Google Cloud Storage Using BR](/br/backup-storage-gcs.md)
+      - [Back Up and Restore RawKV](/br/rawkv-backup-and-restore.md)
+      - [Back up and Restore Data Using Dumpling and TiDB Lightning](/backup-and-restore-using-dumpling-lightning.md)
+      - [BR FAQs](/br/backup-and-restore-faq.md)
   - TiDB Binlog
     - [Overview](/tidb-binlog/tidb-binlog-overview.md)
     - [Quick Start](/tidb-binlog/get-started-with-tidb-binlog.md)
@@ -554,23 +526,6 @@
       - [Troubleshoot](/tidb-binlog/troubleshoot-tidb-binlog.md)
       - [Handle Errors](/tidb-binlog/handle-tidb-binlog-errors.md)
     - [FAQ](/tidb-binlog/tidb-binlog-faq.md)
-<<<<<<< HEAD
-  - TiCDC
-    - [Overview](/ticdc/ticdc-overview.md)
-    - [Deploy](/ticdc/deploy-ticdc.md)
-    - [Maintain](/ticdc/manage-ticdc.md)
-    - Monitor and Alert
-      - [Monitoring Metrics](/ticdc/monitor-ticdc.md)
-      - [Alert Rules](/ticdc/ticdc-alert-rules.md)
-    - [Troubleshoot](/ticdc/troubleshoot-ticdc.md)
-    - Reference
-      - [TiCDC OpenAPI](/ticdc/ticdc-open-api.md)
-      - [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
-      - [TiCDC Avro Protocol](/ticdc/ticdc-avro-protocol.md)
-      - [TiCDC Canal-JSON Protocol](/ticdc/ticdc-canal-json.md)
-    - [FAQs](/ticdc/ticdc-faq.md)
-    - [Glossary](/ticdc/ticdc-glossary.md)
-=======
   - PingCAP Clinic Diagnostic Service
     - [Overview](/clinic/clinic-introduction.md)
     - [Quick Start](/clinic/quick-start-with-clinic.md)
@@ -578,7 +533,6 @@
     - [PingCAP Clinic Diagnostic Data](/clinic/clinic-data-instruction-for-tiup.md)
   - TiSpark
     - [User Guide](/tispark-overview.md)
->>>>>>> a5c13fc2e (*: sort tools; remove binlog recommendation (#13446))
   - sync-diff-inspector
     - [Overview](/sync-diff-inspector/sync-diff-inspector-overview.md)
     - [Data Check for Tables with Different Schema/Table Names](/sync-diff-inspector/route-diff.md)
