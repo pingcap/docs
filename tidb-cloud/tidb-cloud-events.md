@@ -31,7 +31,7 @@ To view the events on the Events page, take the following steps:
 TiDB Cloud logs the following types of cluster events:
 
 | Event Type| Description | 
-|:--- |:--- |:--- |
+|:--- |:--- |
 | CreateCluster |  Create a cluster |  
 | PauseCluster |   Pause a cluster |  
 | ResumeCluster |   Resume a cluster | 
