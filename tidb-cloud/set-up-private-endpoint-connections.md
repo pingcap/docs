@@ -107,7 +107,8 @@ After you have created the interface endpoint, go back to the TiDB Cloud console
 1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click the name of your target cluster to go to its overview page.
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 3. Select the **Private Endpoint** tab.
-4. Under **Connect With**, click the tab of your preferred connection method, and then connect to your cluster with the connection string.
+4. In the **Connect With** drop-down list, select your preferred connection method. The corresponding connection string is displayed at the bottom of the dialog.
+5. Connect to your cluster with the connection string.
 
 > **Tip:**
 >
