@@ -49,7 +49,7 @@ For `[query_parameters]` in the URI, the following parameters can be configured:
 | `flush-interval` | Interval for saving data changes to cloud storage in the downstream.   | `5s` | `[2s, 10m]` |
 | `file-size` | A data change file is stored to cloud storage if the number of bytes exceeds the value of this parameter. | `67108864` | `[1048576, 536870912]` |
 | `protocol` | The protocol format of the messages sent to the downstream.  | N/A |  `canal-json` and `csv` |
-| `enable-tidb-extension` | When `protocol` is set to `canal-json` and `enable-tidb-extension` is set to `true`, TiCDC sends [WATERMARK events](/ticdc/ticdc-canal-json.md#watermark-event) and adds the [TiDB extension field](/ticdc/ticdc-canal-json.md#tidb-extension-field) to canal-json messages. | `false` | `false` and `true` |
+| `enable-tidb-extension` | When `protocol` is set to `canal-json` and `enable-tidb-extension` is set to `true`, TiCDC sends [WATERMARK events](/ticdc/ticdc-canal-json.md#watermark-event) and adds the [TiDB extension field](/ticdc/ticdc-canal-json.md#tidb-extension-field) to Canal-JSON messages. | `false` | `false` and `true` |
 
 > **Note:**
 >
