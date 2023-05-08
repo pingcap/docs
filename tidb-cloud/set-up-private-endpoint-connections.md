@@ -31,7 +31,7 @@ In most scenarios, you are recommended to use private endpoint connection over V
 
 ## Set up a private endpoint with AWS
 
-This section describes how to set up a private endpoint with AWS PrivateLink.
+This section describes how to set up a private endpoint with AWS PrivateLink for a Serverless Tier cluster and a Dedicated Tier cluster.
 
 ### Serverless Tier
 
