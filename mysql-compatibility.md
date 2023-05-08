@@ -147,16 +147,12 @@ In TiDB, all supported DDL changes are performed online. Compared with DDL opera
 * The `ALGORITHM={INSTANT,INPLACE,COPY}` syntax functions only as an assertion in TiDB, and does not modify the `ALTER` algorithm. See [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md) for further details.
 * Adding/Dropping the primary key of the `CLUSTERED` type is unsupported. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
 * Different types of indexes (`HASH|BTREE|RTREE|FULLTEXT`) are not supported, and will be parsed and ignored when specified.
-* Table Partitioning supports `HASH`, `RANGE`, and `LIST` partitioning types. For the unsupported partition type, the `Warning: Unsupported partition type %s, treat as normal table` error might be output, where `%s` is a specific partition type.
-* Table Partitioning also supports `ADD`, `DROP`, and `TRUNCATE` operations. Other partition operations are ignored. The following Table Partition syntaxes are not supported:
+* TiDB supports `HASH`, `RANGE`, and `LIST` partitioning types. For an unsupported partition type, TiDB returns `Warning: Unsupported partition type, treat as normal table`, where `%s` is a specific partition type.
+* Table partitioning supports `ADD`, `DROP`, and `TRUNCATE` operations. Other partition operations are ignored. The following table partition syntaxes are not supported:
     - `PARTITION BY KEY`
     - `PARTITION BY LINEAR KEY`
     - `SUBPARTITION`
-<<<<<<< HEAD
-    - `{CHECK|TRUNCATE|OPTIMIZE|REPAIR|IMPORT|DISCARD|REBUILD|REORGANIZE|COALESCE} PARTITION`
-=======
-    - `{CHECK|OPTIMIZE|REPAIR|IMPORT|DISCARD|REBUILD|COALESCE} PARTITION`
->>>>>>> 06d13b372 (Remove TRUNCATE PARTITION as non-supported (#13439))
+    - `{CHECK|OPTIMIZE|REPAIR|IMPORT|DISCARD|REBUILD|REORGANIZE|COALESCE} PARTITION`
 
     For more details, see [Partitioning](/partitioned-table.md).
 
