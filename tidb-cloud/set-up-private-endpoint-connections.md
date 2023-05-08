@@ -75,7 +75,7 @@ To use the AWS Management Console to create a VPC interface endpoint, perform th
 
     > **Note:**
     >
-    >  Make sure the selected security group allows inbound access from your EC2 instances on Port 4000 or a customer-defined port.
+    >  Make sure the selected security group allows inbound access from your EC2 instances on port 4000.
 
 9. Click **Create endpoint**.
 
