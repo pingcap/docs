@@ -46,7 +46,7 @@ To connect to your Serverless Tier cluster via a private endpoint, follow these 
 1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click the name of your target Serverless Tier cluster to go to its overview page.
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 3. In the **Endpoint Type** drop-down list, select **Private**.
-4. Take a note of **Service Name**, **Region ID** and **Availability Zone ID**.
+4. Take a note of **Service Name**, **Availability Zone ID**, and **Region ID**.
 
     > **Note:**
     >
