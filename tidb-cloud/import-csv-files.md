@@ -23,12 +23,12 @@ This document describes how to import uncompressed CSV files from Amazon Simple 
 
     - If a CSV file contains all data of an entire table, name the file in the `${db_name}.${table_name}.csv` format, which maps to the `${db_name}.${table_name}` table when you import the data.
     - If the data of one table is separated into multiple CSV files, append a numeric suffix to these CSV files. For example, `${db_name}.${table_name}.000001.csv` and `${db_name}.${table_name}.000002.csv`. The numeric suffixes can be inconsecutive but must be in ascending order. You also need to add extra zeros before the number to ensure all the suffixes are in the same length.
-    - TiDB Cloud supports importing the following compressed file formats: `.gz`, `.lz4`, `.zstd`, `.xz`, `.lzo` and `.snappy`. If you want to import compressed CSV files, name the files in the `${db_name}.${table_name}.000001.csv.${compress}` format. For example, if you want to import the `trips.csv.gz` file to the `bikeshare.trips` table, you can name the file as `bikeshare.trips.000001.csv.gz`. 
+    - TiDB Cloud supports importing the following compressed file formats: `.gz`, `.lz4`, `.zstd`, `.xz`, `.lzo` and `.snappy`. If you want to import compressed CSV files, name the files in the `${db_name}.${table_name}.000001.csv.${compress}` format. For example, if you want to import the `trips.csv.gz` file to the `bikeshare.trips` table, you can name the file as `bikeshare.trips.000001.csv.gz`.
 
     > **Note:**
     >
-    > To achieve better performance, it is recommended to limit the size of each compressed file to 100 MiB.
-    > If you cannot update the CSV filenames according to the preceding rules in some cases (for example, the CSV file links are also used by your other programs), you can keep the filenames unchanged and use the **File Pattern** in [Step 4](#step-4-import-csv-files-to-tidb-cloud) to import your source data to a single target table.
+    > - To achieve better performance, it is recommended to limit the size of each compressed file to 100 MiB.
+    > - If you cannot update the CSV filenames according to the preceding rules in some cases (for example, the CSV file links are also used by your other programs), you can keep the filenames unchanged and use the **File Pattern** in [Step 4](#step-4-import-csv-files-to-tidb-cloud) to import your source data to a single target table.
 
 ## Step 2. Create the target table schemas
 
