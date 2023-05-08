@@ -102,7 +102,7 @@ Then you can connect to the endpoint service with the private DNS name.
 
 #### Step 3: Connect to your TiDB cluster
 
-After you have created interface endpoint, go back to the TiDB Cloud console and take the following steps:
+After you have created the interface endpoint, go back to the TiDB Cloud console and take the following steps:
 
 1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click the name of your target cluster to go to its overview page.
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
