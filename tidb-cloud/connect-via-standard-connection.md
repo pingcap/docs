@@ -17,7 +17,12 @@ To connect to a Serverless Tier cluster via standard connection, perform the fol
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
-3. In the dialog, select your preferred connection method and operating system to get the corresponding connection string.
+3. In the dialog, keep the default setting of the endpoint type as `Public`, and select your preferred connection method and operating system to get the corresponding connection string.
+
+    > **Note:**
+    >
+    > - Keeping the endpoint type as `Public` means the connection is via standard TLS connection. For more information, see [TLS Connection to Serverless Tier](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md).
+    > - If you choose `private` in the **Endpoint Type** drop-down list, it means that the connection is via private endpoint. For more information, see [Connect via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections.md#serverless-tier).
 
 4. If you have not set a password yet, click **Create password** to generate a random password. The generated password will not show again, so save your password in a secure location.
 
@@ -25,8 +30,7 @@ To connect to a Serverless Tier cluster via standard connection, perform the fol
 
     > **Note:**
     >
-    > - When you connect to a Serverless Tier cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
-    > - Serverless Tier clusters only support TLS connection. For more information, see [TLS Connection to Serverless Tier](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md).
+    > When you connect to a Serverless Tier cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
 
 ## Dedicated Tier
 

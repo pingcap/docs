@@ -17,6 +17,10 @@ For Serverless Tier clusters, you can connect to your cluster via standard conne
 
     Serverless Tier only [supports TLS connections](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md), which ensures the security of data transmission from your applications to TiDB clusters.
 
+- [Connect via private endpoint](/tidb-cloud/set-up-private-endpoint-connections.md) (recommended)
+
+    Private endpoint connection provides a private endpoint to allow SQL clients in your VPC to securely access services over AWS PrivateLink, which provides highly secure and one-way access to database services with simplified network management.
+
 - [Connect via Chat2Query (beta)](/tidb-cloud/explore-data-with-chat2query.md)
 
     TiDB Cloud is powered by artificial intelligence (AI). You can use Chat2Query (beta), an AI-powered SQL editor in the [TiDB Cloud console](https://tidbcloud.com/), to maximize your data value.
