@@ -118,9 +118,7 @@ After you have created the interface endpoint, go back to the TiDB Cloud console
 
 ### Dedicated Tier
 
-To connect to your Dedicated Tier cluster via a private endpoint, follow these steps:
-
-In addition to the [prerequisites](#prerequisites), follow these steps to set up a private endpoint connection with AWS PrivateLink:
+To connect to your Dedicated Tier cluster via a private endpoint, complete the [prerequisites](#prerequisites) and follow these steps:
 
 1. [Choose a TiDB cluster](#step-1-choose-a-tidb-cluster)
 2. [Check the service endpoint region](#step-2-check-the-service-endpoint-region)
