@@ -114,7 +114,7 @@ After you have created the interface endpoint, go back to the TiDB Cloud console
 >
 > If you cannot connect to the cluster, the reason might be that the security group of your VPC endpoint in AWS is not properly set. See [this FAQ](#troubleshooting) for solutions.
 >
-> If you encounter an error while creating a VPC endpoint that reads "private-dns-enabled cannot be set because there is already a conflicting DNS domain for gatewayXX-privatelink.XX.prod.aws.tidbcloud.com in the VPC vpc-XXXXX," it is due to the fact that a private endpoint has already been created, and creating a new one is unnecessary.
+> When creating a VPC endpoint, if you encounter an error `private-dns-enabled cannot be set because there is already a conflicting DNS domain for gatewayXX-privatelink.XX.prod.aws.tidbcloud.com in the VPC vpc-XXXXX`, it is due to that a private endpoint has already been created, and creating a new one is unnecessary.
 
 ### Dedicated Tier
 
