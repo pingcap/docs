@@ -145,7 +145,7 @@ To connect to TiDB Cloud's Dedicated Tier clusters, follow these steps:
 
 #### Step 1. Choose a TiDB cluster
 
-1. Click the drop-down list and choose an available dedicated tier cluster.
+1. Click the drop-down list and choose an available Dedicated Tier cluster.
 2. Click **Next**.
 
 #### Step 2. Check the service endpoint region
