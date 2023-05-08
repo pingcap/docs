@@ -88,7 +88,7 @@ To use the AWS CLI to create a VPC interface endpoint, perform the following ste
 2. Copy the command provided below and replace the relevant arguments with the information you obtained, then execute it in your terminal.
 
 ```bash
-aws ec2 create-vpc-endpoint --vpc-id <your_vpc_id> --region <region_id> --service-name <service_name> --vpc-endpoint-type Interface --subnet-ids <your_subnet_id>
+aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${region_id} --service-name ${service_name} --vpc-endpoint-type Interface --subnet-ids ${your_subnet_id}
 ```
 
 > **Tip:**
