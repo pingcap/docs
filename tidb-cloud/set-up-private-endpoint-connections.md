@@ -171,15 +171,15 @@ Then create an AWS interface endpoint either using the AWS Management Console or
 
 To use the AWS Management Console to create a VPC interface endpoint, perform the following steps:
 
-1. Go to **VPC** > **Endpoints**.
-2. Click **Create Endpoint**.
+1. Sign in to the [AWS Management Console](https://aws.amazon.com/console/) and open the Amazon VPC console at < https://console.aws.amazon.com/vpc/>.
+2. Click **Endpoints** in the navigation pane, and then click **Create Endpoint** in the upper-right corner.
 
     The **Create endpoint** page is displayed.
 
     ![Verify endpoint service](/media/tidb-cloud/private-endpoint/create-endpoint-2.png)
 
 3. Select **Other endpoint services**.
-4. Enter the endpoint service name.
+4. Enter the service name that you found in [step 1](#step-1-choose-a-tidb-cluster).
 5. Click **Verify service**.
 6. Select your VPC in the drop-down list.
 7. Select the availability zones where your TiDB cluster is located in the **Subnets** area.
