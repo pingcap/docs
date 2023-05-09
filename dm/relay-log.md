@@ -12,15 +12,15 @@ After relay log is enabled, DM-worker automatically migrates the upstream binlog
 
 ## User scenarios
 
-In MySQL, storage space is limited, so the binlog is automatically purged when the maximum retention time is reached. After the upstream database purges the binlog, DM fails to pull the purged binlog and the migration task fails. For each migration task, DM creates a connection in the upstream to pull binlog. Too many connections might cause a heavy load on the upstream database.
+In MySQL, storage space is limited, so the binlog is automatically purged when the maximum retention time is reached. After the upstream database purges the binlog, DM fails to pull the purged binlog and the migration task fails. For each migration task, DM creates a connection in the upstream to pull binlog. Too many connections might cause a heavy workload on the upstream database.
 
 When the relay log is enabled, multiple migration task with the same upstream database can reuse the relay log that has been pulled to the local disk. This **relieves the pressure on the upstream database**.
 
-For full and incremental data migration tasks, DM needs to first migrate full data and then perform incremental migration based on binlog. If the full migration phase takes long, the upstream binlog might be purged, which results in incremental migration failure. To avoid this situation, you can enable the relay log feature so that DM automatically retains enough log in the local disk and **ensures the incremental migration task can be performed normally**.
+For full and incremental data migration tasks (`task-mode=all`), DM needs to first migrate full data and then perform incremental migration based on binlog. If the full migration phase takes long, the upstream binlog might be purged, which results in incremental migration failure. To avoid this situation, you can enable the relay log feature so that DM automatically retains enough log in the local disk and **ensures the incremental migration task can be performed normally**.
 
 It is generally recommended to enable relay log, but be aware of the following potential issue:
 
-Because relay log must be written to the disk, it consumes external IO and CPU resources. This prolongs the whole data replication link and increases the data replication latency. For **latency-sensitive** scenarios, it is not recommended to enable relay log.
+Because relay log must be written to the disk, it consumes external IO and CPU resources. This prolongs the whole data replication process and increases the data replication latency. For **latency-sensitive** scenarios, it is not recommended to enable relay log.
 
 > **Note:**
 >
@@ -246,7 +246,7 @@ DM provides two ways to purge relay logs: manual purge and automatic purge. Neit
 
 #### Automatic purge
 
-You can enable automatic data purge and configure its strategy in the source configuration file. See the following example:
+You can enable automatic purge and configure its strategy in the source configuration file. See the following example:
 
 ```yaml
 # relay log purge strategy
@@ -270,7 +270,7 @@ purge:
 
 #### Manual purge
 
-Manual data purge means using the `purge-relay` command provided by dmctl to specify `subdir` and the binlog name thus to purge all the relay logs **before** the specified binlog. If the `-subdir` option in the command is not specified, all relay logs **before** the current relay log sub-directory are purged.
+Manual purge means using the `purge-relay` command provided by dmctl to specify `subdir` and the binlog name thus to purge all the relay logs **before** the specified binlog. If the `-subdir` option in the command is not specified, all relay logs **before** the current relay log sub-directory are purged.
 
 Assuming that the directory structure of the current relay log is as follows:
 
@@ -388,4 +388,4 @@ An example of the directory structure of the local storage for a relay log:
 
     > **Note:**
     >
-    > If the upstream relay log is purged, an error occurs. In this case, you need to configure `relay-binlog-gtid` to specify the start position of the migration.
+    > If the upstream relay log is purged, an error occurs. In this case, you need to configure [`relay-binlog-gtid`](/dm/dm-source-configuration-file.md#global-configuration) to specify the start position of the migration.
