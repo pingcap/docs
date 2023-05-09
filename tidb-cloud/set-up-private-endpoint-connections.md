@@ -131,7 +131,6 @@ If you have multiple clusters, you need to repeat these steps for each cluster t
 
 #### Prerequisites
 
-
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
 2. In the left navigation pane of the [**Clusters**](https://tidbcloud.com/console/clusters) page, do one of the following:
 
