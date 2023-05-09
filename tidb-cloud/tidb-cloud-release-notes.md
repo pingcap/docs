@@ -8,6 +8,42 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2023.
 
+## May 9, 2023
+
+**General changes**
+
+- Support changing node sizes for GCP-hosted clusters created after April 26, 2023.
+
+    With this feature, you can upgrade to higher-performance nodes for increased demand or downgrade to lower-performance nodes for cost savings. With this added flexibility, you can adjust your cluster's capacity to align with your workloads and optimize costs.
+
+    For detailed steps, see [Change node size](/tidb-cloud/scale-tidb-cluster.md#change-node-size).
+
+- Support importing compressed files. You can import CSV and SQL files in the following formats: `.gzip`, `.gz`, `.zstd`, `.zst` and `.snappy`. This feature provides a more efficient and cost-effective way to import data and reduces your data transfer costs.
+
+    For more information, see [Import CSV Files from Amazon S3 or GCS into TiDB Cloud](/tidb-cloud/import-csv-files.md) and [Import Sample Data](/tidb-cloud/import-sample-data.md).
+
+- Support AWS PrivateLink-powered endpoint connection as a new network access management option for TiDB Cloud [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters.
+
+    The private endpoint connection does not expose your data to the public internet. In addition, the endpoint connection supports CIDR overlap and is easier for network management.
+
+    For more information, see [Set Up Private Endpoint Connections](/tidb-cloud/set-up-private-endpoint-connections.md).
+
+**Console changes**
+
+- Add new event types to the [**Event**](/tidb-cloud/tidb-cloud-events.md) page to record backup, restore, and changefeed actions for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters.
+
+    To get a full list of the events that can be recorded, see [Logged events](/tidb-cloud/tidb-cloud-events.md#logged-events).
+
+- Introduce the **SQL Statement** tab on the **SQL Diagnosis** page for [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters.
+
+    The **SQL Statement** tab provides the following:
+
+    - A comprehensive overview of all SQL statements executed by your TiDB database, allowing you to easily identify and diagnose slow queries.
+    - Detailed information on each SQL statement, such as the query time, execution plan, and the database server response, helping you optimize your database performance.
+    - A user-friendly interface that makes it easy to sort, filter, and search through large amounts of data, enabling you to focus on the most critical queries.
+
+  For more information, see [Statement Analysis](/tidb-cloud/tune-performance.md#statement-analysis).
+
 ## May 6, 2023
 
 **General changes**
