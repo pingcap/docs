@@ -59,7 +59,7 @@ To connect to your Serverless Tier cluster via a private endpoint, follow these 
 
 To use the AWS Management Console to create a VPC interface endpoint, perform the following steps:
 
-1. Go to **VPC** > **Endpoints**.
+1. Sign in to the [AWS Management Console](https://aws.amazon.com/console/) and open the Amazon VPC console at < https://console.aws.amazon.com/vpc/>.
 2. Click **Create Endpoint**.
 
     The **Create endpoint** page is displayed.
