@@ -29,7 +29,7 @@ We are constantly filling in the feature gaps between Serverless Tier and Dedica
 
 ### Connection
 
-- Only [Standard Connection](/tidb-cloud/connect-via-standard-connection.md) can be used. You cannot use [Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections.md) or [VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md) to connect to Serverless Tier clusters. 
+- Only [Standard Connection](/tidb-cloud/connect-via-standard-connection.md) and [Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections.md) can be used. You cannot use [VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md) to connect to Serverless Tier clusters. 
 - No "IP Access List" support.
 
 ### Monitoring

@@ -12,7 +12,7 @@ Establishing a secure TLS connection between your client and your TiDB Cloud Ser
 - Log in to TiDB Cloud via [Password Authentication](/tidb-cloud/tidb-cloud-password-authentication.md) or [SSO Authentication](/tidb-cloud/tidb-cloud-sso-authentication.md).
 - [Create a TiDB Cloud Serverless Tier cluster](/tidb-cloud/tidb-cloud-quickstart.md).
 
-## Secure connection to a Serverless Tier cluster
+## TLS connection to a Serverless Tier cluster
 
 In the [TiDB Cloud console](https://tidbcloud.com/), you can get examples of different connection methods and connect to your Serverless Tier cluster as follows:
 
@@ -20,7 +20,7 @@ In the [TiDB Cloud console](https://tidbcloud.com/), you can get examples of dif
 
 2. Click **Connect** in the upper-right corner. A dialog is displayed.
 
-3. In the dialog, select your preferred connection method and operating system.
+3. In the dialog, keep the default setting of the endpoint type as `Public`, and select your preferred connection method and operating system.
 
     - Supported connection methods: MySQL CLI, MyCLI, JDBC, Python, Go, and Node.js.
     - Supported operating systems: MacOS, Debian, CentOS/RedHat/Fedora, Alpine, OpenSUSE, and Windows.
@@ -199,6 +199,6 @@ TiDB Cloud Serverless Tier only supports one-way TLS authentication, which means
 
 ### Does TiDB Serverless Tier have to configure TLS to establish a secure connection?
 
-Yes.
+For standard connection, TiDB Cloud Serverless Tier only allows TLS connections and prohibits non-SSL/TLS connections. The reason is that SSL/TLS is one of the most basic security measures for you to reduce the risk of data exposure to the internet when you connect to the Serverless Tier cluster through the internet.
 
-TiDB Cloud Serverless Tier only allows TLS connections and prohibits non-SSL/TLS connections. The reason is that SSL/TLS is one of the most basic security measures for you to reduce the risk of data exposure to the internet when you connect to the Serverless Tier cluster through the internet.
+For private endpoint connection, because it supports highly secure and one-way access to the TiDB Cloud service and does not expose your data to the public internet, configuring TLS is optional.
