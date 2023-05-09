@@ -18,11 +18,7 @@ You can use TiDB Lightning to import data in parallel in the following scenarios
 >
 > - Parallel import only supports initialized empty tables in TiDB and does not support migrating data to tables with data written by existing services. Otherwise, data inconsistencies may occur.
 >
-<<<<<<< HEAD
-> - Parallel import is usually used in local-backend mode.
-=======
-> - Parallel import is usually used in the physical import mode. You need to configure `incremental-import = true`.
->>>>>>> fe05a21fe (lightning: update distributed import (#13483))
+> - Parallel import is usually used in local-backend mode. You need to configure `incremental-import = true`.
 >
 > - Apply only one backend at a time when using multiple TiDB Lightning instances to import data to the same target. For example, you cannot import data to the same TiDB cluster in both Local-backend and TiDB-backend modes at the same time.
 
