@@ -19,7 +19,7 @@ For Serverless Tier clusters, you can connect to your cluster via one of the fol
 
     The standard connection exposes a public endpoint with traffic filters, so you can connect to your TiDB cluster via a SQL client from your laptop.
 
-    Serverless Tier only [supports TLS connections](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md), which ensures the security of data transmission from your applications to TiDB clusters.
+    Serverless Tier supports [TLS connections](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md), which ensures the security of data transmission from your applications to TiDB clusters.
 
 - [Connect via Chat2Query (beta)](/tidb-cloud/explore-data-with-chat2query.md)
 
