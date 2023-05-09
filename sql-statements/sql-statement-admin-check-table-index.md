@@ -8,10 +8,10 @@ category: reference
 
 The `ADMIN CHECK [TABLE|INDEX]` statement checks for data consistency of tables and indexes.
 
-It does not support:
+It does not support the following:
 
-- checking [FOREIGN KEY constraints](/foreign-key.md).
-- checking the PRIMARY KEY index if a [clustered primary key](/clustered-indexes.md) is used.
+- Checking [FOREIGN KEY constraints](/foreign-key.md).
+- Checking the PRIMARY KEY index if a [clustered primary key](/clustered-indexes.md) is used.
 
 If `ADMIN CHECK [TABLE|INDEX]` finds any issues these can be fixed by recreating the index by dropping the index and adding it again. 
 
