@@ -8,3 +8,4 @@ The first two chapters of SQL Tuning introduce how to understand TiDB's executio
 
 - In [Optimizer Hints](/optimizer-hints.md), you will learn how to use hints to guide TiDB to generate an execution plan.
 - But hints change the SQL statement intrusively. In some scenarios, hints cannot be simply inserted. In [SQL Plan Management](/sql-plan-management.md), you will know how TiDB uses another syntax to non-intrusively control the generation of execution plans, and the methods of automatic execution plan evolution in the background. This method helps address issues such as execution plan instability caused by version upgrades and cluster performance degradation.
+- Finally, you will learn how to use the blocklist in [Blocklist of Optimization Rules and Expression Pushdown](/blocklist-control-plan.md).
