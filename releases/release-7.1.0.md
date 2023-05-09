@@ -90,7 +90,7 @@ In v7.1.0-LTS, the key new features and improvements are as follows:
 
     For more information, see [documentation](/sql-non-prepared-plan-cache.md).
 
-* Supports the DDL distributed parallel execution framework [#41495](https://github.com/pingcap/tidb/issues/41495) @[benjamin2037](https://github.com/benjamin2037)
+* Supports the DDL distributed parallel execution framework [#41495](https://github.com/pingcap/tidb/issues/41495) @[benjamin2037](https://github.com/benjamin2037) **tw:ran-huang**
 
     Before TiDB v7.1.0, only one TiDB node could serve as the DDL owner and execute DDL tasks. However, starting from TiDB v7.1.0, in the new distributed parallel execution framework, multiple TiDB nodes can execute the same DDL task in parallel, thus better utilizing the resources of the TiDB cluster and significantly improving the performance of DDL. In addition, you can linearly improve the performance of DDL by adding more TiDB nodes. It should be noted that this feature is currently an experimental feature and only supports `ADD INDEX` operations.
 
