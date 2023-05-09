@@ -55,7 +55,7 @@ To create a changefeed, refer to the tutorials:
 
 4. After editing the configuration, click **...** > **Resume** to resume the corresponding changefeed.
 
-## Query TiCDC RCUs
+## Query Changefeed RCUs
 
 1. Navigate to the cluster overview page of the target TiDB cluster, and then click **Changefeed** in the left navigation pane.
 2. You can see the current TiCDC Replication Capacity Units (RCUs) in the upper-left corner of the page.
