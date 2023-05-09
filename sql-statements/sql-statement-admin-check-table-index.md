@@ -13,7 +13,7 @@ It does not support the following:
 - Checking [FOREIGN KEY constraints](/foreign-key.md).
 - Checking the PRIMARY KEY index if a [clustered primary key](/clustered-indexes.md) is used.
 
-If `ADMIN CHECK [TABLE|INDEX]` finds any issues these can be fixed by recreating the index by dropping the index and adding it again. 
+If `ADMIN CHECK [TABLE|INDEX]` finds any issues, you can resolve them by dropping and recreating the index. 
 
 ## Principles
 
