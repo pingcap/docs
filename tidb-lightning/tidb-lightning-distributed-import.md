@@ -18,13 +18,13 @@ v5.3.0 以降、 TiDB Lightningの[ローカル バックエンド モード](/t
 >
 > -   並列インポートは、TiDB で初期化された空のテーブルのみをサポートし、既存のサービスによって書き込まれたデータを含むテーブルへのデータの移行はサポートしていません。そうしないと、データの不整合が発生する可能性があります。
 >
-> -   並列インポートは通常、ローカル バックエンド モードで使用されます。
+> -   並列インポートは通常、ローカル バックエンド モードで使用されます。 `incremental-import = true`を構成する必要があります。
 >
 > -   複数のTiDB Lightningインスタンスを使用して同じターゲットにデータをインポートする場合は、一度に 1 つのバックエンドのみを適用します。たとえば、ローカル バックエンド モードと TiDB バックエンド モードの両方で同時に同じ TiDB クラスターにデータをインポートすることはできません。
 
 ## 考慮事項 {#considerations}
 
-TiDB Lightningを使用したパラレル インポートでは、追加の構成は必要ありません。 TiDB Lightningを起動すると、下流の TiDB クラスターにメタデータを登録し、同時にターゲット クラスターにデータを移行している他のインスタンスが存在するかどうかを自動的に検出します。あれば自動的に並行輸入モードに入る。
+並行インポートを使用するには、構成する必要があります`incremental-import = true` 。 TiDB Lightningを起動すると、下流の TiDB クラスターにメタデータを登録し、同時にターゲット クラスターにデータを移行している他のインスタンスが存在するかどうかを自動的に検出します。あれば自動的に並行輸入モードに入る。
 
 ただし、データを並行して移行する場合は、次の点を考慮する必要があります。
 
@@ -75,7 +75,7 @@ TiDB Lightning は、実行中に一部のリソースを排他的に使用し�
 
 TiDB Lightningがデプロイされている 5 つのノードで 2 つのシャード テーブルをエクスポートします。
 
--   2 つのシャード テーブルが同じ MySQL インスタンスにある場合は、 Dumplingの`--filter`パラメータを使用してそれらを直接エクスポートできます。 TiDB Lightningを使用してインポートする場合、 Dumpling がデータをエクスポートするディレクトリとして`data-source-dir`指定できます。
+-   2 つの分割されたテーブルが同じ MySQL インスタンスにある場合は、 Dumplingの`--filter`パラメータを使用してそれらを直接エクスポートできます。 TiDB Lightningを使用してインポートする場合、 Dumpling がデータをエクスポートするディレクトリとして`data-source-dir`指定できます。
 -   2 つのシャード テーブルのデータが異なる MySQL ノードに分散されている場合は、 Dumpling を使用してそれらを個別にエクスポートする必要があります。エクスポートされたデータは、同じ親ディレクトリに配置する必要があります<b>が、異なるサブディレクトリに</b>配置する必要があります。 TiDB Lightningを使用して並列インポートを実行する場合、親ディレクトリとして`data-source-dir`を指定する必要があります。
 
 Dumpling を使用してデータをエクスポートする方法の詳細については、 [Dumpling](/dumpling-overview.md)を参照してください。
@@ -93,8 +93,8 @@ status-addr = ":8289"
 data-source-dir = "/path/to/source-dir"
 
 [tikv-importer]
-# Whether to allow importing data to tables with data. The default value is `false`.
-# When you use parallel import mode, you must set it to `true`, because multiple TiDB Lightning instances are importing the same table at the same time.
+# Whether to allow importing data into tables that already have data. The default value is `false`.
+# When using parallel import, because multiple TiDB Lightning instances import a table at the same time, this configuration item must be set to `true`.
 incremental-import = true
 # "local": The default mode. It applies to large dataset import, for example, greater than 1 TiB. However, during the import, downstream TiDB is not available to provide services.
 # "tidb": You can use this mode for small dataset import, for example, smaller than 1 TiB. During the import, downstream TiDB is available to provide services.
@@ -171,6 +171,11 @@ pattern = '(?i)^(?:[^/]*/)*my_db\.my_table\.(0[0-4][0-9][0-9][0-9]|05000)\.sql'
 schema = "my_db"
 table = "my_table"
 type = "sql"
+
+[tikv-importer]
+# Whether to allow importing data into tables that already have data. The default value is `false`.
+# When using parallel import, because multiple TiDB Lightning instances import a table at the same time, this configuration item must be set to `true`.
+incremental-import = true
 ```
 
 `05001 ~ 10000`データ ファイルのみをインポートするように、他のインスタンスの構成を変更できます。
