@@ -173,8 +173,8 @@ table = "my_table"
 type = "sql"
 
 [tikv-importer]
-# Whether to allow importing data into tables that already have data. The default value is false.
-# When using parallel import, because multiple TiDB Lightning instances import a table at the same time, this configuration item must be set to true.
+# Whether to allow importing data into tables that already have data. The default value is `false`.
+# When using parallel import, because multiple TiDB Lightning instances import a table at the same time, this configuration item must be set to `true`.
 incremental-import = true
 ```
 
