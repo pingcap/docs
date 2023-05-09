@@ -19,11 +19,11 @@ If `ADMIN CHECK [TABLE|INDEX]` finds any issues these can be fixed by recreating
 
 The `ADMIN CHECK TABLE` statement takes the following steps to check the table:
 
-1. For each index it checks if the number of records in the index is the same as the number of records in the table.
+1. For each index, it checks if the number of records in the index is the same as that in the table.
 
-2. For each index it loops over the values in each row and compare the values with the values in the table.
+2. For each index, it loops over the values in each row and compares the values with that in the table.
 
-If `ADMIN CHECK INDEX` is used it only checks the specified index.
+If you use the `ADMIN CHECK INDEX` statement, it only checks the specified index.
 
 ## Synopsis
 
