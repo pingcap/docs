@@ -69,7 +69,7 @@ The TiDB Cloud roadmap brings you what's coming in the near future, so you can s
 
 ## TiDB kernel
 
-For the roadmap of TiDB kernel, refer to [TiDB Roadmap](https://github.com/pingcap/tidb/blob/master/roadmap.md#tidb-kernel).
+For the roadmap of TiDB kernel, refer to [TiDB Roadmap](https://docs.pingcap.com/tidb/dev/tidb-roadmap).
 
 ## Diagnosis and maintenance
 
