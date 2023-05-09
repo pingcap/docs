@@ -55,7 +55,7 @@ table-concurrency = 6
 # The concurrency number of data. It is set to the number of logical CPU
 # cores by default. When deploying together with other components, you can
 # set it to 75% of the size of logical CPU cores to limit the CPU usage.
-#region-concurrency =
+# region-concurrency =
 
 # The maximum I/O concurrency. Excessive I/O concurrency causes an increase in
 # I/O latency because the disk's internal buffer is frequently refreshed,
@@ -67,6 +67,7 @@ io-concurrency = 5
 # Non-fatal errors are localized to a few rows, and ignoring those rows allows the import process to continue.
 # Setting this to N means that TiDB Lightning will stop as soon as possible when the (N+1)-th error is encountered.
 # The skipped rows will be inserted into tables inside the "task info" schema on the target TiDB, which can be configured below.
+# The default value is `MaxInt64` bytes, that is, 9223372036854775807 bytes.
 max-error = 0
 # task-info-schema-name is the name of the schema or database that stores TiDB Lightning execution results.
 # To disable error recording, set this to an empty string.
@@ -118,8 +119,8 @@ driver = "file"
 # "local": Physical import mode, used by default. It applies to large dataset import, for example, greater than 1 TiB. However, during the import, downstream TiDB is not available to provide services.
 # "tidb": Logical import mode. You can use this mode for small dataset import, for example, smaller than 1 TiB. During the import, downstream TiDB is available to provide services.
 # backend = "local"
-# Whether to allow importing data to tables with data. The default value is `false`.
-# When you use parallel import mode, you must set it to `true`, because multiple TiDB Lightning instances are importing the same table at the same time.
+# Whether to enable multiple TiDB Lightning instances (in physical import mode) to import data to one or more target tables in parallel. The default value is `false`.
+# When you use parallel import mode, you must set the parameter to `true`, but the premise is that no data exists in the target table, that is, all data can only be imported by TiDB Lightning. Note that this parameter **is not for incremental data import** and is only used in scenarios where the target table is empty.
 # incremental-import = false
 
 # The listening address of tikv-importer when backend is "importer". Change it to the actual address.
@@ -132,12 +133,9 @@ addr = "172.16.31.10:8287"
 
 # Whether to detect and resolve duplicate records (unique key conflict) in the physical import mode.
 # The following resolution algorithms are supported:
-#  - record: only records duplicate records to the `lightning_task_info.conflict_error_v1` table on the target TiDB. Note that the
-#    required version of the target TiKV is no earlier than v5.2.0; otherwise it falls back to 'none'.
-#  - none: does not detect duplicate records, which has the best performance of the three algorithms, but might lead to
-#    inconsistent data in the target TiDB.
-#  - remove: records all duplicate records to the lightning_task_info database, like the 'record' algorithm. But it removes all duplicate records from the target table to ensure a consistent
-#    state in the target TiDB.
+#  - record: After the data is written to the target table, add the duplicate records from the target table to the `lightning_task_info.conflict_error_v1` table in the target TiDB. Note that the required version of the target TiKV is no earlier than v5.2.0; otherwise it falls back to 'none'.
+#  - none: does not detect duplicate records, which has the best performance of the three algorithms. But if there are duplicate records in the data source, it might lead to inconsistent data in the target TiDB.
+#  - remove: records all duplicate records in the target table to the lightning_task_info database, like the 'record' algorithm. But it removes all duplicate records from the target table to ensure a consistent state in the target TiDB.
 # duplicate-resolution = 'none'
 # The number of KV pairs sent in one request in the physical import mode.
 # send-kv-pairs = 32768
@@ -272,9 +270,9 @@ log-level = "error"
 # See https://pingcap.com/docs/dev/reference/performance/statistics/#control-analyze-concurrency
 # for the meaning of each setting
 build-stats-concurrency = 20
-distsql-scan-concurrency = 100
+distsql-scan-concurrency = 15
 index-serial-scan-concurrency = 20
-checksum-table-concurrency = 16
+checksum-table-concurrency = 2
 
 # The default SQL mode used to parse and execute the SQL statements.
 sql-mode = "ONLY_FULL_GROUP_BY,NO_ENGINE_SUBSTITUTION"

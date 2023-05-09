@@ -108,31 +108,31 @@ hide_commit: true
 
 [TiUP](https://docs.pingcap.com/tidb/v6.5/tiup-overview)
 
-[Dumpling](https://docs.pingcap.com/tidb/v6.5/dumpling-overview)
+[TiDB Operator](https://docs.pingcap.com/tidb/v6.5/tidb-operator-overview)
+
+[TiDB Data Migration (DM)](https://docs.pingcap.com/tidb/v6.5/dm-overview)
 
 [TiDB Lightning](https://docs.pingcap.com/tidb/v6.5/tidb-lightning-overview)
 
-[Data Migration](https://docs.pingcap.com/tidb/v6.5/dm-overview)
-
-[Backup & Restore (BR)](https://docs.pingcap.com/tidb/v6.5/backup-and-restore-overview)
+[Dumpling](https://docs.pingcap.com/tidb/v6.5/dumpling-overview)
 
 [TiCDC](https://docs.pingcap.com/tidb/v6.5/ticdc-overview)
 
+[Backup & Restore (BR)](https://docs.pingcap.com/tidb/v6.5/backup-and-restore-overview)
+
 [PingCAP Clinic](https://docs.pingcap.com/tidb/v6.5/clinic-introduction)
-
-[TiDB Operator](https://docs.pingcap.com/tidb/v6.5/tidb-operator-overview)
-
-[TiSpark](https://docs.pingcap.com/tidb/v6.5/tispark-overview)
 
 </LearningPath>
 
 <LearningPath label="Reference" icon="cloud-dev">
 
+[TiDB Roadmap](https://docs.pingcap.com/tidb/dev/tidb-roadmap)
+
 [TiDB Configuration File Parameters](https://docs.pingcap.com/tidb/v6.5/tidb-configuration-file)
 
 [TiDB Command-line Flags](https://docs.pingcap.com/tidb/v6.5/command-line-flags-for-tidb-configuration)
 
-[TiDB Control](https://docs.pingcap.com/tidb/v6.5/tidb-control) 
+[TiDB Control](https://docs.pingcap.com/tidb/v6.5/tidb-control)
 
 [System Variables](https://docs.pingcap.com/tidb/v6.5/system-variables)
 

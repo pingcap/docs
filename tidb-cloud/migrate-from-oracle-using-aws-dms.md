@@ -73,7 +73,7 @@ After you finish executing the SQL script, check the data in Oracle. The followi
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com/console/clusters).
 
-2. [Create a free Serverless Tier cluster](/tidb-cloud/tidb-cloud-quickstart.md).
+2. [Create a Serverless Tier cluster](/tidb-cloud/tidb-cloud-quickstart.md).
 
 3. In the [**Clusters**](https://tidbcloud.com/console/clusters) page, click the target cluster name to go to its overview page.
 

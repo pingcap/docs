@@ -8,11 +8,11 @@ category: quick start
 
 *Estimated completion time: 20 minutes*
 
-This tutorial guides you through an easy way to get started with your TiDB Cloud.
+This tutorial guides you through an easy way to get started with your TiDB Cloud. You can also navigate to the [**Getting Started**](https://tidbcloud.com/console/getting-started) page in the TiDB Cloud console to follow the tutorials step by step.
 
 ## Step 1. Create a TiDB cluster
 
-TiDB Cloud [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) (Beta) is the best way to get started with TiDB Cloud. To create a free Serverless Tier cluster, take the following steps:
+TiDB Cloud [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) (Beta) is the best way to get started with TiDB Cloud. To create a Serverless Tier cluster, take the following steps:
 
 1. If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/free-trial) to sign up for an account.
 
@@ -28,7 +28,7 @@ TiDB Cloud [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-
     - To try creating a new Serverless Tier cluster on your own, take the following operations:
 
         1. Click **Create Cluster**.
-        2. On the **Create Cluster** page, **Serverless Tier** is selected by default. Update the default cluster name if necessary, select a target region of your cluster, and then click **Create**. Your Serverless Tier cluster will be created in approximately 30 seconds.
+        2. On the **Create Cluster** page, **Serverless** is selected by default. Select a target region of your cluster, update the default cluster name if necessary, and then click **Create**. Your Serverless Tier cluster will be created in approximately 30 seconds.
 
 ## Step 2. Try AI-powered Chat2Query (beta)
 

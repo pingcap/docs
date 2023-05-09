@@ -5,17 +5,53 @@ summary: Learn how to monitor your TiDB cluster by getting alert notification em
 
 # TiDB Cloud Built-in Alerting
 
-The TiDB Cloud built-in alerting feature provides you with an easy way to be notified by emails whenever a TiDB Cloud cluster in your project triggers one of TiDB Cloud built-in alert conditions.
+TiDB Cloud provides you with an easy way to view alerts, edit alert rules, and subscribe to alert notification emails.
 
-This document describes how to subscribe to alert notification emails from TiDB Cloud and also provides the TiDB Cloud built-in alert conditions for your reference.
+This document describes how to do these operations and provides the TiDB Cloud built-in alert conditions for your reference.
 
-## Limitation
+> **Note:**
+>
+> Currently, the alert feature is only available for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters.
 
-You cannot customize the TiDB Cloud built-in alerting. If you would like to configure different trigger conditions, thresholds, or frequency, or have alerts automatically trigger actions in downstream services like [PagerDuty](https://www.pagerduty.com/docs/guides/datadog-integration-guide/), consider using a third-party monitoring and alerting integration. Currently, TiDB Cloud supports the [Datadog integration](/tidb-cloud/monitor-datadog-integration.md) and the [Prometheus and Grafana integration](/tidb-cloud/monitor-prometheus-and-grafana-integration.md).
+## View alerts
+
+In TiDB Cloud, you can view both active and closed alerts on the Alerts page.
+
+1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+
+    > **Tip:**
+    >
+    > If you have multiple projects, you can switch to the target project from the ☰ hover menu in the upper-left corner.
+
+2. Click the name of the target cluster. The cluster overview page is displayed.
+3. Click **Alerts** in the left navigation pane.
+4. The **Alerts** page displays the active alerts by default. You can view the information of each active alert such as the alert name, trigger time, and duration. 
+5. If you also want to view the closed alerts, just click the **Status** drop-down list and select **Closed** or **All**.
+
+## Edit alert rules
+
+In TiDB Cloud, you can edit the alert rules by disabling or enabling the alerts or updating the alert threshold.
+
+1. On the **Alerts** page, click **Edit Rules**. 
+2. Disable or enable alert rules as needed.
+3. Click **Edit** to update the threshold of an alert rule. 
+
+    > **Tip:**
+    >
+    > Currently, TiDB Cloud provides limited capabilities for alert rule editing. Some alert rules do not support editing. If you would like to configure different trigger conditions or frequency, or have alerts automatically trigger actions in downstream services like [PagerDuty](https://www.pagerduty.com/docs/guides/datadog-integration-guide/), consider using a [third-party monitoring and alerting integration](/tidb-cloud/third-party-monitoring-integrations.md).
 
 ## Subscribe to alert notification emails
 
-If you are a member of a project and you want to get alert notification emails of clusters in your project, take the following steps:
+To get alert notification emails of clusters in your project, take the following steps:
+
+1. On the **Alerts** page , click **Subscribe Alerts**. 
+2. Enter your email address, and then click **Subscribe**. 
+
+    > **Tip:**
+    >
+    > The alert subscription is for all alerts in the current project. If you have multiple clusters in the project, you just need to subscribe once. 
+
+Alternatively, you can also add the subscription from the **Alert Subscription** page as follows:
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
 2. In the left navigation pane of the [**Clusters**](https://tidbcloud.com/console/clusters) page, do one of the following:
@@ -38,6 +74,7 @@ If you no longer want to receive alert notification emails of clusters in your p
     - If you only have one project, click **Admin** > **Alert Subscription**.
 
 3. Locate your email address and click **Unsubscribe**.
+
 4. Click **Delete** to confirm the unsubscription.
 
 ## TiDB Cloud built-in alert conditions
@@ -50,16 +87,14 @@ The following table provides the TiDB Cloud built-in alert conditions and the co
 
 | Condition | Recommended Action |
 |:--- |:--- |
-| Total TiDB node memory utilization across cluster exceeded 70% for 10 minutes | Total TiDB node memory utilization of cluster ABC in project XYZ has exceeded 70% for 10 minutes. Consider increasing the node number or node size for TiDB to reduce the memory usage percentage of the current workload. To monitor node memory utilization, see [Monitoring metrics](/tidb-cloud/monitor-tidb-cluster.md#monitoring-metrics). |
-| Total TiKV node memory utilization across cluster exceeded 70% for 10 minutes | Total TiKV node memory utilization of cluster ABC in project XYZ has exceeded 70% for 10 minutes. Consider increasing the node number or node size for TiKV to reduce the memory usage percentage of the current workload. To monitor node memory utilization, see [Monitoring metrics](/tidb-cloud/monitor-tidb-cluster.md#monitoring-metrics). |
-| Total TiFlash node memory utilization across cluster exceeded 70% for 10 minutes | Total TiFlash node memory utilization of cluster ABC in project XYZ has exceeded 70% for 10 minutes. Consider increasing the node number or node size for TiFlash to reduce the memory usage percentage of the current workload. To monitor node memory utilization, see [Monitoring metrics](/tidb-cloud/monitor-tidb-cluster.md#monitoring-metrics). |
-| At least one TiDB node in the cluster has run out of memory | At least one TiDB node in cluster ABC in project XYZ ran out of memory while executing a SQL statement. Consider increasing the memory available to queries using the `tidb_mem_quota_query` session variable. To monitor node memory utilization, see [Monitoring metrics](/tidb-cloud/monitor-tidb-cluster.md#monitoring-metrics). This alert will be removed in a future release. |
-| Total TiDB node CPU utilization exceeded 80% for 10 minutes | Total TiDB node CPU utilization of cluster ABC in project XYZ has exceeded 80% for 10 minutes. Consider increasing the node number or node size for TiDB to reduce the CPU usage percentage of the current workload. To monitor node CPU utilization, see [Monitoring metrics](/tidb-cloud/monitor-tidb-cluster.md#monitoring-metrics). |
-| Total TiKV node CPU utilization exceeded 80% for 10 minutes | Total TiKV node CPU utilization of cluster ABC in project XYZ has exceeded 80% for 10 minutes. Consider increasing the node number or node size for TiKV to reduce the CPU usage percentage of the current workload. To monitor node CPU utilization, see [Monitoring metrics](/tidb-cloud/monitor-tidb-cluster.md#monitoring-metrics). |
-| Total TiFlash node CPU utilization exceeded 80% for 10 minutes | Total TiFlash node CPU utilization of cluster ABC in project XYZ has exceeded 80% for 10 minutes. Consider increasing the node number or node size for TiFlash to reduce the CPU usage percentage of the current workload. To monitor node CPU utilization, see [Monitoring metrics](/tidb-cloud/monitor-tidb-cluster.md#monitoring-metrics). |
-| TiKV storage utilization exceeds 80% | Total TiKV storage utilization of cluster ABC in project XYZ exceeds 80%. Consider increasing the node number or node storage size for TiKV to increase your storage capacity. To monitor storage utilization, see [Monitoring metrics](/tidb-cloud/monitor-tidb-cluster.md#monitoring-metrics). |
-| TiFlash storage utilization exceeds 80% | Total TiFlash storage utilization of cluster ABC in project XYZ exceeds 80%. Consider increasing the node number or node storage size for TiFlash to increase your storage capacity. To monitor storage utilization, see [Monitoring metrics](/tidb-cloud/monitor-tidb-cluster.md#monitoring-metrics). |
-| One or more cluster nodes are offline | Some or all nodes in cluster ABC in project XYZ are offline. The TiDB Cloud Operations team is aware and working to resolve the issue. Refer to [TiDB Cloud Status](https://status.tidbcloud.com/) for the latest information. To monitor node status, see [Cluster status and node status](/tidb-cloud/monitor-tidb-cluster.md#cluster-status-and-node-status). This alert will be removed in a future release.  |
+| Total TiDB node memory utilization across cluster exceeded 70% for 10 minutes | Consider increasing the node number or node size for TiDB to reduce the memory usage percentage of the current workload.|
+| Total TiKV node memory utilization across cluster exceeded 70% for 10 minutes | Consider increasing the node number or node size for TiKV to reduce the memory usage percentage of the current workload. |
+| Total TiFlash node memory utilization across cluster exceeded 70% for 10 minutes | Consider increasing the node number or node size for TiFlash to reduce the memory usage percentage of the current workload. |
+| Total TiDB node CPU utilization exceeded 80% for 10 minutes | Consider increasing the node number or node size for TiDB to reduce the CPU usage percentage of the current workload.|
+| Total TiKV node CPU utilization exceeded 80% for 10 minutes | Consider increasing the node number or node size for TiKV to reduce the CPU usage percentage of the current workload. |
+| Total TiFlash node CPU utilization exceeded 80% for 10 minutes | Consider increasing the node number or node size for TiFlash to reduce the CPU usage percentage of the current workload. |
+| TiKV storage utilization exceeds 80% | Consider increasing the node number or node storage size for TiKV to increase your storage capacity. |
+| TiFlash storage utilization exceeds 80% | Consider increasing the node number or node storage size for TiFlash to increase your storage capacity. |
 | Data migration job met error during data export | Check the error and see [Troubleshoot data migration](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions) for help.  |
 | Data migration job met error during data import | Check the error and see [Troubleshoot data migration](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions) for help. |
 | Data migration job met error during incremental migration | Check the error and see [Troubleshoot data migration](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md#migration-errors-and-solutions) for help. |

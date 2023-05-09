@@ -64,7 +64,7 @@ In the left pane of the [**Data Service**](https://tidbcloud.com/console/data-se
 
 - **Endpoint Path**: (read-only) the path of the Chat2Data endpoint, which is `/chat2data`.
 
-- **Endpoint URL**: (read-only) the URL of the Chat2Data endpoint, which is used to call the endpoint. For example, `https://data.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/chat2data`.
+- **Endpoint URL**: (read-only) the URL of the Chat2Data endpoint, which is used to call the endpoint. For example, `https://<region>.data.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/chat2data`.
 
 - **Request Method**: (read-only) the HTTP method of the Chat2Data endpoint, which is `POST`.
 
@@ -99,7 +99,7 @@ The following code example is used to find the most popular GitHub repository fr
 
 ```bash
 curl --digest --user '<Public Key>:<Private Key>' \
-  --request POST 'https://data.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/chat2data' \
+  --request POST 'https://<region>.data.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/chat2data' \
   --header 'content-type: application/json' \
   --data-raw '{
       "cluster_id": "12345678912345678960",

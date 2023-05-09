@@ -155,9 +155,11 @@ Your service endpoint region is selected by default. Have a quick check and clic
 
 #### Step 3. Create an AWS interface endpoint
 
-TiDB Cloud begins creating an endpoint service, which takes 3 to 4 minutes.
+> **Note:**
+>
+> For each Dedicated Tier cluster created after March 28, 2023, the corresponding endpoint service is automatically created 3 to 4 minutes after the cluster creation.
 
-When the endpoint service is created, take a note of your endpoint service name from the command in the lower area of the console.
+If you see the `Endpoint Service Ready` message, take note of your endpoint service name from the command in the lower area of the console for later use. Otherwise, wait 3 to 4 minutes to let TiDB Cloud create an endpoint service for your cluster.
 
 ```bash
 aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${your_region} --service-name ${your_endpoint_service_name} --vpc-endpoint-type Interface --subnet-ids ${your_application_subnet_ids}
@@ -271,7 +273,7 @@ When you use private endpoint connections, the statuses of private endpoints or 
 
 The possible statuses of a private endpoint are explained as follows:
 
-- **Not Configured**: You have just created an endpoint service but have not yet created a private endpoint.
+- **Not Configured**: The endpoint service is created but the private endpoint is not created yet.
 - **Pending**: Waiting for processing.
 - **Active**: Your private endpoint is ready to use. You cannot edit the private endpoint of this status.
 - **Deleting**: The private endpoint is being deleted.

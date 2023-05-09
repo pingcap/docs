@@ -9,7 +9,7 @@ TiDB Cloud provides the console audit logging feature to help you track various 
 
 ## Prerequisites
 
-- You must be in the Owner or Audit Admin role of your organization in TiDB Cloud. Otherwise, you cannot see the console audit logging-related options in the TiDB Cloud console. The Audit Admin role is only visible upon request, so it is recommended that you use the Owner role directly. If you need to use the Audit Admin role, click **Help** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), fill in "Apply for the Audit Admin role" in the **Description** field, and then click **Send**. For more information about roles in TiDB Cloud, see [Manage role access](/tidb-cloud/manage-user-access.md#manage-role-access).
+- You must be in the Owner or Audit Admin role of your organization in TiDB Cloud. Otherwise, you cannot see the console audit logging-related options in the TiDB Cloud console. The Audit Admin role is only visible upon request, so it is recommended that you use the Owner role directly. If you need to use the Audit Admin role, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com) and click **Chat with Us**. Then, fill in "Apply for the Audit Admin role" in the **Description** field and click **Send**. For more information about roles in TiDB Cloud, see [Manage role access](/tidb-cloud/manage-user-access.md#manage-role-access).
 - You can only enable and disable the console audit logging for your organization. You can only track the actions of users in your organization.
 - After the console audit logging is enabled, all event types of the TiDB Cloud console will be audited, and you cannot specify only auditing some of them.
 
@@ -147,6 +147,9 @@ The console audit logs record various user activities on the TiDB Cloud console 
 | BindSupportPlan | Bind a support plan |
 | CancelSupportPlan | Cancel a support plan |
 | UpdateOrganizationName | Update the organization name |
+| SetSpendLimit | Edit the spend limit of a Serverless Tier cluster |
+| UpdateMaintenanceWindow    | Modify maintenance window start time              |
+| DeferMaintenanceTask       | Defer a maintenance task                          |
 
 ## Console audit log fields
 

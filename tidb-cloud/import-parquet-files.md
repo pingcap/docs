@@ -118,7 +118,7 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 
     If the region of the bucket is different from your cluster, confirm the compliance of cross region. Click **Next**.
 
-    TiDB Cloud starts validating whether it can access your data in the specified bucket URI. After validation, TiDB Cloud tries to scan all the files in the data source using the default file naming pattern, and returns a scan summary result on the left side of the next page. If you get the `AccessDenied` error, see [Troubleshoot Access Denied Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-access-denied-error.md).
+    TiDB Cloud starts validating whether it can access your data in the specified bucket URI. After validation, TiDB Cloud tries to scan all the files in the data source using the default file naming pattern. If you get the `AccessDenied` error, see [Troubleshoot Access Denied Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-access-denied-error.md).
 
 4. Modify the file patterns and add the table filter rules if needed.
 
@@ -128,7 +128,7 @@ To import the Parquet files to TiDB Cloud, take the following steps:
         >
         > When you use this feature, one import task can only import data to a single table at a time. If you want to use this feature to import data into different tables, you need to import several times, each time specifying a different target table.
 
-        To modify the file pattern, click **Modify**, specify a custom mapping rule between Parquet files and a single target table in the following fields, and then click **Scan**. After that, the data source files will be re-scanned using the provided custom mapping rule.
+        To modify the file pattern, click **File Pattern**, specify a custom mapping rule between Parquet files and a single target table in the following fields, and then click **Save**. After that, the data source files will be re-scanned using the provided custom mapping rule.
 
         - **Source file name**: enter a pattern that matches the names of the Parquet files to be imported. If you have one Parquet file only, you can enter the filename here directly. Note that the names of the Parquet files must include the suffix `.parquet`.
 
