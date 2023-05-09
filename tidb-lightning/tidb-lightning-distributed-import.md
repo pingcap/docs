@@ -16,15 +16,11 @@ You can use TiDB Lightning to import data in parallel in the following scenarios
 
 > **Note:**
 >
-<<<<<<< HEAD
-> Parallel import only supports the initialized empty tables in TiDB. It does not support migrating data to tables with data written by existing services. Otherwise, data inconsistencies may occur.
-=======
 > - Parallel import only supports initialized empty tables in TiDB and does not support migrating data to tables with data written by existing services. Otherwise, data inconsistencies may occur.
 >
 > - Parallel import is usually used in the physical import mode. You need to configure `incremental-import = true`.
 >
 > - Apply only one backend at a time when using multiple TiDB Lightning instances to import data to the same target. For example, you cannot import data to the same TiDB cluster in both the physical and logical import modes at the same time.
->>>>>>> fe05a21fe (lightning: update distributed import (#13483))
 
 ## Considerations
 
@@ -97,14 +93,9 @@ status-addr = ":8289"
 data-source-dir = "/path/to/source-dir"
 
 [tikv-importer]
-<<<<<<< HEAD
-# Whether to allow importing data to tables with data. The default value is `false`.
-# When you use parallel import mode, you must set it to `true`, because multiple TiDB Lightning instances are importing the same table at the same time.
-# NOTE: this config field is introduced since v5.3.1. Ignore it when using TiDB Lightning v5.3.0.
-=======
 # Whether to allow importing data into tables that already have data. The default value is `false`.
 # When using parallel import, because multiple TiDB Lightning instances import a table at the same time, this configuration item must be set to `true`.
->>>>>>> fe05a21fe (lightning: update distributed import (#13483))
+# NOTE: this config field is introduced since v5.3.1. Ignore it when using TiDB Lightning v5.3.0.
 incremental-import = true
 # "local": The default mode. It applies to large dataset import, for example, greater than 1 TiB. However, during the import, downstream TiDB is not available to provide services.
 # "tidb": You can use this mode for small dataset import, for example, smaller than 1 TiB. During the import, downstream TiDB is available to provide services.
