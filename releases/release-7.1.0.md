@@ -5,13 +5,13 @@ summary: Learn about the new features, compatibility changes, improvements, and 
 
 # TiDB 7.1.0 Release Notes
 
-TiDB version: 7.1.0 (upcoming)
+Release date: xxxx
 
-> **Note:**
->
-> TiDB v7.1.0 is not yet available. This release note is a preview version to provide insights into upcoming features and is subject to change. The features outlined here are not guaranteed to be included in the final release.
+TiDB version: 7.1.0 (LTS)
 
-In v7.1.0, the key new features and improvements are as follows:
+Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-tidb) | [Production deployment](https://docs.pingcap.com/tidb/v7.1/production-deployment-using-tiup) | [Installation packages](https://www.pingcap.com/download/?version=v7.1.0#version-list)
+
+In v7.1.0-LTS, the key new features and improvements are as follows:
 
 <table>
 <thead>
