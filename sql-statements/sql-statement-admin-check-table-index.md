@@ -15,7 +15,7 @@ It does not support the following:
 
 If `ADMIN CHECK [TABLE|INDEX]` finds any issues these can be fixed by recreating the index by dropping the index and adding it again. 
 
-## Steps
+## Principles
 
 The `ADMIN CHECK TABLE` statement takes the following steps to check the table:
 
