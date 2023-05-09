@@ -26,7 +26,7 @@ To create a changefeed, refer to the tutorials:
 - [Sink to MySQL](/tidb-cloud/changefeed-sink-to-mysql.md)
 - [Sink to TiDB Cloud](/tidb-cloud/changefeed-sink-to-tidb-cloud.md)
 
-## Query TiCDC RCUs
+## Query Changefeed RCUs
 
 1. Navigate to the cluster overview page of the target TiDB cluster, and then click **Changefeed** in the left navigation pane.
 2. Locate the corresponding changefeed you want to query, and click **...** > **View** in the **Action** column.
