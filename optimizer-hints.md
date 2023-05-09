@@ -42,7 +42,7 @@ TiDB supports optimizer hints, which are based on the comment-like syntax introd
 
 Optimizer hints are case insensitive and specified within `/*+ ... */` comments following the `SELECT`, `UPDATE` or `DELETE` keyword in a SQL statement. Optimizer hints are not currently supported for `INSERT` statements.
 
- Multiple hints can be specified by separating with commas. For example, the following query uses three different hints:
+Multiple hints can be specified by separating with commas. For example, the following query uses three different hints:
 
 {{< copyable "sql" >}}
 
