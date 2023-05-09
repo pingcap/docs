@@ -70,7 +70,7 @@ To use the AWS Management Console to create a VPC interface endpoint, perform th
 4. Enter the service name that you found in [step 1](#step-1-choose-a-tidb-cluster).
 5. Click **Verify service**.
 6. Select your VPC in the drop-down list. Expand **Additional settings** and select the **Enable DNS name** checkbox.
-7. Select the availability zone where your TiDB cluster is located in the **Subnets** area.
+7. In the **Subnets** area, select the availability zone where your TiDB cluster is located, and select the Subnet ID.
 8. Select your security group properly in the **Security groups** area.
 
     > **Note:**
