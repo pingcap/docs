@@ -52,6 +52,12 @@ In v7.1.0-LTS, the key new features and improvements are as follows:
 
 ### Performance
 
+* 下一代 [`Partitioned Raft KV`](/partitioned-raft-kv.md) 存储引擎  [#issue号](链接) @[busyjay](https://github.com/busyjay) @[tonyxuqqi](https://github.com/tonyxuqqi) @[tabokie](https://github.com/tabokie) @[bufferflies](https://github.com/bufferflies) @[5kbpers](https://github.com/5kbpers) @[SpadeA-Tang](https://github.com/SpadeA-Tang) @[nolouch](https://github.com/nolouch) **tw:Oreoxmt**
+
+    TiDB v7.1.0 的 [`Partitioned Raft KV`](/partitioned-raft-kv.md)  存储引擎使用多个 RocksDB 实例存储 TiKV 的 Region 数据，为每个 Region 提供独立的 RocksDB 实例。该引擎能够更好地管理 RocksDB 实例的文件数和层级，实现 Region 间的数据操作物理隔离，并支持更多数据的平滑扩展。与原 TiKV 存储引擎相比，使用该引擎在相同硬件条件和读写混合场景下，可实现约 2 倍的写入吞吐、3 倍的读取吞吐，并缩短约 4/5 的弹性伸缩时间。该引擎与 TiFlash 引擎兼容，支持 Lightning / BR / TiCDC 等周边工具。该引擎目前仅支持在新集群中使用，暂不支持从原 TiKV 存储引擎直接升级到该引擎。
+
+    更多信息，请参考[用户文档](/partitioned-raft-kv.md)。
+
 * TiFlash supports late materialization (GA) [#5829](https://github.com/pingcap/tiflash/issues/5829) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
 
      In v7.0.0, late materialization was introduced in TiFlash as an experimental feature for optimizing query performance. This feature is disabled by default (the [`tidb_opt_enable_late_materialization`](/system-variables.md#tidb_opt_enable_late_materialization-new-in-v700) system variable defaults to `OFF`). When processing a `SELECT` statement with filter conditions (`WHERE` clause), TiFlash reads all the data from the columns required by the query, and then filters and aggregates the data based on the query conditions. When Late materialization is enabled, TiDB supports pushing down part of the filter conditions to the TableScan operator. That is, TiFlash first scans the column data related to the filter conditions that are pushed down to the TableScan operator, filters the rows that meet the condition, and then scans the other column data of these rows for further calculation, thereby reducing IO scans and computations of data processing.
@@ -84,6 +90,18 @@ In v7.1.0-LTS, the key new features and improvements are as follows:
 
     For more information, see [documentation](/sql-non-prepared-plan-cache.md).
 
+* Supports the DDL distributed parallel execution framework [#41495](https://github.com/pingcap/tidb/issues/41495) @[benjamin2037](https://github.com/benjamin2037)
+
+    Before TiDB v7.1.0, only one TiDB node could serve as the DDL owner and execute DDL tasks. However, starting from TiDB v7.1.0, in the new distributed parallel execution framework, multiple TiDB nodes can execute the same DDL task in parallel, thus better utilizing the resources of the TiDB cluster and significantly improving the performance of DDL. In addition, you can linearly improve the performance of DDL by adding more TiDB nodes. It should be noted that this feature is currently an experimental feature and only supports `ADD INDEX` operations.
+
+    To use the distributed framework, set the value of [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task) to `ON`.
+
+    ```sql
+    SET GLOBAL tidb_enable_dist_task = ON;
+    ```
+
+    For more information, refer to [the user documentation](/tidb-distributed-execution-framework.md).
+
 ### Reliability
 
 * Resource Control becomes generally available (GA) [#38825](https://github.com/pingcap/tidb/issues/38825) @[nolouch](https://github.com/nolouch) @[BornChanger](https://github.com/BornChanger) @[glorv](https://github.com/glorv) @[tiancaiamao](https://github.com/tiancaiamao) @[Connor1996](https://github.com/Connor1996) @[JmPotato](https://github.com/JmPotato) @[hnes](https://github.com/hnes) @[CabinfeverB](https://github.com/CabinfeverB) @[HuSharp](https://github.com/HuSharp)
@@ -115,6 +133,12 @@ In v7.1.0-LTS, the key new features and improvements are as follows:
     Enabling synchronous loading of statistics can significantly reduce the number of statistics that must be loaded during startup, thus improving the speed of loading statistics. This feature increases the stability of TiDB in complex runtime environments and reduces the impact of individual TiDB nodes restart on the overall service.
 
     For more information, see [documentation](/statistics.md#load-statistics).
+
+* TiCDC supports the integrity validation feature for single-row data [#8718](https://github.com/pingcap/tiflow/issues/8718) [#42747](https://github.com/pingcap/tidb/issues/42747) @[3AceShowHand](https://github.com/3AceShowHand) @[zyguan](https://github.com/zyguan) **tw:Oreoxmt**
+
+    Starting from v7.1.0, TiCDC introduces the data integrity validation feature, which uses a checksum algorithm to validate the integrity of single-row data. This feature helps verify whether any error occurs in the process of writing data from TiDB, replicating it through TiCDC, and then writing it to a Kafka cluster. The data integrity validation feature only supports changefeeds that use Kafka as the downstream and currently supports the Avro protocol.
+
+    For more information, see [documentation](/ticdc/ticdc-integrity-check.md).
 
 ### SQL
 
@@ -194,6 +218,12 @@ In v7.1.0-LTS, the key new features and improvements are as follows:
     ```
 
     For more information, see [documentation](/ddl-introduction.md#ddl-related-commands).
+
+* Support smooth cluster upgrade without canceling DDL operations [#issue number](link) @[zimulala](https://github.com/zimulala) @[hawkingrei](https://github.com/hawkingrei) **tw:ran-huang**
+
+    Before TiDB v7.1.0, to upgrade a cluster, you must manually cancel the running or queued DDL tasks and then add them back after the upgrade is completed.
+
+    To offer a smoother upgrade experience, TiDB v7.1.0 introduces automatic pausing and resuming of DDL tasks. Starting from v7.1.0, you can upgrade your clusters without manually canceling DDL tasks. TiDB will automatically pause any running or queued DDL tasks before the upgrade and resume these tasks after the cluster has completed rolling upgrade, making it easier for you to upgrade your TiDB clusters.
 
 ### Observability
 
