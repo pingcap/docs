@@ -37,7 +37,7 @@ TiDB supports optimizer hints, which are based on the comment-like syntax introd
 >
 > ```
 >
-> The examples in this document are all tables in the same database. If the table you use is not in the same database, refer to the instructions to explicitly specify the database name.
+> The examples in this document are all tables in the same database. If the tables you use are not in the same database, refer to the instructions to explicitly specify the database name.
 
 Optimizer hints are case insensitive and specified within `/*+ ... */` comments following the `SELECT`, `UPDATE` or `DELETE` keyword in a SQL statement. Optimizer hints are not currently supported for `INSERT` statements.
 
