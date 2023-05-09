@@ -46,7 +46,7 @@ When `tidb_analyze_version = 2`, if memory overflow occurs after `ANALYZE` is ex
 
    ```sql
    SELECT DISTINCT ... INTO OUTFILE '/tmp/sql.txt';
-   mysql -h XXX -u user -P 4000 ... < '/tmp/sql.txt';
+   mysql -h ${TiDB_IP} -u user -P ${TIDB_PORT} ... < '/tmp/sql.txt'
    ```
 
 This document briefly introduces the histogram, Count-Min Sketch, and Top-N, and details the collection and maintenance of statistics.
