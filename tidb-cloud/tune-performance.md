@@ -5,39 +5,17 @@ summary: Learn how to analyze and tune performance of your TiDB Cloud cluster.
 
 # Analyze and Tune Performance
 
-TiDB Cloud provides [Statement Analysis](#statement-analysis), [Slow Query](#slow-query), and [Key Visualizer](#key-visualizer) to analyze performance.
-
-- Statement Analysis enables you to directly observe the SQL execution on the page, and easily locate performance problems without querying the system tables.
+TiDB Cloud provides [Slow Query](#slow-query), [Statement Analysis](#statement-analysis), and [Key Visualizer](#key-visualizer) to analyze performance.
 
 - Slow Query lets you search and view all slow queries in your TiDB cluster, and explore the bottlenecks of each slow query by viewing its execution plan, SQL execution information, and other details.
+
+- Statement Analysis enables you to directly observe the SQL execution on the page, and easily locate performance problems without querying the system tables.
 
 - Key Visualizer helps you observe TiDB's data access patterns and data hotspots.
 
 > **Note:**
 >
-> Currently, **Statement Analysis** and **Key Visualizer** are unavailable for [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta).
-
-## Statement Analysis
-
-> **Note:**
->
-> Statement Analysis is only available for [Dedicated Tier clusters](/tidb-cloud/select-cluster-tier.md#dedicated-tier).
-
-To use the statement analysis, perform the following steps:
-
-1. Navigate to the **SQL Diagnosis** tab of a cluster.
-
-2. Click the **SQL Statement** tab.
-
-3. Select the time period to be analyzed in the time interval box. Then you can get the execution statistics of SQL statements of all databases in this period.
-
-4. (Optional) If you only care about certain databases, you can select the corresponding schema(s) in the next box to filter the results.
-
-The results are displayed in the form of a table, and you can sort the results by different columns.
-
-![Statement Analysis](/media/tidb-cloud/statement-analysis.png)
-
-For more information, see [Statement Execution Details in TiDB Dashboard](https://docs.pingcap.com/tidb/stable/dashboard-statement-details).
+> Currently, **Key Visualizer** is unavailable for [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta).
 
 ## Slow Query
 
@@ -45,7 +23,7 @@ By default, SQL queries that take more than 300 milliseconds are considered as s
 
 To view slow queries in a cluster, perform the following steps:
 
-1. Navigate to the **SQL Diagnosis** tab of a cluster.
+1. Navigate to the **SQL Diagnosis** page of a cluster.
 
 2. Click the **Slow Query** tab.
 
@@ -59,6 +37,24 @@ The results are displayed in the form of a table, and you can sort the results b
 
 For more information, see [Slow Queries in TiDB Dashboard](https://docs.pingcap.com/tidb/stable/dashboard-slow-query).
 
+## Statement Analysis
+
+To use the statement analysis, perform the following steps:
+
+1. Navigate to the **SQL Diagnosis** page of a cluster.
+
+2. Click the **SQL Statement** tab.
+
+3. Select the time period to be analyzed in the time interval box. Then you can get the execution statistics of SQL statements of all databases in this period.
+
+4. (Optional) If you only care about certain databases, you can select the corresponding schema(s) in the next box to filter the results.
+
+The results are displayed in the form of a table, and you can sort the results by different columns.
+
+![Statement Analysis](/media/tidb-cloud/statement-analysis.png)
+
+For more information, see [Statement Execution Details in TiDB Dashboard](https://docs.pingcap.com/tidb/stable/dashboard-statement-details).
+
 ## Key Visualizer
 
 > **Note:**
@@ -67,7 +63,7 @@ For more information, see [Slow Queries in TiDB Dashboard](https://docs.pingcap.
 
 To view the key analytics, perform the following steps:
 
-1. Navigate to the **SQL Diagnosis** tab of a cluster.
+1. Navigate to the **SQL Diagnosis** page of a cluster.
 
 2. Click the **Key Visualizer** tab.
 
