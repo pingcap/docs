@@ -426,7 +426,7 @@ This section gives the alert rules for the PD component.
 
 * Solution:
 
-    * Watch the [**TiKV-Details** > **PD** dashboard](/grafana-tikv-dashboard.md#pd) and view the Store Slow Score metric. Identify the node with a methric value exceeding 80, which is detected as a slow node.
+    * Watch the [**TiKV-Details** > **PD** dashboard](/grafana-tikv-dashboard.md#pd) and view the Store Slow Score metric. Identify the node with a metric value exceeding 80, which is detected as a slow node.
     * Watch the [**TiKV-Details** > **Raft IO** dashboard](/grafana-tikv-dashboard.md#raft-io) and see whether the latency increases. If the latency is high, it means a bottleneck might exist in the disk.
     * Set the [`raftstore.inspect-interval`](/tikv-configuration-file.md#inspect-interval) configuration item to a larger value to increase the timeout limit of latency.
     * For further analysis of performance issues of the alerted TiKV node and tuning methods, see [Performance analysis and tuning](/performance-tuning-methods.md#storage-async-write-duration-store-duration-and-apply-duration).
