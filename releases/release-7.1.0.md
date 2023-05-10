@@ -52,11 +52,15 @@ In v7.1.0-LTS, the key new features and improvements are as follows:
 
 ### Performance
 
-* 下一代 [`Partitioned Raft KV`](/partitioned-raft-kv.md) 存储引擎  [#issue号](链接) @[busyjay](https://github.com/busyjay) @[tonyxuqqi](https://github.com/tonyxuqqi) @[tabokie](https://github.com/tabokie) @[bufferflies](https://github.com/bufferflies) @[5kbpers](https://github.com/5kbpers) @[SpadeA-Tang](https://github.com/SpadeA-Tang) @[nolouch](https://github.com/nolouch) **tw:Oreoxmt**
+* Enhance the Partitioned Raft KV storage engine (experimental) [#11515](https://github.com/tikv/tikv/issues/11515) [#12842](https://github.com/tikv/tikv/issues/12842) @[busyjay](https://github.com/busyjay) @[tonyxuqqi](https://github.com/tonyxuqqi) @[tabokie](https://github.com/tabokie) @[bufferflies](https://github.com/bufferflies) @[5kbpers](https://github.com/5kbpers) @[SpadeA-Tang](https://github.com/SpadeA-Tang) @[nolouch](https://github.com/nolouch) **tw:Oreoxmt**
 
-    TiDB v7.1.0 的 [`Partitioned Raft KV`](/partitioned-raft-kv.md)  存储引擎使用多个 RocksDB 实例存储 TiKV 的 Region 数据，为每个 Region 提供独立的 RocksDB 实例。该引擎能够更好地管理 RocksDB 实例的文件数和层级，实现 Region 间的数据操作物理隔离，并支持更多数据的平滑扩展。与原 TiKV 存储引擎相比，使用该引擎在相同硬件条件和读写混合场景下，可实现约 2 倍的写入吞吐、3 倍的读取吞吐，并缩短约 4/5 的弹性伸缩时间。该引擎与 TiFlash 引擎兼容，支持 Lightning / BR / TiCDC 等周边工具。该引擎目前仅支持在新集群中使用，暂不支持从原 TiKV 存储引擎直接升级到该引擎。
+    TiDB v6.6.0 introduces the Partitioned Raft KV storage engine as an experimental feature, which uses multiple RocksDB instances to store TiKV Region data, and the data of each Region is independently stored in a separate RocksDB instance. The new storage engine can better control the number and level of files in the RocksDB instance, achieve physical isolation of data operations between Regions, and support stably managing more data. Compared with the original TiKV storage engine, using the Partitioned Raft KV storage engine can achieve about twice the write throughput, three times the read throughput, and reduce the elastic scaling time by about 4/5 under the same hardware conditions and mixed read and write scenarios.
+    
+    In TiDB v7.1.0, the Partitioned Raft KV storage engine is compatible with TiFlash and supports tools such as TiDB Lightning, BR, and TiCDC.
 
-    更多信息，请参考[用户文档](/partitioned-raft-kv.md)。
+    Currently, this feature is experimental and not recommended for use in production environments. You can only use this engine in a newly created cluster and you cannot directly upgrade from the original TiKV storage engine.
+
+    For more information, see [documentation](/partitioned-raft-kv.md).
 
 * TiFlash supports late materialization (GA) [#5829](https://github.com/pingcap/tiflash/issues/5829) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
 
