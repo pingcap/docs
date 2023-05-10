@@ -116,7 +116,7 @@ In v7.1.0-LTS, the key new features and improvements are as follows:
 
     In TiDB v7.1.0, this feature introduces the ability to estimate system capacity based on actual workload or hardware deployment. The estimation ability provides you with a more accurate reference for capacity planning and assists you in better managing TiDB resource allocation to meet the stability needs of enterprise-level scenarios.
 
-    To improve user experience, TiDB Dashboard provides a resource control management page. You can view the resource group configuration on this page and make capacity estimation in a visual way to facilitate reasonable resource allocation.
+    To improve user experience, TiDB Dashboard provides a resource control management page. You can view the resource group configuration on this page and estimate capacities in a visual way to facilitate reasonable resource allocation.
 
     For more information, see [documentation](/tidb-resource-control.md).
 
