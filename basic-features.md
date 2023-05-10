@@ -181,6 +181,8 @@ This document lists the features supported in different TiDB versions, including
 | [`caching_sha2_password` authentication](/system-variables.md#default_authentication_plugin) | Y | Y | Y | Y | Y | Y | N | N | N |
 | [`tidb_sm3_password` authentication](/system-variables.md#default_authentication_plugin) | Y | Y | N | N | N | N | N | N | N |
 | [`tidb_auth_token` authentication](/system-variables.md#default_authentication_plugin) | Y | Y | N | N | N | N | N | N | N |
+| [`authentication_ldap_sasl` authentication](/system-variables.md#default_authentication_plugin) | Y | N | N | N | N | N | N | N | N |
+| [`authentication_ldap_simple` authentication](/system-variables.md#default_authentication_plugin) | Y | N | N | N | N | N | N | N | N |
 | [Password management](/password-management.md) | Y | Y | N | N | N | N | N | N | N |
 | [MySQL compatible `GRANT` system](/privilege-management.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Dynamic Privileges](/privilege-management.md#dynamic-privileges) | Y | Y | Y | Y | Y | Y | Y | N | N |
