@@ -6,10 +6,7 @@ on:
       - ".github/**"
     branches:
       - master
-<<<<<<< HEAD
-      - release-*
       - i18n-ja-release-*
-=======
       - release-7.0
       - release-6.6
       - release-6.5
@@ -21,7 +18,6 @@ on:
       - release-5.0
       - release-4.0
       - release-3.0
->>>>>>> 23883a26f (limit trigger branches to release branch (#13520))
 
 jobs:
   trigger:
