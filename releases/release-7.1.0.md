@@ -145,6 +145,13 @@ In v7.1.0-LTS, the key new features and improvements are as follows:
     Starting from v7.1.0, TiCDC introduces the data integrity validation feature, which uses a checksum algorithm to validate the integrity of single-row data. This feature helps verify whether any error occurs in the process of writing data from TiDB, replicating it through TiCDC, and then writing it to a Kafka cluster. The data integrity validation feature only supports changefeeds that use Kafka as the downstream and currently supports the Avro protocol.
 
     For more information, see [documentation](/ticdc/ticdc-integrity-check.md).
+* Optimize the policy for loading statistics [#42160](https://github.com/pingcap/tidb/issues/42160) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes) **tw:hfxsd**
+
+    After you enable the lightweight statistics initialization feature, TiDB can significantly reduce the number of statistics that must be loaded during startup, thus speeding up the loading of statistics during startup. This feature improves the stability of TiDB in complex operating environments, and reduces the impact on the overall service when some TiDB nodes are restarted. You can set the parameter [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710) to `true` to enable this feature. Note that this parameter is experimental.
+
+    TiDB v7.1.0 also introduces the configuration parameter [`force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v710). This parameter forces TiDB to provide service to the public after the statistics is loaded, avoiding SQL performance issues caused by unloaded statistics during the startup phase. This configuration is disabled by default. 
+
+    For more information, see [documentation](/tidb-configuration-file.md).
 
 * TiCDC optimizes DDL replication operations [#8686](https://github.com/pingcap/tiflow/issues/8686) @[nongfushanquan](https://github.com/nongfushanquan) **tw:ran-huang**
 
