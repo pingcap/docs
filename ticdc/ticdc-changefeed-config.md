@@ -37,10 +37,10 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 This section introduces the configuration of a replication task.
 
 ```toml
-# The memory limit the changefeed can used in the caputre server by the sink 
-# manager. If exceed, the overused part will be recycled by the go 
-# runtime prioritily. The default value is 1GB 
-# memory-quota = 67108864 # 64MB 
+# Specifies the memory quota (in bytes) that can be used in the caputre server by the sink manager.
+# If the value is exceeded, the overused part will be recycled by the go runtime.
+# The default value is `1073741824` (1 GB).
+# memory-quota = 1073741824 # 1 GB 
 
 # Specifies whether the database names and tables in the configuration file are case-sensitive.
 # The default value is true.
@@ -52,21 +52,19 @@ enable-old-value = true
 
 # Specifies whether to enable the Syncpoint feature, which is supported since v6.3.0 and is disabled by default.
 # Since v6.4.0, only the changefeed with the SYSTEM_VARIABLES_ADMIN or SUPER privilege can use the TiCDC Syncpoint feature.
-# NOTE: ignore this field when the downstream type is not the DB.
+# Note: ignore this field when the downstream type is not TiDB.
 # enable-sync-point = false
-
-# bdr-mode = true
 
 # Specifies the interval at which Syncpoint aligns the upstream and downstream snapshots.
 # The format is in h m s. For example, "1h30m30s".
 # The default value is "10m" and the minimum value is "30s".
-# NOTE: ignore this field when the downstream type is not the DB.
+# Note: ignore this field when the downstream type is not TiDB.
 # sync-point-interval = "5m"
 
 # Specifies how long the data is retained by Syncpoint in the downstream table. When this duration is exceeded, the data is cleaned up.
 # The format is in h m s. For example, "24h30m30s".
 # The default value is "24h".
-# NOTE: ignore this field when the downstream type is not the DB.
+# Note: ignore this field when the downstream type is not TiDB.
 # sync-point-retention = "1h"
 
 [mounter]
@@ -81,7 +79,8 @@ enable-old-value = true
 # Filter syntax: <https://docs.pingcap.com/tidb/stable/table-filter#syntax>.
 rules = ['*.*', '!test.*']
 
-# Specifies the transaction that will be ignored with specified start_ts.
+# Specifies the transaction that will be ignored with the specified start_ts.
+# The default value is an empty list.
 # IgnoreTxnStartTs = [1683225923]
 
 # Event filter rules.
@@ -119,10 +118,10 @@ region-threshold = 100000
 write-key-threshold = 0
 
 [sink]
-# For the sink of MQ type, you can use  dispatchers to configure the event dispatcher.
+# For the sink of MQ type, you can use dispatchers to configure the event dispatcher.
 # Since v6.1.0, TiDB supports two types of event dispatchers: partition and topic. For more information, see <partition and topic link>.
 # The matching syntax of matcher is the same as the filter rule syntax. For details about the matcher rules, see <>.
-# NOTE: ignore this field when the downstream type is not the MQ.  
+# Note: configure this field only when the downstream type is MQ.
 dispatchers = [
     {matcher = ['test1.*', 'test2.*'], topic = "Topic expression 1", partition = "ts" },
     {matcher = ['test3.*', 'test4.*'], topic = "Topic expression 2", partition = "index-value" },
@@ -133,30 +132,31 @@ dispatchers = [
 # The protocol configuration item specifies the protocol format of the messages sent to the downstream.
 # When the downstream is Kafka, the protocol can only be canal-json or avro.
 # When the downstream is a storage service, the protocol can only be canal-json or csv.
-# NOTE: ignore this field when the downstream type is the DB.
+# Note: ignore this field when the downstream type is the DB.
 protocol = "canal-json"
 
 # The following three configuration items are only used when you replicate data to storage sinks and can be ignored when replicating data to MQ or MySQL sinks.
 # Row terminator, used for separating two data change events. The default value is an empty string, which means "\r\n" is used.
 terminator = ''
-# Date separator type used in the file directory. Value options are `none`, `year`, `month`, and `day`. `none` is the default value and means that the date is not separated. For more information, see <https://docs.pingcap.com/tidb/dev/ticdc-sink-to-cloud-storage#data-change-records>. NOTE: ignore this field when replicating data to the downstream other than Storage.
+# Date separator type used in the file directory. Value options are `none`, `year`, `month`, and `day`. `none` is the default value and means that the date is not separated. For more information, see <https://docs.pingcap.com/tidb/dev/ticdc-sink-to-cloud-storage#data-change-records>. Note: ignore this field when replicating data to the downstream other than Storage.
 date-separator = 'none'
-# Whether to use partitions as the separation string. The default value is true, which means that partitions in a table are stored in separate directories. It is recommended that you keep the value as `true` to avoid potential data loss in downstream partitioned tables <https://github.com/pingcap/tiflow/issues/8724>. For usage examples, see <https://docs.pingcap.com/tidb/dev/ticdc-sink-to-cloud-storage#data-change-records)>. NOTE: ignore this field when replicating data to the downstream with type other than Storage.
+# Whether to use partitions as the separation string. The default value is true, which means that partitions in a table are stored in separate directories. It is recommended that you keep the value as `true` to avoid potential data loss in downstream partitioned tables <https://github.com/pingcap/tiflow/issues/8724>. For usage examples, see <https://docs.pingcap.com/tidb/dev/ticdc-sink-to-cloud-storage#data-change-records)>. Note: ignore this field when replicating data to the downstream with type other than Storage.
 enable-partition-separator = true
 
-# Schema registry url. NOTE: ignore this field if you replicate data to the downstream types other than MQ. 
+# Schema registry url. Note: ignore this field if you replicate data to the downstream types other than MQ. 
 # schema-registry = "http://localhost:80801/subjects/{subject-name}/versions/{version-number}/schema"
 
 # Indicates number of encoder thread used when encoding data.
-# NOTE: ignore this field when the downstream type is not the MQ.
+# Note: ignore this field when the downstream type is not the MQ.
 # encoder-concurrency = 16
 
 # Indicates if enabling kafka-sink-v2 which uses kafka-go sink library.
-# NOTE: ignore this field when the downstream type is not the MQ.
+# Note: ignore this field when the downstream type is not the MQ.
 # enable-kafka-sink-v2 = false
 
 # If set only output the updated column.
-# NOTE: this field only apply to the MQ downstream using the open-protocol.
+# Note: this field only apply to the MQ downstream using the open-protocol and canal-json.
+# The default value is false.
 # only-output-updated-columns = false
 
 # Since v6.5.0, TiCDC supports saving data changes to storage services in CSV format. Ignore the following configurations if you replicate data to MQ or MySQL sinks.
@@ -170,26 +170,33 @@ null = '\N'
 # Whether to include commit-ts in CSV rows. The default value is false.
 include-commit-ts = false
 
-# Represents the replication consistency config for a changefeed when using the redo log, for more information, please refer to https://docs.pingcap.com/tidb/stable/ticdc-sink-to-mysql#eventually-consistent-replication-in-disaster-scenarios. NOTE: Ignore the following configurations if downstream is MQ or Storage.
+# Represents the replication consistency config for a changefeed when using the redo log, for more information, please refer to https://docs.pingcap.com/tidb/stable/ticdc-sink-to-mysql#eventually-consistent-replication-in-disaster-scenarios. Note: Ignore the following configurations if downstream is MQ or Storage.
 [sink.consistent]
 # The data consistency level, available options are `none` and `eventual`, none means the redo log is disabled.  
+# The default value is none.
 level = "none"
 # The max redo log size in megabytes.
+# The default value is 64  
 max-log-size = 64
 # The flush interval for redo log. Default value is 2000 milliseconds.
+# The default value is 2000 
 flush-interval = 2000 
-# The storage uri to the redo log.
+# The storage URI of the redo log.
+# The default value is empty
 storage = "" 
-# Indicates if store the redo log in memory or the file.
+# Specifies whether to store the redo log in a file.
+# The default value is false
 use-file-backend = false
 
-# Specify the data integrity check. NOTE: Ignore the following configurations if downstream is DB or Storage.
+# Specifies the data integrity check. Note: ignore the following configurations if the downstream type is DB or Storage.
 [sink.integrity]
-# The integrity level, available options are `none` and `correctness`, none 
-# means no integrity check, correctness means check the integrity of each row.
+# The integrity level. Available options are `none` and `correctness`. 
+# `none` means no integrity check. `correctness` means to check the integrity of each row.
+# The default value is none
 integrity-check-level = "none"
-# Define what happen when detect data corruption, available options are `warn` 
-# and `error`, warn means log, mark the corrupted event and send it to the 
-# downstream, error means log the corrupted event and stopped the changefeed.  
+# Define what happens when detecting data corruption. Available options are `warn` and `error`, 
+# warn means to log and mark the corrupted event and send it to the downstream.
+# error means to log the corrupted event and stop the changefeed.  
+# The default value is warn
 corruption-handle-level = "warn"
 ```
