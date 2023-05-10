@@ -51,7 +51,7 @@
       - [Prepared Statements](/develop/dev-guide-prepared-statement.md)
     - Read Data
       - [Query Data from a Single Table](/develop/dev-guide-get-data-from-single-table.md)
-      - [Multi-Table Join Queries](/develop/dev-guide-join-tables.md)
+      - [Multi-table Join Queries](/develop/dev-guide-join-tables.md)
       - [Subquery](/develop/dev-guide-use-subqueries.md)
       - [Paginate Results](/develop/dev-guide-paginate-results.md)
       - [Views](/develop/dev-guide-use-views.md)
@@ -61,7 +61,7 @@
         - [Follower Read](/develop/dev-guide-use-follower-read.md)
         - [Stale Read](/develop/dev-guide-use-stale-read.md)
       - [HTAP Queries](/develop/dev-guide-hybrid-oltp-and-olap-queries.md)
-      - [FastScan](/develop/dev-guide-use-fastscan.md)
+      - [FastScan](/tiflash/use-fastscan.md)
     - Transaction
       - [Overview](/develop/dev-guide-transaction-overview.md)
       - [Optimistic and Pessimistic Transactions](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)
