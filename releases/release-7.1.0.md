@@ -233,7 +233,7 @@ In v7.1.0-LTS, the key new features and improvements are as follows:
 
     Before TiDB v7.1.0, to upgrade a cluster, you must manually cancel its running or queued DDL tasks before the upgrade and then add them back after the upgrade.
 
-    To provide a smoother upgrade experience, TiDB v7.1.0 supports automatic pausing and resuming of DDL tasks. Starting from v7.1.0, you can upgrade your clusters without manually canceling DDL tasks. TiDB will automatically pause any running or queued DDL tasks before the upgrade and resume these tasks after the cluster has completed the rolling upgrade, making it easier for you to upgrade your TiDB clusters.
+    To provide a smoother upgrade experience, TiDB v7.1.0 supports automatically pausing and resuming DDL tasks. Starting from v7.1.0, you can upgrade your clusters without manually canceling DDL tasks in advance. TiDB will automatically pause any running or queued DDL tasks before the upgrade and resume these tasks after the rolling upgrade, making it easier for you to upgrade your TiDB clusters.
 
     For more information, see [documentation](to be added).
 
