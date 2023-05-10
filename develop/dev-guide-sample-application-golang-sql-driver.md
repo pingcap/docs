@@ -1,13 +1,7 @@
 ---
-<<<<<<< HEAD:develop/dev-guide-sample-application-golang.md
-title: Build a Simple CRUD App with TiDB and Golang
-summary: Learn how to build a simple CRUD application with TiDB and Golang.
-aliases: ['/tidb/dev/dev-guide-outdated-for-go-sql-driver-mysql','/tidb/dev/dev-guide-outdated-for-gorm']
-=======
 title: Build a Simple CRUD App with TiDB and Go-MySQL-Driver
 summary: Learn how to build a simple CRUD application with TiDB and Go-MySQL-Driver.
-aliases: ['/tidbcloud/dev-guide-sample-application-golang','/tidb/stable/dev-guide-sample-application-golang','/tidb/v6.5/dev-guide-sample-application-golang']
->>>>>>> 579a0321a (cloud: update Develop Applications Doc (#12929)):develop/dev-guide-sample-application-golang-sql-driver.md
+aliases: ['/tidb/dev/dev-guide-outdated-for-go-sql-driver-mysql','/tidb/dev/dev-guide-outdated-for-gorm','/tidb/dev/dev-guide-sample-application-golang']
 ---
 
 <!-- markdownlint-disable MD024 -->
