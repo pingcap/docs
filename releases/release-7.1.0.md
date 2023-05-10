@@ -96,7 +96,7 @@ In v7.1.0-LTS, the key new features and improvements are as follows:
 
 * Support the DDL distributed parallel execution framework [#41495](https://github.com/pingcap/tidb/issues/41495) @[benjamin2037](https://github.com/benjamin2037) **tw:ran-huang**
 
-    Before TiDB v7.1.0, only one TiDB node could serve as the DDL owner and execute DDL tasks. However, starting from TiDB v7.1.0, in the new distributed parallel execution framework, multiple TiDB nodes can execute the same DDL task in parallel, thus better utilizing the resources of the TiDB cluster and significantly improving the performance of DDL. In addition, you can linearly improve the performance of DDL by adding more TiDB nodes. It should be noted that this feature is currently an experimental feature and only supports `ADD INDEX` operations.
+    Before TiDB v7.1.0, only one TiDB node can serve as the DDL owner and execute DDL tasks at the same time. Starting from TiDB v7.1.0, in the new distributed parallel execution framework, multiple TiDB nodes can execute the same DDL task in parallel, thus better utilizing the resources of the TiDB cluster and significantly improving the performance of DDL. In addition, you can linearly improve the performance of DDL by adding more TiDB nodes. Note that this feature is currently experimental and only supports `ADD INDEX` operations.
 
     To use the distributed framework, set the value of [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task) to `ON`:
 
@@ -149,6 +149,7 @@ In v7.1.0-LTS, the key new features and improvements are as follows:
     Before v7.1.0, when you perform a DDL operation that affects all rows on a large table (such as adding or deleting a column), the replication latency of TiCDC would significantly increase. Starting from v7.1.0, TiCDC optimizes this replication operation and mitigates the impact of DDL operations on downstream latency.
 
     For more information, see [documentation](). (to be added)
+
 ### SQL
 
 * Support saving TiFlash query results using the `INSERT INTO SELECT` statement (GA) [#37515](https://github.com/pingcap/tidb/issues/37515) @[gengliqi](https://github.com/gengliqi)
@@ -230,7 +231,7 @@ In v7.1.0-LTS, the key new features and improvements are as follows:
 
 * Support smooth cluster upgrade without manually canceling DDL operations [#39751](https://github.com/pingcap/tidb/issues/39751) @[zimulala](https://github.com/zimulala) @[hawkingrei](https://github.com/hawkingrei) **tw:ran-huang**
 
-    Before TiDB v7.1.0, before upgrading a cluster, you must manually cancel the running or queued DDL tasks and then add them back after the upgrade is completed.
+    Before TiDB v7.1.0, to upgrade a cluster, you must manually cancel its running or queued DDL tasks before the upgrade and then add them back after the upgrade.
 
     To provide a smoother upgrade experience, TiDB v7.1.0 supports automatic pausing and resuming of DDL tasks. Starting from v7.1.0, you can upgrade your clusters without manually canceling DDL tasks. TiDB will automatically pause any running or queued DDL tasks before the upgrade and resume these tasks after the cluster has completed the rolling upgrade, making it easier for you to upgrade your TiDB clusters.
 
