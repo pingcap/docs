@@ -7,20 +7,20 @@ summary: Learn how to migrate data from parquet files to TiDB.
 
 This document describes how to generate parquet files from Apache Hive and how to migrate data from parquet files to TiDB using TiDB Lightning.
 
-If you export parquet files from Amazon Aurora, refer to [Migrate Data from Amazon Aurora to TiDB](/migrate-aurora-to-tidb.md).
+If you export parquet files from Amazon Aurora, refer to [Migrate data from Amazon Aurora to TiDB](/migrate-aurora-to-tidb.md).
 
 ## Prerequisites
 
-- [Install TiDB Lightning](/migration-tools.md).
+- [Install TiDB Lightning using TiUP](/migration-tools.md).
 - [Get the target database privileges required for TiDB Lightning](/tidb-lightning/tidb-lightning-faq.md#what-are-the-privilege-requirements-for-the-target-database).
 
 ## Step 1. Prepare the parquet files
 
 This section describes how to export parquet files from Hive that can be read by TiDB Lightning.
 
-Each table in Hive can export table data to parquet files by annotating `STORED AS PARQUET LOCATION '/path/in/hdfs'`. Therefore, if you need to export a table named `test`, perform the following steps:
+Each table in Hive can be exported to parquet files by annotating `STORED AS PARQUET LOCATION '/path/in/hdfs'`. Therefore, if you need to export a table named `test`, perform the following steps:
 
-1. Run the following SQL statement to create a table named `test`:
+1. Run the following SQL statement in Hive:
 
     ```sql
     CREATE TABLE temp STORED AS PARQUET LOCATION '/path/in/hdfs'
@@ -29,7 +29,7 @@ Each table in Hive can export table data to parquet files by annotating `STORED 
 
     After executing the preceding statement, the table data is successfully exported to the HDFS system.
 
-2. Export the Parquet files to the local file system using the `hdfs dfs -get` command:
+2. Export the parquet files to the local file system using the `hdfs dfs -get` command:
 
     ```shell
     hdfs dfs -get /path/in/hdfs /path/in/local
@@ -90,13 +90,13 @@ status-port = ${status-port} # During the import, TiDB Lightning needs to obtain
 pd-addr = "${ip}:${port}" # The address of the PD cluster, e.g.: 172.16.31.3:2379. TiDB Lightning obtains some information from PD. When backend = "local", you must specify status-port and pd-addr correctly. Otherwise, the import will be abnormal.
 ```
 
-For more information on the configuration file, refer to [TiDB Lightning Configuration](/tidb-lightning/tidb-lightning-configuration.md).
+For more information on the configuration file, refer to [TiDB Lightning configuration](/tidb-lightning/tidb-lightning-configuration.md).
 
 ## Step 4. Import the data
 
 1. Run `tidb-lightning`.
 
-    - If you import data from Amazon S3, you need to set the `SecretKey` and `AccessKey` of the account that has permission to access the S3 backend storage as environment variables before running TiDB Lightning.
+    - If you import data from Amazon S3, you need to set the SecretKey and AccessKey of the account that has permission to access the S3 backend storage as environment variables before running TiDB Lightning.
 
         ```shell
         export AWS_ACCESS_KEY_ID=${access_key}
@@ -114,7 +114,7 @@ For more information on the configuration file, refer to [TiDB Lightning Configu
 2. After the import starts, you can check the progress of the import by either of the following methods:
 
     - Search for the keyword `progress` in the log using `grep`. The progress is updated every 5 minutes by default.
-    - Check progress in [the monitoring dashboard](/tidb-lightning/monitor-tidb-lightning.md).
+    - Check progress in the [monitoring dashboard](/tidb-lightning/monitor-tidb-lightning.md).
     - Check progress in [TiDB Lightning web interface](/tidb-lightning/tidb-lightning-web-interface.md).
 
     After TiDB Lightning completes the import, it exits automatically.
