@@ -39,19 +39,7 @@ Info: {"upstream_id":7171388873935111376,"namespace":"default","id":"simple-repl
 
 ## Configure sink URI
 
-<<<<<<< HEAD
-This section describes how to configure storage services in the changefeed URI, including Amazon S3, Azure Blob Storage, and NFS.
-
-### Configure Amazon S3 or Azure Blob Storage
-
-The URI parameters of Amazon S3 and Azure Blob Storage in TiCDC are the same as their URL parameters in BR. For details, see [Backup storage URL format](/br/backup-and-restore-storages.md#url-format-description).
-
-### Configure NFS
-
-The following configuration saves row change events to NFS:
-=======
-This section describes how to configure Sink URI for storage services, including Amazon S3, GCS, Azure Blob Storage, and NFS. Sink URI is used to specify the connection information of the TiCDC target system. The format is as follows:
->>>>>>> bf4779f65 (ticdc: fix sink uri for storage sink (#13445))
+This section describes how to configure sink URI for storage services, including Amazon S3, GCS, Azure Blob Storage, and NFS. Sink URI is used to specify the connection information of the TiCDC target system. The format is as follows:
 
 ```shell
 [scheme]://[host]/[path]?[query_parameters]
