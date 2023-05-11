@@ -725,6 +725,8 @@ After enabling the synchronously loading statistics feature, you can further con
 - To specify the maximum number of columns that the synchronously loading statistics feature can process concurrently, modify the value of the [`stats-load-concurrency`](/tidb-configuration-file.md#stats-load-concurrency-new-in-v540) option in the TiDB configuration file. The default value is `5`.
 - To specify the maximum number of column requests that the synchronously loading statistics feature can cache, modify the value of the [`stats-load-queue-size`](/tidb-configuration-file.md#stats-load-queue-size-new-in-v540) option in the TiDB configuration file. The default value is `1000`.
 
+To avoid SQL performance issues occurred when statistics initialization has not been finished during startup, starting from v7.1.0, TiDB introduces [`force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v710). With this option, you can control whether TiDB provides services only after statistics initialization has been finished during startup. This option is turned off by default.
+
 > **Warning:**
 >
 > Lightweight statistics initialization is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
