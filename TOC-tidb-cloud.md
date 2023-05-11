@@ -136,8 +136,8 @@
 - Stream Data
   - [Changefeed Overview](/tidb-cloud/changefeed-overview.md)
   - [To MySQL Sink](/tidb-cloud/changefeed-sink-to-mysql.md)
-  - [To Kafka Sink](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
-  - [To TiDB Cloud Sink (Beta)](/tidb-cloud/changefeed-sink-to-tidb-cloud.md)
+  - [To Kafka Sink (Beta)](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
+  - [To TiDB Cloud Sink](/tidb-cloud/changefeed-sink-to-tidb-cloud.md)
 - Back Up and Restore
   - [Automatic Backup](/tidb-cloud/backup-and-restore.md)
   - [Manual Backup](/tidb-cloud/backup-and-restore.md#manual-backup)
