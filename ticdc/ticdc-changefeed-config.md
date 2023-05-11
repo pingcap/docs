@@ -98,8 +98,8 @@ enable-table-across-nodes = false
 region-threshold = 100000
 # When you enable this feature, it takes effect for tables with the number of rows modified per minute greater than the `write-key-threshold` value.
 # Note:
-# * The default value of `write-key-threshold` is 0, which means that the feature does not split the table replication range according the number of rows modified in a table by default.
-# * You can configure this parameter according to the cluster workload. For example, if 30000 is configured, it means that the feature will split the replication range of a table when the number of modified rows per minute in the table exceeds 30000.
+# * The default value of `write-key-threshold` is 0, which means that the feature does not split the table replication range according to the number of rows modified in a table by default.
+# * You can configure this parameter according to your cluster workload. For example, if it is configured as 30000, it means that the feature will split the replication range of a table when the number of modified rows per minute in the table exceeds 30000.
 # * When `region-threshold` and `write-key-threshold` are configured at the same time:
 #   TiCDC will check if the number of modified rows is greater than `write-key-threshold` first.
 #   If not, next check if the number of Regions is greater than `region-threshold`.
