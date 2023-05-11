@@ -91,7 +91,7 @@ This document lists the features supported in different TiDB versions, including
 | Advanced SQL features | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | [Prepared statement cache](/sql-prepared-plan-cache.md) | Y | Y | Y | Y | Y | E | E | E | E |
-| [Non-prepared statement cache](/sql-non-prepared-plan-cache.md) | Y | N | N | N | N | N | N | N | N |
+| [Non-prepared statement cache](/sql-non-prepared-plan-cache.md) | E | N | N | N | N | N | N | N | N |
 | [SQL plan management (SPM)](/sql-plan-management.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Create bindings according to historical execution plans](/sql-plan-management.md#create-a-binding-according-to-a-historical-execution-plan) | Y | E | N | N | N | N | N | N | N |
 | [Coprocessor cache](/coprocessor-cache.md) | Y | Y | Y | Y | Y | Y | Y | Y | E |
@@ -169,6 +169,7 @@ This document lists the features supported in different TiDB versions, including
 | [Control the memory quota for collecting statistics](/statistics.md#the-memory-quota-for-collecting-statistics) | E | E | E | N | N | N | N | N | N |
 | [Randomly sample about 10000 rows of data to quickly build statistics](/system-variables.md#tidb_enable_fast_analyze) | E | E | E | E | E | E | E | E | E |
 | [Lock statistics](/statistics.md#lock-statistics) | E | E | N | N | N | N | N | N | N |
+| [Lightweight statistics initialization](/statistics.md#load-statistics) | E | N | N | N | N | N | N | N | N |
 
 ## Security
 
