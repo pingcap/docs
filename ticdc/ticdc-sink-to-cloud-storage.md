@@ -35,7 +35,7 @@ Info: {"upstream_id":7171388873935111376,"namespace":"default","id":"simple-repl
 
 ## Configure sink URI
 
-This section describes how to configure Sink URI for storage services, including Amazon S3, GCS, Azure Blob Storage, and NFS. Sink URI is used to specify the connection information of the TiCDC target system. The format is as follows:
+This section describes how to configure sink URI for storage services, including Amazon S3, GCS, Azure Blob Storage, and NFS. Sink URI is used to specify the connection information of the TiCDC target system. The format is as follows:
 
 ```shell
 [scheme]://[host]/[path]?[query_parameters]
@@ -54,6 +54,7 @@ For `[query_parameters]` in the URI, the following parameters can be configured:
 > **Note:**
 >
 > Data change files are saved to the downstream when either `flush-interval` or `file-size` meets the requirements.
+>
 > The `protocol` parameter is mandatory. If TiCDC does not receive this parameter when creating a changefeed, the `CDC:ErrSinkUnknownProtocol` error is returned.
 
 ### Configure sink URI for external storage
