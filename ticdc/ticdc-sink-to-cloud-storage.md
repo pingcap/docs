@@ -58,6 +58,7 @@ For `[query_parameters]` in the URI, the following parameters can be configured:
 > **Note:**
 >
 > Data change files are saved to the downstream when either `flush-interval` or `file-size` meets the requirements.
+>
 > The `protocol` parameter is mandatory. If TiCDC does not receive this parameter when creating a changefeed, the `CDC:ErrSinkUnknownProtocol` error is returned.
 
 ### Configure sink URI for external storage
