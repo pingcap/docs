@@ -118,7 +118,7 @@ In v7.1.0-LTS, the key new features and improvements are as follows:
 
     In TiDB v7.1.0, this feature introduces the ability to estimate system capacity based on actual workload or hardware deployment. The estimation ability provides you with a more accurate reference for capacity planning and assists you in better managing TiDB resource allocation to meet the stability needs of enterprise-level scenarios.
 
-    To improve user experience, TiDB Dashboard provides a resource control management page. You can view the resource group configuration on this page and estimate capacities in a visual way to facilitate reasonable resource allocation.
+    To improve user experience, TiDB Dashboard provides a [resource control management page](/dashboard/dashboard-resource-control.md). You can view the resource group configuration on this page and estimate capacities in a visual way to facilitate reasonable resource allocation.
 
     For more information, see [documentation](/tidb-resource-control.md).
 
@@ -138,11 +138,11 @@ In v7.1.0-LTS, the key new features and improvements are as follows:
 
 * Optimize the strategy of loading statistics [#42160](https://github.com/pingcap/tidb/issues/42160) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes) **tw:hfxsd**
 
-    Enabling synchronous loading of statistics can significantly reduce the number of statistics that must be loaded during startup, thus improving the speed of loading statistics. This feature increases the stability of TiDB in complex runtime environments and reduces the impact on the overall service when TiDB nodes restart. You can set the parameter [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710) to `true` to enable this feature. Note that this parameter is experimental.
+   TiDB v7.1.0 introduces lightweight statistics initialization as an experimental feature. Lightweight statistics initialization can significantly reduce the number of statistics that must be loaded during startup, thus improving the speed of loading statistics. This feature increases the stability of TiDB in complex runtime environments and reduces the impact on the overall service when TiDB nodes restart. You can set the parameter [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710) to `true` to enable this feature. Note that this parameter is experimental.
 
-    TiDB v7.1.0 also introduces the configuration parameter [`force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v710). This parameter forces TiDB to provide service to the public after the statistics is loaded, avoiding SQL performance issues caused by unloaded statistics during the startup phase. This parameter is disabled by default.
+    To avoid SQL performance issues caused by unloaded statistics during the startup phase, TiDB v7.1.0 also introduces the configuration parameter [`force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v710). You can control whether to force TiDB to provide service to the public after the statistics is loaded. This parameter is disabled by default.
 
-    For more information, see [documentation](/tidb-configuration-file.md).
+    For more information, see [documentation](/statistics.md#load-statistics).
 
 * TiCDC supports the data integrity validation feature for single-row data [#8718](https://github.com/pingcap/tiflow/issues/8718) [#42747](https://github.com/pingcap/tidb/issues/42747) @[3AceShowHand](https://github.com/3AceShowHand) @[zyguan](https://github.com/zyguan) **tw:Oreoxmt**
 
