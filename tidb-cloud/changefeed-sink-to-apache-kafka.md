@@ -1,9 +1,9 @@
 ---
-title: Sink to Apache Kafka
+title: Sink to Apache Kafka (Beta)
 Summary: Learn how to create a changefeed to stream data from TiDB Cloud to Apache Kafka.
 ---
 
-# Sink to Apache Kafka
+# Sink to Apache Kafka (Beta)
 
 This document describes how to create a changefeed to stream data from TiDB Cloud to Apache Kafka.
 
