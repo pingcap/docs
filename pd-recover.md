@@ -43,7 +43,7 @@ Start the surviving PD node using the `--force-new-cluster` startup parameter. T
 Since this method relies on a minority PD node to recover the service, the node might contain outdated data. If the `alloc_id` and `tso` data roll back, the cluster data might be corrupted or unavailable. To prevent this, you need to use `pd-recover` to modify the metadata to ensure that the node can provide correct allocation IDs and TSO services. The following is an example:
 
 ```shell
-./bin/pd-recover --from-old-member --endpoints=http://127.0.0.1:2379 // Specify the corresponding PD address
+./bin/pd-recover --from-old-member --endpoints=http://127.0.0.1:2379 # Specify the corresponding PD address
 ```
 
 > **Note:**
@@ -58,7 +58,7 @@ Once you see the prompt message `recovery is successful`, restart the PD node.
 
 ### Step 5: Scale out PD and start the cluster
 
-Scale out the PD cluster using the deployment tool and start the other components in the cluster. At this point, the service is available.
+Scale out the PD cluster using the deployment tool and start the other components in the cluster. At this point, the PD service is available.
 
 ## Method 2: Entirely rebuild a PD cluster
 
