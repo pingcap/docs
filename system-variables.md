@@ -4891,7 +4891,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Default value: `ON`
 - This variable controls whether to use the high precision mode when computing the window functions.
 
-### authentication_ldap_sasl_auth_method_name
+### authentication_ldap_sasl_auth_method_name <span class="version-mark">New in v7.1.0</span>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -4900,7 +4900,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Possible values: `SCRAM-SHA-1`, `SCRAM-SHA-256`, `GSSAPI`.
 - For LDAP SASL authentication, the authentication method name.
 
-### authentication_ldap_sasl_bind_base_dn
+### authentication_ldap_sasl_bind_base_dn <span class="version-mark">New in v7.1.0</span>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -4908,7 +4908,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Default value: ""
 - For LDAP SASL authentication, this variable limits the search scope within the search tree. If a user is created without `AS ...` clause, TiDB will automatically search the `dn` in LDAP server according to the user name.
 
-### authentication_ldap_sasl_bind_root_dn
+### authentication_ldap_sasl_bind_root_dn <span class="version-mark">New in v7.1.0</span>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -4916,7 +4916,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Default value: ""
 - For LDAP SASL authentication, the `dn` used to login to the LDAP server to search users.
 
-### authentication_ldap_sasl_bind_root_pwd
+### authentication_ldap_sasl_bind_root_pwd <span class="version-mark">New in v7.1.0</span>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -4924,7 +4924,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Default value: ""
 - For LDAP SASL authentication, the password used to login to the LDAP server to search users.
 
-### authentication_ldap_sasl_ca_path
+### authentication_ldap_sasl_ca_path <span class="version-mark">New in v7.1.0</span>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -4932,7 +4932,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Default value: ""
 - For LDAP SASL authentication, the absolute path of the certificate authority file for StartTLS connection.
 
-### authentication_ldap_sasl_init_pool_size
+### authentication_ldap_sasl_init_pool_size <span class="version-mark">New in v7.1.0</span>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -4941,7 +4941,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Range: `[1, 32767]`
 - For LDAP SASL authentication, the initial size of the pool of connections to the LDAP server.
 
-### authentication_ldap_sasl_max_pool_size
+### authentication_ldap_sasl_max_pool_size <span class="version-mark">New in v7.1.0</span>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -4950,7 +4950,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Range: `[1, 32767]`
 - For LDAP SASL authentication, the maximum size of the pool of connections to the LDAP server.
 
-### authentication_ldap_sasl_server_host
+### authentication_ldap_sasl_server_host <span class="version-mark">New in v7.1.0</span>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -4958,7 +4958,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Default value: ""
 - For LDAP SASL authentication, the LDAP server host.
 
-### authentication_ldap_sasl_server_port
+### authentication_ldap_sasl_server_port <span class="version-mark">New in v7.1.0</span>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -4967,7 +4967,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Range: `[1, 65535]`
 - For LDAP SASL authentication, the LDAP server TCP/IP port number.
 
-### authentication_ldap_sasl_tls
+### authentication_ldap_sasl_tls <span class="version-mark">New in v7.1.0</span>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -4975,7 +4975,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Default value: `OFF`
 - For LDAP SASL authentication, whether connections by the plugin to the LDAP server are protected with StartTLS.
 
-### authentication_ldap_simple_auth_method_name
+### authentication_ldap_simple_auth_method_name <span class="version-mark">New in v7.1.0</span>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -4984,7 +4984,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Possible values: `SIMPLE`.
 - For LDAP simple authentication, the authentication method name. The only supported value is `SIMPLE`.
 
-### authentication_ldap_simple_bind_base_dn
+### authentication_ldap_simple_bind_base_dn <span class="version-mark">New in v7.1.0</span>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -4992,7 +4992,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Default value: ""
 - For LDAP simple authentication, this variable limits the search scope within the search tree. If a user is created without `AS ...` clause, TiDB will automatically search the `dn` in LDAP server according to the user name.
 
-### authentication_ldap_simple_bind_root_dn
+### authentication_ldap_simple_bind_root_dn <span class="version-mark">New in v7.1.0</span>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -5000,7 +5000,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Default value: ""
 - For LDAP simple authentication, the `dn` used to login to the LDAP server to search users.
 
-### authentication_ldap_simple_bind_root_pwd
+### authentication_ldap_simple_bind_root_pwd <span class="version-mark">New in v7.1.0</span>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -5008,7 +5008,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Default value: ""
 - For LDAP simple authentication, the password used to login to the LDAP server to search users.
 
-### authentication_ldap_simple_ca_path
+### authentication_ldap_simple_ca_path <span class="version-mark">New in v7.1.0</span>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -5016,7 +5016,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Default value: ""
 - For LDAP simple authentication, the absolute path of the certificate authority file for StartTLS connection.
 
-### authentication_ldap_simple_init_pool_size
+### authentication_ldap_simple_init_pool_size <span class="version-mark">New in v7.1.0</span>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -5025,7 +5025,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Range: `[1, 32767]`
 - For LDAP simple authentication, the initial size of the pool of connections to the LDAP server.
 
-### authentication_ldap_simple_max_pool_size
+### authentication_ldap_simple_max_pool_size <span class="version-mark">New in v7.1.0</span>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -5034,7 +5034,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Range: `[1, 32767]`
 - For LDAP simple authentication, the maximum size of the pool of connections to the LDAP server.
 
-### authentication_ldap_simple_server_host
+### authentication_ldap_simple_server_host <span class="version-mark">New in v7.1.0</span>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -5042,7 +5042,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Default value: ""
 - For LDAP simple authentication, the LDAP server host.
 
-### authentication_ldap_simple_server_port
+### authentication_ldap_simple_server_port <span class="version-mark">New in v7.1.0</span>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -5051,7 +5051,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Range: `[1, 65535]`
 - For LDAP simple authentication, the LDAP server TCP/IP port number.
 
-### authentication_ldap_simple_tls
+### authentication_ldap_simple_tls <span class="version-mark">New in v7.1.0</span>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
