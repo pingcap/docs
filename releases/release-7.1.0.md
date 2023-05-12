@@ -41,7 +41,7 @@ Introduces S3-based storage engine, which can provide shared storage at a lower 
   <tr>
     <td rowspan="2">Reliability and availability</td>
     <td><a href="https://docs.pingcap.com/tidb/dev/tidb-resource-control" target="_blank">Resource control by resource groups</a> (GA)</td>
-   <td>Support resource management based on resource groups, which maps database users to the corresponding resource groups and sets quotas for each resource group based on actual needs.</td>
+   <td>GA'ed resource groups to allocate and isolate resources for different workloads in the same cluster. This significantly adds to multi-application cluster stability and sets the stage for multi-tenancy. GA'ing this feature includes simple tooling for estimating cluster capacity and workload quotas.</td>
   </tr>
   <tr>
     <td><a href="https://docs.pingcap.com/tidb/dev/tiflash-spill-disk" target="_blank">TiFlash supports spill to disk</a> (GA)</td>
