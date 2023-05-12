@@ -225,7 +225,7 @@ mysql> SELECT * FROM t1;
 - Persists to cluster: Yes
 - Type: Enumeration
 - Default value: `mysql_native_password`
-- Possible values: `mysql_native_password`, `caching_sha2_password`, `tidb_sm3_password`, `tidb_auth_token`, `authentication_ldap_sasl` and `authentication_ldap_simple`.
+- Possible values: `mysql_native_password`, `caching_sha2_password`, `tidb_sm3_password`, `tidb_auth_token`, `authentication_ldap_sasl`, and `authentication_ldap_simple`.
 - The `tidb_auth_token` authentication method is used only for the internal operation of TiDB Cloud. **DO NOT** set the variable to this value.
 - This variable sets the authentication method that the server advertises when the server-client connection is being established.
 - To authenticate using the `tidb_sm3_password` method, you can connect to TiDB using [TiDB-JDBC](https://github.com/pingcap/mysql-connector-j/tree/release/8.0-sm3).
@@ -4930,7 +4930,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Persists to cluster: Yes
 - Type: String
 - Default value: ""
-- For LDAP SASL authentication, the absolute path of the certificate authority file for StartTLS connection.
+- For LDAP SASL authentication, the absolute path of the certificate authority file for StartTLS connections.
 
 ### authentication_ldap_sasl_init_pool_size <span class="version-mark">New in v7.1.0</span>
 
@@ -5014,7 +5014,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Persists to cluster: Yes
 - Type: String
 - Default value: ""
-- For LDAP simple authentication, the absolute path of the certificate authority file for StartTLS connection.
+- For LDAP simple authentication, the absolute path of the certificate authority file for StartTLS connections.
 
 ### authentication_ldap_simple_init_pool_size <span class="version-mark">New in v7.1.0</span>
 
