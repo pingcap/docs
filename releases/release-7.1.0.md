@@ -23,27 +23,47 @@ In v7.1.0-LTS, the key new features and improvements are as follows:
 </thead>
 <tbody>
   <tr>
-    <td rowspan="2">Scalability and Performance</td>
-    <td><a href="https://docs.pingcap.com/tidb/dev/sql-non-prepared-plan-cache" target="_blank">Session-level plan cache for non-prepared statements</a> (experimental)</td>
-    <td>Support automatically reusing plan cache at the session level to remove query planning time, reducing query time for repeat SQL patterns without manually setting prepare statements in advance.</td>
+    <td rowspan="3">Scalability and Performance</td>
+    <td><a href="https://docs.pingcap.com/tidb/dev/tiflash-disaggregated-and-s3" target="_blank">TiFlash decouples storage and compute, and adds S3 shared storage (experimental)</a></td>
+    <td>TiFlash introduces a cloud-native architecture as an option:
+Disaggregates TiFlash's compute and storage, which is a milestone for elastic HTAP resource utilization.
+Introduces S3-based storage engine, which can provide shared storage at a lower cost.
+    </td>
+  </tr>
+  <tr>
+    <td><a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_store_batch_size" target="_blank">TiKV supports batch aggregating data requests</a></td>
+    <td>This enhancement significantly reduces total RPCs in TiKV batch-get operations. In situations where data is highly dispersed and the gRPC thread pool has insufficient resources, batching coprocessor requests can improve performance by more than 50%.</td>
   </tr>
   <tr>
     <td><a href="https://docs.pingcap.com/tidb/dev/troubleshoot-hot-spot-issues#scatter-read-hotspots" target="_blank">Load-based replica read</a></td>
     <td>In a read hotspot scenario, TiDB can redirect read requests for a hotspot TiKV node to its replicas. This feature efficiently scatters read hotspots and optimizes the use of cluster resources. To control the threshold for triggering load-based replica read, you can adjust the system variable <a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_load_based_replica_read_threshold-new-in-v700" target="_blank"><code>tidb_load_based_replica_read_threshold</code></a>.</td>
   </tr>
   <tr>
-    <td rowspan="1">Reliability and availability</td>
+    <td rowspan="2">Reliability and availability</td>
     <td><a href="https://docs.pingcap.com/tidb/dev/tidb-resource-control" target="_blank">Resource control by resource groups</a> (GA)</td>
    <td>Support resource management based on resource groups, which maps database users to the corresponding resource groups and sets quotas for each resource group based on actual needs.</td>
- </tr>
+  </tr>
   <tr>
-    <td rowspan="2">SQL</td>
+    <td><a href="https://docs.pingcap.com/tidb/dev/tiflash-spill-disk" target="_blank">TiFlash supports spill to disk</a> (GA)</td>
+    <td>TiFlash supports intermediate result spill to disk to mitigate OOMs in data-intensive operations such as aggregations, sorts, and hash joins.</td>
+  </tr>
+  <tr>
+    <td rowspan="3">SQL</td>
     <td><a href="https://docs.pingcap.com/tidb/dev/sql-statement-create-index#multi-valued-index" target="_blank">Multi-valued index</a> (GA)</td>
     <td>Support MySQL-compatible multi-valued indexes and enhance the JSON type to improve compatibility with MySQL 8.0. This feature improves the efficiency of membership checks on multi-valued columns.</td>
   </tr>
   <tr>
+    <td><a href="https://docs.pingcap.com/tidb/dev/time-to-live" target="_blank">Row-level TTL</a> (GA)</td>
+    <td>Support managing database size and improve performance by automatically expiring data of a certain age.</td>
+  </tr>
+  <tr>
     <td><a href="https://docs.pingcap.com/tidb/dev/generated-columns" target="_blank">Generated columns</a> (GA)</td>
     <td>Values in a generated column are calculated by a SQL expression in the column definition in real time. This feature pushes some application logic to the database level, thus improving query efficiency.</td>
+  </tr>
+  <tr>
+  <td rowspan="1">Security</td>
+    <td>Added LDAP integration (GA)</td>
+    <td>TiDB adds support for LDAP authentication. This is compatible with the <a href="https://dev.mysql.com/doc/refman/8.0/en/ldap-pluggable-authentication.html" target="_blank">MySQL implementation</a>.</td>
   </tr>
 </tbody>
 </table>
