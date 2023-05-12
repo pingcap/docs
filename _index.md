@@ -50,7 +50,11 @@ hide_commit: true
 
 [Deploy a TiDB Cluster Using TiUP](https://docs.pingcap.com/tidb/v6.5/production-deployment-using-tiup)
 
+<<<<<<< HEAD
 [Deploy a TiDB Cluster on Kubernetes](https://docs.pingcap.com/tidb/v6.5/tidb-in-kubernetes)
+=======
+[Deploy a TiDB Cluster on Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable)
+>>>>>>> bf20a83dd (learning path: update the link for deployment on k8s  (#13548))
 
 </LearningPath>
 
