@@ -20,8 +20,6 @@ You can use one of the following two methods to access the slow query page:
 
 * After logging into TiDB Dashboard, click **Slow Queries** on the left navigation menu:
 
-![Access slow query page](/media/dashboard/dashboard-slow-queries-access-v620.png)
-
 * Visit <http://127.0.0.1:2379/dashboard/#/slow_query> in your browser. Replace `127.0.0.1:2379` with the actual PD address and port.
 
 All data displayed on the slow query page comes from TiDB slow query system tables and slow query logs. See [slow query logs](/identify-slow-queries.md) for details.
