@@ -11,9 +11,9 @@ To implement resource isolation using the [Resource Control](/tidb-resource-cont
 
 You can use one of the following two methods to access the cluster resource control page:
 
-- After logging into TiDB Dashboard, click **Resource Manager** in the left navigation bar.
+* After logging into TiDB Dashboard, click **Resource Manager** in the left navigation bar.
 
-- Visit <http://127.0.0.1:2379/dashboard/#/resource_manager> in your browser. Replace `127.0.0.1:2379` with the actual PD instance address and port.
+* Visit <http://127.0.0.1:2379/dashboard/#/resource_manager> in your browser. Replace `127.0.0.1:2379` with the actual PD instance address and port.
 
 ## Resource Control Details
 
