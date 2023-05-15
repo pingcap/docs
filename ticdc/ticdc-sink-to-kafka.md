@@ -249,7 +249,7 @@ Sample configuration:
 
 ```toml
 [scheduler]
-# The default value is "false". Set it to "true" to enable this feature.
+# The default value is "false". You can set it to "true" to enable this feature.
 enable-table-across-nodes = true
 # When you enable this feature, it only takes effect for tables with the number of regions greater than the `region-threshold` value.
 region-threshold = 100000
@@ -258,8 +258,8 @@ region-threshold = 100000
 # * The default value of `write-key-threshold` is 0, which means that the feature does not split the table replication range according to the number of rows modified in a table by default.
 # * You can configure this parameter according to your cluster workload. For example, if it is configured as 30000, it means that the feature will split the replication range of a table when the number of modified rows per minute in the table exceeds 30000.
 # * When `region-threshold` and `write-key-threshold` are configured at the same time:
-#   TiCDC will check if the number of modified rows is greater than `write-key-threshold` first.
-#   If not, next check if the number of Regions is greater than `region-threshold`.
+#   TiCDC will check whether the number of modified rows is greater than `write-key-threshold` first.
+#   If not, next check whether the number of Regions is greater than `region-threshold`.
 write-key-threshold = 0
 ```
 
