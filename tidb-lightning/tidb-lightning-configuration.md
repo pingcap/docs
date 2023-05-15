@@ -168,6 +168,25 @@ addr = "172.16.31.10:8287"
 
 # When you use TiDB Lightning to import a multi-tenant TiDB cluster, use this parameter to specify the corresponding key space name. The default value is an empty string, which means TiDB Lightning will automatically get the key space name of the corresponding tenant to import data. If you specify a value, the specified key space name will be used to import data.
 # keyspace-name = ""
+
+# In Physical Import Mode, this parameter controls the scope in which TiDB Lightning stops PD scheduling. Available options are:
+# - "table": pause scheduling only for the Region where the target table data range is located. The default value is "table".
+# - "global": stop global scheduling. When importing data to a cluster with no business traffic, it is recommended to set the parameter to "global" to avoid interference from other scheduling.
+# pause-pd-scheduler-scope = "table"
+
+# In Physical Import Mode, this parameter controls the number of regions when splitting regions in a batch. The maximum number of regions that can be split at the same time per TiDB Lightning instance is:
+# region-split-batch-size * region-split-concurrency * table-concurrency
+# This parameter is introduced in v7.1.0. The default value is `4096`.
+# region-split-batch-size = 4096
+
+# In Physical Import Mode, this parameter controls the concurrency when splitting regions. The default value is the number of CPU cores.
+# This parameter is introduced in v7.1.0.
+# region-split-concurrency =
+
+# In Physical Import Mode, this parameter controls the number of retries to wait for the Region to come online after the split and scatter operations. The default value is `1800`. The maximum retry interval is 2 seconds. The number of retries will not be increased if any Region becomes online between retries.
+# This parameter is introduced in v7.1.0.
+# region-check-backoff-limit = 1800
+
 [mydumper]
 # Block size for file reading. Keep it longer than the longest string of the data source.
 read-block-size = "64KiB" # default value

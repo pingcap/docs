@@ -15,8 +15,10 @@ The backend for the physical import mode is `local`.
 
 1. Before importing data, TiDB Lightning automatically switches the TiKV nodes to "import mode", which improves write performance and stops auto-compaction. TiDB Lightning determines whether to pause global scheduling according to the TiDB cluster version.
 
-    - When the TiDB cluster >= v6.1.0 and TiDB Lightning >= v6.2.0, TiDB Lightning pauses scheduling for the region that stores the target table data. After the import is completed, TiDB Lightning recovers scheduling.
+    - Starting from v7.1.0, you can use the TiDB Lightning parameter [pause-pd-scheduler-scope](/tidb-lightning/tidb-lightning-configuration.md) to control the scope of pausing scheduling.
+    - For versions v6.2.0 ~ v7.0.0, TiDB Lightning determines whether to stop global scheduling depending on the version of the TiDB cluster. When the TiDB cluster >= v6.1.0 and TiDB Lightning >= v6.2.0, TiDB Lightning pauses scheduling for the region that stores the target table data. After the import is completed, TiDB Lightning recovers scheduling. For other versions, TiDB Lightning stops global scheduling.
     - When the TiDB cluster < v6.1.0 or TiDB Lightning < v6.2.0, TiDB Lightning pauses global scheduling.
+    - When TiDB Lightning <= v6.1.0, TiDB Lightning stops global scheduling.
 
 2. TiDB Lightning creates table schemas in the target database and fetches the metadata.
 
