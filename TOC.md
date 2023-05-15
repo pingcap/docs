@@ -945,6 +945,7 @@
         - [Use Diagnostics](/dashboard/dashboard-diagnostics-usage.md)
       - [Monitoring Page](/dashboard/dashboard-monitoring.md)
       - [Search Logs Page](/dashboard/dashboard-log-search.md)
+      - [Resource Control Page](/dashboard/dashboard-resource-control.md)
       - Instance Profiling
         - [Manual Profiling](/dashboard/dashboard-profiling.md)
         - [Continuous Profiling](/dashboard/continuous-profiling.md)

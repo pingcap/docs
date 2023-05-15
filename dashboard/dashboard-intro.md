@@ -60,6 +60,12 @@ On the Search Logs page of TiDB Dashboard, you can quickly search logs of all ru
 
 See [Search Logs Page](/dashboard/dashboard-log-search.md) for details.
 
+## Estimated resource control capacity
+
+To implement resource isolation using the [Resource Control](/tidb-resource-control.md) feature, cluster administrators can define Resource Groups and limit read and write quotas by Resource Group.
+
+Before resource planning, you need to know the overall capacity of the cluster. See the [Resource Control page](/dashboard/dashboard-resource-control.md) for details.
+
 ## Collect profiling data for each instance
 
 This is an advanced debugging feature that lets you profile each instance online and analyze various internal operations an instance performed during the profiling data collection period and the proportion of the operation execution time in this period without third-party tools.
