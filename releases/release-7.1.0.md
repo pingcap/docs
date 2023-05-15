@@ -158,7 +158,7 @@ Introduces S3-based storage engine, which can provide shared storage at a lower 
 
 * Optimize the strategy of loading statistics [#42160](https://github.com/pingcap/tidb/issues/42160) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes) **tw:hfxsd**
 
-   TiDB v7.1.0 introduces lightweight statistics initialization as an experimental feature. Lightweight statistics initialization can significantly reduce the number of statistics that must be loaded during startup, thus improving the speed of loading statistics. This feature increases the stability of TiDB in complex runtime environments and reduces the impact on the overall service when TiDB nodes restart. You can set the parameter [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710) to `true` to enable this feature. 
+   TiDB v7.1.0 introduces lightweight statistics initialization as an experimental feature. Lightweight statistics initialization can significantly reduce the number of statistics that must be loaded during startup, thus improving the speed of loading statistics. This feature increases the stability of TiDB in complex runtime environments and reduces the impact on the overall service when TiDB nodes restart. You can set the parameter [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710) to `true` to enable this feature.
 
     During TiDB startup, SQL statements executed before the initial statistics are fully loaded might have suboptimal execution plans, thus causing performance issues. To avoid such issues, TiDB v7.1.0 introduces the configuration parameter [`force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v710). With this option, you can control whether TiDB provides services only after statistics initialization has been finished during startup. This parameter is disabled by default.
 
@@ -280,6 +280,12 @@ Introduces S3-based storage engine, which can provide shared storage at a lower 
 * Replace the interface used for querying TiFlash system table information [#6941](https://github.com/pingcap/tiflash/issues/6941) @[flowbehappy](https://github.com/flowbehappy)
 
     Starting from v7.1.0, when providing the query service of [`INFORMATION_SCHEMA.TIFLASH_TABLES`](/information-schema/information-schema-tiflash-tables.md) and [`INFORMATION_SCHEMA.TIFLASH_SEGMENTS`](/information-schema/information-schema-tiflash-segments.md) system tables for TiDB, TiFlash uses the gRPC port instead of the HTTP port, which avoids the security risks of the HTTP service.
+
+* Support LDAP authentication [#43580](https://github.com/pingcap/tidb/issues/43580)@[YangKeao](https://github.com/YangKeao) **tw:ran-huang**
+
+    Starting from v7.1.0, TiDB supports LDAP authentication and provides two authentication plugins: `authentication_ldap_sasl` and `authentication_ldap_simple`.
+
+    For more information, see [documentation](/security-compatibility-with-mysql.md).
 
 ## Compatibility changes
 
