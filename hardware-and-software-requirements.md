@@ -25,6 +25,7 @@ As an open-source distributed SQL database with high performance, TiDB can be de
 | Amazon Linux 2 | <ul><li>x86_64</li><li>ARM 64</li></ul> |
 | Kylin Euler V10 SP1/SP2   |   <ul><li>x86_64</li><li>ARM 64</li></ul>   |
 | UOS V20                 |   <ul><li>x86_64</li><li>ARM 64</li></ul>   |
+| openEuler 22.03 LTS SP1 |   x86_64   |
 |   macOS Catalina or later   |  <ul><li>x86_64</li><li>ARM 64</li></ul>  |
 |  Oracle Enterprise Linux 7.3 or a later 7.x version  |  x86_64           |
 |   Ubuntu LTS 18.04 or later   |  x86_64           |
