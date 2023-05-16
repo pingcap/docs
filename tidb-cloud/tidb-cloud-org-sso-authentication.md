@@ -87,7 +87,7 @@ To enable Cloud Organization SSO, take the following steps:
 
     > **Note:**
     >
-    > If the dialog includes a list of users to be re-invited and re-join for Cloud Organization SSO, TiDB Cloud will send the invitation emails to the corresponding users automatically after you click **Enable**. After receiving the invitation email, the user needs to click the link in the email to verify the identity, and the custom login page shows.
+    > If the dialog includes a list of users to be re-invited and re-join for Cloud Organization SSO, TiDB Cloud will send the invitation emails to the corresponding users automatically after you click **Enable**. After receiving the invitation email, each user needs to click the link in the email to verify the identity, and the custom login page shows.
 
 ## Step 2. Configure authentication methods
 
@@ -152,27 +152,3 @@ In TiDB Cloud, the OIDC authentication method is disabled by default. After enab
         > If you have configured email domains, before saving the settings, make sure that you add the email domain that you currently use for login, to avoid that you are locked out by TiDB Cloud.
 
 5. Click **Save**.
-
-## Step 3. Invite your organization members
-
-If auto-provision is enabled, users who log in to your custom URL are automatically granted the **Member** role. You can change their roles according to the instructions in [Manage role access](/tidb-cloud/manage-user-access.md#manage-role-access).
-
-If auto-provision is not enabled, you need to re-invite your organization members according to the email list you get in [Step 1. Enable Cloud Organization SSO](#step-1-enable-cloud-organization-sso).
-
-To invite a member, take the following steps:
-
-1. On the **Organization Settings** page, click the **User Management** tab, and then select **By All Users**.
-2. Click **Invite**.
-3. Enter the email address of the member to be invited, select a role, and then choose a project for the user.
-
-    > **Note:**
-    >
-    > For a member who has the organization owner, billing admin, or audit Admin role before the migration, you need to re-grant the corresponding role to the member.
-
-4. Click **Confirm**. An email is sent to the invited email address with a verification link.
-
-After receiving the invitation email, the member needs to click the link in the email to verify the identity, and the custom login page shows.
-
-> **Note:**
->
-> The verification link in the email expires in 24 hours. If an invited member does not receive the email, click **Resend**.
