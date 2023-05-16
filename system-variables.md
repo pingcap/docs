@@ -1160,6 +1160,10 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 >
 > Currently, PITR recovery handles the indexes created by index acceleration during the log backup with extra processing to achieve compatibility. For details, see [Why is the acceleration of adding indexes feature incompatible with PITR?](/faq/backup-and-restore-faq.md#why-is-the-acceleration-of-adding-indexes-feature-incompatible-with-pitr).
 
+> **Note:**
+>
+> Before you upgrade to v6.5.0 or later, it is recommended that you check whether the [temp-dir](/tidb-configuration-file.md#temp-dir-new-in-v630) path of TiDB is correctly mounted to an SSD disk. This parameter is a TiDB configuration item, which takes effect after TiDB is restarted. Therefore, setting this configuration item in advance before upgrading can avoid another restart.
+
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
