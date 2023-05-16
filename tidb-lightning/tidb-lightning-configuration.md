@@ -170,7 +170,7 @@ addr = "172.16.31.10:8287"
 # keyspace-name = ""
 
 # In Physical Import Mode, this parameter controls the scope in which TiDB Lightning stops PD scheduling. The value options are as follows:
-# - "table": pause scheduling only for the Region where the target table data range is located. The default value is "table".
+# - "table": pause scheduling only for the Region that stores the target table data. The default value is "table".
 # - "global": pause global scheduling. When importing data to a cluster without any business traffic, it is recommended to set this parameter to "global" to avoid interference from other scheduling.
 # pause-pd-scheduler-scope = "table"
 
