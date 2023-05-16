@@ -87,7 +87,7 @@ To enable Cloud Organization SSO, take the following steps:
 
     > **Note:**
     >
-    > If the dialog includes a list of users to be re-invited and re-join for Cloud Organization SSO, TiDB Cloud will send the invitation emails to the corresponding users automatically after you click **Enable**. After receiving the invitation email, each user needs to click the link in the email to verify the identity, and the custom login page shows.
+    > If the dialog includes a list of users to be re-invited and re-join for Cloud Organization SSO, TiDB Cloud will automatically send the invitation emails to those users after you enable Cloud Organization SSO. After receiving the invitation email, each user needs to click the link in the email to verify their identity, and the custom login page shows.
 
 ## Step 2. Configure authentication methods
 
