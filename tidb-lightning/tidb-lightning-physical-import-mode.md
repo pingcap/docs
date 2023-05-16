@@ -18,7 +18,7 @@ The backend for the physical import mode is `local`.
     - Starting from v7.1.0, you can you can control the scope of pausing scheduling by using the TiDB Lightning parameter [`pause-pd-scheduler-scope`](/tidb-lightning/tidb-lightning-configuration.md).
     - For TiDB Lightning versions between v6.2.0 and v7.0.0, the behavior of pausing global scheduling depends on the TiDB cluster version. When the TiDB cluster >= v6.1.0, TiDB Lightning pauses scheduling for the Region that stores the target table data. After the import is completed, TiDB Lightning recovers scheduling. For other versions, TiDB Lightning pauses global scheduling.
     - When TiDB Lightning < v6.2.0 or TiDB cluster < v6.1.0, TiDB Lightning pauses global scheduling.
-    - When TiDB Lightning <= v6.1.0, TiDB Lightning stops global scheduling.
+    - When TiDB Lightning <= v6.1.0, TiDB Lightning pauses global scheduling.
 
 2. TiDB Lightning creates table schemas in the target database and fetches the metadata.
 
