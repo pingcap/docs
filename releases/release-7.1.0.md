@@ -7,11 +7,13 @@ summary: Learn about the new features, compatibility changes, improvements, and 
 
 Release date: xxxx
 
-TiDB version: 7.1.0 (LTS)
+TiDB version: 7.1.0
 
 Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-tidb) | [Production deployment](https://docs.pingcap.com/tidb/v7.1/production-deployment-using-tiup) | [Installation packages](https://www.pingcap.com/download/?version=v7.1.0#version-list)
 
-In v7.1.0-LTS, the key new features and improvements are as follows:
+TiDB 7.1.0 is a Long-Term Support Release (LTS).
+
+Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, improvements, and bug fixes released in [6.6.0-DMR](/releases/release-6.6.0.md), [7.0.0-DMR](/releases/release-7.0.0.md), but also introduces the following key features and improvements:
 
 <table>
 <thead>
@@ -301,6 +303,8 @@ Introduces S3-based storage engine, which can provide shared storage at a lower 
 
 * In the outputs of [`SHOW LOAD DATA`](/sql-statements/sql-statement-show-load-data.md), the `Loaded_File_Size` parameter is deprecated and replaced with the `Imported_Rows` parameter.
 
+* TiDB v6.2.0 ~ v7.0.0 版本的 `tidb-lightning` 会根据 TiDB 集群的版本决定是否暂停全局调度。当 TiDB 集群版本 >= v6.1.0，只会暂停目标表数据范围所在 Region 的调度，并在目标表导入完成后恢复调度，其他版本会暂停全局调度。自 TiDB v7.1.0 开始，你可以通过 [pause-pd-scheduler-scope](/tidb-lightning/tidb-lightning-configuration.md) 来控制是否暂停全局调度，默认暂停目标表数据范围所在 Region 的调度，如果目标集群版本低于 v6.1.0 则报错，此时将参数取值改为 `"global"` 后重试即可。**tw:hfxsd**
+
 ### System variables
 
 | Variable name  | Change type    | Description |
@@ -309,8 +313,29 @@ Introduces S3-based storage engine, which can provide shared storage at a lower 
 | [`tidb_non_prepared_plan_cache_size`](/system-variables.md#tidb_non_prepared_plan_cache_size) | Deprecated | Starting from v7.1.0, this system variable is deprecated. You can use [`tidb_session_plan_cache_size`](/system-variables.md#tidb_session_plan_cache_size-new-in-v710) to control the maximum number of plans that can be cached. |
 | [`tidb_prepared_plan_cache_size`](/system-variables.md#tidb_prepared_plan_cache_size-new-in-v610) | Deprecated | Starting from v7.1.0, this system variable is deprecated. You can use [`tidb_session_plan_cache_size`](/system-variables.md#tidb_session_plan_cache_size-new-in-v710) to control the maximum number of plans that can be cached. |
 | `tidb_ddl_distribute_reorg` | Deleted | This variable is renamed to [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710). |
+| [`default_authentication_plugin`](/system-variables.md#default_authentication_plugin) | Modified | Introduces two new value options: `authentication_ldap_sasl` and `authentication_ldap_simpl`. |
 | [`tidb_load_based_replica_read_threshold`](/system-variables.md#tidb_load_based_replica_read_threshold-new-in-v700) | Modified | Takes effect starting from v7.1.0 and controls the threshold for triggering load-based replica read. Changes the default value from `"0s"` to `"1s"` after further tests. |
 | [`tidb_opt_enable_late_materialization`](/system-variables.md#tidb_opt_enable_late_materialization-new-in-v700) | Modified | Changes the default value from `OFF` to `ON`, meaning that the TiFlash late materialization feature is enabled by default. |
+| [`authentication_ldap_sasl_auth_method_name`](/system-variables.md#authentication_ldap_sasl_auth_method_name-new-in-v710) | Newly added | Specifies the authentication method name in LDAP SASL authentication. |
+| [`authentication_ldap_sasl_bind_base_dn`](/system-variables.md#authentication_ldap_sasl_bind_base_dn-new-in-v710) | Newly added | Limits the search scope within the search tree in LDAP SASL authentication. If a user is created without `AS ...` clause, TiDB automatically searches the `dn` in LDAP server according to the user name. |
+| [`authentication_ldap_sasl_bind_root_dn`](/system-variables.md#authentication_ldap_sasl_bind_root_dn-new-in-v710) | Newly added | Specifies the `dn` used to login to the LDAP server to search users in LDAP SASL authentication. |
+| [`authentication_ldap_sasl_bind_root_pwd`](/system-variables.md#authentication_ldap_sasl_bind_root_pwd-new-in-v710) | Newly added | Specifies the password used to login to the LDAP server to search users in LDAP SASL authentication. |
+| [`authentication_ldap_sasl_ca_path`](/system-variables.md#authentication_ldap_sasl_ca_path-new-in-v710) | Newly added | Specifies the absolute path of the certificate authority file for StartTLS connections in LDAP SASL authentication. |
+| [`authentication_ldap_sasl_init_pool_size`](/system-variables.md#authentication_ldap_sasl_init_pool_size-new-in-v710) | Newly added | Specifies the initial size of the pool of connections to the LDAP server in LDAP SASL authentication. |
+| [`authentication_ldap_sasl_max_pool_size`](/system-variables.md#authentication_ldap_sasl_max_pool_size-new-in-v710) | Newly added | Specifies the maximum size of the pool of connections to the LDAP server in LDAP SASL authentication. |
+| [`authentication_ldap_sasl_server_host`](/system-variables.md#authentication_ldap_sasl_server_host-new-in-v710) | Newly added | Specifies the LDAP server host in LDAP SASL authentication. |
+| [`authentication_ldap_sasl_server_port`](/system-variables.md#authentication_ldap_sasl_server_port-new-in-v710) | Newly added | Specifies the LDAP server TCP/IP port number in LDAP SASL authentication. |
+| [`authentication_ldap_sasl_tls`](/system-variables.md#authentication_ldap_sasl_tls-new-in-v710) | Newly added | Specifies whether connections by the plugin to the LDAP server are protected with StartTLS in LDAP SASL authentication. |
+| [`authentication_ldap_simple_auth_method_name`](/system-variables.md#authentication_ldap_simple_auth_method_name-new-in-v710) | Newly added | Specifies the authentication method name in LDAP simple authentication. It only supports `SIMPLE`. |
+| [`authentication_ldap_simple_bind_base_dn`](/system-variables.md#authentication_ldap_simple_bind_base_dn-new-in-v710) | Newly added | Limits the search scope within the search tree in LDAP simple authentication. If a user is created without `AS ...` clause, TiDB will automatically search the `dn` in LDAP server according to the user name. |
+| [`authentication_ldap_simple_bind_root_dn`](/system-variables.md#authentication_ldap_simple_bind_root_dn-new-in-v710) | Newly added | Specifies the `dn` used to login to the LDAP server to search users in LDAP simple authentication. |
+| [`authentication_ldap_simple_bind_root_pwd`](/system-variables.md#authentication_ldap_simple_bind_root_pwd-new-in-v710) | Newly added | Specifies the password used to login to the LDAP server to search users in LDAP simple authentication. |
+| [`authentication_ldap_simple_ca_path`](/system-variables.md#authentication_ldap_simple_ca_path-new-in-v710) | Newly added | Specifies the absolute path of the certificate authority file for StartTLS connections in LDAP simple authentication. |
+| [`authentication_ldap_simple_init_pool_size`](/system-variables.md#authentication_ldap_simple_init_pool_size-new-in-v710) | Newly added | Specifies the initial size of the pool of connections to the LDAP server in LDAP simple authentication. |
+| [`authentication_ldap_simple_max_pool_size`](/system-variables.md#authentication_ldap_simple_max_pool_size-new-in-v710) | Newly added | Specifies the maximum size of the pool of connections to the LDAP server in LDAP simple authentication. |
+| [`authentication_ldap_simple_server_host`](/system-variables.md#authentication_ldap_simple_server_host-new-in-v710) | Newly added | Specifies the LDAP server host in LDAP simple authentication. |
+| [`authentication_ldap_simple_server_port`](/system-variables.md#authentication_ldap_simple_server_port-new-in-v710) | Newly added | Specifies the LDAP server TCP/IP port number in LDAP simple authentication. |
+| [`authentication_ldap_simple_tls`](/system-variables.md#authentication_ldap_simple_tls-new-in-v710) | Newly added | Specifies whether connections by the plugin to the LDAP server are protected with StartTLS in LDAP simple authentication. |
 | [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) | Newly added | Controls whether to enable the distributed execution framework. After enabling distributed execution, DDL, Import and other supported backend tasks will be jointly completed by multiple TiDB nodes in the cluster. This variable was renamed from `tidb_ddl_distribute_reorg`. |
 | [`tidb_enable_non_prepared_plan_cache_for_dml`](/system-variables.md#tidb_enable_non_prepared_plan_cache_for_dml-new-in-v710) | Newly added | Controls whether to enable the [Non-prepared plan cache](/sql-non-prepared-plan-cache.md) feature for DML statements. |
 | [`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v710) | Newly added | This variable provides a more fine-grained control over the optimizer and helps to prevent performance regression after upgrading caused by behavior changes in the optimizer. |
@@ -323,17 +348,114 @@ Introduces S3-based storage engine, which can provide shared storage at a lower 
 
 | Configuration file | Configuration parameter | Change type | Description |
 | -------- | -------- | -------- | -------- |
+| TiDB | [`force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v710) | Newly added | Controls whether to wait for statistics initialization to finish before providing services during TiDB startup. |
 | TiDB | [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710) | Newly added | Controls whether to use lightweight statistics initialization during TiDB startup. |
 | PD | [`store-limit-version`](/pd-configuration-file.md#store-limit-version-new-in-v710) | Newly added | Controls the mode of store limit. Value options are `"v1"` and `"v2"`. |
 | TiFlash | `http_port` | Deleted | Deprecates the HTTP service port (default `8123`). |
+| TiDB Lightning | [`tikv-importer.pause-pd-scheduler-scope`](/tidb-lightning/tidb-lightning-configuration.md) | Newly added | Controls the scope in which TiDB Lightning stops PD scheduling. The default value is `"table"` and value options are `"cluster"` and `"table"`. |
+| TiDB Lightning | [`tikv-importer.region-check-backoff-limit`](/tidb-lightning/tidb-lightning-configuration.md) | Newly added | Controls the number of retries to wait for the Region to come online after the split and scatter operations. The default value is `1800` and the maximum retry interval is two seconds. The number of retries will not be increased if any Region becomes online between retries.|
+| TiDB Lightning | [`tikv-importer.region-split-batch-size`](/tidb-lightning/tidb-lightning-configuration.md) | Newly added | Controls the number of Regions when splitting Regions in a batch. The default value is `4096`. |
+| TiDB Lightning | [`tikv-importer.region-split-concurrency`](/tidb-lightning/tidb-lightning-configuration.md) | Newly added | Controls the concurrency when splitting Regions. The default value is the number of CPU cores. |
 | TiCDC | [`sink.enable-partition-separator`](/ticdc/ticdc-changefeed-config.md#cli-and-configuration-parameters-of-ticdc-changefeeds) | Modified | Changes the default value from `false` to `true` after further tests, meaning that partitions in a table are stored in separate directories by default. It is recommended that you keep the value as `true` to avoid the potential issue of data loss during replication of partitioned tables to storage services. |
 
 ## Improvements
+
++ TiDB
+
+    - note [#issue](链接) @[贡献者 GitHub ID](链接)
+    - note [#issue](链接) @[贡献者 GitHub ID](链接)
+
++ TiKV
+
+    - note [#issue](链接) @[贡献者 GitHub ID](链接)
+    - note [#issue](链接) @[贡献者 GitHub ID](链接)
+
++ PD
+
+    - note [#issue](链接) @[贡献者 GitHub ID](链接)
+    - note [#issue](链接) @[贡献者 GitHub ID](链接)
 
 + TiFlash
 
     - Improve TiFlash performance and stability in the disaggregated storage and compute architecture [#6882](https://github.com/pingcap/tiflash/issues/6882)  @[JaySon-Huang](https://github.com/JaySon-Huang) @[breezewish](https://github.com/breezewish) @[JinheLin](https://github.com/JinheLin)
     - Support optimizing query performance in Semi Join or Anti Semi Join by selecting the smaller table as the build side [#7280](https://github.com/pingcap/tiflash/issues/7280) @[yibin87](https://github.com/yibin87)
+    - note [#issue](链接) @[贡献者 GitHub ID](链接)
+
++ Tools
+
+    + Backup & Restore (BR)
+
+        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+
+    + TiCDC
+
+        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+
+    + TiDB Data Migration (DM)
+
+        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+
+    + TiDB Lightning
+
+        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+
+    + TiUP
+
+        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+
+## Bug fixes
+
++ TiDB
+
+    - note [#issue](链接) @[贡献者 GitHub ID](链接)
+    - note [#issue](链接) @[贡献者 GitHub ID](链接)
+
++ TiKV
+
+    - note [#issue](链接) @[贡献者 GitHub ID](链接)
+    - note [#issue](链接) @[贡献者 GitHub ID](链接)
+
++ PD
+
+    - note [#issue](链接) @[贡献者 GitHub ID](链接)
+    - note [#issue](链接) @[贡献者 GitHub ID](链接)
+
++ TiFlash
+
+    - note [#issue](链接) @[贡献者 GitHub ID](链接)
+    - note [#issue](链接) @[贡献者 GitHub ID](链接)
+
++ Tools
+
+    + Backup & Restore (BR)
+
+        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+
+    + TiCDC
+
+        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+
+    + TiDB Data Migration (DM)
+
+        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+
+    + TiDB Lightning
+
+        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+
+    + TiUP
+
+        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+        - note [#issue](链接) @[贡献者 GitHub ID](链接)
 
 ## Contributors
 
