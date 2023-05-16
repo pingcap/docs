@@ -83,8 +83,11 @@ To enable Cloud Organization SSO, take the following steps:
     >
     > The URL cannot be changed once Cloud Organization SSO is enabled. Members in your organization will only be able to log in to TiDB Cloud using your custom URL. If you need to change the configured URL later, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for assistance.
 
-5. If the dialog includes a list of users to be re-invited and re-join the organization once Cloud Organization SSO is enabled, take note of the list. You will need to re-invite them after the enablement if auto-provision is disabled.
-6. Click the **I understand and confirm** check box, and then click **Enable**.
+5. Click the **I understand and confirm** check box, and then click **Enable**.
+
+    > **Note:**
+    >
+    > If the dialog includes a list of users to be re-invited and re-join for Cloud Organization SSO, TiDB Cloud will send the invitation emails to the corresponding users automatically after you click **Enable**. After receiving the invitation email, the user needs to click the link in the email to verify the identity, and the custom login page shows.
 
 ## Step 2. Configure authentication methods
 
