@@ -1344,7 +1344,7 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 + Default value for `defaultcf`: `true`
 + Default value for `writecf` and `lockcf`: `false`
 
-### `optimize-filters-for-memory`
+### `optimize-filters-for-memory` <span class="version-mark">New in v7.1.0</span>
 
 + Option to generate Bloom/Ribbon filters that minimize memory internal fragmentation.
 + Only effective for `format-version` >= 5.
@@ -1367,7 +1367,7 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 + Determines whether each block creates a bloom filter
 + Default value: `false`
 
-### `ribbon-filter-above-level`
+### `ribbon-filter-above-level` <span class="version-mark">New in v7.1.0</span>
 
 + Use Ribbon filter for levels higher or equal to this value. Use non-block-based bloom filter for lower levels. When this is set, `block-based-bloom-filter` will be ignored.
 + Only effective for `format-version` >= 5.
@@ -1523,7 +1523,7 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 + Default value: `"128MB"`
 + Unit: KB|MB|GB
 
-### `format-version`
+### `format-version` <span class="version-mark">New in v6.3.0</span>
 
 + The format version of SST files. This option only affects newly written tables. When reading existing tables, the information about version is read from the footer.
 + Optional values:
