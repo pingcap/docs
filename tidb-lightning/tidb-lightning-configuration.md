@@ -169,9 +169,9 @@ addr = "172.16.31.10:8287"
 # When you use TiDB Lightning to import a multi-tenant TiDB cluster, use this parameter to specify the corresponding key space name. The default value is an empty string, which means TiDB Lightning will automatically get the key space name of the corresponding tenant to import data. If you specify a value, the specified key space name will be used to import data.
 # keyspace-name = ""
 
-# In Physical Import Mode, this parameter controls the scope in which TiDB Lightning stops PD scheduling. Available options are:
+# In Physical Import Mode, this parameter controls the scope in which TiDB Lightning stops PD scheduling. The value options are as follows:
 # - "table": pause scheduling only for the Region where the target table data range is located. The default value is "table".
-# - "global": stop global scheduling. When importing data to a cluster with no business traffic, it is recommended to set the parameter to "global" to avoid interference from other scheduling.
+# - "global": pause global scheduling. When importing data to a cluster without any business traffic, it is recommended to set this parameter to "global" to avoid interference from other scheduling.
 # pause-pd-scheduler-scope = "table"
 
 # In Physical Import Mode, this parameter controls the number of Regions when splitting Regions in a batch. The maximum number of Regions that can be split at the same time per TiDB Lightning instance is:
@@ -183,7 +183,7 @@ addr = "172.16.31.10:8287"
 # This parameter is introduced in v7.1.0.
 # region-split-concurrency =
 
-# In Physical Import Mode, this parameter controls the number of retries to wait for the Region to come online after the split and scatter operations. The default value is `1800`. The maximum retry interval is 2 seconds. The number of retries is not increased if any Region becomes online between retries.
+# In Physical Import Mode, this parameter controls the number of retries to wait for the Region to come online after the split and scatter operations. The default value is `1800` and the maximum retry interval is two seconds. The number of retries will not be increased if any Region becomes online between retries.
 # This parameter is introduced in v7.1.0.
 # region-check-backoff-limit = 1800
 
