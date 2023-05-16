@@ -8,6 +8,21 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2023.
 
+## May 16, 2023
+
+**Console changes**
+
+- Introduce the left navigation entries organized by functional categories for both Dedicated and Serverless tiers.
+
+    The new navigation makes it easier and more intuitive for you to discover the feature entries. To view the new navigation, access the overview page of your cluster.
+
+- Release a new native web infrastructure for the following two tabs on the **Diagnosis** page of Dedicated Tier clusters.
+
+    - [Slow Query](/tidb-cloud/tune-performance.md#slow-query)
+    - [SQL Statement](/tidb-cloud/tune-performance.md#statement-analysis)
+
+    With the new infrastructure, you can easily navigate through the two tabs and access the necessary information in a more intuitive and efficient manner. The new infrastructure also improves user experience, making the SQL diagnosis process more user-friendly.
+
 ## May 9, 2023
 
 **General changes**
