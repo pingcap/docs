@@ -38,7 +38,7 @@ All performance data in [Manual Profiling](/dashboard/dashboard-profiling.md#sup
 
 You can access the Continuous Profiling page using either of the following methods:
 
-- After logging into TiDB Dashboard, click **Advanced Debugging** > **Profiling Instances** > **Continuous Profiling** on the left navigation bar.
+- After logging in to TiDB Dashboard, click **Advanced Debugging** > **Profiling Instances** > **Continuous Profiling** on the left navigation bar.
 
   ![Access page](/media/dashboard/dashboard-conprof-access.png)
 
