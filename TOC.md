@@ -210,6 +210,7 @@
     - [Performance Analysis and Tuning](/performance-tuning-methods.md)
     - [Performance Tuning Practices for OLTP Scenarios](/performance-tuning-practices.md)
     - [Latency Breakdown](/latency-breakdown.md)
+    - [TiDB Best Practive On Public Cloud](/best-practice-on-public-cloud.md)
   - Configuration Tuning
     - [Tune Operating System Performance](/tune-operating-system.md)
     - [Tune TiDB Memory](/configure-memory-usage.md)
