@@ -174,16 +174,16 @@ addr = "172.16.31.10:8287"
 # - "global": stop global scheduling. When importing data to a cluster with no business traffic, it is recommended to set the parameter to "global" to avoid interference from other scheduling.
 # pause-pd-scheduler-scope = "table"
 
-# In Physical Import Mode, this parameter controls the number of regions when splitting regions in a batch. The maximum number of regions that can be split at the same time per TiDB Lightning instance is:
+# In Physical Import Mode, this parameter controls the number of Regions when splitting Regions in a batch. The maximum number of Regions that can be split at the same time per TiDB Lightning instance is:
 # region-split-batch-size * region-split-concurrency * table-concurrency
 # This parameter is introduced in v7.1.0. The default value is `4096`.
 # region-split-batch-size = 4096
 
-# In Physical Import Mode, this parameter controls the concurrency when splitting regions. The default value is the number of CPU cores.
+# In Physical Import Mode, this parameter controls the concurrency when splitting Regions. The default value is the number of CPU cores.
 # This parameter is introduced in v7.1.0.
 # region-split-concurrency =
 
-# In Physical Import Mode, this parameter controls the number of retries to wait for the Region to come online after the split and scatter operations. The default value is `1800`. The maximum retry interval is 2 seconds. The number of retries will not be increased if any Region becomes online between retries.
+# In Physical Import Mode, this parameter controls the number of retries to wait for the Region to come online after the split and scatter operations. The default value is `1800`. The maximum retry interval is 2 seconds. The number of retries is not increased if any Region becomes online between retries.
 # This parameter is introduced in v7.1.0.
 # region-check-backoff-limit = 1800
 
