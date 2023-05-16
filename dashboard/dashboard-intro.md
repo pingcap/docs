@@ -64,7 +64,7 @@ See [Search Logs Page](/dashboard/dashboard-log-search.md) for details.
 
 To implement resource isolation using the [Resource Control](/tidb-resource-control.md) feature, cluster administrators can create resource groups and set read and write quotas for each group.
 
-Before resource planning, you need to know the overall capacity of the cluster. For more details, see [Resource Manager page](/dashboard/dashboard-resource-control.md).
+Before resource planning, you need to know the overall capacity of the cluster. For more details, see [Resource Manager page](/dashboard/dashboard-resource-manager.md).
 
 ## Collect profiling data for each instance
 
