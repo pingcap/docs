@@ -35,7 +35,7 @@ The Top SQL feature is still in an early stage and is being continuously enhance
 
 You can access the Top SQL page using either of the following methods:
 
-* After logging in to TiDB Dashboard, click **Top SQL** on the left navigation bar.
+* After logging in to TiDB Dashboard, click **Top SQL** in the left navigation menu.
 
   ![Top SQL](/media/dashboard/top-sql-access.png)
 

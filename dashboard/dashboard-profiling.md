@@ -34,7 +34,7 @@ The following performance data are currently supported:
 
 You can access the instance profiling page using either of the following methods:
 
-* After logging in to TiDB Dashboard, click **Advanced Debugging** > **Profiling Instances** > **Manual Profiling** on the left navigation bar.
+* After logging in to TiDB Dashboard, click **Advanced Debugging** > **Profiling Instances** > **Manual Profiling** in the left navigation menu.
 
   ![Access instance profiling page](/media/dashboard/dashboard-profiling-access.png)
 

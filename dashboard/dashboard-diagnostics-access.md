@@ -16,7 +16,7 @@ The cluster diagnostics feature in TiDB Dashboard diagnoses the problems that mi
 
 You can use one of the following methods to access the cluster diagnostics page:
 
-* After logging in to TiDB Dashboard, click **Cluster Diagnostics** on the left navigation menu.
+* After logging in to TiDB Dashboard, click **Cluster Diagnostics** in the left navigation menu.
 
   ![Access Cluster Diagnostics page](/media/dashboard/dashboard-diagnostics-access-v650.png)
 
