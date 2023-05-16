@@ -23,11 +23,15 @@ You can rename a Data App, and manage its API keys, linked clusters, and endpoin
 
 ### Rename a Data App
 
-To rename a Data App, navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page, and do one of the following:
+To rename a Data App, perform the following steps:
 
-- In the left pane, locate your target Data App, click **...** > **Rename**, and enter a new name.
+1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
+2. In the left pane, click the name of your target Data App to view its details.
+3. In the **General** area, modify the **Name** field and click **Save**.
 
-- In the left pane, click the name of your target Data App to view its details. In the **Basic Settings** area, modify the **Name** field and click **Save**.
+### Manage GitHub integration
+
+For more information, see [Manage GitHub integration](/tidb-cloud/data-service-manage-github-integration.md).
 
 ### Manage linked clusters
 
@@ -66,7 +70,8 @@ For more information, see [Manage an endpoint](/tidb-cloud/data-service-manage-e
 To delete a Data App, perform the following steps:
 
 1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
-2. In the left pane, locate your target Data App, and click **...** > **Delete**. The **Confirm deletion of DataApp** dialog box is displayed.
-3. Click **Delete** to confirm the deletion.
+2. In the left pane, locate your target Data App and click the name of your target Data App to view its details.
+3. In the **Delete Data App** area, click **Delete Data App**. A dialog box for confirmation is displayed.
+4. Type the name of target Data App, and then click **I understand, delete**.
 
-    Once a Data App is deleted, the existing endpoints and API keys in the Data App are also deleted.
+    Once a Data App is deleted, the existing endpoints and API keys in the Data App are also deleted. If this Data App is connected to GitHub, deleting the App does not delete the files in the corresponding GitHub repository.
