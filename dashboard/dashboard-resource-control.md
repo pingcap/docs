@@ -59,7 +59,7 @@ Before resource planning, you need to know the overall capacity of the cluster. 
 
     - When the workload within the time window is too low, the following error is displayed `ERROR 1105 (HY000): The workload in selected time window is too low, with which TiDB is unable to reach a capacity estimation; please select another time window with higher workload, or calibrate resource by hardware instead` is displayed.
 
-  You can select an appropriate time range using **CPU Usage** in the [Metrics](#monitoring-metrics) section.
+  You can select an appropriate time range using **CPU Usage** in the [Metrics](#metrics) section.
 
 ## Metrics
 
