@@ -281,7 +281,7 @@ Introduces S3-based storage engine, which can provide shared storage at a lower 
 
     Starting from v7.1.0, when providing the query service of [`INFORMATION_SCHEMA.TIFLASH_TABLES`](/information-schema/information-schema-tiflash-tables.md) and [`INFORMATION_SCHEMA.TIFLASH_SEGMENTS`](/information-schema/information-schema-tiflash-segments.md) system tables for TiDB, TiFlash uses the gRPC port instead of the HTTP port, which avoids the security risks of the HTTP service.
 
-* Support LDAP authentication [#43580](https://github.com/pingcap/tidb/issues/43580)@[YangKeao](https://github.com/YangKeao) **tw:ran-huang**
+* Support LDAP authentication [#43580](https://github.com/pingcap/tidb/issues/43580) @[YangKeao](https://github.com/YangKeao) **tw:ran-huang**
 
     Starting from v7.1.0, TiDB supports LDAP authentication and provides two authentication plugins: `authentication_ldap_sasl` and `authentication_ldap_simple`.
 
