@@ -178,6 +178,17 @@ Introduces S3-based storage engine, which can provide shared storage at a lower 
 
     For more information, see [documentation](). (to be added)
 
+* Improve the stability of TiDB Lightning when importing TiB-level data [#43510](https://github.com/pingcap/tidb/issues/43510) [#43657](https://github.com/pingcap/tidb/issues/43657) @[D3Hunter](https://github.com/D3Hunter) @[lance6716](https://github.com/lance6716) **tw:hfxsd**
+
+    Starting from v7.1.0, TiDB Lightning has added four configuration items to improve stability when importing TiB-level data.
+
+    - `tikv-importer.region-split-batch-size` controls the number of Regions when splitting Regions in a batch. The default value is `4096`.
+    - `tikv-importer.region-split-concurrency` controls the concurrency when splitting Regions. The default value is the number of CPU cores.
+    - `tikv-importer.region-check-backoff-limit` controls the number of retries to wait for the Region to come online after the split and scatter operations. The default value is `1800` and the maximum retry interval is two seconds. The number of retries will not be increased if any Region becomes online between retries.
+    - `tikv-importer.pause-pd-scheduler-scope` controls the scope of pausing PD scheduling during data import. Available values are `"table"` and `"global"`. The default value is `"table"`. For TiDB versions earlier than v6.1.0, you can only configure the `"global"` option, which pauses global scheduling during data import. Starting from v6.1.0, the `"table"` option is supported, which means that scheduling is only paused for the Region where the target table data range is located. It is recommended to set this parameter to `"global"` in scenarios with large data volumes to improve stability.
+
+  For more information, see [documentation](/tidb-lightning/tidb-lightning-configuration.md).
+
 ### SQL
 
 * Support saving TiFlash query results using the `INSERT INTO SELECT` statement (GA) [#37515](https://github.com/pingcap/tidb/issues/37515) @[gengliqi](https://github.com/gengliqi)
@@ -303,7 +314,7 @@ Introduces S3-based storage engine, which can provide shared storage at a lower 
 
 * In the outputs of [`SHOW LOAD DATA`](/sql-statements/sql-statement-show-load-data.md), the `Loaded_File_Size` parameter is deprecated and replaced with the `Imported_Rows` parameter.
 
-* TiDB v6.2.0 ~ v7.0.0 版本的 `tidb-lightning` 会根据 TiDB 集群的版本决定是否暂停全局调度。当 TiDB 集群版本 >= v6.1.0，只会暂停目标表数据范围所在 Region 的调度，并在目标表导入完成后恢复调度，其他版本会暂停全局调度。自 TiDB v7.1.0 开始，你可以通过 [pause-pd-scheduler-scope](/tidb-lightning/tidb-lightning-configuration.md) 来控制是否暂停全局调度，默认暂停目标表数据范围所在 Region 的调度，如果目标集群版本低于 v6.1.0 则报错，此时将参数取值改为 `"global"` 后重试即可。**tw:hfxsd**
+* TiDB Lightning in TiDB versions from v6.2.0 to v7.0.0 decides whether to pause global scheduling based on the TiDB cluster version. When TiDB cluster version >= v6.1.0, scheduling is only paused for the Region where the target table data range is located and resumes after the target table import is complete. While for other versions, TiDB Lightning pauses global scheduling. Starting from TiDB v7.1.0, you can control whether to pause global scheduling by [`pause-pd-scheduler-scope`](/tidb-lightning/tidb-lightning-configuration.md). By default, TiDB Lightning pauses scheduling for the Region where the target table data range is located. If the target cluster version is earlier than v6.1.0, an error occurs. In this case you can change the value of the parameter to `"global"` and try again.**tw:hfxsd**
 
 ### System variables
 
@@ -352,8 +363,8 @@ Introduces S3-based storage engine, which can provide shared storage at a lower 
 | TiDB | [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710) | Newly added | Controls whether to use lightweight statistics initialization during TiDB startup. |
 | PD | [`store-limit-version`](/pd-configuration-file.md#store-limit-version-new-in-v710) | Newly added | Controls the mode of store limit. Value options are `"v1"` and `"v2"`. |
 | TiFlash | `http_port` | Deleted | Deprecates the HTTP service port (default `8123`). |
-| TiDB Lightning | [`tikv-importer.pause-pd-scheduler-scope`](/tidb-lightning/tidb-lightning-configuration.md) | Newly added | Controls the scope in which TiDB Lightning stops PD scheduling. The default value is `"table"` and value options are `"cluster"` and `"table"`. |
-| TiDB Lightning | [`tikv-importer.region-check-backoff-limit`](/tidb-lightning/tidb-lightning-configuration.md) | Newly added | Controls the number of retries to wait for the Region to come online after the split and scatter operations. The default value is `1800` and the maximum retry interval is two seconds. The number of retries will not be increased if any Region becomes online between retries.|
+| TiDB Lightning | [`tikv-importer.pause-pd-scheduler-scope`](/tidb-lightning/tidb-lightning-configuration.md) | Newly added | Controls the scope in which TiDB Lightning pauses PD scheduling. The default value is `"table"` and value options are `"cluster"` and `"table"`. |
+| TiDB Lightning | [`tikv-importer.region-check-backoff-limit`](/tidb-lightning/tidb-lightning-configuration.md) | Newly added | Controls the number of retries to wait for the Region to come online after the split and scatter operations. The default value is `1800`. The maximum retry interval is two seconds. The number of retries is increased if any Region becomes online between retries.|
 | TiDB Lightning | [`tikv-importer.region-split-batch-size`](/tidb-lightning/tidb-lightning-configuration.md) | Newly added | Controls the number of Regions when splitting Regions in a batch. The default value is `4096`. |
 | TiDB Lightning | [`tikv-importer.region-split-concurrency`](/tidb-lightning/tidb-lightning-configuration.md) | Newly added | Controls the concurrency when splitting Regions. The default value is the number of CPU cores. |
 | TiCDC | [`sink.enable-partition-separator`](/ticdc/ticdc-changefeed-config.md#cli-and-configuration-parameters-of-ticdc-changefeeds) | Modified | Changes the default value from `false` to `true` after further tests, meaning that partitions in a table are stored in separate directories by default. It is recommended that you keep the value as `true` to avoid the potential issue of data loss during replication of partitioned tables to storage services. |
