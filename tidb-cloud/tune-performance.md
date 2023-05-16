@@ -23,7 +23,7 @@ By default, SQL queries that take more than 300 milliseconds are considered as s
 
 To view slow queries in a cluster, perform the following steps:
 
-1. Navigate to the **SQL Diagnosis** page of a cluster.
+1. Navigate to the **Diagnosis** page of a cluster.
 
 2. Click the **Slow Query** tab.
 
@@ -41,7 +41,7 @@ For more information, see [Slow Queries in TiDB Dashboard](https://docs.pingcap.
 
 To use the statement analysis, perform the following steps:
 
-1. Navigate to the **SQL Diagnosis** page of a cluster.
+1. Navigate to the **Diagnosis** page of a cluster.
 
 2. Click the **SQL Statement** tab.
 
@@ -63,7 +63,7 @@ For more information, see [Statement Execution Details in TiDB Dashboard](https:
 
 To view the key analytics, perform the following steps:
 
-1. Navigate to the **SQL Diagnosis** page of a cluster.
+1. Navigate to the **Diagnosis** page of a cluster.
 
 2. Click the **Key Visualizer** tab.
 

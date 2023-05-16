@@ -99,9 +99,9 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **Console changes**
 
-- Release a new native web infrastructure for the [Monitoring](/tidb-cloud/built-in-monitoring.md#view-the-monitoring-page) page of [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters.
+- Release a new native web infrastructure for the [Monitoring](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page) page of [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters.
 
-    With the new infrastructure, you can easily navigate through the [Monitoring](/tidb-cloud/built-in-monitoring.md#view-the-monitoring-page) page and access the necessary information in a more intuitive and efficient manner. The new infrastructure also resolves many problems on UX, making the monitoring process more user-friendly.
+    With the new infrastructure, you can easily navigate through the [Monitoring](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page) page and access the necessary information in a more intuitive and efficient manner. The new infrastructure also resolves many problems on UX, making the monitoring process more user-friendly.
 
 ## April 18, 2023
 
@@ -151,11 +151,11 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **Console changes**
 
-- Update the [Monitoring](/tidb-cloud/built-in-monitoring.md#view-the-monitoring-page) page for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters to use [node-level resource metrics](/tidb-cloud/built-in-monitoring.md#server).
+- Update the [Monitoring](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page) page for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters to use [node-level resource metrics](/tidb-cloud/built-in-monitoring.md#server).
 
     With node-level resource metrics, you can see a more accurate representation of resource consumption to better understand the actual usage of purchased services.
 
-    To access these metrics, navigate to the [Monitoring](/tidb-cloud/built-in-monitoring.md#view-the-monitoring-page) page of your cluster, and then check the **Server** category under the **Metrics** tab.
+    To access these metrics, navigate to the [Monitoring](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page) page of your cluster, and then check the **Server** category under the **Metrics** tab.
 
 - Optimize the [Billing](/tidb-cloud/tidb-cloud-billing.md#billing-details) page by reorganizing the billing items in **Summary by Project** and **Summary by Service**, which makes the billing information clearer.
 
