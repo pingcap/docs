@@ -207,18 +207,18 @@ If you still encounter an error above, it is recommended to use BR to restore th
 4. Create a new changefeed and start the replication task from `BackupTS`.
 5. Delete the old changefeed.
 
-## Will TiCDC synchronize data changes caused by lossy DDL to downstream?
+## Does TiCDC synchronize data changes caused by lossy DDL operations to the downstream?
 
-Lossy DDL refers to DDL that may cause data changes when executed in TiDB. Some common lossy DDL operations include:
+Lossy DDL refers to DDL that might cause data changes when executed in TiDB. Some common lossy DDL operations include:
 
-- Modify the type of the column, for example: INT -> VARCHAR
-- Modify the length of the column, for example: VARCHAR(20) -> VARCHAR(10)
-- Modify the precision of the column, for example: DECIMAL(10, 3) -> DECIMAL(10, 2)
-- Modify the sign of the column (signed/unsigned), for example: INT UNSIGNED -> INT SIGNED
+- Modify the type of a column, for example: INT -> VARCHAR
+- Modify the length of a column, for example: VARCHAR(20) -> VARCHAR(10)
+- Modify the precision of a column, for example: DECIMAL(10, 3) -> DECIMAL(10, 2)
+- Modify the UNSIGNED or SIGNED attribute of a column, for example: INT UNSIGNED -> INT SIGNED
 
-Before TiDB v7.1.0, TiCDC would synchronize DML events with new and old data identical to downstream. When downstream is MySQL, these DML events will not cause any data changes. Only when downstream receives and executes the DDL statement will data change. However, when downstream is Kafka or cloud storage, TiCDC will write a useless piece of data to downstream.
+Before TiDB v7.1.0, TiCDC synchronizes DML events with identical old and new data to the downstream. When the downstream is MySQL, these DML events do not cause any data changes until the downstream receives and executes the DDL statement. However, when the downstream is Kafka or cloud storage, TiCDC writes a row of redundant data to the downstream.
 
-Starting from TiDB v7.1.0, TiCDC will filter out these useless DML events and no longer synchronize them to downstream.
+Starting from TiDB v7.1.0, TiCDC eliminates these redundant DML events and no longer synchronizes them to downstream.
 
 ## The default value of the time type field is inconsistent when replicating a DDL statement to the downstream MySQL 5.7. What can I do?
 

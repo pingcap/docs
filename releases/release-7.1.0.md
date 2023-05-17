@@ -263,9 +263,6 @@ In v7.1.0, the key new features and improvements are as follows:
     - Improve TiFlash performance and stability in the disaggregated storage and compute architecture [#6882](https://github.com/pingcap/tiflash/issues/6882)  @[JaySon-Huang](https://github.com/JaySon-Huang) @[breezewish](https://github.com/breezewish) @[JinheLin](https://github.com/JinheLin)
     - Support optimizing query performance in Semi Join or Anti Semi Join by selecting the smaller table as the build side [#7280](https://github.com/pingcap/tiflash/issues/7280) @[yibin87](https://github.com/yibin87)
 
-+ TiCDC
-    - TiCDC filters out data changes caused by lossy DDL statements to avoid sending useless data changes [#43227](https://github.com/pingcap/tidb/issues/43227) @[hi-rustin](https://github.com/hi-rustin)
-
 ## Contributors
 
 We would like to thank the following contributors from the TiDB community:
