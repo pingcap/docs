@@ -37,10 +37,10 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 This section introduces the configuration of a replication task.
 
 ```toml
-# Specifies the memory quota (in bytes) that can be used in the caputre server by the sink manager.
+# Specifies the memory quota (in bytes) that can be used in the capture server by the sink manager.
 # If the value is exceeded, the overused part will be recycled by the go runtime.
 # The default value is `1073741824` (1 GB).
-# memory-quota = 1073741824 # 1 GB 
+# memory-quota = 1073741824
 
 # Specifies whether the database names and tables in the configuration file are case-sensitive.
 # The default value is true.
@@ -138,24 +138,24 @@ protocol = "canal-json"
 # The following three configuration items are only used when you replicate data to storage sinks and can be ignored when replicating data to MQ or MySQL sinks.
 # Row terminator, used for separating two data change events. The default value is an empty string, which means "\r\n" is used.
 terminator = ''
-# Date separator type used in the file directory. Value options are `none`, `year`, `month`, and `day`. `none` is the default value and means that the date is not separated. For more information, see <https://docs.pingcap.com/tidb/dev/ticdc-sink-to-cloud-storage#data-change-records>. Note: ignore this field when replicating data to the downstream other than Storage.
+# Date separator type used in the file directory. Value options are `none`, `year`, `month`, and `day`. `none` is the default value and means that the date is not separated. For more information, see <https://docs.pingcap.com/tidb/dev/ticdc-sink-to-cloud-storage#data-change-records>. Note: ignore this field when replicating data to the downstream other than a storage service.
 date-separator = 'none'
-# Whether to use partitions as the separation string. The default value is true, which means that partitions in a table are stored in separate directories. It is recommended that you keep the value as `true` to avoid potential data loss in downstream partitioned tables <https://github.com/pingcap/tiflow/issues/8724>. For usage examples, see <https://docs.pingcap.com/tidb/dev/ticdc-sink-to-cloud-storage#data-change-records)>. Note: ignore this field when replicating data to the downstream with type other than Storage.
+# Whether to use partitions as the separation string. The default value is true, which means that partitions in a table are stored in separate directories. It is recommended that you keep the value as `true` to avoid potential data loss in downstream partitioned tables <https://github.com/pingcap/tiflow/issues/8724>. For usage examples, see <https://docs.pingcap.com/tidb/dev/ticdc-sink-to-cloud-storage#data-change-records)>. Note: ignore this field when replicating data to the downstream other than a storage service.
 enable-partition-separator = true
 
-# Schema registry url. Note: ignore this field if you replicate data to the downstream types other than MQ. 
+# Schema registry URL. Note: ignore this field if you replicate data to the downstream types other than MQ. 
 # schema-registry = "http://localhost:80801/subjects/{subject-name}/versions/{version-number}/schema"
 
-# Indicates number of encoder thread used when encoding data.
+# Specifies the number of encoder threads used when encoding data.
 # Note: ignore this field when the downstream type is not the MQ.
 # encoder-concurrency = 16
 
-# Indicates if enabling kafka-sink-v2 which uses kafka-go sink library.
+# Specifies whether to enable kafka-sink-v2 that uses the kafka-go sink library.
 # Note: ignore this field when the downstream type is not the MQ.
 # enable-kafka-sink-v2 = false
 
-# If set only output the updated column.
-# Note: this field only apply to the MQ downstream using the open-protocol and canal-json.
+# Specifies whether to only output the updated columns.
+# Note: this field only applies to the MQ downstream using the open-protocol and canal-json.
 # The default value is false.
 # only-output-updated-columns = false
 
@@ -170,15 +170,15 @@ null = '\N'
 # Whether to include commit-ts in CSV rows. The default value is false.
 include-commit-ts = false
 
-# Represents the replication consistency config for a changefeed when using the redo log, for more information, please refer to https://docs.pingcap.com/tidb/stable/ticdc-sink-to-mysql#eventually-consistent-replication-in-disaster-scenarios. Note: Ignore the following configurations if downstream is MQ or Storage.
+# Specifies the replication consistency configurations for a changefeed when using the redo log. For more information, see https://docs.pingcap.com/tidb/stable/ticdc-sink-to-mysql#eventually-consistent-replication-in-disaster-scenarios. Note: Ignore the following configurations if downstream is MQ or Storage.
 [sink.consistent]
-# The data consistency level, available options are `none` and `eventual`, none means the redo log is disabled.  
-# The default value is none.
+# The data consistency level. Available options are `none` and `eventual`. `none` means that the redo log is disabled.  
+# The default value is "none".
 level = "none"
 # The max redo log size in megabytes.
-# The default value is 64  
+# The default value is 64.  
 max-log-size = 64
-# The flush interval for redo log. Default value is 2000 milliseconds.
+# The flush interval for redo log. The default value is 2000 milliseconds.
 # The default value is 2000 
 flush-interval = 2000 
 # The storage URI of the redo log.
