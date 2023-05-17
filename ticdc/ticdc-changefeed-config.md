@@ -148,6 +148,7 @@ enable-partition-separator = true
 
 # Specifies the number of encoder threads used when encoding data.
 # Note: ignore this field when the downstream type is not the MQ.
+# The default value is 16.
 # encoder-concurrency = 16
 
 # Specifies whether to enable kafka-sink-v2 that uses the kafka-go sink library.
