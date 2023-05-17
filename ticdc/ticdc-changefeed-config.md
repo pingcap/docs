@@ -172,31 +172,30 @@ include-commit-ts = false
 
 # Specifies the replication consistency configurations for a changefeed when using the redo log. For more information, see https://docs.pingcap.com/tidb/stable/ticdc-sink-to-mysql#eventually-consistent-replication-in-disaster-scenarios. Note: Ignore the following configurations if downstream is MQ or Storage.
 [sink.consistent]
-# The data consistency level. Available options are `none` and `eventual`. `none` means that the redo log is disabled.  
+# The data consistency level. Available options are "none" and "eventual". "none" means that the redo log is disabled.  
 # The default value is "none".
 level = "none"
 # The max redo log size in megabytes.
 # The default value is 64.  
 max-log-size = 64
 # The flush interval for redo log. The default value is 2000 milliseconds.
-# The default value is 2000 
 flush-interval = 2000 
 # The storage URI of the redo log.
-# The default value is empty
+# The default value is empty.
 storage = "" 
 # Specifies whether to store the redo log in a file.
-# The default value is false
+# The default value is false.
 use-file-backend = false
 
 # Specifies the data integrity check. Note: ignore the following configurations if the downstream type is DB or Storage.
 [sink.integrity]
-# The integrity level. Available options are `none` and `correctness`. 
-# `none` means no integrity check. `correctness` means to check the integrity of each row.
-# The default value is none
+# The integrity level. Available options are "none" and "correctness". 
+# "none" means no integrity check. "correctness" means to check the integrity of each row.
+# The default value is "none".
 integrity-check-level = "none"
-# Define what happens when detecting data corruption. Available options are `warn` and `error`, 
-# warn means to log and mark the corrupted event and send it to the downstream.
-# error means to log the corrupted event and stop the changefeed.  
-# The default value is warn
+# Define what happens when detecting data corruption. Available options are "warn" and "error".
+# "warn" means to log and mark the corrupted event and send it to the downstream.
+# "error" means to log the corrupted event and stop the changefeed.  
+# The default value is "warn".
 corruption-handle-level = "warn"
 ```
