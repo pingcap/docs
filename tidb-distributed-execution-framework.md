@@ -7,7 +7,7 @@ summary: Learn the use cases, limitations, usage, and implementation principles 
 
 > **Warning:**
 >
-> This feature is experimental and not recommended for production use.
+> This feature is an experimental feature. It is not recommended to use it in production environments.
 
 TiDB adopts a computing-storage separation architecture with excellent scalability and elasticity. Starting from v7.1.0, TiDB introduces a backend task distributed execution framework to further leverage the resource advantages of the distributed architecture. The goal of this framework is to implement unified scheduling and distributed execution of all backend tasks, and to provide unified resource management capabilities for the backend tasks, providing resource management capabilities for both the overall and individual backend tasks to better meet users' expectations for resource usage.
 
@@ -19,19 +19,19 @@ This document describes the use cases, limitations, usage, and implementation pr
 
 ## Use cases and limitations
 
-In a database management system, in addition to the core transactional processing (TP) and analytical processing (AP) workloads, there are other important tasks, such as DDL statements, Load Data, TTL, Analyze, and Backup/Restore, which are called **backend tasks**. These tasks need to process a large amount of data in database objects (tables), so they typically have the following characteristics:
+In a database management system, in addition to the core transactional processing (TP) and analytical processing (AP) workloads, there are other important tasks, such as DDL operations, Load Data, TTL, Analyze, and Backup/Restore, which are called **backend tasks**. These backend tasks need to process a large amount of data in database objects (tables), so they typically have the following characteristics:
 
 - Need to process all data in a schema or a database object (table).
 - Might need to be executed periodically, but at a low frequency.
-- If the resources are not properly controlled, they are prone to affect TP and AP tasks, lowering the service quality of the database.
+- If the resources are not properly controlled, they are prone to affect TP and AP tasks, lowering the database service quality.
 
 Enabling the TiDB backend task distributed execution framework can solve the above problems and has the following three advantages:
 
-- Provides unified capabilities for high scalability, high availability, and high performance.
-- Supports distributed execution of backend tasks, which can flexibly schedule the available computing resources of the entire TiDB cluster, thereby better utilizing the computing resources in the TiDB cluster.
-- Provides unified resource usage and management capabilities, providing resource management capabilities for both the overall and individual backend tasks.
+- The framework provides unified capabilities for high scalability, high availability, and high performance.
+- The framework supports distributed execution of backend tasks, which can flexibly schedule the available computing resources of the entire TiDB cluster, thereby better utilizing the computing resources in the TiDB cluster.
+- The framework provides unified resource usage and management capabilities, providing resource management capabilities for both the overall and individual backend tasks.
 
-Currently, the TiDB backend task distributed execution framework only supports the distributed execution of `ADD INDEX` statements, that is, the DDL statements that create indexes. For example, the following SQL statements:
+Currently, the TiDB backend task distributed execution framework only supports the distributed execution of `ADD INDEX` statements, that is, the DDL statements that create indexes. For example, the following SQL statements are supported:
 
 ```sql
 ALTER TABLE t1 ADD INDEX idx1(c1);
@@ -49,11 +49,11 @@ Before using the distributed framework, you need to enable the [Fast Online DDL]
 
 2. Adjust the following configuration item related to Fast Online DDL:
 
-    * [temp-dir](/tidb-configuration-file.md#temp-dir-new-in-v630): specifies the local disk path that can be used in Fast Online DDL mode.
+    * [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630): specifies the local disk path that can be used in Fast Online DDL mode.
 
 > **Note:**
 >
-> Before you upgrade to v6.5.0 or later, it is recommended that you check whether the [temp-dir](/tidb-configuration-file.md#temp-dir-new-in-v630) path of TiDB is correctly mounted to an SSD disk. This parameter is a TiDB configuration item, which takes effect after TiDB is restarted. Therefore, setting this configuration item in advance before upgrading can avoid another restart.
+> Before you upgrade to v6.5.0 or later, it is recommended that you check whether the [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630) path of TiDB is correctly mounted to an SSD disk. This parameter is a TiDB configuration item, which takes effect after TiDB is restarted. Therefore, setting this configuration item in advance before upgrading can avoid another restart.
 
 ## Usage
 
@@ -67,10 +67,10 @@ Before using the distributed framework, you need to enable the [Fast Online DDL]
 
 2. Adjust the following system variables that might affect the distributed execution of DDL tasks according to your needs:
 
-    * [tidb_ddl_reorg_worker_cnt](/system-variables.md#tidb_ddl_reorg_worker_cnt): use the default value `4`. The recommended maximum value is `16`.
-    * [tidb_ddl_reorg_priority](/system-variables.md#tidb_ddl_reorg_priority)
-    * [tidb_ddl_error_count_limit](/system-variables.md#tidb_ddl_error_count_limit)
-    * [tidb_ddl_reorg_batch_size](/system-variables.md#tidb_ddl_reorg_batch_size): use the default value. The recommended maximum value is `1024`.
+    * [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt): use the default value `4`. The recommended maximum value is `16`.
+    * [`tidb_ddl_reorg_priority`](/system-variables.md#tidb_ddl_reorg_priority)
+    * [`tidb_ddl_error_count_limit`](/system-variables.md#tidb_ddl_error_count_limit)
+    * [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size): use the default value. The recommended maximum value is `1024`.
 
 > **Tip:**
 >
@@ -86,7 +86,7 @@ As shown in the preceding diagram, the execution of backend tasks in the distrib
 
 - Dispatcher: generates the distributed execution plan for each task, manages the execution process, converts the task status, and collects and feeds back the runtime task information.
 - Scheduler: replicates the execution of distributed tasks among TiDB nodes to improve the efficiency of backend task execution.
-- Subtask Executor: the actual executor of distributed subtasks. It also returns the execution status of subtasks to the Scheduler, and the Scheduler updates the execution status of subtasks in a unified manner.
+- Subtask Executor: the actual executor of distributed subtasks. In addition, the Subtask Executor returns the execution status of subtasks to the Scheduler, and the Scheduler updates the execution status of subtasks in a unified manner.
 - Resource pool: provides the basis for quantifying resource usage and management by pooling computing resources in the above modules.
 
 ## See also
