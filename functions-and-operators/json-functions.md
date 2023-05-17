@@ -26,7 +26,7 @@ TiDB supports most of the JSON functions that shipped with the GA release of MyS
 | [->](https://dev.mysql.com/doc/refman/5.7/en/json-search-functions.html#operator_json-column-path)  | Returns the value from a JSON column after the evaluating path; an alias for `JSON_EXTRACT(doc, path_literal)`   |
 | [->>](https://dev.mysql.com/doc/refman/5.7/en/json-search-functions.html#operator_json-inline-path)  | Returns the value from a JSON column after the evaluating path and unquoting the result; an alias for `JSON_UNQUOTE(JSON_EXTRACT(doc, path_literal))` |
 | [JSON_KEYS(json_doc[, path])](https://dev.mysql.com/doc/refman/5.7/en/json-search-functions.html#function_json-keys) | Returns the keys from the top-level value of a JSON object as a JSON array, or, if a path argument is given, the top-level keys from the selected path |
-| [JSON_SEARCH(json_doc, one_or_all, search_string)](https://dev.mysql.com/doc/refman/5.7/en/json-search-functions.html#function_json-search) | Search a JSON document for one or all matches of a string |
+| [JSON_SEARCH(json_doc, one_or_all, search_str[, escape_char[, path] ...])](https://dev.mysql.com/doc/refman/5.7/en/json-search-functions.html#function_json-search) | Search a JSON document for one or all matches of a string |
 | [value MEMBER OF(json_array)](https://dev.mysql.com/doc/refman/8.0/en/json-search-functions.html#operator_member-of) | If the passed value is an element of the JSON array, returns 1. Otherwise, returns 0. |
 | [JSON_OVERLAPS(json_doc1, json_doc2)](https://dev.mysql.com/doc/refman/8.0/en/json-search-functions.html#function_json-overlaps) | Indicates whether two JSON documents have overlapping part. If yes, returns 1. If not, returns 0. |
 
