@@ -5,7 +5,7 @@ summary: Introduce how to use the Resource Manager page in TiDB Dashboard to vie
 
 # TiDB Dashboard Resource Manager Page
 
-To implement resource isolation using the [Resource Control](/tidb-resource-control.md) feature, cluster administrators can create resource groups and set read and write quotas for each group. Before resource planning, you need to know the overall capacity of the cluster. This document helps you view the information about resource control, so you can estimate the cluster capacity before resource planning and allocate resources more effectively.
+To implement resource isolation using the [Resource Control](/tidb-resource-control.md) feature, cluster administrators can create resource groups and set quotas for each group. Before resource planning, you need to know the overall capacity of the cluster. This document helps you view the information about resource control, so you can estimate the cluster capacity before resource planning and allocate resources more effectively.
 
 ## Access the page
 
