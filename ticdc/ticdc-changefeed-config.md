@@ -132,7 +132,7 @@ dispatchers = [
 # The protocol configuration item specifies the protocol format of the messages sent to the downstream.
 # When the downstream is Kafka, the protocol can only be canal-json or avro.
 # When the downstream is a storage service, the protocol can only be canal-json or csv.
-# Note: ignore this field when the downstream type is the DB.
+# Note: ignore this field when the downstream type is the Database.
 protocol = "canal-json"
 
 # The following three configuration items are only used when you replicate data to storage sinks and can be ignored when replicating data to MQ or MySQL sinks.
