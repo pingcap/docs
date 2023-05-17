@@ -56,7 +56,7 @@ When you import CSV files, name the data files as follows:
 - *`._xxx_xxx_xxx`*, such as `._0_0_01`
 - *`_xxx_xxx_xxx`*, such as `_0_0_01`
 
-`${compress}` is the compression formats. TiDB Cloud supports the following formats: `.gzip`, `.gz`, `.zstd`, `.zst` and `.snappy`.
+`${compress}` is the compression format. TiDB Cloud supports the following formats: `.gzip`, `.gz`, `.zstd`, `.zst` and `.snappy`.
 
 For example, the target database and table of all the following files are `import_db` and `test_table`:
 
@@ -101,7 +101,7 @@ When you import SQL files, name the data files as follows:
 - *`._xxx_xxx_xxx`*, such as `._0_0_01`
 - *`_xxx_xxx_xxx`*, such as `_0_0_01`
 
-`${compress}` is the compression formats. TiDB Cloud supports the following formats: `.gzip`, `.gz`, `.zstd`, `.zst` and `.snappy`.
+`${compress}` is the compression format. TiDB Cloud supports the following formats: `.gzip`, `.gz`, `.zstd`, `.zst` and `.snappy`.
 
 For example:
 
