@@ -153,6 +153,7 @@ enable-partition-separator = true
 
 # Specifies whether to enable kafka-sink-v2 that uses the kafka-go sink library.
 # Note: ignore this field when the downstream type is not the MQ.
+# The default value is false.
 # enable-kafka-sink-v2 = false
 
 # Specifies whether to only output the updated columns.
