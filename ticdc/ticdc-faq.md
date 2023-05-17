@@ -218,7 +218,7 @@ Lossy DDL refers to DDL that might cause data changes when executed in TiDB. Som
 
 Before TiDB v7.1.0, TiCDC replicates DML events with identical old and new data to the downstream. When the downstream is MySQL, these DML events do not cause any data changes until the downstream receives and executes the DDL statement. However, when the downstream is Kafka or a cloud storage service, TiCDC writes a row of redundant data to the downstream.
 
-Starting from TiDB v7.1.0, TiCDC eliminates these redundant DML events and no longer synchronizes them to downstream.
+Starting from TiDB v7.1.0, TiCDC eliminates these redundant DML events and no longer replicates them to downstream.
 
 ## The default value of the time type field is inconsistent when replicating a DDL statement to the downstream MySQL 5.7. What can I do?
 
