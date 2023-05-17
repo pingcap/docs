@@ -260,7 +260,7 @@ region-threshold = 100000
 # * When `region-threshold` and `write-key-threshold` are configured at the same time:
 #   TiCDC will check whether the number of modified rows is greater than `write-key-threshold` first.
 #   If not, next check whether the number of Regions is greater than `region-threshold`.
-write-key-threshold = 0
+write-key-threshold = 30000
 ```
 
 You can query the number of Regions a table contains by the following SQL statement:
