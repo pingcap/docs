@@ -289,10 +289,10 @@ Configuration items related to log.
 
 ### `timeout` <span class="version-mark">New in v7.1.0</span>
 
-- Make tidb panic if write log operation hang after `timeout` seconds
-- Default value: `0` (0 means disabled)
-- Unit: Second
-- In some user's scenarios, the disk for the tidb server's log file is a hot-plug disk or net-mounted one, the disk media could lost forever, tidb server cannot recover automatically from such disaster, it block forever on the writing log opeartion. The tidb-server process still exist but it never respond to the user's request. This configuration is designed for such scenarios.
+- Sets the timeout for log-writing operations in TiDB. In case of a disk failure that prevents logs from being written, this configuration item can trigger the TiDB process to panic instead of hang.
+- Default value: `0`, indicating no timeout is set.
+- Unit: second
+- In some user scenarios, TiDB logs might be stored on hot-pluggable or network-attached disks, which might become permanently unavailable. In these cases, TiDB cannot recover automatically from such disaster and the log-writing operations will be permanently blocked. Although the TiDB process might seem to be running, it does not respond to any requests. This configuration item is designed to handle such situations.
 
 ## log.file
 
