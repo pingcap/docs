@@ -115,7 +115,6 @@ region-threshold = 100000
 #   If not, next check whether the number of Regions is greater than `region-threshold`.
 write-key-threshold = 0
 
-
 [sink]
 # For the sink of MQ type, you can use  dispatchers to configure the event dispatcher.
 # Since v6.1.0, TiDB supports two types of event dispatchers: partition and topic. For more information, see <partition and topic link>.
