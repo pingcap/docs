@@ -187,7 +187,7 @@ storage = ""
 # The default value is false.
 use-file-backend = false
 
-# Specifies the data integrity check. Note: ignore the following configurations if the downstream type is DB or Storage.
+# Specifies the data integrity check. Note: ignore the following configurations if the downstream type is Database or Storage Service.
 [sink.integrity]
 # The integrity level. Available options are "none" and "correctness". 
 # "none" means no integrity check. "correctness" means to check the integrity of each row.
