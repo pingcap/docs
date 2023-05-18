@@ -2080,7 +2080,7 @@ Query OK, 0 rows affected (0.09 sec)
 
 <CustomContent platform="tidb-cloud">
 
-- This variable is used to control whether to enable the [TiCDC data integrity validation for single-row data](https://docs.pingcap.com/tidb/dev/ticdc-integrity-check) feature.
+- This variable is used to control whether to enable the [TiCDC data integrity validation for single-row data](https://docs.pingcap.com/tidb/stable/ticdc-integrity-check) feature.
 
 </CustomContent>
 
