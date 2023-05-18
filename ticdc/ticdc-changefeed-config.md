@@ -81,7 +81,7 @@ rules = ['*.*', '!test.*']
 
 # Specifies the transaction that will be ignored with the specified start_ts.
 # The default value is an empty list.
-# IgnoreTxnStartTs = [1683225923]
+# IgnoreTxnStartTs = []
 
 # Event filter rules.
 # The detailed syntax is described in the event filter rules section.
