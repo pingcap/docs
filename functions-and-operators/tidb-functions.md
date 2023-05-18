@@ -20,7 +20,7 @@ The following functions are TiDB extensions, and are not present in MySQL:
 | [`TIDB_DECODE_SQL_DIGESTS(digests, stmtTruncateLength)`](#tidb_decode_sql_digests) | The `TIDB_DECODE_SQL_DIGESTS()` function is used to query the normalized SQL statements (a form without formats and arguments) corresponding to the set of SQL digests in the cluster. |
 | `VITESS_HASH(str)` | The `VITESS_HASH` function returns the hash of a string that is compatible with Vitess' `HASH` function. This is intended to help the data migration from Vitess. |
 | `TIDB_SHARD()` | The `TIDB_SHARD` function can be used to create a shard index to scatter the index hotspot. A shard index is an expression index with a `TIDB_SHARD` function as the prefix.|
-| `TIDB_ROW_CHECKSUM()` | The `TIDB_ROW_CHECKSUM` function is used to query the checksum value of a row. This function can only be used in `SELECT` statements within the FastPlan process. That is, you can query through statements like `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id = ?` or `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id IN (?, ?, ...)`. See also: [Data Integrity Validation for Single-Row Data](/ticdc/ticdc-integrity-check.md). |
+| `TIDB_ROW_CHECKSUM()` | The `TIDB_ROW_CHECKSUM` function is used to query the checksum value of a row. This function can only be used in `SELECT` statements within the FastPlan process. That is, you can query through statements like `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id = ?` or `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id IN (?, ?, ...)`. See also: [Data integrity validation for single-row data](/ticdc/ticdc-integrity-check.md). |
 
 </CustomContent>
 
@@ -37,7 +37,7 @@ The following functions are TiDB extensions, and are not present in MySQL:
 | [`TIDB_DECODE_SQL_DIGESTS(digests, stmtTruncateLength)`](#tidb_decode_sql_digests) | The `TIDB_DECODE_SQL_DIGESTS()` function is used to query the normalized SQL statements (a form without formats and arguments) corresponding to the set of SQL digests in the cluster. |
 | `VITESS_HASH(str)` | The `VITESS_HASH` function returns the hash of a string that is compatible with Vitess' `HASH` function. This is intended to help the data migration from Vitess. |
 | `TIDB_SHARD()` | The `TIDB_SHARD` function can be used to create a shard index to scatter the index hotspot. A shard index is an expression index with a `TIDB_SHARD` function as the prefix.|
-| `TIDB_ROW_CHECKSUM()` | The `TIDB_ROW_CHECKSUM` function is used to query the checksum value of a row. This function can only be used in `SELECT` statements within the FastPlan process. That is, you can query through statements like `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id = ?` or `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id IN (?, ?, ...)`. See also: [Data Integrity Validation for Single-Row Data](https://docs.pingcap.com/tidb/stable/ticdc-integrity-check). |
+| `TIDB_ROW_CHECKSUM()` | The `TIDB_ROW_CHECKSUM` function is used to query the checksum value of a row. This function can only be used in `SELECT` statements within the FastPlan process. That is, you can query through statements like `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id = ?` or `SELECT TIDB_ROW_CHECKSUM() FROM t WHERE id IN (?, ?, ...)`. See also: [Data integrity validation for single-row data](https://docs.pingcap.com/tidb/stable/ticdc-integrity-check). |
 
 </CustomContent>
 
