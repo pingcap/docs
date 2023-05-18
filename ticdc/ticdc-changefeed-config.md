@@ -52,19 +52,19 @@ enable-old-value = true
 
 # Specifies whether to enable the Syncpoint feature, which is supported since v6.3.0 and is disabled by default.
 # Since v6.4.0, only the changefeed with the SYSTEM_VARIABLES_ADMIN or SUPER privilege can use the TiCDC Syncpoint feature.
-# Note: ignore this field when the downstream type is not TiDB.
+# Note: This field only takes effect if the downstream is Kafka or a storage service.
 # enable-sync-point = false
 
 # Specifies the interval at which Syncpoint aligns the upstream and downstream snapshots.
 # The format is in h m s. For example, "1h30m30s".
 # The default value is "10m" and the minimum value is "30s".
-# Note: ignore this field when the downstream type is not TiDB.
+# Note: This field only takes effect if the downstream is Kafka or a storage service.
 # sync-point-interval = "5m"
 
 # Specifies how long the data is retained by Syncpoint in the downstream table. When this duration is exceeded, the data is cleaned up.
 # The format is in h m s. For example, "24h30m30s".
 # The default value is "24h".
-# Note: ignore this field when the downstream type is not TiDB.
+# Note: This field only takes effect if the downstream is Kafka or a storage service.
 # sync-point-retention = "1h"
 
 [mounter]
@@ -132,7 +132,7 @@ dispatchers = [
 # The protocol configuration item specifies the protocol format of the messages sent to the downstream.
 # When the downstream is Kafka, the protocol can only be canal-json or avro.
 # When the downstream is a storage service, the protocol can only be canal-json or csv.
-# Note: ignore this field when the downstream type is the Database.
+# Note: This field only takes effect if the downstream is Kafka or a storage service.
 protocol = "canal-json"
 
 # The following three configuration items are only used when you replicate data to storage sinks and can be ignored when replicating data to MQ or MySQL sinks.
@@ -177,7 +177,7 @@ include-commit-ts = false
 # The data consistency level. Available options are "none" and "eventual". "none" means that the redo log is disabled.  
 # The default value is "none".
 level = "none"
-# The max redo log size in megabytes.
+# The max redo log size in MB.
 # The default value is 64.  
 max-log-size = 64
 # The flush interval for redo log. The default value is 2000 milliseconds.
