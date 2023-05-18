@@ -145,7 +145,8 @@ date-separator = 'none'
 # Note: This field only takes effect if the downstream is a storage service.
 enable-partition-separator = true
 
-# Schema registry URL. Note: ignore this field if you replicate data to the downstream types other than MQ. 
+# Schema registry URL. 
+# Note: This field only takes effect if the downstream is MQ. 
 # schema-registry = "http://localhost:80801/subjects/{subject-name}/versions/{version-number}/schema"
 
 # Specifies the number of encoder threads used when encoding data.
