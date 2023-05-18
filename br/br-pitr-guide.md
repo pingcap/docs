@@ -117,9 +117,9 @@ The following steps describe how to clean up backup data that exceeds the backup
 > - Snapshot data restore speed = Snapshot data size / (duration * the number of TiKV nodes)
 > - Log data restore speed = Restored log data size / (duration * the number of TiKV nodes)
 >
-> The snapshot data size refers to the logical size of all KVs in a single replica, not the actual amount of recovered data. BR recovers all replicas according to the number of replicas configured for the cluster. If the number of replicas grows, the actual amount of recovered data grows as well.
+> The snapshot data size refers to the logical size of all KVs in a single replica, not the actual amount of restored data. BR restores all replicas according to the number of replicas configured for the cluster. If the number of replicas grows, the actual amount of restored data grows as well.
 > The default replica number for all clusters in the test is 3.
-> To improve the overall recovery performance, you can modify the [`import.num-threads`](/tikv-configuration-file.md#import) item in the TiKV configuration file and the [`concurrency`](/br/use-br) option in the BR command.
+> To improve the overall restore performance, you can modify the [`import.num-threads`](/tikv-configuration-file.md#import) item in the TiKV configuration file and the [`concurrency`](/br/use-br) option in the BR command.
 
 Testing scenario 1 (on [TiDB Cloud](https://tidbcloud.com)):
 
