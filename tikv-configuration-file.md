@@ -2232,21 +2232,21 @@ Configuration items related to [Load Base Split](/configure-load-base-split.md).
 + Controls the traffic threshold at which a Region is identified as a hotspot.
 + Default value:
 
-    + `30MiB` per second when [`region-split-size`](#region-split-size) is less than 4GB.
-    + `100MiB` per second when [`region-split-size`](#region-split-size) is greater than or equal to 4GB.
+    + `30MiB` per second when [`region-split-size`](#region-split-size) is less than 4 GB.
+    + `100MiB` per second when [`region-split-size`](#region-split-size) is greater than or equal to 4 GB.
 
 ### `qps-threshold`
 
 + Controls the QPS threshold at which a Region is identified as a hotspot.
 + Default value:
 
-    + `3000` when [`region-split-size`](#region-split-size) is less than 4GB.
-    + `7000` when  [`region-split-size`](#region-split-size) is greater than or equal to 4GB.
+    + `3000` when [`region-split-size`](#region-split-size) is less than 4 GB.
+    + `7000` when  [`region-split-size`](#region-split-size) is greater than or equal to 4 GB.
 
 ### `region-cpu-overload-threshold-ratio` <span class="version-mark">New in v6.2.0</span>
 
 + Controls the CPU usage threshold at which a Region is identified as a hotspot.
 + Default value:
 
-    + `0.25` when [`region-split-size`](#region-split-size) is less than 4GB.
-    + `0.75` when  [`region-split-size`](#region-split-size) is greater than or equal to 4GB.
+    + `0.25` when [`region-split-size`](#region-split-size) is less than 4 GB.
+    + `0.75` when  [`region-split-size`](#region-split-size) is greater than or equal to 4 GB.
