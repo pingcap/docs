@@ -193,16 +193,4 @@ storage = ""
 # The default value is false.
 use-file-backend = false
 
-# Specifies the data integrity check. 
-# Note: These parameters only take effect if the downstream is MQ.
-[sink.integrity]
-# The integrity level. Available options are "none" and "correctness". 
-# "none" means no integrity check. "correctness" means to check the integrity of each row.
-# The default value is "none".
-integrity-check-level = "none"
-# Define what happens when detecting data corruption. Available options are "warn" and "error".
-# "warn" means to log and mark the corrupted event and send it to the downstream.
-# "error" means to log the corrupted event and stop the changefeed.  
-# The default value is "warn".
-corruption-handle-level = "warn"
 ```
