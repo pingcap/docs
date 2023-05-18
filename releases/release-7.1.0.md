@@ -144,7 +144,7 @@ Introduces S3-based storage engine, which can provide shared storage at a lower 
 
     For more information, see [documentation](/tidb-resource-control.md).
 
-* Support the checkpoint mechanism for [Fast Online DDL](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) to improve fault tolerance and automatic recovery capability [#42164](https://github.com/pingcap/tidb/issues/42164) @[tangenta](https://github.com/tangenta)
+* Support the checkpoint mechanism for Fast Online DDL to improve fault tolerance and automatic recovery capability [#42164](https://github.com/pingcap/tidb/issues/42164) @[tangenta](https://github.com/tangenta)
 
     TiDB v7.1.0 introduces a checkpoint mechanism for [Fast Online DDL](/ddl-introduction.md), which significantly improves the fault tolerance and automatic recovery capability of Fast Online DDL. Even if the TiDB owner node is restarted or changed due to failures, TiDB can still recover progress from checkpoints that are automatically updated on a regular basis, making the DDL execution more stable and efficient.
 
@@ -362,7 +362,14 @@ Introduces S3-based storage engine, which can provide shared storage at a lower 
 | -------- | -------- | -------- | -------- |
 | TiDB | [`force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v710) | Newly added | Controls whether to wait for statistics initialization to finish before providing services during TiDB startup. |
 | TiDB | [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710) | Newly added | Controls whether to use lightweight statistics initialization during TiDB startup. |
+| TiDB | [`timeout`](/tidb-configuration-file.md#timeout-new-in-v710) | Newly added | Sets the timeout for log-writing operations in TiDB. In case of a disk failure that prevents logs from being written, this configuration item can trigger the TiDB process to panic instead of hang. The default value is `0`, which means no timeout is set. |
+| TiKV | [`optimize-filters-for-memory`](/tikv-configuration-file.md#optimize-filters-for-memory-new-in-v710) | Newly added | Controls whether to generate Bloom/Ribbon filters that minimize memory internal fragmentation. |
+| TiKV | [`ribbon-filter-above-level`](/tikv-configuration-file.md#ribbon-filter-above-level-new-in-v710) | Newly added | Controls whether to use Ribbon filters for levels greater than or equal to this value and use non-block-based bloom filters for levels less than this value. |
+| TiKV | [`split.byte-threshold`](/tikv-configuration-file.md#byte-threshold-new-in-v50) | Modified | Changes the default value from `30MiB` to `100MiB` when [`region-split-size`](/tikv-configuration-file.md#region-split-size) is greater than or equal to 4 GB. |
+| TiKV | [`split.qps-threshold`](/tikv-configuration-file.md#qps-threshold) | Modified | Changes the default value from `3000` to `7000` when [`region-split-size`](/tikv-configuration-file.md#region-split-size) is greater than or equal to 4 GB. |
+| TiKV | [`split.region-cpu-overload-threshold-ratio`](/tikv-configuration-file.md#region-cpu-overload-threshold-ratio-new-in-v620) | Modified | Changes the default value from `0.25` to `0.75` when [`region-split-size`](/tikv-configuration-file.md#region-split-size) is greater than or equal to 4 GB. |
 | PD | [`store-limit-version`](/pd-configuration-file.md#store-limit-version-new-in-v710) | Newly added | Controls the mode of store limit. Value options are `"v1"` and `"v2"`. |
+| PD | [`schedule.enable-diagnostic`](/pd-configuration-file.md#enable-diagnostic-new-in-v630) | Modified | Changes the default value from `false` to `true`, meaning that the diagnostic feature of scheduler is enabled by default. |
 | TiFlash | `http_port` | Deleted | Deprecates the HTTP service port (default `8123`). |
 | TiDB Lightning | [`tikv-importer.pause-pd-scheduler-scope`](/tidb-lightning/tidb-lightning-configuration.md) | Newly added | Controls the scope in which TiDB Lightning pauses PD scheduling. The default value is `"table"` and value options are `"global"` and `"table"`. |
 | TiDB Lightning | [`tikv-importer.region-check-backoff-limit`](/tidb-lightning/tidb-lightning-configuration.md) | Newly added | Controls the number of retries to wait for the Region to come online after the split and scatter operations. The default value is `1800`. The maximum retry interval is two seconds. The number of retries is increased if any Region becomes online between retries.|
