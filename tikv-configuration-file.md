@@ -1347,7 +1347,7 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 ### `optimize-filters-for-memory` <span class="version-mark">New in v7.1.0</span>
 
 + Determines whether to generate Bloom/Ribbon filters that minimize memory internal fragmentation.
-+ Note that this is only effective when [`format-version`](#format-version-new-in-v620) >= 5.
++ Note that this configuration item takes effect only when [`format-version`](#format-version-new-in-v620) >= 5.
 + Default value: `false`
 
 ### `whole-key-filtering`
@@ -1369,8 +1369,8 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 
 ### `ribbon-filter-above-level` <span class="version-mark">New in v7.1.0</span>
 
-+ Determines whether to use Ribbon filter for levels greater than or equal to this value and use non-block-based bloom filter for levels less than this value. When this is set, [`block-based-bloom-filter`](#block-based-bloom-filter) will be ignored.
-+ Note that this is only effective when [`format-version`](#format-version-new-in-v620) >= 5.
++ Determines whether to use Ribbon filters for levels greater than or equal to this value and use non-block-based bloom filters for levels less than this value. When this configuration item is set, [`block-based-bloom-filter`](#block-based-bloom-filter) will be ignored.
++ Note that this configuration item takes effect only when [`format-version`](#format-version-new-in-v620) >= 5.
 + Default value: `false`
 
 ### `read-amp-bytes-per-bit`
@@ -1532,7 +1532,7 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
     - `2`: Can be read by all TiKV versions. Changes the encoding of compressed blocks using LZ4, BZip2 and Zlib compression.
     - `3`: Can be read by TiKV v2.1 and later versions. Changes the encoding of the keys in index blocks.
     - `4`: Can be read by TiKV v3.0 and later versions. Changes the encoding of the values in index blocks.
-    - `5`: Can be read by TiKV v6.1 and later versions. Full and partitioned filters use a generally faster and more accurate Bloom filter implementation with a different schema.
+    - `5`: Can be read by TiKV v6.1 and later versions. Full and partitioned filters use a faster and more accurate Bloom filter implementation with a different schema.
 + Default value: `2`
 
 ## rocksdb.defaultcf.titan
