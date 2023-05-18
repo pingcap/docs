@@ -1347,7 +1347,7 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 ### `optimize-filters-for-memory` <span class="version-mark">New in v7.1.0</span>
 
 + Determines whether to generate Bloom/Ribbon filters that minimize memory internal fragmentation.
-+ Note that this is only effective when [`format-version`](#format-version-new-in-v630) >= 5.
++ Note that this is only effective when [`format-version`](#format-version-new-in-v620) >= 5.
 + Default value: `false`
 
 ### `whole-key-filtering`
@@ -1369,8 +1369,8 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 
 ### `ribbon-filter-above-level` <span class="version-mark">New in v7.1.0</span>
 
-+ Determins whether to use Ribbon filter for levels greater than or equal to this value. Use non-block-based bloom filter for lower levels. When this is set, [`block-based-bloom-filter`](#block-based-bloom-filter) will be ignored.
-+ Note that this is only effective when [`format-version`](#format-version-new-in-v630) >= 5.
++ Determines whether to use Ribbon filter for levels greater than or equal to this value and use non-block-based bloom filter for levels less than this value. When this is set, [`block-based-bloom-filter`](#block-based-bloom-filter) will be ignored.
++ Note that this is only effective when [`format-version`](#format-version-new-in-v620) >= 5.
 + Default value: `false`
 
 ### `read-amp-bytes-per-bit`
