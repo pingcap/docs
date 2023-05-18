@@ -138,9 +138,11 @@ protocol = "canal-json"
 # The following three configuration items are only used when you replicate data to storage sinks and can be ignored when replicating data to MQ or MySQL sinks.
 # Row terminator, used for separating two data change events. The default value is an empty string, which means "\r\n" is used.
 terminator = ''
-# Date separator type used in the file directory. Value options are `none`, `year`, `month`, and `day`. `none` is the default value and means that the date is not separated. For more information, see <https://docs.pingcap.com/tidb/dev/ticdc-sink-to-cloud-storage#data-change-records>. Note: ignore this field when replicating data to the downstream other than a storage service.
+# Date separator type used in the file directory. Value options are `none`, `year`, `month`, and `day`. `none` is the default value and means that the date is not separated. For more information, see <https://docs.pingcap.com/tidb/dev/ticdc-sink-to-cloud-storage#data-change-records>. 
+# Note: This field only takes effect if the downstream is a storage service.
 date-separator = 'none'
-# Whether to use partitions as the separation string. The default value is true, which means that partitions in a table are stored in separate directories. It is recommended that you keep the value as `true` to avoid potential data loss in downstream partitioned tables <https://github.com/pingcap/tiflow/issues/8724>. For usage examples, see <https://docs.pingcap.com/tidb/dev/ticdc-sink-to-cloud-storage#data-change-records)>. Note: ignore this field when replicating data to the downstream other than a storage service.
+# Whether to use partitions as the separation string. The default value is true, which means that partitions in a table are stored in separate directories. It is recommended that you keep the value as `true` to avoid potential data loss in downstream partitioned tables <https://github.com/pingcap/tiflow/issues/8724>. For usage examples, see <https://docs.pingcap.com/tidb/dev/ticdc-sink-to-cloud-storage#data-change-records)>. 
+# Note: This field only takes effect if the downstream is a storage service.
 enable-partition-separator = true
 
 # Schema registry URL. Note: ignore this field if you replicate data to the downstream types other than MQ. 
@@ -157,7 +159,7 @@ enable-partition-separator = true
 # enable-kafka-sink-v2 = false
 
 # Specifies whether to only output the updated columns.
-# Note: this field only applies to the MQ downstream using the open-protocol and canal-json.
+# Note: This field only applies to the MQ downstream using the open-protocol and canal-json.
 # The default value is false.
 # only-output-updated-columns = false
 
@@ -172,7 +174,8 @@ null = '\N'
 # Whether to include commit-ts in CSV rows. The default value is false.
 include-commit-ts = false
 
-# Specifies the replication consistency configurations for a changefeed when using the redo log. For more information, see https://docs.pingcap.com/tidb/stable/ticdc-sink-to-mysql#eventually-consistent-replication-in-disaster-scenarios. Note: Ignore the following configurations if downstream is MQ or Storage.
+# Specifies the replication consistency configurations for a changefeed when using the redo log. For more information, see https://docs.pingcap.com/tidb/stable/ticdc-sink-to-mysql#eventually-consistent-replication-in-disaster-scenarios. 
+# Note: The consistency-related fields only take effect when the downstream is a database and the redo log feature is enabled.
 [sink.consistent]
 # The data consistency level. Available options are "none" and "eventual". "none" means that the redo log is disabled.  
 # The default value is "none".
@@ -189,7 +192,8 @@ storage = ""
 # The default value is false.
 use-file-backend = false
 
-# Specifies the data integrity check. Note: ignore the following configurations if the downstream type is a database or a storage service.
+# Specifies the data integrity check. 
+# Note: This field only takes effect if the downstream is MQ.
 [sink.integrity]
 # The integrity level. Available options are "none" and "correctness". 
 # "none" means no integrity check. "correctness" means to check the integrity of each row.
