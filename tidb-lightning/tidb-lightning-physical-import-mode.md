@@ -5,7 +5,7 @@ summary: Learn about the physical import mode in TiDB Lightning.
 
 # Physical Import Mode
 
-Physical import mode is an efficient and fast import mode that inserts data directly into TiKV nodes as key-value pairs without going through the SQL interface. It is suitable for importing up to 100 TB of data.
+Physical import mode is an efficient and fast import mode that inserts data directly into TiKV nodes as key-value pairs without going through the SQL interface. When using the physical import mode, a single instance of Lightning can import up to 10 TiB of data. The supported amount of imported data theoretically increases as the number of Lightning instances increases. It is verified by users that [parallel importing](/tidb-lightning/tidb-lightning-distributed-import.md) based on Lightning can effectively handle up to 20 TiB of data.
 
 Before you use the physical import mode, make sure to read [Requirements and restrictions](#requirements-and-restrictions).
 
@@ -68,7 +68,7 @@ It is recommended that you allocate CPU more than 32 cores and memory greater th
 
 - Do not use the physical import mode to directly import data to TiDB clusters in production. It has severe performance implications. If you need to do so, refer to [Pause scheduling on the table level](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#pause-scheduling-on-the-table-level).
 - Do not use multiple TiDB Lightning instances to import data to the same TiDB cluster by default. Use [Parallel Import](/tidb-lightning/tidb-lightning-distributed-import.md) instead.
-- When you use multiple TiDB Lightning to import data to the same target, do not mix the backends. That is, do not use the physical import mode and the logical import mode at the same time.
+- When you use multiple TiDB Lightning to import data to the same target cluster, do not mix the import modes. That is, do not use the physical import mode and the logical import mode at the same time.
 - During the process of importing data, do not perform write operations in the target table. Otherwise the import will fail or the data will be inconsistent. At the same time, it is not recommended to perform read operations, because the data you read might be inconsistent. You can perform read and write operations after the import operation is completed.
 - A single Lightning process can import a single table of 10 TB at most. Parallel import can use 10 Lightning instances at most.
 
@@ -82,6 +82,6 @@ It is recommended that you allocate CPU more than 32 cores and memory greater th
 
     - TiDB Lightning earlier than v5.4.0 cannot import tables of `charset=GBK`.
 
-- When you use TiDB Lightning with TiCDC, not the following:
+- When you use TiDB Lightning with TiCDC, note the following:
 
     - TiCDC cannot capture the data inserted in the physical import mode.
