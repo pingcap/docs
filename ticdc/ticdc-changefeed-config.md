@@ -194,7 +194,7 @@ storage = ""
 use-file-backend = false
 
 # Specifies the data integrity check. 
-# Note: This field only takes effect if the downstream is MQ.
+# Note: These fields only take effect if the downstream is MQ.
 [sink.integrity]
 # The integrity level. Available options are "none" and "correctness". 
 # "none" means no integrity check. "correctness" means to check the integrity of each row.
