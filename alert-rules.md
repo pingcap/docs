@@ -46,7 +46,7 @@ This section gives the alert rules for the TiDB component.
 
 * Description:
 
-    TiDB server accesses the Region leader TiKV according to its own cache information. If the Region leader has changed or the current TiKV Region information is inconsistent with the TiDB cache, a Region cache error occurs. When the error is reported over 6000 times in 10 minutes, an alert is triggered.
+    TiDB server accesses the Region leader of TiKV according to its own cache information. If the Region leader has changed or the current TiKV Region information is inconsistent with that in the TiDB cache, a Region cache error occurs. When the error is reported over 6000 times in 10 minutes, an alert is triggered.
 
 * Solution:
 
