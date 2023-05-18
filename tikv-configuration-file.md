@@ -2225,17 +2225,28 @@ Configuration items related to resource control of the TiKV storage layer.
 
 ## split
 
-Configuration items related to load based split.
+Configuration items related to [Load Base Split](/configure-load-base-split.md).
+
+### `byte-threshold` <span class="version-mark">New in v5.0</span>
+
++ Controls the traffic threshold at which a Region is identified as a hotspot.
++ Default value:
+
+    + `30MiB` per second when [`region-split-size`](#region-split-size) is less than 4GB.
+    + `100MiB` per second when [`region-split-size`](#region-split-size) is greater than or equal to 4GB.
 
 ### `qps-threshold`
 
-+ Controls the read qps threshold for a region to be qualified as hot region. 
-+ Default value: `3000` when `region-split-size` is less than 4GB; `7000` when  `region-split-size` is equal or more than 4GB
++ Controls the QPS threshold at which a Region is identified as a hotspot.
++ Default value:
 
-### `byte-threshold`
-+ Controls the read bytes threshold for a region to be qualified as hot region. 
-+ Default value: `30MB` when `region-split-size` is less than 4GB; `100MB` when  `region-split-size` is equal or more than 4GB
+    + `3000` when [`region-split-size`](#region-split-size) is less than 4GB.
+    + `7000` when  [`region-split-size`](#region-split-size) is greater than or equal to 4GB.
 
-### `region-cpu-overload-threshold-ratio`
-+ Controls the read CPU usage for a region to be qualified as hot region.
-+ Default value: `0.25` when `region-split-size` is less than 4GB; `0.75` when  `region-split-size` is equal or more than 4GB 
+### `region-cpu-overload-threshold-ratio` <span class="version-mark">New in v6.2.0</span>
+
++ Controls the CPU usage threshold at which a Region is identified as a hotspot.
++ Default value:
+
+    + `0.25` when [`region-split-size`](#region-split-size) is less than 4GB.
+    + `0.75` when  [`region-split-size`](#region-split-size) is greater than or equal to 4GB.
