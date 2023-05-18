@@ -526,7 +526,7 @@
       - [Manage Changefeeds](/ticdc/ticdc-manage-changefeed.md)
       - [Log Filter](/ticdc/ticdc-filter.md)
       - [Bidirectional Replication](/ticdc/ticdc-bidirectional-replication.md)
-      - [Data Integrity Validation](/ticdc/ticdc-integrity-check.md)
+      - [Data Integrity Validation for Single-Row Data](/ticdc/ticdc-integrity-check.md)
     - Monitor and Alert
       - [Monitoring Metrics](/ticdc/monitor-ticdc.md)
       - [Alert Rules](/ticdc/ticdc-alert-rules.md)
