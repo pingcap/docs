@@ -52,19 +52,19 @@ enable-old-value = true
 
 # Specifies whether to enable the Syncpoint feature, which is supported since v6.3.0 and is disabled by default.
 # Since v6.4.0, only the changefeed with the SYSTEM_VARIABLES_ADMIN or SUPER privilege can use the TiCDC Syncpoint feature.
-# Note: This parameter only takes effect if the downstream is Kafka or a storage service.
+# Note: This configuration item only takes effect if the downstream is Kafka or a storage service.
 # enable-sync-point = false
 
 # Specifies the interval at which Syncpoint aligns the upstream and downstream snapshots.
 # The format is in h m s. For example, "1h30m30s".
 # The default value is "10m" and the minimum value is "30s".
-# Note: This parameter only takes effect if the downstream is Kafka or a storage service.
+# Note: This configuration item only takes effect if the downstream is Kafka or a storage service.
 # sync-point-interval = "5m"
 
 # Specifies how long the data is retained by Syncpoint in the downstream table. When this duration is exceeded, the data is cleaned up.
 # The format is in h m s. For example, "24h30m30s".
 # The default value is "24h".
-# Note: This parameter only takes effect if the downstream is Kafka or a storage service.
+# Note: This configuration item only takes effect if the downstream is Kafka or a storage service.
 # sync-point-retention = "1h"
 
 [mounter]
@@ -103,7 +103,7 @@ ignore-insert-value-expr = "price > 1000 and origin = 'no where'" # Ignore inser
 
 [scheduler]
 # Splits a table into multiple replication ranges based on the number of Regions, and these ranges can be replicated by multiple TiCDC nodes.
-# Note: This parameter only takes effect on Kafka changefeeds and is not supported on MySQL changefeeds.
+# Note: This configuration item only takes effect on Kafka changefeeds and is not supported on MySQL changefeeds.
 # The value is "false" by default. Set it to "true" to enable this feature.
 enable-table-across-nodes = false
 # When you enable this feature, it takes effect for tables with the number of Regions greater than the `region-threshold` value.
@@ -121,7 +121,7 @@ write-key-threshold = 0
 # For the sink of MQ type, you can use dispatchers to configure the event dispatcher.
 # Since v6.1.0, TiDB supports two types of event dispatchers: partition and topic. For more information, see <partition and topic link>.
 # The matching syntax of matcher is the same as the filter rule syntax. For details about the matcher rules, see <>.
-# Note: This parameter only takes effect if the downstream is MQ.
+# Note: This configuration item only takes effect if the downstream is MQ.
 dispatchers = [
     {matcher = ['test1.*', 'test2.*'], topic = "Topic expression 1", partition = "ts" },
     {matcher = ['test3.*', 'test4.*'], topic = "Topic expression 2", partition = "index-value" },
@@ -132,35 +132,35 @@ dispatchers = [
 # The protocol configuration item specifies the protocol format of the messages sent to the downstream.
 # When the downstream is Kafka, the protocol can only be canal-json or avro.
 # When the downstream is a storage service, the protocol can only be canal-json or csv.
-# Note: This parameter only takes effect if the downstream is Kafka or a storage service.
+# Note: This configuration item only takes effect if the downstream is Kafka or a storage service.
 protocol = "canal-json"
 
 # The following three configuration items are only used when you replicate data to storage sinks and can be ignored when replicating data to MQ or MySQL sinks.
 # Row terminator, used for separating two data change events. The default value is an empty string, which means "\r\n" is used.
 terminator = ''
 # Date separator type used in the file directory. Value options are `none`, `year`, `month`, and `day`. `none` is the default value and means that the date is not separated. For more information, see <https://docs.pingcap.com/tidb/dev/ticdc-sink-to-cloud-storage#data-change-records>. 
-# Note: This parameter only takes effect if the downstream is a storage service.
+# Note: This configuration item only takes effect if the downstream is a storage service.
 date-separator = 'none'
 # Whether to use partitions as the separation string. The default value is true, which means that partitions in a table are stored in separate directories. It is recommended that you keep the value as `true` to avoid potential data loss in downstream partitioned tables <https://github.com/pingcap/tiflow/issues/8724>. For usage examples, see <https://docs.pingcap.com/tidb/dev/ticdc-sink-to-cloud-storage#data-change-records)>. 
-# Note: This parameter only takes effect if the downstream is a storage service.
+# Note: This configuration item only takes effect if the downstream is a storage service.
 enable-partition-separator = true
 
 # Schema registry URL. 
-# Note: This parameter only takes effect if the downstream is MQ. 
+# Note: This configuration item only takes effect if the downstream is MQ. 
 # schema-registry = "http://localhost:80801/subjects/{subject-name}/versions/{version-number}/schema"
 
 # Specifies the number of encoder threads used when encoding data.
-# Note: This parameter only takes effect if the downstream is MQ.
+# Note: This configuration item only takes effect if the downstream is MQ.
 # The default value is 16.
 # encoder-concurrency = 16
 
 # Specifies whether to enable kafka-sink-v2 that uses the kafka-go sink library.
-# Note: ignore this parameter when the downstream type is not the MQ.
+# Note: This configuration item only takes effect if the downstream is MQ.
 # The default value is false.
 # enable-kafka-sink-v2 = false
 
 # Specifies whether to only output the updated columns.
-# Note: This parameter only applies to the MQ downstream using the open-protocol and canal-json.
+# Note: This configuration item only applies to the MQ downstream using the open-protocol and canal-json.
 # The default value is false.
 # only-output-updated-columns = false
 
@@ -176,7 +176,7 @@ null = '\N'
 include-commit-ts = false
 
 # Specifies the replication consistency configurations for a changefeed when using the redo log. For more information, see https://docs.pingcap.com/tidb/stable/ticdc-sink-to-mysql#eventually-consistent-replication-in-disaster-scenarios. 
-# Note: The consistency-related parameters only take effect when the downstream is a database and the redo log feature is enabled.
+# Note: The consistency-related configuration items only take effect when the downstream is a database and the redo log feature is enabled.
 [sink.consistent]
 # The data consistency level. Available options are "none" and "eventual". "none" means that the redo log is disabled.  
 # The default value is "none".
