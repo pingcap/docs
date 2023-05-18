@@ -194,7 +194,7 @@ In the above example, `x'2c'` is the hexadecimal representation of the `,` chara
 
 ## MySQL compatibility
 
-The syntax of the `LOAD DATA` statement is fully compatible with that of MySQL, except for character set options which are parsed but ignored. If you find any syntax compatibility difference, you can [report it via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
+The syntax of the `LOAD DATA` statement is compatible with that of MySQL, except for character set options which are parsed but ignored. If you find any syntax compatibility difference, you can [report it via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
 
 <CustomContent platform="tidb">
 
