@@ -11,7 +11,7 @@ The `LOAD DATA` statement batch loads data into a TiDB table.
 In TiDB v7.0.0, the `LOAD DATA` SQL statement supports the following features:
 
 - Support importing data from S3 and GCS
-- Add new parameter `FIELDS DEFINED NULL BY`
+- Add a new parameter `FIELDS DEFINED NULL BY`
 
 > **Warning:**
 >
@@ -97,7 +97,7 @@ If you want to extract `bob`, `20`, and `street 1`, specify the field delimiter 
 FIELDS TERMINATED BY ',' ENCLOSED BY '\"' LINES TERMINATED BY '\r\n'
 ```
 
-If ou do not specify the preceding parameters, the imported data is processed in the following way by default:
+If you do not specify the preceding parameters, the imported data is processed in the following way by default:
 
 ```sql
 FIELDS TERMINATED BY '\t' ENCLOSED BY '' ESCAPED BY '\\'
