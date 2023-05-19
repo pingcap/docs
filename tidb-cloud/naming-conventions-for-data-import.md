@@ -48,7 +48,7 @@ This section describes the naming conventions for data files. Depending on the t
 
 When you import CSV files, name the data files as follows:
 
-`${db_name}.${table_name}${suffix}.csv`
+`${db_name}.${table_name}${suffix}.csv.${compress}`
 
 `${suffix}` is optional and can be one of the following formats, where *`xxx`* can be any number:
 
@@ -56,12 +56,15 @@ When you import CSV files, name the data files as follows:
 - *`._xxx_xxx_xxx`*, such as `._0_0_01`
 - *`_xxx_xxx_xxx`*, such as `_0_0_01`
 
+`${compress}` is the compression format and it is optional. TiDB Cloud supports the following formats: `.gzip`, `.gz`, `.zstd`, `.zst` and `.snappy`.
+
 For example, the target database and table of all the following files are `import_db` and `test_table`:
 
 - `import_db.test_table.csv`
 - `import_db.test_table.01.csv`
 - `import_db.test_table._0_0_01.csv`
 - `import_db.test_table_0_0_01.csv`
+- `import_db.test_table_0_0_01.csv.gz`
 
 ### Parquet
 
@@ -90,12 +93,21 @@ For example:
 
 When you import SQL files, name the data files as follows:
 
-- `${db_name}.${table_name}${suffix}.sql` (`${suffix}` is optional)
+`${db_name}.${table_name}${suffix}.sql.${compress}`
+
+`${suffix}` is optional and can be one of the following formats, where *`xxx`* can be any number:
+
+- *`.xxx`*, such as `.01`
+- *`._xxx_xxx_xxx`*, such as `._0_0_01`
+- *`_xxx_xxx_xxx`*, such as `_0_0_01`
+
+`${compress}` is the compression format and it is optional. TiDB Cloud supports the following formats: `.gzip`, `.gz`, `.zstd`, `.zst` and `.snappy`.
 
 For example:
 
 - `import_db.test_table.sql`
 - `import_db.test_table.01.sql`
+- `import_db.test_table.01.sql.gz`
 
 If the SQL file is exported through TiDB Dumpling with the default configuration, it conforms to the naming convention by default.
 
@@ -104,4 +116,4 @@ If the SQL file is exported through TiDB Dumpling with the default configuration
 If the source data file of CSV or Parquet does not conform to the naming convention, you can use the file pattern feature to establish the name mapping relationship between the source data file and the target table. This feature does not support Aurora Snapshot and SQL data files.
 
 - For CSV files, see **File Pattern** in [Step 4. Import CSV files to TiDB Cloud](/tidb-cloud/import-csv-files.md#step-4-import-csv-files-to-tidb-cloud)
-- For Parquet files, see **File Pattern** in [Step 4. Import Parquet files to TiDB Cloud](/tidb-cloud/import-parquet-files.md#step-4-import-parquet-files-to-tidb-cloud)
+- For Parquet files, see **File Pattern** in [Step 4. Import Parquet files to TiDB Cloud](/tidb-cloud/import-parquet-files.md#step-4-import-parquet-files-to-tidb-cloud) 
