@@ -160,7 +160,7 @@ In TiDB, all supported DDL changes are performed online. Compared with DDL opera
 * Partitioned tables support `ADD`, `DROP`, `TRUNCATE`, and `REORGANIZE` operations. Other partition operations are ignored. The following syntaxes are not supported for partitioned tables:
 
     - `SUBPARTITION`
-    - `{CHECK|TRUNCATE|OPTIMIZE|REPAIR|IMPORT|DISCARD|REBUILD|COALESCE} PARTITION`
+    - `{CHECK|OPTIMIZE|REPAIR|IMPORT|DISCARD|REBUILD|COALESCE} PARTITION`
 
   For more details, see [Partitioning](/partitioned-table.md).
 

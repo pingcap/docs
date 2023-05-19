@@ -94,8 +94,16 @@ ignore-insert-value-expr = "price > 1000 and origin = 'no where'" # Ignore inser
 # Note: This parameter only takes effect on Kafka changefeeds and is not supported on MySQL changefeeds.
 # The value is "false" by default. Set it to "true" to enable this feature.
 enable-table-across-nodes = false
-# When you enable this feature, it only takes effect for tables with the number of regions greater than the `region-threshold` value.
+# When you enable this feature, it takes effect for tables with the number of Regions greater than the `region-threshold` value.
 region-threshold = 100000
+# When you enable this feature, it takes effect for tables with the number of rows modified per minute greater than the `write-key-threshold` value.
+# Note:
+# * The default value of `write-key-threshold` is 0, which means that the feature does not split the table replication range according to the number of rows modified in a table by default.
+# * You can configure this parameter according to your cluster workload. For example, if it is configured as 30000, it means that the feature will split the replication range of a table when the number of modified rows per minute in the table exceeds 30000.
+# * When `region-threshold` and `write-key-threshold` are configured at the same time:
+#   TiCDC will check whether the number of modified rows is greater than `write-key-threshold` first.
+#   If not, next check whether the number of Regions is greater than `region-threshold`.
+write-key-threshold = 0
 
 [sink]
 # For the sink of MQ type, you can use dispatchers to configure the event dispatcher.
@@ -118,7 +126,7 @@ protocol = "canal-json"
 terminator = ''
 # Date separator type used in the file directory. Value options are `none`, `year`, `month`, and `day`. `none` is the default value and means that the date is not separated. For more information, see <https://docs.pingcap.com/tidb/v7.0/ticdc-sink-to-cloud-storage#data-change-records>.
 date-separator = 'none'
-# Whether to use partitions as the separation string. The default value is false, which means that partitions in a table are not stored in separate directories. For more information, see <https://docs.pingcap.com/tidb/v7.0/ticdc-sink-to-cloud-storage#data-change-records)>.
+# Whether to use partitions as the separation string. The default value is false, which means that partitions in a table are not stored in separate directories. It is recommended that you set the value as `true` to avoid potential data loss in downstream partitioned tables <https://github.com/pingcap/tiflow/issues/8724>. For usage examples, see <https://docs.pingcap.com/tidb/v7.0/ticdc-sink-to-cloud-storage#data-change-records>.
 enable-partition-separator = false
 
 # Since v6.5.0, TiCDC supports saving data changes to storage services in CSV format. Ignore the following configurations if you replicate data to MQ or MySQL sinks.

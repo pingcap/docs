@@ -50,7 +50,7 @@ hide_commit: true
 
 [Deploy a TiDB Cluster Using TiUP](https://docs.pingcap.com/tidb/v7.0/production-deployment-using-tiup)
 
-[Deploy a TiDB Cluster on Kubernetes](https://docs.pingcap.com/tidb/v7.0/tidb-in-kubernetes)
+[Deploy a TiDB Cluster on Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable)
 
 </LearningPath>
 
@@ -108,21 +108,19 @@ hide_commit: true
 
 [TiUP](https://docs.pingcap.com/tidb/v7.0/tiup-overview)
 
-[Dumpling](https://docs.pingcap.com/tidb/v7.0/dumpling-overview)
+[TiDB Operator](https://docs.pingcap.com/tidb/v7.0/tidb-operator-overview)
+
+[TiDB Data Migration (DM)](https://docs.pingcap.com/tidb/v7.0/dm-overview)
 
 [TiDB Lightning](https://docs.pingcap.com/tidb/v7.0/tidb-lightning-overview)
 
-[Data Migration](https://docs.pingcap.com/tidb/v7.0/dm-overview)
-
-[Backup & Restore (BR)](https://docs.pingcap.com/tidb/v7.0/backup-and-restore-overview)
+[Dumpling](https://docs.pingcap.com/tidb/v7.0/dumpling-overview)
 
 [TiCDC](https://docs.pingcap.com/tidb/v7.0/ticdc-overview)
 
+[Backup & Restore (BR)](https://docs.pingcap.com/tidb/v7.0/backup-and-restore-overview)
+
 [PingCAP Clinic](https://docs.pingcap.com/tidb/v7.0/clinic-introduction)
-
-[TiDB Operator](https://docs.pingcap.com/tidb/v7.0/tidb-operator-overview)
-
-[TiSpark](https://docs.pingcap.com/tidb/v7.0/tispark-overview)
 
 </LearningPath>
 
