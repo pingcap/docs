@@ -11,12 +11,10 @@ The `LOAD DATA` statement batch loads data into a TiDB table.
 In TiDB v7.0.0, the `LOAD DATA` SQL statement supports the following features:
 
 - Support importing data from S3 and GCS
-- Support importing Parquet format data
 - Add new parameter `FIELDS DEFINED NULL BY`
 
 > **Warning:**
 >
-> The new capabilities and parameters are experimental. It is not recommended to use it in a production environment.
 > The new parameter `FIELDS DEFINED NULL BY` and support for importing data from S3 and GCS in v7.0.0 are experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 <CustomContent platform="tidb-cloud">
