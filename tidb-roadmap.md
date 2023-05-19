@@ -15,8 +15,8 @@ In the course of development, this roadmap is subject to change based on user ne
   <thead>
     <tr>
       <th>Category</th>
-      <th>End-calendar-year LTS release</th>
-      <th>Mid-calendar-year LTS release</th>
+      <th>End of CY23 LTS release</th>
+      <th>Mid CY24 LTS release</th>
       <th>Future releases</th>
     </tr>
   </thead>
@@ -39,14 +39,6 @@ In the course of development, this roadmap is subject to change based on user ne
             </i>
           </li>
           <br />
-          <li>
-            <b>GA of Tiflash S3 based storage engine</b><br /><i>
-              Shared storage, lower cost
-            </i>
-          </li>
-          <br />
-          </li>
-          <br />
         </ul>
       </td>
       <td>
@@ -56,8 +48,8 @@ In the course of development, this roadmap is subject to change based on user ne
           </li>
           <br />
           <li>
-            <b>GA of Disaggregate TiFlash compute/storage (auto-caling) </b><br />
-            <i>Elastic HTAP resource utilization</i>
+            <b>GA TiFlash decoupling of compute/storage and S3 storage</b><br />
+            <i>Enables more cost-effective and elastic HTAP</i>
           </li>
           <br />
           <br />
@@ -86,7 +78,6 @@ In the course of development, this roadmap is subject to change based on user ne
               Control over how background tasks can affect foreground traffic. These tasks could be imports, DDL, TTL, auto-analyze, compactions, etc.
             </i>
           </li>
-          <br />
         </ul>
       </td>
       <td>
@@ -130,12 +121,10 @@ In the course of development, this roadmap is subject to change based on user ne
             <b>Materialized views</b>
             <br /><i>Regularly pre-computed results to boost query performance and better enable data serving use cases</i>
           </li>
-          <br />
           <li>
             <b>Cascades framework for optimizer</b>
             <br /><i>Improved framework for query optimization, and makes the optimizer more extensible and future-proof</i>
           </li>
-          <br />
         </ul>
       </td>
       <td>
@@ -182,7 +171,6 @@ In the course of development, this roadmap is subject to change based on user ne
               >Snowflake, Iceburg, etc.</i
             >
           </li>
-          <br />
         </ul>
       </td>
       <td>
