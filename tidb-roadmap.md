@@ -204,7 +204,9 @@ In the course of development, this roadmap is subject to change based on user ne
 These are non-exhaustive plans and are subject to change. Features might differ per service subscriptions.
 
 ### Previously delivered roadmap items
+
 You may have been waiting on some items from the last version. Some of those are noted below. For more detail, visit the v7.1 release notes:
+
 - Foundation of multi-tenancy framework: Resource control quotas and scheduling for resource groups
 - TiCDC sink to S3 and Azure object store (GA)
 - Fastest online ADD INDEX (GA)
