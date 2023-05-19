@@ -92,9 +92,13 @@ Records: 815264  Deleted: 0  Skipped: 0  Warnings: 0
 
 > **Note:**
 >
-> Committing through splitting a transaction is at the expense of breaking the atomicity and isolation of the transaction. When performing this operation, you must ensure that there are **no other** ongoing operations on the table. When an error occurs, **manual intervention is required to check the consistency and integrity of the data**. Therefore, it is not recommended to use `LOAD DATA` on any tables which are actively being read from or written to.
+> - Committing through splitting a transaction is at the expense of breaking the atomicity and isolation of the transaction. When performing this operation, you must ensure that there are **no other** ongoing operations on the table. When an error occurs, **manual intervention is required to check the consistency and integrity of the data**. Therefore, it is not recommended to use `LOAD DATA` on any tables which are actively being read from or written to.
+> - No matter how many rows are committed in a transaction, `LOAD DATA` is not rolled back by the [`ROLLBACK`](/sql-statements/sql-statement-rollback.md) statement in an explicit transaction.
+> - The `LOAD DATA` statement is always executed in optimistic transaction mode, regardless of the TiDB transaction mode configuration.
 
 ## See also
 
 * [INSERT](/sql-statements/sql-statement-insert.md)
 * [Import Example Database](/import-example-data.md)
+* [TiDB Optimistic Transaction Model](/optimistic-transaction.md)
+* [TiDB Pessimistic Transaction Mode](/pessimistic-transaction.md)
