@@ -174,6 +174,7 @@ The syntax of the `LOAD DATA` statement is compatible with that of MySQL, except
 
 * [INSERT](/sql-statements/sql-statement-insert.md)
 * [TiDB Optimistic Transaction Model](/optimistic-transaction.md)
+* [TiDB Pessimistic Transaction Mode](/pessimistic-transaction.md)
 
 </CustomContent>
 
@@ -181,5 +182,6 @@ The syntax of the `LOAD DATA` statement is compatible with that of MySQL, except
 
 * [INSERT](/sql-statements/sql-statement-insert.md)
 * [TiDB Optimistic Transaction Model](/optimistic-transaction.md)
+* [TiDB Pessimistic Transaction Mode](/pessimistic-transaction.md)
 
 </CustomContent>
