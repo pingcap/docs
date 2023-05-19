@@ -45,6 +45,7 @@ In the course of development, this roadmap is subject to change based on user ne
         <ul>
           <li>
             <b>Performance optimization framework for all applicable background tasks, like DDL, TTL, and analyze cluster</b><br />
+            <i>This distributes the work of these operations throughout the cluster, speeding them up and exposing single nodes to less background resource utilization. This framework already applies to the ADD INDEX operation.</i>
           </li>
           <br />
           <li>
@@ -117,10 +118,6 @@ In the course of development, this roadmap is subject to change based on user ne
       </td>
       <td>
         <ul>
-          <li>
-            <b>Materialized views</b>
-            <br /><i>Regularly pre-computed results to boost query performance and better enable data serving use cases</i>
-          </li>
           <li>
             <b>Cascades framework for optimizer</b>
             <br /><i>Improved framework for query optimization, and makes the optimizer more extensible and future-proof</i>
