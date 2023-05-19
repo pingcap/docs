@@ -88,64 +88,17 @@ Records: 815264  Deleted: 0  Skipped: 0  Warnings: 0
 
 ## MySQL compatibility
 
-<<<<<<< HEAD
 * TiDB will by default commit every 20 000 rows. This behavior is similar to MySQL NDB Cluster, but not the default configuration with the InnoDB storage engine.
 
 > **Note:**
 >
-> Committing through splitting a transaction is at the expense of breaking the atomicity and isolation of the transaction. When performing this operation, you must ensure that there are **no other** ongoing operations on the table. When an error occurs, **manual intervention is required to check the consistency and integrity of the data**. Therefore, it is not recommended to use `LOAD DATA` on any tables which are actively being read from or written to.
-=======
-The syntax of the `LOAD DATA` statement is compatible with that of MySQL, except for character set options which are parsed but ignored. If you find any syntax compatibility difference, you can [report it via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
-
-<CustomContent platform="tidb">
-
-> **Note:**
->
-> - For versions earlier than TiDB v4.0.0, `LOAD DATA` commits every 20000 rows.
-> - For versions from TiDB v4.0.0 to v6.6.0, TiDB commits all rows in one transaction by default.
-> - Starting from TiDB v7.0.0, the number of rows to be committed in a batch is controlled by the `WITH batch_size=<number>` parameter of the `LOAD DATA` statement, which defaults to 1000 rows per commit.
-> - After upgrading from TiDB v4.0.0 or earlier versions, `ERROR 8004 (HY000) at line 1: Transaction is too large, size: 100000058` might occur. The recommended way to resolve this error is to increase the [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit) value in your `tidb.toml` file. If you are unable to increase this limit, you can also restore the behavior before the upgrade by setting [`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size) to `20000`.
+> - Committing through splitting a transaction is at the expense of breaking the atomicity and isolation of the transaction. When performing this operation, you must ensure that there are **no other** ongoing operations on the table. When an error occurs, **manual intervention is required to check the consistency and integrity of the data**. Therefore, it is not recommended to use `LOAD DATA` on any tables which are actively being read from or written to.
 > - No matter how many rows are committed in a transaction, `LOAD DATA` is not rolled back by the [`ROLLBACK`](/sql-statements/sql-statement-rollback.md) statement in an explicit transaction.
 > - The `LOAD DATA` statement is always executed in optimistic transaction mode, regardless of the TiDB transaction mode configuration.
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-> **Note:**
->
-> - For versions earlier than TiDB v4.0.0, `LOAD DATA` commits every 20000 rows.
-> - For versions from TiDB v4.0.0 to v6.6.0, TiDB commits all rows in one transaction by default.
-> - Starting from TiDB v7.0.0, the number of rows to be committed in a batch is controlled by the `WITH batch_size=<number>` parameter of the `LOAD DATA` statement, which defaults to 1000 rows per commit.
-> - After upgrading from TiDB v4.0.0 or earlier versions, `ERROR 8004 (HY000) at line 1: Transaction is too large, size: 100000058` might occur. To resolve this error, you can restore the behavior before the upgrade by setting [`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size) to `20000`.
-> - No matter how many rows are committed in a transaction, `LOAD DATA` is not rolled back by the [`ROLLBACK`](/sql-statements/sql-statement-rollback.md) statement in an explicit transaction.
-> - The `LOAD DATA` statement is always executed in optimistic transaction mode, regardless of the TiDB transaction mode configuration.
-
-</CustomContent>
->>>>>>> 852e2afba (sql-statements: clarify mysql compatibility of load data (#13601))
 
 ## See also
 
 * [INSERT](/sql-statements/sql-statement-insert.md)
-<<<<<<< HEAD
 * [Import Example Database](/import-example-data.md)
-=======
 * [TiDB Optimistic Transaction Model](/optimistic-transaction.md)
 * [TiDB Pessimistic Transaction Mode](/pessimistic-transaction.md)
-* [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)
-* [`SHOW LOAD DATA`](/sql-statements/sql-statement-show-load-data.md)
-* [`CANCEL LOAD DATA` and `DROP LOAD DATA`](/sql-statements/sql-statement-operate-load-data-job.md)
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-* [INSERT](/sql-statements/sql-statement-insert.md)
-* [TiDB Optimistic Transaction Model](/optimistic-transaction.md)
-* [TiDB Pessimistic Transaction Mode](/pessimistic-transaction.md)
-* [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview)
-* [`SHOW LOAD DATA`](/sql-statements/sql-statement-show-load-data.md)
-* [`CANCEL LOAD DATA` and `DROP LOAD DATA`](/sql-statements/sql-statement-operate-load-data-job.md)
-
-</CustomContent>
->>>>>>> 852e2afba (sql-statements: clarify mysql compatibility of load data (#13601))
