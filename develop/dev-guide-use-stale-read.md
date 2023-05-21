@@ -5,7 +5,7 @@ summary: Learn how to use Stale Read to accelerate queries under certain conditi
 
 # Stale Read
 
-Stale Read is a mechanism that TiDB applies to read historical versions of data stored in TiDB. Using this mechanism, you can read the corresponding historical data at a specific time or within a specified time range, and thus save the latency caused by data replication between storage nodes. When you are using Steal Read, TiDB randomly selects a replica for data reading, which means that all replicas are available for data reading.
+Stale Read is a mechanism that TiDB applies to read historical versions of data stored in TiDB. Using this mechanism, you can read the corresponding historical data at a specific time or within a specified time range, and thus save the latency caused by data replication between storage nodes. When you are using Stale Read, TiDB randomly selects a replica for data reading, which means that all replicas are available for data reading.
 
 In practice, consider carefully whether it is appropriate to enable Stale Read in TiDB based on the [usage scenarios](/stale-read.md#usage-scenarios-of-stale-read). Do not enable Stale Read if your application cannot tolerate reading non-real-time data.
 
@@ -100,7 +100,7 @@ In addition to specifying an exact time, you can also specify the following:
 - `AS OF TIMESTAMP TIDB_BOUNDED_STALENESS('2016-10-08 16:45:26', '2016-10-08 16:45:29')` queries the latest data between `2016-10-08 16:45:26` and `2016-10-08 16:45:29`.
 - `AS OF TIMESTAMP TIDB_BOUNDED_STALENESS(NOW() -INTERVAL 20 SECOND, NOW())` queries the latest data within 20 seconds.
 
-Note that the specified timestamp or interval cannot be too early or later than the current time.
+Note that the specified timestamp or interval cannot be too early or later than the current time. Additionally, `NOW()` defaults to second precision. To achieve higher precision, you can add a parameter, such as using `NOW(3)` for millisecond precision. For more information, see [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_now).
 
 Expired data will be recycled by [Garbage Collection](/garbage-collection-overview.md) in TiDB, and the data will be retained for a short period before being cleared. The period is called [GC Life Time (default 10 minutes)](/system-variables.md#tidb_gc_life_time-new-in-v50). When a GC starts, the current time minus the time period will be used as the **GC Safe Point**. If you try to read the data before GC Safe Point, TiDB will report the following error:
 

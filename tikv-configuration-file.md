@@ -220,7 +220,7 @@ This document only describes the parameters that are not included in command-lin
 + Default value: `"60s"`
 + Minimum value: `"1s"`
 
-### `snap-max-write-bytes-per-sec`
+### `snap-io-max-bytes-per-sec`
 
 + The maximum allowable disk bandwidth when processing snapshots
 + Default value: `"100MB"`
@@ -1344,6 +1344,12 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 + Default value for `defaultcf`: `true`
 + Default value for `writecf` and `lockcf`: `false`
 
+### `optimize-filters-for-memory` <span class="version-mark">New in v7.1.0</span>
+
++ Determines whether to generate Bloom/Ribbon filters that minimize memory internal fragmentation.
++ Note that this configuration item takes effect only when [`format-version`](#format-version-new-in-v620) >= 5.
++ Default value: `false`
+
 ### `whole-key-filtering`
 
 + Determines whether to put the entire key to bloom filter
@@ -1359,6 +1365,12 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 ### `block-based-bloom-filter`
 
 + Determines whether each block creates a bloom filter
++ Default value: `false`
+
+### `ribbon-filter-above-level` <span class="version-mark">New in v7.1.0</span>
+
++ Determines whether to use Ribbon filters for levels greater than or equal to this value and use non-block-based bloom filters for levels less than this value. When this configuration item is set, [`block-based-bloom-filter`](#block-based-bloom-filter) will be ignored.
++ Note that this configuration item takes effect only when [`format-version`](#format-version-new-in-v620) >= 5.
 + Default value: `false`
 
 ### `read-amp-bytes-per-bit`
@@ -1510,6 +1522,18 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 + The maximum SST file size when the compaction guard is enabled. The configuration prevents SST files from being too large when the compaction guard is enabled. This configuration overrides `target-file-size-base` for the same column family.
 + Default value: `"128MB"`
 + Unit: KB|MB|GB
+
+### `format-version` <span class="version-mark">New in v6.2.0</span>
+
++ The format version of SST files. This configuration item only affects newly written tables. For existing tables, the version information is read from the footer.
++ Optional values:
+    - `0`: Can be read by all TiKV versions. The default checksum type is CRC32 and this version does not support changing the checksum type.
+    - `1`: Can be read by all TiKV versions. Supports non-default checksum types like xxHash. RocksDB only writes data when the checksum type is not CRC32. (version `0` is automatically upgraded)
+    - `2`: Can be read by all TiKV versions. Changes the encoding of compressed blocks using LZ4, BZip2 and Zlib compression.
+    - `3`: Can be read by TiKV v2.1 and later versions. Changes the encoding of the keys in index blocks.
+    - `4`: Can be read by TiKV v3.0 and later versions. Changes the encoding of the values in index blocks.
+    - `5`: Can be read by TiKV v6.1 and later versions. Full and partitioned filters use a faster and more accurate Bloom filter implementation with a different schema.
++ Default value: `2`
 
 ## rocksdb.defaultcf.titan
 
@@ -1811,6 +1835,15 @@ Configuration items related to Raft Engine.
 > This configuration item is only available when [`format-version`](#format-version-new-in-v630) >= 2.
 
 + Determines whether to recycle stale log files in Raft Engine. When it is enabled, logically purged log files will be reserved for recycling. This reduces the long tail latency on write workloads.
++ Default value: `true`
+
+### `prefill-for-recycle` <span class="version-mark">New in v7.0.0</span>
+
+> **Note:**
+>
+> This configuration item only takes effect when [`enable-log-recycle`](#enable-log-recycle-new-in-v630) is set to `true`.
+
++ Determines whether to generate empty log files for log recycling in Raft Engine. When it is enabled, Raft Engine will automatically fill a batch of empty log files for log recycling during initialization, making log recycling effective immediately after initialization.
 + Default value: `false`
 
 ## security
@@ -2212,4 +2245,32 @@ Configuration items related to resource control of the TiKV storage layer.
 
 + Controls whether to enable scheduling for user foreground read/write requests according to [Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru) of the corresponding resource groups. For information about TiDB resource groups and resource control, see [TiDB resource control](/tidb-resource-control.md).
 + Enabling this configuration item only works when [`tidb_enable_resource_control](/system-variables.md#tidb_enable_resource_control-new-in-v660) is enabled on TiDB. When this configuration item is enabled, TiKV will use the priority queue to schedule the queued read/write requests from foreground users. The scheduling priority of a request is inversely related to the amount of resources already consumed by the resource group that receives this request, and positively related to the quota of the corresponding resource group.
-+ Default value: `false`, which means to disable scheduling based on the RU of the resource group.
++ Default value: `true`, which means scheduling based on the RU of the resource group is enabled.
+
+## split
+
+Configuration items related to [Load Base Split](/configure-load-base-split.md).
+
+### `byte-threshold` <span class="version-mark">New in v5.0</span>
+
++ Controls the traffic threshold at which a Region is identified as a hotspot.
++ Default value:
+
+    + `30MiB` per second when [`region-split-size`](#region-split-size) is less than 4 GB.
+    + `100MiB` per second when [`region-split-size`](#region-split-size) is greater than or equal to 4 GB.
+
+### `qps-threshold`
+
++ Controls the QPS threshold at which a Region is identified as a hotspot.
++ Default value:
+
+    + `3000` when [`region-split-size`](#region-split-size) is less than 4 GB.
+    + `7000` when  [`region-split-size`](#region-split-size) is greater than or equal to 4 GB.
+
+### `region-cpu-overload-threshold-ratio` <span class="version-mark">New in v6.2.0</span>
+
++ Controls the CPU usage threshold at which a Region is identified as a hotspot.
++ Default value:
+
+    + `0.25` when [`region-split-size`](#region-split-size) is less than 4 GB.
+    + `0.75` when  [`region-split-size`](#region-split-size) is greater than or equal to 4 GB.

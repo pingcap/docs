@@ -69,7 +69,9 @@ In addition, TiDB does not support the MySQL replication protocol, but provides 
 
 + TiDB does not support adding the `AUTO_INCREMENT` column attribute, and this attribute cannot be recovered once it is removed.
 
-+ See [`AUTO_INCREMENT`](/auto-increment.md) for more details.
++ For TiDB v6.6.0 and earlier versions, TiDB behaves the same as MySQL InnoDB, which requires auto-increment columns to be primary keys or index prefixes. Starting from v7.0.0, TiDB removes the restriction that auto-increment columns must be indexes or index prefixes, which allows you to define table primary keys more flexibly. [#40580](https://github.com/pingcap/tidb/issues/40580)
+
+For more details, see [`AUTO_INCREMENT`](/auto-increment.md).
 
 > **Note:**
 >
@@ -79,20 +81,27 @@ In addition, TiDB does not support the MySQL replication protocol, but provides 
 mysql> CREATE TABLE t(id INT UNIQUE KEY AUTO_INCREMENT);
 Query OK, 0 rows affected (0.05 sec)
 
-mysql> INSERT INTO t VALUES(),(),();
-Query OK, 3 rows affected (0.00 sec)
-Records: 3  Duplicates: 0  Warnings: 0
+mysql> INSERT INTO t VALUES();
+Query OK, 1 rows affected (0.00 sec)
+
+mysql> INSERT INTO t VALUES();
+Query OK, 1 rows affected (0.00 sec)
+
+mysql> INSERT INTO t VALUES();
+Query OK, 1 rows affected (0.00 sec)
 
 mysql> SELECT _tidb_rowid, id FROM t;
 +-------------+------+
 | _tidb_rowid | id   |
 +-------------+------+
-|           4 |    1 |
-|           5 |    2 |
-|           6 |    3 |
+|           2 |    1 |
+|           4 |    3 |
+|           6 |    5 |
 +-------------+------+
 3 rows in set (0.01 sec)
 ```
+
+As you can see, because of the shared allocator, the `id` increments by 2 each time. This behavior is changed in [MySQL compatibility mode](/auto-increment.md#mysql-compatibility-mode), where there is no shared allocator and therefore no skipping of numbers.
 
 <CustomContent platform="tidb">
 
@@ -148,14 +157,15 @@ In TiDB, all supported DDL changes are performed online. Compared with DDL opera
 * The `ALGORITHM={INSTANT,INPLACE,COPY}` syntax functions only as an assertion in TiDB, and does not modify the `ALTER` algorithm. See [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md) for further details.
 * Adding/Dropping the primary key of the `CLUSTERED` type is unsupported. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
 * Different types of indexes (`HASH|BTREE|RTREE|FULLTEXT`) are not supported, and will be parsed and ignored when specified.
-* Table Partitioning supports `HASH`, `RANGE`, and `LIST` partitioning types. For the unsupported partition type, the `Warning: Unsupported partition type %s, treat as normal table` error might be output, where `%s` is a specific partition type.
-* Table Partitioning also supports `ADD`, `DROP`, and `TRUNCATE` operations. Other partition operations are ignored. The following Table Partition syntaxes are not supported:
-    - `PARTITION BY KEY`
-    - `PARTITION BY LINEAR KEY`
-    - `SUBPARTITION`
-    - `{CHECK|TRUNCATE|OPTIMIZE|REPAIR|IMPORT|DISCARD|REBUILD|REORGANIZE|COALESCE} PARTITION`
+* TiDB supports `HASH`, `RANGE`, `LIST`, and `KEY` partitioning types. Currently, the `KEY` partition type does not support partition statements with an empty partition column list. For an unsupported partition type, TiDB returns `Warning: Unsupported partition type %s, treat as normal table`, where `%s` is the specific unsupported partition type.
+* Range, Range COLUMNS, List, and List COLUMNS partitioned tables support `ADD`, `DROP`, `TRUNCATE`, and `REORGANIZE` operations. Other partition operations are ignored.
+* Hash and Key partitioned tables support `ADD`, `COALESCE`, and `TRUNCATE` operations. Other partition operations are ignored.
+* The following syntaxes are not supported for partitioned tables:
 
-    For more details, see [Partitioning](/partitioned-table.md).
+    - `SUBPARTITION`
+    - `{CHECK|OPTIMIZE|REPAIR|IMPORT|DISCARD|REBUILD} PARTITION`
+
+  For more details, see [Partitioning](/partitioned-table.md).
 
 ### Analyze table
 

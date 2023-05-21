@@ -31,6 +31,7 @@ Based on `sql-statement`, TiDB sorts out and exports the following on-site infor
 - The table schema in `sql-statement`
 - The statistics of the table in `sql-statement`
 - The result of `EXPLAIN [ANALYZE] sql-statement`
+- Some internal procudures of query optimization
 
 > **Note:**
 >
@@ -49,7 +50,7 @@ analyze table t;
 plan replayer dump explain select * from t;
 ```
 
-`PLAN REPLAYER DUMP` packages the table information above into a `ZIP` file and returns the file identifier as the execution result. This file is a one-time file. After the file is downloaded, TiDB will delete it.
+`PLAN REPLAYER DUMP` packages the table information above into a `ZIP` file and returns the file identifier as the execution result.
 
 > **Note:**
 >
@@ -246,4 +247,16 @@ The method of downloading the file of `PLAN REPLAYER CAPTURE` is the same as tha
 
 > **Note:**
 >
-> The result file of `PLAN REPLAYER CAPTURE` is kept in the TiDB cluster for up to one hour. After one hour, TiDB deletes the file.
+> The result file of `PLAN REPLAYER CAPTURE` is kept in the TiDB cluster for up to one week. After one week, TiDB deletes the file.
+
+## Use `PLAN REPLAYER CONTINUOUS CAPTURE`
+
+After `PLAN REPLAYER CONTINUOUS CAPTURE` is enabled, TiDB asynchronously records the applications' SQL statements with the `PLAN REPLAYER` method according to their `SQL DIGEST` and `PLAN DIGEST`. For SQL statements and execution plans that share the same DIGEST, `PLAN REPLAYER CONTINUOUS CAPTURE` does not record them repeatedly.
+
+### Enable `PLAN REPLAYER CONTINUOUS CAPTURE`
+
+`PLAN REPLAYER CONTINUOUS CAPTURE` is controlled by the system variable [`tidb_enable_plan_replayer_continuous_capture`](/system-variables.md#tidb_enable_plan_replayer_continuous_capture-new-in-v700). To enable `PLAN REPLAYER CONTINUOUS CAPTURE`, set the value of the system variable to `ON`.
+
+### View the capture results
+
+The method of viewing the capture results of `PLAN REPLAYER CONTINUOUS CAPTURE` is the same as that of [Viewing the capture results of `PLAN REPLAYER CAPTURE`](#view-the-capture-results).
