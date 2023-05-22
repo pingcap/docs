@@ -8,7 +8,7 @@ TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data servic
 
 > **Note:**
 >
-> To use the changefeed feature, make sure that your TiDB cluster version is v6.4.0 or later and the TiKV node size is at least 8 vCPU and 16 GiB.
+> To use the changefeed feature, make sure that your TiDB cluster version is v6.4.0 or later.
 >
 > Currently, TiDB Cloud only allows up to 10 changefeeds per cluster.
 >
