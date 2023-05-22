@@ -191,5 +191,4 @@ storage = ""
 # Specifies whether to store the redo log in a file.
 # The default value is false.
 use-file-backend = false
-
 ```
