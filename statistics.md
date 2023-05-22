@@ -358,7 +358,17 @@ You can perform incremental collection using the following syntax.
 
 ### Automatic update
 
+<CustomContent platform="tidb">
+
 For the `INSERT`, `DELETE`, or `UPDATE` statements, TiDB automatically updates the number of rows and modified rows. TiDB persists this information regularly and the update cycle is 20 * [`stats-lease`](/tidb-configuration-file.md#stats-lease). The default value of `stats-lease` is `3s`. If you specify the value as `0`, TiDB stops updating statistics automatically.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+For the `INSERT`, `DELETE`, or `UPDATE` statements, TiDB automatically updates the number of rows and modified rows. TiDB persists this information regularly and the update cycle is 20 * `stats-lease`. The default value of `stats-lease` is `3s`.
+
+</CustomContent>
 
 ### Relevant system variables
 
