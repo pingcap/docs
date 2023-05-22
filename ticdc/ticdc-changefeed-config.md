@@ -101,8 +101,6 @@ ignore-event = ["drop table"] # Ignore drop table events.
 ignore-sql = ["delete"] # Ignore delete DMLs.
 ignore-insert-value-expr = "price > 1000 and origin = 'no where'" # Ignore insert DMLs that contain the conditions "price > 1000" and "origin = 'no where'".
 
-<<<<<<< HEAD
-=======
 [scheduler]
 # Splits a table into multiple replication ranges based on the number of Regions, and these ranges can be replicated by multiple TiCDC nodes.
 # Note: This configuration item only takes effect on Kafka changefeeds and is not supported on MySQL changefeeds.
@@ -119,7 +117,6 @@ region-threshold = 100000
 #   If not, next check whether the number of Regions is greater than `region-threshold`.
 write-key-threshold = 0
 
->>>>>>> 3b6c1bb7d (ticdc: refine the ticdc changefeed configuration file. (#13412))
 [sink]
 # For the sink of MQ type, you can use dispatchers to configure the event dispatcher.
 # Since v6.1.0, TiDB supports two types of event dispatchers: partition and topic. For more information, see <partition and topic link>.
@@ -144,14 +141,10 @@ terminator = ''
 # Date separator type used in the file directory. Value options are `none`, `year`, `month`, and `day`. `none` is the default value and means that the date is not separated. For more information, see <https://docs.pingcap.com/tidb/dev/ticdc-sink-to-cloud-storage#data-change-records>. 
 # Note: This configuration item only takes effect if the downstream is a storage service.
 date-separator = 'none'
-<<<<<<< HEAD
-# Whether to use partitions as the separation string to store partitions in a table in separate directories. In v6.5.0 and v6.5.1, the default value is false. In v6.5.2 or a later v6.5.x version, the default value is true. It is recommended that you keep the value as `true` to avoid potential data loss in downstream partitioned tables <https://github.com/pingcap/tiflow/issues/8724>. For usage examples, see <https://docs.pingcap.com/tidb/dev/ticdc-sink-to-cloud-storage#data-change-records)>.
-enable-partition-separator = false
-=======
-# Whether to use partitions as the separation string. The default value is true, which means that partitions in a table are stored in separate directories. It is recommended that you keep the value as `true` to avoid potential data loss in downstream partitioned tables <https://github.com/pingcap/tiflow/issues/8724>. For usage examples, see <https://docs.pingcap.com/tidb/dev/ticdc-sink-to-cloud-storage#data-change-records)>. 
+
+# Whether to use partitions as the separation string. The default value is true, which means that partitions in a table are stored in separate directories. For usage examples, see <https://docs.pingcap.com/tidb/dev/ticdc-sink-to-cloud-storage#data-change-records)>. 
 # Note: This configuration item only takes effect if the downstream is a storage service.
-enable-partition-separator = true
->>>>>>> 3b6c1bb7d (ticdc: refine the ticdc changefeed configuration file. (#13412))
+enable-partition-separator = false
 
 # Schema registry URL. 
 # Note: This configuration item only takes effect if the downstream is MQ. 
