@@ -1,23 +1,13 @@
 ---
 title: LOAD DATA | TiDB SQL Statement Reference
 summary: An overview of the usage of LOAD DATA for the TiDB database.
+aliases: ['/tidb/v7.0/sql-statement-operate-load-data-job','/tidb/v7.0/sql-statement-show-load-data']
 ---
 
 # LOAD DATA
 
 The `LOAD DATA` statement batch loads data into a TiDB table.
 
-<<<<<<< HEAD
-In TiDB v7.0.0, the `LOAD DATA` SQL statement becomes more powerful by integrating TiDB Lightning's logical import mode, including the following:
-
-- Support importing data from S3 and GCS
-- Support importing Parquet format data
-- Add new parameters `FORMAT`, `FIELDS DEFINED NULL BY`, and `With batch_size=<number>,detached`
-
-> **Warning:**
->
-> The new capabilities and parameters are experimental. It is not recommended to use it in a production environment.
-=======
 In TiDB v7.0.0, the `LOAD DATA` SQL statement supports the following features:
 
 - Support importing data from S3 and GCS
@@ -26,7 +16,6 @@ In TiDB v7.0.0, the `LOAD DATA` SQL statement supports the following features:
 > **Warning:**
 >
 > The new parameter `FIELDS DEFINED NULL BY` and support for importing data from S3 and GCS in v7.0.0 are experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
->>>>>>> 6197c82b9 (Revert "sql: GA load data logical mode and add experimental physical mode" (#13606))
 
 <CustomContent platform="tidb-cloud">
 
@@ -44,26 +33,11 @@ LoadDataStmt ::=
 
 LocalOpt ::= ('LOCAL')?
 
-<<<<<<< HEAD
-FormatOpt ::=
-    ('FORMAT' ('DELIMITED DATA' | 'SQL FILE' | 'PARQUET'))?
-
-=======
->>>>>>> 6197c82b9 (Revert "sql: GA load data logical mode and add experimental physical mode" (#13606))
 Fields ::=
     ('TERMINATED' 'BY' stringLit
     | ('OPTIONALLY')? 'ENCLOSED' 'BY' stringLit
     | 'ESCAPED' 'BY' stringLit
     | 'DEFINED' 'NULL' 'BY' stringLit ('OPTIONALLY' 'ENCLOSED')?)?
-<<<<<<< HEAD
-
-LoadDataOptionListOpt ::=
-    ('WITH' (LoadDataOption (',' LoadDataOption)*))?
-
-LoadDataOption ::=
-    detached | batch_size '=' numberLiteral
-=======
->>>>>>> 6197c82b9 (Revert "sql: GA load data logical mode and add experimental physical mode" (#13606))
 ```
 
 ## Parameters
@@ -94,13 +68,6 @@ When the data files are stored on S3 or GCS, you can import individual files or 
 - Import all files prefixed with `foo` under the specified path: `s3://<bucket-name>/path/to/data/foo*`
 - Import all files prefixed with `foo` and ending with `.csv` under the specified path: `s3://<bucket-name>/path/to/data/foo*.csv`
 
-<<<<<<< HEAD
-### `FORMAT`
-
-You can use the `FORMAT` parameter to specify the format of the data file. If you do not specify this parameter, you are using the format defined by `DELIMITED DATA`, which is the default data format of MySQL `LOAD DATA`.
-
-=======
->>>>>>> 6197c82b9 (Revert "sql: GA load data logical mode and add experimental physical mode" (#13606))
 ### `Fields`, `Lines`, and `Ignore Lines`
 
 You can use the `Fields` and `Lines` parameters to specify how to handle the data format.
@@ -139,19 +106,6 @@ LINES TERMINATED BY '\n' STARTING BY ''
 
 You can ignore the first `number` lines of a file by configuring the `IGNORE <number> LINES` parameter. For example, if you configure `IGNORE 1 LINES`, the first line of a file is ignored.
 
-<<<<<<< HEAD
-### `WITH detached`
-
-If you do not specify the `LOCAL` parameter, you can use `WITH detached` to make `LOAD DATA` run in the background.
-
-You can view the created jobs via [`SHOW LOAD DATA`](/sql-statements/sql-statement-show-load-data.md) or you can use [`CANCEL LOAD DATA` and `DROP LOAD DATA`](/sql-statements/sql-statement-operate-load-data-job.md) to cancel or delete the created jobs.
-
-### `WITH batch_size=<number>`
-
-You can specify the number of rows to be written to TiDB in a batch with `WITH batch_size=<number>`. The default value is `1000`. `0` means no splitting.
-
-=======
->>>>>>> 6197c82b9 (Revert "sql: GA load data logical mode and add experimental physical mode" (#13606))
 ## Examples
 
 The following example imports data using `LOAD DATA`. Comma is specified as the field delimiter. The double quotation marks that enclose the data are ignored. The first line of the file is ignored.

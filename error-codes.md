@@ -381,37 +381,6 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
     There is an error in the `LOAD DATA` statement. See [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) for supported features.
 
-<<<<<<< HEAD
-* Error Number: 8163
-
-    Unknown `LOAD DATA...WITH...` option. See [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) for supported options.
-
-* Error Number: 8164
-
-    The `LOAD DATA...WITH...` option takes an invalid value. See [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) for valid values.
-
-* Error Number: 8165
-
-    Specify duplicated `LOAD DATA...WITH...` options. Each option can be specified only once.
-
-* Error Number: 8166
-
-    Some `LOAD DATA...WITH...` options can only be used in certain import modes. See [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) to see the supported options.
-
-* Error Number: 8170
-
-    The specified `LOAD DATA` job does not exist or is not created by the current user. Currently you can only view jobs that you created.
-
-* Error Number: 8171
-
-    You cannot perform operation and maintenance for unsupported `LOAD DATA` task status. Refer to the specific error message for action.
-
-* Error Number: 8172
-
-    `LOAD DATA` specified with `LOCAL` cannot be run in the background. Only `LOAD DATA` specified with the S3 or GCS path can be run in the background. See [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) to change the SQL statement.
-
-=======
->>>>>>> 6197c82b9 (Revert "sql: GA load data logical mode and add experimental physical mode" (#13606))
 * Error Number: 8200
 
     The DDL syntax is not yet supported.
