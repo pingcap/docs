@@ -195,6 +195,33 @@ In the course of development, this roadmap is subject to change based on user ne
         </ul>
       </td>
     </tr>
+    <tr>
+      <td>
+        <b>Security</b>
+        <br /><i>Enhance data safety and privacy</i>
+      </td>
+      <td>
+      </td>
+      <td>
+        <ul>
+          <li>
+            <b>Column-/row-level access control</b>
+            <br />
+          </li>
+          </br>
+          <li>
+            <b>Database level encryption</b>
+          </li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>
+            <b>Database Auth-X.509 Auth</b>
+          </li>
+        </ul>
+      </td>
+    </tr>
   </tbody>
 </table>
 
