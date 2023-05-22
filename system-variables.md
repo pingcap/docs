@@ -96,7 +96,7 @@ mysql> SELECT * FROM t1;
 4 rows in set (0.00 sec)
 ```
 
-### 自動コミット {#autocommit}
+### autocommit {#autocommit}
 
 -   スコープ: セッション |グローバル
 -   クラスターに永続化: はい
@@ -178,7 +178,7 @@ mysql> SELECT * FROM t1;
 -   範囲: `[0, 4294967295]`
 -   共通テーブル式の最大再帰深度を制御します。
 
-### データディレクトリ {#datadir}
+### datadir {#datadir}
 
 <CustomContent platform="tidb">
 
@@ -310,13 +310,13 @@ mysql> SELECT * FROM t1;
 -   デフォルト値: `DISABLED`
 -   MySQL との互換性のための読み取り専用変数。サーバーで TLS が有効になっている場合、サーバーによって`YES`に設定されます。
 
-### ホスト名 {#hostname}
+### hostname {#hostname}
 
 -   スコープ: なし
 -   デフォルト値: (システムのホスト名)
 -   読み取り専用変数としての TiDBサーバーのホスト名。
 
-### ID <span class="version-mark">v5.3.0 の新機能</span> {#identity-span-class-version-mark-new-in-v5-3-0-span}
+### identity <span class="version-mark">v5.3.0 の新機能</span> {#identity-span-class-version-mark-new-in-v5-3-0-span}
 
 この変数は[`last_insert_id`](#last_insert_id)のエイリアスです。
 
@@ -376,7 +376,7 @@ mysql> SELECT * FROM t1;
 -   デフォルト値: `OFF`
 -   この変数は読み取り専用です。前のステートメントがキャッシュされたチャンク オブジェクト (チャンク割り当て) を使用するかどうかを示すために使用されます。
 
-### ライセンス {#license}
+### license {#license}
 
 -   スコープ: なし
 -   デフォルト値: `Apache License 2.0`
@@ -417,7 +417,7 @@ mysql> SELECT * FROM t1;
 -   範囲: `[0, 4294967295]`
 -   この変数は、経過時間に基づいて TiDB がパスワードの再利用を制限できるパスワード再利用ポリシーを確立するために使用されます。デフォルト値`0`は、経過時間に基づくパスワード再利用ポリシーを無効にすることを意味します。この変数が正の整数`N`に設定されている場合、過去`N`日間に使用されたパスワードの再利用は許可されません。
 
-### 最大接続数 {#max-connections}
+### max_connections {#max-connections}
 
 -   範囲: グローバル
 -   Persists to cluster: いいえ、接続している現在の TiDB インスタンスにのみ適用されます。
@@ -499,7 +499,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 -   デフォルト値: &quot;&quot;
 -   TiDB の起動時にロードするプラグインを示します。これらのプラグインは、コマンドライン フラグによって指定され、カンマで区切られます。
 
-### ポート {#port}
+### port {#port}
 
 -   スコープ: なし
 -   タイプ: 整数
@@ -566,7 +566,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 >
 > この例では、 `apphost` IP アドレスまたはワイルドカード ( `%` ) に置き換えることをお勧めします。
 
-### ソケット {#socket}
+### socket {#socket}
 
 -   スコープ: なし
 -   デフォルト値: &quot;&quot;
@@ -4261,7 +4261,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
     -   0 より大きい整数: ファイングレイン シャッフル機能が有効になっています。 TiFlashにプッシュされたウィンドウ関数は、複数のスレッドで実行されます。同時実行レベルは次のとおりです。min( `tiflash_fine_grained_shuffle_stream_count` 、 TiFlashノード上の物理スレッドの数)。
 -   理論的には、ウィンドウ関数のパフォーマンスはこの値に比例して向上します。ただし、値が実際の物理スレッド数を超えると、代わりにパフォーマンスが低下します。
 
-### タイムゾーン {#time-zone}
+### time_zone {#time-zone}
 
 -   スコープ: セッション |グローバル
 -   クラスターに永続化: はい
@@ -4269,7 +4269,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 -   この変数は、現在のタイム ゾーンを返します。値は、「-8:00」などのオフセットまたは名前付きゾーン「America/Los_Angeles」として指定できます。
 -   値`SYSTEM` 、タイム ゾーンがシステム ホストと同じであることを意味します。これは、変数[`system_time_zone`](#system_time_zone)を介して利用できます。
 
-### タイムスタンプ {#timestamp}
+### timestamp {#timestamp}
 
 -   スコープ: セッション
 -   タイプ: フロート
@@ -4277,7 +4277,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 -   範囲: `[0, 2147483647]`
 -   この変数の空でない値は`NOW()` `CURRENT_TIMESTAMP()`およびその他の関数のタイムスタンプとして使用される UNIX エポックを示します。この変数は、データの復元または複製で使用される場合があります。
 
-### トランザクション分離 {#transaction-isolation}
+### transaction_isolation {#transaction-isolation}
 
 -   スコープ: セッション |グローバル
 -   クラスターに永続化: はい
@@ -4393,7 +4393,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 -   範囲: `[0, 2147483647]`
 -   この変数は、パスワード複雑度チェックのチェック項目です。パスワードに十分な特殊文字が含まれているかどうかをチェックします。この変数は、 [`validate_password.enable`](#password_reuse_interval-new-in-v650)が有効で、 [`validate_password.policy`](#validate_passwordpolicy-new-in-v650)が`1` (MEDIUM) 以上に設定されている場合にのみ有効です。
 
-### バージョン {#version}
+### version {#version}
 
 -   スコープ: なし
 -   デフォルト値: `5.7.25-TiDB-` (tidb バージョン)
