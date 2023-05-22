@@ -7,6 +7,7 @@ summary: An overview of the usage of LOAD DATA for the TiDB database.
 
 The `LOAD DATA` statement batch loads data into a TiDB table.
 
+<<<<<<< HEAD
 In TiDB v7.0.0, the `LOAD DATA` SQL statement becomes more powerful by integrating TiDB Lightning's logical import mode, including the following:
 
 - Support importing data from S3 and GCS
@@ -16,6 +17,16 @@ In TiDB v7.0.0, the `LOAD DATA` SQL statement becomes more powerful by integrati
 > **Warning:**
 >
 > The new capabilities and parameters are experimental. It is not recommended to use it in a production environment.
+=======
+In TiDB v7.0.0, the `LOAD DATA` SQL statement supports the following features:
+
+- Support importing data from S3 and GCS
+- Add a new parameter `FIELDS DEFINED NULL BY`
+
+> **Warning:**
+>
+> The new parameter `FIELDS DEFINED NULL BY` and support for importing data from S3 and GCS in v7.0.0 are experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+>>>>>>> 6197c82b9 (Revert "sql: GA load data logical mode and add experimental physical mode" (#13606))
 
 <CustomContent platform="tidb-cloud">
 
@@ -29,24 +40,30 @@ In TiDB v7.0.0, the `LOAD DATA` SQL statement becomes more powerful by integrati
 
 ```ebnf+diagram
 LoadDataStmt ::=
-    'LOAD' 'DATA' LocalOpt 'INFILE' stringLit FormatOpt DuplicateOpt 'INTO' 'TABLE' TableName CharsetOpt Fields Lines IgnoreLines ColumnNameOrUserVarListOptWithBrackets LoadDataSetSpecOpt LoadDataOptionListOpt
+    'LOAD' 'DATA' LocalOpt 'INFILE' stringLit DuplicateOpt 'INTO' 'TABLE' TableName CharsetOpt Fields Lines IgnoreLines ColumnNameOrUserVarListOptWithBrackets LoadDataSetSpecOpt
 
 LocalOpt ::= ('LOCAL')?
 
+<<<<<<< HEAD
 FormatOpt ::=
     ('FORMAT' ('DELIMITED DATA' | 'SQL FILE' | 'PARQUET'))?
 
+=======
+>>>>>>> 6197c82b9 (Revert "sql: GA load data logical mode and add experimental physical mode" (#13606))
 Fields ::=
     ('TERMINATED' 'BY' stringLit
     | ('OPTIONALLY')? 'ENCLOSED' 'BY' stringLit
     | 'ESCAPED' 'BY' stringLit
     | 'DEFINED' 'NULL' 'BY' stringLit ('OPTIONALLY' 'ENCLOSED')?)?
+<<<<<<< HEAD
 
 LoadDataOptionListOpt ::=
     ('WITH' (LoadDataOption (',' LoadDataOption)*))?
 
 LoadDataOption ::=
     detached | batch_size '=' numberLiteral
+=======
+>>>>>>> 6197c82b9 (Revert "sql: GA load data logical mode and add experimental physical mode" (#13606))
 ```
 
 ## Parameters
@@ -77,13 +94,14 @@ When the data files are stored on S3 or GCS, you can import individual files or 
 - Import all files prefixed with `foo` under the specified path: `s3://<bucket-name>/path/to/data/foo*`
 - Import all files prefixed with `foo` and ending with `.csv` under the specified path: `s3://<bucket-name>/path/to/data/foo*.csv`
 
+<<<<<<< HEAD
 ### `FORMAT`
 
 You can use the `FORMAT` parameter to specify the format of the data file. If you do not specify this parameter, you are using the format defined by `DELIMITED DATA`, which is the default data format of MySQL `LOAD DATA`.
 
+=======
+>>>>>>> 6197c82b9 (Revert "sql: GA load data logical mode and add experimental physical mode" (#13606))
 ### `Fields`, `Lines`, and `Ignore Lines`
-
-You can specify the `Fields`, `Lines`, and `Ignore Lines` parameters only when the data format is `DELIMITED DATA`.
 
 You can use the `Fields` and `Lines` parameters to specify how to handle the data format.
 
@@ -112,7 +130,7 @@ If you want to extract `bob`, `20`, and `street 1`, specify the field delimiter 
 FIELDS TERMINATED BY ',' ENCLOSED BY '\"' LINES TERMINATED BY '\r\n'
 ```
 
-If the data format is `DELIMITED DATA` and you do not specify the parameters above, the imported data is processed in the following way by default:
+If you do not specify the preceding parameters, the imported data is processed in the following way by default:
 
 ```sql
 FIELDS TERMINATED BY '\t' ENCLOSED BY '' ESCAPED BY '\\'
@@ -121,6 +139,7 @@ LINES TERMINATED BY '\n' STARTING BY ''
 
 You can ignore the first `number` lines of a file by configuring the `IGNORE <number> LINES` parameter. For example, if you configure `IGNORE 1 LINES`, the first line of a file is ignored.
 
+<<<<<<< HEAD
 ### `WITH detached`
 
 If you do not specify the `LOCAL` parameter, you can use `WITH detached` to make `LOAD DATA` run in the background.
@@ -131,35 +150,9 @@ You can view the created jobs via [`SHOW LOAD DATA`](/sql-statements/sql-stateme
 
 You can specify the number of rows to be written to TiDB in a batch with `WITH batch_size=<number>`. The default value is `1000`. `0` means no splitting.
 
+=======
+>>>>>>> 6197c82b9 (Revert "sql: GA load data logical mode and add experimental physical mode" (#13606))
 ## Examples
-
-For a background job, the corresponding job id is output after the job execution.
-
-```sql
-LOAD DATA INFILE 's3://bucket-name/test.csv?access_key=XXX&secret_access_key=XXX' INTO TABLE my_db.my_table FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '' LINES TERMINATED BY '\n' WITH detached;
-```
-
-```sql
-+--------+
-| Job_ID |
-+--------+
-|      1 |
-+--------+
-1 row in set (3.14 sec)
-```
-
-```sql
-SHOW LOAD DATA JOB 1;
-```
-
-```sql
-+--------+----------------------------+----------------------------+---------------------+---------------------------+--------------------+-------------+------------+-----------+------------+------------------+------------------+-------------+----------------+
-| Job_ID | Create_Time                | Start_Time                 | End_Time            | Data_Source               | Target_Table       | Import_Mode | Created_By | Job_State | Job_Status | Source_File_Size | Loaded_File_Size | Result_Code | Result_Message |
-+--------+----------------------------+----------------------------+---------------------+---------------------------+-------------------+-------------+------------+-----------+------------+------------------+------------------+-------------+----------------+
-|      1 | 2023-03-16 22:29:12.990576 | 2023-03-16 22:29:12.991951 | 0000-00-00 00:00:00 | s3://bucket-name/test.csv | `my_db`.`my_table` | logical     | root@%     | loading   | running    | 52.43MB          | 43.58MB          |           0 |                |
-+--------+----------------------------+----------------------------+---------------------+---------------------------+--------------------+-------------+------------+-----------+------------+------------------+------------------+-------------+----------------+
-1 row in set (0.01 sec)
-```
 
 The following example imports data using `LOAD DATA`. Comma is specified as the field delimiter. The double quotation marks that enclose the data are ignored. The first line of the file is ignored.
 
@@ -202,8 +195,7 @@ The syntax of the `LOAD DATA` statement is compatible with that of MySQL, except
 >
 > - For versions earlier than TiDB v4.0.0, `LOAD DATA` commits every 20000 rows.
 > - For versions from TiDB v4.0.0 to v6.6.0, TiDB commits all rows in one transaction by default.
-> - Starting from TiDB v7.0.0, the number of rows to be committed in a batch is controlled by the `WITH batch_size=<number>` parameter of the `LOAD DATA` statement, which defaults to 1000 rows per commit.
-> - After upgrading from TiDB v4.0.0 or earlier versions, `ERROR 8004 (HY000) at line 1: Transaction is too large, size: 100000058` might occur. The recommended way to resolve this error is to increase the [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit) value in your `tidb.toml` file. If you are unable to increase this limit, you can also restore the behavior before the upgrade by setting [`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size) to `20000`.
+> - After upgrading from TiDB v4.0.0 or earlier versions, `ERROR 8004 (HY000) at line 1: Transaction is too large, size: 100000058` might occur. The recommended way to resolve this error is to increase the [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit) value in your `tidb.toml` file. If you are unable to increase this limit, you can also restore the behavior before the upgrade by setting [`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size) to `20000`. Note that starting from v7.0.0, `tidb_dml_batch_size` no longer takes effect on the `LOAD DATA` statement.
 > - No matter how many rows are committed in a transaction, `LOAD DATA` is not rolled back by the [`ROLLBACK`](/sql-statements/sql-statement-rollback.md) statement in an explicit transaction.
 > - The `LOAD DATA` statement is always executed in optimistic transaction mode, regardless of the TiDB transaction mode configuration.
 
@@ -229,9 +221,6 @@ The syntax of the `LOAD DATA` statement is compatible with that of MySQL, except
 * [INSERT](/sql-statements/sql-statement-insert.md)
 * [TiDB Optimistic Transaction Model](/optimistic-transaction.md)
 * [TiDB Pessimistic Transaction Mode](/pessimistic-transaction.md)
-* [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)
-* [`SHOW LOAD DATA`](/sql-statements/sql-statement-show-load-data.md)
-* [`CANCEL LOAD DATA` and `DROP LOAD DATA`](/sql-statements/sql-statement-operate-load-data-job.md)
 
 </CustomContent>
 
@@ -240,8 +229,5 @@ The syntax of the `LOAD DATA` statement is compatible with that of MySQL, except
 * [INSERT](/sql-statements/sql-statement-insert.md)
 * [TiDB Optimistic Transaction Model](/optimistic-transaction.md)
 * [TiDB Pessimistic Transaction Mode](/pessimistic-transaction.md)
-* [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview)
-* [`SHOW LOAD DATA`](/sql-statements/sql-statement-show-load-data.md)
-* [`CANCEL LOAD DATA` and `DROP LOAD DATA`](/sql-statements/sql-statement-operate-load-data-job.md)
 
 </CustomContent>

@@ -361,17 +361,9 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
     Currently `LOAD DATA` does not support importing data locally from TiDB server. You can specify `LOCAL` to import from client, or upload data to S3 or GCS and then import it. See [`LOAD DATA`](/sql-statements/sql-statement-load-data.md).
 
-* Error Number: 8155
-
-    Currently, `LOAD DATA` only supports importing Parquet files from S3 or GCS. You can upload Parquet files to S3 or GCS and then import them. See [`LOAD DATA`](/sql-statements/sql-statement-load-data.md).
-
 * Error Number: 8156
 
     The file path of the `LOAD DATA` statement cannot be empty. You need to set the correct path before importing. See [`LOAD DATA`](/sql-statements/sql-statement-load-data.md).
-
-* Error Number: 8157
-
-    Unsupported data format. See [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) to check the supported data formats.
 
 * Error Number: 8158
 
@@ -389,6 +381,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
     There is an error in the `LOAD DATA` statement. See [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) for supported features.
 
+<<<<<<< HEAD
 * Error Number: 8163
 
     Unknown `LOAD DATA...WITH...` option. See [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) for supported options.
@@ -417,6 +410,8 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
     `LOAD DATA` specified with `LOCAL` cannot be run in the background. Only `LOAD DATA` specified with the S3 or GCS path can be run in the background. See [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) to change the SQL statement.
 
+=======
+>>>>>>> 6197c82b9 (Revert "sql: GA load data logical mode and add experimental physical mode" (#13606))
 * Error Number: 8200
 
     The DDL syntax is not yet supported.
