@@ -59,7 +59,7 @@ In v6.5 LTS, TiDB provides multi-level support for different quality standards o
 
 |  Libraries required for compiling and building TiDB   |  Version   |
 |   :---   |   :---   |
-|   Golang  |  1.18.5 |
+|   Golang  |  1.19 |
 |   Rust    |   nightly-2022-07-31 or later  |
 |  GCC      |   7.x      |
 |  LLVM     |  13.0 or later  |
