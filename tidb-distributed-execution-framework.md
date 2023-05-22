@@ -112,4 +112,13 @@ As shown in the preceding diagram, the execution of backend tasks in the distrib
 
 ## See also
 
+<CustomContent platform="tidb">
+
 * [Execution Principles and Best Practices of DDL Statements](/ddl-introduction.md)
+
+</CustomContent>
+<CustomContent platform="tidb-cloud">
+
+* [Execution Principles and Best Practices of DDL Statements](https://docs.pingcap.com/tidb/stable/ddl-introduction)
+
+</CustomContent>
