@@ -27,7 +27,7 @@ TiCDC disables data integrity validation by default. To enable it, perform the f
 
     This configuration only takes effect for newly created sessions, so you need to reconnect to TiDB.
 
-2. In the configuration file specified by the `--config` parameter when you create a changefeed, add the following configurations:
+2. In the [configuration file](/ticdc/ticdc-changefeed-config.md##changefeed-configuration-parameters) specified by the `--config` parameter when you create a changefeed, add the following configurations:
 
     ```toml
     [integrity]
@@ -35,13 +35,17 @@ TiCDC disables data integrity validation by default. To enable it, perform the f
     corruption-handle-level = "warn"
     ```
 
-3. When using Avro as the data encoding format, you need to set [`enable-tidb-extension=true`](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka), [`avro-decimal-handling-mode=string`](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka), and [`avro-bigint-unsigned-handling-mode=string`](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka) in the [`sink-uri`](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka). The following is an example:
+3. When using Avro as the data encoding format, you need to set [`enable-tidb-extension=true`](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka) in the [`sink-uri`](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka). To prevent numerical precision loss during network transmission, which can cause Checksum validation failures, you also need to set [`avro-decimal-handling-mode=string`](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka) and [`avro-bigint-unsigned-handling-mode=string`](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka). The following is an example:
 
     ```shell
     cdc cli changefeed create --server=http://127.0.0.1:8300 --changefeed-id="kafka-avro-enable-extension" --sink-uri="kafka://127.0.0.1:9092/topic-name?protocol=avro&enable-tidb-extension=true&avro-decimal-handling-mode=string&avro-bigint-unsigned-handling-mode=string" --schema-registry=http://127.0.0.1:8081 --config changefeed_config.toml
     ```
 
     With the preceding configuration, each message written to Kafka by the Changefeed will include the corresponding data's checksum. You can verify data consistency based on these checksum values.
+
+    > **Note:**
+    >
+    > For existing Changefeeds, if `avro-decimal-handling-mode` and `avro-bigint-unsigned-handling-mode` are not set, enabling the Checksum validation feature might cause Schema compatibility issues. To resolve this issue, you can modify the compatibility type of the Schema Registry to `NONE`. For more details, see [Schema Registry](https://docs.confluent.io/platform/current/schema-registry/fundamentals/avro.html#no-compatibility-checking).
 
 ## Disable the feature
 
@@ -92,5 +96,9 @@ fn checksum(columns) {
     * VARBIANRY, BINARY, and BLOB types (including TINY, MEDIUM, and LONG) are directly encoded as bytes.
     * VARCHAR, CHAR, and TEXT types (including TINY, MEDIUM, and LONG) are encoded as UTF8 bytes.
     * NULL and GEOMETRY types are excluded from the checksum calculation and this function returns empty bytes.
+
+> **Note:**
+>
+> After enabling the Checksum validation feature, DECIMAL and UNSIGNED BIGINT types data will be converted to string types. Therefore, in the downstream consumer code, you need to convert them back to their corresponding numerical types before calculating Checksum values.
 
 The consumer code written in Golang implements steps such as decoding data read from Kafka, sorting by schema fields, and calculating the checksum value. For more information, see [`avro/decoder.go`](https://github.com/pingcap/tiflow/blob/master/pkg/sink/codec/avro/decoder.go).
