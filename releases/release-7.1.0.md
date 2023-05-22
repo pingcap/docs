@@ -26,14 +26,16 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
 <tbody>
   <tr>
     <td rowspan="3">Scalability and Performance</td>
-    <td><a href="https://docs.pingcap.com/tidb/dev/tiflash-disaggregated-and-s3" target="_blank">TiFlash decouples storage and compute, and adds S3 shared storage (experimental)</a></td>
+    <td>TiFlash supports the <a href="https://docs.pingcap.com/tidb/dev/tiflash-disaggregated-and-s3" target="_blank">disaggregated storage and compute architecture and S3 shared storage</a> (experimental, introduced in v7.0.0)</td>
     <td>TiFlash introduces a cloud-native architecture as an option:
-Disaggregates TiFlash's compute and storage, which is a milestone for elastic HTAP resource utilization.
-Introduces S3-based storage engine, which can provide shared storage at a lower cost.
+      <ul>
+        <li>Disaggregates TiFlash's compute and storage, which is a milestone for elastic HTAP resource utilization.</li>
+        <li>Introduces S3-based storage engine, which can provide shared storage at a lower cost.</li>
+      </ul>
     </td>
   </tr>
   <tr>
-    <td><a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_store_batch_size" target="_blank">TiKV supports batch aggregating data requests</a></td>
+    <td>TiKV supports <a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_store_batch_size" target="_blank">batch aggregating data requests</a> (introduced in v6.6.0) </td>
     <td>This enhancement significantly reduces total RPCs in TiKV batch-get operations. In situations where data is highly dispersed and the gRPC thread pool has insufficient resources, batching coprocessor requests can improve performance by more than 50%.</td>
   </tr>
   <tr>
@@ -43,10 +45,10 @@ Introduces S3-based storage engine, which can provide shared storage at a lower 
   <tr>
     <td rowspan="2">Reliability and availability</td>
     <td><a href="https://docs.pingcap.com/tidb/dev/tidb-resource-control" target="_blank">Resource control by resource groups</a> (GA)</td>
-   <td>GA'ed resource groups to allocate and isolate resources for different workloads in the same cluster. This significantly adds to multi-application cluster stability and sets the stage for multi-tenancy. GA'ing this feature includes simple tooling for estimating cluster capacity and workload quotas.</td>
+   <td>Support resource management based on resource groups, which allocates and isolates resources for different workloads in the same cluster. This feature significantly enhances the stability of multi-application clusters and laies the foundation for multi-tenancy. In v7.1.0, this feature introduces the ability to estimate system capacity based on actual workload or hardware deployment.</td>
   </tr>
   <tr>
-    <td><a href="https://docs.pingcap.com/tidb/dev/tiflash-spill-disk" target="_blank">TiFlash supports spill to disk</a> (GA)</td>
+    <td>TiFlash supports <a href="https://docs.pingcap.com/tidb/dev/tiflash-spill-disk" target="_blank">spill to disk</a> (introduced in v7.0.0)</td>
     <td>TiFlash supports intermediate result spill to disk to mitigate OOMs in data-intensive operations such as aggregations, sorts, and hash joins.</td>
   </tr>
   <tr>
@@ -55,7 +57,7 @@ Introduces S3-based storage engine, which can provide shared storage at a lower 
     <td>Support MySQL-compatible multi-valued indexes and enhance the JSON type to improve compatibility with MySQL 8.0. This feature improves the efficiency of membership checks on multi-valued columns.</td>
   </tr>
   <tr>
-    <td><a href="https://docs.pingcap.com/tidb/dev/time-to-live" target="_blank">Row-level TTL</a> (GA)</td>
+    <td><a href="https://docs.pingcap.com/tidb/dev/time-to-live" target="_blank">Row-level TTL</a> (GA in v7.0.0)</td>
     <td>Support managing database size and improve performance by automatically expiring data of a certain age.</td>
   </tr>
   <tr>
@@ -64,8 +66,8 @@ Introduces S3-based storage engine, which can provide shared storage at a lower 
   </tr>
   <tr>
   <td rowspan="1">Security</td>
-    <td>Added LDAP integration (GA)</td>
-    <td>TiDB adds support for LDAP authentication. This is compatible with the <a href="https://dev.mysql.com/doc/refman/8.0/en/ldap-pluggable-authentication.html" target="_blank">MySQL implementation</a>.</td>
+    <td><a href="https://docs.pingcap.com/tidb/dev/security-compatibility-with-mysql" target="_blank">LDAP authentication</a></td>
+    <td>TiDB supports LDAP authentication, which is compatible with <a href="https://dev.mysql.com/doc/refman/8.0/en/ldap-pluggable-authentication.html" target="_blank">MySQL 8.0</a>.</td>
   </tr>
 </tbody>
 </table>
