@@ -1,7 +1,11 @@
 ---
 title: LOAD DATA | TiDB SQL Statement Reference
 summary: An overview of the usage of LOAD DATA for the TiDB database.
+<<<<<<< HEAD
 aliases: ['/docs/dev/sql-statements/sql-statement-load-data/','/docs/dev/reference/sql/statements/load-data/']
+=======
+aliases: ['/tidb/v7.0/sql-statement-operate-load-data-job','/tidb/v7.0/sql-statement-show-load-data']
+>>>>>>> 08a4251ef (Revert "sql: GA load data logical mode and add experimental physical mode" (#13606) (#13642))
 ---
 
 # LOAD DATA
