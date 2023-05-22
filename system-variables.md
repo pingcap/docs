@@ -4897,8 +4897,8 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Persists to cluster: Yes
 - Type: Enumeration
 - Default value: `SCRAM-SHA-1`
-- Possible values: `SCRAM-SHA-1`, `SCRAM-SHA-256`, `GSSAPI`.
-- For LDAP SASL authentication, the authentication method name.
+- Possible values: `SCRAM-SHA-1`, `SCRAM-SHA-256`, and `GSSAPI`.
+- For LDAP SASL authentication, this variable specifies the authentication method name.
 
 ### authentication_ldap_sasl_bind_base_dn <span class="version-mark">New in v7.1.0</span>
 
@@ -4914,7 +4914,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Persists to cluster: Yes
 - Type: String
 - Default value: ""
-- For LDAP SASL authentication, the `dn` used to login to the LDAP server to search users.
+- For LDAP SASL authentication, this variable specifies the `dn` used to login to the LDAP server to search users.
 
 ### authentication_ldap_sasl_bind_root_pwd <span class="version-mark">New in v7.1.0</span>
 
@@ -4922,7 +4922,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Persists to cluster: Yes
 - Type: String
 - Default value: ""
-- For LDAP SASL authentication, the password used to login to the LDAP server to search users.
+- For LDAP SASL authentication, this variable specifies the password used to log in to the LDAP server to search users.
 
 ### authentication_ldap_sasl_ca_path <span class="version-mark">New in v7.1.0</span>
 
@@ -4930,7 +4930,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Persists to cluster: Yes
 - Type: String
 - Default value: ""
-- For LDAP SASL authentication, the absolute path of the certificate authority file for StartTLS connections.
+- For LDAP SASL authentication, this variable specifies the absolute path of the certificate authority file for StartTLS connections.
 
 ### authentication_ldap_sasl_init_pool_size <span class="version-mark">New in v7.1.0</span>
 
@@ -4939,7 +4939,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Type: Integer
 - Default value: `10`
 - Range: `[1, 32767]`
-- For LDAP SASL authentication, the initial size of the pool of connections to the LDAP server.
+- For LDAP SASL authentication, this variable specifies the initial size of the pool of connections to the LDAP server.
 
 ### authentication_ldap_sasl_max_pool_size <span class="version-mark">New in v7.1.0</span>
 
@@ -4948,7 +4948,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Type: Integer
 - Default value: `1000`
 - Range: `[1, 32767]`
-- For LDAP SASL authentication, the maximum size of the pool of connections to the LDAP server.
+- For LDAP SASL authentication, this variable specifies the maximum size of the pool of connections to the LDAP server.
 
 ### authentication_ldap_sasl_server_host <span class="version-mark">New in v7.1.0</span>
 
@@ -4956,7 +4956,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Persists to cluster: Yes
 - Type: String
 - Default value: ""
-- For LDAP SASL authentication, the LDAP server host.
+- For LDAP SASL authentication, this variable specifies the LDAP server host name or IP address.
 
 ### authentication_ldap_sasl_server_port <span class="version-mark">New in v7.1.0</span>
 
@@ -4965,7 +4965,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Type: Integer
 - Default value: `389`
 - Range: `[1, 65535]`
-- For LDAP SASL authentication, the LDAP server TCP/IP port number.
+- For LDAP SASL authentication, this variable specifies the TCP/IP port number of the LDAP server.
 
 ### authentication_ldap_sasl_tls <span class="version-mark">New in v7.1.0</span>
 
@@ -4973,7 +4973,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Persists to cluster: Yes
 - Type: Boolean
 - Default value: `OFF`
-- For LDAP SASL authentication, whether connections by the plugin to the LDAP server are protected with StartTLS.
+- For LDAP SASL authentication, this variable controls whether connections by the plugin to the LDAP server are protected with StartTLS.
 
 ### authentication_ldap_simple_auth_method_name <span class="version-mark">New in v7.1.0</span>
 
@@ -4982,7 +4982,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Type: Enumeration
 - Default value: `SIMPLE`
 - Possible values: `SIMPLE`.
-- For LDAP simple authentication, the authentication method name. The only supported value is `SIMPLE`.
+- For LDAP simple authentication, this variable specifies the authentication method name. The only supported value is `SIMPLE`.
 
 ### authentication_ldap_simple_bind_base_dn <span class="version-mark">New in v7.1.0</span>
 
@@ -4990,7 +4990,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Persists to cluster: Yes
 - Type: String
 - Default value: ""
-- For LDAP simple authentication, this variable limits the search scope within the search tree. If a user is created without `AS ...` clause, TiDB will automatically search the `dn` in LDAP server according to the user name.
+- For LDAP simple authentication, this variable limits the search scope within the search tree. If a user is created without the `AS ...` clause, TiDB will automatically search the `dn` in LDAP server according to the user name.
 
 ### authentication_ldap_simple_bind_root_dn <span class="version-mark">New in v7.1.0</span>
 
@@ -4998,7 +4998,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Persists to cluster: Yes
 - Type: String
 - Default value: ""
-- For LDAP simple authentication, the `dn` used to login to the LDAP server to search users.
+- For LDAP simple authentication, this variable specifies the `dn` used to log in to the LDAP server to search users.
 
 ### authentication_ldap_simple_bind_root_pwd <span class="version-mark">New in v7.1.0</span>
 
@@ -5006,7 +5006,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Persists to cluster: Yes
 - Type: String
 - Default value: ""
-- For LDAP simple authentication, the password used to login to the LDAP server to search users.
+- For LDAP simple authentication, this variable specifies the password used to log in to the LDAP server to search users.
 
 ### authentication_ldap_simple_ca_path <span class="version-mark">New in v7.1.0</span>
 
@@ -5014,7 +5014,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Persists to cluster: Yes
 - Type: String
 - Default value: ""
-- For LDAP simple authentication, the absolute path of the certificate authority file for StartTLS connections.
+- For LDAP simple authentication, this variable specifies the absolute path of the certificate authority file for StartTLS connections.
 
 ### authentication_ldap_simple_init_pool_size <span class="version-mark">New in v7.1.0</span>
 
@@ -5023,7 +5023,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Type: Integer
 - Default value: `10`
 - Range: `[1, 32767]`
-- For LDAP simple authentication, the initial size of the pool of connections to the LDAP server.
+- For LDAP simple authentication, this variable specifies the initial size of the pool of connections to the LDAP server.
 
 ### authentication_ldap_simple_max_pool_size <span class="version-mark">New in v7.1.0</span>
 
@@ -5032,7 +5032,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Type: Integer
 - Default value: `1000`
 - Range: `[1, 32767]`
-- For LDAP simple authentication, the maximum size of the pool of connections to the LDAP server.
+- For LDAP simple authentication, this variable specifies the maximum size of the pool of connections to the LDAP server.
 
 ### authentication_ldap_simple_server_host <span class="version-mark">New in v7.1.0</span>
 
@@ -5040,7 +5040,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Persists to cluster: Yes
 - Type: String
 - Default value: ""
-- For LDAP simple authentication, the LDAP server host.
+- For LDAP simple authentication, this variable specifies the LDAP server host name or IP address.
 
 ### authentication_ldap_simple_server_port <span class="version-mark">New in v7.1.0</span>
 
@@ -5049,7 +5049,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Type: Integer
 - Default value: `389`
 - Range: `[1, 65535]`
-- For LDAP simple authentication, the LDAP server TCP/IP port number.
+- For LDAP simple authentication, this variable specifies the TCP/IP port number of the LDAP server.
 
 ### authentication_ldap_simple_tls <span class="version-mark">New in v7.1.0</span>
 
@@ -5057,4 +5057,4 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Persists to cluster: Yes
 - Type: Boolean
 - Default value: `OFF`
-- For LDAP simple authentication, whether connections by the plugin to the LDAP server are protected with StartTLS.
+- For LDAP simple authentication, this variable controls whether connections by the plugin to the LDAP server are protected with StartTLS.
