@@ -64,7 +64,7 @@ When the memory usage of a tidb-server instance reaches a certain proportion of 
 
 > **Note:**
 >
-> In a hybrid deployment scenario, `tidb_server_memory_limit` is the memory usage threshold for a single tidb-server instance, instead of the total memory threshold for the whole physical machine memory.
+> In a hybrid deployment scenario, `tidb_server_memory_limit` is the memory usage threshold for a single tidb-server instance, instead of the total memory threshold for the whole physical machine.
 
 ## View the memory usage of the current tidb-server instance using the INFORMATION_SCHEMA system table
 
