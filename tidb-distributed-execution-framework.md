@@ -42,6 +42,8 @@ CREATE INDEX idx1 ON table t1(c1);
 
 Before using the distributed framework, you need to enable the [Fast Online DDL](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) mode.
 
+<CustomContent platform="tidb">
+
 1. Adjust the following system variables related to Fast Online DDL:
 
     * [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630): used to enable Fast Online DDL mode. It is enabled by default starting from TiDB v6.5.0.
@@ -54,6 +56,17 @@ Before using the distributed framework, you need to enable the [Fast Online DDL]
 > **Note:**
 >
 > Before you upgrade TiDB to v6.5.0 or later, it is recommended that you check whether the [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630) path of TiDB is correctly mounted to an SSD disk. This path is a TiDB configuration item, which takes effect after TiDB is restarted. Therefore, setting this configuration item in advance before upgrading can avoid another restart.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Adjust the following system variables related to Fast Online DDL:
+
+* [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630): used to enable Fast Online DDL mode. It is enabled by default starting from TiDB v6.5.0.
+* [`tidb_ddl_disk_quota`](/system-variables.md#tidb_ddl_disk_quota-new-in-v630): used to control the maximum quota of local disks that can be used in Fast Online DDL mode.
+
+</CustomContent>
 
 ## Usage
 
