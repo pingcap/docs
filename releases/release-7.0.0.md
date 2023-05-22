@@ -56,8 +56,8 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
   </tr>
   <tr>
     <td rowspan="2">DB Operations and Observability<br/></td>
-    <td><a href="https://docs.pingcap.com/tidb/v7.0/sql-statement-load-data" target="_blank">The <code>LOAD DATA</code> statement integrates with TiDB Lightning</a> (experimental)</td>
-    <td>The <code>LOAD DATA</code> SQL statement becomes more powerful by integrating TiDB Lightning's logical import mode, such as supporting data import from S3/GCS.<br/></td>
+    <td>TiDB enhances the functionalities of <a href="https://docs.pingcap.com/tidb/v7.0/sql-statement-load-data" target="_blank"><code>LOAD DATA</code> statements</a> (experimental)</td>
+    <td>TiDB enhances the functionalities of <code>LOAD DATA</code> SQL statements, such as supporting data import from S3/GCS.<br/></td>
   </tr>
   <tr>
     <td>TiCDC supports <a href="https://docs.pingcap.com/tidb/v7.0/ticdc-sink-to-cloud-storage" target="_blank">object storage sink</a> (GA)</td>
@@ -258,9 +258,9 @@ In v7.0.0-DMR, the key new features and improvements are as follows:
 
 ### Data migration
 
-* The `LOAD DATA` statement integrates with TiDB Lightning, so you can use the `LOAD DATA` statement to complete data import tasks that used to rely only on TiDB Lightning (experimental) [#40499](https://github.com/pingcap/tidb/issues/40499) @[lance6716](https://github.com/lance6716)
+* Enhance the functionalities of `LOAD DATA` statements and support importing data from cloud storage (experimental) [#40499](https://github.com/pingcap/tidb/issues/40499) @[lance6716](https://github.com/lance6716)
 
-    Before integrating TiDB Lightning, the `LOAD DATA` statement could only import data files from the client side. If you wanted to import data from cloud storage, you had to rely on TiDB Lightning. However, deploying TiDB Lightning separately would incur additional deployment and management costs. By integrating the TiDB Lightning logical import capability (TiDB Backend) into the `LOAD DATA` statement, you can not only eliminate the deployment and management costs of TiDB Lightning, but also greatly extend the capabilities of the `LOAD DATA` statement with the TiDB Lightning features. Some examples of the extended functionality are as follows:
+    Before TiDB v7.0.0, the `LOAD DATA` statement could only import data files from the client side. If you wanted to import data from cloud storage, you had to rely on TiDB Lightning. However, deploying TiDB Lightning separately would bring additional deployment and management costs. In v7.0.0, you can directly import data from cloud storage using the `LOAD DATA` statement. Some examples of the feature are as follows:
 
     - Supports importing data from Amazon S3 and Google Cloud Storage to TiDB. Supports importing multiple source files to TiDB in one go with wildcards.
     - Support using `DEFINED NULL BY` to define null.
