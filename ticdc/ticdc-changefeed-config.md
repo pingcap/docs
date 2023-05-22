@@ -138,19 +138,12 @@ protocol = "canal-json"
 # The following three configuration items are only used when you replicate data to storage sinks and can be ignored when replicating data to MQ or MySQL sinks.
 # Row terminator, used for separating two data change events. The default value is an empty string, which means "\r\n" is used.
 terminator = ''
-<<<<<<< HEAD
+
 # Date separator type used in the file directory. Value options are `none`, `year`, `month`, and `day`. `none` is the default value and means that the date is not separated. For more information, see <https://docs.pingcap.com/tidb/v7.0/ticdc-sink-to-cloud-storage#data-change-records>.
 date-separator = 'none'
-# Whether to use partitions as the separation string. The default value is false, which means that partitions in a table are not stored in separate directories. It is recommended that you set the value as `true` to avoid potential data loss in downstream partitioned tables <https://github.com/pingcap/tiflow/issues/8724>. For usage examples, see <https://docs.pingcap.com/tidb/v7.0/ticdc-sink-to-cloud-storage#data-change-records>.
+# Whether to use partitions as the separation string. The default value is false, which means that partitions in a table are not stored in separate directories. For detailed examples, see <https://docs.pingcap.com/tidb/v7.0/ticdc-sink-to-cloud-storage#data-change-records>.
+# Note: This configuration item only takes effect if the downstream is a storage service.
 enable-partition-separator = false
-=======
-# Date separator type used in the file directory. Value options are `none`, `year`, `month`, and `day`. `none` is the default value and means that the date is not separated. For more information, see <https://docs.pingcap.com/tidb/dev/ticdc-sink-to-cloud-storage#data-change-records>. 
-# Note: This configuration item only takes effect if the downstream is a storage service.
-date-separator = 'none'
-# Whether to use partitions as the separation string. The default value is true, which means that partitions in a table are stored in separate directories. It is recommended that you keep the value as `true` to avoid potential data loss in downstream partitioned tables <https://github.com/pingcap/tiflow/issues/8724>. For usage examples, see <https://docs.pingcap.com/tidb/dev/ticdc-sink-to-cloud-storage#data-change-records)>. 
-# Note: This configuration item only takes effect if the downstream is a storage service.
-enable-partition-separator = true
->>>>>>> 3b6c1bb7d (ticdc: refine the ticdc changefeed configuration file. (#13412))
 
 # Schema registry URL. 
 # Note: This configuration item only takes effect if the downstream is MQ. 
