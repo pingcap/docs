@@ -140,7 +140,7 @@ Introduces S3-based storage engine, which can provide shared storage at a lower 
 
     In TiDB v7.1.0, this feature introduces the ability to estimate system capacity based on actual workload or hardware deployment. The estimation ability provides you with a more accurate reference for capacity planning and assists you in better managing TiDB resource allocation to meet the stability needs of enterprise-level scenarios.
 
-    To improve user experience, TiDB Dashboard provides a [resource control management page](/dashboard/dashboard-resource-control.md). You can view the resource group configuration on this page and estimate capacities in a visual way to facilitate reasonable resource allocation.
+    To improve user experience, TiDB Dashboard provides the [Resource Manager page](/dashboard/dashboard-resource-control.md). You can view the resource group configuration on this page and estimate cluster capacity in a visual way to facilitate reasonable resource allocation.
 
     For more information, see [documentation](/tidb-resource-control.md).
 
@@ -242,13 +242,13 @@ Introduces S3-based storage engine, which can provide shared storage at a lower 
 
     For more information, see [documentation](/ddl-introduction.md#ddl-related-commands).
 
-* Support smooth cluster upgrade without manually canceling DDL operations [#39751](https://github.com/pingcap/tidb/issues/39751) @[zimulala](https://github.com/zimulala) @[hawkingrei](https://github.com/hawkingrei) **tw:ran-huang**
+* Support smooth cluster upgrade without manually canceling DDL operations [#39751](https://github.com/pingcap/tidb/issues/39751) @[zimulala](https://github.com/zimulala) **tw:ran-huang**
 
     Before TiDB v7.1.0, to upgrade a cluster, you must manually cancel its running or queued DDL tasks before the upgrade and then add them back after the upgrade.
 
-    To provide a smoother upgrade experience, TiDB v7.1.0 supports automatically pausing and resuming DDL tasks. Starting from v7.1.0, you can upgrade your clusters without manually canceling DDL tasks in advance. TiDB will automatically pause any running or queued DDL tasks before the upgrade and resume these tasks after the rolling upgrade, making it easier for you to upgrade your TiDB clusters.
+    To provide a smoother upgrade experience, TiDB v7.1.0 supports automatically pausing and resuming DDL tasks. Starting from v7.1.0, you can upgrade your clusters without manually canceling DDL tasks in advance. TiDB will automatically pause any running or queued user DDL tasks before the upgrade and resume these tasks after the rolling upgrade, making it easier for you to upgrade your TiDB clusters.
 
-    For more information, see [documentation](to be added).
+    For more information, see [documentation](/smooth-upgrade-tidb.md).
 
 ### Observability
 
