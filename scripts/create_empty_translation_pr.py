@@ -32,7 +32,9 @@ def get_pr_info(pr_url):
 
         source_title = pr_data["title"]
         source_description = pr_data["body"]
-        source_labels = [label["name"] for label in pr_data.get("labels", []) if "size" not in label["name"] and "translation" not in label["name"] and "status" not in label["name"]]
+        exclude_labels = ["size", "translation", "status", "first-time-contributor", "contribution"]
+        source_labels = [label["name"] for label in pr_data.get("labels", []) if not any(exclude_label in label["name"] for exclude_label in exclude_labels)]
+
         base_repo = pr_data["base"]["repo"]["full_name"]
         base_branch = pr_data["base"]["ref"]
         head_repo = pr_data["head"]["repo"]["full_name"]
