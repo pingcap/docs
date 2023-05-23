@@ -70,7 +70,7 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
     <td>TiDB supports LDAP authentication, which is compatible with <a href="https://dev.mysql.com/doc/refman/8.0/en/ldap-pluggable-authentication.html" target="_blank">MySQL 8.0</a>.</td>
   </tr>
   <tr>
-    <td> Audit log enhancement (<a href="https://www.pingcap.com/tidb-enterprise/" target="_blank">Enterprise edition</a>only</td> 
+    <td> Audit log enhancement (<a href="https://www.pingcap.com/tidb-enterprise/" target="_blank">Enterprise edition</a> only)</td> 
     <td>Significant capability improvement with finer-grained event filtering controls, convenient filter condition settings, added JSON format output files, and lifetime management of audit trails.</td>
   </tr>
 </tbody>
