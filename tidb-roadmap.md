@@ -208,7 +208,7 @@ In the course of development, this roadmap is subject to change based on user ne
             <b>Column-/row-level access control</b>
             <br />
           </li>
-          </br>
+          <br />
           <li>
             <b>Database level encryption</b>
           </li>
