@@ -8,6 +8,14 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2023.
 
+## May 23, 2023
+
+**General changes**
+
+- When uploading a CSV file to TiDB, you can use not only English letters and numbers, but also characters such as Chinese and Japanese to define column names. However, for special characters, only underscore (`_`) is supported.
+
+    For details, refer to [Import Local Files to TiDB Cloud](/tidb-cloud/tidb-cloud-import-local-files.md).
+
 ## May 16, 2023
 
 **Console changes**
