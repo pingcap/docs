@@ -115,9 +115,9 @@ To allow TiDB Cloud to access the source data in your GCS bucket, you need to co
 
     3. Click **Import Data** in the upper-right corner, click **Show Google Cloud Service Account ID**, and then copy the Service Account ID for later use.
 
-2. In the Google Cloud Platform (GCP) Management Console, create an IAM role for your GCS bucket.
+2. In the Google Cloud Management Console, create an IAM role for your GCS bucket.
 
-    1. Sign in to the [GCP Management Console](https://console.cloud.google.com/).
+    1. Sign in to the [Google Cloud Management Console](https://console.cloud.google.com/).
     2. Go to the [Roles](https://console.cloud.google.com/iam-admin/roles) page, and then click **CREATE ROLE**.
 
         ![Create a role](/media/tidb-cloud/gcp-create-role.png)

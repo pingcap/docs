@@ -31,10 +31,10 @@ The following table lists the price of TiDB Cloud for each TiCDC RCUs:
 | AWS            | Singapore (ap-southeast-1)  |          $0.1623 |
 | AWS            | Tokyo (ap-northeast-1)      |          $0.1669 |
 | AWS            | Frankfurt (eu-central-1)    |          $0.1564 |
-| GCP            | Oregon (us-west1)           |          $0.1452 |
-| GCP            | N. Virginia (us-east4)      |          $0.1626 |
-| GCP            | Iowa (us-central1)          |          $0.1452 |
-| GCP            | Singapore (asia-southeast1) |          $0.1746 |
-| GCP            | Taiwan (asia-east1)         |          $0.1628 |
-| GCP            | Tokyo (asia-northeast1)     |          $0.1868 |
-| GCP            | Osaka (asia-northeast2)     |          $0.1868 |
+| Google Cloud   | Oregon (us-west1)           |          $0.1452 |
+| Google Cloud   | N. Virginia (us-east4)      |          $0.1626 |
+| Google Cloud   | Iowa (us-central1)          |          $0.1452 |
+| Google Cloud   | Singapore (asia-southeast1) |          $0.1746 |
+| Google Cloud   | Taiwan (asia-east1)         |          $0.1628 |
+| Google Cloud   | Tokyo (asia-northeast1)     |          $0.1868 |
+| Google Cloud   | Osaka (asia-northeast2)     |          $0.1868 |

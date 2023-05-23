@@ -33,7 +33,7 @@ If your MySQL service is in an AWS VPC that has no public internet access, take 
     1. Follow the steps in [Enable DNS resolution for a VPC peering connection](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html#vpc-peering-dns).
     2. Enable the **Accepter DNS resolution** option.
 
-If your MySQL service is in a GCP VPC that has no public internet access, take the following steps:
+If your MySQL service is in a Google Cloud VPC that has no public internet access, take the following steps:
 
 1. If your MySQL service is Google Cloud SQL, you must expose a MySQL endpoint in the associated VPC of the Google Cloud SQL instance. You may need to use the [**Cloud SQL Auth proxy**](https://cloud.google.com/sql/docs/mysql/sql-proxy) which is developed by Google.
 2. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of the MySQL service and your TiDB cluster. 

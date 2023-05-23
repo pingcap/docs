@@ -43,11 +43,11 @@ All user operations in the TiDB Cloud console are recorded in the audit logs as 
 | AuditEventUpdatePaymentMethod | Update credit card information |
 | AuditEventDeletePaymentMethod | Delete a credit card |
 | AuditEventCreateAWSVpcPeering | Create an AWS VPC Peering |
-| AuditEventCreateGCPVpcPeering | Create a GCP VPC Peering | 
+| AuditEventCreateGCPVpcPeering | Create a Google Cloud VPC Peering |
 | AuditEventListAWSVpcPeering | List all AWS VPC Peerings in a project |
-| AuditEventListGCPVpcPeering | List all GCP VPC Peerings in a project |
+| AuditEventListGCPVpcPeering | List all Google Cloud VPC Peerings in a project |
 | AuditEventDeleteAWSVpcPeering | Delete an AWS VPC Peering |
-| AuditEventDeleteGCPVpcPeering | Delete a GCP VPC Peering |
+| AuditEventDeleteGCPVpcPeering | Delete a Google Cloud VPC Peering |
 | AuditEventGetProjectTrafficFilter | Get traffic filter list of a project |
 | AuditEventUpdateProjectTrafficFilter | Update traffic filter list of a project |
 | AuditEventGetTrafficFilter | Get traffic filter list of a cluster |

@@ -73,7 +73,7 @@ To decrease the number of TiKV or TiFlash nodes, you need to submit a support ti
 To submit a support ticket, perform the steps in [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md). For each node to be scaled, provide the following information in the **Description** box:
 
 - Cluster name: xxx
-- Cloud provider: GCP or AWS
+- Cloud provider: Google Cloud or AWS
 - Node type: TiKV or TiFlash
 - Current node number: xxx
 - Expected node number: xxx

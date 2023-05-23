@@ -24,7 +24,7 @@ For more detailed definitions of the private endpoint and endpoint service, see 
 
 ## Restrictions
 
-- Currently, TiDB Cloud supports private endpoint connection only when the endpoint service is hosted in AWS. If the service is hosted in Google Cloud Platform (GCP), the private endpoint is not applicable.
+- Currently, TiDB Cloud supports private endpoint connection only when the endpoint service is hosted in AWS. If the service is hosted in Google Cloud, the private endpoint is not applicable.
 - The private endpoint support is provided only for the TiDB Cloud Dedicated Tier, not for the Serverless Tier.
 - Private endpoint connection across regions is not supported.
 

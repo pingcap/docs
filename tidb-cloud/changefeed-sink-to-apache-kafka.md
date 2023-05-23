@@ -31,7 +31,7 @@ If your Apache Kafka service is in an AWS VPC that has no internet access, take 
     1. Follow the steps in [Enable DNS resolution for a VPC peering connection](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html#vpc-peering-dns).
     2. Enable the **Accepter DNS resolution** option.
 
-If your Apache Kafka service is in a GCP VPC that has no internet access, take the following steps:
+If your Apache Kafka service is in a Google Cloud VPC that has no internet access, take the following steps:
 
 1. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of the Apache Kafka service and your TiDB cluster.
 2. Modify the ingress firewall rules of the VPC where Apache Kafka is located.
