@@ -45,7 +45,7 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
   <tr>
     <td rowspan="2">Reliability and availability</td>
     <td><a href="https://docs.pingcap.com/tidb/dev/tidb-resource-control" target="_blank">Resource control by resource groups</a> (GA)</td>
-   <td>Support resource management based on resource groups, which allocates and isolates resources for different workloads in the same cluster. This feature significantly enhances the stability of multi-application clusters and laies the foundation for multi-tenancy. In v7.1.0, this feature introduces the ability to estimate system capacity based on actual workload or hardware deployment.</td>
+   <td>Support resource management based on resource groups, which allocates and isolates resources for different workloads in the same cluster. This feature significantly enhances the stability of multi-application clusters and lays the foundation for multi-tenancy. In v7.1.0, this feature introduces the ability to estimate system capacity based on actual workload or hardware deployment.</td>
   </tr>
   <tr>
     <td>TiFlash supports <a href="https://docs.pingcap.com/tidb/dev/tiflash-spill-disk" target="_blank">spill to disk</a> (introduced in v7.0.0)</td>
