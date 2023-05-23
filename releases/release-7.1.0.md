@@ -178,7 +178,7 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
 
     Before v7.1.0, when you perform a DDL operation that affects all rows on a large table (such as adding or deleting a column), the replication latency of TiCDC would significantly increase. Starting from v7.1.0, TiCDC optimizes this replication operation and mitigates the impact of DDL operations on downstream latency.
 
-    For more information, see [documentation](). (to be added)
+    For more information, see [documentation](/ticdc/ticdc-faq.md#does-ticdc-replicate-data-changes-caused-by-lossy-ddl-operations-to-the-downstream).
 
 * Improve the stability of TiDB Lightning when importing TiB-level data [#43510](https://github.com/pingcap/tidb/issues/43510) [#43657](https://github.com/pingcap/tidb/issues/43657) @[D3Hunter](https://github.com/D3Hunter) @[lance6716](https://github.com/lance6716) **tw:hfxsd**
 
