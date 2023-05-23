@@ -48,7 +48,13 @@ Currently, this method supports importing one CSV file for one task into either 
 
     - If the target table already exists, the columns in the CSV file will be imported into the target table in order. Extra columns will be truncated and missing columns will be filled with default values. You can also select the **Ignore the first row** option to ignore the first row and start importing from the second row.
 
-    - If you need TiDB Cloud to create the target table, input the name for each column. The column name must start with letters (a-z and A-Z) or numbers (0-9), and can contain letters (a-z and A-Z), numbers (0-9), and the underscore (_) character. You can also change the data type if needed.
+    - If you need TiDB Cloud to create the target table, input the name for each column. The column name must meet the following requirements:
+
+        * The name must be composed of only letters (a-z and A-Z), numbers (0-9), characters (such as Chinese and Japanese), and the underscore (`_`) character.
+        * Other special characters are not supported.
+        * The length of the name must be less than 65 characters.
+
+        You can also change the data type if needed.
 
 6. For a new target table, you can set the primary key. You can select a column as the primary key, or select multiple columns to create a composite primary key. The composite primary key will be formed in the order in which you select the column names.
 
