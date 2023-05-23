@@ -39,8 +39,8 @@ The TiDB Cloud roadmap brings you what's coming in the near future, so you can s
   </tr>
   <tr>
     <td>Cloud provider marketplace</td>
-    <td>✅ Improve the user experience from AWS Marketplace and Google Cloud Marketplace.</td>
-    <td>Improve the user journey and experience of users who sign up from AWS Marketplace and Google Cloud Marketplace.</td>
+    <td>✅ Improve the user experience from AWS Marketplace and GCP Marketplace.</td>
+    <td>Improve the user journey and experience of users who sign up from AWS Marketplace and GCP Marketplace.</td>
   </tr>
   <tr>
     <td rowspan="2">Enterprise-grade features</td>
@@ -151,8 +151,8 @@ For the roadmap of TiDB kernel, refer to [TiDB Roadmap](https://github.com/pingc
   </tr>
   <tr>
     <td>Backup and restore</td>
-    <td>Backup and restore service based on AWS EBS or Google Cloud persistent disk snapshots.</td>
-    <td>Provide backup and restore service on the cloud based on AWS EBS or Google Cloud persistent disk snapshots.</td>
+    <td>Backup and restore service based on AWS EBS or GCP persistent disk snapshots.</td>
+    <td>Provide backup and restore service on the cloud based on AWS EBS or GCP persistent disk snapshots.</td>
   </tr>
   <tr>
     <td rowspan="2">Online data migration</td>

@@ -194,9 +194,9 @@ To learn more about contracts, feel free to [contact our sales](https://www.ping
 
 If you are the owner or billing administrator of your organization, you can link your TiDB Cloud account to an AWS billing account or Google Cloud billing account. Otherwise, skip this section.
 
-If you are new to TiDB Cloud and do not have a TiDB Cloud account, you can sign up for a TiDB Cloud account through [AWS Marketplace](https://aws.amazon.com/marketplace) or [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), and pay for the usage via the AWS or Google Cloud billing account. For more details, refer to [Create a TiDB Cloud account](/tidb-cloud/create-tidb-cluster.md#step-1-create-a-tidb-cloud-account).
+If you are new to TiDB Cloud and do not have a TiDB Cloud account, you can sign up for a TiDB Cloud account through [AWS Marketplace](https://aws.amazon.com/marketplace) or [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), and pay for the usage via the AWS or GCP billing account. For more details, refer to [Create a TiDB Cloud account](/tidb-cloud/create-tidb-cluster.md#step-1-create-a-tidb-cloud-account).
 
-If you already have a TiDB Cloud account and you want to pay for the usage via your AWS or Google Cloud billing account, you can link your TiDB Cloud account to your AWS or Google Cloud billing account.
+If you already have a TiDB Cloud account and you want to pay for the usage via your AWS or GCP billing account, you can link your TiDB Cloud account to your AWS or GCP billing account.
 
 <SimpleTab>
 <div label="AWS Marketplace">
@@ -233,9 +233,9 @@ To link your TiDB Cloud account to a Google Cloud billing account, take the foll
 
 4. Check the notification in the upper part of the sign-up page and click **Sign in**.
 
-5. Sign in with your TiDB Cloud account. The **Link to Your Google Cloud Billing Account** page is displayed.
+5. Sign in with your TiDB Cloud account. The **Link to Your GCP Billing Account** page is displayed.
 
-6. On the **Link to Your Google Cloud Billing Account** page, select the target organization and click **Link** to link to your Google Cloud billing account.
+6. On the **Link to Your GCP Billing Account** page, select the target organization and click **Link** to link to your Google Cloud billing account.
 
     > **Note:**
     >

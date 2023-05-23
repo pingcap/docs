@@ -66,7 +66,7 @@ Currently, you cannot select an arbitrary remote region for backup data storage.
 
 | Cloud provider | Cluster region                      | Remote region support   |
 |----------------|-----------------------------|--------------------------|
-| Google Cloud   | Tokyo (asia-northeast1)     | Osaka (asia-northeast2)  |
+| GCP            | Tokyo (asia-northeast1)     | Osaka (asia-northeast2)  |
 
 > **Note:**
 >

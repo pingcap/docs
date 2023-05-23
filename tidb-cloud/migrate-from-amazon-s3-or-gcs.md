@@ -91,18 +91,18 @@ After the data is imported, if you want to remove the Amazon S3 access of TiDB C
 
 ## Import or migrate from GCS to TiDB Cloud
 
-If your organization is using TiDB Cloud as a service on Google Cloud, you can use Google Cloud Storage (GCS) as a staging area for importing or migrating data into TiDB Cloud.
+If your organization is using TiDB Cloud as a service on Google Cloud Platform (GCP), you can use Google Cloud Storage (GCS) as a staging area for importing or migrating data into TiDB Cloud.
 
 ### Prerequisites
 
 Before migrating data from GCS to TiDB Cloud, ensure the following:
 
-- You have administrator access to your corporate-owned s account.
+- You have administrator access to your corporate-owned GCP account.
 - You have administrator access to the TiDB Cloud Management Portal.
 
 ### Step 1. Create a GCS bucket and prepare source data files
 
-1. Create a GCS bucket in your corporate-owned Google Cloud account.
+1. Create a GCS bucket in your corporate-owned GCP account.
 
     For more information, see [Creating storage buckets](https://cloud.google.com/storage/docs/creating-buckets) in the Google Cloud Storage documentation.
 
@@ -117,7 +117,7 @@ Before migrating data from GCS to TiDB Cloud, ensure the following:
 
 ### Step 2. Configure GCS access
 
-To allow TiDB cloud to access the source data in your GCS bucket, you need to configure the GCS access for each TiDB Cloud as a service on the Google Cloud project and GCS bucket pair. Once the configuration is done for one cluster in a project, all database clusters in that project can access the GCS bucket.
+To allow TiDB cloud to access the source data in your GCS bucket, you need to configure the GCS access for each TiDB Cloud as a service on the GCP project and GCS bucket pair. Once the configuration is done for one cluster in a project, all database clusters in that project can access the GCS bucket.
 
 For detailed steps, see [Configure GCS access](/tidb-cloud/config-s3-and-gcs-access.md#configure-gcs-access).
 

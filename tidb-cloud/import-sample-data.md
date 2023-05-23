@@ -37,9 +37,9 @@ This document describes how to import sample data into TiDB Cloud via the UI. Th
 
     </div>
 
-    <div label="Google Cloud">
+    <div label="GCP">
 
-    If your TiDB cluster is hosted by Google Cloud, click **Import Data** in the upper-right corner, and then fill in the following parameters:
+    If your TiDB cluster is hosted by GCP, click **Import Data** in the upper-right corner, and then fill in the following parameters:
 
     - **Data format**: select **SQL File**.
     - **Bucket URI**: enter the sample data URI `gs://tidbcloud-samples-us-west1`.
