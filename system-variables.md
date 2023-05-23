@@ -4906,7 +4906,7 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Persists to cluster: Yes
 - Type: String
 - Default value: ""
-- For LDAP SASL authentication, this variable limits the search scope within the search tree. If a user is created without `AS ...` clause, TiDB will automatically search the `dn` in LDAP server according to the user name.
+- For LDAP SASL authentication, this variable limits the search scope within the search tree. If a user is created without the `AS ...` clause, TiDB will automatically search the `dn` in LDAP server according to the user name.
 
 ### authentication_ldap_sasl_bind_root_dn <span class="version-mark">New in v7.1.0</span>
 
