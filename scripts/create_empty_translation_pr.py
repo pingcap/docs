@@ -230,7 +230,9 @@ elif "pingcap/docs/pull" in source_pr_url:
     my_repo_name = "docs-cn"
     translation_label = "translation/from-docs"
 else:
-    print ("The provided URL is not a pull request of pingcap/docs-cn or pingcap/docs.")
+    print ("Error: The provided URL is not a pull request of pingcap/docs-cn or pingcap/docs.")
+    print("Exiting the program...")
+    exit(1)
 
 source_labels.append(translation_label)
 #print ("The following labels will be reused for the translation PR.")
