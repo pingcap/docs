@@ -331,7 +331,7 @@ TableStmt ::=
     "TIDB_ROW_CHECKSUM()"
 ```
 
-The following example shows how to use the `TIDB_ROW_CHECKSUM` function to query the Checksum value of the row data:
+The following example shows how to use the `TIDB_ROW_CHECKSUM` function to query the checksum value of the row data:
 
 To enable the checksum feature of single-row data in TiDB (controlled by the system variable [`tidb_enable_row_level_checksum`](/system-variables.md#tidb_enable_row_level_checksum-new-in-v710)), run the following statement:
 
