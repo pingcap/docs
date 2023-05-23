@@ -27,7 +27,7 @@ TiCDC disables data integrity validation by default. To enable it, perform the f
 
     This configuration only takes effect for newly created sessions, so you need to reconnect to TiDB.
 
-2. In the [configuration file](/ticdc/ticdc-changefeed-config.md##changefeed-configuration-parameters) specified by the `--config` parameter when you create a changefeed, add the following configurations:
+2. In the [configuration file](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters) specified by the `--config` parameter when you create a changefeed, add the following configurations:
 
     ```toml
     [integrity]
