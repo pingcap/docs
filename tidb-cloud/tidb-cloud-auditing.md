@@ -209,7 +209,7 @@ For each database event record in audit logs, TiDB provides the following fields
 | 6 | EVENT_CLASS | VARCHAR | 15 | Event type     |
 | 7 | EVENT_SUBCLASS     | VARCHAR | 15 | Event subtype |
 | 8 | STATUS_CODE | INTEGER |  | Response status of the statement   |
-| 9 | COST_TIME | INTEGER |  | Time consumed by the statement    |
+| 9 | COST_TIME | FLOAT |  | Time consumed by the statement    |
 | 10 | HOST | VARCHAR | 16 | Server IP    |
 | 11 | CLIENT_IP         | VARCHAR | 16 | Client IP   |
 | 12 | USER | VARCHAR | 17 | Login username    |
