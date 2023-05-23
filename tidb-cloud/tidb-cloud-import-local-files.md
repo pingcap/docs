@@ -51,8 +51,8 @@ Currently, this method supports importing one CSV file for one task into either 
     - If you need TiDB Cloud to create the target table, input the name for each column. The column name must meet the following requirements:
 
         * The name must be composed of only letters (a-z and A-Z), numbers (0-9), characters (such as Chinese and Japanese), and the underscore (`_`) character.
-        * Other special characters other than `_` are not supported.
-        * The column name must start with letters (a-z and A-Z), numbers (0-9), or characters (such as Chinese and Japanese).
+        * Other special characters are not supported.
+        * The length of the name must be less than 65 characters.
 
         You can also change the data type if needed.
 
