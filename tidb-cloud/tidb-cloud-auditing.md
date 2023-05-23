@@ -115,7 +115,7 @@ For more information, see [Creating storage buckets](https://cloud.google.com/st
 
 1. Get the Google Cloud Service Account ID of the TiDB cluster that you want to enable audit logging.
 
-    1. In the TiDB Cloud console, choose a project and a cluster deployed on Google Cloud Platform.
+    1. In the TiDB Cloud console, choose a project and a cluster deployed on Google Cloud.
     2. Select **Settings** > **Audit Settings**. The **Audit Logging** dialog box is displayed.
     3. Click **Show Google Cloud Service Account ID**, and then copy the Service Account ID for later use.
 
