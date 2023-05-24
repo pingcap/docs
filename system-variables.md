@@ -76,7 +76,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 - Persists to cluster: Yes
 - Type: String
 - Default value: ""
-- For LDAP SASL authentication, this variable specifies the `dn` used to login to the LDAP server to search users.
+- For LDAP SASL authentication, this variable specifies the `dn` used to log in to the LDAP server to search users.
 
 ### authentication_ldap_sasl_bind_root_pwd <span class="version-mark">New in v7.1.0</span>
 
