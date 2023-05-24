@@ -290,7 +290,7 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
     - Support outputting audit logs in both TEXT and JSON formats for easy integration with third-party tools.
     - Support audit log redaction. You can replace all literals to enhance security.
     
-    Database auditing is an important feature in TiDB Enterprise Edition. Database auditing provides a powerful monitoring and auditing tool for enterprises to ensure data security and compliance. It can help managers in enterprises track the source and impact of database operations to ensure that data would not be illegally stolen or tampered with. At the same time, database auditing can also help enterprises to comply with various regulatory and compliance requirements to safeguard the legal and ethical compliance of enterprises. This feature has a very important application value for enterprise information security.
+  Database auditing is an important feature in TiDB Enterprise Edition. Database auditing provides a powerful monitoring and auditing tool for enterprises to ensure data security and compliance. It can help managers in enterprises track the source and impact of database operations to ensure that data would not be illegally stolen or tampered with. At the same time, database auditing can also help enterprises to comply with various regulatory and compliance requirements to safeguard the legal and ethical compliance of enterprises. This feature has a very important application value for enterprise information security.
     
    This is feature is included in TiDB Enterprise Edition. Go to [TiDB Enterprise page](https://www.pingcap.com/tidb-enterprise/) to get TiDB Enterprise Edition and its documentation.
 ## Compatibility changes
