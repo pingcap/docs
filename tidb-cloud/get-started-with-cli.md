@@ -103,7 +103,7 @@ tiup update cloud
 
 ## Quick start
 
-[TiDB Serverless](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) (Beta) is the best way to get started with TiDB Cloud. In this section, you will learn how to create a TiDB Serverless cluster with TiDB Cloud CLI.
+[TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta) (Beta) is the best way to get started with TiDB Cloud. In this section, you will learn how to create a TiDB Serverless cluster with TiDB Cloud CLI.
 
 ### Create a user profile
 

@@ -15,7 +15,7 @@ For TiDB Serverless clusters, you can connect to your cluster via one of the fol
 
     Private endpoint connection provides a private endpoint to allow SQL clients in your VPC to securely access services over AWS PrivateLink, which provides highly secure and one-way access to database services with simplified network management.
 
-- [Connect via standard connection](/tidb-cloud/connect-via-standard-connection.md#serverless-tier)
+- [Connect via standard connection](/tidb-cloud/connect-via-standard-connection.md#tidb-serverless)
 
     The standard connection exposes a public endpoint with traffic filters, so you can connect to your TiDB cluster via a SQL client from your laptop.
 
@@ -31,7 +31,7 @@ For TiDB Serverless clusters, you can connect to your cluster via one of the fol
 
 For TiDB Dedicated clusters, you can connect to your cluster via one of the following methods:
 
-- [Connect via standard connection](/tidb-cloud/connect-via-standard-connection.md#dedicated-tier)
+- [Connect via standard connection](/tidb-cloud/connect-via-standard-connection.md#tidb-dedicated)
 
     The standard connection exposes a public endpoint with traffic filters, so you can connect to your TiDB cluster via a SQL client from your laptop. You can connect to your TiDB clusters using TLS, which ensures the security of data transmission from your applications to TiDB clusters.
 

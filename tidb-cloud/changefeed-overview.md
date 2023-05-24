@@ -12,7 +12,7 @@ TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data servic
 >
 > Currently, TiDB Cloud only allows up to 10 changefeeds per cluster.
 >
-> For [TiDB Serverless clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta), the changefeed feature is unavailable.
+> For [TiDB Serverless clusters](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta), the changefeed feature is unavailable.
 
 To access the changefeed feature, navigate to the cluster overview page of your TiDB cluster, and then click **Changefeed** in the left navigation pane. The changefeed page is displayed.
 

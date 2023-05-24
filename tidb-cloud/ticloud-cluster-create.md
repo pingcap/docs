@@ -13,7 +13,7 @@ ticloud cluster create [flags]
 
 > **Note:**
 >
-> Currently, you can only create a [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) cluster using the preceding command.
+> Currently, you can only create a [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta) cluster using the preceding command.
 
 ## Examples
 

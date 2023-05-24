@@ -10,8 +10,8 @@ The cluster option determines the throughput and performance of your cluster.
 
 TiDB Cloud provides the following two options. Before creating a cluster, you need to consider which option suits your need better.
 
-- [TiDB Serverless](#serverless-tier-beta)
-- [TiDB Dedicated](#dedicated-tier)
+- [TiDB Serverless](#tidb-serverless-beta)
+- [TiDB Dedicated](#tidb-dedicated)
 
 ## TiDB Serverless (Beta)
 

@@ -13,7 +13,7 @@ This document describes the typical PoC procedures and aims to help you quickly 
 
 If you are interested in doing a PoC, feel free to contact <a href="mailto:tidbcloud-support@pingcap.com">PingCAP</a> before you get started. The support team can help you create a test plan and walk you through the PoC procedures smoothly.
 
-Alternatively, you can [create a TiDB Serverless](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster) to get familiar with TiDB Cloud for a quick evaluation. Note that the TiDB Serverless has some [special terms and conditions](/tidb-cloud/select-cluster-tier.md#serverless-tier-special-terms-and-conditions).
+Alternatively, you can [create a TiDB Serverless](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster) to get familiar with TiDB Cloud for a quick evaluation. Note that the TiDB Serverless has some [special terms and conditions](/tidb-cloud/select-cluster-tier.md#tidb-serverless-special-terms-and-conditions).
 
 ## Overview of the PoC procedures
 
@@ -67,7 +67,7 @@ To create a TiDB Dedicated cluster for the PoC, take the following steps:
 
     Once you submit the form, the TiDB Cloud Support team will review your application, contact you, and transfer credits to your account once the application is approved. You can also contact a PingCAP support engineer to assist with your PoC procedures to ensure the PoC runs as smoothly as possible.
 
-2. Refer to [Quick Start](/tidb-cloud/tidb-cloud-quickstart.md) to create a [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#dedicated-tier) cluster for the PoC.
+2. Refer to [Quick Start](/tidb-cloud/tidb-cloud-quickstart.md) to create a [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) cluster for the PoC.
 
 Capacity planning is recommended for cluster sizing before you create a cluster. You can start with estimated numbers of TiDB, TiKV, or TiFlash nodes, and scale out the cluster later to meet performance requirements. You can find more details in the following documents or consult our support team.
 
@@ -87,7 +87,7 @@ For a newly created cluster, note the following configurations:
 
 Next, you can load your database schemas to the TiDB cluster, including tables and indexes.
 
-Because the amount of PoC credits is limited, to maximize the value of credits, it is recommended that you create a [TiDB Serverless cluster](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) for compatibility tests and preliminary analysis on TiDB Cloud.
+Because the amount of PoC credits is limited, to maximize the value of credits, it is recommended that you create a [TiDB Serverless cluster](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta) for compatibility tests and preliminary analysis on TiDB Cloud.
 
 TiDB Cloud is highly compatible with MySQL 5.7. You can directly import your data into TiDB if it is MySQL-compatible or can be adapted to be compatible with MySQL.
 
@@ -181,7 +181,7 @@ Now the workload testing is finished, you can explore more features, for example
 
 You have completed the full cycle of a PoC after you test TiDB Cloud using real workloads and get the testing results. These results help you determine if TiDB Cloud meets your expectations. Meanwhile, you have accumulated best practices for using TiDB Cloud.
 
-If you want to try TiDB Cloud on a larger scale, for a new round of deployments and tests, such as deploying with other node storage sizes offered by TiDB Cloud, get full access to TiDB Cloud by creating a [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#dedicated-tier) cluster.
+If you want to try TiDB Cloud on a larger scale, for a new round of deployments and tests, such as deploying with other node storage sizes offered by TiDB Cloud, get full access to TiDB Cloud by creating a [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) cluster.
 
 If your credits are running out and you want to continue with the PoC, contact the [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for consultation.
 

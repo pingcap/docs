@@ -7,7 +7,7 @@ summary: Learn about TiDB Cloud billing.
 
 > **Note:**
 >
-> [TiDB Serverless clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) are free until May 31, 2023, with a 100% discount off. After that, usage beyond the [free quota](/tidb-cloud/select-cluster-tier.md#usage-quota) will be charged.
+> [TiDB Serverless clusters](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta) are free until May 31, 2023, with a 100% discount off. After that, usage beyond the [free quota](/tidb-cloud/select-cluster-tier.md#usage-quota) will be charged.
 
 TiDB Cloud charges according to the resources that you consume. You can visit the following pages to get more information about the pricing.
 

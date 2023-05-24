@@ -23,7 +23,7 @@ The available third-party integrations are displayed.
 
 ## Limitation
 
-- For [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters, third-party metrics integrations are not supported.
+- For [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta) clusters, third-party metrics integrations are not supported.
 
 - Third-party metrics integrations are not available when the cluster status is **CREATING**, **RESTORING**, **PAUSED**, or **RESUMING**.
 

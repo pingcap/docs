@@ -47,7 +47,7 @@ Yes, your Developer Tier cluster will be automatically migrated to the TiDB Serv
 
 ### Is my TiDB Serverless shared or dedicated?
 
-The serverless technology is designed for multi-tenancy and the resources used by all clusters are shared. To get managed TiDB service with isolated infrastructure and resources, you can upgrade it to [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#dedicated-tier).
+The serverless technology is designed for multi-tenancy and the resources used by all clusters are shared. To get managed TiDB service with isolated infrastructure and resources, you can upgrade it to [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated).
 
 ### How does TiDB Serverless ensure security?
 

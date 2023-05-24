@@ -11,7 +11,7 @@ This document describes how to view the events for TiDB Cloud clusters using the
 
 > **Note:**
 >
-> Currently, the Events page is only available for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters.
+> Currently, the Events page is only available for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters.
 
 ## View the Events page
 

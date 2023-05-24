@@ -9,14 +9,14 @@ summary: Learn about the limitations of TiDB Serverless.
 
 This document describes the limitations of TiDB Serverless.
 
-We are constantly filling in the feature gaps between TiDB Serverless and TiDB Dedicated. If you require these features or capabilities in the gap, use [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#dedicated-tier) or [contact us](https://www.pingcap.com/contact-us/?from=en) for a feature request.
+We are constantly filling in the feature gaps between TiDB Serverless and TiDB Dedicated. If you require these features or capabilities in the gap, use [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) or [contact us](https://www.pingcap.com/contact-us/?from=en) for a feature request.
 
 ## Limitations
 
 ### SQL
 
 - [Time to live (TTL)](/time-to-live.md) is not available for TiDB Serverless clusters currently.
-- The [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md) syntax is not applicable to [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters.
+- The [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md) syntax is not applicable to [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta) clusters.
 - The [`SLEEP()` function](/functions-and-operators/miscellaneous-functions.md) only supports a maximum sleep time of 300 seconds.
 
 ### System tables

@@ -86,7 +86,7 @@ To create a TiDB Serverless cluster, take the following steps:
 
     The cluster creation process starts and your TiDB Cloud cluster will be created in approximately 30 seconds.
 
-7. After the cluster is created, follow the instructions in [Connect via Standard Connection](/tidb-cloud/connect-via-standard-connection.md#serverless-tier) to create a password for your cluster.
+7. After the cluster is created, follow the instructions in [Connect via Standard Connection](/tidb-cloud/connect-via-standard-connection.md#tidb-serverless) to create a password for your cluster.
 
     > **Note:**
     >

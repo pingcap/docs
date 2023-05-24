@@ -78,7 +78,7 @@ The cluster monitoring page provides a full set of standard metrics of a cluster
 
 > **Note:**
 >
-> Currently, the cluster monitoring page is unavailable for [TiDB Serverless clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta).
+> Currently, the cluster monitoring page is unavailable for [TiDB Serverless clusters](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta).
 
 To view metrics on the cluster monitoring page, take the following steps:
 

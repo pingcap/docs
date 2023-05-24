@@ -17,7 +17,7 @@ You can configure TiDB Cloud to send metric data of your TiDB clusters to [New R
 
 ## Limitation
 
-You cannot use the New Relic integration in [TiDB Serverless clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta).
+You cannot use the New Relic integration in [TiDB Serverless clusters](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta).
 
 ## Steps
 

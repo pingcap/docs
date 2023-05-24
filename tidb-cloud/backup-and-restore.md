@@ -25,7 +25,7 @@ This document describes how to back up and restore your TiDB cluster data on TiD
 
 ## Backup
 
-You can back up data for both [TiDB Serverless](#serverless-tier) and [TiDB Dedicated](#dedicated-tier).
+You can back up data for both [TiDB Serverless](#tidb-serverless) and [TiDB Dedicated](#tidb-dedicated).
 
 ### TiDB Serverless
 
