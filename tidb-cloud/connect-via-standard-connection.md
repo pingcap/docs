@@ -7,11 +7,11 @@ summary: Learn how to connect to your TiDB Cloud cluster via standard connection
 
 This document describes how to connect to your TiDB Cloud cluster via standard connection. The standard connection exposes a public endpoint with traffic filters, so you can connect to your TiDB cluster via a SQL client from your laptop.
 
-The standard connection is available to both Serverless Tier and Dedicated Tier.
+The standard connection is available to both TiDB Serverless and TiDB Dedicated.
 
-## Serverless Tier
+## TiDB Serverless
 
-To connect to a Serverless Tier cluster via standard connection, perform the following steps:
+To connect to a TiDB Serverless cluster via standard connection, perform the following steps:
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
 
@@ -21,7 +21,7 @@ To connect to a Serverless Tier cluster via standard connection, perform the fol
 
     > **Note:**
     >
-    > - Keeping the endpoint type as `Public` means the connection is via standard TLS connection. For more information, see [TLS Connection to Serverless Tier](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md).
+    > - Keeping the endpoint type as `Public` means the connection is via standard TLS connection. For more information, see [TLS Connection to TiDB Serverless](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md).
     > - If you choose **Private** in the **Endpoint Type** drop-down list, it means that the connection is via private endpoint. For more information, see [Connect via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections.md#serverless-tier).
 
 4. If you have not set a password yet, click **Create password** to generate a random password. The generated password will not show again, so save your password in a secure location.
@@ -30,11 +30,11 @@ To connect to a Serverless Tier cluster via standard connection, perform the fol
 
     > **Note:**
     >
-    > When you connect to a Serverless Tier cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
+    > When you connect to a TiDB Serverless cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
 
-## Dedicated Tier
+## TiDB Dedicated
 
-To connect to a Dedicated Tier cluster via standard connection, perform the following steps:
+To connect to a TiDB Dedicated cluster via standard connection, perform the following steps:
 
 1. Open the overview page of the target cluster.
 
@@ -65,7 +65,7 @@ To connect to a Dedicated Tier cluster via standard connection, perform the foll
 
     > **Note:**
     >
-    > - The TiDB cluster CA is only available for Dedicated Tier clusters.
+    > - The TiDB cluster CA is only available for TiDB Dedicated clusters.
     > - Currently, TiDB Cloud only provides the connection strings and sample code for these connection methods: MySQL, MyCLI, JDBC, Python, Go, and Node.js.
 
 5. Under **Step 3: Connect with a SQL client** in the dialog, click the tab of your preferred connection method, and then refer to the connection string and sample code on the tab to connect to your cluster.

@@ -10,7 +10,7 @@ This document describes how to import CSV files from Amazon Simple Storage Servi
 > **Note:**
 >
 > - To ensure data consistency, TiDB Cloud allows to import CSV files into empty tables only. To import data into an existing table that already contains data, you can use TiDB Cloud to import the data into a temporary empty table by following this document, and then use the `INSERT SELECT` statement to copy the data to the target existing table.
-> - If there is a changefeed in a Dedicated Tier cluster, you cannot import data to the cluster (the **Import Data** button will be disabled), because the current import data feature uses the [physical import mode](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode). In this mode, the imported data does not generate change logs, so the changefeed cannot detect the imported data.
+> - If there is a changefeed in a TiDB Dedicated cluster, you cannot import data to the cluster (the **Import Data** button will be disabled), because the current import data feature uses the [physical import mode](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode). In this mode, the imported data does not generate change logs, so the changefeed cannot detect the imported data.
 
 ## Step 1. Prepare the CSV files
 
@@ -98,8 +98,8 @@ To import the CSV files to TiDB Cloud, take the following steps:
     2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
 
 2. On the **Import** page:
-   - For a Dedicated Tier cluster, click **Import Data** in the upper-right corner.
-   - For a Serverless Tier cluster, click the **import data from S3** link above the upload area.
+   - For a TiDB Dedicated cluster, click **Import Data** in the upper-right corner.
+   - For a TiDB Serverless cluster, click the **import data from S3** link above the upload area.
 
 3. Provide the following information for the source CSV files:
 

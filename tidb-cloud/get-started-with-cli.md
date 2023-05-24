@@ -103,7 +103,7 @@ tiup update cloud
 
 ## Quick start
 
-TiDB Cloud [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) (Beta) is the best way to get started with TiDB Cloud. In this section, you will learn how to create a Serverless Tier cluster with TiDB Cloud CLI.
+[TiDB Serverless](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) (Beta) is the best way to get started with TiDB Cloud. In this section, you will learn how to create a TiDB Serverless cluster with TiDB Cloud CLI.
 
 ### Create a user profile
 
@@ -117,9 +117,9 @@ ticloud config create
 >
 > The profile name **MUST NOT** contain `.`.
 
-### Create a Serverless Tier cluster
+### Create a TiDB Serverless cluster
 
-To create a Serverless Tier cluster, enter the following command, and then follow the CLI prompts to provide the required information and set the password:
+To create a TiDB Serverless cluster, enter the following command, and then follow the CLI prompts to provide the required information and set the password:
 
 ```shell
 ticloud cluster create

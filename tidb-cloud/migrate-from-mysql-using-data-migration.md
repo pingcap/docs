@@ -7,11 +7,11 @@ summary: Learn how to migrate data from MySQL-compatible databases hosted in Ama
 
 This document describes how to migrate data from a MySQL-compatible database on a cloud provider (Amazon Aurora MySQL, Amazon Relational Database Service (RDS), or Google Cloud SQL for MySQL) or on-premises to TiDB Cloud using the Data Migration feature of the TiDB Cloud console.
 
-This feature helps you migrate your source databases' existing data and ongoing changes to TiDB Cloud (either in the same region or cross regions) directly in one go. 
+This feature helps you migrate your source databases' existing data and ongoing changes to TiDB Cloud (either in the same region or cross regions) directly in one go.
 
 ## Limitations
 
-- The Data Migration feature is available only for **Dedicated Tier** clusters.
+- The Data Migration feature is available only for **TiDB Dedicated** clusters.
 
 - The Data Migration feature is only available to clusters in the projects that are created in the following regions after November 9, 2022. If your **project** was created before the date or if your cluster is in another region, this feature is not available to your cluster and the **Data Migration** tab will not be displayed on the cluster overview page in the TiDB Cloud console.
 
@@ -139,7 +139,7 @@ If your MySQL service is in an GCP VPC, take the following steps:
 
 3. Modify the ingress firewall rules of the VPC where MySQL is located.
 
-    You must add [the CIDR of the region where your TiDB Cloud cluster is located](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr) to the ingress firewall rules. This allows the traffic to flow from your TiDB cluster to the MySQL endpoint. 
+    You must add [the CIDR of the region where your TiDB Cloud cluster is located](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr) to the ingress firewall rules. This allows the traffic to flow from your TiDB cluster to the MySQL endpoint.
 
 </details>
 
@@ -269,7 +269,7 @@ When scaling a migration job specification, note the following:
 - You can only scale a migration job specification when the job is in the **Running** or **Paused** status.
 - TiDB Cloud does not support scaling a migration job specification during the existing data export stage.
 - Scaling a migration job specification will restart the job. If a source table of the job does not have a primary key, duplicate data might be inserted.
-- During scaling, do not purge the binary log of the source database or increase `expire_logs_days` of the upstream database temporarily. Otherwise, the job might fail because it cannot get the continuous binary log position. 
+- During scaling, do not purge the binary log of the source database or increase `expire_logs_days` of the upstream database temporarily. Otherwise, the job might fail because it cannot get the continuous binary log position.
 
 ### Scaling procedure
 

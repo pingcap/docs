@@ -29,11 +29,11 @@ TiDB Cloud is powered by AI. You can use Chat2Query (beta), an AI-powered SQL ed
 
 In Chat2Query, you can either simply type `--` followed by your instructions to let AI generate SQL queries automatically or write SQL queries manually, and then run SQL queries against databases without a terminal. You can find the query results in tables intuitively and check the query logs easily. For more information, see [Chat2Query (beta)](/tidb-cloud/explore-data-with-chat2query.md).
 
-In addition, TiDB Cloud provides a Chat2Query API for Serverless Tier clusters. After it is enabled, TiDB Cloud will automatically create a system Data App called **Chat2Query** and a Chat2Data endpoint in Data Service. You can call this endpoint to let AI generate and execute SQL statements by providing instructions. For more information, see [Get started with Chat2Query API](/tidb-cloud/use-chat2query-api.md).
+In addition, TiDB Cloud provides a Chat2Query API for TiDB Serverless clusters. After it is enabled, TiDB Cloud will automatically create a system Data App called **Chat2Query** and a Chat2Data endpoint in Data Service. You can call this endpoint to let AI generate and execute SQL statements by providing instructions. For more information, see [Get started with Chat2Query API](/tidb-cloud/use-chat2query-api.md).
 
-### cluster tier
+### cluster option
 
-Determines the functionality and capacity of your cluster. Different cluster tiers provide different numbers of TiDB, TiKV, and TiFlash nodes in your cluster.
+Determines the functionality and capacity of your cluster. Different cluster options provide different numbers of TiDB, TiKV, and TiFlash nodes in your cluster.
 
 ### Credit
 
@@ -87,9 +87,9 @@ Organization members are users who are invited by the organization owner to join
 
 ### Playground
 
-Playground contains a pre-loaded dataset of GitHub events, which allows Serverless Tier users to get started with TiDB Cloud by running queries instantly, without importing data or connecting to a client.
+Playground contains a pre-loaded dataset of GitHub events, which allows TiDB Serverless users to get started with TiDB Cloud by running queries instantly, without importing data or connecting to a client.
 
-You can access Playground after [creating a Serverless Tier cluster](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster).
+You can access Playground after [creating a TiDB Serverless cluster](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster).
 
 ### policy
 
@@ -129,13 +129,13 @@ The replication of changefeed is charged according to the computing resources, w
 
 ### Request Unit
 
-A Request Unit (RU) is a unit of measure used to represent the amount of resources consumed by a single request to the database. The amount of RUs consumed by a request depends on various factors, such as the operation type or the amount of data being retrieved or modified. For more information, see [TiDB Cloud Serverless Tier Pricing Details](https://www.pingcap.com/tidb-cloud-serverless-pricing-details).
+A Request Unit (RU) is a unit of measure used to represent the amount of resources consumed by a single request to the database. The amount of RUs consumed by a request depends on various factors, such as the operation type or the amount of data being retrieved or modified. For more information, see [TiDB Serverless Pricing Details](https://www.pingcap.com/tidb-cloud-serverless-pricing-details).
 
 ## S
 
 ### Spend limit
 
-Spend limit refers to the maximum amount of money that you are willing to spend on a particular workload in a month. It is a cost-control mechanism that allows you to set a budget for your Serverless Tier clusters. When the spend limit of a cluster is greater than 0, the cluster is considered a paid cluster. Also, the paid cluster can have a free quota if it meets the qualifications. The paid cluster with a free quota will consume the free quota first.
+Spend limit refers to the maximum amount of money that you are willing to spend on a particular workload in a month. It is a cost-control mechanism that allows you to set a budget for your TiDB Serverless clusters. When the spend limit of a cluster is greater than 0, the cluster is considered a paid cluster. Also, the paid cluster can have a free quota if it meets the qualifications. The paid cluster with a free quota will consume the free quota first.
 
 ## T
 

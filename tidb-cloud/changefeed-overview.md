@@ -12,7 +12,7 @@ TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data servic
 >
 > Currently, TiDB Cloud only allows up to 10 changefeeds per cluster.
 >
-> For [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta), the changefeed feature is unavailable.
+> For [TiDB Serverless clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta), the changefeed feature is unavailable.
 
 To access the changefeed feature, navigate to the cluster overview page of your TiDB cluster, and then click **Changefeed** in the left navigation pane. The changefeed page is displayed.
 
@@ -81,9 +81,9 @@ To learn the billing for changefeeds in TiDB Cloud, see [Changefeed billing](/ti
 
 ## Changefeed states
 
-The state of a replication task represents the running state of the replication task. During the running process, replication tasks might fail with errors, be manually paused, resumed, or reach the specified `TargetTs`. These behaviors can lead to changes of the replication task state. 
+The state of a replication task represents the running state of the replication task. During the running process, replication tasks might fail with errors, be manually paused, resumed, or reach the specified `TargetTs`. These behaviors can lead to changes of the replication task state.
 
-The states are described as follows: 
+The states are described as follows:
 
 - `CREATING`: the replication task is being created.
 - `RUNNING`: the replication task runs normally and the checkpoint-ts proceeds normally.

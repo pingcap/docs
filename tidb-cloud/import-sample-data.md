@@ -24,8 +24,8 @@ This document describes how to import the sample data into TiDB Cloud via the UI
 
     On the **Import** page:
 
-    - For a Dedicated Tier cluster, click **Import Data** in the upper-right corner.
-    - For a Serverless Tier cluster, click the **import data from S3** link above the upload area.
+    - For a TiDB Dedicated cluster, click **Import Data** in the upper-right corner.
+    - For a TiDB Serverless cluster, click the **import data from S3** link above the upload area.
 
     Fill in the following parameters:
 

@@ -5,7 +5,7 @@ summary: Learn about how to use Customer-Managed Encryption Key (CMEK) in TiDB C
 
 # Encryption at Rest Using Customer-Managed Encryption Keys
 
-Customer-Managed Encryption Key (CMEK) lets you protect your static data in a TiDB Cloud Dedicated Tier using a cryptographic key that is completely controlled by you. This key is known as the CMEK key.
+Customer-Managed Encryption Key (CMEK) lets you protect your static data in a TiDB Dedicated cluster using a cryptographic key that is completely controlled by you. This key is known as the CMEK key.
 
 After you enable CMEK for a project, all clusters created within this project encrypt their static data using this CMEK key, and any backup data produced by these clusters is also encrypted using the same key. If you do not enable CMEK, TiDB Cloud uses an escrow key to encrypt all data in your cluster at rest.
 
@@ -17,7 +17,7 @@ After you enable CMEK for a project, all clusters created within this project en
 
 - Currently, TiDB Cloud only supports using AWS KMS to provide CMEK.
 - To use CMEK, you need to enable CMEK when creating a project and complete CMEK-related configurations before creating a cluster. You cannot enable CMEK for existing projects.
-- Currently, in CMEK-enabled projects, you can only create [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters hosted on AWS. Dedicated Tier clusters hosted on GCP and [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters are not supported.
+- Currently, in CMEK-enabled projects, you can only create [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters hosted on AWS. TiDB Dedicated clusters hosted on GCP and [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters are not supported.
 - Currently, for a specific project, you can only enable CMEK for one AWS region. Once you have configured it, you cannot create clusters in other regions within the same project.
 
 ## Enable CMEK
@@ -99,7 +99,7 @@ If you want to encrypt your data using the KMS owned by your account, take the f
 
 ### Step 3. Create a cluster
 
-Create a Dedicated Tier cluster hosted on AWS under the project created in Step 1. Ensure that the region where the cluster is located is the same as that in Step 2.
+Create a TiDB Dedicated cluster hosted on AWS under the project created in Step 1. Ensure that the region where the cluster is located is the same as that in Step 2.
 
 > **Note:**
 >

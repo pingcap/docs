@@ -13,7 +13,7 @@ ticloud cluster connect-info [flags]
 
 > **Note:**
 >
-> Currently, this command only supports getting the connection string of a [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) cluster.
+> Currently, this command only supports getting the connection string of a [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) cluster.
 
 ## Examples
 

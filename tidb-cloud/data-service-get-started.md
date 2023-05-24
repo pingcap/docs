@@ -9,7 +9,7 @@ Data Service (beta) enables you to access TiDB Cloud data via an HTTPS request u
 
 > **Tip:**
 >
-> TiDB Cloud provides a Chat2Query API for Serverless Tier clusters. After it is enabled, TiDB Cloud will automatically create a system Data App called **Chat2Query** and a Chat2Data endpoint in Data Service. You can call this endpoint to let AI generate and execute SQL statements by providing instructions.
+> TiDB Cloud provides a Chat2Query API for TiDB Serverless clusters. After it is enabled, TiDB Cloud will automatically create a system Data App called **Chat2Query** and a Chat2Data endpoint in Data Service. You can call this endpoint to let AI generate and execute SQL statements by providing instructions.
 >
 > For more information, see [Get started with Chat2Query API](/tidb-cloud/use-chat2query-api.md).
 
@@ -17,7 +17,7 @@ This document introduces how to quickly get started with TiDB Cloud Data Service
 
 ## Before you begin
 
-Before creating a Data App, make sure that you have created a [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) cluster. If you do not have one, follow the steps in [Create a cluster](/tidb-cloud/create-tidb-cluster.md) to create one.
+Before creating a Data App, make sure that you have created a [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) cluster. If you do not have one, follow the steps in [Create a cluster](/tidb-cloud/create-tidb-cluster.md) to create one.
 
 ## Step 1. Create a Data App
 
