@@ -70,7 +70,7 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
     <td>TiDB supports LDAP authentication, which is compatible with <a href="https://dev.mysql.com/doc/refman/8.0/en/ldap-pluggable-authentication.html" target="_blank">MySQL 8.0</a>.</td>
   </tr>
   <tr>
-    <td> Audit log enhancement (<a href="https://www.pingcap.com/tidb-enterprise/" target="_blank">enterprise edition</a> only)</td> 
+    <td> Audit log enhancement (<a href="https://www.pingcap.com/tidb-enterprise/" target="_blank">Enterprise Edition</a> only)</td> 
     <td>TiDB Enterprise Edition enhances the database auditing feature. It significantly improves the system capacity by providing more fine-grained event filtering controls, more user-friendly filter settings, newly added JSON formatted output files, and lifecycle management of audit logs.</td>
   </tr>
 </tbody>
@@ -280,19 +280,20 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
 
     For more information, see [documentation](/security-compatibility-with-mysql.md).
 
-* Refactor the database auditing feature (Enterprise Edition) **tw:hfxsd**
+* Enhance the database auditing feature (Enterprise Edition) **tw:hfxsd**
 
-    In v7.1.0, the database auditing capabilities have been refactored for TiDB Enterprise Edition, which significantly increases the scope of capabilities and improves the experience to meet the needs of enterprises for database security compliance:
-    
-    - Introduce the concepts of "Filter" and "Rule" to provide more granular audit event definitions and support more fine-grained audit settings.
-    - Support defining rules in JSON format, providing a more friendly way for configuration.
-    - Add automatic log rotation and space management functions. Support configuring log rotation in two dimensions: retention time and log size.
-    - Support outputting audit logs in both TEXT and JSON formats for easy integration with third-party tools.
+    In v7.1.0, TiDB Enterprise Edition enhances the database auditing feature, which significantly expands its capacity and improves the user experience to meet the needs of enterprises for database security compliance:
+
+    - Introduce the concepts of "Filter" and "Rule" for more granular audit event definitions and more fine-grained audit settings.
+    - Support defining rules in JSON format, providing a more user-friendly configuration method.
+    - Add automatic log rotation and space management functions, and support configuring log rotation in two dimensions: retention time and log size.
+    - Support outputting audit logs in both TEXT and JSON formats, facilitating easier integration with third-party tools.
     - Support audit log redaction. You can replace all literals to enhance security.
     
-  Database auditing is an important feature in TiDB Enterprise Edition. Database auditing provides a powerful monitoring and auditing tool for enterprises to ensure data security and compliance. It can help managers in enterprises track the source and impact of database operations to ensure that data would not be illegally stolen or tampered with. At the same time, database auditing can also help enterprises to comply with various regulatory and compliance requirements to safeguard the legal and ethical compliance of enterprises. This feature has a very important application value for enterprise information security.
+  Database auditing is an important feature in TiDB Enterprise Edition. This feature provides a powerful monitoring and auditing tool for enterprises to ensure data security and compliance. It can help enterprises managers in tracking the source and impact of database operations to prevent illegal data theft or tampering. Furthermore, database auditing can also help enterprises meet various regulatory and compliance requirements, ensuring the legal and ethical compliance. This feature has important application value for enterprise information security.
     
-   This is feature is included in TiDB Enterprise Edition. Go to [TiDB Enterprise page](https://www.pingcap.com/tidb-enterprise/) to get TiDB Enterprise Edition and its documentation.
+   This feature is included in TiDB Enterprise Edition. To use this feature and its documentation, navigate to the  [TiDB Enterprise page](https://www.pingcap.com/tidb-enterprise/).
+
 ## Compatibility changes
 
 > **Note:**
