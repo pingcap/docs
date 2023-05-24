@@ -648,7 +648,7 @@ worker-num = 16
 #    {matcher = ['test3.*', 'test4.*'], topic = "Topic expression 2", partition = "index-value" },
 #    {matcher = ['test1.*', 'test5.*'], topic = "Topic expression 3", partition = "table"},
 #    {matcher = ['test6.*'], partition = "ts"}
-]
+# ]
 # For the sink of MQ type, you can specify the protocol format of the message.
 # Currently the following protocols are supported: canal-json, open-protocol, canal, avro, and maxwell.
 # protocol = "canal-json"
