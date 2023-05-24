@@ -101,7 +101,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 - Type: Integer
 - Default value: `10`
 - Range: `[1, 32767]`
-- For LDAP SASL authentication, this variable specifies the initial size of the pool of connections to the LDAP server.
+- For LDAP SASL authentication, this variable specifies the initial connections in the connection pool to the LDAP server.
 
 ### authentication_ldap_sasl_max_pool_size <span class="version-mark">New in v7.1.0</span>
 
@@ -110,7 +110,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 - Type: Integer
 - Default value: `1000`
 - Range: `[1, 32767]`
-- For LDAP SASL authentication, this variable specifies the maximum size of the pool of connections to the LDAP server.
+- For LDAP SASL authentication, this variable specifies the maximum connections in the connection pool to the LDAP server.
 
 ### authentication_ldap_sasl_server_host <span class="version-mark">New in v7.1.0</span>
 
@@ -185,7 +185,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 - Type: Integer
 - Default value: `10`
 - Range: `[1, 32767]`
-- For LDAP simple authentication, this variable specifies the initial size of the pool of connections to the LDAP server.
+- For LDAP simple authentication, this variable specifies the initial connections in the connection pool to the LDAP server.
 
 ### authentication_ldap_simple_max_pool_size <span class="version-mark">New in v7.1.0</span>
 
@@ -194,7 +194,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 - Type: Integer
 - Default value: `1000`
 - Range: `[1, 32767]`
-- For LDAP simple authentication, this variable specifies the maximum size of the pool of connections to the LDAP server.
+- For LDAP simple authentication, this variable specifies the maximum connections in the connection pool to the LDAP server.
 
 ### authentication_ldap_simple_server_host <span class="version-mark">New in v7.1.0</span>
 
