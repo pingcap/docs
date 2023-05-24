@@ -5,7 +5,7 @@ summary: Introduce how to use the Resource Manager page in TiDB Dashboard to vie
 
 # TiDB Dashboard Resource Manager Page
 
-To implement resource isolation using the [Resource Control](/tidb-resource-control.md) feature, cluster administrators can create resource groups and set read and write quotas for each group. Before resource planning, you need to know the overall capacity of the cluster. This document helps you view the information about resource control, so you can estimate the cluster capacity before resource planning and allocate resources more effectively.
+To implement resource isolation using the [Resource Control](/tidb-resource-control.md) feature, cluster administrators can create resource groups and set quotas for each group. Before resource planning, you need to know the overall capacity of the cluster. This document helps you view the information about resource control, so you can estimate the cluster capacity before resource planning and allocate resources more effectively.
 
 ## Access the page
 
@@ -30,7 +30,7 @@ The Resource Manager page contains the following three sections:
     - [Estimate capacity based on actual workload](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-actual-workload)
     - [Estimate capacity based on hardware deployment](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-hardware-deployment)
 
-- Metrics: By observing the metrics on the panel, you can understand the current overall resource consumption status of the cluster.
+- Metrics: By observing the metrics on the panels, you can understand the current overall resource consumption status of the cluster.
 
 ## Estimate Capacity
 
@@ -47,7 +47,7 @@ Before resource planning, you need to know the overall capacity of the cluster. 
 
     ![Calibrate by Hardware](/media/dashboard/dashboard-resource-manager-calibrate-by-hardware.png)
 
-    The **Total RU of user resource groups** represents the total amount of RU for all users resource groups, excluding the `default` user. If this value is less than the estimated capacity, the system triggers an alert. By default, the system allocates unlimited usage to the predefined `default` resource group. When all users belong to the `default` resource group, resources are allocated in the same way as when resource control is disabled.
+    The **Total RU of user resource groups** represents the total amount of RU for all user resource groups, excluding the `default` resource group. If this value is less than the estimated capacity, the system triggers an alert. By default, the system allocates unlimited usage to the predefined `default` resource group. When all users belong to the `default` resource group, resources are allocated in the same way as when resource control is disabled.
 
 - [Estimate capacity based on actual workload](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-actual-workload)
 
