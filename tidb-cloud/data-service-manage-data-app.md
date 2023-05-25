@@ -17,17 +17,19 @@ To create a Data App for your project, perform the following steps:
 2. Enter a name for the Data App, and select clusters that you want the Data App to access.
 3. (Optional) To automatically deploy metadata and endpoints of the Data App to your preferred GitHub repository and branch, expand **Connect your Data App to GitHub**, and then do the following:
 
-    1. Click **Install on GitHub**, and then follow the on-screen instructions to install TiDB Cloud data services as an application on your target repository.
+    1. Click **Install on GitHub**, and then follow the on-screen instructions to install TiDB Cloud Data Services as an application on your target repository.
     2. Click **Authorize**, and then follow the on-screen instructions to authorize access to the application on GitHub.
-    3. Select the target repository, branch, and directory where you want to save the configuration files of your Data App.
+    3. Select the target repository, branch, and directory where you want to store the configuration files of your Data App.
 
     > **Note:**
     >
-    > The combination of repository, branch, and directory represents the path of the configuration files, which must be unique among Data Apps. If the path already contains files of existing Data Apps, you need to select a new path instead. If you have created a GitHub branch based on configuration files of an existing Data App and want to import the configuration of the existing Data App to a new Data App, see [Import configurations of an existing Data App](#import-configurations-of-an-existing-data-app)
+    > The combination of repository, branch, and directory represents the path of the configuration files, which must be unique among Data Apps. If the path already contains files of existing Data Apps, you need to select a new path instead. If you have created a GitHub branch based on configuration files of an existing Data App and want to import the configuration of the existing Data App to a new Data App, see [Import configurations of an existing Data App](#import-configurations-of-an-existing-data-app).
 
 4.Click **Create Data App**.
 
 The newly created Data App is added to the top of the list. A default `untitled endpoint` is created for the new Data App.
+
+If you have connected your Data App to GitHub, Check your selected directory on GitHub. If the configuration files of the Data App have been committed by `tidb-cloud-data-services`, it indicates that your Data App is connected to GitHub successfully. For more information, see [Deploy Automatically with GitHub](/tidb-cloud/data-service-manage-github-integration.md).
 
 ## Modify a Data App
 

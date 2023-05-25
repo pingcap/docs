@@ -41,6 +41,8 @@ A Data App is a group of endpoints that you can use to access data for a specifi
 
 5. Click **Create Data App**. The [**Data Service**](https://tidbcloud.com/console/data-service) details page is displayed.
 
+If you have connected your Data App to GitHub, Check your selected directory on GitHub. If the configuration files of the Data App have been committed by `tidb-cloud-data-services`, it indicates that your Data App is connected to GitHub successfully. For more information, see [Deploy Automatically with GitHub](/tidb-cloud/data-service-manage-github-integration.md).
+
 ## Step 2. Develop an endpoint
 
 An endpoint is a web API that you can customize to execute SQL statements.
