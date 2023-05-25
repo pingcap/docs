@@ -36,7 +36,7 @@ Different cloud providers offer different types of disks with varying performanc
 - Azure: Ultra SSD, disk size, IOPS and MBPS can be provisioned.
 
 ### Example 1, Run a social network workload on AWS
-With 20GB gp3 dedicated raft-engine disk, for a write intensive social network application workload, qps is up by 17.5%, avg latency of insert statement down by 18.7%, p99 latency of insert statement down by 45.6%, and the estimated cost is increased by only 0.4%. AWS provide 3000 IOPS and 125 MBPS/s for a 20GB gp3 volume.
+With 20GB gp3 dedicated raft-engine disk, for a write intensive social network application workload, qps increases by 17.5%, avg latency of insert statement decreases by 18.7%, p99 latency of insert statement decreases by 45.6%, and the estimated cost is increased by only 0.4%. AWS provide 3000 IOPS and 125 MBPS/s for a 20GB gp3 volume.
 
 | Item | shared raft-engine disk|dedicated raft-engine disk| diff(%) |
 | ------------- | ------------- |------------- |------------- |
@@ -57,9 +57,9 @@ By using a 32G ultra disk for raft-engine on Azure,
 | AVG Latency (ms)| Sysbench - oltp_read_write |  4.5 | 3.8 | -15.6 |
 | AVG Latency (ms)| TPC-C |  3.9 | 3.0 | -23.1 |
 
-### Example 3, how to attach a dedicated ps-ssd disk for raft-engine on TiKV manifest
+### Example 3, how to attach a dedicated pd-ssd disk on Google Cloud for raft-engine on TiKV manifest
 
-Here is a example for a cluster deployed by TiDB Operator on GCP, attach an additional disk with 512GB PD-SSD volumne, and change the `raft-engine.dir` to store raft-engine logs to this specific disk.
+Here is a example for a cluster deployed by TiDB Operator on Google Cloud, attach an additional disk with 512GB PD-SSD volumne, and change the `raft-engine.dir` to store raft-engine logs to this specific disk.
 
 ```
 tikv:
@@ -107,19 +107,18 @@ Since v6.6.0, TiFlash support [compression exchange](https://docs.pingcap.com/ti
 
 # Mitigation of Live Migration Maintenance Events on Google Cloud
 
-Google Cloud's [Live Migration feature](https://cloud.google.com/compute/docs/instances/live-migration-process) enables VMs to be seamlessly migrated between hosts without causing downtime. However, these migration events can have an huge impact on the performance of VMs, including those running in a TiDB Cluster. This can result in slower query processing and longer response times.
+Google Cloud's [Live Migration feature](https://cloud.google.com/compute/docs/instances/live-migration-process) enables VMs to be seamlessly migrated between hosts without causing downtime. However, these migration events are not rarely occured and can have an huge impact on the performance of VMs, including those running in a TiDB Cluster. During the event, the impacted VMs will performan much slower and impact the query proccsing response time in TiDB Cluster.
 
-To mitigate the performance impact caused by GCP's live migration events, TiDB provides a helpful [watching script](https://github.com/PingCAP-QE/tidb-google-maintenance). This script, based on Google's own metadata [example](https://github.com/GoogleCloudPlatform/python-docs-samples/blob/master/compute/metadata/main.py), can be found at the following GitHub repository: TiDB Google Maintenance. The script is deployed on TiDB, TiKV, and PD (Placement Driver) nodes within the TiDB Cluster.
+To mitigate the performance penalty from GCP's live migration event, TiDB provide a [watching script](https://github.com/PingCAP-QE/tidb-google-maintenance) based on the Google's own metadata [example](https://github.com/GoogleCloudPlatform/python-docs-samples/blob/master/compute/metadata/main.py). The scripts are deployed on TiDB, TiKV, and PD nodes, to detect maintenance events. During maintenance events, below appropriate actions can be taken:
+- TiDB: Put the TiDB offline by cordon the TiDB node and delete the TiDB pod (the node pool of TiDB instance MUST be set to auto-scale, and be set to TiDB dedicated. Other pods running on the node would be interrupted when the node is cordon. The cordon node is expected to be reclaimed by auto-scaler)
+- TiKV: Ecivt leaders on TiKV store during maintenance.
+- PD: Resign leader if the current PD instance is the PD leader
+
+It is worth emphasizing that this monitoring script is specifically tailored for TiDB Clusters deployed using the [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/dev/tidb-operator-overview), which offers enhanced management functionalities for TiDB in Kubernetes environments.
 
 The purpose of the watching script is to detect maintenance events initiated by Google Cloud. When such events are detected, appropriate actions can be taken to minimize disruption and optimize the cluster's behavior. It's important to note that this watching script is specifically designed for TiDB Clusters deployed using the TiDB Operator, which provides additional management capabilities for TiDB in Kubernetes environments.
 
 By utilizing the watching script and taking necessary actions during maintenance events, TiDB clusters can better handle GCP's live migration events and ensure smoother operations with minimal impact on query processing and response times.
-
-Google Cloud's [Live Migration](https://cloud.google.com/compute/docs/instances/live-migration-process) feature allows VMs to be migrated between hosts without downtime. It's not a rarely occured maintenance event. During the event, the impacted VMs will performan much slower and impact the query proccsing response time in TiDB Cluster.
-To mitigate the performance penalty from GCP's live migration event, TiDB provide a [watching script](https://github.com/PingCAP-QE/tidb-google-maintenance) based on the Google's own metadata [example](https://github.com/GoogleCloudPlatform/python-docs-samples/blob/master/compute/metadata/main.py). The scripts are deployed on TiDB, TiKV, and PD nodes, to detect maintenance events. During maintenance events, below appropriate actions can be taken, be noted that only TiDB Cluster deployed by [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/dev/tidb-operator-overview) is supported:
-- TiDB: Put the TiDB offline by cordon the TiDB node and delete the TiDB pod (the node pool of TiDB instance MUST be set to auto-scale, the cordon node is expected to be reclaimed by auto-scaler)
-- TiKV: Ecivt leaders on TiKV store during maintenance.
-- PD: Resign leader if the current PD instance is the PD leader
 
 # PD Tuning with large deployment cluster
 
