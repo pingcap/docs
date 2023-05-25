@@ -20,7 +20,7 @@ Before you call an endpoint, make sure that you have created an API key in the D
 To create an endpoint, perform the following steps:
 
 1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
-2. In the left pane, click the name of your target Data App and click **...** > **Create Endpoint**. You can update the default name if necessary.
+2. In the left pane, locate your target Data App and click **+** **Create Endpoint** to the right of the App name. You can update the default name if necessary.
 
     > **Tip:**
     >

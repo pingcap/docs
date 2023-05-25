@@ -34,7 +34,7 @@ If you do not enable that during the app creation, you can still enable it as fo
 
     > **Note:**
     >
-    > The combination of repository, branch, and directory represents the path of the configuration files, which must be unique among Data Apps. If the path already contains files of existing Data Apps, you need to select a new path instead. If you have created a GitHub branch based on configuration files of an existing Data App and want to import the configuration of the existing Data App to a new Data App, see [Import configurations of an existing Data App](#import-configurations-of-an-existing-data-app).
+    > The combination of repository, branch, and directory represents the path of the configuration files, which must be unique among Data Apps. If the path already contains files of existing Data Apps, you need to select a new path instead. If you have created a GitHub branch based on configuration files of an existing Data App and want to import the configuration of the existing Data App to a new Data App, see [Import configurations of an existing Data App](#import-configurations-of-an-existing-data-app)
 
 5. Click **Confirm Connect**.
 6. Check your selected directory on GitHub. If the configuration files of the Data App are committed, it indicates that your Data App is connected to GitHub successfully.
