@@ -95,7 +95,7 @@ Examples:
 >     - After executing the statement, if you create tables in this database before the completion of the statement execution, TiFlash replicas **might or might not** be created for these new tables.
 >     - After executing the statement, if you add indexes for tables in the database before the completion of the statement execution, the statement might hang and resume only after the indexes are added.
 >
-> - If you create tables in this database **after** the completion of the statement execution, TiFlash replicas cannot be created automatically for these new tables.
+> - If you create tables in this database **after** the completion of the statement execution, TiFlash replicas are not created automatically for these new tables.
 >
 > - This statement skips system tables, views, temporary tables, and tables with character sets not supported by TiFlash.
 
