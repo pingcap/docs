@@ -11,6 +11,10 @@ aliases: ['/docs/stable/reference/configuration/tidb-server/configuration-file/'
 
 The TiDB configuration file supports more options than command-line parameters. You can download the default configuration file [`config.toml.example`](https://github.com/pingcap/tidb/blob/master/config/config.toml.example) and rename it to `config.toml`. This document describes only the options that are not involved in [command line options](/command-line-flags-for-tidb-configuration.md).
 
+> **Tip:**
+>
+> If you need to adjust the value of a configuration item, refer to [Modify the configuration](/maintain-tidb-using-tiup.md#modify-the-configuration).
+
 ### `split-table`
 
 - Determines whether to create a separate Region for each table.
@@ -485,6 +489,27 @@ Configuration items related to performance.
 + Default value: `1000`
 + Currently, the valid value range is `[1, 100000]`.
 
+<<<<<<< HEAD
+=======
+### `lite-init-stats` <span class="version-mark">New in v7.1.0</span>
+
+> **Warning:**
+>
+> This variable is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
++ Controls whether to use lightweight statistics initialization during TiDB startup.
++ Default value: false
++ When the value of `lite-init-stats` is `true`, statistics initialization does not load any histogram, TopN, or Count-Min Sketch of indexes or columns into memory. When the value of `lite-init-stats` is `false`, statistics initialization loads histograms, TopN, and Count-Min Sketch of indexes and primary keys into memory but does not load any histogram, TopN, or Count-Min Sketch of non-primary key columns into memory. When the optimizer needs the histogram, TopN, and Count-Min Sketch of a specific index or column, the necessary statistics are loaded into memory synchronously or asynchronously (controlled by [`tidb_stats_load_sync_wait`](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540)).
++ Setting `lite-init-stats` to `true` speeds up statistics initialization and reduces TiDB memory usage by avoiding unnecessary statistics loading. For details, see [Load statistics](/statistics.md#load-statistics).
+
+### `force-init-stats` <span class="version-mark">New in v7.1.0</span>
+
++ Controls whether to wait for statistics initialization to finish before providing services during TiDB startup.
++ Default value: false
++ When the value of `force-init-stats` is `true`, TiDB needs to wait until statistics initialization is finished before providing services upon startup. If there are a large number of tables and partitions, setting `force-init-stats` to `true` might prolong the time it takes for TiDB to start providing services.
++ When the value of `force-init-stats` is `false`, TiDB can still provide services before statistics initialization is finished, but the optimizer uses pseudo statistics to make decisions, which might result in suboptimal execution plans.
+
+>>>>>>> 960264fdc (*: add instruction for editing config (#13666))
 ## opentracing
 
 Configuration items related to opentracing.
