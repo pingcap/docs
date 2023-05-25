@@ -1,12 +1,12 @@
 ---
 title: Deploy Automatically with GitHub
-summary: Learn how to create, develop, test, deploy, and delete an endpoint in a Data App in the TiDB Cloud console.
+summary: Learn how to automatically deploy metadata and endpoints of your Data App with GitHub.
 ---
 
 # Deploy Automatically with GitHub
 
 By connecting your Data App to GitHub, you can automatically deploy metadata and endpoints of the Data App to your preferred GitHub repository and branch. Whenever you push changes of the Data App configuration files to a GitHub
-repository.
+repository, the new configurations are deployed in TiDB Cloud automatically.
 
 This document describes how to manage the GitHub integration of a Data App in the TiDB Cloud console.
 

@@ -13,9 +13,21 @@ This document describes how to manage your Data Apps in the TiDB Cloud console. 
 
 To create a Data App for your project, perform the following steps:
 
-1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
-2. In the left pane, click <MDSvgIcon name="icon-create-data-app" /> **Create DataApp** and update the default name if necessary.
-3. The newly created Data App is added to the top of the list. A default `untitled endpoint` is created for the new Data App.
+1. On the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project, click <MDSvgIcon name="icon-create-data-app" /> **Create DataApp** in the left pane.
+2. Enter a name for the Data App, and select clusters that you want the Data App to access.
+3. (Optional) To automatically deploy metadata and endpoints of the Data App to your preferred GitHub repository and branch, expand **Connect your Data App to GitHub**, and then do the following:
+
+    1. Click **Install on GitHub**, and then follow the on-screen instructions to install TiDB Cloud data services as an application on your target repository.
+    2. Click **Authorize**, and then follow the on-screen instructions to authorize access to the application on GitHub.
+    3. Select the target repository, branch, and directory where you want to save the the configuration files of your Data App.
+
+    > **Note:**
+    >
+    > The directory you selected must be empty. If the directory already contains files of the existing Data Apps, you need to select a new directory instead or clear it.
+
+4.Click **Create Data App**.
+
+The newly created Data App is added to the top of the list. A default `untitled endpoint` is created for the new Data App.
 
 ## Modify a Data App
 

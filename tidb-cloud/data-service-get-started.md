@@ -29,7 +29,17 @@ A Data App is a group of endpoints that you can use to access data for a specifi
 
 3. On the **Get started by creating your first data application** page, enter a name and select clusters that you want the Data App to access.
 
-4. Click **Create Data App**. The [**Data Service**](https://tidbcloud.com/console/data-service) details page is displayed.
+4. (Optional) To automatically deploy metadata and endpoints of the Data App to your preferred GitHub repository and branch, expand **Connect your Data App to GitHub**, and then do the following:
+
+    1. Click **Install on GitHub**, and then follow the on-screen instructions to install TiDB Cloud data services as an application on your target repository.
+    2. Click **Authorize**, and then follow the on-screen instructions to authorize access to the application on GitHub.
+    3. Select the target repository, branch, and directory where you want to save the the configuration files of your Data App.
+
+    > **Note:**
+    >
+    > The directory you selected must be empty. If the directory already contains files of the existing Data Apps, you need to select a new directory instead or clear it.
+
+5. Click **Create Data App**. The [**Data Service**](https://tidbcloud.com/console/data-service) details page is displayed.
 
 ## Step 2. Develop an endpoint
 
