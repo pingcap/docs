@@ -33,7 +33,7 @@ A Data App is a group of endpoints that you can use to access data for a specifi
 
     1. Click **Install on GitHub**, and then follow the on-screen instructions to install TiDB Cloud data services as an application on your target repository.
     2. Click **Authorize**, and then follow the on-screen instructions to authorize access to the application on GitHub.
-    3. Select the target repository, branch, and directory where you want to save the the configuration files of your Data App.
+    3. Select the target repository, branch, and directory where you want to save the configuration files of your Data App.
 
     > **Note:**
     >

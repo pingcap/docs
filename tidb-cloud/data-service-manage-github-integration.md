@@ -30,18 +30,18 @@ If you do not enable that during the app creation, you can still enable it as fo
 
     1. Click **Install on GitHub**, and then follow the on-screen instructions to install TiDB Cloud data services as an application on your target repository.
     2. Click **Authorize**, and then follow the on-screen instructions to authorize access to the application on GitHub.
-    3. Select the target repository, branch, and directory where you want to save the the configuration files of your Data App.
+    3. Select the target repository, branch, and directory where you want to save the configuration files of your Data App.
 
     > **Note:**
     >
-    > The directory you selected must be empty. If the directory already contains files of the existing Data Apps, you need to select a new directory instead or clear it.
+    > The combination of repository, branch, and directory represents the path of the configuration files, which must be unique among Data Apps. If the path already contains files of existing Data Apps, you need to select a new path instead. If you have created a GitHub branch based on configuration files of an existing Data App and want to import the configuration of the existing Data App to a new Data App, see [Import configurations of an existing Data App](#import-configurations-of-an-existing-data-app).
 
 5. Click **Confirm Connect**.
 6. Check your selected directory on GitHub. If the configuration files of the Data App are committed, it indicates that your Data App is connected to GitHub successfully.
 
 ## Step 2. Configure GitHub deployment
 
-After you connect your Data App to GitHub, the automatic deployment of changes for this Data App is enabled by default. 
+After you connect your Data App to GitHub, the automatic deployment of changes for this Data App is enabled by default.
 
 - **Automatic Deployment**
 
@@ -92,8 +92,17 @@ After connecting to GitHub, you can make changes to your application configurati
 
 While not recommended, you might stop or re-start deployment at any time. View the full deployment history.
 
+## Import configurations of an existing Data App
+
+If you have created a GitHub branch based on configuration files of an existing Data App, you can import the configuration of the existing Data App to a new Data App as follows:
+
+1. Create a new Data App without connecting to GitHub.
+2. Get the ID of the new Data App.
+3. In the new branch, update the Data App ID in the `datapp_config.json` file to the new ID, and then modify the linked cluster and endpoints information if necessary.
+4. Follow the steps in [Connect your Data App to GitHub](#step-1-connect-your-data-app-to-github) to specify directory of the new branch for the new Data App.
+
 ## Remove Github integration
 
 1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
 2. In the left pane, click the name of your target Data App to view its details.
-3. In the **Connect to GitHub** area, click **Unlink**. 
+3. In the **Connect to GitHub** area, click **Unlink**.

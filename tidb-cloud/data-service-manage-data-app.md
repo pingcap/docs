@@ -19,11 +19,11 @@ To create a Data App for your project, perform the following steps:
 
     1. Click **Install on GitHub**, and then follow the on-screen instructions to install TiDB Cloud data services as an application on your target repository.
     2. Click **Authorize**, and then follow the on-screen instructions to authorize access to the application on GitHub.
-    3. Select the target repository, branch, and directory where you want to save the the configuration files of your Data App.
+    3. Select the target repository, branch, and directory where you want to save the configuration files of your Data App.
 
     > **Note:**
     >
-    > The directory you selected must be empty. If the directory already contains files of the existing Data Apps, you need to select a new directory instead or clear it.
+    > The combination of repository, branch, and directory represents the path of the configuration files, which must be unique among Data Apps. If the path already contains files of existing Data Apps, you need to select a new path instead. If you have created a GitHub branch based on configuration files of an existing Data App and want to import the configuration of the existing Data App to a new Data App, see [Import configurations of an existing Data App](#import-configurations-of-an-existing-data-app)
 
 4.Click **Create Data App**.
 
