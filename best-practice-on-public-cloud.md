@@ -88,7 +88,7 @@ tikv:
 
 
 ## Reduce Compaction IO Flow In KV RocksDB
-If the IO throughput limit of the cloud disk for KV RocksDB is hits, the total number of compaction pending bytes will grow over time and flow control is triggered, indicating that TiKV doesn't have enough resources to keep up with the foreground write flow. In this case, if the bottleneck is the IO throughput limit on the cloud disk, rafther than on the TiKV cpu resource, increasing the compression level for the RocksDB and reducing the IO throughput can help improve performance. For example, below config increase all the compression level of the defaultcf column family to reduce the compaction flow IO throughput.
+As the storage engine of TiKV, [RocksDB](https://rocksdb.org/) is used to store user data. The write amplification for RocksDB can be high and the workload may be bottlenecked on disk throughput. This is not uncommon because the provisioned IO throughput on cloud ebs is usally limited due to cost reason. Under this situation, the total number of compaction pending bytes will grow over time and flow control is triggered, indicating that TiKV doesn't have enough disk bandwith to keep up with the foreground write flow. In this case, to mitigate the bottleneck of disk throughput, increasing the compression level for the RocksDB and reducing the disk throughput can help improve performance. For example, below config increase all the compression level of the default column family to zstd.
 
 ```
 [rocksdb.defaultcf]
