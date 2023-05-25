@@ -103,15 +103,11 @@ Examples:
 
 Similar to creating TiFlash replicas for tables, successful execution of the DDL statement does not mean the completion of replication. You can execute the following SQL statement to check the progress of replication on target tables:
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = '<db_name>';
 ```
 
 To check tables without TiFlash replicas in the database, you can execute the following SQL statement:
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT TABLE_NAME FROM information_schema.tables where TABLE_SCHEMA = "<db_name>" and TABLE_NAME not in (SELECT TABLE_NAME FROM information_schema.tiflash_replica where TABLE_SCHEMA = "<db_name>");
@@ -215,15 +211,11 @@ When configuring replicas, if you need to distribute TiFlash replicas to multipl
 
 2. After starting a cluster, specify the labels when creating replicas.
 
-    {{< copyable "sql" >}}
-
     ```sql
     ALTER TABLE table_name SET TIFLASH REPLICA count LOCATION LABELS location_labels;
     ```
 
     For example:
-
-    {{< copyable "sql" >}}
 
     ```sql
     ALTER TABLE t SET TIFLASH REPLICA 2 LOCATION LABELS "zone";
