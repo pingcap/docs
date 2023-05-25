@@ -628,7 +628,7 @@ enable-old-value = true
 
 [filter]
 # Ignores the transaction of specified start_ts.
-ignore-txn-start-ts = [1, 2]
+# ignore-txn-start-ts = [1, 2]
 
 # Filter rules.
 # Filter syntax: https://docs.pingcap.com/tidb/stable/table-filter#syntax.
@@ -643,15 +643,15 @@ worker-num = 16
 # Since v6.1, TiDB supports two types of event dispatchers: partition and topic. For more information, see the following section.
 # The matching syntax of matcher is the same as the filter rule syntax. For details about the matcher rules, see the following section.
 
-dispatchers = [
-    {matcher = ['test1.*', 'test2.*'], topic = "Topic expression 1", partition = "ts" },
-    {matcher = ['test3.*', 'test4.*'], topic = "Topic expression 2", partition = "index-value" },
-    {matcher = ['test1.*', 'test5.*'], topic = "Topic expression 3", partition = "table"},
-    {matcher = ['test6.*'], partition = "ts"}
-]
+# dispatchers = [
+#    {matcher = ['test1.*', 'test2.*'], topic = "Topic expression 1", partition = "ts" },
+#    {matcher = ['test3.*', 'test4.*'], topic = "Topic expression 2", partition = "index-value" },
+#    {matcher = ['test1.*', 'test5.*'], topic = "Topic expression 3", partition = "table"},
+#    {matcher = ['test6.*'], partition = "ts"}
+# ]
 # For the sink of MQ type, you can specify the protocol format of the message.
 # Currently the following protocols are supported: canal-json, open-protocol, canal, avro, and maxwell.
-protocol = "canal-json"
+# protocol = "canal-json"
 ```
 
 ### Notes for compatibility
