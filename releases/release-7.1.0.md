@@ -74,7 +74,7 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
     <td>TiDB supports LDAP authentication, which is compatible with <a href="https://dev.mysql.com/doc/refman/8.0/en/ldap-pluggable-authentication.html" target="_blank">MySQL 8.0</a>.</td>
   </tr>
   <tr>
-    <td> Audit log enhancement (<a href="https://www.pingcap.com/tidb-enterprise/" target="_blank">Enterprise Edition</a> only)</td> 
+    <td> Audit log enhancement (<a href="https://www.pingcap.com/tidb-enterprise/" target="_blank">Enterprise Edition</a> only)</td>
     <td>TiDB Enterprise Edition enhances the database auditing feature. It significantly improves the system auditing capacity by providing more fine-grained event filtering controls, more user-friendly filter settings, newly added JSON formatted output files, and lifecycle management of audit logs.</td>
   </tr>
 </tbody>
@@ -379,8 +379,14 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
 
 + TiDB
 
-    - note [#issue](链接) @[贡献者 GitHub ID](链接)
+  <!-- **tw:hfxsd** (5) -->
+
+    - Support to use `SQL_NO_CACHE` to prevent TTL Scan queries from impacting the TiKV block cache [#43206](https://github.com/pingcap/tidb/issues/43206) @[lcwangchao](https://github.com/lcwangchao)
+    - Improve the MySQL compatibility of error messages related to `MAX_EXECUTION_TIME` [#43031](https://github.com/pingcap/tidb/issues/43031) @[dveeden](https://github.com/dveeden)
+    - The Cardinality column in the `SHOW INDEX` result can display the number of distinct values in the corresponding column in the statistics [#42227](https://github.com/pingcap/tidb/issues/42227) @[winoros](https://github.com/winoros)
     - Push down sort property to range partition table [#26166](https://github.com/pingcap/tidb/issues/26166) @[Defined2014](https://github.com/Defined2014)
+    - Enhance compatibility with MySQL implementation when using caching_sha2_password [#43576](https://github.com/pingcap/tidb/issues/43576) @[asjdf](https://github.com/asjdf)
+    - note [#issue](链接) @[贡献者 GitHub ID](链接)
 
 + TiKV
 
@@ -394,50 +400,89 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
 
 + TiFlash
 
-    - Improve TiFlash performance and stability in the disaggregated storage and compute architecture [#6882](https://github.com/pingcap/tiflash/issues/6882)  @[JaySon-Huang](https://github.com/JaySon-Huang) @[breezewish](https://github.com/breezewish) @[JinheLin](https://github.com/JinheLin)
+    - Improve TiFlash performance and stability in the disaggregated storage and compute architecture [#6882](https://github.com/pingcap/tiflash/issues/6882) @[JaySon-Huang](https://github.com/JaySon-Huang) @[breezewish](https://github.com/breezewish) @[JinheLin](https://github.com/JinheLin)
     - Support optimizing query performance in Semi Join or Anti Semi Join by selecting the smaller table as the build side [#7280](https://github.com/pingcap/tiflash/issues/7280) @[yibin87](https://github.com/yibin87)
-    - note [#issue](链接) @[贡献者 GitHub ID](链接)
+    - (dup) Improve performance of data import from BR and TiDB Lightning to TiFlash with default configurations [#7272](https://github.com/pingcap/tiflash/issues/7272) @[breezewish](https://github.com/breezewish)
 
 + Tools
-
-    + Backup & Restore (BR)
-
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
 
     + TiCDC
 
         - note [#issue](链接) @[贡献者 GitHub ID](链接)
         - note [#issue](链接) @[贡献者 GitHub ID](链接)
 
-    + TiDB Data Migration (DM)
-
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
-
     + TiDB Lightning
-
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
-
-    + TiUP
-
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+      <!-- **tw:hfxsd** (3) -->
+        - Change the Region distribution precheck item from Critical to Warn [#42836](https://github.com/pingcap/tidb/issues/42836) @[okJiang](https://github.com/okJiang)
+        - Add retry for unknown RPC errors during import [#43291](https://github.com/pingcap/tidb/issues/43291) @[D3Hunter](https://github.com/D3Hunter)
+        - Enhance Region job retry [#43682](https://github.com/pingcap/tidb/issues/43682) @[lance6716](https://github.com/lance6716)
 
 ## Bug fixes
 
 + TiDB
 
-    - Fix incompatible behaviors between Prepared and Non-Prepared Plan Cache [#42439](https://github.com/pingcap/tidb/issues/42439) @[qw4990](https://github.com/qw4990)
-    - Fix wrong results for Decimal data types in Plan Cache [#43311](https://github.com/pingcap/tidb/issues/43311) @[qw4990](https://github.com/qw4990)
+  <!-- **tw:Oreoxmt** (18) -->
+
+    - Fix the issue that a prompt for manual `analyze table` was added after reorganize partition [#42183](https://github.com/pingcap/tidb/issues/42183) @[CbcWestwolf](https://github.com/CbcWestwolf)
+    - (dup) Fix the issue of missing table names in the `ADMIN SHOW DDL JOBS` result when a `DROP TABLE` operation is being executed [#42268](https://github.com/pingcap/tidb/issues/42268) @[tiancaiamao](https://github.com/tiancaiamao)
+    - Fix the issue that sometimes you can't see the `Ignore Event Per Minute` and `Stats Cache LRU Cost` charts in the monitoring panel [#42562](https://github.com/pingcap/tidb/issues/42562) @[pingandb](https://github.com/pingandb)
+    - Fix the issue of incorrect results for the `ORDINAL_POSITION` column in the `INFORMATION_SCHEMA.COLUMNS` table query [#43379](https://github.com/pingcap/tidb/issues/43379) @[bb7133](https://github.com/bb7133)
+    - Fix the case sensitivity issue for some columns in the permission table [#41048](https://github.com/pingcap/tidb/issues/41048) @[bb7133](https://github.com/bb7133)
+    - (dup) Fix the issue that after a new column is added in the cache table, the value is `NULL` instead of the default value of the column [#42928](https://github.com/pingcap/tidb/issues/42928) @[lqs](https://github.com/lqs)
+    - Fix the correctness issue of CTE results under the condition of predicate pushdown [#43645](https://github.com/pingcap/tidb/issues/43645) @[winoros](https://github.com/winoros)
+    - (dup) Fix the issue of DDL retry caused by write conflict when executing `TRUNCATE TABLE` for partitioned tables with many partitions and TiFlash replicas [#42940](https://github.com/pingcap/tidb/issues/42940) @[mjonss](https://github.com/mjonss)
+    - Fix the issue that a Warning is given if a user uses subpartition when creating a partitioned table [#41198](https://github.com/pingcap/tidb/issues/41198) [#41200](https://github.com/pingcap/tidb/issues/41200) @[mjonss](https://github.com/mjonss)
+    - Fix the issue of incompatibility with MySQL when dealing with value overflow issues in generated columns [#40066](https://github.com/pingcap/tidb/issues/40066) @[jiyfhust](https://github.com/jiyfhust)
+    - Fix the issue that reorganize partition and other DDL operations cannot be performed concurrently [#42442](https://github.com/pingcap/tidb/issues/42442) @[bb7133](https://github.com/bb7133)
+    - Fix the issue of error reporting when querying a partitioned table partitioned by the `FLOOR` function [#42323](https://github.com/pingcap/tidb/issues/42323) @[jiyfhust](https://github.com/jiyfhust)
+    - Fix the issue that subsequent other DDLs report errors after canceling the DDL's reorganize partition task [#42448](https://github.com/pingcap/tidb/issues/42448) @[lcwangchao](https://github.com/lcwangchao)
+    - Fix the issue of incorrect assertions for delete operations under certain conditions [#42426](https://github.com/pingcap/tidb/issues/42426) @[tiancaiamao](https://github.com/tiancaiamao)
+    - (dup) Fix the issue that TiDB server cannot start due to an error in reading the cgroup information with the error message "can't read file memory.stat from cgroup v1: open /sys/memory.stat no such file or directory" [#42659](https://github.com/pingcap/tidb/issues/42659) @[hawkingrei](https://github.com/hawkingrei)
+    - Fix the issue of `Duplicate Key` error when updating the partition key data of a row on a partitioned table with a global index [#42312](https://github.com/pingcap/tidb/issues/42312) @[L-maple](https://github.com/L-maple)
+    - Fix the issue that the Scan Worker Time By Phase chart in the TTL monitoring panel does not display data [#42515](https://github.com/pingcap/tidb/issues/42515) @[lcwangchao](https://github.com/lcwangchao)
+    - Fix the issue that some queries return incorrect results on partitioned tables with a global index [#41991](https://github.com/pingcap/tidb/issues/41991) [#42065](https://github.com/pingcap/tidb/issues/42065) @[L-maple](https://github.com/L-maple)
+  <!-- **tw:ran-huang** (17) -->
+    - Fix the issue of displaying some error logs during the reorganize partition table process [#42180](https://github.com/pingcap/tidb/issues/42180) @[mjonss](https://github.com/mjonss)
+    - Fix the issue that the data length in the QUERY column of the `INFORMATION_SCHEMA.DDL_JOBS` table might be longer than the column definition [#42440](https://github.com/pingcap/tidb/issues/42440) @[tiancaiamao](https://github.com/tiancaiamao)
+    - Fix the issue that the `INFORMATION_SCHEMA.CLUSTER_HARDWARE` table might display errors in containers [#42851](https://github.com/pingcap/tidb/issues/42851) @[hawkingrei](https://github.com/hawkingrei)
+    - Fix the issue of incorrect results returned when querying partitioned tables using order by and limit [#43158](https://github.com/pingcap/tidb/issues/43158) @[Defined2014](https://github.com/Defined2014)
+    - Fix the issue of multiple DDL tasks using injest method running at the same time [#42903](https://github.com/pingcap/tidb/issues/42903) @[tangenta](https://github.com/tangenta)
+    - (dup) Fix the wrong value returned when querying a partitioned table using `Limit` [#24636](https://github.com/pingcap/tidb/issues/24636)
+    - Fix the issue of incorrect TiDB address display in IPv6 environment [#43260](https://github.com/pingcap/tidb/issues/43260) @[nexustar](https://github.com/nexustar)
+    - Fix the issue of incorrect display of system variables `tidb_enable_tiflash_read_for_write_stmt` and `tidb_enable_exchange_partition` [#43281](https://github.com/pingcap/tidb/issues/43281) @[gengliqi](https://github.com/gengliqi)
+    - Fix the issue of `Header read timeout` error when the proxy protocol handles certain error data [#43205](https://github.com/pingcap/tidb/issues/43205) @[blacktear23](https://github.com/blacktear23)
+    - Fix the issue that no automatic split Region after truncating a partition when `tidb_scatter_region` is enabled [#43174](https://github.com/pingcap/tidb/issues/43174) [#43028](https://github.com/pingcap/tidb/issues/43028) @[jiyfhust](https://github.com/jiyfhust)
+    - Add some checks on the table with generated columns, and error out for some unsupported DDL operations on columns [#38988](https://github.com/pingcap/tidb/issues/38988) [#24321](https://github.com/pingcap/tidb/issues/24321) @[tiancaiamao](https://github.com/tiancaiamao)
+    - Fix the issue that the error message is not correct when some type conversion errors occur [#41730](https://github.com/pingcap/tidb/issues/41730) @[hawkingrei](https://github.com/hawkingrei)
+    - Solve the problem that DDL tasks triggered on this node will be cancelled after TiDB node is normally shutdown [#43854](https://github.com/pingcap/tidb/issues/43854) @[zimulala](https://github.com/zimulala)
+    - Fix the issue that allocating ID for AUTO_INCREMENT column will be blocked for a long time when PD member address changes [#42643](https://github.com/pingcap/tidb/issues/42643) @[tiancaiamao](https://github.com/tiancaiamao)
+    - Fix the issue of `GC lifetime is shorter than transaction duration` error during DDL execution [#40074](https://github.com/pingcap/tidb/issues/40074) @[tangenta](https://github.com/tangenta)
+    - Fix the issue that metadata locks unexpectedly block the execution of DDL [#43755](https://github.com/pingcap/tidb/issues/43755) @[wjhuang2016](https://github.com/wjhuang2016)
+    - Fix the issue that some system views cannot be queried in an IPv6 environment [#43286](https://github.com/pingcap/tidb/issues/43286) @[Defined2014](https://github.com/Defined2014)
+  <!-- **tw:qiancai** (16) -->
+    - Fix the issue of new rows being written to the wrong partition during the add or coalesce partition process [#43892](https://github.com/pingcap/tidb/issues/43892) @[mjonss](https://github.com/mjonss)
+    - Fix the issue of not finding the partition during the inner join dynamic pruning [#43686](https://github.com/pingcap/tidb/issues/43686) @[mjonss](https://github.com/mjonss)
+    - Fix the issue of syntax error when analyzing the table [#43392](https://github.com/pingcap/tidb/issues/43392) @[guo-shaoge](https://github.com/guo-shaoge)
+    - Fix the issue that TiCDC might lose some row changes during table renaming [#43338](https://github.com/pingcap/tidb/issues/43338) @[tangenta](https://github.com/tangenta)
+    - Fix the issue that TiDB crashes when the client uses cursor reads [#38116](https://github.com/pingcap/tidb/issues/38116) @[YangKeao](https://github.com/YangKeao)
+    - Fix the issue that `ADMIN SHOW DDL JOBS LIMIT` returns incorrect results [#42298](https://github.com/pingcap/tidb/issues/42298) @[CbcWestwolf](https://github.com/CbcWestwolf)
+    - Fix the issue that TiDB crashes when querying union views and temporary tables with UNION [#42563](https://github.com/pingcap/tidb/issues/42563) @[lcwangchao](https://github.com/lcwangchao)
+    - Fix the issue that renaming tables does not take effect in the middle of transactions when using multiple statements [#39664](https://github.com/pingcap/tidb/issues/39664) @[tiancaiamao](https://github.com/tiancaiamao)
+    - Fix the incompatibility issue between the behavior of prepared and non-prepared plan cache during time conversion [#42439](https://github.com/pingcap/tidb/issues/42439) @[qw4990](https://github.com/qw4990)
+    - Fix the wrong results caused by plan cache for Decimal type [#43311](https://github.com/pingcap/tidb/issues/43311) @[qw4990](https://github.com/qw4990)
     - Fix TiDB panic in NAAJ due to wrong field type check [#42459](https://github.com/pingcap/tidb/issues/42459) @[AilinKid](https://github.com/AilinKid)
-    - note [#issue](链接) @[贡献者 GitHub ID](链接)
+    - Fix the issue where failed DML in pessimistic transactions under RC isolation level may cause data index inconsistency [#43294](https://github.com/pingcap/tidb/issues/43294) @[ekexium](https://github.com/ekexium)
+    - Fix the issue where in some extreme cases, retrying the first statement of a pessimistic transaction might affect transaction correctness when resolving locks on this transaction [#42937](https://github.com/pingcap/tidb/issues/42937) @[MyonKeminta](https://github.com/MyonKeminta)
+    - Fix the issue where in some rare cases, residual pessimistic locks of pessimistic transactions might affect data correctness when GC resolves locks [#43243](https://github.com/pingcap/tidb/issues/43243) @[MyonKeminta](https://github.com/MyonKeminta)
+    - Fix the issue where LOCK to PUT optimization leads to duplicate data being returned in specific queries [#28011](https://github.com/pingcap/tidb/issues/28011) @[zyguan](https://github.com/zyguan)
+    - Fix the inconsistency in unique index locking behavior [#36438](https://github.com/pingcap/tidb/issues/36438) @[zyguan](https://github.com/zyguan)
     - note [#issue](链接) @[贡献者 GitHub ID](链接)
 
 + TiKV
 
-    - note [#issue](链接) @[贡献者 GitHub ID](链接)
+  <!-- **tw:hfxsd** (1)-->
+
+    - Fix the issue where under some extreme conditions, retrying failed RPC with `tidb_pessimistic_txn_fair_locking` enabled could potentially affect data correctness due to expired requests [#14551](https://github.com/tikv/tikv/issues/14551) @[MyonKeminta](https://github.com/MyonKeminta)
     - note [#issue](链接) @[贡献者 GitHub ID](链接)
 
 + PD
@@ -447,15 +492,17 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
 
 + TiFlash
 
-    - note [#issue](链接) @[贡献者 GitHub ID](链接)
-    - note [#issue](链接) @[贡献者 GitHub ID](链接)
+  <!-- **tw:qiancai** (2) -->
+
+    - Fix the issue of querying TIMESTAMP or TIME type errors after enabling Late Materialization [#7455](https://github.com/pingcap/tiflash/issues/7455) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
+    - Fix the issue that large update transactions might cause TiFlash to repeatedly report errors and restart [#7316](https://github.com/pingcap/tiflash/issues/7316) @[JaySon-Huang](https://github.com/JaySon-Huang)
 
 + Tools
 
     + Backup & Restore (BR)
-
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+      <!-- **tw:hfxsd** (2)-->
+        - Fix the issue of backup slowness when TiKV in the cluster is down [#42973](https://github.com/pingcap/tidb/issues/42973) @[YuJuncen](https://github.com/YuJuncen)
+        - Fix the issue of backup failure and missing error information in some cases [#43236](https://github.com/pingcap/tidb/issues/43236) @[YuJuncen](https://github.com/YuJuncen)
 
     + TiCDC
 
@@ -464,18 +511,18 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
 
     + TiDB Data Migration (DM)
 
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+        - (dup) Fix the issue that latin1 data might be corrupted during replication [#7028](https://github.com/pingcap/tiflow/issues/7028) @[lance6716](https://github.com/lance6716)
 
     + TiDB Lightning
-
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
-
-    + TiUP
-
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+      <!-- **tw:hfxsd** (8)-->
+        - Fix the performance degradation issue during Lightning import [#42456](https://github.com/pingcap/tidb/issues/42456) @[lance6716](https://github.com/lance6716)
+        - Fix the error of `write to tikv with no leader returned` during the import of large amounts of data [#43055](https://github.com/pingcap/tidb/issues/43055) @[lance6716](https://github.com/lance6716)
+        - Fix the issue of excessive output of `keys within region is empty, skip doIngest` logs during import [#43197](https://github.com/pingcap/tidb/issues/43197) @[D3Hunter](https://github.com/D3Hunter)
+        - Fix the issue that range part writing might panic [#43363](https://github.com/pingcap/tidb/issues/43363) @[lance6716](https://github.com/lance6716)
+        - Fix the issue of possible OOM when importing wide tables [#43728](https://github.com/pingcap/tidb/issues/43728) @[D3Hunter](https://github.com/D3Hunter)
+        - Fix the issue of missing data in Lightning Grafana panel [#43357](https://github.com/pingcap/tidb/issues/43357) @[lichunzhu](https://github.com/lichunzhu)
+        - Fix the issue of import failure due to incorrect setting of keyspace name [#43684](https://github.com/pingcap/tidb/issues/43684) @[zeminzhou](https://github.com/zeminzhou)
+        - Fix the issue of skipping data import in certain situations when range part is written [#43768](https://github.com/pingcap/tidb/issues/43768) @[lance6716](https://github.com/lance6716)
 
 ## Contributors
 
