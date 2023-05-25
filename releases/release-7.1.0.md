@@ -25,7 +25,7 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
 </thead>
 <tbody>
   <tr>
-    <td rowspan="3">Scalability and Performance</td>
+    <td rowspan="4">Scalability and Performance</td>
     <td>TiFlash supports the <a href="https://docs.pingcap.com/tidb/dev/tiflash-disaggregated-and-s3" target="_blank">disaggregated storage and compute architecture and S3 shared storage</a> (experimental, introduced in v7.0.0)</td>
     <td>TiFlash introduces a cloud-native architecture as an option:
       <ul>
@@ -42,6 +42,10 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
     <td><a href="https://docs.pingcap.com/tidb/dev/troubleshoot-hot-spot-issues#scatter-read-hotspots" target="_blank">Load-based replica read</a></td>
     <td>In a read hotspot scenario, TiDB can redirect read requests for a hotspot TiKV node to its replicas. This feature efficiently scatters read hotspots and optimizes the use of cluster resources. To control the threshold for triggering load-based replica read, you can adjust the system variable <a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_load_based_replica_read_threshold-new-in-v700" target="_blank"><code>tidb_load_based_replica_read_threshold</code></a>.</td>
   </tr>
+  <tr>
+      <td>TiKV supports<a href="https://docs.pingcap.com/tidb/dev/partitioned-raft-kv" target="_blank"> partitioned Raft KV storage engine </a> (experimental)</td>
+    <td>TiKV introduces the next-generation storage engine, the partitioned Raft KV. By allowing each data region to have a dedicated RocksDB instance, it can expand the cluster's storage capacity from TB-level to PB-level and provide more stable write latency and stronger scalability.</td>
+    </tr>
   <tr>
     <td rowspan="2">Reliability and availability</td>
     <td><a href="https://docs.pingcap.com/tidb/dev/tidb-resource-control" target="_blank">Resource control by resource groups</a> (GA)</td>
@@ -71,7 +75,7 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
   </tr>
   <tr>
     <td> Audit log enhancement (<a href="https://www.pingcap.com/tidb-enterprise/" target="_blank">Enterprise Edition</a> only)</td> 
-    <td>TiDB Enterprise Edition enhances the database auditing feature. It significantly improves the system capacity by providing more fine-grained event filtering controls, more user-friendly filter settings, newly added JSON formatted output files, and lifecycle management of audit logs.</td>
+    <td>TiDB Enterprise Edition enhances the database auditing feature. It significantly improves the system auditing capacity by providing more fine-grained event filtering controls, more user-friendly filter settings, newly added JSON formatted output files, and lifecycle management of audit logs.</td>
   </tr>
 </tbody>
 </table>
@@ -306,7 +310,7 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
 
     If you have upgraded TiFlash to v7.1.0, then during the TiDB upgrade to v7.1.0, TiDB cannot read the TiFlash system tables ([`INFORMATION_SCHEMA.TIFLASH_TABLES`](/information-schema/information-schema-tiflash-tables.md) and [`INFORMATION_SCHEMA.TIFLASH_SEGMENTS`](/information-schema/information-schema-tiflash-segments.md)).
 
-* TiDB Lightning in TiDB versions from v6.2.0 to v7.0.0 decides whether to pause global scheduling based on the TiDB cluster version. When TiDB cluster version >= v6.1.0, scheduling is only paused for the Region that stores the target table data and resumes after the target table import is complete. While for other versions, TiDB Lightning pauses global scheduling. Starting from TiDB v7.1.0, you can control whether to pause global scheduling by [`pause-pd-scheduler-scope`](/tidb-lightning/tidb-lightning-configuration.md). By default, TiDB Lightning pauses scheduling for the Region that stores the target table data. If the target cluster version is earlier than v6.1.0, an error occurs. In this case, you can change the value of the parameter to `"global"` and try again.**tw:hfxsd**
+* TiDB Lightning in TiDB versions from v6.2.0 to v7.0.0 decides whether to pause global scheduling based on the TiDB cluster version. When TiDB cluster version >= v6.1.0, scheduling is only paused for the Region that stores the target table data and is resumed after the target table import is complete. While for other versions, TiDB Lightning pauses global scheduling. Starting from TiDB v7.1.0, you can control whether to pause global scheduling by configuring [`pause-pd-scheduler-scope`](/tidb-lightning/tidb-lightning-configuration.md). By default, TiDB Lightning pauses scheduling for the Region that stores the target table data. If the target cluster version is earlier than v6.1.0, an error occurs. In this case, you can change the value of the parameter to `"global"` and try again.**tw:hfxsd**
 
 ### System variables
 
@@ -316,7 +320,7 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
 | [`tidb_non_prepared_plan_cache_size`](/system-variables.md#tidb_non_prepared_plan_cache_size) | Deprecated | Starting from v7.1.0, this system variable is deprecated. You can use [`tidb_session_plan_cache_size`](/system-variables.md#tidb_session_plan_cache_size-new-in-v710) to control the maximum number of plans that can be cached. |
 | [`tidb_prepared_plan_cache_size`](/system-variables.md#tidb_prepared_plan_cache_size-new-in-v610) | Deprecated | Starting from v7.1.0, this system variable is deprecated. You can use [`tidb_session_plan_cache_size`](/system-variables.md#tidb_session_plan_cache_size-new-in-v710) to control the maximum number of plans that can be cached. |
 | `tidb_ddl_distribute_reorg` | Deleted | This variable is renamed to [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710). |
-| [`default_authentication_plugin`](/system-variables.md#default_authentication_plugin) | Modified | Introduces two new value options: `authentication_ldap_sasl` and `authentication_ldap_simpl`. |
+| [`default_authentication_plugin`](/system-variables.md#default_authentication_plugin) | Modified | Introduces two new value options: `authentication_ldap_sasl` and `authentication_ldap_simple`. |
 | [`tidb_load_based_replica_read_threshold`](/system-variables.md#tidb_load_based_replica_read_threshold-new-in-v700) | Modified | Takes effect starting from v7.1.0 and controls the threshold for triggering load-based replica read. Changes the default value from `"0s"` to `"1s"` after further tests. |
 | [`tidb_opt_enable_late_materialization`](/system-variables.md#tidb_opt_enable_late_materialization-new-in-v700) | Modified | Changes the default value from `OFF` to `ON`, meaning that the TiFlash late materialization feature is enabled by default. |
 | [`authentication_ldap_sasl_auth_method_name`](/system-variables.md#authentication_ldap_sasl_auth_method_name-new-in-v710) | Newly added | Specifies the authentication method name in LDAP SASL authentication. |
@@ -376,7 +380,7 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
 + TiDB
 
     - note [#issue](链接) @[贡献者 GitHub ID](链接)
-    - note [#issue](链接) @[贡献者 GitHub ID](链接)
+    - Push down sort property to range partition table [#26166](https://github.com/pingcap/tidb/issues/26166) @[Defined2014](https://github.com/Defined2014)
 
 + TiKV
 
@@ -425,6 +429,9 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
 
 + TiDB
 
+    - Fix incompatible behaviors between Prepared and Non-Prepared Plan Cache [#42439](https://github.com/pingcap/tidb/issues/42439) @[qw4990](https://github.com/qw4990)
+    - Fix wrong results for Decimal data types in Plan Cache [#43311](https://github.com/pingcap/tidb/issues/43311) @[qw4990](https://github.com/qw4990)
+    - Fix TiDB panic in NAAJ due to wrong field type check [#42459](https://github.com/pingcap/tidb/issues/42459) @[AilinKid](https://github.com/AilinKid)
     - note [#issue](链接) @[贡献者 GitHub ID](链接)
     - note [#issue](链接) @[贡献者 GitHub ID](链接)
 
