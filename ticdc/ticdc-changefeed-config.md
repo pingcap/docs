@@ -141,12 +141,8 @@ write-key-threshold = 0
 # Date separator type used in the file directory. Value options are `none`, `year`, `month`, and `day`. `none` is the default value and means that the date is not separated. For more information, see <https://docs.pingcap.com/tidb/dev/ticdc-sink-to-cloud-storage#data-change-records>.
 # Note: This configuration item only takes effect if the downstream is a storage service.
 date-separator = 'none'
-<<<<<<< HEAD
 
-# Whether to use partitions as the separation string. The default value is true, which means that partitions in a table are stored in separate directories. For usage examples, see <https://docs.pingcap.com/tidb/dev/ticdc-sink-to-cloud-storage#data-change-records)>. 
-=======
 # Whether to use partitions as the separation string. The default value is true, which means that partitions in a table are stored in separate directories. It is recommended that you keep the value as `true` to avoid potential data loss in downstream partitioned tables <https://github.com/pingcap/tiflow/issues/8724>. For usage examples, see <https://docs.pingcap.com/tidb/dev/ticdc-sink-to-cloud-storage#data-change-records)>.
->>>>>>> 3948693f3 (ticdc: Fix some ticdc docs master 6.5 (#13664))
 # Note: This configuration item only takes effect if the downstream is a storage service.
 enable-partition-separator = false
 
