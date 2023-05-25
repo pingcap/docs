@@ -56,8 +56,8 @@ With 20GB [gp3](https://aws.amazon.com/ebs/general-purpose/) dedicated Raft-Engi
 ### Example 2, Run TPC-C/SYSBench workload on AZure
 By using a 32G Ultra disk for Raft-Engine on Azure:
 
-- For sysbench oltp_read_write,  QPS up by 17.8%, avg latency is down by 15.6%.
-- For TPC-C, QPS up by 27.6%, avg latency down by 23.1%
+- For sysbench oltp_read_write,  QPS increases by 17.8%, avg latency decreases by 15.6%.
+- For TPC-C, QPS increased by 27.6%, avg latency decreases by 23.1%
 
 | Item | Workload | shared Raft-Engine disk|dedicated Raft-Engine disk| diff(%) |
 | ------------- | ------------- | ------------- |------------- |------------- |
@@ -121,7 +121,7 @@ To mitigate the performance penalty from GCP's live migration event, TiDB provid
 - TiKV: Ecivt leaders on TiKV store during maintenance.
 - PD: Resign leader if the current PD instance is the PD leader
 
-It is worth emphasizing that this monitoring script is specifically tailored for TiDB Clusters deployed using the [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/dev/tidb-operator-overview), which offers enhanced management functionalities for TiDB in Kubernetes environments.
+It is worth emphasizing that this watching script is specifically tailored for TiDB Clusters deployed using the [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/dev/tidb-operator-overview), which offers enhanced management functionalities for TiDB in Kubernetes environments.
 
 The purpose of the watching script is to detect maintenance events initiated by Google Cloud. When such events are detected, appropriate actions can be taken to minimize disruption and optimize the cluster's behavior. It's important to note that this watching script is specifically designed for TiDB Clusters deployed using the TiDB Operator, which provides additional management capabilities for TiDB in Kubernetes environments.
 
