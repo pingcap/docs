@@ -24,9 +24,9 @@ When you apply rolling updates to the TiDB services, the running application is 
 
     * During the cluster upgrade, **DO NOT** execute any DDL statement. Otherwise, the issue of undefined behavior might occur.
 
-* If the TiDB version before upgrade is v7.1.0 or a later version:
+* If the TiDB version before upgrade is v7.1.0 or later:
 
-    * You do not need to follow the restrictions when upgrading from an earlier version to v7.1.0. That is, TiDB can receive user DDL tasks during the upgrade. For details, refer to [TiDB Smooth Upgrade](/smooth-upgrade-tidb.md).
+    * You do not need to follow the restrictions of upgrading from an earlier version to v7.1.0. That is, TiDB can receive user DDL tasks during the upgrade. For details, refer to [TiDB Smooth Upgrade](/smooth-upgrade-tidb.md).
 
 ### How to upgrade TiDB using the binary?
 
