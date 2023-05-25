@@ -10,6 +10,10 @@ summary: Learn the TiDB configuration file options that are not involved in comm
 
 The TiDB configuration file supports more options than command-line parameters. You can download the default configuration file [`config.toml.example`](https://github.com/pingcap/tidb/blob/master/config/config.toml.example) and rename it to `config.toml`. This document describes only the options that are not involved in [command line options](/command-line-flags-for-tidb-configuration.md).
 
+> **Tip:**
+>
+> If you need to adjust the value of a configuration item, refer to [Modify the configuration](/maintain-tidb-using-tiup.md#modify-the-configuration).
+
 ### `split-table`
 
 - Determines whether to create a separate Region for each table.
