@@ -538,6 +538,15 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
 
         - (dup) Fix the issue that latin1 data might be corrupted during replication [#7028](https://github.com/pingcap/tiflow/issues/7028) @[lance6716](https://github.com/lance6716)
 
+    + TiDB Dumpling
+
+        - Fix the issue that primary keys of Unsigned Integer type cannot be used for splitting chunks [#42620](https://github.com/pingcap/tidb/issues/42620) @[lichunzhu](https://github.com/lichunzhu)
+        - Fix the issue that panic might occur when `--output-file-template` is incorrectly set [#42391](https://github.com/pingcap/tidb/issues/42391) @[lichunzhu](https://github.com/lichunzhu)
+
+    + TiDB Binlog
+
+        - Fix the issue that an error might occur when a DDL statement fails [#1228](https://github.com/pingcap/tidb-binlog/issues/1228] @[okJiang](https://github.com/okJiang)
+        
     + TiDB Lightning
       <!-- **tw:hfxsd** (8)-->
         - Fix the performance degradation issue during Lightning import [#42456](https://github.com/pingcap/tidb/issues/42456) @[lance6716](https://github.com/lance6716)
