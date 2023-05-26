@@ -107,7 +107,7 @@ Values allocated implicitly to the `AUTO_RANDOM` column affect `last_insert_id()
 
 To view the shard bits number of the table with an `AUTO_RANDOM` column, you can execute the `SHOW CREATE TABLE` statement. You can also see the value of the `PK_AUTO_RANDOM_BITS=x` mode in the `TIDB_ROW_ID_SHARDING_INFO` column in the `information_schema.tables` system table. `x` is the number of shard bits.
 
-After creating a table with an `AUTO_RANDOM` column, you can use `SHOW WARNINGS` to view the max implicit allocation times:
+After creating a table with an `AUTO_RANDOM` column, you can use `SHOW WARNINGS` to view the maximum implicit allocation times:
 
 ```sql
 CREATE TABLE t (a BIGINT AUTO_RANDOM, b VARCHAR(255), PRIMARY KEY (a));
