@@ -475,7 +475,6 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
     - Fix the issue that metadata locks unexpectedly block the execution of DDL [#43755](https://github.com/pingcap/tidb/issues/43755) @[wjhuang2016](https://github.com/wjhuang2016)
     - Fix the issue that some system views cannot be queried in an IPv6 environment [#43286](https://github.com/pingcap/tidb/issues/43286) @[Defined2014](https://github.com/Defined2014)
   <!-- **tw:qiancai** (16) -->
-    - Fix the issue of new rows being written to the wrong partition during the add or coalesce partition process [#43892](https://github.com/pingcap/tidb/issues/43892) @[mjonss](https://github.com/mjonss)
     - Fix the issue of not finding the partition during inner join in dynamic pruning mode [#43686](https://github.com/pingcap/tidb/issues/43686) @[mjonss](https://github.com/mjonss)
     - Fix the issue that TiDB reports syntax errors when analyzing tables [#43392](https://github.com/pingcap/tidb/issues/43392) @[guo-shaoge](https://github.com/guo-shaoge)
     - Fix the issue that TiCDC might lose some row changes during table renaming [#43338](https://github.com/pingcap/tidb/issues/43338) @[tangenta](https://github.com/tangenta)
@@ -489,7 +488,7 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
     - Fix the issue that DML execution failures in pessimistic transactions at the RC isolation level might cause inconsistency between data and indexes [#43294](https://github.com/pingcap/tidb/issues/43294) @[ekexium](https://github.com/ekexium)
     - Fix the issue that in some extreme cases, retrying the first statement of a pessimistic transaction might affect transaction correctness when resolving locks on this transaction [#42937](https://github.com/pingcap/tidb/issues/42937) @[MyonKeminta](https://github.com/MyonKeminta)
     - Fix the issue that in some rare cases, residual pessimistic locks of pessimistic transactions might affect data correctness when GC resolves locks [#43243](https://github.com/pingcap/tidb/issues/43243) @[MyonKeminta](https://github.com/MyonKeminta)
-    - Fix the issue that the LOCK to PUT optimization leads to duplicate data being returned in specific queries [#28011](https://github.com/pingcap/tidb/issues/28011) @[zyguan](https://github.com/zyguan)
+    - Fix the issue that the `LOCK` to `PUT` optimization leads to duplicate data being returned in specific queries [#28011](https://github.com/pingcap/tidb/issues/28011) @[zyguan](https://github.com/zyguan)
     - Fix the issue that when data is changed, the locking behavior of the unique index is not consistent with that when the data is unchanged [#36438](https://github.com/pingcap/tidb/issues/36438) @[zyguan](https://github.com/zyguan)
 
 + TiKV
