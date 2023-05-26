@@ -201,7 +201,7 @@ To address this issue, TiDB v6.6.0 experimentally introduces the [statement summ
 
 <CustomContent platform="tidb-cloud">
 
-This section is only applicable to on-premises TiDB. For TiDB Cloud, the value of the `tidb_stmt_summary_enable_persistent` parameter is `false` by default and does not support dynamic modification.
+This section is only applicable to TiDB Self-Hosted. For TiDB Cloud, the value of the `tidb_stmt_summary_enable_persistent` parameter is `false` by default and does not support dynamic modification.
 
 </CustomContent>
 
