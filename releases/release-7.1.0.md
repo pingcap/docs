@@ -44,7 +44,7 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
   </tr>
   <tr>
       <td>TiKV supports<a href="https://docs.pingcap.com/tidb/dev/partitioned-raft-kv" target="_blank"> partitioned Raft KV storage engine </a> (experimental)</td>
-    <td>TiKV introduces the next-generation storage engine, the partitioned Raft KV. By allowing each data region to have a dedicated RocksDB instance, it can expand the cluster's storage capacity from TB-level to PB-level and provide more stable write latency and stronger scalability.</td>
+    <td>TiKV introduces a new generation of storage engine, the partitioned Raft KV. By allowing each data Region to have a dedicated RocksDB instance, it can expand the cluster's storage capacity from TB-level to PB-level and provide more stable write latency and stronger scalability.</td>
     </tr>
   <tr>
     <td rowspan="2">Reliability and availability</td>
@@ -75,7 +75,7 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
   </tr>
   <tr>
     <td> Audit log enhancement (<a href="https://www.pingcap.com/tidb-enterprise/" target="_blank">Enterprise Edition</a> only)</td>
-    <td>TiDB Enterprise Edition enhances the database auditing feature. It significantly improves the system auditing capacity by providing more fine-grained event filtering controls, more user-friendly filter settings, newly added JSON formatted output files, and lifecycle management of audit logs.</td>
+    <td>TiDB Enterprise Edition enhances the database auditing feature. It significantly improves the system auditing capacity by providing more fine-grained event filtering controls, more user-friendly filter settings, a new file output format in JSON, and lifecycle management of audit logs.</td>
   </tr>
 </tbody>
 </table>
