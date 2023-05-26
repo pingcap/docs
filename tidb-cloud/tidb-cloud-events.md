@@ -45,6 +45,8 @@ TiDB Cloud logs the following types of cluster events:
 | EditChangefeed |  Edit a changefeed |  
 | ScaleChangefeed |   Scale the specification of a changefeed |  
 | FailedChangefeed |   Changefeed failures |  
+| ImportData |   Import data to cluster |  
+
 
 For each event, the following information is logged:
 
