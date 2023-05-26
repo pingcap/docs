@@ -386,17 +386,24 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
     - The Cardinality column in the `SHOW INDEX` result can display the number of distinct values in the corresponding column in the statistics [#42227](https://github.com/pingcap/tidb/issues/42227) @[winoros](https://github.com/winoros)
     - Push down sort property to range partition table [#26166](https://github.com/pingcap/tidb/issues/26166) @[Defined2014](https://github.com/Defined2014)
     - Enhance compatibility with MySQL implementation when using caching_sha2_password [#43576](https://github.com/pingcap/tidb/issues/43576) @[asjdf](https://github.com/asjdf)
-    - note [#issue](链接) @[贡献者 GitHub ID](链接)
 
 + TiKV
 
-    - note [#issue](链接) @[贡献者 GitHub ID](链接)
-    - note [#issue](链接) @[贡献者 GitHub ID](链接)
+  <!-- **tw:Oreoxmt** (5)-->
+
+    - Reduce the impact of Split on write QPS under partitioned Raft KV [#14447](https://github.com/tikv/tikv/issues/14447) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
+    - Optimize the space occupied by snapshots under partitioned Raft KV [#14581](https://github.com/tikv/tikv/issues/14581) @[bufferflies](https://github.com/bufferflies)
+    - Optimize the default parameters of load-based split according to the size of the Region [#14834](https://github.com/tikv/tikv/issues/14834) @[tonyxuqqi](https://github.com/tonyxuqqi)
+    - Record detailed times of each stage in TiKV processing requests [#12362](https://github.com/tikv/tikv/issues/12362) @[cfzjywxk](https://github.com/cfzjywxk)
+    - Use PD as metastore [#13867](https://github.com/tikv/tikv/issues/13867) @[YuJuncen](https://github.com/YuJuncen)
 
 + PD
 
-    - note [#issue](链接) @[贡献者 GitHub ID](链接)
-    - note [#issue](链接) @[贡献者 GitHub ID](链接)
+  <!-- **tw:ran-huang** (3)-->
+
+    - Added a controller that automatically adjusts the size of the store limit based on the execution details of the snapshot. After setting `store-limit-version` to `v2` to enable, users do not need to manually adjust the configuration to control the speed of scale in and scale out [#6147](https://github.com/tikv/pd/issues/6147) @[bufferflies](https://github.com/bufferflies)
+    - Added historical load information to avoid frequent scheduling of regions with unstable loads by the hotspot scheduler when the storage engine is raft-kv2 [#6297](https://github.com/tikv/pd/issues/6297) @[bufferflies](https://github.com/bufferflies)
+    - Added a leader health check mechanism. When the PD server where the etcd leader is located cannot be elected as the leader, it actively switches the etcd leader to ensure the availability of the PD leader [#6403](https://github.com/tikv/pd/issues/6403) @[nolouch](https://github.com/nolouch)
 
 + TiFlash
 
@@ -406,10 +413,18 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
 
 + Tools
 
-    + TiCDC
+    + Backup & Restore (BR)
+      <!-- **tw:hfxsd** (1) -->
+        - Support for online modification of `tikv.log-backup.max-flush-interval` configuration [#14433](https://github.com/tikv/tikv/issues/14433) @[joccau](https://github.com/joccau)
 
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+    + TiCDC
+      <!-- **tw:ran-huang** (6) -->
+        - Optimized the directory structure when DDL occurs under the scenario of synchronization to object storage [#8890](https://github.com/pingcap/tiflow/issues/8890) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        - Optimized the method of setting GC TLS for upstream when CDC's synchronization task fails [#8403](https://github.com/pingcap/tiflow/issues/8403) @[charleszheng44](https://github.com/charleszheng44)
+        - Added support for synchronization to KOP downstream [#8892](https://github.com/pingcap/tiflow/issues/8892) @[hi-rustin](https://github.com/hi-rustin)
+        - When synchronizing to Kafka, it supports using the open-protocol protocol to only synchronize columns that have changed when an update occurs [#8706](https://github.com/pingcap/tiflow/issues/8706) @[sdojjy](https://github.com/sdojjy)
+        - Optimized the way CDC handles errors when downstream faults and other scenarios occur [#8657](https://github.com/pingcap/tiflow/issues/8657) @[hicqu](https://github.com/hicqu)
+        - Added a configuration to control whether to set the authentication algorithm in the scenario of enabling TLS [#8867](https://github.com/pingcap/tiflow/issues/8867) @[hi-rustin](https://github.com/hi-rustin)
 
     + TiDB Lightning
       <!-- **tw:hfxsd** (3) -->
@@ -476,19 +491,26 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
     - Fix the issue where in some rare cases, residual pessimistic locks of pessimistic transactions might affect data correctness when GC resolves locks [#43243](https://github.com/pingcap/tidb/issues/43243) @[MyonKeminta](https://github.com/MyonKeminta)
     - Fix the issue where LOCK to PUT optimization leads to duplicate data being returned in specific queries [#28011](https://github.com/pingcap/tidb/issues/28011) @[zyguan](https://github.com/zyguan)
     - Fix the inconsistency in unique index locking behavior [#36438](https://github.com/pingcap/tidb/issues/36438) @[zyguan](https://github.com/zyguan)
-    - note [#issue](链接) @[贡献者 GitHub ID](链接)
 
 + TiKV
 
-  <!-- **tw:hfxsd** (1)-->
+  <!-- **tw:hfxsd** (6) -->
 
     - Fix the issue where under some extreme conditions, retrying failed RPC with `tidb_pessimistic_txn_fair_locking` enabled could potentially affect data correctness due to expired requests [#14551](https://github.com/tikv/tikv/issues/14551) @[MyonKeminta](https://github.com/MyonKeminta)
-    - note [#issue](链接) @[贡献者 GitHub ID](链接)
+    - Fix the issue where a conflict of encryption Key ID can lead to the deletion of an old Key [#14585](https://github.com/tikv/tikv/issues/14585) @[tabokie](https://github.com/tabokie)
+    - Fix the performance issue brought by accumulated lock records when the cluster is upgraded from a previous version to v6.5 or higher [#14780](https://github.com/tikv/tikv/issues/14780) @[MyonKeminta](https://github.com/MyonKeminta)
+    - Fix the `raft entry is too large` issue during the PITR recovery process @[YuJuncen](https://github.com/YuJuncen)
+    - Fix the issue of TiKV panicking due to log_batch exceeding 2G during the PITR recovery process @[YuJuncen](https://github.com/YuJuncen)
+    - Fix the issue of correctness caused by replaying pessimistic lock requests @[MyonKeminta](https://github.com/MyonKeminta)
 
 + PD
 
-    - note [#issue](链接) @[贡献者 GitHub ID](链接)
-    - note [#issue](链接) @[贡献者 GitHub ID](链接)
+  <!-- **tw:Oreoxmt** (5) -->
+    - Fix the issue of abnormal number of low space stores in the PD monitoring panel after TiKV panic [#6252](https://github.com/tikv/pd/issues/6252) @[HuSharp](https://github.com/HuSharp)
+    - Fix the issue where Region stats monitoring data is deleted after PD leader switch [#6366](https://github.com/tikv/pd/issues/6366) @[iosmanthus](https://github.com/iosmanthus)
+    - Fix the issue where Rule checker cannot repair unhealthy Region with label `schedule=deny` [#6426](https://github.com/tikv/pd/issues/6426) @[nolouch](https://github.com/nolouch)
+    - Fix the issue where some existing labels are lost after TiKV/TiFlash restart [#6467](https://github.com/tikv/pd/issues/6467) @[JmPotato](https://github.com/JmPotato)
+    - Fix the issue where the state cannot be switched when there are learner nodes in the replication mode [#14704](https://github.com/tikv/tikv/issues/14704) @[nolouch](https://github.com/nolouch)
 
 + TiFlash
 
@@ -505,9 +527,13 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
         - Fix the issue of backup failure and missing error information in some cases [#43236](https://github.com/pingcap/tidb/issues/43236) @[YuJuncen](https://github.com/YuJuncen)
 
     + TiCDC
-
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
+      <!-- **tw:qiancai** (6) -->
+        - Fix related issues when setting timezone [#8798](https://github.com/pingcap/tiflow/issues/8798) @[hi-rustin](https://github.com/hi-rustin)
+        - Fix the issue that TiCDC cannot automatically recover when PD address or leader fails [#8812](https://github.com/pingcap/tiflow/issues/8812) [#8877](https://github.com/pingcap/tiflow/issues/8877) @[asddongmen](https://github.com/asddongmen)
+        - Fix the issue of rising checkpoint lag when upstream tikv node crashes [#8858](https://github.com/pingcap/tiflow/issues/8858) @[hicqu](https://github.com/hicqu)
+        - Fix the issue that the exchange partition in the upstream cannot be properly synchronized to the downstream in the scenario of synchronizing to object storage [#8914](https://github.com/pingcap/tiflow/issues/8914) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        - Fix the OOM issue caused by excessive memory usage of the sorter component in some special scenarios [#8974](https://github.com/pingcap/tiflow/issues/8974) @[hicqu](https://github.com/hicqu)
+        - Fix the issue of CDC node panic when downstream Kafka is rolling restarted [#9023](https://github.com/pingcap/tiflow/issues/9023) @[asddongmen](https://github.com/asddongmen)
 
     + TiDB Data Migration (DM)
 
