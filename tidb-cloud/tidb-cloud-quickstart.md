@@ -76,15 +76,9 @@ In Chat2Query, you can either simply type `--` followed by your instructions to 
 
 After running the queries, you can see the query logs and results immediately at the bottom of the page.
 
-## Step 3. Try Playground
+## Step 3. Load sample data
 
-After your TiDB Cloud cluster is created, you can also quickly start experimenting with TiDB using the pre-loaded sample data in TiDB Cloud Playground.
-
-On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click the name of your newly created cluster to go to its overview page, and then click **Playground** in the left navigation pane.
-
-## Step 4. Load sample data
-
-After trying **Plaground**, you can load sample data to your TiDB Cloud cluster. We provide Capital Bikeshare sample data for you to easily import data and run sample queries.
+You can load sample data to your TiDB Cloud cluster. We provide Capital Bikeshare sample data for you to easily import data and run sample queries.
 
 1. On your cluster overview page, click **Import** in the left navigation pane.
 

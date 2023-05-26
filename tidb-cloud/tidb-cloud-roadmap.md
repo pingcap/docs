@@ -62,7 +62,7 @@ The TiDB Cloud roadmap brings you what's coming in the near future, so you can s
   </tr>
   <tr>
     <td>Optimize Playground.</td>
-    <td>Improve interactivity combined with Chat2Query, and guide users to finish the tutorial.</td>
+    <td>{To be updated}</td>
   </tr>
 </tbody>
 </table>
