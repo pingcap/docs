@@ -86,7 +86,7 @@ desc select * from t where truncate(a, " ") = '1';
 
 In this query, there is a predicate `truncate(a, " ") = '1'`.
 
-From the `explain` results, we can see that the predicate is not pushed down to TiKV for calculation. This is because the TiKV coprocessor does not support the built-in function `truncate`.
+From the `explain` results, you can see that the predicate is not pushed down to TiKV for calculation. This is because the TiKV coprocessor does not support the built-in function `truncate`.
 
 ### Case 5: predicates of inner tables on the outer join can't be pushed down
 
