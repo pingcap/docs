@@ -6,6 +6,10 @@ aliases: ['/docs/dev/optimistic-transaction/','/docs/dev/reference/transactions/
 
 # TiDB Optimistic Transaction Model
 
+> **Warning:**
+>
+> The optimistic transaction will be deprecated in the future.
+
 With optimistic transactions, conflicting changes are detected as part of a transaction commit. This helps improve the performance when concurrent transactions are infrequently modifying the same rows, because the process of acquiring row locks can be skipped. In the case that concurrent transactions frequently modify the same rows (a conflict), optimistic transactions may perform worse than [Pessimistic Transactions](/pessimistic-transaction.md).
 
 Before enabling optimistic transactions, make sure that your application correctly handles that a `COMMIT` statement could return errors. If you are unsure of how your application handles this, it is recommended to instead use Pessimistic Transactions.

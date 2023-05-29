@@ -4799,6 +4799,10 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 ### tidb_txn_mode
 
+> **Warning:**
+>
+> The optimistic transaction will be deprecated in the future.
+
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Type: Enumeration
