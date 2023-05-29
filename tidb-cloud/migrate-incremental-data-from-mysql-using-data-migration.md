@@ -69,7 +69,7 @@ To enable GTID for a local MySQL instance, follow these steps:
 
 1. Connect to the MySQL server using a MySQL client with the appropriate privileges.
 
-2. Execute the following SQL statements to enable GTID:
+2. Execute the following SQL statements to enable the GTID mode:
 
     ```sql
     -- Enable the GTID mode
