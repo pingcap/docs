@@ -404,9 +404,9 @@ The [optimistic transaction mode](/optimistic-transaction.md) will be deprecated
 
   <!-- **tw:ran-huang** (3)-->
 
-    - Added a controller that automatically adjusts the size of the store limit based on the execution details of the snapshot. After setting `store-limit-version` to `v2` to enable, users do not need to manually adjust the configuration to control the speed of scale in and scale out [#6147](https://github.com/tikv/pd/issues/6147) @[bufferflies](https://github.com/bufferflies)
-    - Added historical load information to avoid frequent scheduling of regions with unstable loads by the hotspot scheduler when the storage engine is raft-kv2 [#6297](https://github.com/tikv/pd/issues/6297) @[bufferflies](https://github.com/bufferflies)
-    - Added a leader health check mechanism. When the PD server where the etcd leader is located cannot be elected as the leader, it actively switches the etcd leader to ensure the availability of the PD leader [#6403](https://github.com/tikv/pd/issues/6403) @[nolouch](https://github.com/nolouch)
+    - Add a controller that automatically adjusts the size of the store limit based on the execution details of the snapshot. To enable this controller, set `store-limit-version` to `v2`. Once enabled, you do not need to manually adjust the configuration to control the speed of scaling in or scaling out [#6147](https://github.com/tikv/pd/issues/6147) @[bufferflies](https://github.com/bufferflies)
+    - Add historical load information to avoid frequent scheduling of regions with unstable loads by the hotspot scheduler when the storage engine is raft-kv2 [#6297](https://github.com/tikv/pd/issues/6297) @[bufferflies](https://github.com/bufferflies)
+    - Add a leader health check mechanism. When the PD server where the etcd leader is located cannot be elected as the leader, PD actively switches the etcd leader to ensure that the PD leader is available [#6403](https://github.com/tikv/pd/issues/6403) @[nolouch](https://github.com/nolouch)
 
 + TiFlash
 
@@ -422,12 +422,12 @@ The [optimistic transaction mode](/optimistic-transaction.md) will be deprecated
 
     + TiCDC
       <!-- **tw:ran-huang** (6) -->
-        - Optimized the directory structure when DDL occurs under the scenario of synchronization to object storage [#8890](https://github.com/pingcap/tiflow/issues/8890) @[CharlesCheung96](https://github.com/CharlesCheung96)
-        - Optimized the method of setting GC TLS for upstream when CDC's synchronization task fails [#8403](https://github.com/pingcap/tiflow/issues/8403) @[charleszheng44](https://github.com/charleszheng44)
-        - Added support for synchronization to KOP downstream [#8892](https://github.com/pingcap/tiflow/issues/8892) @[hi-rustin](https://github.com/hi-rustin)
-        - When synchronizing to Kafka, it supports using the open-protocol protocol to only synchronize columns that have changed when an update occurs [#8706](https://github.com/pingcap/tiflow/issues/8706) @[sdojjy](https://github.com/sdojjy)
-        - Optimized the way CDC handles errors when downstream faults and other scenarios occur [#8657](https://github.com/pingcap/tiflow/issues/8657) @[hicqu](https://github.com/hicqu)
-        - Added a configuration to control whether to set the authentication algorithm in the scenario of enabling TLS [#8867](https://github.com/pingcap/tiflow/issues/8867) @[hi-rustin](https://github.com/hi-rustin)
+        - Optimize the directory structure when DDL events occur under the scenario of replicating data to object storage [#8890](https://github.com/pingcap/tiflow/issues/8890) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        - Optimize the method of setting GC TLS for the upstream when the TiCDC replication task fails [#8403](https://github.com/pingcap/tiflow/issues/8403) @[charleszheng44](https://github.com/charleszheng44)
+        - Support replicating data to the Kakfa-on-Pulsar downstream [#8892](https://github.com/pingcap/tiflow/issues/8892) @[hi-rustin](https://github.com/hi-rustin)
+        - Support using the open-protocol protocol to only replicate columns that have changed after an update occurs when replicating data to Kafka [#8706](https://github.com/pingcap/tiflow/issues/8706) @[sdojjy](https://github.com/sdojjy)
+        - Optimize the error handling of TiCDC in the downstream failure or other scenarios [#8657](https://github.com/pingcap/tiflow/issues/8657) @[hicqu](https://github.com/hicqu)
+        - Add a configuration item to control whether to set the authentication algorithm in the scenario of enabling TLS [#8867](https://github.com/pingcap/tiflow/issues/8867) @[hi-rustin](https://github.com/hi-rustin)
 
     + TiDB Lightning
       <!-- **tw:hfxsd** (3) -->
@@ -459,23 +459,23 @@ The [optimistic transaction mode](/optimistic-transaction.md) will be deprecated
     - Fix the issue that the `Scan Worker Time By Phase` chart in the TTL monitoring panel does not display data [#42515](https://github.com/pingcap/tidb/issues/42515) @[lcwangchao](https://github.com/lcwangchao)
     - Fix the issue that some queries on partitioned tables with a global index return incorrect results [#41991](https://github.com/pingcap/tidb/issues/41991) [#42065](https://github.com/pingcap/tidb/issues/42065) @[L-maple](https://github.com/L-maple)
   <!-- **tw:ran-huang** (17) -->
-    - Fix the issue of displaying some error logs during the reorganize partition table process [#42180](https://github.com/pingcap/tidb/issues/42180) @[mjonss](https://github.com/mjonss)
-    - Fix the issue that the data length in the QUERY column of the `INFORMATION_SCHEMA.DDL_JOBS` table might be longer than the column definition [#42440](https://github.com/pingcap/tidb/issues/42440) @[tiancaiamao](https://github.com/tiancaiamao)
-    - Fix the issue that the `INFORMATION_SCHEMA.CLUSTER_HARDWARE` table might display errors in containers [#42851](https://github.com/pingcap/tidb/issues/42851) @[hawkingrei](https://github.com/hawkingrei)
-    - Fix the issue of incorrect results returned when querying partitioned tables using order by and limit [#43158](https://github.com/pingcap/tidb/issues/43158) @[Defined2014](https://github.com/Defined2014)
-    - Fix the issue of multiple DDL tasks using injest method running at the same time [#42903](https://github.com/pingcap/tidb/issues/42903) @[tangenta](https://github.com/tangenta)
+    - Fix the issue of displaying some error logs during the process of reorganizing partitioned table [#42180](https://github.com/pingcap/tidb/issues/42180) @[mjonss](https://github.com/mjonss)
+    - Fix the issue that the data length in the `QUERY` column of the `INFORMATION_SCHEMA.DDL_JOBS` table might exceed the column definition [#42440](https://github.com/pingcap/tidb/issues/42440) @[tiancaiamao](https://github.com/tiancaiamao)
+    - Fix the issue that the `INFORMATION_SCHEMA.CLUSTER_HARDWARE` table might display incorrect values in containers [#42851](https://github.com/pingcap/tidb/issues/42851) @[hawkingrei](https://github.com/hawkingrei)
+    - Fix the issue that the incorrect result is returned when querying a partitioned table using `ORDER BY` + `LIMIT` [#43158](https://github.com/pingcap/tidb/issues/43158) @[Defined2014](https://github.com/Defined2014)
+    - Fix the issue of multiple DDL tasks running simultaneously using the injest methods [#42903](https://github.com/pingcap/tidb/issues/42903) @[tangenta](https://github.com/tangenta)
     - (dup) Fix the wrong value returned when querying a partitioned table using `Limit` [#24636](https://github.com/pingcap/tidb/issues/24636)
-    - Fix the issue of incorrect TiDB address display in IPv6 environment [#43260](https://github.com/pingcap/tidb/issues/43260) @[nexustar](https://github.com/nexustar)
-    - Fix the issue of incorrect display of system variables `tidb_enable_tiflash_read_for_write_stmt` and `tidb_enable_exchange_partition` [#43281](https://github.com/pingcap/tidb/issues/43281) @[gengliqi](https://github.com/gengliqi)
-    - Fix the issue of `Header read timeout` error when the proxy protocol handles certain error data [#43205](https://github.com/pingcap/tidb/issues/43205) @[blacktear23](https://github.com/blacktear23)
-    - Fix the issue that no automatic split Region after truncating a partition when `tidb_scatter_region` is enabled [#43174](https://github.com/pingcap/tidb/issues/43174) [#43028](https://github.com/pingcap/tidb/issues/43028) @[jiyfhust](https://github.com/jiyfhust)
-    - Add some checks on the table with generated columns, and error out for some unsupported DDL operations on columns [#38988](https://github.com/pingcap/tidb/issues/38988) [#24321](https://github.com/pingcap/tidb/issues/24321) @[tiancaiamao](https://github.com/tiancaiamao)
-    - Fix the issue that the error message is not correct when some type conversion errors occur [#41730](https://github.com/pingcap/tidb/issues/41730) @[hawkingrei](https://github.com/hawkingrei)
-    - Solve the problem that DDL tasks triggered on this node will be cancelled after TiDB node is normally shutdown [#43854](https://github.com/pingcap/tidb/issues/43854) @[zimulala](https://github.com/zimulala)
-    - Fix the issue that allocating ID for AUTO_INCREMENT column will be blocked for a long time when PD member address changes [#42643](https://github.com/pingcap/tidb/issues/42643) @[tiancaiamao](https://github.com/tiancaiamao)
-    - Fix the issue of `GC lifetime is shorter than transaction duration` error during DDL execution [#40074](https://github.com/pingcap/tidb/issues/40074) @[tangenta](https://github.com/tangenta)
-    - Fix the issue that metadata locks unexpectedly block the execution of DDL [#43755](https://github.com/pingcap/tidb/issues/43755) @[wjhuang2016](https://github.com/wjhuang2016)
-    - Fix the issue that some system views cannot be queried in an IPv6 environment [#43286](https://github.com/pingcap/tidb/issues/43286) @[Defined2014](https://github.com/Defined2014)
+    - Fix the issue of displaying the incorrect TiDB address in IPv6 environment [#43260](https://github.com/pingcap/tidb/issues/43260) @[nexustar](https://github.com/nexustar)
+    - Fix the issue of displaying incorrect values for system variables `tidb_enable_tiflash_read_for_write_stmt` and `tidb_enable_exchange_partition` [#43281](https://github.com/pingcap/tidb/issues/43281) @[gengliqi](https://github.com/gengliqi)
+    - Fix the issue that the proxy protocol reports the `Header read timeout` error when processing certain erroneous data [#43205](https://github.com/pingcap/tidb/issues/43205) @[blacktear23](https://github.com/blacktear23)
+    - Fix the issue that when `tidb_scatter_region` is enabled, Region does not automatically split after a partition is truncated [#43174](https://github.com/pingcap/tidb/issues/43174) [#43028](https://github.com/pingcap/tidb/issues/43028) @[jiyfhust](https://github.com/jiyfhust)
+    - Add checks on the table with generated columns and report errors for DDL operations on unsupported columns [#38988](https://github.com/pingcap/tidb/issues/38988) [#24321](https://github.com/pingcap/tidb/issues/24321) @[tiancaiamao](https://github.com/tiancaiamao)
+    - Fix the issue that the error message is incorrect in certain type conversion errors [#41730](https://github.com/pingcap/tidb/issues/41730) @[hawkingrei](https://github.com/hawkingrei)
+    - Fix the issue that after a TiDB node is normally shutdown, DDL tasks triggered on this node will be canceled [#43854](https://github.com/pingcap/tidb/issues/43854) @[zimulala](https://github.com/zimulala)
+    - Fix the issue that when the PD member address changes, allocating ID for the `AUTO_INCREMENT` column will be blocked for a long time [#42643](https://github.com/pingcap/tidb/issues/42643) @[tiancaiamao](https://github.com/tiancaiamao)
+    - Fix the issue of the `GC lifetime is shorter than transaction duration` error during DDL execution [#40074](https://github.com/pingcap/tidb/issues/40074) @[tangenta](https://github.com/tangenta)
+    - Fix the issue that metadata locks unexpectedly block the DDL execution [#43755](https://github.com/pingcap/tidb/issues/43755) @[wjhuang2016](https://github.com/wjhuang2016)
+    - Fix the issue that the cluster cannot query some system views in IPv6 environment [#43286](https://github.com/pingcap/tidb/issues/43286) @[Defined2014](https://github.com/Defined2014)
   <!-- **tw:qiancai** (16) -->
     - Fix the issue of not finding the partition during inner join in dynamic pruning mode [#43686](https://github.com/pingcap/tidb/issues/43686) @[mjonss](https://github.com/mjonss)
     - Fix the issue that TiDB reports syntax errors when analyzing tables [#43392](https://github.com/pingcap/tidb/issues/43392) @[guo-shaoge](https://github.com/guo-shaoge)
