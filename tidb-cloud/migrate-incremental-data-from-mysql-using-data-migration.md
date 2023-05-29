@@ -5,7 +5,7 @@ summary: Learn how to migrate incremental data from MySQL-compatible databases h
 
 # Migrate Incremental Data from MySQL-Compatible Databases to TiDB Cloud Using Data Migration
 
-This document describes how to migrate incremental data from a MySQL-compatible database on a cloud provider (Amazon Aurora MySQL, Amazon Relational Database Service (RDS), or Google Cloud SQL for MySQL) or on-premises to TiDB Cloud using the Data Migration feature of the TiDB Cloud console.
+This document describes how to migrate incremental data from a MySQL-compatible database on a cloud provider (Amazon Aurora MySQL, Amazon Relational Database Service (RDS), or Google Cloud SQL for MySQL) or on-premises source database to TiDB Cloud using the Data Migration feature of the TiDB Cloud console.
 
 For instructions about how to migrate existing data or both existing data and incremental data, see [Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md).
 
@@ -13,7 +13,7 @@ For instructions about how to migrate existing data or both existing data and in
 
 > **Note**:
 >
-> This section only includes prerequisites about incremental data migration. For more information about general limitations, see [Limitations](/tidb-cloud/migrate-from-mysql-using-data-migration.md#limitations).
+> This section only includes prerequisites about incremental data migration. It is recommended that you also read the general limitations. See [Limitations](/tidb-cloud/migrate-from-mysql-using-data-migration.md#limitations).
 
 - If the target table is not yet created in the target database, the migration job will report an error and fail. In this case, you need to create the target table and then resume the migration job.
 - If the DELETE or UPDATE records of the upstream table do not exist in the downstream table, there will be no change in the data of the downstream table, that is, the UPDATE will not be changed to UPSERT.
@@ -28,7 +28,7 @@ If you specify GTID as the start position to migrate incremental data, note the 
 
 > **Note**:
 >
-> This section only includes prerequisites about incremental data migration. For more information about general prerequisites of the Data Migration feature, see [Prerequisites](/tidb-cloud/migrate-from-mysql-using-data-migration.md#prerequisites).
+> This section only includes prerequisites about incremental data migration. It is recommended that you also read the general prerequisites. See [Prerequisites](/tidb-cloud/migrate-from-mysql-using-data-migration.md#prerequisites).
 
 If you want to use GTID to specify the start position, make sure that the GTID is enabled in the source database. The operations vary depending on the database type.
 
@@ -69,7 +69,7 @@ To enable GTID for a local MySQL instance, follow these steps:
 
 1. Connect to the MySQL server using a MySQL client with the appropriate privileges.
 
-2. Execute the following SQL statement to enable GTID:
+2. Execute the following SQL statements to enable GTID:
 
     ```sql
     -- Enable the GTID mode
@@ -84,7 +84,7 @@ To enable GTID for a local MySQL instance, follow these steps:
 
 3. Restart the MySQL server to ensure that the configuration changes take effect.
 
-4. You can check if GTID has been successfully enabled by executing the following SQL statement:
+4. Check if GTID has been successfully enabled by executing the following SQL statement:
 
     ```sql
     SHOW VARIABLES LIKE 'gtid_mode';
@@ -147,11 +147,13 @@ In the **Start Position** area, you can specify the following types of start pos
 - GTID
 - Binlog file name and position
 
-If you do not specify a start position, the migration job will start from the time when the incremental migration job starts. Once a migration job starts, you cannot change the start position.
+If you do not specify a start position, the migration job will only migrate the incremental data that is generated in the source database after the migration job starts.
 
-### The time when the incremental migration job starts**
+Once a migration job starts, you cannot change the start position.
 
-If you select this option, the migration job will start from the time when the incremental migration job starts to migrate ongoing changes of the source database to TiDB Cloud.
+### The time when the incremental migration job starts
+
+If you select this option, the migration job will only migrate the incremental data that is generated in the source database after the migration job starts.
 
 ### Specify GTID
 
