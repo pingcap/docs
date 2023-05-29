@@ -192,16 +192,62 @@ On the **Create Migration Job** page, configure the source and target connection
     - If you use Public IP or VPC Peering, you need to add the Data Migration service's IP addresses to the IP Access List of your source database and firewall (if any).
     - If you use AWS Private Link, you are prompted to accept the endpoint request. Go to the [AWS VPC console](https://us-west-2.console.aws.amazon.com/vpc/home), and click **Endpoint services** to accept the endpoint request.
 
-## Step 3: Choose the objects to be migrated
+## Step 3: Choose migration job process
 
-1. Choose existing data migration, incremental data migration, or both by choosing the checkboxes.
+On the **Choose Objects to Migrate** page, you can choose existing data migration, incremental data migration, or both by choosing the checkboxes.
 
-    > **Tip:**
+### Migrate existing data and incremental data
+
+To migrate data to TiDB Cloud once and for all, choose both **Existing data migration** and **Incremental data migration**, which ensures data consistency between the source and target databases.
+
+### Migrate only existing data
+
+To migrate only the existing data of the source database to TiDB Cloud, choose **Existing data migration**.
+
+### Migrate only incremental data
+
+To migrate only the incrementable data of the source database to TiDB Cloud, choose **Incremental data migration**. In this case, the migration job does not migrate the existing data of the source database to TiDB Cloud, but only replicates ongoing changes of the source database to TiDB Cloud.
+
+You can specify the following types of start positions for incremental data migration:
+
+- **The time when the data migrtion job starts**
+
+    If you select this option, the migration job will start from the time when the migration job starts to replicate ongoing changes of the source database to TiDB Cloud.
+
+- **Specify GTID**
+
+    Select this option to specify the GTID of the source database, for example, `3E11FA47-71CA-11E1-9E33-C80AA9429562:23`. The migration job will start from the specified GTID to replicate ongoing changes of the source database to TiDB Cloud.
+
+    You can run the following command to check the GTID of the source database:
+
+    ```sql
+    SHOW MASTER STATUS;
+    ```
+
+    > **Note:**
     >
-    > - To migrate data to TiDB Cloud once and for all, choose both **Existing data migration** and **Incremental data migration**, which ensures data consistency between the source and target databases.
-    > - To migrate only the existing data of the source database to TiDB Cloud, only choose the **Existing data migration** checkbox.
+    > - Make sure that the GTID is enabled in the source database.
+    > - If the source database is MySQL, the MySQL version must be 5.6 or later, and the storage engine must be InnoDB.
+    > - If the migration job connects to the secondary database in upstream, the `REPLICATE CREATE TABLE ... SELECT` events cannot be replicated, because the statement will be split into two transactions, `CREATE TABLE` and `INSERT`, and the two transactions are assigned the same GTID, which will cause the `INSERT` statement to be ignored by the secondary database.
 
-2. On the **Choose Objects to Migrate** page, select the objects to be migrated. You can click **All** to select all objects, or click **Customize** and then click the checkbox next to the object name to select the object.
+- **Specify binlog file name and position**
+
+    Select this option to specify the binlog file name (for example, `binlog.000001`) and binlog position (for example, `1307`) of the source database. The migration job will start from the specified binlog file name and position to replicate ongoing changes of the source database to TiDB Cloud.
+
+    You can run the following command to check the binlog file name and position of the source database:
+
+    ```sql
+    SHOW MASTER STATUS;
+    ```
+
+> **Note:**
+>
+> - If there is data in the target database, make sure the binlog position is correct. Otherwise, thre might be conflicts between the existing data and the incremental data. If conflicts occur, you need to delete the target database and create a new migration job with the correct binlog position.
+> - Once a migration job starts, you cannot change the start position.
+
+## Step 4: Choose the objects to be migrated
+
+1. On the **Choose Objects to Migrate** page, select the objects to be migrated. You can click **All** to select all objects, or click **Customize** and then click the checkbox next to the object name to select the object.
 
     - If you click **All**, the migration job will migrate the existing data from the whole source database instance to TiDB Cloud and replicate ongoing changes after the full migration. Note that it happens only if you have selected the **Existing data migration** and **Incremental data migration** checkboxes in the previous step.
 
@@ -223,7 +269,7 @@ On the **Create Migration Job** page, configure the source and target connection
 
 3. Click **Next**.
 
-## Step 4: Precheck
+## Step 5: Precheck
 
 On the **Precheck** page, you can view the precheck results. If the precheck fails, you need to operate according to **Failed** or **Warning** details, and then click **Check again** to recheck.
 
@@ -235,13 +281,13 @@ For more information about precheck items, see [Migration Task Precheck](https:/
 
 If all check items show **Pass**, click **Next**.
 
-## Step 5: Choose a spec and start migration
+## Step 6: Choose a spec and start migration
 
 On the **Choose a Spec and Start Migration** page, select an appropriate migration specification according to your performance requirements. For more information about the specifications, see [Specifications for Data Migration](/tidb-cloud/tidb-cloud-billing-dm.md#specifications-for-data-migration).
 
 After selecting the spec, click **Create Job and Start** to start the migration.
 
-## Step 6: View the migration progress
+## Step 7: View the migration progress
 
 After the migration job is created, you can view the migration progress on the **Migration Job Details** page. The migration progress is displayed in the **Stage and Status** area.
 
