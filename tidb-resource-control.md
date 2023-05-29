@@ -9,7 +9,7 @@ summary: Learn how to use the resource control feature to control and schedule a
 
 > **Note:**
 >
-> This feature is not available on [TiDB Serverless clusters]( https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless-beta ).
+> This feature is not available on [TiDB Serverless clusters](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless-beta).
 
 </CustomContent>
 
