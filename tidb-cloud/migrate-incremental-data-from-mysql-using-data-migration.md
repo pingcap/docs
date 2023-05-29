@@ -63,7 +63,7 @@ If the result is `ON` or `ON_PERMISSIVE`, the GTID mode is successfully enabled.
 
 > **Note**:
 >
-> The exact steps and commands might vary depending on the MySQL version and configuration. Be sure that you understand the impact of enabling GTID and that you have properly tested and verified it in a non-production environment before performing this action.
+> The exact steps and commands might vary depending on the MySQL version and configuration. Make sure that you understand the impact of enabling GTID and that you have properly tested and verified it in a non-production environment before performing this action.
 
 To enable GTID for a local MySQL instance, follow these steps:
 
@@ -84,7 +84,7 @@ To enable GTID for a local MySQL instance, follow these steps:
 
 3. Restart the MySQL server to ensure that the configuration changes take effect.
 
-4. Check if GTID has been successfully enabled by executing the following SQL statement:
+4. Check if the GTID mode has been successfully enabled by executing the following SQL statement:
 
     ```sql
     SHOW VARIABLES LIKE 'gtid_mode';
