@@ -49,7 +49,7 @@ In the course of development, this roadmap is subject to change based on user ne
           </li>
           <br />
           <li>
-            <b>GA TiFlash decoupling of compute/storage and S3 storage</b><br />
+            <b>GA of disaggregated storage and compute architecture and S3 shared storage in TiFlash</b><br />
             <i>Enables more cost-effective and elastic HTAP</i>
           </li>
           <br />
