@@ -382,10 +382,10 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
   <!-- **tw:hfxsd** (5) -->
 
     - Support to use `SQL_NO_CACHE` to prevent TTL Scan queries from impacting the TiKV block cache [#43206](https://github.com/pingcap/tidb/issues/43206) @[lcwangchao](https://github.com/lcwangchao)
-    - Improve the MySQL compatibility of error messages related to `MAX_EXECUTION_TIME` [#43031](https://github.com/pingcap/tidb/issues/43031) @[dveeden](https://github.com/dveeden)
+    - Improve an error message related to `MAX_EXECUTION_TIME` to make it compatible with MySQL [#43031](https://github.com/pingcap/tidb/issues/43031) @[dveeden](https://github.com/dveeden)
     - The Cardinality column in the `SHOW INDEX` result can display the number of distinct values in the corresponding column in the statistics [#42227](https://github.com/pingcap/tidb/issues/42227) @[winoros](https://github.com/winoros)
-    - Push down sort property to range partition table [#26166](https://github.com/pingcap/tidb/issues/26166) @[Defined2014](https://github.com/Defined2014)
-    - Enhance compatibility with MySQL implementation when using caching_sha2_password [#43576](https://github.com/pingcap/tidb/issues/43576) @[asjdf](https://github.com/asjdf)
+    - Support using the MergeSort operator on partitioned tables in IndexLookUp [#26166](https://github.com/pingcap/tidb/issues/26166) @[Defined2014](https://github.com/Defined2014)
+    - Enhance `caching_sha2_password` to make it compatible with MySQL [#43576](https://github.com/pingcap/tidb/issues/43576) @[asjdf](https://github.com/asjdf)
 
 + TiKV
 
@@ -495,12 +495,12 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
 
   <!-- **tw:hfxsd** (6) -->
 
-    - Fix the issue where under some extreme conditions, retrying failed RPC with `tidb_pessimistic_txn_fair_locking` enabled could potentially affect data correctness due to expired requests [#14551](https://github.com/tikv/tikv/issues/14551) @[MyonKeminta](https://github.com/MyonKeminta)
-    - Fix the issue where a conflict of encryption Key ID can lead to the deletion of an old Key [#14585](https://github.com/tikv/tikv/issues/14585) @[tabokie](https://github.com/tabokie)
-    - Fix the performance issue brought by accumulated lock records when the cluster is upgraded from a previous version to v6.5 or higher [#14780](https://github.com/tikv/tikv/issues/14780) @[MyonKeminta](https://github.com/MyonKeminta)
-    - Fix the `raft entry is too large` issue during the PITR recovery process @[YuJuncen](https://github.com/YuJuncen)
-    - Fix the issue of TiKV panicking due to log_batch exceeding 2G during the PITR recovery process @[YuJuncen](https://github.com/YuJuncen)
-    - Fix the issue of correctness caused by replaying pessimistic lock requests @[MyonKeminta](https://github.com/MyonKeminta)
+    - Fix the issue that when you enable `tidb_pessimistic_txn_fair_locking`, in some extreme cases, expired requests caused by failed RPC retries might affect data correctness during the resolve lock operation [#14551](https://github.com/tikv/tikv/issues/14551) @[MyonKeminta](https://github.com/MyonKeminta)
+    - Fix the issue that when you enable `tidb_pessimistic_txn_fair_locking`, in some extreme cases, expired requests caused by failed RPC retries might cause transaction conflicts to be ignored, thus affecting transaction consistency [#14311](https://github.com/tikv/tikv/issues/14311) @[MyonKeminta](https://github.com/MyonKeminta)
+    - Fix the issue that conflicting encrypted key IDs cause old keys to be deleted [#14585](https://github.com/tikv/tikv/issues/14585) @[tabokie](https://github.com/tabokie)
+    - Fix the performance issue caused by accumulated lock records when a cluster is upgraded from a previous version to v6.5 or later versions [#14780](https://github.com/tikv/tikv/issues/14780) @[MyonKeminta](https://github.com/MyonKeminta)
+    - Fix the issue that the `raft entry is too large` error occurs during the PITR recovery process [#14313](https://github.com/tikv/tikv/issues/14313) @[YuJuncen](https://github.com/YuJuncen)
+    - Fix the TiKV panic issue that occurs when the buffer size of `log_batch` exceeds 2 GB during the PITR recovery process [#13848](https://github.com/tikv/tikv/issues/13848) @[YuJuncen](https://github.com/YuJuncen)
 
 + PD
 
@@ -522,8 +522,8 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
 
     + Backup & Restore (BR)
       <!-- **tw:hfxsd** (2)-->
-        - Fix the issue of backup slowness when TiKV in the cluster is down [#42973](https://github.com/pingcap/tidb/issues/42973) @[YuJuncen](https://github.com/YuJuncen)
-        - Fix the issue of backup failure and missing error information in some cases [#43236](https://github.com/pingcap/tidb/issues/43236) @[YuJuncen](https://github.com/YuJuncen)
+        - Fix the issue of slow backup when TiKV is down in a cluster [#42973](https://github.com/pingcap/tidb/issues/42973) @[YuJuncen](https://github.com/YuJuncen)
+        - Fix the issue of inaccurate error information caused by backup failure in some cases [#43236](https://github.com/pingcap/tidb/issues/43236) @[YuJuncen](https://github.com/YuJuncen)
 
     + TiCDC
       <!-- **tw:qiancai** (6) -->
@@ -549,14 +549,14 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
         
     + TiDB Lightning
       <!-- **tw:hfxsd** (8)-->
-        - Fix the performance degradation issue during Lightning import [#42456](https://github.com/pingcap/tidb/issues/42456) @[lance6716](https://github.com/lance6716)
-        - Fix the error of `write to tikv with no leader returned` during the import of large amounts of data [#43055](https://github.com/pingcap/tidb/issues/43055) @[lance6716](https://github.com/lance6716)
-        - Fix the issue of excessive output of `keys within region is empty, skip doIngest` logs during import [#43197](https://github.com/pingcap/tidb/issues/43197) @[D3Hunter](https://github.com/D3Hunter)
-        - Fix the issue that range part writing might panic [#43363](https://github.com/pingcap/tidb/issues/43363) @[lance6716](https://github.com/lance6716)
-        - Fix the issue of possible OOM when importing wide tables [#43728](https://github.com/pingcap/tidb/issues/43728) @[D3Hunter](https://github.com/D3Hunter)
-        - Fix the issue of missing data in Lightning Grafana panel [#43357](https://github.com/pingcap/tidb/issues/43357) @[lichunzhu](https://github.com/lichunzhu)
-        - Fix the issue of import failure due to incorrect setting of keyspace name [#43684](https://github.com/pingcap/tidb/issues/43684) @[zeminzhou](https://github.com/zeminzhou)
-        - Fix the issue of skipping data import in certain situations when range part is written [#43768](https://github.com/pingcap/tidb/issues/43768) @[lance6716](https://github.com/lance6716)
+        - Fix the performance degradation issue during data import [#42456](https://github.com/pingcap/tidb/issues/42456) @[lance6716](https://github.com/lance6716)
+        - Fix the issue of `write to tikv with no leader returned` when importing a large amount of data [#43055](https://github.com/pingcap/tidb/issues/43055) @[lance6716](https://github.com/lance6716)
+        - Fix the issue that too many `keys within region is empty, skip doIngest` logs are output during data import [#43197](https://github.com/pingcap/tidb/issues/43197) @[D3Hunter](https://github.com/D3Hunter)
+        - Fix the issue that panic might occur during partial write [#43363](https://github.com/pingcap/tidb/issues/43363) @[lance6716](https://github.com/lance6716)
+        - Fix the issue that OOM  might occur when importing a table with a large row size [#43728](https://github.com/pingcap/tidb/issues/43728) @[D3Hunter](https://github.com/D3Hunter)
+        - Fix the issue of missing data in the TiDB Lightning Grafana panel [#43357](https://github.com/pingcap/tidb/issues/43357) @[lichunzhu](https://github.com/lichunzhu)
+        - Fix the issue of import failure due to incorrect setting of keyspace names [#43684](https://github.com/pingcap/tidb/issues/43684) @[zeminzhou](https://github.com/zeminzhou)
+        - Fix the issue of skipping data import during range partial write in some cases [#43768](https://github.com/pingcap/tidb/issues/43768) @[lance6716](https://github.com/lance6716)
 
 ## Contributors
 
