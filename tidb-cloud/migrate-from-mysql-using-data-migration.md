@@ -192,9 +192,9 @@ On the **Create Migration Job** page, configure the source and target connection
     - If you use Public IP or VPC Peering, you need to add the Data Migration service's IP addresses to the IP Access List of your source database and firewall (if any).
     - If you use AWS Private Link, you are prompted to accept the endpoint request. Go to the [AWS VPC console](https://us-west-2.console.aws.amazon.com/vpc/home), and click **Endpoint services** to accept the endpoint request.
 
-## Step 3: Choose migration job process
+## Step 3: Choose migration job type
 
-On the **Choose Objects to Migrate** page, you can choose existing data migration, incremental data migration, or both by choosing the checkboxes.
+On the **Choose the objects to be migrated** step, you can choose existing data migration, incremental data migration, or both by choosing the checkboxes.
 
 ### Migrate existing data and incremental data
 
@@ -208,7 +208,7 @@ To migrate only the existing data of the source database to TiDB Cloud, choose *
 
 To migrate only the incrementable data of the source database to TiDB Cloud, choose **Incremental data migration**. In this case, the migration job does not migrate the existing data of the source database to TiDB Cloud, but only replicates ongoing changes of the source database to TiDB Cloud.
 
-You can specify the following types of start positions for incremental data migration:
+In the **Start Position** area, you can specify the following types of start positions for incremental data migration:
 
 - The time when the data migrtion job starts
 - GTID
@@ -218,7 +218,7 @@ If you do not specify a start position, the migration job will start from the ti
 
 - **The time when the incremental migration job starts**
 
-    If you select this option, the migration job will start from the time when the migration job starts to replicate ongoing changes of the source database to TiDB Cloud.
+    If you select this option, the migration job will start from the time when the incremental migration job starts to replicate ongoing changes of the source database to TiDB Cloud.
 
 - **Specify GTID**
 
@@ -234,7 +234,7 @@ If you do not specify a start position, the migration job will start from the ti
     >
     > - Make sure that the GTID is enabled in the source database.
     > - If the source database is MySQL, the MySQL version must be 5.6 or later, and the storage engine must be InnoDB.
-    > - If the migration job connects to the secondary database in upstream, the `REPLICATE CREATE TABLE ... SELECT` events cannot be replicated, because the statement will be split into two transactions, `CREATE TABLE` and `INSERT`, and the two transactions are assigned the same GTID, which will cause the `INSERT` statement to be ignored by the secondary database.
+    > - If the migration job connects to a secondary database in upstream, the `REPLICATE CREATE TABLE ... SELECT` events cannot be replicated, because the statement will be split into two transactions (`CREATE TABLE` and `INSERT`) that are assigned the same GTID, which will cause the `INSERT` statement to be ignored by the secondary database.
 
 - **Specify binlog file name and position**
 
@@ -246,7 +246,7 @@ If you do not specify a start position, the migration job will start from the ti
     SHOW MASTER STATUS;
     ```
 
-    If there is data in the target database, make sure the binlog position is correct. Otherwise, there might be conflicts between the existing data and the incremental data. If conflicts occur, you need to delete the target database and create a new migration job with the correct binlog position.
+    If there is data in the target database, make sure the binlog position is correct. Otherwise, there might be conflicts between the existing data and the incremental data. If conflicts occur, you need to delete the target database and create a new incremental migration job with the correct binlog position.
 
 > **Note:**
 >
