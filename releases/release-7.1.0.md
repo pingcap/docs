@@ -375,6 +375,10 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
 | TiCDC | [`integrity.integrity-check-level`](/ticdc/ticdc-changefeed-config.md#cli-and-configuration-parameters-of-ticdc-changefeeds) | Newly added | Controls whether to enable the checksum validation for single-row data. The default value is `"none"`, which means to disable the feature. |
 | TiCDC | [`sink.enable-partition-separator`](/ticdc/ticdc-changefeed-config.md#cli-and-configuration-parameters-of-ticdc-changefeeds) | Modified | Changes the default value from `false` to `true` after further tests, meaning that partitions in a table are stored in separate directories by default. It is recommended that you keep the value as `true` to avoid the potential issue of data loss during replication of partitioned tables to storage services. |
 
+## Deprecated feature
+
+The [optimistic transaction mode](/optimistic-transaction.md) will be deprecated in a future release. Starting from v7.1.0, it is not recommended to set the value of `tidb_txn_mode` to `"optimistic"` or `""`.
+
 ## Improvements
 
 + TiDB
@@ -391,11 +395,10 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
 
   <!-- **tw:Oreoxmt** (5)-->
 
-    - Reduce the impact of Split on write QPS under partitioned Raft KV [#14447](https://github.com/tikv/tikv/issues/14447) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
-    - Optimize the space occupied by snapshots under partitioned Raft KV [#14581](https://github.com/tikv/tikv/issues/14581) @[bufferflies](https://github.com/bufferflies)
-    - Optimize the default parameters of load-based split according to the size of the Region [#14834](https://github.com/tikv/tikv/issues/14834) @[tonyxuqqi](https://github.com/tonyxuqqi)
-    - Record detailed times of each stage in TiKV processing requests [#12362](https://github.com/tikv/tikv/issues/12362) @[cfzjywxk](https://github.com/cfzjywxk)
-    - Use PD as metastore [#13867](https://github.com/tikv/tikv/issues/13867) @[YuJuncen](https://github.com/YuJuncen)
+    - Reduce the impact of split operations on write QPS when using partitioned Raft KV [#14447](https://github.com/tikv/tikv/issues/14447) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
+    - Optimize the space occupied by snapshots when using partitioned Raft KV [#14581](https://github.com/tikv/tikv/issues/14581) @[bufferflies](https://github.com/bufferflies)
+    - Provide more detailed time information for each stage of processing requests in TiKV [#12362](https://github.com/tikv/tikv/issues/12362) @[cfzjywxk](https://github.com/cfzjywxk)
+    - Use PD as metastore in log backup [#13867](https://github.com/tikv/tikv/issues/13867) @[YuJuncen](https://github.com/YuJuncen)
 
 + PD
 
@@ -415,7 +418,7 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
 
     + Backup & Restore (BR)
       <!-- **tw:hfxsd** (1) -->
-        - Support for online modification of `tikv.log-backup.max-flush-interval` configuration [#14433](https://github.com/tikv/tikv/issues/14433) @[joccau](https://github.com/joccau)
+        - Support modifying the `tikv.log-backup.max-flush-interval` configuration item during backing up logs [#14433](https://github.com/tikv/tikv/issues/14433) @[joccau](https://github.com/joccau)
 
     + TiCDC
       <!-- **tw:ran-huang** (6) -->
@@ -428,9 +431,9 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
 
     + TiDB Lightning
       <!-- **tw:hfxsd** (3) -->
-        - Change the Region distribution precheck item from Critical to Warn [#42836](https://github.com/pingcap/tidb/issues/42836) @[okJiang](https://github.com/okJiang)
-        - Add retry for unknown RPC errors during import [#43291](https://github.com/pingcap/tidb/issues/43291) @[D3Hunter](https://github.com/D3Hunter)
-        - Enhance Region job retry [#43682](https://github.com/pingcap/tidb/issues/43682) @[lance6716](https://github.com/lance6716)
+        - Change the severity level of the precheck item related to uneven distribution of regions from `Critical` to `Warn` to avoid blocking users from importing data [#42836](https://github.com/pingcap/tidb/issues/42836) @[okJiang](https://github.com/okJiang)
+        - Add retry after an unknown RPC error occurs during data import [#43291](https://github.com/pingcap/tidb/issues/43291) @[D3Hunter](https://github.com/D3Hunter)
+        - Enhance the retry mechanism for region jobs [#43682](https://github.com/pingcap/tidb/issues/43682) @[lance6716](https://github.com/lance6716)
 
 ## Bug fixes
 
@@ -438,24 +441,24 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
 
   <!-- **tw:Oreoxmt** (18) -->
 
-    - Fix the issue that a prompt for manual `analyze table` was added after reorganize partition [#42183](https://github.com/pingcap/tidb/issues/42183) @[CbcWestwolf](https://github.com/CbcWestwolf)
+    - Fix the issue that there is no prompt to manually execute `ANALYZE TABLE` after reorganizing partitions [#42183](https://github.com/pingcap/tidb/issues/42183) @[CbcWestwolf](https://github.com/CbcWestwolf)
     - (dup) Fix the issue of missing table names in the `ADMIN SHOW DDL JOBS` result when a `DROP TABLE` operation is being executed [#42268](https://github.com/pingcap/tidb/issues/42268) @[tiancaiamao](https://github.com/tiancaiamao)
-    - Fix the issue that sometimes you can't see the `Ignore Event Per Minute` and `Stats Cache LRU Cost` charts in the monitoring panel [#42562](https://github.com/pingcap/tidb/issues/42562) @[pingandb](https://github.com/pingandb)
-    - Fix the issue of incorrect results for the `ORDINAL_POSITION` column in the `INFORMATION_SCHEMA.COLUMNS` table query [#43379](https://github.com/pingcap/tidb/issues/43379) @[bb7133](https://github.com/bb7133)
-    - Fix the case sensitivity issue for some columns in the permission table [#41048](https://github.com/pingcap/tidb/issues/41048) @[bb7133](https://github.com/bb7133)
+    - Fix the issue that `Ignore Event Per Minute` and `Stats Cache LRU Cost` charts might not be displayed normally in the Grafana monitoring panel [#42562](https://github.com/pingcap/tidb/issues/42562) @[pingandb](https://github.com/pingandb)
+    - Fix the issue that `ORDINAL_POSITION` column returns incorrect results when querying the `INFORMATION_SCHEMA.COLUMNS` table [#43379](https://github.com/pingcap/tidb/issues/43379) @[bb7133](https://github.com/bb7133)
+    - Fix the case sensitivity issue in some columns of the permission table [#41048](https://github.com/pingcap/tidb/issues/41048) @[bb7133](https://github.com/bb7133)
     - (dup) Fix the issue that after a new column is added in the cache table, the value is `NULL` instead of the default value of the column [#42928](https://github.com/pingcap/tidb/issues/42928) @[lqs](https://github.com/lqs)
-    - Fix the correctness issue of CTE results under the condition of predicate pushdown [#43645](https://github.com/pingcap/tidb/issues/43645) @[winoros](https://github.com/winoros)
+    - Fix the issue that CTE results are incorrect when pushing down predicates [#43645](https://github.com/pingcap/tidb/issues/43645) @[winoros](https://github.com/winoros)
     - (dup) Fix the issue of DDL retry caused by write conflict when executing `TRUNCATE TABLE` for partitioned tables with many partitions and TiFlash replicas [#42940](https://github.com/pingcap/tidb/issues/42940) @[mjonss](https://github.com/mjonss)
-    - Fix the issue that a Warning is given if a user uses subpartition when creating a partitioned table [#41198](https://github.com/pingcap/tidb/issues/41198) [#41200](https://github.com/pingcap/tidb/issues/41200) @[mjonss](https://github.com/mjonss)
-    - Fix the issue of incompatibility with MySQL when dealing with value overflow issues in generated columns [#40066](https://github.com/pingcap/tidb/issues/40066) @[jiyfhust](https://github.com/jiyfhust)
-    - Fix the issue that reorganize partition and other DDL operations cannot be performed concurrently [#42442](https://github.com/pingcap/tidb/issues/42442) @[bb7133](https://github.com/bb7133)
-    - Fix the issue of error reporting when querying a partitioned table partitioned by the `FLOOR` function [#42323](https://github.com/pingcap/tidb/issues/42323) @[jiyfhust](https://github.com/jiyfhust)
-    - Fix the issue that subsequent other DDLs report errors after canceling the DDL's reorganize partition task [#42448](https://github.com/pingcap/tidb/issues/42448) @[lcwangchao](https://github.com/lcwangchao)
-    - Fix the issue of incorrect assertions for delete operations under certain conditions [#42426](https://github.com/pingcap/tidb/issues/42426) @[tiancaiamao](https://github.com/tiancaiamao)
+    - Fix the issue that there is no warning when using `SUBPARTITION` in creating partitioned tables [#41198](https://github.com/pingcap/tidb/issues/41198) [#41200](https://github.com/pingcap/tidb/issues/41200) @[mjonss](https://github.com/mjonss)
+    - Fix the incompatibility issue with MySQL when dealing with value overflow issues in generated columns [#40066](https://github.com/pingcap/tidb/issues/40066) @[jiyfhust](https://github.com/jiyfhust)
+    - Fix the issue that `REORGANIZE PARTITION` cannot be concurrent with other DDL operations [#42442](https://github.com/pingcap/tidb/issues/42442) @[bb7133](https://github.com/bb7133)
+    - Fix the issue that an error is reported when querying a partitioned table partitioned by the `FLOOR` function [#42323](https://github.com/pingcap/tidb/issues/42323) @[jiyfhust](https://github.com/jiyfhust)
+    - Fix the issue that canceling the partition reorganization task in DDL might cause subsequent DDL operations to fail [#42448](https://github.com/pingcap/tidb/issues/42448) @[lcwangchao](https://github.com/lcwangchao)
+    - Fix the issue that assertions on delete operations are incorrect under certain conditions [#42426](https://github.com/pingcap/tidb/issues/42426) @[tiancaiamao](https://github.com/tiancaiamao)
     - (dup) Fix the issue that TiDB server cannot start due to an error in reading the cgroup information with the error message "can't read file memory.stat from cgroup v1: open /sys/memory.stat no such file or directory" [#42659](https://github.com/pingcap/tidb/issues/42659) @[hawkingrei](https://github.com/hawkingrei)
-    - Fix the issue of `Duplicate Key` error when updating the partition key data of a row on a partitioned table with a global index [#42312](https://github.com/pingcap/tidb/issues/42312) @[L-maple](https://github.com/L-maple)
-    - Fix the issue that the Scan Worker Time By Phase chart in the TTL monitoring panel does not display data [#42515](https://github.com/pingcap/tidb/issues/42515) @[lcwangchao](https://github.com/lcwangchao)
-    - Fix the issue that some queries return incorrect results on partitioned tables with a global index [#41991](https://github.com/pingcap/tidb/issues/41991) [#42065](https://github.com/pingcap/tidb/issues/42065) @[L-maple](https://github.com/L-maple)
+    - Fix the issue of `Duplicate Key` error when updating the partition key of a row on a partitioned table with a global index [#42312](https://github.com/pingcap/tidb/issues/42312) @[L-maple](https://github.com/L-maple)
+    - Fix the issue that the `Scan Worker Time By Phase` chart in the TTL monitoring panel does not display data [#42515](https://github.com/pingcap/tidb/issues/42515) @[lcwangchao](https://github.com/lcwangchao)
+    - Fix the issue that some queries on partitioned tables with a global index return incorrect results [#41991](https://github.com/pingcap/tidb/issues/41991) [#42065](https://github.com/pingcap/tidb/issues/42065) @[L-maple](https://github.com/L-maple)
   <!-- **tw:ran-huang** (17) -->
     - Fix the issue of displaying some error logs during the reorganize partition table process [#42180](https://github.com/pingcap/tidb/issues/42180) @[mjonss](https://github.com/mjonss)
     - Fix the issue that the data length in the QUERY column of the `INFORMATION_SCHEMA.DDL_JOBS` table might be longer than the column definition [#42440](https://github.com/pingcap/tidb/issues/42440) @[tiancaiamao](https://github.com/tiancaiamao)
@@ -484,7 +487,7 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
     - Fix the issue that renaming tables does not take effect when committing multiple statements in a transaction [#39664](https://github.com/pingcap/tidb/issues/39664) @[tiancaiamao](https://github.com/tiancaiamao)
     - Fix the incompatibility issue between the behavior of prepared plan cache and non-prepared plan cache during time conversion [#42439](https://github.com/pingcap/tidb/issues/42439) @[qw4990](https://github.com/qw4990)
     - Fix the wrong results caused by plan cache for Decimal type [#43311](https://github.com/pingcap/tidb/issues/43311) @[qw4990](https://github.com/qw4990)
-    - Fix the TiDB panic issue in NAAJ due to wrong field type check [#42459](https://github.com/pingcap/tidb/issues/42459) @[AilinKid](https://github.com/AilinKid)
+    - Fix the TiDB panic issue in NAAJ due to the wrong field type check [#42459](https://github.com/pingcap/tidb/issues/42459) @[AilinKid](https://github.com/AilinKid)
     - Fix the issue that DML execution failures in pessimistic transactions at the RC isolation level might cause inconsistency between data and indexes [#43294](https://github.com/pingcap/tidb/issues/43294) @[ekexium](https://github.com/ekexium)
     - Fix the issue that in some extreme cases, retrying the first statement of a pessimistic transaction might affect transaction correctness when resolving locks on this transaction [#42937](https://github.com/pingcap/tidb/issues/42937) @[MyonKeminta](https://github.com/MyonKeminta)
     - Fix the issue that in some rare cases, residual pessimistic locks of pessimistic transactions might affect data correctness when GC resolves locks [#43243](https://github.com/pingcap/tidb/issues/43243) @[MyonKeminta](https://github.com/MyonKeminta)
@@ -505,11 +508,11 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
 + PD
 
   <!-- **tw:Oreoxmt** (5) -->
-    - Fix the issue of abnormal number of low space stores in the PD monitoring panel after TiKV panic [#6252](https://github.com/tikv/pd/issues/6252) @[HuSharp](https://github.com/HuSharp)
-    - Fix the issue where Region stats monitoring data is deleted after PD leader switch [#6366](https://github.com/tikv/pd/issues/6366) @[iosmanthus](https://github.com/iosmanthus)
-    - Fix the issue where Rule checker cannot repair unhealthy Region with label `schedule=deny` [#6426](https://github.com/tikv/pd/issues/6426) @[nolouch](https://github.com/nolouch)
-    - Fix the issue where some existing labels are lost after TiKV/TiFlash restart [#6467](https://github.com/tikv/pd/issues/6467) @[JmPotato](https://github.com/JmPotato)
-    - Fix the issue where the state cannot be switched when there are learner nodes in the replication mode [#14704](https://github.com/tikv/tikv/issues/14704) @[nolouch](https://github.com/nolouch)
+    - Fix the issue that the number of `low space store` in the PD monitoring panel is abnormal after TiKV panics [#6252](https://github.com/tikv/pd/issues/6252) @[HuSharp](https://github.com/HuSharp)
+    - Fix the issue that Region Health monitoring data is deleted after PD leader switch [#6366](https://github.com/tikv/pd/issues/6366) @[iosmanthus](https://github.com/iosmanthus)
+    - Fix the issue that the rule checker cannot repair unhealthy Regions with the label `schedule=deny` [#6426](https://github.com/tikv/pd/issues/6426) @[nolouch](https://github.com/nolouch)
+    - Fix the issue that some existing labels are lost after TiKV or TiFlash restarts [#6467](https://github.com/tikv/pd/issues/6467) @[JmPotato](https://github.com/JmPotato)
+    - Fix the issue that the replication status cannot be switched when there are learner nodes in the replication mode [#14704](https://github.com/tikv/tikv/issues/14704) @[nolouch](https://github.com/nolouch)
 
 + TiFlash
 
