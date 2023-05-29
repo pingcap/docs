@@ -5,7 +5,7 @@ summary: Learn about what's coming in the future for TiDB.
 
 # TiDB Roadmap
 
-This is a look into the proposed future. We will update this as we release long-term stable (LTS) releases. The purpose is to provide visibility into what is coming you can more closely follow progress, learn about key milestones as we go, and for us to get feedback as development happens. 
+This roadmap provides a look into the proposed future. This will be continually updated as we release long-term stable (LTS) versions. The purpose is to provide visibility into what is coming, so that you can more closely follow the progress, learn about the key milestones on the way, and give feedback as the development work goes on. 
 
 In the course of development, this roadmap is subject to change based on user needs and feedback. As expected, as the columns move right, the items under them are less committed. If you have a feature request or want to prioritize a feature, please file an issue on [GitHub](https://github.com/pingcap/tidb/issues).
 
@@ -16,7 +16,7 @@ In the course of development, this roadmap is subject to change based on user ne
     <tr>
       <th>Category</th>
       <th>End of CY23 LTS release</th>
-      <th>Mid CY24 LTS release</th>
+      <th>Mid of CY24 LTS release</th>
       <th>Future releases</th>
     </tr>
   </thead>
@@ -28,13 +28,13 @@ In the course of development, this roadmap is subject to change based on user ne
       <td>
         <ul>
           <li>
-            <b>GA of Partitioned-raft-kv storage engine</b><br /><i
-              >PB-scale clusters, increased write velocity, faster scaling operations, and more compaction stability</i
+            <b>GA of Partitioned Raft KV storage engine</b><br /><i
+              >PB-scale clusters, increased write velocity, faster scaling operations, and improved compaction stability</i
             >
           </li>
           <br />
           <li>
-            <b>Augmented replica reads</b><br /><i>
+            <b>Augmented replica read</b><br /><i>
               Reduced cross-AZ data transfer costs in TiKV
             </i>
           </li>
@@ -44,8 +44,8 @@ In the course of development, this roadmap is subject to change based on user ne
       <td>
         <ul>
           <li>
-            <b>Performance optimization framework for all applicable background tasks, like DDL, TTL, and analyze cluster</b><br />
-            <i>This distributes the work of these operations throughout the cluster, speeding them up and exposing single nodes to less background resource utilization. This framework already applies to the ADD INDEX operation.</i>
+            <b>Performance optimization framework for all applicable background tasks, like DDL, TTL, and cluster analysis</b><br />
+            <i>This distributes the workload of these operations throughout the cluster, resulting in accelerated performance and reduced resource utilization on individual nodes. This framework already applies to the <code>ADD INDEX</code> operation</i>
           </li>
           <br />
           <li>
@@ -76,7 +76,7 @@ In the course of development, this roadmap is subject to change based on user ne
           <li>
             <b>Resource control for background tasks</b><br />
             <i>
-              Control over how background tasks can affect foreground traffic. These tasks could be imports, DDL, TTL, auto-analyze, compactions, etc.
+              Control over how background tasks, such as imports, DDL, TTL, auto-analyze, and compactions, can affect foreground traffic.
             </i>
           </li>
         </ul>
@@ -112,7 +112,7 @@ In the course of development, this roadmap is subject to change based on user ne
           </li>
           <br />
                     <li>
-            <b>Unified SQL interface for import, backup/restore, and PiTR</b>
+            <b>Unified SQL interface for import, Backup & Restore, and PITR</b>
           </li>
         </ul>
       </td>
@@ -165,7 +165,7 @@ In the course of development, this roadmap is subject to change based on user ne
           <li>
             <b>TiCDC native integrations with big data systems</b>
             <br /><i
-              >Snowflake, Iceburg, etc.</i
+              >Such as Snowflake and Iceburg</i
             >
           </li>
         </ul>
@@ -205,19 +205,19 @@ In the course of development, this roadmap is subject to change based on user ne
       <td>
         <ul>
           <li>
-            <b>Column-/row-level access control</b>
+            <b>Column-level/row-level access control</b>
             <br />
           </li>
           <br />
           <li>
-            <b>Database level encryption</b>
+            <b>Database-level encryption</b>
           </li>
         </ul>
       </td>
       <td>
         <ul>
           <li>
-            <b>Database Auth-X.509 Auth</b>
+            <b>Database X.509 authentication</b>
           </li>
         </ul>
       </td>
@@ -227,26 +227,25 @@ In the course of development, this roadmap is subject to change based on user ne
 
 These are non-exhaustive plans and are subject to change. Features might differ per service subscriptions.
 
-### Previously delivered roadmap items
+## Previously delivered roadmap items
 
-You may have been waiting on some items from the last version. Some of those are noted below. For more detail, visit the v7.1 release notes:
+You might have been waiting on some items from the last version. The following lists some previously delivered features. For more details, refer to the [v7.1.0 release notes](/releases/release-7.1.0.md).
 
-- Foundation of multi-tenancy framework: Resource control quotas and scheduling for resource groups
+- Foundation of multi-tenancy framework: resource control quotas and scheduling for resource groups
 - TiCDC sink to S3 and Azure object store (GA)
-- Fastest online ADD INDEX (GA)
+- Fastest online `ADD INDEX` (GA)
 - TiFlash late materialization (GA)
 - TiFlash spill-to-disk (GA)
 - SQL-based data import (GA)
 - LDAP integration (GA)
 - SQL audit logging enhancement (GA) (Enteprise-only)
-- Partitioned raft-kv storage engine (experimental)
+- Partitioned Raft KV storage engine (experimental)
 - General session-level plan cache (experimental)
 - TiCDC distributed per table with Kafka downstream (experimental)
 
-### Recently shipped
+## Recently shipped
 
 - [TiDB 7.1.0 Release Notes](https://docs.pingcap.com/tidb/dev/release-7.1.0)
-- [TiDB 7.0.0 Release Notes](https://docs.pingcap.com/tidb/v7.0/release-7.0.0)
 - [TiDB 7.0.0 Release Notes](https://docs.pingcap.com/tidb/v7.0/release-7.0.0)
 - [TiDB 6.6.0 Release Notes](https://docs.pingcap.com/tidb/v6.6/release-6.6.0)
 - [TiDB 6.5.0 Release Notes](https://docs.pingcap.com/tidb/v6.5/release-6.5.0)
