@@ -13,7 +13,7 @@ For instructions about how to migrate existing data or both existing data and in
 
 > **Note**:
 >
-> This section only includes prerequisites about incremental data migration. It is recommended that you also read the general limitations. See [Limitations](/tidb-cloud/migrate-from-mysql-using-data-migration.md#limitations).
+> This section only includes limitations about incremental data migration. It is recommended that you also read the general limitations. See [Limitations](/tidb-cloud/migrate-from-mysql-using-data-migration.md#limitations).
 
 - If the target table is not yet created in the target database, the migration job will report an error and fail. In this case, you need to create the target table and then resume the migration job.
 - If the DELETE or UPDATE records of the upstream table do not exist in the downstream table, there will be no change in the data of the downstream table, that is, the UPDATE will not be changed to UPSERT.
