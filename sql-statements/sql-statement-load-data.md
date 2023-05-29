@@ -21,7 +21,7 @@ In TiDB v7.0.0, the `LOAD DATA` SQL statement supports the following features:
 
 > **Note:**
 >
-> This feature is only available on [TiDB Serverless clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta).
+> This feature is only available on [TiDB Serverless clusters](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta).
 
 </CustomContent>
 

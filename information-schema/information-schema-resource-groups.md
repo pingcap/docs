@@ -9,7 +9,7 @@ summary: Learn the `RESOURCE_GROUPS` information_schema table.
 
 > **Note:**
 >
-> This feature is not available on [TiDB Serverless clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta).
+> This feature is not available on [TiDB Serverless clusters](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta).
 
 </CustomContent>
 
