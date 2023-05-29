@@ -210,6 +210,12 @@ To migrate only the incrementable data of the source database to TiDB Cloud, cho
 
 You can specify the following types of start positions for incremental data migration:
 
+- The time when the data migrtion job starts
+- GTID
+- Binlog file name and position
+
+If you do not specify a start position, the migration job will start from the time when the data migrtion job starts.
+
 - **The time when the data migrtion job starts**
 
     If you select this option, the migration job will start from the time when the migration job starts to replicate ongoing changes of the source database to TiDB Cloud.
@@ -240,10 +246,11 @@ You can specify the following types of start positions for incremental data migr
     SHOW MASTER STATUS;
     ```
 
+    If there is data in the target database, make sure the binlog position is correct. Otherwise, thre might be conflicts between the existing data and the incremental data. If conflicts occur, you need to delete the target database and create a new migration job with the correct binlog position.
+
 > **Note:**
 >
-> - If there is data in the target database, make sure the binlog position is correct. Otherwise, thre might be conflicts between the existing data and the incremental data. If conflicts occur, you need to delete the target database and create a new migration job with the correct binlog position.
-> - Once a migration job starts, you cannot change the start position.
+> Once a migration job starts, you cannot change the start position.
 
 ## Step 4: Choose the objects to be migrated
 
@@ -267,7 +274,7 @@ You can specify the following types of start positions for incremental data migr
         ![Select Databases and Deselect Some Tables](/media/tidb-cloud/migration-job-select-db-blacklist2.png)
     -->
 
-3. Click **Next**.
+2. Click **Next**.
 
 ## Step 5: Precheck
 
