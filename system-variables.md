@@ -53,6 +53,174 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 - Default value: `OFF`
 - Determines whether to allow explicitly specifying the values of the column with the `AUTO_RANDOM` attribute in the `INSERT` statement.
 
+### authentication_ldap_sasl_auth_method_name <span class="version-mark">New in v7.1.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: Enumeration
+- Default value: `SCRAM-SHA-1`
+- Possible values: `SCRAM-SHA-1`, `SCRAM-SHA-256`, and `GSSAPI`.
+- For LDAP SASL authentication, this variable specifies the authentication method name.
+
+### authentication_ldap_sasl_bind_base_dn <span class="version-mark">New in v7.1.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: String
+- Default value: ""
+- For LDAP SASL authentication, this variable limits the search scope within the search tree. If a user is created without the `AS ...` clause, TiDB will automatically search the `dn` in LDAP server according to the user name.
+
+### authentication_ldap_sasl_bind_root_dn <span class="version-mark">New in v7.1.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: String
+- Default value: ""
+- For LDAP SASL authentication, this variable specifies the `dn` used to log in to the LDAP server to search users.
+
+### authentication_ldap_sasl_bind_root_pwd <span class="version-mark">New in v7.1.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: String
+- Default value: ""
+- For LDAP SASL authentication, this variable specifies the password used to log in to the LDAP server to search users.
+
+### authentication_ldap_sasl_ca_path <span class="version-mark">New in v7.1.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: String
+- Default value: ""
+- For LDAP SASL authentication, this variable specifies the absolute path of the certificate authority file for StartTLS connections.
+
+### authentication_ldap_sasl_init_pool_size <span class="version-mark">New in v7.1.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: Integer
+- Default value: `10`
+- Range: `[1, 32767]`
+- For LDAP SASL authentication, this variable specifies the initial connections in the connection pool to the LDAP server.
+
+### authentication_ldap_sasl_max_pool_size <span class="version-mark">New in v7.1.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: Integer
+- Default value: `1000`
+- Range: `[1, 32767]`
+- For LDAP SASL authentication, this variable specifies the maximum connections in the connection pool to the LDAP server.
+
+### authentication_ldap_sasl_server_host <span class="version-mark">New in v7.1.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: String
+- Default value: ""
+- For LDAP SASL authentication, this variable specifies the LDAP server host name or IP address.
+
+### authentication_ldap_sasl_server_port <span class="version-mark">New in v7.1.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: Integer
+- Default value: `389`
+- Range: `[1, 65535]`
+- For LDAP SASL authentication, this variable specifies the TCP/IP port number of the LDAP server.
+
+### authentication_ldap_sasl_tls <span class="version-mark">New in v7.1.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `OFF`
+- For LDAP SASL authentication, this variable controls whether connections by the plugin to the LDAP server are protected with StartTLS.
+
+### authentication_ldap_simple_auth_method_name <span class="version-mark">New in v7.1.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: Enumeration
+- Default value: `SIMPLE`
+- Possible values: `SIMPLE`.
+- For LDAP simple authentication, this variable specifies the authentication method name. The only supported value is `SIMPLE`.
+
+### authentication_ldap_simple_bind_base_dn <span class="version-mark">New in v7.1.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: String
+- Default value: ""
+- For LDAP simple authentication, this variable limits the search scope within the search tree. If a user is created without the `AS ...` clause, TiDB will automatically search the `dn` in LDAP server according to the user name.
+
+### authentication_ldap_simple_bind_root_dn <span class="version-mark">New in v7.1.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: String
+- Default value: ""
+- For LDAP simple authentication, this variable specifies the `dn` used to log in to the LDAP server to search users.
+
+### authentication_ldap_simple_bind_root_pwd <span class="version-mark">New in v7.1.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: String
+- Default value: ""
+- For LDAP simple authentication, this variable specifies the password used to log in to the LDAP server to search users.
+
+### authentication_ldap_simple_ca_path <span class="version-mark">New in v7.1.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: String
+- Default value: ""
+- For LDAP simple authentication, this variable specifies the absolute path of the certificate authority file for StartTLS connections.
+
+### authentication_ldap_simple_init_pool_size <span class="version-mark">New in v7.1.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: Integer
+- Default value: `10`
+- Range: `[1, 32767]`
+- For LDAP simple authentication, this variable specifies the initial connections in the connection pool to the LDAP server.
+
+### authentication_ldap_simple_max_pool_size <span class="version-mark">New in v7.1.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: Integer
+- Default value: `1000`
+- Range: `[1, 32767]`
+- For LDAP simple authentication, this variable specifies the maximum connections in the connection pool to the LDAP server.
+
+### authentication_ldap_simple_server_host <span class="version-mark">New in v7.1.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: String
+- Default value: ""
+- For LDAP simple authentication, this variable specifies the LDAP server host name or IP address.
+
+### authentication_ldap_simple_server_port <span class="version-mark">New in v7.1.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: Integer
+- Default value: `389`
+- Range: `[1, 65535]`
+- For LDAP simple authentication, this variable specifies the TCP/IP port number of the LDAP server.
+
+### authentication_ldap_simple_tls <span class="version-mark">New in v7.1.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `OFF`
+- For LDAP simple authentication, this variable controls whether connections by the plugin to the LDAP server are protected with StartTLS.
+
 ### auto_increment_increment
 
 - Scope: SESSION | GLOBAL
@@ -225,7 +393,7 @@ mysql> SELECT * FROM t1;
 - Persists to cluster: Yes
 - Type: Enumeration
 - Default value: `mysql_native_password`
-- Possible values: `mysql_native_password`, `caching_sha2_password`, `tidb_sm3_password`, and `tidb_auth_token`
+- Possible values: `mysql_native_password`, `caching_sha2_password`, `tidb_sm3_password`, `tidb_auth_token`, `authentication_ldap_sasl`, and `authentication_ldap_simple`.
 - The `tidb_auth_token` authentication method is used only for the internal operation of TiDB Cloud. **DO NOT** set the variable to this value.
 - This variable sets the authentication method that the server advertises when the server-client connection is being established.
 - To authenticate using the `tidb_sm3_password` method, you can connect to TiDB using [TiDB-JDBC](https://github.com/pingcap/mysql-connector-j/tree/release/8.0-sm3).
@@ -1160,6 +1328,10 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 >
 > Currently, PITR recovery handles the indexes created by index acceleration during the log backup with extra processing to achieve compatibility. For details, see [Why is the acceleration of adding indexes feature incompatible with PITR?](/faq/backup-and-restore-faq.md#why-is-the-acceleration-of-adding-indexes-feature-incompatible-with-pitr).
 
+> **Note:**
+>
+> Before you upgrade TiDB to v6.5.0 or later, it is recommended that you check whether the [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630) path of TiDB is correctly mounted to an SSD disk. This path is a TiDB configuration item, which takes effect after TiDB is restarted. Therefore, setting this configuration item before upgrading can avoid another restart.
+
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
@@ -1181,7 +1353,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Default value: `OFF`
-- This variable is used to control whether to enable the distributed execution framework. After the framework is enabled, backend tasks such as DDL and import will be jointly completed by multiple TiDB nodes in the cluster.
+- This variable is used to control whether to enable the [TiDB backend task distributed execution framework](/tidb-distributed-execution-framework.md). After the framework is enabled, backend tasks such as DDL and import will be distributedly executed and completed by multiple TiDB nodes in the cluster.
 - In TiDB v7.1.0, the framework supports distributedly executing only the `ADD INDEX` statement for partitioned tables.
 - This variable is renamed from `tidb_ddl_distribute_reorg`.
 
@@ -1304,7 +1476,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 > **Note:**
 >
-> Starting from v7.0.0, `tidb_dml_batch_size` no longer takes effect on the [`LOAD DATA` statement](/sql-statements/sql-statement-load-data.md). To control the batch size of `LOAD DATA`, you can use the parameter [`batch_size`](/sql-statements/sql-statement-load-data.md#with-batch_sizenumber).
+> Starting from v7.0.0, `tidb_dml_batch_size` no longer takes effect on the [`LOAD DATA` statement](/sql-statements/sql-statement-load-data.md).
 
 ### tidb_enable_1pc <span class="version-mark">New in v5.0</span>
 
@@ -1536,14 +1708,21 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 ### tidb_enable_non_prepared_plan_cache
 
+> **Warning:**
+>
+> The non-prepared execution plan cache is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
-- Default value: Before v7.1.0, the default value is `OFF`. Starting from v7.1.0, the default value is `ON`.
+- Default value: `OFF`
 - This variable controls whether to enable the [Non-prepared plan cache](/sql-non-prepared-plan-cache.md) feature.
-- When you upgrade from an earlier version to a v7.1.0 or later version, this variable remains the setting before the upgrade.
 
 ### tidb_enable_non_prepared_plan_cache_for_dml <span class="version-mark">New in v7.1.0</span>
+
+> **Warning:**
+>
+> The non-prepared execution plan cache is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
@@ -2085,6 +2264,25 @@ Query OK, 0 rows affected (0.09 sec)
 - Type: Boolean
 - Default value: `ON`
 - This variable is used to control whether to enable the support for window functions. Note that window functions may use reserved keywords. This might cause SQL statements that could be executed normally cannot be parsed after upgrading TiDB. In this case, you can set `tidb_enable_window_function` to `OFF`.
+
+### `tidb_enable_row_level_checksum` <span class="version-mark">New in v7.1.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `OFF`
+
+<CustomContent platform="tidb">
+
+- This variable is used to control whether to enable the [TiCDC data integrity validation for single-row data](/ticdc/ticdc-integrity-check.md) feature.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- This variable is used to control whether to enable the [TiCDC data integrity validation for single-row data](https://docs.pingcap.com/tidb/stable/ticdc-integrity-check) feature.
+
+</CustomContent>
 
 ### tidb_enforce_mpp <span class="version-mark">New in v5.1</span>
 
@@ -4476,7 +4674,6 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Persists to cluster: Yes
 - Type: Float
 - Default value: `0`
-- Range: `[0, 10]`
 - Range: `[0, 10]`
 - Unit: Milliseconds
 - This variable is used to set the maximum waiting time for a batch operation when TiDB requests TSO from PD. The default value is `0`, which means no extra waiting time.

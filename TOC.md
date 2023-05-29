@@ -32,7 +32,7 @@
       - [GORM](/develop/dev-guide-sample-application-golang-gorm.md)
     - Python
       - [mysqlclient](/develop/dev-guide-sample-application-python-mysqlclient.md)
-      - [MySQL Connect/Python](/develop/dev-guide-sample-application-python-mysql-connector.md)
+      - [MySQL Connector/Python](/develop/dev-guide-sample-application-python-mysql-connector.md)
       - [PyMySQL](/develop/dev-guide-sample-application-python-pymysql.md)
       - [SQLAlchemy](/develop/dev-guide-sample-application-python-sqlalchemy.md)
       - [peewee](/develop/dev-guide-sample-application-python-peewee.md)
@@ -141,6 +141,7 @@
   - Upgrade
     - [Use TiUP](/upgrade-tidb-using-tiup.md)
     - [Use TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/upgrade-a-tidb-cluster)
+    - [TiDB Smooth Upgrade](/smooth-upgrade-tidb.md)
     - [TiFlash v6.2.0 Upgrade Guide](/tiflash-620-upgrade-guide.md)
   - Scale
     - [Use TiUP (Recommended)](/scale-tidb-using-tiup.md)
@@ -533,6 +534,7 @@
       - [Manage Changefeeds](/ticdc/ticdc-manage-changefeed.md)
       - [Log Filter](/ticdc/ticdc-filter.md)
       - [Bidirectional Replication](/ticdc/ticdc-bidirectional-replication.md)
+      - [Data Integrity Validation for Single-Row Data](/ticdc/ticdc-integrity-check.md)
     - Monitor and Alert
       - [Monitoring Metrics Summary](/ticdc/ticdc-summary-monitor.md)
       - [Monitoring Metrics Details](/ticdc/monitor-ticdc.md)
@@ -687,7 +689,6 @@
       - [`BATCH`](/sql-statements/sql-statement-batch.md)
       - [`BEGIN`](/sql-statements/sql-statement-begin.md)
       - [`CALIBRATE RESOURCE`](/sql-statements/sql-statement-calibrate-resource.md)
-      - [`CANCEL LOAD DATA` and `DROP LOAD DATA`](/sql-statements/sql-statement-operate-load-data-job.md)
       - [`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)
       - [`COMMIT`](/sql-statements/sql-statement-commit.md)
       - [`CHANGE DRAINER`](/sql-statements/sql-statement-change-drainer.md)
@@ -780,7 +781,6 @@
       - [`SHOW INDEX [FROM|IN]`](/sql-statements/sql-statement-show-index.md)
       - [`SHOW INDEXES [FROM|IN]`](/sql-statements/sql-statement-show-indexes.md)
       - [`SHOW KEYS [FROM|IN]`](/sql-statements/sql-statement-show-keys.md)
-      - [`SHOW LOAD DATA`](/sql-statements/sql-statement-show-load-data.md)
       - [`SHOW MASTER STATUS`](/sql-statements/sql-statement-show-master-status.md)
       - [`SHOW PLACEMENT`](/sql-statements/sql-statement-show-placement.md)
       - [`SHOW PLACEMENT FOR`](/sql-statements/sql-statement-show-placement-for.md)
@@ -945,6 +945,7 @@
         - [Use Diagnostics](/dashboard/dashboard-diagnostics-usage.md)
       - [Monitoring Page](/dashboard/dashboard-monitoring.md)
       - [Search Logs Page](/dashboard/dashboard-log-search.md)
+      - [Resource Manager Page](/dashboard/dashboard-resource-manager.md)
       - Instance Profiling
         - [Manual Profiling](/dashboard/dashboard-profiling.md)
         - [Continuous Profiling](/dashboard/continuous-profiling.md)
@@ -956,6 +957,8 @@
   - [Errors Codes](/error-codes.md)
   - [Table Filter](/table-filter.md)
   - [Schedule Replicas by Topology Labels](/schedule-replicas-by-topology-labels.md)
+  - Internal Components
+    - [TiDB Backend Task Distributed Execution Framework](/tidb-distributed-execution-framework.md)
 - FAQs
   - [FAQ Summary](/faq/faq-overview.md)
   - [TiDB FAQs](/faq/tidb-faq.md)
