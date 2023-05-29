@@ -5,7 +5,7 @@ summary: Learn how to migrate data from MySQL-compatible databases hosted in Ama
 
 # Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration
 
-This document describes how to migrate data from a MySQL-compatible database on a cloud provider (Amazon Aurora MySQL, Amazon Relational Database Service (RDS), or Google Cloud SQL for MySQL) or on-premises to TiDB Cloud using the Data Migration feature of the TiDB Cloud console.
+This document describes how to migrate data from a MySQL-compatible database on a cloud provider (Amazon Aurora MySQL, Amazon Relational Database Service (RDS), or Google Cloud SQL for MySQL) or on-premises source database to TiDB Cloud using the Data Migration feature of the TiDB Cloud console.
 
 This feature helps you migrate your source databases' existing data and ongoing changes to TiDB Cloud (either in the same region or cross regions) directly in one go.
 
@@ -210,7 +210,7 @@ To migrate only the existing data of the source database to TiDB Cloud, choose *
 
 To migrate only the incrementable data of the source database to TiDB Cloud, choose **Incremental data migration**. In this case, the migration job does not migrate the existing data of the source database to TiDB Cloud, but only migrates ongoing changes of the source database to TiDB Cloud.
 
-For instructions about incremental data migration, see [Incremental data migration](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md).
+For detailed instructions about incremental data migration, see [Migrate Incremental Data from MySQL-Compatible Databases to TiDB Cloud Using Data Migration](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md).
 
 ## Step 4: Choose the objects to be migrated
 
