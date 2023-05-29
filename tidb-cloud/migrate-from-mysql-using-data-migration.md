@@ -204,11 +204,11 @@ To migrate data to TiDB Cloud once and for all, choose both **Existing data migr
 
 ### Migrate only existing data
 
-To migrate only the existing data of the source database to TiDB Cloud, choose **Existing data migration**.
+To migrate only existing data of the source database to TiDB Cloud, choose **Existing data migration**.
 
 ### Migrate only incremental data
 
-To migrate only the incrementable data of the source database to TiDB Cloud, choose **Incremental data migration**. In this case, the migration job does not migrate the existing data of the source database to TiDB Cloud, but only migrates ongoing changes of the source database to TiDB Cloud.
+To migrate only incrementable data of the source database to TiDB Cloud, choose **Incremental data migration**. In this case, the migration job does not migrate existing data of the source database to TiDB Cloud, but only migrates ongoing changes of the source database to TiDB Cloud.
 
 For detailed instructions about incremental data migration, see [Migrate Incremental Data from MySQL-Compatible Databases to TiDB Cloud Using Data Migration](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md).
 
