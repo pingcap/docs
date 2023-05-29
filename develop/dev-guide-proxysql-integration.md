@@ -221,7 +221,7 @@ For this integration, you will be using the [ProxySQL Docker image](https://hub.
 
     </SimpleTab>
 
-    When prompted, enter the endpoint of your cluster for `Serverless Tier Host`, and then enter the username and the password of your cluster.
+    When prompted, enter the endpoint of your cluster for `TiDB Serverless Host`, and then enter the username and the password of your cluster.
 
     The following is an example output. You will see that three configuration files are generated under the current `tidb-cloud-connect` folder.
 
