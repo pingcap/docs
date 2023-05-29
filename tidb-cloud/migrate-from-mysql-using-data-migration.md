@@ -7,7 +7,9 @@ summary: Learn how to migrate data from MySQL-compatible databases hosted in Ama
 
 This document describes how to migrate data from a MySQL-compatible database on a cloud provider (Amazon Aurora MySQL, Amazon Relational Database Service (RDS), or Google Cloud SQL for MySQL) or on-premises to TiDB Cloud using the Data Migration feature of the TiDB Cloud console.
 
-This feature helps you migrate your source databases' existing data and ongoing changes to TiDB Cloud (either in the same region or cross regions) directly in one go. 
+This feature helps you migrate your source databases' existing data and ongoing changes to TiDB Cloud (either in the same region or cross regions) directly in one go.
+
+If you want to migrate incremental data only, see [Migrate Incremental Data from MySQL-Compatible Databases to TiDB Cloud Using Data Migration](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md).
 
 ## Limitations
 
@@ -208,49 +210,7 @@ To migrate only the existing data of the source database to TiDB Cloud, choose *
 
 To migrate only the incrementable data of the source database to TiDB Cloud, choose **Incremental data migration**. In this case, the migration job does not migrate the existing data of the source database to TiDB Cloud, but only migrates ongoing changes of the source database to TiDB Cloud.
 
-In the **Start Position** area, you can specify the following types of start positions for incremental data migration:
-
-- The time when the incremental migration job starts
-- GTID
-- Binlog file name and position
-
-If you do not specify a start position, the migration job will start from the time when the incremental migration job starts.
-
-- **The time when the incremental migration job starts**
-
-    If you select this option, the migration job will start from the time when the incremental migration job starts to migrate ongoing changes of the source database to TiDB Cloud.
-
-- **Specify GTID**
-
-    Select this option to specify the GTID of the source database, for example, `3E11FA47-71CA-11E1-9E33-C80AA9429562:23`. The migration job will start from the specified GTID to migrate ongoing changes of the source database to TiDB Cloud.
-
-    You can run the following command to check the GTID of the source database:
-
-    ```sql
-    SHOW MASTER STATUS;
-    ```
-
-    > **Note:**
-    >
-    > - Make sure that the GTID is enabled in the source database.
-    > - If the source database is MySQL, the MySQL version must be 5.6 or later, and the storage engine must be InnoDB.
-    > - If the migration job connects to a secondary database in upstream, the `REPLICATE CREATE TABLE ... SELECT` events cannot be migrated, because the statement will be split into two transactions (`CREATE TABLE` and `INSERT`) that are assigned the same GTID, which will cause the `INSERT` statement to be ignored by the secondary database.
-
-- **Specify binlog file name and position**
-
-    Select this option to specify the binlog file name (for example, `binlog.000001`) and binlog position (for example, `1307`) of the source database. The migration job will start from the specified binlog file name and position to migrate ongoing changes of the source database to TiDB Cloud.
-
-    You can run the following command to check the binlog file name and position of the source database:
-
-    ```sql
-    SHOW MASTER STATUS;
-    ```
-
-    If there is data in the target database, make sure the binlog position is correct. Otherwise, there might be conflicts between the existing data and the incremental data. If conflicts occur, you need to delete the target database and create a new incremental migration job with the correct binlog position.
-
-> **Note:**
->
-> Once a migration job starts, you cannot change the start position.
+For instructions about incremental data migration, see [Incremental data migration](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md).
 
 ## Step 4: Choose the objects to be migrated
 
