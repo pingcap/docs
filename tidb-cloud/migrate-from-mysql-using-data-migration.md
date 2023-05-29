@@ -37,7 +37,7 @@ This feature helps you migrate your source databases' existing data and ongoing 
 
 - When you delete a cluster in TiDB Cloud, all migration jobs in that cluster are automatically deleted and not recoverable.
 
-- During incremental replication (migrating ongoing changes to your cluster), if the migration job recovers from an abrupt error, it might open the safe mode for 60 seconds. During the safe mode, `INSERT` statements are replicated as `REPLACE`, `UPDATE` statements as `DELETE` and `REPLACE`, and then these transactions are replicated to the downstream cluster to make sure that all the data during the abrupt error has been migrated smoothly to the downstream cluster. In this scenario, for upstream tables without primary keys or not-null unique indexes, some data might be duplicated in the downstream cluster because the data might be inserted repeatedly to the downstream.
+- During incremental replication (migrating ongoing changes to your cluster), if the migration job recovers from an abrupt error, it might open the safe mode for 60 seconds. During the safe mode, `INSERT` statements are migrated as `REPLACE`, `UPDATE` statements as `DELETE` and `REPLACE`, and then these transactions are migrated to the downstream cluster to make sure that all the data during the abrupt error has been migrated smoothly to the downstream cluster. In this scenario, for upstream tables without primary keys or not-null unique indexes, some data might be duplicated in the downstream cluster because the data might be inserted repeatedly to the downstream.
 
 - When you use Data Migration, it is recommended to keep the size of your dataset smaller than 1 TiB. If the dataset size is larger than 1 TiB, the existing data migration will take a long time due to limited specifications.
 
@@ -194,7 +194,7 @@ On the **Create Migration Job** page, configure the source and target connection
 
 ## Step 3: Choose migration job type
 
-On the **Choose the objects to be migrated** step, you can choose existing data migration, incremental data migration, or both by choosing the checkboxes.
+In the **Choose the objects to be migrated** step, you can choose existing data migration, incremental data migration, or both.
 
 ### Migrate existing data and incremental data
 
@@ -206,7 +206,7 @@ To migrate only the existing data of the source database to TiDB Cloud, choose *
 
 ### Migrate only incremental data
 
-To migrate only the incrementable data of the source database to TiDB Cloud, choose **Incremental data migration**. In this case, the migration job does not migrate the existing data of the source database to TiDB Cloud, but only replicates ongoing changes of the source database to TiDB Cloud.
+To migrate only the incrementable data of the source database to TiDB Cloud, choose **Incremental data migration**. In this case, the migration job does not migrate the existing data of the source database to TiDB Cloud, but only migrates ongoing changes of the source database to TiDB Cloud.
 
 In the **Start Position** area, you can specify the following types of start positions for incremental data migration:
 
@@ -218,11 +218,11 @@ If you do not specify a start position, the migration job will start from the ti
 
 - **The time when the incremental migration job starts**
 
-    If you select this option, the migration job will start from the time when the incremental migration job starts to replicate ongoing changes of the source database to TiDB Cloud.
+    If you select this option, the migration job will start from the time when the incremental migration job starts to migrate ongoing changes of the source database to TiDB Cloud.
 
 - **Specify GTID**
 
-    Select this option to specify the GTID of the source database, for example, `3E11FA47-71CA-11E1-9E33-C80AA9429562:23`. The migration job will start from the specified GTID to replicate ongoing changes of the source database to TiDB Cloud.
+    Select this option to specify the GTID of the source database, for example, `3E11FA47-71CA-11E1-9E33-C80AA9429562:23`. The migration job will start from the specified GTID to migrate ongoing changes of the source database to TiDB Cloud.
 
     You can run the following command to check the GTID of the source database:
 
@@ -234,11 +234,11 @@ If you do not specify a start position, the migration job will start from the ti
     >
     > - Make sure that the GTID is enabled in the source database.
     > - If the source database is MySQL, the MySQL version must be 5.6 or later, and the storage engine must be InnoDB.
-    > - If the migration job connects to a secondary database in upstream, the `REPLICATE CREATE TABLE ... SELECT` events cannot be replicated, because the statement will be split into two transactions (`CREATE TABLE` and `INSERT`) that are assigned the same GTID, which will cause the `INSERT` statement to be ignored by the secondary database.
+    > - If the migration job connects to a secondary database in upstream, the `REPLICATE CREATE TABLE ... SELECT` events cannot be migrated, because the statement will be split into two transactions (`CREATE TABLE` and `INSERT`) that are assigned the same GTID, which will cause the `INSERT` statement to be ignored by the secondary database.
 
 - **Specify binlog file name and position**
 
-    Select this option to specify the binlog file name (for example, `binlog.000001`) and binlog position (for example, `1307`) of the source database. The migration job will start from the specified binlog file name and position to replicate ongoing changes of the source database to TiDB Cloud.
+    Select this option to specify the binlog file name (for example, `binlog.000001`) and binlog position (for example, `1307`) of the source database. The migration job will start from the specified binlog file name and position to migrate ongoing changes of the source database to TiDB Cloud.
 
     You can run the following command to check the binlog file name and position of the source database:
 
@@ -256,20 +256,20 @@ If you do not specify a start position, the migration job will start from the ti
 
 1. On the **Choose Objects to Migrate** page, select the objects to be migrated. You can click **All** to select all objects, or click **Customize** and then click the checkbox next to the object name to select the object.
 
-    - If you click **All**, the migration job will migrate the existing data from the whole source database instance to TiDB Cloud and replicate ongoing changes after the full migration. Note that it happens only if you have selected the **Existing data migration** and **Incremental data migration** checkboxes in the previous step.
+    - If you click **All**, the migration job will migrate the existing data from the whole source database instance to TiDB Cloud and migrate ongoing changes after the full migration. Note that it happens only if you have selected the **Existing data migration** and **Incremental data migration** checkboxes in the previous step.
 
         <img src="https://download.pingcap.com/images/docs/tidb-cloud/migration-job-select-all.png" width="60%" />
 
-    - If you click **Customize** and select some databases, the migration job will migrate the existing data and replicate ongoing changes of the selected databases to TiDB Cloud. Note that it happens only if you have selected the **Existing data migration** and **Incremental data migration** checkboxes in the previous step.
+    - If you click **Customize** and select some databases, the migration job will migrate the existing data and migrate ongoing changes of the selected databases to TiDB Cloud. Note that it happens only if you have selected the **Existing data migration** and **Incremental data migration** checkboxes in the previous step.
 
         <img src="https://download.pingcap.com/images/docs/tidb-cloud/migration-job-select-db.png" width="60%" />
 
-    - If you click **Customize** and select some tables under a dataset name, the migration job only will migrate the existing data and replicate ongoing changes of the selected tables. Tables created afterwards in the same database will not be migrated.
+    - If you click **Customize** and select some tables under a dataset name, the migration job only will migrate the existing data and migrate ongoing changes of the selected tables. Tables created afterwards in the same database will not be migrated.
 
         <img src="https://download.pingcap.com/images/docs/tidb-cloud/migration-job-select-tables.png" width="60%" />
 
     <!--
-    - If you click **Customize** and select some databases, and then select some tables in the **Selected Objects** area to move them back to the **Source Database** area, (for example the `username` table in the following screenshots), then the tables will be treated as in a blocklist. The migration job will migrate the existing data but filter out the excluded tables (such as the `username` table in the screenshots), and will replicate ongoing changes of the selected databases to TiDB Cloud except the filtered-out tables.
+    - If you click **Customize** and select some databases, and then select some tables in the **Selected Objects** area to move them back to the **Source Database** area, (for example the `username` table in the following screenshots), then the tables will be treated as in a blocklist. The migration job will migrate the existing data but filter out the excluded tables (such as the `username` table in the screenshots), and will migrate ongoing changes of the selected databases to TiDB Cloud except the filtered-out tables.
         ![Select Databases and Deselect Some Tables](/media/tidb-cloud/migration-job-select-db-blacklist1.png)
         ![Select Databases and Deselect Some Tables](/media/tidb-cloud/migration-job-select-db-blacklist2.png)
     -->
