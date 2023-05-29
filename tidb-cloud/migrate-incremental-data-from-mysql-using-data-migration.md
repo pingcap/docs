@@ -15,7 +15,17 @@ For instructions about how to migrate existing data or both existing data and in
 >
 > This section only includes limitations about incremental data migration. It is recommended that you also read the general limitations. See [Limitations](/tidb-cloud/migrate-from-mysql-using-data-migration.md#limitations).
 
-- If the target table is not yet created in the target database, the migration job will report an error and fail. In this case, you need to create the target table and then resume the migration job.
+- If the target table is not yet created in the target database, the migration job will report an error as folloows and fail. In this case, you need to create the target table and then resume the migration job.
+
+    ```sql
+    startLocation: [position: (mysql_bin.000016, 5122), gtid-set:
+    00000000-0000-0000-0000-00000000000000000], endLocation:
+    [position: (mysql_bin.000016, 5162), gtid-set: 0000000-0000-0000
+    0000-0000000000000:0]: cannot fetch downstream table schema of
+    zm`.'table1' to initialize upstream schema 'zm'.'table1' in sschema
+    tracker Raw Cause: Error 1146: Table 'zm.table1' doesn't exist
+    ```
+
 - If the DELETE or UPDATE records of the upstream table do not exist in the downstream table, there will be no change in the data of the downstream table, that is, the UPDATE will not be changed to UPSERT.
 
 If you specify GTID as the start position to migrate incremental data, note the following limitations:
