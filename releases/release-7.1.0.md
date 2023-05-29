@@ -385,7 +385,7 @@ The [optimistic transaction mode](/optimistic-transaction.md) will be deprecated
 
   <!-- **tw:hfxsd** (5) -->
 
-    - Support to use `SQL_NO_CACHE` to prevent TTL Scan queries from impacting the TiKV block cache [#43206](https://github.com/pingcap/tidb/issues/43206) @[lcwangchao](https://github.com/lcwangchao)
+    - Support using `SQL_NO_CACHE` to prevent TTL Scan queries from impacting the TiKV block cache [#43206](https://github.com/pingcap/tidb/issues/43206) @[lcwangchao](https://github.com/lcwangchao)
     - Improve an error message related to `MAX_EXECUTION_TIME` to make it compatible with MySQL [#43031](https://github.com/pingcap/tidb/issues/43031) @[dveeden](https://github.com/dveeden)
     - The Cardinality column in the `SHOW INDEX` result can display the number of distinct values in the corresponding column in the statistics [#42227](https://github.com/pingcap/tidb/issues/42227) @[winoros](https://github.com/winoros)
     - Support using the MergeSort operator on partitioned tables in IndexLookUp [#26166](https://github.com/pingcap/tidb/issues/26166) @[Defined2014](https://github.com/Defined2014)
