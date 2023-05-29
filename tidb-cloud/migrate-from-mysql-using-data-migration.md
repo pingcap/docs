@@ -210,7 +210,7 @@ To migrate only the incrementable data of the source database to TiDB Cloud, cho
 
 In the **Start Position** area, you can specify the following types of start positions for incremental data migration:
 
-- The time when the data migrtion job starts
+- The time when the incremental migration job starts
 - GTID
 - Binlog file name and position
 
