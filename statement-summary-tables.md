@@ -20,7 +20,7 @@ Therefore, starting from v4.0.0-rc.1, TiDB provides system tables in `informatio
 
 > **Note:**
 >
-> The following tables are unavailable for [TiDB Serverless clusters](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta): `statements_summary`, `statements_summary_history`, `cluster_statements_summary`, and `cluster_statements_summary_history`.
+> The following tables are unavailable for [TiDB Serverless clusters]( https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless-beta ): `statements_summary`, `statements_summary_history`, `cluster_statements_summary`, and `cluster_statements_summary_history`.
   
 </CustomContent>
 

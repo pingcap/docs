@@ -9,7 +9,7 @@ summary: Learn the usage of SHOW CREATE RESOURCE GROUP in TiDB.
 
 > **Note:**
 >
-> This feature is not available on [TiDB Serverless clusters](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta).
+> This feature is not available on [TiDB Serverless clusters]( https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless-beta ).
 
 </CustomContent>
 
