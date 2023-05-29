@@ -1,7 +1,7 @@
 ---
 title: Checkpoint Backup
 summary: Learn about the checkpoint backup feature, including its application scenarios, implementation details, and usage.
-aliases: ["/tidb/dev/br-checkpoint"]
+aliases: ["/tidb/stable/br-checkpoint"]
 ---
 
 # Checkpoint Backup

@@ -1,7 +1,6 @@
 ---
 title: Usage Overview of TiDB Backup and Restore
 summary: Learn about how to deploy the backup and restore tool, and how to use it to back up and restore a TiDB cluster.
-aliases: ['/tidb/dev/br-deployment/']
 ---
 
 # Usage Overview of TiDB Backup and Restore

@@ -1,7 +1,6 @@
 ---
 title: Build a Simple CRUD App with TiDB and SQLAlchemy
 summary: Learn how to build a simple CRUD application with TiDB and SQLAlchemy.
-aliases: ['/tidb/dev/dev-guide-outdated-for-sqlalchemy']
 ---
 
 <!-- markdownlint-disable MD024 -->

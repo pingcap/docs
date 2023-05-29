@@ -1,6 +1,5 @@
 ---
 title: Filter DMLs Using SQL Expressions
-aliases: ['/tidb/dev/feature-expression-filter/']
 ---
 
 # Filter DMLs Using SQL Expressions
