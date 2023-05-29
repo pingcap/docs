@@ -21,7 +21,7 @@ This document describes how to use TiDB and Python to build a simple CRUD applic
 
 The following introduces how to start a TiDB cluster.
 
-**Use a TiDB Cloud Serverless Tier cluster**
+**Use a TiDB Serverless cluster**
 
 For detailed steps, see [Create a Serverless Tier cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster).
 
@@ -823,13 +823,13 @@ If you are not using a local cluster, or have not installed a MySQL client, conn
 
 ### Step 3.2 Modify parameters for TiDB Cloud
 
-If you are using a TiDB Cloud Serverless Tier cluster, you need to provide your CA root path and replace `<ca_path>` in the following examples with your CA path. To get the CA root path on your system, refer to [Where is the CA root path on my system?](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-tier-clusters#where-is-the-ca-root-path-on-my-system).
+If you are using a TiDB Serverless cluster, you need to provide your CA root path and replace `<ca_path>` in the following examples with your CA path. To get the CA root path on your system, refer to [Where is the CA root path on my system?](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-tier-clusters#where-is-the-ca-root-path-on-my-system).
 
 <SimpleTab groupId="language">
 
 <div label="SQLAlchemy (Recommended)" value="SQLAlchemy">
 
-If you are using a TiDB Cloud Serverless Tier cluster, modify the parameters of the `create_engine` function in `sqlalchemy_example.py`:
+If you are using a TiDB Serverless cluster, modify the parameters of the `create_engine` function in `sqlalchemy_example.py`:
 
 ```python
 engine = create_engine('mysql://root:@127.0.0.1:4000/test')
@@ -856,7 +856,7 @@ engine = create_engine('mysql://2aEp24QWEDLqRFs.root:123456@xxx.tidbcloud.com:40
 
 <div label="peewee (Recommended)" value="peewee">
 
-If you are using a TiDB Cloud Serverless Tier cluster, modify the parameters of the `create_engine` function in `sqlalchemy_example.py`:
+If you are using a TiDB Serverless cluster, modify the parameters of the `create_engine` function in `sqlalchemy_example.py`:
 
 ```python
 db = connect('mysql://root:@127.0.0.1:4000/test')
@@ -890,7 +890,7 @@ Because peewee will pass parameters to the driver, you need to pay attention to 
 
 <div label="mysqlclient" value="mysqlclient">
 
-If you are using a TiDB Cloud Serverless Tier cluster, change the `get_connection` function in `mysqlclient_example.py`:
+If you are using a TiDB Serverless cluster, change the `get_connection` function in `mysqlclient_example.py`:
 
 ```python
 def get_connection(autocommit: bool = True) -> MySQLdb.Connection:
@@ -932,7 +932,7 @@ def get_connection(autocommit: bool = True) -> MySQLdb.Connection:
 
 <div label="PyMySQL" value="PyMySQL">
 
-If you are using a TiDB Cloud Serverless Tier cluster, change the `get_connection` function in `pymysql_example.py`:
+If you are using a TiDB Serverless cluster, change the `get_connection` function in `pymysql_example.py`:
 
 ```python
 def get_connection(autocommit: bool = False) -> Connection:
@@ -971,7 +971,7 @@ def get_connection(autocommit: bool = False) -> Connection:
 
 <div label="mysql-connector-python" value="mysql-connector-python">
 
-If you are using a TiDB Cloud Serverless Tier cluster, change the `get_connection` function in `mysql_connector_python_example.py`:
+If you are using a TiDB Serverless cluster, change the `get_connection` function in `mysql_connector_python_example.py`:
 
 ```python
 def get_connection(autocommit: bool = True) -> MySQLConnection:

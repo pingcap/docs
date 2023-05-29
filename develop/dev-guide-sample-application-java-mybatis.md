@@ -20,7 +20,7 @@ This document describes how to use TiDB and Mybatis to build a simple CRUD appli
 
 The following introduces how to start a TiDB cluster.
 
-**Use a TiDB Cloud Serverless Tier cluster**
+**Use a TiDB Serverless cluster**
 
 For detailed steps, see [Create a Serverless Tier cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster).
 
@@ -629,7 +629,7 @@ If you are using a non-local cluster or MySQL client has not been installed, con
 
 ### Step 3.2 Modify parameters for TiDB Cloud
 
-If you are using a TiDB Cloud Serverless Tier cluster, modify the `dataSource.url`, `dataSource.username`, `dataSource.password` in `mybatis-config.xml`.
+If you are using a TiDB Serverless cluster, modify the `dataSource.url`, `dataSource.username`, `dataSource.password` in `mybatis-config.xml`.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
