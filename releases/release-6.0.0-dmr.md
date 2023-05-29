@@ -266,7 +266,7 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
 - An enterprise-level database management platform, TiDB Enterprise Manager
 
-    TiDB Enterprise Manager (TiEM) is an enterprise-level database management platform based on the TiDB database, which aims to help users manage TiDB clusters in  self-hosted or public cloud environments.
+    TiDB Enterprise Manager (TiEM) is an enterprise-level database management platform based on the TiDB database, which aims to help users manage TiDB clusters in self-hosted or public cloud environments.
 
     TiEM not only provides full lifecycle visual management for TiDB clusters, but also provides one-stop services: parameter management, version upgrades, cluster clone, active-standby cluster switching, data import and export, data replication, and data backup and restore services. TiEM can improve the efficiency of DevOps on TiDB and reduce the DevOps cost for enterprises.
 
