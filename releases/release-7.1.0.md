@@ -452,7 +452,6 @@ The [optimistic transaction mode](/optimistic-transaction.md) will be deprecated
     - Fix the issue that there is no warning when using `SUBPARTITION` in creating partitioned tables [#41198](https://github.com/pingcap/tidb/issues/41198) [#41200](https://github.com/pingcap/tidb/issues/41200) @[mjonss](https://github.com/mjonss)
     - Fix the incompatibility issue with MySQL when dealing with value overflow issues in generated columns [#40066](https://github.com/pingcap/tidb/issues/40066) @[jiyfhust](https://github.com/jiyfhust)
     - Fix the issue that `REORGANIZE PARTITION` cannot be concurrent with other DDL operations [#42442](https://github.com/pingcap/tidb/issues/42442) @[bb7133](https://github.com/bb7133)
-    - Fix the issue that an error is reported when querying a partitioned table partitioned by the `FLOOR` function [#42323](https://github.com/pingcap/tidb/issues/42323) @[jiyfhust](https://github.com/jiyfhust)
     - Fix the issue that canceling the partition reorganization task in DDL might cause subsequent DDL operations to fail [#42448](https://github.com/pingcap/tidb/issues/42448) @[lcwangchao](https://github.com/lcwangchao)
     - Fix the issue that assertions on delete operations are incorrect under certain conditions [#42426](https://github.com/pingcap/tidb/issues/42426) @[tiancaiamao](https://github.com/tiancaiamao)
     - (dup) Fix the issue that TiDB server cannot start due to an error in reading the cgroup information with the error message "can't read file memory.stat from cgroup v1: open /sys/memory.stat no such file or directory" [#42659](https://github.com/pingcap/tidb/issues/42659) @[hawkingrei](https://github.com/hawkingrei)
@@ -548,8 +547,8 @@ The [optimistic transaction mode](/optimistic-transaction.md) will be deprecated
 
     + TiDB Binlog
 
-        - Fix the issue that an error might occur when a DDL statement fails [#1228](https://github.com/pingcap/tidb-binlog/issues/1228] @[okJiang](https://github.com/okJiang)
-        
+        - Fix the issue that an error might occur when a DDL statement fails [#1228](https://github.com/pingcap/tidb-binlog/issues/1228) @[okJiang](https://github.com/okJiang)
+
     + TiDB Lightning
       <!-- **tw:hfxsd** (8)-->
         - Fix the performance degradation issue during data import [#42456](https://github.com/pingcap/tidb/issues/42456) @[lance6716](https://github.com/lance6716)
@@ -565,6 +564,9 @@ The [optimistic transaction mode](/optimistic-transaction.md) will be deprecated
 
 We would like to thank the following contributors from the TiDB community:
 
+- [asjdf](https://github.com/asjdf)
+- [blacktear23](https://github.com/blacktear23)
+- [dhysum](https://github.com/dhysum)
 - [ethercflow](https://github.com/ethercflow)
 - [hihihuhu](https://github.com/hihihuhu)
 - [jiyfhust](https://github.com/jiyfhust)
