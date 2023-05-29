@@ -13,7 +13,7 @@ For instructions about how to migrate existing data or both existing data and in
 
 > **Note**:
 >
-> This section only includes prerequisites about incremental data migration. For more information about the limitations, see [Limitations](/tidb-cloud/migrate-from-mysql-using-data-migration.md#limitations).
+> This section only includes prerequisites about incremental data migration. For more information about general limitations, see [Limitations](/tidb-cloud/migrate-from-mysql-using-data-migration.md#limitations).
 
 - If the target table is not yet created in the target database, the migration job will report an error and fail. In this case, you need to create the target table and then resume the migration job.
 - If the DELETE or UPDATE records of the upstream table do not exist in the downstream table, there will be no change in the data of the downstream table, that is, the UPDATE will not be changed to UPSERT.
@@ -28,7 +28,7 @@ If you specify GTID as the start position to migrate incremental data, note the 
 
 > **Note**:
 >
-> This section only includes prerequisites about incremental data migration. For more information about the prerequisites of the Data Migration feature, see [Prerequisites](/tidb-cloud/migrate-from-mysql-using-data-migration.md#prerequisites).
+> This section only includes prerequisites about incremental data migration. For more information about general prerequisites of the Data Migration feature, see [Prerequisites](/tidb-cloud/migrate-from-mysql-using-data-migration.md#prerequisites).
 
 If you want to use GTID to specify the start position, make sure that the GTID is enabled in the source database. The operations vary depending on the database type.
 
@@ -155,7 +155,7 @@ If you select this option, the migration job will start from the time when the i
 
 ### Specify GTID
 
-Select this option to specify the GTID of the source database, for example, `3E11FA47-71CA-11E1-9E33-C80AA9429562:1-23`. The migration job will start from the specified GTID to migrate ongoing changes of the source database to TiDB Cloud.
+Select this option to specify the GTID of the source database, for example, `3E11FA47-71CA-11E1-9E33-C80AA9429562:1-23`. The migration job will replicate the events excluding the specified GTID set to migrate ongoing changes of the source database to TiDB Cloud.
 
 You can run the following command to check the GTID of the source database:
 
