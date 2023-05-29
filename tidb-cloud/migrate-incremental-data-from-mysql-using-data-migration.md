@@ -5,7 +5,7 @@ summary: Learn how to migrate incremental data from MySQL-compatible databases h
 
 # Migrate Incremental Data from MySQL-Compatible Databases to TiDB Cloud Using Data Migration
 
-This document describes how to migrate incremental data from a MySQL-compatible database on a cloud provider (Amazon Aurora MySQL, Amazon Relational Database Service (RDS), or Google Cloud SQL for MySQL) or on-premises source database to TiDB Cloud using the Data Migration feature of the TiDB Cloud console.
+This document describes how to migrate incremental data from a MySQL-compatible database on a cloud provider (Amazon Aurora MySQL, Amazon Relational Database Service (RDS), or Google Cloud SQL for MySQL) or self-hosted source database to TiDB Cloud using the Data Migration feature of the TiDB Cloud console.
 
 For instructions about how to migrate existing data or both existing data and incremental data, see [Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md).
 
@@ -15,7 +15,7 @@ For instructions about how to migrate existing data or both existing data and in
 >
 > This section only includes limitations about incremental data migration. It is recommended that you also read the general limitations. See [Limitations](/tidb-cloud/migrate-from-mysql-using-data-migration.md#limitations).
 
-- If the target table is not yet created in the target database, the migration job will report an error as folloows and fail. In this case, you need to create the target table and then resume the migration job.
+- If the target table is not yet created in the target database, the migration job will report an error as follows and fail. In this case, you need to create the target table and then resume the migration job.
 
     ```sql
     startLocation: [position: (mysql_bin.000016, 5122), gtid-set:
@@ -30,7 +30,7 @@ For instructions about how to migrate existing data or both existing data and in
 
 If you specify GTID as the start position to migrate incremental data, note the following limitations:
 
-- Make sure that the GTID is enabled in the source database.
+- Make sure that the GTID mode is enabled in the source database.
 - If the source database is MySQL, the MySQL version must be 5.6 or later, and the storage engine must be InnoDB.
 - If the migration job connects to a secondary database in upstream, the `REPLICATE CREATE TABLE ... SELECT` events cannot be migrated, because the statement will be split into two transactions (`CREATE TABLE` and `INSERT`) that are assigned the same GTID, which will cause the `INSERT` statement to be ignored by the secondary database.
 
@@ -75,7 +75,7 @@ If the result is `ON` or `ON_PERMISSIVE`, the GTID mode is successfully enabled.
 >
 > The exact steps and commands might vary depending on the MySQL version and configuration. Make sure that you understand the impact of enabling GTID and that you have properly tested and verified it in a non-production environment before performing this action.
 
-To enable GTID for a local MySQL instance, follow these steps:
+To enable the GTID mode for a local MySQL instance, follow these steps:
 
 1. Connect to the MySQL server using a MySQL client with the appropriate privileges.
 
