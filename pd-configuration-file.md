@@ -12,6 +12,10 @@ The PD configuration file supports more options than command-line parameters. Yo
 
 This document only describes parameters that are not included in command-line parameters. Check [here](/command-line-flags-for-pd-configuration.md) for the command line parameters.
 
+> **Tip:**
+>
+> If you need to adjust the value of a configuration item, refer to [Modify the configuration](/maintain-tidb-using-tiup.md#modify-the-configuration).
+
 ### `name`
 
 - The unique name of a PD node
@@ -297,7 +301,7 @@ Configuration items related to scheduling
 ### `enable-diagnostic` <span class="version-mark">New in v6.3.0</span>
 
 + Controls whether to enable the diagnostic feature. When it is enabled, PD records the state during scheduling to help diagnose. If enabled, it might slightly affect the scheduling speed and consume more memory when there are many stores.
-+ Default value: false
++ Default value: true
 
 ### `hot-region-schedule-limit`
 
@@ -353,6 +357,18 @@ Configuration items related to scheduling
 > **Note:**
 >
 > If you have upgraded your cluster from a TiDB 4.0 version to the current version, the new formula version is automatically disabled by default to ensure consistent PD behavior before and after the upgrading. If you want to change the formula version, you need to manually switch through the `pd-ctl` setting. For details, refer to [PD Control](/pd-control.md#config-show--set-option-value--placement-rules).
+
+### `store-limit-version` <span class="version-mark">New in v7.1.0</span>
+
+> **Warning:**
+>
+> Setting this configuration item to `"v2"` is an experimental feature. It is not recommended to use it in production environments.
+
++ Controls the version of the store limit formula
++ Default value: `v1`
++ Value options:
+    + `v1`: In v1 mode, you can manually modify the `store limit` to limit the scheduling speed of a single TiKV.
+    + `v2`: (experimental feature) In v2 mode, you do not need to manually set the `store limit` value, as PD dynamically adjusts it based on the capability of TiKV snapshots. For more details, refer to [Principles of store limit v2](/configure-store-limit.md#principles-of-store-limit-v2).
 
 ### `enable-joint-consensus` <span class="version-mark">New in v5.0</span>
 

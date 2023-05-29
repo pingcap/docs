@@ -17,65 +17,72 @@
   - Quick Start
     - [Build a TiDB Cluster in TiDB Cloud (Serverless Tier)](/develop/dev-guide-build-cluster-in-cloud.md)
     - [CRUD SQL in TiDB](/develop/dev-guide-tidb-crud-sql.md)
-  - Example Applications
-    - [Golang](/develop/dev-guide-sample-application-golang.md)
-    - [Java (Spring Boot)](/develop/dev-guide-sample-application-spring-boot.md)
-    - [Java](/develop/dev-guide-sample-application-java.md)
-    - [Python](/develop/dev-guide-sample-application-python.md)
-  - Connect to TiDB
+  - Connect to TiDB Cloud
     - [Choose Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)
-    - [Connection Pools and Connection Parameters](/develop/dev-guide-connection-parameters.md)
-  - Design Database Schema
-    - [Overview](/develop/dev-guide-schema-design-overview.md)
-    - [Create a Database](/develop/dev-guide-create-database.md)
-    - [Create a Table](/develop/dev-guide-create-table.md)
-    - [Create a Secondary Index](/develop/dev-guide-create-secondary-indexes.md)
-  - Write Data
-    - [Insert Data](/develop/dev-guide-insert-data.md)
-    - [Update Data](/develop/dev-guide-update-data.md)
-    - [Delete Data](/develop/dev-guide-delete-data.md)
-    - [Periodically Delete Expired Data Using TTL (Time to Live)](/time-to-live.md)
-    - [Prepared Statements](/develop/dev-guide-prepared-statement.md)
-  - Read Data
-    - [Query Data from a Single Table](/develop/dev-guide-get-data-from-single-table.md)
-    - [Multi-table Join Queries](/develop/dev-guide-join-tables.md)
-    - [Subquery](/develop/dev-guide-use-subqueries.md)
-    - [Paginate Results](/develop/dev-guide-paginate-results.md)
-    - [Views](/develop/dev-guide-use-views.md)
-    - [Temporary Tables](/develop/dev-guide-use-temporary-tables.md)
-    - [Common Table Expression](/develop/dev-guide-use-common-table-expression.md)
-    - Read Replica Data
-      - [Follower Read](/develop/dev-guide-use-follower-read.md)
-      - [Stale Read](/develop/dev-guide-use-stale-read.md)
-    - [HTAP Queries](/develop/dev-guide-hybrid-oltp-and-olap-queries.md)
-    - [FastScan](/tiflash/use-fastscan.md)
-  - Transaction
-    - [Overview](/develop/dev-guide-transaction-overview.md)
-    - [Optimistic and Pessimistic Transactions](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)
-    - [Transaction Restraints](/develop/dev-guide-transaction-restraints.md)
-    - [Handle Transaction Errors](/develop/dev-guide-transaction-troubleshoot.md)
-  - Optimize
-    - [Overview](/develop/dev-guide-optimize-sql-overview.md)
-    - [SQL Performance Tuning](/develop/dev-guide-optimize-sql.md)
-    - [Best Practices for Performance Tuning](/develop/dev-guide-optimize-sql-best-practices.md)
-    - [Best Practices for Indexing](/develop/dev-guide-index-best-practice.md)
-    - Other Optimization Methods
-      - [Avoid Implicit Type Conversions](/develop/dev-guide-implicit-type-conversion.md)
-      - [Unique Serial Number Generation](/develop/dev-guide-unique-serial-number-generation.md)
-  - Troubleshoot
-    - [SQL or Transaction Issues](/develop/dev-guide-troubleshoot-overview.md)
-    - [Unstable Result Set](/develop/dev-guide-unstable-result-set.md)
-    - [Timeouts](/develop/dev-guide-timeouts-in-tidb.md)
-  - Reference
-    - [Bookshop Example Application](/develop/dev-guide-bookshop-schema-design.md)
-    - Guidelines
-      - [Object Naming Convention](/develop/dev-guide-object-naming-guidelines.md)
-      - [SQL Development Specifications](/develop/dev-guide-sql-development-specification.md)
-  - Cloud Native Development Environment
-    - [Gitpod](/develop/dev-guide-playground-gitpod.md)
+    - Java
+      - [JDBC](/develop/dev-guide-sample-application-java-jdbc.md)
+      - [MyBatis](/develop/dev-guide-sample-application-java-mybatis.md)
+      - [Hibernate](/develop/dev-guide-sample-application-java-hibernate.md)
+      - [Spring Boot](/develop/dev-guide-sample-application-java-spring-boot.md)
+      - [Connection Pools and Connection Parameters](/develop/dev-guide-connection-parameters.md)
+    - Go
+      - [Go-MySQL-Driver](/develop/dev-guide-sample-application-golang-sql-driver.md)
+      - [GORM](/develop/dev-guide-sample-application-golang-gorm.md)
+    - Python
+      - [mysqlclient](/develop/dev-guide-sample-application-python-mysqlclient.md)
+      - [MySQL Connector/Python](/develop/dev-guide-sample-application-python-mysql-connector.md)
+      - [PyMySQL](/develop/dev-guide-sample-application-python-pymysql.md)
+      - [SQLAlchemy](/develop/dev-guide-sample-application-python-sqlalchemy.md)
+      - [peewee](/develop/dev-guide-sample-application-python-peewee.md)
   - Third-Party Support
     - [Third-Party Tools Supported by TiDB](/develop/dev-guide-third-party-support.md)
     - [Known Incompatibility Issues with Third-Party Tools](/develop/dev-guide-third-party-tools-compatibility.md)
+  - Development Reference
+    - Design Database Schema
+      - [Overview](/develop/dev-guide-schema-design-overview.md)
+      - [Create a Database](/develop/dev-guide-create-database.md)
+      - [Create a Table](/develop/dev-guide-create-table.md)
+      - [Create a Secondary Index](/develop/dev-guide-create-secondary-indexes.md)
+    - Write Data
+      - [Insert Data](/develop/dev-guide-insert-data.md)
+      - [Update Data](/develop/dev-guide-update-data.md)
+      - [Delete Data](/develop/dev-guide-delete-data.md)
+      - [Periodically Delete Expired Data Using TTL (Time to Live)](/time-to-live.md)
+      - [Prepared Statements](/develop/dev-guide-prepared-statement.md)
+    - Read Data
+      - [Query Data from a Single Table](/develop/dev-guide-get-data-from-single-table.md)
+      - [Multi-table Join Queries](/develop/dev-guide-join-tables.md)
+      - [Subquery](/develop/dev-guide-use-subqueries.md)
+      - [Paginate Results](/develop/dev-guide-paginate-results.md)
+      - [Views](/develop/dev-guide-use-views.md)
+      - [Temporary Tables](/develop/dev-guide-use-temporary-tables.md)
+      - [Common Table Expression](/develop/dev-guide-use-common-table-expression.md)
+      - Read Replica Data
+        - [Follower Read](/develop/dev-guide-use-follower-read.md)
+        - [Stale Read](/develop/dev-guide-use-stale-read.md)
+      - [HTAP Queries](/develop/dev-guide-hybrid-oltp-and-olap-queries.md)
+      - [FastScan](/tiflash/use-fastscan.md)
+    - Transaction
+      - [Overview](/develop/dev-guide-transaction-overview.md)
+      - [Optimistic and Pessimistic Transactions](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)
+      - [Transaction Restraints](/develop/dev-guide-transaction-restraints.md)
+      - [Handle Transaction Errors](/develop/dev-guide-transaction-troubleshoot.md)
+    - Optimize
+      - [Overview](/develop/dev-guide-optimize-sql-overview.md)
+      - [SQL Performance Tuning](/develop/dev-guide-optimize-sql.md)
+      - [Best Practices for Performance Tuning](/develop/dev-guide-optimize-sql-best-practices.md)
+      - [Best Practices for Indexing](/develop/dev-guide-index-best-practice.md)
+      - Other Optimization Methods
+        - [Avoid Implicit Type Conversions](/develop/dev-guide-implicit-type-conversion.md)
+        - [Unique Serial Number Generation](/develop/dev-guide-unique-serial-number-generation.md)
+    - Troubleshoot
+      - [SQL or Transaction Issues](/develop/dev-guide-troubleshoot-overview.md)
+      - [Unstable Result Set](/develop/dev-guide-unstable-result-set.md)
+      - [Timeouts](/develop/dev-guide-timeouts-in-tidb.md)
+    - Development Guidelines
+      - [Object Naming Convention](/develop/dev-guide-object-naming-guidelines.md)
+      - [SQL Development Specifications](/develop/dev-guide-sql-development-specification.md)
+    - [Bookshop Example Application](/develop/dev-guide-bookshop-schema-design.md)
 - Manage Cluster
   - Plan Your Cluster
     - [Select Your Cluster Tier](/tidb-cloud/select-cluster-tier.md)
@@ -214,6 +221,7 @@
   - [Cloudflare](/tidb-cloud/integrate-tidbcloud-with-cloudflare.md)
   - [Datadog](/tidb-cloud/monitor-datadog-integration.md)
   - [dbt](/tidb-cloud/integrate-tidbcloud-with-dbt.md)
+  - [Gitpod](/develop/dev-guide-playground-gitpod.md)
   - [n8n](/tidb-cloud/integrate-tidbcloud-with-n8n.md)
   - [Netlify](/tidb-cloud/integrate-tidbcloud-with-netlify.md)
   - [Prometheus and Grafana](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)
@@ -266,7 +274,6 @@
       - [`BATCH`](/sql-statements/sql-statement-batch.md)
       - [`BEGIN`](/sql-statements/sql-statement-begin.md)
       - [`CALIBRATE RESOURCE`](/sql-statements/sql-statement-calibrate-resource.md)
-      - [`CANCEL LOAD DATA` and `DROP LOAD DATA`](/sql-statements/sql-statement-operate-load-data-job.md)
       - [`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)
       - [`COMMIT`](/sql-statements/sql-statement-commit.md)
       - [`CHANGE DRAINER`](/sql-statements/sql-statement-change-drainer.md)
@@ -351,7 +358,6 @@
       - [`SHOW INDEX [FROM|IN]`](/sql-statements/sql-statement-show-index.md)
       - [`SHOW INDEXES [FROM|IN]`](/sql-statements/sql-statement-show-indexes.md)
       - [`SHOW KEYS [FROM|IN]`](/sql-statements/sql-statement-show-keys.md)
-      - [`SHOW LOAD DATA`](/sql-statements/sql-statement-show-load-data.md)
       - [`SHOW MASTER STATUS`](/sql-statements/sql-statement-show-master-status.md)
       - [`SHOW PLUGINS`](/sql-statements/sql-statement-show-plugins.md)
       - [`SHOW PRIVILEGES`](/sql-statements/sql-statement-show-privileges.md)
@@ -493,6 +499,7 @@
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
   - [Serverless Tier Limitations](/tidb-cloud/serverless-tier-limitations.md)
   - [Resource Control](/tidb-resource-control.md)
+  - [TiDB Backend Task Distributed Execution Framework](/tidb-distributed-execution-framework.md)
 - FAQs
   - [TiDB Cloud FAQs](/tidb-cloud/tidb-cloud-faq.md)
   - [Serverless Tier FAQs](/tidb-cloud/serverless-tier-faqs.md)

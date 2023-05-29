@@ -46,7 +46,7 @@ As an open-source distributed SQL database with high performance, TiDB can be de
 
 |  Libraries required for compiling and running TiDB |  Version   |
 |   :---   |   :---   |
-|   Golang  |  1.18.5 or later  |
+|   Golang  |  1.20 or later  |
 |   Rust    |   nightly-2022-07-31 or later  |
 |  GCC      |   7.x      |
 |  LLVM     |  13.0 or later  |
@@ -108,7 +108,7 @@ You can deploy and run TiDB on the 64-bit generic hardware server platform in th
 
 | Component | CPU | Memory | Hard Disk Type | Network | Instance Number (Minimum Requirement) |
 | :-----: | :------: | :------: | :------: | :------: | :-----: |
-|  TiDB  | 16 core+ | 48 GB+ | SAS | 10 Gigabit network card (2 preferred) | 2 |
+| TiDB  | 16 core+ | 48 GB+ | SSD | 10 Gigabit network card (2 preferred) | 2 |
 | PD | 8 core+ | 16 GB+ | SSD | 10 Gigabit network card (2 preferred) | 3 |
 | TiKV | 16 core+ | 64 GB+ | SSD | 10 Gigabit network card (2 preferred) | 3 |
 | TiFlash | 48 core+ | 128 GB+ | 1 or more SSDs | 10 Gigabit network card (2 preferred) | 2 |
@@ -151,7 +151,6 @@ As an open-source distributed SQL database, TiDB requires the following network 
 | PD | 2379 | the communication port between TiDB and PD |
 | PD | 2380 | the inter-node communication port within the PD cluster |
 | TiFlash | 9000 | the TiFlash TCP service port |
-| TiFlash | 8123 | the TiFlash HTTP service port |
 | TiFlash | 3930 | the TiFlash RAFT and Coprocessor service port |
 | TiFlash | 20170 |the TiFlash Proxy service port |
 | TiFlash | 20292 | the port for Prometheus to pull TiFlash Proxy metrics |
