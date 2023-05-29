@@ -371,13 +371,14 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
 | TiDB Lightning | [`tikv-importer.region-check-backoff-limit`](/tidb-lightning/tidb-lightning-configuration.md) | Newly added | Controls the number of retries to wait for the Region to come online after the split and scatter operations. The default value is `1800`. The maximum retry interval is two seconds. The number of retries is increased if any Region becomes online between retries.|
 | TiDB Lightning | [`tikv-importer.region-split-batch-size`](/tidb-lightning/tidb-lightning-configuration.md) | Newly added | Controls the number of Regions when splitting Regions in a batch. The default value is `4096`. |
 | TiDB Lightning | [`tikv-importer.region-split-concurrency`](/tidb-lightning/tidb-lightning-configuration.md) | Newly added | Controls the concurrency when splitting Regions. The default value is the number of CPU cores. |
+| TiCDC | [`insecure-skip-verify`](/ticdc/ticdc-sink-to-kafka.md) | Newly added | Controls whether the authentication algorithm is set when TLS is enabled in the scenario of replicating data to Kafka. |
 | TiCDC | [`integrity.corruption-handle-level`](/ticdc/ticdc-changefeed-config.md#cli-and-configuration-parameters-of-ticdc-changefeeds) | Newly added | Specifies the log level of the Changefeed when the checksum validation for single-row data fails. The default value is `"warn"`. Value options are `"warn"` and `"error"`. |
 | TiCDC | [`integrity.integrity-check-level`](/ticdc/ticdc-changefeed-config.md#cli-and-configuration-parameters-of-ticdc-changefeeds) | Newly added | Controls whether to enable the checksum validation for single-row data. The default value is `"none"`, which means to disable the feature. |
 | TiCDC | [`sink.enable-partition-separator`](/ticdc/ticdc-changefeed-config.md#cli-and-configuration-parameters-of-ticdc-changefeeds) | Modified | Changes the default value from `false` to `true` after further tests, meaning that partitions in a table are stored in separate directories by default. It is recommended that you keep the value as `true` to avoid the potential issue of data loss during replication of partitioned tables to storage services. |
 
 ## Deprecated feature
 
-The [optimistic transaction mode](/optimistic-transaction.md) will be deprecated in a future release. Starting from v7.1.0, it is not recommended to set the value of `tidb_txn_mode` to `"optimistic"` or `""`.
+The [optimistic transaction model](/optimistic-transaction.md) will be deprecated in a future release. Starting from v7.1.0, it is not recommended to set the value of [`tidb_txn_mode`](/system-variables.md#tidb_txn_mode) to `"optimistic"` or `""`.
 
 ## Improvements
 
@@ -441,21 +442,21 @@ The [optimistic transaction mode](/optimistic-transaction.md) will be deprecated
 
   <!-- **tw:Oreoxmt** (18) -->
 
-    - Fix the issue that there is no prompt to manually execute `ANALYZE TABLE` after reorganizing partitions [#42183](https://github.com/pingcap/tidb/issues/42183) @[CbcWestwolf](https://github.com/CbcWestwolf)
+    - Fix the issue that there is no prompt about manually executing `ANALYZE TABLE` after reorganizing partitions [#42183](https://github.com/pingcap/tidb/issues/42183) @[CbcWestwolf](https://github.com/CbcWestwolf)
     - (dup) Fix the issue of missing table names in the `ADMIN SHOW DDL JOBS` result when a `DROP TABLE` operation is being executed [#42268](https://github.com/pingcap/tidb/issues/42268) @[tiancaiamao](https://github.com/tiancaiamao)
     - Fix the issue that `Ignore Event Per Minute` and `Stats Cache LRU Cost` charts might not be displayed normally in the Grafana monitoring panel [#42562](https://github.com/pingcap/tidb/issues/42562) @[pingandb](https://github.com/pingandb)
-    - Fix the issue that `ORDINAL_POSITION` column returns incorrect results when querying the `INFORMATION_SCHEMA.COLUMNS` table [#43379](https://github.com/pingcap/tidb/issues/43379) @[bb7133](https://github.com/bb7133)
+    - Fix the issue that the `ORDINAL_POSITION` column returns incorrect results when querying the `INFORMATION_SCHEMA.COLUMNS` table [#43379](https://github.com/pingcap/tidb/issues/43379) @[bb7133](https://github.com/bb7133)
     - Fix the case sensitivity issue in some columns of the permission table [#41048](https://github.com/pingcap/tidb/issues/41048) @[bb7133](https://github.com/bb7133)
     - (dup) Fix the issue that after a new column is added in the cache table, the value is `NULL` instead of the default value of the column [#42928](https://github.com/pingcap/tidb/issues/42928) @[lqs](https://github.com/lqs)
     - Fix the issue that CTE results are incorrect when pushing down predicates [#43645](https://github.com/pingcap/tidb/issues/43645) @[winoros](https://github.com/winoros)
     - (dup) Fix the issue of DDL retry caused by write conflict when executing `TRUNCATE TABLE` for partitioned tables with many partitions and TiFlash replicas [#42940](https://github.com/pingcap/tidb/issues/42940) @[mjonss](https://github.com/mjonss)
     - Fix the issue that there is no warning when using `SUBPARTITION` in creating partitioned tables [#41198](https://github.com/pingcap/tidb/issues/41198) [#41200](https://github.com/pingcap/tidb/issues/41200) @[mjonss](https://github.com/mjonss)
     - Fix the incompatibility issue with MySQL when dealing with value overflow issues in generated columns [#40066](https://github.com/pingcap/tidb/issues/40066) @[jiyfhust](https://github.com/jiyfhust)
-    - Fix the issue that `REORGANIZE PARTITION` cannot be concurrent with other DDL operations [#42442](https://github.com/pingcap/tidb/issues/42442) @[bb7133](https://github.com/bb7133)
+    - Fix the issue that `REORGANIZE PARTITION` cannot be concurrently executed with other DDL operations [#42442](https://github.com/pingcap/tidb/issues/42442) @[bb7133](https://github.com/bb7133)
     - Fix the issue that canceling the partition reorganization task in DDL might cause subsequent DDL operations to fail [#42448](https://github.com/pingcap/tidb/issues/42448) @[lcwangchao](https://github.com/lcwangchao)
     - Fix the issue that assertions on delete operations are incorrect under certain conditions [#42426](https://github.com/pingcap/tidb/issues/42426) @[tiancaiamao](https://github.com/tiancaiamao)
     - (dup) Fix the issue that TiDB server cannot start due to an error in reading the cgroup information with the error message "can't read file memory.stat from cgroup v1: open /sys/memory.stat no such file or directory" [#42659](https://github.com/pingcap/tidb/issues/42659) @[hawkingrei](https://github.com/hawkingrei)
-    - Fix the issue of `Duplicate Key` error when updating the partition key of a row on a partitioned table with a global index [#42312](https://github.com/pingcap/tidb/issues/42312) @[L-maple](https://github.com/L-maple)
+    - Fix the `Duplicate Key` issue that occurs when updating the partition key of a row on a partitioned table with a global index [#42312](https://github.com/pingcap/tidb/issues/42312) @[L-maple](https://github.com/L-maple)
     - Fix the issue that the `Scan Worker Time By Phase` chart in the TTL monitoring panel does not display data [#42515](https://github.com/pingcap/tidb/issues/42515) @[lcwangchao](https://github.com/lcwangchao)
     - Fix the issue that some queries on partitioned tables with a global index return incorrect results [#41991](https://github.com/pingcap/tidb/issues/41991) [#42065](https://github.com/pingcap/tidb/issues/42065) @[L-maple](https://github.com/L-maple)
   <!-- **tw:ran-huang** (17) -->
@@ -509,7 +510,7 @@ The [optimistic transaction mode](/optimistic-transaction.md) will be deprecated
   <!-- **tw:Oreoxmt** (5) -->
     - Fix the issue that the number of `low space store` in the PD monitoring panel is abnormal after TiKV panics [#6252](https://github.com/tikv/pd/issues/6252) @[HuSharp](https://github.com/HuSharp)
     - Fix the issue that Region Health monitoring data is deleted after PD leader switch [#6366](https://github.com/tikv/pd/issues/6366) @[iosmanthus](https://github.com/iosmanthus)
-    - Fix the issue that the rule checker cannot repair unhealthy Regions with the label `schedule=deny` [#6426](https://github.com/tikv/pd/issues/6426) @[nolouch](https://github.com/nolouch)
+    - Fix the issue that the rule checker cannot repair unhealthy Regions with the `schedule=deny` label [#6426](https://github.com/tikv/pd/issues/6426) @[nolouch](https://github.com/nolouch)
     - Fix the issue that some existing labels are lost after TiKV or TiFlash restarts [#6467](https://github.com/tikv/pd/issues/6467) @[JmPotato](https://github.com/JmPotato)
     - Fix the issue that the replication status cannot be switched when there are learner nodes in the replication mode [#14704](https://github.com/tikv/tikv/issues/14704) @[nolouch](https://github.com/nolouch)
 
@@ -566,7 +567,6 @@ We would like to thank the following contributors from the TiDB community:
 
 - [asjdf](https://github.com/asjdf)
 - [blacktear23](https://github.com/blacktear23)
-- [dhysum](https://github.com/dhysum)
 - [ethercflow](https://github.com/ethercflow)
 - [hihihuhu](https://github.com/hihihuhu)
 - [jiyfhust](https://github.com/jiyfhust)
