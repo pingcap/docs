@@ -1,9 +1,9 @@
 ---
-title: Migrate Incremental Data from MySQL-Compatible Databases to TiDB Cloud Using Data Migration
+title: Migrate Only Incremental Data from MySQL-Compatible Databases to TiDB Cloud Using Data Migration
 summary: Learn how to migrate incremental data from MySQL-compatible databases hosted in Amazon Aurora MySQL, Amazon Relational Database Service (RDS), Google Cloud SQL for MySQL, or a local MySQL instance to TiDB Cloud using Data Migration.
 ---
 
-# Migrate Incremental Data from MySQL-Compatible Databases to TiDB Cloud Using Data Migration
+# Migrate Only Incremental Data from MySQL-Compatible Databases to TiDB Cloud Using Data Migration
 
 This document describes how to migrate incremental data from a MySQL-compatible database on a cloud provider (Amazon Aurora MySQL, Amazon Relational Database Service (RDS), or Google Cloud SQL for MySQL) or self-hosted source database to TiDB Cloud using the Data Migration feature of the TiDB Cloud console.
 
@@ -26,7 +26,7 @@ For instructions about how to migrate existing data or both existing data and in
     tracker Raw Cause: Error 1146: Table 'zm.table1' doesn't exist
     ```
 
-- If the DELETE or UPDATE records of the upstream table do not exist in the downstream table, there will be no change in the data of the downstream table, that is, the UPDATE will not be changed to UPSERT.
+- If some rows are deleted or updated in the upstream and there are no corresponding rows in the downstream, the migration job will detect that there are no rows available for deletion or update when replicating the DELETE and UPDATE DML operations from the upstream.
 
 If you specify GTID as the start position to migrate incremental data, note the following limitations:
 
@@ -69,13 +69,13 @@ SHOW VARIABLES LIKE 'gtid_mode';
 
 If the result is `ON` or `ON_PERMISSIVE`, the GTID mode is successfully enabled.
 
-### For a local MySQL instance
+### For a self-hosted MySQL instance
 
 > **Note**:
 >
 > The exact steps and commands might vary depending on the MySQL version and configuration. Make sure that you understand the impact of enabling GTID and that you have properly tested and verified it in a non-production environment before performing this action.
 
-To enable the GTID mode for a local MySQL instance, follow these steps:
+To enable the GTID mode for a self-hosted MySQL instance, follow these steps:
 
 1. Connect to the MySQL server using a MySQL client with the appropriate privileges.
 
@@ -149,15 +149,13 @@ On the **Create Migration Job** page, configure the source and target connection
 
 ## Step 3: Choose migration job type
 
-To migrate only the incrementable data of the source database to TiDB Cloud, choose **Incremental data migration**. In this case, the migration job does not migrate the existing data of the source database to TiDB Cloud, but only migrates ongoing changes of the source database to TiDB Cloud.
+To migrate only the incrementable data of the source database to TiDB Cloud, do not select **Existing data migration**, but only select **Incremental data migration**. In this case, the migration job only migrates ongoing changes of the source database to TiDB Cloud.
 
 In the **Start Position** area, you can specify the following types of start positions for incremental data migration:
 
 - The time when the incremental migration job starts
 - GTID
 - Binlog file name and position
-
-If you do not specify a start position, the migration job will only migrate the incremental data that is generated in the source database after the migration job starts.
 
 Once a migration job starts, you cannot change the start position.
 
