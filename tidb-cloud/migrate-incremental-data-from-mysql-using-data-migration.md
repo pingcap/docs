@@ -18,6 +18,12 @@ For instructions about how to migrate existing data or both existing data and in
 - If the target table is not yet created in the target database, the migration job will report an error and fail. In this case, you need to create the target table and then resume the migration job.
 - If the DELETE or UPDATE records of the upstream table do not exist in the downstream table, there will be no change in the data of the downstream table, that is, the UPDATE will not be changed to UPSERT.
 
+If you specify GTID as the start position to migrate incremental data, note the following limitations:
+
+- Make sure that the GTID is enabled in the source database.
+- If the source database is MySQL, the MySQL version must be 5.6 or later, and the storage engine must be InnoDB.
+- If the migration job connects to a secondary database in upstream, the `REPLICATE CREATE TABLE ... SELECT` events cannot be migrated, because the statement will be split into two transactions (`CREATE TABLE` and `INSERT`) that are assigned the same GTID, which will cause the `INSERT` statement to be ignored by the secondary database.
+
 ## Prerequisites
 
 > **Note**:
@@ -156,12 +162,6 @@ You can run the following command to check the GTID of the source database:
 ```sql
 SHOW MASTER STATUS;
 ```
-
-> **Note:**
->
-> - Make sure that the GTID is enabled in the source database.
-> - If the source database is MySQL, the MySQL version must be 5.6 or later, and the storage engine must be InnoDB.
-> - If the migration job connects to a secondary database in upstream, the `REPLICATE CREATE TABLE ... SELECT` events cannot be migrated, because the statement will be split into two transactions (`CREATE TABLE` and `INSERT`) that are assigned the same GTID, which will cause the `INSERT` statement to be ignored by the secondary database.
 
 ### Specify binlog file name and position
 
