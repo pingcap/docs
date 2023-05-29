@@ -1,7 +1,6 @@
 ---
 title: Literal Values
 summary: This article introduces the literal values ​​of TiDB SQL statements.
-aliases: ['/docs/dev/literal-values/','/docs/dev/reference/sql/language-structure/literal-values/']
 ---
 
 # Literal Values
