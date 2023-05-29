@@ -218,7 +218,7 @@ If you do not specify a start position, the migration job will start from the ti
 
 - **The time when the incremental migration job starts**
 
-    If you select this option, the migration job will start from the time when the incremental migration job starts to migrate ongoing changes of the source database to TiDB Cloud.
+    If you select this option, the migration job will only migrate the incremental data that is generated in the source database after the migration job starts.
 
 - **Specify GTID**
 
@@ -238,7 +238,7 @@ If you do not specify a start position, the migration job will start from the ti
 
 - **Specify binlog file name and position**
 
-    Select this option to specify the binlog file name (for example, `binlog.000001`) and binlog position (for example, `1307`) of the source database. The migration job will start from the specified binlog file name and position to migrate ongoing changes of the source database to TiDB Cloud.
+    Select this option to specify the binlog file name (for example, `binlog.000001`) and binlog position (for example, `1307`) of the source database. The migration job will start after the specified binlog file name and position to migrate ongoing changes of the source database to TiDB Cloud.
 
     You can run the following command to check the binlog file name and position of the source database:
 
