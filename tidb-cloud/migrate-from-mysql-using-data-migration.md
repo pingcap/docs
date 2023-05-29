@@ -214,9 +214,9 @@ You can specify the following types of start positions for incremental data migr
 - GTID
 - Binlog file name and position
 
-If you do not specify a start position, the migration job will start from the time when the data migrtion job starts.
+If you do not specify a start position, the migration job will start from the time when the incremental migration job starts.
 
-- **The time when the data migrtion job starts**
+- **The time when the incremental migration job starts**
 
     If you select this option, the migration job will start from the time when the migration job starts to replicate ongoing changes of the source database to TiDB Cloud.
 
@@ -246,7 +246,7 @@ If you do not specify a start position, the migration job will start from the ti
     SHOW MASTER STATUS;
     ```
 
-    If there is data in the target database, make sure the binlog position is correct. Otherwise, thre might be conflicts between the existing data and the incremental data. If conflicts occur, you need to delete the target database and create a new migration job with the correct binlog position.
+    If there is data in the target database, make sure the binlog position is correct. Otherwise, there might be conflicts between the existing data and the incremental data. If conflicts occur, you need to delete the target database and create a new migration job with the correct binlog position.
 
 > **Note:**
 >
