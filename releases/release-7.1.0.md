@@ -86,7 +86,7 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
 
 * Enhance the Partitioned Raft KV storage engine (experimental) [#11515](https://github.com/tikv/tikv/issues/11515) [#12842](https://github.com/tikv/tikv/issues/12842) @[busyjay](https://github.com/busyjay) @[tonyxuqqi](https://github.com/tonyxuqqi) @[tabokie](https://github.com/tabokie) @[bufferflies](https://github.com/bufferflies) @[5kbpers](https://github.com/5kbpers) @[SpadeA-Tang](https://github.com/SpadeA-Tang) @[nolouch](https://github.com/nolouch) **tw:Oreoxmt**
 
-    TiDB v6.6.0 introduces the Partitioned Raft KV storage engine as an experimental feature, which uses multiple RocksDB instances to store TiKV Region data, and the data of each Region is independently stored in a separate RocksDB instance. The new storage engine can better control the number and level of files in the RocksDB instance, achieve physical isolation of data operations between Regions, and support stably managing more data. Compared with the original TiKV storage engine, using the Partitioned Raft KV storage engine can achieve about twice the write throughput, three times the read throughput, and reduce the elastic scaling time by about 4/5 under the same hardware conditions and mixed read and write scenarios.
+    TiDB v6.6.0 introduces the Partitioned Raft KV storage engine as an experimental feature, which uses multiple RocksDB instances to store TiKV Region data, and the data of each Region is independently stored in a separate RocksDB instance. The new storage engine can better control the number and level of files in the RocksDB instance, achieve physical isolation of data operations between Regions, and support stably managing more data. Compared with the original TiKV storage engine, using the Partitioned Raft KV storage engine can achieve about twice the write throughput and reduce the elastic scaling time by about 4/5 under the same hardware conditions and mixed read and write scenarios.
 
     In TiDB v7.1.0, the Partitioned Raft KV storage engine is compatible with TiFlash and supports tools such as TiDB Lightning, BR, and TiCDC.
 
@@ -150,7 +150,7 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
 
     In TiDB v7.1.0, this feature introduces the ability to estimate system capacity based on actual workload or hardware deployment. The estimation ability provides you with a more accurate reference for capacity planning and assists you in better managing TiDB resource allocation to meet the stability needs of enterprise-level scenarios.
 
-    To improve user experience, TiDB Dashboard provides the [Resource Manager page](/dashboard/dashboard-resource-control.md). You can view the resource group configuration on this page and estimate cluster capacity in a visual way to facilitate reasonable resource allocation.
+    To improve user experience, TiDB Dashboard provides the [Resource Manager page](/dashboard/dashboard-resource-manager.md). You can view the resource group configuration on this page and estimate cluster capacity in a visual way to facilitate reasonable resource allocation.
 
     For more information, see [documentation](/tidb-resource-control.md).
 
