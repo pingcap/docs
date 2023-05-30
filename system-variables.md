@@ -4801,7 +4801,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 > **Warning:**
 >
-> The optimistic transaction will be deprecated in the future.
+> The [optimistic transaction model](/optimistic-transaction.md) will be deprecated in a future release. Starting from v7.1.0, it is not recommended to set the value of `tidb_txn_mode` to `"optimistic"` or `""`.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
