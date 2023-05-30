@@ -7,15 +7,15 @@ summary: Learn how to upgrade TiDB using TiUP.
 
 This document is targeted for the following upgrade paths:
 
-- Upgrade from TiDB 4.0 versions to TiDB 7.0.
-- Upgrade from TiDB 5.0-5.4 versions to TiDB 7.0.
-- Upgrade from TiDB 6.0 to TiDB 7.0.
-- Upgrade from TiDB 6.1 to TiDB 7.0.
-- Upgrade from TiDB 6.2 to TiDB 7.0.
-- Upgrade from TiDB 6.3 to TiDB 7.0.
-- Upgrade from TiDB 6.4 to TiDB 7.0.
-- Upgrade from TiDB 6.5 to TiDB 7.0.
-- Upgrade from TiDB 6.6 to TiDB 7.0.
+- Upgrade from TiDB 4.0 versions to TiDB 7.1.
+- Upgrade from TiDB 5.0-5.4 versions to TiDB 7.1.
+- Upgrade from TiDB 6.0 to TiDB 7.1.
+- Upgrade from TiDB 6.1 to TiDB 7.1.
+- Upgrade from TiDB 6.2 to TiDB 7.1.
+- Upgrade from TiDB 6.3 to TiDB 7.1.
+- Upgrade from TiDB 6.4 to TiDB 7.1.
+- Upgrade from TiDB 6.5 to TiDB 7.1.
+- Upgrade from TiDB 6.6 to TiDB 7.1.
 
 > **Warning:**
 >
@@ -49,7 +49,7 @@ This section introduces the preparation works needed before upgrading your TiDB 
 
 ### Step 1: Review compatibility changes
 
-Review [the compatibility changes](/releases/release-7.0.0.md#compatibility-changes) in TiDB v7.1.0 release notes. If any changes affect your upgrade, take actions accordingly.
+Review [the compatibility changes](/releases/release-7.1.0.md#compatibility-changes) in TiDB v7.1.0 release notes. If any changes affect your upgrade, take actions accordingly.
 
 ### Step 2: Upgrade TiUP or TiUP offline mirror
 
