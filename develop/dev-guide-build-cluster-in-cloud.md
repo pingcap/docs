@@ -1,11 +1,11 @@
 ---
-title: Build a TiDB Cluster in TiDB Serverless
-summary: Learn how to build a TiDB cluster in TiDB Serverless and connect to a TiDB Cloud cluster.
+title: Build a TiDB Serverless Cluster
+summary: Learn how to build a TiDB Serverless cluster in TiDB Cloud and connect to it.
 ---
 
 <!-- markdownlint-disable MD029 -->
 
-# Build a TiDB Cluster in TiDB Serverless
+# Build a TiDB Serverless Cluster
 
 <CustomContent platform="tidb">
 
