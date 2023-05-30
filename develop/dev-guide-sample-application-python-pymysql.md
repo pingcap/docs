@@ -24,7 +24,7 @@ The following introduces how to start a TiDB cluster.
 
 **Use a TiDB Serverless cluster**
 
-For detailed steps, see [Create a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster).
+For detailed steps, see [Create a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-serverless-cluster).
 
 **Use a local cluster**
 
@@ -34,7 +34,7 @@ For detailed steps, see [Deploy a local test cluster](/quick-start-with-tidb.md#
 
 <CustomContent platform="tidb-cloud">
 
-See [Create a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster).
+See [Create a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-serverless-cluster).
 
 </CustomContent>
 
