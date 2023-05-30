@@ -8,7 +8,7 @@ aliases: ['/docs/dev/optimistic-transaction/','/docs/dev/reference/transactions/
 
 > **Warning:**
 >
-> The optimistic transaction model will be deprecated in a future release. Starting from v7.1.0, it is not recommended to set the value of [`tidb_txn_mode`](/system-variables.md#tidb_txn_mode) to `"optimistic"` or `""`.
+> The optimistic transaction model will be deprecated and might be removed in a future release. Starting from TiDB v7.1.0, it is **STRONGLY NOT RECOMMENDED** to set the value of [`tidb_txn_mode`](/system-variables.md#tidb_txn_mode) to `"optimistic"` or `""`.
 
 With optimistic transactions, conflicting changes are detected as part of a transaction commit. This helps improve the performance when concurrent transactions are infrequently modifying the same rows, because the process of acquiring row locks can be skipped. In the case that concurrent transactions frequently modify the same rows (a conflict), optimistic transactions may perform worse than [Pessimistic Transactions](/pessimistic-transaction.md).
 

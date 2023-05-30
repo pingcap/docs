@@ -1,13 +1,13 @@
 ---
-title: Transaction overview
+title: Transaction Overview
 summary: A brief introduction to transactions in TiDB.
 ---
 
-# Transaction overview
+# Transaction Overview
 
 > **Warning:**
 >
-> The [optimistic transaction model](/optimistic-transaction.md) will be deprecated in a future release. Starting from v7.1.0, it is not recommended to set the value of [`tidb_txn_mode`](/system-variables.md#tidb_txn_mode) to `"optimistic"` or `""`.
+> The [optimistic transaction model](/optimistic-transaction.md) will be deprecated and might be removed in a future release. Starting from TiDB v7.1.0, it is **STRONGLY NOT RECOMMENDED** to set the value of [`tidb_txn_mode`](/system-variables.md#tidb_txn_mode) to `"optimistic"` or `""`.
 
 TiDB supports complete distributed transactions, providing [optimistic transactions](/optimistic-transaction.md) and [pessimistic transactions](/pessimistic-transaction.md) (introduced in TiDB 3.0). This article mainly introduces transaction statements, optimistic transactions and pessimistic transactions, transaction isolation levels, and application-side retry and error handling in optimistic transactions.
 
