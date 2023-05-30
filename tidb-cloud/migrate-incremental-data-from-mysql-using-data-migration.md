@@ -185,7 +185,7 @@ You can run the following command to check the binlog file name and position of 
 SHOW MASTER STATUS;
 ```
 
-If there is data in the target database, make sure the binlog position is correct. Otherwise, there might be conflicts between the existing data and the incremental data. If conflicts occur, you need to delete the target database and create a new incremental migration job with the correct binlog position.
+If there is data in the target database, make sure the binlog position is correct. Otherwise, there might be conflicts between the existing data and the incremental data. If conflicts occur, the migration job will fail. If you want to replace the conflicted records with data from the source database, you can resume the migration job.
 
 ## Step 4: Choose the objects to be migrated
 
