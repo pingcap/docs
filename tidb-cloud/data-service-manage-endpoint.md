@@ -155,6 +155,10 @@ After testing the endpoint, you can see the response as JSON at the bottom of th
 
 ## Deploy an endpoint
 
+> **Note:**
+>
+> If you have connected your Data App to GitHub and committed endpoint changes using GitHub, the changes will be deployed by TiDB Cloud automatically. For more information, see [Deploy Automatically with GitHub](/tidb-cloud/data-service-manage-github-integration.md).
+
 To deploy an endpoint, perform the following steps:
 
 1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
@@ -164,6 +168,7 @@ To deploy an endpoint, perform the following steps:
 4. Click **Deploy** to confirm the deployment. You will get the **Endpoint has been deployed** prompt if the endpoint is successfully deployed.
 
     On the right pane of the endpoint details page, you can click the **Deployments** tab to view the deployed history.
+
 
 ## Call an endpoint
 
@@ -242,9 +247,8 @@ To undeploy an endpoint, perform the following steps:
 
 1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
 2. In the left pane, click the name of your target Data App to view its endpoints.
-3. Click the name of the endpoint you want to undeploy to view its details.
-4. On the right pane of the endpoint details page, click the **Deployments** tab. The deployed version page is displayed.
-5. Locate the current online version and click **Undeploy**. The version status will be changed to **Offline**.
+3. Locate the endpoint you want to undeploy, click **...** > **Undeploy**.
+4. Click **Undeploy** to confirm the undeployment.
 
 ## Delete an endpoint
 
@@ -256,10 +260,5 @@ To delete an endpoint, perform the following steps:
 
 1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
 2. In the left pane, click the name of your target Data App to view its endpoints.
-3. Locate the endpoint you want to delete and click **...** > **Delete**. The **Confirm deletion of endpoint** dialog box is displayed.
-
-    > **Tip:**
-    >
-    > Alternatively, you can also click the endpoint name to view its details and click **...** > **Delete** in the upper-right corner.
-
+3. Click the name of the endpoint you want to delete, and then click **...** > **Delete** in the upper-right corner.
 4. Click **Delete** to confirm the deletion.
