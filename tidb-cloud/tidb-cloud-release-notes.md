@@ -8,6 +8,22 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2023.
 
+## May 30, 2023
+
+**General changes**
+
+- Enhance support for incremental data migration for the Data Migration feature in TiDB Cloud.
+
+    You can now specify a binlog position or a GTID to replicate incremental data generated after the specified position to TiDB Cloud. This enhancement empowers you with greater flexibility to select and replicate the data you need, aligning with your specific requirements.
+
+    For details, refer to [Migrate Only Incremental Data from MySQL-Compatible Databases to TiDB Cloud Using Data Migration](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md).
+
+- Add a new event type (ImportData) to the [**Events**](/tidb-cloud/tidb-cloud-events.md) page.
+
+- Remove **Playground** from the TiDB Cloud console.
+
+    Stay tuned for the new standalone Playground with an optimized experience.
+
 ## May 23, 2023
 
 **General changes**
