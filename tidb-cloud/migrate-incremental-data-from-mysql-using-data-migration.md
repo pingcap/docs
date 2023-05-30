@@ -173,6 +173,8 @@ You can run the following command to check the GTID of the source database:
 SHOW MASTER STATUS;
 ```
 
+For information about how to enable GTID, see [Prerequisites](#prerequisites).
+
 ### Specify binlog file name and position
 
 Select this option to specify the binlog file name (for example, `binlog.000001`) and binlog position (for example, `1307`) of the source database. The migration job will start from the specified binlog file name and position to migrate ongoing changes of the source database to TiDB Cloud.
