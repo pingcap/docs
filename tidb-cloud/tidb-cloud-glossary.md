@@ -31,9 +31,6 @@ In Chat2Query, you can either simply type `--` followed by your instructions to 
 
 In addition, TiDB Cloud provides a Chat2Query API for TiDB Serverless clusters. After it is enabled, TiDB Cloud will automatically create a system Data App called **Chat2Query** and a Chat2Data endpoint in Data Service. You can call this endpoint to let AI generate and execute SQL statements by providing instructions. For more information, see [Get started with Chat2Query API](/tidb-cloud/use-chat2query-api.md).
 
-### cluster option
-
-Determines the functionality and capacity of your cluster. Different cluster options provide different numbers of TiDB, TiKV, and TiFlash nodes in your cluster.
 
 ### Credit
 
