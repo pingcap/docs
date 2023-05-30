@@ -1,6 +1,10 @@
 ---
 title: Build a TiDB App Using Spring Boot
 summary: Learn an example of how to build a TiDB application using Spring Boot.
+<<<<<<< HEAD
+=======
+aliases: ['/tidbcloud/dev-guide-sample-application-spring-boot','/tidb/dev/dev-guide-sample-application-spring-boot']
+>>>>>>> d3121ad17 (update link for dev-guide-sample-application-python (#13707))
 ---
 
 <!-- markdownlint-disable MD029 -->
