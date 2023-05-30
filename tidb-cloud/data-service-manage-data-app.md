@@ -45,9 +45,9 @@ To rename a Data App, perform the following steps:
 2. In the left pane, click the name of your target Data App to view its details.
 3. In the **General** area, modify the **Name** field and click **Save**.
 
-### Manage GitHub integration
+### Manage GitHub connection
 
-For more information, see [Manage GitHub integration](/tidb-cloud/data-service-manage-github-integration.md).
+For more information, see [Deploy Automatically with GitHub](/tidb-cloud/data-service-manage-github-integration.md).
 
 ### Manage linked clusters
 
@@ -88,9 +88,9 @@ To manage deployments, perform the following steps:
 
     - **Automatic Deployment**
 
-        - This option can be enabled only when you Data App is connected to GitHub. For more information, see [Deploy Automatically with GitHub](/tidb-cloud/data-service-manage-github-integration.md#deploy-automatically-with-github).
+        - This option can be enabled only when your Data App is connected to GitHub. For more information, see [Deploy Automatically with GitHub](/tidb-cloud/data-service-manage-github-integration.md#deploy-automatically-with-github).
         - When it is enabled, configuration changes in either GitHub or the TiDB Cloud console will be synchronized to each other. Whenever you push changes of the Data App configuration files to a GitHub repository, the new configurations are deployed in TiDB Cloud automatically.
-        - When it is disabled, only configuration changes in the TiDB Cloud console are synchronized to GitHub, but configuration changes on GitHub is not synchronized to the TiDB Cloud console.
+        - When it is disabled, only configuration changes in the TiDB Cloud console are synchronized to GitHub, but configuration changes on GitHub are not synchronized to the TiDB Cloud console.
 
     - **Review Changes**
 
