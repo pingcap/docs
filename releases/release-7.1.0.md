@@ -530,8 +530,9 @@ The [optimistic transaction model](/optimistic-transaction.md) will be deprecate
 
     + TiDB Dumpling
 
-        - Fix the issue that primary keys of Unsigned Integer type cannot be used for splitting chunks [#42620](https://github.com/pingcap/tidb/issues/42620) @[lichunzhu](https://github.com/lichunzhu)
-        - Fix the issue that panic might occur when `--output-file-template` is incorrectly set [#42391](https://github.com/pingcap/tidb/issues/42391) @[lichunzhu](https://github.com/lichunzhu)
+      <!-- **tw:hfxsd** (2)-->
+        - Fix the issue that the `UNSIGNED INTEGER` type primary key cannot be used for splitting chunks [#42620](https://github.com/pingcap/tidb/issues/42620) @[lichunzhu](https://github.com/lichunzhu)
+        - Fix the issue that TiDB Dumpling might panic when `--output-file-template` is incorrectly set [#42391](https://github.com/pingcap/tidb/issues/42391) @[lichunzhu](https://github.com/lichunzhu)
 
     + TiDB Binlog
 
