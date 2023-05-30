@@ -536,7 +536,8 @@ The [optimistic transaction model](/optimistic-transaction.md) will be deprecate
 
     + TiDB Binlog
 
-        - Fix the issue that an error might occur when a DDL statement fails [#1228](https://github.com/pingcap/tidb-binlog/issues/1228) @[okJiang](https://github.com/okJiang)
+      <!-- **tw:hfxsd** (1)-->
+        - Fix the issue that an error might occur when encountering a failed DDL statement [#1228](https://github.com/pingcap/tidb-binlog/issues/1228) @[okJiang](https://github.com/okJiang)
 
     + TiDB Lightning
       <!-- **tw:hfxsd** (8)-->
