@@ -6,6 +6,10 @@ aliases: ['/docs/dev/transaction-overview/','/docs/dev/reference/transactions/ov
 
 # Transactions
 
+> **Warning:**
+>
+> The optimistic transaction model will be deprecated in a future release. Starting from v7.1.0, it is not recommended to set the value of [`tidb_txn_mode`](/system-variables.md#tidb_txn_mode) to `"optimistic"` or `""`.
+
 TiDB supports distributed transactions using either [pessimistic](/pessimistic-transaction.md) or [optimistic](/optimistic-transaction.md) transaction mode. Starting from TiDB 3.0.8, TiDB uses the pessimistic transaction mode by default.
 
 This document introduces commonly used transaction-related statements, explicit and implicit transactions, isolation levels, lazy check for constraints, and transaction sizes.
