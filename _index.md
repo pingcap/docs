@@ -40,7 +40,7 @@ hide_commit: true
 
 [Quick Start](https://docs.pingcap.com/tidb/v7.1/dev-guide-build-cluster-in-cloud)
 
-[Example Application](https://docs.pingcap.com/tidb/v7.1/dev-guide-sample-application-spring-boot)
+[Example Application](https://docs.pingcap.com/tidb/v7.1/dev-guide-sample-application-java-spring-boot)
 
 </LearningPath>
 
