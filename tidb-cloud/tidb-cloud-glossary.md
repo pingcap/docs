@@ -85,12 +85,6 @@ Organization members are users who are invited by the organization owner to join
 
 ## P
 
-### Playground
-
-Playground contains a pre-loaded dataset of GitHub events, which allows Serverless Tier users to get started with TiDB Cloud by running queries instantly, without importing data or connecting to a client.
-
-You can access Playground after [creating a Serverless Tier cluster](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster).
-
 ### policy
 
 A document that defines permissions applying to a role, user, or organization, such as the access to specific actions or resources.
