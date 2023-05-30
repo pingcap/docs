@@ -165,7 +165,7 @@ If you select this option, the migration job will only migrate the incremental d
 
 ### Specify GTID
 
-Select this option to specify the GTID of the source database, for example, `3E11FA47-71CA-11E1-9E33-C80AA9429562:1-23`. The migration job will replicate the events excluding the specified GTID set to migrate ongoing changes of the source database to TiDB Cloud.
+Select this option to specify the GTID of the source database, for example, `3E11FA47-71CA-11E1-9E33-C80AA9429562:1-23`. The migration job will replicate the transactions excluding the specified GTID set to migrate ongoing changes of the source database to TiDB Cloud.
 
 You can run the following command to check the GTID of the source database:
 
