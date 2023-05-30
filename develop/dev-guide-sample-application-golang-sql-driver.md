@@ -21,7 +21,7 @@ This document describes how to use TiDB and [Go-MySQL-Driver](https://github.com
 
 The following introduces how to start a TiDB cluster.
 
-**Use a TiDB Cloud Serverless Tier cluster**
+**Use a TiDB Serverless cluster**
 
 For detailed steps, see [Create a Serverless Tier cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster).
 
@@ -509,7 +509,7 @@ When using go-sql-driver/mysql, you need to connect to your cluster and run the 
 
 ### Step 3.2 Modify parameters for TiDB Cloud
 
-If you are using a TiDB Cloud Serverless Tier cluster, modify the value of the `dsn` in `sqldriver.go`:
+If you are using a TiDB Serverless cluster, modify the value of the `dsn` in `sqldriver.go`:
 
 ```go
 dsn := "root:@tcp(127.0.0.1:4000)/test?charset=utf8mb4"

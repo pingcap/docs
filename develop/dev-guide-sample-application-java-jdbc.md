@@ -20,7 +20,7 @@ This document describes how to use TiDB and JDBC to build a simple CRUD applicat
 
 The following introduces how to start a TiDB cluster.
 
-**Use a TiDB Cloud Serverless Tier cluster**
+**Use a TiDB Serverless cluster**
 
 For detailed steps, see [Create a Serverless Tier cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster).
 
@@ -540,7 +540,7 @@ When using JDBC, you need to connect to your cluster and run the statement in th
 
 ### Step 3.2 Modify parameters for TiDB Cloud
 
-If you are using a TiDB Cloud Serverless Tier cluster, modify the parameters of the host, port, user, and password in `JDBCExample.java`:
+If you are using a TiDB Serverless cluster, modify the parameters of the host, port, user, and password in `JDBCExample.java`:
 
 ```java
 mysqlDataSource.setServerName("localhost");

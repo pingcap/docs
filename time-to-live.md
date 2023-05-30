@@ -18,7 +18,7 @@ TTL is designed to help users clean up unnecessary data periodically and in a ti
 > **Warning:**
 >
 > This is an experimental feature. It is not recommended that you use it in a production environment.
-> TTL is not available for [TiDB Cloud Serverless Tier](https://docs.pingcap.com/tidbcloud/select-cluster-tier#serverless-tier-beta).
+> TTL is not available for [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#serverless-tier-beta).
 
 ## Syntax
 

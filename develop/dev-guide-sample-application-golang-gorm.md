@@ -22,7 +22,7 @@ This document describes how to use TiDB and GORM to build a simple CRUD applicat
 
 The following introduces how to start a TiDB cluster.
 
-**Use a TiDB Cloud Serverless Tier cluster**
+**Use a TiDB Serverless cluster**
 
 For detailed steps, see [Create a Serverless Tier cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster).
 
@@ -280,7 +280,7 @@ The following content introduces how to run the code step by step.
 
 ### Step 3.1 Modify parameters for TiDB Cloud
 
-If you are using a TiDB Cloud Serverless Tier cluster, modify the value of the `dsn` in `gorm.go`:
+If you are using a TiDB Serverless cluster, modify the value of the `dsn` in `gorm.go`:
 
 ```go
 dsn := "root:@tcp(127.0.0.1:4000)/test?charset=utf8mb4"

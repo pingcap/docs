@@ -121,7 +121,7 @@ systemctl start docker
 
 For this integration, you will be using the [ProxySQL Docker image](https://hub.docker.com/r/proxysql/proxysql) along with a TiDB Serverless Tier cluster. The following steps will set up ProxySQL on port `16033`, so make sure this port is available.
 
-#### Step 1. Create a TiDB Cloud Serverless Tier cluster
+#### Step 1. Create a TiDB Serverless cluster
 
 1. [Create a free TiDB Serverless Tier cluster](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-tidb-cluster). Remember the root password that you set for your cluster.
 2. Get your cluster hostname, port, and username for later use.
