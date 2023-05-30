@@ -15,7 +15,7 @@ For instructions about how to migrate existing data or both existing data and in
 >
 > This section only includes limitations about incremental data migration. It is recommended that you also read the general limitations. See [Limitations](/tidb-cloud/migrate-from-mysql-using-data-migration.md#limitations).
 
-- If the target table is not yet created in the target database, the migration job will report an error as follows and fail. In this case, you need to create the target table and then resume the migration job.
+- If the target table is not yet created in the target database, the migration job will report an error as follows and fail. In this case, you need to manually create the target table and then retry the migration job.
 
     ```sql
     startLocation: [position: (mysql_bin.000016, 5122), gtid-set:
