@@ -419,9 +419,9 @@ The [optimistic transaction model](/optimistic-transaction.md) will be deprecate
 
     + TiDB Lightning
       <!-- **tw:hfxsd** (3) -->
-        - Change the severity level of the precheck item related to uneven distribution of regions from `Critical` to `Warn` to avoid blocking users from importing data [#42836](https://github.com/pingcap/tidb/issues/42836) @[okJiang](https://github.com/okJiang)
-        - Add retry after an unknown RPC error occurs during data import [#43291](https://github.com/pingcap/tidb/issues/43291) @[D3Hunter](https://github.com/D3Hunter)
-        - Enhance the retry mechanism for region jobs [#43682](https://github.com/pingcap/tidb/issues/43682) @[lance6716](https://github.com/lance6716)
+        - Change the severity level of the precheck item related to uneven Region distribution from `Critical` to `Warn` to avoid blocking users from importing data [#42836](https://github.com/pingcap/tidb/issues/42836) @[okJiang](https://github.com/okJiang)
+        - Add a retry mechanism when encountering an `unknown RPC` error during data import [#43291](https://github.com/pingcap/tidb/issues/43291) @[D3Hunter](https://github.com/D3Hunter)
+        - Enhance the retry mechanism for Region jobs [#43682](https://github.com/pingcap/tidb/issues/43682) @[lance6716](https://github.com/lance6716)
 
 ## Bug fixes
 
