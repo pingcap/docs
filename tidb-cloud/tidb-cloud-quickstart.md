@@ -80,9 +80,9 @@ After running the queries, you can see the query logs and results immediately at
 
 TiDB Cloud offers interactive tutorials with crafted sample datasets to help you get started with TiDB Cloud quickly. You can try the tutorials to learn how to use TiDB Cloud to run high-performance data analytics.
 
-1. Click the **?** element on the bottom right of the console, and click **Interactive Tutorials**.
+1. Click **?** in the lower-right corner of the console and click **Interactive Tutorials**.
 2. In the tutorials list, select a tutorial card to start. For example, **Steam Game Stats**.
-3. Select a TiDB Serverless cluster that you want to use for the tutorial, and click **Import Dataset**. The import process might take approximately 1 minute.
+3. Select a TiDB Serverless cluster that you want to use for the tutorial, and click **Import Dataset**. The import process might take approximately one minute.
 4. After the sample data is imported, follow the on-screen instructions to complete the tutorial.
 
 ## What's next
