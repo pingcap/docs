@@ -37,7 +37,7 @@ A Data App is a group of endpoints that you can use to access data for a specifi
 
     > **Note:**
     >
-    > The directory you selected must be empty. If the directory already contains files of the existing Data Apps, you need to select a new directory instead or clear it.
+    > The combination of repository, branch, and directory represents the path of the configuration files, which must be unique among Data Apps. If the path already contains files of existing Data Apps, you need to select a new path instead.
 
 5. Click **Create Data App**. The [**Data Service**](https://tidbcloud.com/console/data-service) details page is displayed.
 
