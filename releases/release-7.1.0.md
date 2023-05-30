@@ -26,7 +26,7 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
 <tbody>
   <tr>
     <td rowspan="4">Scalability and Performance</td>
-    <td>TiFlash supports the <a href="https://docs.pingcap.com/tidb/dev/tiflash-disaggregated-and-s3" target="_blank">disaggregated storage and compute architecture and S3 shared storage</a> (experimental, introduced in v7.0.0)</td>
+    <td>TiFlash supports the <a href="https://docs.pingcap.com/tidb/v7.1/tiflash-disaggregated-and-s3" target="_blank">disaggregated storage and compute architecture and S3 shared storage</a> (experimental, introduced in v7.0.0)</td>
     <td>TiFlash introduces a cloud-native architecture as an option:
       <ul>
         <li>Disaggregates TiFlash's compute and storage, which is a milestone for elastic HTAP resource utilization.</li>
@@ -35,42 +35,42 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
     </td>
   </tr>
   <tr>
-    <td>TiKV supports <a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_store_batch_size" target="_blank">batch aggregating data requests</a> (introduced in v6.6.0) </td>
+    <td>TiKV supports <a href="https://docs.pingcap.com/tidb/v7.1/system-variables#tidb_store_batch_size" target="_blank">batch aggregating data requests</a> (introduced in v6.6.0) </td>
     <td>This enhancement significantly reduces total RPCs in TiKV batch-get operations. In situations where data is highly dispersed and the gRPC thread pool has insufficient resources, batching coprocessor requests can improve performance by more than 50%.</td>
   </tr>
   <tr>
-    <td><a href="https://docs.pingcap.com/tidb/dev/troubleshoot-hot-spot-issues#scatter-read-hotspots" target="_blank">Load-based replica read</a></td>
-    <td>In a read hotspot scenario, TiDB can redirect read requests for a hotspot TiKV node to its replicas. This feature efficiently scatters read hotspots and optimizes the use of cluster resources. To control the threshold for triggering load-based replica read, you can adjust the system variable <a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_load_based_replica_read_threshold-new-in-v700" target="_blank"><code>tidb_load_based_replica_read_threshold</code></a>.</td>
+    <td><a href="https://docs.pingcap.com/tidb/v7.1/troubleshoot-hot-spot-issues#scatter-read-hotspots" target="_blank">Load-based replica read</a></td>
+    <td>In a read hotspot scenario, TiDB can redirect read requests for a hotspot TiKV node to its replicas. This feature efficiently scatters read hotspots and optimizes the use of cluster resources. To control the threshold for triggering load-based replica read, you can adjust the system variable <a href="https://docs.pingcap.com/tidb/v7.1/system-variables#tidb_load_based_replica_read_threshold-new-in-v700" target="_blank"><code>tidb_load_based_replica_read_threshold</code></a>.</td>
   </tr>
   <tr>
-      <td>TiKV supports<a href="https://docs.pingcap.com/tidb/dev/partitioned-raft-kv" target="_blank"> partitioned Raft KV storage engine </a> (experimental)</td>
+      <td>TiKV supports<a href="https://docs.pingcap.com/tidb/v7.1/partitioned-raft-kv" target="_blank"> partitioned Raft KV storage engine </a> (experimental)</td>
     <td>TiKV introduces a new generation of storage engine, the partitioned Raft KV. By allowing each data Region to have a dedicated RocksDB instance, it can expand the cluster's storage capacity from TB-level to PB-level and provide more stable write latency and stronger scalability.</td>
     </tr>
   <tr>
     <td rowspan="2">Reliability and availability</td>
-    <td><a href="https://docs.pingcap.com/tidb/dev/tidb-resource-control" target="_blank">Resource control by resource groups</a> (GA)</td>
+    <td><a href="https://docs.pingcap.com/tidb/v7.1/tidb-resource-control" target="_blank">Resource control by resource groups</a> (GA)</td>
    <td>Support resource management based on resource groups, which allocates and isolates resources for different workloads in the same cluster. This feature significantly enhances the stability of multi-application clusters and lays the foundation for multi-tenancy. In v7.1.0, this feature introduces the ability to estimate system capacity based on actual workload or hardware deployment.</td>
   </tr>
   <tr>
-    <td>TiFlash supports <a href="https://docs.pingcap.com/tidb/dev/tiflash-spill-disk" target="_blank">spill to disk</a> (introduced in v7.0.0)</td>
+    <td>TiFlash supports <a href="https://docs.pingcap.com/tidb/v7.1/tiflash-spill-disk" target="_blank">spill to disk</a> (introduced in v7.0.0)</td>
     <td>TiFlash supports intermediate result spill to disk to mitigate OOMs in data-intensive operations such as aggregations, sorts, and hash joins.</td>
   </tr>
   <tr>
     <td rowspan="3">SQL</td>
-    <td><a href="https://docs.pingcap.com/tidb/dev/sql-statement-create-index#multi-valued-index" target="_blank">Multi-valued index</a> (GA)</td>
+    <td><a href="https://docs.pingcap.com/tidb/v7.1/sql-statement-create-index#multi-valued-index" target="_blank">Multi-valued index</a> (GA)</td>
     <td>Support MySQL-compatible multi-valued indexes and enhance the JSON type to improve compatibility with MySQL 8.0. This feature improves the efficiency of membership checks on multi-valued columns.</td>
   </tr>
   <tr>
-    <td><a href="https://docs.pingcap.com/tidb/dev/time-to-live" target="_blank">Row-level TTL</a> (GA in v7.0.0)</td>
+    <td><a href="https://docs.pingcap.com/tidb/v7.1/time-to-live" target="_blank">Row-level TTL</a> (GA in v7.0.0)</td>
     <td>Support managing database size and improve performance by automatically expiring data of a certain age.</td>
   </tr>
   <tr>
-    <td><a href="https://docs.pingcap.com/tidb/dev/generated-columns" target="_blank">Generated columns</a> (GA)</td>
+    <td><a href="https://docs.pingcap.com/tidb/v7.1/generated-columns" target="_blank">Generated columns</a> (GA)</td>
     <td>Values in a generated column are calculated by a SQL expression in the column definition in real time. This feature pushes some application logic to the database level, thus improving query efficiency.</td>
   </tr>
   <tr>
     <td rowspan="2">Security</td>
-    <td><a href="https://docs.pingcap.com/tidb/dev/security-compatibility-with-mysql" target="_blank">LDAP authentication</a></td>
+    <td><a href="https://docs.pingcap.com/tidb/v7.1/security-compatibility-with-mysql" target="_blank">LDAP authentication</a></td>
     <td>TiDB supports LDAP authentication, which is compatible with <a href="https://dev.mysql.com/doc/refman/8.0/en/ldap-pluggable-authentication.html" target="_blank">MySQL 8.0</a>.</td>
   </tr>
   <tr>
@@ -239,19 +239,6 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
 
 ### DB operations
 
-* DDL tasks support pause and resume operations (experimental) [#18015](https://github.com/pingcap/tidb/issues/18015) @[godouxm](https://github.com/godouxm)
-
-    Before TiDB v7.1.0, when a DDL task encounters a business peak period during execution, you can only manually cancel the DDL task to reduce its impact on the business. In v7.1.0, TiDB introduces pause and resume operations for DDL tasks. These operations let you pause DDL tasks during peak periods and resume them after the peak ends, thus avoiding any impact on your application workloads.
-
-    For example, you can pause and resume multiple DDL tasks using `ADMIN PAUSE DDL JOBS` or `ADMIN RESUME DDL JOBS`:
-
-    ```sql
-    ADMIN PAUSE DDL JOBS 1,2;
-    ADMIN RESUME DDL JOBS 1,2;
-    ```
-
-    For more information, see [documentation](/ddl-introduction.md#ddl-related-commands).
-
 * Support smooth cluster upgrade without manually canceling DDL operations [#39751](https://github.com/pingcap/tidb/issues/39751) @[zimulala](https://github.com/zimulala) **tw:ran-huang**
 
     Before TiDB v7.1.0, to upgrade a cluster, you must manually cancel its running or queued DDL tasks before the upgrade and then add them back after the upgrade.
@@ -293,10 +280,10 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
     - Add automatic log rotation and space management functions, and support configuring log rotation in two dimensions: retention time and log size.
     - Support outputting audit logs in both TEXT and JSON formats, facilitating easier integration with third-party tools.
     - Support audit log redaction. You can replace all literals to enhance security.
-    
+
   Database auditing is an important feature in TiDB Enterprise Edition. This feature provides a powerful monitoring and auditing tool for enterprises to ensure data security and compliance. It can help enterprises managers in tracking the source and impact of database operations to prevent illegal data theft or tampering. Furthermore, database auditing can also help enterprises meet various regulatory and compliance requirements, ensuring the legal and ethical compliance. This feature has important application value for enterprise information security.
-    
-   This feature is included in TiDB Enterprise Edition. To use this feature and its documentation, navigate to the  [TiDB Enterprise page](https://www.pingcap.com/tidb-enterprise/).
+
+    This feature is included in TiDB Enterprise Edition. To use this feature and its documentation, navigate to the [TiDB Enterprise page](https://www.pingcap.com/tidb-enterprise/).
 
 ## Compatibility changes
 
@@ -314,7 +301,7 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
 
 ### System variables
 
-| Variable name  | Change type    | Description |
+| Variable name | Change type | Description |
 |--------|------------------------------|------|
 | [`tidb_enable_tiflash_read_for_write_stmt`](/system-variables.md#tidb_enable_tiflash_read_for_write_stmt-new-in-v630) | Deprecated | Changes the default value from `OFF` to `ON`. When [`tidb_allow_mpp = ON`](/system-variables.md#tidb_allow_mpp-new-in-v50), the optimizer intelligently decides whether to push a query down to TiFlash based on the [SQL mode](/sql-mode.md) and the cost estimates of the TiFlash replica. |
 | [`tidb_non_prepared_plan_cache_size`](/system-variables.md#tidb_non_prepared_plan_cache_size) | Deprecated | Starting from v7.1.0, this system variable is deprecated. You can use [`tidb_session_plan_cache_size`](/system-variables.md#tidb_session_plan_cache_size-new-in-v710) to control the maximum number of plans that can be cached. |
@@ -560,6 +547,10 @@ The [optimistic transaction model](/optimistic-transaction.md) will be deprecate
         - Fix the issue of missing data in the TiDB Lightning Grafana panel [#43357](https://github.com/pingcap/tidb/issues/43357) @[lichunzhu](https://github.com/lichunzhu)
         - Fix the issue of import failure due to incorrect setting of keyspace names [#43684](https://github.com/pingcap/tidb/issues/43684) @[zeminzhou](https://github.com/zeminzhou)
         - Fix the issue of skipping data import during range partial write in some cases [#43768](https://github.com/pingcap/tidb/issues/43768) @[lance6716](https://github.com/lance6716)
+
+## Performance test
+
+To learn about the performance of TiDB v7.1.0, you can refer to the [TPC-C performance test report](https://docs.pingcap.com/tidbcloud/v7.1.0-performance-benchmarking-with-tpcc) of the TiDB Dedicated cluster.
 
 ## Contributors
 
