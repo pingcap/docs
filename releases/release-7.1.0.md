@@ -90,7 +90,7 @@ In v7.1.0, the key new features and improvements are as follows:
 
     TiDB enhances the resource control feature based on resource groups, which becomes GA in v7.1.0. This feature significantly improves the resource utilization efficiency and performance of TiDB clusters. The introduction of the resource control feature is a milestone for TiDB. You can divide a distributed database cluster into multiple logical units, map different database users to corresponding resource groups, and set the quota for each resource group as needed. When the cluster resources are limited, all resources used by sessions in the same resource group are limited to the quota. In this way, even if a resource group is over-consumed, the sessions in other resource groups are not affected.
 
-    With this feature, you can combine multiple small and medium-sized applications from different systems into a single TiDB cluster. When the workload of an application grows larger, it does not affect the normal operation of other applications. When the system workload is low, busy applications can still be allocated the required system resources even if they exceed the set read and write quotas, which can achieve the maximum utilization of resources. In addition, the rational use of the resource control feature can reduce the number of clusters, ease the difficulty of operation and maintenance, and save management costs.
+    With this feature, you can combine multiple small and medium-sized applications from different systems into a single TiDB cluster. When the workload of an application grows larger, it does not affect the normal operation of other applications. When the system workload is low, busy applications can still be allocated the required system resources even if they exceed the set quotas, which can achieve the maximum utilization of resources. In addition, the rational use of the resource control feature can reduce the number of clusters, ease the difficulty of operation and maintenance, and save management costs.
 
     In TiDB v7.1.0, this feature introduces the ability to estimate system capacity based on actual workload or hardware deployment. The estimation ability provides you with a more accurate reference for capacity planning and assists you in better managing TiDB resource allocation to meet the stability needs of enterprise-level scenarios.
 
@@ -146,32 +146,6 @@ In v7.1.0, the key new features and improvements are as follows:
 
     For more information, see [documentation](/partitioned-table.md#range-interval-partitioning).
 
-* Some `LOAD DATA` features become GA [#40499](https://github.com/pingcap/tidb/issues/40499) @[lance6716](https://github.com/lance6716)
-
-    In TiDB v7.1.0, the following `LOAD DATA` features become GA:
-
-    - Support importing data from S3 or GCS.
-    - Support importing data from Parquet files.
-    - Support parsing the following character sets in the source file: `ascii`, `latin1`, `binary`, `gbk`, and `utf8mbd`.
-    - Support setting `FIELDS DEFINED NULL BY` to convert the specified value in the source file to `NULL` for writing to the target table.
-    - Support setting `bath_size` which specifies the number of rows inserted into the target table per batch, to improve write performance.
-    - Support setting `detached` to allow the job to run in the background.
-    - Support using `SHOW LOAD DATA` and `DROP LOAD DATA` to manage jobs.
-
-  For more information, see [documentation](/sql-statements/sql-statement-load-data.md).
-
-* `LOAD DATA` integrates with TiDB Lightning Physical Import Mode to improve import performance (experimental) [#42930](https://github.com/pingcap/tidb/issues/42930) @[D3Hunter](https://github.com/D3Hunter)
-
-    `LOAD DATA` integrates with TiDB Lightning Physical Import Mode. You can enable it by setting `WITH import_mode = 'PHYSICAL'`. This feature can improve the performance of importing data exponentially compared to Logical Import Mode.
-
-    For more information, see [documentation](/sql-statements/sql-statement-load-data.md).
-
-* `LOAD DATA` supports concurrent data import to improve import performance (experimental) [#40499](https://github.com/pingcap/tidb/issues/40499) @[lance6716](https://github.com/lance6716)
-
-    Before v7.1.0, `LOAD DATA` does not support concurrent data import, which limits its performance. Starting from TiDB v7.1.0, `LOAD DATA` supports concurrent data import. To enhance import performance, you can increase the concurrency using `WITH thread=<number>`. In internal tests, the logical import performance of the test workload is nearly four times better than that in v7.0.0.
-
-    For more information, see [documentation](/sql-statements/sql-statement-load-data.md).
-
 * Generated columns become generally available (GA) @[bb7133](https://github.com/bb7133)
 
     Generated columns are a valuable feature for database. When creating a table, you can define that the value of a column is calculated based on the values of other columns in the table, rather than being explicitly inserted or updated by users. This generated column can be either a virtual column or a stored column. TiDB has supported MySQL-compatible generated columns since earlier versions, and this feature becomes GA in v7.1.0.
@@ -225,8 +199,6 @@ In v7.1.0, the key new features and improvements are as follows:
 
     If you have upgraded TiFlash to v7.1.0, then during the TiDB upgrade to v7.1.0, TiDB cannot read the TiFlash system tables ([`INFORMATION_SCHEMA.TIFLASH_TABLES`](/information-schema/information-schema-tiflash-tables.md) and [`INFORMATION_SCHEMA.TIFLASH_SEGMENTS`](/information-schema/information-schema-tiflash-segments.md)).
 
-* In the outputs of [`SHOW LOAD DATA`](/sql-statements/sql-statement-show-load-data.md), the `Loaded_File_Size` parameter is deprecated and replaced with the `Imported_Rows` parameter.
-
 ### System variables
 
 | Variable name  | Change type    | Description |
@@ -250,8 +222,16 @@ In v7.1.0, the key new features and improvements are as follows:
 
 | Configuration file | Configuration parameter | Change type | Description |
 | -------- | -------- | -------- | -------- |
+| TiDB | [`force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v710) | Newly added | Controls whether to wait for statistics initialization to finish before providing services during TiDB startup. |
 | TiDB | [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710) | Newly added | Controls whether to use lightweight statistics initialization during TiDB startup. |
+| TiDB | [`timeout`](/tidb-configuration-file.md#timeout-new-in-v710) | Newly added | Sets the timeout for log-writing operations in TiDB. In case of a disk failure that prevents logs from being written, this configuration item can trigger the TiDB process to panic instead of hang. The default value is `0`, which means no timeout is set. |
+| TiKV | [`optimize-filters-for-memory`](/tikv-configuration-file.md#optimize-filters-for-memory-new-in-v710) | Newly added | Controls whether to generate Bloom/Ribbon filters that minimize memory internal fragmentation. |
+| TiKV | [`ribbon-filter-above-level`](/tikv-configuration-file.md#ribbon-filter-above-level-new-in-v710) | Newly added | Controls whether to use Ribbon filters for levels greater than or equal to this value and use non-block-based bloom filters for levels less than this value. |
+| TiKV | [`split.byte-threshold`](/tikv-configuration-file.md#byte-threshold-new-in-v50) | Modified | Changes the default value from `30MiB` to `100MiB` when [`region-split-size`](/tikv-configuration-file.md#region-split-size) is greater than or equal to 4 GB. |
+| TiKV | [`split.qps-threshold`](/tikv-configuration-file.md#qps-threshold) | Modified | Changes the default value from `3000` to `7000` when [`region-split-size`](/tikv-configuration-file.md#region-split-size) is greater than or equal to 4 GB. |
+| TiKV | [`split.region-cpu-overload-threshold-ratio`](/tikv-configuration-file.md#region-cpu-overload-threshold-ratio-new-in-v620) | Modified | Changes the default value from `0.25` to `0.75` when [`region-split-size`](/tikv-configuration-file.md#region-split-size) is greater than or equal to 4 GB. |
 | PD | [`store-limit-version`](/pd-configuration-file.md#store-limit-version-new-in-v710) | Newly added | Controls the mode of store limit. Value options are `"v1"` and `"v2"`. |
+| PD | [`schedule.enable-diagnostic`](/pd-configuration-file.md#enable-diagnostic-new-in-v630) | Modified | Changes the default value from `false` to `true`, meaning that the diagnostic feature of scheduler is enabled by default. |
 | TiFlash | `http_port` | Deleted | Deprecates the HTTP service port (default `8123`). |
 | TiCDC | [`sink.enable-partition-separator`](/ticdc/ticdc-changefeed-config.md#cli-and-configuration-parameters-of-ticdc-changefeeds) | Modified | Changes the default value from `false` to `true` after further tests, meaning that partitions in a table are stored in separate directories by default. It is recommended that you keep the value as `true` to avoid the potential issue of data loss during replication of partitioned tables to storage services. |
 
