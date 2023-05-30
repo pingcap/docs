@@ -26,19 +26,19 @@ For instructions about how to migrate existing data or both existing data and in
     tracker Raw Cause: Error 1146: Table 'zm.table1' doesn't exist
     ```
 
-- If some rows are deleted or updated in the upstream and there are no corresponding rows in the downstream, the migration job will detect that there are no rows available for deletion or update when replicating the DELETE and UPDATE DML operations from the upstream.
+- If some rows are deleted or updated in the upstream and there are no corresponding rows in the downstream, the migration job will detect that there are no rows available for deletion or update when replicating the `DELETE` and `UPDATE` DML operations from the upstream.
 
 If you specify GTID as the start position to migrate incremental data, note the following limitations:
 
 - Make sure that the GTID mode is enabled in the source database.
 - If the source database is MySQL, the MySQL version must be 5.6 or later, and the storage engine must be InnoDB.
-- If the migration job connects to a secondary database in upstream, the `REPLICATE CREATE TABLE ... SELECT` events cannot be migrated, because the statement will be split into two transactions (`CREATE TABLE` and `INSERT`) that are assigned the same GTID, which will cause the `INSERT` statement to be ignored by the secondary database.
+- If the migration job connects to a secondary database in the upstream, the `REPLICATE CREATE TABLE ... SELECT` events cannot be migrated. This is because the statement will be split into two transactions (`CREATE TABLE` and `INSERT`) that are assigned the same GTID. As a result, the `INSERT` statement will be ignored by the secondary database.
 
 ## Prerequisites
 
 > **Note**:
 >
-> This section only includes prerequisites about incremental data migration. It is recommended that you also read the general prerequisites. See [Prerequisites](/tidb-cloud/migrate-from-mysql-using-data-migration.md#prerequisites).
+> This section only includes prerequisites about incremental data migration. It is recommended that you also read the [general prerequisites](/tidb-cloud/migrate-from-mysql-using-data-migration.md#prerequisites).
 
 If you want to use GTID to specify the start position, make sure that the GTID is enabled in the source database. The operations vary depending on the database type.
 
@@ -149,9 +149,9 @@ On the **Create Migration Job** page, configure the source and target connection
 
 ## Step 3: Choose migration job type
 
-To migrate only the incrementable data of the source database to TiDB Cloud, do not select **Existing data migration**, but only select **Incremental data migration**. In this case, the migration job only migrates ongoing changes of the source database to TiDB Cloud.
+To migrate only the incremental data of the source database to TiDB Cloud, select **Incremental data migration** and do not select **Existing data migration**. In this way, the migration job only migrates ongoing changes of the source database to TiDB Cloud.
 
-In the **Start Position** area, you can specify the following types of start positions for incremental data migration:
+In the **Start Position** area, you can specify one of the following types of start positions for incremental data migration:
 
 - The time when the incremental migration job starts
 - GTID
