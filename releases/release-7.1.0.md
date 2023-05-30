@@ -363,10 +363,6 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
 | TiCDC | [`integrity.integrity-check-level`](/ticdc/ticdc-changefeed-config.md#cli-and-configuration-parameters-of-ticdc-changefeeds) | Newly added | Controls whether to enable the checksum validation for single-row data. The default value is `"none"`, which means to disable the feature. |
 | TiCDC | [`sink.enable-partition-separator`](/ticdc/ticdc-changefeed-config.md#cli-and-configuration-parameters-of-ticdc-changefeeds) | Modified | Changes the default value from `false` to `true` after further tests, meaning that partitions in a table are stored in separate directories by default. It is recommended that you keep the value as `true` to avoid the potential issue of data loss during replication of partitioned tables to storage services. |
 
-## Deprecated feature
-
-The [optimistic transaction model](/optimistic-transaction.md) will be deprecated in a future release. Starting from v7.1.0, it is not recommended to set the value of [`tidb_txn_mode`](/system-variables.md#tidb_txn_mode) to `"optimistic"` or `""`.
-
 ## Improvements
 
 + TiDB
