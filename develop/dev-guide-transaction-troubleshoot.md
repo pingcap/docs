@@ -67,7 +67,7 @@ If you only update 1 book in each transaction, you can also avoid deadlocks. How
 
 > **Warning:**
 >
-> The optimistic transaction model will be deprecated in a future release. Starting from v7.1.0, it is not recommended to set the value of [`tidb_txn_mode`](/system-variables.md#tidb_txn_mode) to `"optimistic"` or `""`.
+> The [optimistic transaction model](/optimistic-transaction.md) will be deprecated in a future release. Starting from v7.1.0, it is not recommended to set the value of [`tidb_txn_mode`](/system-variables.md#tidb_txn_mode) to `"optimistic"` or `""`.
 
 There are no deadlocks in the optimistic transaction model. But in your application, you need to add the optimistic transaction retry logic in case of failure. For details, see [Application retry and error handling](#application-retry-and-error-handling).
 
