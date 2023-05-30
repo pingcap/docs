@@ -1,14 +1,14 @@
 ---
-title: Select Your Cluster Option
-summary: Learn how to select your cluster option on TiDB Cloud.
+title: Select Your Cluster Tier
+summary: Learn how to select your cluster tier on TiDB Cloud.
 aliases: ['/tidbcloud/developer-tier-cluster']
 ---
 
-# Select Your Cluster Option
+# Select Your Cluster Tier
 
-The cluster option determines the throughput and performance of your cluster.
+The cluster tier determines the throughput and performance of your cluster.
 
-TiDB Cloud provides the following two options. Before creating a cluster, you need to consider which option suits your need better.
+TiDB Cloud provides the following two options of cluster tiers. Before creating a cluster, you need to consider which option suits your need better.
 
 - [TiDB Serverless](#tidb-serverless-beta)
 - [TiDB Dedicated](#tidb-dedicated)
