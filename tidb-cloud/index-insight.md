@@ -42,17 +42,29 @@ GRANT SELECT ON mysql.* TO 'yourusername'@'%';
 GRANT PROCESS, REFERENCES ON *.* TO 'yourusername'@'%';
 FLUSH PRIVILEGES;
 
-## Activate the feature
+### Activate the feature
 
 Enter the SQL user created specifically for Index Insight in the designated input field. Click on the "Activate" button to initiate the activation process.
 
 Note: Ensure that the SQL user you enter has the necessary permissions and access to query the relevant tables. If you haven't created a dedicated SQL user for Index Insight yet, please refer to the user documentation for instructions on creating one.
 
-## Trigger insight manually
+### Trigger insight manually
 
 To manually trigger the index recommendation capability and obtain index suggestions, you should locate the "Check Up" button and click on it.
 
 After you triggered this insight, the functionality will initiate a scan of slow queries from the past 3 hours. Once the scan is complete, index recommendations will be provided based on the analysis.
+
+### Check the insight detail
+
+To view specific index commands and access detailed information about related slow queries, you need to click a insight on the list and enter the insight detail page.
+
+On the insight detail page, you will find the index commands corresponding to the recommended indexes. 
+
+You can copy the index command(s) provided, open your TiDB instance or database management tool, and execute the copied index command(s) to create the recommended index(es) on the relevant table(s).
+
+Please note that executing the index command(s) may require appropriate permissions and access. Ensure that you have the necessary privileges to create indexes on the desired table(s).
+
+Additionally, on the Index Insight Detail Page, you can access detailed information about the slow queries associated with the index recommendations. This information may include the query text, execution plan, and other relevant metrics. Analyzing this information can help you better understand the performance issues and evaluate the impact of implementing the recommended indexes.
 
 ## Utilizing Index Recommendations
 
@@ -89,10 +101,6 @@ Before implementing the recommended indexes, analyze the potential impact on que
 ### Monitor Performance
 
 Continuously monitor query performance after implementing the recommended indexes to validate the improvements and make further adjustments if necessary.
-
-## Feedback and Support
-
-We value your feedback and are dedicated to improving the Index Insight feature. If you encounter any issues, have suggestions for enhancements, or need assistance, please reach out to our support team at [support email/URL].
 
 ## Conclusion
 
