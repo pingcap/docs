@@ -72,3 +72,25 @@ To view the key analytics, perform the following steps:
 On the **Key Visualizer** page, a large heat map shows changes on access traffic over time. The average values ​​along each axis of the heat map are shown below and on the right side. The left side is the table name, index name and other information.
 
 For more information, see [Key Visualizer](https://docs.pingcap.com/tidb/stable/dashboard-key-visualizer).
+
+## Index Insight (Beta)
+
+> **Note:**
+>
+> Index Insight is only available for [Dedicated Tier clusters](/tidb-cloud/select-cluster-tier.md#dedicated-tier).
+
+To obtain the index recommendations, perform the following steps:
+
+1. Navigate to the **Diagnosis** page of a cluster.
+
+2. Click the **Index Insight (Beta)** tab.
+
+![Index Insight](/media/tidb-cloud/Index-Insight.png)
+
+3. Create a new SQL user dedicated to utilizing the Index Insight feature.
+
+4. Configure the necessary permissions and access for the dedicated SQL user.
+
+5. Manually trigger the Index Insight capability to receive index recommendations for slow queries without proper index usage.
+
+For more information, see [Index Insight](/tidb-cloud/index-insight).
