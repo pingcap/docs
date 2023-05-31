@@ -9,13 +9,8 @@ This document is targeted for the following upgrade paths:
 
 - Upgrade from TiDB 4.0 versions to TiDB 7.1.
 - Upgrade from TiDB 5.0-5.4 versions to TiDB 7.1.
-- Upgrade from TiDB 6.0 to TiDB 7.1.
-- Upgrade from TiDB 6.1 to TiDB 7.1.
-- Upgrade from TiDB 6.2 to TiDB 7.1.
-- Upgrade from TiDB 6.3 to TiDB 7.1.
-- Upgrade from TiDB 6.4 to TiDB 7.1.
-- Upgrade from TiDB 6.5 to TiDB 7.1.
-- Upgrade from TiDB 6.6 to TiDB 7.1.
+- Upgrade from TiDB 6.0-6.6 to TiDB 7.1.
+- Upgrade from TiDB 7.0 to TiDB 7.1.
 
 > **Warning:**
 >
