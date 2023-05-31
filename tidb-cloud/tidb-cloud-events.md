@@ -32,19 +32,20 @@ TiDB Cloud logs the following types of cluster events:
 
 | Event Type| Description |
 |:--- |:--- |
-| CreateCluster |  Create a cluster |
-| PauseCluster |   Pause a cluster |
-| ResumeCluster |   Resume a cluster |
-| ModifyClusterSize |   Modify cluster size |
-| BackupCluster |   Back up a cluster |
-| RestoreFromCluster |   Restore a cluster |
-| CreateChangefeed |   Create a changefeed |
-| PauseChangefeed |   Pause a changefeed |
-| ResumeChangefeed |   Resume a changefeed |
-| DeleteChangefeed |   Delete a changefeed |
-| EditChangefeed |  Edit a changefeed |
-| ScaleChangefeed |   Scale the specification of a changefeed |
-| FailedChangefeed |   Changefeed failures |
+| CreateCluster |  Create a cluster |  
+| PauseCluster |   Pause a cluster |  
+| ResumeCluster |   Resume a cluster | 
+| ModifyClusterSize |   Modify cluster size | 
+| BackupCluster |   Back up a cluster |  
+| RestoreFromCluster |   Restore a cluster |  
+| CreateChangefeed |   Create a changefeed |  
+| PauseChangefeed |   Pause a changefeed | 
+| ResumeChangefeed |   Resume a changefeed | 
+| DeleteChangefeed |   Delete a changefeed |  
+| EditChangefeed |  Edit a changefeed |  
+| ScaleChangefeed |   Scale the specification of a changefeed |  
+| FailedChangefeed |   Changefeed failures |  
+| ImportData |   Import data to a cluster |  
 
 For each event, the following information is logged:
 

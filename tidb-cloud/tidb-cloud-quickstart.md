@@ -76,33 +76,14 @@ In Chat2Query, you can either simply type `--` followed by your instructions to 
 
 After running the queries, you can see the query logs and results immediately at the bottom of the page.
 
-## Step 3. Try Playground
+## Step 3. Try interactive tutorials
 
-After your TiDB Cloud cluster is created, you can also quickly start experimenting with TiDB using the pre-loaded sample data in TiDB Cloud Playground.
+TiDB Cloud offers interactive tutorials with crafted sample datasets to help you get started with TiDB Cloud quickly. You can try the tutorials to learn how to use TiDB Cloud to run high-performance data analytics.
 
-On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click the name of your newly created cluster to go to its overview page, and then click **Playground** in the left navigation pane.
-
-## Step 4. Load sample data
-
-After trying **Plaground**, you can load sample data to your TiDB Cloud cluster. We provide Capital Bikeshare sample data for you to easily import data and run sample queries.
-
-1. On your cluster overview page, click **Import** in the left navigation pane.
-
-2. On the **Import** page, click **Import Data** in the upper-right corner, and then select **From S3**.
-
-3. Fill in the import parameters:
-
-    - **Data format**: select **SQL File**
-    - **Bucket URI**: `s3://tidbcloud-sample-data/data-ingestion/`
-    - **Role ARN**: `arn:aws:iam::801626783489:role/import-sample-access`
-
-    If the region of the bucket is different from your cluster, confirm the compliance of cross region. Click **Next**.
-
-4. Add the table filter rules if needed. For the sample data, you can skip this step. Click **Next**.
-
-5. On the **Preview** page, confirm the data to be imported and then click **Start Import**.
-
-The data import process will take several minutes. When the data import progress shows **Finished**, you have successfully imported the sample data and the database schema to your database in TiDB Cloud.
+1. Click **?** in the lower-right corner of the console and click **Interactive Tutorials**.
+2. In the tutorials list, select a tutorial card to start. For example, **Steam Game Stats**.
+3. Select a TiDB Serverless cluster that you want to use for the tutorial, and click **Import Dataset**. The import process might take approximately one minute.
+4. After the sample data is imported, follow the on-screen instructions to complete the tutorial.
 
 ## What's next
 
