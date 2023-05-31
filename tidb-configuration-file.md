@@ -11,6 +11,10 @@ aliases: ['/docs/dev/tidb-configuration-file/','/docs/dev/reference/configuratio
 
 The TiDB configuration file supports more options than command-line parameters. You can download the default configuration file [`config.toml.example`](https://github.com/pingcap/tidb/blob/master/config/config.toml.example) and rename it to `config.toml`. This document describes only the options that are not involved in [command line options](/command-line-flags-for-tidb-configuration.md).
 
+> **Tip:**
+>
+> If you need to adjust the value of a configuration item, refer to [Modify the configuration](/maintain-tidb-using-tiup.md#modify-the-configuration).
+
 ### `split-table`
 
 - Determines whether to create a separate Region for each table.
@@ -111,7 +115,7 @@ The TiDB configuration file supports more options than command-line parameters. 
 
 + Modifies the version string returned by TiDB in the following situations:
     - When the built-in `VERSION()` function is used.
-    - When TiDB establishes the initial connection to the client and returns the initial handshake packet with version string of the server. For details, see [MySQL Initial Handshake Packet](https://dev.mysql.com/doc/internals/en/connection-phase-packets.html#packet-Protocol::Handshake).
+    - When TiDB establishes the initial connection to the client and returns the initial handshake packet with version string of the server. For details, see [MySQL Initial Handshake Packet](https://dev.mysql.com/doc/dev/mysql-server/latest/page_protocol_connection_phase.html#sect_protocol_connection_phase_initial_handshake).
 + Default value: ""
 + By default, the format of the TiDB version string is `5.7.${mysql_latest_minor_version}-TiDB-${tidb_version}`.
 
@@ -574,7 +578,7 @@ Configuration items related to performance.
 
 + Controls whether to wait for statistics initialization to finish before providing services during TiDB startup.
 + Default value: false
-+ When the value of `force-init-stats` is `true`, TiDB needs to wait until statistics initialization is finished before providing services upon startup. If there are a large number of tables and partitions, setting `force-init-stats` to `true` might prolong the time it takes for TiDB to start providing services. 
++ When the value of `force-init-stats` is `true`, TiDB needs to wait until statistics initialization is finished before providing services upon startup. If there are a large number of tables and partitions, setting `force-init-stats` to `true` might prolong the time it takes for TiDB to start providing services.
 + When the value of `force-init-stats` is `false`, TiDB can still provide services before statistics initialization is finished, but the optimizer uses pseudo statistics to make decisions, which might result in suboptimal execution plans.
 
 ## opentracing

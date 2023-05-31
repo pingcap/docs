@@ -30,7 +30,7 @@
       - [GORM](/develop/dev-guide-sample-application-golang-gorm.md)
     - Python
       - [mysqlclient](/develop/dev-guide-sample-application-python-mysqlclient.md)
-      - [MySQL Connect/Python](/develop/dev-guide-sample-application-python-mysql-connector.md)
+      - [MySQL Connector/Python](/develop/dev-guide-sample-application-python-mysql-connector.md)
       - [PyMySQL](/develop/dev-guide-sample-application-python-pymysql.md)
       - [SQLAlchemy](/develop/dev-guide-sample-application-python-sqlalchemy.md)
       - [peewee](/develop/dev-guide-sample-application-python-peewee.md)
@@ -499,6 +499,7 @@
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
   - [Serverless Tier Limitations](/tidb-cloud/serverless-tier-limitations.md)
   - [Resource Control](/tidb-resource-control.md)
+  - [TiDB Backend Task Distributed Execution Framework](/tidb-distributed-execution-framework.md)
 - FAQs
   - [TiDB Cloud FAQs](/tidb-cloud/tidb-cloud-faq.md)
   - [Serverless Tier FAQs](/tidb-cloud/serverless-tier-faqs.md)
