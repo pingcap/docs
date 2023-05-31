@@ -121,7 +121,7 @@ TiDB Lightning estimates the size of transformed KV pairs by sampling the first 
 [INFO] [table_restore.go:91] ["load engines and files start"] [table=`sysbench`.`sbtest1`]
 ```
 
-[table_restore.go:91](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/restore/table_restore.go#L91): Start to logically [split each table source data files](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/mydump/region.go#L145) into multiple [chunks/table regions](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/mydump/region.go#L283). Each table source data file will be [assigned to an engine](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/mydump/region.go#L246) to process data files in parallel across different engines.
+[table_restore.go:91](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/restore/table_restore.go#L91): Start to logically [split each table source data files](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/mydump/region.go#L145) into multiple [chunks/table regions](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/mydump/region.go#L283). Each table source data file will be [assigned to an engine](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/mydump/region.go#L246) so source data files can be processed in parallel across different engines.
 
 ```
 [INFO] [region.go:241] [makeTableRegions] [filesCount=8] [MaxRegionSize=268435456] [RegionsCount=8] [BatchSize=107374182400] [cost=53.207µs]
@@ -151,7 +151,7 @@ TiDB Lightning estimates the size of transformed KV pairs by sampling the first 
 [INFO] [table_restore.go:317] ["restore engine start"] [table=`sysbench`.`sbtest1`] [engineNumber=0]
 ```
 
-[table_restore.go:317](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/restore/table_restore.go#L317): Start to restore engine 0. A non -1 engine id indicates a data engine. Note that "restore engine" and "import engine" (which appears later in the logs) refer to different processes. "restore engine" indicates the process of sending KV pairs to the allocated engine and sorting them, while "import engine" represents the process of ingesting sorted KV pairs in the engine file into the TiKV nodes.
+[table_restore.go:317](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/lightning/restore/table_restore.go#L317): Start to restore engine `0`. A non `-1` engine id indicates a data engine. Note that "restore engine" and "import engine" (which appears later in the logs) refer to different processes. "restore engine" indicates the process of sending KV pairs to the allocated engine and sorting them, while "import engine" represents the process of ingesting sorted KV pairs in the engine file into the TiKV nodes.
 
 ```
 [INFO] [table_restore.go:422] ["encode kv data and write start"] [table=`sysbench`.`sbtest1`] [engineNumber=0]
