@@ -38,11 +38,11 @@ A Data App is a group of endpoints that you can use to access data for a specifi
     > **Note:**
     >
     > - The directory must start with a slash. For example, `/mydata`. If the directory you specified does not exist in the target repository and branch, it will be created automatically.
-    > - The combination of repository, branch, and directory represents the path of the configuration files, which must be unique among Data Apps. If the path already contains files of existing Data Apps, you need to select a new path instead.
+    > - The combination of repository, branch, and directory represents the path of the configuration files, which must be unique among Data Apps. If the path already contains files of existing Data Apps, you need to specify a new path instead.
 
 5. Click **Create Data App**. The [**Data Service**](https://tidbcloud.com/console/data-service) details page is displayed.
 
-If you have connected your Data App to GitHub, Check your specified directory in GitHub. If the configuration files of the Data App have been committed to this directory by `tidb-cloud-data-services`, it indicates that your Data App is connected to GitHub successfully. For more information, see [Deploy Automatically with GitHub](/tidb-cloud/data-service-manage-github-integration.md).
+If you have connected your Data App to GitHub, check your specified directory in GitHub. If the configuration files of the Data App have been committed to this directory by `tidb-cloud-data-services`, it indicates that your Data App is connected to GitHub successfully. For more information, see [Deploy Automatically with GitHub](/tidb-cloud/data-service-manage-github-integration.md).
 
 ## Step 2. Develop an endpoint
 
