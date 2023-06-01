@@ -1,5 +1,5 @@
 ---
-title: TiDB 7.1.0 リリースノート
+title: TiDB 7.1.0 リリースノート | PingCAP
 summary: TiDB 7.1.0 の新機能、互換性の変更、改善、バグ修正について説明します。
 ---
 
