@@ -34,6 +34,10 @@ You can also create an endpoint from a SQL file in Chat2Query (beta). For more d
 
 For each endpoint, you can write SQL statements to execute on a TiDB cluster, define parameters for the SQL statements, or manage the name and version.
 
+> **Note:**
+>
+> If you have connected your Data App to GitHub with **Automatic Deployment** enabled, you can also update the endpoint configurations using GitHub. The changes you made in GitHub will be deployed in TiDB Cloud automatically. For more information, see [Deploy Automatically with GitHub](/tidb-cloud/data-service-manage-github-integration.md).
+
 ### Configure properties
 
 On the right pane of the endpoint details page, you can click the **Properties** tab to view and manage the following properties of the endpoint:
@@ -157,7 +161,7 @@ After testing the endpoint, you can see the response as JSON at the bottom of th
 
 > **Note:**
 >
-> If you have connected your Data App to GitHub and committed endpoint changes using GitHub, the changes will be deployed by TiDB Cloud automatically. For more information, see [Deploy Automatically with GitHub](/tidb-cloud/data-service-manage-github-integration.md).
+> If you have connected your Data App to GitHub with **Automatic Deployment** enabled, the Data App changes you made in GitHub will be deployed in TiDB Cloud automatically. For more information, see [Deploy Automatically with GitHub](/tidb-cloud/data-service-manage-github-integration.md).
 
 To deploy an endpoint, perform the following steps:
 

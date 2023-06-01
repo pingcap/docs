@@ -29,7 +29,7 @@ A Data App is a group of endpoints that you can use to access data for a specifi
 
 3. On the **Get started by creating your first data application** page, enter a name and select clusters that you want the Data App to access.
 
-4. (Optional) To automatically deploy metadata and endpoints of the Data App to your preferred GitHub repository and branch, expand **Connect your Data App to GitHub**, and then do the following:
+4. (Optional) To automatically deploy endpoints of the Data App to your preferred GitHub repository and branch, expand **Connect your Data App to GitHub**, and then do the following:
 
     1. Click **Install on GitHub**, and then follow the on-screen instructions to install **TiDB Cloud Data Service** as an application on your target repository.
     2. Click **Authorize** to authorize access to the application on GitHub.
@@ -42,7 +42,9 @@ A Data App is a group of endpoints that you can use to access data for a specifi
 
 5. Click **Create Data App**. The [**Data Service**](https://tidbcloud.com/console/data-service) details page is displayed.
 
-If you have connected your Data App to GitHub, check your specified directory in GitHub. If the configuration files of the Data App have been committed to this directory by `tidb-cloud-data-service`, it indicates that your Data App is connected to GitHub successfully. For more information, see [Deploy Automatically with GitHub](/tidb-cloud/data-service-manage-github-integration.md).
+6. If you have connected your Data App to GitHub, check your selected directory on GitHub. Otherwise, skip this step.
+
+    If the configuration files of the Data App have been committed by `tidb-cloud-data-service`, it indicates that your Data App is connected to GitHub successfully. For your Data App, **Automatic Deployment** and **Review Changes** are enabled automatically so you can easily synchronize changes between TiDB Cloud console and GitHub. For more information, see [Deploy Automatically with GitHub](/tidb-cloud/data-service-manage-github-integration.md).
 
 ## Step 2. Develop an endpoint
 
