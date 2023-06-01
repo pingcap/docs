@@ -23,7 +23,7 @@ This document introduces the `AUTO_INCREMENT` column attribute, including its co
 
 </CustomContent>
 
-You can also use the [CREATE TABLE](/sql-statements/sql-statement-create-table.md) parameter in the [CREATE TABLE](/sql-statements/sql-statement-create-table.md) statement to specify the initial value of the increment field.
+You can also use the `AUTO_INCREMENT` parameter in the [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md) statement to specify the initial value of the increment field.
 
 ## Concept
 
