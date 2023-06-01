@@ -24,7 +24,7 @@ CREATE VIEW view_name AS query;
 
 既存のビューまたはテーブルと同じ名前のビューを作成することはできないことに注意してください。
 
-たとえば、 [<a href="/develop/dev-guide-join-tables.md">複数テーブル結合クエリ</a>](/develop/dev-guide-join-tables.md) 、 `JOIN`ステートメントを通じて`books`テーブルと`ratings`テーブルを結合することにより、平均評価を持つ書籍のリストを取得します。
+たとえば、 [複数テーブル結合クエリ](/develop/dev-guide-join-tables.md) 、 `JOIN`ステートメントを通じて`books`テーブルと`ratings`テーブルを結合することにより、平均評価を持つ書籍のリストを取得します。
 
 後続のクエリの便宜のために、次のステートメントを使用してクエリをビューとして定義できます。
 
@@ -113,12 +113,12 @@ DROP VIEW book_with_ratings;
 
 ## 制限 {#limitation}
 
-TiDB のビューの制限については、 [<a href="/views.md#limitations">ビューの制限</a>](/views.md#limitations)を参照してください。
+TiDB のビューの制限については、 [ビューの制限](/views.md#limitations)を参照してください。
 
 ## 続きを読む {#read-more}
 
--   [<a href="/views.md">ビュー</a>](/views.md)
--   [<a href="/sql-statements/sql-statement-create-view.md">CREATE VIEW ステートメント</a>](/sql-statements/sql-statement-create-view.md)
--   [<a href="/sql-statements/sql-statement-drop-view.md">DROP VIEW ステートメント</a>](/sql-statements/sql-statement-drop-view.md)
--   [<a href="/explain-views.md">ビューを使用したEXPLAINステートメント</a>](/explain-views.md)
--   [<a href="https://github.com/tiflink/tiflink">TiFlink: TiKV と Flink を使用した一貫性の高いマテリアライズド ビュー</a>](https://github.com/tiflink/tiflink)
+-   [ビュー](/views.md)
+-   [CREATE VIEW ステートメント](/sql-statements/sql-statement-create-view.md)
+-   [DROP VIEW ステートメント](/sql-statements/sql-statement-drop-view.md)
+-   [ビューを使用したEXPLAINステートメント](/explain-views.md)
+-   [TiFlink: TiKV と Flink を使用した一貫性の高いマテリアライズド ビュー](https://github.com/tiflink/tiflink)

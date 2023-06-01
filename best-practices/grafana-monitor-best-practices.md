@@ -5,11 +5,11 @@ summary: Learn seven tips for efficiently using Grafana to monitor TiDB.
 
 # Grafana を使用して TiDB をモニタリングするためのベスト プラクティス {#best-practices-for-monitoring-tidb-using-grafana}
 
-Grafana と Prometheus をトポロジー構成に追加すると、TiDB クラスター内のさまざまなコンポーネントとマシンのメトリクスを収集して表示するために、 [<a href="/tidb-monitoring-framework.md">Grafana + Prometheus モニタリング プラットフォーム</a>](/tidb-monitoring-framework.md) [<a href="/production-deployment-using-tiup.md">TiUPを使用して TiDB クラスターをデプロイする</a>](/production-deployment-using-tiup.md)セットが同時にデプロイされます。このドキュメントでは、Grafana を使用して TiDB を監視するためのベスト プラクティスについて説明します。これは、メトリクスを使用して TiDB クラスターのステータスを分析し、問題を診断できるようにすることを目的としています。
+Grafana と Prometheus をトポロジー構成に追加すると、TiDB クラスター内のさまざまなコンポーネントとマシンのメトリクスを収集して表示するために、 [TiUPを使用して TiDB クラスターをデプロイする](/production-deployment-using-tiup.md)セットが同時にデプロイされます。このドキュメントでは、Grafana を使用して TiDB を監視するためのベスト プラクティスについて説明します。これは、メトリクスを使用して TiDB クラスターのステータスを分析し、問題を診断できるようにすることを目的としています。
 
 ## 監視アーキテクチャ {#monitoring-architecture}
 
-[<a href="https://prometheus.io/">プロメテウス</a>](https://prometheus.io/)は、多次元データ モデルと柔軟なクエリ言語を備えた時系列データベースです。 [<a href="https://grafana.com/">グラファナ</a>](https://grafana.com/)は、メトリクスを分析および視覚化するためのオープンソース監視システムです。
+[グラファナ](https://grafana.com/)は、メトリクスを分析および視覚化するためのオープンソース監視システムです。
 
 ![The monitoring architecture in the TiDB cluster](/media/prometheus-in-tidb.png)
 
@@ -64,7 +64,7 @@ tidb_executor_statement_total{type="Use"} 466016
 
 ![The query expression on the Metrics tab](/media/best-practices/metric-board-expression.jpeg)
 
-Prometheus は多くのクエリ式と関数をサポートしています。詳細については、 [<a href="https://prometheus.io/docs/prometheus/latest/querying">プロメテウス公式サイト</a>](https://prometheus.io/docs/prometheus/latest/querying)を参照してください。
+Prometheus は多くのクエリ式と関数をサポートしています。詳細については、 [プロメテウス公式サイト](https://prometheus.io/docs/prometheus/latest/querying)を参照してください。
 
 ## グラファナのヒント {#grafana-tips}
 
@@ -72,7 +72,7 @@ Prometheus は多くのクエリ式と関数をサポートしています。詳
 
 ### ヒント 1: すべてのディメンションを確認し、クエリ式を編集する {#tip-1-check-all-dimensions-and-edit-the-query-expression}
 
-[<a href="#source-and-display-of-monitoring-data">モニタリングデータのソースと表示</a>](#source-and-display-of-monitoring-data)セクションで示した例では、データはタイプごとにグループ化されています。他のディメンションでグループ化して、どのディメンションが使用可能であるかをすぐに確認できるかどうかを知りたい場合は、次の方法を使用できます。**クエリ式ではメトリクス名のみを保持し、計算は行わず、 `Legend format`フィールドを空白のままにします**。このようにして、元のメトリクスが表示されます。たとえば、次の図は、3 つの次元 ( `instance` 、 `job` 、および`type` ) があることを示しています。
+[モニタリングデータのソースと表示](#source-and-display-of-monitoring-data)セクションで示した例では、データはタイプごとにグループ化されています。他のディメンションでグループ化して、どのディメンションが使用可能であるかをすぐに確認できるかどうかを知りたい場合は、次の方法を使用できます。**クエリ式ではメトリクス名のみを保持し、計算は行わず、 `Legend format`フィールドを空白のままにします**。このようにして、元のメトリクスが表示されます。たとえば、次の図は、3 つの次元 ( `instance` 、 `job` 、および`type` ) があることを示しています。
 
 ![Edit query expression and check all dimensions](/media/best-practices/edit-expression-check-dimensions.jpg)
 

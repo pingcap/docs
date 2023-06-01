@@ -4,7 +4,7 @@ title: tiup cluster reload
 
 # tiup cluster reload {#tiup-cluster-reload}
 
-[<a href="/tiup/tiup-component-cluster-edit-config.md">クラスタ構成の変更</a>](/tiup/tiup-component-cluster-edit-config.md)の後、構成を有効にするには、 `tiup cluster reload`コマンドを使用してクラスターをリロードする必要があります。このコマンドは、サービスが実行されているリモート マシンに制御マシンの構成を公開し、アップグレード プロセスに従ってサービスを順番に再起動します。クラスターは再起動プロセス中も引き続き使用できます。
+[クラスタ構成の変更](/tiup/tiup-component-cluster-edit-config.md)の後、構成を有効にするには、 `tiup cluster reload`コマンドを使用してクラスターをリロードする必要があります。このコマンドは、サービスが実行されているリモート マシンに制御マシンの構成を公開し、アップグレード プロセスに従ってサービスを順番に再起動します。クラスターは再起動プロセス中も引き続き使用できます。
 
 ## 構文 {#syntax}
 
@@ -40,7 +40,7 @@ tiup cluster reload <cluster-name> [flags]
 
 ### -N、--node {#n-node}
 
--   再起動するノードを指定します。指定しない場合、すべてのノードが再起動されます。このオプションの値は、ノード ID のカンマ区切りリストです。ノード ID は、 [<a href="/tiup/tiup-component-cluster-display.md">`tiup cluster display`</a>](/tiup/tiup-component-cluster-display.md)コマンドによって返されるクラスター ステータス テーブルの最初の列から取得できます。
+-   再起動するノードを指定します。指定しない場合、すべてのノードが再起動されます。このオプションの値は、ノード ID のカンマ区切りリストです。ノード ID は、 [`tiup cluster display`](/tiup/tiup-component-cluster-display.md)コマンドによって返されるクラスター ステータス テーブルの最初の列から取得できます。
 -   データ型: `STRINGS`
 -   このオプションがコマンドで指定されていない場合、デフォルトですべてのノードが選択されます。
 
@@ -51,7 +51,7 @@ tiup cluster reload <cluster-name> [flags]
 
 ### -R、--役割 {#r-role}
 
--   再起動するロールを指定します。指定しない場合、すべてのロールが再起動されます。このオプションの値は、ノードの役割のカンマ区切りのリストです。ロールは[<a href="/tiup/tiup-component-cluster-display.md">クラスタのステータス</a>](/tiup/tiup-component-cluster-display.md)テーブルの 2 列目です。
+-   再起動するロールを指定します。指定しない場合、すべてのロールが再起動されます。このオプションの値は、ノードの役割のカンマ区切りのリストです。ロールは[クラスタのステータス](/tiup/tiup-component-cluster-display.md)テーブルの 2 列目です。
 -   データ型: `STRINGS`
 -   このオプションがコマンドで指定されていない場合、デフォルトですべてのロールが選択されます。
 
@@ -82,4 +82,4 @@ tiup cluster reload <cluster-name> [flags]
 
 tiup-clusterの実行ログ。
 
-[<a href="/tiup/tiup-component-cluster.md#command-list">&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト</a>](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト](/tiup/tiup-component-cluster.md#command-list)

@@ -17,7 +17,7 @@ TTL は、オンラインの読み取りおよび書き込みのワークロー�
 
 ## 構文 {#syntax}
 
-[<a href="/sql-statements/sql-statement-create-table.md">`CREATE TABLE`</a>](/sql-statements/sql-statement-create-table.md)または[<a href="/sql-statements/sql-statement-alter-table.md">`ALTER TABLE`</a>](/sql-statements/sql-statement-alter-table.md)ステートメントを使用して、テーブルの TTL 属性を構成できます。
+[`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md)ステートメントを使用して、テーブルの TTL 属性を構成できます。
 
 ### TTL属性を持つテーブルを作成する {#create-a-table-with-a-ttl-attribute}
 
@@ -78,7 +78,7 @@ TTL は、オンラインの読み取りおよび書き込みのワークロー�
 
 ### TTL とデータ型のデフォルト値 {#ttl-and-the-default-values-of-data-types}
 
-TTL は[<a href="/data-type-default-values.md">データ型のデフォルト値</a>](/data-type-default-values.md)と併用できます。以下に 2 つの一般的な使用例を示します。
+TTL は[データ型のデフォルト値](/data-type-default-values.md)と併用できます。以下に 2 つの一般的な使用例を示します。
 
 -   列のデフォルト値を現在の作成時刻として指定し、この列を TTL タイムスタンプ列として使用するには、 `DEFAULT CURRENT_TIMESTAMP`を使用します。 3 か月前に作成されたレコードは期限切れになります。
 
@@ -100,7 +100,7 @@ TTL は[<a href="/data-type-default-values.md">データ型のデフォルト値
 
 ### TTL と生成された列 {#ttl-and-generated-columns}
 
-TTL と[<a href="/generated-columns.md">生成された列</a>](/generated-columns.md)を併用して、複雑な有効期限ルールを構成できます。例えば：
+TTL と[生成された列](/generated-columns.md)を併用して、複雑な有効期限ルールを構成できます。例えば：
 
 ```sql
 CREATE TABLE message (
@@ -116,7 +116,7 @@ CREATE TABLE message (
 
 前述のステートメントでは、 `expire_at`列を TTL タイムスタンプ列として使用し、メッセージ タイプに応じて有効期限を設定します。メッセージが画像の場合、有効期限は 5 日です。それ以外の場合は、30 日で期限切れになります。
 
-TTL は[<a href="/data-type-json.md">JSONタイプ</a>](/data-type-json.md)と併用できます。例えば：
+TTL は[JSONタイプ](/data-type-json.md)と併用できます。例えば：
 
 ```sql
 CREATE TABLE orders (
@@ -136,15 +136,15 @@ ALTER TABLE orders TTL_JOB_INTERVAL = '24h';
 
 デフォルトでは`TTL_JOB_INTERVAL` `1h`に設定されます。
 
-TTL ジョブを実行するとき、TiDB はテーブルを最大 64 のタスクに分割します。リージョンは最小単位です。これらのタスクは分散的に実行されます。システム変数[<a href="/system-variables.md#tidb_ttl_running_tasks-new-in-v700">`tidb_ttl_running_tasks`</a>](/system-variables.md#tidb_ttl_running_tasks-new-in-v700)を設定することで、クラスター全体での同時 TTL タスクの数を制限できます。ただし、すべての種類のテーブルのすべての TTL ジョブをタスクに分割できるわけではありません。どの種類のテーブルの TTL ジョブをタスクに分割できないかについて詳しくは、 [<a href="#limitations">制限事項</a>](#limitations)セクションを参照してください。
+TTL ジョブを実行するとき、TiDB はテーブルを最大 64 のタスクに分割します。リージョンは最小単位です。これらのタスクは分散的に実行されます。システム変数[制限事項](#limitations)セクションを参照してください。
 
-TTL ジョブの実行を無効にするには、 `TTL_ENABLE='OFF'`テーブル オプションを設定するだけでなく、 [<a href="/system-variables.md#tidb_ttl_job_enable-new-in-v650">`tidb_ttl_job_enable`</a>](/system-variables.md#tidb_ttl_job_enable-new-in-v650)グローバル変数を設定してクラスター全体で TTL ジョブの実行を無効にすることもできます。
+TTL ジョブの実行を無効にするには、 `TTL_ENABLE='OFF'`テーブル オプションを設定するだけでなく、 [`tidb_ttl_job_enable`](/system-variables.md#tidb_ttl_job_enable-new-in-v650)グローバル変数を設定してクラスター全体で TTL ジョブの実行を無効にすることもできます。
 
 ```sql
 SET @@global.tidb_ttl_job_enable = OFF;
 ```
 
-シナリオによっては、特定の時間枠内でのみ TTL ジョブの実行を許可したい場合があります。この場合、 [<a href="/system-variables.md#tidb_ttl_job_schedule_window_start_time-new-in-v650">`tidb_ttl_job_schedule_window_start_time`</a>](/system-variables.md#tidb_ttl_job_schedule_window_start_time-new-in-v650)と[<a href="/system-variables.md#tidb_ttl_job_schedule_window_end_time-new-in-v650">`tidb_ttl_job_schedule_window_end_time`</a>](/system-variables.md#tidb_ttl_job_schedule_window_end_time-new-in-v650)グローバル変数を設定して時間枠を指定できます。例えば：
+シナリオによっては、特定の時間枠内でのみ TTL ジョブの実行を許可したい場合があります。この場合、 [`tidb_ttl_job_schedule_window_end_time`](/system-variables.md#tidb_ttl_job_schedule_window_end_time-new-in-v650)グローバル変数を設定して時間枠を指定できます。例えば：
 
 ```sql
 SET @@global.tidb_ttl_job_schedule_window_start_time = '01:00 +0000';
@@ -167,7 +167,7 @@ TiDB は、TTL に関するランタイム情報を定期的に収集し、Grafa
 
 <CustomContent platform="tidb">
 
-メトリクスの詳細については、 [<a href="/grafana-tidb-dashboard.md">TiDB モニタリングメトリクス</a>](/grafana-tidb-dashboard.md)の TTL セクションを参照してください。
+メトリクスの詳細については、 [TiDB モニタリングメトリクス](/grafana-tidb-dashboard.md)の TTL セクションを参照してください。
 
 </CustomContent>
 
@@ -241,9 +241,9 @@ TTL は、他の TiDB 移行、バックアップ、およびリカバリ ツー
 
 | 機能名                                                                                                                                                               | 説明                                                                                                                                                                                                                                 |
 | :---------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [<a href="/sql-statements/sql-statement-flashback-table.md">`FLASHBACK TABLE`</a>](/sql-statements/sql-statement-flashback-table.md)                              | `FLASHBACK TABLE`指定すると、テーブルの`TTL_ENABLE`属性が`OFF`に設定されます。これにより、TiDB がフラッシュバック後に期限切れのデータをすぐに削除するのを防ぎます。各テーブルの TTL を再度有効にするには、 `TTL_ENABLE`属性を手動でオンにする必要があります。                                                                        |
-| [<a href="/sql-statements/sql-statement-flashback-database.md">`FLASHBACK DATABASE`</a>](/sql-statements/sql-statement-flashback-database.md)                     | `FLASHBACK DATABASE`指定すると、テーブルの`TTL_ENABLE`属性が`OFF`に設定され、 `TTL_ENABLE`属性は変更されません。これにより、TiDB がフラッシュバック後に期限切れのデータをすぐに削除するのを防ぎます。各テーブルの TTL を再度有効にするには、 `TTL_ENABLE`属性を手動でオンにする必要があります。                                               |
-| [<a href="/sql-statements/sql-statement-flashback-to-timestamp.md">`FLASHBACK CLUSTER TO TIMESTAMP`</a>](/sql-statements/sql-statement-flashback-to-timestamp.md) | `FLASHBACK CLUSTER TO TIMESTAMP`指定すると、システム変数[<a href="/system-variables.md#tidb_ttl_job_enable-new-in-v650">`TIDB_TTL_JOB_ENABLE`</a>](/system-variables.md#tidb_ttl_job_enable-new-in-v650) `OFF`に設定され、 `TTL_ENABLE`属性の値は変更されません。 |
+| [`FLASHBACK TABLE`](/sql-statements/sql-statement-flashback-table.md)                              | `FLASHBACK TABLE`指定すると、テーブルの`TTL_ENABLE`属性が`OFF`に設定されます。これにより、TiDB がフラッシュバック後に期限切れのデータをすぐに削除するのを防ぎます。各テーブルの TTL を再度有効にするには、 `TTL_ENABLE`属性を手動でオンにする必要があります。                                                                        |
+| [`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md)                     | `FLASHBACK DATABASE`指定すると、テーブルの`TTL_ENABLE`属性が`OFF`に設定され、 `TTL_ENABLE`属性は変更されません。これにより、TiDB がフラッシュバック後に期限切れのデータをすぐに削除するのを防ぎます。各テーブルの TTL を再度有効にするには、 `TTL_ENABLE`属性を手動でオンにする必要があります。                                               |
+| [`TIDB_TTL_JOB_ENABLE`](/system-variables.md#tidb_ttl_job_enable-new-in-v650) `OFF`に設定され、 `TTL_ENABLE`属性の値は変更されません。 |
 
 ## 制限事項 {#limitations}
 
@@ -252,8 +252,8 @@ TTL は、他の TiDB 移行、バックアップ、およびリカバリ ツー
 -   TTL 属性は、ローカル一時テーブルやグローバル一時テーブルなどの一時テーブルには設定できません。
 -   TTL 属性を持つテーブルは、外部キー制約の主テーブルとして他のテーブルから参照されることをサポートしません。
 -   期限切れのデータがすべて直ちに削除されるという保証はありません。期限切れのデータが削除される時間は、バックグラウンド クリーンアップ ジョブのスケジュール間隔とスケジュール期間によって異なります。
--   [<a href="/clustered-indexes.md">クラスター化インデックス</a>](/clustered-indexes.md)を使用するテーブルの場合、主キーが整数でもバイナリ文字列タイプでもない場合、TTL ジョブを複数のタスクに分割することはできません。これにより、TTL ジョブが単一の TiDB ノード上で順次実行されます。テーブルに大量のデータが含まれている場合、TTL ジョブの実行が遅くなる可能性があります。
--   [<a href="https://docs.pingcap.com/tidbcloud/select-cluster-tier#serverless-tier-beta">TiDB CloudServerless Tier</a>](https://docs.pingcap.com/tidbcloud/select-cluster-tier#serverless-tier-beta)では TTL は使用できません。
+-   [クラスター化インデックス](/clustered-indexes.md)を使用するテーブルの場合、主キーが整数でもバイナリ文字列タイプでもない場合、TTL ジョブを複数のタスクに分割することはできません。これにより、TTL ジョブが単一の TiDB ノード上で順次実行されます。テーブルに大量のデータが含まれている場合、TTL ジョブの実行が遅くなる可能性があります。
+-   [TiDB CloudServerless Tier](https://docs.pingcap.com/tidbcloud/select-cluster-tier#serverless-tier-beta)では TTL は使用できません。
 
 ## よくある質問 {#faqs}
 
@@ -261,7 +261,7 @@ TTL は、他の TiDB 移行、バックアップ、およびリカバリ ツー
 
 -   データ サイズを比較的安定に保つのに十分な速度で削除されているかどうかを判断するにはどうすればよいですか?
 
-    [<a href="/grafana-tidb-dashboard.md">Grafana `TiDB`ダッシュボード</a>](/grafana-tidb-dashboard.md)のパネル`TTL Insert Rows Per Hour`は、前の 1 時間に挿入された行の合計数を記録します。対応する`TTL Delete Rows Per Hour`前の 1 時間に TTL タスクによって削除された行の合計数を記録します。 `TTL Insert Rows Per Hour`が`TTL Delete Rows Per Hour`より高い状態が長期間続く場合は、挿入率が削除率よりも高く、データの総量が増加することを意味します。例えば：
+    [Grafana `TiDB`ダッシュボード](/grafana-tidb-dashboard.md)のパネル`TTL Insert Rows Per Hour`は、前の 1 時間に挿入された行の合計数を記録します。対応する`TTL Delete Rows Per Hour`前の 1 時間に TTL タスクによって削除された行の合計数を記録します。 `TTL Insert Rows Per Hour`が`TTL Delete Rows Per Hour`より高い状態が長期間続く場合は、挿入率が削除率よりも高く、データの総量が増加することを意味します。例えば：
 
     ![insert fast example](/media/ttl/insert-fast.png)
 

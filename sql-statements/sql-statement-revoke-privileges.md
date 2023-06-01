@@ -94,15 +94,15 @@ ERROR 1141 (42000): There is no such grant defined for user 'newuser' on host '%
 
 ## MySQLの互換性 {#mysql-compatibility}
 
--   TiDB では、 `REVOKE <privileges>`ステートメントが正常に実行されると、実行結果が現在の接続に即座に反映されます。一方、 [<a href="https://dev.mysql.com/doc/refman/8.0/en/privilege-changes.html">MySQL では、一部の権限については、実行結果は後続の接続でのみ有効になります。</a>](https://dev.mysql.com/doc/refman/8.0/en/privilege-changes.html) 。詳細は[<a href="https://github.com/pingcap/tidb/issues/39356">TiDB #39356</a>](https://github.com/pingcap/tidb/issues/39356)を参照してください。
+-   TiDB では、 `REVOKE <privileges>`ステートメントが正常に実行されると、実行結果が現在の接続に即座に反映されます。一方、 [TiDB #39356](https://github.com/pingcap/tidb/issues/39356)を参照してください。
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-grant-privileges.md">`GRANT &#x3C;privileges>`</a>](/sql-statements/sql-statement-grant-privileges.md)
--   [<a href="/sql-statements/sql-statement-show-grants.md">助成金を表示する</a>](/sql-statements/sql-statement-show-grants.md)
+-   [`GRANT &#x3C;privileges>`](/sql-statements/sql-statement-grant-privileges.md)
+-   [助成金を表示する](/sql-statements/sql-statement-show-grants.md)
 
 <CustomContent platform="tidb">
 
--   [<a href="/privilege-management.md">権限管理</a>](/privilege-management.md)
+-   [権限管理](/privilege-management.md)
 
 </CustomContent>

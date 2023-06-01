@@ -34,7 +34,7 @@ summary: Learn how to troubleshoot the issue of increased read and write latency
 -   実行計画をバインドする
     -   アプリケーション SQL ステートメントを変更し、 `use index`実行して列のインデックスを一貫して使用します。
     -   3.0 バージョンでは、アプリケーション SQL ステートメントを変更する必要はありません。 `create global binding`を使用して`force index`のバインディング SQL ステートメントを作成します。
-    -   4.0 バージョンでは[<a href="/sql-plan-management.md">SQL計画管理</a>](/sql-plan-management.md)がサポートされており、不安定な実行プランによって引き起こされるパフォーマンスの低下を回避します。
+    -   4.0 バージョンでは[SQL計画管理](/sql-plan-management.md)がサポートされており、不安定な実行プランによって引き起こされるパフォーマンスの低下を回避します。
 
 ### PD異常 {#pd-anomalies}
 
@@ -50,21 +50,21 @@ PD TSO の`wait duration`メトリックが異常に増加しています。こ�
 
 -   サーバー負荷が高い。ログには`server is likely overloaded`表示されます。
 
--   PD はLeaderを選出できません: PD ログには`lease is not expired`表示されます。 [<a href="https://github.com/etcd-io/etcd/issues/10355">この問題</a>](https://github.com/etcd-io/etcd/issues/10355) v3.0.x および v2.1.19 で修正されました。
+-   PD はLeaderを選出できません: PD ログには`lease is not expired`表示されます。 [この問題](https://github.com/etcd-io/etcd/issues/10355) v3.0.x および v2.1.19 で修正されました。
 
 -   リーダー選出は遅々として進まない。リージョンのロード時間が長い。 PD ログで`grep "regions cost"`を実行すると、この問題を確認できます。結果が`load 460927 regions cost 11.77099s`などの秒単位の場合は、リージョンの読み込みが遅いことを意味します。 v3.0 では`use-region-storage`を`true`に設定することで`region storage`機能を有効にすることができ、これによりリージョンの読み込み時間が大幅に短縮されます。
 
 -   TiDB と PD の間のネットワークの問題。 **Grafana** -&gt; **blackbox_exporter** -&gt; **ping レイテンシー**モニターにアクセスして、TiDB から PD Leaderまでのネットワークが正常に動作しているかどうかを確認します。
 
--   PD は`FATAL`エラーを報告し、ログには`range failed to find revision pair`が表示されます。この問題は v3.0.8 ( [<a href="https://github.com/pingcap/pd/pull/2040">#2040</a>](https://github.com/pingcap/pd/pull/2040) ) で修正されました。
+-   PD は`FATAL`エラーを報告し、ログには`range failed to find revision pair`が表示されます。この問題は v3.0.8 ( [#2040](https://github.com/pingcap/pd/pull/2040) ) で修正されました。
 
--   `/api/v1/regions`インターフェイスが使用される場合、リージョンが多すぎると PD OOM が発生する可能性があります。この問題は v3.0.8 ( [<a href="https://github.com/pingcap/pd/pull/1986">#1986</a>](https://github.com/pingcap/pd/pull/1986) ) で修正されました。
+-   `/api/v1/regions`インターフェイスが使用される場合、リージョンが多すぎると PD OOM が発生する可能性があります。この問題は v3.0.8 ( [#1986](https://github.com/pingcap/pd/pull/1986) ) で修正されました。
 
--   ローリング アップグレード中の PD OOM。 gRPC メッセージのサイズには制限がなく、モニターには`TCP InSegs`が比較的大きいことが示されます。この問題は v3.0.6 ( [<a href="https://github.com/pingcap/pd/pull/1952">#1952</a>](https://github.com/pingcap/pd/pull/1952) ) で修正されました。
+-   ローリング アップグレード中の PD OOM。 gRPC メッセージのサイズには制限がなく、モニターには`TCP InSegs`が比較的大きいことが示されます。この問題は v3.0.6 ( [#1952](https://github.com/pingcap/pd/pull/1952) ) で修正されました。
 
--   PDはパニックに陥ります。 [<a href="https://github.com/tikv/pd/issues/new?labels=kind/bug&#x26;template=bug-report.md">バグを報告</a>](https://github.com/tikv/pd/issues/new?labels=kind/bug&#x26;template=bug-report.md) .
+-   PDはパニックに陥ります。 [バグを報告](https://github.com/tikv/pd/issues/new?labels=kind/bug&#x26;template=bug-report.md) .
 
--   その他の原因。 `curl http://127.0.0.1:2379/debug/pprof/goroutine?debug=2`と[<a href="https://github.com/pingcap/pd/issues/new?labels=kind%2Fbug&#x26;template=bug-report.md">バグを報告</a>](https://github.com/pingcap/pd/issues/new?labels=kind%2Fbug&#x26;template=bug-report.md)を実行して goroutine を取得します。
+-   その他の原因。 `curl http://127.0.0.1:2379/debug/pprof/goroutine?debug=2`と[バグを報告](https://github.com/pingcap/pd/issues/new?labels=kind%2Fbug&#x26;template=bug-report.md)を実行して goroutine を取得します。
 
 ### TiKV の異常 {#tikv-anomalies}
 
@@ -77,7 +77,7 @@ PD TSO の`wait duration`メトリックが異常に増加しています。こ�
 -   `gRPC duration`メトリックを確認します。このメトリクスは、TiKV での gRPC リクエストの合計時間を表します。 TiKV の`gRPC duration` TiDB の`KV duration`を比較することで、潜在的なネットワークの問題を見つけることができます。たとえば、gRPC の期間は短いですが、TiDB の KV の期間は長く、これは、TiDB と TiKV の間のネットワークレイテンシーが高い可能性があるか、TiDB と TiKV の間の NIC 帯域幅が完全に占有されている可能性があることを示しています。
 
 -   TiKV再始動のため再選。
-    -   TiKV がパニックになった後は、 `systemd`にプルアップされ、正常に動作します。panicが発生したかどうかは、TiKV ログを表示することで確認できます。この問題は予期せぬものであるため、発生した場合は[<a href="https://github.com/tikv/tikv/issues/new?template=bug-report.md">バグを報告</a>](https://github.com/tikv/tikv/issues/new?template=bug-report.md) 。
+    -   TiKV がパニックになった後は、 `systemd`にプルアップされ、正常に動作します。panicが発生したかどうかは、TiKV ログを表示することで確認できます。この問題は予期せぬものであるため、発生した場合は[バグを報告](https://github.com/tikv/tikv/issues/new?template=bug-report.md) 。
     -   TiKV は第三者によって停止または強制終了され、 `systemd`つ引き上げられます。 `dmesg`とTiKVログを参照して原因を確認してください。
     -   TiKV は OOM であるため、再起動が発生します。
     -   TiKV は、 `THP` (透明な巨大ページ) を動的に調整するためにハングします。

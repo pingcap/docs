@@ -5,13 +5,13 @@ summary: Learn about the release notes of TiDB Cloud in 2021.
 
 # 2021 年のTiDB Cloudリリース ノート {#tidb-cloud-release-notes-in-2021}
 
-このページには2021年[<a href="https://www.pingcap.com/tidb-cloud/">TiDB Cloud</a>](https://www.pingcap.com/tidb-cloud/)のリリースノートを記載しています。
+このページには2021年[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリースノートを記載しています。
 
 ## 2021年12月28日 {#december-28-2021}
 
 新機能：
 
--   サポート[<a href="/tidb-cloud/import-parquet-files.md">Amazon S3 または GCS からTiDB Cloudへの Apache Parquet ファイルのインポート</a>](/tidb-cloud/import-parquet-files.md)
+-   サポート[Amazon S3 または GCS からTiDB Cloudへの Apache Parquet ファイルのインポート](/tidb-cloud/import-parquet-files.md)
 
 バグの修正：
 
@@ -22,11 +22,11 @@ summary: Learn about the release notes of TiDB Cloud in 2021.
 
 全体的な変更:
 
--   Developer TierのTiDB Cloudを[<a href="https://docs.pingcap.com/tidb/stable/release-5.3.0">TiDB v5.3.0</a>](https://docs.pingcap.com/tidb/stable/release-5.3.0)にアップグレードする
+-   Developer TierのTiDB Cloudを[TiDB v5.3.0](https://docs.pingcap.com/tidb/stable/release-5.3.0)にアップグレードする
 
 新機能：
 
--   サポート[<a href="/tidb-cloud/set-up-vpc-peering-connections.md">TiDB クラウド プロジェクトに VPC CIDR を追加する</a>](/tidb-cloud/set-up-vpc-peering-connections.md)
+-   サポート[TiDB クラウド プロジェクトに VPC CIDR を追加する](/tidb-cloud/set-up-vpc-peering-connections.md)
 
 改善点:
 
@@ -40,7 +40,7 @@ summary: Learn about the release notes of TiDB Cloud in 2021.
 
 ## 2021年11月8日 {#november-8-2021}
 
--   Launch [<a href="/tidb-cloud/select-cluster-tier.md#serverless-tier-beta">Developer Tier</a>](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) : TiDB Cloudの 1 年間の無料トライアルを提供します
+-   Launch [Developer Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) : TiDB Cloudの 1 年間の無料トライアルを提供します
 
     各Developer Tierクラスターはフル機能の TiDB クラスターであり、以下が付属しています。
 
@@ -48,25 +48,25 @@ summary: Learn about the release notes of TiDB Cloud in 2021.
     -   1 つの TiKV 共有ノード (500 MiB の OLTPstorageを搭載)
     -   1 つのTiFlash共有ノード (500 MiB の OLAPstorageを搭載)
 
-    始めましょう[<a href="/tidb-cloud/tidb-cloud-quickstart.md">ここ</a>](/tidb-cloud/tidb-cloud-quickstart.md) .
+    始めましょう[ここ](/tidb-cloud/tidb-cloud-quickstart.md) .
 
 ## 2021年10月21日 {#october-21-2021}
 
 -   個人メールアカウントへのユーザー登録を開く
--   サポート[<a href="/tidb-cloud/migrate-from-amazon-s3-or-gcs.md">Amazon S3 または GCS からTiDB Cloudへのインポートまたは移行</a>](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md)
+-   サポート[Amazon S3 または GCS からTiDB Cloudへのインポートまたは移行](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md)
 
 ## 2021年10月11日 {#october-11-2021}
 
--   サポート[<a href="/tidb-cloud/tidb-cloud-billing.md#billing-details">TiDB Cloudの請求詳細の表示とエクスポート</a>](/tidb-cloud/tidb-cloud-billing.md#billing-details) 、各サービスおよび各プロジェクトの費用を含む
+-   サポート[TiDB Cloudの請求詳細の表示とエクスポート](/tidb-cloud/tidb-cloud-billing.md#billing-details) 、各サービスおよび各プロジェクトの費用を含む
 -   TiDB Cloud の内部機能のいくつかの問題を修正
 
 ## 2021年9月16日 {#september-16-2021}
 
--   新しくデプロイされたクラスターのデフォルトの TiDB バージョンを 5.2.0 から 5.2.1 にアップグレードします。 5.2.1 の詳細な変更点については、リリース ノート[<a href="https://docs.pingcap.com/tidb/stable/release-5.2.1">5.2.1</a>](https://docs.pingcap.com/tidb/stable/release-5.2.1)を参照してください。
+-   新しくデプロイされたクラスターのデフォルトの TiDB バージョンを 5.2.0 から 5.2.1 にアップグレードします。 5.2.1 の詳細な変更点については、リリース ノート[5.2.1](https://docs.pingcap.com/tidb/stable/release-5.2.1)を参照してください。
 
 ## 2021年9月2日 {#september-2-2021}
 
--   新しくデプロイされたクラスターのデフォルトの TiDB バージョンを 5.0.2 から 5.2.0 にアップグレードします。 TiDB 5.1.0 および 5.2.0 の機能の詳細については、リリース ノート[<a href="https://docs.pingcap.com/tidb/stable/release-5.2.0">5.2.0</a>](https://docs.pingcap.com/tidb/stable/release-5.2.0)および[<a href="https://docs.pingcap.com/tidb/stable/release-5.1.0">5.1.0</a>](https://docs.pingcap.com/tidb/stable/release-5.1.0)参照してください。
+-   新しくデプロイされたクラスターのデフォルトの TiDB バージョンを 5.0.2 から 5.2.0 にアップグレードします。 TiDB 5.1.0 および 5.2.0 の機能の詳細については、リリース ノート[5.1.0](https://docs.pingcap.com/tidb/stable/release-5.1.0)参照してください。
 -   TiDB Cloud の内部機能のいくつかの問題を修正しました。
 
 ## 2021年8月19日 {#august-19-2021}
@@ -87,11 +87,11 @@ summary: Learn about the release notes of TiDB Cloud in 2021.
 
 ## 2021年7月6日 {#july-6-2021}
 
--   新しくデプロイされたクラスターのデフォルトの TiDB バージョンを 4.0.11 から 5.0.2 にアップグレードします。このアップグレードにより、パフォーマンスと機能が大幅に向上します。詳細については[<a href="https://docs.pingcap.com/tidb/stable/release-5.0.0">ここ</a>](https://docs.pingcap.com/tidb/stable/release-5.0.0)を参照してください。
+-   新しくデプロイされたクラスターのデフォルトの TiDB バージョンを 4.0.11 から 5.0.2 にアップグレードします。このアップグレードにより、パフォーマンスと機能が大幅に向上します。詳細については[ここ](https://docs.pingcap.com/tidb/stable/release-5.0.0)を参照してください。
 
 ## 2021年6月25日 {#june-25-2021}
 
--   [<a href="https://en.pingcap.com/products/tidbcloud/pricing/">TiDB Cloudの料金</a>](https://en.pingcap.com/products/tidbcloud/pricing/)ページで**リージョンの選択が**機能しない問題を修正
+-   [TiDB Cloudの料金](https://en.pingcap.com/products/tidbcloud/pricing/)ページで**リージョンの選択が**機能しない問題を修正
 
 ## 2021年6月24日 {#june-24-2021}
 
@@ -110,7 +110,7 @@ summary: Learn about the release notes of TiDB Cloud in 2021.
 
 全般的
 
--   TiDB Cloud は現在パブリック プレビュー段階にあります。 [<a href="https://tidbcloud.com/signup">サインアップ</a>](https://tidbcloud.com/signup)試用オプションのいずれかを選択できます。
+-   TiDB Cloud は現在パブリック プレビュー段階にあります。 [サインアップ](https://tidbcloud.com/signup)試用オプションのいずれかを選択できます。
 
     -   48時間の無料トライアル
     -   2 週間の PoC 無料トライアル
@@ -119,8 +119,8 @@ summary: Learn about the release notes of TiDB Cloud in 2021.
 管理コンソール
 
 -   電子メール検証とロボット対策 reCAPTCHA がサインアップ プロセスに追加されました
--   [<a href="https://pingcap.com/legal/tidb-cloud-services-agreement">TiDB Cloudサービス契約</a>](https://pingcap.com/legal/tidb-cloud-services-agreement)と[<a href="https://pingcap.com/legal/privacy-policy/">PingCAP プライバシー ポリシー</a>](https://pingcap.com/legal/privacy-policy/)が更新されました
--   [<a href="/tidb-cloud/tidb-cloud-poc.md">実証実験</a>](/tidb-cloud/tidb-cloud-poc.md)は、コンソールの申請フォームに記入して申請できます。
+-   [PingCAP プライバシー ポリシー](https://pingcap.com/legal/privacy-policy/)が更新されました
+-   [実証実験](/tidb-cloud/tidb-cloud-poc.md)は、コンソールの申請フォームに記入して申請できます。
 -   UI を通じてサンプル データをTiDB Cloudクラスターにインポートできます
 -   混乱を避けるため、同じ名前のクラスターは許可されません
 -   **[サポート]**メニューの**[フィードバックを送信]**をクリックしてフィードバックを送信できます。

@@ -288,7 +288,7 @@ commit_txn: {prewrite:48.564544ms, wait_prewrite_binlog:47.821579, get_commit_ts
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/explain-overview.md">クエリ実行プランを理解する</a>](/explain-overview.md)
--   [<a href="/sql-statements/sql-statement-explain.md">EXPLAIN</a>](/sql-statements/sql-statement-explain.md)
--   [<a href="/sql-statements/sql-statement-analyze-table.md">分析テーブル</a>](/sql-statements/sql-statement-analyze-table.md)
--   [<a href="/sql-statements/sql-statement-trace.md">痕跡</a>](/sql-statements/sql-statement-trace.md)
+-   [クエリ実行プランを理解する](/explain-overview.md)
+-   [EXPLAIN](/sql-statements/sql-statement-explain.md)
+-   [分析テーブル](/sql-statements/sql-statement-analyze-table.md)
+-   [痕跡](/sql-statements/sql-statement-trace.md)

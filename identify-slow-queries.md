@@ -5,9 +5,9 @@ summary: Use the slow query log to identify problematic SQL statements.
 
 # 遅いクエリを特定する {#identify-slow-queries}
 
-ユーザーが遅いクエリを特定し、SQL 実行のパフォーマンスを分析して改善できるようにするために、TiDB は実行時間が[<a href="/system-variables.md#tidb_slow_log_threshold">`tidb_slow_log_threshold`</a>](/system-variables.md#tidb_slow_log_threshold) (デフォルト値は 300 ミリ秒) から[<a href="/tidb-configuration-file.md#slow-query-file">スロークエリファイル</a>](/tidb-configuration-file.md#slow-query-file) (デフォルト値は「tidb-slow.log」) を超えるステートメントを出力します。
+ユーザーが遅いクエリを特定し、SQL 実行のパフォーマンスを分析して改善できるようにするために、TiDB は実行時間が[スロークエリファイル](/tidb-configuration-file.md#slow-query-file) (デフォルト値は「tidb-slow.log」) を超えるステートメントを出力します。
 
-TiDB はデフォルトで低速クエリ ログを有効にします。システム変数[<a href="/system-variables.md#tidb_enable_slow_log">`tidb_enable_slow_log`</a>](/system-variables.md#tidb_enable_slow_log)を変更することで、この機能を有効または無効にできます。
+TiDB はデフォルトで低速クエリ ログを有効にします。システム変数[`tidb_enable_slow_log`](/system-variables.md#tidb_enable_slow_log)を変更することで、この機能を有効または無効にできます。
 
 ## 使用例 {#usage-example}
 
@@ -89,7 +89,7 @@ insert into t select * from t;
 -   `Write_sql_response_total` : このステートメントによって結果をクライアントに送信するために費やされた時間。
 -   `Result_rows` : クエリ結果の行数。
 -   `IsExplicitTxn` : このステートメントが明示的なトランザクション内にあるかどうか。値が`false`の場合、トランザクションは`autocommit=1`であり、ステートメントは実行後に自動的にコミットされます。
--   `Warnings` : このステートメントの実行中に生成される JSON 形式の警告。これらの警告は通常、 [<a href="/sql-statements/sql-statement-show-warnings.md">`SHOW WARNINGS`</a>](/sql-statements/sql-statement-show-warnings.md)ステートメントの出力と一致しますが、より多くの診断情報を提供する追加の警告が含まれる場合があります。これらの追加の警告は`IsExtra: true`としてマークされます。
+-   `Warnings` : このステートメントの実行中に生成される JSON 形式の警告。これらの警告は通常、 [`SHOW WARNINGS`](/sql-statements/sql-statement-show-warnings.md)ステートメントの出力と一致しますが、より多くの診断情報を提供する追加の警告が含まれる場合があります。これらの追加の警告は`IsExtra: true`としてマークされます。
 
 次のフィールドはトランザクションの実行に関連します。
 
@@ -162,10 +162,10 @@ TiKVコプロセッサータスク フィールド:
 
 ## 関連するシステム変数 {#related-system-variables}
 
--   [<a href="/system-variables.md#tidb_slow_log_threshold">`tidb_slow_log_threshold`</a>](/system-variables.md#tidb_slow_log_threshold) : スローログのしきい値を設定します。実行時間がこのしきい値を超えたSQL文はスローログに記録されます。デフォルト値は 300 (ミリ秒) です。
--   [<a href="/system-variables.md#tidb_query_log_max_len">`tidb_query_log_max_len`</a>](/system-variables.md#tidb_query_log_max_len) : スローログに記録されるSQL文の最大長を設定します。デフォルト値は 4096 (バイト) です。
--   [<a href="/system-variables.md#tidb_redact_log">tidb_redact_log</a>](/system-variables.md#tidb_redact_log) : スローログに記録される SQL ステートメント`?`を使用してユーザーデータを非感作するかどうかを決定します。デフォルト値は`0`で、これは機能を無効にすることを意味します。
--   [<a href="/system-variables.md#tidb_enable_collect_execution_info">`tidb_enable_collect_execution_info`</a>](/system-variables.md#tidb_enable_collect_execution_info) : 各オペレーターの物理的な実行情報を実行計画に記録するかどうかを決定します。デフォルト値は`1`です。この機能はパフォーマンスに約 3% 影響します。この機能を有効にすると、次のように`Plan`情報を表示できます。
+-   [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold) : スローログのしきい値を設定します。実行時間がこのしきい値を超えたSQL文はスローログに記録されます。デフォルト値は 300 (ミリ秒) です。
+-   [`tidb_query_log_max_len`](/system-variables.md#tidb_query_log_max_len) : スローログに記録されるSQL文の最大長を設定します。デフォルト値は 4096 (バイト) です。
+-   [tidb_redact_log](/system-variables.md#tidb_redact_log) : スローログに記録される SQL ステートメント`?`を使用してユーザーデータを非感作するかどうかを決定します。デフォルト値は`0`で、これは機能を無効にすることを意味します。
+-   [`tidb_enable_collect_execution_info`](/system-variables.md#tidb_enable_collect_execution_info) : 各オペレーターの物理的な実行情報を実行計画に記録するかどうかを決定します。デフォルト値は`1`です。この機能はパフォーマンスに約 3% 影響します。この機能を有効にすると、次のように`Plan`情報を表示できます。
 
     ```sql
     > select tidb_decode_plan('jAOIMAk1XzE3CTAJMQlmdW5jczpjb3VudChDb2x1bW4jNyktPkMJC/BMNQkxCXRpbWU6MTAuOTMxNTA1bXMsIGxvb3BzOjIJMzcyIEJ5dGVzCU4vQQoxCTMyXzE4CTAJMQlpbmRleDpTdHJlYW1BZ2dfOQkxCXQRSAwyNzY4LkgALCwgcnBjIG51bTogMQkMEXMQODg0MzUFK0hwcm9jIGtleXM6MjUwMDcJMjA2HXsIMgk1BWM2zwAAMRnIADcVyAAxHcEQNQlOL0EBBPBbCjMJMTNfMTYJMQkzMTI4MS44NTc4MTk5MDUyMTcJdGFibGU6dCwgaW5kZXg6aWR4KGEpLCByYW5nZTpbLWluZiw1MDAwMCksIGtlZXAgb3JkZXI6ZmFsc2UJMjUBrgnQVnsA');
@@ -188,13 +188,13 @@ TiKVコプロセッサータスク フィールド:
 set @@tidb_enable_collect_execution_info=0;
 ```
 
-`Plan`フィールドの返される結果の形式は、 `EXPLAIN`または`EXPLAIN ANALYZE`の形式とほぼ同じです。実行計画の詳細については、 [<a href="/sql-statements/sql-statement-explain.md">`EXPLAIN`</a>](/sql-statements/sql-statement-explain.md)または[<a href="/sql-statements/sql-statement-explain-analyze.md">`EXPLAIN ANALYZE`</a>](/sql-statements/sql-statement-explain-analyze.md)を参照してください。
+`Plan`フィールドの返される結果の形式は、 `EXPLAIN`または`EXPLAIN ANALYZE`の形式とほぼ同じです。実行計画の詳細については、 [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)を参照してください。
 
-詳細については、 [<a href="/system-variables.md">TiDB 固有の変数と構文</a>](/system-variables.md)を参照してください。
+詳細については、 [TiDB 固有の変数と構文](/system-variables.md)を参照してください。
 
 ## 遅いログのメモリマッピング {#memory-mapping-in-slow-log}
 
-`INFORMATION_SCHEMA.SLOW_QUERY`テーブルをクエリすることで、スロー クエリ ログの内容をクエリできます。テーブル内の各列名は、スロー ログ内の 1 つのフィールド名に対応します。テーブルの構造については、 [<a href="/information-schema/information-schema-slow-query.md">情報スキーマ</a>](/information-schema/information-schema-slow-query.md)の`SLOW_QUERY`テーブルの概要を参照してください。
+`INFORMATION_SCHEMA.SLOW_QUERY`テーブルをクエリすることで、スロー クエリ ログの内容をクエリできます。テーブル内の各列名は、スロー ログ内の 1 つのフィールド名に対応します。テーブルの構造については、 [情報スキーマ](/information-schema/information-schema-slow-query.md)の`SLOW_QUERY`テーブルの概要を参照してください。
 
 > **ノート：**
 >
@@ -246,7 +246,7 @@ TiDB 4.0 の場合、 `SLOW_QUERY` 、ローテーションされたスロー �
 >
 > 指定した時間範囲のスロー ログ ファイルが削除されている場合、またはスロー クエリがない場合、クエリは NULL を返します。
 
-TiDB 4.0 では、すべての TiDB ノードのスロー クエリ情報をクエリするための[<a href="/information-schema/information-schema-slow-query.md#cluster_slow_query-table">`CLUSTER_SLOW_QUERY`</a>](/information-schema/information-schema-slow-query.md#cluster_slow_query-table)システム テーブルが追加されています。 `CLUSTER_SLOW_QUERY`テーブルのテーブル スキーマは、 `CLUSTER_SLOW_QUERY`に`INSTANCE`列が追加されるという点で`SLOW_QUERY`テーブルのテーブル スキーマとは異なります。 `INSTANCE`列は、スロー クエリの行情報の TiDB ノード アドレスを表します。 `CLUSTER_SLOW_QUERY` [<a href="/information-schema/information-schema-slow-query.md">`SLOW_QUERY`</a>](/information-schema/information-schema-slow-query.md)と同じように使用できます。
+TiDB 4.0 では、すべての TiDB ノードのスロー クエリ情報をクエリするための[`SLOW_QUERY`](/information-schema/information-schema-slow-query.md)と同じように使用できます。
 
 `CLUSTER_SLOW_QUERY`テーブルにクエリを実行すると、TiDB は他のノードからすべての低速クエリ情報を取得して 1 つの TiDB ノードで操作を実行するのではなく、計算と判断を他のノードにプッシュします。
 

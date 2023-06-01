@@ -9,7 +9,7 @@ summary: An overview of the usage of SHOW COLLATION for the TiDB database.
 
 > **ノート：**
 >
-> [<a href="/character-set-and-collation.md#new-framework-for-collations">「新しい照合順序ワーク」</a>](/character-set-and-collation.md#new-framework-for-collations)が有効な場合、 `SHOW COLLATION`の結果は異なります。新しい照合順序フレームワークの詳細については、 [<a href="/character-set-and-collation.md">文字セットと照合順序</a>](/character-set-and-collation.md)を参照してください。
+> [文字セットと照合順序](/character-set-and-collation.md)を参照してください。
 
 ## あらすじ {#synopsis}
 
@@ -59,9 +59,9 @@ mysql> SHOW COLLATION;
 
 ## MySQLの互換性 {#mysql-compatibility}
 
-このステートメントの使用法は、MySQL と完全な互換性があると理解されています。ただし、TiDB の文字セットには、MySQL と比較してデフォルトの照合順序が異なる場合があります。詳細は[<a href="/mysql-compatibility.md">MySQLとの互換性</a>](/mysql-compatibility.md)を参照してください。その他の互換性の違いは、GitHub では[<a href="https://github.com/pingcap/tidb/issues/new/choose">問題を通じて報告されました</a>](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
+このステートメントの使用法は、MySQL と完全な互換性があると理解されています。ただし、TiDB の文字セットには、MySQL と比較してデフォルトの照合順序が異なる場合があります。詳細は[問題を通じて報告されました](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-show-character-set.md">キャラクターセットを表示</a>](/sql-statements/sql-statement-show-character-set.md)
--   [<a href="/character-set-and-collation.md">文字セットと照合順序</a>](/character-set-and-collation.md)
+-   [キャラクターセットを表示](/sql-statements/sql-statement-show-character-set.md)
+-   [文字セットと照合順序](/character-set-and-collation.md)

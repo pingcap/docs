@@ -9,19 +9,19 @@ summary: A brief introduction to TiDB's CURD SQL.
 
 ## 始める前に {#before-you-start}
 
-TiDB クラスターに接続していることを確認してください。そうでない場合は、 [<a href="/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster">TiDB Cloud(Serverless Tier) で TiDBクラスタを構築する</a>](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してServerless Tierクラスターを作成します。
+TiDB クラスターに接続していることを確認してください。そうでない場合は、 [TiDB Cloud(Serverless Tier) で TiDBクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してServerless Tierクラスターを作成します。
 
 ## TiDB で SQL を探索する {#explore-sql-with-tidb}
 
 > **ノート：**
 >
-> このドキュメントでは[<a href="/basic-sql-operations.md">TiDB で SQL を探索する</a>](/basic-sql-operations.md)を参照し、簡略化しています。詳細については、 [<a href="/basic-sql-operations.md">TiDB で SQL を探索する</a>](/basic-sql-operations.md)を参照してください。
+> このドキュメントでは[TiDB で SQL を探索する](/basic-sql-operations.md)を参照してください。
 
-TiDB は MySQL と互換性があり、ほとんどの場合、MySQL ステートメントを直接使用できます。サポートされていない機能については、 [<a href="/mysql-compatibility.md#unsupported-features">MySQLとの互換性</a>](/mysql-compatibility.md#unsupported-features)を参照してください。
+TiDB は MySQL と互換性があり、ほとんどの場合、MySQL ステートメントを直接使用できます。サポートされていない機能については、 [MySQLとの互換性](/mysql-compatibility.md#unsupported-features)を参照してください。
 
-SQL を実験し、MySQL クエリと TiDB の互換性をテストするには、 [<a href="https://tour.tidb.io/">TiDB をインストールせずに Web ブラウザで直接実行します</a>](https://tour.tidb.io/)ことができます。最初に TiDB クラスターをデプロイしてから、その中で SQL ステートメントを実行することもできます。
+SQL を実験し、MySQL クエリと TiDB の互換性をテストするには、 [TiDB をインストールせずに Web ブラウザで直接実行します](https://tour.tidb.io/)ことができます。最初に TiDB クラスターをデプロイしてから、その中で SQL ステートメントを実行することもできます。
 
-このページでは、DDL、DML、CRUD 操作などの基本的なTiDB SQLステートメントについて説明します。 TiDB ステートメントの完全なリストについては、 [<a href="https://pingcap.github.io/sqlgram/">TiDB SQL構文図</a>](https://pingcap.github.io/sqlgram/)を参照してください。
+このページでは、DDL、DML、CRUD 操作などの基本的なTiDB SQLステートメントについて説明します。 TiDB ステートメントの完全なリストについては、 [TiDB SQL構文図](https://pingcap.github.io/sqlgram/)を参照してください。
 
 ## カテゴリー {#category}
 
@@ -35,7 +35,7 @@ SQLは関数に応じて以下の4種類に分類されます。
 
 -   **DCL (Data Control Language)** : アクセス権限とセキュリティ レベルを定義するために使用されます。
 
-以下では主にDMLとDQLについて紹介します。 DDL と DCL の詳細については、 [<a href="/basic-sql-operations.md">TiDB で SQL を探索する</a>](/basic-sql-operations.md)または[<a href="https://pingcap.github.io/sqlgram/">TiDB SQL構文の詳細な説明</a>](https://pingcap.github.io/sqlgram/)を参照してください。
+以下では主にDMLとDQLについて紹介します。 DDL と DCL の詳細については、 [TiDB SQL構文の詳細な説明](https://pingcap.github.io/sqlgram/)を参照してください。
 
 ## データ操作言語 {#data-manipulation-language}
 

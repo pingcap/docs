@@ -17,9 +17,9 @@ v7.0.0 以降、 TiFlash はメモリ負荷を軽減するために中間デー�
 
 TiDB は、各オペレーターのスピルのしきい値を制御する次のシステム変数を提供します。オペレーターのメモリ使用量がしきい値を超えると、 TiFlash はオペレーターのスピルをトリガーします。
 
--   [<a href="/system-variables.md#tidb_max_bytes_before_tiflash_external_group_by-new-in-v700">`tidb_max_bytes_before_tiflash_external_group_by`</a>](/system-variables.md#tidb_max_bytes_before_tiflash_external_group_by-new-in-v700)
--   [<a href="/system-variables.md#tidb_max_bytes_before_tiflash_external_join-new-in-v700">`tidb_max_bytes_before_tiflash_external_join`</a>](/system-variables.md#tidb_max_bytes_before_tiflash_external_join-new-in-v700)
--   [<a href="/system-variables.md#tidb_max_bytes_before_tiflash_external_sort-new-in-v700">`tidb_max_bytes_before_tiflash_external_sort`</a>](/system-variables.md#tidb_max_bytes_before_tiflash_external_sort-new-in-v700)
+-   [`tidb_max_bytes_before_tiflash_external_group_by`](/system-variables.md#tidb_max_bytes_before_tiflash_external_group_by-new-in-v700)
+-   [`tidb_max_bytes_before_tiflash_external_join`](/system-variables.md#tidb_max_bytes_before_tiflash_external_join-new-in-v700)
+-   [`tidb_max_bytes_before_tiflash_external_sort`](/system-variables.md#tidb_max_bytes_before_tiflash_external_sort-new-in-v700)
 
 ## 例 {#example}
 

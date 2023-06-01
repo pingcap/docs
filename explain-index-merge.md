@@ -7,11 +7,11 @@ summary: Learn about the execution plan information returned by the `EXPLAIN` st
 
 インデックス マージは、テーブルにアクセスするために TiDB v4.0 で導入された方法です。この方法を使用すると、TiDB オプティマイザーはテーブルごとに複数のインデックスを使用し、各インデックスから返された結果をマージできます。一部のシナリオでは、この方法によりテーブル全体のスキャンが回避され、クエリがより効率的になります。
 
-TiDB のインデックスマージには、交差型と共用型の 2 種類があります。前者は`AND`式に適用され、後者は`OR`式に適用されます。 Union タイプのインデックス マージは、実験的機能として TiDB v4.0 に導入され、v5.4.0 で GA になりました。交差タイプは TiDB v6.5.0 で導入され、 [<a href="/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-">`USE_INDEX_MERGE`</a>](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-)ヒントが指定されている場合にのみ使用できます。
+TiDB のインデックスマージには、交差型と共用型の 2 種類があります。前者は`AND`式に適用され、後者は`OR`式に適用されます。 Union タイプのインデックス マージは、実験的機能として TiDB v4.0 に導入され、v5.4.0 で GA になりました。交差タイプは TiDB v6.5.0 で導入され、 [`USE_INDEX_MERGE`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-)ヒントが指定されている場合にのみ使用できます。
 
 ## インデックスのマージを有効にする {#enable-index-merge}
 
-v5.4.0 以降の TiDB バージョンでは、インデックスのマージがデフォルトで有効になっています。その他の状況で、インデックスのマージが有効になっていない場合は、変数[<a href="/system-variables.md#tidb_enable_index_merge-new-in-v40">`tidb_enable_index_merge`</a>](/system-variables.md#tidb_enable_index_merge-new-in-v40)から`ON`を設定してこの機能を有効にする必要があります。
+v5.4.0 以降の TiDB バージョンでは、インデックスのマージがデフォルトで有効になっています。その他の状況で、インデックスのマージが有効になっていない場合は、変数[`tidb_enable_index_merge`](/system-variables.md#tidb_enable_index_merge-new-in-v40)から`ON`を設定してこの機能を有効にする必要があります。
 
 ```sql
 SET session tidb_enable_index_merge = ON;
@@ -88,12 +88,12 @@ EXPLAIN SELECT /*+ USE_INDEX_MERGE(t, idx_a, idx_b, idx_c) */ * FROM t WHERE a >
 
 > **ノート：**
 >
-> -   インデックス マージ機能は、v5.4.0 からデフォルトで有効になっています。つまり、 [<a href="/system-variables.md#tidb_enable_index_merge-new-in-v40">`tidb_enable_index_merge`</a>](/system-variables.md#tidb_enable_index_merge-new-in-v40)は`ON`です。
+> -   インデックス マージ機能は、v5.4.0 からデフォルトで有効になっています。つまり、 [`tidb_enable_index_merge`](/system-variables.md#tidb_enable_index_merge-new-in-v40)は`ON`です。
 >
-> -   SQL ヒント[<a href="/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-">`USE_INDEX_MERGE`</a>](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-)使用すると、 `tidb_enable_index_merge`の設定に関係なく、オプティマイザにインデックス マージを強制的に適用できます。フィルター条件にプッシュダウンできない式が含まれている場合にインデックス マージを有効にするには、SQL ヒント[<a href="/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-">`USE_INDEX_MERGE`</a>](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-)を使用する必要があります。
+> -   SQL ヒント[`USE_INDEX_MERGE`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-)を使用する必要があります。
 >
 > -   オプティマイザがクエリ プランに対して単一インデックス スキャン方法 (フル テーブル スキャン以外) を選択できる場合、オプティマイザは自動的にインデックス マージを使用しません。オプティマイザーがインデックスのマージを使用するには、オプティマイザー ヒントを使用する必要があります。
 >
-> -   現時点では、インデックス マージは[<a href="/temporary-tables.md">一時配列テーブル</a>](/temporary-tables.md)ではサポートされていません。
+> -   現時点では、インデックス マージは[一時配列テーブル](/temporary-tables.md)ではサポートされていません。
 >
-> -   交差タイプのインデックス マージは、オプティマイザによって自動的に選択されません。テーブル名とインデックス名を選択するには、 [<a href="/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-">`USE_INDEX_MERGE`</a>](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-)ヒントを使用して**テーブル名とインデックス名を**指定する必要があります。
+> -   交差タイプのインデックス マージは、オプティマイザによって自動的に選択されません。テーブル名とインデックス名を選択するには、 [`USE_INDEX_MERGE`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-)ヒントを使用して**テーブル名とインデックス名を**指定する必要があります。

@@ -5,18 +5,18 @@ summary: Learn how to import Apache Parquet files from Amazon S3 or GCS into TiD
 
 # Apache Parquet ファイルを Amazon S3 または GCS からTiDB Cloudにインポートする {#import-apache-parquet-files-from-amazon-s3-or-gcs-into-tidb-cloud}
 
-非圧縮および Snappy 圧縮[<a href="https://parquet.apache.org/">アパッチ寄木細工</a>](https://parquet.apache.org/)形式のデータ ファイルの両方をTiDB Cloudにインポートできます。このドキュメントでは、Amazon Simple Storage Service (Amazon S3) または Google Cloud Storage (GCS) からTiDB Cloudに Parquet ファイルをインポートする方法について説明します。
+非圧縮および Snappy 圧縮[アパッチ寄木細工](https://parquet.apache.org/)形式のデータ ファイルの両方をTiDB Cloudにインポートできます。このドキュメントでは、Amazon Simple Storage Service (Amazon S3) または Google Cloud Storage (GCS) からTiDB Cloudに Parquet ファイルをインポートする方法について説明します。
 
 > **ノート：**
 >
 > -   TiDB Cloud は、空のテーブルへの Parquet ファイルのインポートのみをサポートします。すでにデータが含まれている既存のテーブルにデータをインポートするには、このドキュメントに従ってTiDB Cloudを使用して一時的な空のテーブルにデータをインポートし、その後`INSERT SELECT`ステートメントを使用してデータをターゲットの既存のテーブルにコピーします。
-> -   Dedicated Tierクラスターにチェンジフィードがある場合、現在のデータインポート機能では[<a href="https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode">物理インポートモード</a>](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode)が使用されているため、クラスターにデータをインポートできません ([**データのインポート]**ボタンが無効になります)。このモードでは、インポートされたデータは変更ログを生成しないため、変更フィードはインポートされたデータを検出できません。
+> -   Dedicated Tierクラスターにチェンジフィードがある場合、現在のデータインポート機能では[物理インポートモード](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode)が使用されているため、クラスターにデータをインポートできません ([**データのインポート]**ボタンが無効になります)。このモードでは、インポートされたデータは変更ログを生成しないため、変更フィードはインポートされたデータを検出できません。
 
 ## ステップ 1. Parquet ファイルを準備する {#step-1-prepare-the-parquet-files}
 
 > **ノート：**
 >
-> 現在、 TiDB Cloud は、次のデータ タイプのいずれかを含む Parquet ファイルのインポートをサポートしていません。インポートする Parquet ファイルにそのようなデータ型が含まれている場合は、最初に[<a href="#supported-data-types">サポートされているデータ型</a>](#supported-data-types) (たとえば、 `STRING` ) を使用して Parquet ファイルを再生成する必要があります。あるいは、AWS Glue などのサービスを使用して、データ型を簡単に変換することもできます。
+> 現在、 TiDB Cloud は、次のデータ タイプのいずれかを含む Parquet ファイルのインポートをサポートしていません。インポートする Parquet ファイルにそのようなデータ型が含まれている場合は、最初に[サポートされているデータ型](#supported-data-types) (たとえば、 `STRING` ) を使用して Parquet ファイルを再生成する必要があります。あるいは、AWS Glue などのサービスを使用して、データ型を簡単に変換することもできます。
 >
 > -   `LIST`
 > -   `NEST STRUCT`
@@ -36,7 +36,7 @@ summary: Learn how to import Apache Parquet files from Amazon S3 or GCS into TiD
 
     > **ノート：**
     >
-    > 場合によっては、前述のルールに従って Parquet ファイル名を更新できない場合 (たとえば、Parquet ファイル リンクが他のプログラムでも使用されている場合)、ファイル名を変更しないで、 [<a href="#step-4-import-parquet-files-to-tidb-cloud">ステップ4</a>](#step-4-import-parquet-files-to-tidb-cloud)**ファイル パターン**を使用してソース データをインポートできます。単一のターゲットテーブルに。
+    > 場合によっては、前述のルールに従って Parquet ファイル名を更新できない場合 (たとえば、Parquet ファイル リンクが他のプログラムでも使用されている場合)、ファイル名を変更しないで、 [ステップ4](#step-4-import-parquet-files-to-tidb-cloud)**ファイル パターン**を使用してソース データをインポートできます。単一のターゲットテーブルに。
 
 ## ステップ 2. ターゲットテーブルスキーマを作成する {#step-2-create-the-target-table-schemas}
 
@@ -48,7 +48,7 @@ Parquet ファイルにはスキーマ情報が含まれていないため、Par
 
     1.  ソース データのデータベース スキーマ ファイルを作成します。
 
-        Parquet ファイルが[<a href="#step-1-prepare-the-parquet-files">ステップ1</a>](#step-1-prepare-the-parquet-files)の命名規則に従っている場合、データベース スキーマ ファイルはデータ インポートのオプションになります。それ以外の場合、データベース スキーマ ファイルは必須です。
+        Parquet ファイルが[ステップ1](#step-1-prepare-the-parquet-files)の命名規則に従っている場合、データベース スキーマ ファイルはデータ インポートのオプションになります。それ以外の場合、データベース スキーマ ファイルは必須です。
 
         各データベース スキーマ ファイルは`${db_name}-schema-create.sql`形式であり、 `CREATE DATABASE` DDL ステートメントが含まれている必要があります。データをインポートするときに、このファイルを使用して、 TiDB Cloud はデータを保存する`${db_name}`を作成します。
 
@@ -85,11 +85,11 @@ Parquet ファイルにはスキーマ情報が含まれていないため、Par
 
 TiDB Cloud がAmazon S3 または GCS バケット内の Parquet ファイルにアクセスできるようにするには、次のいずれかを実行します。
 
--   Parquet ファイルが Amazon S3 にある場合、 [<a href="/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access">Amazon S3 アクセスを設定する</a>](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access) .
+-   Parquet ファイルが Amazon S3 にある場合、 [Amazon S3 アクセスを設定する](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access) .
 
-    完了したら、 [<a href="#step-4-import-parquet-files-to-tidb-cloud">ステップ4</a>](#step-4-import-parquet-files-to-tidb-cloud)で必要になるため、Role ARN 値をメモします。
+    完了したら、 [ステップ4](#step-4-import-parquet-files-to-tidb-cloud)で必要になるため、Role ARN 値をメモします。
 
--   Parquet ファイルが GCS にある場合は、 [<a href="/tidb-cloud/config-s3-and-gcs-access.md#configure-gcs-access">GCS アクセスを構成する</a>](/tidb-cloud/config-s3-and-gcs-access.md#configure-gcs-access) 。
+-   Parquet ファイルが GCS にある場合は、 [GCS アクセスを構成する](/tidb-cloud/config-s3-and-gcs-access.md#configure-gcs-access) 。
 
 ## ステップ 4. Parquet ファイルをTiDB Cloudにインポートする {#step-4-import-parquet-files-to-tidb-cloud}
 
@@ -97,7 +97,7 @@ Parquet ファイルをTiDB Cloudにインポートするには、次の手順�
 
 1.  ターゲットクラスターの**インポート**ページを開きます。
 
-    1.  [<a href="https://tidbcloud.com/">TiDB Cloudコンソール</a>](https://tidbcloud.com/)にログインし、プロジェクトの[<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページに移動します。
+    1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
         > **ヒント：**
         >
@@ -117,7 +117,7 @@ Parquet ファイルをTiDB Cloudにインポートするには、次の手順�
 
     バケットのリージョンがクラスターと異なる場合は、クロスリージョンのコンプライアンスを確認してください。 **「次へ」**をクリックします。
 
-    TiDB Cloudは、指定されたバケット URI 内のデータにアクセスできるかどうかの検証を開始します。検証後、 TiDB Cloudはデフォルトのファイル命名パターンを使用してデータ ソース内のすべてのファイルのスキャンを試行し、次のページの左側にスキャンの概要結果を返します。 `AccessDenied`エラーが発生した場合は、 [<a href="/tidb-cloud/troubleshoot-import-access-denied-error.md">S3 からのデータインポート中のアクセス拒否エラーのトラブルシューティング</a>](/tidb-cloud/troubleshoot-import-access-denied-error.md)を参照してください。
+    TiDB Cloudは、指定されたバケット URI 内のデータにアクセスできるかどうかの検証を開始します。検証後、 TiDB Cloudはデフォルトのファイル命名パターンを使用してデータ ソース内のすべてのファイルのスキャンを試行し、次のページの左側にスキャンの概要結果を返します。 `AccessDenied`エラーが発生した場合は、 [S3 からのデータインポート中のアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)を参照してください。
 
 4.  必要に応じて、ファイル パターンを変更し、テーブル フィルター ルールを追加します。
 
@@ -146,7 +146,7 @@ Parquet ファイルをTiDB Cloudにインポートするには、次の手順�
         -   `!db02.*` : `db02`データベース内のテーブルを除き、他のすべてのテーブルがインポートされます。 `!`は、インポートする必要のないテーブルを除外するために使用されます。
         -   `*.*` : すべてのテーブルがインポートされます。
 
-        詳細については、 [<a href="/table-filter.md#syntax">テーブルフィルターの構文</a>](/table-filter.md#syntax)を参照してください。
+        詳細については、 [テーブルフィルターの構文](/table-filter.md#syntax)を参照してください。
 
 5.  **「次へ」**をクリックします。
 
@@ -156,7 +156,7 @@ Parquet ファイルをTiDB Cloudにインポートするには、次の手順�
 
     数値が 0 の場合は、 **[ソース ファイル名]**フィールドに入力した値と一致するデータ ファイルがないことを意味します。この場合は、 **「ソースファイル名」**フィールドにタイプミスがないか確認して、再試行してください。
 
-8.  インポート タスクが完了したら、 **[インポート]**ページの**[データのクエリ]**をクリックして、インポートされたデータをクエリできます。 Chat2Qury の使用方法の詳細については、 [<a href="/tidb-cloud/explore-data-with-chat2query.md">AI を活用した Chat2Query でデータを探索する</a>](/tidb-cloud/explore-data-with-chat2query.md)を参照してください。
+8.  インポート タスクが完了したら、 **[インポート]**ページの**[データのクエリ]**をクリックして、インポートされたデータをクエリできます。 Chat2Qury の使用方法の詳細については、 [AI を活用した Chat2Query でデータを探索する](/tidb-cloud/explore-data-with-chat2query.md)を参照してください。
 
 インポート タスクを実行するときに、サポートされていない変換または無効な変換が検出された場合、 TiDB Cloudはインポート ジョブを自動的に終了し、インポート エラーを報告します。
 
@@ -168,7 +168,7 @@ Parquet ファイルをTiDB Cloudにインポートするには、次の手順�
 
 3.  Parquet ファイルのデータ型を確認してください。
 
-    Parquet ファイルにサポートされていないデータ型 (たとえば、 `NEST STRUCT` 、 `ARRAY` 、または`MAP` ) が含まれている場合は、 [<a href="#supported-data-types">サポートされているデータ型</a>](#supported-data-types) (たとえば、 `STRING` ) を使用して Parquet ファイルを再生成する必要があります。
+    Parquet ファイルにサポートされていないデータ型 (たとえば、 `NEST STRUCT` 、 `ARRAY` 、または`MAP` ) が含まれている場合は、 [サポートされているデータ型](#supported-data-types) (たとえば、 `STRING` ) を使用して Parquet ファイルを再生成する必要があります。
 
 4.  インポートタスクを再試行してください。
 

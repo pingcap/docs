@@ -13,7 +13,7 @@ summary: Learn how to collect performance data to analyze sophisticated problems
 
 これらのパフォーマンス データを使用して、専門家はインスタンスの CPU やメモリなどの現在のリソース消費の詳細を分析し、高い CPU オーバーヘッド、高いメモリ使用量、プロセスの停止など、進行中の高度なパフォーマンス問題を特定するのに役立ちます。
 
-プロファイリングを開始した後、TiDB ダッシュボードは一定期間 (デフォルトでは 30 秒) の間、現在のパフォーマンス データを収集します。したがって、この機能はクラスターが現在直面している進行中の問題を分析するためにのみ使用でき、過去の問題には大きな影響を与えません。パフォーマンス データを**いつでも**収集して分析したい場合は、 [<a href="/dashboard/continuous-profiling.md">継続的なプロファイリング</a>](/dashboard/continuous-profiling.md)参照してください。
+プロファイリングを開始した後、TiDB ダッシュボードは一定期間 (デフォルトでは 30 秒) の間、現在のパフォーマンス データを収集します。したがって、この機能はクラスターが現在直面している進行中の問題を分析するためにのみ使用でき、過去の問題には大きな影響を与えません。パフォーマンス データを**いつでも**収集して分析したい場合は、 [継続的なプロファイリング](/dashboard/continuous-profiling.md)参照してください。
 
 ## サポートされているパフォーマンスデータ {#supported-performance-data}
 
@@ -37,7 +37,7 @@ summary: Learn how to collect performance data to analyze sophisticated problems
 
     ![Access instance profiling page](/media/dashboard/dashboard-profiling-access.png)
 
--   ブラウザで[<a href="http://127.0.0.1:2379/dashboard/#/instance_profiling">http://127.0.0.1:2379/dashboard/#/instance_profiling</a>](http://127.0.0.1:2379/dashboard/#/instance_profiling)にアクセスしてください。 `127.0.0.1:2379`を実際の PD インスタンスのアドレスとポートに置き換えます。
+-   ブラウザで[http://127.0.0.1:2379/dashboard/#/instance_profiling](http://127.0.0.1:2379/dashboard/#/instance_profiling)にアクセスしてください。 `127.0.0.1:2379`を実際の PD インスタンスのアドレスとポートに置き換えます。
 
 ## プロファイリングの開始 {#start-profiling}
 
@@ -47,7 +47,7 @@ summary: Learn how to collect performance data to analyze sophisticated problems
 
 プロファイリングを開始する前に、プロファイリングの期間を変更できます。この期間は、プロファイリングに必要な時間によって決まります。デフォルトでは 30 秒です。 30 秒の期間が完了するまでに 30 秒かかります。
 
-[<a href="/dashboard/continuous-profiling.md">継続的なプロファイリング</a>](/dashboard/continuous-profiling.md)が有効になっているクラスターでは手動プロファイリングを開始できません。現時点でのパフォーマンス データを表示するには、 [<a href="/dashboard/continuous-profiling.md#access-the-page">継続的プロファイリングページ</a>](/dashboard/continuous-profiling.md#access-the-page)で最新のプロファイリング結果をクリックします。
+[継続的プロファイリングページ](/dashboard/continuous-profiling.md#access-the-page)で最新のプロファイリング結果をクリックします。
 
 ## プロファイリングステータスのビュー {#view-profiling-status}
 
@@ -73,4 +73,4 @@ summary: Learn how to collect performance data to analyze sophisticated problems
 
 ![View profiling history](/media/dashboard/dashboard-profiling-history.png)
 
-プロファイリング ステータス ページの詳細な操作については、 [<a href="#view-profiling-status">プロファイリングステータスのビュー</a>](#view-profiling-status)を参照してください。
+プロファイリング ステータス ページの詳細な操作については、 [プロファイリングステータスのビュー](#view-profiling-status)を参照してください。

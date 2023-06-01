@@ -68,7 +68,7 @@ cdc cli changefeed query --server=http://127.0.0.1:8300 --changefeed-id 28c43ffc
 
 ## レプリケーション タスクを作成するとき、またはデータを MySQL にレプリケートするときに<code>Error 1298: Unknown or incorrect time zone: &#39;UTC&#39;</code>エラーを処理するにはどうすればよいですか? {#how-do-i-handle-the-code-error-1298-unknown-or-incorrect-time-zone-utc-code-error-when-creating-the-replication-task-or-replicating-data-to-mysql}
 
-このエラーは、ダウンストリーム MySQL がタイムゾーンをロードしない場合に返されます。 [<a href="https://dev.mysql.com/doc/refman/8.0/en/mysql-tzinfo-to-sql.html">`mysql_tzinfo_to_sql`</a>](https://dev.mysql.com/doc/refman/8.0/en/mysql-tzinfo-to-sql.html)を実行するとタイムゾーンをロードできます。タイムゾーンをロードした後、通常どおりタスクを作成し、データをレプリケートできます。
+このエラーは、ダウンストリーム MySQL がタイムゾーンをロードしない場合に返されます。 [`mysql_tzinfo_to_sql`](https://dev.mysql.com/doc/refman/8.0/en/mysql-tzinfo-to-sql.html)を実行するとタイムゾーンをロードできます。タイムゾーンをロードした後、通常どおりタスクを作成し、データをレプリケートできます。
 
 {{< copyable "" >}}
 
@@ -126,7 +126,7 @@ Warning: Unable to load '/usr/share/zoneinfo/zone1970.tab' as time zone. Skippin
 
 ## TiCDC のアップグレードによって引き起こされる構成ファイルの非互換性の問題にはどのように対処すればよいですか? {#how-do-i-handle-the-incompatibility-issue-of-configuration-files-caused-by-ticdc-upgrade}
 
-[<a href="/ticdc/ticdc-compatibility.md">互換性に関する注意事項</a>](/ticdc/ticdc-compatibility.md)を参照してください。
+[互換性に関する注意事項](/ticdc/ticdc-compatibility.md)を参照してください。
 
 ## TiCDC タスクの<code>start-ts</code>タイムスタンプは、現在時刻とは大きく異なります。このタスクの実行中にレプリケーションが中断され、エラー<code>[CDC:ErrBufferReachLimit]</code>が発生します。私は何をすべきか？ {#the-code-start-ts-code-timestamp-of-the-ticdc-task-is-quite-different-from-the-current-time-during-the-execution-of-this-task-replication-is-interrupted-and-an-error-code-cdc-errbufferreachlimit-code-occurs-what-should-i-do}
 
@@ -178,8 +178,8 @@ v4.0.8 以降、変更フィードの出力に`canal-json` 、 `canal`または`
 
 `pd-ctl service-gc-safepoint --pd <pd-addrs>`の結果に`gc_worker service_id`がない場合:
 
--   PD バージョンが v4.0.8 以前の場合、詳細については[<a href="https://github.com/tikv/pd/issues/3128">PD 問題 #3128</a>](https://github.com/tikv/pd/issues/3128)を参照してください。
--   PD が v4.0.8 以前のバージョンから新しいバージョンにアップグレードされた場合、詳細については[<a href="https://github.com/tikv/pd/issues/3366">PD 問題 #3366</a>](https://github.com/tikv/pd/issues/3366)を参照してください。
+-   PD バージョンが v4.0.8 以前の場合、詳細については[PD 問題 #3128](https://github.com/tikv/pd/issues/3128)を参照してください。
+-   PD が v4.0.8 以前のバージョンから新しいバージョンにアップグレードされた場合、詳細については[PD 問題 #3366](https://github.com/tikv/pd/issues/3366)を参照してください。
 
 ## TiCDC を使用してメッセージを Kafka にレプリケートすると、Kafka は<code>Message was too large</code>エラーを返します。なぜ？ {#when-i-use-ticdc-to-replicate-messages-to-kafka-kafka-returns-the-code-message-was-too-large-code-error-why}
 

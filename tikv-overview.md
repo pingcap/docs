@@ -5,7 +5,7 @@ summary: An overview of the TiKV storage engine.
 
 # TiKVの概要 {#tikv-overview}
 
-TiKV は、分散型のトランザクション キー/値データベースであり、 ACID準拠のトランザクション API を提供します。 TiKV は、RocksDB に保存される[<a href="https://raft.github.io/raft.pdf">Raftコンセンサスアルゴリズム</a>](https://raft.github.io/raft.pdf)およびコンセンサス状態の実装により、複数のレプリカ間のデータの一貫性と高可用性を保証します。 TiKV は、TiDB 分散データベースのstorageレイヤーとして、読み取りおよび書き込みサービスを提供し、アプリケーションから書き込まれたデータを永続化します。 TiDB クラスターの統計データも保存されます。
+TiKV は、分散型のトランザクション キー/値データベースであり、 ACID準拠のトランザクション API を提供します。 TiKV は、RocksDB に保存される[Raftコンセンサスアルゴリズム](https://raft.github.io/raft.pdf)およびコンセンサス状態の実装により、複数のレプリカ間のデータの一貫性と高可用性を保証します。 TiKV は、TiDB 分散データベースのstorageレイヤーとして、読み取りおよび書き込みサービスを提供し、アプリケーションから書き込まれたデータを永続化します。 TiDB クラスターの統計データも保存されます。
 
 ## アーキテクチャの概要 {#architecture-overview}
 
@@ -29,7 +29,7 @@ Leaderレプリカをあるノードから別のノードに移動する場合�
 
 ## 分散トランザクション {#distributed-transaction}
 
-TiKV は分散トランザクションをサポートしています。ユーザー (または TiDB) は、同じリージョンに属しているかどうかを気にせずに、複数のキーと値のペアを書き込むことができます。 TiKV は、2 フェーズ コミットを使用してACID制約を実現します。詳細については[<a href="/optimistic-transaction.md">TiDB 楽観的トランザクションモデル</a>](/optimistic-transaction.md)を参照してください。
+TiKV は分散トランザクションをサポートしています。ユーザー (または TiDB) は、同じリージョンに属しているかどうかを気にせずに、複数のキーと値のペアを書き込むことができます。 TiKV は、2 フェーズ コミットを使用してACID制約を実現します。詳細については[TiDB 楽観的トランザクションモデル](/optimistic-transaction.md)を参照してください。
 
 ## TiKVコプロセッサー {#tikv-coprocessor}
 

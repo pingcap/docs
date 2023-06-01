@@ -195,11 +195,11 @@ public List<Book> getLatestBooksWithAverageScore() throws SQLException {
 
 ### クロスジョイン {#cross-join}
 
-結合条件が定数の場合、2 つのテーブル間の内部結合は[<a href="https://en.wikipedia.org/wiki/Join_(SQL)#Cross_join">クロス結合</a>](https://en.wikipedia.org/wiki/Join_(SQL)#Cross_join)と呼ばれます。クロス結合は、左側のテーブルのすべてのレコードを右側のテーブルのすべてのレコードに結合します。左側のテーブルのレコード数が`m`で、右側のテーブルのレコード数が`n`の場合、結果セットには`m \* n`レコードが生成されます。
+結合条件が定数の場合、2 つのテーブル間の内部結合は[クロス結合](https://en.wikipedia.org/wiki/Join_(SQL)#Cross_join)と呼ばれます。クロス結合は、左側のテーブルのすべてのレコードを右側のテーブルのすべてのレコードに結合します。左側のテーブルのレコード数が`m`で、右側のテーブルのレコード数が`n`の場合、結果セットには`m \* n`レコードが生成されます。
 
 ### 左セミ結合 {#left-semi-join}
 
-TiDB は SQL 構文レベルで`LEFT SEMI JOIN table_name`サポートしません。ただし、実行計画レベルでは、 [<a href="/subquery-optimization.md">サブクエリ関連の最適化</a>](/subquery-optimization.md)書き換えられた同等の JOIN クエリのデフォルトの結合方法として`semi join`を使用します。
+TiDB は SQL 構文レベルで`LEFT SEMI JOIN table_name`サポートしません。ただし、実行計画レベルでは、 [サブクエリ関連の最適化](/subquery-optimization.md)書き換えられた同等の JOIN クエリのデフォルトの結合方法として`semi join`を使用します。
 
 ## 暗黙的な結合 {#implicit-join}
 
@@ -209,13 +209,13 @@ TiDB は SQL 構文レベルで`LEFT SEMI JOIN table_name`サポートしませ�
 
 TiDB は、次の一般的なテーブル結合アルゴリズムをサポートしています。
 
--   [<a href="/explain-joins.md#index-join">インデックス結合</a>](/explain-joins.md#index-join)
--   [<a href="/explain-joins.md#hash-join">ハッシュ結合</a>](/explain-joins.md#hash-join)
--   [<a href="/explain-joins.md#merge-join">マージ結合</a>](/explain-joins.md#merge-join)
+-   [インデックス結合](/explain-joins.md#index-join)
+-   [ハッシュ結合](/explain-joins.md#hash-join)
+-   [マージ結合](/explain-joins.md#merge-join)
 
 オプティマイザは、結合テーブル内のデータ量などの要因に基づいて、実行する適切な結合アルゴリズムを選択します。 `EXPLAIN`ステートメントを使用すると、クエリが結合にどのアルゴリズムを使用しているかを確認できます。
 
-TiDB のオプティマイザが最適な結合アルゴリズムに従って実行されない場合は、 [<a href="/optimizer-hints.md">オプティマイザーのヒント</a>](/optimizer-hints.md)を使用して TiDB により適切な結合アルゴリズムを使用させることができます。
+TiDB のオプティマイザが最適な結合アルゴリズムに従って実行されない場合は、 [オプティマイザーのヒント](/optimizer-hints.md)を使用して TiDB により適切な結合アルゴリズムを使用させることができます。
 
 たとえば、上記の左結合クエリの例が、オプティマイザによって選択されていないハッシュ結合アルゴリズムを使用すると高速に実行されると仮定すると、キーワード`SELECT`の後にヒント`/*+ HASH_JOIN(b, r) */`追加できます。テーブルに別名がある場合は、ヒントでその別名を使用することに注意してください。
 
@@ -230,10 +230,10 @@ LIMIT 10;
 
 結合アルゴリズムに関するヒント:
 
--   [<a href="/optimizer-hints.md#merge_joint1_name--tl_name-">MERGE_JOIN(t1_name [, tl_name ...])</a>](/optimizer-hints.md#merge_joint1_name--tl_name-)
--   [<a href="/optimizer-hints.md#inl_joint1_name--tl_name-">INL_JOIN(t1_name [, tl_name ...])</a>](/optimizer-hints.md#inl_joint1_name--tl_name-)
--   [<a href="/optimizer-hints.md#inl_hash_join">INL_HASH_JOIN(t1_name [, tl_name ...])</a>](/optimizer-hints.md#inl_hash_join)
--   [<a href="/optimizer-hints.md#hash_joint1_name--tl_name-">HASH_JOIN(t1_name [, tl_name ...])</a>](/optimizer-hints.md#hash_joint1_name--tl_name-)
+-   [MERGE_JOIN(t1_name [, tl_name ...])](/optimizer-hints.md#merge_joint1_name--tl_name-)
+-   [INL_JOIN(t1_name [, tl_name ...])](/optimizer-hints.md#inl_joint1_name--tl_name-)
+-   [INL_HASH_JOIN(t1_name [, tl_name ...])](/optimizer-hints.md#inl_hash_join)
+-   [HASH_JOIN(t1_name [, tl_name ...])](/optimizer-hints.md#hash_joint1_name--tl_name-)
 
 ## 注文に参加する {#join-orders}
 
@@ -247,9 +247,9 @@ FROM authors a STRAIGHT_JOIN book_authors ba STRAIGHT_JOIN books b
 WHERE b.id = ba.book_id AND ba.author_id = a.id;
 ```
 
-この結合したテーブルの再配置アルゴリズムの実装の詳細と制限の詳細については、 [<a href="/join-reorder.md">結合したテーブルの再配置アルゴリズムの概要</a>](/join-reorder.md)を参照してください。
+この結合したテーブルの再配置アルゴリズムの実装の詳細と制限の詳細については、 [結合したテーブルの再配置アルゴリズムの概要](/join-reorder.md)を参照してください。
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/explain-joins.md">テーブル結合を使用する Explain ステートメント</a>](/explain-joins.md)
--   [<a href="/join-reorder.md">結合したテーブルの再配置の概要</a>](/join-reorder.md)
+-   [テーブル結合を使用する Explain ステートメント](/explain-joins.md)
+-   [結合したテーブルの再配置の概要](/join-reorder.md)

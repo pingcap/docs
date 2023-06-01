@@ -196,7 +196,7 @@ Grafana サービスを開始します。
 
 1.  Grafana Web インターフェイスにログインします。
 
-    -   デフォルトのアドレス: [<a href="http://localhost:3000">http://ローカルホスト:3000</a>](http://localhost:3000)
+    -   デフォルトのアドレス: [http://ローカルホスト:3000](http://localhost:3000)
 
     -   デフォルトのアカウント: 管理者
 
@@ -227,7 +227,7 @@ PDサーバー、TiKVサーバー、および TiDBサーバーの Grafana ダッ
 
 2.  サイドバー メニューで、 **[ダッシュボード**] -&gt; **[インポート]**をクリックして、 **[ダッシュボードのインポート]**ウィンドウを開きます。
 
-3.  **「.json ファイルのアップロード」**をクリックして JSON ファイルをアップロードします (TiDB Grafana 構成ファイルを[<a href="https://github.com/pingcap/tidb/tree/master/metrics/grafana">pingcap/tidb</a>](https://github.com/pingcap/tidb/tree/master/metrics/grafana) 、 [<a href="https://github.com/tikv/tikv/tree/master/metrics/grafana">ティクブ/ティクブ</a>](https://github.com/tikv/tikv/tree/master/metrics/grafana) 、および[<a href="https://github.com/tikv/pd/tree/master/metrics/grafana">tikv/pd</a>](https://github.com/tikv/pd/tree/master/metrics/grafana)からダウンロードします)。
+3.  **「.json ファイルのアップロード」**をクリックして JSON ファイルをアップロードします (TiDB Grafana 構成ファイルを[tikv/pd](https://github.com/tikv/pd/tree/master/metrics/grafana)からダウンロードします)。
 
     > **ノート：**
     >

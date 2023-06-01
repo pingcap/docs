@@ -47,9 +47,9 @@ Query OK, 0 rows affected (0.00 sec)
 
 ## MySQLの互換性 {#mysql-compatibility}
 
-このステートメントは、MySQL と完全な互換性があると理解されています。 GitHub では互換性の違いは[<a href="https://github.com/pingcap/tidb/issues/new/choose">問題を通じて報告されました</a>](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
+このステートメントは、MySQL と完全な互換性があると理解されています。 GitHub では互換性の違いは[問題を通じて報告されました](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-prepare.md">準備</a>](/sql-statements/sql-statement-prepare.md)
--   [<a href="/sql-statements/sql-statement-execute.md">実行する</a>](/sql-statements/sql-statement-execute.md)
+-   [準備](/sql-statements/sql-statement-prepare.md)
+-   [実行する](/sql-statements/sql-statement-execute.md)

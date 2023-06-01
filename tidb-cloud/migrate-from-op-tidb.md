@@ -22,9 +22,9 @@ S3 バケットとTiDB Cloudクラスターを同じリージョンに配置す�
 
 移行前に、次のものを準備する必要があります。
 
--   管理者アクセス権を持つ[<a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/setting-up-s3.html#sign-up-for-aws-gsg">AWSアカウント</a>](https://docs.aws.amazon.com/AmazonS3/latest/userguide/setting-up-s3.html#sign-up-for-aws-gsg)
--   [<a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-bucket.html">AWS S3バケット</a>](https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-bucket.html)
--   [<a href="/tidb-cloud/tidb-cloud-quickstart.md">管理者アクセス権を持つTiDB CloudアカウントとTiDB Cloud(AWS) クラスター</a>](/tidb-cloud/tidb-cloud-quickstart.md)
+-   管理者アクセス権を持つ[AWSアカウント](https://docs.aws.amazon.com/AmazonS3/latest/userguide/setting-up-s3.html#sign-up-for-aws-gsg)
+-   [AWS S3バケット](https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-bucket.html)
+-   [管理者アクセス権を持つTiDB CloudアカウントとTiDB Cloud(AWS) クラスター](/tidb-cloud/tidb-cloud-quickstart.md)
 
 ## 道具を準備する {#prepare-tools}
 
@@ -35,7 +35,7 @@ S3 バケットとTiDB Cloudクラスターを同じリージョンに配置す�
 
 ### Dumpling {#dumpling}
 
-[<a href="https://docs.pingcap.com/tidb/dev/dumpling-overview">Dumpling</a>](https://docs.pingcap.com/tidb/dev/dumpling-overview)は、TiDB または MySQL から SQL または CSV ファイルにデータをエクスポートするツールです。 Dumpling を使用して、OP TiDB から完全なデータをエクスポートできます。
+[Dumpling](https://docs.pingcap.com/tidb/dev/dumpling-overview)は、TiDB または MySQL から SQL または CSV ファイルにデータをエクスポートするツールです。 Dumpling を使用して、OP TiDB から完全なデータをエクスポートできます。
 
 Dumplingをデプロイする前に、次の点に注意してください。
 
@@ -46,7 +46,7 @@ Dumpling は、 TiUPまたはインストール パッケージを使用して�
 
 #### TiUPを使用してDumplingをデプロイ {#deploy-dumpling-using-tiup}
 
-Dumpling をデプロイするには[<a href="https://docs.pingcap.com/tidb/stable/tiup-overview">TiUP</a>](https://docs.pingcap.com/tidb/stable/tiup-overview)を使用します。
+Dumpling をデプロイするには[TiUP](https://docs.pingcap.com/tidb/stable/tiup-overview)を使用します。
 
 ```bash
 ## Deploy TiUP
@@ -61,9 +61,9 @@ tiup update --self && tiup update dumpling
 
 インストール パッケージを使用してDumplingをデプロイするには:
 
-1.  [<a href="https://docs.pingcap.com/tidb/stable/download-ecosystem-tools">ツールキットパッケージ</a>](https://docs.pingcap.com/tidb/stable/download-ecosystem-tools)をダウンロードします。
+1.  [ツールキットパッケージ](https://docs.pingcap.com/tidb/stable/download-ecosystem-tools)をダウンロードします。
 
-2.  ターゲットマシンに解凍します。 `tiup install dumpling`を実行すると、 TiUPを使用してDumplingを入手できます。その後、 `tiup dumpling ...`使用してDumplingを実行できます。詳細については、 [<a href="https://docs.pingcap.com/tidb/stable/dumpling-overview#dumpling-introduction">Dumplingの紹介</a>](https://docs.pingcap.com/tidb/stable/dumpling-overview#dumpling-introduction)を参照してください。
+2.  ターゲットマシンに解凍します。 `tiup install dumpling`を実行すると、 TiUPを使用してDumplingを入手できます。その後、 `tiup dumpling ...`使用してDumplingを実行できます。詳細については、 [Dumplingの紹介](https://docs.pingcap.com/tidb/stable/dumpling-overview#dumpling-introduction)を参照してください。
 
 #### Dumplingの権限を構成する {#configure-privileges-for-dumpling}
 
@@ -77,11 +77,11 @@ tiup update --self && tiup update dumpling
 
 ### TiCDCのデプロイ {#deploy-ticdc}
 
-増分データを上流の TiDB クラスターからTiDB Cloudにレプリケートするには、 [<a href="https://docs.pingcap.com/tidb/dev/deploy-ticdc">TiCDC を導入する</a>](https://docs.pingcap.com/tidb/dev/deploy-ticdc)を実行する必要があります。
+増分データを上流の TiDB クラスターからTiDB Cloudにレプリケートするには、 [TiCDC を導入する](https://docs.pingcap.com/tidb/dev/deploy-ticdc)を実行する必要があります。
 
-1.  現在の TiDB バージョンが TiCDC をサポートしているかどうかを確認します。 TiDB v4.0.8.rc.1 以降のバージョンは TiCDC をサポートします。 TiDB クラスターで`select tidb_version();`を実行すると、TiDB のバージョンを確認できます。アップグレードする必要がある場合は、 [<a href="https://docs.pingcap.com/tidb/dev/deploy-ticdc#upgrade-ticdc-using-tiup">TiUPを使用して TiDB をアップグレードする</a>](https://docs.pingcap.com/tidb/dev/deploy-ticdc#upgrade-ticdc-using-tiup)参照してください。
+1.  現在の TiDB バージョンが TiCDC をサポートしているかどうかを確認します。 TiDB v4.0.8.rc.1 以降のバージョンは TiCDC をサポートします。 TiDB クラスターで`select tidb_version();`を実行すると、TiDB のバージョンを確認できます。アップグレードする必要がある場合は、 [TiUPを使用して TiDB をアップグレードする](https://docs.pingcap.com/tidb/dev/deploy-ticdc#upgrade-ticdc-using-tiup)参照してください。
 
-2.  TiCDCコンポーネントをTiDB クラスターに追加します。 [<a href="https://docs.pingcap.com/tidb/dev/deploy-ticdc#add-or-scale-out-ticdc-to-an-existing-tidb-cluster-using-tiup">TiUPを使用して、TiCDC を既存の TiDB クラスターに追加またはスケールアウトする</a>](https://docs.pingcap.com/tidb/dev/deploy-ticdc#add-or-scale-out-ticdc-to-an-existing-tidb-cluster-using-tiup)を参照してください。 `scale-out.yml`ファイルを編集して TiCDC を追加します。
+2.  TiCDCコンポーネントをTiDB クラスターに追加します。 [TiUPを使用して、TiCDC を既存の TiDB クラスターに追加またはスケールアウトする](https://docs.pingcap.com/tidb/dev/deploy-ticdc#add-or-scale-out-ticdc-to-an-existing-tidb-cluster-using-tiup)を参照してください。 `scale-out.yml`ファイルを編集して TiCDC を追加します。
 
     ```yaml
     cdc_servers:
@@ -137,9 +137,9 @@ SELECT @@global.tidb_gc_enable;
 
 #### ステップ 2. Dumplingの Amazon S3 バケットへのアクセス許可を設定する {#step-2-configure-access-permissions-to-the-amazon-s3-bucket-for-dumpling}
 
-AWS コンソールでアクセスキーを作成します。詳細については[<a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey">アクセスキーを作成する</a>](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey)を参照してください。
+AWS コンソールでアクセスキーを作成します。詳細については[アクセスキーを作成する](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey)を参照してください。
 
-1.  AWS アカウント ID またはアカウント エイリアス、 IAMユーザー名、およびパスワードを使用して[<a href="https://console.aws.amazon.com/iam/home#/security_credentials">IAMコンソール</a>](https://console.aws.amazon.com/iam/home#/security_credentials)にサインインします。
+1.  AWS アカウント ID またはアカウント エイリアス、 IAMユーザー名、およびパスワードを使用して[IAMコンソール](https://console.aws.amazon.com/iam/home#/security_credentials)にサインインします。
 
 2.  右上のナビゲーション バーでユーザー名を選択し、 **[My Security Credentials]**をクリックします。
 
@@ -160,7 +160,7 @@ Dumplingを使用して上流の TiDB クラスターから Amazon S3 にデー�
     export AWS_SECRET_ACCESS_KEY=${SecretKey}
     ```
 
-2.  AWS コンソールから S3 バケット URI とリージョン情報を取得します。詳細については[<a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html">バケットを作成する</a>](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html)を参照してください。
+2.  AWS コンソールから S3 バケット URI とリージョン情報を取得します。詳細については[バケットを作成する](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html)を参照してください。
 
     次のスクリーンショットは、S3 バケット URI 情報を取得する方法を示しています。
 
@@ -187,7 +187,7 @@ Dumplingを使用して上流の TiDB クラスターから Amazon S3 にデー�
 
     `-t`オプションは、エクスポートのスレッド数を指定します。スレッドの数を増やすと、 Dumplingの同時実行性とエクスポート速度が向上し、データベースのメモリ消費量も増加します。したがって、このパラメータには大きすぎる数値を設定しないでください。
 
-    詳細については、 [<a href="https://docs.pingcap.com/tidb/stable/dumpling-overview#export-to-sql-files">Dumpling</a>](https://docs.pingcap.com/tidb/stable/dumpling-overview#export-to-sql-files)を参照してください。
+    詳細については、 [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview#export-to-sql-files)を参照してください。
 
 4.  エクスポートデータを確認してください。通常、エクスポートされたデータには次のものが含まれます。
 
@@ -201,7 +201,7 @@ Dumplingを使用して上流の TiDB クラスターから Amazon S3 にデー�
 
 OP TiDB クラスターから Amazon S3 にデータをエクスポートした後、データをTiDB Cloudに移行する必要があります。
 
-1.  TiDB Cloudコンソールでクラスターのアカウント ID と外部 ID を取得します。詳細については、 [<a href="/tidb-cloud/tidb-cloud-auditing.md#step-2-configure-amazon-s3-access">ステップ 2. Amazon S3 アクセスを構成する</a>](/tidb-cloud/tidb-cloud-auditing.md#step-2-configure-amazon-s3-access)を参照してください。
+1.  TiDB Cloudコンソールでクラスターのアカウント ID と外部 ID を取得します。詳細については、 [ステップ 2. Amazon S3 アクセスを構成する](/tidb-cloud/tidb-cloud-auditing.md#step-2-configure-amazon-s3-access)を参照してください。
 
     次のスクリーンショットは、アカウント ID と外部 ID を取得する方法を示しています。
 
@@ -218,7 +218,7 @@ OP TiDB クラスターから Amazon S3 にデータをエクスポートした�
 
     -   kms:復号化
 
-3.  アクセスポリシーを設定します。 [<a href="https://console.aws.amazon.com/iamv2/home#/policies">AWS コンソール &gt; IAM &gt; アクセス管理 &gt; ポリシー</a>](https://console.aws.amazon.com/iamv2/home#/policies)に進み、リージョンに切り替えて、 TiDB Cloudのアクセス ポリシーがすでに存在するかどうかを確認します。存在しない場合は、この文書に従ってポリシーを作成します[<a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html">「JSON」タブでのポリシーの作成</a>](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html) 。
+3.  アクセスポリシーを設定します。 [「JSON」タブでのポリシーの作成](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html) 。
 
     以下は、json ポリシーのテンプレートの例です。
 
@@ -265,11 +265,11 @@ OP TiDB クラスターから Amazon S3 にデータをエクスポートした�
     }
     ```
 
-4.  役割を設定します。 [<a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html">IAMロールの作成 (コンソール)</a>](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html)を参照してください。 「アカウント ID」フィールドに、ステップ 1 で書き留めたTiDB Cloudアカウント ID とTiDB Cloud外部 ID を入力します。
+4.  役割を設定します。 [IAMロールの作成 (コンソール)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html)を参照してください。 「アカウント ID」フィールドに、ステップ 1 で書き留めたTiDB Cloudアカウント ID とTiDB Cloud外部 ID を入力します。
 
-5.  ロール ARN を取得します。 [<a href="https://console.aws.amazon.com/iamv2/home#/roles">AWS コンソール &gt; IAM &gt; アクセス管理 &gt; ロール</a>](https://console.aws.amazon.com/iamv2/home#/roles)に進みます。お住まいの地域に切り替えてください。作成したロールをクリックし、ARN をメモします。これは、データをTiDB Cloudにインポートするときに使用します。
+5.  ロール ARN を取得します。 [AWS コンソール &gt; IAM &gt; アクセス管理 &gt; ロール](https://console.aws.amazon.com/iamv2/home#/roles)に進みます。お住まいの地域に切り替えてください。作成したロールをクリックし、ARN をメモします。これは、データをTiDB Cloudにインポートするときに使用します。
 
-6.  データをTiDB Cloudにインポートします。 [<a href="/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-3-import-data-into-tidb-cloud">ステップ 3. データをTiDB Cloudにインポートする</a>](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-3-import-data-into-tidb-cloud)を参照してください。
+6.  データをTiDB Cloudにインポートします。 [ステップ 3. データをTiDB Cloudにインポートする](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-3-import-data-into-tidb-cloud)を参照してください。
 
 ## 増分データをレプリケートする {#replicate-incremental-data}
 
@@ -279,11 +279,11 @@ OP TiDB クラスターから Amazon S3 にデータをエクスポートした�
 
     ![Start Time in Metadata](/media/tidb-cloud/start_ts_in_metadata.png)
 
-2.  TiCDC にTiDB Cloudへの接続を許可します。 [<a href="https://tidbcloud.com/console/clusters">TiDB Cloudコンソール</a>](https://tidbcloud.com/console/clusters)でクラスターを見つけて、 **[概要]** &gt; **[接続]** &gt; **[標準接続]** &gt; **[トラフィック フィルターの作成]**に移動します。 **[編集]** &gt; **[項目の追加]**をクリックします。 TiCDCコンポーネントのパブリック IP アドレスを**「IP アドレス」**フィールドに入力し、 **「フィルターの更新」**をクリックして保存します。これで、TiCDC がTiDB Cloudにアクセスできるようになりました。
+2.  TiCDC にTiDB Cloudへの接続を許可します。 [TiDB Cloudコンソール](https://tidbcloud.com/console/clusters)でクラスターを見つけて、 **[概要]** &gt; **[接続]** &gt; **[標準接続]** &gt; **[トラフィック フィルターの作成]**に移動します。 **[編集]** &gt; **[項目の追加]**をクリックします。 TiCDCコンポーネントのパブリック IP アドレスを**「IP アドレス」**フィールドに入力し、 **「フィルターの更新」**をクリックして保存します。これで、TiCDC がTiDB Cloudにアクセスできるようになりました。
 
     ![Update Filter](/media/tidb-cloud/edit_traffic_filter_rules.png)
 
-3.  ダウンストリームTiDB Cloudクラスターの接続情報を取得します。 [<a href="https://tidbcloud.com/console/clusters">TiDB Cloudコンソール</a>](https://tidbcloud.com/console/clusters)で、 **[概要]** &gt; **[接続]** &gt; **[標準接続]** &gt; **[SQL クライアントとの接続]**に移動します。接続情報から、クラスターのホスト IP アドレスとポートを取得できます。詳細については、 [<a href="/tidb-cloud/connect-via-standard-connection.md">標準接続で接続する</a>](/tidb-cloud/connect-via-standard-connection.md)を参照してください。
+3.  ダウンストリームTiDB Cloudクラスターの接続情報を取得します。 [標準接続で接続する](/tidb-cloud/connect-via-standard-connection.md)を参照してください。
 
 4.  増分レプリケーション タスクを作成して実行します。アップストリーム クラスターで次のコマンドを実行します。
 
@@ -307,7 +307,7 @@ OP TiDB クラスターから Amazon S3 にデータをエクスポートした�
 
     -   `--start-ts` : チェンジフィードの開始 TSO を指定します。この TSO から、TiCDC クラスターはデータのプルを開始します。デフォルト値は現在時刻です。
 
-    詳細については、 [<a href="https://docs.pingcap.com/tidb/dev/ticdc-changefeed-config">TiCDC 変更フィードの CLI およびコンフィグレーションパラメーター</a>](https://docs.pingcap.com/tidb/dev/ticdc-changefeed-config)を参照してください。
+    詳細については、 [TiCDC 変更フィードの CLI およびコンフィグレーションパラメーター](https://docs.pingcap.com/tidb/dev/ticdc-changefeed-config)を参照してください。
 
 5.  上流クラスターで GC メカニズムを再度有効にします。インクリメンタル レプリケーションでエラーや遅延が見つからない場合は、GC メカニズムを有効にしてクラスターのガベージコレクションを再開します。
 

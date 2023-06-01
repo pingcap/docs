@@ -122,7 +122,7 @@ TiCDC オープン プロトコルは、データ変更イベントをダウン�
     }
     ```
 
-    `Delete`イベント。削除されたロウデータが出力されます。古い値機能が有効になっている場合、 `Delete`イベントには削除された行データのすべての列が含まれます。この機能が無効になっている場合、 `Delete`イベントには[<a href="#bit-flags-of-columns">ハンドルキー</a>](#bit-flags-of-columns)列のみが含まれます。
+    `Delete`イベント。削除されたロウデータが出力されます。古い値機能が有効になっている場合、 `Delete`イベントには削除された行データのすべての列が含まれます。この機能が無効になっている場合、 `Delete`イベントには[ハンドルキー](#bit-flags-of-columns)列のみが含まれます。
 
     ```
     {
@@ -146,9 +146,9 @@ TiCDC オープン プロトコルは、データ変更イベントをダウン�
     | パラメータ   | タイプ  | 説明                                                                                            |
     | :------ | :--- | :-------------------------------------------------------------------------------------------- |
     | カラム名    | 弦    | 列名。                                                                                           |
-    | カラムの種類  | 番号   | 列のタイプ。詳細は[<a href="#column-type-code">カラムタイプコード</a>](#column-type-code)を参照してください。             |
+    | カラムの種類  | 番号   | 列のタイプ。詳細は[カラムタイプコード](#column-type-code)を参照してください。             |
     | ハンドルの場所 | ブール値 | この列を`Where`句のフィルター条件にできるかどうかを決定します。この列がテーブル上で一意である場合、 `Where Handle`は`true`になります。             |
-    | 国旗      | 番号   | 列のビットフラグ。詳細は[<a href="#bit-flags-of-columns">カラムのビットフラグ</a>](#bit-flags-of-columns)を参照してください。 |
+    | 国旗      | 番号   | 列のビットフラグ。詳細は[カラムのビットフラグ](#bit-flags-of-columns)を参照してください。 |
     | カラムの値   | どれでも | カラムの値。                                                                                        |
 
 ### DDLイベント {#ddl-event}
@@ -182,7 +182,7 @@ TiCDC オープン プロトコルは、データ変更イベントをダウン�
     | パラメータ   | タイプ | 説明                                                                              |
     | :------ | :-- | :------------------------------------------------------------------------------ |
     | DDLクエリ  | 弦   | DDLクエリSQL                                                                       |
-    | DDL タイプ | 弦   | DDL タイプ。詳細は[<a href="#ddl-type-code">DDL タイプ コード</a>](#ddl-type-code)を参照してください。 |
+    | DDL タイプ | 弦   | DDL タイプ。詳細は[DDL タイプ コード](#ddl-type-code)を参照してください。 |
 
 ### 解決されたイベント {#resolved-event}
 
@@ -274,8 +274,8 @@ COMMIT;
 
 現在、TiCDC は TiCDC Open Protocol の標準解析ライブラリを提供していませんが、 GolangバージョンとJavaバージョンの解析サンプルが提供されています。このドキュメントで提供されているデータ形式と次の例を参照して、コンシューマー向けのプロトコル解析を実装できます。
 
--   [<a href="https://github.com/pingcap/tiflow/tree/master/cmd/kafka-consumer">Golang の例</a>](https://github.com/pingcap/tiflow/tree/master/cmd/kafka-consumer)
--   [<a href="https://github.com/pingcap/tiflow/tree/master/examples/java">Javaの例</a>](https://github.com/pingcap/tiflow/tree/master/examples/java)
+-   [Golang の例](https://github.com/pingcap/tiflow/tree/master/cmd/kafka-consumer)
+-   [Javaの例](https://github.com/pingcap/tiflow/tree/master/examples/java)
 
 ## カラムの型コード {#column-type-code}
 
@@ -386,4 +386,4 @@ COMMIT;
 > **ノート：**
 >
 > -   `BinaryFlag`列の型が BLOB/ TEXT (TINYBLOB/TINYTEXT および BINARY/CHAR を含む) の場合にのみ意味があります。上流列が BLOB 型の場合、値`BinaryFlag`は`1`に設定されます。上流列がTEXT型の場合、値`BinaryFlag`は`0`に設定されます。
-> -   アップストリームからテーブルを複製するために、TiCDC はハンドル インデックスとして[<a href="/ticdc/ticdc-overview.md#best-practices">有効なインデックス</a>](/ticdc/ticdc-overview.md#best-practices)を選択します。 Handle インデックス列の`HandleKeyFlag`値は`1`に設定されます。
+> -   アップストリームからテーブルを複製するために、TiCDC はハンドル インデックスとして[有効なインデックス](/ticdc/ticdc-overview.md#best-practices)を選択します。 Handle インデックス列の`HandleKeyFlag`値は`1`に設定されます。

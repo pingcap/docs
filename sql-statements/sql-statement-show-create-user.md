@@ -43,6 +43,6 @@ mysql> SHOW GRANTS FOR 'root';
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-create-user.md">ユーザーを作成</a>](/sql-statements/sql-statement-create-user.md)
--   [<a href="/sql-statements/sql-statement-show-grants.md">助成金を表示する</a>](/sql-statements/sql-statement-show-grants.md)
--   [<a href="/sql-statements/sql-statement-drop-user.md">ユーザーを削除する</a>](/sql-statements/sql-statement-drop-user.md)
+-   [ユーザーを作成](/sql-statements/sql-statement-create-user.md)
+-   [助成金を表示する](/sql-statements/sql-statement-show-grants.md)
+-   [ユーザーを削除する](/sql-statements/sql-statement-drop-user.md)

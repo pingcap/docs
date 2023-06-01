@@ -7,7 +7,7 @@ summary: Learn about TiFlash disaggregated storage and compute architecture and 
 
 > **警告：**
 >
-> 現在、 TiFlash の分散storageとコンピューティングアーキテクチャは実験的機能です。本番環境での使用はお勧めできません。この機能は予告なく変更または削除される場合があります。バグを見つけた場合は、GitHub で[<a href="https://github.com/pingcap/tiflash/issues">問題</a>](https://github.com/pingcap/tiflash/issues)を報告できます。
+> 現在、 TiFlash の分散storageとコンピューティングアーキテクチャは実験的機能です。本番環境での使用はお勧めできません。この機能は予告なく変更または削除される場合があります。バグを見つけた場合は、GitHub で[問題](https://github.com/pingcap/tiflash/issues)を報告できます。
 
 デフォルトでは、 TiFlash は結合されたstorageとコンピューティングアーキテクチャを使用して展開され、各TiFlashノードはstorageとコンピューティング ノードの両方として機能します。 TiDB v7.0.0 以降、 TiFlash は分散storageとコンピューティングアーキテクチャをサポートし、Amazon S3 または S3 互換のオブジェクトstorage(MinIO など) にデータを保存できるようになります。
 
@@ -46,9 +46,9 @@ TiFlash の分散storageおよびコンピューティングアーキテクチ�
 
 1.  TiFlashデータを保存するための Amazon S3 バケットを準備します。
 
-    既存のバケットを使用することもできますが、TiDB クラスターごとに専用のキー プレフィックスを予約する必要があります。 S3 バケットの詳細については、 [<a href="https://docs.aws.amazon.com/en_us/AmazonS3/latest/userguide/creating-buckets-s3.html">AWS ドキュメント</a>](https://docs.aws.amazon.com/en_us/AmazonS3/latest/userguide/creating-buckets-s3.html)を参照してください。
+    既存のバケットを使用することもできますが、TiDB クラスターごとに専用のキー プレフィックスを予約する必要があります。 S3 バケットの詳細については、 [AWS ドキュメント](https://docs.aws.amazon.com/en_us/AmazonS3/latest/userguide/creating-buckets-s3.html)を参照してください。
 
-    [<a href="https://min.io/">MinIO</a>](https://min.io/)など、他の S3 互換オブジェクトstorageを使用することもできます。
+    [MinIO](https://min.io/)など、他の S3 互換オブジェクトstorageを使用することもできます。
 
     TiFlashで使用される S3 API は次のとおりです。
 
@@ -60,7 +60,7 @@ TiFlash の分散storageおよびコンピューティングアーキテクチ�
     -   GetObjectTagging
     -   PutBucketライフサイクル
 
-2.  削除されたデータをクリーンアップするために、準備された S3 バケットに[<a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lifecycle-mgmt.html">ライフサイクル</a>](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lifecycle-mgmt.html)を追加します。
+2.  削除されたデータをクリーンアップするために、準備された S3 バケットに[ライフサイクル](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lifecycle-mgmt.html)を追加します。
 
     ```shell
     "ID": "tiflash-clean",
@@ -198,4 +198,4 @@ TiFlash の分散storageおよびコンピューティングアーキテクチ�
 -   あるアーキテクチャから別のアーキテクチャに移行した後、すべてのTiFlashデータを再度レプリケートする必要があります。
 -   同じ TiDB クラスター内では、同じアーキテクチャを持つTiFlashノードのみが許可されます。 2 つのアーキテクチャを 1 つのクラスター内で共存させることはできません。
 -   分離されたstorageとコンピューティングアーキテクチャは、S3 API を使用したオブジェクトstorageのみをサポートしますが、結合されたstorageとコンピューティングアーキテクチャはローカルstorageのみをサポートします。
--   S3storageを使用する場合、 TiFlashノードは自身のノードにないファイルのキーを取得できないため、 [<a href="/encryption-at-rest.md">保存時の暗号化</a>](/encryption-at-rest.md)機能は使用できません。
+-   S3storageを使用する場合、 TiFlashノードは自身のノードにないファイルのキーを取得できないため、 [保存時の暗号化](/encryption-at-rest.md)機能は使用できません。

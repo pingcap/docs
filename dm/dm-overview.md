@@ -11,7 +11,7 @@ summary: Learn about the Data Migration tool, the architecture, the key componen
 ![star](https://img.shields.io/github/stars/pingcap/tiflow?style=for-the-badge&logo=github) ![license](https://img.shields.io/github/license/pingcap/tiflow?style=for-the-badge) ![forks](https://img.shields.io/github/forks/pingcap/tiflow?style=for-the-badge)
 -->
 
-[<a href="https://github.com/pingcap/tiflow/tree/master/dm">TiDB データ移行</a>](https://github.com/pingcap/tiflow/tree/master/dm) (DM) は、統合されたデータ移行タスク管理プラットフォームであり、MySQL 互換データベース (MySQL、MariaDB、 Aurora MySQL など) から TiDB への完全なデータ移行と増分データ レプリケーションをサポートします。データ移行の運用コストを削減し、トラブルシューティング プロセスを簡素化するのに役立ちます。
+[TiDB データ移行](https://github.com/pingcap/tiflow/tree/master/dm) (DM) は、統合されたデータ移行タスク管理プラットフォームであり、MySQL 互換データベース (MySQL、MariaDB、 Aurora MySQL など) から TiDB への完全なデータ移行と増分データ レプリケーションをサポートします。データ移行の運用コストを削減し、トラブルシューティング プロセスを簡素化するのに役立ちます。
 
 ## 基本的な機能 {#basic-features}
 
@@ -20,7 +20,7 @@ summary: Learn about the Data Migration tool, the architecture, the key componen
 -   **MySQL シャードの移行とマージ。** DM は、複数の MySQL データベース インスタンスをアップストリームから 1 つの TiDB データベース ダウンストリームに移行およびマージすることをサポートします。さまざまな移行シナリオに合わせてレプリケーション ルールのカスタマイズをサポートします。アップストリーム MySQL シャードの DDL 変更を自動的に検出して処理できるため、運用コストが大幅に削減されます。
 -   **各種フィルター。**イベント タイプ、正規表現、および SQL 式を事前定義して、データ移行プロセス中に MySQLbinlogイベントをフィルタリングして除外できます。
 -   **一元管理。** DM はクラスター内の数千のノードをサポートします。多数のデータ移行タスクを同時に実行および管理できます。
--   **サードパーティのオンライン スキーマ変更プロセスの最適化。** MySQL エコシステムでは、gh-ost や pt-osc などのツールが広く使用されています。 DM は変更プロセスを最適化し、中間データの不必要な移行を回避します。詳細は[<a href="/dm/dm-online-ddl-tool-support.md">オンライン-ddl</a>](/dm/dm-online-ddl-tool-support.md)を参照してください。
+-   **サードパーティのオンライン スキーマ変更プロセスの最適化。** MySQL エコシステムでは、gh-ost や pt-osc などのツールが広く使用されています。 DM は変更プロセスを最適化し、中間データの不必要な移行を回避します。詳細は[オンライン-ddl](/dm/dm-online-ddl-tool-support.md)を参照してください。
 -   **高可用性。** DM は、さまざまなノード上で自由にスケジュールできるデータ移行タスクをサポートしています。少数のノードがクラッシュしても、実行中のタスクは影響を受けません。
 
 ## クイックインストール {#quick-installation}
@@ -55,9 +55,9 @@ DM ツールを使用する前に、次の制限事項に注意してくださ�
 
 -   DDL 構文の互換性
 
-    -   現在、TiDB は、MySQL がサポートするすべての DDL ステートメントと互換性があるわけではありません。 DM は TiDB パーサーを使用して DDL ステートメントを処理するため、TiDB パーサーによってサポートされる DDL 構文のみをサポートします。詳細は[<a href="/mysql-compatibility.md#ddl">MySQL の互換性</a>](/mysql-compatibility.md#ddl)を参照してください。
+    -   現在、TiDB は、MySQL がサポートするすべての DDL ステートメントと互換性があるわけではありません。 DM は TiDB パーサーを使用して DDL ステートメントを処理するため、TiDB パーサーによってサポートされる DDL 構文のみをサポートします。詳細は[MySQL の互換性](/mysql-compatibility.md#ddl)を参照してください。
 
-    -   DM は、互換性のない DDL ステートメントが発生するとエラーを報告します。このエラーを解決するには、dmctl を使用して手動で処理し、この DDL ステートメントをスキップするか、指定された DDL ステートメントに置き換える必要があります。詳細は[<a href="/dm/dm-faq.md#how-to-handle-incompatible-ddl-statements">異常な SQL ステートメントをスキップまたは置換する</a>](/dm/dm-faq.md#how-to-handle-incompatible-ddl-statements)を参照してください。
+    -   DM は、互換性のない DDL ステートメントが発生するとエラーを報告します。このエラーを解決するには、dmctl を使用して手動で処理し、この DDL ステートメントをスキップするか、指定された DDL ステートメントに置き換える必要があります。詳細は[異常な SQL ステートメントをスキップまたは置換する](/dm/dm-faq.md#how-to-handle-incompatible-ddl-statements)を参照してください。
 
     -   DM は、ビュー関連の DDL ステートメントおよび DML ステートメントをダウンストリーム TiDB クラスターに複製しません。ダウンストリーム TiDB クラスターにビューを手動で作成することをお勧めします。
 
@@ -67,25 +67,25 @@ DM ツールを使用する前に、次の制限事項に注意してくださ�
 
 ## 貢献する {#contributing}
 
-DM オープンソース プロジェクトにぜひご参加ください。皆様のご貢献を心よりお待ちしております。詳細については、 [<a href="https://github.com/pingcap/tiflow/blob/master/dm/CONTRIBUTING.md">貢献.md</a>](https://github.com/pingcap/tiflow/blob/master/dm/CONTRIBUTING.md)を参照してください。
+DM オープンソース プロジェクトにぜひご参加ください。皆様のご貢献を心よりお待ちしております。詳細については、 [貢献.md](https://github.com/pingcap/tiflow/blob/master/dm/CONTRIBUTING.md)を参照してください。
 
 ## コミュニティサポート {#community-support}
 
-DM については、オンライン ドキュメントを通じて学習できます。ご不明な点がございましたら、 [<a href="https://github.com/pingcap/tiflow/tree/master/dm">GitHub</a>](https://github.com/pingcap/tiflow/tree/master/dm)までお問い合わせください。
+DM については、オンライン ドキュメントを通じて学習できます。ご不明な点がございましたら、 [GitHub](https://github.com/pingcap/tiflow/tree/master/dm)までお問い合わせください。
 
 ## ライセンス {#license}
 
-DM は Apache 2.0 ライセンスに準拠しています。詳細については、 [<a href="https://github.com/pingcap/tiflow/blob/master/LICENSE">ライセンス</a>](https://github.com/pingcap/tiflow/blob/master/LICENSE)を参照してください。
+DM は Apache 2.0 ライセンスに準拠しています。詳細については、 [ライセンス](https://github.com/pingcap/tiflow/blob/master/LICENSE)を参照してください。
 
 ## DMバージョン {#dm-versions}
 
 v5.4 より前では、DM ドキュメントは TiDB ドキュメントから独立していました。これらの以前のバージョンの DM ドキュメントにアクセスするには、次のリンクのいずれかをクリックします。
 
--   [<a href="https://docs.pingcap.com/tidb-data-migration/v5.3">DM v5.3 ドキュメント</a>](https://docs.pingcap.com/tidb-data-migration/v5.3)
--   [<a href="https://docs.pingcap.com/tidb-data-migration/v2.0/">DM v2.0 ドキュメント</a>](https://docs.pingcap.com/tidb-data-migration/v2.0/)
--   [<a href="https://docs.pingcap.com/tidb-data-migration/v1.0/">DM v1.0 ドキュメント</a>](https://docs.pingcap.com/tidb-data-migration/v1.0/)
+-   [DM v5.3 ドキュメント](https://docs.pingcap.com/tidb-data-migration/v5.3)
+-   [DM v2.0 ドキュメント](https://docs.pingcap.com/tidb-data-migration/v2.0/)
+-   [DM v1.0 ドキュメント](https://docs.pingcap.com/tidb-data-migration/v1.0/)
 
 > **ノート：**
 >
-> -   2021 年 10 月以降、DM の GitHub リポジトリは[<a href="https://github.com/pingcap/tiflow/tree/master/dm">ピンキャップ/ティフロー</a>](https://github.com/pingcap/tiflow/tree/master/dm)に移動されました。 DM に問題がある場合は、フィードバックのために`pingcap/tiflow`リポジトリに問題を送信してください。
+> -   2021 年 10 月以降、DM の GitHub リポジトリは[ピンキャップ/ティフロー](https://github.com/pingcap/tiflow/tree/master/dm)に移動されました。 DM に問題がある場合は、フィードバックのために`pingcap/tiflow`リポジトリに問題を送信してください。
 > -   以前のバージョン (v1.0 および v2.0) では、DM は TiDB から独立したバージョン番号を使用します。 v5.3 以降、DM は TiDB と同じバージョン番号を使用します。 DM v2.0 の次のバージョンは DM v5.3 です。 DM v2.0 から v5.3 への互換性の変更はなく、アップグレード プロセスは通常のアップグレードと同じですが、バージョン番号が増加するだけです。

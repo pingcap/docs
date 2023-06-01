@@ -78,7 +78,7 @@ TiDB Cloudコンソールでのすべてのユーザー操作は、監査ログ�
 
 ## 監査ログをビュー {#view-audit-logs}
 
-コンソール監査ログには、 TiDB Cloudの内部担当者のみが一時的にアクセスできます。ログを表示する必要がある場合は、 [<a href="/tidb-cloud/tidb-cloud-support.md">PingCAP サポート チーム</a>](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
+コンソール監査ログには、 TiDB Cloudの内部担当者のみが一時的にアクセスできます。ログを表示する必要がある場合は、 [PingCAP サポート チーム](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
 ## 監査ログフィールド {#audit-log-fields}
 

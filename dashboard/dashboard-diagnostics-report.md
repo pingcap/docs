@@ -5,7 +5,7 @@ summary: Learn the TiDB Dashboard diagnostic report.
 
 # TiDB ダッシュボード診断レポート {#tidb-dashboard-diagnostic-report}
 
-本書では、診断レポートの内容や閲覧のヒントを紹介します。クラスター診断ページにアクセスしてレポートを生成するには、 [<a href="/dashboard/dashboard-diagnostics-access.md">TiDB ダッシュボードのクラスタ診断ページ</a>](/dashboard/dashboard-diagnostics-access.md)を参照してください。
+本書では、診断レポートの内容や閲覧のヒントを紹介します。クラスター診断ページにアクセスしてレポートを生成するには、 [TiDB ダッシュボードのクラスタ診断ページ](/dashboard/dashboard-diagnostics-access.md)を参照してください。
 
 ## レポートをビュー {#view-report}
 
@@ -61,7 +61,7 @@ summary: Learn the TiDB Dashboard diagnostic report.
 
 #### クラスタトポロジ情報 {#cluster-topology-info}
 
-表`Cluster Info`は、クラスター トポロジー情報を示します。この表の情報は、TiDB [<a href="/information-schema/information-schema-cluster-info.md">information_schema.cluster_info</a>](/information-schema/information-schema-cluster-info.md)システム テーブルからのものです。
+表`Cluster Info`は、クラスター トポロジー情報を示します。この表の情報は、TiDB [information_schema.cluster_info](/information-schema/information-schema-cluster-info.md)システム テーブルからのものです。
 
 ![Cluster info](/media/dashboard/dashboard-diagnostics-cluster-info.png)
 
@@ -77,7 +77,7 @@ summary: Learn the TiDB Dashboard diagnostic report.
 
 ### 診断情報 {#diagnostic-information}
 
-TiDB には自動診断結果が組み込まれています。各フィールドの説明については、 [<a href="/information-schema/information-schema-inspection-result.md">情報スキーマ.検査結果</a>](/information-schema/information-schema-inspection-result.md)システム テーブルを参照してください。
+TiDB には自動診断結果が組み込まれています。各フィールドの説明については、 [情報スキーマ.検査結果](/information-schema/information-schema-inspection-result.md)システム テーブルを参照してください。
 
 ### ロード情報 {#load-info}
 

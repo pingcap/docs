@@ -11,7 +11,7 @@ Summary: Learn how to create a changefeed to stream data from TiDB Cloud to Apac
 >
 > 現在、Kafka シンクは**ベータ版**です。 Changefeed 機能を使用するには、TiDB クラスターのバージョンが v6.4.0 以降であり、TiKV ノードのサイズが少なくとも 8 vCPU および 16 GiB であることを確認してください。
 >
-> [<a href="/tidb-cloud/select-cluster-tier.md#serverless-tier-beta">Serverless Tierクラスター</a>](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)の場合、チェンジフィード機能は使用できません。
+> [Serverless Tierクラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)の場合、チェンジフィード機能は使用できません。
 
 ## 前提条件 {#prerequisites}
 
@@ -21,7 +21,7 @@ TiDB クラスターが Apache Kafka サービスに接続できることを確�
 
 Apache Kafka サービスがインターネットにアクセスできない AWS VPC にある場合は、次の手順を実行します。
 
-1.  Apache Kafka サービスの VPC と TiDB クラスターの間の[<a href="/tidb-cloud/set-up-vpc-peering-connections.md">VPC ピアリング接続をセットアップする</a>](/tidb-cloud/set-up-vpc-peering-connections.md) 。
+1.  Apache Kafka サービスの VPC と TiDB クラスターの間の[VPC ピアリング接続をセットアップする](/tidb-cloud/set-up-vpc-peering-connections.md) 。
 
 2.  Apache Kafka サービスが関連付けられているセキュリティ グループの受信ルールを変更します。
 
@@ -29,12 +29,12 @@ Apache Kafka サービスがインターネットにアクセスできない AWS
 
 3.  Apache Kafka URL にホスト名が含まれている場合は、 TiDB Cloud がApache Kafka ブローカーの DNS ホスト名を解決できるようにする必要があります。
 
-    1.  [<a href="https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html#vpc-peering-dns">VPC ピアリング接続の DNS 解決を有効にする</a>](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html#vpc-peering-dns)の手順に従います。
+    1.  [VPC ピアリング接続の DNS 解決を有効にする](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html#vpc-peering-dns)の手順に従います。
     2.  **アクセプター DNS 解決**オプションを有効にします。
 
 Apache Kafka サービスがインターネットにアクセスできない GCP VPC にある場合は、次の手順を実行します。
 
-1.  Apache Kafka サービスの VPC と TiDB クラスターの間の[<a href="/tidb-cloud/set-up-vpc-peering-connections.md">VPC ピアリング接続をセットアップする</a>](/tidb-cloud/set-up-vpc-peering-connections.md) 。
+1.  Apache Kafka サービスの VPC と TiDB クラスターの間の[VPC ピアリング接続をセットアップする](/tidb-cloud/set-up-vpc-peering-connections.md) 。
 2.  Apache Kafka が配置されている VPC のイングレス ファイアウォール ルールを変更します。
 
     TiDB Cloudクラスターが配置されているリージョンの CIDR をイングレス ファイアウォール ルールに追加する必要があります。 CIDR は、 **「VPC ピアリング」**ページにあります。これにより、TiDB クラスターから Kafka ブローカーにトラフィックが流れるようになります。
@@ -46,11 +46,11 @@ TiDB Cloud変更フィードがデータを Apache Kafka にストリーミン�
 -   Kafka のトピック リソース タイプに`Create`および`Write`権限が追加されます。
 -   Kafka のクラスター リソース タイプに`DescribeConfigs`権限が追加されます。
 
-たとえば、Kafka クラスターが Confluent Cloud にある場合、詳細については Confluent ドキュメントの[<a href="https://docs.confluent.io/platform/current/kafka/authorization.html#resources">資力</a>](https://docs.confluent.io/platform/current/kafka/authorization.html#resources)と[<a href="https://docs.confluent.io/platform/current/kafka/authorization.html#adding-acls">ACLの追加</a>](https://docs.confluent.io/platform/current/kafka/authorization.html#adding-acls)を参照してください。
+たとえば、Kafka クラスターが Confluent Cloud にある場合、詳細については Confluent ドキュメントの[ACLの追加](https://docs.confluent.io/platform/current/kafka/authorization.html#adding-acls)を参照してください。
 
 ## ステップ 1. Apache Kafka のチェンジフィード ページを開く {#step-1-open-the-changefeed-page-for-apache-kafka}
 
-1.  [<a href="https://tidbcloud.com">TiDB Cloudコンソール</a>](https://tidbcloud.com)では、ターゲット TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**[Changefeed]**をクリックします。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)では、ターゲット TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**[Changefeed]**をクリックします。
 2.  **[変更フィードの作成]**をクリックし、**ターゲット タイプ**として**Kafka**を選択します。
 
 ## ステップ 2. チェンジフィードターゲットを構成する {#step-2-configure-the-changefeed-target}
@@ -72,7 +72,7 @@ TiDB Cloud変更フィードがデータを Apache Kafka にストリーミン�
 
 ## ステップ 3. チェンジフィードを設定する {#step-3-set-the-changefeed}
 
-1.  **テーブル フィルターを**カスタマイズして、複製するテーブルをフィルターします。ルールの構文については、 [<a href="/table-filter.md">テーブルフィルタールール</a>](/table-filter.md)を参照してください。
+1.  **テーブル フィルターを**カスタマイズして、複製するテーブルをフィルターします。ルールの構文については、 [テーブルフィルタールール](/table-filter.md)を参照してください。
 
     -   **フィルター ルールの追加**: この列でフィルター ルールを設定できます。デフォルトでは、すべてのテーブルを複製することを表すルール`*.*`があります。新しいルールを追加すると、 TiDB CloudはTiDB 内のすべてのテーブルをクエリし、ルールに一致するテーブルのみを**[複製する**テーブル] 列に表示します。
     -   **複製されるテーブル**: この列には、複製されるテーブルが表示されます。ただし、今後複製される新しいテーブルや完全に複製されるスキーマは表示されません。
@@ -80,12 +80,12 @@ TiDB Cloud変更フィードがデータを Apache Kafka にストリーミン�
 
 2.  **「データ形式」**領域で、Kafka メッセージの希望の形式を選択します。
 
-    -   Avro は、豊富なデータ構造を備えたコンパクトで高速なバイナリ データ形式で、さまざまなフロー システムで広く使用されています。詳細については、 [<a href="https://docs.pingcap.com/tidb/stable/ticdc-avro-protocol">Avro データ形式</a>](https://docs.pingcap.com/tidb/stable/ticdc-avro-protocol)を参照してください。
-    -   Canal-JSON はプレーンな JSON テキスト形式であり、解析が簡単です。詳細については、 [<a href="https://docs.pingcap.com/tidb/stable/ticdc-canal-json">Canal-JSON データ形式</a>](https://docs.pingcap.com/tidb/stable/ticdc-canal-json)を参照してください。
+    -   Avro は、豊富なデータ構造を備えたコンパクトで高速なバイナリ データ形式で、さまざまなフロー システムで広く使用されています。詳細については、 [Avro データ形式](https://docs.pingcap.com/tidb/stable/ticdc-avro-protocol)を参照してください。
+    -   Canal-JSON はプレーンな JSON テキスト形式であり、解析が簡単です。詳細については、 [Canal-JSON データ形式](https://docs.pingcap.com/tidb/stable/ticdc-canal-json)を参照してください。
 
 3.  **TiDB 拡張フィールドを Kafka メッセージ本文に追加する場合は、TiDB 拡張**オプションを有効にします。
 
-    TiDB 拡張フィールドの詳細については、 [<a href="https://docs.pingcap.com/tidb/stable/ticdc-avro-protocol#tidb-extension-fields">Avro データ形式の TiDB 拡張フィールド</a>](https://docs.pingcap.com/tidb/stable/ticdc-avro-protocol#tidb-extension-fields)および[<a href="https://docs.pingcap.com/tidb/stable/ticdc-canal-json#tidb-extension-field">Canal-JSON データ形式の TiDB 拡張フィールド</a>](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#tidb-extension-field)を参照してください。
+    TiDB 拡張フィールドの詳細については、 [Canal-JSON データ形式の TiDB 拡張フィールド](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#tidb-extension-field)を参照してください。
 
 4.  データ形式として**Avro**を選択すると、ページに Avro 固有の構成がいくつか表示されます。これらの構成は次のように入力できます。
 
@@ -141,4 +141,4 @@ TiDB Cloud変更フィードがデータを Apache Kafka にストリーミン�
 
 -   TiDB Cloudクラスターごとに、最大 10 個の変更フィードを作成できます。
 -   現在、 TiDB Cloud は、Kafka ブローカーに接続するための自己署名 TLS 証明書のアップロードをサポートしていません。
--   TiDB Cloud はTiCDC を使用して変更フィードを確立するため、同じ[<a href="https://docs.pingcap.com/tidb/stable/ticdc-overview#restrictions">TiCDC としての制限</a>](https://docs.pingcap.com/tidb/stable/ticdc-overview#restrictions)を持ちます。
+-   TiDB Cloud はTiCDC を使用して変更フィードを確立するため、同じ[TiCDC としての制限](https://docs.pingcap.com/tidb/stable/ticdc-overview#restrictions)を持ちます。

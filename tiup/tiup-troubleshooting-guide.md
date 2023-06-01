@@ -5,7 +5,7 @@ summary: Introduce the troubleshooting methods and solutions if you encounter is
 
 # TiUPトラブルシューティング ガイド {#tiup-troubleshooting-guide}
 
-このドキュメントでは、 TiUP を使用する際の一般的な問題とトラブルシューティング方法を紹介します。このドキュメントに遭遇した問題が含まれていない場合は、 [<a href="https://github.com/pingcap/tiup/issues">新しい問題を提出する</a>](https://github.com/pingcap/tiup/issues) Github TiUPリポジトリにあります。
+このドキュメントでは、 TiUP を使用する際の一般的な問題とトラブルシューティング方法を紹介します。このドキュメントに遭遇した問題が含まれていない場合は、 [新しい問題を提出する](https://github.com/pingcap/tiup/issues) Github TiUPリポジトリにあります。
 
 ## TiUPコマンドのトラブルシューティング {#troubleshoot-tiup-commands}
 
@@ -19,11 +19,11 @@ TiUP は、ミラーサーバーから最新のコンポーネントリストを
 
 ### コンポーネントのダウンロードプロセスが中断されました {#component-downloading-process-is-interrupted}
 
-ネットワークが不安定な場合、コンポーネントのダウンロード プロセスが中断される可能性があります。コンポーネントを再度ダウンロードしてみることができます。何度試してもダウンロードできない場合は、CDNサーバーが原因である可能性があるため、問題を報告できます[<a href="https://github.com/pingcap/tiup/issues">ここ</a>](https://github.com/pingcap/tiup/issues) 。
+ネットワークが不安定な場合、コンポーネントのダウンロード プロセスが中断される可能性があります。コンポーネントを再度ダウンロードしてみることができます。何度試してもダウンロードできない場合は、CDNサーバーが原因である可能性があるため、問題を報告できます[ここ](https://github.com/pingcap/tiup/issues) 。
 
 ### コンポーネントのダウンロード処理中にチェックサムエラーが発生する {#a-checksum-error-occurs-during-component-downloading-process}
 
-CDNサーバーのキャッシュ時間が短いため、新しいチェックサム ファイルがコンポーネントパッケージと一致しない可能性があります。 5分後に再度ダウンロードしてみてください。新しいチェックサム ファイルがまだコンポーネントパッケージと一致しない場合は、問題を報告してください[<a href="https://github.com/pingcap/tiup/issues">ここ</a>](https://github.com/pingcap/tiup/issues) 。
+CDNサーバーのキャッシュ時間が短いため、新しいチェックサム ファイルがコンポーネントパッケージと一致しない可能性があります。 5分後に再度ダウンロードしてみてください。新しいチェックサム ファイルがまだコンポーネントパッケージと一致しない場合は、問題を報告してください[ここ](https://github.com/pingcap/tiup/issues) 。
 
 ## TiUPクラスターコンポーネントのトラブルシューティング {#troubleshoot-tiup-cluster-component}
 

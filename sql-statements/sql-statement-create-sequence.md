@@ -313,5 +313,5 @@ select setval(seq, 6)   // Sets the current value of a sequence to 6.
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-drop-sequence.md">ドロップシーケンス</a>](/sql-statements/sql-statement-drop-sequence.md)
--   [<a href="/sql-statements/sql-statement-show-create-sequence.md">シーケンスの作成を表示</a>](/sql-statements/sql-statement-show-create-sequence.md)
+-   [ドロップシーケンス](/sql-statements/sql-statement-drop-sequence.md)
+-   [シーケンスの作成を表示](/sql-statements/sql-statement-show-create-sequence.md)

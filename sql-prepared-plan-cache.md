@@ -14,7 +14,7 @@ TiDB オプティマイザは、これら 2 種類のクエリを同じ方法で
 
 実行プラン キャッシュが有効になっている場合、最初の実行で`Prepare`ステートメントごとに現在のクエリが実行プラン キャッシュを使用できるかどうかがチェックされ、クエリが実行プラン キャッシュを使用できる場合は、生成された実行プランが LRU (最も古いもの) によって実装されたキャッシュに置かれます。中古）リンクリスト。後続の`Execute`クエリでは、実行プランがキャッシュから取得され、可用性がチェックされます。チェックが成功した場合、実行計画を生成するステップはスキップされます。それ以外の場合、実行計画は再生成され、キャッシュに保存されます。
 
-TiDB は、 `Prepare` / `Execute`ステートメントと同様に、一部の非`PREPARE`ステートメントの実行プラン キャッシュもサポートしています。詳細については、 [<a href="/sql-non-prepared-plan-cache.md">準備されていないプラン キャッシュ</a>](/sql-non-prepared-plan-cache.md)を参照してください。
+TiDB は、 `Prepare` / `Execute`ステートメントと同様に、一部の非`PREPARE`ステートメントの実行プラン キャッシュもサポートしています。詳細については、 [準備されていないプラン キャッシュ](/sql-non-prepared-plan-cache.md)を参照してください。
 
 TiDB の現在のバージョンでは、 `Prepare`ステートメントが次の条件のいずれかを満たしている場合、クエリまたはプランはキャッシュされません。
 
@@ -55,13 +55,13 @@ TiDB の現在のバージョンでは、 `Prepare`ステートメントが次�
 -   `Execute`のパラメータが異なることを考慮して、実行プラン キャッシュは、適応性を確保するために、特定のパラメータ値に密接に関連する一部の積極的なクエリ最適化方法を禁止します。これにより、クエリ プランが特定のパラメーター値に対して最適ではなくなる可能性があります。たとえば、クエリのフィルター条件は`where a > ? And a < ?`で、最初の`Execute`ステートメントのパラメーターはそれぞれ`2`と`1`です。これら 2 つのパラメータが次回の実行時に`1`と`2`になる可能性がある`TableDual`を考慮すると、オプティマイザは現在のパラメータ値に固有の最適な実行プランを生成しません。
 -   キャッシュの無効化と削除が考慮されていない場合、実行プラン キャッシュはさまざまなパラメーター値に適用され、理論的には特定の値に対して実行プランが最適化されなくなります。たとえば、フィルター条件が`where a < ?`で、最初の実行に使用されるパラメーター値が`1`の場合、オプティマイザーは最適な`IndexScan`実行プランを生成し、キャッシュに入れます。後続の実行で値が`10000`になった場合は、 `TableScan`計画の方が良い可能性があります。ただし、実行プラン キャッシュにより、以前に生成された`IndexScan`が実行に使用されます。したがって、実行プラン キャッシュは、クエリが単純で (コンパイル率が高く)、実行プランが比較的固定されているアプリケーション シナリオにより適しています。
 
-v6.1.0 以降、実行プラン キャッシュはデフォルトで有効になります。準備されたプランのキャッシュは、システム変数[<a href="/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610">`tidb_enable_prepared_plan_cache`</a>](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610)を介して制御できます。
+v6.1.0 以降、実行プラン キャッシュはデフォルトで有効になります。準備されたプランのキャッシュは、システム変数[`tidb_enable_prepared_plan_cache`](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610)を介して制御できます。
 
 > **ノート：**
 >
 > 実行プラン キャッシュ機能は`Prepare` / `Execute`クエリにのみ適用され、通常のクエリには効果がありません。
 
-実行プラン キャッシュ機能を有効にすると、セッション レベルのシステム変数[<a href="/system-variables.md#last_plan_from_cache-new-in-v40">`last_plan_from_cache`</a>](/system-variables.md#last_plan_from_cache-new-in-v40)を使用して、前の`Execute`ステートメントがキャッシュされた実行プランを使用したかどうかを確認できます。次に例を示します。
+実行プラン キャッシュ機能を有効にすると、セッション レベルのシステム変数[`last_plan_from_cache`](/system-variables.md#last_plan_from_cache-new-in-v40)を使用して、前の`Execute`ステートメントがキャッシュされた実行プランを使用したかどうかを確認できます。次に例を示します。
 
 {{< copyable "" >}}
 
@@ -169,19 +169,19 @@ mysql> show warnings;
 
 <CustomContent platform="tidb">
 
-プリペアドプランキャッシュを使用すると、メモリオーバーヘッドが発生します。各 TiDB インスタンスのすべてのセッションのキャッシュされた実行プランによる合計メモリ消費量を表示するには、Grafana の[<a href="/grafana-tidb-dashboard.md">**「プラン・キャッシュ・メモリー使用量」**モニター・パネル</a>](/grafana-tidb-dashboard.md)を使用できます。
+プリペアドプランキャッシュを使用すると、メモリオーバーヘッドが発生します。各 TiDB インスタンスのすべてのセッションのキャッシュされた実行プランによる合計メモリ消費量を表示するには、Grafana の[**「プラン・キャッシュ・メモリー使用量」**モニター・パネル](/grafana-tidb-dashboard.md)を使用できます。
 
 > **ノート：**
 >
 > Golangのメモリ再利用メカニズムと一部のカウントされていないメモリ構造のため、Grafana に表示されるメモリは実際のヒープメモリ使用量と等しくありません。 Grafana で表示されるメモリと実際のヒープメモリ使用量の間には、±20% 程度の偏差があることがテストされています。
 
-各 TiDB インスタンスにキャッシュされた実行プランの合計数を表示するには、Grafana の[<a href="/grafana-tidb-dashboard.md">**「プランキャッシュプラン番号」**パネル</a>](/grafana-tidb-dashboard.md)を使用できます。
+各 TiDB インスタンスにキャッシュされた実行プランの合計数を表示するには、Grafana の[**「プランキャッシュプラン番号」**パネル](/grafana-tidb-dashboard.md)を使用できます。
 
 以下は、Grafana の**[プラン キャッシュ メモリ使用量]**パネルと**[プラン キャッシュ プラン数]**パネルの例です。
 
 ![grafana\_panels](/media/planCache-memoryUsage-planNum-panels.png)
 
-v7.1.0 以降、システム変数[<a href="/system-variables.md#tidb_session_plan_cache_size-new-in-v710">`tidb_session_plan_cache_size`</a>](/system-variables.md#tidb_session_plan_cache_size-new-in-v710)を構成することで、各セッションでキャッシュできるプランの最大数を制御できます。さまざまな環境での推奨値は次のとおりで、監視パネルに応じて調整できます。
+v7.1.0 以降、システム変数[`tidb_session_plan_cache_size`](/system-variables.md#tidb_session_plan_cache_size-new-in-v710)を構成することで、各セッションでキャッシュできるプランの最大数を制御できます。さまざまな環境での推奨値は次のとおりで、監視パネルに応じて調整できます。
 
 </CustomContent>
 
@@ -191,14 +191,14 @@ v7.1.0 以降、システム変数[<a href="/system-variables.md#tidb_session_pl
 
 たとえば、現在の TiDB インスタンスには 50 の同時セッションがあり、各セッションには約 100 のキャッシュされたプランがあります。合計メモリ消費量は約`50 * 100 * 100 KiB` = `512 MB`です。
 
-システム変数[<a href="/system-variables.md#tidb_session_plan_cache_size-new-in-v710">`tidb_session_plan_cache_size`</a>](/system-variables.md#tidb_session_plan_cache_size-new-in-v710)を構成することで、各セッションでキャッシュできるプランの最大数を制御できます。さまざまな環境での推奨値は次のとおりです。
+システム変数[`tidb_session_plan_cache_size`](/system-variables.md#tidb_session_plan_cache_size-new-in-v710)を構成することで、各セッションでキャッシュできるプランの最大数を制御できます。さまざまな環境での推奨値は次のとおりです。
 
 </CustomContent>
 
 -   TiDBサーバーインスタンスのメモリしきい値が 64 GiB 以下の場合は、 `tidb_session_plan_cache_size` ～ `50`を設定します。
 -   TiDBサーバーインスタンスのメモリしきい値が 64 GiB を超える場合は、 `tidb_session_plan_cache_size` ～ `100`を設定します。
 
-v7.1.0 以降、システム変数[<a href="/system-variables.md#tidb_plan_cache_max_plan_size-new-in-v710">`tidb_plan_cache_max_plan_size`</a>](/system-variables.md#tidb_plan_cache_max_plan_size-new-in-v710)を使用してキャッシュできるプランの最大サイズを制御できます。デフォルト値は 2 MB です。プランのサイズがこの値を超える場合、プランはキャッシュされません。
+v7.1.0 以降、システム変数[`tidb_plan_cache_max_plan_size`](/system-variables.md#tidb_plan_cache_max_plan_size-new-in-v710)を使用してキャッシュできるプランの最大サイズを制御できます。デフォルト値は 2 MB です。プランのサイズがこの値を超える場合、プランはキャッシュされません。
 
 TiDBサーバーの未使用メモリが特定のしきい値未満になると、プラン キャッシュのメモリ保護メカニズムがトリガーされ、キャッシュされたプランの一部が削除されます。
 
@@ -206,7 +206,7 @@ TiDBサーバーの未使用メモリが特定のしきい値未満になると�
 
 <CustomContent platform="tidb">
 
-メモリ制限により、プラン キャッシュが失われる場合があります。 Grafana ダッシュボードの[<a href="/grafana-tidb-dashboard.md">`Plan Cache Miss OPS`メトリクス</a>](/grafana-tidb-dashboard.md)を表示してステータスを確認できます。
+メモリ制限により、プラン キャッシュが失われる場合があります。 Grafana ダッシュボードの[`Plan Cache Miss OPS`メトリクス](/grafana-tidb-dashboard.md)を表示してステータスを確認できます。
 
 </CustomContent>
 
@@ -300,7 +300,7 @@ MySQL [test]> deallocate prepare stmt; -- Release the prepared statement
 
 このような場合、最初に実行されたステートメントによって取得されたプランは、2 番目に実行されたステートメントによって再利用することはできません。
 
-この問題に対処するには、システム変数[<a href="/system-variables.md#tidb_ignore_prepared_cache_close_stmt-new-in-v600">`tidb_ignore_prepared_cache_close_stmt`</a>](/system-variables.md#tidb_ignore_prepared_cache_close_stmt-new-in-v600) `ON`に設定して、TiDB が`prepare stmt`を閉じるコマンドを無視するようにします。
+この問題に対処するには、システム変数[`tidb_ignore_prepared_cache_close_stmt`](/system-variables.md#tidb_ignore_prepared_cache_close_stmt-new-in-v600) `ON`に設定して、TiDB が`prepare stmt`を閉じるコマンドを無視するようにします。
 
 {{< copyable "" >}}
 
@@ -336,7 +336,7 @@ mysql> select @@last_plan_from_cache;       -- Reuse the last plan
 
 <CustomContent platform="tidb">
 
-TiDB ページの**Executor**セクションの[<a href="/grafana-tidb-dashboard.md">Grafana ダッシュボード</a>](/grafana-tidb-dashboard.md)には、「プラン キャッシュ OPS を使用したクエリ」グラフと「プラン キャッシュ ミス OPS」グラフがあります。これらのグラフを使用して、TiDB とアプリケーションの両方が SQL プラン キャッシュが正しく動作できるように正しく構成されているかどうかを確認できます。同じページの**サーバー**セクションには、「プリペアドステートメント数」グラフが表示されます。アプリケーションがプリペアド ステートメントを使用している場合、このグラフはゼロ以外の値を示します。これは、SQL プラン キャッシュが正しく機能するために必要です。
+TiDB ページの**Executor**セクションの[Grafana ダッシュボード](/grafana-tidb-dashboard.md)には、「プラン キャッシュ OPS を使用したクエリ」グラフと「プラン キャッシュ ミス OPS」グラフがあります。これらのグラフを使用して、TiDB とアプリケーションの両方が SQL プラン キャッシュが正しく動作できるように正しく構成されているかどうかを確認できます。同じページの**サーバー**セクションには、「プリペアドステートメント数」グラフが表示されます。アプリケーションがプリペアド ステートメントを使用している場合、このグラフはゼロ以外の値を示します。これは、SQL プラン キャッシュが正しく機能するために必要です。
 
 ![sql\_plan\_cache](/media/performance/sql_plan_cache.png)
 
@@ -344,6 +344,6 @@ TiDB ページの**Executor**セクションの[<a href="/grafana-tidb-dashboard
 
 <CustomContent platform="tidb-cloud">
 
-[<a href="https://tidbcloud.com/">TiDB Cloudコンソール</a>](https://tidbcloud.com/)の[<a href="/tidb-cloud/built-in-monitoring.md">**モニタリング**</a>](/tidb-cloud/built-in-monitoring.md)ページでは、 `Queries Using Plan Cache OPS`メトリクスをチェックして、すべての TiDB インスタンスで 1 秒あたりのプラン キャッシュを使用しているクエリまたは欠落しているクエリの数を取得できます。
+[**モニタリング**](/tidb-cloud/built-in-monitoring.md)ページでは、 `Queries Using Plan Cache OPS`メトリクスをチェックして、すべての TiDB インスタンスで 1 秒あたりのプラン キャッシュを使用しているクエリまたは欠落しているクエリの数を取得できます。
 
 </CustomContent>

@@ -5,7 +5,7 @@ summary: Learns how to use `binlogctl`.
 
 # binlogctl {#binlogctl}
 
-[<a href="https://github.com/pingcap/tidb-binlog/tree/master/binlogctl">Binlog制御</a>](https://github.com/pingcap/tidb-binlog/tree/master/binlogctl) (略して`binlogctl` ) は、TiDB Binlogのコマンド ライン ツールです。 `binlogctl`使用して TiDB Binlogクラスターを管理できます。
+[Binlog制御](https://github.com/pingcap/tidb-binlog/tree/master/binlogctl) (略して`binlogctl` ) は、TiDB Binlogのコマンド ライン ツールです。 `binlogctl`使用して TiDB Binlogクラスターを管理できます。
 
 `binlogctl`を使用すると、次のことができます。
 
@@ -21,7 +21,7 @@ summary: Learns how to use `binlogctl`.
 
 ## <code>binlogctl</code>をダウンロードする {#download-code-binlogctl-code}
 
-`binlogctl`はTiDB Toolkitに含まれています。 TiDB Toolkitをダウンロードするには、 [<a href="/download-ecosystem-tools.md">TiDB ツールをダウンロード</a>](/download-ecosystem-tools.md)を参照してください。
+`binlogctl`はTiDB Toolkitに含まれています。 TiDB Toolkitをダウンロードするには、 [TiDB ツールをダウンロード](/download-ecosystem-tools.md)を参照してください。
 
 ## 説明 {#descriptions}
 
@@ -107,4 +107,4 @@ Usage of binlogctl:
 
     > **ノート：**
     >
-    > PumpまたはDrainerノードが正常に実行されている場合、その状態は定期的に PD に更新されます。上記のコマンドは、PD に保存されているPumpまたはDrainerの状態を直接変更します。したがって、 PumpまたはDrainerノードが正常に動作しているときは、このコマンドを使用しないでください。詳細については、 [<a href="/tidb-binlog/tidb-binlog-faq.md">TiDBBinlogFAQ</a>](/tidb-binlog/tidb-binlog-faq.md)を参照してください。
+    > PumpまたはDrainerノードが正常に実行されている場合、その状態は定期的に PD に更新されます。上記のコマンドは、PD に保存されているPumpまたはDrainerの状態を直接変更します。したがって、 PumpまたはDrainerノードが正常に動作しているときは、このコマンドを使用しないでください。詳細については、 [TiDBBinlogFAQ](/tidb-binlog/tidb-binlog-faq.md)を参照してください。

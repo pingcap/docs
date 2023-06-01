@@ -5,7 +5,7 @@ summary: Learn how to stop a data migration task.
 
 # データ移行タスクの停止 {#stop-a-data-migration-task}
 
-`stop-task`コマンドを使用して、データ移行タスクを停止できます。 `stop-task`と`pause-task`の違いについては、 [<a href="/dm/dm-pause-task.md">データ移行タスクを一時停止する</a>](/dm/dm-pause-task.md)を参照してください。
+`stop-task`コマンドを使用して、データ移行タスクを停止できます。 `stop-task`と`pause-task`の違いについては、 [データ移行タスクを一時停止する](/dm/dm-pause-task.md)を参照してください。
 
 {{< copyable "" >}}
 

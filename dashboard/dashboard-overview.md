@@ -46,7 +46,7 @@ TiDB ダッシュボードにログインすると、デフォルトで概要ペ
 
 ![Top SQL](/media/dashboard/dashboard-overview-top-statements.png)
 
-この領域に表示される情報は、より詳細な[<a href="/dashboard/dashboard-statement-list.md">SQL ステートメントページ</a>](/dashboard/dashboard-statement-list.md)と一致しています。 **「Top SQLステートメント」**見出しをクリックすると、完全なリストが表示されます。この表の列の詳細については、 [<a href="/dashboard/dashboard-statement-list.md">SQL ステートメントページ</a>](/dashboard/dashboard-statement-list.md)を参照してください。
+この領域に表示される情報は、より詳細な[SQL ステートメントページ](/dashboard/dashboard-statement-list.md)を参照してください。
 
 > **ノート：**
 >
@@ -58,9 +58,9 @@ TiDB ダッシュボードにログインすると、デフォルトで概要ペ
 
 ![Recent slow queries](/media/dashboard/dashboard-overview-slow-query.png)
 
-デフォルトでは、300 ミリ秒を超えて実行される SQL クエリは低速クエリとしてカウントされ、テーブルに表示されます。このしきい値は、 [<a href="/system-variables.md#tidb_slow_log_threshold">tidb_slow_log_threshold</a>](/system-variables.md#tidb_slow_log_threshold)変数または[<a href="/tidb-configuration-file.md#slow-threshold">遅いしきい値</a>](/tidb-configuration-file.md#slow-threshold) TiDB パラメータを変更することで変更できます。
+デフォルトでは、300 ミリ秒を超えて実行される SQL クエリは低速クエリとしてカウントされ、テーブルに表示されます。このしきい値は、 [遅いしきい値](/tidb-configuration-file.md#slow-threshold) TiDB パラメータを変更することで変更できます。
 
-この領域に表示される内容は、より詳細な[<a href="/dashboard/dashboard-slow-query.md">遅いクエリページ</a>](/dashboard/dashboard-slow-query.md)と一致しています。 **「最近の遅いクエリ」の**タイトルをクリックすると、完全なリストが表示されます。この表の列の詳細については、この[<a href="/dashboard/dashboard-slow-query.md">遅いクエリページ</a>](/dashboard/dashboard-slow-query.md)を参照してください。
+この領域に表示される内容は、より詳細な[遅いクエリページ](/dashboard/dashboard-slow-query.md)を参照してください。
 
 > **ノート：**
 >
@@ -77,7 +77,7 @@ TiDB ダッシュボードにログインすると、デフォルトで概要ペ
 -   Up: インスタンスは正常に実行されています (オフラインstorageインスタンスを含む)。
 -   Down: ネットワークの切断やプロセスのクラッシュなど、インスタンスが異常に実行されています。
 
-**インスタンスの**タイトルをクリックして[<a href="/dashboard/dashboard-cluster-info.md">クラスタ情報ページ</a>](/dashboard/dashboard-cluster-info.md)入力すると、各インスタンスの詳細な実行ステータスが表示されます。
+**インスタンスの**タイトルをクリックして[クラスタ情報ページ](/dashboard/dashboard-cluster-info.md)入力すると、各インスタンスの詳細な実行ステータスが表示されます。
 
 ## 監視と警告 {#monitor-and-alert}
 
@@ -85,9 +85,9 @@ TiDB ダッシュボードにログインすると、デフォルトで概要ペ
 
 ![Monitor and alert](/media/dashboard/dashboard-overview-monitor.png)
 
--   **ビュー Metrics** : このリンクをクリックすると、Grafana ダッシュボードにジャンプし、クラスターの詳細な監視情報を表示できます。 Grafana ダッシュボードの各監視メトリックの詳細については、 [<a href="/grafana-overview-dashboard.md">モニタリングメトリクス</a>](/grafana-overview-dashboard.md)を参照してください。
+-   **ビュー Metrics** : このリンクをクリックすると、Grafana ダッシュボードにジャンプし、クラスターの詳細な監視情報を表示できます。 Grafana ダッシュボードの各監視メトリックの詳細については、 [モニタリングメトリクス](/grafana-overview-dashboard.md)を参照してください。
 -   **アラートのビュー**: このリンクをクリックすると、クラスターの詳細なアラート情報を表示できる AlertManager ページにジャンプします。クラスター内にアラートが存在する場合、アラートの数がリンク テキストに直接表示されます。
--   **診断の実行**: このリンクをクリックすると、より詳細な[<a href="/dashboard/dashboard-diagnostics-access.md">クラスター診断ページ</a>](/dashboard/dashboard-diagnostics-access.md)にジャンプします。
+-   **診断の実行**: このリンクをクリックすると、より詳細な[クラスター診断ページ](/dashboard/dashboard-diagnostics-access.md)にジャンプします。
 
 > **ノート：**
 >

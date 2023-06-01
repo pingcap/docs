@@ -34,8 +34,8 @@ summary: Learn basic concepts, state definitions, and state transfer of changefe
 
 ## チェンジフィードの操作 {#operate-changefeeds}
 
-コマンドライン ツール`cdc cli`を使用して、TiCDC クラスターとそのレプリケーション タスクを管理できます。詳細は[<a href="/ticdc/ticdc-manage-changefeed.md">TiCDC 変更フィードを管理する</a>](/ticdc/ticdc-manage-changefeed.md)を参照してください。
+コマンドライン ツール`cdc cli`を使用して、TiCDC クラスターとそのレプリケーション タスクを管理できます。詳細は[TiCDC 変更フィードを管理する](/ticdc/ticdc-manage-changefeed.md)を参照してください。
 
-HTTP インターフェイス (TiCDC OpenAPI 機能) を使用して、TiCDC クラスターとそのレプリケーション タスクを管理することもできます。詳細は[<a href="/ticdc/ticdc-open-api.md">TiCDC OpenAPI</a>](/ticdc/ticdc-open-api.md)を参照してください。
+HTTP インターフェイス (TiCDC OpenAPI 機能) を使用して、TiCDC クラスターとそのレプリケーション タスクを管理することもできます。詳細は[TiCDC OpenAPI](/ticdc/ticdc-open-api.md)を参照してください。
 
 TiCDC がTiUPを使用してデプロイされている場合は、 `tiup ctl:v<CLUSTER_VERSION> cdc`コマンドを実行して`cdc cli`を開始できます。 `v<CLUSTER_VERSION>` TiCDC クラスターのバージョン ( `v6.5.0`など) に置き換えます。 `cdc cli`直接実行することもできます。

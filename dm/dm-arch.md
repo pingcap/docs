@@ -31,7 +31,7 @@ DM ワーカーは、特定のデータ移行タスクを実行します。
 -   データ移行サブタスクの操作を調整する
 -   データ移行サブタスクの実行状態の監視
 
-DMワーカーの詳細については、 [<a href="/dm/dm-worker-intro.md">DMワーカー紹介</a>](/dm/dm-worker-intro.md)を参照してください。
+DMワーカーの詳細については、 [DMワーカー紹介](/dm/dm-worker-intro.md)を参照してください。
 
 ### dmctl {#dmctl}
 

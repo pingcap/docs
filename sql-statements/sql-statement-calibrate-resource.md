@@ -5,13 +5,13 @@ summary: An overview of the usage of CALIBRATE RESOURCE for the TiDB database.
 
 # <code>CALIBRATE RESOURCE</code> {#code-calibrate-resource-code}
 
-`CALIBRATE RESOURCE`ステートメントは、現在のクラスターの[<a href="/tidb-resource-control#what-is-request-unit-ru">「リクエストユニット(RU)」</a>](/tidb-resource-control#what-is-request-unit-ru)を推定して出力するために使用されます。
+`CALIBRATE RESOURCE`ステートメントは、現在のクラスターの[「リクエストユニット(RU)」](/tidb-resource-control#what-is-request-unit-ru)を推定して出力するために使用されます。
 
 <CustomContent platform="tidb-cloud">
 
 > **ノート：**
 >
-> この機能は[<a href="/tidb-cloud/select-cluster-tier.md#serverless-tier-beta">Serverless Tierクラスター</a>](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)では使用できません。
+> この機能は[Serverless Tierクラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)では使用できません。
 
 </CustomContent>
 
@@ -30,7 +30,7 @@ WorkloadOption ::=
 
 このコマンドを実行するには、次の要件が満たされていることを確認してください。
 
--   [<a href="/system-variables.md#tidb_enable_resource_control-new-in-v660">`tidb_enable_resource_control`</a>](/system-variables.md#tidb_enable_resource_control-new-in-v660)有効にしました。
+-   [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660)有効にしました。
 -   ユーザーには`SUPER`または`RESOURCE_GROUP_ADMIN`権限があります。
 -   ユーザーは`METRICS_SCHEMA`スキーマ内のすべてのテーブルに対する`SELECT`権限を持っています。
 
@@ -58,7 +58,7 @@ TiDB は 2 つの推定方法を提供します。
 
 > **ノート：**
 >
-> クラスターの RU 容量は、クラスターのトポロジー、各コンポーネントのハードウェアおよびソフトウェア構成によって異なります。各クラスターが提供できる実際の RU は、実際のワークロードにも関係します。ハードウェア導入に基づく推定値は参考用であり、実際の最大値とは異なる場合があります。 [<a href="#estimate-capacity-based-on-actual-workload">実際のワークロードに基づいて容量を見積もる</a>](#estimate-capacity-based-on-actual-workload)にオススメです。
+> クラスターの RU 容量は、クラスターのトポロジー、各コンポーネントのハードウェアおよびソフトウェア構成によって異なります。各クラスターが提供できる実際の RU は、実際のワークロードにも関係します。ハードウェア導入に基づく推定値は参考用であり、実際の最大値とは異なる場合があります。 [実際のワークロードに基づいて容量を見積もる](#estimate-capacity-based-on-actual-workload)にオススメです。
 
 ## 例 {#examples}
 

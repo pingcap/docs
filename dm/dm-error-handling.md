@@ -59,7 +59,7 @@ summary: Learn about the error system and how to handle common errors when you u
 
 -   `message` : エラーの説明。
 
-    エラーの詳細な説明。エラー呼び出しチェーン上のエラー メッセージのすべての追加レイヤーをラップして保存するには、 [<a href="https://godoc.org/github.com/pkg/errors#hdr-Adding_context_to_an_error">エラー.ラップ</a>](https://godoc.org/github.com/pkg/errors#hdr-Adding_context_to_an_error)モードが採用されます。レイヤーでラップされたメッセージ記述は DM のエラーを示し、最レイヤーでラップされたメッセージ記述はエラーの原因を示します。
+    エラーの詳細な説明。エラー呼び出しチェーン上のエラー メッセージのすべての追加レイヤーをラップして保存するには、 [エラー.ラップ](https://godoc.org/github.com/pkg/errors#hdr-Adding_context_to_an_error)モードが採用されます。レイヤーでラップされたメッセージ記述は DM のエラーを示し、最レイヤーでラップされたメッセージ記述はエラーの原因を示します。
 
 -   `workaround` : エラー処理メソッド (オプション)
 
@@ -69,7 +69,7 @@ summary: Learn about the error system and how to handle common errors when you u
 
     DM がエラースタック情報を出力するかどうかは、エラーの重大度と必要性に応じて異なります。エラー スタックには、エラーが発生したときの完全なスタック呼び出し情報が記録されます。基本情報やエラーメッセージからはエラーの原因が特定できない場合は、エラースタックを使用してエラー発生時のコードの実行パスを追跡できます。
 
-エラー コードの完全なリストについては、 [<a href="https://github.com/pingcap/dm/blob/master/_utils/terror_gen/errors_release.txt">エラーコードリスト</a>](https://github.com/pingcap/dm/blob/master/_utils/terror_gen/errors_release.txt)を参照してください。
+エラー コードの完全なリストについては、 [エラーコードリスト](https://github.com/pingcap/dm/blob/master/_utils/terror_gen/errors_release.txt)を参照してください。
 
 ## トラブルシューティング {#troubleshooting}
 
@@ -77,9 +77,9 @@ DM の実行中にエラーが発生した場合は、次の手順を実行し�
 
 1.  `query-status`コマンドを実行してタスクの実行状況とエラー出力を確認します。
 
-2.  エラーに関連するログ ファイルを確認してください。ログ ファイルは DM マスター ノードと DM ワーカー ノード上にあります。エラーに関する重要な情報を取得するには、 [<a href="#error-system">エラーシステム</a>](#error-system)を参照してください。次に、 [<a href="#handle-common-errors">一般的なエラーの処理</a>](#handle-common-errors)セクションを確認して解決策を見つけます。
+2.  エラーに関連するログ ファイルを確認してください。ログ ファイルは DM マスター ノードと DM ワーカー ノード上にあります。エラーに関する重要な情報を取得するには、 [一般的なエラーの処理](#handle-common-errors)セクションを確認して解決策を見つけます。
 
-3.  このドキュメントでエラーが説明されておらず、ログを確認したりメトリクスを監視しても問題を解決できない場合は、 [<a href="/support.md">支持を得ます</a>](/support.md) PingCAP またはコミュニティから問い合わせてください。
+3.  このドキュメントでエラーが説明されておらず、ログを確認したりメトリクスを監視しても問題を解決できない場合は、 [支持を得ます](/support.md) PingCAP またはコミュニティから問い合わせてください。
 
 4.  エラーが解決したら、dmctl を使用してタスクを再起動します。
 
@@ -89,7 +89,7 @@ DM の実行中にエラーが発生した場合は、次の手順を実行し�
     resume-task ${task name}
     ```
 
-ただし、場合によっては、データ移行タスクをリセットする必要があります。詳細は[<a href="/dm/dm-faq.md#how-to-reset-the-data-migration-task">データ移行タスクをリセットする</a>](/dm/dm-faq.md#how-to-reset-the-data-migration-task)を参照してください。
+ただし、場合によっては、データ移行タスクをリセットする必要があります。詳細は[データ移行タスクをリセットする](/dm/dm-faq.md#how-to-reset-the-data-migration-task)を参照してください。
 
 ## 一般的なエラーを処理する {#handle-common-errors}
 
@@ -101,8 +101,8 @@ DM の実行中にエラーが発生した場合は、次の手順を実行し�
 | `code=10005`                            | `QUERY`種類の SQL ステートメントを実行するときに発生します。                                                                                                                                           |                                                                                                                                                                                                                                                                          |
 | `code=10006`                            | `INSERT` 、または`DELETE`タイプの DDL ステートメントおよび DML ステートメントを含む、 `EXECUTE`タイプの SQL ステートメント`UPDATE`実行するときに発生します。詳細なエラー情報については、エラー メッセージを確認してください。通常、データベース操作で返されたエラー コードとエラー情報が含まれています。 |                                                                                                                                                                                                                                                                          |
 |                                         |                                                                                                                                                                                |                                                                                                                                                                                                                                                                          |
-| `code=11006`                            | DM の組み込みパーサーが互換性のない DDL ステートメントを解析するときに発生します。                                                                                                                                  | 解決策については[<a href="/dm/dm-faq.md#how-to-handle-incompatible-ddl-statements">データ移行 - 互換性のない DDL ステートメント</a>](/dm/dm-faq.md#how-to-handle-incompatible-ddl-statements)を参照してください。                                                                                            |
-| `code=20010`                            | タスク構成で指定されたデータベースのパスワードを復号化するときに発生します。                                                                                                                                         | 構成タスクで指定されたダウンストリーム データベースのパスワードが[<a href="/dm/dm-manage-source.md#encrypt-the-database-password">dmctl を使用して正しく暗号化されている</a>](/dm/dm-manage-source.md#encrypt-the-database-password)であるかどうかを確認します。                                                                       |
+| `code=11006`                            | DM の組み込みパーサーが互換性のない DDL ステートメントを解析するときに発生します。                                                                                                                                  | 解決策については[データ移行 - 互換性のない DDL ステートメント](/dm/dm-faq.md#how-to-handle-incompatible-ddl-statements)を参照してください。                                                                                            |
+| `code=20010`                            | タスク構成で指定されたデータベースのパスワードを復号化するときに発生します。                                                                                                                                         | 構成タスクで指定されたダウンストリーム データベースのパスワードが[dmctl を使用して正しく暗号化されている](/dm/dm-manage-source.md#encrypt-the-database-password)であるかどうかを確認します。                                                                       |
 | `code=26002`                            | タスクチェックでデータベース接続の確立に失敗しました。詳細なエラー情報については、エラー メッセージを確認してください。通常、データベース操作で返されたエラー コードとエラー情報が含まれています。                                                                             | DM-master が配置されているマシンにアップストリームへのアクセス許可があるかどうかを確認します。                                                                                                                                                                                                                     |
 | `code=32001`                            | ダンプ処理装置異常                                                                                                                                                                      | エラー メッセージに`mydumper: argument list too long.`が含まれている場合は、ブロック許可リストに従って`task.yaml`ファイルの Mydumper 引数`extra-args`に`--regex`正規表現を手動で追加して、エクスポートされるテーブルを構成します。たとえば、 `hello`という名前のすべてのテーブルをエクスポートするには、 `--regex '.*\\.hello$'`を追加します。すべてのテーブルをエクスポートするには、 `--regex '.*'`を追加します。 |
 | `code=38008`                            | DM コンポーネント間の gRPC 通信でエラーが発生します。                                                                                                                                                | チェック`class` 。どのコンポーネントの相互作用でエラーが発生したかを調べます。通信エラーの種類を特定します。 gRPC接続確立時にエラーが発生する場合は、通信サーバーが正常に動作しているか確認してください。                                                                                                                                                              |
@@ -178,9 +178,9 @@ binlogレプリケーション処理ユニットの場合は、次の解決策�
 
 ### タスクをクエリするかログを確認すると<code>Access denied for user &#39;root&#39;@&#39;172.31.43.27&#39; (using password: YES)</code>と表示される {#code-access-denied-for-user-root-172-31-43-27-using-password-yes-code-shows-when-you-query-the-task-or-check-the-log}
 
-すべての DM 構成ファイル内のデータベース関連のパスワードには、 `dmctl`で暗号化されたパスワードを使用することをお勧めします。データベースのパスワードが空の場合、暗号化する必要はありません。平文パスワードを暗号化する方法については、 [<a href="/dm/dm-manage-source.md#encrypt-the-database-password">dmctlを使用してデータベースのパスワードを暗号化する</a>](/dm/dm-manage-source.md#encrypt-the-database-password)を参照してください。
+すべての DM 構成ファイル内のデータベース関連のパスワードには、 `dmctl`で暗号化されたパスワードを使用することをお勧めします。データベースのパスワードが空の場合、暗号化する必要はありません。平文パスワードを暗号化する方法については、 [dmctlを使用してデータベースのパスワードを暗号化する](/dm/dm-manage-source.md#encrypt-the-database-password)を参照してください。
 
-さらに、アップストリームおよびダウンストリーム データベースのユーザーは、対応する読み取りおよび書き込み権限を持っている必要があります。データ移行タスクの開始時にデータ移行も[<a href="/dm/dm-precheck.md">対応する権限を自動的に事前チェックします</a>](/dm/dm-precheck.md)なります。
+さらに、アップストリームおよびダウンストリーム データベースのユーザーは、対応する読み取りおよび書き込み権限を持っている必要があります。データ移行タスクの開始時にデータ移行も[対応する権限を自動的に事前チェックします](/dm/dm-precheck.md)なります。
 
 ### <code>load</code>処理ユニットは<code>packet for query is too large. Try adjusting the &#39;max_allowed_packet&#39; variable</code> {#the-code-load-code-processing-unit-reports-the-error-code-packet-for-query-is-too-large-try-adjusting-the-max-allowed-packet-variable-code}
 

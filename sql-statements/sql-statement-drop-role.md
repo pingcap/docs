@@ -162,18 +162,18 @@ ERROR 3530 (HY000): `analyticsteam`@`%` is is not granted to jennifer@%
 
 ## MySQLの互換性 {#mysql-compatibility}
 
-このステートメントは、MySQL 8.0 の機能であるロールと完全な互換性があると理解されています。 GitHub では互換性の違いは[<a href="https://github.com/pingcap/tidb/issues/new/choose">問題を通じて報告されました</a>](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
+このステートメントは、MySQL 8.0 の機能であるロールと完全な互換性があると理解されています。 GitHub では互換性の違いは[問題を通じて報告されました](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-create-role.md">`CREATE ROLE`</a>](/sql-statements/sql-statement-create-role.md)
--   [<a href="/sql-statements/sql-statement-grant-role.md">`GRANT &#x3C;role>`</a>](/sql-statements/sql-statement-grant-role.md)
--   [<a href="/sql-statements/sql-statement-revoke-role.md">`REVOKE &#x3C;role>`</a>](/sql-statements/sql-statement-revoke-role.md)
--   [<a href="/sql-statements/sql-statement-set-role.md">`SET ROLE`</a>](/sql-statements/sql-statement-set-role.md)
--   [<a href="/sql-statements/sql-statement-set-default-role.md">`SET DEFAULT ROLE`</a>](/sql-statements/sql-statement-set-default-role.md)
+-   [`CREATE ROLE`](/sql-statements/sql-statement-create-role.md)
+-   [`GRANT &#x3C;role>`](/sql-statements/sql-statement-grant-role.md)
+-   [`REVOKE &#x3C;role>`](/sql-statements/sql-statement-revoke-role.md)
+-   [`SET ROLE`](/sql-statements/sql-statement-set-role.md)
+-   [`SET DEFAULT ROLE`](/sql-statements/sql-statement-set-default-role.md)
 
 <CustomContent platform="tidb">
 
--   [<a href="/role-based-access-control.md">役割ベースのアクセス制御</a>](/role-based-access-control.md)
+-   [役割ベースのアクセス制御](/role-based-access-control.md)
 
 </CustomContent>

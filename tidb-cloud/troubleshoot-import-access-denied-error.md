@@ -150,7 +150,7 @@ S3 バケットを暗号化する方法は複数あります。バケット内�
 
 <details><summary>SSE-KMS の AWS 管理キー (aws/s3) の場合</summary>
 
-この状況で`AccessDenied`エラーが発生した場合、キーが読み取り専用であり、クロスアカウントのアクセス許可の付与が許可されていないことが原因である可能性があります。詳細については、AWS の記事[<a href="https://aws.amazon.com/premiumsupport/knowledge-center/cross-account-access-denied-error-s3/">クロスアカウントユーザーがカスタム AWS KMS キーで暗号化された S3 オブジェクトにアクセスしようとすると、アクセス拒否エラーが発生するのはなぜですか</a>](https://aws.amazon.com/premiumsupport/knowledge-center/cross-account-access-denied-error-s3/)を参照してください。
+この状況で`AccessDenied`エラーが発生した場合、キーが読み取り専用であり、クロスアカウントのアクセス許可の付与が許可されていないことが原因である可能性があります。詳細については、AWS の記事[クロスアカウントユーザーがカスタム AWS KMS キーで暗号化された S3 オブジェクトにアクセスしようとすると、アクセス拒否エラーが発生するのはなぜですか](https://aws.amazon.com/premiumsupport/knowledge-center/cross-account-access-denied-error-s3/)を参照してください。
 
 アクセス拒否エラーを解決するには、 **[デフォルト暗号化]**領域の右上隅にある**[編集]**をクリックし、AWS KMS キーを [AWS KMS キーから選択] または [AWS KMS キー ARN を入力] に変更するか、サーバーを変更します。側の暗号化タイプを「AWS S3 マネージド キー (SSE-S3)」に設定します。この方法に加えて、新しいバケットを作成してカスタム マネージド キーまたは SSE-S3 暗号化方法を使用することもできます。
 
@@ -164,8 +164,8 @@ S3 バケットを暗号化する方法は複数あります。バケット内�
 
 > **ノート：**
 >
-> バケット内のオブジェクトが既存の暗号化されたバケットからコピーされている場合は、ソース バケットのキーを AWS KMS キー ARN に含める必要もあります。これは、バケット内のオブジェクトがソース オブジェクトの暗号化と同じ暗号化方式を使用しているためです。詳細については、AWS ドキュメント[<a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-encryption.html">レプリケーションでのデフォルトの暗号化の使用</a>](https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-encryption.html)を参照してください。
+> バケット内のオブジェクトが既存の暗号化されたバケットからコピーされている場合は、ソース バケットのキーを AWS KMS キー ARN に含める必要もあります。これは、バケット内のオブジェクトがソース オブジェクトの暗号化と同じ暗号化方式を使用しているためです。詳細については、AWS ドキュメント[レプリケーションでのデフォルトの暗号化の使用](https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-encryption.html)を参照してください。
 
 ## 手順については AWS の記事を確認してください {#check-the-aws-article-for-instruction}
 
-上記のチェックをすべて実行してもエラー`AccessDenied`が発生する場合は、AWS の記事[<a href="https://aws.amazon.com/premiumsupport/knowledge-center/s3-troubleshoot-403/">Amazon S3 からの 403 アクセス拒否エラーをトラブルシューティングするにはどうすればよいですか</a>](https://aws.amazon.com/premiumsupport/knowledge-center/s3-troubleshoot-403/)で詳細な手順を確認してください。
+上記のチェックをすべて実行してもエラー`AccessDenied`が発生する場合は、AWS の記事[Amazon S3 からの 403 アクセス拒否エラーをトラブルシューティングするにはどうすればよいですか](https://aws.amazon.com/premiumsupport/knowledge-center/s3-troubleshoot-403/)で詳細な手順を確認してください。

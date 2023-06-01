@@ -46,7 +46,7 @@ Query OK, 0 rows affected (0.01 sec)
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-commit.md">専念</a>](/sql-statements/sql-statement-commit.md)
--   [<a href="/sql-statements/sql-statement-rollback.md">ロールバック</a>](/sql-statements/sql-statement-rollback.md)
--   [<a href="/sql-statements/sql-statement-begin.md">始める</a>](/sql-statements/sql-statement-begin.md)
--   [<a href="/transaction-overview.md#causal-consistency">因果関係の一貫性のみを考慮してトランザクションを開始する</a>](/transaction-overview.md#causal-consistency)
+-   [専念](/sql-statements/sql-statement-commit.md)
+-   [ロールバック](/sql-statements/sql-statement-rollback.md)
+-   [始める](/sql-statements/sql-statement-begin.md)
+-   [因果関係の一貫性のみを考慮してトランザクションを開始する](/transaction-overview.md#causal-consistency)

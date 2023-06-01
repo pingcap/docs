@@ -52,7 +52,7 @@ Query OK, 0 rows affected (0.00 sec)
 
 <CustomContent platform="tidb">
 
-v6.1.0 以降、TiDB は Global Kill 機能をサポートします。この機能はデフォルトで有効になり、 [<a href="/tidb-configuration-file.md#enable-global-kill-new-in-v610">`enable-global-kill`</a>](/tidb-configuration-file.md#enable-global-kill-new-in-v610)構成によって制御されます。
+v6.1.0 以降、TiDB は Global Kill 機能をサポートします。この機能はデフォルトで有効になり、 [`enable-global-kill`](/tidb-configuration-file.md#enable-global-kill-new-in-v610)構成によって制御されます。
 
 </CustomContent>
 
@@ -70,7 +70,7 @@ Global Kill 機能が有効になっていない場合、または v6.1.0 より
 
 <CustomContent platform="tidb">
 
--   クライアントが常に同じ TiDB インスタンスに接続されることが確実でない限り、構成ファイルで[<a href="/tidb-configuration-file.md#compatible-kill-query">`compatible-kill-query = true`</a>](/tidb-configuration-file.md#compatible-kill-query)を設定することは**強く推奨されません**。これは、デフォルトの MySQL クライアントで<kbd>Ctrl</kbd> + <kbd>C</kbd>を押すと、 `KILL`が実行される新しい接続が開かれるためです。クライアントと TiDB クラスターの間にプロキシがある場合、新しい接続が別の TiDB インスタンスにルーティングされる可能性があり、これにより誤って別のセッションが強制終了される可能性があります。
+-   クライアントが常に同じ TiDB インスタンスに接続されることが確実でない限り、構成ファイルで[`compatible-kill-query = true`](/tidb-configuration-file.md#compatible-kill-query)を設定することは**強く推奨されません**。これは、デフォルトの MySQL クライアントで<kbd>Ctrl</kbd> + <kbd>C</kbd>を押すと、 `KILL`が実行される新しい接続が開かれるためです。クライアントと TiDB クラスターの間にプロキシがある場合、新しい接続が別の TiDB インスタンスにルーティングされる可能性があり、これにより誤って別のセッションが強制終了される可能性があります。
 
 </CustomContent>
 
@@ -78,5 +78,5 @@ Global Kill 機能が有効になっていない場合、または v6.1.0 より
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-show-processlist.md">[完全な] プロセスリストを表示</a>](/sql-statements/sql-statement-show-processlist.md)
--   [<a href="/information-schema/information-schema-processlist.md#cluster_processlist">CLUSTER_PROCESSLIST</a>](/information-schema/information-schema-processlist.md#cluster_processlist)
+-   [[完全な] プロセスリストを表示](/sql-statements/sql-statement-show-processlist.md)
+-   [CLUSTER_PROCESSLIST](/information-schema/information-schema-processlist.md#cluster_processlist)

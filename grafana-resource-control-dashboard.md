@@ -5,19 +5,19 @@ summary: Learn some key metrics displayed on the Grafana Resource Control dashbo
 
 # リソース制御の主要な監視指標 {#key-monitoring-metrics-of-resource-control}
 
-TiUPを使用して TiDB クラスターをデプロイすると、監視システム (Prometheus および Grafana) も同時にデプロイされます。詳細については、 [<a href="/tidb-monitoring-framework.md">監視フレームワークの概要</a>](/tidb-monitoring-framework.md)を参照してください。
+TiUPを使用して TiDB クラスターをデプロイすると、監視システム (Prometheus および Grafana) も同時にデプロイされます。詳細については、 [監視フレームワークの概要](/tidb-monitoring-framework.md)を参照してください。
 
 Grafana ダッシュボードは、概要、PD、TiDB、TiKV、Node_exporter、Disk Performance、および Performance_overview を含む一連のサブ ダッシュボードに分割されています。
 
-クラスターで[<a href="/tidb-resource-control.md">リソース制御</a>](/tidb-resource-control.md)機能が使用されている場合は、リソース制御ダッシュボードからリソース消費ステータスの概要を取得できます。
+クラスターで[リソース制御](/tidb-resource-control.md)機能が使用されている場合は、リソース制御ダッシュボードからリソース消費ステータスの概要を取得できます。
 
-TiDB はフロー制御に[<a href="https://en.wikipedia.org/wiki/Token_bucket">トークンバケットアルゴリズム</a>](https://en.wikipedia.org/wiki/Token_bucket)を使用します。 [<a href="https://github.com/pingcap/tidb/blob/master/docs/design/2022-11-25-global-resource-control.md#distributed-token-buckets">RFC: TiDB におけるグローバル リソース制御</a>](https://github.com/pingcap/tidb/blob/master/docs/design/2022-11-25-global-resource-control.md#distributed-token-buckets)で説明したように、TiDB ノードには複数のリソース グループがある場合があり、これらのリソース グループは PD 側の GAC (グローバル アドミッション コントロール) によってフロー制御されます。各 TiDB ノードのローカル トークン バケットは、PD 側の GAC と定期的に (デフォルトでは 5 秒) 通信して、ローカル トークンを再構成します。 TiDB では、ローカル トークン バケットはリソース コントローラー クライアントとして実装されます。
+TiDB はフロー制御に[RFC: TiDB におけるグローバル リソース制御](https://github.com/pingcap/tidb/blob/master/docs/design/2022-11-25-global-resource-control.md#distributed-token-buckets)で説明したように、TiDB ノードには複数のリソース グループがある場合があり、これらのリソース グループは PD 側の GAC (グローバル アドミッション コントロール) によってフロー制御されます。各 TiDB ノードのローカル トークン バケットは、PD 側の GAC と定期的に (デフォルトでは 5 秒) 通信して、ローカル トークンを再構成します。 TiDB では、ローカル トークン バケットはリソース コントローラー クライアントとして実装されます。
 
 このドキュメントでは、リソース制御ダッシュボードに表示されるいくつかの主要な監視メトリックについて説明します。
 
 ## リクエストユニットに関するメトリクス {#metrics-about-request-unit}
 
--   RU: リアルタイムで計算された、各リソース グループの[<a href="/tidb-resource-control.md#what-is-request-unit-ru">リクエストユニット (RU)</a>](/tidb-resource-control.md#what-is-request-unit-ru)情報。 `total`は、すべてのリソース グループによって消費されるリクエスト ユニットの合計です。各リソース グループのリクエスト ユニット消費量は、その読み取り消費量 (読み取りリクエスト ユニット) と書き込み消費量 (書き込みリクエスト ユニット) の合計と等しくなければなりません。
+-   RU: リアルタイムで計算された、各リソース グループの[リクエストユニット (RU)](/tidb-resource-control.md#what-is-request-unit-ru)情報。 `total`は、すべてのリソース グループによって消費されるリクエスト ユニットの合計です。各リソース グループのリクエスト ユニット消費量は、その読み取り消費量 (読み取りリクエスト ユニット) と書き込み消費量 (書き込みリクエスト ユニット) の合計と等しくなければなりません。
 -   クエリあたりの RU: 1 秒あたりに各 SQL ステートメントによって消費されるリクエスト ユニットの平均数。これは、上記の RU メトリックを 1 秒あたりに実行される SQL ステートメントの数で割ることによって取得されます。
 -   RRU: リアルタイムで計算された、各リソース グループの読み取りリクエスト ユニット消費情報。 `total`は、すべてのリソース グループによって消費される読み取りリクエスト ユニットの合計です。
 -   クエリごとの RRU: 各 SQL ステートメントによって消費される 1 秒あたりの読み取りリクエスト ユニットの平均数。これは、上記の RRU メトリックを 1 秒あたりに実行される SQL ステートメントの数で割ることによって取得されます。

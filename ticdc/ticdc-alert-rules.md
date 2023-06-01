@@ -25,7 +25,7 @@ summary: Learn about TiCDC alert rules and how to handle the alerts.
 
 -   解決：
 
-    [<a href="/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions">TiCDC ハンドル レプリケーションの中断</a>](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions)を参照してください。
+    [TiCDC ハンドル レプリケーションの中断](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions)を参照してください。
 
 ## <code>cdc_resolvedts_high_delay</code> {#code-cdc-resolvedts-high-delay-code}
 
@@ -39,7 +39,7 @@ summary: Learn about TiCDC alert rules and how to handle the alerts.
 
 -   解決：
 
-    [<a href="/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions">TiCDC ハンドル レプリケーションの中断</a>](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions)を参照してください。
+    [TiCDC ハンドル レプリケーションの中断](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions)を参照してください。
 
 ### <code>ticdc_processor_exit_with_error_count</code> {#code-ticdc-processor-exit-with-error-count-code}
 
@@ -53,7 +53,7 @@ summary: Learn about TiCDC alert rules and how to handle the alerts.
 
 -   解決：
 
-    [<a href="/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions">TiCDC ハンドル レプリケーションの中断</a>](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions)を参照してください。
+    [TiCDC ハンドル レプリケーションの中断](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions)を参照してください。
 
 ## 警告アラート {#warning-alerts}
 
@@ -113,7 +113,7 @@ summary: Learn about TiCDC alert rules and how to handle the alerts.
 
 -   解決：
 
-    [<a href="/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions">TiCDC ハンドル レプリケーションの中断</a>](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions)を参照してください。
+    [TiCDC ハンドル レプリケーションの中断](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions)を参照してください。
 
 ### <code>ticdc_puller_entry_sorter_sort_bucket</code> {#code-ticdc-puller-entry-sorter-sort-bucket-code}
 
@@ -183,7 +183,7 @@ summary: Learn about TiCDC alert rules and how to handle the alerts.
 
 -   解決：
 
-    考えられる根本原因は多数あります。 [<a href="/ticdc/troubleshoot-ticdc.md">TiCDC のトラブルシューティング</a>](/ticdc/troubleshoot-ticdc.md)を参照してください。
+    考えられる根本原因は多数あります。 [TiCDC のトラブルシューティング](/ticdc/troubleshoot-ticdc.md)を参照してください。
 
 ### <code>ticdc_memory_abnormal</code> {#code-ticdc-memory-abnormal-code}
 

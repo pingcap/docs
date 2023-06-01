@@ -36,17 +36,17 @@ DESC deadlocks;
 
 -   `DEADLOCK_ID` : デッドロック イベントの ID。テーブル内に複数のデッドロック エラーが存在する場合、この列を使用して、異なるデッドロック エラーに属する行を区別できます。
 -   `OCCUR_TIME` : デッドロックエラーが発生した時刻。
--   `RETRYABLE` : デッドロックエラーをリトライできるかどうか。再試行可能なデッドロック エラーの説明については、 [<a href="#retryable-deadlock-errors">再試行可能なデッドロック エラー</a>](#retryable-deadlock-errors)セクションを参照してください。
+-   `RETRYABLE` : デッドロックエラーをリトライできるかどうか。再試行可能なデッドロック エラーの説明については、 [再試行可能なデッドロック エラー](#retryable-deadlock-errors)セクションを参照してください。
 -   `TRY_LOCK_TRX_ID` : ロックを取得しようとするトランザクションの ID。この ID はトランザクションの`start_ts`でもあります。
 -   `CURRENT_SQL_DIGEST` : ロック取得トランザクションで現在実行中のSQL文のダイジェスト。
 -   `CURRENT_SQL_DIGEST_TEXT` : ロック取得トランザクションで現在実行されている SQL ステートメントの正規化された形式。
 -   `KEY` : トランザクションがロックしようとしたブロックされたキー。このフィールドの値は 16 進文字列の形式で表示されます。
--   `KEY_INFO` ： `KEY`の詳細情報です。 [<a href="#key_info">`KEY_INFO`</a>](#key_info)セクションを参照してください。
+-   `KEY_INFO` ： `KEY`の詳細情報です。 [`KEY_INFO`](#key_info)セクションを参照してください。
 -   `TRX_HOLDING_LOCK` : 現在キーのロックを保持し、ブロックを引き起こしているトランザクションの ID。この ID はトランザクションの`start_ts`でもあります。
 
 <CustomContent platform="tidb">
 
-`DEADLOCKS`テーブルに記録できるデッドロック イベントの最大数を調整するには、TiDB 構成ファイルの[<a href="/tidb-configuration-file.md#deadlock-history-capacity">`pessimistic-txn.deadlock-history-capacity`</a>](/tidb-configuration-file.md#deadlock-history-capacity)構成を調整します。デフォルトでは、最近の 10 件のデッドロック イベントの情報がテーブルに記録されます。
+`DEADLOCKS`テーブルに記録できるデッドロック イベントの最大数を調整するには、TiDB 構成ファイルの[`pessimistic-txn.deadlock-history-capacity`](/tidb-configuration-file.md#deadlock-history-capacity)構成を調整します。デフォルトでは、最近の 10 件のデッドロック イベントの情報がテーブルに記録されます。
 
 </CustomContent>
 
@@ -58,8 +58,8 @@ DESC deadlocks;
 
 > **警告：**
 >
-> -   [<a href="https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process">プロセス</a>](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process)権限を持つユーザーのみがこのテーブルをクエリできます。
-> -   `CURRENT_SQL_DIGEST`列目の情報（SQLダイジェスト）は、正規化されたSQL文から計算されたハッシュ値です。 `CURRENT_SQL_DIGEST_TEXT`列の情報はステートメント概要テーブルから内部的にクエリされるため、対応するステートメントが内部で見つからない可能性があります。 SQL ダイジェストとステートメント概要テーブルの詳細については、 [<a href="/statement-summary-tables.md">ステートメント概要テーブル</a>](/statement-summary-tables.md)を参照してください。
+> -   [プロセス](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process)権限を持つユーザーのみがこのテーブルをクエリできます。
+> -   `CURRENT_SQL_DIGEST`列目の情報（SQLダイジェスト）は、正規化されたSQL文から計算されたハッシュ値です。 `CURRENT_SQL_DIGEST_TEXT`列の情報はステートメント概要テーブルから内部的にクエリされるため、対応するステートメントが内部で見つからない可能性があります。 SQL ダイジェストとステートメント概要テーブルの詳細については、 [ステートメント概要テーブル](/statement-summary-tables.md)を参照してください。
 
 ## <code>KEY_INFO</code> {#code-key-info-code}
 
@@ -100,7 +100,7 @@ DESC deadlocks;
 
 > **ノート：**
 >
-> `DEADLOCKS`テーブルは、デフォルトでは再試行可能なデッドロック エラーの情報を収集しません。テーブルで再試行可能なデッドロック エラー情報を収集する場合は、TiDB 構成ファイルで値[<a href="/tidb-configuration-file.md#deadlock-history-collect-retryable">`pessimistic-txn.deadlock-history-collect-retryable`</a>](/tidb-configuration-file.md#deadlock-history-collect-retryable)を調整できます。
+> `DEADLOCKS`テーブルは、デフォルトでは再試行可能なデッドロック エラーの情報を収集しません。テーブルで再試行可能なデッドロック エラー情報を収集する場合は、TiDB 構成ファイルで値[`pessimistic-txn.deadlock-history-collect-retryable`](/tidb-configuration-file.md#deadlock-history-collect-retryable)を調整できます。
 
 </CustomContent>
 

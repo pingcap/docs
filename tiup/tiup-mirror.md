@@ -115,7 +115,7 @@ export TIUP_MIRRORS=/shared_data/tiup
 tiup list
 ```
 
-`TIUP_MIRRORS`設定では、ミラー構成を永続的に変更できます (例: `tiup mirror set` )。詳細は[<a href="https://github.com/pingcap/tiup/issues/651">ティアップ号 #651</a>](https://github.com/pingcap/tiup/issues/651)を参照してください。
+`TIUP_MIRRORS`設定では、ミラー構成を永続的に変更できます (例: `tiup mirror set` )。詳細は[ティアップ号 #651](https://github.com/pingcap/tiup/issues/651)を参照してください。
 
 ### プライベートリポジトリを更新する {#update-the-private-repository}
 
@@ -129,7 +129,7 @@ tiup list
 
 カスタム リポジトリを作成して、自分で構築した TiDB、TiKV、PD などの TiDB コンポーネントを操作できます。独自の tiup コンポーネントを作成することもできます。
 
-独自のコンポーネントを作成するには、 `tiup package`コマンドを実行し、 [<a href="https://github.com/pingcap/tiup/blob/master/doc/user/package.md">コンポーネントの梱包</a>](https://github.com/pingcap/tiup/blob/master/doc/user/package.md)の指示に従って実行します。
+独自のコンポーネントを作成するには、 `tiup package`コマンドを実行し、 [コンポーネントの梱包](https://github.com/pingcap/tiup/blob/master/doc/user/package.md)の指示に従って実行します。
 
 ### カスタムリポジトリを作成する {#create-a-custom-repository}
 

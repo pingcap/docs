@@ -7,12 +7,12 @@ summary: Learn about the FAQs related to TiDB Monitoring.
 
 このドキュメントには、TiDB モニタリングに関連する FAQ がまとめられています。
 
--   Prometheus 監視フレームワークの詳細については、 [<a href="/tidb-monitoring-framework.md">監視フレームワークの概要</a>](/tidb-monitoring-framework.md)を参照してください。
--   モニタリングの主要な指標の詳細については、 [<a href="/grafana-overview-dashboard.md">主要な指標</a>](/grafana-overview-dashboard.md)を参照してください。
+-   Prometheus 監視フレームワークの詳細については、 [監視フレームワークの概要](/tidb-monitoring-framework.md)を参照してください。
+-   モニタリングの主要な指標の詳細については、 [主要な指標](/grafana-overview-dashboard.md)を参照してください。
 
 ## 主要な指標を監視するより良い方法はあるでしょうか? {#is-there-a-better-way-of-monitoring-the-key-metrics}
 
-TiDB の監視システムは Prometheus と Grafana で構成されます。 Grafana のダッシュボードから、システム リソース、クライアント接続と SQL 操作、内部通信とリージョンスケジューリングの監視メトリクスを含む、TiDB のさまざまな実行メトリクスを監視できます。これらのメトリックを使用すると、データベース管理者はシステムの実行ステータスや実行のボトルネックなどをより深く理解できるようになります。これらのメトリクスを監視する実践では、各 TiDBコンポーネントの主要なメトリクスをリストします。通常、これらの一般的な指標にのみ注意する必要があります。詳細は[<a href="/grafana-overview-dashboard.md">公式ドキュメント</a>](/grafana-overview-dashboard.md)を参照してください。
+TiDB の監視システムは Prometheus と Grafana で構成されます。 Grafana のダッシュボードから、システム リソース、クライアント接続と SQL 操作、内部通信とリージョンスケジューリングの監視メトリクスを含む、TiDB のさまざまな実行メトリクスを監視できます。これらのメトリックを使用すると、データベース管理者はシステムの実行ステータスや実行のボトルネックなどをより深く理解できるようになります。これらのメトリクスを監視する実践では、各 TiDBコンポーネントの主要なメトリクスをリストします。通常、これらの一般的な指標にのみ注意する必要があります。詳細は[公式ドキュメント](/grafana-overview-dashboard.md)を参照してください。
 
 ## Prometheus 監視データは、デフォルトでは 15 日ごとに削除されます。 2か月に設定するか、監視データを手動で削除できますか? {#the-prometheus-monitoring-data-is-deleted-every-15-days-by-default-could-i-set-it-to-two-months-or-delete-the-monitoring-data-manually}
 

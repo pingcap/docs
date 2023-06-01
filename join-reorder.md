@@ -57,14 +57,14 @@ t1 と t3 はデータ量と分布が異なるため、これら 2 つの実行�
 
 ## 結合したテーブルの再配置アルゴリズムの選択 {#selection-of-the-join-reorder-algorithms}
 
-TiDB 結合したテーブルの再配置アルゴリズムの選択は、変数[<a href="/system-variables.md#tidb_opt_join_reorder_threshold">`tidb_opt_join_reorder_threshold`</a>](/system-variables.md#tidb_opt_join_reorder_threshold)によって制御されます。 結合したテーブルの再配置に参加しているノードの数がこのしきい値より大きい場合、TiDB は貪欲アルゴリズムを使用します。それ以外の場合、TiDB は動的プログラミング アルゴリズムを使用します。
+TiDB 結合したテーブルの再配置アルゴリズムの選択は、変数[`tidb_opt_join_reorder_threshold`](/system-variables.md#tidb_opt_join_reorder_threshold)によって制御されます。 結合したテーブルの再配置に参加しているノードの数がこのしきい値より大きい場合、TiDB は貪欲アルゴリズムを使用します。それ以外の場合、TiDB は動的プログラミング アルゴリズムを使用します。
 
 ## 結合したテーブルの再配置アルゴリズムの制限 {#limitations-of-join-reorder-algorithms}
 
 現在の結合したテーブルの再配置アルゴリズムには次の制限があります。
 
 -   結果セットの計算方法によって制限されるため、アルゴリズムは最適な結合順序を選択することを保証できません。
--   結合したテーブルの再配置アルゴリズムによる外部結合のサポートは、 [<a href="/system-variables.md#tidb_enable_outer_join_reorder-new-in-v610">`tidb_enable_outer_join_reorder`</a>](/system-variables.md#tidb_enable_outer_join_reorder-new-in-v610)システム変数によって制御されます。
+-   結合したテーブルの再配置アルゴリズムによる外部結合のサポートは、 [`tidb_enable_outer_join_reorder`](/system-variables.md#tidb_enable_outer_join_reorder-new-in-v610)システム変数によって制御されます。
 -   現在、動的プログラミング アルゴリズムは、外部結合の結合したテーブルの再配置を実行できません。
 
-現在、結合順序を強制する`STRAIGHT_JOIN`構文が TiDB でサポートされています。詳細については、 [<a href="/sql-statements/sql-statement-select.md#description-of-the-syntax-elements">構文要素の説明</a>](/sql-statements/sql-statement-select.md#description-of-the-syntax-elements)を参照してください。
+現在、結合順序を強制する`STRAIGHT_JOIN`構文が TiDB でサポートされています。詳細については、 [構文要素の説明](/sql-statements/sql-statement-select.md#description-of-the-syntax-elements)を参照してください。

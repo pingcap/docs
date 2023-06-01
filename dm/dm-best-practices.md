@@ -5,7 +5,7 @@ summary: Learn about best practices when you use TiDB Data Migration (DM) to mig
 
 # TiDB データ移行 (DM) のベスト プラクティス {#tidb-data-migration-dm-best-practices}
 
-[<a href="https://github.com/pingcap/tiflow/tree/master/dm">TiDB データ移行 (DM)</a>](https://github.com/pingcap/tiflow/tree/master/dm)は、PingCAP によって開発されたデータ移行ツールです。 MySQL、Percona MySQL、MariaDB、Amazon RDS for MySQL、Amazon Auroraなどの MySQL 互換データベースから TiDB への完全および増分データ移行をサポートします。
+[TiDB データ移行 (DM)](https://github.com/pingcap/tiflow/tree/master/dm)は、PingCAP によって開発されたデータ移行ツールです。 MySQL、Percona MySQL、MariaDB、Amazon RDS for MySQL、Amazon Auroraなどの MySQL 互換データベースから TiDB への完全および増分データ移行をサポートします。
 
 DM は次のシナリオで使用できます。
 
@@ -27,7 +27,7 @@ DM は次のシナリオで使用できます。
 
 -   DM は 1000 の作業ノードの同時管理をサポートし、タスクの最大数は 600 です。作業ノードの高可用性を確保するには、いくつかの作業ノードをスタンバイ ノードとして予約する必要があります。推奨されるスタンバイ ノードの数は、移行タスクを実行している作業ノードの数の 20% ～ 50% です。
 -   理論的には、単一の作業ノードはワーカーあたり最大 30,000 QPS のレプリケーション QPS をサポートできます。これはスキーマやワークロードによって異なります。アップストリームのバイナリログを処理できる能力は、ワーカーあたり最大 20 MB/秒です。
--   DM をデータ レプリケーション ミドルウェアとして長期間使用する場合は、DM コンポーネントのデプロイメントアーキテクチャを慎重に設計する必要があります。詳細については、 [<a href="#deploy-dm-master-and-dm-worker">DM マスターと DM ワーカーをデプロイ</a>](#deploy-dm-master-and-dm-worker)を参照してください。
+-   DM をデータ レプリケーション ミドルウェアとして長期間使用する場合は、DM コンポーネントのデプロイメントアーキテクチャを慎重に設計する必要があります。詳細については、 [DM マスターと DM ワーカーをデプロイ](#deploy-dm-master-and-dm-worker)を参照してください。
 
 ## データ移行前 {#before-data-migration}
 
@@ -39,9 +39,9 @@ DM は次のシナリオで使用できます。
 
 #### スキーマ設計における AUTO_INCREMENT のビジネスへの影響 {#business-impact-of-auto-increment-in-schema-design}
 
-TiDB の`AUTO_INCREMENT` MySQL の`AUTO_INCREMENT`と互換性があります。ただし、分散データベースとして、TiDB には通常、複数のコンピューティング ノード (クライアント エンドのエントリ) があります。アプリケーション データが書き込まれるとき、ワークロードは均等に分散されます。これにより、テーブルに`AUTO_INCREMENT`の列がある場合、その列の自動インクリメント ID が不連続になる可能性があります。詳細については、 [<a href="/auto-increment.md#implementation-principles">自動増加</a>](/auto-increment.md#implementation-principles)を参照してください。
+TiDB の`AUTO_INCREMENT` MySQL の`AUTO_INCREMENT`と互換性があります。ただし、分散データベースとして、TiDB には通常、複数のコンピューティング ノード (クライアント エンドのエントリ) があります。アプリケーション データが書き込まれるとき、ワークロードは均等に分散されます。これにより、テーブルに`AUTO_INCREMENT`の列がある場合、その列の自動インクリメント ID が不連続になる可能性があります。詳細については、 [自動増加](/auto-increment.md#implementation-principles)を参照してください。
 
-ビジネスが自動インクリメント ID に強く依存している場合は、 [<a href="/sql-statements/sql-statement-create-sequence.md#sequence-function">シーケンス機能</a>](/sql-statements/sql-statement-create-sequence.md#sequence-function)の使用を検討してください。
+ビジネスが自動インクリメント ID に強く依存している場合は、 [シーケンス機能](/sql-statements/sql-statement-create-sequence.md#sequence-function)の使用を検討してください。
 
 #### クラスター化インデックスの使用法 {#usage-of-clustered-indexes}
 
@@ -49,7 +49,7 @@ TiDB の`AUTO_INCREMENT` MySQL の`AUTO_INCREMENT`と互換性があります。
 
 -   クラスター化インデックス
 
-    [<a href="/clustered-indexes.md">クラスター化インデックス</a>](/clustered-indexes.md)データstorageのハンドル ID (行 ID) として主キーを使用します。主キーを使用してクエリを実行すると、テーブルの検索を回避できるため、クエリのパフォーマンスが効果的に向上します。ただし、テーブルが書き込み集中型で主キーが[<a href="/auto-increment.md">`AUTO_INCREMENT`</a>](/auto-increment.md)使用している場合は、 [<a href="/best-practices/high-concurrency-best-practices.md#highly-concurrent-write-intensive-scenario">書き込みホットスポットの問題</a>](/best-practices/high-concurrency-best-practices.md#highly-concurrent-write-intensive-scenario)発生する可能性が非常に高く、その結果、クラスターのパフォーマンスが中程度になり、単一のstorageノードのパフォーマンスのボトルネックが発生します。
+    [書き込みホットスポットの問題](/best-practices/high-concurrency-best-practices.md#highly-concurrent-write-intensive-scenario)発生する可能性が非常に高く、その結果、クラスターのパフォーマンスが中程度になり、単一のstorageノードのパフォーマンスのボトルネックが発生します。
 
 -   非クラスター化インデックス + `shard row id bit`
 
@@ -61,7 +61,7 @@ TiDB の`AUTO_INCREMENT` MySQL の`AUTO_INCREMENT`と互換性があります。
 
 -   クラスター化インデックス + `AUTO_RANDOM`
 
-    このソリューションでは、クラスター化インデックスを使用する利点を維持し、書き込みホットスポットの問題を回避できます。カスタマイズに必要な労力が少なくなります。 TiDB を書き込みデータベースとして使用するように切り替えるときに、スキーマ属性を変更できます。後続のクエリで、ID 列を使用してデータを並べ替える必要がある場合は、 [<a href="/auto-random.md">`AUTO_RANDOM`</a>](/auto-random.md) ID 列を使用して 5 ビット左シフトし、クエリ データの順序を確保できます。例えば：
+    このソリューションでは、クラスター化インデックスを使用する利点を維持し、書き込みホットスポットの問題を回避できます。カスタマイズに必要な労力が少なくなります。 TiDB を書き込みデータベースとして使用するように切り替えるときに、スキーマ属性を変更できます。後続のクエリで、ID 列を使用してデータを並べ替える必要がある場合は、 [`AUTO_RANDOM`](/auto-random.md) ID 列を使用して 5 ビット左シフトし、クエリ データの順序を確保できます。例えば：
 
     ```sql
     CREATE TABLE t (a bigint PRIMARY KEY AUTO_RANDOM, b varchar(255));
@@ -81,9 +81,9 @@ TiDB の`AUTO_INCREMENT` MySQL の`AUTO_INCREMENT`と互換性があります。
 
 #### 分割と結合 {#splitting-and-merging}
 
-[<a href="/migrate-small-mysql-shards-to-tidb.md">小規模なデータセットの MySQL シャードを TiDB に移行およびマージする</a>](/migrate-small-mysql-shards-to-tidb.md)への DM を使用することをお勧めします。
+[小規模なデータセットの MySQL シャードを TiDB に移行およびマージする](/migrate-small-mysql-shards-to-tidb.md)への DM を使用することをお勧めします。
 
-データのマージのほかに、もう 1 つの典型的なシナリオはデータのアーカイブです。データは常に書き込まれ続けます。時間が経つにつれて、大量のデータはホット データからウォーム データ、さらにはコールド データに徐々に変化します。幸いなことに、TiDB ではデータに異なる[<a href="/configure-placement-rules.md">配置ルール</a>](/configure-placement-rules.md)を設定できます。ルールの最小粒度は[<a href="/partitioned-table.md">パーティション</a>](/partitioned-table.md)です。
+データのマージのほかに、もう 1 つの典型的なシナリオはデータのアーカイブです。データは常に書き込まれ続けます。時間が経つにつれて、大量のデータはホット データからウォーム データ、さらにはコールド データに徐々に変化します。幸いなことに、TiDB ではデータに異なる[パーティション](/partitioned-table.md)です。
 
 したがって、書き込み集中型のシナリオでは、データをアーカイブし、ホット データとコールド データを異なるメディアに別々に保存する必要があるかどうかを最初から評価する必要があることをお勧めします。データをアーカイブする必要がある場合は、移行前にパーティション化ルールを設定できます (TiDB はテーブル再構築操作をまだサポートしていません)。これにより、今後テーブルを再作成したりデータをインポートしたりする必要がなくなります。
 
@@ -91,7 +91,7 @@ TiDB の`AUTO_INCREMENT` MySQL の`AUTO_INCREMENT`と互換性があります。
 
 DM はデフォルトで悲観的モードを使用します。 MySQL シャードの移行およびマージのシナリオでは、アップストリーム シャード スキーマの変更により、ダウンストリーム データベースへの DML 書き込みがブロックされる可能性があります。すべてのスキーマが変更されて同じ構造になるまで待ってから、ブレークポイントから移行を続行する必要があります。
 
--   上流のスキーマ変更に長い時間がかかると、上流のBinlog がクリーンアップされる可能性があります。この問題を回避するには、リレー ログを有効にすることができます。詳細については、 [<a href="#use-the-relay-log">リレーログを使用する</a>](#use-the-relay-log)を参照してください。
+-   上流のスキーマ変更に長い時間がかかると、上流のBinlog がクリーンアップされる可能性があります。この問題を回避するには、リレー ログを有効にすることができます。詳細については、 [リレーログを使用する](#use-the-relay-log)を参照してください。
 
 -   上流のスキーマ変更によりデータ書き込みをブロックしたくない場合は、楽観的モードの使用を検討してください。この場合、DM は上流のシャード スキーマの変更を検出した場合でもデータ移行をブロックせず、データの移行を続行します。ただし、DM がアップストリームとダウンストリームで互換性のない形式を検出した場合、移行タスクは停止します。この問題は手動で解決する必要があります。
 
@@ -100,24 +100,24 @@ DM はデフォルトで悲観的モードを使用します。 MySQL シャー�
 | シナリオ           | 長所                                      | 短所                                                                                                                                                                                                                                                             |
 | :------------- | :-------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 悲観的モード (デフォルト) | ダウンストリームに移行されたデータに問題が発生しないことを保証できます。    | 多数のシャードがある場合、移行タスクは長時間ブロックされるか、上流のバイナリログがクリーンアップされている場合には停止することもあります。この問題を回避するには、リレー ログを有効にすることができます。詳細については、「リレーログを使用する」(#use-therelay-log)を参照してください。                                                                                                         |
-| 楽観的モード         | 上流のスキーマ変更によってデータ移行のレイテンシーが発生することはありません。 | このモードでは、スキーマの変更に互換性があることを確認します (増分列にデフォルト値があるかどうかを確認します)。矛盾したデータが見落とされる可能性があります。詳細については、 [<a href="/dm/feature-shard-merge-optimistic.md#restrictions">オプティミスティックモードでのシャードテーブルからのデータのマージと移行</a>](/dm/feature-shard-merge-optimistic.md#restrictions)を参照してください。 |
+| 楽観的モード         | 上流のスキーマ変更によってデータ移行のレイテンシーが発生することはありません。 | このモードでは、スキーマの変更に互換性があることを確認します (増分列にデフォルト値があるかどうかを確認します)。矛盾したデータが見落とされる可能性があります。詳細については、 [オプティミスティックモードでのシャードテーブルからのデータのマージと移行](/dm/feature-shard-merge-optimistic.md#restrictions)を参照してください。 |
 
 ### その他の制限と影響 {#other-restrictions-and-impact}
 
 #### アップストリームとダウンストリームのデータ型 {#data-types-in-upstream-and-downstream}
 
-TiDB はほとんどの MySQL データ型をサポートします。ただし、一部の特殊な型はまだサポートされていません ( `SPATIAL`など)。データ型の互換性については、 [<a href="/data-type-overview.md">データ型</a>](/data-type-overview.md)を参照してください。
+TiDB はほとんどの MySQL データ型をサポートします。ただし、一部の特殊な型はまだサポートされていません ( `SPATIAL`など)。データ型の互換性については、 [データ型](/data-type-overview.md)を参照してください。
 
 #### 文字セットと照合順序 {#character-sets-and-collations}
 
-TiDB v6.0.0 以降、照合順序の新しいフレームワークがデフォルトで使用されます。以前のバージョンでは、TiDB で utf8_general_ci、utf8mb4_general_ci、utf8_unicode_ci、utf8mb4_unicode_ci、gbk_chinese_ci、gbk_bin をサポートしたい場合は、クラスターの作成時に`new_collations_enabled_on_first_bootstrap`から`true`の値を設定して明示的に宣言する必要がありました。詳細については、 [<a href="/character-set-and-collation.md#new-framework-for-collations">照合順序の新しいフレームワーク</a>](/character-set-and-collation.md#new-framework-for-collations)を参照してください。
+TiDB v6.0.0 以降、照合順序の新しいフレームワークがデフォルトで使用されます。以前のバージョンでは、TiDB で utf8_general_ci、utf8mb4_general_ci、utf8_unicode_ci、utf8mb4_unicode_ci、gbk_chinese_ci、gbk_bin をサポートしたい場合は、クラスターの作成時に`new_collations_enabled_on_first_bootstrap`から`true`の値を設定して明示的に宣言する必要がありました。詳細については、 [照合順序の新しいフレームワーク](/character-set-and-collation.md#new-framework-for-collations)を参照してください。
 
 TiDB のデフォルトの文字セットは utf8mb4 です。アップストリームおよびダウンストリームのデータベースおよびアプリケーションには utf8mb4 を使用することをお勧めします。上流のデータベースが文字セットまたは照合順序を明示的に指定している場合は、TiDB がそれをサポートしているかどうかを確認する必要があります。
 
 TiDB v6.0.0 以降、GBK がサポートされています。詳細については、次のドキュメントを参照してください。
 
--   [<a href="/character-set-and-collation.md">文字セットと照合順序</a>](/character-set-and-collation.md)
--   [<a href="/character-set-gbk.md#mysql-compatibility">GBKの互換性</a>](/character-set-gbk.md#mysql-compatibility)
+-   [文字セットと照合順序](/character-set-and-collation.md)
+-   [GBKの互換性](/character-set-gbk.md#mysql-compatibility)
 
 ### 導入のベストプラクティス {#best-practices-for-deployment}
 
@@ -151,7 +151,7 @@ MySQL シャードを移行およびマージする場合、アップストリ�
 
 #### アップストリーム データ ソースの選択と構成 {#choose-and-configure-the-upstream-data-source}
 
-DM は、完全データ移行を実行するときにデータベース全体の完全データをバックアップし、並列論理バックアップ方式を使用します。 MySQL のバックアップ中に、グローバル読み取りロック[<a href="https://dev.mysql.com/doc/refman/8.0/en/flush.html#flush-tables-with-read-lock">`FLUSH TABLES WITH READ LOCK`</a>](https://dev.mysql.com/doc/refman/8.0/en/flush.html#flush-tables-with-read-lock)が追加されます。アップストリーム データベースの DML および DDL 操作は、短期間ブロックされます。したがって、アップストリームでバックアップ データベースを使用して完全なデータ バックアップを実行し、データ ソースの GTID 機能を有効にすることを強くお勧めします ( `enable-gtid: true` )。このようにして、アップストリームからの影響を回避し、アップストリームのマスター ノードに切り替えることで、増分移行中のレイテンシーを短縮できます。上流の MySQL データ ソースを切り替える手順については、 [<a href="/dm/usage-scenario-master-slave-switch.md#switch-dm-worker-connection-via-virtual-ip">アップストリーム MySQL インスタンス間の DM ワーカー接続を切り替える</a>](/dm/usage-scenario-master-slave-switch.md#switch-dm-worker-connection-via-virtual-ip)を参照してください。
+DM は、完全データ移行を実行するときにデータベース全体の完全データをバックアップし、並列論理バックアップ方式を使用します。 MySQL のバックアップ中に、グローバル読み取りロック[アップストリーム MySQL インスタンス間の DM ワーカー接続を切り替える](/dm/usage-scenario-master-slave-switch.md#switch-dm-worker-connection-via-virtual-ip)を参照してください。
 
 次の点に注意してください。
 
@@ -161,7 +161,7 @@ DM は、完全データ移行を実行するときにデータベース全体�
 
 -   バックアップ スナップショットを使用して完全なデータ移行を実行します (AWS 上の MySQL RDS およびAurora RDS の移行にのみ適用されます)
 
-    移行するデータベースが AWS MySQL RDS またはAurora RDS の場合、RDS スナップショットを使用して Amazon S3 のバックアップ データを TiDB に直接移行し、データの整合性を確保できます。詳細については、 [<a href="/migrate-aurora-to-tidb.md">Amazon Auroraから TiDB へのデータの移行</a>](/migrate-aurora-to-tidb.md)を参照してください。
+    移行するデータベースが AWS MySQL RDS またはAurora RDS の場合、RDS スナップショットを使用して Amazon S3 のバックアップ データを TiDB に直接移行し、データの整合性を確保できます。詳細については、 [Amazon Auroraから TiDB へのデータの移行](/migrate-aurora-to-tidb.md)を参照してください。
 
 ### 構成の詳細 {#details-of-configurations}
 
@@ -175,7 +175,7 @@ TiDB スキーマ名は、デフォルトでは大文字と小文字が区別さ
 
 #### フィルタルール {#filter-rules}
 
-データ ソースの構成を開始するとすぐにフィルター ルールを構成できます。詳細については、 [<a href="/dm/dm-task-configuration-guide.md">データ移行タスクコンフィグレーションガイド</a>](/dm/dm-task-configuration-guide.md)を参照してください。フィルター ルールを構成する利点は次のとおりです。
+データ ソースの構成を開始するとすぐにフィルター ルールを構成できます。詳細については、 [データ移行タスクコンフィグレーションガイド](/dm/dm-task-configuration-guide.md)を参照してください。フィルター ルールを構成する利点は次のとおりです。
 
 -   ダウンストリームが処理する必要があるBinlogイベントの数を減らすことで、移行効率が向上します。
 -   不要なリレー ログstorageを削減し、ディスク領域を節約します。
@@ -192,13 +192,13 @@ MySQL マスター/スタンバイ メカニズムでは、スタンバイ ノ�
 
 -   DM を使用して長時間のデータ レプリケーションを実行すると、さまざまな理由により移行タスクが長時間ブロックされることがあります。リレー ログを有効にすると、移行タスクのブロックによりアップストリームのバイナリ ログがリサイクルされる問題に効果的に対処できます。
 
-リレーログの使用にはいくつかの制限があります。 DM は高可用性をサポートします。 DM ワーカーに障害が発生すると、アイドル状態の DM ワーカー インスタンスを動作中のインスタンスに昇格させようとします。アップストリームのバイナリログに必要な移行ログが含まれていない場合、中断が発生する可能性があります。手動で介入して、できるだけ早くリレー ログを新しい DM ワーカー ノードにコピーし、対応するリレー メタ ファイルを変更する必要があります。詳細は[<a href="/dm/dm-error-handling.md#the-relay-unit-throws-error-event-from--in--diff-from-passed-in-event--or-a-migration-task-is-interrupted-with-failing-to-get-or-parse-binlog-errors-like-get-binlog-error-error-1236-hy000-and-binlog-checksum-mismatch-data-may-be-corrupted-returned">トラブルシューティング</a>](/dm/dm-error-handling.md#the-relay-unit-throws-error-event-from--in--diff-from-passed-in-event--or-a-migration-task-is-interrupted-with-failing-to-get-or-parse-binlog-errors-like-get-binlog-error-error-1236-hy000-and-binlog-checksum-mismatch-data-may-be-corrupted-returned)を参照してください。
+リレーログの使用にはいくつかの制限があります。 DM は高可用性をサポートします。 DM ワーカーに障害が発生すると、アイドル状態の DM ワーカー インスタンスを動作中のインスタンスに昇格させようとします。アップストリームのバイナリログに必要な移行ログが含まれていない場合、中断が発生する可能性があります。手動で介入して、できるだけ早くリレー ログを新しい DM ワーカー ノードにコピーし、対応するリレー メタ ファイルを変更する必要があります。詳細は[トラブルシューティング](/dm/dm-error-handling.md#the-relay-unit-throws-error-event-from--in--diff-from-passed-in-event--or-a-migration-task-is-interrupted-with-failing-to-get-or-parse-binlog-errors-like-get-binlog-error-error-1236-hy000-and-binlog-checksum-mismatch-data-may-be-corrupted-returned)を参照してください。
 
 #### アップストリームで PT-osc/GH-ost を使用する {#use-pt-osc-gh-ost-in-upstream}
 
 MySQL の日常的な運用と保守では、通常、PT-osc/GH-ost などのツールを使用してオンラインでスキーマを変更し、ビジネスへの影響を最小限に抑えます。ただし、プロセス全体は MySQL Binlogに記録されます。このようなデータを TiDB ダウンストリームに移行すると、多くの不必要な書き込み操作が発生し、効率的でも経済的でもありません。
 
-この問題を解決するために、DM は移行タスクを構成するときに PT-osc や GH-ost などのサードパーティ データ ツールをサポートします。このようなツールを使用すると、DM は冗長データを移行せず、データの一貫性を確保します。詳細は[<a href="/dm/feature-online-ddl.md">GH-ost/PT-osc を使用するデータベースからの移行</a>](/dm/feature-online-ddl.md)を参照してください。
+この問題を解決するために、DM は移行タスクを構成するときに PT-osc や GH-ost などのサードパーティ データ ツールをサポートします。このようなツールを使用すると、DM は冗長データを移行せず、データの一貫性を確保します。詳細は[GH-ost/PT-osc を使用するデータベースからの移行](/dm/feature-online-ddl.md)を参照してください。
 
 ## 移行時のベスト プラクティス {#best-practices-during-migration}
 
@@ -213,22 +213,22 @@ MySQL の日常的な運用と保守では、通常、PT-osc/GH-ost などのツ
 
 通常、このような問題は、ダウンストリーム TiDB でインデックスが変更または追加されたか、ダウンストリームに列が増えたことが原因で発生します。このようなエラーが発生した場合は、上流と下流のスキーマに矛盾がないか確認してください。
 
-このような問題を解決するには、DM にキャッシュされたスキーマ情報を更新して、ダウンストリーム TiDB スキーマと一致するようにします。詳細は[<a href="/dm/dm-manage-schema.md">移行するテーブルのテーブルスキーマを管理する</a>](/dm/dm-manage-schema.md)を参照してください。
+このような問題を解決するには、DM にキャッシュされたスキーマ情報を更新して、ダウンストリーム TiDB スキーマと一致するようにします。詳細は[移行するテーブルのテーブルスキーマを管理する](/dm/dm-manage-schema.md)を参照してください。
 
-下流にさらに多くの列がある場合は、 [<a href="/migrate-with-more-columns-downstream.md">より多くの列を含むダウンストリーム TiDB テーブルにデータを移行する</a>](/migrate-with-more-columns-downstream.md)を参照してください。
+下流にさらに多くの列がある場合は、 [より多くの列を含むダウンストリーム TiDB テーブルにデータを移行する](/migrate-with-more-columns-downstream.md)を参照してください。
 
 ### DDL の失敗により移行タスクが中断されました {#interrupted-migration-task-due-to-failed-ddl}
 
-DM は、移行タスクの中断を引き起こす DDL ステートメントのスキップまたは置換をサポートしています。詳細は[<a href="/dm/handle-failed-ddl-statements.md#usage-examples">失敗した DDL ステートメントの処理</a>](/dm/handle-failed-ddl-statements.md#usage-examples)を参照してください。
+DM は、移行タスクの中断を引き起こす DDL ステートメントのスキップまたは置換をサポートしています。詳細は[失敗した DDL ステートメントの処理](/dm/handle-failed-ddl-statements.md#usage-examples)を参照してください。
 
 ## データ移行後のデータ検証 {#data-validation-after-data-migration}
 
-データ移行後にデータの整合性を検証することをお勧めします。 TiDB は、データ検証を完了するのに役立つ[<a href="/sync-diff-inspector/sync-diff-inspector-overview.md">同期差分インスペクター</a>](/sync-diff-inspector/sync-diff-inspector-overview.md)を提供します。
+データ移行後にデータの整合性を検証することをお勧めします。 TiDB は、データ検証を完了するのに役立つ[同期差分インスペクター](/sync-diff-inspector/sync-diff-inspector-overview.md)を提供します。
 
-sync-diff-inspector は、DM タスクを通じてデータの整合性をチェックするテーブル リストを自動的に管理できるようになりました。以前の手動構成と比較して、より効率的です。詳細は[<a href="/sync-diff-inspector/dm-diff.md">DM レプリケーション シナリオでのデータ チェック</a>](/sync-diff-inspector/dm-diff.md)を参照してください。
+sync-diff-inspector は、DM タスクを通じてデータの整合性をチェックするテーブル リストを自動的に管理できるようになりました。以前の手動構成と比較して、より効率的です。詳細は[DM レプリケーション シナリオでのデータ チェック](/sync-diff-inspector/dm-diff.md)を参照してください。
 
-DM v6.2.0 以降、DM は増分レプリケーションの継続的なデータ検証をサポートしています。詳細は[<a href="/dm/dm-continuous-data-validation.md">DM での継続的なデータ検証</a>](/dm/dm-continuous-data-validation.md)を参照してください。
+DM v6.2.0 以降、DM は増分レプリケーションの継続的なデータ検証をサポートしています。詳細は[DM での継続的なデータ検証](/dm/dm-continuous-data-validation.md)を参照してください。
 
 ## 長期的なデータレプリケーション {#long-term-data-replication}
 
-DM を使用して長期的なデータ複製タスクを実行する場合は、メタデータをバックアップする必要があります。一方で、移行クラスターを再構築できるようになります。一方、移行タスクのバージョン管理を実装できます。詳細は[<a href="/dm/dm-export-import-config.md">データソースのエクスポートとインポート、およびクラスターのタスクコンフィグレーション</a>](/dm/dm-export-import-config.md)を参照してください。
+DM を使用して長期的なデータ複製タスクを実行する場合は、メタデータをバックアップする必要があります。一方で、移行クラスターを再構築できるようになります。一方、移行タスクのバージョン管理を実装できます。詳細は[データソースのエクスポートとインポート、およびクラスターのタスクコンフィグレーション](/dm/dm-export-import-config.md)を参照してください。

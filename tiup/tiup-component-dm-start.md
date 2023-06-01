@@ -12,13 +12,13 @@ title: tiup dm start
 tiup dm start <cluster-name> [flags]
 ```
 
-`<cluster-name>` : 操作するクラスターの名前。クラスター名を忘れた場合は、 [<a href="/tiup/tiup-component-dm-list.md">クラスタリスト</a>](/tiup/tiup-component-dm-list.md)コマンドで確認できます。
+`<cluster-name>` : 操作するクラスターの名前。クラスター名を忘れた場合は、 [クラスタリスト](/tiup/tiup-component-dm-list.md)コマンドで確認できます。
 
 ## オプション {#options}
 
 ### -N、--node {#n-node}
 
--   起動するノードを指定します。指定しない場合は、すべてのノードが開始されます。このオプションの値は、ノード ID のカンマ区切りリストです。ノード ID は、 [<a href="/tiup/tiup-component-dm-display.md">`tiup dm display`</a>](/tiup/tiup-component-dm-display.md)コマンドによって返されるクラスター ステータス テーブルの最初の列から取得できます。
+-   起動するノードを指定します。指定しない場合は、すべてのノードが開始されます。このオプションの値は、ノード ID のカンマ区切りリストです。ノード ID は、 [`tiup dm display`](/tiup/tiup-component-dm-display.md)コマンドによって返されるクラスター ステータス テーブルの最初の列から取得できます。
 -   データ型: `STRINGS`
 -   コマンドでこのオプションを指定しない場合は、すべてのノードが起動されます。
 
@@ -28,7 +28,7 @@ tiup dm start <cluster-name> [flags]
 
 ### -R、--役割 {#r-role}
 
--   開始するロールを指定します。指定しない場合、すべてのロールが開始されます。このオプションの値は、ノードの役割のカンマ区切りのリストです。ノードの役割は、 [<a href="/tiup/tiup-component-dm-display.md">`tiup dm display`</a>](/tiup/tiup-component-dm-display.md)コマンドによって返されるクラスター状態テーブルの 2 番目の列から取得できます。
+-   開始するロールを指定します。指定しない場合、すべてのロールが開始されます。このオプションの値は、ノードの役割のカンマ区切りのリストです。ノードの役割は、 [`tiup dm display`](/tiup/tiup-component-dm-display.md)コマンドによって返されるクラスター状態テーブルの 2 番目の列から取得できます。
 -   データ型: `STRINGS`
 -   このオプションがコマンドで指定されていない場合は、すべてのロールが開始されます。
 
@@ -46,4 +46,4 @@ tiup dm start <cluster-name> [flags]
 
 サービスを開始したときのログです。
 
-[<a href="/tiup/tiup-component-dm.md#command-list">&lt;&lt; 前のページに戻る - TiUP DMコマンド一覧</a>](/tiup/tiup-component-dm.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP DMコマンド一覧](/tiup/tiup-component-dm.md#command-list)

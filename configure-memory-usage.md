@@ -5,14 +5,14 @@ summary: Learn how to configure the memory quota of a query and avoid OOM (out o
 
 # TiDB メモリ制御 {#tidb-memory-control}
 
-現在、TiDB は単一の SQL クエリのメモリクォータを追跡し、メモリ使用量が特定のしきい値を超えた場合に OOM (メモリ不足) を防止したり、OOM のトラブルシューティングを行ったりすることができます。システム変数[<a href="/system-variables.md#tidb_mem_oom_action-new-in-v610">`tidb_mem_oom_action`</a>](/system-variables.md#tidb_mem_oom_action-new-in-v610)は、クエリがメモリ制限に達したときに実行するアクションを指定します。
+現在、TiDB は単一の SQL クエリのメモリクォータを追跡し、メモリ使用量が特定のしきい値を超えた場合に OOM (メモリ不足) を防止したり、OOM のトラブルシューティングを行ったりすることができます。システム変数[`tidb_mem_oom_action`](/system-variables.md#tidb_mem_oom_action-new-in-v610)は、クエリがメモリ制限に達したときに実行するアクションを指定します。
 
--   値`LOG`は、制限[<a href="/system-variables.md#tidb_mem_quota_query">`tidb_mem_quota_query`</a>](/system-variables.md#tidb_mem_quota_query)に達してもクエリは実行し続けるが、TiDB はログにエントリを出力することを意味します。
--   値`CANCEL`は、TiDB が[<a href="/system-variables.md#tidb_mem_quota_query">`tidb_mem_quota_query`</a>](/system-variables.md#tidb_mem_quota_query)制限に達した直後に SQL クエリの実行を停止し、クライアントにエラーを返すことを意味します。エラー情報には、SQL 実行プロセスでメモリを消費する各物理実行オペレータのメモリ使用量が明確に示されます。
+-   値`LOG`は、制限[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)に達してもクエリは実行し続けるが、TiDB はログにエントリを出力することを意味します。
+-   値`CANCEL`は、TiDB が[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)制限に達した直後に SQL クエリの実行を停止し、クライアントにエラーを返すことを意味します。エラー情報には、SQL 実行プロセスでメモリを消費する各物理実行オペレータのメモリ使用量が明確に示されます。
 
 ## クエリのメモリ割り当てを構成する {#configure-the-memory-quota-of-a-query}
 
-システム変数[<a href="/system-variables.md#tidb_mem_quota_query">`tidb_mem_quota_query`</a>](/system-variables.md#tidb_mem_quota_query)は、クエリの制限をバイト単位で設定します。いくつかの使用例:
+システム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)は、クエリの制限をバイト単位で設定します。いくつかの使用例:
 
 {{< copyable "" >}}
 
@@ -37,7 +37,7 @@ SET tidb_mem_quota_query = 8 << 10;
 
 ## tidb-server インスタンスのメモリ使用量のしきい値を構成する {#configure-the-memory-usage-threshold-of-a-tidb-server-instance}
 
-v6.5.0 以降、システム変数[<a href="/system-variables.md#tidb_server_memory_limit-new-in-v640">`tidb_server_memory_limit`</a>](/system-variables.md#tidb_server_memory_limit-new-in-v640)使用して tidb-server インスタンスのメモリ使用量のしきい値を設定できます。
+v6.5.0 以降、システム変数[`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)使用して tidb-server インスタンスのメモリ使用量のしきい値を設定できます。
 
 たとえば、 tidb-server インスタンスの合計メモリ使用量を 32 GB に設定します。
 
@@ -55,11 +55,11 @@ SET GLOBAL tidb_server_memory_limit = "32GB";
 
 > **警告：**
 >
-> -   起動プロセス中、TiDB は[<a href="/system-variables.md#tidb_server_memory_limit-new-in-v640">`tidb_server_memory_limit`</a>](/system-variables.md#tidb_server_memory_limit-new-in-v640)制限が適用されることを保証しません。オペレーティング システムの空きメモリが不十分な場合でも、TiDB で OOM が発生する可能性があります。 TiDB インスタンスに十分な使用可能なメモリがあることを確認する必要があります。
+> -   起動プロセス中、TiDB は[`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)制限が適用されることを保証しません。オペレーティング システムの空きメモリが不十分な場合でも、TiDB で OOM が発生する可能性があります。 TiDB インスタンスに十分な使用可能なメモリがあることを確認する必要があります。
 > -   メモリ制御のプロセスで、TiDB の合計メモリ使用量が`tidb_server_memory_limit`で設定された制限をわずかに超える可能性があります。
 > -   v6.5.0 以降、構成項目`server-memory-quota`は非推奨になりました。互換性を確保するために、クラスターを v6.5.0 以降のバージョンにアップグレードすると、 `tidb_server_memory_limit` `server-memory-quota`の値を継承します。アップグレード前に`server-memory-quota`構成していない場合は、デフォルト値`tidb_server_memory_limit` ( `80%`が使用されます。
 
-tidb-server インスタンスのメモリ使用量が総メモリの特定の割合に達すると (割合はシステム変数[<a href="/system-variables.md#tidb_server_memory_limit_gc_trigger-new-in-v640">`tidb_server_memory_limit_gc_trigger`</a>](/system-variables.md#tidb_server_memory_limit_gc_trigger-new-in-v640)によって制御されます)、 tidb-server はメモリのストレスを軽減するためにGolang GC をトリガーしようとします。インスタンスメモリがしきい値付近で変動するためにパフォーマンスの問題を引き起こす頻繁な GC を回避するために、この GC メソッドは最大でも 1 分に 1 回 GC をトリガーします。
+tidb-server インスタンスのメモリ使用量が総メモリの特定の割合に達すると (割合はシステム変数[`tidb_server_memory_limit_gc_trigger`](/system-variables.md#tidb_server_memory_limit_gc_trigger-new-in-v640)によって制御されます)、 tidb-server はメモリのストレスを軽減するためにGolang GC をトリガーしようとします。インスタンスメモリがしきい値付近で変動するためにパフォーマンスの問題を引き起こす頻繁な GC を回避するために、この GC メソッドは最大でも 1 分に 1 回 GC をトリガーします。
 
 > **ノート：**
 >
@@ -67,9 +67,9 @@ tidb-server インスタンスのメモリ使用量が総メモリの特定の�
 
 ## INFORMATION_SCHEMA システム テーブルを使用して、現在の tidb-server インスタンスのメモリ使用量をビュー {#view-the-memory-usage-of-the-current-tidb-server-instance-using-the-information-schema-system-table}
 
-現在のインスタンスまたはクラスターのメモリ使用量を表示するには、システム テーブル[<a href="/information-schema/information-schema-memory-usage.md">`INFORMATION_SCHEMA.(CLUSTER_)MEMORY_USAGE`</a>](/information-schema/information-schema-memory-usage.md)をクエリします。
+現在のインスタンスまたはクラスターのメモリ使用量を表示するには、システム テーブル[`INFORMATION_SCHEMA.(CLUSTER_)MEMORY_USAGE`](/information-schema/information-schema-memory-usage.md)をクエリします。
 
-現在のインスタンスまたはクラスターのメモリ関連の操作と実行ベースを表示するには、システム テーブル[<a href="/information-schema/information-schema-memory-usage-ops-history.md">`INFORMATION_SCHEMA.(CLUSTER_)MEMORY_USAGE_OPS_HISTORY`</a>](/information-schema/information-schema-memory-usage-ops-history.md)クエリを実行します。このテーブルには、インスタンスごとに最新の 50 レコードが保持されます。
+現在のインスタンスまたはクラスターのメモリ関連の操作と実行ベースを表示するには、システム テーブル[`INFORMATION_SCHEMA.(CLUSTER_)MEMORY_USAGE_OPS_HISTORY`](/information-schema/information-schema-memory-usage-ops-history.md)クエリを実行します。このテーブルには、インスタンスごとに最新の 50 レコードが保持されます。
 
 ## 過剰なメモリ使用量のアラームをトリガーする {#trigger-the-alarm-of-excessive-memory-usage}
 
@@ -79,11 +79,11 @@ tidb-server インスタンスのメモリ使用量がメモリしきい値 (デ
 -   メモリ使用量がメモリしきい値を超えており、最後のアラームから 60 秒以上経過しています。
 -   メモリ使用量がメモリしきい値と`(Current memory usage - Memory usage at the last alarm) / Total memory > 10%`を超えています。
 
-システム変数[<a href="/system-variables.md#tidb_memory_usage_alarm_ratio">`tidb_memory_usage_alarm_ratio`</a>](/system-variables.md#tidb_memory_usage_alarm_ratio)を介してメモリ使用率を変更することで、アラームをトリガーするメモリしきい値を制御できます。
+システム変数[`tidb_memory_usage_alarm_ratio`](/system-variables.md#tidb_memory_usage_alarm_ratio)を介してメモリ使用率を変更することで、アラームをトリガーするメモリしきい値を制御できます。
 
 過剰なメモリ使用量のアラームがトリガーされると、TiDB は次のアクションを実行します。
 
--   TiDB は、TiDB ログ ファイル[<a href="/tidb-configuration-file.md#filename">`filename`</a>](/tidb-configuration-file.md#filename)が配置されているディレクトリに次の情報を記録します。
+-   TiDB は、TiDB ログ ファイル[`filename`](/tidb-configuration-file.md#filename)が配置されているディレクトリに次の情報を記録します。
 
     -   現在実行されているすべての SQL ステートメントのうち、メモリ使用量が最も多い上位 10 の SQL ステートメントと実行時間の最も長い SQL ステートメントの上位 10 位に関する情報
     -   goroutine スタック情報
@@ -91,13 +91,13 @@ tidb-server インスタンスのメモリ使用量がメモリしきい値 (デ
 
 -   TiDB は、キーワード`tidb-server has the risk of OOM`と次のメモリ関連のシステム変数の値を含むアラーム ログを出力。
 
-    -   [<a href="/system-variables.md#tidb_mem_oom_action-new-in-v610">`tidb_mem_oom_action`</a>](/system-variables.md#tidb_mem_oom_action-new-in-v610)
-    -   [<a href="/system-variables.md#tidb_mem_quota_query">`tidb_mem_quota_query`</a>](/system-variables.md#tidb_mem_quota_query)
-    -   [<a href="/system-variables.md#tidb_server_memory_limit-new-in-v640">`tidb_server_memory_limit`</a>](/system-variables.md#tidb_server_memory_limit-new-in-v640)
-    -   [<a href="/system-variables.md#tidb_analyze_version-new-in-v510">`tidb_analyze_version`</a>](/system-variables.md#tidb_analyze_version-new-in-v510)
-    -   [<a href="/system-variables.md#tidb_enable_rate_limit_action">`tidb_enable_rate_limit_action`</a>](/system-variables.md#tidb_enable_rate_limit_action)
+    -   [`tidb_mem_oom_action`](/system-variables.md#tidb_mem_oom_action-new-in-v610)
+    -   [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)
+    -   [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)
+    -   [`tidb_analyze_version`](/system-variables.md#tidb_analyze_version-new-in-v510)
+    -   [`tidb_enable_rate_limit_action`](/system-variables.md#tidb_enable_rate_limit_action)
 
-アラーム用のステータス ファイルが大量に蓄積されるのを避けるため、TiDB はデフォルトで最近の 5 つのアラーム中に生成されたステータス ファイルのみを保持します。この数値は、システム変数[<a href="/system-variables.md#tidb_memory_usage_alarm_keep_record_num-new-in-v640">`tidb_memory_usage_alarm_keep_record_num`</a>](/system-variables.md#tidb_memory_usage_alarm_keep_record_num-new-in-v640)を構成することで調整できます。
+アラーム用のステータス ファイルが大量に蓄積されるのを避けるため、TiDB はデフォルトで最近の 5 つのアラーム中に生成されたステータス ファイルのみを保持します。この数値は、システム変数[`tidb_memory_usage_alarm_keep_record_num`](/system-variables.md#tidb_memory_usage_alarm_keep_record_num-new-in-v640)を構成することで調整できます。
 
 次の例では、アラームをトリガーするメモリを大量に消費する SQL ステートメントを作成します。
 
@@ -121,22 +121,22 @@ tidb-server インスタンスのメモリ使用量がメモリしきい値 (デ
 
     上記のログ ファイルの例のフィールドは次のように説明されています。
 
-    -   `is tidb_server_memory_limit set` [<a href="/system-variables.md#tidb_server_memory_limit-new-in-v640">`tidb_server_memory_limit`</a>](/system-variables.md#tidb_server_memory_limit-new-in-v640)設定されているかどうかを示します。
+    -   `is tidb_server_memory_limit set` [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)設定されているかどうかを示します。
     -   `system memory total`現在のシステムの合計メモリを示します。
     -   `system memory usage`現在のシステムメモリ使用量を示します。
     -   `tidb-server memory usage` tidb-server インスタンスのメモリ使用量を示します。
-    -   `memory-usage-alarm-ratio`システム変数[<a href="/system-variables.md#tidb_memory_usage_alarm_ratio">`tidb_memory_usage_alarm_ratio`</a>](/system-variables.md#tidb_memory_usage_alarm_ratio)の値を示します。
+    -   `memory-usage-alarm-ratio`システム変数[`tidb_memory_usage_alarm_ratio`](/system-variables.md#tidb_memory_usage_alarm_ratio)の値を示します。
     -   `record path`ステータスファイルのディレクトリを示します。
 
-5.  ステータス ファイルのディレクトリ (前の例では、ディレクトリは`/tiup/deploy/tidb-4000/log/oom_record` ) を確認すると、対応するタイムスタンプ (たとえば、 `record2022-10-09T17:18:38+08:00` ) を持つレコード ディレクトリが表示されます。レコード ディレクトリには、 `goroutinue` 、 `heap` 、および`running_sql`の 3 つのファイルが含まれています。これら 3 つのファイルには、ステータス ファイルが記録される時刻が接尾辞として付けられます。それぞれ、ゴルーチンのスタック情報、ヒープメモリの使用状況、アラーム発生時の実行中のSQL情報を記録します。 `running_sql`の内容については[<a href="/identify-expensive-queries.md">`expensive-queries`</a>](/identify-expensive-queries.md)を参照してください。
+5.  ステータス ファイルのディレクトリ (前の例では、ディレクトリは`/tiup/deploy/tidb-4000/log/oom_record` ) を確認すると、対応するタイムスタンプ (たとえば、 `record2022-10-09T17:18:38+08:00` ) を持つレコード ディレクトリが表示されます。レコード ディレクトリには、 `goroutinue` 、 `heap` 、および`running_sql`の 3 つのファイルが含まれています。これら 3 つのファイルには、ステータス ファイルが記録される時刻が接尾辞として付けられます。それぞれ、ゴルーチンのスタック情報、ヒープメモリの使用状況、アラーム発生時の実行中のSQL情報を記録します。 `running_sql`の内容については[`expensive-queries`](/identify-expensive-queries.md)を参照してください。
 
 ## tidb-server のその他のメモリ制御動作 {#other-memory-control-behaviors-of-tidb-server}
 
 ### フロー制御 {#flow-control}
 
--   TiDB は、データを読み取るオペレーターの動的メモリ制御をサポートします。デフォルトでは、この演算子は[<a href="/system-variables.md#tidb_distsql_scan_concurrency">`tidb_distsql_scan_concurrency`</a>](/system-variables.md#tidb_distsql_scan_concurrency)データの読み取りが許可される最大スレッド数を使用します。 1 回の SQL 実行のメモリ使用量が毎回[<a href="/system-variables.md#tidb_mem_quota_query">`tidb_mem_quota_query`</a>](/system-variables.md#tidb_mem_quota_query)を超えると、データを読み取るオペレーターは 1 つのスレッドを停止します。
+-   TiDB は、データを読み取るオペレーターの動的メモリ制御をサポートします。デフォルトでは、この演算子は[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)を超えると、データを読み取るオペレーターは 1 つのスレッドを停止します。
 
--   このフロー制御動作は、システム変数[<a href="/system-variables.md#tidb_enable_rate_limit_action">`tidb_enable_rate_limit_action`</a>](/system-variables.md#tidb_enable_rate_limit_action)によって制御されます。
+-   このフロー制御動作は、システム変数[`tidb_enable_rate_limit_action`](/system-variables.md#tidb_enable_rate_limit_action)によって制御されます。
 
 -   フロー制御動作がトリガーされると、TiDB はキーワード`memory exceeds quota, destroy one token now`を含むログを出力します。
 
@@ -144,7 +144,7 @@ tidb-server インスタンスのメモリ使用量がメモリしきい値 (デ
 
 TiDB は、実行オペレーターのディスク スピルをサポートしています。 SQL 実行のメモリ使用量がメモリクォータを超えると、 tidb-server は実行演算子の中間データをディスクに書き込み、メモリの圧迫を軽減することができます。ディスク流出をサポートする演算子には、Sort、MergeJoin、HashJoin、および HashAgg が含まれます。
 
--   ディスク スピルの動作は、パラメータ[<a href="/system-variables.md#tidb_mem_quota_query">`tidb_mem_quota_query`</a>](/system-variables.md#tidb_mem_quota_query) 、 [<a href="/system-variables.md#tidb_enable_tmp_storage_on_oom">`tidb_enable_tmp_storage_on_oom`</a>](/system-variables.md#tidb_enable_tmp_storage_on_oom) 、 [<a href="/tidb-configuration-file.md#tmp-storage-path">`tmp-storage-path`</a>](/tidb-configuration-file.md#tmp-storage-path) 、および[<a href="/tidb-configuration-file.md#tmp-storage-quota">`tmp-storage-quota`</a>](/tidb-configuration-file.md#tmp-storage-quota)によって共同制御されます。
+-   ディスク スピルの動作は、パラメータ[`tmp-storage-quota`](/tidb-configuration-file.md#tmp-storage-quota)によって共同制御されます。
 -   ディスク流出がトリガーされると、TiDB はキーワード`memory exceeds quota, spill to disk now`または`memory exceeds quota, set aggregate mode to spill-mode`を含むログを出力します。
 -   Sort、MergeJoin、および HashJoin オペレーターのディスク スピルは v4.0.0 で導入されました。 HashAgg オペレーターのディスク スピルは v5.2.0 で導入されました。
 -   Sort、MergeJoin、または HashJoin を含む SQL 実行によって OOM が発生すると、TiDB はデフォルトでディスク スピルをトリガーします。 HashAgg を含む SQL 実行によって OOM が発生しても、TiDB はデフォルトでディスク スピルをトリガーしません。 HashAgg のディスク スピルをトリガーするようにシステム変数`tidb_executor_concurrency = 1`を構成できます。
@@ -216,7 +216,7 @@ TiDB は、実行オペレーターのディスク スピルをサポートし�
 
 ### <code>GOMEMLIMIT</code>を構成することで OOM の問題を軽減する {#mitigate-oom-issues-by-configuring-code-gomemlimit-code}
 
-GO 1.19 では、GC をトリガーするメモリ制限を設定する環境変数[<a href="https://pkg.go.dev/runtime@go1.19#hdr-Environment_Variables">`GOMEMLIMIT`</a>](https://pkg.go.dev/runtime@go1.19#hdr-Environment_Variables)が導入されています。
+GO 1.19 では、GC をトリガーするメモリ制限を設定する環境変数[`GOMEMLIMIT`](https://pkg.go.dev/runtime@go1.19#hdr-Environment_Variables)が導入されています。
 
 v6.1.3 &lt;= TiDB &lt; v6.5.0 の場合、手動で`GOMEMLIMIT`を設定することで、一般的なカテゴリの OOM 問題を軽減できます。 OOM 問題の典型的なカテゴリは次のとおりです。次の図に示すように、OOM が発生する前は、Grafana で使用中の推定メモリはメモリ全体の半分しか占有しません (TiDB-Runtime &gt; メモリ使用量 &gt;estimate-inuse)。
 

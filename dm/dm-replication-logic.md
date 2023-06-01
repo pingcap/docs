@@ -15,15 +15,15 @@ summary: Learn how the core processing unit Sync in DM replicates DML statements
 
 2.  データ ソースから読み取ったbinlogイベントを変換します。
 
-    1.  [<a href="/dm/dm-binlog-event-filter.md">Binlogフィルター</a>](/dm/dm-binlog-event-filter.md) : `filters`で構成されたbinlog式に従ってbinlogイベントをフィルタリングします。
-    2.  [<a href="/dm/dm-table-routing.md">テーブルルーティング</a>](/dm/dm-table-routing.md) : `routes`で構成された「データベース/テーブル」ルーティング ルールに従って「データベース/テーブル」名を変換します。
-    3.  [<a href="/filter-dml-event.md">式フィルター</a>](/filter-dml-event.md) : `expression-filter`で構成された SQL 式に従ってbinlogイベントをフィルタリングします。
+    1.  [Binlogフィルター](/dm/dm-binlog-event-filter.md) : `filters`で構成されたbinlog式に従ってbinlogイベントをフィルタリングします。
+    2.  [テーブルルーティング](/dm/dm-table-routing.md) : `routes`で構成された「データベース/テーブル」ルーティング ルールに従って「データベース/テーブル」名を変換します。
+    3.  [式フィルター](/filter-dml-event.md) : `expression-filter`で構成された SQL 式に従ってbinlogイベントをフィルタリングします。
 
 3.  DML 実行計画を最適化します。
 
-    1.  [<a href="#compactor">コンパクター</a>](#compactor) : 同じレコード (同じ主キーを持つ) に対する複数の操作を 1 つの操作にマージします。この機能は`syncer.compact`によって有効になります。
-    2.  [<a href="#causality">因果関係</a>](#causality) : レプリケーションの同時実行性を向上させるために、異なるレコード (異なる主キーを持つ) で競合検出を実行します。
-    3.  [<a href="#merger">合併</a>](#merger) : 複数のbinlogイベントを 1 つの DML ステートメントにマージします。 `syncer.multiple-rows`で有効になります。
+    1.  [コンパクター](#compactor) : 同じレコード (同じ主キーを持つ) に対する複数の操作を 1 つの操作にマージします。この機能は`syncer.compact`によって有効になります。
+    2.  [因果関係](#causality) : レプリケーションの同時実行性を向上させるために、異なるレコード (異なる主キーを持つ) で競合検出を実行します。
+    3.  [合併](#merger) : 複数のbinlogイベントを 1 つの DML ステートメントにマージします。 `syncer.multiple-rows`で有効になります。
 
 4.  DMLをダウンストリームに実行します。
 
@@ -115,13 +115,13 @@ DML 生成のロジックは次のとおりです。
 
 Causality は、競合検出を通じてbinlog を複数のグループに分割し、ダウンストリームに対して同時に実行できます。 DM は`worker-count`を設定することで同時実行性を制御します。ダウンストリーム TiDB の CPU 使用率が高くない場合、同時実行性を高めることで、データ レプリケーションのスループットを効果的に向上させることができます。
 
-[<a href="/dm/dm-tune-configuration.md#worker-count">`syncer.worker-count`構成アイテム</a>](/dm/dm-tune-configuration.md#worker-count)を変更することで、DML を同時に移行するスレッドの数を変更できます。
+[`syncer.worker-count`構成アイテム](/dm/dm-tune-configuration.md#worker-count)を変更することで、DML を同時に移行するスレッドの数を変更できます。
 
 ### バッチ {#batch}
 
 DM は複数の DML を 1 つのトランザクションにまとめて、ダウンストリームに実行します。 DML ワーカーは DML を受信すると、その DML をキャッシュに追加します。キャッシュ内の DML の数が事前に設定されたしきい値に達するか、DML ワーカーが長時間 DML を受信しない場合、DML ワーカーはキャッシュ内の DML をダウンストリームに実行します。
 
-[<a href="/dm/dm-tune-configuration.md#batch">`syncer.batch`構成アイテム</a>](/dm/dm-tune-configuration.md#batch)を変更することで、トランザクションに含まれる DML の数を変更できます。
+[`syncer.batch`構成アイテム](/dm/dm-tune-configuration.md#batch)を変更することで、トランザクションに含まれる DML の数を変更できます。
 
 ### チェックポイント {#checkpoint}
 

@@ -191,10 +191,10 @@ SELECT USER, JSON_EXTRACT(User_attributes, "$.resource_group") FROM mysql.user W
 
 <CustomContent platform="tidb">
 
--   [<a href="/security-compatibility-with-mysql.md">MySQL とのSecurity互換性</a>](/security-compatibility-with-mysql.md)
+-   [MySQL とのSecurity互換性](/security-compatibility-with-mysql.md)
 
 </CustomContent>
 
--   [<a href="/sql-statements/sql-statement-create-user.md">ユーザーを作成</a>](/sql-statements/sql-statement-create-user.md)
--   [<a href="/sql-statements/sql-statement-drop-user.md">ユーザーを削除する</a>](/sql-statements/sql-statement-drop-user.md)
--   [<a href="/sql-statements/sql-statement-show-create-user.md">ユーザーの作成を表示</a>](/sql-statements/sql-statement-show-create-user.md)
+-   [ユーザーを作成](/sql-statements/sql-statement-create-user.md)
+-   [ユーザーを削除する](/sql-statements/sql-statement-drop-user.md)
+-   [ユーザーの作成を表示](/sql-statements/sql-statement-show-create-user.md)

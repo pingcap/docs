@@ -12,7 +12,7 @@ title: tiup dm scale-in
 tiup dm scale-in <cluster-name> [flags]
 ```
 
-`<cluster-name>` : 操作するクラスターの名前。クラスター名を忘れた場合は、 [<a href="/tiup/tiup-component-dm-list.md">クラスタリスト</a>](/tiup/tiup-component-dm-list.md)コマンドで確認できます。
+`<cluster-name>` : 操作するクラスターの名前。クラスター名を忘れた場合は、 [クラスタリスト](/tiup/tiup-component-dm-list.md)コマンドで確認できます。
 
 ## オプション {#options}
 
@@ -38,4 +38,4 @@ tiup dm scale-in <cluster-name> [flags]
 
 スケールインのログ。
 
-[<a href="/tiup/tiup-component-dm.md#command-list">&lt;&lt; 前のページに戻る - TiUP DMコマンド一覧</a>](/tiup/tiup-component-dm.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP DMコマンド一覧](/tiup/tiup-component-dm.md#command-list)

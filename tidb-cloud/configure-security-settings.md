@@ -9,9 +9,9 @@ Dedicated Tierクラスターの場合、root パスワードとクラスター�
 
 > **ノート：**
 >
-> Serverless Tierクラスターの場合、このドキュメントは適用されないため、代わりに[<a href="/tidb-cloud/secure-connections-to-serverless-tier-clusters.md">Serverless Tierクラスターへのセキュリティ接続</a>](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md)を参照してください。
+> Serverless Tierクラスターの場合、このドキュメントは適用されないため、代わりに[Serverless Tierクラスターへのセキュリティ接続](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md)を参照してください。
 
-1.  TiDB Cloudコンソールで、プロジェクトの[<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページに移動します。
+1.  TiDB Cloudコンソールで、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
     > **ヒント：**
     >

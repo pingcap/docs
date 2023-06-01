@@ -9,9 +9,9 @@ summary: Learn how to configure TiFlash.
 
 ## PD スケジューリングパラメータ {#pd-scheduling-parameters}
 
-[<a href="/pd-control.md">PD-CTL</a>](/pd-control.md)を使用して PD スケジューリング パラメータを調整できます。 tiup を使用してクラスターをデプロイおよび管理する場合は、 `pd-ctl -u <pd_ip:pd_port>`を`tiup ctl:v<CLUSTER_VERSION> pd`に置き換えることができることに注意してください。
+[PD-CTL](/pd-control.md)を使用して PD スケジューリング パラメータを調整できます。 tiup を使用してクラスターをデプロイおよび管理する場合は、 `pd-ctl -u <pd_ip:pd_port>`を`tiup ctl:v<CLUSTER_VERSION> pd`に置き換えることができることに注意してください。
 
--   [<a href="/pd-configuration-file.md#replica-schedule-limit">`replica-schedule-limit`</a>](/pd-configuration-file.md#replica-schedule-limit) : レプリカ関連のオペレーターが生成される速度を決定します。このパラメーターは、ノードのオフライン化やレプリカの追加などの操作に影響します。
+-   [`replica-schedule-limit`](/pd-configuration-file.md#replica-schedule-limit) : レプリカ関連のオペレーターが生成される速度を決定します。このパラメーターは、ノードのオフライン化やレプリカの追加などの操作に影響します。
 
     > **ノート：**
     >
@@ -21,13 +21,13 @@ summary: Learn how to configure TiFlash.
 
     > **ノート：**
     >
-    > v4.0.2 以降、 `store-balance-rate`パラメータは非推奨となり、 `store limit`コマンドに変更が加えられました。詳細は[<a href="/configure-store-limit.md">店舗限定</a>](/configure-store-limit.md)を参照してください。
+    > v4.0.2 以降、 `store-balance-rate`パラメータは非推奨となり、 `store limit`コマンドに変更が加えられました。詳細は[店舗限定](/configure-store-limit.md)を参照してください。
 
     -   `pd-ctl -u <pd_ip:pd_port> store limit <store_id> <value>`コマンドを実行して、指定したストアのスケジューリング レートを設定します。 ( `store_id`を取得するには、 `pd-ctl -u <pd_ip:pd_port> store`コマンドを実行します。
     -   指定したストアのリージョンのスケジュール レートを設定しない場合、このストアは`store-balance-rate`の設定を継承します。
     -   `pd-ctl -u <pd_ip:pd_port> store limit`コマンドを実行すると、 `store-balance-rate`の現在の設定値を表示できます。
 
--   [<a href="/pd-configuration-file.md#location-labels">`replication.location-labels`</a>](/pd-configuration-file.md#location-labels) : TiKV インスタンスのトポロジー関係を示します。キーの順序は、さまざまなラベルの階層関係を示します。 TiFlashが有効な場合は、 [<a href="/pd-control.md#config-show--set-option-value--placement-rules">`pd-ctl config placement-rules`</a>](/pd-control.md#config-show--set-option-value--placement-rules)を使用してデフォルト値を設定する必要があります。詳細は[<a href="/geo-distributed-deployment-topology.md">地理分散展開トポロジ</a>](/geo-distributed-deployment-topology.md)を参照してください。
+-   [地理分散展開トポロジ](/geo-distributed-deployment-topology.md)を参照してください。
 
 ## TiFlash設定パラメータ {#tiflash-configuration-parameters}
 
@@ -35,7 +35,7 @@ summary: Learn how to configure TiFlash.
 
 > **ヒント：**
 >
-> 設定項目の値を調整する必要がある場合は、 [<a href="/maintain-tidb-using-tiup.md#modify-the-configuration">構成を変更する</a>](/maintain-tidb-using-tiup.md#modify-the-configuration)を参照してください。
+> 設定項目の値を調整する必要がある場合は、 [構成を変更する](/maintain-tidb-using-tiup.md#modify-the-configuration)を参照してください。
 
 ### <code>tiflash.toml</code>ファイルを構成する {#configure-the-code-tiflash-toml-code-file}
 
@@ -299,11 +299,11 @@ delta_index_cache_size = 0
 
 ### トポロジ ラベルごとにレプリカをスケジュールする {#schedule-replicas-by-topology-labels}
 
-[<a href="/tiflash/create-tiflash-replicas.md#set-available-zones">利用可能なゾーンを設定する</a>](/tiflash/create-tiflash-replicas.md#set-available-zones)を参照してください。
+[利用可能なゾーンを設定する](/tiflash/create-tiflash-replicas.md#set-available-zones)を参照してください。
 
 ### マルチディスク展開 {#multi-disk-deployment}
 
-TiFlash はマルチディスク展開をサポートしています。 TiFlashノードに複数のディスクがある場合は、次のセクションで説明するパラメータを構成することで、それらのディスクを最大限に活用できます。 TiUPに使用される TiFlash の構成テンプレートについては、 [<a href="https://github.com/pingcap/docs/blob/master/config-templates/complex-tiflash.yaml">TiFlashトポロジの複雑なテンプレート</a>](https://github.com/pingcap/docs/blob/master/config-templates/complex-tiflash.yaml)を参照してください。
+TiFlash はマルチディスク展開をサポートしています。 TiFlashノードに複数のディスクがある場合は、次のセクションで説明するパラメータを構成することで、それらのディスクを最大限に活用できます。 TiUPに使用される TiFlash の構成テンプレートについては、 [TiFlashトポロジの複雑なテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/complex-tiflash.yaml)を参照してください。
 
 #### v4.0.9 より前の TiDB バージョンを使用したマルチディスク展開 {#multi-disk-deployment-with-tidb-version-earlier-than-v4-0-9}
 

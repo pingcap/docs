@@ -7,13 +7,13 @@ summary: Learn the PD configuration file.
 
 <!-- markdownlint-disable MD001 -->
 
-PD 構成ファイルは、コマンドライン パラメーターよりも多くのオプションをサポートしています。デフォルトの構成ファイル[<a href="https://github.com/pingcap/pd/blob/master/conf/config.toml">ここ</a>](https://github.com/pingcap/pd/blob/master/conf/config.toml)が見つかります。
+PD 構成ファイルは、コマンドライン パラメーターよりも多くのオプションをサポートしています。デフォルトの構成ファイル[ここ](https://github.com/pingcap/pd/blob/master/conf/config.toml)が見つかります。
 
-このドキュメントでは、コマンドライン パラメーターに含まれないパラメーターのみについて説明します。コマンドラインパラメータの場合は[<a href="/command-line-flags-for-pd-configuration.md">ここ</a>](/command-line-flags-for-pd-configuration.md)確認してください。
+このドキュメントでは、コマンドライン パラメーターに含まれないパラメーターのみについて説明します。コマンドラインパラメータの場合は[ここ](/command-line-flags-for-pd-configuration.md)確認してください。
 
 > **ヒント：**
 >
-> 設定項目の値を調整する必要がある場合は、 [<a href="/maintain-tidb-using-tiup.md#modify-the-configuration">構成を変更する</a>](/maintain-tidb-using-tiup.md#modify-the-configuration)を参照してください。
+> 設定項目の値を調整する必要がある場合は、 [構成を変更する](/maintain-tidb-using-tiup.md#modify-the-configuration)を参照してください。
 
 ### <code>name</code> {#code-name-code}
 
@@ -105,7 +105,7 @@ PD 構成ファイルは、コマンドライン パラメーターよりも多�
 
 -   PD が TSO の物理時間を更新する間隔。
 -   TSO 物理時間のデフォルトの更新間隔では、PD は最大 262144 個の TSO を提供します。より多くの TSO を取得するには、この構成項目の値を減らすことができます。最小値は`1ms`です。
--   この設定項目を減らすと、PD の CPU 使用率が増加する可能性があります。実験によると、間隔が`50ms`場合に比べ、間隔が`1ms`の場合は PD の[<a href="https://man7.org/linux/man-pages/man1/top.1.html">CPU使用率</a>](https://man7.org/linux/man-pages/man1/top.1.html)が約 10% 増加します。
+-   この設定項目を減らすと、PD の CPU 使用率が増加する可能性があります。実験によると、間隔が`50ms`場合に比べ、間隔が`1ms`の場合は PD の[CPU使用率](https://man7.org/linux/man-pages/man1/top.1.html)が約 10% 増加します。
 -   デフォルト値: `50ms`
 -   最小値: `1ms`
 
@@ -355,7 +355,7 @@ pd-serverに関するコンフィグレーション項目
 
 > **ノート：**
 >
-> クラスターを TiDB 4.0 バージョンから現在のバージョンにアップグレードした場合、アップグレードの前後で一貫した PD 動作を保証するために、新しいフォーミュラ バージョンはデフォルトで自動的に無効になります。式のバージョンを変更したい場合は、 `pd-ctl`設定を手動で切り替える必要があります。詳細は[<a href="/pd-control.md#config-show--set-option-value--placement-rules">PD Control</a>](/pd-control.md#config-show--set-option-value--placement-rules)を参照してください。
+> クラスターを TiDB 4.0 バージョンから現在のバージョンにアップグレードした場合、アップグレードの前後で一貫した PD 動作を保証するために、新しいフォーミュラ バージョンはデフォルトで自動的に無効になります。式のバージョンを変更したい場合は、 `pd-ctl`設定を手動で切り替える必要があります。詳細は[PD Control](/pd-control.md#config-show--set-option-value--placement-rules)を参照してください。
 
 ### <code>store-limit-version</code> <span class="version-mark">v7.1.0 の新機能</span> {#code-store-limit-version-code-span-class-version-mark-new-in-v7-1-0-span}
 
@@ -367,7 +367,7 @@ pd-serverに関するコンフィグレーション項目
 -   デフォルト値: `v1`
 -   値のオプション:
     -   `v1` : v1 モードでは、 `store limit`手動で変更して、単一の TiKV のスケジュール速度を制限できます。
-    -   `v2` : (実験的機能) v2 モードでは、PD が TiKV スナップショットの機能に基づいて`store limit`値を動的に調整するため、手動で 2 の値を設定する必要はありません。詳細については[<a href="/configure-store-limit.md#principles-of-store-limit-v2">ストア制限 v2 の原則</a>](/configure-store-limit.md#principles-of-store-limit-v2)を参照してください。
+    -   `v2` : (実験的機能) v2 モードでは、PD が TiKV スナップショットの機能に基づいて`store limit`値を動的に調整するため、手動で 2 の値を設定する必要はありません。詳細については[ストア制限 v2 の原則](/configure-store-limit.md#principles-of-store-limit-v2)を参照してください。
 
 ### <code>enable-joint-consensus</code> <span class="version-mark">v5.0 の新機能</span> {#code-enable-joint-consensus-code-span-class-version-mark-new-in-v5-0-span}
 
@@ -401,13 +401,13 @@ pd-serverに関するコンフィグレーション項目
 
 -   TiKVクラスターのトポロジー情報
 -   デフォルト値: `[]`
--   [<a href="/schedule-replicas-by-topology-labels.md">クラスタトポロジ構成</a>](/schedule-replicas-by-topology-labels.md)
+-   [クラスタトポロジ構成](/schedule-replicas-by-topology-labels.md)
 
 ### <code>isolation-level</code> {#code-isolation-level-code}
 
 -   TiKV クラスターの最小トポロジ分離レベル
 -   デフォルト値: `""`
--   [<a href="/schedule-replicas-by-topology-labels.md">クラスタトポロジ構成</a>](/schedule-replicas-by-topology-labels.md)
+-   [クラスタトポロジ構成](/schedule-replicas-by-topology-labels.md)
 
 ### <code>strictly-match-label</code> {#code-strictly-match-label-code}
 
@@ -418,7 +418,7 @@ pd-serverに関するコンフィグレーション項目
 
 -   `placement-rules`を有効にします。
 -   デフォルト値: `true`
--   [<a href="/configure-placement-rules.md">配置ルール</a>](/configure-placement-rules.md)を参照してください。
+-   [配置ルール](/configure-placement-rules.md)を参照してください。
 
 ## <code>label-property</code> {#code-label-property-code}
 
@@ -436,7 +436,7 @@ pd-serverに関するコンフィグレーション項目
 
 ## <code>dashboard</code> {#code-dashboard-code}
 
-[<a href="/dashboard/dashboard-intro.md">TiDB ダッシュボード</a>](/dashboard/dashboard-intro.md)内蔵 PD に関するコンフィグレーション項目。
+[TiDB ダッシュボード](/dashboard/dashboard-intro.md)内蔵 PD に関するコンフィグレーション項目。
 
 ### <code>tidb-cacert-path</code> {#code-tidb-cacert-path-code}
 
@@ -457,21 +457,21 @@ pd-serverに関するコンフィグレーション項目
 
 -   TiDB ダッシュボードがリバース プロキシの背後でアクセスされる場合、この項目はすべての Web リソースのパブリック URL パス プレフィックスを設定します。
 -   デフォルト値: `/dashboard`
--   リバース プロキシの背後以外で TiDB ダッシュボードにアクセスする場合は、この構成項目を変更し**ないで**ください。そうしないと、アクセスの問題が発生する可能性があります。詳細は[<a href="/dashboard/dashboard-ops-reverse-proxy.md">リバース プロキシの背後で TiDB ダッシュボードを使用する</a>](/dashboard/dashboard-ops-reverse-proxy.md)参照してください。
+-   リバース プロキシの背後以外で TiDB ダッシュボードにアクセスする場合は、この構成項目を変更し**ないで**ください。そうしないと、アクセスの問題が発生する可能性があります。詳細は[リバース プロキシの背後で TiDB ダッシュボードを使用する](/dashboard/dashboard-ops-reverse-proxy.md)参照してください。
 
 ### <code>enable-telemetry</code> {#code-enable-telemetry-code}
 
 -   TiDB ダッシュボードでテレメトリ収集機能を有効にするかどうかを決定します。
 -   デフォルト値: `false`
--   詳細については[<a href="/telemetry.md">テレメトリー</a>](/telemetry.md)を参照してください。
+-   詳細については[テレメトリー](/telemetry.md)を参照してください。
 
 ## <code>replication-mode</code> {#code-replication-mode-code}
 
-すべてのリージョンのレプリケーション モードに関連するコンフィグレーション項目。詳細については[<a href="/two-data-centers-in-one-city-deployment.md#enable-the-dr-auto-sync-mode">DR 自動同期モードを有効にする</a>](/two-data-centers-in-one-city-deployment.md#enable-the-dr-auto-sync-mode)を参照してください。
+すべてのリージョンのレプリケーション モードに関連するコンフィグレーション項目。詳細については[DR 自動同期モードを有効にする](/two-data-centers-in-one-city-deployment.md#enable-the-dr-auto-sync-mode)を参照してください。
 
 ## コントローラー {#controllor}
 
-このセクションでは、PD for [<a href="/tidb-resource-control.md">リソース制御</a>](/tidb-resource-control.md)に組み込まれる設定項目について説明します。
+このセクションでは、PD for [リソース制御](/tidb-resource-control.md)に組み込まれる設定項目について説明します。
 
 ### <code>degraded-mode-wait-duration</code> {#code-degraded-mode-wait-duration-code}
 
@@ -481,7 +481,7 @@ pd-serverに関するコンフィグレーション項目
 
 ### <code>request-unit</code> {#code-request-unit-code}
 
-[<a href="/tidb-resource-control.md#what-is-request-unit-ru">リクエストユニット (RU)</a>](/tidb-resource-control.md#what-is-request-unit-ru)に関する設定項目は以下のとおりです。
+[リクエストユニット (RU)](/tidb-resource-control.md#what-is-request-unit-ru)に関する設定項目は以下のとおりです。
 
 #### <code>read-base-cost</code> {#code-read-base-cost-code}
 

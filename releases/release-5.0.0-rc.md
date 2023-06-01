@@ -37,8 +37,8 @@ v5.0 の主な新機能または改善点は次のとおりです。
 
 たとえば、テーブル ( `tbl_name` ) にクラスター化インデックスがあるかどうかを確認するには、 `select tidb_pk_type from information_schema.tables where table_name = '{tbl_name}'`実行します。
 
--   [<a href="/system-variables.md#tidb_enable_clustered_index-new-in-v50">ユーザードキュメント</a>](/system-variables.md#tidb_enable_clustered_index-new-in-v50)
--   関連問題: [<a href="https://github.com/pingcap/tidb/issues/4841">#4841</a>](https://github.com/pingcap/tidb/issues/4841)
+-   [ユーザードキュメント](/system-variables.md#tidb_enable_clustered_index-new-in-v50)
+-   関連問題: [#4841](https://github.com/pingcap/tidb/issues/4841)
 
 ### 非表示のインデックスをサポートする {#support-invisible-indexes}
 
@@ -46,8 +46,8 @@ v5.0 の主な新機能または改善点は次のとおりです。
 
 インデックスの可視性を変更するには、 `ALTER INDEX`ステートメントを使用します。変更後、オプティマイザはインデックスの可視性に基づいて、このインデックスをインデックス リストに追加するかどうかを決定します。
 
--   [<a href="/sql-statements/sql-statement-alter-index.md">ユーザードキュメント</a>](/sql-statements/sql-statement-alter-index.md)
--   関連問題: [<a href="https://github.com/pingcap/tidb/issues/9246">#9246</a>](https://github.com/pingcap/tidb/issues/9246)
+-   [ユーザードキュメント](/sql-statements/sql-statement-alter-index.md)
+-   関連問題: [#9246](https://github.com/pingcap/tidb/issues/9246)
 
 ### <code>EXCEPT</code>演算子と<code>INTERSECT</code>演算子のサポート {#support-code-except-code-and-code-intersect-code-operators}
 
@@ -55,8 +55,8 @@ v5.0 の主な新機能または改善点は次のとおりです。
 
 `EXCEPT`演算子は集合演算子で、2 つのクエリの結果セットを結合し、最初のクエリ結果には含まれるが 2 番目のクエリ結果には含まれない要素を返します。
 
--   [<a href="/functions-and-operators/set-operators.md">ユーザードキュメント</a>](/functions-and-operators/set-operators.md)
--   関連問題: [<a href="https://github.com/pingcap/tidb/issues/18031">#18031</a>](https://github.com/pingcap/tidb/issues/18031)
+-   [ユーザードキュメント](/functions-and-operators/set-operators.md)
+-   関連問題: [#18031](https://github.com/pingcap/tidb/issues/18031)
 
 ## トランザクション {#transaction}
 
@@ -64,14 +64,14 @@ v5.0 の主な新機能または改善点は次のとおりです。
 
 悲観的トランザクション モードでは、トランザクションに関係するテーブルに同時 DDL 操作または`SCHEMA VERSION`変更が含まれている場合、システムはトランザクションの`SCHEMA VERSION`を最新のものに自動的に更新して、DDL 操作によるトランザクションの中断を回避し、トランザクションのコミットが成功することを保証します。トランザクションが中断されると、クライアントは`Information schema is changed`エラー メッセージを受け取ります。
 
--   関連問題: [<a href="https://github.com/pingcap/tidb/issues/18005">#18005</a>](https://github.com/pingcap/tidb/issues/18005)
+-   関連問題: [#18005](https://github.com/pingcap/tidb/issues/18005)
 
 ## 文字セットと照合順序 {#character-set-and-collation}
 
 文字セットの大文字と小文字を区別しない比較ソートをサポートします。
 
--   [<a href="/character-set-and-collation.md#new-framework-for-collations">ユーザードキュメント</a>](/character-set-and-collation.md#new-framework-for-collations)
--   関連問題: [<a href="https://github.com/pingcap/tidb/issues/17596">#17596</a>](https://github.com/pingcap/tidb/issues/17596)
+-   [ユーザードキュメント](/character-set-and-collation.md#new-framework-for-collations)
+-   関連問題: [#17596](https://github.com/pingcap/tidb/issues/17596)
 
 ## Security {#security}
 
@@ -83,12 +83,12 @@ TiDB は、ID 情報やクレジット カード番号などの機密情報の�
 
 -   TiDB 側では、tidb-server の SQL ステートメントを使用して`tidb_redact_log=1`変数を設定します。
 -   TiKV側では、tikv-serverに`security.redact-info-log = true`設定を行います。
--   PD 側の場合は、pd-server に`security.redact-info-log = true`構成を設定します。 [<a href="https://github.com/tikv/pd/issues/2852">#2852</a>](https://github.com/tikv/pd/issues/2852) [<a href="https://github.com/tikv/pd/pull/3011">#3011</a>](https://github.com/tikv/pd/pull/3011)
+-   PD 側の場合は、pd-server に`security.redact-info-log = true`構成を設定します。 [#3011](https://github.com/tikv/pd/pull/3011)
 -   TiFlash側では、tflash-server で`security.redact_info_log = true`設定を設定し、tflash-learner で`security.redact-info-log = true`設定を設定します。
 
-[<a href="/log-redaction.md">ユーザードキュメント</a>](/log-redaction.md)
+[ユーザードキュメント](/log-redaction.md)
 
-関連問題: [<a href="https://github.com/pingcap/tidb/issues/18566">#18566</a>](https://github.com/pingcap/tidb/issues/18566)
+関連問題: [#18566](https://github.com/pingcap/tidb/issues/18566)
 
 ## パフォーマンスの向上 {#performance-improvements}
 
@@ -102,8 +102,8 @@ TiDB は、ID 情報やクレジット カード番号などの機密情報の�
 
 ユーザーはグローバル変数`tidb_enable_async_commit = ON`を設定することでこの機能を有効にできます。
 
--   [<a href="/system-variables.md#tidb_enable_async_commit-new-in-v50">ユーザードキュメント</a>](/system-variables.md#tidb_enable_async_commit-new-in-v50)
--   関連問題: [<a href="https://github.com/tikv/tikv/issues/8316">#8316</a>](https://github.com/tikv/tikv/issues/8316)
+-   [ユーザードキュメント](/system-variables.md#tidb_enable_async_commit-new-in-v50)
+-   関連問題: [#8316](https://github.com/tikv/tikv/issues/8316)
 
 ### インデックス選択におけるオプティマイザの安定性を改善しました (実験的) {#improve-the-optimizer-s-stability-in-index-selection-experimental}
 
@@ -115,19 +115,19 @@ TiDB は、ID 情報やクレジット カード番号などの機密情報の�
     -   `TopN`の検索ロジックをリファクタリングします。
     -   Bucket NDV のメンテナンスを容易にするために、ヒストグラムから`TopN`情報を削除し、ヒストグラムのインデックスを作成します。
 
-関連問題: [<a href="https://github.com/pingcap/tidb/issues/18065">#18065</a>](https://github.com/pingcap/tidb/issues/18065)
+関連問題: [#18065](https://github.com/pingcap/tidb/issues/18065)
 
 ### 不完全なスケジューリングまたは不完全な I/O フロー制御によって引き起こされるパフォーマンスのジッターを最適化します。 {#optimize-performance-jitter-caused-by-imperfect-scheduling-or-imperfect-i-o-flow-control}
 
 TiDB スケジューリング プロセスは、I/O、ネットワーク、CPU、メモリなどのリソースを占有します。 TiDB がスケジュールされたタスクを制御しない場合、QPS と遅延により、リソースのプリエンプションによるパフォーマンスのジッターが発生する可能性があります。次の最適化の後、72 時間のテストで、Sysbench TPS ジッターの標準偏差は 11.09% から 3.36% に減少しました。
 
--   ノード容量の変動 (常に喫水線付近) や、PD `store-limit`構成値の設定が大きすぎることによって引き起こされる冗長なスケジューリングの問題を軽減します。これは、 `region-score-formula-version = v2`構成項目によって有効になる新しいスケジューリング計算式のセットを導入することによって実現されます。 [<a href="https://github.com/tikv/pd/pull/3269">#3269</a>](https://github.com/tikv/pd/pull/3269)
--   `enable-cross-table-merge = true`を変更して空のリージョンの数を減らし、クロスリージョンのマージ機能を有効にします。 [<a href="https://github.com/tikv/pd/pull/3129">#3129</a>](https://github.com/tikv/pd/pull/3129)
--   TiKV バックグラウンドでのデータ圧縮は、多くの I/O リソースを占有します。システムは圧縮率を自動的に調整して、バックグラウンド タスクとフォアグラウンドの読み取りおよび書き込みの間の I/O リソースの競合のバランスをとります。 `rate-limiter-auto-tuned`設定項目でこの機能を有効にすると、遅延ジッターが大幅に減少します。 [<a href="https://github.com/pingcap/tidb/issues/18011">#18011</a>](https://github.com/pingcap/tidb/issues/18011)
--   TiKV がガベージコレクション(GC) とデータ圧縮を実行すると、パーティションが CPU と I/O リソースを占有します。これら 2 つのタスクの実行中に、重複するデータが存在します。 I/O 使用量を削減するために、GC 圧縮フィルター機能はこれら 2 つのタスクを 1 つに結合し、同じタスク内で実行します。この機能はまだ実験的であり、 `gc.enable-compaction-filter = true`で有効にできます。 [<a href="https://github.com/pingcap/tidb/issues/18009">#18009</a>](https://github.com/pingcap/tidb/issues/18009)
+-   ノード容量の変動 (常に喫水線付近) や、PD `store-limit`構成値の設定が大きすぎることによって引き起こされる冗長なスケジューリングの問題を軽減します。これは、 `region-score-formula-version = v2`構成項目によって有効になる新しいスケジューリング計算式のセットを導入することによって実現されます。 [#3269](https://github.com/tikv/pd/pull/3269)
+-   `enable-cross-table-merge = true`を変更して空のリージョンの数を減らし、クロスリージョンのマージ機能を有効にします。 [#3129](https://github.com/tikv/pd/pull/3129)
+-   TiKV バックグラウンドでのデータ圧縮は、多くの I/O リソースを占有します。システムは圧縮率を自動的に調整して、バックグラウンド タスクとフォアグラウンドの読み取りおよび書き込みの間の I/O リソースの競合のバランスをとります。 `rate-limiter-auto-tuned`設定項目でこの機能を有効にすると、遅延ジッターが大幅に減少します。 [#18011](https://github.com/pingcap/tidb/issues/18011)
+-   TiKV がガベージコレクション(GC) とデータ圧縮を実行すると、パーティションが CPU と I/O リソースを占有します。これら 2 つのタスクの実行中に、重複するデータが存在します。 I/O 使用量を削減するために、GC 圧縮フィルター機能はこれら 2 つのタスクを 1 つに結合し、同じタスク内で実行します。この機能はまだ実験的であり、 `gc.enable-compaction-filter = true`で有効にできます。 [#18009](https://github.com/pingcap/tidb/issues/18009)
 -   TiFlash がデータを圧縮または並べ替えると、大量の I/O リソースが占有されます。システムは、圧縮とデータの並べ替えによる I/O リソースの使用を制限することで、リソースの競合を軽減します。この機能はまだ実験的であり、 `bg_task_io_rate_limit`で有効にできます。
 
-関連問題: [<a href="https://github.com/pingcap/tidb/issues/18005">#18005</a>](https://github.com/pingcap/tidb/issues/18005)
+関連問題: [#18005](https://github.com/pingcap/tidb/issues/18005)
 
 ### リアルタイム BI / データ ウェアハウジング シナリオにおけるTiFlashの安定性を向上させる {#improve-the-stability-of-tiflash-in-real-time-bi-data-warehousing-scenarios}
 
@@ -137,17 +137,17 @@ TiDB スケジューリング プロセスは、I/O、ネットワーク、CPU�
 
 ### その他のパフォーマンスの最適化 {#other-performance-optimizations}
 
--   `delete from table where id <?`ステートメントの実行パフォーマンスを向上させます。 P99 のパフォーマンスは 4 倍向上します。 [<a href="https://github.com/pingcap/tidb/issues/18028">#18028</a>](https://github.com/pingcap/tidb/issues/18028)
+-   `delete from table where id <?`ステートメントの実行パフォーマンスを向上させます。 P99 のパフォーマンスは 4 倍向上します。 [#18028](https://github.com/pingcap/tidb/issues/18028)
 -   TiFlash は、パフォーマンスを向上させるために、複数のローカル ディスクでのデータの同時読み取りと書き込みをサポートしています。
 
 ## 高可用性と災害復旧 {#high-availability-and-disaster-recovery}
 
 ### リージョンのメンバーシップ変更時のシステム可用性の向上 (実験的) {#improve-system-availability-during-region-membership-change-experimental}
 
-リージョンのメンバーシップ変更のプロセスでは、「メンバーの追加」と「メンバーの削除」の 2 つの操作が 2 つのステップで実行されます。メンバーシップの変更が完了するときに障害が発生すると、リージョンは使用できなくなり、フォアグラウンド アプリケーションのエラーが返されます。導入されたRaft Joint Consensus アルゴリズムにより、リージョンのメンバーシップ変更時のシステムの可用性が向上します。会員変更時の「会員追加」と「会員削除」の操作を一つにまとめて全会員に送信します。変更プロセス中、リージョンは中間状態になります。変更されたメンバーのいずれかが失敗した場合でも、システムは引き続き使用できます。ユーザーは、 `pd-ctl config set enable-joint-consensus true`を実行してメンバーシップ変数を変更することで、この機能を有効にできます。 [<a href="https://github.com/tikv/tikv/issues/7587">#7587</a>](https://github.com/tikv/tikv/issues/7587) [<a href="https://github.com/tikv/pd/issues/2860">#2860</a>](https://github.com/tikv/pd/issues/2860)
+リージョンのメンバーシップ変更のプロセスでは、「メンバーの追加」と「メンバーの削除」の 2 つの操作が 2 つのステップで実行されます。メンバーシップの変更が完了するときに障害が発生すると、リージョンは使用できなくなり、フォアグラウンド アプリケーションのエラーが返されます。導入されたRaft Joint Consensus アルゴリズムにより、リージョンのメンバーシップ変更時のシステムの可用性が向上します。会員変更時の「会員追加」と「会員削除」の操作を一つにまとめて全会員に送信します。変更プロセス中、リージョンは中間状態になります。変更されたメンバーのいずれかが失敗した場合でも、システムは引き続き使用できます。ユーザーは、 `pd-ctl config set enable-joint-consensus true`を実行してメンバーシップ変数を変更することで、この機能を有効にできます。 [#2860](https://github.com/tikv/pd/issues/2860)
 
--   [<a href="/pd-configuration-file.md#enable-joint-consensus-new-in-v50">ユーザードキュメント</a>](/pd-configuration-file.md#enable-joint-consensus-new-in-v50)
--   関連問題: [<a href="https://github.com/pingcap/tidb/issues/18079">#18079</a>](https://github.com/pingcap/tidb/issues/18079)
+-   [ユーザードキュメント](/pd-configuration-file.md#enable-joint-consensus-new-in-v50)
+-   関連問題: [#18079](https://github.com/pingcap/tidb/issues/18079)
 
 ### メモリ管理モジュールを最適化してシステム OOM リスクを軽減する {#optimize-the-memory-management-module-to-reduce-system-oom-risks}
 
@@ -157,15 +157,15 @@ TiDB スケジューリング プロセスは、I/O、ネットワーク、CPU�
 
 ## バックアップと復元 {#backup-and-restore}
 
--   バックアップと復元ツール (BR) は、AWS S3 および Google Cloud GCS へのデータのバックアップをサポートしています。 ( [<a href="/br/backup-and-restore-storages.md">ユーザードキュメント</a>](/br/backup-and-restore-storages.md) )
--   バックアップと復元ツール (BR) は、AWS S3 および Google Cloud GCS から TiDB へのデータの復元をサポートしています。 ( [<a href="/br/backup-and-restore-storages.md">ユーザードキュメント</a>](/br/backup-and-restore-storages.md) )
--   関連問題: [<a href="https://github.com/pingcap/br/issues/89">#89</a>](https://github.com/pingcap/br/issues/89)
+-   バックアップと復元ツール (BR) は、AWS S3 および Google Cloud GCS へのデータのバックアップをサポートしています。 ( [ユーザードキュメント](/br/backup-and-restore-storages.md) )
+-   バックアップと復元ツール (BR) は、AWS S3 および Google Cloud GCS から TiDB へのデータの復元をサポートしています。 ( [ユーザードキュメント](/br/backup-and-restore-storages.md) )
+-   関連問題: [#89](https://github.com/pingcap/br/issues/89)
 
 ## データのインポートとエクスポート {#data-import-and-export}
 
--   TiDB Lightning は、 AWS S3storageから TiDB へのAuroraスナップショット データのインポートをサポートしています。 (関連問題: [<a href="https://github.com/pingcap/tidb-lightning/issues/266">#266</a>](https://github.com/pingcap/tidb-lightning/issues/266) )
+-   TiDB Lightning は、 AWS S3storageから TiDB へのAuroraスナップショット データのインポートをサポートしています。 (関連問題: [#266](https://github.com/pingcap/tidb-lightning/issues/266) )
 -   1 TiB のデータを DBaaS T1.standard にインポートする TPC-C テストでは、パフォーマンスが 254 GiB/h から 366 GiB/h に 40% 向上しました。
--   Dumpling は、 TiDB/MySQL から AWS S3storageへのデータのエクスポートをサポートしています (実験的) (関連問題: [<a href="https://github.com/pingcap/dumpling/issues/8">#8</a>](https://github.com/pingcap/dumpling/issues/8) 、 [<a href="/dumpling-overview.md#export-data-to-amazon-s3-cloud-storage">ユーザードキュメント</a>](/dumpling-overview.md#export-data-to-amazon-s3-cloud-storage) )
+-   Dumpling は、 TiDB/MySQL から AWS S3storageへのデータのエクスポートをサポートしています (実験的) (関連問題: [ユーザードキュメント](/dumpling-overview.md#export-data-to-amazon-s3-cloud-storage) )
 
 ## 診断 {#diagnostics}
 
@@ -173,16 +173,16 @@ TiDB スケジューリング プロセスは、I/O、ネットワーク、CPU�
 
 ユーザーが SQL パフォーマンスの問題をトラブルシューティングする場合、パフォーマンスの問題の原因を特定するための詳細な診断情報が必要です。以前の TiDB バージョンでは、 `EXPLAIN`ステートメントによって収集される情報の詳細が十分ではありませんでした。 DBA は、ログ情報、監視情報、または推測に基づいてのみトラブルシューティングを実行していたため、非効率的である可能性がありました。 TiDB v5.0 では、ユーザーがパフォーマンスの問題をより効率的にトラブルシューティングできるように、次の改良が加えられています。
 
--   `EXPLAIN ANALYZE`はすべての DML ステートメントの分析をサポートし、実際のパフォーマンス プランと各オペレーターの実行情報を表示します。 [<a href="https://github.com/pingcap/tidb/issues/18056">#18056</a>](https://github.com/pingcap/tidb/issues/18056)
--   ユーザーは`EXPLAIN FOR CONNECTION`を使用して、実行中の SQL ステートメントのステータス情報を分析できます。この情報には、各演算子の実行時間と処理された行の数が含まれます。 [<a href="https://github.com/pingcap/tidb/issues/18233">#18233</a>](https://github.com/pingcap/tidb/issues/18233)
--   `EXPLAIN ANALYZE`の出力には、オペレーターによって送信された RPC リクエストの数、ロック競合の解決にかかる時間、ネットワークレイテンシー、RocksDB 内の削除されたデータのスキャン量、RocksDB キャッシュのヒット率などの詳細情報が含まれています。 [<a href="https://github.com/pingcap/tidb/issues/18663">#18663</a>](https://github.com/pingcap/tidb/issues/18663)
--   SQL ステートメントの詳細な実行情報はスロー ログに記録され、これは`EXPLAIN ANALYZE`の出力情報と一致します。この情報には、各オペレーターが費やした時間、処理された行数、送信された RPC リクエストの数が含まれます。 [<a href="https://github.com/pingcap/tidb/issues/15009">#15009</a>](https://github.com/pingcap/tidb/issues/15009)
+-   `EXPLAIN ANALYZE`はすべての DML ステートメントの分析をサポートし、実際のパフォーマンス プランと各オペレーターの実行情報を表示します。 [#18056](https://github.com/pingcap/tidb/issues/18056)
+-   ユーザーは`EXPLAIN FOR CONNECTION`を使用して、実行中の SQL ステートメントのステータス情報を分析できます。この情報には、各演算子の実行時間と処理された行の数が含まれます。 [#18233](https://github.com/pingcap/tidb/issues/18233)
+-   `EXPLAIN ANALYZE`の出力には、オペレーターによって送信された RPC リクエストの数、ロック競合の解決にかかる時間、ネットワークレイテンシー、RocksDB 内の削除されたデータのスキャン量、RocksDB キャッシュのヒット率などの詳細情報が含まれています。 [#18663](https://github.com/pingcap/tidb/issues/18663)
+-   SQL ステートメントの詳細な実行情報はスロー ログに記録され、これは`EXPLAIN ANALYZE`の出力情報と一致します。この情報には、各オペレーターが費やした時間、処理された行数、送信された RPC リクエストの数が含まれます。 [#15009](https://github.com/pingcap/tidb/issues/15009)
 
-[<a href="/sql-statements/sql-statement-explain.md">ユーザードキュメント</a>](/sql-statements/sql-statement-explain.md)
+[ユーザードキュメント](/sql-statements/sql-statement-explain.md)
 
 ## 導入とメンテナンス {#deployment-and-maintenance}
 
 -   以前は、TiDB Ansible の構成情報がTiUPにインポートされると、 TiUP はユーザー構成を`ansible-imported-configs`ディレクトリに置きました。後でユーザーが`tiup cluster edit-config`使用して構成を編集する必要がある場合、インポートされた構成はエディター インターフェイスに表示されず、ユーザーが混乱する可能性がありました。 TiDB v5.0 では、TiDB Ansible 構成がインポートされると、 TiUP は構成情報を`ansible-imported-configs`とエディター インターフェイスの両方に置きます。この改善により、ユーザーはクラスター構成を編集するときに、インポートされた構成を確認できるようになります。
--   複数のミラーの 1 つの結合、ローカル ミラーでのコンポーネントの公開、ローカル ミラーでのコンポーネント所有者の追加をサポートする強化された`mirror`コマンド。 [<a href="https://github.com/pingcap/tiup/issues/814">#814</a>](https://github.com/pingcap/tiup/issues/814)
+-   複数のミラーの 1 つの結合、ローカル ミラーでのコンポーネントの公開、ローカル ミラーでのコンポーネント所有者の追加をサポートする強化された`mirror`コマンド。 [#814](https://github.com/pingcap/tiup/issues/814)
     -   大企業、特に金融業界の場合、本番環境の変化は慎重に考慮されます。各バージョンのインストールに CD を使用する必要がある場合は、面倒な場合があります。 TiDB v5.0 では、 TiUPの`merge`コマンドは複数のインストール パッケージを 1 つにマージすることをサポートしており、インストールが簡単になります。
     -   v4.0 では、ユーザーは自己構築ミラーを公開するために tiup-server を起動する必要がありましたが、これは十分に便利ではありませんでした。 v5.0 では、ユーザーは`tiup mirror set`を使用して現在のミラーをローカル ミラーに設定するだけで、自己構築ミラーを公開できます。

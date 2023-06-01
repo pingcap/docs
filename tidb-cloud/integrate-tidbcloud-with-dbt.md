@@ -5,7 +5,7 @@ summary: Learn the use cases of dbt in TiDB Cloud.
 
 # TiDB Cloudと dbt を統合する {#integrate-tidb-cloud-with-dbt}
 
-[<a href="https://www.getdbt.com/">データ構築ツール（dbt）</a>](https://www.getdbt.com/)は、分析エンジニアが SQL ステートメントを使用してウェアハウス内のデータを変換するのに役立つ、人気のあるオープンソース データ変換ツールです。 [<a href="https://github.com/pingcap/dbt-tidb">dbt-tidb</a>](https://github.com/pingcap/dbt-tidb)プラグインを使用すると、 TiDB Cloudを使用する分析エンジニアは、テーブルやビューの作成プロセスを考慮することなく、SQL を介してフォームを直接作成し、データを照合することができます。
+[dbt-tidb](https://github.com/pingcap/dbt-tidb)プラグインを使用すると、 TiDB Cloudを使用する分析エンジニアは、テーブルやビューの作成プロセスを考慮することなく、SQL を介してフォームを直接作成し、データを照合することができます。
 
 このドキュメントでは、dbt プロジェクトを例として、 TiDB Cloudで dbt を使用する方法を紹介します。
 
@@ -17,11 +17,11 @@ dbt と dbt-tidb は、1 つのコマンドだけを使用してインストー�
 pip install dbt-tidb
 ```
 
-dbt を個別にインストールすることもできます。 DBT ドキュメントの[<a href="https://docs.getdbt.com/docs/get-started/installation">DBTのインストール方法</a>](https://docs.getdbt.com/docs/get-started/installation)参照してください。
+dbt を個別にインストールすることもできます。 DBT ドキュメントの[DBTのインストール方法](https://docs.getdbt.com/docs/get-started/installation)参照してください。
 
 ## ステップ 2: デモ プロジェクトを作成する {#step-2-create-a-demo-project}
 
-dbt 関数を試すには、 dbt-lab が提供するデモ プロジェクト[<a href="https://github.com/dbt-labs/jaffle_shop">ジャッフルショップ</a>](https://github.com/dbt-labs/jaffle_shop)を使用できます。 GitHub から直接プロジェクトのクローンを作成できます。
+dbt 関数を試すには、 dbt-lab が提供するデモ プロジェクト[ジャッフルショップ](https://github.com/dbt-labs/jaffle_shop)を使用できます。 GitHub から直接プロジェクトのクローンを作成できます。
 
 ```shell
 git clone https://github.com/dbt-labs/jaffle_shop && \
@@ -59,9 +59,9 @@ cd jaffle_shop
 
 -   `dbt_project.yml`は dbt プロジェクト構成ファイルで、プロジェクト名とデータベース構成ファイル情報が保持されます。
 
--   `models`ディレクトリには、プロジェクトの SQL モデルとテーブル スキーマが含まれています。このセクションはデータ アナリストが執筆していることに注意してください。モデルの詳細については、 [<a href="https://docs.getdbt.com/docs/build/sql-models">SQLモデル</a>](https://docs.getdbt.com/docs/build/sql-models)を参照してください。
+-   `models`ディレクトリには、プロジェクトの SQL モデルとテーブル スキーマが含まれています。このセクションはデータ アナリストが執筆していることに注意してください。モデルの詳細については、 [SQLモデル](https://docs.getdbt.com/docs/build/sql-models)を参照してください。
 
--   `seeds`ディレクトリには、データベース エクスポート ツールによってダンプされた CSV ファイルが保存されます。たとえば、 Dumplingを使用して CSV ファイルに[<a href="https://docs.pingcap.com/tidbcloud/export-data-from-tidb-cloud">TiDB Cloudデータをエクスポートする</a>](https://docs.pingcap.com/tidbcloud/export-data-from-tidb-cloud)できます。 `jaffle_shop`プロジェクトでは、これらの CSV ファイルが処理対象の生データとして使用されます。
+-   `seeds`ディレクトリには、データベース エクスポート ツールによってダンプされた CSV ファイルが保存されます。たとえば、 Dumplingを使用して CSV ファイルに[TiDB Cloudデータをエクスポートする](https://docs.pingcap.com/tidbcloud/export-data-from-tidb-cloud)できます。 `jaffle_shop`プロジェクトでは、これらの CSV ファイルが処理対象の生データとして使用されます。
 
 ## ステップ 3: プロジェクトを構成する {#step-3-configure-the-project}
 
@@ -69,7 +69,7 @@ cd jaffle_shop
 
 1.  グローバル構成を完了します。
 
-    [<a href="#description-of-profile-fields">プロフィールフィールドの説明</a>](#description-of-profile-fields)を参照し、デフォルトのグローバル プロファイル`~/.dbt/profiles.yml`を編集して、 TiDB Cloudとの接続を構成できます。
+    [プロフィールフィールドの説明](#description-of-profile-fields)を参照し、デフォルトのグローバル プロファイル`~/.dbt/profiles.yml`を編集して、 TiDB Cloudとの接続を構成できます。
 
     ```shell
     sudo vi ~/.dbt/profiles.yml
@@ -90,7 +90,7 @@ cd jaffle_shop
            password: "your_password"                                   # The password to use for authenticating to the TiDB Cloud clusters
     ```
 
-    TiDB Cloudコンソールの[<a href="/tidb-cloud/connect-via-standard-connection.md">**接続**</a>](/tidb-cloud/connect-via-standard-connection.md)ダイアログから`server` 、 `port` 、および`username`の値を取得できます。
+    TiDB Cloudコンソールの[**接続**](/tidb-cloud/connect-via-standard-connection.md)ダイアログから`server` 、 `port` 、および`username`の値を取得できます。
 
 2.  プロジェクトの構成を完了します。
 
@@ -315,7 +315,7 @@ dbt を使用すると、プロジェクトの全体的な構造を表示し、�
     dbt docs serve
     ```
 
-3.  ブラウザからドキュメントにアクセスするには、 [<a href="http://localhost:8080">http://ローカルホスト:8080</a>](http://localhost:8080)に進みます。
+3.  ブラウザからドキュメントにアクセスするには、 [http://ローカルホスト:8080](http://localhost:8080)に進みます。
 
 ## プロフィールフィールドの説明 {#description-of-profile-fields}
 
@@ -331,7 +331,7 @@ dbt を使用すると、プロジェクトの全体的な構造を表示し、�
 
 ## サポートされている関数 {#supported-functions}
 
-次の関数をdbt-tidb で直接使用できます。使用方法については、 [<a href="https://github.com/dbt-labs/dbt-utils">dbt-util</a>](https://github.com/dbt-labs/dbt-utils)を参照してください。
+次の関数をdbt-tidb で直接使用できます。使用方法については、 [dbt-util](https://github.com/dbt-labs/dbt-utils)を参照してください。
 
 次の関数がサポートされています。
 

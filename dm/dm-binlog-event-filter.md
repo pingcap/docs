@@ -5,7 +5,7 @@ summary: Learn how to use the binlog event filter feature of DM.
 
 # TiDB データ移行Binlogイベント フィルター {#tidb-data-migration-binlog-event-filter}
 
-TiDB Data Migration (DM) は、一部のスキーマまたはテーブルの指定されたタイプのbinlogイベントをフィルターで除外するか、のみ受信するbinlogイベント フィルター機能を提供します。たとえば、 `TRUNCATE TABLE`つまたは`INSERT`のイベントをすべてフィルターで除外できます。 binlogイベント フィルター機能は、 [<a href="/dm/dm-block-allow-table-lists.md">ブロックリストと許可リスト</a>](/dm/dm-block-allow-table-lists.md)機能よりも粒度が細かいです。
+TiDB Data Migration (DM) は、一部のスキーマまたはテーブルの指定されたタイプのbinlogイベントをフィルターで除外するか、のみ受信するbinlogイベント フィルター機能を提供します。たとえば、 `TRUNCATE TABLE`つまたは`INSERT`のイベントをすべてフィルターで除外できます。 binlogイベント フィルター機能は、 [ブロックリストと許可リスト](/dm/dm-block-allow-table-lists.md)機能よりも粒度が細かいです。
 
 ## binlogイベントフィルターを構成する {#configure-the-binlog-event-filter}
 
@@ -21,17 +21,17 @@ filters:
     ​action: Ignore
 ```
 
-DM v2.0.2 以降、ソース構成ファイルでbinlogイベント フィルターを構成できます。詳細は[<a href="/dm/dm-source-configuration-file.md">アップストリーム データベースコンフィグレーションファイル</a>](/dm/dm-source-configuration-file.md)を参照してください。
+DM v2.0.2 以降、ソース構成ファイルでbinlogイベント フィルターを構成できます。詳細は[アップストリーム データベースコンフィグレーションファイル](/dm/dm-source-configuration-file.md)を参照してください。
 
 単純なシナリオでは、スキーマとテーブルを一致させるためにワイルドカードを使用することをお勧めします。ただし、次のバージョンの違いに注意してください。
 
--   DM v1.0.5 以降のバージョンでは、 binlogイベント フィルターは[<a href="https://en.wikipedia.org/wiki/Glob_(programming)#Syntax">ワイルドカードマッチ</a>](https://en.wikipedia.org/wiki/Glob_(programming)#Syntax)サポートしますが、ワイルドカード式には`*`**つだけ**使用でき、**最後に**`*`を配置する必要があります。
+-   DM v1.0.5 以降のバージョンでは、 binlogイベント フィルターは[ワイルドカードマッチ](https://en.wikipedia.org/wiki/Glob_(programming)#Syntax)サポートしますが、ワイルドカード式には`*`**つだけ**使用でき、**最後に**`*`を配置する必要があります。
 
 -   v1.0.5 より前の DM バージョンの場合、 binlogイベント フィルターはワイルドカードをサポートしますが、 `[...]`および`[!...]`式はサポートしません。
 
 ## パラメータの説明 {#parameter-descriptions}
 
--   [<a href="/dm/table-selector.md">`schema-pattern` / `table-pattern`</a>](/dm/table-selector.md) : `schema-pattern` / `table-pattern`に一致するアップストリーム MySQL または MariaDB インスタンス テーブルのbinlogイベントまたは DDL SQL ステートメントは、以下のルールによってフィルターされます。
+-   [`schema-pattern` / `table-pattern`](/dm/table-selector.md) : `schema-pattern` / `table-pattern`に一致するアップストリーム MySQL または MariaDB インスタンス テーブルのbinlogイベントまたは DDL SQL ステートメントは、以下のルールによってフィルターされます。
 
 -   `events` :binlogイベント配列。次の表から 1 つ以上の`Event`のみを選択できます。
 

@@ -41,17 +41,17 @@ PumpまたはDrainerの状態の説明:
     -   一時停止: Drainerプロセスを一時停止するには、 `kill`コマンド ( `kill -9`ではありません) を使用するか、 <kbd>Ctrl</kbd> + <kbd>C</kbd>を押すか、binlogctl ツールで`pause-drainer`コマンドを使用します。一時停止命令を受信した後、 Drainerノードはその状態を`pausing`に設定し、 Pumpノードからのバイナリログの取得を停止します。すべてのスレッドが安全に終了すると、 Drainerノードは状態を`paused`に設定し、プロセスを終了します。
     -   オフライン: Drainerプロセスを閉じるには、binlogctl ツールの`offline-drainer`コマンドを使用する必要があります。オフライン命令を受信した後、 Drainerノードは状態を`closing`に設定し、 Pumpノードからのバイナリログの取得を停止します。すべてのスレッドが安全に終了すると、 Drainerノードは状態を`offline`に更新し、プロセスを終了します。
 
-Drainerの一時停止、終了、状態の確認、および変更の方法については、 [<a href="/tidb-binlog/binlog-control.md">binlogctl ガイド</a>](/tidb-binlog/binlog-control.md)を参照してください。
+Drainerの一時停止、終了、状態の確認、および変更の方法については、 [binlogctl ガイド](/tidb-binlog/binlog-control.md)を参照してください。
 
 ## <code>binlogctl</code>使用してPump/Drainerを管理する {#use-code-binlogctl-code-to-manage-pump-drainer}
 
-[<a href="https://github.com/pingcap/tidb-binlog/tree/master/binlogctl">`binlogctl`</a>](https://github.com/pingcap/tidb-binlog/tree/master/binlogctl)は、次の機能を備えた TiDB Binlogの操作ツールです。
+[`binlogctl`](https://github.com/pingcap/tidb-binlog/tree/master/binlogctl)は、次の機能を備えた TiDB Binlogの操作ツールです。
 
 -   PumpやDrainerの状態を確認する
 -   PumpまたはDrainerを一時停止または閉じる
 -   PumpやDrainerの異常時の対処
 
-`binlogctl`の詳しい使い方は[<a href="/tidb-binlog/binlog-control.md">binlogctl の概要</a>](/tidb-binlog/binlog-control.md)を参照してください。
+`binlogctl`の詳しい使い方は[binlogctl の概要](/tidb-binlog/binlog-control.md)を参照してください。
 
 ## SQL ステートメントを使用してPumpまたはDrainerを管理する {#use-sql-statements-to-manage-pump-or-drainer}
 

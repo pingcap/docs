@@ -26,32 +26,32 @@ v5.0 の主な新機能または改善点は次のとおりです。
 
 ### システム変数 {#system-variables}
 
--   [<a href="/system-variables.md#tidb_executor_concurrency-new-in-v50">`tidb_executor_concurrency`</a>](/system-variables.md#tidb_executor_concurrency-new-in-v50)システム変数を追加して、複数のオペレータの同時実行性を制御します。以前の`tidb_*_concurrency`設定 ( `tidb_projection_concurrency`など) は引き続き有効ですが、使用すると警告が表示されます。
+-   [`tidb_executor_concurrency`](/system-variables.md#tidb_executor_concurrency-new-in-v50)システム変数を追加して、複数のオペレータの同時実行性を制御します。以前の`tidb_*_concurrency`設定 ( `tidb_projection_concurrency`など) は引き続き有効ですが、使用すると警告が表示されます。
 
--   [<a href="/system-variables.md#tidb_skip_ascii_check-new-in-v50">`tidb_skip_ascii_check`</a>](/system-variables.md#tidb_skip_ascii_check-new-in-v50)システム変数を追加して、ASCII 文字セットを書き込むときに ASCII 検証チェックをスキップするかどうかを指定します。このデフォルト値は`OFF`です。
+-   [`tidb_skip_ascii_check`](/system-variables.md#tidb_skip_ascii_check-new-in-v50)システム変数を追加して、ASCII 文字セットを書き込むときに ASCII 検証チェックをスキップするかどうかを指定します。このデフォルト値は`OFF`です。
 
--   [<a href="/system-variables.md#tidb_enable_strict_double_type_check-new-in-v50">`tidb_enable_strict_double_type_check`</a>](/system-variables.md#tidb_enable_strict_double_type_check-new-in-v50)システム変数を追加して、 `double(N)`のような構文をテーブル スキーマで定義できるかどうかを判断します。このデフォルト値は`OFF`です。
+-   [`tidb_enable_strict_double_type_check`](/system-variables.md#tidb_enable_strict_double_type_check-new-in-v50)システム変数を追加して、 `double(N)`のような構文をテーブル スキーマで定義できるかどうかを判断します。このデフォルト値は`OFF`です。
 
--   デフォルト値の[<a href="/system-variables.md#tidb_dml_batch_size">`tidb_dml_batch_size`</a>](/system-variables.md#tidb_dml_batch_size)を`20000`から`0`に変更します。これは、バッチ DML ステートメント`INSERT INTO SELECT ...` `LOAD`ではデフォルトで使用されなくなったことを意味します。代わりに、厳密なACIDセマンティクスに準拠するために大規模なトランザクションが使用されます。
+-   デフォルト値の[`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size)を`20000`から`0`に変更します。これは、バッチ DML ステートメント`INSERT INTO SELECT ...` `LOAD`ではデフォルトで使用されなくなったことを意味します。代わりに、厳密なACIDセマンティクスに準拠するために大規模なトランザクションが使用されます。
 
     > **ノート：**
     >
     > 変数のスコープがセッションからグローバルに変更され、デフォルト値が`20000`から`0`に変更されます。アプリケーションが元のデフォルト値に依存している場合は、アップグレード後に`set global`ステートメントを使用して変数を元の値に変更する必要があります。
 
--   [<a href="/system-variables.md#tidb_enable_noop_functions-new-in-v40">`tidb_enable_noop_functions`</a>](/system-variables.md#tidb_enable_noop_functions-new-in-v40)システム変数を使用して、一時テーブルの構文の互換性を制御します。この変数値が`OFF`場合、 `CREATE TEMPORARY TABLE`構文はエラーを返します。
+-   [`tidb_enable_noop_functions`](/system-variables.md#tidb_enable_noop_functions-new-in-v40)システム変数を使用して、一時テーブルの構文の互換性を制御します。この変数値が`OFF`場合、 `CREATE TEMPORARY TABLE`構文はエラーを返します。
 
 -   次のシステム変数を追加して、ガベージコレクション関連のパラメーターを直接制御します。
-    -   [<a href="/system-variables.md#tidb_gc_concurrency-new-in-v50">`tidb_gc_concurrency`</a>](/system-variables.md#tidb_gc_concurrency-new-in-v50)
-    -   [<a href="/system-variables.md#tidb_gc_enable-new-in-v50">`tidb_gc_enable`</a>](/system-variables.md#tidb_gc_enable-new-in-v50)
-    -   [<a href="/system-variables.md#tidb_gc_life_time-new-in-v50">`tidb_gc_life_time`</a>](/system-variables.md#tidb_gc_life_time-new-in-v50)
-    -   [<a href="/system-variables.md#tidb_gc_run_interval-new-in-v50">`tidb_gc_run_interval`</a>](/system-variables.md#tidb_gc_run_interval-new-in-v50)
-    -   [<a href="/system-variables.md#tidb_gc_scan_lock_mode-new-in-v50">`tidb_gc_scan_lock_mode`</a>](/system-variables.md#tidb_gc_scan_lock_mode-new-in-v50)
+    -   [`tidb_gc_concurrency`](/system-variables.md#tidb_gc_concurrency-new-in-v50)
+    -   [`tidb_gc_enable`](/system-variables.md#tidb_gc_enable-new-in-v50)
+    -   [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50)
+    -   [`tidb_gc_run_interval`](/system-variables.md#tidb_gc_run_interval-new-in-v50)
+    -   [`tidb_gc_scan_lock_mode`](/system-variables.md#tidb_gc_scan_lock_mode-new-in-v50)
 
--   デフォルト値[<a href="/pd-configuration-file.md#enable-joint-consensus-new-in-v50">`enable-joint-consensus`</a>](/pd-configuration-file.md#enable-joint-consensus-new-in-v50) `false`から`true`に変更します。これにより、ジョイント コンセンサス機能がデフォルトで有効になります。
+-   デフォルト値[`enable-joint-consensus`](/pd-configuration-file.md#enable-joint-consensus-new-in-v50) `false`から`true`に変更します。これにより、ジョイント コンセンサス機能がデフォルトで有効になります。
 
 -   `tidb_enable_amend_pessimistic_txn`の値を`0`または`1`から`ON`または`OFF`に変更します。
 
--   デフォルト値の[<a href="/system-variables.md#tidb_enable_clustered_index-new-in-v50">`tidb_enable_clustered_index`</a>](/system-variables.md#tidb_enable_clustered_index-new-in-v50)次の新しい意味を持つ`OFF`から`INT_ONLY`に変更します。
+-   デフォルト値の[`tidb_enable_clustered_index`](/system-variables.md#tidb_enable_clustered_index-new-in-v50)次の新しい意味を持つ`OFF`から`INT_ONLY`に変更します。
     -   `ON` : クラスター化インデックスが有効になります。非クラスター化インデックスの追加または削除がサポートされています。
 
     -   `OFF` : クラスター化インデックスは無効です。非クラスター化インデックスの追加または削除がサポートされています。
@@ -63,20 +63,20 @@ v5.0 の主な新機能または改善点は次のとおりです。
 
 ### コンフィグレーションファイルのパラメータ {#configuration-file-parameters}
 
--   TiDB の設定項目を[<a href="/tidb-configuration-file.md#index-limit-new-in-v50">`index-limit`</a>](/tidb-configuration-file.md#index-limit-new-in-v50)追加します。その値のデフォルトは`64`で、範囲は`[64,512]`です。 MySQL テーブルは最大 64 個のインデックスをサポートします。その値がデフォルト設定を超え、テーブルに 64 を超えるインデックスが作成された場合、テーブル スキーマが MySQL に再インポートされるときにエラーが報告されます。
--   MySQL の ENUM/SET 長 (ENUM 長 &lt; 255) と互換性および一貫性を持たせるために、TiDB の[<a href="/tidb-configuration-file.md#enable-enum-length-limit-new-in-v50">`enable-enum-length-limit`</a>](/tidb-configuration-file.md#enable-enum-length-limit-new-in-v50)構成項目を追加します。デフォルト値は`true`です。
--   `pessimistic-txn.enable`構成項目を[<a href="/system-variables.md#tidb_txn_mode">`tidb_txn_mode`</a>](/system-variables.md#tidb_txn_mode)環境変数に置き換えます。
--   `performance.max-memory`構成項目を[<a href="/tidb-configuration-file.md#server-memory-quota-new-in-v409">`performance.server-memory-quota`</a>](/tidb-configuration-file.md#server-memory-quota-new-in-v409)に置き換えます。
--   `tikv-client.copr-cache.enable`構成項目を[<a href="/tidb-configuration-file.md#capacity-mb">`tikv-client.copr-cache.capacity-mb`</a>](/tidb-configuration-file.md#capacity-mb)に置き換えます。項目の値が`0.0`の場合、この機能は無効になります。項目の値が`0.0`より大きい場合、この機能は有効になります。デフォルト値は`1000.0`です。
--   `rocksdb.auto-tuned`構成項目を[<a href="/tikv-configuration-file.md#rate-limiter-auto-tuned-new-in-v50">`rocksdb.rate-limiter-auto-tuned`</a>](/tikv-configuration-file.md#rate-limiter-auto-tuned-new-in-v50)に置き換えます。
+-   TiDB の設定項目を[`index-limit`](/tidb-configuration-file.md#index-limit-new-in-v50)追加します。その値のデフォルトは`64`で、範囲は`[64,512]`です。 MySQL テーブルは最大 64 個のインデックスをサポートします。その値がデフォルト設定を超え、テーブルに 64 を超えるインデックスが作成された場合、テーブル スキーマが MySQL に再インポートされるときにエラーが報告されます。
+-   MySQL の ENUM/SET 長 (ENUM 長 &lt; 255) と互換性および一貫性を持たせるために、TiDB の[`enable-enum-length-limit`](/tidb-configuration-file.md#enable-enum-length-limit-new-in-v50)構成項目を追加します。デフォルト値は`true`です。
+-   `pessimistic-txn.enable`構成項目を[`tidb_txn_mode`](/system-variables.md#tidb_txn_mode)環境変数に置き換えます。
+-   `performance.max-memory`構成項目を[`performance.server-memory-quota`](/tidb-configuration-file.md#server-memory-quota-new-in-v409)に置き換えます。
+-   `tikv-client.copr-cache.enable`構成項目を[`tikv-client.copr-cache.capacity-mb`](/tidb-configuration-file.md#capacity-mb)に置き換えます。項目の値が`0.0`の場合、この機能は無効になります。項目の値が`0.0`より大きい場合、この機能は有効になります。デフォルト値は`1000.0`です。
+-   `rocksdb.auto-tuned`構成項目を[`rocksdb.rate-limiter-auto-tuned`](/tikv-configuration-file.md#rate-limiter-auto-tuned-new-in-v50)に置き換えます。
 -   `raftstore.sync-log`設定項目を削除します。デフォルトでは、書き込まれたデータは強制的にディスクに書き込まれます。 v5.0 より前では、 `raftstore.sync-log`明示的に無効にすることができます。 v5.0 以降、構成値は強制的に`true`に設定されます。
 -   `gc.enable-compaction-filter`設定項目のデフォルト値を`false`から`true`に変更します。
 -   `enable-cross-table-merge`設定項目のデフォルト値を`false`から`true`に変更します。
--   [<a href="/tikv-configuration-file.md#rate-limiter-auto-tuned-new-in-v50">`rate-limiter-auto-tuned`</a>](/tikv-configuration-file.md#rate-limiter-auto-tuned-new-in-v50)設定項目のデフォルト値を`false`から`true`に変更します。
+-   [`rate-limiter-auto-tuned`](/tikv-configuration-file.md#rate-limiter-auto-tuned-new-in-v50)設定項目のデフォルト値を`false`から`true`に変更します。
 
 ### その他 {#others}
 
--   アップグレードの前に、TiDB 構成の値を確認してください[<a href="https://docs.pingcap.com/tidb/v5.0/tidb-configuration-file#feedback-probability">`feedback-probability`</a>](https://docs.pingcap.com/tidb/v5.0/tidb-configuration-file#feedback-probability) 。値が 0 でない場合、アップグレード後に「回復可能な goroutine のpanic」エラーが発生しますが、このエラーはアップグレードには影響しません。
+-   アップグレードの前に、TiDB 構成の値を確認してください[`feedback-probability`](https://docs.pingcap.com/tidb/v5.0/tidb-configuration-file#feedback-probability) 。値が 0 でない場合、アップグレード後に「回復可能な goroutine のpanic」エラーが発生しますが、このエラーはアップグレードには影響しません。
 -   データの正確性の問題を回避するために、列の型変更中に`VARCHAR`型と`CHAR`型の間の変換を禁止します。
 
 ## 新機能 {#new-features}
@@ -85,25 +85,25 @@ v5.0 の主な新機能または改善点は次のとおりです。
 
 #### List パーティショニング(<strong>Experimental</strong>) {#list-partitioning-strong-experimental-strong}
 
-[<a href="/partitioned-table.md#list-partitioning">ユーザードキュメント</a>](/partitioned-table.md#list-partitioning)
+[ユーザードキュメント](/partitioned-table.md#list-partitioning)
 
 リスト パーティショニング機能を使用すると、大量のデータを含むテーブルのクエリと管理を効果的に行うことができます。
 
 この機能を有効にすると、パーティションとパーティション間でのデータの分散方法が`PARTITION BY LIST(expr) PARTITION part_name VALUES IN (...)`式に従って定義されます。パーティション テーブルのデータ セットは、最大 1024 個の個別の整数値をサポートします。 `PARTITION ... VALUES IN (...)`句を使用して値を定義できます。
 
-リストのパーティショニングを有効にするには、セッション変数を[<a href="/system-variables.md#tidb_enable_list_partition-new-in-v50">`tidb_enable_list_partition`</a>](/system-variables.md#tidb_enable_list_partition-new-in-v50)から`ON`に設定します。
+リストのパーティショニングを有効にするには、セッション変数を[`tidb_enable_list_partition`](/system-variables.md#tidb_enable_list_partition-new-in-v50)から`ON`に設定します。
 
 #### List COLUMNS パーティショニング(<strong>Experimental</strong>) {#list-columns-partitioning-strong-experimental-strong}
 
-[<a href="/partitioned-table.md#list-columns-partitioning">ユーザードキュメント</a>](/partitioned-table.md#list-columns-partitioning)
+[ユーザードキュメント](/partitioned-table.md#list-columns-partitioning)
 
 List COLUMNS パーティショニングは、リスト パーティショニングの変形です。複数の列をパーティション キーとして使用できます。整数データ型のほかに、文字列、 `DATE` 、および`DATETIME`データ型の列をパーティション列として使用することもできます。
 
-List COLUMNS パーティショニングを有効にするには、セッション変数を[<a href="/system-variables.md#tidb_enable_list_partition-new-in-v50">`tidb_enable_list_partition`</a>](/system-variables.md#tidb_enable_list_partition-new-in-v50)から`ON`に設定します。
+List COLUMNS パーティショニングを有効にするには、セッション変数を[`tidb_enable_list_partition`](/system-variables.md#tidb_enable_list_partition-new-in-v50)から`ON`に設定します。
 
 #### 非表示のインデックス {#invisible-indexes}
 
-[<a href="/sql-statements/sql-statement-alter-index.md">ユーザードキュメント</a>](/sql-statements/sql-statement-alter-index.md) [<a href="https://github.com/pingcap/tidb/issues/9246">#9246</a>](https://github.com/pingcap/tidb/issues/9246)
+[#9246](https://github.com/pingcap/tidb/issues/9246)
 
 パフォーマンスを調整したり、最適なインデックスを選択したりする場合、SQL ステートメントを使用してインデックスを`Visible`または`Invisible`に設定できます。この設定により、 `DROP INDEX`や`ADD INDEX`などのリソースを消費する操作の実行を回避できます。
 
@@ -111,7 +111,7 @@ List COLUMNS パーティショニングを有効にするには、セッショ�
 
 #### <code>EXCEPT</code>演算子と<code>INTERSECT</code>演算子 {#code-except-code-and-code-intersect-code-operators}
 
-[<a href="/functions-and-operators/set-operators.md">ユーザードキュメント</a>](/functions-and-operators/set-operators.md) [<a href="https://github.com/pingcap/tidb/issues/18031">#18031</a>](https://github.com/pingcap/tidb/issues/18031)
+[#18031](https://github.com/pingcap/tidb/issues/18031)
 
 `INTERSECT`演算子は集合演算子で、2 つ以上のクエリの結果セットの共通部分を返します。ある程度、これは`Inner Join`演算子の代替となります。
 
@@ -119,7 +119,7 @@ List COLUMNS パーティショニングを有効にするには、セッショ�
 
 ### トランザクション {#transaction}
 
-[<a href="https://github.com/pingcap/tidb/issues/18005">#18005</a>](https://github.com/pingcap/tidb/issues/18005)
+[#18005](https://github.com/pingcap/tidb/issues/18005)
 
 悲観的トランザクション モードでは、トランザクションに関係するテーブルに同時 DDL 操作または`SCHEMA VERSION`の変更が含まれている場合、システムはトランザクションの`SCHEMA VERSION`を最新のものに自動的に更新して、トランザクションのコミットが成功することを保証し、クライアントがエラー`Information schema is changed`受け取るのを回避します。 DDL 操作または`SCHEMA VERSION`によってトランザクションが中断されました。
 
@@ -137,18 +137,18 @@ List COLUMNS パーティショニングを有効にするには、セッショ�
 
 ### 文字セットと照合順序 {#character-set-and-collation}
 
--   `utf8mb4_unicode_ci`および`utf8_unicode_ci`照合順序をサポートします。 [<a href="/character-set-and-collation.md#new-framework-for-collations">ユーザードキュメント</a>](/character-set-and-collation.md#new-framework-for-collations) [<a href="https://github.com/pingcap/tidb/issues/17596">#17596</a>](https://github.com/pingcap/tidb/issues/17596)
+-   `utf8mb4_unicode_ci`および`utf8_unicode_ci`照合順序をサポートします。 [#17596](https://github.com/pingcap/tidb/issues/17596)
 -   照合順序で大文字と小文字を区別しない比較ソートをサポートする
 
 ### Security {#security}
 
-[<a href="/log-redaction.md">ユーザードキュメント</a>](/log-redaction.md) [<a href="https://github.com/pingcap/tidb/issues/18566">#18566</a>](https://github.com/pingcap/tidb/issues/18566)
+[#18566](https://github.com/pingcap/tidb/issues/18566)
 
 セキュリティ コンプライアンス要件 (*一般データ保護規則*(GDPR) など) を満たすために、システムは、出力エラー メッセージおよびログ内の情報 (ID やクレジット カード番号など) の機密性を解除することをサポートしており、機密情報の漏洩を回避できます。
 
 TiDB は、出力ログ情報の感度を下げることをサポートしています。この機能を有効にするには、次のスイッチを使用します。
 
--   グローバル変数[<a href="/system-variables.md#tidb_redact_log">`tidb_redact_log`</a>](/system-variables.md#tidb_redact_log) 。デフォルト値は`0`で、感度解除が無効であることを意味します。 tidb-server ログの感度解除を有効にするには、変数値を`1`に設定します。
+-   グローバル変数[`tidb_redact_log`](/system-variables.md#tidb_redact_log) 。デフォルト値は`0`で、感度解除が無効であることを意味します。 tidb-server ログの感度解除を有効にするには、変数値を`1`に設定します。
 -   構成項目`security.redact-info-log` ．デフォルト値は`false`で、感度解除が無効であることを意味します。 tikv-server ログの感度解除を有効にするには、変数値を`true`に設定します。
 -   構成項目`security.redact-info-log` ．デフォルト値は`false`で、感度解除が無効であることを意味します。 pd-server ログの感度解除を有効にするには、変数値を`true`に設定します。
 -   設定項目`security.redact_info_log`は tflash-server 、 `security.redact-info-log`は tflash-learner です。デフォルト値はどちらも`false`で、感度解除が無効であることを意味します。 tiflash-server ログと tflash-learner ログの感度解除を有効にするには、両方の変数の値を`true`に設定します。
@@ -159,7 +159,7 @@ TiDB は、出力ログ情報の感度を下げることをサポートしてい
 
 ### MPPアーキテクチャ {#mpp-architecture}
 
-[<a href="/tiflash/use-tiflash-mpp-mode.md">ユーザードキュメント</a>](/tiflash/use-tiflash-mpp-mode.md)
+[ユーザードキュメント](/tiflash/use-tiflash-mpp-mode.md)
 
 TiDB は、 TiFlashノードを通じて MPPアーキテクチャを導入します。このアーキテクチャ、複数のTiFlashノードが大規模な結合クエリの実行ワークロードを共有できます。
 
@@ -167,7 +167,7 @@ MPP モードがオンの場合、TiDB は計算コストに基づいて、計�
 
 TPC-H 100 ベンチマーク テストでは、 TiFlash MPP は、従来の分析データベースの分析エンジンや Hadoop 上の SQL を上回る大幅な処理速度を実現しました。このアーキテクチャを使用すると、最新のトランザクション データに対して大規模な分析クエリを直接実行でき、従来のオフライン分析ソリューションよりも高いパフォーマンスが得られます。ベンチマークによると、同じクラスター リソースを使用した場合、TiDB 5.0 MPP は Greenplum 6.15.0 および Apache Spark 3.1.1 と比較して 2 ～ 3 倍の高速化を示し、一部のクエリのパフォーマンスは 8 倍向上しています。
 
-現在、MPP モードがサポートしていない主な機能は次のとおりです (詳細については、 [<a href="/tiflash/use-tiflash-mpp-mode.md">TiFlashを使用する</a>](/tiflash/use-tiflash-mpp-mode.md)を参照してください)。
+現在、MPP モードがサポートしていない主な機能は次のとおりです (詳細については、 [TiFlashを使用する](/tiflash/use-tiflash-mpp-mode.md)を参照してください)。
 
 -   テーブルのパーティショニング
 -   窓関数
@@ -180,7 +180,7 @@ TPC-H 100 ベンチマーク テストでは、 TiFlash MPP は、従来の分�
 
 ### クラスター化インデックス {#clustered-index}
 
-[<a href="/clustered-indexes.md">ユーザードキュメント</a>](/clustered-indexes.md) [<a href="https://github.com/pingcap/tidb/issues/4841">#4841</a>](https://github.com/pingcap/tidb/issues/4841)
+[#4841](https://github.com/pingcap/tidb/issues/4841)
 
 テーブル構造を設計したり、データベースの動作を分析したりするときに、主キーを持つ一部の列がグループ化および並べ替えられることが多く、これらの列に対するクエリで特定の範囲のデータまたは少量のデータが返されることが多いことが判明した場合は、クラスタード インデックス機能を使用することをお勧めします。異なる値を持つデータが含まれており、対応するデータによって読み取りまたは書き込みのホットスポットの問題が発生することはありません。
 
@@ -241,13 +241,13 @@ CREATE TABLE `t` (`a` VARCHAR(255) PRIMARY KEY CLUSTERED, `b` INT);
 
 ### 非同期コミット {#async-commit}
 
-[<a href="/system-variables.md#tidb_enable_async_commit-new-in-v50">ユーザードキュメント</a>](/system-variables.md#tidb_enable_async_commit-new-in-v50) [<a href="https://github.com/tikv/tikv/issues/8316">#8316</a>](https://github.com/tikv/tikv/issues/8316)
+[#8316](https://github.com/tikv/tikv/issues/8316)
 
 データベースのクライアントは、データベース システムがトランザクションのコミットを 2 フェーズ (2PC) で同期的に完了するのを待ちます。第 1 フェーズのコミットが成功した後、トランザクションは結果をクライアントに返し、システムは第 2 フェーズのコミット操作をバックグラウンドで非同期に実行して、トランザクションのコミットレイテンシーを短縮します。トランザクション書き込みに関与するリージョンが1 つだけの場合、2 番目のフェーズは直接省略され、トランザクションは 1 フェーズ コミットになります。
 
 非同期コミット機能を有効にした後、同じハードウェアと構成で、Sysbench が 64 スレッドで更新インデックスをテストするように設定されている場合、平均レイテンシーは12.04 ミリ秒から 7.01 ミリ秒に 41.7% 減少します。
 
-非同期コミット機能が有効になっている場合、ネットワーク インタラクションのレイテンシーを1 つ削減し、データ書き込みのパフォーマンスを向上させるために、データベース アプリケーション開発者は、トランザクションの整合性を線形整合性から[<a href="/transaction-overview.md#causal-consistency">因果関係の一貫性</a>](/transaction-overview.md#causal-consistency)に下げることを検討することをお勧めします。因果関係の一貫性を有効にする SQL ステートメントは`START TRANSACTION WITH CAUSAL CONSISTENCY`です。
+非同期コミット機能が有効になっている場合、ネットワーク インタラクションのレイテンシーを1 つ削減し、データ書き込みのパフォーマンスを向上させるために、データベース アプリケーション開発者は、トランザクションの整合性を線形整合性から[因果関係の一貫性](/transaction-overview.md#causal-consistency)に下げることを検討することをお勧めします。因果関係の一貫性を有効にする SQL ステートメントは`START TRANSACTION WITH CAUSAL CONSISTENCY`です。
 
 因果的整合性を有効にした後、同じハードウェアと構成で、Sysbench が 64 スレッドで oltp_write_only をテストするように設定されている場合、平均レイテンシーは11.86 ミリ秒から 11.19 ミリ秒に 5.6% 減少しました。
 
@@ -263,7 +263,7 @@ CREATE TABLE `t` (`a` VARCHAR(255) PRIMARY KEY CLUSTERED, `b` INT);
 
 ### コプロセッサーキャッシュ機能をデフォルトで有効にする {#enable-the-coprocessor-cache-feature-by-default}
 
-[<a href="/tidb-configuration-file.md#tikv-clientcopr-cache-new-in-v400">ユーザードキュメント</a>](/tidb-configuration-file.md#tikv-clientcopr-cache-new-in-v400) [<a href="https://github.com/pingcap/tidb/issues/18028">#18028</a>](https://github.com/pingcap/tidb/issues/18028)
+[#18028](https://github.com/pingcap/tidb/issues/18028)
 
 5.0 GA では、コプロセッサーキャッシュ機能がデフォルトで有効になっています。この機能が有効になった後、データ読み取りのレイテンシーを短縮するために、TiDB は tikv-server にプッシュダウンされた演算子の計算結果を tidb-server にキャッシュします。
 
@@ -271,19 +271,19 @@ CREATE TABLE `t` (`a` VARCHAR(255) PRIMARY KEY CLUSTERED, `b` INT);
 
 ### <code>delete from table where id &lt;? Limit ?</code>の実行パフォーマンスを向上させます。 <code>delete from table where id &lt;? Limit ?</code>声明 {#improve-the-execution-performance-of-code-delete-from-table-where-id-x3c-limit-code-statement}
 
-[<a href="https://github.com/pingcap/tidb/issues/18028">#18028</a>](https://github.com/pingcap/tidb/issues/18028)
+[#18028](https://github.com/pingcap/tidb/issues/18028)
 
 `delete from table where id <? limit ?`ステートメントの p99 パフォーマンスは 4 倍向上しました。
 
 ### ロードベース分割戦略を最適化して、一部の小さなテーブルのホットスポット読み取りシナリオでデータを分割できないというパフォーマンスの問題を解決します。 {#optimize-load-base-split-strategy-to-solve-the-performance-problem-that-data-cannot-be-split-in-some-small-table-hotspot-read-scenarios}
 
-[<a href="https://github.com/pingcap/tidb/issues/18005">#18005</a>](https://github.com/pingcap/tidb/issues/18005)
+[#18005](https://github.com/pingcap/tidb/issues/18005)
 
 ## 安定性の向上 {#improve-stability}
 
 ### 不完全なスケジューリングによって引き起こされるパフォーマンスのジッター問題を最適化します。 {#optimize-the-performance-jitter-issue-caused-by-imperfect-scheduling}
 
-[<a href="https://github.com/pingcap/tidb/issues/18005">#18005</a>](https://github.com/pingcap/tidb/issues/18005)
+[#18005](https://github.com/pingcap/tidb/issues/18005)
 
 TiDB スケジューリング プロセスは、I/O、ネットワーク、CPU、メモリなどのリソースを占有します。 TiDB がスケジュールされたタスクを制御しない場合、QPS と遅延により、リソースのプリエンプションによるパフォーマンスのジッターが発生する可能性があります。
 
@@ -297,13 +297,13 @@ TiDB スケジューリング プロセスは、I/O、ネットワーク、CPU�
 
 #### デフォルトでクロステーブルリージョンマージ機能を有効にする {#enable-the-cross-table-region-merge-feature-by-default}
 
-[<a href="/pd-configuration-file.md#enable-cross-table-merge">ユーザードキュメント</a>](/pd-configuration-file.md#enable-cross-table-merge)
+[ユーザードキュメント](/pd-configuration-file.md#enable-cross-table-merge)
 
 v5.0 より前では、TiDB はデフォルトでクロステーブルリージョンマージ機能を無効にしています。 v5.0 以降、空のリージョンの数とネットワーク、メモリ、CPU のオーバーヘッドを削減するために、この機能はデフォルトで有効になっています。 `schedule.enable-cross-table-merge`構成項目を変更することで、この機能を無効にできます。
 
 #### システムがデフォルトでデータ圧縮速度を自動的に調整し、バックグラウンド タスクとフォアグラウンドの読み取りおよび書き込みの間の I/O リソースの競合のバランスを取ることができるようにします。 {#enable-the-system-to-automatically-adjust-the-data-compaction-speed-by-default-to-balance-the-contention-for-i-o-resources-between-background-tasks-and-foreground-reads-and-writes}
 
-[<a href="/tikv-configuration-file.md#rate-limiter-auto-tuned-new-in-v50">ユーザードキュメント</a>](/tikv-configuration-file.md#rate-limiter-auto-tuned-new-in-v50)
+[ユーザードキュメント](/tikv-configuration-file.md#rate-limiter-auto-tuned-new-in-v50)
 
 v5.0 より前では、バックグラウンド タスクとフォアグラウンドの読み取りおよび書き込みの間の I/O リソースの競合のバランスを取るために、システムがデータ圧縮速度を自動的に調整する機能はデフォルトで無効になっていました。 v5.0 以降、TiDB はデフォルトでこの機能を有効にし、アルゴリズムを最適化してレイテンシーのジッターが大幅に減少します。
 
@@ -311,7 +311,7 @@ v5.0 より前では、バックグラウンド タスクとフォアグラウ�
 
 #### デフォルトで GC 圧縮フィルター機能を有効にして、GC による CPU および I/O リソースの消費を削減します。 {#enable-the-gc-compaction-filter-feature-by-default-to-reduce-gc-s-consumption-of-cpu-and-i-o-resources}
 
-[<a href="/garbage-collection-configuration.md#gc-in-compaction-filter">ユーザードキュメント</a>](/garbage-collection-configuration.md#gc-in-compaction-filter) [<a href="https://github.com/pingcap/tidb/issues/18009">#18009</a>](https://github.com/pingcap/tidb/issues/18009)
+[#18009](https://github.com/pingcap/tidb/issues/18009)
 
 TiDB がガベージコレクション(GC) とデータ圧縮を実行すると、パーティションが CPU と I/O リソースを占有します。これら 2 つのタスクの実行中に、重複するデータが存在します。
 
@@ -327,7 +327,7 @@ GC による CPU および I/O リソースの消費を削減するために、G
 
 ### パフォーマンスのジッターを避けるために、実行計画が可能な限り変更されていないことを確認します。 {#ensure-that-the-execution-plans-are-unchanged-as-much-as-possible-to-avoid-performance-jitter}
 
-[<a href="/sql-plan-management.md">ユーザードキュメント</a>](/sql-plan-management.md)
+[ユーザードキュメント](/sql-plan-management.md)
 
 #### SQL バインディングは、 <code>INSERT</code> 、 <code>REPLACE</code> 、 <code>UPDATE</code> 、 <code>DELETE</code>ステートメントをサポートします {#sql-binding-supports-the-code-insert-code-code-replace-code-code-update-code-code-delete-code-statements}
 
@@ -345,11 +345,11 @@ TiDB をアップグレードする場合、パフォーマンスのジッター
 
 ### TiFlashクエリの安定性の向上 {#improve-stability-of-tiflash-queries}
 
-TiFlash が失敗した場合に TiKV にクエリをフォールバックするためのシステム変数[<a href="/system-variables.md#tidb_allow_fallback_to_tikv-new-in-v50">`tidb_allow_fallback_to_tikv`</a>](/system-variables.md#tidb_allow_fallback_to_tikv-new-in-v50)を追加します。デフォルト値は`OFF`です。
+TiFlash が失敗した場合に TiKV にクエリをフォールバックするためのシステム変数[`tidb_allow_fallback_to_tikv`](/system-variables.md#tidb_allow_fallback_to_tikv-new-in-v50)を追加します。デフォルト値は`OFF`です。
 
 ### TiCDC の安定性を向上させ、増分データの複製が多すぎることによって引き起こされる OOM 問題を軽減します。 {#improve-ticdc-stability-and-alleviate-the-oom-issue-caused-by-replicating-too-much-incremental-data}
 
-[<a href="/ticdc/ticdc-manage-changefeed.md#unified-sorter">ユーザードキュメント</a>](/ticdc/ticdc-manage-changefeed.md#unified-sorter) [<a href="https://github.com/pingcap/tiflow/issues/1150">#1150</a>](https://github.com/pingcap/tiflow/issues/1150)
+[#1150](https://github.com/pingcap/tiflow/issues/1150)
 
 TiCDC v4.0.9 以前のバージョンでは、あまりにも多くのデータ変更をレプリケートすると OOM が発生する可能性があります。 v5.0 では、次のシナリオによって発生する OOM 問題を軽減するために、統合ソーター機能がデフォルトで有効になっています。
 
@@ -366,7 +366,7 @@ TiCDC v4.0.9 以前のバージョンでは、あまりにも多くのデータ�
 
 ### リージョンのメンバーシップ変更時のシステム可用性の向上 {#improve-system-availability-during-region-membership-change}
 
-[<a href="/pd-configuration-file.md#enable-joint-consensus-new-in-v50">ユーザードキュメント</a>](/pd-configuration-file.md#enable-joint-consensus-new-in-v50) [<a href="https://github.com/pingcap/tidb/issues/18079">#18079</a>](https://github.com/pingcap/tidb/issues/18079) [<a href="https://github.com/tikv/tikv/issues/7587">#7587</a>](https://github.com/tikv/tikv/issues/7587) [<a href="https://github.com/tikv/pd/issues/2860">#2860</a>](https://github.com/tikv/pd/issues/2860)
+[#2860](https://github.com/tikv/pd/issues/2860)
 
 リージョンのメンバーシップ変更のプロセスでは、「メンバーの追加」と「メンバーの削除」の 2 つの操作が 2 つのステップで実行されます。メンバーシップの変更が完了するときに障害が発生すると、リージョンは使用できなくなり、フォアグラウンド アプリケーションのエラーが返されます。
 
@@ -388,8 +388,8 @@ TiDB データ移行ツールは、データ移行の中間として Amazon S3 (
 
 この機能を使用するには、次のドキュメントを参照してください。
 
--   [<a href="/dumpling-overview.md#export-data-to-amazon-s3-cloud-storage">データを Amazon S3 クラウドstorageにエクスポートする</a>](/dumpling-overview.md#export-data-to-amazon-s3-cloud-storage) [<a href="https://github.com/pingcap/dumpling/issues/8">#8</a>](https://github.com/pingcap/dumpling/issues/8)
--   [<a href="/migrate-aurora-to-tidb.md">TiDB Lightningを使用した Amazon Aurora MySQL からの移行</a>](/migrate-aurora-to-tidb.md) [<a href="https://github.com/pingcap/tidb-lightning/issues/266">#266</a>](https://github.com/pingcap/tidb-lightning/issues/266)
+-   [#8](https://github.com/pingcap/dumpling/issues/8)
+-   [#266](https://github.com/pingcap/tidb-lightning/issues/266)
 
 ### TiDB Cloudのデータインポートパフォーマンスを最適化する {#optimize-the-data-import-performance-of-tidb-cloud}
 
@@ -399,7 +399,7 @@ TiDB Lightning は、特にTiDB Cloudの AWS T1.standard 構成 (または同等
 
 ### TiCDC を使用して TiDB を Kafka Connect (Confluent Platform) に統合する (<strong>実験的機能</strong>) {#integrate-tidb-to-kafka-connect-confluent-platform-using-ticdc-strong-experimental-feature-strong}
 
-[<a href="/ticdc/integrate-confluent-using-ticdc.md">ユーザードキュメント</a>](/ticdc/integrate-confluent-using-ticdc.md) [<a href="https://github.com/pingcap/tiflow/issues/660">#660</a>](https://github.com/pingcap/tiflow/issues/660)
+[#660](https://github.com/pingcap/tiflow/issues/660)
 
 TiDB データを他のシステムにストリーミングするというビジネス要件をサポートするために、この機能を使用すると、TiDB データを Kafka、Hadoop、Oracle などのシステムにストリーミングできるようになります。
 
@@ -407,22 +407,22 @@ Confluent プラットフォームによって提供される Kafka コネクタ
 
 ## 診断 {#diagnostics}
 
-[<a href="/sql-statements/sql-statement-explain.md#explain">ユーザードキュメント</a>](/sql-statements/sql-statement-explain.md#explain)
+[ユーザードキュメント](/sql-statements/sql-statement-explain.md#explain)
 
 SQL パフォーマンス問題のトラブルシューティングでは、パフォーマンス問題の原因を特定するために詳細な診断情報が必要です。 TiDB 5.0 より前は、 `EXPLAIN`ステートメントによって収集される情報の詳細が十分ではありませんでした。問題の根本原因は、ログ情報、監視情報、または推測に基づいてのみ判断でき、非効率である可能性があります。
 
 TiDB v5.0 では、パフォーマンスの問題をより効率的にトラブルシューティングできるように、次の改良が加えられています。
 
--   `EXPLAIN ANALYZE`ステートメントを使用したすべての DML ステートメントの分析をサポートし、実際のパフォーマンス プランと各オペレーターの実行情報を表示します。 [<a href="https://github.com/pingcap/tidb/issues/18056">#18056</a>](https://github.com/pingcap/tidb/issues/18056)
--   `EXPLAIN FOR CONNECTION`ステートメントを使用して、実行されているすべての SQL ステートメントのリアルタイム ステータスを確認できるようになりました。たとえば、このステートメントを使用して、各演算子の実行時間と処理された行数を確認できます。 [<a href="https://github.com/pingcap/tidb/issues/18233">#18233</a>](https://github.com/pingcap/tidb/issues/18233)
--   `EXPLAIN ANALYZE`ステートメントの出力で、オペレーターによって送信された RPC リクエストの数、ロック競合の解決にかかる時間、ネットワークレイテンシー、RocksDB 内の削除されたデータのスキャン量、RocksDB のヒット率など、オペレーターの実行に関する詳細を提供します。キャッシュ。 [<a href="https://github.com/pingcap/tidb/issues/18663">#18663</a>](https://github.com/pingcap/tidb/issues/18663)
--   SQL ステートメントの詳細な実行情報をスロー ログに自動的に記録する機能をサポートします。低速ログの実行情報は、各オペレーターが費やした時間、処理された行数、送信された RPC リクエストの数を含む`EXPLAIN ANALYZE`ステートメントの出力情報と一致しています。 [<a href="https://github.com/pingcap/tidb/issues/15009">#15009</a>](https://github.com/pingcap/tidb/issues/15009)
+-   `EXPLAIN ANALYZE`ステートメントを使用したすべての DML ステートメントの分析をサポートし、実際のパフォーマンス プランと各オペレーターの実行情報を表示します。 [#18056](https://github.com/pingcap/tidb/issues/18056)
+-   `EXPLAIN FOR CONNECTION`ステートメントを使用して、実行されているすべての SQL ステートメントのリアルタイム ステータスを確認できるようになりました。たとえば、このステートメントを使用して、各演算子の実行時間と処理された行数を確認できます。 [#18233](https://github.com/pingcap/tidb/issues/18233)
+-   `EXPLAIN ANALYZE`ステートメントの出力で、オペレーターによって送信された RPC リクエストの数、ロック競合の解決にかかる時間、ネットワークレイテンシー、RocksDB 内の削除されたデータのスキャン量、RocksDB のヒット率など、オペレーターの実行に関する詳細を提供します。キャッシュ。 [#18663](https://github.com/pingcap/tidb/issues/18663)
+-   SQL ステートメントの詳細な実行情報をスロー ログに自動的に記録する機能をサポートします。低速ログの実行情報は、各オペレーターが費やした時間、処理された行数、送信された RPC リクエストの数を含む`EXPLAIN ANALYZE`ステートメントの出力情報と一致しています。 [#15009](https://github.com/pingcap/tidb/issues/15009)
 
 ## 導入とメンテナンス {#deployment-and-maintenance}
 
 ### クラスター展開操作のロジックを最適化し、DBA が一連の標準 TiDB本番クラスターをより迅速に展開できるようにします。 {#optimize-the-logic-of-cluster-deployment-operations-to-help-dbas-deploy-a-set-of-standard-tidb-production-cluster-faster}
 
-[<a href="/production-deployment-using-tiup.md">ユーザードキュメント</a>](/production-deployment-using-tiup.md)
+[ユーザードキュメント](/production-deployment-using-tiup.md)
 
 以前の TiDB バージョンでは、 TiUPを使用して TiDB クラスターを展開する DBA は、環境の初期化が複雑で、チェックサム構成が過剰で、クラスター トポロジー ファイルの編集が難しいことに気づきました。これらの問題はすべて、DBA の導入効率の低下につながります。 TiDB v5.0 では、 TiUPを使用した TiDB デプロイメント効率が、次の項目によって DBA 向けに向上しました。
 
@@ -471,4 +471,4 @@ TiUP v1.4.0 では、TiDB クラスターの運用および保守のための機
 
 TiDB は、データ テーブルの数、クエリの数、新機能が有効になっているかどうかなど、クラスターの使用状況メトリクスをテレメトリに追加します。
 
-詳細とこの動作を無効にする方法については、 [<a href="/telemetry.md">テレメトリー</a>](/telemetry.md)を参照してください。
+詳細とこの動作を無効にする方法については、 [テレメトリー](/telemetry.md)を参照してください。

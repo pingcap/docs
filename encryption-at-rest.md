@@ -7,7 +7,7 @@ summary: Learn how to enable encryption at rest to protect sensitive data.
 
 > **ノート：**
 >
-> クラスターが AWS にデプロイされ、EBSstorageを使用する場合は、EBS 暗号化を使用することをお勧めします。 [<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html">AWS ドキュメント - EBS 暗号化</a>](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html)を参照してください。 AWS でローカル NVMestorageなどの非 EBSstorageを使用している場合、このドキュメントで紹介されている保存時の暗号化を使用することをお勧めします。
+> クラスターが AWS にデプロイされ、EBSstorageを使用する場合は、EBS 暗号化を使用することをお勧めします。 [AWS ドキュメント - EBS 暗号化](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html)を参照してください。 AWS でローカル NVMestorageなどの非 EBSstorageを使用している場合、このドキュメントで紹介されている保存時の暗号化を使用することをお勧めします。
 
 保存時の暗号化とは、データが保存されるときに暗号化されることを意味します。データベースの場合、この機能は TDE (透過的データ暗号化) とも呼ばれます。これは、実行中の暗号化 (TLS) または使用中の暗号化 (めったに使用されない) とは対照的です。保存時の暗号化はさまざまなもの (SSD ドライブ、ファイル システム、クラウド ベンダーなど) で実行される可能性がありますが、TiKV にstorage前に暗号化を実行させることで、攻撃者がデータにアクセスするためにデータベースで認証する必要があることが保証されます。たとえば、攻撃者が物理マシンにアクセスした場合、ディスク上のファイルをコピーしてもデータにアクセスできなくなります。
 
@@ -19,7 +19,7 @@ TiDB クラスターが展開されると、ユーザー データの大部分�
 
 ### TiKV {#tikv}
 
-TiKV は保存時の暗号化をサポートしています。この機能により、TiKV は[<a href="https://en.wikipedia.org/wiki/Advanced_Encryption_Standard">AES</a>](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard)または[<a href="https://en.wikipedia.org/wiki/SM4_(cipher)">SM4</a>](https://en.wikipedia.org/wiki/SM4_(cipher)) in [<a href="https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation">CTR</a>](https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation)モードを使用してデータ ファイルを透過的に暗号化できます。保管時の暗号化を有効にするには、ユーザーが暗号化キーを提供する必要があります。このキーはマスターキーと呼ばれます。 TiKV は、実際のデータ ファイルの暗号化に使用したデータ キーを自動的にローテーションします。マスターキーを手動でローテーションすることもできます。保存時の暗号化では、保存時 (つまりディスク上) のデータのみが暗号化され、ネットワーク上でのデータ転送中は暗号化されないことに注意してください。保存時の暗号化と TLS を併用することをお勧めします。
+TiKV は保存時の暗号化をサポートしています。この機能により、TiKV は[CTR](https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation)モードを使用してデータ ファイルを透過的に暗号化できます。保管時の暗号化を有効にするには、ユーザーが暗号化キーを提供する必要があります。このキーはマスターキーと呼ばれます。 TiKV は、実際のデータ ファイルの暗号化に使用したデータ キーを自動的にローテーションします。マスターキーを手動でローテーションすることもできます。保存時の暗号化では、保存時 (つまりディスク上) のデータのみが暗号化され、ネットワーク上でのデータ転送中は暗号化されないことに注意してください。保存時の暗号化と TLS を併用することをお勧めします。
 
 オプションで、クラウドとオンプレミスの両方の展開に AWS KMS を使用できます。プレーンテキストのマスター キーをファイルで指定することもできます。
 
@@ -31,7 +31,7 @@ SM4 暗号化は、TiKV の v6.3.0 以降のバージョンでのみサポート
 
 ### TiFlash {#tiflash}
 
-TiFlash は保存時の暗号化をサポートしています。データキーはTiFlashによって生成されます。 TiFlash ( TiFlashプロキシを含む) に書き込まれるすべてのファイル (データ ファイル、スキーマ ファイル、一時ファイルを含む) は、現在のデータ キーを使用して暗号化されます。暗号化アルゴリズム、暗号化構成 ( TiFlashでサポートされている[<a href="/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file">`tiflash-learner.toml`ファイル</a>](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)の場合)、および監視メトリクスの意味は TiKV のものと一致しています。
+TiFlash は保存時の暗号化をサポートしています。データキーはTiFlashによって生成されます。 TiFlash ( TiFlashプロキシを含む) に書き込まれるすべてのファイル (データ ファイル、スキーマ ファイル、一時ファイルを含む) は、現在のデータ キーを使用して暗号化されます。暗号化アルゴリズム、暗号化構成 ( TiFlashでサポートされている[`tiflash-learner.toml`ファイル](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)の場合)、および監視メトリクスの意味は TiKV のものと一致しています。
 
 Grafana を使用してTiFlashを展開した場合は、 **[TiFlash-Proxy-Details** -&gt; **Encryption]**パネルを確認できます。
 
@@ -43,11 +43,11 @@ PD の保存時の暗号化は実験的機能であり、TiKV と同じ方法で
 
 ### BRを使用したバックアップ {#backups-with-br}
 
-BR は、 S3 にデータをバックアップする際の S3 サーバー側暗号化 (SSE) をサポートします。顧客所有の AWS KMS キーは、S3 サーバー側の暗号化と併用することもできます。詳細については[<a href="/encryption-at-rest.md#br-s3-server-side-encryption">BR S3 サーバー側暗号化</a>](/encryption-at-rest.md#br-s3-server-side-encryption)を参照してください。
+BR は、 S3 にデータをバックアップする際の S3 サーバー側暗号化 (SSE) をサポートします。顧客所有の AWS KMS キーは、S3 サーバー側の暗号化と併用することもできます。詳細については[BR S3 サーバー側暗号化](/encryption-at-rest.md#br-s3-server-side-encryption)を参照してください。
 
 ### ロギング {#logging}
 
-TiKV、TiDB、および PD 情報ログには、デバッグ目的のユーザー データが含まれる場合があります。情報ログとその中のデータは暗号化されません。 [<a href="/log-redaction.md">ログ編集</a>](/log-redaction.md)を有効にすることをお勧めします。
+TiKV、TiDB、および PD 情報ログには、デバッグ目的のユーザー データが含まれる場合があります。情報ログとその中のデータは暗号化されません。 [ログ編集](/log-redaction.md)を有効にすることをお勧めします。
 
 ## 保存時の TiKV 暗号化 {#tikv-encryption-at-rest}
 
@@ -58,7 +58,7 @@ TiKV は現在、 CTRモードで AES128、AES192、AES256、または SM4 (v6.3
 -   マスターキー。マスター キーはユーザーによって提供され、TiKV が生成するデータ キーの暗号化に使用されます。マスターキーの管理は TiKV の外部で行われます。
 -   データキー。データ キーは TiKV によって生成され、データの暗号化に実際に使用されるキーです。
 
-同じマスター キーを TiKV の複数のインスタンスで共有できます。本番でマスターキーを提供する推奨方法は、AWS KMS を使用することです。 AWS KMS を通じてカスタマーマスターキー (CMK) を作成し、構成ファイルで CMK キー ID を TiKV に提供します。 TiKV プロセスは、実行中に KMS CMK にアクセスする必要があります。これは、 [<a href="https://aws.amazon.com/iam/">IAMの役割</a>](https://aws.amazon.com/iam/)を使用して実行できます。 TiKV が KMS CMK へのアクセスに失敗すると、起動または再起動に失敗します。 [<a href="https://docs.aws.amazon.com/kms/index.html">KMS</a>](https://docs.aws.amazon.com/kms/index.html)と[<a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html">IAMは</a>](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html)使用法については、AWS のドキュメントを参照してください。
+同じマスター キーを TiKV の複数のインスタンスで共有できます。本番でマスターキーを提供する推奨方法は、AWS KMS を使用することです。 AWS KMS を通じてカスタマーマスターキー (CMK) を作成し、構成ファイルで CMK キー ID を TiKV に提供します。 TiKV プロセスは、実行中に KMS CMK にアクセスする必要があります。これは、 [IAMは](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html)使用法については、AWS のドキュメントを参照してください。
 
 あるいは、カスタム キーの使用が必要な場合は、ファイル経由でマスター キーを指定することもできます。ファイルには、16 進文字列としてエンコードされた 256 ビット (または 32 バイト) のキーが含まれ、改行 (つまり`\n` ) で終わり、他には何も含まれていない必要があります。ただし、キーをディスク上に保存するとキーが漏洩するため、キー ファイルは`tempfs`に保存するのにのみ適しています。
 
@@ -70,7 +70,7 @@ TiKV は現在、 CTRモードで AES128、AES192、AES256、または SM4 (v6.3
 
 AWS でキーを作成するには、次の手順に従います。
 
-1.  AWS コンソールの[<a href="https://console.aws.amazon.com/kms">AWS KMS</a>](https://console.aws.amazon.com/kms)に移動します。
+1.  AWS コンソールの[AWS KMS](https://console.aws.amazon.com/kms)に移動します。
 2.  コンソールの右上隅で正しいリージョンを選択していることを確認してください。
 3.  **「キーの作成」**をクリックし、キーのタイプとして**「対称」**を選択します。
 4.  キーのエイリアスを設定します。
@@ -106,9 +106,9 @@ region = "us-west-2"
 endpoint = "https://kms.us-west-2.amazonaws.com"
 ```
 
-`key-id` KMS CMK のキー ID を指定します。 `region` 、KMS CMK の AWS リージョン名です。 `endpoint`はオプションであり、AWS 以外のベンダーの AWS KMS 互換サービスを使用している場合、または[<a href="https://docs.aws.amazon.com/kms/latest/developerguide/kms-vpc-endpoint.html">KMS の VPC エンドポイント</a>](https://docs.aws.amazon.com/kms/latest/developerguide/kms-vpc-endpoint.html)を使用する必要がある場合を除き、通常は指定する必要はありません。
+`key-id` KMS CMK のキー ID を指定します。 `region` 、KMS CMK の AWS リージョン名です。 `endpoint`はオプションであり、AWS 以外のベンダーの AWS KMS 互換サービスを使用している場合、または[KMS の VPC エンドポイント](https://docs.aws.amazon.com/kms/latest/developerguide/kms-vpc-endpoint.html)を使用する必要がある場合を除き、通常は指定する必要はありません。
 
-[<a href="https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html">マルチリージョンキー</a>](https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html) AWS でも使用できます。このためには、特定のリージョンに主キーを設定し、必要なリージョンにレプリカ キーを追加する必要があります。
+[マルチリージョンキー](https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html) AWS でも使用できます。このためには、特定のリージョンに主キーを設定し、必要なリージョンにレプリカ キーを追加する必要があります。
 
 ファイルに保存されているマスター キーを指定するには、マスター キーの構成は次のようになります。
 
@@ -154,7 +154,7 @@ region = "us-west-2"
 -   暗号化メタファイルのサイズ: 暗号化メタデータファイルのサイズ。
 -   読み取り/書き込み暗号化メタ期間: 暗号化のためにメタデータを操作するための追加のオーバーヘッド。
 
-デバッグの場合、 `tikv-ctl`コマンドを使用して、ファイルの暗号化に使用された暗号化方法やデータ キー ID などの暗号化メタデータ、およびデータ キーのリストをダンプできます。この操作により機密データが公開される可能性があるため、本番での使用はお勧めできません。資料[<a href="/tikv-control.md#dump-encryption-metadata">TiKV Control</a>](/tikv-control.md#dump-encryption-metadata)をご参照ください。
+デバッグの場合、 `tikv-ctl`コマンドを使用して、ファイルの暗号化に使用された暗号化方法やデータ キー ID などの暗号化メタデータ、およびデータ キーのリストをダンプできます。この操作により機密データが公開される可能性があるため、本番での使用はお勧めできません。資料[TiKV Control](/tikv-control.md#dump-encryption-metadata)をご参照ください。
 
 ### TiKV バージョン間の互換性 {#compatibility-between-tikv-versions}
 
@@ -284,11 +284,11 @@ server_configs:
 
 保存時の暗号化を監視するには、Grafana を使用してTiFlashを展開する場合、 **TiFlash-Proxy-Details**ダッシュボードの**[暗号化]**パネルを確認できます。監視項目の意味はTiKVと同様です。
 
-デバッグの場合、 TiFlashは暗号化されたメタデータを管理するための TiKV のロジックを再利用するため、 `tikv-ctl`コマンドを使用して、ファイルの暗号化に使用された暗号化方式やデータ キー ID、データ キーのリストなどの暗号化メタデータをダンプできます。この操作は機密データを公開する可能性があるため、本番では推奨されません。詳細については[<a href="/tikv-control.md#dump-encryption-metadata">TiKV Control</a>](/tikv-control.md#dump-encryption-metadata)を参照してください。
+デバッグの場合、 TiFlashは暗号化されたメタデータを管理するための TiKV のロジックを再利用するため、 `tikv-ctl`コマンドを使用して、ファイルの暗号化に使用された暗号化方式やデータ キー ID、データ キーのリストなどの暗号化メタデータをダンプできます。この操作は機密データを公開する可能性があるため、本番では推奨されません。詳細については[TiKV Control](/tikv-control.md#dump-encryption-metadata)を参照してください。
 
 ### TiKV バージョン間の互換性 {#compatibility-between-tikv-versions}
 
-TiFlash は、 v4.0.9 で暗号化されたメタデータの操作も最適化しており、その互換性要件は TiKV の要件と同じです。詳細は[<a href="#compatibility-between-tikv-versions">TiKV バージョン間の互換性</a>](#compatibility-between-tikv-versions)を参照してください。
+TiFlash は、 v4.0.9 で暗号化されたメタデータの操作も最適化しており、その互換性要件は TiKV の要件と同じです。詳細は[TiKV バージョン間の互換性](#compatibility-between-tikv-versions)を参照してください。
 
 ## BR S3 サーバー側暗号化 {#br-s3-server-side-encryption}
 
@@ -298,7 +298,7 @@ BRを使用して S3 にバックアップするときに S3 サーバー側の�
 ./br backup full --pd <pd-address> --storage "s3://<bucket>/<prefix>" --s3.sse aws:kms
 ```
 
-自分が作成して所有したカスタム AWS KMS CMK を使用するには、さらに`--s3.sse-kms-key-id`を渡します。この場合、 BRプロセスとクラスター内のすべての TiKV ノードの両方が KMS CMK に (たとえば、AWS IAM経由で) アクセスする必要があり、KMS CMK は、以前に使用されていた S3 バケットと同じ AWS リージョンにある必要があります。バックアップを保存します。 AWS IAMを介して、KMS CMK へのBRプロセスおよび TiKV ノードへのアクセスを許可することをお勧めします。 [<a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html">IAMは</a>](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html)の使用法については、AWS のドキュメントを参照してください。例えば：
+自分が作成して所有したカスタム AWS KMS CMK を使用するには、さらに`--s3.sse-kms-key-id`を渡します。この場合、 BRプロセスとクラスター内のすべての TiKV ノードの両方が KMS CMK に (たとえば、AWS IAM経由で) アクセスする必要があり、KMS CMK は、以前に使用されていた S3 バケットと同じ AWS リージョンにある必要があります。バックアップを保存します。 AWS IAMを介して、KMS CMK へのBRプロセスおよび TiKV ノードへのアクセスを許可することをお勧めします。 [IAMは](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html)の使用法については、AWS のドキュメントを参照してください。例えば：
 
 ```
 ./br backup full --pd <pd-address> --storage "s3://<bucket>/<prefix>" --s3.sse aws:kms --s3.sse-kms-key-id 0987dcba-09fe-87dc-65ba-ab0987654321

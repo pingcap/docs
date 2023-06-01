@@ -5,7 +5,7 @@ summary: Introduce how to use the Resource Manager page in TiDB Dashboard to vie
 
 # TiDB ダッシュボードのリソース マネージャー ページ {#tidb-dashboard-resource-manager-page}
 
-[<a href="/tidb-resource-control.md">リソース制御</a>](/tidb-resource-control.md)機能を使用してリソース分離を実装するには、クラスター管理者がリソース グループを作成し、各グループのクォータを設定します。リソースを計画する前に、クラスターの全体的な容量を把握する必要があります。このドキュメントは、リソース制御に関する情報を表示するのに役立ちます。これにより、リソース計画の前にクラスターの容量を見積もり、より効果的にリソースを割り当てることができます。
+[リソース制御](/tidb-resource-control.md)機能を使用してリソース分離を実装するには、クラスター管理者がリソース グループを作成し、各グループのクォータを設定します。リソースを計画する前に、クラスターの全体的な容量を把握する必要があります。このドキュメントは、リソース制御に関する情報を表示するのに役立ちます。これにより、リソース計画の前にクラスターの容量を見積もり、より効果的にリソースを割り当てることができます。
 
 ## ページにアクセスする {#access-the-page}
 
@@ -13,7 +13,7 @@ summary: Introduce how to use the Resource Manager page in TiDB Dashboard to vie
 
 -   TiDB ダッシュボードにログインした後、左側のナビゲーション メニューで**[リソース マネージャー]**をクリックします。
 
--   ブラウザで[<a href="http://127.0.0.1:2379/dashboard/#/resource_manager">http://127.0.0.1:2379/dashboard/#/resource_manager</a>](http://127.0.0.1:2379/dashboard/#/resource_manager)にアクセスしてください。 `127.0.0.1:2379`を実際の PD インスタンスのアドレスとポートに置き換えます。
+-   ブラウザで[http://127.0.0.1:2379/dashboard/#/resource_manager](http://127.0.0.1:2379/dashboard/#/resource_manager)にアクセスしてください。 `127.0.0.1:2379`を実際の PD インスタンスのアドレスとポートに置き換えます。
 
 ## リソースマネージャーページ {#resource-manager-page}
 
@@ -23,20 +23,20 @@ summary: Introduce how to use the Resource Manager page in TiDB Dashboard to vie
 
 「リソース マネージャー」ページには、次の 3 つのセクションが含まれています。
 
--   コンフィグレーション: このセクションには、TiDB の`RESOURCE_GROUPS`テーブルから取得したデータが表示されます。すべてのリソース グループに関する情報が含まれます。詳細については、 [<a href="/information-schema/information-schema-resource-groups.md">`RESOURCE_GROUPS`</a>](/information-schema/information-schema-resource-groups.md)を参照してください。
+-   コンフィグレーション: このセクションには、TiDB の`RESOURCE_GROUPS`テーブルから取得したデータが表示されます。すべてのリソース グループに関する情報が含まれます。詳細については、 [`RESOURCE_GROUPS`](/information-schema/information-schema-resource-groups.md)を参照してください。
 
 -   容量の見積もり: リソースを計画する前に、クラスターの全体的な容量を把握する必要があります。次のいずれかの方法を使用できます。
 
-    -   [<a href="/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-actual-workload">実際のワークロードに基づいて容量を見積もる</a>](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-actual-workload)
-    -   [<a href="/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-hardware-deployment">ハードウェア導入に基づいて容量を見積もる</a>](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-hardware-deployment)
+    -   [実際のワークロードに基づいて容量を見積もる](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-actual-workload)
+    -   [ハードウェア導入に基づいて容量を見積もる](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-hardware-deployment)
 
 -   メトリック: パネル上のメトリックを観察することで、クラスターの現在の全体的なリソース消費ステータスを理解できます。
 
 ## 容量の見積もり {#estimate-capacity}
 
-リソースを計画する前に、クラスターの全体的な容量を把握する必要があります。 TiDB は、現在のクラスター内の[<a href="/tidb-resource-control.md#what-is-request-unit-ru#what-is-request-unit-ru">リクエストユニット(RU)</a>](/tidb-resource-control.md#what-is-request-unit-ru#what-is-request-unit-ru)の容量を見積もるための 2 つの方法を提供します。
+リソースを計画する前に、クラスターの全体的な容量を把握する必要があります。 TiDB は、現在のクラスター内の[リクエストユニット(RU)](/tidb-resource-control.md#what-is-request-unit-ru#what-is-request-unit-ru)の容量を見積もるための 2 つの方法を提供します。
 
--   [<a href="/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-hardware-deployment">ハードウェア導入に基づいて容量を見積もる</a>](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-hardware-deployment)
+-   [ハードウェア導入に基づいて容量を見積もる](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-hardware-deployment)
 
     TiDB は次のワークロード タイプを受け入れます。
 
@@ -49,7 +49,7 @@ summary: Introduce how to use the Resource Manager page in TiDB Dashboard to vie
 
     **ユーザー リソース グループの合計 RU は、** `default`リソース グループを除く、すべてのユーザー リソース グループの RU の合計量を表します。この値が推定容量より小さい場合、システムはアラートをトリガーします。デフォルトでは、システムは事前定義された`default`リソース グループに無制限の使用量を割り当てます。すべてのユーザーが`default`リソース グループに属している場合、リソース制御が無効な場合と同じ方法でリソースが割り当てられます。
 
--   [<a href="/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-actual-workload">実際のワークロードに基づいて容量を見積もる</a>](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-actual-workload)
+-   [実際のワークロードに基づいて容量を見積もる](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-actual-workload)
 
     ![Calibrate by Workload](/media/dashboard/dashboard-resource-manager-calibrate-by-workload.png)
 
@@ -59,7 +59,7 @@ summary: Introduce how to use the Resource Manager page in TiDB Dashboard to vie
 
     -   時間枠内のワークロードが低すぎる場合、次のエラーが表示されます`ERROR 1105 (HY000): The workload in selected time window is too low, with which TiDB is unable to reach a capacity estimation; please select another time window with higher workload, or calibrate resource by hardware instead`が表示されます。
 
-    [<a href="#metrics">メトリクス</a>](#metrics)セクションの**CPU 使用率**を使用して、適切な時間範囲を選択できます。
+    [メトリクス](#metrics)セクションの**CPU 使用率**を使用して、適切な時間範囲を選択できます。
 
 ## メトリクス {#metrics}
 

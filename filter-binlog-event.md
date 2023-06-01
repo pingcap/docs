@@ -7,10 +7,10 @@ summary: Learn how to filter binlog events when migrating data.
 
 このドキュメントでは、DM を使用して継続的な増分データ レプリケーションを実行するときに、binlogイベントをフィルタリングする方法について説明します。レプリケーション手順の詳細については、シナリオごとに次のドキュメントを参照してください。
 
--   [<a href="/migrate-small-mysql-to-tidb.md">小規模なデータセットの MySQL を TiDB に移行する</a>](/migrate-small-mysql-to-tidb.md)
--   [<a href="/migrate-large-mysql-to-tidb.md">大規模なデータセットの MySQL を TiDB に移行する</a>](/migrate-large-mysql-to-tidb.md)
--   [<a href="/migrate-small-mysql-shards-to-tidb.md">小規模なデータセットの MySQL シャードを TiDB に移行およびマージする</a>](/migrate-small-mysql-shards-to-tidb.md)
--   [<a href="/migrate-large-mysql-shards-to-tidb.md">大規模なデータセットの MySQL シャードを TiDB に移行およびマージする</a>](/migrate-large-mysql-shards-to-tidb.md)
+-   [小規模なデータセットの MySQL を TiDB に移行する](/migrate-small-mysql-to-tidb.md)
+-   [大規模なデータセットの MySQL を TiDB に移行する](/migrate-large-mysql-to-tidb.md)
+-   [小規模なデータセットの MySQL シャードを TiDB に移行およびマージする](/migrate-small-mysql-shards-to-tidb.md)
+-   [大規模なデータセットの MySQL シャードを TiDB に移行およびマージする](/migrate-large-mysql-shards-to-tidb.md)
 
 ## コンフィグレーション {#configuration}
 
@@ -123,4 +123,4 @@ filters:
 
 ## こちらも参照 {#see-also}
 
-[<a href="/filter-dml-event.md">SQL式を使用したBinlogイベントのフィルタリング</a>](/filter-dml-event.md)
+[SQL式を使用したBinlogイベントのフィルタリング](/filter-dml-event.md)

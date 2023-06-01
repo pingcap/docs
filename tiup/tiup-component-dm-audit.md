@@ -31,4 +31,4 @@ tiup dm audit [audit-id] [flags]
     -   時間: レコードに対応するコマンドの実行時間
     -   コマンド: レコードに対応するコマンド
 
-[<a href="/tiup/tiup-component-dm.md#command-list">&lt;&lt; 前のページに戻る - TiUP DMコマンド一覧</a>](/tiup/tiup-component-dm.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP DMコマンド一覧](/tiup/tiup-component-dm.md#command-list)

@@ -11,9 +11,9 @@ summary: Learn how to configure a data migration task in Data Migration (DM).
 
 タスク用に移行するデータ ソースを構成する前に、まず DM が対応するデータ ソースの構成ファイルをロードしていることを確認する必要があります。以下に操作に関する参考情報をいくつか示します。
 
--   データ ソースを表示するには、 [<a href="/dm/dm-manage-source.md#check-data-source-configurations">データソース構成を確認してください</a>](/dm/dm-manage-source.md#check-data-source-configurations)を参照してください。
--   データ ソースを作成するには、 [<a href="/dm/migrate-data-using-dm.md#step-3-create-data-source">データソースの作成</a>](/dm/migrate-data-using-dm.md#step-3-create-data-source)を参照してください。
--   データ ソース構成ファイルを生成するには、 [<a href="/dm/dm-source-configuration-file.md">ソース設定ファイルの紹介</a>](/dm/dm-source-configuration-file.md)を参照してください。
+-   データ ソースを表示するには、 [データソース構成を確認してください](/dm/dm-manage-source.md#check-data-source-configurations)を参照してください。
+-   データ ソースを作成するには、 [データソースの作成](/dm/migrate-data-using-dm.md#step-3-create-data-source)を参照してください。
+-   データ ソース構成ファイルを生成するには、 [ソース設定ファイルの紹介](/dm/dm-source-configuration-file.md)を参照してください。
 
 次の例`mysql-instances`は、データ移行タスクのために移行する必要があるデータ ソースを構成する方法を示しています。
 
@@ -78,7 +78,7 @@ target-database:       # Configuration of target TiDB database.
           tbl-name: "log"
     ```
 
-    詳細な構成ルールについては、 [<a href="/dm/dm-block-allow-table-lists.md">ブロックおよび許可テーブルのリスト</a>](/dm/dm-block-allow-table-lists.md)を参照してください。
+    詳細な構成ルールについては、 [ブロックおよび許可テーブルのリスト](/dm/dm-block-allow-table-lists.md)を参照してください。
 
 2.  データ ソース構成内のブロック ルールと許可リスト ルールを参照して、移行するテーブルをフィルタリングします。
 
@@ -113,7 +113,7 @@ target-database:       # Configuration of target TiDB database.
         action: Do
     ```
 
-    詳細な構成ルールについては、 [<a href="/dm/dm-binlog-event-filter.md">Binlogイベントフィルター</a>](/dm/dm-binlog-event-filter.md)を参照してください。
+    詳細な構成ルールについては、 [Binlogイベントフィルター](/dm/dm-binlog-event-filter.md)を参照してください。
 
 2.  データ ソース構成内のbinlogイベント フィルタリング ルールを参照して、データ ソース内の指定されたテーブルまたはスキーマの指定されたbinlogイベントをフィルタリングします。
 
@@ -151,7 +151,7 @@ target-database:       # Configuration of target TiDB database.
         target-schema: "test"
     ```
 
-    詳細な構成ルールについては、 [<a href="/dm/dm-table-routing.md">テーブルルーティング</a>](/dm/dm-table-routing.md)を参照してください。
+    詳細な構成ルールについては、 [テーブルルーティング](/dm/dm-table-routing.md)を参照してください。
 
 2.  データ ソース構成内のルーティング マッピング ルールを参照して、移行するテーブルをフィルターします。
 
@@ -186,7 +186,7 @@ shard-mode: "pessimistic"       # The shard merge mode. Optional modes are ""/"p
 
 ## その他の構成 {#other-configurations}
 
-以下は本書全体のタスク構成例です。完全なタスク構成テンプレートは[<a href="/dm/task-configuration-file-full.md">DMタスク設定ファイルの完全な紹介</a>](/dm/task-configuration-file-full.md)にあります。
+以下は本書全体のタスク構成例です。完全なタスク構成テンプレートは[DMタスク設定ファイルの完全な紹介](/dm/task-configuration-file-full.md)にあります。
 
 ```yaml
 ---

@@ -22,7 +22,7 @@ SELECT * FROM table_a t ORDER BY gmt_modified DESC LIMIT offset, row_count;
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
 
-たとえば、 [<a href="/develop/dev-guide-bookshop-schema-design.md">書店</a>](/develop/dev-guide-bookshop-schema-design.md)アプリケーションのユーザーが最新の出版書籍をページ分割して表示できるようにするには、 `LIMIT 0, 10`ステートメントを使用します。これにより、1 ページあたり最大 10 レコードの結果リストの最初のページが返されます。 2 ページ目を取得するには、ステートメントを`LIMIT 10, 10`に変更します。
+たとえば、 [書店](/develop/dev-guide-bookshop-schema-design.md)アプリケーションのユーザーが最新の出版書籍をページ分割して表示できるようにするには、 `LIMIT 0, 10`ステートメントを使用します。これにより、1 ページあたり最大 10 レコードの結果リストの最初のページが返されます。 2 ページ目を取得するには、ステートメントを`LIMIT 10, 10`に変更します。
 
 ```sql
 SELECT *
@@ -217,7 +217,7 @@ pageMetaList.forEach((pageMeta) -> {
 
 > **ヒント：**
 >
-> `SHOW CREATE TABLE users;`ステートメントを使用すると、テーブルの主キーが[<a href="/clustered-indexes.md">クラスター化インデックス</a>](/clustered-indexes.md)を使用しているかどうかを確認できます。
+> `SHOW CREATE TABLE users;`ステートメントを使用すると、テーブルの主キーが[クラスター化インデックス](/clustered-indexes.md)を使用しているかどうかを確認できます。
 
 例えば：
 
@@ -283,7 +283,7 @@ ORDER BY page_num;
 
 > **ノート：**
 >
-> 前述の SQL ステートメントは`TableFullScan`として実行されます。データ量が多い場合、クエリは遅くなりますが、 [<a href="/tiflash/tiflash-overview.md#use-tiflash">TiFlashを使用する</a>](/tiflash/tiflash-overview.md#use-tiflash)を高速化することができます。
+> 前述の SQL ステートメントは`TableFullScan`として実行されます。データ量が多い場合、クエリは遅くなりますが、 [TiFlashを使用する](/tiflash/tiflash-overview.md#use-tiflash)を高速化することができます。
 
 結果は次のとおりです。
 

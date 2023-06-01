@@ -9,8 +9,8 @@ PD Recover は、PD の災害復旧ツールであり、サービスが正常に
 
 ## ソースコードからコンパイルする {#compile-from-source-code}
 
--   [<a href="https://golang.org/">行く</a>](https://golang.org/) Go モジュールを使用するため、1.20 以降が必要です。
--   [<a href="https://github.com/pingcap/pd">PDプロジェクト</a>](https://github.com/pingcap/pd)のルート ディレクトリで、 `make pd-recover`コマンドを使用して`bin/pd-recover`をコンパイルし、生成します。
+-   [行く](https://golang.org/) Go モジュールを使用するため、1.20 以降が必要です。
+-   [PDプロジェクト](https://github.com/pingcap/pd)のルート ディレクトリで、 `make pd-recover`コマンドを使用して`bin/pd-recover`をコンパイルし、生成します。
 
 > **ノート：**
 >
@@ -18,7 +18,7 @@ PD Recover は、PD の災害復旧ツールであり、サービスが正常に
 
 ## TiDB Toolkitをダウンロード {#download-tidb-toolkit}
 
-PD Recover インストール パッケージは、 TiDB Toolkitに含まれています。 TiDB Toolkitをダウンロードするには、 [<a href="/download-ecosystem-tools.md">TiDB ツールをダウンロード</a>](/download-ecosystem-tools.md)を参照してください。
+PD Recover インストール パッケージは、 TiDB Toolkitに含まれています。 TiDB Toolkitをダウンロードするには、 [TiDB ツールをダウンロード](/download-ecosystem-tools.md)を参照してください。
 
 次のセクションでは、PD クラスターを回復する 2 つの方法、つまり、生き残った PD ノードから回復する方法と、PD クラスター全体を再構築する方法を紹介します。
 

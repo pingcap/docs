@@ -108,11 +108,11 @@ tiup cluster display ${cluster-name}
               log.slow-threshold: 300
         ```
 
-    パラメータの形式については、 [<a href="https://github.com/pingcap/tiup/blob/master/embed/examples/cluster/topology.example.yaml">TiUPパラメータテンプレート</a>](https://github.com/pingcap/tiup/blob/master/embed/examples/cluster/topology.example.yaml)を参照してください。
+    パラメータの形式については、 [TiUPパラメータテンプレート](https://github.com/pingcap/tiup/blob/master/embed/examples/cluster/topology.example.yaml)を参照してください。
 
     **を使用します`.`構成アイテムの階層を表します**。
 
-    コンポーネントの構成パラメータの詳細については、 [<a href="https://github.com/pingcap/tidb/blob/master/config/config.toml.example">TiDB `config.toml.example`</a>](https://github.com/pingcap/tidb/blob/master/config/config.toml.example) 、 [<a href="https://github.com/tikv/tikv/blob/master/etc/config-template.toml">TiKV `config.toml.example`</a>](https://github.com/tikv/tikv/blob/master/etc/config-template.toml) 、および[<a href="https://github.com/tikv/pd/blob/master/conf/config.toml">PD `config.toml.example`</a>](https://github.com/tikv/pd/blob/master/conf/config.toml)を参照してください。
+    コンポーネントの構成パラメータの詳細については、 [PD `config.toml.example`](https://github.com/tikv/pd/blob/master/conf/config.toml)を参照してください。
 
 3.  `reload`コマンドを実行して、構成をローリング更新し、対応するコンポーネントを再起動します。
 
@@ -124,7 +124,7 @@ tiup cluster display ${cluster-name}
 
 ### 例 {#example}
 
-tidb-server でトランザクション サイズ制限パラメーター ( [<a href="https://github.com/pingcap/tidb/blob/master/config/config.toml.example">パフォーマンス</a>](https://github.com/pingcap/tidb/blob/master/config/config.toml.example)モジュールの`txn-total-size-limit` ) を`1G`に設定する場合は、次のように構成を編集します。
+tidb-server でトランザクション サイズ制限パラメーター ( [パフォーマンス](https://github.com/pingcap/tidb/blob/master/config/config.toml.example)モジュールの`txn-total-size-limit` ) を`1G`に設定する場合は、次のように構成を編集します。
 
 ```
 server_configs:
@@ -136,7 +136,7 @@ server_configs:
 
 ## 修正プログラムパッケージに置き換えます {#replace-with-a-hotfix-package}
 
-通常のアップグレードについては、 [<a href="/upgrade-tidb-using-tiup.md">TiUPを使用して TiDB をアップグレードする</a>](/upgrade-tidb-using-tiup.md)を参照してください。ただし、デバッグなどの一部のシナリオでは、現在実行中のコンポーネントを一時パッケージに置き換える必要がある場合があります。これを実現するには、 `patch`コマンドを使用します。
+通常のアップグレードについては、 [TiUPを使用して TiDB をアップグレードする](/upgrade-tidb-using-tiup.md)を参照してください。ただし、デバッグなどの一部のシナリオでは、現在実行中のコンポーネントを一時パッケージに置き換える必要がある場合があります。これを実現するには、 `patch`コマンドを使用します。
 
 {{< copyable "" >}}
 

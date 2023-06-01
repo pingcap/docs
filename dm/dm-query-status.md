@@ -40,7 +40,7 @@ summary: Learn how to query the status of a data replication task.
 }
 ```
 
-`tasks`の`taskStatus`の詳しい説明は[<a href="#task-status">タスクのステータス</a>](#task-status)を参照してください。
+`tasks`の`taskStatus`の詳しい説明は[タスクのステータス](#task-status)を参照してください。
 
 次の手順で`query-status`を使用することをお勧めします。
 
@@ -49,7 +49,7 @@ summary: Learn how to query the status of a data replication task.
 
 ## タスクのステータス {#task-status}
 
-DM 移行タスクのステータスは、DM ワーカーに割り当てられた各サブタスクのステータスによって異なります。サブタスクのステータスの詳細については、 [<a href="#subtask-status">サブタスクのステータス</a>](#subtask-status)を参照してください。次の表は、サブタスクのステータスとタスクのステータスの関係を示しています。
+DM 移行タスクのステータスは、DM ワーカーに割り当てられた各サブタスクのステータスによって異なります。サブタスクのステータスの詳細については、 [サブタスクのステータス](#subtask-status)を参照してください。次の表は、サブタスクのステータスとタスクのステータスの関係を示しています。
 
 | タスク内のサブタスクのステータス                                                                            | タスクのステータス                                      |
 | :------------------------------------------------------------------------------------------ | :--------------------------------------------- |
@@ -222,9 +222,9 @@ DM 移行タスクのステータスは、DM ワーカーに割り当てられ�
 
 ```
 
-「sources」の「subTaskStatus」の「stage」の状態説明と状態切り替え関係については、 [<a href="#subtask-status">サブタスクのステータス</a>](#subtask-status)を参照してください。
+「sources」の「subTaskStatus」の「stage」の状態説明と状態切り替え関係については、 [サブタスクのステータス](#subtask-status)を参照してください。
 
-「sources」の「subTaskStatus」の「unresolvedDDLLockID」の操作詳細については、 [<a href="/dm/manually-handling-sharding-ddl-locks.md">シャーディング DDL ロックを手動で処理する</a>](/dm/manually-handling-sharding-ddl-locks.md)を参照してください。
+「sources」の「subTaskStatus」の「unresolvedDDLLockID」の操作詳細については、 [シャーディング DDL ロックを手動で処理する](/dm/manually-handling-sharding-ddl-locks.md)を参照してください。
 
 ## サブタスクのステータス {#subtask-status}
 

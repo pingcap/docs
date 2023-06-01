@@ -89,7 +89,7 @@ explain analyze select count(*) from test.t;
 
 > **ノート：**
 >
-> [<a href="/dashboard/dashboard-intro.md">TiDB ダッシュボード</a>](/dashboard/dashboard-intro.md)およびその他のコンポーネントは、TiDBメモリテーブル領域に格納されているいくつかのシステム テーブルを読み取る必要があるため、常に「tidb」エンジンをインスタンス レベルのエンジン構成に追加することをお勧めします。
+> [TiDB ダッシュボード](/dashboard/dashboard-intro.md)およびその他のコンポーネントは、TiDBメモリテーブル領域に格納されているいくつかのシステム テーブルを読み取る必要があるため、常に「tidb」エンジンをインスタンス レベルのエンジン構成に追加することをお勧めします。
 
 </CustomContent>
 
@@ -129,7 +129,7 @@ select /*+ read_from_storage(tiflash[table_name]) */ ... from table_name;
 select /*+ read_from_storage(tiflash[alias_a,alias_b]) */ ... from table_name_1 as alias_a, table_name_2 as alias_b where alias_a.column_1 = alias_b.column_2;
 ```
 
-上記のステートメントで、 `tiflash[]`オプティマイザにTiFlashレプリカを読み取るように指示します。 `tikv[]`使用して、必要に応じてオプティマイザーに TiKV レプリカを読み取るように指示することもできます。ヒント構文の詳細については、 [<a href="/optimizer-hints.md#read_from_storagetiflasht1_name--tl_name--tikvt2_name--tl_name-">READ_FROM_STORAGE</a>](/optimizer-hints.md#read_from_storagetiflasht1_name--tl_name--tikvt2_name--tl_name-)を参照してください。
+上記のステートメントで、 `tiflash[]`オプティマイザにTiFlashレプリカを読み取るように指示します。 `tikv[]`使用して、必要に応じてオプティマイザーに TiKV レプリカを読み取るように指示することもできます。ヒント構文の詳細については、 [READ_FROM_STORAGE](/optimizer-hints.md#read_from_storagetiflasht1_name--tl_name--tikvt2_name--tl_name-)を参照してください。
 
 ヒントで指定されたテーブルに指定されたエンジンのレプリカがない場合、ヒントは無視され、警告が報告されます。また、ヒントはエンジン隔離を前提としてのみ有効となります。ヒントで指定されたエンジンがエンジン分離リストにない場合も、ヒントは無視され、警告が報告されます。
 
@@ -143,4 +143,4 @@ TiFlashレプリカを読み取る上記の 3 つの方法では、エンジン�
 
 > **ノート：**
 >
-> v4.0.3 より前では、読み取り専用以外の SQL ステートメント ( `INSERT INTO ... SELECT` 、 `SELECT ... FOR UPDATE` 、 `UPDATE ...` 、 `DELETE ...`など) でTiFlashレプリカから読み取る動作は未定義です。 v4.0.3 以降のバージョンでは、データの正確性を保証するために、TiDB は内部的に読み取り専用以外の SQL ステートメントのTiFlashレプリカを無視します。つまり、 [<a href="#smart-selection">賢い選択</a>](#smart-selection)場合、TiDB は非TiFlashレプリカを自動的に選択します。 TiFlashレプリカ**のみ**を指定する[<a href="#engine-isolation">エンジンの隔離</a>](#engine-isolation)場合、TiDB はエラーを報告します。 [<a href="#manual-hint">手動ヒント</a>](#manual-hint)の場合、TiDB はヒントを無視します。
+> v4.0.3 より前では、読み取り専用以外の SQL ステートメント ( `INSERT INTO ... SELECT` 、 `SELECT ... FOR UPDATE` 、 `UPDATE ...` 、 `DELETE ...`など) でTiFlashレプリカから読み取る動作は未定義です。 v4.0.3 以降のバージョンでは、データの正確性を保証するために、TiDB は内部的に読み取り専用以外の SQL ステートメントのTiFlashレプリカを無視します。つまり、 [手動ヒント](#manual-hint)の場合、TiDB はヒントを無視します。

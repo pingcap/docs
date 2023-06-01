@@ -9,7 +9,7 @@ summary: Learn how to use the table attribute feature of TiDB.
 
 <CustomContent platform="tidb">
 
-現在、TiDB は、リージョンのマージ動作を制御するためにテーブルまたはパーティションに`merge_option`属性を追加することのみをサポートしています。 `merge_option`属性は、ホットスポットへの対処方法の一部にすぎません。詳細については、 [<a href="/troubleshoot-hot-spot-issues.md">ホットスポットの問題のトラブルシューティング</a>](/troubleshoot-hot-spot-issues.md)を参照してください。
+現在、TiDB は、リージョンのマージ動作を制御するためにテーブルまたはパーティションに`merge_option`属性を追加することのみをサポートしています。 `merge_option`属性は、ホットスポットへの対処方法の一部にすぎません。詳細については、 [ホットスポットの問題のトラブルシューティング](/troubleshoot-hot-spot-issues.md)を参照してください。
 
 </CustomContent>
 
@@ -133,8 +133,8 @@ ALTER TABLE t PARTITION p ATTRIBUTES 'merge_option=allow';
 
 > **ノート：**
 >
-> -   パーティションのあるテーブルの場合、 `merge_option`属性がテーブル レベルでのみ構成されている場合、 `merge_option=allow`であっても、テーブルは実際のパーティション数に応じてデフォルトで複数のリージョンに分割されます。すべてのリージョンをマージするには、 [<a href="#usage">テーブルの属性をリセットする</a>](#usage)を行う必要があります。
-> -   `merge_option`属性を使用する場合は、PD 構成パラメータ[<a href="/pd-configuration-file.md#split-merge-interval">`split-merge-interval`</a>](/pd-configuration-file.md#split-merge-interval)に注意する必要があります。 `merge_option`属性が設定されていないとします。この場合、リージョンが条件を満たしていれば、 `split-merge-interval`で指定された間隔の後にリージョンをマージできます。 `merge_option`属性が設定されている場合、PD は、 `merge_option`設定に従って、指定された間隔の後にリージョンをマージするかどうかを決定します。
+> -   パーティションのあるテーブルの場合、 `merge_option`属性がテーブル レベルでのみ構成されている場合、 `merge_option=allow`であっても、テーブルは実際のパーティション数に応じてデフォルトで複数のリージョンに分割されます。すべてのリージョンをマージするには、 [テーブルの属性をリセットする](#usage)を行う必要があります。
+> -   `merge_option`属性を使用する場合は、PD 構成パラメータ[`split-merge-interval`](/pd-configuration-file.md#split-merge-interval)に注意する必要があります。 `merge_option`属性が設定されていないとします。この場合、リージョンが条件を満たしていれば、 `split-merge-interval`で指定された間隔の後にリージョンをマージできます。 `merge_option`属性が設定されている場合、PD は、 `merge_option`設定に従って、指定された間隔の後にリージョンをマージするかどうかを決定します。
 
 </CustomContent>
 
@@ -142,7 +142,7 @@ ALTER TABLE t PARTITION p ATTRIBUTES 'merge_option=allow';
 
 > **ノート：**
 >
-> -   パーティションのあるテーブルの場合、 `merge_option`属性がテーブル レベルでのみ構成されている場合、 `merge_option=allow`であっても、テーブルは実際のパーティション数に応じてデフォルトで複数のリージョンに分割されます。すべてのリージョンをマージするには、 [<a href="#usage">テーブルの属性をリセットする</a>](#usage)を行う必要があります。
+> -   パーティションのあるテーブルの場合、 `merge_option`属性がテーブル レベルでのみ構成されている場合、 `merge_option=allow`であっても、テーブルは実際のパーティション数に応じてデフォルトで複数のリージョンに分割されます。すべてのリージョンをマージするには、 [テーブルの属性をリセットする](#usage)を行う必要があります。
 > -   `merge_option`属性が設定されていないとします。この場合、リージョンが条件を満たしていれば、1 時間後にリージョンをマージできます。 `merge_option`属性が設定されている場合、PD は`merge_option`設定に従って 1 時間後にリージョンをマージするかどうかを決定します。
 
 </CustomContent>

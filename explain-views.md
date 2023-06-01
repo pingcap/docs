@@ -5,17 +5,17 @@ summary: Learn about the execution plan information returned by the `EXPLAIN` st
 
 # ビューを使用したEXPLAINステートメント {#explain-statements-using-views}
 
-`EXPLAIN`ビュー自体の名前ではなく、 [<a href="/views.md">意見</a>](/views.md)が参照するテーブルとインデックスを表示します。これは、ビューは単なる仮想テーブルであり、それ自体にはデータが格納されないためです。ビューの定義とステートメントの残りの部分は、SQL の最適化中にマージされます。
+`EXPLAIN`ビュー自体の名前ではなく、 [意見](/views.md)が参照するテーブルとインデックスを表示します。これは、ビューは単なる仮想テーブルであり、それ自体にはデータが格納されないためです。ビューの定義とステートメントの残りの部分は、SQL の最適化中にマージされます。
 
 <CustomContent platform="tidb">
 
-[<a href="/import-example-data.md">自転車シェアのサンプル データベース</a>](/import-example-data.md)から、次の 2 つのクエリが同様の方法で実行されることがわかります。
+[自転車シェアのサンプル データベース](/import-example-data.md)から、次の 2 つのクエリが同様の方法で実行されることがわかります。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[<a href="/tidb-cloud/import-sample-data.md">自転車シェアのサンプル データベース</a>](/tidb-cloud/import-sample-data.md)から、次の 2 つのクエリが同様の方法で実行されることがわかります。
+[自転車シェアのサンプル データベース](/tidb-cloud/import-sample-data.md)から、次の 2 つのクエリが同様の方法で実行されることがわかります。
 
 </CustomContent>
 

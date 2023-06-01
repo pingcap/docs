@@ -42,7 +42,7 @@ br backup full --pd "${PD_IP}:2379" \
 ### 共通オプション {#common-options}
 
 -   `--pd` : PD サービスアドレスを指定します。たとえば、 `"${PD_IP}:2379"` 。
--   `-s` (または`--storage` ): バックアップ ファイルが保存されるパスを指定します。バックアップ データの保存には、Amazon S3、Google Cloud Storage (GCS)、Azure Blob Storage、NFS がサポートされています。詳細については[<a href="/br/backup-and-restore-storages.md#uri-format">バックアップストレージのURI形式</a>](/br/backup-and-restore-storages.md#uri-format)を参照してください。
+-   `-s` (または`--storage` ): バックアップ ファイルが保存されるパスを指定します。バックアップ データの保存には、Amazon S3、Google Cloud Storage (GCS)、Azure Blob Storage、NFS がサポートされています。詳細については[バックアップストレージのURI形式](/br/backup-and-restore-storages.md#uri-format)を参照してください。
 -   `--ca` : 信頼できる CA 証明書へのパスを PEM 形式で指定します。
 -   `--cert` : PEM 形式の SSL 証明書へのパスを指定します。
 -   `--key` : SSL 証明書キーへのパスを PEM 形式で指定します。
@@ -53,30 +53,30 @@ br backup full --pd "${PD_IP}:2379" \
 
 クラスターデータをバックアップするには、 `br backup`コマンドを実行します。 `full`または`table`サブコマンドを追加して、バックアップ操作の範囲 (クラスター全体 ( `full` ) または単一のテーブル ( `table` )) を指定できます。
 
--   [<a href="/br/br-snapshot-manual.md#back-up-cluster-snapshots">TiDB クラスターのスナップショットをバックアップする</a>](/br/br-snapshot-manual.md#back-up-cluster-snapshots)
--   [<a href="/br/br-snapshot-manual.md#back-up-a-database">データベースをバックアップする</a>](/br/br-snapshot-manual.md#back-up-a-database)
--   [<a href="/br/br-snapshot-manual.md#back-up-a-table">テーブルをバックアップする</a>](/br/br-snapshot-manual.md#back-up-a-table)
--   [<a href="/br/br-snapshot-manual.md#back-up-multiple-tables-with-table-filter">テーブルフィルターを使用して複数のテーブルをバックアップする</a>](/br/br-snapshot-manual.md#back-up-multiple-tables-with-table-filter)
--   [<a href="/br/backup-and-restore-storages.md#server-side-encryption">スナップショットの暗号化</a>](/br/backup-and-restore-storages.md#server-side-encryption)
+-   [TiDB クラスターのスナップショットをバックアップする](/br/br-snapshot-manual.md#back-up-cluster-snapshots)
+-   [データベースをバックアップする](/br/br-snapshot-manual.md#back-up-a-database)
+-   [テーブルをバックアップする](/br/br-snapshot-manual.md#back-up-a-table)
+-   [テーブルフィルターを使用して複数のテーブルをバックアップする](/br/br-snapshot-manual.md#back-up-multiple-tables-with-table-filter)
+-   [スナップショットの暗号化](/br/backup-and-restore-storages.md#server-side-encryption)
 
 ## ログバックアップのコマンド {#commands-of-log-backup}
 
 ログ バックアップを開始し、ログ バックアップ タスクを管理するには、 `br log`コマンドを実行します。
 
--   [<a href="/br/br-pitr-manual.md#start-a-backup-task">ログバックアップタスクを開始する</a>](/br/br-pitr-manual.md#start-a-backup-task)
--   [<a href="/br/br-pitr-manual.md#query-the-backup-status">バックアップステータスを問い合わせる</a>](/br/br-pitr-manual.md#query-the-backup-status)
--   [<a href="/br/br-pitr-manual.md#pause-and-resume-a-backup-task">ログバックアップタスクの一時停止と再開</a>](/br/br-pitr-manual.md#pause-and-resume-a-backup-task)
--   [<a href="/br/br-pitr-manual.md#stop-and-restart-a-backup-task">ログバックアップタスクを停止して再開する</a>](/br/br-pitr-manual.md#stop-and-restart-a-backup-task)
--   [<a href="/br/br-pitr-manual.md#clean-up-backup-data">バックアップデータをクリーンアップする</a>](/br/br-pitr-manual.md#clean-up-backup-data)
--   [<a href="/br/br-pitr-manual.md#view-the-backup-metadata">バックアップのメタデータをビュー</a>](/br/br-pitr-manual.md#view-the-backup-metadata)
+-   [ログバックアップタスクを開始する](/br/br-pitr-manual.md#start-a-backup-task)
+-   [バックアップステータスを問い合わせる](/br/br-pitr-manual.md#query-the-backup-status)
+-   [ログバックアップタスクの一時停止と再開](/br/br-pitr-manual.md#pause-and-resume-a-backup-task)
+-   [ログバックアップタスクを停止して再開する](/br/br-pitr-manual.md#stop-and-restart-a-backup-task)
+-   [バックアップデータをクリーンアップする](/br/br-pitr-manual.md#clean-up-backup-data)
+-   [バックアップのメタデータをビュー](/br/br-pitr-manual.md#view-the-backup-metadata)
 
 ## バックアップデータを復元するコマンド {#commands-of-restoring-backup-data}
 
 クラスターデータを復元するには、 `br restore`コマンドを実行します。 `full` 、 `db` 、または`table`サブコマンドを追加して、リストアの範囲 (クラスター全体 ( `full` )、単一データベース ( `db` )、または単一テーブル ( `table` )) を指定できます。
 
--   [<a href="/br/br-pitr-manual.md#restore-to-a-specified-point-in-time-pitr">ポイントインタイムリカバリ</a>](/br/br-pitr-manual.md#restore-to-a-specified-point-in-time-pitr)
--   [<a href="/br/br-snapshot-manual.md#restore-cluster-snapshots">クラスターのスナップショットを復元する</a>](/br/br-snapshot-manual.md#restore-cluster-snapshots)
--   [<a href="/br/br-snapshot-manual.md#restore-a-database">データベースを復元する</a>](/br/br-snapshot-manual.md#restore-a-database)
--   [<a href="/br/br-snapshot-manual.md#restore-a-table">テーブルを復元する</a>](/br/br-snapshot-manual.md#restore-a-table)
--   [<a href="/br/br-snapshot-manual.md#restore-multiple-tables-with-table-filter">テーブルフィルターを使用して複数のテーブルを復元する</a>](/br/br-snapshot-manual.md#restore-multiple-tables-with-table-filter)
--   [<a href="/br/br-snapshot-manual.md#restore-encrypted-snapshots">暗号化されたスナップショットを復元する</a>](/br/br-snapshot-manual.md#restore-encrypted-snapshots)
+-   [ポイントインタイムリカバリ](/br/br-pitr-manual.md#restore-to-a-specified-point-in-time-pitr)
+-   [クラスターのスナップショットを復元する](/br/br-snapshot-manual.md#restore-cluster-snapshots)
+-   [データベースを復元する](/br/br-snapshot-manual.md#restore-a-database)
+-   [テーブルを復元する](/br/br-snapshot-manual.md#restore-a-table)
+-   [テーブルフィルターを使用して複数のテーブルを復元する](/br/br-snapshot-manual.md#restore-multiple-tables-with-table-filter)
+-   [暗号化されたスナップショットを復元する](/br/br-snapshot-manual.md#restore-encrypted-snapshots)

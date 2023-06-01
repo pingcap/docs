@@ -51,12 +51,12 @@ Create Table: CREATE TABLE `t1` (
 
 ## MySQLの互換性 {#mysql-compatibility}
 
-このステートメントは、MySQL と完全な互換性があると理解されています。 GitHub では互換性の違いは[<a href="https://github.com/pingcap/tidb/issues/new/choose">問題を通じて報告されました</a>](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
+このステートメントは、MySQL と完全な互換性があると理解されています。 GitHub では互換性の違いは[問題を通じて報告されました](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-show-create-table.md">テーブルの作成を表示</a>](/sql-statements/sql-statement-show-create-table.md)
--   [<a href="/sql-statements/sql-statement-create-index.md">インデックスの作成</a>](/sql-statements/sql-statement-create-index.md)
--   [<a href="/sql-statements/sql-statement-drop-index.md">ドロップインデックス</a>](/sql-statements/sql-statement-drop-index.md)
--   [<a href="/sql-statements/sql-statement-show-index.md">インデックスを表示</a>](/sql-statements/sql-statement-show-index.md)
--   [<a href="/sql-statements/sql-statement-alter-index.md">インデックスの変更</a>](/sql-statements/sql-statement-alter-index.md)
+-   [テーブルの作成を表示](/sql-statements/sql-statement-show-create-table.md)
+-   [インデックスの作成](/sql-statements/sql-statement-create-index.md)
+-   [ドロップインデックス](/sql-statements/sql-statement-drop-index.md)
+-   [インデックスを表示](/sql-statements/sql-statement-show-index.md)
+-   [インデックスの変更](/sql-statements/sql-statement-alter-index.md)

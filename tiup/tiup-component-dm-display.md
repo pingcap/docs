@@ -12,7 +12,7 @@ DMクラスタ内の各コンポーネントの稼働状況を確認したい場
 tiup dm display <cluster-name> [flags]
 ```
 
-`<cluster-name>`は操作対象のクラスタ名です。クラスター名を忘れた場合は、 [<a href="/tiup/tiup-component-dm-list.md">`tiup dm list`</a>](/tiup/tiup-component-dm-list.md)コマンドを使用して確認できます。
+`<cluster-name>`は操作対象のクラスタ名です。クラスター名を忘れた場合は、 [`tiup dm list`](/tiup/tiup-component-dm-list.md)コマンドを使用して確認できます。
 
 ## オプション {#options}
 
@@ -57,4 +57,4 @@ tiup dm display <cluster-name> [flags]
     -   `Data Dir` : サービスのデータ ディレクトリ。 `-`データ ディレクトリがないことを意味します。
     -   `Deploy Dir` : サービスのデプロイメントディレクトリ。
 
-[<a href="/tiup/tiup-component-dm.md#command-list">&lt;&lt; 前のページに戻る - TiUP DMコマンド一覧</a>](/tiup/tiup-component-dm.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP DMコマンド一覧](/tiup/tiup-component-dm.md#command-list)

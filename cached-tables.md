@@ -171,7 +171,7 @@ SELECT * FROM users;
 
 > **ノート：**
 >
-> キャッシュされたテーブルにデータを挿入すると、第 2 レベルの書き込みレイテンシーが発生する可能性があります。レイテンシーはグローバル環境変数[<a href="/system-variables.md#tidb_table_cache_lease-new-in-v600">`tidb_table_cache_lease`</a>](/system-variables.md#tidb_table_cache_lease-new-in-v600)によって制御されます。アプリケーションに基づいてレイテンシーが許容できるかどうかを確認することで、キャッシュされたテーブル機能を使用するかどうかを決定できます。たとえば、読み取り専用のシナリオでは、 `tidb_table_cache_lease`の値を増やすことができます。
+> キャッシュされたテーブルにデータを挿入すると、第 2 レベルの書き込みレイテンシーが発生する可能性があります。レイテンシーはグローバル環境変数[`tidb_table_cache_lease`](/system-variables.md#tidb_table_cache_lease-new-in-v600)によって制御されます。アプリケーションに基づいてレイテンシーが許容できるかどうかを確認することで、キャッシュされたテーブル機能を使用するかどうかを決定できます。たとえば、読み取り専用のシナリオでは、 `tidb_table_cache_lease`の値を増やすことができます。
 >
 > ```sql
 > set @@global.tidb_table_cache_lease = 10;
@@ -262,5 +262,5 @@ TiDB はテーブル全体のデータをメモリにロードし、キャッシ
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-alter-table.md">他の机</a>](/sql-statements/sql-statement-alter-table.md)
--   [<a href="/system-variables.md">システム変数</a>](/system-variables.md)
+-   [他の机](/sql-statements/sql-statement-alter-table.md)
+-   [システム変数](/system-variables.md)

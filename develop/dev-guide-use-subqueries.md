@@ -11,7 +11,7 @@ summary: Learn how to use subquery in TiDB.
 
 サブクエリは、別の SQL クエリ内のクエリです。サブクエリを使用すると、クエリ結果を別のクエリで使用できます。
 
-以下では、 [<a href="/develop/dev-guide-bookshop-schema-design.md">書店</a>](/develop/dev-guide-bookshop-schema-design.md)アプリケーションを例として、サブクエリを紹介します。
+以下では、 [書店](/develop/dev-guide-bookshop-schema-design.md)アプリケーションを例として、サブクエリを紹介します。
 
 ## サブクエリ文 {#subquery-statement}
 
@@ -25,7 +25,7 @@ summary: Learn how to use subquery in TiDB.
 
 ## サブクエリのカテゴリ {#category-of-subquery}
 
-サブクエリは[<a href="https://en.wikipedia.org/wiki/Correlated_subquery">相関サブクエリ</a>](https://en.wikipedia.org/wiki/Correlated_subquery)と自己完結型サブクエリに分類できます。 TiDB は、これら 2 つのタイプを別々に扱います。
+サブクエリは[相関サブクエリ](https://en.wikipedia.org/wiki/Correlated_subquery)と自己完結型サブクエリに分類できます。 TiDB は、これら 2 つのタイプを別々に扱います。
 
 サブクエリが相関しているかどうかは、サブクエリがその外側のクエリで使用されている列を参照しているかどうかによって決まります。
 
@@ -79,13 +79,13 @@ WHERE (IFNULL(a1.death_year, YEAR(NOW())) - a1.birth_year) > 34;
 ...
 ```
 
-Existential Test や Quantified Comparison などの自己完結型サブクエリの場合、TiDB はパフォーマンスを向上させるためにそれらを書き換えて同等のクエリに置き換えます。詳細については、 [<a href="/subquery-optimization.md">サブクエリ関連の最適化</a>](/subquery-optimization.md)を参照してください。
+Existential Test や Quantified Comparison などの自己完結型サブクエリの場合、TiDB はパフォーマンスを向上させるためにそれらを書き換えて同等のクエリに置き換えます。詳細については、 [サブクエリ関連の最適化](/subquery-optimization.md)を参照してください。
 
 ### 相関サブクエリ {#correlated-subquery}
 
 相関サブクエリの場合、内部サブクエリは外部クエリの列を参照するため、各サブクエリは外部クエリの行ごとに 1 回実行されます。つまり、外側のクエリが 1,000 万件の結果を取得すると仮定すると、サブクエリも 1,000 万回実行され、より多くの時間とリソースが消費されます。
 
-したがって、処理の過程で、TiDB は実行プラン レベルでのクエリ効率の[<a href="/correlated-subquery-optimization.md">相関サブクエリの相関解除</a>](/correlated-subquery-optimization.md)を試みます。
+したがって、処理の過程で、TiDB は実行プラン レベルでのクエリ効率の[相関サブクエリの相関解除](/correlated-subquery-optimization.md)を試みます。
 
 次のステートメントは、同性の他の著者の平均年齢よりも年上の著者を照会するものです。
 
@@ -125,6 +125,6 @@ WHERE
 
 ## 続きを読む {#read-more}
 
--   [<a href="/subquery-optimization.md">サブクエリ関連の最適化</a>](/subquery-optimization.md)
--   [<a href="/correlated-subquery-optimization.md">相関サブクエリの相関解除</a>](/correlated-subquery-optimization.md)
--   [<a href="https://en.pingcap.com/blog/subquery-optimization-in-tidb/">TiDB でのサブクエリの最適化</a>](https://en.pingcap.com/blog/subquery-optimization-in-tidb/)
+-   [サブクエリ関連の最適化](/subquery-optimization.md)
+-   [相関サブクエリの相関解除](/correlated-subquery-optimization.md)
+-   [TiDB でのサブクエリの最適化](https://en.pingcap.com/blog/subquery-optimization-in-tidb/)

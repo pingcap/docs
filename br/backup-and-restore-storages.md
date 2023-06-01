@@ -5,7 +5,7 @@ summary: Describes the storage URI format used in TiDB backup and restore.
 
 # バックアップストレージ {#backup-storages}
 
-TiDB は、Amazon S3、Google Cloud Storage (GCS)、Azure Blob Storage、NFS へのバックアップ データの保存をサポートしています。具体的には、 `br`のコマンドの`--storage`または`-s`パラメータにバックアップstorageのURIを指定できます。このドキュメントでは、さまざまな外部storageサービスの[<a href="#uri-format">URI形式</a>](#uri-format)と[<a href="#authentication">認証</a>](#authentication) 、および[<a href="#server-side-encryption">サーバー側の暗号化</a>](#server-side-encryption)を紹介します。
+TiDB は、Amazon S3、Google Cloud Storage (GCS)、Azure Blob Storage、NFS へのバックアップ データの保存をサポートしています。具体的には、 `br`のコマンドの`--storage`または`-s`パラメータにバックアップstorageのURIを指定できます。このドキュメントでは、さまざまな外部storageサービスの[サーバー側の暗号化](#server-side-encryption)を紹介します。
 
 ## 資格情報を TiKV に送信する {#send-credentials-to-tikv}
 
@@ -21,7 +21,7 @@ TiDB は、Amazon S3、Google Cloud Storage (GCS)、Azure Blob Storage、NFS へ
 ./br backup full -c=0 -u pd-service:2379 --storage 's3://bucket-name/prefix'
 ```
 
-[<a href="/sql-statements/sql-statement-backup.md">`BACKUP`</a>](/sql-statements/sql-statement-backup.md)および[<a href="/sql-statements/sql-statement-restore.md">`RESTORE`</a>](/sql-statements/sql-statement-restore.md)ステートメントを使用してデータをバックアップまたは復元する場合は、 `SEND_CREDENTIALS_TO_TIKV = FALSE`オプションを追加できます。
+[`RESTORE`](/sql-statements/sql-statement-restore.md)ステートメントを使用してデータをバックアップまたは復元する場合は、 `SEND_CREDENTIALS_TO_TIKV = FALSE`オプションを追加できます。
 
 ```sql
 BACKUP DATABASE * TO 's3://bucket-name/prefix' SEND_CREDENTIALS_TO_TIKV = FALSE;
@@ -150,7 +150,7 @@ BACKUP DATABASE * TO 's3://bucket-name/prefix' SEND_CREDENTIALS_TO_TIKV = FALSE;
 -   バックアップ中にバックアップ ディレクトリにアクセスするための TiKV およびバックアップ &amp; リストア ( BR ) の最小権限: `s3:ListBucket` 、 `s3:PutObject` 、および`s3:AbortMultipartUpload`
 -   TiKV およびBR が復元中にバックアップ ディレクトリにアクセスするための最小権限: `s3:ListBucket` 、 `s3:GetObject` 、および`s3:PutObject` 。 BR は、チェックポイント情報をバックアップ ディレクトリの下の`./checkpoints`サブディレクトリに書き込みます。ログ バックアップ データを復元するとき、 BR は復元されたクラスターのテーブル ID マッピング関係をバックアップ ディレクトリの下の`./pitr_id_maps`サブディレクトリに書き込みます。
 
-バックアップ ディレクトリをまだ作成していない場合は、 [<a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html">バケットを作成する</a>](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html)を参照して、指定したリージョンに S3 バケットを作成します。必要に応じて、 [<a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html">フォルダーを作成する</a>](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html)を参照してバケット内にフォルダーを作成することもできます。
+バックアップ ディレクトリをまだ作成していない場合は、 [フォルダーを作成する](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html)を参照してバケット内にフォルダーを作成することもできます。
 
 次のいずれかの方法を使用して S3 へのアクセスを構成することをお勧めします。
 
@@ -242,8 +242,8 @@ BACKUP DATABASE * TO 's3://bucket-name/prefix' SEND_CREDENTIALS_TO_TIKV = FALSE;
 
 ### Amazon S3 サーバー側の暗号化 {#amazon-s3-server-side-encryption}
 
-BR は、 Amazon S3 にデータをバックアップする際のサーバー側の暗号化をサポートします。 BRを使用して S3 サーバー側暗号化用に作成した AWS KMS キーを使用することもできます。詳細は[<a href="/encryption-at-rest.md#br-s3-server-side-encryption">BR S3 サーバー側暗号化</a>](/encryption-at-rest.md#br-s3-server-side-encryption)を参照してください。
+BR は、 Amazon S3 にデータをバックアップする際のサーバー側の暗号化をサポートします。 BRを使用して S3 サーバー側暗号化用に作成した AWS KMS キーを使用することもできます。詳細は[BR S3 サーバー側暗号化](/encryption-at-rest.md#br-s3-server-side-encryption)を参照してください。
 
 ## storageサービスでサポートされるその他の機能 {#other-features-supported-by-the-storage-service}
 
-BR v6.3.0 は AWS [<a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html">S3 オブジェクトロック</a>](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html)をサポートします。この機能を有効にすると、バックアップ データの改ざんや削除を防ぐことができます。
+BR v6.3.0 は AWS [S3 オブジェクトロック](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html)をサポートします。この機能を有効にすると、バックアップ データの改ざんや削除を防ぐことができます。

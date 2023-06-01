@@ -9,7 +9,7 @@ TiDB は分散型データベースであるため、スタンドアロン型デ
 
 ## TiDB ダッシュボードの主要な指標 {#key-indicators-of-tidb-dashboard}
 
-TiDB は v4.0 から、新しい運用および保守管理ツール[<a href="/dashboard/dashboard-intro.md">TiDB ダッシュボード</a>](/dashboard/dashboard-intro.md)を提供します。このツールは PDコンポーネントに統合されています。 TiDB ダッシュボードにはデフォルトのアドレス`http://${pd-ip}:${pd_port}/dashboard`でアクセスできます。
+TiDB は v4.0 から、新しい運用および保守管理ツール[TiDB ダッシュボード](/dashboard/dashboard-intro.md)を提供します。このツールは PDコンポーネントに統合されています。 TiDB ダッシュボードにはデフォルトのアドレス`http://${pd-ip}:${pd_port}/dashboard`でアクセスできます。
 
 TiDB ダッシュボードは、TiDB データベースの運用とメンテナンスを簡素化します。 1 つのインターフェイスを通じて TiDB クラスター全体の実行ステータスを表示できます。以下に、いくつかのパフォーマンス指標について説明します。
 

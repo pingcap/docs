@@ -9,7 +9,7 @@ summary: Learn about the CLI usage and sample configuration in TiDB Lightning.
 
 ## コンフィグレーションファイル {#configuration-files}
 
-TiDB Lightning には「グローバル」と「タスク」という 2 つの構成クラスがあり、それらは互換性のある構造を持っています。それらの区別は、 [<a href="/tidb-lightning/tidb-lightning-web-interface.md">サーバーモード</a>](/tidb-lightning/tidb-lightning-web-interface.md)有効な場合にのみ発生します。サーバーモードが無効になっている場合 (デフォルト)、 TiDB Lightning は1 つのタスクのみを実行し、同じ構成ファイルがグローバル構成とタスク構成の両方に使用されます。
+TiDB Lightning には「グローバル」と「タスク」という 2 つの構成クラスがあり、それらは互換性のある構造を持っています。それらの区別は、 [サーバーモード](/tidb-lightning/tidb-lightning-web-interface.md)有効な場合にのみ発生します。サーバーモードが無効になっている場合 (デフォルト)、 TiDB Lightning は1 つのタスクのみを実行し、同じ構成ファイルがグローバル構成とタスク構成の両方に使用されます。
 
 ### TiDB Lightning(グローバル) {#tidb-lightning-global}
 
@@ -383,9 +383,9 @@ log-progress = "5m"
 | :------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------------- |
 | --config*ファイル*                                                             | *ファイル*からグローバル設定を読み取ります。指定しない場合は、デフォルトの構成が使用されます。                                                                                               |                                |
 | -V                                                                         | プログラムのバージョンを表示します                                                                                                                              |                                |
-| -d*ディレクトリ*                                                                 | 読み取るデータ ダンプのディレクトリまたは[<a href="/br/backup-and-restore-storages.md#uri-format">外部storageURI</a>](/br/backup-and-restore-storages.md#uri-format) | `mydumper.data-source-dir`     |
+| -d*ディレクトリ*                                                                 | 読み取るデータ ダンプのディレクトリまたは[外部storageURI](/br/backup-and-restore-storages.md#uri-format) | `mydumper.data-source-dir`     |
 | -L*レベル*                                                                    | ログレベル: デバッグ、情報、警告、エラー、致命的 (デフォルト = 情報)                                                                                                         | `lightning.log-level`          |
-| -f*ルール*                                                                    | [<a href="/table-filter.md">テーブルフィルタールール</a>](/table-filter.md) (複数指定可能)                                                                       | `mydumper.filter`              |
+| -f*ルール*                                                                    | [テーブルフィルタールール](/table-filter.md) (複数指定可能)                                                                       | `mydumper.filter`              |
 | --バック*<a href="/tidb-lightning/tidb-lightning-overview.md">エンド バックエンド</a>* | インポートモードを選択します。 `local`は物理インポート モードを指します。 `tidb`論理インポート モードを指します。                                                                              | `local`                        |
 | --log-file*ファイル*                                                           | ログファイルのパス。デフォルトでは`/tmp/lightning.log.{timestamp}`です。 「-」に設定すると、ログ ファイルが stdout に出力されることを意味します。                                                 | `lightning.log-file`           |
 | --status-addr *ip:ポート*                                                     | TiDB Lightningサーバーのリスニング アドレス                                                                                                                  | `lightning.status-port`        |

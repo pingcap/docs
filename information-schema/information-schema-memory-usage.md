@@ -49,7 +49,7 @@ SELECT * FROM information_schema.memory_usage;
 `MEMORY_USAGE`のテーブルの列は次のように説明されます。
 
 -   MEMORY_TOTAL: TiDB の利用可能なメモリの合計 (バイト単位)。
--   MEMORY_LIMIT: TiDB のメモリ使用制限 (バイト単位)。値はシステム変数[<a href="/system-variables.md#tidb_server_memory_limit-new-in-v640">`tidb_server_memory_limit`</a>](/system-variables.md#tidb_server_memory_limit-new-in-v640)と同じです。
+-   MEMORY_LIMIT: TiDB のメモリ使用制限 (バイト単位)。値はシステム変数[`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)と同じです。
 -   MEMORY_CURRENT: TiDB の現在のメモリ使用量 (バイト単位)。
 -   MEMORY_MAX_USED: TiDB の開始時から現在までの最大メモリ使用量 (バイト単位)。
 -   CURRENT_OPS: &quot;縮小中&quot; |ヌル。 「縮小」とは、TiDB がメモリ使用量を縮小する操作を実行していることを意味します。

@@ -50,6 +50,6 @@ tiup status [flags]
 >
 > TiUPの`Pending Offline` 、PD API によって返される`Offline` 、および TiDB ダッシュボードの`Leaving`同じステータスを示します。
 
-コンポーネントのステータスは、PD スケジュール情報から取得されます。詳細については、 [<a href="/tidb-scheduling.md#information-collection">情報収集</a>](/tidb-scheduling.md#information-collection)を参照してください。
+コンポーネントのステータスは、PD スケジュール情報から取得されます。詳細については、 [情報収集](/tidb-scheduling.md#information-collection)を参照してください。
 
-[<a href="/tiup/tiup-reference.md#command-list">&lt;&lt; 前のページに戻る - TiUPリファレンスコマンドリスト</a>](/tiup/tiup-reference.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPリファレンスコマンドリスト](/tiup/tiup-reference.md#command-list)

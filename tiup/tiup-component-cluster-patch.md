@@ -86,7 +86,7 @@ tiup cluster patch <cluster-name> <package-path> [flags]
 
 ### -N、--node {#n-node}
 
--   置き換えるノードを指定します。このオプションの値は、ノード ID のカンマ区切りリストです。ノード ID は、 `tiup cluster display`コマンドによって返される[<a href="/tiup/tiup-component-cluster-display.md">クラスタステータステーブル</a>](/tiup/tiup-component-cluster-display.md)の最初の列から取得できます。
+-   置き換えるノードを指定します。このオプションの値は、ノード ID のカンマ区切りリストです。ノード ID は、 `tiup cluster display`コマンドによって返される[クラスタステータステーブル](/tiup/tiup-component-cluster-display.md)の最初の列から取得できます。
 -   データ型: `STRINGS`
 -   このオプションが指定されていない場合、 TiUP はデフォルトで置換するノードを選択しません。
 
@@ -96,7 +96,7 @@ tiup cluster patch <cluster-name> <package-path> [flags]
 
 ### -R、--役割 {#r-role}
 
--   置き換える役割を指定します。このオプションの値は、ノードの役割のカンマ区切りリストです。 `tiup cluster display`コマンドによって返される[<a href="/tiup/tiup-component-cluster-display.md">クラスタステータステーブル</a>](/tiup/tiup-component-cluster-display.md)の 2 番目の列から、ノードにデプロイされたロールを取得できます。
+-   置き換える役割を指定します。このオプションの値は、ノードの役割のカンマ区切りリストです。 `tiup cluster display`コマンドによって返される[クラスタステータステーブル](/tiup/tiup-component-cluster-display.md)の 2 番目の列から、ノードにデプロイされたロールを取得できます。
 -   データ型: `STRINGS`
 -   このオプションが指定されていない場合、 TiUP はデフォルトで置き換える役割を選択しません。
 
@@ -120,4 +120,4 @@ tiup cluster patch <cluster-name> <package-path> [flags]
 
 tiup-clusterの実行ログ。
 
-[<a href="/tiup/tiup-component-cluster.md#command-list">&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト</a>](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト](/tiup/tiup-component-cluster.md#command-list)

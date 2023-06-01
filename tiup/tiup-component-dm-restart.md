@@ -16,7 +16,7 @@ title: tiup dm restart
 tiup dm restart <cluster-name> [flags]
 ```
 
-`<cluster-name>` : 操作するクラスターの名前。クラスター名を忘れた場合は、 [<a href="/tiup/tiup-component-cluster-list.md">クラスタリスト</a>](/tiup/tiup-component-cluster-list.md)コマンドで確認できます。
+`<cluster-name>` : 操作するクラスターの名前。クラスター名を忘れた場合は、 [クラスタリスト](/tiup/tiup-component-cluster-list.md)コマンドで確認できます。
 
 ## オプション {#options}
 
@@ -50,4 +50,4 @@ tiup dm restart <cluster-name> [flags]
 
 サービスの再起動処理のログ。
 
-[<a href="/tiup/tiup-component-dm.md#command-list">&lt;&lt; 前のページに戻る - TiUP DMコマンド一覧</a>](/tiup/tiup-component-dm.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP DMコマンド一覧](/tiup/tiup-component-dm.md#command-list)

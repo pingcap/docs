@@ -9,13 +9,13 @@ TiDB Cloudは、クラスターの標準メトリクスの完全なセットを�
 
 > **ノート：**
 >
-> 現在、[監視] ページは[<a href="/tidb-cloud/select-cluster-tier.md#serverless-tier-beta">Serverless Tierクラスター</a>](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)では利用できません。
+> 現在、[監視] ページは[Serverless Tierクラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)では利用できません。
 
 ## モニタリングページをビュー {#view-the-monitoring-page}
 
 [モニタリング] ページでメトリクスを表示するには、次の手順を実行します。
 
-1.  [<a href="https://tidbcloud.com/">TiDB Cloudコンソール</a>](https://tidbcloud.com/)で、プロジェクトの[<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページに移動します。
+1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
     > **ヒント：**
     >
@@ -116,4 +116,4 @@ TiDB Cloudは、クラスターの標準メトリクスの完全なセットを�
 -   対応するクラスターのワークロードによってこのメトリクスがトリガーされることはありません。たとえば、失敗したクエリがない場合、失敗したクエリ メトリックは常に空になります。
 -   クラスターのバージョンが低いです。これらのメトリクスを表示するには、TiDB の最新バージョンにアップグレードする必要があります。
 
-これらの理由がすべて除外される場合は、トラブルシューティングのために[<a href="/tidb-cloud/tidb-cloud-support.md">PingCAP サポート チーム</a>](/tidb-cloud/tidb-cloud-support.md)に問い合わせることができます。
+これらの理由がすべて除外される場合は、トラブルシューティングのために[PingCAP サポート チーム](/tidb-cloud/tidb-cloud-support.md)に問い合わせることができます。

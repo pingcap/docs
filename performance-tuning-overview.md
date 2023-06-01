@@ -84,7 +84,7 @@ User Response time = Service time + Queuing delay + Coherency delay
 
 -   データベース時間、クエリレイテンシー、QPS などのデータベース パフォーマンス データ
 
-    TiDB は、 [<a href="/identify-slow-queries.md">遅いクエリログ</a>](/identify-slow-queries.md) 、 [<a href="/dashboard/top-sql.md">Top SQL</a>](/dashboard/top-sql.md) 、 [<a href="/dashboard/continuous-profiling.md">継続的なパフォーマンスプロファイリング</a>](/dashboard/continuous-profiling.md) 、 [<a href="/dashboard/dashboard-key-visualizer.md">トラフィックビジュアライザー</a>](/dashboard/dashboard-key-visualizer.md)などのさまざまな次元でパフォーマンス データを徹底的に測定し、保存します。さらに、Prometheus に保存されているタイミング メトリクス データの履歴のバックトラッキングと比較を実行できます。
+    TiDB は、 [トラフィックビジュアライザー](/dashboard/dashboard-key-visualizer.md)などのさまざまな次元でパフォーマンス データを徹底的に測定し、保存します。さらに、Prometheus に保存されているタイミング メトリクス データの履歴のバックトラッキングと比較を実行できます。
 
 -   CPU、IO、ネットワークなどのリソースを含むリソース使用率
 
@@ -101,13 +101,13 @@ User Response time = Service time + Queuing delay + Coherency delay
 -   ボトルネックがデータベース内にない場合は、データベースの外部で収集されたリソース使用率に依存するか、アプリケーションのプロファイリングを行ってデータベースの外部のボトルネックを特定する必要があります。一般的なシナリオには、アプリケーションまたはプロキシサーバーのリソース不足、およびアプリケーション内のシリアル ポイントによって引き起こされるハードウェア リソースの使用不足が含まれます。
 -   ボトルネックがデータベースにある場合は、包括的なチューニング ツールを使用してデータベースのパフォーマンスを分析および診断できます。一般的なシナリオには、遅い SQL の存在、アプリケーションによるデータベースの不当な使用、データベース内の読み取りおよび書き込みホットスポットの存在などが含まれます。
 
-分析および診断の方法とツールの詳細については、 [<a href="/performance-tuning-methods.md">パフォーマンスの分析とチューニング</a>](/performance-tuning-methods.md)を参照してください。
+分析および診断の方法とツールの詳細については、 [パフォーマンスの分析とチューニング](/performance-tuning-methods.md)を参照してください。
 
 ### ステップ 4. チューニング ソリューションを提案し、各ソリューションのメリット、リスク、コストを評価する {#step-4-propose-tuning-solutions-and-evaluate-the-benefits-risks-and-costs-of-each-solution}
 
 パフォーマンス分析を通じてシステムのボトルネックを特定した後、実際の状況に基づいてコスト効率が高く、リスクが低く、最大のメリットをもたらすチューニング ソリューションを提案できます。
 
-[<a href="https://en.wikipedia.org/wiki/Amdahl%27s_law">アムダールの法則</a>](https://en.wikipedia.org/wiki/Amdahl%27s_law)によると、パフォーマンス調整による最大のゲインは、システム全体における最適化された部分の割合に依存します。したがって、パフォーマンス データに基づいてシステムのボトルネックとそれに対応する割合を特定し、ボトルネックが解決または最適化された後の利益を予測する必要があります。
+[アムダールの法則](https://en.wikipedia.org/wiki/Amdahl%27s_law)によると、パフォーマンス調整による最大のゲインは、システム全体における最適化された部分の割合に依存します。したがって、パフォーマンス データに基づいてシステムのボトルネックとそれに対応する割合を特定し、ボトルネックが解決または最適化された後の利益を予測する必要があります。
 
 最大のボトルネックを調整することでソリューションが最大の潜在的なメリットをもたらすことができる場合でも、このソリューションのリスクとコストを評価する必要があることに注意してください。例えば：
 

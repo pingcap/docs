@@ -9,7 +9,7 @@ summary: View the execution details of a single SQL statement in TiDB Dashboard.
 
 -   SQL ステートメントの概要。これには、SQL テンプレート、SQL テンプレート ID、表示される SQL 実行の現在の時間範囲、実行プランの数、SQL ステートメントが実行されるデータベース、および高速プラン バインディング機能 (エリア) が含まれます。次の図の 1)。
 -   実行計画リスト: SQL ステートメントに複数の実行計画がある場合、このリストが表示されます。 TiDB v6.2.0 では、実行計画のテキスト情報に加えて、視覚的な実行計画が導入されており、これによりステートメントの各演算子や詳細情報をより直観的に学ぶことができます。さまざまな実行プランを選択でき、選択したプランの詳細がリストの下に表示されます (次の図の領域 2)。
--   プランの実行の詳細。選択した実行プランの詳細情報が表示されます。 [<a href="#execution-details-of-plans">実行計画の詳細</a>](#execution-details-of-plans) (次の図の領域 3) を参照してください。
+-   プランの実行の詳細。選択した実行プランの詳細情報が表示されます。 [実行計画の詳細](#execution-details-of-plans) (次の図の領域 3) を参照してください。
 
 ![Details](/media/dashboard/dashboard-statement-detail-v660.png)
 
@@ -56,14 +56,14 @@ v6.6.0 以降、TiDB には高速プラン バインディング機能が導入�
 -   TiFlashにアクセスするクエリ
 -   3 つ以上のテーブルを結合するクエリ
 
-この機能を使用するには、SUPER 権限が必要です。使用中に権限の問題が発生した場合は、 [<a href="/dashboard/dashboard-user.md">TiDB ダッシュボードのユーザー管理</a>](/dashboard/dashboard-user.md)を参照して必要な権限を追加してください。
+この機能を使用するには、SUPER 権限が必要です。使用中に権限の問題が発生した場合は、 [TiDB ダッシュボードのユーザー管理](/dashboard/dashboard-user.md)を参照して必要な権限を追加してください。
 
 ## 計画の実行内容 {#execution-details-of-plans}
 
 プランの実行の詳細には、次の情報が含まれます。
 
 -   SQL サンプル: 計画に応じて実際に実行される特定の SQL 文のテキスト。時間範囲内に実行された SQL ステートメントは、SQL サンプルとして使用される可能性があります。
--   実行計画: 実行計画に関する完全な情報がグラフとテキストで表示されます。実行計画の詳細については、 [<a href="/explain-overview.md">クエリ実行計画を理解する</a>](/explain-overview.md)を参照してください。複数の実行プランが選択されている場合は、そのうちの (いずれか) 1 つだけが表示されます。
+-   実行計画: 実行計画に関する完全な情報がグラフとテキストで表示されます。実行計画の詳細については、 [クエリ実行計画を理解する](/explain-overview.md)を参照してください。複数の実行プランが選択されている場合は、そのうちの (いずれか) 1 つだけが表示されます。
 -   SQL ステートメントの基本情報、実行時間、コプロセッサー読み取り、トランザクション、低速クエリについては、対応するタブ タイトルをクリックしてさまざまな情報を切り替えることができます。
 
 ![Execution details of plans](/media/dashboard/dashboard-statement-plans-detail.png)
@@ -102,4 +102,4 @@ SQL 実行の基本情報には、テーブル名、インデックス名、実�
 
 ![Slow Query](/media/dashboard/dashboard-statement-plans-slow-queries.png)
 
-この領域に表示される情報は、スロー クエリ ページと同じ構造になっています。詳細については[<a href="/dashboard/dashboard-slow-query.md">TiDB ダッシュボードの低速クエリ ページ</a>](/dashboard/dashboard-slow-query.md)を参照してください。
+この領域に表示される情報は、スロー クエリ ページと同じ構造になっています。詳細については[TiDB ダッシュボードの低速クエリ ページ](/dashboard/dashboard-slow-query.md)を参照してください。

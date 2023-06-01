@@ -19,13 +19,13 @@ summary: Learn the SHARD_ROW_ID_BITS attribute.
 
 <CustomContent platform="tidb">
 
-使用方法の詳細については、 [<a href="/troubleshoot-hot-spot-issues.md#use-shard_row_id_bits-to-process-hotspots">ホットスポットの問題のトラブルシューティング ガイド</a>](/troubleshoot-hot-spot-issues.md#use-shard_row_id_bits-to-process-hotspots)を参照してください。
+使用方法の詳細については、 [ホットスポットの問題のトラブルシューティング ガイド](/troubleshoot-hot-spot-issues.md#use-shard_row_id_bits-to-process-hotspots)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-使用方法の詳細については、 [<a href="https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues#use-shard_row_id_bits-to-process-hotspots">ホットスポットの問題のトラブルシューティング ガイド</a>](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues#use-shard_row_id_bits-to-process-hotspots)を参照してください。
+使用方法の詳細については、 [ホットスポットの問題のトラブルシューティング ガイド](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues#use-shard_row_id_bits-to-process-hotspots)を参照してください。
 
 </CustomContent>
 

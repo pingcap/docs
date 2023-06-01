@@ -5,7 +5,7 @@ summary: Learn what TiCDC is, what features TiCDC provides, and how to install a
 
 # TiCDC の概要 {#ticdc-overview}
 
-[<a href="https://github.com/pingcap/tiflow/tree/master/cdc">TiCDC</a>](https://github.com/pingcap/tiflow/tree/master/cdc)は、TiDB の増分データをレプリケートするために使用されるツールです。具体的には、TiCDC は TiKV 変更ログを取得し、キャプチャしたデータを並べ替えて、行ベースの増分データをダウンストリーム データベースにエクスポートします。
+[TiCDC](https://github.com/pingcap/tiflow/tree/master/cdc)は、TiDB の増分データをレプリケートするために使用されるツールです。具体的には、TiCDC は TiKV 変更ログを取得し、キャプチャしたデータを並べ替えて、行ベースの増分データをダウンストリーム データベースにエクスポートします。
 
 ## 使用シナリオ {#usage-scenarios}
 
@@ -19,10 +19,10 @@ summary: Learn what TiCDC is, what features TiCDC provides, and how to install a
 -   第 2 レベルの RPO と分レベルの RTO を使用して、ある TiDB クラスターから別の TiDB クラスターに増分データをレプリケートします。
 -   TiDB クラスター間でデータを双方向にレプリケートし、これに基づいて、TiCDC を使用してマルチアクティブ TiDB ソリューションを作成できます。
 -   TiDB クラスターから MySQL データベース (または他の MySQL 互換データベース) に低レイテンシーで増分データをレプリケートします。
--   TiDB クラスターから Kafka クラスターに増分データをレプリケートします。推奨するデータ形式には[<a href="/ticdc/ticdc-canal-json.md">カナル-JSON</a>](/ticdc/ticdc-canal-json.md)と[<a href="/ticdc/ticdc-avro-protocol.md">アブロ</a>](/ticdc/ticdc-avro-protocol.md)があります。
+-   TiDB クラスターから Kafka クラスターに増分データをレプリケートします。推奨するデータ形式には[アブロ](/ticdc/ticdc-avro-protocol.md)があります。
 -   データベース、テーブル、DML、および DDL をフィルタリングする機能を備えたテーブルをレプリケートします。
 -   単一障害点がなく可用性が高くなります。 TiCDC ノードの動的追加と削除をサポートします。
--   タスク ステータスのクエリ、タスク構成の動的変更、タスクの作成または削除など、 [<a href="/ticdc/ticdc-open-api.md">オープンAPI</a>](/ticdc/ticdc-open-api.md)を通じてクラスター管理をサポートします。
+-   タスク ステータスのクエリ、タスク構成の動的変更、タスクの作成または削除など、 [オープンAPI](/ticdc/ticdc-open-api.md)を通じてクラスター管理をサポートします。
 
 ### レプリケーションの順序 {#replication-order}
 
@@ -47,7 +47,7 @@ summary: Learn what TiCDC is, what features TiCDC provides, and how to install a
 
     > **ノート：**
     >
-    > v6.2 以降、シンク URI パラメーター[<a href="/ticdc/ticdc-sink-to-mysql.md#configure-sink-uri-for-mysql-or-tidb">`transaction-atomicity`</a>](/ticdc/ticdc-sink-to-mysql.md#configure-sink-uri-for-mysql-or-tidb)を使用して、単一テーブルのトランザクションを分割するかどうかを制御できます。単一テーブルのトランザクションを分割すると、大規模なトランザクションをレプリケートする際のレイテンシーとメモリ消費量を大幅に削減できます。
+    > v6.2 以降、シンク URI パラメーター[`transaction-atomicity`](/ticdc/ticdc-sink-to-mysql.md#configure-sink-uri-for-mysql-or-tidb)を使用して、単一テーブルのトランザクションを分割するかどうかを制御できます。単一テーブルのトランザクションを分割すると、大規模なトランザクションをレプリケートする際のレイテンシーとメモリ消費量を大幅に削減できます。
 
 ## TiCDCアーキテクチャ {#ticdc-architecture}
 
@@ -78,19 +78,19 @@ TiCDC のアーキテクチャを次の図に示します。
     -   主キー ( `PRIMARY KEY` ) は有効なインデックスです。
     -   一意のインデックス ( `UNIQUE INDEX` ) は、インデックスのすべての列が null 非許容として明示的に定義され ( `NOT NULL` )、インデックスに仮想生成列 ( `VIRTUAL GENERATED COLUMNS` ) がない場合に有効です。
 
--   災害復旧シナリオで TiCDC を使用するには、 [<a href="/ticdc/ticdc-sink-to-mysql.md#eventually-consistent-replication-in-disaster-scenarios">やり直しログ</a>](/ticdc/ticdc-sink-to-mysql.md#eventually-consistent-replication-in-disaster-scenarios)を構成する必要があります。
+-   災害復旧シナリオで TiCDC を使用するには、 [やり直しログ](/ticdc/ticdc-sink-to-mysql.md#eventually-consistent-replication-in-disaster-scenarios)を構成する必要があります。
 
--   大きな単一行 (1K を超える) を含む幅の広いテーブルをレプリケートする場合は、 `per-table-memory-quota` = `ticdcTotalMemory` /( `tableCount` * 2) となるように[<a href="/ticdc/ticdc-server-config.md">`per-table-memory-quota`</a>](/ticdc/ticdc-server-config.md)を構成することをお勧めします。 `ticdcTotalMemory`は TiCDC ノードのメモリ、 `tableCount`は TiCDC ノードが複製するターゲット テーブルの数です。
+-   大きな単一行 (1K を超える) を含む幅の広いテーブルをレプリケートする場合は、 `per-table-memory-quota` = `ticdcTotalMemory` /( `tableCount` * 2) となるように[`per-table-memory-quota`](/ticdc/ticdc-server-config.md)を構成することをお勧めします。 `ticdcTotalMemory`は TiCDC ノードのメモリ、 `tableCount`は TiCDC ノードが複製するターゲット テーブルの数です。
 
 > **ノート：**
 >
-> v4.0.8 以降、TiCDC はタスク構成を変更することで、**有効なインデックスのない**テーブルの複製をサポートします。ただし、これによりデータの一貫性の保証がある程度損なわれます。詳細については、 [<a href="/ticdc/ticdc-manage-changefeed.md#replicate-tables-without-a-valid-index">有効なインデックスのないテーブルをレプリケートする</a>](/ticdc/ticdc-manage-changefeed.md#replicate-tables-without-a-valid-index)を参照してください。
+> v4.0.8 以降、TiCDC はタスク構成を変更することで、**有効なインデックスのない**テーブルの複製をサポートします。ただし、これによりデータの一貫性の保証がある程度損なわれます。詳細については、 [有効なインデックスのないテーブルをレプリケートする](/ticdc/ticdc-manage-changefeed.md#replicate-tables-without-a-valid-index)を参照してください。
 
 ### サポートされていないシナリオ {#unsupported-scenarios}
 
 現在、次のシナリオはサポートされていません。
 
 -   RawKV のみを使用する TiKV クラスター。
--   TiDB の[<a href="/sql-statements/sql-statement-create-sequence.md">DDL 操作`CREATE SEQUENCE`</a>](/sql-statements/sql-statement-create-sequence.md)と[<a href="/sql-statements/sql-statement-create-sequence.md#sequence-function">シーケンス機能</a>](/sql-statements/sql-statement-create-sequence.md#sequence-function) 。アップストリームの TiDB が`SEQUENCE`使用する場合、TiCDC はアップストリームで実行された`SEQUENCE` DDL 操作/関数を無視します。ただし、 `SEQUENCE`関数を使用する DML 操作は正しく複製できます。
+-   TiDB の[シーケンス機能](/sql-statements/sql-statement-create-sequence.md#sequence-function) 。アップストリームの TiDB が`SEQUENCE`使用する場合、TiCDC はアップストリームで実行された`SEQUENCE` DDL 操作/関数を無視します。ただし、 `SEQUENCE`関数を使用する DML 操作は正しく複製できます。
 
-TiCDC は、アップストリームでの大規模なトランザクションのシナリオに対して部分的なサポートのみを提供します。詳細は[<a href="/ticdc/ticdc-faq.md#does-ticdc-support-replicating-large-transactions-is-there-any-risk">TiCDC は大規模なトランザクションのレプリケーションをサポートしていますか?リスクはありますか?</a>](/ticdc/ticdc-faq.md#does-ticdc-support-replicating-large-transactions-is-there-any-risk)を参照してください。
+TiCDC は、アップストリームでの大規模なトランザクションのシナリオに対して部分的なサポートのみを提供します。詳細は[TiCDC は大規模なトランザクションのレプリケーションをサポートしていますか?リスクはありますか?](/ticdc/ticdc-faq.md#does-ticdc-support-replicating-large-transactions-is-there-any-risk)を参照してください。

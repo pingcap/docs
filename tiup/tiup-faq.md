@@ -26,7 +26,7 @@ TiUPプレイグラウンドコンポーネントは主に、Linux または mac
 
 ## TiUPクラスターコンポーネントのトポロジ ファイルを作成するにはどうすればよいですか? {#how-do-i-write-the-topology-file-for-the-tiup-cluster-component}
 
-トポロジファイルの作成は[<a href="https://github.com/pingcap/tiup/tree/master/embed/examples/cluster">これらのテンプレート</a>](https://github.com/pingcap/tiup/tree/master/embed/examples/cluster)を参照してください。テンプレートには次のものが含まれます。
+トポロジファイルの作成は[これらのテンプレート](https://github.com/pingcap/tiup/tree/master/embed/examples/cluster)を参照してください。テンプレートには次のものが含まれます。
 
 -   マルチ DC 導入トポロジ
 -   最小限の導入トポロジ

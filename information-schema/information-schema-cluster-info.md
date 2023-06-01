@@ -34,7 +34,7 @@ desc cluster_info;
 
 -   `TYPE` : インスタンスのタイプ。オプションの値は`tidb` 、 `pd` 、および`tikv`です。
 -   `INSTANCE` : インスタンス アドレス。 `IP:PORT`の形式の文字列です。
--   `STATUS_ADDRESS` : HTTP APIのサービスアドレス。 tikv-ctl、pd-ctl、または tidb-ctl の一部のコマンドは、この API とこのアドレスを使用する場合があります。このアドレスからさらに多くのクラスター情報を取得することもできます。詳細は[<a href="https://github.com/pingcap/tidb/blob/master/docs/tidb_http_api.md">TiDB HTTP API ドキュメント</a>](https://github.com/pingcap/tidb/blob/master/docs/tidb_http_api.md)を参照してください。
+-   `STATUS_ADDRESS` : HTTP APIのサービスアドレス。 tikv-ctl、pd-ctl、または tidb-ctl の一部のコマンドは、この API とこのアドレスを使用する場合があります。このアドレスからさらに多くのクラスター情報を取得することもできます。詳細は[TiDB HTTP API ドキュメント](https://github.com/pingcap/tidb/blob/master/docs/tidb_http_api.md)を参照してください。
 -   `VERSION` : 対応するインスタンスのセマンティック バージョン番号。 MySQL のバージョン番号と互換性を持たせるために、TiDB のバージョンは`${mysql-version}-${tidb-version}`の形式で表示されます。
 -   `GIT_HASH` : インスタンスのバージョンをコンパイルするときの Git コミット ハッシュ。2 つのインスタンスが完全に一貫したバージョンであるかどうかを識別するために使用されます。
 -   `START_TIME` : 対応するインスタンスの開始時刻。

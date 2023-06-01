@@ -7,7 +7,7 @@ summary: Learn to use Reparo.
 
 Reparo は、増分データを回復するために使用される TiDB Binlogツールです。増分データをバックアップするには、TiDB BinlogのDrainer を使用して、 binlogデータを protobuf 形式でファイルに出力します。増分データを復元するには、 Reparoを使用してファイル内のbinlogデータを解析し、そのbinlogをTiDB/MySQL に適用します。
 
-Reparoインストール パッケージ ( `reparo` ) はTiDB Toolkitに含まれています。 TiDB Toolkitをダウンロードするには、 [<a href="/download-ecosystem-tools.md">TiDB ツールをダウンロード</a>](/download-ecosystem-tools.md)を参照してください。
+Reparoインストール パッケージ ( `reparo` ) はTiDB Toolkitに含まれています。 TiDB Toolkitをダウンロードするには、 [TiDB ツールをダウンロード](/download-ecosystem-tools.md)を参照してください。
 
 ## Reparoの使い方 {#reparo-usage}
 

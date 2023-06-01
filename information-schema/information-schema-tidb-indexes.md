@@ -36,7 +36,7 @@ DESC tidb_indexes;
 
 `INDEX_ID`は、TiDB が各インデックスに割り当てる一意の ID です。別のテーブルまたは API から取得した`INDEX_ID`の結合操作を行うために使用できます。
 
-たとえば、 [<a href="/information-schema/information-schema-slow-query.md">`SLOW_QUERY`テーブル</a>](/information-schema/information-schema-slow-query.md)の遅いクエリに関係する`TABLE_ID`と`INDEX_ID`を取得し、次の SQL ステートメントを使用して特定のインデックス情報を取得できます。
+たとえば、 [`SLOW_QUERY`テーブル](/information-schema/information-schema-slow-query.md)の遅いクエリに関係する`TABLE_ID`と`INDEX_ID`を取得し、次の SQL ステートメントを使用して特定のインデックス情報を取得できます。
 
 ```sql
 SELECT
@@ -63,4 +63,4 @@ WHERE
 -   `INDEX_COMMENT` : インデックスのコメント。インデックスの作成時に作成されます。
 -   `INDEX_ID` : インデックス ID。
 -   `IS_VISIBLE` : インデックスが表示されるかどうか。
--   `CLUSTERED` : [<a href="/clustered-indexes.md">クラスター化インデックス</a>](/clustered-indexes.md)かどうか。
+-   `CLUSTERED` : [クラスター化インデックス](/clustered-indexes.md)かどうか。

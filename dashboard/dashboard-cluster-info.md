@@ -13,7 +13,7 @@ summary: View the running status of TiDB, TiKV, PD, TiFlash components in the en
 
 -   TiDB ダッシュボードにログインした後、左側のナビゲーション メニューで**[クラスタ情報]**をクリックします。
 
--   ブラウザで[<a href="http://127.0.0.1:2379/dashboard/#/cluster_info/instance">http://127.0.0.1:2379/dashboard/#/cluster_info/instance</a>](http://127.0.0.1:2379/dashboard/#/cluster_info/instance)にアクセスしてください。 `127.0.0.1:2379`を実際の PD インスタンスのアドレスとポートに置き換えます。
+-   ブラウザで[http://127.0.0.1:2379/dashboard/#/cluster_info/instance](http://127.0.0.1:2379/dashboard/#/cluster_info/instance)にアクセスしてください。 `127.0.0.1:2379`を実際の PD インスタンスのアドレスとポートに置き換えます。
 
 ## インスタンスリスト {#instance-list}
 
@@ -47,7 +47,7 @@ summary: View the running status of TiDB, TiKV, PD, TiFlash components in the en
 > -   TiDB ダッシュボードの`Leaving` 、PD API によって返される`Offline` 、 TiUPの`Pending Offline`は同じステータスを示します。
 > -   テーブル内の一部の列は、インスタンスが起動している場合にのみ表示できます。
 
-インスタンスのステータスは、PD スケジュール情報から取得されます。詳細については、 [<a href="/tidb-scheduling.md#information-collection">情報収集</a>](/tidb-scheduling.md#information-collection)を参照してください。
+インスタンスのステータスは、PD スケジュール情報から取得されます。詳細については、 [情報収集](/tidb-scheduling.md#information-collection)を参照してください。
 
 ## ホストリスト {#host-list}
 

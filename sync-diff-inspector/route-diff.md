@@ -5,9 +5,9 @@ summary: Learn the data check for different database names or table names.
 
 # 異なるスキーマまたはテーブル名を持つテーブルのデータ チェック {#data-check-for-tables-with-different-schema-or-table-names}
 
-[<a href="/dm/dm-overview.md">TiDB データ移行</a>](/dm/dm-overview.md)などのレプリケーション ツールを使用する場合、 `route-rules`を設定すると、ダウンストリームの指定されたテーブルにデータをレプリケートできます。 sync-diff-inspector を使用すると、 `rules`を設定することで、異なるスキーマ名またはテーブル名を持つテーブルを検証できます。
+[TiDB データ移行](/dm/dm-overview.md)などのレプリケーション ツールを使用する場合、 `route-rules`を設定すると、ダウンストリームの指定されたテーブルにデータをレプリケートできます。 sync-diff-inspector を使用すると、 `rules`を設定することで、異なるスキーマ名またはテーブル名を持つテーブルを検証できます。
 
-以下は簡単な構成例です。完全な構成については、 [<a href="/sync-diff-inspector/sync-diff-inspector-overview.md">Sync-diff-inspector ユーザーガイド</a>](/sync-diff-inspector/sync-diff-inspector-overview.md)を参照してください。
+以下は簡単な構成例です。完全な構成については、 [Sync-diff-inspector ユーザーガイド](/sync-diff-inspector/sync-diff-inspector-overview.md)を参照してください。
 
 ```toml
 ######################### Datasource config #########################

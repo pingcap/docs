@@ -75,6 +75,6 @@ MySQL の`Cardinality`列は、インデックス上のさまざまな値の数�
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-show-create-table.md">テーブルの作成を表示</a>](/sql-statements/sql-statement-show-create-table.md)
--   [<a href="/sql-statements/sql-statement-drop-index.md">ドロップインデックス</a>](/sql-statements/sql-statement-drop-index.md)
--   [<a href="/sql-statements/sql-statement-create-index.md">インデックスの作成</a>](/sql-statements/sql-statement-create-index.md)
+-   [テーブルの作成を表示](/sql-statements/sql-statement-show-create-table.md)
+-   [ドロップインデックス](/sql-statements/sql-statement-drop-index.md)
+-   [インデックスの作成](/sql-statements/sql-statement-create-index.md)

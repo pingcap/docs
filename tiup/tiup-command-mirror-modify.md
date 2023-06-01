@@ -4,7 +4,7 @@ title: tiup mirror modify
 
 # tiup mirror modify {#tiup-mirror-modify}
 
-`tiup mirror modify`コマンドは、公開されたコンポーネントを変更するために使用されます。有効なコンポーネント所有者のみが、独自に公開したコンポーネントを変更できます。コンポーネントの公開方法については、 [<a href="/tiup/tiup-command-mirror-publish.md">`publish`コマンド</a>](/tiup/tiup-command-mirror-publish.md)を参照してください。
+`tiup mirror modify`コマンドは、公開されたコンポーネントを変更するために使用されます。有効なコンポーネント所有者のみが、独自に公開したコンポーネントを変更できます。コンポーネントの公開方法については、 [`publish`コマンド](/tiup/tiup-command-mirror-publish.md)を参照してください。
 
 ## 構文 {#syntax}
 
@@ -61,4 +61,4 @@ tiup mirror modify <component>[:version] [flags]
     -   ミラーがリモート ミラーの場合、 TiUP はエラー`Error: The server refused, make sure you have access to this component`を報告します。
     -   ミラーがローカル ミラーの場合、 TiUP はエラー`Error: the signature is not correct`を報告します。
 
-[<a href="/tiup/tiup-command-mirror.md#command-list">&lt;&lt; 前のページに戻る - TiUP Mirror コマンド一覧</a>](/tiup/tiup-command-mirror.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP Mirror コマンド一覧](/tiup/tiup-command-mirror.md#command-list)

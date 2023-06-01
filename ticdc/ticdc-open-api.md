@@ -9,28 +9,28 @@ summary: Learn how to use the OpenAPI interface to manage the cluster status and
 
 > **ノート**
 >
-> TiCDC OpenAPI v1 は非推奨となり、将来削除される予定です。 [<a href="/ticdc/ticdc-open-api-v2.md">TiCDC OpenAPI v2</a>](/ticdc/ticdc-open-api-v2.md)を使用することをお勧めします。
+> TiCDC OpenAPI v1 は非推奨となり、将来削除される予定です。 [TiCDC OpenAPI v2](/ticdc/ticdc-open-api-v2.md)を使用することをお勧めします。
 
-TiCDC は、TiCDC クラスターのクエリと操作のための OpenAPI 機能を提供します。これは、 [<a href="/ticdc/ticdc-manage-changefeed.md">`cdc cli`ツール</a>](/ticdc/ticdc-manage-changefeed.md)の機能に似ています。
+TiCDC は、TiCDC クラスターのクエリと操作のための OpenAPI 機能を提供します。これは、 [`cdc cli`ツール](/ticdc/ticdc-manage-changefeed.md)の機能に似ています。
 
 API を使用して、TiCDC クラスター上で次のメンテナンス操作を実行できます。
 
--   [<a href="#get-the-status-information-of-a-ticdc-node">TiCDC ノードのステータス情報を取得する</a>](#get-the-status-information-of-a-ticdc-node)
--   [<a href="#check-the-health-status-of-a-ticdc-cluster">TiCDC クラスターの健全性ステータスを確認する</a>](#check-the-health-status-of-a-ticdc-cluster)
--   [<a href="#create-a-replication-task">レプリケーションタスクを作成する</a>](#create-a-replication-task)
--   [<a href="#remove-a-replication-task">レプリケーションタスクを削除する</a>](#remove-a-replication-task)
--   [<a href="#update-the-replication-configuration">レプリケーション構成を更新する</a>](#update-the-replication-configuration)
--   [<a href="#query-the-replication-task-list">レプリケーションタスクリストのクエリ</a>](#query-the-replication-task-list)
--   [<a href="#query-a-specific-replication-task">特定のレプリケーションタスクをクエリする</a>](#query-a-specific-replication-task)
--   [<a href="#pause-a-replication-task">レプリケーションタスクを一時停止する</a>](#pause-a-replication-task)
--   [<a href="#resume-a-replication-task">レプリケーションタスクを再開する</a>](#resume-a-replication-task)
--   [<a href="#query-the-replication-subtask-list">レプリケーションサブタスクリストのクエリ</a>](#query-the-replication-subtask-list)
--   [<a href="#query-a-specific-replication-subtask">特定のレプリケーションサブタスクをクエリする</a>](#query-a-specific-replication-subtask)
--   [<a href="#query-the-ticdc-service-process-list">TiCDC サービス プロセス リストのクエリ</a>](#query-the-ticdc-service-process-list)
--   [<a href="#evict-an-owner-node">所有者ノードを削除する</a>](#evict-an-owner-node)
--   [<a href="#manually-trigger-the-load-balancing-of-all-tables-in-a-replication-task">レプリケーション タスク内のすべてのテーブルの負荷分散を手動でトリガーする</a>](#manually-trigger-the-load-balancing-of-all-tables-in-a-replication-task)
--   [<a href="#manually-schedule-a-table-to-another-node">テーブルを別のノードに手動でスケジュールする</a>](#manually-schedule-a-table-to-another-node)
--   [<a href="#dynamically-adjust-the-log-level-of-the-ticdc-server">TiCDCサーバーのログ レベルを動的に調整する</a>](#dynamically-adjust-the-log-level-of-the-ticdc-server)
+-   [TiCDC ノードのステータス情報を取得する](#get-the-status-information-of-a-ticdc-node)
+-   [TiCDC クラスターの健全性ステータスを確認する](#check-the-health-status-of-a-ticdc-cluster)
+-   [レプリケーションタスクを作成する](#create-a-replication-task)
+-   [レプリケーションタスクを削除する](#remove-a-replication-task)
+-   [レプリケーション構成を更新する](#update-the-replication-configuration)
+-   [レプリケーションタスクリストのクエリ](#query-the-replication-task-list)
+-   [特定のレプリケーションタスクをクエリする](#query-a-specific-replication-task)
+-   [レプリケーションタスクを一時停止する](#pause-a-replication-task)
+-   [レプリケーションタスクを再開する](#resume-a-replication-task)
+-   [レプリケーションサブタスクリストのクエリ](#query-the-replication-subtask-list)
+-   [特定のレプリケーションサブタスクをクエリする](#query-a-specific-replication-subtask)
+-   [TiCDC サービス プロセス リストのクエリ](#query-the-ticdc-service-process-list)
+-   [所有者ノードを削除する](#evict-an-owner-node)
+-   [レプリケーション タスク内のすべてのテーブルの負荷分散を手動でトリガーする](#manually-trigger-the-load-balancing-of-all-tables-in-a-replication-task)
+-   [テーブルを別のノードに手動でスケジュールする](#manually-schedule-a-table-to-another-node)
+-   [TiCDCサーバーのログ レベルを動的に調整する](#dynamically-adjust-the-log-level-of-the-ticdc-server)
 
 すべての API のリクエスト本文と戻り値は JSON 形式です。次のセクションでは、API の具体的な使用法について説明します。
 
@@ -117,7 +117,7 @@ curl -X GET http://127.0.0.1:8300/api/v1/health
 
 |パラメータ名 |説明 | | :---------------------- | :---------------------- ------------------------- ---- | | `changefeed_id` | `STRING`タイプ。レプリケーションタスクのID。 (オプション) | | `start_ts` | `UINT64`型。変更フィードの開始 TSO を指定します。 (オプション) | | `target_ts` | `UINT64`型。変更フィードのターゲット TSO を指定します。 (オプション) | | **`sink_uri`** | `STRING`型。レプリケーションタスクの下流アドレス。 (**必須**) | | `force_replicate` | `BOOLEAN`型。一意のインデックスのないテーブルを強制的にレプリケートするかどうかを決定します。 (オプション) | | `ignore_ineligible_table` | `BOOLEAN`タイプ。複製できないテーブルを無視するかどうかを決定します。 (オプション) | | `filter_rules` | `STRING`型配列。テーブルスキーマフィルタリングのルール。 (オプション) | | `ignore_txn_start_ts` | `UINT64`型配列。指定された start_ts のトランザクションを無視します。 (オプション) | | `mounter_worker_num` | `INT`型。マウンターのスレッド番号。 (オプション) | | `sink_config` |シンクの構成パラメータ。 (オプション) |
 
-`changefeed_id` 、 `start_ts` 、 `target_ts` 、 `sink_uri`の意味と形式は、ドキュメント[<a href="/ticdc/ticdc-manage-changefeed.md#create-a-replication-task">`cdc cli`を使用してレプリケーション タスクを作成する</a>](/ticdc/ticdc-manage-changefeed.md#create-a-replication-task)に記載されているものと同じです。これらのパラメータの詳細については、このドキュメントを参照してください。 `sink_uri`で証明書のパスを指定する場合は、対応する証明書を対応する TiCDCサーバーにアップロードしていることを確認してください。
+`changefeed_id` 、 `start_ts` 、 `target_ts` 、 `sink_uri`の意味と形式は、ドキュメント[`cdc cli`を使用してレプリケーション タスクを作成する](/ticdc/ticdc-manage-changefeed.md#create-a-replication-task)に記載されているものと同じです。これらのパラメータの詳細については、このドキュメントを参照してください。 `sink_uri`で証明書のパスを指定する場合は、対応する証明書を対応する TiCDCサーバーにアップロードしていることを確認してください。
 
 上の表の他のパラメータについては、以下でさらに説明します。
 
@@ -125,7 +125,7 @@ curl -X GET http://127.0.0.1:8300/api/v1/health
 
 `ignore_ineligible_table` : このパラメータのデフォルトは`false`です。 `true`として指定すると、TiCDC は複製できないテーブルを無視します。
 
-`filter_rules` : テーブル スキーマ フィルタリングのルール ( `filter_rules = ['foo*.*','bar*.*']`など)。詳細は資料[<a href="/table-filter.md">テーブルフィルター</a>](/table-filter.md)をご参照ください。
+`filter_rules` : テーブル スキーマ フィルタリングのルール ( `filter_rules = ['foo*.*','bar*.*']`など)。詳細は資料[テーブルフィルター](/table-filter.md)をご参照ください。
 
 `ignore_txn_start_ts` : このパラメータを指定した場合、指定された start_ts は無視されます。たとえば、 `ignore-txn-start-ts = [1, 2]` 。
 
@@ -218,7 +218,7 @@ curl -X DELETE http://127.0.0.1:8300/api/v1/changefeeds/test1
 
 |パラメータ名 |説明 | | :---------------------- | :-------------------------- ------------ ---- | | `target_ts` | `UINT64`タイプ。変更フィードのターゲット TSO を指定します。 (オプション) | | `sink_uri` | `STRING`型。レプリケーションタスクの下流アドレス。 (オプション) | | `filter_rules` | `STRING`型配列。テーブルスキーマフィルタリングのルール。 (オプション) | | `ignore_txn_start_ts` | `UINT64`型配列。指定された start_ts のトランザクションを無視します。 (オプション) | | `mounter_worker_num` | `INT`型。マウンターのスレッド番号。 (オプション) | | `sink_config` |シンクの構成パラメータ。 (オプション) |
 
-上記パラメータの意味は[<a href="#create-a-replication-task">レプリケーションタスクを作成する</a>](#create-a-replication-task)項と同様です。詳細については、そのセクションを参照してください。
+上記パラメータの意味は[レプリケーションタスクを作成する](#create-a-replication-task)項と同様です。詳細については、そのセクションを参照してください。
 
 ### 例 {#example}
 
@@ -282,7 +282,7 @@ curl -X GET http://127.0.0.1:8300/api/v1/changefeeds?state=normal
 上記で返された結果のフィールドは次のように説明されます。
 
 -   id: レプリケーションタスクのID。
--   state: レプリケーションタスクの現在の[<a href="/ticdc/ticdc-changefeed-overview.md#changefeed-state-transfer">州</a>](/ticdc/ticdc-changefeed-overview.md#changefeed-state-transfer) 。
+-   state: レプリケーションタスクの現在の[州](/ticdc/ticdc-changefeed-overview.md#changefeed-state-transfer) 。
 -   checkpoint_tso: レプリケーション タスクの現在のチェックポイントの TSO 表現。
 -   checkpoint_time: レプリケーション タスクの現在のチェックポイントの形式化された時刻表現。
 -   error: レプリケーションタスクのエラー情報。
@@ -586,7 +586,7 @@ curl -X POST -H "'Content-type':'application/json'" http://127.0.0.1:8300/api/v1
 | :---------- | :--------- |
 | `log_level` | 設定するログレベル。 |
 
-`log_level` 「debug」、「info」、「warn」、「error」、「dpanic」、「panic」、および「fatal」の[<a href="https://godoc.org/go.uber.org/zap#UnmarshalText">zap によって提供されるログ レベル</a>](https://godoc.org/go.uber.org/zap#UnmarshalText)をサポートします。
+`log_level` 「debug」、「info」、「warn」、「error」、「dpanic」、「panic」、および「fatal」の[zap によって提供されるログ レベル](https://godoc.org/go.uber.org/zap#UnmarshalText)をサポートします。
 
 ### 例 {#example}
 

@@ -25,7 +25,7 @@ TiDB Cloud は、TiDB のサービスとしてのフルマネージド クラウ
 
 ### TiDB Cloud はMySQL と互換性がありますか? {#is-tidb-cloud-compatible-with-mysql}
 
-現在、 TiDB Cloud は、トリガー、ストアド プロシージャ、およびユーザー定義関数を除く、 MySQL 5.7構文の大部分をサポートしています。詳細については、 [<a href="https://docs.pingcap.com/tidb/stable/mysql-compatibility">MySQLとの互換性</a>](https://docs.pingcap.com/tidb/stable/mysql-compatibility)を参照してください。
+現在、 TiDB Cloud は、トリガー、ストアド プロシージャ、およびユーザー定義関数を除く、 MySQL 5.7構文の大部分をサポートしています。詳細については、 [MySQLとの互換性](https://docs.pingcap.com/tidb/stable/mysql-compatibility)を参照してください。
 
 ### TiDB Cloudを操作するにはどのようなプログラミング言語を使用できますか? {#what-programming-languages-can-i-use-to-work-with-tidb-cloud}
 
@@ -41,23 +41,23 @@ TiDB Cloudは現在、アマゾン ウェブ サービスと Google Cloud で利
 
 ### TiDB Cloudではどのバージョンの TiDB がサポートされていますか? {#what-versions-of-tidb-are-supported-on-tidb-cloud}
 
-現在サポートされている TiDB のバージョンについては、 [<a href="/tidb-cloud/tidb-cloud-release-notes.md">TiDB Cloudリリースノート</a>](/tidb-cloud/tidb-cloud-release-notes.md)を参照してください。
+現在サポートされている TiDB のバージョンについては、 [TiDB Cloudリリースノート](/tidb-cloud/tidb-cloud-release-notes.md)を参照してください。
 
 ### TiDB またはTiDB Cloud を本番で使用しているのはどの企業ですか? {#what-companies-are-using-tidb-or-tidb-cloud-in-production}
 
-TiDB は、金融サービス、ゲーム、電子商取引など、さまざまな業界の 1,500 社以上のグローバル企業から信頼されています。当社のユーザーには、Square (米国)、Shopee (シンガポール)、および China UnionPay (中国) が含まれます。具体的な詳細については[<a href="https://en.pingcap.com/customers/">ケーススタディ</a>](https://en.pingcap.com/customers/)参照してください。
+TiDB は、金融サービス、ゲーム、電子商取引など、さまざまな業界の 1,500 社以上のグローバル企業から信頼されています。当社のユーザーには、Square (米国)、Shopee (シンガポール)、および China UnionPay (中国) が含まれます。具体的な詳細については[ケーススタディ](https://en.pingcap.com/customers/)参照してください。
 
 ### SLA はどのようなものですか? {#what-does-the-sla-look-like}
 
-TiDB Cloudは99.99% の SLA を提供します。詳細は[<a href="https://en.pingcap.com/legal/service-level-agreement-for-tidb-cloud-services/">TiDB Cloudサービスのサービス レベル契約</a>](https://en.pingcap.com/legal/service-level-agreement-for-tidb-cloud-services/)を参照してください。
+TiDB Cloudは99.99% の SLA を提供します。詳細は[TiDB Cloudサービスのサービス レベル契約](https://en.pingcap.com/legal/service-level-agreement-for-tidb-cloud-services/)を参照してください。
 
 ### TiDB Cloudについてさらに詳しく知るにはどうすればよいですか? {#how-can-i-learn-more-about-tidb-cloud}
 
 TiDB Cloudについて学ぶ最善の方法は、ステップバイステップのチュートリアルに従うことです。開始するには、次のトピックを確認してください。
 
--   [<a href="/tidb-cloud/tidb-cloud-intro.md">TiDB Cloudの紹介</a>](/tidb-cloud/tidb-cloud-intro.md)
--   [<a href="/tidb-cloud/tidb-cloud-quickstart.md">始めましょう</a>](/tidb-cloud/tidb-cloud-quickstart.md)
--   [<a href="/tidb-cloud/create-tidb-cluster.md">TiDBクラスタを作成する</a>](/tidb-cloud/create-tidb-cluster.md)
+-   [TiDB Cloudの紹介](/tidb-cloud/tidb-cloud-intro.md)
+-   [始めましょう](/tidb-cloud/tidb-cloud-quickstart.md)
+-   [TiDBクラスタを作成する](/tidb-cloud/create-tidb-cluster.md)
 
 ## アーキテクチャに関するよくある質問 {#architecture-faqs}
 
@@ -85,19 +85,19 @@ TiDB は、 Raftコンセンサス アルゴリズムを使用して、リージ
 
 TiDB は、 Raftコンセンサス アルゴリズムを使用して、データの可用性が高く、 Raftグループ内のstorage全体に安全に複製されることを保証します。データは TiKV ノード間で冗長的にコピーされ、異なるアベイラビリティーゾーンに配置されて、マシンまたはデータセンターの障害から保護されます。 TiDB は自動フェイルオーバーにより、サービスが常に稼働していることを保証します。
 
-Software as a Service (SaaS) プロバイダーとして、当社はデータのセキュリティを真剣に考えています。当社は、 [<a href="https://en.pingcap.com/press-release/pingcap-successfully-completes-soc-2-type-1-examination-for-tidb-cloud/">Service Organization Control (SOC) 2 タイプ 1 準拠</a>](https://en.pingcap.com/press-release/pingcap-successfully-completes-soc-2-type-1-examination-for-tidb-cloud/)に要求される厳格な情報セキュリティポリシーと手順を確立しています。これにより、データの安全性、可用性、機密性が確保されます。
+Software as a Service (SaaS) プロバイダーとして、当社はデータのセキュリティを真剣に考えています。当社は、 [Service Organization Control (SOC) 2 タイプ 1 準拠](https://en.pingcap.com/press-release/pingcap-successfully-completes-soc-2-type-1-examination-for-tidb-cloud/)に要求される厳格な情報セキュリティポリシーと手順を確立しています。これにより、データの安全性、可用性、機密性が確保されます。
 
 ## 移行に関するFAQ {#migration-faq}
 
 ### 別の RDBMS からTiDB Cloudへの簡単な移行パスはありますか? {#is-there-an-easy-migration-path-from-another-rdbms-to-tidb-cloud}
 
-TiDB は MySQL と高い互換性があります。データがセルフホスト型 MySQL インスタンスからのものであっても、パブリック クラウドによって提供される RDS サービスからのものであっても、MySQL 互換データベースから TiDB にスムーズにデータを移行できます。詳細については、 [<a href="/tidb-cloud/migrate-data-into-tidb.md">MySQL 互換データベースからのデータの移行</a>](/tidb-cloud/migrate-data-into-tidb.md)を参照してください。
+TiDB は MySQL と高い互換性があります。データがセルフホスト型 MySQL インスタンスからのものであっても、パブリック クラウドによって提供される RDS サービスからのものであっても、MySQL 互換データベースから TiDB にスムーズにデータを移行できます。詳細については、 [MySQL 互換データベースからのデータの移行](/tidb-cloud/migrate-data-into-tidb.md)を参照してください。
 
 ## バックアップと復元に関するFAQ {#backup-and-restore-faq}
 
 ### TiDB Cloud は増分バックアップをサポートしていますか? {#does-tidb-cloud-support-incremental-backups}
 
-いいえ。クラスターのバックアップ保持期間内の任意の時点にデータを復元する必要がある場合は、 [<a href="/tidb-cloud/backup-and-restore.md#automatic-backup">PITR (ポイントインタイムリカバリ) を使用する</a>](/tidb-cloud/backup-and-restore.md#automatic-backup)を実行できます。
+いいえ。クラスターのバックアップ保持期間内の任意の時点にデータを復元する必要がある場合は、 [PITR (ポイントインタイムリカバリ) を使用する](/tidb-cloud/backup-and-restore.md#automatic-backup)を実行できます。
 
 ## HTAPに関するよくある質問 {#htap-faqs}
 
@@ -107,11 +107,11 @@ TiDB は MySQL と高い互換性があります。データがセルフホス�
 
 ハイブリッド トランザクション分析処理 (HTAP) データベースとして、 TiDB Cloudは、OLTP (TiKV) ストアと OLAP ( TiFlash ) の間でデータを確実に自動的に複製することにより、システムアーキテクチャを簡素化し、メンテナンスの複雑さを軽減し、トランザクション データのリアルタイム分析をサポートします。店。典型的な HTAP の使用例には、ユーザーのパーソナライゼーション、AI 推奨、不正検出、ビジネス インテリジェンス、リアルタイム レポートなどがあります。
 
-HTAP シナリオの詳細については、 [<a href="https://pingcap.com/blog/how-we-build-an-htap-database-that-simplifies-your-data-platform">データ プラットフォームを簡素化する HTAP データベースの構築方法</a>](https://pingcap.com/blog/how-we-build-an-htap-database-that-simplifies-your-data-platform)を参照してください。
+HTAP シナリオの詳細については、 [データ プラットフォームを簡素化する HTAP データベースの構築方法](https://pingcap.com/blog/how-we-build-an-htap-database-that-simplifies-your-data-platform)を参照してください。
 
 ### データをTiFlashに直接インポートできますか? {#can-i-import-my-data-directly-to-tiflash}
 
-いいえ。データをTiDB Cloudにインポートすると、データは TiKV にインポートされます。インポートが完了したら、SQL ステートメントを使用して、どのテーブルをTiFlashにレプリケートするかを指定できます。次に、TiDB は指定されたテーブルのレプリカをTiFlashに作成します。詳細については、 [<a href="/tiflash/create-tiflash-replicas.md">TiFlashレプリカの作成</a>](/tiflash/create-tiflash-replicas.md)を参照してください。
+いいえ。データをTiDB Cloudにインポートすると、データは TiKV にインポートされます。インポートが完了したら、SQL ステートメントを使用して、どのテーブルをTiFlashにレプリケートするかを指定できます。次に、TiDB は指定されたテーブルのレプリカをTiFlashに作成します。詳細については、 [TiFlashレプリカの作成](/tiflash/create-tiflash-replicas.md)を参照してください。
 
 ### TiFlashデータを CSV 形式でエクスポートできますか? {#can-i-export-tiflash-data-in-the-csv-format}
 
@@ -130,7 +130,7 @@ TiDB Cloudでは、保存されているすべてのデータが暗号化され�
 
 TiDB Cloudは、データベース データやバックアップ データなどの保存中のビジネス データに対して、デフォルトでstorageボリューム暗号化を使用します。 TiDB Cloud、転送中のデータに対して TLS 暗号化が必要であり、TiDB、PD、TiKV、 TiFlash間のデータベース クラスター内のデータに対してコンポーネント レベルの TLS 暗号化も必要です。
 
-TiDB Cloudでのビジネス データの暗号化に関する詳細情報を入手するには、 [<a href="/tidb-cloud/tidb-cloud-support.md">TiDB Cloudのサポート</a>](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
+TiDB Cloudでのビジネス データの暗号化に関する詳細情報を入手するには、 [TiDB Cloudのサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
 ### TiDB Cloudはどのバージョンの TLS をサポートしていますか? {#what-versions-of-tls-does-tidb-cloud-support}
 
@@ -171,16 +171,16 @@ Serverless Tierクラスターの場合、クラスターに接続する手順�
 1.  データベース ユーザーとログイン資格情報を設定します。
 2.  SQL クライアントを選択し、 TiDB CloudUI に表示される自動生成された接続文字列を取得し、その文字列を使用して SQL クライアント経由でクラスターに接続します。
 
-詳細については、 [<a href="/tidb-cloud/connect-to-tidb-cluster.md">TiDBクラスタに接続する</a>](/tidb-cloud/connect-to-tidb-cluster.md)を参照してください。
+詳細については、 [TiDBクラスタに接続する](/tidb-cloud/connect-to-tidb-cluster.md)を参照してください。
 
 ### データベース クラスターの私のビジネス データにアクセスできるのは誰ですか? {#who-has-access-to-my-business-data-of-a-database-cluster}
 
 自分の TiDB クラスター内のテーブル データにアクセスできるのは自分だけです。 TiDB Cloudサポートは、TiDB クラスター内のデータに直接アクセスできません。唯一の例外は、製品を改善し、クラスター操作の問題を解決する必要がある場合、内部で一時的な許可を与えた後、 TiDB Cloudサポートがクラスター操作データにアクセスできることです。すべての認可およびアクセス記録は、PCI-DSS、SOC2、ISO27701 などのサードパーティ監査組織によって毎年監査されます。
 
-TiDB Cloudの運用データについては[<a href="https://www.pingcap.com/privacy-policy/">TiDB Cloudプライバシー ポリシー</a>](https://www.pingcap.com/privacy-policy/)と[<a href="https://www.pingcap.com/legal/data-processing-agreement-for-tidb-cloud-services/">TiDB Cloudデータ処理契約</a>](https://www.pingcap.com/legal/data-processing-agreement-for-tidb-cloud-services/)で説明します。
+TiDB Cloudの運用データについては[TiDB Cloudデータ処理契約](https://www.pingcap.com/legal/data-processing-agreement-for-tidb-cloud-services/)で説明します。
 
 ## サポートに関するFAQ {#support-faq}
 
 ### 顧客はどのようなサポートを受けられますか? {#what-support-is-available-for-customers}
 
-TiDB Cloud は、金融サービス、電子商取引、エンタープライズ アプリケーション、ゲームなどの業界にわたる 1500 以上のグローバル企業のミッション クリティカルなユースケースを実行してきた TiDB と同じチームによってサポートされています。 TiDB Cloud は、各ユーザーに無料の基本サポート プランを提供しており、拡張サービスの有料プランにアップグレードすることができます。詳細については、 [<a href="/tidb-cloud/tidb-cloud-support.md">TiDB Cloudのサポート</a>](/tidb-cloud/tidb-cloud-support.md)を参照してください。
+TiDB Cloud は、金融サービス、電子商取引、エンタープライズ アプリケーション、ゲームなどの業界にわたる 1500 以上のグローバル企業のミッション クリティカルなユースケースを実行してきた TiDB と同じチームによってサポートされています。 TiDB Cloud は、各ユーザーに無料の基本サポート プランを提供しており、拡張サービスの有料プランにアップグレードすることができます。詳細については、 [TiDB Cloudのサポート](/tidb-cloud/tidb-cloud-support.md)を参照してください。

@@ -5,7 +5,7 @@ summary: Learn how to upgrade TiDB Binlog to the latest cluster version.
 
 # TiDBBinlogをアップグレードする {#upgrade-tidb-binlog}
 
-このドキュメントでは、手動でデプロイされた TiDB Binlogを最新の[<a href="/tidb-binlog/tidb-binlog-overview.md">集まる</a>](/tidb-binlog/tidb-binlog-overview.md)バージョンにアップグレードする方法を紹介します。 TiDB Binlog を以前の互換性のないバージョン (Kafka/ローカル バージョン) から最新バージョンにアップグレードする方法に関するセクションもあります。
+このドキュメントでは、手動でデプロイされた TiDB Binlogを最新の[集まる](/tidb-binlog/tidb-binlog-overview.md)バージョンにアップグレードする方法を紹介します。 TiDB Binlog を以前の互換性のないバージョン (Kafka/ローカル バージョン) から最新バージョンにアップグレードする方法に関するセクションもあります。
 
 ## 手動でデプロイされた TiDB Binlogをアップグレードする {#upgrade-tidb-binlog-deployed-manually}
 
@@ -41,7 +41,7 @@ TiDB Binlogバージョンと TiDB バージョンの対応関係を次の表に
 
 > **ノート：**
 >
-> 完全なデータのインポートが許容される場合は、古いバージョンを放棄して、 [<a href="/tidb-binlog/deploy-tidb-binlog.md">TiDBBinlogクラスタの展開</a>](/tidb-binlog/deploy-tidb-binlog.md)の TiDB Binlogをデプロイできます。
+> 完全なデータのインポートが許容される場合は、古いバージョンを放棄して、 [TiDBBinlogクラスタの展開](/tidb-binlog/deploy-tidb-binlog.md)の TiDB Binlogをデプロイできます。
 
 元のチェックポイントからレプリケーションを再開する場合は、次の手順を実行して TiDB Binlogをアップグレードします。
 

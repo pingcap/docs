@@ -71,7 +71,7 @@ set global tidb_prepared_plan_cache_size=1000;
 
 #### HAProxy 構成 - haproxy.cfg {#haproxy-configuration-haproxy-cfg}
 
-TiDB で HAProxy を使用する方法の詳細については、 [<a href="/best-practices/haproxy-best-practices.md">TiDB で HAProxy を使用するためのベスト プラクティス</a>](/best-practices/haproxy-best-practices.md)を参照してください。
+TiDB で HAProxy を使用する方法の詳細については、 [TiDB で HAProxy を使用するためのベスト プラクティス](/best-practices/haproxy-best-practices.md)を参照してください。
 
 {{< copyable "" >}}
 

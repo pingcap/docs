@@ -88,8 +88,8 @@ WITH RECURSIVE cte(a) AS (SELECT 1 UNION SELECT a+1 FROM cte WHERE a < 5) SELECT
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-select.md">選択する</a>](/sql-statements/sql-statement-select.md)
--   [<a href="/sql-statements/sql-statement-insert.md">入れる</a>](/sql-statements/sql-statement-insert.md)
--   [<a href="/sql-statements/sql-statement-delete.md">消去</a>](/sql-statements/sql-statement-delete.md)
--   [<a href="/sql-statements/sql-statement-update.md">アップデート</a>](/sql-statements/sql-statement-update.md)
--   [<a href="/sql-statements/sql-statement-replace.md">交換</a>](/sql-statements/sql-statement-replace.md)
+-   [選択する](/sql-statements/sql-statement-select.md)
+-   [入れる](/sql-statements/sql-statement-insert.md)
+-   [消去](/sql-statements/sql-statement-delete.md)
+-   [アップデート](/sql-statements/sql-statement-update.md)
+-   [交換](/sql-statements/sql-statement-replace.md)

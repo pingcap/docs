@@ -243,5 +243,5 @@ Query OK, 0 rows affected (0.02 sec)
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-create-view.md">ビューの作成</a>](/sql-statements/sql-statement-create-view.md)
--   [<a href="/sql-statements/sql-statement-drop-view.md">ドロップビュー</a>](/sql-statements/sql-statement-drop-view.md)
+-   [ビューの作成](/sql-statements/sql-statement-create-view.md)
+-   [ドロップビュー](/sql-statements/sql-statement-drop-view.md)

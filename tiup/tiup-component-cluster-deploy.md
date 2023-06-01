@@ -14,7 +14,7 @@ tiup cluster deploy <cluster-name> <version> <topology.yaml> [flags]
 
 -   `<cluster-name>` : 新しいクラスターの名前。既存のクラスター名と同じにすることはできません。
 -   `<version>` : デプロイする TiDB クラスターのバージョン番号`v7.1.0`など)。
--   `<topology.yaml>` : 準備された[<a href="/tiup/tiup-cluster-topology-reference.md">トポロジファイル</a>](/tiup/tiup-cluster-topology-reference.md) 。
+-   `<topology.yaml>` : 準備された[トポロジファイル](/tiup/tiup-cluster-topology-reference.md) 。
 
 ## オプション {#options}
 
@@ -45,7 +45,7 @@ tiup cluster deploy <cluster-name> <version> <topology.yaml> [flags]
 ### --no-labels {#no-labels}
 
 -   このオプションは、ラベル チェックをスキップするために使用されます。
--   2 つ以上の TiKV ノードが同じ物理マシンにデプロイされている場合、リスクが存在します。PD はクラスター トポロジを学習できないため、PD は 1 つの物理マシン上の異なる TiKV ノードにリージョンの複数のレプリカをスケジュールする可能性があり、これにより、この物理マシンは単一になります。点。このリスクを回避するには、ラベルを使用して、同じリージョンを同じマシンにスケジュールしないよう PD に指示できます。ラベルの構成については[<a href="/schedule-replicas-by-topology-labels.md">トポロジ ラベルごとにレプリカをスケジュールする</a>](/schedule-replicas-by-topology-labels.md)を参照してください。
+-   2 つ以上の TiKV ノードが同じ物理マシンにデプロイされている場合、リスクが存在します。PD はクラスター トポロジを学習できないため、PD は 1 つの物理マシン上の異なる TiKV ノードにリージョンの複数のレプリカをスケジュールする可能性があり、これにより、この物理マシンは単一になります。点。このリスクを回避するには、ラベルを使用して、同じリージョンを同じマシンにスケジュールしないよう PD に指示できます。ラベルの構成については[トポロジ ラベルごとにレプリカをスケジュールする](/schedule-replicas-by-topology-labels.md)を参照してください。
 -   テスト環境では、このリスクが重要になる可能性があるため、 `--no-labels`使用してチェックをスキップできます。
 -   データ型: `BOOLEAN`
 -   このオプションはデフォルトでは無効になっており、デフォルト値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加して、値`true`渡すか、値を渡さないことができます。
@@ -66,4 +66,4 @@ tiup cluster deploy <cluster-name> <version> <topology.yaml> [flags]
 
 デプロイメントログ。
 
-[<a href="/tiup/tiup-component-cluster.md#command-list">&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト</a>](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト](/tiup/tiup-component-cluster.md#command-list)

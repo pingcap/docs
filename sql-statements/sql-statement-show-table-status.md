@@ -5,7 +5,7 @@ summary: An overview of the usage of SHOW TABLE STATUS for the TiDB database.
 
 # テーブルステータスを表示 {#show-table-status}
 
-このステートメントは、TiDB 内のテーブルに関するさまざまな統計を示します。統計が古いと思われる場合は、 [<a href="/sql-statements/sql-statement-analyze-table.md">`ANALYZE TABLE`</a>](/sql-statements/sql-statement-analyze-table.md)を実行することをお勧めします。
+このステートメントは、TiDB 内のテーブルに関するさまざまな統計を示します。統計が古いと思われる場合は、 [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)を実行することをお勧めします。
 
 ## あらすじ {#synopsis}
 
@@ -81,11 +81,11 @@ Max_data_length: 0
 
 ## MySQLの互換性 {#mysql-compatibility}
 
-このステートメントは、MySQL と完全な互換性があると理解されています。 GitHub では互換性の違いは[<a href="https://github.com/pingcap/tidb/issues/new/choose">問題を通じて報告されました</a>](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
+このステートメントは、MySQL と完全な互換性があると理解されています。 GitHub では互換性の違いは[問題を通じて報告されました](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-show-tables.md">テーブルを表示</a>](/sql-statements/sql-statement-show-tables.md)
--   [<a href="/sql-statements/sql-statement-create-table.md">テーブルの作成</a>](/sql-statements/sql-statement-create-table.md)
--   [<a href="/sql-statements/sql-statement-drop-table.md">ドロップテーブル</a>](/sql-statements/sql-statement-drop-table.md)
--   [<a href="/sql-statements/sql-statement-show-create-table.md">テーブルの作成を表示</a>](/sql-statements/sql-statement-show-create-table.md)
+-   [テーブルを表示](/sql-statements/sql-statement-show-tables.md)
+-   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
+-   [ドロップテーブル](/sql-statements/sql-statement-drop-table.md)
+-   [テーブルの作成を表示](/sql-statements/sql-statement-show-create-table.md)

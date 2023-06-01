@@ -5,7 +5,7 @@ summary: Learn how to read historical data using the `AS OF TIMESTAMP` statement
 
 # <code>AS OF TIMESTAMP</code>句を使用した履歴データの読み取り {#read-historical-data-using-the-code-as-of-timestamp-code-clause}
 
-このドキュメントでは、 `AS OF TIMESTAMP`句を使用して[<a href="/stale-read.md">ステイル読み取り</a>](/stale-read.md)機能を実行し、TiDB で履歴データを読み取る方法について説明します。これには、履歴データを保存するための具体的な使用例や戦略も含まれます。
+このドキュメントでは、 `AS OF TIMESTAMP`句を使用して[ステイル読み取り](/stale-read.md)機能を実行し、TiDB で履歴データを読み取る方法について説明します。これには、履歴データを保存するための具体的な使用例や戦略も含まれます。
 
 TiDB は、特別なクライアントやドライバーを必要とせず、標準 SQL インターフェイス ( `AS OF TIMESTAMP` SQL 句) を介した履歴データの読み取りをサポートします。データが更新または削除された後、この SQL インターフェイスを使用して、更新または削除前の履歴データを読み取ることができます。
 
@@ -17,9 +17,9 @@ TiDB は、特別なクライアントやドライバーを必要とせず、標
 
 `AS OF TIMESTAMP`句は次の 3 つの方法で使用できます。
 
--   [<a href="/sql-statements/sql-statement-select.md">`SELECT ... FROM ... AS OF TIMESTAMP`</a>](/sql-statements/sql-statement-select.md)
--   [<a href="/sql-statements/sql-statement-start-transaction.md">`START TRANSACTION READ ONLY AS OF TIMESTAMP`</a>](/sql-statements/sql-statement-start-transaction.md)
--   [<a href="/sql-statements/sql-statement-set-transaction.md">`SET TRANSACTION READ ONLY AS OF TIMESTAMP`</a>](/sql-statements/sql-statement-set-transaction.md)
+-   [`SELECT ... FROM ... AS OF TIMESTAMP`](/sql-statements/sql-statement-select.md)
+-   [`START TRANSACTION READ ONLY AS OF TIMESTAMP`](/sql-statements/sql-statement-start-transaction.md)
+-   [`SET TRANSACTION READ ONLY AS OF TIMESTAMP`](/sql-statements/sql-statement-set-transaction.md)
 
 正確な時点を指定する場合は、日時値を設定するか、 `AS OF TIMESTAMP`句で時刻関数を使用します。日時の形式は「2016-10-08 16:45:26.999」のようなもので、時間の最小単位はミリ秒ですが、ほとんどの場合、「2016」のように日時を指定するには時間単位の秒で十分です。 -10-08 16:45:26」。 `NOW(3)`関数を使用して、現在時刻をミリ秒単位で取得することもできます。数秒前のデータを読みたい場合は、 `NOW() - INTERVAL 10 SECOND`などの式を使用することを**お勧めし**ます。
 
@@ -38,7 +38,7 @@ TiDB は、特別なクライアントやドライバーを必要とせず、標
 >
 > ステイル読み取りを使用する場合は、TiDB ノードおよび PD ノードに NTP サービスをデプロイする必要があります。これにより、TiDB によって使用される指定されたタイムスタンプが、最新の TSO 割り当て進行状況よりも進んでいる (タイムスタンプが数秒進んでいるなど)、または GC セーフ ポイントのタイムスタンプよりも遅いという状況が回避されます。指定されたタイムスタンプがサービスの範囲を超える場合、TiDB はエラーを返します。
 >
-> レイテンシーを短縮し、 ステイル読み取りデータの適時性を向上させるために、TiKV `advance-ts-interval`構成項目を変更できます。詳細は[<a href="/stale-read.md#reduce-stale-read-latency">ステイル読み取りレイテンシーを削減する</a>](/stale-read.md#reduce-stale-read-latency)参照してください。
+> レイテンシーを短縮し、 ステイル読み取りデータの適時性を向上させるために、TiKV `advance-ts-interval`構成項目を変更できます。詳細は[ステイル読み取りレイテンシーを削減する](/stale-read.md#reduce-stale-read-latency)参照してください。
 
 ## 使用例 {#usage-examples}
 
@@ -125,7 +125,7 @@ select * from t;
 
 ### <code>SELECT</code>ステートメントを使用して履歴データを読み取る {#read-historical-data-using-the-code-select-code-statement}
 
-[<a href="/sql-statements/sql-statement-select.md">`SELECT ... FROM ... AS OF TIMESTAMP`</a>](/sql-statements/sql-statement-select.md)ステートメントを使用すると、過去のある時点からデータを読み取ることができます。
+[`SELECT ... FROM ... AS OF TIMESTAMP`](/sql-statements/sql-statement-select.md)ステートメントを使用すると、過去のある時点からデータを読み取ることができます。
 
 ```sql
 select * from t as of timestamp '2021-05-26 16:45:26';
@@ -148,7 +148,7 @@ select * from t as of timestamp '2021-05-26 16:45:26';
 
 ### <code>START TRANSACTION READ ONLY AS OF TIMESTAMP</code>ステートメントを使用して履歴データを読み取る {#read-historical-data-using-the-code-start-transaction-read-only-as-of-timestamp-code-statement}
 
-[<a href="/sql-statements/sql-statement-start-transaction.md">`START TRANSACTION READ ONLY AS OF TIMESTAMP`</a>](/sql-statements/sql-statement-start-transaction.md)ステートメントを使用すると、過去の時点に基づいて読み取り専用トランザクションを開始できます。トランザクションは、指定された時点の履歴データを読み取ります。
+[`START TRANSACTION READ ONLY AS OF TIMESTAMP`](/sql-statements/sql-statement-start-transaction.md)ステートメントを使用すると、過去の時点に基づいて読み取り専用トランザクションを開始できます。トランザクションは、指定された時点の履歴データを読み取ります。
 
 ```sql
 start transaction read only as of timestamp '2021-05-26 16:45:26';
@@ -204,7 +204,7 @@ select * from t;
 
 ### <code>SET TRANSACTION READ ONLY AS OF TIMESTAMP</code>ステートメントを使用して履歴データを読み取る {#read-historical-data-using-the-code-set-transaction-read-only-as-of-timestamp-code-statement}
 
-[<a href="/sql-statements/sql-statement-set-transaction.md">`SET TRANSACTION READ ONLY AS OF TIMESTAMP`</a>](/sql-statements/sql-statement-set-transaction.md)ステートメントを使用すると、過去の指定された時点に基づいて次のトランザクションを読み取り専用トランザクションとして設定できます。トランザクションは、指定された時点の履歴データを読み取ります。
+[`SET TRANSACTION READ ONLY AS OF TIMESTAMP`](/sql-statements/sql-statement-set-transaction.md)ステートメントを使用すると、過去の指定された時点に基づいて次のトランザクションを読み取り専用トランザクションとして設定できます。トランザクションは、指定された時点の履歴データを読み取ります。
 
 ```sql
 set transaction read only as of timestamp '2021-05-26 16:45:26';

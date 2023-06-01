@@ -5,7 +5,7 @@ summary: Learn the deployment topology of TiDB Binlog based on the minimal TiDB 
 
 # TiDBBinlog展開トポロジ {#tidb-binlog-deployment-topology}
 
-このドキュメントでは、最小の TiDB トポロジに基づいた[<a href="/tidb-binlog/tidb-binlog-overview.md">TiDBBinlog</a>](/tidb-binlog/tidb-binlog-overview.md)の展開トポロジについて説明します。
+このドキュメントでは、最小の TiDB トポロジに基づいた[TiDBBinlog](/tidb-binlog/tidb-binlog-overview.md)の展開トポロジについて説明します。
 
 TiDB Binlog は、増分データをレプリケートするために広く使用されているコンポーネントです。ほぼリアルタイムのバックアップとレプリケーションを提供します。
 
@@ -21,11 +21,11 @@ TiDB Binlog は、増分データをレプリケートするために広く使�
 
 ### トポロジテンプレート {#topology-templates}
 
--   [<a href="https://github.com/pingcap/docs/blob/master/config-templates/simple-tidb-binlog.yaml">TiDB Binlogトポロジの単純なテンプレート (ダウンストリーム タイプとして`mysql`を使用)</a>](https://github.com/pingcap/docs/blob/master/config-templates/simple-tidb-binlog.yaml)
--   [<a href="https://github.com/pingcap/docs/blob/master/config-templates/simple-file-binlog.yaml">TiDB Binlogトポロジの単純なテンプレート (ダウンストリーム タイプとして`file`を使用)</a>](https://github.com/pingcap/docs/blob/master/config-templates/simple-file-binlog.yaml)
--   [<a href="https://github.com/pingcap/docs/blob/master/config-templates/complex-tidb-binlog.yaml">TiDB Binlogトポロジの複雑なテンプレート</a>](https://github.com/pingcap/docs/blob/master/config-templates/complex-tidb-binlog.yaml)
+-   [TiDB Binlogトポロジの単純なテンプレート (ダウンストリーム タイプとして`mysql`を使用)](https://github.com/pingcap/docs/blob/master/config-templates/simple-tidb-binlog.yaml)
+-   [TiDB Binlogトポロジの単純なテンプレート (ダウンストリーム タイプとして`file`を使用)](https://github.com/pingcap/docs/blob/master/config-templates/simple-file-binlog.yaml)
+-   [TiDB Binlogトポロジの複雑なテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/complex-tidb-binlog.yaml)
 
-上記の TiDB クラスター トポロジー ファイルの構成項目の詳細な説明については、 [<a href="/tiup/tiup-cluster-topology-reference.md">TiUPを使用して TiDB を展開するためのトポロジコンフィグレーションファイル</a>](/tiup/tiup-cluster-topology-reference.md)を参照してください。
+上記の TiDB クラスター トポロジー ファイルの構成項目の詳細な説明については、 [TiUPを使用して TiDB を展開するためのトポロジコンフィグレーションファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
 
 ### 主要パラメータ {#key-parameters}
 
@@ -48,7 +48,7 @@ TiDB Binlog は、増分データをレプリケートするために広く使�
 
 -   `drainer_servers.config.syncer.to`
 
-    TiDB Binlogのダウンストリーム構成。さまざまな`db-type`に応じて、この構成アイテムを使用して、ダウンストリーム データベースの接続パラメーター、Kafka の接続パラメーター、およびファイルの保存パスを構成できます。詳細は[<a href="/tidb-binlog/tidb-binlog-configuration-file.md#syncerto">TiDBBinlogコンフィグレーションファイル</a>](/tidb-binlog/tidb-binlog-configuration-file.md#syncerto)を参照してください。
+    TiDB Binlogのダウンストリーム構成。さまざまな`db-type`に応じて、この構成アイテムを使用して、ダウンストリーム データベースの接続パラメーター、Kafka の接続パラメーター、およびファイルの保存パスを構成できます。詳細は[TiDBBinlogコンフィグレーションファイル](/tidb-binlog/tidb-binlog-configuration-file.md#syncerto)を参照してください。
 
 > **ノート：**
 >

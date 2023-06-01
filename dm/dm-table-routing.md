@@ -10,7 +10,7 @@ TiDB Data Migration (DM) を使用してデータを移行する場合、アッ�
 > **ノート：**
 >
 > -   1 つのテーブルに対して複数の異なるルーティング ルールを構成することはサポートされていません。
-> -   スキーマの一致ルールは個別に構成する必要があります。これは、セクション[<a href="#configure-table-routing">テーブルルーティングを構成する</a>](#configure-table-routing)の`rule-2`に示すように、 `CREATE/DROP SCHEMA xx`の移行に使用されます。
+> -   スキーマの一致ルールは個別に構成する必要があります。これは、セクション[テーブルルーティングを構成する](#configure-table-routing)の`rule-2`に示すように、 `CREATE/DROP SCHEMA xx`の移行に使用されます。
 
 ## テーブルルーティングを構成する {#configure-table-routing}
 
@@ -40,20 +40,20 @@ routes:
 
 単純なシナリオでは、スキーマとテーブルを一致させるためにワイルドカードを使用することをお勧めします。ただし、次のバージョンの違いに注意してください。
 
--   DM v1.0.5 以降のバージョンでは、テーブル ルーティングは[<a href="https://en.wikipedia.org/wiki/Glob_(programming)#Syntax">ワイルドカードマッチ</a>](https://en.wikipedia.org/wiki/Glob_(programming)#Syntax)サポートしますが、ワイルドカード式には`*` **1 つだけ**使用でき、**最後に**`*`を配置する必要があります。
+-   DM v1.0.5 以降のバージョンでは、テーブル ルーティングは[ワイルドカードマッチ](https://en.wikipedia.org/wiki/Glob_(programming)#Syntax)サポートしますが、ワイルドカード式には`*` **1 つだけ**使用でき、**最後に**`*`を配置する必要があります。
 
 -   v1.0.5 より前の DM バージョンの場合、テーブル ルーティングはワイルドカードをサポートしますが、 `[...]`および`[!...]`の式はサポートしません。
 
 ## パラメータの説明 {#parameter-descriptions}
 
--   DM は、 [<a href="/dm/table-selector.md">テーブル セレクターによって提供される`schema-pattern` / `table-pattern`ルール</a>](/dm/table-selector.md)に一致するアップストリームの MySQL または MariaDB インスタンス テーブルをダウンストリーム`target-schema` `target-table`移行します。
+-   DM は、 [テーブル セレクターによって提供される`schema-pattern` / `table-pattern`ルール](/dm/table-selector.md)に一致するアップストリームの MySQL または MariaDB インスタンス テーブルをダウンストリーム`target-schema` `target-table`移行します。
 -   `schema-pattern` / `table-pattern`ルールに一致するシャードテーブルの場合、DM は`extract-table`を使用してテーブル名を抽出します。 `table-regexp`正規表現、 `extract-schema`を使用したスキーマ名。 `schema-regexp`正規表現、および`extract-source`を使用したソース情報。 `source-regexp`の正規表現。次に、DM は抽出した情報を下流のマージされたテーブルの対応する`target-column`に書き込みます。
 
 ## 使用例 {#usage-examples}
 
 このセクションでは、4 つの異なるシナリオでの使用例を示します。
 
-小規模なデータセットの MySQL シャードを TiDB に移行してマージする必要がある場合は、 [<a href="/migrate-small-mysql-shards-to-tidb.md">このチュートリアル</a>](/migrate-small-mysql-shards-to-tidb.md)を参照してください。
+小規模なデータセットの MySQL シャードを TiDB に移行してマージする必要がある場合は、 [このチュートリアル](/migrate-small-mysql-shards-to-tidb.md)を参照してください。
 
 ### シャードされたスキーマとテーブルをマージする {#merge-sharded-schemas-and-tables}
 
@@ -84,7 +84,7 @@ routes:
 
 シャード化されたスキーマとテーブルのシナリオで、 `test_{1,2,3...}`を移行するとします。 2 つのアップストリーム MySQL インスタンスの`t_{1,2,3...}`テーブルを`test`にします。 `t`ダウンストリーム TiDB インスタンスのテーブル。同時に、シャードテーブルのソース情報を抽出し、それを下流のマージテーブルに書き込む必要があります。
 
-アップストリーム インスタンスをダウンストリームに移行するには、 `test`に従います。 `t`前のセクション[<a href="#merge-sharded-schemas-and-tables">シャードされたスキーマとテーブルをマージする</a>](#merge-sharded-schemas-and-tables)と同様のルーティング ルールを作成する必要があります。さらに、 `extract-table` 、 `extract-schema` 、および`extract-source`構成を追加する必要があります。
+アップストリーム インスタンスをダウンストリームに移行するには、 `test`に従います。 `t`前のセクション[シャードされたスキーマとテーブルをマージする](#merge-sharded-schemas-and-tables)と同様のルーティング ルールを作成する必要があります。さらに、 `extract-table` 、 `extract-schema` 、および`extract-source`構成を追加する必要があります。
 
 -   `extract-table` : `schema-pattern`および`table-pattern`に一致するシャード表の場合、DM は`table-regexp`を使用してシャード表名を抽出し、 `t_`の部分を除いた名前サフィックスをマージされた表の`target-column` 、つまり`c_table`列に書き込みます。
 -   `extract-schema` : `schema-pattern`と`table-pattern`に一致するシャード スキーマの場合、DM は`schema-regexp`を使用してシャード スキーマ名を抽出し、 `test_`の部分を除いた名前サフィックスをマージされたテーブルの`target-column` 、つまり`c_schema`列に書き込みます。

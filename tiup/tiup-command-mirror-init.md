@@ -19,7 +19,7 @@ title: tiup mirror init
    |-- {hash}-timestamp.json                    # Private key of the timestamps
 ```
 
-上記ファイルの具体的な使い方や内容形式については、 [<a href="/tiup/tiup-mirror-reference.md">TiUPミラー リファレンス ガイド</a>](/tiup/tiup-mirror-reference.md)を参照してください。
+上記ファイルの具体的な使い方や内容形式については、 [TiUPミラー リファレンス ガイド](/tiup/tiup-mirror-reference.md)を参照してください。
 
 ## 構文 {#syntax}
 
@@ -43,4 +43,4 @@ tiup mirror init <path> [flags]
 -   指定された`<path>`空でない場合、 TiUP はエラー`Error: the target path '%s' is not an empty directory`を報告します。
 -   指定された`<path>`ディレクトリではない場合、 TiUP はエラー`Error: fdopendir: not a directory`を報告します。
 
-[<a href="/tiup/tiup-command-mirror.md#command-list">&lt;&lt; 前のページに戻る - TiUP Mirror コマンド一覧</a>](/tiup/tiup-command-mirror.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP Mirror コマンド一覧](/tiup/tiup-command-mirror.md#command-list)

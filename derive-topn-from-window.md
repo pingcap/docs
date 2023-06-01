@@ -5,7 +5,7 @@ summary: Introduce the optimization rule of deriving TopN or Limit from window f
 
 # ウィンドウ関数から TopN または Limit を導出する {#derive-topn-or-limit-from-window-functions}
 
-[<a href="/functions-and-operators/window-functions.md">ウィンドウ関数</a>](/functions-and-operators/window-functions.md)は一般的なタイプの SQL 関数です。 `ROW_NUMBER()`や`RANK()`などの行番号付けにウィンドウ関数を使用する場合、ウィンドウ関数の評価後に結果をフィルター処理するのが一般的です。例えば：
+[ウィンドウ関数](/functions-and-operators/window-functions.md)は一般的なタイプの SQL 関数です。 `ROW_NUMBER()`や`RANK()`などの行番号付けにウィンドウ関数を使用する場合、ウィンドウ関数の評価後に結果をフィルター処理するのが一般的です。例えば：
 
 ```sql
 SELECT * FROM (SELECT ROW_NUMBER() OVER (ORDER BY a) AS rownumber FROM t) dt WHERE rownumber <= 3
@@ -21,12 +21,12 @@ WITH t_topN AS (SELECT a FROM t1 ORDER BY a LIMIT 3) SELECT * FROM (SELECT ROW_N
 
 書き換え後、TiDB はウィンドウ関数と後続のフィルター条件から TopN 演算子を導出できます。元の SQL ( `ORDER BY` ) の Sort 演算子と比較して、TopN 演算子の実行効率ははるかに高くなります。さらに、TiKV とTiFlash はどちらも TopN 演算子のプッシュダウンをサポートしており、書き換えられた SQL のパフォーマンスがさらに向上します。
 
-ウィンドウ関数からの TopN または Limit の導出は、デフォルトでは無効になっています。この機能を有効にするには、セッション変数[<a href="/system-variables.md#tidb_opt_derive_topn-new-in-v700">tidb_opt_derive_topn</a>](/system-variables.md#tidb_opt_derive_topn-new-in-v700) ～ `ON`を設定します。
+ウィンドウ関数からの TopN または Limit の導出は、デフォルトでは無効になっています。この機能を有効にするには、セッション変数[tidb_opt_derive_topn](/system-variables.md#tidb_opt_derive_topn-new-in-v700) ～ `ON`を設定します。
 
 この機能を有効にした後、次のいずれかの操作を実行することで無効にできます。
 
--   セッション変数[<a href="/system-variables.md#tidb_opt_derive_topn-new-in-v700">tidb_opt_derive_topn</a>](/system-variables.md#tidb_opt_derive_topn-new-in-v700) ～ `OFF`を設定します。
--   [<a href="/blocklist-control-plan.md">最適化ルールと式プッシュダウンのブロックリスト</a>](/blocklist-control-plan.md)で説明した手順に従います。
+-   セッション変数[tidb_opt_derive_topn](/system-variables.md#tidb_opt_derive_topn-new-in-v700) ～ `OFF`を設定します。
+-   [最適化ルールと式プッシュダウンのブロックリスト](/blocklist-control-plan.md)で説明した手順に従います。
 
 ## 制限事項 {#limitations}
 

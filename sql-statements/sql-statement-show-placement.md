@@ -51,6 +51,6 @@ Query OK, 0 rows affected (0.00 sec)
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/placement-rules-in-sql.md">SQL の配置ルール</a>](/placement-rules-in-sql.md)
--   [<a href="/sql-statements/sql-statement-show-placement-for.md">のプレースメントを表示</a>](/sql-statements/sql-statement-show-placement-for.md)
--   [<a href="/sql-statements/sql-statement-create-placement-policy.md">配置ポリシーの作成</a>](/sql-statements/sql-statement-create-placement-policy.md)
+-   [SQL の配置ルール](/placement-rules-in-sql.md)
+-   [のプレースメントを表示](/sql-statements/sql-statement-show-placement-for.md)
+-   [配置ポリシーの作成](/sql-statements/sql-statement-create-placement-policy.md)

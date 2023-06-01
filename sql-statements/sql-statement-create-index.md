@@ -151,7 +151,7 @@ json_array, json_array_append, json_array_insert, json_contains, json_contains_p
 
 <CustomContent platform="tidb">
 
-これらの式を引き続き使用したい場合は、 [<a href="/tidb-configuration-file.md#allow-expression-index-new-in-v400">TiDB 設定ファイル</a>](/tidb-configuration-file.md#allow-expression-index-new-in-v400)で次の構成を行うことができます。
+これらの式を引き続き使用したい場合は、 [TiDB 設定ファイル](/tidb-configuration-file.md#allow-expression-index-new-in-v400)で次の構成を行うことができます。
 
 {{< copyable "" >}}
 
@@ -229,7 +229,7 @@ SELECT min(col1) FROM t GROUP BY lower(col1);
 
 したがって、クエリのパフォーマンスが挿入および更新のパフォーマンスを上回る場合は、式のインデックス作成を検討できます。
 
-式インデックスには、MySQL と同じ構文と制限があります。これらは、生成された非表示の仮想列にインデックスを作成することによって実装されるため、サポートされる式はすべて[<a href="/generated-columns.md#limitations">仮想生成列の制限事項</a>](/generated-columns.md#limitations)を継承します。
+式インデックスには、MySQL と同じ構文と制限があります。これらは、生成された非表示の仮想列にインデックスを作成することによって実装されるため、サポートされる式はすべて[仮想生成列の制限事項](/generated-columns.md#limitations)を継承します。
 
 ## 多値インデックス {#multi-valued-index}
 
@@ -328,7 +328,7 @@ Query OK, 1 row affected (0.00 sec)
 
 ### 複数値のインデックスを使用する {#use-a-multi-valued-index}
 
-詳細については[<a href="/choose-index.md#use-a-multi-valued-index">インデックスの選択 - 複数値のインデックスを使用する</a>](/choose-index.md#use-a-multi-valued-index)参照してください。
+詳細については[インデックスの選択 - 複数値のインデックスを使用する](/choose-index.md#use-a-multi-valued-index)参照してください。
 
 ### 制限事項 {#limitations}
 
@@ -351,29 +351,29 @@ CREATE TABLE t1 (c1 INT, c2 INT, UNIQUE(c2));
 CREATE UNIQUE INDEX c1 ON t1 (c1) INVISIBLE;
 ```
 
-詳細は[<a href="/sql-statements/sql-statement-alter-index.md">`ALTER INDEX`</a>](/sql-statements/sql-statement-alter-index.md)を参照してください。
+詳細は[`ALTER INDEX`](/sql-statements/sql-statement-alter-index.md)を参照してください。
 
 ## 関連するシステム変数 {#associated-system-variables}
 
-`CREATE INDEX`ステートメントに関連付けられたシステム変数は`tidb_ddl_enable_fast_reorg` 、 `tidb_ddl_reorg_worker_cnt` 、 `tidb_ddl_reorg_batch_size` 、 `tidb_enable_auto_increment_in_generated` 、および`tidb_ddl_reorg_priority`です。詳細は[<a href="/system-variables.md#tidb_ddl_reorg_worker_cnt">システム変数</a>](/system-variables.md#tidb_ddl_reorg_worker_cnt)を参照してください。
+`CREATE INDEX`ステートメントに関連付けられたシステム変数は`tidb_ddl_enable_fast_reorg` 、 `tidb_ddl_reorg_worker_cnt` 、 `tidb_ddl_reorg_batch_size` 、 `tidb_enable_auto_increment_in_generated` 、および`tidb_ddl_reorg_priority`です。詳細は[システム変数](/system-variables.md#tidb_ddl_reorg_worker_cnt)を参照してください。
 
 ## MySQLの互換性 {#mysql-compatibility}
 
 -   TiDB は`FULLTEXT`および`SPATIAL`構文の解析をサポートしていますが、 `FULLTEXT` 、 `HASH` 、および`SPATIAL`インデックスの使用はサポートしていません。
 -   降順インデックスはサポートされていません ( MySQL 5.7と同様)。
--   `CLUSTERED`タイプの主キーのテーブルへの追加はサポートされていません。 `CLUSTERED`種類の主キーの詳細については、 [<a href="/clustered-indexes.md">クラスター化インデックス</a>](/clustered-indexes.md)を参照してください。
+-   `CLUSTERED`タイプの主キーのテーブルへの追加はサポートされていません。 `CLUSTERED`種類の主キーの詳細については、 [クラスター化インデックス](/clustered-indexes.md)を参照してください。
 -   式インデックスはビューと互換性がありません。ビューを使用してクエリを実行する場合、式インデックスを同時に使用することはできません。
 -   式インデックスにはバインディングとの互換性の問題があります。式インデックスの式に定数がある場合、対応するクエリに対して作成されたバインディングのスコープが拡張されます。たとえば、式インデックスの式が`a+1`で、対応するクエリ条件が`a+1 > 2`であるとします。この場合、作成されたバインディングは`a+? > ?`です。これは、 `a+2 > 2`などの条件を持つクエリでも式インデックスの使用が強制され、不適切な実行プランが生じることを意味します。さらに、これは SQL Plan Management (SPM) のベースラインの取得とベースラインの進化にも影響します。
--   複数値インデックスを使用して書き込まれるデータは、定義されたデータ型と正確に一致する必要があります。そうしないと、データの書き込みは失敗します。詳細は[<a href="/sql-statements/sql-statement-create-index.md#create-a-multi-valued-index">複数値のインデックスを作成する</a>](/sql-statements/sql-statement-create-index.md#create-a-multi-valued-index)を参照してください。
+-   複数値インデックスを使用して書き込まれるデータは、定義されたデータ型と正確に一致する必要があります。そうしないと、データの書き込みは失敗します。詳細は[複数値のインデックスを作成する](/sql-statements/sql-statement-create-index.md#create-a-multi-valued-index)を参照してください。
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/choose-index.md">インデックスの選択</a>](/choose-index.md)
--   [<a href="/wrong-index-solution.md">インデックス問題の解決方法</a>](/wrong-index-solution.md)
--   [<a href="/sql-statements/sql-statement-add-index.md">インデックスの追加</a>](/sql-statements/sql-statement-add-index.md)
--   [<a href="/sql-statements/sql-statement-drop-index.md">ドロップインデックス</a>](/sql-statements/sql-statement-drop-index.md)
--   [<a href="/sql-statements/sql-statement-rename-index.md">インデックスの名前を変更</a>](/sql-statements/sql-statement-rename-index.md)
--   [<a href="/sql-statements/sql-statement-alter-index.md">インデックスの変更</a>](/sql-statements/sql-statement-alter-index.md)
--   [<a href="/sql-statements/sql-statement-add-column.md">列の追加</a>](/sql-statements/sql-statement-add-column.md)
--   [<a href="/sql-statements/sql-statement-create-table.md">テーブルの作成</a>](/sql-statements/sql-statement-create-table.md)
--   [<a href="/sql-statements/sql-statement-explain.md">EXPLAIN</a>](/sql-statements/sql-statement-explain.md)
+-   [インデックスの選択](/choose-index.md)
+-   [インデックス問題の解決方法](/wrong-index-solution.md)
+-   [インデックスの追加](/sql-statements/sql-statement-add-index.md)
+-   [ドロップインデックス](/sql-statements/sql-statement-drop-index.md)
+-   [インデックスの名前を変更](/sql-statements/sql-statement-rename-index.md)
+-   [インデックスの変更](/sql-statements/sql-statement-alter-index.md)
+-   [列の追加](/sql-statements/sql-statement-add-column.md)
+-   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
+-   [EXPLAIN](/sql-statements/sql-statement-explain.md)

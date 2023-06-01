@@ -17,7 +17,7 @@ ERROR 1213: Deadlock found when trying to get lock; try restarting transaction
 
 デッドロックは、2 つ以上のトランザクションがすでに保持しているロックを解放するのをお互いに待っている場合、またはロック順序が矛盾しているため、ロック リソースを待機するループが発生する場合に発生します。
 
-以下は、データベース[<a href="/develop/dev-guide-bookshop-schema-design.md">`bookshop`</a>](/develop/dev-guide-bookshop-schema-design.md)のテーブル`books`を使用したデッドロックの例です。
+以下は、データベース[`bookshop`](/develop/dev-guide-bookshop-schema-design.md)のテーブル`books`を使用したデッドロックの例です。
 
 まず、テーブル`books`に 2 行を挿入します。
 
@@ -65,11 +65,11 @@ UPDATE books SET stock=stock-1 WHERE id IN (1, 2);
 
 ### 解決策 3:楽観的トランザクションを使用する {#solution-3-use-optimistic-transactions}
 
-楽観的トランザクション モデルにはデッドロックがありません。ただし、アプリケーションでは、失敗した場合に備えて楽観的トランザクション再試行ロジックを追加する必要があります。詳細は[<a href="#application-retry-and-error-handling">アプリケーションの再試行とエラー処理</a>](#application-retry-and-error-handling)を参照してください。
+楽観的トランザクション モデルにはデッドロックがありません。ただし、アプリケーションでは、失敗した場合に備えて楽観的トランザクション再試行ロジックを追加する必要があります。詳細は[アプリケーションの再試行とエラー処理](#application-retry-and-error-handling)を参照してください。
 
 ### 解決策 4: 再試行する {#solution-4-retry}
 
-エラー メッセージに示されているように、アプリケーションに再試行ロジックを追加します。詳細は[<a href="#application-retry-and-error-handling">アプリケーションの再試行とエラー処理</a>](#application-retry-and-error-handling)を参照してください。
+エラー メッセージに示されているように、アプリケーションに再試行ロジックを追加します。詳細は[アプリケーションの再試行とエラー処理](#application-retry-and-error-handling)を参照してください。
 
 ## アプリケーションの再試行とエラー処理 {#application-retry-and-error-handling}
 
@@ -93,13 +93,13 @@ MySQL などの従来のデータベースとは異なり、TiDB では楽観的
 
 <CustomContent platform="tidb">
 
-エラー コードの詳細については、 [<a href="/error-codes.md">エラーコードとトラブルシューティング</a>](/error-codes.md)を参照してください。
+エラー コードの詳細については、 [エラーコードとトラブルシューティング](/error-codes.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-エラー コードの詳細については、 [<a href="https://docs.pingcap.com/tidb/stable/error-codes">エラーコードとトラブルシューティング</a>](https://docs.pingcap.com/tidb/stable/error-codes)を参照してください。
+エラー コードの詳細については、 [エラーコードとトラブルシューティング](https://docs.pingcap.com/tidb/stable/error-codes)を参照してください。
 
 </CustomContent>
 
@@ -131,13 +131,13 @@ while True:
 
 <CustomContent platform="tidb">
 
-トランザクション競合のトラブルシューティングと解決方法については、 [<a href="/troubleshoot-lock-conflicts.md">ロックの競合のトラブルシューティング</a>](/troubleshoot-lock-conflicts.md)を参照してください。
+トランザクション競合のトラブルシューティングと解決方法については、 [ロックの競合のトラブルシューティング](/troubleshoot-lock-conflicts.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-トランザクション競合のトラブルシューティングと解決方法については、 [<a href="https://docs.pingcap.com/tidb/stable/troubleshoot-lock-conflicts">ロックの競合のトラブルシューティング</a>](https://docs.pingcap.com/tidb/stable/troubleshoot-lock-conflicts)を参照してください。
+トランザクション競合のトラブルシューティングと解決方法については、 [ロックの競合のトラブルシューティング](https://docs.pingcap.com/tidb/stable/troubleshoot-lock-conflicts)を参照してください。
 
 </CustomContent>
 
@@ -145,12 +145,12 @@ while True:
 
 <CustomContent platform="tidb">
 
--   [<a href="/troubleshoot-write-conflicts.md">オプティミスティック トランザクションでの書き込み競合のトラブルシューティング</a>](/troubleshoot-write-conflicts.md)
+-   [オプティミスティック トランザクションでの書き込み競合のトラブルシューティング](/troubleshoot-write-conflicts.md)
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
--   [<a href="https://docs.pingcap.com/tidb/stable/troubleshoot-write-conflicts">オプティミスティック トランザクションでの書き込み競合のトラブルシューティング</a>](https://docs.pingcap.com/tidb/stable/troubleshoot-write-conflicts)
+-   [オプティミスティック トランザクションでの書き込み競合のトラブルシューティング](https://docs.pingcap.com/tidb/stable/troubleshoot-write-conflicts)
 
 </CustomContent>

@@ -5,7 +5,7 @@ summary: Learn how to manage upstream MySQL instances in TiDB Data Migration.
 
 # TiDB Data Migration でのデータ ソース構成の管理 {#manage-data-source-configurations-in-tidb-data-migration}
 
-このドキュメントでは、MySQL パスワードの暗号化、データ ソースの操作、 [<a href="/dm/dmctl-introduction.md">dmctl</a>](/dm/dmctl-introduction.md)を使用したアップストリーム MySQL インスタンスと DM ワーカー間のバインディングの変更など、データ ソース構成を管理する方法を紹介します。
+このドキュメントでは、MySQL パスワードの暗号化、データ ソースの操作、 [dmctl](/dm/dmctl-introduction.md)を使用したアップストリーム MySQL インスタンスと DM ワーカー間のバインディングの変更など、データ ソース構成を管理する方法を紹介します。
 
 ## データベースのパスワードを暗号化する {#encrypt-the-database-password}
 
@@ -67,7 +67,7 @@ Global Flags:
 operate-source create ./source.yaml
 ```
 
-`source.yaml`の構成については[<a href="/dm/dm-source-configuration-file.md">アップストリーム データベースコンフィグレーションファイルの概要</a>](/dm/dm-source-configuration-file.md)を参照してください。
+`source.yaml`の構成については[アップストリーム データベースコンフィグレーションファイルの概要](/dm/dm-source-configuration-file.md)を参照してください。
 
 以下は返される結果の例です。
 
@@ -166,7 +166,7 @@ Global Flags:
   -s, --source strings   MySQL Source ID.
 ```
 
-転送する前に、DM はバインドを解除するワーカーにまだ実行中のタスクがあるかどうかを確認します。ワーカーに実行中のタスクがある場合は、まず[<a href="/dm/dm-pause-task.md">タスクを一時停止する</a>](/dm/dm-pause-task.md) 、バインドを変更してから[<a href="/dm/dm-resume-task.md">タスクを再開する</a>](/dm/dm-resume-task.md)行う必要があります。
+転送する前に、DM はバインドを解除するワーカーにまだ実行中のタスクがあるかどうかを確認します。ワーカーに実行中のタスクがある場合は、まず[タスクを再開する](/dm/dm-resume-task.md)行う必要があります。
 
 ### 使用例 {#usage-example}
 

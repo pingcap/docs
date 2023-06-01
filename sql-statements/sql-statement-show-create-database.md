@@ -54,11 +54,11 @@ SHOW CREATE SCHEMA IF NOT EXISTS test;
 
 ## MySQLの互換性 {#mysql-compatibility}
 
-`SHOW CREATE DATABASE`は MySQL と完全な互換性があることが期待されています。互換性の違いを見つけた場合は、 GitHub [<a href="https://github.com/pingcap/tidb/issues/new/choose">問題</a>](https://github.com/pingcap/tidb/issues/new/choose)を送信してください。
+`SHOW CREATE DATABASE`は MySQL と完全な互換性があることが期待されています。互換性の違いを見つけた場合は、 GitHub [問題](https://github.com/pingcap/tidb/issues/new/choose)を送信してください。
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-create-table.md">テーブルの作成</a>](/sql-statements/sql-statement-create-table.md)
--   [<a href="/sql-statements/sql-statement-drop-table.md">ドロップテーブル</a>](/sql-statements/sql-statement-drop-table.md)
--   [<a href="/sql-statements/sql-statement-show-tables.md">テーブルを表示</a>](/sql-statements/sql-statement-show-tables.md)
--   [<a href="/sql-statements/sql-statement-show-columns-from.md">次の列を表示</a>](/sql-statements/sql-statement-show-columns-from.md)
+-   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
+-   [ドロップテーブル](/sql-statements/sql-statement-drop-table.md)
+-   [テーブルを表示](/sql-statements/sql-statement-show-tables.md)
+-   [次の列を表示](/sql-statements/sql-statement-show-columns-from.md)

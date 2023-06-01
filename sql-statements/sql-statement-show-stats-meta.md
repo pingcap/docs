@@ -78,5 +78,5 @@ show stats_meta where table_name = 't2';
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-analyze-table.md">分析する</a>](/sql-statements/sql-statement-analyze-table.md)
--   [<a href="/statistics.md">統計入門</a>](/statistics.md)
+-   [分析する](/sql-statements/sql-statement-analyze-table.md)
+-   [統計入門](/statistics.md)

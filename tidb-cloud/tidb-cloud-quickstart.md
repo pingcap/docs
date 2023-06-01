@@ -12,13 +12,13 @@ category: quick start
 
 ## ステップ 1. TiDB クラスターを作成する {#step-1-create-a-tidb-cluster}
 
-TiDB Cloud [<a href="/tidb-cloud/select-cluster-tier.md#serverless-tier-beta">Serverless Tier</a>](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) (ベータ) は、 TiDB Cloudを開始するための最良の方法です。無料のServerless Tierクラスターを作成するには、次の手順を実行します。
+TiDB Cloud [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) (ベータ) は、 TiDB Cloudを開始するための最良の方法です。無料のServerless Tierクラスターを作成するには、次の手順を実行します。
 
-1.  TiDB Cloudアカウントをお持ちでない場合は、 [<a href="https://tidbcloud.com/free-trial">ここ</a>](https://tidbcloud.com/free-trial)をクリックしてアカウントにサインアップしてください。
+1.  TiDB Cloudアカウントをお持ちでない場合は、 [ここ](https://tidbcloud.com/free-trial)をクリックしてアカウントにサインアップしてください。
 
     Google または GitHub ユーザーの場合は、Google または GitHub アカウントでサインアップすることもできます。あなたの電子メール アドレスとパスワードは Google または GitHub によって管理され、 TiDB Cloudコンソールを使用して変更することはできません。
 
-2.  TiDB Cloudアカウントに[<a href="https://tidbcloud.com/">ログイン</a>](https://tidbcloud.com/) 。
+2.  TiDB Cloudアカウントに[ログイン](https://tidbcloud.com/) 。
 
     デフォルトではプラン選択ページが表示されます。
 
@@ -36,7 +36,7 @@ TiDB CloudはAI を活用しています。 TiDB Cloudコンソールの AI を�
 
 Chat2Query では、 `--`入力してから AI に SQL クエリを自動的に生成させる指示を入力するか、SQL クエリを手動で作成して、ターミナルを使用せずにデータベースに対して SQL クエリを実行することができます。
 
-1.  [<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページでクラスター名をクリックし、次に<mdsvgicon name="icon-left-sql-editor">左側のナビゲーション ペインの**Chat2Query** 。</mdsvgicon>
+1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページでクラスター名をクリックし、次に<mdsvgicon name="icon-left-sql-editor">左側のナビゲーション ペインの**Chat2Query** 。</mdsvgicon>
 
 2.  TiDB Cloud AI の容量を試すには、画面上の指示に従って、PingCAP と OpenAI がコード スニペットを使用してサービスを調査および改善できるようにし、 **[保存して開始する]**をクリックします。
 
@@ -80,7 +80,7 @@ Chat2Query では、 `--`入力してから AI に SQL クエリを自動的に�
 
 TiDB Cloudクラスターの作成後、 TiDB Cloudプレイグラウンドに事前にロードされたサンプル データを使用して、TiDB の実験をすぐに開始することもできます。
 
-[<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページで、新しく作成したクラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ウィンドウで**[プレイグラウンド]**をクリックします。
+[**クラスター**](https://tidbcloud.com/console/clusters)ページで、新しく作成したクラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ウィンドウで**[プレイグラウンド]**をクリックします。
 
 ## ステップ4. サンプルデータをロードする {#step-4-load-sample-data}
 
@@ -106,7 +106,7 @@ TiDB Cloudクラスターの作成後、 TiDB Cloudプレイグラウンドに�
 
 ## 次は何ですか {#what-s-next}
 
--   さまざまな方法でクラスターに接続する方法については、 [<a href="/tidb-cloud/connect-to-tidb-cluster.md">TiDB クラスターに接続する</a>](/tidb-cloud/connect-to-tidb-cluster.md)を参照してください。
--   Chat2Query を使用してデータを探索する方法の詳細については、 [<a href="/tidb-cloud/explore-data-with-chat2query.md">チャット2クエリ</a>](/tidb-cloud/explore-data-with-chat2query.md)を参照してください。
--   TiDB SQLの使用法については、 [<a href="/basic-sql-operations.md">TiDB で SQL を探索する</a>](/basic-sql-operations.md)を参照してください。
--   クロスゾーン高可用性、水平スケーリング、および[<a href="https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing">HTAP</a>](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)利点を備えた本番での使用については、Dedicated Tierクラスターの作成については[<a href="/tidb-cloud/create-tidb-cluster.md">TiDB クラスターを作成する</a>](/tidb-cloud/create-tidb-cluster.md)を参照してください。
+-   さまざまな方法でクラスターに接続する方法については、 [TiDB クラスターに接続する](/tidb-cloud/connect-to-tidb-cluster.md)を参照してください。
+-   Chat2Query を使用してデータを探索する方法の詳細については、 [チャット2クエリ](/tidb-cloud/explore-data-with-chat2query.md)を参照してください。
+-   TiDB SQLの使用法については、 [TiDB で SQL を探索する](/basic-sql-operations.md)を参照してください。
+-   クロスゾーン高可用性、水平スケーリング、および[TiDB クラスターを作成する](/tidb-cloud/create-tidb-cluster.md)を参照してください。

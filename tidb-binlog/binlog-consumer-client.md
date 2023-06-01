@@ -117,11 +117,11 @@ message Binlog {
 }
 ```
 
-データ形式の定義については、 [<a href="https://github.com/pingcap/tidb/blob/master/tidb-binlog/proto/proto/secondary_binlog.proto">`secondary_binlog.proto`</a>](https://github.com/pingcap/tidb/blob/master/tidb-binlog/proto/proto/secondary_binlog.proto)を参照してください。
+データ形式の定義については、 [`secondary_binlog.proto`](https://github.com/pingcap/tidb/blob/master/tidb-binlog/proto/proto/secondary_binlog.proto)を参照してください。
 
 ### Driver {#driver}
 
-[<a href="https://github.com/pingcap/tidb-tools/">TiDB ツール</a>](https://github.com/pingcap/tidb-tools/)プロジェクトは、Kafka でbinlogデータを読み取るために使用される[<a href="https://github.com/pingcap/tidb/tree/master/tidb-binlog/driver">Driver</a>](https://github.com/pingcap/tidb/tree/master/tidb-binlog/driver)提供します。次のような特徴があります。
+[Driver](https://github.com/pingcap/tidb/tree/master/tidb-binlog/driver)提供します。次のような特徴があります。
 
 -   Kafka データを読み取ります。
 -   `commit ts`に基づいて、Kafka に保存されているbinlogを見つけます。
@@ -144,4 +144,4 @@ Driverを使用する場合は、次の情報を構成する必要がありま�
 > **ノート：**
 >
 > -   このサンプル コードでは、 Driver の使用方法のみを示しています。本番環境でDriverを使用する場合は、コードを最適化する必要があります。
-> -   現在、 GolangバージョンのDriverとサンプル コードのみが利用可能です。他の言語を使用する場合は、 binlog proto ファイルに基づいて対応する言語でコード ファイルを生成し、Kafka でbinlogデータを読み取り、データを解析してダウンストリームに出力するアプリケーションを開発する必要があります。サンプル コードを最適化して、他の言語のサンプル コードを[<a href="https://github.com/pingcap/tidb-tools">TiDB ツール</a>](https://github.com/pingcap/tidb-tools)に送信することも歓迎します。
+> -   現在、 GolangバージョンのDriverとサンプル コードのみが利用可能です。他の言語を使用する場合は、 binlog proto ファイルに基づいて対応する言語でコード ファイルを生成し、Kafka でbinlogデータを読み取り、データを解析してダウンストリームに出力するアプリケーションを開発する必要があります。サンプル コードを最適化して、他の言語のサンプル コードを[TiDB ツール](https://github.com/pingcap/tidb-tools)に送信することも歓迎します。

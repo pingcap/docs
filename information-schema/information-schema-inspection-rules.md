@@ -5,7 +5,7 @@ summary: Learn the `INSPECTION_RULES` information_schema table.
 
 # 検査ルール {#inspection-rules}
 
-表`INSPECTION_RULES`は、検査結果でどの診断テストが実行されるかに関する情報を示します。使用例については[<a href="/information-schema/information-schema-inspection-result.md">検査結果</a>](/information-schema/information-schema-inspection-result.md)参照してください。
+表`INSPECTION_RULES`は、検査結果でどの診断テストが実行されるかに関する情報を示します。使用例については[検査結果](/information-schema/information-schema-inspection-result.md)参照してください。
 
 {{< copyable "" >}}
 

@@ -10,6 +10,6 @@ SQL 最適化との比較として、GPS ナビゲーションを使用したと
 
 このセクションでは、クエリの実行に関するいくつかの概念を紹介します。
 
--   [<a href="/explain-overview.md">クエリ実行プランを理解する</a>](/explain-overview.md) TiDB がステートメントの実行をどのように決定したかを理解するために`EXPLAIN`ステートメントを使用する方法を紹介します。
--   [<a href="/sql-optimization-concepts.md">SQL最適化プロセス</a>](/sql-optimization-concepts.md)クエリ実行パフォーマンスを向上させるために TiDB が使用できる最適化が導入されています。
--   [<a href="/control-execution-plan.md">実行計画の制御</a>](/control-execution-plan.md)では、実行プランの生成を制御する方法が導入されています。これは、TiDB によって決定された実行計画が最適ではない場合に役立ちます。
+-   [クエリ実行プランを理解する](/explain-overview.md) TiDB がステートメントの実行をどのように決定したかを理解するために`EXPLAIN`ステートメントを使用する方法を紹介します。
+-   [SQL最適化プロセス](/sql-optimization-concepts.md)クエリ実行パフォーマンスを向上させるために TiDB が使用できる最適化が導入されています。
+-   [実行計画の制御](/control-execution-plan.md)では、実行プランの生成を制御する方法が導入されています。これは、TiDB によって決定された実行計画が最適ではない場合に役立ちます。

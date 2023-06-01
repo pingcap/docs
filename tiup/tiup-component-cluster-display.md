@@ -12,7 +12,7 @@ title: tiup cluster display
 tiup cluster display <cluster-name> [flags]
 ```
 
-`<cluster-name>` : 操作するクラスターの名前。クラスター名を忘れた場合は、 [<a href="/tiup/tiup-component-cluster-list.md">クラスタリスト</a>](/tiup/tiup-component-cluster-list.md)コマンドで確認できます。
+`<cluster-name>` : 操作するクラスターの名前。クラスター名を忘れた場合は、 [クラスタリスト](/tiup/tiup-component-cluster-list.md)コマンドで確認できます。
 
 ## オプション {#options}
 
@@ -98,6 +98,6 @@ tiup cluster display <cluster-name> [flags]
 >
 > TiUPの`Pending Offline` 、PD API によって返される`Offline` 、および TiDB ダッシュボードの`Leaving`同じステータスを示します。
 
-ノード サービス ステータスは PD スケジューリング情報から取得されます。詳細については、 [<a href="/tidb-scheduling.md#information-collection">情報収集</a>](/tidb-scheduling.md#information-collection)を参照してください。
+ノード サービス ステータスは PD スケジューリング情報から取得されます。詳細については、 [情報収集](/tidb-scheduling.md#information-collection)を参照してください。
 
-[<a href="/tiup/tiup-component-cluster.md#command-list">&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト</a>](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト](/tiup/tiup-component-cluster.md#command-list)

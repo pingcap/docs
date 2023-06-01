@@ -18,7 +18,7 @@ summary: Learn about the multi-replica disaster recovery solution for a single c
 
 > **ノート：**
 >
-> [<a href="/glossary.md#regionpeerraft-group">TiKVの「リージョン」</a>](/glossary.md#regionpeerraft-group)データの範囲を意味し、「領域」という用語は物理的な位置を意味します。この 2 つの用語は互換性がありません。
+> [TiKVの「リージョン」](/glossary.md#regionpeerraft-group)データの範囲を意味し、「領域」という用語は物理的な位置を意味します。この 2 つの用語は互換性がありません。
 
 ## クラスターをセットアップし、レプリカを構成する {#set-up-a-cluster-and-configure-replicas}
 
@@ -153,10 +153,10 @@ summary: Learn about the multi-replica disaster recovery solution for a single c
 
 Grafana または TiDB ダッシュボードにアクセスして、クラスター内の TiKV、TiDB、PD、およびその他のコンポーネントのパフォーマンス メトリックを監視できます。コンポーネントのステータスに基づいて、DR スイッチオーバーを実行するかどうかを決定できます。詳細については、次のドキュメントを参照してください。
 
--   [<a href="/grafana-tidb-dashboard.md">TiDB の主要なモニタリング指標</a>](/grafana-tidb-dashboard.md)
--   [<a href="/grafana-tikv-dashboard.md">TiKV の主要なモニタリング指標</a>](/grafana-tikv-dashboard.md)
--   [<a href="/grafana-pd-dashboard.md">PD の主要なモニタリング指標</a>](/grafana-pd-dashboard.md)
--   [<a href="/dashboard/dashboard-monitoring.md">TiDB ダッシュボード監視ページ</a>](/dashboard/dashboard-monitoring.md)
+-   [TiDB の主要なモニタリング指標](/grafana-tidb-dashboard.md)
+-   [TiKV の主要なモニタリング指標](/grafana-tikv-dashboard.md)
+-   [PD の主要なモニタリング指標](/grafana-pd-dashboard.md)
+-   [TiDB ダッシュボード監視ページ](/dashboard/dashboard-monitoring.md)
 
 ## DR スイッチオーバーを実行する {#perform-a-dr-switchover}
 

@@ -50,5 +50,5 @@ Query OK, 0 rows affected (0.03 sec)
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-create-sequence.md">シーケンスの作成</a>](/sql-statements/sql-statement-create-sequence.md)
--   [<a href="/sql-statements/sql-statement-show-create-sequence.md">シーケンスの作成を表示</a>](/sql-statements/sql-statement-show-create-sequence.md)
+-   [シーケンスの作成](/sql-statements/sql-statement-create-sequence.md)
+-   [シーケンスの作成を表示](/sql-statements/sql-statement-show-create-sequence.md)

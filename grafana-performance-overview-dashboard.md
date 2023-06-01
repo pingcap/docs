@@ -5,7 +5,7 @@ summary: Learn key metrics displayed on the Performance Overview dashboard.
 
 # パフォーマンスの概要に関する主要な指標 {#key-metrics-on-performance-overview}
 
-TiUPを使用して TiDB クラスターをデプロイすると、監視システム (Prometheus および Grafana) も同時にデプロイされます。詳細については、 [<a href="/tidb-monitoring-framework.md">TiDB モニタリング フレームワークの概要</a>](/tidb-monitoring-framework.md)を参照してください。
+TiUPを使用して TiDB クラスターをデプロイすると、監視システム (Prometheus および Grafana) も同時にデプロイされます。詳細については、 [TiDB モニタリング フレームワークの概要](/tidb-monitoring-framework.md)を参照してください。
 
 Grafana ダッシュボードは、PD、TiDB、TiKV、Node_exporter、概要、およびパフォーマンス概要を含む一連のサブ ダッシュボードに分割されています。診断に役立つ指標が多数あります。
 
@@ -17,7 +17,7 @@ Grafana ダッシュボードは、PD、TiDB、TiKV、Node_exporter、概要、�
 
 -   トップダウンのレイテンシーの内訳: クエリレイテンシーと接続アイドル時間の比率、クエリレイテンシーの内訳、実行中の TSO/KV リクエストレイテンシー、TiKV 内の書き込みレイテンシーの内訳。
 
-パフォーマンス概要ダッシュボードを使用すると、パフォーマンスを効率的に分析し、ユーザー応答時間のボトルネックがデータベースにあるかどうかを確認できます。ボトルネックがデータベース内にある場合は、データベース時間の概要、ワークロード プロファイル、SQLレイテンシー時間の内訳を使用して、データベース内のボトルネックを特定できます。詳細は[<a href="/performance-tuning-methods.md">パフォーマンスの分析とチューニング</a>](/performance-tuning-methods.md)を参照してください。
+パフォーマンス概要ダッシュボードを使用すると、パフォーマンスを効率的に分析し、ユーザー応答時間のボトルネックがデータベースにあるかどうかを確認できます。ボトルネックがデータベース内にある場合は、データベース時間の概要、ワークロード プロファイル、SQLレイテンシー時間の内訳を使用して、データベース内のボトルネックを特定できます。詳細は[パフォーマンスの分析とチューニング](/performance-tuning-methods.md)を参照してください。
 
 次のセクションでは、パフォーマンス概要ダッシュボードのメトリクスを説明します。
 

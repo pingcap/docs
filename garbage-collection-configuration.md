@@ -7,12 +7,12 @@ summary: Learn about GC configuration parameters.
 
 ガベージ コレクションは、次のシステム変数を介して構成されます。
 
--   [<a href="/system-variables.md#tidb_gc_enable-new-in-v50">`tidb_gc_enable`</a>](/system-variables.md#tidb_gc_enable-new-in-v50)
--   [<a href="/system-variables.md#tidb_gc_run_interval-new-in-v50">`tidb_gc_run_interval`</a>](/system-variables.md#tidb_gc_run_interval-new-in-v50)
--   [<a href="/system-variables.md#tidb_gc_life_time-new-in-v50">`tidb_gc_life_time`</a>](/system-variables.md#tidb_gc_life_time-new-in-v50)
--   [<a href="/system-variables.md#tidb_gc_concurrency-new-in-v50">`tidb_gc_concurrency`</a>](/system-variables.md#tidb_gc_concurrency-new-in-v50)
--   [<a href="/system-variables.md#tidb_gc_scan_lock_mode-new-in-v50">`tidb_gc_scan_lock_mode`</a>](/system-variables.md#tidb_gc_scan_lock_mode-new-in-v50)
--   [<a href="/system-variables.md#tidb_gc_max_wait_time-new-in-v610">`tidb_gc_max_wait_time`</a>](/system-variables.md#tidb_gc_max_wait_time-new-in-v610)
+-   [`tidb_gc_enable`](/system-variables.md#tidb_gc_enable-new-in-v50)
+-   [`tidb_gc_run_interval`](/system-variables.md#tidb_gc_run_interval-new-in-v50)
+-   [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50)
+-   [`tidb_gc_concurrency`](/system-variables.md#tidb_gc_concurrency-new-in-v50)
+-   [`tidb_gc_scan_lock_mode`](/system-variables.md#tidb_gc_scan_lock_mode-new-in-v50)
+-   [`tidb_gc_max_wait_time`](/system-variables.md#tidb_gc_max_wait_time-new-in-v610)
 
 ## GC I/O 制限 {#gc-i-o-limit}
 
@@ -38,7 +38,7 @@ tikv-ctl --host=ip:port modify-tikv-config -n gc.max-write-bytes-per-sec -v 10MB
 
 ## TiDB 5.0 の変更点 {#changes-in-tidb-5-0}
 
-TiDB の以前のリリースでは、ガベージコレクションは`mysql.tidb`システム テーブルを介して構成されていました。このテーブルへの変更は引き続きサポートされていますが、提供されているシステム変数を使用することをお勧めします。これにより、構成への変更を確実に検証し、予期しない動作を防ぐことができます ( [<a href="https://github.com/pingcap/tidb/issues/20655">#20655</a>](https://github.com/pingcap/tidb/issues/20655) )。
+TiDB の以前のリリースでは、ガベージコレクションは`mysql.tidb`システム テーブルを介して構成されていました。このテーブルへの変更は引き続きサポートされていますが、提供されているシステム変数を使用することをお勧めします。これにより、構成への変更を確実に検証し、予期しない動作を防ぐことができます ( [#20655](https://github.com/pingcap/tidb/issues/20655) )。
 
 `CENTRAL`ガベージコレクションモードはサポートされなくなりました。代わりに`DISTRIBUTED` GC モード (TiDB 3.0 以降のデフォルト) が自動的に使用されます。 TiDB はガベージコレクションをトリガーするために各 TiKV 領域にリクエストを送信する必要がなくなるため、このモードはより効率的です。
 
@@ -48,7 +48,7 @@ TiDB の以前のリリースでは、ガベージコレクションは`mysql.ti
 
 TiDB v6.1.0 より前では、TiDB のトランザクションは GC セーフ ポイントに影響しません。 v6.1.0 以降、TiDB は GC セーフ ポイントを計算する際にトランザクションの startTS を考慮し、アクセス対象のデータがクリアされている問題を解決します。トランザクションが長すぎると、安全なポイントが長時間ブロックされ、アプリケーションのパフォーマンスに影響します。
 
-TiDB v6.1.0 では、アクティブなトランザクションが GC セーフ ポイントをブロックする最大時間を制御するためにシステム変数[<a href="/system-variables.md#tidb_gc_max_wait_time-new-in-v610">`tidb_gc_max_wait_time`</a>](/system-variables.md#tidb_gc_max_wait_time-new-in-v610)が導入されました。この値を超えると、GC セーフ ポイントが強制的に転送されます。
+TiDB v6.1.0 では、アクティブなトランザクションが GC セーフ ポイントをブロックする最大時間を制御するためにシステム変数[`tidb_gc_max_wait_time`](/system-variables.md#tidb_gc_max_wait_time-new-in-v610)が導入されました。この値を超えると、GC セーフ ポイントが強制的に転送されます。
 
 ### 圧縮フィルターの GC {#gc-in-compaction-filter}
 

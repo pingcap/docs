@@ -13,7 +13,7 @@ summary: Learn about the key features and usage scenarios of TiDB.
 
 -->
 
-[<a href="https://github.com/pingcap/tidb">TiDB</a>](https://github.com/pingcap/tidb) (/&#39;taɪdiːbi:/、「Ti」は Titanium の略) は、ハイブリッド トランザクションおよび分析処理 (HTAP) ワークロードをサポートするオープンソースの分散 SQL データベースです。 MySQL と互換性があり、水平スケーラビリティ、強力な一貫性、高可用性を備えています。 TiDB の目標は、OLTP (オンライン トランザクション処理)、OLAP (オンライン分析処理)、および HTAP サービスをカバーするワンストップ データベース ソリューションをユーザーに提供することです。 TiDB は、高可用性と大規模データの強力な一貫性を必要とするさまざまなユースケースに適しています。
+[TiDB](https://github.com/pingcap/tidb) (/&#39;taɪdiːbi:/、「Ti」は Titanium の略) は、ハイブリッド トランザクションおよび分析処理 (HTAP) ワークロードをサポートするオープンソースの分散 SQL データベースです。 MySQL と互換性があり、水平スケーラビリティ、強力な一貫性、高可用性を備えています。 TiDB の目標は、OLTP (オンライン トランザクション処理)、OLAP (オンライン分析処理)、および HTAP サービスをカバーするワンストップ データベース ソリューションをユーザーに提供することです。 TiDB は、高可用性と大規模データの強力な一貫性を必要とするさまざまなユースケースに適しています。
 
 次のビデオでは、TiDB の主要な機能を紹介します。
 
@@ -31,15 +31,15 @@ summary: Learn about the key features and usage scenarios of TiDB.
 
 -   **リアルタイムHTAP**
 
-    TiDB は 2 つのstorageエンジンを提供します[<a href="/tikv-overview.md">TiKV</a>](/tikv-overview.md)は行ベースのstorageエンジン、 [<a href="/tiflash/tiflash-overview.md">TiFlash</a>](/tiflash/tiflash-overview.md)は列指向のstorageエンジンです。 TiFlash は、 Multi-Raft Learnerプロトコルを使用して TiKV からリアルタイムでデータを複製し、TiKV 行ベースのstorageエンジンとTiFlash の列型storageエンジン間のデータの一貫性を確保します。 TiKV とTiFlash は、 HTAP リソース分離の問題を解決するために、必要に応じて別のマシンにデプロイできます。
+    TiDB は 2 つのstorageエンジンを提供します[TiFlash](/tiflash/tiflash-overview.md)は列指向のstorageエンジンです。 TiFlash は、 Multi-Raft Learnerプロトコルを使用して TiKV からリアルタイムでデータを複製し、TiKV 行ベースのstorageエンジンとTiFlash の列型storageエンジン間のデータの一貫性を確保します。 TiKV とTiFlash は、 HTAP リソース分離の問題を解決するために、必要に応じて別のマシンにデプロイできます。
 
 -   **クラウドネイティブな分散データベース**
 
-    TiDB はクラウド用に設計された分散データベースであり、クラウド プラットフォーム上で柔軟な拡張性、信頼性、セキュリティを提供します。ユーザーは、変化するワークロードの要件に合わせて TiDB を柔軟に拡張できます。 TiDB では、各データには少なくとも 3 つのレプリカがあり、データセンター全体の停止に耐えられるように、異なるクラウド アベイラビリティ ゾーンにスケジュールできます。 [<a href="https://docs.pingcap.com/tidb-in-kubernetes/stable/tidb-operator-overview">TiDB Operator</a>](https://docs.pingcap.com/tidb-in-kubernetes/stable/tidb-operator-overview) 、Kubernetes 上で TiDB を管理し、TiDB クラスターの操作に関連するタスクを自動化するのに役立ちます。これにより、マネージド Kubernetes を提供するクラウドへの TiDB のデプロイが容易になります。フルマネージド TiDB サービスで[<a href="https://pingcap.com/tidb-cloud/">TiDB Cloud</a>](https://pingcap.com/tidb-cloud/)は、 [<a href="https://docs.pingcap.com/tidbcloud/">クラウド上の TiDB</a>](https://docs.pingcap.com/tidbcloud/)の機能を最大限に活用するための最も簡単、最も経済的、かつ回復力に優れた方法であり、数回クリックするだけで TiDB クラスターを展開して実行できます。
+    TiDB はクラウド用に設計された分散データベースであり、クラウド プラットフォーム上で柔軟な拡張性、信頼性、セキュリティを提供します。ユーザーは、変化するワークロードの要件に合わせて TiDB を柔軟に拡張できます。 TiDB では、各データには少なくとも 3 つのレプリカがあり、データセンター全体の停止に耐えられるように、異なるクラウド アベイラビリティ ゾーンにスケジュールできます。 [クラウド上の TiDB](https://docs.pingcap.com/tidbcloud/)の機能を最大限に活用するための最も簡単、最も経済的、かつ回復力に優れた方法であり、数回クリックするだけで TiDB クラスターを展開して実行できます。
 
 -   **MySQL 5.7プロトコルおよび MySQL エコシステムとの互換性**
 
-    TiDB は、MySQL 5.7プロトコル、MySQL の共通機能、および MySQL エコシステムと互換性があります。アプリケーションを TiDB に移行する場合、多くの場合、コードを 1 行も変更する必要はありません。または、少量のコードを変更するだけで済みます。さらに、TiDB は、アプリケーション データを TiDB に簡単に移行するのに役立つ一連の[<a href="/ecosystem-tool-user-guide.md">データ移行ツール</a>](/ecosystem-tool-user-guide.md)を提供します。
+    TiDB は、MySQL 5.7プロトコル、MySQL の共通機能、および MySQL エコシステムと互換性があります。アプリケーションを TiDB に移行する場合、多くの場合、コードを 1 行も変更する必要はありません。または、少量のコードを変更するだけで済みます。さらに、TiDB は、アプリケーション データを TiDB に簡単に移行するのに役立つ一連の[データ移行ツール](/ecosystem-tool-user-guide.md)を提供します。
 
 ## ユースケース {#use-cases}
 
@@ -61,7 +61,7 @@ summary: Learn about the key features and usage scenarios of TiDB.
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/tidb-architecture.md">TiDBアーキテクチャ</a>](/tidb-architecture.md)
--   [<a href="/tidb-storage.md">TiDBストレージ</a>](/tidb-storage.md)
--   [<a href="/tidb-computing.md">TiDB コンピューティング</a>](/tidb-computing.md)
--   [<a href="/tidb-scheduling.md">TiDB スケジューリング</a>](/tidb-scheduling.md)
+-   [TiDBアーキテクチャ](/tidb-architecture.md)
+-   [TiDBストレージ](/tidb-storage.md)
+-   [TiDB コンピューティング](/tidb-computing.md)
+-   [TiDB スケジューリング](/tidb-scheduling.md)

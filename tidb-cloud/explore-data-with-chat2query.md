@@ -5,13 +5,13 @@ summary: Learn how to use Chat2Query, an AI-powered SQL editor in the TiDB Cloud
 
 # AI を活用した Chat2Query (ベータ版) でデータを探索する {#explore-your-data-with-ai-powered-chat2query-beta}
 
-TiDB CloudはAI を活用しています。 [<a href="https://tidbcloud.com/">TiDB Cloudコンソール</a>](https://tidbcloud.com/)の AI を活用した SQL エディターである Chat2Query (ベータ版) を使用すると、データの価値を最大化できます。
+TiDB CloudはAI を活用しています。 [TiDB Cloudコンソール](https://tidbcloud.com/)の AI を活用した SQL エディターである Chat2Query (ベータ版) を使用すると、データの価値を最大化できます。
 
 Chat2Query では、 `--`を入力してから AI に SQL クエリを自動的に生成させる指示を入力するか、SQL クエリを手動で作成して、ターミナルを使用せずにデータベースに対して SQL クエリを実行することができます。クエリ結果をテーブルで直感的に見つけたり、クエリログを簡単に確認したりできます。
 
 > **ノート：**
 >
-> Chat2Query は[<a href="/tidb-cloud/select-cluster-tier.md#serverless-tier-beta">Serverless Tier</a>](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)クラスターでのみ使用できます。
+> Chat2Query は[Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)クラスターでのみ使用できます。
 
 ## ユースケース {#use-cases}
 
@@ -27,7 +27,7 @@ AI によって生成された SQL クエリは 100% 正確ではないため、
 
 ## Chat2Query にアクセスする {#access-chat2query}
 
-1.  プロジェクトの[<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページに移動します。
+1.  プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
     > **ヒント：**
     >
@@ -37,7 +37,7 @@ AI によって生成された SQL クエリは 100% 正確ではないため、
 
 ## AI による SQL クエリの生成を有効または無効にする {#enable-or-disable-ai-to-generate-sql-queries}
 
-PingCAP は、ユーザーのデータのプライバシーとセキュリティを最優先事項としています。 Chat2Query の AI 機能は、データ自体ではなく、データベース スキーマにアクセスして SQL クエリを生成することのみが必要です。詳細については、 [<a href="https://www.pingcap.com/privacy-policy/privacy-chat2query">Chat2Query のプライバシーに関するFAQ</a>](https://www.pingcap.com/privacy-policy/privacy-chat2query)を参照してください。
+PingCAP は、ユーザーのデータのプライバシーとセキュリティを最優先事項としています。 Chat2Query の AI 機能は、データ自体ではなく、データベース スキーマにアクセスして SQL クエリを生成することのみが必要です。詳細については、 [Chat2Query のプライバシーに関するFAQ](https://www.pingcap.com/privacy-policy/privacy-chat2query)を参照してください。
 
 Chat2Query に初めてアクセスすると、PingCAP と OpenAI がコード スニペットを使用してサービスを調査および改善することを許可するかどうかを尋ねるダイアログが表示されます。
 
@@ -47,7 +47,7 @@ Chat2Query に初めてアクセスすると、PingCAP と OpenAI がコード �
 初回アクセス後も、次のように AI 設定を変更できます。
 
 -   AI を有効にするには、Chat2Query の右上隅にある**[データ探索のための AI パワーを有効にする]**をクリックします。
--   AI を無効にするには、<mdsvgicon name="icon-top-account-settings"> [<a href="https://tidbcloud.com/">TiDB Cloudコンソール</a>](https://tidbcloud.com/)の右上隅にある**[アカウント] を**クリックし、 **[アカウント設定]**をクリックし、 **[プライバシー]**タブをクリックして、 **AI を活用したデータ探索**オプションを無効にします。</mdsvgicon>
+-   AI を無効にするには、<mdsvgicon name="icon-top-account-settings"> [TiDB Cloudコンソール](https://tidbcloud.com/)の右上隅にある**[アカウント] を**クリックし、 **[アカウント設定]**をクリックし、 **[プライバシー]**タブをクリックして、 **AI を活用したデータ探索**オプションを無効にします。</mdsvgicon>
 
 ## SQL クエリを作成して実行する {#write-and-run-sql-queries}
 

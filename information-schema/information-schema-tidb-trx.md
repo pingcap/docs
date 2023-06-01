@@ -52,14 +52,14 @@ DESC TIDB_TRX;
 -   `SESSION_ID` : このトランザクションが属するセッションの ID。
 -   `USER` : トランザクションを実行するユーザーの名前。
 -   `DB` : トランザクションが実行されるセッションの現在のデフォルトのデータベース名。
--   `ALL_SQL_DIGESTS` : トランザクションによって実行されたステートメントのダイジェスト リスト。リストは JSON 形式の文字列配列として表示されます。各トランザクションは最大で最初の 50 ステートメントを記録します。 [<a href="/functions-and-operators/tidb-functions.md#tidb_decode_sql_digests">`TIDB_DECODE_SQL_DIGESTS`</a>](/functions-and-operators/tidb-functions.md#tidb_decode_sql_digests)関数を使用すると、この列の情報を、対応する正規化された SQL ステートメントのリストに変換できます。
+-   `ALL_SQL_DIGESTS` : トランザクションによって実行されたステートメントのダイジェスト リスト。リストは JSON 形式の文字列配列として表示されます。各トランザクションは最大で最初の 50 ステートメントを記録します。 [`TIDB_DECODE_SQL_DIGESTS`](/functions-and-operators/tidb-functions.md#tidb_decode_sql_digests)関数を使用すると、この列の情報を、対応する正規化された SQL ステートメントのリストに変換できます。
 -   `RELATED_TABLE_IDS` : トランザクションがアクセスするテーブル、ビュー、およびその他のオブジェクトの ID。
 
 > **ノート：**
 >
-> -   [<a href="https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process">プロセス</a>](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process)権限を持つユーザーのみが、この表の完全な情報を取得できます。 PROCESS 権限を持たないユーザーは、現在のユーザーが実行したトランザクションの情報のみを照会できます。
-> -   `CURRENT_SQL_DIGEST`目と`ALL_SQL_DIGESTS`列目の情報（SQLダイジェスト）は、正規化されたSQL文から計算されたハッシュ値です。 `CURRENT_SQL_DIGEST_TEXT`列の情報と`TIDB_DECODE_SQL_DIGESTS`関数から返された結果は、ステートメント概要テーブルから内部的にクエリされるため、対応するステートメントが内部的に見つからない可能性があります。 SQL ダイジェストとステートメント概要テーブルの詳細については、 [<a href="/statement-summary-tables.md">ステートメント概要テーブル</a>](/statement-summary-tables.md)を参照してください。
-> -   [<a href="/functions-and-operators/tidb-functions.md#tidb_decode_sql_digests">`TIDB_DECODE_SQL_DIGESTS`</a>](/functions-and-operators/tidb-functions.md#tidb_decode_sql_digests)関数呼び出しにはオーバーヘッドが高くなります。多数のトランザクションの履歴 SQL ステートメントをクエリするために関数が呼び出された場合、クエリに時間がかかる可能性があります。クラスターが大きく、多くの同時トランザクションがある場合は、 `TIDB_TRX`のテーブル全体をクエリするときに、この関数を`ALL_SQL_DIGEST`列で直接使用することは避けてください。これは、 `SELECT *, tidb_decode_sql_digests(all_sql_digests) FROM TIDB_TRX`のような SQL ステートメントを避けることを意味します。
+> -   [プロセス](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process)権限を持つユーザーのみが、この表の完全な情報を取得できます。 PROCESS 権限を持たないユーザーは、現在のユーザーが実行したトランザクションの情報のみを照会できます。
+> -   `CURRENT_SQL_DIGEST`目と`ALL_SQL_DIGESTS`列目の情報（SQLダイジェスト）は、正規化されたSQL文から計算されたハッシュ値です。 `CURRENT_SQL_DIGEST_TEXT`列の情報と`TIDB_DECODE_SQL_DIGESTS`関数から返された結果は、ステートメント概要テーブルから内部的にクエリされるため、対応するステートメントが内部的に見つからない可能性があります。 SQL ダイジェストとステートメント概要テーブルの詳細については、 [ステートメント概要テーブル](/statement-summary-tables.md)を参照してください。
+> -   [`TIDB_DECODE_SQL_DIGESTS`](/functions-and-operators/tidb-functions.md#tidb_decode_sql_digests)関数呼び出しにはオーバーヘッドが高くなります。多数のトランザクションの履歴 SQL ステートメントをクエリするために関数が呼び出された場合、クエリに時間がかかる可能性があります。クラスターが大きく、多くの同時トランザクションがある場合は、 `TIDB_TRX`のテーブル全体をクエリするときに、この関数を`ALL_SQL_DIGEST`列で直接使用することは避けてください。これは、 `SELECT *, tidb_decode_sql_digests(all_sql_digests) FROM TIDB_TRX`のような SQL ステートメントを避けることを意味します。
 > -   現在、 `TIDB_TRX`テーブルは TiDB 内部トランザクションの情報の表示をサポートしていません。
 
 ## 例 {#example}
@@ -121,7 +121,7 @@ all_sql_digests: ["e6f07d43b5c21db0fbb9a31feac2dc599787763393dd5acbfad80e247eb02
        all_sqls: ["begin","update `t` set `v` = `v` + ? where `id` = ?"]
 ```
 
-このクエリは、 `TIDB_TRX`テーブルの`ALL_SQL_DIGESTS`列で[<a href="/functions-and-operators/tidb-functions.md#tidb_decode_sql_digests">`TIDB_DECODE_SQL_DIGESTS`</a>](/functions-and-operators/tidb-functions.md#tidb_decode_sql_digests)関数を呼び出し、システム内部クエリを通じて SQL ダイジェスト配列を正規化された SQL ステートメントの配列に変換します。これは、トランザクションによって過去に実行されたステートメントの情報を視覚的に取得するのに役立ちます。ただし、前述のクエリは`TIDB_TRX`のテーブル全体をスキャンし、行ごとに`TIDB_DECODE_SQL_DIGESTS`関数を呼び出すことに注意してください。 `TIDB_DECODE_SQL_DIGESTS`関数の呼び出しには高いオーバーヘッドがかかります。したがって、クラスター内に多数の同時トランザクションが存在する場合は、このタイプのクエリを避けるようにしてください。
+このクエリは、 `TIDB_TRX`テーブルの`ALL_SQL_DIGESTS`列で[`TIDB_DECODE_SQL_DIGESTS`](/functions-and-operators/tidb-functions.md#tidb_decode_sql_digests)関数を呼び出し、システム内部クエリを通じて SQL ダイジェスト配列を正規化された SQL ステートメントの配列に変換します。これは、トランザクションによって過去に実行されたステートメントの情報を視覚的に取得するのに役立ちます。ただし、前述のクエリは`TIDB_TRX`のテーブル全体をスキャンし、行ごとに`TIDB_DECODE_SQL_DIGESTS`関数を呼び出すことに注意してください。 `TIDB_DECODE_SQL_DIGESTS`関数の呼び出しには高いオーバーヘッドがかかります。したがって、クラスター内に多数の同時トランザクションが存在する場合は、このタイプのクエリを避けるようにしてください。
 
 ## CLUSTER_TIDB_TRX {#cluster-tidb-trx}
 

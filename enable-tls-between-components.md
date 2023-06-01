@@ -23,13 +23,13 @@ summary: Learn how to enable TLS authentication between TiDB components.
 
     <CustomContent platform="tidb">
 
-    `openssl`を選択すると[<a href="/generate-self-signed-certificates.md">自己署名証明書の生成</a>](/generate-self-signed-certificates.md)を参照できます。
+    `openssl`を選択すると[自己署名証明書の生成](/generate-self-signed-certificates.md)を参照できます。
 
     </CustomContent>
 
     <CustomContent platform="tidb-cloud">
 
-    `openssl`を選択すると[<a href="https://docs.pingcap.com/tidb/stable/generate-self-signed-certificates">自己署名証明書の生成</a>](https://docs.pingcap.com/tidb/stable/generate-self-signed-certificates)を参照できます。
+    `openssl`を選択すると[自己署名証明書の生成](https://docs.pingcap.com/tidb/stable/generate-self-signed-certificates)を参照できます。
 
     </CustomContent>
 
@@ -213,8 +213,8 @@ summary: Learn how to enable TLS authentication between TiDB components.
 
 ## 証明書の有効期限 {#certificate-validity}
 
-TiDB クラスター内の各コンポーネントの TLS 証明書の有効期間をカスタマイズできます。たとえば、OpenSSL を使用して TLS 証明書を発行および生成する場合、 **days**パラメーターを使用して有効期間を設定できます。詳細については、 [<a href="/generate-self-signed-certificates.md">自己署名証明書を生成する</a>](/generate-self-signed-certificates.md)を参照してください。
+TiDB クラスター内の各コンポーネントの TLS 証明書の有効期間をカスタマイズできます。たとえば、OpenSSL を使用して TLS 証明書を発行および生成する場合、 **days**パラメーターを使用して有効期間を設定できます。詳細については、 [自己署名証明書を生成する](/generate-self-signed-certificates.md)を参照してください。
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/enable-tls-between-clients-and-servers.md">TiDB クライアントとサーバー間で TLS を有効にする</a>](/enable-tls-between-clients-and-servers.md)
+-   [TiDB クライアントとサーバー間で TLS を有効にする](/enable-tls-between-clients-and-servers.md)

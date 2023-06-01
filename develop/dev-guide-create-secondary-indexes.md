@@ -5,16 +5,16 @@ summary: Learn steps, rules, and examples to create a secondary index.
 
 # セカンダリインデックスを作成する {#create-a-secondary-index}
 
-このドキュメントでは、SQL およびさまざまなプログラミング言語を使用してセカンダリ インデックスを作成する方法を説明し、インデックス作成のルールを示します。このドキュメントでは、 [<a href="/develop/dev-guide-bookshop-schema-design.md">書店</a>](/develop/dev-guide-bookshop-schema-design.md)アプリケーションを例として、セカンダリ インデックスの作成手順を説明します。
+このドキュメントでは、SQL およびさまざまなプログラミング言語を使用してセカンダリ インデックスを作成する方法を説明し、インデックス作成のルールを示します。このドキュメントでは、 [書店](/develop/dev-guide-bookshop-schema-design.md)アプリケーションを例として、セカンダリ インデックスの作成手順を説明します。
 
 ## 始める前に {#before-you-start}
 
 セカンダリ インデックスを作成する前に、次の手順を実行します。
 
--   [<a href="/develop/dev-guide-build-cluster-in-cloud.md">TiDB Cloud(Serverless Tier) で TiDBクラスタを構築する</a>](/develop/dev-guide-build-cluster-in-cloud.md) 。
--   [<a href="/develop/dev-guide-schema-design-overview.md">スキーマ設計の概要</a>](/develop/dev-guide-schema-design-overview.md)を読みます。
--   [<a href="/develop/dev-guide-create-database.md">データベースを作成する</a>](/develop/dev-guide-create-database.md) 。
--   [<a href="/develop/dev-guide-create-table.md">テーブルを作成する</a>](/develop/dev-guide-create-table.md) 。
+-   [TiDB Cloud(Serverless Tier) で TiDBクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md) 。
+-   [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md)を読みます。
+-   [データベースを作成する](/develop/dev-guide-create-database.md) 。
+-   [テーブルを作成する](/develop/dev-guide-create-table.md) 。
 
 ## セカンダリインデックスとは {#what-is-secondary-index}
 
@@ -22,21 +22,21 @@ summary: Learn steps, rules, and examples to create a secondary index.
 
 <CustomContent platform="tidb">
 
-セカンダリ インデックスの詳細については、 [<a href="/best-practices/tidb-best-practices.md#secondary-index">セカンダリインデックス</a>](/best-practices/tidb-best-practices.md#secondary-index)を参照してください。
+セカンダリ インデックスの詳細については、 [セカンダリインデックス](/best-practices/tidb-best-practices.md#secondary-index)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-セカンダリ インデックスの詳細については、 [<a href="https://docs.pingcap.com/tidb/stable/tidb-best-practices#secondary-index">セカンダリインデックス</a>](https://docs.pingcap.com/tidb/stable/tidb-best-practices#secondary-index)を参照してください。
+セカンダリ インデックスの詳細については、 [セカンダリインデックス](https://docs.pingcap.com/tidb/stable/tidb-best-practices#secondary-index)を参照してください。
 
 </CustomContent>
 
-TiDB では、 [<a href="#add-a-secondary-index-to-an-existing-table">既存のテーブルにセカンダリ インデックスを追加する</a>](#add-a-secondary-index-to-an-existing-table)または[<a href="#create-a-secondary-index-when-creating-a-new-table">新しいテーブルを作成するときにセカンダリインデックスを作成する</a>](#create-a-secondary-index-when-creating-a-new-table)いずれかを選択できます。
+TiDB では、 [新しいテーブルを作成するときにセカンダリインデックスを作成する](#create-a-secondary-index-when-creating-a-new-table)いずれかを選択できます。
 
 ## 既存のテーブルにセカンダリ インデックスを追加する {#add-a-secondary-index-to-an-existing-table}
 
-既存のテーブルにセカンダリ インデックスを追加するには、次のように[<a href="/sql-statements/sql-statement-create-index.md">インデックスの作成</a>](/sql-statements/sql-statement-create-index.md)ステートメントを使用します。
+既存のテーブルにセカンダリ インデックスを追加するには、次のように[インデックスの作成](/sql-statements/sql-statement-create-index.md)ステートメントを使用します。
 
 ```sql
 CREATE INDEX {index_name} ON {table_name} ({column_names});
@@ -50,7 +50,7 @@ CREATE INDEX {index_name} ON {table_name} ({column_names});
 
 ## 新しいテーブルを作成するときにセカンダリインデックスを作成する {#create-a-secondary-index-when-creating-a-new-table}
 
-テーブルの作成と同時にセカンダリ インデックスを作成するには、 `KEY`キーワードを含む句を[<a href="/sql-statements/sql-statement-create-table.md">テーブルの作成</a>](/sql-statements/sql-statement-create-table.md)ステートメントの最後に追加します。
+テーブルの作成と同時にセカンダリ インデックスを作成するには、 `KEY`キーワードを含む句を[テーブルの作成](/sql-statements/sql-statement-create-table.md)ステートメントの最後に追加します。
 
 ```sql
 KEY `{index_name}` (`{column_names}`)
@@ -63,7 +63,7 @@ KEY `{index_name}` (`{column_names}`)
 
 ## セカンダリインデックス作成のルール {#rules-in-secondary-index-creation}
 
-[<a href="/develop/dev-guide-index-best-practice.md">インデックス作成のベスト プラクティス</a>](/develop/dev-guide-index-best-practice.md)を参照してください。
+[インデックス作成のベスト プラクティス](/develop/dev-guide-index-best-practice.md)を参照してください。
 
 ## 例 {#example}
 
@@ -100,7 +100,7 @@ CREATE TABLE `bookshop`.`books` (
 SELECT * FROM `bookshop`.`books` WHERE `published_at` >= '2022-01-01 00:00:00' AND `published_at` < '2023-01-01 00:00:00';
 ```
 
-SQL ステートメントの実行計画を確認するには、 [<a href="/sql-statements/sql-statement-explain.md">`EXPLAIN`</a>](/sql-statements/sql-statement-explain.md)ステートメントを使用できます。
+SQL ステートメントの実行計画を確認するには、 [`EXPLAIN`](/sql-statements/sql-statement-explain.md)ステートメントを使用できます。
 
 ```sql
 EXPLAIN SELECT * FROM `bookshop`.`books` WHERE `published_at` >= '2022-01-01 00:00:00' AND `published_at` < '2023-01-01 00:00:00';
@@ -144,25 +144,25 @@ CREATE INDEX `idx_book_published_at` ON `bookshop`.`books` (`bookshop`.`books`.`
 
 出力では、 **TableFullScan**の代わりに**IndexRangeScan**が表示されます。これは、TiDB がこのクエリを実行するためにインデックスを使用する準備ができていることを意味します。
 
-実行計画内の**TableFullScan**や**IndexRangeScan**などの単語は、TiDB では[<a href="/explain-overview.md#operator-overview">演算子</a>](/explain-overview.md#operator-overview)です。実行プランと演算子の詳細については、 [<a href="/explain-overview.md">TiDB クエリ実行計画の概要</a>](/explain-overview.md)を参照してください。
+実行計画内の**TableFullScan**や**IndexRangeScan**などの単語は、TiDB では[TiDB クエリ実行計画の概要](/explain-overview.md)を参照してください。
 
 <CustomContent platform="tidb">
 
-実行プランは毎回同じ演算子を返すわけではありません。これは、TiDB が**コストベースの最適化 (CBO)**アプローチを使用しており、実行計画がルールとデータ分散の両方に依存するためです。 TiDB SQL のパフォーマンスの詳細については、 [<a href="/sql-tuning-overview.md">SQLチューニングの概要</a>](/sql-tuning-overview.md)を参照してください。
+実行プランは毎回同じ演算子を返すわけではありません。これは、TiDB が**コストベースの最適化 (CBO)**アプローチを使用しており、実行計画がルールとデータ分散の両方に依存するためです。 TiDB SQL のパフォーマンスの詳細については、 [SQLチューニングの概要](/sql-tuning-overview.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-実行プランは毎回同じ演算子を返すわけではありません。これは、TiDB が**コストベースの最適化 (CBO)**アプローチを使用しており、実行計画がルールとデータ分散の両方に依存するためです。 TiDB SQL のパフォーマンスの詳細については、 [<a href="/tidb-cloud/tidb-cloud-sql-tuning-overview.md">SQLチューニングの概要</a>](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)を参照してください。
+実行プランは毎回同じ演算子を返すわけではありません。これは、TiDB が**コストベースの最適化 (CBO)**アプローチを使用しており、実行計画がルールとデータ分散の両方に依存するためです。 TiDB SQL のパフォーマンスの詳細については、 [SQLチューニングの概要](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)を参照してください。
 
 </CustomContent>
 
 > **ノート：**
 >
-> TiDB はクエリ時のインデックスの明示的な使用もサポートしており、 [<a href="/optimizer-hints.md">オプティマイザーのヒント</a>](/optimizer-hints.md)または[<a href="/sql-plan-management.md">SQL 計画管理 (SPM)</a>](/sql-plan-management.md)使用してインデックスの使用を人為的に制御できます。ただし、インデックス、オプティマイザ ヒント、または SPM についてよく知らない場合は、予期しない結果を避けるためにこの機能を使用し**ないでください**。
+> TiDB はクエリ時のインデックスの明示的な使用もサポートしており、 [SQL 計画管理 (SPM)](/sql-plan-management.md)使用してインデックスの使用を人為的に制御できます。ただし、インデックス、オプティマイザ ヒント、または SPM についてよく知らない場合は、予期しない結果を避けるためにこの機能を使用し**ないでください**。
 
-テーブルのインデックスをクエリするには、 [<a href="/sql-statements/sql-statement-show-indexes.md">インデックスを表示</a>](/sql-statements/sql-statement-show-indexes.md)ステートメントを使用できます。
+テーブルのインデックスをクエリするには、 [インデックスを表示](/sql-statements/sql-statement-show-indexes.md)ステートメントを使用できます。
 
 ```sql
 SHOW INDEXES FROM `bookshop`.`books`;
@@ -182,4 +182,4 @@ SHOW INDEXES FROM `bookshop`.`books`;
 
 ## 次のステップ {#next-step}
 
-データベースを作成し、テーブルとセカンダリ インデックスを追加した後、アプリケーションにデータ[<a href="/develop/dev-guide-insert-data.md">書く</a>](/develop/dev-guide-insert-data.md)および[<a href="/develop/dev-guide-get-data-from-single-table.md">読む</a>](/develop/dev-guide-get-data-from-single-table.md)機能の追加を開始できます。
+データベースを作成し、テーブルとセカンダリ インデックスを追加した後、アプリケーションにデータ[読む](/develop/dev-guide-get-data-from-single-table.md)機能の追加を開始できます。

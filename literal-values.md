@@ -73,7 +73,7 @@ SELECT _utf8'some text';
 
 `'`で囲まれた文字列で`"`を表したい場合、または`"`で囲まれた文字列で`'`表したい場合は、エスケープ文字を使用する必要はありません。
 
-詳細については、 [<a href="https://dev.mysql.com/doc/refman/5.7/en/string-literals.html">MySQL の文字列リテラル</a>](https://dev.mysql.com/doc/refman/5.7/en/string-literals.html)を参照してください。
+詳細については、 [MySQL の文字列リテラル](https://dev.mysql.com/doc/refman/5.7/en/string-literals.html)を参照してください。
 
 ## 数値リテラル {#numeric-literals}
 
@@ -85,7 +85,7 @@ SELECT _utf8'some text';
 
 数値リテラルは、 `1.2E3, 1.2E-3, -1.2E3, -1.2E-3`などの科学的表記法で表すこともできます。
 
-詳細については、 [<a href="https://dev.mysql.com/doc/refman/5.7/en/number-literals.html">MySQL の数値リテラル</a>](https://dev.mysql.com/doc/refman/5.7/en/number-literals.html)を参照してください。
+詳細については、 [MySQL の数値リテラル](https://dev.mysql.com/doc/refman/5.7/en/number-literals.html)を参照してください。
 
 ## 日付と時刻のリテラル {#date-and-time-literals}
 
@@ -121,7 +121,7 @@ TiDB は、時間値の次の形式をサポートしています。
 
 Time 型の小数点も`.`で、小数点以下最大 6 桁の精度です。
 
-詳細については[<a href="https://dev.mysql.com/doc/refman/5.7/en/date-and-time-literals.html">MySQL の日付と時刻のリテラル</a>](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-literals.html)参照してください。
+詳細については[MySQL の日付と時刻のリテラル](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-literals.html)参照してください。
 
 ## ブールリテラル {#boolean-literals}
 

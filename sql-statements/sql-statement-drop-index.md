@@ -58,12 +58,12 @@ Query OK, 0 rows affected (0.30 sec)
 
 ## MySQLの互換性 {#mysql-compatibility}
 
--   `CLUSTERED`タイプの主キーの削除はサポートされていません。 `CLUSTERED`種類の主キーの詳細については、 [<a href="/clustered-indexes.md">クラスター化インデックス</a>](/clustered-indexes.md)を参照してください。
+-   `CLUSTERED`タイプの主キーの削除はサポートされていません。 `CLUSTERED`種類の主キーの詳細については、 [クラスター化インデックス](/clustered-indexes.md)を参照してください。
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-show-index.md">インデックスを表示</a>](/sql-statements/sql-statement-show-index.md)
--   [<a href="/sql-statements/sql-statement-create-index.md">インデックスの作成</a>](/sql-statements/sql-statement-create-index.md)
--   [<a href="/sql-statements/sql-statement-add-index.md">インデックスの追加</a>](/sql-statements/sql-statement-add-index.md)
--   [<a href="/sql-statements/sql-statement-rename-index.md">インデックスの名前を変更</a>](/sql-statements/sql-statement-rename-index.md)
--   [<a href="/sql-statements/sql-statement-alter-index.md">インデックスの変更</a>](/sql-statements/sql-statement-alter-index.md)
+-   [インデックスを表示](/sql-statements/sql-statement-show-index.md)
+-   [インデックスの作成](/sql-statements/sql-statement-create-index.md)
+-   [インデックスの追加](/sql-statements/sql-statement-add-index.md)
+-   [インデックスの名前を変更](/sql-statements/sql-statement-rename-index.md)
+-   [インデックスの変更](/sql-statements/sql-statement-alter-index.md)

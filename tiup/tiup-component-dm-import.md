@@ -14,10 +14,10 @@ DM v1.0 では、クラスターは基本的に TiDB Ansible を使用してデ�
 > -   クラスターをインポートする前に、まず元のクラスターの実行を停止します。
 > -   v2.0 にアップグレードする必要があるデータ移行タスクの場合は、これらのタスクで`stop-task`を実行しないでください。
 > -   このコマンドは、DM v2.0.0-rc.2 以降のバージョンへのインポートのみをサポートしています。
-> -   `import`コマンドは、DM v1.0 クラスターを新しい DM v2.0 クラスターにインポートするために使用されます。データ移行タスクを既存の v2.0 クラスターにインポートする必要がある場合は、 [<a href="/dm/manually-upgrade-dm-1.0-to-2.0.md">TiDB データ移行を v1.0.x から v2.0+ に手動でアップグレードする</a>](/dm/manually-upgrade-dm-1.0-to-2.0.md)を参照してください。
+> -   `import`コマンドは、DM v1.0 クラスターを新しい DM v2.0 クラスターにインポートするために使用されます。データ移行タスクを既存の v2.0 クラスターにインポートする必要がある場合は、 [TiDB データ移行を v1.0.x から v2.0+ に手動でアップグレードする](/dm/manually-upgrade-dm-1.0-to-2.0.md)を参照してください。
 > -   一部のコンポーネントのデプロイメント ディレクトリは、元のクラスターのものと異なる場合があります。 `display`コマンドで確認できます。
 > -   クラスターをインポートする前に、 `tiup update --self && tiup update dm`を実行してTiUP DMコンポーネントを最新バージョンにアップグレードします。
-> -   クラスターがインポートされた後は、クラスター内に DM マスター ノードが 1 つだけ存在します。 [<a href="/tiup/tiup-component-dm-scale-out.md">`scale out`コマンド</a>](/tiup/tiup-component-dm-scale-out.md)を参照して、DM マスター ノードをスケールアウトできます。
+> -   クラスターがインポートされた後は、クラスター内に DM マスター ノードが 1 つだけ存在します。 [`scale out`コマンド](/tiup/tiup-component-dm-scale-out.md)を参照して、DM マスター ノードをスケールアウトできます。
 
 ## 構文 {#syntax}
 
@@ -61,4 +61,4 @@ tiup dm import [flags]
 
 インポートプロセスのログ。
 
-[<a href="/tiup/tiup-component-dm.md#command-list">&lt;&lt; 前のページに戻る - TiUP DMコマンド一覧</a>](/tiup/tiup-component-dm.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP DMコマンド一覧](/tiup/tiup-component-dm.md#command-list)

@@ -15,7 +15,7 @@ TiDB のトランザクション実装では、MVCC (Multiple Version Concurrenc
 
 たとえば、フル バックアップに**Mydumper を**使用している場合 ( **Mydumper は**一貫性のあるスナップショットをバックアップする)、より長い読み取り時間が必要な場合は、TiDB の`mysql.tidb`テーブルの値`tikv_gc_life_time`を調整して、MVCC バージョンの保持時間を増やすことができます。 `tikv_gc_life_time`グローバルかつ即座に有効になることに注意してください。値を増やすと、既存のすべてのスナップショットの存続時間が長くなり、値を減らすと、すべてのスナップショットの存続時間がすぐに短くなります。 MVCC のバージョンが多すぎると、TiKV の処理効率に影響します。したがって、 **Mydumper**で完全バックアップを実行した後、時間内に`tikv_gc_life_time`前の設定に戻す必要があります。
 
-GC の詳細については、 [<a href="/garbage-collection-overview.md">GCの概要</a>](/garbage-collection-overview.md)を参照してください。
+GC の詳細については、 [GCの概要](/garbage-collection-overview.md)を参照してください。
 
 ## トランザクションタイムアウト {#transaction-timeout}
 

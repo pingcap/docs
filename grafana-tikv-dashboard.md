@@ -5,13 +5,13 @@ summary: Learn some key metrics displayed on the Grafana TiKV dashboard.
 
 # TiKV の主要なモニタリング指標 {#key-monitoring-metrics-of-tikv}
 
-TiUPを使用して TiDB クラスターをデプロイすると、監視システム (Prometheus/Grafana) も同時にデプロイされます。詳細については、 [<a href="/tidb-monitoring-framework.md">監視フレームワークの概要</a>](/tidb-monitoring-framework.md)を参照してください。
+TiUPを使用して TiDB クラスターをデプロイすると、監視システム (Prometheus/Grafana) も同時にデプロイされます。詳細については、 [監視フレームワークの概要](/tidb-monitoring-framework.md)を参照してください。
 
 Grafana ダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter、Performance_overview を含む一連のサブ ダッシュボードに分割されています。診断に役立つ指標が多数あります。
 
 ## TiKV-詳細ダッシュボード {#tikv-details-dashboard}
 
-**TiKV 詳細**ダッシュボードからコンポーネントTiKV ステータスの概要を取得できます。ここには主要なメトリクスが表示されます。 [<a href="https://asktug.com/_/tidb-performance-map/#/">パフォーマンスマップ</a>](https://asktug.com/_/tidb-performance-map/#/)に従って、クラスターのステータスが期待どおりであるかどうかを確認できます。
+**TiKV 詳細**ダッシュボードからコンポーネントTiKV ステータスの概要を取得できます。ここには主要なメトリクスが表示されます。 [パフォーマンスマップ](https://asktug.com/_/tidb-performance-map/#/)に従って、クラスターのステータスが期待どおりであるかどうかを確認できます。
 
 このセクションでは、 **TiKV-Details**ダッシュボード上のこれらの主要な指標について詳しく説明します。
 
@@ -439,4 +439,4 @@ QPS ジッター、レイテンシージッター、レイテンシー増加傾�
 
 グラフの左側の Y 軸はstorage側の書き込み RPC QPS を表し、右側の Y 軸上の一連のグラフは上下逆に描かれています。左側のグラフの形状が右側のグラフの形状と一致する場合、示唆された原因は真です。
 
-詳細なメトリクスと説明については、ダッシュボード[<a href="https://docs.google.com/presentation/d/1aeBF2VCKf7eo4-3TMyP7oPzFWIih6UBA53UI8YQASCQ/edit#slide=id.gab6b984c2a_1_352">ユーザーマニュアル</a>](https://docs.google.com/presentation/d/1aeBF2VCKf7eo4-3TMyP7oPzFWIih6UBA53UI8YQASCQ/edit#slide=id.gab6b984c2a_1_352)を参照してください。
+詳細なメトリクスと説明については、ダッシュボード[ユーザーマニュアル](https://docs.google.com/presentation/d/1aeBF2VCKf7eo4-3TMyP7oPzFWIih6UBA53UI8YQASCQ/edit#slide=id.gab6b984c2a_1_352)を参照してください。

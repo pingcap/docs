@@ -19,10 +19,10 @@ TiCDC ダッシュボードには 4 つの監視パネルが含まれていま�
 
 各パネルの説明は次のとおりです。
 
--   [<a href="#server">**サーバ**</a>](#server) : TiDB クラスター内の TiKV ノードと TiCDC ノードの概要情報
--   [<a href="#changefeed">**チェンジフィード**</a>](#changefeed) : TiCDC レプリケーション タスクの詳細情報
--   [<a href="#events">**イベント**</a>](#events) : TiCDC クラスター内のデータ フローに関する詳細情報
--   [<a href="#tikv">**TiKV**</a>](#tikv) : TiCDC に関連する TiKV 情報
+-   [**サーバ**](#server) : TiDB クラスター内の TiKV ノードと TiCDC ノードの概要情報
+-   [**チェンジフィード**](#changefeed) : TiCDC レプリケーション タスクの詳細情報
+-   [**イベント**](#events) : TiCDC クラスター内のデータ フローに関する詳細情報
+-   [**TiKV**](#tikv) : TiCDC に関連する TiKV 情報
 
 ## サーバ {#server}
 

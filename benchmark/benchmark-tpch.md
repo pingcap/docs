@@ -38,7 +38,7 @@ title: TiDB TPC-H 50G Performance Test Report V2.0
 
 ### TPC-H {#tpc-h}
 
-[<a href="https://github.com/pingcap/tidb-bench/tree/master/tpch">tidbベンチ/tpch</a>](https://github.com/pingcap/tidb-bench/tree/master/tpch)
+[tidbベンチ/tpch](https://github.com/pingcap/tidb-bench/tree/master/tpch)
 
 ### クラスタトポロジ {#cluster-topology}
 

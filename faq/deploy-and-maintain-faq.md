@@ -11,11 +11,11 @@ summary: Learn about the FAQs related to TiDB deployment.
 
 ### TiDB はどのオペレーティング システムをサポートしていますか? {#what-operating-systems-does-tidb-support}
 
-TiDB がサポートするオペレーティング システムについては、 [<a href="/hardware-and-software-requirements.md">ソフトウェアとハードウェアの推奨事項</a>](/hardware-and-software-requirements.md)を参照してください。
+TiDB がサポートするオペレーティング システムについては、 [ソフトウェアとハードウェアの推奨事項](/hardware-and-software-requirements.md)を参照してください。
 
 ### 開発、テスト、または本番環境における TiDB クラスターの推奨ハードウェア構成は何ですか? {#what-is-the-recommended-hardware-configuration-for-a-tidb-cluster-in-the-development-test-or-production-environment}
 
-TiDB は、Intel x86-64アーキテクチャの 64 ビット汎用ハードウェアサーバープラットフォーム、または ARMアーキテクチャのハードサーバープラットフォームに展開して実行できます。開発、テスト、本番環境のサーバーハードウェア構成に関する要件と推奨事項については、 [<a href="/hardware-and-software-requirements.md#server-recommendations">ソフトウェアおよびハードウェアの推奨事項 - サーバーの推奨事項</a>](/hardware-and-software-requirements.md#server-recommendations)を参照してください。
+TiDB は、Intel x86-64アーキテクチャの 64 ビット汎用ハードウェアサーバープラットフォーム、または ARMアーキテクチャのハードサーバープラットフォームに展開して実行できます。開発、テスト、本番環境のサーバーハードウェア構成に関する要件と推奨事項については、 [ソフトウェアおよびハードウェアの推奨事項 - サーバーの推奨事項](/hardware-and-software-requirements.md#server-recommendations)を参照してください。
 
 ### 10 ギガビットのネットワーク カード 2 枚の目的は何ですか? {#what-s-the-purposes-of-2-network-cards-of-10-gigabit}
 
@@ -31,15 +31,15 @@ TiDB は分散クラスターとして、PD が一意のタイムスタンプを
 -   PD はクラスターのメタデータを保存し、頻繁に読み取りおよび書き込みリクエストを行います。高い I/O ディスクが必要です。ディスクのパフォーマンスが低いと、クラスター全体のパフォーマンスに影響します。 SSD ディスクの使用をお勧めします。さらに、リージョンの数が増えると、CPU とメモリの要件も高くなります。
 -   TiKV には、CPU、メモリ、ディスクに対する高い要件があります。 SSDを使用するために必要です。
 
-詳細は[<a href="/hardware-and-software-requirements.md">ソフトウェアとハードウェアの推奨事項</a>](/hardware-and-software-requirements.md)を参照してください。
+詳細は[ソフトウェアとハードウェアの推奨事項](/hardware-and-software-requirements.md)を参照してください。
 
 ## インストールと展開 {#installation-and-deployment}
 
-本番環境では、 [<a href="/tiup/tiup-overview.md">TiUP</a>](/tiup/tiup-overview.md)を使用して TiDB クラスターをデプロイすることをお勧めします。 [<a href="/production-deployment-using-tiup.md">TiUPを使用した TiDBクラスタのデプロイ</a>](/production-deployment-using-tiup.md)を参照してください。
+本番環境では、 [TiUPを使用した TiDBクラスタのデプロイ](/production-deployment-using-tiup.md)を参照してください。
 
 ### TiKV/PD 用に変更された<code>toml</code>構成が有効にならないのはなぜですか? {#why-the-modified-code-toml-code-configuration-for-tikv-pd-does-not-take-effect}
 
-`toml`設定を有効にするには、TiKV/PD で`--config`パラメータを設定する必要があります。 TiKV/PD はデフォルトでは構成を読み取りません。現在、この問題はバイナリを使用して展開する場合にのみ発生します。 TiKV の場合は、構成を編集し、サービスを再起動します。 PD の場合、構成ファイルは PD の初回起動時にのみ読み取られ、その後は pd-ctl を使用して構成を変更できます。詳細は[<a href="/pd-control.md">PD Controlユーザーガイド</a>](/pd-control.md)を参照してください。
+`toml`設定を有効にするには、TiKV/PD で`--config`パラメータを設定する必要があります。 TiKV/PD はデフォルトでは構成を読み取りません。現在、この問題はバイナリを使用して展開する場合にのみ発生します。 TiKV の場合は、構成を編集し、サービスを再起動します。 PD の場合、構成ファイルは PD の初回起動時にのみ読み取られ、その後は pd-ctl を使用して構成を変更できます。詳細は[PD Controlユーザーガイド](/pd-control.md)を参照してください。
 
 ### TiDB モニタリング フレームワーク (Prometheus + Grafana) をスタンドアロン マシンにデプロイする必要がありますか? それとも複数のマシンにデプロイする必要がありますか?推奨のCPUとメモリは何ですか? {#should-i-deploy-the-tidb-monitoring-framework-prometheus-grafana-on-a-standalone-machine-or-on-multiple-machines-what-is-the-recommended-cpu-and-memory}
 
@@ -81,13 +81,13 @@ TiDB は分散クラスターとして、PD が一意のタイムスタンプを
 
 2.  スロークエリが発生した場合、Grafana を使用してスロークエリが発生している`tidb-server`のインスタンスとスロークエリの時点を特定し、対応するノードのログに記録されている SQL ステートメント情報を見つけることができます。
 
-3.  ログに加えて、 `ADMIN SHOW SLOW`コマンドを使用してスロー クエリを表示することもできます。詳細は[<a href="/identify-slow-queries.md#admin-show-slow-command">`ADMIN SHOW SLOW`コマンド</a>](/identify-slow-queries.md#admin-show-slow-command)を参照してください。
+3.  ログに加えて、 `ADMIN SHOW SLOW`コマンドを使用してスロー クエリを表示することもできます。詳細は[`ADMIN SHOW SLOW`コマンド](/identify-slow-queries.md#admin-show-slow-command)を参照してください。
 
 ### TiDB クラスターを初めてデプロイしたときに TiKV の<code>label</code>が構成されていなかった場合、 <code>label</code>構成を追加するにはどうすればよいですか? {#how-to-add-the-code-label-code-configuration-if-code-label-code-of-tikv-was-not-configured-when-i-deployed-the-tidb-cluster-for-the-first-time}
 
 TiDB `label`の構成は、クラスター展開アーキテクチャに関連しています。これは PD がグローバルな管理とスケジューリングを実行するための重要なものであり、その基礎となります。以前にクラスターをデプロイするときに`label`構成しなかった場合は、PD 管理ツール`pd-ctl`を使用して`location-labels`情報 (たとえば、 `config set location-labels "zone,rack,host"`を手動で追加して、デプロイメント構造を調整する必要があります (実際の`label`レベル名に基づいて構成する必要があります)。
 
-`pd-ctl`の使用方法については、 [<a href="/pd-control.md">PD Controlユーザーガイド</a>](/pd-control.md)を参照してください。
+`pd-ctl`の使用方法については、 [PD Controlユーザーガイド](/pd-control.md)を参照してください。
 
 ### ディスク テストの<code>dd</code>コマンドで<code>oflag=direct</code>オプションが使用されるのはなぜですか? {#why-does-the-code-dd-code-command-for-the-disk-test-use-the-code-oflag-direct-code-option}
 
@@ -113,6 +113,6 @@ TiDB `label`の構成は、クラスター展開アーキテクチャに関連�
 
 ## 現在 TiDB でサポートされているパブリック クラウド ベンダーは何ですか? {#what-public-cloud-vendors-are-currently-supported-by-tidb}
 
-TiDB は[<a href="https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-gcp-gke">Google Cloud GKE</a>](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-gcp-gke) 、 [<a href="https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-aws-eks">AWS EKS</a>](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-aws-eks) 、および[<a href="https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-alibaba-cloud">アリババクラウドACK</a>](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-alibaba-cloud)でのデプロイメントをサポートします。
+TiDB は[アリババクラウドACK](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-alibaba-cloud)でのデプロイメントをサポートします。
 
 さらに、TiDB は現在、JD Cloud と UCloud で利用できます。

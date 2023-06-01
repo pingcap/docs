@@ -9,12 +9,12 @@ MySQL エコシステムでは、gh-ost や pt-osc などのツールが広く�
 
 このドキュメントでは、DM における一般的なオンライン DDL ツールのサポート、使用方法、注意事項について紹介します。
 
-オンライン DDL ツールの DM の動作原理と実装方法については、 [<a href="/dm/feature-online-ddl.md">オンライン-ddl</a>](/dm/feature-online-ddl.md)を参照してください。
+オンライン DDL ツールの DM の動作原理と実装方法については、 [オンライン-ddl](/dm/feature-online-ddl.md)を参照してください。
 
 ## 制限 {#restrictions}
 
 -   DM は gh-ost と pt-osc のみをサポートします。
--   `online-ddl`が有効な場合、増分レプリケーションに対応するチェックポイントはオンライン DDL 実行のプロセスにあってはなりません。たとえば、アップストリームのオンライン DDL 操作がbinlogの`position-A`で開始し、 `position-B`で終了する場合、増分レプリケーションの開始点は`position-A`より前か`position-B`より後である必要があります。そうしないとエラーが発生します。詳細は[<a href="/dm/dm-faq.md#how-to-handle-the-error-returned-by-the-ddl-operation-related-to-the-gh-ost-table-after-online-ddl-scheme-gh-ost-is-set">FAQ</a>](/dm/dm-faq.md#how-to-handle-the-error-returned-by-the-ddl-operation-related-to-the-gh-ost-table-after-online-ddl-scheme-gh-ost-is-set)を参照してください。
+-   `online-ddl`が有効な場合、増分レプリケーションに対応するチェックポイントはオンライン DDL 実行のプロセスにあってはなりません。たとえば、アップストリームのオンライン DDL 操作がbinlogの`position-A`で開始し、 `position-B`で終了する場合、増分レプリケーションの開始点は`position-A`より前か`position-B`より後である必要があります。そうしないとエラーが発生します。詳細は[FAQ](/dm/dm-faq.md#how-to-handle-the-error-returned-by-the-ddl-operation-related-to-the-gh-ost-table-after-online-ddl-scheme-gh-ost-is-set)を参照してください。
 
 ## パラメータを設定する {#configure-parameters}
 

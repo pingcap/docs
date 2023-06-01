@@ -43,7 +43,7 @@ MySQL とは異なり、TiDB のローカル一時テーブルはすべて外部
 
 > **ノート：**
 >
-> -   TiDB で一時テーブルを使用する前に、 [<a href="#compatibility-restrictions-with-other-tidb-features">他の TiDB 機能との互換性制限</a>](#compatibility-restrictions-with-other-tidb-features)と[<a href="#compatibility-with-mysql-temporary-tables">MySQL 一時テーブルとの互換性</a>](#compatibility-with-mysql-temporary-tables)に注意してください。
+> -   TiDB で一時テーブルを使用する前に、 [MySQL 一時テーブルとの互換性](#compatibility-with-mysql-temporary-tables)に注意してください。
 > -   TiDB v5.3.0 より前のクラスター上にローカル一時テーブルを作成した場合、これらのテーブルは実際には通常のテーブルであり、クラスターが TiDB v5.3.0 以降のバージョンにアップグレードされた後は通常のテーブルとして扱われます。
 
 通常のテーブル`users`があると仮定します。
@@ -160,7 +160,7 @@ TiDB ローカル一時テーブルの次の機能と制限は、MySQL 一時テ
 TiDB のローカル一時テーブルは、次の点で MySQL 一時テーブルと互換性がありません。
 
 -   TiDB ローカル一時テーブルは`ALTER TABLE`をサポートしません。
--   TiDB ローカル一時テーブルは`ENGINE`テーブル オプションを無視し、常に一時テーブル データを TiDBメモリに[<a href="#limit-the-memory-usage-of-temporary-tables">メモリ制限</a>](#limit-the-memory-usage-of-temporary-tables)で保存します。
+-   TiDB ローカル一時テーブルは`ENGINE`テーブル オプションを無視し、常に一時テーブル データを TiDBメモリに[メモリ制限](#limit-the-memory-usage-of-temporary-tables)で保存します。
 -   storageエンジンとして`MEMORY`が宣言されている場合、TiDB ローカル一時テーブルは`MEMORY`storageエンジンによって制限されません。
 -   `INNODB`または`MYISAM`がstorageエンジンとして宣言されている場合、TiDB ローカル一時テーブルは InnoDB 一時テーブルに固有のシステム変数を無視します。
 -   MySQL では、同じ SQL ステートメント内で同じ一時テーブルを複数回参照することは許可されません。 TiDB ローカル一時テーブルにはこの制限はありません。
@@ -181,7 +181,7 @@ TiDB のローカル一時テーブルは、次の点で MySQL 一時テーブ�
 
 > **ノート：**
 >
-> -   TiDB で一時テーブルを使用する前に、 [<a href="#compatibility-restrictions-with-other-tidb-features">他の TiDB 機能との互換性制限</a>](#compatibility-restrictions-with-other-tidb-features)点に注意してください。
+> -   TiDB で一時テーブルを使用する前に、 [他の TiDB 機能との互換性制限](#compatibility-restrictions-with-other-tidb-features)点に注意してください。
 > -   v5.3.0 以降の TiDB クラスター上にグローバル一時テーブルを作成した場合、クラスターが v5.3.0 より前のバージョンにダウングレードされると、これらのテーブルは通常のテーブルとして処理されます。この場合、データエラーが発生します。
 
 セッション A にグローバル一時テーブル`users`を作成します。
@@ -280,7 +280,7 @@ Empty set (0.00 sec)
 
 テーブルを定義するときにどのstorageエンジンが`ENGINE`として宣言されていても、ローカル一時テーブルとグローバル一時テーブルのデータは TiDB インスタンスのメモリにのみ保存されます。このデータは永続化されません。
 
-メモリのオーバーフローを避けるために、 [<a href="/system-variables.md#tidb_tmp_table_max_size-new-in-v530">`tidb_tmp_table_max_size`</a>](/system-variables.md#tidb_tmp_table_max_size-new-in-v530)システム変数を使用して各一時テーブルのサイズを制限できます。一時テーブルが`tidb_tmp_table_max_size`しきい値を超えると、TiDB はエラーを報告します。デフォルト値の`tidb_tmp_table_max_size`は`64MB`です。
+メモリのオーバーフローを避けるために、 [`tidb_tmp_table_max_size`](/system-variables.md#tidb_tmp_table_max_size-new-in-v530)システム変数を使用して各一時テーブルのサイズを制限できます。一時テーブルが`tidb_tmp_table_max_size`しきい値を超えると、TiDB はエラーを報告します。デフォルト値の`tidb_tmp_table_max_size`は`64MB`です。
 
 たとえば、一時テーブルの最大サイズを`256MB`に設定します。
 
@@ -327,6 +327,6 @@ TiDB のローカル一時テーブルは次の機能をサポートしてい**�
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-create-table.md">テーブルの作成</a>](/sql-statements/sql-statement-create-table.md)
--   [<a href="/sql-statements/sql-statement-create-table-like.md">次のようなテーブルを作成します</a>](/sql-statements/sql-statement-create-table-like.md)
--   [<a href="/sql-statements/sql-statement-drop-table.md">ドロップテーブル</a>](/sql-statements/sql-statement-drop-table.md)
+-   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
+-   [次のようなテーブルを作成します](/sql-statements/sql-statement-create-table-like.md)
+-   [ドロップテーブル](/sql-statements/sql-statement-drop-table.md)

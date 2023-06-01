@@ -55,13 +55,13 @@ Empty set (0.00 sec)
 
 ## 分割前の領域 {#pre-split-region}
 
-コピーするテーブルが`PRE_SPLIT_REGIONS`属性で定義されている場合、 `CREATE TABLE LIKE`ステートメントで作成されたテーブルはこの属性を継承し、新しいテーブルのリージョンが分割されます。 `PRE_SPLIT_REGIONS`の詳細については、 [<a href="/sql-statements/sql-statement-create-table.md">`CREATE TABLE`ステートメント</a>](/sql-statements/sql-statement-create-table.md)を参照してください。
+コピーするテーブルが`PRE_SPLIT_REGIONS`属性で定義されている場合、 `CREATE TABLE LIKE`ステートメントで作成されたテーブルはこの属性を継承し、新しいテーブルのリージョンが分割されます。 `PRE_SPLIT_REGIONS`の詳細については、 [`CREATE TABLE`ステートメント](/sql-statements/sql-statement-create-table.md)を参照してください。
 
 ## MySQLの互換性 {#mysql-compatibility}
 
-このステートメントは、MySQL と完全な互換性があると理解されています。 GitHub では互換性の違いは[<a href="https://github.com/pingcap/tidb/issues/new/choose">問題を通じて報告されました</a>](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
+このステートメントは、MySQL と完全な互換性があると理解されています。 GitHub では互換性の違いは[問題を通じて報告されました](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-create-table.md">テーブルの作成</a>](/sql-statements/sql-statement-create-table.md)
--   [<a href="/sql-statements/sql-statement-show-create-table.md">テーブルの作成を表示</a>](/sql-statements/sql-statement-show-create-table.md)
+-   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
+-   [テーブルの作成を表示](/sql-statements/sql-statement-show-create-table.md)

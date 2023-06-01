@@ -9,13 +9,13 @@ summary: Introduces TiDB's SQL performance tuning scheme and analysis approach.
 
 ## あなたが始める前に {#before-you-begin}
 
-[<a href="/develop/dev-guide-bookshop-schema-design.md#method-1-via-tiup-demo">`tiup demo`のインポート</a>](/develop/dev-guide-bookshop-schema-design.md#method-1-via-tiup-demo)を使用してデータを準備できます。
+[`tiup demo`のインポート](/develop/dev-guide-bookshop-schema-design.md#method-1-via-tiup-demo)を使用してデータを準備できます。
 
 ```shell
 tiup demo bookshop prepare --host 127.0.0.1 --port 4000 --books 1000000
 ```
 
-または、 [<a href="/develop/dev-guide-bookshop-schema-design.md#method-2-via-tidb-cloud-import">TiDB Cloudのインポート機能を使用する</a>](/develop/dev-guide-bookshop-schema-design.md#method-2-via-tidb-cloud-import)を選択して、事前に準備されたサンプル データをインポートします。
+または、 [TiDB Cloudのインポート機能を使用する](/develop/dev-guide-bookshop-schema-design.md#method-2-via-tidb-cloud-import)を選択して、事前に準備されたサンプル データをインポートします。
 
 ## 問題: フルテーブルスキャン {#issue-full-table-scan}
 
@@ -59,7 +59,7 @@ EXPLAIN SELECT * FROM books WHERE title = 'Marian Yost';
 
 実行計画の`TableFullScan_5`からわかるように、TiDB は`books`テーブルに対してフル テーブル スキャンを実行し、 `title`各行の条件を満たすかどうかをチェックします。 `TableFullScan_5`の`estRows`値は`1000000.00`です。これは、オプティマイザがこのテーブル全体のスキャンには`1000000.00`行のデータが必要であると推定することを意味します。
 
-`EXPLAIN`の使用法の詳細については、 [<a href="/explain-walkthrough.md">`EXPLAIN`ウォークスルー</a>](/explain-walkthrough.md)を参照してください。
+`EXPLAIN`の使用法の詳細については、 [`EXPLAIN`ウォークスルー](/explain-walkthrough.md)を参照してください。
 
 ### 解決策: セカンダリ インデックスを使用する {#solution-use-secondary-index}
 
@@ -109,7 +109,7 @@ EXPLAIN SELECT * FROM books WHERE title = 'Marian Yost';
 
 `IndexLookup_10`実行プランでは、まず`IndexRangeScan_8`演算子を使用して、 `title_idx`インデックスを通じて条件を満たすインデックス データを読み取り、次に`TableLookup_9`演算子を使用して、インデックス データに格納されている行 ID に従って対応する行をクエリします。
 
-TiDB 実行計画の詳細については、 [<a href="/explain-overview.md">TiDB クエリ実行計画の概要</a>](/explain-overview.md)を参照してください。
+TiDB 実行計画の詳細については、 [TiDB クエリ実行計画の概要](/explain-overview.md)を参照してください。
 
 ### 解決策: カバリングインデックスを使用する {#solution-use-covering-index}
 
@@ -238,9 +238,9 @@ EXPLAIN SELECT * FROM books WHERE id = 896;
 
 ## 適切な結合タイプを使用する {#use-the-right-join-type}
 
-[<a href="/explain-joins.md">JOIN実行計画</a>](/explain-joins.md)を参照してください。
+[JOIN実行計画](/explain-joins.md)を参照してください。
 
 ### こちらも参照 {#see-also}
 
--   [<a href="/explain-walkthrough.md">EXPLAIN コマンド</a>](/explain-walkthrough.md)
--   [<a href="/explain-indexes.md">インデックスを使用する Explain ステートメント</a>](/explain-indexes.md)
+-   [EXPLAIN コマンド](/explain-walkthrough.md)
+-   [インデックスを使用する Explain ステートメント](/explain-indexes.md)

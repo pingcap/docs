@@ -11,13 +11,13 @@ summary: Learn the `SLOW_QUERY` INFORMATION_SCHEMA table.
 
 > **ノート：**
 >
-> `SLOW_QUERY`テーブルは[<a href="/tidb-cloud/select-cluster-tier.md#serverless-tier-beta">Serverless Tierクラスター</a>](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)では使用できません。
+> `SLOW_QUERY`テーブルは[Serverless Tierクラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)では使用できません。
 
 </CustomContent>
 
 <CustomContent platform="tidb">
 
-このテーブルを使用して問題のあるステートメントを特定し、クエリのパフォーマンスを向上させる方法については、 [<a href="/identify-slow-queries.md">スロークエリログドキュメント</a>](/identify-slow-queries.md)を参照してください。
+このテーブルを使用して問題のあるステートメントを特定し、クエリのパフォーマンスを向上させる方法については、 [スロークエリログドキュメント](/identify-slow-queries.md)を参照してください。
 
 </CustomContent>
 
@@ -116,7 +116,7 @@ DESC SLOW_QUERY;
 
 <CustomContent platform="tidb">
 
-このテーブルを使用して問題のあるステートメントを特定し、クエリのパフォーマンスを向上させる方法については、 [<a href="/identify-slow-queries.md">スロークエリログドキュメント</a>](/identify-slow-queries.md)を参照してください。
+このテーブルを使用して問題のあるステートメントを特定し、クエリのパフォーマンスを向上させる方法については、 [スロークエリログドキュメント](/identify-slow-queries.md)を参照してください。
 
 </CustomContent>
 

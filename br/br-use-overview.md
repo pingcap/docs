@@ -35,7 +35,7 @@ BR は基本的なバックアップおよび復元機能のみを提供し、�
 
 TiDB クラスターが自社構築のデータセンターにデプロイされている場合は、次の方法が推奨されます。
 
--   バックアップstorageシステムとして[<a href="https://docs.min.io/docs/minio-quickstart-guide.html">MinIO</a>](https://docs.min.io/docs/minio-quickstart-guide.html)を構築し、S3 プロトコルを使用してデータを MinIO にバックアップします。
+-   バックアップstorageシステムとして[MinIO](https://docs.min.io/docs/minio-quickstart-guide.html)を構築し、S3 プロトコルを使用してデータを MinIO にバックアップします。
 -   ネットワーク ファイル システム (NAS など) ディスクを br コマンド ライン ツールおよびすべての TiKV インスタンスにマウントし、POSIX ファイル システム インターフェイスを使用してバックアップ データを対応する NFS ディレクトリに書き込みます。
 
 > **ノート：**
@@ -75,26 +75,26 @@ BRを展開するには、次の要件が満たされていることを確認し
 
 TiDB は、br コマンドライン ツールを使用したバックアップと復元をサポートしています。
 
--   `tiup install br`から[<a href="/migration-tools.md#install-tools-using-tiup">TiUPオンラインを使用して br コマンドライン ツールをインストールします</a>](/migration-tools.md#install-tools-using-tiup)までのコマンドを実行できます。
+-   `tiup install br`から[TiUPオンラインを使用して br コマンドライン ツールをインストールします](/migration-tools.md#install-tools-using-tiup)までのコマンドを実行できます。
 -   `br`コマンドを使用してデータをバックアップおよび復元する方法の詳細については、次のドキュメントを参照してください。
 
-    -   [<a href="/br/br-snapshot-guide.md">TiDB スナップショットのバックアップおよび復元ガイド</a>](/br/br-snapshot-guide.md)
-    -   [<a href="/br/br-pitr-guide.md">TiDB ログのバックアップと PITR ガイド</a>](/br/br-pitr-guide.md)
-    -   [<a href="/br/backup-and-restore-use-cases.md">TiDB のバックアップと復元の使用例</a>](/br/backup-and-restore-use-cases.md)
+    -   [TiDB スナップショットのバックアップおよび復元ガイド](/br/br-snapshot-guide.md)
+    -   [TiDB ログのバックアップと PITR ガイド](/br/br-pitr-guide.md)
+    -   [TiDB のバックアップと復元の使用例](/br/backup-and-restore-use-cases.md)
 
 ### SQL ステートメントを使用する {#use-sql-statements}
 
 TiDB は、SQL ステートメントを使用した完全バックアップと復元をサポートしています。
 
--   [<a href="/sql-statements/sql-statement-backup.md">`BACKUP`</a>](/sql-statements/sql-statement-backup.md) : 完全なスナップショット データをバックアップします。
--   [<a href="/sql-statements/sql-statement-restore.md">`RESTORE`</a>](/sql-statements/sql-statement-restore.md) : スナップショットバックアップデータを復元します。
--   [<a href="/sql-statements/sql-statement-show-backups.md">`SHOW BACKUPS|RESTORES`</a>](/sql-statements/sql-statement-show-backups.md) : バックアップと復元の進行状況を表示します。
+-   [`BACKUP`](/sql-statements/sql-statement-backup.md) : 完全なスナップショット データをバックアップします。
+-   [`RESTORE`](/sql-statements/sql-statement-restore.md) : スナップショットバックアップデータを復元します。
+-   [`SHOW BACKUPS|RESTORES`](/sql-statements/sql-statement-show-backups.md) : バックアップと復元の進行状況を表示します。
 
 ### Kubernetes でTiDB Operatorを使用する {#use-tidb-operator-on-kubernetes}
 
-Kubernetes では、 TiDB Operatorを使用して TiDB クラスター データを Amazon S3、GCS、または Azure Blob Storage にバックアップし、そのようなシステムのバックアップ データからデータを復元できます。詳細は[<a href="https://docs.pingcap.com/tidb-in-kubernetes/stable/backup-restore-overview">TiDB Operatorを使用したデータのバックアップと復元</a>](https://docs.pingcap.com/tidb-in-kubernetes/stable/backup-restore-overview)を参照してください。
+Kubernetes では、 TiDB Operatorを使用して TiDB クラスター データを Amazon S3、GCS、または Azure Blob Storage にバックアップし、そのようなシステムのバックアップ データからデータを復元できます。詳細は[TiDB Operatorを使用したデータのバックアップと復元](https://docs.pingcap.com/tidb-in-kubernetes/stable/backup-restore-overview)を参照してください。
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/br/backup-and-restore-overview.md">TiDB のバックアップと復元の概要</a>](/br/backup-and-restore-overview.md)
--   [<a href="/br/backup-and-restore-design.md">TiDB のバックアップと復元のアーキテクチャ</a>](/br/backup-and-restore-design.md)
+-   [TiDB のバックアップと復元の概要](/br/backup-and-restore-overview.md)
+-   [TiDB のバックアップと復元のアーキテクチャ](/br/backup-and-restore-design.md)

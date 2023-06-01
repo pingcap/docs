@@ -125,7 +125,7 @@ SELECT TABLE_NAME FROM information_schema.tables where TABLE_SCHEMA = "<db_name>
 
 TiFlashレプリカが追加される前に、各 TiKV インスタンスはフル テーブル スキャンを実行し、スキャンされたデータを「スナップショット」としてTiFlashに送信してレプリカを作成します。デフォルトでは、オンライン サービスへの影響を最小限に抑えるために、 TiFlashレプリカはリソース使用量を減らしてゆっくり追加されます。 TiKV ノードとTiFlashノードに予備の CPU とディスク IO リソースがある場合は、次の手順を実行してTiFlashレプリケーションを高速化できます。
 
-1.  [<a href="https://docs.pingcap.com/tidb/stable/dynamic-config">動的構成 SQL ステートメント</a>](https://docs.pingcap.com/tidb/stable/dynamic-config)を使用して、各 TiKV およびTiFlashインスタンスのスナップショット書き込み速度制限を一時的に増加します。
+1.  [動的構成 SQL ステートメント](https://docs.pingcap.com/tidb/stable/dynamic-config)を使用して、各 TiKV およびTiFlashインスタンスのスナップショット書き込み速度制限を一時的に増加します。
 
     ```sql
     -- The default value for both configurations are 100MiB, i.e. the maximum disk bandwidth used for writing snapshots is no more than 100MiB/s.
@@ -135,7 +135,7 @@ TiFlashレプリカが追加される前に、各 TiKV インスタンスはフ�
 
     これらの SQL ステートメントを実行すると、クラスターを再起動しなくても、構成の変更がすぐに有効になります。ただし、レプリケーション速度は依然として PD 制限によってグローバルに制限されているため、現時点では加速を観察することはできません。
 
-2.  新しいレプリカの速度制限を段階的に緩和するには、 [<a href="https://docs.pingcap.com/tidb/stable/pd-control">PD Control</a>](https://docs.pingcap.com/tidb/stable/pd-control)を使用します。
+2.  新しいレプリカの速度制限を段階的に緩和するには、 [PD Control](https://docs.pingcap.com/tidb/stable/pd-control)を使用します。
 
     デフォルトの新しいレプリカの速度制限は 30 です。これは、毎分約 30 のリージョンがTiFlashレプリカを追加することを意味します。次のコマンドを実行すると、すべてのTiFlashインスタンスの制限が 60 に調整され、元の速度が 2 倍になります。
 
@@ -254,6 +254,6 @@ TiFlashレプリカが追加される前に、各 TiKV インスタンスはフ�
 
 <CustomContent platform="tidb">
 
-ラベルを使用したレプリカのスケジュール設定の詳細については、 [<a href="/schedule-replicas-by-topology-labels.md">トポロジーラベルごとにレプリカをスケジュールする</a>](/schedule-replicas-by-topology-labels.md) 、 [<a href="/multi-data-centers-in-one-city-deployment.md">1 つの地域展開における複数のデータセンター</a>](/multi-data-centers-in-one-city-deployment.md) 、および[<a href="/three-data-centers-in-two-cities-deployment.md">2 つの地域に配置された 3 つのデータ センター</a>](/three-data-centers-in-two-cities-deployment.md)を参照してください。
+ラベルを使用したレプリカのスケジュール設定の詳細については、 [2 つの地域に配置された 3 つのデータ センター](/three-data-centers-in-two-cities-deployment.md)を参照してください。
 
 </CustomContent>

@@ -31,7 +31,7 @@ TiKV、 TiFlash、および TiDB Binlogコンポーネントは非同期的に�
 tiup cluster scale-in <cluster-name> [flags]
 ```
 
-`<cluster-name>`は、スケールインするクラスターの名前です。クラスター名を忘れた場合は、 [<a href="/tiup/tiup-component-cluster-list.md">`tiup cluster list`</a>](/tiup/tiup-component-cluster-list.md)コマンドを使用して確認できます。
+`<cluster-name>`は、スケールインするクラスターの名前です。クラスター名を忘れた場合は、 [`tiup cluster list`](/tiup/tiup-component-cluster-list.md)コマンドを使用して確認できます。
 
 ## オプション {#options}
 
@@ -71,4 +71,4 @@ tiup cluster scale-in <cluster-name> [flags]
 
 スケールインプロセスのログを表示します。
 
-[<a href="/tiup/tiup-component-cluster.md#command-list">&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト</a>](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト](/tiup/tiup-component-cluster.md#command-list)

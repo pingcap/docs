@@ -7,7 +7,7 @@ summary: Learn how to create, view, query, and delete temporary tables.
 
 一時テーブルは、クエリ結果を再利用するための手法と考えることができます。
 
-[<a href="/develop/dev-guide-bookshop-schema-design.md">書店</a>](/develop/dev-guide-bookshop-schema-design.md)アプリケーション内の最年長の著者について何かを知りたい場合は、最年長の著者のリストを使用する複数のクエリを作成できます。
+[書店](/develop/dev-guide-bookshop-schema-design.md)アプリケーション内の最年長の著者について何かを知りたい場合は、最年長の著者のリストを使用する複数のクエリを作成できます。
 
 たとえば、次のステートメントを使用すると、 `authors`テーブルから上位 50 人の最年長著者を取得できます。
 
@@ -223,7 +223,7 @@ public List<Author> getTop50EldestAuthorInfo() throws SQLException {
 SELECT * FROM top_50_eldest_authors;
 ```
 
-[<a href="/develop/dev-guide-join-tables.md">複数テーブル結合クエリ</a>](/develop/dev-guide-join-tables.md)を介して一時テーブルのデータをクエリに参照できます。
+[複数テーブル結合クエリ](/develop/dev-guide-join-tables.md)を介して一時テーブルのデータをクエリに参照できます。
 
 ```sql
 EXPLAIN SELECT ANY_VALUE(ta.id) AS author_id, ANY_VALUE(ta.age), ANY_VALUE(ta.name), COUNT(*) AS books
@@ -232,7 +232,7 @@ LEFT JOIN book_authors ba ON ta.id = ba.author_id
 GROUP BY ta.id;
 ```
 
-[<a href="/develop/dev-guide-use-views.md">意見</a>](/develop/dev-guide-use-views.md)とは異なり、一時テーブルをクエリすると、データの挿入で使用された元のクエリを実行するのではなく、一時テーブルからデータが直接取得されます。場合によっては、これによりクエリのパフォーマンスが向上することがあります。
+[意見](/develop/dev-guide-use-views.md)とは異なり、一時テーブルをクエリすると、データの挿入で使用された元のクエリを実行するのではなく、一時テーブルからデータが直接取得されます。場合によっては、これによりクエリのパフォーマンスが向上することがあります。
 
 ## 一時テーブルを削除する {#drop-a-temporary-table}
 
@@ -252,8 +252,8 @@ DROP GLOBAL TEMPORARY TABLE top_50_eldest_authors_global;
 
 ## 制限 {#limitation}
 
-TiDB の一時テーブルの制限については、 [<a href="/temporary-tables.md#compatibility-restrictions-with-other-tidb-features">他の TiDB 機能との互換性制限</a>](/temporary-tables.md#compatibility-restrictions-with-other-tidb-features)を参照してください。
+TiDB の一時テーブルの制限については、 [他の TiDB 機能との互換性制限](/temporary-tables.md#compatibility-restrictions-with-other-tidb-features)を参照してください。
 
 ## 続きを読む {#read-more}
 
--   [<a href="/temporary-tables.md">一時テーブル</a>](/temporary-tables.md)
+-   [一時テーブル](/temporary-tables.md)

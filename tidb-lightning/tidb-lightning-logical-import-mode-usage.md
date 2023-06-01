@@ -5,7 +5,7 @@ summary: Learn how to use the logical import mode in TiDB Lightning.
 
 # 論理インポートモードを使用する {#use-logical-import-mode}
 
-このドキュメントでは、設定ファイルの作成やパフォーマンスのチューニングなど、 TiDB Lightningの[<a href="/tidb-lightning/tidb-lightning-logical-import-mode.md">論理インポートモード</a>](/tidb-lightning/tidb-lightning-logical-import-mode.md)の使用方法を紹介します。
+このドキュメントでは、設定ファイルの作成やパフォーマンスのチューニングなど、 TiDB Lightningの[論理インポートモード](/tidb-lightning/tidb-lightning-logical-import-mode.md)の使用方法を紹介します。
 
 ## 論理インポート モードを構成して使用する {#configure-and-use-the-logical-import-mode}
 
@@ -49,7 +49,7 @@ password = ""
 log-level = "error"
 ```
 
-完全な構成ファイルについては、 [<a href="/tidb-lightning/tidb-lightning-configuration.md">TiDB Lightningコンフィグレーション</a>](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
+完全な構成ファイルについては、 [TiDB Lightningコンフィグレーション](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
 
 ## 競合の検出 {#conflict-detection}
 
@@ -65,7 +65,7 @@ log-level = "error"
 
 ## 性能調整 {#performance-tuning}
 
--   論理インポート モードでは、 TiDB Lightningのパフォーマンスはターゲット TiDB クラスターの書き込みパフォーマンスに大きく依存します。クラスターがパフォーマンスのボトルネックに達した場合は、 [<a href="/best-practices/high-concurrency-best-practices.md">高度な同時書き込みのベスト プラクティス</a>](/best-practices/high-concurrency-best-practices.md)を参照してください。
+-   論理インポート モードでは、 TiDB Lightningのパフォーマンスはターゲット TiDB クラスターの書き込みパフォーマンスに大きく依存します。クラスターがパフォーマンスのボトルネックに達した場合は、 [高度な同時書き込みのベスト プラクティス](/best-practices/high-concurrency-best-practices.md)を参照してください。
 
 -   ターゲット TiDB クラスターが書き込みボトルネックに遭遇しない場合は、 TiDB Lightning構成の値`region-concurrency`を増やすことを検討してください。デフォルト値の`region-concurrency`は CPU コアの数です。 `region-concurrency`の意味は、物理インポートモードと論理インポートモードで異なります。論理インポート モードでは、書き込み同時実行数は`region-concurrency`です。
 

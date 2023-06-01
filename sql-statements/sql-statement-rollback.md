@@ -44,7 +44,7 @@ Empty set (0.01 sec)
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-savepoint.md">セーブポイント</a>](/sql-statements/sql-statement-savepoint.md)
--   [<a href="/sql-statements/sql-statement-commit.md">専念</a>](/sql-statements/sql-statement-commit.md)
--   [<a href="/sql-statements/sql-statement-begin.md">始める</a>](/sql-statements/sql-statement-begin.md)
--   [<a href="/sql-statements/sql-statement-start-transaction.md">取引を開始する</a>](/sql-statements/sql-statement-start-transaction.md)
+-   [セーブポイント](/sql-statements/sql-statement-savepoint.md)
+-   [専念](/sql-statements/sql-statement-commit.md)
+-   [始める](/sql-statements/sql-statement-begin.md)
+-   [取引を開始する](/sql-statements/sql-statement-start-transaction.md)

@@ -8,7 +8,7 @@ summary: Learn about the naming conventions for CSV, Parquet, Aurora Snapshot, a
 データは、CSV、Parquet、 Aurora Snapshot、SQL のファイル形式でTiDB Cloudにインポートできます。データが正常にインポートされていることを確認するには、次の 2 種類のファイルを準備する必要があります。
 
 -   **スキーマ ファイル**。データベース スキーマ ファイル (オプション) とテーブル スキーマ ファイルを両方とも SQL 形式で準備します ( `.sql` )。テーブル スキーマ ファイルが提供されていない場合は、事前にターゲット データベースに対応するテーブルを手動で作成する必要があります。
--   **データファイル**。データをインポートするための命名規則に従ったデータファイルを準備します。データ ファイル名が要件を満たさない場合は、 [<a href="#file-pattern">**ファイルパターン**</a>](#file-pattern)使用してインポート タスクを実行することをお勧めします。そうしないと、インポート タスクはインポートするデータ ファイルをスキャンできません。
+-   **データファイル**。データをインポートするための命名規則に従ったデータファイルを準備します。データ ファイル名が要件を満たさない場合は、 [**ファイルパターン**](#file-pattern)使用してインポート タスクを実行することをお勧めします。そうしないと、インポート タスクはインポートするデータ ファイルをスキャンできません。
 
 ## スキーマファイルの命名規則 {#naming-conventions-for-schema-files}
 
@@ -95,5 +95,5 @@ SQL ファイルがデフォルト構成の TiDB Dumplingを介してエクス�
 
 CSV または Parquet のソース データ ファイルが命名規則に準拠していない場合は、ファイル パターン機能を使用して、ソース データ ファイルとターゲット テーブルの間に名前マッピング関係を確立できます。この機能は、 Auroraスナップショットと SQL データ ファイルをサポートしていません。
 
--   CSV ファイルについては、 [<a href="/tidb-cloud/import-csv-files.md#step-4-import-csv-files-to-tidb-cloud">ステップ 4. CSV ファイルをTiDB Cloudにインポートする</a>](/tidb-cloud/import-csv-files.md#step-4-import-csv-files-to-tidb-cloud)の**ファイル パターン**を参照してください。
--   Parquet ファイルについては、 [<a href="/tidb-cloud/import-parquet-files.md#step-4-import-parquet-files-to-tidb-cloud">ステップ 4. Parquet ファイルをTiDB Cloudにインポートする</a>](/tidb-cloud/import-parquet-files.md#step-4-import-parquet-files-to-tidb-cloud)の**ファイル パターン**を参照してください。
+-   CSV ファイルについては、 [ステップ 4. CSV ファイルをTiDB Cloudにインポートする](/tidb-cloud/import-csv-files.md#step-4-import-csv-files-to-tidb-cloud)の**ファイル パターン**を参照してください。
+-   Parquet ファイルについては、 [ステップ 4. Parquet ファイルをTiDB Cloudにインポートする](/tidb-cloud/import-parquet-files.md#step-4-import-parquet-files-to-tidb-cloud)の**ファイル パターン**を参照してください。

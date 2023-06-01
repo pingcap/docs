@@ -5,11 +5,11 @@ summary: Install the Bikeshare example database.
 
 # サンプルデータベースのインポート {#import-example-database}
 
-TiDB マニュアルで使用されている例では、Capital Bikeshare の[<a href="https://www.capitalbikeshare.com/data-license-agreement">Capital Bikeshare データライセンス契約</a>](https://www.capitalbikeshare.com/data-license-agreement)の下でリリースされた[<a href="https://www.capitalbikeshare.com/system-data">システムデータ</a>](https://www.capitalbikeshare.com/system-data)使用しています。
+TiDB マニュアルで使用されている例では、Capital Bikeshare の[システムデータ](https://www.capitalbikeshare.com/system-data)使用しています。
 
 ## すべてのデータ ファイルをダウンロードする {#download-all-data-files}
 
-システムデータは1年に[<a href="https://s3.amazonaws.com/capitalbikeshare-data/index.html">.zip ファイルでダウンロードする場合</a>](https://s3.amazonaws.com/capitalbikeshare-data/index.html)整理して利用可能です。すべてのファイルをダウンロードして解凍するには、約 3GB のディスク容量が必要です。 bash スクリプトを使用して 2010 年から 2017 年のすべてのファイルをダウンロードするには:
+システムデータは1年に[.zip ファイルでダウンロードする場合](https://s3.amazonaws.com/capitalbikeshare-data/index.html)整理して利用可能です。すべてのファイルをダウンロードして解凍するには、約 3GB のディスク容量が必要です。 bash スクリプトを使用して 2010 年から 2017 年のすべてのファイルをダウンロードするには:
 
 ```bash
 mkdir -p bikeshare-data && cd bikeshare-data

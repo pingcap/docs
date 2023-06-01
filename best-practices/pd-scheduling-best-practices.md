@@ -7,14 +7,14 @@ summary: Learn best practice and strategy for PD scheduling.
 
 このドキュメントでは、アプリケーションを容易にするための一般的なシナリオを通じて PD スケジューリングの原則と戦略について詳しく説明します。このドキュメントは、次の中心的な概念を含む TiDB、TiKV、および PD の基本を理解していることを前提としています。
 
--   [<a href="/glossary.md#leaderfollowerlearner">リーダー/フォロワー/学習者</a>](/glossary.md#leaderfollowerlearner)
--   [<a href="/glossary.md#operator">オペレーター</a>](/glossary.md#operator)
--   [<a href="/glossary.md#operator-step">オペレータステップ</a>](/glossary.md#operator-step)
--   [<a href="/glossary.md#pendingdown">保留中/ダウン中</a>](/glossary.md#pendingdown)
--   [<a href="/glossary.md#regionpeerraft-group">リージョン/ピア/ Raftグループ</a>](/glossary.md#regionpeerraft-group)
--   [<a href="/glossary.md#region-split">リージョン分割</a>](/glossary.md#region-split)
--   [<a href="/glossary.md#scheduler">スケジューラ</a>](/glossary.md#scheduler)
--   [<a href="/glossary.md#store">店</a>](/glossary.md#store)
+-   [リーダー/フォロワー/学習者](/glossary.md#leaderfollowerlearner)
+-   [オペレーター](/glossary.md#operator)
+-   [オペレータステップ](/glossary.md#operator-step)
+-   [保留中/ダウン中](/glossary.md#pendingdown)
+-   [リージョン/ピア/ Raftグループ](/glossary.md#regionpeerraft-group)
+-   [リージョン分割](/glossary.md#region-split)
+-   [スケジューラ](/glossary.md#scheduler)
+-   [店](/glossary.md#store)
 
 > **ノート：**
 >
@@ -101,15 +101,15 @@ summary: Learn best practice and strategy for PD scheduling.
 
 リージョンのマージとは、隣接する小さな領域をマージするプロセスを指します。これは、データ削除後の多数の小さな領域または空の領域による不必要なリソースの消費を回避するのに役立ちます。リージョンのマージは`mergeChecker`によって実行されます。これは`replicaChecker`と同様の方法で処理されます。PD はバックグラウンドですべての領域を継続的にスキャンし、連続した小さな領域が見つかった場合にオペレーターを生成します。
 
-具体的には、新しく分割されたリージョンが値[<a href="/pd-configuration-file.md#split-merge-interval">`split-merge-interval`</a>](/pd-configuration-file.md#split-merge-interval) (デフォルトでは`1h` ) を超えて存在する場合、次の条件が同時に発生すると、このリージョンはリージョンのマージ スケジューリングをトリガーします。
+具体的には、新しく分割されたリージョンが値[`split-merge-interval`](/pd-configuration-file.md#split-merge-interval) (デフォルトでは`1h` ) を超えて存在する場合、次の条件が同時に発生すると、このリージョンはリージョンのマージ スケジューリングをトリガーします。
 
--   このリージョンのサイズは[<a href="/pd-configuration-file.md#max-merge-region-size">`max-merge-region-size`</a>](/pd-configuration-file.md#max-merge-region-size)の値より小さいです (デフォルトでは 20 MiB)。
+-   このリージョンのサイズは[`max-merge-region-size`](/pd-configuration-file.md#max-merge-region-size)の値より小さいです (デフォルトでは 20 MiB)。
 
--   このリージョンのキーの数は、値[<a href="/pd-configuration-file.md#max-merge-region-keys">`max-merge-region-keys`</a>](/pd-configuration-file.md#max-merge-region-keys) (デフォルトでは 200,000) より小さいです。
+-   このリージョンのキーの数は、値[`max-merge-region-keys`](/pd-configuration-file.md#max-merge-region-keys) (デフォルトでは 200,000) より小さいです。
 
 ## スケジュールステータスのクエリ {#query-scheduling-status}
 
-スケジューリングシステムの状態はメトリクス、pd-ctl、ログで確認できます。ここではメトリクスとpd-ctlの手法について簡単に紹介します。詳細は[<a href="/grafana-pd-dashboard.md">PDモニタリングメトリクス</a>](/grafana-pd-dashboard.md)と[<a href="/pd-control.md">PD Control</a>](/pd-control.md)を参照してください。
+スケジューリングシステムの状態はメトリクス、pd-ctl、ログで確認できます。ここではメトリクスとpd-ctlの手法について簡単に紹介します。詳細は[PD Control](/pd-control.md)を参照してください。
 
 ### オペレーターのステータス {#operator-status}
 
@@ -162,7 +162,7 @@ pd-ctl と領域チェック コマンドを使用して、異常な状態にあ
 
 ## スケジュール戦略を制御する {#control-scheduling-strategy}
 
-pd-ctl を使用すると、次の 3 つの側面からスケジューリング戦略を調整できます。詳細については[<a href="/pd-control.md">PD Control</a>](/pd-control.md)を参照してください。
+pd-ctl を使用すると、次の 3 つの側面からスケジューリング戦略を調整できます。詳細については[PD Control](/pd-control.md)を参照してください。
 
 ### スケジューラを手動で追加/削除する {#add-delete-scheduler-manually}
 
@@ -203,9 +203,9 @@ PD の評価メカニズムでは、さまざまなストアのリーダー数�
 
 さまざまな店舗のスコアが近い場合、PD はリーダー/地域が均等に分布していると誤って信じていることを意味します。考えられる理由は次のとおりです。
 
--   負荷の不均衡を引き起こすホットな領域があります。この場合、 [<a href="#hot-regions-are-not-evenly-distributed">ホットリージョンのスケジュール設定</a>](#hot-regions-are-not-evenly-distributed)に基づいてさらに分析する必要があります。
--   空き領域または小さな領域が多数存在するため、店舗ごとのリーダーの数に大きな差が生じ、 Raft店舗へのプレッシャーが高くなります。これは[<a href="#region-merge-is-slow">リージョンのマージ</a>](#region-merge-is-slow)スケジュールの時間です。
--   ハードウェアおよびソフトウェア環境は店舗によって異なります。リーダー/リージョンの分布を制御するには、 [<a href="#load-balancing">負荷分散</a>](#load-balancing)を参照し、 `leader-weight`と`region-weight`の値を調整します。
+-   負荷の不均衡を引き起こすホットな領域があります。この場合、 [ホットリージョンのスケジュール設定](#hot-regions-are-not-evenly-distributed)に基づいてさらに分析する必要があります。
+-   空き領域または小さな領域が多数存在するため、店舗ごとのリーダーの数に大きな差が生じ、 Raft店舗へのプレッシャーが高くなります。これは[リージョンのマージ](#region-merge-is-slow)スケジュールの時間です。
+-   ハードウェアおよびソフトウェア環境は店舗によって異なります。リーダー/リージョンの分布を制御するには、 [負荷分散](#load-balancing)を参照し、 `leader-weight`と`region-weight`の値を調整します。
 -   その他の不明な理由。それでも、 `leader-weight`と`region-weight`の値を調整して、リーダー/領域の分布を制御できます。
 
 異なるストアの評価に大きな違いがある場合は、オペレーターの生成と実行に特に焦点を当てて、オペレーター関連のメトリクスを調べる必要があります。主に次の 2 つの状況があります。
@@ -229,7 +229,7 @@ PD の評価メカニズムでは、さまざまなストアのリーダー数�
 オペレーターは正常に生成されたものの、スケジューリング プロセスが遅い場合は、次の理由が考えられます。
 
 -   スケジュール速度はデフォルトで制限されています。 `leader-schedule-limit`または`replica-schedule-limit`をより大きな値に調整できます。s 同様に、 `max-pending-peer-count`と`max-snapshot-count`の制限を緩めることを検討できます。
--   他のスケジューリング タスクが同時に実行され、システム内のリソースを奪い合っています。 [<a href="#leadersregions-are-not-evenly-distributed">リーダー/地域が均等に分散されていない</a>](#leadersregions-are-not-evenly-distributed)の解決策を参照してください。
+-   他のスケジューリング タスクが同時に実行され、システム内のリソースを奪い合っています。 [リーダー/地域が均等に分散されていない](#leadersregions-are-not-evenly-distributed)の解決策を参照してください。
 -   単一のノードをオフラインにすると、処理されるリージョン リーダーの数 (3 つのレプリカ構成では約 1/3) が削除するノードに分散されます。したがって、速度は、この単一ノードによってスナップショットが生成される速度によって制限されます。リーダーを移行するために手動で`evict-leader-scheduler`を追加すると、速度を上げることができます。
 
 対応する演算子の生成に失敗した場合、考えられる理由は次のとおりです。
@@ -239,7 +239,7 @@ PD の評価メカニズムでは、さまざまなストアのリーダー数�
 
 ### ノードをオンラインにするのが遅い {#bringing-nodes-online-is-slow}
 
-現在、ノードをオンラインにすることは、バランス リージョン メカニズムを通じてスケジュールされています。トラブルシューティングについては[<a href="#leadersregions-are-not-evenly-distributed">リーダー/地域が均等に分散されていない</a>](#leadersregions-are-not-evenly-distributed)を参照してください。
+現在、ノードをオンラインにすることは、バランス リージョン メカニズムを通じてスケジュールされています。トラブルシューティングについては[リーダー/地域が均等に分散されていない](#leadersregions-are-not-evenly-distributed)を参照してください。
 
 ### 高温領域が均等に分布していない {#hot-regions-are-not-evenly-distributed}
 
@@ -253,7 +253,7 @@ PD の評価メカニズムでは、さまざまなストアのリーダー数�
 
 -   TiKV 関連のメトリクスから、一部のノードの負荷が他のノードの負荷よりも大幅に高く、これがシステム全体のボトルネックになります。現在、PD はトラフィック分析のみを通じてホットスポットをカウントしているため、特定のシナリオでは PD がホットスポットを特定できない可能性があります。たとえば、一部のリージョンに対して集中的なポイント ルックアップ リクエストがある場合、トラフィック内での検出が明らかではない場合がありますが、それでも高い QPS が主要モジュールでボトルネックを引き起こす可能性があります。
 
-    **解決策**: まず、特定のビジネスに基づいてホット リージョンが形成されているテーブルを見つけます。次に、 `scatter-range-scheduler`スケジューラを追加して、このテーブルのすべての領域が均等に分散されるようにします。 TiDB は、この操作を簡素化するための HTTP API インターフェースも提供します。詳細は[<a href="https://github.com/pingcap/tidb/blob/master/docs/tidb_http_api.md">TiDB HTTP API</a>](https://github.com/pingcap/tidb/blob/master/docs/tidb_http_api.md)を参照してください。
+    **解決策**: まず、特定のビジネスに基づいてホット リージョンが形成されているテーブルを見つけます。次に、 `scatter-range-scheduler`スケジューラを追加して、このテーブルのすべての領域が均等に分散されるようにします。 TiDB は、この操作を簡素化するための HTTP API インターフェースも提供します。詳細は[TiDB HTTP API](https://github.com/pingcap/tidb/blob/master/docs/tidb_http_api.md)を参照してください。
 
 ### リージョンのマージが遅い {#region-merge-is-slow}
 
@@ -266,7 +266,7 @@ PD の評価メカニズムでは、さまざまなストアのリーダー数�
     -   TiKV: `split-region-on-table` ～ `false`を設定します。パラメータを動的に変更することはできません。
     -   PD: PD Controlを使用して、クラスターの状況に必要なパラメーターを設定します。
 
-        -   クラスターに TiDB インスタンスがなく、値[<a href="/pd-control.md#config-show--set-option-value--placement-rules">`key-type`</a>](/pd-control.md#config-show--set-option-value--placement-rules)が`raw`または`txn`に設定されているとします。この場合、PD は`enable-cross-table-merge setting`の値に関係なく、テーブル全体でリージョンをマージできます。 `key-type`パラメータは動的に変更できます。
+        -   クラスターに TiDB インスタンスがなく、値[`key-type`](/pd-control.md#config-show--set-option-value--placement-rules)が`raw`または`txn`に設定されているとします。この場合、PD は`enable-cross-table-merge setting`の値に関係なく、テーブル全体でリージョンをマージできます。 `key-type`パラメータは動的に変更できます。
 
         {{< copyable "" >}}
 
@@ -282,7 +282,7 @@ PD の評価メカニズムでは、さまざまなストアのリーダー数�
         config set enable-cross-table-merge true
         ```
 
-        変更が反映されない場合は、 [<a href="/faq/deploy-and-maintain-faq.md#why-the-modified-toml-configuration-for-tikvpd-does-not-take-effect">FAQ - TiKV/PD 用に変更した`toml`構成が有効にならないのはなぜですか?</a>](/faq/deploy-and-maintain-faq.md#why-the-modified-toml-configuration-for-tikvpd-does-not-take-effect)を参照してください。
+        変更が反映されない場合は、 [FAQ - TiKV/PD 用に変更した`toml`構成が有効にならないのはなぜですか?](/faq/deploy-and-maintain-faq.md#why-the-modified-toml-configuration-for-tikvpd-does-not-take-effect)を参照してください。
 
         > **ノート：**
         >
@@ -296,4 +296,4 @@ TiKV ノードに障害が発生した場合、PD はデフォルトで 30 分�
 
 実際には、ノード障害が回復不可能とみなされる場合は、すぐにオフラインにすることができます。これにより、PD はすぐに別のノードにレプリカを補充し、データ損失のリスクを軽減します。対照的に、ノードが回復可能であると考えられているものの、回復を 30 分以内に実行できない場合は、タイムアウト後の不必要なレプリカの補充とリソースの浪費を避けるために、一時的に`max-store-down-time`をより大きな値に調整できます。
 
-TiDB v5.2.0 では、TiKV に低速な TiKV ノード検出のメカニズムが導入されています。 TiKV でリクエストをサンプリングすることにより、このメカニズムは 1 ～ 100 の範囲のスコアを算出します。スコアが 80 以上の TiKV ノードは低速としてマークされます。 [<a href="/pd-control.md#scheduler-show--add--remove--pause--resume--config--describe">`evict-slow-store-scheduler`</a>](/pd-control.md#scheduler-show--add--remove--pause--resume--config--describe)を追加すると、遅いノードを検出してスケジュールすることができます。 TiKV が 1 つだけ低速として検出され、低速スコアが上限 (デフォルトでは 100) に達した場合、このノードのリーダーが排除されます ( `evict-leader-scheduler`の効果と同様)。
+TiDB v5.2.0 では、TiKV に低速な TiKV ノード検出のメカニズムが導入されています。 TiKV でリクエストをサンプリングすることにより、このメカニズムは 1 ～ 100 の範囲のスコアを算出します。スコアが 80 以上の TiKV ノードは低速としてマークされます。 [`evict-slow-store-scheduler`](/pd-control.md#scheduler-show--add--remove--pause--resume--config--describe)を追加すると、遅いノードを検出してスケジュールすることができます。 TiKV が 1 つだけ低速として検出され、低速スコアが上限 (デフォルトでは 100) に達した場合、このノードのリーダーが排除されます ( `evict-leader-scheduler`の効果と同様)。

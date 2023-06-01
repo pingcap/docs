@@ -9,11 +9,11 @@ summary: Learn best practices for highly-concurrent write-intensive workloads in
 
 ## 対象者 {#target-audience}
 
-このドキュメントは、TiDB の基本を理解していることを前提としています。まず、TiDB の基礎について説明した次の 3 つのブログ記事と[<a href="https://en.pingcap.com/blog/tidb-best-practice/">TiDB のベスト プラクティス</a>](https://en.pingcap.com/blog/tidb-best-practice/)を読むことをお勧めします。
+このドキュメントは、TiDB の基本を理解していることを前提としています。まず、TiDB の基礎について説明した次の 3 つのブログ記事と[TiDB のベスト プラクティス](https://en.pingcap.com/blog/tidb-best-practice/)を読むことをお勧めします。
 
--   [<a href="https://en.pingcap.com/blog/tidb-internal-data-storage/">データストレージ</a>](https://en.pingcap.com/blog/tidb-internal-data-storage/)
--   [<a href="https://en.pingcap.com/blog/tidb-internal-computing/">コンピューティング</a>](https://en.pingcap.com/blog/tidb-internal-computing/)
--   [<a href="https://en.pingcap.com/blog/tidb-internal-scheduling/">スケジュール設定</a>](https://en.pingcap.com/blog/tidb-internal-scheduling/)
+-   [データストレージ](https://en.pingcap.com/blog/tidb-internal-data-storage/)
+-   [コンピューティング](https://en.pingcap.com/blog/tidb-internal-computing/)
+-   [スケジュール設定](https://en.pingcap.com/blog/tidb-internal-scheduling/)
 
 ## 同時書き込み集中型のシナリオ {#highly-concurrent-write-intensive-scenario}
 
@@ -32,9 +32,9 @@ summary: Learn best practices for highly-concurrent write-intensive workloads in
 
 ## TiDB におけるデータ分散の原則 {#data-distribution-principles-in-tidb}
 
-上記の課題に対処するには、TiDB のデータのセグメント化とスケジューリングの原則から始める必要があります。詳細については[<a href="https://en.pingcap.com/blog/tidb-internal-scheduling/">スケジュール設定</a>](https://en.pingcap.com/blog/tidb-internal-scheduling/)を参照してください。
+上記の課題に対処するには、TiDB のデータのセグメント化とスケジューリングの原則から始める必要があります。詳細については[スケジュール設定](https://en.pingcap.com/blog/tidb-internal-scheduling/)を参照してください。
 
-TiDB はデータをリージョンに分割し、それぞれがデフォルトで 96M のサイズ制限を持つデータ範囲を表します。各リージョンには複数のレプリカがあり、レプリカの各グループはRaftグループと呼ばれます。 Raftグループでは、リージョンLeaderはデータ範囲内で読み取りおよび書き込みタスク (TiDB は[<a href="/follower-read.md">フォロワー読み取り</a>](/follower-read.md)をサポート) を実行します。リージョンLeaderは、配置Driver(PD)コンポーネントによって自動的に異なる物理ノードに均等にスケジュールされ、読み取りおよび書き込みの圧力が分散されます。
+TiDB はデータをリージョンに分割し、それぞれがデフォルトで 96M のサイズ制限を持つデータ範囲を表します。各リージョンには複数のレプリカがあり、レプリカの各グループはRaftグループと呼ばれます。 Raftグループでは、リージョンLeaderはデータ範囲内で読み取りおよび書き込みタスク (TiDB は[フォロワー読み取り](/follower-read.md)をサポート) を実行します。リージョンLeaderは、配置Driver(PD)コンポーネントによって自動的に異なる物理ノードに均等にスケジュールされ、読み取りおよび書き込みの圧力が分散されます。
 
 ![TiDB Data Overview](/media/best-practices/tidb-data-overview.png)
 
@@ -101,7 +101,7 @@ FROM
 
 ![QPS3](/media/best-practices/QPS3.png)
 
-[<a href="/grafana-tikv-dashboard.md">RaftストアCPU</a>](/grafana-tikv-dashboard.md)は`raftstore`スレッドの CPU 使用率で、通常は書き込み負荷を表します。このシナリオでは、 `tikv-3`がこのRaftグループのLeaderです。 `tikv-0`と`tikv-1`はフォロワーです。他のノードの負荷はほぼ空です。
+[RaftストアCPU](/grafana-tikv-dashboard.md)は`raftstore`スレッドの CPU 使用率で、通常は書き込み負荷を表します。このシナリオでは、 `tikv-3`がこのRaftグループのLeaderです。 `tikv-0`と`tikv-1`はフォロワーです。他のノードの負荷はほぼ空です。
 
 PD のモニタリング メトリックによっても、ホットスポットが発生していることが確認されます。
 
@@ -133,7 +133,7 @@ PD のモニタリング メトリックによっても、ホットスポット�
 
 理論上期待される理想的なパフォーマンスを達成するには、リージョンを必要な数のリージョンに直接分割し、これらのリージョンをクラスター内の他のノードに事前にスケジュールすることで、ウォームアップ フェーズをスキップできます。
 
-v3.0.x、v2.1.13 以降のバージョンでは、TiDB は[<a href="/sql-statements/sql-statement-split-region.md">分割リージョン</a>](/sql-statements/sql-statement-split-region.md)と呼ばれる新機能をサポートします。この新機能では、次の新しい構文が提供されます。
+v3.0.x、v2.1.13 以降のバージョンでは、TiDB は[分割リージョン](/sql-statements/sql-statement-split-region.md)と呼ばれる新機能をサポートします。この新機能では、次の新しい構文が提供されます。
 
 {{< copyable "" >}}
 
@@ -199,15 +199,15 @@ ORDER BY
 
 明らかなホットスポットの問題が解決されたことがわかります。
 
-この場合、テーブルは単純です。他の場合には、インデックスのホットスポットの問題も考慮する必要があるかもしれません。インデックスリージョン を事前に分割する方法の詳細については、 [<a href="/sql-statements/sql-statement-split-region.md">分割リージョン</a>](/sql-statements/sql-statement-split-region.md)を参照してください。
+この場合、テーブルは単純です。他の場合には、インデックスのホットスポットの問題も考慮する必要があるかもしれません。インデックスリージョン を事前に分割する方法の詳細については、 [分割リージョン](/sql-statements/sql-statement-split-region.md)を参照してください。
 
 ## 複雑なホットスポットの問題 {#complex-hotspot-problems}
 
 **問題 1:**
 
-テーブルに主キーがない場合、または主キーが`Int`タイプではなく、ランダムに分散された主キー ID を生成したくない場合、TiDB は暗黙的な`_tidb_rowid`列を行 ID として提供します。一般に、 `SHARD_ROW_ID_BITS`パラメータを使用しない場合、 `_tidb_rowid`列の値も単調増加するため、ホットスポットが発生する可能性があります。詳細については[<a href="/shard-row-id-bits.md">`SHARD_ROW_ID_BITS`</a>](/shard-row-id-bits.md)を参照してください。
+テーブルに主キーがない場合、または主キーが`Int`タイプではなく、ランダムに分散された主キー ID を生成したくない場合、TiDB は暗黙的な`_tidb_rowid`列を行 ID として提供します。一般に、 `SHARD_ROW_ID_BITS`パラメータを使用しない場合、 `_tidb_rowid`列の値も単調増加するため、ホットスポットが発生する可能性があります。詳細については[`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)を参照してください。
 
-この状況でのホットスポットの問題を回避するには、テーブルを作成するときに`SHARD_ROW_ID_BITS`と`PRE_SPLIT_REGIONS`を使用します。 `PRE_SPLIT_REGIONS`の詳細については、 [<a href="/sql-statements/sql-statement-split-region.md#pre_split_regions">分割前のリージョン</a>](/sql-statements/sql-statement-split-region.md#pre_split_regions)を参照してください。
+この状況でのホットスポットの問題を回避するには、テーブルを作成するときに`SHARD_ROW_ID_BITS`と`PRE_SPLIT_REGIONS`を使用します。 `PRE_SPLIT_REGIONS`の詳細については、 [分割前のリージョン](/sql-statements/sql-statement-split-region.md#pre_split_regions)を参照してください。
 
 `SHARD_ROW_ID_BITS`は、 `_tidb_rowid`列で生成される行 ID をランダムに分散するために使用されます。 `PRE_SPLIT_REGIONS`は、テーブルの作成後にリージョンを事前に分割するために使用されます。
 
@@ -238,11 +238,11 @@ table `t`へのデータの書き込みが開始されると、データは分�
 
 テーブルの主キーが整数型で、テーブルが主キーの一意性を保証するために`AUTO_INCREMENT`を使用する場合 (必ずしも連続または増分である必要はありません)、TiDB は行の値を直接使用するため、このテーブルにホットスポットを分散するために`SHARD_ROW_ID_BITS`使用することはできません。主キーの`_tidb_rowid` 。
 
-このシナリオの問題に対処するには、データを挿入するときに`AUTO_INCREMENT`を[<a href="/auto-random.md">`AUTO_RANDOM`</a>](/auto-random.md) (列属性) に置き換えます。次に、TiDB は整数の主キー列に値を自動的に割り当てます。これにより、行 ID の連続性がなくなり、ホットスポットが分散されます。
+このシナリオの問題に対処するには、データを挿入するときに`AUTO_INCREMENT`を[`AUTO_RANDOM`](/auto-random.md) (列属性) に置き換えます。次に、TiDB は整数の主キー列に値を自動的に割り当てます。これにより、行 ID の連続性がなくなり、ホットスポットが分散されます。
 
 ## パラメータ設定 {#parameter-configuration}
 
-v2.1 では、書き込み競合が頻繁に発生するシナリオでトランザクション競合を事前に特定するために、TiDB に[<a href="/tidb-configuration-file.md#txn-local-latches">ラッチ機構</a>](/tidb-configuration-file.md#txn-local-latches)が導入されました。目的は、書き込み競合によって引き起こされる TiDB および TiKV でのトランザクション コミットの再試行を減らすことです。一般に、バッチ タスクは TiDB に既に保存されているデータを使用するため、トランザクションの書き込み競合は存在しません。この状況では、TiDB のラッチを無効にして、小さなオブジェクトへのメモリ割り当てを減らすことができます。
+v2.1 では、書き込み競合が頻繁に発生するシナリオでトランザクション競合を事前に特定するために、TiDB に[ラッチ機構](/tidb-configuration-file.md#txn-local-latches)が導入されました。目的は、書き込み競合によって引き起こされる TiDB および TiKV でのトランザクション コミットの再試行を減らすことです。一般に、バッチ タスクは TiDB に既に保存されているデータを使用するため、トランザクションの書き込み競合は存在しません。この状況では、TiDB のラッチを無効にして、小さなオブジェクトへのメモリ割り当てを減らすことができます。
 
 ```
 [txn-local-latches]

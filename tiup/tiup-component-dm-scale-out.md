@@ -12,9 +12,9 @@ title: tiup dm scale-out
 tiup dm scale-out <cluster-name> <topology.yaml> [flags]
 ```
 
-`<cluster-name>` : 操作するクラスターの名前。クラスター名を忘れた場合は、 [<a href="/tiup/tiup-component-dm-list.md">クラスタリスト</a>](/tiup/tiup-component-dm-list.md)コマンドで確認できます。
+`<cluster-name>` : 操作するクラスターの名前。クラスター名を忘れた場合は、 [クラスタリスト](/tiup/tiup-component-dm-list.md)コマンドで確認できます。
 
-`<topology.yaml>` : 準備された[<a href="/tiup/tiup-dm-topology-reference.md">トポロジファイル</a>](/tiup/tiup-dm-topology-reference.md) 。このトポロジ ファイルには、現在のクラスターに追加される新しいノードのみが含まれている必要があります。
+`<topology.yaml>` : 準備された[トポロジファイル](/tiup/tiup-dm-topology-reference.md) 。このトポロジ ファイルには、現在のクラスターに追加される新しいノードのみが含まれている必要があります。
 
 ## オプション {#options}
 
@@ -46,4 +46,4 @@ tiup dm scale-out <cluster-name> <topology.yaml> [flags]
 
 スケールアウトのログ。
 
-[<a href="/tiup/tiup-component-dm.md#command-list">&lt;&lt; 前のページに戻る - TiUP DMコマンド一覧</a>](/tiup/tiup-component-dm.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP DMコマンド一覧](/tiup/tiup-component-dm.md#command-list)

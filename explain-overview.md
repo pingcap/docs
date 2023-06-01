@@ -37,24 +37,24 @@ Records: 2  Duplicates: 0  Warnings: 0
 3 rows in set (0.00 sec)
 ```
 
-`EXPLAIN`は実際のクエリを実行しません。 [<a href="/sql-statements/sql-statement-explain-analyze.md">`EXPLAIN ANALYZE`</a>](/sql-statements/sql-statement-explain-analyze.md)を使用してクエリを実行し、 `EXPLAIN`情報を表示できます。これは、選択した実行計画が最適ではないケースを診断する場合に役立ちます。 `EXPLAIN`その他の使用例については、次のドキュメントを参照してください。
+`EXPLAIN`は実際のクエリを実行しません。 [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)を使用してクエリを実行し、 `EXPLAIN`情報を表示できます。これは、選択した実行計画が最適ではないケースを診断する場合に役立ちます。 `EXPLAIN`その他の使用例については、次のドキュメントを参照してください。
 
--   [<a href="/explain-indexes.md">インデックス</a>](/explain-indexes.md)
--   [<a href="/explain-joins.md">テーブル結合</a>](/explain-joins.md)
--   [<a href="/explain-subqueries.md">サブクエリ</a>](/explain-subqueries.md)
--   [<a href="/explain-aggregation.md">集計</a>](/explain-aggregation.md)
--   [<a href="/explain-views.md">ビュー</a>](/explain-views.md)
--   [<a href="/explain-partitions.md">パーティション</a>](/explain-partitions.md)
+-   [インデックス](/explain-indexes.md)
+-   [テーブル結合](/explain-joins.md)
+-   [サブクエリ](/explain-subqueries.md)
+-   [集計](/explain-aggregation.md)
+-   [ビュー](/explain-views.md)
+-   [パーティション](/explain-partitions.md)
 
 ## EXPLAIN出力を理解する {#understand-explain-output}
 
 以下に、上記の`EXPLAIN`ステートメントの出力について説明します。
 
--   `id` 、SQL ステートメントを実行するために必要なオペレーターまたはサブタスクの名前を表します。詳細については[<a href="#operator-overview">オペレーター概要</a>](#operator-overview)参照してください。
+-   `id` 、SQL ステートメントを実行するために必要なオペレーターまたはサブタスクの名前を表します。詳細については[オペレーター概要](#operator-overview)参照してください。
 -   `estRows` TiDB が処理すると予想される行数の推定値を示します。この数値は、アクセス方法が主キーまたは一意キーに基づいている場合など、辞書情報に基づいている場合や、CMSketch やヒストグラムなどの統計に基づいている場合があります。
--   `task`オペレーターが作業を行っている場所を示します。詳細については[<a href="#task-overview">タスクの概要</a>](#task-overview)参照してください。
+-   `task`オペレーターが作業を行っている場所を示します。詳細については[タスクの概要](#task-overview)参照してください。
 -   `access object`アクセスされているテーブル、パーティション、インデックスを示します。インデックスの列`a`が使用された上記の場合と同様に、インデックスの部分も表示されます。これは、複合インデックスがある場合に役立ちます。
--   `operator info`アクセスに関する追加の詳細を示します。詳細については[<a href="#operator-info-overview">オペレーター情報の概要</a>](#operator-info-overview)参照してください。
+-   `operator info`アクセスに関する追加の詳細を示します。詳細については[オペレーター情報の概要](#operator-info-overview)参照してください。
 
 > **ノート：**
 >
@@ -157,7 +157,7 @@ TiDB は、TiKV/ TiFlashからスキャンしたデータまたは計算結果�
 > **ノート：**
 >
 > -   インデックスを使用するには、条件が*sargable*である必要があります。たとえば、条件`YEAR(date_column) < 1992`ではインデックスを使用できませんが、 `date_column < '1992-01-01`ではインデックスを使用できます。
-> -   同じ種類のデータと[<a href="/character-set-and-collation.md">文字セットと照合順序</a>](/character-set-and-collation.md)を比較することをお勧めします。タイプを混合すると、さらに`cast`操作が必要になったり、インデックスが使用できなくなる場合があります。
+> -   同じ種類のデータと[文字セットと照合順序](/character-set-and-collation.md)を比較することをお勧めします。タイプを混合すると、さらに`cast`操作が必要になったり、インデックスが使用できなくなる場合があります。
 > -   `AND` (交差) と`OR` (和集合) を使用して、1 つの列の範囲クエリ条件を結合することもできます。多次元複合インデックスの場合、複数の列で条件を使用できます。たとえば、複合インデックス`(a, b, c)`に関しては次のようになります。
 >     -   `a`が同等のクエリの場合、引き続き`b`のクエリ範囲を計算します。 `b`も同等のクエリである場合、引き続き`c`のクエリ範囲を計算します。
 >     -   それ以外の場合、 `a`が等価でないクエリの場合は、 `a`の範囲しか把握できません。
@@ -176,4 +176,4 @@ SQL 最適化の目標の 1 つは、計算を可能な限り TiKV にプッシ�
 -   `keep order:false` 、このクエリのセマンティクスが TiKV が結果を順番に返す必要がないことを示します。順序 ( `SELECT * FROM t WHERE a = 1 ORDER BY id`など) を必要とするようにクエリが変更された場合、この条件は`keep order:true`になります。
 -   `stats:pseudo` 、 `estRows`に示された推定値が正確ではない可能性があることを示します。 TiDB は、バックグラウンド操作の一部として統計を定期的に更新します。 `ANALYZE TABLE t`を実行して手動更新を実行することもできます。
 
-演算子が異なれば、 `EXPLAIN`ステートメントの実行後に出力される情報も異なります。オプティマイザー ヒントを使用してオプティマイザーの動作を制御し、それによって物理演算子の選択を制御できます。たとえば、 `/*+ HASH_JOIN(t1, t2) */` 、オプティマイザが`Hash Join`アルゴリズムを使用することを意味します。詳細については、 [<a href="/optimizer-hints.md">オプティマイザーのヒント</a>](/optimizer-hints.md)を参照してください。
+演算子が異なれば、 `EXPLAIN`ステートメントの実行後に出力される情報も異なります。オプティマイザー ヒントを使用してオプティマイザーの動作を制御し、それによって物理演算子の選択を制御できます。たとえば、 `/*+ HASH_JOIN(t1, t2) */` 、オプティマイザが`Hash Join`アルゴリズムを使用することを意味します。詳細については、 [オプティマイザーのヒント](/optimizer-hints.md)を参照してください。

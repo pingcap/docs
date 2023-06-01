@@ -9,13 +9,13 @@ TiDB ダッシュボード UI は、v4.0 以降のバージョンの PDコンポ
 
 > **ノート：**
 >
-> TiDB v6.5.0 (以降) およびTiDB Operator v1.4.0 (以降) は、Kubernetes 上の独立したポッドとして TiDB ダッシュボードをデプロイすることをサポートしています。詳細は[<a href="https://docs.pingcap.com/tidb-in-kubernetes/dev/get-started#deploy-tidb-dashboard-independently">TiDB Operatorで TiDB ダッシュボードを独立してデプロイ</a>](https://docs.pingcap.com/tidb-in-kubernetes/dev/get-started#deploy-tidb-dashboard-independently)を参照してください。
+> TiDB v6.5.0 (以降) およびTiDB Operator v1.4.0 (以降) は、Kubernetes 上の独立したポッドとして TiDB ダッシュボードをデプロイすることをサポートしています。詳細は[TiDB Operatorで TiDB ダッシュボードを独立してデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/dev/get-started#deploy-tidb-dashboard-independently)を参照してください。
 
 標準の TiDB クラスターをデプロイする方法については、次のドキュメントを参照してください。
 
--   [<a href="/quick-start-with-tidb.md">TiDB データベース プラットフォームのクイック スタート ガイド</a>](/quick-start-with-tidb.md)
--   [<a href="/production-deployment-using-tiup.md">TiDB を実稼働環境にデプロイ</a>](/production-deployment-using-tiup.md)
--   [<a href="https://docs.pingcap.com/tidb-in-kubernetes/stable/access-dashboard">Kubernetes環境の導入</a>](https://docs.pingcap.com/tidb-in-kubernetes/stable/access-dashboard)
+-   [TiDB データベース プラットフォームのクイック スタート ガイド](/quick-start-with-tidb.md)
+-   [TiDB を実稼働環境にデプロイ](/production-deployment-using-tiup.md)
+-   [Kubernetes環境の導入](https://docs.pingcap.com/tidb-in-kubernetes/stable/access-dashboard)
 
 > **ノート：**
 >
@@ -131,7 +131,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u http://127.0.0.1:2379 config set dashboard-add
 tiup cluster display CLUSTER_NAME --dashboard
 ```
 
-TiDB ダッシュボードを提供する PD インスタンスを手動で指定することで、TiDB ダッシュボードを再度有効にすることもできます。 [<a href="#switch-to-another-pd-instance-to-serve-tidb-dashboard">別の PD インスタンスに切り替えて TiDB ダッシュボードを提供する</a>](#switch-to-another-pd-instance-to-serve-tidb-dashboard)を参照してください。
+TiDB ダッシュボードを提供する PD インスタンスを手動で指定することで、TiDB ダッシュボードを再度有効にすることもできます。 [別の PD インスタンスに切り替えて TiDB ダッシュボードを提供する](#switch-to-another-pd-instance-to-serve-tidb-dashboard)を参照してください。
 
 > **警告：**
 >
@@ -139,6 +139,6 @@ TiDB ダッシュボードを提供する PD インスタンスを手動で指�
 
 ## 次は何ですか {#what-s-next}
 
--   TiDB ダッシュボード UI にアクセスしてログインする方法については、 [<a href="/dashboard/dashboard-access.md">TiDB ダッシュボードにアクセスする</a>](/dashboard/dashboard-access.md)を参照してください。
+-   TiDB ダッシュボード UI にアクセスしてログインする方法については、 [TiDB ダッシュボードにアクセスする](/dashboard/dashboard-access.md)を参照してください。
 
--   ファイアウォールの構成など、TiDB ダッシュボードのセキュリティを強化する方法については、 [<a href="/dashboard/dashboard-ops-security.md">セキュリティTiDB ダッシュボード</a>](/dashboard/dashboard-ops-security.md)を参照してください。
+-   ファイアウォールの構成など、TiDB ダッシュボードのセキュリティを強化する方法については、 [セキュリティTiDB ダッシュボード](/dashboard/dashboard-ops-security.md)を参照してください。

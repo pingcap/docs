@@ -5,9 +5,9 @@ summary: Learn how to connect to TiDB.
 
 # TiDB に接続する {#connect-to-tidb}
 
-TiDB は MySQL プロトコルと高い互換性があります。クライアント リンク パラメータの完全なリストについては、 [<a href="https://dev.mysql.com/doc/refman/5.7/en/mysql-command-options.html">MySQL クライアントのオプション</a>](https://dev.mysql.com/doc/refman/5.7/en/mysql-command-options.html)を参照してください。
+TiDB は MySQL プロトコルと高い互換性があります。クライアント リンク パラメータの完全なリストについては、 [MySQL クライアントのオプション](https://dev.mysql.com/doc/refman/5.7/en/mysql-command-options.html)を参照してください。
 
-TiDB は[<a href="https://dev.mysql.com/doc/dev/mysql-server/latest/PAGE_PROTOCOL.html">MySQL クライアント/サーバー プロトコル</a>](https://dev.mysql.com/doc/dev/mysql-server/latest/PAGE_PROTOCOL.html)サポートしており、ほとんどのクライアント ドライバーと ORM フレームワークが MySQL に接続するのと同じように TiDB に接続できるようになります。
+TiDB は[MySQL クライアント/サーバー プロトコル](https://dev.mysql.com/doc/dev/mysql-server/latest/PAGE_PROTOCOL.html)サポートしており、ほとんどのクライアント ドライバーと ORM フレームワークが MySQL に接続するのと同じように TiDB に接続できるようになります。
 
 ## MySQL {#mysql}
 
@@ -33,7 +33,7 @@ mysql --host <tidb_server_host> --port 4000 -u root -p --comments
 
 <div label="MySQL Shell">
 
-TiDB のコマンドライン ツールとして使用できる MySQL Shell を使用して TiDB に接続できます。 MySQL Shell をインストールするには、 [<a href="https://dev.mysql.com/doc/mysql-shell/8.0/en/mysql-shell-install.html">MySQL シェルのドキュメント</a>](https://dev.mysql.com/doc/mysql-shell/8.0/en/mysql-shell-install.html)の手順に従ってください。インストール後、次のコマンドを使用して TiDB に接続できます。
+TiDB のコマンドライン ツールとして使用できる MySQL Shell を使用して TiDB に接続できます。 MySQL Shell をインストールするには、 [MySQL シェルのドキュメント](https://dev.mysql.com/doc/mysql-shell/8.0/en/mysql-shell-install.html)の手順に従ってください。インストール後、次のコマンドを使用して TiDB に接続できます。
 
 ```shell
 mysqlsh --sql mysql://root@<tidb_server_host>:4000
@@ -45,7 +45,7 @@ mysqlsh --sql mysql://root@<tidb_server_host>:4000
 
 ## JDBC {#jdbc}
 
-[<a href="https://dev.mysql.com/doc/connector-j/8.0/en/">JDBC</a>](https://dev.mysql.com/doc/connector-j/8.0/en/)ドライバーを使用して TiDB に接続できます。これを行うには、 `MysqlDataSource`または`MysqlConnectionPoolDataSource`オブジェクト (どちらのオブジェクトも`DataSource`インターフェイスをサポートします) を作成し、 `setURL`関数を使用して接続文字列を設定する必要があります。
+[JDBC](https://dev.mysql.com/doc/connector-j/8.0/en/)ドライバーを使用して TiDB に接続できます。これを行うには、 `MysqlDataSource`または`MysqlConnectionPoolDataSource`オブジェクト (どちらのオブジェクトも`DataSource`インターフェイスをサポートします) を作成し、 `setURL`関数を使用して接続文字列を設定する必要があります。
 
 例えば：
 
@@ -54,7 +54,7 @@ MysqlDataSource mysqlDataSource = new MysqlDataSource();
 mysqlDataSource.setURL("jdbc:mysql://{host}:{port}/{database}?user={username}&password={password}");
 ```
 
-JDBC 接続の詳細については、 [<a href="https://dev.mysql.com/doc/connector-j/8.0/en/">JDBC ドキュメント</a>](https://dev.mysql.com/doc/connector-j/8.0/en/)を参照してください。
+JDBC 接続の詳細については、 [JDBC ドキュメント](https://dev.mysql.com/doc/connector-j/8.0/en/)を参照してください。
 
 ### 接続パラメータ {#connection-parameters}
 
@@ -62,25 +62,25 @@ JDBC 接続の詳細については、 [<a href="https://dev.mysql.com/doc/conne
 | :----------: | :---------------------------------------------------------------------------------------------------------------------: |
 | `{username}` |                                               TiDB クラスターに接続するための SQL ユーザー                                               |
 | `{password}` |                                                      SQL ユーザーのパスワード                                                     |
-|   `{host}`   | TiDB ノードの[<a href="https://en.wikipedia.org/wiki/Host_(network)">ホスト</a>](https://en.wikipedia.org/wiki/Host_(network)) |
+|   `{host}`   | TiDB ノードの[ホスト](https://en.wikipedia.org/wiki/Host_(network)) |
 |   `{port}`   |                                                   TiDB ノードがリッスンしているポート                                                  |
 | `{database}` |                                                       既存のデータベースの名前                                                      |
 
 <CustomContent platform="tidb">
 
-TiDB SQLユーザーの詳細については、 [<a href="/user-account-management.md">TiDB ユーザーアカウント管理</a>](/user-account-management.md)を参照してください。
+TiDB SQLユーザーの詳細については、 [TiDB ユーザーアカウント管理](/user-account-management.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-TiDB SQLユーザーの詳細については、 [<a href="https://docs.pingcap.com/tidb/stable/user-account-management">TiDB ユーザーアカウント管理</a>](https://docs.pingcap.com/tidb/stable/user-account-management)を参照してください。
+TiDB SQLユーザーの詳細については、 [TiDB ユーザーアカウント管理](https://docs.pingcap.com/tidb/stable/user-account-management)を参照してください。
 
 </CustomContent>
 
 ## 休止状態 {#hibernate}
 
-[<a href="https://hibernate.org/orm/">休止状態 ORM</a>](https://hibernate.org/orm/)を使用して TiDB に接続できます。これを行うには、Hibernate 構成ファイルの`hibernate.connection.url`正当な TiDB 接続文字列に設定する必要があります。
+[休止状態 ORM](https://hibernate.org/orm/)を使用して TiDB に接続できます。これを行うには、Hibernate 構成ファイルの`hibernate.connection.url`正当な TiDB 接続文字列に設定する必要があります。
 
 たとえば、 `hibernate.cfg.xml`設定ファイルを使用する場合は、次のように`hibernate.connection.url`を設定します。
 
@@ -110,7 +110,7 @@ SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml
 -   `TiDB`方言を`hibernate.dialect` ～ `org.hibernate.dialect.TiDBDialect`に設定して使用することをお勧めします。
 -   Hibernate は`6.0.0.Beta2`から始まる TiDB ダイアレクトをサポートしているため、TiDB への接続には Hibernate `6.0.0.Beta2`以降のバージョンを使用することをお勧めします。
 
-Hibernate 接続パラメータの詳細については、 [<a href="https://hibernate.org/orm/documentation">Hibernate のドキュメント</a>](https://hibernate.org/orm/documentation)を参照してください。
+Hibernate 接続パラメータの詳細については、 [Hibernate のドキュメント](https://hibernate.org/orm/documentation)を参照してください。
 
 ### 接続パラメータ {#connection-parameters}
 
@@ -118,18 +118,18 @@ Hibernate 接続パラメータの詳細については、 [<a href="https://hib
 | :----------: | :---------------------------------------------------------------------------------------------------------------------: |
 | `{username}` |                                               TiDB クラスターに接続するための SQL ユーザー                                               |
 | `{password}` |                                                      SQL ユーザーのパスワード                                                     |
-|   `{host}`   | TiDB ノードの[<a href="https://en.wikipedia.org/wiki/Host_(network)">ホスト</a>](https://en.wikipedia.org/wiki/Host_(network)) |
+|   `{host}`   | TiDB ノードの[ホスト](https://en.wikipedia.org/wiki/Host_(network)) |
 |   `{port}`   |                                                   TiDB ノードがリッスンしているポート                                                  |
 | `{database}` |                                                       既存のデータベースの名前                                                      |
 
 <CustomContent platform="tidb">
 
-TiDB SQLユーザーの詳細については、 [<a href="/user-account-management.md">TiDB ユーザーアカウント管理</a>](/user-account-management.md)を参照してください。
+TiDB SQLユーザーの詳細については、 [TiDB ユーザーアカウント管理](/user-account-management.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-TiDB SQLユーザーの詳細については、 [<a href="https://docs.pingcap.com/tidb/stable/user-account-management">TiDB ユーザーアカウント管理</a>](https://docs.pingcap.com/tidb/stable/user-account-management)を参照してください。
+TiDB SQLユーザーの詳細については、 [TiDB ユーザーアカウント管理](https://docs.pingcap.com/tidb/stable/user-account-management)を参照してください。
 
 </CustomContent>

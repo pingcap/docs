@@ -23,7 +23,7 @@ tiup playground ${version} [flags]
 -   TiUPプレイグラウンドを使用して TiDB、TiKV、および PD コンポーネントをインストールしていない場合、プレイグラウンドコンポーネントはこれらのコンポーネントの最新の安定したバージョンをインストールし、これらのインスタンスを起動します。
 -   このコマンドは TiDB、PD、および TiKVコンポーネントのバージョンを指定しないため、 TiUPプレイグラウンドはデフォルトで各コンポーネントの最新バージョンを使用します。最新バージョンが v7.1.0 であると仮定すると、このコマンドは`tiup playground:v1.11.3 v7.1.0`と同じように機能します。
 -   このコマンドでは各コンポーネントの数が指定されていないため、 TiUPプレイグラウンドはデフォルトで、1 つの TiDB インスタンス、1 つの TiKV インスタンス、1 つの PD インスタンス、および 1 つのTiFlashインスタンスで構成される最小のクラスターを開始します。
--   各 TiDBコンポーネントを開始すると、 TiUPプレイグラウンドはクラスターが正常に開始されたことを通知し、MySQL クライアントを介して TiDB クラスターに接続する方法や[<a href="/dashboard/dashboard-intro.md">TiDB ダッシュボード</a>](/dashboard/dashboard-intro.md)にアクセスする方法などの役立つ情報を提供します。
+-   各 TiDBコンポーネントを開始すると、 TiUPプレイグラウンドはクラスターが正常に開始されたことを通知し、MySQL クライアントを介して TiDB クラスターに接続する方法や[TiDB ダッシュボード](/dashboard/dashboard-intro.md)にアクセスする方法などの役立つ情報を提供します。
 
 プレイグラウンドコンポーネントのコマンドライン フラグは次のように説明されます。
 
@@ -89,7 +89,7 @@ tiup playground nightly
 
 ### PD のデフォルト設定を上書きする {#override-pd-s-default-configuration}
 
-まず、 [<a href="https://github.com/pingcap/pd/blob/master/conf/config.toml">PD構成テンプレート</a>](https://github.com/pingcap/pd/blob/master/conf/config.toml)をコピーする必要があります。コピーしたファイルを`~/config/pd.toml`に配置し、必要に応じていくつかの変更を加えた場合、次のコマンドを実行して PD のデフォルト設定をオーバーライドできます。
+まず、 [PD構成テンプレート](https://github.com/pingcap/pd/blob/master/conf/config.toml)をコピーする必要があります。コピーしたファイルを`~/config/pd.toml`に配置し、必要に応じていくつかの変更を加えた場合、次のコマンドを実行して PD のデフォルト設定をオーバーライドできます。
 
 ```shell
 tiup playground --pd.config ~/config/pd.toml

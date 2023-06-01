@@ -51,10 +51,10 @@ mysql> SHOW DATABASES;
 
 ## MySQLの互換性 {#mysql-compatibility}
 
-このステートメントは、MySQL と完全な互換性があると理解されています。 GitHub では互換性の違いは[<a href="https://github.com/pingcap/tidb/issues/new/choose">問題を通じて報告されました</a>](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
+このステートメントは、MySQL と完全な互換性があると理解されています。 GitHub では互換性の違いは[問題を通じて報告されました](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-show-schemas.md">スキーマの表示</a>](/sql-statements/sql-statement-show-schemas.md)
--   [<a href="/sql-statements/sql-statement-drop-database.md">データベースを削除</a>](/sql-statements/sql-statement-drop-database.md)
--   [<a href="/sql-statements/sql-statement-create-database.md">データベースの作成</a>](/sql-statements/sql-statement-create-database.md)
+-   [スキーマの表示](/sql-statements/sql-statement-show-schemas.md)
+-   [データベースを削除](/sql-statements/sql-statement-drop-database.md)
+-   [データベースの作成](/sql-statements/sql-statement-create-database.md)

@@ -46,7 +46,7 @@ strict-format = true
 [2018/08/10 07:29:08.310 +08:00] [INFO] [main.go:41] ["got signal to exit"] [signal=hangup]
 ```
 
-コマンドラインで`nohup`直接使用して`tidb-lightning`を開始することはお勧めできません。 [<a href="/tidb-lightning/deploy-tidb-lightning.md#step-3-start-tidb-lightning">`tidb-lightning`を開始する</a>](/tidb-lightning/deploy-tidb-lightning.md#step-3-start-tidb-lightning)スクリプトを実行することで実行できます。
+コマンドラインで`nohup`直接使用して`tidb-lightning`を開始することはお勧めできません。 [`tidb-lightning`を開始する](/tidb-lightning/deploy-tidb-lightning.md#step-3-start-tidb-lightning)スクリプトを実行することで実行できます。
 
 さらに、 TiDB Lightningの最後のログでエラーが「コンテキストがキャンセルされました」であることが示されている場合は、最初の「ERROR」レベルのログを検索する必要があります。通常、この「ERROR」レベルのログの後には「終了する信号を取得しました」というメッセージが続きます。これは、 TiDB Lightning が割り込み信号を受信して終了したことを示します。
 
@@ -100,11 +100,11 @@ tidb-lightning-ctl --config tidb-lightning.toml --fetch-mode
 
 2.  ターゲット データベースの負荷を軽減するために、外部データベースを使用してチェックポイント (変更`[checkpoint] dsn` ) を保存することを検討してください。
 
-3.  TiDB Lightning が不適切に再起動された場合は、 FAQの「 [<a href="/tidb-lightning/tidb-lightning-faq.md#how-to-properly-restart-tidb-lightning">TiDB Lightning を適切に再起動する方法</a>](/tidb-lightning/tidb-lightning-faq.md#how-to-properly-restart-tidb-lightning) 」セクションも参照してください。
+3.  TiDB Lightning が不適切に再起動された場合は、 FAQの「 [TiDB Lightning を適切に再起動する方法](/tidb-lightning/tidb-lightning-faq.md#how-to-properly-restart-tidb-lightning) 」セクションも参照してください。
 
 ### <code>Checkpoint for … has invalid status:</code> (エラー コード) {#code-checkpoint-for-has-invalid-status-code-error-code}
 
-**原因**: [<a href="/tidb-lightning/tidb-lightning-checkpoints.md">チェックポイント</a>](/tidb-lightning/tidb-lightning-checkpoints.md)が有効になっており、 TiDB Lightningまたは TiKV Importer が以前に異常終了しました。偶発的なデータ破損を防ぐため、エラーが解決されるまでTiDB Lightning は起動しません。
+**原因**: [チェックポイント](/tidb-lightning/tidb-lightning-checkpoints.md)が有効になっており、 TiDB Lightningまたは TiKV Importer が以前に異常終了しました。偶発的なデータ破損を防ぐため、エラーが解決されるまでTiDB Lightning は起動しません。
 
 エラー コードは 25 より小さい整数で、取り得る値は 0、3、6、9、12、14、15、17、18、20、および 21 です。整数は、インポートで予期しない終了が発生したステップを示します。プロセス。整数が大きいほど、終了は後のステップで発生します。
 
@@ -116,7 +116,7 @@ tidb-lightning-ctl --config tidb-lightning.toml --fetch-mode
 tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=all
 ```
 
-他のオプションについては、 [<a href="/tidb-lightning/tidb-lightning-checkpoints.md#checkpoints-control">チェックポイント制御</a>](/tidb-lightning/tidb-lightning-checkpoints.md#checkpoints-control)セクションを参照してください。
+他のオプションについては、 [チェックポイント制御](/tidb-lightning/tidb-lightning-checkpoints.md#checkpoints-control)セクションを参照してください。
 
 ### <code>ResourceTemporarilyUnavailable("Too many open engines …: …")</code> {#code-resourcetemporarilyunavailable-too-many-open-engines-code}
 
@@ -179,7 +179,7 @@ tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=
 
 ### TiDB Lightning がモードを切り替えるときに<code>rpc error: code = Unimplemented ...</code> {#encounter-code-rpc-error-code-unimplemented-code-when-tidb-lightning-switches-the-mode}
 
-**原因**: クラスター内の一部のノードは`switch-mode`をサポートしていません。たとえば、 TiFlash のバージョンが`v4.0.0-rc.2`より前の場合は、 [<a href="https://github.com/pingcap/tidb-lightning/issues/273">`switch-mode`サポートされていません</a>](https://github.com/pingcap/tidb-lightning/issues/273) 。
+**原因**: クラスター内の一部のノードは`switch-mode`をサポートしていません。たとえば、 TiFlash のバージョンが`v4.0.0-rc.2`より前の場合は、 [`switch-mode`サポートされていません](https://github.com/pingcap/tidb-lightning/issues/273) 。
 
 **解決策**:
 
@@ -203,8 +203,8 @@ header = false
 
 ### <code>Unknown character set</code> {#code-unknown-character-set-code}
 
-TiDB は、すべての MySQL 文字セットをサポートしているわけではありません。したがって、インポート中にテーブル スキーマを作成するときにサポートされていない文字セットが使用された場合、 TiDB Lightning はこのエラーを報告します。このエラーを回避するには、特定のデータに応じて[<a href="/character-set-and-collation.md">TiDB がサポートする文字セット</a>](/character-set-and-collation.md)使用してダウンストリームにテーブル スキーマを事前に作成します。
+TiDB は、すべての MySQL 文字セットをサポートしているわけではありません。したがって、インポート中にテーブル スキーマを作成するときにサポートされていない文字セットが使用された場合、 TiDB Lightning はこのエラーを報告します。このエラーを回避するには、特定のデータに応じて[TiDB がサポートする文字セット](/character-set-and-collation.md)使用してダウンストリームにテーブル スキーマを事前に作成します。
 
 ### <code>invalid compression type ...</code> {#code-invalid-compression-type-code}
 
--   TiDB Lightning v6.4.0 以降のバージョンは、 `.bak`ファイルと圧縮データ ファイル`gzip` 、 `snappy` 、および`zstd`のみをサポートします。他の種類のファイルではエラーが発生します。サポートされていないファイルについては、そのようなエラーを避けるために、事前にファイル名を変更するか、それらのファイルをインポート データ ディレクトリから移動する必要があります。詳細については、 [<a href="/tidb-lightning/tidb-lightning-data-source.md#compressed-files">圧縮ファイル</a>](/tidb-lightning/tidb-lightning-data-source.md#compressed-files)を参照してください。
+-   TiDB Lightning v6.4.0 以降のバージョンは、 `.bak`ファイルと圧縮データ ファイル`gzip` 、 `snappy` 、および`zstd`のみをサポートします。他の種類のファイルではエラーが発生します。サポートされていないファイルについては、そのようなエラーを避けるために、事前にファイル名を変更するか、それらのファイルをインポート データ ディレクトリから移動する必要があります。詳細については、 [圧縮ファイル](/tidb-lightning/tidb-lightning-data-source.md#compressed-files)を参照してください。

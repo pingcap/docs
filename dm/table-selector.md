@@ -5,7 +5,7 @@ summary: Learn about Table Selector used by the table routing, binlog event filt
 
 # TiDB データ移行のテーブルセレクター {#table-selector-of-tidb-data-migration}
 
-テーブル セレクターは、スキーマ/テーブルの[<a href="https://en.wikipedia.org/wiki/Wildcard_character">ワイルドカード文字</a>](https://en.wikipedia.org/wiki/Wildcard_character)に基づく一致ルールを提供します。指定したテーブルに一致させるには、 `schema-pattern` / `table-pattern`を設定します。
+テーブル セレクターは、スキーマ/テーブルの[ワイルドカード文字](https://en.wikipedia.org/wiki/Wildcard_character)に基づく一致ルールを提供します。指定したテーブルに一致させるには、 `schema-pattern` / `table-pattern`を設定します。
 
 ## ワイルドカード文字 {#wildcard-character}
 

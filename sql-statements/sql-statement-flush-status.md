@@ -77,4 +77,4 @@ mysql> show status;
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-show-status.md">[グローバル|セッション]ステータスを表示</a>](/sql-statements/sql-statement-show-status.md)
+-   [[グローバル|セッション]ステータスを表示](/sql-statements/sql-statement-show-status.md)

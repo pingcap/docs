@@ -5,9 +5,9 @@ summary: Learns about how to perform log backup and PITR in TiDB.
 
 # TiDB ログのバックアップと PITR ガイド {#tidb-log-backup-and-pitr-guide}
 
-フル バックアップ (スナップショット バックアップ) には特定の時点での完全なクラスター データが含まれますが、TiDB ログ バックアップでは、アプリケーションによって指定されたstorageに書き込まれたデータをタイムリーにバックアップできます。必要に応じて復元ポイントを選択する場合、つまりポイントインタイム リカバリ (PITR) を実行する場合は、 [<a href="#start-log-backup">ログのバックアップを開始する</a>](#start-log-backup)と[<a href="#run-full-backup-regularly">完全バックアップを定期的に実行する</a>](#run-full-backup-regularly)を実行できます。
+フル バックアップ (スナップショット バックアップ) には特定の時点での完全なクラスター データが含まれますが、TiDB ログ バックアップでは、アプリケーションによって指定されたstorageに書き込まれたデータをタイムリーにバックアップできます。必要に応じて復元ポイントを選択する場合、つまりポイントインタイム リカバリ (PITR) を実行する場合は、 [完全バックアップを定期的に実行する](#run-full-backup-regularly)を実行できます。
 
-br コマンドライン ツール (以下`br`とします) を使用してデータをバックアップまたは復元する前に、まず[<a href="/br/br-use-overview.md#deploy-and-use-br">`br`をインストールする</a>](/br/br-use-overview.md#deploy-and-use-br)を行う必要があります。
+br コマンドライン ツール (以下`br`とします) を使用してデータをバックアップまたは復元する前に、まず[`br`をインストールする](/br/br-use-overview.md#deploy-and-use-br)を行う必要があります。
 
 ## TiDB クラスターをバックアップする {#back-up-tidb-cluster}
 
@@ -16,7 +16,7 @@ br コマンドライン ツール (以下`br`とします) を使用してデ�
 > **ノート：**
 >
 > -   次の例では、Amazon S3 アクセス キーと秘密キーがアクセス許可の承認に使用されることを前提としています。 IAMロールを使用して権限を承認する場合は、 `--send-credentials-to-tikv` ～ `false`を設定する必要があります。
-> -   他のstorageシステムまたは認証方法を使用して権限を認証する場合は、 [<a href="/br/backup-and-restore-storages.md">バックアップストレージ</a>](/br/backup-and-restore-storages.md)に従ってパラメータ設定を調整します。
+> -   他のstorageシステムまたは認証方法を使用して権限を認証する場合は、 [バックアップストレージ](/br/backup-and-restore-storages.md)に従ってパラメータ設定を調整します。
 
 ログのバックアップを開始するには、 `br log start`を実行します。クラスターは毎回 1 つのログ バックアップ タスクのみを実行できます。
 
@@ -77,7 +77,7 @@ Restore KV Files <--------------------------------------------------------------
 
 ## 古いデータをクリーンアップする {#clean-up-outdated-data}
 
-[<a href="/br/br-use-overview.md">TiDB バックアップと復元の使用法の概要</a>](/br/br-use-overview.md)で説明したように:
+[TiDB バックアップと復元の使用法の概要](/br/br-use-overview.md)で説明したように:
 
 PITR を実行するには、復元ポイントの前に完全バックアップを復元し、完全バックアップ ポイントと復元ポイントの間にログ バックアップを復元する必要があります。したがって、バックアップ保持期間を超えたログ バックアップの場合は、 `br log truncate`を使用して、指定された時点より前にバックアップを削除できます。**完全なスナップショットの前にのみログ バックアップを削除することをお勧めします**。
 
@@ -117,9 +117,9 @@ PITR を実行するには、復元ポイントの前に完全バックアップ
 > -   スナップショット データの復元速度 = スナップショット データのサイズ / (期間 * TiKV ノードの数)
 > -   ログデータの復元速度 = 復元されたログデータのサイズ / (期間 * TiKV ノードの数)
 >
-> スナップショットのデータ サイズは、復元されたデータの実際の量ではなく、単一レプリカ内のすべての KV の論理サイズを指します。 BR は、クラスターに構成されたレプリカの数に従って、すべてのレプリカを復元します。レプリカが多ければ多いほど、実際に復元できるデータも多くなります。テスト内のすべてのクラスターのデフォルトのレプリカ番号は 3 です。全体的な復元パフォーマンスを向上させるために、TiKV 構成ファイルの[<a href="/tikv-configuration-file.md#import">`import.num-threads`</a>](/tikv-configuration-file.md#import)項目とBRコマンドの[<a href="/br/use-br-command-line-tool.md#common-options">`concurrency`</a>](/br/use-br-command-line-tool.md#common-options)オプションを変更できます。
+> スナップショットのデータ サイズは、復元されたデータの実際の量ではなく、単一レプリカ内のすべての KV の論理サイズを指します。 BR は、クラスターに構成されたレプリカの数に従って、すべてのレプリカを復元します。レプリカが多ければ多いほど、実際に復元できるデータも多くなります。テスト内のすべてのクラスターのデフォルトのレプリカ番号は 3 です。全体的な復元パフォーマンスを向上させるために、TiKV 構成ファイルの[`concurrency`](/br/use-br-command-line-tool.md#common-options)オプションを変更できます。
 
-テストシナリオ 1 ( [<a href="https://tidbcloud.com">TiDB Cloud</a>](https://tidbcloud.com)上):
+テストシナリオ 1 ( [TiDB Cloud](https://tidbcloud.com)上):
 
 -   TiKV ノード数 (8 コア、16 GBメモリ): 21
 -   TiKV構成項目`import.num-threads` ：8
@@ -139,6 +139,6 @@ PITR を実行するには、復元ポイントの前に完全バックアップ
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/br/backup-and-restore-use-cases.md">TiDB のバックアップと復元の使用例</a>](/br/backup-and-restore-use-cases.md)
--   [<a href="/br/use-br-command-line-tool.md">br コマンドラインマニュアル</a>](/br/use-br-command-line-tool.md)
--   [<a href="/br/br-log-architecture.md">ログバックアップとPITRアーキテクチャ</a>](/br/br-log-architecture.md)
+-   [TiDB のバックアップと復元の使用例](/br/backup-and-restore-use-cases.md)
+-   [br コマンドラインマニュアル](/br/use-br-command-line-tool.md)
+-   [ログバックアップとPITRアーキテクチャ](/br/br-log-architecture.md)

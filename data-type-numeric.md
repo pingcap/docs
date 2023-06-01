@@ -7,13 +7,13 @@ summary: Learn about numeric data types supported in TiDB.
 
 TiDB は、以下を含むすべての MySQL 数値型をサポートします。
 
--   [<a href="#integer-types">整数型</a>](#integer-types) (正確な値)
--   [<a href="#floating-point-types">浮動小数点型</a>](#floating-point-types) （近似値）
--   [<a href="#fixed-point-types">固定小数点型</a>](#fixed-point-types) (正確な値)
+-   [整数型](#integer-types) (正確な値)
+-   [浮動小数点型](#floating-point-types) （近似値）
+-   [固定小数点型](#fixed-point-types) (正確な値)
 
 ## 整数型 {#integer-types}
 
-TiDB は、 `INTEGER` / `INT` 、 `TINYINT` 、 `SMALLINT` 、 `MEDIUMINT` 、 `BIGINT`を含むすべての MySQL 整数型をサポートします。詳細については、 [<a href="https://dev.mysql.com/doc/refman/5.7/en/integer-types.html">MySQL の整数データ型の構文</a>](https://dev.mysql.com/doc/refman/5.7/en/integer-types.html)参照してください。
+TiDB は、 `INTEGER` / `INT` 、 `TINYINT` 、 `SMALLINT` 、 `MEDIUMINT` 、 `BIGINT`を含むすべての MySQL 整数型をサポートします。詳細については、 [MySQL の整数データ型の構文](https://dev.mysql.com/doc/refman/5.7/en/integer-types.html)参照してください。
 
 次の表にフィールドの説明をまとめます。
 
@@ -97,7 +97,7 @@ BIGINT[(M)] [UNSIGNED] [ZEROFILL]
 
 ## 浮動小数点型 {#floating-point-types}
 
-TiDB は、 `FLOAT`および`DOUBLE`を含むすべての MySQL 浮動小数点型をサポートします。詳細については、 [<a href="https://dev.mysql.com/doc/refman/5.7/en/floating-point-types.html">浮動小数点型 (近似値) - MySQL の FLOAT、DOUBLE</a>](https://dev.mysql.com/doc/refman/5.7/en/floating-point-types.html)を参照してください。
+TiDB は、 `FLOAT`および`DOUBLE`を含むすべての MySQL 浮動小数点型をサポートします。詳細については、 [浮動小数点型 (近似値) - MySQL の FLOAT、DOUBLE](https://dev.mysql.com/doc/refman/5.7/en/floating-point-types.html)を参照してください。
 
 次の表にフィールドの説明をまとめます。
 
@@ -148,11 +148,11 @@ DOUBLE PRECISION [(M,D)] [UNSIGNED] [ZEROFILL], REAL[(M,D)] [UNSIGNED] [ZEROFILL
 
 > **ノート：**
 >
-> TiDB が科学表記法で表現された倍精度浮動小数点数を`CHAR`型に変換すると、結果が MySQL の結果と矛盾して表示されます。詳細は[<a href="/functions-and-operators/cast-functions-and-operators.md">キャスト関数と演算子</a>](/functions-and-operators/cast-functions-and-operators.md)参照してください。
+> TiDB が科学表記法で表現された倍精度浮動小数点数を`CHAR`型に変換すると、結果が MySQL の結果と矛盾して表示されます。詳細は[キャスト関数と演算子](/functions-and-operators/cast-functions-and-operators.md)参照してください。
 
 ## 固定小数点型 {#fixed-point-types}
 
-TiDB は、DECIMAL や NUMERIC を含むすべての MySQL 浮動小数点型をサポートします。詳細については、 [<a href="https://dev.mysql.com/doc/refman/5.7/en/fixed-point-types.html">固定小数点型 (正確な値) - MySQL の DECIMAL、NUMERIC</a>](https://dev.mysql.com/doc/refman/5.7/en/fixed-point-types.html)参照してください。
+TiDB は、DECIMAL や NUMERIC を含むすべての MySQL 浮動小数点型をサポートします。詳細については、 [固定小数点型 (正確な値) - MySQL の DECIMAL、NUMERIC](https://dev.mysql.com/doc/refman/5.7/en/fixed-point-types.html)参照してください。
 
 フィールドの意味:
 

@@ -22,7 +22,7 @@ summary: Learn how to migrate data from MySQL-compatible databases hosted in Ama
     -   AWS 東京 (ap-northeast-1)
     -   AWS フランクフルト (eu-central-1)
 
--   組織ごとに最大 200 個の移行ジョブを作成できます。さらに移行ジョブを作成するには、 [<a href="/tidb-cloud/tidb-cloud-support.md">サポートチケットを提出する</a>](/tidb-cloud/tidb-cloud-support.md)を実行する必要があります。
+-   組織ごとに最大 200 個の移行ジョブを作成できます。さらに移行ジョブを作成するには、 [サポートチケットを提出する](/tidb-cloud/tidb-cloud-support.md)を実行する必要があります。
 
 -   移行するデータベースをすべて選択した場合でも、システム データベースはフィルターで除外され、 TiDB Cloudには移行されません。つまり、 `mysql` 、 `information_schema` 、 `information_schema` 、および`sys`は、この機能を使用して移行されません。
 
@@ -96,13 +96,13 @@ GRANT CREATE,SELECT,INSERT,UPDATE,DELETE,ALTER,TRUNCATE,DROP,INDEX ON *.* TO 'yo
 
 ### ネットワーク接続をセットアップする {#set-up-network-connection}
 
-移行ジョブを作成する前に、接続方法に従ってネットワーク接続を設定します。 [<a href="/tidb-cloud/connect-to-tidb-cluster.md">TiDBクラスタに接続する</a>](/tidb-cloud/connect-to-tidb-cluster.md)を参照してください。
+移行ジョブを作成する前に、接続方法に従ってネットワーク接続を設定します。 [TiDBクラスタに接続する](/tidb-cloud/connect-to-tidb-cluster.md)を参照してください。
 
 -   ネットワーク接続にパブリック IP (標準接続) を使用する場合は、上流のデータベースがパブリック ネットワーク経由で接続できることを確認してください。
 
--   VPC ピアリングを使用する場合は、 [<a href="/tidb-cloud/set-up-vpc-peering-connections.md#step-1-add-vpc-peering-requests">VPC ピアリングリクエストの追加</a>](/tidb-cloud/set-up-vpc-peering-connections.md#step-1-add-vpc-peering-requests)に従って設定します。
+-   VPC ピアリングを使用する場合は、 [VPC ピアリングリクエストの追加](/tidb-cloud/set-up-vpc-peering-connections.md#step-1-add-vpc-peering-requests)に従って設定します。
 
--   AWS PrivateLink を使用する場合は、 [<a href="/tidb-cloud/set-up-private-endpoint-connections.md">プライベートエンドポイント接続のセットアップ</a>](/tidb-cloud/set-up-private-endpoint-connections.md)に従って設定します。
+-   AWS PrivateLink を使用する場合は、 [プライベートエンドポイント接続のセットアップ](/tidb-cloud/set-up-private-endpoint-connections.md)に従って設定します。
 
 ### バイナリログを有効にする {#enable-binlogs}
 
@@ -110,7 +110,7 @@ GRANT CREATE,SELECT,INSERT,UPDATE,DELETE,ALTER,TRUNCATE,DROP,INDEX ON *.* TO 'yo
 
 ## ステップ 1:<strong>データ移行</strong>ページに移動する {#step-1-go-to-the-strong-data-migration-strong-page}
 
-1.  [<a href="https://tidbcloud.com/">TiDB Cloudコンソール</a>](https://tidbcloud.com/)にログインし、プロジェクトの[<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページに移動します。
+1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
     > **ヒント：**
     >
@@ -151,7 +151,7 @@ GRANT CREATE,SELECT,INSERT,UPDATE,DELETE,ALTER,TRUNCATE,DROP,INDEX ON *.* TO 'yo
 5.  表示されるメッセージに従ってアクションを実行します。
 
     -   パブリック IP または VPC ピアリングを使用する場合は、ソース データベースとファイアウォール (存在する場合) の IP アクセス リストにデータ移行サービスの IP アドレスを追加する必要があります。
-    -   Private Link を使用する場合は、エンドポイント要求を受け入れるように求められます。 [<a href="https://us-west-2.console.aws.amazon.com/vpc/home">AWS VPC コンソール</a>](https://us-west-2.console.aws.amazon.com/vpc/home)に移動し、 **「エンドポイント サービス」**をクリックしてエンドポイント要求を受け入れます。
+    -   Private Link を使用する場合は、エンドポイント要求を受け入れるように求められます。 [AWS VPC コンソール](https://us-west-2.console.aws.amazon.com/vpc/home)に移動し、 **「エンドポイント サービス」**をクリックしてエンドポイント要求を受け入れます。
 
 ## ステップ 3: 移行するオブジェクトを選択する {#step-3-choose-the-objects-to-be-migrated}
 
@@ -190,13 +190,13 @@ GRANT CREATE,SELECT,INSERT,UPDATE,DELETE,ALTER,TRUNCATE,DROP,INDEX ON *.* TO 'yo
 
 一部のチェック項目に警告のみがある場合は、リスクを評価し、警告を無視するかどうかを検討できます。すべての警告が無視された場合、移行ジョブは自動的に次のステップに進みます。
 
-事前チェック項目の詳細については、 [<a href="https://docs.pingcap.com/tidb/stable/dm-precheck">移行タスクの事前チェック</a>](https://docs.pingcap.com/tidb/stable/dm-precheck)を参照してください。
+事前チェック項目の詳細については、 [移行タスクの事前チェック](https://docs.pingcap.com/tidb/stable/dm-precheck)を参照してください。
 
 すべてのチェック項目に**「合格」**と表示されている場合は、 **「次へ」**をクリックします。
 
 ## ステップ 5: 仕様を選択して移行を開始する {#step-5-choose-a-spec-and-start-migration}
 
-**「仕様を選択して移行を開始」**ページで、パフォーマンス要件に応じて適切な移行仕様を選択します。仕様の詳細については、 [<a href="/tidb-cloud/tidb-cloud-billing-dm.md#specifications-for-data-migration">データ移行の仕様</a>](/tidb-cloud/tidb-cloud-billing-dm.md#specifications-for-data-migration)を参照してください。
+**「仕様を選択して移行を開始」**ページで、パフォーマンス要件に応じて適切な移行仕様を選択します。仕様の詳細については、 [データ移行の仕様](/tidb-cloud/tidb-cloud-billing-dm.md#specifications-for-data-migration)を参照してください。
 
 仕様を選択した後、 **「ジョブを作成して開始」**をクリックして移行を開始します。
 
@@ -234,7 +234,7 @@ GRANT CREATE,SELECT,INSERT,UPDATE,DELETE,ALTER,TRUNCATE,DROP,INDEX ON *.* TO 'yo
 
 -   エラー メッセージ:「TiDB クラスターstorageが十分ではありません。TiKV のノードstorageを増やしてください。」
 
-    TiDB クラスターのstorageが不足しています。 [<a href="/tidb-cloud/scale-tidb-cluster.md#increase-node-storage">TiKV ノードのstorageを増やす</a>](/tidb-cloud/scale-tidb-cluster.md#increase-node-storage)し、 **[再起動]**をクリックしてタスクを再開することをお勧めします。
+    TiDB クラスターのstorageが不足しています。 [TiKV ノードのstorageを増やす](/tidb-cloud/scale-tidb-cluster.md#increase-node-storage)し、 **[再起動]**をクリックしてタスクを再開することをお勧めします。
 
 -   エラー メッセージ:「ソース データベースに接続できませんでした。データベースが利用可能か、または最大接続数に達しているかを確認してください。」
 

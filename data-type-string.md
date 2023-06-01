@@ -5,7 +5,7 @@ summary: Learn about the string types supported in TiDB.
 
 # 文字列型 {#string-types}
 
-TiDB は、 `CHAR` 、 `VARCHAR` 、 `BINARY` 、 `VARBINARY` 、 `BLOB` 、 `TEXT` 、 `ENUM` 、 `SET`を含むすべての MySQL 文字列タイプをサポートします。詳細については、 [<a href="https://dev.mysql.com/doc/refman/5.7/en/string-types.html">MySQL の文字列型</a>](https://dev.mysql.com/doc/refman/5.7/en/string-types.html)参照してください。
+TiDB は、 `CHAR` 、 `VARCHAR` 、 `BINARY` 、 `VARBINARY` 、 `BLOB` 、 `TEXT` 、 `ENUM` 、 `SET`を含むすべての MySQL 文字列タイプをサポートします。詳細については、 [MySQL の文字列型](https://dev.mysql.com/doc/refman/5.7/en/string-types.html)参照してください。
 
 ## サポートされているタイプ {#supported-types}
 
@@ -45,7 +45,7 @@ TEXT[(M)] [CHARACTER SET charset_name] [COLLATE collation_name]
 
 ### <code>TINYTEXT</code>型 {#code-tinytext-code-type}
 
-`TINYTEXT`タイプは[<a href="#text-type">`TEXT`タイプ</a>](#text-type)と似ています。違いは、 `TINYTEXT`の最大列長が 255 であることです。
+`TINYTEXT`タイプは[`TEXT`タイプ](#text-type)と似ています。違いは、 `TINYTEXT`の最大列長が 255 であることです。
 
 ```sql
 TINYTEXT [CHARACTER SET charset_name] [COLLATE collation_name]
@@ -53,7 +53,7 @@ TINYTEXT [CHARACTER SET charset_name] [COLLATE collation_name]
 
 ### <code>MEDIUMTEXT</code>型 {#code-mediumtext-code-type}
 
-`MEDIUMTEXT`タイプは[<a href="#text-type">`TEXT`タイプ</a>](#text-type)と似ています。違いは、 `MEDIUMTEXT`の最大列長が 16,777,215 であることです。ただし、 [<a href="/tidb-limitations.md#limitation-on-a-single-column">TiDB の単一列の制限</a>](/tidb-limitations.md#limitation-on-a-single-column)により、TiDB の単一列の最大storageサイズはデフォルトで 6 MiB ですが、構成を変更することで 120 MiB まで増やすことができます。
+`MEDIUMTEXT`タイプは[TiDB の単一列の制限](/tidb-limitations.md#limitation-on-a-single-column)により、TiDB の単一列の最大storageサイズはデフォルトで 6 MiB ですが、構成を変更することで 120 MiB まで増やすことができます。
 
 ```sql
 MEDIUMTEXT [CHARACTER SET charset_name] [COLLATE collation_name]
@@ -61,7 +61,7 @@ MEDIUMTEXT [CHARACTER SET charset_name] [COLLATE collation_name]
 
 ### <code>LONGTEXT</code>型 {#code-longtext-code-type}
 
-`LONGTEXT`タイプは[<a href="#text-type">`TEXT`タイプ</a>](#text-type)と似ています。違いは、 `LONGTEXT`の最大列長が 4,294,967,295 であることです。ただし、 [<a href="/tidb-limitations.md#limitation-on-a-single-column">TiDB の単一列の制限</a>](/tidb-limitations.md#limitation-on-a-single-column)により、TiDB の単一列の最大storageサイズはデフォルトで 6 MiB ですが、構成を変更することで 120 MiB まで増やすことができます。
+`LONGTEXT`タイプは[TiDB の単一列の制限](/tidb-limitations.md#limitation-on-a-single-column)により、TiDB の単一列の最大storageサイズはデフォルトで 6 MiB ですが、構成を変更することで 120 MiB まで増やすことができます。
 
 ```sql
 LONGTEXT [CHARACTER SET charset_name] [COLLATE collation_name]
@@ -69,7 +69,7 @@ LONGTEXT [CHARACTER SET charset_name] [COLLATE collation_name]
 
 ### <code>BINARY</code>型 {#code-binary-code-type}
 
-`BINARY`タイプは[<a href="#char-type">`CHAR`型</a>](#char-type)と似ています。違いは、 `BINARY`バイナリ バイト文字列を格納することです。
+`BINARY`タイプは[`CHAR`型](#char-type)と似ています。違いは、 `BINARY`バイナリ バイト文字列を格納することです。
 
 ```sql
 BINARY(M)
@@ -77,7 +77,7 @@ BINARY(M)
 
 ### <code>VARBINARY</code>型 {#code-varbinary-code-type}
 
-`VARBINARY`タイプは[<a href="#varchar-type">`VARCHAR`型</a>](#varchar-type)と似ています。違いは、 `VARBINARY`バイナリ バイト文字列を格納することです。
+`VARBINARY`タイプは[`VARCHAR`型](#varchar-type)と似ています。違いは、 `VARBINARY`バイナリ バイト文字列を格納することです。
 
 ```sql
 VARBINARY(M)
@@ -93,7 +93,7 @@ BLOB[(M)]
 
 ### <code>TINYBLOB</code>型 {#code-tinyblob-code-type}
 
-`TINYBLOB`タイプは[<a href="#blob-type">`BLOB`タイプ</a>](#blob-type)と似ています。違いは、 `TINYBLOB`の最大列長が 255 であることです。
+`TINYBLOB`タイプは[`BLOB`タイプ](#blob-type)と似ています。違いは、 `TINYBLOB`の最大列長が 255 であることです。
 
 ```sql
 TINYBLOB
@@ -101,7 +101,7 @@ TINYBLOB
 
 ### <code>MEDIUMBLOB</code>タイプ {#code-mediumblob-code-type}
 
-`MEDIUMBLOB`タイプは[<a href="#blob-type">`BLOB`タイプ</a>](#blob-type)と似ています。違いは、 `MEDIUMBLOB`の最大列長が 16,777,215 であることです。ただし、 [<a href="/tidb-limitations.md#limitation-on-a-single-column">TiDB の単一列の制限</a>](/tidb-limitations.md#limitation-on-a-single-column)により、TiDB の単一列の最大storageサイズはデフォルトで 6 MiB ですが、構成を変更することで 120 MiB まで増やすことができます。
+`MEDIUMBLOB`タイプは[TiDB の単一列の制限](/tidb-limitations.md#limitation-on-a-single-column)により、TiDB の単一列の最大storageサイズはデフォルトで 6 MiB ですが、構成を変更することで 120 MiB まで増やすことができます。
 
 ```sql
 MEDIUMBLOB
@@ -109,7 +109,7 @@ MEDIUMBLOB
 
 ### <code>LONGBLOB</code>型 {#code-longblob-code-type}
 
-`LONGBLOB`タイプは[<a href="#blob-type">`BLOB`タイプ</a>](#blob-type)と似ています。違いは、 `LONGBLOB`の最大列長が 4,294,967,295 であることです。ただし、 [<a href="/tidb-limitations.md#limitation-on-a-single-column">TiDB の単一列の制限</a>](/tidb-limitations.md#limitation-on-a-single-column)により、TiDB の単一列の最大storageサイズはデフォルトで 6 MiB ですが、構成を変更することで 120 MiB まで増やすことができます。
+`LONGBLOB`タイプは[TiDB の単一列の制限](/tidb-limitations.md#limitation-on-a-single-column)により、TiDB の単一列の最大storageサイズはデフォルトで 6 MiB ですが、構成を変更することで 120 MiB まで増やすことができます。
 
 ```sql
 LONGBLOB
@@ -136,7 +136,7 @@ ENUM('apple', 'orange', 'pear')
 | &#39;オレンジ&#39; | 2  |
 | &#39;梨&#39;    | 3  |
 
-詳細については、 [<a href="https://dev.mysql.com/doc/refman/5.7/en/enum.html">MySQL の ENUM 型</a>](https://dev.mysql.com/doc/refman/5.7/en/enum.html)を参照してください。
+詳細については、 [MySQL の ENUM 型](https://dev.mysql.com/doc/refman/5.7/en/enum.html)を参照してください。
 
 ### <code>SET</code>タイプ {#code-set-code-type}
 
@@ -169,4 +169,4 @@ TiDB では、 `SET`型の値は内部で`Int64`に変換されます。各要�
 
 この場合、要素が`('a', 'c')`の場合、2 進数では`0101`になります。
 
-詳細については、 [<a href="https://dev.mysql.com/doc/refman/5.7/en/set.html">MySQL の SET タイプ</a>](https://dev.mysql.com/doc/refman/5.7/en/set.html)を参照してください。
+詳細については、 [MySQL の SET タイプ](https://dev.mysql.com/doc/refman/5.7/en/set.html)を参照してください。

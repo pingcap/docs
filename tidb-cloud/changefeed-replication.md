@@ -15,8 +15,8 @@ TiDB Cloudレプリケーションを使用すると、地域的な災害や大�
 >
 > -   1 つのプライマリ クラスターはレプリケーションを 1 つだけ持つことができます。
 > -   セカンダリ クラスターを別のクラスターへの**TiDB Cloudレプリケーション**のソースとして使用することはできません。
-> -   **TiDB Cloudレプリケーションは**[<a href="/tidb-cloud/changefeed-sink-to-apache-kafka.md">**Apache Kafka にシンクする**</a>](/tidb-cloud/changefeed-sink-to-apache-kafka.md)と[<a href="/tidb-cloud/changefeed-sink-to-mysql.md">**MySQL にシンクする**</a>](/tidb-cloud/changefeed-sink-to-mysql.md)に矛盾します。 **TiDB Cloudレプリケーション**が有効になっている場合、プライマリ クラスターもセカンダリ クラスターも、 **Sink to Apache Kafka**または**Sink to MySQL**変更フィードを使用できず、その逆も同様です。
-> -   TiDB Cloud はTiCDC を使用してレプリケーションを確立するため、同じ[<a href="https://docs.pingcap.com/tidb/stable/ticdc-overview#restrictions">TiCDC としての制限</a>](https://docs.pingcap.com/tidb/stable/ticdc-overview#restrictions)を持ちます。
+> -   **TiDB Cloudレプリケーションは**[**MySQL にシンクする**](/tidb-cloud/changefeed-sink-to-mysql.md)に矛盾します。 **TiDB Cloudレプリケーション**が有効になっている場合、プライマリ クラスターもセカンダリ クラスターも、 **Sink to Apache Kafka**または**Sink to MySQL**変更フィードを使用できず、その逆も同様です。
+> -   TiDB Cloud はTiCDC を使用してレプリケーションを確立するため、同じ[TiCDC としての制限](https://docs.pingcap.com/tidb/stable/ticdc-overview#restrictions)を持ちます。
 
 アプリケーションのレプリケーションをサポートするには、アプリケーションをプライマリ リージョンとセカンダリ リージョンの両方にデプロイし、各アプリケーションが同じリージョン内の TiDB クラスターに接続されていることを確認する必要があります。セカンダリ リージョンのアプリケーションはスタンバイ状態です。プライマリ リージョンに障害が発生した場合、「デタッチ」操作を開始してセカンダリ リージョンの TiDB クラスターをアクティブにし、すべてのデータ トラフィックをセカンダリ リージョンのアプリケーションに転送できます。
 
@@ -92,7 +92,7 @@ TiDB Cloudレプリケーションを使用すると、地域的な災害や大�
 
 TiDB Cloudレプリケーションを構成するには、次の手順を実行します。
 
-1.  [<a href="https://tidbcloud.com">TiDB Cloudコンソール</a>](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**[Changefeed]**をクリックします。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**[Changefeed]**をクリックします。
 2.  **[TiDBクラスタのレプリカを作成する]**をクリックします。
 3.  データベースのユーザー名とパスワードを入力します。
 4.  セカンダリ クラスターのリージョンを選択します。
@@ -100,7 +100,7 @@ TiDB Cloudレプリケーションを構成するには、次の手順を実行�
 
 **Planned Detach**または**Force Detach**をトリガーするには、次の手順を実行します。
 
-1.  [<a href="https://tidbcloud.com">TiDB Cloudコンソール</a>](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**[Changefeed]**をクリックします。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**[Changefeed]**をクリックします。
 2.  **[TiDBクラスタのレプリカを作成する]**をクリックします。
 3.  **[計画的なデタッチ]**または**[強制的なデタッチ]**をクリックします。
 
@@ -112,6 +112,6 @@ TiDB Cloudレプリケーションを構成するには、次の手順を実行�
 
 RPO に関する遅延を監視するには、次の手順を実行します。
 
-1.  [<a href="https://tidbcloud.com">TiDB Cloudコンソール</a>](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**[Changefeed]**をクリックします。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**[Changefeed]**をクリックします。
 2.  **[TiDBクラスタのレプリカを作成する]**をクリックします。
 3.  プライマリ - セカンダリ クラスターの遅れがわかります。

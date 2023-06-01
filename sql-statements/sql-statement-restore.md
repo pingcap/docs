@@ -5,9 +5,9 @@ summary: An overview of the usage of RESTORE for the TiDB database.
 
 # 戻す {#restore}
 
-このステートメントは、 [<a href="/sql-statements/sql-statement-backup.md">`BACKUP`文</a>](/sql-statements/sql-statement-backup.md)によって以前に作成されたバックアップ アーカイブから分散復元を実行します。
+このステートメントは、 [`BACKUP`文](/sql-statements/sql-statement-backup.md)によって以前に作成されたバックアップ アーカイブから分散復元を実行します。
 
-`RESTORE`ステートメントは[<a href="/br/backup-and-restore-overview.md">BRツール</a>](/br/backup-and-restore-overview.md)と同じエンジンを使用しますが、復元プロセスが別個のBRツールではなく TiDB 自体によって駆動される点が異なります。 BRのすべての利点と注意事項がここにも適用されます。特に、 **`RESTORE`現在ACIDに準拠していません**。 `RESTORE`を実行する前に、次の要件が満たされていることを確認してください。
+`RESTORE`ステートメントは[BRツール](/br/backup-and-restore-overview.md)と同じエンジンを使用しますが、復元プロセスが別個のBRツールではなく TiDB 自体によって駆動される点が異なります。 BRのすべての利点と注意事項がここにも適用されます。特に、 **`RESTORE`現在ACIDに準拠していません**。 `RESTORE`を実行する前に、次の要件が満たされていることを確認してください。
 
 -   クラスターは「オフライン」であり、現在の TiDB セッションは、復元されるすべてのテーブルにアクセスできる唯一のアクティブな SQL 接続です。
 -   完全復元を実行する場合、既存のデータが上書きされ、データとインデックスの間に不整合が生じる可能性があるため、復元されるテーブルがまだ存在してはいけません。
@@ -15,7 +15,7 @@ summary: An overview of the usage of RESTORE for the TiDB database.
 
 `RESTORE`を実行するには、 `RESTORE_ADMIN`または`SUPER`権限が必要です。さらに、リストアを実行する TiDB ノードとクラスター内のすべての TiKV ノードの両方に、宛先からの読み取り権限が必要です。
 
-`RESTORE`ステートメントはブロックされており、復元タスク全体が完了、失敗、またはキャンセルされた後にのみ終了します。 `RESTORE`を実行するには、長時間持続する接続を準備する必要があります。タスクは[<a href="/sql-statements/sql-statement-kill.md">`KILL TIDB QUERY`</a>](/sql-statements/sql-statement-kill.md)ステートメントを使用してキャンセルできます。
+`RESTORE`ステートメントはブロックされており、復元タスク全体が完了、失敗、またはキャンセルされた後にのみ終了します。 `RESTORE`を実行するには、長時間持続する接続を準備する必要があります。タスクは[`KILL TIDB QUERY`](/sql-statements/sql-statement-kill.md)ステートメントを使用してキャンセルできます。
 
 `BACKUP`と`RESTORE`タスクは一度に 1 つだけ実行できます。 `BACKUP`または`RESTORE`タスクが同じ TiDBサーバー上ですでに実行されている場合、新しい`RESTORE`実行は、前のタスクがすべて完了するまで待機します。
 
@@ -98,7 +98,7 @@ BR は、 S3 または GCS からのデータの復元をサポートしてい�
 RESTORE DATABASE * FROM 's3://example-bucket-2020/backup-05/';
 ```
 
-URL 構文については、 [<a href="/br/backup-and-restore-storages.md#uri-format">外部storageURI</a>](/br/backup-and-restore-storages.md#uri-format)で詳しく説明します。
+URL 構文については、 [外部storageURI](/br/backup-and-restore-storages.md#uri-format)で詳しく説明します。
 
 認証情報を配布しないクラウド環境で実行する場合は、 `SEND_CREDENTIALS_TO_TIKV`オプションを`FALSE`に設定します。
 
@@ -156,5 +156,5 @@ RESTORE DATABASE * FROM 's3://example-bucket/inc-backup-2';
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-backup.md">バックアップ</a>](/sql-statements/sql-statement-backup.md)
--   [<a href="/sql-statements/sql-statement-show-backups.md">復元を表示</a>](/sql-statements/sql-statement-show-backups.md)
+-   [バックアップ](/sql-statements/sql-statement-backup.md)
+-   [復元を表示](/sql-statements/sql-statement-show-backups.md)

@@ -12,7 +12,7 @@ DM はシャーディング DDL ロックを使用して、操作が正しい順
 > -   このドキュメントは、悲観的調整モードでのシャーディング DDL ロックの処理にのみ適用されます。
 > -   このドキュメントの「コマンドの使用法」セクションのコマンドは対話モードです。コマンドライン モードでは、エラー レポートを回避するためにエスケープ文字を追加する必要があります。
 > -   コマンドによってもたらされる可能性のある影響を完全に理解しており、それを受け入れることができる場合を除き、 `shard-ddl-lock unlock`を使用しないでください。
-> -   異常な DDL ロックを手動で処理する前に、DM [<a href="/dm/feature-shard-merge-pessimistic.md#principles">シャードマージの原則</a>](/dm/feature-shard-merge-pessimistic.md#principles)を必ず読んでください。
+> -   異常な DDL ロックを手動で処理する前に、DM [シャードマージの原則](/dm/feature-shard-merge-pessimistic.md#principles)を必ず読んでください。
 
 ## 指図 {#command}
 
@@ -155,7 +155,7 @@ shard-ddl-lock unlock test-`shard_db`.`shard_table`
 
 #### 異常ロックの原因 {#the-reason-for-the-abnormal-lock}
 
-`DM-master`がシャーディング DDL ロックの自動的なロック解除を試行する前に、すべての MySQL ソースがシャーディング DDL イベントを受信する必要があります (詳細は[<a href="/dm/feature-shard-merge-pessimistic.md#principles">シャードマージの原則</a>](/dm/feature-shard-merge-pessimistic.md#principles)を参照)。シャーディング DDL イベントがすでに移行プロセス中であり、一部の MySQL ソースが削除されて再ロードされない場合 (これらの MySQL ソースはアプリケーションの要求に応じて削除されています)、シャーディング DDL ロックは自動的に移行およびロック解除できません。すべての DM ワーカーが DDL イベントを受信できるわけではないためです。
+`DM-master`がシャーディング DDL ロックの自動的なロック解除を試行する前に、すべての MySQL ソースがシャーディング DDL イベントを受信する必要があります (詳細は[シャードマージの原則](/dm/feature-shard-merge-pessimistic.md#principles)を参照)。シャーディング DDL イベントがすでに移行プロセス中であり、一部の MySQL ソースが削除されて再ロードされない場合 (これらの MySQL ソースはアプリケーションの要求に応じて削除されています)、シャーディング DDL ロックは自動的に移行およびロック解除できません。すべての DM ワーカーが DDL イベントを受信できるわけではないためです。
 
 > **ノート：**
 >
@@ -309,7 +309,7 @@ MySQLとDMの動作プロセスは以下のとおりです。
 
 #### 手動による解決策 {#manual-solution}
 
-ここで、上流と下流のテーブル構造が同じであり、テーブルのマージと移行に対する要求が[<a href="#scenario-1-some-mysql-sources-are-removed">一部の MySQL ソースが削除されました</a>](#scenario-1-some-mysql-sources-are-removed)の手動ソリューションと同じであると仮定します。
+ここで、上流と下流のテーブル構造が同じであり、テーブルのマージと移行に対する要求が[一部の MySQL ソースが削除されました](#scenario-1-some-mysql-sources-are-removed)の手動ソリューションと同じであると仮定します。
 
 `DM-master`がロック解除プロセスを自動的に実行すると、所有者 ( `mysql-replica-01` ) は DDL を正常に実行し、移行プロセスを続行します。ただし、非所有者 ( `mysql-replica-02` ) に DDL 操作のスキップを要求するプロセスでは、対応する DM ワーカーが再起動されたため、DM ワーカーが DDL 操作をスキップした後、チェックポイントの更新に失敗します。
 

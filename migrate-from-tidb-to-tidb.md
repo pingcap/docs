@@ -25,7 +25,7 @@ summary: Learn how to migrate data from one TiDB cluster to another TiDB cluster
 
 1.  TiDB クラスターをデプロイ。
 
-    TiUP Playground を使用して、2 つの TiDB クラスター (1 つはアップストリーム、もう 1 つはダウンストリーム)をデプロイ。詳細については、 [<a href="/tiup/tiup-cluster.md">TiUPを使用したオンライン TiDBクラスタのデプロイと管理</a>](/tiup/tiup-cluster.md)を参照してください。
+    TiUP Playground を使用して、2 つの TiDB クラスター (1 つはアップストリーム、もう 1 つはダウンストリーム)をデプロイ。詳細については、 [TiUPを使用したオンライン TiDBクラスタのデプロイと管理](/tiup/tiup-cluster.md)を参照してください。
 
     ```shell
     # Create an upstream cluster
@@ -38,7 +38,7 @@ summary: Learn how to migrate data from one TiDB cluster to another TiDB cluster
 
 2.  データを初期化します。
 
-    デフォルトでは、新しくデプロイされたクラスターにテスト データベースが作成されます。したがって、 [<a href="https://github.com/akopytov/sysbench#linux">システムベンチ</a>](https://github.com/akopytov/sysbench#linux)を使用してテスト データを生成し、実際のシナリオでデータをシミュレートできます。
+    デフォルトでは、新しくデプロイされたクラスターにテスト データベースが作成されます。したがって、 [システムベンチ](https://github.com/akopytov/sysbench#linux)を使用してテスト データを生成し、実際のシナリオでデータをシミュレートできます。
 
     ```shell
     sysbench oltp_write_only --config-file=./tidb-config --tables=10 --table-size=10000 prepare
@@ -69,7 +69,7 @@ summary: Learn how to migrate data from one TiDB cluster to another TiDB cluster
 
 4.  外部storageを準備します。
 
-    フルデータバックアップでは、アップストリームクラスタとダウンストリームクラスタの両方がバックアップファイルにアクセスする必要があります。バックアップ ファイルを保存するには[<a href="/br/backup-and-restore-storages.md">外部storage</a>](/br/backup-and-restore-storages.md)を使用することをお勧めします。このドキュメントでは、Minio を使用して S3 互換のstorageサービスをシミュレートします。
+    フルデータバックアップでは、アップストリームクラスタとダウンストリームクラスタの両方がバックアップファイルにアクセスする必要があります。バックアップ ファイルを保存するには[外部storage](/br/backup-and-restore-storages.md)を使用することをお勧めします。このドキュメントでは、Minio を使用して S3 互換のstorageサービスをシミュレートします。
 
     ```shell
     wget https://dl.min.io/server/minio/release/linux-amd64/minio
@@ -99,13 +99,13 @@ summary: Learn how to migrate data from one TiDB cluster to another TiDB cluster
 
 ## ステップ 2. 全データを移行する {#step-2-migrate-full-data}
 
-環境をセットアップしたら、 [<a href="https://github.com/pingcap/tidb/tree/master/br">BR</a>](https://github.com/pingcap/tidb/tree/master/br)のバックアップおよびリストア関数を使用して、完全なデータを移行できます。 BRは[<a href="/br/br-use-overview.md#deploy-and-use-br">三つの方法</a>](/br/br-use-overview.md#deploy-and-use-br)で起動可能です。このドキュメントでは、SQL ステートメント`BACKUP`と`RESTORE`を使用します。
+環境をセットアップしたら、 [三つの方法](/br/br-use-overview.md#deploy-and-use-br)で起動可能です。このドキュメントでは、SQL ステートメント`BACKUP`と`RESTORE`を使用します。
 
 > **ノート：**
 >
 > 本番クラスターでは、GC を無効にしてバックアップを実行すると、クラスターのパフォーマンスに影響を与える可能性があります。パフォーマンスの低下を避けるために、オフピーク時間にデータをバックアップし、 `RATE_LIMIT`を適切な値に設定することをお勧めします。
 >
-> 上流クラスターと下流クラスターのバージョンが異なる場合は、 [<a href="/br/backup-and-restore-overview.md#before-you-use">BR互換性</a>](/br/backup-and-restore-overview.md#before-you-use)をチェックする必要があります。このドキュメントでは、アップストリーム クラスターとダウンストリーム クラスターが同じバージョンであると仮定します。
+> 上流クラスターと下流クラスターのバージョンが異なる場合は、 [BR互換性](/br/backup-and-restore-overview.md#before-you-use)をチェックする必要があります。このドキュメントでは、アップストリーム クラスターとダウンストリーム クラスターが同じバージョンであると仮定します。
 
 1.  GC を無効にします。
 
@@ -174,13 +174,13 @@ summary: Learn how to migrate data from one TiDB cluster to another TiDB cluster
 
 4.  (オプション) データを検証します。
 
-    [<a href="/sync-diff-inspector/sync-diff-inspector-overview.md">同期差分インスペクター</a>](/sync-diff-inspector/sync-diff-inspector-overview.md)を使用すると、特定の時点で上流と下流の間のデータの整合性をチェックできます。前の`BACKUP`出力は、アップストリーム クラスターが 431434047157698561 でバックアップを終了したことを示しています。前の`RESTORE`の出力は、ダウンストリーム クラスターが 431434141450371074 で復元を終了したことを示しています。
+    [同期差分インスペクター](/sync-diff-inspector/sync-diff-inspector-overview.md)を使用すると、特定の時点で上流と下流の間のデータの整合性をチェックできます。前の`BACKUP`出力は、アップストリーム クラスターが 431434047157698561 でバックアップを終了したことを示しています。前の`RESTORE`の出力は、ダウンストリーム クラスターが 431434141450371074 で復元を終了したことを示しています。
 
     ```shell
     sync_diff_inspector -C ./config.yaml
     ```
 
-    sync-diff-inspector の構成方法の詳細については、 [<a href="/sync-diff-inspector/sync-diff-inspector-overview.md#configuration-file-description">コンフィグレーションファイルの説明</a>](/sync-diff-inspector/sync-diff-inspector-overview.md#configuration-file-description)を参照してください。このドキュメントでは、構成は次のようになります。
+    sync-diff-inspector の構成方法の詳細については、 [コンフィグレーションファイルの説明](/sync-diff-inspector/sync-diff-inspector-overview.md#configuration-file-description)を参照してください。このドキュメントでは、構成は次のようになります。
 
     ```shell
     # Diff Configuration.
@@ -210,7 +210,7 @@ summary: Learn how to migrate data from one TiDB cluster to another TiDB cluster
 
 1.  TiCDCをデプロイ。
 
-    完全なデータ移行が完了したら、増分データを複製するように TiCDC を展開および構成します。本番環境では、 [<a href="/ticdc/deploy-ticdc.md">TiCDCのデプロイ</a>](/ticdc/deploy-ticdc.md)の指示に従って TiCDC をデプロイします。このドキュメントでは、テスト クラスターの作成時に TiCDC ノードが開始されています。したがって、TiCDC をデプロイするステップをスキップして、変更フィード構成に進むことができます。
+    完全なデータ移行が完了したら、増分データを複製するように TiCDC を展開および構成します。本番環境では、 [TiCDCのデプロイ](/ticdc/deploy-ticdc.md)の指示に従って TiCDC をデプロイします。このドキュメントでは、テスト クラスターの作成時に TiCDC ノードが開始されています。したがって、TiCDC をデプロイするステップをスキップして、変更フィード構成に進むことができます。
 
 2.  チェンジフィードを作成します。
 
@@ -227,13 +227,13 @@ summary: Learn how to migrate data from one TiDB cluster to another TiDB cluster
     -   `--server` : TiCDC クラスター内の任意のノードの IP アドレス
     -   `--sink-uri` : ダウンストリームクラスターのURI
     -   `--changefeed-id` : 変更フィード ID。正規表現 ^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$ の形式である必要があります。
-    -   `--start-ts` : 変更フィードの開始タイムスタンプ。バックアップ時間 (または[<a href="#step-2-migrate-full-data">ステップ 2. 全データを移行する</a>](#step-2-migrate-full-data)の「データのバックアップ」セクションの BackupTS) である必要があります。
+    -   `--start-ts` : 変更フィードの開始タイムスタンプ。バックアップ時間 (または[ステップ 2. 全データを移行する](#step-2-migrate-full-data)の「データのバックアップ」セクションの BackupTS) である必要があります。
 
-    変更フィード構成の詳細については、 [<a href="/ticdc/ticdc-changefeed-config.md">タスク設定ファイル</a>](/ticdc/ticdc-changefeed-config.md)を参照してください。
+    変更フィード構成の詳細については、 [タスク設定ファイル](/ticdc/ticdc-changefeed-config.md)を参照してください。
 
 3.  GCを有効にします。
 
-    TiCDC を使用した増分移行では、GC はレプリケートされた履歴データのみを削除します。したがって、変更フィードを作成した後、次のコマンドを実行して GC を有効にする必要があります。詳細は[<a href="/ticdc/ticdc-faq.md#what-is-the-complete-behavior-of-ticdc-garbage-collection-gc-safepoint">TiCDCガベージコレクション(GC) セーフポイントの完全な動作は何ですか?</a>](/ticdc/ticdc-faq.md#what-is-the-complete-behavior-of-ticdc-garbage-collection-gc-safepoint)を参照してください。
+    TiCDC を使用した増分移行では、GC はレプリケートされた履歴データのみを削除します。したがって、変更フィードを作成した後、次のコマンドを実行して GC を有効にする必要があります。詳細は[TiCDCガベージコレクション(GC) セーフポイントの完全な動作は何ですか?](/ticdc/ticdc-faq.md#what-is-the-complete-behavior-of-ticdc-garbage-collection-gc-safepoint)を参照してください。
 
     GC を有効にするには、次のコマンドを実行します。
 

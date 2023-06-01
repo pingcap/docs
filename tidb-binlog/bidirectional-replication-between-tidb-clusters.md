@@ -32,7 +32,7 @@ summary: Learn how to perform the bidirectional replication between TiDB cluster
 詳細な実装は次のように説明されます。
 
 1.  2 つのクラスターのそれぞれに対して TiDB Binlogレプリケーション プログラムを開始します。
-2.  レプリケートされるトランザクションがクラスター A のDrainerを通過すると、このDrainerはトランザクションに[<a href="#mark-table">`_drainer_repl_mark`テーブル</a>](#mark-table)を追加し、この DML イベント更新をマーク テーブルに書き込み、このトランザクションをクラスター B にレプリケートします。
+2.  レプリケートされるトランザクションがクラスター A のDrainerを通過すると、このDrainerはトランザクションに[`_drainer_repl_mark`テーブル](#mark-table)を追加し、この DML イベント更新をマーク テーブルに書き込み、このトランザクションをクラスター B にレプリケートします。
 3.  クラスタB は、 `_drainer_repl_mark`マーク テーブルを持つbinlogイベントをクラスター A に返します。クラスター B のDrainerは、binlogイベントを解析するときに DML イベントを持つマーク テーブルを識別し、このbinlogイベントをクラスター A にレプリケートすることを断念します。
 
 クラスター B からクラスター A へのレプリケーション プロセスは上記と同じです。 2 つのクラスターは相互に上流にも下流にもあります。
@@ -40,7 +40,7 @@ summary: Learn how to perform the bidirectional replication between TiDB cluster
 > **ノート：**
 >
 > -   `_drainer_repl_mark`マーク テーブルを更新する場合、バイナリログを生成するにはデータ変更が必要です。
-> -   DDL 操作はトランザクションではないため、DDL 操作をレプリケートするには一方向のレプリケーション方法を使用する必要があります。詳細については[<a href="#replicate-ddl-operations">DDL 操作をレプリケートする</a>](#replicate-ddl-operations)を参照してください。
+> -   DDL 操作はトランザクションではないため、DDL 操作をレプリケートするには一方向のレプリケーション方法を使用する必要があります。詳細については[DDL 操作をレプリケートする](#replicate-ddl-operations)を参照してください。
 
 Drainer は、競合を避けるために、ダウンストリームへの接続ごとに一意の ID を使用できます。 `channel_id`は、双方向レプリケーションのチャネルを示すために使用されます。 2 つのクラスターは同じ`channel_id`構成 (同じ値) である必要があります。
 

@@ -11,7 +11,7 @@ summary: Learn the `AUTO_INCREMENT` column attribute of TiDB.
 
 > **ノート：**
 >
-> `AUTO_INCREMENT`属性は、本番環境でホットスポットを引き起こす可能性があります。詳細は[<a href="/troubleshoot-hot-spot-issues.md">ホットスポットの問題のトラブルシューティング</a>](/troubleshoot-hot-spot-issues.md)参照してください。代わりに[<a href="/auto-random.md">`AUTO_RANDOM`</a>](/auto-random.md)を使用することをお勧めします。
+> `AUTO_INCREMENT`属性は、本番環境でホットスポットを引き起こす可能性があります。詳細は[`AUTO_RANDOM`](/auto-random.md)を使用することをお勧めします。
 
 </CustomContent>
 
@@ -19,7 +19,7 @@ summary: Learn the `AUTO_INCREMENT` column attribute of TiDB.
 
 > **ノート：**
 >
-> `AUTO_INCREMENT`属性は、本番環境でホットスポットを引き起こす可能性があります。詳細は[<a href="https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues#handle-auto-increment-primary-key-hotspot-tables-using-auto_random">ホットスポットの問題のトラブルシューティング</a>](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues#handle-auto-increment-primary-key-hotspot-tables-using-auto_random)参照してください。代わりに[<a href="/auto-random.md">`AUTO_RANDOM`</a>](/auto-random.md)を使用することをお勧めします。
+> `AUTO_INCREMENT`属性は、本番環境でホットスポットを引き起こす可能性があります。詳細は[`AUTO_RANDOM`](/auto-random.md)を使用することをお勧めします。
 
 </CustomContent>
 
@@ -31,7 +31,7 @@ summary: Learn the `AUTO_INCREMENT` column attribute of TiDB.
 
 > **ノート：**
 >
-> すべての TiDB サーバーで`AUTO_INCREMENT`数値を単調にしたい場合、および TiDB バージョンが v6.5.0 以降の場合は、 [<a href="#mysql-compatibility-mode">MySQL互換モード</a>](#mysql-compatibility-mode)を有効にすることをお勧めします。
+> すべての TiDB サーバーで`AUTO_INCREMENT`数値を単調にしたい場合、および TiDB バージョンが v6.5.0 以降の場合は、 [MySQL互換モード](#mysql-compatibility-mode)を有効にすることをお勧めします。
 
 以下は`AUTO_INCREMENT`の基本的な例です。
 

@@ -7,7 +7,7 @@ summary: Learn the MPP mode of TiFlash and how to use it.
 
 このドキュメントでは、 TiFlashの MPP モードとその使用方法を紹介します。
 
-TiFlash は、計算にクロスノード データ交換 (データ シャッフル プロセス) を導入するクエリの実行に MPP モードの使用をサポートします。 TiDB は、オプティマイザーのコスト推定を使用して、MPP モードを選択するかどうかを自動的に決定します。 [<a href="/system-variables.md#tidb_allow_mpp-new-in-v50">`tidb_allow_mpp`</a>](/system-variables.md#tidb_allow_mpp-new-in-v50)と[<a href="/system-variables.md#tidb_enforce_mpp-new-in-v51">`tidb_enforce_mpp`</a>](/system-variables.md#tidb_enforce_mpp-new-in-v51)の値を変更することで、選択戦略を変更できます。
+TiFlash は、計算にクロスノード データ交換 (データ シャッフル プロセス) を導入するクエリの実行に MPP モードの使用をサポートします。 TiDB は、オプティマイザーのコスト推定を使用して、MPP モードを選択するかどうかを自動的に決定します。 [`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51)の値を変更することで、選択戦略を変更できます。
 
 ## MPP モードを選択するかどうかを制御します {#control-whether-to-select-the-mpp-mode}
 
@@ -48,7 +48,7 @@ set @@session.tidb_enforce_mpp=1;
 
 <CustomContent platform="tidb">
 
-`tidb_enforce_mpp`セッション変数の初期値は、この tidb-server インスタンスの[<a href="/tidb-configuration-file.md#enforce-mpp">`enforce-mpp`</a>](/tidb-configuration-file.md#enforce-mpp)構成値 (デフォルトでは`false` ) と同じです。 TiDB クラスター内の複数の tidb-server インスタンスが分析クエリのみを実行し、これらのインスタンスで MPP モードが使用されていることを確認したい場合は、それらの[<a href="/tidb-configuration-file.md#enforce-mpp">`enforce-mpp`</a>](/tidb-configuration-file.md#enforce-mpp)構成値を`true`に変更できます。
+`tidb_enforce_mpp`セッション変数の初期値は、この tidb-server インスタンスの[`enforce-mpp`](/tidb-configuration-file.md#enforce-mpp)構成値を`true`に変更できます。
 
 </CustomContent>
 
@@ -101,13 +101,13 @@ explain select count(*) from customer c join nation n on c.c_nationkey=n.n_natio
 
 TiFlash は、ブロードキャスト ハッシュ結合を使用するかどうかを制御するために、次の 3 つのグローバル/セッション変数を提供します。
 
--   [<a href="/system-variables.md#tidb_broadcast_join_threshold_size-new-in-v50">`tidb_broadcast_join_threshold_size`</a>](/system-variables.md#tidb_broadcast_join_threshold_size-new-in-v50) : 値の単位はバイトです。テーブル サイズ (バイト単位) が変数の値より小さい場合は、ブロードキャスト ハッシュ結合アルゴリズムが使用されます。それ以外の場合は、シャッフル ハッシュ結合アルゴリズムが使用されます。
--   [<a href="/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50">`tidb_broadcast_join_threshold_count`</a>](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50) : 値の単位は行です。結合操作のオブジェクトがサブクエリに属している場合、オプティマイザはサブクエリの結果セットのサイズを推定できないため、サイズは結果セット内の行数によって決まります。サブクエリ内の推定行数がこの変数の値より小さい場合は、ブロードキャスト ハッシュ結合アルゴリズムが使用されます。それ以外の場合は、シャッフル ハッシュ結合アルゴリズムが使用されます。
--   [<a href="/system-variables.md#tidb_prefer_broadcast_join_by_exchange_data_size-new-in-v710">`tidb_prefer_broadcast_join_by_exchange_data_size`</a>](/system-variables.md#tidb_prefer_broadcast_join_by_exchange_data_size-new-in-v710) : ネットワーク送信のオーバーヘッドを最小限に抑えたアルゴリズムを使用するかどうかを制御します。この変数が有効な場合、TiDB はネットワーク内で交換されるデータのサイズをそれぞれ`Broadcast Hash Join`と`Shuffled Hash Join`を使用して推定し、サイズの小さい方を選択します。この変数を有効にすると、 [<a href="/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50">`tidb_broadcast_join_threshold_count`</a>](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50)と[<a href="/system-variables.md#tidb_broadcast_join_threshold_size-new-in-v50">`tidb_broadcast_join_threshold_size`</a>](/system-variables.md#tidb_broadcast_join_threshold_size-new-in-v50)は無効になります。
+-   [`tidb_broadcast_join_threshold_size`](/system-variables.md#tidb_broadcast_join_threshold_size-new-in-v50) : 値の単位はバイトです。テーブル サイズ (バイト単位) が変数の値より小さい場合は、ブロードキャスト ハッシュ結合アルゴリズムが使用されます。それ以外の場合は、シャッフル ハッシュ結合アルゴリズムが使用されます。
+-   [`tidb_broadcast_join_threshold_count`](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50) : 値の単位は行です。結合操作のオブジェクトがサブクエリに属している場合、オプティマイザはサブクエリの結果セットのサイズを推定できないため、サイズは結果セット内の行数によって決まります。サブクエリ内の推定行数がこの変数の値より小さい場合は、ブロードキャスト ハッシュ結合アルゴリズムが使用されます。それ以外の場合は、シャッフル ハッシュ結合アルゴリズムが使用されます。
+-   [`tidb_broadcast_join_threshold_size`](/system-variables.md#tidb_broadcast_join_threshold_size-new-in-v50)は無効になります。
 
 ## MPP モードでパーティション化されたテーブルにアクセスする {#access-partitioned-tables-in-the-mpp-mode}
 
-MPP モードでパーティション化されたテーブルにアクセスするには、まず[<a href="https://docs.pingcap.com/tidb/stable/partitioned-table#dynamic-pruning-mode">動的プルーニングモード</a>](https://docs.pingcap.com/tidb/stable/partitioned-table#dynamic-pruning-mode)有効にする必要があります。
+MPP モードでパーティション化されたテーブルにアクセスするには、まず[動的プルーニングモード](https://docs.pingcap.com/tidb/stable/partitioned-table#dynamic-pruning-mode)有効にする必要があります。
 
 例：
 

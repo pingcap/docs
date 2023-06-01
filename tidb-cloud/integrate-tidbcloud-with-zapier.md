@@ -5,9 +5,9 @@ summary: Learn how to connect TiDB Cloud to 5000+ Apps with Zapier.
 
 # TiDB Cloudと Zapier を統合する {#integrate-tidb-cloud-with-zapier}
 
-[<a href="https://zapier.com">ザピエル</a>](https://zapier.com)は、コード不要の自動化ツールで、何千ものアプリやサービスが関与するワークフローを簡単に作成できます。
+[ザピエル](https://zapier.com)は、コード不要の自動化ツールで、何千ものアプリやサービスが関与するワークフローを簡単に作成できます。
 
-Zapier で[<a href="https://zapier.com/apps/tidb-cloud/integrations">TiDB Cloudアプリ</a>](https://zapier.com/apps/tidb-cloud/integrations)使用すると、次のことが可能になります。
+Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)使用すると、次のことが可能になります。
 
 -   MySQL と互換性のある HTAP データベースである TiDB を無料で使用します。ローカルで構築する必要はありません。
 -   TiDB Cloudの管理が簡単になります。
@@ -17,21 +17,21 @@ Zapier で[<a href="https://zapier.com/apps/tidb-cloud/integrations">TiDB Cloud�
 
 ## テンプレートを使ったクイックスタート {#quick-start-with-template}
 
-[<a href="https://platform.zapier.com/partners/zap-templates">ザップテンプレート</a>](https://platform.zapier.com/partners/zap-templates)は、公開されている Zapier 統合用に、事前に選択されたアプリとコア フィールドを備えた既製の統合または Zaps です。
+[ザップテンプレート](https://platform.zapier.com/partners/zap-templates)は、公開されている Zapier 統合用に、事前に選択されたアプリとコア フィールドを備えた既製の統合または Zaps です。
 
-このセクションでは、例として**「新しい Github グローバル イベントを TiDB 行に追加」**テンプレートを使用してワークフローを作成します。このワークフローでは、GitHub アカウントから新しいグローバル イベント (任意のリポジトリ上で、ユーザーから、またはユーザーに発生する[<a href="https://docs.github.com/en/developers/webhooks-and-events/events/github-event-types">GitHubイベント</a>](https://docs.github.com/en/developers/webhooks-and-events/events/github-event-types)つのイベント) が作成されるたびに、Zapier は新しい行をTiDB Cloudクラスターに追加します。
+このセクションでは、例として**「新しい Github グローバル イベントを TiDB 行に追加」**テンプレートを使用してワークフローを作成します。このワークフローでは、GitHub アカウントから新しいグローバル イベント (任意のリポジトリ上で、ユーザーから、またはユーザーに発生する[GitHubイベント](https://docs.github.com/en/developers/webhooks-and-events/events/github-event-types)つのイベント) が作成されるたびに、Zapier は新しい行をTiDB Cloudクラスターに追加します。
 
 ### 前提条件 {#prerequisites}
 
 始める前に、次のものが必要です。
 
--   回答[<a href="https://zapier.com/app/login">ザピアアカウント</a>](https://zapier.com/app/login) ．
--   回答[<a href="https://github.com/login">GitHub アカウント</a>](https://github.com/login) ．
--   TiDB Cloud上の A [<a href="https://tidbcloud.com/signup">TiDB Cloudアカウント</a>](https://tidbcloud.com/signup)およびServerless Tierクラスター。詳細については、 [<a href="https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-tidb-cluster">TiDB Cloudクイック スタート</a>](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-tidb-cluster)を参照してください。
+-   回答[ザピアアカウント](https://zapier.com/app/login) ．
+-   回答[GitHub アカウント](https://github.com/login) ．
+-   TiDB Cloud上の A [TiDB Cloudクイック スタート](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-tidb-cluster)を参照してください。
 
 ### ステップ 1: テンプレートを取得する {#step-1-get-the-template}
 
-[<a href="https://zapier.com/apps/tidb-cloud/integrations">Zapier 上のTiDB Cloudアプリ</a>](https://zapier.com/apps/tidb-cloud/integrations)に進みます。 **[Add new Github global events to TiDB rows]**テンプレートを選択し、 **[Try it]**をクリックします。次に、エディターページに入ります。
+[Zapier 上のTiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)に進みます。 **[Add new Github global events to TiDB rows]**テンプレートを選択し、 **[Try it]**をクリックします。次に、エディターページに入ります。
 
 ### ステップ 2: トリガーを設定する {#step-2-set-up-the-trigger}
 
@@ -62,7 +62,7 @@ Zapier で[<a href="https://zapier.com/apps/tidb-cloud/integrations">TiDB Cloud�
 2.  アカウントを選択してください
 
     1.  **「サインイン」**ボタンをクリックすると、新しいログインページにリダイレクトされます。
-    2.  ログイン ページで、公開キーと秘密キーを入力します。 TiDB CloudAPI キーを取得するには、 [<a href="https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management">TiDB CloudAPI ドキュメント</a>](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management)の手順に従います。
+    2.  ログイン ページで、公開キーと秘密キーを入力します。 TiDB CloudAPI キーを取得するには、 [TiDB CloudAPI ドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management)の手順に従います。
     3.  **[続行]**をクリックします。
 
     ![Account](/media/tidb-cloud/zapier/zapier-tidbcloud-account.png)
@@ -131,7 +131,7 @@ Zapier で[<a href="https://zapier.com/apps/tidb-cloud/integrations">TiDB Cloud�
 
 ### ステップ 5: ザップを公開する {#step-5-publish-your-zap}
 
-**「公開」**をクリックしてザップを公開します。 [<a href="https://zapier.com/app/zaps">ホームページ</a>](https://zapier.com/app/zaps)でザップが実行されていることがわかります。
+**「公開」**をクリックしてザップを公開します。 [ホームページ](https://zapier.com/app/zaps)でザップが実行されていることがわかります。
 
 ![Publish the zap](/media/tidb-cloud/zapier/zapier-tidbcloud-publish.png)
 
@@ -139,7 +139,7 @@ Zapier で[<a href="https://zapier.com/apps/tidb-cloud/integrations">TiDB Cloud�
 
 ## トリガーとアクション {#triggers-x26-actions}
 
-[<a href="https://zapier.com/how-it-works">トリガーとアクション</a>](https://zapier.com/how-it-works)は Zapier の重要な概念です。さまざまなトリガーとアクションを組み合わせることで、さまざまな自動化ワークフローを作成できます。
+[トリガーとアクション](https://zapier.com/how-it-works)は Zapier の重要な概念です。さまざまなトリガーとアクションを組み合わせることで、さまざまな自動化ワークフローを作成できます。
 
 このセクションでは、Zapier 上のTiDB Cloud App によって提供されるトリガーとアクションを紹介します。
 
@@ -173,15 +173,15 @@ Zapier で[<a href="https://zapier.com/apps/tidb-cloud/integrations">TiDB Cloud�
 
 ## TiDB Cloudアプリ テンプレート {#tidb-cloud-app-templates}
 
-TiDB Cloud には、 Zapier で直接使用できるテンプレートがいくつか用意されています。すべてのテンプレートが[<a href="https://zapier.com/apps/tidb-cloud/integrations">TiDB Cloudアプリ</a>](https://zapier.com/apps/tidb-cloud/integrations)ページで見つかります。
+TiDB Cloud には、 Zapier で直接使用できるテンプレートがいくつか用意されています。すべてのテンプレートが[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)ページで見つかります。
 
 ここではいくつかの例を示します。
 
--   [<a href="https://zapier.com/apps/google-sheets/integrations/tidb-cloud/1134881/duplicate-new-tidb-cloud-rows-in-google-sheets">Google スプレッドシートで新しいTiDB Cloud行を複製する</a>](https://zapier.com/apps/google-sheets/integrations/tidb-cloud/1134881/duplicate-new-tidb-cloud-rows-in-google-sheets) 。
--   [<a href="https://zapier.com/apps/gmail/integrations/tidb-cloud/1134903/send-emails-via-gmail-from-new-custom-tidb-queries">新しいカスタム TiDB クエリから Gmail 経由で電子メールを送信</a>](https://zapier.com/apps/gmail/integrations/tidb-cloud/1134903/send-emails-via-gmail-from-new-custom-tidb-queries) 。
--   [<a href="https://zapier.com/apps/tidb-cloud/integrations/webhook/1134955/add-rows-to-tidb-cloud-from-newly-caught-webhooks">新しくキャッチした Webhook からTiDB Cloudに行を追加します</a>](https://zapier.com/apps/tidb-cloud/integrations/webhook/1134955/add-rows-to-tidb-cloud-from-newly-caught-webhooks) 。
--   [<a href="https://zapier.com/apps/salesforce/integrations/tidb-cloud/1134923/store-new-salesforce-contacts-on-tidb-rows">新しい Salesforce 連絡先を TiDB 行に保存する</a>](https://zapier.com/apps/salesforce/integrations/tidb-cloud/1134923/store-new-salesforce-contacts-on-tidb-rows) 。
--   [<a href="https://zapier.com/apps/gmail/integrations/slack/1135456/create-tidb-rows-for-new-gmail-emails-with-resumes-and-send-direct-slack-notifications">履歴書付きの新しい Gmail メール用の TiDB 行を作成し、Slack 通知を直接送信します</a>](https://zapier.com/apps/gmail/integrations/slack/1135456/create-tidb-rows-for-new-gmail-emails-with-resumes-and-send-direct-slack-notifications)
+-   [Google スプレッドシートで新しいTiDB Cloud行を複製する](https://zapier.com/apps/google-sheets/integrations/tidb-cloud/1134881/duplicate-new-tidb-cloud-rows-in-google-sheets) 。
+-   [新しいカスタム TiDB クエリから Gmail 経由で電子メールを送信](https://zapier.com/apps/gmail/integrations/tidb-cloud/1134903/send-emails-via-gmail-from-new-custom-tidb-queries) 。
+-   [新しくキャッチした Webhook からTiDB Cloudに行を追加します](https://zapier.com/apps/tidb-cloud/integrations/webhook/1134955/add-rows-to-tidb-cloud-from-newly-caught-webhooks) 。
+-   [新しい Salesforce 連絡先を TiDB 行に保存する](https://zapier.com/apps/salesforce/integrations/tidb-cloud/1134923/store-new-salesforce-contacts-on-tidb-rows) 。
+-   [履歴書付きの新しい Gmail メール用の TiDB 行を作成し、Slack 通知を直接送信します](https://zapier.com/apps/gmail/integrations/slack/1135456/create-tidb-rows-for-new-gmail-emails-with-resumes-and-send-direct-slack-notifications)
 
 ## FAQ {#faq}
 
@@ -189,7 +189,7 @@ TiDB Cloud には、 Zapier で直接使用できるテンプレートがいく�
 
 Zapier では、 TiDB Cloudアカウントに接続するために**TiDB CloudAPI キーが**必要です。 Zapier では、 TiDB Cloudのログイン アカウントは必要ありません。
 
-TiDB CloudAPI キーを取得するには、 [<a href="https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management">TiDB CloudAPI ドキュメント</a>](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management)に従ってください。
+TiDB CloudAPI キーを取得するには、 [TiDB CloudAPI ドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management)に従ってください。
 
 ### TiDB Cloudトリガーはどのように重複除外を実行しますか? {#how-do-tidb-cloud-triggers-perform-de-duplication}
 

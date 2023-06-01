@@ -53,7 +53,7 @@ TiDBのコーディング規約では、同一テーブルのデータはTableID
 
 一方、TiDB の RowID もデフォルトで順次自動増分されます。主キーが整数型ではない場合、書き込みホットスポットの問題が発生する可能性もあります。
 
-さらに、データ書き込み (新しく作成されたテーブルまたはパーティション上) またはデータ読み取り (読み取り専用シナリオでの定期読み取りホットスポット) のプロセス中にホットスポットが発生した場合、テーブル属性を使用してリージョンのマージ動作を制御できます。詳細は[<a href="/table-attributes.md#control-the-region-merge-behavior-using-table-attributes">テーブル属性を使用してリージョンのマージ動作を制御する</a>](/table-attributes.md#control-the-region-merge-behavior-using-table-attributes)を参照してください。
+さらに、データ書き込み (新しく作成されたテーブルまたはパーティション上) またはデータ読み取り (読み取り専用シナリオでの定期読み取りホットスポット) のプロセス中にホットスポットが発生した場合、テーブル属性を使用してリージョンのマージ動作を制御できます。詳細は[テーブル属性を使用してリージョンのマージ動作を制御する](/table-attributes.md#control-the-region-merge-behavior-using-table-attributes)を参照してください。
 
 ### インデックスホットスポット {#index-hotspots}
 
@@ -69,7 +69,7 @@ TiDBのコーディング規約では、同一テーブルのデータはTableID
 
 ### TiDB ダッシュボードを使用してホットスポット テーブルを見つける {#use-tidb-dashboard-to-locate-hotspot-tables}
 
-[<a href="/dashboard/dashboard-intro.md">TiDB ダッシュボード</a>](/dashboard/dashboard-intro.md)の**Key Visualizer**機能は、ユーザーがホットスポットのトラブルシューティング範囲をテーブル レベルに絞り込むのに役立ちます。以下は**Key Visualizer**で表示される熱線図の例です。グラフの横軸は時間、縦軸は各種表と指標です。色が明るいほど負荷が大きくなります。ツールバーで読み取りまたは書き込みフローを切り替えることができます。
+[TiDB ダッシュボード](/dashboard/dashboard-intro.md)の**Key Visualizer**機能は、ユーザーがホットスポットのトラブルシューティング範囲をテーブル レベルに絞り込むのに役立ちます。以下は**Key Visualizer**で表示される熱線図の例です。グラフの横軸は時間、縦軸は各種表と指標です。色が明るいほど負荷が大きくなります。ツールバーで読み取りまたは書き込みフローを切り替えることができます。
 
 ![Dashboard Example 1](/media/troubleshoot-hot-spot-issues-1.png)
 
@@ -89,7 +89,7 @@ TiDBのコーディング規約では、同一テーブルのデータはTableID
 
 非クラスター化主キーまたは主キーのないテーブルの場合、TiDB は暗黙的な自動インクリメント RowID を使用します。多数の`INSERT`オペレーションが存在する場合、データは 1 つのリージョンに書き込まれ、書き込みホットスポットが発生します。
 
-[<a href="/shard-row-id-bits.md">`SHARD_ROW_ID_BITS`</a>](/shard-row-id-bits.md)を設定すると、行 ID が分散されて複数のリージョンに書き込まれるため、書き込みホットスポットの問題が軽減されます。
+[`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)を設定すると、行 ID が分散されて複数のリージョンに書き込まれるため、書き込みホットスポットの問題が軽減されます。
 
 ```
 SHARD_ROW_ID_BITS = 4 # Represents 16 shards.
@@ -108,7 +108,7 @@ ALTER TABLE: ALTER TABLE t SHARD_ROW_ID_BITS = 4;
 
 `SHARD_ROW_ID_BITS`の値は動的に変更できます。変更された値は、新しく書き込まれたデータに対してのみ有効です。
 
-タイプ`CLUSTERED`の主キーを持つテーブルの場合、TiDB はテーブルの主キーを RowID として使用します。現時点では、 `SHARD_ROW_ID_BITS`オプションは RowID の生成ルールが変更されるため使用できません。 `NONCLUSTERED`タイプの主キーを持つテーブルの場合、TiDB は自動的に割り当てられた 64 ビット整数を RowID として使用します。この場合、 `SHARD_ROW_ID_BITS`機能を使用できます。 `CLUSTERED`タイプの主キーの詳細については、 [<a href="/clustered-indexes.md">クラスター化インデックス</a>](/clustered-indexes.md)を参照してください。
+タイプ`CLUSTERED`の主キーを持つテーブルの場合、TiDB はテーブルの主キーを RowID として使用します。現時点では、 `SHARD_ROW_ID_BITS`オプションは RowID の生成ルールが変更されるため使用できません。 `NONCLUSTERED`タイプの主キーを持つテーブルの場合、TiDB は自動的に割り当てられた 64 ビット整数を RowID として使用します。この場合、 `SHARD_ROW_ID_BITS`機能を使用できます。 `CLUSTERED`タイプの主キーの詳細については、 [クラスター化インデックス](/clustered-indexes.md)を参照してください。
 
 次の 2 つの負荷図は、主キーのない 2 つのテーブルが`SHARD_ROW_ID_BITS`を使用してホットスポットを分散するケースを示しています。最初の図はホットスポットを分散させる前の状況を示し、2 番目の図はホットスポットを分散させた後の状況を示します。
 
@@ -168,19 +168,19 @@ SELECT LAST_INSERT_ID();
 
 上の負荷図に示されているように、 `AUTO_INCREMENT` `AUTO_RANDOM`に置き換えると、ホットスポットが分散される可能性があります。
 
-詳細については、 [<a href="/auto-random.md">自動ランダム</a>](/auto-random.md)を参照してください。
+詳細については、 [自動ランダム](/auto-random.md)を参照してください。
 
 ## 小さなテーブルのホットスポットの最適化 {#optimization-of-small-table-hotspots}
 
 TiDB のコプロセッサーキャッシュ機能は、コンピューティング結果キャッシュのプッシュ ダウンをサポートしています。この機能を有効にすると、TiDB は TiKV にプッシュダウンされる計算結果をキャッシュします。この機能は、小さなテーブルの読み取りホットスポットに適しています。
 
-詳細については、 [<a href="/coprocessor-cache.md">コプロセッサーキャッシュ</a>](/coprocessor-cache.md)を参照してください。
+詳細については、 [コプロセッサーキャッシュ](/coprocessor-cache.md)を参照してください。
 
 **以下も参照してください。**
 
--   [<a href="/best-practices/high-concurrency-best-practices.md">高度な同時書き込みのベスト プラクティス</a>](/best-practices/high-concurrency-best-practices.md)
--   [<a href="/sql-statements/sql-statement-split-region.md">分割リージョン</a>](/sql-statements/sql-statement-split-region.md)
+-   [高度な同時書き込みのベスト プラクティス](/best-practices/high-concurrency-best-practices.md)
+-   [分割リージョン](/sql-statements/sql-statement-split-region.md)
 
 ## 分散読み取りホットスポット {#scatter-read-hotspots}
 
-読み取りホットスポットのシナリオでは、ホットスポット TiKV ノードが読み取りリクエストを時間内に処理できず、読み取りリクエストがキューイングされます。ただし、現時点ではすべての TiKV リソースが使い果たされているわけではありません。レイテンシーを短縮するために、TiDB v7.1.0 には負荷ベースのレプリカ読み取り機能が導入されています。これにより、TiDB は、ホットスポット TiKV ノードでキューに入れることなく、他の TiKV ノードからデータを読み取ることができます。 [<a href="/system-variables.md#tidb_load_based_replica_read_threshold-new-in-v700">`tidb_load_based_replica_read_threshold`</a>](/system-variables.md#tidb_load_based_replica_read_threshold-new-in-v700)システム変数を使用して、読み取りリクエストのキューの長さを制御できます。リーダー ノードの推定キュー時間がこのしきい値を超えると、TiDB はフォロワー ノードからのデータの読み取りを優先します。この機能により、読み取りホットスポットのシナリオでは、読み取りホットスポットを分散しない場合と比較して、読み取りスループットが 70% ～ 200% 向上します。
+読み取りホットスポットのシナリオでは、ホットスポット TiKV ノードが読み取りリクエストを時間内に処理できず、読み取りリクエストがキューイングされます。ただし、現時点ではすべての TiKV リソースが使い果たされているわけではありません。レイテンシーを短縮するために、TiDB v7.1.0 には負荷ベースのレプリカ読み取り機能が導入されています。これにより、TiDB は、ホットスポット TiKV ノードでキューに入れることなく、他の TiKV ノードからデータを読み取ることができます。 [`tidb_load_based_replica_read_threshold`](/system-variables.md#tidb_load_based_replica_read_threshold-new-in-v700)システム変数を使用して、読み取りリクエストのキューの長さを制御できます。リーダー ノードの推定キュー時間がこのしきい値を超えると、TiDB はフォロワー ノードからのデータの読み取りを優先します。この機能により、読み取りホットスポットのシナリオでは、読み取りホットスポットを分散しない場合と比較して、読み取りスループットが 70% ～ 200% 向上します。

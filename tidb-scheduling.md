@@ -5,7 +5,7 @@ summary: Introduces the PD scheduling component in a TiDB cluster.
 
 # TiDB スケジューリング {#tidb-scheduling}
 
-配置Driver( [<a href="https://github.com/tikv/pd">PD</a>](https://github.com/tikv/pd) ) は、TiDB クラスター内のマネージャーとして機能し、クラスター内のリージョンのスケジュールも設定します。この記事では、PD スケジューリングコンポーネントの設計と中心となる概念を紹介します。
+配置Driver( [PD](https://github.com/tikv/pd) ) は、TiDB クラスター内のマネージャーとして機能し、クラスター内のリージョンのスケジュールも設定します。この記事では、PD スケジューリングコンポーネントの設計と中心となる概念を紹介します。
 
 ## 状況のスケジュール設定 {#scheduling-situations}
 
@@ -67,7 +67,7 @@ TiKV は、TiDB で使用される分散キーバリューstorageエンジンで
 
 -   各 TiKV ピアによって報告される状態情報:
 
-    各 TiKV ピアは定期的にハートビートを PD に送信します。 PD はストアが生きているかどうかを確認するだけでなく、ハートビートメッセージの[<a href="https://github.com/pingcap/kvproto/blob/master/proto/pdpb.proto#L473">`StoreState`</a>](https://github.com/pingcap/kvproto/blob/master/proto/pdpb.proto#L473)も収集します。 `StoreState`には以下が含まれます：
+    各 TiKV ピアは定期的にハートビートを PD に送信します。 PD はストアが生きているかどうかを確認するだけでなく、ハートビートメッセージの[`StoreState`](https://github.com/pingcap/kvproto/blob/master/proto/pdpb.proto#L473)も収集します。 `StoreState`には以下が含まれます：
 
     -   合計ディスク容量
     -   利用可能なディスク容量
@@ -75,7 +75,7 @@ TiKV は、TiDB で使用される分散キーバリューstorageエンジンで
     -   データの読み取り/書き込み速度
     -   送受信されるスナップショットの数 (データはスナップショットを通じてレプリカ間で複製される場合があります)
     -   ストアが過負荷かどうか
-    -   ラベル ( [<a href="https://docs.pingcap.com/tidb/stable/schedule-replicas-by-topology-labels">トポロジーの認識</a>](https://docs.pingcap.com/tidb/stable/schedule-replicas-by-topology-labels)を参照)
+    -   ラベル ( [トポロジーの認識](https://docs.pingcap.com/tidb/stable/schedule-replicas-by-topology-labels)を参照)
 
     PD コントロールを使用して、TiKV ストアのステータス (アップ、切断、オフライン、ダウン、または廃棄) を確認できます。以下に、すべてのステータスとその関係について説明します。
 
@@ -89,7 +89,7 @@ TiKV は、TiDB で使用される分散キーバリューstorageエンジンで
 
 -   リージョンのリーダーによって報告された情報:
 
-    各リージョンリーダーは、次のようなハートビートを PD に定期的に送信してレポート[<a href="https://github.com/pingcap/kvproto/blob/master/proto/pdpb.proto#L312">`RegionState`</a>](https://github.com/pingcap/kvproto/blob/master/proto/pdpb.proto#L312)を行います。
+    各リージョンリーダーは、次のようなハートビートを PD に定期的に送信してレポート[`RegionState`](https://github.com/pingcap/kvproto/blob/master/proto/pdpb.proto#L312)を行います。
 
     -   リーダーそのものの立場
     -   他のレプリカの位置
@@ -112,7 +112,7 @@ PD は、リージョンリーダーのハートビートから、リージョ�
 
 -   ストア障害により、一部のリージョンのレプリカ数が予想よりも少なくなります。
 -   障害後のストア回復のため、一部のリージョンのレプリカ数が予想よりも多くなる可能性があります。
--   [<a href="https://github.com/pingcap/pd/blob/v4.0.0-beta/conf/config.toml#L95">`max-replicas`</a>](https://github.com/pingcap/pd/blob/v4.0.0-beta/conf/config.toml#L95)が変更されます。
+-   [`max-replicas`](https://github.com/pingcap/pd/blob/v4.0.0-beta/conf/config.toml#L95)が変更されます。
 
 **戦略 2:リージョンのレプリカは異なる位置にある必要がある**
 
@@ -122,7 +122,7 @@ PD は、リージョンリーダーのハートビートから、リージョ�
 -   TiKV ピアは複数のラック上にあり、ラックに障害が発生した場合でもシステムは使用できることが期待されます。
 -   TiKV ピアは複数のデータ センターにあり、データ センターに障害が発生した場合でもシステムは利用できることが期待されています。
 
-これらの要件の鍵は、ピアが同じ「位置」（障害許容の最小単位）を持つことができることです。リージョンのレプリカは 1 つのユニット内にあってはなりません。したがって、TiKV ピアに[<a href="https://github.com/tikv/tikv/blob/v4.0.0-beta/etc/config-template.toml#L140">ラベル</a>](https://github.com/tikv/tikv/blob/v4.0.0-beta/etc/config-template.toml#L140)設定し、PD に[<a href="https://github.com/pingcap/pd/blob/v4.0.0-beta/conf/config.toml#L100">ロケーションラベル</a>](https://github.com/pingcap/pd/blob/v4.0.0-beta/conf/config.toml#L100)を設定して、位置のマーキングに使用するラベルを指定できます。
+これらの要件の鍵は、ピアが同じ「位置」（障害許容の最小単位）を持つことができることです。リージョンのレプリカは 1 つのユニット内にあってはなりません。したがって、TiKV ピアに[ロケーションラベル](https://github.com/pingcap/pd/blob/v4.0.0-beta/conf/config.toml#L100)を設定して、位置のマーキングに使用するラベルを指定できます。
 
 **戦略 3: レプリカはストア間でバランスをとる必要がある**
 

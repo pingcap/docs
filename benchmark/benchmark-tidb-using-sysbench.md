@@ -4,7 +4,7 @@ title: How to Test TiDB Using Sysbench
 
 # Sysbench を使用して TiDB をテストする方法 {#how-to-test-tidb-using-sysbench}
 
-Sysbench 1.0 以降を使用することをお勧めします ( [<a href="https://github.com/akopytov/sysbench/releases/tag/1.0.20">ここからダウンロードされました</a>](https://github.com/akopytov/sysbench/releases/tag/1.0.20)を使用できます)。
+Sysbench 1.0 以降を使用することをお勧めします ( [ここからダウンロードされました](https://github.com/akopytov/sysbench/releases/tag/1.0.20)を使用できます)。
 
 ## テスト計画 {#test-plan}
 
@@ -18,7 +18,7 @@ server_configs:
     log.level: "error"
 ```
 
-また[<a href="/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610">`tidb_enable_prepared_plan_cache`</a>](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610)が有効になっていることを確認し、 `--db-ps-mode=disabled`使用せ*ず*に sysbench がプリペアド ステートメントを使用できるようにすることもお勧めします。 SQL プラン キャッシュの機能とそれを監視する方法については、ドキュメント[<a href="/sql-prepared-plan-cache.md">SQL 準備済み実行プラン キャッシュ</a>](/sql-prepared-plan-cache.md)を参照してください。
+また[SQL 準備済み実行プラン キャッシュ](/sql-prepared-plan-cache.md)を参照してください。
 
 ### TiKV 構成 {#tikv-configuration}
 
@@ -46,7 +46,7 @@ server_configs:
     storage.block-cache.capacity: "30GB"
 ```
 
-TiKV パフォーマンス チューニングの詳細については、 [<a href="/tune-tikv-memory-performance.md">TiKV のパフォーマンスを調整する</a>](/tune-tikv-memory-performance.md)を参照してください。
+TiKV パフォーマンス チューニングの詳細については、 [TiKV のパフォーマンスを調整する](/tune-tikv-memory-performance.md)を参照してください。
 
 ## テストプロセス {#test-process}
 
@@ -110,10 +110,10 @@ MySQL クライアントを再起動し、次の SQL ステートメントを実
 create database sbtest;
 ```
 
-Sysbench スクリプトがインデックスを作成する順序を調整します。 Sysbench は「テーブルの構築 -&gt; データの挿入 -&gt; インデックスの作成」の順序でデータをインポートします。これにより、TiDB がデータをインポートするのに時間がかかります。ユーザーは順序を調整してデータのインポートを高速化できます。 Sysbench バージョン[<a href="https://github.com/akopytov/sysbench/tree/1.0.20">1.0.20</a>](https://github.com/akopytov/sysbench/tree/1.0.20)を使用するとします。次の 2 つの方法のいずれかで順序を調整できます。
+Sysbench スクリプトがインデックスを作成する順序を調整します。 Sysbench は「テーブルの構築 -&gt; データの挿入 -&gt; インデックスの作成」の順序でデータをインポートします。これにより、TiDB がデータをインポートするのに時間がかかります。ユーザーは順序を調整してデータのインポートを高速化できます。 Sysbench バージョン[1.0.20](https://github.com/akopytov/sysbench/tree/1.0.20)を使用するとします。次の 2 つの方法のいずれかで順序を調整できます。
 
--   TiDB 用に変更した[<a href="https://raw.githubusercontent.com/pingcap/tidb-bench/master/sysbench/sysbench-patch/oltp_common.lua">oltp_common.lua</a>](https://raw.githubusercontent.com/pingcap/tidb-bench/master/sysbench/sysbench-patch/oltp_common.lua)ファイルをダウンロードし、そのファイルで`/usr/share/sysbench/oltp_common.lua`ファイルを上書きします。
--   `/usr/share/sysbench/oltp_common.lua`で、行[<a href="https://github.com/akopytov/sysbench/blob/1.0.20/src/lua/oltp_common.lua#L235-L240">235-240</a>](https://github.com/akopytov/sysbench/blob/1.0.20/src/lua/oltp_common.lua#L235-L240)行 198 のすぐ後ろに移動します。
+-   TiDB 用に変更した[oltp_common.lua](https://raw.githubusercontent.com/pingcap/tidb-bench/master/sysbench/sysbench-patch/oltp_common.lua)ファイルをダウンロードし、そのファイルで`/usr/share/sysbench/oltp_common.lua`ファイルを上書きします。
+-   `/usr/share/sysbench/oltp_common.lua`で、行[235-240](https://github.com/akopytov/sysbench/blob/1.0.20/src/lua/oltp_common.lua#L235-L240)行 198 のすぐ後ろに移動します。
 
 > **ノート：**
 >

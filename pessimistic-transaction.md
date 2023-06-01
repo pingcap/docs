@@ -13,7 +13,7 @@ TiDB の使用法を従来のデータベースに近づけ、移行コストを
 
 ## トランザクションモードの切り替え {#switch-transaction-mode}
 
-[<a href="/system-variables.md#tidb_txn_mode">`tidb_txn_mode`</a>](/system-variables.md#tidb_txn_mode)システム変数を構成することで、トランザクション モードを設定できます。次のコマンドは、クラスター内に新しく作成されたセッションによって実行されるすべての明示的なトランザクション (つまり、非自動コミット トランザクション) を悲観的トランザクション モードに設定します。
+[`tidb_txn_mode`](/system-variables.md#tidb_txn_mode)システム変数を構成することで、トランザクション モードを設定できます。次のコマンドは、クラスター内に新しく作成されたセッションによって実行されるすべての明示的なトランザクション (つまり、非自動コミット トランザクション) を悲観的トランザクション モードに設定します。
 
 {{< copyable "" >}}
 
@@ -39,7 +39,7 @@ BEGIN /*T! PESSIMISTIC */;
 
 ## 行動 {#behaviors}
 
-TiDB の悲観的なトランザクションは、MySQL のトランザクションと同様に動作します。 [<a href="#difference-with-mysql-innodb">MySQL InnoDBとの違い</a>](#difference-with-mysql-innodb)の小さな違いを参照してください。
+TiDB の悲観的なトランザクションは、MySQL のトランザクションと同様に動作します。 [MySQL InnoDBとの違い](#difference-with-mysql-innodb)の小さな違いを参照してください。
 
 -   悲観的トランザクションのために、TiDB はスナップショット読み取りと現在の読み取りを導入します。
 
@@ -67,7 +67,7 @@ TiDB の悲観的なトランザクションは、MySQL のトランザクショ
 
 -   ロックは、トランザクションがコミットまたはロールバックされると解放されます。データを変更しようとする他のトランザクションはブロックされ、ロックが解放されるまで待つ必要があります。 TiDB はマルチバージョン同時実行制御 (MVCC) を使用するため、データを*読み取ろ*うとするトランザクションはブロックされません。
 
--   システム変数[<a href="/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630">`tidb_constraint_check_in_place_pessimistic`</a>](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630)を設定すると、一意制約チェックによる悲観的ロックをスキップするかどうかを制御できます。詳細は[<a href="/constraints.md#pessimistic-transactions">制約</a>](/constraints.md#pessimistic-transactions)参照してください。
+-   システム変数[制約](/constraints.md#pessimistic-transactions)参照してください。
 
 -   複数のトランザクションが互いのロックを取得しようとすると、デッドロックが発生します。これは自動的に検出され、トランザクションの 1 つがランダムに終了し、MySQL 互換のエラー コード`1213`が返されます。
 
@@ -132,13 +132,13 @@ TiDB の悲観的なトランザクションは、MySQL のトランザクショ
 
 TiDB は、悲観的トランザクション モードで次の 2 つの分離レベルをサポートします。
 
--   デフォルトは[<a href="/transaction-isolation-levels.md#repeatable-read-isolation-level">反復可能な読み取り</a>](/transaction-isolation-levels.md#repeatable-read-isolation-level)で、MySQL と同じです。
+-   デフォルトは[反復可能な読み取り](/transaction-isolation-levels.md#repeatable-read-isolation-level)で、MySQL と同じです。
 
     > **ノート：**
     >
-    > この分離レベルでは、最新のコミットされたデータに基づいて DML 操作が実行されます。動作は MySQL と同じですが、TiDB の楽観的トランザクション モードとは異なります。 [<a href="/transaction-isolation-levels.md#difference-between-tidb-and-mysql-repeatable-read">TiDB と MySQL 反復読み取りの違い</a>](/transaction-isolation-levels.md#difference-between-tidb-and-mysql-repeatable-read)を参照してください。
+    > この分離レベルでは、最新のコミットされたデータに基づいて DML 操作が実行されます。動作は MySQL と同じですが、TiDB の楽観的トランザクション モードとは異なります。 [TiDB と MySQL 反復読み取りの違い](/transaction-isolation-levels.md#difference-between-tidb-and-mysql-repeatable-read)を参照してください。
 
--   [<a href="/transaction-isolation-levels.md#read-committed-isolation-level">コミットされた読み取り</a>](/transaction-isolation-levels.md#read-committed-isolation-level) 。この分離レベルは[<a href="/sql-statements/sql-statement-set-transaction.md">`SET TRANSACTION`</a>](/sql-statements/sql-statement-set-transaction.md)ステートメントを使用して設定できます。
+-   [`SET TRANSACTION`](/sql-statements/sql-statement-set-transaction.md)ステートメントを使用して設定できます。
 
 ## 悲観的なトランザクションコミットプロセス {#pessimistic-transaction-commit-process}
 
@@ -177,7 +177,7 @@ TiDB は、悲観的トランザクション モードで次の 2 つの分離�
 pipelined = false
 ```
 
-TiKV クラスターが v4.0.9 以降の場合は、 [<a href="/dynamic-config.md#modify-tikv-configuration-dynamically">TiKV 構成を動的に変更する</a>](/dynamic-config.md#modify-tikv-configuration-dynamically)を使用してこの機能を動的に無効にすることもできます。
+TiKV クラスターが v4.0.9 以降の場合は、 [TiKV 構成を動的に変更する](/dynamic-config.md#modify-tikv-configuration-dynamically)を使用してこの機能を動的に無効にすることもできます。
 
 {{< copyable "" >}}
 
@@ -189,7 +189,7 @@ set config tikv pessimistic-txn.pipelined='false';
 
 <CustomContent platform="tidb-cloud">
 
-アプリケーション ロジックがロックまたはロック待機メカニズムに依存している場合、または TiKV クラスターの異常が発生した場合でもトランザクション コミットの成功率をできる限り保証したい場合は、パイプライン ロック機能を[<a href="/tidb-cloud/tidb-cloud-support.md">TiDB Cloudサポートにお問い合わせください</a>](/tidb-cloud/tidb-cloud-support.md)にすることができます。
+アプリケーション ロジックがロックまたはロック待機メカニズムに依存している場合、または TiKV クラスターの異常が発生した場合でもトランザクション コミットの成功率をできる限り保証したい場合は、パイプライン ロック機能を[TiDB Cloudサポートにお問い合わせください](/tidb-cloud/tidb-cloud-support.md)にすることができます。
 
 </CustomContent>
 
@@ -197,7 +197,7 @@ set config tikv pessimistic-txn.pipelined='false';
 
 v6.0.0 では、TiKV にメモリ内悲観的ロックの機能が導入されています。この機能が有効になっている場合、悲観的ロックは通常、リージョンリーダーのメモリにのみ保存され、ディスクに保存されたり、 Raftを介して他のレプリカに複製されたりしません。この機能により、悲観的ロックを取得するオーバーヘッドが大幅に削減され、悲観的トランザクションのスループットが向上します。
 
-メモリ内悲観的ロックのメモリ使用量がリージョンまたは TiKV ノードのメモリしきい値を超えると、悲観的ロックの取得は[<a href="#pipelined-locking-process">パイプライン化されたロックプロセス</a>](#pipelined-locking-process)になります。リージョンがマージされるか、リーダーが転送されると、悲観的ロックの損失を避けるために、TiKV はメモリ内の悲観的ロックをディスクに書き込み、それを他のレプリカに複製します。
+メモリ内悲観的ロックのメモリ使用量がリージョンまたは TiKV ノードのメモリしきい値を超えると、悲観的ロックの取得は[パイプライン化されたロックプロセス](#pipelined-locking-process)になります。リージョンがマージされるか、リーダーが転送されると、悲観的ロックの損失を避けるために、TiKV はメモリ内の悲観的ロックをディスクに書き込み、それを他のレプリカに複製します。
 
 インメモリ悲観的ロックはパイプライン ロック プロセスと同様に実行され、クラスターが正常な場合はロックの取得に影響を与えません。ただし、TiKV でネットワークの分離が発生したり、TiKV ノードがダウンしたりすると、取得した悲観的ロックが失われる可能性があります。
 

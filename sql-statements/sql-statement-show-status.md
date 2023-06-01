@@ -57,4 +57,4 @@ mysql> show global status;
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-flush-status.md">フラッシュステータス</a>](/sql-statements/sql-statement-flush-status.md)
+-   [フラッシュステータス](/sql-statements/sql-statement-flush-status.md)

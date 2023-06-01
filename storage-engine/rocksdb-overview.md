@@ -6,7 +6,7 @@ category: reference
 
 # RocksDB の概要 {#rocksdb-overview}
 
-[<a href="https://github.com/facebook/rocksdb">ロックスDB</a>](https://github.com/facebook/rocksdb)は、キー/値ストアおよび読み取り/書き込み関数を提供する LSM ツリーstorageエンジンです。 Facebook によって開発され、LevelDB に基づいています。ユーザーによって書き込まれたキーと値のペアは、まず先行書き込みログ (WAL) に挿入され、次にメモリ内の SkipList ( MemTableと呼ばれるデータ構造) に書き込まれます。 LSM ツリー エンジンは、ランダムな変更 (挿入) を WAL ファイルへの順次書き込みに変換するため、B ツリー エンジンよりも優れた書き込みスループットを提供します。
+[ロックスDB](https://github.com/facebook/rocksdb)は、キー/値ストアおよび読み取り/書き込み関数を提供する LSM ツリーstorageエンジンです。 Facebook によって開発され、LevelDB に基づいています。ユーザーによって書き込まれたキーと値のペアは、まず先行書き込みログ (WAL) に挿入され、次にメモリ内の SkipList ( MemTableと呼ばれるデータ構造) に書き込まれます。 LSM ツリー エンジンは、ランダムな変更 (挿入) を WAL ファイルへの順次書き込みに変換するため、B ツリー エンジンよりも優れた書き込みスループットを提供します。
 
 メモリ内のデータが特定のサイズに達すると、RocksDB はその内容をディスク内の SST (Sorted String Table) ファイルにフラッシュします。 SST ファイルは複数のレベルで構成されます (デフォルトは最大 6 レベル)。レベルの合計サイズがしきい値に達すると、RocksDB は SST ファイルの一部を選択し、それらを次のレベルにマージします。後続の各レベルは前のレベルの 10 倍大きいため、データの 90% が最後のレイヤーに保存されます。
 

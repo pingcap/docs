@@ -48,22 +48,22 @@ CREATE INDEX idx1 ON table t1(c1);
 
 ## 前提条件 {#prerequisites}
 
-分散フレームワークを使用する前に、 [<a href="/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630">高速オンライン DDL</a>](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)モードを有効にする必要があります。
+分散フレームワークを使用する前に、 [高速オンライン DDL](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)モードを有効にする必要があります。
 
 <CustomContent platform="tidb">
 
 1.  Fast Online DDL に関連する次のシステム変数を調整します。
 
-    -   [<a href="/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630">`tidb_ddl_enable_fast_reorg`</a>](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) : Fast Online DDL モードを有効にするために使用されます。 TiDB v6.5.0 以降、デフォルトで有効になっています。
-    -   [<a href="/system-variables.md#tidb_ddl_disk_quota-new-in-v630">`tidb_ddl_disk_quota`</a>](/system-variables.md#tidb_ddl_disk_quota-new-in-v630) : Fast Online DDL モードで使用できるローカル ディスクの最大クォータを制御するために使用されます。
+    -   [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) : Fast Online DDL モードを有効にするために使用されます。 TiDB v6.5.0 以降、デフォルトで有効になっています。
+    -   [`tidb_ddl_disk_quota`](/system-variables.md#tidb_ddl_disk_quota-new-in-v630) : Fast Online DDL モードで使用できるローカル ディスクの最大クォータを制御するために使用されます。
 
 2.  Fast Online DDL に関連する次の構成項目を調整します。
 
-    -   [<a href="/tidb-configuration-file.md#temp-dir-new-in-v630">`temp-dir`</a>](/tidb-configuration-file.md#temp-dir-new-in-v630) : Fast Online DDL モードで使用できるローカル ディスク パスを指定します。
+    -   [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630) : Fast Online DDL モードで使用できるローカル ディスク パスを指定します。
 
 > **ノート：**
 >
-> TiDB を v6.5.0 以降にアップグレードする前に、TiDB の[<a href="/tidb-configuration-file.md#temp-dir-new-in-v630">`temp-dir`</a>](/tidb-configuration-file.md#temp-dir-new-in-v630)パスが SSD ディスクに正しくマウントされているかどうかを確認することをお勧めします。このパスは TiDB 構成アイテムであり、TiDB の再起動後に有効になります。したがって、アップグレード前にこの構成項目を事前に設定しておくと、再度の再起動を回避できます。
+> TiDB を v6.5.0 以降にアップグレードする前に、TiDB の[`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630)パスが SSD ディスクに正しくマウントされているかどうかを確認することをお勧めします。このパスは TiDB 構成アイテムであり、TiDB の再起動後に有効になります。したがって、アップグレード前にこの構成項目を事前に設定しておくと、再度の再起動を回避できます。
 
 </CustomContent>
 
@@ -71,14 +71,14 @@ CREATE INDEX idx1 ON table t1(c1);
 
 Fast Online DDL に関連する次のシステム変数を調整します。
 
--   [<a href="/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630">`tidb_ddl_enable_fast_reorg`</a>](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) : Fast Online DDL モードを有効にするために使用されます。 TiDB v6.5.0 以降、デフォルトで有効になっています。
--   [<a href="/system-variables.md#tidb_ddl_disk_quota-new-in-v630">`tidb_ddl_disk_quota`</a>](/system-variables.md#tidb_ddl_disk_quota-new-in-v630) : Fast Online DDL モードで使用できるローカル ディスクの最大クォータを制御するために使用されます。
+-   [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) : Fast Online DDL モードを有効にするために使用されます。 TiDB v6.5.0 以降、デフォルトで有効になっています。
+-   [`tidb_ddl_disk_quota`](/system-variables.md#tidb_ddl_disk_quota-new-in-v630) : Fast Online DDL モードで使用できるローカル ディスクの最大クォータを制御するために使用されます。
 
 </CustomContent>
 
 ## 使用法 {#usage}
 
-1.  分散フレームワークを有効にするには、値[<a href="/system-variables.md#tidb_enable_dist_task-new-in-v710">`tidb_enable_dist_task`</a>](/system-variables.md#tidb_enable_dist_task-new-in-v710)から`ON`を設定します。
+1.  分散フレームワークを有効にするには、値[`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)から`ON`を設定します。
 
     ```sql
     SET GLOBAL tidb_enable_dist_task = ON;
@@ -88,10 +88,10 @@ Fast Online DDL に関連する次のシステム変数を調整します。
 
 2.  必要に応じて、DDL タスクの分散実行に影響を与える可能性がある次のシステム変数を調整します。
 
-    -   [<a href="/system-variables.md#tidb_ddl_reorg_worker_cnt">`tidb_ddl_reorg_worker_cnt`</a>](/system-variables.md#tidb_ddl_reorg_worker_cnt) : デフォルト値`4`を使用します。推奨される最大値は`16`です。
-    -   [<a href="/system-variables.md#tidb_ddl_reorg_priority">`tidb_ddl_reorg_priority`</a>](/system-variables.md#tidb_ddl_reorg_priority)
-    -   [<a href="/system-variables.md#tidb_ddl_error_count_limit">`tidb_ddl_error_count_limit`</a>](/system-variables.md#tidb_ddl_error_count_limit)
-    -   [<a href="/system-variables.md#tidb_ddl_reorg_batch_size">`tidb_ddl_reorg_batch_size`</a>](/system-variables.md#tidb_ddl_reorg_batch_size) : デフォルト値を使用します。推奨される最大値は`1024`です。
+    -   [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt) : デフォルト値`4`を使用します。推奨される最大値は`16`です。
+    -   [`tidb_ddl_reorg_priority`](/system-variables.md#tidb_ddl_reorg_priority)
+    -   [`tidb_ddl_error_count_limit`](/system-variables.md#tidb_ddl_error_count_limit)
+    -   [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size) : デフォルト値を使用します。推奨される最大値は`1024`です。
 
 > **ヒント：**
 >
@@ -114,11 +114,11 @@ TiDB バックエンド タスク分散実行フレームワークのアーキ�
 
 <CustomContent platform="tidb">
 
--   [<a href="/ddl-introduction.md">DDL ステートメントの実行原則とベスト プラクティス</a>](/ddl-introduction.md)
+-   [DDL ステートメントの実行原則とベスト プラクティス](/ddl-introduction.md)
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
--   [<a href="https://docs.pingcap.com/tidb/stable/ddl-introduction">DDL ステートメントの実行原則とベスト プラクティス</a>](https://docs.pingcap.com/tidb/stable/ddl-introduction)
+-   [DDL ステートメントの実行原則とベスト プラクティス](https://docs.pingcap.com/tidb/stable/ddl-introduction)
 
 </CustomContent>

@@ -5,11 +5,11 @@ summary: Learns about how to perform incremental backup and restore in TiDB.
 
 # TiDB 増分バックアップおよび復元ガイド {#tidb-incremental-backup-and-restore-guide}
 
-TiDB クラスターの増分データは、期間の開始スナップショットと終了スナップショットの間の差分データ、およびこの期間中に生成された DDL です。増分データは完全 (スナップショット) バックアップ データと比較してデータ量が小さいため、スナップショット バックアップを補完するものであり、バックアップ データの量を削減します。増分バックアップを実行するには、指定された期間内に生成された MVCC データが[<a href="/garbage-collection-overview.md">TiDB GC メカニズム</a>](/garbage-collection-overview.md)によってガベージ コレクションされていないことを確認してください。たとえば、増分バックアップを 1 時間ごとに実行するには、 [<a href="/system-variables.md#tidb_gc_life_time-new-in-v50">`tidb_gc_life_time`</a>](/system-variables.md#tidb_gc_life_time-new-in-v50) 1 時間より大きい値に設定する必要があります。
+TiDB クラスターの増分データは、期間の開始スナップショットと終了スナップショットの間の差分データ、およびこの期間中に生成された DDL です。増分データは完全 (スナップショット) バックアップ データと比較してデータ量が小さいため、スナップショット バックアップを補完するものであり、バックアップ データの量を削減します。増分バックアップを実行するには、指定された期間内に生成された MVCC データが[`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) 1 時間より大きい値に設定する必要があります。
 
 > **警告：**
 >
-> この機能の開発は停止されました。代わりに[<a href="/br/br-pitr-guide.md">ログバックアップとPITR</a>](/br/br-pitr-guide.md)を使用することをお勧めします。
+> この機能の開発は停止されました。代わりに[ログバックアップとPITR](/br/br-pitr-guide.md)を使用することをお勧めします。
 
 ## 増分データをバックアップする {#back-up-incremental-data}
 
@@ -30,7 +30,7 @@ tiup br backup full --pd "${PD_IP}:2379" \
 
 -   `--lastbackupts` : 最後のバックアップのタイムスタンプ。
 -   `--ratelimit` : バックアップ タスクを実行する**TiKV ごとの**最大速度 (MiB/秒)。
--   `storage` : バックアップデータのstorageパス。増分バックアップ データは、以前のスナップショット バックアップとは別のパスに保存する必要があります。前の例では、増分バックアップ データは完全バックアップ データの下の`incr`ディレクトリに保存されます。詳細は[<a href="/br/backup-and-restore-storages.md#uri-format">バックアップstorageURI 構成</a>](/br/backup-and-restore-storages.md#uri-format)を参照してください。
+-   `storage` : バックアップデータのstorageパス。増分バックアップ データは、以前のスナップショット バックアップとは別のパスに保存する必要があります。前の例では、増分バックアップ データは完全バックアップ データの下の`incr`ディレクトリに保存されます。詳細は[バックアップstorageURI 構成](/br/backup-and-restore-storages.md#uri-format)を参照してください。
 
 ## 増分データの復元 {#restore-incremental-data}
 

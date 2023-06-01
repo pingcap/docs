@@ -5,7 +5,7 @@ summary: Learn about the supported date and time types.
 
 # 日付と時刻のタイプ {#date-and-time-types}
 
-TiDB は、時間値を格納するためにすべての MySQL 日付と時刻のデータ型 ( [<a href="#date-type">`DATE`</a>](#date-type) 、 [<a href="#time-type">`TIME`</a>](#time-type) 、 [<a href="#datetime-type">`DATETIME`</a>](#datetime-type) 、 [<a href="#timestamp-type">`TIMESTAMP`</a>](#timestamp-type) 、および[<a href="#year-type">`YEAR`</a>](#year-type)をサポートします。詳細については、 [<a href="https://dev.mysql.com/doc/refman/5.7/en/date-and-time-types.html">MySQL の日付と時刻のデータ型</a>](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-types.html)を参照してください。
+TiDB は、時間値を格納するためにすべての MySQL 日付と時刻のデータ型 ( [MySQL の日付と時刻のデータ型](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-types.html)を参照してください。
 
 これらの型にはそれぞれ有効な値の範囲があり、無効な値であることを示すためにゼロ値を使用します。さらに、タイプ`TIMESTAMP`と`DATETIME`は、変更時に新しい時間値を自動的に生成できます。
 
@@ -13,7 +13,7 @@ TiDB は、時間値を格納するためにすべての MySQL 日付と時刻�
 
 -   TiDB はさまざまな形式を解釈しようとしますが、日付部分は、月-日-年または日-月-年ではなく、年-月-日の形式 (たとえば、「1998-09-04」) である必要があります。
 
--   日付の年の部分が 2 桁で指定されている場合、TiDB は[<a href="#two-digit-year-portion-contained-in-the-date">特定のルール</a>](#two-digit-year-portion-contained-in-the-date)に基づいて変換します。
+-   日付の年の部分が 2 桁で指定されている場合、TiDB は[特定のルール](#two-digit-year-portion-contained-in-the-date)に基づいて変換します。
 
 -   コンテキストで数値が必要な場合、TiDB は日付または時刻の値を数値タイプに自動的に変換します。例えば：
 
@@ -129,7 +129,7 @@ TIMESTAMP[(fsp)]
 
 > **警告：**
 >
-> MySQL と同様に、 `TIMESTAMP`データ型は[<a href="https://en.wikipedia.org/wiki/Year_2038_problem">2038年問題</a>](https://en.wikipedia.org/wiki/Year_2038_problem)の影響を受けます。 2038 年を超える可能性のある値を保存する場合は、代わりに`DATETIME`タイプの使用を検討してください。
+> MySQL と同様に、 `TIMESTAMP`データ型は[2038年問題](https://en.wikipedia.org/wiki/Year_2038_problem)の影響を受けます。 2038 年を超える可能性のある値を保存する場合は、代わりに`DATETIME`タイプの使用を検討してください。
 
 ### <code>YEAR</code>型 {#code-year-code-type}
 

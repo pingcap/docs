@@ -5,7 +5,7 @@ summary: Learn how to create a data migration task in TiDB Data Migration.
 
 # データ移行タスクの作成 {#create-a-data-migration-task}
 
-`start-task`コマンドを使用して、データ移行タスクを作成できます。データ移行タスクが開始されると、DM [<a href="/dm/dm-precheck.md">権限と構成を事前チェックします</a>](/dm/dm-precheck.md) .
+`start-task`コマンドを使用して、データ移行タスクを作成できます。データ移行タスクが開始されると、DM [権限と構成を事前チェックします](/dm/dm-precheck.md) .
 
 {{< copyable "" >}}
 

@@ -19,7 +19,7 @@ summary: Learn the alert rules of the TiFlash cluster.
 
 -   解決：
 
-    エラーは、間違ったロジックによって発生する可能性があります。 [<a href="/support.md">支持を得ます</a>](/support.md) PingCAP またはコミュニティから。
+    エラーは、間違ったロジックによって発生する可能性があります。 [支持を得ます](/support.md) PingCAP またはコミュニティから。
 
 ## <code>TiFlash_schema_apply_duration</code> {#code-tiflash-schema-apply-duration-code}
 
@@ -33,7 +33,7 @@ summary: Learn the alert rules of the TiFlash cluster.
 
 -   解決：
 
-    TiFlashstorageエンジンの内部問題が原因である可能性があります。 [<a href="/support.md">支持を得ます</a>](/support.md) PingCAP またはコミュニティから。
+    TiFlashstorageエンジンの内部問題が原因である可能性があります。 [支持を得ます](/support.md) PingCAP またはコミュニティから。
 
 ## <code>TiFlash_raft_read_index_duration</code> {#code-tiflash-raft-read-index-duration-code}
 
@@ -65,4 +65,4 @@ summary: Learn the alert rules of the TiFlash cluster.
 
 -   解決：
 
-    TiKV とプロキシ間の通信エラーが原因である可能性があります。 [<a href="/support.md">支持を得ます</a>](/support.md) PingCAP またはコミュニティから。
+    TiKV とプロキシ間の通信エラーが原因である可能性があります。 [支持を得ます](/support.md) PingCAP またはコミュニティから。

@@ -67,7 +67,7 @@ Raftstore はTiDB v3.0 以降マルチスレッド モジュールにアップ�
 
 実際の状況では、読み取りおよび書き込みリクエストはすべてのリージョンに均等に分散されません。代わりに、それらはいくつかの地域に集中しています。その後、 Raftリーダーと、一時的にアイドル状態になっているリージョンのフォロワー間のメッセージの数を最小限に抑えることができます。これが Hibernateリージョンの機能です。この機能では、 Raftstore は、必要がない場合に、アイドル状態のリージョンのRaftステート マシンにティック メッセージを送信します。そうすれば、これらのRaftステート マシンはハートビートメッセージを生成するためにトリガーされなくなり、 Raftstoreのワークロードを大幅に軽減できます。
 
-Hibernateリージョンは[<a href="https://github.com/tikv/tikv/tree/master">TiKVマスター</a>](https://github.com/tikv/tikv/tree/master)ではデフォルトで有効になっています。この機能は必要に応じて設定できます。詳細は[<a href="/tikv-configuration-file.md">休止状態リージョンの構成</a>](/tikv-configuration-file.md)を参照してください。
+Hibernateリージョンは[休止状態リージョンの構成](/tikv-configuration-file.md)を参照してください。
 
 ### 方法 3: <code>Region Merge</code>を有効にする {#method-3-enable-code-region-merge-code}
 
@@ -87,13 +87,13 @@ config set max-merge-region-keys 200000
 config set merge-schedule-limit 8
 ```
 
-詳細については、 [<a href="https://tikv.org/docs/4.0/tasks/configure/region-merge/">リージョンのマージ</a>](https://tikv.org/docs/4.0/tasks/configure/region-merge/)と、 [<a href="/pd-configuration-file.md#schedule">PD設定ファイル</a>](/pd-configuration-file.md#schedule)の次の 3 つの構成パラメータを参照してください。
+詳細については、 [PD設定ファイル](/pd-configuration-file.md#schedule)の次の 3 つの構成パラメータを参照してください。
 
--   [<a href="/pd-configuration-file.md#max-merge-region-size">`max-merge-region-size`</a>](/pd-configuration-file.md#max-merge-region-size)
--   [<a href="/pd-configuration-file.md#max-merge-region-keys">`max-merge-region-keys`</a>](/pd-configuration-file.md#max-merge-region-keys)
--   [<a href="/pd-configuration-file.md#merge-schedule-limit">`merge-schedule-limit`</a>](/pd-configuration-file.md#merge-schedule-limit)
+-   [`max-merge-region-size`](/pd-configuration-file.md#max-merge-region-size)
+-   [`max-merge-region-keys`](/pd-configuration-file.md#max-merge-region-keys)
+-   [`merge-schedule-limit`](/pd-configuration-file.md#merge-schedule-limit)
 
-`Region Merge`パラメータのデフォルト設定はかなり保守的です。 [<a href="/best-practices/pd-scheduling-best-practices.md#region-merge-is-slow">PD スケジュールのベスト プラクティス</a>](/best-practices/pd-scheduling-best-practices.md#region-merge-is-slow)の方法を参考に`Region Merge`処理を高速化することができます。
+`Region Merge`パラメータのデフォルト設定はかなり保守的です。 [PD スケジュールのベスト プラクティス](/best-practices/pd-scheduling-best-practices.md#region-merge-is-slow)の方法を参考に`Region Merge`処理を高速化することができます。
 
 ### 方法 4: TiKV インスタンスの数を増やす {#method-4-increase-the-number-of-tikv-instances}
 
@@ -125,7 +125,7 @@ raft-heartbeat-interval = raft-base-tick-interval * raft-heartbeat-ticks
 
 ### 方法 6:リージョンサイズを調整する {#method-6-adjust-region-size}
 
-リージョンのデフォルトのサイズは 96 MiB ですが、リージョンをより大きなサイズに設定することでリージョンの数を減らすことができます。詳細については、 [<a href="/tune-region-performance.md">リージョンのパフォーマンスを調整する</a>](/tune-region-performance.md)を参照してください。
+リージョンのデフォルトのサイズは 96 MiB ですが、リージョンをより大きなサイズに設定することでリージョンの数を減らすことができます。詳細については、 [リージョンのパフォーマンスを調整する](/tune-region-performance.md)を参照してください。
 
 > **警告：**
 >
@@ -153,7 +153,7 @@ TiKV では、pd-worker がリージョンメタ情報を定期的に PD に報�
 
 ![Check pd-worker](/media/best-practices/pd-worker-metrics.png)
 
-pd-worker は、 [<a href="/releases/release-3.0.5.md#tikv">v3.0.5</a>](/releases/release-3.0.5.md#tikv)以降、パフォーマンスが向上するように最適化されています。同様の問題が発生した場合は、最新バージョンにアップグレードすることをお勧めします。
+pd-worker は、 [v3.0.5](/releases/release-3.0.5.md#tikv)以降、パフォーマンスが向上するように最適化されています。同様の問題が発生した場合は、最新バージョンにアップグレードすることをお勧めします。
 
 ### Prometheus はメトリクスのクエリが遅い {#prometheus-is-slow-to-query-metrics}
 

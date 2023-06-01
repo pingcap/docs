@@ -53,7 +53,7 @@ show config where type='tikv' and name='log.level'
 
 > **ノート：**
 >
-> -   TiKV 構成項目を動的に変更した後、TiKV 構成ファイルは自動的に更新されます。ただし、 `tiup edit-config` ; を実行して、対応する構成項目を変更する必要もあります。そうしないと、 `upgrade`や`reload`などの操作によって変更が上書きされます。設定項目の変更の詳細については、 [<a href="/maintain-tidb-using-tiup.md#modify-the-configuration">TiUPを使用して構成を変更する</a>](/maintain-tidb-using-tiup.md#modify-the-configuration)を参照してください。
+> -   TiKV 構成項目を動的に変更した後、TiKV 構成ファイルは自動的に更新されます。ただし、 `tiup edit-config` ; を実行して、対応する構成項目を変更する必要もあります。そうしないと、 `upgrade`や`reload`などの操作によって変更が上書きされます。設定項目の変更の詳細については、 [TiUPを使用して構成を変更する](/maintain-tidb-using-tiup.md#modify-the-configuration)を参照してください。
 > -   `tiup edit-config`を実行した後、 `tiup reload`を実行する必要はありません。
 
 `set config`ステートメントを使用すると、インスタンス アドレスまたはコンポーネントタイプに応じて、単一インスタンスまたはすべてのインスタンスの構成を変更できます。
@@ -232,7 +232,7 @@ show warnings;
 -   `db-name` `writecf` `rocksdb` `raftcf`場合、 `cf-name`のオプションの値は`defaultcf` 、および`lockcf`です。
 -   `db-name`が`raftdb`場合、 `cf-name`の値は`defaultcf`になる可能性があります。
 
-パラメータの詳細な説明については、 [<a href="/tikv-configuration-file.md">TiKVコンフィグレーションファイル</a>](/tikv-configuration-file.md)を参照してください。
+パラメータの詳細な説明については、 [TiKVコンフィグレーションファイル](/tikv-configuration-file.md)を参照してください。
 
 ### PD構成を動的に変更する {#modify-pd-configuration-dynamically}
 
@@ -295,11 +295,11 @@ Query OK, 0 rows affected (0.01 sec)
 | `pd-server.dashboard-address`              | ダッシュボードのアドレスを設定します                              |
 | `replication-mode.replication-mode`        | バックアップモードを設定します                                 |
 
-パラメータの詳細な説明については、 [<a href="/pd-configuration-file.md">PDコンフィグレーションファイル</a>](/pd-configuration-file.md)を参照してください。
+パラメータの詳細な説明については、 [PDコンフィグレーションファイル](/pd-configuration-file.md)を参照してください。
 
 ### TiDB 構成を動的に変更する {#modify-tidb-configuration-dynamically}
 
-現在、TiDB 構成を変更する方法は、TiKV および PD 構成を変更する方法とは異なります。 [<a href="/system-variables.md">システム変数</a>](/system-variables.md)を使用して TiDB 構成を変更できます。
+現在、TiDB 構成を変更する方法は、TiKV および PD 構成を変更する方法とは異なります。 [システム変数](/system-variables.md)を使用して TiDB 構成を変更できます。
 
 次の例は、変数`tidb_slow_log_threshold`を使用して`slow-threshold`動的に変更する方法を示しています。
 
@@ -336,7 +336,7 @@ select @@tidb_slow_log_threshold;
 
 ### TiFlash構成を動的に変更する {#modify-tiflash-configuration-dynamically}
 
-現在、システム変数[<a href="/system-variables.md#tidb_max_tiflash_threads-new-in-v610">`tidb_max_tiflash_threads`</a>](/system-variables.md#tidb_max_tiflash_threads-new-in-v610)を使用してTiFlash構成`max_threads`を変更できます。これは、 TiFlash がリクエストを実行するための最大同時実行数を指定します。
+現在、システム変数[`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610)を使用してTiFlash構成`max_threads`を変更できます。これは、 TiFlash がリクエストを実行するための最大同時実行数を指定します。
 
 デフォルト値`tidb_max_tiflash_threads`は`-1`で、このシステム変数が無効であり、 TiFlash構成ファイルの設定に依存することを示します。 `tidb_max_tiflash_threads`を使用して`max_threads` ～ 10 を設定できます。
 

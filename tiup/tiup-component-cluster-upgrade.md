@@ -12,7 +12,7 @@ title: tiup cluster upgrade
 tiup cluster upgrade <cluster-name> <version> [flags]
 ```
 
--   `<cluster-name>` : 操作対象のクラスター名。クラスター名を忘れた場合は、 [<a href="/tiup/tiup-component-cluster-list.md">クラスタリスト</a>](/tiup/tiup-component-cluster-list.md)コマンドで確認できます。
+-   `<cluster-name>` : 操作対象のクラスター名。クラスター名を忘れた場合は、 [クラスタリスト](/tiup/tiup-component-cluster-list.md)コマンドで確認できます。
 -   `<version>` : アップグレード先のターゲット バージョン ( `v6.5.0`など)。現在、現在のクラスターよりも高いバージョンへのアップグレードのみが許可されています。つまり、ダウングレードは許可されていません。また、夜間バージョンにアップグレードすることもできません。
 
 ## オプション {#options}
@@ -59,4 +59,4 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 
 アップグレードの進行状況のログ。
 
-[<a href="/tiup/tiup-component-cluster.md#command-list">&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト</a>](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト](/tiup/tiup-component-cluster.md#command-list)

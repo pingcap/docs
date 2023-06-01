@@ -5,7 +5,7 @@ summary: Learn about the execution plan information returned by the EXPLAIN stat
 
 # パーティションを使用した Explain ステートメント {#explain-statements-using-partitions}
 
-`EXPLAIN`ステートメントは、クエリを実行するために TiDB がアクセスする必要があるパーティションを表示します。 [<a href="/partition-pruning.md">パーティションのプルーニング</a>](/partition-pruning.md)のため、表示されるパーティションは、多くの場合、パーティション全体のサブセットにすぎません。このドキュメントでは、一般的なパーティション テーブルの最適化のいくつかと、 `EXPLAIN`の出力を解釈する方法について説明します。
+`EXPLAIN`ステートメントは、クエリを実行するために TiDB がアクセスする必要があるパーティションを表示します。 [パーティションのプルーニング](/partition-pruning.md)のため、表示されるパーティションは、多くの場合、パーティション全体のサブセットにすぎません。このドキュメントでは、一般的なパーティション テーブルの最適化のいくつかと、 `EXPLAIN`の出力を解釈する方法について説明します。
 
 このドキュメントで使用されるサンプル データ:
 
@@ -126,7 +126,7 @@ EXPLAIN SELECT COUNT(*) FROM t1 WHERE YEAR(d) = 2017;
 
 上記の出力から:
 
--   TiDB は、すべてのパーティションにアクセスする必要があると考えています`(p2016..pMax)` 。これは、述語`YEAR(d) = 2017`が[<a href="https://en.wikipedia.org/wiki/Sargable">検索対象外</a>](https://en.wikipedia.org/wiki/Sargable)とみなされるためです。この問題は TiDB に固有のものではありません。
+-   TiDB は、すべてのパーティションにアクセスする必要があると考えています`(p2016..pMax)` 。これは、述語`YEAR(d) = 2017`が[検索対象外](https://en.wikipedia.org/wiki/Sargable)とみなされるためです。この問題は TiDB に固有のものではありません。
 -   各パーティションがスキャンされると、 `Selection`演算子によって 2017 年に一致しない行が除外されます。
 -   各パーティションでストリーム集約が実行され、一致する行の数がカウントされます。
 -   演算子`└─PartitionUnion_21`は、各パーティションへのアクセスの結果を結合します。

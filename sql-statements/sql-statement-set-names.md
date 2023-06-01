@@ -94,10 +94,10 @@ mysql> SHOW VARIABLES LIKE 'character_set%';
 
 ## MySQLの互換性 {#mysql-compatibility}
 
-このステートメントは、MySQL と完全な互換性があると理解されています。 GitHub では互換性の違いは[<a href="https://github.com/pingcap/tidb/issues/new/choose">問題を通じて報告されました</a>](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
+このステートメントは、MySQL と完全な互換性があると理解されています。 GitHub では互換性の違いは[問題を通じて報告されました](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-show-variables.md">[グローバル|セッション] 変数を表示</a>](/sql-statements/sql-statement-show-variables.md)
--   [<a href="/sql-statements/sql-statement-set-variable.md">`SET &#x3C;variable>`</a>](/sql-statements/sql-statement-set-variable.md)
--   [<a href="/character-set-and-collation.md">文字セットと照合順序のサポート</a>](/character-set-and-collation.md)
+-   [[グローバル|セッション] 変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [`SET &#x3C;variable>`](/sql-statements/sql-statement-set-variable.md)
+-   [文字セットと照合順序のサポート](/character-set-and-collation.md)

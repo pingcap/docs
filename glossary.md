@@ -11,7 +11,7 @@ summary: Glossaries about TiDB.
 
 ACID は、トランザクションの 4 つの主要なプロパティ (アトミック性、一貫性、分離性、耐久性) を指します。これらの各プロパティについては以下で説明します。
 
--   **原子性とは、**操作のすべての変更が実行されるか、まったく実行されないかのいずれかを意味します。 TiDB は、主キーを格納する[<a href="#regionpeerraft-group">リージョン</a>](#regionpeerraft-group)のアトミック性を保証し、トランザクションのアトミック性を実現します。
+-   **原子性とは、**操作のすべての変更が実行されるか、まったく実行されないかのいずれかを意味します。 TiDB は、主キーを格納する[リージョン](#regionpeerraft-group)のアトミック性を保証し、トランザクションのアトミック性を実現します。
 
 -   **一貫性とは**、トランザクションが常にデータベースをある一貫した状態から別の一貫した状態に移行させることを意味します。 TiDB では、データをメモリに書き込む前にデータの整合性が確保されます。
 
@@ -23,15 +23,15 @@ ACID は、トランザクションの 4 つの主要なプロパティ (アト�
 
 ### テーブルのバッチ作成 {#batch-create-table}
 
-テーブルのバッチ作成は、TiDB v6.0.0 で導入された機能です。この機能はデフォルトで有効になっています。 BR (バックアップ &amp; リストア) を使用して多数のテーブル (約 50,000) を含むデータをリストアする場合、この機能によりテーブルをバッチで作成することでリストア プロセスが大幅に高速化されます。詳細は[<a href="/br/br-batch-create-table.md">テーブルのバッチ作成</a>](/br/br-batch-create-table.md)を参照してください。
+テーブルのバッチ作成は、TiDB v6.0.0 で導入された機能です。この機能はデフォルトで有効になっています。 BR (バックアップ &amp; リストア) を使用して多数のテーブル (約 50,000) を含むデータをリストアする場合、この機能によりテーブルをバッチで作成することでリストア プロセスが大幅に高速化されます。詳細は[テーブルのバッチ作成](/br/br-batch-create-table.md)を参照してください。
 
 ### ベースラインのキャプチャ {#baseline-capturing}
 
-ベースライン キャプチャでは、キャプチャ条件を満たすクエリをキャプチャし、それらのバインディングを作成します。 [<a href="/sql-plan-management.md#prevent-regression-of-execution-plans-during-an-upgrade">アップグレード中の実行計画の回帰を防止する</a>](/sql-plan-management.md#prevent-regression-of-execution-plans-during-an-upgrade)に使用されます。
+ベースライン キャプチャでは、キャプチャ条件を満たすクエリをキャプチャし、それらのバインディングを作成します。 [アップグレード中の実行計画の回帰を防止する](/sql-plan-management.md#prevent-regression-of-execution-plans-during-an-upgrade)に使用されます。
 
 ### バケツ {#bucket}
 
-[<a href="#regionpeerraft-group">リージョン</a>](#regionpeerraft-group)は論理的にバケットと呼ばれるいくつかの小さな範囲に分割されます。 TiKV はバケットごとにクエリ統計を収集し、バケットのステータスを PD に報告します。詳細は[<a href="https://github.com/tikv/rfcs/blob/master/text/0082-dynamic-size-region.md#bucket">バケット設計ドキュメント</a>](https://github.com/tikv/rfcs/blob/master/text/0082-dynamic-size-region.md#bucket)を参照してください。
+[バケット設計ドキュメント](https://github.com/tikv/rfcs/blob/master/text/0082-dynamic-size-region.md#bucket)を参照してください。
 
 ## C {#c}
 
@@ -41,11 +41,11 @@ ACID は、トランザクションの 4 つの主要なプロパティ (アト�
 
 ### パーティションを結合する {#coalesce-partition}
 
-パーティションの結合は、ハッシュまたはキーパーティションテーブル内のパーティションの数を減らす方法です。詳細については、 [<a href="/partitioned-table.md#manage-hash-and-key-partitions">ハッシュとキーのパーティションを管理する</a>](/partitioned-table.md#manage-hash-and-key-partitions)を参照してください。
+パーティションの結合は、ハッシュまたはキーパーティションテーブル内のパーティションの数を減らす方法です。詳細については、 [ハッシュとキーのパーティションを管理する](/partitioned-table.md#manage-hash-and-key-partitions)を参照してください。
 
 ### 継続的なプロファイリング {#continuous-profiling}
 
-TiDB 5.3.0 で導入された継続的プロファイリングは、システム コール レベルでリソースのオーバーヘッドを観察する方法です。継続的プロファイリングのサポートにより、TiDB はデータベースのソース コードを直接調べるのと同じくらい明確なパフォーマンスの洞察を提供し、研究開発および運用保守担当者がフレーム グラフを使用してパフォーマンスの問題の根本原因を特定できるように支援します。詳細は[<a href="/dashboard/continuous-profiling.md">TiDB ダッシュボード インスタンス プロファイリング - 継続的プロファイリング</a>](/dashboard/continuous-profiling.md)を参照してください。
+TiDB 5.3.0 で導入された継続的プロファイリングは、システム コール レベルでリソースのオーバーヘッドを観察する方法です。継続的プロファイリングのサポートにより、TiDB はデータベースのソース コードを直接調べるのと同じくらい明確なパフォーマンスの洞察を提供し、研究開発および運用保守担当者がフレーム グラフを使用してパフォーマンスの問題の根本原因を特定できるように支援します。詳細は[TiDB ダッシュボード インスタンス プロファイリング - 継続的プロファイリング](/dashboard/continuous-profiling.md)を参照してください。
 
 ## D {#d}
 
@@ -67,7 +67,7 @@ TiDB 5.3.0 で導入された継続的プロファイリングは、システム
 
 ### リーダー/フォロワー/学習者 {#leader-follower-learner}
 
-Leader/ Follower/ Learnerはそれぞれ[<a href="#regionpeerraft-group">仲間</a>](#regionpeerraft-group)のRaftグループ内の役割に対応します。リーダーはすべてのクライアント要求に対応し、データをフォロワーに複製します。グループ リーダーが失敗した場合、フォロワーの 1 人が新しいリーダーとして選出されます。学習者は、レプリカの追加のプロセスでのみ機能する非投票フォロワーです。
+Leader/ Follower/ Learnerはそれぞれ[仲間](#regionpeerraft-group)のRaftグループ内の役割に対応します。リーダーはすべてのクライアント要求に対応し、データをフォロワーに複製します。グループ リーダーが失敗した場合、フォロワーの 1 人が新しいリーダーとして選出されます。学習者は、レプリカの追加のプロセスでのみ機能する非投票フォロワーです。
 
 ## ○ {#o}
 
@@ -79,7 +79,7 @@ TiCDC によって出力される増分変更ログの「元の値」。 TiCDC �
 
 演算子は、スケジュールの目的でリージョンに適用されるアクションのコレクションです。オペレーターは、「リージョン2 のリーダーをストア 5 に移行」や「リージョン2 のレプリカをストア 1、4、5 に移行」などのスケジュール タスクを実行します。
 
-演算子は[<a href="#scheduler">スケジューラ</a>](#scheduler)によって計算および生成することも、外部 API によって作成することもできます。
+演算子は[スケジューラ](#scheduler)によって計算および生成することも、外部 API によって作成することもできます。
 
 ### オペレータステップ {#operator-step}
 
@@ -98,7 +98,7 @@ TiCDC によって出力される増分変更ログの「元の値」。 TiCDC �
 
 ### パーティショニング {#partitioning}
 
-[<a href="/partitioned-table.md">パーティショニング</a>](/partitioned-table.md) 、テーブルをより小さなテーブル パーティションに物理的に分割することを指します。これは、RANGE、LIST、HASH、KEY パーティション化などのパーティション メソッドによって実行できます。
+[パーティショニング](/partitioned-table.md) 、テーブルをより小さなテーブル パーティションに物理的に分割することを指します。これは、RANGE、LIST、HASH、KEY パーティション化などのパーティション メソッドによって実行できます。
 
 ### 保留中/ダウン中 {#pending-down}
 
@@ -110,19 +110,19 @@ TiCDC によって出力される増分変更ログの「元の値」。 TiCDC �
 
 ### 述語列 {#predicate-columns}
 
-ほとんどの場合、SQL ステートメントを実行するとき、オプティマイザーは一部の列 ( `WHERE` 、 `JOIN` 、 `ORDER BY` 、および`GROUP BY`ステートメントの列など) の統計のみを使用します。これらの使用される列は述語列と呼ばれます。詳細は[<a href="/statistics.md#collect-statistics-on-some-columns">いくつかの列の統計を収集する</a>](/statistics.md#collect-statistics-on-some-columns)を参照してください。
+ほとんどの場合、SQL ステートメントを実行するとき、オプティマイザーは一部の列 ( `WHERE` 、 `JOIN` 、 `ORDER BY` 、および`GROUP BY`ステートメントの列など) の統計のみを使用します。これらの使用される列は述語列と呼ばれます。詳細は[いくつかの列の統計を収集する](/statistics.md#collect-statistics-on-some-columns)を参照してください。
 
 ## Q {#q}
 
 ### クォータ制限 {#quota-limiter}
 
-クォータ リミッターは、TiDB v6.0.0 で導入された実験的機能です。 TiKV がデプロイされているマシンのリソースが限られている場合 (たとえば、CPU が 4 v とメモリが 16 G しかない場合)、TiKV のフォアグラウンドがあまりにも多くの読み取りおよび書き込みリクエストを処理する場合、バックグラウンドで使用される CPU リソースは、そのような処理を支援するために占有されます。これは、TiKV のパフォーマンスの安定性に影響します。この状況を回避するには、 [<a href="/tikv-configuration-file.md#quota">クォータ関連の設定項目</a>](/tikv-configuration-file.md#quota)設定して、フォアグラウンドで使用される CPU リソースを制限します。
+クォータ リミッターは、TiDB v6.0.0 で導入された実験的機能です。 TiKV がデプロイされているマシンのリソースが限られている場合 (たとえば、CPU が 4 v とメモリが 16 G しかない場合)、TiKV のフォアグラウンドがあまりにも多くの読み取りおよび書き込みリクエストを処理する場合、バックグラウンドで使用される CPU リソースは、そのような処理を支援するために占有されます。これは、TiKV のパフォーマンスの安定性に影響します。この状況を回避するには、 [クォータ関連の設定項目](/tikv-configuration-file.md#quota)設定して、フォアグラウンドで使用される CPU リソースを制限します。
 
 ## R {#r}
 
 ### Raft Engine {#raft-engine}
 
-Raft Engine は、ログ構造設計を備えた組み込み永続storageエンジンです。 TiKV がマルチ Raft ログを保存できるように構築されています。 v5.4 以降、TiDB はログstorageエンジンとしてRaft Engineの使用をサポートしています。詳細は[<a href="/tikv-configuration-file.md#raft-engine">Raft Engine</a>](/tikv-configuration-file.md#raft-engine)を参照してください。
+Raft Engine は、ログ構造設計を備えた組み込み永続storageエンジンです。 TiKV がマルチ Raft ログを保存できるように構築されています。 v5.4 以降、TiDB はログstorageエンジンとしてRaft Engineの使用をサポートしています。詳細は[Raft Engine](/tikv-configuration-file.md#raft-engine)を参照してください。
 
 ### リージョン/ピア/ Raftグループ {#region-peer-raft-group}
 
@@ -157,12 +157,12 @@ Raft Engine は、ログ構造設計を備えた組み込み永続storageエン�
 
 ### Top SQL {#top-sql}
 
-Top SQL は、指定された時間範囲内で TiDB または TiKV ノードの高負荷に寄与する SQL クエリを見つけるのに役立ちます。詳細は[<a href="/dashboard/top-sql.md">Top SQLユーザー ドキュメント</a>](/dashboard/top-sql.md)を参照してください。
+Top SQL は、指定された時間範囲内で TiDB または TiKV ノードの高負荷に寄与する SQL クエリを見つけるのに役立ちます。詳細は[Top SQLユーザー ドキュメント](/dashboard/top-sql.md)を参照してください。
 
 ### TSO {#tso}
 
-TiKV は分散storageシステムであるため、単調増加するタイムスタンプを割り当てるには、グローバル タイミング サービスである Timestamp Oracle (TSO) が必要です。 TiKV では、このような機能は PD によって提供され、Google [<a href="http://static.googleusercontent.com/media/research.google.com/en//archive/spanner-osdi2012.pdf">スパナ</a>](http://static.googleusercontent.com/media/research.google.com/en//archive/spanner-osdi2012.pdf)では、この機能は複数のアトミック時計と GPS によって提供されます。
+TiKV は分散storageシステムであるため、単調増加するタイムスタンプを割り当てるには、グローバル タイミング サービスである Timestamp Oracle (TSO) が必要です。 TiKV では、このような機能は PD によって提供され、Google [スパナ](http://static.googleusercontent.com/media/research.google.com/en//archive/spanner-osdi2012.pdf)では、この機能は複数のアトミック時計と GPS によって提供されます。
 
 ### TTL {#ttl}
 
-[<a href="/time-to-live.md">生存時間 (TTL)</a>](/time-to-live.md)は、TiDB データの有効期間を行レベルで管理できる機能です。 TTL 属性を持つテーブルの場合、TiDB はデータの有効期間を自動的にチェックし、期限切れのデータを行レベルで削除します。
+[生存時間 (TTL)](/time-to-live.md)は、TiDB データの有効期間を行レベルで管理できる機能です。 TTL 属性を持つテーブルの場合、TiDB はデータの有効期間を自動的にチェックし、期限切れのデータを行レベルで削除します。

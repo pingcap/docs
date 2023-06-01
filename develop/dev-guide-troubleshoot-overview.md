@@ -9,36 +9,36 @@ summary: Learn how to troubleshoot SQL or transaction issues that might occur du
 
 ## SQL クエリの問題のトラブルシューティング {#troubleshoot-sql-query-problems}
 
-SQL クエリのパフォーマンスを向上させたい場合は、 [<a href="/develop/dev-guide-optimize-sql-overview.md">SQL性能チューニング</a>](/develop/dev-guide-optimize-sql-overview.md)の手順に従って、テーブル全体のスキャンやインデックスの欠落などのパフォーマンスの問題を解決します。
+SQL クエリのパフォーマンスを向上させたい場合は、 [SQL性能チューニング](/develop/dev-guide-optimize-sql-overview.md)の手順に従って、テーブル全体のスキャンやインデックスの欠落などのパフォーマンスの問題を解決します。
 
 <CustomContent platform="tidb">
 
 それでもパフォーマンスの問題が解決しない場合は、次のドキュメントを参照してください。
 
--   [<a href="/analyze-slow-queries.md">遅いクエリを分析する</a>](/analyze-slow-queries.md)
--   [<a href="/dashboard/top-sql.md">Top SQLを使用して負荷の高いクエリを特定する</a>](/dashboard/top-sql.md)
+-   [遅いクエリを分析する](/analyze-slow-queries.md)
+-   [Top SQLを使用して負荷の高いクエリを特定する](/dashboard/top-sql.md)
 
-SQL 操作に関する質問がある場合は、 [<a href="/faq/sql-faq.md">SQL FAQ</a>](/faq/sql-faq.md)を参照してください。
+SQL 操作に関する質問がある場合は、 [SQL FAQ](/faq/sql-faq.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-SQL 操作に関する質問がある場合は、 [<a href="https://docs.pingcap.com/tidb/stable/sql-faq">SQL FAQ</a>](https://docs.pingcap.com/tidb/stable/sql-faq)を参照してください。
+SQL 操作に関する質問がある場合は、 [SQL FAQ](https://docs.pingcap.com/tidb/stable/sql-faq)を参照してください。
 
 </CustomContent>
 
 ## トランザクションの問題のトラブルシューティング {#troubleshoot-transaction-issues}
 
-[<a href="/develop/dev-guide-transaction-troubleshoot.md">トランザクションエラーを処理する</a>](/develop/dev-guide-transaction-troubleshoot.md)を参照してください。
+[トランザクションエラーを処理する](/develop/dev-guide-transaction-troubleshoot.md)を参照してください。
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/mysql-compatibility.md#unsupported-features">サポートされていない機能</a>](/mysql-compatibility.md#unsupported-features)
+-   [サポートされていない機能](/mysql-compatibility.md#unsupported-features)
 
 <CustomContent platform="tidb">
 
--   [<a href="/faq/manage-cluster-faq.md">クラスタ管理に関するよくある質問</a>](/faq/manage-cluster-faq.md)
--   [<a href="/faq/tidb-faq.md">TiDB よくある質問</a>](/faq/tidb-faq.md)
+-   [クラスタ管理に関するよくある質問](/faq/manage-cluster-faq.md)
+-   [TiDB よくある質問](/faq/tidb-faq.md)
 
 </CustomContent>

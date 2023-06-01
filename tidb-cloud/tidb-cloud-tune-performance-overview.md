@@ -47,10 +47,10 @@ TiDB Cloudコンソールには、ユーザーの応答時間のトラブルシ�
 -   **概要**: このタブでは、合計 QPS、レイテンシー、接続、リクエスト QPS、リクエスト期間、storageサイズ、CPU、IO 読み取り、および IO 書き込みなどの TiDB メトリクスを表示できます。
 -   **SQL診断**:
 
-    -   **SQL ステートメントを**使用すると、ページ上の SQL 実行を直接観察でき、システム テーブルをクエリせずにパフォーマンスの問題を簡単に特定できます。 SQL ステートメントをクリックすると、トラブルシューティングと分析のためにクエリの実行プランをさらに表示できます。 SQL パフォーマンス チューニングの詳細については、 [<a href="/tidb-cloud/tidb-cloud-sql-tuning-overview.md">SQLチューニングの概要</a>](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)を参照してください。
+    -   **SQL ステートメントを**使用すると、ページ上の SQL 実行を直接観察でき、システム テーブルをクエリせずにパフォーマンスの問題を簡単に特定できます。 SQL ステートメントをクリックすると、トラブルシューティングと分析のためにクエリの実行プランをさらに表示できます。 SQL パフォーマンス チューニングの詳細については、 [SQLチューニングの概要](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)を参照してください。
     -   **Key Visualizer は、** TiDB のデータ アクセス パターンとデータ ホットスポットを観察するのに役立ちます。
 
-追加のメトリクスが必要な場合は、 [<a href="/tidb-cloud/tidb-cloud-support.md">PingCAP サポート チーム</a>](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
+追加のメトリクスが必要な場合は、 [PingCAP サポート チーム](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
 レイテンシーとパフォーマンスの問題が発生した場合は、次のセクションの分析とトラブルシューティングの手順を参照してください。
 
@@ -58,7 +58,7 @@ TiDB Cloudコンソールには、ユーザーの応答時間のトラブルシ�
 
 **[概要]**タブでレイテンシ (P80) を観察します。この値がユーザー応答時間の P80 値よりも大幅に低い場合は、主なボトルネックが TiDB クラスターの外側にある可能性があると判断できます。この場合、次の手順を使用してボトルネックをトラブルシューティングできます。
 
-1.  [<a href="/tidb-cloud/monitor-tidb-cluster.md">「概要」タブ</a>](/tidb-cloud/monitor-tidb-cluster.md)の左側で TiDB バージョンを確認します。 v6.0.0 以前のバージョンの場合は、 [<a href="/tidb-cloud/tidb-cloud-support.md">PingCAP サポート チーム</a>](/tidb-cloud/tidb-cloud-support.md)に問い合わせて、準備済みプラン キャッシュ、Raft エンジン、および TiKV AsyncIO 機能を有効にできるかどうかを確認することをお勧めします。これらの機能を有効にし、アプリケーション側の調整を行うと、スループット パフォーマンスが大幅に向上し、レイテンシーとリソース使用率が削減されます。
+1.  [PingCAP サポート チーム](/tidb-cloud/tidb-cloud-support.md)に問い合わせて、準備済みプラン キャッシュ、Raft エンジン、および TiKV AsyncIO 機能を有効にできるかどうかを確認することをお勧めします。これらの機能を有効にし、アプリケーション側の調整を行うと、スループット パフォーマンスが大幅に向上し、レイテンシーとリソース使用率が削減されます。
 2.  必要に応じて、TiDB トークンの制限を増やしてスループットを向上させることができます。
 3.  準備されたプランのキャッシュ機能が有効であり、ユーザー側で JDBC を使用する場合は、次の構成を使用することをお勧めします。
 
@@ -66,7 +66,7 @@ TiDB Cloudコンソールには、ユーザーの応答時間のトラブルシ�
     useServerPrepStmts=true&cachePrepStmts=true& prepStmtCacheSize=1000&prepStmtCacheSqlLimit=20480&useConfigs=maxPerformance
     ```
 
-    JDBC を使用せず、現在の TiDB クラスターのプリペアド プラン キャッシュ機能を最大限に活用したい場合は、クライアント側でプリペアドステートメントオブジェクトをキャッシュする必要があります。 StmtPrepare および StmtClose の呼び出しをリセットする必要はありません。各クエリで呼び出されるコマンドの数を 3 から 1 に減らします。パフォーマンス要件とクライアント側の変更の量に応じて、ある程度の開発作業が必要になります。 [<a href="/tidb-cloud/tidb-cloud-support.md">PingCAP サポート チーム</a>](/tidb-cloud/tidb-cloud-support.md)に相談してください。
+    JDBC を使用せず、現在の TiDB クラスターのプリペアド プラン キャッシュ機能を最大限に活用したい場合は、クライアント側でプリペアドステートメントオブジェクトをキャッシュする必要があります。 StmtPrepare および StmtClose の呼び出しをリセットする必要はありません。各クエリで呼び出されるコマンドの数を 3 から 1 に減らします。パフォーマンス要件とクライアント側の変更の量に応じて、ある程度の開発作業が必要になります。 [PingCAP サポート チーム](/tidb-cloud/tidb-cloud-support.md)に相談してください。
 
 ### TiDB クラスターのボトルネック {#bottlenecks-in-the-tidb-cluster}
 
@@ -78,11 +78,11 @@ TiDB Cloudコンソールには、ユーザーの応答時間のトラブルシ�
 
 #### 遅い SQL クエリを最適化する {#optimize-slow-sql-queries}
 
-SQL パフォーマンス チューニングの詳細については、 [<a href="/tidb-cloud/tidb-cloud-sql-tuning-overview.md">SQLチューニングの概要</a>](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)を参照してください。
+SQL パフォーマンス チューニングの詳細については、 [SQLチューニングの概要](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)を参照してください。
 
 #### ホットスポットの問題を解決する {#resolve-hotstpot-issues}
 
-ホットスポットの問題は[<a href="/tidb-cloud/tune-performance.md#key-visualizer">「キー ビジュアライザー」タブ</a>](/tidb-cloud/tune-performance.md#key-visualizer)で確認できます。次のスクリーンショットは、ヒート マップのサンプルを示しています。地図の横座標は時刻、縦座標は表と索引です。明るい色はトラフィックが多いことを示します。ツールバーで読み取りトラフィックまたは書き込みトラフィックの表示を切り替えることができます。
+ホットスポットの問題は[「キー ビジュアライザー」タブ](/tidb-cloud/tune-performance.md#key-visualizer)で確認できます。次のスクリーンショットは、ヒート マップのサンプルを示しています。地図の横座標は時刻、縦座標は表と索引です。明るい色はトラフィックが多いことを示します。ツールバーで読み取りトラフィックまたは書き込みトラフィックの表示を切り替えることができます。
 
 ![Hotspot issues](/media/tidb-cloud/tidb-cloud-troubleshoot-hotspot.png)
 
@@ -100,11 +100,11 @@ SQL パフォーマンス チューニングの詳細については、 [<a href
 
 #### 規格外 {#scale-out}
 
-クラスター[<a href="/tidb-cloud/monitor-tidb-cluster.md">概要</a>](/tidb-cloud/monitor-tidb-cluster.md)ページで、storage容量、CPU 使用率、TiKV IO レートのメトリックを確認します。いずれかのクラスタが長期間にわたって上限に達している場合は、現在のクラスタ サイズがビジネス要件を満たすことができない可能性があります。クラスターをスケールアウトする必要があるかどうかを確認するには、 [<a href="/tidb-cloud/tidb-cloud-support.md">PingCAP サポート チーム</a>](/tidb-cloud/tidb-cloud-support.md)に問い合わせることをお勧めします。
+クラスター[PingCAP サポート チーム](/tidb-cloud/tidb-cloud-support.md)に問い合わせることをお勧めします。
 
 #### その他の問題 {#other-issues}
 
-上記の方法でパフォーマンスの問題を解決できない場合は、 [<a href="/tidb-cloud/tidb-cloud-support.md">PingCAP サポート チーム</a>](/tidb-cloud/tidb-cloud-support.md)に問い合わせてサポートを求めることができます。トラブルシューティング プロセスを迅速化するために、次の情報を提供することをお勧めします。
+上記の方法でパフォーマンスの問題を解決できない場合は、 [PingCAP サポート チーム](/tidb-cloud/tidb-cloud-support.md)に問い合わせてサポートを求めることができます。トラブルシューティング プロセスを迅速化するために、次の情報を提供することをお勧めします。
 
 -   クラスターID
 -   発行間隔と同等の通常間隔
@@ -118,7 +118,7 @@ SQL パフォーマンス チューニングの詳細については、 [<a href
 | アクション                              | 効果                                                                                                                                                  |
 | :--------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 準備されたプラン キャッシュ + JDBC              | スループット パフォーマンスが大幅に向上し、レイテンシーが大幅に短縮され、TiDB の平均 CPU 使用率が大幅に削減されます。                                                                                    |
-| TiKV で AsyncIO と Raft エンジンを有効にする   | スループットパフォーマンスがいくらか向上します。有効にするには、 [<a href="/tidb-cloud/tidb-cloud-support.md">PingCAP サポート チーム</a>](/tidb-cloud/tidb-cloud-support.md)に連絡する必要があります。 |
+| TiKV で AsyncIO と Raft エンジンを有効にする   | スループットパフォーマンスがいくらか向上します。有効にするには、 [PingCAP サポート チーム](/tidb-cloud/tidb-cloud-support.md)に連絡する必要があります。 |
 | クラスター化インデックス                       | スループットパフォーマンスが大幅に向上します。                                                                                                                             |
 | TiDB ノードをスケールアウトする                 | スループットパフォーマンスが大幅に向上します。                                                                                                                             |
 | クライアント側の最適化。 1 つの JVM を 3 つに分割     | スループット パフォーマンスは大幅に向上し、さらに分割するとスループット キャパシティがさらに向上し続ける可能性があります。                                                                                      |

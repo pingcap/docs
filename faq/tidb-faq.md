@@ -21,11 +21,11 @@ summary: Learn about the most frequently asked questions (FAQs) relating to TiDB
 
 -->
 
-[<a href="https://github.com/pingcap/tidb">TiDB</a>](https://github.com/pingcap/tidb)は、ハイブリッド トランザクションおよび分析処理 (HTAP) ワークロードをサポートするオープンソースの分散 SQL データベースです。 MySQL と互換性があり、水平スケーラビリティ、強力な一貫性、高可用性を備えています。 TiDB の目標は、OLTP (オンライン トランザクション処理)、OLAP (オンライン分析処理)、および HTAP サービスをカバーするワンストップ データベース ソリューションをユーザーに提供することです。 TiDB は、高可用性と大規模データの強力な一貫性を必要とするさまざまなユースケースに適しています。
+[TiDB](https://github.com/pingcap/tidb)は、ハイブリッド トランザクションおよび分析処理 (HTAP) ワークロードをサポートするオープンソースの分散 SQL データベースです。 MySQL と互換性があり、水平スケーラビリティ、強力な一貫性、高可用性を備えています。 TiDB の目標は、OLTP (オンライン トランザクション処理)、OLAP (オンライン分析処理)、および HTAP サービスをカバーするワンストップ データベース ソリューションをユーザーに提供することです。 TiDB は、高可用性と大規模データの強力な一貫性を必要とするさまざまなユースケースに適しています。
 
 ### TiDB のアーキテクチャとは何ですか? {#what-is-tidb-s-architecture}
 
-TiDB クラスターには、TiDBサーバー、PD (配置Driver)サーバー、および TiKVサーバーの3 つのコンポーネントがあります。詳細については、 [<a href="/tidb-architecture.md">TiDBアーキテクチャ</a>](/tidb-architecture.md) 、 [<a href="/tidb-storage.md">TiDBstorage</a>](/tidb-storage.md) 、 [<a href="/tidb-computing.md">TiDB コンピューティング</a>](/tidb-computing.md) 、および[<a href="/tidb-scheduling.md">TiDB のスケジューリング</a>](/tidb-scheduling.md)を参照してください。
+TiDB クラスターには、TiDBサーバー、PD (配置Driver)サーバー、および TiKVサーバーの3 つのコンポーネントがあります。詳細については、 [TiDB のスケジューリング](/tidb-scheduling.md)を参照してください。
 
 ### TiDB は MySQL に基づいていますか? {#is-tidb-based-on-mysql}
 
@@ -43,13 +43,13 @@ TiDB クラスターには、TiDBサーバー、PD (配置Driver)サーバー、
 
 ### TiDB は MySQL とどのように互換性がありますか? {#how-is-tidb-compatible-with-mysql}
 
-現在、TiDB はMySQL 5.7構文の大部分をサポートしていますが、トリガー、ストアド プロシージャ、およびユーザー定義関数はサポートしていません。詳細については、 [<a href="/mysql-compatibility.md">MySQLとの互換性</a>](/mysql-compatibility.md)を参照してください。
+現在、TiDB はMySQL 5.7構文の大部分をサポートしていますが、トリガー、ストアド プロシージャ、およびユーザー定義関数はサポートしていません。詳細については、 [MySQLとの互換性](/mysql-compatibility.md)を参照してください。
 
 ### TiDB は分散トランザクションをサポートしていますか? {#does-tidb-support-distributed-transactions}
 
-はい。 TiDB は、単一の場所にある少数のノードであっても、 [<a href="/multi-data-centers-in-one-city-deployment.md">複数のデータセンターにわたるノード</a>](/multi-data-centers-in-one-city-deployment.md)のノードであっても、クラスター全体にトランザクションを分散します。
+はい。 TiDB は、単一の場所にある少数のノードであっても、 [複数のデータセンターにわたるノード](/multi-data-centers-in-one-city-deployment.md)のノードであっても、クラスター全体にトランザクションを分散します。
 
-Google の Percolator からインスピレーションを得た TiDB のトランザクション モデルは、主に 2 フェーズ コミット プロトコルであり、いくつかの実用的な最適化が施されています。このモデルは、タイムスタンプ アロケータに依存して各トランザクションに単調増加タイムスタンプを割り当てるため、競合を検出できます。 [<a href="/tidb-architecture.md#placement-driver-pd-server">PD</a>](/tidb-architecture.md#placement-driver-pd-server) TiDB クラスター内のタイムスタンプ アロケーターとして機能します。
+Google の Percolator からインスピレーションを得た TiDB のトランザクション モデルは、主に 2 フェーズ コミット プロトコルであり、いくつかの実用的な最適化が施されています。このモデルは、タイムスタンプ アロケータに依存して各トランザクションに単調増加タイムスタンプを割り当てるため、競合を検出できます。 [PD](/tidb-architecture.md#placement-driver-pd-server) TiDB クラスター内のタイムスタンプ アロケーターとして機能します。
 
 ### TiDB を操作するにはどのようなプログラミング言語を使用できますか? {#what-programming-language-can-i-use-to-work-with-tidb}
 
@@ -84,9 +84,9 @@ Usage of ./bin/tidb-server:
 
 ### TiDB ドキュメント以外に、TiDB の知識を取得する方法はありますか? {#in-addition-to-the-tidb-documentation-are-there-any-other-ways-to-acquire-tidb-knowledge}
 
--   [<a href="https://docs.pingcap.com/">TiDB ドキュメント</a>](https://docs.pingcap.com/) : TiDB 関連の知識を得る最も重要かつタイムリーな方法。
--   [<a href="https://www.pingcap.com/blog/">TiDB ブログ</a>](https://www.pingcap.com/blog/) : 技術記事、製品に関する洞察、ケーススタディを学びます。
--   [<a href="https://www.pingcap.com/education/?from=en">PingCAP 教育</a>](https://www.pingcap.com/education/?from=en) : オンラインコースと認定プログラムを受講します。
+-   [TiDB ドキュメント](https://docs.pingcap.com/) : TiDB 関連の知識を得る最も重要かつタイムリーな方法。
+-   [TiDB ブログ](https://www.pingcap.com/blog/) : 技術記事、製品に関する洞察、ケーススタディを学びます。
+-   [PingCAP 教育](https://www.pingcap.com/education/?from=en) : オンラインコースと認定プログラムを受講します。
 
 ### TiDB ユーザー名の長さの制限は何ですか? {#what-is-the-length-limit-for-the-tidb-user-name}
 
@@ -97,7 +97,7 @@ Usage of ./bin/tidb-server:
 -   TiDB の最大列数のデフォルトは 1017 です。この数は最大 4096 まで調整できます。
 -   単一行の最大サイズのデフォルトは 6 MB です。最大 120 MB まで数値を増やすことができます。
 
-詳細については、 [<a href="/tidb-limitations.md">TiDB の制限事項</a>](/tidb-limitations.md)を参照してください。
+詳細については、 [TiDB の制限事項](/tidb-limitations.md)を参照してください。
 
 ### TiDB は XA をサポートしていますか? {#does-tidb-support-xa}
 
@@ -109,7 +109,7 @@ Atomikos の 2 つのデータ ソースを構成したら、JDBC ドライブ�
 
 ### TiDB は、パフォーマンスを損なうことなく、カラムナstorageエンジン (TiFlash) への大量の同時<code>INSERT</code>または<code>UPDATE</code>操作をどのようにサポートできるのでしょうか? {#how-could-tidb-support-high-concurrent-code-insert-code-or-code-update-code-operations-to-the-columnar-storage-engine-tiflash-without-hurting-performance}
 
--   [<a href="/tiflash/tiflash-overview.md">TiFlash</a>](/tiflash/tiflash-overview.md)柱状エンジンの変更を処理するために、DeltaTree という特別な構造が導入されています。
+-   [TiFlash](/tiflash/tiflash-overview.md)柱状エンジンの変更を処理するために、DeltaTree という特別な構造が導入されています。
 -   TiFlash はRaftグループの学習者ロールとして機能するため、ログのコミットや書き込みに投票しません。これは、DML 操作がTiFlashの確認応答を待つ必要がないことを意味します。そのため、 TiFlashが OLTP のパフォーマンスを低下させません。さらに、 TiFlashと TiKV は別のインスタンスで動作するため、相互に影響しません。
 
 ### TiFlash は最終的に一貫性がありますか? {#is-tiflash-eventually-consistent}
@@ -120,12 +120,12 @@ Atomikos の 2 つのデータ ソースを構成したら、JDBC ドライブ�
 
 ### データstorage用の TiKV {#tikv-for-data-storage}
 
-[<a href="https://www.pingcap.com/blog/tidb-internal-data-storage/?from=en">TiDB 内部 (I) - データ ストレージ</a>](https://www.pingcap.com/blog/tidb-internal-data-storage/?from=en)を参照してください。
+[TiDB 内部 (I) - データ ストレージ](https://www.pingcap.com/blog/tidb-internal-data-storage/?from=en)を参照してください。
 
 ### データコンピューティング用の TiDB {#tidb-for-data-computing}
 
-[<a href="https://www.pingcap.com/blog/tidb-internal-computing/?from=en">TiDB 内部 (II) - コンピューティング</a>](https://www.pingcap.com/blog/tidb-internal-computing/?from=en)を参照してください。
+[TiDB 内部 (II) - コンピューティング](https://www.pingcap.com/blog/tidb-internal-computing/?from=en)を参照してください。
 
 ### スケジューリング用PD {#pd-for-scheduling}
 
-[<a href="https://www.pingcap.com/blog/tidb-internal-scheduling/?from=en">TiDB 内部 (III) - スケジュール設定</a>](https://www.pingcap.com/blog/tidb-internal-scheduling/?from=en)を参照してください。
+[TiDB 内部 (III) - スケジュール設定](https://www.pingcap.com/blog/tidb-internal-scheduling/?from=en)を参照してください。

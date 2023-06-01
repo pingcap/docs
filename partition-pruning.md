@@ -238,8 +238,8 @@ explain select * from t where x between 7 and 14;
 
 `fn`関数が単調な場合、任意の`x`と`y`について、 `x > y`の場合は`fn(x) > fn(y)`です。したがって、この`fn`関数は厳密に単調であると言えます。 `x`と`y`場合、 `x > y`の場合は`fn(x) >= fn(y)`なります。この場合、 `fn` 「単調」とも言えます。理論的には、厳密かどうかにかかわらず、すべての単調関数がパーティション プルーニングによってサポートされます。現在、TiDB は次の単調関数のみをサポートしています。
 
--   [<a href="/functions-and-operators/date-and-time-functions.md">`UNIX_TIMESTAMP()`</a>](/functions-and-operators/date-and-time-functions.md)
--   [<a href="/functions-and-operators/date-and-time-functions.md">`TO_DAYS()`</a>](/functions-and-operators/date-and-time-functions.md)
+-   [`UNIX_TIMESTAMP()`](/functions-and-operators/date-and-time-functions.md)
+-   [`TO_DAYS()`](/functions-and-operators/date-and-time-functions.md)
 
 たとえば、パーティション プルーニングは、パーティション式が`fn(col)`の形式であり、 `fn`が単調関数`to_days`である場合に有効になります。
 

@@ -192,7 +192,7 @@ tikv_servers:
 
     > **ノート：**
     >
-    > TiDB v5.2 以降、 `label-property`構成はデフォルトではサポートされません。レプリカ ポリシーを設定するには、 [<a href="/configure-placement-rules.md">配置ルール</a>](/configure-placement-rules.md)を使用します。
+    > TiDB v5.2 以降、 `label-property`構成はデフォルトではサポートされません。レプリカ ポリシーを設定するには、 [配置ルール](/configure-placement-rules.md)を使用します。
 
 -   PDの優先度を設定します。 PD リーダーが別のリージョン (AZ3) にある状況を回避するには、ローカル PD (シアトル) の優先順位を上げ、別のリージョン (サンフランシスコ) の PD の優先順位を下げることができます。数値が大きいほど優先度が高くなります。
 

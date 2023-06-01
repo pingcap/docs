@@ -24,7 +24,7 @@ summary: Learn the mechanism of user password management in TiDB.
 -   `caching_sha2_password`
 -   `tidb_sm3_password`
 
-TiDB 認証プラグインの詳細については、 [<a href="/security-compatibility-with-mysql.md#authentication-plugin-status">認証プラグインのステータス</a>](/security-compatibility-with-mysql.md#authentication-plugin-status)を参照してください。
+TiDB 認証プラグインの詳細については、 [認証プラグインのステータス](/security-compatibility-with-mysql.md#authentication-plugin-status)を参照してください。
 
 ## パスワードの複雑さのポリシー {#password-complexity-policy}
 
@@ -33,7 +33,7 @@ TiDB では、パスワードの複雑さのチェックはデフォルトで無
 パスワードの複雑さのポリシーには次の機能があります。
 
 -   ユーザー パスワードをプレーンテキスト ( `CREATE USER` 、 `ALTER USER` 、および`SET PASSWORD`を含む) で設定する SQL ステートメントの場合、TiDB はパスワードの複雑さのポリシーに照らしてパスワードをチェックします。パスワードが要件を満たしていない場合、パスワードは拒否されます。
--   SQL 関数[<a href="https://dev.mysql.com/doc/refman/5.7/en/encryption-functions.html#function_validate-password-strength">`VALIDATE_PASSWORD_STRENGTH()`</a>](https://dev.mysql.com/doc/refman/5.7/en/encryption-functions.html#function_validate-password-strength)を使用して、パスワードの強度を検証できます。
+-   SQL 関数[`VALIDATE_PASSWORD_STRENGTH()`](https://dev.mysql.com/doc/refman/5.7/en/encryption-functions.html#function_validate-password-strength)を使用して、パスワードの強度を検証できます。
 
 > **ノート：**
 >
@@ -60,7 +60,7 @@ mysql> SHOW VARIABLES LIKE 'validate_password.%';
 8 rows in set (0.00 sec)
 ```
 
-各システム変数の詳細については、 [<a href="/system-variables.md#validate_passwordcheck_user_name-new-in-v650">システム変数</a>](/system-variables.md#validate_passwordcheck_user_name-new-in-v650)を参照してください。
+各システム変数の詳細については、 [システム変数](/system-variables.md#validate_passwordcheck_user_name-new-in-v650)を参照してください。
 
 ### パスワードの複雑さのポリシーを構成する {#configure-password-complexity-policy}
 
@@ -220,7 +220,7 @@ TiDB は、グローバル レベルおよびアカウント レベルでの自�
 
 -   世界レベル
 
-    システム変数[<a href="/system-variables.md#default_password_lifetime-new-in-v650">`default_password_lifetime`</a>](/system-variables.md#default_password_lifetime-new-in-v650)を設定して、パスワードの有効期間を制御できます。デフォルト値`0`は、パスワードの有効期限が切れないことを示します。このシステム変数が正の整数`N`に設定されている場合、パスワードの有効期間は`N`日であり、 `N`日ごとにパスワードを変更する必要があることを意味します。
+    システム変数[`default_password_lifetime`](/system-variables.md#default_password_lifetime-new-in-v650)を設定して、パスワードの有効期間を制御できます。デフォルト値`0`は、パスワードの有効期限が切れないことを示します。このシステム変数が正の整数`N`に設定されている場合、パスワードの有効期間は`N`日であり、 `N`日ごとにパスワードを変更する必要があることを意味します。
 
     グローバル自動パスワード有効期限ポリシーは、アカウント レベルの上書きがないすべてのアカウントに適用されます。
 
@@ -266,7 +266,7 @@ TiDB は、グローバル レベルおよびアカウント レベルでの自�
 
 パスワードの有効期限に関する TiDBサーバーの動作を制御できます。パスワードの有効期限が切れると、サーバーはクライアントを切断するか、クライアントを「サンドボックス モード」に制限します。 「サンドボックス モード」では、TiDBサーバーは期限切れのアカウントからの接続を許可します。ただし、そのような接続では、ユーザーはパスワードのリセットのみを許可されます。
 
-TiDBサーバーは、 「サンドボックス モード」でパスワードが期限切れになったユーザーを制限するかどうかを制御できます。パスワードの有効期限が切れたときの TiDBサーバーの動作を制御するには、TiDB 構成ファイルで[<a href="/tidb-configuration-file.md#disconnect-on-expired-password-new-in-v650">`security.disconnect-on-expired-password`</a>](/tidb-configuration-file.md#disconnect-on-expired-password-new-in-v650)パラメーターを構成します。
+TiDBサーバーは、 「サンドボックス モード」でパスワードが期限切れになったユーザーを制限するかどうかを制御できます。パスワードの有効期限が切れたときの TiDBサーバーの動作を制御するには、TiDB 構成ファイルで[`security.disconnect-on-expired-password`](/tidb-configuration-file.md#disconnect-on-expired-password-new-in-v650)パラメーターを構成します。
 
 ```toml
 [security]
@@ -280,7 +280,7 @@ disconnect-on-expired-password = true
 
 -   通常のアカウントのパスワードの有効期限が切れた場合、管理者は SQL ステートメントを使用してアカウントのパスワードを変更できます。
 -   管理者アカウントのパスワードの有効期限が切れた場合、別の管理者は SQL ステートメントを使用してアカウントのパスワードを変更できます。
--   管理者アカウントのパスワードの有効期限が切れており、パスワードの変更を手伝ってくれる他の管理者がいない場合は、 `skip-grant-table`メカニズムを使用してアカウントのパスワードを変更できます。詳細は[<a href="/user-account-management.md#forget-the-root-password">パスワードを忘れた場合の手続き</a>](/user-account-management.md#forget-the-root-password)を参照してください。
+-   管理者アカウントのパスワードの有効期限が切れており、パスワードの変更を手伝ってくれる他の管理者がいない場合は、 `skip-grant-table`メカニズムを使用してアカウントのパスワードを変更できます。詳細は[パスワードを忘れた場合の手続き](/user-account-management.md#forget-the-root-password)を参照してください。
 
 ## パスワード再利用ポリシー {#password-reuse-policy}
 
@@ -299,7 +299,7 @@ TiDB はアカウントのパスワード履歴を記録し、履歴からの新
 
 ### グローバルレベルのパスワード再利用ポリシー {#global-level-password-reuse-policy}
 
-グローバルなパスワード再利用ポリシーを確立するには、 [<a href="/system-variables.md#password_history-new-in-v650">`password_history`</a>](/system-variables.md#password_history-new-in-v650)および[<a href="/system-variables.md#password_reuse_interval-new-in-v650">`password_reuse_interval`</a>](/system-variables.md#password_reuse_interval-new-in-v650)システム変数を使用します。
+グローバルなパスワード再利用ポリシーを確立するには、 [`password_reuse_interval`](/system-variables.md#password_reuse_interval-new-in-v650)システム変数を使用します。
 
 たとえば、過去 6 個のパスワードと過去 365 日以内に使用されたパスワードの再利用を禁止するグローバル パスワード再利用ポリシーを確立するには、次のようにします。
 

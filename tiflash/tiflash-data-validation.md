@@ -32,13 +32,13 @@ TiFlash は、自動データ検証と手動データ検証の両方をサポー
 -   自動データ検証:
     -   v6.0.0 以降のバージョンでは、デフォルトで V3 検証メカニズムが使用されます。
     -   v6.0.0 より前のバージョンでは、デフォルトで V2 検証メカニズムが使用されます。
-    -   検証メカニズムを手動で切り替えるには、 [<a href="/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file">TiFlash設定ファイル</a>](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)を参照してください。ただし、デフォルト構成はテストによって検証されているため、推奨されます。
--   手動データ検証。 [<a href="/tiflash/tiflash-command-line-flags.md#dttool-inspect">`DTTool inspect`</a>](/tiflash/tiflash-command-line-flags.md#dttool-inspect)を参照してください。
+    -   検証メカニズムを手動で切り替えるには、 [TiFlash設定ファイル](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)を参照してください。ただし、デフォルト構成はテストによって検証されているため、推奨されます。
+-   手動データ検証。 [`DTTool inspect`](/tiflash/tiflash-command-line-flags.md#dttool-inspect)を参照してください。
 
 > **警告：**
 >
-> V3 検証メカニズムを有効にすると、新しく生成された DTFile は、v5.4.0 より前のTiFlashで直接読み取ることができなくなります。 v5.4.0 以降、 TiFlash はV2 と V3 の両方をサポートし、バージョンを積極的にアップグレードまたはダウングレードしません。既存のファイルのバージョンをアップグレードまたはダウングレードする必要がある場合は、手動で行う必要があります[<a href="/tiflash/tiflash-command-line-flags.md#dttool-migrate">バージョンを切り替える</a>](/tiflash/tiflash-command-line-flags.md#dttool-migrate) 。
+> V3 検証メカニズムを有効にすると、新しく生成された DTFile は、v5.4.0 より前のTiFlashで直接読み取ることができなくなります。 v5.4.0 以降、 TiFlash はV2 と V3 の両方をサポートし、バージョンを積極的にアップグレードまたはダウングレードしません。既存のファイルのバージョンをアップグレードまたはダウングレードする必要がある場合は、手動で行う必要があります[バージョンを切り替える](/tiflash/tiflash-command-line-flags.md#dttool-migrate) 。
 
 ### 検証ツール {#validation-tool}
 
-TiFlash がデータを読み取るときに実行される自動データ検証に加えて、データの整合性を手動でチェックするツールが v5.4.0 で導入されました。詳細は[<a href="/tiflash/tiflash-command-line-flags.md#dttool-inspect">DTツール</a>](/tiflash/tiflash-command-line-flags.md#dttool-inspect)を参照してください。
+TiFlash がデータを読み取るときに実行される自動データ検証に加えて、データの整合性を手動でチェックするツールが v5.4.0 で導入されました。詳細は[DTツール](/tiflash/tiflash-command-line-flags.md#dttool-inspect)を参照してください。

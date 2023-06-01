@@ -5,7 +5,7 @@ summary: An overview of the usage of ADMIN CLEANUP for the TiDB database.
 
 # 管理者のクリーンアップインデックス {#admin-cleanup-index}
 
-`ADMIN CLEANUP INDEX`ステートメントは、テーブルに一貫性のないデータとインデックスがある場合に、テーブルから冗長なインデックスを削除するために使用されます。この構文はまだ[<a href="/foreign-key.md">外部キー制約</a>](/foreign-key.md)をサポートしていないことに注意してください。
+`ADMIN CLEANUP INDEX`ステートメントは、テーブルに一貫性のないデータとインデックスがある場合に、テーブルから冗長なインデックスを削除するために使用されます。この構文はまだ[外部キー制約](/foreign-key.md)をサポートしていないことに注意してください。
 
 ## あらすじ {#synopsis}
 
@@ -57,10 +57,10 @@ Query OK, 0 rows affected (0.01 sec)
 >
 > レプリカの損失によりデータとインデックスが不整合になった場合:
 >
-> -   行データとインデックス データの両方が失われる可能性があります。一貫性を復元するには、 `ADMIN CLEANUP INDEX`と[<a href="/sql-statements/sql-statement-admin-recover.md">`ADMIN RECOVER INDEX`</a>](/sql-statements/sql-statement-admin-recover.md)ステートメントを一緒に使用します。
+> -   行データとインデックス データの両方が失われる可能性があります。一貫性を復元するには、 `ADMIN CLEANUP INDEX`と[`ADMIN RECOVER INDEX`](/sql-statements/sql-statement-admin-recover.md)ステートメントを一緒に使用します。
 > -   `ADMIN CLEANUP INDEX`ステートメントは常に単一スレッドで実行されます。テーブルデータが大きい場合は、インデックスを再構築してインデックスデータを回復することをお勧めします。
 > -   `ADMIN CLEANUP INDEX`ステートメントを実行すると、対応するテーブルまたはインデックスはロックされず、TiDB は他のセッションがテーブル レコードを同時に変更できるようになります。ただし、この場合、 `ADMIN CLEANUP INDEX`すべてのテーブル レコードを正しく処理できない可能性があります。したがって、 `ADMIN CLEANUP INDEX`を実行するときは、テーブルのデータを同時に変更しないようにしてください。
-> -   TiDB のエンタープライズ エディションを使用している場合は、サポート エンジニアに[<a href="https://support.pingcap.com/hc/en-us">リクエストを送信する</a>](https://support.pingcap.com/hc/en-us)して支援を求めることができます。
+> -   TiDB のエンタープライズ エディションを使用している場合は、サポート エンジニアに[リクエストを送信する](https://support.pingcap.com/hc/en-us)して支援を求めることができます。
 >
 > `ADMIN CLEANUP INDEX`ステートメントはアトミックではありません。ステートメントが実行中に中断された場合は、成功するまで再実行することをお勧めします。
 
@@ -70,5 +70,5 @@ Query OK, 0 rows affected (0.01 sec)
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-admin-check-table-index.md">`ADMIN CHECK TABLE/INDEX`</a>](/sql-statements/sql-statement-admin-check-table-index.md)
--   [<a href="/sql-statements/sql-statement-admin-recover.md">`ADMIN RECOVER INDEX`</a>](/sql-statements/sql-statement-admin-recover.md)
+-   [`ADMIN CHECK TABLE/INDEX`](/sql-statements/sql-statement-admin-check-table-index.md)
+-   [`ADMIN RECOVER INDEX`](/sql-statements/sql-statement-admin-recover.md)

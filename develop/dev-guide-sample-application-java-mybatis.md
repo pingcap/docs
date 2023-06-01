@@ -23,17 +23,17 @@ TiDB クラスターの起動方法を紹介します。
 
 **TiDB CloudServerless Tierクラスターを使用する**
 
-詳細な手順については、 [<a href="/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster">Serverless Tierクラスターの作成</a>](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
+詳細な手順については、 [Serverless Tierクラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
 
 **ローカルクラスターを使用する**
 
-詳細な手順については、 [<a href="/quick-start-with-tidb.md#deploy-a-local-test-cluster">ローカルテストクラスターをデプロイ</a>](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[<a href="/production-deployment-using-tiup.md">TiUPを使用した TiDBクラスタのデプロイ</a>](/production-deployment-using-tiup.md)を参照してください。
+詳細な手順については、 [TiUPを使用した TiDBクラスタのデプロイ](/production-deployment-using-tiup.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[<a href="/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster">Serverless Tierクラスターの作成</a>](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
+[Serverless Tierクラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
 
 </CustomContent>
 
@@ -43,9 +43,9 @@ TiDB クラスターの起動方法を紹介します。
 git clone https://github.com/pingcap-inc/tidb-example-java.git
 ```
 
-[<a href="https://mybatis.org/mybatis-3/index.html">マイバティス</a>](https://mybatis.org/mybatis-3/index.html)と比較すると、JDBC 実装はベスト プラクティスではない可能性があります。これは、エラー処理ロジックを手動で記述する必要があり、コードを簡単に再利用できないため、コードが若干冗長になるためです。
+[マイバティス](https://mybatis.org/mybatis-3/index.html)と比較すると、JDBC 実装はベスト プラクティスではない可能性があります。これは、エラー処理ロジックを手動で記述する必要があり、コードを簡単に再利用できないため、コードが若干冗長になるためです。
 
-Mybatis は、人気のあるオープンソースのJavaクラス永続フレームワークです。以下では[<a href="https://mybatis.org/generator/quickstart.html">MyBatis ジェネレーター</a>](https://mybatis.org/generator/quickstart.html) Maven プラグインとして使用して永続化レイヤーコードを生成します。
+Mybatis は、人気のあるオープンソースのJavaクラス永続フレームワークです。以下では[MyBatis ジェネレーター](https://mybatis.org/generator/quickstart.html) Maven プラグインとして使用して永続化レイヤーコードを生成します。
 
 `plain-java-mybatis`ディレクトリに移動します。
 
@@ -87,7 +87,7 @@ cd plain-java-mybatis
 -   `src/main/java/com/pingcap/model/PlayerMapper.java` : `PlayerMapper`のインターフェース。
 -   `src/main/resources/mapper/PlayerMapper.xml` : `Player`の XML マッピング。 Mybatis はこの構成を使用して、 `PlayerMapper`インターフェースの実装クラスを自動的に生成します。
 
-これらのファイルを生成するための戦略は、 [<a href="https://mybatis.org/generator/quickstart.html">マイバティスジェネレーター</a>](https://mybatis.org/generator/quickstart.html)の構成ファイルである`mybatis-generator.xml`に書かれています。次の設定ファイルには、その使用方法を説明するコメントがあります。
+これらのファイルを生成するための戦略は、 [マイバティスジェネレーター](https://mybatis.org/generator/quickstart.html)の構成ファイルである`mybatis-generator.xml`に書かれています。次の設定ファイルには、その使用方法を説明するコメントがあります。
 
 ```xml
 <!DOCTYPE generatorConfiguration PUBLIC
@@ -420,7 +420,7 @@ public interface PlayerMapperEx extends PlayerMapper {
 </mapper>
 ```
 
-`PlayerDAO.java`はデータを管理するために使用されるクラスで、 `DAO` [<a href="https://en.wikipedia.org/wiki/Data_access_object">データアクセスオブジェクト</a>](https://en.wikipedia.org/wiki/Data_access_object)を意味します。このクラスは、データを書き込むための一連のデータ操作メソッドを定義します。 Mybatis はその中で、オブジェクト マッピングや基本オブジェクトの CRUD などの多数の操作をカプセル化し、コードを大幅に簡素化します。
+`PlayerDAO.java`はデータを管理するために使用されるクラスで、 `DAO` [データアクセスオブジェクト](https://en.wikipedia.org/wiki/Data_access_object)を意味します。このクラスは、データを書き込むための一連のデータ操作メソッドを定義します。 Mybatis はその中で、オブジェクト マッピングや基本オブジェクトの CRUD などの多数の操作をカプセル化し、コードを大幅に簡素化します。
 
 ```java
 package com.pingcap.dao;
@@ -739,4 +739,4 @@ java -jar target/plain-java-mybatis-0.0.1-jar-with-dependencies.jar
 
 ## ステップ 4. 期待される出力 {#step-4-expected-output}
 
-[<a href="https://github.com/pingcap-inc/tidb-example-java/blob/main/Expected-Output.md#plain-java-mybatis">Mybatis の期待される出力</a>](https://github.com/pingcap-inc/tidb-example-java/blob/main/Expected-Output.md#plain-java-mybatis)
+[Mybatis の期待される出力](https://github.com/pingcap-inc/tidb-example-java/blob/main/Expected-Output.md#plain-java-mybatis)

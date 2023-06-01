@@ -6,7 +6,7 @@ category: intro
 
 # TiDB Cloudの概要 {#tidb-cloud-introduction}
 
-[<a href="https://www.pingcap.com/tidb-cloud/">TiDB Cloud</a>](https://www.pingcap.com/tidb-cloud/)は、オープンソースのハイブリッド トランザクションおよび分析処理 (HTAP) データベースである[<a href="https://docs.pingcap.com/tidb/stable/overview">TiDB</a>](https://docs.pingcap.com/tidb/stable/overview)クラウドに提供する、フルマネージドの Database-as-a-Service (DBaaS) です。 TiDB Cloudは、データベースの導入と管理を簡単に行う方法を提供し、データベースの複雑さではなく、アプリケーションに集中できるようにします。 TiDB Cloudクラスターを作成して、Google Cloud Platform (GCP) およびアマゾン ウェブ サービス (AWS) 上でミッションクリティカルなアプリケーションを迅速に構築できます。
+[TiDB](https://docs.pingcap.com/tidb/stable/overview)クラウドに提供する、フルマネージドの Database-as-a-Service (DBaaS) です。 TiDB Cloudは、データベースの導入と管理を簡単に行う方法を提供し、データベースの複雑さではなく、アプリケーションに集中できるようにします。 TiDB Cloudクラスターを作成して、Google Cloud Platform (GCP) およびアマゾン ウェブ サービス (AWS) 上でミッションクリティカルなアプリケーションを迅速に構築できます。
 
 ![TiDB Cloud Overview](/media/tidb-cloud/tidb-cloud-overview.png)
 
@@ -30,7 +30,7 @@ TiDB Cloudを使用すると、次の主要な機能を利用できます。
 
 -   **MySQL の互換性**
 
-    TiDB の MySQL 互換性により、生産性が向上し、アプリケーションの市場投入までの時間が短縮されます。コードを書き直すことなく、既存の MySQL インスタンスからデータを簡単に移行できます。 TiDB Cloud [<a href="/tidb-cloud/tidb-cloud-glossary.md#playground">遊び場</a>](/tidb-cloud/tidb-cloud-glossary.md#playground)には、GitHub イベントの事前ロードされたデータセットが含まれているため、SQL を即座に作成して実行できます。
+    TiDB の MySQL 互換性により、生産性が向上し、アプリケーションの市場投入までの時間が短縮されます。コードを書き直すことなく、既存の MySQL インスタンスからデータを簡単に移行できます。 TiDB Cloud [遊び場](/tidb-cloud/tidb-cloud-glossary.md#playground)には、GitHub イベントの事前ロードされたデータセットが含まれているため、SQL を即座に作成して実行できます。
 
 -   **高可用性と信頼性**
 
@@ -38,7 +38,7 @@ TiDB Cloudを使用すると、次の主要な機能を利用できます。
 
 -   **リアルタイム分析**
 
-    組み込みの分析エンジンを使用して、リアルタイムの分析クエリ結果を取得します。 TiDB Cloudは、ミッションクリティカルなアプリケーションを妨げることなく、現在のデータに対して一貫した分析クエリを実行します。データをロードしたりクライアントに接続したりせずに、TiDB Cloud の速度を[<a href="/tidb-cloud/tidb-cloud-glossary.md#playground">遊び場</a>](/tidb-cloud/tidb-cloud-glossary.md#playground)つで気軽に体験してください。
+    組み込みの分析エンジンを使用して、リアルタイムの分析クエリ結果を取得します。 TiDB Cloudは、ミッションクリティカルなアプリケーションを妨げることなく、現在のデータに対して一貫した分析クエリを実行します。データをロードしたりクライアントに接続したりせずに、TiDB Cloud の速度を[遊び場](/tidb-cloud/tidb-cloud-glossary.md#playground)つで気軽に体験してください。
 
 -   **エンタープライズグレードのSecurity**
 
@@ -74,4 +74,4 @@ TiDB Cloudを使用すると、次の主要な機能を利用できます。
 
 -   あなたの VPC
 
-    プライベート エンドポイント接続または VPC ピアリング接続を介して TiDB クラスターに接続できます。詳細は[<a href="/tidb-cloud/set-up-private-endpoint-connections.md">プライベートエンドポイント接続のセットアップ</a>](/tidb-cloud/set-up-private-endpoint-connections.md)または[<a href="/tidb-cloud/set-up-vpc-peering-connections.md">VPC ピア接続のセットアップ</a>](/tidb-cloud/set-up-vpc-peering-connections.md)を参照してください。
+    プライベート エンドポイント接続または VPC ピアリング接続を介して TiDB クラスターに接続できます。詳細は[VPC ピア接続のセットアップ](/tidb-cloud/set-up-vpc-peering-connections.md)を参照してください。

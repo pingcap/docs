@@ -9,7 +9,7 @@ summary: Learn how to build a simple CRUD application with TiDB and PyMySQL.
 
 # TiDB と PyMySQL を使用してシンプルな CRUD アプリを構築する {#build-a-simple-crud-app-with-tidb-and-pymysql}
 
-[<a href="https://pypi.org/project/PyMySQL/">PyMySQL</a>](https://pypi.org/project/PyMySQL/)は、Python 用の人気のあるオープンソース ドライバーです。
+[PyMySQL](https://pypi.org/project/PyMySQL/)は、Python 用の人気のあるオープンソース ドライバーです。
 
 このドキュメントでは、TiDB と PyMySQL を使用して単純な CRUD アプリケーションを構築する方法について説明します。
 
@@ -25,17 +25,17 @@ TiDB クラスターの起動方法を紹介します。
 
 **TiDB CloudServerless Tierクラスターを使用する**
 
-詳細な手順については、 [<a href="/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster">Serverless Tierクラスターの作成</a>](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
+詳細な手順については、 [Serverless Tierクラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
 
 **ローカルクラスターを使用する**
 
-詳細な手順については、 [<a href="/quick-start-with-tidb.md#deploy-a-local-test-cluster">ローカルテストクラスターをデプロイ</a>](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[<a href="/production-deployment-using-tiup.md">TiUPを使用して TiDB クラスターをデプロイ</a>](/production-deployment-using-tiup.md)を参照してください。
+詳細な手順については、 [TiUPを使用して TiDB クラスターをデプロイ](/production-deployment-using-tiup.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[<a href="/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster">Serverless Tierクラスターの作成</a>](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
+[Serverless Tierクラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
 
 </CustomContent>
 
@@ -198,7 +198,7 @@ trade_example()
 
 ドライバーのカプセル化レベルは ORM よりも低いため、プログラム内に多数の SQL ステートメントが含まれます。 ORM とは異なり、ドライバーにはデータ オブジェクトがないため、ドライバーによってクエリされた`Player`辞書として表されます。
 
-PyMySQL の使用方法の詳細については、 [<a href="https://pymysql.readthedocs.io/en/latest/">PyMySQL ドキュメント</a>](https://pymysql.readthedocs.io/en/latest/)を参照してください。
+PyMySQL の使用方法の詳細については、 [PyMySQL ドキュメント](https://pymysql.readthedocs.io/en/latest/)を参照してください。
 
 ## ステップ 3. コードを実行する {#step-3-run-the-code}
 
@@ -232,7 +232,7 @@ mycli --host 127.0.0.1 --port 4000 -u root --no-warn < player_init.sql
 
 ### ステップ 3.2 TiDB Cloudのパラメータを変更する {#step-3-2-modify-parameters-for-tidb-cloud}
 
-TiDB CloudServerless Tierクラスターを使用している場合は、CA ルート パスを指定し、次の例の`<ca_path>`を CA パスに置き換える必要があります。システム上の CA ルート パスを取得するには、 [<a href="https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-tier-clusters#where-is-the-ca-root-path-on-my-system">私のシステム上の CA ルート パスはどこにありますか?</a>](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-tier-clusters#where-is-the-ca-root-path-on-my-system)を参照してください。
+TiDB CloudServerless Tierクラスターを使用している場合は、CA ルート パスを指定し、次の例の`<ca_path>`を CA パスに置き換える必要があります。システム上の CA ルート パスを取得するには、 [私のシステム上の CA ルート パスはどこにありますか?](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-tier-clusters#where-is-the-ca-root-path-on-my-system)を参照してください。
 
 TiDB CloudServerless Tierクラスターを使用している場合は、 `pymysql_example.py`の`get_connection`関数を変更します。
 
@@ -277,7 +277,7 @@ def get_connection(autocommit: bool = False) -> Connection:
 pip3 install -r requirement.txt
 ```
 
-スクリプトを複数回実行する必要がある場合は、各実行前に[<a href="#step-31-initialize-table">テーブルの初期化</a>](#step-31-initialize-table)セクションに従ってテーブルを再度初期化します。
+スクリプトを複数回実行する必要がある場合は、各実行前に[テーブルの初期化](#step-31-initialize-table)セクションに従ってテーブルを再度初期化します。
 
 ```bash
 python3 pymysql_example.py
@@ -285,4 +285,4 @@ python3 pymysql_example.py
 
 ## ステップ 4. 期待される出力 {#step-4-expected-output}
 
-[<a href="https://github.com/pingcap-inc/tidb-example-python/blob/main/Expected-Output.md#PyMySQL">PyMySQL の予想される出力</a>](https://github.com/pingcap-inc/tidb-example-python/blob/main/Expected-Output.md#PyMySQL)
+[PyMySQL の予想される出力](https://github.com/pingcap-inc/tidb-example-python/blob/main/Expected-Output.md#PyMySQL)

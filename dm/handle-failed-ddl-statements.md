@@ -7,7 +7,7 @@ summary: Learn how to handle failed DDL statements when you're using the TiDB Da
 
 このドキュメントでは、TiDB データ移行 (DM) ツールを使用してデータを移行するときに失敗した DDL ステートメントを処理する方法を紹介します。
 
-現在、TiDB はすべての MySQL 構文と完全に互換性があるわけではありません ( [<a href="/mysql-compatibility.md#ddl">TiDB によってサポートされる DDL ステートメント</a>](/mysql-compatibility.md#ddl)を参照)。したがって、DM が MySQL から TiDB にデータを移行していて、TiDB が対応する DDL ステートメントをサポートしていない場合、エラーが発生して移行プロセスが中断される可能性があります。この場合、DM の`binlog`コマンドを使用して移行を再開できます。
+現在、TiDB はすべての MySQL 構文と完全に互換性があるわけではありません ( [TiDB によってサポートされる DDL ステートメント](/mysql-compatibility.md#ddl)を参照)。したがって、DM が MySQL から TiDB にデータを移行していて、TiDB が対応する DDL ステートメントをサポートしていない場合、エラーが発生して移行プロセスが中断される可能性があります。この場合、DM の`binlog`コマンドを使用して移行を再開できます。
 
 ## 制限 {#restrictions}
 
@@ -33,7 +33,7 @@ dmctl を使用して失敗した DDL ステートメントを手動で処理す
 
 ### クエリステータス {#query-status}
 
-`query-status`コマンドは、各 MySQL インスタンスのサブタスクや中継ユニットなどの現在のステータスを照会するために使用されます。詳細は[<a href="/dm/dm-query-status.md">クエリステータス</a>](/dm/dm-query-status.md)を参照してください。
+`query-status`コマンドは、各 MySQL インスタンスのサブタスクや中継ユニットなどの現在のステータスを照会するために使用されます。詳細は[クエリステータス](/dm/dm-query-status.md)を参照してください。
 
 ### binlog {#binlog}
 
@@ -82,7 +82,7 @@ Use "dmctl binlog [command] --help" for more information about a command.
     -   タイプ: 文字列。
     -   binlogの位置を指定します。 binlogイベントの位置が`binlog-pos`一致すると、操作が実行されます。これが指定されていない場合、DM は現在失敗した DDL ステートメントに自動的に`binlog-pos`設定します。
     -   形式: `binlog-filename:binlog-pos` 、たとえば`mysql-bin|000001.000003:3270` 。
-    -   移行がエラーを返した後、 `query-status`によって返された`startLocation`分の`position`からbinlogの位置を取得できます。移行でエラーが返される前に、上流の MySQL インスタンスで[<a href="https://dev.mysql.com/doc/refman/5.7/en/show-binlog-events.html">`SHOW BINLOG EVENTS`</a>](https://dev.mysql.com/doc/refman/5.7/en/show-binlog-events.html)を使用してbinlogの位置を取得できます。
+    -   移行がエラーを返した後、 `query-status`によって返された`startLocation`分の`position`からbinlogの位置を取得できます。移行でエラーが返される前に、上流の MySQL インスタンスで[`SHOW BINLOG EVENTS`](https://dev.mysql.com/doc/refman/5.7/en/show-binlog-events.html)を使用してbinlogの位置を取得できます。
 
 -   `-s, --source` :
     -   タイプ: 文字列。

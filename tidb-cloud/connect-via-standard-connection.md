@@ -13,7 +13,7 @@ summary: Learn how to connect to your TiDB Cloud cluster via standard connection
 
 標準接続経由でServerless Tierクラスターに接続するには、次の手順を実行します。
 
-1.  [<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして、その概要ページに移動します。
+1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして、その概要ページに移動します。
 
 2.  右上隅にある**「接続」**をクリックします。接続ダイアログが表示されます。
 
@@ -25,8 +25,8 @@ summary: Learn how to connect to your TiDB Cloud cluster via standard connection
 
     > **ノート：**
     >
-    > -   Serverless Tierクラスターに接続するときは、ユーザー名にクラスターのプレフィックスを含め、名前を引用符で囲む必要があります。詳細については、 [<a href="/tidb-cloud/select-cluster-tier.md#user-name-prefix">ユーザー名のプレフィックス</a>](/tidb-cloud/select-cluster-tier.md#user-name-prefix)を参照してください。
-    > -   Serverless Tierクラスターは TLS 接続のみをサポートします。詳細については、 [<a href="/tidb-cloud/secure-connections-to-serverless-tier-clusters.md">Serverless Tierクラスターへのセキュリティ接続</a>](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md)を参照してください。
+    > -   Serverless Tierクラスターに接続するときは、ユーザー名にクラスターのプレフィックスを含め、名前を引用符で囲む必要があります。詳細については、 [ユーザー名のプレフィックス](/tidb-cloud/select-cluster-tier.md#user-name-prefix)を参照してください。
+    > -   Serverless Tierクラスターは TLS 接続のみをサポートします。詳細については、 [Serverless Tierクラスターへのセキュリティ接続](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md)を参照してください。
 
 ## Dedicated Tier {#dedicated-tier}
 
@@ -34,7 +34,7 @@ summary: Learn how to connect to your TiDB Cloud cluster via standard connection
 
 1.  ターゲットクラスターの概要ページを開きます。
 
-    1.  [<a href="https://tidbcloud.com/">TiDB Cloudコンソール</a>](https://tidbcloud.com/)にログインし、プロジェクトの[<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページに移動します。
+    1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
         > **ヒント：**
         >
@@ -70,4 +70,4 @@ summary: Learn how to connect to your TiDB Cloud cluster via standard connection
 
 ## 次は何ですか {#what-s-next}
 
-TiDB クラスターに正常に接続したら、 [<a href="/basic-sql-operations.md">TiDB で SQL ステートメントを探索する</a>](/basic-sql-operations.md)を行うことができます。
+TiDB クラスターに正常に接続したら、 [TiDB で SQL ステートメントを探索する](/basic-sql-operations.md)を行うことができます。

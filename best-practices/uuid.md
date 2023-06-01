@@ -25,7 +25,7 @@ summary: Learn best practice and strategy for using UUIDs with TiDB.
 
 <CustomContent platform="tidb">
 
-[<a href="/best-practices/high-concurrency-best-practices.md">ホットスポット</a>](/best-practices/high-concurrency-best-practices.md)を避けるために、TiDB では`swap_flag`設定しないことをお勧めします。
+[ホットスポット](/best-practices/high-concurrency-best-practices.md)を避けるために、TiDB では`swap_flag`設定しないことをお勧めします。
 
 </CustomContent>
 
@@ -35,19 +35,19 @@ summary: Learn best practice and strategy for using UUIDs with TiDB.
 
 </CustomContent>
 
-ホットスポットを回避するために、UUID ベースの主キーに明示的に[<a href="/clustered-indexes.md">`CLUSTERED`オプション</a>](/clustered-indexes.md)を設定することもできます。
+ホットスポットを回避するために、UUID ベースの主キーに明示的に[`CLUSTERED`オプション](/clustered-indexes.md)を設定することもできます。
 
 `swap_flag`の効果を示すために、同じ構造を持つ 2 つのテーブルを示します。違いは、 `uuid_demo_1`に挿入されたデータは`UUID_TO_BIN(?, 0)`を使用し、 `uuid_demo_2`挿入されたデータは`UUID_TO_BIN(?, 1)`を使用することです。
 
 <CustomContent platform="tidb">
 
-以下の[<a href="/dashboard/dashboard-key-visualizer.md">キービジュアライザー</a>](/dashboard/dashboard-key-visualizer.md)のスクリーンショットでは、フィールドの順序がバイナリ形式で交換された`uuid_demo_2`テーブルの 1 つの領域に書き込みが集中していることがわかります。
+以下の[キービジュアライザー](/dashboard/dashboard-key-visualizer.md)のスクリーンショットでは、フィールドの順序がバイナリ形式で交換された`uuid_demo_2`テーブルの 1 つの領域に書き込みが集中していることがわかります。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-以下の[<a href="/tidb-cloud/tune-performance.md#key-visualizer">キービジュアライザー</a>](/tidb-cloud/tune-performance.md#key-visualizer)のスクリーンショットでは、フィールドの順序がバイナリ形式で交換された`uuid_demo_2`テーブルの 1 つの領域に書き込みが集中していることがわかります。
+以下の[キービジュアライザー](/tidb-cloud/tune-performance.md#key-visualizer)のスクリーンショットでは、フィールドの順序がバイナリ形式で交換された`uuid_demo_2`テーブルの 1 つの領域に書き込みが集中していることがわかります。
 
 </CustomContent>
 

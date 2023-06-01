@@ -9,8 +9,8 @@ summary: Learn the overview of data integration scenarios.
 
 ## Confluent Cloud および Snowflake との統合 {#integrate-with-confluent-cloud-and-snowflake}
 
-TiCDC を使用して、増分データを TiDB から Confluent Cloud にレプリケートし、そのデータを Confluent Cloud 経由で Snowflake、ksqlDB、および SQL Server にレプリケートできます。詳細は[<a href="/ticdc/integrate-confluent-using-ticdc.md">Confluent Cloud および Snowflake との統合</a>](/ticdc/integrate-confluent-using-ticdc.md)を参照してください。
+TiCDC を使用して、増分データを TiDB から Confluent Cloud にレプリケートし、そのデータを Confluent Cloud 経由で Snowflake、ksqlDB、および SQL Server にレプリケートできます。詳細は[Confluent Cloud および Snowflake との統合](/ticdc/integrate-confluent-using-ticdc.md)を参照してください。
 
 ## Apache Kafka および Apache Flink との統合 {#integrate-with-apache-kafka-and-apache-flink}
 
-TiCDC を使用して、増分データを TiDB から Apache Kafka にレプリケートし、Apache Flink を使用してデータを消費できます。詳細は[<a href="/replicate-data-to-kafka.md">Apache Kafka および Apache Flink との統合</a>](/replicate-data-to-kafka.md)を参照してください。
+TiCDC を使用して、増分データを TiDB から Apache Kafka にレプリケートし、Apache Flink を使用してデータを消費できます。詳細は[Apache Kafka および Apache Flink との統合](/replicate-data-to-kafka.md)を参照してください。

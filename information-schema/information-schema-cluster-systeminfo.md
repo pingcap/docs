@@ -30,8 +30,8 @@ DESC cluster_systeminfo;
 
 フィールドの説明:
 
--   `TYPE` : [<a href="/information-schema/information-schema-cluster-info.md">`information_schema.cluster_info`</a>](/information-schema/information-schema-cluster-info.md)テーブルの`TYPE`フィールドに対応します。オプションの値は`tidb` 、 `pd` 、および`tikv`です。
--   `INSTANCE` : [<a href="/information-schema/information-schema-cluster-info.md">`information_schema.cluster_info`</a>](/information-schema/information-schema-cluster-info.md)クラスタ情報テーブルの`INSTANCE`フィールドに対応します。
+-   `TYPE` : [`information_schema.cluster_info`](/information-schema/information-schema-cluster-info.md)テーブルの`TYPE`フィールドに対応します。オプションの値は`tidb` 、 `pd` 、および`tikv`です。
+-   `INSTANCE` : [`information_schema.cluster_info`](/information-schema/information-schema-cluster-info.md)クラスタ情報テーブルの`INSTANCE`フィールドに対応します。
 -   `SYSTEM_TYPE` : システムのタイプ。現在、 `system`システム タイプをクエリできます。
 -   `SYSTEM_NAME` : システム名。現在、 `sysctl`システム名を照会できます。
 -   `NAME` : `sysctl`に対応する構成名。

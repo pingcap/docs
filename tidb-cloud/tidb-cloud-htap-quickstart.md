@@ -5,13 +5,13 @@ summary: Learn how to get started with HTAP in TiDB Cloud.
 
 # TiDB CloudHTAP クイック スタート {#tidb-cloud-htap-quick-start}
 
-[<a href="https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing">HTAP</a>](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)ハイブリッド トランザクション処理と分析処理を意味します。 TiDB Cloudの HTAP クラスターは、トランザクション処理用に設計された行ベースのstorageエンジン[<a href="https://tikv.org">TiKV</a>](https://tikv.org)と、分析処理用に設計されたカラム型storage[<a href="https://docs.pingcap.com/tidb/stable/tiflash-overview">TiFlash</a>](https://docs.pingcap.com/tidb/stable/tiflash-overview)で構成されます。アプリケーション データはまず TiKV に保存され、次にRaftコンセンサス アルゴリズムを介してTiFlashにレプリケートされます。したがって、これは行storageから列storageへのリアルタイム レプリケーションです。
+[TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview)で構成されます。アプリケーション データはまず TiKV に保存され、次にRaftコンセンサス アルゴリズムを介してTiFlashにレプリケートされます。したがって、これは行storageから列storageへのリアルタイム レプリケーションです。
 
 このチュートリアルでは、 TiDB Cloudのハイブリッド トランザクションおよび分析処理 (HTAP) 機能を体験する簡単な方法を説明します。コンテンツには、テーブルをTiFlashにレプリケートする方法、 TiFlashでクエリを実行する方法、およびパフォーマンスの向上を体験する方法が含まれます。
 
 ## あなたが始める前に {#before-you-begin}
 
-HTAP 機能を体験する前に、 [<a href="/tidb-cloud/tidb-cloud-quickstart.md">TiDB Cloudクイック スタート</a>](/tidb-cloud/tidb-cloud-quickstart.md)に従ってTiFlashノードを含むクラスターを作成し、TiDB クラスターに接続し、Capital Bikeshare サンプル データをクラスターにインポートします。
+HTAP 機能を体験する前に、 [TiDB Cloudクイック スタート](/tidb-cloud/tidb-cloud-quickstart.md)に従ってTiFlashノードを含むクラスターを作成し、TiDB クラスターに接続し、Capital Bikeshare サンプル データをクラスターにインポートします。
 
 ## ステップ {#steps}
 
@@ -125,8 +125,8 @@ ORDER BY count ASC;
 
 ## もっと詳しく知る {#learn-more}
 
--   [<a href="/tiflash/tiflash-overview.md">TiFlashの概要</a>](/tiflash/tiflash-overview.md)
--   [<a href="/tiflash/create-tiflash-replicas.md">TiFlashレプリカの作成</a>](/tiflash/create-tiflash-replicas.md)
--   [<a href="/tiflash/use-tidb-to-read-tiflash.md">TiFlashからデータを読み取る</a>](/tiflash/use-tidb-to-read-tiflash.md)
--   [<a href="/tiflash/use-tiflash-mpp-mode.md">MPP モードを使用する</a>](/tiflash/use-tiflash-mpp-mode.md)
--   [<a href="/tiflash/tiflash-supported-pushdown-calculations.md">サポートされているプッシュダウン計算</a>](/tiflash/tiflash-supported-pushdown-calculations.md)
+-   [TiFlashの概要](/tiflash/tiflash-overview.md)
+-   [TiFlashレプリカの作成](/tiflash/create-tiflash-replicas.md)
+-   [TiFlashからデータを読み取る](/tiflash/use-tidb-to-read-tiflash.md)
+-   [MPP モードを使用する](/tiflash/use-tiflash-mpp-mode.md)
+-   [サポートされているプッシュダウン計算](/tiflash/tiflash-supported-pushdown-calculations.md)

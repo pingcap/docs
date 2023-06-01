@@ -13,7 +13,7 @@ v5.4.0 以降、無効な型変換や一意のキーの競合などのエラー�
 
 `lightning.max-error`構成を使用すると、データ型に関連するエラーの許容度を高めることができます。この構成が*N*に設定されている場合、 TiDB Lightning はデータ ソースが存在する前に最大*N 個の*エラーを許可し、スキップします。デフォルト値`0`エラーが許可されないことを意味します。
 
-これらのエラーはデータベースに記録されます。インポートが完了したら、データベース内のエラーを表示し、手動で処理できます。詳細については、 [<a href="#error-report">エラーレポート</a>](#error-report)を参照してください。
+これらのエラーはデータベースに記録されます。インポートが完了したら、データベース内のエラーを表示し、手動で処理できます。詳細については、 [エラーレポート](#error-report)を参照してください。
 
 {{< copyable "" >}}
 
@@ -110,7 +110,7 @@ CREATE TABLE conflict_error_v1 (
 **syntax_error_v1** is intended to record syntax error from files. It is not implemented yet.
 -->
 
-**type_error_v1 は、** `max-error`の構成によって管理される[<a href="#type-error">タイプエラー</a>](#type-error)すべてを記録します。エラーごとに 1 行があります。
+**type_error_v1 は、** `max-error`の構成によって管理される[タイプエラー](#type-error)すべてを記録します。エラーごとに 1 行があります。
 
 **conflict_error_v1 は、**ローカル バックエンド内のすべての一意/主キーの競合を記録します。競合のペアごとに 2 行があります。
 

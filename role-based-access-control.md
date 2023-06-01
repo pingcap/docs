@@ -28,7 +28,7 @@ TiDB のロールベースのアクセス制御 (RBAC) システムの実装は�
 CREATE ROLE 'app_developer', 'app_read', 'app_write';
 ```
 
-ロールの命名形式とルールについては、 [<a href="/user-account-management.md">TiDB ユーザーアカウント管理</a>](/user-account-management.md)を参照してください。
+ロールの命名形式とルールについては、 [TiDB ユーザーアカウント管理](/user-account-management.md)を参照してください。
 
 ロールは`mysql.user`テーブルに保存され、ロール名のホスト名部分 (省略した場合) はデフォルトの`'%'`になります。作成しようとしているロールの名前は一意である必要があります。それ以外の場合は、エラーが報告されます。
 
@@ -36,7 +36,7 @@ CREATE ROLE 'app_developer', 'app_read', 'app_write';
 
 ### ロールに権限を付与する {#grant-a-privilege-to-a-role}
 
-ロールに権限を付与する操作は、ユーザーに権限を付与する場合と同様です。詳細は[<a href="/privilege-management.md">TiDB権限管理</a>](/privilege-management.md)を参照してください。
+ロールに権限を付与する操作は、ユーザーに権限を付与する場合と同様です。詳細は[TiDB権限管理](/privilege-management.md)を参照してください。
 
 たとえば、次のステートメントを使用して、 `app_read`ロールに`app_db`データベースを読み取る権限を付与できます。
 
@@ -352,7 +352,7 @@ REVOKE 'app_read', 'app_write' FROM 'rw_user1'@'localhost';
 REVOKE INSERT, UPDATE, DELETE ON app_db.* FROM 'app_write';
 ```
 
-詳細は[<a href="/privilege-management.md">TiDB権限管理</a>](/privilege-management.md)を参照してください。
+詳細は[TiDB権限管理](/privilege-management.md)を参照してください。
 
 ### 役割を削除する {#delete-a-role}
 
@@ -370,7 +370,7 @@ DROP ROLE 'app_read', 'app_write';
 
 ### 権限テーブル {#authorization-table}
 
-4 つのシステム[<a href="/privilege-management.md#privilege-table">特権テーブル</a>](/privilege-management.md#privilege-table)に加えて、RBAC システムには 2 つの新しいシステム権限テーブルが導入されています。
+4 つのシステム[特権テーブル](/privilege-management.md#privilege-table)に加えて、RBAC システムには 2 つの新しいシステム権限テーブルが導入されています。
 
 -   `mysql.role_edges` : ロールとユーザーの権限関係を記録します。
 -   `mysql.default_roles` : 各ユーザーのデフォルトのロールを記録します。
@@ -424,5 +424,5 @@ SELECT * FROM mysql.default_roles;
 
 RBAC、ユーザー管理、権限管理は密接に関連しているため、次のリソースで操作の詳細を参照できます。
 
--   [<a href="/privilege-management.md">TiDB権限管理</a>](/privilege-management.md)
--   [<a href="/user-account-management.md">TiDB ユーザーアカウント管理</a>](/user-account-management.md)
+-   [TiDB権限管理](/privilege-management.md)
+-   [TiDB ユーザーアカウント管理](/user-account-management.md)

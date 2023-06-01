@@ -7,7 +7,7 @@ summary: Learn the CTE feature of TiDB, which help you write SQL statements more
 
 一部のトランザクション シナリオでは、アプリケーションの複雑さにより、最大 2,000 行の単一 SQL ステートメントを作成する必要がある場合があります。このステートメントにはおそらく、多数の集計と複数レベルのサブクエリのネストが含まれています。このような長い SQL ステートメントを維持することは、開発者にとって悪夢となる可能性があります。
 
-このような長い SQL ステートメントを回避するには、 [<a href="/develop/dev-guide-use-views.md">ビュー</a>](/develop/dev-guide-use-views.md)使用してクエリを簡素化するか、 [<a href="/develop/dev-guide-use-temporary-tables.md">一時テーブル</a>](/develop/dev-guide-use-temporary-tables.md)を使用して中間クエリ結果をキャッシュします。
+このような長い SQL ステートメントを回避するには、 [一時テーブル](/develop/dev-guide-use-temporary-tables.md)を使用して中間クエリ結果をキャッシュします。
 
 このドキュメントでは、クエリ結果を再利用するためのより便利な方法である TiDB の Common Table Expression (CTE) 構文を紹介します。
 
@@ -35,7 +35,7 @@ SELECT ... FROM <query_name>;
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
 
-[<a href="/develop/dev-guide-use-temporary-tables.md">一時テーブル</a>](/develop/dev-guide-use-temporary-tables.md)のステートメントを次のように変更します。
+[一時テーブル](/develop/dev-guide-use-temporary-tables.md)のステートメントを次のように変更します。
 
 ```sql
 WITH top_50_eldest_authors_cte AS (
@@ -166,7 +166,7 @@ FROM
 
 > **ヒント：**
 >
-> デフォルトの CTE クエリの効率が悪い場合は、 [<a href="/optimizer-hints.md#merge">`MERGE()`</a>](/optimizer-hints.md#merge)ヒントを使用して CTE サブクエリを外側のクエリに拡張すると、効率が向上します。
+> デフォルトの CTE クエリの効率が悪い場合は、 [`MERGE()`](/optimizer-hints.md#merge)ヒントを使用して CTE サブクエリを外側のクエリに拡張すると、効率が向上します。
 
 ### 再帰的 CTE {#recursive-cte}
 
@@ -179,7 +179,7 @@ WITH RECURSIVE <query_name> AS (
 SELECT ... FROM <query_name>;
 ```
 
-典型的な例は、再帰 CTE を使用して[<a href="https://en.wikipedia.org/wiki/Fibonacci_number">フィボナッチ数</a>](https://en.wikipedia.org/wiki/Fibonacci_number)のセットを生成することです。
+典型的な例は、再帰 CTE を使用して[フィボナッチ数](https://en.wikipedia.org/wiki/Fibonacci_number)のセットを生成することです。
 
 ```sql
 WITH RECURSIVE fibonacci (n, fib_n, next_fib_n) AS
@@ -213,4 +213,4 @@ SELECT * FROM fibonacci;
 
 ## 続きを読む {#read-more}
 
--   [<a href="/sql-statements/sql-statement-with.md">と</a>](/sql-statements/sql-statement-with.md)
+-   [と](/sql-statements/sql-statement-with.md)

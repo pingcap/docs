@@ -5,7 +5,7 @@ summary: Learn the `CHARACTER_SETS` INFORMATION_SCHEMA table.
 
 # CHARACTER_SETS {#character-sets}
 
-`CHARACTER_SETS`表は[<a href="/character-set-and-collation.md">文字セット</a>](/character-set-and-collation.md)に関する情報を提供します。現在、TiDB は一部の文字セットのみをサポートしています。
+`CHARACTER_SETS`表は[文字セット](/character-set-and-collation.md)に関する情報を提供します。現在、TiDB は一部の文字セットのみをサポートしています。
 
 ```sql
 USE INFORMATION_SCHEMA;

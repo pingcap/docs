@@ -11,7 +11,7 @@ summary: Learn how to use the cluster resource to create and modify a TiDB Cloud
 
 ## 前提条件 {#prerequisites}
 
--   [<a href="/tidb-cloud/terraform-get-tidbcloud-provider.md">TiDB Cloud Terraform プロバイダーを入手する</a>](/tidb-cloud/terraform-get-tidbcloud-provider.md) 。
+-   [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) 。
 
 ## <code>tidbcloud_projects</code>データ ソースを使用してプロジェクト ID を取得する {#get-project-ids-using-the-code-tidbcloud-projects-code-data-source}
 
@@ -19,7 +19,7 @@ summary: Learn how to use the cluster resource to create and modify a TiDB Cloud
 
 利用可能なすべてのプロジェクトの情報を表示するには、次のように`tidbcloud_projects`データ ソースを使用します。
 
-1.  [<a href="/tidb-cloud/terraform-get-tidbcloud-provider.md">TiDB Cloud Terraform プロバイダーを入手する</a>](/tidb-cloud/terraform-get-tidbcloud-provider.md)のときに作成される`main.tf`ファイルに、次のように`data`と`output`ブロックを追加します。
+1.  [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md)のときに作成される`main.tf`ファイルに、次のように`data`と`output`ブロックを追加します。
 
     ```
     terraform {
@@ -55,9 +55,9 @@ summary: Learn how to use the cluster resource to create and modify a TiDB Cloud
 
     -   `output`ブロックを使用して、出力に表示されるデータ ソース情報を定義し、他の Terraform 構成で使用する情報を公開します。
 
-        `output`ブロックは、プログラミング言語の戻り値と同様に機能します。詳細については、 [<a href="https://www.terraform.io/language/values/outputs">Terraform ドキュメント</a>](https://www.terraform.io/language/values/outputs)参照してください。
+        `output`ブロックは、プログラミング言語の戻り値と同様に機能します。詳細については、 [Terraform ドキュメント](https://www.terraform.io/language/values/outputs)参照してください。
 
-    リソースとデータ ソースで使用可能なすべての構成を取得するには、この[<a href="https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs">設定ドキュメント</a>](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs)参照してください。
+    リソースとデータ ソースで使用可能なすべての構成を取得するには、この[設定ドキュメント](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs)参照してください。
 
 2.  `terraform apply`コマンドを実行して構成を適用します。続行するには、確認プロンプトで`yes`入力する必要があります。
 
@@ -282,7 +282,7 @@ summary: Learn how to use the cluster resource to create and modify a TiDB Cloud
 
 > **ノート：**
 >
-> 始める前に、 TiDB Cloudコンソールでプロジェクト CIDR を設定していることを確認してください。詳細については、 [<a href="/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr">プロジェクトCIDRを設定する</a>](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr)を参照してください。
+> 始める前に、 TiDB Cloudコンソールでプロジェクト CIDR を設定していることを確認してください。詳細については、 [プロジェクトCIDRを設定する](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr)を参照してください。
 
 `tidbcloud_cluster`リソースを使用してクラスターを作成できます。
 
@@ -496,7 +496,7 @@ Dedicated Tierクラスターの場合、Terraform を使用してクラスタ�
 
 ### TiFlashコンポーネントを追加する {#add-a-tiflash-component}
 
-1.  [<a href="#create-a-cluster-using-the-cluster-resource">クラスターを作成する</a>](#create-a-cluster-using-the-cluster-resource)実行するときに使用される`cluster.tf`ファイルで、 `tiflash`構成を`components`フィールドに追加します。
+1.  [クラスターを作成する](#create-a-cluster-using-the-cluster-resource)実行するときに使用される`cluster.tf`ファイルで、 `tiflash`構成を`components`フィールドに追加します。
 
     例えば：
 
@@ -619,9 +619,9 @@ Dedicated Tierクラスターの場合、Terraform を使用してクラスタ�
 
 TiDB クラスターのステータスが`AVAILABLE`の場合、TiDB クラスターをスケーリングできます。
 
-1.  [<a href="#create-a-cluster-using-the-cluster-resource">クラスターを作成する</a>](#create-a-cluster-using-the-cluster-resource)のときに使用する`cluster.tf`ファイルで、 `components`構成を編集します。
+1.  [クラスターを作成する](#create-a-cluster-using-the-cluster-resource)のときに使用する`cluster.tf`ファイルで、 `components`構成を編集します。
 
-    たとえば、TiDB にノードを 1 つ追加し、TiKV にノードを 3 つ追加するには (ステップが 3 であるため、TiKV ノードの数は 3 の倍数である必要があります[<a href="#get-cluster-specification-information-using-the-tidbcloud_cluster_specs-data-source">この情報はクラスター仕様から取得します。</a>](#get-cluster-specification-information-using-the-tidbcloud_cluster_specs-data-source)にすることができます)、 TiFlashにノードをもう 1 つ追加するには、編集できます。構成は次のとおりです。
+    たとえば、TiDB にノードを 1 つ追加し、TiKV にノードを 3 つ追加するには (ステップが 3 であるため、TiKV ノードの数は 3 の倍数である必要があります[この情報はクラスター仕様から取得します。](#get-cluster-specification-information-using-the-tidbcloud_cluster_specs-data-source)にすることができます)、 TiFlashにノードをもう 1 つ追加するには、編集できます。構成は次のとおりです。
 
     ```
         components = {
@@ -702,7 +702,7 @@ TiDB クラスターのステータスが`AVAILABLE`の場合、TiDB クラス�
 -   クラスターを一時停止するには`paused = true`を設定します。
 -   クラスターを再開するには`paused = false`を設定します。
 
-1.  [<a href="#create-a-cluster-using-the-cluster-resource">クラスターを作成する</a>](#create-a-cluster-using-the-cluster-resource)のときに使用される`cluster.tf`ファイルで、 `config`構成に`pause = true`を追加します。
+1.  [クラスターを作成する](#create-a-cluster-using-the-cluster-resource)のときに使用される`cluster.tf`ファイルで、 `config`構成に`pause = true`を追加します。
 
     ```
     config = {
@@ -844,13 +844,13 @@ TiDB クラスターのステータスが`AVAILABLE`の場合、TiDB クラス�
 
 6.  しばらく待ってから、 `terraform refersh`コマンドを使用して状態を更新します。最終的にステータスは`AVAILABLE`になります。
 
-これで、Terraform を使用してDedicated Tierクラスターを作成および管理しました。次に、 [<a href="/tidb-cloud/terraform-use-backup-resource.md">バックアップリソース</a>](/tidb-cloud/terraform-use-backup-resource.md)によってクラスターのバックアップを作成してみてください。
+これで、Terraform を使用してDedicated Tierクラスターを作成および管理しました。次に、 [バックアップリソース](/tidb-cloud/terraform-use-backup-resource.md)によってクラスターのバックアップを作成してみてください。
 
 ## クラスターをインポートする {#import-a-cluster}
 
 Terraform によって管理されていない TiDB クラスターの場合は、インポートするだけで Terraform を使用して管理できます。
 
-たとえば、Terraform によって作成されていないクラスターをインポートしたり、 [<a href="/tidb-cloud/terraform-use-restore-resource.md#create-a-restore-task-with-the-restore-resource">復元リソースを使用して作成された</a>](/tidb-cloud/terraform-use-restore-resource.md#create-a-restore-task-with-the-restore-resource)のクラスターをインポートしたりできます。
+たとえば、Terraform によって作成されていないクラスターをインポートしたり、 [復元リソースを使用して作成された](/tidb-cloud/terraform-use-restore-resource.md#create-a-restore-task-with-the-restore-resource)のクラスターをインポートしたりできます。
 
 1.  次のように`import_cluster.tf`ファイルを作成します。
 

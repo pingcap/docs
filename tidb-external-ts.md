@@ -5,7 +5,7 @@ summary: Learn how to read historical data using the `tidb_external_ts` variable
 
 # <code>tidb_external_ts</code>変数を使用した履歴データの読み取り {#read-historical-data-using-the-code-tidb-external-ts-code-variable}
 
-履歴データの読み取りをサポートするために、TiDB v6.4.0 ではシステム変数[<a href="/system-variables.md#tidb_external_ts-new-in-v640">`tidb_external_ts`</a>](/system-variables.md#tidb_external_ts-new-in-v640)が導入されています。このドキュメントでは、このシステム変数を使用して履歴データを読み取る方法について、詳細な使用例を含めて説明します。
+履歴データの読み取りをサポートするために、TiDB v6.4.0 ではシステム変数[`tidb_external_ts`](/system-variables.md#tidb_external_ts-new-in-v640)が導入されています。このドキュメントでは、このシステム変数を使用して履歴データを読み取る方法について、詳細な使用例を含めて説明します。
 
 ## シナリオ {#scenarios}
 
@@ -13,9 +13,9 @@ summary: Learn how to read historical data using the `tidb_external_ts` variable
 
 ## 機能の説明 {#feature-description}
 
-システム変数[<a href="/system-variables.md#tidb_external_ts-new-in-v640">`tidb_external_ts`</a>](/system-variables.md#tidb_external_ts-new-in-v640)は、 `tidb_enable_external_ts_read`有効な場合に読み取られる履歴データのタイムスタンプを指定します。
+システム変数[`tidb_external_ts`](/system-variables.md#tidb_external_ts-new-in-v640)は、 `tidb_enable_external_ts_read`有効な場合に読み取られる履歴データのタイムスタンプを指定します。
 
-システム変数[<a href="/system-variables.md#tidb_enable_external_ts_read-new-in-v640">`tidb_enable_external_ts_read`</a>](/system-variables.md#tidb_enable_external_ts_read-new-in-v640)は、履歴データを現在のセッションで読み取るかグローバルに読み取るかを制御します。デフォルト値は`OFF`です。これは、履歴データの読み取り機能が無効であり、値`tidb_external_ts`は無視されることを意味します。 `tidb_enable_external_ts_read`がグローバルに`ON`に設定されている場合、すべてのクエリは`tidb_external_ts`で指定された時間より前の履歴データを読み取ります。特定のセッションに対してのみ`tidb_enable_external_ts_read` `ON`に設定されている場合、そのセッション内のクエリのみが履歴データを読み取ります。
+システム変数[`tidb_enable_external_ts_read`](/system-variables.md#tidb_enable_external_ts_read-new-in-v640)は、履歴データを現在のセッションで読み取るかグローバルに読み取るかを制御します。デフォルト値は`OFF`です。これは、履歴データの読み取り機能が無効であり、値`tidb_external_ts`は無視されることを意味します。 `tidb_enable_external_ts_read`がグローバルに`ON`に設定されている場合、すべてのクエリは`tidb_external_ts`で指定された時間より前の履歴データを読み取ります。特定のセッションに対してのみ`tidb_enable_external_ts_read` `ON`に設定されている場合、そのセッション内のクエリのみが履歴データを読み取ります。
 
 `tidb_enable_external_ts_read`を有効にすると、TiDB は読み取り専用になります。すべての書き込みクエリは`ERROR 1836 (HY000): Running in read-only mode`のようなエラーで失敗します。
 

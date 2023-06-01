@@ -9,7 +9,7 @@ summary: Learn the usage of SHOW CREATE RESOURCE GROUP in TiDB.
 
 > **ノート：**
 >
-> この機能は[<a href="/tidb-cloud/select-cluster-tier.md#serverless-tier-beta">Serverless Tierクラスター</a>](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)では使用できません。
+> この機能は[Serverless Tierクラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)では使用できません。
 
 </CustomContent>
 
@@ -53,7 +53,7 @@ SHOW CREATE RESOURCE GROUP rg1;
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/tidb-resource-control.md">TiDB リソース制御</a>](/tidb-resource-control.md)
--   [<a href="/sql-statements/sql-statement-alter-resource-group.md">リソースグループの作成</a>](/sql-statements/sql-statement-alter-resource-group.md)
--   [<a href="/sql-statements/sql-statement-alter-resource-group.md">リソースグループの変更</a>](/sql-statements/sql-statement-alter-resource-group.md)
--   [<a href="/sql-statements/sql-statement-drop-resource-group.md">リソースグループを削除</a>](/sql-statements/sql-statement-drop-resource-group.md)
+-   [TiDB リソース制御](/tidb-resource-control.md)
+-   [リソースグループの作成](/sql-statements/sql-statement-alter-resource-group.md)
+-   [リソースグループの変更](/sql-statements/sql-statement-alter-resource-group.md)
+-   [リソースグループを削除](/sql-statements/sql-statement-drop-resource-group.md)

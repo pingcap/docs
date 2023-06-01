@@ -130,18 +130,18 @@ PlacementPolicyOption ::=
 | オプション                                                                            | 説明                                                                                                    | 例                                   |
 | -------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------- |
 | `AUTO_INCREMENT`                                                                 | インクリメントフィールドの初期値                                                                                      | `AUTO_INCREMENT` = 5                |
-| [<a href="/shard-row-id-bits.md">`SHARD_ROW_ID_BITS`</a>](/shard-row-id-bits.md) | 暗黙的な`_tidb_rowid`シャードのビット数を設定するには                                                                     | `SHARD_ROW_ID_BITS` = 4             |
+| [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md) | 暗黙的な`_tidb_rowid`シャードのビット数を設定するには                                                                     | `SHARD_ROW_ID_BITS` = 4             |
 | `PRE_SPLIT_REGIONS`                                                              | テーブルの作成時に`2^(PRE_SPLIT_REGIONS)`リージョンを事前に分割するには                                                       | `PRE_SPLIT_REGIONS` = 4             |
 | `AUTO_ID_CACHE`                                                                  | TiDB インスタンスで自動 ID キャッシュ サイズを設定するには。デフォルトでは、TiDB は自動 ID の割り当て速度に応じてこのサイズを自動的に変更します。                    | `AUTO_ID_CACHE` = 200               |
 | `AUTO_RANDOM_BASE`                                                               | auto_random の初期増分部分値を設定します。このオプションは、内部インターフェイスの一部として考えることができます。ユーザーはこのパラメータを無視できます                    | `AUTO_RANDOM_BASE` = 0              |
-| `CHARACTER SET`                                                                  | テーブルに[<a href="/character-set-and-collation.md">キャラクターセット</a>](/character-set-and-collation.md)指定するには | `CHARACTER SET` = &#39;utf8mb4&#39; |
+| `CHARACTER SET`                                                                  | テーブルに[キャラクターセット](/character-set-and-collation.md)指定するには | `CHARACTER SET` = &#39;utf8mb4&#39; |
 | `COMMENT`                                                                        | コメント情報は                                                                                               | `COMMENT` = &#39;コメント情報&#39;        |
 
 <CustomContent platform="tidb">
 
 > **ノート：**
 >
-> `split-table`構成オプションはデフォルトで有効になっています。これを有効にすると、新しく作成されたテーブルごとに個別のリージョンが作成されます。詳細は[<a href="/tidb-configuration-file.md">TiDB 設定ファイル</a>](/tidb-configuration-file.md)を参照してください。
+> `split-table`構成オプションはデフォルトで有効になっています。これを有効にすると、新しく作成されたテーブルごとに個別のリージョンが作成されます。詳細は[TiDB 設定ファイル](/tidb-configuration-file.md)を参照してください。
 
 </CustomContent>
 
@@ -242,7 +242,7 @@ mysql> DESC t1;
 
 <CustomContent platform="tidb">
 
--   互換性を確保するために、 `index_col_name`属性は、デフォルトで最大長が 3072 バイトに制限された長さオプションをサポートします。長さ制限は、 `max-index-length`構成オプションを通じて変更できます。詳細は[<a href="/tidb-configuration-file.md#max-index-length">TiDB 設定ファイル</a>](/tidb-configuration-file.md#max-index-length)を参照してください。
+-   互換性を確保するために、 `index_col_name`属性は、デフォルトで最大長が 3072 バイトに制限された長さオプションをサポートします。長さ制限は、 `max-index-length`構成オプションを通じて変更できます。詳細は[TiDB 設定ファイル](/tidb-configuration-file.md#max-index-length)を参照してください。
 
 </CustomContent>
 
@@ -254,13 +254,13 @@ mysql> DESC t1;
 
 -   `index_col_name`の`[ASC | DESC]`現在解析されていますが、無視されます (MySQL 5.7 と互換性のある動作)。
 -   `COMMENT`属性は`WITH PARSER`オプションをサポートしません。
--   TiDB は、単一テーブル内でデフォルトで 1017 列、最大 4096 列をサポートします。 InnoDB の対応する数制限は 1017 列で、MySQL のハード制限は 4096 列です。詳細は[<a href="/tidb-limitations.md">TiDB の制限事項</a>](/tidb-limitations.md)を参照してください。
--   パーティション化されたテーブルの場合、範囲、ハッシュ、および範囲列 (単一列) のみがサポートされます。詳細は[<a href="/partitioned-table.md">パーティションテーブル</a>](/partitioned-table.md)を参照してください。
--   `CHECK`制約は解析されますが無視されます (MySQL 5.7 と互換性のある動作)。詳細は[<a href="/constraints.md">制約</a>](/constraints.md)を参照してください。
+-   TiDB は、単一テーブル内でデフォルトで 1017 列、最大 4096 列をサポートします。 InnoDB の対応する数制限は 1017 列で、MySQL のハード制限は 4096 列です。詳細は[TiDB の制限事項](/tidb-limitations.md)を参照してください。
+-   パーティション化されたテーブルの場合、範囲、ハッシュ、および範囲列 (単一列) のみがサポートされます。詳細は[パーティションテーブル](/partitioned-table.md)を参照してください。
+-   `CHECK`制約は解析されますが無視されます (MySQL 5.7 と互換性のある動作)。詳細は[制約](/constraints.md)を参照してください。
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/data-type-overview.md">データ型</a>](/data-type-overview.md)
--   [<a href="/sql-statements/sql-statement-drop-table.md">ドロップテーブル</a>](/sql-statements/sql-statement-drop-table.md)
--   [<a href="/sql-statements/sql-statement-create-table-like.md">次のようなテーブルを作成します</a>](/sql-statements/sql-statement-create-table-like.md)
--   [<a href="/sql-statements/sql-statement-show-create-table.md">テーブルの作成を表示</a>](/sql-statements/sql-statement-show-create-table.md)
+-   [データ型](/data-type-overview.md)
+-   [ドロップテーブル](/sql-statements/sql-statement-drop-table.md)
+-   [次のようなテーブルを作成します](/sql-statements/sql-statement-create-table-like.md)
+-   [テーブルの作成を表示](/sql-statements/sql-statement-show-create-table.md)

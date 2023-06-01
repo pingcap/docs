@@ -28,6 +28,6 @@ TiDB クラスターには複数のレプリカがあるため、単一のデー
 
 TiDB は、DR シナリオでのバックアップおよび復元機能の使用方法を理解するのに役立つ詳細なドキュメントも提供します。その中で、
 
--   [<a href="/br/br-use-overview.md">TiDB バックアップと復元の使用法の概要</a>](/br/br-use-overview.md)は、バックアップ戦略とバックアップ データの構成を含む、 BR機能の概要です。
--   [<a href="/faq/backup-and-restore-faq.md">バックアップと復元に関するよくある質問</a>](/faq/backup-and-restore-faq.md) 、TiDB バックアップ &amp; リストア (BR) のよくある質問 (FAQ) と解決策がリストされています。
--   [<a href="/br/backup-and-restore-design.md">TiDB バックアップおよび復元アーキテクチャの概要</a>](/br/backup-and-restore-design.md) 、バックアップおよび復元プロセス、バックアップ ファイルの設計など、 BR機能の設計アーキテクチャを説明します。
+-   [TiDB バックアップと復元の使用法の概要](/br/br-use-overview.md)は、バックアップ戦略とバックアップ データの構成を含む、 BR機能の概要です。
+-   [バックアップと復元に関するよくある質問](/faq/backup-and-restore-faq.md) 、TiDB バックアップ &amp; リストア (BR) のよくある質問 (FAQ) と解決策がリストされています。
+-   [TiDB バックアップおよび復元アーキテクチャの概要](/br/backup-and-restore-design.md) 、バックアップおよび復元プロセス、バックアップ ファイルの設計など、 BR機能の設計アーキテクチャを説明します。

@@ -31,7 +31,7 @@ fetch.message.max.bytes=1073741824
 
 原因:Pumpが開始されると、状態`online`にあるすべてのDrainerノードに通知されます。 Drainerへの通知に失敗した場合、このエラー ログが出力されます。
 
-解決策: [<a href="/tidb-binlog/binlog-control.md">binlogctl ツール</a>](/tidb-binlog/binlog-control.md)使用して、各Drainerノードが正常かどうかを確認します。これは、 `online`状態にあるすべてのDrainerノードが正常に動作していることを確認するためです。 Drainerノードの状態が実際の動作ステータスと一致しない場合は、 binlogctl ツールを使用してその状態を変更し、 Pumpを再起動します。
+解決策: [binlogctl ツール](/tidb-binlog/binlog-control.md)使用して、各Drainerノードが正常かどうかを確認します。これは、 `online`状態にあるすべてのDrainerノードが正常に動作していることを確認するためです。 Drainerノードの状態が実際の動作ステータスと一致しない場合は、 binlogctl ツールを使用してその状態を変更し、 Pumpを再起動します。
 
 ## TiDB Binlogレプリケーション中にデータ損失が発生する {#data-loss-occurs-during-the-tidb-binlog-replication}
 
@@ -44,4 +44,4 @@ TiDB Binlogがすべての TiDB インスタンスで有効になっていて、
 ## Drainerによって出力されたファイル形式の増分データをクリーニングするメカニズムはありますか?データは削除されますか? {#is-there-any-cleaning-mechanism-for-the-incremental-data-of-the-file-format-output-by-drainer-will-the-data-be-deleted}
 
 -   Drainer v3.0.x には、ファイル形式の増分データのクリーニング メカニズムがありません。
--   v4.0.x バージョンには、時間ベースのデータ クリーニング メカニズムがあります。詳細は[<a href="https://github.com/pingcap/tidb-binlog/blob/v4.0.9/cmd/drainer/drainer.toml#L153">ドレイナーの`retention-time`設定項目</a>](https://github.com/pingcap/tidb-binlog/blob/v4.0.9/cmd/drainer/drainer.toml#L153)を参照してください。
+-   v4.0.x バージョンには、時間ベースのデータ クリーニング メカニズムがあります。詳細は[ドレイナーの`retention-time`設定項目](https://github.com/pingcap/tidb-binlog/blob/v4.0.9/cmd/drainer/drainer.toml#L153)を参照してください。

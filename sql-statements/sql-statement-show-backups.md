@@ -5,7 +5,7 @@ summary: An overview of the usage of SHOW [BACKUPS|RESTORES] for the TiDB databa
 
 # [バックアップ|復元]を表示 {#show-backups-restores}
 
-これらのステートメントは、TiDB インスタンス上で実行された、キューに入れられ、実行中、および最近終了したすべてのタスク[<a href="/sql-statements/sql-statement-backup.md">`BACKUP`</a>](/sql-statements/sql-statement-backup.md)および[<a href="/sql-statements/sql-statement-restore.md">`RESTORE`</a>](/sql-statements/sql-statement-restore.md)リストを表示します。
+これらのステートメントは、TiDB インスタンス上で実行された、キューに入れられ、実行中、および最近終了したすべてのタスク[`RESTORE`](/sql-statements/sql-statement-restore.md)リストを表示します。
 
 どちらのステートメントも実行するには`SUPER`権限が必要です。
 
@@ -72,7 +72,7 @@ SHOW BACKUPS;
 | 待って    | 実行を待っています   |
 | チェックサム | チェックサム操作の実行 |
 
-接続 ID を使用して、 [<a href="/sql-statements/sql-statement-kill.md">`KILL TIDB QUERY`</a>](/sql-statements/sql-statement-kill.md)ステートメント経由でバックアップ/復元タスクをキャンセルできます。
+接続 ID を使用して、 [`KILL TIDB QUERY`](/sql-statements/sql-statement-kill.md)ステートメント経由でバックアップ/復元タスクをキャンセルできます。
 
 {{< copyable "" >}}
 
@@ -108,5 +108,5 @@ SHOW BACKUPS WHERE `Progress` < 25.0;
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-backup.md">バックアップ</a>](/sql-statements/sql-statement-backup.md)
--   [<a href="/sql-statements/sql-statement-restore.md">戻す</a>](/sql-statements/sql-statement-restore.md)
+-   [バックアップ](/sql-statements/sql-statement-backup.md)
+-   [戻す](/sql-statements/sql-statement-restore.md)

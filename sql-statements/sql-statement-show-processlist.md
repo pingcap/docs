@@ -35,4 +35,4 @@ mysql> SHOW PROCESSLIST;
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-kill.md">[TIDB]を殺す</a>](/sql-statements/sql-statement-kill.md)
+-   [[TIDB]を殺す](/sql-statements/sql-statement-kill.md)

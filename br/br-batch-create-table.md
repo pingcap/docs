@@ -5,7 +5,7 @@ summary: Learn how to use the Batch Create Table feature. When restoring data, B
 
 # テーブルのバッチ作成 {#batch-create-table}
 
-データを復元する場合、バックアップ &amp; 復元 (BR) はターゲット TiDB クラスターにデータベースとテーブルを作成し、バックアップ データをテーブルに復元します。 TiDB v6.0.0 より前のバージョンでは、 BR は[<a href="#implementation">シリアル実行</a>](#implementation)実装を使用して復元プロセスでテーブルを作成します。ただし、 BR が多数のテーブル (50000 近く) を含むデータを復元する場合、この実装ではテーブルの作成に時間がかかります。
+データを復元する場合、バックアップ &amp; 復元 (BR) はターゲット TiDB クラスターにデータベースとテーブルを作成し、バックアップ データをテーブルに復元します。 TiDB v6.0.0 より前のバージョンでは、 BR は[シリアル実行](#implementation)実装を使用して復元プロセスでテーブルを作成します。ただし、 BR が多数のテーブル (50000 近く) を含むデータを復元する場合、この実装ではテーブルの作成に時間がかかります。
 
 テーブル作成プロセスを高速化し、データの復元時間を短縮するために、TiDB v6.0.0 ではバッチ作成テーブル機能が導入されました。この機能はデフォルトで有効になっています。
 
@@ -18,7 +18,7 @@ summary: Learn how to use the Batch Create Table feature. When restoring data, B
 
 大量のテーブル (50,000 テーブルなど) を含むデータを復元する必要がある場合は、バッチ作成テーブル機能を使用して復元プロセスを高速化できます。
 
-詳しい効果については[<a href="#feature-test">テーブルのバッチ作成機能のテスト</a>](#feature-test)を参照してください。
+詳しい効果については[テーブルのバッチ作成機能のテスト](#feature-test)を参照してください。
 
 ## テーブルのバッチ作成を使用する {#use-batch-create-table}
 
@@ -32,7 +32,7 @@ br restore full \
 --ddl-batch-size=1
 ```
 
-この機能が無効になった後、 BR は代わりに[<a href="#implementation">シリアル実行の実装</a>](#implementation)を使用します。
+この機能が無効になった後、 BR は代わりに[シリアル実行の実装](#implementation)を使用します。
 
 ## 実装 {#implementation}
 
@@ -50,7 +50,7 @@ br restore full \
 
 -   クラスタ構成:
 
-    -   15 個の TiKV インスタンス。各 TiKV インスタンスには、RPC リクエストを処理するための 16 個の CPU コア、80 GBメモリ、および 16 個のスレッド ( [<a href="/tikv-configuration-file.md#num-threads">`import.num-threads`</a>](/tikv-configuration-file.md#num-threads) = 16) が装備されています。
+    -   15 個の TiKV インスタンス。各 TiKV インスタンスには、RPC リクエストを処理するための 16 個の CPU コア、80 GBメモリ、および 16 個のスレッド ( [`import.num-threads`](/tikv-configuration-file.md#num-threads) = 16) が装備されています。
     -   3 つの TiDB インスタンス。各 TiDB インスタンスには、16 個の CPU コア、32 GB のメモリが搭載されています。
     -   3 つの PD インスタンス。各 PD インスタンスには、16 個の CPU コア、32 GB のメモリが搭載されています。
 

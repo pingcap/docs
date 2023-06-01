@@ -23,7 +23,7 @@ summary: An overview of the usage of SHOW [GLOBAL|SESSION] VARIABLES for the TiD
 
 ## 例 {#examples}
 
-TiDB 固有の変数をすべてリストします。詳細な説明は[<a href="/system-variables.md">システム変数</a>](/system-variables.md)を参照してください。
+TiDB 固有の変数をすべてリストします。詳細な説明は[システム変数](/system-variables.md)を参照してください。
 
 ```sql
 mysql> SHOW GLOBAL VARIABLES LIKE 'tidb%';
@@ -150,8 +150,8 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'time_zone%';
 
 ## MySQLの互換性 {#mysql-compatibility}
 
-このステートメントは、MySQL と完全な互換性があると理解されています。 GitHub では互換性の違いは[<a href="https://github.com/pingcap/tidb/issues/new/choose">問題を通じて報告されました</a>](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
+このステートメントは、MySQL と完全な互換性があると理解されています。 GitHub では互換性の違いは[問題を通じて報告されました](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-set-variable.md">`SET [GLOBAL|SESSION]`</a>](/sql-statements/sql-statement-set-variable.md)
+-   [`SET [GLOBAL|SESSION]`](/sql-statements/sql-statement-set-variable.md)

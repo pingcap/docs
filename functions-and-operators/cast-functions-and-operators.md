@@ -5,15 +5,15 @@ summary: Learn about the cast functions and operators.
 
 # キャスト関数と演算子 {#cast-functions-and-operators}
 
-キャスト関数と演算子を使用すると、あるデータ型から別のデータ型に値を変換できます。 TiDB は、 MySQL 5.7で利用可能な[<a href="https://dev.mysql.com/doc/refman/5.7/en/cast-functions.html">キャスト関数と演算子</a>](https://dev.mysql.com/doc/refman/5.7/en/cast-functions.html)をサポートします。
+キャスト関数と演算子を使用すると、あるデータ型から別のデータ型に値を変換できます。 TiDB は、 MySQL 5.7で利用可能な[キャスト関数と演算子](https://dev.mysql.com/doc/refman/5.7/en/cast-functions.html)をサポートします。
 
 ## キャスト関数と演算子のリスト {#list-of-cast-functions-and-operators}
 
 | 名前                                                                                                                                                                                     | 説明                  |
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- |
-| [<a href="https://dev.mysql.com/doc/refman/5.7/en/cast-functions.html#operator_binary">`BINARY`</a>](https://dev.mysql.com/doc/refman/5.7/en/cast-functions.html#operator_binary)      | 文字列をバイナリ文字列にキャストします |
-| [<a href="https://dev.mysql.com/doc/refman/5.7/en/cast-functions.html#function_cast">`CAST()`</a>](https://dev.mysql.com/doc/refman/5.7/en/cast-functions.html#function_cast)          | 値を特定の型としてキャストする     |
-| [<a href="https://dev.mysql.com/doc/refman/5.7/en/cast-functions.html#function_convert">`CONVERT()`</a>](https://dev.mysql.com/doc/refman/5.7/en/cast-functions.html#function_convert) | 値を特定の型としてキャストする     |
+| [`BINARY`](https://dev.mysql.com/doc/refman/5.7/en/cast-functions.html#operator_binary)      | 文字列をバイナリ文字列にキャストします |
+| [`CAST()`](https://dev.mysql.com/doc/refman/5.7/en/cast-functions.html#function_cast)          | 値を特定の型としてキャストする     |
+| [`CONVERT()`](https://dev.mysql.com/doc/refman/5.7/en/cast-functions.html#function_convert) | 値を特定の型としてキャストする     |
 
 > **ノート：**
 >

@@ -4,7 +4,7 @@ title: TiUP DM
 
 # TiUP DM {#tiup-dm}
 
-TiDB クラスターの管理に使用される[<a href="/tiup/tiup-component-cluster.md">TiUPクラスタ</a>](/tiup/tiup-component-cluster.md)と同様に、 TiUP DM はDM クラスターの管理に使用されます。 TiUP DMコンポーネントを使用すると、DM クラスターの展開、開始、停止、破棄、エラスティック スケーリング、DM クラスターのアップグレード、DM クラスターの構成パラメーターの管理など、DM クラスターの日常的な操作およびメンテナンス タスクを実行できます。
+TiDB クラスターの管理に使用される[TiUPクラスタ](/tiup/tiup-component-cluster.md)と同様に、 TiUP DM はDM クラスターの管理に使用されます。 TiUP DMコンポーネントを使用すると、DM クラスターの展開、開始、停止、破棄、エラスティック スケーリング、DM クラスターのアップグレード、DM クラスターの構成パラメーターの管理など、DM クラスターの日常的な操作およびメンテナンス タスクを実行できます。
 
 ## 構文 {#syntax}
 
@@ -12,7 +12,7 @@ TiDB クラスターの管理に使用される[<a href="/tiup/tiup-component-cl
 tiup dm [command] [flags]
 ```
 
-`[command]`はコマンドの名前を渡すために使用されます。サポートされているコマンドについては、 [<a href="#command-list">コマンド一覧</a>](#command-list)を参照してください。
+`[command]`はコマンドの名前を渡すために使用されます。サポートされているコマンドについては、 [コマンド一覧](#command-list)を参照してください。
 
 ## オプション {#options}
 
@@ -62,26 +62,26 @@ tiup dm [command] [flags]
 
 ## コマンド一覧 {#command-list}
 
--   [<a href="/tiup/tiup-component-dm-import.md">輸入</a>](/tiup/tiup-component-dm-import.md) : DM-Ansible によってデプロイされた DM v1.0 クラスターをインポートします。
--   [<a href="/tiup/tiup-component-dm-template.md">レンプレート</a>](/tiup/tiup-component-dm-template.md) : トポロジテンプレートを出力します。
--   [<a href="/tiup/tiup-component-dm-deploy.md">配備</a>](/tiup/tiup-component-dm-deploy.md) : 指定されたトポロジに基づいてクラスターをデプロイします。
--   [<a href="/tiup/tiup-component-dm-list.md">リスト</a>](/tiup/tiup-component-dm-list.md) : デプロイされたクラスターのリストを照会します。
--   [<a href="/tiup/tiup-component-dm-display.md">画面</a>](/tiup/tiup-component-dm-display.md) : 指定したクラスターの状態を表示します。
--   [<a href="/tiup/tiup-component-dm-start.md">始める</a>](/tiup/tiup-component-dm-start.md) : 指定されたクラスターを開始します。
--   [<a href="/tiup/tiup-component-dm-stop.md">ストップ</a>](/tiup/tiup-component-dm-stop.md) : 指定されたクラスターを停止します。
--   [<a href="/tiup/tiup-component-dm-restart.md">再起動</a>](/tiup/tiup-component-dm-restart.md) : 指定されたクラスターを再起動します。
--   [<a href="/tiup/tiup-component-dm-scale-in.md">スケールイン</a>](/tiup/tiup-component-dm-scale-in.md) : 指定されたクラスター内でスケールします。
--   [<a href="/tiup/tiup-component-dm-scale-out.md">規格外</a>](/tiup/tiup-component-dm-scale-out.md) : 指定されたクラスターをスケールアウトします。
--   [<a href="/tiup/tiup-component-dm-upgrade.md">アップグレード</a>](/tiup/tiup-component-dm-upgrade.md) : 指定されたクラスターをアップグレードします。
--   [<a href="/tiup/tiup-component-dm-prune.md">プルーン</a>](/tiup/tiup-component-dm-prune.md) : 指定されたクラスターの廃棄状態のインスタンスをクリーンアップします。
--   [<a href="/tiup/tiup-component-dm-edit-config.md">編集構成</a>](/tiup/tiup-component-dm-edit-config.md) : 指定されたクラスターの構成を変更します。
--   [<a href="/tiup/tiup-component-dm-reload.md">リロード</a>](/tiup/tiup-component-dm-reload.md) : 指定されたクラスターの構成を再ロードします。
--   [<a href="/tiup/tiup-component-dm-patch.md">パッチ</a>](/tiup/tiup-component-dm-patch.md) : デプロイされたクラスター内の指定されたサービスを置き換えます。
--   [<a href="/tiup/tiup-component-dm-destroy.md">破壊</a>](/tiup/tiup-component-dm-destroy.md) : 指定されたクラスターを破棄します。
--   [<a href="/tiup/tiup-component-dm-audit.md">監査</a>](/tiup/tiup-component-dm-audit.md) : 指定したクラスターの操作監査ログを照会します。
--   [<a href="/tiup/tiup-component-dm-replay.md">リプレイ</a>](/tiup/tiup-component-dm-replay.md) : 指定されたコマンドを再生します
--   [<a href="/tiup/tiup-component-dm-enable.md">有効</a>](/tiup/tiup-component-dm-enable.md) : マシンの再起動後のクラスター サービスの自動有効化を有効にします。
--   [<a href="/tiup/tiup-component-dm-disable.md">無効にする</a>](/tiup/tiup-component-dm-disable.md) : マシンの再起動後のクラスター サービスの自動有効化を無効にします。
--   [<a href="/tiup/tiup-component-dm-help.md">ヘルプ</a>](/tiup/tiup-component-dm-help.md) : ヘルプ情報を出力します。
+-   [輸入](/tiup/tiup-component-dm-import.md) : DM-Ansible によってデプロイされた DM v1.0 クラスターをインポートします。
+-   [レンプレート](/tiup/tiup-component-dm-template.md) : トポロジテンプレートを出力します。
+-   [配備](/tiup/tiup-component-dm-deploy.md) : 指定されたトポロジに基づいてクラスターをデプロイします。
+-   [リスト](/tiup/tiup-component-dm-list.md) : デプロイされたクラスターのリストを照会します。
+-   [画面](/tiup/tiup-component-dm-display.md) : 指定したクラスターの状態を表示します。
+-   [始める](/tiup/tiup-component-dm-start.md) : 指定されたクラスターを開始します。
+-   [ストップ](/tiup/tiup-component-dm-stop.md) : 指定されたクラスターを停止します。
+-   [再起動](/tiup/tiup-component-dm-restart.md) : 指定されたクラスターを再起動します。
+-   [スケールイン](/tiup/tiup-component-dm-scale-in.md) : 指定されたクラスター内でスケールします。
+-   [規格外](/tiup/tiup-component-dm-scale-out.md) : 指定されたクラスターをスケールアウトします。
+-   [アップグレード](/tiup/tiup-component-dm-upgrade.md) : 指定されたクラスターをアップグレードします。
+-   [プルーン](/tiup/tiup-component-dm-prune.md) : 指定されたクラスターの廃棄状態のインスタンスをクリーンアップします。
+-   [編集構成](/tiup/tiup-component-dm-edit-config.md) : 指定されたクラスターの構成を変更します。
+-   [リロード](/tiup/tiup-component-dm-reload.md) : 指定されたクラスターの構成を再ロードします。
+-   [パッチ](/tiup/tiup-component-dm-patch.md) : デプロイされたクラスター内の指定されたサービスを置き換えます。
+-   [破壊](/tiup/tiup-component-dm-destroy.md) : 指定されたクラスターを破棄します。
+-   [監査](/tiup/tiup-component-dm-audit.md) : 指定したクラスターの操作監査ログを照会します。
+-   [リプレイ](/tiup/tiup-component-dm-replay.md) : 指定されたコマンドを再生します
+-   [有効](/tiup/tiup-component-dm-enable.md) : マシンの再起動後のクラスター サービスの自動有効化を有効にします。
+-   [無効にする](/tiup/tiup-component-dm-disable.md) : マシンの再起動後のクラスター サービスの自動有効化を無効にします。
+-   [ヘルプ](/tiup/tiup-component-dm-help.md) : ヘルプ情報を出力します。
 
-[<a href="/tiup/tiup-reference.md#component-list">&lt;&lt; 前のページに戻る - TiUPリファレンスコンポーネントリスト</a>](/tiup/tiup-reference.md#component-list)
+[&lt;&lt; 前のページに戻る - TiUPリファレンスコンポーネントリスト](/tiup/tiup-reference.md#component-list)

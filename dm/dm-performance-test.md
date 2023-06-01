@@ -50,7 +50,7 @@ sysbench --test=oltp_insert --tables=4 --mysql-host=172.16.4.40 --mysql-port=330
 
 #### データ移行タスクを作成する {#create-a-data-migration-task}
 
-1.  上流の MySQL ソースを作成し、 `source-id` ～ `source-1`を設定します。詳細は[<a href="/dm/dm-manage-source.md#operate-data-source">データソース構成をロードする</a>](/dm/dm-manage-source.md#operate-data-source)を参照してください。
+1.  上流の MySQL ソースを作成し、 `source-id` ～ `source-1`を設定します。詳細は[データソース構成をロードする](/dm/dm-manage-source.md#operate-data-source)を参照してください。
 
 2.  移行タスクを作成します ( `full`モード)。以下はタスク構成テンプレートです。
 
@@ -84,7 +84,7 @@ mydumpers:
     threads: 32
 ```
 
-移行タスクの作成方法の詳細については、 [<a href="/dm/dm-create-task.md">データ移行タスクの作成</a>](/dm/dm-create-task.md)を参照してください。
+移行タスクの作成方法の詳細については、 [データ移行タスクの作成](/dm/dm-create-task.md)を参照してください。
 
 > **ノート：**
 >
@@ -109,7 +109,7 @@ DM ワーカーのログを確認します。 `all data files have been finished
 
 #### データ移行タスクを作成する {#create-a-data-migration-task}
 
-1.  上流の MySQL のソースを作成します。 `source-id` ～ `source-1`を設定します（ [<a href="#full-import-benchmark-case">フルインポートベンチマークケース</a>](#full-import-benchmark-case)でソースを作成している場合は、再度作成する必要はありません）。詳細は[<a href="/dm/dm-manage-source.md#operate-data-source">データソース構成をロードする</a>](/dm/dm-manage-source.md#operate-data-source)を参照してください。
+1.  上流の MySQL のソースを作成します。 `source-id` ～ `source-1`を設定します（ [データソース構成をロードする](/dm/dm-manage-source.md#operate-data-source)を参照してください。
 
 2.  DM 移行タスクを作成します ( `all`モード)。以下はタスク構成ファイルの例です。
 
@@ -142,7 +142,7 @@ syncers:
     batch: 100
 ```
 
-データ移行タスクの作成方法の詳細については、 [<a href="/dm/dm-create-task.md">データ移行タスクの作成</a>](/dm/dm-create-task.md)を参照してください。
+データ移行タスクの作成方法の詳細については、 [データ移行タスクの作成](/dm/dm-create-task.md)を参照してください。
 
 > **ノート：**
 >
@@ -164,4 +164,4 @@ sysbench --test=oltp_insert --tables=4 --num-threads=32 --mysql-host=172.17.4.40
 
 #### テスト結果を取得する {#get-test-results}
 
-DM の移行ステータスを確認するには、 `query-status`コマンドを実行します。 DM の監視メトリクスを観察するには、Grafana を使用できます。ここで、監視メトリクスは`finished sqls jobs` (単位時間あたりに完了したジョブの数) およびその他の関連メトリクスを指します。詳細については、 [<a href="/dm/monitor-a-dm-cluster.md#binlog-replication">Binlog移行監視メトリクス</a>](/dm/monitor-a-dm-cluster.md#binlog-replication)を参照してください。
+DM の移行ステータスを確認するには、 `query-status`コマンドを実行します。 DM の監視メトリクスを観察するには、Grafana を使用できます。ここで、監視メトリクスは`finished sqls jobs` (単位時間あたりに完了したジョブの数) およびその他の関連メトリクスを指します。詳細については、 [Binlog移行監視メトリクス](/dm/monitor-a-dm-cluster.md#binlog-replication)を参照してください。

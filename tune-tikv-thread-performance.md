@@ -18,14 +18,14 @@ TiKV スレッド プールは主に、gRPC、Scheduler、UnifyReadPool、 Rafts
 -   Raftstoreスレッド プール:
 
     -   すべてのRaftメッセージと新しいログを追加する提案を処理します。
-    -   Raftログをディスクに書き込みます。 [<a href="/tikv-configuration-file.md#store-io-pool-size-new-in-v530">`store-io-pool-size`</a>](/tikv-configuration-file.md#store-io-pool-size-new-in-v530)の値が`0`の場合、 Raftstoreスレッドはログをディスクに書き込みます。値が`0`でない場合、 Raftstoreスレッドはログを StoreWriter スレッドに送信します。
+    -   Raftログをディスクに書き込みます。 [`store-io-pool-size`](/tikv-configuration-file.md#store-io-pool-size-new-in-v530)の値が`0`の場合、 Raftstoreスレッドはログをディスクに書き込みます。値が`0`でない場合、 Raftstoreスレッドはログを StoreWriter スレッドに送信します。
     -   大部分のレプリカのRaftログに一貫性がある場合、 Raftstoreスレッドはログを適用スレッドに送信します。
 
 -   StoreWriter スレッド プール: すべてのRaftログをディスクに書き込み、結果をRaftstoreスレッドに返します。
 
 -   アプライ スレッド プール: Raftstoreスレッド プールから送信された送信済みログを受信し、それをキーと値のリクエストとして解析して RocksDB に書き込み、コールバック関数を呼び出して gRPC スレッド プールに書き込みリクエストが完了したことを通知します。結果をクライアントに返します。
 
--   RocksDB スレッド プール: タスクを圧縮してフラッシュするための RocksDB のスレッド プールです。 RocksDB のアーキテクチャと`Compact`操作については、 [<a href="https://github.com/facebook/rocksdb">RocksDB: フラッシュおよび RAM ストレージ用の永続的なキーと値のストア</a>](https://github.com/facebook/rocksdb)を参照してください。
+-   RocksDB スレッド プール: タスクを圧縮してフラッシュするための RocksDB のスレッド プールです。 RocksDB のアーキテクチャと`Compact`操作については、 [RocksDB: フラッシュおよび RAM ストレージ用の永続的なキーと値のストア](https://github.com/facebook/rocksdb)を参照してください。
 
 -   UnifyReadPool スレッド プール:コプロセッサースレッド プールとストレージ読み取りプールを組み合わせたものです。 kv get、kvバッチget、raw kv get、コプロセッサなどのすべての読み取りリクエストは、このスレッドプールで実行されます。
 
@@ -83,7 +83,7 @@ TiKV v5.0 以降、すべての読み取りリクエストはデフォルトで�
 
     Grafana の`TiKV-Details.Thread CPU.Unified read pool CPU`のピーク値が 800% を超えない場合は、 `readpool.unified.max-thread-count` ～ `10`に設定することをお勧めします。スレッドが多すぎると、スレッドの切り替えが頻繁に発生し、他のスレッド プールのリソースが占有される可能性があります。
 
-    v6.3.0 以降、TiKV は、現在の CPU 使用率に基づいて UnifyReadPool スレッド プール サイズの自動調整をサポートします。この機能を有効にするには、 [<a href="/tikv-configuration-file.md#auto-adjust-pool-size-new-in-v630">`readpool.unified.auto-adjust-pool-size = true`</a>](/tikv-configuration-file.md#auto-adjust-pool-size-new-in-v630)を設定します。再読み取りが行われ、最大 CPU 使用率が 80% を超えるクラスターのスレッド プール サイズを自動的に調整することをお勧めします。
+    v6.3.0 以降、TiKV は、現在の CPU 使用率に基づいて UnifyReadPool スレッド プール サイズの自動調整をサポートします。この機能を有効にするには、 [`readpool.unified.auto-adjust-pool-size = true`](/tikv-configuration-file.md#auto-adjust-pool-size-new-in-v630)を設定します。再読み取りが行われ、最大 CPU 使用率が 80% を超えるクラスターのスレッド プール サイズを自動的に調整することをお勧めします。
 
 -   RocksDB スレッド プール。
 

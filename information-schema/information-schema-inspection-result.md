@@ -274,7 +274,7 @@ DETAILS   | the cluster has 2 different tidb versions, execute the sql to see mo
 | 成分   | モニタリング指標           | 監視テーブル                              | 期待値                           | 説明                                                                                                                                                                                             |
 | :--- | :----------------- | :---------------------------------- | :---------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | TiDB | tso-duration       | pd_tso_wait_duration                | &lt; 50ms                     | トランザクションの TSO を取得するまでの待機時間。                                                                                                                                                                    |
-| TiDB | トークンの取得期間          | tidb_get_token_duration             | &lt; 1ms                      | トークンの取得にかかる時間を問い合わせます。関連する TiDB 構成項目は[<a href="/command-line-flags-for-tidb-configuration.md#--token-limit">`token-limit`</a>](/command-line-flags-for-tidb-configuration.md#--token-limit)です。 |
+| TiDB | トークンの取得期間          | tidb_get_token_duration             | &lt; 1ms                      | トークンの取得にかかる時間を問い合わせます。関連する TiDB 構成項目は[`token-limit`](/command-line-flags-for-tidb-configuration.md#--token-limit)です。 |
 | TiDB | ロードスキーマ期間          | tidb_load_schema_duration           | 1秒未満                          | TiDB がスキーマ メタデータを更新するのにかかる時間。                                                                                                                                                                  |
 | TiKV | スケジューラ-cmd-期間      | tikv_scheduler_command_duration     | &lt; 0.1秒                     | TiKV が KV `cmd`リクエストを実行するのにかかる時間。                                                                                                                                                              |
 | TiKV | ハンドル スナップショット期間    | tikv_handle_snapshot_duration       | 30代未満                         | TiKV がスナップショットを処理するのにかかる時間。                                                                                                                                                                    |
@@ -307,4 +307,4 @@ DETAILS   | the cluster has 2 different tidb versions, execute the sql to see mo
 -   ストレージ読み取りプール低 CPU
 -   分割チェックCPU
 
-組み込みの診断ルールは常に改善されています。さらに診断ルールがある場合は、PR または問題を[<a href="https://github.com/pingcap/tidb">`tidb`リポジトリ</a>](https://github.com/pingcap/tidb)に作成してください。
+組み込みの診断ルールは常に改善されています。さらに診断ルールがある場合は、PR または問題を[`tidb`リポジトリ](https://github.com/pingcap/tidb)に作成してください。

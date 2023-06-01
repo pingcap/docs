@@ -5,7 +5,7 @@ summary: Learn about the monitor configuration and monitoring metrics of TiDB Li
 
 # TiDB Lightning監視 {#tidb-lightning-monitoring}
 
-`tidb-lightning` [<a href="https://prometheus.io/">プロメテウス</a>](https://prometheus.io/)によるメトリクス収集をサポートします。このドキュメントでは、 TiDB Lightningのモニター構成とモニタリングメトリクスを紹介します。
+`tidb-lightning` [プロメテウス](https://prometheus.io/)によるメトリクス収集をサポートします。このドキュメントでは、 TiDB Lightningのモニター構成とモニタリングメトリクスを紹介します。
 
 ## モニターの設定 {#monitor-configuration}
 
@@ -43,7 +43,7 @@ scrape_configs:
 
 ## グラファナダッシュボード {#grafana-dashboard}
 
-[<a href="https://grafana.com/">グラファナ</a>](https://grafana.com/)は、Prometheus メトリクスをダッシュ​​ボードとして視覚化するための Web インターフェイスです。
+[グラファナ](https://grafana.com/)は、Prometheus メトリクスをダッシュ​​ボードとして視覚化するための Web インターフェイスです。
 
 ### 行 1: 速度 {#row-1-speed}
 

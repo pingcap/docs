@@ -15,9 +15,9 @@ summary: Understand optimizations related to subqueries.
 -   `EXISTS (SELECT ... FROM ...)`
 -   `... >/>=/</<=/=/!= (SELECT ... FROM ...)`
 
-サブクエリには、 `select * from t where t.a in (select * from t2 where t.b=t2.b)`などの非サブクエリ列が含まれる場合があります。サブクエリの`t.b`列はサブクエリに属さず、サブクエリの外部から導入されます。この種のサブクエリは通常「相関サブクエリ」と呼ばれ、外部から導入された列は「相関列」と呼ばれます。相関サブクエリの最適化については、 [<a href="/correlated-subquery-optimization.md">相関サブクエリの相関解除</a>](/correlated-subquery-optimization.md)を参照してください。この記事では、相関列を含まないサブクエリに焦点を当てます。
+サブクエリには、 `select * from t where t.a in (select * from t2 where t.b=t2.b)`などの非サブクエリ列が含まれる場合があります。サブクエリの`t.b`列はサブクエリに属さず、サブクエリの外部から導入されます。この種のサブクエリは通常「相関サブクエリ」と呼ばれ、外部から導入された列は「相関列」と呼ばれます。相関サブクエリの最適化については、 [相関サブクエリの相関解除](/correlated-subquery-optimization.md)を参照してください。この記事では、相関列を含まないサブクエリに焦点を当てます。
 
-デフォルトでは、サブクエリは実行方法として[<a href="/explain-overview.md">TiDB 実行計画を理解する</a>](/explain-overview.md)で説明した`semi join`を使用します。一部の特殊なサブクエリでは、TiDB はパフォーマンスを向上させるために論理的な書き換えを行います。
+デフォルトでは、サブクエリは実行方法として[TiDB 実行計画を理解する](/explain-overview.md)で説明した`semi join`を使用します。一部の特殊なサブクエリでは、TiDB はパフォーマンスを向上させるために論理的な書き換えを行います。
 
 ## <code>... &lt; ALL (SELECT ... FROM ...)</code>または<code>... &gt; ANY (SELECT ... FROM ...)</code> {#code-x3c-all-select-from-code-or-code-any-select-from-code}
 
@@ -63,7 +63,7 @@ explain select * from t1 where t1.a in (select t2.a from t2);
 +------------------------------+---------+-----------+------------------------+----------------------------------------------------------------------------+
 ```
 
-この書き換えは、サブクエリ`IN`が比較的小さく、外部クエリが比較的大きい場合にパフォーマンスが向上します。これは、書き換えなしでは`index join`と t2 を駆動テーブルとして使用することが不可能であるためです。ただし、リライト中に集計を自動的に削除できず、 `t2`が比較的大きい場合、このリライトがクエリのパフォーマンスに影響を与えるという欠点があります。現在、変数[<a href="/system-variables.md#tidb_opt_insubq_to_join_and_agg">tidb_opt_insubq_to_join_and_agg</a>](/system-variables.md#tidb_opt_insubq_to_join_and_agg)はこの最適化を制御するために使用されます。この最適化が適切でない場合は、手動で無効にすることができます。
+この書き換えは、サブクエリ`IN`が比較的小さく、外部クエリが比較的大きい場合にパフォーマンスが向上します。これは、書き換えなしでは`index join`と t2 を駆動テーブルとして使用することが不可能であるためです。ただし、リライト中に集計を自動的に削除できず、 `t2`が比較的大きい場合、このリライトがクエリのパフォーマンスに影響を与えるという欠点があります。現在、変数[tidb_opt_insubq_to_join_and_agg](/system-variables.md#tidb_opt_insubq_to_join_and_agg)はこの最適化を制御するために使用されます。この最適化が適切でない場合は、手動で無効にすることができます。
 
 ## <code>EXISTS</code>サブクエリと<code>... &gt;/&gt;=/&lt;/&lt;=/=/!= (SELECT ... FROM ...)</code> {#code-exists-code-subquery-and-code-x3c-x3c-select-from-code}
 
@@ -87,7 +87,7 @@ explain select * from t1 where exists (select * from t2);
 +------------------------+----------+-----------+---------------+--------------------------------+
 ```
 
-前述の最適化では、オプティマイザーはステートメントの実行を自動的に最適化します。さらに、 [<a href="/optimizer-hints.md#semi_join_rewrite">`SEMI_JOIN_REWRITE`</a>](/optimizer-hints.md#semi_join_rewrite)ヒントを追加してステートメントをさらに書き直すこともできます。
+前述の最適化では、オプティマイザーはステートメントの実行を自動的に最適化します。さらに、 [`SEMI_JOIN_REWRITE`](/optimizer-hints.md#semi_join_rewrite)ヒントを追加してステートメントをさらに書き直すこともできます。
 
 このヒントを使用してクエリを書き換えない場合、実行プランでハッシュ結合が選択されている場合、セミ結合クエリはサブクエリを使用してハッシュ テーブルを構築することしかできません。この場合、サブクエリの結果が外側のクエリの結果よりも大きい場合、実行速度が予想より遅くなる可能性があります。
 

@@ -5,7 +5,7 @@ summary: Learn how to use the physical import mode in TiDB Lightning.
 
 # 物理インポートモードを使用する {#use-physical-import-mode}
 
-このドキュメントでは、構成ファイルの作成、パフォーマンスのチューニング、ディスク クォータの構成など、 TiDB Lightningの[<a href="/tidb-lightning/tidb-lightning-physical-import-mode.md">物理インポートモード</a>](/tidb-lightning/tidb-lightning-physical-import-mode.md)の使用方法を紹介します。
+このドキュメントでは、構成ファイルの作成、パフォーマンスのチューニング、ディスク クォータの構成など、 TiDB Lightningの[物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode.md)の使用方法を紹介します。
 
 ## 物理インポート モードを構成して使用する {#configure-and-use-the-physical-import-mode}
 
@@ -79,7 +79,7 @@ checksum = "required"
 analyze = "optional"
 ```
 
-完全な構成ファイルについては、 [<a href="/tidb-lightning/tidb-lightning-configuration.md">設定ファイルとコマンドラインパラメータ</a>](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
+完全な構成ファイルについては、 [設定ファイルとコマンドラインパラメータ](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
 
 ## 競合の検出 {#conflict-detection}
 
@@ -138,7 +138,7 @@ mysql> select table_name,index_name,key_data,row_data from conflict_error_v1 lim
 
 v6.2.0 以降、 TiDB Lightning は、オンライン アプリケーションへのデータ インポートの影響を制限するメカニズムを実装します。新しいメカニズムにより、 TiDB Lightning はグローバル スケジューリングを一時停止せず、ターゲット テーブル データを保存するリージョンのスケジューリングのみを一時停止します。これにより、オンライン アプリケーションに対するインポートの影響が大幅に軽減されます。
 
-v7.1.0 以降、 TiDB Lightningパラメータ[<a href="/tidb-lightning/tidb-lightning-configuration.md">`pause-pd-scheduler-scope`</a>](/tidb-lightning/tidb-lightning-configuration.md)を使用して、スケジュールの一時停止の範囲を制御できます。デフォルト値は`"table"`です。これは、ターゲット テーブル データを保存するリージョンに対してのみスケジュールが一時停止されることを意味します。クラスター内にビジネス トラフィックがない場合は、インポート中の他のスケジュールによる干渉を避けるために、このパラメーターを`"global"`に設定することをお勧めします。
+v7.1.0 以降、 TiDB Lightningパラメータ[`pause-pd-scheduler-scope`](/tidb-lightning/tidb-lightning-configuration.md)を使用して、スケジュールの一時停止の範囲を制御できます。デフォルト値は`"table"`です。これは、ターゲット テーブル データを保存するリージョンに対してのみスケジュールが一時停止されることを意味します。クラスター内にビジネス トラフィックがない場合は、インポート中の他のスケジュールによる干渉を避けるために、このパラメーターを`"global"`に設定することをお勧めします。
 
 <Note>TiDB Lightning は、既にデータが含まれているテーブルへのデータのインポートをサポートしていません。
 
@@ -222,7 +222,7 @@ io-concurrency = 5
 
 ファイルデータが読み取られた後、Lightning はローカルでのデータのエンコードや並べ替えなどの後処理を行う必要があります。これらの操作の同時実行性は`region-concurrency`によって制御されます。デフォルト値は CPU コアの数です。この設定はデフォルト値のままにすることができます。 Lightning を他のコンポーネントとは別のサーバーにデプロイすることをお勧めします。 Lightning を他のコンポーネントと一緒にデプロイする必要がある場合は、負荷に応じて`region-concurrency`の値を下げる必要があります。
 
-TiKV の[<a href="/tikv-configuration-file.md#num-threads">`num-threads`</a>](/tikv-configuration-file.md#num-threads)構成もパフォーマンスに影響を与える可能性があります。新しいクラスターの場合は、CPU コアの数を`num-threads`に設定することをお勧めします。
+TiKV の[`num-threads`](/tikv-configuration-file.md#num-threads)構成もパフォーマンスに影響を与える可能性があります。新しいクラスターの場合は、CPU コアの数を`num-threads`に設定することをお勧めします。
 
 ## ディスク クォータの構成<span class="version-mark">v6.2.0 の新機能</span> {#configure-disk-quota-span-class-version-mark-new-in-v6-2-0-span}
 

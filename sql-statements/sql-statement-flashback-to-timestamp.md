@@ -11,7 +11,7 @@ TiDB v6.4.0 では`FLASHBACK CLUSTER TO TIMESTAMP`構文が導入されていま
 
 > **警告：**
 >
-> `FLASHBACK CLUSTER TO TIMESTAMP`構文はTiDB Cloud [<a href="/tidb-cloud/select-cluster-tier.md#serverless-tier-beta">Serverless Tier</a>](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)クラスターには適用されません。予期しない結果を避けるため、Serverless Tierクラスターではこのステートメントを実行しないでください。
+> `FLASHBACK CLUSTER TO TIMESTAMP`構文はTiDB Cloud [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)クラスターには適用されません。予期しない結果を避けるため、Serverless Tierクラスターではこのステートメントを実行しないでください。
 
 </CustomContent>
 
@@ -19,9 +19,9 @@ TiDB v6.4.0 では`FLASHBACK CLUSTER TO TIMESTAMP`構文が導入されていま
 
 > **警告：**
 >
-> TiDB v7.1.0 でこの機能を使用すると、FLASHBACK 操作の完了後でも、一部のリージョンが FLASHBACK プロセスに残る場合があります。 v7.1.0 ではこの機能を使用しないことをお勧めします。詳細については、問題[<a href="https://github.com/pingcap/tidb/issues/44292">#44292</a>](https://github.com/pingcap/tidb/issues/44292)を参照してください。
+> TiDB v7.1.0 でこの機能を使用すると、FLASHBACK 操作の完了後でも、一部のリージョンが FLASHBACK プロセスに残る場合があります。 v7.1.0 ではこの機能を使用しないことをお勧めします。詳細については、問題[#44292](https://github.com/pingcap/tidb/issues/44292)を参照してください。
 >
-> この問題が発生した場合は、 [<a href="/br/br-snapshot-guide.md">TiDB スナップショットのバックアップと復元</a>](/br/br-snapshot-guide.md)機能を使用してデータを復元できます。
+> この問題が発生した場合は、 [TiDB スナップショットのバックアップと復元](/br/br-snapshot-guide.md)機能を使用してデータを復元できます。
 
 </CustomContent>
 
@@ -44,7 +44,7 @@ FlashbackToTimestampStmt ::=
 
 ## ノート {#notes}
 
--   `FLASHBACK`ステートメントで指定する時間は、ガベージ コレクション (GC) の有効期間内である必要があります。システム変数[<a href="/system-variables.md#tidb_gc_life_time-new-in-v50">`tidb_gc_life_time`</a>](/system-variables.md#tidb_gc_life_time-new-in-v50) (デフォルト: `10m0s` ) は、以前のバージョンの行の保持時間を定義します。ガベージコレクションが実行された現在の`safePoint`の場所は、次のクエリで取得できます。
+-   `FLASHBACK`ステートメントで指定する時間は、ガベージ コレクション (GC) の有効期間内である必要があります。システム変数[`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) (デフォルト: `10m0s` ) は、以前のバージョンの行の保持時間を定義します。ガベージコレクションが実行された現在の`safePoint`の場所は、次のクエリで取得できます。
 
     ```sql
     SELECT * FROM mysql.tidb WHERE variable_name = 'tikv_gc_safe_point';
@@ -57,7 +57,7 @@ FlashbackToTimestampStmt ::=
 -   `FLASHBACK`ステートメントで指定された時点で、完全に実行されていない DDL ステートメントがあってはなりません。そのような DDL が存在する場合、TiDB はそれを拒否します。
 -   `FLASHBACK CLUSTER TO TIMESTAMP`を実行する前に、TiDB は関連するすべての接続を切断し、ステートメント`FLASHBACK CLUSTER`完了するまでこれらのテーブルに対する読み取りおよび書き込み操作を禁止します。
 -   `FLASHBACK CLUSTER TO TIMESTAMP`ステートメントは実行後にキャンセルできません。 TiDB は成功するまで再試行を続けます。
--   `FLASHBACK CLUSTER`の実行中にデータをバックアップする必要がある場合は、 [<a href="/br/br-snapshot-guide.md">復元する</a>](/br/br-snapshot-guide.md)のみを使用し、 `FLASHBACK CLUSTER`の開始時刻よりも前の`BackupTS`を指定できます。さらに、 `FLASHBACK CLUSTER`の実行中に[<a href="/br/br-pitr-guide.md">ログのバックアップ</a>](/br/br-pitr-guide.md)を有効にすると失敗します。したがって、 `FLASHBACK CLUSTER`が完了した後でログのバックアップを有効にするようにしてください。
+-   `FLASHBACK CLUSTER`の実行中にデータをバックアップする必要がある場合は、 [ログのバックアップ](/br/br-pitr-guide.md)を有効にすると失敗します。したがって、 `FLASHBACK CLUSTER`が完了した後でログのバックアップを有効にするようにしてください。
 -   `FLASHBACK CLUSTER`ステートメントによってメタデータ (テーブル構造、データベース構造) のロールバックが発生した場合、関連する変更は TiCDC によってレプリケートされませ**ん**。したがって、タスクを手動で一時停止し、 `FLASHBACK CLUSTER`の完了を待ち、アップストリームとダウンストリームのスキーマ定義を手動でレプリケートして、一貫性があることを確認する必要があります。その後、TiCDC 変更フィードを再作成する必要があります。
 
 </CustomContent>

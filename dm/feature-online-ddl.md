@@ -5,13 +5,13 @@ summary: This document introduces the `online-ddl/online-ddl-scheme` feature of 
 
 # GH-ost/PT-osc を使用するデータベースからの移行 {#migrate-from-databases-that-use-gh-ost-pt-osc}
 
-本番シナリオでは、DDL 実行中のテーブル ロックにより、データベースへの読み取りまたは書き込みがある程度ブロックされる可能性があります。したがって、読み取りと書き込みへの影響を最小限に抑えるために、オンライン DDL ツールを使用して DDL を実行することがよくあります。一般的な DDL ツールは[<a href="https://github.com/github/gh-ost">おばけ</a>](https://github.com/github/gh-ost)と[<a href="https://www.percona.com/doc/percona-toolkit/3.0/pt-online-schema-change.html">pt-osc</a>](https://www.percona.com/doc/percona-toolkit/3.0/pt-online-schema-change.html)です。
+本番シナリオでは、DDL 実行中のテーブル ロックにより、データベースへの読み取りまたは書き込みがある程度ブロックされる可能性があります。したがって、読み取りと書き込みへの影響を最小限に抑えるために、オンライン DDL ツールを使用して DDL を実行することがよくあります。一般的な DDL ツールは[pt-osc](https://www.percona.com/doc/percona-toolkit/3.0/pt-online-schema-change.html)です。
 
-DM を使用して MySQL から TiDB にデータを移行する場合、online-ddl を有効にして、DM と gh-ost または pt-osc のコラボレーションを可能にすることができます。 online-ddl を有効にする方法と、このオプションを有効にした後のワークフローの詳細については、 [<a href="/migrate-with-pt-ghost.md">gh-ost または pt-osc による継続的レプリケーション</a>](/migrate-with-pt-ghost.md)を参照してください。このドキュメントでは、DM とオンライン DDL ツールのコラボレーションの詳細に焦点を当てます。
+DM を使用して MySQL から TiDB にデータを移行する場合、online-ddl を有効にして、DM と gh-ost または pt-osc のコラボレーションを可能にすることができます。 online-ddl を有効にする方法と、このオプションを有効にした後のワークフローの詳細については、 [gh-ost または pt-osc による継続的レプリケーション](/migrate-with-pt-ghost.md)を参照してください。このドキュメントでは、DM とオンライン DDL ツールのコラボレーションの詳細に焦点を当てます。
 
 ## オンライン DDL ツールを使用した DM の動作の詳細 {#working-details-for-dm-with-online-ddl-tools}
 
-このセクションでは、online-schema-change を実装する場合のオンライン DDL ツール[<a href="https://github.com/github/gh-ost">おばけ</a>](https://github.com/github/gh-ost)および[<a href="https://www.percona.com/doc/percona-toolkit/3.0/pt-online-schema-change.html">pt-osc</a>](https://www.percona.com/doc/percona-toolkit/3.0/pt-online-schema-change.html)を使用した DM の動作の詳細について説明します。
+このセクションでは、online-schema-change を実装する場合のオンライン DDL ツール[pt-osc](https://www.percona.com/doc/percona-toolkit/3.0/pt-online-schema-change.html)を使用した DM の動作の詳細について説明します。
 
 ### オンラインスキーマ変更: gh-ost {#online-schema-change-gh-ost}
 
@@ -109,7 +109,7 @@ gh-ost で主に使用される SQL ステートメントと、それに対応�
 
 > **ノート：**
 >
-> gh-ost の特定の SQL ステートメントは、実行時に使用されるパラメータによって異なります。このドキュメントでは、主要な SQL ステートメントのみをリストします。詳細については、 [<a href="https://github.com/github/gh-ost#gh-ost">gh-ost ドキュメント</a>](https://github.com/github/gh-ost#gh-ost)を参照してください。
+> gh-ost の特定の SQL ステートメントは、実行時に使用されるパラメータによって異なります。このドキュメントでは、主要な SQL ステートメントのみをリストします。詳細については、 [gh-ost ドキュメント](https://github.com/github/gh-ost#gh-ost)を参照してください。
 
 ## オンラインスキーマ変更: ポイント {#online-schema-change-pt}
 
@@ -210,7 +210,7 @@ pt-osc で主に使用される SQL ステートメントと、それに対応�
 
 > **ノート：**
 >
-> pt-osc の特定の SQL ステートメントは、実行時に使用されるパラメーターによって異なります。このドキュメントでは、主要な SQL ステートメントのみをリストします。詳細については、 [<a href="https://www.percona.com/doc/percona-toolkit/2.2/pt-online-schema-change.html">pt-osc ドキュメント</a>](https://www.percona.com/doc/percona-toolkit/2.2/pt-online-schema-change.html)を参照してください。
+> pt-osc の特定の SQL ステートメントは、実行時に使用されるパラメーターによって異なります。このドキュメントでは、主要な SQL ステートメントのみをリストします。詳細については、 [pt-osc ドキュメント](https://www.percona.com/doc/percona-toolkit/2.2/pt-online-schema-change.html)を参照してください。
 
 ## その他のオンライン スキーマ変更ツール {#other-online-schema-change-tools}
 

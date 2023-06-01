@@ -15,7 +15,7 @@ summary: Learn how to collect performance data from TiDB, TiKV and PD continuous
 
 ## 手動プロファイリングとの比較 {#compare-with-manual-profiling}
 
-継続的プロファイリングは[<a href="/dashboard/dashboard-profiling.md">手動プロファイリング</a>](/dashboard/dashboard-profiling.md)の拡張機能です。どちらも、インスタンスごとにさまざまな種類のパフォーマンス データを収集および分析するために使用できます。それらの違いは次のとおりです。
+継続的プロファイリングは[手動プロファイリング](/dashboard/dashboard-profiling.md)の拡張機能です。どちらも、インスタンスごとにさまざまな種類のパフォーマンス データを収集および分析するために使用できます。それらの違いは次のとおりです。
 
 -   手動プロファイリングはプロファイリングを開始した瞬間の短期間 (たとえば 30 秒) のみパフォーマンス データを収集しますが、継続プロファイリングは有効にすると継続的にデータを収集します。
 -   手動プロファイリングは現在発生している問題の分析にのみ使用できますが、継続プロファイリングは現在の問題と過去の問題の両方を分析するために使用できます。
@@ -24,7 +24,7 @@ summary: Learn how to collect performance data from TiDB, TiKV and PD continuous
 
 ## サポートされているパフォーマンスデータ {#supported-performance-data}
 
-[<a href="/dashboard/dashboard-profiling.md#supported-performance-data">手動プロファイリング</a>](/dashboard/dashboard-profiling.md#supported-performance-data)のすべてのパフォーマンスデータが収集されます。
+[手動プロファイリング](/dashboard/dashboard-profiling.md#supported-performance-data)のすべてのパフォーマンスデータが収集されます。
 
 -   CPU: TiDB、TiKV、 TiFlash、PD インスタンスの各内部関数の CPU オーバーヘッド
 
@@ -42,19 +42,19 @@ summary: Learn how to collect performance data from TiDB, TiKV and PD continuous
 
     ![Access page](/media/dashboard/dashboard-conprof-access.png)
 
--   ブラウザで[<a href="http://127.0.0.1:2379/dashboard/#/continuous_profiling">http://127.0.0.1:2379/dashboard/#/continuous_profiling</a>](http://127.0.0.1:2379/dashboard/#/continuous_profiling)にアクセスしてください。 `127.0.0.1:2379`を実際の PD インスタンスのアドレスとポートに置き換えます。
+-   ブラウザで[http://127.0.0.1:2379/dashboard/#/continuous_profiling](http://127.0.0.1:2379/dashboard/#/continuous_profiling)にアクセスしてください。 `127.0.0.1:2379`を実際の PD インスタンスのアドレスとポートに置き換えます。
 
 ## 継続的プロファイリングを有効にする {#enable-continuous-profiling}
 
 > **ノート：**
 >
-> 継続的プロファイリングを使用するには、最新バージョンのTiUP (v1.9.0 以降) またはTiDB Operator (v1.3.0 以降) を使用してクラスターをデプロイまたはアップグレードする必要があります。クラスターが以前のバージョンのTiUPまたはTiDB Operatorを使用してアップグレードされた場合、手順については[<a href="/dashboard/dashboard-faq.md#a-required-component-ngmonitoring-is-not-started-error-is-shown">FAQ</a>](/dashboard/dashboard-faq.md#a-required-component-ngmonitoring-is-not-started-error-is-shown)を参照してください。
+> 継続的プロファイリングを使用するには、最新バージョンのTiUP (v1.9.0 以降) またはTiDB Operator (v1.3.0 以降) を使用してクラスターをデプロイまたはアップグレードする必要があります。クラスターが以前のバージョンのTiUPまたはTiDB Operatorを使用してアップグレードされた場合、手順については[FAQ](/dashboard/dashboard-faq.md#a-required-component-ngmonitoring-is-not-started-error-is-shown)を参照してください。
 
 継続的プロファイリングを有効にすると、Web ページを常にアクティブにしておくことなく、バックグラウンドでパフォーマンス データを継続的に収集できます。収集されたデータは一定期間保存でき、期限切れのデータは自動的に消去されます。
 
 この機能を有効にするには:
 
-1.  [<a href="#access-the-page">継続的プロファイリングページ</a>](#access-the-page)にアクセスしてください。
+1.  [継続的プロファイリングページ](#access-the-page)にアクセスしてください。
 2.  **[設定を開く]**をクリックします。右側の**設定**領域で、**機能の有効化**をオンにし、必要に応じて**保存期間**のデフォルト値を変更します。
 3.  **「保存」**をクリックします。
 
@@ -82,7 +82,7 @@ summary: Learn how to collect performance data from TiDB, TiKV and PD continuous
 
 ## 継続的プロファイリングを無効にする {#disable-continuous-profiling}
 
-1.  [<a href="#access-the-page">継続的プロファイリングページ</a>](#access-the-page)にアクセスしてください。
+1.  [継続的プロファイリングページ](#access-the-page)にアクセスしてください。
 2.  右上隅にある歯車アイコンをクリックして設定ページを開きます。 **「機能の有効化」**をオフに切り替えます。
 3.  **「保存」**をクリックします。
 4.  ポップアップダイアログボックスで、 **「無効にする」**をクリックします。
@@ -93,7 +93,7 @@ summary: Learn how to collect performance data from TiDB, TiKV and PD continuous
 
 **1. 継続的プロファイリングを有効にできず、UI に「必須コンポーネントNgMonitoring が開始されていません」と表示されます**。
 
-[<a href="/dashboard/dashboard-faq.md#a-required-component-ngmonitoring-is-not-started-error-is-shown">TiDB ダッシュボードFAQ</a>](/dashboard/dashboard-faq.md#a-required-component-ngmonitoring-is-not-started-error-is-shown)を参照してください。
+[TiDB ダッシュボードFAQ](/dashboard/dashboard-faq.md#a-required-component-ngmonitoring-is-not-started-error-is-shown)を参照してください。
 
 **2. 継続的プロファイリングを有効にした後、パフォーマンスは影響を受けますか?**
 

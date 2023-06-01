@@ -7,7 +7,7 @@ summary: Learn how to use CSV configurations for the Import Data service on TiDB
 
 このドキュメントでは、 TiDB Cloud上のデータのインポート サービスの CSV 構成を紹介します。
 
-以下は、 TiDB Cloud上のデータインポートサービスを使用して CSV ファイルをインポートするときの CSVコンフィグレーションウィンドウです。詳細については、 [<a href="/tidb-cloud/import-csv-files.md">Amazon S3 または GCS からTiDB Cloudに CSV ファイルをインポート</a>](/tidb-cloud/import-csv-files.md)を参照してください。
+以下は、 TiDB Cloud上のデータインポートサービスを使用して CSV ファイルをインポートするときの CSVコンフィグレーションウィンドウです。詳細については、 [Amazon S3 または GCS からTiDB Cloudに CSV ファイルをインポート](/tidb-cloud/import-csv-files.md)を参照してください。
 
 ![CSV Configurations](/media/tidb-cloud/import-data-csv-config.png)
 
@@ -77,7 +77,7 @@ summary: Learn how to use CSV configurations for the Import Data service on TiDB
 
 > **ノート：**
 >
-> TiDB Cloudに[<a href="/tidb-cloud/tidb-cloud-import-local-files.md">ローカルファイルのインポート</a>](/tidb-cloud/tidb-cloud-import-local-files.md)場合、 **Not-null**および**Null**設定を構成することはできません。
+> TiDB Cloudに[ローカルファイルのインポート](/tidb-cloud/tidb-cloud-import-local-files.md)場合、 **Not-null**および**Null**設定を構成することはできません。
 
 -   定義: **Not-null**設定は、すべてのフィールドが null 値を許容できないかどうかを制御します。 **Not-null**が`False`の場合、 **Null**で指定された文字列は、特定の値ではなく SQL NULL に変換されます。
 

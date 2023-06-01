@@ -5,7 +5,7 @@ summary: An overview of the usage of ADMIN SHOW TELEMETRY for the TiDB database.
 
 # 管理者表示テレメトリー {#admin-show-telemetry}
 
-`ADMIN SHOW TELEMETRY`ステートメントは、 [<a href="/telemetry.md">テレメトリー</a>](/telemetry.md)機能の一部として PingCAP に報告される情報を示します。
+`ADMIN SHOW TELEMETRY`ステートメントは、 [テレメトリー](/telemetry.md)機能の一部として PingCAP に報告される情報を示します。
 
 ## あらすじ {#synopsis}
 
@@ -427,5 +427,5 @@ DATA_PREVIEW: {
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/telemetry.md">テレメトリー</a>](/telemetry.md)
--   [<a href="/system-variables.md#tidb_enable_telemetry-new-in-v402">`tidb_enable_telemetry`システム変数</a>](/system-variables.md#tidb_enable_telemetry-new-in-v402)
+-   [テレメトリー](/telemetry.md)
+-   [`tidb_enable_telemetry`システム変数](/system-variables.md#tidb_enable_telemetry-new-in-v402)

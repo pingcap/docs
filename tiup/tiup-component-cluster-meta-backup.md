@@ -12,7 +12,7 @@ TiUPメタ ファイルは、クラスターの運用と保守 (OM) に使用さ
 tiup cluster meta backup <cluster-name> [flags]
 ```
 
-`<cluster-name>`は、操作対象のクラスターの名前です。クラスター名を忘れた場合は、 [<a href="/tiup/tiup-component-dm-list.md">`tiup dm list`</a>](/tiup/tiup-component-dm-list.md)コマンドを使用して確認できます。
+`<cluster-name>`は、操作対象のクラスターの名前です。クラスター名を忘れた場合は、 [`tiup dm list`](/tiup/tiup-component-dm-list.md)コマンドを使用して確認できます。
 
 ## オプション {#options}
 
@@ -30,4 +30,4 @@ TiUPメタ バックアップ ファイルを保存するターゲット ディ�
 
 tiup-clusterの実行ログ。
 
-[<a href="/tiup/tiup-component-cluster.md#command-list">&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト</a>](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト](/tiup/tiup-component-cluster.md#command-list)

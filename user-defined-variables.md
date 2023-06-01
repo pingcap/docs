@@ -182,4 +182,4 @@ SELECT @col FROM t;
 
 `SELECT ... INTO <variable>`を除いて、MySQL と TiDB でサポートされる構文は同一です。
 
-詳細については、 [<a href="https://dev.mysql.com/doc/refman/5.7/en/user-variables.html">MySQL のユーザー定義変数</a>](https://dev.mysql.com/doc/refman/5.7/en/user-variables.html)を参照してください。
+詳細については、 [MySQL のユーザー定義変数](https://dev.mysql.com/doc/refman/5.7/en/user-variables.html)を参照してください。

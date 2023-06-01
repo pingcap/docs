@@ -5,15 +5,15 @@ summary: Learn about user-level locking functions in TiDB.
 
 # ロック機能 {#locking-functions}
 
-TiDB は、 MySQL 5.7で利用可能なユーザーレベル[<a href="https://dev.mysql.com/doc/refman/5.7/en/locking-functions.html">ロック関数</a>](https://dev.mysql.com/doc/refman/5.7/en/locking-functions.html)のほとんどをサポートします。
+TiDB は、 MySQL 5.7で利用可能なユーザーレベル[ロック関数](https://dev.mysql.com/doc/refman/5.7/en/locking-functions.html)のほとんどをサポートします。
 
 ## サポートされている関数 {#supported-functions}
 
 | 名前                                                                                                                                                                                                                         | 説明                                                                                       |
 | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------- |
-| [<a href="https://dev.mysql.com/doc/refman/5.7/en/locking-functions.html#function_get-lock">`GET_LOCK(lockName, timeout)`</a>](https://dev.mysql.com/doc/refman/5.7/en/locking-functions.html#function_get-lock)           | アドバイザリーロックを取得します。 `lockName`パラメータは 64 文字以内である必要があります。タイムアウトになるまで最大`timeout`秒待機し、失敗を返します。 |
-| [<a href="https://dev.mysql.com/doc/refman/5.7/en/locking-functions.html#function_release-lock">`RELEASE_LOCK(lockName)`</a>](https://dev.mysql.com/doc/refman/5.7/en/locking-functions.html#function_release-lock)        | 以前に取得したロックを解放します。 `lockName`パラメータは 64 文字以内である必要があります。                                    |
-| [<a href="https://dev.mysql.com/doc/refman/5.7/en/locking-functions.html#function_release-all-locks">`RELEASE_ALL_LOCKS()`</a>](https://dev.mysql.com/doc/refman/5.7/en/locking-functions.html#function_release-all-locks) | 現在のセッションによって保持されているすべてのロックを解放します。                                                        |
+| [`GET_LOCK(lockName, timeout)`](https://dev.mysql.com/doc/refman/5.7/en/locking-functions.html#function_get-lock)           | アドバイザリーロックを取得します。 `lockName`パラメータは 64 文字以内である必要があります。タイムアウトになるまで最大`timeout`秒待機し、失敗を返します。 |
+| [`RELEASE_LOCK(lockName)`](https://dev.mysql.com/doc/refman/5.7/en/locking-functions.html#function_release-lock)        | 以前に取得したロックを解放します。 `lockName`パラメータは 64 文字以内である必要があります。                                    |
+| [`RELEASE_ALL_LOCKS()`](https://dev.mysql.com/doc/refman/5.7/en/locking-functions.html#function_release-all-locks) | 現在のセッションによって保持されているすべてのロックを解放します。                                                        |
 
 ## MySQLの互換性 {#mysql-compatibility}
 

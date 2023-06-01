@@ -1,16 +1,16 @@
 # TiDB ドキュメント貢献ガイド {#tidb-documentation-contributing-guide}
 
-[<a href="https://github.com/pingcap/tidb">TiDB</a>](https://github.com/pingcap/tidb)ドキュメントへようこそ!私たちは、あなたが[<a href="https://github.com/pingcap/community/">TiDB コミュニティ</a>](https://github.com/pingcap/community/)に参加してくれることを楽しみにしています。
+[TiDB コミュニティ](https://github.com/pingcap/community/)に参加してくれることを楽しみにしています。
 
 ## あなたが貢献できること {#what-you-can-contribute}
 
-[<a href="https://docs.pingcap.com/tidb/stable">PingCAP Web サイトの TiDB ドキュメント</a>](https://docs.pingcap.com/tidb/stable)を改善するには、次のいずれかの項目から始めることができます。
+[PingCAP Web サイトの TiDB ドキュメント](https://docs.pingcap.com/tidb/stable)を改善するには、次のいずれかの項目から始めることができます。
 
 -   タイプミスやフォーマット (句読点、スペース、インデント、コード ブロックなど) を修正します。
 -   不適切または古い説明を修正または更新する
 -   不足しているコンテンツ (文、段落、または新しいドキュメント) を追加します。
 -   ドキュメントの変更を英語から中国語に翻訳する
--   送信、返信、解決[<a href="https://github.com/pingcap/docs/issues">ドキュメントの問題</a>](https://github.com/pingcap/docs/issues)
+-   送信、返信、解決[ドキュメントの問題](https://github.com/pingcap/docs/issues)
 -   (上級) 他の人が作成したプル リクエストを確認する
 
 ## 貢献する前に {#before-you-contribute}
@@ -19,13 +19,13 @@
 
 ### スタイルに慣れる {#get-familiar-with-style}
 
--   [<a href="https://github.com/pingcap/community/blob/master/contributors/commit-message-pr-style.md#how-to-write-a-good-commit-message">コミットメッセージのスタイル</a>](https://github.com/pingcap/community/blob/master/contributors/commit-message-pr-style.md#how-to-write-a-good-commit-message)
--   [<a href="https://github.com/pingcap/community/blob/master/contributors/commit-message-pr-style.md#pull-request-title-style">プルリクエストのタイトルスタイル</a>](https://github.com/pingcap/community/blob/master/contributors/commit-message-pr-style.md#pull-request-title-style)
--   [<a href="/resources/markdownlint-rules.md">マークダウンルール</a>](/resources/markdownlint-rules.md)
--   [<a href="https://github.com/pingcap/community/blob/master/contributors/code-comment-style.md">コードコメントのスタイル</a>](https://github.com/pingcap/community/blob/master/contributors/code-comment-style.md)
--   図のスタイル: [<a href="https://github.com/pingcap/community/blob/master/contributors/figma-quick-start-guide.md">Figma クイック スタート ガイド</a>](https://github.com/pingcap/community/blob/master/contributors/figma-quick-start-guide.md)
+-   [コミットメッセージのスタイル](https://github.com/pingcap/community/blob/master/contributors/commit-message-pr-style.md#how-to-write-a-good-commit-message)
+-   [プルリクエストのタイトルスタイル](https://github.com/pingcap/community/blob/master/contributors/commit-message-pr-style.md#pull-request-title-style)
+-   [マークダウンルール](/resources/markdownlint-rules.md)
+-   [コードコメントのスタイル](https://github.com/pingcap/community/blob/master/contributors/code-comment-style.md)
+-   図のスタイル: [Figma クイック スタート ガイド](https://github.com/pingcap/community/blob/master/contributors/figma-quick-start-guide.md)
 
-    図のスタイルの一貫性を維持するには、 [<a href="https://www.figma.com/">フィグマ</a>](https://www.figma.com/)を使用して図を描画または設計することをお勧めします。図を描く必要がある場合は、ガイドを参照し、テンプレートに用意されている図形や色を使用してください。
+    図のスタイルの一貫性を維持するには、 [フィグマ](https://www.figma.com/)を使用して図を描画または設計することをお勧めします。図を描く必要がある場合は、ガイドを参照し、テンプレートに用意されている図形や色を使用してください。
 
 ### ドキュメントのバージョンについて学ぶ {#learn-about-docs-versions}
 
@@ -71,13 +71,13 @@
     -   `needs-cherry-pick-2.1`ラベル: ti-chi-bot が`release-2.1`支店に PR を提出します。
     -   `needs-cherry-pick-master`ラベル: ti-chi-bot が`master`支店に PR を提出します。
 
-    ドキュメントのバージョンの選択方法については、 [<a href="#guideline-for-choosing-the-affected-versions">影響を受けるバージョンを選択するためのガイドライン</a>](#guideline-for-choosing-the-affected-versions)を参照してください。
+    ドキュメントのバージョンの選択方法については、 [影響を受けるバージョンを選択するためのガイドライン](#guideline-for-choosing-the-affected-versions)を参照してください。
 
 -   変更のほとんどが複数のドキュメント バージョンに適用されるが、バージョン間にいくつかの違いが存在する場合でも、チェリーピック ラベルを使用して、ti-chi-bot に他のバージョンへの PR を作成させることができます。別のバージョンへの PR が ti-chi-bot によって正常に送信された後、その PR に変更を加えることができます。
 
 ## 貢献方法 {#how-to-contribute}
 
-このリポジトリへのプル リクエストを作成するには、次の手順を実行してください。コマンドを使用したくない場合は、簡単に開始できる[<a href="https://desktop.github.com/">GitHub デスクトップ</a>](https://desktop.github.com/)使用することもできます。
+このリポジトリへのプル リクエストを作成するには、次の手順を実行してください。コマンドを使用したくない場合は、簡単に開始できる[GitHub デスクトップ](https://desktop.github.com/)使用することもできます。
 
 > **ノート：**
 >
@@ -85,11 +85,11 @@
 
 ### ステップ 0: CLA に署名する {#step-0-sign-the-cla}
 
-プル リクエストは、 [<a href="https://cla-assistant.io/pingcap/docs">コントリビューターライセンス契約</a>](https://cla-assistant.io/pingcap/docs) (CLA) に署名した後にのみマージできます。続行する前に、必ず CLA に署名してください。
+プル リクエストは、 [コントリビューターライセンス契約](https://cla-assistant.io/pingcap/docs) (CLA) に署名した後にのみマージできます。続行する前に、必ず CLA に署名してください。
 
 ### ステップ 1: リポジトリをフォークする {#step-1-fork-the-repository}
 
-1.  プロジェクトにアクセスしてください: [<a href="https://github.com/pingcap/docs">https://github.com/pingcap/docs</a>](https://github.com/pingcap/docs)
+1.  プロジェクトにアクセスしてください: [https://github.com/pingcap/docs](https://github.com/pingcap/docs)
 2.  右上の**「Fork」**ボタンをクリックし、完了するまで待ちます。
 
 ### ステップ 2: フォークされたリポジトリのクローンをローカルstorageに作成する {#step-2-clone-the-forked-repository-to-local-storage}
@@ -132,7 +132,7 @@ git add <file> ... # Adds the file(s) you want to commit. If you want to commit 
 git commit -m "commit-message: update the xx"
 ```
 
-[<a href="https://github.com/pingcap/community/blob/master/contributors/commit-message-pr-style.md#how-to-write-a-good-commit-message">コミットメッセージのスタイル</a>](https://github.com/pingcap/community/blob/master/contributors/commit-message-pr-style.md#how-to-write-a-good-commit-message)を参照してください。
+[コミットメッセージのスタイル](https://github.com/pingcap/community/blob/master/contributors/commit-message-pr-style.md#how-to-write-a-good-commit-message)を参照してください。
 
 ### ステップ 6: ブランチをアップストリーム/マスターと同期した状態に保つ {#step-6-keep-your-branch-in-sync-with-upstream-master}
 
@@ -150,8 +150,8 @@ git push -u origin new-branch-name # "-u" is used to track the remote branch fro
 
 ### ステップ 8: プル リクエストを作成する {#step-8-create-a-pull-request}
 
-1.  [<a href="https://github.com/$user/docs">https://github.com/$user/docs</a>](https://github.com/$user/docs)のフォークにアクセスします ( `$user` GitHub ID に置き換えます)。
-2.  `new-branch-name`ブランチの横にある`Compare & pull request`ボタンをクリックして PR を作成します。 [<a href="https://github.com/pingcap/community/blob/master/contributors/commit-message-pr-style.md#pull-request-title-style">プルリクエストのタイトルスタイル</a>](https://github.com/pingcap/community/blob/master/contributors/commit-message-pr-style.md#pull-request-title-style)を参照してください。
+1.  [https://github.com/$user/docs](https://github.com/$user/docs)のフォークにアクセスします ( `$user` GitHub ID に置き換えます)。
+2.  `new-branch-name`ブランチの横にある`Compare & pull request`ボタンをクリックして PR を作成します。 [プルリクエストのタイトルスタイル](https://github.com/pingcap/community/blob/master/contributors/commit-message-pr-style.md#pull-request-title-style)を参照してください。
 
 これで、PR が正常に送信されました。この PR がマージされると、自動的に TiDB ドキュメントの寄稿者になります。
 
@@ -159,7 +159,7 @@ git push -u origin new-branch-name # "-u" is used to track the remote branch fro
 
 プル リクエストを作成するときは、プル リクエスト ページの説明テンプレートでドキュメントの変更を適用するリリース バージョンを選択する必要があります。
 
-変更が次のいずれかの状況に当てはまる場合は、 **MASTER ブランチのみを選択する**ことをお勧めします。 PR がマージされると、変更はすぐに[<a href="https://docs.pingcap.com/tidb/dev/">PingCAP ドキュメント Web サイトの開発ページ</a>](https://docs.pingcap.com/tidb/dev/)に表示されます。 TiDB の次のメジャー バージョンまたはマイナー バージョンがリリースされると、その変更は Web サイトの新しいバージョンのページにも表示されます。
+変更が次のいずれかの状況に当てはまる場合は、 **MASTER ブランチのみを選択する**ことをお勧めします。 PR がマージされると、変更はすぐに[PingCAP ドキュメント Web サイトの開発ページ](https://docs.pingcap.com/tidb/dev/)に表示されます。 TiDB の次のメジャー バージョンまたはマイナー バージョンがリリースされると、その変更は Web サイトの新しいバージョンのページにも表示されます。
 
 -   欠落または不完全なドキュメント内容の補足など、ドキュメントの強化に関連します。
 -   値、説明、例、タイプミスなど、不正確または間違ったドキュメントの内容を修正します。
@@ -174,4 +174,4 @@ git push -u origin new-branch-name # "-u" is used to track the remote branch fro
 
 ## コンタクト {#contact}
 
-[<a href="https://internals.tidb.io/">TiDB 内部フォーラム</a>](https://internals.tidb.io/)に参加して議論してください。
+[TiDB 内部フォーラム](https://internals.tidb.io/)に参加して議論してください。

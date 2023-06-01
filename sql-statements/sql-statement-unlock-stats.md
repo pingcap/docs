@@ -99,6 +99,6 @@ mysql> show warnings;
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/statistics.md#lock-statistics">統計</a>](/statistics.md#lock-statistics)
--   [<a href="/sql-statements/sql-statement-lock-stats.md">ロック統計</a>](/sql-statements/sql-statement-lock-stats.md)
--   [<a href="/sql-statements/sql-statement-show-stats-locked.md">STATS_LOCKEDを表示</a>](/sql-statements/sql-statement-show-stats-locked.md)
+-   [統計](/statistics.md#lock-statistics)
+-   [ロック統計](/sql-statements/sql-statement-lock-stats.md)
+-   [STATS_LOCKEDを表示](/sql-statements/sql-statement-show-stats-locked.md)

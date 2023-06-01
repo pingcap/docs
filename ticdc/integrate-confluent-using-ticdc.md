@@ -7,7 +7,7 @@ summary: Learn how to stream TiDB data to Confluent Cloud, Snowflake, ksqlDB, an
 
 Confluent は、強力なデータ統合機能を提供する Apache Kafka 互換のストリーミング データ プラットフォームです。このプラットフォームでは、ノンストップのリアルタイム ストリーミング データにアクセス、保存、管理できます。
 
-TiDB v6.1.0 以降、TiCDC は、Avro 形式での Confluent への増分データのレプリケートをサポートします。このドキュメントでは、 [<a href="/ticdc/ticdc-overview.md">TiCDC</a>](/ticdc/ticdc-overview.md)使用して TiDB 増分データを Confluent にレプリケートし、さらに Confluent Cloud 経由でデータを Snowflake、ksqlDB、SQL Server にレプリケートする方法を紹介します。この文書の構成は次のとおりです。
+TiDB v6.1.0 以降、TiCDC は、Avro 形式での Confluent への増分データのレプリケートをサポートします。このドキュメントでは、 [TiCDC](/ticdc/ticdc-overview.md)使用して TiDB 増分データを Confluent にレプリケートし、さらに Confluent Cloud 経由でデータを Snowflake、ksqlDB、SQL Server にレプリケートする方法を紹介します。この文書の構成は次のとおりです。
 
 1.  TiCDC を含む TiDB クラスターを迅速にデプロイします。
 2.  TiDB から Confluent Cloud にデータをレプリケートする変更フィードを作成します。
@@ -30,17 +30,17 @@ TiDB v6.1.0 以降、TiCDC は、Avro 形式での Confluent への増分デー�
     tiup status
     ```
 
-    TiUPがまだインストールされていない場合は、 [<a href="/tiup/tiup-overview.md#install-tiup">TiUPをインストールする</a>](/tiup/tiup-overview.md#install-tiup)を参照してください。本番環境では、 [<a href="/ticdc/deploy-ticdc.md">TiCDCのデプロイ</a>](/ticdc/deploy-ticdc.md)手順に従って TiCDC をデプロイできます。
+    TiUPがまだインストールされていない場合は、 [TiCDCのデプロイ](/ticdc/deploy-ticdc.md)手順に従って TiCDC をデプロイできます。
 
 2.  Confluent Cloud を登録し、Confluent クラスターを作成します。
 
-    基本クラスターを作成し、インターネット経由でアクセスできるようにします。詳細は[<a href="https://docs.confluent.io/cloud/current/get-started/index.html">Confluent クラウドのクイック スタート</a>](https://docs.confluent.io/cloud/current/get-started/index.html)を参照してください。
+    基本クラスターを作成し、インターネット経由でアクセスできるようにします。詳細は[Confluent クラウドのクイック スタート](https://docs.confluent.io/cloud/current/get-started/index.html)を参照してください。
 
 ### ステップ 2. アクセスキーペアを作成する {#step-2-create-an-access-key-pair}
 
 1.  クラスター API キーを作成します。
 
-    [<a href="https://confluent.cloud">合流クラウド</a>](https://confluent.cloud)にサインインします。 **[データ統合]** &gt; **[API キー]** &gt; [**キーの作成]**を選択します。表示される**[API キーのスコープの選択]**ページで、 **[グローバル アクセス]**を選択します。
+    [合流クラウド](https://confluent.cloud)にサインインします。 **[データ統合]** &gt; **[API キー]** &gt; [**キーの作成]**を選択します。表示される**[API キーのスコープの選択]**ページで、 **[グローバル アクセス]**を選択します。
 
     作成後、以下に示すようにキー ペア ファイルが生成されます。
 
@@ -79,7 +79,7 @@ TiDB v6.1.0 以降、TiCDC は、Avro 形式での Confluent への増分デー�
     xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
     ```
 
-    この手順は、Confluent CLI を使用して実行することもできます。詳細は[<a href="https://docs.confluent.io/confluent-cli/current/connect.html">Confluent CLI を Confluent クラウドクラスタに接続する</a>](https://docs.confluent.io/confluent-cli/current/connect.html)を参照してください。
+    この手順は、Confluent CLI を使用して実行することもできます。詳細は[Confluent CLI を Confluent クラウドクラスタに接続する](https://docs.confluent.io/confluent-cli/current/connect.html)を参照してください。
 
 ### ステップ 3. Kafka チェンジフィードを作成する {#step-3-create-a-kafka-changefeed}
 
@@ -94,7 +94,7 @@ TiDB v6.1.0 以降、TiCDC は、Avro 形式での Confluent への増分デー�
     ]
     ```
 
-    設定ファイルの`dispatchers`の詳細については、 [<a href="/ticdc/ticdc-sink-to-kafka.md#customize-the-rules-for-topic-and-partition-dispatchers-of-kafka-sink">Kafka シンクのトピックおよびパーティション ディスパッチャーのルールをカスタマイズする</a>](/ticdc/ticdc-sink-to-kafka.md#customize-the-rules-for-topic-and-partition-dispatchers-of-kafka-sink)を参照してください。
+    設定ファイルの`dispatchers`の詳細については、 [Kafka シンクのトピックおよびパーティション ディスパッチャーのルールをカスタマイズする](/ticdc/ticdc-sink-to-kafka.md#customize-the-rules-for-topic-and-partition-dispatchers-of-kafka-sink)を参照してください。
 
 2.  変更フィードを作成して増分データを Confluent Cloud にレプリケートします。
 
@@ -102,7 +102,7 @@ TiDB v6.1.0 以降、TiCDC は、Avro 形式での Confluent への増分デー�
     tiup ctl:v<CLUSTER_VERSION> cdc changefeed create --server="http://127.0.0.1:8300" --sink-uri="kafka://<broker_endpoint>/ticdc-meta?protocol=avro&replication-factor=3&enable-tls=true&auto-create-topic=true&sasl-mechanism=plain&sasl-user=<broker_api_key>&sasl-password=<broker_api_secret>" --schema-registry="https://<schema_registry_api_key>:<schema_registry_api_secret>@<schema_registry_endpoint>" --changefeed-id="confluent-changefeed" --config changefeed.conf
     ```
 
-    次のフィールドの値を、 [<a href="#step-2-create-an-access-key-pair">ステップ 2. アクセスキーペアを作成する</a>](#step-2-create-an-access-key-pair)で作成または記録された値に置き換える必要があります。
+    次のフィールドの値を、 [ステップ 2. アクセスキーペアを作成する](#step-2-create-an-access-key-pair)で作成または記録された値に置き換える必要があります。
 
     -   `<broker_endpoint>`
     -   `<broker_api_key>`
@@ -111,7 +111,7 @@ TiDB v6.1.0 以降、TiCDC は、Avro 形式での Confluent への増分デー�
     -   `<schema_registry_api_secret>`
     -   `<schema_registry_endpoint>`
 
-    値を置き換える前に、 [<a href="https://www.w3schools.com/tags/ref_urlencode.asp">HTML URL エンコーディングのリファレンス</a>](https://www.w3schools.com/tags/ref_urlencode.asp)に基づいて`<schema_registry_api_secret>`をエンコードする必要があることに注意してください。前述のフィールドをすべて置き換えると、構成ファイルは次のようになります。
+    値を置き換える前に、 [HTML URL エンコーディングのリファレンス](https://www.w3schools.com/tags/ref_urlencode.asp)に基づいて`<schema_registry_api_secret>`をエンコードする必要があることに注意してください。前述のフィールドをすべて置き換えると、構成ファイルは次のようになります。
 
     ```shell
     tiup ctl:v<CLUSTER_VERSION> cdc changefeed create --server="http://127.0.0.1:8300" --sink-uri="kafka://xxx-xxxxx.ap-east-1.aws.confluent.cloud:9092/ticdc-meta?protocol=avro&replication-factor=3&enable-tls=true&auto-create-topic=true&sasl-mechanism=plain&sasl-user=L5WWA4GK4NAT2EQV&sasl-password=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" --schema-registry="https://7NBH2CAFM2LMGTH7:xxxxxxxxxxxxxxxxxx@yyy-yyyyy.us-east-2.aws.confluent.cloud" --changefeed-id="confluent-changefeed" --config changefeed.conf
@@ -127,7 +127,7 @@ TiDB v6.1.0 以降、TiCDC は、Avro 形式での Confluent への増分デー�
             Info: {... changfeed info json struct ...}
             ```
 
-        -   コマンドの実行後に結果が返されない場合は、コマンドを実行したサーバーと Confluent Cloud の間のネットワーク接続を確認してください。詳細は[<a href="https://docs.confluent.io/cloud/current/networking/testing.html">Confluent Cloud への接続をテストする</a>](https://docs.confluent.io/cloud/current/networking/testing.html)を参照してください。
+        -   コマンドの実行後に結果が返されない場合は、コマンドを実行したサーバーと Confluent Cloud の間のネットワーク接続を確認してください。詳細は[Confluent Cloud への接続をテストする](https://docs.confluent.io/cloud/current/networking/testing.html)を参照してください。
 
 3.  変更フィードを作成した後、次のコマンドを実行して変更フィードのステータスを確認します。
 
@@ -135,7 +135,7 @@ TiDB v6.1.0 以降、TiCDC は、Avro 形式での Confluent への増分デー�
     tiup ctl:v<CLUSTER_VERSION> cdc changefeed list --server="http://127.0.0.1:8300"
     ```
 
-    チェンジフィードを管理するには、 [<a href="/ticdc/ticdc-manage-changefeed.md">TiCDC 変更フィードの管理</a>](/ticdc/ticdc-manage-changefeed.md)を参照してください。
+    チェンジフィードを管理するには、 [TiCDC 変更フィードの管理](/ticdc/ticdc-manage-changefeed.md)を参照してください。
 
 ### ステップ 4. データを書き込んで変更ログを生成する {#step-4-write-data-to-generate-change-logs}
 
@@ -150,7 +150,7 @@ TiDB v6.1.0 以降、TiCDC は、Avro 形式での Confluent への増分デー�
     tiup bench tpcc -H 127.0.0.1 -P 4000 -D tpcc --warehouses 4 run --time 300s
     ```
 
-    go-tpc の詳細については、 [<a href="/benchmark/benchmark-tidb-using-tpcc.md">TiDB で TPC-C テストを実行する方法</a>](/benchmark/benchmark-tidb-using-tpcc.md)を参照してください。
+    go-tpc の詳細については、 [TiDB で TPC-C テストを実行する方法](/benchmark/benchmark-tidb-using-tpcc.md)を参照してください。
 
 2.  Confluent Cloud でデータを観察します。
 
@@ -164,8 +164,8 @@ Snowflake はクラウド ネイティブのデータ ウェアハウスです�
 
 ### 前提条件 {#prerequisites}
 
--   Snowflake クラスターを登録して作成しました。 [<a href="https://docs.snowflake.com/en/user-guide-getting-started.html">スノーフレークの入門</a>](https://docs.snowflake.com/en/user-guide-getting-started.html)を参照してください。
--   Snowflake クラスターに接続する前に、その秘密キーを生成しておきます。 [<a href="https://docs.snowflake.com/en/user-guide/key-pair-auth.html">キーペア認証とキーペアローテーション</a>](https://docs.snowflake.com/en/user-guide/key-pair-auth.html)を参照してください。
+-   Snowflake クラスターを登録して作成しました。 [スノーフレークの入門](https://docs.snowflake.com/en/user-guide-getting-started.html)を参照してください。
+-   Snowflake クラスターに接続する前に、その秘密キーを生成しておきます。 [キーペア認証とキーペアローテーション](https://docs.snowflake.com/en/user-guide/key-pair-auth.html)を参照してください。
 
 ### 統合手順 {#integration-procedure}
 

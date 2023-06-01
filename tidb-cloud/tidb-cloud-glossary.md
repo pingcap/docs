@@ -12,7 +12,7 @@ category: glossary
 
 ACID は、トランザクションの 4 つの主要なプロパティ (アトミック性、一貫性、分離性、耐久性) を指します。これらの各プロパティについては以下で説明します。
 
--   **原子性とは、**操作のすべての変更が実行されるか、まったく実行されないかのいずれかを意味します。 TiDB は、主キーを格納する[<a href="#region">TiDBリージョン</a>](#region)のアトミック性を保証し、トランザクションのアトミック性を実現します。
+-   **原子性とは、**操作のすべての変更が実行されるか、まったく実行されないかのいずれかを意味します。 TiDB は、主キーを格納する[TiDBリージョン](#region)のアトミック性を保証し、トランザクションのアトミック性を実現します。
 
 -   **一貫性とは**、トランザクションが常にデータベースをある一貫した状態から別の一貫した状態に移行させることを意味します。 TiDB では、データをメモリに書き込む前にデータの整合性が確保されます。
 
@@ -58,7 +58,7 @@ TiDB Cloud は、概念実証 (PoC) ユーザーに一定数のクレジット�
 
 Playground には、GitHub イベントのプリロードされたデータセットが含まれており、Serverless Tierユーザーは、データのインポートやクライアントへの接続を行わずに、クエリを即座に実行してTiDB Cloudを使い始めることができます。
 
-[<a href="/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster">Serverless Tierクラスターの作成</a>](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster)以降、プレイグラウンドにアクセスできるようになります。
+[Serverless Tierクラスターの作成](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster)以降、プレイグラウンドにアクセスできるようになります。
 
 ### ポリシー {#policy}
 
@@ -100,7 +100,7 @@ Playground には、GitHub イベントのプリロードされたデータセ�
 
 ### TiDB クラスター {#tidb-cluster}
 
-機能的な作業データベースを形成する[<a href="https://docs.pingcap.com/tidb/stable/tidb-computing">TiDB</a>](https://docs.pingcap.com/tidb/stable/tidb-computing) 、 [<a href="https://docs.pingcap.com/tidb/stable/tidb-storage">TiKV</a>](https://docs.pingcap.com/tidb/stable/tidb-storage) 、 [<a href="https://docs.pingcap.com/tidb/stable/tidb-scheduling">配置Driver</a>](https://docs.pingcap.com/tidb/stable/tidb-scheduling) (PD)、および[<a href="https://docs.pingcap.com/tidb/stable/tiflash-overview">TiFlash</a>](https://docs.pingcap.com/tidb/stable/tiflash-overview)ノードのコレクション。
+機能的な作業データベースを形成する[TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview)ノードのコレクション。
 
 ### TiDB ノード {#tidb-node}
 
@@ -130,7 +130,7 @@ SQL クライアント経由でTiDB Cloudクラスターにアクセスできる
 
 ### VPC ピアリング {#vpc-peering}
 
-Virtual Private Cloud ( [<a href="#vpc">VPC</a>](#vpc) ) ネットワークに接続して、異なる VPC ネットワーク内のワークロードがプライベートに通信できるようにします。
+Virtual Private Cloud ( [VPC](#vpc) ) ネットワークに接続して、異なる VPC ネットワーク内のワークロードがプライベートに通信できるようにします。
 
 ### VPC ピアリング接続 {#vpc-peering-connection}
 

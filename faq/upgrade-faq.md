@@ -19,17 +19,17 @@ TiDB サービスにローリング アップデートを適用すると、実�
 
 -   アップグレード前の TiDB バージョンが v7.1.0 より前の場合:
 
-    -   DDL ステートメントがクラスター内で実行されているときは、TiDB クラスターをアップグレードし**ないでください**(通常は、 `ADD INDEX`や列タイプの変更などの時間のかかる DDL ステートメントの場合)。アップグレードの前に、 [<a href="/sql-statements/sql-statement-admin-show-ddl.md">`ADMIN SHOW DDL`</a>](/sql-statements/sql-statement-admin-show-ddl.md)コマンドを使用して、TiDB クラスターに進行中の DDL ジョブがあるかどうかを確認することをお勧めします。クラスターに DDL ジョブがある場合、クラスターをアップグレードするには、DDL の実行が完了するまで待つか、クラスターをアップグレードする前に[<a href="/sql-statements/sql-statement-admin-cancel-ddl.md">`ADMIN CANCEL DDL`</a>](/sql-statements/sql-statement-admin-cancel-ddl.md)コマンドを使用して DDL ジョブをキャンセルします。
+    -   DDL ステートメントがクラスター内で実行されているときは、TiDB クラスターをアップグレードし**ないでください**(通常は、 `ADD INDEX`や列タイプの変更などの時間のかかる DDL ステートメントの場合)。アップグレードの前に、 [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)コマンドを使用して DDL ジョブをキャンセルします。
 
     -   クラスターのアップグレード中は、DDL ステートメントを実行し**ないでください**。そうしないと、未定義の動作の問題が発生する可能性があります。
 
 -   アップグレード前の TiDB バージョンが v7.1.0 以降の場合:
 
-    -   以前のバージョンから v7.1.0 にアップグレードする場合の制限に従う必要はありません。つまり、TiDB はアップグレード中にユーザーの DDL タスクを受け取ることができます。詳細は[<a href="/smooth-upgrade-tidb.md">TiDB のスムーズなアップグレード</a>](/smooth-upgrade-tidb.md)を参照してください。
+    -   以前のバージョンから v7.1.0 にアップグレードする場合の制限に従う必要はありません。つまり、TiDB はアップグレード中にユーザーの DDL タスクを受け取ることができます。詳細は[TiDB のスムーズなアップグレード](/smooth-upgrade-tidb.md)を参照してください。
 
 ### バイナリを使用して TiDB をアップグレードするにはどうすればよいですか? {#how-to-upgrade-tidb-using-the-binary}
 
-バイナリを使用して TiDB をアップグレードすることはお勧めできません。代わりに、バージョンの一貫性と互換性の両方を保証する[<a href="/upgrade-tidb-using-tiup.md">TiUPを使用して TiDB をアップグレードする</a>](/upgrade-tidb-using-tiup.md)または[<a href="https://docs.pingcap.com/tidb-in-kubernetes/stable/upgrade-a-tidb-cluster">Kubernetes 上の TiDB クラスターをアップグレードする</a>](https://docs.pingcap.com/tidb-in-kubernetes/stable/upgrade-a-tidb-cluster)をお勧めします。
+バイナリを使用して TiDB をアップグレードすることはお勧めできません。代わりに、バージョンの一貫性と互換性の両方を保証する[Kubernetes 上の TiDB クラスターをアップグレードする](https://docs.pingcap.com/tidb-in-kubernetes/stable/upgrade-a-tidb-cluster)をお勧めします。
 
 ## アップグレード後のよくある質問 {#after-upgrade-faqs}
 

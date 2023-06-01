@@ -5,7 +5,7 @@ summary: Learn some key metrics displayed on the Grafana TiDB dashboard.
 
 # TiDB モニタリングメトリクス {#tidb-monitoring-metrics}
 
-TiUPを使用して TiDB クラスターをデプロイすると、監視システム (Prometheus および Grafana) も同時にデプロイされます。監視アーキテクチャについては、 [<a href="/tidb-monitoring-framework.md">TiDB モニタリング フレームワークの概要</a>](/tidb-monitoring-framework.md)を参照してください。
+TiUPを使用して TiDB クラスターをデプロイすると、監視システム (Prometheus および Grafana) も同時にデプロイされます。監視アーキテクチャについては、 [TiDB モニタリング フレームワークの概要](/tidb-monitoring-framework.md)を参照してください。
 
 Grafana ダッシュボードは、概要、PD、TiDB、TiKV、Node_exporter、Disk Performance、および Performance_overview を含む一連のサブ ダッシュボードに分割されています。 TiDB ダッシュボードは、TiDB パネルと TiDB 概要パネルで構成されます。 2 つのパネルの違いは次の点です。
 

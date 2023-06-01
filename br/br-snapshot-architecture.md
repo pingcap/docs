@@ -27,8 +27,8 @@ TiDB スナップショットのバックアップと復元のアーキテクチ
 
 2.  BR はデータのバックアップをスケジュールします。
 
-    -   **GC の一時停止**: BR は、バックアップ データが[<a href="/garbage-collection-overview.md">TiDB GC メカニズム</a>](/garbage-collection-overview.md)によってクリーンアップされないように TiDB GC 時間を設定します。
-    -   **TiKV およびリージョン情報の取得**: BR はPD にアクセスして、すべての TiKV ノードのアドレスとデータの[<a href="/tidb-storage.md#region">リージョン</a>](/tidb-storage.md#region)を取得します。
+    -   **GC の一時停止**: BR は、バックアップ データが[TiDB GC メカニズム](/garbage-collection-overview.md)によってクリーンアップされないように TiDB GC 時間を設定します。
+    -   **TiKV およびリージョン情報の取得**: BR はPD にアクセスして、すべての TiKV ノードのアドレスとデータの[リージョン](/tidb-storage.md#region)を取得します。
     -   **TiKV にデータのバックアップを要求する**: BR はバックアップ要求を作成し、それをすべての TiKV ノードに送信します。バックアップ要求には、バックアップ時点、バックアップ対象のリージョン、およびstorageパスが含まれます。
 
 3.  TiKV はバックアップ要求を受け入れ、バックアップ ワーカーを開始します。
@@ -77,7 +77,7 @@ TiDB スナップショットのバックアップと復元のアーキテクチ
 4.  TiKV がデータを復元します。
 
     -   **SST のダウンロード**: リストア ワーカーは、対応する SST ファイルをstorageパスからローカル ディレクトリにダウンロードします。
-    -   **KV の書き換え**: 復元ワーカーは、新しいテーブル ID に従って KV データを書き換えます。つまり、 [<a href="/tidb-computing.md#mapping-table-data-to-key-value">キーと値</a>](/tidb-computing.md#mapping-table-data-to-key-value)の元のテーブル ID を新しいテーブル ID に置き換えます。復元ワーカーも同様にインデックス ID を書き換えます。
+    -   **KV の書き換え**: 復元ワーカーは、新しいテーブル ID に従って KV データを書き換えます。つまり、 [キーと値](/tidb-computing.md#mapping-table-data-to-key-value)の元のテーブル ID を新しいテーブル ID に置き換えます。復元ワーカーも同様にインデックス ID を書き換えます。
     -   **SSTの取り込み**: リストア ワーカーは、処理された SST ファイルを RocksDB に取り込みます。
     -   **復元結果の報告**: 復元ワーカーは復元結果をBRに報告します。
 
@@ -118,8 +118,8 @@ TiDB スナップショットのバックアップと復元のアーキテクチ
 
 ### SSTファイルの保存形式 {#storage-format-of-sst-files}
 
--   SST ファイルのstorage形式については、 [<a href="https://github.com/facebook/rocksdb/wiki/Rocksdb-BlockBasedTable-Format">RocksDB BlockBasedTable 形式</a>](https://github.com/facebook/rocksdb/wiki/Rocksdb-BlockBasedTable-Format)を参照してください。
--   SSTファイルのバックアップデータのエンコード形式については、 [<a href="/tidb-computing.md#mapping-table-data-to-key-value">テーブルデータの Key-Value へのマッピング</a>](/tidb-computing.md#mapping-table-data-to-key-value)を参照してください。
+-   SST ファイルのstorage形式については、 [RocksDB BlockBasedTable 形式](https://github.com/facebook/rocksdb/wiki/Rocksdb-BlockBasedTable-Format)を参照してください。
+-   SSTファイルのバックアップデータのエンコード形式については、 [テーブルデータの Key-Value へのマッピング](/tidb-computing.md#mapping-table-data-to-key-value)を参照してください。
 
 ### バックアップファイルの構造 {#structure-of-backup-files}
 
@@ -155,4 +155,4 @@ TiDB スナップショットのバックアップと復元のアーキテクチ
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/br/br-snapshot-guide.md">TiDB スナップショットのバックアップおよび復元ガイド</a>](/br/br-snapshot-guide.md)
+-   [TiDB スナップショットのバックアップおよび復元ガイド](/br/br-snapshot-guide.md)

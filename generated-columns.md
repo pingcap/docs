@@ -106,7 +106,7 @@ ERROR 1048 (23000): Column 'city' cannot be null
 
 クエリ内の式がインデックス付きの生成列と厳密に同等である場合、TiDB はその式を対応する生成列に置き換えます。これにより、オプティマイザーは実行プランの構築中にそのインデックスを考慮できるようになります。
 
-次の例では、式`a+1`に対して生成された列を作成し、インデックスを追加します。 `a`の列の型は int で、 `a+1`の列の型は bigint です。生成された列の型が int に設定されている場合、置換は行われません。型変換規則については、 [<a href="/functions-and-operators/type-conversion-in-expression-evaluation.md">式評価の型変換</a>](/functions-and-operators/type-conversion-in-expression-evaluation.md)を参照してください。
+次の例では、式`a+1`に対して生成された列を作成し、インデックスを追加します。 `a`の列の型は int で、 `a+1`の列の型は bigint です。生成された列の型が int に設定されている場合、置換は行われません。型変換規則については、 [式評価の型変換](/functions-and-operators/type-conversion-in-expression-evaluation.md)を参照してください。
 
 ```sql
 create table t(a int);
@@ -143,7 +143,7 @@ desc select a+1 from t where a+1=3;
 
 > **ノート：**
 >
-> 置換される式と生成される列が両方とも文字列型であるが長さが異なる場合でも、システム変数[<a href="/system-variables.md#tidb_enable_unsafe_substitute-new-in-v630">`tidb_enable_unsafe_substitute`</a>](/system-variables.md#tidb_enable_unsafe_substitute-new-in-v630)から`ON`を設定することで式を置換できます。このシステム変数を構成するときは、生成された列によって計算された値が生成された列の定義を厳密に満たしていることを確認してください。そうしないと、長さの違いによりデータが切り捨てられ、不正確な結果が生じる可能性があります。 GitHub の問題[<a href="https://github.com/pingcap/tidb/issues/35490#issuecomment-1211658886">#35490</a>](https://github.com/pingcap/tidb/issues/35490#issuecomment-1211658886)を参照してください。
+> 置換される式と生成される列が両方とも文字列型であるが長さが異なる場合でも、システム変数[#35490](https://github.com/pingcap/tidb/issues/35490#issuecomment-1211658886)を参照してください。
 
 ## 制限事項 {#limitations}
 
@@ -152,5 +152,5 @@ JSON と生成された列の現在の制限は次のとおりです。
 -   `ALTER TABLE`を介して格納された生成列を追加することはできません。
 -   `ALTER TABLE`ステートメントを使用して格納された生成列を通常の列に変換したり、通常の列を格納された生成列に変換したりすることはできません。
 -   `ALTER TABLE`ステートメントを使用して、保存された生成列の式を変更することはできません。
--   すべての[<a href="/functions-and-operators/json-functions.md">JSON関数</a>](/functions-and-operators/json-functions.md)サポートされているわけではありません。
+-   すべての[JSON関数](/functions-and-operators/json-functions.md)サポートされているわけではありません。
 -   現在、生成列インデックス置換ルールは、生成列が仮想生成列である場合にのみ有効です。格納された生成列では無効ですが、生成列自体を直接使用することでインデックスを引き続き使用できます。

@@ -82,7 +82,7 @@ source /home/tidb/.bash_profile
 
 さまざまなクラスター トポロジに応じてクラスター初期化構成ファイルを編集する必要があります。
 
-完全な構成テンプレートについては、 [<a href="https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml">TiUP設定パラメータ テンプレート</a>](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml)を参照してください。 `topology.yaml`設定ファイルを作成します。その他の組み合わせシナリオでは、テンプレートに従って必要に応じて構成ファイルを編集します。
+完全な構成テンプレートについては、 [TiUP設定パラメータ テンプレート](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml)を参照してください。 `topology.yaml`設定ファイルを作成します。その他の組み合わせシナリオでは、テンプレートに従って必要に応じて構成ファイルを編集します。
 
 3 つの DM マスター、3 つの DM ワーカー、および 1 つの監視コンポーネントインスタンスをデプロイする構成は次のとおりです。
 
@@ -125,9 +125,9 @@ alertmanager_servers:
 >
 > -   特定のノードで有効にするパラメータについては、このノードの`config`でこれらのパラメータを設定します。
 >
-> -   構成のサブカテゴリを示すには`.`を使用します ( `log.slow-threshold`など)。その他の形式については、 [<a href="https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml">TiUP構成テンプレート</a>](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml)を参照してください。
+> -   構成のサブカテゴリを示すには`.`を使用します ( `log.slow-threshold`など)。その他の形式については、 [TiUP構成テンプレート](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml)を参照してください。
 >
-> -   パラメーターの詳細については、 [<a href="https://github.com/pingcap/dm/blob/master/dm/master/dm-master.toml">マスター`config.toml.example`</a>](https://github.com/pingcap/dm/blob/master/dm/master/dm-master.toml)および[<a href="https://github.com/pingcap/dm/blob/master/dm/worker/dm-worker.toml">ワーカーの`config.toml.example`</a>](https://github.com/pingcap/dm/blob/master/dm/worker/dm-worker.toml)を参照してください。
+> -   パラメーターの詳細については、 [ワーカーの`config.toml.example`](https://github.com/pingcap/dm/blob/master/dm/worker/dm-worker.toml)を参照してください。
 >
 > -   次のコンポーネント間のポートが相互接続されていることを確認してください。
 >     -   DM マスター ノードのうちの`peer_port` (デフォルトでは`8291` ) は相互接続されています。
@@ -159,7 +159,7 @@ tiup dm deploy dm-test ${version} ./topology.yaml --user root [-p] [-i /home/roo
 -   初期化設定ファイルは`topology.yaml`です。
 -   `--user root` : `root`キーを使用してターゲット マシンにログインしてクラスターのデプロイメントを完了するか、 `ssh`および`sudo`権限を持つ他のユーザーを使用してデプロイメントを完了することもできます。
 -   `[-i]`および`[-p]` : オプション。パスワードなしでターゲット マシンへのログインを設定した場合、これらのパラメータは必要ありません。そうでない場合は、2 つのパラメータのいずれかを選択します。 `[-i]`ターゲット マシンにアクセスできるユーザー`root` (または`--user`で指定された他のユーザー) の秘密キーです。 `[-p]`ユーザーのパスワードを対話的に入力するために使用されます。
--   TiUP DM は組み込み SSH クライアントを使用します。制御マシン システムにネイティブな SSH クライアントを使用する場合は、 [<a href="/dm/maintain-dm-using-tiup.md#use-the-systems-native-ssh-client-to-connect-to-cluster">システムのネイティブ SSH クライアントを使用してクラスターに接続する</a>](/dm/maintain-dm-using-tiup.md#use-the-systems-native-ssh-client-to-connect-to-cluster)に従って設定を編集します。
+-   TiUP DM は組み込み SSH クライアントを使用します。制御マシン システムにネイティブな SSH クライアントを使用する場合は、 [システムのネイティブ SSH クライアントを使用してクラスターに接続する](/dm/maintain-dm-using-tiup.md#use-the-systems-native-ssh-client-to-connect-to-cluster)に従って設定を編集します。
 
 出力ログの最後には``Deployed cluster `dm-test` successfully``が表示されます。これは、展開が成功したことを示します。
 

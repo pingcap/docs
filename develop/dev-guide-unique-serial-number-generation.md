@@ -17,7 +17,7 @@ summary: Unique serial number generation solution for developers who generate th
 
 **シーケンスは**、アプリケーションが増分シーケンス値を生成するために呼び出すことができるデータベース オブジェクトです。アプリケーションはシーケンス値を柔軟に使用して、1 つ以上のテーブルに値を割り当てることができます。アプリケーションは、シーケンス値を使用してより複雑な処理を行い、テキストと数値の組み合わせを生成することもできます。このアプローチにより、プロキシ キーに追跡と分類の意味が与えられます。
 
-シーケンスは TiDB v4.0 以降で利用可能です。詳細は[<a href="/sql-statements/sql-statement-create-sequence.md#create-sequence">シーケンスのドキュメント</a>](/sql-statements/sql-statement-create-sequence.md#create-sequence)を参照してください。
+シーケンスは TiDB v4.0 以降で利用可能です。詳細は[シーケンスのドキュメント](/sql-statements/sql-statement-create-sequence.md#create-sequence)を参照してください。
 
 ## スノーフレークのようなソリューション {#snowflake-like-solutions}
 

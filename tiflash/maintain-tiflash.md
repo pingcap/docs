@@ -5,7 +5,7 @@ summary: Learn common operations when you maintain a TiFlash cluster.
 
 # TiFlashクラスタの管理 {#maintain-a-tiflash-cluster}
 
-このドキュメントでは、 TiFlashバージョンの確認など、 [<a href="/tiflash/tiflash-overview.md">TiFlash</a>](/tiflash/tiflash-overview.md)クラスターを保守する場合の一般的な操作を実行する方法について説明します。このドキュメントでは、 TiFlashの重要なログとシステム テーブルも紹介します。
+このドキュメントでは、 TiFlashバージョンの確認など、 [TiFlash](/tiflash/tiflash-overview.md)クラスターを保守する場合の一般的な操作を実行する方法について説明します。このドキュメントでは、 TiFlashの重要なログとシステム テーブルも紹介します。
 
 ## TiFlashのバージョンを確認する {#check-the-tiflash-version}
 
@@ -23,7 +23,7 @@ TiFlash のバージョンを確認するには 2 つの方法があります。
     LD_LIBRARY_PATH=./ ./tiflash version
     ```
 
--   TiFlash のバージョンはTiFlashログを参照して確認してください。ログのパスについては、 [<a href="/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file">`tiflash.toml`ファイル</a>](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)の`[logger]`部分を参照してください。例えば：
+-   TiFlash のバージョンはTiFlashログを参照して確認してください。ログのパスについては、 [`tiflash.toml`ファイル](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)の`[logger]`部分を参照してください。例えば：
 
     ```
     <information>: TiFlash version: TiFlash 0.2.0 master-375035282451103999f3863c691e2fc2

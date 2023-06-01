@@ -28,7 +28,7 @@ TiDB と MySQL のパスワード有効期限ポリシーには次のような�
 TiDB の有効期限メカニズムは、次の点で MySQL とは異なります。
 
 -   MySQL v5.7 および v8.0 では、クライアントとサーバーの構成を組み合わせて、クライアント接続に対して「サンドボックス モード」を有効にするかどうかが決まります。
--   TiDB では、 [<a href="/tidb-configuration-file.md#disconnect-on-expired-password-new-in-v650">`security.disconnect-on-expired-password`</a>](/tidb-configuration-file.md#disconnect-on-expired-password-new-in-v650)構成項目だけで、クライアント接続に対して「サンドボックス モード」を有効にするかどうかが決まります。
+-   TiDB では、 [`security.disconnect-on-expired-password`](/tidb-configuration-file.md#disconnect-on-expired-password-new-in-v650)構成項目だけで、クライアント接続に対して「サンドボックス モード」を有効にするかどうかが決まります。
 
 ### パスワードの複雑さのポリシー {#password-complexity-policy}
 
@@ -44,13 +44,13 @@ TiDB と MySQL のパスワード複雑さのポリシーには次のような�
 
     -   MySQL v5.7 では、この機能は`validate_password`プラグインを使用して実装されます。プラグインをインストールすることでこの機能を有効にできます。
     -   MySQL v8.0 では、この機能は`validate_password`コンポーネントを使用して実装されます。この機能は、コンポーネントをインストールすることで有効にできます。
-    -   TiDB の場合、この機能は組み込まれています。システム変数[<a href="/system-variables.md#validate_passwordenable-new-in-v650">`validate_password.enable`</a>](/system-variables.md#validate_passwordenable-new-in-v650)を使用してこの機能を有効にできます。
+    -   TiDB の場合、この機能は組み込まれています。システム変数[`validate_password.enable`](/system-variables.md#validate_passwordenable-new-in-v650)を使用してこの機能を有効にできます。
 
 -   辞書チェック:
 
     -   MySQL v5.7 では、 `validate_password_dictionary_file`変数を使用してファイル パスを指定できます。このファイルには、パスワードに含めることが許可されていない単語のリストが含まれています。
     -   MySQL v8.0 では、 `validate_password.dictionary_file`変数を使用してファイル パスを指定できます。このファイルには、パスワードに含めることが許可されていない単語のリストが含まれています。
-    -   TiDB では、 [<a href="/system-variables.md#validate_passworddictionary-new-in-v650">`validate_password.dictionary`</a>](/system-variables.md#validate_passworddictionary-new-in-v650)システム変数を使用して文字列を指定できます。この文字列には、パスワードに含めることが許可されていない単語のリストが含まれています。
+    -   TiDB では、 [`validate_password.dictionary`](/system-variables.md#validate_passworddictionary-new-in-v650)システム変数を使用して文字列を指定できます。この文字列には、パスワードに含めることが許可されていない単語のリストが含まれています。
 
 ### パスワード障害の追跡 {#password-failure-tracking}
 
@@ -107,19 +107,19 @@ TiDB と MySQL のパスワード再利用ポリシーには次のような違�
 
 ## 認証プラグインのステータス {#authentication-plugin-status}
 
-TiDB は複数の認証方法をサポートしています。これらのメソッドは、 [<a href="/sql-statements/sql-statement-create-user.md">`CREATE USER`</a>](/sql-statements/sql-statement-create-user.md)と[<a href="/sql-statements/sql-statement-create-user.md">`ALTER USER`</a>](/sql-statements/sql-statement-create-user.md)を使用してユーザーごとに指定できます。これらのメソッドは、同じ名前の MySQL の認証メソッドと互換性があります。
+TiDB は複数の認証方法をサポートしています。これらのメソッドは、 [`ALTER USER`](/sql-statements/sql-statement-create-user.md)を使用してユーザーごとに指定できます。これらのメソッドは、同じ名前の MySQL の認証メソッドと互換性があります。
 
-次の表でサポートされている認証方法のいずれかを使用できます。クライアント/サーバー接続の確立時にサーバーがアドバタイズするデフォルトのメソッドを指定するには、変数[<a href="/system-variables.md#default_authentication_plugin">`default_authentication_plugin`</a>](/system-variables.md#default_authentication_plugin)を設定します。 `tidb_sm3_password`は、TiDB でのみサポートされている SM3 認証方法です。したがって、この方法を使用して認証するには、 [<a href="https://github.com/pingcap/mysql-connector-j/tree/release/8.0-sm3">TiDB-JDBC</a>](https://github.com/pingcap/mysql-connector-j/tree/release/8.0-sm3)を使用して TiDB に接続する必要があります。 `tidb_auth_token`は、 TiDB Cloudでのみ使用される JSON Web Token (JWT) ベースの認証方法です。
+次の表でサポートされている認証方法のいずれかを使用できます。クライアント/サーバー接続の確立時にサーバーがアドバタイズするデフォルトのメソッドを指定するには、変数[TiDB-JDBC](https://github.com/pingcap/mysql-connector-j/tree/release/8.0-sm3)を使用して TiDB に接続する必要があります。 `tidb_auth_token`は、 TiDB Cloudでのみ使用される JSON Web Token (JWT) ベースの認証方法です。
 
 <CustomContent platform="tidb">
 
-TLS 認証のサポートの構成は異なります。詳細については、 [<a href="/enable-tls-between-clients-and-servers.md">TiDB クライアントとサーバーの間で TLS を有効にする</a>](/enable-tls-between-clients-and-servers.md)を参照してください。
+TLS 認証のサポートの構成は異なります。詳細については、 [TiDB クライアントとサーバーの間で TLS を有効にする](/enable-tls-between-clients-and-servers.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-TLS 認証のサポートの構成は異なります。詳細については、 [<a href="https://docs.pingcap.com/tidb/stable/enable-tls-between-clients-and-servers">TiDB クライアントとサーバーの間で TLS を有効にする</a>](https://docs.pingcap.com/tidb/stable/enable-tls-between-clients-and-servers)を参照してください。
+TLS 認証のサポートの構成は異なります。詳細については、 [TiDB クライアントとサーバーの間で TLS を有効にする](https://docs.pingcap.com/tidb/stable/enable-tls-between-clients-and-servers)を参照してください。
 
 </CustomContent>
 

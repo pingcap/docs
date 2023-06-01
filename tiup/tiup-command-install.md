@@ -24,4 +24,4 @@ tiup install <component1>[:version] [component2...N] [flags]
 -   コンポーネントが存在しない場合は、エラー`The component "%s" not found`が報告されます。
 -   バージョンが存在しない場合は、 `version %s not supported by component %s`エラーが報告されます。
 
-[<a href="/tiup/tiup-reference.md#command-list">&lt;&lt; 前のページに戻る - TiUPリファレンスコマンドリスト</a>](/tiup/tiup-reference.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPリファレンスコマンドリスト](/tiup/tiup-reference.md#command-list)

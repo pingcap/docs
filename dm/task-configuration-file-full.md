@@ -4,11 +4,11 @@ title: DM Advanced Task Configuration File
 
 # DM 拡張タスクコンフィグレーションファイル {#dm-advanced-task-configuration-file}
 
-このドキュメントでは、データ移行 (DM) の高度なタスク構成ファイル ( [<a href="#global-configuration">グローバル構成</a>](#global-configuration)と[<a href="#instance-configuration">インスタンス構成</a>](#instance-configuration)を含む) を紹介します。
+このドキュメントでは、データ移行 (DM) の高度なタスク構成ファイル ( [インスタンス構成](#instance-configuration)を含む) を紹介します。
 
 ## 重要な概念 {#important-concepts}
 
-`source-id`および DM ワーカー ID を含む重要な概念の説明については、 [<a href="/dm/dm-config-overview.md#important-concepts">重要な概念</a>](/dm/dm-config-overview.md#important-concepts)を参照してください。
+`source-id`および DM ワーカー ID を含む重要な概念の説明については、 [重要な概念](/dm/dm-config-overview.md#important-concepts)を参照してください。
 
 ## タスク構成ファイルのテンプレート (詳細) {#task-configuration-file-template-advanced}
 
@@ -238,14 +238,14 @@ mysql-instances:
 
 ## コンフィグレーションの順序 {#configuration-order}
 
-1.  [<a href="#global-configuration">グローバル構成</a>](#global-configuration)を編集します。
-2.  グローバル設定に基づいて[<a href="#instance-configuration">インスタンス構成</a>](#instance-configuration)を編集します。
+1.  [グローバル構成](#global-configuration)を編集します。
+2.  グローバル設定に基づいて[インスタンス構成](#instance-configuration)を編集します。
 
 ## グローバル構成 {#global-configuration}
 
 ### 基本構成 {#basic-configuration}
 
-詳細については、 [<a href="#task-configuration-file-template-advanced">レンプレート</a>](#task-configuration-file-template-advanced)のコメントを参照してください。 `task-mode`についての詳しい説明は以下の通りです。
+詳細については、 [レンプレート](#task-configuration-file-template-advanced)のコメントを参照してください。 `task-mode`についての詳しい説明は以下の通りです。
 
 -   説明: 実行するデータ移行タスクを指定するために使用できるタスク モード。
 -   値: 文字列 ( `full` 、 `incremental` 、または`all` )。
@@ -255,13 +255,13 @@ mysql-instances:
 
 ### 機能構成セット {#feature-configuration-set}
 
-各機能構成セットの引数は、 [<a href="#task-configuration-file-template-advanced">レンプレート</a>](#task-configuration-file-template-advanced)のコメントで説明されています。
+各機能構成セットの引数は、 [レンプレート](#task-configuration-file-template-advanced)のコメントで説明されています。
 
 | パラメータ              | 説明                                                                                                                                                                                                                                                                                                                                                |
 | :----------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `routes`           | 上流テーブルと下流テーブルの間に設定されるルーティング マッピング ルール。上流と下流のスキーマ名とテーブル名が同じ場合は、この項目を設定する必要はありません。使用シナリオとサンプル構成については、 [<a href="/dm/dm-table-routing.md">テーブルルーティング</a>](/dm/dm-table-routing.md)を参照してください。                                                                                                                                                         |
-| `filters`          | アップストリーム データベース インスタンスの一致するテーブルのbinlogイベント フィルター ルール セット。 binlogフィルタリングが必要ない場合、この項目を設定する必要はありません。使用シナリオとサンプル構成については、 [<a href="/dm/dm-binlog-event-filter.md">Binlogイベントフィルター</a>](/dm/dm-binlog-event-filter.md)を参照してください。                                                                                                                       |
-| `block-allow-list` | 上流のデータベース インスタンスの一致するテーブルのブロック許可リストのフィルター ルール セット。この項目で移行する必要があるスキーマとテーブルを指定することをお勧めします。指定しないと、すべてのスキーマとテーブルが移行されます。使用シナリオとサンプル構成については、 [<a href="/dm/dm-binlog-event-filter.md">Binlogイベントフィルター</a>](/dm/dm-binlog-event-filter.md)と[<a href="/dm/dm-block-allow-table-lists.md">ブロックリストと許可リスト</a>](/dm/dm-block-allow-table-lists.md)を参照してください。 |
+| `routes`           | 上流テーブルと下流テーブルの間に設定されるルーティング マッピング ルール。上流と下流のスキーマ名とテーブル名が同じ場合は、この項目を設定する必要はありません。使用シナリオとサンプル構成については、 [テーブルルーティング](/dm/dm-table-routing.md)を参照してください。                                                                                                                                                         |
+| `filters`          | アップストリーム データベース インスタンスの一致するテーブルのbinlogイベント フィルター ルール セット。 binlogフィルタリングが必要ない場合、この項目を設定する必要はありません。使用シナリオとサンプル構成については、 [Binlogイベントフィルター](/dm/dm-binlog-event-filter.md)を参照してください。                                                                                                                       |
+| `block-allow-list` | 上流のデータベース インスタンスの一致するテーブルのブロック許可リストのフィルター ルール セット。この項目で移行する必要があるスキーマとテーブルを指定することをお勧めします。指定しないと、すべてのスキーマとテーブルが移行されます。使用シナリオとサンプル構成については、 [ブロックリストと許可リスト](/dm/dm-block-allow-table-lists.md)を参照してください。 |
 | `mydumpers`        | ダンプ処理ユニットのコンフィグレーション引数。デフォルト設定でニーズを十分に満たす場合は、この項目を設定する必要はありません。または、 `mydumper-thread`を使用して`thread`のみを構成することもできます。                                                                                                                                                                                                                                 |
 | `loaders`          | ロード処理ユニットのコンフィグレーション引数。デフォルト設定でニーズを十分に満たす場合は、この項目を設定する必要はありません。または、 `loader-thread`を使用して`pool-size`のみを構成することもできます。                                                                                                                                                                                                                                |
 | `syncers`          | 同期処理ユニットのコンフィグレーション引数。デフォルト設定でニーズを十分に満たす場合は、この項目を設定する必要はありません。または、 `syncer-thread`を使用して`worker-count`のみを構成することもできます。                                                                                                                                                                                                                              |
@@ -270,7 +270,7 @@ mysql-instances:
 
 この部分では、データ移行のサブタスクを定義します。 DM は、アップストリームの 1 つまたは複数の MySQL インスタンスからダウンストリームの同じインスタンスへのデータの移行をサポートします。
 
-上記のオプションの設定の詳細については、次の表に示すように、 [<a href="#feature-configuration-set">機能構成セット</a>](#feature-configuration-set)の対応する部分を参照してください。
+上記のオプションの設定の詳細については、次の表に示すように、 [機能構成セット](#feature-configuration-set)の対応する部分を参照してください。
 
 | オプション                  | 対応箇所               |
 | :--------------------- | :----------------- |

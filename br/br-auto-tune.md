@@ -13,7 +13,7 @@ TiDB v5.4.0 より前では、バックアップと復元 (BR) を使用して�
 
 クラスターに対するバックアップ タスクの影響を軽減したい場合は、自動調整機能を有効にすることができます。この機能を有効にすると、TiDB はクラスターに過度の影響を与えることなく、可能な限り高速にバックアップ タスクを実行します。
 
-あるいは、TiKV 構成項目[<a href="/tikv-configuration-file.md#num-threads-1">`backup.num-threads`</a>](/tikv-configuration-file.md#num-threads-1)またはパラメーター`--ratelimit`を使用して、バックアップ速度を制限することもできます。
+あるいは、TiKV 構成項目[`backup.num-threads`](/tikv-configuration-file.md#num-threads-1)またはパラメーター`--ratelimit`を使用して、バックアップ速度を制限することもできます。
 
 ## 自動調整を使用する {#use-auto-tune}
 
@@ -23,7 +23,7 @@ TiDB v5.4.0 より前では、バックアップと復元 (BR) を使用して�
 >
 > v5.3.x から v5.4.0 以降のバージョンにアップグレードするクラスターの場合、自動調整機能はデフォルトで無効になっています。手動で有効にする必要があります。
 
-自動調整機能を手動で有効にするには、TiKV 構成項目[<a href="/tikv-configuration-file.md#enable-auto-tune-new-in-v540">`backup.enable-auto-tune`</a>](/tikv-configuration-file.md#enable-auto-tune-new-in-v540) ～ `true`を設定する必要があります。
+自動調整機能を手動で有効にするには、TiKV 構成項目[`backup.enable-auto-tune`](/tikv-configuration-file.md#enable-auto-tune-new-in-v540) ～ `true`を設定する必要があります。
 
 TiKV は、自動調整機能の動的構成をサポートしています。クラスターを再起動せずに、この機能を有効または無効にすることができます。自動調整機能を動的に有効または無効にするには、次のコマンドを実行します。
 
@@ -51,7 +51,7 @@ tikv-ctl modify-tikv-config -n backup.enable-auto-tune -v <true|false>
 
     -   解決策: ホットスポット ノードを削除するか、ホットスポット ノードの自動調整を無効にします (クラスターのパフォーマンスが低下する可能性があります)。
 
--   問題 3:**トラフィック ジッターが高い**シナリオの場合、自動調整は一定の間隔 (デフォルトでは 1 分) で速度制限を調整するため、トラフィック ジッターが大きい場合は処理できない可能性があります。詳細は[<a href="#implementation">`auto-tune-refresh-interval`</a>](#implementation)を参照してください。
+-   問題 3:**トラフィック ジッターが高い**シナリオの場合、自動調整は一定の間隔 (デフォルトでは 1 分) で速度制限を調整するため、トラフィック ジッターが大きい場合は処理できない可能性があります。詳細は[`auto-tune-refresh-interval`](#implementation)を参照してください。
 
     -   解決策: 自動調整を無効にします。
 

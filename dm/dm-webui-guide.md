@@ -29,7 +29,7 @@ DM WebUIには次のページがあります。
 
 ## アクセス方法 {#access-method}
 
-[<a href="/dm/dm-open-api.md#maintain-dm-clusters-using-openapi">オープンAPI</a>](/dm/dm-open-api.md#maintain-dm-clusters-using-openapi)が有効な場合、DM クラスターの任意のマスター ノードからDM WebUIにアクセスできます。アクセスポートはデフォルトで`8261`であり、DM OpenAPI と同じです。アクセス アドレスの例は次のとおりです。 `http://{master_ip}:{master_port}/dashboard/` 。
+[オープンAPI](/dm/dm-open-api.md#maintain-dm-clusters-using-openapi)が有効な場合、DM クラスターの任意のマスター ノードからDM WebUIにアクセスできます。アクセスポートはデフォルトで`8261`であり、DM OpenAPI と同じです。アクセス アドレスの例は次のとおりです。 `http://{master_ip}:{master_port}/dashboard/` 。
 
 ## 移住 {#migration}
 

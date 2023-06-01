@@ -5,7 +5,7 @@ summary: Learn about the data types supported in TiDB.
 
 # データ型 {#data-types}
 
-TiDB は、 `SPATIAL`のタイプを除く MySQL のすべてのデータ タイプをサポートします。これには、 [<a href="/data-type-numeric.md">数値型</a>](/data-type-numeric.md) 、 [<a href="/data-type-string.md">文字列型</a>](/data-type-string.md) 、 [<a href="/data-type-date-and-time.md">日付と時刻のタイプ</a>](/data-type-date-and-time.md) 、および[<a href="/data-type-json.md">JSON タイプ</a>](/data-type-json.md)がすべて含まれます。
+TiDB は、 `SPATIAL`のタイプを除く MySQL のすべてのデータ タイプをサポートします。これには、 [JSON タイプ](/data-type-json.md)がすべて含まれます。
 
 データ型に使用される定義は`T(M[, D])`として指定されます。どこで:
 

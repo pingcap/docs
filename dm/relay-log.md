@@ -7,7 +7,7 @@ summary: Learn the directory structure, initial migration rules and data purge o
 
 データ移行 (DM) リレー ログは、データベースの変更を説明するイベントを含む番号付きファイルのいくつかのセットと、使用されるすべてのリレー ログ ファイルの名前を含むインデックス ファイルで構成されます。
 
-リレーログが有効になると、DM-worker はアップストリームのbinlogをローカル構成ディレクトリに自動的に移行します ( TiUPを使用して DM が展開されている場合、デフォルトの移行ディレクトリは`<deploy_dir>/<relay_log>`です)。デフォルト値`<relay_log>`は`relay-dir`ですが、 [<a href="/dm/dm-source-configuration-file.md">アップストリーム データベースコンフィグレーションファイル</a>](/dm/dm-source-configuration-file.md)で変更できます。 v5.4.0 以降、 [<a href="/dm/dm-worker-configuration-file.md">DM ワーカー構成ファイル</a>](/dm/dm-worker-configuration-file.md)の`relay-dir`から 9 までのローカル構成ディレクトリを構成できます。これは、アップストリーム データベースの構成ファイルよりも優先されます。
+リレーログが有効になると、DM-worker はアップストリームのbinlogをローカル構成ディレクトリに自動的に移行します ( TiUPを使用して DM が展開されている場合、デフォルトの移行ディレクトリは`<deploy_dir>/<relay_log>`です)。デフォルト値`<relay_log>`は`relay-dir`ですが、 [DM ワーカー構成ファイル](/dm/dm-worker-configuration-file.md)の`relay-dir`から 9 までのローカル構成ディレクトリを構成できます。これは、アップストリーム データベースの構成ファイルよりも優先されます。
 
 ## ユーザーシナリオ {#user-scenarios}
 
@@ -37,7 +37,7 @@ MySQL では、storage容量が限られているため、最大保持時間に�
 
 v5.4.0 以降のバージョンでは、 `enable-relay` ～ `true`を設定することでリレー ログを有効にできます。 v5.4.0 以降、DM-worker は上流データ ソースをバインドするときに、データ ソースの設定の`enable-relay`項目をチェックします。 `enable-relay`が`true`の場合、このデータ ソースに対してリレー ログ機能が有効になります。
 
-詳しい設定方法については[<a href="/dm/dm-source-configuration-file.md">アップストリーム データベースコンフィグレーションファイル</a>](/dm/dm-source-configuration-file.md)を参照してください。
+詳しい設定方法については[アップストリーム データベースコンフィグレーションファイル](/dm/dm-source-configuration-file.md)を参照してください。
 
 さらに、 `start-relay`または`stop-relay`コマンドを使用してデータ ソースの構成を`enable-relay`に調整し、リレー ログイン時間を有効または無効にすることもできます。
 
@@ -60,7 +60,7 @@ start-relay -s mysql-replica-01
 
 > **ノート：**
 >
-> DM v2.0.2 以降の DM v2.0.x および v5.3.0 では、ソース構成ファイルの構成項目`enable-relay`は無効になり、リレー ログを有効または無効にするために使用できるのは`start-relay`と`stop-relay`のみです。 DM は、 [<a href="/dm/dm-manage-source.md#operate-data-source">データソース構成のロード</a>](/dm/dm-manage-source.md#operate-data-source)のときに`enable-relay` `true`に設定されていることを検出すると、次のメッセージを出力します。
+> DM v2.0.2 以降の DM v2.0.x および v5.3.0 では、ソース構成ファイルの構成項目`enable-relay`は無効になり、リレー ログを有効または無効にするために使用できるのは`start-relay`と`stop-relay`のみです。 DM は、 [データソース構成のロード](/dm/dm-manage-source.md#operate-data-source)のときに`enable-relay` `true`に設定されていることを検出すると、次のメッセージを出力します。
 >
 > ```
 > Please use `start-relay` to specify which workers should pull relay log of relay-enabled sources.
@@ -104,7 +104,7 @@ stop-relay -s mysql-replica-01 worker1 worker2
 
 v2.0.2 より前の DM バージョン (v2.0.2 を除く) では、DM は、DM ワーカーをアップストリーム データ ソースにバインドするときに、ソース構成ファイル内の構成項目`enable-relay`をチェックします。 `enable-relay`が`true`に設定されている場合、DM はデータ ソースのリレー ログ機能を有効にします。
 
-設定項目`enable-relay`の設定方法は[<a href="/dm/dm-source-configuration-file.md">アップストリーム データベースコンフィグレーションファイル</a>](/dm/dm-source-configuration-file.md)を参照してください。
+設定項目`enable-relay`の設定方法は[アップストリーム データベースコンフィグレーションファイル](/dm/dm-source-configuration-file.md)を参照してください。
 
 </div>
 </SimpleTab>
@@ -385,4 +385,4 @@ deb76a2b-09cc-11e9-9129-5242cf3bb246.000003
 
     > **ノート：**
     >
-    > 上流のリレー ログがパージされると、エラーが発生します。この場合、移行の開始位置を指定するには[<a href="/dm/dm-source-configuration-file.md#global-configuration">`relay-binlog-gtid`</a>](/dm/dm-source-configuration-file.md#global-configuration)を設定する必要があります。
+    > 上流のリレー ログがパージされると、エラーが発生します。この場合、移行の開始位置を指定するには[`relay-binlog-gtid`](/dm/dm-source-configuration-file.md#global-configuration)を設定する必要があります。

@@ -14,9 +14,9 @@ summary: Learn the CLI and configuration parameters used in TiCDC.
 -   `addr` : TiCDC のリスニング アドレス、HTTP API アドレス、および TiCDC サービスの Prometheus アドレス。デフォルト値は`127.0.0.1:8300`です。
 -   `advertise-addr` : クライアントが TiCDC にアクセスする際に経由するアドバタイズされたアドレス。未指定の場合、値は`addr`と同じになります。
 -   `pd` : PD エンドポイントのカンマ区切りリスト。
--   `config` : TiCDC が使用する構成ファイルのアドレス (オプション)。このオプションは、TiCDC v5.0.0 以降でサポートされています。このオプションは、 TiUP v1.4.0 以降の TiCDC 導入で使用できます。詳しい構成説明については、 [<a href="/ticdc/ticdc-changefeed-config.md">TiCDC Changefeed構成</a>](/ticdc/ticdc-changefeed-config.md)を参照してください。
--   `data-dir` : TiCDC がファイルの保存にディスクを使用する必要がある場合に使用するディレクトリを指定します。 TiCDC によって使用されるソート エンジンと REDO ログは、このディレクトリを使用して一時ファイルを保存します。このディレクトリの空きディスク容量が 500 GiB 以上であることを確認することをお勧めします。 TiUPを使用している場合は、 [<a href="/tiup/tiup-cluster-topology-reference.md#cdc_servers">`cdc_servers`</a>](/tiup/tiup-cluster-topology-reference.md#cdc_servers)セクションで`data_dir`設定するか、 `global`でデフォルトの`data_dir`パスを直接使用できます。
--   `gc-ttl` : TiCDC によって設定された PD のサービス レベル`GC safepoint`の TTL (Time To Live)、およびレプリケーション タスクが一時停止できる期間 (秒単位)。デフォルト値は`86400`で、これは 24 時間を意味します。注: TiCDC レプリケーション タスクの一時停止は、TiCDC GC セーフポイントの進行状況に影響します。つまり、 [<a href="/ticdc/ticdc-faq.md#what-is-the-complete-behavior-of-ticdc-garbage-collection-gc-safepoint">TiCDC GC セーフポイントの完全な動作</a>](/ticdc/ticdc-faq.md#what-is-the-complete-behavior-of-ticdc-garbage-collection-gc-safepoint)で詳しく説明されているように、上流の TiDB GC の進行状況に影響します。
+-   `config` : TiCDC が使用する構成ファイルのアドレス (オプション)。このオプションは、TiCDC v5.0.0 以降でサポートされています。このオプションは、 TiUP v1.4.0 以降の TiCDC 導入で使用できます。詳しい構成説明については、 [TiCDC Changefeed構成](/ticdc/ticdc-changefeed-config.md)を参照してください。
+-   `data-dir` : TiCDC がファイルの保存にディスクを使用する必要がある場合に使用するディレクトリを指定します。 TiCDC によって使用されるソート エンジンと REDO ログは、このディレクトリを使用して一時ファイルを保存します。このディレクトリの空きディスク容量が 500 GiB 以上であることを確認することをお勧めします。 TiUPを使用している場合は、 [`cdc_servers`](/tiup/tiup-cluster-topology-reference.md#cdc_servers)セクションで`data_dir`設定するか、 `global`でデフォルトの`data_dir`パスを直接使用できます。
+-   `gc-ttl` : TiCDC によって設定された PD のサービス レベル`GC safepoint`の TTL (Time To Live)、およびレプリケーション タスクが一時停止できる期間 (秒単位)。デフォルト値は`86400`で、これは 24 時間を意味します。注: TiCDC レプリケーション タスクの一時停止は、TiCDC GC セーフポイントの進行状況に影響します。つまり、 [TiCDC GC セーフポイントの完全な動作](/ticdc/ticdc-faq.md#what-is-the-complete-behavior-of-ticdc-garbage-collection-gc-safepoint)で詳しく説明されているように、上流の TiDB GC の進行状況に影響します。
 -   `log-file` : TiCDC プロセス実行時にログが出力されるパス。このパラメータが指定されていない場合、ログは標準出力 (stdout) に書き込まれます。
 -   `log-level` : TiCDC プロセス実行時のログ レベル。デフォルト値は`"info"`です。
 -   `ca` : TLS 接続用の PEM 形式の CA 証明書ファイルのパスを指定します (オプション)。

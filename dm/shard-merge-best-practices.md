@@ -5,25 +5,25 @@ summary: Learn the best practices of data migration in the shard merge scenario.
 
 # シャード結合シナリオにおけるデータ移行のベスト プラクティス {#best-practices-of-data-migration-in-the-shard-merge-scenario}
 
-このドキュメントでは、シャード マージ シナリオにおける[<a href="https://github.com/pingcap/dm">TiDB データ移行</a>](https://github.com/pingcap/dm) (DM) の機能と制限について説明し、アプリケーションのデータ移行のベスト プラクティス ガイドを提供します (デフォルトの「悲観的」モードが使用されます)。
+このドキュメントでは、シャード マージ シナリオにおける[TiDB データ移行](https://github.com/pingcap/dm) (DM) の機能と制限について説明し、アプリケーションのデータ移行のベスト プラクティス ガイドを提供します (デフォルトの「悲観的」モードが使用されます)。
 
 ## 別のデータ移行タスクを使用する {#use-a-separate-data-migration-task}
 
-[<a href="/dm/feature-shard-merge-pessimistic.md#principles">シャードテーブルからのデータのマージと移行</a>](/dm/feature-shard-merge-pessimistic.md#principles)のドキュメントでは、「シャーディング グループ」の定義が示されています。シャーディング グループは、同じダウンストリーム テーブルにマージおよび移行する必要があるすべての上流テーブルで構成されます。
+[シャードテーブルからのデータのマージと移行](/dm/feature-shard-merge-pessimistic.md#principles)のドキュメントでは、「シャーディング グループ」の定義が示されています。シャーディング グループは、同じダウンストリーム テーブルにマージおよび移行する必要があるすべての上流テーブルで構成されます。
 
-現在のシャーディング DDL メカニズムには、さまざまなシャーディング テーブルでの DDL 操作によってもたらされるスキーマの変更を調整するために、いくつかの[<a href="/dm/feature-shard-merge-pessimistic.md#restrictions">使用制限</a>](/dm/feature-shard-merge-pessimistic.md#restrictions)あります。予期しない理由でこれらの制限に違反した場合は、データ移行タスク全体[<a href="/dm/manually-handling-sharding-ddl-locks.md">DM でシャーディング DDL ロックを手動で処理する</a>](/dm/manually-handling-sharding-ddl-locks.md)か、場合によってはやり直す必要があります。
+現在のシャーディング DDL メカニズムには、さまざまなシャーディング テーブルでの DDL 操作によってもたらされるスキーマの変更を調整するために、いくつかの[DM でシャーディング DDL ロックを手動で処理する](/dm/manually-handling-sharding-ddl-locks.md)か、場合によってはやり直す必要があります。
 
 例外が発生した場合のデータ移行への影響を軽減するには、各シャーディング グループを個別のデータ移行タスクとしてマージおよび移行することをお勧めします。**これにより、少数のデータ移行タスクのみを手動で処理する必要があり、他のタスクは影響を受けないままになる可能性があります。**
 
 ## シャーディング DDL ロックを手動で処理する {#handle-sharding-ddl-locks-manually}
 
-[<a href="/dm/feature-shard-merge-pessimistic.md#principles">シャードテーブルからのデータのマージと移行</a>](/dm/feature-shard-merge-pessimistic.md#principles)から、DM のシャーディング DDL ロックは、複数の上流のシャーディング テーブルから下流への DDL 操作の実行を調整するためのメカニズムであると簡単に結論付けることができます。
+[シャードテーブルからのデータのマージと移行](/dm/feature-shard-merge-pessimistic.md#principles)から、DM のシャーディング DDL ロックは、複数の上流のシャーディング テーブルから下流への DDL 操作の実行を調整するためのメカニズムであると簡単に結論付けることができます。
 
 したがって、 `DM-master` ～ `shard-ddl-lock`コマンドでシャーディング DDL ロックが見つかった場合、または一部の DM ワーカーで`query-status`コマンドで`unresolvedGroups`または`blockingDDLs`が見つかった場合は、急いで`shard-ddl-lock unlock`コマンドでシャーディング DDL ロックを手動で解放しないでください。
 
 代わりに、次のことができます。
 
--   シャーディング DDL ロックの自動解放の失敗が[<a href="/dm/manually-handling-sharding-ddl-locks.md#supported-scenarios">リストされた異常なシナリオ</a>](/dm/manually-handling-sharding-ddl-locks.md#supported-scenarios)のいずれかである場合は、対応する手動の解決策に従ってシナリオを処理します。
+-   シャーディング DDL ロックの自動解放の失敗が[リストされた異常なシナリオ](/dm/manually-handling-sharding-ddl-locks.md#supported-scenarios)のいずれかである場合は、対応する手動の解決策に従ってシナリオを処理します。
 -   サポートされていないシナリオの場合は、データ移行タスク全体をやり直します。まず、ダウンストリーム データベース内のデータと移行タスクに関連付けられ`dm_meta`情報を空にします。その後、完全および増分データ レプリケーションを再実行します。
 
 ## 複数のシャードテーブルにわたる主キーまたは一意のインデックス間の競合を処理する {#handle-conflicts-between-primary-keys-or-unique-indexes-across-multiple-sharded-tables}
@@ -31,8 +31,8 @@ summary: Learn the best practices of data migration in the shard merge scenario.
 複数のシャードテーブルからのデータにより、主キーまたは一意のインデックス間で競合が発生する可能性があります。これらのシャードテーブルのシャーディングロジックに基づいて、各主キーまたは一意のインデックスをチェックする必要があります。主キーまたは一意のインデックスに関連する 3 つのケースを次に示します。
 
 -   シャード キー: 通常、同じシャード キーは 1 つのシャード テーブルにのみ存在します。これは、シャード キーでデータの競合が発生しないことを意味します。
--   自動インクリメント主キー: 各シャードテーブルの自動インクリメント主キーは個別にカウントされるため、範囲が重複する可能性があります。この場合は、次のセクション[<a href="/dm/shard-merge-best-practices.md#handle-conflicts-of-auto-increment-primary-key">自動インクリメント主キーの競合を処理する</a>](/dm/shard-merge-best-practices.md#handle-conflicts-of-auto-increment-primary-key)を参照して解決する必要があります。
--   その他の主キーまたは一意のインデックス: ビジネス ロジックに基づいて分析する必要があります。データが競合する場合は、次のセクション[<a href="/dm/shard-merge-best-practices.md#handle-conflicts-of-auto-increment-primary-key">自動インクリメント主キーの競合を処理する</a>](/dm/shard-merge-best-practices.md#handle-conflicts-of-auto-increment-primary-key)を参照して解決することもできます。
+-   自動インクリメント主キー: 各シャードテーブルの自動インクリメント主キーは個別にカウントされるため、範囲が重複する可能性があります。この場合は、次のセクション[自動インクリメント主キーの競合を処理する](/dm/shard-merge-best-practices.md#handle-conflicts-of-auto-increment-primary-key)を参照して解決する必要があります。
+-   その他の主キーまたは一意のインデックス: ビジネス ロジックに基づいて分析する必要があります。データが競合する場合は、次のセクション[自動インクリメント主キーの競合を処理する](/dm/shard-merge-best-practices.md#handle-conflicts-of-auto-increment-primary-key)を参照して解決することもできます。
 
 ## 自動インクリメント主キーの競合を処理する {#handle-conflicts-of-auto-increment-primary-key}
 
@@ -119,11 +119,11 @@ CREATE TABLE `tbl_multi_pk` (
 
 ## 上流の RDS にシャードテーブルが含まれる場合の特別な処理 {#special-processing-when-the-upstream-rds-contains-sharded-tables}
 
-アップストリーム データ ソースが RDS であり、それにシャード テーブルが含まれている場合、SQL クライアントに接続するときに MySQLbinlog内のテーブル名が表示されない可能性があります。たとえば、アップストリームが UCloud 分散データベースである場合、binlog内のテーブル名には追加のプレフィックス`_0001`が付く可能性があります。したがって、SQL クライアントのテーブル名ではなく、 binlogのテーブル名に基づいて[<a href="/dm/dm-table-routing.md">テーブルルーティング</a>](/dm/dm-table-routing.md)を構成する必要があります。
+アップストリーム データ ソースが RDS であり、それにシャード テーブルが含まれている場合、SQL クライアントに接続するときに MySQLbinlog内のテーブル名が表示されない可能性があります。たとえば、アップストリームが UCloud 分散データベースである場合、binlog内のテーブル名には追加のプレフィックス`_0001`が付く可能性があります。したがって、SQL クライアントのテーブル名ではなく、 binlogのテーブル名に基づいて[テーブルルーティング](/dm/dm-table-routing.md)を構成する必要があります。
 
 ## アップストリームでのテーブルの作成/削除 {#create-drop-tables-in-the-upstream}
 
-[<a href="/dm/feature-shard-merge-pessimistic.md#principles">シャードテーブルからのデータのマージと移行</a>](/dm/feature-shard-merge-pessimistic.md#principles)では、シャーディング DDL ロックの調整は、ダウンストリーム データベースがアップストリームのすべてのシャーディング テーブルの DDL ステートメントを受信するかどうかに依存することは明らかです。さらに、DM は現在、アップストリームでのシャード テーブルの動的作成または削除**をサポートしていません**。したがって、アップストリームでシャードテーブルを作成または削除するには、次の手順を実行することをお勧めします。
+[シャードテーブルからのデータのマージと移行](/dm/feature-shard-merge-pessimistic.md#principles)では、シャーディング DDL ロックの調整は、ダウンストリーム データベースがアップストリームのすべてのシャーディング テーブルの DDL ステートメントを受信するかどうかに依存することは明らかです。さらに、DM は現在、アップストリームでのシャード テーブルの動的作成または削除**をサポートしていません**。したがって、アップストリームでシャードテーブルを作成または削除するには、次の手順を実行することをお勧めします。
 
 ### アップストリームでシャードテーブルを作成する {#create-sharded-tables-in-the-upstream}
 
@@ -145,7 +145,7 @@ CREATE TABLE `tbl_multi_pk` (
 
 アップストリームでシャードテーブルを削除する必要がある場合は、次の手順を実行します。
 
-1.  シャードテーブルを削除し、 [<a href="https://dev.mysql.com/doc/refman/5.7/en/show-binlog-events.html">`SHOW BINLOG EVENTS`</a>](https://dev.mysql.com/doc/refman/5.7/en/show-binlog-events.html)を実行してbinlogイベントの`DROP TABLE`ステートメントに対応する`End_log_pos`をフェッチし、それを*Pos-M*としてマークします。
+1.  シャードテーブルを削除し、 [`SHOW BINLOG EVENTS`](https://dev.mysql.com/doc/refman/5.7/en/show-binlog-events.html)を実行してbinlogイベントの`DROP TABLE`ステートメントに対応する`End_log_pos`をフェッチし、それを*Pos-M*としてマークします。
 
 2.  `query-status`を実行して、DM によって処理されたbinlogイベントに対応する位置 ( `syncerBinlog` ) を取得し、それを*Pos-S*としてマークします。
 

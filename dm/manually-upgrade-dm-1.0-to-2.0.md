@@ -7,7 +7,7 @@ summary: Learn how to manually upgrade TiDB data migration from v1.0.x to v2.0+.
 
 このドキュメントでは、TiDB DM ツールを v1.0.x から v2.0+ に手動でアップグレードする方法を紹介します。主なアイデアは、v1.0.x のグローバル チェックポイント情報を使用して、v2.0+ クラスターで新しいデータ移行タスクを開始することです。
 
-TiDB DM ツールを v1.0.x から v2.0+ に自動的にアップグレードする方法については、 [<a href="/dm/maintain-dm-using-tiup.md#import-and-upgrade-a-dm-10-cluster-deployed-using-dm-ansible">TiUPを使用して、DM-Ansible によってデプロイされた 1.0 クラスターを自動的にインポートする</a>](/dm/maintain-dm-using-tiup.md#import-and-upgrade-a-dm-10-cluster-deployed-using-dm-ansible)を参照してください。
+TiDB DM ツールを v1.0.x から v2.0+ に自動的にアップグレードする方法については、 [TiUPを使用して、DM-Ansible によってデプロイされた 1.0 クラスターを自動的にインポートする](/dm/maintain-dm-using-tiup.md#import-and-upgrade-a-dm-10-cluster-deployed-using-dm-ansible)を参照してください。
 
 > **ノート：**
 >
@@ -25,7 +25,7 @@ v2.0以降で用意される設定ファイルには、上流データベース�
 
 ### アップストリームデータベース構成ファイル {#upstream-database-configuration-file}
 
-v2.0 以降では、 [<a href="/dm/dm-source-configuration-file.md">上流データベース構成ファイル</a>](/dm/dm-source-configuration-file.md)が DM ワーカーのプロセス構成から分離されているため、 [<a href="/dm/dm-worker-configuration-file.md">v1.0.x DM ワーカー構成</a>](/dm/dm-worker-configuration-file.md)に基づいてソース構成を取得する必要があります。
+v2.0 以降では、 [v1.0.x DM ワーカー構成](/dm/dm-worker-configuration-file.md)に基づいてソース構成を取得する必要があります。
 
 > **ノート：**
 >
@@ -98,7 +98,7 @@ from:
 
 ### データ移行タスク構成ファイル {#data-migration-task-configuration-file}
 
-[<a href="/dm/dm-task-configuration-guide.md">データ移行タスク構成ガイド</a>](/dm/dm-task-configuration-guide.md)については、v2.0+ は基本的に v1.0.x と互換性があります。 v1.0.x の設定を直接コピーできます。
+[データ移行タスク構成ガイド](/dm/dm-task-configuration-guide.md)については、v2.0+ は基本的に v1.0.x と互換性があります。 v1.0.x の設定を直接コピーできます。
 
 ## ステップ 2: v2.0+ クラスターをデプロイ {#step-2-deploy-the-v2-0-cluster}
 
@@ -106,17 +106,17 @@ from:
 >
 > 他の v2.0 以降のクラスターが使用可能な場合は、この手順をスキップしてください。
 
-[<a href="/dm/deploy-a-dm-cluster-using-tiup.md">TiUPを使用する</a>](/dm/deploy-a-dm-cluster-using-tiup.md)必要なノード数に応じて新しい v2.0+ クラスターをデプロイします。
+[TiUPを使用する](/dm/deploy-a-dm-cluster-using-tiup.md)必要なノード数に応じて新しい v2.0+ クラスターをデプロイします。
 
 ## ステップ 3: v1.0.x クラスターを停止する {#step-3-stop-the-v1-0-x-cluster}
 
-元の v1.0.x クラスターが DM-Ansible によってデプロイされている場合は、 [<a href="https://docs.pingcap.com/tidb-data-migration/v1.0/cluster-operations#stop-a-cluster">DM-Ansible による v1.0.x クラスターの停止</a>](https://docs.pingcap.com/tidb-data-migration/v1.0/cluster-operations#stop-a-cluster)使用する必要があります。
+元の v1.0.x クラスターが DM-Ansible によってデプロイされている場合は、 [DM-Ansible による v1.0.x クラスターの停止](https://docs.pingcap.com/tidb-data-migration/v1.0/cluster-operations#stop-a-cluster)使用する必要があります。
 
 元の v1.0.x クラスターがバイナリでデプロイされている場合は、DM ワーカー プロセスと DM マスター プロセスを直接停止できます。
 
 ## ステップ 4: データ移行タスクのアップグレード {#step-4-upgrade-data-migration-task}
 
-1.  [<a href="/dm/dm-manage-source.md#operate-data-source">`operate-source`</a>](/dm/dm-manage-source.md#operate-data-source)コマンドを使用して、アップストリーム データベース ソース構成を[<a href="#step-1-prepare-v20-configuration-file">ステップ1</a>](#step-1-prepare-v20-configuration-file)から v2.0+ クラスターにロードします。
+1.  [ステップ1](#step-1-prepare-v20-configuration-file)から v2.0+ クラスターにロードします。
 
 2.  ダウンストリーム TiDB クラスターで、v1.0.x データ移行タスクの増分チェックポイント テーブルから対応するグローバル チェックポイント情報を取得します。
 
@@ -158,8 +158,8 @@ from:
             >
             > ソース構成で`enable-gtid`が有効になっている場合、現時点では、binlogファイルまたはリレー ログ ファイルを解析してbinlogの位置に対応する GTID セットを取得し、それを`meta`の`binlog-gtid`に設定する必要があります。
 
-4.  [<a href="/dm/dm-create-task.md">`start-task`</a>](/dm/dm-create-task.md)コマンドを使用して、v2.0 以降のデータ移行タスク構成ファイルを通じてアップグレードされたデータ移行タスクを開始します。
+4.  [`start-task`](/dm/dm-create-task.md)コマンドを使用して、v2.0 以降のデータ移行タスク構成ファイルを通じてアップグレードされたデータ移行タスクを開始します。
 
-5.  [<a href="/dm/dm-query-status.md">`query-status`</a>](/dm/dm-query-status.md)コマンドを使用して、データ移行タスクが正常に実行されているかどうかを確認します。
+5.  [`query-status`](/dm/dm-query-status.md)コマンドを使用して、データ移行タスクが正常に実行されているかどうかを確認します。
 
 データ移行タスクが正常に実行された場合は、DM の v2.0+ へのアップグレードが成功したことを示します。

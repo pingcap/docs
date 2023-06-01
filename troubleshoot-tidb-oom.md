@@ -19,7 +19,7 @@ summary: Learn how to diagnose and resolve TiDB OOM (Out of Memory) issues.
     -   **[TiDB-Runtime]** &gt; **[メモリ使用量]**では、 `estimate-inuse`メトリクスが上昇し続けていることがわかります。
 
 -   `tidb.log`を確認すると、次のログ エントリが見つかります。
-    -   OOM に関するアラーム: `[WARN] [memory_usage_alarm.go:139] ["tidb-server has the risk of OOM. Running SQLs and heap profile will be recorded in record path"]` 。詳細については、 [<a href="/system-variables.md#tidb_memory_usage_alarm_ratio">`memory-usage-alarm-ratio`</a>](/system-variables.md#tidb_memory_usage_alarm_ratio)を参照してください。
+    -   OOM に関するアラーム: `[WARN] [memory_usage_alarm.go:139] ["tidb-server has the risk of OOM. Running SQLs and heap profile will be recorded in record path"]` 。詳細については、 [`memory-usage-alarm-ratio`](/system-variables.md#tidb_memory_usage_alarm_ratio)を参照してください。
     -   再起動に関するログ エントリ: `[INFO] [printer.go:33] ["Welcome to TiDB."]` 。
 
 ## 全体的なトラブルシューティングのプロセス {#overall-troubleshooting-process}
@@ -63,16 +63,16 @@ OOM の問題をトラブルシューティングする場合は、次のプロ�
 
 OOM の問題は通常、次のことが原因で発生します。
 
--   [<a href="#deployment-issues">導入の問題</a>](#deployment-issues)
--   [<a href="#database-issues">データベースの問題</a>](#database-issues)
--   [<a href="#client-side-issues">クライアント側の問題</a>](#client-side-issues)
+-   [導入の問題](#deployment-issues)
+-   [データベースの問題](#database-issues)
+-   [クライアント側の問題](#client-side-issues)
 
 ### 導入の問題 {#deployment-issues}
 
 不適切なデプロイメントによる OOM の原因には、次のようなものがあります。
 
 -   オペレーティング システムのメモリ容量が少なすぎます。
--   TiUP構成[<a href="/tiup/tiup-cluster-topology-reference.md#global">`resource_control`</a>](/tiup/tiup-cluster-topology-reference.md#global)は適切ではありません。
+-   TiUP構成[`resource_control`](/tiup/tiup-cluster-topology-reference.md#global)は適切ではありません。
 -   ハイブリッド デプロイメント (TiDB と他のアプリケーションが同じサーバーにデプロイされることを意味します) の場合、リソース不足により TiDB が`oom-killer`て強制終了されます。
 
 ### データベースの問題 {#database-issues}
@@ -81,7 +81,7 @@ OOM の問題は通常、次のことが原因で発生します。
 
 > **ノート：**
 >
-> [<a href="/system-variables.md#tidb_mem_quota_query">`tidb_mem_quota_query`</a>](/system-variables.md#tidb_mem_quota_query)を設定した場合、次のエラーが発生します。 `ERROR 1105 (HY000): Out Of Memory Quota![conn_id=54]` 。これは、データベースのメモリ使用量制御動作が原因で発生します。それは正常な動作です。
+> [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)を設定した場合、次のエラーが発生します。 `ERROR 1105 (HY000): Out Of Memory Quota![conn_id=54]` 。これは、データベースのメモリ使用量制御動作が原因で発生します。それは正常な動作です。
 
 #### SQL ステートメントを実行すると大量のメモリが消費されます {#executing-sql-statements-consumes-too-much-memory}
 
@@ -89,7 +89,7 @@ OOM 問題のさまざまな原因に応じて、次の措置を講じて SQL �
 
 -   たとえば、適切なインデックスの欠如、古い統計、オプティマイザのバグなどが原因で SQL の実行計画が最適でない場合、間違った SQL の実行計画が選択される可能性があります。巨大な中間結果セットがメモリに蓄積されます。この場合は、次のような対策を検討してください。
     -   適切なインデックスを追加します。
-    -   実行演算子には[<a href="/configure-memory-usage.md#disk-spill">ディスク流出</a>](/configure-memory-usage.md#disk-spill)機能を使用します。
+    -   実行演算子には[ディスク流出](/configure-memory-usage.md#disk-spill)機能を使用します。
     -   テーブル間の JOIN 順序を調整します。
     -   ヒントを使用して SQL ステートメントを最適化します。
 
@@ -98,9 +98,9 @@ OOM 問題のさまざまな原因に応じて、次の措置を講じて SQL �
 -   実行プランには演算子 HashAgg が含まれています。 HashAgg は複数のスレッドによって同時に実行されるため、高速になりますが、より多くのメモリを消費します。代わりに`STREAM_AGG()`を使用できます。
 
 -   同時に読み取られるリージョンの数を減らすか、オペレーターの同時実行数を減らして、同時実行性の高さによって引き起こされるメモリの問題を回避します。対応するシステム変数には次のものがあります。
-    -   [<a href="/system-variables.md#tidb_distsql_scan_concurrency">`tidb_distsql_scan_concurrency`</a>](/system-variables.md#tidb_distsql_scan_concurrency)
-    -   [<a href="/system-variables.md#tidb_index_serial_scan_concurrency">`tidb_index_serial_scan_concurrency`</a>](/system-variables.md#tidb_index_serial_scan_concurrency)
-    -   [<a href="/system-variables.md#tidb_executor_concurrency-new-in-v50">`tidb_executor_concurrency`</a>](/system-variables.md#tidb_executor_concurrency-new-in-v50)
+    -   [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency)
+    -   [`tidb_index_serial_scan_concurrency`](/system-variables.md#tidb_index_serial_scan_concurrency)
+    -   [`tidb_executor_concurrency`](/system-variables.md#tidb_executor_concurrency-new-in-v50)
 
 -   問題が発生する時点近くでは、セッションの同時実行性が高すぎます。この場合、TiDB ノードを追加して TiDB クラスターをスケールアウトすることを検討してください。
 
@@ -115,24 +115,24 @@ OOM 問題のさまざまな原因に応じて、次の措置を講じて SQL �
 TiDB ノードは、起動後に統計をメモリにロードする必要があります。 TiDB は統計情報を収集するときにメモリを消費します。次の方法でメモリ使用量を制御できます。
 
 -   サンプリング レートを指定し、特定の列の統計のみを収集し、同時実行数を`ANALYZE`減らします。
--   TiDB v6.1.0 以降、システム変数[<a href="/system-variables.md#tidb_stats_cache_mem_quota-new-in-v610">`tidb_stats_cache_mem_quota`</a>](/system-variables.md#tidb_stats_cache_mem_quota-new-in-v610)を使用して統計情報のメモリ使用量を制御できます。
--   TiDB v6.1.0 以降、システム変数[<a href="/system-variables.md#tidb_mem_quota_analyze-new-in-v610">`tidb_mem_quota_analyze`</a>](/system-variables.md#tidb_mem_quota_analyze-new-in-v610)を使用して、TiDB が統計を更新するときに最大メモリ使用量を制御できます。
+-   TiDB v6.1.0 以降、システム変数[`tidb_stats_cache_mem_quota`](/system-variables.md#tidb_stats_cache_mem_quota-new-in-v610)を使用して統計情報のメモリ使用量を制御できます。
+-   TiDB v6.1.0 以降、システム変数[`tidb_mem_quota_analyze`](/system-variables.md#tidb_mem_quota_analyze-new-in-v610)を使用して、TiDB が統計を更新するときに最大メモリ使用量を制御できます。
 
-詳細については、 [<a href="/statistics.md">統計入門</a>](/statistics.md)を参照してください。
+詳細については、 [統計入門](/statistics.md)を参照してください。
 
 #### プリペアドステートメントが多用されている {#prepared-statements-are-overused}
 
-クライアント側はプリペアド ステートメントを作成し続けますが、 [<a href="/sql-prepared-plan-cache.md#ignore-the-com_stmt_close-command-and-the-deallocate-prepare-statement">`deallocate prepare stmt`</a>](/sql-prepared-plan-cache.md#ignore-the-com_stmt_close-command-and-the-deallocate-prepare-statement)実行しないため、メモリ消費量が増加し続け、最終的に TiDB OOM がトリガーされます。その理由は、プリペアドステートメントによって占有されているメモリは、セッションが閉じられるまで解放されないためです。これは、長時間の接続セッションでは特に重要です。
+クライアント側はプリペアド ステートメントを作成し続けますが、 [`deallocate prepare stmt`](/sql-prepared-plan-cache.md#ignore-the-com_stmt_close-command-and-the-deallocate-prepare-statement)実行しないため、メモリ消費量が増加し続け、最終的に TiDB OOM がトリガーされます。その理由は、プリペアドステートメントによって占有されているメモリは、セッションが閉じられるまで解放されないためです。これは、長時間の接続セッションでは特に重要です。
 
 この問題を解決するには、次の対策を検討してください。
 
 -   セッションのライフサイクルを調整します。
--   [<a href="/develop/dev-guide-connection-parameters.md#timeout-related-parameters">接続プールの`wait_timeout`と`max_execution_time`</a>](/develop/dev-guide-connection-parameters.md#timeout-related-parameters)を調整します。
--   システム変数[<a href="/system-variables.md#max_prepared_stmt_count">`max_prepared_stmt_count`</a>](/system-variables.md#max_prepared_stmt_count)を使用して、セッション内の準備済みステートメントの最大数を制御します。
+-   [接続プールの`wait_timeout`と`max_execution_time`](/develop/dev-guide-connection-parameters.md#timeout-related-parameters)を調整します。
+-   システム変数[`max_prepared_stmt_count`](/system-variables.md#max_prepared_stmt_count)を使用して、セッション内の準備済みステートメントの最大数を制御します。
 
 #### <code>tidb_enable_rate_limit_action</code>が正しく構成されていません {#code-tidb-enable-rate-limit-action-code-is-not-configured-properly}
 
-システム変数[<a href="/system-variables.md#tidb_enable_rate_limit_action">`tidb_enable_rate_limit_action`</a>](/system-variables.md#tidb_enable_rate_limit_action) 、SQL ステートメントがデータの読み取りのみを行う場合のメモリ使用量を効果的に制御します。この変数が有効で、計算操作 (結合操作や集計操作など) が必要な場合、メモリ使用量が[<a href="/system-variables.md#tidb_mem_quota_query">`tidb_mem_quota_query`</a>](/system-variables.md#tidb_mem_quota_query)制御下にない可能性があり、OOM のリスクが増加します。
+システム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)制御下にない可能性があり、OOM のリスクが増加します。
 
 このシステム変数を無効にすることをお勧めします。 TiDB v6.3.0 以降、このシステム変数はデフォルトで無効になっています。
 
@@ -194,5 +194,5 @@ OOM 問題の根本原因を特定するには、次の情報を収集する必�
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/configure-memory-usage.md">TiDB メモリ制御</a>](/configure-memory-usage.md)
--   [<a href="/tune-tikv-memory-performance.md">TiKV メモリ パラメータのパフォーマンスを調整する</a>](/tune-tikv-memory-performance.md)
+-   [TiDB メモリ制御](/configure-memory-usage.md)
+-   [TiKV メモリ パラメータのパフォーマンスを調整する](/tune-tikv-memory-performance.md)

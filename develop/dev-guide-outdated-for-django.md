@@ -7,7 +7,7 @@ summary: Learn how to build a simple Python application using TiDB and Django.
 
 > **ノート：**
 >
-> このレガシー ドキュメントは古いため、その後更新されません。詳しくは[<a href="/develop/dev-guide-overview.md">開発者ガイドの概要</a>](/develop/dev-guide-overview.md)をご覧ください。
+> このレガシー ドキュメントは古いため、その後更新されません。詳しくは[開発者ガイドの概要](/develop/dev-guide-overview.md)をご覧ください。
 
 このチュートリアルでは、TiDB と Django に基づいて単純な Python アプリケーションを構築する方法を示します。ここで構築するサンプル アプリケーションは、顧客情報と注文情報を追加、クエリ、更新できるシンプルな CRM ツールです。
 
@@ -25,10 +25,10 @@ docker run -p 127.0.0.1:$LOCAL_PORT:4000 pingcap/tidb:v5.1.0
 >
 > 「実際の」TiDB クラスターを実本番にデプロイするには、次のガイドを参照してください。
 >
-> -   [<a href="https://docs.pingcap.com/tidb/v5.1/production-deployment-using-tiup">オンプレミス向けTiUPを使用して TiDBをデプロイ</a>](https://docs.pingcap.com/tidb/v5.1/production-deployment-using-tiup)
-> -   [<a href="https://docs.pingcap.com/tidb-in-kubernetes/stable">TiDB を Kubernetes にデプロイ</a>](https://docs.pingcap.com/tidb-in-kubernetes/stable)
+> -   [オンプレミス向けTiUPを使用して TiDBをデプロイ](https://docs.pingcap.com/tidb/v5.1/production-deployment-using-tiup)
+> -   [TiDB を Kubernetes にデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/stable)
 >
-> また、TiDB のフルマネージド Database-as-a-Service (DBaaS) [<a href="https://pingcap.com/products/tidbcloud/">TiDB Cloudを使用する</a>](https://pingcap.com/products/tidbcloud/)を使用することもできます。
+> また、TiDB のフルマネージド Database-as-a-Service (DBaaS) [TiDB Cloudを使用する](https://pingcap.com/products/tidbcloud/)を使用することもできます。
 
 ## ステップ 2. データベースを作成する {#step-2-create-a-database}
 
@@ -60,7 +60,7 @@ docker run -p 127.0.0.1:$LOCAL_PORT:4000 pingcap/tidb:v5.1.0
 
 ## ステップ 3. 仮想環境を設定し、プロジェクトを初期化する {#step-3-set-virtual-environments-and-initialize-the-project}
 
-1.  Python の依存関係およびパッケージ マネージャーである[<a href="https://python-poetry.org/docs/">詩</a>](https://python-poetry.org/docs/)使用して、仮想環境を設定し、プロジェクトを初期化します。
+1.  Python の依存関係およびパッケージ マネージャーである[詩](https://python-poetry.org/docs/)使用して、仮想環境を設定し、プロジェクトを初期化します。
 
     詩はシステムの依存関係を他の依存関係から分離し、依存関係の汚染を回避できます。次のコマンドを使用して Poetry をインストールします。
 
@@ -228,7 +228,7 @@ docker run -p 127.0.0.1:$LOCAL_PORT:4000 pingcap/tidb:v5.1.0
 
 ## ステップ 5. Django アプリケーションをセットアップして実行する {#step-5-set-up-and-run-the-django-application}
 
-一番上の`tidb_example`ディレクトリで、 [<a href="https://docs.djangoproject.com/en/3.1/ref/django-admin/">`manage.py`</a>](https://docs.djangoproject.com/en/3.1/ref/django-admin/)スクリプトを使用して、アプリケーションのデータベースを初期化する[<a href="https://docs.djangoproject.com/en/3.1/topics/migrations/">Django の移行</a>](https://docs.djangoproject.com/en/3.1/topics/migrations/)を作成します。
+一番上の`tidb_example`ディレクトリで、 [Django の移行](https://docs.djangoproject.com/en/3.1/topics/migrations/)を作成します。
 
 ```bash
 python manage.py makemigrations tidb_example

@@ -16,7 +16,7 @@ summary: Learn how to migrate data from TiDB to MySQL-compatible databases.
 
 1.  TiDB クラスターをアップストリームにデプロイ。
 
-    TiUP Playground を使用して TiDB クラスターをデプロイ。詳細については、 [<a href="/tiup/tiup-cluster.md">TiUPを使用したオンライン TiDBクラスタのデプロイと管理</a>](/tiup/tiup-cluster.md)を参照してください。
+    TiUP Playground を使用して TiDB クラスターをデプロイ。詳細については、 [TiUPを使用したオンライン TiDBクラスタのデプロイと管理](/tiup/tiup-cluster.md)を参照してください。
 
     ```shell
     # Create a TiDB cluster
@@ -33,7 +33,7 @@ summary: Learn how to migrate data from TiDB to MySQL-compatible databases.
         docker run --name some-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -p 3306:3306 -d mysql
         ```
 
-    -   本番環境では、 [<a href="https://dev.mysql.com/doc/refman/8.0/en/installing.html">MySQLのインストール</a>](https://dev.mysql.com/doc/refman/8.0/en/installing.html)手順に従って MySQL インスタンスをデプロイできます。
+    -   本番環境では、 [MySQLのインストール](https://dev.mysql.com/doc/refman/8.0/en/installing.html)手順に従って MySQL インスタンスをデプロイできます。
 
 3.  サービスのワークロードをシミュレートします。
 
@@ -44,11 +44,11 @@ summary: Learn how to migrate data from TiDB to MySQL-compatible databases.
     tiup bench tpcc -H 127.0.0.1 -P 4000 -D tpcc --warehouses 4 run --time 300s
     ```
 
-    `go-tpc`について詳しくは[<a href="/benchmark/benchmark-tidb-using-tpcc.md">TiDB で TPC-C テストを実行する方法</a>](/benchmark/benchmark-tidb-using-tpcc.md)を参照してください。
+    `go-tpc`について詳しくは[TiDB で TPC-C テストを実行する方法](/benchmark/benchmark-tidb-using-tpcc.md)を参照してください。
 
 ## ステップ 2. 全データを移行する {#step-2-migrate-full-data}
 
-環境をセットアップした後、 [<a href="/dumpling-overview.md">Dumpling</a>](/dumpling-overview.md)を使用して上流の TiDB クラスターから完全なデータをエクスポートできます。
+環境をセットアップした後、 [Dumpling](/dumpling-overview.md)を使用して上流の TiDB クラスターから完全なデータをエクスポートできます。
 
 > **ノート：**
 >
@@ -108,7 +108,7 @@ summary: Learn how to migrate data from TiDB to MySQL-compatible databases.
 
 3.  データを復元します。
 
-    MyLoader (オープンソース ツール) を使用して、データをダウンストリーム MySQL インスタンスにインポートします。 MyLoaderのインストール方法と使用方法の詳細については、 [<a href="https://github.com/mydumper/mydumper">MyDumpler/MyLoader</a>](https://github.com/mydumper/mydumper)を参照してください。次のコマンドを実行して、 Dumplingによってエクスポートされた完全なデータを MySQL にインポートします。
+    MyLoader (オープンソース ツール) を使用して、データをダウンストリーム MySQL インスタンスにインポートします。 MyLoaderのインストール方法と使用方法の詳細については、 [MyDumpler/MyLoader](https://github.com/mydumper/mydumper)を参照してください。次のコマンドを実行して、 Dumplingによってエクスポートされた完全なデータを MySQL にインポートします。
 
     ```shell
     myloader -h 127.0.0.1 -P 3306 -d ./dumpling_output/
@@ -116,13 +116,13 @@ summary: Learn how to migrate data from TiDB to MySQL-compatible databases.
 
 4.  (オプション) データを検証します。
 
-    [<a href="/sync-diff-inspector/sync-diff-inspector-overview.md">同期差分インスペクター</a>](/sync-diff-inspector/sync-diff-inspector-overview.md)を使用すると、特定の時点で上流と下流の間のデータの整合性をチェックできます。
+    [同期差分インスペクター](/sync-diff-inspector/sync-diff-inspector-overview.md)を使用すると、特定の時点で上流と下流の間のデータの整合性をチェックできます。
 
     ```shell
     sync_diff_inspector -C ./config.yaml
     ```
 
-    sync-diff-inspector の構成方法の詳細については、 [<a href="/sync-diff-inspector/sync-diff-inspector-overview.md#configuration-file-description">コンフィグレーションファイルの説明</a>](/sync-diff-inspector/sync-diff-inspector-overview.md#configuration-file-description)を参照してください。このドキュメントでは、構成は次のようになります。
+    sync-diff-inspector の構成方法の詳細については、 [コンフィグレーションファイルの説明](/sync-diff-inspector/sync-diff-inspector-overview.md#configuration-file-description)を参照してください。このドキュメントでは、構成は次のようになります。
 
     ```toml
     # Diff Configuration.
@@ -151,7 +151,7 @@ summary: Learn how to migrate data from TiDB to MySQL-compatible databases.
 
 1.  TiCDCをデプロイ。
 
-    完全なデータ移行が完了したら、増分データをレプリケートするために TiCDC クラスターを展開および構成します。本番環境では、 [<a href="/ticdc/deploy-ticdc.md">TiCDCのデプロイ</a>](/ticdc/deploy-ticdc.md)の指示に従って TiCDC をデプロイします。このドキュメントでは、テスト クラスターの作成時に TiCDC ノードが開始されています。したがって、TiCDC をデプロイするステップをスキップして、次のステップに進んで変更フィードを作成できます。
+    完全なデータ移行が完了したら、増分データをレプリケートするために TiCDC クラスターを展開および構成します。本番環境では、 [TiCDCのデプロイ](/ticdc/deploy-ticdc.md)の指示に従って TiCDC をデプロイします。このドキュメントでは、テスト クラスターの作成時に TiCDC ノードが開始されています。したがって、TiCDC をデプロイするステップをスキップして、次のステップに進んで変更フィードを作成できます。
 
 2.  チェンジフィードを作成します。
 
@@ -166,13 +166,13 @@ summary: Learn how to migrate data from TiDB to MySQL-compatible databases.
     -   `--server` : TiCDC クラスター内の任意のノードの IP アドレス
     -   `--sink-uri` : ダウンストリームクラスターのURI
     -   `--changefeed-id` : 変更フィード ID。正規表現の形式である必要があります`^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$`
-    -   `--start-ts` : 変更フィードの開始タイムスタンプ。バックアップ時間 (または[<a href="#step-2-migrate-full-data">ステップ 2. 全データを移行する</a>](#step-2-migrate-full-data)の「データのバックアップ」セクションの BackupTS) である必要があります。
+    -   `--start-ts` : 変更フィードの開始タイムスタンプ。バックアップ時間 (または[ステップ 2. 全データを移行する](#step-2-migrate-full-data)の「データのバックアップ」セクションの BackupTS) である必要があります。
 
-    変更フィード構成の詳細については、 [<a href="/ticdc/ticdc-changefeed-config.md">タスク設定ファイル</a>](/ticdc/ticdc-changefeed-config.md)を参照してください。
+    変更フィード構成の詳細については、 [タスク設定ファイル](/ticdc/ticdc-changefeed-config.md)を参照してください。
 
 3.  GCを有効にします。
 
-    TiCDC を使用した増分移行では、GC はレプリケートされた履歴データのみを削除します。したがって、変更フィードを作成した後、次のコマンドを実行して GC を有効にする必要があります。詳細は[<a href="/ticdc/ticdc-faq.md#what-is-the-complete-behavior-of-ticdc-garbage-collection-gc-safepoint">TiCDCガベージコレクション(GC) セーフポイントの完全な動作は何ですか</a>](/ticdc/ticdc-faq.md#what-is-the-complete-behavior-of-ticdc-garbage-collection-gc-safepoint)を参照してください。
+    TiCDC を使用した増分移行では、GC はレプリケートされた履歴データのみを削除します。したがって、変更フィードを作成した後、次のコマンドを実行して GC を有効にする必要があります。詳細は[TiCDCガベージコレクション(GC) セーフポイントの完全な動作は何ですか](/ticdc/ticdc-faq.md#what-is-the-complete-behavior-of-ticdc-garbage-collection-gc-safepoint)を参照してください。
 
     GC を有効にするには、次のコマンドを実行します。
 

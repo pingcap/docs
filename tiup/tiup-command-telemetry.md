@@ -49,4 +49,4 @@ tiup telemetry <command>
 
 `tiup telemetry disable`コマンドはテレメトリを無効にするために使用されます。
 
-[<a href="/tiup/tiup-reference.md#command-list">&lt;&lt; 前のページに戻る - TiUPリファレンスコマンドリスト</a>](/tiup/tiup-reference.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPリファレンスコマンドリスト](/tiup/tiup-reference.md#command-list)

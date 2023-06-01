@@ -5,15 +5,15 @@ summary: This document describes how to analyze and tune performance for OLTP wo
 
 # OLTP シナリオの性能チューニングの実践 {#performance-tuning-practices-for-oltp-scenarios}
 
-TiDB は、TiDB ダッシュボードの[<a href="/dashboard/top-sql.md">Top SQL</a>](/dashboard/top-sql.md)および[<a href="/dashboard/continuous-profiling.md">継続的なプロファイリング</a>](/dashboard/continuous-profiling.md)の機能や TiDB [<a href="/grafana-performance-overview-dashboard.md">パフォーマンス概要ダッシュボード</a>](/grafana-performance-overview-dashboard.md)など、包括的なパフォーマンス診断および分析機能を提供します。
+TiDB は、TiDB ダッシュボードの[パフォーマンス概要ダッシュボード](/grafana-performance-overview-dashboard.md)など、包括的なパフォーマンス診断および分析機能を提供します。
 
 このドキュメントでは、これらの機能を組み合わせて使用し、7 つの異なるランタイム シナリオで同じ OLTP ワークロードのパフォーマンスを分析および比較する方法について説明します。これは、TiDB のパフォーマンスを効率的に分析および調整するのに役立つパフォーマンス チューニング プロセスを示しています。
 
 > **ノート：**
 >
-> [<a href="/dashboard/top-sql.md">Top SQL</a>](/dashboard/top-sql.md)と[<a href="/dashboard/continuous-profiling.md">継続的なプロファイリング</a>](/dashboard/continuous-profiling.md)デフォルトでは有効になっていません。事前に有効にしておく必要があります。
+> [継続的なプロファイリング](/dashboard/continuous-profiling.md)デフォルトでは有効になっていません。事前に有効にしておく必要があります。
 
-このドキュメントでは、これらのシナリオで同じアプリケーションを異なる JDBC 構成で実行することにより、アプリケーションとデータベース間のさまざまな相互作用によってシステム全体のパフォーマンスがどのような影響を受けるかを示し、パフォーマンスを向上させるために[<a href="/best-practices/java-app-best-practices.md">TiDB を使用したJavaアプリケーション開発のベスト プラクティス</a>](/best-practices/java-app-best-practices.md)適用できるようにします。
+このドキュメントでは、これらのシナリオで同じアプリケーションを異なる JDBC 構成で実行することにより、アプリケーションとデータベース間のさまざまな相互作用によってシステム全体のパフォーマンスがどのような影響を受けるかを示し、パフォーマンスを向上させるために[TiDB を使用したJavaアプリケーション開発のベスト プラクティス](/best-practices/java-app-best-practices.md)適用できるようにします。
 
 ## 環境の説明 {#environment-description}
 
@@ -433,8 +433,8 @@ TiDB の平均 CPU 使用率は 603% から 478% に低下し、TiKV の平均 C
 
 -   パフォーマンスの分析とチューニングには、TiDB ダッシュボード (たとえば、Top SQL機能や継続的プロファイリング機能) とパフォーマンス概要ダッシュボードを使用することをお勧めします。
 
-    -   [<a href="/dashboard/top-sql.md">Top SQL</a>](/dashboard/top-sql.md)機能を使用すると、実行中のデータベース内の各 SQL ステートメントの CPU 消費量を視覚的に監視および調査して、データベースのパフォーマンスの問題をトラブルシューティングできます。
-    -   [<a href="/dashboard/continuous-profiling.md">継続的なプロファイリング</a>](/dashboard/continuous-profiling.md)を使用すると、TiDB、TiKV、PD の各インスタンスからパフォーマンス データを継続的に収集できます。アプリケーションが異なるインターフェイスを使用して TiDB と対話する場合、TiDB の CPU 消費量の違いは非常に大きくなります。
-    -   [<a href="/grafana-performance-overview-dashboard.md">パフォーマンス概要ダッシュボード</a>](/grafana-performance-overview-dashboard.md)を使用すると、データベース時間と SQL 実行時間の内訳情報の概要を取得できます。データベース時間に基づいてパフォーマンスを分析および診断し、システム全体のパフォーマンスのボトルネックが TiDB にあるかどうかを判断できます。ボトルネックが TiDB 内にある場合は、データベースの時間とレイテンシーの内訳、および負荷プロファイルとリソースの使用状況を使用して、TiDB 内のパフォーマンスのボトルネックを特定し、それに応じてパフォーマンスを調整できます。
+    -   [Top SQL](/dashboard/top-sql.md)機能を使用すると、実行中のデータベース内の各 SQL ステートメントの CPU 消費量を視覚的に監視および調査して、データベースのパフォーマンスの問題をトラブルシューティングできます。
+    -   [継続的なプロファイリング](/dashboard/continuous-profiling.md)を使用すると、TiDB、TiKV、PD の各インスタンスからパフォーマンス データを継続的に収集できます。アプリケーションが異なるインターフェイスを使用して TiDB と対話する場合、TiDB の CPU 消費量の違いは非常に大きくなります。
+    -   [パフォーマンス概要ダッシュボード](/grafana-performance-overview-dashboard.md)を使用すると、データベース時間と SQL 実行時間の内訳情報の概要を取得できます。データベース時間に基づいてパフォーマンスを分析および診断し、システム全体のパフォーマンスのボトルネックが TiDB にあるかどうかを判断できます。ボトルネックが TiDB 内にある場合は、データベースの時間とレイテンシーの内訳、および負荷プロファイルとリソースの使用状況を使用して、TiDB 内のパフォーマンスのボトルネックを特定し、それに応じてパフォーマンスを調整できます。
 
 これらの機能を組み合わせて使用​​すると、実際のアプリケーションのパフォーマンスを効率的に分析および調整できます。

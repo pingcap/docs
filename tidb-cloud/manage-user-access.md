@@ -7,7 +7,7 @@ summary: Learn how to manage identity access in TiDB Cloud.
 
 このドキュメントでは、 TiDB Cloudで組織、プロジェクト、ロール、およびユーザー プロファイルへのアクセスを管理する方法について説明します。
 
-TiDB クラウドにアクセスする前に、 [<a href="https://tidbcloud.com/free-trial">TiDB クラウド アカウントを作成する</a>](https://tidbcloud.com/free-trial) . [<a href="/tidb-cloud/tidb-cloud-password-authentication.md">TiDB Cloudを使用してパスワードを管理する</a>](/tidb-cloud/tidb-cloud-password-authentication.md)できるように電子メールとパスワードでサインアップするか、 TiDB Cloudへのシングル サインオン (SSO) 用に Google Workspace または GitHub アカウントを選択することができます。
+TiDB クラウドにアクセスする前に、 [TiDB Cloudを使用してパスワードを管理する](/tidb-cloud/tidb-cloud-password-authentication.md)できるように電子メールとパスワードでサインアップするか、 TiDB Cloudへのシングル サインオン (SSO) 用に Google Workspace または GitHub アカウントを選択することができます。
 
 ## 組織とプロジェクト {#organizations-and-projects}
 

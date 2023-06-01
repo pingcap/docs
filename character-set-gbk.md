@@ -35,13 +35,13 @@ MySQL の GBK 文字セットのデフォルトの照合順序は`gbk_chinese_ci
 
 <CustomContent platform="tidb">
 
-TiDB を MySQL GBK 文字セットの照合順序と互換性を持たせるには、最初に TiDB クラスターを初期化するときに、TiDB オプション[<a href="/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap">`new_collations_enabled_on_first_bootstrap`</a>](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)から`true`を設定して[<a href="/character-set-and-collation.md#new-framework-for-collations">照合順序の新しいフレームワーク</a>](/character-set-and-collation.md#new-framework-for-collations)を有効にする必要があります。
+TiDB を MySQL GBK 文字セットの照合順序と互換性を持たせるには、最初に TiDB クラスターを初期化するときに、TiDB オプション[照合順序の新しいフレームワーク](/character-set-and-collation.md#new-framework-for-collations)を有効にする必要があります。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-TiDB を MySQL GBK 文字セットの照合順序と互換性を持たせるために、最初に TiDB クラスターを初期化するときに、 TiDB Cloud はデフォルトで[<a href="/character-set-and-collation.md#new-framework-for-collations">照合順序の新しいフレームワーク</a>](/character-set-and-collation.md#new-framework-for-collations)を有効にします。
+TiDB を MySQL GBK 文字セットの照合順序と互換性を持たせるために、最初に TiDB クラスターを初期化するときに、 TiDB Cloud はデフォルトで[照合順序の新しいフレームワーク](/character-set-and-collation.md#new-framework-for-collations)を有効にします。
 
 </CustomContent>
 
@@ -68,7 +68,7 @@ SHOW COLLATION WHERE CHARSET = 'gbk';
 
 ### 不正な文字の互換性 {#illegal-character-compatibility}
 
--   システム変数[<a href="/system-variables.md#character_set_client">`character_set_client`</a>](/system-variables.md#character_set_client)と[<a href="/system-variables.md#character_set_connection">`character_set_connection`</a>](/system-variables.md#character_set_connection)が同時に`gbk`に設定されていない場合、TiDB は MySQL と同じ方法で不正な文字を処理します。
+-   システム変数[`character_set_connection`](/system-variables.md#character_set_connection)が同時に`gbk`に設定されていない場合、TiDB は MySQL と同じ方法で不正な文字を処理します。
 -   `character_set_client`と`character_set_connection`が両方とも`gbk`に設定されている場合、TiDB は MySQL とは異なる方法で不正な文字を処理します。
 
     -   MySQL は、読み取り操作と書き込み操作で不正な GBK 文字セットを別々に処理します。

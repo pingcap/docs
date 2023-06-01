@@ -7,7 +7,7 @@ summary: Learn how to scale the TiDB cluster using TiUP.
 
 TiDB クラスターの容量は、オンライン サービスを中断することなく増減できます。
 
-このドキュメントでは、 TiUPを使用して TiDB、TiKV、PD、TiCDC、またはTiFlashクラスターをスケーリングする方法について説明します。 TiUPをインストールしていない場合は、 [<a href="/production-deployment-using-tiup.md#step-2-deploy-tiup-on-the-control-machine">ステップ 2. 制御マシンにTiUPをデプロイ</a>](/production-deployment-using-tiup.md#step-2-deploy-tiup-on-the-control-machine)の手順を参照してください。
+このドキュメントでは、 TiUPを使用して TiDB、TiKV、PD、TiCDC、またはTiFlashクラスターをスケーリングする方法について説明します。 TiUPをインストールしていない場合は、 [ステップ 2. 制御マシンにTiUPをデプロイ](/production-deployment-using-tiup.md#step-2-deploy-tiup-on-the-control-machine)の手順を参照してください。
 
 現在のクラスター名のリストを表示するには、 `tiup cluster list`を実行します。
 
@@ -134,7 +134,7 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
     tiup cluster display <cluster-name>
     ```
 
-    ブラウザを使用して[<a href="http://10.0.1.5:3000">http://10.0.1.5:3000</a>](http://10.0.1.5:3000)の監視プラットフォームにアクセスし、クラスターと新しいノードのステータスを監視します。
+    ブラウザを使用して[http://10.0.1.5:3000](http://10.0.1.5:3000)の監視プラットフォームにアクセスし、クラスターと新しいノードのステータスを監視します。
 
 スケールアウト後のクラスター トポロジは次のようになります。
 
@@ -155,7 +155,7 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
 > TiFlashノードを既存の TiDB クラスターに追加する場合は、次の点に注意してください。
 >
 > -   現在の TiDB バージョンがTiFlashの使用をサポートしていることを確認します。それ以外の場合は、TiDB クラスターを v5.0 以降のバージョンにアップグレードします。
-> -   `tiup ctl:v<CLUSTER_VERSION> pd -u http://<pd_ip>:<pd_port> config set enable-placement-rules true`コマンドを実行して、配置ルール機能を有効にします。または、 [<a href="/pd-control.md">PD-CTL</a>](/pd-control.md)で対応するコマンドを実行します。
+> -   `tiup ctl:v<CLUSTER_VERSION> pd -u http://<pd_ip>:<pd_port> config set enable-placement-rules true`コマンドを実行して、配置ルール機能を有効にします。または、 [PD-CTL](/pd-control.md)で対応するコマンドを実行します。
 
 1.  ノード情報を`scale-out.yml`ファイルに追加します。
 
@@ -190,7 +190,7 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
     tiup cluster display <cluster-name>
     ```
 
-    ブラウザを使用して[<a href="http://10.0.1.5:3000">http://10.0.1.5:3000</a>](http://10.0.1.5:3000)監視プラットフォームにアクセスし、クラスターと新しいノードのステータスを表示します。
+    ブラウザを使用して[http://10.0.1.5:3000](http://10.0.1.5:3000)監視プラットフォームにアクセスし、クラスターと新しいノードのステータスを表示します。
 
 スケールアウト後のクラスター トポロジは次のようになります。
 
@@ -242,7 +242,7 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
     tiup cluster display <cluster-name>
     ```
 
-    ブラウザを使用して[<a href="http://10.0.1.5:3000">http://10.0.1.5:3000</a>](http://10.0.1.5:3000)監視プラットフォームにアクセスし、クラスターと新しいノードのステータスを表示します。
+    ブラウザを使用して[http://10.0.1.5:3000](http://10.0.1.5:3000)監視プラットフォームにアクセスし、クラスターと新しいノードのステータスを表示します。
 
 スケールアウト後のクラスター トポロジは次のようになります。
 
@@ -261,7 +261,7 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
 > **ノート：**
 >
 > -   同様の手順を実行して、TiDB または PD ノードを削除できます。
-> -   TiKV、 TiFlash、および TiDB Binlogコンポーネントは非同期でオフラインになり、停止プロセスに時間がかかるため、 TiUPはさまざまな方法でこれらをオフラインにします。詳細は[<a href="/tiup/tiup-component-cluster-scale-in.md#particular-handling-of-components-offline-process">コンポーネントのオフラインプロセスの特別な処理</a>](/tiup/tiup-component-cluster-scale-in.md#particular-handling-of-components-offline-process)を参照してください。
+> -   TiKV、 TiFlash、および TiDB Binlogコンポーネントは非同期でオフラインになり、停止プロセスに時間がかかるため、 TiUPはさまざまな方法でこれらをオフラインにします。詳細は[コンポーネントのオフラインプロセスの特別な処理](/tiup/tiup-component-cluster-scale-in.md#particular-handling-of-components-offline-process)を参照してください。
 > -   TiKV の PD クライアントは、PD ノードのリストをキャッシュします。 TiKV の現在のバージョンには、PD ノードを自動的かつ定期的に更新するメカニズムがあり、TiKV によってキャッシュされた PD ノードの期限切れリストの問題を軽減するのに役立ちます。ただし、PD をスケールアウトした後は、スケーリング前に存在していたすべての PD ノードを一度に直接削除しないようにする必要があります。必要に応じて、既存のすべての PD ノードをオフラインにする前に、必ず PD リーダーを新しく追加した PD ノードに切り替えてください。
 
 1.  ノード ID 情報をビュー。
@@ -318,7 +318,7 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
 
     スケールインするノードが`Tombstone`になれば、スケールイン操作は成功します。
 
-    ブラウザを使用して[<a href="http://10.0.1.5:3000">http://10.0.1.5:3000</a>](http://10.0.1.5:3000)の監視プラットフォームにアクセスし、クラスターのステータスを表示します。
+    ブラウザを使用して[http://10.0.1.5:3000](http://10.0.1.5:3000)の監視プラットフォームにアクセスし、クラスターのステータスを表示します。
 
 現在のトポロジは次のとおりです。
 
@@ -378,7 +378,7 @@ TiDB クラスターの容量は、オンライン サービスを中断する�
 
 1.  pd-ctlのstoreコマンドを使用して、このTiFlashノードに対応するストアIDを表示します。
 
-    -   [<a href="/pd-control.md">PD-CTL</a>](/pd-control.md)に store コマンドを入力します (バイナリ ファイルは tidb-ansible ディレクトリの`resources/bin`の下にあります)。
+    -   [PD-CTL](/pd-control.md)に store コマンドを入力します (バイナリ ファイルは tidb-ansible ディレクトリの`resources/bin`の下にあります)。
 
     -   TiUPデプロイメントを使用する場合は、 `pd-ctl` `tiup ctl:v<CLUSTER_VERSION> pd`に置き換えます。
 
@@ -473,7 +473,7 @@ PD のレプリケーション ルールを手動でクリーンアップする�
     tiup cluster display <cluster-name>
     ```
 
-    ブラウザを使用して[<a href="http://10.0.1.5:3000">http://10.0.1.5:3000</a>](http://10.0.1.5:3000)監視プラットフォームにアクセスし、クラスターと新しいノードのステータスを表示します。
+    ブラウザを使用して[http://10.0.1.5:3000](http://10.0.1.5:3000)監視プラットフォームにアクセスし、クラスターと新しいノードのステータスを表示します。
 
 スケールアウト後のクラスター トポロジは次のようになります。
 
@@ -505,7 +505,7 @@ PD のレプリケーション ルールを手動でクリーンアップする�
     tiup cluster display <cluster-name>
     ```
 
-    ブラウザを使用して[<a href="http://10.0.1.5:3000">http://10.0.1.5:3000</a>](http://10.0.1.5:3000)の監視プラットフォームにアクセスし、クラスターのステータスを表示します。
+    ブラウザを使用して[http://10.0.1.5:3000](http://10.0.1.5:3000)の監視プラットフォームにアクセスし、クラスターのステータスを表示します。
 
 現在のトポロジは次のとおりです。
 

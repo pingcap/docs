@@ -9,13 +9,13 @@ SQL 計画管理は、SQL バインディングを実行して SQL 実行計画�
 
 ## SQLバインディング {#sql-binding}
 
-SQL バインディングは SPM の基礎です。 [<a href="/optimizer-hints.md">オプティマイザーのヒント</a>](/optimizer-hints.md)ドキュメントでは、ヒントを使用して特定の実行プランを選択する方法が紹介されています。ただし、場合によっては、SQL ステートメントを変更せずに実行選択に干渉する必要がある場合があります。 SQL バインディングを使用すると、SQL ステートメントを変更せずに、指定した実行プランを選択できます。
+SQL バインディングは SPM の基礎です。 [オプティマイザーのヒント](/optimizer-hints.md)ドキュメントでは、ヒントを使用して特定の実行プランを選択する方法が紹介されています。ただし、場合によっては、SQL ステートメントを変更せずに実行選択に干渉する必要がある場合があります。 SQL バインディングを使用すると、SQL ステートメントを変更せずに、指定した実行プランを選択できます。
 
 <CustomContent platform="tidb">
 
 > **ノート：**
 >
-> SQL バインディングを使用するには、 `SUPER`権限が必要です。 TiDB が十分な権限を持っていないことを示すプロンプトを表示した場合は、 [<a href="/privilege-management.md">権限管理</a>](/privilege-management.md)を参照して必要な権限を追加してください。
+> SQL バインディングを使用するには、 `SUPER`権限が必要です。 TiDB が十分な権限を持っていないことを示すプロンプトを表示した場合は、 [権限管理](/privilege-management.md)を参照して必要な権限を追加してください。
 
 </CustomContent>
 
@@ -23,7 +23,7 @@ SQL バインディングは SPM の基礎です。 [<a href="/optimizer-hints.m
 
 > **ノート：**
 >
-> SQL バインディングを使用するには、 `SUPER`権限が必要です。 TiDB が十分な権限を持っていないことを示すプロンプトを表示した場合は、 [<a href="https://docs.pingcap.com/tidb/stable/privilege-management">権限管理</a>](https://docs.pingcap.com/tidb/stable/privilege-management)を参照して必要な権限を追加してください。
+> SQL バインディングを使用するには、 `SUPER`権限が必要です。 TiDB が十分な権限を持っていないことを示すプロンプトを表示した場合は、 [権限管理](https://docs.pingcap.com/tidb/stable/privilege-management)を参照して必要な権限を追加してください。
 
 </CustomContent>
 
@@ -187,7 +187,7 @@ SQL ステートメントの実行プランを履歴実行プランに固定す�
 
 現在、この機能には次の制限があります。
 
--   この機能は、履歴実行計画に従ってヒントを生成し、生成されたヒントをバインドに使用します。履歴実行プランは[<a href="/statement-summary-tables.md">ステートメント概要テーブル</a>](/statement-summary-tables.md)に保存されるため、この機能を使用する前に、まず[<a href="/system-variables.md#tidb_enable_stmt_summary-new-in-v304">`tidb_enable_stmt_summary`</a>](/system-variables.md#tidb_enable_stmt_summary-new-in-v304)システム変数を有効にする必要があります。
+-   この機能は、履歴実行計画に従ってヒントを生成し、生成されたヒントをバインドに使用します。履歴実行プランは[`tidb_enable_stmt_summary`](/system-variables.md#tidb_enable_stmt_summary-new-in-v304)システム変数を有効にする必要があります。
 -   現在、この機能は、現在の TiDB ノードの`statements_summary`と`statements_summary_history`テーブルでの履歴実行プランのバインディングのみをサポートしています。 `can't find any plans`エラーが発生した場合は、クラスター内の別の TiDB ノードに接続して、バインドを再試行できます。
 
 このバインド方法の SQL ステートメントは次のとおりです。
@@ -196,7 +196,7 @@ SQL ステートメントの実行プランを履歴実行プランに固定す�
 CREATE [GLOBAL | SESSION] BINDING FROM HISTORY USING PLAN DIGEST 'plan_digest';
 ```
 
-このステートメントは、 `plan_digest`を使用して実行プランを SQL ステートメントにバインドします。デフォルトのスコープは SESSION です。作成されるバインディングの適用可能なSQL文、優先度、範囲、有効条件は[<a href="#create-a-binding-according-to-a-sql-statement">SQL ステートメントに従って作成されたバインディング</a>](#create-a-binding-according-to-a-sql-statement)と同様です。
+このステートメントは、 `plan_digest`を使用して実行プランを SQL ステートメントにバインドします。デフォルトのスコープは SESSION です。作成されるバインディングの適用可能なSQL文、優先度、範囲、有効条件は[SQL ステートメントに従って作成されたバインディング](#create-a-binding-according-to-a-sql-statement)と同様です。
 
 このバインド方法を使用するには、まず`statements_summary`でターゲットの履歴実行プランに対応する`plan_digest`取得し、次に`plan_digest`を使用してバインディングを作成する必要があります。詳細な手順は次のとおりです。
 
@@ -233,7 +233,7 @@ CREATE [GLOBAL | SESSION] BINDING FROM HISTORY USING PLAN DIGEST 'plan_digest';
     CREATE BINDING FROM HISTORY USING PLAN DIGEST '4e3159169cc63c14b139a4e7d72eae1759875c9a9581f94bb2079aae961189cb';
     ```
 
-作成したバインディングが有効かどうかを確認するには、 [<a href="#view-bindings">バインディングを表示する</a>](#view-bindings)を実行します。
+作成したバインディングが有効かどうかを確認するには、 [バインディングを表示する](#view-bindings)を実行します。
 
 ```sql
 SHOW BINDINGS\G;
@@ -282,7 +282,7 @@ DROP [GLOBAL | SESSION] BINDING FOR BindableStmt;
 
 一般に、SESSION スコープのバインディングは主にテストまたは特殊な状況で使用されます。すべての TiDB プロセスでバインディングを有効にするには、GLOBAL バインディングを使用する必要があります。作成された SESSION バインディングは、セッションが閉じる前に SESSION バインディングが削除された場合でも、SESSION が終了するまで対応する GLOBAL バインディングを保護します。この場合、バインディングは有効にならず、プランはオプティマイザーによって選択されます。
 
-次の例は、SESSION バインディングが GLOBAL バインディングをシールドする[<a href="#create-a-binding">バインディングを作成する</a>](#create-a-binding)の例に基づいています。
+次の例は、SESSION バインディングが GLOBAL バインディングをシールドする[バインディングを作成する](#create-a-binding)の例に基づいています。
 
 ```sql
 -- Drops the binding created in the SESSION scope.
@@ -302,7 +302,7 @@ SQL ステートメントに従ってバインディングを削除するだけ�
 DROP [GLOBAL | SESSION] BINDING FOR SQL DIGEST 'sql_digest';
 ```
 
-このステートメントは、GLOBAL または SESSION レベルで`sql_digest`に対応する実行プラン バインディングを削除します。デフォルトのスコープは SESSION です。 `sql_digest` x [<a href="#view-bindings">バインディングの表示</a>](#view-bindings)を取得できます。
+このステートメントは、GLOBAL または SESSION レベルで`sql_digest`に対応する実行プラン バインディングを削除します。デフォルトのスコープは SESSION です。 `sql_digest` x [バインディングの表示](#view-bindings)を取得できます。
 
 > **ノート：**
 >
@@ -330,7 +330,7 @@ SQL ステートメントに従ってバインド ステータスを変更する
 SET BINDING [ENABLED | DISABLED] FOR SQL DIGEST 'sql_digest';
 ```
 
-`sql_digest`で変更できるバインドステータスと効果は変更[<a href="#change-binding-status-according-to-a-sql-statement">SQL文によると</a>](#change-binding-status-according-to-a-sql-statement)と同じです。ステータス変更に使用できるバインドがない場合は、警告メッセージ`can't find any binding for 'sql_digest'`が返されます。
+`sql_digest`で変更できるバインドステータスと効果は変更[SQL文によると](#change-binding-status-according-to-a-sql-statement)と同じです。ステータス変更に使用できるバインドがない場合は、警告メッセージ`can't find any binding for 'sql_digest'`が返されます。
 
 ### バインディングをビュー {#view-bindings}
 
@@ -360,7 +360,7 @@ SHOW [GLOBAL | SESSION] BINDINGS [ShowLikeOrWhere]
 
 次のいずれかの方法を使用して、バインディングのトラブルシューティングを行うことができます。
 
--   システム変数[<a href="/system-variables.md#last_plan_from_binding-new-in-v40">`last_plan_from_binding`</a>](/system-variables.md#last_plan_from_binding-new-in-v40)を使用して、最後に実行されたステートメントで使用された実行プランがバインディングからのものであるかどうかを示します。
+-   システム変数[`last_plan_from_binding`](/system-variables.md#last_plan_from_binding-new-in-v40)を使用して、最後に実行されたステートメントで使用された実行プランがバインディングからのものであるかどうかを示します。
 
     {{< copyable "" >}}
 
@@ -415,7 +415,7 @@ SHOW [GLOBAL | SESSION] BINDINGS [ShowLikeOrWhere]
 
 ### キャッシュバインディング {#cache-bindings}
 
-各 TiDB インスタンスには、バインディング用に最も長く使用されていない (LRU) キャッシュがあります。キャッシュ容量はシステム変数[<a href="/system-variables.md#tidb_mem_quota_binding_cache-new-in-v600">`tidb_mem_quota_binding_cache`</a>](/system-variables.md#tidb_mem_quota_binding_cache-new-in-v600)によって制御されます。 TiDB インスタンスにキャッシュされたバインディングを表示できます。
+各 TiDB インスタンスには、バインディング用に最も長く使用されていない (LRU) キャッシュがあります。キャッシュ容量はシステム変数[`tidb_mem_quota_binding_cache`](/system-variables.md#tidb_mem_quota_binding_cache-new-in-v600)によって制御されます。 TiDB インスタンスにキャッシュされたバインディングを表示できます。
 
 バインディングのキャッシュ ステータスを表示するには、 `SHOW binding_cache status`ステートメントを実行します。このステートメントでは、有効スコープはデフォルトで GLOBAL であり、変更できません。このステートメントは、キャッシュ内で使用可能なバインディングの数、システム内で使用可能なバインディングの合計数、キャッシュされたすべてのバインディングのメモリ使用量、およびキャッシュの合計メモリを返します。
 
@@ -437,7 +437,7 @@ SHOW binding_cache status;
 
 ## ベースラインのキャプチャ {#baseline-capturing}
 
-[<a href="#prevent-regression-of-execution-plans-during-an-upgrade">アップグレード中の実行計画の回帰を防止する</a>](#prevent-regression-of-execution-plans-during-an-upgrade)に使用されるこの機能は、キャプチャ条件を満たすクエリをキャプチャし、これらのクエリのバインディングを作成します。
+[アップグレード中の実行計画の回帰を防止する](#prevent-regression-of-execution-plans-during-an-upgrade)に使用されるこの機能は、キャプチャ条件を満たすクエリをキャプチャし、これらのクエリのバインディングを作成します。
 
 計画ベースラインは、オプティマイザが SQL ステートメントを実行するために使用できる、承認された計画のコレクションを指します。通常、TiDB は、プランが適切に実行されることを確認した後にのみ、プランをプラン ベースラインに追加します。このコンテキストにおけるプランには、オプティマイザーが実行プランを再現するために必要なプラン関連の詳細 (SQL プラン識別子、ヒント セット、バインド値、オプティマイザー環境など) がすべて含まれます。
 
@@ -447,7 +447,7 @@ SHOW binding_cache status;
 
 > **ノート：**
 >
-> 自動バインド作成機能は[<a href="/statement-summary-tables.md">声明の概要</a>](/statement-summary-tables.md)に依存しているため、自動バインドを使用する前に必ず Statement Summary を有効にしてください。
+> 自動バインド作成機能は[声明の概要](/statement-summary-tables.md)に依存しているため、自動バインドを使用する前に必ず Statement Summary を有効にしてください。
 
 自動バインディング作成を有効にすると、ステートメント サマリー内の履歴 SQL ステートメントが`bind-info-lease` (デフォルト値は`3s` ) ごとに走査され、少なくとも 2 回出現する SQL ステートメントに対してバインディングが自動的に作成されます。これらの SQL ステートメントの場合、TiDB はステートメントの概要に記録された実行計画を自動的にバインドします。
 
@@ -493,7 +493,7 @@ SHOW binding_cache status;
 
 | **次元名** | **説明**                                                                                                                                                                                                                                                 | 備考                                                                                                                                              |
 | :------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| テーブル    | テーブル名でフィルターします。各フィルタリング ルールは`db.table`形式です。サポートされているフィルタリング構文には[<a href="/table-filter.md#plain-table-names">プレーンなテーブル名</a>](/table-filter.md#plain-table-names)と[<a href="/table-filter.md#wildcards">ワイルドカード</a>](/table-filter.md#wildcards)が含まれます。 | 大文字小文字を区別しません。テーブル名に不正な文字が含まれている場合、ログは警告メッセージ`[sql-bind] failed to load mysql.capture_plan_baselines_blacklist`を返します。                           |
+| テーブル    | テーブル名でフィルターします。各フィルタリング ルールは`db.table`形式です。サポートされているフィルタリング構文には[ワイルドカード](/table-filter.md#wildcards)が含まれます。 | 大文字小文字を区別しません。テーブル名に不正な文字が含まれている場合、ログは警告メッセージ`[sql-bind] failed to load mysql.capture_plan_baselines_blacklist`を返します。                           |
 | 周波数     | 周波数でフィルタリングします。複数回実行された SQL ステートメントはデフォルトでキャプチャされます。頻繁に実行されるステートメントをキャプチャするために高い頻度を設定できます。                                                                                                                                                             | 頻度を 1 より小さい値に設定すると、不正とみなされ、ログに警告メッセージ`[sql-bind] frequency threshold is less than 1, ignore it`が返されます。複数の周波数フィルター ルールが挿入された場合、最も高い周波数の値が優先されます。 |
 | ユーザー    | ユーザー名でフィルターします。ブロックリストに登録されたユーザーによって実行されたステートメントはキャプチャされません。                                                                                                                                                                                           | 複数のユーザーが同じステートメントを実行し、そのユーザー名がすべてブロックリストに含まれている場合、このステートメントはキャプチャされません。                                                                         |
 
@@ -517,7 +517,7 @@ TiDB クラスターをアップグレードする前に、次の手順を実行
 
 3.  アップグレード後、必要に応じてバインディングを削除します。
 
-    -   [<a href="#view-bindings">`SHOW GLOBAL BINDINGS`</a>](#view-bindings)ステートメントを実行してバインディング ソースを確認します。
+    -   [`SHOW GLOBAL BINDINGS`](#view-bindings)ステートメントを実行してバインディング ソースを確認します。
 
         出力の`Source`フィールドをチェックして、バインディングがキャプチャされたか ( `capture` )、手動で作成されたか ( `manual` ) を確認します。
 
@@ -562,7 +562,7 @@ SET GLOBAL tidb_evolve_plan_baselines = ON;
 > **警告：**
 >
 > -   ベースライン進化は実験的機能です。未知のリスクが存在する可能性があります。本番環境で使用することは**お**勧めしません。
-> -   この変数は、ベースライン進化機能が一般提供 (GA) されるまで、強制的に`off`に設定されます。この機能を有効にしようとすると、エラーが返されます。本番環境でこの機能をすでに使用している場合は、できるだけ早く無効にしてください。バインディング ステータスが期待どおりではない場合は、PingCAP またはコミュニティから[<a href="/support.md">支持を得ます</a>](/support.md) 。
+> -   この変数は、ベースライン進化機能が一般提供 (GA) されるまで、強制的に`off`に設定されます。この機能を有効にしようとすると、エラーが返されます。本番環境でこの機能をすでに使用している場合は、できるだけ早く無効にしてください。バインディング ステータスが期待どおりではない場合は、PingCAP またはコミュニティから[支持を得ます](/support.md) 。
 
 </CustomContent>
 
@@ -571,7 +571,7 @@ SET GLOBAL tidb_evolve_plan_baselines = ON;
 > **警告：**
 >
 > -   ベースライン進化は実験的機能です。未知のリスクが存在する可能性があります。本番環境で使用することは**お**勧めしません。
-> -   この変数は、ベースライン進化機能が一般提供 (GA) されるまで、強制的に`off`に設定されます。この機能を有効にしようとすると、エラーが返されます。本番環境でこの機能をすでに使用している場合は、できるだけ早く無効にしてください。バインディングのステータスが期待どおりではない場合は、 [<a href="/tidb-cloud/tidb-cloud-support.md">TiDB Cloudサポートにお問い合わせください</a>](/tidb-cloud/tidb-cloud-support.md) .
+> -   この変数は、ベースライン進化機能が一般提供 (GA) されるまで、強制的に`off`に設定されます。この機能を有効にしようとすると、エラーが返されます。本番環境でこの機能をすでに使用している場合は、できるだけ早く無効にしてください。バインディングのステータスが期待どおりではない場合は、 [TiDB Cloudサポートにお問い合わせください](/tidb-cloud/tidb-cloud-support.md) .
 
 </CustomContent>
 

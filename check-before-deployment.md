@@ -129,7 +129,7 @@ sysctl -p
 
 ## ターゲットマシンのファイアウォールサービスを確認して停止します。 {#check-and-stop-the-firewall-service-of-target-machines}
 
-TiDB クラスターでは、読み取りおよび書き込みリクエストやデータ ハートビートなどの情報の送信を確実にするために、ノード間のアクセス ポートが開いている必要があります。一般的なオンライン シナリオでは、データベースとアプリケーション サービスの間、およびデータベース ノード間のデータ対話はすべて安全なネットワーク内で行われます。したがって、特別なセキュリティ要件がない場合は、ターゲット マシンのファイアウォールを停止することをお勧めします。それ以外の場合は、 [<a href="/hardware-and-software-requirements.md#network-requirements">ポートの使用状況</a>](/hardware-and-software-requirements.md#network-requirements)を参照して、ファイアウォール サービスの許可リストに必要なポート情報を追加します。
+TiDB クラスターでは、読み取りおよび書き込みリクエストやデータ ハートビートなどの情報の送信を確実にするために、ノード間のアクセス ポートが開いている必要があります。一般的なオンライン シナリオでは、データベースとアプリケーション サービスの間、およびデータベース ノード間のデータ対話はすべて安全なネットワーク内で行われます。したがって、特別なセキュリティ要件がない場合は、ターゲット マシンのファイアウォールを停止することをお勧めします。それ以外の場合は、 [ポートの使用状況](/hardware-and-software-requirements.md#network-requirements)を参照して、ファイアウォール サービスの許可リストに必要なポート情報を追加します。
 
 このセクションの残りの部分では、ターゲット マシンのファイアウォール サービスを停止する方法について説明します。
 
@@ -692,7 +692,7 @@ sudo yum -y install numactl
 
 **方法 2** : `tiup cluster exec`コマンドを実行して、既存のクラスターに NUMA をバッチでインストールします。
 
-1.  [<a href="/production-deployment-using-tiup.md">TiUPを使用した TiDBクラスタのデプロイ</a>](/production-deployment-using-tiup.md)に従ってクラスターをデプロイします。 `tidb-test` . TiDB クラスターをインストールしている場合は、この手順をスキップできます。
+1.  [TiUPを使用した TiDBクラスタのデプロイ](/production-deployment-using-tiup.md)に従ってクラスターをデプロイします。 `tidb-test` . TiDB クラスターをインストールしている場合は、この手順をスキップできます。
 
     ```bash
     tiup cluster deploy tidb-test v6.1.0 ./topology.yaml --user root [-p] [-i /home/root/.ssh/gcp_rsa]

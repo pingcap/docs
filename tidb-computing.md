@@ -7,7 +7,7 @@ summary: Understand the computing layer of the TiDB database.
 
 TiKV が提供する分散storageに基づいて、TiDB はトランザクション処理の優れた機能とデータ分析の機能を組み合わせたコンピューティング エンジンを構築します。このドキュメントは、TiDB データベース テーブルのデータを TiKV の (Key, Value) キーと値のペアにマッピングするデータ マッピング アルゴリズムを紹介することから始まり、次に TiDB がメタデータを管理する方法を紹介し、最後にTiDB SQLレイヤーのアーキテクチャを説明します。
 
-コンピューティングレイヤーが依存するstorageソリューションについては、このドキュメントでは TiKV の行ベースのstorage構造のみを紹介します。 OLAP サービスの場合、TiDB は TiKV 拡張機能として列ベースのstorageソリューション[<a href="/tiflash/tiflash-overview.md">TiFlash</a>](/tiflash/tiflash-overview.md)を導入します。
+コンピューティングレイヤーが依存するstorageソリューションについては、このドキュメントでは TiKV の行ベースのstorage構造のみを紹介します。 OLAP サービスの場合、TiDB は TiKV 拡張機能として列ベースのstorageソリューション[TiFlash](/tiflash/tiflash-overview.md)を導入します。
 
 ## テーブルデータの Key-Value へのマッピング {#mapping-table-data-to-key-value}
 
@@ -32,7 +32,7 @@ Key:   tablePrefix{TableID}_recordPrefixSep{RowID}
 Value: [col1, col2, col3, col4]
 ```
 
-`tablePrefix`と`recordPrefixSep`両方とも、キー空間内の他のデータを区別するために使用される特別な文字列定数です。文字列定数の正確な値は[<a href="#summary-of-mapping-relationships">マッピング関係の概要</a>](#summary-of-mapping-relationships)で紹介されています。
+`tablePrefix`と`recordPrefixSep`両方とも、キー空間内の他のデータを区別するために使用される特別な文字列定数です。文字列定数の正確な値は[マッピング関係の概要](#summary-of-mapping-relationships)で紹介されています。
 
 ### インデックス付きデータの Key-Value へのマッピング {#mapping-of-indexed-data-to-key-value}
 
@@ -121,7 +121,7 @@ TiDB の SQLレイヤーである TiDB サーバーは、SQL ステートメン�
 
 ### SQLコンピューティング {#sql-computing}
 
-SQL コンピューティングの最も単純なソリューションは、前のセクションで説明した[<a href="#mapping-of-table-data-to-key-value">テーブルデータの Key-Value へのマッピング</a>](#mapping-of-table-data-to-key-value)です。これは、SQL クエリを KV クエリにマップし、KV インターフェイスを通じて対応するデータを取得し、さまざまな計算を実行します。
+SQL コンピューティングの最も単純なソリューションは、前のセクションで説明した[テーブルデータの Key-Value へのマッピング](#mapping-of-table-data-to-key-value)です。これは、SQL クエリを KV クエリにマップし、KV インターフェイスを通じて対応するデータを取得し、さまざまな計算を実行します。
 
 たとえば、 `select count(*) from user where name = "TiDB"` SQL ステートメントを実行するには、TiDB はテーブル内のすべてのデータを読み取り、 `name`フィールドが`TiDB`であるかどうかを確認し、そうであればこの行を返します。プロセスは次のとおりです。
 

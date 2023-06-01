@@ -30,7 +30,7 @@ rules = ['*.*', '!test.*']
 -   `rules = ['scm1.tidb_*']`
     -   `scm1`データベース内の名前が`tidb_`で始まるすべてのテーブルをレプリケートします。
 
-詳細については、 [<a href="/table-filter.md#syntax">テーブルフィルターの構文</a>](/table-filter.md#syntax)を参照してください。
+詳細については、 [テーブルフィルターの構文](/table-filter.md#syntax)を参照してください。
 
 ## イベントフィルタールール {#event-filter-rules}
 
@@ -54,7 +54,7 @@ ignore-update-new-value-expr = "gender = 'male' and age > 18" # Ignore update DM
 
 設定パラメータの説明:
 
--   `matcher` : このイベント フィルター ルールが適用されるデータベースとテーブル。構文は[<a href="/table-filter.md">テーブルフィルター</a>](/table-filter.md)と同じです。
+-   `matcher` : このイベント フィルター ルールが適用されるデータベースとテーブル。構文は[テーブルフィルター](/table-filter.md)と同じです。
 -   `ignore-event` : 無視するイベントの種類。このパラメータは文字列の配列を受け入れます。複数のイベント タイプを設定できます。現在、次のイベント タイプがサポートされています。
 
 | イベント              | タイプ | エイリアス       | 説明                                                                            |

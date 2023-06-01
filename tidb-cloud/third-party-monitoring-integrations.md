@@ -9,7 +9,7 @@ TiDB Cloudをサードパーティの監視サービスと統合して、 TiDB C
 
 > **ノート：**
 >
-> [<a href="/tidb-cloud/select-cluster-tier.md#serverless-tier-beta">Serverless Tierクラスター</a>](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)の場合、サードパーティの監視統合はサポートされていません。
+> [Serverless Tierクラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)の場合、サードパーティの監視統合はサポートされていません。
 
 ## 必要なアクセス {#required-access}
 
@@ -17,8 +17,8 @@ TiDB Cloudをサードパーティの監視サービスと統合して、 TiDB C
 
 ## サードパーティ統合をビューまたは変更する {#view-or-modify-third-party-integrations}
 
-1.  [<a href="https://tidbcloud.com">TiDB Cloudコンソール</a>](https://tidbcloud.com)にログインします。
-2.  [<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページの左側のナビゲーション ウィンドウで、次のいずれかを実行します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)にログインします。
+2.  [**クラスター**](https://tidbcloud.com/console/clusters)ページの左側のナビゲーション ウィンドウで、次のいずれかを実行します。
 
     -   複数のプロジェクトがある場合は、ターゲット プロジェクトに切り替えて、 **[管理]** &gt; **[統合]**をクリックします。
     -   プロジェクトが 1 つだけの場合は、 **[管理]** &gt; **[統合]**をクリックします。
@@ -29,12 +29,12 @@ TiDB Cloudをサードパーティの監視サービスと統合して、 TiDB C
 
 ### Datadog の統合 {#datadog-integration}
 
-Datadog の統合を使用すると、TiDB クラスターに関するメトリクス データを[<a href="https://www.datadoghq.com/">データドッグ</a>](https://www.datadoghq.com/)に送信し、これらのメトリクスを Datadog ダッシュボードに表示するようにTiDB Cloudを構成できます。
+Datadog の統合を使用すると、TiDB クラスターに関するメトリクス データを[データドッグ](https://www.datadoghq.com/)に送信し、これらのメトリクスを Datadog ダッシュボードに表示するようにTiDB Cloudを構成できます。
 
-詳細な統合手順と Datadog が追跡するメトリクスのリストについては、 [<a href="/tidb-cloud/monitor-datadog-integration.md">TiDB Cloudと Datadog を統合する</a>](/tidb-cloud/monitor-datadog-integration.md)を参照してください。
+詳細な統合手順と Datadog が追跡するメトリクスのリストについては、 [TiDB Cloudと Datadog を統合する](/tidb-cloud/monitor-datadog-integration.md)を参照してください。
 
 ### プロメテウスとグラファナの統合 {#prometheus-and-grafana-integration}
 
 Prometheus と Grafana の統合により、 TiDB Cloudから Prometheus のscrape_config ファイルを取得し、そのファイルの内容を使用して Prometheus を構成できます。これらのメトリクスは、Grafana ダッシュボードで表示できます。
 
-詳細な統合手順と Prometheus が追跡するメトリクスのリストについては、 [<a href="/tidb-cloud/monitor-prometheus-and-grafana-integration.md">TiDB CloudをPrometheus および Grafana と統合する</a>](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)を参照してください。
+詳細な統合手順と Prometheus が追跡するメトリクスのリストについては、 [TiDB CloudをPrometheus および Grafana と統合する](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)を参照してください。

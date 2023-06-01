@@ -5,42 +5,42 @@ summary: Introduce how to integrate TiDB with Amazon AppFlow step by step.
 
 # TiDB と Amazon AppFlow を統合する {#integrate-tidb-with-amazon-appflow}
 
-[<a href="https://aws.amazon.com/appflow/">Amazon アプリフロー</a>](https://aws.amazon.com/appflow/)は、Software as a Service (SaaS) アプリケーションを AWS サービスに接続し、データを安全に転送するために使用するフルマネージド API 統合サービスです。 Amazon AppFlow を使用すると、TiDB との間で、Salesforce、Amazon S3、LinkedIn、GitHub などのさまざまなタイプのデータプロバイダーにデータをインポートおよびエクスポートできます。詳細については、AWS ドキュメントの[<a href="https://docs.aws.amazon.com/appflow/latest/userguide/app-specific.html">サポートされているソースおよび宛先アプリケーション</a>](https://docs.aws.amazon.com/appflow/latest/userguide/app-specific.html)参照してください。
+[サポートされているソースおよび宛先アプリケーション](https://docs.aws.amazon.com/appflow/latest/userguide/app-specific.html)参照してください。
 
 このドキュメントでは、TiDB を Amazon AppFlow と統合する方法について説明し、例としてTiDB CloudServerless Tierクラスターの統合を取り上げます。
 
-TiDB クラスターがない場合は、 [<a href="https://tidbcloud.com/console/clusters">Serverless Tier</a>](https://tidbcloud.com/console/clusters)クラスターを作成できます。これは無料で、約 30 秒で作成できます。
+TiDB クラスターがない場合は、 [Serverless Tier](https://tidbcloud.com/console/clusters)クラスターを作成できます。これは無料で、約 30 秒で作成できます。
 
 ## 前提条件 {#prerequisites}
 
--   [<a href="https://git-scm.com/">ギット</a>](https://git-scm.com/)
+-   [ギット](https://git-scm.com/)
 
--   [<a href="https://openjdk.org/install/">JDK</a>](https://openjdk.org/install/) 11以上
+-   [JDK](https://openjdk.org/install/) 11以上
 
--   [<a href="https://maven.apache.org/install.html">メイビン</a>](https://maven.apache.org/install.html) 3.8以上
+-   [メイビン](https://maven.apache.org/install.html) 3.8以上
 
--   [<a href="https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html">AWS CLI</a>](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)バージョン 2
+-   [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)バージョン 2
 
--   [<a href="https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html">AWS サーバーレス アプリケーション モデル コマンドライン インターフェイス (AWS SAM CLI)</a>](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html) 1.58.0以上
+-   [AWS サーバーレス アプリケーション モデル コマンドライン インターフェイス (AWS SAM CLI)](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html) 1.58.0以上
 
--   次の要件を持つ AWS [<a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html">Identity and Access Management (IAM) ユーザー</a>](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html) :
+-   次の要件を持つ AWS [Identity and Access Management (IAM) ユーザー](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html) :
 
-    -   ユーザーは[<a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html">アクセスキー</a>](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html)を使用して AWS にアクセスできます。
+    -   ユーザーは[アクセスキー](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html)を使用して AWS にアクセスできます。
     -   ユーザーには次の権限があります。
 
-        -   `AWSCertificateManagerFullAccess` : [<a href="https://aws.amazon.com/secrets-manager/">AWS シークレットマネージャー</a>](https://aws.amazon.com/secrets-manager/)読み取りおよび書き込みに使用されます。
-        -   `AWSCloudFormationFullAccess` : SAM CLI は[<a href="https://aws.amazon.com/cloudformation/">AWSクラウドフォーメーション</a>](https://aws.amazon.com/cloudformation/)を使用して AWS リソースを宣言します。
-        -   `AmazonS3FullAccess` : AWS CloudFormation は公開に[<a href="https://aws.amazon.com/s3/?nc2=h_ql_prod_fs_s3">アマゾンS3</a>](https://aws.amazon.com/s3/?nc2=h_ql_prod_fs_s3)を使用します。
-        -   `AWSLambda_FullAccess` : 現在、Amazon AppFlow の新しいコネクタを実装する唯一の方法は[<a href="https://aws.amazon.com/lambda/?nc2=h_ql_prod_fs_lbd">AWSラムダ</a>](https://aws.amazon.com/lambda/?nc2=h_ql_prod_fs_lbd)です。
+        -   `AWSCertificateManagerFullAccess` : [AWS シークレットマネージャー](https://aws.amazon.com/secrets-manager/)読み取りおよび書き込みに使用されます。
+        -   `AWSCloudFormationFullAccess` : SAM CLI は[AWSクラウドフォーメーション](https://aws.amazon.com/cloudformation/)を使用して AWS リソースを宣言します。
+        -   `AmazonS3FullAccess` : AWS CloudFormation は公開に[アマゾンS3](https://aws.amazon.com/s3/?nc2=h_ql_prod_fs_s3)を使用します。
+        -   `AWSLambda_FullAccess` : 現在、Amazon AppFlow の新しいコネクタを実装する唯一の方法は[AWSラムダ](https://aws.amazon.com/lambda/?nc2=h_ql_prod_fs_lbd)です。
         -   `IAMFullAccess` : SAM CLI はコネクタに`ConnectorFunctionRole`を作成する必要があります。
 
--   [<a href="https://developer.salesforce.com">セールスフォース</a>](https://developer.salesforce.com)アカウント。
+-   [セールスフォース](https://developer.salesforce.com)アカウント。
 
 ## ステップ 1. TiDB コネクタを登録する {#step-1-register-a-tidb-connector}
 
 ### コードのクローンを作成する {#clone-the-code}
 
-TiDB と Amazon AppFlow の[<a href="https://github.com/pingcap-inc/tidb-appflow-integration">統合サンプルコードリポジトリ</a>](https://github.com/pingcap-inc/tidb-appflow-integration)クローンを作成します。
+TiDB と Amazon AppFlow の[統合サンプルコードリポジトリ](https://github.com/pingcap-inc/tidb-appflow-integration)クローンを作成します。
 
 ```bash
 git clone https://github.com/pingcap-inc/tidb-appflow-integration
@@ -80,13 +80,13 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
     Successfully created/updated stack - <stack_name> in <region>
     ```
 
-4.  [<a href="https://console.aws.amazon.com/lambda/home">AWS Lambda コンソール</a>](https://console.aws.amazon.com/lambda/home)に移動すると、アップロードしたばかりの Lambda が表示されます。ウィンドウの右上隅で正しい領域を選択する必要があることに注意してください。
+4.  [AWS Lambda コンソール](https://console.aws.amazon.com/lambda/home)に移動すると、アップロードしたばかりの Lambda が表示されます。ウィンドウの右上隅で正しい領域を選択する必要があることに注意してください。
 
     ![lambda dashboard](/media/develop/aws-appflow-step-lambda-dashboard.png)
 
 ### Lambda を使用してコネクタを登録する {#use-lambda-to-register-a-connector}
 
-1.  [<a href="https://console.aws.amazon.com">AWS マネジメントコンソール</a>](https://console.aws.amazon.com)で、 [<a href="https://console.aws.amazon.com/appflow/home#/gallery">Amazon AppFlow &gt; コネクタ</a>](https://console.aws.amazon.com/appflow/home#/gallery)に移動し、 **[新しいコネクタの登録]**をクリックします。
+1.  [Amazon AppFlow &gt; コネクタ](https://console.aws.amazon.com/appflow/home#/gallery)に移動し、 **[新しいコネクタの登録]**をクリックします。
 
     ![register connector](/media/develop/aws-appflow-step-register-connector.png)
 
@@ -98,7 +98,7 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
 
 ## ステップ 2. フローを作成する {#step-2-create-a-flow}
 
-[<a href="https://console.aws.amazon.com/appflow/home#/list">Amazon AppFlow &gt; フロー</a>](https://console.aws.amazon.com/appflow/home#/list)に移動し、 **[フローの作成]**をクリックします。
+[Amazon AppFlow &gt; フロー](https://console.aws.amazon.com/appflow/home#/list)に移動し、 **[フローの作成]**をクリックします。
 
 ![create flow](/media/develop/aws-appflow-step-create-flow.png)
 
@@ -132,13 +132,13 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
 
     > **ノート：**
     >
-    > 会社がすでに Salesforce の Professional Edition を使用している場合、REST API はデフォルトでは有効になっていません。 REST API を使用するには、新しい Developer Edition の登録が必要になる場合があります。詳細については、 [<a href="https://developer.salesforce.com/forums/?id=906F0000000D9Y2IAK">Salesforce フォーラムのトピック</a>](https://developer.salesforce.com/forums/?id=906F0000000D9Y2IAK)を参照してください。
+    > 会社がすでに Salesforce の Professional Edition を使用している場合、REST API はデフォルトでは有効になっていません。 REST API を使用するには、新しい Developer Edition の登録が必要になる場合があります。詳細については、 [Salesforce フォーラムのトピック](https://developer.salesforce.com/forums/?id=906F0000000D9Y2IAK)を参照してください。
 
 3.  **[宛先の詳細]**領域で、宛先として**TiDB-Connector**を選択します。 **「接続」**ボタンが表示されます。
 
     ![tidb dest](/media/develop/aws-appflow-step-tidb-dest.png)
 
-4.  **[接続]**をクリックする前に、TiDB に Salesforce **Account**オブジェクト用の`sf_account`を作成する必要があります。このテーブル スキーマは[<a href="https://docs.aws.amazon.com/appflow/latest/userguide/flow-tutorial-set-up-source.html">Amazon AppFlowのチュートリアル</a>](https://docs.aws.amazon.com/appflow/latest/userguide/flow-tutorial-set-up-source.html)のサンプル データとは異なることに注意してください。
+4.  **[接続]**をクリックする前に、TiDB に Salesforce **Account**オブジェクト用の`sf_account`を作成する必要があります。このテーブル スキーマは[Amazon AppFlowのチュートリアル](https://docs.aws.amazon.com/appflow/latest/userguide/flow-tutorial-set-up-source.html)のサンプル データとは異なることに注意してください。
 
     ```sql
     CREATE TABLE `sf_account` (
@@ -248,7 +248,7 @@ test> SELECT * FROM sf_account;
 
 ## 注目すべきもの {#noteworthy-things}
 
--   何か問題が発生した場合は、AWS マネジメント コンソールの[<a href="https://console.aws.amazon.com/cloudwatch/home">クラウドウォッチ</a>](https://console.aws.amazon.com/cloudwatch/home)ページに移動してログを取得できます。
--   このドキュメントの手順は[<a href="https://aws.amazon.com/blogs/compute/building-custom-connectors-using-the-amazon-appflow-custom-connector-sdk/">Amazon AppFlow カスタムコネクタ SDK を使用したカスタムコネクタの構築</a>](https://aws.amazon.com/blogs/compute/building-custom-connectors-using-the-amazon-appflow-custom-connector-sdk/)に基づいています。
--   [<a href="https://docs.pingcap.com/tidbcloud/select-cluster-tier#serverless-tier-beta">TiDB CloudServerless Tier</a>](https://docs.pingcap.com/tidbcloud/select-cluster-tier#serverless-tier-beta)本番環境**ではありません**。
+-   何か問題が発生した場合は、AWS マネジメント コンソールの[クラウドウォッチ](https://console.aws.amazon.com/cloudwatch/home)ページに移動してログを取得できます。
+-   このドキュメントの手順は[Amazon AppFlow カスタムコネクタ SDK を使用したカスタムコネクタの構築](https://aws.amazon.com/blogs/compute/building-custom-connectors-using-the-amazon-appflow-custom-connector-sdk/)に基づいています。
+-   [TiDB CloudServerless Tier](https://docs.pingcap.com/tidbcloud/select-cluster-tier#serverless-tier-beta)本番環境**ではありません**。
 -   長すぎるのを防ぐために、このドキュメントの例では`Insert`戦略のみを示していますが、 `Update`と`Upsert`戦略もテストされており、使用できます。

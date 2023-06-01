@@ -49,7 +49,7 @@ summary: Learn the alert rules in a TiDB cluster.
 
 -   解決：
 
-    [<a href="/grafana-tikv-dashboard.md#cluster">**TiKV-詳細**&gt;**クラスタ**ダッシュボード</a>](/grafana-tikv-dashboard.md#cluster)ビュー、リーダーのバランスが取れているかどうかを確認します。
+    [**TiKV-詳細**&gt;**クラスタ**ダッシュボード](/grafana-tikv-dashboard.md#cluster)ビュー、リーダーのバランスが取れているかどうかを確認します。
 
 #### <code>TiDB_domain_load_schema_total</code> {#code-tidb-domain-load-schema-total-code}
 
@@ -63,7 +63,7 @@ summary: Learn the alert rules in a TiDB cluster.
 
 -   解決：
 
-    [<a href="#tidb_schema_error">`TiDB_schema_error`</a>](#tidb_schema_error)と同じ。
+    [`TiDB_schema_error`](#tidb_schema_error)と同じ。
 
 #### <code>TiDB_monitor_keep_alive</code> {#code-tidb-monitor-keep-alive-code}
 
@@ -267,7 +267,7 @@ summary: Learn the alert rules in a TiDB cluster.
 
 -   説明：
 
-    不健全な店舗があることを示します。この状況がしばらく続く場合 ( [<a href="/pd-configuration-file.md#max-store-down-time">`max-store-down-time`</a>](/pd-configuration-file.md#max-store-down-time)で構成され、デフォルトは`30m` )、ストアは`Offline`状態に変化し、 [<a href="#pd_cluster_down_store_nums">`PD_cluster_down_store_nums`</a>](#pd_cluster_down_store_nums)アラートがトリガーされる可能性があります。
+    不健全な店舗があることを示します。この状況がしばらく続く場合 ( [`PD_cluster_down_store_nums`](#pd_cluster_down_store_nums)アラートがトリガーされる可能性があります。
 
 -   解決：
 
@@ -422,14 +422,14 @@ summary: Learn the alert rules in a TiDB cluster.
 
 -   説明：
 
-    遅い TiKV ノードがあります。 `raftstore.inspect-interval` TiKV 低速ノードの検出を制御します。詳細については、 [<a href="/tikv-configuration-file.md#inspect-interval">`raftstore.inspect-interval`</a>](/tikv-configuration-file.md#inspect-interval)を参照してください。
+    遅い TiKV ノードがあります。 `raftstore.inspect-interval` TiKV 低速ノードの検出を制御します。詳細については、 [`raftstore.inspect-interval`](/tikv-configuration-file.md#inspect-interval)を参照してください。
 
 -   解決：
 
-    -   [<a href="/grafana-tikv-dashboard.md#pd">**TiKV-詳細**&gt; **PD**ダッシュボード</a>](/grafana-tikv-dashboard.md#pd)を見て、Store Slow Score メトリクスを確認します。メトリック値が 80 を超えるノードを特定します。これは低速ノードとして検出されます。
-    -   [<a href="/grafana-tikv-dashboard.md#raft-io">**TiKV-詳細**&gt; **Raft IO**ダッシュボード</a>](/grafana-tikv-dashboard.md#raft-io)見て、レイテンシーが増加するかどうかを確認します。レイテンシーが長い場合は、ディスクにボトルネックが存在する可能性があることを意味します。
-    -   レイテンシーのタイムアウト制限を増やすには、構成項目[<a href="/tikv-configuration-file.md#inspect-interval">`raftstore.inspect-interval`</a>](/tikv-configuration-file.md#inspect-interval)をより大きな値に設定します。
-    -   アラートが発生した TiKV ノードのパフォーマンス問題の詳細な分析と調整方法については、 [<a href="/performance-tuning-methods.md#storage-async-write-duration-store-duration-and-apply-duration">パフォーマンスの分析とチューニング</a>](/performance-tuning-methods.md#storage-async-write-duration-store-duration-and-apply-duration)を参照してください。
+    -   [**TiKV-詳細**&gt; **PD**ダッシュボード](/grafana-tikv-dashboard.md#pd)を見て、Store Slow Score メトリクスを確認します。メトリック値が 80 を超えるノードを特定します。これは低速ノードとして検出されます。
+    -   [**TiKV-詳細**&gt; **Raft IO**ダッシュボード](/grafana-tikv-dashboard.md#raft-io)見て、レイテンシーが増加するかどうかを確認します。レイテンシーが長い場合は、ディスクにボトルネックが存在する可能性があることを意味します。
+    -   レイテンシーのタイムアウト制限を増やすには、構成項目[`raftstore.inspect-interval`](/tikv-configuration-file.md#inspect-interval)をより大きな値に設定します。
+    -   アラートが発生した TiKV ノードのパフォーマンス問題の詳細な分析と調整方法については、 [パフォーマンスの分析とチューニング](/performance-tuning-methods.md#storage-async-write-duration-store-duration-and-apply-duration)を参照してください。
 
 ## TiKV アラート ルール {#tikv-alert-rules}
 
@@ -465,7 +465,7 @@ summary: Learn the alert rules in a TiDB cluster.
 
     1.  `SELECT VARIABLE_VALUE FROM mysql.tidb WHERE VARIABLE_NAME = "tikv_gc_leader_desc"`を実行して、GC リーダーに対応する`tidb-server`見つけます。
     2.  `tidb-server`のログをビュー、 gc_worker tidb.log を grep します。
-    3.  この間に GC ワーカーがロックを解決している (最後のログは「start replace locks」)、または範囲を削除している (最後のログは「start delete {number} ranges」) ことが判明した場合、それは GC プロセスが実行中であることを意味します。通常は。それ以外の場合は、PingCAP またはコミュニティから[<a href="/support.md">支持を得ます</a>](/support.md) 。
+    3.  この間に GC ワーカーがロックを解決している (最後のログは「start replace locks」)、または範囲を削除している (最後のログは「start delete {number} ranges」) ことが判明した場合、それは GC プロセスが実行中であることを意味します。通常は。それ以外の場合は、PingCAP またはコミュニティから[支持を得ます](/support.md) 。
 
 ### 重大レベルのアラート {#critical-level-alerts}
 
@@ -483,7 +483,7 @@ summary: Learn the alert rules in a TiDB cluster.
 
     1.  ネットワークがクリアかどうかを確認してください。
     2.  リモート TiKV がダウンしていないか確認します。
-    3.  リモート TiKV が停止していない場合は、圧力が高すぎないかどうかを確認してください。 [<a href="#tikv_channel_full_total">`TiKV_channel_full_total`</a>](#tikv_channel_full_total)の解決策を参照してください。
+    3.  リモート TiKV が停止していない場合は、圧力が高すぎないかどうかを確認してください。 [`TiKV_channel_full_total`](#tikv_channel_full_total)の解決策を参照してください。
 
 #### <code>TiKV_channel_full_total</code> {#code-tikv-channel-full-total-code}
 
@@ -497,9 +497,9 @@ summary: Learn the alert rules in a TiDB cluster.
 
 -   解決：
 
-    1.  [<a href="/grafana-tikv-dashboard.md#raft-propose">**TiKV-詳細**&gt; **Raft提案**ダッシュボード</a>](/grafana-tikv-dashboard.md#raft-propose)観察し、アラートされた TiKV ノードのRaftプロポーザルが他の TiKV ノードよりもはるかに高いかどうかを確認します。そうであれば、この TiKV に 1 つ以上のホット スポットがあることを意味します。ホットスポットのスケジューリングが適切に機能するかどうかを確認する必要があります。
-    2.  [<a href="/grafana-tikv-dashboard.md#raft-io">**TiKV-詳細**&gt; **Raft IO**ダッシュボード</a>](/grafana-tikv-dashboard.md#raft-io)見て、レイテンシーが増加するかどうかを確認します。レイテンシーが長い場合は、ディスクにボトルネックが存在する可能性があることを意味します。
-    3.  [<a href="/grafana-tikv-dashboard.md#raft-process">**TiKV-詳細**&gt; **Raftプロセス**ダッシュボード</a>](/grafana-tikv-dashboard.md#raft-process)見て、 `tick duration`が高いかどうかを確認します。その場合は、 [<a href="/tikv-configuration-file.md#raft-base-tick-interval">`raftstore.raft-base-tick-interval`</a>](/tikv-configuration-file.md#raft-base-tick-interval) ～ `"2s"`を設定する必要があります。
+    1.  [**TiKV-詳細**&gt; **Raft提案**ダッシュボード](/grafana-tikv-dashboard.md#raft-propose)観察し、アラートされた TiKV ノードのRaftプロポーザルが他の TiKV ノードよりもはるかに高いかどうかを確認します。そうであれば、この TiKV に 1 つ以上のホット スポットがあることを意味します。ホットスポットのスケジューリングが適切に機能するかどうかを確認する必要があります。
+    2.  [**TiKV-詳細**&gt; **Raft IO**ダッシュボード](/grafana-tikv-dashboard.md#raft-io)見て、レイテンシーが増加するかどうかを確認します。レイテンシーが長い場合は、ディスクにボトルネックが存在する可能性があることを意味します。
+    3.  [`raftstore.raft-base-tick-interval`](/tikv-configuration-file.md#raft-base-tick-interval) ～ `"2s"`を設定する必要があります。
 
 #### <code>TiKV_write_stall</code> {#code-tikv-write-stall-code}
 
@@ -539,7 +539,7 @@ summary: Learn the alert rules in a TiDB cluster.
 
 -   解決：
 
-    [<a href="#tikv_channel_full_total">`TiKV_channel_full_total`</a>](#tikv_channel_full_total)の解決策を参照してください。
+    [`TiKV_channel_full_total`](#tikv_channel_full_total)の解決策を参照してください。
 
 #### <code>TiKV_async_request_write_duration_seconds</code> {#code-tikv-async-request-write-duration-seconds-code}
 
@@ -553,9 +553,9 @@ summary: Learn the alert rules in a TiDB cluster.
 
 -   解決：
 
-    1.  [<a href="/grafana-tikv-dashboard.md#raft-propose">**TiKV-詳細**&gt; **Raft提案**ダッシュボード</a>](/grafana-tikv-dashboard.md#raft-propose)観察し、アラートが発生した TiKV ノードの**サーバーの 99% 提案待機時間**メトリックが他の TiKV ノードよりも大幅に高いかどうかを確認します。存在する場合は、この TiKV ノードにホットスポットが存在することを示しており、ホットスポットのスケジューリングが適切に機能するかどうかを確認する必要があります。
-    2.  [<a href="/grafana-tikv-dashboard.md#raft-io">**TiKV-詳細**&gt; **Raft IO**ダッシュボード</a>](/grafana-tikv-dashboard.md#raft-io)見て、レイテンシーが増加するかどうかを確認します。レイテンシーが長い場合は、ディスクにボトルネックが存在する可能性があることを意味します。
-    3.  アラートが発生した TiKV ノードのパフォーマンス問題の詳細な分析と調整方法については、 [<a href="/performance-tuning-methods.md#storage-async-write-duration-store-duration-and-apply-duration">パフォーマンスの分析とチューニング</a>](/performance-tuning-methods.md#storage-async-write-duration-store-duration-and-apply-duration)を参照してください。
+    1.  [**TiKV-詳細**&gt; **Raft提案**ダッシュボード](/grafana-tikv-dashboard.md#raft-propose)観察し、アラートが発生した TiKV ノードの**サーバーの 99% 提案待機時間**メトリックが他の TiKV ノードよりも大幅に高いかどうかを確認します。存在する場合は、この TiKV ノードにホットスポットが存在することを示しており、ホットスポットのスケジューリングが適切に機能するかどうかを確認する必要があります。
+    2.  [**TiKV-詳細**&gt; **Raft IO**ダッシュボード](/grafana-tikv-dashboard.md#raft-io)見て、レイテンシーが増加するかどうかを確認します。レイテンシーが長い場合は、ディスクにボトルネックが存在する可能性があることを意味します。
+    3.  アラートが発生した TiKV ノードのパフォーマンス問題の詳細な分析と調整方法については、 [パフォーマンスの分析とチューニング](/performance-tuning-methods.md#storage-async-write-duration-store-duration-and-apply-duration)を参照してください。
 
 #### <code>TiKV_coprocessor_request_wait_seconds</code> {#code-tikv-coprocessor-request-wait-seconds-code}
 
@@ -585,7 +585,7 @@ summary: Learn the alert rules in a TiDB cluster.
 
 -   解決：
 
-    [<a href="#tikv_channel_full_total">`TiKV_channel_full_total`</a>](#tikv_channel_full_total)の解決策を参照してください。
+    [`TiKV_channel_full_total`](#tikv_channel_full_total)の解決策を参照してください。
 
 #### <code>TiKV_raft_append_log_duration_secs</code> {#code-tikv-raft-append-log-duration-secs-code}
 
@@ -647,7 +647,7 @@ summary: Learn the alert rules in a TiDB cluster.
 
 -   解決：
 
-    1.  [<a href="#tikv_channel_full_total">`TiKV_channel_full_total`</a>](#tikv_channel_full_total)を参照してください。
+    1.  [`TiKV_channel_full_total`](#tikv_channel_full_total)を参照してください。
     2.  TiKV に対するプレッシャーが低い場合は、PD スケジューリングが頻繁すぎるかどうかを検討してください。 PD ページの Operator Create パネルを表示して、PD スケジューリングのタイプと数を確認できます。
 
 #### <code>TiKV_raft_process_ready_duration_secs</code> {#code-tikv-raft-process-ready-duration-secs-code}
@@ -687,7 +687,7 @@ summary: Learn the alert rules in a TiDB cluster.
 
 -   解決：
 
-    [<a href="#tikv_scheduler_latch_wait_duration_seconds">`TiKV_scheduler_latch_wait_duration_seconds`</a>](#tikv_scheduler_latch_wait_duration_seconds)を参照してください。
+    [`TiKV_scheduler_latch_wait_duration_seconds`](#tikv_scheduler_latch_wait_duration_seconds)を参照してください。
 
 #### <code>TiKV_scheduler_command_duration_seconds</code> {#code-tikv-scheduler-command-duration-seconds-code}
 
@@ -701,7 +701,7 @@ summary: Learn the alert rules in a TiDB cluster.
 
 -   解決：
 
-    [<a href="#tikv_scheduler_latch_wait_duration_seconds">`TiKV_scheduler_latch_wait_duration_seconds`</a>](#tikv_scheduler_latch_wait_duration_seconds)を参照してください。
+    [`TiKV_scheduler_latch_wait_duration_seconds`](#tikv_scheduler_latch_wait_duration_seconds)を参照してください。
 
 #### <code>TiKV_coprocessor_outdated_request_wait_seconds</code> {#code-tikv-coprocessor-outdated-request-wait-seconds-code}
 
@@ -715,7 +715,7 @@ summary: Learn the alert rules in a TiDB cluster.
 
 -   解決：
 
-    [<a href="#tikv_coprocessor_request_wait_seconds">`TiKV_coprocessor_request_wait_seconds`</a>](#tikv_coprocessor_request_wait_seconds)を参照してください。
+    [`TiKV_coprocessor_request_wait_seconds`](#tikv_coprocessor_request_wait_seconds)を参照してください。
 
 #### <code>TiKV_coprocessor_pending_request</code> {#code-tikv-coprocessor-pending-request-code}
 
@@ -729,7 +729,7 @@ summary: Learn the alert rules in a TiDB cluster.
 
 -   解決：
 
-    [<a href="#tikv_coprocessor_request_wait_seconds">`TiKV_coprocessor_request_wait_seconds`</a>](#tikv_coprocessor_request_wait_seconds)を参照してください。
+    [`TiKV_coprocessor_request_wait_seconds`](#tikv_coprocessor_request_wait_seconds)を参照してください。
 
 #### <code>TiKV_batch_request_snapshot_nums</code> {#code-tikv-batch-request-snapshot-nums-code}
 
@@ -753,7 +753,7 @@ summary: Learn the alert rules in a TiDB cluster.
 
 -   解決：
 
-    [<a href="/grafana-tikv-dashboard.md#task">**TiKV-詳細**&gt;**タスク**ダッシュボード</a>](/grafana-tikv-dashboard.md#task)の`Worker pending tasks`指標から、どの種類のタスクの値が高いかを確認します。
+    [**TiKV-詳細**&gt;**タスク**ダッシュボード](/grafana-tikv-dashboard.md#task)の`Worker pending tasks`指標から、どの種類のタスクの値が高いかを確認します。
 
 #### <code>TiKV_low_space</code> {#code-tikv-low-space-code}
 
@@ -786,15 +786,15 @@ summary: Learn the alert rules in a TiDB cluster.
 
 ## TiFlashアラート ルール {#tiflash-alert-rules}
 
-TiFlashアラート ルールの詳細については、 [<a href="/tiflash/tiflash-alert-rules.md">TiFlashアラート ルール</a>](/tiflash/tiflash-alert-rules.md)を参照してください。
+TiFlashアラート ルールの詳細については、 [TiFlashアラート ルール](/tiflash/tiflash-alert-rules.md)を参照してください。
 
 ## TiDB Binlogアラート ルール {#tidb-binlog-alert-rules}
 
-TiDB Binlogアラート ルールの詳細については、 [<a href="/tidb-binlog/monitor-tidb-binlog-cluster.md#alert-rules">TiDB Binlogモニタリング ドキュメント</a>](/tidb-binlog/monitor-tidb-binlog-cluster.md#alert-rules)を参照してください。
+TiDB Binlogアラート ルールの詳細については、 [TiDB Binlogモニタリング ドキュメント](/tidb-binlog/monitor-tidb-binlog-cluster.md#alert-rules)を参照してください。
 
 ## TiCDC アラート ルール {#ticdc-alert-rules}
 
-TiCDC アラート ルールの詳細については、 [<a href="/ticdc/ticdc-alert-rules.md">TiCDC アラート ルール</a>](/ticdc/ticdc-alert-rules.md)を参照してください。
+TiCDC アラート ルールの詳細については、 [TiCDC アラート ルール](/ticdc/ticdc-alert-rules.md)を参照してください。
 
 ## Node_exporter ホスト アラート ルール {#node-exporter-host-alert-rules}
 

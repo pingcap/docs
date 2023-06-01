@@ -7,9 +7,9 @@ summary: Learn about third-party tools supported by TiDB.
 
 > **ノート：**
 >
-> このドキュメントでは、TiDB でサポートされる一般的な[<a href="https://en.wikipedia.org/wiki/Third-party_source">サードパーティツール</a>](https://en.wikipedia.org/wiki/Third-party_source)のみをリストします。他のサードパーティ ツールの一部はリストされていません。これは、それらがサポートされていないためではなく、TiDB と互換性のない機能を使用しているかどうか PingCAP が不明であるためです。
+> このドキュメントでは、TiDB でサポートされる一般的な[サードパーティツール](https://en.wikipedia.org/wiki/Third-party_source)のみをリストします。他のサードパーティ ツールの一部はリストされていません。これは、それらがサポートされていないためではなく、TiDB と互換性のない機能を使用しているかどうか PingCAP が不明であるためです。
 
-TiDB は[<a href="/mysql-compatibility.md">MySQLプロトコルとの高い互換性</a>](/mysql-compatibility.md)なので、ほとんどの MySQL ドライバー、ORM フレームワーク、および MySQL に適応するその他のツールは TiDB と互換性があります。このドキュメントでは、これらのツールと TiDB のサポート レベルに焦点を当てます。
+TiDB は[MySQLプロトコルとの高い互換性](/mysql-compatibility.md)なので、ほとんどの MySQL ドライバー、ORM フレームワーク、および MySQL に適応するその他のツールは TiDB と互換性があります。このドキュメントでは、これらのツールと TiDB のサポート レベルに焦点を当てます。
 
 ## サポートレベル {#support-level}
 
@@ -20,9 +20,9 @@ PingCAP はコミュニティと連携し、サードパーティ ツールに�
 
 > **ノート：**
 >
-> 特に指定しない限り、**Driver**または**ORM フレームワーク**には[<a href="/develop/dev-guide-transaction-troubleshoot.md#application-retry-and-error-handling">アプリケーションの再試行とエラー処理</a>](/develop/dev-guide-transaction-troubleshoot.md#application-retry-and-error-handling)のサポートは含まれません。
+> 特に指定しない限り、**Driver**または**ORM フレームワーク**には[アプリケーションの再試行とエラー処理](/develop/dev-guide-transaction-troubleshoot.md#application-retry-and-error-handling)のサポートは含まれません。
 
-このドキュメントに記載されているツールを使用して TiDB に接続するときに問題が発生した場合は、このツールのサポートを促進するための詳細を記載して GitHub に[<a href="https://github.com/pingcap/tidb/issues/new?assignees=&#x26;labels=type%2Fquestion&#x26;template=general-question.md">問題</a>](https://github.com/pingcap/tidb/issues/new?assignees=&#x26;labels=type%2Fquestion&#x26;template=general-question.md)を送信してください。
+このドキュメントに記載されているツールを使用して TiDB に接続するときに問題が発生した場合は、このツールのサポートを促進するための詳細を記載して GitHub に[問題](https://github.com/pingcap/tidb/issues/new?assignees=&#x26;labels=type%2Fquestion&#x26;template=general-question.md)を送信してください。
 
 ## Driver {#driver}
 
@@ -36,8 +36,8 @@ PingCAP はコミュニティと連携し、サードパーティ ツールに�
 
 | GUI                                                                                                               | 最新のテスト済みバージョン | サポートレベル | チュートリアル |
 | ----------------------------------------------------------------------------------------------------------------- | ------------- | ------- | ------- |
-| [<a href="https://dbeaver.io/">Dビーバー</a>](https://dbeaver.io/)                                                    | 22.1.0        | 互換性     | 該当なし    |
-| [<a href="https://www.navicat.com/">MySQL 用 Navicat</a>](https://www.navicat.com/)                                | 16.0.14       | 互換性     | 該当なし    |
-| [<a href="https://www.mysql.com/products/workbench/">MySQL ワークベンチ</a>](https://www.mysql.com/products/workbench/) | 8.0           | 互換性     | 該当なし    |
+| [Dビーバー](https://dbeaver.io/)                                                    | 22.1.0        | 互換性     | 該当なし    |
+| [MySQL 用 Navicat](https://www.navicat.com/)                                | 16.0.14       | 互換性     | 該当なし    |
+| [MySQL ワークベンチ](https://www.mysql.com/products/workbench/) | 8.0           | 互換性     | 該当なし    |
 
 <table><thead><tr><th>IDE</th><th>プラグイン</th><th>サポートレベル</th><th>チュートリアル</th></tr></thead><tbody><tr><td><a href="https://www.jetbrains.com/datagrip/" target="_blank" referrerpolicy="no-referrer-when-downgrade">データグリップ</a></td><td>該当なし</td><td>互換性</td><td>該当なし</td></tr><tr><td><a href="https://www.jetbrains.com/idea/" target="_blank" referrerpolicy="no-referrer-when-downgrade">インテリJアイデア</a></td><td>該当なし</td><td>互換性</td><td>該当なし</td></tr><tr><td rowspan="2"><a href="https://code.visualstudio.com/" target="_blank" referrerpolicy="no-referrer-when-downgrade">Visual Studio コード</a></td><td><a href="https://marketplace.visualstudio.com/items?itemName=dragonly.ticode" target="_blank" referrerpolicy="no-referrer-when-downgrade">潮</a></td><td>互換性</td><td>該当なし</td></tr><tr><td><a href="https://marketplace.visualstudio.com/items?itemName=formulahendry.vscode-mysql" target="_blank" referrerpolicy="no-referrer-when-downgrade">MySQL</a></td><td>互換性</td><td>該当なし</td></tr></tbody></table>

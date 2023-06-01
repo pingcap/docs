@@ -40,7 +40,7 @@ summary: Use `openssl` to generate self-signed certificates.
     yum install openssl
     ```
 
-インストールについては、OpenSSL の公式[<a href="https://www.openssl.org/source/">ドキュメントをダウンロードする</a>](https://www.openssl.org/source/)を参照することもできます。
+インストールについては、OpenSSL の公式[ドキュメントをダウンロードする](https://www.openssl.org/source/)を参照することもできます。
 
 ## CA証明書を生成する {#generate-the-ca-certificate}
 

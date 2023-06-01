@@ -16,13 +16,13 @@ title: tiup dm stop
 tiup dm stop <cluster-name> [flags]
 ```
 
-`<cluster-name>` : 操作するクラスターの名前。クラスター名を忘れた場合は、 [<a href="/tiup/tiup-component-dm-list.md">クラスタリスト</a>](/tiup/tiup-component-dm-list.md)コマンドで確認できます。
+`<cluster-name>` : 操作するクラスターの名前。クラスター名を忘れた場合は、 [クラスタリスト](/tiup/tiup-component-dm-list.md)コマンドで確認できます。
 
 ## オプション {#options}
 
 ### -N、--node {#n-node}
 
--   停止するノードを指定します。指定しない場合、すべてのノードが停止します。このオプションの値は、ノード ID のカンマ区切りリストです。ノード ID は、 [<a href="/tiup/tiup-component-dm-display.md">`tiup dm display`</a>](/tiup/tiup-component-dm-display.md)コマンドによって返されるクラスター ステータス テーブルの最初の列から取得できます。
+-   停止するノードを指定します。指定しない場合、すべてのノードが停止します。このオプションの値は、ノード ID のカンマ区切りリストです。ノード ID は、 [`tiup dm display`](/tiup/tiup-component-dm-display.md)コマンドによって返されるクラスター ステータス テーブルの最初の列から取得できます。
 -   データ型: `STRINGS`
 -   このオプションがコマンドで指定されていない場合、デフォルトですべてのノードが選択されます。
 
@@ -32,7 +32,7 @@ tiup dm stop <cluster-name> [flags]
 
 ### -R、--役割 {#r-role}
 
--   停止するロールを指定します。指定しない場合、すべてのロールが停止されます。このオプションの値は、ノードの役割のカンマ区切りのリストです。ノードの役割は、 [<a href="/tiup/tiup-component-dm-display.md">`tiup dm display`</a>](/tiup/tiup-component-dm-display.md)コマンドによって返されるクラスター状態テーブルの 2 番目の列から取得できます。
+-   停止するロールを指定します。指定しない場合、すべてのロールが停止されます。このオプションの値は、ノードの役割のカンマ区切りのリストです。ノードの役割は、 [`tiup dm display`](/tiup/tiup-component-dm-display.md)コマンドによって返されるクラスター状態テーブルの 2 番目の列から取得できます。
 -   データ型: `STRINGS`
 -   このオプションがコマンドで指定されていない場合、デフォルトですべてのロールが選択されます。
 
@@ -50,4 +50,4 @@ tiup dm stop <cluster-name> [flags]
 
 サービスを停止したときのログです。
 
-[<a href="/tiup/tiup-component-dm.md#command-list">&lt;&lt; 前のページに戻る - TiUP DMコマンド一覧</a>](/tiup/tiup-component-dm.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP DMコマンド一覧](/tiup/tiup-component-dm.md#command-list)

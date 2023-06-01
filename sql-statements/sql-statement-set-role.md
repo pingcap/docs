@@ -108,18 +108,18 @@ SELECT CURRENT_ROLE();
 
 ## MySQLの互換性 {#mysql-compatibility}
 
-このステートメントは、MySQL 8.0 の機能であるロールと完全な互換性があると理解されています。 GitHub では互換性の違いは[<a href="https://github.com/pingcap/tidb/issues/new/choose">問題を通じて報告されました</a>](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
+このステートメントは、MySQL 8.0 の機能であるロールと完全な互換性があると理解されています。 GitHub では互換性の違いは[問題を通じて報告されました](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-create-role.md">ロールの作成</a>](/sql-statements/sql-statement-create-role.md)
--   [<a href="/sql-statements/sql-statement-drop-role.md">役割を削除する</a>](/sql-statements/sql-statement-drop-role.md)
--   [<a href="/sql-statements/sql-statement-grant-role.md">`GRANT &#x3C;role>`</a>](/sql-statements/sql-statement-grant-role.md)
--   [<a href="/sql-statements/sql-statement-revoke-role.md">`REVOKE &#x3C;role>`</a>](/sql-statements/sql-statement-revoke-role.md)
--   [<a href="/sql-statements/sql-statement-set-default-role.md">デフォルトの役割を設定</a>](/sql-statements/sql-statement-set-default-role.md)
+-   [ロールの作成](/sql-statements/sql-statement-create-role.md)
+-   [役割を削除する](/sql-statements/sql-statement-drop-role.md)
+-   [`GRANT &#x3C;role>`](/sql-statements/sql-statement-grant-role.md)
+-   [`REVOKE &#x3C;role>`](/sql-statements/sql-statement-revoke-role.md)
+-   [デフォルトの役割を設定](/sql-statements/sql-statement-set-default-role.md)
 
 <CustomContent platform="tidb">
 
--   [<a href="/role-based-access-control.md">役割ベースのアクセス制御</a>](/role-based-access-control.md)
+-   [役割ベースのアクセス制御](/role-based-access-control.md)
 
 </CustomContent>

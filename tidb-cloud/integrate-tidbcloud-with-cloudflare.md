@@ -5,32 +5,32 @@ summary: Learn how deploy Cloudflare Workers with TiDB Cloud.
 
 # TiDB Cloudと Cloudflare ワーカーを統合する {#integrate-tidb-cloud-with-cloudflare-workers}
 
-[<a href="https://workers.cloudflare.com/">Cloudflare ワーカー</a>](https://workers.cloudflare.com/)は、HTTP リクエストやデータベースへの変更などの特定のイベントに応答してコードを実行できるプラットフォームです。 Cloudflare Workers は使いやすく、カスタム API、サーバーレス関数、マイクロサービスなどのさまざまなアプリケーションの構築に使用できます。これは、低レイテンシのパフォーマンスを必要とするアプリケーションや、迅速に拡張する必要があるアプリケーションに特に役立ちます。
+[Cloudflare ワーカー](https://workers.cloudflare.com/)は、HTTP リクエストやデータベースへの変更などの特定のイベントに応答してコードを実行できるプラットフォームです。 Cloudflare Workers は使いやすく、カスタム API、サーバーレス関数、マイクロサービスなどのさまざまなアプリケーションの構築に使用できます。これは、低レイテンシのパフォーマンスを必要とするアプリケーションや、迅速に拡張する必要があるアプリケーションに特に役立ちます。
 
 ただし、Cloudflare Workers は直接 TCP 接続を行うことができない V8 エンジン上で実行されるため、Cloudflare Workers からTiDB Cloudに接続するのが難しい場合があります。
 
-幸いなことに、Prisma は[<a href="https://www.prisma.io/docs/data-platform/data-proxy">データプロキシ</a>](https://www.prisma.io/docs/data-platform/data-proxy)をサポートします。これは、Cloudflare Workers を使用して、TCP 接続経由で送信されるデータを処理および操作するのに役立ちます。
+幸いなことに、Prisma は[データプロキシ](https://www.prisma.io/docs/data-platform/data-proxy)をサポートします。これは、Cloudflare Workers を使用して、TCP 接続経由で送信されるデータを処理および操作するのに役立ちます。
 
 このドキュメントでは、 TiDB Cloudおよび Prisma Data Proxy を使用して Cloudflare Workers をデプロイする方法を段階的に説明します。
 
 > **ノート：**
 >
-> ローカルにデプロイされた TiDB を Cloudflare Workers に接続する場合は、Cloudflare トンネルをプロキシとして使用する[<a href="https://github.com/shiyuhang0/worker-tidb">労働者-情報</a>](https://github.com/shiyuhang0/worker-tidb)を試すことができます。ただし、worker-tdb は本番での使用はお勧めできません。
+> ローカルにデプロイされた TiDB を Cloudflare Workers に接続する場合は、Cloudflare トンネルをプロキシとして使用する[労働者-情報](https://github.com/shiyuhang0/worker-tidb)を試すことができます。ただし、worker-tdb は本番での使用はお勧めできません。
 
 ## あなたが始める前に {#before-you-begin}
 
 この記事の手順を試す前に、次のものを準備する必要があります。
 
--   TiDB CloudアカウントとTiDB Cloud上のServerless Tierクラスター。詳細については、 [<a href="/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster">TiDB Cloudクイック スタート</a>](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster)を参照してください。
--   回答[<a href="https://dash.cloudflare.com/login">Cloudflare ワーカーアカウント</a>](https://dash.cloudflare.com/login) ．
--   回答[<a href="https://cloud.prisma.io/">Prisma データ プラットフォーム アカウント</a>](https://cloud.prisma.io/) ．
--   回答[<a href="https://github.com/login">GitHub アカウント</a>](https://github.com/login) ．
+-   TiDB CloudアカウントとTiDB Cloud上のServerless Tierクラスター。詳細については、 [TiDB Cloudクイック スタート](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster)を参照してください。
+-   回答[Cloudflare ワーカーアカウント](https://dash.cloudflare.com/login) ．
+-   回答[Prisma データ プラットフォーム アカウント](https://cloud.prisma.io/) ．
+-   回答[GitHub アカウント](https://github.com/login) ．
 -   Node.js と npm をインストールします。
 -   `npm install -D prisma typescript wrangler`を使用して依存関係をインストールします
 
 ## ステップ 1: Wrangler をセットアップする {#step-1-set-up-wrangler}
 
-[<a href="https://developers.cloudflare.com/workers/wrangler/">ラングラー</a>](https://developers.cloudflare.com/workers/wrangler/)は公式のCloudflare Worker CLIです。これを使用して、ワーカーを生成、構築、プレビュー、公開できます。
+[ラングラー](https://developers.cloudflare.com/workers/wrangler/)は公式のCloudflare Worker CLIです。これを使用して、ワーカーを生成、構築、プレビュー、公開できます。
 
 1.  Wrangler を認証するには、wrangler ログインを実行します。
 
@@ -89,7 +89,7 @@ summary: Learn how deploy Cloudflare Workers with TiDB Cloud.
 
 ## ステップ 3: プロジェクトを GitHub にプッシュする {#step-3-push-your-project-to-github}
 
-1.  GitHub では[<a href="https://github.com/new">リポジトリを作成する</a>](https://github.com/new) `prisma-tidb-cloudflare`と名付けました。
+1.  GitHub では[リポジトリを作成する](https://github.com/new) `prisma-tidb-cloudflare`と名付けました。
 
 2.  リポジトリを作成したら、プロジェクトを GitHub にプッシュできます。
 
@@ -104,9 +104,9 @@ summary: Learn how deploy Cloudflare Workers with TiDB Cloud.
 
 Cloudflare Workers では、TCP サポートがないため、データベースに直接アクセスできません。代わりに、上記のように Prisma Data Proxy を使用できます。
 
-1.  開始するには、 [<a href="https://cloud.prisma.io/">プリズマ データ プラットフォーム</a>](https://cloud.prisma.io/)にサインインし、 **[新しいプロジェクト]**をクリックします。
+1.  開始するには、 [プリズマ データ プラットフォーム](https://cloud.prisma.io/)にサインインし、 **[新しいプロジェクト]**をクリックします。
 
-2.  **接続文字列**にこのパターンを入力します`mysql://USER:PASSWORD@HOST:PORT/DATABASE?sslaccept=strict` 。接続情報は[<a href="https://tidbcloud.com/console/clusters">TiDB Cloudコンソール</a>](https://tidbcloud.com/console/clusters)にあります。
+2.  **接続文字列**にこのパターンを入力します`mysql://USER:PASSWORD@HOST:PORT/DATABASE?sslaccept=strict` 。接続情報は[TiDB Cloudコンソール](https://tidbcloud.com/console/clusters)にあります。
 
 3.  TiDB CloudServerless Tierにはどの IP アドレスからでもアクセスできるため**、静的 IP は**無効のままにしておきます。
 
@@ -144,7 +144,7 @@ Cloudflare Workers では、TCP サポートがないため、データベース
 
 ## ステップ 6: Prisma クライアントを生成する {#step-6-generate-a-prisma-client}
 
-[<a href="https://www.prisma.io/docs/data-platform/data-proxy">データプロキシ</a>](https://www.prisma.io/docs/data-platform/data-proxy)を介して接続する Prisma クライアントを生成します。
+[データプロキシ](https://www.prisma.io/docs/data-platform/data-proxy)を介して接続する Prisma クライアントを生成します。
 
 ```
 npx prisma generate --data-proxy
@@ -202,7 +202,7 @@ npx wrangler publish
 
 ## ステップ9: Cloudflareワーカーを試す {#step-9-try-your-cloudflare-workers}
 
-1.  [<a href="https://dash.cloudflare.com">Cloudflareダッシュボード</a>](https://dash.cloudflare.com)に進み、ワーカーを見つけます。ワーカーの URL は概要ページで確認できます。
+1.  [Cloudflareダッシュボード](https://dash.cloudflare.com)に進み、ワーカーを見つけます。ワーカーの URL は概要ページで確認できます。
 
 2.  テーブル名を含む URL にアクセスします: `https://{your-worker-url}/?table={table_name}` 。対応する TiDB テーブルから結果を取得します。
 

@@ -10,7 +10,7 @@ summary: Learn how to locate and analyze slow queries.
 1.  多くのクエリの中で、どのタイプのクエリが遅いかを特定します。
 2.  このタイプのクエリが遅い理由を分析します。
 
-ステップ 1 は、 [<a href="/dashboard/dashboard-slow-query.md">遅いクエリログ</a>](/dashboard/dashboard-slow-query.md)と[<a href="/statement-summary-tables.md">ステートメント概要表</a>](/statement-summary-tables.md)機能を使用して簡単に実行できます。 2 つの機能を統合し、遅いクエリをブラウザに直接表示する[<a href="/dashboard/dashboard-intro.md">TiDB ダッシュボード</a>](/dashboard/dashboard-intro.md)使用することをお勧めします。
+ステップ 1 は、 [TiDB ダッシュボード](/dashboard/dashboard-intro.md)使用することをお勧めします。
 
 このドキュメントでは、ステップ 2 を実行する方法 (このタイプのクエリが遅い理由を分析する) に焦点を当てています。
 
@@ -31,12 +31,12 @@ summary: Learn how to locate and analyze slow queries.
 
 ## クエリのパフォーマンスのボトルネックを特定する {#identify-the-performance-bottleneck-of-the-query}
 
-まず、クエリ プロセスについて一般的に理解する必要があります。 TiDB でのクエリ実行プロセスの主要な段階を[<a href="/media/performance-map.png">TiDB パフォーマンスマップ</a>](/media/performance-map.png)に示します。
+まず、クエリ プロセスについて一般的に理解する必要があります。 TiDB でのクエリ実行プロセスの主要な段階を[TiDB パフォーマンスマップ](/media/performance-map.png)に示します。
 
 次のメソッドを使用して期間情報を取得できます。
 
--   [<a href="/identify-slow-queries.md">遅いログ</a>](/identify-slow-queries.md) 。 [<a href="/dashboard/dashboard-overview.md">TiDB ダッシュボード</a>](/dashboard/dashboard-overview.md)でスローログを表示することをお勧めします。
--   [<a href="/sql-statements/sql-statement-explain-analyze.md">`EXPLAIN ANALYZE`文</a>](/sql-statements/sql-statement-explain-analyze.md) 。
+-   [TiDB ダッシュボード](/dashboard/dashboard-overview.md)でスローログを表示することをお勧めします。
+-   [`EXPLAIN ANALYZE`文](/sql-statements/sql-statement-explain-analyze.md) 。
 
 上記の方法は、次の点で異なります。
 
@@ -74,7 +74,7 @@ TiKV のデータ処理が遅い場合は、 `EXPLAIN ANALYZE`の結果で簡単
 
 さらに、遅いログの`Cop_process`フィールドと`Cop_wait`フィールドも分析に役立ちます。次の例では、クエリの合計期間は約`180.85ms`で、最大の`coptask`は`171ms`になります。これは、このクエリのボトルネックが TiKV 側にあることを示しています。
 
-低速ログの各フィールドの説明については、 [<a href="/identify-slow-queries.md#fields-description">フィールドの説明</a>](/identify-slow-queries.md#fields-description)を参照してください。
+低速ログの各フィールドの説明については、 [フィールドの説明](/identify-slow-queries.md#fields-description)を参照してください。
 
 ```log
 # Query_time: 0.18085
@@ -163,7 +163,7 @@ mysql> explain analyze select count(*) from t where a=(select max(t1.a) from t t
 
 TiDB の実行計画は正しいが、実行が遅いと仮定します。この種の問題を解決するには、パラメータを調整するか、SQL ステートメントの`EXPLAIN ANALYZE`の結果に従ってヒントを使用します。
 
-実行計画が間違っている場合は、 [<a href="#analyze-optimizer-issues">オプティマイザーの問題を分析する</a>](#analyze-optimizer-issues)セクションを参照してください。
+実行計画が間違っている場合は、 [オプティマイザーの問題を分析する](#analyze-optimizer-issues)セクションを参照してください。
 
 #### 同時実行性が低い {#low-concurrency}
 
@@ -189,7 +189,7 @@ mysql> explain analyze select sum(t1.a) from t t1, t t2 where t1.a=t2.a;
 
 上に示したように、 `HashJoin_14`と`Projection_24`実行時間の多くを消費します。実行を高速化するために、SQL 変数を使用して同時実行性を高めることを検討してください。
 
-すべてのシステム変数は[<a href="/system-variables.md">システム変数</a>](/system-variables.md)に記載されています。 `HashJoin_14`の同時実行性を高めるには、 `tidb_hash_join_concurrency`システム変数を変更します。
+すべてのシステム変数は[システム変数](/system-variables.md)に記載されています。 `HashJoin_14`の同時実行性を高めるには、 `tidb_hash_join_concurrency`システム変数を変更します。
 
 #### データがディスクに流出する {#data-is-spilled-to-disk}
 
@@ -244,12 +244,12 @@ mysql> explain select * from t t1, t t2 where t1.a>t2.a;
 4.  `select b from t where c=3` : 前置条件なしでは、複数列インデクスは使用できません。したがって、 `IndexFullScan`が使用されます。
 5.  ...
 
-上記の例は、データの読み取りに使用される演算子です。その他の演算子については、 [<a href="/explain-overview.md">TiDB 実行計画を理解する</a>](/explain-overview.md)を参照してください。
+上記の例は、データの読み取りに使用される演算子です。その他の演算子については、 [TiDB 実行計画を理解する](/explain-overview.md)を参照してください。
 
-さらに、 [<a href="/sql-tuning-overview.md">SQLチューニングの概要</a>](/sql-tuning-overview.md)を読むと、TiDB オプティマイザーをより深く理解し、実行計画が妥当かどうかを判断するのに役立ちます。
+さらに、 [SQLチューニングの概要](/sql-tuning-overview.md)を読むと、TiDB オプティマイザーをより深く理解し、実行計画が妥当かどうかを判断するのに役立ちます。
 
-オプティマイザーの問題のほとんどは[<a href="/sql-tuning-overview.md">SQLチューニングの概要</a>](/sql-tuning-overview.md)で説明されています。解決策については、次のドキュメントを参照してください。
+オプティマイザーの問題のほとんどは[SQLチューニングの概要](/sql-tuning-overview.md)で説明されています。解決策については、次のドキュメントを参照してください。
 
-1.  [<a href="/wrong-index-solution.md">インデックス問題の解決方法</a>](/wrong-index-solution.md)
-2.  [<a href="/join-reorder.md">間違った結合順序</a>](/join-reorder.md)
-3.  [<a href="/blocklist-control-plan.md">式はプッシュダウンされません</a>](/blocklist-control-plan.md)
+1.  [インデックス問題の解決方法](/wrong-index-solution.md)
+2.  [間違った結合順序](/join-reorder.md)
+3.  [式はプッシュダウンされません](/blocklist-control-plan.md)

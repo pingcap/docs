@@ -9,7 +9,7 @@ summary: Learn how to import sample data into TiDB Cloud via UI.
 
 1.  ターゲットクラスターの**インポート**ページを開きます。
 
-    1.  [<a href="https://tidbcloud.com/">TiDB Cloudコンソール</a>](https://tidbcloud.com/)にログインし、プロジェクトの[<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページに移動します。
+    1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
         > **ヒント：**
         >

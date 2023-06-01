@@ -9,7 +9,7 @@ summary: Learn the overview of the `ALTER INSTANCE` usage in TiDB.
 
 ## TLSをリロードする {#reload-tls}
 
-`ALTER INSTANCE RELOAD TLS`ステートメントを実行して、元の構成パスから証明書 ( [<a href="/tidb-configuration-file.md#ssl-cert">`ssl-cert`</a>](/tidb-configuration-file.md#ssl-cert) )、キー ( [<a href="/tidb-configuration-file.md#ssl-key">`ssl-key`</a>](/tidb-configuration-file.md#ssl-key) )、および CA ( [<a href="/tidb-configuration-file.md#ssl-ca">`ssl-ca`</a>](/tidb-configuration-file.md#ssl-ca) ) を再ロードできます。
+`ALTER INSTANCE RELOAD TLS`ステートメントを実行して、元の構成パスから証明書 ( [`ssl-ca`](/tidb-configuration-file.md#ssl-ca) ) を再ロードできます。
 
 新しくロードされた証明書、キー、および CA は、ステートメントが正常に実行された後に確立された接続で有効になります。このステートメントの実行前に確立された接続は影響を受けません。
 
@@ -41,4 +41,4 @@ ALTER INSTANCE RELOAD TLS;
 
 ## こちらも参照 {#see-also}
 
-[<a href="/enable-tls-between-clients-and-servers.md">TiDB クライアントとサーバー間で TLS を有効にする</a>](/enable-tls-between-clients-and-servers.md) 。
+[TiDB クライアントとサーバー間で TLS を有効にする](/enable-tls-between-clients-and-servers.md) 。

@@ -46,7 +46,7 @@ AdvancedPlacementOption ::=
 
 > **ノート：**
 >
-> クラスター内で使用可能なリージョンを確認するには、 [<a href="/sql-statements/sql-statement-show-placement-labels.md">`SHOW PLACEMENT LABELS`</a>](/sql-statements/sql-statement-show-placement-labels.md)を参照してください。
+> クラスター内で使用可能なリージョンを確認するには、 [`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md)を参照してください。
 >
 > 利用可能なリージョンが表示されない場合は、TiKV インストールにラベルが正しく設定されていない可能性があります。
 
@@ -77,7 +77,7 @@ Query OK, 0 rows affected (0.10 sec)
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/placement-rules-in-sql.md">SQL の配置ルール</a>](/placement-rules-in-sql.md)
--   [<a href="/sql-statements/sql-statement-show-placement.md">配置を表示</a>](/sql-statements/sql-statement-show-placement.md)
--   [<a href="/sql-statements/sql-statement-alter-placement-policy.md">配置ポリシーの変更</a>](/sql-statements/sql-statement-alter-placement-policy.md)
--   [<a href="/sql-statements/sql-statement-drop-placement-policy.md">ドロップ配置ポリシー</a>](/sql-statements/sql-statement-drop-placement-policy.md)
+-   [SQL の配置ルール](/placement-rules-in-sql.md)
+-   [配置を表示](/sql-statements/sql-statement-show-placement.md)
+-   [配置ポリシーの変更](/sql-statements/sql-statement-alter-placement-policy.md)
+-   [ドロップ配置ポリシー](/sql-statements/sql-statement-drop-placement-policy.md)

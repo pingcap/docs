@@ -5,7 +5,7 @@ summary: Learn the deployment topology of TiFlash based on the minimal TiDB topo
 
 # TiFlash導入トポロジ {#tiflash-deployment-topology}
 
-このドキュメントでは、最小の TiDB トポロジに基づいた[<a href="/tiflash/tiflash-overview.md">TiFlash</a>](/tiflash/tiflash-overview.md)の展開トポロジについて説明します。
+このドキュメントでは、最小の TiDB トポロジに基づいた[TiFlash](/tiflash/tiflash-overview.md)の展開トポロジについて説明します。
 
 TiFlashはカラム型storageエンジンであり、徐々に標準のクラスター トポロジになりつつあります。リアルタイム HTAP アプリケーションに適しています。
 
@@ -21,16 +21,16 @@ TiFlashはカラム型storageエンジンであり、徐々に標準のクラス
 
 ### トポロジテンプレート {#topology-templates}
 
--   [<a href="https://github.com/pingcap/docs/blob/master/config-templates/simple-tiflash.yaml">TiFlashトポロジのシンプルなテンプレート</a>](https://github.com/pingcap/docs/blob/master/config-templates/simple-tiflash.yaml)
--   [<a href="https://github.com/pingcap/docs/blob/master/config-templates/complex-tiflash.yaml">TiFlashトポロジの複雑なテンプレート</a>](https://github.com/pingcap/docs/blob/master/config-templates/complex-tiflash.yaml)
+-   [TiFlashトポロジのシンプルなテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/simple-tiflash.yaml)
+-   [TiFlashトポロジの複雑なテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/complex-tiflash.yaml)
 
-上記の TiDB クラスター トポロジー ファイルの構成項目の詳細な説明については、 [<a href="/tiup/tiup-cluster-topology-reference.md">TiUPを使用して TiDB を展開するためのトポロジコンフィグレーションファイル</a>](/tiup/tiup-cluster-topology-reference.md)を参照してください。
+上記の TiDB クラスター トポロジー ファイルの構成項目の詳細な説明については、 [TiUPを使用して TiDB を展開するためのトポロジコンフィグレーションファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
 
 ### 主要パラメータ {#key-parameters}
 
--   PD の[<a href="/configure-placement-rules.md">配置ルール</a>](/configure-placement-rules.md)機能を有効にするには、構成テンプレートの`replication.enable-placement-rules`の値を`true`に設定します。
+-   PD の[配置ルール](/configure-placement-rules.md)機能を有効にするには、構成テンプレートの`replication.enable-placement-rules`の値を`true`に設定します。
 -   `tiflash_servers`のインスタンス レベル`"-host"`構成は IP のみをサポートし、ドメイン名はサポートしません。
--   TiFlashパラメータの詳細な説明については、 [<a href="/tiflash/tiflash-configuration.md">TiFlashコンフィグレーション</a>](/tiflash/tiflash-configuration.md)を参照してください。
+-   TiFlashパラメータの詳細な説明については、 [TiFlashコンフィグレーション](/tiflash/tiflash-configuration.md)を参照してください。
 
 > **ノート：**
 >

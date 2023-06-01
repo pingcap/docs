@@ -26,43 +26,43 @@ summary: Learn the overview of data migration scenarios and the solutions.
 
 Auroraから AWS にデプロイされた TiDB クラスターにデータを移行する場合、データ移行には完全なデータ移行と増分レプリケーションという 2 つの操作が必要になります。アプリケーションのニーズに応じて、対応する操作を選択できます。
 
--   [<a href="/migrate-aurora-to-tidb.md">Amazon Auroraから TiDB へのデータの移行</a>](/migrate-aurora-to-tidb.md) 。
+-   [Amazon Auroraから TiDB へのデータの移行](/migrate-aurora-to-tidb.md) 。
 
 ## MySQL から TiDB にデータを移行する {#migrate-data-from-mysql-to-tidb}
 
 クラウドstorage(S3) サービスが使用されておらず、ネットワーク接続が良好で、ネットワークレイテンシーが低い場合は、次の方法を使用して MySQL から TiDB にデータを移行できます。
 
--   [<a href="/migrate-small-mysql-to-tidb.md">小規模なデータセットの MySQL を TiDB に移行する</a>](/migrate-small-mysql-to-tidb.md)
+-   [小規模なデータセットの MySQL を TiDB に移行する](/migrate-small-mysql-to-tidb.md)
 
 移行速度に対する要求が高い場合、またはデータ サイズが大きく (たとえば、1 TiB を超える)、移行期間中に他のアプリケーションによる TiDB への書き込みを許可しない場合は、 TiDB Lightningを使用して、データをインポートします。その後、DM を使用して、アプリケーションのニーズに基づいて増分データ (binlog) をレプリケートできます。
 
--   [<a href="/migrate-large-mysql-to-tidb.md">大規模なデータセットの MySQL を TiDB に移行する</a>](/migrate-large-mysql-to-tidb.md)
+-   [大規模なデータセットの MySQL を TiDB に移行する](/migrate-large-mysql-to-tidb.md)
 
 ## MySQL シャードを TiDB に移行およびマージする {#migrate-and-merge-mysql-shards-into-tidb}
 
 アプリケーションがデータstorageに MySQL シャードを使用しており、これらのシャードを 1 つのテーブルとして TiDB に移行する必要があるとします。この場合、DM を使用してシャードのマージと移行を実行できます。
 
--   [<a href="/migrate-small-mysql-shards-to-tidb.md">小規模なデータセットの MySQL シャードを TiDB に移行およびマージする</a>](/migrate-small-mysql-shards-to-tidb.md)
+-   [小規模なデータセットの MySQL シャードを TiDB に移行およびマージする](/migrate-small-mysql-shards-to-tidb.md)
 
 シャードテーブルのデータサイズが大きく (たとえば、1 TiB を超える)、移行期間中に他のアプリケーションによる TiDB への書き込みを許可しない場合は、 TiDB Lightningを使用してシャードテーブルを迅速にマージおよびインポートできます。その後、DM を使用して、アプリケーションのニーズに基づいて増分シャーディング データ (binlog) をレプリケートできます。
 
--   [<a href="/migrate-large-mysql-shards-to-tidb.md">大規模なデータセットの MySQL シャードを TiDB に移行およびマージする</a>](/migrate-large-mysql-shards-to-tidb.md)
+-   [大規模なデータセットの MySQL シャードを TiDB に移行およびマージする](/migrate-large-mysql-shards-to-tidb.md)
 
 ## ファイルから TiDB へのデータの移行 {#migrate-data-from-files-to-tidb}
 
--   [<a href="/migrate-from-csv-files-to-tidb.md">CSV ファイルから TiDB にデータを移行する</a>](/migrate-from-csv-files-to-tidb.md)
--   [<a href="/migrate-from-sql-files-to-tidb.md">SQL ファイルから TiDB にデータを移行する</a>](/migrate-from-sql-files-to-tidb.md)
--   [<a href="/migrate-from-parquet-files-to-tidb.md">Parquet ファイルから TiDB にデータを移行する</a>](/migrate-from-parquet-files-to-tidb.md)
+-   [CSV ファイルから TiDB にデータを移行する](/migrate-from-csv-files-to-tidb.md)
+-   [SQL ファイルから TiDB にデータを移行する](/migrate-from-sql-files-to-tidb.md)
+-   [Parquet ファイルから TiDB にデータを移行する](/migrate-from-parquet-files-to-tidb.md)
 
 ## TiDB クラスター間の増分レプリケーション {#incremental-replication-between-tidb-clusters}
 
-TiCDC を使用して、TiDB クラスター間の増分データ複製を行うことができます。詳細は[<a href="/ticdc/ticdc-overview.md">TiCDC の概要</a>](/ticdc/ticdc-overview.md)を参照してください。
+TiCDC を使用して、TiDB クラスター間の増分データ複製を行うことができます。詳細は[TiCDC の概要](/ticdc/ticdc-overview.md)を参照してください。
 
 ## より高度な移行ソリューション {#more-advanced-migration-solutions}
 
 次の機能により移行プロセスが改善され、アプリケーションのより多くのニーズを満たす可能性があります。
 
--   [<a href="/migrate-with-pt-ghost.md">gh-ost または pt-osc を使用するデータベースからの連続レプリケーション</a>](/migrate-with-pt-ghost.md)
--   [<a href="/migrate-with-more-columns-downstream.md">より多くの列を含むダウンストリーム TiDB テーブルにデータを移行する</a>](/migrate-with-more-columns-downstream.md)
--   [<a href="/filter-binlog-event.md">Binlogイベントのフィルタリング</a>](/filter-binlog-event.md)
--   [<a href="/filter-dml-event.md">SQL式を使用したDMLイベントのフィルタリング</a>](/filter-dml-event.md)
+-   [gh-ost または pt-osc を使用するデータベースからの連続レプリケーション](/migrate-with-pt-ghost.md)
+-   [より多くの列を含むダウンストリーム TiDB テーブルにデータを移行する](/migrate-with-more-columns-downstream.md)
+-   [Binlogイベントのフィルタリング](/filter-binlog-event.md)
+-   [SQL式を使用したDMLイベントのフィルタリング](/filter-dml-event.md)

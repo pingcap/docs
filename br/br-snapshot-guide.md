@@ -5,21 +5,21 @@ summary: Learn about how to back up and restore TiDB snapshots using the br comm
 
 # スナップショットのバックアップと復元ガイド {#snapshot-backup-and-restore-guide}
 
-このドキュメントでは、br コマンドライン ツール (以下`br`と呼びます) を使用して TiDB スナップショットをバックアップおよび復元する方法について説明します。データをバックアップおよび復元する前に、まず[<a href="/br/br-use-overview.md#deploy-and-use-br">br コマンドライン ツールをインストールする</a>](/br/br-use-overview.md#deploy-and-use-br)を行う必要があります。
+このドキュメントでは、br コマンドライン ツール (以下`br`と呼びます) を使用して TiDB スナップショットをバックアップおよび復元する方法について説明します。データをバックアップおよび復元する前に、まず[br コマンドライン ツールをインストールする](/br/br-use-overview.md#deploy-and-use-br)を行う必要があります。
 
-スナップショット バックアップは、クラスター全体をバックアップする実装です。これは[<a href="/tidb-storage.md#mvcc">マルチバージョン同時実行制御 (MVCC)</a>](/tidb-storage.md#mvcc)に基づいており、指定されたスナップショット内のすべてのデータをターゲットstorageにバックアップします。バックアップ データのサイズは、クラスター内の圧縮された単一レプリカのサイズとほぼ同じです。バックアップが完了したら、バックアップ データを空のクラスター、または競合データが含まれていないクラスター (同じスキーマまたは同じテーブルを持つ) に復元したり、クラスターをスナップショット バックアップの時点に復元したり、複数のクラスターを復元したりできます。クラスターレプリカ設定に従ってレプリカを作成します。
+スナップショット バックアップは、クラスター全体をバックアップする実装です。これは[マルチバージョン同時実行制御 (MVCC)](/tidb-storage.md#mvcc)に基づいており、指定されたスナップショット内のすべてのデータをターゲットstorageにバックアップします。バックアップ データのサイズは、クラスター内の圧縮された単一レプリカのサイズとほぼ同じです。バックアップが完了したら、バックアップ データを空のクラスター、または競合データが含まれていないクラスター (同じスキーマまたは同じテーブルを持つ) に復元したり、クラスターをスナップショット バックアップの時点に復元したり、複数のクラスターを復元したりできます。クラスターレプリカ設定に従ってレプリカを作成します。
 
 基本的なバックアップと復元に加えて、スナップショット バックアップと復元では次の機能も提供します。
 
--   [<a href="#back-up-cluster-snapshots">指定した時点のデータをバックアップする</a>](#back-up-cluster-snapshots)
--   [<a href="#restore-a-database-or-a-table">指定したデータベースまたはテーブルのデータを復元します</a>](#restore-a-database-or-a-table)
+-   [指定した時点のデータをバックアップする](#back-up-cluster-snapshots)
+-   [指定したデータベースまたはテーブルのデータを復元します](#restore-a-database-or-a-table)
 
 ## クラスターのスナップショットをバックアップする {#back-up-cluster-snapshots}
 
 > **ノート：**
 >
 > -   次の例では、Amazon S3 アクセス キーと秘密キーがアクセス許可の承認に使用されることを前提としています。 IAMロールを使用して権限を承認する場合は、 `--send-credentials-to-tikv` ～ `false`を設定する必要があります。
-> -   他のstorageシステムまたは認証方法を使用して権限を認証する場合は、 [<a href="/br/backup-and-restore-storages.md">バックアップストレージ</a>](/br/backup-and-restore-storages.md)に従ってパラメータ設定を調整します。
+> -   他のstorageシステムまたは認証方法を使用して権限を認証する場合は、 [バックアップストレージ](/br/backup-and-restore-storages.md)に従ってパラメータ設定を調整します。
 
 `br backup full`コマンドを実行すると、TiDB クラスターのスナップショットをバックアップできます。 `br backup full --help`を実行してヘルプ情報を表示します。
 
@@ -32,8 +32,8 @@ tiup br backup full --pd "${PD_IP}:2379" \
 
 前述のコマンドでは次のようになります。
 
--   `--backupts` : スナップショットの時点。形式は[<a href="/glossary.md#tso">TSO</a>](/glossary.md#tso)またはタイムスタンプ ( `400036290571534337`や`2018-05-11 01:42:23`など) です。このスナップショットのデータがガベージ コレクションされた場合、 `br backup`コマンドはエラーを返し、 `br`は終了します。このパラメータを指定しないままにすると、 `br`バックアップ開始時刻に対応するスナップショットを選択します。
--   `--storage` : バックアップデータのstorageアドレス。スナップショット バックアップは、Amazon S3、Google Cloud Storage、および Azure Blob Storage をバックアップstorageとしてサポートします。前述のコマンドでは、例として Amazon S3 を使用しています。詳細については、 [<a href="/br/backup-and-restore-storages.md#uri-format">バックアップストレージのURI形式</a>](/br/backup-and-restore-storages.md#uri-format)を参照してください。
+-   `--backupts` : スナップショットの時点。形式は[TSO](/glossary.md#tso)またはタイムスタンプ ( `400036290571534337`や`2018-05-11 01:42:23`など) です。このスナップショットのデータがガベージ コレクションされた場合、 `br backup`コマンドはエラーを返し、 `br`は終了します。このパラメータを指定しないままにすると、 `br`バックアップ開始時刻に対応するスナップショットを選択します。
+-   `--storage` : バックアップデータのstorageアドレス。スナップショット バックアップは、Amazon S3、Google Cloud Storage、および Azure Blob Storage をバックアップstorageとしてサポートします。前述のコマンドでは、例として Amazon S3 を使用しています。詳細については、 [バックアップストレージのURI形式](/br/backup-and-restore-storages.md#uri-format)を参照してください。
 -   `--ratelimit` : バックアップ タスクを実行する**TiKV ごとの**最大速度。単位は MiB/s です。
 
 バックアップ中、以下に示すように進行状況バーがターミナルに表示されます。進行状況バーが 100% まで進むと、バックアップ タスクが完了し、合計バックアップ時間、平均バックアップ速度、バックアップ データ サイズなどの統計が表示されます。
@@ -63,7 +63,7 @@ tiup br validate decode --field="end-version" \
 
 `br restore full`コマンドを実行すると、スナップショット バックアップを復元できます。 `br restore full --help`を実行してヘルプ情報を表示します。
 
-次の例では、 [<a href="#back-up-cluster-snapshots">以前のバックアップ スナップショット</a>](#back-up-cluster-snapshots)をターゲット クラスターに復元します。
+次の例では、 [以前のバックアップ スナップショット](#back-up-cluster-snapshots)をターゲット クラスターに復元します。
 
 ```shell
 tiup br restore full --pd "${PD_IP}:2379" \
@@ -109,7 +109,7 @@ tiup br restore table --pd "${PD_IP}:2379" \
 
 **テーブルフィルターを使用して複数のテーブルを復元する**
 
-より複雑なフィルター ルールを使用して複数のテーブルを復元するには、 `br restore full`コマンドを実行し、 [<a href="/table-filter.md">テーブルフィルター</a>](/table-filter.md)に`--filter`または`-f`を指定します。次の例では、 `db*.tbl*`フィルター ルールに一致するテーブルをバックアップ データからターゲット クラスターに復元します。
+より複雑なフィルター ルールを使用して複数のテーブルを復元するには、 `br restore full`コマンドを実行し、 [テーブルフィルター](/table-filter.md)に`--filter`または`-f`を指定します。次の例では、 `db*.tbl*`フィルター ルールに一致するテーブルをバックアップ データからターゲット クラスターに復元します。
 
 ```shell
 tiup br restore full \
@@ -141,7 +141,7 @@ BR v5.1.0 以降、スナップショットをバックアップする場合、 
 
 -   統計テーブル ( `mysql.stats_*` )
 -   システム変数テーブル ( `mysql.tidb`および`mysql.global_variables` )
--   [<a href="https://github.com/pingcap/tidb/blob/master/br/pkg/restore/systable_restore.go#L31">その他のシステムテーブル</a>](https://github.com/pingcap/tidb/blob/master/br/pkg/restore/systable_restore.go#L31)
+-   [その他のシステムテーブル](https://github.com/pingcap/tidb/blob/master/br/pkg/restore/systable_restore.go#L31)
 
 システム権限に関連するデータを復元するときは、次の点に注意してください。
 
@@ -156,7 +156,7 @@ BR v5.1.0 以降、スナップショットをバックアップする場合、 
 
 ### スナップショット バックアップのパフォーマンスと影響 {#performance-and-impact-of-snapshot-backup}
 
-バックアップ機能は、クラスターのパフォーマンス (トランザクションレイテンシーと QPS) にある程度の影響を与えます。ただし、バックアップ スレッドの数を[<a href="/tikv-configuration-file.md#num-threads-1">`backup.num-threads`</a>](/tikv-configuration-file.md#num-threads-1)調整するか、クラスターを追加することで影響を軽減できます。
+バックアップ機能は、クラスターのパフォーマンス (トランザクションレイテンシーと QPS) にある程度の影響を与えます。ただし、バックアップ スレッドの数を[`backup.num-threads`](/tikv-configuration-file.md#num-threads-1)調整するか、クラスターを追加することで影響を軽減できます。
 
 バックアップの影響を説明するために、このドキュメントでは、いくつかのスナップショット バックアップ テストの結果をリストします。
 
@@ -168,7 +168,7 @@ BR v5.1.0 以降、スナップショットをバックアップする場合、 
 次の方法を使用して、クラスタのパフォーマンスに対するバックアップ タスクの影響を手動で制御できます。ただし、これら 2 つの方法では、クラスターに対するバックアップ タスクの影響を軽減しながら、バックアップ タスクの速度も低下します。
 
 -   `--ratelimit`パラメータを使用して、バックアップ タスクの速度を制限します。このパラメータは、**バックアップ ファイルを外部storageに保存する**速度を制限することに注意してください。バックアップ ファイルの合計サイズを計算するときは、 `backup data size(after compressed)`ベンチマークとして使用してください。
--   TiKV 構成項目[<a href="/tikv-configuration-file.md#num-threads-1">`backup.num-threads`</a>](/tikv-configuration-file.md#num-threads-1)を調整して、バックアップ タスクで使用されるスレッドの数を制限します。内部テストによると、 BR がバックアップ タスクに使用するスレッドが`8`以下で、クラスターの合計 CPU 使用率が 60% を超えない場合、読み取りおよび書き込みのワークロードに関係なく、バックアップ タスクはクラスターにほとんど影響を与えません。
+-   TiKV 構成項目[`backup.num-threads`](/tikv-configuration-file.md#num-threads-1)を調整して、バックアップ タスクで使用されるスレッドの数を制限します。内部テストによると、 BR がバックアップ タスクに使用するスレッドが`8`以下で、クラスターの合計 CPU 使用率が 60% を超えない場合、読み取りおよび書き込みのワークロードに関係なく、バックアップ タスクはクラスターにほとんど影響を与えません。
 
 バックアップがクラスターのパフォーマンスに与える影響は、バックアップ スレッドの数を制限することで軽減できますが、これはバックアップのパフォーマンスに影響します。前述のテストは、バックアップ速度がバックアップ スレッドの数に比例することを示しています。スレッド数が少ない場合、バックアップ速度は 20 MiB/スレッド程度になります。たとえば、単一の TiKV ノード上の 5 つのバックアップ スレッドは、100 MiB/秒のバックアップ速度に達します。
 
@@ -179,6 +179,6 @@ BR v5.1.0 以降、スナップショットをバックアップする場合、 
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/br/backup-and-restore-use-cases.md">TiDB のバックアップと復元の使用例</a>](/br/backup-and-restore-use-cases.md)
--   [<a href="/br/use-br-command-line-tool.md">br コマンドラインマニュアル</a>](/br/use-br-command-line-tool.md)
--   [<a href="/br/br-snapshot-architecture.md">TiDB スナップショットのバックアップおよび復元のアーキテクチャ</a>](/br/br-snapshot-architecture.md)
+-   [TiDB のバックアップと復元の使用例](/br/backup-and-restore-use-cases.md)
+-   [br コマンドラインマニュアル](/br/use-br-command-line-tool.md)
+-   [TiDB スナップショットのバックアップおよび復元のアーキテクチャ](/br/br-snapshot-architecture.md)

@@ -5,7 +5,7 @@ summary: Understand the storage layer of a TiDB database.
 
 # TiDBストレージ {#tidb-storage}
 
-この文書では、いくつかの設計アイデアと[<a href="https://github.com/tikv/tikv">TiKV</a>](https://github.com/tikv/tikv)の重要な概念を紹介します。
+この文書では、いくつかの設計アイデアと[TiKV](https://github.com/tikv/tikv)の重要な概念を紹介します。
 
 ![storage-architecture](/media/tidb-storage-architecture-1.png)
 
@@ -30,7 +30,7 @@ RocksDB は、Facebook によってオープンソース化された優れたス
 
 簡単な方法は、データを複数のマシンにレプリケートすることです。これにより、1 台のマシンに障害が発生した場合でも、他のマシン上のレプリカが引き続き使用できるようになります。言い換えれば、信頼性が高く、効率的で、レプリカに障害が発生した場合にも対処できるデータ レプリケーション スキームが必要です。これらはすべて、 Raftアルゴリズムによって可能になります。
 
-Raft はコンセンサス アルゴリズムです。このドキュメントではRaft簡単に紹介するだけです。詳細については、 [<a href="https://raft.github.io/raft.pdf">理解可能なコンセンサスアルゴリズムを求めて</a>](https://raft.github.io/raft.pdf)を参照してください。 Raft にはいくつかの重要な機能があります。
+Raft はコンセンサス アルゴリズムです。このドキュメントではRaft簡単に紹介するだけです。詳細については、 [理解可能なコンセンサスアルゴリズムを求めて](https://raft.github.io/raft.pdf)を参照してください。 Raft にはいくつかの重要な機能があります。
 
 -   Leader選挙
 -   メンバーシップの変更 (レプリカの追加、レプリカの削除、リーダーの転送など)
@@ -100,8 +100,8 @@ KeyN_Version1 -> Value
 ……
 ```
 
-同じキーの複数のバージョンの場合、番号の大きいバージョンが最初に配置されることに注意してください (キーの順序についてのセクション[<a href="#key-value-pairs">キーと値</a>](#key-value-pairs)を参照)。そのため、キー + バージョンを通じて値を取得する場合、MVCC のキーはキーで構築できます。バージョンは`Key_Version`です。次に、RocksDB の`SeekPrefix(Key_Version)` API を使用して、この`Key_Version`以上の最初の位置を直接見つけることができます。
+同じキーの複数のバージョンの場合、番号の大きいバージョンが最初に配置されることに注意してください (キーの順序についてのセクション[キーと値](#key-value-pairs)を参照)。そのため、キー + バージョンを通じて値を取得する場合、MVCC のキーはキーで構築できます。バージョンは`Key_Version`です。次に、RocksDB の`SeekPrefix(Key_Version)` API を使用して、この`Key_Version`以上の最初の位置を直接見つけることができます。
 
 ## 分散ACIDトランザクション {#distributed-acid-transaction}
 
-TiKV のトランザクションは、 Google が[<a href="https://research.google.com/pubs/pub36726.html">パーコレーター</a>](https://research.google.com/pubs/pub36726.html)で使用するモデルを採用しています。 TiKV の実装はこの論文からインスピレーションを受けており、多くの最適化が施されています。詳細は[<a href="/transaction-overview.md">取引概要</a>](/transaction-overview.md)参照してください。
+TiKV のトランザクションは、 Google が[取引概要](/transaction-overview.md)参照してください。

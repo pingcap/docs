@@ -13,18 +13,18 @@ summary: Learn about the supported aggregate functions in TiDB.
 
 | 名前                                                                                                                                                                                                                              | 説明                                      |
 | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :-------------------------------------- |
-| [<a href="https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_count">`COUNT()`</a>](https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_count)                                      | 返された行数を返します。                            |
-| [<a href="https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_count-distinct">`COUNT(DISTINCT)`</a>](https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_count-distinct)            | さまざまな値の数を返します。                          |
-| [<a href="https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_sum">`SUM()`</a>](https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_sum)                                            | 合計を返します                                 |
-| [<a href="https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_avg">`AVG()`</a>](https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_avg)                                            | 引数の平均値を返します                             |
-| [<a href="https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_max">`MAX()`</a>](https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_max)                                            | 最大値を返す                                  |
-| [<a href="https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_min">`MIN()`</a>](https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_min)                                            | 最小値を返す                                  |
-| [<a href="https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_group-concat">`GROUP_CONCAT()`</a>](https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_group-concat)                 | 連結された文字列を返す                             |
-| [<a href="https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_var-pop">`VARIANCE()` 、 `VAR_POP()`</a>](https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_var-pop)                 | 母集団の標準分散を返します                           |
-| [<a href="https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_std">`STD()` 、 `STDDEV()` 、 `STDDEV_POP`</a>](https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_std)                | 母集団の標準偏差を返します                           |
-| [<a href="https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_var-samp">`VAR_SAMP()`</a>](https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_var-samp)                             | 標本分散を返す                                 |
-| [<a href="https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_stddev-samp">`STDDEV_SAMP()`</a>](https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_stddev-samp)                    | サンプルの標準偏差を返します                          |
-| [<a href="https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_json-objectagg">`JSON_OBJECTAGG(key, value)`</a>](https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_json-objectagg) | 結果セットをキーと値のペアを含む単一の JSON オブジェクトとして返します。 |
+| [`COUNT()`](https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_count)                                      | 返された行数を返します。                            |
+| [`COUNT(DISTINCT)`](https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_count-distinct)            | さまざまな値の数を返します。                          |
+| [`SUM()`](https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_sum)                                            | 合計を返します                                 |
+| [`AVG()`](https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_avg)                                            | 引数の平均値を返します                             |
+| [`MAX()`](https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_max)                                            | 最大値を返す                                  |
+| [`MIN()`](https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_min)                                            | 最小値を返す                                  |
+| [`GROUP_CONCAT()`](https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_group-concat)                 | 連結された文字列を返す                             |
+| [`VARIANCE()` 、 `VAR_POP()`](https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_var-pop)                 | 母集団の標準分散を返します                           |
+| [`STD()` 、 `STDDEV()` 、 `STDDEV_POP`](https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_std)                | 母集団の標準偏差を返します                           |
+| [`VAR_SAMP()`](https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_var-samp)                             | 標本分散を返す                                 |
+| [`STDDEV_SAMP()`](https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_stddev-samp)                    | サンプルの標準偏差を返します                          |
+| [`JSON_OBJECTAGG(key, value)`](https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_json-objectagg) | 結果セットをキーと値のペアを含む単一の JSON オブジェクトとして返します。 |
 
 -   特に明記されていない限り、グループ関数は`NULL`値を無視します。
 -   `GROUP BY`句を含まないステートメントでグループ関数を使用すると、すべての行をグループ化することと同じになります。
@@ -35,7 +35,7 @@ summary: Learn about the supported aggregate functions in TiDB.
 
     この関数は`expr`のパーセンタイルを返します。 `constant_integer_expr`引数は、 `[1,100]`の範囲の定数整数であるパーセンテージ値を示します。パーセンタイル P <sub>k</sub> ( `k`パーセンテージを表す) は、データ セット内に P <sub>k</sub>以下の値が少なくとも`k%`あることを示します。
 
-    この関数は、 `expr`の戻り値の型として[<a href="/data-type-numeric.md">数値型</a>](/data-type-numeric.md)と[<a href="/data-type-date-and-time.md">日付と時刻のタイプ</a>](/data-type-date-and-time.md)のみをサポートします。他の返される型の場合、 `APPROX_PERCENTILE` `NULL`のみを返します。
+    この関数は、 `expr`の戻り値の型として[日付と時刻のタイプ](/data-type-date-and-time.md)のみをサポートします。他の返される型の場合、 `APPROX_PERCENTILE` `NULL`のみを返します。
 
     次の例は、 `INT`列の 50 パーセンタイルを計算する方法を示しています。
 
@@ -62,11 +62,11 @@ summary: Learn about the supported aggregate functions in TiDB.
     1 row in set (0.00 sec)
     ```
 
-`GROUP_CONCAT()`と`APPROX_PERCENTILE()`関数を除き、前述のすべての関数が[<a href="/functions-and-operators/window-functions.md">ウィンドウ関数</a>](/functions-and-operators/window-functions.md)として機能します。
+`GROUP_CONCAT()`と`APPROX_PERCENTILE()`関数を除き、前述のすべての関数が[ウィンドウ関数](/functions-and-operators/window-functions.md)として機能します。
 
 ## GROUP BY 修飾子 {#group-by-modifiers}
 
-TiDB は現在、 `WITH ROLLUP`などの`GROUP BY`修飾子をサポートしていません。将来的にはサポートを追加する予定です。 [<a href="https://github.com/pingcap/tidb/issues/4250">ティDB #4250</a>](https://github.com/pingcap/tidb/issues/4250)を参照してください。
+TiDB は現在、 `WITH ROLLUP`などの`GROUP BY`修飾子をサポートしていません。将来的にはサポートを追加する予定です。 [ティDB #4250](https://github.com/pingcap/tidb/issues/4250)を参照してください。
 
 ## SQLモードのサポート {#sql-mode-support}
 
@@ -94,7 +94,7 @@ mysql> select a, b, sum(c) from t group by a;
 ERROR 1055 (42000): Expression #2 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'b' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
 ```
 
-TiDB は現在、デフォルトで[<a href="/mysql-compatibility.md#default-differences">`ONLY_FULL_GROUP_BY`</a>](/mysql-compatibility.md#default-differences)モードを有効にしています。
+TiDB は現在、デフォルトで[`ONLY_FULL_GROUP_BY`](/mysql-compatibility.md#default-differences)モードを有効にしています。
 
 ### MySQLとの違い {#differences-from-mysql}
 
@@ -114,7 +114,7 @@ MySQL では、 `ORDER BY`の式が次の条件の少なくとも 1 つを満た
 -   式はリスト`SELECT`の 1 に等しい
 -   式によって参照され、クエリの選択されたテーブルに属するすべての列は、 `SELECT`リストの要素です。
 
-ただし、TiDB では、上記のクエリは有効です。詳細については、 [<a href="https://github.com/pingcap/tidb/issues/4254">#4254</a>](https://github.com/pingcap/tidb/issues/4254)を参照してください。
+ただし、TiDB では、上記のクエリは有効です。詳細については、 [#4254](https://github.com/pingcap/tidb/issues/4254)を参照してください。
 
 標準 SQL への別の TiDB 拡張機能では、 `HAVING`節で`SELECT`リストのエイリアス化された式への参照が許可されます。たとえば、次のクエリは、テーブル &quot;orders&quot; に 1 回だけ出現する &quot;name&quot; 値を返します。
 

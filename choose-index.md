@@ -22,7 +22,7 @@ storageエンジンからのデータの読み取りは、SQL 実行中に最も
 | テーブルリーダー             | テーブルにはTiFlashノード上にレプリカがあります。                        | 読み取る列は少なくなりますが、評価する行は多くなります。                 | この TableReader オペレーターはTiFlash用です。 TiFlash は列ベースのstorageです。少数の列と多数の行を計算する必要がある場合は、この演算子を選択することをお勧めします。                                                                                                                                           |
 | インデックスリーダー           | テーブルには 1 つ以上のインデックスがあり、計算に必要な列はインデックスに含まれています。      | インデックスに狭い範囲のクエリがある場合、またはインデックス付き列の順序要件がある場合。 | 複数のインデックスが存在する場合、コスト見積もりに基づいて合理的なインデックスが選択されます。                                                                                                                                                                                                 |
 | IndexLookupReader    | テーブルには 1 つ以上のインデックスがあり、計算に必要な列がインデックスに完全には含まれていません。 | IndexReader と同じです。                           | インデックスは計算列を完全にはカバーしていないため、TiDB はインデックスを読み取った後にテーブルから行を取得する必要があります。 IndexReader オペレーターと比較して追加のコストがかかります。                                                                                                                                         |
-| インデックスマージ            | テーブルには複数のインデックスまたは複数値のインデックスがあります。                  | 多値インデックスまたは複数のインデックスが使用される場合。                | 演算子を使用するには、 [<a href="/optimizer-hints.md">オプティマイザーのヒント</a>](/optimizer-hints.md)指定するか、コスト見積もりに基づいてオプティマイザにこの演算子を自動的に選択させることができます。詳細は[<a href="/explain-index-merge.md">インデックス マージを使用した Explain ステートメント</a>](/explain-index-merge.md)を参照してください。 |
+| インデックスマージ            | テーブルには複数のインデックスまたは複数値のインデックスがあります。                  | 多値インデックスまたは複数のインデックスが使用される場合。                | 演算子を使用するには、 [インデックス マージを使用した Explain ステートメント](/explain-index-merge.md)を参照してください。 |
 
 > **ノート：**
 >
@@ -135,7 +135,7 @@ mysql> SHOW WARNINGS;
 
 ## 制御インデックスの選択 {#control-index-selection}
 
-インデックスの選択は、 [<a href="/optimizer-hints.md">オプティマイザーのヒント</a>](/optimizer-hints.md)を介して単一のクエリによって制御できます。
+インデックスの選択は、 [オプティマイザーのヒント](/optimizer-hints.md)を介して単一のクエリによって制御できます。
 
 -   `USE_INDEX` / `IGNORE_INDEX` 、オプティマイザに特定のインデックスを使用または使用しないように強制できます。 `FORCE_INDEX`と`USE_INDEX`同様の効果があります。
 
@@ -143,9 +143,9 @@ mysql> SHOW WARNINGS;
 
 ## 複数値のインデックスを使用する {#use-a-multi-valued-index}
 
-[<a href="/sql-statements/sql-statement-create-index.md#multi-valued-index">複数値インデックス</a>](/sql-statements/sql-statement-create-index.md#multi-valued-index)は通常のインデックスとは異なります。 TiDB は現在、複数値インデックスへのアクセスに[<a href="/explain-index-merge.md">インデックスマージ</a>](/explain-index-merge.md)のみを使用します。したがって、データ アクセスに複数値インデックスを使用するには、システム変数`tidb_enable_index_merge`の値が`ON`に設定されていることを確認してください。
+[インデックスマージ](/explain-index-merge.md)のみを使用します。したがって、データ アクセスに複数値インデックスを使用するには、システム変数`tidb_enable_index_merge`の値が`ON`に設定されていることを確認してください。
 
-現在、TiDB は、 `json_member_of` 、 `json_contains` 、および`json_overlaps`条件から自動的に変換される IndexMerge を使用した複数値インデックスへのアクセスをサポートしています。オプティマイザを利用してコストに基づいて IndexMerge を自動的に選択することも、オプティマイザのヒント[<a href="/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-">`use_index_merge`</a>](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-)または[<a href="/optimizer-hints.md#use_indext1_name-idx1_name--idx2_name-">`use_index`</a>](/optimizer-hints.md#use_indext1_name-idx1_name--idx2_name-)を使用して複数値インデックスの選択を指定することもできます。次の例を参照してください。
+現在、TiDB は、 `json_member_of` 、 `json_contains` 、および`json_overlaps`条件から自動的に変換される IndexMerge を使用した複数値インデックスへのアクセスをサポートしています。オプティマイザを利用してコストに基づいて IndexMerge を自動的に選択することも、オプティマイザのヒント[`use_index`](/optimizer-hints.md#use_indext1_name-idx1_name--idx2_name-)を使用して複数値インデックスの選択を指定することもできます。次の例を参照してください。
 
 ```sql
 mysql> CREATE TABLE t1 (j JSON, INDEX idx((CAST(j->'$.path' AS SIGNED ARRAY)))); -- Uses '$.path' as the path to create a multi-valued index
@@ -296,7 +296,7 @@ mysql> EXPLAIN SELECT /*+ use_index_merge(t3, idx) */ * FROM t3 WHERE ((1 member
 3 rows in set, 2 warnings (0.00 sec)
 ```
 
-多値インデックスの現在の実装による制限により、 [<a href="/optimizer-hints.md#use_indext1_name-idx1_name--idx2_name-">`use_index`</a>](/optimizer-hints.md#use_indext1_name-idx1_name--idx2_name-)を使用すると`Can't find a proper physical plan for this query`エラーが返される可能性がありますが、 [<a href="/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-">`use_index_merge`</a>](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-)使用するとそのようなエラーは返されません。したがって、複数値インデックスを使用する場合は`use_index_merge`を使用することをお勧めします。
+多値インデックスの現在の実装による制限により、 [`use_index_merge`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-)使用するとそのようなエラーは返されません。したがって、複数値インデックスを使用する場合は`use_index_merge`を使用することをお勧めします。
 
 ```sql
 mysql> EXPLAIN SELECT /*+ use_index(t3, idx) */ * FROM t3 WHERE ((1 member of (j)) AND (2 member of (j))) OR ((3 member of (j)) AND (4 member of (j)));

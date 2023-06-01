@@ -53,11 +53,11 @@ mysql> SELECT * FROM t1;
 
 ## MySQLの互換性 {#mysql-compatibility}
 
-このステートメントは、MySQL と完全な互換性があると理解されています。 GitHub では互換性の違いは[<a href="https://github.com/pingcap/tidb/issues/new/choose">問題を通じて報告されました</a>](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
+このステートメントは、MySQL と完全な互換性があると理解されています。 GitHub では互換性の違いは[問題を通じて報告されました](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-insert.md">入れる</a>](/sql-statements/sql-statement-insert.md)
--   [<a href="/sql-statements/sql-statement-select.md">選択する</a>](/sql-statements/sql-statement-select.md)
--   [<a href="/sql-statements/sql-statement-update.md">アップデート</a>](/sql-statements/sql-statement-update.md)
--   [<a href="/sql-statements/sql-statement-replace.md">交換</a>](/sql-statements/sql-statement-replace.md)
+-   [入れる](/sql-statements/sql-statement-insert.md)
+-   [選択する](/sql-statements/sql-statement-select.md)
+-   [アップデート](/sql-statements/sql-statement-update.md)
+-   [交換](/sql-statements/sql-statement-replace.md)

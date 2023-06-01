@@ -5,11 +5,11 @@ summary: Use sync-diff-inspector to compare data and repair inconsistent data.
 
 # sync-diff-inspector ユーザーガイド {#sync-diff-inspector-user-guide}
 
-[<a href="https://github.com/pingcap/tidb-tools/tree/master/sync_diff_inspector">同期差分インスペクター</a>](https://github.com/pingcap/tidb-tools/tree/master/sync_diff_inspector)データベースに保存されているデータを MySQL プロトコルと比較するために使用されるツールです。たとえば、MySQL のデータと TiDB のデータ、MySQL のデータと MySQL のデータ、または TiDB のデータと TiDB のデータを比較できます。さらに、このツールを使用して、少量のデータに不整合があるシナリオでデータを修復することもできます。
+[同期差分インスペクター](https://github.com/pingcap/tidb-tools/tree/master/sync_diff_inspector)データベースに保存されているデータを MySQL プロトコルと比較するために使用されるツールです。たとえば、MySQL のデータと TiDB のデータ、MySQL のデータと MySQL のデータ、または TiDB のデータと TiDB のデータを比較できます。さらに、このツールを使用して、少量のデータに不整合があるシナリオでデータを修復することもできます。
 
 このガイドでは、sync-diff-inspector の主要な機能を紹介し、このツールの構成方法と使用方法について説明します。 sync-diff-inspector をダウンロードするには、次のいずれかの方法を使用します。
 
--   バイナリパッケージ。 sync-diff-inspector バイナリ パッケージはTiDB Toolkitに含まれています。 TiDB Toolkitをダウンロードするには、 [<a href="/download-ecosystem-tools.md">TiDB ツールをダウンロード</a>](/download-ecosystem-tools.md)を参照してください。
+-   バイナリパッケージ。 sync-diff-inspector バイナリ パッケージはTiDB Toolkitに含まれています。 TiDB Toolkitをダウンロードするには、 [TiDB ツールをダウンロード](/download-ecosystem-tools.md)を参照してください。
 -   ドッカーイメージ。次のコマンドを実行してダウンロードします。
 
     {{< copyable "" >}}
@@ -22,10 +22,10 @@ summary: Use sync-diff-inspector to compare data and repair inconsistent data.
 
 -   テーブルのスキーマとデータを比較する
 -   データの不整合が存在する場合にデータを修復するために使用される SQL ステートメントを生成します。
--   サポート[<a href="/sync-diff-inspector/route-diff.md">異なるスキーマ名またはテーブル名を持つテーブルのデータ チェック</a>](/sync-diff-inspector/route-diff.md)
--   サポート[<a href="/sync-diff-inspector/shard-diff.md">シャーディングシナリオでのデータチェック</a>](/sync-diff-inspector/shard-diff.md)
--   サポート[<a href="/sync-diff-inspector/upstream-downstream-diff.md">TiDB アップストリーム/ダウンストリーム クラスターのデータ チェック</a>](/sync-diff-inspector/upstream-downstream-diff.md)
--   サポート[<a href="/sync-diff-inspector/dm-diff.md">DM レプリケーション シナリオでのデータ チェック</a>](/sync-diff-inspector/dm-diff.md)
+-   サポート[異なるスキーマ名またはテーブル名を持つテーブルのデータ チェック](/sync-diff-inspector/route-diff.md)
+-   サポート[シャーディングシナリオでのデータチェック](/sync-diff-inspector/shard-diff.md)
+-   サポート[TiDB アップストリーム/ダウンストリーム クラスターのデータ チェック](/sync-diff-inspector/upstream-downstream-diff.md)
+-   サポート[DM レプリケーション シナリオでのデータ チェック](/sync-diff-inspector/dm-diff.md)
 
 ## sync-diff-inspector の制限事項 {#restrictions-of-sync-diff-inspector}
 

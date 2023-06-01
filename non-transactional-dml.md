@@ -18,7 +18,7 @@ summary: Learn the non-transactional DML statements in TiDB. At the expense of a
 -   `UPDATE`
 -   `DELETE`
 
-詳細な構文については、 [<a href="/sql-statements/sql-statement-batch.md">`BATCH`</a>](/sql-statements/sql-statement-batch.md)を参照してください。
+詳細な構文については、 [`BATCH`](/sql-statements/sql-statement-batch.md)を参照してください。
 
 > **ノート：**
 >
@@ -67,7 +67,7 @@ summary: Learn the non-transactional DML statements in TiDB. At the expense of a
         SELECT * FROM t2; -- (4, 1) (4, 2) (4, 4)
         ```
 
--   このステートメントは[<a href="#restrictions">制限</a>](#restrictions)を満たしています。
+-   このステートメントは[制限](#restrictions)を満たしています。
 
 -   この DML ステートメントによって読み書きされるテーブルに対して DDL 操作を同時に実行することはお勧めできません。
 
@@ -191,7 +191,7 @@ SHOW PROCESSLIST;
 
 非トランザクション DML ステートメントを終了するには、 `KILL TIDB <processlist_id>`を使用できます。その後、TiDB は現在実行中のバッチ以降のすべてのバッチをキャンセルします。実行結果はログから取得できます。
 
-`KILL TIDB`の詳細については、参考文献[<a href="/sql-statements/sql-statement-kill.md">`KILL`</a>](/sql-statements/sql-statement-kill.md)を参照してください。
+`KILL TIDB`の詳細については、参考文献[`KILL`](/sql-statements/sql-statement-kill.md)を参照してください。
 
 ### バッチ分割ステートメントのクエリ {#query-the-batch-dividing-statement}
 
@@ -248,7 +248,7 @@ BATCH ON id LIMIT 2 DELETE /*+ USE_INDEX(t)*/ FROM t WHERE v < 6;
 
 非トランザクション DML ステートメントを使用するには、次の手順を実行することをお勧めします。
 
-1.  適切な[<a href="#parameter-description">シャード列</a>](#parameter-description)を選択します。整数型または文字列型が推奨されます。
+1.  適切な[シャード列](#parameter-description)を選択します。整数型または文字列型が推奨されます。
 
 2.  非トランザクション DML ステートメントに`DRY RUN QUERY`を追加し、手動でクエリを実行し、DML ステートメントの影響を受けるデータ範囲がおおよそ正しいかどうかを確認します。
 
@@ -285,7 +285,7 @@ BATCH ON id LIMIT 2 DELETE /*+ USE_INDEX(t)*/ FROM t WHERE v < 6;
 
 非トランザクション DML ステートメントでは、バッチ サイズが大きくなるほど、分割される SQL ステートメントの数が減り、各 SQL ステートメントの実行が遅くなります。最適なバッチ サイズはワークロードによって異なります。 50000 から開始することをお勧めします。バッチ サイズが小さすぎても大きすぎても、実行効率が低下します。
 
-各バッチの情報はメモリに保存されるため、バッチが多すぎるとメモリ消費量が大幅に増加する可能性があります。これは、バッチ サイズが小さすぎることができない理由を説明します。バッチ情報を格納するために非トランザクション ステートメントが消費するメモリの上限は[<a href="/system-variables.md#tidb_mem_quota_query">`tidb_mem_quota_query`</a>](/system-variables.md#tidb_mem_quota_query)と同じで、この制限を超えた場合にトリガーされるアクションは構成項目[<a href="/system-variables.md#tidb_mem_oom_action-new-in-v610">`tidb_mem_oom_action`</a>](/system-variables.md#tidb_mem_oom_action-new-in-v610)によって決まります。
+各バッチの情報はメモリに保存されるため、バッチが多すぎるとメモリ消費量が大幅に増加する可能性があります。これは、バッチ サイズが小さすぎることができない理由を説明します。バッチ情報を格納するために非トランザクション ステートメントが消費するメモリの上限は[`tidb_mem_oom_action`](/system-variables.md#tidb_mem_oom_action-new-in-v610)によって決まります。
 
 ## 制限 {#restrictions}
 
@@ -294,17 +294,17 @@ BATCH ON id LIMIT 2 DELETE /*+ USE_INDEX(t)*/ FROM t WHERE v < 6;
 -   DML ステートメントには`ORDER BY`または`LIMIT`の句を含めることはできません。
 -   サブクエリまたは集合演算はサポートされていません。
 -   シャード列にはインデックスを付ける必要があります。インデックスは、単一列インデックス、または結合インデックスの最初の列にすることができます。
--   [<a href="/system-variables.md#autocommit">`autocommit`</a>](/system-variables.md#autocommit)モードで使用する必要があります。
+-   [`autocommit`](/system-variables.md#autocommit)モードで使用する必要があります。
 -   バッチdmlが有効な場合は使用できません。
 -   [ `tidb_snapshot` ](/read-historyal-data.md#操作フロー)が設定されている場合は使用できません。
 -   `prepare`ステートメントと一緒に使用することはできません。
 -   `ENUM` 、 `BIT` 、 `SET` 、 `JSON`タイプはシャード列としてサポートされていません。
--   [<a href="/temporary-tables.md">一時テーブル</a>](/temporary-tables.md)ではサポートされていません。
--   [<a href="/develop/dev-guide-use-common-table-expression.md">共通テーブル式</a>](/develop/dev-guide-use-common-table-expression.md)はサポートされていません。
+-   [一時テーブル](/temporary-tables.md)ではサポートされていません。
+-   [共通テーブル式](/develop/dev-guide-use-common-table-expression.md)はサポートされていません。
 
 ## 制御バッチ実行の失敗 {#control-batch-execution-failure}
 
-非トランザクション DML ステートメントはアトミック性を満たしていません。一部のバッチは成功する可能性がありますが、一部のバッチは失敗する可能性があります。システム変数[<a href="/system-variables.md#tidb_nontransactional_ignore_error-new-in-v610">`tidb_nontransactional_ignore_error`</a>](/system-variables.md#tidb_nontransactional_ignore_error-new-in-v610)は、非トランザクション DML ステートメントがエラーを処理する方法を制御します。
+非トランザクション DML ステートメントはアトミック性を満たしていません。一部のバッチは成功する可能性がありますが、一部のバッチは失敗する可能性があります。システム変数[`tidb_nontransactional_ignore_error`](/system-variables.md#tidb_nontransactional_ignore_error-new-in-v610)は、非トランザクション DML ステートメントがエラーを処理する方法を制御します。
 
 例外として、最初のバッチが失敗した場合は、ステートメント自体が間違っている可能性が高くなります。この場合、非トランザクション ステートメント全体が直接エラーを返します。
 
@@ -314,9 +314,9 @@ BATCH ON id LIMIT 2 DELETE /*+ USE_INDEX(t)*/ FROM t WHERE v < 6;
 
 非トランザクション DML `BATCH ON $C$ LIMIT $N$ DELETE FROM ... WHERE $P$`の場合、$C$ は分割に使用される列、$N$ はバッチ サイズ、$P$ はフィルター条件です。
 
-1.  元のステートメントのフィルター条件 $P$ と分割するために指定された列 $C$ に従って、TiDB は $P$ を満たすすべての $C$ をクエリします。 TiDB は、これらの $C$ を $N$ に従ってグループ $B_1 \dots B_k$ に分類します。 TiDB は、すべての $B_i$ のそれぞれについて、最初と最後の $C$ を $S_i$ および $E_i$ として保持します。このステップで実行されたクエリ ステートメントは、 [<a href="/non-transactional-dml.md#query-the-batch-dividing-statement">`DRY RUN QUERY`</a>](/non-transactional-dml.md#query-the-batch-dividing-statement)を通じて表示できます。
+1.  元のステートメントのフィルター条件 $P$ と分割するために指定された列 $C$ に従って、TiDB は $P$ を満たすすべての $C$ をクエリします。 TiDB は、これらの $C$ を $N$ に従ってグループ $B_1 \dots B_k$ に分類します。 TiDB は、すべての $B_i$ のそれぞれについて、最初と最後の $C$ を $S_i$ および $E_i$ として保持します。このステップで実行されたクエリ ステートメントは、 [`DRY RUN QUERY`](/non-transactional-dml.md#query-the-batch-dividing-statement)を通じて表示できます。
 2.  $B_i$ に含まれるデータは、$S_i$ と $E_i$ の間の $P_i$: $C$ を満たすサブセットです。 $P_i$ を使用すると、各バッチで処理する必要があるデータの範囲を絞り込むことができます。
-3.  $B_i$ の場合、TiDB は上記の条件を元のステートメントの`WHERE`条件に埋め込み、WHERE ($P_i$) AND ($P$) になります。このステップの実行結果は[<a href="/non-transactional-dml.md#query-the-statements-corresponding-to-the-first-and-the-last-batches">`DRY RUN`</a>](/non-transactional-dml.md#query-the-statements-corresponding-to-the-first-and-the-last-batches)で確認できます。
+3.  $B_i$ の場合、TiDB は上記の条件を元のステートメントの`WHERE`条件に埋め込み、WHERE ($P_i$) AND ($P$) になります。このステップの実行結果は[`DRY RUN`](/non-transactional-dml.md#query-the-statements-corresponding-to-the-first-and-the-last-batches)で確認できます。
 4.  すべてのバッチに対して、新しいステートメントを順番に実行します。各グループ化のエラーは収集および結合され、すべてのグループ化が完了した後に非トランザクション DML ステートメント全体の結果として返されます。
 
 ## バッチdmlとの比較 {#comparison-with-batch-dml}
@@ -329,9 +329,9 @@ BATCH ON id LIMIT 2 DELETE /*+ USE_INDEX(t)*/ FROM t WHERE v < 6;
 
 非トランザクション DML ステートメントは、まだすべてのバッチ DML 使用シナリオに代わるものではありません。それらの主な違いは次のとおりです。
 
--   パフォーマンス: [<a href="#how-to-select-a-shard-column">シャード列</a>](#how-to-select-a-shard-column)が効率的である場合、非トランザクション DML ステートメントのパフォーマンスはバッチ DML のパフォーマンスに近くなります。シャード列の効率が低い場合、非トランザクション DML ステートメントのパフォーマンスはバッチ dml のパフォーマンスよりも大幅に低下します。
+-   パフォーマンス: [シャード列](#how-to-select-a-shard-column)が効率的である場合、非トランザクション DML ステートメントのパフォーマンスはバッチ DML のパフォーマンスに近くなります。シャード列の効率が低い場合、非トランザクション DML ステートメントのパフォーマンスはバッチ dml のパフォーマンスよりも大幅に低下します。
 
--   安定性: バッチ DML は、不適切な使用によりデータ インデックスの不整合が発生する傾向があります。非トランザクション DML ステートメントは、データ インデックスの不整合を引き起こしません。ただし、不適切に使用すると、非トランザクション DML ステートメントは元のステートメントと同等ではなくなり、アプリケーションで予期しない動作が発生する可能性があります。詳細は[<a href="#non-transactional-delete-has-exceptional-behavior-that-is-not-equivalent-to-ordinary-delete">一般的な問題セクション</a>](#non-transactional-delete-has-exceptional-behavior-that-is-not-equivalent-to-ordinary-delete)を参照してください。
+-   安定性: バッチ DML は、不適切な使用によりデータ インデックスの不整合が発生する傾向があります。非トランザクション DML ステートメントは、データ インデックスの不整合を引き起こしません。ただし、不適切に使用すると、非トランザクション DML ステートメントは元のステートメントと同等ではなくなり、アプリケーションで予期しない動作が発生する可能性があります。詳細は[一般的な問題セクション](#non-transactional-delete-has-exceptional-behavior-that-is-not-equivalent-to-ordinary-delete)を参照してください。
 
 ## よくある問題 {#common-issues}
 
@@ -349,13 +349,13 @@ BATCH ON id LIMIT 2 DELETE /*+ USE_INDEX(t)*/ FROM t WHERE v < 6;
 
 <CustomContent platform="tidb">
 
-選択したシャード列がこれらのサポートされていないタイプのいずれでもないときにエラーが発生した場合は、PingCAP またはコミュニティから[<a href="/support.md">支持を得ます</a>](/support.md) 。
+選択したシャード列がこれらのサポートされていないタイプのいずれでもないときにエラーが発生した場合は、PingCAP またはコミュニティから[支持を得ます](/support.md) 。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-選択したシャード列がこれらのサポートされていないタイプのいずれでもないときにエラーが発生する場合は、 [<a href="/tidb-cloud/tidb-cloud-support.md">TiDB Cloudサポートにお問い合わせください</a>](/tidb-cloud/tidb-cloud-support.md) 。
+選択したシャード列がこれらのサポートされていないタイプのいずれでもないときにエラーが発生する場合は、 [TiDB Cloudサポートにお問い合わせください](/tidb-cloud/tidb-cloud-support.md) 。
 
 </CustomContent>
 
@@ -374,5 +374,5 @@ BATCH ON id LIMIT 2 DELETE /*+ USE_INDEX(t)*/ FROM t WHERE v < 6;
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-batch.md">`BATCH`</a>](/sql-statements/sql-statement-batch.md)の構文
--   [<a href="/system-variables.md#tidb_nontransactional_ignore_error-new-in-v610">`tidb_nontransactional_ignore_error`</a>](/system-variables.md#tidb_nontransactional_ignore_error-new-in-v610)
+-   [`BATCH`](/sql-statements/sql-statement-batch.md)の構文
+-   [`tidb_nontransactional_ignore_error`](/system-variables.md#tidb_nontransactional_ignore_error-new-in-v610)

@@ -7,7 +7,7 @@ summary: Learn to deploy TiDB Binlog with a simple TiDB cluster.
 
 このチュートリアルは、MariaDB サーバー インスタンスにデータをプッシュするように設定された、各コンポーネント(Placement Driver、TiKV Server、TiDB Server、 Pump、およびDrainer ) の単一ノードを備えた単純な TiDB Binlogデプロイメントから始まります。
 
-このチュートリアルは、 [<a href="/tidb-architecture.md">TiDBアーキテクチャ</a>](/tidb-architecture.md)にある程度の知識があり、すでに TiDB クラスターをセットアップしている可能性があり (必須ではありません)、TiDB Binlogの実践的な経験を積みたいと考えているユーザーを対象としています。このチュートリアルは、TiDB Binlogを「試して」、そのアーキテクチャの概念に慣れるための良い方法です。
+このチュートリアルは、 [TiDBアーキテクチャ](/tidb-architecture.md)にある程度の知識があり、すでに TiDB クラスターをセットアップしている可能性があり (必須ではありません)、TiDB Binlogの実践的な経験を積みたいと考えているユーザーを対象としています。このチュートリアルは、TiDB Binlogを「試して」、そのアーキテクチャの概念に慣れるための良い方法です。
 
 > **警告：**
 >
@@ -23,7 +23,7 @@ TiDB Binlog を増分バックアップに使用したり、ある TiDB クラ�
 
 TiDB Binlog は、MySQL または MariaDB から TiDB にデータを移行する場合に特に便利です。この場合、TiDB DM (データ移行) プラットフォームを使用して MySQL/MariaDB クラスターから TiDB にデータを取得し、TiDB Binlogを使用してTiDB クラスターと同期する別のダウンストリーム MySQL/MariaDB インスタンス/クラスター。 TiDB Binlog を使用すると、TiDB へのアプリケーション トラフィックをダウンストリームの MySQL または MariaDB インスタンス/クラスターにプッシュできるようになります。これにより、ダウンタイムやデータ損失なしにアプリケーションを MySQL または MariaDB に簡単に戻すことができるため、TiDB への移行のリスクが軽減されます。
 
-詳細については[<a href="/tidb-binlog/tidb-binlog-overview.md">TiDBBinlogクラスタユーザー ガイド</a>](/tidb-binlog/tidb-binlog-overview.md)参照してください。
+詳細については[TiDBBinlogクラスタユーザー ガイド](/tidb-binlog/tidb-binlog-overview.md)参照してください。
 
 ## アーキテクチャ {#architecture}
 
@@ -325,7 +325,7 @@ MariaDBサーバーにクエリを実行するときに、TiDB に挿入した�
 
 ## binlogctl {#binlogctl}
 
-クラスターに参加したポンプとドレーナーの情報は PD に保存されます。 binlogctl ツールのクエリを使用して、それらの状態に関する情報を操作できます。詳細については[<a href="/tidb-binlog/binlog-control.md">binlogctl ガイド</a>](/tidb-binlog/binlog-control.md)参照してください。
+クラスターに参加したポンプとドレーナーの情報は PD に保存されます。 binlogctl ツールのクエリを使用して、それらの状態に関する情報を操作できます。詳細については[binlogctl ガイド](/tidb-binlog/binlog-control.md)参照してください。
 
 クラスター内のポンプとドレイナーの現在のステータスを表示するには、 `binlogctl`を使用します。
 
@@ -399,7 +399,7 @@ kolbe@localhost tidb-latest-linux-amd64]$ for p in tidb-server drainer pump tikv
 [1]+  Done                    ./bin/pd-server --config=pd.toml &>pd.out
 ```
 
-すべてのサービスが終了した後にクラスターを再起動する場合は、最初にサービスを開始するために実行したのと同じコマンドを使用します。上記の[<a href="#binlogctl">`binlogctl`</a>](#binlogctl)セクションで説明したように、 `pump`の前に`drainer`開始し、 `tidb-server`の前に`pump`を開始する必要があります。
+すべてのサービスが終了した後にクラスターを再起動する場合は、最初にサービスを開始するために実行したのと同じコマンドを使用します。上記の[`binlogctl`](#binlogctl)セクションで説明したように、 `pump`の前に`drainer`開始し、 `tidb-server`の前に`pump`を開始する必要があります。
 
 ```bash
 ./bin/pd-server --config=pd.toml &>pd.out &

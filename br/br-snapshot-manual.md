@@ -7,21 +7,21 @@ summary: Learn about the commands of TiDB snapshot backup and restore.
 
 このドキュメントでは、次のようなアプリケーション シナリオに従って、TiDB スナップショットのバックアップと復元のコマンドについて説明します。
 
--   [<a href="#back-up-cluster-snapshots">クラスターのスナップショットをバックアップする</a>](#back-up-cluster-snapshots)
--   [<a href="#back-up-a-database">データベースをバックアップする</a>](#back-up-a-database)
--   [<a href="#back-up-a-table">テーブルをバックアップする</a>](#back-up-a-table)
--   [<a href="#back-up-multiple-tables-with-table-filter">テーブルフィルターを使用して複数のテーブルをバックアップする</a>](#back-up-multiple-tables-with-table-filter)
--   [<a href="#encrypt-the-backup-data">バックアップデータを暗号化する</a>](#encrypt-the-backup-data)
--   [<a href="#restore-cluster-snapshots">クラスターのスナップショットを復元する</a>](#restore-cluster-snapshots)
--   [<a href="#restore-a-database">データベースを復元する</a>](#restore-a-database)
--   [<a href="#restore-a-table">テーブルを復元する</a>](#restore-a-table)
--   [<a href="#restore-multiple-tables-with-table-filter">テーブルフィルターを使用して複数のテーブルを復元する</a>](#restore-multiple-tables-with-table-filter)
--   [<a href="#restore-encrypted-snapshots">暗号化されたスナップショットを復元する</a>](#restore-encrypted-snapshots)
+-   [クラスターのスナップショットをバックアップする](#back-up-cluster-snapshots)
+-   [データベースをバックアップする](#back-up-a-database)
+-   [テーブルをバックアップする](#back-up-a-table)
+-   [テーブルフィルターを使用して複数のテーブルをバックアップする](#back-up-multiple-tables-with-table-filter)
+-   [バックアップデータを暗号化する](#encrypt-the-backup-data)
+-   [クラスターのスナップショットを復元する](#restore-cluster-snapshots)
+-   [データベースを復元する](#restore-a-database)
+-   [テーブルを復元する](#restore-a-table)
+-   [テーブルフィルターを使用して複数のテーブルを復元する](#restore-multiple-tables-with-table-filter)
+-   [暗号化されたスナップショットを復元する](#restore-encrypted-snapshots)
 
 スナップショットのバックアップと復元の詳細については、以下を参照してください。
 
--   [<a href="/br/br-snapshot-guide.md">スナップショットのバックアップと復元ガイド</a>](/br/br-snapshot-guide.md)
--   [<a href="/br/backup-and-restore-use-cases.md">バックアップと復元の使用例</a>](/br/backup-and-restore-use-cases.md)
+-   [スナップショットのバックアップと復元ガイド](/br/br-snapshot-guide.md)
+-   [バックアップと復元の使用例](/br/backup-and-restore-use-cases.md)
 
 ## クラスターのスナップショットをバックアップする {#back-up-cluster-snapshots}
 
@@ -38,7 +38,7 @@ br backup full \
 
 前述のコマンドでは次のようになります。
 
--   `--backupts` : スナップショットの時点。形式は[<a href="/glossary.md#tso">TSO</a>](/glossary.md#tso)またはタイムスタンプ ( `400036290571534337`や`2018-05-11 01:42:23`など) です。このスナップショットのデータがガベージ コレクションされた場合、 `br backup`コマンドはエラーを返し、「br」は終了します。このパラメータを指定しないままにすると、 `br`バックアップ開始時刻に対応するスナップショットを選択します。
+-   `--backupts` : スナップショットの時点。形式は[TSO](/glossary.md#tso)またはタイムスタンプ ( `400036290571534337`や`2018-05-11 01:42:23`など) です。このスナップショットのデータがガベージ コレクションされた場合、 `br backup`コマンドはエラーを返し、「br」は終了します。このパラメータを指定しないままにすると、 `br`バックアップ開始時刻に対応するスナップショットを選択します。
 -   `--ratelimit` : バックアップ タスクを実行する**TiKV ごとの**最大速度。単位は MiB/s です。
 -   `--log-file` : `br`ログが書き込まれる対象ファイル。
 
@@ -71,7 +71,7 @@ br backup db \
     --log-file backuptable.log
 ```
 
-前述のコマンドでは、 `--db`データベース名を指定し、その他のパラメータは[<a href="#back-up-cluster-snapshots">TiDB クラスターのスナップショットをバックアップする</a>](#back-up-cluster-snapshots)と同じです。
+前述のコマンドでは、 `--db`データベース名を指定し、その他のパラメータは[TiDB クラスターのスナップショットをバックアップする](#back-up-cluster-snapshots)と同じです。
 
 ### テーブルをバックアップする {#back-up-a-table}
 
@@ -89,11 +89,11 @@ br backup table \
     --log-file backuptable.log
 ```
 
-前述のコマンドでは、 `--db`と`--table`にそれぞれデータベース名とテーブル名を指定し、その他のパラメータは[<a href="#back-up-cluster-snapshots">TiDB クラスターのスナップショットをバックアップする</a>](#back-up-cluster-snapshots)と同じです。
+前述のコマンドでは、 `--db`と`--table`にそれぞれデータベース名とテーブル名を指定し、その他のパラメータは[TiDB クラスターのスナップショットをバックアップする](#back-up-cluster-snapshots)と同じです。
 
 ### テーブルフィルターを使用して複数のテーブルをバックアップする {#back-up-multiple-tables-with-table-filter}
 
-より多くの条件を使用して複数のテーブルをバックアップするには、 `br backup full`コマンドを実行し、 `--filter`または`-f`で[<a href="/table-filter.md">テーブルフィルター</a>](/table-filter.md)を指定します。
+より多くの条件を使用して複数のテーブルをバックアップするには、 `br backup full`コマンドを実行し、 `--filter`または`-f`で[テーブルフィルター](/table-filter.md)を指定します。
 
 次の例では、 `db*.tbl*`フィルター ルールに一致するテーブルを Amazon S3 にバックアップします。
 
@@ -112,7 +112,7 @@ br backup full \
 >
 > これは実験的機能です。本番環境で使用することはお勧めできません。
 
-BR は、バックアップ[<a href="/br/backup-and-restore-storages.md#amazon-s3-server-side-encryption">Amazon S3 にバックアップするときにstorage側で</a>](/br/backup-and-restore-storages.md#amazon-s3-server-side-encryption)でのバックアップ データの暗号化をサポートします。必要に応じてどちらかの暗号化方式を選択できます。
+BR は、バックアップ[Amazon S3 にバックアップするときにstorage側で](/br/backup-and-restore-storages.md#amazon-s3-server-side-encryption)でのバックアップ データの暗号化をサポートします。必要に応じてどちらかの暗号化方式を選択できます。
 
 TiDB v5.3.0 以降、次のパラメータを構成することでバックアップ データを暗号化できます。
 
@@ -177,7 +177,7 @@ br restore db \
     --log-file restore_db.log
 ```
 
-前述のコマンドでは、 `--db`復元するデータベースの名前を指定し、その他のパラメータは[<a href="#restore-cluster-snapshots">TiDB クラスターのスナップショットを復元する</a>](#restore-cluster-snapshots)と同じです。
+前述のコマンドでは、 `--db`復元するデータベースの名前を指定し、その他のパラメータは[TiDB クラスターのスナップショットを復元する](#restore-cluster-snapshots)と同じです。
 
 > **ノート：**
 >
@@ -199,11 +199,11 @@ br restore table \
     --log-file restore_table.log
 ```
 
-前述のコマンドでは、 `--table`に復元するテーブルの名前を指定し、その他のパラメータは[<a href="#restore-a-database">データベースを復元する</a>](#restore-a-database)と同じです。
+前述のコマンドでは、 `--table`に復元するテーブルの名前を指定し、その他のパラメータは[データベースを復元する](#restore-a-database)と同じです。
 
 ### テーブルフィルターを使用して複数のテーブルを復元する {#restore-multiple-tables-with-table-filter}
 
-より複雑なフィルター ルールを使用して複数のテーブルを復元するには、 `br restore full`コマンドを実行し、 [<a href="/table-filter.md">テーブルフィルター</a>](/table-filter.md)に`--filter`または`-f`を指定します。
+より複雑なフィルター ルールを使用して複数のテーブルを復元するには、 `br restore full`コマンドを実行し、 [テーブルフィルター](/table-filter.md)に`--filter`または`-f`を指定します。
 
 次の例では、 `db*.tbl*`フィルター ルールに一致するテーブルを Amazon S3 からターゲット クラスターに復元します。
 

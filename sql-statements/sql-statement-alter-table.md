@@ -7,9 +7,9 @@ summary: An overview of the usage of ALTER TABLE for the TiDB database.
 
 このステートメントは、新しいテーブル構造に適合するように既存のテーブルを変更します。ステートメント`ALTER TABLE`次の目的で使用できます。
 
--   [<a href="/sql-statements/sql-statement-add-index.md">`ADD`</a>](/sql-statements/sql-statement-add-index.md) 、 [<a href="/sql-statements/sql-statement-drop-index.md">`DROP`</a>](/sql-statements/sql-statement-drop-index.md) 、または[<a href="/sql-statements/sql-statement-rename-index.md">`RENAME`</a>](/sql-statements/sql-statement-rename-index.md)インデックス
--   [<a href="/sql-statements/sql-statement-add-column.md">`ADD`</a>](/sql-statements/sql-statement-add-column.md) 、 [<a href="/sql-statements/sql-statement-drop-column.md">`DROP`</a>](/sql-statements/sql-statement-drop-column.md) 、 [<a href="/sql-statements/sql-statement-modify-column.md">`MODIFY`</a>](/sql-statements/sql-statement-modify-column.md)または[<a href="/sql-statements/sql-statement-change-column.md">`CHANGE`</a>](/sql-statements/sql-statement-change-column.md)列
--   [<a href="/sql-statements/sql-statement-alter-table-compact.md">`COMPACT`</a>](/sql-statements/sql-statement-alter-table-compact.md)テーブルデータ
+-   [`RENAME`](/sql-statements/sql-statement-rename-index.md)インデックス
+-   [`CHANGE`](/sql-statements/sql-statement-change-column.md)列
+-   [`COMPACT`](/sql-statements/sql-statement-alter-table-compact.md)テーブルデータ
 
 ## あらすじ {#synopsis}
 
@@ -98,7 +98,7 @@ EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 3 rows in set (0.00 sec)
 ```
 
-ステートメント[<a href="/sql-statements/sql-statement-add-index.md">`ALTER TABLE .. ADD INDEX`</a>](/sql-statements/sql-statement-add-index.md)は、テーブル t1 にインデックスを追加するために使用できます。 `EXPLAIN` 、元のクエリがより効率的なインデックス範囲スキャンを使用していることを確認します。
+ステートメント[`ALTER TABLE .. ADD INDEX`](/sql-statements/sql-statement-add-index.md)は、テーブル t1 にインデックスを追加するために使用できます。 `EXPLAIN` 、元のクエリがより効率的なインデックス範囲スキャンを使用していることを確認します。
 
 {{< copyable "" >}}
 
@@ -173,7 +173,7 @@ TiDB の`ALTER TABLE`には、次の主要な制限が適用されます。
     -   TiDB は、**実行前に**テーブル スキーマに従ってステートメントを検証します。たとえば、列`c1`がテーブルに存在しないため、 `ALTER TABLE t ADD COLUMN c1 INT, ADD COLUMN c2 INT AFTER c1;`実行するとエラーが返されます。
     -   `ALTER TABLE`ステートメントの場合、TiDB での実行順序は左から右に次々と変更され、場合によっては MySQL と互換性がありません。
 
--   主キー列の[<a href="/sql-statements/sql-statement-modify-column.md#reorg-data-change">データの再編成</a>](/sql-statements/sql-statement-modify-column.md#reorg-data-change)タイプの変更はサポートされていません。
+-   主キー列の[データの再編成](/sql-statements/sql-statement-modify-column.md#reorg-data-change)タイプの変更はサポートされていません。
 
 -   パーティション化されたテーブルの列タイプの変更はサポートされていません。
 
@@ -183,19 +183,19 @@ TiDB の`ALTER TABLE`には、次の主要な制限が適用されます。
 
 -   空間データ型はサポートされていません。
 
--   `ALTER TABLE t CACHE | NOCACHE`は、MySQL 構文の TiDB 拡張機能です。詳細は[<a href="/cached-tables.md">キャッシュされたテーブル</a>](/cached-tables.md)を参照してください。
+-   `ALTER TABLE t CACHE | NOCACHE`は、MySQL 構文の TiDB 拡張機能です。詳細は[キャッシュされたテーブル](/cached-tables.md)を参照してください。
 
-さらなる制限については、 [<a href="/mysql-compatibility.md#ddl">MySQL の互換性</a>](/mysql-compatibility.md#ddl)を参照してください。
+さらなる制限については、 [MySQL の互換性](/mysql-compatibility.md#ddl)を参照してください。
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/mysql-compatibility.md#ddl">MySQL の互換性</a>](/mysql-compatibility.md#ddl)
--   [<a href="/sql-statements/sql-statement-add-column.md">列の追加</a>](/sql-statements/sql-statement-add-column.md)
--   [<a href="/sql-statements/sql-statement-drop-column.md">ドロップカラム</a>](/sql-statements/sql-statement-drop-column.md)
--   [<a href="/sql-statements/sql-statement-add-index.md">インデックスの追加</a>](/sql-statements/sql-statement-add-index.md)
--   [<a href="/sql-statements/sql-statement-drop-index.md">ドロップインデックス</a>](/sql-statements/sql-statement-drop-index.md)
--   [<a href="/sql-statements/sql-statement-rename-index.md">インデックスの名前を変更</a>](/sql-statements/sql-statement-rename-index.md)
--   [<a href="/sql-statements/sql-statement-alter-index.md">インデックスの変更</a>](/sql-statements/sql-statement-alter-index.md)
--   [<a href="/sql-statements/sql-statement-create-table.md">テーブルの作成</a>](/sql-statements/sql-statement-create-table.md)
--   [<a href="/sql-statements/sql-statement-drop-table.md">ドロップテーブル</a>](/sql-statements/sql-statement-drop-table.md)
--   [<a href="/sql-statements/sql-statement-show-create-table.md">テーブルの作成を表示</a>](/sql-statements/sql-statement-show-create-table.md)
+-   [MySQL の互換性](/mysql-compatibility.md#ddl)
+-   [列の追加](/sql-statements/sql-statement-add-column.md)
+-   [ドロップカラム](/sql-statements/sql-statement-drop-column.md)
+-   [インデックスの追加](/sql-statements/sql-statement-add-index.md)
+-   [ドロップインデックス](/sql-statements/sql-statement-drop-index.md)
+-   [インデックスの名前を変更](/sql-statements/sql-statement-rename-index.md)
+-   [インデックスの変更](/sql-statements/sql-statement-alter-index.md)
+-   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
+-   [ドロップテーブル](/sql-statements/sql-statement-drop-table.md)
+-   [テーブルの作成を表示](/sql-statements/sql-statement-show-create-table.md)

@@ -5,7 +5,7 @@ summary: Learn how to optimize database system based on database time and how to
 
 # パフォーマンスの分析とチューニング {#performance-analysis-and-tuning}
 
-このドキュメントでは、データベース時間ごとのチューニング手法について説明し、パフォーマンス分析とチューニングに TiDB [<a href="/grafana-performance-overview-dashboard.md">パフォーマンス概要ダッシュボード</a>](/grafana-performance-overview-dashboard.md)を使用する方法を示します。
+このドキュメントでは、データベース時間ごとのチューニング手法について説明し、パフォーマンス分析とチューニングに TiDB [パフォーマンス概要ダッシュボード](/grafana-performance-overview-dashboard.md)を使用する方法を示します。
 
 このドキュメントで説明する方法を使用すると、ユーザー応答時間とデータベース時間をグローバルかつトップダウンの観点から分析し、ユーザー応答時間のボトルネックがデータベースの問題によって引き起こされているかどうかを確認できます。ボトルネックがデータベースにある場合は、データベース時間の概要と SQLレイテンシーの内訳を使用してボトルネックを特定し、パフォーマンスを調整できます。
 
@@ -143,7 +143,7 @@ TiDB は、SQL 処理パスとデータベース時間を常に測定および�
 
 #### 1 秒あたりのクエリ、1 秒あたりのコマンド、および準備済みプラン キャッシュ {#query-per-second-command-per-second-and-prepared-plan-cache}
 
-パフォーマンスの概要で次の 3 つのパネルを確認すると、アプリケーションのワークロード タイプ、アプリケーションが TiDB とどのように対話するか、アプリケーションが TiDB を最大限に活用しているかどうかを知ることができます[<a href="/sql-prepared-plan-cache.md">準備されたプランのキャッシュ</a>](/sql-prepared-plan-cache.md) 。
+パフォーマンスの概要で次の 3 つのパネルを確認すると、アプリケーションのワークロード タイプ、アプリケーションが TiDB とどのように対話するか、アプリケーションが TiDB を最大限に活用しているかどうかを知ることができます[準備されたプランのキャッシュ](/sql-prepared-plan-cache.md) 。
 
 -   QPS: Query Per Second の略。アプリケーションによって実行された SQL ステートメントの数を示します。
 -   CPS By Type: Command Per Second の略。 Command は、MySQL プロトコル固有のコマンドを示します。クエリ ステートメントは、クエリ コマンドまたはプリペアドステートメントのいずれかによって TiDB に送信できます。
@@ -154,7 +154,7 @@ TiDB は、SQL 処理パスとデータベース時間を常に測定および�
     -   準備されたプラン キャッシュがヒットしない場合: `avg-hit` (1 秒あたりのヒット数) は 0、3 は`avg-miss`秒あたり`StmtExecute`コマンドの数に等しくなります。考えられる理由は次のとおりです。
         -   アプリケーションはクエリ インターフェイスを使用しています。
         -   アプリケーションは`StmtExecute`回実行するたびに`StmtClose`コマンドを呼び出すため、キャッシュされたプランはクリーンアップされます。
-        -   `StmtExecute`によって実行されるすべてのステートメントは[<a href="/sql-prepared-plan-cache.md">キャッシュ条件</a>](/sql-prepared-plan-cache.md)を満たさないため、実行プラン キャッシュにヒットできません。
+        -   `StmtExecute`によって実行されるすべてのステートメントは[キャッシュ条件](/sql-prepared-plan-cache.md)を満たさないため、実行プラン キャッシュにヒットできません。
     -   準備されたすべてのプラン キャッシュがヒットします。1 ( `avg-hit`秒あたりのヒット数) は 1 秒あたりの`StmtExecute`コマンドの数に等しく、 `avg-miss` (1 秒あたりのヒットなしの数) は 0 です。
     -   準備されたプラン キャッシュの一部がヒットします。1 ( `avg-hit`秒あたりのヒット数) は、1 秒あたりのコマンド数`StmtExecute`よりも少ないです。準備されたプラン キャッシュには既知の制限があります。たとえば、サブクエリはサポートされていないため、サブクエリを含む SQL ステートメントは準備されたプラン キャッシュを使用できません。
 
@@ -308,11 +308,11 @@ TiDB CPU および TiKV CPU/IO MBps パネルでは、TiDB と TiKV の論理 CP
 
 #### 解析、コンパイル、および実行期間 {#parse-compile-and-execute-duration}
 
-TiDB では、クエリ ステートメントの送信から結果が返されるまでは[<a href="/sql-optimization-concepts.md">一般的な処理フロー</a>](/sql-optimization-concepts.md)です。
+TiDB では、クエリ ステートメントの送信から結果が返されるまでは[一般的な処理フロー](/sql-optimization-concepts.md)です。
 
 TiDB における SQL 処理は、 `get token` 、 `parse` 、 `compile` 、 `execute`の 4 つのフェーズで構成されます。
 
--   `get token` : 通常は数マイクロ秒だけなので無視できます。トークンは、単一の TiDB インスタンスへの接続数が制限[<a href="/tidb-configuration-file.md">トークン制限</a>](/tidb-configuration-file.md)に達した場合にのみ制限されます。
+-   `get token` : 通常は数マイクロ秒だけなので無視できます。トークンは、単一の TiDB インスタンスへの接続数が制限[トークン制限](/tidb-configuration-file.md)に達した場合にのみ制限されます。
 -   `parse` : クエリ ステートメントは抽象構文ツリー (AST) に解析されます。
 -   `compile` : 実行計画は、 `parse`フェーズの AST と統計に基づいて作成されます。 `compile`フェーズには、論理的な最適化と物理的な最適化が含まれます。論理最適化は、リレーショナル代数に基づく列の枝刈りなどのルールによってクエリ プランを最適化します。物理的な最適化は、コストベースのオプティマイザーによる統計によって実行計画のコストを見積もり、最もコストが低い物理的な実行計画を選択します。
 -   `execute` : SQL ステートメントの実行にかかる時間。 TiDB はまず、グローバルに一意のタイムスタンプ TSO を待ちます。次に、エグゼキュータは、実行プラン内のオペレータのキー範囲に基づいて TiKV API リクエストを構築し、それを TiKV に配布します。 `execute`時間には、TSO 待機時間、KV リクエスト時間、TiDB エグゼキュータがデータ処理に費やした時間が含まれます。
@@ -326,7 +326,7 @@ avg Query Duration = avg Get Token + avg Parse Duration + avg Compile Duration +
 通常、 `execute`フェーズが`query`のレイテンシーの大部分を占めます。ただし、次の場合には`parse`フェーズと`compile`フェーズが大きな役割を果たすこともあります。
 
 -   `parse`フェーズでの長いレイテンシー: たとえば、 `query`のステートメントが長い場合、SQL テキストの解析に多くの CPU が消費されます。
--   `compile`フェーズでの長いレイテンシー: 準備されたプラン キャッシュがヒットしない場合、TiDB は SQL 実行ごとに実行プランをコンパイルする必要があります。 `compile`フェーズのレイテンシーは、数ミリ秒、数十ミリ秒、あるいはそれ以上になる場合があります。準備されたプラン キャッシュがヒットしない場合、論理的および物理的な最適化が`compile`フェーズで実行され、大量の CPU とメモリが消費され、Go ランタイム (TiDB は[<a href="https://go.dev/">`Go`</a>](https://go.dev/)で書き込まれます) に負荷がかかり、他の TiDB コンポーネントのパフォーマンスに影響します。準備されたプラン キャッシュは、TiDB で OLTP ワークロードを効率的に処理するために重要です。
+-   `compile`フェーズでの長いレイテンシー: 準備されたプラン キャッシュがヒットしない場合、TiDB は SQL 実行ごとに実行プランをコンパイルする必要があります。 `compile`フェーズのレイテンシーは、数ミリ秒、数十ミリ秒、あるいはそれ以上になる場合があります。準備されたプラン キャッシュがヒットしない場合、論理的および物理的な最適化が`compile`フェーズで実行され、大量の CPU とメモリが消費され、Go ランタイム (TiDB は[`Go`](https://go.dev/)で書き込まれます) に負荷がかかり、他の TiDB コンポーネントのパフォーマンスに影響します。準備されたプラン キャッシュは、TiDB で OLTP ワークロードを効率的に処理するために重要です。
 
 **例 1: `compile`段階でのデータベースのボトルネック**
 
@@ -490,11 +490,11 @@ v5.4.0:
 `Store`スレッドの場合、 `Commit Log Duration`は明らかに`Apply Log Duration`よりも高くなります。一方、 `Append Log Duration`は`Apply Log Duration`よりも大幅に高く、 `Store`スレッドが CPU と I/O の両方でボトルネックに悩まされている可能性があることを示しています。 `Commit Log Duration`と`Append Log Duration`減らすために考えられる方法は次のとおりです。
 
 -   TiKV CPU リソースが十分な場合は、 `raftstore.store-pool-size`の値を増やして`Store`スレッドを追加することを検討してください。
--   TiDB が v5.4.0 以降の場合は、 `raft-engine.enable: true`を設定して[<a href="/tikv-configuration-file.md#raft-engine">`Raft Engine`</a>](/tikv-configuration-file.md#raft-engine)を有効にすることを検討してください。 Raft Engine には軽い実行パスがあります。これは、一部のシナリオで I/O 書き込みと書き込みのロングテールレイテンシーを削減するのに役立ちます。
--   TiKV CPU リソースが十分で、TiDB が v5.3.0 以降の場合は、 `raftstore.store-io-pool-size: 1`を設定して[<a href="/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools">`StoreWriter`</a>](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools)有効にすることを検討してください。
+-   TiDB が v5.4.0 以降の場合は、 `raft-engine.enable: true`を設定して[`Raft Engine`](/tikv-configuration-file.md#raft-engine)を有効にすることを検討してください。 Raft Engine には軽い実行パスがあります。これは、一部のシナリオで I/O 書き込みと書き込みのロングテールレイテンシーを削減するのに役立ちます。
+-   TiKV CPU リソースが十分で、TiDB が v5.3.0 以降の場合は、 `raftstore.store-io-pool-size: 1`を設定して[`StoreWriter`](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools)有効にすることを検討してください。
 
 ## TiDB バージョンが v6.1.0 より前の場合、パフォーマンス概要ダッシュボードを使用するにはどうすればよいですか? {#if-my-tidb-version-is-earlier-than-v6-1-0-what-should-i-do-to-use-the-performance-overview-dashboard}
 
-v6.1.0 以降、Grafana にはデフォルトでパフォーマンス概要ダッシュボードが組み込まれています。このダッシュボードは、TiDB v4.x および v5.x バージョンと互換性があります。 TiDB が v6.1.0 より前の場合は、次の図に示すように、 [<a href="https://github.com/pingcap/tidb/blob/master/metrics/grafana/performance_overview.json">`performance_overview.json`</a>](https://github.com/pingcap/tidb/blob/master/metrics/grafana/performance_overview.json)手動でインポートする必要があります。
+v6.1.0 以降、Grafana にはデフォルトでパフォーマンス概要ダッシュボードが組み込まれています。このダッシュボードは、TiDB v4.x および v5.x バージョンと互換性があります。 TiDB が v6.1.0 より前の場合は、次の図に示すように、 [`performance_overview.json`](https://github.com/pingcap/tidb/blob/master/metrics/grafana/performance_overview.json)手動でインポートする必要があります。
 
 ![Store](/media/performance/import_dashboard.png)

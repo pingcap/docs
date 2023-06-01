@@ -5,7 +5,7 @@ summary: Understand how to decorrelate correlated subqueries.
 
 # 相関サブクエリの相関解除 {#decorrelation-of-correlated-subquery}
 
-[<a href="/subquery-optimization.md">サブクエリ関連の最適化</a>](/subquery-optimization.md)相関列がない場合に TiDB がサブクエリを処理する方法を示します。相関サブクエリの非相関化は複雑であるため、この記事では、いくつかの簡単なシナリオと最適化ルールが適用される範囲を紹介します。
+[サブクエリ関連の最適化](/subquery-optimization.md)相関列がない場合に TiDB がサブクエリを処理する方法を示します。相関サブクエリの非相関化は複雑であるため、この記事では、いくつかの簡単なシナリオと最適化ルールが適用される範囲を紹介します。
 
 ## 序章 {#introduction}
 
@@ -17,7 +17,7 @@ TiDB がこの書き換えを行う必要がある理由は、相関サブクエ
 
 この書き換えの欠点は、相関関係が解除されていない場合、オプティマイザーが相関列のインデックスを使用できることです。つまり、このサブクエリは何度も繰り返される可能性がありますが、そのたびにインデックスを使用してデータをフィルタリングできます。書き換えルールを使用すると、通常、相関列の位置が変わります。サブクエリは 1 回だけ実行されますが、1 回の実行時間は非相関なしの場合よりも長くなります。
 
-したがって、外部値が少ない場合は、非相関化を実行しないでください。これにより、実行パフォーマンスが向上する可能性があります。この場合、 [<a href="/optimizer-hints.md#no_decorrelate">`NO_DECORRELATE`</a>](/optimizer-hints.md#no_decorrelate)オプティマイザー ヒントを使用するか、 [<a href="/blocklist-control-plan.md">最適化ルールと式プッシュダウンのブロックリスト</a>](/blocklist-control-plan.md)の「サブクエリの非相関化」最適化ルールを無効にすることで、この最適化を無効にできます。ほとんどの場合、オプティマイザ ヒントを[<a href="/sql-plan-management.md">SQL計画管理</a>](/sql-plan-management.md)とともに使用して非相関を無効にすることをお勧めします。
+したがって、外部値が少ない場合は、非相関化を実行しないでください。これにより、実行パフォーマンスが向上する可能性があります。この場合、 [SQL計画管理](/sql-plan-management.md)とともに使用して非相関を無効にすることをお勧めします。
 
 ## 例 {#example}
 

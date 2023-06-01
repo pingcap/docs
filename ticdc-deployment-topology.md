@@ -9,7 +9,7 @@ summary: Learn the deployment topology of TiCDC based on the minimal TiDB topolo
 >
 > TiCDC は、v4.0.6 以降の一般提供 (GA) の機能です。本番環境でも使用できます。
 
-このドキュメントでは、最小クラスター トポロジに基づいた[<a href="/ticdc/ticdc-overview.md">TiCDC</a>](/ticdc/ticdc-overview.md)の展開トポロジについて説明します。
+このドキュメントでは、最小クラスター トポロジに基づいた[TiCDC](/ticdc/ticdc-overview.md)の展開トポロジについて説明します。
 
 TiCDC は、TiDB 4.0 で導入された、TiDB の増分データを複製するためのツールです。 TiDB、MySQL、MQ などの複数のダウンストリーム プラットフォームをサポートします。 TiDB Binlogと比較して、TiCDC はレイテンシーが低く、ネイティブの高可用性を備えています。
 
@@ -25,10 +25,10 @@ TiCDC は、TiDB 4.0 で導入された、TiDB の増分データを複製する
 
 ### トポロジテンプレート {#topology-templates}
 
--   [<a href="https://github.com/pingcap/docs/blob/master/config-templates/simple-cdc.yaml">TiCDC トポロジのシンプルなテンプレート</a>](https://github.com/pingcap/docs/blob/master/config-templates/simple-cdc.yaml)
--   [<a href="https://github.com/pingcap/docs/blob/master/config-templates/complex-cdc.yaml">TiCDC トポロジの複雑なテンプレート</a>](https://github.com/pingcap/docs/blob/master/config-templates/complex-cdc.yaml)
+-   [TiCDC トポロジのシンプルなテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/simple-cdc.yaml)
+-   [TiCDC トポロジの複雑なテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/complex-cdc.yaml)
 
-上記の TiDB クラスター トポロジー ファイルの構成項目の詳細な説明については、 [<a href="/tiup/tiup-cluster-topology-reference.md">TiUPを使用して TiDB を展開するためのトポロジコンフィグレーションファイル</a>](/tiup/tiup-cluster-topology-reference.md)を参照してください。
+上記の TiDB クラスター トポロジー ファイルの構成項目の詳細な説明については、 [TiUPを使用して TiDB を展開するためのトポロジコンフィグレーションファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
 
 > **ノート：**
 >

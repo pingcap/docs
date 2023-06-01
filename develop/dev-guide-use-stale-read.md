@@ -7,13 +7,13 @@ summary: Learn how to use Stale Read to accelerate queries under certain conditi
 
 ステイル読み取り は、TiDB に保存されているデータの履歴バージョンを読み取るために TiDB が適用するメカニズムです。このメカニズムを使用すると、特定の時刻または指定された時間範囲内で対応する履歴データを読み取ることができるため、storageノード間のデータ レプリケーションによって生じるレイテンシーを節約できます。 ステイル読み取りを使用している場合、TiDB はデータ読み取り用のレプリカをランダムに選択します。これは、すべてのレプリカがデータ読み取りに使用できることを意味します。
 
-実際には、 [<a href="/stale-read.md#usage-scenarios-of-stale-read">使用シナリオ</a>](/stale-read.md#usage-scenarios-of-stale-read)に基づいて TiDB でステイル読み取り を有効にすることが適切かどうかを慎重に検討してください。アプリケーションが非リアルタイム データの読み取りを許容できない場合は、 ステイル読み取り を有効にしないでください。
+実際には、 [使用シナリオ](/stale-read.md#usage-scenarios-of-stale-read)に基づいて TiDB でステイル読み取り を有効にすることが適切かどうかを慎重に検討してください。アプリケーションが非リアルタイム データの読み取りを許容できない場合は、 ステイル読み取り を有効にしないでください。
 
 TiDB は、ステートメント レベル、トランザクション レベル、セッション レベルの 3 つのレベルのステイル読み取りを提供します。
 
 ## 序章 {#introduction}
 
-[<a href="/develop/dev-guide-bookshop-schema-design.md">書店</a>](/develop/dev-guide-bookshop-schema-design.md)アプリケーションでは、次の SQL ステートメントを使用して、最新の出版された書籍とその価格をクエリできます。
+[書店](/develop/dev-guide-bookshop-schema-design.md)アプリケーションでは、次の SQL ステートメントを使用して、最新の出版された書籍とその価格をクエリできます。
 
 ```sql
 SELECT id, title, type, price FROM books ORDER BY published_at DESC LIMIT 5;
@@ -100,9 +100,9 @@ SELECT id, title, type, price FROM books AS OF TIMESTAMP '2022-04-20 15:20:00' O
 -   `AS OF TIMESTAMP TIDB_BOUNDED_STALENESS('2016-10-08 16:45:26', '2016-10-08 16:45:29')` `2016-10-08 16:45:26`から`2016-10-08 16:45:29`までの最新のデータをクエリします。
 -   `AS OF TIMESTAMP TIDB_BOUNDED_STALENESS(NOW() -INTERVAL 20 SECOND, NOW())` 20 秒以内の最新データをクエリします。
 
-指定するタイムスタンプまたは間隔は、現在時刻より早すぎたり遅すぎたりすることはできないことに注意してください。さらに、秒精度のデフォルトは`NOW()`です。より高い精度を実現するには、ミリ秒の精度に`NOW(3)`使用するなど、パラメーターを追加できます。詳細については、 [<a href="https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_now">MySQL ドキュメント</a>](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_now)を参照してください。
+指定するタイムスタンプまたは間隔は、現在時刻より早すぎたり遅すぎたりすることはできないことに注意してください。さらに、秒精度のデフォルトは`NOW()`です。より高い精度を実現するには、ミリ秒の精度に`NOW(3)`使用するなど、パラメーターを追加できます。詳細については、 [MySQL ドキュメント](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_now)を参照してください。
 
-期限切れのデータは TiDB で[<a href="/garbage-collection-overview.md">ガベージコレクション</a>](/garbage-collection-overview.md)によってリサイクルされ、データは消去されるまで短期間保持されます。この期間を[<a href="/system-variables.md#tidb_gc_life_time-new-in-v50">GC ライフタイム (デフォルトは 10 分)</a>](/system-variables.md#tidb_gc_life_time-new-in-v50)と呼びます。 GC が開始されると、現在時刻から期間を引いた時間が**GC セーフ ポイント**として使用されます。 GC セーフ ポイントの前にデータを読み取ろうとすると、TiDB は次のエラーを報告します。
+期限切れのデータは TiDB で[GC ライフタイム (デフォルトは 10 分)](/system-variables.md#tidb_gc_life_time-new-in-v50)と呼びます。 GC が開始されると、現在時刻から期間を引いた時間が**GC セーフ ポイント**として使用されます。 GC セーフ ポイントの前にデータを読み取ろうとすると、TiDB は次のエラーを報告します。
 
 ```
 ERROR 9006 (HY000): GC life time is shorter than transaction duration...
@@ -494,6 +494,6 @@ public static class StaleReadHelper{
 
 ## 続きを読む {#read-more}
 
--   [<a href="/stale-read.md">ステイル読み取りの使用シナリオ</a>](/stale-read.md)
--   [<a href="/as-of-timestamp.md">`AS OF TIMESTAMP`句を使用した履歴データの読み取り</a>](/as-of-timestamp.md)
--   [<a href="/tidb-read-staleness.md">`tidb_read_staleness`システム変数を使用した履歴データの読み取り</a>](/tidb-read-staleness.md)
+-   [ステイル読み取りの使用シナリオ](/stale-read.md)
+-   [`AS OF TIMESTAMP`句を使用した履歴データの読み取り](/as-of-timestamp.md)
+-   [`tidb_read_staleness`システム変数を使用した履歴データの読み取り](/tidb-read-staleness.md)

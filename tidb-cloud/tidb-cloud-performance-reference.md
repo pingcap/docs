@@ -5,7 +5,7 @@ summary: Learn TiDB Cloud performance test results.
 
 # TiDB Cloudパフォーマンス リファレンス {#tidb-cloud-performance-reference}
 
-このドキュメントでは、いくつかの TiDB クラスター スケールの[<a href="https://www.tpc.org/tpcc/">TPC-C</a>](https://www.tpc.org/tpcc/)および[<a href="https://github.com/akopytov/sysbench">システムベンチ</a>](https://github.com/akopytov/sysbench)パフォーマンス テスト結果を提供します。これは、 [<a href="/tidb-cloud/size-your-cluster.md">クラスターのサイズを決定する</a>](/tidb-cloud/size-your-cluster.md)実行する際の参考として利用できます。
+このドキュメントでは、いくつかの TiDB クラスター スケールの[クラスターのサイズを決定する](/tidb-cloud/size-your-cluster.md)実行する際の参考として利用できます。
 
 ## 2 vCPU のパフォーマンス {#2-vcpu-performance}
 

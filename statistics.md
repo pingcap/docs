@@ -5,7 +5,7 @@ summary: Learn how the statistics collect table-level and column-level informati
 
 # 統計入門 {#introduction-to-statistics}
 
-TiDB は統計を使用して決定します[<a href="/choose-index.md">どのインデックスを選択するか</a>](/choose-index.md) 。
+TiDB は統計を使用して決定します[どのインデックスを選択するか](/choose-index.md) 。
 
 ## 統計のバージョン {#versions-of-statistics}
 
@@ -63,7 +63,7 @@ TiDB は統計を使用して決定します[<a href="/choose-index.md">どの�
 
 ![Equal-depth Histogram Example](/media/statistics-1.png)
 
-ヒストグラムバケット数の上限を決定するパラメータの詳細については、 [<a href="#manual-collection">マニュアルの収集</a>](#manual-collection)を参照してください。バケットの数が多いほど、ヒストグラムの精度は高くなります。ただし、精度を高めるとメモリリソースの使用量が犠牲になります。実際のシナリオに応じて、この数値を適切に調整できます。
+ヒストグラムバケット数の上限を決定するパラメータの詳細については、 [マニュアルの収集](#manual-collection)を参照してください。バケットの数が多いほど、ヒストグラムの精度は高くなります。ただし、精度を高めるとメモリリソースの使用量が犠牲になります。実際のシナリオに応じて、この数値を適切に調整できます。
 
 ## カウントミニスケッチ {#count-min-sketch}
 
@@ -71,8 +71,8 @@ Count-Min Sketch はハッシュ構造です。等価性クエリに`a = 1`ま�
 
 Count-Min Sketch はハッシュ構造であるため、ハッシュの衝突が発生する可能性があります。 `EXPLAIN`のステートメントで、同等のクエリの推定値が実際の値から大きく乖離している場合、大きい値と小さい値が一緒にハッシュ化されていると考えることができます。この場合、次のいずれかの方法でハッシュの衝突を回避できます。
 
--   `WITH NUM TOPN`パラメータを変更します。 TiDB は、高頻度 (上位 x) データを個別に保存し、他のデータは Count-Min Sketch に保存されます。したがって、より大きな値とより小さな値が一緒にハッシュされるのを防ぐために、 `WITH NUM TOPN`の値を増やすことができます。 TiDB では、デフォルト値は 20 です。最大値は 1024 です。このパラメータの詳細については、 [<a href="#full-collection">フルコレクション</a>](#full-collection)を参照してください。
--   2 つのパラメータ`WITH NUM CMSKETCH DEPTH`と`WITH NUM CMSKETCH WIDTH`を変更します。どちらもハッシュ バケットの数と衝突確率に影響します。実際のシナリオに応じて 2 つのパラメーターの値を適切に増やしてハッシュ衝突の可能性を減らすことができますが、その代わりに統計のメモリ使用量が増加します。 TiDB では、デフォルト値`WITH NUM CMSKETCH DEPTH`は 5、デフォルト値`WITH NUM CMSKETCH WIDTH`は 2048 です。2 つのパラメータの詳細については、 [<a href="#full-collection">フルコレクション</a>](#full-collection)を参照してください。
+-   `WITH NUM TOPN`パラメータを変更します。 TiDB は、高頻度 (上位 x) データを個別に保存し、他のデータは Count-Min Sketch に保存されます。したがって、より大きな値とより小さな値が一緒にハッシュされるのを防ぐために、 `WITH NUM TOPN`の値を増やすことができます。 TiDB では、デフォルト値は 20 です。最大値は 1024 です。このパラメータの詳細については、 [フルコレクション](#full-collection)を参照してください。
+-   2 つのパラメータ`WITH NUM CMSKETCH DEPTH`と`WITH NUM CMSKETCH WIDTH`を変更します。どちらもハッシュ バケットの数と衝突確率に影響します。実際のシナリオに応じて 2 つのパラメーターの値を適切に増やしてハッシュ衝突の可能性を減らすことができますが、その代わりに統計のメモリ使用量が増加します。 TiDB では、デフォルト値`WITH NUM CMSKETCH DEPTH`は 5、デフォルト値`WITH NUM CMSKETCH WIDTH`は 2048 です。2 つのパラメータの詳細については、 [フルコレクション](#full-collection)を参照してください。
 
 ## 上位 N の値 {#top-n-values}
 
@@ -125,13 +125,13 @@ Count-Min Sketch はハッシュ構造であるため、ハッシュの衝突が
 
 v5.3.0 より前では、TiDB はリザーバー サンプリング方式を使用して統計を収集します。 v5.3.0 以降、TiDB バージョン 2 統計では、デフォルトでベルヌーイ サンプリング法を使用して統計が収集されます。貯留層サンプリング方法を再利用するには、 `WITH NUM SAMPLES`ステートメントを使用します。
 
-現在のサンプリング レートは、適応アルゴリズムに基づいて計算されます。 [<a href="/sql-statements/sql-statement-show-stats-meta.md">`SHOW STATS_META`</a>](/sql-statements/sql-statement-show-stats-meta.md)を使用してテーブル内の行数を確認できる場合、この行数を使用して 100,000 行に対応するサンプリング レートを計算できます。この数値を確認できない場合は、 [<a href="/information-schema/information-schema-table-storage-stats.md">`TABLE_STORAGE_STATS`</a>](/information-schema/information-schema-table-storage-stats.md)表の`TABLE_KEYS`列を別の参照として使用して、サンプリング レートを計算できます。
+現在のサンプリング レートは、適応アルゴリズムに基づいて計算されます。 [`TABLE_STORAGE_STATS`](/information-schema/information-schema-table-storage-stats.md)表の`TABLE_KEYS`列を別の参照として使用して、サンプリング レートを計算できます。
 
 <CustomContent platform="tidb">
 
 > **ノート：**
 >
-> 通常、 `STATS_META`は`TABLE_KEYS`よりも信頼性が高くなります。ただし、 [<a href="https://docs.pingcap.com/tidb/stable/tidb-lightning-overview">TiDB Lightning</a>](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview)のような方法でデータをインポートした後、 `STATS_META`の結果は`0`になります。この状況に対処するには、 `STATS_META`の結果が`TABLE_KEYS`の結果よりはるかに小さい場合に、 `TABLE_KEYS`使用してサンプリング レートを計算します。
+> 通常、 `STATS_META`は`TABLE_KEYS`よりも信頼性が高くなります。ただし、 [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview)のような方法でデータをインポートした後、 `STATS_META`の結果は`0`になります。この状況に対処するには、 `STATS_META`の結果が`TABLE_KEYS`の結果よりはるかに小さい場合に、 `TABLE_KEYS`使用してサンプリング レートを計算します。
 
 </CustomContent>
 
@@ -139,7 +139,7 @@ v5.3.0 より前では、TiDB はリザーバー サンプリング方式を使�
 
 > **ノート：**
 >
-> 通常、 `STATS_META`は`TABLE_KEYS`よりも信頼性が高くなります。ただし、 TiDB Cloudコンソールを介してデータをインポートした後 ( [<a href="/tidb-cloud/import-sample-data.md">サンプルデータのインポート</a>](/tidb-cloud/import-sample-data.md)参照)、 `STATS_META`の結果は`0`になります。この状況に対処するには、 `STATS_META`の結果が`TABLE_KEYS`の結果よりはるかに小さい場合に、 `TABLE_KEYS`使用してサンプリング レートを計算します。
+> 通常、 `STATS_META`は`TABLE_KEYS`よりも信頼性が高くなります。ただし、 TiDB Cloudコンソールを介してデータをインポートした後 ( [サンプルデータのインポート](/tidb-cloud/import-sample-data.md)参照)、 `STATS_META`の結果は`0`になります。この状況に対処するには、 `STATS_META`の結果が`TABLE_KEYS`の結果よりはるかに小さい場合に、 `TABLE_KEYS`使用してサンプリング レートを計算します。
 
 </CustomContent>
 
@@ -173,11 +173,11 @@ v5.3.0 より前では、TiDB はリザーバー サンプリング方式を使�
     >
     > 現在、 `PREDICATE COLUMNS`に関する統計の収集は実験的機能です。本番環境で使用することはお勧めできません。
 
-    1.  TiDB が`PREDICATE COLUMNS`を収集できるようにするには、 [<a href="/system-variables.md#tidb_enable_column_tracking-new-in-v540">`tidb_enable_column_tracking`</a>](/system-variables.md#tidb_enable_column_tracking-new-in-v540)システム変数の値を`ON`に設定します。
+    1.  TiDB が`PREDICATE COLUMNS`を収集できるようにするには、 [`tidb_enable_column_tracking`](/system-variables.md#tidb_enable_column_tracking-new-in-v540)システム変数の値を`ON`に設定します。
 
         <CustomContent platform="tidb">
 
-        設定後、TiDB は 100 * [<a href="/tidb-configuration-file.md#stats-lease">`stats-lease`</a>](/tidb-configuration-file.md#stats-lease)ごとに`PREDICATE COLUMNS`情報を`mysql.column_stats_usage`システムテーブルに書き込みます。
+        設定後、TiDB は 100 * [`stats-lease`](/tidb-configuration-file.md#stats-lease)ごとに`PREDICATE COLUMNS`情報を`mysql.column_stats_usage`システムテーブルに書き込みます。
 
         </CustomContent>
 
@@ -210,7 +210,7 @@ v5.3.0 より前では、TiDB はリザーバー サンプリング方式を使�
     ANALYZE TABLE TableName ALL COLUMNS [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
     ```
 
-`ANALYZE`ステートメントの列構成 ( `COLUMNS ColumnNameList` 、 `PREDICATE COLUMNS` 、および`ALL COLUMNS`を含む) を保持したい場合は、 `tidb_persist_analyze_options`システム変数の値を`ON`に設定して[<a href="#persist-analyze-configurations">構成の永続性を分析する</a>](#persist-analyze-configurations)機能を有効にします。 ANALYZE 構成永続化機能を有効にした後、次の手順を実行します。
+`ANALYZE`ステートメントの列構成 ( `COLUMNS ColumnNameList` 、 `PREDICATE COLUMNS` 、および`ALL COLUMNS`を含む) を保持したい場合は、 `tidb_persist_analyze_options`システム変数の値を`ON`に設定して[構成の永続性を分析する](#persist-analyze-configurations)機能を有効にします。 ANALYZE 構成永続化機能を有効にした後、次の手順を実行します。
 
 -   TiDB が統計を自動的に収集する場合、または列構成を指定せずに`ANALYZE`ステートメントを実行して統計を手動で収集する場合、TiDB は統計収集のために以前に永続化された構成を引き続き使用します。
 -   列構成を指定して`ANALYZE`ステートメントを手動で複数回実行すると、TiDB は、最新の`ANALYZE`ステートメントで指定された新しい構成を使用して、以前に記録された永続的な構成を上書きします。
@@ -308,7 +308,7 @@ ANALYZE TABLE TableName INDEX [IndexNameList] [WITH NUM BUCKETS|TOPN|CMSKETCH DE
     ANALYZE TABLE TableName PARTITION PartitionNameList INDEX [IndexNameList] [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
     ```
 
--   テーブル内の一部のパーティションのうち[<a href="/statistics.md#collect-statistics-on-some-columns">いくつかの列の統計を収集する</a>](/statistics.md#collect-statistics-on-some-columns)だけが必要な場合は、次の構文を使用します。
+-   テーブル内の一部のパーティションのうち[いくつかの列の統計を収集する](/statistics.md#collect-statistics-on-some-columns)だけが必要な場合は、次の構文を使用します。
 
     > **警告：**
     >
@@ -322,7 +322,7 @@ ANALYZE TABLE TableName INDEX [IndexNameList] [WITH NUM BUCKETS|TOPN|CMSKETCH DE
 
 ##### 動的プルーニング モードでパーティション テーブルの統計を収集する {#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode}
 
-[<a href="/partitioned-table.md#dynamic-pruning-mode">動的プルーニングモード</a>](/partitioned-table.md#dynamic-pruning-mode)でパーティション化されたテーブルにアクセスすると、TiDB は GlobalStats と呼ばれるテーブル レベルの統計を収集します。現在、GlobalStats はすべてのパーティションの統計から集計されています。動的プルーニング モードでは、パーティションテーブルの統計の更新により、GlobalStats の更新がトリガーされる可能性があります。
+[動的プルーニングモード](/partitioned-table.md#dynamic-pruning-mode)でパーティション化されたテーブルにアクセスすると、TiDB は GlobalStats と呼ばれるテーブル レベルの統計を収集します。現在、GlobalStats はすべてのパーティションの統計から集計されています。動的プルーニング モードでは、パーティションテーブルの統計の更新により、GlobalStats の更新がトリガーされる可能性があります。
 
 > **ノート：**
 >
@@ -363,7 +363,7 @@ ANALYZE TABLE TableName INDEX [IndexNameList] [WITH NUM BUCKETS|TOPN|CMSKETCH DE
 
 <CustomContent platform="tidb">
 
-`INSERT` 、 `DELETE` 、または`UPDATE`ステートメントの場合、TiDB は行数と変更された行数を自動的に更新します。 TiDB はこの情報を定期的に保持し、更新サイクルは 20 * [<a href="/tidb-configuration-file.md#stats-lease">`stats-lease`</a>](/tidb-configuration-file.md#stats-lease)です。デフォルト値`stats-lease`は`3s`です。値を`0`に指定すると、TiDB は統計の自動更新を停止します。
+`INSERT` 、 `DELETE` 、または`UPDATE`ステートメントの場合、TiDB は行数と変更された行数を自動的に更新します。 TiDB はこの情報を定期的に保持し、更新サイクルは 20 * [`stats-lease`](/tidb-configuration-file.md#stats-lease)です。デフォルト値`stats-lease`は`3s`です。値を`0`に指定すると、TiDB は統計の自動更新を停止します。
 
 </CustomContent>
 
@@ -393,7 +393,7 @@ ANALYZE TABLE TableName INDEX [IndexNameList] [WITH NUM BUCKETS|TOPN|CMSKETCH DE
 
 #### 自動アップデートを無効にする {#disable-automatic-update}
 
-統計の自動更新が過剰なリソースを消費し、オンライン アプリケーションの操作に影響を与える場合は、 [<a href="/system-variables.md#tidb_enable_auto_analyze-new-in-v610">`tidb_enable_auto_analyze`</a>](/system-variables.md#tidb_enable_auto_analyze-new-in-v610)システム変数を使用して無効にすることができます。
+統計の自動更新が過剰なリソースを消費し、オンライン アプリケーションの操作に影響を与える場合は、 [`tidb_enable_auto_analyze`](/system-variables.md#tidb_enable_auto_analyze-new-in-v610)システム変数を使用して無効にすることができます。
 
 #### バックグラウンドの<code>ANALYZE</code>タスクを終了する {#terminate-background-code-analyze-code-tasks}
 
@@ -413,7 +413,7 @@ TiDB v6.0 以降、TiDB は、 `KILL`ステートメントを使用してバッ�
 
     <CustomContent platform="tidb">
 
-    -   [<a href="/tidb-configuration-file.md#enable-global-kill-new-in-v610">`enable-global-kill`</a>](/tidb-configuration-file.md#enable-global-kill-new-in-v610)が`true` (デフォルトでは`true` ) の場合、 `KILL TIDB ${id};`ステートメントを直接実行できます。9 は、前のステップ`ID`取得したバックグラウンド`ANALYZE`タスクの`${id}`です。
+    -   [`enable-global-kill`](/tidb-configuration-file.md#enable-global-kill-new-in-v610)が`true` (デフォルトでは`true` ) の場合、 `KILL TIDB ${id};`ステートメントを直接実行できます。9 は、前のステップ`ID`取得したバックグラウンド`ANALYZE`タスクの`${id}`です。
     -   `enable-global-kill`が`false`の場合、クライアントを使用してバックエンド`ANALYZE`タスクを実行している TiDB インスタンスに接続し、その後`KILL TIDB ${id};`ステートメントを実行する必要があります。クライアントを使用して別の TiDB インスタンスに接続する場合、またはクライアントと TiDB クラスターの間にプロキシがある場合、 `KILL`ステートメントはバックグラウンド`ANALYZE`タスクを終了できません。
 
     </CustomContent>
@@ -424,7 +424,7 @@ TiDB v6.0 以降、TiDB は、 `KILL`ステートメントを使用してバッ�
 
     </CustomContent>
 
-`KILL`ステートメントの詳細については、 [<a href="/sql-statements/sql-statement-kill.md">`KILL`</a>](/sql-statements/sql-statement-kill.md)を参照してください。
+`KILL`ステートメントの詳細については、 [`KILL`](/sql-statements/sql-statement-kill.md)を参照してください。
 
 ### <code>ANALYZE</code>同時実行性の制御 {#control-code-analyze-code-concurrency}
 
@@ -491,7 +491,7 @@ v5.4.0 以降、TiDB は一部の`ANALYZE`構成の永続化をサポートし�
 >
 > 現在、 `ANALYZE`メモリクォータは実験的機能であり、本番環境ではメモリ統計が不正確になる可能性があります。
 
-TiDB v6.1.0 以降、システム変数[<a href="/system-variables.md#tidb_mem_quota_analyze-new-in-v610">`tidb_mem_quota_analyze`</a>](/system-variables.md#tidb_mem_quota_analyze-new-in-v610)を使用して、TiDB で統計を収集するためのメモリクォータを制御できます。
+TiDB v6.1.0 以降、システム変数[`tidb_mem_quota_analyze`](/system-variables.md#tidb_mem_quota_analyze-new-in-v610)を使用して、TiDB で統計を収集するためのメモリクォータを制御できます。
 
 適切な値`tidb_mem_quota_analyze`設定するには、クラスターのデータ サイズを考慮してください。デフォルトのサンプリング レートを使用する場合、主に考慮すべき点は、列の数、列値のサイズ、TiDB のメモリ構成です。最大値と最小値を構成するときは、次の提案を考慮してください。
 
@@ -533,9 +533,9 @@ TiDB v6.1.0 以降、 `SHOW ANALYZE STATUS`ステートメントはクラスタ�
 
 `SHOW ANALYZE STATUS`最新のタスク レコードのみを表示します。 TiDB v6.1.0 以降、システム テーブル`mysql.analyze_jobs`を通じて過去 7 日間の履歴タスクを表示できるようになりました。
 
-[<a href="/system-variables.md#tidb_mem_quota_analyze-new-in-v610">`tidb_mem_quota_analyze`</a>](/system-variables.md#tidb_mem_quota_analyze-new-in-v610)が設定され、TiDB バックグラウンドで実行されている自動`ANALYZE`タスクがこのしきい値を超えるメモリを使用すると、タスクは再試行されます。 `SHOW ANALYZE STATUS`ステートメントの出力で、失敗したタスクと再試行されたタスクを確認できます。
+[`tidb_mem_quota_analyze`](/system-variables.md#tidb_mem_quota_analyze-new-in-v610)が設定され、TiDB バックグラウンドで実行されている自動`ANALYZE`タスクがこのしきい値を超えるメモリを使用すると、タスクは再試行されます。 `SHOW ANALYZE STATUS`ステートメントの出力で、失敗したタスクと再試行されたタスクを確認できます。
 
-[<a href="/system-variables.md#tidb_max_auto_analyze_time-new-in-v610">`tidb_max_auto_analyze_time`</a>](/system-variables.md#tidb_max_auto_analyze_time-new-in-v610)が 0 より大きく、TiDB バックグラウンドで実行されている自動`ANALYZE`タスクにこのしきい値よりも時間がかかる場合、タスクは終了します。
+[`tidb_max_auto_analyze_time`](/system-variables.md#tidb_max_auto_analyze_time-new-in-v610)が 0 より大きく、TiDB バックグラウンドで実行されている自動`ANALYZE`タスクにこのしきい値よりも時間がかかる場合、タスクは終了します。
 
 ```sql
 mysql> SHOW ANALYZE STATUS [ShowLikeOrWhere];
@@ -736,23 +736,23 @@ DROP STATS TableName GLOBAL;
 
 v5.4.0 以降、TiDB には統計の同期ロード機能が導入されました。この機能により、SQL ステートメントの実行時に TiDB が大きなサイズの統計 (ヒストグラム、TopN、Count-Min Sketch 統計など) をメモリに同期してロードできるようになり、SQL 最適化のための統計の完全性が向上します。
 
-この機能を有効にするには、 [<a href="/system-variables.md#tidb_stats_load_sync_wait-new-in-v540">`tidb_stats_load_sync_wait`</a>](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540)システム変数の値を、SQL 最適化が完全な列統計を同期的にロードするまで待機できるタイムアウト (ミリ秒単位) に設定します。この変数のデフォルト値は`100`で、この機能が有効であることを示します。
+この機能を有効にするには、 [`tidb_stats_load_sync_wait`](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540)システム変数の値を、SQL 最適化が完全な列統計を同期的にロードするまで待機できるタイムアウト (ミリ秒単位) に設定します。この変数のデフォルト値は`100`で、この機能が有効であることを示します。
 
 <CustomContent platform="tidb">
 
 統計の同期読み込み機能を有効にした後、次のように機能をさらに構成できます。
 
--   SQL 最適化の待機時間がタイムアウトに達したときの TiDB の動作を制御するには、 [<a href="/system-variables.md#tidb_stats_load_pseudo_timeout-new-in-v540">`tidb_stats_load_pseudo_timeout`</a>](/system-variables.md#tidb_stats_load_pseudo_timeout-new-in-v540)システム変数の値を変更します。この変数のデフォルト値は`ON` 、タイムアウト後、SQL 最適化プロセスがどの列にもヒストグラム、TopN、または CMSketch 統計を使用しないことを示します。この変数が`OFF`に設定されている場合、タイムアウト後に SQL の実行は失敗します。
--   統計の同期ロード機能が同時に処理できる列の最大数を指定するには、TiDB 構成ファイルの[<a href="/tidb-configuration-file.md#stats-load-concurrency-new-in-v540">`stats-load-concurrency`</a>](/tidb-configuration-file.md#stats-load-concurrency-new-in-v540)オプションの値を変更します。デフォルト値は`5`です。
--   同期ロード統計機能がキャッシュできる列リクエストの最大数を指定するには、TiDB 構成ファイルの[<a href="/tidb-configuration-file.md#stats-load-queue-size-new-in-v540">`stats-load-queue-size`</a>](/tidb-configuration-file.md#stats-load-queue-size-new-in-v540)オプションの値を変更します。デフォルト値は`1000`です。
+-   SQL 最適化の待機時間がタイムアウトに達したときの TiDB の動作を制御するには、 [`tidb_stats_load_pseudo_timeout`](/system-variables.md#tidb_stats_load_pseudo_timeout-new-in-v540)システム変数の値を変更します。この変数のデフォルト値は`ON` 、タイムアウト後、SQL 最適化プロセスがどの列にもヒストグラム、TopN、または CMSketch 統計を使用しないことを示します。この変数が`OFF`に設定されている場合、タイムアウト後に SQL の実行は失敗します。
+-   統計の同期ロード機能が同時に処理できる列の最大数を指定するには、TiDB 構成ファイルの[`stats-load-concurrency`](/tidb-configuration-file.md#stats-load-concurrency-new-in-v540)オプションの値を変更します。デフォルト値は`5`です。
+-   同期ロード統計機能がキャッシュできる列リクエストの最大数を指定するには、TiDB 構成ファイルの[`stats-load-queue-size`](/tidb-configuration-file.md#stats-load-queue-size-new-in-v540)オプションの値を変更します。デフォルト値は`1000`です。
 
-TiDB の起動中、初期統計が完全にロードされる前に実行される SQL ステートメントには最適ではない実行プランが含まれる可能性があり、そのためパフォーマンスの問題が発生します。このような問題を回避するために、TiDB v7.1.0 では構成パラメーター[<a href="/tidb-configuration-file.md#force-init-stats-new-in-v710">`force-init-stats`</a>](/tidb-configuration-file.md#force-init-stats-new-in-v710)が導入されています。このオプションを使用すると、起動時に統計の初期化が完了した後にのみ TiDB がサービスを提供するかどうかを制御できます。このパラメータはデフォルトでは無効になっています。
+TiDB の起動中、初期統計が完全にロードされる前に実行される SQL ステートメントには最適ではない実行プランが含まれる可能性があり、そのためパフォーマンスの問題が発生します。このような問題を回避するために、TiDB v7.1.0 では構成パラメーター[`force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v710)が導入されています。このオプションを使用すると、起動時に統計の初期化が完了した後にのみ TiDB がサービスを提供するかどうかを制御できます。このパラメータはデフォルトでは無効になっています。
 
 > **警告：**
 >
-> 軽量統計の初期化は実験的機能です。本番環境で使用することはお勧めできません。この機能は予告なく変更または削除される場合があります。バグを見つけた場合は、GitHub で[<a href="https://github.com/pingcap/tidb/issues">問題</a>](https://github.com/pingcap/tidb/issues)を報告できます。
+> 軽量統計の初期化は実験的機能です。本番環境で使用することはお勧めできません。この機能は予告なく変更または削除される場合があります。バグを見つけた場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告できます。
 
-v7.1.0 以降、TiDB では軽量統計初期化のために[<a href="/tidb-configuration-file.md#lite-init-stats-new-in-v710">`lite-init-stats`</a>](/tidb-configuration-file.md#lite-init-stats-new-in-v710)が導入されています。
+v7.1.0 以降、TiDB では軽量統計初期化のために[`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710)が導入されています。
 
 -   `lite-init-stats`の値が`true`の場合、統計の初期化では、インデックスまたは列のヒストグラム、TopN、または Count-Min スケッチがメモリにロードされません。
 -   `lite-init-stats`の値が`false`の場合、統計の初期化では、インデックスと主キーのヒストグラム、TopN、および Count-Min スケッチがメモリにロードされますが、非主キー列のヒストグラム、TopN、または Count-Min スケッチはメモリにロードされません。オプティマイザーが特定のインデックスまたは列のヒストグラム、TopN、および Count-Min スケッチを必要とする場合、必要な統計が同期または非同期でメモリにロードされます。
@@ -896,11 +896,11 @@ mysql> show warnings;
 
 <CustomContent platform="tidb">
 
--   [<a href="/sql-statements/sql-statement-load-stats.md">負荷統計</a>](/sql-statements/sql-statement-load-stats.md)
--   [<a href="/sql-statements/sql-statement-drop-stats.md">統計を削除</a>](/sql-statements/sql-statement-drop-stats.md)
+-   [負荷統計](/sql-statements/sql-statement-load-stats.md)
+-   [統計を削除](/sql-statements/sql-statement-drop-stats.md)
 
 </CustomContent>
 
--   [<a href="/sql-statements/sql-statement-lock-stats.md">ロック統計</a>](/sql-statements/sql-statement-lock-stats.md)
--   [<a href="/sql-statements/sql-statement-unlock-stats.md">ステータスのロックを解除する</a>](/sql-statements/sql-statement-unlock-stats.md)
--   [<a href="/sql-statements/sql-statement-show-stats-locked.md">STATS_LOCKEDを表示</a>](/sql-statements/sql-statement-show-stats-locked.md)
+-   [ロック統計](/sql-statements/sql-statement-lock-stats.md)
+-   [ステータスのロックを解除する](/sql-statements/sql-statement-unlock-stats.md)
+-   [STATS_LOCKEDを表示](/sql-statements/sql-statement-show-stats-locked.md)

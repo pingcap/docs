@@ -5,7 +5,7 @@ summary: Learn how to enable SSO to sign into TiDB Dashboard.
 
 # TiDB ダッシュボードの SSO を構成する {#configure-sso-for-tidb-dashboard}
 
-TiDB ダッシュボードは、 [<a href="https://openid.net/connect/">OIDC</a>](https://openid.net/connect/)ベースのシングル サインオン (SSO) をサポートしています。 TiDB ダッシュボードの SSO 機能を有効にすると、構成された SSO サービスがサインイン認証に使用され、SQL ユーザー パスワードを入力せずに TiDB ダッシュボードにアクセスできるようになります。
+TiDB ダッシュボードは、 [OIDC](https://openid.net/connect/)ベースのシングル サインオン (SSO) をサポートしています。 TiDB ダッシュボードの SSO 機能を有効にすると、構成された SSO サービスがサインイン認証に使用され、SQL ユーザー パスワードを入力せずに TiDB ダッシュボードにアクセスできるようになります。
 
 ## OIDC SSO の構成 {#configure-oidc-sso}
 
@@ -90,7 +90,7 @@ TiDB ダッシュボードに SSO が設定されたら、次の手順を実行�
 
 ## 例 1: TiDB ダッシュボードの SSO サインインに Okta を使用する {#example-1-use-okta-for-tidb-dashboard-sso-sign-in}
 
-[<a href="https://www.okta.com/">オクタ</a>](https://www.okta.com/)は OIDC SSO アイデンティティ サービスであり、TiDB ダッシュボードの SSO 機能と互換性があります。以下の手順では、Okta を TiDB ダッシュボード SSO プロバイダーとして使用できるように Okta と TiDB ダッシュボードを構成する方法を示します。
+[オクタ](https://www.okta.com/)は OIDC SSO アイデンティティ サービスであり、TiDB ダッシュボードの SSO 機能と互換性があります。以下の手順では、Okta を TiDB ダッシュボード SSO プロバイダーとして使用できるように Okta と TiDB ダッシュボードを構成する方法を示します。
 
 ### ステップ 1: Okta を構成する {#step-1-configure-okta}
 
@@ -152,7 +152,7 @@ TiDB ダッシュボードに SSO が設定されたら、次の手順を実行�
 
 ## 例 2: TiDB ダッシュボードの SSO サインインに Auth0 を使用する {#example-2-use-auth0-for-tidb-dashboard-sso-sign-in}
 
-Okta と同様に、 [<a href="https://auth0.com/">認証0</a>](https://auth0.com/)も OIDC SSO ID サービスを提供します。次の手順では、Auth0 を TiDB ダッシュボード SSO プロバイダーとして使用できるように、Auth0 と TiDB ダッシュボードを構成する方法について説明します。
+Okta と同様に、 [認証0](https://auth0.com/)も OIDC SSO ID サービスを提供します。次の手順では、Auth0 を TiDB ダッシュボード SSO プロバイダーとして使用できるように、Auth0 と TiDB ダッシュボードを構成する方法について説明します。
 
 ### ステップ 1: Auth0 を構成する {#step-1-configure-auth0}
 
@@ -202,7 +202,7 @@ Okta と同様に、 [<a href="https://auth0.com/">認証0</a>](https://auth0.co
 
 ## 例 3: TiDB ダッシュボードの SSO サインインに Casdoor を使用する {#example-3-use-casdoor-for-tidb-dashboard-sso-sign-in}
 
-[<a href="https://casdoor.org/">カスドール</a>](https://casdoor.org/)は、独自のホストに展開できるオープンソースの SSO プラットフォームです。 TiDB ダッシュボードの SSO 機能と互換性があります。次の手順では、Casdoor を TiDB ダッシュボード SSO プロバイダーとして使用できるように Casdoor と TiDB ダッシュボードを構成する方法について説明します。
+[カスドール](https://casdoor.org/)は、独自のホストに展開できるオープンソースの SSO プラットフォームです。 TiDB ダッシュボードの SSO 機能と互換性があります。次の手順では、Casdoor を TiDB ダッシュボード SSO プロバイダーとして使用できるように Casdoor と TiDB ダッシュボードを構成する方法について説明します。
 
 ### ステップ 1: Casdoor を構成する {#step-1-configure-casdoor}
 

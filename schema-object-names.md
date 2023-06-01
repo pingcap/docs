@@ -76,7 +76,7 @@ SELECT 1 AS `identifier`, 2 AS 'string';
 1 row in set (0.00 sec)
 ```
 
-詳細については、 [<a href="https://dev.mysql.com/doc/refman/5.7/en/identifiers.html">MySQL スキーマ オブジェクト名</a>](https://dev.mysql.com/doc/refman/5.7/en/identifiers.html)を参照してください。
+詳細については、 [MySQL スキーマ オブジェクト名](https://dev.mysql.com/doc/refman/5.7/en/identifiers.html)を参照してください。
 
 ## 識別子修飾子 {#identifier-qualifiers}
 
@@ -112,4 +112,4 @@ CREATE TABLE test.t (i int);
 `table_name.col_name`
 ```
 
-詳細については、 [<a href="https://dev.mysql.com/doc/refman/5.7/en/identifier-qualifiers.html">MySQL 識別子修飾子</a>](https://dev.mysql.com/doc/refman/5.7/en/identifier-qualifiers.html)を参照してください。
+詳細については、 [MySQL 識別子修飾子](https://dev.mysql.com/doc/refman/5.7/en/identifier-qualifiers.html)を参照してください。

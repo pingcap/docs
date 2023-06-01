@@ -64,4 +64,4 @@ JSON 形式のトレースは、TiDB ステータス ポート経由でアクセ
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-explain-analyze.md">EXPLAINの説明</a>](/sql-statements/sql-statement-explain-analyze.md)
+-   [EXPLAINの説明](/sql-statements/sql-statement-explain-analyze.md)

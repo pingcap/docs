@@ -5,21 +5,21 @@ summary: Learn transactions in TiDB.
 
 # 取引 {#transactions}
 
-TiDB は、 [<a href="/pessimistic-transaction.md">悲観的</a>](/pessimistic-transaction.md)または[<a href="/optimistic-transaction.md">楽観的</a>](/optimistic-transaction.md)トランザクション モードを使用した分散トランザクションをサポートします。 TiDB 3.0.8 以降、TiDB はデフォルトで悲観的トランザクション モードを使用します。
+TiDB は、 [楽観的](/optimistic-transaction.md)トランザクション モードを使用した分散トランザクションをサポートします。 TiDB 3.0.8 以降、TiDB はデフォルトで悲観的トランザクション モードを使用します。
 
 このドキュメントでは、一般的に使用されるトランザクション関連のステートメント、明示的および暗黙的なトランザクション、分離レベル、制約の遅延チェック、およびトランザクション サイズについて紹介します。
 
-共通変数には、 [<a href="#autocommit">`autocommit`</a>](#autocommit) 、 [<a href="/system-variables.md#tidb_disable_txn_auto_retry">`tidb_disable_txn_auto_retry`</a>](/system-variables.md#tidb_disable_txn_auto_retry) 、 [<a href="/system-variables.md#tidb_retry_limit">`tidb_retry_limit`</a>](/system-variables.md#tidb_retry_limit) 、および[<a href="/system-variables.md#tidb_txn_mode">`tidb_txn_mode`</a>](/system-variables.md#tidb_txn_mode)が含まれます。
+共通変数には、 [`tidb_txn_mode`](/system-variables.md#tidb_txn_mode)が含まれます。
 
 > **ノート：**
 >
-> 変数[<a href="/system-variables.md#tidb_disable_txn_auto_retry">`tidb_disable_txn_auto_retry`</a>](/system-variables.md#tidb_disable_txn_auto_retry)と[<a href="/system-variables.md#tidb_retry_limit">`tidb_retry_limit`</a>](/system-variables.md#tidb_retry_limit)は楽観的トランザクションにのみ適用され、悲観的トランザクションには適用されません。
+> 変数[`tidb_retry_limit`](/system-variables.md#tidb_retry_limit)は楽観的トランザクションにのみ適用され、悲観的トランザクションには適用されません。
 
 ## 一般的なステートメント {#common-statements}
 
 ### トランザクションの開始 {#starting-a-transaction}
 
-ステートメント[<a href="/sql-statements/sql-statement-begin.md">`BEGIN`</a>](/sql-statements/sql-statement-begin.md)と[<a href="/sql-statements/sql-statement-start-transaction.md">`START TRANSACTION`</a>](/sql-statements/sql-statement-start-transaction.md)は、新しいトランザクションを明示的に開始するために同じ意味で使用できます。
+ステートメント[`START TRANSACTION`](/sql-statements/sql-statement-start-transaction.md)は、新しいトランザクションを明示的に開始するために同じ意味で使用できます。
 
 構文：
 
@@ -55,7 +55,7 @@ START TRANSACTION WITH CAUSAL CONSISTENCY ONLY;
 
 ### トランザクションのコミット {#committing-a-transaction}
 
-ステートメント[<a href="/sql-statements/sql-statement-commit.md">`COMMIT`</a>](/sql-statements/sql-statement-commit.md)は、現在のトランザクションで行われたすべての変更を適用するように TiDB に指示します。
+ステートメント[`COMMIT`](/sql-statements/sql-statement-commit.md)は、現在のトランザクションで行われたすべての変更を適用するように TiDB に指示します。
 
 構文：
 
@@ -67,11 +67,11 @@ COMMIT;
 
 > **ヒント：**
 >
-> [<a href="/optimistic-transaction.md">楽観的取引</a>](/optimistic-transaction.md)を有効にする前に、 `COMMIT`ステートメントがエラーを返す可能性があることをアプリケーションが正しく処理していることを確認してください。アプリケーションがこれをどのように処理するかわからない場合は、代わりにデフォルトの[<a href="/pessimistic-transaction.md">悲観的取引</a>](/pessimistic-transaction.md)を使用することをお勧めします。
+> [悲観的取引](/pessimistic-transaction.md)を使用することをお勧めします。
 
 ### トランザクションのロールバック {#rolling-back-a-transaction}
 
-ステートメント[<a href="/sql-statements/sql-statement-rollback.md">`ROLLBACK`</a>](/sql-statements/sql-statement-rollback.md)は、現在のトランザクションのすべての変更をロールバックしてキャンセルします。
+ステートメント[`ROLLBACK`](/sql-statements/sql-statement-rollback.md)は、現在のトランザクションのすべての変更をロールバックしてキャンセルします。
 
 構文：
 
@@ -157,7 +157,7 @@ mysql> SELECT * FROM t2;
 Empty set (0.00 sec)
 ```
 
-[<a href="/system-variables.md#autocommit">`autocommit`</a>](/system-variables.md#autocommit)グローバルまたはセッションベースのシステム変数[<a href="/sql-statements/sql-statement-set-variable.md">変更可能</a>](/sql-statements/sql-statement-set-variable.md) 。
+[変更可能](/sql-statements/sql-statement-set-variable.md) 。
 
 例えば：
 
@@ -177,7 +177,7 @@ SET GLOBAL autocommit = 0;
 
 > **ノート：**
 >
-> 一部のステートメントは暗黙的にコミットされます。たとえば、 `[BEGIN|START TRANSACTION]`を実行すると、最後のトランザクションが暗黙的にコミットされ、新しいトランザクションが開始されます。この動作は、MySQL との互換性のために必要です。詳細については[<a href="https://dev.mysql.com/doc/refman/8.0/en/implicit-commit.html">暗黙的なコミット</a>](https://dev.mysql.com/doc/refman/8.0/en/implicit-commit.html)を参照してください。
+> 一部のステートメントは暗黙的にコミットされます。たとえば、 `[BEGIN|START TRANSACTION]`を実行すると、最後のトランザクションが暗黙的にコミットされ、新しいトランザクションが開始されます。この動作は、MySQL との互換性のために必要です。詳細については[暗黙的なコミット](https://dev.mysql.com/doc/refman/8.0/en/implicit-commit.html)を参照してください。
 
 TiDB は、明示的なトランザクション ( `[BEGIN|START TRANSACTION]`と`COMMIT`を使用してトランザクションの開始と終了を定義します) と暗黙的なトランザクション ( `SET autocommit = 1` ) をサポートします。
 
@@ -187,7 +187,7 @@ DDL ステートメントの場合、トランザクションは自動的にコ�
 
 ## 制約の遅延チェック {#lazy-check-of-constraints}
 
-デフォルトでは、楽観的トランザクションは、DML ステートメントの実行時に[<a href="/constraints.md#primary-key">主キー</a>](/constraints.md#primary-key)または[<a href="/constraints.md#unique-key">固有の制約</a>](/constraints.md#unique-key)をチェックしません。これらのチェックは、代わりにトランザクション`COMMIT`で実行されます。
+デフォルトでは、楽観的トランザクションは、DML ステートメントの実行時に[固有の制約](/constraints.md#unique-key)をチェックしません。これらのチェックは、代わりにトランザクション`COMMIT`で実行されます。
 
 例えば：
 
@@ -230,7 +230,7 @@ mysql> SELECT * FROM t1; -- MySQL returns 1 2; TiDB returns 1.
 1 row in set (0.01 sec)
 ```
 
-遅延チェックの最適化は、制約チェックをバッチ処理し、ネットワーク通信を削減することでパフォーマンスを向上させます。この動作は[<a href="/system-variables.md#tidb_constraint_check_in_place">`tidb_constraint_check_in_place=ON`</a>](/system-variables.md#tidb_constraint_check_in_place)に設定することで無効にできます。
+遅延チェックの最適化は、制約チェックをバッチ処理し、ネットワーク通信を削減することでパフォーマンスを向上させます。この動作は[`tidb_constraint_check_in_place=ON`](/system-variables.md#tidb_constraint_check_in_place)に設定することで無効にできます。
 
 > **ノート：**
 >
@@ -306,7 +306,7 @@ TiDB は以前、単一トランザクションのキーと値のペアの総数
 
 > **ノート：**
 >
-> 因果的一貫性のあるトランザクションは、非同期コミット機能と 1 フェーズ コミット機能が有効になっている場合にのみ有効になります。 2つの機能の詳細については、 [<a href="/system-variables.md#tidb_enable_async_commit-new-in-v50">`tidb_enable_async_commit`</a>](/system-variables.md#tidb_enable_async_commit-new-in-v50)と[<a href="/system-variables.md#tidb_enable_1pc-new-in-v50">`tidb_enable_1pc`</a>](/system-variables.md#tidb_enable_1pc-new-in-v50)を参照してください。
+> 因果的一貫性のあるトランザクションは、非同期コミット機能と 1 フェーズ コミット機能が有効になっている場合にのみ有効になります。 2つの機能の詳細については、 [`tidb_enable_1pc`](/system-variables.md#tidb_enable_1pc-new-in-v50)を参照してください。
 
 TiDB は、トランザクションの因果関係の一貫性の有効化をサポートしています。因果的一貫性のあるトランザクションは、コミット時に PD からタイムスタンプを取得する必要がなく、コミットのレイテンシーが短くなります。因果関係の一貫性を有効にする構文は次のとおりです。
 
@@ -320,9 +320,9 @@ START TRANSACTION WITH CAUSAL CONSISTENCY ONLY;
 
 因果的整合性が有効になっている 2 つのトランザクションには、次の特性があります。
 
--   [<a href="#transactions-with-potential-causal-relationship-have-the-consistent-logical-order-and-physical-commit-order">潜在的な因果関係のあるトランザクションには、一貫した論理順序と物理コミット順序があります。</a>](#transactions-with-potential-causal-relationship-have-the-consistent-logical-order-and-physical-commit-order)
--   [<a href="#transactions-with-no-causal-relationship-do-not-guarantee-consistent-logical-order-and-physical-commit-order">因果関係のないトランザクションは、一貫した論理順序と物理コミット順序を保証しません。</a>](#transactions-with-no-causal-relationship-do-not-guarantee-consistent-logical-order-and-physical-commit-order)
--   [<a href="#reads-without-lock-do-not-create-causal-relationship">ロックなしの読み取りでは因果関係が作成されません</a>](#reads-without-lock-do-not-create-causal-relationship)
+-   [潜在的な因果関係のあるトランザクションには、一貫した論理順序と物理コミット順序があります。](#transactions-with-potential-causal-relationship-have-the-consistent-logical-order-and-physical-commit-order)
+-   [因果関係のないトランザクションは、一貫した論理順序と物理コミット順序を保証しません。](#transactions-with-no-causal-relationship-do-not-guarantee-consistent-logical-order-and-physical-commit-order)
+-   [ロックなしの読み取りでは因果関係が作成されません](#reads-without-lock-do-not-create-causal-relationship)
 
 ### 潜在的な因果関係のあるトランザクションには、一貫した論理順序と物理コミット順序があります。 {#transactions-with-potential-causal-relationship-have-the-consistent-logical-order-and-physical-commit-order}
 

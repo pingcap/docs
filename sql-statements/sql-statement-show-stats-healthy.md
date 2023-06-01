@@ -7,7 +7,7 @@ summary: An overview of the usage of SHOW STATS_HEALTHY for TiDB database.
 
 `SHOW STATS_HEALTHY`ステートメントは、統計がどの程度正確であると考えられるかの推定を示します。健全性の割合が低いテーブルでは、最適ではないクエリ実行プランが生成される可能性があります。
 
-`ANALYZE` table コマンドを実行すると、テーブルの健全性を改善できます。 `ANALYZE`ヘルスが[<a href="/system-variables.md#tidb_auto_analyze_ratio">`tidb_auto_analyze_ratio`</a>](/system-variables.md#tidb_auto_analyze_ratio)しきい値を下回ると自動的に実行されます。
+`ANALYZE` table コマンドを実行すると、テーブルの健全性を改善できます。 `ANALYZE`ヘルスが[`tidb_auto_analyze_ratio`](/system-variables.md#tidb_auto_analyze_ratio)しきい値を下回ると自動的に実行されます。
 
 ## あらすじ {#synopsis}
 
@@ -85,5 +85,5 @@ mysql> SHOW STATS_HEALTHY;
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-analyze-table.md">分析する</a>](/sql-statements/sql-statement-analyze-table.md)
--   [<a href="/statistics.md">統計入門</a>](/statistics.md)
+-   [分析する](/sql-statements/sql-statement-analyze-table.md)
+-   [統計入門](/statistics.md)

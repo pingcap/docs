@@ -158,11 +158,11 @@ SELECT USER, HOST, USER_ATTRIBUTES FROM MYSQL.USER WHERE USER='newuser7';
 
 <CustomContent platform="tidb">
 
--   [<a href="/security-compatibility-with-mysql.md">MySQL とのSecurity互換性</a>](/security-compatibility-with-mysql.md)
--   [<a href="/privilege-management.md">権限管理</a>](/privilege-management.md)
+-   [MySQL とのSecurity互換性](/security-compatibility-with-mysql.md)
+-   [権限管理](/privilege-management.md)
 
 </CustomContent>
 
--   [<a href="/sql-statements/sql-statement-drop-user.md">ユーザーを削除する</a>](/sql-statements/sql-statement-drop-user.md)
--   [<a href="/sql-statements/sql-statement-show-create-user.md">ユーザーの作成を表示</a>](/sql-statements/sql-statement-show-create-user.md)
--   [<a href="/sql-statements/sql-statement-alter-user.md">ユーザーの変更</a>](/sql-statements/sql-statement-alter-user.md)
+-   [ユーザーを削除する](/sql-statements/sql-statement-drop-user.md)
+-   [ユーザーの作成を表示](/sql-statements/sql-statement-show-create-user.md)
+-   [ユーザーの変更](/sql-statements/sql-statement-alter-user.md)

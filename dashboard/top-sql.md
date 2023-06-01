@@ -39,23 +39,23 @@ Top SQL機能はまだ初期段階にあり、継続的に強化されていま�
 
     ![Top SQL](/media/dashboard/top-sql-access.png)
 
--   ブラウザで[<a href="http://127.0.0.1:2379/dashboard/#/topsql">http://127.0.0.1:2379/dashboard/#/topsql</a>](http://127.0.0.1:2379/dashboard/#/topsql)にアクセスしてください。 `127.0.0.1:2379`を実際の PD インスタンスのアドレスとポートに置き換えます。
+-   ブラウザで[http://127.0.0.1:2379/dashboard/#/topsql](http://127.0.0.1:2379/dashboard/#/topsql)にアクセスしてください。 `127.0.0.1:2379`を実際の PD インスタンスのアドレスとポートに置き換えます。
 
 ## Top SQLを有効にする {#enable-top-sql}
 
 > **ノート：**
 >
-> Top SQLを使用するには、最新バージョンのTiUP (v1.9.0 以降) またはTiDB Operator (v1.3.0 以降) を使用してクラスターをデプロイまたはアップグレードする必要があります。クラスターが以前のバージョンのTiUPまたはTiDB Operatorを使用してアップグレードされた場合、手順については[<a href="/dashboard/dashboard-faq.md#a-required-component-ngmonitoring-is-not-started-error-is-shown">FAQ</a>](/dashboard/dashboard-faq.md#a-required-component-ngmonitoring-is-not-started-error-is-shown)を参照してください。
+> Top SQLを使用するには、最新バージョンのTiUP (v1.9.0 以降) またはTiDB Operator (v1.3.0 以降) を使用してクラスターをデプロイまたはアップグレードする必要があります。クラスターが以前のバージョンのTiUPまたはTiDB Operatorを使用してアップグレードされた場合、手順については[FAQ](/dashboard/dashboard-faq.md#a-required-component-ngmonitoring-is-not-started-error-is-shown)を参照してください。
 
 Top SQLは、有効にするとクラスターのパフォーマンスにわずかな影響 (平均 3% 以内) を与えるため、デフォルトでは有効になりません。次の手順でTop SQL を有効にできます。
 
-1.  [<a href="#access-the-page">Top SQLページ</a>](#access-the-page)にアクセスしてください。
+1.  [Top SQLページ](#access-the-page)にアクセスしてください。
 2.  **[設定を開く]**をクリックします。 **[設定]**領域の右側で、 **[機能を有効にする**] をオンにします。
 3.  **「保存」**をクリックします。
 
 機能を有効にした後、 Top SQL がデータをロードするまで最大 1 分間待ちます。次に、CPU 負荷の詳細を確認できます。
 
-UI に加えて、TiDB システム変数[<a href="/system-variables.md#tidb_enable_top_sql-new-in-v540">`tidb_enable_top_sql`</a>](/system-variables.md#tidb_enable_top_sql-new-in-v540)を設定してTop SQL機能を有効にすることもできます。
+UI に加えて、TiDB システム変数[`tidb_enable_top_sql`](/system-variables.md#tidb_enable_top_sql-new-in-v540)を設定してTop SQL機能を有効にすることもできます。
 
 {{< copyable "" >}}
 
@@ -67,7 +67,7 @@ SET GLOBAL tidb_enable_top_sql = 1;
 
 以下は、 Top SQL を使用するための一般的な手順です。
 
-1.  [<a href="#access-the-page">Top SQLページ</a>](#access-the-page)にアクセスしてください。
+1.  [Top SQLページ](#access-the-page)にアクセスしてください。
 
 2.  負荷を観察したい特定の TiDB または TiKV インスタンスを選択します。
 
@@ -85,7 +85,7 @@ SET GLOBAL tidb_enable_top_sql = 1;
 
     ![Details](/media/dashboard/top-sql-details.png)
 
-5.  これらの最初の手がかりに基づいて、 [<a href="/dashboard/dashboard-statement-list.md">SQL文</a>](/dashboard/dashboard-statement-list.md)または[<a href="/dashboard/dashboard-slow-query.md">遅いクエリ</a>](/dashboard/dashboard-slow-query.md)ページをさらに調査して、CPU 消費量の増加や SQL ステートメントの大規模なデータ スキャンの根本原因を見つけることができます。
+5.  これらの最初の手がかりに基づいて、 [遅いクエリ](/dashboard/dashboard-slow-query.md)ページをさらに調査して、CPU 消費量の増加や SQL ステートメントの大規模なデータ スキャンの根本原因を見つけることができます。
 
 さらに、次のようにTop SQLを構成できます。
 
@@ -101,12 +101,12 @@ SET GLOBAL tidb_enable_top_sql = 1;
 
 次の手順に従って、この機能を無効にできます。
 
-1.  訪問[<a href="#access-the-page">Top SQLページ</a>](#access-the-page) 。
+1.  訪問[Top SQLページ](#access-the-page) 。
 2.  右上隅にある歯車アイコンをクリックして設定画面を開き、 **[機能を有効にする]**をオフにします。
 3.  **「保存」**をクリックします。
 4.  ポップアップダイアログボックスで、 **「無効にする」**をクリックします。
 
-UI に加えて、TiDB システム変数[<a href="/system-variables.md#tidb_enable_top_sql-new-in-v540">`tidb_enable_top_sql`</a>](/system-variables.md#tidb_enable_top_sql-new-in-v540)を設定してTop SQL機能を無効にすることもできます。
+UI に加えて、TiDB システム変数[`tidb_enable_top_sql`](/system-variables.md#tidb_enable_top_sql-new-in-v540)を設定してTop SQL機能を無効にすることもできます。
 
 {{< copyable "" >}}
 
@@ -118,7 +118,7 @@ SET GLOBAL tidb_enable_top_sql = 0;
 
 **1. Top SQL を有効にできず、UI に「必須コンポーネントNgMonitoring が開始されていません」と表示されます**。
 
-[<a href="/dashboard/dashboard-faq.md#a-required-component-ngmonitoring-is-not-started-error-is-shown">TiDB ダッシュボードFAQ</a>](/dashboard/dashboard-faq.md#a-required-component-ngmonitoring-is-not-started-error-is-shown)を参照してください。
+[TiDB ダッシュボードFAQ](/dashboard/dashboard-faq.md#a-required-component-ngmonitoring-is-not-started-error-is-shown)を参照してください。
 
 **2. Top SQL を有効にするとパフォーマンスに影響しますか?**
 

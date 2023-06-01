@@ -7,12 +7,12 @@ summary: Learn how to use extended statistics to guide the optimizer.
 
 TiDB は、次の 2 種類の統計を収集できます。
 
--   基本統計: ヒストグラムや Count-Min Sketch などの統計。詳細については[<a href="/statistics.md">統計入門</a>](/statistics.md)を参照してください。
+-   基本統計: ヒストグラムや Count-Min Sketch などの統計。詳細については[統計入門](/statistics.md)を参照してください。
 -   拡張統計: テーブルと列によってフィルターされた統計。
 
 > **ヒント：**
 >
-> このドキュメントを読む前に、まず[<a href="/statistics.md">統計入門</a>](/statistics.md)を読むことをお勧めします。
+> このドキュメントを読む前に、まず[統計入門](/statistics.md)を読むことをお勧めします。
 
 `ANALYZE`ステートメントが手動または自動で実行される場合、TiDB はデフォルトで基本統計のみを収集し、拡張統計は収集しません。これは、拡張統計は特定のシナリオでのオプティマイザの推定にのみ使用され、それらの収集には追加のオーバーヘッドが必要になるためです。
 
@@ -105,7 +105,7 @@ ALTER TABLE table_name DROP STATS_EXTENDED stats_name;
 
 ### 拡張統計のエクスポートとインポート {#export-and-import-extended-statistics}
 
-拡張統計をエクスポートまたはインポートする方法は、基本統計をエクスポートまたはインポートする方法と同じです。詳細については[<a href="/statistics.md#import-and-export-statistics">統計の概要 - 統計のインポートとエクスポート</a>](/statistics.md#import-and-export-statistics)を参照してください。
+拡張統計をエクスポートまたはインポートする方法は、基本統計をエクスポートまたはインポートする方法と同じです。詳細については[統計の概要 - 統計のインポートとエクスポート](/statistics.md#import-and-export-statistics)を参照してください。
 
 ## 相関型拡張統計の使用例 {#usage-examples-for-correlation-type-extended-statistics}
 
@@ -144,13 +144,13 @@ SELECT * FROM t WHERE col1 > 1 ORDER BY col2 LIMIT 1;
 ALTER TABLE t ADD STATS_EXTENDED s1 correlation(col1, col2);
 ```
 
-登録後に`ANALYZE`を実行すると、TiDB はテーブル`t`の`col`と`col2`の[<a href="https://en.wikipedia.org/wiki/Pearson_correlation_coefficient">ピアソン相関係数</a>](https://en.wikipedia.org/wiki/Pearson_correlation_coefficient)計算し、オブジェクトを`mysql.stats_extended`テーブルに書き込みます。
+登録後に`ANALYZE`を実行すると、TiDB はテーブル`t`の`col`と`col2`の[ピアソン相関係数](https://en.wikipedia.org/wiki/Pearson_correlation_coefficient)計算し、オブジェクトを`mysql.stats_extended`テーブルに書き込みます。
 
 ### ステップ 4. 拡張統計がどのような違いを生むかを確認する {#step-4-see-how-extended-statistics-make-a-difference}
 
 TiDB が相関に関する拡張統計を取得すると、オプティマイザーはスキャンする行数をより正確に推定できるようになります。
 
-このとき、 [<a href="#step-2-execute-an-example-query-without-extended-statistics">ステージ 2. 拡張統計を使用せずにクエリ例を実行する</a>](#step-2-execute-an-example-query-without-extended-statistics)のクエリでは、 `col1` 、 `col2`が順に厳密に対応付けられます。 TiDB が`col2`のインデックスを使用してテーブル`t`にアクセスし、 `col1 > 1`を満たす最初の行を検索すると、TiDB オプティマイザーは行数の推定を次のクエリに変換します。
+このとき、 [ステージ 2. 拡張統計を使用せずにクエリ例を実行する](#step-2-execute-an-example-query-without-extended-statistics)のクエリでは、 `col1` 、 `col2`が順に厳密に対応付けられます。 TiDB が`col2`のインデックスを使用してテーブル`t`にアクセスし、 `col1 > 1`を満たす最初の行を検索すると、TiDB オプティマイザーは行数の推定を次のクエリに変換します。
 
 ```sql
 SELECT * FROM t WHERE col1 <= 1 OR col1 IS NULL;

@@ -9,11 +9,11 @@ summary: Learn about the FAQs related to high reliability of TiDB.
 
 ## TiDB はデータ暗号化をサポートしていますか? {#does-tidb-support-data-encryption}
 
-はい。ネットワーク トラフィック内のデータを暗号化するには、 [<a href="/enable-tls-between-clients-and-servers.md">TiDB クライアントとサーバー間の TLS を有効にする</a>](/enable-tls-between-clients-and-servers.md)方法があります。storageエンジン内のデータを暗号化するには、 [<a href="/encryption-at-rest.md">透過的データ暗号化 (TDE)</a>](/encryption-at-rest.md)を有効にします。
+はい。ネットワーク トラフィック内のデータを暗号化するには、 [透過的データ暗号化 (TDE)](/encryption-at-rest.md)を有効にします。
 
 ## TiDB は、サーバーの MySQL バージョン文字列を、セキュリティ脆弱性スキャン ツールに必要な特定の文字列に変更することをサポートしていますか? {#does-tidb-support-modifying-the-mysql-version-string-of-the-server-to-a-specific-one-that-is-required-by-the-security-vulnerability-scanning-tool}
 
--   v3.0.8 以降、TiDB は構成ファイル内の[<a href="/tidb-configuration-file.md#server-version">`server-version`</a>](/tidb-configuration-file.md#server-version)を変更することによるサーバーのバージョン文字列の変更をサポートしています。
+-   v3.0.8 以降、TiDB は構成ファイル内の[`server-version`](/tidb-configuration-file.md#server-version)を変更することによるサーバーのバージョン文字列の変更をサポートしています。
 
 -   v4.0 以降、 TiUPを使用して TiDB をデプロイする場合は、 `tiup cluster edit-config <cluster-name>`を実行して次のセクションを編集することで、適切なバージョン文字列を指定することもできます。
 
@@ -40,4 +40,4 @@ MySQL と同様に、TiDB はユーザー ログイン認証とパスワード�
 
 TiDB のユーザー パスワードを変更する場合は、他のノードのパスワードが適時に更新されない可能性がある`UPDATE mysql.user`ではなく`ALTER USER` (たとえば、 `ALTER USER 'test'@'localhost' IDENTIFIED BY 'mypass';` ) を使用することをお勧めします。
 
-ユーザーのパスワードと権限を変更する場合は、公式の標準ステートメントを使用することをお勧めします。詳細は[<a href="/user-account-management.md">TiDB ユーザーアカウント管理</a>](/user-account-management.md)を参照してください。
+ユーザーのパスワードと権限を変更する場合は、公式の標準ステートメントを使用することをお勧めします。詳細は[TiDB ユーザーアカウント管理](/user-account-management.md)を参照してください。

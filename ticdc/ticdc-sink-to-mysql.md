@@ -25,10 +25,10 @@ Info: {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":
 ```
 
 -   `--changefeed-id` : レプリケーション タスクの ID。形式は`^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$`正規表現と一致する必要があります。この ID が指定されていない場合、TiCDC は UUID (バージョン 4 形式) を ID として自動的に生成します。
--   `--sink-uri` : レプリケーションタスクの下流アドレス。詳細は[<a href="#configure-sink-uri-for-mysql-or-tidb">`mysql` / `tidb`でシンク URI を設定する</a>](#configure-sink-uri-for-mysql-or-tidb)を参照してください。
+-   `--sink-uri` : レプリケーションタスクの下流アドレス。詳細は[`mysql` / `tidb`でシンク URI を設定する](#configure-sink-uri-for-mysql-or-tidb)を参照してください。
 -   `--start-ts` : チェンジフィードの開始 TSO を指定します。この TSO から、TiCDC クラスターはデータのプルを開始します。デフォルト値は現在時刻です。
 -   `--target-ts` : チェンジフィードの終了 TSO を指定します。この TSO に対して、TiCDC クラスターはデータのプルを停止します。デフォルト値は空です。これは、TiCDC がデータのプルを自動的に停止しないことを意味します。
--   `--config` : チェンジフィード構成ファイルを指定します。詳細は[<a href="/ticdc/ticdc-changefeed-config.md">TiCDC Changefeedコンフィグレーションパラメータ</a>](/ticdc/ticdc-changefeed-config.md)を参照してください。
+-   `--config` : チェンジフィード構成ファイルを指定します。詳細は[TiCDC Changefeedコンフィグレーションパラメータ](/ticdc/ticdc-changefeed-config.md)を参照してください。
 
 ## MySQL または TiDB のシンク URI を構成する {#configure-sink-uri-for-mysql-or-tidb}
 
@@ -79,7 +79,7 @@ MTIzNDU2
 
 > **ノート：**
 >
-> シンク URI に`! * ' ( ) ; : @ & = + $ , / ? % # [ ]`などの特殊文字が含まれている場合は、特殊文字をエスケープする必要があります (たとえば、 [<a href="https://meyerweb.com/eric/tools/dencoder/">URIエンコーダ</a>](https://meyerweb.com/eric/tools/dencoder/) 。
+> シンク URI に`! * ' ( ) ; : @ & = + $ , / ? % # [ ]`などの特殊文字が含まれている場合は、特殊文字をエスケープする必要があります (たとえば、 [URIエンコーダ](https://meyerweb.com/eric/tools/dencoder/) 。
 
 ## 災害シナリオにおける最終的に整合性のあるレプリケーション {#eventually-consistent-replication-in-disaster-scenarios}
 

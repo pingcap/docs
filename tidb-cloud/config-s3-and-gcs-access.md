@@ -11,9 +11,9 @@ summary: Learn how to configure Amazon Simple Storage Service (Amazon S3) access
 
 TiDB Cloud がAmazon S3 バケット内のソース データにアクセスできるようにするには、次の手順を実行してTiDB Cloudのバケット アクセスを設定し、Role-ARN を取得します。
 
-1.  [<a href="https://tidbcloud.com/">TiDB Cloudコンソール</a>](https://tidbcloud.com/)では、ターゲット TiDB クラスターのTiDB Cloudアカウント ID と外部 ID を取得します。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com/)では、ターゲット TiDB クラスターのTiDB Cloudアカウント ID と外部 ID を取得します。
 
-    1.  プロジェクトの[<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページに移動します。
+    1.  プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
         > **ヒント：**
         >
@@ -27,13 +27,13 @@ TiDB Cloud がAmazon S3 バケット内のソース データにアクセスで�
 
 2.  AWS マネジメントコンソールで、Amazon S3 バケットの管理ポリシーを作成します。
 
-    1.  AWS マネジメントコンソールにサインインし、 [<a href="https://console.aws.amazon.com/s3/">https://console.aws.amazon.com/s3/</a>](https://console.aws.amazon.com/s3/)で Amazon S3 コンソールを開きます。
+    1.  AWS マネジメントコンソールにサインインし、 [https://console.aws.amazon.com/s3/](https://console.aws.amazon.com/s3/)で Amazon S3 コンソールを開きます。
 
     2.  **[バケット]**リストで、ソース データが含まれるバケットの名前を選択し、 **[ARN をコピー]**をクリックして S3 バケット ARN (たとえば、 `arn:aws:s3:::tidb-cloud-source-data` ) を取得します。後で使用できるようにバケット ARN をメモしておきます。
 
         ![Copy bucket ARN](/media/tidb-cloud/copy-bucket-arn.png)
 
-    3.  [<a href="https://console.aws.amazon.com/iam/">https://console.aws.amazon.com/iam/</a>](https://console.aws.amazon.com/iam/)でIAMコンソールを開き、左側のナビゲーション ペインで**[ポリシー]**をクリックし、 **[ポリシーの作成]**をクリックします。
+    3.  [https://console.aws.amazon.com/iam/](https://console.aws.amazon.com/iam/)でIAMコンソールを開き、左側のナビゲーション ペインで**[ポリシー]**をクリックし、 **[ポリシーの作成]**をクリックします。
 
         ![Create a policy](/media/tidb-cloud/aws-create-policy.png)
 
@@ -83,7 +83,7 @@ TiDB Cloud がAmazon S3 バケット内のソース データにアクセスで�
 
 3.  AWS マネジメント コンソールで、 TiDB Cloudのアクセス ロールを作成し、ロール ARN を取得します。
 
-    1.  IAMコンソール[<a href="https://console.aws.amazon.com/iam/">https://console.aws.amazon.com/iam/</a>](https://console.aws.amazon.com/iam/)で、左側のナビゲーション ペインで**[ロール]**をクリックし、 **[ロールの作成]**をクリックします。
+    1.  IAMコンソール[https://console.aws.amazon.com/iam/](https://console.aws.amazon.com/iam/)で、左側のナビゲーション ペインで**[ロール]**をクリックし、 **[ロールの作成]**をクリックします。
 
         ![Create a role](/media/tidb-cloud/aws-create-role.png)
 
@@ -109,7 +109,7 @@ TiDB Cloud がGCS バケット内のソース データにアクセスできる�
 
 1.  TiDB Cloudコンソールで、ターゲット TiDB クラスターの Google Cloud サービス アカウント ID を取得します。
 
-    1.  プロジェクトの[<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページに移動します。
+    1.  プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
         > **ヒント：**
         >
@@ -121,9 +121,9 @@ TiDB Cloud がGCS バケット内のソース データにアクセスできる�
 
 2.  Google Cloud Platform (GCP) 管理コンソールで、GCS バケットのIAMロールを作成します。
 
-    1.  [<a href="https://console.cloud.google.com/">GCP 管理コンソール</a>](https://console.cloud.google.com/)にサインインします。
+    1.  [GCP 管理コンソール](https://console.cloud.google.com/)にサインインします。
 
-    2.  [<a href="https://console.cloud.google.com/iam-admin/roles">役割</a>](https://console.cloud.google.com/iam-admin/roles)ページに移動し、 **「ロールの作成」**をクリックします。
+    2.  [役割](https://console.cloud.google.com/iam-admin/roles)ページに移動し、 **「ロールの作成」**をクリックします。
 
         ![Create a role](/media/tidb-cloud/gcp-create-role.png)
 
@@ -141,7 +141,7 @@ TiDB Cloud がGCS バケット内のソース データにアクセスできる�
 
         ![Add permissions](/media/tidb-cloud/gcp-add-permissions.png)
 
-3.  [<a href="https://console.cloud.google.com/storage/browser">バケツ</a>](https://console.cloud.google.com/storage/browser)ページに移動し、 TiDB Cloudがアクセスする GCS バケットの名前をクリックします。
+3.  [バケツ](https://console.cloud.google.com/storage/browser)ページに移動し、 TiDB Cloudがアクセスする GCS バケットの名前をクリックします。
 
 4.  **[バケットの詳細]**ページで、 **[権限]**タブをクリックし、 **[アクセスの許可]**をクリックします。
 

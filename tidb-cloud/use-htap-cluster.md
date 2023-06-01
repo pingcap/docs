@@ -5,9 +5,9 @@ summary: Learn how to use HTAP cluster in TiDB Cloud.
 
 # HTAPクラスタを使用する {#use-an-htap-cluster}
 
-[<a href="https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing">HTAP</a>](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)ハイブリッド トランザクション/分析処理を意味します。 TiDB Cloudの HTAP クラスターは、トランザクション処理用に設計された行ベースのstorageエンジン[<a href="https://tikv.org">TiKV</a>](https://tikv.org)と、分析処理用に設計されたカラム型storage[<a href="https://docs.pingcap.com/tidb/stable/tiflash-overview">TiFlash</a>](https://docs.pingcap.com/tidb/stable/tiflash-overview)で構成されます。アプリケーション データはまず TiKV に保存され、次にRaftコンセンサス アルゴリズムを介してTiFlashにレプリケートされます。つまり、行ストアから列ストアへのリアルタイム レプリケーションです。
+[TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview)で構成されます。アプリケーション データはまず TiKV に保存され、次にRaftコンセンサス アルゴリズムを介してTiFlashにレプリケートされます。つまり、行ストアから列ストアへのリアルタイム レプリケーションです。
 
-TiDB Cloudを使用すると、HTAP ワークロードに応じて 1 つ以上のTiFlashノードを指定することで、HTAP クラスターを簡単に作成できます。クラスターの作成時にTiFlashノード数が指定されていない場合、またはTiFlashノードをさらに追加したい場合は、ノード数を[<a href="/tidb-cloud/scale-tidb-cluster.md">クラスターのスケーリング</a>](/tidb-cloud/scale-tidb-cluster.md)ずつ変更できます。
+TiDB Cloudを使用すると、HTAP ワークロードに応じて 1 つ以上のTiFlashノードを指定することで、HTAP クラスターを簡単に作成できます。クラスターの作成時にTiFlashノード数が指定されていない場合、またはTiFlashノードをさらに追加したい場合は、ノード数を[クラスターのスケーリング](/tidb-cloud/scale-tidb-cluster.md)ずつ変更できます。
 
 > **ノート：**
 >
@@ -77,4 +77,4 @@ set @@session.tidb_isolation_read_engines = "engine list separated by commas";
 select /*+ read_from_storage(tiflash[table_name]) */ ... from table_name;
 ```
 
-TiFlashの詳細については、ドキュメント[<a href="https://docs.pingcap.com/tidb/stable/tiflash-overview/">ここ</a>](https://docs.pingcap.com/tidb/stable/tiflash-overview/)を参照してください。
+TiFlashの詳細については、ドキュメント[ここ](https://docs.pingcap.com/tidb/stable/tiflash-overview/)を参照してください。

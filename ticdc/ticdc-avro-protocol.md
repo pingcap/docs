@@ -5,7 +5,7 @@ summary: Learn the concept of TiCDC Avro Protocol and how to use it.
 
 # TiCDC Avro プロトコル {#ticdc-avro-protocol}
 
-Avro は、 [<a href="https://avro.apache.org/">Apache Avro™</a>](https://avro.apache.org/)によって定義され、 [<a href="https://docs.confluent.io/platform/current/platform.html">コンフルエントなプラットフォーム</a>](https://docs.confluent.io/platform/current/platform.html)によってデフォルトのデータ交換形式として選択されるデータ交換形式プロトコルです。このドキュメントでは、TiDB 拡張フィールド、Avro データ形式の定義、Avro と[<a href="https://docs.confluent.io/platform/current/schema-registry/index.html">Confluent スキーマ レジストリ</a>](https://docs.confluent.io/platform/current/schema-registry/index.html)の間の対話など、TiCDC での Avro データ形式の実装について説明します。
+Avro は、 [Confluent スキーマ レジストリ](https://docs.confluent.io/platform/current/schema-registry/index.html)の間の対話など、TiCDC での Avro データ形式の実装について説明します。
 
 ## アブロを使用する {#use-avro}
 
@@ -91,7 +91,7 @@ TiCDC は DML イベントを Kafka イベントに変換し、イベントの�
 
 デフォルトでは、Value のデータ形式は Key のデータ形式と同じです。ただし、値の`fields`には主キー列だけでなくすべての列が含まれます。
 
-[<a href="#tidb-extension-fields">`enable-tidb-extension`</a>](#tidb-extension-fields)を有効にすると、値のデータ形式は次のようになります。
+[`enable-tidb-extension`](#tidb-extension-fields)を有効にすると、値のデータ形式は次のようになります。
 
 ```
 {
@@ -155,7 +155,7 @@ TiCDC は DML イベントを Kafka イベントに変換し、イベントの�
 
 -   `{{ColumnName}}`列名を示します。
 -   `{{TIDB_TYPE}}` TiDB のタイプを示します。これは SQL タイプと 1 対 1 のマッピングではありません。
--   `{{AVRO_TYPE}}` [<a href="https://avro.apache.org/docs/current/spec.html">アブロ仕様</a>](https://avro.apache.org/docs/current/spec.html)のタイプを示します。
+-   `{{AVRO_TYPE}}` [アブロ仕様](https://avro.apache.org/docs/current/spec.html)のタイプを示します。
 
 | SQLの種類   | TIDB_TYPE | AVRO_TYPE | 説明                                                                                                          |
 | -------- | --------- | --------- | ----------------------------------------------------------------------------------------------------------- |
@@ -320,12 +320,12 @@ Avro はダウンストリームで DDL イベントを生成しません。 DML
 
 Confluent Schema Registry のデフォルトの互換性ポリシーが`BACKWARD`であると仮定し、空でない列をソース テーブルに追加します。この状況では、Avro は新しいスキーマを生成しますが、互換性の問題によりスキーマ レジストリへの登録に失敗します。このとき、チェンジフィードはエラー状態になります。
 
-スキーマの詳細については、 [<a href="https://docs.confluent.io/platform/current/schema-registry/avro.html">スキーマレジストリ関連ドキュメント</a>](https://docs.confluent.io/platform/current/schema-registry/avro.html)を参照してください。
+スキーマの詳細については、 [スキーマレジストリ関連ドキュメント](https://docs.confluent.io/platform/current/schema-registry/avro.html)を参照してください。
 
 ## トピック配信 {#topic-distribution}
 
-スキーマ レジストリは、TopicNameStrategy、RecordNameStrategy、および TopicRecordNameStrategy の 3 つの[<a href="https://docs.confluent.io/platform/current/schema-registry/serdes-develop/index.html#subject-name-strategy">件名名戦略</a>](https://docs.confluent.io/platform/current/schema-registry/serdes-develop/index.html#subject-name-strategy)をサポートします。現在、TiCDC Avro は TopicNameStrategy のみをサポートしています。これは、Kafka トピックが 1 つのデータ形式でのみデータを受信できることを意味します。したがって、TiCDC Avro では、複数のテーブルを同じトピックにマッピングすることを禁止しています。変更フィードを作成するとき、トピック ルールに設定された配布ルールに`{schema}`と`{table}`プレースホルダーが含まれていない場合、エラーが報告されます。
+スキーマ レジストリは、TopicNameStrategy、RecordNameStrategy、および TopicRecordNameStrategy の 3 つの[件名名戦略](https://docs.confluent.io/platform/current/schema-registry/serdes-develop/index.html#subject-name-strategy)をサポートします。現在、TiCDC Avro は TopicNameStrategy のみをサポートしています。これは、Kafka トピックが 1 つのデータ形式でのみデータを受信できることを意味します。したがって、TiCDC Avro では、複数のテーブルを同じトピックにマッピングすることを禁止しています。変更フィードを作成するとき、トピック ルールに設定された配布ルールに`{schema}`と`{table}`プレースホルダーが含まれていない場合、エラーが報告されます。
 
 ## 互換性 {#compatibility}
 
-TiCDC クラスターを v7.0.0 にアップグレードするときに、Avro を使用してレプリケートされたテーブルに`FLOAT`データ型が含まれている場合、変更フィードがスキーマを正常に更新できるように、アップグレードする前に Confluent Schema Registry の互換性ポリシーを手動で`None`に調整する必要があります。そうしないと、アップグレード後に変更フィードがスキーマを更新できなくなり、エラー状態になります。詳細については、 [<a href="https://github.com/pingcap/tiflow/issues/8490">#8490</a>](https://github.com/pingcap/tiflow/issues/8490)を参照してください。
+TiCDC クラスターを v7.0.0 にアップグレードするときに、Avro を使用してレプリケートされたテーブルに`FLOAT`データ型が含まれている場合、変更フィードがスキーマを正常に更新できるように、アップグレードする前に Confluent Schema Registry の互換性ポリシーを手動で`None`に調整する必要があります。そうしないと、アップグレード後に変更フィードがスキーマを更新できなくなり、エラー状態になります。詳細については、 [#8490](https://github.com/pingcap/tiflow/issues/8490)を参照してください。

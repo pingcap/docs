@@ -9,11 +9,11 @@ summary: Learn how to get TiDB Cloud Terraform Provider.
 
 ## 前提条件 {#prerequisites}
 
-[<a href="/tidb-cloud/terraform-tidbcloud-provider-overview.md#requirements">TiDB Cloud Terraform プロバイダーの概要</a>](/tidb-cloud/terraform-tidbcloud-provider-overview.md#requirements)の要件が満たされていることを確認してください。
+[TiDB Cloud Terraform プロバイダーの概要](/tidb-cloud/terraform-tidbcloud-provider-overview.md#requirements)の要件が満たされていることを確認してください。
 
 ## ステップ 1. Terraform をインストールする {#step-1-install-terraform}
 
-TiDB Cloud Terraform プロバイダーが[<a href="https://registry.terraform.io/">Terraform レジストリ</a>](https://registry.terraform.io/)にリリースされました。必要なのは、Terraform (&gt;=1.0) をインストールすることだけです。
+TiDB Cloud Terraform プロバイダーが[Terraform レジストリ](https://registry.terraform.io/)にリリースされました。必要なのは、Terraform (&gt;=1.0) をインストールすることだけです。
 
 macOS の場合は、次の手順に従ってHomebrewを使用して Terraform をインストールできます。
 
@@ -29,15 +29,15 @@ macOS の場合は、次の手順に従ってHomebrewを使用して Terraform �
     brew install hashicorp/tap/terraform
     ```
 
-他のオペレーティング システムの手順については、 [<a href="https://learn.hashicorp.com/tutorials/terraform/install-cli">Terraform ドキュメント</a>](https://learn.hashicorp.com/tutorials/terraform/install-cli)を参照してください。
+他のオペレーティング システムの手順については、 [Terraform ドキュメント](https://learn.hashicorp.com/tutorials/terraform/install-cli)を参照してください。
 
 ## ステップ 2. API キーを作成する {#step-2-create-an-api-key}
 
 TiDB CloudAPI は HTTP ダイジェスト認証を使用します。秘密キーがネットワーク経由で送信されるのを防ぎます。
 
-現在、 TiDB Cloud Terraform Provider は API キーの管理をサポートしていません。したがって、 [<a href="https://tidbcloud.com/console/clusters">TiDB Cloudコンソール</a>](https://tidbcloud.com/console/clusters)で API キーを作成する必要があります。
+現在、 TiDB Cloud Terraform Provider は API キーの管理をサポートしていません。したがって、 [TiDB Cloudコンソール](https://tidbcloud.com/console/clusters)で API キーを作成する必要があります。
 
-詳細な手順については、 [<a href="https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management">TiDB CloudAPI ドキュメント</a>](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management)を参照してください。
+詳細な手順については、 [TiDB CloudAPI ドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management)を参照してください。
 
 ## ステップ 3. TiDB Cloud Terraform プロバイダーをダウンロードする {#step-3-download-tidb-cloud-terraform-provider}
 
@@ -55,7 +55,7 @@ TiDB CloudAPI は HTTP ダイジェスト認証を使用します。秘密キー
     }
     ```
 
-    -   `source`属性は、ダウンロード[<a href="https://registry.terraform.io/">Terraform レジストリ</a>](https://registry.terraform.io/)のターゲット Terraform プロバイダーを指定します。
+    -   `source`属性は、ダウンロード[Terraform レジストリ](https://registry.terraform.io/)のターゲット Terraform プロバイダーを指定します。
     -   `version`属性はオプションで、Terraform プロバイダーのバージョンを指定します。指定しない場合は、最新のプロバイダーのバージョンがデフォルトで使用されます。
     -   `required_version`はオプションで、Terraform のバージョンを指定します。指定しない場合は、デフォルトで最新の Terraform バージョンが使用されます。
 
@@ -113,4 +113,4 @@ export TIDBCLOUD_PRIVATE_KEY = ${private_key}
 
 ## 次のステップ {#next-step}
 
-[<a href="/tidb-cloud/terraform-use-cluster-resource.md">クラスターリソース</a>](/tidb-cloud/terraform-use-cluster-resource.md)を使用してクラスターを管理することから始めます。
+[クラスターリソース](/tidb-cloud/terraform-use-cluster-resource.md)を使用してクラスターを管理することから始めます。

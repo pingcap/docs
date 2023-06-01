@@ -17,7 +17,7 @@ TiDB CloudServerless Tierは、お客様とお客様の組織に、完全な HTA
 
 ### Serverless Tierの使用を開始するにはどうすればよいですか? {#how-do-i-get-started-with-serverless-tier}
 
-5 分間から始めましょう[<a href="/tidb-cloud/tidb-cloud-quickstart.md">TiDB Cloudクイック スタート</a>](/tidb-cloud/tidb-cloud-quickstart.md) 。
+5 分間から始めましょう[TiDB Cloudクイック スタート](/tidb-cloud/tidb-cloud-quickstart.md) 。
 
 ### Serverless Tierはベータ期間中は無料ですか? {#is-serverless-tier-free-during-beta}
 
@@ -35,7 +35,7 @@ Serverless Tierはベータ版であり、一般提供される前に継続的�
     -   コンピューティング リソースは 1 vCPU と 1 GiB RAM に制限されます。
     -   単一トランザクションの合計サイズは、ベータ段階ではServerless Tierで 10 MB 以下に設定されます。
     -   **注**: 今後数か月間、無料のスターター プランの提供を継続しながら、追加のリソースとより高いパフォーマンスを目的とした従量制の料金プランを提供する予定です。今後のリリースでは、無料のServerless Tierの制限が変更される可能性があります。
--   TiDB Cloud機能の一部は、Serverless Tierで部分的にサポートされているか、サポートされていません。詳細については[<a href="/tidb-cloud/serverless-tier-limitations.md">Serverless Tierの制限</a>](/tidb-cloud/serverless-tier-limitations.md)を参照してください。
+-   TiDB Cloud機能の一部は、Serverless Tierで部分的にサポートされているか、サポートされていません。詳細については[Serverless Tierの制限](/tidb-cloud/serverless-tier-limitations.md)を参照してください。
 
 ### Serverless Tierは何に使用できますか? {#what-can-serverless-tier-be-used-for}
 
@@ -49,15 +49,15 @@ Serverless Tierクラスターは、プロトタイプ アプリケーション�
 
 ### 私のServerless Tierは共有ですか、それとも専用ですか? {#is-my-serverless-tier-shared-or-dedicated}
 
-サーバーレス テクノロジーはマルチテナンシー向けに設計されており、すべてのクラスターで使用されるリソースが共有されます。分離されたインフラストラクチャとリソースを使用してマネージド TiDB サービスを利用するには、サービスを[<a href="/tidb-cloud/select-cluster-tier.md#dedicated-tier">Dedicated Tier</a>](/tidb-cloud/select-cluster-tier.md#dedicated-tier)にアップグレードできます。
+サーバーレス テクノロジーはマルチテナンシー向けに設計されており、すべてのクラスターで使用されるリソースが共有されます。分離されたインフラストラクチャとリソースを使用してマネージド TiDB サービスを利用するには、サービスを[Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier)にアップグレードできます。
 
 ### TiDBServerless Tierはセキュリティをどのように確保しますか? {#how-does-tidb-serverless-tier-ensure-security}
 
--   接続は Transport Layer Security (TLS) によって暗号化されます。 TLS を使用してServerless Tierに接続する方法の詳細については、 [<a href="/tidb-cloud/secure-connections-to-serverless-tier-clusters.md">Serverless Tierクラスターへのセキュリティ接続</a>](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md)を参照してください。
+-   接続は Transport Layer Security (TLS) によって暗号化されます。 TLS を使用してServerless Tierに接続する方法の詳細については、 [Serverless Tierクラスターへのセキュリティ接続](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md)を参照してください。
 -   Serverless Tier上のすべての永続化データは、クラスターが実行されているクラウド プロバイダーのツールを使用して保存時に暗号化されます。
 
 ## メンテナンスに関するFAQ {#maintenance-faq}
 
 ### クラスターが実行されている TiDB のバージョンをアップグレードできますか? {#can-i-upgrade-the-version-of-tidb-that-my-cluster-is-running-on}
 
-いいえ。Serverless Tierクラスターは、 TiDB Cloudで新しい TiDB バージョンを展開すると自動的にアップグレードされます。クラスターが実行している TiDB のバージョンは[<a href="https://tidbcloud.com/console/clusters">TiDB Cloudコンソール</a>](https://tidbcloud.com/console/clusters)または最新の[<a href="https://docs.pingcap.com/tidbcloud/tidb-cloud-release-notes">リリースノート</a>](https://docs.pingcap.com/tidbcloud/tidb-cloud-release-notes)で確認できます。あるいは、クラスターに接続し、 `SELECT version()`または`SELECT tidb_version()`を使用して TiDB バージョンを確認することもできます。
+いいえ。Serverless Tierクラスターは、 TiDB Cloudで新しい TiDB バージョンを展開すると自動的にアップグレードされます。クラスターが実行している TiDB のバージョンは[リリースノート](https://docs.pingcap.com/tidbcloud/tidb-cloud-release-notes)で確認できます。あるいは、クラスターに接続し、 `SELECT version()`または`SELECT tidb_version()`を使用して TiDB バージョンを確認することもできます。

@@ -80,16 +80,16 @@ mysql> SHOW GRANTS FOR 'newuser';
 -   MySQL と同様に、 `USAGE`特権は TiDBサーバーにログインできることを示します。
 -   カラムレベルの権限は現在サポートされていません。
 -   MySQL と同様に、 `NO_AUTO_CREATE_USER` SQL モードが存在しない場合、ユーザーが存在しない場合、 `GRANT`ステートメントは空のパスワードを持つ新しいユーザーを自動的に作成します。この SQL モードを削除すると (デフォルトで有効になっています)、セキュリティ上のリスクが生じます。
--   TiDB では、 `GRANT <privileges>`ステートメントが正常に実行されると、実行結果が現在の接続に即座に反映されます。一方、 [<a href="https://dev.mysql.com/doc/refman/8.0/en/privilege-changes.html">MySQL では、一部の権限については、実行結果は後続の接続でのみ有効になります。</a>](https://dev.mysql.com/doc/refman/8.0/en/privilege-changes.html) 。詳細は[<a href="https://github.com/pingcap/tidb/issues/39356">TiDB #39356</a>](https://github.com/pingcap/tidb/issues/39356)を参照してください。
+-   TiDB では、 `GRANT <privileges>`ステートメントが正常に実行されると、実行結果が現在の接続に即座に反映されます。一方、 [TiDB #39356](https://github.com/pingcap/tidb/issues/39356)を参照してください。
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-grant-role.md">`GRANT &#x3C;role>`</a>](/sql-statements/sql-statement-grant-role.md)
--   [<a href="/sql-statements/sql-statement-revoke-privileges.md">`REVOKE &#x3C;privileges>`</a>](/sql-statements/sql-statement-revoke-privileges.md)
--   [<a href="/sql-statements/sql-statement-show-grants.md">助成金を表示する</a>](/sql-statements/sql-statement-show-grants.md)
+-   [`GRANT &#x3C;role>`](/sql-statements/sql-statement-grant-role.md)
+-   [`REVOKE &#x3C;privileges>`](/sql-statements/sql-statement-revoke-privileges.md)
+-   [助成金を表示する](/sql-statements/sql-statement-show-grants.md)
 
 <CustomContent platform="tidb">
 
--   [<a href="/privilege-management.md">権限管理</a>](/privilege-management.md)
+-   [権限管理](/privilege-management.md)
 
 </CustomContent>

@@ -7,8 +7,8 @@ summary: Learn the API of TiDB monitoring services.
 
 次のタイプのインターフェイスを使用して、TiDB クラスターのステータスを監視できます。
 
--   [<a href="#use-the-status-interface">ステータスインターフェース</a>](#use-the-status-interface) : このインターフェイスは HTTP インターフェイスを使用してコンポーネント情報を取得します。このインターフェースを使用すると、現在の TiDBサーバーの[<a href="#running-status">実行ステータス</a>](#running-status)とテーブルの[<a href="#storage-information">storage情報</a>](#storage-information)を取得できます。
--   [<a href="#use-the-metrics-interface">メトリクスインターフェイス</a>](#use-the-metrics-interface) : このインターフェイスは Prometheus を使用してコンポーネントのさまざまな操作の詳細情報を記録し、Grafana を使用してこれらのメトリクスを表示します。
+-   [storage情報](#storage-information)を取得できます。
+-   [メトリクスインターフェイス](#use-the-metrics-interface) : このインターフェイスは Prometheus を使用してコンポーネントのさまざまな操作の詳細情報を記録し、Grafana を使用してこれらのメトリクスを表示します。
 
 ## ステータスインターフェイスを使用する {#use-the-status-interface}
 
@@ -78,7 +78,7 @@ curl http://127.0.0.1:10080/schema_storage/test
 
 -   PD API アドレス: `http://${host}:${port}/pd/api/v1/${api_name}`
 -   デフォルトのポート: `2379`
--   API 名の詳細: [<a href="https://download.pingcap.com/pd-api-v1.html">PD API ドキュメント</a>](https://download.pingcap.com/pd-api-v1.html)を参照
+-   API 名の詳細: [PD API ドキュメント](https://download.pingcap.com/pd-api-v1.html)を参照
 
 PD インターフェイスは、すべての TiKV サーバーのステータスと負荷分散に関する情報を提供します。単一ノード TiKV クラスターについては、次の例を参照してください。
 
@@ -118,6 +118,6 @@ curl http://127.0.0.1:2379/pd/api/v1/stores
 
 メトリクス インターフェイスは、TiDB クラスター全体のステータスとパフォーマンスを監視します。
 
--   他の展開方法を使用する場合は、このインターフェイスを使用する前に[<a href="/deploy-monitoring-services.md">Prometheus と Grafana をデプロイする</a>](/deploy-monitoring-services.md) 。
+-   他の展開方法を使用する場合は、このインターフェイスを使用する前に[Prometheus と Grafana をデプロイする](/deploy-monitoring-services.md) 。
 
-Prometheus と Grafana が正常にデプロイされたら、 [<a href="/deploy-monitoring-services.md#configure-grafana">Grafana を設定する</a>](/deploy-monitoring-services.md#configure-grafana) .
+Prometheus と Grafana が正常にデプロイされたら、 [Grafana を設定する](/deploy-monitoring-services.md#configure-grafana) .

@@ -46,4 +46,4 @@ tiup mirror set <mirror-addr> -r /path/to/local/root.json
 
 なし
 
-[<a href="/tiup/tiup-command-mirror.md#command-list">&lt;&lt; 前のページに戻る - TiUP Mirror コマンド一覧</a>](/tiup/tiup-command-mirror.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP Mirror コマンド一覧](/tiup/tiup-command-mirror.md#command-list)

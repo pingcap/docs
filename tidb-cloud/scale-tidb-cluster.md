@@ -7,7 +7,7 @@ summary: Learn how to scale your TiDB Cloud cluster.
 
 > **ノート：**
 >
-> -   [<a href="/tidb-cloud/select-cluster-tier.md#serverless-tier-beta">Serverless Tierクラスター</a>](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)をスケールすることはできません。
+> -   [Serverless Tierクラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)をスケールすることはできません。
 > -   クラスターが**MODIFYING**ステータスにある場合、クラスターに対して新しいスケーリング操作を実行することはできません。
 
 TiDB クラスターは次の次元でスケールできます。
@@ -16,11 +16,11 @@ TiDB クラスターは次の次元でスケールできます。
 -   TiKV とTiFlashのノードstorage
 -   TiDB、TiKV、 TiFlashのノード サイズ (vCPU とメモリを含む)
 
-TiDB クラスターのサイズを決定する方法については、 [<a href="/tidb-cloud/size-your-cluster.md">TiDB サイズを決定する</a>](/tidb-cloud/size-your-cluster.md)を参照してください。
+TiDB クラスターのサイズを決定する方法については、 [TiDB サイズを決定する](/tidb-cloud/size-your-cluster.md)を参照してください。
 
 > **ノート：**
 >
-> TiDB または TiKV のノード サイズが**2 vCPU、8 GiB (ベータ版)**または**4 vCPU、16 GiB**に設定されている場合は、次の制限事項に注意してください。これらの制限を回避するには、まず[<a href="#increase-node-size">ノードサイズを増やす</a>](#increase-node-size)を実行します。
+> TiDB または TiKV のノード サイズが**2 vCPU、8 GiB (ベータ版)**または**4 vCPU、16 GiB**に設定されている場合は、次の制限事項に注意してください。これらの制限を回避するには、まず[ノードサイズを増やす](#increase-node-size)を実行します。
 >
 > -   TiDB のノード数は 1 または 2 のみに設定でき、TiKV のノード数は 3 に固定されます。
 > -   2 vCPU TiDB は 2 vCPU TiKV でのみ使用でき、2 vCPU TiKV は 2 vCPU TiDB でのみ使用できます。
@@ -35,7 +35,7 @@ TiDB、TiKV、またはTiFlashノードの数を変更できます。
 
 TiDB、TiKV、またはTiFlashノードの数を増やすには、次の手順を実行します。
 
-1.  TiDB Cloudコンソールで、プロジェクトの[<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページに移動します。
+1.  TiDB Cloudコンソールで、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
 2.  スケーリングするクラスターの行で、 **[...]**をクリックします。
 
@@ -49,13 +49,13 @@ TiDB、TiKV、またはTiFlashノードの数を増やすには、次の手順�
 
 5.  **「確認」**をクリックします。
 
-[<a href="https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster">Dedicated Tierクラスターを変更する</a>](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster)エンドポイントを通じてTiDB CloudAPI を使用して、TiDB、TiKV、またはTiFlashノードの数を増やすこともできます。現在、 TiDB Cloud API はまだベータ版です。詳細については、 [<a href="https://docs.pingcap.com/tidbcloud/api/v1beta">TiDB CloudAPI ドキュメント</a>](https://docs.pingcap.com/tidbcloud/api/v1beta)を参照してください。
+[TiDB CloudAPI ドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta)を参照してください。
 
 ### ノード番号を減らす {#decrease-node-number}
 
 TiDB ノードの数を減らすには、次の手順を実行します。
 
-1.  TiDB Cloudコンソールで、プロジェクトの[<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページに移動します。
+1.  TiDB Cloudコンソールで、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
 2.  スケーリングするクラスターの行で、 **[...]**をクリックします。
 
@@ -75,7 +75,7 @@ TiKV またはTiFlashノードの数を減らすには、サポート チケッ�
 >
 > TiKV またはTiFlashノード数を減らすことは危険を伴う可能性があり、残りのノードでstorage容量の不足、過剰な CPU 使用率、または過剰なメモリ使用率が発生する可能性があります。
 
-サポート チケットを送信するには、 [<a href="/tidb-cloud/tidb-cloud-support.md">TiDB Cloudのサポート</a>](/tidb-cloud/tidb-cloud-support.md)の手順を実行します。スケーリングするノードごとに、 **[説明]**ボックスに次の情報を入力します。
+サポート チケットを送信するには、 [TiDB Cloudのサポート](/tidb-cloud/tidb-cloud-support.md)の手順を実行します。スケーリングするノードごとに、 **[説明]**ボックスに次の情報を入力します。
 
 -   クラスタ名: xxx
 -   クラウドプロバイダー: GCP または AWS
@@ -95,7 +95,7 @@ TiKV またはTiFlashのノードstorageを変更できます。
 
 TiKV またはTiFlashのノードstorageを増やすには、次の手順を実行します。
 
-1.  TiDB Cloudコンソールで、プロジェクトの[<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページに移動します。
+1.  TiDB Cloudコンソールで、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
 2.  スケーリングするクラスターの行で、 **[...]**をクリックします。
 
@@ -109,7 +109,7 @@ TiKV またはTiFlashのノードstorageを増やすには、次の手順を実�
 
 5.  **「確認」**をクリックします。
 
-[<a href="https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster">Dedicated Tierクラスターを変更する</a>](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster)エンドポイントを通じてTiDB CloudAPI を使用して、TiKV またはTiFlashノードのstorageを増やすこともできます。現在、 TiDB Cloud API はまだベータ版です。詳細については、 [<a href="https://docs.pingcap.com/tidbcloud/api/v1beta">TiDB CloudAPI ドキュメント</a>](https://docs.pingcap.com/tidbcloud/api/v1beta)を参照してください。
+[TiDB CloudAPI ドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta)を参照してください。
 
 ### ノードstorageを減らす {#decrease-node-storage}
 

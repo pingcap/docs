@@ -9,11 +9,11 @@ summary: Learn how to back up and restore your TiDB Cloud cluster.
 
 > **ノート：**
 >
-> [<a href="/tidb-cloud/select-cluster-tier.md#serverless-tier-beta">Serverless Tierクラスター</a>](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)の場合、バックアップおよび復元機能は使用できません。 [<a href="https://docs.pingcap.com/tidb/stable/dumpling-overview">Dumpling</a>](https://docs.pingcap.com/tidb/stable/dumpling-overview)使用して、データをバックアップとしてエクスポートできます。
+> [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)使用して、データをバックアップとしてエクスポートできます。
 >
 > 現在、バックアップおよび復元機能には次の制限があります。
 >
-> -   TiDB Cloudは、ユーザー権限やシステム変数を含む`mysql`スキーマ内のテーブルの復元をサポートしていません。 [<a href="https://docs.pingcap.com/tidb/dev/backup-and-restore-using-dumpling-lightning">Dumplingと稲妻</a>](https://docs.pingcap.com/tidb/dev/backup-and-restore-using-dumpling-lightning)使用すると、これらのデータを手動でバックアップおよび復元できます。
+> -   TiDB Cloudは、ユーザー権限やシステム変数を含む`mysql`スキーマ内のテーブルの復元をサポートしていません。 [Dumplingと稲妻](https://docs.pingcap.com/tidb/dev/backup-and-restore-using-dumpling-lightning)使用すると、これらのデータを手動でバックアップおよび復元できます。
 > -   PITR (ポイントインタイムリカバリ) を複数回オン/オフにした場合、最新の PITR が有効になった後の回復可能な範囲内の時点のみを選択できます。以前の回復可能範囲にはアクセスできません。
 > -   自動バックアップを無効にすることはできません。
 
@@ -69,7 +69,7 @@ TiDB Cloud は自動バックアップと手動バックアップをサポート
 
 > **ノート：**
 >
-> 複数のバックアップstorageリージョンを選択した場合、複数のバックアップstorageと、クラスター リージョンから各宛先リージョンへのリージョン間のバックアップ データ レプリケーションに対して料金が発生します。コストはリージョンごとに異なり、選択したバックアップ リージョンによって異なります。詳細については、 [<a href="https://en.pingcap.com/tidb-cloud-pricing-details/#data-backup-cost">データバックアップコスト</a>](https://en.pingcap.com/tidb-cloud-pricing-details/#data-backup-cost)を参照してください。
+> 複数のバックアップstorageリージョンを選択した場合、複数のバックアップstorageと、クラスター リージョンから各宛先リージョンへのリージョン間のバックアップ データ レプリケーションに対して料金が発生します。コストはリージョンごとに異なり、選択したバックアップ リージョンによって異なります。詳細については、 [データバックアップコスト](https://en.pingcap.com/tidb-cloud-pricing-details/#data-backup-cost)を参照してください。
 
 ### 手動バックアップ {#manual-backup}
 
@@ -95,7 +95,7 @@ TiDB クラスターに手動バックアップを適用するには、次の手
 
 ### 実行中のバックアップ ジョブを削除する {#delete-a-running-backup-job}
 
-実行中のバックアップ ジョブを削除するには、 [<a href="#delete-backup-files">**バックアップファイルを削除する**</a>](#delete-backup-files)と同様です。
+実行中のバックアップ ジョブを削除するには、 [**バックアップファイルを削除する**](#delete-backup-files)と同様です。
 
 1.  クラスターの**「バックアップ」**タブに移動します。
 
@@ -162,9 +162,9 @@ TiDB クラスターのデータをバックアップから新しいクラスタ
 
 削除されたクラスターをごみ箱から復元するには、次の手順を実行します。
 
-1.  [<a href="https://tidbcloud.com">TiDB Cloudコンソール</a>](https://tidbcloud.com)にログインします。
+1.  [TiDB Cloudコンソール](https://tidbcloud.com)にログインします。
 
-2.  [<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページの左側のナビゲーション ウィンドウで、次のいずれかを実行します。
+2.  [**クラスター**](https://tidbcloud.com/console/clusters)ページの左側のナビゲーション ウィンドウで、次のいずれかを実行します。
 
     -   複数のプロジェクトがある場合は、ターゲット プロジェクトに切り替えて、 **[管理]** &gt; **[ごみ箱]**をクリックします。
     -   プロジェクトが 1 つだけの場合は、 **[管理]** &gt; **[ごみ箱]**をクリックします。

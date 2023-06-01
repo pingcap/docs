@@ -7,10 +7,10 @@ summary: Learn how to migrate data to a downstream TiDB table with more columns 
 
 このドキュメントでは、対応するアップストリーム テーブルよりも多くの列を持つダウンストリーム TiDB テーブルにデータを移行するときに実行する追加手順について説明します。通常の移行手順については、次の移行シナリオを参照してください。
 
--   [<a href="/migrate-small-mysql-to-tidb.md">小規模なデータセットの MySQL を TiDB に移行する</a>](/migrate-small-mysql-to-tidb.md)
--   [<a href="/migrate-large-mysql-to-tidb.md">大規模なデータセットの MySQL を TiDB に移行する</a>](/migrate-large-mysql-to-tidb.md)
--   [<a href="/migrate-small-mysql-shards-to-tidb.md">小規模なデータセットの MySQL シャードを TiDB に移行およびマージする</a>](/migrate-small-mysql-shards-to-tidb.md)
--   [<a href="/migrate-large-mysql-shards-to-tidb.md">大規模なデータセットの MySQL シャードを TiDB に移行およびマージする</a>](/migrate-large-mysql-shards-to-tidb.md)
+-   [小規模なデータセットの MySQL を TiDB に移行する](/migrate-small-mysql-to-tidb.md)
+-   [大規模なデータセットの MySQL を TiDB に移行する](/migrate-large-mysql-to-tidb.md)
+-   [小規模なデータセットの MySQL シャードを TiDB に移行およびマージする](/migrate-small-mysql-shards-to-tidb.md)
+-   [大規模なデータセットの MySQL シャードを TiDB に移行およびマージする](/migrate-large-mysql-shards-to-tidb.md)
 
 ## DM を使用して、より多くの列を含むダウンストリーム TiDB テーブルにデータを移行する {#use-dm-to-migrate-data-to-a-downstream-tidb-table-with-more-columns}
 
@@ -55,7 +55,7 @@ DM がダウンストリーム テーブル スキーマを使用して、アッ
 
 このような場合、 `binlog-schema`コマンドを使用して、データ ソースから移行するテーブルのテーブル スキーマを設定できます。指定されたテーブル スキーマは、DM によってレプリケートされるbinlogイベント データに対応する必要があります。シャードテーブルを移行する場合は、シャードテーブルごとに、binlogイベントデータを解析するために DM でテーブルスキーマを設定する必要があります。手順は次のとおりです。
 
-1.  DM で SQL ファイルを作成し、上流のテーブル スキーマに対応する`CREATE TABLE`ステートメントをファイルに追加します。たとえば、次のテーブル スキーマを`log.messages.sql`に保存します。 DM v6.0 以降のバージョンでは、SQL ファイルを作成せずに`--from-source`または`--from-target`フラグを追加することでテーブル スキーマを更新できます。詳細は[<a href="/dm/dm-manage-schema.md">移行するテーブルのテーブルスキーマを管理する</a>](/dm/dm-manage-schema.md)を参照してください。
+1.  DM で SQL ファイルを作成し、上流のテーブル スキーマに対応する`CREATE TABLE`ステートメントをファイルに追加します。たとえば、次のテーブル スキーマを`log.messages.sql`に保存します。 DM v6.0 以降のバージョンでは、SQL ファイルを作成せずに`--from-source`または`--from-target`フラグを追加することでテーブル スキーマを更新できます。詳細は[移行するテーブルのテーブルスキーマを管理する](/dm/dm-manage-schema.md)を参照してください。
 
     ```sql
     # Upstream table schema

@@ -69,6 +69,6 @@ store limit 1 5 remove-peer         // store 1 can at most delete 5 peers per mi
 
 ### ストア制限 v2 の原則 {#principles-of-store-limit-v2}
 
-[<a href="/pd-configuration-file.md#store-limit-version-new-in-v710">`store-limit-version`</a>](/pd-configuration-file.md#store-limit-version-new-in-v710)を`v2`に設定すると、ストア制限 v2 が有効になります。 v2 モードでは、オペレーターの制限は TiKV スナップショットの機能に基づいて動的に調整されます。 TiKV の保留中のタスクが少なくなると、PD はスケジューリング タスクを増やします。それ以外の場合、PD はノードのスケジューリング タスクを削減します。したがって、スケジュール プロセスを高速化するために手動で`store limit`を設定する必要はありません。
+[`store-limit-version`](/pd-configuration-file.md#store-limit-version-new-in-v710)を`v2`に設定すると、ストア制限 v2 が有効になります。 v2 モードでは、オペレーターの制限は TiKV スナップショットの機能に基づいて動的に調整されます。 TiKV の保留中のタスクが少なくなると、PD はスケジューリング タスクを増やします。それ以外の場合、PD はノードのスケジューリング タスクを削減します。したがって、スケジュール プロセスを高速化するために手動で`store limit`を設定する必要はありません。
 
-v2 モードでは、TiKV の実行速度が移行中の主なボトルネックになります。現在のスケジュール速度が上限に達しているかどうかは、 **[TiKV 詳細]** &gt; **[スナップショット]** &gt; **[スナップショット速度]**パネルで確認できます。ノードのスケジューリング速度を増減するには、TiKV スナップショット制限を調整できます ( [<a href="/tikv-configuration-file.md#snap-io-max-bytes-per-sec">`snap-io-max-bytes-per-sec`</a>](/tikv-configuration-file.md#snap-io-max-bytes-per-sec) )。
+v2 モードでは、TiKV の実行速度が移行中の主なボトルネックになります。現在のスケジュール速度が上限に達しているかどうかは、 **[TiKV 詳細]** &gt; **[スナップショット]** &gt; **[スナップショット速度]**パネルで確認できます。ノードのスケジューリング速度を増減するには、TiKV スナップショット制限を調整できます ( [`snap-io-max-bytes-per-sec`](/tikv-configuration-file.md#snap-io-max-bytes-per-sec) )。

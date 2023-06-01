@@ -122,8 +122,8 @@ Query OK, 0 rows affected (0.02 sec)
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-create-table.md">テーブルの作成</a>](/sql-statements/sql-statement-create-table.md)
--   [<a href="/sql-statements/sql-statement-create-index.md">インデックスの作成</a>](/sql-statements/sql-statement-create-index.md)
--   [<a href="/sql-statements/sql-statement-add-index.md">インデックスの追加</a>](/sql-statements/sql-statement-add-index.md)
--   [<a href="/sql-statements/sql-statement-drop-index.md">ドロップインデックス</a>](/sql-statements/sql-statement-drop-index.md)
--   [<a href="/sql-statements/sql-statement-rename-index.md">インデックスの名前を変更</a>](/sql-statements/sql-statement-rename-index.md)
+-   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
+-   [インデックスの作成](/sql-statements/sql-statement-create-index.md)
+-   [インデックスの追加](/sql-statements/sql-statement-add-index.md)
+-   [ドロップインデックス](/sql-statements/sql-statement-drop-index.md)
+-   [インデックスの名前を変更](/sql-statements/sql-statement-rename-index.md)

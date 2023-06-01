@@ -5,7 +5,7 @@ summary: Learn the overview of the Titan storage engine.
 
 # タイタンの概要 {#titan-overview}
 
-[<a href="https://github.com/pingcap/rocksdb/tree/titan-5.15">巨人</a>](https://github.com/pingcap/rocksdb/tree/titan-5.15)キーと値を分離するための高性能[<a href="https://github.com/facebook/rocksdb">ロックスDB</a>](https://github.com/facebook/rocksdb)プラグインです。 Titan は、大きな値が使用される場合、RocksDB での書き込み増幅を減らすことができます。
+[ロックスDB](https://github.com/facebook/rocksdb)プラグインです。 Titan は、大きな値が使用される場合、RocksDB での書き込み増幅を減らすことができます。
 
 Key-Value ペアの値のサイズが大きい (1 KB または 512 B より大きい) 場合、Titan は書き込み、更新、およびポイント読み取りのシナリオで RocksDB よりも優れたパフォーマンスを発揮します。ただし、Titan はstorage領域と範囲クエリのパフォーマンスを犠牲にすることで、より高い書き込みパフォーマンスを実現します。 SSD の価格が下がり続けるにつれて、このトレードオフの意味はますます大きくなります。
 
@@ -27,11 +27,11 @@ Titan は、大量のデータが TiKV フォアグラウンドに書き込ま�
 
 Titan を有効にするための前提条件は次のとおりです。
 
--   値の平均サイズが大きいか、すべての大きな値のサイズが合計値サイズの大部分を占めます。現在、1 KB を超える値のサイズは大きな値とみなされます。状況によっては、この数値 (1 KB) は 512 B になることがあります。TiKV Raftレイヤーの制限により、TiKV に書き込まれる単一の値は 8 MB を超えることができないことに注意してください。 [<a href="/tikv-configuration-file.md#raft-entry-max-size">`raft-entry-max-size`</a>](/tikv-configuration-file.md#raft-entry-max-size)構成値を調整して制限を緩和できます。
+-   値の平均サイズが大きいか、すべての大きな値のサイズが合計値サイズの大部分を占めます。現在、1 KB を超える値のサイズは大きな値とみなされます。状況によっては、この数値 (1 KB) は 512 B になることがあります。TiKV Raftレイヤーの制限により、TiKV に書き込まれる単一の値は 8 MB を超えることができないことに注意してください。 [`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size)構成値を調整して制限を緩和できます。
 -   範囲クエリは実行されないか、範囲クエリの高いパフォーマンスは必要ありません。 Titan に保存されているデータは適切に順序付けされていないため、範囲クエリのパフォーマンスは RocksDB のパフォーマンスよりも低く、特に大きな範囲のクエリのパフォーマンスが劣ります。 PingCAP の内部テストによると、Titan の範囲クエリのパフォーマンスは RocksDB のパフォーマンスよりも 40% から数分の 1 低いことがわかっています。
 -   十分なディスク容量 (同じデータボリュームで RocksDB のディスク消費量の 2 倍のスペースを予約することを検討してください)。これは、Titan がディスク容量を犠牲にして書き込み増幅を減らすためです。また、Titan は値を 1 つずつ圧縮するため、RocksDB よりも圧縮率が低くなります。 RocksDB はブロックを 1 つずつ圧縮します。したがって、Titan は RocksDB よりも多くのstorageスペースを消費しますが、これは予想されることであり、正常です。状況によっては、Titan のstorage消費量が RocksDB の 2 倍になる可能性があります。
 
-Titan のパフォーマンスを向上させたい場合は、ブログ投稿[<a href="https://pingcap.com/blog/titan-storage-engine-design-and-implementation/">Titan: 書き込み増幅を軽減する RocksDB プラグイン</a>](https://pingcap.com/blog/titan-storage-engine-design-and-implementation/)を参照してください。
+Titan のパフォーマンスを向上させたい場合は、ブログ投稿[Titan: 書き込み増幅を軽減する RocksDB プラグイン](https://pingcap.com/blog/titan-storage-engine-design-and-implementation/)を参照してください。
 
 ## アーキテクチャと実装 {#architecture-and-implementation}
 
@@ -53,7 +53,7 @@ BLOB ファイルは主に、BLOB レコード、メタ ブロック、メタ �
 >
 > -   BLOB ファイル内の Key-Value ペアは順番に格納されるため、Iterator を実装すると、プリフェッチによって順次読み取りのパフォーマンスを向上させることができます。
 > -   各 BLOB レコードは、値に対応するユーザー キーのコピーを保持します。このようにして、Titan がガベージ コレクション (GC) を実行するときに、ユーザー キーをクエリして、対応する値が古いかどうかを識別できます。ただし、このプロセスでは書き込み増幅が発生します。
-> -   BlobFile は、BLOB レコード レベルでの圧縮をサポートしています。 Titan は、 [<a href="https://github.com/google/snappy">キビキビ</a>](https://github.com/google/snappy) 、 [<a href="https://github.com/lz4/lz4">LZ4</a>](https://github.com/lz4/lz4) 、 [<a href="https://github.com/facebook/zstd">Zstd</a>](https://github.com/facebook/zstd)などの複数の圧縮アルゴリズムをサポートしています。現在、Titan が使用するデフォルトの圧縮アルゴリズムは LZ4 です。
+> -   BlobFile は、BLOB レコード レベルでの圧縮をサポートしています。 Titan は、 [Zstd](https://github.com/facebook/zstd)などの複数の圧縮アルゴリズムをサポートしています。現在、Titan が使用するデフォルトの圧縮アルゴリズムは LZ4 です。
 
 ### TitanTableBuilder {#titantablebuilder}
 

@@ -9,7 +9,7 @@ summary: Learn how to use partitioning in TiDB.
 
 ## パーティショニングの種類 {#partitioning-types}
 
-このセクションでは、TiDB のパーティショニングの種類を紹介します。現在、TiDB は[<a href="#range-partitioning">範囲分割</a>](#range-partitioning) 、 [<a href="#range-columns-partitioning">範囲COLUMNSパーティショニング</a>](#range-columns-partitioning) 、 [<a href="#list-partitioning">List パーティショニング</a>](#list-partitioning) 、 [<a href="#list-columns-partitioning">List COLUMNS パーティショニング</a>](#list-columns-partitioning) 、 [<a href="#hash-partitioning">ハッシュ分割</a>](#hash-partitioning) 、および[<a href="#key-partitioning">キーの分割</a>](#key-partitioning)をサポートしています。
+このセクションでは、TiDB のパーティショニングの種類を紹介します。現在、TiDB は[キーの分割](#key-partitioning)をサポートしています。
 
 -   レンジ パーティショニング、レンジ COLUMNS パーティショニング、List パーティショニング、およびList COLUMNS パーティショニングは、アプリケーションでの大量の削除によって引き起こされるパフォーマンスの問題を解決するために使用され、パーティションの迅速な削除をサポートします。
 -   ハッシュ パーティショニングとキー パーティショニングは、大量の書き込みが行われるシナリオでデータを分散するために使用されます。ハッシュ パーティショニングと比較して、キー パーティショニングは、複数の列のデータの分散と非整数列によるパーティショニングをサポートします。
@@ -244,7 +244,7 @@ PARTITION BY RANGE (`id`)
  PARTITION `P_MAXVALUE` VALUES LESS THAN (MAXVALUE))
 ```
 
-範囲 INTERVAL パーティショニングは[<a href="#range-columns-partitioning">範囲の列</a>](#range-columns-partitioning)パーティショニングでも機能します。
+範囲 INTERVAL パーティショニングは[範囲の列](#range-columns-partitioning)パーティショニングでも機能します。
 
 例えば：
 
@@ -275,7 +275,7 @@ PARTITION BY RANGE COLUMNS(`report_date`)
  PARTITION `P_LT_2025-01-01` VALUES LESS THAN ('2025-01-01'))
 ```
 
-オプションのパラメーター`NULL PARTITION`は、定義が`PARTITION P_NULL VALUES LESS THAN (<minimum value of the column type>)`であるパーティションを作成し、パーティション式が`NULL`と評価される場合にのみ一致します。 `NULL`が他の値より小さいとみなされることを説明する[<a href="#handling-of-null-with-range-partitioning">範囲パーティショニングによる NULL の処理</a>](#handling-of-null-with-range-partitioning)を参照してください。
+オプションのパラメーター`NULL PARTITION`は、定義が`PARTITION P_NULL VALUES LESS THAN (<minimum value of the column type>)`であるパーティションを作成し、パーティション式が`NULL`と評価される場合にのみ一致します。 `NULL`が他の値より小さいとみなされることを説明する[範囲パーティショニングによる NULL の処理](#handling-of-null-with-range-partitioning)を参照してください。
 
 オプションのパラメータ`MAXVALUE PARTITION`は、最後のパーティションを`PARTITION P_MAXVALUE VALUES LESS THAN (MAXVALUE)`として作成します。
 
@@ -636,13 +636,13 @@ PARTITIONS 4;
 
 #### TiDB がリニア ハッシュ パーティションを処理する方法 {#how-tidb-handles-linear-hash-partitions}
 
-v6.4.0 より前では、TiDB で[<a href="https://dev.mysql.com/doc/refman/5.7/en/partitioning-linear-hash.html">MySQL 線形ハッシュ</a>](https://dev.mysql.com/doc/refman/5.7/en/partitioning-linear-hash.html)パーティションの DDL ステートメントを実行すると、TiDB は非パーティションテーブルのみを作成できました。この場合、TiDB でパーティション化されたテーブルを引き続き使用したい場合は、DDL ステートメントを変更する必要があります。
+v6.4.0 より前では、TiDB で[MySQL 線形ハッシュ](https://dev.mysql.com/doc/refman/5.7/en/partitioning-linear-hash.html)パーティションの DDL ステートメントを実行すると、TiDB は非パーティションテーブルのみを作成できました。この場合、TiDB でパーティション化されたテーブルを引き続き使用したい場合は、DDL ステートメントを変更する必要があります。
 
 v6.4.0 以降、TiDB は MySQL `PARTITION BY LINEAR HASH`構文の解析をサポートしますが、その中の`LINEAR`キーワードは無視されます。 MySQL Linear Hash パーティションの既存の DDL および DML ステートメントがある場合は、それらを変更せずに TiDB で実行できます。
 
--   MySQL リニア ハッシュ パーティションの`CREATE`ステートメントの場合、TiDB は非リニア ハッシュパーティションテーブルを作成します (TiDB にはリニア ハッシュパーティションテーブルがないことに注意してください)。パーティション数が 2 の累乗の場合、TiDB ハッシュパーティションテーブル内の行は、MySQL Linear Hashパーティションテーブル内の行と同じように分散されます。それ以外の場合、TiDB でのこれらの行の分散は MySQL とは異なります。これは、非線形パーティション テーブルでは単純な「パーティションの剰余数」が使用されるのに対し、線形パーティション テーブルでは「2 の次の累乗を剰余とし、パーティション数と次の 2 の累乗の間で値を折り畳む」が使用されるためです。詳細は[<a href="https://github.com/pingcap/tidb/issues/38450">#38450</a>](https://github.com/pingcap/tidb/issues/38450)を参照してください。
+-   MySQL リニア ハッシュ パーティションの`CREATE`ステートメントの場合、TiDB は非リニア ハッシュパーティションテーブルを作成します (TiDB にはリニア ハッシュパーティションテーブルがないことに注意してください)。パーティション数が 2 の累乗の場合、TiDB ハッシュパーティションテーブル内の行は、MySQL Linear Hashパーティションテーブル内の行と同じように分散されます。それ以外の場合、TiDB でのこれらの行の分散は MySQL とは異なります。これは、非線形パーティション テーブルでは単純な「パーティションの剰余数」が使用されるのに対し、線形パーティション テーブルでは「2 の次の累乗を剰余とし、パーティション数と次の 2 の累乗の間で値を折り畳む」が使用されるためです。詳細は[#38450](https://github.com/pingcap/tidb/issues/38450)を参照してください。
 
--   MySQL Linear Hash パーティションの他のすべてのステートメントは、TiDB で MySQL と同じように機能します。ただし、パーティションの数が 2 の累乗でない場合、行の分散方法が異なります。これにより、 [<a href="#partition-selection">パーティションの選択</a>](#partition-selection) 、 `TRUNCATE PARTITION` 、および`EXCHANGE PARTITION` 。
+-   MySQL Linear Hash パーティションの他のすべてのステートメントは、TiDB で MySQL と同じように機能します。ただし、パーティションの数が 2 の累乗でない場合、行の分散方法が異なります。これにより、 [パーティションの選択](#partition-selection) 、 `TRUNCATE PARTITION` 、および`EXCHANGE PARTITION` 。
 
 ### TiDB がリニア キー パーティションを処理する方法 {#how-tidb-handles-linear-key-partitions}
 
@@ -798,7 +798,7 @@ Empty set (0.00 sec)
 
 > **ノート：**
 >
-> TiDB のハッシュ パーティションによる`NULL`値は[<a href="https://dev.mysql.com/doc/refman/8.0/en/partitioning-handling-nulls.html">MySQL パーティショニングによる NULL の処理方法</a>](https://dev.mysql.com/doc/refman/8.0/en/partitioning-handling-nulls.html)で説明したのと同じ方法で処理されますが、これは MySQL の実際の動作と一致しません。言い換えれば、この場合の MySQL の実装はそのドキュメントと一致していません。
+> TiDB のハッシュ パーティションによる`NULL`値は[MySQL パーティショニングによる NULL の処理方法](https://dev.mysql.com/doc/refman/8.0/en/partitioning-handling-nulls.html)で説明したのと同じ方法で処理されますが、これは MySQL の実際の動作と一致しません。言い換えれば、この場合の MySQL の実装はそのドキュメントと一致していません。
 >
 > この場合、TiDB の実際の動作はこのドキュメントの説明と一致します。
 
@@ -812,14 +812,14 @@ Empty set (0.00 sec)
 
 -   `ALTER TABLE <table name> ADD PARTITION (<partition specification>)`ステートメントを使用してパーティションを追加します。
 -   `ALTER TABLE <table name> DROP PARTITION <list of partitions>`ステートメントを使用してパーティションを削除します。
--   `ALTER TABLE <table name> TRUNCATE PARTITION <list of partitions>`ステートメントを使用して、指定されたパーティションからすべてのデータを削除します。 `TRUNCATE PARTITION`のロジックは[<a href="/sql-statements/sql-statement-truncate.md">`TRUNCATE TABLE`</a>](/sql-statements/sql-statement-truncate.md)と似ていますが、パーティション用です。
+-   `ALTER TABLE <table name> TRUNCATE PARTITION <list of partitions>`ステートメントを使用して、指定されたパーティションからすべてのデータを削除します。 `TRUNCATE PARTITION`のロジックは[`TRUNCATE TABLE`](/sql-statements/sql-statement-truncate.md)と似ていますが、パーティション用です。
 -   `ALTER TABLE <table name> REORGANIZE PARTITION <list of partitions> INTO (<new partition definitions>)`ステートメントを使用して、パーティションの結合、分割、またはその他の変更を行います。
 
 `HASH`および`KEY`パーティション分割テーブルの場合、次のようにパーティションを管理できます。
 
 -   `ALTER TABLE <table name> COALESCE PARTITION <number of partitions to decrease by>`ステートメントを使用してパーティションの数を減らします。この操作では、テーブル全体を新しい数のパーティションにオンラインでコピーすることにより、パーティションが再編成されます。
 -   `ALTER TABLE <table name> ADD PARTITION <number of partitions to increase by | (additional partition definitions)>`ステートメントを使用してパーティションの数を増やします。この操作では、テーブル全体を新しい数のパーティションにオンラインでコピーすることにより、パーティションが再編成されます。
--   `ALTER TABLE <table name> TRUNCATE PARTITION <list of partitions>`ステートメントを使用して、指定されたパーティションからすべてのデータを削除します。 `TRUNCATE PARTITION`のロジックは[<a href="/sql-statements/sql-statement-truncate.md">`TRUNCATE TABLE`</a>](/sql-statements/sql-statement-truncate.md)と似ていますが、パーティション用です。
+-   `ALTER TABLE <table name> TRUNCATE PARTITION <list of partitions>`ステートメントを使用して、指定されたパーティションからすべてのデータを削除します。 `TRUNCATE PARTITION`のロジックは[`TRUNCATE TABLE`](/sql-statements/sql-statement-truncate.md)と似ていますが、パーティション用です。
 
 `EXCHANGE PARTITION` `RENAME TABLE t1 TO t1_tmp, t2 TO t1, t1_tmp TO t2`ようなテーブルの名前変更の仕組みと同様に、パーティションと非パーティションテーブルを交換することによって機能します。
 
@@ -827,16 +827,16 @@ Empty set (0.00 sec)
 
 パーティションに交換するすべての行がパーティション定義と一致していることを確認してください。そうしないと、ステートメントは失敗します。
 
-TiDB には、 `EXCHANGE PARTITION`に影響を与える可能性のある特定の機能がいくつかあることに注意してください。テーブル構造にそのような機能が含まれている場合は、 `EXCHANGE PARTITION` [<a href="https://dev.mysql.com/doc/refman/8.0/en/partitioning-management-exchange.html">MySQL の EXCHANGE PARTITION 条件</a>](https://dev.mysql.com/doc/refman/8.0/en/partitioning-management-exchange.html)を満たすことを確認する必要があります。一方、これらの特定の機能がパーティション化されたテーブルと非パーティション化されたテーブルの両方で同じように定義されていることを確認してください。これらの具体的な機能には次のようなものがあります。
+TiDB には、 `EXCHANGE PARTITION`に影響を与える可能性のある特定の機能がいくつかあることに注意してください。テーブル構造にそのような機能が含まれている場合は、 `EXCHANGE PARTITION` [MySQL の EXCHANGE PARTITION 条件](https://dev.mysql.com/doc/refman/8.0/en/partitioning-management-exchange.html)を満たすことを確認する必要があります。一方、これらの特定の機能がパーティション化されたテーブルと非パーティション化されたテーブルの両方で同じように定義されていることを確認してください。これらの具体的な機能には次のようなものがあります。
 
 <CustomContent platform="tidb">
 
--   [<a href="/placement-rules-in-sql.md">SQL の配置ルール</a>](/placement-rules-in-sql.md) : 配置ポリシーは同じです。
+-   [SQL の配置ルール](/placement-rules-in-sql.md) : 配置ポリシーは同じです。
 
 </CustomContent>
 
--   [<a href="/tikv-overview.md">TiFlash</a>](/tikv-overview.md) : TiFlashレプリカの数は同じです。
--   [<a href="/clustered-indexes.md">クラスター化インデックス</a>](/clustered-indexes.md) : パーティション化されたテーブルと非パーティション化テーブルが両方とも`CLUSTERED` 、または両方とも`NONCLUSTERED`です。
+-   [TiFlash](/tikv-overview.md) : TiFlashレプリカの数は同じです。
+-   [クラスター化インデックス](/clustered-indexes.md) : パーティション化されたテーブルと非パーティション化テーブルが両方とも`CLUSTERED` 、または両方とも`NONCLUSTERED`です。
 
 さらに、 `EXCHANGE PARTITION`と他のコンポーネントとの互換性には制限があります。パーティション化テーブルと非パーティション化テーブルの両方に同じ定義が必要です。
 
@@ -986,7 +986,7 @@ ALTER TABLE member_level REORGANIZE PARTITION l1_2,l3,l4,l5,l6 INTO
     ERROR 1526 (HY000): Table has no partition for value 6
     ```
 
--   パーティションが再編成されると、対応するパーティションの統計が古くなるため、次の警告が表示されます。この場合、 [<a href="/sql-statements/sql-statement-analyze-table.md">`ANALYZE TABLE`</a>](/sql-statements/sql-statement-analyze-table.md)ステートメントを使用して統計を更新できます。
+-   パーティションが再編成されると、対応するパーティションの統計が古くなるため、次の警告が表示されます。この場合、 [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)ステートメントを使用して統計を更新できます。
 
     ```sql
     +---------+------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -1038,7 +1038,7 @@ ALTER TABLE example COALESCE PARTITION 1;
 
 > **ノート：**
 >
-> ハッシュまたはキー パーティション テーブルのパーティション数を変更するプロセスでは、すべてのデータを新しいパーティション数にコピーすることでパーティションが再編成されます。したがって、ハッシュ パーティション テーブルまたはキーパーティションテーブルのパーティション数を変更すると、古い統計に関する次の警告が表示されます。この場合、 [<a href="/sql-statements/sql-statement-analyze-table.md">`ANALYZE TABLE`</a>](/sql-statements/sql-statement-analyze-table.md)ステートメントを使用して統計を更新できます。
+> ハッシュまたはキー パーティション テーブルのパーティション数を変更するプロセスでは、すべてのデータを新しいパーティション数にコピーすることでパーティションが再編成されます。したがって、ハッシュ パーティション テーブルまたはキーパーティションテーブルのパーティション数を変更すると、古い統計に関する次の警告が表示されます。この場合、 [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)ステートメントを使用して統計を更新できます。
 >
 > ```sql
 > +---------+------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -1085,7 +1085,7 @@ Query OK, 0 rows affected (0.03 sec)
 
 ## パーティションのプルーニング {#partition-pruning}
 
-[<a href="/partition-pruning.md">パーティションのプルーニング</a>](/partition-pruning.md)は、一致しないパーティションをスキャンしないという非常に単純なアイデアに基づいた最適化です。
+[パーティションのプルーニング](/partition-pruning.md)は、一致しないパーティションをスキャンしないという非常に単純なアイデアに基づいた最適化です。
 
 パーティションテーブル`t1`を作成するとします。
 
@@ -1189,8 +1189,8 @@ SELECT fname, lname, region_code, dob
 
     現在、TiDB のパーティション プルーニングは、次の単調な関数のみをサポートしています。
 
-    -   [<a href="/functions-and-operators/date-and-time-functions.md">`UNIX_TIMESTAMP()`</a>](/functions-and-operators/date-and-time-functions.md)
-    -   [<a href="/functions-and-operators/date-and-time-functions.md">`TO_DAYS()`</a>](/functions-and-operators/date-and-time-functions.md)
+    -   [`UNIX_TIMESTAMP()`](/functions-and-operators/date-and-time-functions.md)
+    -   [`TO_DAYS()`](/functions-and-operators/date-and-time-functions.md)
 
     たとえば、パーティション式は単純な列です。
 
@@ -1694,11 +1694,11 @@ select * from t;
 
 `tidb_enable_list_partition`環境変数は、パーティションテーブル機能を有効にするかどうかを制御します。この変数を`OFF`に設定すると、テーブルの作成時にパーティション情報が無視され、このテーブルは通常のテーブルとして作成されます。
 
-この変数はテーブルの作成時にのみ使用されます。テーブルの作成後、この変数値を変更しても効果はありません。詳細は[<a href="/system-variables.md#tidb_enable_list_partition-new-in-v50">システム変数</a>](/system-variables.md#tidb_enable_list_partition-new-in-v50)を参照してください。
+この変数はテーブルの作成時にのみ使用されます。テーブルの作成後、この変数値を変更しても効果はありません。詳細は[システム変数](/system-variables.md#tidb_enable_list_partition-new-in-v50)を参照してください。
 
 ### 動的プルーニングモード {#dynamic-pruning-mode}
 
-TiDB は、 `dynamic`または`static`モードのいずれかでパーティション化されたテーブルにアクセスします。 v6.3.0 以降、 `dynamic`モードがデフォルトで使用されます。ただし、動的パーティショニングは、完全なテーブル レベルの統計 (GlobalStats) が収集された後にのみ有効になります。 GlobalStats が収集される前に、TiDB は代わりに`static`モードを使用します。 GlobalStats の詳細については、 [<a href="/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode">動的プルーニング モードでパーティション テーブルの統計を収集する</a>](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode)を参照してください。
+TiDB は、 `dynamic`または`static`モードのいずれかでパーティション化されたテーブルにアクセスします。 v6.3.0 以降、 `dynamic`モードがデフォルトで使用されます。ただし、動的パーティショニングは、完全なテーブル レベルの統計 (GlobalStats) が収集された後にのみ有効になります。 GlobalStats が収集される前に、TiDB は代わりに`static`モードを使用します。 GlobalStats の詳細については、 [動的プルーニング モードでパーティション テーブルの統計を収集する](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode)を参照してください。
 
 {{< copyable "" >}}
 
@@ -1757,7 +1757,7 @@ show stats_meta where table_name like "t";
 | Warning | 8244 | Build table: `t` column: `a` global-level stats failed due to missing partition-level column stats, please run analyze table to refresh columns of all partitions
 ```
 
-スクリプトを使用して、すべてのパーティション化されたテーブルの統計を更新することもできます。詳細は[<a href="#update-statistics-of-partitioned-tables-in-dynamic-pruning-mode">動的プルーニング モードでパーティション テーブルの統計を更新する</a>](#update-statistics-of-partitioned-tables-in-dynamic-pruning-mode)を参照してください。
+スクリプトを使用して、すべてのパーティション化されたテーブルの統計を更新することもできます。詳細は[動的プルーニング モードでパーティション テーブルの統計を更新する](#update-statistics-of-partitioned-tables-in-dynamic-pruning-mode)を参照してください。
 
 テーブルレベルの統計の準備ができたら、すべての SQL ステートメントと`auto-analyze`操作に有効なグローバル動的プルーニング モードを有効にできます。
 

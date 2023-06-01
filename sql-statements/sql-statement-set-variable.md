@@ -91,4 +91,4 @@ mysql> SHOW SESSION VARIABLES LIKE 'sql_mode';
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-show-variables.md">[グローバル|セッション] 変数を表示</a>](/sql-statements/sql-statement-show-variables.md)
+-   [[グローバル|セッション] 変数を表示](/sql-statements/sql-statement-show-variables.md)

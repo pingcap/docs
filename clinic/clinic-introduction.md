@@ -9,9 +9,9 @@ PingCAPクリニック診断サービス (PingCAPクリニック) は、 TiUPま
 
 PingCAPクリニック は、クラスターの問題を診断するために次の 2 つのコンポーネントを提供します。
 
--   [<a href="https://github.com/pingcap/diag">クライアントを診断する</a>](https://github.com/pingcap/diag) :
+-   [クライアントを診断する](https://github.com/pingcap/diag) :
 
-    Diag クライアント (Diag) は、クラスター側にデプロイされるオープンソースの診断ツールです。 Diag は、クラスター診断データを収集し、診断データをクリニック サーバーにアップロードし、クラスター上でローカルに簡単なヘルス チェックを実行するために使用されます。 Diag によって収集できる診断データの完全なリストについては、 [<a href="/clinic/clinic-data-instruction-for-tiup.md">PingCAPクリニックの診断データ</a>](/clinic/clinic-data-instruction-for-tiup.md)を参照してください。
+    Diag クライアント (Diag) は、クラスター側にデプロイされるオープンソースの診断ツールです。 Diag は、クラスター診断データを収集し、診断データをクリニック サーバーにアップロードし、クラスター上でローカルに簡単なヘルス チェックを実行するために使用されます。 Diag によって収集できる診断データの完全なリストについては、 [PingCAPクリニックの診断データ](/clinic/clinic-data-instruction-for-tiup.md)を参照してください。
 
     > **ノート：**
     >
@@ -21,14 +21,14 @@ PingCAPクリニック は、クラスターの問題を診断するために次
 
     Clinic Server は、クラウド上に展開されるクラウド サービスです。 SaaS モデルで診断サービスを提供することにより、クリニック サーバーはアップロードされた診断データを受信するだけでなく、データの保存、表示、クラスター診断レポートの提供を行うオンライン診断環境としても機能します。 Clinic Server は、storage場所に応じて 2 つの独立したサービスを提供します。
 
-    -   [<a href="https://clinic.pingcap.com">海外ユーザー向けクリニックサーバー</a>](https://clinic.pingcap.com) : データは米国の AWS に保存されます。
-    -   [<a href="https://clinic.pingcap.com.cn">中国本土のユーザー向けクリニックサーバー</a>](https://clinic.pingcap.com.cn) : データは中国 (北京) リージョンの AWS に保存されます。
+    -   [海外ユーザー向けクリニックサーバー](https://clinic.pingcap.com) : データは米国の AWS に保存されます。
+    -   [中国本土のユーザー向けクリニックサーバー](https://clinic.pingcap.com.cn) : データは中国 (北京) リージョンの AWS に保存されます。
 
 ## ユーザーシナリオ {#user-scenarios}
 
 -   クラスターの問題をリモートでトラブルシューティングする
 
-    クラスターにすぐに修正できない問題がある場合は、PingCAP またはコミュニティから[<a href="/support.md">支持を得ます</a>](/support.md)できます。リモート アシスタンスについてテクニカル サポートに問い合わせる場合は、クラスターからさまざまな診断データを保存し、そのデータをサポート スタッフに転送する必要があります。この場合、Diag を使用すると、ワンクリックで診断データを収集できます。 Diag を使用すると、完全な診断データを迅速に収集できるため、複雑な手動データ収集操作を回避できます。データを収集した後、PingCAP テクニカル サポート スタッフがクラスターの問題をトラブルシューティングできるように、そのデータをクリニック サーバーにアップロードできます。 Clinic Server は、アップロードされた診断データ用の安全なstorageを提供し、オンライン診断をサポートするため、トラブルシューティングの効率が大幅に向上します。
+    クラスターにすぐに修正できない問題がある場合は、PingCAP またはコミュニティから[支持を得ます](/support.md)できます。リモート アシスタンスについてテクニカル サポートに問い合わせる場合は、クラスターからさまざまな診断データを保存し、そのデータをサポート スタッフに転送する必要があります。この場合、Diag を使用すると、ワンクリックで診断データを収集できます。 Diag を使用すると、完全な診断データを迅速に収集できるため、複雑な手動データ収集操作を回避できます。データを収集した後、PingCAP テクニカル サポート スタッフがクラスターの問題をトラブルシューティングできるように、そのデータをクリニック サーバーにアップロードできます。 Clinic Server は、アップロードされた診断データ用の安全なstorageを提供し、オンライン診断をサポートするため、トラブルシューティングの効率が大幅に向上します。
 
 -   クラスターのステータスをすばやく確認する
 
@@ -62,7 +62,7 @@ PingCAPクリニック は、クラスターの問題を診断するために次
 > **ノート：**
 >
 > -   Clinic Server は、2022 年 7 月 15 日から 2023 年 7 月 14 日まで無料です。その後サービスで料金の請求が開始される場合は、2023 年 7 月 14 日までに電子メールで通知されます。
-> -   使用制限を調整したい場合は、PingCAP から[<a href="/support.md">支持を得ます</a>](/support.md) 。
+> -   使用制限を調整したい場合は、PingCAP から[支持を得ます](/support.md) 。
 
 | サービスの種類       | 制限          |
 | :------------ | :---------- |
@@ -75,10 +75,10 @@ PingCAPクリニック は、クラスターの問題を診断するために次
 ## 次のステップ {#next-step}
 
 -   オンプレミス環境でPingCAPクリニックを使用する
-    -   [<a href="/clinic/quick-start-with-clinic.md">PingCAPクリニックのクイック スタート</a>](/clinic/quick-start-with-clinic.md)
-    -   [<a href="/clinic/clinic-user-guide-for-tiup.md">PingCAPクリニックを使用したクラスターのトラブルシューティング</a>](/clinic/clinic-user-guide-for-tiup.md)
-    -   [<a href="/clinic/clinic-data-instruction-for-tiup.md">PingCAPクリニックの診断データ</a>](/clinic/clinic-data-instruction-for-tiup.md)
+    -   [PingCAPクリニックのクイック スタート](/clinic/quick-start-with-clinic.md)
+    -   [PingCAPクリニックを使用したクラスターのトラブルシューティング](/clinic/clinic-user-guide-for-tiup.md)
+    -   [PingCAPクリニックの診断データ](/clinic/clinic-data-instruction-for-tiup.md)
 
 -   Kubernetes でPingCAPクリニックを使用する
-    -   [<a href="https://docs.pingcap.com/tidb-in-kubernetes/stable/clinic-user-guide">PingCAPクリニックを使用した TiDBクラスタのトラブルシューティング</a>](https://docs.pingcap.com/tidb-in-kubernetes/stable/clinic-user-guide)
-    -   [<a href="https://docs.pingcap.com/tidb-in-kubernetes/stable/clinic-data-collection">PingCAPクリニックの診断データ</a>](https://docs.pingcap.com/tidb-in-kubernetes/stable/clinic-data-collection)
+    -   [PingCAPクリニックを使用した TiDBクラスタのトラブルシューティング](https://docs.pingcap.com/tidb-in-kubernetes/stable/clinic-user-guide)
+    -   [PingCAPクリニックの診断データ](https://docs.pingcap.com/tidb-in-kubernetes/stable/clinic-data-collection)

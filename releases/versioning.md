@@ -12,7 +12,7 @@ TiDB は 2 つのリリース シリーズを提供します。
 -   長期サポートのリリース
 -   開発マイルストーン リリース (TiDB v6.0.0 で導入)
 
-TiDB のメジャー リリースのサポート ポリシーについては、 [<a href="https://en.pingcap.com/tidb-release-support-policy/">TiDB リリース サポート ポリシー</a>](https://en.pingcap.com/tidb-release-support-policy/)を参照してください。
+TiDB のメジャー リリースのサポート ポリシーについては、 [TiDB リリース サポート ポリシー](https://en.pingcap.com/tidb-release-support-policy/)を参照してください。
 
 ## リリースのバージョン管理 {#release-versioning}
 
@@ -22,7 +22,7 @@ TiDB のバージョン管理の形式は`X.Y.Z`です。 `X.Y`リリース シ�
 -   `Y`は 0 から増分します。2 `Y`リリースごとに新機能と改善が導入されています。
 -   リリース シリーズの最初のリリースでは、デフォルトで`Z`が 0 に設定されます。パッチ リリースの場合は、1 から`Z`増加します。
 
-TiDB v5.0.0 以前のバージョンのバージョン管理システムについては、 [<a href="#historical-versioning-deprecated">履歴バージョン管理</a>](#historical-versioning-deprecated)を参照してください。
+TiDB v5.0.0 以前のバージョンのバージョン管理システムについては、 [履歴バージョン管理](#historical-versioning-deprecated)を参照してください。
 
 ## 長期サポートのリリース {#long-term-support-releases}
 

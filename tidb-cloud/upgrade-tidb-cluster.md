@@ -13,7 +13,7 @@ TiDB バージョンが低すぎる場合、 TiDB Cloud は定期的に均一に
 
 ## アップグレードするにはサポートに連絡してください {#contact-support-to-upgrade}
 
-アップグレード リクエストを送信するには、 [<a href="/tidb-cloud/tidb-cloud-support.md">TiDB Cloudのサポート</a>](/tidb-cloud/tidb-cloud-support.md)の手順を実行してサポート チームに連絡してください。 **[説明]**ボックスに次の情報を入力してください。
+アップグレード リクエストを送信するには、 [TiDB Cloudのサポート](/tidb-cloud/tidb-cloud-support.md)の手順を実行してサポート チームに連絡してください。 **[説明]**ボックスに次の情報を入力してください。
 
 -   クラウドプロバイダー: GCP または AWS
 -   クラスタ名: xxx

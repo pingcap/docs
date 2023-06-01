@@ -4,7 +4,7 @@ title: tiup mirror sign
 
 # tiup mirror sign {#tiup-mirror-sign}
 
-`tiup mirror sign`コマンドは、 TiUP [<a href="/tiup/tiup-mirror-reference.md">鏡</a>](/tiup/tiup-mirror-reference.md)で定義されたメタデータ ファイル (*.json) に署名するために使用されます。これらのメタデータ ファイルは、ローカル ファイル システムに保存されるか、署名エントリを提供するために HTTP プロトコルを使用してリモートに保存される場合があります。
+`tiup mirror sign`コマンドは、 TiUP [鏡](/tiup/tiup-mirror-reference.md)で定義されたメタデータ ファイル (*.json) に署名するために使用されます。これらのメタデータ ファイルは、ローカル ファイル システムに保存されるか、署名エントリを提供するために HTTP プロトコルを使用してリモートに保存される場合があります。
 
 ## 構文 {#syntax}
 
@@ -46,4 +46,4 @@ tiup mirror sign <manifest-file> [flags]
 -   ファイルが指定されたキーで署名されている場合、 TiUP はエラー`Error: this manifest file has already been signed by specified key`を報告します。
 -   ファイルが有効なマニフェストではない場合、 TiUP はエラー`Error: unmarshal manifest: %s`を報告します。
 
-[<a href="/tiup/tiup-command-mirror.md#command-list">&lt;&lt; 前のページに戻る - TiUP Mirror コマンド一覧</a>](/tiup/tiup-command-mirror.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP Mirror コマンド一覧](/tiup/tiup-command-mirror.md#command-list)

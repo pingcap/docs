@@ -11,26 +11,26 @@ DM v5.4 以降、TiDB データ移行のリリース ノートは、同じバー
 
 ## 5.3 {#5-3}
 
--   [<a href="https://docs.pingcap.com/tidb-data-migration/v5.3/5.3.0/">5.3.0</a>](https://docs.pingcap.com/tidb-data-migration/v5.3/5.3.0/)
+-   [5.3.0](https://docs.pingcap.com/tidb-data-migration/v5.3/5.3.0/)
 
 ## 2.0 {#2-0}
 
--   [<a href="https://docs.pingcap.com/tidb-data-migration/v5.3/2.0.7/">2.0.7</a>](https://docs.pingcap.com/tidb-data-migration/v5.3/2.0.7/)
--   [<a href="https://docs.pingcap.com/tidb-data-migration/v5.3/2.0.6/">2.0.6</a>](https://docs.pingcap.com/tidb-data-migration/v5.3/2.0.6/)
--   [<a href="https://docs.pingcap.com/tidb-data-migration/v5.3/2.0.5/">2.0.5</a>](https://docs.pingcap.com/tidb-data-migration/v5.3/2.0.5/)
--   [<a href="https://docs.pingcap.com/tidb-data-migration/v5.3/2.0.4/">2.0.4</a>](https://docs.pingcap.com/tidb-data-migration/v5.3/2.0.4/)
--   [<a href="https://docs.pingcap.com/tidb-data-migration/v5.3/2.0.3/">2.0.3</a>](https://docs.pingcap.com/tidb-data-migration/v5.3/2.0.3/)
--   [<a href="https://docs.pingcap.com/tidb-data-migration/v5.3/2.0.2/">2.0.2</a>](https://docs.pingcap.com/tidb-data-migration/v5.3/2.0.2/)
--   [<a href="https://docs.pingcap.com/tidb-data-migration/v5.3/2.0.1/">2.0.1</a>](https://docs.pingcap.com/tidb-data-migration/v5.3/2.0.1/)
--   [<a href="https://docs.pingcap.com/tidb-data-migration/v5.3/2.0.0-ga/">2.0GA</a>](https://docs.pingcap.com/tidb-data-migration/v5.3/2.0.0-ga/)
--   [<a href="https://docs.pingcap.com/tidb-data-migration/v5.3/2.0.0-rc.2/">2.0.0-rc.2</a>](https://docs.pingcap.com/tidb-data-migration/v5.3/2.0.0-rc.2/)
--   [<a href="https://docs.pingcap.com/tidb-data-migration/v5.3/2.0.0-rc/">2.0.0-rc</a>](https://docs.pingcap.com/tidb-data-migration/v5.3/2.0.0-rc/)
+-   [2.0.7](https://docs.pingcap.com/tidb-data-migration/v5.3/2.0.7/)
+-   [2.0.6](https://docs.pingcap.com/tidb-data-migration/v5.3/2.0.6/)
+-   [2.0.5](https://docs.pingcap.com/tidb-data-migration/v5.3/2.0.5/)
+-   [2.0.4](https://docs.pingcap.com/tidb-data-migration/v5.3/2.0.4/)
+-   [2.0.3](https://docs.pingcap.com/tidb-data-migration/v5.3/2.0.3/)
+-   [2.0.2](https://docs.pingcap.com/tidb-data-migration/v5.3/2.0.2/)
+-   [2.0.1](https://docs.pingcap.com/tidb-data-migration/v5.3/2.0.1/)
+-   [2.0GA](https://docs.pingcap.com/tidb-data-migration/v5.3/2.0.0-ga/)
+-   [2.0.0-rc.2](https://docs.pingcap.com/tidb-data-migration/v5.3/2.0.0-rc.2/)
+-   [2.0.0-rc](https://docs.pingcap.com/tidb-data-migration/v5.3/2.0.0-rc/)
 
 ## 1.0 {#1-0}
 
--   [<a href="https://docs.pingcap.com/tidb-data-migration/v5.3/1.0.7/">1.0.7</a>](https://docs.pingcap.com/tidb-data-migration/v5.3/1.0.7/)
--   [<a href="https://docs.pingcap.com/tidb-data-migration/v5.3/1.0.6/">1.0.6</a>](https://docs.pingcap.com/tidb-data-migration/v5.3/1.0.6/)
--   [<a href="https://docs.pingcap.com/tidb-data-migration/v5.3/1.0.5/">1.0.5</a>](https://docs.pingcap.com/tidb-data-migration/v5.3/1.0.5/)
--   [<a href="https://docs.pingcap.com/tidb-data-migration/v5.3/1.0.4/">1.0.4</a>](https://docs.pingcap.com/tidb-data-migration/v5.3/1.0.4/)
--   [<a href="https://docs.pingcap.com/tidb-data-migration/v5.3/1.0.3/">1.0.3</a>](https://docs.pingcap.com/tidb-data-migration/v5.3/1.0.3/)
--   [<a href="https://docs.pingcap.com/tidb-data-migration/v5.3/1.0.2/">1.0.2</a>](https://docs.pingcap.com/tidb-data-migration/v5.3/1.0.2/)
+-   [1.0.7](https://docs.pingcap.com/tidb-data-migration/v5.3/1.0.7/)
+-   [1.0.6](https://docs.pingcap.com/tidb-data-migration/v5.3/1.0.6/)
+-   [1.0.5](https://docs.pingcap.com/tidb-data-migration/v5.3/1.0.5/)
+-   [1.0.4](https://docs.pingcap.com/tidb-data-migration/v5.3/1.0.4/)
+-   [1.0.3](https://docs.pingcap.com/tidb-data-migration/v5.3/1.0.3/)
+-   [1.0.2](https://docs.pingcap.com/tidb-data-migration/v5.3/1.0.2/)

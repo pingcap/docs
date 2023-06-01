@@ -5,7 +5,7 @@ summary: Learn how to deploy TiDB Data Migration using TiUP DM.
 
 # TiUPを使用した DMクラスタのデプロイ {#deploy-a-dm-cluster-using-tiup}
 
-[<a href="https://github.com/pingcap/tiup">TiUP</a>](https://github.com/pingcap/tiup) TiDB 4.0 で導入されたクラスターの運用および保守ツールです。 TiUP は、 Golangで書かれたクラスター管理コンポーネント[<a href="/dm/maintain-dm-using-tiup.md">TiUP DM</a>](/dm/maintain-dm-using-tiup.md)を提供します。 TiUP DMを使用すると、DM クラスターのデプロイ、開始、停止、破棄、スケーリング、アップグレードなどの毎日の TiDB データ移行 (DM) 操作を簡単に実行し、DM クラスターのパラメーターを管理できます。
+[TiUP DM](/dm/maintain-dm-using-tiup.md)を提供します。 TiUP DMを使用すると、DM クラスターのデプロイ、開始、停止、破棄、スケーリング、アップグレードなどの毎日の TiDB データ移行 (DM) 操作を簡単に実行し、DM クラスターのパラメーターを管理できます。
 
 TiUP は、 DM v2.0 以降の DM バージョンの導入をサポートしています。このドキュメントでは、さまざまなトポロジの DM クラスターを展開する方法を紹介します。
 
@@ -17,7 +17,7 @@ TiUP は、 DM v2.0 以降の DM バージョンの導入をサポートして�
 
 DM が完全なデータ レプリケーション タスクを実行する場合、DM ワーカーは 1 つのアップストリーム データベースのみにバインドされます。 DM ワーカーは、まず全量のデータをローカルにエクスポートし、次にそのデータをダウンストリーム データベースにインポートします。したがって、ワーカーのホスト領域には、エクスポートするすべての上流テーブルを格納できる十分な大きさが必要です。storageパスは、後でタスクを作成するときに指定します。
 
-さらに、DM クラスターをデプロイする場合は[<a href="/dm/dm-hardware-and-software-requirements.md">ハードウェアとソフトウェアの要件</a>](/dm/dm-hardware-and-software-requirements.md)を満たす必要があります。
+さらに、DM クラスターをデプロイする場合は[ハードウェアとソフトウェアの要件](/dm/dm-hardware-and-software-requirements.md)を満たす必要があります。
 
 ## ステップ 1: TiUP を制御マシンにインストールする {#step-1-install-tiup-on-the-control-machine}
 
@@ -45,7 +45,7 @@ DM が完全なデータ レプリケーション タスクを実行する場合
 
 目的のクラスター トポロジに応じて、クラスター初期化構成ファイルを手動で作成および編集する必要があります。
 
-[<a href="https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml">設定ファイルのテンプレート</a>](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml)に従って、YAML 構成ファイル (たとえば`topology.yaml`という名前) を作成する必要があります。他のシナリオの場合は、それに応じて構成を編集します。
+[設定ファイルのテンプレート](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml)に従って、YAML 構成ファイル (たとえば`topology.yaml`という名前) を作成する必要があります。他のシナリオの場合は、それに応じて構成を編集します。
 
 コマンド`tiup dm template > topology.yaml`を使用すると、構成ファイルのテンプレートをすばやく生成できます。
 
@@ -143,7 +143,7 @@ alertmanager_servers:
 >     -   TiUPノードは、すべての DM マスター ノードのうちの`port`に接続できます (デフォルトでは`8261` )。
 >     -   TiUPノードは、すべての DM ワーカー ノードのうちの`port`に接続できます (デフォルトでは`8262` )。
 
-`master_servers.host.config`パラメータの詳細については、 [<a href="https://github.com/pingcap/dm/blob/master/dm/master/dm-master.toml">マスターパラメータ</a>](https://github.com/pingcap/dm/blob/master/dm/master/dm-master.toml)を参照してください。 `worker_servers.host.config`パラメータの詳細については、 [<a href="https://github.com/pingcap/dm/blob/master/dm/worker/dm-worker.toml">ワーカーパラメータ</a>](https://github.com/pingcap/dm/blob/master/dm/worker/dm-worker.toml)を参照してください。
+`master_servers.host.config`パラメータの詳細については、 [ワーカーパラメータ](https://github.com/pingcap/dm/blob/master/dm/worker/dm-worker.toml)を参照してください。
 
 ## ステップ 3: デプロイメント コマンドを実行する {#step-3-execute-the-deployment-command}
 
@@ -226,6 +226,6 @@ tiup dm display dm-test
 
 ## ステップ 8: dmctl を使用した移行タスクの管理 {#step-8-managing-migration-tasks-using-dmctl}
 
-dmctl は、DM クラスターの制御に使用されるコマンドライン ツールです。 [<a href="/dm/maintain-dm-using-tiup.md#dmctl">TiUP経由で dmctl を使用する</a>](/dm/maintain-dm-using-tiup.md#dmctl)をお勧めします。
+dmctl は、DM クラスターの制御に使用されるコマンドライン ツールです。 [TiUP経由で dmctl を使用する](/dm/maintain-dm-using-tiup.md#dmctl)をお勧めします。
 
-dmctl は、コマンド モードと対話モードの両方をサポートします。詳細は[<a href="/dm/dmctl-introduction.md#maintain-dm-clusters-using-dmctl">dmctl を使用した DM クラスターの管理</a>](/dm/dmctl-introduction.md#maintain-dm-clusters-using-dmctl)を参照してください。
+dmctl は、コマンド モードと対話モードの両方をサポートします。詳細は[dmctl を使用した DM クラスターの管理](/dm/dmctl-introduction.md#maintain-dm-clusters-using-dmctl)を参照してください。

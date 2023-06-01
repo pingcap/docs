@@ -4,7 +4,7 @@ title: tiup mirror genkey
 
 # tiup mirror genkey {#tiup-mirror-genkey}
 
-TiUP [<a href="/tiup/tiup-mirror-reference.md">鏡</a>](/tiup/tiup-mirror-reference.md)の定義によれば、ユーザーには次の 3 つの役割があります。
+TiUP [鏡](/tiup/tiup-mirror-reference.md)の定義によれば、ユーザーには次の 3 つの役割があります。
 
 -   ミラー管理者: `root.json` 、 `index.json` 、 `snapshot.json` 、および`timestamp.json`を変更する権限を持っています。
 -   コンポーネント所有者: 対応するコンポーネントを変更する権限を持っています。
@@ -52,4 +52,4 @@ tiup mirror genkey [flags]
     -   `-n/--name`で指定された秘密キーが存在しない場合: TiUP はエラー`Error: open ${TIUP_HOME}/keys/{name}.json: no such file or directory`を報告します。
     -   `-n/--name`で指定した秘密鍵が存在する場合TiUPは、対応する公開鍵の内容を出力します。
 
-[<a href="/tiup/tiup-command-mirror.md#command-list">&lt;&lt; 前のページに戻る - TiUP Mirror コマンド一覧</a>](/tiup/tiup-command-mirror.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP Mirror コマンド一覧](/tiup/tiup-command-mirror.md#command-list)

@@ -33,7 +33,7 @@ TiDB バージョン: v3.0.1
 
 ### TiDBパラメータの設定 {#tidb-parameter-configuration}
 
-TiDB、TiKV、PD はすべてデフォルトの[<a href="https://github.com/pingcap/tidb-operator">TiDB Operator</a>](https://github.com/pingcap/tidb-operator)構成を使用します。
+TiDB、TiKV、PD はすべてデフォルトの[TiDB Operator](https://github.com/pingcap/tidb-operator)構成を使用します。
 
 ### クラスタトポロジ {#cluster-topology}
 

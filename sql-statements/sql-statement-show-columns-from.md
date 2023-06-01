@@ -11,7 +11,7 @@ summary: An overview of the usage of SHOW [FULL] COLUMNS FROM for the TiDB datab
 
 > **ノート：**
 >
-> `DESC TABLE <table_name>` 、 `DESCRIBE TABLE <table_name>` 、および`EXPLAIN TABLE <table_name>` 、上記のステートメントと同等ではありません。これらは[<a href="/sql-statements/sql-statement-explain.md">`DESC SELECT * FROM &#x3C;table_name>`</a>](/sql-statements/sql-statement-explain.md)の別名です。
+> `DESC TABLE <table_name>` 、 `DESCRIBE TABLE <table_name>` 、および`EXPLAIN TABLE <table_name>` 、上記のステートメントと同等ではありません。これらは[`DESC SELECT * FROM &#x3C;table_name>`](/sql-statements/sql-statement-explain.md)の別名です。
 
 ## あらすじ {#synopsis}
 
@@ -157,8 +157,8 @@ mysql> show full columns from mysql.user;
 
 ## MySQLの互換性 {#mysql-compatibility}
 
-このステートメントは、MySQL と完全な互換性があると理解されています。 GitHub では互換性の違いは[<a href="https://github.com/pingcap/tidb/issues/new/choose">問題を通じて報告されました</a>](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
+このステートメントは、MySQL と完全な互換性があると理解されています。 GitHub では互換性の違いは[問題を通じて報告されました](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-show-create-table.md">テーブルの作成を表示</a>](/sql-statements/sql-statement-show-create-table.md)
+-   [テーブルの作成を表示](/sql-statements/sql-statement-show-create-table.md)

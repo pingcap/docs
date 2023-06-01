@@ -11,33 +11,33 @@ summary: This document describes how to query data from a single table in a data
 
 ## あなたが始める前に {#before-you-begin}
 
-次のコンテンツでは、 [<a href="/develop/dev-guide-bookshop-schema-design.md">書店</a>](/develop/dev-guide-bookshop-schema-design.md)アプリケーションを例として、TiDB の単一テーブルのデータをクエリする方法を示します。
+次のコンテンツでは、 [書店](/develop/dev-guide-bookshop-schema-design.md)アプリケーションを例として、TiDB の単一テーブルのデータをクエリする方法を示します。
 
 データをクエリする前に、次の手順を完了していることを確認してください。
 
 <CustomContent platform="tidb">
 
-1.  TiDB クラスターを構築します ( [<a href="/develop/dev-guide-build-cluster-in-cloud.md">TiDB Cloud</a>](/develop/dev-guide-build-cluster-in-cloud.md)または[<a href="/production-deployment-using-tiup.md">TiUP</a>](/production-deployment-using-tiup.md)の使用を推奨)。
+1.  TiDB クラスターを構築します ( [TiUP](/production-deployment-using-tiup.md)の使用を推奨)。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-1.  [<a href="/develop/dev-guide-build-cluster-in-cloud.md">TiDB Cloud</a>](/develop/dev-guide-build-cluster-in-cloud.md)を使用して TiDB クラスターを構築します。
+1.  [TiDB Cloud](/develop/dev-guide-build-cluster-in-cloud.md)を使用して TiDB クラスターを構築します。
 
 </CustomContent>
 
-2.  [<a href="/develop/dev-guide-bookshop-schema-design.md#import-table-structures-and-data">Bookshop アプリケーションのテーブル スキーマとサンプル データをインポートします</a>](/develop/dev-guide-bookshop-schema-design.md#import-table-structures-and-data) 。
+2.  [Bookshop アプリケーションのテーブル スキーマとサンプル データをインポートします](/develop/dev-guide-bookshop-schema-design.md#import-table-structures-and-data) 。
 
 <CustomContent platform="tidb">
 
-3.  [<a href="/develop/dev-guide-connect-to-tidb.md">TiDB に接続する</a>](/develop/dev-guide-connect-to-tidb.md) 。
+3.  [TiDB に接続する](/develop/dev-guide-connect-to-tidb.md) 。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-3.  [<a href="/tidb-cloud/connect-to-tidb-cluster.md">TiDB に接続する</a>](/tidb-cloud/connect-to-tidb-cluster.md) 。
+3.  [TiDB に接続する](/tidb-cloud/connect-to-tidb-cluster.md) 。
 
 </CustomContent>
 
@@ -78,7 +78,7 @@ SELECT id, name FROM authors;
 </div>
 <div label="Java" value="java">
 
-Javaでは、作成者の基本情報を保存するために、クラス`Author`を宣言できます。データベースの[<a href="/data-type-overview.md">データ型</a>](/data-type-overview.md)と[<a href="/data-type-numeric.md">値の範囲</a>](/data-type-numeric.md)に従って、適切なJavaデータ型を選択する必要があります。例えば：
+Javaでは、作成者の基本情報を保存するために、クラス`Author`を宣言できます。データベースの[値の範囲](/data-type-numeric.md)に従って、適切なJavaデータ型を選択する必要があります。例えば：
 
 -   タイプ`int`のデータを格納するには、タイプ`Int`の変数を使用します。
 -   タイプ`bigint`のデータを格納するには、タイプ`Long`の変数を使用します。
@@ -124,13 +124,13 @@ public class AuthorDAO {
 
 <CustomContent platform="tidb">
 
--   [<a href="/develop/dev-guide-connect-to-tidb.md#jdbc">JDBC ドライバーを使用して TiDB に接続する</a>](/develop/dev-guide-connect-to-tidb.md#jdbc)の後に、 `conn.createStatus()`を使用して`Statement`オブジェクトを作成できます。
+-   [JDBC ドライバーを使用して TiDB に接続する](/develop/dev-guide-connect-to-tidb.md#jdbc)の後に、 `conn.createStatus()`を使用して`Statement`オブジェクトを作成できます。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
--   [<a href="/develop/dev-guide-choose-driver-or-orm.md#java-drivers">JDBC ドライバーを使用して TiDB に接続する</a>](/develop/dev-guide-choose-driver-or-orm.md#java-drivers)の後に、 `conn.createStatus()`を使用して`Statement`オブジェクトを作成できます。
+-   [JDBC ドライバーを使用して TiDB に接続する](/develop/dev-guide-choose-driver-or-orm.md#java-drivers)の後に、 `conn.createStatus()`を使用して`Statement`オブジェクトを作成できます。
 
 </CustomContent>
 
@@ -160,9 +160,9 @@ SELECT * FROM authors WHERE birth_year = 1998;
 
 Javaでは、同じ SQL を使用して、動的パラメータを使用したデータ クエリ リクエストを処理できます。
 
-これは、パラメータを SQL ステートメントに連結することで実行できます。ただし、この方法はアプリケーションのセキュリティに[<a href="https://en.wikipedia.org/wiki/SQL_injection">SQLインジェクション</a>](https://en.wikipedia.org/wiki/SQL_injection)的なリスクをもたらします。
+これは、パラメータを SQL ステートメントに連結することで実行できます。ただし、この方法はアプリケーションのセキュリティに[SQLインジェクション](https://en.wikipedia.org/wiki/SQL_injection)的なリスクをもたらします。
 
-このようなクエリを処理するには、通常のステートメントの代わりに[<a href="/develop/dev-guide-prepared-statement.md">作成済みのステートメント</a>](/develop/dev-guide-prepared-statement.md)を使用します。
+このようなクエリを処理するには、通常のステートメントの代わりに[作成済みのステートメント](/develop/dev-guide-prepared-statement.md)を使用します。
 
 ```java
 public List<Author> getAuthorsByBirthYear(Short birthYear) throws SQLException {
@@ -317,7 +317,7 @@ public List<Author> getAuthorsWithLimit(Integer limit) throws SQLException {
 10 rows in set (0.11 sec)
 ```
 
-この例では、ステートメント`LIMIT`を使用すると、クエリ時間が`0.23 sec`から`0.11 sec`に大幅に短縮されます。詳細については、 [<a href="/topn-limit-push-down.md">トップNとリミット</a>](/topn-limit-push-down.md)を参照してください。
+この例では、ステートメント`LIMIT`を使用すると、クエリ時間が`0.23 sec`から`0.11 sec`に大幅に短縮されます。詳細については、 [トップNとリミット](/topn-limit-push-down.md)を参照してください。
 
 ## 集計クエリ {#aggregate-queries}
 
@@ -395,4 +395,4 @@ public List<AuthorCount> getAuthorCountsByBirthYear() throws SQLException {
 71 rows in set (0.00 sec)
 ```
 
-`COUNT`関数に加えて、TiDB は他の集計関数もサポートしています。詳細については、 [<a href="/functions-and-operators/aggregate-group-by-functions.md">集計 (GROUP BY) 関数</a>](/functions-and-operators/aggregate-group-by-functions.md)を参照してください。
+`COUNT`関数に加えて、TiDB は他の集計関数もサポートしています。詳細については、 [集計 (GROUP BY) 関数](/functions-and-operators/aggregate-group-by-functions.md)を参照してください。

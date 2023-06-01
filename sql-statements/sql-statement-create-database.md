@@ -49,7 +49,7 @@ create_specification:
 
 既存のデータベースを作成し、 `IF NOT EXISTS`を指定しない場合、エラーが表示されます。
 
-`create_specification`オプションは、データベース内の特定の`CHARACTER SET`と`COLLATE`を指定するために使用されます。現在、TiDB は一部の文字セットと照合順序のみをサポートしています。詳細は[<a href="/character-set-and-collation.md">文字セットと照合順序のサポート</a>](/character-set-and-collation.md)を参照してください。
+`create_specification`オプションは、データベース内の特定の`CHARACTER SET`と`COLLATE`を指定するために使用されます。現在、TiDB は一部の文字セットと照合順序のみをサポートしています。詳細は[文字セットと照合順序のサポート](/character-set-and-collation.md)を参照してください。
 
 ## 例 {#examples}
 
@@ -73,11 +73,11 @@ mysql> SHOW TABLES;
 
 ## MySQLの互換性 {#mysql-compatibility}
 
-このステートメントは、MySQL と完全な互換性があると理解されています。 GitHub では互換性の違いは[<a href="https://github.com/pingcap/tidb/issues/new/choose">問題を通じて報告されました</a>](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
+このステートメントは、MySQL と完全な互換性があると理解されています。 GitHub では互換性の違いは[問題を通じて報告されました](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-use.md">使用</a>](/sql-statements/sql-statement-use.md)
--   [<a href="/sql-statements/sql-statement-alter-database.md">データベースの変更</a>](/sql-statements/sql-statement-alter-database.md)
--   [<a href="/sql-statements/sql-statement-drop-database.md">データベースを削除</a>](/sql-statements/sql-statement-drop-database.md)
--   [<a href="/sql-statements/sql-statement-show-databases.md">データベースを表示する</a>](/sql-statements/sql-statement-show-databases.md)
+-   [使用](/sql-statements/sql-statement-use.md)
+-   [データベースの変更](/sql-statements/sql-statement-alter-database.md)
+-   [データベースを削除](/sql-statements/sql-statement-drop-database.md)
+-   [データベースを表示する](/sql-statements/sql-statement-show-databases.md)

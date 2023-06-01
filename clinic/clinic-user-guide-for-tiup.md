@@ -5,22 +5,22 @@ summary: Learn how to use the PingCAP Clinic Diagnostic Service to troubleshoot 
 
 # PingCAPクリニックを使用したクラスターのトラブルシューティング {#troubleshoot-clusters-using-pingcap-clinic}
 
-TiUPを使用してデプロイされた TiDB クラスターおよび DM クラスターの場合、 PingCAPクリニック診断サービス (PingCAPクリニック) を使用してクラスターの問題をリモートでトラブルシューティングし、 [<a href="https://github.com/pingcap/diag">診断クライアント (Diag)</a>](https://github.com/pingcap/diag)および Clinic Server を使用してローカルでクラスターのステータスを簡単にチェックできます。
+TiUPを使用してデプロイされた TiDB クラスターおよび DM クラスターの場合、 PingCAPクリニック診断サービス (PingCAPクリニック) を使用してクラスターの問題をリモートでトラブルシューティングし、 [診断クライアント (Diag)](https://github.com/pingcap/diag)および Clinic Server を使用してローカルでクラスターのステータスを簡単にチェックできます。
 
 > **ノート：**
 >
-> -   このドキュメントは、オンプレミス環境でTiUP を使用してデプロイされたクラスターに**のみ**適用されます。 TiDB Operator on Kubernetes を使用してデプロイされたクラスターについては、 [<a href="https://docs.pingcap.com/tidb-in-kubernetes/stable/clinic-user-guide">TiDB Operator環境向けPingCAPクリニック</a>](https://docs.pingcap.com/tidb-in-kubernetes/stable/clinic-user-guide)を参照してください。
+> -   このドキュメントは、オンプレミス環境でTiUP を使用してデプロイされたクラスターに**のみ**適用されます。 TiDB Operator on Kubernetes を使用してデプロイされたクラスターについては、 [TiDB Operator環境向けPingCAPクリニック](https://docs.pingcap.com/tidb-in-kubernetes/stable/clinic-user-guide)を参照してください。
 >
 > -   PingCAPクリニック は、 TiDB Ansible を使用してデプロイされたクラスターからのデータ収集を**サポートしていません**。
 
 ## ユーザーシナリオ {#user-scenarios}
 
--   [<a href="#troubleshoot-cluster-problems-remotely">クラスターの問題をリモートでトラブルシューティングする</a>](#troubleshoot-cluster-problems-remotely)
+-   [クラスターの問題をリモートでトラブルシューティングする](#troubleshoot-cluster-problems-remotely)
 
-    -   クラスターに[<a href="/support.md">支持を得ます</a>](/support.md)問題が発生した場合、PingCAP から必要な場合は、リモート トラブルシューティングを容易にするために次の操作を実行できます。Diag で診断データを収集し、収集したデータをクリニック サーバーにアップロードし、サーバーへのデータ アクセス リンクを提供します。テクニカルサポートスタッフ。
+    -   クラスターに[支持を得ます](/support.md)問題が発生した場合、PingCAP から必要な場合は、リモート トラブルシューティングを容易にするために次の操作を実行できます。Diag で診断データを収集し、収集したデータをクリニック サーバーにアップロードし、サーバーへのデータ アクセス リンクを提供します。テクニカルサポートスタッフ。
     -   クラスターに問題が発生し、問題をすぐに分析できない場合は、Diag を使用してデータを収集し、後で分析するために保存できます。
 
--   [<a href="#perform-a-quick-check-on-the-cluster-status-locally">クラスターのステータスをローカルで簡単にチェックする</a>](#perform-a-quick-check-on-the-cluster-status-locally)
+-   [クラスターのステータスをローカルで簡単にチェックする](#perform-a-quick-check-on-the-cluster-status-locally)
 
     現時点ではクラスターが安定して実行されている場合でも、潜在的な安定性リスクを検出するためにクラスターを定期的にチェックする必要があります。 PingCAPクリニックが提供するローカル クイック チェック機能を使用して、クラスターの潜在的な健康リスクを特定できます。ローカル チェックは構成のみをチェックします。メトリクスやログなど、より多くの項目を確認するには、診断データをクリニック サーバーにアップロードし、ヘルス レポート機能を使用することをお勧めします。
 
@@ -44,7 +44,7 @@ PingCAPクリニックを使用する前に、Diag ( PingCAPクリニックが�
 
     > **ノート：**
     >
-    > -   インターネット接続のないクラスターの場合は、Diag をオフラインでデプロイする必要があります。詳細は[<a href="/production-deployment-using-tiup.md#deploy-tiup-offline">TiUP をオフラインでデプロイ: 方法 2</a>](/production-deployment-using-tiup.md#deploy-tiup-offline)を参照してください。
+    > -   インターネット接続のないクラスターの場合は、Diag をオフラインでデプロイする必要があります。詳細は[TiUP をオフラインでデプロイ: 方法 2](/production-deployment-using-tiup.md#deploy-tiup-offline)を参照してください。
     > -   Diag は、v5.4.0 以降の TiDB Server オフライン ミラー パッケージで**のみ**提供されます。
 
 2.  データをアップロードするためのアクセストークン（トークン）を取得、設定します。
@@ -58,12 +58,12 @@ PingCAPクリニックを使用する前に、Diag ( PingCAPクリニックが�
         <SimpleTab groupId="clinicServer">
           <div label="Clinic Server for international users" value="clinic-us">
 
-        [<a href="https://clinic.pingcap.com">海外ユーザー向けクリニックサーバー</a>](https://clinic.pingcap.com) : データは米国の AWS に保存されます。
+        [海外ユーザー向けクリニックサーバー](https://clinic.pingcap.com) : データは米国の AWS に保存されます。
 
         </div>
           <div label="Clinic Server for users in the Chinese mainland" value="clinic-cn">
 
-        [<a href="https://clinic.pingcap.com.cn">中国本土のユーザー向けクリニックサーバー</a>](https://clinic.pingcap.com.cn) : データは中国 (北京) リージョンの AWS に保存されます。
+        [中国本土のユーザー向けクリニックサーバー](https://clinic.pingcap.com.cn) : データは中国 (北京) リージョンの AWS に保存されます。
 
         </div>
 
@@ -75,7 +75,7 @@ PingCAPクリニックを使用する前に、Diag ( PingCAPクリニックが�
 
     > **ノート：**
     >
-    > -   Clinic Server に初めてアクセスする場合は、トークンを取得する前に[<a href="/clinic/quick-start-with-clinic.md#prerequisites">PingCAPクリニックのクイック スタート</a>](/clinic/quick-start-with-clinic.md#prerequisites)を参照して環境を準備する必要があります。
+    > -   Clinic Server に初めてアクセスする場合は、トークンを取得する前に[PingCAPクリニックのクイック スタート](/clinic/quick-start-with-clinic.md#prerequisites)を参照して環境を準備する必要があります。
     > -   データのセキュリティのため、TiDB はトークンの作成時にのみトークンを表示します。トークンを紛失した場合は、古いトークンを削除して、新しいトークンを作成してください。
     > -   トークンはデータのアップロードにのみ使用されます。
 
@@ -118,7 +118,7 @@ PingCAPクリニックを使用する前に、Diag ( PingCAPクリニックが�
 
 4.  (オプション) ログの編集を有効にします。
 
-    TiDB が詳細なログ情報を提供する場合、機密情報 (ユーザー データなど) がログに出力される場合があります。ローカル ログおよびクリニック サーバー内の機密情報の漏洩を回避したい場合は、TiDB 側でログの編集を有効にすることができます。詳細については、 [<a href="/log-redaction.md#log-redaction-in-tidb-side">ログ編集</a>](/log-redaction.md#log-redaction-in-tidb-side)を参照してください。
+    TiDB が詳細なログ情報を提供する場合、機密情報 (ユーザー データなど) がログに出力される場合があります。ローカル ログおよびクリニック サーバー内の機密情報の漏洩を回避したい場合は、TiDB 側でログの編集を有効にすることができます。詳細については、 [ログ編集](/log-redaction.md#log-redaction-in-tidb-side)を参照してください。
 
 ## クラスターの問題をリモートでトラブルシューティングする {#troubleshoot-cluster-problems-remotely}
 
@@ -126,9 +126,9 @@ Diag を使用すると、モニタリング データや構成情報を含む�
 
 ### ステップ1. 収集するデータを確認する {#step-1-check-the-data-to-be-collected}
 
-Diag によって収集できるデータの完全なリストについては、 [<a href="/clinic/clinic-data-instruction-for-tiup.md">PingCAPクリニックの診断データ</a>](/clinic/clinic-data-instruction-for-tiup.md)を参照してください。
+Diag によって収集できるデータの完全なリストについては、 [PingCAPクリニックの診断データ](/clinic/clinic-data-instruction-for-tiup.md)を参照してください。
 
-後の診断の効率を向上させるために、監視データや構成情報を含む完全な診断データを収集することをお勧めします。詳細は[<a href="#step-2-collect-data">クラスターからデータを収集する</a>](#step-2-collect-data)を参照してください。
+後の診断の効率を向上させるために、監視データや構成情報を含む完全な診断データを収集することをお勧めします。詳細は[クラスターからデータを収集する](#step-2-collect-data)を参照してください。
 
 ### ステップ 2. データを収集する {#step-2-collect-data}
 
@@ -219,16 +219,16 @@ Diag を使用すると、 TiUPを使用してデプロイされた TiDB クラ�
 
 クラスターのネットワーク接続に応じて、次のいずれかの方法を選択してデータをアップロードできます。
 
--   方法 1: クラスターが配置されているネットワークがインターネットにアクセスできる場合は、 [<a href="#method-1-upload-directly">アップロード コマンドを使用してデータを直接アップロードする</a>](#method-1-upload-directly)ことができます。
--   方法 2: クラスターが配置されているネットワークがインターネットにアクセスできない場合は、 [<a href="#method-2-pack-and-upload-data">データをパックしてアップロードする</a>](#method-2-pack-and-upload-data)を実行する必要があります。
+-   方法 1: クラスターが配置されているネットワークがインターネットにアクセスできる場合は、 [アップロード コマンドを使用してデータを直接アップロードする](#method-1-upload-directly)ことができます。
+-   方法 2: クラスターが配置されているネットワークがインターネットにアクセスできない場合は、 [データをパックしてアップロードする](#method-2-pack-and-upload-data)を実行する必要があります。
 
 > **ノート：**
 >
-> データをアップロードする前に Diag でトークンまたは`region`設定しなかった場合、Diag はアップロードの失敗を報告し、トークンまたは`region`を設定するように通知します。トークンを設定するには、 [<a href="#prerequisites">前提条件の 2 番目のステップ</a>](#prerequisites)を参照してください。
+> データをアップロードする前に Diag でトークンまたは`region`設定しなかった場合、Diag はアップロードの失敗を報告し、トークンまたは`region`を設定するように通知します。トークンを設定するには、 [前提条件の 2 番目のステップ](#prerequisites)を参照してください。
 
 #### 方法 1. 直接アップロードする {#method-1-upload-directly}
 
-クラスターが配置されているネットワークがインターネットにアクセスできる場合は、次のコマンドを使用して、 [<a href="#step-2-collect-data">ステップ 2: データを収集する</a>](#step-2-collect-data)で取得した収集データが含まれるフォルダーを直接アップロードできます。
+クラスターが配置されているネットワークがインターネットにアクセスできる場合は、次のコマンドを使用して、 [ステップ 2: データを収集する](#step-2-collect-data)で取得した収集データが含まれるフォルダーを直接アップロードできます。
 
 {{< copyable "" >}}
 
@@ -242,7 +242,7 @@ tiup diag upload
 
 クラスターが配置されているネットワークがインターネットにアクセスできない場合は、イントラネット上にデータをパックし、インターネットにアクセスできるデバイスを使用してデータ パッケージをクリニック サーバーにアップロードする必要があります。詳細な操作は次のとおりです。
 
-1.  次のコマンドを実行して、 [<a href="#step-2-collect-data">ステップ 2. データを収集する</a>](#step-2-collect-data)で取得した収集データをパックします。
+1.  次のコマンドを実行して、 [ステップ 2. データを収集する](#step-2-collect-data)で取得した収集データをパックします。
 
     ```bash
     tiup diag package ${filepath}

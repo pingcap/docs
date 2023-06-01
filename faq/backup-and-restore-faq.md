@@ -9,18 +9,18 @@ summary: Learn about Frequently Asked Questions (FAQs) and the solutions of back
 
 ## 誤ってデータを削除または更新した後、すぐにデータを復元するにはどうすればよいですか? {#what-should-i-do-to-quickly-recover-data-after-mistakenly-deleting-or-updating-data}
 
-TiDB v6.4.0 にはフラッシュバック機能が導入されています。この機能を使用すると、GC 時間内で指定した時点までデータを迅速にリカバリできます。したがって、誤操作が発生した場合、この機能を使用してデータを回復できます。詳細は[<a href="/sql-statements/sql-statement-flashback-to-timestamp.md">フラッシュバッククラスタ</a>](/sql-statements/sql-statement-flashback-to-timestamp.md)および[<a href="/sql-statements/sql-statement-flashback-database.md">フラッシュバックデータベース</a>](/sql-statements/sql-statement-flashback-database.md)を参照してください。
+TiDB v6.4.0 にはフラッシュバック機能が導入されています。この機能を使用すると、GC 時間内で指定した時点までデータを迅速にリカバリできます。したがって、誤操作が発生した場合、この機能を使用してデータを回復できます。詳細は[フラッシュバックデータベース](/sql-statements/sql-statement-flashback-database.md)を参照してください。
 
 ## TiDB v5.4.0 以降のバージョンでは、負荷の高いクラスターでバックアップ タスクが実行されると、バックアップ タスクの速度が遅くなるのはなぜですか? {#in-tidb-v5-4-0-and-later-versions-when-backup-tasks-are-performed-on-the-cluster-under-a-heavy-workload-why-does-the-speed-of-backup-tasks-become-slow}
 
-TiDB v5.4.0 以降、 BR にはバックアップ タスクの自動調整機能が導入されています。 v5.4.0 以降のバージョンのクラスターの場合、この機能はデフォルトで有効になっています。クラスターのワークロードが重い場合、この機能はバックアップ タスクで使用されるリソースを制限し、オンライン クラスターへの影響を軽減します。詳細については、 [<a href="/br/br-auto-tune.md">バックアップの自動調整</a>](/br/br-auto-tune.md)を参照してください。
+TiDB v5.4.0 以降、 BR にはバックアップ タスクの自動調整機能が導入されています。 v5.4.0 以降のバージョンのクラスターの場合、この機能はデフォルトで有効になっています。クラスターのワークロードが重い場合、この機能はバックアップ タスクで使用されるリソースを制限し、オンライン クラスターへの影響を軽減します。詳細については、 [バックアップの自動調整](/br/br-auto-tune.md)を参照してください。
 
-TiKV は自動調整[<a href="/tikv-control.md#modify-the-tikv-configuration-dynamically">動的構成</a>](/tikv-control.md#modify-the-tikv-configuration-dynamically)をサポートしています。クラスターを再起動せずに、次の方法でこの機能を有効または無効にできます。
+TiKV は自動調整[動的構成](/tikv-control.md#modify-the-tikv-configuration-dynamically)をサポートしています。クラスターを再起動せずに、次の方法でこの機能を有効または無効にできます。
 
--   自動調整を無効にする: TiKV 構成項目[<a href="/tikv-configuration-file.md#enable-auto-tune-new-in-v540">`backup.enable-auto-tune`</a>](/tikv-configuration-file.md#enable-auto-tune-new-in-v540)から`false`を設定します。
+-   自動調整を無効にする: TiKV 構成項目[`backup.enable-auto-tune`](/tikv-configuration-file.md#enable-auto-tune-new-in-v540)から`false`を設定します。
 -   自動調整を有効にする: `backup.enable-auto-tune` ～ `true`を設定します。 v5.3.x から v5.4.0 以降のバージョンにアップグレードされたクラスターの場合、自動調整機能はデフォルトで無効になっています。手動で有効にする必要があります。
 
-`tikv-ctl`を使用して自動調整を有効または無効にするには、 [<a href="/br/br-auto-tune.md#use-auto-tune">自動調整を使用する</a>](/br/br-auto-tune.md#use-auto-tune)を参照してください。
+`tikv-ctl`を使用して自動調整を有効または無効にするには、 [自動調整を使用する](/br/br-auto-tune.md#use-auto-tune)を参照してください。
 
 さらに、自動調整により、バックアップ タスクで使用されるデフォルトのスレッド数が減少します。詳細については、 `backup.num-threads` ](/tikv-configuration-file.md#num-threads-1)」を参照してください。したがって、Grafana ダッシュボードでは、バックアップ タスクによって使用される速度、CPU 使用率、および I/O リソース使用率が v5.4.0 より前のバージョンよりも低くなります。 v5.4.0 より前では、デフォルト値`backup.num-threads`は`CPU * 0.75`でした。つまり、バックアップ タスクによって使用されるスレッドの数が論理 CPU コアの 75% を占めます。その最大値は`32`でした。 v5.4.0 以降、この構成項目のデフォルト値は`CPU * 0.5` 、最大値は`8`です。
 
@@ -42,15 +42,15 @@ TiKV は自動調整[<a href="/tikv-control.md#modify-the-tikv-configuration-dyn
 
 ### インデックス追加の高速化機能が PITR と互換性がないのはなぜですか? {#why-is-the-acceleration-of-adding-indexes-feature-incompatible-with-pitr}
 
-問題: [<a href="https://github.com/pingcap/tidb/issues/38045">#38045</a>](https://github.com/pingcap/tidb/issues/38045)
+問題: [#38045](https://github.com/pingcap/tidb/issues/38045)
 
-現在、 [<a href="/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630">インデックス加速度</a>](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)機能で作成されたインデックス データは PITR でバックアップできません。
+現在、 [インデックス加速度](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)機能で作成されたインデックス データは PITR でバックアップできません。
 
 したがって、PITR リカバリの完了後、 BR はインデックス アクセラレーションによって作成されたインデックス データを削除し、再作成します。インデックス アクセラレーションによって多数のインデックスが作成された場合、またはログ バックアップ中にインデックス データが大きい場合は、インデックスの作成後にフル バックアップを実行することをお勧めします。
 
 ### クラスターはネットワーク パーティションの障害から回復しましたが、ログ バックアップ タスクの進行状況のチェックポイントはまだ再開されません。なぜ？ {#the-cluster-has-recovered-from-the-network-partition-failure-but-the-checkpoint-of-the-log-backup-task-progress-still-does-not-resume-why}
 
-問題: [<a href="https://github.com/tikv/tikv/issues/13126">#13126</a>](https://github.com/tikv/tikv/issues/13126)
+問題: [#13126](https://github.com/tikv/tikv/issues/13126)
 
 クラスター内でネットワーク パーティションに障害が発生すると、バックアップ タスクはログのバックアップを続行できなくなります。一定の再試行時間が経過すると、タスクは`ERROR`状態に設定されます。この時点で、バックアップ タスクは停止しました。
 
@@ -58,7 +58,7 @@ TiKV は自動調整[<a href="/tikv-control.md#modify-the-tikv-configuration-dyn
 
 ### PITR を実行すると、 <code>execute over region id</code>エラーが返された場合はどうすればよいですか? {#what-should-i-do-if-the-error-code-execute-over-region-id-code-is-returned-when-i-perform-pitr}
 
-問題: [<a href="https://github.com/pingcap/tidb/issues/37207">#37207</a>](https://github.com/pingcap/tidb/issues/37207)
+問題: [#37207](https://github.com/pingcap/tidb/issues/37207)
 
 この問題は通常、完全データ インポート中にログ バックアップを有効にし、その後 PITR を実行してデータ インポート中の特定の時点でデータを復元した場合に発生します。
 
@@ -133,11 +133,11 @@ Error: failed to check gc safePoint, checkpoint ts 433177834291200000: GC safepo
 
 -   v4.0.3 より前では、リストア中に生成された DDL ジョブにより、 TiCDC/ Drainerで予期しない DDL 実行が発生する可能性がありました。したがって、 TiCDC/ Drainerの上流クラスターでリストアを実行する必要がある場合は、 br コマンドライン ツールを使用してリストアされたすべてのテーブルを TiCDC/ Drainerブロック リストに追加します。
 
-[<a href="https://github.com/pingcap/tiflow/blob/7c3c2336f98153326912f3cf6ea2fbb7bcc4a20c/cmd/changefeed.toml#L16">`filter.rules`</a>](https://github.com/pingcap/tiflow/blob/7c3c2336f98153326912f3cf6ea2fbb7bcc4a20c/cmd/changefeed.toml#L16)を使用して TiCDC のブロック リストを構成し、 [<a href="/tidb-binlog/tidb-binlog-configuration-file.md#ignore-table">`syncer.ignore-table`</a>](/tidb-binlog/tidb-binlog-configuration-file.md#ignore-table)を使用してDrainerのブロック リストを構成できます。
+[`syncer.ignore-table`](/tidb-binlog/tidb-binlog-configuration-file.md#ignore-table)を使用してDrainerのブロック リストを構成できます。
 
 ### リストア中に<code>new_collations_enabled_on_first_bootstrap</code>の不一致が報告されるのはなぜですか? {#why-is-code-new-collations-enabled-on-first-bootstrap-code-mismatch-reported-during-restore}
 
-TiDB v6.0.0 以降、デフォルト値[<a href="/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap">`new_collations_enabled_on_first_bootstrap`</a>](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)が`false`から`true`に変更されました。 BR は、上流クラスタの`new_collations_enabled_on_first_bootstrap`設定をバックアップし、この設定の値が上流クラスタと下流クラスタ間で一貫しているかどうかを確認します。値が一貫している場合、 BR は上流クラスターにバックアップされたデータを下流クラスターに安全に復元します。値が矛盾している場合、 BR はデータの復元を実行せず、エラーを報告します。
+TiDB v6.0.0 以降、デフォルト値[`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)が`false`から`true`に変更されました。 BR は、上流クラスタの`new_collations_enabled_on_first_bootstrap`設定をバックアップし、この設定の値が上流クラスタと下流クラスタ間で一貫しているかどうかを確認します。値が一貫している場合、 BR は上流クラスターにバックアップされたデータを下流クラスターに安全に復元します。値が矛盾している場合、 BR はデータの復元を実行せず、エラーを報告します。
 
 以前のバージョンの v6.0.0 の TiDB クラスターにデータをバックアップしており、このデータを v6.0.0 以降のバージョンの TiDB クラスターに復元するとします。この状況では、値`new_collations_enabled_on_first_bootstrap`がアップストリーム クラスターとダウンストリーム クラスター間で一致しているかどうかを手動で確認する必要があります。
 
@@ -146,7 +146,7 @@ TiDB v6.0.0 以降、デフォルト値[<a href="/tidb-configuration-file.md#new
 
 ### 配置ルールをクラスターに復元するとエラーが発生するのはなぜですか? {#why-does-an-error-occur-when-i-restore-placement-rules-to-a-cluster}
 
-v6.0.0 より前では、 BR は[<a href="/placement-rules-in-sql.md">配置ルール</a>](/placement-rules-in-sql.md)をサポートしていません。 v6.0.0 以降、 BR は配置ルールをサポートし、配置ルールのバックアップおよび復元モードを制御するコマンド ライン オプション`--with-tidb-placement-mode=strict/ignore`を導入します。デフォルト値`strict`では、 BR は配置ルールをインポートして検証しますが、値が`ignore`の場合はすべての配置ルールを無視します。
+v6.0.0 より前では、 BR は[配置ルール](/placement-rules-in-sql.md)をサポートしていません。 v6.0.0 以降、 BR は配置ルールをサポートし、配置ルールのバックアップおよび復元モードを制御するコマンド ライン オプション`--with-tidb-placement-mode=strict/ignore`を導入します。デフォルト値`strict`では、 BR は配置ルールをインポートして検証しますが、値が`ignore`の場合はすべての配置ルールを無視します。
 
 ## データ復元の問題 {#data-restore-issues}
 
@@ -168,7 +168,7 @@ v6.0.0 より前では、 BR は[<a href="/placement-rules-in-sql.md">配置ル�
 
 `--ddl-batch-size` ～ `128` 、またはそれより小さい値を設定すると、バッチで作成されるテーブルの数を減らすことができます。
 
-BRを使用して`1`より大きい[<a href="/br/br-batch-create-table.md#use-batch-create-table">`--ddl-batch-size`</a>](/br/br-batch-create-table.md#use-batch-create-table)の値を持つバックアップ データを復元すると、TiDB はテーブル作成の DDL ジョブを TiKV によって維持される DDL ジョブ キューに書き込みます。現時点では、ジョブ メッセージの最大値はデフォルトで`6 MB`であるため、TiDB によって一度に送信されるすべてのテーブル スキーマの合計サイズは 6 MB を超えてはなりません (この値を変更することは**お勧めできません**。詳細については、9 と[<a href="/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50">`txn-entry-size-limit`</a>](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50)を参照してください)。 [<a href="/tikv-configuration-file.md#raft-entry-max-size">`raft-entry-max-size`</a>](/tikv-configuration-file.md#raft-entry-max-size) ）。したがって、 `--ddl-batch-size`過度に大きな値に設定すると、TiDB によって一度にバッチで送信されるテーブルのスキーマ サイズが指定値を超え、 BRで`entry too large, the max entry size is 6291456, the size of data is 7690800`エラーが報告されます。
+BRを使用して`1`より大きい[`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size) ）。したがって、 `--ddl-batch-size`過度に大きな値に設定すると、TiDB によって一度にバッチで送信されるテーブルのスキーマ サイズが指定値を超え、 BRで`entry too large, the max entry size is 6291456, the size of data is 7690800`エラーが報告されます。
 
 ### <code>local</code>storageを使用する場合、バックアップ ファイルはどこに保存されますか? {#where-are-the-backed-up-files-stored-when-i-use-code-local-code-storage}
 
@@ -267,7 +267,7 @@ TiKV がバックアップ ディレクトリにアクセスできるかどう�
 
 BR v5.1.0 以降、完全バックアップを実行すると、 BR は**`mysql`スキーマ内のテーブル**をバックアップします。 BR v6.2.0 より前のデフォルト設定では、 BR はユーザー データのみを復元し、 **`mysql`スキーマ**内のテーブルは復元しません。
 
-ユーザーが`mysql`スキーマ (システム テーブルではない) で作成したテーブルを復元するには、 [<a href="/table-filter.md#syntax">テーブルフィルター</a>](/table-filter.md#syntax)使用してテーブルを明示的に含めます。次の例は、 BR が通常の復元を実行するときに`mysql.usertable`テーブルを復元する方法を示しています。
+ユーザーが`mysql`スキーマ (システム テーブルではない) で作成したテーブルを復元するには、 [テーブルフィルター](/table-filter.md#syntax)使用してテーブルを明示的に含めます。次の例は、 BR が通常の復元を実行するときに`mysql.usertable`テーブルを復元する方法を示しています。
 
 {{< copyable "" >}}
 
@@ -289,11 +289,11 @@ br restore full -f '*.*' -f '!mysql.*' -f 'mysql.usertable' -s $external_storage
 br restore full -f 'mysql.usertable' -s $external_storage_url --with-sys-table
 ```
 
-[<a href="/table-filter.md#syntax">テーブルフィルター</a>](/table-filter.md#syntax)を設定した場合でも、 **BR は次のシステム テーブルを復元しないこと**に注意してください。
+[テーブルフィルター](/table-filter.md#syntax)を設定した場合でも、 **BR は次のシステム テーブルを復元しないこと**に注意してください。
 
 -   統計テーブル ( `mysql.stat_*` )
 -   システム変数テーブル ( `mysql.tidb` 、 `mysql.global_variables` )
--   [<a href="https://github.com/pingcap/tidb/blob/master/br/pkg/restore/systable_restore.go#L31">その他のシステムテーブル</a>](https://github.com/pingcap/tidb/blob/master/br/pkg/restore/systable_restore.go#L31)
+-   [その他のシステムテーブル](https://github.com/pingcap/tidb/blob/master/br/pkg/restore/systable_restore.go#L31)
 
 ## バックアップと復元についてその他知っておきたいこと {#other-things-you-may-want-to-know-about-backup-and-restore}
 
@@ -325,4 +325,4 @@ v4.0.9 では、 BR はデフォルトで統計をバックアップするため
 
 ### BR はテーブルの<code>SHARD_ROW_ID_BITS</code>および<code>PRE_SPLIT_REGIONS</code>情報をバックアップしますか?復元されたテーブルには複数のリージョンがありますか? {#does-br-back-up-the-code-shard-row-id-bits-code-and-code-pre-split-regions-code-information-of-a-table-does-the-restored-table-have-multiple-regions}
 
-はい。 BRはテーブルの[<a href="/sql-statements/sql-statement-split-region.md#pre_split_regions">`SHARD_ROW_ID_BITS`および`PRE_SPLIT_REGIONS`</a>](/sql-statements/sql-statement-split-region.md#pre_split_regions)情報をバックアップします。復元されたテーブルのデータも複数のリージョンに分割されます。
+はい。 BRはテーブルの[`SHARD_ROW_ID_BITS`および`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions)情報をバックアップします。復元されたテーブルのデータも複数のリージョンに分割されます。

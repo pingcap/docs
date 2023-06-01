@@ -7,8 +7,8 @@ summary: Learn how to replicate data to storage services using TiCDC, and learn 
 
 TiDB v6.5.0 以降、TiCDC は、Amazon S3、GCS、Azure Blob Storage、NFS などのstorageサービスへの行変更イベントの保存をサポートします。このドキュメントでは、TiCDC を使用して増分データをstorageサービスにレプリケートする変更フィードを作成する方法と、データがどのように保存されるかを説明します。この文書の構成は次のとおりです。
 
--   [<a href="#replicate-change-data-to-storage-services">データをstorageサービスにレプリケートする方法</a>](#replicate-change-data-to-storage-services) 。
--   [<a href="#storage-path-structure">データがstorageサービスに保存される仕組み</a>](#storage-path-structure) 。
+-   [データをstorageサービスにレプリケートする方法](#replicate-change-data-to-storage-services) 。
+-   [データがstorageサービスに保存される仕組み](#storage-path-structure) 。
 
 ## 変更データをstorageサービスにレプリケートする {#replicate-change-data-to-storage-services}
 
@@ -28,10 +28,10 @@ Info: {"upstream_id":7171388873935111376,"namespace":"default","id":"simple-repl
 ```
 
 -   `--changefeed-id` : チェンジフィードの ID。形式は`^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$`正規表現と一致する必要があります。この ID が指定されていない場合、TiCDC は UUID (バージョン 4 形式) を ID として自動的に生成します。
--   `--sink-uri` : チェンジフィードの下流アドレス。詳細は[<a href="#configure-sink-uri">シンク URI を構成する</a>](#configure-sink-uri)を参照してください。
+-   `--sink-uri` : チェンジフィードの下流アドレス。詳細は[シンク URI を構成する](#configure-sink-uri)を参照してください。
 -   `--start-ts` : チェンジフィードの開始 TSO。 TiCDC は、この TSO からのデータの取得を開始します。デフォルト値は現在時刻です。
 -   `--target-ts` : チェンジフィードの終了 TSO。 TiCDC は、この TSO が発生するまでデータのプルを停止します。デフォルト値は空です。これは、TiCDC がデータのプルを自動的に停止しないことを意味します。
--   `--config` : チェンジフィードの設定ファイル。詳細は[<a href="/ticdc/ticdc-changefeed-config.md">TiCDC チェンジフィード構成パラメータ</a>](/ticdc/ticdc-changefeed-config.md)を参照してください。
+-   `--config` : チェンジフィードの設定ファイル。詳細は[TiCDC チェンジフィード構成パラメータ](/ticdc/ticdc-changefeed-config.md)を参照してください。
 
 ## シンク URI を構成する {#configure-sink-uri}
 
@@ -49,7 +49,7 @@ URI の`[query_parameters]`については、次のパラメータを設定で�
 | `flush-interval`        | データの変更をダウンストリームのクラウドstorageに保存する間隔。                                                                                                                                                                                                                                                                                                                         | `5s`       | `[2s, 10m]`            |
 | `file-size`             | バイト数がこのパラメータの値を超える場合、データ変更ファイルはクラウドstorageに保存されます。                                                                                                                                                                                                                                                                                                          | `67108864` | `[1048576, 536870912]` |
 | `protocol`              | ダウンストリームに送信されるメッセージのプロトコル形式。                                                                                                                                                                                                                                                                                                                                | 該当なし       | `canal-json`と`csv`     |
-| `enable-tidb-extension` | `protocol`が`canal-json`に設定され、 `enable-tidb-extension` `true`に設定されている場合、TiCDC は[<a href="/ticdc/ticdc-canal-json.md#watermark-event">ウォーターマークイベント</a>](/ticdc/ticdc-canal-json.md#watermark-event)送信し、 [<a href="/ticdc/ticdc-canal-json.md#tidb-extension-field">TiDB 拡張フィールド</a>](/ticdc/ticdc-canal-json.md#tidb-extension-field) Canal-JSON メッセージに追加します。 | `false`    | `false`と`true`         |
+| `enable-tidb-extension` | `protocol`が`canal-json`に設定され、 `enable-tidb-extension` `true`に設定されている場合、TiCDC は[TiDB 拡張フィールド](/ticdc/ticdc-canal-json.md#tidb-extension-field) Canal-JSON メッセージに追加します。 | `false`    | `false`と`true`         |
 
 > **ノート：**
 >
@@ -77,7 +77,7 @@ URI の`[query_parameters]`については、次のパラメータを設定で�
 
 > **ヒント：**
 >
-> TiCDC の Amazon S3、GCS、および Azure Blob Storage の URI パラメーターは、 BRの URI パラメーターと同じです。詳細は[<a href="/br/backup-and-restore-storages.md#uri-format-description">バックアップstorageのURI形式</a>](/br/backup-and-restore-storages.md#uri-format-description)を参照してください。
+> TiCDC の Amazon S3、GCS、および Azure Blob Storage の URI パラメーターは、 BRの URI パラメーターと同じです。詳細は[バックアップstorageのURI形式](/br/backup-and-restore-storages.md#uri-format-description)を参照してください。
 
 ### NFS のシンク URI を構成する {#configure-sink-uri-for-nfs}
 
@@ -212,17 +212,17 @@ DDL イベントによってテーブルのバージョンが変更されると�
 -   `Query` ：DDL文。
 -   `TableColumns` : 1 つ以上のマップの配列。各マップはソース テーブル内の列を記述します。
     -   `ColumnName` :カラム名。
-    -   `ColumnType` :カラムのタイプ。詳細は[<a href="#data-type">データ・タイプ</a>](#data-type)を参照してください。
-    -   `ColumnLength` :カラムの長さ。詳細は[<a href="#data-type">データ・タイプ</a>](#data-type)を参照してください。
-    -   `ColumnPrecision` :カラムの精度。詳細は[<a href="#data-type">データ・タイプ</a>](#data-type)を参照してください。
-    -   `ColumnScale` : 小数点以下の桁数(スケール)。詳細は[<a href="#data-type">データ・タイプ</a>](#data-type)を参照してください。
+    -   `ColumnType` :カラムのタイプ。詳細は[データ・タイプ](#data-type)を参照してください。
+    -   `ColumnLength` :カラムの長さ。詳細は[データ・タイプ](#data-type)を参照してください。
+    -   `ColumnPrecision` :カラムの精度。詳細は[データ・タイプ](#data-type)を参照してください。
+    -   `ColumnScale` : 小数点以下の桁数(スケール)。詳細は[データ・タイプ](#data-type)を参照してください。
     -   `ColumnNullable` : このオプションの値が`true`の場合、列は NULL にすることができます。
     -   `ColumnIsPk` : このオプションの値が`true`の場合、列は主キーの一部です。
 -   `TableColumnsTotal` : `TableColumns`配列のサイズ。
 
 ### データ・タイプ {#data-type}
 
-このセクションでは、 `schema.json`ファイルで使用されるデータ型について説明します。データ型は`T(M[, D])`として定義されています。詳細は[<a href="/data-type-overview.md">データ型</a>](/data-type-overview.md)を参照してください。
+このセクションでは、 `schema.json`ファイルで使用されるデータ型について説明します。データ型は`T(M[, D])`として定義されています。詳細は[データ型](/data-type-overview.md)を参照してください。
 
 #### 整数型 {#integer-types}
 

@@ -4,7 +4,7 @@ title: Topology Configuration File for DM Cluster Deployment Using TiUP
 
 # TiUPを使用した DMクラスタ展開用のトポロジコンフィグレーションファイル {#topology-configuration-file-for-dm-cluster-deployment-using-tiup}
 
-TiDB データ マイグレーション (DM) クラスターをデプロイまたはスケーリングするには、クラスター トポロジーを記述するトポロジー ファイル ( [<a href="https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml">サンプル</a>](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml) ) を提供する必要があります。
+TiDB データ マイグレーション (DM) クラスターをデプロイまたはスケーリングするには、クラスター トポロジーを記述するトポロジー ファイル ( [サンプル](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml) ) を提供する必要があります。
 
 同様に、クラスター トポロジを変更するには、トポロジ ファイルを変更する必要があります。違いは、クラスターのデプロイ後は、トポロジー ファイル内のフィールドの一部のみを変更できることです。このドキュメントでは、トポロジ ファイルの各セクションと各セクションの各フィールドを紹介します。
 
@@ -12,13 +12,13 @@ TiDB データ マイグレーション (DM) クラスターをデプロイま�
 
 TiUPを使用した DM クラスター展開のトポロジ構成ファイルには、次のセクションが含まれる場合があります。
 
--   [<a href="#global">グローバル</a>](#global) : クラスターのグローバル構成。一部の構成項目はクラスターのデフォルト値を使用し、インスタンスごとに個別に構成できます。
--   [<a href="#server_configs">サーバー構成</a>](#server_configs) : コンポーネントのグローバル構成。各コンポーネントを個別に構成できます。インスタンスに同じキーを持つ構成アイテムがある場合、インスタンスの構成アイテムが有効になります。
--   [<a href="#master_servers">マスターサーバー</a>](#master_servers) : DM マスター インスタンスの構成。この構成では、DMコンポーネントのマスター サービスがデプロイされるマシンを指定します。
--   [<a href="#worker_servers">ワーカーサーバー</a>](#worker_servers) : DM ワーカー インスタンスの構成。この構成では、DMコンポーネントのワーカー サービスがデプロイされるマシンを指定します。
--   [<a href="#monitoring_servers">監視サーバー</a>](#monitoring_servers) : Prometheus インスタンスがデプロイされるマシンを指定します。 TiUP は複数の Prometheus インスタンスのデプロイをサポートしていますが、最初のインスタンスのみが使用されます。
--   [<a href="#grafana_servers">グラファナサーバー</a>](#grafana_servers) : Grafana インスタンスの構成。構成では、Grafana インスタンスがデプロイされるマシンを指定します。
--   [<a href="#alertmanager_servers">アラートマネージャー_サーバー</a>](#alertmanager_servers) : Alertemanager インスタンスの構成。この構成では、Alertmanager インスタンスがデプロイされるマシンを指定します。
+-   [グローバル](#global) : クラスターのグローバル構成。一部の構成項目はクラスターのデフォルト値を使用し、インスタンスごとに個別に構成できます。
+-   [サーバー構成](#server_configs) : コンポーネントのグローバル構成。各コンポーネントを個別に構成できます。インスタンスに同じキーを持つ構成アイテムがある場合、インスタンスの構成アイテムが有効になります。
+-   [マスターサーバー](#master_servers) : DM マスター インスタンスの構成。この構成では、DMコンポーネントのマスター サービスがデプロイされるマシンを指定します。
+-   [ワーカーサーバー](#worker_servers) : DM ワーカー インスタンスの構成。この構成では、DMコンポーネントのワーカー サービスがデプロイされるマシンを指定します。
+-   [監視サーバー](#monitoring_servers) : Prometheus インスタンスがデプロイされるマシンを指定します。 TiUP は複数の Prometheus インスタンスのデプロイをサポートしていますが、最初のインスタンスのみが使用されます。
+-   [グラファナサーバー](#grafana_servers) : Grafana インスタンスの構成。構成では、Grafana インスタンスがデプロイされるマシンを指定します。
+-   [アラートマネージャー_サーバー](#alertmanager_servers) : Alertemanager インスタンスの構成。この構成では、Alertmanager インスタンスがデプロイされるマシンを指定します。
 
 ### <code>global</code> {#code-global-code}
 
@@ -64,8 +64,8 @@ global:
 
 `server_configs`は、サービスを構成し、各コンポーネントの構成ファイルを生成するために使用されます。 `global`セクションと同様に、 `server_configs`セクションの設定は、インスタンス内の同じキーを持つ設定によって上書きできます。 `server_configs`は主に次のフィールドが含まれます。
 
--   `master` : DMマスターサービスに関連する設定。サポートされているすべての構成項目については、 [<a href="/dm/dm-master-configuration-file.md">DMマスターコンフィグレーションファイル</a>](/dm/dm-master-configuration-file.md)を参照してください。
--   `worker` : DM-worker サービスに関連する構成。サポートされているすべての構成項目については、 [<a href="/dm/dm-worker-configuration-file.md">DM ワーカーコンフィグレーションファイル</a>](/dm/dm-worker-configuration-file.md)を参照してください。
+-   `master` : DMマスターサービスに関連する設定。サポートされているすべての構成項目については、 [DMマスターコンフィグレーションファイル](/dm/dm-master-configuration-file.md)を参照してください。
+-   `worker` : DM-worker サービスに関連する構成。サポートされているすべての構成項目については、 [DM ワーカーコンフィグレーションファイル](/dm/dm-worker-configuration-file.md)を参照してください。
 
 `server_configs`構成例は次のとおりです。
 
@@ -92,7 +92,7 @@ server_configs:
 -   `deploy_dir` : デプロイメントディレクトリを指定します。フィールドが指定されていないか、相対ディレクトリとして指定されている場合、デプロイメント ディレクトリは`global`セクションの`deploy_dir`設定に従って生成されます。
 -   `data_dir` : データディレクトリを指定します。フィールドが指定されていないか、相対ディレクトリとして指定されている場合、データ ディレクトリはセクション`global`の`data_dir`設定に従って生成されます。
 -   `log_dir` : ログディレクトリを指定します。フィールドが指定されていないか、相対ディレクトリとして指定されている場合、ログ ディレクトリはセクション`global`の`log_dir`設定に従って生成されます。
--   `numa_node` : NUMA ポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲット マシンに[<a href="https://linux.die.net/man/8/numactl">ヌマクトル</a>](https://linux.die.net/man/8/numactl)がインストールされていることを確認する必要があります。このフィールドが指定されている場合、 cpubind および membind ポリシーは[<a href="https://linux.die.net/man/8/numactl">ヌマクトル</a>](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などの NUMA ノードの ID です。
+-   `numa_node` : NUMA ポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲット マシンに[ヌマクトル](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などの NUMA ノードの ID です。
 -   `config` : このフィールドの設定ルールは、セクション`server_configs`の`master`と同じです。 `config`を指定した場合、 `config`の設定は`server_configs`の`master`の設定とマージされ (2 つのフィールドが重複する場合、このフィールドの設定が有効になります)、設定ファイルが生成され、設定ファイルで指定されたマシンに配布されます。 `host`フィールド。
 -   `os` : `host`フィールドで指定されたマシンのオペレーティング システム。フィールドが指定されていない場合、デフォルト値は`global`セクションで設定された`os`値です。
 -   `arch` : `host`フィールドで指定されたマシンのアーキテクチャ。フィールドが指定されていない場合、デフォルト値は`global`セクションで設定された`arch`値です。
@@ -148,7 +148,7 @@ master_servers:
 -   `deploy_dir` : デプロイメントディレクトリを指定します。フィールドが指定されていないか、相対ディレクトリとして指定されている場合、デプロイメント ディレクトリは`global`セクションの`deploy_dir`設定に従って生成されます。
 -   `data_dir` : データディレクトリを指定します。フィールドが指定されていないか、相対ディレクトリとして指定されている場合、データ ディレクトリはセクション`global`の`data_dir`設定に従って生成されます。
 -   `log_dir` : ログディレクトリを指定します。フィールドが指定されていないか、相対ディレクトリとして指定されている場合、ログ ディレクトリはセクション`global`の`log_dir`設定に従って生成されます。
--   `numa_node` : NUMA ポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲット マシンに[<a href="https://linux.die.net/man/8/numactl">ヌマクトル</a>](https://linux.die.net/man/8/numactl)がインストールされていることを確認する必要があります。このフィールドが指定されている場合、 cpubind および membind ポリシーは[<a href="https://linux.die.net/man/8/numactl">ヌマクトル</a>](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などの NUMA ノードの ID です。
+-   `numa_node` : NUMA ポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲット マシンに[ヌマクトル](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などの NUMA ノードの ID です。
 -   `config` : このフィールドの設定ルールは、セクション`server_configs`の`worker`と同じです。 `config`を指定した場合、 `config`の設定は`server_configs`の`worker`の設定とマージされ (2 つのフィールドが重複する場合、このフィールドの設定が有効になります)、設定ファイルが生成され、設定ファイルで指定されたマシンに配布されます。 `host`フィールド。
 -   `os` : `host`フィールドで指定されたマシンのオペレーティング システム。フィールドが指定されていない場合、デフォルト値は`global`セクションで設定された`os`値です。
 -   `arch` : `host`フィールドで指定されたマシンのアーキテクチャ。フィールドが指定されていない場合、デフォルト値は`global`セクションで設定された`arch`値です。
@@ -191,12 +191,12 @@ worker_servers:
 -   `deploy_dir` : デプロイメントディレクトリを指定します。フィールドが指定されていないか、相対ディレクトリとして指定されている場合、デプロイメント ディレクトリは`global`セクションの`deploy_dir`設定に従って生成されます。
 -   `data_dir` : データディレクトリを指定します。フィールドが指定されていないか、相対ディレクトリとして指定されている場合、データ ディレクトリはセクション`global`の`data_dir`設定に従って生成されます。
 -   `log_dir` : ログディレクトリを指定します。フィールドが指定されていないか、相対ディレクトリとして指定されている場合、ログ ディレクトリはセクション`global`の`log_dir`設定に従って生成されます。
--   `numa_node` : NUMA ポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲット マシンに[<a href="https://linux.die.net/man/8/numactl">ヌマクトル</a>](https://linux.die.net/man/8/numactl)がインストールされていることを確認する必要があります。このフィールドが指定されている場合、 cpubind および membind ポリシーは[<a href="https://linux.die.net/man/8/numactl">ヌマクトル</a>](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などの NUMA ノードの ID です。
+-   `numa_node` : NUMA ポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲット マシンに[ヌマクトル](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などの NUMA ノードの ID です。
 -   `storage_retention` : Prometheus 監視データの保持時間を指定します。デフォルト値は「15d」です。
 -   `rule_dir` : `*.rules.yml`つのファイル全体が配置されているローカル ディレクトリを指定します。指定されたディレクトリ内のファイルは、クラスター構成の初期化フェーズ中に Prometheus ルールとしてターゲット マシンに送信されます。
 -   `remote_config` : Prometheus データのリモートへの書き込み、またはリモートからのデータの読み取りをサポートします。このフィールドには 2 つの構成があります。
-    -   `remote_write` : Prometheus のドキュメント[<a href="https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_write">`&#x3C;remote_write>`</a>](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_write)を参照してください。
-    -   `remote_read` : Prometheus のドキュメント[<a href="https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_read">`&#x3C;remote_read>`</a>](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_read)を参照してください。
+    -   `remote_write` : Prometheus のドキュメント[`&#x3C;remote_write>`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_write)を参照してください。
+    -   `remote_read` : Prometheus のドキュメント[`&#x3C;remote_read>`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_read)を参照してください。
 -   `external_alertmanagers` : `external_alertmanagers`フィールドが設定されている場合、Prometheus はクラスターの外部にある Alertmanager に設定動作を警告します。このフィールドは配列であり、その各要素は外部 Alertmanager であり、 `host`フィールドと`web_port`フィールドで構成されます。
 -   `os` : `host`フィールドで指定されたマシンのオペレーティング システム。フィールドが指定されていない場合、デフォルト値は`global`セクションで設定された`os`値です。
 -   `arch` : `host`フィールドで指定されたマシンのアーキテクチャ。フィールドが指定されていない場合、デフォルト値は`global`セクションで設定された`arch`値です。
@@ -284,7 +284,7 @@ grafana_servers:
 -   `deploy_dir` : デプロイメントディレクトリを指定します。フィールドが指定されていないか、相対ディレクトリとして指定されている場合、デプロイメント ディレクトリは`global`セクションの`deploy_dir`設定に従って生成されます。
 -   `data_dir` : データディレクトリを指定します。フィールドが指定されていないか、相対ディレクトリとして指定されている場合、データ ディレクトリはセクション`global`の`data_dir`設定に従って生成されます。
 -   `log_dir` : ログディレクトリを指定します。フィールドが指定されていないか、相対ディレクトリとして指定されている場合、ログ ディレクトリはセクション`global`の`log_dir`設定に従って生成されます。
--   `numa_node` : NUMA ポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲット マシンに[<a href="https://linux.die.net/man/8/numactl">ヌマクトル</a>](https://linux.die.net/man/8/numactl)がインストールされていることを確認する必要があります。このフィールドが指定されている場合、 cpubind および membind ポリシーは[<a href="https://linux.die.net/man/8/numactl">ヌマクトル</a>](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などの NUMA ノードの ID です。
+-   `numa_node` : NUMA ポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲット マシンに[ヌマクトル](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などの NUMA ノードの ID です。
 -   `config_file` : ローカルファイルを指定します。指定されたファイルは、クラスター構成の初期化フェーズ中に、Alertmanager の構成としてターゲット マシンに送信されます。
 -   `os` : `host`フィールドで指定されたマシンのオペレーティング システム。フィールドが指定されていない場合、デフォルト値は`global`セクションで設定された`os`値です。
 -   `arch` : `host`フィールドで指定されたマシンのアーキテクチャ。フィールドが指定されていない場合、デフォルト値は`global`セクションで設定された`arch`値です。

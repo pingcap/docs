@@ -49,7 +49,7 @@ TiDB は、 MySQL 5.7で導入されたコメントのような構文に基づ�
 SELECT /*+ USE_INDEX(t1, idx1), HASH_AGG(), HASH_JOIN(t1) */ count(*) FROM t t1, t t2 WHERE t1.a = t2.b;
 ```
 
-オプティマイザー ヒントがクエリ実行プランにどのような影響を与えるかは、 [<a href="/sql-statements/sql-statement-explain.md">`EXPLAIN`</a>](/sql-statements/sql-statement-explain.md)と[<a href="/sql-statements/sql-statement-explain-analyze.md">`EXPLAIN ANALYZE`</a>](/sql-statements/sql-statement-explain-analyze.md)の出力で確認できます。
+オプティマイザー ヒントがクエリ実行プランにどのような影響を与えるかは、 [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)の出力で確認できます。
 
 間違ったヒントや不完全なヒントによってステートメント エラーが発生することはありません。これは、ヒントがクエリ実行に対する*ヒント*(提案) セマンティクスのみを意図しているためです。同様に、ヒントが適用できない場合、TiDB は最大でも警告を返します。
 
@@ -57,7 +57,7 @@ SELECT /*+ USE_INDEX(t1, idx1), HASH_AGG(), HASH_JOIN(t1) */ count(*) FROM t t1,
 >
 > コメントが指定されたキーワードの後に続かない場合、それらは一般的な MySQL コメントとして扱われます。コメントは有効にならず、警告も報告されません。
 
-現在、TiDB は範囲が異なる 2 つのカテゴリのヒントをサポートしています。ヒントの最初のカテゴリは、 [<a href="#hash_agg">`/*+ HASH_AGG() */`</a>](#hash_agg) ; などのクエリ ブロックのスコープで有効です。 2 番目のカテゴリのヒントは、クエリ全体で有効になります ( [<a href="#memory_quotan">`/*+ MEMORY_QUOTA(1024 MB)*/`</a>](#memory_quotan)など)。
+現在、TiDB は範囲が異なる 2 つのカテゴリのヒントをサポートしています。ヒントの最初のカテゴリは、 [`/*+ MEMORY_QUOTA(1024 MB)*/`](#memory_quotan)など)。
 
 ステートメント内の各クエリまたはサブクエリは異なるクエリ ブロックに対応し、各クエリ ブロックには独自の名前があります。例えば：
 
@@ -236,8 +236,8 @@ SELECT /*+ SHUFFLE_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 
 > **ノート：**
 >
-> -   このヒントを使用する前に、現在の TiDB クラスターがクエリでのTiFlash MPP モードの使用をサポートできることを確認してください。詳細は[<a href="/tiflash/use-tiflash-mpp-mode.md">TiFlash MPP モードを使用する</a>](/tiflash/use-tiflash-mpp-mode.md)を参照してください。
-> -   このヒントは、 [<a href="#hash_join_buildt1_name--tl_name-">`HASH_JOIN_BUILD`ヒント</a>](#hash_join_buildt1_name--tl_name-)および[<a href="#hash_join_probet1_name--tl_name-">`HASH_JOIN_PROBE`ヒント</a>](#hash_join_probet1_name--tl_name-)と組み合わせて使用​​して、シャッフル結合アルゴリズムのビルド側とプローブ側を制御できます。
+> -   このヒントを使用する前に、現在の TiDB クラスターがクエリでのTiFlash MPP モードの使用をサポートできることを確認してください。詳細は[TiFlash MPP モードを使用する](/tiflash/use-tiflash-mpp-mode.md)を参照してください。
+> -   このヒントは、 [`HASH_JOIN_PROBE`ヒント](#hash_join_probet1_name--tl_name-)と組み合わせて使用​​して、シャッフル結合アルゴリズムのビルド側とプローブ側を制御できます。
 
 ### BROADCAST_JOIN(t1_name [, tl_name ...]) {#broadcast-join-t1-name-tl-name}
 
@@ -249,8 +249,8 @@ SELECT /*+ BROADCAST_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 
 > **ノート：**
 >
-> -   このヒントを使用する前に、現在の TiDB クラスターがクエリでのTiFlash MPP モードの使用をサポートできることを確認してください。詳細は[<a href="/tiflash/use-tiflash-mpp-mode.md">TiFlash MPP モードを使用する</a>](/tiflash/use-tiflash-mpp-mode.md)を参照してください。
-> -   このヒントは、 [<a href="#hash_join_buildt1_name--tl_name-">`HASH_JOIN_BUILD`ヒント</a>](#hash_join_buildt1_name--tl_name-)および[<a href="#hash_join_probet1_name--tl_name-">`HASH_JOIN_PROBE`ヒント</a>](#hash_join_probet1_name--tl_name-)と組み合わせて使用して、ブロードキャスト結合アルゴリズムのビルド側とプローブ側を制御できます。
+> -   このヒントを使用する前に、現在の TiDB クラスターがクエリでのTiFlash MPP モードの使用をサポートできることを確認してください。詳細は[TiFlash MPP モードを使用する](/tiflash/use-tiflash-mpp-mode.md)を参照してください。
+> -   このヒントは、 [`HASH_JOIN_PROBE`ヒント](#hash_join_probet1_name--tl_name-)と組み合わせて使用して、ブロードキャスト結合アルゴリズムのビルド側とプローブ側を制御できます。
 
 ### NO_DECORRELATE() {#no-decorrelate}
 
@@ -258,7 +258,7 @@ SELECT /*+ BROADCAST_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 
 このヒントがクエリ ブロックで使用される場合、オプティマイザはサブクエリとその外側のクエリ ブロックの間の相関列の非相関化を実行しようとせず、常に適用演算子を使用してクエリを実行します。
 
-デフォルトでは、TiDB はより高い実行効率を達成するために、相関サブクエリに対して[<a href="/correlated-subquery-optimization.md">無相関化を実行する</a>](/correlated-subquery-optimization.md)を試行します。ただし、 [<a href="/correlated-subquery-optimization.md#restrictions">いくつかのシナリオ</a>](/correlated-subquery-optimization.md#restrictions)では、非相関化により実際に実行効率が低下する可能性があります。この場合、このヒントを使用して、非相関化を実行しないようにオプティマイザに手動で指示できます。例えば：
+デフォルトでは、TiDB はより高い実行効率を達成するために、相関サブクエリに対して[いくつかのシナリオ](/correlated-subquery-optimization.md#restrictions)では、非相関化により実際に実行効率が低下する可能性があります。この場合、このヒントを使用して、非相関化を実行しないようにオプティマイザに手動で指示できます。例えば：
 
 {{< copyable "" >}}
 
@@ -348,7 +348,7 @@ SELECT /*+ MPP_1PHASE_AGG() */ COUNT(*) FROM t1, t2 WHERE t1.a > 10 GROUP BY t1.
 
 > **ノート：**
 >
-> このヒントを使用する前に、現在の TiDB クラスターがクエリでのTiFlash MPP モードの使用をサポートできることを確認してください。詳細は[<a href="/tiflash/use-tiflash-mpp-mode.md">TiFlash MPP モードを使用する</a>](/tiflash/use-tiflash-mpp-mode.md)を参照してください。
+> このヒントを使用する前に、現在の TiDB クラスターがクエリでのTiFlash MPP モードの使用をサポートできることを確認してください。詳細は[TiFlash MPP モードを使用する](/tiflash/use-tiflash-mpp-mode.md)を参照してください。
 
 ### MPP_2PHASE_AGG() {#mpp-2phase-agg}
 
@@ -360,7 +360,7 @@ SELECT /*+ MPP_2PHASE_AGG() */ COUNT(*) FROM t1, t2 WHERE t1.a > 10 GROUP BY t1.
 
 > **ノート：**
 >
-> このヒントを使用する前に、現在の TiDB クラスターがクエリでのTiFlash MPP モードの使用をサポートできることを確認してください。詳細は[<a href="/tiflash/use-tiflash-mpp-mode.md">TiFlash MPP モードを使用する</a>](/tiflash/use-tiflash-mpp-mode.md)を参照してください。
+> このヒントを使用する前に、現在の TiDB クラスターがクエリでのTiFlash MPP モードの使用をサポートできることを確認してください。詳細は[TiFlash MPP モードを使用する](/tiflash/use-tiflash-mpp-mode.md)を参照してください。
 
 ### USE_INDEX(t1_name, idx1_name [, idx2_name ...]) {#use-index-t1-name-idx1-name-idx2-name}
 
@@ -492,7 +492,7 @@ select /*+ READ_FROM_STORAGE(TIFLASH[t1], TIKV[t2]) */ t1.a from t t1, t t2 wher
 
 ### USE_INDEX_MERGE(t1_name, idx1_name [, idx2_name ...]) {#use-index-merge-t1-name-idx1-name-idx2-name}
 
-`USE_INDEX_MERGE(t1_name, idx1_name [, idx2_name ...])`ヒントは、インデックス マージ メソッドを使用して特定のテーブルにアクセスするようにオプティマイザに指示します。インデクス結合には、交差型と共用体型の 2 種類があります。詳細は[<a href="/explain-index-merge.md">インデックス マージを使用した Explain ステートメント</a>](/explain-index-merge.md)を参照してください。
+`USE_INDEX_MERGE(t1_name, idx1_name [, idx2_name ...])`ヒントは、インデックス マージ メソッドを使用して特定のテーブルにアクセスするようにオプティマイザに指示します。インデクス結合には、交差型と共用体型の 2 種類があります。詳細は[インデックス マージを使用した Explain ステートメント](/explain-index-merge.md)を参照してください。
 
 インデックスのリストを明示的に指定すると、TiDB はリストからインデックスを選択してインデックス マージを構築します。インデックスのリストを指定しない場合、TiDB は使用可能なすべてのインデックスからインデックスを選択してインデックス マージを構築します。
 
@@ -520,7 +520,7 @@ SELECT /*+ USE_INDEX_MERGE(t1, idx_a, idx_b, idx_c) */ * FROM t1 WHERE t1.a > 10
 SELECT /*+ LEADING(t1, t2) */ * FROM t1, t2, t3 WHERE t1.id = t2.id and t2.id = t3.id;
 ```
 
-複数テーブル結合を使用した上記のクエリでは、結合の順序は`LEADING()`ヒントで指定されたテーブル名の順序によって決まります。オプティマイザはまず`t1`と`t2`を結合し、次にその結果を`t3`と結合します。このヒントは[<a href="#straight_join">`STRAIGHT_JOIN`</a>](#straight_join)よりも一般的です。
+複数テーブル結合を使用した上記のクエリでは、結合の順序は`LEADING()`ヒントで指定されたテーブル名の順序によって決まります。オプティマイザはまず`t1`と`t2`を結合し、次にその結果を`t3`と結合します。このヒントは[`STRAIGHT_JOIN`](#straight_join)よりも一般的です。
 
 `LEADING`ヒントは、次の状況では有効になりません。
 
@@ -570,18 +570,18 @@ WITH CTE1 AS (SELECT * FROM t1), CTE2 AS (WITH CTE3 AS (SELECT /*+ MERGE() */ * 
 >
 > `MERGE()`は、単純な CTE クエリにのみ適用されます。以下の場合には適用されません。
 >
-> -   [<a href="https://docs.pingcap.com/tidb/stable/dev-guide-use-common-table-expression#recursive-cte">再帰的 CTE</a>](https://docs.pingcap.com/tidb/stable/dev-guide-use-common-table-expression#recursive-cte)
+> -   [再帰的 CTE](https://docs.pingcap.com/tidb/stable/dev-guide-use-common-table-expression#recursive-cte)
 > -   集約演算子、ウィンドウ関数、 `DISTINCT`など、展開できないインラインを含むサブクエリ。
 >
 > CTE 参照の数が多すぎると、クエリのパフォーマンスがデフォルトの実体化動作よりも低下する可能性があります。
 
 ## グローバルに有効なヒント {#hints-that-take-effect-globally}
 
-グローバル ヒントは[<a href="/views.md">ビュー</a>](/views.md)で機能します。グローバル ヒントとして指定すると、クエリで定義されたヒントがビュー内で有効になります。グローバル ヒントを指定するには、まず`QB_NAME`ヒントを使用してクエリ ブロック名を定義し、次に`ViewName@QueryBlockName`の形式でターゲット ヒントを追加します。
+グローバル ヒントは[ビュー](/views.md)で機能します。グローバル ヒントとして指定すると、クエリで定義されたヒントがビュー内で有効になります。グローバル ヒントを指定するには、まず`QB_NAME`ヒントを使用してクエリ ブロック名を定義し、次に`ViewName@QueryBlockName`の形式でターゲット ヒントを追加します。
 
 ### ステップ 1: <code>QB_NAME</code>ヒントを使用してビューのクエリ ブロック名を定義する {#step-1-define-the-query-block-name-of-the-view-using-the-code-qb-name-code-hint}
 
-[<a href="#qb_name">`QB_NAME`のヒント</a>](#qb_name)を使用して、ビューの各クエリ ブロックの新しい名前を定義します。ビューの`QB_NAME`ヒントの定義は[<a href="#qb_name">クエリブロック</a>](#qb_name)の定義と同じですが、構文は`QB_NAME(QB)`から`QB_NAME(QB, ViewName@QueryBlockName [.ViewName@QueryBlockName .ViewName@QueryBlockName ...])`に拡張されています。
+[クエリブロック](#qb_name)の定義と同じですが、構文は`QB_NAME(QB)`から`QB_NAME(QB, ViewName@QueryBlockName [.ViewName@QueryBlockName .ViewName@QueryBlockName ...])`に拡張されています。
 
 > **ノート：**
 >
@@ -648,7 +648,7 @@ WITH CTE1 AS (SELECT * FROM t1), CTE2 AS (WITH CTE3 AS (SELECT /*+ MERGE() */ * 
 
 ### ステップ 2: ターゲット ヒントを追加する {#step-2-add-the-target-hints}
 
-ビューのクエリ ブロックに`QB_NAME`ヒントを定義した後、必要な[<a href="#hints-that-take-effect-in-query-blocks">クエリブロックで有効になるヒント</a>](#hints-that-take-effect-in-query-blocks) `ViewName@QueryBlockName`の形式で追加して、ビュー内で有効にすることができます。例えば：
+ビューのクエリ ブロックに`QB_NAME`ヒントを定義した後、必要な[クエリブロックで有効になるヒント](#hints-that-take-effect-in-query-blocks) `ViewName@QueryBlockName`の形式で追加して、ビュー内で有効にすることができます。例えば：
 
 -   ビュー`v2`の最初のクエリ ブロックに`MERGE_JOIN()`ヒントを指定します。
 
@@ -739,7 +739,7 @@ select /*+ MAX_EXECUTION_TIME(1000) */ * from t1 inner join t2 where t1.id = t2.
 select /*+ MEMORY_QUOTA(1024 MB) */ * from t;
 ```
 
-このヒントに加えて、 [<a href="/system-variables.md#tidb_mem_quota_query">`tidb_mem_quota_query`</a>](/system-variables.md#tidb_mem_quota_query)システム変数もステートメントのメモリ使用量を制限できます。
+このヒントに加えて、 [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)システム変数もステートメントのメモリ使用量を制限できます。
 
 ### READ_CONSISTENT_REPLICA() {#read-consistent-replica}
 
@@ -757,7 +757,7 @@ select /*+ READ_CONSISTENT_REPLICA() */ * from t;
 
 `IGNORE_PLAN_CACHE()`ヒントは、現在の`prepare`ステートメントを処理するときにプラン キャッシュを使用しないようにオプティマイザに通知します。
 
-このヒントは、 [<a href="/sql-prepared-plan-cache.md">準備プランキャッシュ</a>](/sql-prepared-plan-cache.md)が有効な場合に、特定の種類のクエリに対してプラン キャッシュを一時的に無効にするために使用されます。
+このヒントは、 [準備プランキャッシュ](/sql-prepared-plan-cache.md)が有効な場合に、特定の種類のクエリに対してプラン キャッシュを一時的に無効にするために使用されます。
 
 次の例では、 `prepare`ステートメントの実行時にプラン キャッシュが強制的に無効になります。
 
@@ -804,7 +804,7 @@ SELECT /*+ NTH_PLAN(3) */ count(*) from t where a > 5;
 
 ### RESOURCE_GROUP(リソースグループ名) {#resource-group-resource-group-name}
 
-`RESOURCE_GROUP(resource_group_name)`はリソースを分離するために[<a href="/tidb-resource-control.md">リソース制御</a>](/tidb-resource-control.md)に使用されます。このヒントは、指定されたリソース グループを使用して現在のステートメントを一時的に実行します。指定されたリソース グループが存在しない場合、このヒントは無視されます。
+`RESOURCE_GROUP(resource_group_name)`はリソースを分離するために[リソース制御](/tidb-resource-control.md)に使用されます。このヒントは、指定されたリソース グループを使用して現在のステートメントを一時的に実行します。指定されたリソース グループが存在しない場合、このヒントは無視されます。
 
 例：
 

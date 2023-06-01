@@ -5,7 +5,7 @@ summary: An overview of the usage of MODIFY COLUMN for the TiDB database.
 
 # 列の変更 {#modify-column}
 
-`ALTER TABLE.. MODIFY COLUMN`ステートメントは、既存のテーブルの列を変更します。変更には、データ型と属性の変更が含まれる場合があります。同時に名前を変更するには、代わりに[<a href="/sql-statements/sql-statement-change-column.md">`CHANGE COLUMN`</a>](/sql-statements/sql-statement-change-column.md)ステートメントを使用します。
+`ALTER TABLE.. MODIFY COLUMN`ステートメントは、既存のテーブルの列を変更します。変更には、データ型と属性の変更が含まれる場合があります。同時に名前を変更するには、代わりに[`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)ステートメントを使用します。
 
 v5.1.0 以降、TiDB は、以下を含む (ただしこれらに限定されない) Reorg データのデータ型の変更をサポートしています。
 
@@ -214,8 +214,8 @@ CREATE TABLE `t1` (
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-create-table.md">テーブルの作成</a>](/sql-statements/sql-statement-create-table.md)
--   [<a href="/sql-statements/sql-statement-show-create-table.md">テーブルの作成を表示</a>](/sql-statements/sql-statement-show-create-table.md)
--   [<a href="/sql-statements/sql-statement-add-column.md">列の追加</a>](/sql-statements/sql-statement-add-column.md)
--   [<a href="/sql-statements/sql-statement-drop-column.md">ドロップカラム</a>](/sql-statements/sql-statement-drop-column.md)
--   [<a href="/sql-statements/sql-statement-change-column.md">列の変更</a>](/sql-statements/sql-statement-change-column.md)
+-   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
+-   [テーブルの作成を表示](/sql-statements/sql-statement-show-create-table.md)
+-   [列の追加](/sql-statements/sql-statement-add-column.md)
+-   [ドロップカラム](/sql-statements/sql-statement-drop-column.md)
+-   [列の変更](/sql-statements/sql-statement-change-column.md)

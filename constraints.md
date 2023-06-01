@@ -73,7 +73,7 @@ SELECT * FROM users;
 
 ### 楽観的な取引 {#optimistic-transactions}
 
-デフォルトでは、楽観的トランザクションの場合、TiDB は実行フェーズと厳密にコミット フェーズで一意の制約[<a href="/transaction-overview.md#lazy-check-of-constraints">怠惰に</a>](/transaction-overview.md#lazy-check-of-constraints)をチェックします。これにより、ネットワーク オーバーヘッドが削減され、パフォーマンスが向上します。
+デフォルトでは、楽観的トランザクションの場合、TiDB は実行フェーズと厳密にコミット フェーズで一意の制約[怠惰に](/transaction-overview.md#lazy-check-of-constraints)をチェックします。これにより、ネットワーク オーバーヘッドが削減され、パフォーマンスが向上します。
 
 例えば：
 
@@ -118,7 +118,7 @@ ERROR 1062 (23000): Duplicate entry 'bill' for key 'users.username'
 
 前述の楽観的例では、トランザクションがコミットされるまで一意のチェックが延期されました。値`bill`がすでに存在していたため、重複キー エラーが発生しました。
 
-[<a href="/system-variables.md#tidb_constraint_check_in_place">`tidb_constraint_check_in_place`</a>](/system-variables.md#tidb_constraint_check_in_place) ～ `ON`を設定すると、この動作を無効にできます。 `tidb_constraint_check_in_place=ON`の場合、ステートメントの実行時に一意制約がチェックされます。この変数は楽観的トランザクションにのみ適用されることに注意してください。悲観的トランザクションの場合、変数[<a href="/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630">`tidb_constraint_check_in_place_pessimistic`</a>](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630)を使用してこの動作を制御できます。
+[`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630)を使用してこの動作を制御できます。
 
 例えば：
 
@@ -179,7 +179,7 @@ INSERT INTO users (username) VALUES ('jane'), ('chris'), ('bill');
 ERROR 1062 (23000): Duplicate entry 'bill' for key 'users.username'
 ```
 
-悲観的トランザクションのパフォーマンスを向上させるには、変数[<a href="/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630">`tidb_constraint_check_in_place_pessimistic`</a>](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630)を`OFF`に設定します。これにより、TiDB が一意のインデックスの一意制約チェックを (次回このインデックスがロックを必要とするとき、またはトランザクションがコミットされるときまで) 延期できるようになります。 ) 対応する悲観的ロックをスキップします。この変数を使用するときは、次の点に注意してください。
+悲観的トランザクションのパフォーマンスを向上させるには、変数[`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630)を`OFF`に設定します。これにより、TiDB が一意のインデックスの一意制約チェックを (次回このインデックスがロックを必要とするとき、またはトランザクションがコミットされるときまで) 延期できるようになります。 ) 対応する悲観的ロックをスキップします。この変数を使用するときは、次の点に注意してください。
 
 -   一意制約チェックが遅延されるため、悲観的トランザクションをコミットすると、TiDB が一意制約を満たさない結果を読み取り、 `Duplicate entry`エラーを返す可能性があります。このエラーが発生すると、TiDB は現在のトランザクションをロールバックします。
 
@@ -335,13 +335,13 @@ ALTER TABLE t5 DROP PRIMARY KEY;
 Query OK, 0 rows affected (0.10 sec)
 ```
 
-`CLUSTERED`タイプの主キーの詳細については、 [<a href="/clustered-indexes.md">クラスター化インデックス</a>](/clustered-indexes.md)を参照してください。
+`CLUSTERED`タイプの主キーの詳細については、 [クラスター化インデックス](/clustered-indexes.md)を参照してください。
 
 ## 外部キー {#foreign-key}
 
 > **ノート：**
 >
-> v6.6.0 以降、TiDB は[<a href="/foreign-key.md">FOREIGN KEY 制約</a>](/foreign-key.md)機能をサポートします。 v6.6.0 より前では、TiDB は外部キー制約の作成と削除をサポートしていましたが、その制約は実際には有効ではありませんでした。 TiDB を v6.6.0 にアップグレードした後、無効な外部キーを削除し、新しい外部キーを作成して、外部キー制約を有効にすることができます。
+> v6.6.0 以降、TiDB は[FOREIGN KEY 制約](/foreign-key.md)機能をサポートします。 v6.6.0 より前では、TiDB は外部キー制約の作成と削除をサポートしていましたが、その制約は実際には有効ではありませんでした。 TiDB を v6.6.0 にアップグレードした後、無効な外部キーを削除し、新しい外部キーを作成して、外部キー制約を有効にすることができます。
 
 TiDB は、DDL コマンドでの`FOREIGN KEY`制約の作成をサポートしています。
 

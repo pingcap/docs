@@ -7,7 +7,7 @@ summary: Learn how to migrate and merge small datasets of shards from MySQL to T
 
 アップストリームの複数の MySQL データベース インスタンスを 1 つの TiDB データベース ダウンストリームに移行およびマージする必要があり、データ量がそれほど大きくない場合は、DM を使用して MySQL シャードを移行できます。このドキュメントにおける「小規模なデータセット」とは、通常、1 TiB 程度またはそれ未満のデータを意味します。本書の例を通じて、移行の操作手順や注意事項、トラブルシューティングについて学ぶことができます。
 
-このドキュメントは、合計 1 TiB 未満の MySQL シャードの移行に適用されます。合計 1 TiB を超えるデータを持つ MySQL シャードを移行する場合、DM のみを使用して移行するには長い時間がかかります。この場合は、 [<a href="/migrate-large-mysql-shards-to-tidb.md">大規模なデータセットの MySQL シャードを TiDB に移行およびマージする</a>](/migrate-large-mysql-shards-to-tidb.md)で紹介した操作に従って移行を行うことをお勧めします。
+このドキュメントは、合計 1 TiB 未満の MySQL シャードの移行に適用されます。合計 1 TiB を超えるデータを持つ MySQL シャードを移行する場合、DM のみを使用して移行するには長い時間がかかります。この場合は、 [大規模なデータセットの MySQL シャードを TiDB に移行およびマージする](/migrate-large-mysql-shards-to-tidb.md)で紹介した操作に従って移行を行うことをお勧めします。
 
 このドキュメントでは、簡単な例を使用して移行手順を説明します。この例の 2 つのデータ ソース MySQL インスタンスの MySQL シャードは、ダウンストリームの TiDB クラスターに移行されます。
 
@@ -28,12 +28,12 @@ summary: Learn how to migrate and merge small datasets of shards from MySQL to T
 
 移行を開始する前に、次のタスクが完了していることを確認してください。
 
--   [<a href="/dm/deploy-a-dm-cluster-using-tiup.md">TiUPを使用した DMクラスタのデプロイ</a>](/dm/deploy-a-dm-cluster-using-tiup.md)
--   [<a href="/dm/dm-worker-intro.md">DM ワーカーに必要な権限</a>](/dm/dm-worker-intro.md)
+-   [TiUPを使用した DMクラスタのデプロイ](/dm/deploy-a-dm-cluster-using-tiup.md)
+-   [DM ワーカーに必要な権限](/dm/dm-worker-intro.md)
 
 ### シャードテーブルの競合を確認する {#check-conflicts-for-the-sharded-tables}
 
-移行に異なるシャードテーブルのデータのマージが含まれる場合、マージ中に主キーまたは一意のインデックスの競合が発生する可能性があります。したがって、移行前に、ビジネスの観点から現在のシャーディング スキームを詳しく調べ、競合を回避する方法を見つける必要があります。詳細については、 [<a href="/dm/shard-merge-best-practices.md#handle-conflicts-between-primary-keys-or-unique-indexes-across-multiple-sharded-tables">複数のシャードテーブルにわたる主キーまたは一意のインデックス間の競合を処理する</a>](/dm/shard-merge-best-practices.md#handle-conflicts-between-primary-keys-or-unique-indexes-across-multiple-sharded-tables)を参照してください。以下に簡単に説明します。
+移行に異なるシャードテーブルのデータのマージが含まれる場合、マージ中に主キーまたは一意のインデックスの競合が発生する可能性があります。したがって、移行前に、ビジネスの観点から現在のシャーディング スキームを詳しく調べ、競合を回避する方法を見つける必要があります。詳細については、 [複数のシャードテーブルにわたる主キーまたは一意のインデックス間の競合を処理する](/dm/shard-merge-best-practices.md#handle-conflicts-between-primary-keys-or-unique-indexes-across-multiple-sharded-tables)を参照してください。以下に簡単に説明します。
 
 この例では、 `sale_01`と`sale_02`次のような同じテーブル構造を持ちます。
 
@@ -50,7 +50,7 @@ CREATE TABLE `sale_01` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
 ```
 
-`id`列が主キー、 `sid`列がシャーディング キーです。 `id`列は自動増分であり、複数のシャードテーブル範囲が重複するとデータの競合が発生します。 `sid`インデックスがグローバルに一意であることが保証されるため、 [<a href="/dm/shard-merge-best-practices.md#remove-the-primary-key-attribute-from-the-column">自動インクリメント主キーの主キー属性を削除します。</a>](/dm/shard-merge-best-practices.md#remove-the-primary-key-attribute-from-the-column)の手順に従って`id`列をバイパスできます。
+`id`列が主キー、 `sid`列がシャーディング キーです。 `id`列は自動増分であり、複数のシャードテーブル範囲が重複するとデータの競合が発生します。 `sid`インデックスがグローバルに一意であることが保証されるため、 [自動インクリメント主キーの主キー属性を削除します。](/dm/shard-merge-best-practices.md#remove-the-primary-key-attribute-from-the-column)の手順に従って`id`列をバイパスできます。
 
 {{< copyable "" >}}
 
@@ -176,14 +176,14 @@ block-allow-list:           # filter or only migrate all operations of some data
     do-dbs: ["store_*"]     # The allow list of the schemas to be migrated, similar to replicate-do-db in MySQL.
 ```
 
-上記の例は、移行タスクを実行するための最小構成です。詳細については、 [<a href="/dm/task-configuration-file-full.md">DM 拡張タスクコンフィグレーションファイル</a>](/dm/task-configuration-file-full.md)を参照してください。
+上記の例は、移行タスクを実行するための最小構成です。詳細については、 [DM 拡張タスクコンフィグレーションファイル](/dm/task-configuration-file-full.md)を参照してください。
 
 タスク ファイルの`routes` 、 `filters`およびその他の構成の詳細については、次のドキュメントを参照してください。
 
--   [<a href="/dm/dm-table-routing.md">テーブルルーティング</a>](/dm/dm-table-routing.md)
--   [<a href="/dm/dm-block-allow-table-lists.md">ブロックおよび許可テーブル リスト</a>](/dm/dm-block-allow-table-lists.md)
--   [<a href="/filter-binlog-event.md">Binlogイベントフィルター</a>](/filter-binlog-event.md)
--   [<a href="/filter-dml-event.md">SQL式を使用して特定の行変更をフィルタリングする</a>](/filter-dml-event.md)
+-   [テーブルルーティング](/dm/dm-table-routing.md)
+-   [ブロックおよび許可テーブル リスト](/dm/dm-block-allow-table-lists.md)
+-   [Binlogイベントフィルター](/filter-binlog-event.md)
+-   [SQL式を使用して特定の行変更をフィルタリングする](/filter-dml-event.md)
 
 ## ステップ 3. タスクを開始する {#step-3-start-the-task}
 
@@ -208,7 +208,7 @@ tiup dmctl --master-addr ${advertise-addr} start-task task.yaml
 | `--master-addr` | dmctl が接続するクラスター内の任意の DM マスター ノードの`{advertise-addr}` 。例: 172.16.10.71:8261 |
 | `start-task`    | データ移行タスクを開始します。                                                            |
 
-移行タスクの開始に失敗した場合は、エラー情報に従って構成情報を変更し、再度`start-task task.yaml`を実行して移行タスクを開始します。問題が発生した場合は、 [<a href="/dm/dm-error-handling.md">エラーの処理</a>](/dm/dm-error-handling.md)と[<a href="/dm/dm-faq.md">FAQ</a>](/dm/dm-faq.md)を参照してください。
+移行タスクの開始に失敗した場合は、エラー情報に従って構成情報を変更し、再度`start-task task.yaml`を実行して移行タスクを開始します。問題が発生した場合は、 [FAQ](/dm/dm-faq.md)を参照してください。
 
 ## ステップ4. タスクを確認する {#step-4-check-the-task}
 
@@ -220,7 +220,7 @@ tiup dmctl --master-addr ${advertise-addr} start-task task.yaml
 tiup dmctl --master-addr ${advertise-addr} query-status ${task-name}
 ```
 
-エラーが発生した場合は、 `query-status ${task-name}`を使用して詳細情報を表示します。 `query-status`コマンドのクエリ結果、タスクステータス、サブタスクステータスの詳細については、 [<a href="/dm/dm-query-status.md">TiDB データ移行クエリのステータス</a>](/dm/dm-query-status.md)を参照してください。
+エラーが発生した場合は、 `query-status ${task-name}`を使用して詳細情報を表示します。 `query-status`コマンドのクエリ結果、タスクステータス、サブタスクステータスの詳細については、 [TiDB データ移行クエリのステータス](/dm/dm-query-status.md)を参照してください。
 
 ## ステップ 5. タスクを監視し、ログを確認する (オプション) {#step-5-monitor-tasks-and-check-logs-optional}
 
@@ -239,9 +239,9 @@ Grafana またはログを通じて、移行タスクの履歴と内部運用メ
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/migrate-large-mysql-shards-to-tidb.md">大規模なデータセットの MySQL シャードを TiDB に移行およびマージする</a>](/migrate-large-mysql-shards-to-tidb.md) 。
--   [<a href="/dm/feature-shard-merge.md">シャードテーブルからのデータのマージと移行</a>](/dm/feature-shard-merge.md)
--   [<a href="/dm/shard-merge-best-practices.md">シャード結合シナリオにおけるデータ移行のベスト プラクティス</a>](/dm/shard-merge-best-practices.md)
--   [<a href="/dm/dm-error-handling.md">エラーの処理</a>](/dm/dm-error-handling.md)
--   [<a href="/dm/dm-handle-performance-issues.md">パフォーマンスの問題に対処する</a>](/dm/dm-handle-performance-issues.md)
--   [<a href="/dm/dm-faq.md">FAQ</a>](/dm/dm-faq.md)
+-   [大規模なデータセットの MySQL シャードを TiDB に移行およびマージする](/migrate-large-mysql-shards-to-tidb.md) 。
+-   [シャードテーブルからのデータのマージと移行](/dm/feature-shard-merge.md)
+-   [シャード結合シナリオにおけるデータ移行のベスト プラクティス](/dm/shard-merge-best-practices.md)
+-   [エラーの処理](/dm/dm-error-handling.md)
+-   [パフォーマンスの問題に対処する](/dm/dm-handle-performance-issues.md)
+-   [FAQ](/dm/dm-faq.md)

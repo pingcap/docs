@@ -11,7 +11,7 @@ summary: Learn some best practices for creating and using indexes in TiDB.
 
 ## あなたが始める前に {#before-you-begin}
 
-このセクションでは、例として[<a href="/develop/dev-guide-bookshop-schema-design.md">書店</a>](/develop/dev-guide-bookshop-schema-design.md)データベースの`books`テーブルを取り上げます。
+このセクションでは、例として[書店](/develop/dev-guide-bookshop-schema-design.md)データベースの`books`テーブルを取り上げます。
 
 ```sql
 CREATE TABLE `books` (
@@ -27,7 +27,7 @@ CREATE TABLE `books` (
 
 ## インデックス作成のベストプラクティス {#best-practices-for-creating-indexes}
 
--   複数の列を含む結合インデックスを作成します。これは[<a href="/explain-indexes.md#indexreader">インデックスの最適化をカバーする</a>](/explain-indexes.md#indexreader)と呼ばれる最適化です。**インデックスの最適化をカバーすると、** TiDB はインデックス上でデータを直接クエリできるようになり、パフォーマンスの向上に役立ちます。
+-   複数の列を含む結合インデックスを作成します。これは[インデックスの最適化をカバーする](/explain-indexes.md#indexreader)と呼ばれる最適化です。**インデックスの最適化をカバーすると、** TiDB はインデックス上でデータを直接クエリできるようになり、パフォーマンスの向上に役立ちます。
 
 -   頻繁にクエリを実行しない列にはセカンダリ インデックスを作成しないでください。便利なセカンダリ インデックスを使用するとクエリを高速化できますが、副作用もあることに注意してください。インデックスを追加するたびに、行を挿入するときに追加の Key-Value が追加されます。インデックスの数が増えると、書き込みが遅くなり、消費するスペースも増えます。さらに、インデックスが多すぎるとオプティマイザーの実行時間に影響し、不適切なインデックスはオプティマイザーに誤解を与える可能性があります。したがって、インデックスが多いほどパフォーマンスが向上するとは限りません。
 
@@ -36,7 +36,7 @@ CREATE TABLE `books` (
     -   区別度の高い列を使用すると、フィルター処理される行の数を大幅に減らすことができます。たとえば、個人 ID 番号についてはインデックスを作成するが、性別については作成しないことをお勧めします。
     -   複数の条件でクエリを実行する場合は、結合インデックスを使用します。同等の条件を持つ列は、結合インデックスの前に配置する必要があることに注意してください。次に例を示します。 `select* from t where c1 = 10 and c2 = 100 and c3 > 10`クエリが頻繁に使用される場合は、クエリ条件によってスキャンするためのインデックス プレフィックスを構築できるように、結合インデックス`Index cidx (c1, c2, c3)`の作成を検討してください。
 
--   セカンダリ インデックスにはわかりやすい名前を付け、会社または組織のテーブル命名規則に従うことをお勧めします。このような命名規則が存在しない場合は、 [<a href="/develop/dev-guide-object-naming-guidelines.md">インデックス命名仕様</a>](/develop/dev-guide-object-naming-guidelines.md)の規則に従ってください。
+-   セカンダリ インデックスにはわかりやすい名前を付け、会社または組織のテーブル命名規則に従うことをお勧めします。このような命名規則が存在しない場合は、 [インデックス命名仕様](/develop/dev-guide-object-naming-guidelines.md)の規則に従ってください。
 
 ## インデックスを使用するためのベスト プラクティス {#best-practices-for-using-indexes}
 
@@ -106,7 +106,7 @@ CREATE TABLE `books` (
 
     > **警告：**
     >
-    > 現在、式インデックスは実験的機能であり、TiDB 構成ファイルで有効にする必要があります。詳細については、 [<a href="/sql-statements/sql-statement-create-index.md#expression-index">式インデックス</a>](/sql-statements/sql-statement-create-index.md#expression-index)を参照してください。
+    > 現在、式インデックスは実験的機能であり、TiDB 構成ファイルで有効にする必要があります。詳細については、 [式インデックス](/sql-statements/sql-statement-create-index.md#expression-index)を参照してください。
 
 -   インデックス内の列にクエリ対象の列が含まれるカバリング インデックスを使用するようにし、すべての列を`SELECT *`ステートメントでクエリすることは避けてください。
 
@@ -142,7 +142,7 @@ CREATE TABLE `books` (
     SELECT * FROM books WHERE title LIKE '%database';
     ```
 
--   クエリ条件に複数のインデックスが使用可能で、実際にどのインデックスが最適であるかがわかっている場合は、 [<a href="/optimizer-hints.md">オプティマイザーのヒント</a>](/optimizer-hints.md)を使用して TiDB オプティマイザーにこのインデックスの使用を強制することをお勧めします。これにより、不正確な統計やその他の問題により、TiDB オプティマイザーが間違ったインデックスを選択するのを防ぐことができます。
+-   クエリ条件に複数のインデックスが使用可能で、実際にどのインデックスが最適であるかがわかっている場合は、 [オプティマイザーのヒント](/optimizer-hints.md)を使用して TiDB オプティマイザーにこのインデックスの使用を強制することをお勧めします。これにより、不正確な統計やその他の問題により、TiDB オプティマイザーが間違ったインデックスを選択するのを防ぐことができます。
 
     次のクエリでは、インデックス`id_idx`と`title_idx`それぞれ列`id`と列`title`で使用できると仮定し、 `id_idx`の方が優れていることがわかっている場合は、SQL で`USE INDEX`ヒントを使用して、TiDB オプティマイザーに強制的に`id_idx`インデックスを使用させることができます。
 

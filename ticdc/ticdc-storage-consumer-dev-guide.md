@@ -13,7 +13,7 @@ summary: Learn how to design and implement a consumer to consume data changes in
 
 TiCDC は、コンシューマーを実装するための標準的な方法を提供しません。このドキュメントでは、 Golangで書かれた消費者向けサンプル プログラムを提供します。このプログラムは、storageサービスからデータを読み取り、そのデータを MySQL 互換データベースに書き込むことができます。この例で提供されているデータ形式と手順を参照して、コンシューマーを独自に実装できます。
 
-[<a href="https://github.com/pingcap/tiflow/tree/master/cmd/storage-consumer">Golangで書かれたコンシューマ プログラム</a>](https://github.com/pingcap/tiflow/tree/master/cmd/storage-consumer)
+[Golangで書かれたコンシューマ プログラム](https://github.com/pingcap/tiflow/tree/master/cmd/storage-consumer)
 
 ## 消費者をデザインする {#design-a-consumer}
 

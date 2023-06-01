@@ -32,7 +32,7 @@ v7.1 LTS では、TiDB は、オペレーティング システムと CPU アー
 
     > **ノート：**
     >
-    > [<a href="https://www.centos.org/centos-linux-eol/">CentOS Linux EOL</a>](https://www.centos.org/centos-linux-eol/)によると、CentOS Linux 8 のアップストリーム サポートは 2021 年 12 月 31 日に終了しました。CentOS Stream 8 は引き続き CentOS 組織によってサポートされます。
+    > [CentOS Linux EOL](https://www.centos.org/centos-linux-eol/)によると、CentOS Linux 8 のアップストリーム サポートは 2021 年 12 月 31 日に終了しました。CentOS Stream 8 は引き続き CentOS 組織によってサポートされます。
 
 -   以下のオペレーティング システムと CPU アーキテクチャの組み合わせでは、TiDB をコンパイル、構築、展開できます。さらに、OLTP、OLAP、データ ツールの基本機能も使用できます。ただし、TiDB は**エンタープライズ レベルの本番品質を保証しません**。
 
@@ -71,7 +71,7 @@ TiDB の実行に必要なライブラリ: glibc (2.28-151.el8 バージョン)
 
 次の CPU アーキテクチャがサポートされています。
 
--   x86_64。 TiDB v6.6.0 以降では、 [<a href="https://developers.redhat.com/blog/2021/01/05/building-red-hat-enterprise-linux-9-for-the-x86-64-v2-microarchitecture-level">x84-64-v2 命令セット</a>](https://developers.redhat.com/blog/2021/01/05/building-red-hat-enterprise-linux-9-for-the-x86-64-v2-microarchitecture-level)が必須になります。
+-   x86_64。 TiDB v6.6.0 以降では、 [x84-64-v2 命令セット](https://developers.redhat.com/blog/2021/01/05/building-red-hat-enterprise-linux-9-for-the-x86-64-v2-microarchitecture-level)が必須になります。
 -   アーム64
 
 ## ソフトウェアの推奨事項 {#software-recommendations}
@@ -85,7 +85,7 @@ TiDB の実行に必要なライブラリ: glibc (2.28-151.el8 バージョン)
 
 > **ノート：**
 >
-> TiDB クラスターを操作[<a href="/production-deployment-using-tiup.md#step-2-deploy-tiup-on-the-control-machine">制御マシンにTiUPを展開する</a>](/production-deployment-using-tiup.md#step-2-deploy-tiup-on-the-control-machine)管理する必要があります。
+> TiDB クラスターを操作[制御マシンにTiUPを展開する](/production-deployment-using-tiup.md#step-2-deploy-tiup-on-the-control-machine)管理する必要があります。
 
 ### 対象マシン {#target-machines}
 
@@ -114,7 +114,7 @@ TiDB は、Intel x86-64アーキテクチャの 64 ビット汎用ハードウ�
 > -   テスト環境では、TiDB インスタンスと PD インスタンスを同じサーバーにデプロイできます。
 > -   パフォーマンス関連のテストでは、テスト結果の正確性を保証するために、低パフォーマンスのstorageとネットワーク ハードウェア構成を使用しないでください。
 > -   TiKVサーバーの場合、読み取りと書き込みを高速化するために NVMe SSD を使用することをお勧めします。
-> -   機能をテストして検証するだけの場合は、 [<a href="/quick-start-with-tidb.md">TiDB クイック スタート ガイド</a>](/quick-start-with-tidb.md)に従って単一マシンに TiDB をデプロイします。
+> -   機能をテストして検証するだけの場合は、 [TiDB クイック スタート ガイド](/quick-start-with-tidb.md)に従って単一マシンに TiDB をデプロイします。
 > -   TiDBサーバーはディスクを使用してサーバーログを保存するため、テスト環境ではディスクの種類と容量に特別な要件はありません。
 > -   v6.3.0 以降、Linux AMD64アーキテクチャでTiFlash を展開するには、CPU が AVX2 命令セットをサポートする必要があります。 `cat /proc/cpuinfo | grep avx2`に出力があることを確認します。 Linux ARM64アーキテクチャでTiFlashを導入するには、CPU が ARMv8 命令セットアーキテクチャをサポートしている必要があります。 `cat /proc/cpuinfo | grep 'crc32' | grep 'asimd'`に出力があることを確認します。命令セット拡張を使用することにより、TiFlash のベクトル化エンジンはより優れたパフォーマンスを実現できます。
 
@@ -137,7 +137,7 @@ TiDB は、Intel x86-64アーキテクチャの 64 ビット汎用ハードウ�
 
 TiFlashを展開する前に、次の点に注意してください。
 
--   TiFlash は[<a href="/tiflash/tiflash-configuration.md#multi-disk-deployment">複数のディスクに展開される</a>](/tiflash/tiflash-configuration.md#multi-disk-deployment)にすることができます。
+-   TiFlash は[複数のディスクに展開される](/tiflash/tiflash-configuration.md#multi-disk-deployment)にすることができます。
 -   TiKV データのリアルタイム レプリケーションをバッファリングするために、 TiFlashデータ ディレクトリの最初のディスクとして高性能 SSD を使用することをお勧めします。このディスクのパフォーマンスは、PCI-E SSD などの TiKV のパフォーマンスよりも低くてはなりません。ディスク容量は総容量の 10% 以上である必要があります。そうしないと、このノードのボトルネックになる可能性があります。他のディスクに通常の SSD を導入することもできますが、より優れた PCI-E SSD の方がパフォーマンスが向上することに注意してください。
 -   TiFlash をTiKV とは別のノードにデプロイすることをお勧めします。 TiFlashと TiKV を同じノードにデプロイする必要がある場合は、CPU コアとメモリの数を増やし、相互の干渉を避けるためにTiFlashと TiKV を異なるディスクにデプロイするようにしてください。
 -   TiFlashディスクの総容量は`the data volume of the entire TiKV cluster to be replicated / the number of TiKV replicas * the number of TiFlash replicas`のように計算されます。たとえば、TiKV の計画全体容量が 1 TB、TiKV レプリカの数が 3、 TiFlashレプリカの数が 2 の場合、 TiFlashの推奨合計容量は`1024 GB / 3 * 2`です。一部のテーブルのデータのみを複製できます。この場合、複製するテーブルのデータ量に応じてTiFlashの容量を決定してください。
@@ -193,4 +193,4 @@ TiCDC を展開する前に、1 TB を超える PCIe-SSD ディスクに TiCDC �
 
 ## Web ブラウザの要件 {#web-browser-requirements}
 
-TiDB は[<a href="https://grafana.com/">グラファナ</a>](https://grafana.com/)に依存してデータベース メトリックの視覚化を提供します。 Javascript が有効になっている最新バージョンの Internet Explorer、Chrome、または Firefox で十分です。
+TiDB は[グラファナ](https://grafana.com/)に依存してデータベース メトリックの視覚化を提供します。 Javascript が有効になっている最新バージョンの Internet Explorer、Chrome、または Firefox で十分です。

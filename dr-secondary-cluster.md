@@ -37,7 +37,7 @@ summary: Learn how to implement primary-secondary disaster recovery based on TiC
 
 > **ノート：**
 >
-> -   [<a href="/glossary.md#regionpeerraft-group">TiKVの「リージョン」</a>](/glossary.md#regionpeerraft-group)データの範囲を意味し、「領域」という用語は物理的な位置を意味します。この 2 つの用語は互換性がありません。
+> -   [TiKVの「リージョン」](/glossary.md#regionpeerraft-group)データの範囲を意味し、「領域」という用語は物理的な位置を意味します。この 2 つの用語は互換性がありません。
 > -   セカンダリ クラスターにデータをレプリケートするために複数の変更フィードを実行したり、セカンダリ クラスターがすでに存在する状態で別のセカンダリ クラスターを実行したりしないでください。そうしないと、セカンダリ クラスターのデータ トランザクションの整合性が保証されません。
 
 ### プライマリ クラスタとセカンダリ クラスタをセットアップする {#set-up-primary-and-secondary-clusters}
@@ -58,14 +58,14 @@ summary: Learn how to implement primary-secondary disaster recovery based on TiC
 
 サーバー構成については、次のドキュメントを参照してください。
 
--   [<a href="/hardware-and-software-requirements.md">TiDB のソフトウェアとハードウェアの推奨事項</a>](/hardware-and-software-requirements.md)
--   [<a href="/ticdc/deploy-ticdc.md#software-and-hardware-recommendations">TiCDC のソフトウェアおよびハードウェアの推奨事項</a>](/ticdc/deploy-ticdc.md#software-and-hardware-recommendations)
+-   [TiDB のソフトウェアとハードウェアの推奨事項](/hardware-and-software-requirements.md)
+-   [TiCDC のソフトウェアおよびハードウェアの推奨事項](/ticdc/deploy-ticdc.md#software-and-hardware-recommendations)
 
-TiDB プライマリ クラスターとセカンダリ クラスターを展開する方法の詳細については、 [<a href="/production-deployment-using-tiup.md">TiDB クラスターをデプロイ</a>](/production-deployment-using-tiup.md)を参照してください。
+TiDB プライマリ クラスターとセカンダリ クラスターを展開する方法の詳細については、 [TiDB クラスターをデプロイ](/production-deployment-using-tiup.md)を参照してください。
 
 TiCDC を展開するときは、セカンダリ クラスターと TiCDC を一緒に展開して管理し、それらの間のネットワークを接続する必要があることに注意してください。
 
--   TiCDC を既存のプライマリ クラスターにデプロイするには、 [<a href="/ticdc/deploy-ticdc.md#add-or-scale-out-ticdc-to-an-existing-tidb-cluster-using-tiup">TiCDCのデプロイ</a>](/ticdc/deploy-ticdc.md#add-or-scale-out-ticdc-to-an-existing-tidb-cluster-using-tiup)を参照してください。
+-   TiCDC を既存のプライマリ クラスターにデプロイするには、 [TiCDCのデプロイ](/ticdc/deploy-ticdc.md#add-or-scale-out-ticdc-to-an-existing-tidb-cluster-using-tiup)を参照してください。
 -   新しいプライマリ クラスターと TiCDC をデプロイするには、次のデプロイ テンプレートを使用し、必要に応じて構成パラメータを変更します。
 
     ```yaml
@@ -111,7 +111,7 @@ TiDB プライマリ クラスターとセカンダリ クラスターをセッ�
 
 外部storageは、データの移行やリアルタイムの変更データのレプリケーション時に使用されます。 Amazon S3 をお勧めします。 TiDB クラスターが自社構築のデータセンターにデプロイされている場合は、次の方法をお勧めします。
 
--   バックアップstorageシステムとして[<a href="https://docs.min.io/docs/minio-quickstart-guide.html">MinIO</a>](https://docs.min.io/docs/minio-quickstart-guide.html)を構築し、S3 プロトコルを使用してデータを MinIO にバックアップします。
+-   バックアップstorageシステムとして[MinIO](https://docs.min.io/docs/minio-quickstart-guide.html)を構築し、S3 プロトコルを使用してデータを MinIO にバックアップします。
 -   ネットワーク ファイル システム (NAS など) ディスクを br コマンド ライン ツール、TiKV、および TiCDC インスタンスにマウントし、POSIX ファイル システム インターフェイスを使用してバックアップ データを対応する NFS ディレクトリに書き込みます。
 
 次の例では、storageシステムとして MinIO を使用していますが、これは参照のみを目的としています。 MinIO をリージョン 1 またはリージョン 2 にデプロイするには、別のサーバーを準備する必要があることに注意してください。
@@ -145,7 +145,7 @@ s3://backup?access-key=minio&secret-access-key=miniostorage&endpoint=http://10.0
 
 #### データの移行 {#migrate-data}
 
-プライマリ クラスタからセカンダリ クラスタにデータを移行するには、 [<a href="/br/backup-and-restore-overview.md">バックアップと復元機能</a>](/br/backup-and-restore-overview.md)を使用します。
+プライマリ クラスタからセカンダリ クラスタにデータを移行するには、 [バックアップと復元機能](/br/backup-and-restore-overview.md)を使用します。
 
 1.  GC を無効にします。新しく書き込まれたデータが増分移行中に削除されないようにするには、バックアップ前にアップストリーム クラスターの GC を無効にする必要があります。これにより、履歴データは削除されません。
 
@@ -236,7 +236,7 @@ s3://backup?access-key=minio&secret-access-key=miniostorage&endpoint=http://10.0
     --changefeed-id="dr-primary-to-secondary" --start-ts="431434047157698561"
     ```
 
-    変更フィード構成の詳細については、 [<a href="/ticdc/ticdc-changefeed-config.md">TiCDC Changefeed構成</a>](/ticdc/ticdc-changefeed-config.md)を参照してください。
+    変更フィード構成の詳細については、 [TiCDC Changefeed構成](/ticdc/ticdc-changefeed-config.md)を参照してください。
 
 2.  チェンジフィードタスクが適切に実行されるかどうかを確認するには、 `changefeed query`コマンドを実行します。クエリ結果には、タスク情報とタスクの状態が含まれます。 `--simple`または`-s`引数を指定すると、基本的なレプリケーション状態とチェックポイント情報のみを表示できます。この引数を指定しない場合、出力には詳細なタスク構成、レプリケーション状態、およびレプリケーション テーブル情報が含まれます。
 
@@ -284,8 +284,8 @@ s3://backup?access-key=minio&secret-access-key=miniostorage&endpoint=http://10.0
 
 現在、TiDB では DR ダッシュボードを利用できません。次のダッシュボードを使用して TiDB プライマリ クラスターとセカンダリ クラスターのステータスを確認し、DR スイッチオーバーを実行するかどうかを決定できます。
 
--   [<a href="/grafana-overview-dashboard.md">TiDB の主要な指標</a>](/grafana-overview-dashboard.md)
--   [<a href="/ticdc/monitor-ticdc.md#changefeed">チェンジフィードメトリクス</a>](/ticdc/monitor-ticdc.md#changefeed)
+-   [TiDB の主要な指標](/grafana-overview-dashboard.md)
+-   [チェンジフィードメトリクス](/ticdc/monitor-ticdc.md#changefeed)
 
 ### DRスイッチオーバーを実行する {#perform-dr-switchover}
 
@@ -362,9 +362,9 @@ s3://backup?access-key=minio&secret-access-key=miniostorage&endpoint=http://10.0
 
 TiDB プライマリ クラスタとセカンダリ クラスタを再構築するには、新しいクラスタをデプロイして新しい DR システムを形成します。詳細については、次のドキュメントを参照してください。
 
--   [<a href="#set-up-primary-and-secondary-clusters-based-on-ticdc">プライマリ クラスタとセカンダリ クラスタをセットアップする</a>](#set-up-primary-and-secondary-clusters-based-on-ticdc)
--   [<a href="#replicate-data-from-the-primary-cluster-to-the-secondary-cluster">プライマリ クラスタからセカンダリ クラスタにデータをレプリケートする</a>](#replicate-data-from-the-primary-cluster-to-the-secondary-cluster)
--   前述の手順が完了したら、新しいプライマリ クラスターを作成するには、 [<a href="#planned-primary-and-secondary-switchover">プライマリとセカンダリの切り替え</a>](#planned-primary-and-secondary-switchover)を参照してください。
+-   [プライマリ クラスタとセカンダリ クラスタをセットアップする](#set-up-primary-and-secondary-clusters-based-on-ticdc)
+-   [プライマリ クラスタからセカンダリ クラスタにデータをレプリケートする](#replicate-data-from-the-primary-cluster-to-the-secondary-cluster)
+-   前述の手順が完了したら、新しいプライマリ クラスターを作成するには、 [プライマリとセカンダリの切り替え](#planned-primary-and-secondary-switchover)を参照してください。
 
 > **ノート：**
 >
@@ -413,8 +413,8 @@ storage = "s3://redo?access-key=minio&secret-access-key=miniostorage&endpoint=ht
 
 双方向レプリケーション機能を使用すると、2 つのリージョンにある TiDB クラスターが相互にデータをレプリケートできます。この DR ソリューションは、データのセキュリティと信頼性を保証し、データベースの書き込みパフォーマンスも保証します。計画的な DR スイッチオーバーでは、新しい変更フィードを開始する前に実行中の変更フィードを停止する必要がないため、運用とメンテナンスが簡素化されます。
 
-双方向 DR クラスターを構築するには、 [<a href="/ticdc/ticdc-bidirectional-replication.md">TiCDC 双方向レプリケーション</a>](/ticdc/ticdc-bidirectional-replication.md)を参照してください。
+双方向 DR クラスターを構築するには、 [TiCDC 双方向レプリケーション](/ticdc/ticdc-bidirectional-replication.md)を参照してください。
 
 ## トラブルシューティング {#troubleshooting}
 
-前の手順で問題が発生した場合は、まず[<a href="/faq/faq-overview.md">TiDB よくある質問</a>](/faq/faq-overview.md)で問題の解決策を見つけることができます。問題が解決しない場合は、GitHub で[<a href="https://github.com/pingcap/tidb/issues/new/choose">問題</a>](https://github.com/pingcap/tidb/issues/new/choose)を報告してください。
+前の手順で問題が発生した場合は、まず[問題](https://github.com/pingcap/tidb/issues/new/choose)を報告してください。

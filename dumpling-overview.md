@@ -5,13 +5,13 @@ summary: Use the Dumpling tool to export data from TiDB.
 
 # Dumpling を使用してデータをエクスポートする {#use-dumpling-to-export-data}
 
-このドキュメントでは、データ エクスポート ツール[<a href="https://github.com/pingcap/tidb/tree/master/dumpling">Dumpling</a>](https://github.com/pingcap/tidb/tree/master/dumpling)について紹介します。 Dumpling は、 TiDB/MySQL に保存されているデータを SQL または CSV データ ファイルとしてエクスポートし、論理完全バックアップまたはエクスポートの作成に使用できます。 Dumpling は、Amazon S3 へのデータのエクスポートもサポートしています。
+このドキュメントでは、データ エクスポート ツール[Dumpling](https://github.com/pingcap/tidb/tree/master/dumpling)について紹介します。 Dumpling は、 TiDB/MySQL に保存されているデータを SQL または CSV データ ファイルとしてエクスポートし、論理完全バックアップまたはエクスポートの作成に使用できます。 Dumpling は、Amazon S3 へのデータのエクスポートもサポートしています。
 
 <CustomContent platform="tidb">
 
-`tiup install dumpling`を実行すると、 [<a href="/tiup/tiup-overview.md">TiUP</a>](/tiup/tiup-overview.md)使用してDumplingを入手できます。その後、 `tiup dumpling ...`使用してDumplingを実行できます。
+`tiup install dumpling`を実行すると、 [TiUP](/tiup/tiup-overview.md)使用してDumplingを入手できます。その後、 `tiup dumpling ...`使用してDumplingを実行できます。
 
-Dumplingインストール パッケージは、 TiDB Toolkitに含まれています。 TiDB Toolkitをダウンロードするには、 [<a href="/download-ecosystem-tools.md">TiDB ツールをダウンロード</a>](/download-ecosystem-tools.md)を参照してください。
+Dumplingインストール パッケージは、 TiDB Toolkitに含まれています。 TiDB Toolkitをダウンロードするには、 [TiDB ツールをダウンロード](/download-ecosystem-tools.md)を参照してください。
 
 </CustomContent>
 
@@ -29,7 +29,7 @@ tiup install dumpling
 
 </CustomContent>
 
-Dumplingの詳細な使用方法については、 `--help`オプションを使用するか、 [<a href="#option-list-of-dumpling">Dumplingのオプション一覧</a>](#option-list-of-dumpling)を参照してください。
+Dumplingの詳細な使用方法については、 `--help`オプションを使用するか、 [Dumplingのオプション一覧](#option-list-of-dumpling)を参照してください。
 
 Dumplingを使用する場合は、実行中のクラスターでエクスポート コマンドを実行する必要があります。
 
@@ -37,28 +37,28 @@ Dumplingを使用する場合は、実行中のクラスターでエクスポー
 
 TiDB は、必要に応じて使用できる他のツールも提供します。
 
--   SST ファイル (キーと値のペア) のバックアップ、またはレイテンシーの影響を受けない増分データのバックアップについては、 [<a href="/br/backup-and-restore-overview.md">BR</a>](/br/backup-and-restore-overview.md)を参照してください。
--   増分データのリアルタイム バックアップについては、 [<a href="/ticdc/ticdc-overview.md">TiCDC</a>](/ticdc/ticdc-overview.md)を参照してください。
--   エクスポートされたすべてのデータは、 [<a href="/tidb-lightning/tidb-lightning-overview.md">TiDB Lightning</a>](/tidb-lightning/tidb-lightning-overview.md)使用して TiDB にインポートして戻すことができます。
+-   SST ファイル (キーと値のペア) のバックアップ、またはレイテンシーの影響を受けない増分データのバックアップについては、 [BR](/br/backup-and-restore-overview.md)を参照してください。
+-   増分データのリアルタイム バックアップについては、 [TiCDC](/ticdc/ticdc-overview.md)を参照してください。
+-   エクスポートされたすべてのデータは、 [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)使用して TiDB にインポートして戻すことができます。
 
 </CustomContent>
 
 > **ノート：**
 >
-> PingCAP は以前、TiDB に固有の拡張機能を備えた[<a href="https://github.com/maxbube/mydumper">マイダンパープロジェクト</a>](https://github.com/maxbube/mydumper)のフォークを維持していました。その後、このフォークは Go で書き直された[<a href="/dumpling-overview.md">Dumpling</a>](/dumpling-overview.md)に置き換えられ、TiDB に固有のさらなる最適化をサポートしています。 mydumper の代わりにDumpling を使用することを強くお勧めします。
+> PingCAP は以前、TiDB に固有の拡張機能を備えた[Dumpling](/dumpling-overview.md)に置き換えられ、TiDB に固有のさらなる最適化をサポートしています。 mydumper の代わりにDumpling を使用することを強くお勧めします。
 >
-> Mydumper の詳細については、 [<a href="https://docs.pingcap.com/tidb/v4.0/backup-and-restore-using-mydumper-lightning">v4.0 Mydumper ドキュメント</a>](https://docs.pingcap.com/tidb/v4.0/backup-and-restore-using-mydumper-lightning)を参照してください。
+> Mydumper の詳細については、 [v4.0 Mydumper ドキュメント](https://docs.pingcap.com/tidb/v4.0/backup-and-restore-using-mydumper-lightning)を参照してください。
 
 Mydumper と比較して、 Dumplingには次の改良点があります。
 
 -   SQL や CSV などの複数の形式でのデータのエクスポートをサポートします。
--   データのフィルタリングを容易にする[<a href="https://github.com/pingcap/tidb-tools/blob/master/pkg/table-filter/README.md">テーブルフィルター</a>](https://github.com/pingcap/tidb-tools/blob/master/pkg/table-filter/README.md)機能をサポートします。
+-   データのフィルタリングを容易にする[テーブルフィルター](https://github.com/pingcap/tidb-tools/blob/master/pkg/table-filter/README.md)機能をサポートします。
 -   Amazon S3 クラウドstorageへのデータのエクスポートをサポートします。
 -   TiDB に対してさらに最適化が行われています。
     -   単一のTiDB SQLステートメントのメモリ制限の構成をサポートします。
     -   Dumpling がPD に直接接続できる場合、 Dumpling はTiDB v4.0.0 以降のバージョンの TiDB GC 時間の自動調整をサポートします。
     -   TiDB の非表示列`_tidb_rowid`を使用して、単一テーブルからの同時データ エクスポートのパフォーマンスを最適化します。
-    -   TiDB の場合、値[<a href="/read-historical-data.md#how-tidb-reads-data-from-history-versions">`tidb_snapshot`</a>](/read-historical-data.md#how-tidb-reads-data-from-history-versions)を設定してデータ バックアップの時点を指定できます。一貫性を確保するために`FLUSH TABLES WITH READ LOCK`を使用するのではなく、これによりバックアップの一貫性が確保されます。
+    -   TiDB の場合、値[`tidb_snapshot`](/read-historical-data.md#how-tidb-reads-data-from-history-versions)を設定してデータ バックアップの時点を指定できます。一貫性を確保するために`FLUSH TABLES WITH READ LOCK`を使用するのではなく、これによりバックアップの一貫性が確保されます。
 
 > **ノート：**
 >
@@ -67,7 +67,7 @@ Mydumper と比較して、 Dumplingには次の改良点があります。
 > -   TiDB クラスターは Kubernetes 上で実行されます ( Dumpling自体が Kubernetes 環境内で実行されない限り)。
 > -   TiDB クラスターはTiDB Cloud上で実行されています。
 >
-> このような場合、エクスポートの失敗を避けるために手動で[<a href="#manually-set-the-tidb-gc-time">TiDB GC 時間を調整する</a>](#manually-set-the-tidb-gc-time)を行う必要があります。
+> このような場合、エクスポートの失敗を避けるために手動で[TiDB GC 時間を調整する](#manually-set-the-tidb-gc-time)を行う必要があります。
 
 ## TiDB または MySQL からデータをエクスポートする {#export-data-from-tidb-or-mysql}
 
@@ -104,13 +104,13 @@ dumpling \
 
 <CustomContent platform="tidb">
 
--   `-o` (または`--output` ) オプションは、ローカル ファイル パスまたは[<a href="/br/backup-and-restore-storages.md#uri-format">外部storageURI</a>](/br/backup-and-restore-storages.md#uri-format)をサポートするstorageのエクスポート ディレクトリを指定します。
+-   `-o` (または`--output` ) オプションは、ローカル ファイル パスまたは[外部storageURI](/br/backup-and-restore-storages.md#uri-format)をサポートするstorageのエクスポート ディレクトリを指定します。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
--   `-o` (または`--output` ) オプションは、ローカル ファイル パスまたは[<a href="https://docs.pingcap.com/tidb/stable/backup-and-restore-storages#uri-format">外部storageURI</a>](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages#uri-format)をサポートするstorageのエクスポート ディレクトリを指定します。
+-   `-o` (または`--output` ) オプションは、ローカル ファイル パスまたは[外部storageURI](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages#uri-format)をサポートするstorageのエクスポート ディレクトリを指定します。
 
 </CustomContent>
 
@@ -148,7 +148,7 @@ dumpling \
 
 <CustomContent platform="tidb">
 
--   `--sql`オプションを使用すると、 Dumpling はエクスポートされたテーブルとスキーマの情報を取得できません。 `--output-filename-template`オプションを使用して CSV ファイルのファイル名形式を指定できます。これにより、その後[<a href="/tidb-lightning/tidb-lightning-overview.md">TiDB Lightning</a>](/tidb-lightning/tidb-lightning-overview.md)を使用してデータ ファイルをインポートすることが容易になります。たとえば、 `--output-filename-template='test.sbtest1.{{.Index}}'`エクスポートされた CSV ファイルの名前が`test.sbtest1.000000000`または`test.sbtest1.000000001`であることを指定します。
+-   `--sql`オプションを使用すると、 Dumpling はエクスポートされたテーブルとスキーマの情報を取得できません。 `--output-filename-template`オプションを使用して CSV ファイルのファイル名形式を指定できます。これにより、その後[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用してデータ ファイルをインポートすることが容易になります。たとえば、 `--output-filename-template='test.sbtest1.{{.Index}}'`エクスポートされた CSV ファイルの名前が`test.sbtest1.000000000`または`test.sbtest1.000000001`であることを指定します。
 
 </CustomContent>
 
@@ -158,7 +158,7 @@ dumpling \
 
 </CustomContent>
 
--   `--csv-separator`や`--csv-delimiter`のようなオプションを使用して、CSV ファイル形式を構成できます。詳細は[<a href="#option-list-of-dumpling">Dumplingオプション一覧</a>](#option-list-of-dumpling)を参照してください。
+-   `--csv-separator`や`--csv-delimiter`のようなオプションを使用して、CSV ファイル形式を構成できます。詳細は[Dumplingオプション一覧](#option-list-of-dumpling)を参照してください。
 
 > **ノート：**
 >
@@ -236,7 +236,7 @@ dumpling \
 
 v4.0.8 以降、 Dumpling はクラウド ストレージへのデータのエクスポートをサポートします。データを Amazon S3 にバックアップする必要がある場合は、 `-o`パラメータで Amazon S3storageパスを指定する必要があります。
 
-指定されたリージョンに Amazon S3 バケットを作成する必要があります ( [<a href="https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html">Amazon ドキュメント - S3 バケットの作成方法</a>](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html)を参照)。バケット内にフォルダーを作成する必要がある場合は、 [<a href="https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-folder.html">Amazon ドキュメント - フォルダーの作成</a>](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-folder.html)を参照してください。
+指定されたリージョンに Amazon S3 バケットを作成する必要があります ( [Amazon ドキュメント - フォルダーの作成](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-folder.html)を参照してください。
 
 Amazon S3 バックエンドstorageにアクセスする権限を持つアカウントの`SecretKey`と`AccessKey`環境変数としてDumplingノードに渡します。
 
@@ -249,13 +249,13 @@ export AWS_SECRET_ACCESS_KEY=${SecretKey}
 
 <CustomContent platform="tidb">
 
-Dumpling は、資格情報ファイルの`~/.aws/credentials`からの読み取りもサポートしています。 Dumplingを使用して Amazon S3 にデータをエクスポートするためのパラメータは、 BRで使用されるパラメータと同じです。パラメーターの詳細については、 [<a href="/br/backup-and-restore-storages.md#uri-format">外部storageURI</a>](/br/backup-and-restore-storages.md#uri-format)を参照してください。
+Dumpling は、資格情報ファイルの`~/.aws/credentials`からの読み取りもサポートしています。 Dumplingを使用して Amazon S3 にデータをエクスポートするためのパラメータは、 BRで使用されるパラメータと同じです。パラメーターの詳細については、 [外部storageURI](/br/backup-and-restore-storages.md#uri-format)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Dumpling は、資格情報ファイルの`~/.aws/credentials`からの読み取りもサポートしています。 Dumplingを使用して Amazon S3 にデータをエクスポートするためのパラメータは、 BRで使用されるパラメータと同じです。パラメーターの詳細については、 [<a href="https://docs.pingcap.com/tidb/stable/backup-and-restore-storages#uri-format">外部storageURI</a>](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages#uri-format)を参照してください。
+Dumpling は、資格情報ファイルの`~/.aws/credentials`からの読み取りもサポートしています。 Dumplingを使用して Amazon S3 にデータをエクスポートするためのパラメータは、 BRで使用されるパラメータと同じです。パラメーターの詳細については、 [外部storageURI](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages#uri-format)を参照してください。
 
 </CustomContent>
 
@@ -291,7 +291,7 @@ Dumpling は、資格情報ファイルの`~/.aws/credentials`からの読み取
 
 #### <code>--filter</code>オプションを使用してデータをフィルタリングします。 {#use-the-code-filter-code-option-to-filter-data}
 
-Dumpling は、 `--filter`オプションでテーブル フィルターを指定することで、特定のデータベースまたはテーブルをフィルターできます。テーブル フィルターの構文は`.gitignore`の構文と似ています。詳細は[<a href="/table-filter.md">テーブルフィルター</a>](/table-filter.md)を参照してください。
+Dumpling は、 `--filter`オプションでテーブル フィルターを指定することで、特定のデータベースまたはテーブルをフィルターできます。テーブル フィルターの構文は`.gitignore`の構文と似ています。詳細は[テーブルフィルター](/table-filter.md)を参照してください。
 
 {{< copyable "" >}}
 
@@ -340,7 +340,7 @@ Dumpling は、 `-B`オプションを使用して特定のデータベースを
 
 Dumpling は`--consistency <consistency level>`オプションを使用して、「一貫性保証」のためにデータをエクスポートする方法を制御します。一貫性のためにスナップショットを使用する場合、 `--snapshot`オプションを使用して、バックアップするタイムスタンプを指定できます。次のレベルの一貫性を使用することもできます。
 
--   `flush` : レプリカ データベースの DML および DDL 操作を一時的に中断し、バックアップ接続のグローバルな一貫性を確保し、binlog位置 (POS) 情報を記録するには、 [<a href="https://dev.mysql.com/doc/refman/8.0/en/flush.html#flush-tables-with-read-lock">`FLUSH TABLES WITH READ LOCK`</a>](https://dev.mysql.com/doc/refman/8.0/en/flush.html#flush-tables-with-read-lock)を使用します。すべてのバックアップ接続がトランザクションを開始すると、ロックが解放されます。完全バックアップはオフピーク時間帯に実行するか、MySQL レプリカ データベースで実行することをお勧めします。
+-   `flush` : レプリカ データベースの DML および DDL 操作を一時的に中断し、バックアップ接続のグローバルな一貫性を確保し、binlog位置 (POS) 情報を記録するには、 [`FLUSH TABLES WITH READ LOCK`](https://dev.mysql.com/doc/refman/8.0/en/flush.html#flush-tables-with-read-lock)を使用します。すべてのバックアップ接続がトランザクションを開始すると、ロックが解放されます。完全バックアップはオフピーク時間帯に実行するか、MySQL レプリカ データベースで実行することをお勧めします。
 -   `snapshot` : 指定されたタイムスタンプの一貫したスナップショットを取得し、エクスポートします。
 -   `lock` : エクスポートするすべてのテーブルに読み取りロックを追加します。
 -   `none` : 一貫性の保証はありません。
@@ -367,7 +367,7 @@ ls -lh /tmp/test | awk '{print $5 "\t" $9}'
 
 ### TiDB の履歴データのスナップショットをエクスポートする {#export-historical-data-snapshots-of-tidb}
 
-Dumpling は、 `--snapshot`オプションを指定して、ある[<a href="/read-historical-data.md#how-tidb-reads-data-from-history-versions">tidb_スナップショット</a>](/read-historical-data.md#how-tidb-reads-data-from-history-versions)のデータをエクスポートできます。
+Dumpling は、 `--snapshot`オプションを指定して、ある[tidb_スナップショット](/read-historical-data.md#how-tidb-reads-data-from-history-versions)のデータをエクスポートできます。
 
 `--snapshot`オプションは、TSO ( `SHOW MASTER STATUS`コマンドによって出力される`Position`フィールド) または`datetime`データ型の有効時間 ( `YYYY-MM-DD hh:mm:ss`の形式) に設定できます。次に例を示します。
 
@@ -386,7 +386,7 @@ Dumplingが TiDB から大きな単一テーブルをエクスポートしてい
 
 -   エクスポートするデータをチャンクに分割するには`-r`を設定します。これにより、TiDB のデータ スキャンのメモリオーバーヘッドが軽減され、テーブル データの同時ダンプが可能になり、エクスポート効率が向上します。アップストリーム データベースが TiDB v3.0 以降のバージョンである場合、0 より大きい`-r`値は、TiDB 領域情報が分割に使用され、特定の`-r`値が分割アルゴリズムに影響を与えないことを示します。
 -   `--tidb-mem-quota-query`の値を`8589934592` (8 GB) 以下に減らしてください。 `--tidb-mem-quota-query` TiDB 内の単一のクエリ ステートメントのメモリ使用量を制御します。
--   `--params "tidb_distsql_scan_concurrency=5"`パラメータを調整します。 [<a href="/system-variables.md#tidb_distsql_scan_concurrency">`tidb_distsql_scan_concurrency`</a>](/system-variables.md#tidb_distsql_scan_concurrency)は、TiDB でのスキャン操作の同時実行性を制御するセッション変数です。
+-   `--params "tidb_distsql_scan_concurrency=5"`パラメータを調整します。 [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency)は、TiDB でのスキャン操作の同時実行性を制御するセッション変数です。
 
 ### TiDB GC 時間を手動で設定する {#manually-set-the-tidb-gc-time}
 
@@ -418,7 +418,7 @@ SET GLOBAL tidb_gc_life_time = '10m';
 | `-V`または`--version`           | Dumplingバージョンを出力して直接終了します                                                                                                                                                                                                                                           |                                                                                                                                                                     |     |
 | `-B`または`--database`          | 指定したデータベースをエクスポートする                                                                                                                                                                                                                                                 |                                                                                                                                                                     |     |
 | `-T`または`--tables-list`       | 指定したテーブルをエクスポートする                                                                                                                                                                                                                                                   |                                                                                                                                                                     |     |
-| `-f`または`--filter`            | フィルター パターンに一致するテーブルをエクスポートします。フィルターの構文については、 [<a href="/table-filter.md">テーブルフィルター</a>](/table-filter.md)を参照してください。                                                                                                                                                 | `[\*.\*,!/^(mysql&#124;sys&#124;INFORMATION_SCHEMA&#124;PERFORMANCE_SCHEMA&#124;METRICS_SCHEMA&#124;INSPECTION_SCHEMA)$/.\*]` (システムスキーマを除くすべてのデータベースまたはテーブルをエクスポート) |     |
+| `-f`または`--filter`            | フィルター パターンに一致するテーブルをエクスポートします。フィルターの構文については、 [テーブルフィルター](/table-filter.md)を参照してください。                                                                                                                                                 | `[\*.\*,!/^(mysql&#124;sys&#124;INFORMATION_SCHEMA&#124;PERFORMANCE_SCHEMA&#124;METRICS_SCHEMA&#124;INSPECTION_SCHEMA)$/.\*]` (システムスキーマを除くすべてのデータベースまたはテーブルをエクスポート) |     |
 | `--case-sensitive`           | テーブルフィルターで大文字と小文字が区別されるかどうか                                                                                                                                                                                                                                         | false (大文字と小文字を区別しない)                                                                                                                                               |     |
 | `-h`または`--host`              | 接続されているデータベースホストのIPアドレス                                                                                                                                                                                                                                             | 「127.0.0.1」                                                                                                                                                         |     |
 | `-t`または`--threads`           | 同時バックアップスレッドの数                                                                                                                                                                                                                                                      | 4                                                                                                                                                                   |     |
@@ -433,7 +433,7 @@ SET GLOBAL tidb_gc_life_time = '10m';
 | `-s`または`--statement-size`    | `INSERT`ステートメントのサイズを制御します。単位はバイトです                                                                                                                                                                                                                                  |                                                                                                                                                                     |     |
 | `-F`または`--filesize`          | 分割されたテーブルのファイルサイズ。単位は`128B` 、 `64KiB` 、 `32MiB` 、 `1.5GiB`などで指定する必要があります。                                                                                                                                                                                           |                                                                                                                                                                     |     |
 | `--filetype`                 | エクスポートされるファイルの種類 (csv/sql)                                                                                                                                                                                                                                          | 「SQL」                                                                                                                                                               |     |
-| `-o`または`--output`            | エクスポートされたローカル ファイルのパス、または[<a href="https://docs.pingcap.com/tidb/stable/backup-and-restore-storages#uri-format">外部storageURI</a>](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages#uri-format)                                                      | 「./export-${time}」                                                                                                                                                  |     |
+| `-o`または`--output`            | エクスポートされたローカル ファイルのパス、または[外部storageURI](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages#uri-format)                                                      | 「./export-${time}」                                                                                                                                                  |     |
 | `-S`または`--sql`               | 指定されたSQL文に従ってデータをエクスポートします。このコマンドは同時エクスポートをサポートしていません。                                                                                                                                                                                                              |                                                                                                                                                                     |     |
 | `--consistency`              | フラッシュ: ダンプの前に FTWRL を使用します。<br/>スナップショット: TSO の特定のスナップショットの TiDB データをダンプします。<br/> lock: ダンプされるすべてのテーブルに対して`lock tables read`を実行します。<br/> none: ロックを追加せずにダンプします。一貫性は保証できません。<br/> auto: MySQL の場合は --consistency flash を使用します。 TiDB の --consistency スナップショットを使用する    | 「自動」                                                                                                                                                                |     |
 | `--snapshot`                 | スナップショット TSO。 `consistency=snapshot`の場合のみ有効                                                                                                                                                                                                                         |                                                                                                                                                                     |     |
@@ -449,7 +449,7 @@ SET GLOBAL tidb_gc_life_time = '10m';
 | `--csv-separator`            | CSV ファイル内の各値の区切り文字。デフォルトの「,」を使用することはお勧めできません。 「|+|」を使用することをお勧めします。またはその他の珍しい文字の組み合わせ                                                                                                                                                                                | 「、」                                                                                                                                                                 | 「、」 |
 | `--csv-null-value`           | CSV ファイル内の null 値の表現                                                                                                                                                                                                                                                | 「\N」                                                                                                                                                                |     |
 | `--escape-backslash`         | エクスポート ファイル内の特殊文字をエスケープするには、バックスラッシュ ( `\` ) を使用します。                                                                                                                                                                                                                | 真実                                                                                                                                                                  |     |
-| `--output-filename-template` | [<a href="https://golang.org/pkg/text/template/#hdr-Arguments">golang テンプレート</a>](https://golang.org/pkg/text/template/#hdr-Arguments)の形式で表されるファイル名テンプレート<br/>`{{.DB}}` 、 `{{.Table}}` 、および`{{.Index}}`引数をサポートします<br/>3 つの引数は、データ ファイルのデータベース名、テーブル名、チャンク ID を表します。 | &#39;{{.DB}}.{{.Table}}.{{.Index}}&#39;                                                                                                                             |     |
+| `--output-filename-template` | [golang テンプレート](https://golang.org/pkg/text/template/#hdr-Arguments)の形式で表されるファイル名テンプレート<br/>`{{.DB}}` 、 `{{.Table}}` 、および`{{.Index}}`引数をサポートします<br/>3 つの引数は、データ ファイルのデータベース名、テーブル名、チャンク ID を表します。 | &#39;{{.DB}}.{{.Table}}.{{.Index}}&#39;                                                                                                                             |     |
 | `--status-addr`              | Dumpling のサービス アドレス (Prometheus がメトリクスと pprof デバッグを取得するためのアドレスを含む)                                                                                                                                                                                                  | &quot;:8281&quot;                                                                                                                                                   |     |
 | `--tidb-mem-quota-query`     | Dumplingコマンドの 1 行で SQL ステートメントをエクスポートする際のメモリ制限。単位はバイトです。 v4.0.10 以降のバージョンでは、このパラメーターを設定しない場合、TiDB はデフォルトで`mem-quota-query`構成項目の値をメモリ制限値として使用します。 v4.0.10 より前のバージョンの場合、パラメータ値のデフォルトは 32 GB です。                                                                       | 34359738368                                                                                                                                                         |     |
 | `--params`                   | エクスポートするデータベースの接続のセッション変数を指定します。必要な形式は`"character_set_client=latin1,character_set_connection=latin1"`です                                                                                                                                                             |                                                                                                                                                                     |     |

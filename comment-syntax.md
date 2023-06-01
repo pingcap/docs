@@ -145,10 +145,10 @@ TiDB には独自のコメント構文 (つまり、TiDB 固有のコメント�
 SELECT /*+ hint */ FROM ...;
 ```
 
-TiDB がサポートするオプティマイザー ヒントの詳細については、 [<a href="/optimizer-hints.md">オプティマイザーのヒント</a>](/optimizer-hints.md)を参照してください。
+TiDB がサポートするオプティマイザー ヒントの詳細については、 [オプティマイザーのヒント](/optimizer-hints.md)を参照してください。
 
 > **ノート：**
 >
 > MySQL クライアントでは、TiDB 固有のコメント構文はコメントとして扱われ、デフォルトでクリアされます。 5.7.7 より前の MySQL クライアントでは、ヒントもコメントとして表示され、デフォルトでクリアされます。クライアントを起動するときは、 `--comments`オプションを使用することをお勧めします。たとえば、 `mysql -h 127.0.0.1 -P 4000 -uroot --comments` 。
 
-詳細については、 [<a href="https://dev.mysql.com/doc/refman/5.7/en/comments.html">コメントの構文</a>](https://dev.mysql.com/doc/refman/5.7/en/comments.html)を参照してください。
+詳細については、 [コメントの構文](https://dev.mysql.com/doc/refman/5.7/en/comments.html)を参照してください。

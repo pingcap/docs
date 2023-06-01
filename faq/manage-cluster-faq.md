@@ -25,11 +25,11 @@ MySQL と同様に、TiDB には静的パラメーターとソリッド パラ�
 
 ### TiDB (TiKV) のデータ ディレクトリはどこにありますか? {#where-and-what-are-the-data-directories-in-tidb-tikv}
 
-TiKV データは[<a href="/command-line-flags-for-tikv-configuration.md#--data-dir">`--data-dir`</a>](/command-line-flags-for-tikv-configuration.md#--data-dir)にあり、バックアップ、db、raft、snap の 4 つのディレクトリが含まれており、それぞれバックアップ、データ、 Raftデータ、ミラー データの保存に使用されます。
+TiKV データは[`--data-dir`](/command-line-flags-for-tikv-configuration.md#--data-dir)にあり、バックアップ、db、raft、snap の 4 つのディレクトリが含まれており、それぞれバックアップ、データ、 Raftデータ、ミラー データの保存に使用されます。
 
 ### TiDB のシステム テーブルとは何ですか? {#what-are-the-system-tables-in-tidb}
 
-MySQL と同様に、TiDB にはシステム テーブルも含まれており、サーバーの実行時に必要な情報を保存するために使用されます。 [<a href="/mysql-schema.md">TiDBシステムテーブル</a>](/mysql-schema.md)を参照してください。
+MySQL と同様に、TiDB にはシステム テーブルも含まれており、サーバーの実行時に必要な情報を保存するために使用されます。 [TiDBシステムテーブル](/mysql-schema.md)を参照してください。
 
 ### TiDB/PD/TiKV ログはどこにありますか? {#where-are-the-tidb-pd-tikv-logs}
 
@@ -37,7 +37,7 @@ MySQL と同様に、TiDB にはシステム テーブルも含まれており�
 
 ### TiDB を安全に停止するにはどうすればよいですか? {#how-to-safely-stop-tidb}
 
--   ロード バランサーが実行中の場合 (推奨): ロード バランサーを停止し、SQL ステートメント`SHUTDOWN`を実行します。その後、TiDB は、すべてのセッションが終了するまで、 [<a href="/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50">`graceful-wait-before-shutdown`</a>](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50)で指定された期間待機します。その後、TiDB は実行を停止します。
+-   ロード バランサーが実行中の場合 (推奨): ロード バランサーを停止し、SQL ステートメント`SHUTDOWN`を実行します。その後、TiDB は、すべてのセッションが終了するまで、 [`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50)で指定された期間待機します。その後、TiDB は実行を停止します。
 
 -   ロードバランサが実行されていない場合: `SHUTDOWN`ステートメントを実行します。その後、TiDB コンポーネントが正常に停止されます。
 
@@ -49,31 +49,31 @@ MySQL と同様に、TiDB にはシステム テーブルも含まれており�
 
     TiDB v6.1.0 では、Global Kill 機能が導入されています (デフォルトで有効になっている`enable-global-kill`構成によって制御されます)。 Global Kill が有効な場合は、 `kill session_id`を実行するだけです。
 
-    TiDB バージョンが v6.1.0 より前の場合、または Global Kill 機能が有効になっていない場合、デフォルトでは`kill session_id`は有効になりません。 DML ステートメントを終了するには、DML ステートメントを実行している TiDB インスタンスにクライアントを直接接続し、 `kill tidb session_id`ステートメントを実行する必要があります。クライアントが別の TiDB インスタンスに接続している場合、またはクライアントと TiDB クラスターの間にプロキシがある場合、 `kill tidb session_id`ステートメントが別の TiDB インスタンスにルーティングされる可能性があり、別のセッションが誤って終了する可能性があります。詳細は[<a href="/sql-statements/sql-statement-kill.md">`KILL`</a>](/sql-statements/sql-statement-kill.md)を参照してください。
+    TiDB バージョンが v6.1.0 より前の場合、または Global Kill 機能が有効になっていない場合、デフォルトでは`kill session_id`は有効になりません。 DML ステートメントを終了するには、DML ステートメントを実行している TiDB インスタンスにクライアントを直接接続し、 `kill tidb session_id`ステートメントを実行する必要があります。クライアントが別の TiDB インスタンスに接続している場合、またはクライアントと TiDB クラスターの間にプロキシがある場合、 `kill tidb session_id`ステートメントが別の TiDB インスタンスにルーティングされる可能性があり、別のセッションが誤って終了する可能性があります。詳細は[`KILL`](/sql-statements/sql-statement-kill.md)を参照してください。
 
--   DDL ステートメントを強制終了する: まず`admin show ddl jobs`使用して、終了する必要がある DDL ジョブの ID を見つけてから、 `admin cancel ddl jobs 'job_id' [, 'job_id'] ...`実行します。詳細については、 [<a href="/sql-statements/sql-statement-admin.md">`ADMIN`ステートメント</a>](/sql-statements/sql-statement-admin.md)参照してください。
+-   DDL ステートメントを強制終了する: まず`admin show ddl jobs`使用して、終了する必要がある DDL ジョブの ID を見つけてから、 `admin cancel ddl jobs 'job_id' [, 'job_id'] ...`実行します。詳細については、 [`ADMIN`ステートメント](/sql-statements/sql-statement-admin.md)参照してください。
 
 ### TiDB はセッション タイムアウトをサポートしていますか? {#does-tidb-support-session-timeout}
 
-TiDB は現在 2 つのタイムアウト、 [<a href="/system-variables.md#wait_timeout">`wait_timeout`</a>](/system-variables.md#wait_timeout)と[<a href="/system-variables.md#interactive_timeout">`interactive_timeout`</a>](/system-variables.md#interactive_timeout)をサポートしています。
+TiDB は現在 2 つのタイムアウト、 [`interactive_timeout`](/system-variables.md#interactive_timeout)をサポートしています。
 
 ### TiDB のバージョン管理戦略とは何ですか? {#what-is-the-tidb-version-management-strategy}
 
-TiDB のバージョン管理の詳細については、 [<a href="/releases/versioning.md">TiDB のバージョン管理</a>](/releases/versioning.md)を参照してください。
+TiDB のバージョン管理の詳細については、 [TiDB のバージョン管理](/releases/versioning.md)を参照してください。
 
 ### TiDB クラスターの導入と維持にかかる運用コストはどうでしょうか? {#how-about-the-operating-cost-of-deploying-and-maintaining-a-tidb-cluster}
 
-TiDB は、クラスターを低コストで簡単に管理できるいくつかの機能と[<a href="/ecosystem-tool-user-guide.md">ツール</a>](/ecosystem-tool-user-guide.md)を提供します。
+TiDB は、クラスターを低コストで簡単に管理できるいくつかの機能と[ツール](/ecosystem-tool-user-guide.md)を提供します。
 
--   メンテナンス操作の場合、 [<a href="/tiup/tiup-documentation-guide.md">TiUP</a>](/tiup/tiup-documentation-guide.md)パッケージ マネージャーとして機能し、展開、スケーリング、アップグレード、およびその他のメンテナンス タスクを簡素化します。
--   監視の場合、 [<a href="/tidb-monitoring-framework.md">TiDB監視フレームワーク</a>](/tidb-monitoring-framework.md) [<a href="https://prometheus.io/">プロメテウス</a>](https://prometheus.io/)を使用して監視とパフォーマンスのメトリクスを保存し、 [<a href="https://grafana.com/grafana/">グラファナ</a>](https://grafana.com/grafana/)を使用してこれらのメトリクスを視覚化します。数百のメトリクスを備えた数十の組み込みパネルが利用可能です。
--   トラブルシューティングのために、TiDBサーバーとその他のコンポーネントの一般的な問題が[<a href="/tidb-troubleshooting-map.md">TiDB トラブルシューティング マップ</a>](/tidb-troubleshooting-map.md)にまとめられています。関連する問題が発生した場合は、このマップを使用して問題を診断し、解決できます。
+-   メンテナンス操作の場合、 [TiUP](/tiup/tiup-documentation-guide.md)パッケージ マネージャーとして機能し、展開、スケーリング、アップグレード、およびその他のメンテナンス タスクを簡素化します。
+-   監視の場合、 [グラファナ](https://grafana.com/grafana/)を使用してこれらのメトリクスを視覚化します。数百のメトリクスを備えた数十の組み込みパネルが利用可能です。
+-   トラブルシューティングのために、TiDBサーバーとその他のコンポーネントの一般的な問題が[TiDB トラブルシューティング マップ](/tidb-troubleshooting-map.md)にまとめられています。関連する問題が発生した場合は、このマップを使用して問題を診断し、解決できます。
 
 ### さまざまな TiDB マスター バージョンの違いは何ですか? {#what-s-the-difference-between-various-tidb-master-versions}
 
-TiDB コミュニティは非常に活発です。エンジニアは機能の最適化とバグの修正を続けてきました。したがって、TiDB のバージョンは非常に速く更新されます。最新バージョンの情報を常に知りたい場合は、 [<a href="/releases/release-timeline.md">TiDB リリース タイムライン</a>](/releases/release-timeline.md)を参照してください。
+TiDB コミュニティは非常に活発です。エンジニアは機能の最適化とバグの修正を続けてきました。したがって、TiDB のバージョンは非常に速く更新されます。最新バージョンの情報を常に知りたい場合は、 [TiDB リリース タイムライン](/releases/release-timeline.md)を参照してください。
 
-TiDB [<a href="/production-deployment-using-tiup.md">TiUPを使用する</a>](/production-deployment-using-tiup.md)または[<a href="https://docs.pingcap.com/tidb-in-kubernetes/stable">TiDB Operatorを使用する</a>](https://docs.pingcap.com/tidb-in-kubernetes/stable)を導入することをお勧めします。 TiDBではバージョン番号を一元管理しています。次のいずれかの方法を使用してバージョン番号を表示できます。
+TiDB [TiDB Operatorを使用する](https://docs.pingcap.com/tidb-in-kubernetes/stable)を導入することをお勧めします。 TiDBではバージョン番号を一元管理しています。次のいずれかの方法を使用してバージョン番号を表示できます。
 
 -   `select tidb_version()`
 -   `tidb-server -V`
@@ -86,8 +86,8 @@ TiDB [<a href="/production-deployment-using-tiup.md">TiUPを使用する</a>](/p
 
 オンライン サービスを中断することなく TiDB クラスターをスケールアウトできます。
 
--   クラスターが[<a href="/production-deployment-using-tiup.md">TiUP</a>](/production-deployment-using-tiup.md)使用してデプロイされている場合は、 [<a href="/scale-tidb-using-tiup.md">TiUPを使用して TiDBクラスタをスケールする</a>](/scale-tidb-using-tiup.md)を参照してください。
--   クラスターが Kubernetes 上の[<a href="/tidb-operator-overview.md">TiDB Operator</a>](/tidb-operator-overview.md)使用してデプロイされている場合は、 [<a href="https://docs.pingcap.com/tidb-in-kubernetes/stable/scale-a-tidb-cluster">Kubernetes 上で TiDB を手動でスケールする</a>](https://docs.pingcap.com/tidb-in-kubernetes/stable/scale-a-tidb-cluster)を参照してください。
+-   クラスターが[TiUPを使用して TiDBクラスタをスケールする](/scale-tidb-using-tiup.md)を参照してください。
+-   クラスターが Kubernetes 上の[Kubernetes 上で TiDB を手動でスケールする](https://docs.pingcap.com/tidb-in-kubernetes/stable/scale-a-tidb-cluster)を参照してください。
 
 ### TiDB を水平方向にスケーリングするにはどうすればよいですか? {#how-to-scale-tidb-horizontally}
 
@@ -109,7 +109,7 @@ TiDB [<a href="/production-deployment-using-tiup.md">TiUPを使用する</a>](/p
 
 ### Percolator が分散ロックを使用し、クラッシュ クライアントがロックを保持している場合、ロックは解放されませんか? {#if-percolator-uses-distributed-locks-and-the-crash-client-keeps-the-lock-will-the-lock-not-be-released}
 
-詳細については、中国語の[<a href="https://pingcap.com/blog-cn/percolator-and-txn/">パーコレーターと TiDBトランザクションアルゴリズム</a>](https://pingcap.com/blog-cn/percolator-and-txn/)を参照してください。
+詳細については、中国語の[パーコレーターと TiDBトランザクションアルゴリズム](https://pingcap.com/blog-cn/percolator-and-txn/)を参照してください。
 
 ### TiDB が Thrift ではなく gRPC を使用するのはなぜですか? Googleが使っているからでしょうか？ {#why-does-tidb-use-grpc-instead-of-thrift-is-it-because-google-uses-it}
 
@@ -128,7 +128,7 @@ TiDB [<a href="/production-deployment-using-tiup.md">TiUPを使用する</a>](/p
 
 ### トランザクションが非同期コミットまたは 1 フェーズ コミット機能を使用しないのはなぜですか? {#why-does-the-transaction-not-use-the-async-commit-or-the-one-phase-commit-feature}
 
-次の状況では、システム変数を使用して機能[<a href="/system-variables.md#tidb_enable_async_commit-new-in-v50">非同期コミット</a>](/system-variables.md#tidb_enable_async_commit-new-in-v50)と機能[<a href="/system-variables.md#tidb_enable_1pc-new-in-v50">1フェーズコミット</a>](/system-variables.md#tidb_enable_1pc-new-in-v50)を有効にしても、TiDB はこれらの機能を使用しません。
+次の状況では、システム変数を使用して機能[1フェーズコミット](/system-variables.md#tidb_enable_1pc-new-in-v50)を有効にしても、TiDB はこれらの機能を使用しません。
 
 -   TiDB Binlogの実装によって制限されている TiDB Binlogを有効にしている場合、TiDB は非同期コミットまたは 1 フェーズ コミット機能を使用しません。
 -   TiDB は、トランザクションに書き込まれるキーと値のペアが 256 個以下で、キーの合計サイズが 4 KB 以下の場合にのみ、非同期コミットまたは 1 フェーズ コミット機能を使用します。これは、大量のデータを書き込むトランザクションの場合、非同期コミットを使用してもパフォーマンスを大幅に改善できないためです。
@@ -155,7 +155,7 @@ PD はあらゆる同期エラーを許容できますが、エラー値が大�
 
 ### TiKV ストアの各ステータス (稼働中、切断、オフライン、ダウン、廃棄) 間の関係は何ですか? {#what-is-the-relationship-between-each-status-up-disconnect-offline-down-tombstone-of-a-tikv-store}
 
-各ステータスの関係については[<a href="/tidb-scheduling.md#information-collection">TiKVストアの各ステータスの関係</a>](/tidb-scheduling.md#information-collection)を参照してください。
+各ステータスの関係については[TiKVストアの各ステータスの関係](/tidb-scheduling.md#information-collection)を参照してください。
 
 PD Control を使用して、TiKV ストアのステータス情報を確認できます。
 
@@ -168,7 +168,7 @@ PD Control を使用して、TiKV ストアのステータス情報を確認で�
 
 はい。現在、更新できるのはレプリカのグローバル数のみです。初めて起動すると、PD は構成ファイル (conf/pd.yml) を読み取り、その中の max-replicas 構成を使用します。後で番号を更新する場合は、pd-ctl コンフィグレーション コマンド`config set max-replicas $num`を使用し、有効な設定を`config show all`で表示します。更新はアプリケーションには影響せず、バックグラウンドで構成されます。
 
-TiKV インスタンスの合計数が常に、設定したレプリカの数以上であることを確認してください。たとえば、3 つのレプリカには少なくとも 3 つの TiKV インスタンスが必要です。レプリカの数を増やす前に、追加のstorage要件を見積もる必要があります。 pd-ctl の詳細については、 [<a href="/pd-control.md">PD Controlユーザーガイド</a>](/pd-control.md)を参照してください。
+TiKV インスタンスの合計数が常に、設定したレプリカの数以上であることを確認してください。たとえば、3 つのレプリカには少なくとも 3 つの TiKV インスタンスが必要です。レプリカの数を増やす前に、追加のstorage要件を見積もる必要があります。 pd-ctl の詳細については、 [PD Controlユーザーガイド](/pd-control.md)を参照してください。
 
 ### コマンドラインクラスター管理ツールがない場合にクラスター全体の健全性状態を確認するにはどうすればよいですか? {#how-to-check-the-health-status-of-the-whole-cluster-when-lacking-command-line-cluster-management-tools}
 
@@ -214,7 +214,7 @@ DDL リクエストを受信する TiDBサーバーインスタンスが、DDL �
 
 ### <code>Information_schema</code>より実際の情報をサポートできますか? {#can-the-code-information-schema-code-support-more-real-information}
 
-MySQL 互換性の一環として、TiDB は多数の`INFORMATION_SCHEMA`テーブルをサポートします。これらのテーブルの多くには、対応する SHOW コマンドもあります。詳細については、 [<a href="/information-schema/information-schema.md">情報スキーマ</a>](/information-schema/information-schema.md)を参照してください。
+MySQL 互換性の一環として、TiDB は多数の`INFORMATION_SCHEMA`テーブルをサポートします。これらのテーブルの多くには、対応する SHOW コマンドもあります。詳細については、 [情報スキーマ](/information-schema/information-schema.md)を参照してください。
 
 ### TiDB バックオフ タイプのシナリオの説明は何ですか? {#what-s-the-explanation-of-the-tidb-backoff-type-scenario}
 
@@ -226,7 +226,7 @@ TiClientリージョンエラー インジケーターは、TiDBサーバーが�
 
 ### TiDB がサポートする同時接続の最大数はどれくらいですか? {#what-s-the-maximum-number-of-concurrent-connections-that-tidb-supports}
 
-デフォルトでは、TiDBサーバーごとの最大接続数に制限はありません。必要に応じて、 `config.toml`ファイルで`instance.max_connections`を設定するか、システム変数[<a href="/system-variables.md#max_connections">`max_connections`</a>](/system-variables.md#max_connections)の値を変更することで、最大接続数を制限できます。同時実行数が大きすぎると応答時間が長くなる場合は、TiDB ノードを追加して容量を増やすことをお勧めします。
+デフォルトでは、TiDBサーバーごとの最大接続数に制限はありません。必要に応じて、 `config.toml`ファイルで`instance.max_connections`を設定するか、システム変数[`max_connections`](/system-variables.md#max_connections)の値を変更することで、最大接続数を制限できます。同時実行数が大きすぎると応答時間が長くなる場合は、TiDB ノードを追加して容量を増やすことをお勧めします。
 
 ### テーブルの作成時間を確認するにはどうすればよいですか? {#how-to-view-the-creation-time-of-a-table}
 
@@ -298,7 +298,7 @@ GROUP BY
 
 ### コンプライアンスまたはマルチテナント アプリケーションのデータの場所を指定するにはどうすればよいですか? {#how-to-specify-the-location-of-data-for-compliance-or-multi-tenant-applications}
 
-[<a href="/placement-rules-in-sql.md">配置ルール</a>](/placement-rules-in-sql.md)を使用して、コンプライアンス アプリケーションまたはマルチテナント アプリケーションのデータの場所を指定できます。
+[配置ルール](/placement-rules-in-sql.md)を使用して、コンプライアンス アプリケーションまたはマルチテナント アプリケーションのデータの場所を指定できます。
 
 SQL の配置ルールは、レプリカの数、 Raftロール、配置場所、ルールが有効になるキー範囲などの連続データ範囲の属性を制御するように設計されています。
 
@@ -314,7 +314,7 @@ SQL の配置ルールは、レプリカの数、 Raftロール、配置場所�
 
 ### TiKV起動時に<code>duplicated store address</code>メッセージが表示される {#the-code-duplicated-store-address-code-message-is-displayed-when-starting-tikv}
 
-これは、起動パラメータのアドレスが他の TiKV によって PD クラスタに登録されているためです。このエラーが発生する一般的な条件: TiKV `--data-dir`で指定されたパスにデータ フォルダーがありません (削除または移動後に --data-dir が更新されません)。以前のパラメーターで TiKV を再起動します。pd-ctl の[<a href="https://github.com/pingcap/pd/tree/55db505e8f35e8ab4e00efd202beb27a8ecc40fb/tools/pd-ctl#store-delete--label--weight-store_id----jqquery-string">ストア削除</a>](https://github.com/pingcap/pd/tree/55db505e8f35e8ab4e00efd202beb27a8ecc40fb/tools/pd-ctl#store-delete--label--weight-store_id----jqquery-string)機能を試してください。以前のストアを削除してから、TiKV を再起動します。
+これは、起動パラメータのアドレスが他の TiKV によって PD クラスタに登録されているためです。このエラーが発生する一般的な条件: TiKV `--data-dir`で指定されたパスにデータ フォルダーがありません (削除または移動後に --data-dir が更新されません)。以前のパラメーターで TiKV を再起動します。pd-ctl の[ストア削除](https://github.com/pingcap/pd/tree/55db505e8f35e8ab4e00efd202beb27a8ecc40fb/tools/pd-ctl#store-delete--label--weight-store_id----jqquery-string)機能を試してください。以前のストアを削除してから、TiKV を再起動します。
 
 ### TiKV プライマリ ノードとセカンダリ ノードは同じ圧縮アルゴリズムを使用していますが、結果が異なるのはなぜですか? {#tikv-primary-node-and-secondary-node-use-the-same-compression-algorithm-why-the-results-are-different}
 
@@ -378,11 +378,11 @@ WAL は順序付けされた書き込みに属しており、現時点では独�
 
 ### 最も厳密なデータ利用可能モード ( <code>sync-log = true</code> ) での書き込みパフォーマンスはどうですか? {#how-is-the-write-performance-in-the-most-strict-data-available-mode-code-sync-log-true-code}
 
-一般に、 `sync-log`を有効にすると、パフォーマンスが約 30% 低下します。 `sync-log`を`false`に設定した場合の書き込みパフォーマンスについては、 [<a href="/benchmark/v3.0-performance-benchmarking-with-sysbench.md">Sysbenchを使用したTiDBのパフォーマンステスト結果</a>](/benchmark/v3.0-performance-benchmarking-with-sysbench.md)参照してください。
+一般に、 `sync-log`を有効にすると、パフォーマンスが約 30% 低下します。 `sync-log`を`false`に設定した場合の書き込みパフォーマンスについては、 [Sysbenchを使用したTiDBのパフォーマンステスト結果](/benchmark/v3.0-performance-benchmarking-with-sysbench.md)参照してください。
 
 ### Raft + TiKVアーキテクチャの複数のレプリカは絶対的なデータ安全性を実現できますか?スタンドアロンstorageに最も厳密なモード ( <code>sync-log = true</code> ) を適用する必要がありますか? {#can-raft-multiple-replicas-in-the-tikv-architecture-achieve-absolute-data-safety-is-it-necessary-to-apply-the-most-strict-mode-code-sync-log-true-code-to-a-standalone-storage}
 
-データは[<a href="https://raft.github.io/">Raftコンセンサス アルゴリズム</a>](https://raft.github.io/)使用して TiKV ノード間で冗長的に複製され、ノード障害が発生した場合の回復可能性を確保します。データがレプリカの 50% を超えて書き込まれた場合にのみ、アプリケーションは ACK を返します (3 ノードのうち 2 ノード)。ただし、理論的には 2 つのノードがクラッシュする可能性があります。したがって、データの安全性に対する要件はそれほど厳しくないが、パフォーマンスに対する要件が非常に厳しいシナリオを除き、 `sync-log`モードを有効にすることを強くお勧めします。
+データは[Raftコンセンサス アルゴリズム](https://raft.github.io/)使用して TiKV ノード間で冗長的に複製され、ノード障害が発生した場合の回復可能性を確保します。データがレプリカの 50% を超えて書き込まれた場合にのみ、アプリケーションは ACK を返します (3 ノードのうち 2 ノード)。ただし、理論的には 2 つのノードがクラッシュする可能性があります。したがって、データの安全性に対する要件はそれほど厳しくないが、パフォーマンスに対する要件が非常に厳しいシナリオを除き、 `sync-log`モードを有効にすることを強くお勧めします。
 
 `sync-log`を使用する代わりに、 Raftグループに 3 つではなく 5 つのレプリカを含めることも検討できます。これにより、データの安全性を確保しながら、2 つのレプリカの障害が許容されます。
 
@@ -422,7 +422,7 @@ TiKV のメモリ使用量は主に RocksDB のブロック キャッシュか�
 多くのユーザーは最初に、TiDB と MySQL の間のベンチマーク テストや比較テストを行う傾向があります。また、同様の公式テストを実施したところ、テストデータには多少の偏りがあるものの、テスト結果は全体的に一貫していることがわかりました。 TiDB のアーキテクチャはMySQL とは大きく異なるため、ベンチマーク ポイントを見つけるのは困難です。提案は次のとおりです。
 
 -   ベンチマーク テストにあまり時間をかけすぎないでください。 TiDB を使用するシナリオの違いにさらに注目してください。
--   [<a href="/benchmark/v3.0-performance-benchmarking-with-sysbench.md">Sysbenchを使用したTiDBのパフォーマンステスト結果</a>](/benchmark/v3.0-performance-benchmarking-with-sysbench.md)を参照してください。
+-   [Sysbenchを使用したTiDBのパフォーマンステスト結果](/benchmark/v3.0-performance-benchmarking-with-sysbench.md)を参照してください。
 
 ### TiDB クラスター容量 (QPS) とノード数の関係は何ですか? TiDB と MySQL を比較するとどうですか? {#what-s-the-relationship-between-the-tidb-cluster-capacity-qps-and-the-number-of-nodes-how-does-tidb-compare-to-mysql}
 
@@ -442,10 +442,10 @@ TiDB は、小さなサイズのテーブル (1,000 万レベル未満など) �
 
 ### TiDB のデータをバックアップするにはどうすればよいですか? {#how-to-back-up-data-in-tidb}
 
-現在、大容量データ (1 TB を超える) のバックアップには、 [<a href="/br/backup-and-restore-overview.md">バックアップと復元 (BR)</a>](/br/backup-and-restore-overview.md)使用する方法が推奨されています。それ以外の場合、推奨されるツールは[<a href="/dumpling-overview.md">Dumpling</a>](/dumpling-overview.md)です。 TiDB では、データのバックアップと復元のために公式 MySQL ツール`mysqldump`もサポートされていますが、そのパフォーマンスはBRに劣らず、大量のデータのバックアップと復元にはさらに多くの時間が必要です。
+現在、大容量データ (1 TB を超える) のバックアップには、 [Dumpling](/dumpling-overview.md)です。 TiDB では、データのバックアップと復元のために公式 MySQL ツール`mysqldump`もサポートされていますが、そのパフォーマンスはBRに劣らず、大量のデータのバックアップと復元にはさらに多くの時間が必要です。
 
-BRに関するその他の FAQ については、 [<a href="/faq/backup-and-restore-faq.md">BRよくある質問</a>](/faq/backup-and-restore-faq.md)を参照してください。
+BRに関するその他の FAQ については、 [BRよくある質問](/faq/backup-and-restore-faq.md)を参照してください。
 
 ### バックアップと復元の速度はどうですか? {#how-is-the-speed-of-backup-and-restore}
 
-[<a href="/br/backup-and-restore-overview.md">BR</a>](/br/backup-and-restore-overview.md)を使用してバックアップおよび復元タスクを実行する場合、バックアップは TiKV インスタンスあたり約 40 MB/秒で処理され、復元は TiKV インスタンスあたり約 100 MB/秒で処理されます。
+[BR](/br/backup-and-restore-overview.md)を使用してバックアップおよび復元タスクを実行する場合、バックアップは TiKV インスタンスあたり約 40 MB/秒で処理され、復元は TiKV インスタンスあたり約 100 MB/秒で処理されます。

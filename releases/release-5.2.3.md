@@ -12,4 +12,4 @@ TiDB バージョン: 5.2.3
 
 -   TiKV
 
-    -   複数のキーで呼び出された場合に`GcKeys`タスクが動作しない問題を修正します。この問題が原因で、圧縮フィルター GC が MVCC 削除情報を削除しない可能性があります。 [<a href="https://github.com/tikv/tikv/issues/11217">#11217</a>](https://github.com/tikv/tikv/issues/11217)
+    -   複数のキーで呼び出された場合に`GcKeys`タスクが動作しない問題を修正します。この問題が原因で、圧縮フィルター GC が MVCC 削除情報を削除しない可能性があります。 [#11217](https://github.com/tikv/tikv/issues/11217)

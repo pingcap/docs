@@ -70,4 +70,4 @@ mysql> show analyze status;
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/information-schema/information-schema-analyze-status.md">ANALYZE_STATUS テーブル</a>](/information-schema/information-schema-analyze-status.md)
+-   [ANALYZE_STATUS テーブル](/information-schema/information-schema-analyze-status.md)

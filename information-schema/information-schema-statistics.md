@@ -59,7 +59,7 @@ DESC statistics;
 -   `COMMENT` : インデックスに関連するその他の情報。
 -   `INDEX_COMMENT` : インデックス作成時にインデックスに指定されたコメント属性を持つコメント。
 -   `IS_VISIBLE` : オプティマイザーがこのインデックスを使用できるかどうか。
--   `Expression`非式部分のインデックス キーの場合、この値は`NULL`です。式部分のインデックス キーの場合、この値は式そのものです。 [<a href="/sql-statements/sql-statement-create-index.md#expression-index">式インデックス</a>](/sql-statements/sql-statement-create-index.md#expression-index)を参照してください。
+-   `Expression`非式部分のインデックス キーの場合、この値は`NULL`です。式部分のインデックス キーの場合、この値は式そのものです。 [式インデックス](/sql-statements/sql-statement-create-index.md#expression-index)を参照してください。
 
 次のステートメントは同等です。
 

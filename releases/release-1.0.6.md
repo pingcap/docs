@@ -8,17 +8,17 @@ title: TiDB 1.0.6 Release Notes
 
 ## TiDB {#tidb}
 
--   [<a href="https://github.com/pingcap/tidb/pull/5511">`Alter Table Auto_Increment`構文のサポート</a>](https://github.com/pingcap/tidb/pull/5511)
--   [<a href="https://github.com/pingcap/tidb/pull/5556">コストベースの計算のバグと統計の`Null Json`の問題を修正</a>](https://github.com/pingcap/tidb/pull/5556)
--   [<a href="https://github.com/pingcap/tidb/pull/5559">単一テーブルの書き込みホットスポットを回避するために、暗黙的な行 ID をシャードするための拡張構文をサポートします。</a>](https://github.com/pingcap/tidb/pull/5559)
--   [<a href="https://github.com/pingcap/tidb/pull/5562">潜在的な DDL 問題を修正する</a>](https://github.com/pingcap/tidb/pull/5562)
--   [<a href="https://github.com/pingcap/tidb/pull/5564">`curtime` 、 `sysdate` 、および`curdate`関数のタイムゾーン設定を考慮してください。</a>](https://github.com/pingcap/tidb/pull/5564)
--   [<a href="https://github.com/pingcap/tidb/pull/5569">`GROUP_CONCAT`関数で`SEPARATOR`構文をサポートする</a>](https://github.com/pingcap/tidb/pull/5569)
--   [<a href="https://github.com/pingcap/tidb/pull/5582">`GROUP_CONCAT`関数の間違った戻り値の型の問題を修正します。</a>](https://github.com/pingcap/tidb/pull/5582)
+-   [`Alter Table Auto_Increment`構文のサポート](https://github.com/pingcap/tidb/pull/5511)
+-   [コストベースの計算のバグと統計の`Null Json`の問題を修正](https://github.com/pingcap/tidb/pull/5556)
+-   [単一テーブルの書き込みホットスポットを回避するために、暗黙的な行 ID をシャードするための拡張構文をサポートします。](https://github.com/pingcap/tidb/pull/5559)
+-   [潜在的な DDL 問題を修正する](https://github.com/pingcap/tidb/pull/5562)
+-   [`curtime` 、 `sysdate` 、および`curdate`関数のタイムゾーン設定を考慮してください。](https://github.com/pingcap/tidb/pull/5564)
+-   [`GROUP_CONCAT`関数で`SEPARATOR`構文をサポートする](https://github.com/pingcap/tidb/pull/5569)
+-   [`GROUP_CONCAT`関数の間違った戻り値の型の問題を修正します。](https://github.com/pingcap/tidb/pull/5582)
 
 ## PD {#pd}
 
--   [<a href="https://github.com/pingcap/pd/pull/898">ホットリージョンスケジューラのストア選択の問題を修正</a>](https://github.com/pingcap/pd/pull/898)
+-   [ホットリージョンスケジューラのストア選択の問題を修正](https://github.com/pingcap/pd/pull/898)
 
 ## TiKV {#tikv}
 

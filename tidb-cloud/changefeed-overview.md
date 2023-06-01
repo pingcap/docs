@@ -12,7 +12,7 @@ TiDB Cloudチェンジフィードは、 TiDB Cloudから他のデータ サー�
 >
 > 現在、 TiDB Cloudクラスターごとに最大 10 個の変更フィードのみが許可されます。
 >
-> [<a href="/tidb-cloud/select-cluster-tier.md#serverless-tier-beta">Serverless Tierクラスター</a>](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)の場合、チェンジフィード機能は使用できません。
+> [Serverless Tierクラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)の場合、チェンジフィード機能は使用できません。
 
 チェンジフィード機能にアクセスするには、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**[チェンジフィード]**をクリックします。チェンジフィード一覧が表示されます。
 
@@ -25,8 +25,8 @@ TiDB Cloudチェンジフィードは、 TiDB Cloudから他のデータ サー�
 
 チェンジフィードを作成するには、次のチュートリアルを参照してください。
 
--   [<a href="/tidb-cloud/changefeed-sink-to-apache-kafka.md">Apache Kafka にシンクする</a>](/tidb-cloud/changefeed-sink-to-apache-kafka.md) (ベータ版)
--   [<a href="/tidb-cloud/changefeed-sink-to-mysql.md">MySQL にシンクする</a>](/tidb-cloud/changefeed-sink-to-mysql.md)
+-   [Apache Kafka にシンクする](/tidb-cloud/changefeed-sink-to-apache-kafka.md) (ベータ版)
+-   [MySQL にシンクする](/tidb-cloud/changefeed-sink-to-mysql.md)
 
 ## 変更フィードを削除する {#delete-a-changefeed}
 
@@ -64,4 +64,4 @@ TiDB Cloudチェンジフィードは、 TiDB Cloudから他のデータ サー�
 
 ## 変更フィードの請求 {#changefeed-billing}
 
-TiDB Cloudでの変更フィードの請求については、 [<a href="/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md">変更フィードの請求</a>](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md)を参照してください。
+TiDB Cloudでの変更フィードの請求については、 [変更フィードの請求](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md)を参照してください。

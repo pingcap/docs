@@ -5,7 +5,7 @@ summary: Learn the `PLACEMENT_POLICIES` information_schema table.
 
 # PLACEMENT_POLICIES {#placement-policies}
 
-`PLACEMENT_POLICIES`表は、すべての配置ポリシーに関する情報を提供します。詳細は[<a href="/placement-rules-in-sql.md">SQL の配置ルール</a>](/placement-rules-in-sql.md)を参照してください。
+`PLACEMENT_POLICIES`表は、すべての配置ポリシーに関する情報を提供します。詳細は[SQL の配置ルール](/placement-rules-in-sql.md)を参照してください。
 
 {{< copyable "" >}}
 

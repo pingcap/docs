@@ -14,7 +14,7 @@ tiup dm deploy <cluster-name> <version> <topology.yaml> [flags]
 
 -   `<cluster-name>` : 新しいクラスターの名前。既存のクラスター名と同じにすることはできません。
 -   `<version>` : デプロイされる DM クラスターのバージョン番号`v2.0.0`など)。
--   `<topology.yaml>` : 準備された[<a href="/tiup/tiup-dm-topology-reference.md">トポロジファイル</a>](/tiup/tiup-dm-topology-reference.md) 。
+-   `<topology.yaml>` : 準備された[トポロジファイル](/tiup/tiup-dm-topology-reference.md) 。
 
 ## オプション {#options}
 
@@ -46,4 +46,4 @@ tiup dm deploy <cluster-name> <version> <topology.yaml> [flags]
 
 デプロイメントログ。
 
-[<a href="/tiup/tiup-component-dm.md#command-list">&lt;&lt; 前のページに戻る - TiUP DMコマンド一覧</a>](/tiup/tiup-component-dm.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP DMコマンド一覧](/tiup/tiup-component-dm.md#command-list)

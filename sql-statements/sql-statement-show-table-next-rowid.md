@@ -9,8 +9,8 @@ summary: Learn the usage of `SHOW TABLE NEXT_ROW_ID` in TiDB.
 
 -   TiDB によって自動的に作成される`AUTO_INCREMENT`列、つまり`_tidb_rowid`列。
 -   ユーザーが作成した列は`AUTO_INCREMENT` 。
--   ユーザーが作成した列は[<a href="/auto-random.md">`AUTO_RANDOM`</a>](/auto-random.md) 。
--   ユーザーが作成したものは[<a href="/sql-statements/sql-statement-create-sequence.md">`SEQUENCE`</a>](/sql-statements/sql-statement-create-sequence.md)ます。
+-   ユーザーが作成した列は[`AUTO_RANDOM`](/auto-random.md) 。
+-   ユーザーが作成したものは[`SEQUENCE`](/sql-statements/sql-statement-create-sequence.md)ます。
 
 ## あらすじ {#synopsis}
 
@@ -67,6 +67,6 @@ show table t next_row_id;
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-create-table.md">テーブルの作成</a>](/sql-statements/sql-statement-create-table.md)
--   [<a href="/auto-random.md">自動ランダム</a>](/auto-random.md)
--   [<a href="/sql-statements/sql-statement-create-sequence.md">CREATE_SEQUENCE</a>](/sql-statements/sql-statement-create-sequence.md)
+-   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
+-   [自動ランダム](/auto-random.md)
+-   [CREATE_SEQUENCE](/sql-statements/sql-statement-create-sequence.md)

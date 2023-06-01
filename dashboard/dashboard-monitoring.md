@@ -5,7 +5,7 @@ summary: Learn how to view the Performance Overview dashboard on TiDB Dashboard 
 
 # TiDB ダッシュボード監視ページ {#tidb-dashboard-monitoring-page}
 
-モニタリング ページでは、TiDB v6.1.0 で導入されたパフォーマンス分析およびチューニング ツールであるパフォーマンス概要ダッシュボードを表示できます。パフォーマンス概要ダッシュボードを使用すると、パフォーマンスを効率的に分析し、ユーザー応答時間のボトルネックがデータベースにあるかどうかを確認できます。ボトルネックがデータベース内にある場合は、データベース時間の概要、ワークロード プロファイル、SQLレイテンシー時間の内訳を使用して、データベース内のボトルネックを特定できます。詳細は[<a href="/performance-tuning-methods.md">パフォーマンスの分析とチューニング</a>](/performance-tuning-methods.md)を参照してください。
+モニタリング ページでは、TiDB v6.1.0 で導入されたパフォーマンス分析およびチューニング ツールであるパフォーマンス概要ダッシュボードを表示できます。パフォーマンス概要ダッシュボードを使用すると、パフォーマンスを効率的に分析し、ユーザー応答時間のボトルネックがデータベースにあるかどうかを確認できます。ボトルネックがデータベース内にある場合は、データベース時間の概要、ワークロード プロファイル、SQLレイテンシー時間の内訳を使用して、データベース内のボトルネックを特定できます。詳細は[パフォーマンスの分析とチューニング](/performance-tuning-methods.md)を参照してください。
 
 ## ページにアクセスする {#access-the-page}
 
@@ -13,7 +13,7 @@ TiDB ダッシュボードにログインし、左側のナビゲーション �
 
 ![Monitoring page](/media/dashboard/dashboard-monitoring.png)
 
-TiDB クラスターがTiUPを使用してデプロイされている場合は、Grafana でパフォーマンス概要ダッシュボードを表示することもできます。この展開モードでは、監視システム (Prometheus および Grafana) が同時に展開されます。詳細については、 [<a href="/tidb-monitoring-framework.md">TiDB モニタリング フレームワークの概要</a>](/tidb-monitoring-framework.md)を参照してください。
+TiDB クラスターがTiUPを使用してデプロイされている場合は、Grafana でパフォーマンス概要ダッシュボードを表示することもできます。この展開モードでは、監視システム (Prometheus および Grafana) が同時に展開されます。詳細については、 [TiDB モニタリング フレームワークの概要](/tidb-monitoring-framework.md)を参照してください。
 
 ![performance overview](/media/performance/grafana_performance_overview.png)
 

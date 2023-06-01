@@ -9,7 +9,7 @@ summary: An overview of the usage of ALTER TABLE ... COMPACT for the TiDB databa
 
 このステートメントの実行は、既存の SQL ステートメントをブロックしたり、トランザクション、DDL、GC などの TiDB 機能に影響を与えたりすることはありません。 SQL ステートメントで選択できるデータも変更されません。このステートメントを実行すると、一部の IO リソースと CPU リソースが消費されます。ビジネスへの悪影響を避けるために、リソースが利用可能な場合など、実行の適切なタイミングを選択するように注意してください。
 
-テーブルのすべてのレプリカが圧縮されると、圧縮ステートメントは終了して返されます。実行プロセス中に、 [<a href="/sql-statements/sql-statement-kill.md">`KILL`</a>](/sql-statements/sql-statement-kill.md)ステートメントを実行することで圧縮を安全に中断できます。圧縮を中断しても、データの一貫性が損なわれたり、データの損失が発生したりすることはなく、その後の手動またはバックグラウンドの圧縮にも影響しません。
+テーブルのすべてのレプリカが圧縮されると、圧縮ステートメントは終了して返されます。実行プロセス中に、 [`KILL`](/sql-statements/sql-statement-kill.md)ステートメントを実行することで圧縮を安全に中断できます。圧縮を中断しても、データの一貫性が損なわれたり、データの損失が発生したりすることはなく、その後の手動またはバックグラウンドの圧縮にも影響しません。
 
 このデータ圧縮ステートメントは現在、 TiFlashレプリカでのみサポートされており、TiKV レプリカではサポートされていません。
 
@@ -85,7 +85,7 @@ ALTER TABLE employees COMPACT PARTITION pNorth, pEast TIFLASH REPLICA;
 
 <CustomContent platform="tidb">
 
-リソース使用量を増やしてテーブルレベルの同時実行性を高めるには、 TiFlash構成を変更します[<a href="/tiflash/tiflash-configuration.md">`manual_compact_pool_size`</a>](/tiflash/tiflash-configuration.md) 。たとえば、 `manual_compact_pool_size`を 2 に設定すると、2 つのテーブルのコンパクションを同時に処理できます。
+リソース使用量を増やしてテーブルレベルの同時実行性を高めるには、 TiFlash構成を変更します[`manual_compact_pool_size`](/tiflash/tiflash-configuration.md) 。たとえば、 `manual_compact_pool_size`を 2 に設定すると、2 つのテーブルのコンパクションを同時に処理できます。
 
 </CustomContent>
 
@@ -207,5 +207,5 @@ SELECT PARTITION_NAME, TOTAL_DELTA_ROWS, TOTAL_STABLE_ROWS
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-alter-table.md">他の机</a>](/sql-statements/sql-statement-alter-table.md)
--   [<a href="/sql-statements/sql-statement-kill.md">タイブを殺す</a>](/sql-statements/sql-statement-kill.md)
+-   [他の机](/sql-statements/sql-statement-alter-table.md)
+-   [タイブを殺す](/sql-statements/sql-statement-kill.md)

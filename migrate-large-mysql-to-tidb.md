@@ -5,7 +5,7 @@ summary: Learn how to migrate MySQL of large datasets to TiDB.
 
 # 大規模なデータセットの MySQL を TiDB に移行する {#migrate-mysql-of-large-datasets-to-tidb}
 
-移行するデータのボリュームが小さい場合は、完全な移行と増分レプリケーションの[<a href="/migrate-small-mysql-to-tidb.md">DM を使用してデータを移行する</a>](/migrate-small-mysql-to-tidb.md)を簡単に行うことができます。ただし、DM はデータのインポート速度が遅い (30 ～ 50 GiB/h) ため、データ量が多い場合、移行に時間がかかることがあります。このドキュメントにおける「大規模なデータセット」とは、通常、約 1 TiB 以上のデータを意味します。
+移行するデータのボリュームが小さい場合は、完全な移行と増分レプリケーションの[DM を使用してデータを移行する](/migrate-small-mysql-to-tidb.md)を簡単に行うことができます。ただし、DM はデータのインポート速度が遅い (30 ～ 50 GiB/h) ため、データ量が多い場合、移行に時間がかかることがあります。このドキュメントにおける「大規模なデータセット」とは、通常、約 1 TiB 以上のデータを意味します。
 
 このドキュメントでは、大規模なデータセットを MySQL から TiDB に移行する方法について説明します。移行全体には次の 2 つのプロセスがあります。
 
@@ -14,11 +14,11 @@ summary: Learn how to migrate MySQL of large datasets to TiDB.
 
 ## 前提条件 {#prerequisites}
 
--   [<a href="/dm/deploy-a-dm-cluster-using-tiup.md">DMをインストールする</a>](/dm/deploy-a-dm-cluster-using-tiup.md) 。
--   [<a href="/migration-tools.md">DumplingとTiDB Lightningをインストールする</a>](/migration-tools.md) 。
--   [<a href="/dm/dm-worker-intro.md">DMに必要なソース・データベースとターゲット・データベースの権限を付与します。</a>](/dm/dm-worker-intro.md) 。
--   [<a href="/tidb-lightning/tidb-lightning-faq.md#what-are-the-privilege-requirements-for-the-target-database">TiDB Lightningに必要なターゲット データベース権限を付与します。</a>](/tidb-lightning/tidb-lightning-faq.md#what-are-the-privilege-requirements-for-the-target-database) 。
--   [<a href="/dumpling-overview.md#export-data-from-tidb-or-mysql">Dumplingに必要なソース データベース権限を付与します。</a>](/dumpling-overview.md#export-data-from-tidb-or-mysql) 。
+-   [DMをインストールする](/dm/deploy-a-dm-cluster-using-tiup.md) 。
+-   [DumplingとTiDB Lightningをインストールする](/migration-tools.md) 。
+-   [DMに必要なソース・データベースとターゲット・データベースの権限を付与します。](/dm/dm-worker-intro.md) 。
+-   [TiDB Lightningに必要なターゲット データベース権限を付与します。](/tidb-lightning/tidb-lightning-faq.md#what-are-the-privilege-requirements-for-the-target-database) 。
+-   [Dumplingに必要なソース データベース権限を付与します。](/dumpling-overview.md#export-data-from-tidb-or-mysql) 。
 
 ## リソース要件 {#resource-requirements}
 
@@ -28,7 +28,7 @@ summary: Learn how to migrate MySQL of large datasets to TiDB.
 
 **ディスク容量**:
 
--   Dumplingには、データ ソース全体を保存できる (またはエクスポートされるすべてのアップストリーム テーブルを保存できる) ディスク容量が必要です。 SSD推奨です。必要なスペースを計算するには、 [<a href="/tidb-lightning/tidb-lightning-requirements.md#storage-space-of-the-target-database">ダウンストリームのstorageスペース要件</a>](/tidb-lightning/tidb-lightning-requirements.md#storage-space-of-the-target-database)を参照してください。
+-   Dumplingには、データ ソース全体を保存できる (またはエクスポートされるすべてのアップストリーム テーブルを保存できる) ディスク容量が必要です。 SSD推奨です。必要なスペースを計算するには、 [ダウンストリームのstorageスペース要件](/tidb-lightning/tidb-lightning-requirements.md#storage-space-of-the-target-database)を参照してください。
 -   インポート中、 TiDB Lightning はソートされたキーと値のペアを保存するための一時スペースを必要とします。ディスク容量は、データ ソースからの最大の単一テーブルを保持するのに十分である必要があります。
 -   全データのボリュームが大きい場合は、アップストリームでのbinlogのstorage時間を増やすことができます。これは、増分レプリケーション中にバイナリログが失われないようにするためです。
 
@@ -46,7 +46,7 @@ SELECT table_name,table_schema,SUM(data_length)/1024/1024 AS data_length,SUM(ind
 
 ### ターゲット TiKV クラスターのディスク容量 {#disk-space-for-the-target-tikv-cluster}
 
-ターゲット TiKV クラスターには、インポートされたデータを保存するのに十分なディスク容量が必要です。ターゲット TiKV クラスターのstorage容量は、 [<a href="/hardware-and-software-requirements.md">標準的なハードウェア要件</a>](/hardware-and-software-requirements.md)に加えて、**データ ソースのサイズ x <a href="/faq/manage-cluster-faq.md#is-the-number-of-replicas-in-each-region-configurable-if-yes-how-to-configure-it">レプリカの数</a>x 2**より大きくなければなりません。たとえば、クラスターがデフォルトで 3 つのレプリカを使用する場合、ターゲット TiKV クラスターにはデータ ソースのサイズの 6 倍を超えるstorageスペースが必要です。この式に`x 2`含まれるのは、次の理由からです。
+ターゲット TiKV クラスターには、インポートされたデータを保存するのに十分なディスク容量が必要です。ターゲット TiKV クラスターのstorage容量は、 [標準的なハードウェア要件](/hardware-and-software-requirements.md)に加えて、**データ ソースのサイズ x <a href="/faq/manage-cluster-faq.md#is-the-number-of-replicas-in-each-region-configurable-if-yes-how-to-configure-it">レプリカの数</a>x 2**より大きくなければなりません。たとえば、クラスターがデフォルトで 3 つのレプリカを使用する場合、ターゲット TiKV クラスターにはデータ ソースのサイズの 6 倍を超えるstorageスペースが必要です。この式に`x 2`含まれるのは、次の理由からです。
 
 -   インデックスには余分なスペースが必要になる場合があります。
 -   RocksDB には空間増幅効果があります。
@@ -63,7 +63,7 @@ SELECT table_name,table_schema,SUM(data_length)/1024/1024 AS data_length,SUM(ind
 
     Dumpling は、デフォルトでデータを SQL ファイルにエクスポートします。 `--filetype`オプションを追加すると、別のファイル形式を指定できます。
 
-    上記で使用したパラメータは以下のとおりです。 Dumplingパラメータの詳細については、 [<a href="/dumpling-overview.md">Dumplingの概要</a>](/dumpling-overview.md)を参照してください。
+    上記で使用したパラメータは以下のとおりです。 Dumplingパラメータの詳細については、 [Dumplingの概要](/dumpling-overview.md)を参照してください。
 
     | パラメーター               | 説明                                                                                                                                                                   |
     | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -72,13 +72,13 @@ SELECT table_name,table_schema,SUM(data_length)/1024/1024 AS data_length,SUM(ind
     | `-P`または`--port`      | MySQLポート                                                                                                                                                             |
     | `-h`または`--host`      | MySQLのIPアドレス                                                                                                                                                         |
     | `-t`または`--thread`    | エクスポートに使用されるスレッドの数                                                                                                                                                   |
-    | `-o`または`--output`    | エクスポートされたファイルを保存するディレクトリ。ローカル パスまたは[<a href="/br/backup-and-restore-storages.md#uri-format">外部storageURI</a>](/br/backup-and-restore-storages.md#uri-format)をサポートします |
+    | `-o`または`--output`    | エクスポートされたファイルを保存するディレクトリ。ローカル パスまたは[外部storageURI](/br/backup-and-restore-storages.md#uri-format)をサポートします |
     | `-r`または`--row`       | 1 つのファイル内の最大行数                                                                                                                                                       |
     | `-F`                 | 単一ファイルの最大サイズ (MiB 単位)。推奨値: 256 MiB。                                                                                                                                  |
     | - `B`または`--database` | エクスポートするデータベースを指定します                                                                                                                                                 |
-    | `-f`または`--filter`    | パターンに一致するテーブルをエクスポートします。構文については[<a href="/table-filter.md">テーブルフィルター</a>](/table-filter.md)を参照してください。                                                                |
+    | `-f`または`--filter`    | パターンに一致するテーブルをエクスポートします。構文については[テーブルフィルター](/table-filter.md)を参照してください。                                                                |
 
-    `${data-path}`エクスポートされたすべてのアップストリーム テーブルを保存するためのスペースがあることを確認してください。必要なスペースを計算するには、 [<a href="/tidb-lightning/tidb-lightning-requirements.md#storage-space-of-the-target-database">ダウンストリームのstorageスペース要件</a>](/tidb-lightning/tidb-lightning-requirements.md#storage-space-of-the-target-database)を参照してください。大きなテーブルがすべてのスペースを消費することによってエクスポートが中断されないようにするには、 `-F`オプションを使用して 1 つのファイルのサイズを制限することを強くお勧めします。
+    `${data-path}`エクスポートされたすべてのアップストリーム テーブルを保存するためのスペースがあることを確認してください。必要なスペースを計算するには、 [ダウンストリームのstorageスペース要件](/tidb-lightning/tidb-lightning-requirements.md#storage-space-of-the-target-database)を参照してください。大きなテーブルがすべてのスペースを消費することによってエクスポートが中断されないようにするには、 `-F`オプションを使用して 1 つのファイルのサイズを制限することを強くお勧めします。
 
 2.  `${data-path}`ディレクトリ内の`metadata`ファイルをビュー。これは、Dumpling によって生成されたメタデータ ファイルです。ステップ 3 の増分レプリケーションに必要なbinlogの位置情報を記録します。
 
@@ -122,7 +122,7 @@ SELECT table_name,table_schema,SUM(data_length)/1024/1024 AS data_length,SUM(ind
     pd-addr = "${ip}:${port}"     # The address of the PD cluster, e.g.: 172.16.31.3:2379. TiDB Lightning obtains some information from PD. When backend = "local", you must specify status-port and pd-addr correctly. Otherwise, the import will be abnormal.
     ```
 
-    TiDB Lightning構成の詳細については、 [<a href="/tidb-lightning/tidb-lightning-configuration.md">TiDB Lightningコンフィグレーション</a>](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
+    TiDB Lightning構成の詳細については、 [TiDB Lightningコンフィグレーション](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
 
 2.  `tidb-lightning`を実行してインポートを開始します。コマンド ラインでプログラムを直接起動すると、SIGHUP シグナルの受信後にプロセスが予期せず終了する可能性があります。この場合、 `nohup`または`screen`ツールを使用してプログラムを実行することをお勧めします。例えば：
 
@@ -139,8 +139,8 @@ SELECT table_name,table_schema,SUM(data_length)/1024/1024 AS data_length,SUM(ind
 3.  インポートの開始後、次のいずれかの方法でインポートの進行状況を確認できます。
 
     -   `grep`ログ内のキーワード`progress` 。デフォルトでは、進行状況は 5 分ごとに更新されます。
-    -   [<a href="/tidb-lightning/monitor-tidb-lightning.md">監視ダッシュボード</a>](/tidb-lightning/monitor-tidb-lightning.md)で進行状況を確認します。
-    -   [<a href="/tidb-lightning/tidb-lightning-web-interface.md">TiDB Lightning Web インターフェース</a>](/tidb-lightning/tidb-lightning-web-interface.md)で進行状況を確認します。
+    -   [監視ダッシュボード](/tidb-lightning/monitor-tidb-lightning.md)で進行状況を確認します。
+    -   [TiDB Lightning Web インターフェース](/tidb-lightning/tidb-lightning-web-interface.md)で進行状況を確認します。
 
 4.  TiDB Lightning はインポートを完了すると、自動的に終了します。最後の行に`tidb-lightning.log` `the whole procedure completed`含まれているかどうかを確認します。 「はい」の場合、インポートは成功です。 「いいえ」の場合、インポートでエラーが発生します。エラー メッセージの指示に従ってエラーに対処します。
 
@@ -148,7 +148,7 @@ SELECT table_name,table_schema,SUM(data_length)/1024/1024 AS data_length,SUM(ind
 >
 > インポートが成功したかどうかに関係なく、ログの最後の行には`tidb lightning exit`が表示されます。これは、 TiDB Lightning が正常に終了したことを意味しますが、インポートが成功したことを必ずしも意味するわけではありません。
 
-インポートが失敗した場合は、 [<a href="/tidb-lightning/tidb-lightning-faq.md">TiDB LightningFAQ</a>](/tidb-lightning/tidb-lightning-faq.md)のトラブルシューティングを参照してください。
+インポートが失敗した場合は、 [TiDB LightningFAQ](/tidb-lightning/tidb-lightning-faq.md)のトラブルシューティングを参照してください。
 
 ## ステップ 3. 増分データを TiDB にレプリケートする {#step-3-replicate-incremental-data-to-tidb}
 
@@ -226,7 +226,7 @@ SELECT table_name,table_schema,SUM(data_length)/1024/1024 AS data_length,SUM(ind
     #     safe-mode: true # If this field is set to true, DM changes INSERT of the data source to REPLACE for the target database, and changes UPDATE of the data source to DELETE and REPLACE for the target database. This is to ensure that when the table schema contains a primary key or unique index, DML statements can be imported repeatedly. In the first minute of starting or resuming an incremental replication task, DM automatically enables the safe mode.
     ```
 
-    上記の YAML は、移行タスクに必要な最小構成です。その他の設定項目については、 [<a href="/dm/task-configuration-file-full.md">DM 拡張タスクコンフィグレーションファイル</a>](/dm/task-configuration-file-full.md)を参照してください。
+    上記の YAML は、移行タスクに必要な最小構成です。その他の設定項目については、 [DM 拡張タスクコンフィグレーションファイル](/dm/task-configuration-file-full.md)を参照してください。
 
     移行タスクを開始する前に、エラーの可能性を減らすために、 `check-task`コマンドを実行して構成が DM の要件を満たしていることを確認することをお勧めします。
 
@@ -253,7 +253,7 @@ SELECT table_name,table_schema,SUM(data_length)/1024/1024 AS data_length,SUM(ind
 
     タスクの開始に失敗した場合は、プロンプト メッセージを確認して構成を修正します。その後、上記のコマンドを再実行してタスクを開始できます。
 
-    何か問題が発生した場合は、 [<a href="/dm/dm-error-handling.md">DMエラー処理</a>](/dm/dm-error-handling.md)と[<a href="/dm/dm-faq.md">DMに関するFAQ</a>](/dm/dm-faq.md)を参照してください。
+    何か問題が発生した場合は、 [DMに関するFAQ](/dm/dm-faq.md)を参照してください。
 
 ### 移行タスクのステータスを確認する {#check-the-migration-task-status}
 
@@ -265,7 +265,7 @@ DM クラスターに進行中の移行タスクがあるかどうかを確認�
 tiup dmctl --master-addr ${advertise-addr} query-status ${task-name}
 ```
 
-結果の詳細な解釈については、 [<a href="/dm/dm-query-status.md">クエリステータス</a>](/dm/dm-query-status.md)を参照してください。
+結果の詳細な解釈については、 [クエリステータス](/dm/dm-query-status.md)を参照してください。
 
 ### タスクを監視し、ログを表示する {#monitor-the-task-and-view-logs}
 
@@ -280,8 +280,8 @@ DM の実行中、DM-worker、DM-master、および dmctl は関連情報をロ�
 
 ## 次は何ですか {#what-s-next}
 
--   [<a href="/dm/dm-pause-task.md">データ移行タスクを一時停止する</a>](/dm/dm-pause-task.md)
--   [<a href="/dm/dm-resume-task.md">データ移行タスクを再開する</a>](/dm/dm-resume-task.md)
--   [<a href="/dm/dm-stop-task.md">データ移行タスクの停止</a>](/dm/dm-stop-task.md)
--   [<a href="/dm/dm-export-import-config.md">データソースのエクスポートとインポート、およびクラスターのタスクコンフィグレーション</a>](/dm/dm-export-import-config.md)
--   [<a href="/dm/handle-failed-ddl-statements.md">失敗した DDL ステートメントの処理</a>](/dm/handle-failed-ddl-statements.md)
+-   [データ移行タスクを一時停止する](/dm/dm-pause-task.md)
+-   [データ移行タスクを再開する](/dm/dm-resume-task.md)
+-   [データ移行タスクの停止](/dm/dm-stop-task.md)
+-   [データソースのエクスポートとインポート、およびクラスターのタスクコンフィグレーション](/dm/dm-export-import-config.md)
+-   [失敗した DDL ステートメントの処理](/dm/handle-failed-ddl-statements.md)

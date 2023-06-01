@@ -29,13 +29,13 @@ mysql> explain SELECT DISTINCT a from t;
 
 <CustomContent platform="tidb">
 
-TiDB の[<a href="/system-variables.md#tidb_opt_distinct_agg_push_down">`tidb_opt_distinct_agg_push_down`</a>](/system-variables.md#tidb_opt_distinct_agg_push_down)システム変数または[<a href="/tidb-configuration-file.md#distinct-agg-push-down">`distinct-agg-push-down`</a>](/tidb-configuration-file.md#distinct-agg-push-down)構成項目は、個別の集計クエリを書き換えて TiKV またはTiFlashコプロセッサーにプッシュするかどうかを制御します。
+TiDB の[`distinct-agg-push-down`](/tidb-configuration-file.md#distinct-agg-push-down)構成項目は、個別の集計クエリを書き換えて TiKV またはTiFlashコプロセッサーにプッシュするかどうかを制御します。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-TiDB の[<a href="/system-variables.md#tidb_opt_distinct_agg_push_down">`tidb_opt_distinct_agg_push_down`</a>](/system-variables.md#tidb_opt_distinct_agg_push_down)システム変数は、個別の集計クエリを書き換えて TiKV またはTiFlashコプロセッサーにプッシュするかどうかを制御します。
+TiDB の[`tidb_opt_distinct_agg_push_down`](/system-variables.md#tidb_opt_distinct_agg_push_down)システム変数は、個別の集計クエリを書き換えて TiKV またはTiFlashコプロセッサーにプッシュするかどうかを制御します。
 
 </CustomContent>
 

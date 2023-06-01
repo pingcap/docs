@@ -13,7 +13,7 @@ summary: Learn how to migrate data from Amazon Aurora MySQL to TiDB Cloud in bul
 
 1.  ターゲットクラスターの**インポート**ページを開きます。
 
-    1.  [<a href="https://tidbcloud.com/">TiDB Cloudコンソール</a>](https://tidbcloud.com/)にログインし、プロジェクトの[<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページに移動します。
+    1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
         > **ヒント：**
         >
@@ -23,13 +23,13 @@ summary: Learn how to migrate data from Amazon Aurora MySQL to TiDB Cloud in bul
 
 2.  **[インポート]**ページで、右上隅の**[データのインポート]**をクリックし、 **[S3 から]**を選択します。
 
-3.  [<a href="#learn-how-to-create-an-amazon-s3-bucket-and-prepare-source-data-files">Amazon S3 バケットを作成し、ソース データ ファイルを準備する方法を学習します。</a>](#learn-how-to-create-an-amazon-s3-bucket-and-prepare-source-data-files)に従ってソースデータを準備します。ソース データ ファイルの準備の部分で、さまざまなデータ形式の長所と短所を確認できます。
+3.  [Amazon S3 バケットを作成し、ソース データ ファイルを準備する方法を学習します。](#learn-how-to-create-an-amazon-s3-bucket-and-prepare-source-data-files)に従ってソースデータを準備します。ソース データ ファイルの準備の部分で、さまざまなデータ形式の長所と短所を確認できます。
 
-4.  ソース データの仕様に従って、 **[データ形式]** 、 **[バケット URI]** 、および**[ロール ARN]**フィールドを選択または入力します。クロスアカウント アクセス用のバケット ポリシーとロールを作成する方法の詳細については、 [<a href="/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access">Amazon S3 アクセスを設定する</a>](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access)を参照してください。
+4.  ソース データの仕様に従って、 **[データ形式]** 、 **[バケット URI]** 、および**[ロール ARN]**フィールドを選択または入力します。クロスアカウント アクセス用のバケット ポリシーとロールを作成する方法の詳細については、 [Amazon S3 アクセスを設定する](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access)を参照してください。
 
 5.  **ターゲット データベース**のクラスター名とリージョン名を確認します。 **「次へ」**をクリックします。
 
-    TiDB Cloudは、指定されたバケット URI 内のデータにアクセスできるかどうかの検証を開始します。検証後、 TiDB Cloudはデフォルトのファイル命名パターンを使用してデータ ソース内のすべてのファイルのスキャンを試行し、次のページの左側にスキャンの概要結果を返します。 `AccessDenied`エラーが発生した場合は、 [<a href="/tidb-cloud/troubleshoot-import-access-denied-error.md">S3 からのデータインポート中のアクセス拒否エラーのトラブルシューティング</a>](/tidb-cloud/troubleshoot-import-access-denied-error.md)を参照してください。
+    TiDB Cloudは、指定されたバケット URI 内のデータにアクセスできるかどうかの検証を開始します。検証後、 TiDB Cloudはデフォルトのファイル命名パターンを使用してデータ ソース内のすべてのファイルのスキャンを試行し、次のページの左側にスキャンの概要結果を返します。 `AccessDenied`エラーが発生した場合は、 [S3 からのデータインポート中のアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)を参照してください。
 
 6.  必要に応じて、テーブル フィルター ルールを追加します。 **「次へ」**をクリックします。
 
@@ -41,25 +41,25 @@ summary: Learn how to migrate data from Amazon Aurora MySQL to TiDB Cloud in bul
         -   `!db02.*` : `db02`データベース内のテーブルを除き、他のすべてのテーブルがインポートされます。 `!`は、インポートする必要のないテーブルを除外するために使用されます。
         -   `*.*` : すべてのテーブルがインポートされます。
 
-        詳細については、 [<a href="/table-filter.md#syntax">テーブルフィルターの構文</a>](/table-filter.md#syntax)を参照してください。
+        詳細については、 [テーブルフィルターの構文](/table-filter.md#syntax)を参照してください。
 
 7.  **[プレビュー]**ページで、インポートするデータを確認し、 **[インポートの開始]**をクリックします。
 
 > **ノート：**
 >
-> タスクが失敗した場合は、 [<a href="#learn-how-to-clean-up-incomplete-data">不完全なデータをクリーンアップする方法を学ぶ</a>](#learn-how-to-clean-up-incomplete-data)を参照してください。
+> タスクが失敗した場合は、 [不完全なデータをクリーンアップする方法を学ぶ](#learn-how-to-clean-up-incomplete-data)を参照してください。
 
 ## Amazon S3 バケットを作成し、ソース データ ファイルを準備する方法を学習します。 {#learn-how-to-create-an-amazon-s3-bucket-and-prepare-source-data-files}
 
 データを準備するには、次の 2 つのオプションから 1 つを選択できます。
 
--   [<a href="#option-1-prepare-source-data-files-using-dumpling">オプション 1: Dumplingを使用してソース データ ファイルを準備する</a>](#option-1-prepare-source-data-files-using-dumpling)
+-   [オプション 1: Dumplingを使用してソース データ ファイルを準備する](#option-1-prepare-source-data-files-using-dumpling)
 
-    EC2 で[<a href="/dumpling-overview.md">Dumpling</a>](/dumpling-overview.md)起動し、データを Amazon S3 にエクスポートする必要があります。エクスポートするデータは、ソース データベースの現在の最新データです。これはオンライン サービスに影響を与える可能性があります。 Dumpling は、データをエクスポートするときにテーブルをロックします。
+    EC2 で[Dumpling](/dumpling-overview.md)起動し、データを Amazon S3 にエクスポートする必要があります。エクスポートするデータは、ソース データベースの現在の最新データです。これはオンライン サービスに影響を与える可能性があります。 Dumpling は、データをエクスポートするときにテーブルをロックします。
 
--   [<a href="#option-2-prepare-source-data-files-using-amazon-aurora-snapshots">オプション 2: Amazon Auroraスナップショットを使用してソース データ ファイルを準備する</a>](#option-2-prepare-source-data-files-using-amazon-aurora-snapshots)
+-   [オプション 2: Amazon Auroraスナップショットを使用してソース データ ファイルを準備する](#option-2-prepare-source-data-files-using-amazon-aurora-snapshots)
 
-    これはオンライン サービスに影響します。 Amazon Auroraのエクスポート タスクは、データを Amazon S3 にエクスポートする前に、まずデータベースを復元してスケーリングするため、データのエクスポートには時間がかかる場合があります。詳細については、 [<a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_ExportSnapshot.html">DB スナップショット データを Amazon S3 にエクスポートする</a>](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_ExportSnapshot.html)を参照してください。
+    これはオンライン サービスに影響します。 Amazon Auroraのエクスポート タスクは、データを Amazon S3 にエクスポートする前に、まずデータベースを復元してスケーリングするため、データのエクスポートには時間がかかる場合があります。詳細については、 [DB スナップショット データを Amazon S3 にエクスポートする](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_ExportSnapshot.html)を参照してください。
 
 ### 事前チェックと準備 {#prechecks-and-preparations}
 
@@ -89,7 +89,7 @@ select * from ((select table_schema, table_name, column_name, collation_name fro
 Empty set (0.04 sec)
 ```
 
-TiDB が文字セットまたは照合順序をサポートしていない場合は、サポートされているタイプに変換することを検討してください。詳細については、 [<a href="https://docs.pingcap.com/tidb/stable/character-set-and-collation">文字セットと照合順序</a>](https://docs.pingcap.com/tidb/stable/character-set-and-collation)を参照してください。
+TiDB が文字セットまたは照合順序をサポートしていない場合は、サポートされているタイプに変換することを検討してください。詳細については、 [文字セットと照合順序](https://docs.pingcap.com/tidb/stable/character-set-and-collation)を参照してください。
 
 ### オプション 1: Dumplingを使用してソース データ ファイルを準備する {#option-1-prepare-source-data-files-using-dumpling}
 
@@ -124,7 +124,7 @@ TiDB が文字セットまたは照合順序をサポートしていない場合
 
 3.  ソース データベースを S3 にバックアップします。
 
-    Dumpling を使用して Amazon Auroraからデータをエクスポートします。環境に応じて山括弧 (&gt;) 内の内容を置き換えて、次のコマンドを実行します。データのエクスポート時にフィルター ルールを使用する場合は、 [<a href="/table-filter.md#syntax">テーブルフィルター</a>](/table-filter.md#syntax)を参照してください。
+    Dumpling を使用して Amazon Auroraからデータをエクスポートします。環境に応じて山括弧 (&gt;) 内の内容を置き換えて、次のコマンドを実行します。データのエクスポート時にフィルター ルールを使用する場合は、 [テーブルフィルター](/table-filter.md#syntax)を参照してください。
 
     {{< copyable "" >}}
 
@@ -217,7 +217,7 @@ Auroraからデータを移行するには、データベースのスキーマ�
 
 ## Amazon S3 へのアクセスを設定する方法を学ぶ {#learn-how-to-configure-access-to-amazon-s3}
 
-TiDB Cloudクラスターと S3 バケットは別の AWS アカウントにあります。 TiDB Cloudクラスターが S3 バケット内のソース データ ファイルにアクセスできるようにするには、Amazon S3 へのクロスアカウント アクセスを設定する必要があります。詳細については、 [<a href="/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access">Amazon S3 アクセスを構成する</a>](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access)を参照してください。
+TiDB Cloudクラスターと S3 バケットは別の AWS アカウントにあります。 TiDB Cloudクラスターが S3 バケット内のソース データ ファイルにアクセスできるようにするには、Amazon S3 へのクロスアカウント アクセスを設定する必要があります。詳細については、 [Amazon S3 アクセスを構成する](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access)を参照してください。
 
 完了すると、クロスアカウントのポリシーとロールが作成されます。その後、 TiDB Cloudのデータ インポート タスク パネルで構成を続行できます。
 
@@ -227,7 +227,7 @@ TiDB Cloudクラスターと S3 バケットは別の AWS アカウントにあ�
 
 ## フィルタールールの設定方法を学ぶ {#learn-how-to-set-up-filter-rules}
 
-資料[<a href="/table-filter.md#syntax">テーブルフィルター</a>](/table-filter.md#syntax)をご参照ください。
+資料[テーブルフィルター](/table-filter.md#syntax)をご参照ください。
 
 ## 不完全なデータをクリーンアップする方法を学ぶ {#learn-how-to-clean-up-incomplete-data}
 

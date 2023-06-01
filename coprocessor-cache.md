@@ -11,7 +11,7 @@ v4.0 以降、TiDB インスタンスは、TiKV にプッシュダウンされ�
 
 <CustomContent platform="tidb">
 
-TiDB 構成ファイルの`tikv-client.copr-cache`構成項目を使用して、コプロセッサー・キャッシュを構成できます。コプロセッサーキャッシュを有効にして構成する方法の詳細については、 [<a href="/tidb-configuration-file.md#tikv-clientcopr-cache-new-in-v400">TiDBコンフィグレーションファイル</a>](/tidb-configuration-file.md#tikv-clientcopr-cache-new-in-v400)を参照してください。
+TiDB 構成ファイルの`tikv-client.copr-cache`構成項目を使用して、コプロセッサー・キャッシュを構成できます。コプロセッサーキャッシュを有効にして構成する方法の詳細については、 [TiDBコンフィグレーションファイル](/tidb-configuration-file.md#tikv-clientcopr-cache-new-in-v400)を参照してください。
 
 </CustomContent>
 
@@ -54,7 +54,7 @@ TiDB 構成ファイルの`tikv-client.copr-cache`構成項目を使用して、
 
 ### <code>EXPLAIN ANALYZE</code>を使用する {#use-code-explain-analyze-code}
 
-[<a href="/choose-index.md#operators-for-accessing-tables">テーブルにアクセスするための演算子</a>](/choose-index.md#operators-for-accessing-tables)のキャッシュ ヒット率は[<a href="/sql-statements/sql-statement-explain-analyze.md">`EXPLAIN ANALYZE`文</a>](/sql-statements/sql-statement-explain-analyze.md)を使用して表示できます。次の例を参照してください。
+[`EXPLAIN ANALYZE`文](/sql-statements/sql-statement-explain-analyze.md)を使用して表示できます。次の例を参照してください。
 
 ```sql
 EXPLAIN ANALYZE SELECT * FROM t USE INDEX(a);

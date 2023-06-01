@@ -148,15 +148,15 @@ ERROR 8200 (HY000): Unsupported modify column: change from original type decimal
 
 ## MySQLの互換性 {#mysql-compatibility}
 
--   主キー列の[<a href="/sql-statements/sql-statement-modify-column.md#reorg-data-change">データの再編成</a>](/sql-statements/sql-statement-modify-column.md#reorg-data-change)タイプの変更はサポートされていません。
+-   主キー列の[データの再編成](/sql-statements/sql-statement-modify-column.md#reorg-data-change)タイプの変更はサポートされていません。
 -   パーティション化されたテーブルの列タイプの変更はサポートされていません。
 -   生成された列の列タイプの変更はサポートされていません。
 -   一部のデータ型 (たとえば、一部の TIME、Bit、Set、Enum、および JSON 型) の変更は、TiDB と MySQL の間の`CAST`の動作の互換性の問題によりサポートされません。
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-create-table.md">テーブルの作成</a>](/sql-statements/sql-statement-create-table.md)
--   [<a href="/sql-statements/sql-statement-show-create-table.md">テーブルの作成を表示</a>](/sql-statements/sql-statement-show-create-table.md)
--   [<a href="/sql-statements/sql-statement-add-column.md">列の追加</a>](/sql-statements/sql-statement-add-column.md)
--   [<a href="/sql-statements/sql-statement-drop-column.md">ドロップカラム</a>](/sql-statements/sql-statement-drop-column.md)
--   [<a href="/sql-statements/sql-statement-modify-column.md">列の変更</a>](/sql-statements/sql-statement-modify-column.md)
+-   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
+-   [テーブルの作成を表示](/sql-statements/sql-statement-show-create-table.md)
+-   [列の追加](/sql-statements/sql-statement-add-column.md)
+-   [ドロップカラム](/sql-statements/sql-statement-drop-column.md)
+-   [列の変更](/sql-statements/sql-statement-modify-column.md)

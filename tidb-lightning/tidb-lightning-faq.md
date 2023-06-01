@@ -17,7 +17,7 @@ TiDB Lightningのバージョンはクラスターと同じである必要があ
 
 ## ターゲットデータベースの権限要件は何ですか? {#what-are-the-privilege-requirements-for-the-target-database}
 
-権限の詳細については、 [<a href="/tidb-lightning/tidb-lightning-requirements.md">TiDB Lightning を使用するための前提条件</a>](/tidb-lightning/tidb-lightning-requirements.md)を参照してください。
+権限の詳細については、 [TiDB Lightning を使用するための前提条件](/tidb-lightning/tidb-lightning-requirements.md)を参照してください。
 
 ## TiDB Lightning で1 つのテーブルをインポート中にエラーが発生しました。他のテーブルに影響はありますか?プロセスは終了しますか? {#tidb-lightning-encountered-an-error-when-importing-one-table-will-it-affect-other-tables-will-the-process-be-terminated}
 
@@ -29,20 +29,20 @@ Importer-backend を使用している場合、 `tikv-importer`のステータ�
 
 `tikv-importer`がまだ実行中の場合:
 
-1.  [<a href="#how-to-stop-the-tidb-lightning-process">`tidb-lightning`やめる</a>](#how-to-stop-the-tidb-lightning-process) 。
+1.  [`tidb-lightning`やめる](#how-to-stop-the-tidb-lightning-process) 。
 2.  ソースデータの修正、設定の変更、ハードウェアの交換など、意図した変更を実行します。
-3.  以前の変更によってテーブルが変更されている場合は、 [<a href="/tidb-lightning/tidb-lightning-checkpoints.md#--checkpoint-remove">対応するチェックポイントを削除します</a>](/tidb-lightning/tidb-lightning-checkpoints.md#--checkpoint-remove)も追加されます。
+3.  以前の変更によってテーブルが変更されている場合は、 [対応するチェックポイントを削除します](/tidb-lightning/tidb-lightning-checkpoints.md#--checkpoint-remove)も追加されます。
 4.  `tidb-lightning`を開始します。
 
 `tikv-importer`を再起動する必要がある場合:
 
-1.  [<a href="#how-to-stop-the-tidb-lightning-process">`tidb-lightning`やめる</a>](#how-to-stop-the-tidb-lightning-process) 。
-2.  [<a href="#how-to-stop-the-tikv-importer-process">`tikv-importer`停止する</a>](#how-to-stop-the-tikv-importer-process) 。
+1.  [`tidb-lightning`やめる](#how-to-stop-the-tidb-lightning-process) 。
+2.  [`tikv-importer`停止する](#how-to-stop-the-tikv-importer-process) 。
 3.  ソースデータの修正、設定の変更、ハードウェアの交換など、意図した変更を実行します。
 4.  `tikv-importer`を開始します。
 5.  `tidb-lightning`を開始し*、CHECKSUM エラー (存在する場合) でプログラムが失敗するまで待ちます*。
     -   `tikv-importer`を再起動すると、まだ書き込まれているすべてのエンジン ファイルが破壊されますが、 `tidb-lightning`それを知りませんでした。 v3.0 では、最も簡単な方法は`tidb-lightning`を続行して再試行することです。
-6.  [<a href="/tidb-lightning/troubleshoot-tidb-lightning.md#checkpoint-for--has-invalid-status-error-code">失敗したテーブルとチェックポイントを破棄します</a>](/tidb-lightning/troubleshoot-tidb-lightning.md#checkpoint-for--has-invalid-status-error-code)
+6.  [失敗したテーブルとチェックポイントを破棄します](/tidb-lightning/troubleshoot-tidb-lightning.md#checkpoint-for--has-invalid-status-error-code)
 7.  もう一度`tidb-lightning`から始めます。
 
 Local-backend または TiDB-backend を使用している場合、操作は`tikv-importer`がまだ実行中の場合に Importer-backend を使用する場合と同じです。
@@ -51,7 +51,7 @@ Local-backend または TiDB-backend を使用している場合、操作は`tik
 
 TiDB Lightning はデフォルトで、ローカル データ ソースとインポートされたテーブルに対してチェックサムを実行します。チェックサムが一致しない場合、プロセスは中止されます。これらのチェックサム情報はログから読み取ることができます。
 
-ターゲット テーブルで[<a href="/sql-statements/sql-statement-admin-checksum-table.md">`ADMIN CHECKSUM TABLE`</a>](/sql-statements/sql-statement-admin-checksum-table.md) SQL コマンドを実行して、インポートされたデータのチェックサムを再計算することもできます。
+ターゲット テーブルで[`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md) SQL コマンドを実行して、インポートされたデータのチェックサムを再計算することもできます。
 
 ```sql
 ADMIN CHECKSUM TABLE `schema`.`table`;
@@ -70,7 +70,7 @@ ADMIN CHECKSUM TABLE `schema`.`table`;
 
 TiDB Lightningは以下をサポートします。
 
--   [<a href="/dumpling-overview.md">Dumpling</a>](/dumpling-overview.md) 、CSVファイル、 [<a href="/migrate-aurora-to-tidb.md">Amazon Auroraによって生成された Apache Parquet ファイル</a>](/migrate-aurora-to-tidb.md)でエクスポートしたファイルをインポートします。
+-   [Amazon Auroraによって生成された Apache Parquet ファイル](/migrate-aurora-to-tidb.md)でエクスポートしたファイルをインポートします。
 -   ローカル ディスクまたは Amazon S3storageからのデータの読み取り。
 
 ## TiDB Lightning はスキーマとテーブルの作成をスキップできますか? {#could-tidb-lightning-skip-creating-schema-and-tables}
@@ -79,7 +79,7 @@ v5.1 以降、 TiDB Lightning はダウンストリームのスキーマとテ�
 
 ## 厳密 SQL モードを無効にして、無効なデータをインポートできるようにすることはできますか? {#can-the-strict-sql-mode-be-disabled-to-allow-importing-invalid-data}
 
-はい。デフォルトでは、 TiDB Lightningで使用される[<a href="https://dev.mysql.com/doc/refman/5.7/en/sql-mode.html">`sql_mode`</a>](https://dev.mysql.com/doc/refman/5.7/en/sql-mode.html) `"STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION"`で、日付`1970-00-00`などの無効なデータは許可されません。モードは、 `tidb-lightning.toml`の`[tidb]`セクションの`sql-mode`設定を変更することで変更できます。
+はい。デフォルトでは、 TiDB Lightningで使用される[`sql_mode`](https://dev.mysql.com/doc/refman/5.7/en/sql-mode.html) `"STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION"`で、日付`1970-00-00`などの無効なデータは許可されません。モードは、 `tidb-lightning.toml`の`[tidb]`セクションの`sql-mode`設定を変更することで変更できます。
 
 ```toml
 ...
@@ -119,9 +119,9 @@ TiDB Lightning は、 10 ギガビット ネットワーク カードと併用�
 
 ## TiDB Lightningの実行中に TiKV Importer を再起動できますか? {#can-tikv-importer-be-restarted-while-tidb-lightning-is-running}
 
-いいえ。TiKV インポーターはエンジンの一部の情報をメモリに保存します。 `tikv-importer`を再起動すると、 `tidb-lightning`接続が失われたため停止します。この時点で、TiKV Importer 固有の情報が失われるため、 [<a href="/tidb-lightning/tidb-lightning-checkpoints.md#--checkpoint-error-destroy">失敗したチェックポイントを破棄する</a>](/tidb-lightning/tidb-lightning-checkpoints.md#--checkpoint-error-destroy)を行う必要があります。後でTiDB Lightningを再起動できます。
+いいえ。TiKV インポーターはエンジンの一部の情報をメモリに保存します。 `tikv-importer`を再起動すると、 `tidb-lightning`接続が失われたため停止します。この時点で、TiKV Importer 固有の情報が失われるため、 [失敗したチェックポイントを破棄する](/tidb-lightning/tidb-lightning-checkpoints.md#--checkpoint-error-destroy)を行う必要があります。後でTiDB Lightningを再起動できます。
 
-正しい順序については[<a href="#how-to-properly-restart-tidb-lightning">TiDB Lightning を適切に再起動するにはどうすればよいですか?</a>](#how-to-properly-restart-tidb-lightning)も参照してください。
+正しい順序については[TiDB Lightning を適切に再起動するにはどうすればよいですか?](#how-to-properly-restart-tidb-lightning)も参照してください。
 
 ## TiDB Lightningに関連付けられたすべての中間データを完全に破棄するにはどうすればよいですか? {#how-to-completely-destroy-all-intermediate-data-associated-with-tidb-lightning}
 
@@ -154,7 +154,7 @@ TiDB Lightning は、 10 ギガビット ネットワーク カードと併用�
 
 ## TiDB Lightningのランタイムゴルーチン情報を取得する方法 {#how-to-get-the-runtime-goroutine-information-of-tidb-lightning}
 
-1.  TiDB Lightningの設定ファイルで[<a href="/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-configuration">`status-port`</a>](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-configuration)が指定されている場合は、この手順をスキップしてください。それ以外の場合は、USR1 信号をTiDB Lightningに送信して`status-port`を有効にする必要があります。
+1.  TiDB Lightningの設定ファイルで[`status-port`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-configuration)が指定されている場合は、この手順をスキップしてください。それ以外の場合は、USR1 信号をTiDB Lightningに送信して`status-port`を有効にする必要があります。
 
     `ps`などのコマンドを使用してTiDB Lightningのプロセス ID (PID) を取得し、次のコマンドを実行します。
 
@@ -170,7 +170,7 @@ TiDB Lightning は、 10 ギガビット ネットワーク カードと併用�
 
 ## TiDB Lightning がSQL の配置ルールと互換性がないのはなぜですか? {#why-is-tidb-lightning-not-compatible-with-placement-rules-in-sql}
 
-TiDB Lightning は[<a href="/placement-rules-in-sql.md">SQL の配置ルール</a>](/placement-rules-in-sql.md)と互換性がありません。 TiDB Lightning が配置ポリシーを含むデータをインポートすると、 TiDB Lightning はエラーを報告します。
+TiDB Lightning は[SQL の配置ルール](/placement-rules-in-sql.md)と互換性がありません。 TiDB Lightning が配置ポリシーを含むデータをインポートすると、 TiDB Lightning はエラーを報告します。
 
 その理由は次のように説明されています。
 

@@ -5,9 +5,9 @@ summary: Learn about how to set a specific `task-name` configuration from `DM-ma
 
 # DM レプリケーション シナリオでのデータ チェック {#data-check-in-the-dm-replication-scenario}
 
-[<a href="/dm/dm-overview.md">TiDB データ移行</a>](/dm/dm-overview.md)などのレプリケーション ツールを使用する場合、レプリケーション プロセスの前後でデータの整合性をチェックする必要があります。 `DM-master`の中から特定の`task-name`構成を設定してデータチェックを実行できます。
+[TiDB データ移行](/dm/dm-overview.md)などのレプリケーション ツールを使用する場合、レプリケーション プロセスの前後でデータの整合性をチェックする必要があります。 `DM-master`の中から特定の`task-name`構成を設定してデータチェックを実行できます。
 
-以下は簡単な構成例です。完全な構成については、 [<a href="/sync-diff-inspector/sync-diff-inspector-overview.md">Sync-diff-inspector ユーザーガイド</a>](/sync-diff-inspector/sync-diff-inspector-overview.md)を参照してください。
+以下は簡単な構成例です。完全な構成については、 [Sync-diff-inspector ユーザーガイド](/sync-diff-inspector/sync-diff-inspector-overview.md)を参照してください。
 
 ```toml
 # Diff Configuration.

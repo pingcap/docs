@@ -4,7 +4,7 @@ title: How to Run TPC-C Test on TiDB
 
 # TiDB で TPC-C テストを実行する方法 {#how-to-run-tpc-c-test-on-tidb}
 
-このドキュメントでは、 [<a href="http://www.tpc.org/tpcc/">TPC-C</a>](http://www.tpc.org/tpcc/)使用して TiDB をテストする方法について説明します。
+このドキュメントでは、 [TPC-C](http://www.tpc.org/tpcc/)使用して TiDB をテストする方法について説明します。
 
 TPC-C は、オンライン トランザクション処理 (OLTP) ベンチマークです。次のさまざまなタイプの 5 つのトランザクションを含む商品販売モデルを使用して、OLTP システムをテストします。
 
@@ -28,7 +28,7 @@ TPC-C は、オンライン トランザクション処理 (OLTP) ベンチマ�
 
 TPC-C は、tpmC (1 分あたりのトランザクション数) を使用して、最大認定スループット (MQTh、最大認定スループット) を測定します。トランザクションは NewOrder トランザクションであり、最終的な測定単位は 1 分あたりに処理される新しい注文の数です。
 
-本書のテストは[<a href="https://github.com/pingcap/go-tpc">ゴーTPC</a>](https://github.com/pingcap/go-tpc)に基づいて実施されます。 [<a href="/tiup/tiup-overview.md">TiUP</a>](/tiup/tiup-overview.md)コマンドを使用してテストプログラムをダウンロードできます。
+本書のテストは[TiUP](/tiup/tiup-overview.md)コマンドを使用してテストプログラムをダウンロードできます。
 
 {{< copyable "" >}}
 
@@ -36,7 +36,7 @@ TPC-C は、tpmC (1 分あたりのトランザクション数) を使用して�
 tiup install bench
 ```
 
-TiUP Benchコンポーネントの詳しい使用方法については、 [<a href="/tiup/tiup-bench.md">TiUPベンチ</a>](/tiup/tiup-bench.md)を参照してください。
+TiUP Benchコンポーネントの詳しい使用方法については、 [TiUPベンチ](/tiup/tiup-bench.md)を参照してください。
 
 172.16.5.140 と 172.16.5.141 にある 2 つの TiDB サーバーを含む TiDB クラスターを展開し、両方のサーバーがポート 4000 でリッスンしていると仮定します。次の手順で TPC-C テストを実行できます。
 

@@ -5,7 +5,7 @@ summary: Learn how to analyze and tune performance of your TiDB Cloud cluster.
 
 # パフォーマンスの分析と調整 {#analyze-and-tune-performance}
 
-TiDB Cloud は、パフォーマンスを分析するために[<a href="#statement-analysis">ステートメント分析</a>](#statement-analysis) 、 [<a href="#slow-query">遅いクエリ</a>](#slow-query) 、および[<a href="#key-visualizer">キービジュアライザー</a>](#key-visualizer)を提供します。
+TiDB Cloud は、パフォーマンスを分析するために[キービジュアライザー](#key-visualizer)を提供します。
 
 -   ステートメント分析を使用すると、ページ上の SQL 実行を直接観察し、システム テーブルをクエリせずにパフォーマンスの問題を簡単に特定できます。
 
@@ -15,7 +15,7 @@ TiDB Cloud は、パフォーマンスを分析するために[<a href="#stateme
 
 > **ノート：**
 >
-> 現在、これら 3 つの機能は[<a href="/tidb-cloud/select-cluster-tier.md#serverless-tier-beta">Serverless Tierクラスター</a>](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)では利用できません。
+> 現在、これら 3 つの機能は[Serverless Tierクラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)では利用できません。
 
 ## ステートメント分析 {#statement-analysis}
 
@@ -33,7 +33,7 @@ TiDB Cloud は、パフォーマンスを分析するために[<a href="#stateme
 
 ![Statement Analysis](/media/tidb-cloud/statement-analysis.png)
 
-詳細については、 [<a href="https://docs.pingcap.com/tidb/stable/dashboard-statement-details">TiDB ダッシュボードでのステートメント実行の詳細</a>](https://docs.pingcap.com/tidb/stable/dashboard-statement-details)を参照してください。
+詳細については、 [TiDB ダッシュボードでのステートメント実行の詳細](https://docs.pingcap.com/tidb/stable/dashboard-statement-details)を参照してください。
 
 ## 遅いクエリ {#slow-query}
 
@@ -53,7 +53,7 @@ TiDB Cloud は、パフォーマンスを分析するために[<a href="#stateme
 
 ![Slow Queries](/media/tidb-cloud/slow-queries.png)
 
-詳細については、 [<a href="https://docs.pingcap.com/tidb/stable/dashboard-slow-query">TiDB ダッシュボードの遅いクエリ</a>](https://docs.pingcap.com/tidb/stable/dashboard-slow-query)を参照してください。
+詳細については、 [TiDB ダッシュボードの遅いクエリ](https://docs.pingcap.com/tidb/stable/dashboard-slow-query)を参照してください。
 
 ## キービジュアライザー {#key-visualizer}
 
@@ -67,4 +67,4 @@ TiDB Cloud は、パフォーマンスを分析するために[<a href="#stateme
 
 **Key Visualizer**ページでは、アクセス トラフィックの時間の経過に伴う変化を大きなヒート マップで表示します。ヒートマップの各軸に沿った平均値を下と右側に示します。左側はテーブル名、インデックス名などの情報です。
 
-詳細については、 [<a href="https://docs.pingcap.com/tidb/stable/dashboard-key-visualizer">キービジュアライザー</a>](https://docs.pingcap.com/tidb/stable/dashboard-key-visualizer)を参照してください。
+詳細については、 [キービジュアライザー](https://docs.pingcap.com/tidb/stable/dashboard-key-visualizer)を参照してください。

@@ -27,7 +27,7 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
     [scheme]://[userinfo@][host]:[port][/path]?[query_parameters]
     ```
 
-    シンク URI に`! * ' ( ) ; : @ & = + $ , / ? % # [ ]`などの特殊文字が含まれている場合は、特殊文字をエスケープする必要があります (たとえば、 [<a href="https://meyerweb.com/eric/tools/dencoder/">URIエンコーダ</a>](https://meyerweb.com/eric/tools/dencoder/) 。
+    シンク URI に`! * ' ( ) ; : @ & = + $ , / ? % # [ ]`などの特殊文字が含まれている場合は、特殊文字をエスケープする必要があります (たとえば、 [URIエンコーダ](https://meyerweb.com/eric/tools/dencoder/) 。
 
 -   `--start-ts` : チェンジフィードの開始 TSO を指定します。この TSO から、TiCDC クラスターはデータのプルを開始します。デフォルト値は現在時刻です。
 

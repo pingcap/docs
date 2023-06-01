@@ -5,7 +5,7 @@ summary: A brief introduction to transactions in TiDB.
 
 # トランザクション概要 {#transaction-overview}
 
-TiDB は完全な分散トランザクションをサポートし、 [<a href="/optimistic-transaction.md">楽観的取引</a>](/optimistic-transaction.md)と[<a href="/pessimistic-transaction.md">悲観的取引</a>](/pessimistic-transaction.md) (TiDB 3.0 で導入) を提供します。この記事では主に、トランザクション ステートメント、楽観的トランザクションと悲観的トランザクション、トランザクション分離レベル、楽観的トランザクションにおけるアプリケーション側のリトライとエラー処理について紹介します。
+TiDB は完全な分散トランザクションをサポートし、 [悲観的取引](/pessimistic-transaction.md) (TiDB 3.0 で導入) を提供します。この記事では主に、トランザクション ステートメント、楽観的トランザクションと悲観的トランザクション、トランザクション分離レベル、楽観的トランザクションにおけるアプリケーション側のリトライとエラー処理について紹介します。
 
 ## 一般的なステートメント {#common-statements}
 
@@ -18,7 +18,7 @@ TiDB は完全な分散トランザクションをサポートし、 [<a href="/
 
 トランザクションにより、上記の操作が両方とも正常に実行されるか、両方とも失敗するかを確認できます。
 
-[<a href="/develop/dev-guide-bookshop-schema-design.md">書店</a>](/develop/dev-guide-bookshop-schema-design.md)データベースの`users`テーブルを使用して、サンプル データをテーブルに挿入します。
+[書店](/develop/dev-guide-bookshop-schema-design.md)データベースの`users`テーブルを使用して、サンプル データをテーブルに挿入します。
 
 ```sql
 INSERT INTO users (id, nickname, balance)
@@ -60,13 +60,13 @@ BEGIN;
 START TRANSACTION;
 ```
 
-TiDB のデフォルトのトランザクション モードは悲観的です。 [<a href="/develop/dev-guide-optimistic-and-pessimistic-transaction.md">楽観的トランザクション モデル</a>](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)明示的に指定することもできます。
+TiDB のデフォルトのトランザクション モードは悲観的です。 [楽観的トランザクション モデル](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)明示的に指定することもできます。
 
 ```sql
 BEGIN OPTIMISTIC;
 ```
 
-[<a href="/develop/dev-guide-optimistic-and-pessimistic-transaction.md">悲観的トランザクション モード</a>](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)を有効にします。
+[悲観的トランザクション モード](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)を有効にします。
 
 ```sql
 BEGIN PESSIMISTIC;
@@ -158,4 +158,4 @@ mysql> SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
 ERROR 8048 (HY000): The isolation level 'SERIALIZABLE' is not supported. Set tidb_skip_isolation_level_check=1 to skip this error
 ```
 
-TiDB は、MySQL との一貫性のために「反復読み取り」とも呼ばれるスナップショット分離 (SI) レベルの一貫性を実装しています。この分離レベルは[<a href="/transaction-isolation-levels.md#difference-between-tidb-and-ansi-repeatable-read">ANSI 反復読み取り分離レベル</a>](/transaction-isolation-levels.md#difference-between-tidb-and-ansi-repeatable-read)および[<a href="/transaction-isolation-levels.md#difference-between-tidb-and-mysql-repeatable-read">MySQL 反復読み取り分離レベル</a>](/transaction-isolation-levels.md#difference-between-tidb-and-mysql-repeatable-read)とは異なります。詳細については、 [<a href="/transaction-isolation-levels.md">TiDBトランザクション分離レベル</a>](/transaction-isolation-levels.md)を参照してください。
+TiDB は、MySQL との一貫性のために「反復読み取り」とも呼ばれるスナップショット分離 (SI) レベルの一貫性を実装しています。この分離レベルは[TiDBトランザクション分離レベル](/transaction-isolation-levels.md)を参照してください。

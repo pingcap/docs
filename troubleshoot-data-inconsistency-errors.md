@@ -5,17 +5,17 @@ summary: Learn how to deal with errors reported by the consistency check between
 
 # データとインデックス間の不一致のトラブルシューティング {#troubleshoot-inconsistency-between-data-and-indexes}
 
-TiDB は、トランザクション[<a href="/sql-statements/sql-statement-admin-check-table-index.md">`ADMIN CHECK [TABLE|INDEX]`</a>](/sql-statements/sql-statement-admin-check-table-index.md)ステートメントを実行するときに、データとインデックス間の一貫性をチェックします。チェックで、レコードのキーと値、および対応するインデックスのキーと値が矛盾していることが判明した場合、つまり、行データを格納するキーと値のペアと、そのインデックスを格納する対応するキーと値のペアが一致しない場合 (たとえば、インデックスを増やすか、インデックスが欠落している場合)、TiDB はデータ不整合エラーを報告し、関連するエラーをエラー ログに出力。
+TiDB は、トランザクション[`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md)ステートメントを実行するときに、データとインデックス間の一貫性をチェックします。チェックで、レコードのキーと値、および対応するインデックスのキーと値が矛盾していることが判明した場合、つまり、行データを格納するキーと値のペアと、そのインデックスを格納する対応するキーと値のペアが一致しない場合 (たとえば、インデックスを増やすか、インデックスが欠落している場合)、TiDB はデータ不整合エラーを報告し、関連するエラーをエラー ログに出力。
 
 <CustomContent platform="tidb">
 
-このドキュメントでは、データ不整合エラーの意味について説明し、整合性チェックをバイパスするいくつかの方法を提供します。データ整合性エラーが発生した場合は、PingCAP またはコミュニティから[<a href="/support.md">支持を得ます</a>](/support.md)できます。
+このドキュメントでは、データ不整合エラーの意味について説明し、整合性チェックをバイパスするいくつかの方法を提供します。データ整合性エラーが発生した場合は、PingCAP またはコミュニティから[支持を得ます](/support.md)できます。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-このドキュメントでは、データ不整合エラーの意味について説明し、整合性チェックをバイパスするいくつかの方法を提供します。データ整合性エラーが発生した場合は、 [<a href="/tidb-cloud/tidb-cloud-support.md">TiDB Cloudサポートにお問い合わせください</a>](/tidb-cloud/tidb-cloud-support.md)を行うことができます。
+このドキュメントでは、データ不整合エラーの意味について説明し、整合性チェックをバイパスするいくつかの方法を提供します。データ整合性エラーが発生した場合は、 [TiDB Cloudサポートにお問い合わせください](/tidb-cloud/tidb-cloud-support.md)を行うことができます。
 
 </CustomContent>
 
@@ -59,13 +59,13 @@ TiDB は、トランザクション[<a href="/sql-statements/sql-statement-admin
 
 ### 管理者チェックで報告されたエラー {#errors-reported-in-admin-check}
 
-このセクションでは、 [<a href="/sql-statements/sql-statement-admin-check-table-index.md">`ADMIN CHECK [TABLE|INDEX]`</a>](/sql-statements/sql-statement-admin-check-table-index.md)ステートメントの実行時に TiDB で発生する可能性のあるデータ不整合エラーをリストし、これらのエラーの意味を例を示して説明します。
+このセクションでは、 [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md)ステートメントの実行時に TiDB で発生する可能性のあるデータ不整合エラーをリストし、これらのエラーの意味を例を示して説明します。
 
 #### エラー8003 {#error-8003}
 
 `ERROR 8003 (HY000): table count 3 != index(idx) count 2`
 
-このエラーは、 [<a href="/sql-statements/sql-statement-admin-check-table-index.md">`ADMIN CHECK`</a>](/sql-statements/sql-statement-admin-check-table-index.md)ステートメントが実行されるテーブルには 3 つの行キーと値のペアがあるが、インデックス キーと値のペアは 2 つしかないことを示します。
+このエラーは、 [`ADMIN CHECK`](/sql-statements/sql-statement-admin-check-table-index.md)ステートメントが実行されるテーブルには 3 つの行キーと値のペアがあるが、インデックス キーと値のペアは 2 つしかないことを示します。
 
 #### エラー8134 {#error-8134}
 
@@ -86,13 +86,13 @@ TiDB は、トランザクション[<a href="/sql-statements/sql-statement-admin
 
 <CustomContent platform="tidb">
 
-データの不整合エラーが発生した場合は、自分でエラーに対処するのではなく、すぐにトラブルシューティングのために PingCAP から[<a href="/support.md">支持を得ます</a>](/support.md)を受け取ります。アプリケーションでこのようなエラーを緊急にスキップする必要がある場合は、次の方法を使用してチェックをバイパスできます。
+データの不整合エラーが発生した場合は、自分でエラーに対処するのではなく、すぐにトラブルシューティングのために PingCAP から[支持を得ます](/support.md)を受け取ります。アプリケーションでこのようなエラーを緊急にスキップする必要がある場合は、次の方法を使用してチェックをバイパスできます。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-データの不[<a href="/tidb-cloud/tidb-cloud-support.md">TiDB Cloudサポートにお問い合わせください</a>](/tidb-cloud/tidb-cloud-support.md)エラーが発生した場合は、自分でエラーに対処するのではなく、すぐにトラブルシューティングを行ってください。アプリケーションでこのようなエラーを緊急にスキップする必要がある場合は、次の方法を使用してチェックをバイパスできます。
+データの不[TiDB Cloudサポートにお問い合わせください](/tidb-cloud/tidb-cloud-support.md)エラーが発生した場合は、自分でエラーに対処するのではなく、すぐにトラブルシューティングを行ってください。アプリケーションでこのようなエラーを緊急にスキップする必要がある場合は、次の方法を使用してチェックをバイパスできます。
 
 </CustomContent>
 
@@ -111,4 +111,4 @@ TiDB は、トランザクション[<a href="/sql-statements/sql-statement-admin
 >
 > `tidb_enable_mutation_checker`と`tidb_txn_assertion_level`を無効にすると、すべての SQL ステートメントの対応するチェックがバイパスされます。
 
-トランザクションの実行で報告される他のエラーと、 [<a href="/sql-statements/sql-statement-admin-check-table-index.md">`ADMIN CHECK [TABLE|INDEX]`</a>](/sql-statements/sql-statement-admin-check-table-index.md)ステートメントの実行中に報告されるすべてのエラーについては、データがすでに不整合であるため、対応するチェックをバイパスできません。
+トランザクションの実行で報告される他のエラーと、 [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md)ステートメントの実行中に報告されるすべてのエラーについては、データがすでに不整合であるため、対応するチェックをバイパスできません。

@@ -7,11 +7,11 @@ summary: Learn how to create a data source for Data Migration (DM).
 
 > **ノート：**
 >
-> データ ソースを作成する前に、 [<a href="/dm/deploy-a-dm-cluster-using-tiup.md">TiUPを使用した DMクラスタのデプロイ</a>](/dm/deploy-a-dm-cluster-using-tiup.md)を行う必要があります。
+> データ ソースを作成する前に、 [TiUPを使用した DMクラスタのデプロイ](/dm/deploy-a-dm-cluster-using-tiup.md)を行う必要があります。
 
 このドキュメントでは、TiDB Data Migration (DM) のデータ移行タスク用のデータ ソースを作成する方法について説明します。
 
-データ ソースには、上流の移行タスクにアクセスするための情報が含まれています。データ移行タスクでは、アクセスの構成情報を取得するために対応するデータ ソースを参照する必要があるため、データ移行タスクを作成する前にタスクのデータ ソースを作成する必要があります。特定のデータ ソース管理コマンドについては、 [<a href="/dm/dm-manage-source.md">データソース構成の管理</a>](/dm/dm-manage-source.md)を参照してください。
+データ ソースには、上流の移行タスクにアクセスするための情報が含まれています。データ移行タスクでは、アクセスの構成情報を取得するために対応するデータ ソースを参照する必要があるため、データ移行タスクを作成する前にタスクのデータ ソースを作成する必要があります。特定のデータ ソース管理コマンドについては、 [データソース構成の管理](/dm/dm-manage-source.md)を参照してください。
 
 ## ステップ 1: データソースを構成する {#step-1-configure-the-data-source}
 
@@ -57,7 +57,7 @@ summary: Learn how to create a data source for Data Migration (DM).
 tiup dmctl --master-addr <master-addr> operate-source create ./source-mysql-01.yaml
 ```
 
-その他の設定パラメータについては、 [<a href="/dm/dm-source-configuration-file.md">アップストリーム データベースコンフィグレーションファイル</a>](/dm/dm-source-configuration-file.md)を参照してください。
+その他の設定パラメータについては、 [アップストリーム データベースコンフィグレーションファイル](/dm/dm-source-configuration-file.md)を参照してください。
 
 返される結果は次のとおりです。
 

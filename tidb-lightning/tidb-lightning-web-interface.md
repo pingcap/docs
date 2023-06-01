@@ -56,7 +56,7 @@ TiDB Lightningが起動したら、 `http://127.0.0.1:8289`にアクセスして
 
 ![Submit task dialog](/media/lightning-web-submit.png)
 
-タスクは[<a href="/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task">タスク構成</a>](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)として記述される TOML ファイルです。 **[アップロード]**をクリックしてローカル TOML ファイルを開くこともできます。
+タスクは[タスク構成](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)として記述される TOML ファイルです。 **[アップロード]**をクリックしてローカル TOML ファイルを開くこともできます。
 
 **「送信」**をクリックしてタスクを実行します。タスクがすでに実行中の場合、新しいタスクはキューに入れられ、現在のタスクが成功した後に実行されます。
 

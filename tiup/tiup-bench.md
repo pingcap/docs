@@ -15,7 +15,7 @@ tiup bench ycsb   # Benchmark a database using YCSB
 tiup bench rawsql # Benchmark a database using arbitrary SQL files
 ```
 
-`tpcc` 、 `tpch` 、 `ch` 、および`rawsql` 、次の共通コマンド フラグを共有します。ただし、 `ycsb`は主に`.properties`ファイルによって構成されており、その[<a href="https://github.com/pingcap/go-ycsb#usage">使用ガイド</a>](https://github.com/pingcap/go-ycsb#usage)で説明されています。
+`tpcc` 、 `tpch` 、 `ch` 、および`rawsql` 、次の共通コマンド フラグを共有します。ただし、 `ycsb`は主に`.properties`ファイルによって構成されており、その[使用ガイド](https://github.com/pingcap/go-ycsb#usage)で説明されています。
 
 ```
   -t, --acThreads int         OLAP client concurrency, only for CH-benCHmark (default to 1)
@@ -43,7 +43,7 @@ tiup bench rawsql # Benchmark a database using arbitrary SQL files
 ```
 
 -   カンマ区切りの値を`--host`と`--port`に渡すと、クライアント側の負荷分散を有効にすることができます。たとえば、 `--host 172.16.4.1,172.16.4.2 --port 4000,4001`を指定すると、プログラムはラウンドロビン方式で選択された 172.16.4.1:4000、172.16.4.1:4001、172.16.4.2:4000、および 172.16.4.2:4001 に接続します。
--   `--conn-params` [<a href="https://en.wikipedia.org/wiki/Query_string">クエリ文字列</a>](https://en.wikipedia.org/wiki/Query_string)の形式に従う必要があります。データベースが異なれば、パラメーターも異なる場合があります。例えば：
+-   `--conn-params` [クエリ文字列](https://en.wikipedia.org/wiki/Query_string)の形式に従う必要があります。データベースが異なれば、パラメーターも異なる場合があります。例えば：
     -   `--conn-params tidb_isolation_read_engines='tiflash'` 、TiDB にTiFlashからの読み取りを強制します。
     -   `--conn-params sslmode=disable`指定すると、PostgreSQL に接続するときに SSL が無効になります。
 -   CH-benCHmark を実行する場合、 `--ap-host` 、 `--ap-port` 、および`--ap-conn-params`を使用して、OLAP クエリ用のスタンドアロン TiDBサーバーを指定できます。
@@ -72,7 +72,7 @@ Flags:
 
 ### 試験手順 {#test-procedures}
 
-以下に、TPC-C テストを実行するための簡略化された手順を示します。詳細な手順については、 [<a href="/benchmark/benchmark-tidb-using-tpcc.md">TiDB で TPC-C テストを実行する方法</a>](/benchmark/benchmark-tidb-using-tpcc.md)を参照してください。
+以下に、TPC-C テストを実行するための簡略化された手順を示します。詳細な手順については、 [TiDB で TPC-C テストを実行する方法](/benchmark/benchmark-tidb-using-tpcc.md)を参照してください。
 
 1.  ハッシュ経由で 4 つのパーティションを使用して 4 つのウェアハウスを作成します。
 
@@ -106,7 +106,7 @@ Flags:
     tiup bench tpcc --warehouses 4 cleanup
     ```
 
-大規模なデータセットを使用してベンチマークを実行する場合、SQL を介してデータを準備すると時間がかかる可能性があります。その場合は、以下のコマンドでCSV形式のデータを生成し、 [<a href="/tidb-lightning/tidb-lightning-overview.md">TiDB Lightning</a>](/tidb-lightning/tidb-lightning-overview.md)経由でTiDBにインポートすることができます。
+大規模なデータセットを使用してベンチマークを実行する場合、SQL を介してデータを準備すると時間がかかる可能性があります。その場合は、以下のコマンドでCSV形式のデータを生成し、 [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)経由でTiDBにインポートすることができます。
 
 -   CSV ファイルを生成します。
 

@@ -9,8 +9,8 @@ SQL ステートメントに`max` / `min`関数が含まれている場合、ク
 
 この最適化ルールは、 `select`ステートメント内の`max` / `min`関数の数に応じて、次の 2 種類に分けられます。
 
--   [<a href="#one-maxmin-function">`max` / `min`関数が 1 つだけあるステートメント</a>](#one-maxmin-function)
--   [<a href="#multiple-maxmin-functions">複数の`max` / `min`関数を含むステートメント</a>](#multiple-maxmin-functions)
+-   [`max` / `min`関数が 1 つだけあるステートメント](#one-maxmin-function)
+-   [複数の`max` / `min`関数を含むステートメント](#multiple-maxmin-functions)
 
 ## 1つの<code>max</code> / <code>min</code>関数 {#one-code-max-code-code-min-code-function}
 

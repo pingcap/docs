@@ -11,8 +11,8 @@ TiDB Lightning は、CSV ファイルおよびタブ区切り値 (TSV) などの
 
 ## 前提条件 {#prerequisites}
 
--   [<a href="/migration-tools.md">TiDB Lightningをインストールする</a>](/migration-tools.md) 。
--   [<a href="/tidb-lightning/tidb-lightning-requirements.md#privileges-of-the-target-database">TiDB Lightningに必要なターゲット データベース権限を取得します。</a>](/tidb-lightning/tidb-lightning-requirements.md#privileges-of-the-target-database) 。
+-   [TiDB Lightningをインストールする](/migration-tools.md) 。
+-   [TiDB Lightningに必要なターゲット データベース権限を取得します。](/tidb-lightning/tidb-lightning-requirements.md#privileges-of-the-target-database) 。
 
 ## ステップ 1. CSV ファイルを準備する {#step-1-prepare-the-csv-files}
 
@@ -86,7 +86,7 @@ status-port = ${status-port} # During the import, TiDB Lightning needs to obtain
 pd-addr = "${ip}:${port}" # The address of the PD cluster, e.g.: 172.16.31.3:2379. TiDB Lightning obtains some information from PD. When backend = "local", you must specify status-port and pd-addr correctly. Otherwise, the import will be abnormal.
 ```
 
-設定ファイルの詳細については、 [<a href="/tidb-lightning/tidb-lightning-configuration.md">TiDB Lightningコンフィグレーション</a>](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
+設定ファイルの詳細については、 [TiDB Lightningコンフィグレーション](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
 
 ## ステップ 4. インポートのパフォーマンスを調整する (オプション) {#step-4-tune-the-import-performance-optional}
 
@@ -123,8 +123,8 @@ nohup tiup tidb-lightning -config tidb-lightning.toml > nohup.out 2>&1 &
 インポートの開始後、次のいずれかの方法でインポートの進行状況を確認できます。
 
 -   `grep`ログ内のキーワード`progress` 。デフォルトでは、進行状況は 5 分ごとに更新されます。
--   [<a href="/tidb-lightning/monitor-tidb-lightning.md">監視ダッシュボード</a>](/tidb-lightning/monitor-tidb-lightning.md)で進行状況を確認します。
--   [<a href="/tidb-lightning/tidb-lightning-web-interface.md">TiDB Lightning Web インターフェース</a>](/tidb-lightning/tidb-lightning-web-interface.md)で進行状況を確認します。
+-   [監視ダッシュボード](/tidb-lightning/monitor-tidb-lightning.md)で進行状況を確認します。
+-   [TiDB Lightning Web インターフェース](/tidb-lightning/tidb-lightning-web-interface.md)で進行状況を確認します。
 
 TiDB Lightning はインポートを完了すると、自動的に終了します。最後の行に`tidb-lightning.log` `the whole procedure completed`含まれているかどうかを確認します。 「はい」の場合、インポートは成功です。 「いいえ」の場合、インポートでエラーが発生します。エラー メッセージの指示に従ってエラーに対処します。
 
@@ -132,7 +132,7 @@ TiDB Lightning はインポートを完了すると、自動的に終了しま�
 >
 > インポートが成功したかどうかに関係なく、ログの最後の行には`tidb lightning exit`が表示されます。これは、 TiDB Lightning が正常に終了したことを意味しますが、インポートが成功したことを必ずしも意味するわけではありません。
 
-インポートが失敗した場合は、 [<a href="/tidb-lightning/tidb-lightning-faq.md">TiDB LightningFAQ</a>](/tidb-lightning/tidb-lightning-faq.md)のトラブルシューティングを参照してください。
+インポートが失敗した場合は、 [TiDB LightningFAQ](/tidb-lightning/tidb-lightning-faq.md)のトラブルシューティングを参照してください。
 
 ## 他のファイル形式 {#other-file-formats}
 
@@ -180,4 +180,4 @@ trim-last-separator = true
 
 ## 次は何ですか {#what-s-next}
 
--   [<a href="/tidb-lightning/tidb-lightning-data-source.md#csv">CSV のサポートと制限</a>](/tidb-lightning/tidb-lightning-data-source.md#csv) 。
+-   [CSV のサポートと制限](/tidb-lightning/tidb-lightning-data-source.md#csv) 。

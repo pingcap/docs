@@ -9,8 +9,8 @@ summary: Learn how to select your cluster tier on TiDB Cloud.
 
 TiDB Cloud、次の 2 つのクラスター層のオプションが提供されます。クラスターを作成する前に、どちらのオプションがニーズに適しているかを検討する必要があります。
 
--   [<a href="#serverless-tier-beta">Serverless Tier</a>](#serverless-tier-beta)
--   [<a href="#dedicated-tier">Dedicated Tier</a>](#dedicated-tier)
+-   [Serverless Tier](#serverless-tier-beta)
+-   [Dedicated Tier](#dedicated-tier)
 
 ## Serverless Tier(ベータ版) {#serverless-tier-beta}
 
@@ -34,7 +34,7 @@ TiDB Cloudは、Serverless Tierクラスターごとに、他のクラスター�
 
     > **ノート：**
     >
-    > Serverless TierにはTLS接続が必要です。システム上の CA ルート パスを見つけるには、 [<a href="/tidb-cloud/secure-connections-to-serverless-tier-clusters.md#where-is-the-ca-root-path-on-my-system">CA ルート パス リスト</a>](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md#where-is-the-ca-root-path-on-my-system)を参照してください。
+    > Serverless TierにはTLS接続が必要です。システム上の CA ルート パスを見つけるには、 [CA ルート パス リスト](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md#where-is-the-ca-root-path-on-my-system)を参照してください。
 
 -   データベース ユーザーを作成するには:
 
@@ -44,22 +44,22 @@ TiDB Cloudは、Serverless Tierクラスターごとに、他のクラスター�
 
 クラスターのプレフィックスを取得するには、次の手順を実行します。
 
-1.  [<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページに移動します。
+1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 2.  ターゲット クラスターの名前をクリックして概要ページに移動し、右上隅の**[接続]**をクリックします。接続ダイアログが表示されます。
 3.  ダイアログで、接続文字列からプレフィックスを取得します。
 
 ### Serverless Tierの特別利用規約 {#serverless-tier-special-terms-and-conditions}
 
 -   Serverless Tierは現在ベータ版であり、ベータ段階中の稼働時間 SLA 保証はありません。商用または本番データセットを保存するためにServerless Tierベータ版を使用する場合、その使用に関連する潜在的なリスクはすべて自分で負う必要があり、PingCAP は損害に対して責任を負いません。
--   TiDB Cloud機能の一部は、Serverless Tierで部分的にサポートされているか、サポートされていません。詳細については[<a href="/tidb-cloud/serverless-tier-limitations.md">Serverless Tierの制限</a>](/tidb-cloud/serverless-tier-limitations.md)を参照してください。
+-   TiDB Cloud機能の一部は、Serverless Tierで部分的にサポートされているか、サポートされていません。詳細については[Serverless Tierの制限](/tidb-cloud/serverless-tier-limitations.md)を参照してください。
 
 ## Dedicated Tier {#dedicated-tier}
 
-TiDB CloudDedicated Tierは、クロスゾーンの高可用性、水平スケーリング、および[<a href="https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing">HTAP</a>](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)利点を備えた本番稼働専用です。
+TiDB CloudDedicated Tierは、クロスゾーンの高可用性、水平スケーリング、および[HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)利点を備えた本番稼働専用です。
 
-Dedicated Tierクラスターの場合、ビジネス ニーズに応じて TiDB、TiKV、およびTiFlashのクラスター サイズを簡単にカスタマイズできます。 TiKV ノードとTiFlashノードごとに、ノード上のデータが複製され、 [<a href="/tidb-cloud/high-availability-with-multi-az.md">高可用性</a>](/tidb-cloud/high-availability-with-multi-az.md)アベイラビリティ ゾーンに分散されます。
+Dedicated Tierクラスターの場合、ビジネス ニーズに応じて TiDB、TiKV、およびTiFlashのクラスター サイズを簡単にカスタマイズできます。 TiKV ノードとTiFlashノードごとに、ノード上のデータが複製され、 [高可用性](/tidb-cloud/high-availability-with-multi-az.md)アベイラビリティ ゾーンに分散されます。
 
-Dedicated Tierクラスターを作成するには、 [<a href="/tidb-cloud/tidb-cloud-billing.md#payment-method">支払い方法を追加する</a>](/tidb-cloud/tidb-cloud-billing.md#payment-method)または[<a href="/tidb-cloud/tidb-cloud-poc.md">概念実証 (PoC) トライアルに申し込む</a>](/tidb-cloud/tidb-cloud-poc.md)を行う必要があります。
+Dedicated Tierクラスターを作成するには、 [概念実証 (PoC) トライアルに申し込む](/tidb-cloud/tidb-cloud-poc.md)を行う必要があります。
 
 > **ノート：**
 >

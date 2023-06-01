@@ -9,11 +9,11 @@ summary: Learn how to migrate incremental data from MySQL-compatible databases t
 
 ## あなたが始める前に {#before-you-begin}
 
-増分データ移行を実行する前に、MySQL 互換データベースからTiDB Cloudへの完全なデータ移行を完了しておく必要があります。詳細については、 [<a href="/tidb-cloud/migrate-data-into-tidb.md">MySQL 互換データベースからのデータの移行</a>](/tidb-cloud/migrate-data-into-tidb.md)を参照してください。
+増分データ移行を実行する前に、MySQL 互換データベースからTiDB Cloudへの完全なデータ移行を完了しておく必要があります。詳細については、 [MySQL 互換データベースからのデータの移行](/tidb-cloud/migrate-data-into-tidb.md)を参照してください。
 
 ## ステップ 1. DM クラスターをデプロイ {#step-1-deploy-a-dm-cluster}
 
-TiDB Cloudコンソールには、増分データ移行機能がまだ提供されていません。 TiDB Cloudへの増分移行を実行するには、 [<a href="https://docs.pingcap.com/tidb/stable/dm-overview">TiDB データ移行</a>](https://docs.pingcap.com/tidb/stable/dm-overview) (DM) を手動でデプロイする必要があります。インストール手順については、 [<a href="https://docs.pingcap.com/tidb/stable/deploy-a-dm-cluster-using-tiup">TiUPを使用した DMクラスタのデプロイ</a>](https://docs.pingcap.com/tidb/stable/deploy-a-dm-cluster-using-tiup)を参照してください。
+TiDB Cloudコンソールには、増分データ移行機能がまだ提供されていません。 TiDB Cloudへの増分移行を実行するには、 [TiUPを使用した DMクラスタのデプロイ](https://docs.pingcap.com/tidb/stable/deploy-a-dm-cluster-using-tiup)を参照してください。
 
 ## ステップ 2. データソース構成ファイルを作成する {#step-2-create-a-data-source-configuration-file}
 
@@ -79,7 +79,7 @@ Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /roo
 
 移行用のファイルを`dm-task1.yaml`作成します。ファイル内の増分移行モードとデータ ソースの開始点を構成します。
 
-[<a href="/dumpling-overview.md">Dumpling</a>](/dumpling-overview.md)によってエクスポートされたメタデータ ファイルで開始点を見つけることができます。例えば：
+[Dumpling](/dumpling-overview.md)によってエクスポートされたメタデータ ファイルで開始点を見つけることができます。例えば：
 
 ```toml
 # Get the contents of the metadata in the file exported by Dumpling
@@ -149,7 +149,7 @@ filters:
 ignore-checking-items: ["table_schema"]
 ```
 
-タスク構成の詳細については、 [<a href="https://docs.pingcap.com/tidb/stable/task-configuration-file-full">DM タスクの構成</a>](https://docs.pingcap.com/tidb/stable/task-configuration-file-full)を参照してください。
+タスク構成の詳細については、 [DM タスクの構成](https://docs.pingcap.com/tidb/stable/task-configuration-file-full)を参照してください。
 
 データ移行タスクをスムーズに実行するために、DM はタスクの開始時に事前チェックを自動的にトリガーし、チェック結果を返します。 DM は、事前チェックに合格した後にのみ移行を開始します。事前チェックを手動でトリガーするには、 `check-task`コマンドを実行します。
 
@@ -205,7 +205,7 @@ Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /roo
 
 タスクの開始に失敗した場合は、プロンプト メッセージを確認して構成を修正します。その後、上記のコマンドを再実行してタスクを開始できます。
 
-何か問題が発生した場合は、 [<a href="https://docs.pingcap.com/tidb/stable/dm-error-handling">DMエラー処理</a>](https://docs.pingcap.com/tidb/stable/dm-error-handling)と[<a href="https://docs.pingcap.com/tidb/stable/dm-faq">DMに関するFAQ</a>](https://docs.pingcap.com/tidb/stable/dm-faq)を参照してください。
+何か問題が発生した場合は、 [DMに関するFAQ](https://docs.pingcap.com/tidb/stable/dm-faq)を参照してください。
 
 ## ステップ 5. 移行タスクのステータスを確認する {#step-5-check-the-migration-task-status}
 
@@ -264,4 +264,4 @@ Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /roo
 }
 ```
 
-結果の詳細な解釈については、 [<a href="https://docs.pingcap.com/tidb/stable/dm-query-status">クエリステータス</a>](https://docs.pingcap.com/tidb/stable/dm-query-status)を参照してください。
+結果の詳細な解釈については、 [クエリステータス](https://docs.pingcap.com/tidb/stable/dm-query-status)を参照してください。

@@ -5,7 +5,7 @@ summary: Learn about the execution plan information returned by the EXPLAIN stat
 
 # サブクエリを使用する Explain ステートメント {#explain-statements-that-use-subqueries}
 
-TiDB はサブクエリのパフォーマンスを向上させるために[<a href="/subquery-optimization.md">いくつかの最適化</a>](/subquery-optimization.md)を実行します。このドキュメントでは、一般的なサブクエリに対するこれらの最適化のいくつかと、 `EXPLAIN`の出力を解釈する方法について説明します。
+TiDB はサブクエリのパフォーマンスを向上させるために[いくつかの最適化](/subquery-optimization.md)を実行します。このドキュメントでは、一般的なサブクエリに対するこれらの最適化のいくつかと、 `EXPLAIN`の出力を解釈する方法について説明します。
 
 このドキュメントの例は、次のサンプル データに基づいています。
 
@@ -121,7 +121,7 @@ EXPLAIN SELECT * FROM t1 WHERE id IN (SELECT t1_id FROM t2 WHERE t1_id != t1.int
 
 上記の結果から、TiDB は`Semi Join`アルゴリズムを使用していることがわかります。セミ結合は内部結合とは異なります。セミ結合では右側のキー ( `t2.t1_id` ) の最初の値のみが許可されます。これは、重複が結合演算子タスクの一部として削除されることを意味します。結合アルゴリズムも Merge Join であり、オペレーターがソートされた順序で左側と右側の両方からデータを読み取るため、効率的なジッパー マージに似ています。
 
-サブクエリはサブクエリの外部に存在する列 ( `t1.int_col` ) を参照しているため、元のステートメントは*相関サブクエリと*みなされます。ただし、 `EXPLAIN`の出力には、 [<a href="/correlated-subquery-optimization.md">サブクエリ非相関最適化</a>](/correlated-subquery-optimization.md)適用された後の実行計画が表示されます。条件`t1_id != t1.int_col`は`t1.id != t1.int_col`に書き換えられます。 TiDB は、テーブル`t1`からデータを読み取りながらこれを`└─Selection_21`で実行できるため、この非相関化と再書き込みにより実行が大幅に効率化されます。
+サブクエリはサブクエリの外部に存在する列 ( `t1.int_col` ) を参照しているため、元のステートメントは*相関サブクエリと*みなされます。ただし、 `EXPLAIN`の出力には、 [サブクエリ非相関最適化](/correlated-subquery-optimization.md)適用された後の実行計画が表示されます。条件`t1_id != t1.int_col`は`t1.id != t1.int_col`に書き換えられます。 TiDB は、テーブル`t1`からデータを読み取りながらこれを`└─Selection_21`で実行できるため、この非相関化と再書き込みにより実行が大幅に効率化されます。
 
 ## アンチセミ結合 ( <code>NOT IN</code>サブクエリ) {#anti-semi-join-code-not-in-code-subquery}
 
@@ -150,7 +150,7 @@ EXPLAIN SELECT * FROM t3 WHERE t1_id NOT IN (SELECT id FROM t1 WHERE int_col < 1
 
 `IN`または`= ANY`集合演算子の値は 3 値 ( `true` 、 `false` 、および`NULL` ) です。 2 つの演算子のいずれかから変換された結合タイプの場合、TiDB は結合キーの両側の`NULL`を認識し、それを特別な方法で処理する必要があります。
 
-`IN`と`= ANY`の演算子を含むサブクエリは、それぞれセミ結合と左外部セミ結合に変換されます。前述の[<a href="#semi-join-correlated-subquery">セミジョイン</a>](#semi-join-correlated-subquery)の例では、結合キーの両側の列`test.t1.id`と`test.t2.t1_id` `not NULL`であるため、半結合を null 対応とみなす必要はありません ( `NULL`は特別に処理されません)。 TiDB は、特別な最適化を行わずに、デカルト積とフィルターに基づいてヌル認識セミ結合を処理します。以下は例です。
+`IN`と`= ANY`の演算子を含むサブクエリは、それぞれセミ結合と左外部セミ結合に変換されます。前述の[セミジョイン](#semi-join-correlated-subquery)の例では、結合キーの両側の列`test.t1.id`と`test.t2.t1_id` `not NULL`であるため、半結合を null 対応とみなす必要はありません ( `NULL`は特別に処理されません)。 TiDB は、特別な最適化を行わずに、デカルト積とフィルターに基づいてヌル認識セミ結合を処理します。以下は例です。
 
 ```sql
 CREATE TABLE t(a INT, b INT);
@@ -200,7 +200,7 @@ tidb> EXPLAIN SELECT * FROM t WHERE (a,b) IN (SELECT * FROM s);
 
 `NOT IN`または`!= ALL`集合演算子の値は 3 値 ( `true` 、 `false` 、および`NULL` ) です。 2 つの演算子のいずれかから変換された結合タイプの場合、TiDB は結合キーの両側の`NULL`を認識し、それを特別な方法で処理する必要があります。
 
-`NOT IN`つと`! = ALL`の演算子を含むサブクエリは、それぞれアンチセミ結合とアンチ左外部セミ結合に変換されます。前述の[<a href="#anti-semi-join-not-in-subquery">アンチセミ結合</a>](#anti-semi-join-not-in-subquery)の例では、結合キーの両側の列`test.t3.t1_id`と`test.t1.id` `not NULL`であるため、アンチセミ結合を null 対応とみなす必要はありません ( `NULL`は特別に処理されません)。
+`NOT IN`つと`! = ALL`の演算子を含むサブクエリは、それぞれアンチセミ結合とアンチ左外部セミ結合に変換されます。前述の[アンチセミ結合](#anti-semi-join-not-in-subquery)の例では、結合キーの両側の列`test.t3.t1_id`と`test.t1.id` `not NULL`であるため、アンチセミ結合を null 対応とみなす必要はありません ( `NULL`は特別に処理されません)。
 
 TiDB v6.3.0 は、次のように null 対応アンチ結合 (NAAJ) を最適化します。
 
@@ -261,10 +261,10 @@ tidb> EXPLAIN SELECT * FROM t WHERE (a, b) NOT IN (SELECT * FROM s);
 
 ## 他のタイプのサブクエリを使用した Explain ステートメント {#explain-statements-using-other-types-of-subqueries}
 
--   [<a href="/explain-mpp.md">MPP モードでの Explain ステートメント</a>](/explain-mpp.md)
--   [<a href="/explain-indexes.md">インデックスを使用する Explain ステートメント</a>](/explain-indexes.md)
--   [<a href="/explain-joins.md">テーブル結合を使用する Explain ステートメント</a>](/explain-joins.md)
--   [<a href="/explain-aggregation.md">集計を使用する Explain ステートメント</a>](/explain-aggregation.md)
--   [<a href="/explain-views.md">ビューを使用したステートメントの説明</a>](/explain-views.md)
--   [<a href="/explain-partitions.md">パーティションを使用した Explain ステートメント</a>](/explain-partitions.md)
--   [<a href="/explain-index-merge.md">インデックス マージを使用した Explain ステートメント</a>](/explain-index-merge.md)
+-   [MPP モードでの Explain ステートメント](/explain-mpp.md)
+-   [インデックスを使用する Explain ステートメント](/explain-indexes.md)
+-   [テーブル結合を使用する Explain ステートメント](/explain-joins.md)
+-   [集計を使用する Explain ステートメント](/explain-aggregation.md)
+-   [ビューを使用したステートメントの説明](/explain-views.md)
+-   [パーティションを使用した Explain ステートメント](/explain-partitions.md)
+-   [インデックス マージを使用した Explain ステートメント](/explain-index-merge.md)

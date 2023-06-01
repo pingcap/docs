@@ -38,7 +38,7 @@ CSV ファイルにはスキーマがありません。 CSV ファイルを TiDB
 
 ### コンフィグレーション {#configuration}
 
-CSV形式は、 `tidb-lightning.toml`ファイルの`[mydumper.csv]`セクションで設定できます。ほとんどの設定には、MySQL の[<a href="https://dev.mysql.com/doc/refman/8.0/en/load-data.html">`LOAD DATA`</a>](https://dev.mysql.com/doc/refman/8.0/en/load-data.html)ステートメントに対応するオプションがあります。
+CSV形式は、 `tidb-lightning.toml`ファイルの`[mydumper.csv]`セクションで設定できます。ほとんどの設定には、MySQL の[`LOAD DATA`](https://dev.mysql.com/doc/refman/8.0/en/load-data.html)ステートメントに対応するオプションがあります。
 
 ```toml
 [mydumper.csv]
@@ -71,7 +71,7 @@ trim-last-separator = false
 
 *一重引用*符で囲まれた文字列 ( `'…'` ) を使用すると、バックスラッシュのエスケープを抑制できます。たとえば、 `terminator = '\n'` 、LF `\n`ではなく、バックスラッシュ ( `\` ) とその後に文字`n`が続いた 2 文字の文字列をターミネータとして使用することを意味します。
 
-詳細については、 [<a href="https://toml.io/en/v1.0.0#string">TOML v1.0.0 仕様</a>](https://toml.io/en/v1.0.0#string)を参照してください。
+詳細については、 [TOML v1.0.0 仕様](https://toml.io/en/v1.0.0#string)を参照してください。
 
 #### <code>separator</code> {#code-separator-code}
 
@@ -95,7 +95,7 @@ trim-last-separator = false
 
 -   一般的な値:
 
-    -   `'"'`フィールドを二重引用符で囲みます。 [<a href="https://tools.ietf.org/html/rfc4180">RFC 4180</a>](https://tools.ietf.org/html/rfc4180)と同じ。
+    -   `'"'`フィールドを二重引用符で囲みます。 [RFC 4180](https://tools.ietf.org/html/rfc4180)と同じ。
     -   `''`引用を無効にします。
 
 -   `LOAD DATA`ステートメントの`FIELDS ENCLOSED BY`オプションに対応します。
@@ -289,7 +289,7 @@ type = '$3'
 
 この設定は、 Auroraスナップショットによってエクスポートされた寄木細工のファイルを照合する方法のみを示していることに注意してください。スキーマ ファイルを個別にエクスポートして処理する必要があります。
 
-`mydumper.files`の詳細については、 [<a href="#match-customized-files">カスタマイズされたファイルと一致する</a>](#match-customized-files)を参照してください。
+`mydumper.files`の詳細については、 [カスタマイズされたファイルと一致する](#match-customized-files)を参照してください。
 
 ## 圧縮ファイル {#compressed-files}
 
@@ -338,7 +338,7 @@ type = '$3'
 
 ## Amazon S3 からデータをインポートする {#import-data-from-amazon-s3}
 
-次の例は、 TiDB Lightningを使用して Amazon S3 からデータをインポートする方法を示しています。パラメータ設定の詳細については、 [<a href="/br/backup-and-restore-storages.md#uri-format">外部storageURI</a>](/br/backup-and-restore-storages.md#uri-format)を参照してください。
+次の例は、 TiDB Lightningを使用して Amazon S3 からデータをインポートする方法を示しています。パラメータ設定の詳細については、 [外部storageURI](/br/backup-and-restore-storages.md#uri-format)を参照してください。
 
 -   ローカルに設定された権限を使用して S3 データにアクセスします。
 
@@ -379,5 +379,5 @@ type = '$3'
 
 ## その他のリソース {#more-resources}
 
--   [<a href="/dumpling-overview.md#export-to-csv-files">Dumplingを使用して CSV ファイルにエクスポートする</a>](/dumpling-overview.md#export-to-csv-files)
--   [<a href="https://dev.mysql.com/doc/refman/8.0/en/load-data.html">`LOAD DATA`</a>](https://dev.mysql.com/doc/refman/8.0/en/load-data.html)
+-   [Dumplingを使用して CSV ファイルにエクスポートする](/dumpling-overview.md#export-to-csv-files)
+-   [`LOAD DATA`](https://dev.mysql.com/doc/refman/8.0/en/load-data.html)

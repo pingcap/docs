@@ -54,7 +54,7 @@ tiup dmctl check-task ./task.yaml
 
     -   上流テーブルに TiDB でサポートされていない外部キーがあるかどうかを確認します。事前チェックで外部キーが見つかった場合は、警告が返されます。
 
-    -   上流のテーブルで TiDB と互換性のない文字セットが使用されていないか確認してください。詳細については、 [<a href="/character-set-and-collation.md">TiDB でサポートされる文字セット</a>](/character-set-and-collation.md)を参照してください。
+    -   上流のテーブルで TiDB と互換性のない文字セットが使用されていないか確認してください。詳細については、 [TiDB でサポートされる文字セット](/character-set-and-collation.md)を参照してください。
 
     -   上流テーブルに主キー制約または一意キー制約 (v1.0.7 から導入) があるかどうかを確認します。
 
@@ -65,7 +65,7 @@ tiup dmctl check-task ./task.yaml
 
 ### 完全データ移行のチェック項目 {#check-items-for-full-data-migration}
 
-完全データ移行モード ( `task-mode: full` ) の場合、事前チェックには[<a href="#common-check-items">よくあるチェック項目</a>](#common-check-items)に加えて、次のチェック項目も含まれます。
+完全データ移行モード ( `task-mode: full` ) の場合、事前チェックには[よくあるチェック項目](#common-check-items)に加えて、次のチェック項目も含まれます。
 
 -   上流データベースのダンプ権限 (必須)
 
@@ -84,25 +84,25 @@ tiup dmctl check-task ./task.yaml
         -   主キー
         -   一意のインデックス
 
-    -   楽観的モードでは、すべてのシャード テーブルのスキーマが[<a href="https://github.com/pingcap/tiflow/blob/master/dm/docs/RFCS/20191209_optimistic_ddl.md#modifying-column-types">楽観的互換性</a>](https://github.com/pingcap/tiflow/blob/master/dm/docs/RFCS/20191209_optimistic_ddl.md#modifying-column-types)を満たすかどうかを確認します。
+    -   楽観的モードでは、すべてのシャード テーブルのスキーマが[楽観的互換性](https://github.com/pingcap/tiflow/blob/master/dm/docs/RFCS/20191209_optimistic_ddl.md#modifying-column-types)を満たすかどうかを確認します。
 
     -   移行タスクが`start-task`コマンドによって正常に開始された場合、このタスクの事前チェックでは整合性チェックがスキップされます。
 
 -   シャードテーブルの主キーの自動インクリメント
 
-    -   シャードテーブルに自動インクリメント主キーがある場合、事前チェックにより警告が返されます。自動インクリメント主キーに競合がある場合、解決策については[<a href="/dm/shard-merge-best-practices.md#handle-conflicts-of-auto-increment-primary-key">自動インクリメント主キーの競合を処理する</a>](/dm/shard-merge-best-practices.md#handle-conflicts-of-auto-increment-primary-key)を参照してください。
+    -   シャードテーブルに自動インクリメント主キーがある場合、事前チェックにより警告が返されます。自動インクリメント主キーに競合がある場合、解決策については[自動インクリメント主キーの競合を処理する](/dm/shard-merge-best-practices.md#handle-conflicts-of-auto-increment-primary-key)を参照してください。
 
 #### 現物輸入のチェック項目 {#check-items-for-physical-import}
 
-タスク構成で`import-mode: "physical"`を設定した場合、 [<a href="/tidb-lightning/tidb-lightning-physical-import-mode.md">物理的なインポート</a>](/tidb-lightning/tidb-lightning-physical-import-mode.md)正常に動作することを確認するために以下のチェック項目が追加されます。指示に従っても、これらのチェック項目の要件を満たすことが難しい場合は、 [<a href="/tidb-lightning/tidb-lightning-logical-import-mode.md">論理インポートモード</a>](/tidb-lightning/tidb-lightning-logical-import-mode.md)を使用してデータをインポートしてみてください。
+タスク構成で`import-mode: "physical"`を設定した場合、 [論理インポートモード](/tidb-lightning/tidb-lightning-logical-import-mode.md)を使用してデータをインポートしてみてください。
 
 -   ダウンストリーム データベース内の空の領域
 
-    -   空のリージョンの数が`max(1000, 3 * the number of tables)` (「1000」と「テーブル数の 3 倍」の大きい方) より大きい場合、事前チェックは警告を返します。関連する PD パラメータを調整して、空のリージョンの結合を高速化し、空のリージョンの数が減少するのを待つことができます。 [<a href="/best-practices/pd-scheduling-best-practices.md#region-merge-is-slow">PD スケジュールのベスト プラクティス - 低速なリージョンマージ</a>](/best-practices/pd-scheduling-best-practices.md#region-merge-is-slow)を参照してください。
+    -   空のリージョンの数が`max(1000, 3 * the number of tables)` (「1000」と「テーブル数の 3 倍」の大きい方) より大きい場合、事前チェックは警告を返します。関連する PD パラメータを調整して、空のリージョンの結合を高速化し、空のリージョンの数が減少するのを待つことができます。 [PD スケジュールのベスト プラクティス - 低速なリージョンマージ](/best-practices/pd-scheduling-best-practices.md#region-merge-is-slow)を参照してください。
 
 -   ダウンストリームデータベースのリージョン分布
 
-    -   さまざまな TiKV ノード上のリージョンの数を確認します。リージョン数が最も低い TiKV ノードにリージョンが`a`つあり、リージョン数が最も高い TiKV ノードに`b`のリージョンがあると仮定すると、 `a / b`が 0.75 未満の場合、事前チェックは警告を返します。関連する PD パラメータを調整して、リージョンのスケジュールを高速化し、リージョンの数が変更されるのを待つことができます。 [<a href="/best-practices/pd-scheduling-best-practices.md#leadersregions-are-not-evenly-distributed">PD スケジュールのベスト プラクティス -Leader/リージョンの分散のバランスが取れていません</a>](/best-practices/pd-scheduling-best-practices.md#leadersregions-are-not-evenly-distributed)を参照してください。
+    -   さまざまな TiKV ノード上のリージョンの数を確認します。リージョン数が最も低い TiKV ノードにリージョンが`a`つあり、リージョン数が最も高い TiKV ノードに`b`のリージョンがあると仮定すると、 `a / b`が 0.75 未満の場合、事前チェックは警告を返します。関連する PD パラメータを調整して、リージョンのスケジュールを高速化し、リージョンの数が変更されるのを待つことができます。 [PD スケジュールのベスト プラクティス -Leader/リージョンの分散のバランスが取れていません](/best-practices/pd-scheduling-best-practices.md#leadersregions-are-not-evenly-distributed)を参照してください。
 
 -   ダウンストリーム データベース内の TiDB、PD、および TiKV のバージョン
 
@@ -114,11 +114,11 @@ tiup dmctl check-task ./task.yaml
 
 -   ダウンストリーム データベースが物理インポートと互換性のないタスクを実行しているかどうか
 
-    -   現在、物理インポートは[<a href="/ticdc/ticdc-overview.md">TiCDC</a>](/ticdc/ticdc-overview.md)および[<a href="/br/br-pitr-guide.md">PITR</a>](/br/br-pitr-guide.md)タスクと互換性がありません。これらのタスクがダウンストリーム データベースで実行されている場合、事前チェックはエラーを返します。
+    -   現在、物理インポートは[PITR](/br/br-pitr-guide.md)タスクと互換性がありません。これらのタスクがダウンストリーム データベースで実行されている場合、事前チェックはエラーを返します。
 
 ### 増分データ移行のチェック項目 {#check-items-for-incremental-data-migration}
 
-増分データ移行モード ( `task-mode: incremental` ) の場合、事前チェックには[<a href="#common-check-items">よくあるチェック項目</a>](#common-check-items)に加えて、次のチェック項目も含まれます。
+増分データ移行モード ( `task-mode: incremental` ) の場合、事前チェックには[よくあるチェック項目](#common-check-items)に加えて、次のチェック項目も含まれます。
 
 -   (必須) アップストリーム データベース REPLICATION 権限
 
@@ -136,15 +136,15 @@ tiup dmctl check-task ./task.yaml
     -   `binlog_row_image=FULL`が構成されているかどうかを確認します (DM は`binlog_row_image=FULL`のみをサポートします)。
     -   `binlog_do_db`または`binlog_ignore_db`が設定されている場合、移行するデータベーステーブルが`binlog_do_db`および`binlog_ignore_db`の条件を満たしているか確認してください。
 
--   (必須) 上流データベースが[<a href="/dm/feature-online-ddl.md">オンライン DDL</a>](/dm/feature-online-ddl.md)プロセス ( `ghost`テーブルは作成されているが、 `rename`フェーズがまだ実行されていないプロセス) にあるかどうかを確認します。アップストリームがオンライン DDL プロセスにある場合、事前チェックはエラーを返します。この場合、DDL が完了するまで待ってから再試行してください。
+-   (必須) 上流データベースが[オンライン DDL](/dm/feature-online-ddl.md)プロセス ( `ghost`テーブルは作成されているが、 `rename`フェーズがまだ実行されていないプロセス) にあるかどうかを確認します。アップストリームがオンライン DDL プロセスにある場合、事前チェックはエラーを返します。この場合、DDL が完了するまで待ってから再試行してください。
 
 ### 完全データ移行および増分データ移行のチェック項目 {#check-items-for-full-and-incremental-data-migration}
 
-完全および増分データ移行モード ( `task-mode: all` ) の場合、事前チェックには[<a href="#common-check-items">よくあるチェック項目</a>](#common-check-items)に加えて[<a href="#check-items-for-full-data-migration">完全なデータ移行チェック項目</a>](#check-items-for-full-data-migration)および[<a href="#check-items-for-incremental-data-migration">増分データ移行のチェック項目</a>](#check-items-for-incremental-data-migration)も含まれます。
+完全および増分データ移行モード ( `task-mode: all` ) の場合、事前チェックには[増分データ移行のチェック項目](#check-items-for-incremental-data-migration)も含まれます。
 
 ### 無視できるチェック項目 {#ignorable-check-items}
 
-事前チェックにより、環境内の潜在的なリスクを見つけることができます。チェック項目を無視することはお勧めできません。データ移行タスクに特別なニーズがある場合は、「 [<a href="/dm/task-configuration-file-full.md#task-configuration-file-template-advanced">`ignore-checking-items`設定項目</a>](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)を使用して一部のチェック項目をスキップできます。
+事前チェックにより、環境内の潜在的なリスクを見つけることができます。チェック項目を無視することはお勧めできません。データ移行タスクに特別なニーズがある場合は、「 [`ignore-checking-items`設定項目](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)を使用して一部のチェック項目をスキップできます。
 
 | チェック項目                      | 説明                                                                                                 |
 | :-------------------------- | :------------------------------------------------------------------------------------------------- |
@@ -156,7 +156,7 @@ tiup dmctl check-task ./task.yaml
 | `table_schema`              | アップストリームの MySQL テーブル内のテーブル スキーマの互換性をチェックします。                                                       |
 | `schema_of_shard_tables`    | アップストリームの MySQL マルチインスタンス シャード内のテーブル スキーマの一貫性をチェックします。                                             |
 | `auto_increment_ID`         | 自動インクリメント主キーがアップストリームの MySQL マルチインスタンス シャードで競合するかどうかを確認します。                                        |
-| `online_ddl`                | 上流が[<a href="/dm/feature-online-ddl.md">オンライン DDL</a>](/dm/feature-online-ddl.md)のプロセス中かどうかを確認します。 |
+| `online_ddl`                | 上流が[オンライン DDL](/dm/feature-online-ddl.md)のプロセス中かどうかを確認します。 |
 | `empty_region`              | 物理インポート用にダウンストリーム データベース内の空のリージョンの数を確認します。                                                         |
 | `region_distribution`       | 物理インポートのダウンストリーム データベース内のリージョンの分布を確認します。                                                           |
 | `downstream_version`        | ダウンストリーム データベース内の TiDB、PD、および TiKV のバージョンを確認します。                                                   |

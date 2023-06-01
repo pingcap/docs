@@ -14,7 +14,7 @@ DM ワーカーが接続する上流の MySQL インスタンスでダウンタ�
 > -   DM ワーカーは GTID セット モードで動作する必要があります。つまり、対応するソース構成ファイルで`enable-gtid: true`を指定する必要があります。
 > -   接続スイッチは、次の 2 つのシナリオのみをサポートします。各シナリオの手順に厳密に従ってください。それ以外の場合は、新しく接続された MySQL インスタンスに従って DM クラスターを再デプロイし、データ移行タスクを最初からやり直す必要がある場合があります。
 
-GTID セットの詳細については、 [<a href="https://dev.mysql.com/doc/refman/5.7/en/replication-gtids-concepts.html#replication-gtids-concepts-gtid-sets">MySQL ドキュメント</a>](https://dev.mysql.com/doc/refman/5.7/en/replication-gtids-concepts.html#replication-gtids-concepts-gtid-sets)を参照してください。
+GTID セットの詳細については、 [MySQL ドキュメント](https://dev.mysql.com/doc/refman/5.7/en/replication-gtids-concepts.html#replication-gtids-concepts-gtid-sets)を参照してください。
 
 ## 仮想 IP 経由で DM とワーカーの接続を切り替える {#switch-dm-worker-connection-via-virtual-ip}
 

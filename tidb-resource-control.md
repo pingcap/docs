@@ -9,17 +9,17 @@ summary: Learn how to use the resource control feature to control and schedule a
 
 > **ノート：**
 >
-> この機能は[<a href="/tidb-cloud/select-cluster-tier.md#serverless-tier-beta">Serverless Tierクラスター</a>](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)では使用できません。
+> この機能は[Serverless Tierクラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)では使用できません。
 
 </CustomContent>
 
 クラスター管理者は、リソース制御機能を使用して、リソース グループの作成、リソース グループのクォータの設定、およびそれらのグループへのユーザーのバインドを行うことができます。
 
-TiDB リソース制御機能は、TiDBレイヤーのフロー制御機能と TiKVレイヤーの優先スケジューリング機能の 2 層のリソース管理機能を提供します。 2 つの機能は個別に有効にすることも、同時に有効にすることもできます。詳細は[<a href="#parameters-for-resource-control">リソース制御用パラメータ</a>](#parameters-for-resource-control)を参照してください。これにより、TiDBレイヤーがリソース グループに設定されたクォータに基づいてユーザーの読み取りおよび書き込みリクエストのフローを制御できるようになり、TiKVレイヤーが読み取りおよび書き込みクォータにマップされた優先順位に基づいてリクエストをスケジュールできるようになります。これにより、アプリケーションのリソース分離を確保し、サービス品質 (QoS) 要件を満たすことができます。
+TiDB リソース制御機能は、TiDBレイヤーのフロー制御機能と TiKVレイヤーの優先スケジューリング機能の 2 層のリソース管理機能を提供します。 2 つの機能は個別に有効にすることも、同時に有効にすることもできます。詳細は[リソース制御用パラメータ](#parameters-for-resource-control)を参照してください。これにより、TiDBレイヤーがリソース グループに設定されたクォータに基づいてユーザーの読み取りおよび書き込みリクエストのフローを制御できるようになり、TiKVレイヤーが読み取りおよび書き込みクォータにマップされた優先順位に基づいてリクエストをスケジュールできるようになります。これにより、アプリケーションのリソース分離を確保し、サービス品質 (QoS) 要件を満たすことができます。
 
--   TiDB フロー制御: TiDB フロー制御は[<a href="https://en.wikipedia.org/wiki/Token_bucket">トークンバケットアルゴリズム</a>](https://en.wikipedia.org/wiki/Token_bucket)を使用します。バケット内に十分なトークンがなく、リソース グループが`BURSTABLE`オプションを指定していない場合、リソース グループへのリクエストは、トークン バケットにトークンがバックフィルされるまで待機して、再試行します。タイムアウトにより再試行が失敗する場合があります。
+-   TiDB フロー制御: TiDB フロー制御は[トークンバケットアルゴリズム](https://en.wikipedia.org/wiki/Token_bucket)を使用します。バケット内に十分なトークンがなく、リソース グループが`BURSTABLE`オプションを指定していない場合、リソース グループへのリクエストは、トークン バケットにトークンがバックフィルされるまで待機して、再試行します。タイムアウトにより再試行が失敗する場合があります。
 
--   TiKV スケジューリング: 必要に応じて絶対優先度[<a href="/information-schema/information-schema-resource-groups.md#examples">( `PRIORITY` )</a>](/information-schema/information-schema-resource-groups.md#examples)を設定できます。 `PRIORITY`の設定に従って、さまざまなリソースがスケジュールされます。高`PRIORITY`のタスクが最初にスケジュールされます。絶対優先度を設定しない場合、TiKV は各リソース グループの値`RU_PER_SEC`を使用して、各リソース グループの読み取りおよび書き込みリクエストの優先度を決定します。優先順位に基づいて、storageレイヤーは優先キューを使用してリクエストをスケジュールし、処理します。
+-   TiKV スケジューリング: 必要に応じて絶対優先度[( `PRIORITY` )](/information-schema/information-schema-resource-groups.md#examples)を設定できます。 `PRIORITY`の設定に従って、さまざまなリソースがスケジュールされます。高`PRIORITY`のタスクが最初にスケジュールされます。絶対優先度を設定しない場合、TiKV は各リソース グループの値`RU_PER_SEC`を使用して、各リソース グループの読み取りおよび書き込みリクエストの優先度を決定します。優先順位に基づいて、storageレイヤーは優先キューを使用してリクエストをスケジュールし、処理します。
 
 ## リソース制御のシナリオ {#scenarios-for-resource-control}
 
@@ -63,11 +63,11 @@ TiDB リソース制御機能は、TiDBレイヤーのフロー制御機能と T
 
 リソース制御機能では、2 つの新しいグローバル変数が導入されています。
 
--   TiDB: [<a href="/system-variables.md#tidb_enable_resource_control-new-in-v660">`tidb_enable_resource_control`</a>](/system-variables.md#tidb_enable_resource_control-new-in-v660)システム変数を使用して、リソース グループのフロー制御を有効にするかどうかを制御できます。
+-   TiDB: [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660)システム変数を使用して、リソース グループのフロー制御を有効にするかどうかを制御できます。
 
 <CustomContent platform="tidb">
 
--   TiKV: [<a href="/tikv-configuration-file.md#resource-control">`resource-control.enabled`</a>](/tikv-configuration-file.md#resource-control)パラメーターを使用して、リソース グループに基づいたリクエストのスケジューリングを使用するかどうかを制御できます。
+-   TiKV: [`resource-control.enabled`](/tikv-configuration-file.md#resource-control)パラメーターを使用して、リソース グループに基づいたリクエストのスケジューリングを使用するかどうかを制御できます。
 
 </CustomContent>
 
@@ -84,7 +84,7 @@ TiDB v7.0.0 以降、両方のパラメータがデフォルトで有効にな�
 | `resource-control.enabled` = 真 | フロー制御とスケジューリング (推奨)                 | 無効な組み合わせです                          |
 | `resource-control.enabled` = 偽 | フロー制御のみ (非推奨)                       | 機能は無効になっています。                       |
 
-リソース制御メカニズムとパラメータの詳細については、 [<a href="https://github.com/pingcap/tidb/blob/master/docs/design/2022-11-25-global-resource-control.md">RFC: TiDB におけるグローバル リソース制御</a>](https://github.com/pingcap/tidb/blob/master/docs/design/2022-11-25-global-resource-control.md)を参照してください。
+リソース制御メカニズムとパラメータの詳細については、 [RFC: TiDB におけるグローバル リソース制御](https://github.com/pingcap/tidb/blob/master/docs/design/2022-11-25-global-resource-control.md)を参照してください。
 
 ## リソース制御の使用方法 {#how-to-use-resource-control}
 
@@ -92,20 +92,20 @@ TiDB v7.0.0 以降、両方のパラメータがデフォルトで有効にな�
 
 ### クラスター容量の見積もり {#estimate-cluster-capacity}
 
-リソースを計画する前に、クラスターの全体的な容量を把握する必要があります。 TiDB は、クラスター容量を見積もるためのステートメント[<a href="/sql-statements/sql-statement-calibrate-resource.md">`CALIBRATE RESOURCE`</a>](/sql-statements/sql-statement-calibrate-resource.md)を提供します。次のいずれかの方法を使用できます。
+リソースを計画する前に、クラスターの全体的な容量を把握する必要があります。 TiDB は、クラスター容量を見積もるためのステートメント[`CALIBRATE RESOURCE`](/sql-statements/sql-statement-calibrate-resource.md)を提供します。次のいずれかの方法を使用できます。
 
--   [<a href="/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-actual-workload">実際のワークロードに基づいて容量を見積もる</a>](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-actual-workload)
--   [<a href="/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-hardware-deployment">ハードウェア導入に基づいて容量を見積もる</a>](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-hardware-deployment)
+-   [実際のワークロードに基づいて容量を見積もる](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-actual-workload)
+-   [ハードウェア導入に基づいて容量を見積もる](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-hardware-deployment)
 
 <CustomContent platform="tidb">
 
-[<a href="/dashboard/dashboard-resource-manager.md">リソースマネージャーページ</a>](/dashboard/dashboard-resource-manager.md) TiDB ダッシュボードで確認できます。詳細については、 [<a href="/sql-statements/sql-statement-calibrate-resource.md#methods-for-estimating-capacity">`CALIBRATE RESOURCE`</a>](/sql-statements/sql-statement-calibrate-resource.md#methods-for-estimating-capacity)を参照してください。
+[`CALIBRATE RESOURCE`](/sql-statements/sql-statement-calibrate-resource.md#methods-for-estimating-capacity)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-詳細については、 [<a href="/sql-statements/sql-statement-calibrate-resource.md#methods-for-estimating-capacity">`CALIBRATE RESOURCE`</a>](/sql-statements/sql-statement-calibrate-resource.md#methods-for-estimating-capacity)を参照してください。
+詳細については、 [`CALIBRATE RESOURCE`](/sql-statements/sql-statement-calibrate-resource.md#methods-for-estimating-capacity)を参照してください。
 
 </CustomContent>
 
@@ -113,11 +113,11 @@ TiDB v7.0.0 以降、両方のパラメータがデフォルトで有効にな�
 
 リソース グループを作成、変更、または削除するには、 `SUPER`または`RESOURCE_GROUP_ADMIN`権限が必要です。
 
-[<a href="/sql-statements/sql-statement-create-resource-group.md">`CREATE RESOURCE GROUP`</a>](/sql-statements/sql-statement-create-resource-group.md)を使用してクラスターのリソース グループを作成できます。
+[`CREATE RESOURCE GROUP`](/sql-statements/sql-statement-create-resource-group.md)を使用してクラスターのリソース グループを作成できます。
 
-既存のリソース グループの場合、 [<a href="/sql-statements/sql-statement-alter-resource-group.md">`ALTER RESOURCE GROUP`</a>](/sql-statements/sql-statement-alter-resource-group.md)を使用して、リソース グループの`RU_PER_SEC`オプション (1 秒あたりの RU バックフィルの速度) を変更できます。リソース グループへの変更はすぐに有効になります。
+既存のリソース グループの場合、 [`ALTER RESOURCE GROUP`](/sql-statements/sql-statement-alter-resource-group.md)を使用して、リソース グループの`RU_PER_SEC`オプション (1 秒あたりの RU バックフィルの速度) を変更できます。リソース グループへの変更はすぐに有効になります。
 
-[<a href="/sql-statements/sql-statement-drop-resource-group.md">`DROP RESOURCE GROUP`</a>](/sql-statements/sql-statement-drop-resource-group.md)を使用してリソース グループを削除できます。
+[`DROP RESOURCE GROUP`](/sql-statements/sql-statement-drop-resource-group.md)を使用してリソース グループを削除できます。
 
 ### リソースグループを作成する {#create-a-resource-group}
 
@@ -145,19 +145,19 @@ TiDB v7.0.0 以降、両方のパラメータがデフォルトで有効にな�
 
 TiDB は、次の 3 つのレベルのリソース グループ設定をサポートしています。
 
--   ユーザーレベル。 [<a href="/sql-statements/sql-statement-create-user.md">`CREATE USER`</a>](/sql-statements/sql-statement-create-user.md)または[<a href="/sql-statements/sql-statement-alter-user.md#modify-the-resource-group-bound-to-the-user">`ALTER USER`</a>](/sql-statements/sql-statement-alter-user.md#modify-the-resource-group-bound-to-the-user)ステートメントを使用して、ユーザーを特定のリソース グループにバインドします。ユーザーがリソース グループにバインドされると、ユーザーが作成したセッションは、対応するリソース グループに自動的にバインドされます。
--   セッションレベル。 [<a href="/sql-statements/sql-statement-set-resource-group.md">`SET RESOURCE GROUP`</a>](/sql-statements/sql-statement-set-resource-group.md)を介して現在のセッションのリソース グループを設定します。
--   発言レベル。 [<a href="/optimizer-hints.md#resource_groupresource_group_name">`RESOURCE_GROUP()`</a>](/optimizer-hints.md#resource_groupresource_group_name)オプティマイザー ヒントを使用して、現在のステートメントのリソース グループを設定します。
+-   ユーザーレベル。 [`ALTER USER`](/sql-statements/sql-statement-alter-user.md#modify-the-resource-group-bound-to-the-user)ステートメントを使用して、ユーザーを特定のリソース グループにバインドします。ユーザーがリソース グループにバインドされると、ユーザーが作成したセッションは、対応するリソース グループに自動的にバインドされます。
+-   セッションレベル。 [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md)を介して現在のセッションのリソース グループを設定します。
+-   発言レベル。 [`RESOURCE_GROUP()`](/optimizer-hints.md#resource_groupresource_group_name)オプティマイザー ヒントを使用して、現在のステートメントのリソース グループを設定します。
 
 #### ユーザーをリソース グループにバインドする {#bind-users-to-a-resource-group}
 
-次の例では、ユーザー`usr1`を作成し、そのユーザーをリソース グループ`rg1`にバインドします。 `rg1`は、 [<a href="#create-a-resource-group">リソースグループの作成</a>](#create-a-resource-group)の例で作成されたリソース グループです。
+次の例では、ユーザー`usr1`を作成し、そのユーザーをリソース グループ`rg1`にバインドします。 `rg1`は、 [リソースグループの作成](#create-a-resource-group)の例で作成されたリソース グループです。
 
 ```sql
 CREATE USER 'usr1'@'%' IDENTIFIED BY '123' RESOURCE GROUP rg1;
 ```
 
-次の例では、 `ALTER USER`を使用してユーザー`usr2`リソース グループ`rg2`にバインドします。 `rg2`は、 [<a href="#create-a-resource-group">リソースグループの作成</a>](#create-a-resource-group)の例で作成されたリソース グループです。
+次の例では、 `ALTER USER`を使用してユーザー`usr2`リソース グループ`rg2`にバインドします。 `rg2`は、 [リソースグループの作成](#create-a-resource-group)の例で作成されたリソース グループです。
 
 ```sql
 ALTER USER usr2 RESOURCE GROUP rg2;
@@ -184,7 +184,7 @@ SET RESOURCE GROUP rg1;
 
 #### 現在のステートメントをリソース グループにバインドします {#bind-the-current-statement-to-a-resource-group}
 
-SQL ステートメントに[<a href="/optimizer-hints.md#resource_groupresource_group_name">`RESOURCE_GROUP(resource_group_name)`</a>](/optimizer-hints.md#resource_groupresource_group_name)ヒントを追加すると、ステートメントがバインドされるリソース グループを指定できます。このヒントは、 `SELECT` 、 `INSERT` 、 `UPDATE` 、および`DELETE`ステートメントをサポートします。
+SQL ステートメントに[`RESOURCE_GROUP(resource_group_name)`](/optimizer-hints.md#resource_groupresource_group_name)ヒントを追加すると、ステートメントがバインドされるリソース グループを指定できます。このヒントは、 `SELECT` 、 `INSERT` 、 `UPDATE` 、および`DELETE`ステートメントをサポートします。
 
 次の例では、現在のステートメントをリソース グループ`rg1`にバインドします。
 
@@ -202,7 +202,7 @@ SELECT /*+ RESOURCE_GROUP(rg1) */ * FROM t limit 10;
     SET GLOBAL tidb_enable_resource_control = 'OFF';
     ```
 
-2.  リソース グループの RU に基づくスケジューリングを無効にするには、TiKV パラメーターを[<a href="/tikv-configuration-file.md#resource-control">`resource-control.enabled`</a>](/tikv-configuration-file.md#resource-control) ～ `false`に設定します。
+2.  リソース グループの RU に基づくスケジューリングを無効にするには、TiKV パラメーターを[`resource-control.enabled`](/tikv-configuration-file.md#resource-control) ～ `false`に設定します。
 
 </CustomContent>
 
@@ -214,7 +214,7 @@ SELECT /*+ RESOURCE_GROUP(rg1) */ * FROM t limit 10;
     SET GLOBAL tidb_enable_resource_control = 'OFF';
     ```
 
-2.  オンプレミス TiDB の場合、 `resource-control.enabled`パラメーターを使用して、リソース グループ クォータに基づいてリクエストのスケジューリングを使用するかどうかを制御できます。 TiDB Cloudの場合、 `resource-control.enabled`パラメーターの値はデフォルトで`true`であり、動的変更はサポートされていません。 TiDB CloudDedicated Tierクラスターに対してこれを無効にする必要がある場合は、 [<a href="/tidb-cloud/tidb-cloud-support.md">TiDB Cloudのサポート</a>](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
+2.  オンプレミス TiDB の場合、 `resource-control.enabled`パラメーターを使用して、リソース グループ クォータに基づいてリクエストのスケジューリングを使用するかどうかを制御できます。 TiDB Cloudの場合、 `resource-control.enabled`パラメーターの値はデフォルトで`true`であり、動的変更はサポートされていません。 TiDB CloudDedicated Tierクラスターに対してこれを無効にする必要がある場合は、 [TiDB Cloudのサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
 </CustomContent>
 
@@ -222,11 +222,11 @@ SELECT /*+ RESOURCE_GROUP(rg1) */ * FROM t limit 10;
 
 <CustomContent platform="tidb">
 
-TiDB はリソース制御に関する実行時情報を定期的に収集し、Grafana の**[TiDB]** &gt; **[リソース制御]**ダッシュボードにメトリクスの視覚的なグラフを提供します。メトリクスについては、 [<a href="/grafana-tidb-dashboard.md">TiDB の重要なモニタリング指標</a>](/grafana-tidb-dashboard.md)の**「リソース制御」**セクションで詳しく説明されています。
+TiDB はリソース制御に関する実行時情報を定期的に収集し、Grafana の**[TiDB]** &gt; **[リソース制御]**ダッシュボードにメトリクスの視覚的なグラフを提供します。メトリクスについては、 [TiDB の重要なモニタリング指標](/grafana-tidb-dashboard.md)の**「リソース制御」**セクションで詳しく説明されています。
 
-TiKV は、さまざまなリソース グループからのリクエスト QPS も記録します。詳細については、 [<a href="/grafana-tikv-dashboard.md#grpc">TiKV モニタリング メトリクスの詳細</a>](/grafana-tikv-dashboard.md#grpc)を参照してください。
+TiKV は、さまざまなリソース グループからのリクエスト QPS も記録します。詳細については、 [TiKV モニタリング メトリクスの詳細](/grafana-tikv-dashboard.md#grpc)を参照してください。
 
-TiDB ダッシュボードの現在の[<a href="/information-schema/information-schema-resource-groups.md">`RESOURCE_GROUPS`</a>](/information-schema/information-schema-resource-groups.md)のテーブルでリソース グループのデータを表示できます。詳細については、 [<a href="/dashboard/dashboard-resource-manager.md">リソースマネージャーページ</a>](/dashboard/dashboard-resource-manager.md)を参照してください。
+TiDB ダッシュボードの現在の[リソースマネージャーページ](/dashboard/dashboard-resource-manager.md)を参照してください。
 
 </CustomContent>
 
@@ -254,7 +254,7 @@ TiKV は、Grafana の**TiKV**ダッシュボードにさまざまなリソー�
 
 2.  データベース ユーザーを複数のリソース グループにバインドできますか?
 
-    いいえ。データベース ユーザーは 1 つのリソース グループにのみバインドできます。ただし、セッションの実行中は、 [<a href="/sql-statements/sql-statement-set-resource-group.md">`SET RESOURCE GROUP`</a>](/sql-statements/sql-statement-set-resource-group.md)を使用して、現在のセッションで使用されるリソース グループを設定できます。オプティマイザ ヒント[<a href="/optimizer-hints.md#resource_groupresource_group_name">`RESOURCE_GROUP()`</a>](/optimizer-hints.md#resource_groupresource_group_name)使用して、実行中のステートメントのリソース グループを設定することもできます。
+    いいえ。データベース ユーザーは 1 つのリソース グループにのみバインドできます。ただし、セッションの実行中は、 [`RESOURCE_GROUP()`](/optimizer-hints.md#resource_groupresource_group_name)使用して、実行中のステートメントのリソース グループを設定することもできます。
 
 3.  すべてのリソース グループのリソース割り当ての合計 ( `RU_PER_SEC` ) がシステム容量を超えるとどうなりますか?
 
@@ -262,7 +262,7 @@ TiKV は、Grafana の**TiKV**ダッシュボードにさまざまなリソー�
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-create-resource-group.md">リソースグループの作成</a>](/sql-statements/sql-statement-create-resource-group.md)
--   [<a href="/sql-statements/sql-statement-alter-resource-group.md">リソースグループの変更</a>](/sql-statements/sql-statement-alter-resource-group.md)
--   [<a href="/sql-statements/sql-statement-drop-resource-group.md">リソースグループを削除</a>](/sql-statements/sql-statement-drop-resource-group.md)
--   [<a href="https://github.com/pingcap/tidb/blob/master/docs/design/2022-11-25-global-resource-control.md">リソースグループ RFC</a>](https://github.com/pingcap/tidb/blob/master/docs/design/2022-11-25-global-resource-control.md)
+-   [リソースグループの作成](/sql-statements/sql-statement-create-resource-group.md)
+-   [リソースグループの変更](/sql-statements/sql-statement-alter-resource-group.md)
+-   [リソースグループを削除](/sql-statements/sql-statement-drop-resource-group.md)
+-   [リソースグループ RFC](https://github.com/pingcap/tidb/blob/master/docs/design/2022-11-25-global-resource-control.md)

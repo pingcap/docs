@@ -18,9 +18,9 @@ summary: Learn the geo-distributed deployment topology of TiDB.
 
 ### トポロジテンプレート {#topology-templates}
 
--   [<a href="https://github.com/pingcap/docs/blob/master/config-templates/geo-redundancy-deployment.yaml">地理的に分散されたトポロジ テンプレート</a>](https://github.com/pingcap/docs/blob/master/config-templates/geo-redundancy-deployment.yaml)
+-   [地理的に分散されたトポロジ テンプレート](https://github.com/pingcap/docs/blob/master/config-templates/geo-redundancy-deployment.yaml)
 
-上記の TiDB クラスター トポロジー ファイルの構成項目の詳細な説明については、 [<a href="/tiup/tiup-cluster-topology-reference.md">TiUPを使用して TiDB を展開するためのトポロジコンフィグレーションファイル</a>](/tiup/tiup-cluster-topology-reference.md)を参照してください。
+上記の TiDB クラスター トポロジー ファイルの構成項目の詳細な説明については、 [TiUPを使用して TiDB を展開するためのトポロジコンフィグレーションファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
 
 ### 主要パラメータ {#key-parameters}
 
@@ -85,9 +85,9 @@ summary: Learn the geo-distributed deployment topology of TiDB.
 
     > **ノート：**
     >
-    > TiDB 5.2 以降、 `label-property`構成はデフォルトではサポートされていません。レプリカ ポリシーを設定するには、 [<a href="/configure-placement-rules.md">配置ルール</a>](/configure-placement-rules.md)を使用します。
+    > TiDB 5.2 以降、 `label-property`構成はデフォルトではサポートされていません。レプリカ ポリシーを設定するには、 [配置ルール](/configure-placement-rules.md)を使用します。
 
-ラベルとRaftグループ レプリカの数の詳細については、 [<a href="/schedule-replicas-by-topology-labels.md">トポロジーラベルごとにレプリカをスケジュールする</a>](/schedule-replicas-by-topology-labels.md)を参照してください。
+ラベルとRaftグループ レプリカの数の詳細については、 [トポロジーラベルごとにレプリカをスケジュールする](/schedule-replicas-by-topology-labels.md)を参照してください。
 
 > **ノート：**
 >

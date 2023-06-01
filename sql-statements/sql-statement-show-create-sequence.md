@@ -50,5 +50,5 @@ SHOW CREATE SEQUENCE seq;
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-create-sequence.md">シーケンスの作成</a>](/sql-statements/sql-statement-create-sequence.md)
--   [<a href="/sql-statements/sql-statement-drop-sequence.md">ドロップシーケンス</a>](/sql-statements/sql-statement-drop-sequence.md)
+-   [シーケンスの作成](/sql-statements/sql-statement-create-sequence.md)
+-   [ドロップシーケンス](/sql-statements/sql-statement-drop-sequence.md)

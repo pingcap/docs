@@ -9,7 +9,7 @@ summary: Learn how to use restore resource.
 
 ## 前提条件 {#prerequisites}
 
--   [<a href="/tidb-cloud/terraform-get-tidbcloud-provider.md">TiDB Cloud Terraform プロバイダーを入手する</a>](/tidb-cloud/terraform-get-tidbcloud-provider.md) 。
+-   [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) 。
 -   バックアップおよび復元機能は、Serverless Tierクラスターでは使用できません。復元リソースを使用するには、Dedicated Tierクラスターを作成していることを確認してください。
 
 ## 復元リソースを使用して復元タスクを作成する {#create-a-restore-task-with-the-restore-resource}
@@ -179,7 +179,7 @@ summary: Learn how to use restore resource.
 
 6.  クラスターのステータスが`AVAILABLE`に変化した後、復元タスクは`RUNNING`なり、最終的に`SUCCESS`になります。
 
-復元されたクラスターは Terraform によって管理されないことに注意してください。復元されたクラスターは[<a href="/tidb-cloud/terraform-use-cluster-resource.md#import-a-cluster">それをインポートする</a>](/tidb-cloud/terraform-use-cluster-resource.md#import-a-cluster)で管理できます。
+復元されたクラスターは Terraform によって管理されないことに注意してください。復元されたクラスターは[それをインポートする](/tidb-cloud/terraform-use-cluster-resource.md#import-a-cluster)で管理できます。
 
 ## 復元タスクを削除する {#delete-a-restore-task}
 

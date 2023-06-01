@@ -19,7 +19,7 @@ summary: Learn how to enable TLS for DM connections.
 
     自己署名証明書を生成するには、 `openssl` 、 `cfssl` 、および`easy-rsa`などの`openssl`に基づくその他のツールを使用できます。
 
-    `openssl`を選択すると[<a href="/dm/dm-generate-self-signed-certificates.md">自己署名証明書の生成</a>](/dm/dm-generate-self-signed-certificates.md)を参照できます。
+    `openssl`を選択すると[自己署名証明書の生成](/dm/dm-generate-self-signed-certificates.md)を参照できます。
 
 2.  証明書を構成します。
 
@@ -91,7 +91,7 @@ summary: Learn how to enable TLS for DM connections.
 
 ### 上流データベースの暗号化されたデータ送信を有効にする {#enable-encrypted-data-transmission-for-upstream-database}
 
-1.  アップストリーム データベースを構成し、暗号化サポートを有効にし、サーバー証明書を設定します。詳しい操作方法については[<a href="https://dev.mysql.com/doc/refman/5.7/en/using-encrypted-connections.html">暗号化された接続の使用</a>](https://dev.mysql.com/doc/refman/5.7/en/using-encrypted-connections.html)を参照してください。
+1.  アップストリーム データベースを構成し、暗号化サポートを有効にし、サーバー証明書を設定します。詳しい操作方法については[暗号化された接続の使用](https://dev.mysql.com/doc/refman/5.7/en/using-encrypted-connections.html)を参照してください。
 
 2.  ソース構成ファイルに MySQL クライアント証明書を設定します。
 
@@ -109,7 +109,7 @@ summary: Learn how to enable TLS for DM connections.
 
 ### ダウンストリーム TiDB の暗号化データ送信を有効にする {#enable-encrypted-data-transmission-for-downstream-tidb}
 
-1.  暗号化された接続を使用するようにダウンストリーム TiDB を構成します。詳しい操作については[<a href="/enable-tls-between-clients-and-servers.md#configure-tidb-server-to-use-secure-connections">安全な接続を使用するように TiDBサーバーを構成する</a>](/enable-tls-between-clients-and-servers.md#configure-tidb-server-to-use-secure-connections)を参照してください。
+1.  暗号化された接続を使用するようにダウンストリーム TiDB を構成します。詳しい操作については[安全な接続を使用するように TiDBサーバーを構成する](/enable-tls-between-clients-and-servers.md#configure-tidb-server-to-use-secure-connections)を参照してください。
 
 2.  タスク構成ファイルに TiDB クライアント証明書を設定します。
 

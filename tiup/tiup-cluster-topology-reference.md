@@ -4,7 +4,7 @@ title: Topology Configuration File for TiDB Deployment Using TiUP
 
 # TiUPを使用した TiDB デプロイメント用のトポロジーコンフィグレーションファイル {#topology-configuration-file-for-tidb-deployment-using-tiup}
 
-TiUPを使用して TiDB をデプロイまたはスケーリングするには、クラスター トポロジを記述するトポロジ ファイル ( [<a href="https://github.com/pingcap/tiup/blob/master/embed/examples/cluster/topology.example.yaml">サンプル</a>](https://github.com/pingcap/tiup/blob/master/embed/examples/cluster/topology.example.yaml) ) を提供する必要があります。
+TiUPを使用して TiDB をデプロイまたはスケーリングするには、クラスター トポロジを記述するトポロジ ファイル ( [サンプル](https://github.com/pingcap/tiup/blob/master/embed/examples/cluster/topology.example.yaml) ) を提供する必要があります。
 
 同様に、クラスター トポロジを変更するには、トポロジ ファイルを変更する必要があります。違いは、クラスターのデプロイ後は、トポロジー ファイル内のフィールドの一部のみを変更できることです。このドキュメントでは、トポロジ ファイルの各セクションと各セクションの各フィールドを紹介します。
 
@@ -12,21 +12,21 @@ TiUPを使用して TiDB をデプロイまたはスケーリングするには�
 
 TiUPを使用した TiDB 導入用のトポロジ構成ファイルには、次のセクションが含まれる場合があります。
 
--   [<a href="#global">グローバル</a>](#global) : クラスターのグローバル構成。一部の構成項目はデフォルト値を使用しており、インスタンスごとに個別に構成できます。
--   [<a href="#monitored">監視されている</a>](#monitored) : 監視サービス、つまり blackbox_exporter と`node_exporter`のコンフィグレーション。各マシンには`node_exporter`と`blackbox_exporter`がデプロイされます。
--   [<a href="#server_configs">サーバー構成</a>](#server_configs) : コンポーネントのグローバル構成。各コンポーネントを個別に構成できます。インスタンスに同じ名前の構成アイテムがある場合、インスタンスの構成アイテムが有効になります。
--   [<a href="#pd_servers">pd_servers</a>](#pd_servers) : PD インスタンスの構成。この構成では、PDコンポーネントがデプロイされるマシンを指定します。
--   [<a href="#tidb_servers">tidb_servers</a>](#tidb_servers) : TiDB インスタンスの構成。この構成では、TiDBコンポーネントがデプロイされるマシンを指定します。
--   [<a href="#tikv_servers">tikv_servers</a>](#tikv_servers) : TiKV インスタンスの構成。この構成では、TiKVコンポーネントがデプロイされるマシンを指定します。
--   [<a href="#tiflash_servers">tflash_servers</a>](#tiflash_servers) : TiFlashインスタンスの構成。この構成では、 TiFlashコンポーネントが展開されるマシンを指定します。
--   [<a href="#pump_servers">ポンプサーバー</a>](#pump_servers) :Pumpインスタンスの構成。この構成では、Pumpコンポーネントがデプロイされるマシンを指定します。
--   [<a href="#drainer_servers">ドレイナーサーバー</a>](#drainer_servers) : Drainerインスタンスの構成。この構成では、 Drainerコンポーネントがデプロイされるマシンを指定します。
--   [<a href="#cdc_servers">cdc_servers</a>](#cdc_servers) : TiCDC インスタンスの構成。この構成では、TiCDCコンポーネントがデプロイされるマシンを指定します。
--   [<a href="#tispark_masters">tispark_masters</a>](#tispark_masters) : TiSpark マスター インスタンスの構成。この構成では、TiSpark マスターコンポーネントがデプロイされるマシンを指定します。 TiSpark マスターのノードは 1 つだけデプロイできます。
--   [<a href="#tispark_workers">tispark_workers</a>](#tispark_workers) : TiSpark ワーカー インスタンスの構成。この構成では、TiSpark ワーカーコンポーネントがデプロイされるマシンを指定します。
--   [<a href="#monitoring_servers">監視サーバー</a>](#monitoring_servers) : Prometheus と NGMonitoring がデプロイされるマシンを指定します。 TiUP は複数の Prometheus インスタンスのデプロイをサポートしていますが、最初のインスタンスのみが使用されます。
--   [<a href="#grafana_servers">グラファナサーバー</a>](#grafana_servers) : Grafana インスタンスの構成。この構成では、Grafana がデプロイされるマシンを指定します。
--   [<a href="#alertmanager_servers">アラートマネージャー_サーバー</a>](#alertmanager_servers) : Alertmanager インスタンスの構成。この構成では、Alertmanager が展開されるマシンを指定します。
+-   [グローバル](#global) : クラスターのグローバル構成。一部の構成項目はデフォルト値を使用しており、インスタンスごとに個別に構成できます。
+-   [監視されている](#monitored) : 監視サービス、つまり blackbox_exporter と`node_exporter`のコンフィグレーション。各マシンには`node_exporter`と`blackbox_exporter`がデプロイされます。
+-   [サーバー構成](#server_configs) : コンポーネントのグローバル構成。各コンポーネントを個別に構成できます。インスタンスに同じ名前の構成アイテムがある場合、インスタンスの構成アイテムが有効になります。
+-   [pd_servers](#pd_servers) : PD インスタンスの構成。この構成では、PDコンポーネントがデプロイされるマシンを指定します。
+-   [tidb_servers](#tidb_servers) : TiDB インスタンスの構成。この構成では、TiDBコンポーネントがデプロイされるマシンを指定します。
+-   [tikv_servers](#tikv_servers) : TiKV インスタンスの構成。この構成では、TiKVコンポーネントがデプロイされるマシンを指定します。
+-   [tflash_servers](#tiflash_servers) : TiFlashインスタンスの構成。この構成では、 TiFlashコンポーネントが展開されるマシンを指定します。
+-   [ポンプサーバー](#pump_servers) :Pumpインスタンスの構成。この構成では、Pumpコンポーネントがデプロイされるマシンを指定します。
+-   [ドレイナーサーバー](#drainer_servers) : Drainerインスタンスの構成。この構成では、 Drainerコンポーネントがデプロイされるマシンを指定します。
+-   [cdc_servers](#cdc_servers) : TiCDC インスタンスの構成。この構成では、TiCDCコンポーネントがデプロイされるマシンを指定します。
+-   [tispark_masters](#tispark_masters) : TiSpark マスター インスタンスの構成。この構成では、TiSpark マスターコンポーネントがデプロイされるマシンを指定します。 TiSpark マスターのノードは 1 つだけデプロイできます。
+-   [tispark_workers](#tispark_workers) : TiSpark ワーカー インスタンスの構成。この構成では、TiSpark ワーカーコンポーネントがデプロイされるマシンを指定します。
+-   [監視サーバー](#monitoring_servers) : Prometheus と NGMonitoring がデプロイされるマシンを指定します。 TiUP は複数の Prometheus インスタンスのデプロイをサポートしていますが、最初のインスタンスのみが使用されます。
+-   [グラファナサーバー](#grafana_servers) : Grafana インスタンスの構成。この構成では、Grafana がデプロイされるマシンを指定します。
+-   [アラートマネージャー_サーバー](#alertmanager_servers) : Alertmanager インスタンスの構成。この構成では、Alertmanager が展開されるマシンを指定します。
 
 ### <code>global</code> {#code-global-code}
 
@@ -95,7 +95,7 @@ global:
 
 ### <code>monitored</code> {#code-monitored-code}
 
-`monitored`は、ターゲット マシン ( [<a href="https://github.com/prometheus/node_exporter">`node_exporter`</a>](https://github.com/prometheus/node_exporter)および[<a href="https://github.com/prometheus/blackbox_exporter">`blackbox_exporter`</a>](https://github.com/prometheus/blackbox_exporter)で監視サービスを構成するために使用されます。次のフィールドが含まれます。
+`monitored`は、ターゲット マシン ( [`blackbox_exporter`](https://github.com/prometheus/blackbox_exporter)で監視サービスを構成するために使用されます。次のフィールドが含まれます。
 
 -   `node_exporter_port` : `node_exporter`のサービスポート。デフォルト値は`9100`です。
 
@@ -121,21 +121,21 @@ monitored:
 
 `server_configs`は、サービスを構成し、各コンポーネントの構成ファイルを生成するために使用されます。 `global`セクションと同様に、このセクションの構成は、インスタンス内の同じ名前の構成によって上書きできます。 `server_configs`は主に次のフィールドが含まれます。
 
--   `tidb` : TiDB サービス関連の構成。完全な構成については、 [<a href="/tidb-configuration-file.md">TiDB 設定ファイル</a>](/tidb-configuration-file.md)を参照してください。
+-   `tidb` : TiDB サービス関連の構成。完全な構成については、 [TiDB 設定ファイル](/tidb-configuration-file.md)を参照してください。
 
--   `tikv` : TiKV サービス関連の構成。完全な構成については、 [<a href="/tikv-configuration-file.md">TiKV設定ファイル</a>](/tikv-configuration-file.md)を参照してください。
+-   `tikv` : TiKV サービス関連の構成。完全な構成については、 [TiKV設定ファイル](/tikv-configuration-file.md)を参照してください。
 
--   `pd` : PD サービス関連の設定。完全な構成については、 [<a href="/pd-configuration-file.md">PD設定ファイル</a>](/pd-configuration-file.md)を参照してください。
+-   `pd` : PD サービス関連の設定。完全な構成については、 [PD設定ファイル](/pd-configuration-file.md)を参照してください。
 
--   `tiflash` : TiFlashサービス関連の設定。完全な構成については、 [<a href="/tiflash/tiflash-configuration.md">TiFlash設定ファイル</a>](/tiflash/tiflash-configuration.md)を参照してください。
+-   `tiflash` : TiFlashサービス関連の設定。完全な構成については、 [TiFlash設定ファイル](/tiflash/tiflash-configuration.md)を参照してください。
 
 -   `tiflash_learner` : 各TiFlashノードには特別な組み込み TiKV があります。この構成アイテムは、この特別な TiKV を構成するために使用されます。通常、この構成項目の内容を変更することはお勧めできません。
 
--   `pump` :Pumpサービス関連の構成。完全な構成については、 [<a href="/tidb-binlog/tidb-binlog-configuration-file.md#pump">TiDBBinlog構成ファイル</a>](/tidb-binlog/tidb-binlog-configuration-file.md#pump)を参照してください。
+-   `pump` :Pumpサービス関連の構成。完全な構成については、 [TiDBBinlog構成ファイル](/tidb-binlog/tidb-binlog-configuration-file.md#pump)を参照してください。
 
--   `drainer` :Drainerサービス関連の設定。完全な構成については、 [<a href="/tidb-binlog/tidb-binlog-configuration-file.md#drainer">TiDBBinlog構成ファイル</a>](/tidb-binlog/tidb-binlog-configuration-file.md#drainer)を参照してください。
+-   `drainer` :Drainerサービス関連の設定。完全な構成については、 [TiDBBinlog構成ファイル](/tidb-binlog/tidb-binlog-configuration-file.md#drainer)を参照してください。
 
--   `cdc` : TiCDC サービス関連の構成。完全な構成については、 [<a href="/ticdc/deploy-ticdc.md">TiCDCのデプロイ</a>](/ticdc/deploy-ticdc.md)を参照してください。
+-   `cdc` : TiCDC サービス関連の構成。完全な構成については、 [TiCDCのデプロイ](/ticdc/deploy-ticdc.md)を参照してください。
 
 `server_configs`構成例は次のとおりです。
 
@@ -175,7 +175,7 @@ server_configs:
 
 -   `log_dir` : ログディレクトリを指定します。指定しない場合、または相対ディレクトリとして指定した場合は、 `global`で設定した`log_dir`ディレクトリに従ってログが生成されます。
 
--   `numa_node` : NUMA ポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲット マシンに[<a href="https://linux.die.net/man/8/numactl">ヌマクトル</a>](https://linux.die.net/man/8/numactl)がインストールされていることを確認する必要があります。このフィールドが指定されている場合、 cpubind および membind ポリシーは[<a href="https://linux.die.net/man/8/numactl">ヌマクトル</a>](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などの NUMA ノードの ID です。
+-   `numa_node` : NUMA ポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲット マシンに[ヌマクトル](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などの NUMA ノードの ID です。
 
 -   `config` : このフィールドの設定ルールは、 `server_configs`の`pd`の設定ルールと同じです。このフィールドが設定されている場合、フィールドの内容は`server_configs`の`pd`内容とマージされます (2 つのフィールドが重複する場合、このフィールドの内容が有効になります)。次に、構成ファイルが生成され、 `host`で指定されたマシンに送信されます。
 
@@ -229,7 +229,7 @@ pd_servers:
 
 -   `log_dir` : ログディレクトリを指定します。指定しない場合、または相対ディレクトリとして指定した場合は、 `global`で設定した`log_dir`ディレクトリに従ってログが生成されます。
 
--   `numa_node` : NUMA ポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲット マシンに[<a href="https://linux.die.net/man/8/numactl">ヌマクトル</a>](https://linux.die.net/man/8/numactl)がインストールされていることを確認する必要があります。このフィールドが指定されている場合、 cpubind および membind ポリシーは[<a href="https://linux.die.net/man/8/numactl">ヌマクトル</a>](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などの NUMA ノードの ID です。
+-   `numa_node` : NUMA ポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲット マシンに[ヌマクトル](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などの NUMA ノードの ID です。
 
 -   `config` : このフィールドの設定ルールは、 `server_configs`の`tidb`の設定ルールと同じです。このフィールドが設定されている場合、フィールドの内容は`server_configs`の`tidb`内容とマージされます (2 つのフィールドが重複する場合、このフィールドの内容が有効になります)。次に、構成ファイルが生成され、 `host`で指定されたマシンに送信されます。
 
@@ -281,7 +281,7 @@ tidb_servers:
 
 -   `log_dir` : ログディレクトリを指定します。指定しない場合、または相対ディレクトリとして指定した場合は、 `global`で設定した`log_dir`ディレクトリに従ってログが生成されます。
 
--   `numa_node` : NUMA ポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲット マシンに[<a href="https://linux.die.net/man/8/numactl">ヌマクトル</a>](https://linux.die.net/man/8/numactl)がインストールされていることを確認する必要があります。このフィールドが指定されている場合、 cpubind および membind ポリシーは[<a href="https://linux.die.net/man/8/numactl">ヌマクトル</a>](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などの NUMA ノードの ID です。
+-   `numa_node` : NUMA ポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲット マシンに[ヌマクトル](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などの NUMA ノードの ID です。
 
 -   `config` : このフィールドの設定ルールは、 `server_configs`の`tikv`の設定ルールと同じです。このフィールドが設定されている場合、フィールドの内容は`server_configs`の`tikv`内容とマージされます (2 つのフィールドが重複する場合、このフィールドの内容が有効になります)。次に、構成ファイルが生成され、 `host`で指定されたマシンに送信されます。
 
@@ -341,7 +341,7 @@ tikv_servers:
 
 -   `tmp_path` : TiFlash一時ファイルのstorageパス。デフォルト値は [ `path`または`storage.latest.dir`の最初のディレクトリ] + &quot;/tmp&quot; です。
 
--   `numa_node` : NUMA ポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲット マシンに[<a href="https://linux.die.net/man/8/numactl">ヌマクトル</a>](https://linux.die.net/man/8/numactl)がインストールされていることを確認する必要があります。このフィールドが指定されている場合、 cpubind および membind ポリシーは[<a href="https://linux.die.net/man/8/numactl">ヌマクトル</a>](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などの NUMA ノードの ID です。
+-   `numa_node` : NUMA ポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲット マシンに[ヌマクトル](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などの NUMA ノードの ID です。
 
 -   `config` : このフィールドの設定ルールは、 `server_configs`の`tiflash`の設定ルールと同じです。このフィールドが設定されている場合、フィールドの内容は`server_configs`の`tiflash`内容とマージされます (2 つのフィールドが重複する場合、このフィールドの内容が有効になります)。次に、構成ファイルが生成され、 `host`で指定されたマシンに送信されます。
 
@@ -392,7 +392,7 @@ tiflash_servers:
 
 -   `log_dir` : ログディレクトリを指定します。指定しない場合、または相対ディレクトリとして指定した場合は、 `global`で設定した`log_dir`ディレクトリに従ってログが生成されます。
 
--   `numa_node` : NUMA ポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲット マシンに[<a href="https://linux.die.net/man/8/numactl">ヌマクトル</a>](https://linux.die.net/man/8/numactl)がインストールされていることを確認する必要があります。このフィールドが指定されている場合、 cpubind および membind ポリシーは[<a href="https://linux.die.net/man/8/numactl">ヌマクトル</a>](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などの NUMA ノードの ID です。
+-   `numa_node` : NUMA ポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲット マシンに[ヌマクトル](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などの NUMA ノードの ID です。
 
 -   `config` : このフィールドの設定ルールは、 `server_configs`の`pump`の設定ルールと同じです。このフィールドが設定されている場合、フィールドの内容は`server_configs`の`pump`内容とマージされます (2 つのフィールドが重複する場合、このフィールドの内容が有効になります)。次に、構成ファイルが生成され、 `host`で指定されたマシンに送信されます。
 
@@ -440,7 +440,7 @@ pump_servers:
 
 -   `commit_ts` (非推奨): Drainer が起動すると、チェックポイントが読み取られます。 Drainer がチェックポイントを取得しない場合、Drainer はこのフィールドを最初の起動時のレプリケーション時点として使用します。このフィールドのデフォルトは`-1`です (Drainer は常に PD から最新のタイムスタンプを commit_ts として取得します)。
 
--   `numa_node` : NUMA ポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲット マシンに[<a href="https://linux.die.net/man/8/numactl">ヌマクトル</a>](https://linux.die.net/man/8/numactl)がインストールされていることを確認する必要があります。このフィールドが指定されている場合、 cpubind および membind ポリシーは[<a href="https://linux.die.net/man/8/numactl">ヌマクトル</a>](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などの NUMA ノードの ID です。
+-   `numa_node` : NUMA ポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲット マシンに[ヌマクトル](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などの NUMA ノードの ID です。
 
 -   `config` : このフィールドの設定ルールは、 `server_configs`の`drainer`の設定ルールと同じです。このフィールドが設定されている場合、フィールドの内容は`server_configs`の`drainer`内容とマージされます (2 つのフィールドが重複する場合、このフィールドの内容が有効になります)。次に、構成ファイルが生成され、 `host`で指定されたマシンに送信されます。
 
@@ -501,7 +501,7 @@ drainer_servers:
 
 -   `tz` : TiCDC サービスが使用するタイムゾーン。 TiCDC は、タイムスタンプなどの時間データ型を内部で変換するとき、およびデータをダウンストリームにレプリケートするときに、このタイム ゾーンを使用します。デフォルト値は、プロセスが実行されるローカル タイム ゾーンです。
 
--   `numa_node` : NUMA ポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲット マシンに[<a href="https://linux.die.net/man/8/numactl">ヌマクトル</a>](https://linux.die.net/man/8/numactl)がインストールされていることを確認する必要があります。このフィールドが指定されている場合、 cpubind および membind ポリシーは[<a href="https://linux.die.net/man/8/numactl">ヌマクトル</a>](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などの NUMA ノードの ID です。
+-   `numa_node` : NUMA ポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲット マシンに[ヌマクトル](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などの NUMA ノードの ID です。
 
 -   `config` : フィールドの内容は`server_configs`の`cdc`内容とマージされます (2 つのフィールドが重複する場合、このフィールドの内容が有効になります)。次に、構成ファイルが生成され、 `host`で指定したマシンに送信されます。
 
@@ -639,7 +639,7 @@ tispark_workers:
 
 -   `host` : 監視サービスが展開されるマシンを指定します。フィールド値は IP アドレスであり、必須です。
 
--   `ng_port` : NgMonitoring がリッスンするポートを指定します。 TiUP v1.7.0 で導入されたこのフィールドは[<a href="/dashboard/dashboard-profiling.md">継続的なプロファイリング</a>](/dashboard/dashboard-profiling.md)と[<a href="/dashboard/top-sql.md">Top SQL</a>](/dashboard/top-sql.md)をサポートします。デフォルト値は`12020`です。
+-   `ng_port` : NgMonitoring がリッスンするポートを指定します。 TiUP v1.7.0 で導入されたこのフィールドは[Top SQL](/dashboard/top-sql.md)をサポートします。デフォルト値は`12020`です。
 
 -   `ssh_port` : 操作のためにターゲット マシンに接続する SSH ポートを指定します。指定しない場合は、 `global`セクションのうち`ssh_port`使用されます。
 
@@ -651,15 +651,15 @@ tispark_workers:
 
 -   `log_dir` : ログディレクトリを指定します。指定しない場合、または相対ディレクトリとして指定した場合は、 `global`で設定した`log_dir`ディレクトリに従ってログが生成されます。
 
--   `numa_node` : NUMA ポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲット マシンに[<a href="https://linux.die.net/man/8/numactl">ヌマクトル</a>](https://linux.die.net/man/8/numactl)がインストールされていることを確認する必要があります。このフィールドが指定されている場合、 cpubind および membind ポリシーは[<a href="https://linux.die.net/man/8/numactl">ヌマクトル</a>](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などの NUMA ノードの ID です。
+-   `numa_node` : NUMA ポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲット マシンに[ヌマクトル](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などの NUMA ノードの ID です。
 
 -   `storage_retention` : Prometheus 監視データの保持期間。デフォルト値は`"30d"`です。
 
 -   `rule_dir` : 完全な`*.rules.yml`のファイルを含むローカル ディレクトリを指定します。これらのファイルは、Prometheus のルールとして、クラスター構成の初期化フェーズ中にターゲット マシンに転送されます。
 
 -   `remote_config` : Prometheus データのリモートへの書き込み、またはリモートからのデータの読み取りをサポートします。このフィールドには 2 つの構成があります。
-    -   `remote_write` : Prometheus のドキュメント[<a href="https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_write">`&#x3C;remote_write>`</a>](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_write)を参照してください。
-    -   `remote_read` : Prometheus のドキュメント[<a href="https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_read">`&#x3C;remote_read>`</a>](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_read)を参照してください。
+    -   `remote_write` : Prometheus のドキュメント[`&#x3C;remote_write>`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_write)を参照してください。
+    -   `remote_read` : Prometheus のドキュメント[`&#x3C;remote_read>`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_read)を参照してください。
 
 -   `external_alertmanagers` : `external_alertmanagers`フィールドが設定されている場合、Prometheus はクラスターの外部にある Alertmanager に設定動作を警告します。このフィールドは配列であり、その各要素は外部 Alertmanager であり、 `host`フィールドと`web_port`フィールドで構成されます。
 
@@ -767,7 +767,7 @@ grafana_servers:
 
 -   `log_dir` : ログディレクトリを指定します。指定しない場合、または相対ディレクトリとして指定した場合は、 `global`で設定した`log_dir`ディレクトリに従ってログが生成されます。
 
--   `numa_node` : NUMA ポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲット マシンに[<a href="https://linux.die.net/man/8/numactl">ヌマクトル</a>](https://linux.die.net/man/8/numactl)がインストールされていることを確認する必要があります。このフィールドが指定されている場合、 cpubind および membind ポリシーは[<a href="https://linux.die.net/man/8/numactl">ヌマクトル</a>](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などの NUMA ノードの ID です。
+-   `numa_node` : NUMA ポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲット マシンに[ヌマクトル](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などの NUMA ノードの ID です。
 
 -   `config_file` : クラスタ構成の初期化フェーズ中にターゲット マシンに転送されるローカル ファイルを Alertmanager の構成として指定します。
 

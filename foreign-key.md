@@ -166,7 +166,7 @@ Create Table: CREATE TABLE `child` (
 
 ## 外部キー制約チェック {#foreign-key-constraint-check}
 
-TiDB は、システム変数[<a href="/system-variables.md#foreign_key_checks">`foreign_key_checks`</a>](/system-variables.md#foreign_key_checks)によって制御される外部キー制約チェックをサポートしています。デフォルトでは、この変数は`ON`に設定されており、外部キー制約チェックが有効であることを意味します。この変数には`GLOBAL`と`SESSION` 2 つのスコープがあります。この変数を有効にしておくと、外部キー参照関係の整合性を確保できます。
+TiDB は、システム変数[`foreign_key_checks`](/system-variables.md#foreign_key_checks)によって制御される外部キー制約チェックをサポートしています。デフォルトでは、この変数は`ON`に設定されており、外部キー制約チェックが有効であることを意味します。この変数には`GLOBAL`と`SESSION` 2 つのスコープがあります。この変数を有効にしておくと、外部キー参照関係の整合性を確保できます。
 
 外部キー制約チェックを無効にした場合の影響は次のとおりです。
 
@@ -185,11 +185,11 @@ TiDB は、システム変数[<a href="/system-variables.md#foreign_key_checks">
 
 `INSERT`または`UPDATE`が子テーブルの場合、外部キー制約は、対応する外部キー値が親テーブルに存在するかどうかをチェックし、親テーブルの行をロックして、外部キー制約に違反する他の操作によって外部キー値が削除されるのを防ぎます。ロック動作は、親テーブル内の外部キー値が存在する行に対して`SELECT FOR UPDATE`操作を実行することと同じです。
 
-TiDB は現在`LOCK IN SHARE MODE`をサポートしていないため、子テーブルが多数の同時書き込みを受け入れ、参照される外部キー値のほとんどが同じである場合、深刻なロックの競合が発生する可能性があります。大量の子テーブルデータを書き込む場合は、 [<a href="/system-variables.md#foreign_key_checks">`foreign_key_checks`</a>](/system-variables.md#foreign_key_checks)無効にすることをお勧めします。
+TiDB は現在`LOCK IN SHARE MODE`をサポートしていないため、子テーブルが多数の同時書き込みを受け入れ、参照される外部キー値のほとんどが同じである場合、深刻なロックの競合が発生する可能性があります。大量の子テーブルデータを書き込む場合は、 [`foreign_key_checks`](/system-variables.md#foreign_key_checks)無効にすることをお勧めします。
 
 ## 外部キーの定義とメタデータ {#definition-and-metadata-of-foreign-keys}
 
-外部キー制約の定義を表示するには、 [<a href="/sql-statements/sql-statement-show-create-table.md">`SHOW CREATE TABLE`</a>](/sql-statements/sql-statement-show-create-table.md)ステートメントを実行します。
+外部キー制約の定義を表示するには、 [`SHOW CREATE TABLE`](/sql-statements/sql-statement-show-create-table.md)ステートメントを実行します。
 
 ```sql
 mysql> SHOW CREATE TABLE child\G
@@ -205,9 +205,9 @@ Create Table: CREATE TABLE `child` (
 
 次のシステム テーブルのいずれかを使用して、外部キーに関する情報を取得することもできます。
 
--   [<a href="/information-schema/information-schema-key-column-usage.md">`INFORMATION_SCHEMA.KEY_COLUMN_USAGE`</a>](/information-schema/information-schema-key-column-usage.md)
--   [<a href="/information-schema/information-schema-table-constraints.md">`INFORMATION_SCHEMA.TABLE_CONSTRAINTS`</a>](/information-schema/information-schema-table-constraints.md)
--   [<a href="/information-schema/information-schema-referential-constraints.md">`INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS`</a>](/information-schema/information-schema-referential-constraints.md)
+-   [`INFORMATION_SCHEMA.KEY_COLUMN_USAGE`](/information-schema/information-schema-key-column-usage.md)
+-   [`INFORMATION_SCHEMA.TABLE_CONSTRAINTS`](/information-schema/information-schema-table-constraints.md)
+-   [`INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS`](/information-schema/information-schema-referential-constraints.md)
 
 以下に例を示します。
 
@@ -309,19 +309,19 @@ Create Table | CREATE TABLE `child` (
 
 <CustomContent platform="tidb">
 
--   [<a href="/tidb-binlog/tidb-binlog-overview.md">TiDBBinlog</a>](/tidb-binlog/tidb-binlog-overview.md)は外部キーをサポートしません。
--   [<a href="/dm/dm-overview.md">DM</a>](/dm/dm-overview.md)は外部キーをサポートしません。 DM v6.6.0 では、データを TiDB にレプリケートするときに、ダウンストリーム TiDB の[<a href="/system-variables.md#foreign_key_checks">`foreign_key_checks`</a>](/system-variables.md#foreign_key_checks)が無効になります。したがって、外部キーによって引き起こされるカスケード操作は上流から下流にレプリケートされず、データの不整合が発生する可能性があります。この動作は、以前の DM バージョンと一致しています。
--   [<a href="/ticdc/ticdc-overview.md">TiCDC</a>](/ticdc/ticdc-overview.md) v6.6.0 は外部キーと互換性があります。 TiCDC の以前のバージョンでは、外部キーを含むテーブルを複製するときにエラーが報告される場合がありました。 v6.6.0 より前の TiCDC バージョンを使用する場合は、ダウンストリーム TiDB クラスターの`foreign_key_checks`無効にすることをお勧めします。
--   [<a href="/br/backup-and-restore-overview.md">BR</a>](/br/backup-and-restore-overview.md) v6.6.0 は外部キーと互換性があります。 BRの以前のバージョンでは、外部キーを含むテーブルを v6.6.0 以降のクラスターに復元するときにエラーが報告される場合があります。 v6.6.0 より前のBRを使用する場合は、クラスターを復元する前にダウンストリーム TiDB クラスターの`foreign_key_checks`無効にすることをお勧めします。
--   [<a href="/tidb-lightning/tidb-lightning-overview.md">TiDB Lightning</a>](/tidb-lightning/tidb-lightning-overview.md)を使用する場合は、データをインポートする前にダウンストリーム TiDB クラスターの`foreign_key_checks`無効にすることをお勧めします。
+-   [TiDBBinlog](/tidb-binlog/tidb-binlog-overview.md)は外部キーをサポートしません。
+-   [`foreign_key_checks`](/system-variables.md#foreign_key_checks)が無効になります。したがって、外部キーによって引き起こされるカスケード操作は上流から下流にレプリケートされず、データの不整合が発生する可能性があります。この動作は、以前の DM バージョンと一致しています。
+-   [TiCDC](/ticdc/ticdc-overview.md) v6.6.0 は外部キーと互換性があります。 TiCDC の以前のバージョンでは、外部キーを含むテーブルを複製するときにエラーが報告される場合がありました。 v6.6.0 より前の TiCDC バージョンを使用する場合は、ダウンストリーム TiDB クラスターの`foreign_key_checks`無効にすることをお勧めします。
+-   [BR](/br/backup-and-restore-overview.md) v6.6.0 は外部キーと互換性があります。 BRの以前のバージョンでは、外部キーを含むテーブルを v6.6.0 以降のクラスターに復元するときにエラーが報告される場合があります。 v6.6.0 より前のBRを使用する場合は、クラスターを復元する前にダウンストリーム TiDB クラスターの`foreign_key_checks`無効にすることをお勧めします。
+-   [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用する場合は、データをインポートする前にダウンストリーム TiDB クラスターの`foreign_key_checks`無効にすることをお勧めします。
 
 </CustomContent>
 
--   [<a href="/dumpling-overview.md">Dumpling</a>](/dumpling-overview.md)は外部キーと互換性があります。
+-   [Dumpling](/dumpling-overview.md)は外部キーと互換性があります。
 
 <CustomContent platform="tidb">
 
--   アップストリーム データベースとダウンストリーム データベースの間でデータを比較するために[<a href="/sync-diff-inspector/sync-diff-inspector-overview.md">同期差分インスペクター</a>](/sync-diff-inspector/sync-diff-inspector-overview.md)を使用する場合、データベースのバージョンが異なり、 [<a href="#compatibility-between-tidb-versions">ダウンストリーム TiDB 内の無効な外部キー</a>](#compatibility-between-tidb-versions)ある場合、 sync-diff-inspector はテーブル スキーマの不一致エラーを報告する可能性があります。これは、TiDB v6.6.0 が無効な外部キーに対して`/* FOREIGN KEY INVALID */`コメントを追加しているためです。
+-   アップストリーム データベースとダウンストリーム データベースの間でデータを比較するために[ダウンストリーム TiDB 内の無効な外部キー](#compatibility-between-tidb-versions)ある場合、 sync-diff-inspector はテーブル スキーマの不一致エラーを報告する可能性があります。これは、TiDB v6.6.0 が無効な外部キーに対して`/* FOREIGN KEY INVALID */`コメントを追加しているためです。
 
 </CustomContent>
 

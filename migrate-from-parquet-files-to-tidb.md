@@ -7,12 +7,12 @@ summary: Learn how to migrate data from parquet files to TiDB.
 
 このドキュメントでは、Apache Hive から寄木細工ファイルを生成する方法と、 TiDB Lightningを使用して寄木細工ファイルから TiDB にデータを移行する方法について説明します。
 
-Amazon Auroraから寄木細工ファイルをエクスポートする場合は、 [<a href="/migrate-aurora-to-tidb.md">Amazon Auroraから TiDB にデータを移行する</a>](/migrate-aurora-to-tidb.md)を参照してください。
+Amazon Auroraから寄木細工ファイルをエクスポートする場合は、 [Amazon Auroraから TiDB にデータを移行する](/migrate-aurora-to-tidb.md)を参照してください。
 
 ## 前提条件 {#prerequisites}
 
--   [<a href="/migration-tools.md">TiUPを使用してTiDB Lightningをインストールする</a>](/migration-tools.md) 。
--   [<a href="/tidb-lightning/tidb-lightning-faq.md#what-are-the-privilege-requirements-for-the-target-database">TiDB Lightningに必要なターゲット データベース権限を取得します。</a>](/tidb-lightning/tidb-lightning-faq.md#what-are-the-privilege-requirements-for-the-target-database) 。
+-   [TiUPを使用してTiDB Lightningをインストールする](/migration-tools.md) 。
+-   [TiDB Lightningに必要なターゲット データベース権限を取得します。](/tidb-lightning/tidb-lightning-faq.md#what-are-the-privilege-requirements-for-the-target-database) 。
 
 ## ステップ 1. 寄木細工のファイルを準備する {#step-1-prepare-the-parquet-files}
 
@@ -90,7 +90,7 @@ status-port = ${status-port} # During the import, TiDB Lightning needs to obtain
 pd-addr = "${ip}:${port}" # The address of the PD cluster, e.g.: 172.16.31.3:2379. TiDB Lightning obtains some information from PD. When backend = "local", you must specify status-port and pd-addr correctly. Otherwise, the import will be abnormal.
 ```
 
-設定ファイルの詳細については、 [<a href="/tidb-lightning/tidb-lightning-configuration.md">TiDB Lightning構成</a>](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
+設定ファイルの詳細については、 [TiDB Lightning構成](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
 
 ## ステップ 4. データをインポートする {#step-4-import-the-data}
 
@@ -114,8 +114,8 @@ pd-addr = "${ip}:${port}" # The address of the PD cluster, e.g.: 172.16.31.3:237
 2.  インポートの開始後、次のいずれかの方法でインポートの進行状況を確認できます。
 
     -   `grep`を使用してログ内のキーワード`progress`を検索します。デフォルトでは、進行状況は 5 分ごとに更新されます。
-    -   [<a href="/tidb-lightning/monitor-tidb-lightning.md">監視ダッシュボード</a>](/tidb-lightning/monitor-tidb-lightning.md)で進行状況を確認します。
-    -   [<a href="/tidb-lightning/tidb-lightning-web-interface.md">TiDB LightningWeb インターフェース</a>](/tidb-lightning/tidb-lightning-web-interface.md)で進行状況を確認します。
+    -   [監視ダッシュボード](/tidb-lightning/monitor-tidb-lightning.md)で進行状況を確認します。
+    -   [TiDB LightningWeb インターフェース](/tidb-lightning/tidb-lightning-web-interface.md)で進行状況を確認します。
 
     TiDB Lightning はインポートを完了すると、自動的に終了します。
 
@@ -127,4 +127,4 @@ pd-addr = "${ip}:${port}" # The address of the PD cluster, e.g.: 172.16.31.3:237
     >
     > インポートが成功したかどうかに関係なく、ログの最後の行には`tidb lightning exit`が表示されます。これは、 TiDB Lightning が正常に終了したことを意味しますが、インポートが成功したことを必ずしも意味するわけではありません。
 
-インポートが失敗した場合は、 [<a href="/tidb-lightning/tidb-lightning-faq.md">TiDB LightningFAQ</a>](/tidb-lightning/tidb-lightning-faq.md)のトラブルシューティングを参照してください。
+インポートが失敗した場合は、 [TiDB LightningFAQ](/tidb-lightning/tidb-lightning-faq.md)のトラブルシューティングを参照してください。

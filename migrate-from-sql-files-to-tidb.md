@@ -5,12 +5,12 @@ summary: Learn how to migrate data from SQL files to TiDB.
 
 # SQL ファイルから TiDB へのデータの移行 {#migrate-data-from-sql-files-to-tidb}
 
-このドキュメントでは、 TiDB Lightningを使用して MySQL SQL ファイルから TiDB にデータを移行する方法について説明します。 MySQL SQL ファイルの生成方法については、 [<a href="/dumpling-overview.md#export-to-sql-files">Dumplingを使用して SQL ファイルにエクスポートする</a>](/dumpling-overview.md#export-to-sql-files)を参照してください。
+このドキュメントでは、 TiDB Lightningを使用して MySQL SQL ファイルから TiDB にデータを移行する方法について説明します。 MySQL SQL ファイルの生成方法については、 [Dumplingを使用して SQL ファイルにエクスポートする](/dumpling-overview.md#export-to-sql-files)を参照してください。
 
 ## 前提条件 {#prerequisites}
 
--   [<a href="/migration-tools.md">TiUPを使用してTiDB Lightningをインストールする</a>](/migration-tools.md)
--   [<a href="/tidb-lightning/tidb-lightning-faq.md#what-are-the-privilege-requirements-for-the-target-database">TiDB Lightningのターゲット データベースに必要な権限を付与します。</a>](/tidb-lightning/tidb-lightning-faq.md#what-are-the-privilege-requirements-for-the-target-database)
+-   [TiUPを使用してTiDB Lightningをインストールする](/migration-tools.md)
+-   [TiDB Lightningのターゲット データベースに必要な権限を付与します。](/tidb-lightning/tidb-lightning-faq.md#what-are-the-privilege-requirements-for-the-target-database)
 
 ## ステップ 1. SQL ファイルを準備する {#step-1-prepare-sql-files}
 
@@ -65,7 +65,7 @@ status-port = ${status-port}  # During the import process, TiDB Lightning needs 
 pd-addr = "${ip}:${port}"     # The address of the cluster's PD. TiDB Lightning obtains some information through PD, such as 172.16.31.3:2379. When backend = "local", you must correctly specify status-port and pd-addr. Otherwise, the import will encounter errors.
 ```
 
-構成ファイルの詳細については、 [<a href="/tidb-lightning/tidb-lightning-configuration.md">TiDB Lightningコンフィグレーション</a>](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
+構成ファイルの詳細については、 [TiDB Lightningコンフィグレーション](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
 
 ## ステップ 4. データをインポートする {#step-4-import-the-data}
 
@@ -86,11 +86,11 @@ TiDB Lightning は、 `~/.aws/credentials`からの認証情報ファイルの�
 インポートが開始されたら、次のいずれかの方法で進行状況を確認できます。
 
 -   デフォルトでは 5 分ごとに更新される`grep`ログで`progress`キーワードを検索します。
--   Grafana ダッシュボードを使用します。詳細は[<a href="/tidb-lightning/monitor-tidb-lightning.md">TiDB Lightning監視</a>](/tidb-lightning/monitor-tidb-lightning.md)を参照してください。
--   Webインターフェイスを使用します。詳細は[<a href="/tidb-lightning/tidb-lightning-web-interface.md">TiDB LightningWeb インターフェイス</a>](/tidb-lightning/tidb-lightning-web-interface.md)を参照してください。
+-   Grafana ダッシュボードを使用します。詳細は[TiDB Lightning監視](/tidb-lightning/monitor-tidb-lightning.md)を参照してください。
+-   Webインターフェイスを使用します。詳細は[TiDB LightningWeb インターフェイス](/tidb-lightning/tidb-lightning-web-interface.md)を参照してください。
 
 インポートが完了すると、 TiDB Lightning は自動的に終了します。最後の行に`tidb-lightning.log` `the whole procedure completed`含まれているかどうかを確認します。 「はい」の場合、インポートは成功です。 「いいえ」の場合、インポートでエラーが発生します。エラー メッセージの指示に従ってエラーに対処します。
 
 > **ノート：**
 >
-> インポートが成功したかどうかに関係なく、最後の行には`tidb lightning exit`が表示されます。これは、 TiDB Lightning が正常に終了したことを意味するだけで、タスクが完了したことを意味するわけではありません。インポート プロセス中に問題が発生した場合は、トラブルシューティングについて[<a href="/tidb-lightning/tidb-lightning-faq.md">TiDB LightningFAQ</a>](/tidb-lightning/tidb-lightning-faq.md)を参照してください。
+> インポートが成功したかどうかに関係なく、最後の行には`tidb lightning exit`が表示されます。これは、 TiDB Lightning が正常に終了したことを意味するだけで、タスクが完了したことを意味するわけではありません。インポート プロセス中に問題が発生した場合は、トラブルシューティングについて[TiDB LightningFAQ](/tidb-lightning/tidb-lightning-faq.md)を参照してください。

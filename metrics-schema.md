@@ -5,7 +5,7 @@ summary: Learn the `METRICS_SCHEMA` schema.
 
 # メトリクススキーマ {#metrics-schema}
 
-`METRICS_SCHEMA` 、Prometheus に保存されている TiDB メトリクスに基づく一連のビューです。各テーブルの PromQL (Prometheus Query Language) のソースは[<a href="/information-schema/information-schema-metrics-tables.md">`INFORMATION_SCHEMA.METRICS_TABLES`</a>](/information-schema/information-schema-metrics-tables.md)で入手できます。
+`METRICS_SCHEMA` 、Prometheus に保存されている TiDB メトリクスに基づく一連のビューです。各テーブルの PromQL (Prometheus Query Language) のソースは[`INFORMATION_SCHEMA.METRICS_TABLES`](/information-schema/information-schema-metrics-tables.md)で入手できます。
 
 {{< copyable "" >}}
 
@@ -93,7 +93,7 @@ SHOW TABLES;
 626 rows in set (0.00 sec)
 ```
 
-`METRICS_SCHEMA` ( [<a href="/information-schema/information-schema-metrics-summary.md">`metrics_summary`</a>](/information-schema/information-schema-metrics-summary.md) 、 [<a href="/information-schema/information-schema-metrics-summary.md">`metrics_summary_by_label`</a>](/information-schema/information-schema-metrics-summary.md) 、 [<a href="/information-schema/information-schema-inspection-summary.md">`inspection_summary`</a>](/information-schema/information-schema-inspection-summary.md)など) の監視関連のサマリー テーブルのデータ ソースとして使用されます。
+`METRICS_SCHEMA` ( [`inspection_summary`](/information-schema/information-schema-inspection-summary.md)など) の監視関連のサマリー テーブルのデータ ソースとして使用されます。
 
 ## 追加の例 {#additional-examples}
 

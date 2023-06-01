@@ -414,9 +414,9 @@ all regions are healthy
 
 ### TiKV 構成を動的に変更する {#modify-the-tikv-configuration-dynamically}
 
-`modify-tikv-config`コマンドを使用すると、構成引数を動的に変更できます。現時点では、動的に変更できる TiKV 構成項目と詳細な変更は、SQL ステートメントを使用した構成変更と一致しています。詳細は[<a href="/dynamic-config.md#modify-tikv-configuration-dynamically">TiKV 構成を動的に変更する</a>](/dynamic-config.md#modify-tikv-configuration-dynamically)を参照してください。
+`modify-tikv-config`コマンドを使用すると、構成引数を動的に変更できます。現時点では、動的に変更できる TiKV 構成項目と詳細な変更は、SQL ステートメントを使用した構成変更と一致しています。詳細は[TiKV 構成を動的に変更する](/dynamic-config.md#modify-tikv-configuration-dynamically)を参照してください。
 
--   `-n`は、構成アイテムの完全名を指定するために使用されます。動的に変更できる構成項目のリストについては、 [<a href="/dynamic-config.md#modify-tikv-configuration-dynamically">TiKV 構成を動的に変更する</a>](/dynamic-config.md#modify-tikv-configuration-dynamically)を参照してください。
+-   `-n`は、構成アイテムの完全名を指定するために使用されます。動的に変更できる構成項目のリストについては、 [TiKV 構成を動的に変更する](/dynamic-config.md#modify-tikv-configuration-dynamically)を参照してください。
 -   `-v`は設定値を指定するために使用されます。
 
 サイズを`shared block cache`に設定します。
@@ -477,7 +477,7 @@ success
 
 > **警告：**
 >
-> この機能の使用はお勧めしません。代わりに、ワンストップの自動回復機能を提供する`pd-ctl`の Online Unsafe Recovery を使用できます。サービスを停止するなどの余分な操作は必要ありません。詳細な紹介については、 [<a href="/online-unsafe-recovery.md">オンラインの安全でないリカバリ</a>](/online-unsafe-recovery.md)を参照してください。
+> この機能の使用はお勧めしません。代わりに、ワンストップの自動回復機能を提供する`pd-ctl`の Online Unsafe Recovery を使用できます。サービスを停止するなどの余分な操作は必要ありません。詳細な紹介については、 [オンラインの安全でないリカバリ](/online-unsafe-recovery.md)を参照してください。
 
 `unsafe-recover remove-fail-stores`コマンドを使用して、障害が発生したマシンをリージョンのピア リストから削除できます。このコマンドを実行する前に、ターゲット TiKV ストアのサービスを停止してファイル ロックを解除する必要があります。
 
@@ -570,7 +570,7 @@ tikv-ctl --config=./conf.toml encryption-meta dump-file --path=/path/to/tikv/dat
 /path/to/tikv/data/db/CURRENT: key_id: 9291156302549018620 iv: E3C2FDBF63FC03BFC28F265D7E78283F method: Aes128Ctr
 ```
 
-データ暗号化キーをダンプするには、 `encryption-meta dump-key`サブコマンドを使用します。 `data-dir`に加えて、構成ファイルで使用されている現在のマスター キーを指定する必要もあります。マスターキーの設定方法については、 [<a href="/encryption-at-rest.md">保存時の暗号化</a>](/encryption-at-rest.md)を参照してください。また、このコマンドを使用すると、 `security.encryption.previous-master-key`設定は無視され、マスター キーのローテーションはトリガーされません。
+データ暗号化キーをダンプするには、 `encryption-meta dump-key`サブコマンドを使用します。 `data-dir`に加えて、構成ファイルで使用されている現在のマスター キーを指定する必要もあります。マスターキーの設定方法については、 [保存時の暗号化](/encryption-at-rest.md)を参照してください。また、このコマンドを使用すると、 `security.encryption.previous-master-key`設定は無視され、マスター キーのローテーションはトリガーされません。
 
 ```
 # conf.toml

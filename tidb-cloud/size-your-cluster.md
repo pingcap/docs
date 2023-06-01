@@ -9,7 +9,7 @@ summary: Learn how to determine the size of your TiDB Cloud cluster.
 
 > **ノート：**
 >
-> [<a href="/tidb-cloud/select-cluster-tier.md#serverless-tier-beta">Serverless Tier</a>](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)クラスターのサイズは変更できません。
+> [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)クラスターのサイズは変更できません。
 
 ## サイズ TiDB {#size-tidb}
 
@@ -17,7 +17,7 @@ TiDB はコンピューティング専用であり、データは保存されま
 
 TiDB のノード サイズとノード数の両方を構成できます。
 
-さまざまなクラスター規模のパフォーマンス テストの結果については、 [<a href="/tidb-cloud/tidb-cloud-performance-reference.md">TiDB Cloudパフォーマンス リファレンス</a>](/tidb-cloud/tidb-cloud-performance-reference.md)を参照してください。
+さまざまなクラスター規模のパフォーマンス テストの結果については、 [TiDB Cloudパフォーマンス リファレンス](/tidb-cloud/tidb-cloud-performance-reference.md)を参照してください。
 
 ### TiDB ノードのサイズ {#tidb-node-size}
 
@@ -46,7 +46,7 @@ TiKV はデータの保存を担当します。水平方向にスケーラブル
 
 TiKV のノード サイズ、ノード数、ノードstorageを構成できます。
 
-さまざまなクラスター規模のパフォーマンス テストの結果については、 [<a href="/tidb-cloud/tidb-cloud-performance-reference.md">TiDB Cloudパフォーマンス リファレンス</a>](/tidb-cloud/tidb-cloud-performance-reference.md)を参照してください。
+さまざまなクラスター規模のパフォーマンス テストの結果については、 [TiDB Cloudパフォーマンス リファレンス](/tidb-cloud/tidb-cloud-performance-reference.md)を参照してください。
 
 ### TiKV ノードのサイズ {#tikv-node-size}
 
@@ -74,7 +74,7 @@ TiDB Cloud は、耐久性と高可用性を実現するために、選択した
 
 > **ノート：**
 >
-> TiDB クラスターをスケールすると、3 つのアベイラビリティ ゾーン内のノードが同時に増加または減少します。ニーズに基づいて TiDB クラスターをスケールインまたはスケールアウトする方法については、 [<a href="/tidb-cloud/scale-tidb-cluster.md">TiDBクラスタを拡張する</a>](/tidb-cloud/scale-tidb-cluster.md)を参照してください。
+> TiDB クラスターをスケールすると、3 つのアベイラビリティ ゾーン内のノードが同時に増加または減少します。ニーズに基づいて TiDB クラスターをスケールインまたはスケールアウトする方法については、 [TiDBクラスタを拡張する](/tidb-cloud/scale-tidb-cluster.md)を参照してください。
 
 推奨される TiKV ノード数: `ceil(compressed size of your data ÷ TiKV storage usage ratio ÷ one TiKV capacity) × the number of replicas`
 

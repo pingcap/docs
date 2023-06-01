@@ -9,7 +9,7 @@ summary: Learn the usage of DROP RESOURCE GROUP in TiDB.
 
 > **ノート：**
 >
-> この機能は[<a href="/tidb-cloud/select-cluster-tier.md#serverless-tier-beta">Serverless Tierクラスター</a>](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)では使用できません。
+> この機能は[Serverless Tierクラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)では使用できません。
 
 </CustomContent>
 
@@ -30,7 +30,7 @@ ResourceGroupName ::=
 
 > **ノート：**
 >
-> -   `DROP RESOURCE GROUP`ステートメントは、グローバル変数[<a href="/system-variables.md#tidb_enable_resource_control-new-in-v660">`tidb_enable_resource_control`</a>](/system-variables.md#tidb_enable_resource_control-new-in-v660) `ON`に設定されている場合にのみ実行できます。
+> -   `DROP RESOURCE GROUP`ステートメントは、グローバル変数[`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660) `ON`に設定されている場合にのみ実行できます。
 > -   `default`リソース グループは予約されているため、削除できません。
 
 ## 例 {#examples}
@@ -84,10 +84,10 @@ Empty set (0.00 sec)
 
 ## MySQLの互換性 {#mysql-compatibility}
 
-MySQL は[<a href="https://dev.mysql.com/doc/refman/8.0/en/drop-resource-group.html">リソースグループを削除</a>](https://dev.mysql.com/doc/refman/8.0/en/drop-resource-group.html)もサポートしますが、TiDB は`FORCE`パラメータをサポートしません。
+MySQL は[リソースグループを削除](https://dev.mysql.com/doc/refman/8.0/en/drop-resource-group.html)もサポートしますが、TiDB は`FORCE`パラメータをサポートしません。
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-alter-resource-group.md">リソースグループの変更</a>](/sql-statements/sql-statement-alter-resource-group.md)
--   [<a href="/sql-statements/sql-statement-create-resource-group.md">リソースグループの作成</a>](/sql-statements/sql-statement-create-resource-group.md)
--   [<a href="/tidb-resource-control.md#what-is-request-unit-ru">リクエストユニット(RU)</a>](/tidb-resource-control.md#what-is-request-unit-ru)
+-   [リソースグループの変更](/sql-statements/sql-statement-alter-resource-group.md)
+-   [リソースグループの作成](/sql-statements/sql-statement-create-resource-group.md)
+-   [リクエストユニット(RU)](/tidb-resource-control.md#what-is-request-unit-ru)

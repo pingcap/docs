@@ -5,7 +5,7 @@ summary: Learn the use cases of backing up and restoring data using br command-l
 
 # TiDB のバックアップと復元の使用例 {#tidb-backup-and-restore-use-cases}
 
-[<a href="/br/br-snapshot-guide.md">TiDB スナップショットのバックアップおよび復元ガイド</a>](/br/br-snapshot-guide.md)および[<a href="/br/br-pitr-guide.md">TiDB ログのバックアップと PITR ガイド</a>](/br/br-pitr-guide.md) 、TiDB が提供するバックアップおよび復元ソリューション、つまりスナップショット (フル) バックアップおよび復元、ログ バックアップ、およびポイントインタイム リカバリ (PITR) を紹介します。このドキュメントは、特定の使用例で TiDB のバックアップおよび復元ソリューションをすぐに使い始めるのに役立ちます。
+[TiDB ログのバックアップと PITR ガイド](/br/br-pitr-guide.md) 、TiDB が提供するバックアップおよび復元ソリューション、つまりスナップショット (フル) バックアップおよび復元、ログ バックアップ、およびポイントインタイム リカバリ (PITR) を紹介します。このドキュメントは、特定の使用例で TiDB のバックアップおよび復元ソリューションをすぐに使い始めるのに役立ちます。
 
 TiDB本番クラスターを AWS にデプロイしており、ビジネス チームが次の要件を要求していると仮定します。
 
@@ -35,8 +35,8 @@ PITR を使用するには、TiDB クラスター &gt;= v6.2.0 をデプロイ�
 
 TiUPを使用して TiDB クラスターをデプロイまたはアップグレードします。
 
--   新しい TiDB クラスターをデプロイするには、 [<a href="/production-deployment-using-tiup.md">TiDB クラスターをデプロイ</a>](/production-deployment-using-tiup.md)を参照してください。
--   TiDB クラスターが v6.2.0 より前の場合は、 [<a href="/upgrade-tidb-using-tiup.md">TiDB クラスターをアップグレードする</a>](/upgrade-tidb-using-tiup.md)を参照してアップグレードします。
+-   新しい TiDB クラスターをデプロイするには、 [TiDB クラスターをデプロイ](/production-deployment-using-tiup.md)を参照してください。
+-   TiDB クラスターが v6.2.0 より前の場合は、 [TiDB クラスターをアップグレードする](/upgrade-tidb-using-tiup.md)を参照してアップグレードします。
 
 TiUPを使用してBR をインストールまたはアップグレードします。
 
@@ -64,10 +64,10 @@ TiUPを使用してBR をインストールまたはアップグレードしま�
 
 1.  S3にバックアップデータを保存するディレクトリを作成します。この例のディレクトリは`s3://tidb-pitr-bucket/backup-data`です。
 
-    1.  バケットを作成します。バックアップ データを保存するために既存の S3 を選択できます。存在しない場合は、 [<a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html">AWS ドキュメント: バケットの作成</a>](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html)を参照してS3バケットを作成してください。この例では、バケット名は`tidb-pitr-bucket`です。
-    2.  バックアップ データ用のディレクトリを作成します。バケット ( `tidb-pitr-bucket` ) に、 `backup-data`という名前のディレクトリを作成します。詳細な手順については、 [<a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html">AWS ドキュメント: フォルダーを使用した Amazon S3 コンソール内のオブジェクトの整理</a>](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html)を参照してください。
+    1.  バケットを作成します。バックアップ データを保存するために既存の S3 を選択できます。存在しない場合は、 [AWS ドキュメント: バケットの作成](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html)を参照してS3バケットを作成してください。この例では、バケット名は`tidb-pitr-bucket`です。
+    2.  バックアップ データ用のディレクトリを作成します。バケット ( `tidb-pitr-bucket` ) に、 `backup-data`という名前のディレクトリを作成します。詳細な手順については、 [AWS ドキュメント: フォルダーを使用した Amazon S3 コンソール内のオブジェクトの整理](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html)を参照してください。
 
-2.  BRおよび TiKV が S3 ディレクトリにアクセスするための権限を設定します。 S3 バケットにアクセスする最も安全な方法であるIAMメソッドを使用して権限を付与することをお勧めします。詳細な手順については、 [<a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/walkthrough1.html">AWS ドキュメント: ユーザー ポリシーによるバケットへのアクセスの制御</a>](https://docs.aws.amazon.com/AmazonS3/latest/userguide/walkthrough1.html)を参照してください。必要な権限は次のとおりです。
+2.  BRおよび TiKV が S3 ディレクトリにアクセスするための権限を設定します。 S3 バケットにアクセスする最も安全な方法であるIAMメソッドを使用して権限を付与することをお勧めします。詳細な手順については、 [AWS ドキュメント: ユーザー ポリシーによるバケットへのアクセスの制御](https://docs.aws.amazon.com/AmazonS3/latest/userguide/walkthrough1.html)を参照してください。必要な権限は次のとおりです。
 
     -   バックアップ クラスター内の TiKV とBRには、 `s3://tidb-pitr-bucket/backup-data`ディレクトリの`s3:ListBucket` 、 `s3:PutObject` 、および`s3:AbortMultipartUpload`アクセス許可が必要です。
     -   復元クラスター内の TiKV とBRには、 `s3://tidb-pitr-bucket/backup-data`ディレクトリの`s3:ListBucket` 、 `s3:GetObject` 、および`s3:PutObject`アクセス許可が必要です。
@@ -171,6 +171,6 @@ crontab などの自動ツールを使用して、古いデータを 2 日ごと
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/br/backup-and-restore-storages.md">バックアップストレージ</a>](/br/backup-and-restore-storages.md)
--   [<a href="/br/br-snapshot-manual.md">スナップショットバックアップおよびリストアコマンドマニュアル</a>](/br/br-snapshot-manual.md)
--   [<a href="/br/br-pitr-manual.md">ログバックアップとPITRコマンドマニュアル</a>](/br/br-pitr-manual.md)
+-   [バックアップストレージ](/br/backup-and-restore-storages.md)
+-   [スナップショットバックアップおよびリストアコマンドマニュアル](/br/br-snapshot-manual.md)
+-   [ログバックアップとPITRコマンドマニュアル](/br/br-pitr-manual.md)

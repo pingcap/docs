@@ -5,21 +5,21 @@ summary: Learn about Statement Summary Table in TiDB.
 
 # ステートメント概要テーブル {#statement-summary-tables}
 
-SQL パフォーマンスの問題をより適切に処理するために、MySQL は統計を使用して SQL を監視する`performance_schema`分の[<a href="https://dev.mysql.com/doc/refman/5.7/en/performance-schema-statement-summary-tables.html">ステートメント概要テーブル</a>](https://dev.mysql.com/doc/refman/5.7/en/performance-schema-statement-summary-tables.html)を提供しています。これらのテーブルのうち、 `events_statements_summary_by_digest` 、レイテンシー、実行時間、スキャンされた行数、テーブル全体のスキャンなどの豊富なフィールドを備えており、SQL の問題を特定するのに非常に役立ちます。
+SQL パフォーマンスの問題をより適切に処理するために、MySQL は統計を使用して SQL を監視する`performance_schema`分の[ステートメント概要テーブル](https://dev.mysql.com/doc/refman/5.7/en/performance-schema-statement-summary-tables.html)を提供しています。これらのテーブルのうち、 `events_statements_summary_by_digest` 、レイテンシー、実行時間、スキャンされた行数、テーブル全体のスキャンなどの豊富なフィールドを備えており、SQL の問題を特定するのに非常に役立ちます。
 
 したがって、v4.0.0-rc.1 以降、TiDB は機能の点で`events_statements_summary_by_digest`に似たシステム テーブルを`information_schema` ( `performance_schema`*ではなく*) で提供します。
 
--   [<a href="#statements_summary">`statements_summary`</a>](#statements_summary)
--   [<a href="#statements_summary_history">`statements_summary_history`</a>](#statements_summary_history)
--   [<a href="#statements_summary_evicted">`cluster_statements_summary`</a>](#statements_summary_evicted)
--   [<a href="#statements_summary_evicted">`cluster_statements_summary_history`</a>](#statements_summary_evicted)
--   [<a href="#statements_summary_evicted">`statements_summary_evicted`</a>](#statements_summary_evicted)
+-   [`statements_summary`](#statements_summary)
+-   [`statements_summary_history`](#statements_summary_history)
+-   [`cluster_statements_summary`](#statements_summary_evicted)
+-   [`cluster_statements_summary_history`](#statements_summary_evicted)
+-   [`statements_summary_evicted`](#statements_summary_evicted)
 
 <CustomContent platform="tidb-cloud">
 
 > **ノート：**
 >
-> 次のテーブルは[<a href="/tidb-cloud/select-cluster-tier.md#serverless-tier-beta">Serverless Tierクラスター</a>](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)では使用できませ`cluster_statements_summary_history` : `statements_summary` 、および`cluster_statements_summary` `statements_summary_history`
+> 次のテーブルは[Serverless Tierクラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)では使用できませ`cluster_statements_summary_history` : `statements_summary` 、および`cluster_statements_summary` `statements_summary_history`
 
 </CustomContent>
 
@@ -192,7 +192,7 @@ select * from information_schema.statements_summary_evicted;
 
 <CustomContent platform="tidb">
 
-この問題に対処するために、TiDB v6.6.0 では実験的に[<a href="#persist-statements-summary">ステートメントの概要の永続性</a>](#persist-statements-summary)機能が導入されていますが、この機能はデフォルトでは無効になっています。この機能を有効にすると、履歴データはメモリに保存されなくなり、ディスクに直接書き込まれます。このようにして、TiDBサーバーが再起動しても履歴データは引き続き使用できます。
+この問題に対処するために、TiDB v6.6.0 では実験的に[ステートメントの概要の永続性](#persist-statements-summary)機能が導入されていますが、この機能はデフォルトでは無効になっています。この機能を有効にすると、履歴データはメモリに保存されなくなり、ディスクに直接書き込まれます。このようにして、TiDBサーバーが再起動しても履歴データは引き続き使用できます。
 
 </CustomContent>
 
@@ -206,17 +206,17 @@ select * from information_schema.statements_summary_evicted;
 
 > **警告：**
 >
-> ステートメントの概要の永続化は実験的機能です。本番環境で使用することはお勧めできません。この機能は予告なく変更または削除される場合があります。バグを見つけた場合は、GitHub で[<a href="https://github.com/pingcap/tidb/issues">問題</a>](https://github.com/pingcap/tidb/issues)を報告できます。
+> ステートメントの概要の永続化は実験的機能です。本番環境で使用することはお勧めできません。この機能は予告なく変更または削除される場合があります。バグを見つけた場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告できます。
 
 <CustomContent platform="tidb">
 
-[<a href="#limitation">制限</a>](#limitation)セクションで説明したように、ステートメント概要テーブルはデフォルトでメモリに保存されます。 TiDBサーバーが再起動すると、すべてのステートメントの概要が失われます。 v6.6.0 以降、TiDB は実験的に構成項目[<a href="/tidb-configuration-file.md#tidb_stmt_summary_enable_persistent-new-in-v660">`tidb_stmt_summary_enable_persistent`</a>](/tidb-configuration-file.md#tidb_stmt_summary_enable_persistent-new-in-v660)を提供し、ユーザーがステートメントの概要の永続性を有効または無効にできるようにします。
+[`tidb_stmt_summary_enable_persistent`](/tidb-configuration-file.md#tidb_stmt_summary_enable_persistent-new-in-v660)を提供し、ユーザーがステートメントの概要の永続性を有効または無効にできるようにします。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[<a href="#limitation">制限</a>](#limitation)セクションで説明したように、ステートメント概要テーブルはデフォルトでメモリに保存されます。 TiDBサーバーが再起動すると、すべてのステートメントの概要が失われます。 v6.6.0 以降、TiDB は実験的に構成項目`tidb_stmt_summary_enable_persistent`を提供し、ユーザーがステートメントの概要の永続性を有効または無効にできるようにします。
+[制限](#limitation)セクションで説明したように、ステートメント概要テーブルはデフォルトでメモリに保存されます。 TiDBサーバーが再起動すると、すべてのステートメントの概要が失われます。 v6.6.0 以降、TiDB は実験的に構成項目`tidb_stmt_summary_enable_persistent`を提供し、ユーザーがステートメントの概要の永続性を有効または無効にできるようにします。
 
 </CustomContent>
 
@@ -232,13 +232,13 @@ tidb_stmt_summary_enable_persistent = true
 # tidb_stmt_summary_file_max_backups = 0
 ```
 
-ステートメントの概要の永続性が有効になった後、メモリには現在のリアルタイム データのみが保持され、履歴データは保持されません。リアルタイム データが履歴データとして更新されると、履歴データは[<a href="#parameter-configuration">パラメータ設定</a>](#parameter-configuration)セクションで説明した`tidb_stmt_summary_refresh_interval`の間隔でディスクに書き込まれます。 `statements_summary_history`または`cluster_statements_summary_history`テーブルに対するクエリは、メモリ内データとディスク上のデータの両方を組み合わせた結果を返します。
+ステートメントの概要の永続性が有効になった後、メモリには現在のリアルタイム データのみが保持され、履歴データは保持されません。リアルタイム データが履歴データとして更新されると、履歴データは[パラメータ設定](#parameter-configuration)セクションで説明した`tidb_stmt_summary_refresh_interval`の間隔でディスクに書き込まれます。 `statements_summary_history`または`cluster_statements_summary_history`テーブルに対するクエリは、メモリ内データとディスク上のデータの両方を組み合わせた結果を返します。
 
 <CustomContent platform="tidb">
 
 > **ノート：**
 >
-> -   ステートメントの概要の永続性が有効になっている場合、メモリに履歴データが保持されないため、 [<a href="#parameter-configuration">パラメータ設定</a>](#parameter-configuration)セクションで説明されている`tidb_stmt_summary_history_size`設定は有効になりません。代わりに、永続化のための履歴データの保持期間とサイズを制御するために、 [<a href="/tidb-configuration-file.md#tidb_stmt_summary_file_max_days-new-in-v660">`tidb_stmt_summary_file_max_days`</a>](/tidb-configuration-file.md#tidb_stmt_summary_file_max_days-new-in-v660) 、 [<a href="/tidb-configuration-file.md#tidb_stmt_summary_file_max_size-new-in-v660">`tidb_stmt_summary_file_max_size`</a>](/tidb-configuration-file.md#tidb_stmt_summary_file_max_size-new-in-v660) 、および[<a href="/tidb-configuration-file.md#tidb_stmt_summary_file_max_backups-new-in-v660">`tidb_stmt_summary_file_max_backups`</a>](/tidb-configuration-file.md#tidb_stmt_summary_file_max_backups-new-in-v660)の 3 つの構成が使用されます。
+> -   ステートメントの概要の永続性が有効になっている場合、メモリに履歴データが保持されないため、 [`tidb_stmt_summary_file_max_backups`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_backups-new-in-v660)の 3 つの構成が使用されます。
 > -   `tidb_stmt_summary_refresh_interval`の値が小さいほど、より多くの即時データがディスクに書き込まれます。ただし、これは、より多くの冗長データがディスクに書き込まれることも意味します。
 
 </CustomContent>

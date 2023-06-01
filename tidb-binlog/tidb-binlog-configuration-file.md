@@ -9,7 +9,7 @@ summary: Learn the configuration items of TiDB Binlog.
 
 ## Pump {#pump}
 
-このセクションでは、 Pumpの設定項目を紹介します。完全なPump構成ファイルの例については、 [<a href="https://github.com/pingcap/tidb-binlog/blob/master/cmd/pump/pump.toml">Pumpコンフィグレーション</a>](https://github.com/pingcap/tidb-binlog/blob/master/cmd/pump/pump.toml)を参照してください。
+このセクションでは、 Pumpの設定項目を紹介します。完全なPump構成ファイルの例については、 [Pumpコンフィグレーション](https://github.com/pingcap/tidb-binlog/blob/master/cmd/pump/pump.toml)を参照してください。
 
 ### アドレス {#addr}
 
@@ -111,7 +111,7 @@ summary: Learn the configuration items of TiDB Binlog.
 
 #### kv {#kv}
 
-現在、Pumpのstorageは[<a href="https://github.com/syndtr/goleveldb">GoLevelDB</a>](https://github.com/syndtr/goleveldb)に基づいて実装されています。 `storage`の下には、GoLevel 構成を調整するために使用される`kv`サブグループもあります。サポートされている設定項目は以下のとおりです。
+現在、Pumpのstorageは[GoLevelDB](https://github.com/syndtr/goleveldb)に基づいて実装されています。 `storage`の下には、GoLevel 構成を調整するために使用される`kv`サブグループもあります。サポートされている設定項目は以下のとおりです。
 
 -   ブロックキャッシュ容量
 -   ブロック再起動間隔
@@ -124,11 +124,11 @@ summary: Learn the configuration items of TiDB Binlog.
 -   書き込み-L0-一時停止トリガー
 -   書き込み-L0-スローダウントリガー
 
-上記項目の詳細については、 [<a href="https://godoc.org/github.com/syndtr/goleveldb/leveldb/opt#Options">GoLevelDB ドキュメント</a>](https://godoc.org/github.com/syndtr/goleveldb/leveldb/opt#Options)を参照してください。
+上記項目の詳細については、 [GoLevelDB ドキュメント](https://godoc.org/github.com/syndtr/goleveldb/leveldb/opt#Options)を参照してください。
 
 ## Drainer {#drainer}
 
-ここでは、 Drainerの設定項目を紹介します。完全なDrainer構成ファイルの例については、 [<a href="https://github.com/pingcap/tidb-binlog/blob/master/cmd/drainer/drainer.toml">Drainerコンフィグレーション</a>](https://github.com/pingcap/tidb-binlog/blob/master/cmd/drainer/drainer.toml)を参照してください。
+ここでは、 Drainerの設定項目を紹介します。完全なDrainer構成ファイルの例については、 [Drainerコンフィグレーション](https://github.com/pingcap/tidb-binlog/blob/master/cmd/drainer/drainer.toml)を参照してください。
 
 ### アドレス {#addr}
 
@@ -173,7 +173,7 @@ summary: Learn the configuration items of TiDB Binlog.
 ### 初期コミット-ts {#initial-commit-ts}
 
 -   トランザクションのどのコミット タイムスタンプからレプリケーション プロセスを開始するかを指定します。この構成は、初めてレプリケーション プロセスにあるDrainerノードにのみ適用されます。ダウンストリームにチェックポイントがすでに存在する場合、レプリケーションはチェックポイントに記録された時間に従って実行されます。
--   commit ts (コミット タイムスタンプ) は、TiDB における[<a href="/transaction-overview.md#transactions">取引</a>](/transaction-overview.md#transactions)コミットの特定の時点です。これは、現在のトランザクションの一意の ID として PD から取得される、グローバルに一意で増加するタイムスタンプです。 `initial-commit-ts`構成は、次の一般的な方法で取得できます。
+-   commit ts (コミット タイムスタンプ) は、TiDB における[取引](/transaction-overview.md#transactions)コミットの特定の時点です。これは、現在のトランザクションの一意の ID として PD から取得される、グローバルに一意で増加するタイムスタンプです。 `initial-commit-ts`構成は、次の一般的な方法で取得できます。
     -   BRを使用した場合、 BRでバックアップされたメタデータ(backupmeta)に記録されているバックアップTSから`initial-commit-ts`を取得できます。
     -   Dumplingを使用すると、 Dumplingでバックアップされたメタデータ(メタデータ)に記録されているPosから`initial-commit-ts`を取得でき、
     -   PD Controlが使用されている場合、 `tso`コマンドの出力には`initial-commit-ts`が含まれます。

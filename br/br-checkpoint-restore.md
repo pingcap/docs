@@ -19,7 +19,7 @@ TiDB クラスターが大きく、障害後に再度復元する余裕がない
 
 ### スナップショットの復元 {#snapshot-restore}
 
-スナップショット復元の実装は[<a href="/br/br-checkpoint-backup.md#implementation-details">スナップショットバックアップ</a>](/br/br-checkpoint-backup.md#implementation-details)と似ています。 `br`キー範囲 (リージョン) 内のすべての SST ファイルをバッチで復元します。復元の完了後、 `br`この範囲と復元されたクラスター テーブルのテーブル ID を記録します。チェックポイント復元機能は、復元されたキー範囲を永続化できるように、新しい復元情報を外部storageに定期的にアップロードします。
+スナップショット復元の実装は[スナップショットバックアップ](/br/br-checkpoint-backup.md#implementation-details)と似ています。 `br`キー範囲 (リージョン) 内のすべての SST ファイルをバッチで復元します。復元の完了後、 `br`この範囲と復元されたクラスター テーブルのテーブル ID を記録します。チェックポイント復元機能は、復元されたキー範囲を永続化できるように、新しい復元情報を外部storageに定期的にアップロードします。
 
 `br`復元を再試行するときに、外部storageから復元されたキー範囲を読み取り、対応するテーブル ID と照合します。復元中、 `br` 、チェックポイント復元で記録されたキー範囲と重複し、同じテーブル ID を持つキー範囲をスキップします。
 
@@ -47,7 +47,7 @@ MVCC (Multi-Version Concurrency Control) メカニズムの使用により、指
 
 ログの復元が完了すると、GC は手動で起動しなくても自動的に再起動されます。ただし、復元を続行しない場合は、次のように手動で GC を有効にすることができます。
 
-`br` GC 一時停止の原理は、 `SET config tikv gc.ratio-threshold = -1.0`実行して`gc.ratio-threshold`を負の数に設定し、GC を一時停止することです。 [<a href="/tikv-configuration-file.md#ratio-threshold">`gc.ratio-threshold`</a>](/tikv-configuration-file.md#ratio-threshold)の値を変更することで、GC を手動で有効にできます。たとえば、デフォルト値にリセットするには、 `SET config tikv gc.ratio-threshold = 1.1`を実行します。
+`br` GC 一時停止の原理は、 `SET config tikv gc.ratio-threshold = -1.0`実行して`gc.ratio-threshold`を負の数に設定し、GC を一時停止することです。 [`gc.ratio-threshold`](/tikv-configuration-file.md#ratio-threshold)の値を変更することで、GC を手動で有効にできます。たとえば、デフォルト値にリセットするには、 `SET config tikv gc.ratio-threshold = 1.1`を実行します。
 
 ### 一部のデータは再度復元する必要があります {#some-data-needs-to-be-restored-again}
 

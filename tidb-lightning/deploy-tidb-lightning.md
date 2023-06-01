@@ -7,8 +7,8 @@ summary: Deploy TiDB Lightning to quickly import large amounts of new data.
 
 このドキュメントでは、 TiDB Lightningを使用してデータをインポートするためのハードウェア要件と、それを手動で展開する方法について説明します。ハードウェア リソースの要件はインポート モードによって異なります。詳細については、次のドキュメントを参照してください。
 
--   [<a href="/tidb-lightning/tidb-lightning-physical-import-mode.md#requirements-and-restrictions">物理インポートモードの要件と制限事項</a>](/tidb-lightning/tidb-lightning-physical-import-mode.md#requirements-and-restrictions)
--   [<a href="/tidb-lightning/tidb-lightning-logical-import-mode.md">論理インポート モードの要件と制限事項</a>](/tidb-lightning/tidb-lightning-logical-import-mode.md)
+-   [物理インポートモードの要件と制限事項](/tidb-lightning/tidb-lightning-physical-import-mode.md#requirements-and-restrictions)
+-   [論理インポート モードの要件と制限事項](/tidb-lightning/tidb-lightning-logical-import-mode.md)
 
 ## TiUPを使用したオンライン導入 (推奨) {#online-deployment-using-tiup-recommended}
 
@@ -30,7 +30,7 @@ summary: Deploy TiDB Lightning to quickly import large amounts of new data.
 
 ### TiDB Lightningバイナリをダウンロードする {#download-tidb-lightning-binaries}
 
-[<a href="/download-ecosystem-tools.md">TiDB ツールをダウンロード</a>](/download-ecosystem-tools.md)を参照して、 TiDB Lightningバイナリをダウンロードします。 TiDB Lightning は、 TiDB の初期バージョンと完全な互換性があります。最新バージョンのTiDB Lightningを使用することをお勧めします。
+[TiDB ツールをダウンロード](/download-ecosystem-tools.md)を参照して、 TiDB Lightningバイナリをダウンロードします。 TiDB Lightning は、 TiDB の初期バージョンと完全な互換性があります。最新バージョンのTiDB Lightningを使用することをお勧めします。
 
 TiDB Lightningバイナリ パッケージを解凍して、 `tidb-lightning`実行可能ファイルを取得します。
 
@@ -46,11 +46,11 @@ chmod +x tidb-lightning
 -   `-t 16` : データのエクスポートに 16 スレッドが使用されることを意味します。
 -   `-F 256MB` : テーブルが複数のチャンクに分割されており、1 つのチャンクが 256 MB であることを意味します。
 
-データ ソースが CSV ファイルで構成されている場合、構成については[<a href="/tidb-lightning/tidb-lightning-data-source.md#csv">CSVのサポート</a>](/tidb-lightning/tidb-lightning-data-source.md#csv)を参照してください。
+データ ソースが CSV ファイルで構成されている場合、構成については[CSVのサポート](/tidb-lightning/tidb-lightning-data-source.md#csv)を参照してください。
 
 ## TiDB Lightningのデプロイ {#deploy-tidb-lightning}
 
-このセクションでは、 [<a href="#deploy-tidb-lightning-manually">TiDB Lightning を手動で導入する</a>](#deploy-tidb-lightning-manually)方法について説明します。
+このセクションでは、 [TiDB Lightning を手動で導入する](#deploy-tidb-lightning-manually)方法について説明します。
 
 ### TiDB Lightningを手動でデプロイ {#deploy-tidb-lightning-manually}
 
@@ -58,11 +58,11 @@ chmod +x tidb-lightning
 
 データをインポートする前に、TiDB クラスターをデプロイする必要があります。最新の安定バージョンを使用することを強くお勧めします。
 
-導入手順については[<a href="/quick-start-with-tidb.md">TiDB クイック スタート ガイド</a>](/quick-start-with-tidb.md)を参照してください。
+導入手順については[TiDB クイック スタート ガイド](/quick-start-with-tidb.md)を参照してください。
 
 #### ステップ 2: TiDB Lightningインストール パッケージをダウンロードする {#step-2-download-the-tidb-lightning-installation-package}
 
-TiDB Lightningパッケージをダウンロードするには、 [<a href="/download-ecosystem-tools.md">TiDB ツールをダウンロード</a>](/download-ecosystem-tools.md)ドキュメントを参照してください。
+TiDB Lightningパッケージをダウンロードするには、 [TiDB ツールをダウンロード](/download-ecosystem-tools.md)ドキュメントを参照してください。
 
 > **ノート：**
 >
@@ -76,7 +76,7 @@ TiDB Lightningパッケージをダウンロードするには、 [<a href="/dow
 
 3.  `tidb-lightning.toml`を設定します。以下のテンプレートに表示されない構成の場合、 TiDB Lightning は構成エラーをログ ファイルに書き込んで終了します。
 
-    `sorted-kv-dir`ソートされた Key-Value ファイルの一時storageディレクトリを設定します。ディレクトリは空である必要があり、storageスペース**はインポートするデータセットのサイズより大きくなければなりません**。詳細は[<a href="/tidb-lightning/tidb-lightning-requirements.md#storage-space-of-the-target-database">ダウンストリームのstorageスペース要件</a>](/tidb-lightning/tidb-lightning-requirements.md#storage-space-of-the-target-database)を参照してください。
+    `sorted-kv-dir`ソートされた Key-Value ファイルの一時storageディレクトリを設定します。ディレクトリは空である必要があり、storageスペース**はインポートするデータセットのサイズより大きくなければなりません**。詳細は[ダウンストリームのstorageスペース要件](/tidb-lightning/tidb-lightning-requirements.md#storage-space-of-the-target-database)を参照してください。
 
     ```toml
     [lightning]
@@ -111,7 +111,7 @@ TiDB Lightningパッケージをダウンロードするには、 [<a href="/dow
     pd-addr = "172.16.31.4:2379"
     ```
 
-    上記は重要な設定のみを示しています。設定の完全なリストについては、 [<a href="/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-global">コンフィグレーション</a>](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-global)セクションを参照してください。
+    上記は重要な設定のみを示しています。設定の完全なリストについては、 [コンフィグレーション](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-global)セクションを参照してください。
 
 4.  `tidb-lightning`を実行します。
 
@@ -121,6 +121,6 @@ TiDB Lightningパッケージをダウンロードするには、 [<a href="/dow
 
 ## TiDB Lightningのアップグレード {#upgrade-tidb-lightning}
 
-TiDB Lightning は、追加の構成を行わずにバイナリのみを置き換えることによってアップグレードできます。アップグレード後、 TiDB Lightningを再起動する必要があります。詳細は[<a href="/tidb-lightning/tidb-lightning-faq.md#how-to-properly-restart-tidb-lightning">TiDB Lightning を適切に再起動する方法</a>](/tidb-lightning/tidb-lightning-faq.md#how-to-properly-restart-tidb-lightning)を参照してください。
+TiDB Lightning は、追加の構成を行わずにバイナリのみを置き換えることによってアップグレードできます。アップグレード後、 TiDB Lightningを再起動する必要があります。詳細は[TiDB Lightning を適切に再起動する方法](/tidb-lightning/tidb-lightning-faq.md#how-to-properly-restart-tidb-lightning)を参照してください。
 
 インポート タスクが実行中の場合は、それが完了するまで待ってからTiDB Lightningをアップグレードすることをお勧めします。そうしないと、チェックポイントがバージョン間で機能するという保証がないため、最初から再インポートする必要が生じる可能性があります。

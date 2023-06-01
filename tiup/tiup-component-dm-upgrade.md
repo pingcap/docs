@@ -12,7 +12,7 @@ title: tiup dm upgrade
 tiup dm upgrade <cluster-name> <version> [flags]
 ```
 
--   `<cluster-name>`は、操作対象のクラスターの名前です。クラスター名を忘れた場合は、 [<a href="/tiup/tiup-component-dm-list.md">`tiup dm list`</a>](/tiup/tiup-component-dm-list.md)コマンドを使用して確認できます。
+-   `<cluster-name>`は、操作対象のクラスターの名前です。クラスター名を忘れた場合は、 [`tiup dm list`](/tiup/tiup-component-dm-list.md)コマンドを使用して確認できます。
 -   `<version>`は、アップグレード先のターゲット バージョンです ( `v6.5.0`など)。現在、新しいバージョンへのアップグレードのみが許可されており、以前のバージョンへのアップグレードは許可されていません。つまり、ダウングレードは許可されていません。夜間バージョンへのアップグレードも許可されていません。
 
 ## オプション {#options}
@@ -31,4 +31,4 @@ tiup dm upgrade <cluster-name> <version> [flags]
 
 サービスのアップグレード プロセスのログ。
 
-[<a href="/tiup/tiup-component-dm.md#command-list">&lt;&lt; 前のページに戻る - TiUP DMコマンド一覧</a>](/tiup/tiup-component-dm.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP DMコマンド一覧](/tiup/tiup-component-dm.md#command-list)

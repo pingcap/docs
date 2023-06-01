@@ -144,8 +144,8 @@ Original_sql: select * from t1 where b = ?
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-create-binding.md">[グローバル|セッション] バインディングの作成</a>](/sql-statements/sql-statement-create-binding.md)
--   [<a href="/sql-statements/sql-statement-drop-binding.md">[グローバル|セッション] バインディングを削除</a>](/sql-statements/sql-statement-drop-binding.md)
--   [<a href="/sql-statements/sql-statement-analyze-table.md">分析テーブル</a>](/sql-statements/sql-statement-analyze-table.md)
--   [<a href="/optimizer-hints.md">オプティマイザーのヒント</a>](/optimizer-hints.md)
--   [<a href="/sql-plan-management.md">SQL計画管理</a>](/sql-plan-management.md)
+-   [[グローバル|セッション] バインディングの作成](/sql-statements/sql-statement-create-binding.md)
+-   [[グローバル|セッション] バインディングを削除](/sql-statements/sql-statement-drop-binding.md)
+-   [分析テーブル](/sql-statements/sql-statement-analyze-table.md)
+-   [オプティマイザーのヒント](/optimizer-hints.md)
+-   [SQL計画管理](/sql-plan-management.md)

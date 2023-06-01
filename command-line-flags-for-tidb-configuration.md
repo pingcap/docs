@@ -17,7 +17,7 @@ TiDB クラスターを開始するときは、コマンドライン オプシ�
 
 -   設定ファイル
 -   デフォルト: `""`
--   構成ファイルを指定した場合、TiDB は構成ファイルを読み取ります。対応する構成がコマンド ライン オプションにも存在する場合、TiDB はコマンド ライン オプションの構成を使用して、構成ファイル内の構成を上書きします。詳しい構成情報については、 [<a href="/tidb-configuration-file.md">TiDBコンフィグレーションファイルの説明</a>](/tidb-configuration-file.md)を参照してください。
+-   構成ファイルを指定した場合、TiDB は構成ファイルを読み取ります。対応する構成がコマンド ライン オプションにも存在する場合、TiDB はコマンド ライン オプションの構成を使用して、構成ファイル内の構成を上書きします。詳しい構成情報については、 [TiDBコンフィグレーションファイルの説明](/tidb-configuration-file.md)を参照してください。
 
 ## <code>--config-check</code> {#code-config-check-code}
 
@@ -58,7 +58,7 @@ TiDB クラスターを開始するときは、コマンドライン オプシ�
 
 ## <code>--initialize-sql-file</code> {#code-initialize-sql-file-code}
 
--   TiDB クラスターが初めて起動されるときに実行される SQL スクリプト。詳細は[<a href="/tidb-configuration-file.md#initialize-sql-file-new-in-v660">構成項目`initialize-sql-file`</a>](/tidb-configuration-file.md#initialize-sql-file-new-in-v660)を参照
+-   TiDB クラスターが初めて起動されるときに実行される SQL スクリプト。詳細は[構成項目`initialize-sql-file`](/tidb-configuration-file.md#initialize-sql-file-new-in-v660)を参照
 -   デフォルト: `""`
 
 ## <code>-L</code> {#code-l-code}
@@ -118,7 +118,7 @@ TiDB クラスターを開始するときは、コマンドライン オプシ�
 
 ## <code>--proxy-protocol-networks</code> {#code-proxy-protocol-networks-code}
 
--   [<a href="https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt">プロキシプロトコル</a>](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt)を使用して TiDB に接続できるプロキシ サーバーの IP アドレスのリスト。
+-   [プロキシプロトコル](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt)を使用して TiDB に接続できるプロキシ サーバーの IP アドレスのリスト。
 -   デフォルト: `""`
 -   一般に、リバース プロキシの背後で TiDB にアクセスすると、TiDB はリバース プロキシサーバーの IP アドレスをクライアントの IP アドレスとして取得します。 PROXY プロトコルを有効にすることにより、このプロトコルをサポートする HAProxy などのリバース プロキシは、実際のクライアント IP アドレスを TiDB に渡すことができます。
 -   このフラグを設定すると、TiDB は、設定されたソース IP アドレスが PROXY プロトコルを使用して TiDB に接続できるようにします。 PROXY 以外のプロトコルが使用されている場合、この接続は拒否されます。他のアドレスは、PROXY プロトコルを使用せずに TiDB に接続できます。このフラグを空のままにすると、どの IP アドレスも PROXY プロトコルを使用して TiDB に接続できなくなります。値には、区切り文字として`,`を使用した IP アドレス (192.168.1.50) または CIDR (192.168.1.0/24) を指定できます。 `*`任意の IP アドレスを意味します。
@@ -166,7 +166,7 @@ TiDB クラスターを開始するときは、コマンドライン オプシ�
 
 -   TiDBサーバーのステータス レポート ポート
 -   デフォルト: `"10080"`
--   このポートはサーバーの内部データを取得するために使用されます。データには[<a href="https://prometheus.io/">プロメテウスのメトリクス</a>](https://prometheus.io/)と[<a href="https://golang.org/pkg/net/http/pprof/">プロフ</a>](https://golang.org/pkg/net/http/pprof/)が含まれます。
+-   このポートはサーバーの内部データを取得するために使用されます。データには[プロフ](https://golang.org/pkg/net/http/pprof/)が含まれます。
 -   Prometheus メトリクスには`"http://host:status_port/metrics"`でアクセスできます。
 -   pprof データには`"http://host:status_port/debug/pprof"`によってアクセスできます。
 

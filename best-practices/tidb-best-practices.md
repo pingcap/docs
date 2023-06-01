@@ -9,9 +9,9 @@ summary: Learn the best practices of using TiDB.
 
 このドキュメントを読む前に、TiDB の技術原則を紹介する 3 つのブログ投稿を読むことをお勧めします。
 
--   [<a href="https://en.pingcap.com/blog/tidb-internal-data-storage/">TiDB 内部 (I) - データ ストレージ</a>](https://en.pingcap.com/blog/tidb-internal-data-storage/)
--   [<a href="https://en.pingcap.com/blog/tidb-internal-computing/">TiDB 内部 (II) - コンピューティング</a>](https://en.pingcap.com/blog/tidb-internal-computing/)
--   [<a href="https://en.pingcap.com/blog/tidb-internal-scheduling/">TiDB 内部 (III) - スケジュール設定</a>](https://en.pingcap.com/blog/tidb-internal-scheduling/)
+-   [TiDB 内部 (I) - データ ストレージ](https://en.pingcap.com/blog/tidb-internal-data-storage/)
+-   [TiDB 内部 (II) - コンピューティング](https://en.pingcap.com/blog/tidb-internal-computing/)
+-   [TiDB 内部 (III) - スケジュール設定](https://en.pingcap.com/blog/tidb-internal-scheduling/)
 
 ## 序文 {#preface}
 
@@ -23,7 +23,7 @@ TiDB は、MySQL プロトコルおよび構文と互換性のある分散デー
 
 ベスト プラクティスは、その実装原則と密接に関連しています。 Raftコンセンサス アルゴリズム、分散トランザクション、データ シャーディング、負荷分散、SQL から Key-Value (KV) へのマッピング ソリューション、セカンダリ インデックスの実装方法、分散実行などの基本的なメカニズムのいくつかを学習することをお勧めします。エンジン。
 
-このセクションでは、これらの概念について説明します。詳細については、 [<a href="https://pingcap.com/blog/">PingCAP のブログ投稿</a>](https://pingcap.com/blog/)を参照してください。
+このセクションでは、これらの概念について説明します。詳細については、 [PingCAP のブログ投稿](https://pingcap.com/blog/)を参照してください。
 
 ### Raft {#raft}
 
@@ -33,7 +33,7 @@ Raft は、強い整合性を備えたデータ レプリケーションを保�
 
 ### 分散トランザクション {#distributed-transactions}
 
-TiDB は完全な分散トランザクションを提供し、モデルには[<a href="https://research.google.com/pubs/pub36726.html">Google パーコレーター</a>](https://research.google.com/pubs/pub36726.html)に基づいていくつかの最適化が施されています。このドキュメントでは、次の機能を紹介します。
+TiDB は完全な分散トランザクションを提供し、モデルには[Google パーコレーター](https://research.google.com/pubs/pub36726.html)に基づいていくつかの最適化が施されています。このドキュメントでは、次の機能を紹介します。
 
 -   楽観的なトランザクション モデル
 
@@ -55,7 +55,7 @@ TiDB は完全な分散トランザクションを提供し、モデルには[<a
     -   各 Key-Value エントリは 6 MB 以下です (デフォルト)
     -   Key-Value エントリの合計サイズは 10 GB を超えません。
 
-    同様の制限は[<a href="https://cloud.google.com/spanner/quotas">Googleクラウドスパナー</a>](https://cloud.google.com/spanner/quotas)にもあります。
+    同様の制限は[Googleクラウドスパナー](https://cloud.google.com/spanner/quotas)にもあります。
 
 ### データシャーディング {#data-sharding}
 
@@ -67,7 +67,7 @@ TiKV は、キーの範囲に従って最下層のデータを自動的にシャ
 
 ### KV 上の SQL {#sql-on-kv}
 
-TiDB は、SQL 構造を Key-Value 構造に自動的にマッピングします。詳細は[<a href="https://en.pingcap.com/blog/tidb-internal-computing/">TiDB 内部 (II) - コンピューティング</a>](https://en.pingcap.com/blog/tidb-internal-computing/)を参照してください。
+TiDB は、SQL 構造を Key-Value 構造に自動的にマッピングします。詳細は[TiDB 内部 (II) - コンピューティング](https://en.pingcap.com/blog/tidb-internal-computing/)を参照してください。
 
 簡単に言うと、TiDB は次の操作を実行します。
 
@@ -115,21 +115,21 @@ MySQL の豊富な経験は TiDB にも応用できます。 TiDB には独自�
 
     データは多くのリージョンに分散されるため、クエリは TiDB で同時に実行されます。ただし、システム リソースを大量に消費する場合を考慮して、デフォルトの同時実行性は高くありません。さらに、OLTP クエリには通常、大量のデータが含まれないため、同時実行性が低くても十分です。ただし、OLAP クエリの場合は同時実行性が高く、TiDB は次のシステム変数を通じてクエリの同時実行性を変更します。
 
-    -   [<a href="/system-variables.md#tidb_distsql_scan_concurrency">`tidb_distsql_scan_concurrency`</a>](/system-variables.md#tidb_distsql_scan_concurrency) :
+    -   [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency) :
 
         テーブルおよびインデックス データのスキャンを含む、データのスキャンの同時実行性。
 
-    -   [<a href="/system-variables.md#tidb_index_lookup_size">`tidb_index_lookup_size`</a>](/system-variables.md#tidb_index_lookup_size) :
+    -   [`tidb_index_lookup_size`](/system-variables.md#tidb_index_lookup_size) :
 
         テーブル データにアクセスする前にインデックスにアクセスして行 ID を取得する必要がある場合、行 ID のバッチを単一のリクエストとして使用してテーブル データにアクセスします。このパラメータはバッチのサイズを設定します。バッチが大きくなるとレイテンシーが増加しますが、バッチが小さくなるとクエリが増加する可能性があります。このパラメータの適切なサイズは、クエリに含まれるデータの量に関係します。通常、変更は必要ありません。
 
-    -   [<a href="/system-variables.md#tidb_index_lookup_concurrency">`tidb_index_lookup_concurrency`</a>](/system-variables.md#tidb_index_lookup_concurrency) :
+    -   [`tidb_index_lookup_concurrency`](/system-variables.md#tidb_index_lookup_concurrency) :
 
         テーブル データにアクセスする前にインデックスにアクセスして行 ID を取得する必要がある場合、毎回行 ID を介してデータを取得する同時実行性は、このパラメーターによって変更されます。
 
 -   インデックスを使用して結果の順序を保証する
 
-    インデックスを使用してデータをフィルタリングまたは並べ替えることができます。まず、インデックスの順序に従って行 ID を取得します。次に、行 ID の返される順序に従って、行の内容を返します。このようにして、返された結果はインデックス列に従って順序付けされます。インデックスのスキャンと行の取得のモデルが並列 + パイプラインであることは前述しました。インデックスの順序に従って行が返される場合、2 つのクエリ間の同時実行性が高くてもレイテンシーは短縮されません。したがって、デフォルトでは同時実行性は低くなりますが、 [<a href="/system-variables.md#tidb_index_serial_scan_concurrency">`tidb_index_serial_scan_concurrency`</a>](/system-variables.md#tidb_index_serial_scan_concurrency)変数を使用して変更できます。
+    インデックスを使用してデータをフィルタリングまたは並べ替えることができます。まず、インデックスの順序に従って行 ID を取得します。次に、行 ID の返される順序に従って、行の内容を返します。このようにして、返された結果はインデックス列に従って順序付けされます。インデックスのスキャンと行の取得のモデルが並列 + パイプラインであることは前述しました。インデックスの順序に従って行が返される場合、2 つのクエリ間の同時実行性が高くてもレイテンシーは短縮されません。したがって、デフォルトでは同時実行性は低くなりますが、 [`tidb_index_serial_scan_concurrency`](/system-variables.md#tidb_index_serial_scan_concurrency)変数を使用して変更できます。
 
 -   逆インデックススキャン
 
@@ -141,13 +141,13 @@ MySQL の豊富な経験は TiDB にも応用できます。 TiDB には独自�
 
 ### 導入 {#deployment}
 
-導入の前に、 [<a href="/hardware-and-software-requirements.md">ソフトウェアとハードウェアの要件</a>](/hardware-and-software-requirements.md)をお読みください。
+導入の前に、 [ソフトウェアとハードウェアの要件](/hardware-and-software-requirements.md)をお読みください。
 
-[<a href="/production-deployment-using-tiup.md">TiUP</a>](/production-deployment-using-tiup.md)を使用して TiDB クラスターをデプロイすることをお勧めします。このツールはクラスター全体をデプロイ、停止、破棄、アップグレードできるため、非常に便利です。 TiDB クラスターを手動でデプロイすることはお勧めできません。後で保守したりアップグレードしたりするのが面倒になる可能性があります。
+[TiUP](/production-deployment-using-tiup.md)を使用して TiDB クラスターをデプロイすることをお勧めします。このツールはクラスター全体をデプロイ、停止、破棄、アップグレードできるため、非常に便利です。 TiDB クラスターを手動でデプロイすることはお勧めできません。後で保守したりアップグレードしたりするのが面倒になる可能性があります。
 
 ### データインポート {#data-import}
 
-インポート プロセス中の書き込みパフォーマンスを向上させるために、 [<a href="/tune-tikv-memory-performance.md">TiKV メモリ パラメータのパフォーマンスを調整する</a>](/tune-tikv-memory-performance.md)で説明したように TiKV のパラメーターを調整できます。
+インポート プロセス中の書き込みパフォーマンスを向上させるために、 [TiKV メモリ パラメータのパフォーマンスを調整する](/tune-tikv-memory-performance.md)で説明したように TiKV のパラメーターを調整できます。
 
 ### 書く {#write}
 
@@ -174,7 +174,7 @@ for i from 0 to 23:
 
 ### クエリ {#query}
 
-クエリ要件と特定のステートメントについては、 [<a href="/system-variables.md">システム変数</a>](/system-variables.md)を参照してください。
+クエリ要件と特定のステートメントについては、 [システム変数](/system-variables.md)を参照してください。
 
 `SET`ステートメントを通じて SQL 実行の同時実行性を制御し、ヒントを通じて`Join`演算子の選択を制御できます。
 
@@ -188,23 +188,23 @@ OLTP および OLAP ワークロードを完全に分離するには、 TiFlash�
 
 監視メトリクスは、システムのステータスを知るための最良の方法です。 TiDB クラスターと一緒にモニタリング システムを展開することをお勧めします。
 
-TiDB は[<a href="/tidb-monitoring-framework.md">グラファナ + プロメテウス</a>](/tidb-monitoring-framework.md)を使用してシステムのステータスを監視します。 TiUPを使用して TiDB を展開すると、監視システムが自動的に展開および構成されます。
+TiDB は[グラファナ + プロメテウス](/tidb-monitoring-framework.md)を使用してシステムのステータスを監視します。 TiUPを使用して TiDB を展開すると、監視システムが自動的に展開および構成されます。
 
 監視システムには多くの項目があり、その大部分は TiDB 開発者向けです。ソース コードに関する深い知識がなくても、これらの項目を理解する必要はありません。アプリケーションまたはシステム キー コンポーネントの状態に関連するいくつかの項目が選択され、ユーザー用の別の`overview`パネルに配置されます。
 
 監視に加えて、システム ログを表示することもできます。 TiDB の 3 つのコンポーネント、tidb-server、tikv-server、および pd-server には、それぞれ`--log-file`パラメーターがあります。クラスターの起動時にこのパラメーターが設定されている場合、ログはパラメーターで設定されたファイルに保存され、ログ ファイルは毎日自動的にアーカイブされます。 `--log-file`パラメータが設定されていない場合、ログは`stderr`に出力されます。
 
-TiDB 4.0 以降、TiDB は使いやすさを向上させるために[<a href="/dashboard/dashboard-intro.md">TiDB ダッシュボード</a>](/dashboard/dashboard-intro.md) UI を提供します。ブラウザで[<a href="http://$%7BPD_IP%7D:$%7BPD_PORT%7D/dashboard">http://${PD_IP}:${PD_PORT}/ダッシュボード</a>](http://$%7BPD_IP%7D:$%7BPD_PORT%7D/dashboard)アクセスすると、TiDB ダッシュボードにアクセスできます。 TiDB ダッシュボードは、クラスターのステータスの表示、パフォーマンス分析、トラフィックの視覚化、クラスターの診断、ログ検索などの機能を提供します。
+TiDB 4.0 以降、TiDB は使いやすさを向上させるために[http://${PD_IP}:${PD_PORT}/ダッシュボード](http://$%7BPD_IP%7D:$%7BPD_PORT%7D/dashboard)アクセスすると、TiDB ダッシュボードにアクセスできます。 TiDB ダッシュボードは、クラスターのステータスの表示、パフォーマンス分析、トラフィックの視覚化、クラスターの診断、ログ検索などの機能を提供します。
 
 ### ドキュメンテーション {#documentation}
 
 システムについて学び、問題を解決する最善の方法は、そのドキュメントを読み、その実装原理を理解することです。
 
-TiDB には中国語と英語の両方で多数の公式文書があります。問題が発生した場合は、 [<a href="/faq/tidb-faq.md">FAQ</a>](/faq/tidb-faq.md)と[<a href="/troubleshoot-tidb-cluster.md">TiDBクラスタのトラブルシューティング ガイド</a>](/troubleshoot-tidb-cluster.md)から始めることができます。 [<a href="https://github.com/pingcap/tidb">GitHub 上の TiDB リポジトリ</a>](https://github.com/pingcap/tidb)で問題リストを検索したり、問題を作成したりすることもできます。
+TiDB には中国語と英語の両方で多数の公式文書があります。問題が発生した場合は、 [GitHub 上の TiDB リポジトリ](https://github.com/pingcap/tidb)で問題リストを検索したり、問題を作成したりすることもできます。
 
-TiDB には便利な移行ツールも多数あります。詳細については[<a href="/ecosystem-tool-user-guide.md">移行ツールの概要</a>](/ecosystem-tool-user-guide.md)を参照してください。
+TiDB には便利な移行ツールも多数あります。詳細については[移行ツールの概要](/ecosystem-tool-user-guide.md)を参照してください。
 
-TiDB の技術的な詳細に関するその他の記事については、 [<a href="https://pingcap.com/blog/">PingCAP公式ブログサイト</a>](https://pingcap.com/blog/)を参照してください。
+TiDB の技術的な詳細に関するその他の記事については、 [PingCAP公式ブログサイト](https://pingcap.com/blog/)を参照してください。
 
 ## TiDB に最適なシナリオ {#best-scenarios-for-tidb}
 

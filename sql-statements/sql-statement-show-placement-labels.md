@@ -38,6 +38,6 @@ SHOW PLACEMENT LABELS;
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/placement-rules-in-sql.md">SQL の配置ルール</a>](/placement-rules-in-sql.md)
--   [<a href="/sql-statements/sql-statement-show-placement.md">配置を表示</a>](/sql-statements/sql-statement-show-placement.md)
--   [<a href="/sql-statements/sql-statement-create-placement-policy.md">配置ポリシーの作成</a>](/sql-statements/sql-statement-create-placement-policy.md)
+-   [SQL の配置ルール](/placement-rules-in-sql.md)
+-   [配置を表示](/sql-statements/sql-statement-show-placement.md)
+-   [配置ポリシーの作成](/sql-statements/sql-statement-create-placement-policy.md)

@@ -22,10 +22,10 @@ summary: Learn the hybrid deployment topology of TiDB clusters.
 
 ### トポロジテンプレート {#topology-templates}
 
--   [<a href="https://github.com/pingcap/docs-cn/blob/master/config-templates/simple-multi-instance.yaml">ハイブリッド展開用のシンプルなテンプレート</a>](https://github.com/pingcap/docs-cn/blob/master/config-templates/simple-multi-instance.yaml)
--   [<a href="https://github.com/pingcap/docs/blob/master/config-templates/complex-multi-instance.yaml">ハイブリッド展開用の複雑なテンプレート</a>](https://github.com/pingcap/docs/blob/master/config-templates/complex-multi-instance.yaml)
+-   [ハイブリッド展開用のシンプルなテンプレート](https://github.com/pingcap/docs-cn/blob/master/config-templates/simple-multi-instance.yaml)
+-   [ハイブリッド展開用の複雑なテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/complex-multi-instance.yaml)
 
-上記の TiDB クラスター トポロジー ファイルの構成項目の詳細な説明については、 [<a href="/tiup/tiup-cluster-topology-reference.md">TiUPを使用して TiDB を展開するためのトポロジコンフィグレーションファイル</a>](/tiup/tiup-cluster-topology-reference.md)を参照してください。
+上記の TiDB クラスター トポロジー ファイルの構成項目の詳細な説明については、 [TiUPを使用して TiDB を展開するためのトポロジコンフィグレーションファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
 
 ### 主要パラメータ {#key-parameters}
 

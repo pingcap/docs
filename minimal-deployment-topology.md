@@ -18,10 +18,10 @@ summary: Learn the minimal deployment topology of TiDB clusters.
 
 ### トポロジテンプレート {#topology-templates}
 
--   [<a href="https://github.com/pingcap/docs/blob/master/config-templates/simple-mini.yaml">最小限のトポロジのシンプルなテンプレート</a>](https://github.com/pingcap/docs/blob/master/config-templates/simple-mini.yaml)
--   [<a href="https://github.com/pingcap/docs/blob/master/config-templates/complex-mini.yaml">最小トポロジの複雑なテンプレート</a>](https://github.com/pingcap/docs/blob/master/config-templates/complex-mini.yaml)
+-   [最小限のトポロジのシンプルなテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/simple-mini.yaml)
+-   [最小トポロジの複雑なテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/complex-mini.yaml)
 
-上記の TiDB クラスター トポロジー ファイルの構成項目の詳細な説明については、 [<a href="/tiup/tiup-cluster-topology-reference.md">TiUPを使用して TiDB を展開するためのトポロジコンフィグレーションファイル</a>](/tiup/tiup-cluster-topology-reference.md)を参照してください。
+上記の TiDB クラスター トポロジー ファイルの構成項目の詳細な説明については、 [TiUPを使用して TiDB を展開するためのトポロジコンフィグレーションファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
 
 > **ノート：**
 >

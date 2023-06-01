@@ -5,7 +5,7 @@ summary: Learn about the monitoring metrics when you use Data Migration to migra
 
 # データ移行監視メトリクス {#data-migration-monitoring-metrics}
 
-DM クラスターがTiUPを使用してデプロイされている場合、 [<a href="/dm/migrate-data-using-dm.md#step-8-monitor-the-task-and-check-logs">監視システム</a>](/dm/migrate-data-using-dm.md#step-8-monitor-the-task-and-check-logs)も同時にデプロイされます。このドキュメントでは、DM-worker によって提供される監視メトリクスについて説明します。
+DM クラスターがTiUPを使用してデプロイされている場合、 [監視システム](/dm/migrate-data-using-dm.md#step-8-monitor-the-task-and-check-logs)も同時にデプロイされます。このドキュメントでは、DM-worker によって提供される監視メトリクスについて説明します。
 
 ## タスク {#task}
 

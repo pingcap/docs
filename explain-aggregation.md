@@ -31,7 +31,7 @@ SELECT SLEEP(1);
 ANALYZE TABLE t1;
 ```
 
-[<a href="/sql-statements/sql-statement-show-table-regions.md">`SHOW TABLE REGIONS`</a>](/sql-statements/sql-statement-show-table-regions.md)の出力から、このテーブルが複数のリージョンに分割されていることがわかります。
+[`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md)の出力から、このテーブルが複数のリージョンに分割されていることがわかります。
 
 {{< copyable "" >}}
 

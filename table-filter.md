@@ -13,11 +13,11 @@ TiDB 4.0 以降、すべての TiDB 移行ツールは、サブセットを定�
 
 ### CLI {#cli}
 
-テーブル フィルターは、複数の`-f`または`--filter`コマンド ライン パラメーターを使用してツールに適用できます。各フィルターは`db.table`の形式で、各部分はワイルドカードにすることができます ( [<a href="#wildcards">次のセクション</a>](#wildcards)で詳しく説明します)。以下に使用例を示します。
+テーブル フィルターは、複数の`-f`または`--filter`コマンド ライン パラメーターを使用してツールに適用できます。各フィルターは`db.table`の形式で、各部分はワイルドカードにすることができます ( [次のセクション](#wildcards)で詳しく説明します)。以下に使用例を示します。
 
 <CustomContent platform="tidb">
 
--   [<a href="/br/backup-and-restore-overview.md">BR</a>](/br/backup-and-restore-overview.md) :
+-   [BR](/br/backup-and-restore-overview.md) :
 
     ```shell
     ./br backup full -f 'foo*.*' -f 'bar*.*' -s 'local:///tmp/backup'
@@ -29,7 +29,7 @@ TiDB 4.0 以降、すべての TiDB 移行ツールは、サブセットを定�
 
 </CustomContent>
 
--   [<a href="/dumpling-overview.md">Dumpling</a>](/dumpling-overview.md) :
+-   [Dumpling](/dumpling-overview.md) :
 
     ```shell
     ./dumpling -f 'foo*.*' -f 'bar*.*' -P 3306 -o /tmp/data/
@@ -37,7 +37,7 @@ TiDB 4.0 以降、すべての TiDB 移行ツールは、サブセットを定�
 
 <CustomContent platform="tidb">
 
--   [<a href="/tidb-lightning/tidb-lightning-overview.md">TiDB Lightning</a>](/tidb-lightning/tidb-lightning-overview.md) :
+-   [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) :
 
     ```shell
     ./tidb-lightning -f 'foo*.*' -f 'bar*.*' -d /tmp/data/ --backend tidb
@@ -47,7 +47,7 @@ TiDB 4.0 以降、すべての TiDB 移行ツールは、サブセットを定�
 
 <CustomContent platform="tidb-cloud">
 
--   [<a href="https://docs.pingcap.com/tidb/stable/tidb-lightning-overview">TiDB Lightning</a>](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview) :
+-   [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview) :
 
     ```shell
     ./tidb-lightning -f 'foo*.*' -f 'bar*.*' -d /tmp/data/ --backend tidb
@@ -57,7 +57,7 @@ TiDB 4.0 以降、すべての TiDB 移行ツールは、サブセットを定�
 
 ### TOML 設定ファイル {#toml-configuration-files}
 
-TOML ファイルのテーブル フィルターは[<a href="https://toml.io/en/v1.0.0-rc.1#section-15">文字列の配列</a>](https://toml.io/en/v1.0.0-rc.1#section-15)として指定されます。以下に使用例を示します。
+TOML ファイルのテーブル フィルターは[文字列の配列](https://toml.io/en/v1.0.0-rc.1#section-15)として指定されます。以下に使用例を示します。
 
 -   TiDB Lightning:
 
@@ -68,7 +68,7 @@ TOML ファイルのテーブル フィルターは[<a href="https://toml.io/en/
 
 <CustomContent platform="tidb">
 
--   [<a href="/ticdc/ticdc-overview.md">TiCDC</a>](/ticdc/ticdc-overview.md) :
+-   [TiCDC](/ticdc/ticdc-overview.md) :
 
     ```toml
     [filter]
@@ -93,7 +93,7 @@ db2.tbl2
 db3.tbl3
 ```
 
-プレーン名は、次のように有効な[<a href="/schema-object-names.md">識別文字</a>](/schema-object-names.md)のみで構成されている必要があります。
+プレーン名は、次のように有効な[識別文字](/schema-object-names.md)のみで構成されている必要があります。
 
 -   数字 ( `0` ～ `9` )
 -   文字 ( `a` ～ `z` 、 `A` ～ `Z` )
@@ -105,7 +105,7 @@ db3.tbl3
 
 ### ワイルドカード {#wildcards}
 
-名前の各部分には、 [<a href="https://pubs.opengroup.org/onlinepubs/9699919799/utilities/V3_chap02.html#tag_18_13">fnmatch(3)</a>](https://pubs.opengroup.org/onlinepubs/9699919799/utilities/V3_chap02.html#tag_18_13)で説明されているワイルドカード記号を使用できます。
+名前の各部分には、 [fnmatch(3)](https://pubs.opengroup.org/onlinepubs/9699919799/utilities/V3_chap02.html#tag_18_13)で説明されているワイルドカード記号を使用できます。
 
 -   `*` — 0 個以上の文字と一致します
 -   `?` — 1 つの文字と一致します
@@ -212,7 +212,7 @@ foo\"bar.foo\`bar
 /^db\d{2,}$/./^tbl\d{2,}$/
 ```
 
-これらの正規表現では[<a href="https://pkg.go.dev/regexp/syntax?tab=doc">囲碁方言</a>](https://pkg.go.dev/regexp/syntax?tab=doc)使用されます。識別子に正規表現と一致する部分文字列が含まれている場合、パターンは一致します。たとえば、 `/b/` `db01`と一致します。
+これらの正規表現では[囲碁方言](https://pkg.go.dev/regexp/syntax?tab=doc)使用されます。識別子に正規表現と一致する部分文字列が含まれている場合、パターンは一致します。たとえば、 `/b/` `db01`と一致します。
 
 > **ノート：**
 >

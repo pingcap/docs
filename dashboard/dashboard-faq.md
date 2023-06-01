@@ -5,7 +5,7 @@ summary: Learn about the frequently asked questions (FAQs) and answers about TiD
 
 # TiDB ダッシュボードに関するよくある質問 {#tidb-dashboard-faqs}
 
-このドキュメントには、TiDB ダッシュボードに関するよくある質問 (FAQ) とその回答がまとめられています。指示どおりに実行しても問題が見つからない場合、または問題が解決しない場合は、 [<a href="/support.md">支持を得ます</a>](/support.md) PingCAP またはコミュニティから連絡を受けます。
+このドキュメントには、TiDB ダッシュボードに関するよくある質問 (FAQ) とその回答がまとめられています。指示どおりに実行しても問題が見つからない場合、または問題が解決しない場合は、 [支持を得ます](/support.md) PingCAP またはコミュニティから連絡を受けます。
 
 ## アクセスに関するFAQ {#access-related-faq}
 
@@ -13,15 +13,15 @@ summary: Learn about the frequently asked questions (FAQs) and answers about TiD
 
 複数の配置Driver(PD) インスタンスがクラスターにデプロイされている場合、PD インスタンスのうちの 1 つだけが実際に TiDB ダッシュボード サービスを実行します。このインスタンスではなく他の PD インスタンスにアクセスすると、ブラウザは別のアドレスにリダイレクトします。 TiDB ダッシュボードにアクセスするためにファイアウォールまたはリバース プロキシが適切に構成されていない場合、ダッシュボードにアクセスすると、ファイアウォールまたはリバース プロキシによって保護されている内部アドレスにリダイレクトされる可能性があります。
 
--   複数の PD インスタンスを使用した TiDB ダッシュボードの動作原理については、 [<a href="/dashboard/dashboard-ops-deploy.md">TiDB ダッシュボードのマルチ PD インスタンスの展開</a>](/dashboard/dashboard-ops-deploy.md)を参照してください。
--   リバース プロキシを正しく構成する方法については、 [<a href="/dashboard/dashboard-ops-reverse-proxy.md">リバース プロキシ経由で TiDB ダッシュボードを使用する</a>](/dashboard/dashboard-ops-reverse-proxy.md)を参照してください。
--   ファイアウォールを正しく構成する方法については[<a href="/dashboard/dashboard-ops-security.md">セキュリティTiDB ダッシュボード</a>](/dashboard/dashboard-ops-security.md)を参照してください。
+-   複数の PD インスタンスを使用した TiDB ダッシュボードの動作原理については、 [TiDB ダッシュボードのマルチ PD インスタンスの展開](/dashboard/dashboard-ops-deploy.md)を参照してください。
+-   リバース プロキシを正しく構成する方法については、 [リバース プロキシ経由で TiDB ダッシュボードを使用する](/dashboard/dashboard-ops-reverse-proxy.md)を参照してください。
+-   ファイアウォールを正しく構成する方法については[セキュリティTiDB ダッシュボード](/dashboard/dashboard-ops-security.md)を参照してください。
 
 ### TiDB ダッシュボードがデュアル ネットワーク インターフェイス カード (NIC) で展開されている場合、別の NIC を使用して TiDB ダッシュボードにアクセスすることはできません {#when-tidb-dashboard-is-deployed-with-dual-network-interface-cards-nics-tidb-dashboard-cannot-be-accessed-using-another-nic}
 
 セキュリティ上の理由から、PD 上の TiDB ダッシュボードは、展開中に指定された IP アドレスのみを監視します (つまり、 `0.0.0.0`つの NIC でのみリッスンします)。したがって、ホストに複数の NIC がインストールされている場合、別の NIC を使用して TiDB ダッシュボードにアクセスすることはできません。
 
-`tiup cluster`または`tiup playground`コマンドを使用して TiDB をデプロイした場合、現時点ではこの問題は解決できません。 TiDB ダッシュボードを別の NIC に安全に公開するには、リバース プロキシを使用することをお勧めします。詳細は[<a href="/dashboard/dashboard-ops-reverse-proxy.md">リバース プロキシの背後で TiDB ダッシュボードを使用する</a>](/dashboard/dashboard-ops-reverse-proxy.md)を参照してください。
+`tiup cluster`または`tiup playground`コマンドを使用して TiDB をデプロイした場合、現時点ではこの問題は解決できません。 TiDB ダッシュボードを別の NIC に安全に公開するには、リバース プロキシを使用することをお勧めします。詳細は[リバース プロキシの背後で TiDB ダッシュボードを使用する](/dashboard/dashboard-ops-reverse-proxy.md)を参照してください。
 
 ## UI関連のFAQ {#ui-related-faq}
 
@@ -56,11 +56,11 @@ Prometheus インスタンスがデプロイされているときに引き続き
 
 ### <strong>「遅いクエリ」</strong>ページに<code>invalid connection</code>エラーが表示される {#an-code-invalid-connection-code-error-is-shown-on-the-strong-slow-queries-strong-page}
 
-考えられる理由は、TiDB のプリペアドプランキャッシュ機能を有効にしていることです。実験的機能として、有効にすると、プリペアドプランキャッシュが特定の TiDB バージョンで正しく機能しない可能性があり、TiDB ダッシュボード (および他のアプリケーション) でこの問題が発生する可能性があります。システム変数[<a href="/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610">`tidb_enable_prepared_plan_cache = OFF`</a>](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610)を設定すると、プリペアドプランキャッシュを無効にできます。
+考えられる理由は、TiDB のプリペアドプランキャッシュ機能を有効にしていることです。実験的機能として、有効にすると、プリペアドプランキャッシュが特定の TiDB バージョンで正しく機能しない可能性があり、TiDB ダッシュボード (および他のアプリケーション) でこの問題が発生する可能性があります。システム変数[`tidb_enable_prepared_plan_cache = OFF`](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610)を設定すると、プリペアドプランキャッシュを無効にできます。
 
 ### <code>required component NgMonitoring is not started</code>エラーが表示される {#a-code-required-component-ngmonitoring-is-not-started-code-error-is-shown}
 
-NgMonitoring は、**継続的プロファイリング**や**Top SQL**などの TiDB ダッシュボード機能をサポートするために、v5.4.0 以降のバージョンの TiDB クラスターに組み込まれた高度な監視コンポーネントです。新しいバージョンのTiUPを使用してクラスターをデプロイまたはアップグレードすると、NgMonitoring が自動的にデプロイされます。 TiDB Operatorを使用してデプロイされたクラスターの場合は、 [<a href="https://docs.pingcap.com/tidb-in-kubernetes/dev/access-dashboard/#enable-continuous-profiling">継続的プロファイリングを有効にする</a>](https://docs.pingcap.com/tidb-in-kubernetes/dev/access-dashboard/#enable-continuous-profiling)を参照して NgMonitoring を手動でデプロイできます。
+NgMonitoring は、**継続的プロファイリング**や**Top SQL**などの TiDB ダッシュボード機能をサポートするために、v5.4.0 以降のバージョンの TiDB クラスターに組み込まれた高度な監視コンポーネントです。新しいバージョンのTiUPを使用してクラスターをデプロイまたはアップグレードすると、NgMonitoring が自動的にデプロイされます。 TiDB Operatorを使用してデプロイされたクラスターの場合は、 [継続的プロファイリングを有効にする](https://docs.pingcap.com/tidb-in-kubernetes/dev/access-dashboard/#enable-continuous-profiling)を参照して NgMonitoring を手動でデプロイできます。
 
 Web ページに`required component NgMonitoring is not started`表示されている場合は、次のように展開の問題をトラブルシューティングできます。
 
@@ -118,13 +118,13 @@ Web ページに`required component NgMonitoring is not started`表示されて�
     tiup cluster reload ${cluster-name} --role prometheus
     ```
 
-上記の手順を実行した後もエラー メッセージが表示される場合は、PingCAP またはコミュニティから[<a href="/support.md">支持を得ます</a>](/support.md) 。
+上記の手順を実行した後もエラー メッセージが表示される場合は、PingCAP またはコミュニティから[支持を得ます](/support.md) 。
 
 </details>
 
 <details><summary>TiDB Operatorを使用してデプロイされたクラスター</summary>
 
-TiDB Operatorドキュメントの[<a href="https://docs.pingcap.com/tidb-in-kubernetes/dev/access-dashboard/#enable-continuous-profiling">継続的プロファイリングを有効にする</a>](https://docs.pingcap.com/tidb-in-kubernetes/dev/access-dashboard/#enable-continuous-profiling)セクションの手順に従って、NgMonitoringコンポーネントをデプロイ。
+TiDB Operatorドキュメントの[継続的プロファイリングを有効にする](https://docs.pingcap.com/tidb-in-kubernetes/dev/access-dashboard/#enable-continuous-profiling)セクションの手順に従って、NgMonitoringコンポーネントをデプロイ。
 
 </details>
 

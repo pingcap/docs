@@ -5,7 +5,7 @@ summary: This document describes best practices for configuration and usage of H
 
 # TiDB で HAProxy を使用するためのベスト プラクティス {#best-practices-for-using-haproxy-in-tidb}
 
-このドキュメントでは、TiDB の[<a href="https://github.com/haproxy/haproxy">HAプロキシ</a>](https://github.com/haproxy/haproxy)の構成と使用に関するベスト プラクティスについて説明します。 HAProxy は、TCP ベースのアプリケーションの負荷分散を提供します。 TiDB クライアントからは、HAProxy によって提供されるフローティング仮想 IP アドレスに接続するだけでデータを操作できます。これは、TiDBサーバーレイヤーでの負荷分散の実現に役立ちます。
+このドキュメントでは、TiDB の[HAプロキシ](https://github.com/haproxy/haproxy)の構成と使用に関するベスト プラクティスについて説明します。 HAProxy は、TCP ベースのアプリケーションの負荷分散を提供します。 TiDB クライアントからは、HAProxy によって提供されるフローティング仮想 IP アドレスに接続するだけでデータを操作できます。これは、TiDBサーバーレイヤーでの負荷分散の実現に役立ちます。
 
 ![HAProxy Best Practices in TiDB](/media/haproxy.jpg)
 
@@ -17,16 +17,16 @@ summary: This document describes best practices for configuration and usage of H
 
 HAProxy は、C 言語で書かれた無料のオープンソース ソフトウェアで、TCP および HTTP ベースのアプリケーションに高可用性ロード バランサーとプロキシサーバーを提供します。 HAProxy は CPU とメモリを高速かつ効率的に使用できるため、現在、GitHub、Bitbucket、Stack Overflow、Reddit、Tumblr、Twitter、Tuenti、AWS (アマゾン ウェブ サービス) などの多くの有名な Web サイトで広く使用されています。
 
-HAProxy は、Linux カーネルの中心的な貢献者である Willy Tarreau によって 2000 年に作成されました。彼は現在もプロジェクトの保守を担当しており、オープンソース コミュニティで無料のソフトウェア アップデートを提供しています。このガイドでは、HAProxy [<a href="https://www.haproxy.com/blog/announcing-haproxy-2-6/">2.6</a>](https://www.haproxy.com/blog/announcing-haproxy-2-6/)が使用されます。最新の安定バージョンを使用することをお勧めします。詳細は[<a href="http://www.haproxy.org/">HAProxy のリリースされたバージョン</a>](http://www.haproxy.org/)参照してください。
+HAProxy は、Linux カーネルの中心的な貢献者である Willy Tarreau によって 2000 年に作成されました。彼は現在もプロジェクトの保守を担当しており、オープンソース コミュニティで無料のソフトウェア アップデートを提供しています。このガイドでは、HAProxy [HAProxy のリリースされたバージョン](http://www.haproxy.org/)参照してください。
 
 ## 基本的な機能 {#basic-features}
 
--   [<a href="http://cbonte.github.io/haproxy-dconv/2.6/intro.html#3.3.4">高可用性</a>](http://cbonte.github.io/haproxy-dconv/2.6/intro.html#3.3.4) : HAProxy は、正常なシャットダウンとシームレスなスイッチオーバーをサポートする高可用性を提供します。
--   [<a href="http://cbonte.github.io/haproxy-dconv/2.6/configuration.html#4.2-balance">ロードバランシング</a>](http://cbonte.github.io/haproxy-dconv/2.6/configuration.html#4.2-balance) : TCP (レイヤー4 とも呼ばれる) と HTTP (レイヤー7 とも呼ばれる) という 2 つの主要なプロキシ モードがサポートされています。ラウンドロビン、leastconn、ランダムなど、9 つ以上の負荷分散アルゴリズムがサポートされています。
--   [<a href="http://cbonte.github.io/haproxy-dconv/2.6/configuration.html#5.2-check">健康診断</a>](http://cbonte.github.io/haproxy-dconv/2.6/configuration.html#5.2-check) : HAProxy はサーバーの HTTP または TCP モードのステータスを定期的にチェックします。
--   [<a href="http://cbonte.github.io/haproxy-dconv/2.6/intro.html#3.3.6">スティッキーセッション</a>](http://cbonte.github.io/haproxy-dconv/2.6/intro.html#3.3.6) : HAProxy は、アプリケーションがスティッキー セッションをサポートしていない間、クライアントを特定のサーバーに固定できます。
--   [<a href="http://cbonte.github.io/haproxy-dconv/2.6/intro.html#3.3.2">SSL</a>](http://cbonte.github.io/haproxy-dconv/2.6/intro.html#3.3.2) : HTTPS 通信と解決がサポートされます。
--   [<a href="http://cbonte.github.io/haproxy-dconv/2.6/intro.html#3.3.3">モニタリングと統計</a>](http://cbonte.github.io/haproxy-dconv/2.6/intro.html#3.3.3) : Web ページを通じて、サービスの状態とトラフィック フローをリアルタイムで監視できます。
+-   [高可用性](http://cbonte.github.io/haproxy-dconv/2.6/intro.html#3.3.4) : HAProxy は、正常なシャットダウンとシームレスなスイッチオーバーをサポートする高可用性を提供します。
+-   [ロードバランシング](http://cbonte.github.io/haproxy-dconv/2.6/configuration.html#4.2-balance) : TCP (レイヤー4 とも呼ばれる) と HTTP (レイヤー7 とも呼ばれる) という 2 つの主要なプロキシ モードがサポートされています。ラウンドロビン、leastconn、ランダムなど、9 つ以上の負荷分散アルゴリズムがサポートされています。
+-   [健康診断](http://cbonte.github.io/haproxy-dconv/2.6/configuration.html#5.2-check) : HAProxy はサーバーの HTTP または TCP モードのステータスを定期的にチェックします。
+-   [スティッキーセッション](http://cbonte.github.io/haproxy-dconv/2.6/intro.html#3.3.6) : HAProxy は、アプリケーションがスティッキー セッションをサポートしていない間、クライアントを特定のサーバーに固定できます。
+-   [SSL](http://cbonte.github.io/haproxy-dconv/2.6/intro.html#3.3.2) : HTTPS 通信と解決がサポートされます。
+-   [モニタリングと統計](http://cbonte.github.io/haproxy-dconv/2.6/intro.html#3.3.3) : Web ページを通じて、サービスの状態とトラフィック フローをリアルタイムで監視できます。
 
 ## あなたが始める前に {#before-you-begin}
 
@@ -58,7 +58,7 @@ HAProxy を展開する前に、ハードウェアとソフトウェアの要件
 
 > **ノート：**
 >
-> -   サポートされているその他のオペレーティング システムの詳細については、 [<a href="https://github.com/haproxy/haproxy/blob/master/INSTALL">HAProxy ドキュメント</a>](https://github.com/haproxy/haproxy/blob/master/INSTALL)を参照してください。
+> -   サポートされているその他のオペレーティング システムの詳細については、 [HAProxy ドキュメント](https://github.com/haproxy/haproxy/blob/master/INSTALL)を参照してください。
 
 #### 依存関係 {#dependencies}
 
@@ -76,7 +76,7 @@ yum -y install epel-release gcc systemd-devel
 
 ## HAProxyのデプロイ {#deploy-haproxy}
 
-HAProxy を使用すると、負荷分散されたデータベース環境を簡単に構成およびセットアップできます。このセクションでは、一般的な展開操作について説明します。実際のシナリオに基づいて[<a href="http://cbonte.github.io/haproxy-dconv/2.6/configuration.html">設定ファイル</a>](http://cbonte.github.io/haproxy-dconv/2.6/configuration.html)カスタマイズできます。
+HAProxy を使用すると、負荷分散されたデータベース環境を簡単に構成およびセットアップできます。このセクションでは、一般的な展開操作について説明します。実際のシナリオに基づいて[設定ファイル](http://cbonte.github.io/haproxy-dconv/2.6/configuration.html)カスタマイズできます。
 
 ### HAProxy をインストールする {#install-haproxy}
 
@@ -163,7 +163,7 @@ haproxy --help
 | `-x <unix_socket>`              | 指定されたソケットに接続し、古いプロセスからリスニングしているすべてのソケットを取得します。その後、これらのソケットは新しいソケットをバインドする代わりに使用されます。                                                                      |
 | `-S <bind>[,<bind_options>...]` | マスター/ワーカー モードでは、マスター CLI を作成します。この CLI により、すべてのワーカーの CLI へのアクセスが可能になります。デバッグに便利で、終了プロセスにアクセスする便利な方法です。                                                    |
 
-HAProxy コマンド ライン オプションの詳細については、 [<a href="http://cbonte.github.io/haproxy-dconv/2.6/management.html">HAProxy管理ガイド</a>](http://cbonte.github.io/haproxy-dconv/2.6/management.html)および[<a href="https://manpages.debian.org/buster-backports/haproxy/haproxy.1.en.html">HAProxyの一般コマンドマニュアル</a>](https://manpages.debian.org/buster-backports/haproxy/haproxy.1.en.html)を参照してください。
+HAProxy コマンド ライン オプションの詳細については、 [HAProxyの一般コマンドマニュアル](https://manpages.debian.org/buster-backports/haproxy/haproxy.1.en.html)を参照してください。
 
 ### HAProxy の構成 {#configure-haproxy}
 
@@ -209,7 +209,7 @@ listen tidb-cluster                        # Database load balancing.
    server tidb-3 10.9.64.166:4000 check inter 2000 rise 2 fall 3
 ```
 
-`SHOW PROCESSLIST`を使用して送信元 IP アドレスを確認するには、TiDB に接続するように[<a href="https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt">プロキシプロトコル</a>](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt)を設定する必要があります。
+`SHOW PROCESSLIST`を使用して送信元 IP アドレスを確認するには、TiDB に接続するように[プロキシプロトコル](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt)を設定する必要があります。
 
 ```yaml
    server tidb-1 10.9.18.229:4000 send-proxy check inter 2000 rise 2 fall 3       
@@ -219,7 +219,7 @@ listen tidb-cluster                        # Database load balancing.
 
 > **ノート：**
 >
-> PROXY プロトコルを使用する前に、TiDBサーバーの構成ファイルで[<a href="/tidb-configuration-file.md#networks">`proxy-protocol.networks`</a>](/tidb-configuration-file.md#networks)を構成する必要があります。
+> PROXY プロトコルを使用する前に、TiDBサーバーの構成ファイルで[`proxy-protocol.networks`](/tidb-configuration-file.md#networks)を構成する必要があります。
 
 ### HAProxyを開始する {#start-haproxy}
 

@@ -14,7 +14,7 @@ summary: The key architecture components of the TiDB platform
 
 <CustomContent platform="tidb">
 
--   データの移行、複製、またはバックアップのための豊富な[<a href="/migration-overview.md">データ移行ツール</a>](/migration-overview.md)シリーズを提供します。
+-   データの移行、複製、またはバックアップのための豊富な[データ移行ツール](/migration-overview.md)シリーズを提供します。
 
 </CustomContent>
 
@@ -24,27 +24,27 @@ summary: The key architecture components of the TiDB platform
 
 ## TiDBサーバー {#tidb-server}
 
-[<a href="/tidb-computing.md">TiDBサーバー</a>](/tidb-computing.md) 、MySQL プロトコルの接続エンドポイントを外部に公開するステートレス SQLレイヤーです。 TiDBサーバーはSQL リクエストを受信し、SQL 解析と最適化を実行し、最終的に分散実行プランを生成します。水平方向に拡張可能で、Linux Virtual Server (LVS)、HAProxy、F5 などの負荷分散コンポーネントを通じて外部に統合インターフェイスを提供します。データは保存されず、コンピューティングと SQL 分析のみを目的としており、実際のデータ読み取りリクエストを TiKV ノード (またはTiFlashノード) に送信します。
+[TiDBサーバー](/tidb-computing.md) 、MySQL プロトコルの接続エンドポイントを外部に公開するステートレス SQLレイヤーです。 TiDBサーバーはSQL リクエストを受信し、SQL 解析と最適化を実行し、最終的に分散実行プランを生成します。水平方向に拡張可能で、Linux Virtual Server (LVS)、HAProxy、F5 などの負荷分散コンポーネントを通じて外部に統合インターフェイスを提供します。データは保存されず、コンピューティングと SQL 分析のみを目的としており、実際のデータ読み取りリクエストを TiKV ノード (またはTiFlashノード) に送信します。
 
 ## 配置Driver(PD)サーバー {#placement-driver-pd-server}
 
-[<a href="/tidb-scheduling.md">PDサーバー</a>](/tidb-scheduling.md)は、クラスター全体のメタデータ管理コンポーネントです。すべての単一 TiKV ノードのリアルタイム データ分散のメタデータと TiDB クラスター全体のトポロジ構造を保存し、TiDB ダッシュボード管理 UI を提供し、分散トランザクションにトランザクション ID を割り当てます。 PDサーバーは、クラスターのメタデータを保存するだけでなく、TiKV ノードからリアルタイムで報告されるデータ分散状態に従って、特定の TiKV ノードにデータ スケジューリング コマンドを送信するため、TiDB クラスター全体の「頭脳」です。また、PDサーバーは少なくとも 3 つのノードで構成され、高可用性を備えています。奇数の PD ノードを展開することをお勧めします。
+[PDサーバー](/tidb-scheduling.md)は、クラスター全体のメタデータ管理コンポーネントです。すべての単一 TiKV ノードのリアルタイム データ分散のメタデータと TiDB クラスター全体のトポロジ構造を保存し、TiDB ダッシュボード管理 UI を提供し、分散トランザクションにトランザクション ID を割り当てます。 PDサーバーは、クラスターのメタデータを保存するだけでなく、TiKV ノードからリアルタイムで報告されるデータ分散状態に従って、特定の TiKV ノードにデータ スケジューリング コマンドを送信するため、TiDB クラスター全体の「頭脳」です。また、PDサーバーは少なくとも 3 つのノードで構成され、高可用性を備えています。奇数の PD ノードを展開することをお勧めします。
 
 ## ストレージサーバー {#storage-servers}
 
 ### TiKVサーバー {#tikv-server}
 
-[<a href="/tidb-storage.md">TiKVサーバー</a>](/tidb-storage.md)はデータの保存を担当します。 TiKV は、分散トランザクションのキーと値のstorageエンジンです。
+[TiKVサーバー](/tidb-storage.md)はデータの保存を担当します。 TiKV は、分散トランザクションのキーと値のstorageエンジンです。
 
 <CustomContent platform="tidb">
 
-[<a href="/glossary.md#regionpeerraft-group">リージョン</a>](/glossary.md#regionpeerraft-group)はデータを格納する基本単位です。各リージョンには、 StartKey から EndKey までの左が閉じて右が開いた間隔である特定のキー範囲のデータが格納されます。
+[リージョン](/glossary.md#regionpeerraft-group)はデータを格納する基本単位です。各リージョンには、 StartKey から EndKey までの左が閉じて右が開いた間隔である特定のキー範囲のデータが格納されます。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[<a href="/tidb-cloud/tidb-cloud-glossary.md#region">リージョン</a>](/tidb-cloud/tidb-cloud-glossary.md#region)はデータを格納する基本単位です。各リージョンには、 StartKey から EndKey までの左が閉じて右が開いた間隔である特定のキー範囲のデータが格納されます。
+[リージョン](/tidb-cloud/tidb-cloud-glossary.md#region)はデータを格納する基本単位です。各リージョンには、 StartKey から EndKey までの左が閉じて右が開いた間隔である特定のキー範囲のデータが格納されます。
 
 </CustomContent>
 
@@ -52,4 +52,4 @@ summary: The key architecture components of the TiDB platform
 
 ### TiFlashサーバー {#tiflash-server}
 
-[<a href="/tiflash/tiflash-overview.md">TiFlashサーバー</a>](/tiflash/tiflash-overview.md)は特殊なタイプのstorageサーバーです。通常の TiKV ノードとは異なり、 TiFlash はデータを列ごとに保存し、主に分析処理を高速化するように設計されています。
+[TiFlashサーバー](/tiflash/tiflash-overview.md)は特殊なタイプのstorageサーバーです。通常の TiKV ノードとは異なり、 TiFlash はデータを列ごとに保存し、主に分析処理を高速化するように設計されています。

@@ -7,16 +7,16 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
 
 このガイドでは、TiDB を始める最も簡単な方法を説明します。非実稼働環境の場合は、次のいずれかの方法で TiDB データベースをデプロイできます。
 
--   [<a href="#deploy-a-local-test-cluster">ローカルテストクラスターをデプロイ</a>](#deploy-a-local-test-cluster) (macOS および Linux の場合)
--   [<a href="#simulate-production-deployment-on-a-single-machine">単一マシン上で本番デプロイメントをシミュレートする</a>](#simulate-production-deployment-on-a-single-machine) (Linux のみ)
+-   [ローカルテストクラスターをデプロイ](#deploy-a-local-test-cluster) (macOS および Linux の場合)
+-   [単一マシン上で本番デプロイメントをシミュレートする](#simulate-production-deployment-on-a-single-machine) (Linux のみ)
 
 > **ノート：**
 >
 > このガイドで提供されるデプロイメント方法は、クイック スタート**のみを目的として**おり、本番**向けではありません**。
 >
-> -   オンプレミスの本番クラスターをデプロイするには、 [<a href="/production-deployment-using-tiup.md">本番インストールガイド</a>](/production-deployment-using-tiup.md)を参照してください。
-> -   TiDB を Kubernetes にデプロイするには、 [<a href="https://docs.pingcap.com/tidb-in-kubernetes/stable/get-started">Kubernetes で TiDB を使ってみる</a>](https://docs.pingcap.com/tidb-in-kubernetes/stable/get-started)を参照してください。
-> -   クラウドで TiDB を管理するには、 [<a href="https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart">TiDB Cloudクイック スタート</a>](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart)を参照してください。
+> -   オンプレミスの本番クラスターをデプロイするには、 [本番インストールガイド](/production-deployment-using-tiup.md)を参照してください。
+> -   TiDB を Kubernetes にデプロイするには、 [Kubernetes で TiDB を使ってみる](https://docs.pingcap.com/tidb-in-kubernetes/stable/get-started)を参照してください。
+> -   クラウドで TiDB を管理するには、 [TiDB Cloudクイック スタート](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart)を参照してください。
 
 ## ローカルテストクラスターをデプロイ {#deploy-a-local-test-cluster}
 
@@ -99,7 +99,7 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
         >
         > -   v5.2.0 以降、TiDB は Apple M1 チップを使用するマシンでの`tiup playground`の実行をサポートします。
         > -   この方法で操作されたプレイグラウンドの場合、テスト デプロイメントが完了した後、 TiUP は元のクラスター データをクリーンアップします。コマンドを再実行すると、新しいクラスターが取得されます。
-        > -   データをstorage上に保持したい場合は、 `tiup --tag <your-tag> playground ...`を実行します。詳細は[<a href="/tiup/tiup-reference.md#-t---tag">TiUPリファレンスガイド</a>](/tiup/tiup-reference.md#-t---tag)を参照してください。
+        > -   データをstorage上に保持したい場合は、 `tiup --tag <your-tag> playground ...`を実行します。詳細は[TiUPリファレンスガイド](/tiup/tiup-reference.md#-t---tag)を参照してください。
 
 4.  新しいセッションを開始して TiDB にアクセスします。
 
@@ -119,13 +119,13 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
         mysql --host 127.0.0.1 --port 4000 -u root
         ```
 
-5.  [<a href="http://127.0.0.1:9090">http://127.0.0.1:9090</a>](http://127.0.0.1:9090)で TiDB の Prometheus ダッシュボードにアクセスします。
+5.  [http://127.0.0.1:9090](http://127.0.0.1:9090)で TiDB の Prometheus ダッシュボードにアクセスします。
 
-6.  [<a href="http://127.0.0.1:2379/dashboard">http://127.0.0.1:2379/ダッシュボード</a>](http://127.0.0.1:2379/dashboard)で[<a href="/dashboard/dashboard-intro.md">TiDB ダッシュボード</a>](/dashboard/dashboard-intro.md)にアクセスします。デフォルトのユーザー名は`root`で、パスワードは空です。
+6.  [TiDB ダッシュボード](/dashboard/dashboard-intro.md)にアクセスします。デフォルトのユーザー名は`root`で、パスワードは空です。
 
-7.  [<a href="http://127.0.0.1:3000">http://127.0.0.1:3000</a>](http://127.0.0.1:3000)を通じて TiDB の Grafana ダッシュボードにアクセスします。デフォルトのユーザー名とパスワードは両方とも`admin`です。
+7.  [http://127.0.0.1:3000](http://127.0.0.1:3000)を通じて TiDB の Grafana ダッシュボードにアクセスします。デフォルトのユーザー名とパスワードは両方とも`admin`です。
 
-8.  (オプション) 分析用に[<a href="/tiflash/tiflash-overview.md#use-tiflash">データをTiFlashにロードする</a>](/tiflash/tiflash-overview.md#use-tiflash) 。
+8.  (オプション) 分析用に[データをTiFlashにロードする](/tiflash/tiflash-overview.md#use-tiflash) 。
 
 9.  テスト展開後にクラスターをクリーンアップします。
 
@@ -217,7 +217,7 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
 
         > **ノート：**
         >
-        > この方法で操作されたプレイグラウンドの場合、テスト デプロイメントが完了した後、 TiUP は元のクラスター データをクリーンアップします。コマンドを再実行すると、新しいクラスターが取得されます。データをstorage上に保持したい場合は、 `tiup --tag <your-tag> playground ...`を実行します。詳細は[<a href="/tiup/tiup-reference.md#-t---tag">TiUPリファレンスガイド</a>](/tiup/tiup-reference.md#-t---tag)を参照してください。
+        > この方法で操作されたプレイグラウンドの場合、テスト デプロイメントが完了した後、 TiUP は元のクラスター データをクリーンアップします。コマンドを再実行すると、新しいクラスターが取得されます。データをstorage上に保持したい場合は、 `tiup --tag <your-tag> playground ...`を実行します。詳細は[TiUPリファレンスガイド](/tiup/tiup-reference.md#-t---tag)を参照してください。
 
 4.  新しいセッションを開始して TiDB にアクセスします。
 
@@ -237,13 +237,13 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
         mysql --host 127.0.0.1 --port 4000 -u root
         ```
 
-5.  [<a href="http://127.0.0.1:9090">http://127.0.0.1:9090</a>](http://127.0.0.1:9090)で TiDB の Prometheus ダッシュボードにアクセスします。
+5.  [http://127.0.0.1:9090](http://127.0.0.1:9090)で TiDB の Prometheus ダッシュボードにアクセスします。
 
-6.  [<a href="http://127.0.0.1:2379/dashboard">http://127.0.0.1:2379/ダッシュボード</a>](http://127.0.0.1:2379/dashboard)で[<a href="/dashboard/dashboard-intro.md">TiDB ダッシュボード</a>](/dashboard/dashboard-intro.md)にアクセスします。デフォルトのユーザー名は`root`で、パスワードは空です。
+6.  [TiDB ダッシュボード](/dashboard/dashboard-intro.md)にアクセスします。デフォルトのユーザー名は`root`で、パスワードは空です。
 
-7.  [<a href="http://127.0.0.1:3000">http://127.0.0.1:3000</a>](http://127.0.0.1:3000)を通じて TiDB の Grafana ダッシュボードにアクセスします。デフォルトのユーザー名とパスワードは両方とも`admin`です。
+7.  [http://127.0.0.1:3000](http://127.0.0.1:3000)を通じて TiDB の Grafana ダッシュボードにアクセスします。デフォルトのユーザー名とパスワードは両方とも`admin`です。
 
-8.  (オプション) 分析用に[<a href="/tiflash/tiflash-overview.md#use-tiflash">データをTiFlashにロードする</a>](/tiflash/tiflash-overview.md#use-tiflash) 。
+8.  (オプション) 分析用に[データをTiFlashにロードする](/tiflash/tiflash-overview.md#use-tiflash) 。
 
 9.  テスト展開後にクラスターをクリーンアップします。
 
@@ -294,7 +294,7 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
 ターゲット マシンのその他の要件:
 
 -   `root`ユーザーとそのパスワードが必要です
--   [<a href="/check-before-deployment.md#check-and-stop-the-firewall-service-of-target-machines">ターゲットマシンのファイアウォールサービスを停止します</a>](/check-before-deployment.md#check-and-stop-the-firewall-service-of-target-machines) 、または TiDB クラスターノードに必要なポートを開きます
+-   [ターゲットマシンのファイアウォールサービスを停止します](/check-before-deployment.md#check-and-stop-the-firewall-service-of-target-machines) 、または TiDB クラスターノードに必要なポートを開きます
 -   現在、 TiUPクラスターは、x86_64 (AMD64) および ARM アーキテクチャでの TiDB のデプロイをサポートしています。
 
     -   AMD64 では CentOS 7.3 以降のバージョンを使用することをお勧めします
@@ -473,9 +473,9 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
         mysql -h 10.0.1.1 -P 4000 -u root
         ```
 
-    -   [<a href="http://%7Bgrafana-ip%7D:3000">http://{グラファナ-ip}:3000</a>](http://%7Bgrafana-ip%7D:3000)から Grafana 監視ダッシュボードにアクセスします。デフォルトのユーザー名とパスワードは両方とも`admin`です。
+    -   [http://{グラファナ-ip}:3000](http://%7Bgrafana-ip%7D:3000)から Grafana 監視ダッシュボードにアクセスします。デフォルトのユーザー名とパスワードは両方とも`admin`です。
 
-    -   [<a href="http://%7Bpd-ip%7D:2379/dashboard">http://{pd-ip}:2379/ダッシュボード</a>](http://%7Bpd-ip%7D:2379/dashboard)で[<a href="/dashboard/dashboard-intro.md">TiDB ダッシュボード</a>](/dashboard/dashboard-intro.md)にアクセスします。デフォルトのユーザー名は`root`で、パスワードは空です。
+    -   [TiDB ダッシュボード](/dashboard/dashboard-intro.md)にアクセスします。デフォルトのユーザー名は`root`で、パスワードは空です。
 
     -   現在デプロイされているクラスターのリストを表示するには、次の手順を実行します。
 
@@ -497,15 +497,15 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
 
 -   ローカル テスト環境に TiDB クラスターをデプロイしたばかりの場合:
 
-    -   学ぶ[<a href="/basic-sql-operations.md">TiDB の基本的な SQL 操作</a>](/basic-sql-operations.md)
-    -   [<a href="/migration-overview.md">データを TiDB に移行する</a>](/migration-overview.md)
+    -   学ぶ[TiDB の基本的な SQL 操作](/basic-sql-operations.md)
+    -   [データを TiDB に移行する](/migration-overview.md)
 
 -   TiDB クラスターを本番環境にデプロイする準備ができている場合:
 
-    -   [<a href="/production-deployment-using-tiup.md">TiUPを使用して TiDBをデプロイ</a>](/production-deployment-using-tiup.md)
-    -   [<a href="https://docs.pingcap.com/tidb-in-kubernetes/stable">TiDB Operatorを使用して TiDB をクラウドにデプロイ</a>](https://docs.pingcap.com/tidb-in-kubernetes/stable)
+    -   [TiUPを使用して TiDBをデプロイ](/production-deployment-using-tiup.md)
+    -   [TiDB Operatorを使用して TiDB をクラウドにデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/stable)
 
 -   TiFlashを使用した分析ソリューションをお探しの場合:
 
-    -   [<a href="/tiflash/tiflash-overview.md#use-tiflash">TiFlashを使用する</a>](/tiflash/tiflash-overview.md#use-tiflash)
-    -   [<a href="/tiflash/tiflash-overview.md">TiFlashの概要</a>](/tiflash/tiflash-overview.md)
+    -   [TiFlashを使用する](/tiflash/tiflash-overview.md#use-tiflash)
+    -   [TiFlashの概要](/tiflash/tiflash-overview.md)

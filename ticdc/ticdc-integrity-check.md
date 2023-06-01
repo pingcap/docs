@@ -13,13 +13,13 @@ v7.1.0 以降、TiCDC には、チェックサム アルゴリズムを使用し
 
 TiCDC はデータを特定の形式にエンコードし、Kafka に送信します。 Kafka Consumer はデータを読み取った後、TiDB と同じアルゴリズムを使用して新しいチェックサムを計算します。新しいチェックサムがデータ内のチェックサムと等しい場合、TiCDC から Kafka Consumer への送信中にデータが一貫していることを示します。
 
-チェックサムのアルゴリズムの詳細については、 [<a href="#algorithm-for-checksum-calculation">チェックサム計算のアルゴリズム</a>](#algorithm-for-checksum-calculation)を参照してください。
+チェックサムのアルゴリズムの詳細については、 [チェックサム計算のアルゴリズム](#algorithm-for-checksum-calculation)を参照してください。
 
 ## 機能を有効にする {#enable-the-feature}
 
 TiCDC は、デフォルトでデータ整合性検証を無効にします。有効にするには、次の手順を実行します。
 
-1.  [<a href="/system-variables.md#tidb_enable_row_level_checksum-new-in-v710">`tidb_enable_row_level_checksum`</a>](/system-variables.md#tidb_enable_row_level_checksum-new-in-v710)システム変数を設定して、アップストリーム TiDB クラスター内の単一行データのチェックサム整合性検証機能を有効にします。
+1.  [`tidb_enable_row_level_checksum`](/system-variables.md#tidb_enable_row_level_checksum-new-in-v710)システム変数を設定して、アップストリーム TiDB クラスター内の単一行データのチェックサム整合性検証機能を有効にします。
 
     ```sql
     SET GLOBAL tidb_enable_row_level_checksum = ON;
@@ -27,7 +27,7 @@ TiCDC は、デフォルトでデータ整合性検証を無効にします。�
 
     この設定は新しく作成されたセッションに対してのみ有効であるため、TiDB に再接続する必要があります。
 
-2.  変更フィードの作成時に`--config`パラメーターで指定した[<a href="/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters">設定ファイル</a>](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)に、次の構成を追加します。
+2.  変更フィードの作成時に`--config`パラメーターで指定した[設定ファイル](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)に、次の構成を追加します。
 
     ```toml
     [integrity]
@@ -35,7 +35,7 @@ TiCDC は、デフォルトでデータ整合性検証を無効にします。�
     corruption-handle-level = "warn"
     ```
 
-3.  データのエンコード形式として Avro を使用する場合は、 [<a href="/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka">`sink-uri`</a>](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka)に[<a href="/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka">`enable-tidb-extension=true`</a>](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka)を設定する必要があります。チェックサム検証の失敗を引き起こす可能性があるネットワーク送信中の数値精度の損失を防ぐには、 [<a href="/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka">`avro-decimal-handling-mode=string`</a>](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka)と[<a href="/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka">`avro-bigint-unsigned-handling-mode=string`</a>](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka)を設定する必要もあります。以下は例です。
+3.  データのエンコード形式として Avro を使用する場合は、 [`avro-bigint-unsigned-handling-mode=string`](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka)を設定する必要もあります。以下は例です。
 
     ```shell
     cdc cli changefeed create --server=http://127.0.0.1:8300 --changefeed-id="kafka-avro-checksum" --sink-uri="kafka://127.0.0.1:9092/topic-name?protocol=avro&enable-tidb-extension=true&avro-decimal-handling-mode=string&avro-bigint-unsigned-handling-mode=string" --schema-registry=http://127.0.0.1:8081 --config changefeed_config.toml
@@ -45,13 +45,13 @@ TiCDC は、デフォルトでデータ整合性検証を無効にします。�
 
     > **ノート：**
     >
-    > 既存の変更フィードの場合、 `avro-decimal-handling-mode`と`avro-bigint-unsigned-handling-mode`が設定されていない場合、チェックサム検証機能を有効にすると、スキーマの互換性の問題が発生する可能性があります。この問題を解決するには、スキーマ レジストリの互換性タイプを`NONE`に変更します。詳細については、 [<a href="https://docs.confluent.io/platform/current/schema-registry/fundamentals/avro.html#no-compatibility-checking">スキーマレジストリ</a>](https://docs.confluent.io/platform/current/schema-registry/fundamentals/avro.html#no-compatibility-checking)を参照してください。
+    > 既存の変更フィードの場合、 `avro-decimal-handling-mode`と`avro-bigint-unsigned-handling-mode`が設定されていない場合、チェックサム検証機能を有効にすると、スキーマの互換性の問題が発生する可能性があります。この問題を解決するには、スキーマ レジストリの互換性タイプを`NONE`に変更します。詳細については、 [スキーマレジストリ](https://docs.confluent.io/platform/current/schema-registry/fundamentals/avro.html#no-compatibility-checking)を参照してください。
 
 ## 機能を無効にする {#disable-the-feature}
 
 TiCDC は、デフォルトでデータ整合性検証を無効にします。この機能を有効にした後に無効にするには、次の手順を実行します。
 
-1.  [<a href="/ticdc/ticdc-manage-changefeed.md#update-task-configuration">タスク構成を更新する</a>](/ticdc/ticdc-manage-changefeed.md#update-task-configuration)で説明した`Pause Task -> Modify Configuration -> Resume Task`プロセスに従い、変更フィードの`--config`パラメーターで指定された構成ファイル内の`[integrity]`構成をすべて削除します。
+1.  [タスク構成を更新する](/ticdc/ticdc-manage-changefeed.md#update-task-configuration)で説明した`Pause Task -> Modify Configuration -> Resume Task`プロセスに従い、変更フィードの`--config`パラメーターで指定された構成ファイル内の`[integrity]`構成をすべて削除します。
 
     ```toml
     [integrity]
@@ -59,7 +59,7 @@ TiCDC は、デフォルトでデータ整合性検証を無効にします。�
     corruption-handle-level = "warn"
     ```
 
-2.  アップストリーム TiDB で次の SQL ステートメントを実行して、チェックサム整合性検証機能を無効にします ( [<a href="/system-variables.md#tidb_enable_row_level_checksum-new-in-v710">`tidb_enable_row_level_checksum`</a>](/system-variables.md#tidb_enable_row_level_checksum-new-in-v710) )。
+2.  アップストリーム TiDB で次の SQL ステートメントを実行して、チェックサム整合性検証機能を無効にします ( [`tidb_enable_row_level_checksum`](/system-variables.md#tidb_enable_row_level_checksum-new-in-v710) )。
 
     ```sql
     SET GLOBAL tidb_enable_row_level_checksum = OFF;
@@ -106,4 +106,4 @@ fn checksum(columns) {
 >
 > チェックサム検証機能を有効にすると、DECIMAL 型および UNSIGNED BIGINT 型のデータが文字列型に変換されます。したがって、ダウンストリームのコンシューマー コードでは、チェックサム値を計算する前に、それらを対応する数値型に変換し直す必要があります。
 
-Golangで記述されたコンシューマー コードは、Kafka から読み取られたデータのデコード、スキーマ フィールドによる並べ替え、チェックサム値の計算などの手順を実装します。詳細については、 [<a href="https://github.com/pingcap/tiflow/blob/master/pkg/sink/codec/avro/decoder.go">`avro/decoder.go`</a>](https://github.com/pingcap/tiflow/blob/master/pkg/sink/codec/avro/decoder.go)を参照してください。
+Golangで記述されたコンシューマー コードは、Kafka から読み取られたデータのデコード、スキーマ フィールドによる並べ替え、チェックサム値の計算などの手順を実装します。詳細については、 [`avro/decoder.go`](https://github.com/pingcap/tiflow/blob/master/pkg/sink/codec/avro/decoder.go)を参照してください。

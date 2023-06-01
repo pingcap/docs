@@ -20,13 +20,13 @@ TiDB は、ユーザーが TiDB にログインするための証明書ベース
 
 <CustomContent platform="tidb">
 
-キーと証明書を作成するには[<a href="https://www.openssl.org/">OpenSSL</a>](https://www.openssl.org/)を使用することをお勧めします。証明書の生成プロセスは、 [<a href="/enable-tls-between-clients-and-servers.md">TiDB クライアントとサーバー間で TLS を有効にする</a>](/enable-tls-between-clients-and-servers.md)で説明したプロセスと同様です。次の段落では、証明書で検証する必要があるその他の属性フィールドを構成する方法を示します。
+キーと証明書を作成するには[TiDB クライアントとサーバー間で TLS を有効にする](/enable-tls-between-clients-and-servers.md)で説明したプロセスと同様です。次の段落では、証明書で検証する必要があるその他の属性フィールドを構成する方法を示します。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-キーと証明書を作成するには[<a href="https://www.openssl.org/">OpenSSL</a>](https://www.openssl.org/)を使用することをお勧めします。証明書の生成プロセスは、 [<a href="https://docs.pingcap.com/tidb/stable/enable-tls-between-clients-and-servers">TiDB クライアントとサーバー間で TLS を有効にする</a>](https://docs.pingcap.com/tidb/stable/enable-tls-between-clients-and-servers)で説明したプロセスと同様です。次の段落では、証明書で検証する必要があるその他の属性フィールドを構成する方法を示します。
+キーと証明書を作成するには[TiDB クライアントとサーバー間で TLS を有効にする](https://docs.pingcap.com/tidb/stable/enable-tls-between-clients-and-servers)で説明したプロセスと同様です。次の段落では、証明書で検証する必要があるその他の属性フィールドを構成する方法を示します。
 
 </CustomContent>
 
@@ -201,7 +201,7 @@ TiDB は、ユーザーが TiDB にログインするための証明書ベース
 
     > **ノート：**
     >
-    > 上記の出力の`subject`セクションの情報は、 `require`セクションの[<a href="#configure-the-user-certificate-information-for-login-verification">ログイン検証のための証明書の構成</a>](#configure-the-user-certificate-information-for-login-verification)に使用されます。
+    > 上記の出力の`subject`セクションの情報は、 `require`セクションの[ログイン検証のための証明書の構成](#configure-the-user-certificate-information-for-login-verification)に使用されます。
 
 ### 証明書を検証する {#verify-certificate}
 
@@ -267,7 +267,7 @@ mysql -utest -h0.0.0.0 -P4000 --ssl-cert /path/to/client-cert.new.pem --ssl-key 
 
 ユーザー証明書情報は`require subject` 、 `require issuer` 、 `require san` 、および`require cipher`で指定でき、X509 証明書の属性を確認するために使用されます。
 
--   `require subject` : ログイン時にクライアント証明書の`subject`情報を指定します。このオプションを指定すると、 `require ssl`またはx509の設定は不要です。指定する情報は、 [<a href="#generate-client-key-and-certificate">クライアントキーと証明書を生成する</a>](#generate-client-key-and-certificate)で入力した`subject`情報と一致します。
+-   `require subject` : ログイン時にクライアント証明書の`subject`情報を指定します。このオプションを指定すると、 `require ssl`またはx509の設定は不要です。指定する情報は、 [クライアントキーと証明書を生成する](#generate-client-key-and-certificate)で入力した`subject`情報と一致します。
 
     このオプションを取得するには、次のコマンドを実行します。
 
@@ -277,7 +277,7 @@ mysql -utest -h0.0.0.0 -P4000 --ssl-cert /path/to/client-cert.new.pem --ssl-key 
     openssl x509 -noout -subject -in client-cert.pem | sed 's/.\{8\}//'  | sed 's/, /\//g' | sed 's/ = /=/g' | sed 's/^/\//'
     ```
 
--   `require issuer` : ユーザー証明書を発行するCA証明書の情報`subject`を指定します。指定する情報は、 [<a href="#generate-ca-key-and-certificate">CA キーと証明書を生成する</a>](#generate-ca-key-and-certificate)で入力した`subject`情報と一致します。
+-   `require issuer` : ユーザー証明書を発行するCA証明書の情報`subject`を指定します。指定する情報は、 [CA キーと証明書を生成する](#generate-ca-key-and-certificate)で入力した`subject`情報と一致します。
 
     このオプションを取得するには、次のコマンドを実行します。
 
@@ -287,7 +287,7 @@ mysql -utest -h0.0.0.0 -P4000 --ssl-cert /path/to/client-cert.new.pem --ssl-key 
     openssl x509 -noout -subject -in ca-cert.pem | sed 's/.\{8\}//'  | sed 's/, /\//g' | sed 's/ = /=/g' | sed 's/^/\//'
     ```
 
--   `require san` : ユーザー証明書を発行するCA証明書の情報`Subject Alternative Name`を指定します。指定する情報は、クライアント証明書の生成に使用した[<a href="https://docs.pingcap.com/tidb/stable/generate-self-signed-certificates">`openssl.cnf`構成ファイルの`alt_names`</a>](https://docs.pingcap.com/tidb/stable/generate-self-signed-certificates)と一致します。
+-   `require san` : ユーザー証明書を発行するCA証明書の情報`Subject Alternative Name`を指定します。指定する情報は、クライアント証明書の生成に使用した[`openssl.cnf`構成ファイルの`alt_names`](https://docs.pingcap.com/tidb/stable/generate-self-signed-certificates)と一致します。
 
     -   次のコマンドを実行して、生成された証明書の`require san`項目の情報を取得します。
 
@@ -510,4 +510,4 @@ CA 証明書は、クライアントとサーバー間の相互検証の基礎�
     sudo openssl x509 -req -in server-req.new.pem -days 365000 -CA ca-cert.pem -CAkey ca-key.pem -set_serial 01 -out server-cert.new.pem
     ```
 
-3.  新しいサーバーキーと証明書を使用するように TiDBサーバーを構成します。詳細については[<a href="#configure-tidb-and-the-client-to-use-certificates">TiDBサーバーを構成する</a>](#configure-tidb-and-the-client-to-use-certificates)を参照してください。
+3.  新しいサーバーキーと証明書を使用するように TiDBサーバーを構成します。詳細については[TiDBサーバーを構成する](#configure-tidb-and-the-client-to-use-certificates)を参照してください。

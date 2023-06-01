@@ -96,11 +96,11 @@ SELECT title, price FROM books WHERE title = 'Marian Yost';
 
 ### 一括削除を使用する {#use-bulk-delete}
 
-大量のデータを削除する場合は、 [<a href="/develop/dev-guide-delete-data.md#bulk-delete">一括削除</a>](/develop/dev-guide-delete-data.md#bulk-delete)を使用することをお勧めします。
+大量のデータを削除する場合は、 [一括削除](/develop/dev-guide-delete-data.md#bulk-delete)を使用することをお勧めします。
 
 ### 一括更新を使用する {#use-bulk-update}
 
-大量のデータを更新する場合は、 [<a href="/develop/dev-guide-update-data.md#bulk-update">一括更新</a>](/develop/dev-guide-update-data.md#bulk-update)を使用することをお勧めします。
+大量のデータを更新する場合は、 [一括更新](/develop/dev-guide-update-data.md#bulk-update)を使用することをお勧めします。
 
 ### テーブル全体のデータには<code>DELETE</code>ではなく<code>TRUNCATE</code>使用してください {#use-code-truncate-code-instead-of-code-delete-code-for-full-table-data}
 
@@ -122,18 +122,18 @@ DELETE FROM t;
 
 ### 主キーのベスト プラクティス {#primary-key-best-practices}
 
-[<a href="/develop/dev-guide-create-table.md#guidelines-to-follow-when-selecting-primary-key">主キーを選択するときに従うべきルール</a>](/develop/dev-guide-create-table.md#guidelines-to-follow-when-selecting-primary-key)参照してください。
+[主キーを選択するときに従うべきルール](/develop/dev-guide-create-table.md#guidelines-to-follow-when-selecting-primary-key)参照してください。
 
 ## インデックスのベストプラクティス {#index-best-practices}
 
-[<a href="/develop/dev-guide-index-best-practice.md">インデックスのベストプラクティス</a>](/develop/dev-guide-index-best-practice.md)を参照してください。
+[インデックスのベストプラクティス](/develop/dev-guide-index-best-practice.md)を参照してください。
 
 ### インデックスのベスト プラクティスを追加する {#add-index-best-practices}
 
-TiDB は、オンラインのインデックス追加操作をサポートしています。 [<a href="/sql-statements/sql-statement-add-index.md">インデックスの追加</a>](/sql-statements/sql-statement-add-index.md)または[<a href="/sql-statements/sql-statement-create-index.md">インデックスの作成</a>](/sql-statements/sql-statement-create-index.md)ステートメントを使用してインデックスを追加できます。テーブル内のデータの読み取りと書き込みはブロックされません。次のシステム変数を変更することで、インデックス追加操作の`re-organize`フェーズ中に同時実行性とバッチ サイズを調整できます。
+TiDB は、オンラインのインデックス追加操作をサポートしています。 [インデックスの作成](/sql-statements/sql-statement-create-index.md)ステートメントを使用してインデックスを追加できます。テーブル内のデータの読み取りと書き込みはブロックされません。次のシステム変数を変更することで、インデックス追加操作の`re-organize`フェーズ中に同時実行性とバッチ サイズを調整できます。
 
--   [<a href="/system-variables.md#tidb_ddl_reorg_worker_cnt">`tidb_ddl_reorg_worker_cnt`</a>](/system-variables.md#tidb_ddl_reorg_worker_cnt)
--   [<a href="/system-variables.md#tidb_ddl_reorg_batch_size">`tidb_ddl_reorg_batch_size`</a>](/system-variables.md#tidb_ddl_reorg_batch_size)
+-   [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt)
+-   [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size)
 
 オンライン アプリケーションへの影響を軽減するために、インデックス追加操作のデフォルトの速度は遅くなります。インデックス追加操作のターゲット列が読み取り負荷のみを伴う場合、またはオンライン ワークロードに直接関係しない場合は、上記の変数の値を適切に増やしてインデックス追加操作を高速化できます。
 
@@ -153,13 +153,13 @@ SET @@global.tidb_ddl_reorg_batch_size = 128;
 
 <CustomContent platform="tidb">
 
-トランザクションの競合を特定して解決する方法については、 [<a href="/troubleshoot-lock-conflicts.md">ロックの競合のトラブルシューティング</a>](/troubleshoot-lock-conflicts.md)を参照してください。
+トランザクションの競合を特定して解決する方法については、 [ロックの競合のトラブルシューティング](/troubleshoot-lock-conflicts.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-トランザクションの競合を特定して解決する方法については、 [<a href="https://docs.pingcap.com/tidb/stable/troubleshoot-lock-conflicts">ロックの競合のトラブルシューティング</a>](https://docs.pingcap.com/tidb/stable/troubleshoot-lock-conflicts)を参照してください。
+トランザクションの競合を特定して解決する方法については、 [ロックの競合のトラブルシューティング](https://docs.pingcap.com/tidb/stable/troubleshoot-lock-conflicts)を参照してください。
 
 </CustomContent>
 
@@ -167,13 +167,13 @@ SET @@global.tidb_ddl_reorg_batch_size = 128;
 
 <CustomContent platform="tidb">
 
-[<a href="/best-practices/java-app-best-practices.md">TiDB を使用したJavaアプリケーション開発のベスト プラクティス</a>](/best-practices/java-app-best-practices.md)を参照してください。
+[TiDB を使用したJavaアプリケーション開発のベスト プラクティス](/best-practices/java-app-best-practices.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[<a href="https://docs.pingcap.com/tidb/stable/java-app-best-practices">TiDB を使用したJavaアプリケーション開発のベスト プラクティス</a>](https://docs.pingcap.com/tidb/stable/java-app-best-practices)を参照してください。
+[TiDB を使用したJavaアプリケーション開発のベスト プラクティス](https://docs.pingcap.com/tidb/stable/java-app-best-practices)を参照してください。
 
 </CustomContent>
 
@@ -181,12 +181,12 @@ SET @@global.tidb_ddl_reorg_batch_size = 128;
 
 <CustomContent platform="tidb">
 
--   [<a href="/best-practices/high-concurrency-best-practices.md">高度な同時書き込みのベスト プラクティス</a>](/best-practices/high-concurrency-best-practices.md)
+-   [高度な同時書き込みのベスト プラクティス](/best-practices/high-concurrency-best-practices.md)
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
--   [<a href="https://docs.pingcap.com/tidb/stable/high-concurrency-best-practices">高度な同時書き込みのベスト プラクティス</a>](https://docs.pingcap.com/tidb/stable/high-concurrency-best-practices)
+-   [高度な同時書き込みのベスト プラクティス](https://docs.pingcap.com/tidb/stable/high-concurrency-best-practices)
 
 </CustomContent>

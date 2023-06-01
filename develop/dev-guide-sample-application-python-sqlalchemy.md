@@ -9,7 +9,7 @@ summary: Learn how to build a simple CRUD application with TiDB and SQLAlchemy.
 
 # TiDB と SQLAlchemy を使用してシンプルな CRUD アプリを構築する {#build-a-simple-crud-app-with-tidb-and-sqlalchemy}
 
-[<a href="https://www.sqlalchemy.org/">SQLアルケミー</a>](https://www.sqlalchemy.org/)は、Python 用の人気のあるオープンソース ORM ライブラリです。
+[SQLアルケミー](https://www.sqlalchemy.org/)は、Python 用の人気のあるオープンソース ORM ライブラリです。
 
 このドキュメントでは、TiDB と SQLAlchemy を使用して単純な CRUD アプリケーションを構築する方法について説明します。
 
@@ -25,17 +25,17 @@ TiDB クラスターの起動方法を紹介します。
 
 **TiDB CloudServerless Tierクラスターを使用する**
 
-詳細な手順については、 [<a href="/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster">Serverless Tierクラスターの作成</a>](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
+詳細な手順については、 [Serverless Tierクラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
 
 **ローカルクラスターを使用する**
 
-詳細な手順については、 [<a href="/quick-start-with-tidb.md#deploy-a-local-test-cluster">ローカルテストクラスターをデプロイ</a>](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[<a href="/production-deployment-using-tiup.md">TiUPを使用して TiDB クラスターをデプロイ</a>](/production-deployment-using-tiup.md)を参照してください。
+詳細な手順については、 [TiUPを使用して TiDB クラスターをデプロイ](/production-deployment-using-tiup.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[<a href="/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster">Serverless Tierクラスターの作成</a>](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
+[Serverless Tierクラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
 
 </CustomContent>
 
@@ -171,7 +171,7 @@ trade_example()
 
 `Player`のクラスは、アプリケーション内のテーブルの属性へのマッピングです。 `Player`の各属性は、 `player`テーブルのフィールドに対応します。 SQLAlchemy に詳細情報を提供するために、フィールド タイプとその追加属性を示す属性は`id = Column(String(36), primary_key=True)`として定義されています。たとえば、 `id = Column(String(36), primary_key=True)` 、 `id`属性が`String`タイプ、データベース内の対応するフィールドが`VARCHAR`タイプ、長さが`36`で、主キーであることを示します。
 
-SQLAlchemy の使用方法の詳細については、 [<a href="https://www.sqlalchemy.org/">SQLAlchemy ドキュメント</a>](https://www.sqlalchemy.org/)を参照してください。
+SQLAlchemy の使用方法の詳細については、 [SQLAlchemy ドキュメント](https://www.sqlalchemy.org/)を参照してください。
 
 ## ステップ 3. コードを実行する {#step-3-run-the-code}
 
@@ -205,7 +205,7 @@ mycli --host 127.0.0.1 --port 4000 -u root --no-warn < player_init.sql
 
 ### ステップ 3.2 TiDB Cloudのパラメータを変更する {#step-3-2-modify-parameters-for-tidb-cloud}
 
-TiDB CloudServerless Tierクラスターを使用している場合は、CA ルート パスを指定し、次の例の`<ca_path>`を CA パスに置き換える必要があります。システム上の CA ルート パスを取得するには、 [<a href="https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-tier-clusters#where-is-the-ca-root-path-on-my-system">私のシステム上の CA ルート パスはどこにありますか?</a>](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-tier-clusters#where-is-the-ca-root-path-on-my-system)を参照してください。
+TiDB CloudServerless Tierクラスターを使用している場合は、CA ルート パスを指定し、次の例の`<ca_path>`を CA パスに置き換える必要があります。システム上の CA ルート パスを取得するには、 [私のシステム上の CA ルート パスはどこにありますか?](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-tier-clusters#where-is-the-ca-root-path-on-my-system)を参照してください。
 
 TiDB CloudServerless Tierクラスターを使用している場合は、 `sqlalchemy_example.py`の`create_engine`関数のパラメーターを変更します。
 
@@ -238,7 +238,7 @@ engine = create_engine('mysql://2aEp24QWEDLqRFs.root:123456@xxx.tidbcloud.com:40
 pip3 install -r requirement.txt
 ```
 
-スクリプトを複数回実行する必要がある場合は、各実行前に[<a href="#step-31-initialize-table">テーブルの初期化</a>](#step-31-initialize-table)セクションに従ってテーブルを再度初期化します。
+スクリプトを複数回実行する必要がある場合は、各実行前に[テーブルの初期化](#step-31-initialize-table)セクションに従ってテーブルを再度初期化します。
 
 ```bash
 python3 sqlalchemy_example.py
@@ -246,4 +246,4 @@ python3 sqlalchemy_example.py
 
 ## ステップ 4. 期待される出力 {#step-4-expected-output}
 
-[<a href="https://github.com/pingcap-inc/tidb-example-python/blob/main/Expected-Output.md#SQLAlchemy">SQLAlchemy の予想される出力</a>](https://github.com/pingcap-inc/tidb-example-python/blob/main/Expected-Output.md#SQLAlchemy)
+[SQLAlchemy の予想される出力](https://github.com/pingcap-inc/tidb-example-python/blob/main/Expected-Output.md#SQLAlchemy)

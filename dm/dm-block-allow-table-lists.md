@@ -36,29 +36,29 @@ block-allow-list:             # Use black-white-list if the DM version is earlie
 
 単純なシナリオでは、スキーマとテーブルを一致させるためにワイルドカードを使用することをお勧めします。ただし、次のバージョンの違いに注意してください。
 
--   DM v1.0.5 以降のバージョンでは、ブロック リストと許可リストは[<a href="https://en.wikipedia.org/wiki/Glob_(programming)#Syntax">ワイルドカードマッチ</a>](https://en.wikipedia.org/wiki/Glob_(programming)#Syntax)サポートしますが、ワイルドカード式には`*` **1 つだけ**使用でき、**最後に**`*`を置く必要があります。
+-   DM v1.0.5 以降のバージョンでは、ブロック リストと許可リストは[ワイルドカードマッチ](https://en.wikipedia.org/wiki/Glob_(programming)#Syntax)サポートしますが、ワイルドカード式には`*` **1 つだけ**使用でき、**最後に**`*`を置く必要があります。
 
 -   v1.0.5 より前の DM バージョンの場合、ブロック リストと許可リストは正規表現の一致のみをサポートします。
 
 ## パラメータの説明 {#parameter-descriptions}
 
--   `do-dbs` : MySQL の[<a href="https://dev.mysql.com/doc/refman/5.7/en/replication-options-replica.html#option_mysqld_replicate-do-db">`replicate-do-db`</a>](https://dev.mysql.com/doc/refman/5.7/en/replication-options-replica.html#option_mysqld_replicate-do-db)と同様に、スキーマのリストの移行を許可します。
--   `ignore-dbs` : MySQL の[<a href="https://dev.mysql.com/doc/refman/5.7/en/replication-options-replica.html#option_mysqld_replicate-ignore-db">`replicate-ignore-db`</a>](https://dev.mysql.com/doc/refman/5.7/en/replication-options-replica.html#option_mysqld_replicate-ignore-db)に似た、移行するスキーマのブロック リスト。
--   `do-tables` : MySQL の[<a href="https://dev.mysql.com/doc/refman/5.7/en/replication-options-replica.html#option_mysqld_replicate-do-table">`replicate-do-table`</a>](https://dev.mysql.com/doc/refman/5.7/en/replication-options-replica.html#option_mysqld_replicate-do-table)と同様に、テーブルのリストの移行を許可します。 `db-name`と`tbl-name`の両方を指定する必要があります。
--   `ignore-tables` : MySQL の[<a href="https://dev.mysql.com/doc/refman/5.7/en/replication-options-replica.html#option_mysqld_replicate-ignore-table">`replicate-ignore-table`</a>](https://dev.mysql.com/doc/refman/5.7/en/replication-options-replica.html#option_mysqld_replicate-ignore-table)に似た、移行するテーブルのブロック リスト。 `db-name`と`tbl-name`の両方を指定する必要があります。
+-   `do-dbs` : MySQL の[`replicate-do-db`](https://dev.mysql.com/doc/refman/5.7/en/replication-options-replica.html#option_mysqld_replicate-do-db)と同様に、スキーマのリストの移行を許可します。
+-   `ignore-dbs` : MySQL の[`replicate-ignore-db`](https://dev.mysql.com/doc/refman/5.7/en/replication-options-replica.html#option_mysqld_replicate-ignore-db)に似た、移行するスキーマのブロック リスト。
+-   `do-tables` : MySQL の[`replicate-do-table`](https://dev.mysql.com/doc/refman/5.7/en/replication-options-replica.html#option_mysqld_replicate-do-table)と同様に、テーブルのリストの移行を許可します。 `db-name`と`tbl-name`の両方を指定する必要があります。
+-   `ignore-tables` : MySQL の[`replicate-ignore-table`](https://dev.mysql.com/doc/refman/5.7/en/replication-options-replica.html#option_mysqld_replicate-ignore-table)に似た、移行するテーブルのブロック リスト。 `db-name`と`tbl-name`の両方を指定する必要があります。
 
-上記のパラメータの値が`~`文字で始まる場合、この値の後続の文字は[<a href="https://golang.org/pkg/regexp/syntax/#hdr-syntax">正規表現</a>](https://golang.org/pkg/regexp/syntax/#hdr-syntax)として扱われます。このパラメータを使用して、スキーマ名またはテーブル名を一致させることができます。
+上記のパラメータの値が`~`文字で始まる場合、この値の後続の文字は[正規表現](https://golang.org/pkg/regexp/syntax/#hdr-syntax)として扱われます。このパラメータを使用して、スキーマ名またはテーブル名を一致させることができます。
 
 ## フィルタリングプロセス {#filtering-process}
 
--   `do-dbs`と`ignore-dbs`に対応するフィルタリング ルールは、MySQL の[<a href="https://dev.mysql.com/doc/refman/5.7/en/replication-rules-db-options.html">データベースレベルのレプリケーションとバイナリログオプションの評価</a>](https://dev.mysql.com/doc/refman/5.7/en/replication-rules-db-options.html)に似ています。
--   `do-tables`と`ignore-tables`に対応するフィルタリング ルールは、MySQL の[<a href="https://dev.mysql.com/doc/refman/5.7/en/replication-rules-table-options.html">テーブルレベルのレプリケーション オプションの評価</a>](https://dev.mysql.com/doc/refman/5.7/en/replication-rules-table-options.html)に似ています。
+-   `do-dbs`と`ignore-dbs`に対応するフィルタリング ルールは、MySQL の[データベースレベルのレプリケーションとバイナリログオプションの評価](https://dev.mysql.com/doc/refman/5.7/en/replication-rules-db-options.html)に似ています。
+-   `do-tables`と`ignore-tables`に対応するフィルタリング ルールは、MySQL の[テーブルレベルのレプリケーション オプションの評価](https://dev.mysql.com/doc/refman/5.7/en/replication-rules-table-options.html)に似ています。
 
 > **ノート：**
 >
 > DM と MySQL では、ブロック リストと許可リストのフィルタリング ルールが次の点で異なります。
 >
-> -   MySQL では、 [<a href="https://dev.mysql.com/doc/refman/5.7/en/replication-options-replica.html#option_mysqld_replicate-wild-do-table">`replicate-wild-do-table`</a>](https://dev.mysql.com/doc/refman/5.7/en/replication-options-replica.html#option_mysqld_replicate-wild-do-table)と[<a href="https://dev.mysql.com/doc/refman/5.7/en/replication-options-replica.html#option_mysqld_replicate-wild-ignore-table">`replicate-wild-ignore-table`</a>](https://dev.mysql.com/doc/refman/5.7/en/replication-options-replica.html#option_mysqld_replicate-wild-ignore-table)ワイルドカード文字をサポートします。 DM では、一部のパラメーター値は、 `~`文字で始まる正規表現を直接サポートします。
+> -   MySQL では、 [`replicate-wild-ignore-table`](https://dev.mysql.com/doc/refman/5.7/en/replication-options-replica.html#option_mysqld_replicate-wild-ignore-table)ワイルドカード文字をサポートします。 DM では、一部のパラメーター値は、 `~`文字で始まる正規表現を直接サポートします。
 > -   DM は現在、 `ROW`形式のバイナリログのみをサポートしており、 `STATEMENT`または`MIXED`形式のバイナリログはサポートしていません。したがって、DM のフィルタリング ルールは、MySQL の`ROW`形式のルールに対応します。
 > -   MySQL は、ステートメントの`USE`セクションで明示的に指定されたデータベース名のみによって DDL ステートメントを決定します。 DM は、まず DDL ステートメントのデータベース名セクションに基づいてステートメントを決定します。 DDL ステートメントにそのようなセクションが含まれていない場合、DM は`USE`番目のセクションによってステートメントを決定します。判定対象の SQL ステートメントが`USE test_db_2; CREATE TABLE test_db_1.test_table (c1 INT PRIMARY KEY)`であるとします。 `replicate-do-db=test_db_1`は MySQL で構成され、 `do-dbs: ["test_db_1"]`は DM で構成されます。このルールは DM にのみ適用され、MySQL には適用されません。
 

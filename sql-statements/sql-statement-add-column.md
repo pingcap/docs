@@ -87,9 +87,9 @@ mysql> SELECT * FROM t1;
 
 -   新しい列を追加して`PRIMARY KEY`に設定することはサポートされていません。
 -   新しい列を追加して`AUTO_INCREMENT`に設定することはサポートされていません。
--   生成された列の追加には制限があります[<a href="/generated-columns.md#limitations">生成される列の制限事項</a>](/generated-columns.md#limitations)を参照してください。
+-   生成された列の追加には制限があります[生成される列の制限事項](/generated-columns.md#limitations)を参照してください。
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-add-index.md">インデックスの追加</a>](/sql-statements/sql-statement-add-index.md)
--   [<a href="/sql-statements/sql-statement-create-table.md">テーブルの作成</a>](/sql-statements/sql-statement-create-table.md)
+-   [インデックスの追加](/sql-statements/sql-statement-add-index.md)
+-   [テーブルの作成](/sql-statements/sql-statement-create-table.md)

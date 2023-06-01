@@ -9,8 +9,8 @@ summary: Learn about the commands of TiDB log backup and point-in-time recovery.
 
 ログ バックアップと PITR の詳細については、以下を参照してください。
 
--   [<a href="/br/br-pitr-guide.md">ログのバックアップと PITR ガイド</a>](/br/br-pitr-guide.md)
--   [<a href="/br/backup-and-restore-use-cases.md">バックアップと復元の使用例</a>](/br/backup-and-restore-use-cases.md)
+-   [ログのバックアップと PITR ガイド](/br/br-pitr-guide.md)
+-   [バックアップと復元の使用例](/br/backup-and-restore-use-cases.md)
 
 ## ログのバックアップを実行する {#perform-log-backup}
 
@@ -77,7 +77,7 @@ Global Flags:
 -   `task-name` : ログバックアップのタスク名を指定します。この名前は、バックアップ タスクのクエリ、一時停止、再開にも使用されます。
 -   `--ca` 、 `--cert` 、 `--key` : TiKV および PD と通信するための mTLS 暗号化方式を指定します。
 -   `--pd` : バックアップ クラスターの PD アドレスを指定します。ログ バックアップ タスクを開始するには、 BR がPD にアクセスする必要があります。
--   `--storage` : バックアップstorageアドレスを指定します。現在、 BR はログ バックアップ用のstorageとして Amazon S3、Google Cloud Storage (GCS)、または Azure Blob Storage をサポートしています。前述のコマンドでは、例として Amazon S3 を使用しています。詳細は[<a href="/br/backup-and-restore-storages.md#uri-format">バックアップストレージのURI形式</a>](/br/backup-and-restore-storages.md#uri-format)を参照してください。
+-   `--storage` : バックアップstorageアドレスを指定します。現在、 BR はログ バックアップ用のstorageとして Amazon S3、Google Cloud Storage (GCS)、または Azure Blob Storage をサポートしています。前述のコマンドでは、例として Amazon S3 を使用しています。詳細は[バックアップストレージのURI形式](/br/backup-and-restore-storages.md#uri-format)を参照してください。
 
 使用例：
 
@@ -201,7 +201,7 @@ Global Flags:
  -u, --pd strings             PD address (default [127.0.0.1:2379])
 ```
 
-バックアップ タスクが 24 時間以上一時停止された後、 `br log resume`実行するとエラーが報告され、 BR はバックアップ データが失われたことを示すプロンプトを表示します。このエラーに対処するには、 [<a href="/faq/backup-and-restore-faq.md#what-should-i-do-if-the-error-message-errbackupgcsafepointexceeded-is-returned-when-using-the-br-log-resume-command-to-resume-a-suspended-task">バックアップと復元に関するよくある質問</a>](/faq/backup-and-restore-faq.md#what-should-i-do-if-the-error-message-errbackupgcsafepointexceeded-is-returned-when-using-the-br-log-resume-command-to-resume-a-suspended-task)を参照してください。
+バックアップ タスクが 24 時間以上一時停止された後、 `br log resume`実行するとエラーが報告され、 BR はバックアップ データが失われたことを示すプロンプトを表示します。このエラーに対処するには、 [バックアップと復元に関するよくある質問](/faq/backup-and-restore-faq.md#what-should-i-do-if-the-error-message-errbackupgcsafepointexceeded-is-returned-when-using-the-br-log-resume-command-to-resume-a-suspended-task)を参照してください。
 
 使用例：
 
@@ -283,7 +283,7 @@ Global Flags:
 
 -   `--dry-run` : コマンドを実行しますが、実際にはファイルを削除しません。
 -   `--until` : 指定されたタイムスタンプより前のすべてのログ バックアップ データを削除します。
--   `--storage` : バックアップstorageアドレス。現在、 BR はログ バックアップ用のstorageとして Amazon S3、GCS、または Azure Blob Storage をサポートしています。詳細は[<a href="/br/backup-and-restore-storages.md#uri-format">バックアップストレージのURI形式</a>](/br/backup-and-restore-storages.md#uri-format)を参照してください。
+-   `--storage` : バックアップstorageアドレス。現在、 BR はログ バックアップ用のstorageとして Amazon S3、GCS、または Azure Blob Storage をサポートしています。詳細は[バックアップストレージのURI形式](/br/backup-and-restore-storages.md#uri-format)を参照してください。
 
 使用例：
 
@@ -324,7 +324,7 @@ Global Flags:
 
 このコマンドはバックアップstorageにのみアクセスし、TiDB クラスターにはアクセスしません。
 
-`--storage`パラメータは、バックアップstorageアドレスを指定するために使用されます。現在、 BR はログ バックアップ用のstorageとして Amazon S3、GCS、または Azure Blob Storage をサポートしています。詳細は[<a href="/br/backup-and-restore-storages.md#uri-format">バックアップストレージのURI形式</a>](/br/backup-and-restore-storages.md#uri-format)を参照してください。
+`--storage`パラメータは、バックアップstorageアドレスを指定するために使用されます。現在、 BR はログ バックアップ用のstorageとして Amazon S3、GCS、または Azure Blob Storage をサポートしています。詳細は[バックアップストレージのURI形式](/br/backup-and-restore-storages.md#uri-format)を参照してください。
 
 使用例：
 
@@ -368,12 +368,12 @@ Global Flags:
 
 出力例には、共通パラメータのみが示されています。これらのパラメータは次のように説明されます。
 
--   `--full-backup-storage` : スナップショット (フル) バックアップのstorageアドレス。 PITR を使用するには、このパラメータを指定し、復元タイムスタンプより前の最新のスナップショット バックアップを選択します。ログバックアップデータのみをリストアする場合は、このパラメータを省略できます。現在、 BR はログ バックアップ用のstorageとして Amazon S3、GCS、または Azure Blob Storage をサポートしています。詳細は[<a href="/br/backup-and-restore-storages.md#uri-format">バックアップストレージのURI形式</a>](/br/backup-and-restore-storages.md#uri-format)を参照してください。
+-   `--full-backup-storage` : スナップショット (フル) バックアップのstorageアドレス。 PITR を使用するには、このパラメータを指定し、復元タイムスタンプより前の最新のスナップショット バックアップを選択します。ログバックアップデータのみをリストアする場合は、このパラメータを省略できます。現在、 BR はログ バックアップ用のstorageとして Amazon S3、GCS、または Azure Blob Storage をサポートしています。詳細は[バックアップストレージのURI形式](/br/backup-and-restore-storages.md#uri-format)を参照してください。
 -   `--restored-ts` : データを復元するタイムスタンプ。このパラメータが指定されていない場合、 BR はログ バックアップで使用可能な最新のタイムスタンプ、つまりバックアップ データのチェックポイントにデータを復元します。
 -   `--start-ts` : ログ バックアップ データを復元する開始タイムスタンプ。ログ バックアップ データのみを復元する必要がある場合は、このパラメータを指定する必要があります。
 -   `--pd` : 復元クラスターの PD アドレス。
 -   `--ca` 、 `--cert` 、 `--key` : TiKV および PD と通信するための mTLS 暗号化方式を指定します。
--   `--storage` : ログバックアップのstorageアドレス。現在、 BR はログ バックアップ用のstorageとして Amazon S3、GCS、または Azure Blob Storage をサポートしています。詳細は[<a href="/br/backup-and-restore-storages.md#uri-format">バックアップストレージのURI形式</a>](/br/backup-and-restore-storages.md#uri-format)を参照してください。
+-   `--storage` : ログバックアップのstorageアドレス。現在、 BR はログ バックアップ用のstorageとして Amazon S3、GCS、または Azure Blob Storage をサポートしています。詳細は[バックアップストレージのURI形式](/br/backup-and-restore-storages.md#uri-format)を参照してください。
 
 使用例：
 

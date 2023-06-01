@@ -6,7 +6,7 @@ category: reference
 
 # 管理者チェック [表|索引] {#admin-check-table-index}
 
-`ADMIN CHECK [TABLE|INDEX]`ステートメントは、テーブルとインデックスのデータの整合性をチェックします。 [<a href="/foreign-key.md">FOREIGN KEY 制約</a>](/foreign-key.md)チェックには対応していません。
+`ADMIN CHECK [TABLE|INDEX]`ステートメントは、テーブルとインデックスのデータの整合性をチェックします。 [FOREIGN KEY 制約](/foreign-key.md)チェックには対応していません。
 
 ## あらすじ {#synopsis}
 
@@ -52,4 +52,4 @@ ADMIN CHECK INDEX tbl_name idx_name (lower_val, upper_val) [, (lower_val, upper_
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-admin.md#admin-repair-statement">`ADMIN REPAIR`</a>](/sql-statements/sql-statement-admin.md#admin-repair-statement)
+-   [`ADMIN REPAIR`](/sql-statements/sql-statement-admin.md#admin-repair-statement)

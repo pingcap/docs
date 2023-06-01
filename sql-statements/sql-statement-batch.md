@@ -11,7 +11,7 @@ summary: An overview of the usage of BATCH for the TiDB database.
 
 `BATCH`構文は、列に基づいて、DML ステートメントを実行範囲の複数の範囲に分割します。各範囲で、単一の SQL ステートメントが実行されます。
 
-使用方法および制限事項の詳細については、 [<a href="/non-transactional-dml.md">非トランザクション DML ステートメント</a>](/non-transactional-dml.md)を参照してください。
+使用方法および制限事項の詳細については、 [非トランザクション DML ステートメント](/non-transactional-dml.md)を参照してください。
 
 `BATCH`ステートメントで複数テーブル結合を使用する場合、あいまいさを避けるために列のフルパスを指定する必要があります。
 
@@ -49,4 +49,4 @@ ShardableStmt ::=
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/non-transactional-dml.md">非トランザクション DML ステートメント</a>](/non-transactional-dml.md)
+-   [非トランザクション DML ステートメント](/non-transactional-dml.md)

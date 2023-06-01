@@ -108,7 +108,7 @@ tikv_servers:
 
 #### 3.1 TiDB でのFollower Readの使用 {#3-1-use-follower-read-in-tidb}
 
-TiDB の使用時に読み取り専用ノードからデータを読み取るには、システム変数[<a href="/system-variables.md#tidb_replica_read-new-in-v40">`tidb_replica_read`</a>](/system-variables.md#tidb_replica_read-new-in-v40)から`learner`を設定できます。
+TiDB の使用時に読み取り専用ノードからデータを読み取るには、システム変数[`tidb_replica_read`](/system-variables.md#tidb_replica_read-new-in-v40)から`learner`を設定できます。
 
 ```sql
 set tidb_replica_read=learner;

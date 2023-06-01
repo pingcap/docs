@@ -17,15 +17,15 @@ TiDB は、オンライン非同期スキーマ変更アルゴリズムを使用
 
 TiDB のメタデータ ロックは、次のようなすべての DDL ステートメントに適用されます。
 
--   [<a href="/sql-statements/sql-statement-add-index.md">`ADD INDEX`</a>](/sql-statements/sql-statement-add-index.md)
--   [<a href="/sql-statements/sql-statement-add-column.md">`ADD COLUMN`</a>](/sql-statements/sql-statement-add-column.md)
--   [<a href="/sql-statements/sql-statement-drop-column.md">`DROP COLUMN`</a>](/sql-statements/sql-statement-drop-column.md)
--   [<a href="/sql-statements/sql-statement-drop-index.md">`DROP INDEX`</a>](/sql-statements/sql-statement-drop-index.md)
--   [<a href="/partitioned-table.md#partition-management">`DROP PARTITION`</a>](/partitioned-table.md#partition-management)
--   [<a href="/sql-statements/sql-statement-truncate.md">`TRUNCATE TABLE`</a>](/sql-statements/sql-statement-truncate.md)
--   [<a href="/partitioned-table.md#partition-management">`EXCHANGE PARTITION`</a>](/partitioned-table.md#partition-management)
--   [<a href="/sql-statements/sql-statement-change-column.md">`CHANGE COLUMN`</a>](/sql-statements/sql-statement-change-column.md)
--   [<a href="/sql-statements/sql-statement-modify-column.md">`MODIFY COLUMN`</a>](/sql-statements/sql-statement-modify-column.md)
+-   [`ADD INDEX`](/sql-statements/sql-statement-add-index.md)
+-   [`ADD COLUMN`](/sql-statements/sql-statement-add-column.md)
+-   [`DROP COLUMN`](/sql-statements/sql-statement-drop-column.md)
+-   [`DROP INDEX`](/sql-statements/sql-statement-drop-index.md)
+-   [`DROP PARTITION`](/partitioned-table.md#partition-management)
+-   [`TRUNCATE TABLE`](/sql-statements/sql-statement-truncate.md)
+-   [`EXCHANGE PARTITION`](/partitioned-table.md#partition-management)
+-   [`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)
+-   [`MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md)
 
 メタデータ ロックを有効にすると、TiDB での DDL タスクの実行にパフォーマンスに影響を与える可能性があります。影響を軽減するために、メタデータ ロックを必要としないいくつかのシナリオを以下に示します。
 
@@ -35,7 +35,7 @@ TiDB のメタデータ ロックは、次のようなすべての DDL ステー
 
 ## 使用法 {#usage}
 
-v6.5.0 以降、TiDB はデフォルトでメタデータ ロックを有効にします。既存のクラスターを v6.4.0 以前から v6.5.0 以降にアップグレードすると、TiDB はメタデータ ロックを自動的に有効にします。メタデータのロックを無効にするには、システム変数[<a href="/system-variables.md#tidb_enable_metadata_lock-new-in-v630">`tidb_enable_metadata_lock`</a>](/system-variables.md#tidb_enable_metadata_lock-new-in-v630) ～ `OFF`を設定します。
+v6.5.0 以降、TiDB はデフォルトでメタデータ ロックを有効にします。既存のクラスターを v6.4.0 以前から v6.5.0 以降にアップグレードすると、TiDB はメタデータ ロックを自動的に有効にします。メタデータのロックを無効にするには、システム変数[`tidb_enable_metadata_lock`](/system-variables.md#tidb_enable_metadata_lock-new-in-v630) ～ `OFF`を設定します。
 
 ## 影響 {#impact}
 
@@ -72,7 +72,7 @@ TiDB v6.3.0 では、現在ブロックされている DDL の情報を取得す
 
 > **ノート：**
 >
-> `mysql.tidb_mdl_view`ビューを選択するには、 [<a href="https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process">`PROCESS`権限</a>](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process)が必要です。
+> `mysql.tidb_mdl_view`ビューを選択するには、 [`PROCESS`権限](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process)が必要です。
 
 以下では、例としてテーブル`t`にインデックスを追加します。 DDL ステートメント`ALTER TABLE t ADD INDEX idx(a)`あるとします。
 

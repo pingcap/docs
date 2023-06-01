@@ -59,7 +59,7 @@ TiDB Binlogレプリケーション中にアップストリーム TiDB で`RECOV
 
 -   アップストリーム データベースとダウンストリーム データベース間のレプリケーション中に遅延が発生します。エラーインスタンス: `snapshot is older than GC safe point 2019-07-10 13:45:57 +0800 CST` 。
 
-上記の 3 つの状況では、 [<a href="/ecosystem-tool-user-guide.md#backup-and-restore---backup--restore-br">削除されたテーブルの完全インポート</a>](/ecosystem-tool-user-guide.md#backup-and-restore---backup--restore-br)を使用して TiDB Binlogからデータ レプリケーションを再開できます。
+上記の 3 つの状況では、 [削除されたテーブルの完全インポート](/ecosystem-tool-user-guide.md#backup-and-restore---backup--restore-br)を使用して TiDB Binlogからデータ レプリケーションを再開できます。
 
 </CustomContent>
 
@@ -119,7 +119,7 @@ TiDB Binlogレプリケーション中にアップストリーム TiDB で`RECOV
 
 テーブルを削除する場合、TiDB はテーブルのメタデータのみを削除し、削除するテーブル データ (行データおよびインデックス データ) を`mysql.gc_delete_range`のテーブルに書き込みます。 TiDB バックグラウンドの GC ワーカーは、GC の有効期間を超えたキーを`mysql.gc_delete_range`テーブルから定期的に削除します。
 
-したがって、テーブルを回復するには、GC ワーカーがテーブル データを削除する前に、テーブルのメタデータを回復し、テーブル`mysql.gc_delete_range`内の対応する行レコードを削除するだけで済みます。 TiDB のスナップショット読み取りを使用して、テーブルのメタデータを回復できます。詳細は[<a href="/read-historical-data.md">履歴データの読み取り</a>](/read-historical-data.md)を参照してください。
+したがって、テーブルを回復するには、GC ワーカーがテーブル データを削除する前に、テーブルのメタデータを回復し、テーブル`mysql.gc_delete_range`内の対応する行レコードを削除するだけで済みます。 TiDB のスナップショット読み取りを使用して、テーブルのメタデータを回復できます。詳細は[履歴データの読み取り](/read-historical-data.md)を参照してください。
 
 テーブルのリカバリは、TiDB がスナップショット読み取りを通じてテーブル メタデータを取得し、その後`CREATE TABLE`と同様のテーブル作成プロセスを経ることによって行われます。したがって、 `RECOVER TABLE`自体は本質的には一種の DDL 操作です。
 

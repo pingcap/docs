@@ -5,9 +5,9 @@ summary: Learn about how to use the TiDB prepared statements.
 
 # 準備されたステートメント {#prepared-statements}
 
-[<a href="/sql-statements/sql-statement-prepare.md">プリペアドステートメント</a>](/sql-statements/sql-statement-prepare.md)パラメータのみが異なる複数の SQL ステートメントをテンプレート化します。 SQL ステートメントをパラメーターから分離します。これを使用すると、SQL ステートメントの次の側面を改善できます。
+[プリペアドステートメント](/sql-statements/sql-statement-prepare.md)パラメータのみが異なる複数の SQL ステートメントをテンプレート化します。 SQL ステートメントをパラメーターから分離します。これを使用すると、SQL ステートメントの次の側面を改善できます。
 
--   **Security**: パラメータとステートメントが分離されているため、 [<a href="https://en.wikipedia.org/wiki/SQL_injection">SQLインジェクション</a>](https://en.wikipedia.org/wiki/SQL_injection)攻撃のリスクが回避されます。
+-   **Security**: パラメータとステートメントが分離されているため、 [SQLインジェクション](https://en.wikipedia.org/wiki/SQL_injection)攻撃のリスクが回避されます。
 -   **パフォーマンス**: ステートメントは TiDBサーバー上で事前に解析されるため、後続の実行にはパラメーターのみが渡され、SQL ステートメント全体の解析、SQL ステートメント文字列の結合、およびネットワーク送信のコストが節約されます。
 
 ほとんどのアプリケーションでは、SQL ステートメントを列挙できます。限られた数の SQL ステートメントを使用して、アプリケーション全体のデータ クエリを実行できます。したがって、プリペアドステートメントを使用することがベスト プラクティスです。
@@ -27,11 +27,11 @@ PREPARE {prepared_statement_name} FROM '{prepared_statement_sql}';
 | `{prepared_statement_name}` |          プリペアドステートメントの名前         |
 |  `{prepared_statement_sql}` | プレースホルダーとして疑問符を付けプリペアドステートメントSQL |
 
-詳細については[<a href="/sql-statements/sql-statement-prepare.md">PREPARE 文</a>](/sql-statements/sql-statement-prepare.md)参照してください。
+詳細については[PREPARE 文](/sql-statements/sql-statement-prepare.md)参照してください。
 
 ### プリペアドステートメントを使用する {#use-the-prepared-statement}
 
-プリペアドステートメントは**ユーザー変数を**パラメータとしてのみ使用できるため、 [<a href="/sql-statements/sql-statement-execute.md">`EXECUTE`文</a>](/sql-statements/sql-statement-execute.md)がプリペアドステートメントを呼び出す前に、 [<a href="/sql-statements/sql-statement-set-variable.md">`SET`ステートメント</a>](/sql-statements/sql-statement-set-variable.md)を使用して変数を設定します。
+プリペアドステートメントは**ユーザー変数を**パラメータとしてのみ使用できるため、 [`SET`ステートメント](/sql-statements/sql-statement-set-variable.md)を使用して変数を設定します。
 
 ```sql
 SET @{parameter_name} = {parameter_value};
@@ -42,9 +42,9 @@ EXECUTE {prepared_statement_name} USING @{parameter_name};
 | :-------------------------: | :-----------------------------------------------------------------------------------------------------------------------------: |
 |      `{parameter_name}`     |                                                             ユーザー変数名                                                             |
 |     `{parameter_value}`     |                                                             ユーザー変数の値                                                            |
-| `{prepared_statement_name}` | 前処理ステートメントの名前[<a href="#create-a-prepared-statement">プリペアドステートメントを作成する</a>](#create-a-prepared-statement)で定義された名前と同じである必要があります。 |
+| `{prepared_statement_name}` | 前処理ステートメントの名前[プリペアドステートメントを作成する](#create-a-prepared-statement)で定義された名前と同じである必要があります。 |
 
-詳細については[<a href="/sql-statements/sql-statement-execute.md">`EXECUTE`文</a>](/sql-statements/sql-statement-execute.md)参照してください。
+詳細については[`EXECUTE`文](/sql-statements/sql-statement-execute.md)参照してください。
 
 ### プリペアドステートメントを削除します {#delete-the-prepared-statement}
 
@@ -54,9 +54,9 @@ DEALLOCATE PREPARE {prepared_statement_name};
 
 |            パラメータ名           |                                                                説明                                                               |
 | :-------------------------: | :-----------------------------------------------------------------------------------------------------------------------------: |
-| `{prepared_statement_name}` | 前処理ステートメントの名前[<a href="#create-a-prepared-statement">プリペアドステートメントを作成する</a>](#create-a-prepared-statement)で定義された名前と同じである必要があります。 |
+| `{prepared_statement_name}` | 前処理ステートメントの名前[プリペアドステートメントを作成する](#create-a-prepared-statement)で定義された名前と同じである必要があります。 |
 
-詳細については[<a href="/sql-statements/sql-statement-deallocate.md">`DEALLOCATE`文</a>](/sql-statements/sql-statement-deallocate.md)参照してください。
+詳細については[`DEALLOCATE`文](/sql-statements/sql-statement-deallocate.md)参照してください。
 
 ## 例 {#examples}
 
@@ -64,7 +64,7 @@ DEALLOCATE PREPARE {prepared_statement_name};
 
 ### <code>SELECT</code>例 {#code-select-code-example}
 
-たとえば、 [<a href="/develop/dev-guide-bookshop-schema-design.md#books-table">`bookshop`アプリケーション</a>](/develop/dev-guide-bookshop-schema-design.md#books-table)のうち`id = 1`を含む書籍をクエリする必要があります。
+たとえば、 [`bookshop`アプリケーション](/develop/dev-guide-bookshop-schema-design.md#books-table)のうち`id = 1`を含む書籍をクエリする必要があります。
 
 <SimpleTab groupId="language">
 
@@ -135,7 +135,7 @@ try (Connection connection = ds.getConnection()) {
 
 ### <code>INSERT</code>例 {#code-insert-code-example}
 
-例として[<a href="/develop/dev-guide-bookshop-schema-design.md#books-table">`books`テーブル</a>](/develop/dev-guide-bookshop-schema-design.md#books-table)を使用すると、 `title = TiDB Developer Guide` 、 `type = Science & Technology` 、 `stock = 100` 、 `price = 0.0` 、および`published_at = NOW()` (挿入の現在の時刻) を持つ本を挿入する必要があります。 `books`テーブルの**主キー**に`AUTO_RANDOM`属性を指定する必要がないことに注意してください。データの挿入の詳細については、 [<a href="/develop/dev-guide-insert-data.md">データの挿入</a>](/develop/dev-guide-insert-data.md)を参照してください。
+例として[データの挿入](/develop/dev-guide-insert-data.md)を参照してください。
 
 <SimpleTab groupId="language">
 
@@ -213,13 +213,13 @@ try (Connection connection = ds.getConnection()) {
 jdbc:mysql://127.0.0.1:4000/test?user=root&useConfigs=maxPerformance&useServerPrepStmts=true&prepStmtCacheSqlLimit=2048&prepStmtCacheSize=256&rewriteBatchedStatements=true&allowMultiQueries=true
 ```
 
-データの挿入時に他の JDBC パラメータを変更する必要がある場合は、第[<a href="/develop/dev-guide-insert-data.md#insert-rows">行を挿入する</a>](/develop/dev-guide-insert-data.md#insert-rows)章を参照してください。
+データの挿入時に他の JDBC パラメータを変更する必要がある場合は、第[行を挿入する](/develop/dev-guide-insert-data.md#insert-rows)章を参照してください。
 
 Javaの完全な例については、以下を参照してください。
 
--   [<a href="/develop/dev-guide-sample-application-java-jdbc.md#step-2-get-the-code">TiDB と JDBC を使用してシンプルな CRUD アプリを構築する</a>](/develop/dev-guide-sample-application-java-jdbc.md#step-2-get-the-code)
--   [<a href="/develop/dev-guide-sample-application-java-hibernate.md#step-2-get-the-code">TiDB と Hibernate を使用してシンプルな CRUD アプリを構築する</a>](/develop/dev-guide-sample-application-java-hibernate.md#step-2-get-the-code)
--   [<a href="/develop/dev-guide-sample-application-java-spring-boot.md">Spring Boot を使用して TiDB アプリを構築する</a>](/develop/dev-guide-sample-application-java-spring-boot.md)
+-   [TiDB と JDBC を使用してシンプルな CRUD アプリを構築する](/develop/dev-guide-sample-application-java-jdbc.md#step-2-get-the-code)
+-   [TiDB と Hibernate を使用してシンプルな CRUD アプリを構築する](/develop/dev-guide-sample-application-java-hibernate.md#step-2-get-the-code)
+-   [Spring Boot を使用して TiDB アプリを構築する](/develop/dev-guide-sample-application-java-spring-boot.md)
 
 </div>
 

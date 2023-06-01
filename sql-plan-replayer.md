@@ -69,7 +69,7 @@ MySQL [test]> plan replayer dump explain select * from t;
 1 row in set (0.015 sec)
 ```
 
-あるいは、セッション変数[<a href="/system-variables.md#tidb_last_plan_replayer_token-new-in-v630">`tidb_last_plan_replayer_token`</a>](/system-variables.md#tidb_last_plan_replayer_token-new-in-v630)を使用して、最後の`PLAN REPLAYER DUMP`回の実行結果を取得することもできます。
+あるいは、セッション変数[`tidb_last_plan_replayer_token`](/system-variables.md#tidb_last_plan_replayer_token-new-in-v630)を使用して、最後の`PLAN REPLAYER DUMP`回の実行結果を取得することもできます。
 
 ```sql
 SELECT @@tidb_last_plan_replayer_token;
@@ -194,7 +194,7 @@ mysql> show stats_meta;
 
 ### <code>PLAN REPLAYER CAPTURE</code>を有効にする {#enable-code-plan-replayer-capture-code}
 
-`PLAN REPLAYER CAPTURE`はシステム変数[<a href="/system-variables.md#tidb_enable_plan_replayer_capture">`tidb_enable_plan_replayer_capture`</a>](/system-variables.md#tidb_enable_plan_replayer_capture)によって制御されます。 `PLAN REPLAYER CAPTURE`を有効にするには、システム変数の値を`ON`に設定します。
+`PLAN REPLAYER CAPTURE`はシステム変数[`tidb_enable_plan_replayer_capture`](/system-variables.md#tidb_enable_plan_replayer_capture)によって制御されます。 `PLAN REPLAYER CAPTURE`を有効にするには、システム変数の値を`ON`に設定します。
 
 ### <code>PLAN REPLAYER CAPTURE</code>を使用する {#use-code-plan-replayer-capture-code}
 
@@ -243,7 +243,7 @@ mysql> SELECT * FROM mysql.plan_replayer_status;
 3 rows in set (0.00 sec)
 ```
 
-`PLAN REPLAYER CAPTURE`のファイルのダウンロード方法は`PLAN REPLAYER`と同様です。詳細は[<a href="#examples-of-exporting-cluster-information">クラスタ情報のエクスポート例</a>](#examples-of-exporting-cluster-information)を参照してください。
+`PLAN REPLAYER CAPTURE`のファイルのダウンロード方法は`PLAN REPLAYER`と同様です。詳細は[クラスタ情報のエクスポート例](#examples-of-exporting-cluster-information)を参照してください。
 
 > **ノート：**
 >
@@ -255,8 +255,8 @@ mysql> SELECT * FROM mysql.plan_replayer_status;
 
 ### <code>PLAN REPLAYER CONTINUOUS CAPTURE</code>を有効にする {#enable-code-plan-replayer-continuous-capture-code}
 
-`PLAN REPLAYER CONTINUOUS CAPTURE`はシステム変数[<a href="/system-variables.md#tidb_enable_plan_replayer_continuous_capture-new-in-v700">`tidb_enable_plan_replayer_continuous_capture`</a>](/system-variables.md#tidb_enable_plan_replayer_continuous_capture-new-in-v700)によって制御されます。 `PLAN REPLAYER CONTINUOUS CAPTURE`を有効にするには、システム変数の値を`ON`に設定します。
+`PLAN REPLAYER CONTINUOUS CAPTURE`はシステム変数[`tidb_enable_plan_replayer_continuous_capture`](/system-variables.md#tidb_enable_plan_replayer_continuous_capture-new-in-v700)によって制御されます。 `PLAN REPLAYER CONTINUOUS CAPTURE`を有効にするには、システム変数の値を`ON`に設定します。
 
 ### キャプチャ結果をビュー {#view-the-capture-results}
 
-`PLAN REPLAYER CONTINUOUS CAPTURE`の攻略結果の見方は[<a href="#view-the-capture-results">`PLAN REPLAYER CAPTURE`のキャプチャ結果の確認</a>](#view-the-capture-results)と同様です。
+`PLAN REPLAYER CONTINUOUS CAPTURE`の攻略結果の見方は[`PLAN REPLAYER CAPTURE`のキャプチャ結果の確認](#view-the-capture-results)と同様です。

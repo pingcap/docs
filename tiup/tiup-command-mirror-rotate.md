@@ -14,7 +14,7 @@ title: tiup mirror rotate
     -   タイムスタンプ.json
 -   有効期限は`root.json`です。公式ミラーの有効期限は、 `root.json`の作成日から 1 年後です。
 
-TiUPミラーの詳細については、 [<a href="/tiup/tiup-mirror-reference.md">TiUPミラーリファレンス</a>](/tiup/tiup-mirror-reference.md)を参照してください。
+TiUPミラーの詳細については、 [TiUPミラーリファレンス](/tiup/tiup-mirror-reference.md)を参照してください。
 
 次の場合は`root.json`を更新する必要があります。
 
@@ -34,7 +34,7 @@ TiUP はコマンド`tiup mirror rotate`を使用して上記のプロセスを�
 
 > **ノート：**
 >
-> -   v1.5.0 より前のTiUPバージョンの場合、このコマンドを実行しても正しい新しい`root.json`ファイルは返されません。 [<a href="https://github.com/pingcap/tiup/issues/983">#983</a>](https://github.com/pingcap/tiup/issues/983)を参照してください。
+> -   v1.5.0 より前のTiUPバージョンの場合、このコマンドを実行しても正しい新しい`root.json`ファイルは返されません。 [#983](https://github.com/pingcap/tiup/issues/983)を参照してください。
 > -   このコマンドを使用する前に、すべてのTiUPクライアントが v1.5.0 以降のバージョンにアップグレードされていることを確認してください。
 
 ## 構文 {#syntax}
@@ -45,13 +45,13 @@ tiup mirror rotate [flags]
 
 このコマンドを実行すると、 TiUP はユーザーがファイルの内容をターゲット値に変更するためのエディターを起動します ( `expires`フィールドの値を後日変更するなど)。次に、 TiUP は`version`フィールドを`N`から`N+1`に変更し、ファイルを保存します。ファイルが保存された後、 TiUP は一時 HTTPサーバーを起動し、すべてのミラー管理者がファイルに署名するのを待ちます。
 
-ミラー管理者がファイルに署名する方法については、 [<a href="/tiup/tiup-command-mirror-sign.md">`sign`コマンド</a>](/tiup/tiup-command-mirror-sign.md)を参照してください。
+ミラー管理者がファイルに署名する方法については、 [`sign`コマンド](/tiup/tiup-command-mirror-sign.md)を参照してください。
 
 ## オプション {#options}
 
 ### --addr {#addr}
 
--   一時サーバーのリスニングアドレスを指定します。他のミラー管理者が[<a href="/tiup/tiup-command-mirror-sign.md">`sign`コマンド</a>](/tiup/tiup-command-mirror-sign.md)を使用してファイルに署名できるように、そのアドレスにアクセスできることを確認する必要があります。
+-   一時サーバーのリスニングアドレスを指定します。他のミラー管理者が[`sign`コマンド](/tiup/tiup-command-mirror-sign.md)を使用してファイルに署名できるように、そのアドレスにアクセスできることを確認する必要があります。
 -   データ型: `STRING`
 -   このオプションがコマンドで指定されていない場合、 TiUP はデフォルトで`0.0.0.0:8080`をリッスンします。
 
@@ -59,4 +59,4 @@ tiup mirror rotate [flags]
 
 各ミラー管理者の現在の署名ステータス。
 
-[<a href="/tiup/tiup-command-mirror.md#command-list">&lt;&lt; 前のページに戻る - TiUP Mirror コマンド一覧</a>](/tiup/tiup-command-mirror.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP Mirror コマンド一覧](/tiup/tiup-command-mirror.md#command-list)

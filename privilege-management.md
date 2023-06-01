@@ -198,18 +198,18 @@ v5.1 以降、TiDB 機能は、MySQL 8.0 から借用した機能である動的
 -   `PLACEMENT_ADMIN`指定すると、権限所有者は配置ポリシーを作成、変更、削除できます。
 -   `DASHBOARD_CLIENT`では、特権所有者が TiDB ダッシュボードにログインできるようになります。
 -   `RESTRICTED_TABLES_ADMIN`指定すると、SEM が有効な場合、権限所有者はシステム テーブルを表示できます。
--   `RESTRICTED_STATUS_ADMIN`指定すると、SEM が有効な場合、特権所有者は[<a href="/sql-statements/sql-statement-show-status.md">`SHOW [GLOBAL|SESSION] STATUS`</a>](/sql-statements/sql-statement-show-status.md)のすべてのステータス変数を表示できます。
+-   `RESTRICTED_STATUS_ADMIN`指定すると、SEM が有効な場合、特権所有者は[`SHOW [GLOBAL|SESSION] STATUS`](/sql-statements/sql-statement-show-status.md)のすべてのステータス変数を表示できます。
 -   `RESTRICTED_VARIABLES_ADMIN`指定すると、SEM が有効な場合、権限所有者はすべてのシステム変数を表示できます。
 -   `RESTRICTED_USER_ADMIN` SEM が有効な場合、特権所有者が SUPER ユーザーによってアクセスを取り消されることを禁止します。
 -   `RESTRICTED_CONNECTION_ADMIN`指定すると、特権所有者は`RESTRICTED_USER_ADMIN`人のユーザーの接続を強制終了できます。この権限はステートメント`KILL`とステートメント`KILL TIDB`に影響します。
--   `RESTRICTED_REPLICA_WRITER_ADMIN`指定すると、TiDB クラスターで読み取り専用モードが有効になっている場合、特権所有者は影響を受けることなく書き込みまたは更新操作を実行できます。詳細は[<a href="/system-variables.md#tidb_restricted_read_only-new-in-v520">`tidb_restricted_read_only`</a>](/system-variables.md#tidb_restricted_read_only-new-in-v520)を参照してください。
+-   `RESTRICTED_REPLICA_WRITER_ADMIN`指定すると、TiDB クラスターで読み取り専用モードが有効になっている場合、特権所有者は影響を受けることなく書き込みまたは更新操作を実行できます。詳細は[`tidb_restricted_read_only`](/system-variables.md#tidb_restricted_read_only-new-in-v520)を参照してください。
 
 動的権限の完全なセットを表示するには、 `SHOW PRIVILEGES`ステートメントを実行します。プラグインは新しい権限を追加できるため、割り当て可能な権限のリストは TiDB インストールによって異なる場合があります。
 
 ## <code>SUPER</code>特典 {#code-super-code-privilege}
 
 -   `SUPER`権限により、ユーザーはほぼすべての操作を実行できます。デフォルトでは、 `root`ユーザーのみにこの権限が付与されます。この権限を他のユーザーに付与する場合は注意してください。
--   `SUPER`権限は[<a href="https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#dynamic-privileges-migration-from-super">MySQL 8.0 では非推奨になりました</a>](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#dynamic-privileges-migration-from-super)とみなされ、よりきめ細かいアクセス制御を提供するために[<a href="#dynamic-privileges">動的権限</a>](#dynamic-privileges)に置き換えることができます。
+-   `SUPER`権限は[動的権限](#dynamic-privileges)に置き換えることができます。
 
 ## TiDB 操作に必要な権限 {#privileges-required-for-tidb-operations}
 

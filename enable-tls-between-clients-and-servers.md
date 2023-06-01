@@ -7,7 +7,7 @@ summary: Use the encrypted connection to ensure data security.
 
 TiDB のサーバーとクライアント間の非暗号化接続はデフォルトで許可されており、これにより、チャネル トラフィックを監視するサードパーティは、サーバーとクライアントの間で送受信されるデータ (クエリ内容やクエリ結果など) を知ることができます。チャネルが信頼できない場合 (クライアントがパブリック ネットワーク経由で TiDBサーバーに接続している場合など)、暗号化されていない接続では情報漏洩が発生する可能性があります。この場合、セキュリティ上の理由から、暗号化された接続を要求することをお勧めします。
 
-TiDBサーバーは、 TLS (Transport Layer Security) に基づく暗号化接続をサポートしています。このプロトコルは MySQL 暗号化接続と一致しており、MySQL クライアント、MySQL シェル、MySQL ドライバーなどの既存の MySQL クライアントによって直接サポートされています。 TLS は、SSL (セキュリティ Sockets Layer) と呼ばれることもあります。 SSL プロトコルには[<a href="https://en.wikipedia.org/wiki/Transport_Layer_Security">既知のセキュリティ脆弱性</a>](https://en.wikipedia.org/wiki/Transport_Layer_Security)あるため、TiDB は SSL をサポートしません。 TiDB は、TLSv1.0、TLSv1.1、TLSv1.2、および TLSv1.3 のプロトコルをサポートします。
+TiDBサーバーは、 TLS (Transport Layer Security) に基づく暗号化接続をサポートしています。このプロトコルは MySQL 暗号化接続と一致しており、MySQL クライアント、MySQL シェル、MySQL ドライバーなどの既存の MySQL クライアントによって直接サポートされています。 TLS は、SSL (セキュリティ Sockets Layer) と呼ばれることもあります。 SSL プロトコルには[既知のセキュリティ脆弱性](https://en.wikipedia.org/wiki/Transport_Layer_Security)あるため、TiDB は SSL をサポートしません。 TiDB は、TLSv1.0、TLSv1.1、TLSv1.2、および TLSv1.3 のプロトコルをサポートします。
 
 暗号化された接続が使用される場合、接続には次のセキュリティ特性があります。
 
@@ -30,21 +30,21 @@ MySQL と同様に、TiDB では、同じ TCP ポート上で TLS 接続と非 T
 
 > **ノート：**
 >
-> ログイン ユーザーが[<a href="/certificate-authentication.md#configure-the-user-certificate-information-for-login-verification">TiDB 証明書ベースのログイン認証</a>](/certificate-authentication.md#configure-the-user-certificate-information-for-login-verification)使用して設定した場合、ユーザーは TiDB への暗号化された接続を有効にすることが暗黙的に要求されます。
+> ログイン ユーザーが[TiDB 証明書ベースのログイン認証](/certificate-authentication.md#configure-the-user-certificate-information-for-login-verification)使用して設定した場合、ユーザーは TiDB への暗号化された接続を有効にすることが暗黙的に要求されます。
 
 ## 安全な接続を使用するように TiDBサーバーを構成する {#configure-tidb-server-to-use-secure-connections}
 
 安全な接続を有効にするための関連パラメータについては、次の説明を参照してください。
 
--   [<a href="/tidb-configuration-file.md#auto-tls">`auto-tls`</a>](/tidb-configuration-file.md#auto-tls) : 証明書の自動生成を有効にします (v5.2.0 以降)
--   [<a href="/tidb-configuration-file.md#ssl-cert">`ssl-cert`</a>](/tidb-configuration-file.md#ssl-cert) : SSL証明書のファイルパスを指定します。
--   [<a href="/tidb-configuration-file.md#ssl-key">`ssl-key`</a>](/tidb-configuration-file.md#ssl-key) : 証明書と一致する秘密キーを指定します
--   [<a href="/tidb-configuration-file.md#ssl-ca">`ssl-ca`</a>](/tidb-configuration-file.md#ssl-ca) : (オプション) 信頼された CA 証明書のファイル パスを指定します。
--   [<a href="/tidb-configuration-file.md#tls-version">`tls-version`</a>](/tidb-configuration-file.md#tls-version) : (オプション) 最小の TLS バージョンを指定します (例: 「TLSv1.2」)。
+-   [`auto-tls`](/tidb-configuration-file.md#auto-tls) : 証明書の自動生成を有効にします (v5.2.0 以降)
+-   [`ssl-cert`](/tidb-configuration-file.md#ssl-cert) : SSL証明書のファイルパスを指定します。
+-   [`ssl-key`](/tidb-configuration-file.md#ssl-key) : 証明書と一致する秘密キーを指定します
+-   [`ssl-ca`](/tidb-configuration-file.md#ssl-ca) : (オプション) 信頼された CA 証明書のファイル パスを指定します。
+-   [`tls-version`](/tidb-configuration-file.md#tls-version) : (オプション) 最小の TLS バージョンを指定します (例: 「TLSv1.2」)。
 
 `auto-tls`安全な接続を許可しますが、クライアント証明書の検証は提供しません。証明書の検証と証明書の生成方法の制御については、以下の`ssl-cert` 、 `ssl-key` 、および`ssl-ca`変数の構成に関するアドバイスを参照してください。
 
-TiDBサーバーで独自の証明書を使用した安全な接続を有効にするには、TiDBサーバーの起動時に構成ファイルで`ssl-cert`と`ssl-key`の両方のパラメーターを指定する必要があります。クライアント認証に`ssl-ca`パラメータを指定することもできます ( [<a href="#enable-authentication">認証を有効にする</a>](#enable-authentication)を参照)。
+TiDBサーバーで独自の証明書を使用した安全な接続を有効にするには、TiDBサーバーの起動時に構成ファイルで`ssl-cert`と`ssl-key`の両方のパラメーターを指定する必要があります。クライアント認証に`ssl-ca`パラメータを指定することもできます ( [認証を有効にする](#enable-authentication)を参照)。
 
 パラメータで指定されたすべてのファイルは PEM (Privacy Enhanced Mail) 形式です。現在、TiDB はパスワードで保護された秘密キーのインポートをサポートしていないため、パスワードなしで秘密キー ファイルを提供する必要があります。証明書または秘密キーが無効な場合、TiDBサーバーは通常どおり起動しますが、クライアントは暗号化された接続を介して TiDBサーバーに接続できません。
 
@@ -67,7 +67,7 @@ MySQL 8.0 クライアントには、このパラメータに加えて 2 つの 
 -   `--ssl-mode=VERIFY_CA` : `--ssl-ca`を必要とする CA に対してサーバーからの証明書を検証します。
 -   `--ssl-mode=VERIFY_IDENTITY` : `VERIFY_CA`と同じですが、接続先のホスト名が証明書と一致するかどうかも検証します。
 
-詳細については、MySQL の[<a href="https://dev.mysql.com/doc/refman/5.7/en/using-encrypted-connections.html#using-encrypted-connections-client-side-configuration">暗号化された接続のためのクライアント側のコンフィグレーション</a>](https://dev.mysql.com/doc/refman/5.7/en/using-encrypted-connections.html#using-encrypted-connections-client-side-configuration)を参照してください。
+詳細については、MySQL の[暗号化された接続のためのクライアント側のコンフィグレーション](https://dev.mysql.com/doc/refman/5.7/en/using-encrypted-connections.html#using-encrypted-connections-client-side-configuration)を参照してください。
 
 ## 認証を有効にする {#enable-authentication}
 
@@ -98,7 +98,7 @@ create user 'u1'@'%'  require x509;
 
 > **ノート：**
 >
-> ログイン ユーザーが[<a href="/certificate-authentication.md#configure-the-user-certificate-information-for-login-verification">TiDB 証明書ベースのログイン認証</a>](/certificate-authentication.md#configure-the-user-certificate-information-for-login-verification)使用して設定した場合、ユーザーは TiDB への暗号化された接続を有効にすることが暗黙的に要求されます。
+> ログイン ユーザーが[TiDB 証明書ベースのログイン認証](/certificate-authentication.md#configure-the-user-certificate-information-for-login-verification)使用して設定した場合、ユーザーは TiDB への暗号化された接続を有効にすることが暗黙的に要求されます。
 
 ## 現在の接続で暗号化が使用されているかどうかを確認する {#check-whether-the-current-connection-uses-encryption}
 
@@ -166,7 +166,7 @@ TiDB でサポートされる TLS バージョン、鍵交換プロトコル、�
 
 ## 証明書、キー、CA をリロードする {#reload-certificate-key-and-ca}
 
-証明書、キー、または CA を置き換えるには、まず対応するファイルを置き換えてから、実行中の TiDB インスタンスで[<a href="/sql-statements/sql-statement-alter-instance.md">`ALTER INSTANCE RELOAD TLS`</a>](/sql-statements/sql-statement-alter-instance.md)ステートメントを実行して、元の構成から証明書 ( [<a href="/tidb-configuration-file.md#ssl-cert">`ssl-cert`</a>](/tidb-configuration-file.md#ssl-cert) )、キー ( [<a href="/tidb-configuration-file.md#ssl-key">`ssl-key`</a>](/tidb-configuration-file.md#ssl-key) )、および CA ( [<a href="/tidb-configuration-file.md#ssl-ca">`ssl-ca`</a>](/tidb-configuration-file.md#ssl-ca) ) を再ロードします。道。この方法では、TiDB インスタンスを再起動する必要はありません。
+証明書、キー、または CA を置き換えるには、まず対応するファイルを置き換えてから、実行中の TiDB インスタンスで[`ssl-ca`](/tidb-configuration-file.md#ssl-ca) ) を再ロードします。道。この方法では、TiDB インスタンスを再起動する必要はありません。
 
 新しくロードされた証明書、キー、および CA は、ステートメントが正常に実行された後に確立された接続で有効になります。ステートメントの実行前に確立された接続は影響を受けません。
 
@@ -190,4 +190,4 @@ SHOW GLOBAL STATUS LIKE 'Ssl\_server\_not\_%';
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/enable-tls-between-components.md">TiDB コンポーネント間で TLS を有効にする</a>](/enable-tls-between-components.md) 。
+-   [TiDB コンポーネント間で TLS を有効にする](/enable-tls-between-components.md) 。

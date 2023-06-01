@@ -27,8 +27,8 @@ TiDB データ マイグレーション (DM) はデータを移行するとき�
 
 ## シャードマージ移行タスク {#shard-merge-migration-tasks}
 
-DM が悲観的モードまたは楽観的モードでテーブルをマージおよび移行する場合、DDL レプリケーションの動作は他のシナリオの動作とは異なります。詳細は[<a href="/dm/feature-shard-merge-pessimistic.md">悲観的モード</a>](/dm/feature-shard-merge-pessimistic.md) 、 [<a href="/dm/feature-shard-merge-optimistic.md">楽観的モード</a>](/dm/feature-shard-merge-optimistic.md)を参照してください。
+DM が悲観的モードまたは楽観的モードでテーブルをマージおよび移行する場合、DDL レプリケーションの動作は他のシナリオの動作とは異なります。詳細は[楽観的モード](/dm/feature-shard-merge-optimistic.md)を参照してください。
 
 ## オンラインDDL {#online-ddl}
 
-オンライン DDL 機能は、特別な方法で DDL イベントも処理します。詳細は[<a href="/dm/feature-online-ddl.md">GH-ost/PT-osc を使用するデータベースからの移行</a>](/dm/feature-online-ddl.md)を参照してください。
+オンライン DDL 機能は、特別な方法で DDL イベントも処理します。詳細は[GH-ost/PT-osc を使用するデータベースからの移行](/dm/feature-online-ddl.md)を参照してください。

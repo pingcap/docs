@@ -25,4 +25,4 @@ tiup env [name1...N]
 
 上記の出力で、 `value`が空の場合は、環境変数の値が設定されていないことを意味します。この場合、 TiUP はデフォルト値を使用します。
 
-[<a href="/tiup/tiup-reference.md#command-list">&lt;&lt; 前のページに戻る - TiUPリファレンスコマンドリスト</a>](/tiup/tiup-reference.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPリファレンスコマンドリスト](/tiup/tiup-reference.md#command-list)

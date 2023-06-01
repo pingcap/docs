@@ -12,7 +12,7 @@ TiUP クラスタ は、 Golangで書かれたTiUPのクラスター管理コン
 tiup cluster [command] [flags]
 ```
 
-`[command]`はコマンドの名前です。サポートされているコマンドについては、以下の[<a href="#command-list">コマンドリスト</a>](#command-list)を参照してください。
+`[command]`はコマンドの名前です。サポートされているコマンドについては、以下の[コマンドリスト](#command-list)を参照してください。
 
 ## オプション {#options}
 
@@ -61,31 +61,31 @@ tiup cluster [command] [flags]
 
 ## コマンド一覧 {#command-list}
 
--   [<a href="/tiup/tiup-component-cluster-import.md">輸入</a>](/tiup/tiup-component-cluster-import.md) : Ansible によってデプロイされたクラスターをインポートします
--   [<a href="/tiup/tiup-component-cluster-template.md">レンプレート</a>](/tiup/tiup-component-cluster-template.md) : トポロジテンプレートを出力します。
--   [<a href="/tiup/tiup-component-cluster-check.md">チェック</a>](/tiup/tiup-component-cluster-check.md) : デプロイメントの前後にクラスターをチェックします。
--   [<a href="/tiup/tiup-component-cluster-deploy.md">配備</a>](/tiup/tiup-component-cluster-deploy.md) : 指定されたトポロジに基づいてクラスターをデプロイします
--   [<a href="/tiup/tiup-component-cluster-list.md">リスト</a>](/tiup/tiup-component-cluster-list.md) : デプロイされたクラスターのリストをクエリします。
--   [<a href="/tiup/tiup-component-cluster-display.md">画面</a>](/tiup/tiup-component-cluster-display.md) : 指定されたクラスターのステータスを表示します。
--   [<a href="/tiup/tiup-component-cluster-start.md">始める</a>](/tiup/tiup-component-cluster-start.md) : 指定されたクラスターを開始します
--   [<a href="/tiup/tiup-component-cluster-stop.md">ストップ</a>](/tiup/tiup-component-cluster-stop.md) : 指定されたクラスターを停止します
--   [<a href="/tiup/tiup-component-cluster-restart.md">再起動</a>](/tiup/tiup-component-cluster-restart.md) : 指定されたクラスターを再起動します
--   [<a href="/tiup/tiup-component-cluster-scale-in.md">スケールイン</a>](/tiup/tiup-component-cluster-scale-in.md) : 指定されたクラスター内でスケーリングします
--   [<a href="/tiup/tiup-component-cluster-scale-out.md">規格外</a>](/tiup/tiup-component-cluster-scale-out.md) : 指定されたクラスターをスケールアウトします。
--   [<a href="/tiup/tiup-component-cluster-upgrade.md">アップグレード</a>](/tiup/tiup-component-cluster-upgrade.md) : 指定されたクラスターをアップグレードします
--   [<a href="/tiup/tiup-component-cluster-prune.md">プルーン</a>](/tiup/tiup-component-cluster-prune.md) : 指定されたクラスターの廃棄状態のインスタンスをクリーンアップします。
--   [<a href="/tiup/tiup-component-cluster-edit-config.md">編集構成</a>](/tiup/tiup-component-cluster-edit-config.md) : 指定されたクラスターの構成を変更します
--   [<a href="/tiup/tiup-component-cluster-reload.md">リロード</a>](/tiup/tiup-component-cluster-reload.md) : 指定されたクラスターの構成を再ロードします
--   [<a href="/tiup/tiup-component-cluster-patch.md">パッチ</a>](/tiup/tiup-component-cluster-patch.md) : デプロイされたクラスター内のサービスを置き換えます
--   [<a href="/tiup/tiup-component-cluster-rename.md">名前を変更する</a>](/tiup/tiup-component-cluster-rename.md) : クラスターの名前を変更します
--   [<a href="/tiup/tiup-component-cluster-clean.md">綺麗</a>](/tiup/tiup-component-cluster-clean.md) : 指定されたクラスターからデータを削除します
--   [<a href="/tiup/tiup-component-cluster-destroy.md">破壊</a>](/tiup/tiup-component-cluster-destroy.md) : 指定されたクラスターを破棄します
--   [<a href="/tiup/tiup-component-cluster-audit.md">監査</a>](/tiup/tiup-component-cluster-audit.md) : 指定されたクラスターの操作監査ログを照会します。
--   [<a href="/tiup/tiup-component-cluster-replay.md">リプレイ</a>](/tiup/tiup-component-cluster-replay.md) : 指定されたコマンドを再試行します
--   [<a href="/tiup/tiup-component-cluster-enable.md">有効</a>](/tiup/tiup-component-cluster-enable.md) : マシンの再起動後にクラスターサービスの自動有効化を有効にします。
--   [<a href="/tiup/tiup-component-cluster-disable.md">無効にする</a>](/tiup/tiup-component-cluster-disable.md) : マシンの再起動後のクラスターサービスの自動有効化を無効にします。
--   [<a href="/tiup/tiup-component-cluster-meta-backup.md">メタバックアップ</a>](/tiup/tiup-component-cluster-meta-backup.md) : 指定されたクラスターの運用と保守に必要なTiUPメタ ファイルをバックアップします。
--   [<a href="/tiup/tiup-component-cluster-meta-restore.md">メタ復元</a>](/tiup/tiup-component-cluster-meta-restore.md) : 指定されたクラスターのTiUPメタ ファイルを復元します
--   [<a href="/tiup/tiup-component-cluster-help.md">ヘルプ</a>](/tiup/tiup-component-cluster-help.md) : ヘルプ情報を出力。
+-   [輸入](/tiup/tiup-component-cluster-import.md) : Ansible によってデプロイされたクラスターをインポートします
+-   [レンプレート](/tiup/tiup-component-cluster-template.md) : トポロジテンプレートを出力します。
+-   [チェック](/tiup/tiup-component-cluster-check.md) : デプロイメントの前後にクラスターをチェックします。
+-   [配備](/tiup/tiup-component-cluster-deploy.md) : 指定されたトポロジに基づいてクラスターをデプロイします
+-   [リスト](/tiup/tiup-component-cluster-list.md) : デプロイされたクラスターのリストをクエリします。
+-   [画面](/tiup/tiup-component-cluster-display.md) : 指定されたクラスターのステータスを表示します。
+-   [始める](/tiup/tiup-component-cluster-start.md) : 指定されたクラスターを開始します
+-   [ストップ](/tiup/tiup-component-cluster-stop.md) : 指定されたクラスターを停止します
+-   [再起動](/tiup/tiup-component-cluster-restart.md) : 指定されたクラスターを再起動します
+-   [スケールイン](/tiup/tiup-component-cluster-scale-in.md) : 指定されたクラスター内でスケーリングします
+-   [規格外](/tiup/tiup-component-cluster-scale-out.md) : 指定されたクラスターをスケールアウトします。
+-   [アップグレード](/tiup/tiup-component-cluster-upgrade.md) : 指定されたクラスターをアップグレードします
+-   [プルーン](/tiup/tiup-component-cluster-prune.md) : 指定されたクラスターの廃棄状態のインスタンスをクリーンアップします。
+-   [編集構成](/tiup/tiup-component-cluster-edit-config.md) : 指定されたクラスターの構成を変更します
+-   [リロード](/tiup/tiup-component-cluster-reload.md) : 指定されたクラスターの構成を再ロードします
+-   [パッチ](/tiup/tiup-component-cluster-patch.md) : デプロイされたクラスター内のサービスを置き換えます
+-   [名前を変更する](/tiup/tiup-component-cluster-rename.md) : クラスターの名前を変更します
+-   [綺麗](/tiup/tiup-component-cluster-clean.md) : 指定されたクラスターからデータを削除します
+-   [破壊](/tiup/tiup-component-cluster-destroy.md) : 指定されたクラスターを破棄します
+-   [監査](/tiup/tiup-component-cluster-audit.md) : 指定されたクラスターの操作監査ログを照会します。
+-   [リプレイ](/tiup/tiup-component-cluster-replay.md) : 指定されたコマンドを再試行します
+-   [有効](/tiup/tiup-component-cluster-enable.md) : マシンの再起動後にクラスターサービスの自動有効化を有効にします。
+-   [無効にする](/tiup/tiup-component-cluster-disable.md) : マシンの再起動後のクラスターサービスの自動有効化を無効にします。
+-   [メタバックアップ](/tiup/tiup-component-cluster-meta-backup.md) : 指定されたクラスターの運用と保守に必要なTiUPメタ ファイルをバックアップします。
+-   [メタ復元](/tiup/tiup-component-cluster-meta-restore.md) : 指定されたクラスターのTiUPメタ ファイルを復元します
+-   [ヘルプ](/tiup/tiup-component-cluster-help.md) : ヘルプ情報を出力。
 
-[<a href="/tiup/tiup-reference.md#component-list">&lt;&lt; 前のページに戻る - TiUPリファレンスコンポーネントリスト</a>](/tiup/tiup-reference.md#component-list)
+[&lt;&lt; 前のページに戻る - TiUPリファレンスコンポーネントリスト](/tiup/tiup-reference.md#component-list)

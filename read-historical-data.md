@@ -9,7 +9,7 @@ summary: Learn about how TiDB reads data from history versions using the system 
 
 > **ノート：**
 >
-> [<a href="/stale-read.md">ステイル読み取り</a>](/stale-read.md)機能を使用して履歴データを読み取ることもできます。これを使用することをお勧めします。
+> [ステイル読み取り](/stale-read.md)機能を使用して履歴データを読み取ることもできます。これを使用することをお勧めします。
 
 ## 機能の説明 {#feature-description}
 
@@ -22,7 +22,7 @@ TiDB は、特別なクライアントやドライバーを使用せずに、標
 
 ## TiDB が履歴バージョンからデータを読み取る方法 {#how-tidb-reads-data-from-history-versions}
 
-[<a href="/system-variables.md#tidb_snapshot">`tidb_snapshot`</a>](/system-variables.md#tidb_snapshot)システム変数は、履歴データの読み取りをサポートするために導入されました。 `tidb_snapshot`変数について:
+[`tidb_snapshot`](/system-variables.md#tidb_snapshot)システム変数は、履歴データの読み取りをサポートするために導入されました。 `tidb_snapshot`変数について:
 
 -   変数は`SESSION`スコープで有効です。
 -   その値は`SET`ステートメントを使用して変更できます。
@@ -40,11 +40,11 @@ TiDB は、特別なクライアントやドライバーを使用せずに、標
 
 TiDB は、データ バージョンを管理するためにマルチバージョン同時実行制御 (MVCC) を実装しています。データ オブジェクトをその場で更新/削除するのではなく、更新/削除のたびにデータ オブジェクトの新しいバージョンが作成されるため、データの履歴バージョンが保持されます。ただし、すべてのバージョンが保存されているわけではありません。バージョンが特定の時点よりも古い場合、storage占有量と、履歴バージョンが多すぎることによって生じるパフォーマンスのオーバーヘッドを削減するために、バージョンは完全に削除されます。
 
-TiDB では、ガベージ コレクション (GC) が定期的に実行され、古いデータ バージョンが削除されます。 GC の詳細については、 [<a href="/garbage-collection-overview.md">TiDB ガベージ コレクション (GC)</a>](/garbage-collection-overview.md)を参照してください。
+TiDB では、ガベージ コレクション (GC) が定期的に実行され、古いデータ バージョンが削除されます。 GC の詳細については、 [TiDB ガベージ コレクション (GC)](/garbage-collection-overview.md)を参照してください。
 
 以下の点に特に注意してください。
 
--   [<a href="/system-variables.md#tidb_gc_life_time-new-in-v50">`tidb_gc_life_time`</a>](/system-variables.md#tidb_gc_life_time-new-in-v50) : このシステム変数は、以前の変更の保持時間を構成するために使用されます (デフォルト: `10m0s` )。
+-   [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) : このシステム変数は、以前の変更の保持時間を構成するために使用されます (デフォルト: `10m0s` )。
 -   `SELECT * FROM mysql.tidb WHERE variable_name = 'tikv_gc_safe_point'`の出力。過去のデータが読めるのは現在`safePoint`までです。ガベージコレクションプロセスが実行されるたびに更新されます。
 
 ## 例 {#example}
@@ -174,4 +174,4 @@ SET GLOBAL tidb_gc_life_time="60m";
 
 -   単純な場合は、変数`tidb_snapshot`設定した後に`SELECT`使用し、出力をコピーして貼り付けるか、 `SELECT ... INTO LOCAL OUTFLE`を使用し、後でデータをインポートするために`LOAD DATA`を使用します。
 
--   履歴スナップショットをエクスポートするには[<a href="/dumpling-overview.md#export-historical-data-snapshots-of-tidb">Dumpling</a>](/dumpling-overview.md#export-historical-data-snapshots-of-tidb)使用します。 Dumpling は、大規模なデータセットのエクスポートに優れたパフォーマンスを発揮します。
+-   履歴スナップショットをエクスポートするには[Dumpling](/dumpling-overview.md#export-historical-data-snapshots-of-tidb)使用します。 Dumpling は、大規模なデータセットのエクスポートに優れたパフォーマンスを発揮します。

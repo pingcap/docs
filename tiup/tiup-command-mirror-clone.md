@@ -43,8 +43,8 @@ tiup mirror clone <target-dir> [global version] [flags]
 
 ### --{コンポーネント} {#component}
 
--   クローンを作成するコンポーネントのバージョンリストを指定します。 `{component}`にコンポーネント名を入力します。 [<a href="/tiup/tiup-command-list.md">`tiup list --all`</a>](/tiup/tiup-command-list.md)を実行すると、使用可能なコンポーネント名が表示されます。
+-   クローンを作成するコンポーネントのバージョンリストを指定します。 `{component}`にコンポーネント名を入力します。 [`tiup list --all`](/tiup/tiup-command-list.md)を実行すると、使用可能なコンポーネント名が表示されます。
 -   データ型: 文字列
 -   デフォルト: ヌル
 
-[<a href="/tiup/tiup-command-mirror.md#command-list">&lt;&lt; 前のページに戻る - TiUP Mirror コマンド一覧</a>](/tiup/tiup-command-mirror.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP Mirror コマンド一覧](/tiup/tiup-command-mirror.md#command-list)

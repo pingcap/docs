@@ -7,9 +7,9 @@ summary: An overview of the usage of EXPLAIN for the TiDB database.
 
 `EXPLAIN`ステートメントは、クエリを実行せずにクエリの実行計画を示します。これに`EXPLAIN ANALYZE`付加すると、クエリが実行されます。 `EXPLAIN`の出力が予期した結果と一致しない場合は、クエリ内の各テーブルに対して`ANALYZE TABLE`を実行することを検討してください。
 
-ステートメント`DESC`と`DESCRIBE`は、このステートメントの別名です。 `EXPLAIN <tableName>`の別の使用法は[<a href="/sql-statements/sql-statement-show-columns-from.md">`SHOW [FULL] COLUMNS FROM`</a>](/sql-statements/sql-statement-show-columns-from.md)に記載されています。
+ステートメント`DESC`と`DESCRIBE`は、このステートメントの別名です。 `EXPLAIN <tableName>`の別の使用法は[`SHOW [FULL] COLUMNS FROM`](/sql-statements/sql-statement-show-columns-from.md)に記載されています。
 
-TiDB は`EXPLAIN [options] FOR CONNECTION connection_id`ステートメントをサポートします。ただし、このステートメントは MySQL の`EXPLAIN FOR`ステートメントとは異なります。詳細については、 [<a href="#explain-for-connection">`EXPLAIN FOR CONNECTION`</a>](#explain-for-connection)を参照してください。
+TiDB は`EXPLAIN [options] FOR CONNECTION connection_id`ステートメントをサポートします。ただし、このステートメントは MySQL の`EXPLAIN FOR`ステートメントとは異なります。詳細については、 [`EXPLAIN FOR CONNECTION`](#explain-for-connection)を参照してください。
 
 ## あらすじ {#synopsis}
 
@@ -39,7 +39,7 @@ ExplainableStmt ::=
 
 > **ノート：**
 >
-> 返された実行プランでは、 `IndexJoin`および`Apply`演算子のすべてのプローブ側子ノードについて、v6.4.0 以降の`estRows`の意味は v6.4.0 以前とは異なります。詳細については[<a href="/explain-overview.md#understand-explain-output">TiDB クエリ実行計画の概要</a>](/explain-overview.md#understand-explain-output)を参照してください。
+> 返された実行プランでは、 `IndexJoin`および`Apply`演算子のすべてのプローブ側子ノードについて、v6.4.0 以降の`estRows`の意味は v6.4.0 以前とは異なります。詳細については[TiDB クエリ実行計画の概要](/explain-overview.md#understand-explain-output)を参照してください。
 
 現在、TiDB の`EXPLAIN`は`id` 、 `estRows` 、 `task` 、 `access object` 、 `operator info`の 5 つの列を出力します。実行プラン内の各演算子はこれらの属性によって記述され、 `EXPLAIN`の出力の各行が演算子を記述します。各属性の説明は次のとおりです。
 
@@ -191,7 +191,7 @@ EXPLAIN DELETE FROM t1 WHERE c1=3;
 | フォーマット      | 説明                                                                                                                      |
 | ----------- | ----------------------------------------------------------------------------------------------------------------------- |
 | 指定されていない    | 形式が指定されていない場合、 `EXPLAIN`デフォルトの形式`row`を使用します。                                                                            |
-| `row`       | `EXPLAIN`ステートメントは結果を表形式で出力します。詳細については、 [<a href="/explain-overview.md">クエリ実行計画を理解する</a>](/explain-overview.md)参照してください。 |
+| `row`       | `EXPLAIN`ステートメントは結果を表形式で出力します。詳細については、 [クエリ実行計画を理解する](/explain-overview.md)参照してください。 |
 | `brief`     | `EXPLAIN`ステートメントの出力のオペレーター ID は、 `FORMAT`指定しない場合に比べて簡略化されます。                                                            |
 | `dot`       | `EXPLAIN`ステートメントは DOT 実行プランを出力します。これは、( `graphviz`パッケージ内の) `dot`プログラムを通じて PNG ファイルを生成するために使用できます。                       |
 | `tidb_json` | `EXPLAIN`ステートメントは、実行プランを JSON で出力し、オペレーター情報を JSON 配列に保存します。                                                             |
@@ -276,7 +276,7 @@ dot xx.dot -T png -O
 The xx.dot is the result returned by the above statement.
 ```
 
-コンピュータに`dot`プログラムがない場合は、結果を[<a href="http://www.webgraphviz.com/">このウェブサイト</a>](http://www.webgraphviz.com/)にコピーして樹形図を取得します。
+コンピュータに`dot`プログラムがない場合は、結果を[このウェブサイト](http://www.webgraphviz.com/)にコピーして樹形図を取得します。
 
 ![Explain Dot](/media/explain_dot.png)
 
@@ -347,7 +347,7 @@ EXPLAIN FORMAT = "tidb_json" SELECT id FROM t WHERE a = 1;
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/explain-overview.md">クエリ実行プランを理解する</a>](/explain-overview.md)
--   [<a href="/sql-statements/sql-statement-explain-analyze.md">EXPLAINの説明</a>](/sql-statements/sql-statement-explain-analyze.md)
--   [<a href="/sql-statements/sql-statement-analyze-table.md">分析テーブル</a>](/sql-statements/sql-statement-analyze-table.md)
--   [<a href="/sql-statements/sql-statement-trace.md">痕跡</a>](/sql-statements/sql-statement-trace.md)
+-   [クエリ実行プランを理解する](/explain-overview.md)
+-   [EXPLAINの説明](/sql-statements/sql-statement-explain-analyze.md)
+-   [分析テーブル](/sql-statements/sql-statement-analyze-table.md)
+-   [痕跡](/sql-statements/sql-statement-trace.md)

@@ -7,7 +7,7 @@ summary: Learn how to use PingCAP Clinic to collect, upload, and view cluster di
 
 このドキュメントでは、 PingCAPクリニック診断サービス (PingCAPクリニック) を使用してクラスター診断データを迅速に収集、アップロード、および表示する方法について説明します。
 
-PingCAPクリニック は、 2 つのコンポーネントで構成されています[<a href="https://github.com/pingcap/diag">クライアントを診断する</a>](https://github.com/pingcap/diag) (Diag と短縮) と Clinic Server クラウド サービス (Clinic Server と短縮)。これら 2 つのコンポーネントの詳細については、 [<a href="/clinic/clinic-introduction.md">PingCAPクリニックの概要</a>](/clinic/clinic-introduction.md)を参照してください。
+PingCAPクリニック は、 2 つのコンポーネントで構成されています[PingCAPクリニックの概要](/clinic/clinic-introduction.md)を参照してください。
 
 ## ユーザーシナリオ {#user-scenarios}
 
@@ -16,7 +16,7 @@ PingCAPクリニック は、 2 つのコンポーネントで構成されてい
 
 > **ノート：**
 >
-> -   データを収集してアップロードする次の方法は[<a href="/production-deployment-using-tiup.md">TiUPを使用してデプロイされたクラスター</a>](/production-deployment-using-tiup.md)に**のみ**適用されます。 TiDB Operator on Kubernetes を使用してデプロイされたクラスターについては、 [<a href="https://docs.pingcap.com/tidb-in-kubernetes/stable/clinic-user-guide">TiDB Operator環境向けPingCAPクリニック</a>](https://docs.pingcap.com/tidb-in-kubernetes/stable/clinic-user-guide)を参照してください。
+> -   データを収集してアップロードする次の方法は[TiDB Operator環境向けPingCAPクリニック](https://docs.pingcap.com/tidb-in-kubernetes/stable/clinic-user-guide)を参照してください。
 > -   PingCAPクリニックによって収集された診断データは、クラスターの問題のトラブルシューティングに**のみ**使用されます。
 
 ## 前提条件 {#prerequisites}
@@ -34,7 +34,7 @@ PingCAPクリニックを使用する前に、Diag をインストールし、�
     <SimpleTab groupId="clinicServer">
      <div label="Clinic Server for international users" value="clinic-us">
 
-    [<a href="https://clinic.pingcap.com">海外ユーザー向けクリニックサーバー</a>](https://clinic.pingcap.com)に進み、 **「TiDB アカウントでサインイン」**を選択して、 TiDB Cloudのログイン ページに入ります。 TiDB Cloudアカウントをお持ちでない場合は、そのページで作成してください。
+    [海外ユーザー向けクリニックサーバー](https://clinic.pingcap.com)に進み、 **「TiDB アカウントでサインイン」**を選択して、 TiDB Cloudのログイン ページに入ります。 TiDB Cloudアカウントをお持ちでない場合は、そのページで作成してください。
 
     > **ノート：**
     >
@@ -44,7 +44,7 @@ PingCAPクリニックを使用する前に、Diag をインストールし、�
 
     <div label="Clinic Server for users in the Chinese mainland" value="clinic-cn">
 
-    [<a href="https://clinic.pingcap.com.cn">中国本土のユーザー向けクリニックサーバー</a>](https://clinic.pingcap.com.cn)に進み、 **「AskTUG でサインイン」**を選択して、AskTUG コミュニティのログイン ページに入ります。 AskTUG アカウントをお持ちでない場合は、そのページでアカウントを作成してください
+    [中国本土のユーザー向けクリニックサーバー](https://clinic.pingcap.com.cn)に進み、 **「AskTUG でサインイン」**を選択して、AskTUG コミュニティのログイン ページに入ります。 AskTUG アカウントをお持ちでない場合は、そのページでアカウントを作成してください
 
     </div>
      </SimpleTab>
@@ -103,7 +103,7 @@ PingCAPクリニックを使用する前に、Diag をインストールし、�
 
 6.  (オプション) ログの編集を有効にします。
 
-    TiDB が詳細なログ情報を提供する場合、機密情報 (ユーザー データなど) がログに出力される場合があります。ローカル ログおよびクリニック サーバー内の機密情報の漏洩を回避したい場合は、TiDB 側でログの編集を有効にすることができます。詳細については、 [<a href="/log-redaction.md#log-redaction-in-tidb-side">ログ編集</a>](/log-redaction.md#log-redaction-in-tidb-side)を参照してください。
+    TiDB が詳細なログ情報を提供する場合、機密情報 (ユーザー データなど) がログに出力される場合があります。ローカル ログおよびクリニック サーバー内の機密情報の漏洩を回避したい場合は、TiDB 側でログの編集を有効にすることができます。詳細については、 [ログ編集](/log-redaction.md#log-redaction-in-tidb-side)を参照してください。
 
 ## ステップ {#steps}
 
@@ -139,7 +139,7 @@ PingCAPクリニックを使用する前に、Diag をインストールし、�
         >
         > この方法でデータをアップロードする場合は、Diag v0.9.0 以降のバージョンを使用する必要があります。 Diag を実行すると、Diag のバージョンを取得できます。 Diag のバージョンが 0.9.0 より前の場合は、 `tiup update diag`コマンドを使用して Diag を最新バージョンにアップグレードできます。
 
-    -   クラスターが配置されているネットワークがインターネットにアクセスできない場合は、収集したデータを圧縮してパッケージをアップロードする必要があります。詳細は[<a href="/clinic/clinic-user-guide-for-tiup.md#method-2-pack-and-upload-data">方法 2. データをパックしてアップロードする</a>](/clinic/clinic-user-guide-for-tiup.md#method-2-pack-and-upload-data)を参照してください。
+    -   クラスターが配置されているネットワークがインターネットにアクセスできない場合は、収集したデータを圧縮してパッケージをアップロードする必要があります。詳細は[方法 2. データをパックしてアップロードする](/clinic/clinic-user-guide-for-tiup.md#method-2-pack-and-upload-data)を参照してください。
 
 3.  アップロードが完了したら、コマンド出力の`Download URL`からデータ アクセス リンクを取得します。
 
@@ -153,6 +153,6 @@ PingCAPクリニックを使用する前に、Diag をインストールし、�
 
 ## 次は何ですか {#what-s-next}
 
--   [<a href="/clinic/clinic-introduction.md">PingCAPクリニックの概要</a>](/clinic/clinic-introduction.md)
--   [<a href="/clinic/clinic-user-guide-for-tiup.md">PingCAPクリニックを使用したクラスターのトラブルシューティング</a>](/clinic/clinic-user-guide-for-tiup.md)
--   [<a href="/clinic/clinic-data-instruction-for-tiup.md">PingCAPクリニックの診断データ</a>](/clinic/clinic-data-instruction-for-tiup.md)
+-   [PingCAPクリニックの概要](/clinic/clinic-introduction.md)
+-   [PingCAPクリニックを使用したクラスターのトラブルシューティング](/clinic/clinic-user-guide-for-tiup.md)
+-   [PingCAPクリニックの診断データ](/clinic/clinic-data-instruction-for-tiup.md)

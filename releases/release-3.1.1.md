@@ -14,8 +14,8 @@ TiDB Ansible バージョン: 3.1.1
 
 -   TiDB
 
-    -   `auto_rand_base` [<a href="https://github.com/pingcap/tidb/pull/16812">#16812</a>](https://github.com/pingcap/tidb/pull/16812)のテーブル オプションを追加します
-    -   `Feature ID`コメントを追加します。SQL ステートメントの特別なコメントでは、登録されたステートメントのフラグメントのみがパーサーによって解析されます。それ以外の場合、ステートメントは無視されます[<a href="https://github.com/pingcap/tidb/pull/16155">#16155</a>](https://github.com/pingcap/tidb/pull/16155)
+    -   `auto_rand_base` [#16812](https://github.com/pingcap/tidb/pull/16812)のテーブル オプションを追加します
+    -   `Feature ID`コメントを追加します。SQL ステートメントの特別なコメントでは、登録されたステートメントのフラグメントのみがパーサーによって解析されます。それ以外の場合、ステートメントは無視されます[#16155](https://github.com/pingcap/tidb/pull/16155)
 
 -   TiFlash
 
@@ -28,10 +28,10 @@ TiDB Ansible バージョン: 3.1.1
 
 -   TiDB
 
-    -   インスタンス レベルでの分離読み取り設定が有効にならず、TiDB のアップグレード後に分離読み取り設定が誤って保持される問題を修正します[<a href="https://github.com/pingcap/tidb/pull/16482">#16482</a>](https://github.com/pingcap/tidb/pull/16482) [<a href="https://github.com/pingcap/tidb/pull/16802">#16802</a>](https://github.com/pingcap/tidb/pull/16802)
-    -   `partition (P0)` [<a href="https://github.com/pingcap/tidb/pull/16076">#16076</a>](https://github.com/pingcap/tidb/pull/16076)などの構文でエラーが報告されないように、ハッシュパーティションテーブルのパーティション選択構文を修正しました。
-    -   `UPDATE` SQL ステートメントがビューからクエリのみを実行し、ビューを更新しない場合でも、更新ステートメントでエラーが報告される問題を修正します[<a href="https://github.com/pingcap/tidb/pull/16789">#16789</a>](https://github.com/pingcap/tidb/pull/16789)
-    -   ネストされたクエリ[<a href="https://github.com/pingcap/tidb/pull/16423">#16423</a>](https://github.com/pingcap/tidb/pull/16423)から`not not`を削除することによって引き起こされる間違った結果の問題を修正します。
+    -   インスタンス レベルでの分離読み取り設定が有効にならず、TiDB のアップグレード後に分離読み取り設定が誤って保持される問題を修正します[#16802](https://github.com/pingcap/tidb/pull/16802)
+    -   `partition (P0)` [#16076](https://github.com/pingcap/tidb/pull/16076)などの構文でエラーが報告されないように、ハッシュパーティションテーブルのパーティション選択構文を修正しました。
+    -   `UPDATE` SQL ステートメントがビューからクエリのみを実行し、ビューを更新しない場合でも、更新ステートメントでエラーが報告される問題を修正します[#16789](https://github.com/pingcap/tidb/pull/16789)
+    -   ネストされたクエリ[#16423](https://github.com/pingcap/tidb/pull/16423)から`not not`を削除することによって引き起こされる間違った結果の問題を修正します。
 
 -   TiFlash
 
@@ -45,4 +45,4 @@ TiDB Ansible バージョン: 3.1.1
 
     -   バックアップと復元 (BR)
 
-        -   BR が`auto_random`属性を持つテーブルを復元した後、データを挿入すると重複エントリ エラー[<a href="https://github.com/pingcap/br/issues/241">#241</a>](https://github.com/pingcap/br/issues/241)が発生する可能性がある問題を修正します。
+        -   BR が`auto_random`属性を持つテーブルを復元した後、データを挿入すると重複エントリ エラー[#241](https://github.com/pingcap/br/issues/241)が発生する可能性がある問題を修正します。

@@ -52,7 +52,7 @@ dispatchers = [
 ]
 ```
 
-前述の`cdc cli changefeed create`コマンドのパラメーターの詳細については、 [<a href="/ticdc/ticdc-changefeed-config.md">TiCDC Changefeedコンフィグレーションパラメータ</a>](/ticdc/ticdc-changefeed-config.md)を参照してください。
+前述の`cdc cli changefeed create`コマンドのパラメーターの詳細については、 [TiCDC Changefeedコンフィグレーションパラメータ](/ticdc/ticdc-changefeed-config.md)を参照してください。
 
 前述の`cdc cli changefeed create`コマンドは、 `test1.tab1` 、 `test1.tab2` 、 `test3.tab3` 、および`test4.tab4`を Kafka クラスターにレプリケートする変更フィード タスクを作成します。 TiCDC がこのコマンドを受信した後の処理フローは次のとおりです。
 

@@ -43,4 +43,4 @@ tiup list [component] [flags]
     -   指定されたコンポーネントが存在する場合: TiUP は、 `Version` (バージョン番号)、 `Installed` (インストール状況)、 `Release` (リリース日)、および`Platforms` (サポートされているプラットフォーム) で構成される、指定されたコンポーネントのバージョン情報リストを出力します。
     -   指定されたコンポーネントが存在しない場合: TiUP はエラー`failed to fetch component: unknown component`を報告します。
 
-[<a href="/tiup/tiup-reference.md#command-list">&lt;&lt; 前のページに戻る - TiUPリファレンスコマンドリスト</a>](/tiup/tiup-reference.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPリファレンスコマンドリスト](/tiup/tiup-reference.md#command-list)

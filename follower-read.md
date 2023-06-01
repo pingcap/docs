@@ -43,8 +43,8 @@ set [session | global] tidb_replica_read = '<target value>';
 
 -   `tidb_replica_read`の値を`closest-adaptive`に設定した場合:
 
-    -   読み取りリクエストの推定結果が値[<a href="/system-variables.md#tidb_adaptive_closest_read_threshold-new-in-v630">`tidb_adaptive_closest_read_threshold`</a>](/system-variables.md#tidb_adaptive_closest_read_threshold-new-in-v630)以上の場合、TiDB は読み取り操作のために同じアベイラビリティ ゾーン内のレプリカを選択することを優先します。アベイラビリティ ゾーン間での読み取りトラフィックの不均衡な分散を回避するために、TiDB はすべてのオンライン TiDB および TiKV ノードのアベイラビリティ ゾーンの分散を動的に検出します。各アベイラビリティーゾーンでは、構成が有効になる TiDB ノードの数は制限されており、これは常に TiDB ノードが最も少ないアベイラビリティーゾーン内の TiDB ノードの数と同じであり、他の TiDB ノードはリーダーレプリカから`closest-adaptive`に読み取られます。 。たとえば、TiDB ノードが 3 つのアベイラビリティ ゾーン (A、B、および C) に分散されており、A と B にはそれぞれ 3 つの TiDB ノードが含まれ、C には 2 つの TiDB ノードのみが含まれる場合、 `closest-adaptive`構成を持つ TiDB ノードの数が各ゾーンで有効になります。可用性ゾーンは 2 であり、A および B の各可用性ゾーンにある他の TiDB ノードは、読み取り操作用のリーダー レプリカを自動的に選択します。
-    -   読み取りリクエストの推定結果が[<a href="/system-variables.md#tidb_adaptive_closest_read_threshold-new-in-v630">`tidb_adaptive_closest_read_threshold`</a>](/system-variables.md#tidb_adaptive_closest_read_threshold-new-in-v630)の値より小さい場合、TiDB は読み取り操作用にリーダー レプリカのみを選択できます。
+    -   読み取りリクエストの推定結果が値[`tidb_adaptive_closest_read_threshold`](/system-variables.md#tidb_adaptive_closest_read_threshold-new-in-v630)以上の場合、TiDB は読み取り操作のために同じアベイラビリティ ゾーン内のレプリカを選択することを優先します。アベイラビリティ ゾーン間での読み取りトラフィックの不均衡な分散を回避するために、TiDB はすべてのオンライン TiDB および TiKV ノードのアベイラビリティ ゾーンの分散を動的に検出します。各アベイラビリティーゾーンでは、構成が有効になる TiDB ノードの数は制限されており、これは常に TiDB ノードが最も少ないアベイラビリティーゾーン内の TiDB ノードの数と同じであり、他の TiDB ノードはリーダーレプリカから`closest-adaptive`に読み取られます。 。たとえば、TiDB ノードが 3 つのアベイラビリティ ゾーン (A、B、および C) に分散されており、A と B にはそれぞれ 3 つの TiDB ノードが含まれ、C には 2 つの TiDB ノードのみが含まれる場合、 `closest-adaptive`構成を持つ TiDB ノードの数が各ゾーンで有効になります。可用性ゾーンは 2 であり、A および B の各可用性ゾーンにある他の TiDB ノードは、読み取り操作用のリーダー レプリカを自動的に選択します。
+    -   読み取りリクエストの推定結果が[`tidb_adaptive_closest_read_threshold`](/system-variables.md#tidb_adaptive_closest_read_threshold-new-in-v630)の値より小さい場合、TiDB は読み取り操作用にリーダー レプリカのみを選択できます。
 
 -   `tidb_replica_read`の値が`learner`に設定されると、TiDB は学習者レプリカからデータを読み取ります。リージョンに学習者レプリカがない場合、TiDB はエラーを返します。
 
@@ -52,7 +52,7 @@ set [session | global] tidb_replica_read = '<target value>';
 
 > **ノート：**
 >
-> `tidb_replica_read`の値が`closest-replicas`または`closest-adaptive`に設定されている場合は、指定された構成に従ってレプリカが可用性ゾーン全体に分散されるようにクラスターを構成する必要があります。 PD に`location-labels`設定し、TiDB および TiKV に正しい`labels`を設定するには、 [<a href="/schedule-replicas-by-topology-labels.md">トポロジ ラベルごとにレプリカをスケジュールする</a>](/schedule-replicas-by-topology-labels.md)を参照してください。 TiDB は、同じアベイラビリティ ゾーン内の TiKV ノードと一致するために`zone`ラベルに依存するため、 `zone`ラベルが PD の`location-labels`に含まれ、 `zone`が各 TiDB および TiKV ノードの構成に含まれていることを確認する必要があります。クラスターがTiDB Operatorを使用してデプロイされている場合は、 [<a href="https://docs.pingcap.com/tidb-in-kubernetes/v1.4/configure-a-tidb-cluster#high-availability-of-data">データの高可用性</a>](https://docs.pingcap.com/tidb-in-kubernetes/v1.4/configure-a-tidb-cluster#high-availability-of-data)を参照してください。
+> `tidb_replica_read`の値が`closest-replicas`または`closest-adaptive`に設定されている場合は、指定された構成に従ってレプリカが可用性ゾーン全体に分散されるようにクラスターを構成する必要があります。 PD に`location-labels`設定し、TiDB および TiKV に正しい`labels`を設定するには、 [データの高可用性](https://docs.pingcap.com/tidb-in-kubernetes/v1.4/configure-a-tidb-cluster#high-availability-of-data)を参照してください。
 
 </CustomContent>
 

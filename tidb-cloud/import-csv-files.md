@@ -11,7 +11,7 @@ summary: Learn how to import CSV files from Amazon S3 or GCS into TiDB Cloud.
 >
 > -   CSV ソース ファイルが圧縮されている場合は、インポートする前にファイルを解凍する必要があります。
 > -   データの一貫性を確保するために、 TiDB Cloud空のテーブルにのみ CSV ファイルをインポートできます。すでにデータが含まれている既存のテーブルにデータをインポートするには、このドキュメントに従ってTiDB Cloudを使用して一時的な空のテーブルにデータをインポートし、その後`INSERT SELECT`ステートメントを使用してデータをターゲットの既存のテーブルにコピーします。
-> -   Dedicated Tierクラスターにチェンジフィードがある場合、現在のデータインポート機能では[<a href="https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode">物理インポートモード</a>](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode)使用されているため、クラスターにデータをインポートできません ([**データのインポート]**ボタンが無効になります)。このモードでは、インポートされたデータは変更ログを生成しないため、変更フィードはインポートされたデータを検出できません。
+> -   Dedicated Tierクラスターにチェンジフィードがある場合、現在のデータインポート機能では[物理インポートモード](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode)使用されているため、クラスターにデータをインポートできません ([**データのインポート]**ボタンが無効になります)。このモードでは、インポートされたデータは変更ログを生成しないため、変更フィードはインポートされたデータを検出できません。
 
 ## ステップ 1. CSV ファイルを準備する {#step-1-prepare-the-csv-files}
 
@@ -27,7 +27,7 @@ summary: Learn how to import CSV files from Amazon S3 or GCS into TiDB Cloud.
 
     > **ノート：**
     >
-    > 場合によっては、前述のルールに従って CSV ファイル名を更新できない場合 (たとえば、CSV ファイルのリンクが他のプログラムでも使用されている場合)、ファイル名を変更しないで、 [<a href="#step-4-import-csv-files-to-tidb-cloud">ステップ4</a>](#step-4-import-csv-files-to-tidb-cloud)**ファイル パターン**を使用してソース データをインポートできます。単一のターゲットテーブルに。
+    > 場合によっては、前述のルールに従って CSV ファイル名を更新できない場合 (たとえば、CSV ファイルのリンクが他のプログラムでも使用されている場合)、ファイル名を変更しないで、 [ステップ4](#step-4-import-csv-files-to-tidb-cloud)**ファイル パターン**を使用してソース データをインポートできます。単一のターゲットテーブルに。
 
 ## ステップ 2. ターゲットテーブルスキーマを作成する {#step-2-create-the-target-table-schemas}
 
@@ -39,7 +39,7 @@ CSV ファイルにはスキーマ情報が含まれていないため、CSV フ
 
     1.  ソース データのデータベース スキーマ ファイルを作成します。
 
-        CSV ファイルが[<a href="#step-1-prepare-the-csv-files">ステップ1</a>](#step-1-prepare-the-csv-files)の命名規則に従っている場合、データベース スキーマ ファイルはデータ インポートのオプションになります。それ以外の場合、データベース スキーマ ファイルは必須です。
+        CSV ファイルが[ステップ1](#step-1-prepare-the-csv-files)の命名規則に従っている場合、データベース スキーマ ファイルはデータ インポートのオプションになります。それ以外の場合、データベース スキーマ ファイルは必須です。
 
         各データベース スキーマ ファイルは`${db_name}-schema-create.sql`形式であり、 `CREATE DATABASE` DDL ステートメントが含まれている必要があります。データをインポートするときに、このファイルを使用して、 TiDB Cloud はデータを保存する`${db_name}`を作成します。
 
@@ -76,11 +76,11 @@ CSV ファイルにはスキーマ情報が含まれていないため、CSV フ
 
 TiDB Cloud がAmazon S3 または GCS バケット内の CSV ファイルにアクセスできるようにするには、次のいずれかを実行します。
 
--   CSV ファイルが Amazon S3 にある場合、 [<a href="/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access">Amazon S3 アクセスを設定する</a>](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access) .
+-   CSV ファイルが Amazon S3 にある場合、 [Amazon S3 アクセスを設定する](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access) .
 
-    完了したら、 [<a href="#step-4-import-csv-files-to-tidb-cloud">ステップ4</a>](#step-4-import-csv-files-to-tidb-cloud)で必要になるため、Role ARN 値をメモします。
+    完了したら、 [ステップ4](#step-4-import-csv-files-to-tidb-cloud)で必要になるため、Role ARN 値をメモします。
 
--   CSV ファイルが GCS にある場合は、 [<a href="/tidb-cloud/config-s3-and-gcs-access.md#configure-gcs-access">GCS アクセスを構成する</a>](/tidb-cloud/config-s3-and-gcs-access.md#configure-gcs-access) 。
+-   CSV ファイルが GCS にある場合は、 [GCS アクセスを構成する](/tidb-cloud/config-s3-and-gcs-access.md#configure-gcs-access) 。
 
 ## ステップ 4. CSV ファイルをTiDB Cloudにインポートする {#step-4-import-csv-files-to-tidb-cloud}
 
@@ -88,7 +88,7 @@ CSV ファイルをTiDB Cloudにインポートするには、次の手順を実
 
 1.  ターゲットクラスターの**インポート**ページを開きます。
 
-    1.  [<a href="https://tidbcloud.com/">TiDB Cloudコンソール</a>](https://tidbcloud.com/)にログインし、プロジェクトの[<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページに移動します。
+    1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
         > **ヒント：**
         >
@@ -108,7 +108,7 @@ CSV ファイルをTiDB Cloudにインポートするには、次の手順を実
 
     バケットのリージョンがクラスターと異なる場合は、クロスリージョンのコンプライアンスを確認してください。 **「次へ」**をクリックします。
 
-    TiDB Cloudは、指定されたバケット URI 内のデータにアクセスできるかどうかの検証を開始します。検証後、 TiDB Cloudはデフォルトのファイル命名パターンを使用してデータ ソース内のすべてのファイルのスキャンを試行し、次のページの左側にスキャンの概要結果を返します。 `AccessDenied`エラーが発生した場合は、 [<a href="/tidb-cloud/troubleshoot-import-access-denied-error.md">S3 からのデータインポート中のアクセス拒否エラーのトラブルシューティング</a>](/tidb-cloud/troubleshoot-import-access-denied-error.md)を参照してください。
+    TiDB Cloudは、指定されたバケット URI 内のデータにアクセスできるかどうかの検証を開始します。検証後、 TiDB Cloudはデフォルトのファイル命名パターンを使用してデータ ソース内のすべてのファイルのスキャンを試行し、次のページの左側にスキャンの概要結果を返します。 `AccessDenied`エラーが発生した場合は、 [S3 からのデータインポート中のアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)を参照してください。
 
 4.  必要に応じて、ファイル パターンを変更し、テーブル フィルター ルールを追加します。
 
@@ -137,11 +137,11 @@ CSV ファイルをTiDB Cloudにインポートするには、次の手順を実
         -   `!db02.*` : `db02`データベース内のテーブルを除き、他のすべてのテーブルがインポートされます。 `!`は、インポートする必要のないテーブルを除外するために使用されます。
         -   `*.*` : すべてのテーブルがインポートされます。
 
-        詳細については、 [<a href="/table-filter.md#syntax">テーブルフィルターの構文</a>](/table-filter.md#syntax)を参照してください。
+        詳細については、 [テーブルフィルターの構文](/table-filter.md#syntax)を参照してください。
 
 5.  **「次へ」**をクリックします。
 
-6.  **[プレビュー]**ページでは、データのプレビューを表示できます。プレビューされたデータが期待したものと異なる場合は、 **「ここをクリックして CSV 設定を編集」**リンクをクリックして、区切り文字、区切り文字、ヘッダー、非 null、null、バックスラッシュエスケープ、最後の区切り文字のトリミングなどの CSV 固有の設定を更新します。 。詳細については、 [<a href="/tidb-cloud/csv-config-for-import-data.md">データをインポートするための CSV 構成</a>](/tidb-cloud/csv-config-for-import-data.md)を参照してください。
+6.  **[プレビュー]**ページでは、データのプレビューを表示できます。プレビューされたデータが期待したものと異なる場合は、 **「ここをクリックして CSV 設定を編集」**リンクをクリックして、区切り文字、区切り文字、ヘッダー、非 null、null、バックスラッシュエスケープ、最後の区切り文字のトリミングなどの CSV 固有の設定を更新します。 。詳細については、 [データをインポートするための CSV 構成](/tidb-cloud/csv-config-for-import-data.md)を参照してください。
 
     > **ノート：**
     >
@@ -155,7 +155,7 @@ CSV ファイルをTiDB Cloudにインポートするには、次の手順を実
 
     数値が 0 の場合は、 **[ソース ファイル名]**フィールドに入力した値と一致するデータ ファイルがないことを意味します。この場合、 **「ソースファイル名」**フィールドにタイプミスがないことを確認して、再試行してください。
 
-9.  インポート タスクが完了したら、 **[インポート]**ページの**[データのクエリ]**をクリックして、インポートされたデータをクエリできます。 Chat2Qury の使用方法の詳細については、 [<a href="/tidb-cloud/explore-data-with-chat2query.md">AI を活用した Chat2Query でデータを探索する</a>](/tidb-cloud/explore-data-with-chat2query.md)を参照してください。
+9.  インポート タスクが完了したら、 **[インポート]**ページの**[データのクエリ]**をクリックして、インポートされたデータをクエリできます。 Chat2Qury の使用方法の詳細については、 [AI を活用した Chat2Query でデータを探索する](/tidb-cloud/explore-data-with-chat2query.md)を参照してください。
 
 インポート タスクを実行するときに、サポートされていない変換または無効な変換が検出された場合、 TiDB Cloudはインポート ジョブを自動的に終了し、インポート エラーを報告します。
 

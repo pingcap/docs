@@ -30,7 +30,7 @@ SHOW MASTER STATUS;
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-show-pump-status.md">ポンプのステータスを表示</a>](/sql-statements/sql-statement-show-pump-status.md)
--   [<a href="/sql-statements/sql-statement-show-drainer-status.md">ドレイナーステータスを表示</a>](/sql-statements/sql-statement-show-drainer-status.md)
--   [<a href="/sql-statements/sql-statement-change-pump.md">ポンプステータスの変更</a>](/sql-statements/sql-statement-change-pump.md)
--   [<a href="/sql-statements/sql-statement-change-drainer.md">ドレイナーステータスの変更</a>](/sql-statements/sql-statement-change-drainer.md)
+-   [ポンプのステータスを表示](/sql-statements/sql-statement-show-pump-status.md)
+-   [ドレイナーステータスを表示](/sql-statements/sql-statement-show-drainer-status.md)
+-   [ポンプステータスの変更](/sql-statements/sql-statement-change-pump.md)
+-   [ドレイナーステータスの変更](/sql-statements/sql-statement-change-drainer.md)

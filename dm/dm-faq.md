@@ -16,23 +16,23 @@ Alibaba Cloud RDS の主キーのない上流テーブルの場合、そのbinlo
 互換性のない既知の問題をいくつか次に示します。
 
 -   **Alibaba Cloud RDS**では、主キーのない上流テーブルの場合、そのbinlogには依然として非表示の主キー列が含まれており、元のテーブル構造と矛盾します。
--   **HUAWEI Cloud RDS**では、 binlogファイルの直接読み取りはサポートされていません。詳細については、 [<a href="https://support.huaweicloud.com/en-us/rds_faq/rds_faq_0210.html">HUAWEI Cloud RDS はBinlogバックアップ ファイルを直接読み取ることができますか?</a>](https://support.huaweicloud.com/en-us/rds_faq/rds_faq_0210.html)参照してください。
+-   **HUAWEI Cloud RDS**では、 binlogファイルの直接読み取りはサポートされていません。詳細については、 [HUAWEI Cloud RDS はBinlogバックアップ ファイルを直接読み取ることができますか?](https://support.huaweicloud.com/en-us/rds_faq/rds_faq_0210.html)参照してください。
 
 ## タスク設定のブロックと許可リストの正規表現は<code>non-capturing (?!)</code>をサポートしていますか? {#does-the-regular-expression-of-the-block-and-allow-list-in-the-task-configuration-support-code-non-capturing-code}
 
-現在、DM はこれをサポートしておらず、 Golang標準ライブラリの正規表現のみをサポートしています。 Golangでサポートされている正規表現については、 [<a href="https://github.com/google/re2/wiki/Syntax">re2 構文</a>](https://github.com/google/re2/wiki/Syntax)参照してください。
+現在、DM はこれをサポートしておらず、 Golang標準ライブラリの正規表現のみをサポートしています。 Golangでサポートされている正規表現については、 [re2 構文](https://github.com/google/re2/wiki/Syntax)参照してください。
 
 ## 上流で実行されるステートメントに複数の DDL 操作が含まれている場合、DM はそのような移行をサポートしますか? {#if-a-statement-executed-upstream-contains-multiple-ddl-operations-does-dm-support-such-migration}
 
-DM は、複数の DDL 変更操作を含む 1 つのステートメントを、1 つの DDL 操作のみを含む複数のステートメントに分割しようとしますが、すべてのケースをカバーできるわけではありません。上流で実行されるステートメントには DDL 操作を 1 つだけ含めるか、テスト環境で検証することをお勧めします。サポートされていない場合は、DM リポジトリに[<a href="https://github.com/pingcap/dm/issues">問題</a>](https://github.com/pingcap/dm/issues)を提出できます。
+DM は、複数の DDL 変更操作を含む 1 つのステートメントを、1 つの DDL 操作のみを含む複数のステートメントに分割しようとしますが、すべてのケースをカバーできるわけではありません。上流で実行されるステートメントには DDL 操作を 1 つだけ含めるか、テスト環境で検証することをお勧めします。サポートされていない場合は、DM リポジトリに[問題](https://github.com/pingcap/dm/issues)を提出できます。
 
 ## 互換性のない DDL ステートメントを処理するにはどうすればよいですか? {#how-to-handle-incompatible-ddl-statements}
 
-TiDB でサポートされていない DDL ステートメントが発生した場合は、dmctl を使用して手動で処理する必要があります (DDL ステートメントをスキップするか、DDL ステートメントを指定された DDL ステートメントに置き換えます)。詳細は[<a href="/dm/handle-failed-ddl-statements.md">失敗した DDL ステートメントを処理する</a>](/dm/handle-failed-ddl-statements.md)を参照してください。
+TiDB でサポートされていない DDL ステートメントが発生した場合は、dmctl を使用して手動で処理する必要があります (DDL ステートメントをスキップするか、DDL ステートメントを指定された DDL ステートメントに置き換えます)。詳細は[失敗した DDL ステートメントを処理する](/dm/handle-failed-ddl-statements.md)を参照してください。
 
 > **ノート：**
 >
-> 現在、TiDB は、MySQL がサポートするすべての DDL ステートメントと互換性があるわけではありません。 [<a href="/mysql-compatibility.md#ddl">MySQL の互換性</a>](/mysql-compatibility.md#ddl)を参照してください。
+> 現在、TiDB は、MySQL がサポートするすべての DDL ステートメントと互換性があるわけではありません。 [MySQL の互換性](/mysql-compatibility.md#ddl)を参照してください。
 
 ## DM はビュー関連の DDL ステートメントと DML ステートメントを TiDB にレプリケートしますか? {#does-dm-replicate-view-related-ddl-statements-and-dml-statements-to-tidb}
 
@@ -63,7 +63,7 @@ TiDB でサポートされていない DDL ステートメントが発生した�
 
 ただし、メモリ内の DDL 情報は、次の 2 つの方法のいずれかで取得されます。
 
--   DM [<a href="/dm/feature-online-ddl.md#online-schema-change-gh-ost">`alter ghost_table`操作中に gh-ost テーブルを処理します</a>](/dm/feature-online-ddl.md#online-schema-change-gh-ost)および`ghost_table`の DDL 情報を記録します。
+-   DM [`alter ghost_table`操作中に gh-ost テーブルを処理します](/dm/feature-online-ddl.md#online-schema-change-gh-ost)および`ghost_table`の DDL 情報を記録します。
 -   タスクを開始するために DM-worker が再起動されると、DM は DDL を`dm_meta.{task_name}_onlineddl`から読み取ります。
 
 したがって、増分レプリケーションのプロセスで、指定された Pos が`alter ghost_table` DDL をスキップしても、その Pos がまだ gh-ost の online-ddl プロセスにある場合、ghost_table はメモリまたは`dm_meta.{task_name}_onlineddl`に正しく書き込まれません。このような場合、上記のエラーが返されます。
@@ -125,13 +125,13 @@ MySQL はエクスポート用のスナップショットを指定できない�
 以下のパラメータをデフォルトの 67108864 (64M) より大きい値に設定します。
 
 -   TiDBサーバーのグローバル変数: `max_allowed_packet` .
--   タスク構成ファイルの構成項目: `target-database.max-allowed-packet` .詳細は[<a href="/dm/task-configuration-file-full.md">DM 拡張タスクコンフィグレーションファイル</a>](/dm/task-configuration-file-full.md)を参照してください。
+-   タスク構成ファイルの構成項目: `target-database.max-allowed-packet` .詳細は[DM 拡張タスクコンフィグレーションファイル](/dm/task-configuration-file-full.md)を参照してください。
 
 ## DM 1.0 クラスターの既存の DM 移行タスクが DM 2.0 以降のクラスターで実行されているときに発生するエラー<code>Error 1054: Unknown column &#39;binlog_gtid&#39; in &#39;field list&#39;</code>処理する方法は? {#how-to-handle-the-error-code-error-1054-unknown-column-binlog-gtid-in-field-list-code-that-occurs-when-existing-dm-migration-tasks-of-an-dm-1-0-cluster-are-running-on-a-dm-2-0-or-newer-cluster}
 
 DM v2.0 以降、DM 1.0 クラスターのタスク構成ファイルを使用して`start-task`コマンドを直接実行して増分データ レプリケーションを続行すると、エラー`Error 1054: Unknown column 'binlog_gtid' in 'field list'`が発生します。
 
-このエラーは[<a href="/dm/manually-upgrade-dm-1.0-to-2.0.md">DM 1.0 クラスターの DM 移行タスクを DM 2.0 クラスターに手動でインポート</a>](/dm/manually-upgrade-dm-1.0-to-2.0.md)で処理できます。
+このエラーは[DM 1.0 クラスターの DM 移行タスクを DM 2.0 クラスターに手動でインポート](/dm/manually-upgrade-dm-1.0-to-2.0.md)で処理できます。
 
 ## TiUP がDM の一部のバージョン (v2.0.0-hotfix など) の展開に失敗するのはなぜですか? {#why-does-tiup-fail-to-deploy-some-versions-of-dm-for-example-v2-0-0-hotfix}
 
@@ -154,7 +154,7 @@ DM 1.0 では、モニター データを生成するには`enable-heartbeat`を
 
 ## DM がタスクを開始するときに<code>fail to initial unit Sync of subtask</code> 、エラー メッセージ内の<code>RawCause</code>に<code>context deadline exceeded</code>示すエラーを処理する方法はありますか? {#how-to-handle-the-error-code-fail-to-initial-unit-sync-of-subtask-code-when-dm-is-starting-a-task-with-the-code-rawcause-code-in-the-error-message-showing-code-context-deadline-exceeded-code}
 
-これは DM 2.0.0 バージョンの既知の問題であり、DM 2.0.1 バージョンで修正される予定です。これは、レプリケーション タスクで処理するテーブルが多数ある場合にトリガーされる可能性があります。 TiUP を使用して DM を展開する場合は、DM を夜間バージョンにアップグレードしてこの問題を解決できます。または、GitHub で[<a href="https://github.com/pingcap/tiflow/releases">DMのリリースページ</a>](https://github.com/pingcap/tiflow/releases)から 2.0.0-hotfix バージョンをダウンロードし、実行可能ファイルを手動で置き換えることもできます。
+これは DM 2.0.0 バージョンの既知の問題であり、DM 2.0.1 バージョンで修正される予定です。これは、レプリケーション タスクで処理するテーブルが多数ある場合にトリガーされる可能性があります。 TiUP を使用して DM を展開する場合は、DM を夜間バージョンにアップグレードしてこの問題を解決できます。または、GitHub で[DMのリリースページ](https://github.com/pingcap/tiflow/releases)から 2.0.0-hotfix バージョンをダウンロードし、実行可能ファイルを手動で置き換えることもできます。
 
 ## DM がデータを複製するときにエラー<code>duplicate entry</code>を処理するにはどうすればよいですか? {#how-to-handle-the-error-code-duplicate-entry-code-when-dm-is-replicating-data}
 
@@ -164,7 +164,7 @@ DM 1.0 では、モニター データを生成するには`enable-heartbeat`を
 -   データは手動または他のレプリケーション プログラムによって挿入されません。
 -   このテーブルに関連付けられた DML フィルターは構成されていません。
 
-トラブルシューティングを容易にするために、まずダウンストリーム TiDB インスタンスの一般的なログ ファイルを収集し、次に[<a href="https://tidbcommunity.slack.com/archives/CH7TTLL7P">TiDB コミュニティのスラック チャンネル</a>](https://tidbcommunity.slack.com/archives/CH7TTLL7P)でテクニカル サポートを依頼できます。次の例は、一般的なログ ファイルを収集する方法を示しています。
+トラブルシューティングを容易にするために、まずダウンストリーム TiDB インスタンスの一般的なログ ファイルを収集し、次に[TiDB コミュニティのスラック チャンネル](https://tidbcommunity.slack.com/archives/CH7TTLL7P)でテクニカル サポートを依頼できます。次の例は、一般的なログ ファイルを収集する方法を示しています。
 
 ```bash
 # Enable general log collection
@@ -177,7 +177,7 @@ curl -X POST -d "tidb_general_log=0" http://{TiDBIP}:10080/settings
 
 ## 一部の監視パネルに<code>No data point</code>表示されないのはなぜですか? {#why-do-some-monitoring-panels-show-code-no-data-point-code}
 
-一部のパネルにデータがないのは正常です。たとえば、エラーが報告されない場合、DDL ロックがない場合、またはリレー ログ機能が有効になっていない場合、対応するパネルには`No data point`が表示されます。各パネルの詳細な説明については、 [<a href="/dm/monitor-a-dm-cluster.md">DM監視メトリクス</a>](/dm/monitor-a-dm-cluster.md)を参照してください。
+一部のパネルにデータがないのは正常です。たとえば、エラーが報告されない場合、DDL ロックがない場合、またはリレー ログ機能が有効になっていない場合、対応するパネルには`No data point`が表示されます。各パネルの詳細な説明については、 [DM監視メトリクス](/dm/monitor-a-dm-cluster.md)を参照してください。
 
 ## DM v1.0 では、タスクにエラーがあるときにコマンド<code>sql-skip</code>一部のステートメントをスキップできないのはなぜですか? {#in-dm-v1-0-why-does-the-command-code-sql-skip-code-fail-to-skip-some-statements-when-the-task-is-in-error}
 
@@ -189,13 +189,13 @@ curl -X POST -d "tidb_general_log=0" http://{TiDBIP}:10080/settings
 if the DDL is not needed, you can use a filter rule with \"*\" schema-pattern to ignore it.\n\t : parse statement: line 1 column 11 near \"EVENT `event_del_big_table` \r\nDISABLE\" %!!(MISSING)(EXTRA string=ALTER EVENT `event_del_big_table` \r\nDISABLE
 ```
 
-このタイプのエラーの理由は、TiDB パーサーがアップストリームによって送信された DDL ステートメント ( `ALTER EVENT`など) を解析できないため、 `sql-skip`期待どおりに機能しないことです。構成ファイルに[<a href="/dm/dm-binlog-event-filter.md">binlogイベントフィルター</a>](/dm/dm-binlog-event-filter.md)追加してこれらのステートメントをフィルターし、 `schema-pattern: "*"`を設定できます。 DM v2.0.1 以降、DM は`EVENT`に関連するステートメントを事前にフィルターします。
+このタイプのエラーの理由は、TiDB パーサーがアップストリームによって送信された DDL ステートメント ( `ALTER EVENT`など) を解析できないため、 `sql-skip`期待どおりに機能しないことです。構成ファイルに[binlogイベントフィルター](/dm/dm-binlog-event-filter.md)追加してこれらのステートメントをフィルターし、 `schema-pattern: "*"`を設定できます。 DM v2.0.1 以降、DM は`EVENT`に関連するステートメントを事前にフィルターします。
 
 DM v6.0 以降、 `sql-skip`と`handle-error`は`binlog`に置き換えられます。この問題を回避するには、代わりに`binlog`コマンドを使用します。
 
 ## DM の複製中に<code>REPLACE</code>ステートメントがダウンストリームに出現し続けるのはなぜですか? {#why-do-code-replace-code-statements-keep-appearing-in-the-downstream-when-dm-is-replicating}
 
-タスクに対して[<a href="/dm/dm-glossary.md#safe-mode">セーフモード</a>](/dm/dm-glossary.md#safe-mode)が自動的に有効になっているかどうかを確認する必要があります。エラー後にタスクが自動的に再開される場合、または高可用性スケジュールが設定されている場合は、タスクの開始または再開後 1 分以内であるため、セーフ モードが有効になります。
+タスクに対して[セーフモード](/dm/dm-glossary.md#safe-mode)が自動的に有効になっているかどうかを確認する必要があります。エラー後にタスクが自動的に再開される場合、または高可用性スケジュールが設定されている場合は、タスクの開始または再開後 1 分以内であるため、セーフ モードが有効になります。
 
 DM-worker ログ ファイルを確認して、 `change count`を含む行を検索できます。行内の`new count`ゼロでない場合、セーフ モードが有効になります。有効になっている理由を調べるには、それがいつ発生するか、以前にエラーが報告されているかどうかを確認してください。
 
@@ -242,7 +242,7 @@ DM v2.0.1 以前のバージョンでは、完全なインポートが完了す�
     2.  クラスター内の Grafana ノードをスケールインからスケールアウトし、Grafana サービスを再起動します。
 -   解決策 2:
     1.  `deploy/grafana-$port/bin/public`フォルダをバックアップします。
-    2.  [<a href="https://download.pingcap.org/tidb-dm-v2.0.1-linux-amd64.tar.gz">TiUP DMオフライン パッケージ</a>](https://download.pingcap.org/tidb-dm-v2.0.1-linux-amd64.tar.gz)をダウンロードして解凍します。
+    2.  [TiUP DMオフライン パッケージ](https://download.pingcap.org/tidb-dm-v2.0.1-linux-amd64.tar.gz)をダウンロードして解凍します。
     3.  オフライン パッケージの`grafana-v4.0.3-**.tar.gz`を開梱します。
     4.  `grafana-v4.0.3-**.tar.gz`のフォルダー`deploy/grafana-$port/bin/public` `public`フォルダーに置き換えます。
     5.  `tiup dm restart $cluster_name -R grafana`を実行して Grafana サービスを再起動します。
@@ -398,4 +398,4 @@ flush local meta, Rawcause: open relay-dir/xxx.000001/relay.metayyyy: no such fi
 
 ## ロード ユニットが<code>Unknown character set</code>エラーを報告するのはなぜですか? {#why-does-the-load-unit-report-the-code-unknown-character-set-code-error}
 
-TiDB は、すべての MySQL 文字セットをサポートしているわけではありません。したがって、完全インポート中にテーブル スキーマを作成するときにサポートされていない文字セットが使用されると、DM はこのエラーを報告します。このエラーを回避するには、特定のデータに応じて[<a href="/character-set-and-collation.md">TiDB がサポートする文字セット</a>](/character-set-and-collation.md)使用してダウンストリームにテーブル スキーマを事前に作成します。
+TiDB は、すべての MySQL 文字セットをサポートしているわけではありません。したがって、完全インポート中にテーブル スキーマを作成するときにサポートされていない文字セットが使用されると、DM はこのエラーを報告します。このエラーを回避するには、特定のデータに応じて[TiDB がサポートする文字セット](/character-set-and-collation.md)使用してダウンストリームにテーブル スキーマを事前に作成します。

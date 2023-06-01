@@ -5,18 +5,18 @@ summary: Learn what diagnostic data can be collected by PingCAP Clinic Diagnosti
 
 # PingCAPクリニックの診断データ {#pingcap-clinic-diagnostic-data}
 
-このドキュメントでは、 TiUPを使用して展開された TiDB および DM クラスターからPingCAPクリニック診断サービス (PingCAPクリニック) によって収集できる診断データの種類について説明します。また、このドキュメントには、各データ タイプに対応するデータ収集用のパラメーターがリストされています。 [<a href="/clinic/clinic-user-guide-for-tiup.md">Diag クライアント (Diag) を使用してデータを収集する</a>](/clinic/clinic-user-guide-for-tiup.md)にコマンドを実行する場合、収集するデータの種類に応じて必要なパラメータをコマンドに追加できます。
+このドキュメントでは、 TiUPを使用して展開された TiDB および DM クラスターからPingCAPクリニック診断サービス (PingCAPクリニック) によって収集できる診断データの種類について説明します。また、このドキュメントには、各データ タイプに対応するデータ収集用のパラメーターがリストされています。 [Diag クライアント (Diag) を使用してデータを収集する](/clinic/clinic-user-guide-for-tiup.md)にコマンドを実行する場合、収集するデータの種類に応じて必要なパラメータをコマンドに追加できます。
 
 PingCAPクリニックによって収集された診断データは、クラスターの問題のトラブルシューティングに**のみ**使用されます。
 
 クラウドに展開された診断サービスである Clinic Server は、データのstorage場所に応じて 2 つの独立したサービスを提供します。
 
--   [<a href="https://clinic.pingcap.com">海外ユーザー向けクリニックサーバー</a>](https://clinic.pingcap.com) : 収集したデータを海外ユーザー向けの Clinic Server にアップロードすると、データは AWS 米国リージョンの PingCAP によってデプロイされた Amazon S3 サービスに保存されます。 PingCAP は厳格なデータ アクセス ポリシーを使用しており、承認されたテクニカル サポートのみがデータにアクセスできます。
--   [<a href="https://clinic.pingcap.com.cn">中国本土のユーザー向けクリニックサーバー</a>](https://clinic.pingcap.com.cn) : 収集したデータを中国本土のユーザー向けに Clinic Server にアップロードすると、データは中国 (北京) リージョンの PingCAP によってデプロイされた Amazon S3 サービスに保存されます。 PingCAP は厳格なデータ アクセス ポリシーを使用しており、承認されたテクニカル サポートのみがデータにアクセスできます。
+-   [海外ユーザー向けクリニックサーバー](https://clinic.pingcap.com) : 収集したデータを海外ユーザー向けの Clinic Server にアップロードすると、データは AWS 米国リージョンの PingCAP によってデプロイされた Amazon S3 サービスに保存されます。 PingCAP は厳格なデータ アクセス ポリシーを使用しており、承認されたテクニカル サポートのみがデータにアクセスできます。
+-   [中国本土のユーザー向けクリニックサーバー](https://clinic.pingcap.com.cn) : 収集したデータを中国本土のユーザー向けに Clinic Server にアップロードすると、データは中国 (北京) リージョンの PingCAP によってデプロイされた Amazon S3 サービスに保存されます。 PingCAP は厳格なデータ アクセス ポリシーを使用しており、承認されたテクニカル サポートのみがデータにアクセスできます。
 
 ## TiDB クラスター {#tidb-clusters}
 
-このセクションでは、 TiUPを使用してデプロイされた TiDB クラスターから[<a href="https://github.com/pingcap/diag">診断</a>](https://github.com/pingcap/diag)で収集できる診断データのタイプをリストします。
+このセクションでは、 TiUPを使用してデプロイされた TiDB クラスターから[診断](https://github.com/pingcap/diag)で収集できる診断データのタイプをリストします。
 
 ### TiDB クラスター情報 {#tidb-cluster-information}
 

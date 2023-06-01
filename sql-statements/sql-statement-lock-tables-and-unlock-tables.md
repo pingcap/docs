@@ -19,7 +19,7 @@ TiDB を使用すると、クライアント セッションがテーブルに�
 
 > **警告：**
 >
-> テーブル ロックを有効にするには、すべての TiDB インスタンスの構成ファイルで[<a href="/tidb-configuration-file.md#enable-table-lock-new-in-v400">`enable-table-lock`</a>](/tidb-configuration-file.md#enable-table-lock-new-in-v400) ～ `true`を設定する必要があります。
+> テーブル ロックを有効にするには、すべての TiDB インスタンスの構成ファイルで[`enable-table-lock`](/tidb-configuration-file.md#enable-table-lock-new-in-v400) ～ `true`を設定する必要があります。
 
 ## あらすじ {#synopsis}
 

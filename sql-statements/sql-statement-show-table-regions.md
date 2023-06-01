@@ -52,7 +52,7 @@ SHOW TABLE [table_name] INDEX [index_name] REGIONS [WhereClauseOptional];
 
 <CustomContent platform="tidb">
 
--   `SCHEDULING_CONSTRAINTS` :リージョンが属するテーブルまたはパーティションに関連付けられた[<a href="/placement-rules-in-sql.md">配置ポリシーの設定</a>](/placement-rules-in-sql.md) 。
+-   `SCHEDULING_CONSTRAINTS` :リージョンが属するテーブルまたはパーティションに関連付けられた[配置ポリシーの設定](/placement-rules-in-sql.md) 。
 
 </CustomContent>
 
@@ -214,5 +214,5 @@ test> show table t regions;
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-split-region.md">分割領域</a>](/sql-statements/sql-statement-split-region.md)
--   [<a href="/sql-statements/sql-statement-create-table.md">テーブルの作成</a>](/sql-statements/sql-statement-create-table.md)
+-   [分割領域](/sql-statements/sql-statement-split-region.md)
+-   [テーブルの作成](/sql-statements/sql-statement-create-table.md)

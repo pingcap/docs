@@ -22,7 +22,7 @@ tiup cluster enable <cluster-name> [flags]
 
 ### -N、--node {#n-node}
 
--   サービスの自動有効化を有効にするノードを指定します。このオプションの値は、ノード ID のカンマ区切りリストです。ノード ID は、 [<a href="/tiup/tiup-component-cluster-display.md">`tiup cluster display`</a>](/tiup/tiup-component-cluster-display.md)コマンドによって返されるクラスター ステータス テーブルの最初の列から取得できます。
+-   サービスの自動有効化を有効にするノードを指定します。このオプションの値は、ノード ID のカンマ区切りリストです。ノード ID は、 [`tiup cluster display`](/tiup/tiup-component-cluster-display.md)コマンドによって返されるクラスター ステータス テーブルの最初の列から取得できます。
 -   データ型: `STRINGS`
 -   このオプションがコマンドで指定されていない場合、すべてのノードの自動有効化がデフォルトで有効になります。
 
@@ -32,7 +32,7 @@ tiup cluster enable <cluster-name> [flags]
 
 ### -R、--役割 {#r-role}
 
--   サービスの自動有効化を有効にするロールを指定します。このオプションの値は、ノードの役割のカンマ区切りのリストです。ノードの役割は、 [<a href="/tiup/tiup-component-cluster-display.md">`tiup cluster display`</a>](/tiup/tiup-component-cluster-display.md)コマンドによって返されるクラスター状態テーブルの 2 番目の列から取得できます。
+-   サービスの自動有効化を有効にするロールを指定します。このオプションの値は、ノードの役割のカンマ区切りのリストです。ノードの役割は、 [`tiup cluster display`](/tiup/tiup-component-cluster-display.md)コマンドによって返されるクラスター状態テーブルの 2 番目の列から取得できます。
 -   データ型: `STRINGS`
 -   このオプションがコマンドで指定されていない場合、すべての役割の自動有効化がデフォルトで有効になります。
 
@@ -50,4 +50,4 @@ tiup cluster enable <cluster-name> [flags]
 
 tiup-clusterの実行ログ。
 
-[<a href="/tiup/tiup-component-cluster.md#command-list">&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト</a>](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト](/tiup/tiup-component-cluster.md#command-list)

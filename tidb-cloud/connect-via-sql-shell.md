@@ -9,11 +9,11 @@ TiDB Cloud SQL Shell では、 TiDB SQL を試し、TiDB と MySQL の互換性�
 
 > **ノート：**
 >
-> SQL Shell を使用して[<a href="/tidb-cloud/select-cluster-tier.md#serverless-tier-beta">Serverless Tierクラスター</a>](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)に接続することはできません。Serverless Tierクラスターに接続するには、 [<a href="/tidb-cloud/connect-to-tidb-cluster.md#serverless-tier">Serverless Tierクラスターに接続する</a>](/tidb-cloud/connect-to-tidb-cluster.md#serverless-tier)を参照してください。
+> SQL Shell を使用して[Serverless Tierクラスターに接続する](/tidb-cloud/connect-to-tidb-cluster.md#serverless-tier)を参照してください。
 
 SQL シェルを使用して TiDB クラスターに接続するには、次の手順を実行します。
 
-1.  [<a href="https://tidbcloud.com/">TiDB Cloudコンソール</a>](https://tidbcloud.com/)にログインし、プロジェクトの[<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページに移動します。
+1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
     > **ヒント：**
     >

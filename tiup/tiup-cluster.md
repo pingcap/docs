@@ -5,9 +5,9 @@ summary: Learns how to deploy and maintain an online TiDB cluster using TiUP.
 
 # TiUPを使用したオンライン TiDBクラスタのデプロイと管理 {#deploy-and-maintain-an-online-tidb-cluster-using-tiup}
 
-このドキュメントでは、 TiUPクラスターコンポーネントの使用方法に焦点を当てます。オンライン展開の完全な手順については、 [<a href="/production-deployment-using-tiup.md">TiUPを使用した TiDBクラスタのデプロイ</a>](/production-deployment-using-tiup.md)を参照してください。
+このドキュメントでは、 TiUPクラスターコンポーネントの使用方法に焦点を当てます。オンライン展開の完全な手順については、 [TiUPを使用した TiDBクラスタのデプロイ](/production-deployment-using-tiup.md)を参照してください。
 
-ローカル テスト デプロイメントに使用される[<a href="/tiup/tiup-playground.md">TiUPプレイグラウンドコンポーネント</a>](/tiup/tiup-playground.md)と同様に、 TiUPクラスターコンポーネントは、本番環境に TiDB を迅速にデプロイします。 Playground と比較して、クラスターコンポーネントは、アップグレード、スケーリング、さらには操作や監査など、より強力な本番クラスター管理機能を提供します。
+ローカル テスト デプロイメントに使用される[TiUPプレイグラウンドコンポーネント](/tiup/tiup-playground.md)と同様に、 TiUPクラスターコンポーネントは、本番環境に TiDB を迅速にデプロイします。 Playground と比較して、クラスターコンポーネントは、アップグレード、スケーリング、さらには操作や監査など、より強力な本番クラスター管理機能を提供します。
 
 クラスターコンポーネントのヘルプ情報を表示するには、次のコマンドを実行します。
 
@@ -63,11 +63,11 @@ tiup cluster deploy <cluster-name> <version> <topology.yaml> [flags]
 
 このコマンドでは、クラスター名、TiDB クラスターのバージョン ( `v6.5.0`など)、およびクラスターのトポロジー ファイルを指定する必要があります。
 
-トポロジ ファイルを作成するには、 [<a href="https://github.com/pingcap/tiup/blob/master/embed/examples/cluster/topology.example.yaml">例</a>](https://github.com/pingcap/tiup/blob/master/embed/examples/cluster/topology.example.yaml)を参照してください。次のファイルは、最も単純なトポロジの例です。
+トポロジ ファイルを作成するには、 [例](https://github.com/pingcap/tiup/blob/master/embed/examples/cluster/topology.example.yaml)を参照してください。次のファイルは、最も単純なトポロジの例です。
 
 > **ノート：**
 >
-> TiUPクラスターコンポーネントがデプロイメントとスケーリングに使用するトポロジ ファイルは[<a href="https://yaml.org/spec/1.2/spec.html">ヤムル</a>](https://yaml.org/spec/1.2/spec.html)構文を使用して記述されているため、インデントが正しいことを確認してください。
+> TiUPクラスターコンポーネントがデプロイメントとスケーリングに使用するトポロジ ファイルは[ヤムル](https://yaml.org/spec/1.2/spec.html)構文を使用して記述されているため、インデントが正しいことを確認してください。
 
 ```yaml
 ---
@@ -225,13 +225,13 @@ ID                  Role        Host          Ports                            O
 
 `Status`列は、サービスが正常に実行されているかどうかを示すために`Up`または`Down`を使用します。
 
-PDコンポーネントの場合、 `Up`または`Down`に`|L`または`|UI`が追加される場合があります。 `|L` PD ノードがLeaderであることを示し、 `|UI`は[<a href="/dashboard/dashboard-intro.md">TiDB ダッシュボード</a>](/dashboard/dashboard-intro.md) PD ノード上で実行されていることを示します。
+PDコンポーネントの場合、 `Up`または`Down`に`|L`または`|UI`が追加される場合があります。 `|L` PD ノードがLeaderであることを示し、 `|UI`は[TiDB ダッシュボード](/dashboard/dashboard-intro.md) PD ノード上で実行されていることを示します。
 
 ## クラスタースケールイン {#scale-in-a-cluster}
 
 > **ノート：**
 >
-> このセクションでは、スケールイン コマンドの構文のみについて説明します。オンライン スケーリングの詳細な手順については、 [<a href="/scale-tidb-using-tiup.md">TiUPを使用して TiDBクラスタをスケールする</a>](/scale-tidb-using-tiup.md)を参照してください。
+> このセクションでは、スケールイン コマンドの構文のみについて説明します。オンライン スケーリングの詳細な手順については、 [TiUPを使用して TiDBクラスタをスケールする](/scale-tidb-using-tiup.md)を参照してください。
 
 クラスター内でのスケーリングとは、一部のノードをオフラインにすることを意味します。この操作により、クラスターから特定のノードが削除され、残りのファイルが削除されます。
 
@@ -303,7 +303,7 @@ PD がノード上のデータを他の TiKV ノードにスケジュールす�
 
 > **ノート：**
 >
-> このセクションでは、スケールアウト コマンドの構文についてのみ説明します。オンライン スケーリングの詳細な手順については、 [<a href="/scale-tidb-using-tiup.md">TiUPを使用して TiDBクラスタをスケールする</a>](/scale-tidb-using-tiup.md)を参照してください。
+> このセクションでは、スケールアウト コマンドの構文についてのみ説明します。オンライン スケーリングの詳細な手順については、 [TiUPを使用して TiDBクラスタをスケールする](/scale-tidb-using-tiup.md)を参照してください。
 
 スケールアウト操作には、デプロイメントの内部ロジックと同様の内部ロジックがありますTiUPクラスターコンポーネントは、まずノードの SSH 接続を確保し、ターゲット ノード上に必要なディレクトリを作成してから、デプロイメント操作を実行して、ノード サービスを開始します。
 
@@ -343,7 +343,7 @@ PD をスケールアウトすると、ノードがクラスターに`join`追�
 
 > **ノート：**
 >
-> このセクションでは、アップグレード コマンドの構文のみについて説明します。オンライン アップグレードの詳細な手順については、 [<a href="/upgrade-tidb-using-tiup.md">TiUPを使用して TiDB をアップグレードする</a>](/upgrade-tidb-using-tiup.md)を参照してください。
+> このセクションでは、アップグレード コマンドの構文のみについて説明します。オンライン アップグレードの詳細な手順については、 [TiUPを使用して TiDB をアップグレードする](/upgrade-tidb-using-tiup.md)を参照してください。
 
 ローリング アップグレード機能は、TiDB の分散機能を活用します。アップグレード プロセスはアプリケーションに対して可能な限り透過的に行われ、ビジネスには影響しません。
 
@@ -443,7 +443,7 @@ alertmanager_servers:
 
 -   `grafana_servers`の`dashboard_dir`フィールドで指定されたフォルダーには、 `*.json`ファイルがすべて含まれている必要があります。
 -   `monitoring_servers`の`rule_dir`フィールドで指定されたフォルダーには、 `*.rules.yml`ファイルがすべて含まれている必要があります。
--   `alertmanager_servers`の`config_file`フィールドで指定するファイルの形式については、 [<a href="https://github.com/pingcap/tiup/blob/master/embed/templates/config/alertmanager.yml">Alertmanager 構成テンプレート</a>](https://github.com/pingcap/tiup/blob/master/embed/templates/config/alertmanager.yml)を参照してください。
+-   `alertmanager_servers`の`config_file`フィールドで指定するファイルの形式については、 [Alertmanager 構成テンプレート](https://github.com/pingcap/tiup/blob/master/embed/templates/config/alertmanager.yml)を参照してください。
 
 `tiup reload`を実行すると、 TiUP はまずターゲット マシン内の古い設定ファイルをすべて削除し、次に、対応する設定を制御マシンからターゲット マシンの対応する設定ディレクトリにアップロードします。したがって、特定の構成ファイルを変更する場合は、すべての構成ファイル (未変更のものを含む) が同じディレクトリにあることを確認してください。たとえば、Grafana の`tidb.json`ファイルを変更するには、まず Grafana の`dashboards`ディレクトリから`*.json`ファイルすべてをローカル ディレクトリにコピーする必要があります。そうしないと、他の JSON ファイルがターゲット マシンから失われます。
 

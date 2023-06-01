@@ -5,7 +5,7 @@ summary: Learn how to monitor the cluster version of TiDB Binlog.
 
 # TiDBBinlogのモニタリング {#tidb-binlog-monitoring}
 
-TiDB Binlog を正常にデプロイした後、Grafana Web (デフォルトのアドレス: [<a href="http://grafana_ip:3000">http://grafana_ip:3000</a>](http://grafana_ip:3000) 、デフォルトのアカウント: admin、パスワード: admin) に移動して、 PumpとDrainerの状態を確認できます。
+TiDB Binlog を正常にデプロイした後、Grafana Web (デフォルトのアドレス: [http://grafana_ip:3000](http://grafana_ip:3000) 、デフォルトのアカウント: admin、パスワード: admin) に移動して、 PumpとDrainerの状態を確認できます。
 
 ## モニタリング指標 {#monitoring-metrics}
 
@@ -91,7 +91,7 @@ Drainer監視メトリクスを理解するには、次の表を確認してく�
         -   Drainer `execute time`が大きすぎる場合は、 Drainerが展開されているマシンとターゲット データベースが展開されているマシン間のネットワーク帯域幅とレイテンシー、およびターゲット データベースの状態を確認してください。
         -   Drainer`execute time`が大きすぎず、Drainer`event`が小さすぎる場合は、 `work count`と`batch`を追加して再試行します。
 
-    -   上記の 2 つの解決策が機能しない場合は、 [<a href="/support.md">支持を得ます</a>](/support.md) PingCAP またはコミュニティからの解決策。
+    -   上記の 2 つの解決策が機能しない場合は、 [支持を得ます](/support.md) PingCAP またはコミュニティからの解決策。
 
 ### 警報レベルのアラート {#warning-level-alerts}
 
@@ -110,7 +110,7 @@ Drainer監視メトリクスを理解するには、次の表を確認してく�
 -   解決：
 
     -   ディスク パフォーマンスの負荷を確認し、 `node exported`を介してディスク パフォーマンスの監視を確認します。
-    -   `disk latency`と`util`が両方とも低い場合は、PingCAP またはコミュニティからの[<a href="/support.md">支持を得ます</a>](/support.md) 。
+    -   `disk latency`と`util`が両方とも低い場合は、PingCAP またはコミュニティからの[支持を得ます](/support.md) 。
 
 #### <code>binlog_pump_storage_write_binlog_duration_time_bucket</code> {#code-binlog-pump-storage-write-binlog-duration-time-bucket-code}
 

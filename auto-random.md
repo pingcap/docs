@@ -7,11 +7,11 @@ summary: Learn the AUTO_RANDOM attribute.
 
 ## ユーザーシナリオ {#user-scenario}
 
-`AUTO_RANDOM`の値はランダムで一意であるため、TiDB が連続する ID を割り当てることによって生じる単一storageノード内の書き込みホットスポットを避けるために、 [<a href="/auto-increment.md">`AUTO_INCREMENT`</a>](/auto-increment.md)の代わりに`AUTO_RANDOM`がよく使用されます。現在の`AUTO_INCREMENT`列が主キーで、型が`BIGINT`場合、 `ALTER TABLE t MODIFY COLUMN id BIGINT AUTO_RANDOM(5);`ステートメントを実行して`AUTO_INCREMENT`から`AUTO_RANDOM`に切り替えることができます。
+`AUTO_RANDOM`の値はランダムで一意であるため、TiDB が連続する ID を割り当てることによって生じる単一storageノード内の書き込みホットスポットを避けるために、 [`AUTO_INCREMENT`](/auto-increment.md)の代わりに`AUTO_RANDOM`がよく使用されます。現在の`AUTO_INCREMENT`列が主キーで、型が`BIGINT`場合、 `ALTER TABLE t MODIFY COLUMN id BIGINT AUTO_RANDOM(5);`ステートメントを実行して`AUTO_INCREMENT`から`AUTO_RANDOM`に切り替えることができます。
 
 <CustomContent platform="tidb">
 
-TiDB で同時書き込み負荷の高いワークロードを処理する方法の詳細については、 [<a href="/best-practices/high-concurrency-best-practices.md">高度な同時書き込みのベスト プラクティス</a>](/best-practices/high-concurrency-best-practices.md)を参照してください。
+TiDB で同時書き込み負荷の高いワークロードを処理する方法の詳細については、 [高度な同時書き込みのベスト プラクティス](/best-practices/high-concurrency-best-practices.md)を参照してください。
 
 </CustomContent>
 
@@ -29,7 +29,7 @@ CREATE TABLE t (a BIGINT AUTO_RANDOM(5, 54), b VARCHAR(255), PRIMARY KEY (a));
 CREATE TABLE t (a BIGINT AUTO_RANDOM(5, 54), b VARCHAR(255), PRIMARY KEY (a, b));
 ```
 
-キーワード`AUTO_RANDOM`実行可能コメントで囲むことができます。詳細は[<a href="/comment-syntax.md#tidb-specific-comment-syntax">TiDB 固有のコメント構文</a>](/comment-syntax.md#tidb-specific-comment-syntax)を参照してください。
+キーワード`AUTO_RANDOM`実行可能コメントで囲むことができます。詳細は[TiDB 固有のコメント構文](/comment-syntax.md#tidb-specific-comment-syntax)を参照してください。
 
 ```sql
 CREATE TABLE t (a bigint /*T![auto_rand] AUTO_RANDOM */, b VARCHAR(255), PRIMARY KEY (a));
@@ -130,7 +130,7 @@ SHOW WARNINGS;
 `AUTO_RANDOM`を使用する場合は、次の制限事項に注意してください。
 
 -   値を明示的に挿入するには、 `@@allow_auto_random_explicit_insert`システム変数の値を`1` (デフォルトでは`0` ) に設定する必要があります。データを挿入するときに、 `AUTO_RANDOM`属性を持つ列の値を明示的に指定することはお勧め**できません**。そうしないと、このテーブルに自動的に割り当てられる数値が事前に使い果たされてしまう可能性があります。
--   この属性は主キー列に**のみ**`BIGINT`タイプとして指定します。それ以外の場合はエラーが発生します。また、主キーの属性が`NONCLUSTERED`の場合、整数主キーであっても`AUTO_RANDOM`サポートされません。 `CLUSTERED`タイプの主キーの詳細については、 [<a href="/clustered-indexes.md">クラスター化インデックス</a>](/clustered-indexes.md)を参照してください。
+-   この属性は主キー列に**のみ**`BIGINT`タイプとして指定します。それ以外の場合はエラーが発生します。また、主キーの属性が`NONCLUSTERED`の場合、整数主キーであっても`AUTO_RANDOM`サポートされません。 `CLUSTERED`タイプの主キーの詳細については、 [クラスター化インデックス](/clustered-indexes.md)を参照してください。
 -   `ALTER TABLE`を使用して`AUTO_RANDOM`属性を変更することはできません (この属性の追加や削除など)。
 -   最大値が列タイプの最大値に近い場合、 `ALTER TABLE`使用して`AUTO_INCREMENT`から`AUTO_RANDOM`に変更することはできません。
 -   `AUTO_RANDOM`属性で指定した主キー列の列型は変更できません。

@@ -5,7 +5,7 @@ summary: Learn how the cost model used by TiDB works during physical optimizatio
 
 # コストモデル {#cost-model}
 
-TiDB はコスト モデルを使用して、 [<a href="/sql-physical-optimization.md">物理的な最適化</a>](/sql-physical-optimization.md)の際にインデックスと演算子を選択します。このプロセスを次の図に示します。
+TiDB はコスト モデルを使用して、 [物理的な最適化](/sql-physical-optimization.md)の際にインデックスと演算子を選択します。このプロセスを次の図に示します。
 
 ![CostModel](/media/cost-model.png)
 
@@ -44,7 +44,7 @@ TiDB v6.2.0 では、新しいコスト モデルであるコスト モデル �
 
 コスト モデル バージョン 2 は、コスト式のより正確な回帰キャリブレーションを提供し、コスト式の一部を調整し、以前のバージョンのコスト式よりも正確になっています。
 
-コストモデルのバージョンを切り替えるには、 [<a href="/system-variables.md#tidb_cost_model_version-new-in-v620">`tidb_cost_model_version`</a>](/system-variables.md#tidb_cost_model_version-new-in-v620)変数を設定します。
+コストモデルのバージョンを切り替えるには、 [`tidb_cost_model_version`](/system-variables.md#tidb_cost_model_version-new-in-v620)変数を設定します。
 
 > **ノート：**
 >

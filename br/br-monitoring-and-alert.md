@@ -9,17 +9,17 @@ summary: Learn the monitoring and alert of the backup and restore feature.
 
 ## ログバックアップの監視 {#log-backup-monitoring}
 
-ログ バックアップでは、 [<a href="https://prometheus.io/">プロメテウス</a>](https://prometheus.io/)を使用したモニタリング メトリックの収集がサポートされています。現在、すべての監視メトリックは TiKV に組み込まれています。
+ログ バックアップでは、 [プロメテウス](https://prometheus.io/)を使用したモニタリング メトリックの収集がサポートされています。現在、すべての監視メトリックは TiKV に組み込まれています。
 
 ### 監視構成 {#monitoring-configuration}
 
 -   TiUPを使用してデプロイされたクラスターの場合、Prometheus はモニタリング メトリックを自動的に収集します。
--   手動でデプロイされたクラスターの場合は、 [<a href="/deploy-monitoring-services.md">TiDBクラスタモニタリングの展開</a>](/deploy-monitoring-services.md)の手順に従って、TiKV 関連のジョブを Prometheus 構成ファイルの`scrape_configs`セクションに追加します。
+-   手動でデプロイされたクラスターの場合は、 [TiDBクラスタモニタリングの展開](/deploy-monitoring-services.md)の手順に従って、TiKV 関連のジョブを Prometheus 構成ファイルの`scrape_configs`セクションに追加します。
 
 ### グラファナの構成 {#grafana-configuration}
 
--   TiUPを使用してデプロイされたクラスターの場合、 [<a href="https://grafana.com/">グラファナ</a>](https://grafana.com/)ダッシュボードにはポイントインタイム リカバリ (PITR) パネルが含まれています。 TiKV-Details ダッシュボードの**バックアップ ログ**パネルは PITR パネルです。
--   手動でデプロイされたクラスターの場合は、 [<a href="/deploy-monitoring-services.md#step-2-import-a-grafana-dashboard">Grafana ダッシュボードをインポートする</a>](/deploy-monitoring-services.md#step-2-import-a-grafana-dashboard)を参照し、 [<a href="https://github.com/tikv/tikv/blob/master/metrics/grafana/tikv_details.json">tikv_details</a>](https://github.com/tikv/tikv/blob/master/metrics/grafana/tikv_details.json) JSON ファイルを Grafana にアップロードします。次に、TiKV-Details ダッシュボードで**[バックアップ ログ]**パネルを見つけます。
+-   TiUPを使用してデプロイされたクラスターの場合、 [グラファナ](https://grafana.com/)ダッシュボードにはポイントインタイム リカバリ (PITR) パネルが含まれています。 TiKV-Details ダッシュボードの**バックアップ ログ**パネルは PITR パネルです。
+-   手動でデプロイされたクラスターの場合は、 [tikv_details](https://github.com/tikv/tikv/blob/master/metrics/grafana/tikv_details.json) JSON ファイルを Grafana にアップロードします。次に、TiKV-Details ダッシュボードで**[バックアップ ログ]**パネルを見つけます。
 
 ### モニタリング指標 {#monitoring-metrics}
 
@@ -56,7 +56,7 @@ summary: Learn the monitoring and alert of the backup and restore feature.
 
 PITR でアラート項目を構成するには、次の手順に従います。
 
-1.  Prometheus が配置されているノード上にアラート ルールの構成ファイル (たとえば、 `pitr.rules.yml` ) を作成します。ファイルには、 [<a href="https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/">プロメテウスのドキュメント</a>](https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/) 、以下の推奨アラート項目、設定サンプルに従ってアラートルールを記入します。
+1.  Prometheus が配置されているノード上にアラート ルールの構成ファイル (たとえば、 `pitr.rules.yml` ) を作成します。ファイルには、 [プロメテウスのドキュメント](https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/) 、以下の推奨アラート項目、設定サンプルに従ってアラートルールを記入します。
 2.  Prometheus 構成ファイルの`rule_files`フィールドに、アラート ルール ファイルのパスを追加します。
 3.  `SIGHUP`シグナルを Prometheus プロセス ( `kill -HUP pid` ) に送信するか、HTTP `POST`リクエストを`http://prometheus-addr/-/reload`に送信します (HTTP リクエストを送信する前に、Prometheus の起動時に`--web.enable-lifecycle`パラメーターを追加します)。
 

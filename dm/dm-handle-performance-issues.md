@@ -7,19 +7,19 @@ summary: Learn about common performance issues that might exist in DM and how to
 
 このドキュメントでは、DM に存在する可能性のある一般的なパフォーマンスの問題とその対処方法を紹介します。
 
-問題を診断する前に、 [<a href="https://github.com/pingcap/docs-dm/blob/release-5.3/en/dm-benchmark-v5.3.0.md">DM ベンチマーク レポート</a>](https://github.com/pingcap/docs-dm/blob/release-5.3/en/dm-benchmark-v5.3.0.md)を参照してください。
+問題を診断する前に、 [DM ベンチマーク レポート](https://github.com/pingcap/docs-dm/blob/release-5.3/en/dm-benchmark-v5.3.0.md)を参照してください。
 
 パフォーマンスの問題を診断して処理するときは、次のことを確認してください。
 
 -   DM 監視コンポーネントが正しく構成され、インストールされています。
--   [<a href="/dm/monitor-a-dm-cluster.md#task">モニタリングメトリクス</a>](/dm/monitor-a-dm-cluster.md#task) Grafana 監視ダッシュボードで確認できます。
+-   [モニタリングメトリクス](/dm/monitor-a-dm-cluster.md#task) Grafana 監視ダッシュボードで確認できます。
 -   診断したコンポーネントは正常に動作します。そうしないと、モニタリング メトリックの例外が発生し、パフォーマンスの問題の診断が妨げられる可能性があります。
 
-データ移行でレイテンシーが大きい場合、ボトルネックが DMコンポーネント内にあるのか TiDB クラスター内にあるのかをすぐに判断するには、まず`DML queue remain length` [<a href="#write-sql-statements-to-downstream">SQL ステートメントをダウンストリームに書き込む</a>](#write-sql-statements-to-downstream)チェックします。
+データ移行でレイテンシーが大きい場合、ボトルネックが DMコンポーネント内にあるのか TiDB クラスター内にあるのかをすぐに判断するには、まず`DML queue remain length` [SQL ステートメントをダウンストリームに書き込む](#write-sql-statements-to-downstream)チェックします。
 
 ## リレーログユニット {#relay-log-unit}
 
-リレー ログ ユニットのパフォーマンスの問題を診断するには、 `binlog file gap between master and relay`監視メトリックを確認します。この指標の詳細については、 [<a href="/dm/monitor-a-dm-cluster.md#relay-log">リレーログのモニタリングメトリクス</a>](/dm/monitor-a-dm-cluster.md#relay-log)を参照してください。このメトリクスが長期間 1 より大きい場合、通常はパフォーマンスの問題があることを示します。このメトリクスが 0 の場合、通常はパフォーマンスに問題がないことを示します。
+リレー ログ ユニットのパフォーマンスの問題を診断するには、 `binlog file gap between master and relay`監視メトリックを確認します。この指標の詳細については、 [リレーログのモニタリングメトリクス](/dm/monitor-a-dm-cluster.md#relay-log)を参照してください。このメトリクスが長期間 1 より大きい場合、通常はパフォーマンスの問題があることを示します。このメトリクスが 0 の場合、通常はパフォーマンスに問題がないことを示します。
 
 `binlog file gap between master and relay`の値が 0 であるが、パフォーマンスの問題があると思われる場合は、 `binlog pos`チェックしてください。このメトリクスの`master` `relay`よりも大幅に大きい場合、パフォーマンスの問題が存在する可能性があります。この場合は、この問題を診断して、それに応じて対処してください。
 
@@ -55,24 +55,24 @@ binlogイベントをリレー ログ ファイルに書き込む場合、関連
 
 ## Binlogレプリケーションユニット {#binlog-replication-unit}
 
-Binlogレプリケーション ユニットのパフォーマンスの問題を診断するには、 `binlog file gap between master and syncer`監視メトリックを確認します。この指標の詳細については、 [<a href="/dm/monitor-a-dm-cluster.md#binlog-replication">Binlogレプリケーションの監視メトリクス</a>](/dm/monitor-a-dm-cluster.md#binlog-replication)を参照してください。
+Binlogレプリケーション ユニットのパフォーマンスの問題を診断するには、 `binlog file gap between master and syncer`監視メトリックを確認します。この指標の詳細については、 [Binlogレプリケーションの監視メトリクス](/dm/monitor-a-dm-cluster.md#binlog-replication)を参照してください。
 
 -   このメトリクスが長期間にわたって 1 より大きい場合、通常はパフォーマンスの問題があることを示します。
 -   このメトリクスが 0 の場合、通常はパフォーマンスに問題がないことを示します。
 
-`binlog file gap between master and syncer`が 1 より大きい値が長時間続く場合は、 `binlog file gap between relay and syncer`をチェックして、レイテンシーが主にどのユニットに存在するかを把握します。この値が通常 0 である場合、レイテンシーはリレー ログ ユニットに存在する可能性があります。この問題を解決するには、 [<a href="#relay-log-unit">リレーログユニット</a>](#relay-log-unit)を参照してください。それ以外の場合は、 Binlogレプリケーション ユニットのチェックを続けます。
+`binlog file gap between master and syncer`が 1 より大きい値が長時間続く場合は、 `binlog file gap between relay and syncer`をチェックして、レイテンシーが主にどのユニットに存在するかを把握します。この値が通常 0 である場合、レイテンシーはリレー ログ ユニットに存在する可能性があります。この問題を解決するには、 [リレーログユニット](#relay-log-unit)を参照してください。それ以外の場合は、 Binlogレプリケーション ユニットのチェックを続けます。
 
 ### binlogデータの読み取り {#read-binlog-data}
 
 Binlogレプリケーション ユニットは、設定に従って、 binlogイベントを上流の MySQL/MariaDB から読み取るかリレー ログ ファイルから読み取るかを決定します。関連するパフォーマンス メトリックは`read binlog event duration`で、通常は数マイクロ秒から数十マイクロ秒の範囲です。
 
--   DM のBinlogレプリケーション処理ユニットがアップストリームの MySQL/MariaDB からbinlogイベントを読み取る場合、問題を特定して解決するには、「リレー ログ ユニット」セクションの[<a href="#read-binlog-data">binlogデータを読み取る</a>](#read-binlog-data)を参照してください。
+-   DM のBinlogレプリケーション処理ユニットがアップストリームの MySQL/MariaDB からbinlogイベントを読み取る場合、問題を特定して解決するには、「リレー ログ ユニット」セクションの[binlogデータを読み取る](#read-binlog-data)を参照してください。
 
 -   DM のBinlogレプリケーション処理ユニットがリレー ログ ファイルからbinlogイベントを読み取る場合、 `binlog event size`が大きすぎない場合、 `read binlog event duration`の値はマイクロ秒である必要があります。 `read binlog event duration`が大きすぎる場合は、ディスクの読み取りパフォーマンスを確認してください。書き込みパフォーマンスの低下を回避するには、DM ワーカーにローカル SSD を使用します。
 
 ### binlogイベントの変換 {#binlog-event-conversion}
 
-Binlogレプリケーション ユニットは、DML を構築し、DDL を解析し、 binlogイベント データから[<a href="/dm/dm-table-routing.md">テーブルルーター</a>](/dm/dm-table-routing.md)変換を実行します。関連するメトリックは`transform binlog event duration`です。
+Binlogレプリケーション ユニットは、DML を構築し、DDL を解析し、 binlogイベント データから[テーブルルーター](/dm/dm-table-routing.md)変換を実行します。関連するメトリックは`transform binlog event duration`です。
 
 この期間は主にアップストリームの書き込み操作によって影響されます。 `INSERT INTO`ステートメントを例にとると、単一の`VALUES`変換するのにかかる時間は、多数の`VALUES`を変換するのにかかる時間とは大きく異なります。消費される時間は、数十マイクロ秒から数百マイクロ秒の範囲である可能性があります。ただし、通常、これはシステムのボトルネックではありません。
 

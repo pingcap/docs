@@ -29,9 +29,9 @@ summary: Learn common operations when you troubleshoot a TiFlash cluster.
     ulimit -n 1000000
     ```
 
-3.  PD Controlツールを使用して、ノード (同じ IP およびポート) 上でオフラインにできなかったTiFlashインスタンスがあるかどうかを確認し、インスタンスを強制的にオフラインにします。詳細な手順については、 [<a href="/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster">TiFlashクラスターでのスケールイン</a>](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster)を参照してください。
+3.  PD Controlツールを使用して、ノード (同じ IP およびポート) 上でオフラインにできなかったTiFlashインスタンスがあるかどうかを確認し、インスタンスを強制的にオフラインにします。詳細な手順については、 [TiFlashクラスターでのスケールイン](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster)を参照してください。
 
-上記の方法で問題を解決できない場合は、PingCAP またはコミュニティからTiFlashログ ファイルと[<a href="/support.md">支持を得ます</a>](/support.md)を保存してください。
+上記の方法で問題を解決できない場合は、PingCAP またはコミュニティからTiFlashログ ファイルと[支持を得ます](/support.md)を保存してください。
 
 ## TiFlashレプリカは常に利用できない {#tiflash-replica-is-always-unavailable}
 
@@ -46,7 +46,7 @@ summary: Learn common operations when you troubleshoot a TiFlash cluster.
     ```
 
     -   `true`が返された場合は、次のステップに進みます。
-    -   `false`が返された場合は[<a href="/configure-placement-rules.md#enable-placement-rules">配置ルール機能を有効にする</a>](/configure-placement-rules.md#enable-placement-rules)返し、次のステップに進みます。
+    -   `false`が返された場合は[配置ルール機能を有効にする](/configure-placement-rules.md#enable-placement-rules)返し、次のステップに進みます。
 
 2.  TiFlash - Summary モニタリング パネルの`UpTime`を表示して、 TiFlashプロセスが正しく動作しているかどうかを確認します。
 
@@ -74,7 +74,7 @@ summary: Learn common operations when you troubleshoot a TiFlash cluster.
 
     > **ノート：**
     >
-    > [<a href="/configure-placement-rules.md">配置ルール</a>](/configure-placement-rules.md)機能を有効にすると、以前に設定した`max-replicas`と`location-labels`は無効になります。レプリカ ポリシーを調整するには、配置ルールに関連するインターフェイスを使用します。
+    > [配置ルール](/configure-placement-rules.md)機能を有効にすると、以前に設定した`max-replicas`と`location-labels`は無効になります。レプリカ ポリシーを調整するには、配置ルールに関連するインターフェイスを使用します。
 
 6.  マシン ( TiFlashノードの`store`存在する) の残りのディスク容量が十分であるかどうかを確認します。デフォルトでは、残りのディスク容量が`store`容量 ( `low-space-ratio`パラメータで制御される) の 20% 未満の場合、PD はこのTiFlashノードにデータをスケジュールできません。
 
@@ -88,7 +88,7 @@ TiFlashの負荷が重すぎて、 TiFlashデータ レプリケーションが�
 
 データ ファイルの破損に対処するには、次の手順を実行します。
 
-1.  対応するTiFlashノードを停止するには、 [<a href="/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster">TiFlashノードを停止します</a>](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster)を参照してください。
+1.  対応するTiFlashノードを停止するには、 [TiFlashノードを停止します](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster)を参照してください。
 2.  TiFlashノードの関連データを削除します。
 3.  クラスターにTiFlashノードを再デプロイします。
 
@@ -133,7 +133,7 @@ TiFlashノードをデプロイし、(ALTER 操作を実行して) レプリケ�
     -   「はい」の場合、 TiFlashレプリケーションは正しく実行されます。
     -   「いいえ」の場合、 TiFlashレプリケーションは異常です。 `tidb.log`で、 `Tiflash replica is not available`というログを検索します。該当テーブルの`progress`更新されているか確認してください。そうでない場合は、 `tiflash log`で詳細を確認してください。たとえば、 `tiflash log`のうち`lag_region_info`検索して、どのリージョンが遅れているかを確認します。
 
-3.  pd-ctlを使用して、 [<a href="/configure-placement-rules.md">配置ルール</a>](/configure-placement-rules.md)機能が有効になっているかどうかを確認します。
+3.  pd-ctlを使用して、 [配置ルール](/configure-placement-rules.md)機能が有効になっているかどうかを確認します。
 
     {{< copyable "" >}}
 
@@ -142,7 +142,7 @@ TiFlashノードをデプロイし、(ALTER 操作を実行して) レプリケ�
     ```
 
     -   `true`が返された場合は、次のステップに進みます。
-    -   `false`が返された場合は[<a href="/configure-placement-rules.md#enable-placement-rules">配置ルール機能を有効にする</a>](/configure-placement-rules.md#enable-placement-rules)返し、次のステップに進みます。
+    -   `false`が返された場合は[配置ルール機能を有効にする](/configure-placement-rules.md#enable-placement-rules)返し、次のステップに進みます。
 
 4.  `max-replicas`構成が正しいかどうかを確認します。
 
@@ -207,7 +207,7 @@ TiFlashでのデータ レプリケーションが正常に開始された後、
 
 原因はさまざまです。次の手順を実行することで問題に対処できます。
 
-1.  レプリケーションを高速化するには、 [<a href="/configure-store-limit.md#usage">`store limit`</a>](/configure-store-limit.md#usage)を増やします。
+1.  レプリケーションを高速化するには、 [`store limit`](/configure-store-limit.md#usage)を増やします。
 
 2.  TiFlashの負荷を調整します。
 

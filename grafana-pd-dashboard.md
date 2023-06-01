@@ -5,7 +5,7 @@ summary: Learn some key metrics displayed on the Grafana PD dashboard.
 
 # PD の主要なモニタリング指標 {#key-monitoring-metrics-of-pd}
 
-TiUPを使用して TiDB クラスターをデプロイすると、監視システム (Prometheus および Grafana) も同時にデプロイされます。詳細については、 [<a href="/tidb-monitoring-framework.md">監視フレームワークの概要</a>](/tidb-monitoring-framework.md)を参照してください。
+TiUPを使用して TiDB クラスターをデプロイすると、監視システム (Prometheus および Grafana) も同時にデプロイされます。詳細については、 [監視フレームワークの概要](/tidb-monitoring-framework.md)を参照してください。
 
 Grafana ダッシュボードは、概要、PD、TiDB、TiKV、Node_exporter、Disk Performance、および Performance_overview を含む一連のサブ ダッシュボードに分割されています。診断に役立つ指標が多数あります。
 

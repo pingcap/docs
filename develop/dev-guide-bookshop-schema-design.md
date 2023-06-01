@@ -6,19 +6,19 @@ title: Bookshop Example Application
 
 Bookshop は、さまざまなカテゴリの本を購入したり、読んだ本を評価したりできる仮想オンライン書店アプリケーションです。
 
-アプリケーション開発者ガイドをよりスムーズに読むために、Bookshop アプリケーションの[<a href="#description-of-the-tables">テーブル構造</a>](#description-of-the-tables)とデータに基づいた SQL ステートメントの例を示します。このドキュメントでは、テーブル構造とデータをインポートする方法、およびテーブル構造の定義に焦点を当てます。
+アプリケーション開発者ガイドをよりスムーズに読むために、Bookshop アプリケーションの[テーブル構造](#description-of-the-tables)とデータに基づいた SQL ステートメントの例を示します。このドキュメントでは、テーブル構造とデータをインポートする方法、およびテーブル構造の定義に焦点を当てます。
 
 ## テーブル構造とデータをインポートする {#import-table-structures-and-data}
 
 <CustomContent platform="tidb">
 
-Bookshop テーブルの構造とデータは[<a href="#method-1-via-tiup-demo">TiUP経由</a>](#method-1-via-tiup-demo)または[<a href="#method-2-via-tidb-cloud-import">TiDB Cloudのインポート機能経由</a>](#method-2-via-tidb-cloud-import)いずれかでインポートできます。
+Bookshop テーブルの構造とデータは[TiDB Cloudのインポート機能経由](#method-2-via-tidb-cloud-import)いずれかでインポートできます。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-TiDB Cloudの場合は、 [<a href="#method-1-via-tiup-demo">方法 1: `tiup demo`経由</a>](#method-1-via-tiup-demo)スキップして Bookshop テーブル構造[<a href="#method-2-via-tidb-cloud-import">TiDB Cloudのインポート機能経由</a>](#method-2-via-tidb-cloud-import)をインポートできます。
+TiDB Cloudの場合は、 [TiDB Cloudのインポート機能経由](#method-2-via-tidb-cloud-import)をインポートできます。
 
 </CustomContent>
 
@@ -26,13 +26,13 @@ TiDB Cloudの場合は、 [<a href="#method-1-via-tiup-demo">方法 1: `tiup dem
 
 <CustomContent platform="tidb">
 
-TiDB クラスターが[<a href="/tiup/tiup-reference.md#tiup-reference">TiUP</a>](/tiup/tiup-reference.md#tiup-reference)を使用してデプロイされている場合、または TiDBサーバーに接続できる場合は、次のコマンドを実行して、Bookshop アプリケーションのサンプル データをすばやく生成してインポートできます。
+TiDB クラスターが[TiUP](/tiup/tiup-reference.md#tiup-reference)を使用してデプロイされている場合、または TiDBサーバーに接続できる場合は、次のコマンドを実行して、Bookshop アプリケーションのサンプル データをすばやく生成してインポートできます。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-TiDB クラスターが[<a href="https://docs.pingcap.com/tidb/stable/tiup-reference">TiUP</a>](https://docs.pingcap.com/tidb/stable/tiup-reference)を使用してデプロイされている場合、または TiDBサーバーに接続できる場合は、次のコマンドを実行して、Bookshop アプリケーションのサンプル データをすばやく生成してインポートできます。
+TiDB クラスターが[TiUP](https://docs.pingcap.com/tidb/stable/tiup-reference)を使用してデプロイされている場合、または TiDBサーバーに接続できる場合は、次のコマンドを実行して、Bookshop アプリケーションのサンプル データをすばやく生成してインポートできます。
 
 </CustomContent>
 
@@ -40,7 +40,7 @@ TiDB クラスターが[<a href="https://docs.pingcap.com/tidb/stable/tiup-refer
 tiup demo bookshop prepare
 ```
 
-デフォルトでは、このコマンドにより、アプリケーションがアドレス`127.0.0.1`のポート`4000`に接続できるようになり、パスワードなしで`root`ユーザーとしてログインできるようになり、データベース`bookshop`に[<a href="#description-of-the-tables">テーブル構造</a>](#description-of-the-tables)が作成されます。
+デフォルトでは、このコマンドにより、アプリケーションがアドレス`127.0.0.1`のポート`4000`に接続できるようになり、パスワードなしで`root`ユーザーとしてログインできるようになり、データベース`bookshop`に[テーブル構造](#description-of-the-tables)が作成されます。
 
 #### 接続情報を設定する {#configure-connection-information}
 
@@ -120,7 +120,7 @@ TiDB Cloudのクラスター詳細ページで、「**インポート」**領域
 
 5.  **[インポートの開始]**をクリックしてインポート プロセスを開始し、 TiDB Cloudがインポートを完了するまで待ちます。
 
-データをTiDB Cloudにインポートまたは移行する方法の詳細については、 [<a href="https://docs.pingcap.com/tidbcloud/tidb-cloud-migration-overview">TiDB Cloud移行の概要</a>](https://docs.pingcap.com/tidbcloud/tidb-cloud-migration-overview)を参照してください。
+データをTiDB Cloudにインポートまたは移行する方法の詳細については、 [TiDB Cloud移行の概要](https://docs.pingcap.com/tidbcloud/tidb-cloud-migration-overview)を参照してください。
 
 ### データのインポートステータスをビュー {#view-data-import-status}
 
@@ -199,8 +199,8 @@ WHERE table_schema LIKE 'bookshop';
 
 | フィールド名  | タイプ    | 説明                                                                 |
 | ------- | ------ | ------------------------------------------------------------------ |
-| book_id | ビギント   | 書籍の一意の ID ( [<a href="#books-table">本</a>](#books-table)にリンク)      |
-| ユーザーID  | ビギント   | ユーザーの一意の識別子 ( [<a href="#users-table">ユーザー</a>](#users-table)にリンク) |
+| book_id | ビギント   | 書籍の一意の ID ( [本](#books-table)にリンク)      |
+| ユーザーID  | ビギント   | ユーザーの一意の識別子 ( [ユーザー](#users-table)にリンク) |
 | スコア     | タイニーント | ユーザー評価 (1-5)                                                       |
 | 評価済み    | 日付時刻   | 評価時間                                                               |
 
@@ -210,8 +210,8 @@ WHERE table_schema LIKE 'bookshop';
 
 | フィールド名  | タイプ        | 説明                                                              |
 | ------- | ---------- | --------------------------------------------------------------- |
-| book_id | bigint(20) | 書籍の一意の ID ( [<a href="#books-table">本</a>](#books-table)にリンク)   |
-| 著者ID    | bigint(20) | 著者固有のID（リンク先[<a href="#authors-table">著者</a>](#authors-table) ） |
+| book_id | bigint(20) | 書籍の一意の ID ( [本](#books-table)にリンク)   |
+| 著者ID    | bigint(20) | 著者固有のID（リンク先[著者](#authors-table) ） |
 
 ### <code>orders</code>テーブル {#code-orders-code-table}
 
@@ -220,8 +220,8 @@ WHERE table_schema LIKE 'bookshop';
 | フィールド名  | タイプ        | 説明                                                                        |
 | ------- | ---------- | ------------------------------------------------------------------------- |
 | ID      | bigint(20) | 注文の一意のID                                                                  |
-| book_id | bigint(20) | 書籍の一意の ID ( [<a href="#books-table">本</a>](#books-table)にリンク)             |
-| ユーザーID  | bigint(20) | ユーザーの一意の識別子 ( [<a href="#users-table">ユーザー</a>](#users-table)に関連付けられています) |
+| book_id | bigint(20) | 書籍の一意の ID ( [本](#books-table)にリンク)             |
+| ユーザーID  | bigint(20) | ユーザーの一意の識別子 ( [ユーザー](#users-table)に関連付けられています) |
 | 量       | tinyint(4) | 購入数量                                                                      |
 | 注文済みの番号 | 日付時刻       | 購入時間                                                                      |
 

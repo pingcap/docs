@@ -160,7 +160,7 @@ public class EffectWriteSkew {
 
 <div label="Golang" value="golang">
 
-TiDB トランザクションを適応させるには、次のコードに従って[<a href="https://github.com/pingcap-inc/tidb-example-golang/tree/main/util">ユーティリティ</a>](https://github.com/pingcap-inc/tidb-example-golang/tree/main/util)を書き込みます。
+TiDB トランザクションを適応させるには、次のコードに従って[ユーティリティ](https://github.com/pingcap-inc/tidb-example-golang/tree/main/util)を書き込みます。
 
 ```go
 package main

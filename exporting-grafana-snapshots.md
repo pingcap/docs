@@ -6,15 +6,15 @@ summary: Learn how to export snapshots of Grafana Dashboard, and how to visualiz
 > **警告：**
 >
 > -   TiDB v6.0.0 以降、PingCAP は MetricsTool を保守しなくなりました。 v6.1.0 以降、PingCAP は MetricsTool ドキュメントを管理しなくなりました。
-> -   モニタリング メトリック データをエクスポートするには、 [<a href="/clinic/clinic-introduction.md">PingCAPクリニック診断サービス</a>](/clinic/clinic-introduction.md)を使用して、モニタリング メトリック、ログ、クラスター トポロジ、構成、パラメーターなど、TiDB クラスターの診断に必要な情報を取得します。
+> -   モニタリング メトリック データをエクスポートするには、 [PingCAPクリニック診断サービス](/clinic/clinic-introduction.md)を使用して、モニタリング メトリック、ログ、クラスター トポロジ、構成、パラメーターなど、TiDB クラスターの診断に必要な情報を取得します。
 
 # Grafana スナップショットのエクスポート {#export-grafana-snapshots}
 
-メトリクス データはトラブルシューティングにおいて重要です。リモート アシスタンスをリクエストすると、サポート スタッフが問題を診断するために Grafana ダッシュボードを表示する必要がある場合があります。 [<a href="https://metricstool.pingcap.net/">メトリクスツール</a>](https://metricstool.pingcap.net/) Grafana ダッシュボードのスナップショットをローカル ファイルとしてエクスポートし、これらのスナップショットを視覚化するのに役立ちます。これらのスナップショットを部外者と共有すると、Grafanaサーバー上の他の機密情報へのアクセスを与えることなく、部外者がグラフを正確に読み取れるようになります。
+メトリクス データはトラブルシューティングにおいて重要です。リモート アシスタンスをリクエストすると、サポート スタッフが問題を診断するために Grafana ダッシュボードを表示する必要がある場合があります。 [メトリクスツール](https://metricstool.pingcap.net/) Grafana ダッシュボードのスナップショットをローカル ファイルとしてエクスポートし、これらのスナップショットを視覚化するのに役立ちます。これらのスナップショットを部外者と共有すると、Grafanaサーバー上の他の機密情報へのアクセスを与えることなく、部外者がグラフを正確に読み取れるようになります。
 
 ## 使用法 {#usage}
 
-MetricsTool には[<a href="https://metricstool.pingcap.net/">https://metricstool.pingcap.net/</a>](https://metricstool.pingcap.net/)からアクセスできます。これは 3 つのツール セットで構成されます。
+MetricsTool には[https://metricstool.pingcap.net/](https://metricstool.pingcap.net/)からアクセスできます。これは 3 つのツール セットで構成されます。
 
 -   **エクスポート**: ブラウザの開発者ツールで実行されるユーザー スクリプト。これにより、任意の Grafana v6.xxサーバー上の現在のダッシュボードに表示されているすべてのパネルのスナップショットをダウンロードできます。
 

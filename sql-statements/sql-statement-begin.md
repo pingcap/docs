@@ -39,8 +39,8 @@ TiDB は、 `BEGIN PESSIMISTIC`または`BEGIN OPTIMISTIC`の構文拡張をサ�
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-commit.md">専念</a>](/sql-statements/sql-statement-commit.md)
--   [<a href="/sql-statements/sql-statement-rollback.md">ロールバック</a>](/sql-statements/sql-statement-rollback.md)
--   [<a href="/sql-statements/sql-statement-start-transaction.md">取引を開始する</a>](/sql-statements/sql-statement-start-transaction.md)
--   [<a href="/optimistic-transaction.md">TiDB の楽観的トランザクション モデル</a>](/optimistic-transaction.md)
--   [<a href="/pessimistic-transaction.md">TiDB悲観的トランザクション モード</a>](/pessimistic-transaction.md)
+-   [専念](/sql-statements/sql-statement-commit.md)
+-   [ロールバック](/sql-statements/sql-statement-rollback.md)
+-   [取引を開始する](/sql-statements/sql-statement-start-transaction.md)
+-   [TiDB の楽観的トランザクション モデル](/optimistic-transaction.md)
+-   [TiDB悲観的トランザクション モード](/pessimistic-transaction.md)

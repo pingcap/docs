@@ -15,7 +15,7 @@ v7.1.0 以降、TiDB を新しいバージョンにアップグレードする�
 
 ## 機能紹介 {#feature-introduction}
 
-スムーズ アップグレード機能が導入される前は、アップグレード プロセス中の DDL 操作に次の制限があります ( [<a href="/upgrade-tidb-using-tiup.md#upgrade-tidb-using-tiup">TiUPを使用して TiDB をアップグレードする</a>](/upgrade-tidb-using-tiup.md#upgrade-tidb-using-tiup)の*警告*内容を参照)。
+スムーズ アップグレード機能が導入される前は、アップグレード プロセス中の DDL 操作に次の制限があります ( [TiUPを使用して TiDB をアップグレードする](/upgrade-tidb-using-tiup.md#upgrade-tidb-using-tiup)の*警告*内容を参照)。
 
 -   アップグレード プロセス中に DDL 操作を実行すると、TiDB で未定義の動作が発生する可能性があります。
 -   DDL 操作中に TiDB をアップグレードすると、TiDB で未定義の動作が発生する可能性があります。

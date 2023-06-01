@@ -15,7 +15,7 @@ TiDB ダッシュボードの Key Visualizer ページは、TiDB の使用状況
 
     ![Access Key Visualizer](/media/dashboard/dashboard-keyviz-access-v650.png)
 
--   ブラウザで[<a href="http://127.0.0.1:2379/dashboard/#/keyviz">http://127.0.0.1:2379/dashboard/#/keyviz</a>](http://127.0.0.1:2379/dashboard/#/keyviz)にアクセスしてください。 `127.0.0.1:2379`を実際の PD インスタンスのアドレスとポートに置き換えます。
+-   ブラウザで[http://127.0.0.1:2379/dashboard/#/keyviz](http://127.0.0.1:2379/dashboard/#/keyviz)にアクセスしてください。 `127.0.0.1:2379`を実際の PD インスタンスのアドレスとポートに置き換えます。
 
 ## インターフェイスのデモンストレーション {#interface-demonstration}
 
@@ -37,7 +37,7 @@ TiDB ダッシュボードの Key Visualizer ページは、TiDB の使用状況
 
 TiDB クラスターでは、保存されたデータは TiKV インスタンス間で分散されます。論理的には、TiKV は巨大で整然としたキーと値のマップです。キーと値の空間全体は多くのセグメントに分割され、各セグメントは一連の隣接するキーで構成されます。このようなセグメントは`Region`と呼ばれます。
 
-リージョンの詳細については、 [<a href="https://en.pingcap.com/blog/tidb-internal-data-storage/">TiDB 内部 (I) - データ ストレージ</a>](https://en.pingcap.com/blog/tidb-internal-data-storage/)を参照してください。
+リージョンの詳細については、 [TiDB 内部 (I) - データ ストレージ](https://en.pingcap.com/blog/tidb-internal-data-storage/)を参照してください。
 
 ### ホットスポット {#hotspot}
 
@@ -46,7 +46,7 @@ TiDB データベースを使用すると、狭い範囲のデータに大量の
 -   隣接するデータを`AUTO_INCREMENT`の主キーを持つテーブルに書き込むと、このテーブルでホットスポットの問題が発生します。
 -   隣接する時間データをテーブルの時間インデックスに書き込むと、テーブル インデックスでホットスポットの問題が発生します。
 
-ホットスポットの詳細については、 [<a href="/best-practices/high-concurrency-best-practices.md#hotspot-causes">高度な同時書き込みのベスト プラクティス</a>](/best-practices/high-concurrency-best-practices.md#hotspot-causes)を参照してください。
+ホットスポットの詳細については、 [高度な同時書き込みのベスト プラクティス](/best-practices/high-concurrency-best-practices.md#hotspot-causes)を参照してください。
 
 ### ヒートマップ {#heatmap}
 
@@ -178,4 +178,4 @@ Key Visualizer を開くと、デフォルトで最近 6 時間のデータベ�
 
 ## ホットスポットの問題に対処する {#address-hotspot-issues}
 
-TiDB には、一般的なホットスポットの問題を軽減するための機能がいくつか組み込まれています。詳細は[<a href="/best-practices/high-concurrency-best-practices.md">高度な同時書き込みのベスト プラクティス</a>](/best-practices/high-concurrency-best-practices.md)を参照してください。
+TiDB には、一般的なホットスポットの問題を軽減するための機能がいくつか組み込まれています。詳細は[高度な同時書き込みのベスト プラクティス](/best-practices/high-concurrency-best-practices.md)を参照してください。

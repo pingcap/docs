@@ -27,7 +27,7 @@ DESC user_attributes;
 
 -   `USER` : ユーザー名。
 -   `HOST` : ユーザーが TiDB に接続できるホスト。このフィールドの値が`％`の場合、ユーザーは任意のホストから TiDB に接続できることを意味します。
--   `ATTRIBUTE` : [<a href="/sql-statements/sql-statement-create-user.md">`CREATE USER`</a>](/sql-statements/sql-statement-create-user.md)または[<a href="/sql-statements/sql-statement-alter-user.md">`ALTER USER`</a>](/sql-statements/sql-statement-alter-user.md)ステートメントで設定されるユーザーのコメントと属性。
+-   `ATTRIBUTE` : [`ALTER USER`](/sql-statements/sql-statement-alter-user.md)ステートメントで設定されるユーザーのコメントと属性。
 
 以下は例です。
 

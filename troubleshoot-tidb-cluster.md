@@ -5,7 +5,7 @@ summary: Learn how to diagnose and resolve issues when you use TiDB.
 
 # TiDBクラスタのトラブルシューティング ガイド {#tidb-cluster-troubleshooting-guide}
 
-このガイドは、TiDB の使用中に基本的な問題を診断して解決するのに役立ちます。問題が解決しない場合は、次の情報と[<a href="https://github.com/pingcap/tidb/issues/new/choose">問題を作成する</a>](https://github.com/pingcap/tidb/issues/new/choose)を収集してください。
+このガイドは、TiDB の使用中に基本的な問題を診断して解決するのに役立ちます。問題が解決しない場合は、次の情報と[問題を作成する](https://github.com/pingcap/tidb/issues/new/choose)を収集してください。
 
 -   正確なエラーメッセージとエラー発生時の操作
 -   すべてのコンポーネントの状態
@@ -13,7 +13,7 @@ summary: Learn how to diagnose and resolve issues when you use TiDB.
 -   構成と展開トポロジ
 -   `dmesg`の TiDBコンポーネント関連の問題
 
-その他の情報については、 [<a href="/faq/tidb-faq.md">よくある質問 (FAQ)</a>](/faq/tidb-faq.md)を参照してください。
+その他の情報については、 [よくある質問 (FAQ)](/faq/tidb-faq.md)を参照してください。
 
 ## データベースに接続できません {#cannot-connect-to-the-database}
 
@@ -27,7 +27,7 @@ summary: Learn how to diagnose and resolve issues when you use TiDB.
 
     -   すべてのプロセスが実行されている場合は、 `tidb-server`ログをチェックして、次のメッセージが表示されるかどうかを確認します。
         -   InformationSchema is out of date: このメッセージは、 `tikv-server`に接続できない場合に表示されます。 `pd-server`と`tikv-server`の状態とログを確認します。
-        -   panic: このメッセージは、プログラムに問題がある場合に表示されます。詳細なpanicログと[<a href="https://github.com/pingcap/tidb/issues/new/choose">問題を作成する</a>](https://github.com/pingcap/tidb/issues/new/choose)を提供してください。
+        -   panic: このメッセージは、プログラムに問題がある場合に表示されます。詳細なpanicログと[問題を作成する](https://github.com/pingcap/tidb/issues/new/choose)を提供してください。
 
 3.  データがクリアされ、サービスが再デプロイされた場合は、次のことを確認してください。
 
@@ -40,7 +40,7 @@ summary: Learn how to diagnose and resolve issues when you use TiDB.
 
 -   起動パラメータにエラーがあります。
 
-    [<a href="/command-line-flags-for-tidb-configuration.md">TiDB の構成とオプション</a>](/command-line-flags-for-tidb-configuration.md)参照してください。
+    [TiDB の構成とオプション](/command-line-flags-for-tidb-configuration.md)参照してください。
 
 -   港が占領されています。
 
@@ -57,7 +57,7 @@ summary: Learn how to diagnose and resolve issues when you use TiDB.
 
 `tikv-server`起動できない場合は、以下を参照してください。
 
--   起動パラメータのエラー: [<a href="/command-line-flags-for-tikv-configuration.md">TiKV の構成とオプション</a>](/command-line-flags-for-tikv-configuration.md)を参照してください。
+-   起動パラメータのエラー: [TiKV の構成とオプション](/command-line-flags-for-tikv-configuration.md)を参照してください。
 
 -   ポートが占有されている: `lsof -i:port`コマンドを使用して、特定のポートに関連するすべてのネットワークを表示し、 `tikv-server`開始するポートが占有されていないことを確認します。
 
@@ -81,7 +81,7 @@ summary: Learn how to diagnose and resolve issues when you use TiDB.
 
 -   起動パラメータにエラーがあります。
 
-    [<a href="/command-line-flags-for-pd-configuration.md">PDの構成とオプション</a>](/command-line-flags-for-pd-configuration.md)を参照してください。
+    [PDの構成とオプション](/command-line-flags-for-pd-configuration.md)を参照してください。
 
 -   港が占領されています。
 
@@ -95,7 +95,7 @@ summary: Learn how to diagnose and resolve issues when you use TiDB.
 
 ## TiDBpanic {#tidb-panic}
 
-panicログと[<a href="https://github.com/pingcap/tidb/issues/new/choose">問題を作成する</a>](https://github.com/pingcap/tidb/issues/new/choose)を提供してください。
+panicログと[問題を作成する](https://github.com/pingcap/tidb/issues/new/choose)を提供してください。
 
 ## 接続が拒否されました {#the-connection-is-rejected}
 
@@ -110,7 +110,7 @@ panicログと[<a href="https://github.com/pingcap/tidb/issues/new/choose">問�
 
 ## データベースアクセスがタイムアウトし、システム負荷が高すぎる {#database-access-times-out-and-the-system-load-is-too-high}
 
-まず、 [<a href="/identify-slow-queries.md">遅いクエリログ</a>](/identify-slow-queries.md)チェックして、不適切な SQL ステートメントが原因であるかどうかを確認します。
+まず、 [遅いクエリログ](/identify-slow-queries.md)チェックして、不適切な SQL ステートメントが原因であるかどうかを確認します。
 
 問題を解決できなかった場合は、次の情報を提供してください。
 

@@ -30,8 +30,8 @@ DESC cluster_load;
 
 フィールドの説明:
 
--   `TYPE` : [<a href="/information-schema/information-schema-cluster-info.md">`information_schema.cluster_info`</a>](/information-schema/information-schema-cluster-info.md)テーブルの`TYPE`フィールドに対応します。オプションの値は`tidb` 、 `pd` 、および`tikv`です。
--   `INSTANCE` : [<a href="/information-schema/information-schema-cluster-info.md">`information_schema.cluster_info`</a>](/information-schema/information-schema-cluster-info.md)クラスタ情報テーブルの`INSTANCE`フィールドに対応します。
+-   `TYPE` : [`information_schema.cluster_info`](/information-schema/information-schema-cluster-info.md)テーブルの`TYPE`フィールドに対応します。オプションの値は`tidb` 、 `pd` 、および`tikv`です。
+-   `INSTANCE` : [`information_schema.cluster_info`](/information-schema/information-schema-cluster-info.md)クラスタ情報テーブルの`INSTANCE`フィールドに対応します。
 -   `DEVICE_TYPE` : ハードウェアの種類。現在、 `cpu` 、 `memory` 、 `disk` 、および`net`のタイプをクエリできます。
 -   `DEVICE_NAME` : ハードウェア名。 `DEVICE_NAME`の値は`DEVICE_TYPE`によって変化します。
     -   `cpu` : ハードウェア名は cpu です。

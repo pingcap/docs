@@ -7,24 +7,24 @@ summary: Learn about how to update data and batch update data.
 
 このドキュメントでは、次の SQL ステートメントを使用して、さまざまなプログラミング言語で TiDB 内のデータを更新する方法について説明します。
 
--   [<a href="/sql-statements/sql-statement-update.md">アップデート</a>](/sql-statements/sql-statement-update.md) : 指定されたテーブル内のデータを変更するために使用されます。
--   [<a href="/sql-statements/sql-statement-insert.md">重複キーの更新時に挿入</a>](/sql-statements/sql-statement-insert.md) : 主キーまたは一意キーの競合がある場合に、データを挿入し、このデータを更新するために使用されます。複数の一意のキー (主キーを含む) がある場合、このステートメントを使用すること**はお勧めできません**。これは、このステートメントが一意のキー (主キーを含む) の競合を検出するとデータを更新するためです。複数の行の競合がある場合、1 つの行のみが更新されます。
+-   [アップデート](/sql-statements/sql-statement-update.md) : 指定されたテーブル内のデータを変更するために使用されます。
+-   [重複キーの更新時に挿入](/sql-statements/sql-statement-insert.md) : 主キーまたは一意キーの競合がある場合に、データを挿入し、このデータを更新するために使用されます。複数の一意のキー (主キーを含む) がある場合、このステートメントを使用すること**はお勧めできません**。これは、このステートメントが一意のキー (主キーを含む) の競合を検出するとデータを更新するためです。複数の行の競合がある場合、1 つの行のみが更新されます。
 
 ## 始める前に {#before-you-start}
 
 このドキュメントを読む前に、以下を準備する必要があります。
 
--   [<a href="/develop/dev-guide-build-cluster-in-cloud.md">TiDB Cloud(Serverless Tier) で TiDBクラスタを構築する</a>](/develop/dev-guide-build-cluster-in-cloud.md) 。
--   [<a href="/develop/dev-guide-schema-design-overview.md">スキーマ設計の概要</a>](/develop/dev-guide-schema-design-overview.md) 、 [<a href="/develop/dev-guide-create-database.md">データベースを作成する</a>](/develop/dev-guide-create-database.md) 、 [<a href="/develop/dev-guide-create-table.md">テーブルを作成する</a>](/develop/dev-guide-create-table.md) 、および[<a href="/develop/dev-guide-create-secondary-indexes.md">セカンダリインデックスの作成</a>](/develop/dev-guide-create-secondary-indexes.md)を読み取ります。
--   データを`UPDATE`にしたい場合は、まず[<a href="/develop/dev-guide-insert-data.md">データを挿入する</a>](/develop/dev-guide-insert-data.md)を行う必要があります。
+-   [TiDB Cloud(Serverless Tier) で TiDBクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md) 。
+-   [セカンダリインデックスの作成](/develop/dev-guide-create-secondary-indexes.md)を読み取ります。
+-   データを`UPDATE`にしたい場合は、まず[データを挿入する](/develop/dev-guide-insert-data.md)を行う必要があります。
 
 ## <code>UPDATE</code>を使用する {#use-code-update-code}
 
-テーブル内の既存の行を更新するには、 [<a href="/sql-statements/sql-statement-update.md">`UPDATE`ステートメント</a>](/sql-statements/sql-statement-update.md)と`WHERE`句を使用して、更新する列をフィルタリングする必要があります。
+テーブル内の既存の行を更新するには、 [`UPDATE`ステートメント](/sql-statements/sql-statement-update.md)と`WHERE`句を使用して、更新する列をフィルタリングする必要があります。
 
 > **ノート：**
 >
-> 大量の行 (たとえば、1 万行を超える行) を更新する必要がある場合は、一度に完全な更新を実行せ***ず***、すべての行が更新されるまで一度に一部を繰り返し更新することをお勧めします。この操作をループするスクリプトまたはプログラムを作成できます。詳細は[<a href="#bulk-update">一括更新</a>](#bulk-update)参照してください。
+> 大量の行 (たとえば、1 万行を超える行) を更新する必要がある場合は、一度に完全な更新を実行せ***ず***、すべての行が更新されるまで一度に一部を繰り返し更新することをお勧めします。この操作をループするスクリプトまたはプログラムを作成できます。詳細は[一括更新](#bulk-update)参照してください。
 
 ### <code>UPDATE</code> SQL 構文 {#code-update-code-sql-syntax}
 
@@ -42,7 +42,7 @@ UPDATE {table} SET {update_column} = {update_value} WHERE {filter_column} = {fil
 | `{filter_column}` | フィルターに一致するカラム名 |
 |  `{filter_value}` | フィルタに一致するカラムの値 |
 
-詳細については、 [<a href="/sql-statements/sql-statement-update.md">UPDATE 構文</a>](/sql-statements/sql-statement-update.md)を参照してください。
+詳細については、 [UPDATE 構文](/sql-statements/sql-statement-update.md)を参照してください。
 
 ### ベストプラクティス<code>UPDATE</code> {#code-update-code-best-practices}
 
@@ -52,19 +52,19 @@ UPDATE {table} SET {update_column} = {update_value} WHERE {filter_column} = {fil
 
 <CustomContent platform="tidb">
 
--   多数の行 (たとえば、1 万行以上) を更新する必要がある場合は、 [<a href="#bulk-update">一括更新</a>](#bulk-update)使用します。 TiDB は 1 つのトランザクションのサイズを制限しているため (デフォルトでは[<a href="/tidb-configuration-file.md#txn-total-size-limit">txn 合計サイズ制限</a>](/tidb-configuration-file.md#txn-total-size-limit) MB)、一度に更新するデータが多すぎると、ロックが長時間保持されすぎたり ( [<a href="/pessimistic-transaction.md">悲観的取引</a>](/pessimistic-transaction.md) )、競合が発生したり ( [<a href="/optimistic-transaction.md">楽観的取引</a>](/optimistic-transaction.md) ) することがあります。
+-   多数の行 (たとえば、1 万行以上) を更新する必要がある場合は、 [楽観的取引](/optimistic-transaction.md) ) することがあります。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
--   多数の行 (たとえば、1 万行以上) を更新する必要がある場合は、 [<a href="#bulk-update">一括更新</a>](#bulk-update)使用します。 TiDB はデフォルトで 1 つのトランザクションのサイズを 100 MB に制限しているため、一度に更新するデータが多すぎると、ロックが長時間保持されすぎたり ( [<a href="/pessimistic-transaction.md">悲観的取引</a>](/pessimistic-transaction.md) )、競合が発生したり ( [<a href="/optimistic-transaction.md">楽観的取引</a>](/optimistic-transaction.md) ) する可能性があります。
+-   多数の行 (たとえば、1 万行以上) を更新する必要がある場合は、 [楽観的取引](/optimistic-transaction.md) ) する可能性があります。
 
 </CustomContent>
 
 ### <code>UPDATE</code>例 {#code-update-code-example}
 
-著者が名前を**春木ヘレン**に変更したとします。 [<a href="/develop/dev-guide-bookshop-schema-design.md#authors-table">著者</a>](/develop/dev-guide-bookshop-schema-design.md#authors-table)テーブルを変更する必要があります。彼女の一意の`id` **1**であると仮定し、フィルターは`id = 1`である必要があります。
+著者が名前を**春木ヘレン**に変更したとします。 [著者](/develop/dev-guide-bookshop-schema-design.md#authors-table)テーブルを変更する必要があります。彼女の一意の`id` **1**であると仮定し、フィルターは`id = 1`である必要があります。
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
@@ -120,7 +120,7 @@ INSERT INTO {table} ({columns}) VALUES ({values})
 
 ### <code>INSERT ON DUPLICATE KEY UPDATE</code>例 {#code-insert-on-duplicate-key-update-code-example}
 
-たとえば、書籍に対するユーザーの評価を含めるように[<a href="/develop/dev-guide-bookshop-schema-design.md#ratings-table">評価</a>](/develop/dev-guide-bookshop-schema-design.md#ratings-table)テーブルを更新する必要があります。ユーザーがまだ書籍を評価していない場合は、新しい評価が作成されます。ユーザーがすでに評価している場合は、以前の評価が更新されます。
+たとえば、書籍に対するユーザーの評価を含めるように[評価](/develop/dev-guide-bookshop-schema-design.md#ratings-table)テーブルを更新する必要があります。ユーザーがまだ書籍を評価していない場合は、新しい評価が作成されます。ユーザーがすでに評価している場合は、以前の評価が更新されます。
 
 次の例では、主キーは`book_id`と`user_id`の結合主キーです。ユーザ`user_id = 1`は、書籍`book_id = 1000`に`5`の評価を与える。
 
@@ -160,17 +160,17 @@ VALUES (?, ?, ?, NOW()) ON DUPLICATE KEY UPDATE `score` = ?, `rated_at` = NOW()"
 
 ## 一括更新 {#bulk-update}
 
-テーブル内の複数行のデータを更新する必要がある場合は、 `WHERE`句を使用[<a href="#use-insert-on-duplicate-key-update">`INSERT ON DUPLICATE KEY UPDATE`使用する</a>](#use-insert-on-duplicate-key-update)て、更新する必要があるデータをフィルタリングできます。
+テーブル内の複数行のデータを更新する必要がある場合は、 `WHERE`句を使用[`INSERT ON DUPLICATE KEY UPDATE`使用する](#use-insert-on-duplicate-key-update)て、更新する必要があるデータをフィルタリングできます。
 
 <CustomContent platform="tidb">
 
-ただし、多数の行 (たとえば、1 万行以上) を更新する必要がある場合は、データを繰り返し更新することをお勧めします。つまり、更新が完了するまで、各繰り返しでデータの一部のみを更新します。 。これは、TiDB が単一トランザクションのサイズを制限しているためです (デフォルトでは[<a href="/tidb-configuration-file.md#txn-total-size-limit">txn 合計サイズ制限</a>](/tidb-configuration-file.md#txn-total-size-limit) MB)。一度にあまりに多くのデータ更新を行うと、ロックが長時間保持されすぎたり ( [<a href="/pessimistic-transaction.md">悲観的取引</a>](/pessimistic-transaction.md) )、競合が発生したり ( [<a href="/optimistic-transaction.md">楽観的取引</a>](/optimistic-transaction.md) ) します。プログラムまたはスクリプトでループを使用すると、操作を完了できます。
+ただし、多数の行 (たとえば、1 万行以上) を更新する必要がある場合は、データを繰り返し更新することをお勧めします。つまり、更新が完了するまで、各繰り返しでデータの一部のみを更新します。 。これは、TiDB が単一トランザクションのサイズを制限しているためです (デフォルトでは[楽観的取引](/optimistic-transaction.md) ) します。プログラムまたはスクリプトでループを使用すると、操作を完了できます。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-ただし、多数の行 (たとえば、1 万行以上) を更新する必要がある場合は、データを繰り返し更新することをお勧めします。つまり、更新が完了するまで、各繰り返しでデータの一部のみを更新します。 。これは、TiDB がデフォルトで 1 つのトランザクションのサイズを 100 MB に制限しているためです。一度にあまりに多くのデータ更新を行うと、ロックが長時間保持されすぎたり ( [<a href="/pessimistic-transaction.md">悲観的取引</a>](/pessimistic-transaction.md) )、競合が発生したり ( [<a href="/optimistic-transaction.md">楽観的取引</a>](/optimistic-transaction.md) ) します。プログラムまたはスクリプトでループを使用して操作を完了できます。
+ただし、多数の行 (たとえば、1 万行以上) を更新する必要がある場合は、データを繰り返し更新することをお勧めします。つまり、更新が完了するまで、各繰り返しでデータの一部のみを更新します。 。これは、TiDB がデフォルトで 1 つのトランザクションのサイズを 100 MB に制限しているためです。一度にあまりに多くのデータ更新を行うと、ロックが長時間保持されすぎたり ( [楽観的取引](/optimistic-transaction.md) ) します。プログラムまたはスクリプトでループを使用して操作を完了できます。
 
 </CustomContent>
 
@@ -186,7 +186,7 @@ VALUES (?, ?, ?, NOW()) ON DUPLICATE KEY UPDATE `score` = ?, `rated_at` = NOW()"
 
 前の 5 段階評価の`ratings`テーブルのデータに`2`を掛けて、行が更新されたかどうかを示す新しい列を評価テーブルに追加する必要があります。この列を使用すると、 `SELECT`で更新された行をフィルターで除外できます。これにより、スクリプトがクラッシュして行が複数回更新され、結果として不合理なデータが生成されるのを防ぐことができます。
 
-たとえば、10 点スケールかどうかの識別子として、データ型[<a href="/data-type-numeric.md#boolean-type">ブール</a>](/data-type-numeric.md#boolean-type)を使用して`ten_point`という名前の列を作成します。
+たとえば、10 点スケールかどうかの識別子として、データ型[ブール](/data-type-numeric.md#boolean-type)を使用して`ten_point`という名前の列を作成します。
 
 ```sql
 ALTER TABLE `bookshop`.`ratings` ADD COLUMN `ten_point` BOOL NOT NULL DEFAULT FALSE;
@@ -194,7 +194,7 @@ ALTER TABLE `bookshop`.`ratings` ADD COLUMN `ten_point` BOOL NOT NULL DEFAULT FA
 
 > **ノート：**
 >
-> この一括更新アプリケーションは、 **DDL**ステートメントを使用してデータ テーブルにスキーマ変更を加えます。 TiDB のすべての DDL 変更操作はオンラインで実行されます。詳細については、 [<a href="/sql-statements/sql-statement-add-column.md">列の追加</a>](/sql-statements/sql-statement-add-column.md)を参照してください。
+> この一括更新アプリケーションは、 **DDL**ステートメントを使用してデータ テーブルにスキーマ変更を加えます。 TiDB のすべての DDL 変更操作はオンラインで実行されます。詳細については、 [列の追加](/sql-statements/sql-statement-add-column.md)を参照してください。
 
 <SimpleTab groupId="language">
 <div label="Golang" value="golang">

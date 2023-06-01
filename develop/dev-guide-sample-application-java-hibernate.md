@@ -23,17 +23,17 @@ TiDB クラスターの起動方法を紹介します。
 
 **TiDB CloudServerless Tierクラスターを使用する**
 
-詳細な手順については、 [<a href="/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster">Serverless Tierクラスターの作成</a>](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
+詳細な手順については、 [Serverless Tierクラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
 
 **ローカルクラスターを使用する**
 
-詳細な手順については、 [<a href="/quick-start-with-tidb.md#deploy-a-local-test-cluster">ローカルテストクラスターをデプロイ</a>](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[<a href="/production-deployment-using-tiup.md">TiUPを使用した TiDBクラスタのデプロイ</a>](/production-deployment-using-tiup.md)を参照してください。
+詳細な手順については、 [TiUPを使用した TiDBクラスタのデプロイ](/production-deployment-using-tiup.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[<a href="/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster">Serverless Tierクラスターの作成</a>](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
+[Serverless Tierクラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
 
 </CustomContent>
 
@@ -100,7 +100,7 @@ cd plain-java-hibernate
 
 `HibernateExample.java`は`plain-java-hibernate`の本体です。 JDBC と比較して、Hibernate を使用する場合は、異なるデータベース間でのデータベース作成の差異が回避されるため、構成ファイルのパスを記述するだけで済みます。
 
-`PlayerDAO`はデータを管理するために使用されるクラスで、 `DAO` [<a href="https://en.wikipedia.org/wiki/Data_access_object">データアクセスオブジェクト</a>](https://en.wikipedia.org/wiki/Data_access_object)を意味します。このクラスは、データを書き込むための一連のデータ操作メソッドを定義します。 JDBC と比較して、Hibernate はオブジェクト マッピングや基本オブジェクトの CRUD などの多数の操作をカプセル化するため、コードが大幅に簡素化されます。
+`PlayerDAO`はデータを管理するために使用されるクラスで、 `DAO` [データアクセスオブジェクト](https://en.wikipedia.org/wiki/Data_access_object)を意味します。このクラスは、データを書き込むための一連のデータ操作メソッドを定義します。 JDBC と比較して、Hibernate はオブジェクト マッピングや基本オブジェクトの CRUD などの多数の操作をカプセル化するため、コードが大幅に簡素化されます。
 
 `PlayerBean`は、テーブルのマッピングであるデータ エンティティ クラスです。 `PlayerBean`の各プロパティは、 `player`テーブルのフィールドに対応します。 JDBC と比較すると、Hibernate `PlayerBean`では、詳細情報のマッピング関係を示す注釈が追加されています。
 
@@ -424,4 +424,4 @@ java -jar target/plain-java-jdbc-0.0.1-jar-with-dependencies.jar
 
 ## ステップ 4. 期待される出力 {#step-4-expected-output}
 
-[<a href="https://github.com/pingcap-inc/tidb-example-java/blob/main/Expected-Output.md#plain-java-hibernate">Hibernate の予想される出力</a>](https://github.com/pingcap-inc/tidb-example-java/blob/main/Expected-Output.md#plain-java-hibernate)
+[Hibernate の予想される出力](https://github.com/pingcap-inc/tidb-example-java/blob/main/Expected-Output.md#plain-java-hibernate)

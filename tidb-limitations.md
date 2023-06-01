@@ -45,8 +45,8 @@ summary: Learn the usage limitations of TiDB.
 
 <CustomContent platform="tidb">
 
--   上限`Columns`は[<a href="/tidb-configuration-file.md#table-column-count-limit-new-in-v50">`table-column-count-limit`</a>](/tidb-configuration-file.md#table-column-count-limit-new-in-v50)によって変更できます。
--   上限`Indexes`は[<a href="/tidb-configuration-file.md#index-limit-new-in-v50">`index-limit`</a>](/tidb-configuration-file.md#index-limit-new-in-v50)によって変更できます。
+-   上限`Columns`は[`table-column-count-limit`](/tidb-configuration-file.md#table-column-count-limit-new-in-v50)によって変更できます。
+-   上限`Indexes`は[`index-limit`](/tidb-configuration-file.md#index-limit-new-in-v50)によって変更できます。
 
 </CustomContent>
 
@@ -58,7 +58,7 @@ summary: Learn the usage limitations of TiDB.
 
 <CustomContent platform="tidb">
 
-[<a href="/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50">`txn-entry-size-limit`</a>](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50)設定項目でサイズ制限を調整できます。
+[`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50)設定項目でサイズ制限を調整できます。
 
 </CustomContent>
 
@@ -70,7 +70,7 @@ summary: Learn the usage limitations of TiDB.
 
 <CustomContent platform="tidb">
 
-[<a href="/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50">`txn-entry-size-limit`</a>](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50)設定項目でサイズ制限を調整できます。
+[`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50)設定項目でサイズ制限を調整できます。
 
 </CustomContent>
 
@@ -93,7 +93,7 @@ summary: Learn the usage limitations of TiDB.
 
 <CustomContent platform="tidb">
 
-[<a href="/tidb-configuration-file.md#stmt-count-limit">`stmt-count-limit`</a>](/tidb-configuration-file.md#stmt-count-limit)設定項目を使用して制限を変更できます。
+[`stmt-count-limit`](/tidb-configuration-file.md#stmt-count-limit)設定項目を使用して制限を変更できます。
 
 </CustomContent>
 

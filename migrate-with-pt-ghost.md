@@ -5,16 +5,16 @@ summary: Learn how to use DM to replicate incremental data from databases that u
 
 # gh-ost または pt-osc を使用するデータベースからの連続レプリケーション {#continuous-replication-from-databases-that-use-gh-ost-or-pt-osc}
 
-本番シナリオでは、DDL 実行中のテーブル ロックにより、データベースへの読み取りまたは書き込みがある程度ブロックされる可能性があります。したがって、読み取りと書き込みへの影響を最小限に抑えるために、オンライン DDL ツールを使用して DDL を実行することがよくあります。一般的な DDL ツールは[<a href="https://github.com/github/gh-ost">おばけ</a>](https://github.com/github/gh-ost)と[<a href="https://www.percona.com/doc/percona-toolkit/3.0/pt-online-schema-change.html">pt-osc</a>](https://www.percona.com/doc/percona-toolkit/3.0/pt-online-schema-change.html)です。
+本番シナリオでは、DDL 実行中のテーブル ロックにより、データベースへの読み取りまたは書き込みがある程度ブロックされる可能性があります。したがって、読み取りと書き込みへの影響を最小限に抑えるために、オンライン DDL ツールを使用して DDL を実行することがよくあります。一般的な DDL ツールは[pt-osc](https://www.percona.com/doc/percona-toolkit/3.0/pt-online-schema-change.html)です。
 
 DM を使用して MySQL から TiDB にデータを移行する場合、 `online-ddl`有効にして DM と gh-ost または pt-osc のコラボレーションを許可できます。
 
 レプリケーション手順の詳細については、シナリオごとに次のドキュメントを参照してください。
 
--   [<a href="/migrate-small-mysql-to-tidb.md">小規模なデータセットの MySQL を TiDB に移行する</a>](/migrate-small-mysql-to-tidb.md)
--   [<a href="/migrate-large-mysql-to-tidb.md">大規模なデータセットの MySQL を TiDB に移行する</a>](/migrate-large-mysql-to-tidb.md)
--   [<a href="/migrate-small-mysql-shards-to-tidb.md">小規模なデータセットの MySQL シャードを TiDB に移行およびマージする</a>](/migrate-small-mysql-shards-to-tidb.md)
--   [<a href="/migrate-large-mysql-shards-to-tidb.md">大規模なデータセットの MySQL シャードを TiDB に移行およびマージする</a>](/migrate-large-mysql-shards-to-tidb.md)
+-   [小規模なデータセットの MySQL を TiDB に移行する](/migrate-small-mysql-to-tidb.md)
+-   [大規模なデータセットの MySQL を TiDB に移行する](/migrate-large-mysql-to-tidb.md)
+-   [小規模なデータセットの MySQL シャードを TiDB に移行およびマージする](/migrate-small-mysql-shards-to-tidb.md)
+-   [大規模なデータセットの MySQL シャードを TiDB に移行およびマージする](/migrate-large-mysql-shards-to-tidb.md)
 
 ## DM で online-ddl を有効にする {#enable-online-ddl-on-dm}
 
@@ -64,4 +64,4 @@ DMのワークフロー:
 
 ## こちらも参照 {#see-also}
 
-[<a href="/dm/feature-online-ddl.md#working-details-for-dm-with-online-ddl-tools">オンライン DDL ツールを使用した DM の動作の詳細</a>](/dm/feature-online-ddl.md#working-details-for-dm-with-online-ddl-tools)
+[オンライン DDL ツールを使用した DM の動作の詳細](/dm/feature-online-ddl.md#working-details-for-dm-with-online-ddl-tools)

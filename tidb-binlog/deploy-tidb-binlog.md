@@ -5,7 +5,7 @@ summary: Learn how to deploy TiDB Binlog cluster.
 
 # TiDBBinlogクラスタの展開 {#tidb-binlog-cluster-deployment}
 
-このドキュメントでは、 [<a href="#deploy-tidb-binlog-using-a-binary-package">バイナリ パッケージを使用して TiDB Binlogをデプロイする</a>](#deploy-tidb-binlog-using-a-binary-package)方法について説明します。
+このドキュメントでは、 [バイナリ パッケージを使用して TiDB Binlogをデプロイする](#deploy-tidb-binlog-using-a-binary-package)方法について説明します。
 
 ## ハードウェア要件 {#hardware-requirements}
 
@@ -20,13 +20,13 @@ PumpとDrainer は、 Intel x86-64アーキテクチャを備えた 64 ビット
 
 ## TiUP を使用して TiDB Binlogをデプロイ {#deploy-tidb-binlog-using-tiup}
 
-TiUP を使用して TiDB Binlogを展開することをお勧めします。そのためには、 TiUPを使用して TiDB をデプロイするときに、 [<a href="/tidb-binlog-deployment-topology.md">TiDBBinlog展開トポロジ</a>](/tidb-binlog-deployment-topology.md)に TiDB Binlogの`drainer`と`pump`のノード情報を追加する必要があります。導入の詳細については、 [<a href="/production-deployment-using-tiup.md">TiUPを使用した TiDBクラスタのデプロイ</a>](/production-deployment-using-tiup.md)を参照してください。
+TiUP を使用して TiDB Binlogを展開することをお勧めします。そのためには、 TiUPを使用して TiDB をデプロイするときに、 [TiUPを使用した TiDBクラスタのデプロイ](/production-deployment-using-tiup.md)を参照してください。
 
 ## バイナリ パッケージを使用して TiDB Binlogをデプロイ {#deploy-tidb-binlog-using-a-binary-package}
 
 ### 公式バイナリパッケージをダウンロードする {#download-the-official-binary-package}
 
-TiDB Binlogのバイナリ パッケージはTiDB Toolkitに含まれています。 TiDB Toolkitをダウンロードするには、 [<a href="/download-ecosystem-tools.md">TiDB ツールをダウンロード</a>](/download-ecosystem-tools.md)を参照してください。
+TiDB Binlogのバイナリ パッケージはTiDB Toolkitに含まれています。 TiDB Toolkitをダウンロードするには、 [TiDB ツールをダウンロード](/download-ecosystem-tools.md)を参照してください。
 
 ### 使用例 {#the-usage-example}
 
@@ -383,4 +383,4 @@ TiDB Binlogのバイナリ パッケージはTiDB Toolkitに含まれていま�
 > -   Drainer は、 `ignore schemas`のテーブル (フィルター リスト内のスキーマ) に対する`rename` DDL 操作をサポートしていません。
 > -   既存の TiDB クラスターでDrainerを開始する場合は、通常、クラスター データの完全バックアップを作成し、スナップショット**のタイムスタンプを**取得し、データをターゲット データベースにインポートしてから、 Drainer を開始して、対応する**スナップショット**から増分データをレプリケートする必要があります。**タイムスタンプ**。
 > -   ダウンストリーム データベースが TiDB または MySQL の場合、アップストリーム データベースとダウンストリーム データベースの`sql_mode`が一致していることを確認してください。つまり、各 SQL ステートメントがアップストリームで実行され、ダウンストリームにレプリケートされるとき、 `sql_mode`は同じである必要があります。アップストリームとダウンストリームでそれぞれ`select @@sql_mode;`ステートメントを実行して、 `sql_mode`を比較できます。
-> -   DDL ステートメントがアップストリームでサポートされているが、ダウンストリームと互換性がない場合、 Drainer はデータのレプリケートに失敗します。例としては、ダウンストリーム データベース MySQL が InnoDB エンジンを使用する場合に`CREATE TABLE t1(a INT) ROW_FORMAT=FIXED;`ステートメントを複製することが挙げられます。この場合、 Drainerで[<a href="/tidb-binlog/tidb-binlog-faq.md#what-can-i-do-when-some-ddl-statements-supported-by-the-upstream-database-cause-error-when-executed-in-the-downstream-database">トランザクションをスキップする</a>](/tidb-binlog/tidb-binlog-faq.md#what-can-i-do-when-some-ddl-statements-supported-by-the-upstream-database-cause-error-when-executed-in-the-downstream-database)構成し、ダウンストリーム データベースで互換性のあるステートメントを手動で実行できます。
+> -   DDL ステートメントがアップストリームでサポートされているが、ダウンストリームと互換性がない場合、 Drainer はデータのレプリケートに失敗します。例としては、ダウンストリーム データベース MySQL が InnoDB エンジンを使用する場合に`CREATE TABLE t1(a INT) ROW_FORMAT=FIXED;`ステートメントを複製することが挙げられます。この場合、 Drainerで[トランザクションをスキップする](/tidb-binlog/tidb-binlog-faq.md#what-can-i-do-when-some-ddl-statements-supported-by-the-upstream-database-cause-error-when-executed-in-the-downstream-database)構成し、ダウンストリーム データベースで互換性のあるステートメントを手動で実行できます。

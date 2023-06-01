@@ -23,17 +23,17 @@ TiDB クラスターの起動方法を紹介します。
 
 **TiDB CloudServerless Tierクラスターを使用する**
 
-詳細な手順については、 [<a href="/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster">Serverless Tierクラスターの作成</a>](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
+詳細な手順については、 [Serverless Tierクラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
 
 **ローカルクラスターを使用する**
 
-詳細な手順については、 [<a href="/quick-start-with-tidb.md#deploy-a-local-test-cluster">ローカルテストクラスターをデプロイ</a>](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[<a href="/production-deployment-using-tiup.md">TiUPを使用した TiDBクラスタのデプロイ</a>](/production-deployment-using-tiup.md)を参照してください。
+詳細な手順については、 [TiUPを使用した TiDBクラスタのデプロイ](/production-deployment-using-tiup.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[<a href="/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster">Serverless Tierクラスターの作成</a>](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
+[Serverless Tierクラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
 
 </CustomContent>
 
@@ -82,7 +82,7 @@ CREATE TABLE player (
 
 `JDBCExample.java`は`plain-java-jdbc`の本体です。 TiDB は MySQL プロトコルと高い互換性があるため、TiDB に接続するには MySQL ソース インスタンス`MysqlDataSource`を初期化する必要があります。次に、オブジェクト管理用に`PlayerDAO`初期化し、それを使用してデータの読み取り、編集、追加、削除を行うことができます。
 
-`PlayerDAO`はデータを管理するために使用されるクラスで、 `DAO` [<a href="https://en.wikipedia.org/wiki/Data_access_object">データアクセスオブジェクト</a>](https://en.wikipedia.org/wiki/Data_access_object)を意味します。このクラスは、データを書き込む機能を提供する一連のデータ操作メソッドを定義します。
+`PlayerDAO`はデータを管理するために使用されるクラスで、 `DAO` [データアクセスオブジェクト](https://en.wikipedia.org/wiki/Data_access_object)を意味します。このクラスは、データを書き込む機能を提供する一連のデータ操作メソッドを定義します。
 
 `PlayerBean`は、テーブルのマッピングであるデータ エンティティ クラスです。 `PlayerBean`の各プロパティは、 `player`テーブルのフィールドに対応します。
 
@@ -589,4 +589,4 @@ java -jar target/plain-java-jdbc-0.0.1-jar-with-dependencies.jar
 
 ## ステップ 4. 期待される出力 {#step-4-expected-output}
 
-[<a href="https://github.com/pingcap-inc/tidb-example-java/blob/main/Expected-Output.md#plain-java-jdbc">JDBC の予期される出力</a>](https://github.com/pingcap-inc/tidb-example-java/blob/main/Expected-Output.md#plain-java-jdbc)
+[JDBC の予期される出力](https://github.com/pingcap-inc/tidb-example-java/blob/main/Expected-Output.md#plain-java-jdbc)

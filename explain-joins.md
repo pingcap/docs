@@ -43,7 +43,7 @@ ANALYZE TABLE t1, t2;
 
 > **ノート：**
 >
-> 返された実行プランでは、 `IndexJoin`および`Apply`演算子のすべてのプローブ側子ノードについて、v6.4.0 以降の`estRows`の意味は v6.4.0 以前とは異なります。詳細については、 [<a href="/explain-overview.md#understand-explain-output">TiDB クエリ実行計画の概要</a>](/explain-overview.md#understand-explain-output)を参照してください。
+> 返された実行プランでは、 `IndexJoin`および`Apply`演算子のすべてのプローブ側子ノードについて、v6.4.0 以降の`estRows`の意味は v6.4.0 以前とは異なります。詳細については、 [TiDB クエリ実行計画の概要](/explain-overview.md#understand-explain-output)を参照してください。
 
 {{< copyable "" >}}
 
@@ -169,18 +169,18 @@ EXPLAIN ANALYZE SELECT * FROM t1 INNER JOIN t2 ON t1.id = t2.t1_id WHERE t1.int_
 
 > **ノート：**
 >
-> 上記の例では、SQL オプティマイザーはインデックス結合よりもパフォーマンスの悪いハッシュ結合プランを選択します。クエリの最適化は[<a href="https://en.wikipedia.org/wiki/NP-completeness">NP完全問題</a>](https://en.wikipedia.org/wiki/NP-completeness)であり、最適とはいえないプランが選択される可能性があります。これが頻繁なクエリの場合は、 [<a href="/sql-plan-management.md">SQL計画管理</a>](/sql-plan-management.md)使用してヒントをクエリにバインドすることをお勧めします。これは、アプリケーションが TiDB に送信するクエリにヒントを挿入するよりも管理が簡単です。
+> 上記の例では、SQL オプティマイザーはインデックス結合よりもパフォーマンスの悪いハッシュ結合プランを選択します。クエリの最適化は[SQL計画管理](/sql-plan-management.md)使用してヒントをクエリにバインドすることをお勧めします。これは、アプリケーションが TiDB に送信するクエリにヒントを挿入するよりも管理が簡単です。
 
 ### インデックス結合のバリエーション {#variations-of-index-join}
 
-ヒント[<a href="/optimizer-hints.md#inl_joint1_name--tl_name-">`INL_JOIN`</a>](/optimizer-hints.md#inl_joint1_name--tl_name-)を使用したインデックス結合操作では、外部表に結合する前に中間結果のハッシュ テーブルが作成されます。 TiDB は、ヒント[<a href="/optimizer-hints.md#inl_hash_join">`INL_HASH_JOIN`</a>](/optimizer-hints.md#inl_hash_join)を使用した外部テーブルでのハッシュ テーブルの作成もサポートしています。これらのインデックス結合の各バリエーションは、SQL オプティマイザーによって自動的に選択されます。
+ヒント[`INL_HASH_JOIN`](/optimizer-hints.md#inl_hash_join)を使用した外部テーブルでのハッシュ テーブルの作成もサポートしています。これらのインデックス結合の各バリエーションは、SQL オプティマイザーによって自動的に選択されます。
 
 ### コンフィグレーション {#configuration}
 
 インデックス結合のパフォーマンスは、次のシステム変数の影響を受けます。
 
--   [<a href="/system-variables.md#tidb_index_join_batch_size">`tidb_index_join_batch_size`</a>](/system-variables.md#tidb_index_join_batch_size) (デフォルト値: `25000` ) - `index lookup join`の操作のバッチ サイズ。
--   [<a href="/system-variables.md#tidb_index_lookup_join_concurrency">`tidb_index_lookup_join_concurrency`</a>](/system-variables.md#tidb_index_lookup_join_concurrency) (デフォルト値: `4` ) - 同時インデックス検索タスクの数。
+-   [`tidb_index_join_batch_size`](/system-variables.md#tidb_index_join_batch_size) (デフォルト値: `25000` ) - `index lookup join`の操作のバッチ サイズ。
+-   [`tidb_index_lookup_join_concurrency`](/system-variables.md#tidb_index_lookup_join_concurrency) (デフォルト値: `4` ) - 同時インデックス検索タスクの数。
 
 ## ハッシュ結合 {#hash-join}
 
@@ -219,7 +219,7 @@ EXPLAIN SELECT /*+ HASH_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 
 ### 実行時の統計 {#runtime-statistics}
 
-[<a href="/system-variables.md#tidb_mem_quota_query">`tidb_mem_quota_query`</a>](/system-variables.md#tidb_mem_quota_query) (デフォルト値: 1 GB) を超え、 [<a href="/system-variables.md#tidb_enable_tmp_storage_on_oom">`tidb_enable_tmp_storage_on_oom`</a>](/system-variables.md#tidb_enable_tmp_storage_on_oom)値が`ON` (デフォルト) の場合、TiDB は一時storageの使用を試み、ディスク上に`Build`演算子 (ハッシュ結合の一部として使用) を作成する可能性があります。メモリ使用量などの実行時の統計は、 `EXPLAIN ANALYZE`中`execution info`の結果テーブルに記録されます。次の例は、 1 GB (デフォルト) と`tidb_mem_quota_query`の 500 MB クォータを備えた`EXPLAIN ANALYZE`の出力を示しています。 500 MB では、ディスクが一時storageとして使用されます。
+[`tidb_enable_tmp_storage_on_oom`](/system-variables.md#tidb_enable_tmp_storage_on_oom)値が`ON` (デフォルト) の場合、TiDB は一時storageの使用を試み、ディスク上に`Build`演算子 (ハッシュ結合の一部として使用) を作成する可能性があります。メモリ使用量などの実行時の統計は、 `EXPLAIN ANALYZE`中`execution info`の結果テーブルに記録されます。次の例は、 1 GB (デフォルト) と`tidb_mem_quota_query`の 500 MB クォータを備えた`EXPLAIN ANALYZE`の出力を示しています。 500 MB では、ディスクが一時storageとして使用されます。
 
 ```sql
 EXPLAIN ANALYZE SELECT /*+ HASH_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
@@ -257,8 +257,8 @@ Query OK, 0 rows affected (0.00 sec)
 
 ハッシュ結合のパフォーマンスは、次のシステム変数の影響を受けます。
 
--   [<a href="/system-variables.md#tidb_mem_quota_query">`tidb_mem_quota_query`</a>](/system-variables.md#tidb_mem_quota_query) (デフォルト値: 1GB) - クエリのメモリ割り当てを超過した場合、TiDB はメモリを節約するためにハッシュ結合の`Build`演算子をディスクにスピルしようとします。
--   [<a href="/system-variables.md#tidb_hash_join_concurrency">`tidb_hash_join_concurrency`</a>](/system-variables.md#tidb_hash_join_concurrency) (デフォルト値: `5` ) - 同時ハッシュ結合タスクの数。
+-   [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) (デフォルト値: 1GB) - クエリのメモリ割り当てを超過した場合、TiDB はメモリを節約するためにハッシュ結合の`Build`演算子をディスクにスピルしようとします。
+-   [`tidb_hash_join_concurrency`](/system-variables.md#tidb_hash_join_concurrency) (デフォルト値: `5` ) - 同時ハッシュ結合タスクの数。
 
 ## マージ結合 {#merge-join}
 

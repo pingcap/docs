@@ -57,7 +57,7 @@ Query OK, 0 rows affected (0.08 sec)
 
 ## キーワードリスト {#keyword-list}
 
-TiDB のキーワードを次のリストに示します。予約されたキーワードには`(R)`マークが付けられます。 [<a href="/functions-and-operators/window-functions.md">ウィンドウ関数</a>](/functions-and-operators/window-functions.md)の予約キーワードには`(R-Window)`マークが付いています。バッククォート`` ` ``でエスケープする必要がある特別な予約されていないキーワードは、 `(S)`でマークされます。
+TiDB のキーワードを次のリストに示します。予約されたキーワードには`(R)`マークが付けられます。 [ウィンドウ関数](/functions-and-operators/window-functions.md)の予約キーワードには`(R-Window)`マークが付いています。バッククォート`` ` ``でエスケープする必要がある特別な予約されていないキーワードは、 `(S)`でマークされます。
 
 <TabsPanel letters="ABCDEFGHIJKLMNOPQRSTUVWXYZ" />
 

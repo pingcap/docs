@@ -5,7 +5,7 @@ summary: An overview of the usage of Split Region for the TiDB database.
 
 # 分割リージョン {#split-region}
 
-TiDB で作成された新しいテーブルごとに、デフォルトで 1 つの[<a href="/tidb-storage.md#region">リージョン</a>](/tidb-storage.md#region)がセグメント化され、このテーブルのデータが保存されます。このデフォルトの動作は、TiDB 構成ファイルの`split-table`によって制御されます。このリージョン内のデータがデフォルトのリージョンサイズ制限を超えると、リージョンは2 つに分割され始めます。
+TiDB で作成された新しいテーブルごとに、デフォルトで 1 つの[リージョン](/tidb-storage.md#region)がセグメント化され、このテーブルのデータが保存されます。このデフォルトの動作は、TiDB 構成ファイルの`split-table`によって制御されます。このリージョン内のデータがデフォルトのリージョンサイズ制限を超えると、リージョンは2 つに分割され始めます。
 
 上記の場合、最初にリージョンが1 つだけあるため、すべての書き込みリクエストはそのリージョンが配置されている TiKV 上で発生します。新しく作成したテーブルに対して大量の書き込みが行われると、ホットスポットが発生します。
 
@@ -225,7 +225,7 @@ SPLIT TABLE t INDEX idx3 BETWEEN ("2010-01-01 00:00:00", "a") AND ("2010-01-01 0
 
 このステートメントは、列 b の値に従って、列 a と同じ時間プレフィックスを使用して、a ～ z の範囲の 10 個のリージョンを分割します。列 a に指定された値が異なる場合、この場合、列 b の値は使用されない可能性があります。
 
-テーブルの主キーが[<a href="/clustered-indexes.md">非クラスター化インデックス</a>](/clustered-indexes.md)の場合、リージョンを分割するときにバッククォート`` ` ``使用して`PRIMARY`キーワードをエスケープする必要があります。例えば：
+テーブルの主キーが[非クラスター化インデックス](/clustered-indexes.md)の場合、リージョンを分割するときにバッククォート`` ` ``使用して`PRIMARY`キーワードをエスケープする必要があります。例えば：
 
 ```sql
 SPLIT TABLE t INDEX `PRIMARY` BETWEEN (-9223372036854775808) AND (9223372036854775807) REGIONS 16;
@@ -311,7 +311,7 @@ region4  [("c", "")                    , maxIndexValue               )
 
     > **ノート：**
     >
-    > この例は、ホットスポット データが均等に分散されているシナリオにのみ適用されます。ホットスポット データが指定されたデータ範囲内で不均等に分散している場合は、 [<a href="#split-regions-for-partitioned-tables">パーティション化されたテーブルの分割リージョン</a>](#split-regions-for-partitioned-tables)の不均等な分割の構文を参照してください。
+    > この例は、ホットスポット データが均等に分散されているシナリオにのみ適用されます。ホットスポット データが指定されたデータ範囲内で不均等に分散している場合は、 [パーティション化されたテーブルの分割リージョン](#split-regions-for-partitioned-tables)の不均等な分割の構文を参照してください。
 
 3.  このテーブルのリージョンを再度表示するには、 `SHOW TABLE REGIONS`構文を使用します。このテーブルには 10 個のリージョンがあり、各パーティションには 5 つのリージョンがあり、そのうち 4 つは行データ、1 つはインデックス データであることがわかります。
 
@@ -438,7 +438,7 @@ region4:   [ 3<<61     ,  +inf  )
 
 > **ノート：**
 >
-> Split リージョンステートメントによって分割されたリージョンは、PD の[<a href="/best-practices/pd-scheduling-best-practices.md#region-merge">リージョンのマージ</a>](/best-practices/pd-scheduling-best-practices.md#region-merge)スケジューラによって制御されます。 PD が新しく分割されたリージョンをすぐに再マージしないようにするには、リージョンのマージ機能に関連する[<a href="/pd-control.md">動的に変更する</a>](/pd-control.md)設定項目を行う必要があります。
+> Split リージョンステートメントによって分割されたリージョンは、PD の[動的に変更する](/pd-control.md)設定項目を行う必要があります。
 
 </CustomContent>
 
@@ -448,5 +448,5 @@ region4:   [ 3<<61     ,  +inf  )
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-show-table-regions.md">テーブル領域を表示</a>](/sql-statements/sql-statement-show-table-regions.md)
--   セッション変数: [<a href="/system-variables.md#tidb_scatter_region">`tidb_scatter_region`</a>](/system-variables.md#tidb_scatter_region) 、 [<a href="/system-variables.md#tidb_wait_split_region_finish">`tidb_wait_split_region_finish`</a>](/system-variables.md#tidb_wait_split_region_finish) 、および[<a href="/system-variables.md#tidb_wait_split_region_timeout">`tidb_wait_split_region_timeout`</a>](/system-variables.md#tidb_wait_split_region_timeout) 。
+-   [テーブル領域を表示](/sql-statements/sql-statement-show-table-regions.md)
+-   セッション変数: [`tidb_wait_split_region_timeout`](/system-variables.md#tidb_wait_split_region_timeout) 。

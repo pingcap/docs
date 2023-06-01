@@ -109,13 +109,13 @@ SHOW COLLATION;
 
 > **警告：**
 >
-> TiDB は、latin1 を utf8 のサブセットとして誤って扱います。これにより、latin1 エンコーディングと utf8 エンコーディングの間で異なる文字を保存すると、予期しない動作が発生する可能性があります。 utf8mb4 文字セットを強く推奨します。詳細については[<a href="https://github.com/pingcap/tidb/issues/18955">TiDB #18955</a>](https://github.com/pingcap/tidb/issues/18955)参照してください。
+> TiDB は、latin1 を utf8 のサブセットとして誤って扱います。これにより、latin1 エンコーディングと utf8 エンコーディングの間で異なる文字を保存すると、予期しない動作が発生する可能性があります。 utf8mb4 文字セットを強く推奨します。詳細については[TiDB #18955](https://github.com/pingcap/tidb/issues/18955)参照してください。
 
 > **ノート：**
 >
-> TiDB のデフォルトの照合順序 (サフィックス`_bin`が付くバイナリ照合順序) は、 [<a href="https://dev.mysql.com/doc/refman/8.0/en/charset-charsets.html">MySQL のデフォルトの照合順序</a>](https://dev.mysql.com/doc/refman/8.0/en/charset-charsets.html) (通常はサフィックス`_general_ci`が付く一般照合順序) とは異なります。これにより、明示的な文字セットを指定しているが、暗黙的なデフォルト照合順序の選択に依存している場合、互換性のない動作が発生する可能性があります。
+> TiDB のデフォルトの照合順序 (サフィックス`_bin`が付くバイナリ照合順序) は、 [MySQL のデフォルトの照合順序](https://dev.mysql.com/doc/refman/8.0/en/charset-charsets.html) (通常はサフィックス`_general_ci`が付く一般照合順序) とは異なります。これにより、明示的な文字セットを指定しているが、暗黙的なデフォルト照合順序の選択に依存している場合、互換性のない動作が発生する可能性があります。
 
-次のステートメントを使用すると、文字セットに対応する照合順序 ( [<a href="#new-framework-for-collations">照合順序の新しいフレームワーク</a>](#new-framework-for-collations)の下) を表示できます。
+次のステートメントを使用すると、文字セットに対応する照合順序 ( [照合順序の新しいフレームワーク](#new-framework-for-collations)の下) を表示できます。
 
 {{< copyable "" >}}
 
@@ -134,13 +134,13 @@ SHOW COLLATION WHERE Charset = 'utf8mb4';
 3 rows in set (0.00 sec)
 ```
 
-TiDB による GBK 文字セットのサポートの詳細については、 [<a href="/character-set-gbk.md">GBK</a>](/character-set-gbk.md)を参照してください。
+TiDB による GBK 文字セットのサポートの詳細については、 [GBK](/character-set-gbk.md)を参照してください。
 
 ## TiDB の<code>utf8</code>と<code>utf8mb4</code> {#code-utf8-code-and-code-utf8mb4-code-in-tidb}
 
 MySQL では、文字セット`utf8`は最大 3 バイトに制限されています。これは、Basic Multilingual Plane (BMP) に文字を保存するには十分ですが、絵文字などの文字を保存するには十分ではありません。この場合、代わりに文字セット`utf8mb4`を使用することをお勧めします。
 
-デフォルトでは、TiDB は文字セット`utf8`を最大 3 バイトに制限し、TiDB で作成されたデータを MySQL で安全に復元できるようにします。システム変数[<a href="/system-variables.md#tidb_check_mb4_value_in_utf8">`tidb_check_mb4_value_in_utf8`</a>](/system-variables.md#tidb_check_mb4_value_in_utf8)の値を`OFF`に変更することで無効にできます。
+デフォルトでは、TiDB は文字セット`utf8`を最大 3 バイトに制限し、TiDB で作成されたデータを MySQL で安全に復元できるようにします。システム変数[`tidb_check_mb4_value_in_utf8`](/system-variables.md#tidb_check_mb4_value_in_utf8)の値を`OFF`に変更することで無効にできます。
 
 以下は、表に 4 バイトの絵文字を挿入するときのデフォルトの動作を示しています。 `INSERT`ステートメントは`utf8`文字セットでは失敗しますが、 `utf8mb4`では成功します。
 
@@ -433,13 +433,13 @@ SELECT _utf8mb4'string' COLLATE utf8mb4_general_ci;
 
 <CustomContent platform="tidb">
 
-照合照合順序の構文サポートとセマンティック サポートは、 [<a href="/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap">`new_collations_enabled_on_first_bootstrap`</a>](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)構成項目の影響を受けます。構文サポートとセマンティック サポートは異なります。前者は、TiDB が解析および照合順序の設定ができることを示します。後者は、TiDB が文字列を比較するときに照合順序を正しく使用できることを示しています。
+照合照合順序の構文サポートとセマンティック サポートは、 [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)構成項目の影響を受けます。構文サポートとセマンティック サポートは異なります。前者は、TiDB が解析および照合順序の設定ができることを示します。後者は、TiDB が文字列を比較するときに照合順序を正しく使用できることを示しています。
 
 </CustomContent>
 
-v4.0 より前では、TiDB は[<a href="#old-framework-for-collations">照合順序の古いフレームワーク</a>](#old-framework-for-collations)のみを提供していました。このフレームワークでは、TiDB はほとんどの MySQL 照合順序の構文解析をサポートしていますが、意味的にはすべての照合順序をバイナリ照合順序として受け取ります。
+v4.0 より前では、TiDB は[照合順序の古いフレームワーク](#old-framework-for-collations)のみを提供していました。このフレームワークでは、TiDB はほとんどの MySQL 照合順序の構文解析をサポートしていますが、意味的にはすべての照合順序をバイナリ照合順序として受け取ります。
 
-v4.0 以降、TiDB は[<a href="#new-framework-for-collations">照合順序の新しいフレームワーク</a>](#new-framework-for-collations)をサポートします。このフレームワークでは、TiDB はさまざまな照合順序を意味的に解析し、文字列を比較するときに照合順序に厳密に従います。
+v4.0 以降、TiDB は[照合順序の新しいフレームワーク](#new-framework-for-collations)をサポートします。このフレームワークでは、TiDB はさまざまな照合順序を意味的に解析し、文字列を比較するときに照合順序に厳密に従います。
 
 ### 照合順序の古いフレームワーク {#old-framework-for-collations}
 
@@ -489,7 +489,7 @@ TiDB v4.0 以降、照合順序のための完全なフレームワークが導�
 
 <CustomContent platform="tidb">
 
-この新しいフレームワークは、セマンティックな照合順序の解析をサポートし、クラスターの最初の初期化時に新しいフレームワークを有効にするかどうかを決定する`new_collations_enabled_on_first_bootstrap`構成項目を導入します。新しいフレームワークを有効にするには、 `new_collations_enabled_on_first_bootstrap` ～ `true`を設定します。詳細は[<a href="/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap">`new_collations_enabled_on_first_bootstrap`</a>](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)を参照してください。構成項目が有効になった後にクラスターを初期化すると、 `mysql`の`new_collation_enabled`変数を通じて新しい照合順序が有効になっているかどうかを確認できます。 `tidb`テーブル:
+この新しいフレームワークは、セマンティックな照合順序の解析をサポートし、クラスターの最初の初期化時に新しいフレームワークを有効にするかどうかを決定する`new_collations_enabled_on_first_bootstrap`構成項目を導入します。新しいフレームワークを有効にするには、 `new_collations_enabled_on_first_bootstrap` ～ `true`を設定します。詳細は[`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)を参照してください。構成項目が有効になった後にクラスターを初期化すると、 `mysql`の`new_collation_enabled`変数を通じて新しい照合順序が有効になっているかどうかを確認できます。 `tidb`テーブル:
 
 {{< copyable "" >}}
 
@@ -596,4 +596,4 @@ SELECT 'a' = _utf8mb4 'A' collate utf8mb4_general_ci;
 1 row in set (0.00 sec)
 ```
 
-詳細については、 [<a href="https://dev.mysql.com/doc/refman/5.7/en/charset-connection.html">接続文字セットと照合順序</a>](https://dev.mysql.com/doc/refman/5.7/en/charset-connection.html)を参照してください。
+詳細については、 [接続文字セットと照合順序](https://dev.mysql.com/doc/refman/5.7/en/charset-connection.html)を参照してください。

@@ -67,7 +67,7 @@ TiDB Cloudでは、次のページからクラスターの一般的に使用さ�
 
 クラスターの概要ページでメトリックを表示するには、次の手順を実行します。
 
-1.  [<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページに移動します。
+1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
 
 2.  ターゲット プロジェクトを選択し、クラスターの名前をクリックしてクラスターの概要ページに移動します。
 
@@ -77,11 +77,11 @@ TiDB Cloudでは、次のページからクラスターの一般的に使用さ�
 
 > **ノート：**
 >
-> 現在、クラスター監視ページは[<a href="/tidb-cloud/select-cluster-tier.md#serverless-tier-beta">Serverless Tierクラスター</a>](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)では利用できません。
+> 現在、クラスター監視ページは[Serverless Tierクラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)では利用できません。
 
 クラスター監視ページでメトリックを表示するには、次の手順を実行します。
 
-1.  対象プロジェクトの[<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページで、対象クラスタ名をクリックします。クラスターの概要ページが表示されます。
+1.  対象プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページで、対象クラスタ名をクリックします。クラスターの概要ページが表示されます。
 2.  左側のナビゲーション ペインで**[監視]**をクリックします。
 
-詳細については、 [<a href="/tidb-cloud/built-in-monitoring.md">内蔵モニタリング</a>](/tidb-cloud/built-in-monitoring.md)を参照してください。
+詳細については、 [内蔵モニタリング](/tidb-cloud/built-in-monitoring.md)を参照してください。

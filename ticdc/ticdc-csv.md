@@ -37,7 +37,7 @@ include-commit-ts = true
 
 ## データstorageパス構造 {#data-storage-path-structure}
 
-データのstorageパス構造の詳細については、 [<a href="/ticdc/ticdc-sink-to-cloud-storage.md#storage-path-structure">ストレージパス構造</a>](/ticdc/ticdc-sink-to-cloud-storage.md#storage-path-structure)を参照してください。
+データのstorageパス構造の詳細については、 [ストレージパス構造](/ticdc/ticdc-sink-to-cloud-storage.md#storage-path-structure)を参照してください。
 
 ## データフォーマットの定義 {#definition-of-the-data-format}
 

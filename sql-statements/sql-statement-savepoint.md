@@ -16,7 +16,7 @@ RELEASE SAVEPOINT identifier
 > **警告：**
 >
 > -   TiDB Binlogが有効な場合は`SAVEPOINT`を使用できません。
-> -   [<a href="/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630">`tidb_constraint_check_in_place_pessimistic`</a>](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630)が無効になっている場合、悲観的トランザクションで`SAVEPOINT`を使用することはできません。
+> -   [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630)が無効になっている場合、悲観的トランザクションで`SAVEPOINT`を使用することはできません。
 
 -   `SAVEPOINT`は、現在のトランザクションに指定された名前のセーブポイントを設定するために使用されます。同名のセーブポイントがすでに存在する場合は削除され、新たに同名のセーブポイントが設定されます。
 
@@ -143,8 +143,8 @@ SELECT * FROM t1;
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-commit.md">専念</a>](/sql-statements/sql-statement-commit.md)
--   [<a href="/sql-statements/sql-statement-rollback.md">ロールバック</a>](/sql-statements/sql-statement-rollback.md)
--   [<a href="/sql-statements/sql-statement-start-transaction.md">取引を開始する</a>](/sql-statements/sql-statement-start-transaction.md)
--   [<a href="/optimistic-transaction.md">TiDB オプティミスティックトランザクションモード</a>](/optimistic-transaction.md)
--   [<a href="/pessimistic-transaction.md">TiDB ペシミスティックトランザクションモード</a>](/pessimistic-transaction.md)
+-   [専念](/sql-statements/sql-statement-commit.md)
+-   [ロールバック](/sql-statements/sql-statement-rollback.md)
+-   [取引を開始する](/sql-statements/sql-statement-start-transaction.md)
+-   [TiDB オプティミスティックトランザクションモード](/optimistic-transaction.md)
+-   [TiDB ペシミスティックトランザクションモード](/pessimistic-transaction.md)

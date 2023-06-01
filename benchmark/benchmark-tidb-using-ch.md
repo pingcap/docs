@@ -7,11 +7,11 @@ summary: Learn how to run CH-benCHmark test on TiDB.
 
 このドキュメントでは、CH-benCHmark を使用して TiDB をテストする方法について説明します。
 
-CH-benCHmark は、 [<a href="http://www.tpc.org/tpcc/">TPC-C</a>](http://www.tpc.org/tpcc/)つと[<a href="http://www.tpc.org/tpch/">TPC-H</a>](http://www.tpc.org/tpch/)テストの両方を含む混合ワークロードです。これは、HTAP システムをテストするための最も一般的なワークロードです。詳細については、 [<a href="https://research.tableau.com/sites/default/files/a8-cole.pdf">混合ワークロード CH-benCHmark</a>](https://research.tableau.com/sites/default/files/a8-cole.pdf)を参照してください。
+CH-benCHmark は、 [混合ワークロード CH-benCHmark](https://research.tableau.com/sites/default/files/a8-cole.pdf)を参照してください。
 
-CH-benCHmark テストを実行する前に、まず[<a href="/tiflash/tiflash-overview.md">TiFlash</a>](/tiflash/tiflash-overview.md)をデプロイする必要があります。これは TiDB の HTAPコンポーネントです。 TiFlashと[<a href="#create-tiflash-replicas">TiFlashレプリカを作成する</a>](#create-tiflash-replicas)を展開すると、TiKV は TPC-C オンライン トランザクションの最新データをリアルタイムでTiFlashにレプリケートし、TiDB オプティマイザーは効率的な実行のために TPC-H ワークロードからTiFlashの MPP エンジンに OLAP クエリを自動的にプッシュダウンします。
+CH-benCHmark テストを実行する前に、まず[TiFlashレプリカを作成する](#create-tiflash-replicas)を展開すると、TiKV は TPC-C オンライン トランザクションの最新データをリアルタイムでTiFlashにレプリケートし、TiDB オプティマイザーは効率的な実行のために TPC-H ワークロードからTiFlashの MPP エンジンに OLAP クエリを自動的にプッシュダウンします。
 
-このドキュメントの CH-benCHmark テストは[<a href="https://github.com/pingcap/go-tpc">ゴーTPC</a>](https://github.com/pingcap/go-tpc)に基づいて実装されています。次の[<a href="/tiup/tiup-overview.md">TiUP</a>](/tiup/tiup-overview.md)コマンドを使用してテスト プログラムをダウンロードできます。
+このドキュメントの CH-benCHmark テストは[TiUP](/tiup/tiup-overview.md)コマンドを使用してテスト プログラムをダウンロードできます。
 
 {{< copyable "" >}}
 
@@ -19,7 +19,7 @@ CH-benCHmark テストを実行する前に、まず[<a href="/tiflash/tiflash-o
 tiup install bench
 ```
 
-TiUP Benchコンポーネントの詳しい使用方法については、 [<a href="/tiup/tiup-bench.md">TiUPベンチ</a>](/tiup/tiup-bench.md)を参照してください。
+TiUP Benchコンポーネントの詳しい使用方法については、 [TiUPベンチ](/tiup/tiup-bench.md)を参照してください。
 
 ## データを読み込む {#load-data}
 

@@ -73,4 +73,4 @@ Empty set (0.00 sec)
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/statistics.md">統計入門</a>](/statistics.md)
+-   [統計入門](/statistics.md)

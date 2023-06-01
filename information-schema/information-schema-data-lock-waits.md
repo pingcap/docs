@@ -30,7 +30,7 @@ DESC data_lock_waits;
 `DATA_LOCK_WAITS`テーブルの各列フィールドの意味は次のとおりです。
 
 -   `KEY` : ロックを待機している 16 進数形式のキー。
--   `KEY_INFO` ： `KEY`の詳細情報です。 [<a href="#key_info">KEY_INFO</a>](#key_info)セクションを参照してください。
+-   `KEY_INFO` ： `KEY`の詳細情報です。 [KEY_INFO](#key_info)セクションを参照してください。
 -   `TRX_ID` : ロックを待機しているトランザクションの ID。この ID はトランザクションの`start_ts`でもあります。
 -   `CURRENT_HOLDING_TRX_ID` : 現在ロックを保持しているトランザクションの ID。この ID はトランザクションの`start_ts`でもあります。
 -   `SQL_DIGEST` : ロック待ちトランザクションで現在ブロックされている SQL 文のダイジェスト。
@@ -38,11 +38,11 @@ DESC data_lock_waits;
 
 > **警告：**
 >
-> -   [<a href="https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process">プロセス</a>](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process)権限を持つユーザーのみがこのテーブルをクエリできます。
-> -   現在、楽観的トランザクションの場合、 `SQL_DIGEST`フィールドと`SQL_DIGEST_TEXT`フィールドは`null` (使用できないことを意味します) です。回避策として、ブロッキングの原因となっている SQL ステートメントを特定するには、このテーブルを[<a href="/information-schema/information-schema-tidb-trx.md">`CLUSTER_TIDB_TRX`</a>](/information-schema/information-schema-tidb-trx.md)と結合して、楽観的トランザクションのすべての SQL ステートメントを取得します。
+> -   [プロセス](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process)権限を持つユーザーのみがこのテーブルをクエリできます。
+> -   現在、楽観的トランザクションの場合、 `SQL_DIGEST`フィールドと`SQL_DIGEST_TEXT`フィールドは`null` (使用できないことを意味します) です。回避策として、ブロッキングの原因となっている SQL ステートメントを特定するには、このテーブルを[`CLUSTER_TIDB_TRX`](/information-schema/information-schema-tidb-trx.md)と結合して、楽観的トランザクションのすべての SQL ステートメントを取得します。
 > -   `DATA_LOCK_WAITS`テーブルの情報は、クエリ中にすべての TiKV ノードからリアルタイムで取得されます。現在、クエリに`WHERE`条件がある場合でも、情報収集はすべての TiKV ノードで実行されます。クラスターが大きく負荷が高い場合、このテーブルにクエリを実行すると、パフォーマンス ジッターの潜在的なリスクが発生する可能性があります。したがって、実際の状況に応じて使用してください。
 > -   異なる TiKV ノードからの情報は、同じ時刻のスナップショットであることは保証されません。
-> -   `SQL_DIGEST`列目の情報（SQLダイジェスト）は、正規化されたSQL文から計算されたハッシュ値です。 `SQL_DIGEST_TEXT`列の情報はステートメント概要テーブルから内部的にクエリされるため、対応するステートメントが内部で見つからない可能性があります。 SQL ダイジェストとステートメント概要テーブルの詳細については、 [<a href="/statement-summary-tables.md">ステートメント概要テーブル</a>](/statement-summary-tables.md)を参照してください。
+> -   `SQL_DIGEST`列目の情報（SQLダイジェスト）は、正規化されたSQL文から計算されたハッシュ値です。 `SQL_DIGEST_TEXT`列の情報はステートメント概要テーブルから内部的にクエリされるため、対応するステートメントが内部で見つからない可能性があります。 SQL ダイジェストとステートメント概要テーブルの詳細については、 [ステートメント概要テーブル](/statement-summary-tables.md)を参照してください。
 
 ## <code>KEY_INFO</code> {#code-key-info-code}
 

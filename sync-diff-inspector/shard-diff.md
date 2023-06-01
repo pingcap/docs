@@ -5,7 +5,7 @@ summary: Learn the data check in the sharding scenario.
 
 # シャーディングシナリオでのデータチェック {#data-check-in-the-sharding-scenario}
 
-sync-diff-inspector は、シャーディング シナリオでのデータ チェックをサポートします。 [<a href="/dm/dm-overview.md">TiDB データ移行</a>](/dm/dm-overview.md)ツールを使用して複数の MySQL インスタンスから TiDB にデータをレプリケートすると仮定すると、sync-diff-inspector を使用してアップストリーム データとダウンストリーム データをチェックできます。
+sync-diff-inspector は、シャーディング シナリオでのデータ チェックをサポートします。 [TiDB データ移行](/dm/dm-overview.md)ツールを使用して複数の MySQL インスタンスから TiDB にデータをレプリケートすると仮定すると、sync-diff-inspector を使用してアップストリーム データとダウンストリーム データをチェックできます。
 
 アップストリームのシャードテーブルの数が少なく、シャードテーブルの命名規則に以下に示すようなパターンがないシナリオの場合、 `Datasource config`を使用して`table-0`を構成し、対応する`rules`を設定して、アップストリーム間のマッピング関係を持つテーブルを構成できます。そしてダウンストリームデータベース。この構成方法では、すべてのシャードテーブルを設定する必要があります。
 

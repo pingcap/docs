@@ -22,7 +22,7 @@ DM ワーカー タスクには、リレー ログ、ダンプ処理ユニット
 
 リレー ログは、上流の MySQL/MariaDB からのbinlogデータを永続的に保存し、binlogレプリケーションのbinlogイベントにアクセスする機能を提供します。
 
-その原理と機能は MySQL のリレー ログに似ています。詳細は[<a href="https://dev.mysql.com/doc/refman/5.7/en/replica-logs-relaylog.html">MySQLリレーログ</a>](https://dev.mysql.com/doc/refman/5.7/en/replica-logs-relaylog.html)を参照してください。
+その原理と機能は MySQL のリレー ログに似ています。詳細は[MySQLリレーログ](https://dev.mysql.com/doc/refman/5.7/en/replica-logs-relaylog.html)を参照してください。
 
 ### ダンプ処理ユニット {#dump-processing-unit}
 

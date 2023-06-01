@@ -7,13 +7,13 @@ summary: An overview of the usage of BACKUP for the TiDB database.
 
 このステートメントは、TiDB クラスターの分散バックアップを実行するために使用されます。
 
-`BACKUP`ステートメントは[<a href="/br/backup-and-restore-overview.md">BRツール</a>](/br/backup-and-restore-overview.md)と同じエンジンを使用しますが、バックアップ プロセスが別個のBRツールではなく TiDB 自体によって駆動される点が異なります。 BRのすべての利点と警告は、この声明にも適用されます。
+`BACKUP`ステートメントは[BRツール](/br/backup-and-restore-overview.md)と同じエンジンを使用しますが、バックアップ プロセスが別個のBRツールではなく TiDB 自体によって駆動される点が異なります。 BRのすべての利点と警告は、この声明にも適用されます。
 
-`BACKUP`を実行するには、 `BACKUP_ADMIN`または`SUPER`権限が必要です。さらに、バックアップを実行する TiDB ノードとクラスター内のすべての TiKV ノードの両方に、宛先への読み取りまたは書き込み権限が必要です。 [<a href="/system-variables.md#tidb_enable_enhanced_security">Security強化モード</a>](/system-variables.md#tidb_enable_enhanced_security)が有効な場合、ローカルstorage( `local://`で始まるstorageパス) は許可されません。
+`BACKUP`を実行するには、 `BACKUP_ADMIN`または`SUPER`権限が必要です。さらに、バックアップを実行する TiDB ノードとクラスター内のすべての TiKV ノードの両方に、宛先への読み取りまたは書き込み権限が必要です。 [Security強化モード](/system-variables.md#tidb_enable_enhanced_security)が有効な場合、ローカルstorage( `local://`で始まるstorageパス) は許可されません。
 
-`BACKUP`ステートメントは、バックアップ タスク全体が完了するか、失敗するか、キャンセルされるまでブロックされます。 `BACKUP`を実行するには、長時間持続する接続を準備する必要があります。タスクは[<a href="/sql-statements/sql-statement-kill.md">`KILL TIDB QUERY`</a>](/sql-statements/sql-statement-kill.md)ステートメントを使用してキャンセルできます。
+`BACKUP`ステートメントは、バックアップ タスク全体が完了するか、失敗するか、キャンセルされるまでブロックされます。 `BACKUP`を実行するには、長時間持続する接続を準備する必要があります。タスクは[`KILL TIDB QUERY`](/sql-statements/sql-statement-kill.md)ステートメントを使用してキャンセルできます。
 
-`BACKUP`と[<a href="/sql-statements/sql-statement-restore.md">`RESTORE`</a>](/sql-statements/sql-statement-restore.md)タスクは一度に 1 つだけ実行できます。 `BACKUP`または`RESTORE`ステートメントが同じ TiDBサーバー上ですでに実行されている場合、新しい`BACKUP`ステートメントの実行は、前のタスクがすべて完了するまで待機します。
+`BACKUP`と[`RESTORE`](/sql-statements/sql-statement-restore.md)タスクは一度に 1 つだけ実行できます。 `BACKUP`または`RESTORE`ステートメントが同じ TiDBサーバー上ですでに実行されている場合、新しい`BACKUP`ステートメントの実行は、前のタスクがすべて完了するまで待機します。
 
 `BACKUP` 「tikv」storageエンジンでのみ使用できます。 「unistore」エンジンで`BACKUP`使用すると失敗します。
 
@@ -69,7 +69,7 @@ BACKUP DATABASE `test` TO 'local:///mnt/backup/2020/04/';
 | :--------------- | :------------------------------------------------------------------------------------------------- |
 | `Destination`    | リンク先の URL                                                                                          |
 | `Size`           | バックアップ アーカイブの合計サイズ (バイト単位)                                                                         |
-| `BackupTS`       | バックアップ作成時のスナップショットの TSO ( [<a href="#incremental-backup">増分バックアップ</a>](#incremental-backup)に役立ちます) |
+| `BackupTS`       | バックアップ作成時のスナップショットの TSO ( [増分バックアップ](#incremental-backup)に役立ちます) |
 | `Queue Time`     | `BACKUP`のタスクがキューに入れられたときのタイムスタンプ (現在のタイムゾーン)。                                                      |
 | `Execution Time` | `BACKUP`タスクの実行が開始されたときのタイムスタンプ (現在のタイムゾーン)。                                                        |
 
@@ -107,7 +107,7 @@ BR は、 S3 または GCS へのデータのバックアップをサポート�
 BACKUP DATABASE `test` TO 's3://example-bucket-2020/backup-05/?access-key={YOUR_ACCESS_KEY}&secret-access-key={YOUR_SECRET_KEY}';
 ```
 
-URL 構文については、 [<a href="/br/backup-and-restore-storages.md#uri-format">外部storageURI</a>](/br/backup-and-restore-storages.md#uri-format)で詳しく説明します。
+URL 構文については、 [外部storageURI](/br/backup-and-restore-storages.md#uri-format)で詳しく説明します。
 
 認証情報を配布しないクラウド環境で実行する場合は、 `SEND_CREDENTIALS_TO_TIKV`オプションを`FALSE`に設定します。
 
@@ -188,5 +188,5 @@ BACKUP DATABASE `test` TO 'local:///mnt/backup/hist03'
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-restore.md">戻す</a>](/sql-statements/sql-statement-restore.md)
--   [<a href="/sql-statements/sql-statement-show-backups.md">バックアップを表示</a>](/sql-statements/sql-statement-show-backups.md)
+-   [戻す](/sql-statements/sql-statement-restore.md)
+-   [バックアップを表示](/sql-statements/sql-statement-show-backups.md)

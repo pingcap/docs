@@ -9,11 +9,11 @@ summary: Learn how to deploy a Data Migration cluster using DM binary.
 
 > **ノート：**
 >
-> 本番環境では、 [<a href="/dm/deploy-a-dm-cluster-using-tiup.md">TiUP を使用して DM クラスターをデプロイする</a>](/dm/deploy-a-dm-cluster-using-tiup.md)を推奨します。
+> 本番環境では、 [TiUP を使用して DM クラスターをデプロイする](/dm/deploy-a-dm-cluster-using-tiup.md)を推奨します。
 
 ## DMバイナリをダウンロードする {#download-dm-binary}
 
-DM バイナリはTiDB Toolkitに含まれています。 TiDB Toolkitをダウンロードするには、 [<a href="/download-ecosystem-tools.md">TiDB ツールをダウンロード</a>](/download-ecosystem-tools.md)を参照してください。
+DM バイナリはTiDB Toolkitに含まれています。 TiDB Toolkitをダウンロードするには、 [TiDB ツールをダウンロード](/download-ecosystem-tools.md)を参照してください。
 
 ## サンプルシナリオ {#sample-scenario}
 
@@ -48,7 +48,7 @@ DM バイナリはTiDB Toolkitに含まれています。 TiDB Toolkitをダウ�
 
 ### DMマスターをデプロイ {#deploy-dm-master}
 
-[<a href="#dm-master-command-line-parameters">コマンドラインパラメータ</a>](#dm-master-command-line-parameters)または[<a href="#dm-master-configuration-file">設定ファイル</a>](#dm-master-configuration-file)を使用して DM マスターを構成できます。
+[設定ファイル](#dm-master-configuration-file)を使用して DM マスターを構成できます。
 
 #### DM マスターのコマンドラインパラメータ {#dm-master-command-line-parameters}
 
@@ -131,7 +131,7 @@ Usage of dm-master:
 
 ### DM ワーカーをデプロイ {#deploy-dm-worker}
 
-[<a href="#dm-worker-command-line-parameters">コマンドラインパラメータ</a>](#dm-worker-command-line-parameters)または[<a href="#dm-worker-configuration-file">設定ファイル</a>](#dm-worker-configuration-file)を使用して DM ワーカーを構成できます。
+[設定ファイル](#dm-worker-configuration-file)を使用して DM ワーカーを構成できます。
 
 #### DM-worker コマンドラインパラメータ {#dm-worker-command-line-parameters}
 

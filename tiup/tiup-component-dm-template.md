@@ -4,7 +4,7 @@ title: tiup dm template
 
 # tiup dm template {#tiup-dm-template}
 
-クラスターをデプロイする前に、クラスターの[<a href="/tiup/tiup-dm-topology-reference.md">トポロジーファイル</a>](/tiup/tiup-dm-topology-reference.md)を準備する必要があります。 TiUPにはトポロジ ファイル テンプレートが組み込まれており、このテンプレートを変更して最終的なトポロジ ファイルを作成できます。組み込みテンプレートのコンテンツを出力するには、 `tiup dm template`コマンドを使用できます。
+クラスターをデプロイする前に、クラスターの[トポロジーファイル](/tiup/tiup-dm-topology-reference.md)を準備する必要があります。 TiUPにはトポロジ ファイル テンプレートが組み込まれており、このテンプレートを変更して最終的なトポロジ ファイルを作成できます。組み込みテンプレートのコンテンツを出力するには、 `tiup dm template`コマンドを使用できます。
 
 ## 構文 {#syntax}
 
@@ -35,4 +35,4 @@ tiup dm template [flags]
 
 指定されたオプションに従ってトポロジ テンプレートを出力します。これは、展開用のトポロジ ファイルにリダイレクトできます。
 
-[<a href="/tiup/tiup-component-dm.md#command-list">&lt;&lt; 前のページに戻る - TiUP DMコマンド一覧</a>](/tiup/tiup-component-dm.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP DMコマンド一覧](/tiup/tiup-component-dm.md#command-list)

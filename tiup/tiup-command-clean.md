@@ -12,7 +12,7 @@ title: tiup clean
 tiup clean [name] [flags]
 ```
 
-値`[name]`は、 [<a href="/tiup/tiup-command-status.md">`status`コマンド</a>](/tiup/tiup-command-status.md)によって出力される`Name`フィールドです。 `[name]`を省略した場合は、 `tiup clean`コマンドに`--all`オプションを追加する必要があります。
+値`[name]`は、 [`status`コマンド](/tiup/tiup-command-status.md)によって出力される`Name`フィールドです。 `[name]`を省略した場合は、 `tiup clean`コマンドに`--all`オプションを追加する必要があります。
 
 ## オプション {#option}
 
@@ -28,4 +28,4 @@ tiup clean [name] [flags]
 Clean instance of `%s`, directory: %s
 ```
 
-[<a href="/tiup/tiup-reference.md#command-list">&lt;&lt; 前のページに戻る - TiUPリファレンスコマンドリスト</a>](/tiup/tiup-reference.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPリファレンスコマンドリスト](/tiup/tiup-reference.md#command-list)

@@ -5,17 +5,17 @@ summary: Learn how to use EXPLAIN by walking through an example statement
 
 # <code>EXPLAIN</code>ウォークスルー {#code-explain-code-walkthrough}
 
-SQL は宣言型言語であるため、クエリが効率的に実行されたかどうかを自動的に判断することはできません。まず[<a href="/sql-statements/sql-statement-explain.md">`EXPLAIN`</a>](/sql-statements/sql-statement-explain.md)ステートメントを使用して、現在の実行計画を確認する必要があります。
+SQL は宣言型言語であるため、クエリが効率的に実行されたかどうかを自動的に判断することはできません。まず[`EXPLAIN`](/sql-statements/sql-statement-explain.md)ステートメントを使用して、現在の実行計画を確認する必要があります。
 
 <CustomContent platform="tidb">
 
-[<a href="/import-example-data.md">自転車シェアのサンプル データベース</a>](/import-example-data.md)の次のステートメントは、2017 年 7 月 1 日に行われた旅行の数をカウントします。
+[自転車シェアのサンプル データベース](/import-example-data.md)の次のステートメントは、2017 年 7 月 1 日に行われた旅行の数をカウントします。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[<a href="/tidb-cloud/import-sample-data.md">自転車シェアのサンプル データベース</a>](/tidb-cloud/import-sample-data.md)の次のステートメントは、2017 年 7 月 1 日に行われた旅行の数をカウントします。
+[自転車シェアのサンプル データベース](/tidb-cloud/import-sample-data.md)の次のステートメントは、2017 年 7 月 1 日に行われた旅行の数をカウントします。
 
 </CustomContent>
 
@@ -43,12 +43,12 @@ EXPLAIN SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00
 1.  コプロセッサ (TiKV) は、 `trips`テーブル全体を`TableFullScan`操作として読み取ります。次に、読み取った行を TiKV 内にある`Selection_19`オペレーターに渡します。
 2.  次に、 `WHERE start_date BETWEEN ..`述語が`Selection_19`演算子でフィルタリングされます。約`250`行がこの選択を満たすと推定されます。この数値は統計とオペレーターのロジックに従って推定されることに注意してください。 `└─TableFullScan_18`演算子は`stats:pseudo`を示します。これは、テーブルに実際の統計情報がないことを意味します。 `ANALYZE TABLE trips`を実行して統計情報を収集すると、統計はより正確になることが期待されます。
 3.  選択基準を満たす行には`count`関数が適用されます。これも、TiKV ( `cop[tikv]` ) 内にある`StreamAgg_9`オペレーター内で完了します。 TiKV コプロセッサは、多数の MySQL 組み込み関数を実行できます。そのうちの 1 つは`count`です。
-4.  `StreamAgg_9`の結果は、TiDBサーバー内にある`TableReader_21`オペレーターに送信されます ( `root`のタスク)。この演算子の`estRows`列の値は`1`です。これは、演算子がアクセスされる各 TiKV リージョンから 1 行を受け取ることを意味します。これらのリクエストの詳細については、 [<a href="/sql-statements/sql-statement-explain-analyze.md">`EXPLAIN ANALYZE`</a>](/sql-statements/sql-statement-explain-analyze.md)を参照してください。
-5.  次に、 `StreamAgg_20`演算子は`└─TableReader_21`演算子からの各行に`count`関数を適用します。これは[<a href="/sql-statements/sql-statement-show-table-regions.md">`SHOW TABLE REGIONS`</a>](/sql-statements/sql-statement-show-table-regions.md)からわかるように、約 56 行になります。これはルート オペレーターであるため、結果をクライアントに返します。
+4.  `StreamAgg_9`の結果は、TiDBサーバー内にある`TableReader_21`オペレーターに送信されます ( `root`のタスク)。この演算子の`estRows`列の値は`1`です。これは、演算子がアクセスされる各 TiKV リージョンから 1 行を受け取ることを意味します。これらのリクエストの詳細については、 [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)を参照してください。
+5.  次に、 `StreamAgg_20`演算子は`└─TableReader_21`演算子からの各行に`count`関数を適用します。これは[`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md)からわかるように、約 56 行になります。これはルート オペレーターであるため、結果をクライアントに返します。
 
 > **ノート：**
 >
-> テーブルに含まれるリージョンの概要を表示するには、 [<a href="/sql-statements/sql-statement-show-table-regions.md">`SHOW TABLE REGIONS`</a>](/sql-statements/sql-statement-show-table-regions.md)を実行します。
+> テーブルに含まれるリージョンの概要を表示するには、 [`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md)を実行します。
 
 ## 現在のパフォーマンスを評価する {#assess-the-current-performance}
 
@@ -75,7 +75,7 @@ EXPLAIN ANALYZE SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 
 
 上記のクエリ例の実行には`1.03`秒かかりますが、これは理想的なパフォーマンスです。
 
-上記`EXPLAIN ANALYZE`の結果から、 `actRows`推定値 ( `estRows` ) の一部が不正確であることを示します (10,000 行を期待していましたが、1,900 万行が見つかりました)。これは`└─TableFullScan_18`の`operator info` ( `stats:pseudo` ) ですでに示されています。最初に[<a href="/sql-statements/sql-statement-analyze-table.md">`ANALYZE TABLE`</a>](/sql-statements/sql-statement-analyze-table.md)実行し、次に`EXPLAIN ANALYZE`再度実行すると、推定値がかなり近くなることがわかります。
+上記`EXPLAIN ANALYZE`の結果から、 `actRows`推定値 ( `estRows` ) の一部が不正確であることを示します (10,000 行を期待していましたが、1,900 万行が見つかりました)。これは`└─TableFullScan_18`の`operator info` ( `stats:pseudo` ) ですでに示されています。最初に[`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)実行し、次に`EXPLAIN ANALYZE`再度実行すると、推定値がかなり近くなることがわかります。
 
 {{< copyable "" >}}
 
@@ -101,7 +101,7 @@ Query OK, 0 rows affected (10.22 sec)
 
 `ANALYZE TABLE`が実行されると、 `└─TableFullScan_18`演算子の推定行が正確で、 `└─Selection_19`の推定もかなり近づいていることがわかります。上記の 2 つのケースでは、実行計画 (TiDB がこのクエリを実行するために使用する一連の演算子) は変更されていませんが、非常に頻繁に、古い統計が原因で次善の計画が発生します。
 
-`ANALYZE TABLE`に加えて、TiDB はしきい値[<a href="/system-variables.md#tidb_auto_analyze_ratio">`tidb_auto_analyze_ratio`</a>](/system-variables.md#tidb_auto_analyze_ratio)に達した後、バックグラウンド操作として統計を自動的に再生成します。次の[<a href="/sql-statements/sql-statement-show-stats-healthy.md">`SHOW STATS_HEALTHY`</a>](/sql-statements/sql-statement-show-stats-healthy.md)ステートメントを実行すると、TiDB がこのしきい値にどの程度近づいているか (TiDB が統計がどの程度健全であるとみなしているか) を確認できます。
+`ANALYZE TABLE`に加えて、TiDB はしきい値[`SHOW STATS_HEALTHY`](/sql-statements/sql-statement-show-stats-healthy.md)ステートメントを実行すると、TiDB がこのしきい値にどの程度近づいているか (TiDB が統計がどの程度健全であるとみなしているか) を確認できます。
 
 {{< copyable "" >}}
 
@@ -167,7 +167,7 @@ Query OK, 0 rows affected (2 min 10.23 sec)
 
 > **ノート：**
 >
-> [<a href="/sql-statements/sql-statement-admin-show-ddl.md">`ADMIN SHOW DDL JOBS`</a>](/sql-statements/sql-statement-admin-show-ddl.md)コマンドを使用して、DDL ジョブの進行状況を監視できます。 TiDB のデフォルトは、インデックスの追加が実本番ワークロードに大きな影響を与えないよう慎重に選択されています。テスト環境の場合は、 [<a href="/system-variables.md#tidb_ddl_reorg_batch_size">`tidb_ddl_reorg_batch_size`</a>](/system-variables.md#tidb_ddl_reorg_batch_size)と[<a href="/system-variables.md#tidb_ddl_reorg_worker_cnt">`tidb_ddl_reorg_worker_cnt`</a>](/system-variables.md#tidb_ddl_reorg_worker_cnt)値を増やすことを検討してください。参照システムでは、バッチ サイズ`10240`とワーカー数`32`により、デフォルトと比較して 10 倍のパフォーマンス向上を達成できます。
+> [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt)値を増やすことを検討してください。参照システムでは、バッチ サイズ`10240`とワーカー数`32`により、デフォルトと比較して 10 倍のパフォーマンス向上を達成できます。
 
 インデックスを追加した後、 `EXPLAIN`のクエリを繰り返すことができます。次の出力では、新しい実行プランが選択され、 `TableFullScan`と`Selection`演算子が削除されていることがわかります。
 
@@ -189,7 +189,7 @@ EXPLAIN SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00
 4 rows in set (0.00 sec)
 ```
 
-実際の実行時間を比較するには、再度[<a href="/sql-statements/sql-statement-explain-analyze.md">`EXPLAIN ANALYZE`</a>](/sql-statements/sql-statement-explain-analyze.md)を使用します。
+実際の実行時間を比較するには、再度[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)を使用します。
 
 {{< copyable "" >}}
 
@@ -213,4 +213,4 @@ EXPLAIN ANALYZE SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 
 
 > **ノート：**
 >
-> ここで適用されるもう 1 つの最適化は、コプロセッサ キャッシュです。インデックスを追加できない場合は、 [<a href="/coprocessor-cache.md">コプロセッサキャッシュ</a>](/coprocessor-cache.md)を有効にすることを検討してください。これが有効な場合、オペレーターが最後に実行されてからリージョンが変更されていない限り、TiKV はキャッシュから値を返します。これは、高価な`TableFullScan`および`Selection`オペレータのコストの大幅な削減にも役立ちます。
+> ここで適用されるもう 1 つの最適化は、コプロセッサ キャッシュです。インデックスを追加できない場合は、 [コプロセッサキャッシュ](/coprocessor-cache.md)を有効にすることを検討してください。これが有効な場合、オペレーターが最後に実行されてからリージョンが変更されていない限り、TiKV はキャッシュから値を返します。これは、高価な`TableFullScan`および`Selection`オペレータのコストの大幅な削減にも役立ちます。

@@ -84,7 +84,7 @@ TiDB は、より標準的な SQL 動作に従い、 `b`対 1 を更新します
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-insert.md">入れる</a>](/sql-statements/sql-statement-insert.md)
--   [<a href="/sql-statements/sql-statement-select.md">選択する</a>](/sql-statements/sql-statement-select.md)
--   [<a href="/sql-statements/sql-statement-delete.md">消去</a>](/sql-statements/sql-statement-delete.md)
--   [<a href="/sql-statements/sql-statement-replace.md">交換</a>](/sql-statements/sql-statement-replace.md)
+-   [入れる](/sql-statements/sql-statement-insert.md)
+-   [選択する](/sql-statements/sql-statement-select.md)
+-   [消去](/sql-statements/sql-statement-delete.md)
+-   [交換](/sql-statements/sql-statement-replace.md)

@@ -20,7 +20,7 @@ TiDB は、完全なデータ移行、増分データ移行、バックアップ
 | **上流の**  | MySQL、MariaDB、 Aurora                                                                                                                                                                                                                                                                                                                                                                                 |
 | **下流**   | TiDB                                                                                                                                                                                                                                                                                                                                                                                                  |
 | **利点**   | <ul><li>完全なデータ移行と増分レプリケーションをサポートする便利な統合データ移行タスク管理ツール</li><li>テーブルと操作のフィルタリングをサポート</li><li>シャードのマージと移行をサポート</li></ul>                                                                                                                                                                                                                                                                                  |
-| **制限**   | データのインポート速度は TiDB Lightning の[<a href="/tidb-lightning/tidb-lightning-logical-import-mode.md">論理インポートモード</a>](/tidb-lightning/tidb-lightning-logical-import-mode.md)とほぼ同じですが、TiDB Lightning の[<a href="/tidb-lightning/tidb-lightning-physical-import-mode.md">物理インポートモード</a>](/tidb-lightning/tidb-lightning-physical-import-mode.md)よりはかなり遅くなります。したがって、DM を使用して、サイズが 1 TiB 未満の完全なデータを移行することをお勧めします。 |
+| **制限**   | データのインポート速度は TiDB Lightning の[物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode.md)よりはかなり遅くなります。したがって、DM を使用して、サイズが 1 TiB 未満の完全なデータを移行することをお勧めします。 |
 
 ## <a href="/tidb-lightning/tidb-lightning-overview.md">TiDB Lightning</a> {#a-href-tidb-lightning-tidb-lightning-overview-md-tidb-lightning-a}
 
@@ -29,7 +29,7 @@ TiDB は、完全なデータ移行、増分データ移行、バックアップ
 | **上流 (インポートされたソース ファイル)** | <ul><li>Dumplingからエクスポートされたファイル</li><li>Amazon Auroraまたは Apache Hive によってエクスポートされた Parquet ファイル</li><li>CSVファイル</li><li>ローカルディスクまたはAmazon S3からのデータ</li></ul>                                                                                                                                                                                                                                                                                          |
 | **下流**                    | TiDB                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | **利点**                    | <ul><li>大量のデータの迅速なインポートと、TiDB クラスター内の特定のテーブルの迅速な初期化をサポートします。</li><li>インポートの進行状況を保存するチェックポイントをサポートするため、 `tidb-lightning`再起動後に中断したところからインポートを継続します。</li><li>データフィルタリングをサポート</li></ul>                                                                                                                                                                                                                                                                   |
-| **制限**                    | <ul><li>データのインポートに[<a href="/tidb-lightning/tidb-lightning-physical-import-mode-usage.md">物理インポートモード</a>](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md)使用される場合、インポート プロセス中、TiDB クラスターはサービスを提供できません。</li><li> TiDB サービスに影響を与えたくない場合は、 TiDB Lightning [<a href="/tidb-lightning/tidb-lightning-logical-import-mode-usage.md">論理インポートモード</a>](/tidb-lightning/tidb-lightning-logical-import-mode-usage.md)に従ってデータ インポートを実行します。</li></ul> |
+| **制限**                    | <ul><li>データのインポートに[論理インポートモード](/tidb-lightning/tidb-lightning-logical-import-mode-usage.md)に従ってデータ インポートを実行します。</li></ul> |
 
 ## <a href="/dumpling-overview.md">Dumpling</a> {#a-href-dumpling-overview-md-dumpling-a}
 
@@ -133,5 +133,5 @@ tiup update --self && tiup update dm
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/production-deployment-using-tiup.md#deploy-tiup-offline">TiUP をオフラインでデプロイ</a>](/production-deployment-using-tiup.md#deploy-tiup-offline)
--   [<a href="/download-ecosystem-tools.md">ツールをバイナリでダウンロードしてインストールする</a>](/download-ecosystem-tools.md)
+-   [TiUP をオフラインでデプロイ](/production-deployment-using-tiup.md#deploy-tiup-offline)
+-   [ツールをバイナリでダウンロードしてインストールする](/download-ecosystem-tools.md)

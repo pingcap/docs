@@ -5,7 +5,7 @@ summary: Learn the supported set operations in TiDB.
 
 # 集合演算 {#set-operations}
 
-TiDB は、UNION、EXCEPT、INTERSECT 演算子を使用した 3 つの集合演算をサポートします。集合の最小単位は[<a href="/sql-statements/sql-statement-select.md">`SELECT`ステートメント</a>](/sql-statements/sql-statement-select.md)です。
+TiDB は、UNION、EXCEPT、INTERSECT 演算子を使用した 3 つの集合演算をサポートします。集合の最小単位は[`SELECT`ステートメント](/sql-statements/sql-statement-select.md)です。
 
 ## UNION 演算子 {#union-operator}
 
@@ -116,7 +116,7 @@ TiDB は、括弧を使用して集合演算の優先順位を指定すること
 
 ## <code>ORDER BY</code>と<code>LIMIT</code>を使用する {#use-code-order-by-code-and-code-limit-code}
 
-TiDB は、集合演算での[<a href="/media/sqlgram/OrderByOptional.png">`ORDER BY`</a>](/media/sqlgram/OrderByOptional.png)または[<a href="/media/sqlgram/LimitClause.png">`LIMIT`</a>](/media/sqlgram/LimitClause.png)句の使用をサポートしています。これら 2 つの句はステートメント全体の最後になければなりません。
+TiDB は、集合演算での[`LIMIT`](/media/sqlgram/LimitClause.png)句の使用をサポートしています。これら 2 つの句はステートメント全体の最後になければなりません。
 
 ```sql
 (SELECT * FROM t1 UNION ALL SELECT * FROM t1 INTERSECT SELECT * FROM t2) ORDER BY a LIMIT 2;

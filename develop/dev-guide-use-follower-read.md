@@ -9,7 +9,7 @@ summary: Learn how to use Follower Read to optimize query performance.
 
 ## 序章 {#introduction}
 
-TiDB は、クラスター内のすべてのノードにデータを分散するための基本単位として[<a href="/tidb-storage.md#region">リージョン</a>](/tidb-storage.md#region)を使用します。リージョンには複数のレプリカを含めることができ、レプリカはリーダーと複数のフォロワーに分割されます。リーダー上のデータが変更されると、TiDB は同期的にデータをフォロワーに更新します。
+TiDB は、クラスター内のすべてのノードにデータを分散するための基本単位として[リージョン](/tidb-storage.md#region)を使用します。リージョンには複数のレプリカを含めることができ、レプリカはリーダーと複数のフォロワーに分割されます。リーダー上のデータが変更されると、TiDB は同期的にデータをフォロワーに更新します。
 
 デフォルトでは、TiDB は同じリージョンのリーダー上でのみデータの読み取りと書き込みを行います。リージョンで読み取りホットスポットが発生すると、リージョンリーダーがシステム全体の読み取りボトルネックになる可能性があります。この状況では、Follower Read機能を有効にすると、リーダーの負荷が大幅に軽減され、複数のフォロワー間で負荷が分散されるため、システム全体のスループットが向上します。
 
@@ -19,17 +19,17 @@ TiDB は、クラスター内のすべてのノードにデータを分散する
 
 <CustomContent platform="tidb">
 
-アプリケーションに[<a href="/dashboard/dashboard-key-visualizer.md">TiDB ダッシュボード キー ビジュアライザー ページ</a>](/dashboard/dashboard-key-visualizer.md)スポットリージョンがあるかどうかを視覚的に分析できます。 「メトリクス選択ボックス」を`Read (bytes)`または`Read (keys)`に選択すると、読み取りホットスポットが発生しているかどうかを確認できます。
+アプリケーションに[TiDB ダッシュボード キー ビジュアライザー ページ](/dashboard/dashboard-key-visualizer.md)スポットリージョンがあるかどうかを視覚的に分析できます。 「メトリクス選択ボックス」を`Read (bytes)`または`Read (keys)`に選択すると、読み取りホットスポットが発生しているかどうかを確認できます。
 
-ホットスポットの処理の詳細については、 [<a href="/troubleshoot-hot-spot-issues.md">TiDB ホットスポットの問題処理</a>](/troubleshoot-hot-spot-issues.md)を参照してください。
+ホットスポットの処理の詳細については、 [TiDB ホットスポットの問題処理](/troubleshoot-hot-spot-issues.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-アプリケーションに[<a href="/tidb-cloud/tune-performance.md#key-visualizer">TiDB Cloudキー ビジュアライザー ページ</a>](/tidb-cloud/tune-performance.md#key-visualizer)スポットリージョンがあるかどうかを視覚的に分析できます。 「メトリクス選択ボックス」を`Read (bytes)`または`Read (keys)`に選択すると、読み取りホットスポットが発生しているかどうかを確認できます。
+アプリケーションに[TiDB Cloudキー ビジュアライザー ページ](/tidb-cloud/tune-performance.md#key-visualizer)スポットリージョンがあるかどうかを視覚的に分析できます。 「メトリクス選択ボックス」を`Read (bytes)`または`Read (keys)`に選択すると、読み取りホットスポットが発生しているかどうかを確認できます。
 
-ホットスポットの処理の詳細については、 [<a href="https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues">TiDB ホットスポットの問題処理</a>](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues)を参照してください。
+ホットスポットの処理の詳細については、 [TiDB ホットスポットの問題処理](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues)を参照してください。
 
 </CustomContent>
 
@@ -37,7 +37,7 @@ TiDB は、クラスター内のすべてのノードにデータを分散する
 
 ### 地理的に分散された展開のレイテンシーを削減 {#reduce-latency-for-geo-distributed-deployments}
 
-TiDB クラスターが複数の地区またはデータセンターに展開されている場合、リージョンの異なるレプリカが異なる地区またはデータセンターに分散されます。この場合、 Follower Read を`closest-adaptive`または`closest-replicas`に設定すると、TiDB が現在のデータセンターからの読み取りを優先できるようになり、読み取り操作のレイテンシーとトラフィック オーバーヘッドを大幅に削減できます。実装の詳細については、 [<a href="/follower-read.md">Follower Read</a>](/follower-read.md)を参照してください。
+TiDB クラスターが複数の地区またはデータセンターに展開されている場合、リージョンの異なるレプリカが異なる地区またはデータセンターに分散されます。この場合、 Follower Read を`closest-adaptive`または`closest-replicas`に設定すると、TiDB が現在のデータセンターからの読み取りを優先できるようになり、読み取り操作のレイテンシーとトラフィック オーバーヘッドを大幅に削減できます。実装の詳細については、 [Follower Read](/follower-read.md)を参照してください。
 
 ## Follower Readを有効にする {#enable-follower-read}
 
@@ -50,7 +50,7 @@ Follower Readを有効にするには、変数`tidb_replica_read` (デフォル�
 SET [GLOBAL] tidb_replica_read = 'follower';
 ```
 
-この変数の詳細については、 [<a href="/follower-read.md#usage">Follower Readの使用法</a>](/follower-read.md#usage)を参照してください。
+この変数の詳細については、 [Follower Readの使用法](/follower-read.md#usage)を参照してください。
 
 </div>
 <div label="Java" value="java">
@@ -145,18 +145,18 @@ public static class AuthorDAO {
 
 ## 続きを読む {#read-more}
 
--   [<a href="/follower-read.md">Follower Read</a>](/follower-read.md)
+-   [Follower Read](/follower-read.md)
 
 <CustomContent platform="tidb">
 
--   [<a href="/troubleshoot-hot-spot-issues.md">ホットスポットの問題のトラブルシューティング</a>](/troubleshoot-hot-spot-issues.md)
--   [<a href="/dashboard/dashboard-key-visualizer.md">TiDB ダッシュボード - キー ビジュアライザー ページ</a>](/dashboard/dashboard-key-visualizer.md)
+-   [ホットスポットの問題のトラブルシューティング](/troubleshoot-hot-spot-issues.md)
+-   [TiDB ダッシュボード - キー ビジュアライザー ページ](/dashboard/dashboard-key-visualizer.md)
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
--   [<a href="https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues">ホットスポットの問題のトラブルシューティング</a>](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues)
--   [<a href="/tidb-cloud/tune-performance.md#key-visualizer">TiDB Cloudキー ビジュアライザー ページ</a>](/tidb-cloud/tune-performance.md#key-visualizer)
+-   [ホットスポットの問題のトラブルシューティング](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues)
+-   [TiDB Cloudキー ビジュアライザー ページ](/tidb-cloud/tune-performance.md#key-visualizer)
 
 </CustomContent>

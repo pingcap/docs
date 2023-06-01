@@ -5,7 +5,7 @@ summary: Learn the concept of TiCDC Canal-JSON Protocol and how to use it.
 
 # TiCDC Canal-JSON プロトコル {#ticdc-canal-json-protocol}
 
-Canal-JSON は、 [<a href="https://github.com/alibaba/canal">アリババ運河</a>](https://github.com/alibaba/canal)によって定義されたデータ交換形式のプロトコルです。このドキュメントでは、TiDB 拡張フィールド、Canal-JSON データ形式の定義、公式 Canal との比較など、Canal-JSON データ形式が TiCDC でどのように実装されているかを学ぶことができます。
+Canal-JSON は、 [アリババ運河](https://github.com/alibaba/canal)によって定義されたデータ交換形式のプロトコルです。このドキュメントでは、TiDB 拡張フィールド、Canal-JSON データ形式の定義、公式 Canal との比較など、Canal-JSON データ形式が TiCDC でどのように実装されているかを学ぶことができます。
 
 ## Canal-JSON を使用する {#use-canal-json}
 
@@ -180,7 +180,7 @@ Canal-JSON 形式では、 `mysqlType`フィールドと`sqlType`フィールド
 
 ### 「MySQL タイプ」フィールド {#mysql-type-field}
 
-`mysqlType`フィールドには、Canal-JSON 形式で各列に MySQL Type の文字列が記録されます。詳細については、 [<a href="/data-type-overview.md">TiDB データ型</a>](/data-type-overview.md)を参照してください。
+`mysqlType`フィールドには、Canal-JSON 形式で各列に MySQL Type の文字列が記録されます。詳細については、 [TiDB データ型](/data-type-overview.md)を参照してください。
 
 ### 「SQL タイプ」フィールド {#sql-type-field}
 
@@ -216,7 +216,7 @@ Canal-JSON 形式では、 `mysqlType`フィールドと`sqlType`フィールド
 
 ## 整数型 {#integer-types}
 
-次の表に示すように、 [<a href="/data-type-numeric.md#integer-types">整数型</a>](/data-type-numeric.md#integer-types)に`Unsigned`制約があるかどうかと、さまざまなJava SQL タイプ コードにそれぞれ対応する値のサイズを考慮する必要があります。
+次の表に示すように、 [整数型](/data-type-numeric.md#integer-types)に`Unsigned`制約があるかどうかと、さまざまなJava SQL タイプ コードにそれぞれ対応する値のサイズを考慮する必要があります。
 
 | MySQLの型文字列    | 値の範囲                                       | Java SQL タイプ コード |
 | :------------ | :----------------------------------------- | :--------------- |
@@ -256,7 +256,7 @@ Canal-JSON 形式では、 `mysqlType`フィールドと`sqlType`フィールド
 | タイイント        | -6               |
 | 少し           | -7               |
 
-Java SQL タイプの詳細については、 [<a href="https://docs.oracle.com/javase/8/docs/api/java/sql/Types.html">Java SQL クラスの型</a>](https://docs.oracle.com/javase/8/docs/api/java/sql/Types.html)を参照してください。
+Java SQL タイプの詳細については、 [Java SQL クラスの型](https://docs.oracle.com/javase/8/docs/api/java/sql/Types.html)を参照してください。
 
 ## TiCDC Canal-JSON と公式 Canal の比較 {#comparison-of-ticdc-canal-json-and-the-official-canal}
 

@@ -13,7 +13,7 @@ v6.5.0 以降、TiCDC は 2 つの TiDB クラスター間の双方向レプリ�
 
 TiCDC は、指定されたタイムスタンプの後に発生する増分データ変更のみをダウンストリーム クラスターにレプリケートします。双方向レプリケーションを開始する前に、次の手順を実行する必要があります。
 
-1.  (オプション) 必要に応じて、データ エクスポート ツール[<a href="/dumpling-overview.md">Dumpling</a>](/dumpling-overview.md)とデータ インポート ツール[<a href="/tidb-lightning/tidb-lightning-overview.md">TiDB Lightning</a>](/tidb-lightning/tidb-lightning-overview.md)を使用して、2 つの TiDB クラスターのデータを相互にインポートします。
+1.  (オプション) 必要に応じて、データ エクスポート ツール[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用して、2 つの TiDB クラスターのデータを相互にインポートします。
 
 2.  2 つの TiDB クラスターの間に 2 つの TiCDC クラスターをデプロイ。クラスタのトポロジは以下のとおりです。図中の矢印はデータの流れの方向を示しています。
 
@@ -32,7 +32,7 @@ TiCDC は、指定されたタイムスタンプの後に発生する増分デ�
     bdr-mode = true
     ```
 
-5.  (オプション) データ ソースを追跡する必要がある場合は、 [<a href="/system-variables.md#tidb_source_id-new-in-v650">`tidb_source_id`</a>](/system-variables.md#tidb_source_id-new-in-v650)システム変数を使用して各クラスターに一意のデータ ソース ID を設定します。
+5.  (オプション) データ ソースを追跡する必要がある場合は、 [`tidb_source_id`](/system-variables.md#tidb_source_id-new-in-v650)システム変数を使用して各クラスターに一意のデータ ソース ID を設定します。
 
 構成が有効になると、クラスターは双方向レプリケーションを実行できるようになります。
 
@@ -56,7 +56,7 @@ DDL ステートメントを実行する必要がある場合は、次の手順�
 
 ## 制限事項 {#limitations}
 
--   DDL の制限については、 [<a href="#execute-ddl">DDLの実行</a>](#execute-ddl)を参照してください。
+-   DDL の制限については、 [DDLの実行](#execute-ddl)を参照してください。
 
 -   双方向レプリケーション クラスターは書き込み競合を検出できず、未定義の動作が発生する可能性があります。したがって、アプリケーション側から書き込み競合がないことを確認する必要があります。
 

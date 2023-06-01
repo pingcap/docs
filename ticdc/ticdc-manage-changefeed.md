@@ -5,7 +5,7 @@ summary: Learn how to manage TiCDC changefeeds.
 
 # 変更フィードの管理 {#manage-changefeeds}
 
-このドキュメントでは、TiCDC コマンドライン ツール`cdc cli`を使用して TiCDC 変更フィードを作成および管理する方法について説明します。 TiCDC の HTTP インターフェイスを介して変更フィードを管理することもできます。詳細は[<a href="/ticdc/ticdc-open-api.md">TiCDC OpenAPI</a>](/ticdc/ticdc-open-api.md)を参照してください。
+このドキュメントでは、TiCDC コマンドライン ツール`cdc cli`を使用して TiCDC 変更フィードを作成および管理する方法について説明します。 TiCDC の HTTP インターフェイスを介して変更フィードを管理することもできます。詳細は[TiCDC OpenAPI](/ticdc/ticdc-open-api.md)を参照してください。
 
 ## レプリケーションタスクを作成する {#create-a-replication-task}
 
@@ -266,11 +266,11 @@ v4.0.5 以降、TiCDC は行変更イベントの履歴値の出力をサポー�
 enable-old-value = true
 ```
 
-この機能は、v5.0 以降、デフォルトで有効になっています。この機能を有効にした後の TiCDC オープン プロトコルの出力形式については、 [<a href="/ticdc/ticdc-open-protocol.md#row-changed-event">TiCDC オープン プロトコル - 行変更イベント</a>](/ticdc/ticdc-open-protocol.md#row-changed-event)を参照してください。
+この機能は、v5.0 以降、デフォルトで有効になっています。この機能を有効にした後の TiCDC オープン プロトコルの出力形式については、 [TiCDC オープン プロトコル - 行変更イベント](/ticdc/ticdc-open-protocol.md#row-changed-event)を参照してください。
 
 ## 照合順序の新しいフレームワークを有効にしてテーブルをレプリケートする {#replicate-tables-with-the-new-framework-for-collations-enabled}
 
-v4.0.15、v5.0.4、v5.1.1、および v5.2.0 以降、TiCDC は[<a href="/character-set-and-collation.md#new-framework-for-collations">照合順序の新しいフレームワーク</a>](/character-set-and-collation.md#new-framework-for-collations)を有効にしたテーブルをサポートします。
+v4.0.15、v5.0.4、v5.1.1、および v5.2.0 以降、TiCDC は[照合順序の新しいフレームワーク](/character-set-and-collation.md#new-framework-for-collations)を有効にしたテーブルをサポートします。
 
 ## 有効なインデックスのないテーブルをレプリケートする {#replicate-tables-without-a-valid-index}
 

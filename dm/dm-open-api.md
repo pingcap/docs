@@ -5,7 +5,7 @@ summary: Learn about how to use OpenAPI interface to manage the cluster status a
 
 # OpenAPI を使用した DM クラスターの管理 {#maintain-dm-clusters-using-openapi}
 
-DM は、DM クラスターのクエリと操作を簡単に行うための OpenAPI 機能を提供します。これは[<a href="/dm/dmctl-introduction.md">dmctl ツール</a>](/dm/dmctl-introduction.md)の機能と同様です。
+DM は、DM クラスターのクエリと操作を簡単に行うための OpenAPI 機能を提供します。これは[dmctl ツール](/dm/dmctl-introduction.md)の機能と同様です。
 
 OpenAPI を有効にするには、次のいずれかの操作を実行します。
 
@@ -25,7 +25,7 @@ OpenAPI を有効にするには、次のいずれかの操作を実行します
 
 > **ノート：**
 >
-> -   DM は、OpenAPI 3.0.0 標準を満たす[<a href="https://github.com/pingcap/tiflow/blob/master/dm/openapi/spec/dm.yaml">仕様書</a>](https://github.com/pingcap/tiflow/blob/master/dm/openapi/spec/dm.yaml)を提供します。このドキュメントには、すべてのリクエスト パラメーターと戻り値が含まれています。ドキュメント yaml をコピーして、 [<a href="https://editor.swagger.io/">スワガーエディター</a>](https://editor.swagger.io/)でプレビューできます。
+> -   DM は、OpenAPI 3.0.0 標準を満たす[スワガーエディター](https://editor.swagger.io/)でプレビューできます。
 >
 > -   DM マスター ノードを展開した後、 `http://{master-addr}/api/v1/docs`にアクセスしてドキュメントをオンラインでプレビューできます。
 
@@ -33,44 +33,44 @@ API を使用して、DM クラスター上で次のメンテナンス操作を�
 
 ## クラスターを管理するための API {#apis-for-managing-clusters}
 
--   [<a href="#get-the-information-of-a-dm-master-node">DMマスターノードの情報を取得する</a>](#get-the-information-of-a-dm-master-node)
--   [<a href="#stop-a-dm-master-node">DMマスターノードを停止する</a>](#stop-a-dm-master-node)
--   [<a href="#get-the-information-of-a-dm-worker-node">DMワーカーノードの情報を取得する</a>](#get-the-information-of-a-dm-worker-node)
--   [<a href="#stop-a-dm-worker-node">DM ワーカー ノードを停止する</a>](#stop-a-dm-worker-node)
+-   [DMマスターノードの情報を取得する](#get-the-information-of-a-dm-master-node)
+-   [DMマスターノードを停止する](#stop-a-dm-master-node)
+-   [DMワーカーノードの情報を取得する](#get-the-information-of-a-dm-worker-node)
+-   [DM ワーカー ノードを停止する](#stop-a-dm-worker-node)
 
 ## データソースを管理するための API {#apis-for-managing-data-sources}
 
--   [<a href="#create-a-data-source">データソースを作成する</a>](#create-a-data-source)
--   [<a href="#get-a-data-source">データソースを取得する</a>](#get-a-data-source)
--   [<a href="#delete-the-data-source">データソースを削除する</a>](#delete-the-data-source)
--   [<a href="#update-a-data-source">データソースを更新する</a>](#update-a-data-source)
--   [<a href="#enable-a-data-source">データソースを有効にする</a>](#enable-a-data-source)
--   [<a href="#disable-a-data-source">データソースを無効にする</a>](#disable-a-data-source)
--   [<a href="#get-the-information-of-a-data-source">データソースの情報を取得する</a>](#get-the-information-of-a-data-source)
--   [<a href="#get-the-data-source-list">データソースリストを取得する</a>](#get-the-data-source-list)
--   [<a href="#start-the-relay-log-feature-for-data-sources">データソースのリレーログ機能を開始する</a>](#start-the-relay-log-feature-for-data-sources)
--   [<a href="#stop-the-relay-log-feature-for-data-sources">データソースのリレーログ機能を停止する</a>](#stop-the-relay-log-feature-for-data-sources)
--   [<a href="#purge-relay-log-files-that-are-no-longer-required">不要になったリレーログファイルをパージする</a>](#purge-relay-log-files-that-are-no-longer-required)
--   [<a href="#change-the-bindings-between-the-data-source-and-dm-workers">データソースとDMワーカー間のバインディングを変更する</a>](#change-the-bindings-between-the-data-source-and-dm-workers)
--   [<a href="#get-the-list-of-schema-names-of-a-data-source">データソースのスキーマ名のリストを取得します。</a>](#get-the-list-of-schema-names-of-a-data-source)
--   [<a href="#get-the-list-of-table-names-of-a-specified-schema-in-a-data-source">データソース内の指定されたスキーマのテーブル名のリストを取得します。</a>](#get-the-list-of-table-names-of-a-specified-schema-in-a-data-source)
+-   [データソースを作成する](#create-a-data-source)
+-   [データソースを取得する](#get-a-data-source)
+-   [データソースを削除する](#delete-the-data-source)
+-   [データソースを更新する](#update-a-data-source)
+-   [データソースを有効にする](#enable-a-data-source)
+-   [データソースを無効にする](#disable-a-data-source)
+-   [データソースの情報を取得する](#get-the-information-of-a-data-source)
+-   [データソースリストを取得する](#get-the-data-source-list)
+-   [データソースのリレーログ機能を開始する](#start-the-relay-log-feature-for-data-sources)
+-   [データソースのリレーログ機能を停止する](#stop-the-relay-log-feature-for-data-sources)
+-   [不要になったリレーログファイルをパージする](#purge-relay-log-files-that-are-no-longer-required)
+-   [データソースとDMワーカー間のバインディングを変更する](#change-the-bindings-between-the-data-source-and-dm-workers)
+-   [データソースのスキーマ名のリストを取得します。](#get-the-list-of-schema-names-of-a-data-source)
+-   [データソース内の指定されたスキーマのテーブル名のリストを取得します。](#get-the-list-of-table-names-of-a-specified-schema-in-a-data-source)
 
 ## レプリケーションタスクを管理するための API {#apis-for-managing-replication-tasks}
 
--   [<a href="#create-a-replication-task">レプリケーションタスクを作成する</a>](#create-a-replication-task)
--   [<a href="#get-a-replication-task">レプリケーションタスクを取得する</a>](#get-a-replication-task)
--   [<a href="#delete-a-replication-task">レプリケーションタスクを削除する</a>](#delete-a-replication-task)
--   [<a href="#update-a-replication-task">レプリケーションタスクを更新する</a>](#update-a-replication-task)
--   [<a href="#start-a-replication-task">レプリケーションタスクを開始する</a>](#start-a-replication-task)
--   [<a href="#stop-a-replication-task">レプリケーションタスクを停止する</a>](#stop-a-replication-task)
--   [<a href="#get-the-information-of-a-replication-task">レプリケーションタスクの情報を取得する</a>](#get-the-information-of-a-replication-task)
--   [<a href="#get-the-replication-task-list">レプリケーションタスクリストを取得する</a>](#get-the-replication-task-list)
--   [<a href="#get-the-migration-rules-of-a-replication-task">レプリケーションタスクの移行ルールを取得する</a>](#get-the-migration-rules-of-a-replication-task)
--   [<a href="#get-the-list-of-schema-names-of-the-data-source-that-is-associated-with-a-replication-task">レプリケーションタスクに関連付けられたデータソースのスキーマ名のリストを取得します。</a>](#get-the-list-of-schema-names-of-the-data-source-that-is-associated-with-a-replication-task)
--   [<a href="#get-the-list-of-table-names-of-a-specified-schema-in-the-data-source-that-is-associated-with-a-replication-task">レプリケーション タスクに関連付けられているデータ ソース内の指定されたスキーマのテーブル名のリストを取得します。</a>](#get-the-list-of-table-names-of-a-specified-schema-in-the-data-source-that-is-associated-with-a-replication-task)
--   [<a href="#get-the-create-statement-for-schemas-of-the-data-source-that-is-associated-with-a-replication-task">レプリケーション タスクに関連付けられたデータ ソースのスキーマの CREATE ステートメントを取得します。</a>](#get-the-create-statement-for-schemas-of-the-data-source-that-is-associated-with-a-replication-task)
--   [<a href="#update-the-create-statement-for-schemas-of-the-data-source-that-is-associated-with-a-replication-task">レプリケーション タスクに関連付けられたデータ ソースのスキーマの CREATE ステートメントを更新します。</a>](#update-the-create-statement-for-schemas-of-the-data-source-that-is-associated-with-a-replication-task)
--   [<a href="#delete-a-schema-of-the-data-source-that-is-associated-with-a-replication-task">レプリケーションタスクに関連付けられたデータソースのスキーマを削除します</a>](#delete-a-schema-of-the-data-source-that-is-associated-with-a-replication-task)
+-   [レプリケーションタスクを作成する](#create-a-replication-task)
+-   [レプリケーションタスクを取得する](#get-a-replication-task)
+-   [レプリケーションタスクを削除する](#delete-a-replication-task)
+-   [レプリケーションタスクを更新する](#update-a-replication-task)
+-   [レプリケーションタスクを開始する](#start-a-replication-task)
+-   [レプリケーションタスクを停止する](#stop-a-replication-task)
+-   [レプリケーションタスクの情報を取得する](#get-the-information-of-a-replication-task)
+-   [レプリケーションタスクリストを取得する](#get-the-replication-task-list)
+-   [レプリケーションタスクの移行ルールを取得する](#get-the-migration-rules-of-a-replication-task)
+-   [レプリケーションタスクに関連付けられたデータソースのスキーマ名のリストを取得します。](#get-the-list-of-schema-names-of-the-data-source-that-is-associated-with-a-replication-task)
+-   [レプリケーション タスクに関連付けられているデータ ソース内の指定されたスキーマのテーブル名のリストを取得します。](#get-the-list-of-table-names-of-a-specified-schema-in-the-data-source-that-is-associated-with-a-replication-task)
+-   [レプリケーション タスクに関連付けられたデータ ソースのスキーマの CREATE ステートメントを取得します。](#get-the-create-statement-for-schemas-of-the-data-source-that-is-associated-with-a-replication-task)
+-   [レプリケーション タスクに関連付けられたデータ ソースのスキーマの CREATE ステートメントを更新します。](#update-the-create-statement-for-schemas-of-the-data-source-that-is-associated-with-a-replication-task)
+-   [レプリケーションタスクに関連付けられたデータソースのスキーマを削除します](#delete-a-schema-of-the-data-source-that-is-associated-with-a-replication-task)
 
 次のセクションでは、API の具体的な使用法について説明します。
 
@@ -569,7 +569,7 @@ curl -X 'GET' \
 
 ## データソースのリレーログ機能を開始する {#start-the-relay-log-feature-for-data-sources}
 
-この API は非同期インターフェイスです。リクエストが成功した場合、返される本文のステータス コードは 200 です。最新のステータスを確認するには、 [<a href="#get-the-information-of-a-data-source">データソースの情報を取得する</a>](#get-the-information-of-a-data-source)手順を実行します。
+この API は非同期インターフェイスです。リクエストが成功した場合、返される本文のステータス コードは 200 です。最新のステータスを確認するには、 [データソースの情報を取得する](#get-the-information-of-a-data-source)手順を実行します。
 
 ### リクエストURI {#request-uri}
 
@@ -596,7 +596,7 @@ curl -X 'POST' \
 
 ## データソースのリレーログ機能を停止する {#stop-the-relay-log-feature-for-data-sources}
 
-この API は非同期インターフェイスです。リクエストが成功した場合、返される本文のステータス コードは 200 です。最新のステータスを確認するには、 [<a href="#get-the-information-of-a-data-source">データソースの情報を取得する</a>](#get-the-information-of-a-data-source)を実行します。
+この API は非同期インターフェイスです。リクエストが成功した場合、返される本文のステータス コードは 200 です。最新のステータスを確認するには、 [データソースの情報を取得する](#get-the-information-of-a-data-source)を実行します。
 
 ### リクエストURI {#request-uri}
 
@@ -620,7 +620,7 @@ curl -X 'POST' \
 
 ## 不要になったリレー ログ ファイルを削除する {#purge-relay-log-files-that-are-no-longer-required}
 
-この API は非同期インターフェイスです。リクエストが成功した場合、返される本文のステータス コードは 200 です。最新のステータスを確認するには、 [<a href="#get-the-information-of-a-data-source">データソースの情報を取得する</a>](#get-the-information-of-a-data-source)手順を実行します。
+この API は非同期インターフェイスです。リクエストが成功した場合、返される本文のステータス コードは 200 です。最新のステータスを確認するには、 [データソースの情報を取得する](#get-the-information-of-a-data-source)手順を実行します。
 
 ### リクエストURI {#request-uri}
 
@@ -643,7 +643,7 @@ curl -X 'POST' \
 
 ## データソースとDMワーカー間のバインディングを変更する {#change-the-bindings-between-the-data-source-and-dm-workers}
 
-この API は非同期インターフェイスです。リクエストが成功した場合、返される本文のステータス コードは 200 です。最新のステータスを確認するには、 [<a href="#get-the-information-of-a-dm-worker-node">DMワーカーノードの情報を取得する</a>](#get-the-information-of-a-dm-worker-node)を実行します。
+この API は非同期インターフェイスです。リクエストが成功した場合、返される本文のステータス コードは 200 です。最新のステータスを確認するには、 [DMワーカーノードの情報を取得する](#get-the-information-of-a-dm-worker-node)を実行します。
 
 ### リクエストURI {#request-uri}
 
@@ -1234,7 +1234,7 @@ curl -X 'PUT' \
 
 ## レプリケーションタスクを開始する {#start-a-replication-task}
 
-この API は非同期インターフェイスです。リクエストが成功した場合、返される本文のステータス コードは 204 です。タスクの最新のステータスを確認するには、 [<a href="#get-the-information-of-a-replication-task">レプリケーションタスクの情報を取得する</a>](#get-the-information-of-a-replication-task)を実行します。
+この API は非同期インターフェイスです。リクエストが成功した場合、返される本文のステータス コードは 204 です。タスクの最新のステータスを確認するには、 [レプリケーションタスクの情報を取得する](#get-the-information-of-a-replication-task)を実行します。
 
 ### リクエストURI {#request-uri}
 
@@ -1252,7 +1252,7 @@ curl -X 'POST' \
 
 ## レプリケーションタスクを停止する {#stop-a-replication-task}
 
-この API は非同期インターフェイスです。リクエストが成功した場合、返される本文のステータス コードは 200 です。タスクの最新のステータスを確認するには、 [<a href="#get-the-information-of-a-replication-task">レプリケーションタスクの情報を取得する</a>](#get-the-information-of-a-replication-task)を行うことができます。
+この API は非同期インターフェイスです。リクエストが成功した場合、返される本文のステータス コードは 200 です。タスクの最新のステータスを確認するには、 [レプリケーションタスクの情報を取得する](#get-the-information-of-a-replication-task)を行うことができます。
 
 ### リクエストURI {#request-uri}
 

@@ -5,7 +5,7 @@ summary: Learn about the execution plan information returned by the EXPLAIN stat
 
 # MPP モードでの Explain ステートメント {#explain-statements-in-the-mpp-mode}
 
-TiDB は、 [<a href="/tiflash/use-tiflash-mpp-mode.md">MPPモード</a>](/tiflash/use-tiflash-mpp-mode.md)を使用したクエリの実行をサポートしています。 MPP モードでは、TiDB オプティマイザーは MPP の実行プランを生成します。 MPP モードは、 [<a href="/tiflash/tiflash-overview.md">TiFlash</a>](/tiflash/tiflash-overview.md)にレプリカがあるテーブルでのみ使用できることに注意してください。
+TiDB は、 [TiFlash](/tiflash/tiflash-overview.md)にレプリカがあるテーブルでのみ使用できることに注意してください。
 
 このドキュメントの例は、次のサンプル データに基づいています。
 
@@ -175,8 +175,8 @@ EXPLAIN ANALYZE SELECT COUNT(*) FROM t1 GROUP BY id;
 
 v6.6.0 以降、新しいフィールド`MPPVersion`と`Compression`が MPP 実行プランに追加されます。
 
--   `MppVersion` : MPP 実行プランのバージョン番号。システム変数[<a href="/system-variables.md#mpp_version-new-in-v660">`mpp_version`</a>](/system-variables.md#mpp_version-new-in-v660)を通じて設定できます。
--   `Compression` : `Exchange`演算子のデータ圧縮モード。システム変数[<a href="/system-variables.md#mpp_exchange_compression_mode-new-in-v660">`mpp_exchange_compression_mode`</a>](/system-variables.md#mpp_exchange_compression_mode-new-in-v660)を通じて設定できます。データ圧縮が有効になっていない場合、このフィールドは実行計画に表示されません。
+-   `MppVersion` : MPP 実行プランのバージョン番号。システム変数[`mpp_version`](/system-variables.md#mpp_version-new-in-v660)を通じて設定できます。
+-   `Compression` : `Exchange`演算子のデータ圧縮モード。システム変数[`mpp_exchange_compression_mode`](/system-variables.md#mpp_exchange_compression_mode-new-in-v660)を通じて設定できます。データ圧縮が有効になっていない場合、このフィールドは実行計画に表示されません。
 
 次の例を参照してください。
 

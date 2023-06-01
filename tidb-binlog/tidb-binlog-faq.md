@@ -76,7 +76,7 @@ binlogctl -cmd pumps
 
 Pumpインスタンスがクラッシュすると、 Drainerはこのインスタンスのデータを取得できないため、データをダウンストリームにレプリケートできません。このPumpインスタンスが通常の状態に回復できる場合、 Drainer はレプリケーションを再開します。そうでない場合は、次の手順を実行します。
 
-1.  このPumpインスタンスのデータを破棄するには、 [<a href="/tidb-binlog/maintain-tidb-binlog-cluster.md">binlogctl を使用して、このPumpインスタンスの状態を`offline`に変更します。</a>](/tidb-binlog/maintain-tidb-binlog-cluster.md)を使用します。
+1.  このPumpインスタンスのデータを破棄するには、 [binlogctl を使用して、このPumpインスタンスの状態を`offline`に変更します。](/tidb-binlog/maintain-tidb-binlog-cluster.md)を使用します。
 
 2.  Drainer はこのポンプ インスタンスのデータを取得できないため、下流と上流のデータに一貫性がありません。この状況では、完全バックアップと増分バックアップを再度実行します。手順は次のとおりです。
 
@@ -112,13 +112,13 @@ Drainer は開始時にチェックポイントを読み取ります。 Drainer 
 
     1.  新しいDrainerをデプロイて開始します ( Drainer はチェックポイントを読み取り、レプリケーションを再開できます)。
 
-    2.  [<a href="/tidb-binlog/maintain-tidb-binlog-cluster.md">binlogctl は、古いDrainerの状態を`offline`に変更します。</a>](/tidb-binlog/maintain-tidb-binlog-cluster.md)を使用します。
+    2.  [binlogctl は、古いDrainerの状態を`offline`に変更します。](/tidb-binlog/maintain-tidb-binlog-cluster.md)を使用します。
 
 -   チェックポイントが失われた場合は、次の手順を実行します。
 
     1.  新しいDrainerをデプロイするには、古いDrainerの`commit-ts`を新しいDrainerの`initialCommitTs`として取得します。
 
-    2.  [<a href="/tidb-binlog/maintain-tidb-binlog-cluster.md">binlogctl は、古いDrainerの状態を`offline`に変更します。</a>](/tidb-binlog/maintain-tidb-binlog-cluster.md)を使用します。
+    2.  [binlogctl は、古いDrainerの状態を`offline`に変更します。](/tidb-binlog/maintain-tidb-binlog-cluster.md)を使用します。
 
 ## 完全バックアップとbinlogバックアップ ファイルを使用してクラスターのデータを復元するにはどうすればよいですか? {#how-to-restore-the-data-of-a-cluster-using-a-full-backup-and-a-binlog-backup-file}
 
@@ -144,7 +144,7 @@ Drainer は開始時にチェックポイントを読み取ります。 Drainer 
 
 ## PumpまたはDrainerノードを一時停止または閉じることができるのはいつですか? {#when-can-i-pause-or-close-a-pump-or-drainer-node}
 
-PumpまたはDrainerの状態の説明と、プロセスの開始および終了方法については、 [<a href="/tidb-binlog/maintain-tidb-binlog-cluster.md">TiDBBinlogクラスタの操作</a>](/tidb-binlog/maintain-tidb-binlog-cluster.md)を参照してください。
+PumpまたはDrainerの状態の説明と、プロセスの開始および終了方法については、 [TiDBBinlogクラスタの操作](/tidb-binlog/maintain-tidb-binlog-cluster.md)を参照してください。
 
 サービスを一時的に停止する必要がある場合は、 PumpノードまたはDrainerノードを一時停止します。例えば：
 
@@ -232,7 +232,7 @@ Pumpプロセスが終了し、ノードが`paused`状態にある場合、ノ�
 
 ## <code>change pump</code>や<code>change drainer</code>などの SQL 操作を使用して、PumpまたはDrainerサービスを一時停止または終了できますか? {#can-i-use-sql-operations-such-as-code-change-pump-code-and-code-change-drainer-code-to-pause-or-close-the-pump-or-drainer-service}
 
-いいえ。これらの SQL 操作の詳細については、 [<a href="/tidb-binlog/maintain-tidb-binlog-cluster.md#use-sql-statements-to-manage-pump-or-drainer">SQL ステートメントを使用してPumpまたはDrainerを管理する</a>](/tidb-binlog/maintain-tidb-binlog-cluster.md#use-sql-statements-to-manage-pump-or-drainer)を参照してください。
+いいえ。これらの SQL 操作の詳細については、 [SQL ステートメントを使用してPumpまたはDrainerを管理する](/tidb-binlog/maintain-tidb-binlog-cluster.md#use-sql-statements-to-manage-pump-or-drainer)を参照してください。
 
 これらの SQL 操作は、PD に保存された状態情報を直接変更し、binlogctl の`update-pump`および`update-drainer`コマンドと機能的に同等です。 PumpサービスまたはDrainerサービスを一時停止または閉じるには、binlogctl ツールを使用します。
 

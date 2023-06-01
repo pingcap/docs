@@ -13,7 +13,7 @@ summary: Learn the deployment topology of TiSpark using TiUP based on the minima
 
 TiSpark は、TiDB/TiKV 上で Apache Spark を実行し、複雑な OLAP クエリに答えるために構築されたコンポーネントです。これにより、Spark プラットフォームと分散 TiKV クラスターの両方の利点が TiDB に導入され、TiDB はオンライン トランザクションと分析の両方に対するワンストップ ソリューションになります。
 
-TiSparkアーキテクチャとその使用方法の詳細については、 [<a href="/tispark-overview.md">TiSpark ユーザーガイド</a>](/tispark-overview.md)を参照してください。
+TiSparkアーキテクチャとその使用方法の詳細については、 [TiSpark ユーザーガイド](/tispark-overview.md)を参照してください。
 
 ## トポロジ情報 {#topology-information}
 
@@ -27,10 +27,10 @@ TiSparkアーキテクチャとその使用方法の詳細については、 [<a
 
 ## トポロジテンプレート {#topology-templates}
 
--   [<a href="https://github.com/pingcap/docs/blob/master/config-templates/simple-tispark.yaml">シンプルな TiSpark トポロジ テンプレート</a>](https://github.com/pingcap/docs/blob/master/config-templates/simple-tispark.yaml)
--   [<a href="https://github.com/pingcap/docs/blob/master/config-templates/complex-tispark.yaml">複雑な TiSpark トポロジ テンプレート</a>](https://github.com/pingcap/docs/blob/master/config-templates/complex-tispark.yaml)
+-   [シンプルな TiSpark トポロジ テンプレート](https://github.com/pingcap/docs/blob/master/config-templates/simple-tispark.yaml)
+-   [複雑な TiSpark トポロジ テンプレート](https://github.com/pingcap/docs/blob/master/config-templates/complex-tispark.yaml)
 
-上記の TiDB クラスター トポロジー ファイルの構成項目の詳細な説明については、 [<a href="/tiup/tiup-cluster-topology-reference.md">TiUPを使用して TiDB を展開するためのトポロジコンフィグレーションファイル</a>](/tiup/tiup-cluster-topology-reference.md)を参照してください。
+上記の TiDB クラスター トポロジー ファイルの構成項目の詳細な説明については、 [TiUPを使用して TiDB を展開するためのトポロジコンフィグレーションファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
 
 > **ノート：**
 >
@@ -41,6 +41,6 @@ TiSparkアーキテクチャとその使用方法の詳細については、 [<a
 
 TiSpark は Apache Spark クラスターに基づいているため、TiSpark を含む TiDB クラスターを開始する前に、TiSpark をデプロイするサーバーにJavaランタイム環境 (JRE) 8 がインストールされていることを確認する必要があります。そうしないと、TiSpark を起動できません。
 
-TiUP は、 JRE の自動インストールをサポートしていません。自分でインストールする必要があります。詳しいインストール手順については、 [<a href="https://openjdk.java.net/install/">事前に構築された OpenJDK パッケージをダウンロードしてインストールする方法</a>](https://openjdk.java.net/install/)を参照してください。
+TiUP は、 JRE の自動インストールをサポートしていません。自分でインストールする必要があります。詳しいインストール手順については、 [事前に構築された OpenJDK パッケージをダウンロードしてインストールする方法](https://openjdk.java.net/install/)を参照してください。
 
 JRE 8 が展開サーバーにすでにインストールされているが、システムのデフォルトのパッケージ管理ツールのパスにない場合は、トポロジ構成で`java_home`パラメータを設定することで、使用する JRE 環境のパスを指定できます。このパラメータは`JAVA_HOME`システム環境変数に対応します。

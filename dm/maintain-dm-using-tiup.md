@@ -7,7 +7,7 @@ summary: Learn how to maintain a DM cluster using TiUP.
 
 このドキュメントでは、 TiUP DMコンポーネントを使用して DM クラスターを維持する方法を紹介します。
 
-DM クラスターをまだデプロイしていない場合は、手順について[<a href="/dm/deploy-a-dm-cluster-using-tiup.md">TiUPを使用した DMクラスタのデプロイ</a>](/dm/deploy-a-dm-cluster-using-tiup.md)を参照してください。
+DM クラスターをまだデプロイしていない場合は、手順について[TiUPを使用した DMクラスタのデプロイ](/dm/deploy-a-dm-cluster-using-tiup.md)を参照してください。
 
 > **ノート：**
 >
@@ -153,7 +153,7 @@ tiup dm scale-in prod-cluster -N 172.16.5.140:8262
 
     > **ノート：**
     >
-    > トポロジ ファイルを作成する必要があります。このファイルには、既存のノードではなく、新しいノードの説明のみが含まれます。その他の設定項目 (展開ディレクトリなど) については、この[<a href="https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml">TiUP設定パラメータの例</a>](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml)を参照してください。
+    > トポロジ ファイルを作成する必要があります。このファイルには、既存のノードではなく、新しいノードの説明のみが含まれます。その他の設定項目 (展開ディレクトリなど) については、この[TiUP設定パラメータの例](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml)を参照してください。
 
     ```yaml
     ---
@@ -177,13 +177,13 @@ tiup dm scale-in prod-cluster -N 172.16.5.140:8262
 
 > **ノート：**
 >
-> v2.0.5 以降、 dmctl は[<a href="/dm/dm-export-import-config.md">データソースのエクスポートとインポート、およびクラスターのタスクコンフィグレーション</a>](/dm/dm-export-import-config.md)をサポートします。
+> v2.0.5 以降、 dmctl は[データソースのエクスポートとインポート、およびクラスターのタスクコンフィグレーション](/dm/dm-export-import-config.md)をサポートします。
 >
 > アップグレードする前に、 `config export`を使用してクラスターの構成ファイルをエクスポートできます。アップグレード後、以前のバージョンにダウングレードする必要がある場合は、まず以前のクラスターを再デプロイし、次に`config import`を使用して以前の構成ファイルをインポートします。
 >
 > v2.0.5 より前のクラスターの場合は、dmctl v2.0.5 以降を使用して、データ ソースおよびタスク構成ファイルをエクスポートおよびインポートできます。
 >
-> v2.0.2 以降のクラスターの場合、現在、リレー ワーカーに関連する構成の自動インポートはサポートされていません。 `start-relay`コマンドを使用して手動で[<a href="/dm/relay-log.md#enable-and-disable-relay-log">リレーログの開始</a>](/dm/relay-log.md#enable-and-disable-relay-log)実行できます。
+> v2.0.2 以降のクラスターの場合、現在、リレー ワーカーに関連する構成の自動インポートはサポートされていません。 `start-relay`コマンドを使用して手動で[リレーログの開始](/dm/relay-log.md#enable-and-disable-relay-log)実行できます。
 
 ローリング アップグレード プロセスはアプリケーションに対して可能な限り透過的に行われ、ビジネスには影響しません。操作はノードによって異なります。
 
@@ -271,10 +271,10 @@ tiup dm patch prod-cluster /tmp/dm--hotfix.tar.gz -N 172.16.4.5:8261
 > -   インポートする前に元のクラスターを停止する必要があります。
 > -   2.0 にアップグレードする必要があるタスクには`stop-task`を実行しないでください。
 > -   TiUP は、v2.0.0-rc.2 以降のバージョンの DM クラスターへのインポートのみをサポートします。
-> -   `import`コマンドは、DM 1.0 クラスターから新しい DM 2.0 クラスターにデータをインポートするために使用されます。 DM 移行タスクを既存の DM 2.0 クラスターにインポートする必要がある場合は、 [<a href="/dm/manually-upgrade-dm-1.0-to-2.0.md">TiDB データ移行を v1.0.x から v2.0+ に手動でアップグレードする</a>](/dm/manually-upgrade-dm-1.0-to-2.0.md)を参照してください。
+> -   `import`コマンドは、DM 1.0 クラスターから新しい DM 2.0 クラスターにデータをインポートするために使用されます。 DM 移行タスクを既存の DM 2.0 クラスターにインポートする必要がある場合は、 [TiDB データ移行を v1.0.x から v2.0+ に手動でアップグレードする](/dm/manually-upgrade-dm-1.0-to-2.0.md)を参照してください。
 > -   一部のコンポーネントのデプロイメント ディレクトリは、元のクラスターのデプロイメント ディレクトリと異なります。 `display`コマンドを実行して詳細を表示できます。
 > -   インポートする前に`tiup update --self && tiup update dm`を実行して、 TiUP DMコンポーネントが最新バージョンであることを確認します。
-> -   インポート後のクラスターには DM マスター ノードが 1 つだけ存在します。 DM マスターをスケールアウトするには、 [<a href="#scale-out-a-cluster">クラスターをスケールアウトする</a>](#scale-out-a-cluster)を参照してください。
+> -   インポート後のクラスターには DM マスター ノードが 1 つだけ存在します。 DM マスターをスケールアウトするには、 [クラスターをスケールアウトする](#scale-out-a-cluster)を参照してください。
 
 TiUPがリリースされる前は、DM クラスターのデプロイに DM-Ansible がよく使用されていました。 TiUP がDM-Ansible によってデプロイされた DM 1.0 クラスターを引き継ぐことができるようにするには、 `import`コマンドを使用します。
 
@@ -290,7 +290,7 @@ tiup dm import --dir=/path/to/dm-ansible --cluster-version ${version}
 
 `import`コマンドを使用するプロセスは次のとおりです。
 
-1.  TiUP は、 DM-Ansible を使用して以前にデプロイされた DM クラスターに基づいてトポロジ ファイル[<a href="https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml">`topology.yml`</a>](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml)を生成します。
+1.  TiUP は、 DM-Ansible を使用して以前にデプロイされた DM クラスターに基づいてトポロジ ファイル[`topology.yml`](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml)を生成します。
 2.  トポロジ ファイルが生成されたことを確認したら、それを使用して v2.0 以降のバージョンの DM クラスターをデプロイできます。
 
 デプロイメントが完了したら、 `tiup dm start`コマンドを実行してクラスターを起動し、DM カーネルのアップグレード プロセスを開始できます。

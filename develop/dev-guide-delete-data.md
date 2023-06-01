@@ -5,15 +5,15 @@ summary: Learn about the SQL syntax, best practices, and examples for deleting d
 
 # データの削除 {#delete-data}
 
-このドキュメントでは、 [<a href="/sql-statements/sql-statement-delete.md">消去</a>](/sql-statements/sql-statement-delete.md) SQL ステートメントを使用して TiDB 内のデータを削除する方法について説明します。期限切れのデータを定期的に削除する必要がある場合は、 [<a href="/time-to-live.md">有効期間</a>](/time-to-live.md)機能を使用してください。
+このドキュメントでは、 [有効期間](/time-to-live.md)機能を使用してください。
 
 ## 始める前に {#before-you-start}
 
 このドキュメントを読む前に、以下を準備する必要があります。
 
--   [<a href="/develop/dev-guide-build-cluster-in-cloud.md">TiDB Cloud(Serverless Tier) で TiDBクラスタを構築する</a>](/develop/dev-guide-build-cluster-in-cloud.md)
--   [<a href="/develop/dev-guide-schema-design-overview.md">スキーマ設計の概要</a>](/develop/dev-guide-schema-design-overview.md) 、 [<a href="/develop/dev-guide-create-database.md">データベースを作成する</a>](/develop/dev-guide-create-database.md) 、 [<a href="/develop/dev-guide-create-table.md">テーブルを作成する</a>](/develop/dev-guide-create-table.md) 、および[<a href="/develop/dev-guide-create-secondary-indexes.md">セカンダリインデックスの作成</a>](/develop/dev-guide-create-secondary-indexes.md)を読み取ります
--   [<a href="/develop/dev-guide-insert-data.md">データの挿入</a>](/develop/dev-guide-insert-data.md)
+-   [TiDB Cloud(Serverless Tier) で TiDBクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md)
+-   [セカンダリインデックスの作成](/develop/dev-guide-create-secondary-indexes.md)を読み取ります
+-   [データの挿入](/develop/dev-guide-insert-data.md)
 
 ## SQL 構文 {#sql-syntax}
 
@@ -28,7 +28,7 @@ DELETE FROM {table} WHERE {filter}
 |  `{table}` |     テーブル名     |
 | `{filter}` | フィルターのマッチング条件 |
 
-この例では、 `DELETE`の単純な使用例のみを示します。詳細については、 [<a href="/sql-statements/sql-statement-delete.md">DELETE 構文</a>](/sql-statements/sql-statement-delete.md)を参照してください。
+この例では、 `DELETE`の単純な使用例のみを示します。詳細については、 [DELETE 構文](/sql-statements/sql-statement-delete.md)を参照してください。
 
 ## ベストプラクティス {#best-practices}
 
@@ -38,29 +38,29 @@ DELETE FROM {table} WHERE {filter}
 
 <CustomContent platform="tidb">
 
--   大量の行 (たとえば、1 万行以上) を削除する場合は、 [<a href="#bulk-delete">一括削除</a>](#bulk-delete)を使用します。これは、TiDB が単一トランザクションのサイズを制限しているためです (デフォルトでは[<a href="/tidb-configuration-file.md#txn-total-size-limit">txn 合計サイズ制限</a>](/tidb-configuration-file.md#txn-total-size-limit) MB)。
+-   大量の行 (たとえば、1 万行以上) を削除する場合は、 [txn 合計サイズ制限](/tidb-configuration-file.md#txn-total-size-limit) MB)。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
--   TiDB は単一トランザクションのサイズをデフォルトで 100 MB に制限しているため、大量の行 (たとえば、1 万行以上) を削除する場合は[<a href="#bulk-delete">一括削除</a>](#bulk-delete)使用します。
+-   TiDB は単一トランザクションのサイズをデフォルトで 100 MB に制限しているため、大量の行 (たとえば、1 万行以上) を削除する場合は[一括削除](#bulk-delete)使用します。
 
 </CustomContent>
 
--   テーブル内のすべてのデータを削除する場合は、 `DELETE`ステートメントを使用しないでください。代わりに、 [<a href="/sql-statements/sql-statement-truncate.md">`TRUNCATE`</a>](/sql-statements/sql-statement-truncate.md)ステートメントを使用してください。
--   パフォーマンスに関する考慮事項については、 [<a href="#performance-considerations">パフォーマンスに関する考慮事項</a>](#performance-considerations)を参照してください。
--   大量のデータを削除する必要があるシナリオでは、 [<a href="#non-transactional-bulk-delete">非トランザクション一括削除</a>](#non-transactional-bulk-delete)指定するとパフォーマンスが大幅に向上します。ただし、これにより削除のトランザクションが失われるため、ロールバックでき**ません**。正しい操作を選択していることを確認してください。
+-   テーブル内のすべてのデータを削除する場合は、 `DELETE`ステートメントを使用しないでください。代わりに、 [`TRUNCATE`](/sql-statements/sql-statement-truncate.md)ステートメントを使用してください。
+-   パフォーマンスに関する考慮事項については、 [パフォーマンスに関する考慮事項](#performance-considerations)を参照してください。
+-   大量のデータを削除する必要があるシナリオでは、 [非トランザクション一括削除](#non-transactional-bulk-delete)指定するとパフォーマンスが大幅に向上します。ただし、これにより削除のトランザクションが失われるため、ロールバックでき**ません**。正しい操作を選択していることを確認してください。
 
 ## 例 {#example}
 
-特定の期間内にアプリケーション エラーが見つかり、この期間内の[<a href="/develop/dev-guide-bookshop-schema-design.md#ratings-table">評価</a>](/develop/dev-guide-bookshop-schema-design.md#ratings-table)のすべてのデータ (たとえば`2022-04-15 00:00:00`から`2022-04-15 00:15:00`を削除する必要があるとします。この場合、 `SELECT`ステートメントを使用して、削除されるレコードの数を確認できます。
+特定の期間内にアプリケーション エラーが見つかり、この期間内の[評価](/develop/dev-guide-bookshop-schema-design.md#ratings-table)のすべてのデータ (たとえば`2022-04-15 00:00:00`から`2022-04-15 00:15:00`を削除する必要があるとします。この場合、 `SELECT`ステートメントを使用して、削除されるレコードの数を確認できます。
 
 ```sql
 SELECT COUNT(*) FROM `ratings` WHERE `rated_at` >= "2022-04-15 00:00:00" AND `rated_at` <= "2022-04-15 00:15:00";
 ```
 
-10,000 を超えるレコードが返された場合は、 [<a href="#bulk-delete">一括削除</a>](#bulk-delete)を使用して削除します。
+10,000 を超えるレコードが返された場合は、 [一括削除](#bulk-delete)を使用して削除します。
 
 返されるレコードが 10,000 未満の場合は、次の例を使用してレコードを削除します。
 
@@ -172,19 +172,19 @@ with connection:
 
 <CustomContent platform="tidb">
 
-`rated_at`フィールドは[<a href="/data-type-date-and-time.md">日付と時刻のタイプ</a>](/data-type-date-and-time.md)の`DATETIME`タイプです。タイムゾーンに関係なく、TiDB にリテラル数量として保存されていると想定できます。一方、 `TIMESTAMP`タイプはタイムスタンプを格納するため、異なる[<a href="/configure-time-zone.md">タイムゾーン</a>](/configure-time-zone.md)で異なる時刻文字列を表示します。
+`rated_at`フィールドは[タイムゾーン](/configure-time-zone.md)で異なる時刻文字列を表示します。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-`rated_at`フィールドは[<a href="/data-type-date-and-time.md">日付と時刻のタイプ</a>](/data-type-date-and-time.md)の`DATETIME`タイプです。タイムゾーンに関係なく、TiDB にリテラル数量として保存されていると想定できます。一方、 `TIMESTAMP`タイプはタイムスタンプを格納するため、タイムゾーンが異なると異なる時刻文字列を表示します。
+`rated_at`フィールドは[日付と時刻のタイプ](/data-type-date-and-time.md)の`DATETIME`タイプです。タイムゾーンに関係なく、TiDB にリテラル数量として保存されていると想定できます。一方、 `TIMESTAMP`タイプはタイムスタンプを格納するため、タイムゾーンが異なると異なる時刻文字列を表示します。
 
 </CustomContent>
 
 > **ノート：**
 >
-> MySQL と同様に、 `TIMESTAMP`データ型は[<a href="https://en.wikipedia.org/wiki/Year_2038_problem">2038年問題</a>](https://en.wikipedia.org/wiki/Year_2038_problem)の影響を受けます。 2038 より大きい値を保存する場合は、 `DATETIME`タイプを使用することをお勧めします。
+> MySQL と同様に、 `TIMESTAMP`データ型は[2038年問題](https://en.wikipedia.org/wiki/Year_2038_problem)の影響を受けます。 2038 より大きい値を保存する場合は、 `DATETIME`タイプを使用することをお勧めします。
 
 ## パフォーマンスに関する考慮事項 {#performance-considerations}
 
@@ -194,19 +194,19 @@ TiDB は、 `DELETE`ステートメントを実行した直後にはデータを
 
 GC はデフォルトで 10 分ごとにトリガーされます。各 GC は、 **safe_point**と呼ばれる時点を計算します。この時点より前のデータは再使用されないため、TiDB は安全にクリーンアップできます。
 
-詳細については、 [<a href="/garbage-collection-overview.md">GC機構</a>](/garbage-collection-overview.md)を参照してください。
+詳細については、 [GC機構](/garbage-collection-overview.md)を参照してください。
 
 ### 統計情報を更新する {#update-statistical-information}
 
-TiDB は[<a href="/statistics.md">統計情報</a>](/statistics.md)を使用してインデックスの選択を決定します。大量のデータが削除された後は、インデックスが正しく選択されない可能性が高くなります。 [<a href="/statistics.md#manual-collection">手動収集</a>](/statistics.md#manual-collection)使用して統計を更新できます。これは、SQL パフォーマンスを最適化するためのより正確な統計情報を TiDB オプティマイザーに提供します。
+TiDB は[手動収集](/statistics.md#manual-collection)使用して統計を更新できます。これは、SQL パフォーマンスを最適化するためのより正確な統計情報を TiDB オプティマイザーに提供します。
 
 ## 一括削除 {#bulk-delete}
 
-テーブルから複数のデータ行を削除する必要がある場合は、 [<a href="#example">`DELETE`例</a>](#example)を選択し、 `WHERE`句を使用して、削除する必要があるデータをフィルタリングできます。
+テーブルから複数のデータ行を削除する必要がある場合は、 [`DELETE`例](#example)を選択し、 `WHERE`句を使用して、削除する必要があるデータをフィルタリングできます。
 
 <CustomContent platform="tidb">
 
-ただし、大量の行 (1 万行を超える) を削除する必要がある場合は、データを反復的に削除することをお勧めします。つまり、削除が完了するまで反復ごとにデータの一部を削除します。これは、TiDB が単一トランザクションのサイズを制限しているためです (デフォルトでは[<a href="/tidb-configuration-file.md#txn-total-size-limit">`txn-total-size-limit`</a>](/tidb-configuration-file.md#txn-total-size-limit) MB)。プログラムまたはスクリプトでループを使用して、このような操作を実行できます。
+ただし、大量の行 (1 万行を超える) を削除する必要がある場合は、データを反復的に削除することをお勧めします。つまり、削除が完了するまで反復ごとにデータの一部を削除します。これは、TiDB が単一トランザクションのサイズを制限しているためです (デフォルトでは[`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit) MB)。プログラムまたはスクリプトでループを使用して、このような操作を実行できます。
 
 </CustomContent>
 
@@ -224,7 +224,7 @@ TiDB は[<a href="/statistics.md">統計情報</a>](/statistics.md)を使用し�
 
 ### 一括削除の例 {#bulk-delete-example}
 
-特定の期間内にアプリケーション エラーが見つかったとします。この期間内に[<a href="/develop/dev-guide-bookshop-schema-design.md#ratings-table">評価</a>](/develop/dev-guide-bookshop-schema-design.md#ratings-table)のデータをすべて削除する必要があります (たとえば、 `2022-04-15 00:00:00`から`2022-04-15 00:15:00`まで)。15 分間に 10,000 件を超えるレコードが書き込まれます。以下のように実行できます。
+特定の期間内にアプリケーション エラーが見つかったとします。この期間内に[評価](/develop/dev-guide-bookshop-schema-design.md#ratings-table)のデータをすべて削除する必要があります (たとえば、 `2022-04-15 00:00:00`から`2022-04-15 00:15:00`まで)。15 分間に 10,000 件を超えるレコードが書き込まれます。以下のように実行できます。
 
 <SimpleTab groupId="language">
 <div label="Java" value="java">
@@ -380,11 +380,11 @@ with connection:
 
 > **ノート：**
 >
-> v6.1.0 以降、TiDB は[<a href="/non-transactional-dml.md">非トランザクション DML ステートメント</a>](/non-transactional-dml.md)をサポートします。この機能は、TiDB v6.1.0 より前のバージョンでは使用できません。
+> v6.1.0 以降、TiDB は[非トランザクション DML ステートメント](/non-transactional-dml.md)をサポートします。この機能は、TiDB v6.1.0 より前のバージョンでは使用できません。
 
 ### 非トランザクション一括削除の前提条件 {#prerequisites-of-non-transactional-bulk-delete}
 
-非トランザクション一括削除を使用する前に、必ず最初に[<a href="/non-transactional-dml.md">非トランザクション DML ステートメントのドキュメント</a>](/non-transactional-dml.md)をお読みください。非トランザクション一括削除により、バッチ データ処理シナリオのパフォーマンスと使いやすさが向上しますが、トランザクションの原子性と分離性が損なわれます。
+非トランザクション一括削除を使用する前に、必ず最初に[非トランザクション DML ステートメントのドキュメント](/non-transactional-dml.md)をお読みください。非トランザクション一括削除により、バッチ データ処理シナリオのパフォーマンスと使いやすさが向上しますが、トランザクションの原子性と分離性が損なわれます。
 
 したがって、誤った取り扱いによる重大な結果 (データ損失など) を避けるために、慎重に使用する必要があります。
 
@@ -402,11 +402,11 @@ BATCH ON {shard_column} LIMIT {batch_size} {delete_statement};
 |    `{batch_size}`    |    各バッチのサイズを制御します。   |
 | `{delete_statement}` |   `DELETE`ステートメント。   |
 
-前述の例は、非トランザクション一括削除ステートメントの単純な使用例のみを示しています。詳細については、 [<a href="/non-transactional-dml.md">非トランザクション DML ステートメント</a>](/non-transactional-dml.md)を参照してください。
+前述の例は、非トランザクション一括削除ステートメントの単純な使用例のみを示しています。詳細については、 [非トランザクション DML ステートメント](/non-transactional-dml.md)を参照してください。
 
 ### 非トランザクション一括削除の例 {#example-of-non-transactional-bulk-delete}
 
-[<a href="#bulk-delete-example">一括削除の例</a>](#bulk-delete-example)と同じシナリオで、次の SQL ステートメントは非トランザクション一括削除を実行する方法を示しています。
+[一括削除の例](#bulk-delete-example)と同じシナリオで、次の SQL ステートメントは非トランザクション一括削除を実行する方法を示しています。
 
 ```sql
 BATCH ON `rated_at` LIMIT 1000 DELETE FROM `ratings` WHERE `rated_at` >= "2022-04-15 00:00:00" AND  `rated_at` <= "2022-04-15 00:15:00";

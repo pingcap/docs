@@ -5,7 +5,7 @@ summary: Learn about optimistic and pessimistic transactions in TiDB.
 
 # 楽観的なトランザクションと悲観的なトランザクション {#optimistic-transactions-and-pessimistic-transactions}
 
-[<a href="/optimistic-transaction.md">楽観的取引</a>](/optimistic-transaction.md)モデルはトランザクションを直接コミットし、競合が発生した場合はロールバックします。対照的に、 [<a href="/pessimistic-transaction.md">悲観的取引</a>](/pessimistic-transaction.md)モデルは、トランザクションを実際にコミットする前に、変更が必要なリソースのロックを試行し、トランザクションが正常に実行できることを確認した後でのみコミットを開始します。
+[悲観的取引](/pessimistic-transaction.md)モデルは、トランザクションを実際にコミットする前に、変更が必要なリソースのロックを試行し、トランザクションが正常に実行できることを確認した後でのみコミットを開始します。
 
 楽観的トランザクション モデルは、直接コミットが成功する可能性が高いため、競合率が低いシナリオに適しています。ただし、トランザクションの競合が発生すると、ロールバックのコストが比較的高くなります。
 
@@ -13,7 +13,7 @@ summary: Learn about optimistic and pessimistic transactions in TiDB.
 
 悲観的トランザクション モデルはより直感的で、アプリケーション側での実装が簡単です。楽観的トランザクション モデルには、アプリケーション側の複雑な再試行メカニズムが必要です。
 
-以下は[<a href="/develop/dev-guide-bookshop-schema-design.md">書店</a>](/develop/dev-guide-bookshop-schema-design.md)の例です。本を購入する例を使用して、楽観的取引と悲観悲観的取引の長所と短所を示しています。本を買うまでの流れは主に以下のような流れになります。
+以下は[書店](/develop/dev-guide-bookshop-schema-design.md)の例です。本を購入する例を使用して、楽観的取引と悲観悲観的取引の長所と短所を示しています。本を買うまでの流れは主に以下のような流れになります。
 
 1.  在庫数を更新します
 2.  注文を作成する
@@ -29,7 +29,7 @@ summary: Learn about optimistic and pessimistic transactions in TiDB.
 
 <div label="Java" value="java">
 
-複数のスレッドを使用して複数のユーザーが同時にデータを挿入する状況をシミュレートするため、安全なスレッドを持つ接続オブジェクトを使用する必要があります。ここでは、Java の一般的な接続プール[<a href="https://github.com/brettwooldridge/HikariCP">HikariCP</a>](https://github.com/brettwooldridge/HikariCP)をデモに使用します。
+複数のスレッドを使用して複数のユーザーが同時にデータを挿入する状況をシミュレートするため、安全なスレッドを持つ接続オブジェクトを使用する必要があります。ここでは、Java の一般的な接続プール[HikariCP](https://github.com/brettwooldridge/HikariCP)をデモに使用します。
 
 </div>
 
@@ -37,7 +37,7 @@ summary: Learn about optimistic and pessimistic transactions in TiDB.
 
 Golangの`sql.DB`同時実行安全であるため、サードパーティのパッケージをインポートする必要はありません。
 
-TiDB トランザクションを適応させるには、次のコードに従ってツールキット[<a href="https://github.com/pingcap-inc/tidb-example-golang/tree/main/util">ユーティリティ</a>](https://github.com/pingcap-inc/tidb-example-golang/tree/main/util)を作成します。
+TiDB トランザクションを適応させるには、次のコードに従ってツールキット[ユーティリティ](https://github.com/pingcap-inc/tidb-example-golang/tree/main/util)を作成します。
 
 ```go
 package util
@@ -1182,13 +1182,13 @@ public class TxnExample {
 
 <div label="Golang" value="golang">
 
-[<a href="#write-a-pessimistic-transaction-example">悲観的トランザクションの例を書く</a>](#write-a-pessimistic-transaction-example)セクションのGolang の例はすでに楽観的トランザクションをサポートしており、変更せずに直接使用できます。
+[悲観的トランザクションの例を書く](#write-a-pessimistic-transaction-example)セクションのGolang の例はすでに楽観的トランザクションをサポートしており、変更せずに直接使用できます。
 
 </div>
 
 <div label="Python" value="python">
 
-[<a href="#write-a-pessimistic-transaction-example">悲観的トランザクションの例を書く</a>](#write-a-pessimistic-transaction-example)セクションの Python の例はすでに楽観的トランザクションをサポートしているため、変更せずに直接使用できます。
+[悲観的トランザクションの例を書く](#write-a-pessimistic-transaction-example)セクションの Python の例はすでに楽観的トランザクションをサポートしているため、変更せずに直接使用できます。
 
 </div>
 

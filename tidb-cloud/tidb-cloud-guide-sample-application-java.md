@@ -15,7 +15,7 @@ summary: Learn how to build a simple CRUD application with TiDB and Java.
 >
 > Java 8 以降のJavaバージョンを使用することをお勧めします。
 >
-> Spring Boot を使用してアプリケーション開発を行う場合は、 [<a href="/develop/dev-guide-sample-application-java-spring-boot.md">Spring Boot を使用して TiDB アプリを構築する</a>](/develop/dev-guide-sample-application-java-spring-boot.md)を参照してください。
+> Spring Boot を使用してアプリケーション開発を行う場合は、 [Spring Boot を使用して TiDB アプリを構築する](/develop/dev-guide-sample-application-java-spring-boot.md)を参照してください。
 
 ## ステップ 1. TiDB クラスターを起動する {#step-1-launch-your-tidb-cluster}
 
@@ -25,17 +25,17 @@ TiDB クラスターの起動方法を紹介します。
 
 **TiDB CloudServerless Tierクラスターを使用する**
 
-詳細な手順については、 [<a href="/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster">Serverless Tierクラスターの作成</a>](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
+詳細な手順については、 [Serverless Tierクラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
 
 **ローカルクラスターを使用する**
 
-詳細な手順については、 [<a href="/quick-start-with-tidb.md#deploy-a-local-test-cluster">ローカルテストクラスターをデプロイ</a>](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[<a href="/production-deployment-using-tiup.md">TiUPを使用した TiDBクラスタのデプロイ</a>](/production-deployment-using-tiup.md)を参照してください。
+詳細な手順については、 [TiUPを使用した TiDBクラスタのデプロイ](/production-deployment-using-tiup.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[<a href="/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster">Serverless Tierクラスターの作成</a>](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
+[Serverless Tierクラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
 
 </CustomContent>
 
@@ -49,9 +49,9 @@ git clone https://github.com/pingcap-inc/tidb-example-java.git
 
 <div label="Using Mybatis (Recommended)" value="mybatis">
 
-[<a href="https://mybatis.org/mybatis-3/index.html">マイバティス</a>](https://mybatis.org/mybatis-3/index.html)と比較すると、JDBC 実装はベスト プラクティスではない可能性があります。これは、エラー処理ロジックを手動で記述する必要があり、コードを簡単に再利用できないため、コードが若干冗長になるためです。
+[マイバティス](https://mybatis.org/mybatis-3/index.html)と比較すると、JDBC 実装はベスト プラクティスではない可能性があります。これは、エラー処理ロジックを手動で記述する必要があり、コードを簡単に再利用できないため、コードが若干冗長になるためです。
 
-Mybatis は、人気のあるオープンソースのJavaクラス永続フレームワークです。以下では[<a href="https://mybatis.org/generator/quickstart.html">MyBatis ジェネレーター</a>](https://mybatis.org/generator/quickstart.html) Maven プラグインとして使用して永続化レイヤーコードを生成します。
+Mybatis は、人気のあるオープンソースのJavaクラス永続フレームワークです。以下では[MyBatis ジェネレーター](https://mybatis.org/generator/quickstart.html) Maven プラグインとして使用して永続化レイヤーコードを生成します。
 
 `plain-java-mybatis`ディレクトリに移動します。
 
@@ -93,7 +93,7 @@ cd plain-java-mybatis
 -   `src/main/java/com/pingcap/model/PlayerMapper.java` : `PlayerMapper`のインターフェース。
 -   `src/main/resources/mapper/PlayerMapper.xml` : `Player`の XML マッピング。 Mybatis はこの構成を使用して、 `PlayerMapper`インターフェースの実装クラスを自動的に生成します。
 
-これらのファイルを生成するための戦略は、 [<a href="https://mybatis.org/generator/quickstart.html">マイバティスジェネレーター</a>](https://mybatis.org/generator/quickstart.html)の構成ファイルである`mybatis-generator.xml`に書かれています。次の設定ファイルには、その使用方法を説明するコメントがあります。
+これらのファイルを生成するための戦略は、 [マイバティスジェネレーター](https://mybatis.org/generator/quickstart.html)の構成ファイルである`mybatis-generator.xml`に書かれています。次の設定ファイルには、その使用方法を説明するコメントがあります。
 
 ```xml
 <!DOCTYPE generatorConfiguration PUBLIC
@@ -426,7 +426,7 @@ public interface PlayerMapperEx extends PlayerMapper {
 </mapper>
 ```
 
-`PlayerDAO.java`はデータを管理するために使用されるクラスで、 `DAO` [<a href="https://en.wikipedia.org/wiki/Data_access_object">データアクセスオブジェクト</a>](https://en.wikipedia.org/wiki/Data_access_object)を意味します。このクラスは、データを書き込むための一連のデータ操作メソッドを定義します。 Mybatis はその中で、オブジェクト マッピングや基本オブジェクトの CRUD などの多数の操作をカプセル化し、コードを大幅に簡素化します。
+`PlayerDAO.java`はデータを管理するために使用されるクラスで、 `DAO` [データアクセスオブジェクト](https://en.wikipedia.org/wiki/Data_access_object)を意味します。このクラスは、データを書き込むための一連のデータ操作メソッドを定義します。 Mybatis はその中で、オブジェクト マッピングや基本オブジェクトの CRUD などの多数の操作をカプセル化し、コードを大幅に簡素化します。
 
 ```java
 package com.pingcap.dao;
@@ -675,7 +675,7 @@ cd plain-java-hibernate
 
 `HibernateExample.java`は`plain-java-hibernate`の本体です。 JDBC と比較して、Hibernate を使用する場合は、異なるデータベース間でのデータベース作成の差異が回避されるため、構成ファイルのパスを記述するだけで済みます。
 
-`PlayerDAO`はデータを管理するために使用されるクラスで、 `DAO` [<a href="https://en.wikipedia.org/wiki/Data_access_object">データアクセスオブジェクト</a>](https://en.wikipedia.org/wiki/Data_access_object)を意味します。このクラスは、データを書き込むための一連のデータ操作メソッドを定義します。 JDBC と比較して、Hibernate はオブジェクト マッピングや基本オブジェクトの CRUD などの多数の操作をカプセル化するため、コードが大幅に簡素化されます。
+`PlayerDAO`はデータを管理するために使用されるクラスで、 `DAO` [データアクセスオブジェクト](https://en.wikipedia.org/wiki/Data_access_object)を意味します。このクラスは、データを書き込むための一連のデータ操作メソッドを定義します。 JDBC と比較して、Hibernate はオブジェクト マッピングや基本オブジェクトの CRUD などの多数の操作をカプセル化するため、コードが大幅に簡素化されます。
 
 `PlayerBean`は、テーブルのマッピングであるデータ エンティティ クラスです。 `PlayerBean`の各プロパティは、 `player`テーブルのフィールドに対応します。 JDBC と比較すると、Hibernate `PlayerBean`では、詳細情報のマッピング関係を示す注釈が追加されています。
 
@@ -950,7 +950,7 @@ CREATE TABLE player (
 
 `JDBCExample.java`は`plain-java-jdbc`の本体です。 TiDB は MySQL プロトコルと高い互換性があるため、TiDB に接続するには MySQL ソース インスタンス`MysqlDataSource`を初期化する必要があります。次に、オブジェクト管理用に`PlayerDAO`初期化し、それを使用してデータの読み取り、編集、追加、削除を行うことができます。
 
-`PlayerDAO`はデータを管理するために使用されるクラスで、 `DAO` [<a href="https://en.wikipedia.org/wiki/Data_access_object">データアクセスオブジェクト</a>](https://en.wikipedia.org/wiki/Data_access_object)を意味します。このクラスは、データを書き込む機能を提供する一連のデータ操作メソッドを定義します。
+`PlayerDAO`はデータを管理するために使用されるクラスで、 `DAO` [データアクセスオブジェクト](https://en.wikipedia.org/wiki/Data_access_object)を意味します。このクラスは、データを書き込む機能を提供する一連のデータ操作メソッドを定義します。
 
 `PlayerBean`は、テーブルのマッピングであるデータ エンティティ クラスです。 `PlayerBean`の各プロパティは、 `player`テーブルのフィールドに対応します。
 
@@ -1712,19 +1712,19 @@ java -jar target/plain-java-jdbc-0.0.1-jar-with-dependencies.jar
 
 <div label="Using Mybatis (Recommended)" value="mybatis">
 
-[<a href="https://github.com/pingcap-inc/tidb-example-java/blob/main/Expected-Output.md#plain-java-mybatis">Mybatis の期待される出力</a>](https://github.com/pingcap-inc/tidb-example-java/blob/main/Expected-Output.md#plain-java-mybatis)
+[Mybatis の期待される出力](https://github.com/pingcap-inc/tidb-example-java/blob/main/Expected-Output.md#plain-java-mybatis)
 
 </div>
 
 <div label="Using Hibernate (Recommended)" value="hibernate">
 
-[<a href="https://github.com/pingcap-inc/tidb-example-java/blob/main/Expected-Output.md#plain-java-hibernate">Hibernate の予想される出力</a>](https://github.com/pingcap-inc/tidb-example-java/blob/main/Expected-Output.md#plain-java-hibernate)
+[Hibernate の予想される出力](https://github.com/pingcap-inc/tidb-example-java/blob/main/Expected-Output.md#plain-java-hibernate)
 
 </div>
 
 <div label="Using JDBC" value="jdbc">
 
-[<a href="https://github.com/pingcap-inc/tidb-example-java/blob/main/Expected-Output.md#plain-java-jdbc">JDBC の予期される出力</a>](https://github.com/pingcap-inc/tidb-example-java/blob/main/Expected-Output.md#plain-java-jdbc)
+[JDBC の予期される出力](https://github.com/pingcap-inc/tidb-example-java/blob/main/Expected-Output.md#plain-java-jdbc)
 
 </div>
 

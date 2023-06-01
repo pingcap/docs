@@ -17,13 +17,13 @@ v5.1 以降、TiDB はロックビュー機能をサポートしています。�
 
 これらのテーブルの詳細については、次のドキュメントを参照してください。
 
--   [<a href="/information-schema/information-schema-tidb-trx.md">`TIDB_TRX`および`CLUSTER_TIDB_TRX`</a>](/information-schema/information-schema-tidb-trx.md) : 現在の TiDB ノードまたはクラスター全体で実行中のすべてのトランザクションの情報を提供します。これには、トランザクションがロック待機状態にあるかどうか、ロック待機時間、トランザクションで実行されたステートメントのダイジェストが含まれます。
--   [<a href="/information-schema/information-schema-data-lock-waits.md">`DATA_LOCK_WAITS`</a>](/information-schema/information-schema-data-lock-waits.md) : ブロッキングおよびブロックされたトランザクションの`start_ts` 、ブロックされた SQL ステートメントのダイジェスト、および待機が発生したキーを含む、TiKV の悲観的ロック待機情報を提供します。
--   [<a href="/information-schema/information-schema-deadlocks.md">`DEADLOCKS`と`CLUSTER_DEADLOCKS`</a>](/information-schema/information-schema-deadlocks.md) : 現在の TiDB ノードまたはクラスター全体で最近発生したいくつかのデッドロック イベントの情報を提供します。これには、デッドロック ループ内のトランザクション間の待機関係、トランザクション内で現在実行中のステートメントのダイジェスト、およびキーが含まれます。待機が発生します。
+-   [`TIDB_TRX`および`CLUSTER_TIDB_TRX`](/information-schema/information-schema-tidb-trx.md) : 現在の TiDB ノードまたはクラスター全体で実行中のすべてのトランザクションの情報を提供します。これには、トランザクションがロック待機状態にあるかどうか、ロック待機時間、トランザクションで実行されたステートメントのダイジェストが含まれます。
+-   [`DATA_LOCK_WAITS`](/information-schema/information-schema-data-lock-waits.md) : ブロッキングおよびブロックされたトランザクションの`start_ts` 、ブロックされた SQL ステートメントのダイジェスト、および待機が発生したキーを含む、TiKV の悲観的ロック待機情報を提供します。
+-   [`DEADLOCKS`と`CLUSTER_DEADLOCKS`](/information-schema/information-schema-deadlocks.md) : 現在の TiDB ノードまたはクラスター全体で最近発生したいくつかのデッドロック イベントの情報を提供します。これには、デッドロック ループ内のトランザクション間の待機関係、トランザクション内で現在実行中のステートメントのダイジェスト、およびキーが含まれます。待機が発生します。
 
 > **ノート：**
 >
-> ロック ビュー関連のシステム テーブルに表示される SQL ステートメントは、SQL ダイジェストに従って内部クエリによって取得される正規化された SQL ステートメント (つまり、形式と引数のない SQL ステートメント) であるため、テーブルは、形式と引数。 SQL ダイジェストと正規化された SQL ステートメントの詳細については、 [<a href="/statement-summary-tables.md">ステートメント概要テーブル</a>](/statement-summary-tables.md)を参照してください。
+> ロック ビュー関連のシステム テーブルに表示される SQL ステートメントは、SQL ダイジェストに従って内部クエリによって取得される正規化された SQL ステートメント (つまり、形式と引数のない SQL ステートメント) であるため、テーブルは、形式と引数。 SQL ダイジェストと正規化された SQL ステートメントの詳細については、 [ステートメント概要テーブル](/statement-summary-tables.md)を参照してください。
 
 次のセクションでは、これらの表を使用したいくつかの問題のトラブルシューティングの例を示します。
 
@@ -153,9 +153,9 @@ CURRENT_SQL_DIGEST_TEXT: update `t` set `v` = `v` + ? where `id` = ? ;
 1 row in set (0.01 sec)
 ```
 
-上記のクエリでは、 [<a href="/functions-and-operators/tidb-functions.md#tidb_decode_sql_digests">`TIDB_DECODE_SQL_DIGESTS`</a>](/functions-and-operators/tidb-functions.md#tidb_decode_sql_digests)関数が`CLUSTER_TIDB_TRX`テーブルの`ALL_SQL_DIGESTS`列で使用されています。この関数は、この列 (値は SQL ダイジェストのセット) を正規化された SQL ステートメントに変換しようとします。これにより、可読性が向上します。
+上記のクエリでは、 [`TIDB_DECODE_SQL_DIGESTS`](/functions-and-operators/tidb-functions.md#tidb_decode_sql_digests)関数が`CLUSTER_TIDB_TRX`テーブルの`ALL_SQL_DIGESTS`列で使用されています。この関数は、この列 (値は SQL ダイジェストのセット) を正規化された SQL ステートメントに変換しようとします。これにより、可読性が向上します。
 
-現在のトランザクションの`start_ts`不明な場合は、 `TIDB_TRX` / `CLUSTER_TIDB_TRX`テーブルまたは[<a href="/information-schema/information-schema-processlist.md">`PROCESSLIST` / `CLUSTER_PROCESSLIST`</a>](/information-schema/information-schema-processlist.md)テーブルの情報から調べてみることができます。
+現在のトランザクションの`start_ts`不明な場合は、 `TIDB_TRX` / `CLUSTER_TIDB_TRX`テーブルまたは[`PROCESSLIST` / `CLUSTER_PROCESSLIST`](/information-schema/information-schema-processlist.md)テーブルの情報から調べてみることができます。
 
 ## 楽観的ロックの競合のトラブルシューティング {#troubleshoot-optimistic-lock-conflicts}
 
@@ -212,7 +212,7 @@ TiDB クラスター内の読み取り/書き込み競合は、次の方法で�
 
 -   読み取り/書き込みの競合が発生すると、自動バックオフと再試行がトリガーされます。上の例と同様に、Txn1 にはバックオフと再試行があります。初回のリトライは 10 ms、最長のリトライは 3000 ms、合計時間は最大 20000 ms です。
 
--   TiDB コントロールのサブコマンド[<a href="/tidb-control.md#the-decoder-command">`decoder`</a>](/tidb-control.md#the-decoder-command)を使用すると、指定したキーに対応する行のテーブル ID と ROWID を表示できます。
+-   TiDB コントロールのサブコマンド[`decoder`](/tidb-control.md#the-decoder-command)を使用すると、指定したキーに対応する行のテーブル ID と ROWID を表示できます。
 
     ```sh
     ./tidb-ctl decoder "t\x00\x00\x00\x00\x00\x00\x00\x1c_r\x00\x00\x00\x00\x00\x00\x00\xfa"
@@ -239,7 +239,7 @@ TiDB ダッシュボードの`KV Errors`パネルには、トランザクショ�
 
 ### ロックノットファウンドエラー {#locknotfound-error}
 
-「TxnLockNotFound」のエラー ログは、トランザクションのコミット時間が TTL 時間より長く、トランザクションがコミットしようとしたときに、そのロックが他のトランザクションによってロールバックされたことを意味します。 TiDBサーバーがトランザクションのコミット再試行を有効にしている場合、このトランザクションは[<a href="/system-variables.md#tidb_retry_limit">tidb_retry_limit</a>](/system-variables.md#tidb_retry_limit)に従って再実行されます。 (明示的トランザクションと暗黙的トランザクションの違いに注意してください。)
+「TxnLockNotFound」のエラー ログは、トランザクションのコミット時間が TTL 時間より長く、トランザクションがコミットしようとしたときに、そのロックが他のトランザクションによってロールバックされたことを意味します。 TiDBサーバーがトランザクションのコミット再試行を有効にしている場合、このトランザクションは[tidb_retry_limit](/system-variables.md#tidb_retry_limit)に従って再実行されます。 (明示的トランザクションと暗黙的トランザクションの違いに注意してください。)
 
 「LockNotFound」エラーがあるかどうかは、次の方法で確認できます。
 
@@ -287,13 +287,13 @@ TiDB ダッシュボードの`KV Errors`パネルには、トランザクショ�
 
 ### 読み取り/書き込みの競合 {#read-write-conflicts}
 
-エラー メッセージと解決策は、楽観的ロックの競合の[<a href="#read-write-conflicts">読み取り/書き込み競合</a>](#read-write-conflicts)と同じです。
+エラー メッセージと解決策は、楽観的ロックの競合の[読み取り/書き込み競合](#read-write-conflicts)と同じです。
 
 ### 悲観的なロックの再試行制限に達しました {#pessimistic-lock-retry-limit-reached}
 
 トランザクションの競合が非常に深刻な場合、または書き込み競合が発生した場合、楽観的トランザクションは直接終了され、悲観的トランザクションは書き込み競合がなくなるまでstorageからの最新データを使用してステートメントを再試行します。
 
-TiDB のロック操作は書き込み操作であり、操作のプロセスは最初に読み取り、次に書き込みであるため、2 つの RPC リクエストが存在します。トランザクションの途中で書き込み競合が発生した場合、TiDB はターゲット キーのロックを再試行し、各再試行が TiDB ログに出力されます。再試行回数は[<a href="/tidb-configuration-file.md#max-retry-count">pessimistic-txn。max-retry-count</a>](/tidb-configuration-file.md#max-retry-count)で決まります。
+TiDB のロック操作は書き込み操作であり、操作のプロセスは最初に読み取り、次に書き込みであるため、2 つの RPC リクエストが存在します。トランザクションの途中で書き込み競合が発生した場合、TiDB はターゲット キーのロックを再試行し、各再試行が TiDB ログに出力されます。再試行回数は[pessimistic-txn。max-retry-count](/tidb-configuration-file.md#max-retry-count)で決まります。
 
 悲観的トランザクション モードでは、書き込み競合が発生し、再試行回数が上限に達すると、次のキーワードを含むエラー メッセージが TiDB ログに表示されます。
 
@@ -304,11 +304,11 @@ err="pessimistic lock retry limit reached"
 解決策:
 
 -   上記エラーが頻繁に発生する場合は、アプリケーション側から調整することをお勧めします。
--   ビジネスに同じ行 (同じキー) に対する同時ロックが多く、頻繁に競合が発生する場合は、システム変数[<a href="/system-variables.md#tidb_pessimistic_txn_fair_locking-new-in-v700">`tidb_pessimistic_txn_fair_locking`</a>](/system-variables.md#tidb_pessimistic_txn_fair_locking-new-in-v700)を有効にしてみてください。この変数を有効にすると、ロック競合のあるトランザクションのスループット低下 (平均レイテンシーの増加) というコストが発生する可能性があることに注意してください。新しくデプロイされたクラスターの場合、この変数はデフォルトで有効 ( `ON` ) になります。
+-   ビジネスに同じ行 (同じキー) に対する同時ロックが多く、頻繁に競合が発生する場合は、システム変数[`tidb_pessimistic_txn_fair_locking`](/system-variables.md#tidb_pessimistic_txn_fair_locking-new-in-v700)を有効にしてみてください。この変数を有効にすると、ロック競合のあるトランザクションのスループット低下 (平均レイテンシーの増加) というコストが発生する可能性があることに注意してください。新しくデプロイされたクラスターの場合、この変数はデフォルトで有効 ( `ON` ) になります。
 
 ### ロック待機タイムアウトを超過しました {#lock-wait-timeout-exceeded}
 
-悲観的トランザクション モードでは、トランザクションは相互のロックを待ちます。ロック待機のタイムアウトは、TiDB の[<a href="/pessimistic-transaction.md#behaviors">innodb_lock_wait_timeout</a>](/pessimistic-transaction.md#behaviors)パラメータによって定義されます。これは、SQL ステートメント レベルでの最大ロック待機時間であり、SQL ステートメントのロックの予想値ですが、ロックは取得されていません。この時間が経過すると、TiDB は再度ロックを試行せず、対応するエラー メッセージをクライアントに返します。
+悲観的トランザクション モードでは、トランザクションは相互のロックを待ちます。ロック待機のタイムアウトは、TiDB の[innodb_lock_wait_timeout](/pessimistic-transaction.md#behaviors)パラメータによって定義されます。これは、SQL ステートメント レベルでの最大ロック待機時間であり、SQL ステートメントのロックの予想値ですが、ロックは取得されていません。この時間が経過すると、TiDB は再度ロックを試行せず、対応するエラー メッセージをクライアントに返します。
 
 待機ロックのタイムアウトが発生すると、次のエラー メッセージがクライアントに返されます。
 
@@ -322,7 +322,7 @@ ERROR 1205 (HY000): Lock wait timeout exceeded; try restarting transaction
 
 ### TTL マネージャーがタイムアウトしました {#ttl-manager-has-timed-out}
 
-トランザクションの実行時間は GC 時間制限を超えることはできません。さらに、悲観的トランザクションの TTL 時間には上限があり、デフォルト値は 1 時間です。したがって、1 時間を超えて実行された悲観的トランザクションはコミットに失敗します。このタイムアウトしきい値は、TiDB パラメータ[<a href="https://github.com/pingcap/tidb/blob/master/config/config.toml.example">パフォーマンス.max-txn-ttl</a>](https://github.com/pingcap/tidb/blob/master/config/config.toml.example)によって制御されます。
+トランザクションの実行時間は GC 時間制限を超えることはできません。さらに、悲観的トランザクションの TTL 時間には上限があり、デフォルト値は 1 時間です。したがって、1 時間を超えて実行された悲観的トランザクションはコミットに失敗します。このタイムアウトしきい値は、TiDB パラメータ[パフォーマンス.max-txn-ttl](https://github.com/pingcap/tidb/blob/master/config/config.toml.example)によって制御されます。
 
 悲観的トランザクションの実行時間が TTL 時間を超えると、TiDB ログに次のエラー メッセージが表示されます。
 
@@ -347,5 +347,5 @@ TTL manager has timed out, pessimistic locks may expire, please commit or rollba
 
 解決策:
 
--   v5.1 以降のバージョンでデッドロックの原因を確認することが難しい場合は、システム テーブル`INFORMATION_SCHEMA.DEADLOCKS`または`INFORMATION_SCHEMA.CLUSTER_DEADLOCKS`にクエリを実行して、デッドロック待機チェーンの情報を取得することをお勧めします。詳細については、 [<a href="#deadlock-errors">デッドロックエラー</a>](#deadlock-errors)節および[<a href="/information-schema/information-schema-deadlocks.md">`DEADLOCKS`テーブル</a>](/information-schema/information-schema-deadlocks.md)ドキュメントを参照してください。
+-   v5.1 以降のバージョンでデッドロックの原因を確認することが難しい場合は、システム テーブル`INFORMATION_SCHEMA.DEADLOCKS`または`INFORMATION_SCHEMA.CLUSTER_DEADLOCKS`にクエリを実行して、デッドロック待機チェーンの情報を取得することをお勧めします。詳細については、 [`DEADLOCKS`テーブル](/information-schema/information-schema-deadlocks.md)ドキュメントを参照してください。
 -   デッドロックが頻繁に発生する場合は、アプリケーションのトランザクション クエリ ロジックを調整して、デッドロックの発生を減らす必要があります。

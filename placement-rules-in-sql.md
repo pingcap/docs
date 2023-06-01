@@ -9,7 +9,7 @@ SQL の配置ルールは、SQL インターフェイスを使用して TiKV ク
 
 > **ノート：**
 >
-> *SQL での配置ルール*の実装は、PD の*配置ルール機能*に依存します。詳細は[<a href="/configure-placement-rules.md">配置ルールの構成</a>](/configure-placement-rules.md)を参照してください。 SQL の配置ルールのコンテキストでは、*配置ルールは*、他のオブジェクトに添付された*配置ポリシー*、または TiDB から PD に送信されるルールを指す場合があります。
+> *SQL での配置ルール*の実装は、PD の*配置ルール機能*に依存します。詳細は[配置ルールの構成](/configure-placement-rules.md)を参照してください。 SQL の配置ルールのコンテキストでは、*配置ルールは*、他のオブジェクトに添付された*配置ポリシー*、または TiDB から PD に送信されるルールを指す場合があります。
 
 詳細なユーザー シナリオは次のとおりです。
 
@@ -22,7 +22,7 @@ SQL の配置ルールは、SQL インターフェイスを使用して TiKV ク
 
 ## 配置ルールを指定する {#specify-placement-rules}
 
-配置ルールを指定するには、まず[<a href="/sql-statements/sql-statement-create-placement-policy.md">`CREATE PLACEMENT POLICY`</a>](/sql-statements/sql-statement-create-placement-policy.md)を使用して配置ポリシーを作成します。
+配置ルールを指定するには、まず[`CREATE PLACEMENT POLICY`](/sql-statements/sql-statement-create-placement-policy.md)を使用して配置ポリシーを作成します。
 
 ```sql
 CREATE PLACEMENT POLICY myplacementpolicy PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1";
@@ -38,13 +38,13 @@ ALTER TABLE t2 PLACEMENT POLICY=myplacementpolicy;
 
 配置ポリシーはデータベース スキーマに関連付けられておらず、グローバル スコープを持ちます。したがって、配置ポリシーを割り当てるには、 `CREATE TABLE`権限を超える追加の権限は必要ありません。
 
-配置ポリシーを変更するには、 [<a href="/sql-statements/sql-statement-alter-placement-policy.md">`ALTER PLACEMENT POLICY`</a>](/sql-statements/sql-statement-alter-placement-policy.md)を使用できます。変更は、対応するポリシーが割り当てられているすべてのオブジェクトに反映されます。
+配置ポリシーを変更するには、 [`ALTER PLACEMENT POLICY`](/sql-statements/sql-statement-alter-placement-policy.md)を使用できます。変更は、対応するポリシーが割り当てられているすべてのオブジェクトに反映されます。
 
 ```sql
 ALTER PLACEMENT POLICY myplacementpolicy FOLLOWERS=5;
 ```
 
-どのテーブルまたはパーティションにもアタッチされていないポリシーを削除するには、 [<a href="/sql-statements/sql-statement-drop-placement-policy.md">`DROP PLACEMENT POLICY`</a>](/sql-statements/sql-statement-drop-placement-policy.md)使用できます。
+どのテーブルまたはパーティションにもアタッチされていないポリシーを削除するには、 [`DROP PLACEMENT POLICY`](/sql-statements/sql-statement-drop-placement-policy.md)使用できます。
 
 ```sql
 DROP PLACEMENT POLICY myplacementpolicy;
@@ -52,7 +52,7 @@ DROP PLACEMENT POLICY myplacementpolicy;
 
 ## 現在の配置ルールをビュー {#view-current-placement-rules}
 
-テーブルに配置ルールがアタッチされている場合は、 [<a href="/sql-statements/sql-statement-show-create-table.md">`SHOW CREATE TABLE`</a>](/sql-statements/sql-statement-show-create-table.md)の出力で配置ルールを確認できます。利用可能なポリシーの定義を表示するには、 [<a href="/sql-statements/sql-statement-show-create-placement-policy.md">`SHOW CREATE PLACEMENT POLICY`</a>](/sql-statements/sql-statement-show-create-placement-policy.md)を実行します。
+テーブルに配置ルールがアタッチされている場合は、 [`SHOW CREATE PLACEMENT POLICY`](/sql-statements/sql-statement-show-create-placement-policy.md)を実行します。
 
 ```sql
 tidb> SHOW CREATE TABLE t1\G
@@ -70,7 +70,7 @@ Create Policy: CREATE PLACEMENT POLICY myplacementpolicy PRIMARY_REGION="us-east
 1 row in set (0.00 sec)
 ```
 
-[<a href="/information-schema/information-schema-placement-policies.md">`INFORMATION_SCHEMA.PLACEMENT_POLICIES`</a>](/information-schema/information-schema-placement-policies.md)テーブルを使用して、配置ポリシーの定義を表示することもできます。
+[`INFORMATION_SCHEMA.PLACEMENT_POLICIES`](/information-schema/information-schema-placement-policies.md)テーブルを使用して、配置ポリシーの定義を表示することもできます。
 
 ```sql
 tidb> select * from information_schema.placement_policies\G
@@ -97,13 +97,13 @@ SELECT * FROM information_schema.tables WHERE tidb_placement_policy_name IS NOT 
 SELECT * FROM information_schema.partitions WHERE tidb_placement_policy_name IS NOT NULL;
 ```
 
-オブジェクトに付加されたルールは*非同期的に*適用されます。現在の配置のスケジュールの進行状況を表示するには、 [<a href="/sql-statements/sql-statement-show-placement.md">`SHOW PLACEMENT`</a>](/sql-statements/sql-statement-show-placement.md)を使用します。
+オブジェクトに付加されたルールは*非同期的に*適用されます。現在の配置のスケジュールの進行状況を表示するには、 [`SHOW PLACEMENT`](/sql-statements/sql-statement-show-placement.md)を使用します。
 
 ## オプションリファレンス {#option-reference}
 
 > **ノート：**
 >
-> -   配置オプションは、各 TiKV ノードの構成で正しく指定されたラベルによって異なります。たとえば、 `PRIMARY_REGION`オプションは TiKV の`region`ラベルに依存します。 TiKV クラスターで使用可能なすべてのラベルの概要を表示するには、ステートメント[<a href="/sql-statements/sql-statement-show-placement-labels.md">`SHOW PLACEMENT LABELS`</a>](/sql-statements/sql-statement-show-placement-labels.md)を使用します。
+> -   配置オプションは、各 TiKV ノードの構成で正しく指定されたラベルによって異なります。たとえば、 `PRIMARY_REGION`オプションは TiKV の`region`ラベルに依存します。 TiKV クラスターで使用可能なすべてのラベルの概要を表示するには、ステートメント[`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md)を使用します。
 >
 >     ```sql
 >     mysql> show placement labels;
@@ -126,7 +126,7 @@ SELECT * FROM information_schema.partitions WHERE tidb_placement_policy_name IS 
 | `SCHEDULE`       | フォロワーの配置をスケジュールするために使用される戦略。値のオプションは`EVEN` (デフォルト) または`MAJORITY_IN_PRIMARY`です。 |
 | `FOLLOWERS`      | フォロワー数。たとえば、 `FOLLOWERS=2` 、データのレプリカが 3 つ (2 つのフォロワーと 1 つのリーダー) 存在することを意味します。  |
 
-上記の配置オプションに加えて、高度な構成を使用することもできます。詳細は[<a href="#advanced-placement-options">高度な配置オプション</a>](#advanced-placement-options)を参照してください。
+上記の配置オプションに加えて、高度な構成を使用することもできます。詳細は[高度な配置オプション](#advanced-placement-options)を参照してください。
 
 | オプション名                 | 説明                                                                              |
 | ---------------------- | ------------------------------------------------------------------------------- |
@@ -141,7 +141,7 @@ SELECT * FROM information_schema.partitions WHERE tidb_placement_policy_name IS 
 
 ### レプリカの数を増やす {#increase-the-number-of-replicas}
 
-デフォルト設定の[<a href="/pd-configuration-file.md#max-replicas">`max-replicas`</a>](/pd-configuration-file.md#max-replicas)は`3`です。特定のテーブル セットに対してこれを増やすには、次のように配置ポリシーを使用できます。
+デフォルト設定の[`max-replicas`](/pd-configuration-file.md#max-replicas)は`3`です。特定のテーブル セットに対してこれを増やすには、次のように配置ポリシーを使用できます。
 
 ```sql
 CREATE PLACEMENT POLICY fivereplicas FOLLOWERS=4;
@@ -267,13 +267,13 @@ CREATE PLACEMENT POLICY singleaz CONSTRAINTS="[+zone=zone1]" SURVIVAL_PREFERENCE
 
 > **ノート：**
 >
-> `SURVIVAL_PREFERENCES`は PD の`location-labels`に相当します。詳細については、 [<a href="/schedule-replicas-by-topology-labels.md">トポロジーラベルごとにレプリカをスケジュールする</a>](/schedule-replicas-by-topology-labels.md)を参照してください。
+> `SURVIVAL_PREFERENCES`は PD の`location-labels`に相当します。詳細については、 [トポロジーラベルごとにレプリカをスケジュールする](/schedule-replicas-by-topology-labels.md)を参照してください。
 
 ## ツールとの互換性 {#compatibility-with-tools}
 
 | ツール名           | サポートされる最小バージョン | 説明                                                                                                                                                                |
 | -------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| バックアップと復元 (BR) | 6.0            | 配置ルールのインポートとエクスポートをサポートします。詳細は[<a href="/br/backup-and-restore-overview.md#compatibility">BRの互換性</a>](/br/backup-and-restore-overview.md#compatibility)を参照してください。 |
+| バックアップと復元 (BR) | 6.0            | 配置ルールのインポートとエクスポートをサポートします。詳細は[BRの互換性](/br/backup-and-restore-overview.md#compatibility)を参照してください。 |
 | TiDB Lightning | まだ互換性がありません    | TiDB Lightning が配置ポリシーを含むバックアップ データをインポートするとエラーが報告される                                                                                                             |
 | TiCDC          | 6.0            | 配置ルールを無視し、ルールをダウンストリームに複製しません。                                                                                                                                    |
 | TiDBBinlog     | 6.0            | 配置ルールを無視し、ルールをダウンストリームに複製しません。                                                                                                                                    |
@@ -283,5 +283,5 @@ CREATE PLACEMENT POLICY singleaz CONSTRAINTS="[+zone=zone1]" SURVIVAL_PREFERENCE
 既知の制限事項は次のとおりです。
 
 -   一時テーブルは配置オプションをサポートしていません。
--   設定`PRIMARY_REGION`および`REGIONS`では、糖衣構文ルールが許可されます。将来的には、 `PRIMARY_RACK` 、 `PRIMARY_ZONE` 、 `PRIMARY_HOST`の品種も追加する予定です。 [<a href="https://github.com/pingcap/tidb/issues/18030">問題 #18030</a>](https://github.com/pingcap/tidb/issues/18030)を参照してください。
+-   設定`PRIMARY_REGION`および`REGIONS`では、糖衣構文ルールが許可されます。将来的には、 `PRIMARY_RACK` 、 `PRIMARY_ZONE` 、 `PRIMARY_HOST`の品種も追加する予定です。 [問題 #18030](https://github.com/pingcap/tidb/issues/18030)を参照してください。
 -   配置ルールは、保存データが正しい TiKV ストアに存在することを保証するだけです。このルールでは、転送中のデータ (ユーザー クエリまたは内部操作による) が特定のリージョンでのみ発生することは保証されません。

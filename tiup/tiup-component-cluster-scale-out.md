@@ -14,9 +14,9 @@ PD がスケールアウトされると、結合操作によって新しい PD �
 tiup cluster scale-out <cluster-name> <topology.yaml> [flags]
 ```
 
-`<cluster-name>` : 操作するクラスターの名前。クラスター名を忘れた場合は、 [<a href="/tiup/tiup-component-dm-list.md">`cluster list`</a>](/tiup/tiup-component-dm-list.md)コマンドで確認できます。
+`<cluster-name>` : 操作するクラスターの名前。クラスター名を忘れた場合は、 [`cluster list`](/tiup/tiup-component-dm-list.md)コマンドで確認できます。
 
-`<topology.yaml>` : 準備された[<a href="/tiup/tiup-dm-topology-reference.md">トポロジファイル</a>](/tiup/tiup-dm-topology-reference.md) 。このトポロジ ファイルには、現在のクラスターに追加される新しいノードのみが含まれている必要があります。
+`<topology.yaml>` : 準備された[トポロジファイル](/tiup/tiup-dm-topology-reference.md) 。このトポロジ ファイルには、現在のクラスターに追加される新しいノードのみが含まれている必要があります。
 
 ## オプション {#options}
 
@@ -41,7 +41,7 @@ tiup cluster scale-out <cluster-name> <topology.yaml> [flags]
 ### --no-labels {#no-labels}
 
 -   このオプションは、ラベル チェックをスキップするために使用されます。
--   2 つ以上の TiKV ノードが同じ物理マシン上にデプロイされている場合、リスクが存在します。PD はクラスター トポロジを認識していないため、リージョンの複数のレプリカを 1 つの物理マシン上の異なる TiKV ノードにスケジュールする可能性があり、この物理マシンは単一障害点。このリスクを回避するには、ラベルを使用して、同じリージョンを同じマシンにスケジュールしないよう PD に指示できます。ラベルの構成については[<a href="/schedule-replicas-by-topology-labels.md">トポロジーラベルごとにレプリカをスケジュールする</a>](/schedule-replicas-by-topology-labels.md)を参照してください。
+-   2 つ以上の TiKV ノードが同じ物理マシン上にデプロイされている場合、リスクが存在します。PD はクラスター トポロジを認識していないため、リージョンの複数のレプリカを 1 つの物理マシン上の異なる TiKV ノードにスケジュールする可能性があり、この物理マシンは単一障害点。このリスクを回避するには、ラベルを使用して、同じリージョンを同じマシンにスケジュールしないよう PD に指示できます。ラベルの構成については[トポロジーラベルごとにレプリカをスケジュールする](/schedule-replicas-by-topology-labels.md)を参照してください。
 -   テスト環境では、このリスクは問題にならない可能性があるため、 `--no-labels`を使用してチェックをスキップできます。
 -   データ型: `BOOLEAN`
 -   デフォルト: false
@@ -62,4 +62,4 @@ tiup cluster scale-out <cluster-name> <topology.yaml> [flags]
 
 スケールアウトのログ。
 
-[<a href="/tiup/tiup-component-cluster.md#command-list">&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト</a>](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト](/tiup/tiup-component-cluster.md#command-list)

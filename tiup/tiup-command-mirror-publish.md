@@ -4,7 +4,7 @@ title: tiup mirror publish
 
 # tiup mirror publish {#tiup-mirror-publish}
 
-コマンド`tiup mirror publish`は、新しいコンポーネントまたは既存のコンポーネントの新しいバージョンを公開するために使用されます。ターゲットコンポーネントへのアクセス権を持つコンポーネント所有者のみがそれを公開できます。新しいコンポーネント所有者を追加するには、 [<a href="/tiup/tiup-command-mirror-grant.md">`grant`コマンド</a>](/tiup/tiup-command-mirror-grant.md)の使用法を参照してください。
+コマンド`tiup mirror publish`は、新しいコンポーネントまたは既存のコンポーネントの新しいバージョンを公開するために使用されます。ターゲットコンポーネントへのアクセス権を持つコンポーネント所有者のみがそれを公開できます。新しいコンポーネント所有者を追加するには、 [`grant`コマンド](/tiup/tiup-command-mirror-grant.md)の使用法を参照してください。
 
 ## 構文 {#syntax}
 
@@ -15,7 +15,7 @@ tiup mirror publish <comp-name> <version> <tarball> <entry> [flags]
 各パラメータの意味は次のとおりです。
 
 -   `<comp-name>` : コンポーネントの名前 ( `tidb`など)。正規表現`^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$`に一致する文字列を使用することをお勧めします。
--   `<version>` : 公開されるコンポーネントのバージョン。バージョン番号は[<a href="https://semver.org/">セマンティック バージョニング</a>](https://semver.org/)の要件に従う必要があります。
+-   `<version>` : 公開されるコンポーネントのバージョン。バージョン番号は[セマンティック バージョニング](https://semver.org/)の要件に従う必要があります。
 -   `<tarball>` : `.tar.gz`パッケージのローカル ディレクトリ。このパッケージには、コンポーネントの依存関係と実行可能ファイルを含める必要があります。 TiUP はこのパッケージをミラーにアップロードします。
 -   `<entry>` : `<tarball>`のコンポーネントの実行可能ファイルの場所。
 
@@ -84,4 +84,4 @@ tiup mirror publish <comp-name> <version> <tarball> <entry> [flags]
     -   ミラーがリモート ミラーの場合、 TiUP はエラー`Error: The server refused, make sure you have access to this component`を報告します。
     -   ミラーがローカル ミラーの場合、 TiUP はエラー`Error: the signature is not correct`を報告します。
 
-[<a href="/tiup/tiup-command-mirror.md#command-list">&lt;&lt; 前のページに戻る - TiUP Mirror コマンド一覧</a>](/tiup/tiup-command-mirror.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP Mirror コマンド一覧](/tiup/tiup-command-mirror.md#command-list)

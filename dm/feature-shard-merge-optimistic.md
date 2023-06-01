@@ -21,7 +21,7 @@ DM は、シャーディング DDL と呼ばれるオンラインのシャード
 
 ## 楽観的モードのコンフィグレーション {#configuration-of-the-optimistic-mode}
 
-楽観的モードを使用するには、タスク構成ファイルの`shard-mode`項目を`optimistic`として指定します。詳細なサンプル構成ファイルについては、 [<a href="/dm/task-configuration-file-full.md">DM 拡張タスクコンフィグレーションファイル</a>](/dm/task-configuration-file-full.md)を参照してください。
+楽観的モードを使用するには、タスク構成ファイルの`shard-mode`項目を`optimistic`として指定します。詳細なサンプル構成ファイルについては、 [DM 拡張タスクコンフィグレーションファイル](/dm/task-configuration-file-full.md)を参照してください。
 
 ## 制限 {#restrictions}
 

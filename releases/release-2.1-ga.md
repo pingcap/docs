@@ -50,7 +50,7 @@ title: TiDB 2.1 GA Release Notes
 
     -   ハッシュ結合の実行を最適化します。結合タイプが内部結合またはセミ結合で、内部テーブルが空の場合、外部テーブルからデータを読み取らずに結果を返します。
 
-    -   [<a href="/sql-statements/sql-statement-explain-analyze.md">`EXPLAIN ANALYZE`文</a>](/sql-statements/sql-statement-explain-analyze.md)を使用して、各演算子の実行時間や返された行数などの実行時統計を確認できるようになりました。
+    -   [`EXPLAIN ANALYZE`文](/sql-statements/sql-statement-explain-analyze.md)を使用して、各演算子の実行時間や返された行数などの実行時統計を確認できるようになりました。
 
 -   統計
 
@@ -80,7 +80,7 @@ title: TiDB 2.1 GA Release Notes
 
     <!---->
 
-    -   [<a href="https://github.com/pingcap/tidb/blob/master/docs/tidb_http_api.md">HTTP API</a>](https://github.com/pingcap/tidb/blob/master/docs/tidb_http_api.md)を追加します
+    -   [HTTP API](https://github.com/pingcap/tidb/blob/master/docs/tidb_http_api.md)を追加します
 
         -   TiKV クラスター内のテーブル リージョンの分散
 
@@ -92,17 +92,17 @@ title: TiDB 2.1 GA Release Notes
 
     <!---->
 
-    -   [<a href="/faq/sql-faq.md#whats-the-trigger-strategy-for-auto-analyze-in-tidb">`auto_analyze_ratio`システム変数を追加して、Analyze の比率を制御します。</a>](/faq/sql-faq.md#whats-the-trigger-strategy-for-auto-analyze-in-tidb)
+    -   [`auto_analyze_ratio`システム変数を追加して、Analyze の比率を制御します。](/faq/sql-faq.md#whats-the-trigger-strategy-for-auto-analyze-in-tidb)
 
-    -   [<a href="/system-variables.md#tidb_retry_limit">トランザクションの自動再試行時間を制御するために`tidb_retry_limit`システム変数を追加します。</a>](/system-variables.md#tidb_retry_limit)
+    -   [トランザクションの自動再試行時間を制御するために`tidb_retry_limit`システム変数を追加します。](/system-variables.md#tidb_retry_limit)
 
-    -   [<a href="/system-variables.md#tidb_disable_txn_auto_retry">`tidb_disable_txn_auto_retry`システム変数を追加して、トランザクションを自動的に再試行するかどうかを制御します</a>](/system-variables.md#tidb_disable_txn_auto_retry)
+    -   [`tidb_disable_txn_auto_retry`システム変数を追加して、トランザクションを自動的に再試行するかどうかを制御します](/system-variables.md#tidb_disable_txn_auto_retry)
 
-    -   [<a href="/identify-slow-queries.md#admin-show-slow-command">`admin show slow`ステートメントを使用したスロー クエリの取得のサポート</a>](/identify-slow-queries.md#admin-show-slow-command)
+    -   [`admin show slow`ステートメントを使用したスロー クエリの取得のサポート](/identify-slow-queries.md#admin-show-slow-command)
 
-    -   [<a href="/system-variables.md#tidb_slow_log_threshold">`tidb_slow_log_threshold`環境変数を追加して、遅いログのしきい値を自動的に設定します。</a>](/system-variables.md#tidb_slow_log_threshold)
+    -   [`tidb_slow_log_threshold`環境変数を追加して、遅いログのしきい値を自動的に設定します。](/system-variables.md#tidb_slow_log_threshold)
 
-    -   [<a href="/system-variables.md#tidb_query_log_max_len">`tidb_query_log_max_len`環境変数を追加して、ログ内で動的に切り詰められる SQL ステートメントの長さを設定します。</a>](/system-variables.md#tidb_query_log_max_len)
+    -   [`tidb_query_log_max_len`環境変数を追加して、ログ内で動的に切り詰められる SQL ステートメントの長さを設定します。](/system-variables.md#tidb_query_log_max_len)
 
 -   DDL
 
@@ -118,7 +118,7 @@ title: TiDB 2.1 GA Release Notes
 
     -   `admin show ddl jobs`の出力情報にテーブル名とデータベース名を追加します。
 
-    -   [<a href="https://github.com/pingcap/tidb/blob/master/docs/tidb_http_api.md">DDL 所有者を解放し、新しい DDL 所有者の選択を開始するための`ddl/owner/resign` HTTP インターフェイスの使用のサポート</a>](https://github.com/pingcap/tidb/blob/master/docs/tidb_http_api.md)
+    -   [DDL 所有者を解放し、新しい DDL 所有者の選択を開始するための`ddl/owner/resign` HTTP インターフェイスの使用のサポート](https://github.com/pingcap/tidb/blob/master/docs/tidb_http_api.md)
 
 -   互換性
 
@@ -142,7 +142,7 @@ title: TiDB 2.1 GA Release Notes
 
     -   バージョン管理メカニズムを導入し、クラスターのローリング アップデートを互換的にサポートします。
 
-    -   ネットワーク分離後にネットワークが回復したときにリーダーの再選を回避するため、PD ノード間で[<a href="https://github.com/pingcap/pd/blob/5c7b18cf3af91098f07cf46df0b59fbf8c7c5462/conf/config.toml#L22">`Raft PreVote`を有効にする</a>](https://github.com/pingcap/pd/blob/5c7b18cf3af91098f07cf46df0b59fbf8c7c5462/conf/config.toml#L22)
+    -   ネットワーク分離後にネットワークが回復したときにリーダーの再選を回避するため、PD ノード間で[`Raft PreVote`を有効にする](https://github.com/pingcap/pd/blob/5c7b18cf3af91098f07cf46df0b59fbf8c7c5462/conf/config.toml#L22)
 
     -   デフォルトで`raft learner`有効にすると、スケジュール中のマシンの障害によってデータが利用できなくなるリスクが軽減されます。
 
@@ -162,38 +162,38 @@ title: TiDB 2.1 GA Release Notes
 
     -   リージョン内の行数を考慮してリージョンのマージを最適化します。
 
-    -   [<a href="/pd-control.md#config-show--set-option-value--placement-rules">スケジュール ポリシーを制御するコマンドをさらに追加します。</a>](/pd-control.md#config-show--set-option-value--placement-rules)
+    -   [スケジュール ポリシーを制御するコマンドをさらに追加します。](/pd-control.md#config-show--set-option-value--placement-rules)
 
-    -   スケジューリング シナリオをシミュレートするために[<a href="https://github.com/pingcap/pd/tree/release-2.1/tools/pd-simulator">PDシミュレータ</a>](https://github.com/pingcap/pd/tree/release-2.1/tools/pd-simulator)を改善します。
+    -   スケジューリング シナリオをシミュレートするために[PDシミュレータ](https://github.com/pingcap/pd/tree/release-2.1/tools/pd-simulator)を改善します。
 
 -   APIと運用ツール
 
-    -   `TiDB reverse scan`機能をサポートするには[<a href="https://github.com/pingcap/kvproto/blob/8e3f33ac49297d7c93b61a955531191084a2f685/proto/pdpb.proto#L40">`GetPrevRegion`インターフェース</a>](https://github.com/pingcap/kvproto/blob/8e3f33ac49297d7c93b61a955531191084a2f685/proto/pdpb.proto#L40)を追加します
+    -   `TiDB reverse scan`機能をサポートするには[`GetPrevRegion`インターフェース](https://github.com/pingcap/kvproto/blob/8e3f33ac49297d7c93b61a955531191084a2f685/proto/pdpb.proto#L40)を追加します
 
-    -   [<a href="https://github.com/pingcap/kvproto/blob/8e3f33ac49297d7c93b61a955531191084a2f685/proto/pdpb.proto#L54">`BatchSplitRegion`インターフェース</a>](https://github.com/pingcap/kvproto/blob/8e3f33ac49297d7c93b61a955531191084a2f685/proto/pdpb.proto#L54)を追加すると、TiKVリージョンの分割が高速化されます。
+    -   [`BatchSplitRegion`インターフェース](https://github.com/pingcap/kvproto/blob/8e3f33ac49297d7c93b61a955531191084a2f685/proto/pdpb.proto#L54)を追加すると、TiKVリージョンの分割が高速化されます。
 
-    -   TiDB で分散 GC をサポートするには[<a href="https://github.com/pingcap/kvproto/blob/8e3f33ac49297d7c93b61a955531191084a2f685/proto/pdpb.proto#L64-L66">`GCSafePoint`インターフェース</a>](https://github.com/pingcap/kvproto/blob/8e3f33ac49297d7c93b61a955531191084a2f685/proto/pdpb.proto#L64-L66)を追加します。
+    -   TiDB で分散 GC をサポートするには[`GCSafePoint`インターフェース](https://github.com/pingcap/kvproto/blob/8e3f33ac49297d7c93b61a955531191084a2f685/proto/pdpb.proto#L64-L66)を追加します。
 
-    -   TiDB で分散 GC をサポートするには、 [<a href="https://github.com/pingcap/kvproto/blob/8e3f33ac49297d7c93b61a955531191084a2f685/proto/pdpb.proto#L32">`GetAllStores`インターフェース</a>](https://github.com/pingcap/kvproto/blob/8e3f33ac49297d7c93b61a955531191084a2f685/proto/pdpb.proto#L32)を追加します。
+    -   TiDB で分散 GC をサポートするには、 [`GetAllStores`インターフェース](https://github.com/pingcap/kvproto/blob/8e3f33ac49297d7c93b61a955531191084a2f685/proto/pdpb.proto#L32)を追加します。
 
     <!---->
 
     -   pd-ctl は以下をサポートします。
-        -   [<a href="/pd-control.md#operator-check--show--add--remove">リージョン分割の統計の使用</a>](/pd-control.md#operator-check--show--add--remove)
+        -   [リージョン分割の統計の使用](/pd-control.md#operator-check--show--add--remove)
 
-        -   [<a href="/pd-control.md#jq-formatted-json-output-usage">`jq`を呼び出して JSON 出力をフォーマットする</a>](/pd-control.md#jq-formatted-json-output-usage)
+        -   [`jq`を呼び出して JSON 出力をフォーマットする](/pd-control.md#jq-formatted-json-output-usage)
 
-        -   [<a href="/pd-control.md#region-store-store_id">指定した店舗のリージョン情報を確認する</a>](/pd-control.md#region-store-store_id)
+        -   [指定した店舗のリージョン情報を確認する](/pd-control.md#region-store-store_id)
 
-        -   [<a href="/pd-control.md#region-topconfver-limit">バージョン別にソートされた上位 Nリージョンリストを確認する</a>](/pd-control.md#region-topconfver-limit)
+        -   [バージョン別にソートされた上位 Nリージョンリストを確認する](/pd-control.md#region-topconfver-limit)
 
-        -   [<a href="/pd-control.md#region-topsize-limit">サイズ順に並べ替えられた上位 Nリージョンリストを確認する</a>](/pd-control.md#region-topsize-limit)
+        -   [サイズ順に並べ替えられた上位 Nリージョンリストを確認する](/pd-control.md#region-topsize-limit)
 
-        -   [<a href="/pd-control.md#tso">より正確な TSO エンコード</a>](/pd-control.md#tso)
+        -   [より正確な TSO エンコード](/pd-control.md#tso)
 
     <!---->
 
-    -   [<a href="/pd-recover.md">PD回復</a>](/pd-recover.md)は`max-replica`パラメータを指定する必要はありません
+    -   [PD回復](/pd-recover.md)は`max-replica`パラメータを指定する必要はありません
 
 -   メトリクス
 
@@ -215,7 +215,7 @@ title: TiDB 2.1 GA Release Notes
 
     -   組み込み関数をさらに追加する
 
-    -   [<a href="https://github.com/tikv/rfcs/blob/master/text/0010-read-pool.md">コプロセッサー`ReadPool`を追加して、リクエスト処理の同時実行性を向上させます。</a>](https://github.com/tikv/rfcs/blob/master/text/0010-read-pool.md)
+    -   [コプロセッサー`ReadPool`を追加して、リクエスト処理の同時実行性を向上させます。](https://github.com/tikv/rfcs/blob/master/text/0010-read-pool.md)
 
     -   時間関数の解析問題とタイムゾーン関連の問題を修正
 
@@ -227,7 +227,7 @@ title: TiDB 2.1 GA Release Notes
 
     -   連続したロールバック レコードをフォールドして読み取りパフォーマンスを確保します
 
-    -   [<a href="https://github.com/tikv/rfcs/blob/master/text/0002-unsafe-destroy-range.md">`UnsafeDestroyRange` API を追加して、テーブル/インデックスを削除するためのスペースの収集をサポートします。</a>](https://github.com/tikv/rfcs/blob/master/text/0002-unsafe-destroy-range.md)
+    -   [`UnsafeDestroyRange` API を追加して、テーブル/インデックスを削除するためのスペースの収集をサポートします。](https://github.com/tikv/rfcs/blob/master/text/0002-unsafe-destroy-range.md)
 
     -   書き込みへの影響を軽減するために GC モジュールを分離する
 
@@ -237,9 +237,9 @@ title: TiDB 2.1 GA Release Notes
 
     -   RocksDB の停止を回避するためにスナップショット書き込みプロセスを改善します。
 
-    -   [<a href="https://github.com/tikv/rfcs/pull/17">`LocalReader`スレッドを追加して読み取りリクエストを処理し、読み取りリクエストの遅延を短縮します。</a>](https://github.com/tikv/rfcs/pull/17)
+    -   [`LocalReader`スレッドを追加して読み取りリクエストを処理し、読み取りリクエストの遅延を短縮します。](https://github.com/tikv/rfcs/pull/17)
 
-    -   [<a href="https://github.com/tikv/rfcs/pull/6">大量の書き込みによってもたらされる大きなリージョンを回避するために`BatchSplit`をサポートします</a>](https://github.com/tikv/rfcs/pull/6)
+    -   [大量の書き込みによってもたらされる大きなリージョンを回避するために`BatchSplit`をサポートします](https://github.com/tikv/rfcs/pull/6)
 
     -   I/O オーバーヘッドを削減するために、統計に従って`Region Split`サポートします。
 
@@ -259,15 +259,15 @@ title: TiDB 2.1 GA Release Notes
 
 -   tikv-ctl
 
-    -   [<a href="https://tikv.org/docs/3.0/reference/tools/tikv-ctl/#ldb-command">RocksDB 関連の問題を診断するための`ldb`コマンドを追加します。</a>](https://tikv.org/docs/3.0/reference/tools/tikv-ctl/#ldb-command)
+    -   [RocksDB 関連の問題を診断するための`ldb`コマンドを追加します。](https://tikv.org/docs/3.0/reference/tools/tikv-ctl/#ldb-command)
 
     -   `compact`コマンドは、最下位レベルでデータを圧縮するかどうかの指定をサポートします。
 
 ## ツール {#tools}
 
--   大量のデータの高速完全インポート: [<a href="/tidb-lightning/tidb-lightning-overview.md">TiDB Lightning</a>](/tidb-lightning/tidb-lightning-overview.md)
+-   大量のデータの高速完全インポート: [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)
 
--   新しい[<a href="/tidb-binlog/tidb-binlog-overview.md">TiDBBinlog</a>](/tidb-binlog/tidb-binlog-overview.md)をサポート
+-   新しい[TiDBBinlog](/tidb-binlog/tidb-binlog-overview.md)をサポート
 
 ## アップグレードに関する注意事項 {#upgrade-caveat}
 

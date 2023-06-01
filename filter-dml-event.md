@@ -7,16 +7,16 @@ summary: Learn how to filter DML events using SQL expressions.
 
 このドキュメントでは、DM を使用して継続的な増分データ レプリケーションを実行する場合に、SQL 式を使用してbinlogイベントをフィルタリングする方法を紹介します。レプリケーション手順の詳細については、次のドキュメントを参照してください。
 
--   [<a href="/migrate-small-mysql-to-tidb.md">小規模なデータセットの MySQL を TiDB に移行する</a>](/migrate-small-mysql-to-tidb.md)
--   [<a href="/migrate-large-mysql-to-tidb.md">大規模なデータセットの MySQL を TiDB に移行する</a>](/migrate-large-mysql-to-tidb.md)
--   [<a href="/migrate-small-mysql-shards-to-tidb.md">小規模なデータセットの MySQL シャードを TiDB に移行およびマージする</a>](/migrate-small-mysql-shards-to-tidb.md)
--   [<a href="/migrate-large-mysql-shards-to-tidb.md">大規模なデータセットの MySQL シャードを TiDB に移行およびマージする</a>](/migrate-large-mysql-shards-to-tidb.md)
+-   [小規模なデータセットの MySQL を TiDB に移行する](/migrate-small-mysql-to-tidb.md)
+-   [大規模なデータセットの MySQL を TiDB に移行する](/migrate-large-mysql-to-tidb.md)
+-   [小規模なデータセットの MySQL シャードを TiDB に移行およびマージする](/migrate-small-mysql-shards-to-tidb.md)
+-   [大規模なデータセットの MySQL シャードを TiDB に移行およびマージする](/migrate-large-mysql-shards-to-tidb.md)
 
-増分データ レプリケーションを実行する場合、 [<a href="/filter-binlog-event.md">Binlogイベントフィルター</a>](/filter-binlog-event.md)を使用して特定の種類のbinlogイベントをフィルターできます。たとえば、アーカイブや監査などの目的で`DELETE`イベントをダウンストリームにレプリケートしないことを選択できます。ただし、 Binlogイベント フィルターは、より細かい粒度が必要な行の`DELETE`のイベントをフィルターするかどうかを決定できません。
+増分データ レプリケーションを実行する場合、 [Binlogイベントフィルター](/filter-binlog-event.md)を使用して特定の種類のbinlogイベントをフィルターできます。たとえば、アーカイブや監査などの目的で`DELETE`イベントをダウンストリームにレプリケートしないことを選択できます。ただし、 Binlogイベント フィルターは、より細かい粒度が必要な行の`DELETE`のイベントをフィルターするかどうかを決定できません。
 
 この問題に対処するために、DM は v2.0.5 以降、増分データ レプリケーションで`binlog value filter`を使用してデータをフィルタリングすることをサポートしています。 DM でサポートされている`ROW`形式のbinlogの中で、 binlogイベントはすべての列の値を保持し、これらの値に基づいて SQL 式を構成できます。式で行の変更が`TRUE`として計算される場合、DM はこの行の変更をダウンストリームにレプリケートしません。
 
-[<a href="/filter-binlog-event.md">Binlogイベントフィルター</a>](/filter-binlog-event.md)と同様に、タスク構成ファイルで`binlog value filter`を構成する必要があります。詳細については、以下の構成例を参照してください。高度なタスクの構成と説明については、 [<a href="/dm/task-configuration-file-full.md#task-configuration-file-template-advanced">DM 拡張タスク構成ファイル</a>](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)を参照してください。
+[DM 拡張タスク構成ファイル](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)を参照してください。
 
 ```yaml
 name: test

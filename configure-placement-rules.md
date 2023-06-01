@@ -7,11 +7,11 @@ summary: Learn how to configure Placement Rules.
 
 > **ノート：**
 >
-> このドキュメントでは、Placement Driver (PD) で配置ルールを手動で指定する方法を紹介します。現在は[<a href="/placement-rules-in-sql.md">SQL の配置ルール</a>](/placement-rules-in-sql.md)を使用することをお勧めします。これにより、テーブルとパーティションの配置を構成するためのより便利な方法が提供されます。
+> このドキュメントでは、Placement Driver (PD) で配置ルールを手動で指定する方法を紹介します。現在は[SQL の配置ルール](/placement-rules-in-sql.md)を使用することをお勧めします。これにより、テーブルとパーティションの配置を構成するためのより便利な方法が提供されます。
 
 v5.0 で導入された配置ルールは、PD がさまざまなタイプのデータに対応するスケジュールを生成するようにガイドするレプリカ ルール システムです。さまざまなスケジューリング ルールを組み合わせることで、レプリカの数、storageの場所、ホストの種類、 Raft の選出に参加するかどうか、 Raftリーダーとして機能するかどうかなど、連続データ範囲の属性を細かく制御できます。
 
-TiDB の v5.0 以降のバージョンでは、配置ルール機能がデフォルトで有効になっています。無効にするには、 [<a href="#disable-placement-rules">配置ルールを無効にする</a>](#disable-placement-rules)を参照してください。
+TiDB の v5.0 以降のバージョンでは、配置ルール機能がデフォルトで有効になっています。無効にするには、 [配置ルールを無効にする](#disable-placement-rules)を参照してください。
 
 ## ルールシステム {#rule-system}
 
@@ -50,7 +50,7 @@ TiDB の v5.0 以降のバージョンでは、配置ルール機能がデフォ
 
 `LocationLabels`の意味と機能は v4.0 以前と同様です。たとえば、3 層トポロジを定義する`[zone,rack,host]`展開した場合、クラスターには複数のゾーン (アベイラビリティーゾーン) があり、各ゾーンには複数のラックがあり、各ラックには複数のホストがあります。スケジュールを実行するとき、PD はまずリージョンのピアを異なるゾーンに配置しようとします。この試行が失敗した場合 (レプリカが 3 つあるのにゾーンが合計 2 つしかない場合など)、PD はこれらのレプリカを別のラックに配置することを保証します。ラックの数が分離を保証するのに十分でない場合、PD はホストレベルの分離を試みます。
 
-`IsolationLevel`の意味と機能については[<a href="/schedule-replicas-by-topology-labels.md">クラスタトポロジ構成</a>](/schedule-replicas-by-topology-labels.md)で詳しく説明します。たとえば、 `LocationLabels`で 3 層トポロジを定義する`[zone,rack,host]`展開し、 `IsolationLevel`を`zone`に設定した場合、PD は、スケジューリング中に各リージョンのすべてのピアが異なるゾーンに配置されるようにします。 `IsolationLevel`の最小分離レベル制限を満たすことができない場合 (たとえば、3 つのレプリカが構成されているが、合計でデータ ゾーンが 2 つしかない場合)、PD はこの制限を満たすために補おうとしません。デフォルト値の`IsolationLevel`空の文字列で、無効であることを意味します。
+`IsolationLevel`の意味と機能については[クラスタトポロジ構成](/schedule-replicas-by-topology-labels.md)で詳しく説明します。たとえば、 `LocationLabels`で 3 層トポロジを定義する`[zone,rack,host]`展開し、 `IsolationLevel`を`zone`に設定した場合、PD は、スケジューリング中に各リージョンのすべてのピアが異なるゾーンに配置されるようにします。 `IsolationLevel`の最小分離レベル制限を満たすことができない場合 (たとえば、3 つのレプリカが構成されているが、合計でデータ ゾーンが 2 つしかない場合)、PD はこの制限を満たすために補おうとしません。デフォルト値の`IsolationLevel`空の文字列で、無効であることを意味します。
 
 ### ルールグループのフィールド {#fields-of-the-rule-group}
 
@@ -64,11 +64,11 @@ TiDB の v5.0 以降のバージョンでは、配置ルール機能がデフォ
 
 ## ルールを構成する {#configure-rules}
 
-このセクションの操作は[<a href="/pd-control.md">PD-CTL</a>](/pd-control.md)に基づいており、操作に含まれるコマンドは HTTP API を介した呼び出しもサポートしています。
+このセクションの操作は[PD-CTL](/pd-control.md)に基づいており、操作に含まれるコマンドは HTTP API を介した呼び出しもサポートしています。
 
 ### 配置ルールを有効にする {#enable-placement-rules}
 
-TiDB の v5.0 以降のバージョンでは、配置ルール機能がデフォルトで有効になっています。無効にするには、 [<a href="#disable-placement-rules">配置ルールを無効にする</a>](#disable-placement-rules)を参照してください。この機能を無効にした後に有効にするには、クラスターを初期化する前に次のように PD 構成ファイルを変更します。
+TiDB の v5.0 以降のバージョンでは、配置ルール機能がデフォルトで有効になっています。無効にするには、 [配置ルールを無効にする](#disable-placement-rules)を参照してください。この機能を無効にした後に有効にするには、クラスターを初期化する前に次のように PD 構成ファイルを変更します。
 
 {{< copyable "" >}}
 
@@ -282,7 +282,7 @@ pd-ctl config placement-rules rule-bundle get pd
 pd-ctl config placement-rules rule-bundle get pd --out="group.json"
 ```
 
-変更が完了したら、 `rule-bundle set`サブコマンドを使用して、ファイル内の構成を PDサーバーに保存できます。 [<a href="#set-rules-using-pd-ctl">pd-ctl を使用してルールを設定する</a>](#set-rules-using-pd-ctl)で説明した`save`コマンドとは異なり、このコマンドはサーバー側でこのグループのすべてのルールを置き換えます。
+変更が完了したら、 `rule-bundle set`サブコマンドを使用して、ファイル内の構成を PDサーバーに保存できます。 [pd-ctl を使用してルールを設定する](#set-rules-using-pd-ctl)で説明した`save`コマンドとは異なり、このコマンドはサーバー側でこのグループのすべてのルールを置き換えます。
 
 {{< copyable "" >}}
 
@@ -312,7 +312,7 @@ pd-ctl config placement-rules rule-bundle save --in="rules.json"
 
 ### tidb-ctl を使用してテーブル関連のキー範囲をクエリする {#use-tidb-ctl-to-query-the-table-related-key-range}
 
-メタデータまたは特定のテーブルに特別な構成が必要な場合は、 [<a href="https://github.com/pingcap/tidb-ctl/blob/master/doc/tidb-ctl_keyrange.md">`keyrange`コマンド</a>](https://github.com/pingcap/tidb-ctl/blob/master/doc/tidb-ctl_keyrange.md) / [<a href="https://github.com/pingcap/tidb-ctl">tidb-ctl</a>](https://github.com/pingcap/tidb-ctl)を実行して関連キーをクエリできます。コマンドの最後に`--encode`を忘れずに追加してください。
+メタデータまたは特定のテーブルに特別な構成が必要な場合は、 [tidb-ctl](https://github.com/pingcap/tidb-ctl)を実行して関連キーをクエリできます。コマンドの最後に`--encode`を忘れずに追加してください。
 
 {{< copyable "" >}}
 

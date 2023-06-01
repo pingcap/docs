@@ -5,7 +5,7 @@ summary: Learn the `METRICS_TABLES` system table.
 
 # METRICS_TABLES {#metrics-tables}
 
-`METRICS_TABLES`テーブルは、 [<a href="/metrics-schema.md">`METRICS_SCHEMA`</a>](/metrics-schema.md)データベース内の各ビューの PromQL (Prometheus Query Language) 定義を提供します。
+`METRICS_TABLES`テーブルは、 [`METRICS_SCHEMA`](/metrics-schema.md)データベース内の各ビューの PromQL (Prometheus Query Language) 定義を提供します。
 
 ```sql
 USE INFORMATION_SCHEMA;

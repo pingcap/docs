@@ -54,7 +54,7 @@ mysql> ADMIN SHOW DDL;
 -   `JOB_TYPE` : DDL 操作のタイプ。
 -   `SCHEMA_STATE` : DDL が操作するスキーマ オブジェクトの現在の状態。 `JOB_TYPE`が`ADD INDEX`の場合、それはインデックスの状態です。 `JOB_TYPE`が`ADD COLUMN`の場合、それは列の状態です。 `JOB_TYPE`が`CREATE TABLE`の場合、それはテーブルの状態です。一般的な状態には次のようなものがあります。
     -   `none` : 存在しないことを示します。通常、 `DROP`操作後、または`CREATE`操作が失敗してロールバックした後、 `none`状態になります。
-    -   `delete only` 、 `write only` 、 `delete reorganization` 、 `write reorganization` : これら 4 つの状態は中間状態です。それぞれの具体的な意味については、 [<a href="/ddl-introduction.md#how-the-online-ddl-asynchronous-change-works-in-tidb">TiDB でのオンライン DDL 非同期変更の仕組み</a>](/ddl-introduction.md#how-the-online-ddl-asynchronous-change-works-in-tidb)を参照してください。中間状態の変換は高速であるため、これらの状態は通常、動作中に表示されません。 `ADD INDEX`操作を実行した場合にのみ、インデックス データが追加されていることを示す`write reorganization`状態が表示されます。
+    -   `delete only` 、 `write only` 、 `delete reorganization` 、 `write reorganization` : これら 4 つの状態は中間状態です。それぞれの具体的な意味については、 [TiDB でのオンライン DDL 非同期変更の仕組み](/ddl-introduction.md#how-the-online-ddl-asynchronous-change-works-in-tidb)を参照してください。中間状態の変換は高速であるため、これらの状態は通常、動作中に表示されません。 `ADD INDEX`操作を実行した場合にのみ、インデックス データが追加されていることを示す`write reorganization`状態が表示されます。
     -   `public` : 存在し、ユーザーが使用できることを示します。通常、 `CREATE TABLE`と`ADD INDEX` (または`ADD COLUMN` ) の操作が完了すると、 `public`の状態になり、新しく作成されたテーブル、カラム、インデックスが正常に読み書きできることを示します。
 -   `SCHEMA_ID` : DDL 操作が実行されるデータベースの ID。
 -   `TABLE_ID` : DDL 操作が実行されるテーブルの ID。
@@ -78,7 +78,7 @@ mysql> ADMIN SHOW DDL;
 -   `JOB_TYPE` : DDL 操作のタイプ。
 -   `SCHEMA_STATE` : DDL が操作するスキーマ オブジェクトの現在の状態。 `JOB_TYPE`が`ADD INDEX`の場合、それはインデックスの状態です。 `JOB_TYPE`が`ADD COLUMN`の場合、それは列の状態です。 `JOB_TYPE`が`CREATE TABLE`の場合、それはテーブルの状態です。一般的な状態には次のようなものがあります。
     -   `none` : 存在しないことを示します。通常、 `DROP`操作後、または`CREATE`操作が失敗してロールバックした後、 `none`状態になります。
-    -   `delete only` 、 `write only` 、 `delete reorganization` 、 `write reorganization` : これら 4 つの状態は中間状態です。それぞれの具体的な意味については、 [<a href="https://docs.pingcap.com/tidb/stable/ddl-introduction#how-the-online-ddl-asynchronous-change-works-in-tidb">TiDB でのオンライン DDL 非同期変更の仕組み</a>](https://docs.pingcap.com/tidb/stable/ddl-introduction#how-the-online-ddl-asynchronous-change-works-in-tidb)を参照してください。中間状態の変換は高速であるため、これらの状態は通常、動作中に表示されません。 `ADD INDEX`操作を実行した場合にのみ、インデックス データが追加されていることを示す`write reorganization`状態が表示されます。
+    -   `delete only` 、 `write only` 、 `delete reorganization` 、 `write reorganization` : これら 4 つの状態は中間状態です。それぞれの具体的な意味については、 [TiDB でのオンライン DDL 非同期変更の仕組み](https://docs.pingcap.com/tidb/stable/ddl-introduction#how-the-online-ddl-asynchronous-change-works-in-tidb)を参照してください。中間状態の変換は高速であるため、これらの状態は通常、動作中に表示されません。 `ADD INDEX`操作を実行した場合にのみ、インデックス データが追加されていることを示す`write reorganization`状態が表示されます。
     -   `public` : 存在し、ユーザーが使用できることを示します。通常、 `CREATE TABLE`と`ADD INDEX` (または`ADD COLUMN` ) の操作が完了すると、 `public`の状態になり、新しく作成されたテーブル、カラム、インデックスが正常に読み書きできることを示します。
 -   `SCHEMA_ID` : DDL 操作が実行されるデータベースの ID。
 -   `TABLE_ID` : DDL 操作が実行されるテーブルの ID。
@@ -220,4 +220,4 @@ DDL履歴ジョブキュー内の任意に指定した結果範囲内で、 `job
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-admin-cancel-ddl.md">管理者が DDL をキャンセル</a>](/sql-statements/sql-statement-admin-cancel-ddl.md)
+-   [管理者が DDL をキャンセル](/sql-statements/sql-statement-admin-cancel-ddl.md)

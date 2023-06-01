@@ -9,7 +9,7 @@ summary: Learn the usage of CREATE RESOURCE GROUP in TiDB.
 
 > **ノート：**
 >
-> この機能は[<a href="/tidb-cloud/select-cluster-tier.md#serverless-tier-beta">Serverless Tierクラスター</a>](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)では使用できません。
+> この機能は[Serverless Tierクラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)では使用できません。
 
 </CustomContent>
 
@@ -44,7 +44,7 @@ ResourceGroupPriorityOption ::=
 
 リソース グループ名パラメーター ( `ResourceGroupName` ) はグローバルに一意である必要があります。
 
-TiDB は次の`DirectResourceGroupOption`サポートします。ここで[<a href="/tidb-resource-control.md#what-is-request-unit-ru">リクエストユニット(RU)</a>](/tidb-resource-control.md#what-is-request-unit-ru) 、CPU、IO、およびその他のシステム リソースに対する TiDB の統合抽象化ユニットです。
+TiDB は次の`DirectResourceGroupOption`サポートします。ここで[リクエストユニット(RU)](/tidb-resource-control.md#what-is-request-unit-ru) 、CPU、IO、およびその他のシステム リソースに対する TiDB の統合抽象化ユニットです。
 
 | オプション        | 説明                                                                                     | 例                                                                  |
 | ------------ | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
@@ -54,7 +54,7 @@ TiDB は次の`DirectResourceGroupOption`サポートします。ここで[<a hr
 
 > **ノート：**
 >
-> -   `CREATE RESOURCE GROUP`ステートメントは、グローバル変数[<a href="/system-variables.md#tidb_enable_resource_control-new-in-v660">`tidb_enable_resource_control`</a>](/system-variables.md#tidb_enable_resource_control-new-in-v660) `ON`に設定されている場合にのみ実行できます。 TiDB は、クラスターの初期化中に`default`リソース グループを自動的に作成します。このリソース グループのデフォルト値`RU_PER_SEC`は`UNLIMITED` ( `INT`タイプの最大値、つまり`2147483647`に相当) であり、 `BURSTABLE`モードです。どのリソース グループにもバインドされていないすべてのリクエストは、この`default`リソース グループに自動的にバインドされます。別のリソース グループの新しい構成を作成する場合は、必要に応じて`default`リソース グループの構成を変更することをお勧めします。
+> -   `CREATE RESOURCE GROUP`ステートメントは、グローバル変数[`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660) `ON`に設定されている場合にのみ実行できます。 TiDB は、クラスターの初期化中に`default`リソース グループを自動的に作成します。このリソース グループのデフォルト値`RU_PER_SEC`は`UNLIMITED` ( `INT`タイプの最大値、つまり`2147483647`に相当) であり、 `BURSTABLE`モードです。どのリソース グループにもバインドされていないすべてのリクエストは、この`default`リソース グループに自動的にバインドされます。別のリソース グループの新しい構成を作成する場合は、必要に応じて`default`リソース グループの構成を変更することをお勧めします。
 
 ## 例 {#examples}
 
@@ -104,11 +104,11 @@ SELECT * FROM information_schema.resource_groups WHERE NAME ='rg1' or NAME = 'rg
 
 ## MySQLの互換性 {#mysql-compatibility}
 
-MySQL は[<a href="https://dev.mysql.com/doc/refman/8.0/en/create-resource-group.html">リソースグループの作成</a>](https://dev.mysql.com/doc/refman/8.0/en/create-resource-group.html)もサポートします。ただし、受け入れられるパラメータが TiDB とは異なるため、互換性はありません。
+MySQL は[リソースグループの作成](https://dev.mysql.com/doc/refman/8.0/en/create-resource-group.html)もサポートします。ただし、受け入れられるパラメータが TiDB とは異なるため、互換性はありません。
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-drop-resource-group.md">リソースグループを削除</a>](/sql-statements/sql-statement-drop-resource-group.md)
--   [<a href="/sql-statements/sql-statement-alter-resource-group.md">リソースグループの変更</a>](/sql-statements/sql-statement-alter-resource-group.md)
--   [<a href="/sql-statements/sql-statement-alter-user.md#modify-the-resource-group-bound-to-the-user">ユーザーリソースグループの変更</a>](/sql-statements/sql-statement-alter-user.md#modify-the-resource-group-bound-to-the-user)
--   [<a href="/tidb-resource-control.md#what-is-request-unit-ru">リクエストユニット(RU)</a>](/tidb-resource-control.md#what-is-request-unit-ru)
+-   [リソースグループを削除](/sql-statements/sql-statement-drop-resource-group.md)
+-   [リソースグループの変更](/sql-statements/sql-statement-alter-resource-group.md)
+-   [ユーザーリソースグループの変更](/sql-statements/sql-statement-alter-user.md#modify-the-resource-group-bound-to-the-user)
+-   [リクエストユニット(RU)](/tidb-resource-control.md#what-is-request-unit-ru)

@@ -41,4 +41,4 @@ tiup mirror grant <id> [flags]
 -   コンポーネント所有者の ID が重複している場合、 TiUP はエラー`Error: owner %s exists`を報告します。
 -   キーが別のコンポーネント所有者によって使用されている場合、 TiUP はエラー`Error: key %s exists`を報告します。
 
-[<a href="/tiup/tiup-command-mirror.md#command-list">&lt;&lt; 前のページに戻る - TiUP Mirror コマンド一覧</a>](/tiup/tiup-command-mirror.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP Mirror コマンド一覧](/tiup/tiup-command-mirror.md#command-list)

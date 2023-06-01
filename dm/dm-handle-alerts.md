@@ -44,7 +44,7 @@ summary: Understand how to deal with the alert information in DM.
 
 -   解決：
 
-    [<a href="/dm/dm-error-handling.md#troubleshooting">DM のトラブルシューティング</a>](/dm/dm-error-handling.md#troubleshooting)を参照してください。
+    [DM のトラブルシューティング](/dm/dm-error-handling.md#troubleshooting)を参照してください。
 
 ### <code>DM_pending_DDL</code> {#code-dm-pending-ddl-code}
 
@@ -54,7 +54,7 @@ summary: Understand how to deal with the alert information in DM.
 
 -   解決：
 
-    シナリオによっては、保留中のシャーディング DDL 操作がユーザーの期待どおりである場合があります。それ以外の場合は、解決策について[<a href="/dm/manually-handling-sharding-ddl-locks.md">DM でシャーディング DDL ロックを手動で処理する</a>](/dm/manually-handling-sharding-ddl-locks.md)を参照してください。
+    シナリオによっては、保留中のシャーディング DDL 操作がユーザーの期待どおりである場合があります。それ以外の場合は、解決策について[DM でシャーディング DDL ロックを手動で処理する](/dm/manually-handling-sharding-ddl-locks.md)を参照してください。
 
 ## タスクのステータスに関連するアラート ルール {#alert-rules-related-to-task-status}
 
@@ -66,7 +66,7 @@ summary: Understand how to deal with the alert information in DM.
 
 -   解決：
 
-    [<a href="/dm/dm-error-handling.md#troubleshooting">DM のトラブルシューティング</a>](/dm/dm-error-handling.md#troubleshooting)を参照してください。
+    [DM のトラブルシューティング](/dm/dm-error-handling.md#troubleshooting)を参照してください。
 
 ## リレーログに関するアラートルール {#alert-rules-related-to-relay-log}
 
@@ -78,7 +78,7 @@ summary: Understand how to deal with the alert information in DM.
 
 -   解決：
 
-    [<a href="/dm/dm-error-handling.md#troubleshooting">DM のトラブルシューティング</a>](/dm/dm-error-handling.md#troubleshooting)を参照してください。
+    [DM のトラブルシューティング](/dm/dm-error-handling.md#troubleshooting)を参照してください。
 
 ### <code>DM_remain_storage_of_relay_log</code> {#code-dm-remain-storage-of-relay-log-code}
 
@@ -91,7 +91,7 @@ summary: Understand how to deal with the alert information in DM.
     アラートを処理するには、次の方法を使用できます。
 
     -   不要なデータを手動で削除して、ディスクの空き容量を増やします。
-    -   [<a href="/dm/relay-log.md#automatic-purge">リレーログの自動データパージ戦略</a>](/dm/relay-log.md#automatic-purge)または[<a href="/dm/relay-log.md#manual-purge">データを手動で消去する</a>](/dm/relay-log.md#manual-purge)を再構成します。
+    -   [データを手動で消去する](/dm/relay-log.md#manual-purge)を再構成します。
     -   コマンド`pause-relay`を実行して中継ログの取得処理を一時停止します。十分な空きディスク容量が確保できたら、コマンド`resume-relay`を実行してプロセスを再開します。リレー ログの取得プロセスが一時停止された後は、取得されていないアップストリームのbinlogファイルを削除しないでください。
 
 ### <code>DM_relay_log_data_corruption</code> {#code-dm-relay-log-data-corruption-code}
@@ -102,7 +102,7 @@ summary: Understand how to deal with the alert information in DM.
 
 -   解決：
 
-    [<a href="/dm/dm-error-handling.md#troubleshooting">DM のトラブルシューティング</a>](/dm/dm-error-handling.md#troubleshooting)を参照してください。
+    [DM のトラブルシューティング](/dm/dm-error-handling.md#troubleshooting)を参照してください。
 
 ### <code>DM_fail_to_read_binlog_from_master</code> {#code-dm-fail-to-read-binlog-from-master-code}
 
@@ -112,7 +112,7 @@ summary: Understand how to deal with the alert information in DM.
 
 -   解決：
 
-    [<a href="/dm/dm-error-handling.md#troubleshooting">DM のトラブルシューティング</a>](/dm/dm-error-handling.md#troubleshooting)を参照してください。
+    [DM のトラブルシューティング](/dm/dm-error-handling.md#troubleshooting)を参照してください。
 
 ### <code>DM_fail_to_write_relay_log</code> {#code-dm-fail-to-write-relay-log-code}
 
@@ -122,7 +122,7 @@ summary: Understand how to deal with the alert information in DM.
 
 -   解決：
 
-    [<a href="/dm/dm-error-handling.md#troubleshooting">DM のトラブルシューティング</a>](/dm/dm-error-handling.md#troubleshooting)を参照してください。
+    [DM のトラブルシューティング](/dm/dm-error-handling.md#troubleshooting)を参照してください。
 
 ### <code>DM_binlog_file_gap_between_master_relay</code> {#code-dm-binlog-file-gap-between-master-relay-code}
 
@@ -132,7 +132,7 @@ summary: Understand how to deal with the alert information in DM.
 
 -   解決：
 
-    [<a href="/dm/dm-error-handling.md#troubleshooting">DM のトラブルシューティング</a>](/dm/dm-error-handling.md#troubleshooting)を参照してください。
+    [DM のトラブルシューティング](/dm/dm-error-handling.md#troubleshooting)を参照してください。
 
 ## ダンプ/ロードに関連するアラート ルール {#alert-rules-related-to-dump-load}
 
@@ -144,7 +144,7 @@ summary: Understand how to deal with the alert information in DM.
 
 -   解決：
 
-    [<a href="/dm/dm-error-handling.md#troubleshooting">DM のトラブルシューティング</a>](/dm/dm-error-handling.md#troubleshooting)を参照してください。
+    [DM のトラブルシューティング](/dm/dm-error-handling.md#troubleshooting)を参照してください。
 
 ### <code>DM_load_process_exists_with_error</code> {#code-dm-load-process-exists-with-error-code}
 
@@ -154,7 +154,7 @@ summary: Understand how to deal with the alert information in DM.
 
 -   解決：
 
-    [<a href="/dm/dm-error-handling.md#troubleshooting">DM のトラブルシューティング</a>](/dm/dm-error-handling.md#troubleshooting)を参照してください。
+    [DM のトラブルシューティング](/dm/dm-error-handling.md#troubleshooting)を参照してください。
 
 ## binlogレプリケーションに関連するアラートルール {#alert-rules-related-to-binlog-replication}
 
@@ -166,7 +166,7 @@ summary: Understand how to deal with the alert information in DM.
 
 -   解決：
 
-    [<a href="/dm/dm-error-handling.md#troubleshooting">DM のトラブルシューティング</a>](/dm/dm-error-handling.md#troubleshooting)を参照してください。
+    [DM のトラブルシューティング](/dm/dm-error-handling.md#troubleshooting)を参照してください。
 
 ### <code>DM_binlog_file_gap_between_master_syncer</code> {#code-dm-binlog-file-gap-between-master-syncer-code}
 
@@ -176,7 +176,7 @@ summary: Understand how to deal with the alert information in DM.
 
 -   解決：
 
-    [<a href="/dm/dm-handle-performance-issues.md">パフォーマンスの問題に対処する</a>](/dm/dm-handle-performance-issues.md)を参照してください。
+    [パフォーマンスの問題に対処する](/dm/dm-handle-performance-issues.md)を参照してください。
 
 ### <code>DM_binlog_file_gap_between_relay_syncer</code> {#code-dm-binlog-file-gap-between-relay-syncer-code}
 
@@ -186,4 +186,4 @@ summary: Understand how to deal with the alert information in DM.
 
 -   解決：
 
-    [<a href="/dm/dm-handle-performance-issues.md">パフォーマンスの問題に対処する</a>](/dm/dm-handle-performance-issues.md)を参照してください。
+    [パフォーマンスの問題に対処する](/dm/dm-handle-performance-issues.md)を参照してください。

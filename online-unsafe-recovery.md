@@ -38,7 +38,7 @@ TiDB では、ユーザーが定義したレプリカ ルールに従って、�
 
 ### ステップ 1. 回復できないストアを指定する {#step-1-specify-the-stores-that-cannot-be-recovered}
 
-自動リカバリをトリガーするには、 PD Controlを使用して[<a href="/pd-control.md#unsafe-remove-failed-stores-store-ids--show">`unsafe remove-failed-stores &#x3C;store_id>[,&#x3C;store_id>,...]`</a>](/pd-control.md#unsafe-remove-failed-stores-store-ids--show)を実行し、リカバリできない**すべての**TiKV ノードをカンマで区切って指定します。
+自動リカバリをトリガーするには、 PD Controlを使用して[`unsafe remove-failed-stores &#x3C;store_id>[,&#x3C;store_id>,...]`](/pd-control.md#unsafe-remove-failed-stores-store-ids--show)を実行し、リカバリできない**すべての**TiKV ノードをカンマで区切って指定します。
 
 {{< copyable "" >}}
 
@@ -46,7 +46,7 @@ TiDB では、ユーザーが定義したレプリカ ルールに従って、�
 pd-ctl -u <pd_addr> unsafe remove-failed-stores <store_id1,store_id2,...>
 ```
 
-コマンドが`Success`を返した場合、 PD Controlはタスクを PD に正常に登録しています。これは、リクエストが受け入れられたことを意味するだけであり、リカバリが正常に実行されたことを意味するものではありません。回復タスクはバックグラウンドで実行されます。リカバリの進行状況を確認するには、 [<a href="#step-2-check-the-recovery-progress-and-wait-for-the-completion">`show`</a>](#step-2-check-the-recovery-progress-and-wait-for-the-completion)を使用します。
+コマンドが`Success`を返した場合、 PD Controlはタスクを PD に正常に登録しています。これは、リクエストが受け入れられたことを意味するだけであり、リカバリが正常に実行されたことを意味するものではありません。回復タスクはバックグラウンドで実行されます。リカバリの進行状況を確認するには、 [`show`](#step-2-check-the-recovery-progress-and-wait-for-the-completion)を使用します。
 
 コマンドが`Failed`を返した場合、 PD Controlはタスクを PD に登録できませんでした。考えられるエラーは次のとおりです。
 
@@ -65,7 +65,7 @@ pd-ctl -u <pd_addr> unsafe remove-failed-stores <store_id1,store_id2,...>
 
 ### ステップ 2. 回復の進行状況を確認し、完了を待ちます。 {#step-2-check-the-recovery-progress-and-wait-for-the-completion}
 
-上記のストア削除コマンドが正常に実行されたら、 PD Control を使用して[<a href="/pd-control.md#config-show--set-option-value--placement-rules">`unsafe remove-failed-stores show`</a>](/pd-control.md#config-show--set-option-value--placement-rules)を実行して削除の進行状況を確認できます。
+上記のストア削除コマンドが正常に実行されたら、 PD Control を使用して[`unsafe remove-failed-stores show`](/pd-control.md#config-show--set-option-value--placement-rules)を実行して削除の進行状況を確認できます。
 
 {{< copyable "" >}}
 
@@ -168,7 +168,7 @@ SELECT TABLE_SCHEMA, TABLE_NAME, TIDB_TABLE_ID FROM INFORMATION_SCHEMA.TABLES WH
 >
 > データの読み書きは可能ですが、データの損失がないわけではありません。
 
-リカバリの完了後、データとインデックスに不整合が生じる可能性があります。 SQL コマンド[<a href="/sql-statements/sql-statement-admin-check-table-index.md">`ADMIN CHECK`</a>](/sql-statements/sql-statement-admin-check-table-index.md)を使用して、影響を受けるテーブルのデータとインデックスの整合性を確認します。
+リカバリの完了後、データとインデックスに不整合が生じる可能性があります。 SQL コマンド[`ADMIN CHECK`](/sql-statements/sql-statement-admin-check-table-index.md)を使用して、影響を受けるテーブルのデータとインデックスの整合性を確認します。
 
 ```sql
 ADMIN CHECK TABLE table_name;

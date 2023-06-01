@@ -32,8 +32,8 @@ PD Controlを使用するには、 `tiup ctl:v<CLUSTER_VERSION> pd -u http://<pd
 
 ### ソースコードからコンパイルする {#compile-from-source-code}
 
-1.  [<a href="https://golang.org/">行く</a>](https://golang.org/) Go モジュールを使用するため、1.20 以降が必要です。
-2.  [<a href="https://github.com/pingcap/pd">PDプロジェクト</a>](https://github.com/pingcap/pd)のルート ディレクトリで、 `make`または`make pd-ctl`コマンドを使用してコンパイルし、 `bin/pd-ctl`を生成します。
+1.  [行く](https://golang.org/) Go モジュールを使用するため、1.20 以降が必要です。
+2.  [PDプロジェクト](https://github.com/pingcap/pd)のルート ディレクトリで、 `make`または`make pd-ctl`コマンドを使用してコンパイルし、 `bin/pd-ctl`を生成します。
 
 ## 使用法 {#usage}
 
@@ -311,7 +311,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
     config set cluster-version 1.0.8              // Set the version of the cluster to 1.0.8
     ```
 
--   `replication-mode`デュアル データセンター シナリオにおけるリージョンのレプリケーション モードを制御します。詳細については[<a href="/two-data-centers-in-one-city-deployment.md#enable-the-dr-auto-sync-mode">DR 自動同期モードを有効にする</a>](/two-data-centers-in-one-city-deployment.md#enable-the-dr-auto-sync-mode)を参照してください。
+-   `replication-mode`デュアル データセンター シナリオにおけるリージョンのレプリケーション モードを制御します。詳細については[DR 自動同期モードを有効にする](/two-data-centers-in-one-city-deployment.md#enable-the-dr-auto-sync-mode)を参照してください。
 
 -   `leader-schedule-policy`は、リーダーのスケジューリング戦略を選択するために使用されます。 `size`または`count`に従ってリーダーをスケジュールできます。
 
@@ -333,7 +333,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
 
 -   `store-limit-mode`は、ストア速度を制限するモードを制御するために使用されます。オプションのモードは`auto`と`manual`です。 `auto`モードでは、ストアは負荷に応じて自動的にバランスがとられます (非推奨)。
 
--   `store-limit-version`ストア制限式のバージョンを制御します。 v1 モードでは、 `store limit`手動で変更して、単一の TiKV のスケジュール速度を制限できます。 v2 モードは実験的機能です。 v2 モードでは、PD が TiKV スナップショットの機能に基づいて`store limit`値を動的に調整するため、手動で 4 の値を設定する必要はありません。詳細については、 [<a href="/configure-store-limit.md#principles-of-store-limit-v2">ストア制限 v2 の原則</a>](/configure-store-limit.md#principles-of-store-limit-v2)を参照してください。
+-   `store-limit-version`ストア制限式のバージョンを制御します。 v1 モードでは、 `store limit`手動で変更して、単一の TiKV のスケジュール速度を制限できます。 v2 モードは実験的機能です。 v2 モードでは、PD が TiKV スナップショットの機能に基づいて`store limit`値を動的に調整するため、手動で 4 の値を設定する必要はありません。詳細については、 [ストア制限 v2 の原則](/configure-store-limit.md#principles-of-store-limit-v2)を参照してください。
 
     ```bash
     config set store-limit-version v2       // using store limit v2
@@ -351,7 +351,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
 
 #### <code>config placement-rules [disable | enable | load | save | show | rule-group]</code> {#code-config-placement-rules-disable-enable-load-save-show-rule-group-code}
 
-`config placement-rules [disable | enable | load | save | show | rule-group]`の使用方法については、 [<a href="/configure-placement-rules.md#configure-rules">配置ルールを構成する</a>](/configure-placement-rules.md#configure-rules)を参照してください。
+`config placement-rules [disable | enable | load | save | show | rule-group]`の使用方法については、 [配置ルールを構成する](/configure-placement-rules.md#configure-rules)を参照してください。
 
 ### <code>health</code> {#code-health-code}
 
@@ -510,7 +510,7 @@ time: 43.12698ms
 
 ### <code>region &#x3C;region_id> [--jq="&#x3C;query string>"]</code> {#code-region-x3c-region-id-jq-x3c-query-string-code}
 
-このコマンドを使用して、リージョン情報を表示します。 jq 形式の出力については、 [<a href="#jq-formatted-json-output-usage">jq-formatted-json-output-usage</a>](#jq-formatted-json-output-usage)を参照してください。
+このコマンドを使用して、リージョン情報を表示します。 jq 形式の出力については、 [jq-formatted-json-output-usage](#jq-formatted-json-output-usage)を参照してください。
 
 使用法：
 
@@ -738,7 +738,7 @@ time: 43.12698ms
 
 ### <code>region check [miss-peer | extra-peer | down-peer | pending-peer | offline-peer | empty-region | hist-size | hist-keys] [--jq="&#x3C;query string>"]</code> {#code-region-check-miss-peer-extra-peer-down-peer-pending-peer-offline-peer-empty-region-hist-size-hist-keys-jq-x3c-query-string-code}
 
-このコマンドを使用して、異常状態にあるリージョンを確認します。 jq 形式の出力については、 [<a href="#jq-formatted-json-output-usage">jq 形式の JSON 出力の使用法</a>](#jq-formatted-json-output-usage)を参照してください。
+このコマンドを使用して、異常状態にあるリージョンを確認します。 jq 形式の出力については、 [jq 形式の JSON 出力の使用法](#jq-formatted-json-output-usage)を参照してください。
 
 さまざまなタイプの説明:
 
@@ -784,7 +784,7 @@ time: 43.12698ms
 
 このコマンドを使用して、 `balance-region-scheduler`の実行状態および関連する診断情報を表示します。
 
-TiDB v6.3.0 以降、PD は`balance-region-scheduler`と`balance-leader-scheduler`の実行状態と簡単な診断情報を提供します。他のスケジューラーとチェッカーはまだサポートされていません。この機能を有効にするには、 `pd-ctl`を使用して[<a href="/pd-configuration-file.md#enable-diagnostic-new-in-v630">`enable-diagnostic`</a>](/pd-configuration-file.md#enable-diagnostic-new-in-v630)構成項目を変更します。
+TiDB v6.3.0 以降、PD は`balance-region-scheduler`と`balance-leader-scheduler`の実行状態と簡単な診断情報を提供します。他のスケジューラーとチェッカーはまだサポートされていません。この機能を有効にするには、 `pd-ctl`を使用して[`enable-diagnostic`](/pd-configuration-file.md#enable-diagnostic-new-in-v630)構成項目を変更します。
 
 スケジューラの状態は次のいずれかになります。
 
@@ -800,7 +800,7 @@ TiDB v6.3.0 以降、PD は`balance-region-scheduler`と`balance-leader-schedule
 
 TiDB v6.0.0 以降、PD は、バランス リーダーがタスクを処理する速度を制御するために、 `Batch`対`balance-leader-scheduler`パラメーターを導入しました。このパラメータを使用するには、pd-ctl を使用して`balance-leader batch`設定項目を変更します。
 
-v6.0.0 より前の PD にはこの構成項目がなく、これは`balance-leader batch=1`を意味します。 v6.0.0 以降のバージョンでは、デフォルト値`balance-leader batch`は`4`です。この構成項目を`4`より大きい値に設定するには、同時に[<a href="#config-show--set-option-value--placement-rules">`scheduler-max-waiting-operator`</a>](#config-show--set-option-value--placement-rules) (デフォルト値は`5` ) より大きい値を設定する必要があります。両方の構成項目を変更した後でのみ、期待される加速効果を得ることができます。
+v6.0.0 より前の PD にはこの構成項目がなく、これは`balance-leader batch=1`を意味します。 v6.0.0 以降のバージョンでは、デフォルト値`balance-leader batch`は`4`です。この構成項目を`4`より大きい値に設定するには、同時に[`scheduler-max-waiting-operator`](#config-show--set-option-value--placement-rules) (デフォルト値は`5` ) より大きい値を設定する必要があります。両方の構成項目を変更した後でのみ、期待される加速効果を得ることができます。
 
 ```bash
 scheduler config balance-leader-scheduler set batch 3 // Set the size of the operator that the balance-leader scheduler can execute in a batch to 3
@@ -943,7 +943,7 @@ scheduler config balance-leader-scheduler set batch 3 // Set the size of the ope
 
 ### <code>store [delete | cancel-delete | label | weight | remove-tombstone | limit ] &#x3C;store_id> [--jq="&#x3C;query string>"]</code> {#code-store-delete-cancel-delete-label-weight-remove-tombstone-limit-x3c-store-id-jq-x3c-query-string-code}
 
-jq 形式の出力については、 [<a href="#jq-formatted-json-output-usage">jq-formatted-json-output-usage</a>](#jq-formatted-json-output-usage)を参照してください。
+jq 形式の出力については、 [jq-formatted-json-output-usage](#jq-formatted-json-output-usage)を参照してください。
 
 #### ストアを取得する {#get-a-store}
 
@@ -994,7 +994,7 @@ store remove-tombstone
 
 > **ノート：**
 >
-> ストアの削除中に PD リーダーが変更された場合は、 [<a href="#configure-store-scheduling-speed">`store limit`</a>](#configure-store-scheduling-speed)コマンドを使用してストア制限を手動で変更する必要があります。
+> ストアの削除中に PD リーダーが変更された場合は、 [`store limit`](#configure-store-scheduling-speed)コマンドを使用してストア制限を手動で変更する必要があります。
 
 #### ストアラベルの管理 {#manage-store-labels}
 
@@ -1039,7 +1039,7 @@ store weight 1 5 10
 
 #### ストアのスケジュール速度を構成する {#configure-store-scheduling-speed}
 
-`store limit`を使用して、ストアのスケジュール速度を設定できます。 `store limit`の原理と使用法の詳細については、 [<a href="/configure-store-limit.md">`store limit`</a>](/configure-store-limit.md)を参照してください。
+`store limit`を使用して、ストアのスケジュール速度を設定できます。 `store limit`の原理と使用法の詳細については、 [`store limit`](/configure-store-limit.md)を参照してください。
 
 ```bash
 >> store limit                         // Show the speed limit of adding-peer operations and the limit of removing-peer operations per minute in all stores
@@ -1055,7 +1055,7 @@ store weight 1 5 10
 
 > **ノート：**
 >
-> `pd-ctl`を使用して、TiKV ストアの状態 ( `Up` 、 `Disconnect` 、 `Offline` 、 `Down` 、または`Tombstone` ) を確認できます。各状態の関係については[<a href="/tidb-scheduling.md#information-collection">TiKV ストアの各状態の関係</a>](/tidb-scheduling.md#information-collection)を参照してください。
+> `pd-ctl`を使用して、TiKV ストアの状態 ( `Up` 、 `Disconnect` 、 `Offline` 、 `Down` 、または`Tombstone` ) を確認できます。各状態の関係については[TiKV ストアの各状態の関係](/tidb-scheduling.md#information-collection)を参照してください。
 
 ### <code>log [fatal | error | warn | info | debug]</code> {#code-log-fatal-error-warn-info-debug-code}
 
@@ -1086,7 +1086,7 @@ logic:  120102
 > -   この機能は損失を伴うリカバリであるため、TiKV はこの機能の使用後のデータの整合性とデータ インデックスの整合性を保証できません。
 > -   TiDB チームのサポートを受けて機能関連の操作を実行することをお勧めします。誤った操作を行った場合、クラスタの復旧が困難になる可能性があります。
 
-このコマンドは、レプリカが永続的に損傷し、データが使用できなくなった場合に、損失を伴う回復操作を実行するために使用します。次の例を参照してください。詳細は[<a href="/online-unsafe-recovery.md">オンラインの安全でないリカバリ</a>](/online-unsafe-recovery.md)で説明します
+このコマンドは、レプリカが永続的に損傷し、データが使用できなくなった場合に、損失を伴う回復操作を実行するために使用します。次の例を参照してください。詳細は[オンラインの安全でないリカバリ](/online-unsafe-recovery.md)で説明します
 
 オンラインの安全でないリカバリを実行して、永続的に損傷したストアを削除します。
 

@@ -5,7 +5,7 @@ summary: Learn how to manage the schema of the table to be migrated in DM.
 
 # TiDB データ移行を使用して移行するテーブルのテーブル スキーマを管理する {#manage-table-schemas-of-tables-to-be-migrated-using-tidb-data-migration}
 
-このドキュメントでは、 [<a href="/dm/dmctl-introduction.md">dmctl</a>](/dm/dmctl-introduction.md)使用して移行中に DM でテーブルのスキーマを管理する方法について説明します。
+このドキュメントでは、 [dmctl](/dm/dmctl-introduction.md)使用して移行中に DM でテーブルのスキーマを管理する方法について説明します。
 
 DM が増分レプリケーションを実行する場合、最初にアップストリームのbinlogを読み取り、次に SQL ステートメントを作成してダウンストリームで実行します。ただし、アップストリームのbinlogには完全なテーブル スキーマが含まれていません。 SQL ステートメントを生成するために、DM は移行されるテーブルのスキーマ情報を内部的に維持します。これは内部テーブル スキーマと呼ばれます。
 
@@ -34,9 +34,9 @@ DM が増分レプリケーションを実行する場合、最初にアップ�
 
 不整合が発生する可能性がある次の状況に注意してください。
 
--   [<a href="/dm/feature-shard-merge-optimistic.md">楽観的モード シャーディング DDL サポート</a>](/dm/feature-shard-merge-optimistic.md)を有効にして移行すると、ダウンストリーム テーブルの`schema-D` 、一部のアップストリーム シャード テーブルの`schema-B`および`schema-I`と矛盾する可能性があります。このような場合でも、DM は`schema-I`と`schema-B`の一貫性を維持し、DML に対応するbinlogイベントを正常に解析できるようにします。
+-   [楽観的モード シャーディング DDL サポート](/dm/feature-shard-merge-optimistic.md)を有効にして移行すると、ダウンストリーム テーブルの`schema-D` 、一部のアップストリーム シャード テーブルの`schema-B`および`schema-I`と矛盾する可能性があります。このような場合でも、DM は`schema-I`と`schema-B`の一貫性を維持し、DML に対応するbinlogイベントを正常に解析できるようにします。
 
--   下流テーブルに上流テーブルよりも多くの列がある場合、 `schema-D` `schema-B`および`schema-I`と矛盾する可能性があります。完全なデータ移行 ( `task-mode=all` ) では、DM が不整合を自動的に処理します。増分移行 ( `task-mode=incremental` ) では、タスクが初めて開始され、内部スキーマ情報がまだないため、DM は自動的にダウンストリーム スキーマ ( `schema-D` ) を読み取り、スキーマ`schema-I`更新します (この動作は DM のバージョンによって異なります)。その後、DM が`schema-I`使用して`schema-B`のbinlogを解析すると、 `Column count doesn't match value count`エラーが報告されます。詳細は[<a href="/migrate-with-more-columns-downstream.md">より多くの列を含むダウンストリーム TiDB テーブルにデータを移行する</a>](/migrate-with-more-columns-downstream.md)を参照してください。
+-   下流テーブルに上流テーブルよりも多くの列がある場合、 `schema-D` `schema-B`および`schema-I`と矛盾する可能性があります。完全なデータ移行 ( `task-mode=all` ) では、DM が不整合を自動的に処理します。増分移行 ( `task-mode=incremental` ) では、タスクが初めて開始され、内部スキーマ情報がまだないため、DM は自動的にダウンストリーム スキーマ ( `schema-D` ) を読み取り、スキーマ`schema-I`更新します (この動作は DM のバージョンによって異なります)。その後、DM が`schema-I`使用して`schema-B`のbinlogを解析すると、 `Column count doesn't match value count`エラーが報告されます。詳細は[より多くの列を含むダウンストリーム TiDB テーブルにデータを移行する](/migrate-with-more-columns-downstream.md)を参照してください。
 
 `binlog-schema`コマンドを実行して、DM で保持されている`schema-I`テーブル スキーマを取得、変更、または削除できます。
 

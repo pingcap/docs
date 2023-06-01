@@ -101,7 +101,7 @@ TiDB v6.2.0 より前は、DDL 実行フレームワークには次の制限が�
 -   DDL 所有者は常に DDL ジョブを先入れ先出し方式で処理します。
 -   DDL 所有者は、一度に同じタイプ (論理または物理) の DDL タスクを 1 つだけ実行できます。これは比較的厳密であり、ユーザー エクスペリエンスに影響します。
 
-これらの制限により、「意図しない」DDL ブロック動作が発生する可能性があります。詳細については、 [<a href="/faq/sql-faq.md#ddl-execution">SQL FAQ - DDL の実行</a>](/faq/sql-faq.md#ddl-execution)を参照してください。
+これらの制限により、「意図しない」DDL ブロック動作が発生する可能性があります。詳細については、 [SQL FAQ - DDL の実行](/faq/sql-faq.md#ddl-execution)を参照してください。
 
 </div>
 <div label="Parallel DDL framework starting from v6.2.0">
@@ -137,9 +137,9 @@ DDL 実行のユーザー エクスペリエンスを向上させるために、
 
 物理 DDL ステートメント (インデックスの追加や列タイプの変更を含む) を実行する場合、次のシステム変数の値を調整して、DDL 実行速度とアプリケーション負荷への影響のバランスをとることができます。
 
--   [<a href="/system-variables.md#tidb_ddl_reorg_worker_cnt">`tidb_ddl_reorg_worker_cnt`</a>](/system-variables.md#tidb_ddl_reorg_worker_cnt) : この変数は、バックフィルの同時実行性を制御する DDL 操作の reorg ワーカーの数を設定します。
+-   [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt) : この変数は、バックフィルの同時実行性を制御する DDL 操作の reorg ワーカーの数を設定します。
 
--   [<a href="/system-variables.md#tidb_ddl_reorg_batch_size">`tidb_ddl_reorg_batch_size`</a>](/system-variables.md#tidb_ddl_reorg_batch_size) : この変数は、 `re-organize`フェーズでの DDL 操作のバッチ サイズを設定し、バックフィルされるデータの量を制御します。
+-   [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size) : この変数は、 `re-organize`フェーズでの DDL 操作のバッチ サイズを設定し、バックフィルされるデータの量を制御します。
 
     推奨値:
 
@@ -168,11 +168,11 @@ TiDB がインデックスを追加しているとき、データのバックフ
 
 ## DDL 関連のコマンド {#ddl-related-commands}
 
--   `ADMIN SHOW DDL` : 現在のスキーマのバージョン番号、DDL ID と DDL 所有者のアドレス、DDL タスクと実行中の SQL、現在の TiDB インスタンスの DDL ID など、TiDB DDL 操作のステータスを表示するために使用されます。詳細は[<a href="/sql-statements/sql-statement-admin-show-ddl.md#admin-show-ddl">`ADMIN SHOW DDL`</a>](/sql-statements/sql-statement-admin-show-ddl.md#admin-show-ddl)を参照してください。
+-   `ADMIN SHOW DDL` : 現在のスキーマのバージョン番号、DDL ID と DDL 所有者のアドレス、DDL タスクと実行中の SQL、現在の TiDB インスタンスの DDL ID など、TiDB DDL 操作のステータスを表示するために使用されます。詳細は[`ADMIN SHOW DDL`](/sql-statements/sql-statement-admin-show-ddl.md#admin-show-ddl)を参照してください。
 
--   `ADMIN SHOW DDL JOBS` : クラスター環境で実行されている DDL タスクの詳細なステータスを表示するために使用されます。詳細は[<a href="/sql-statements/sql-statement-admin-show-ddl.md#admin-show-ddl-jobs">`ADMIN SHOW DDL JOBS`</a>](/sql-statements/sql-statement-admin-show-ddl.md#admin-show-ddl-jobs)を参照してください。
+-   `ADMIN SHOW DDL JOBS` : クラスター環境で実行されている DDL タスクの詳細なステータスを表示するために使用されます。詳細は[`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md#admin-show-ddl-jobs)を参照してください。
 
--   `ADMIN SHOW DDL JOB QUERIES job_id [, job_id]` : `job_id`に対応する DDL タスクの元の SQL ステートメントを表示するために使用されます。詳細は[<a href="/sql-statements/sql-statement-admin-show-ddl.md#admin-show-ddl-job-queries">`ADMIN SHOW DDL JOB QUERIES`</a>](/sql-statements/sql-statement-admin-show-ddl.md#admin-show-ddl-job-queries)を参照してください。
+-   `ADMIN SHOW DDL JOB QUERIES job_id [, job_id]` : `job_id`に対応する DDL タスクの元の SQL ステートメントを表示するために使用されます。詳細は[`ADMIN SHOW DDL JOB QUERIES`](/sql-statements/sql-statement-admin-show-ddl.md#admin-show-ddl-job-queries)を参照してください。
 
 -   `ADMIN CANCEL DDL JOBS job_id, [, job_id]` : 送信されたが完了していない DDL タスクをキャンセルするために使用されます。キャンセルが完了すると、DDL タスクを実行する SQL ステートメントは`ERROR 8214 (HY000): Cancelled DDL job`エラーを返します。
 
@@ -180,4 +180,4 @@ TiDB がインデックスを追加しているとき、データのバックフ
 
 ## よくある質問 {#common-questions}
 
-DDL の実行に関するよくある質問については、 [<a href="/faq/sql-faq.md#ddl-execution">SQL FAQ - DDL の実行</a>](/faq/sql-faq.md#ddl-execution)を参照してください。
+DDL の実行に関するよくある質問については、 [SQL FAQ - DDL の実行](/faq/sql-faq.md#ddl-execution)を参照してください。

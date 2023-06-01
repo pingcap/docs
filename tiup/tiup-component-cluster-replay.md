@@ -12,7 +12,7 @@ title: tiup cluster replay
 tiup cluster replay <audit-id> [flags]
 ```
 
--   `<audit-id>` : 再試行するコマンドの`audit-id` 。 [<a href="/tiup/tiup-component-cluster-audit.md">`tiup cluster audit`</a>](/tiup/tiup-component-cluster-audit.md)コマンドを使用すると、履歴コマンドとその`audit-id`を表示できます。
+-   `<audit-id>` : 再試行するコマンドの`audit-id` 。 [`tiup cluster audit`](/tiup/tiup-component-cluster-audit.md)コマンドを使用すると、履歴コマンドとその`audit-id`を表示できます。
 
 ## オプション {#option}
 
@@ -24,4 +24,4 @@ tiup cluster replay <audit-id> [flags]
 
 `<audit-id>`に対応するコマンドの出力。
 
-[<a href="/tiup/tiup-component-cluster.md#command-list">&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト</a>](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト](/tiup/tiup-component-cluster.md#command-list)

@@ -23,7 +23,7 @@ INSERT INTO city (id,detail) VALUES (1, '{"name": "Beijing", "population": 100}'
 SELECT id FROM city WHERE population >= 100;
 ```
 
-詳細については、 [<a href="/functions-and-operators/json-functions.md">JSON関数</a>](/functions-and-operators/json-functions.md)および[<a href="/generated-columns.md">生成された列</a>](/generated-columns.md)を参照してください。
+詳細については、 [生成された列](/generated-columns.md)を参照してください。
 
 ## 制限 {#restrictions}
 
@@ -49,7 +49,7 @@ SELECT id FROM city WHERE population >= 100;
     1 row in set (0.01 sec)
     ```
 
-    詳細については、問題[<a href="https://github.com/pingcap/tidb/issues/37443">#37443</a>](https://github.com/pingcap/tidb/issues/37443)を参照してください。
+    詳細については、問題[#37443](https://github.com/pingcap/tidb/issues/37443)を参照してください。
 
 -   データ型を`ENUM`または`SET`から`JSON`に変換するときに、TiDB はデータ形式の正しさをチェックします。たとえば、TiDB で次の SQL ステートメントを実行すると、エラーが返されます。
 
@@ -60,7 +60,7 @@ SELECT id FROM city WHERE population >= 100;
     ERROR 3140 (22032): Invalid JSON text: The document root must not be followed by other values.
     ```
 
-    詳細については、問題[<a href="https://github.com/pingcap/tidb/issues/9999">#9999</a>](https://github.com/pingcap/tidb/issues/9999)を参照してください。
+    詳細については、問題[#9999](https://github.com/pingcap/tidb/issues/9999)を参照してください。
 
 -   TiDB では、 `ORDER BY`を使用して JSON 配列または JSON オブジェクトを並べ替えることができます。
 
@@ -90,7 +90,7 @@ SELECT id FROM city WHERE population >= 100;
     2 rows in set (0.00 sec)
     ```
 
-    詳細については、問題[<a href="https://github.com/pingcap/tidb/issues/37506">#37506</a>](https://github.com/pingcap/tidb/issues/37506)を参照してください。
+    詳細については、問題[#37506](https://github.com/pingcap/tidb/issues/37506)を参照してください。
 
 -   データを JSON 列に挿入すると、TiDB はデータの値を暗黙的に`JSON`型に変換します。
 
@@ -101,4 +101,4 @@ SELECT id FROM city WHERE population >= 100;
     INSERT INTO t VALUES (3);
     ```
 
-`JSON`データ型の詳細については、 [<a href="/functions-and-operators/json-functions.md">JSON関数</a>](/functions-and-operators/json-functions.md)および[<a href="/generated-columns.md">生成された列</a>](/generated-columns.md)を参照してください。
+`JSON`データ型の詳細については、 [生成された列](/generated-columns.md)を参照してください。

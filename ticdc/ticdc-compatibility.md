@@ -20,7 +20,7 @@ TODO
 ## CLIと設定ファイルの互換性 {#cli-and-configuration-file-compatibility}
 
 -   TiCDC v4.0.0 では、 `ignore-txn-commit-ts`が削除され、 `ignore-txn-start-ts`が追加され、start_ts を使用してトランザクションをフィルタリングします。
--   TiCDC v4.0.2 では、 `db-dbs` / `db-tables` / `ignore-dbs` / `ignore-tables`が削除され、データベースとテーブルに新しいフィルター ルールを使用する`rules`が追加されています。フィルター構文の詳細については、 [<a href="/table-filter.md">テーブルフィルター</a>](/table-filter.md)を参照してください。
+-   TiCDC v4.0.2 では、 `db-dbs` / `db-tables` / `ignore-dbs` / `ignore-tables`が削除され、データベースとテーブルに新しいフィルター ルールを使用する`rules`が追加されています。フィルター構文の詳細については、 [テーブルフィルター](/table-filter.md)を参照してください。
 -   TiCDC v6.2.0 以降、TiCDC Open API を介して TiCDCサーバーと直接対話できるようになり`cdc cli`た。 `--server`パラメータを使用して、TiCDCサーバーのアドレスを指定できます。 `--pd`は非推奨です。
 -   v6.4.0 以降、TiCDC Syncpoint 機能を使用できるのは、 `SYSTEM_VARIABLES_ADMIN`または`SUPER`権限を持つ変更フィードのみです。
 
@@ -61,6 +61,6 @@ TiCDC クラスターのバージョンに対応する`cdc`実行可能ファイ
 
 ### 一時テーブルとの互換性 {#compatibility-with-temporary-tables}
 
-v5.3.0 以降、TiCDC は[<a href="/temporary-tables.md#global-temporary-tables">グローバル一時テーブル</a>](/temporary-tables.md#global-temporary-tables)をサポートします。 v5.3.0 より前のバージョンの TiCDC を使用してグローバル一時テーブルをダウンストリームにレプリケートすると、テーブル定義エラーが発生します。
+v5.3.0 以降、TiCDC は[グローバル一時テーブル](/temporary-tables.md#global-temporary-tables)をサポートします。 v5.3.0 より前のバージョンの TiCDC を使用してグローバル一時テーブルをダウンストリームにレプリケートすると、テーブル定義エラーが発生します。
 
 アップストリーム クラスターにグローバル一時テーブルが含まれている場合、ダウンストリーム TiDB クラスターは v5.3.0 以降のバージョンであることが予想されます。そうしないと、レプリケーション プロセス中にエラーが発生します。

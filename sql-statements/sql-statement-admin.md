@@ -7,11 +7,11 @@ summary: An overview of the usage of ADMIN for the TiDB database.
 
 このステートメントは TiDB 拡張構文であり、TiDB のステータスを表示し、TiDB 内のテーブルのデータをチェックするために使用されます。このドキュメントでは、次の`ADMIN`関連ステートメントを紹介します。
 
--   [<a href="#admin-reload-statement">`ADMIN RELOAD`</a>](#admin-reload-statement)
--   [<a href="#admin-plugins-related-statement">`ADMIN PLUGINS`</a>](#admin-plugins-related-statement)
--   [<a href="#admin-bindings-related-statement">`ADMIN ... BINDINGS`</a>](#admin-bindings-related-statement)
--   [<a href="#admin-repair-statement">`ADMIN REPAIR`</a>](#admin-repair-statement)
--   [<a href="#admin-show-slow-statement">`ADMIN SHOW SLOW`</a>](#admin-show-slow-statement)
+-   [`ADMIN RELOAD`](#admin-reload-statement)
+-   [`ADMIN PLUGINS`](#admin-plugins-related-statement)
+-   [`ADMIN ... BINDINGS`](#admin-bindings-related-statement)
+-   [`ADMIN REPAIR`](#admin-repair-statement)
+-   [`ADMIN SHOW SLOW`](#admin-show-slow-statement)
 
 ## DDL 関連のステートメント {#ddl-related-statement}
 
@@ -19,10 +19,10 @@ summary: An overview of the usage of ADMIN for the TiDB database.
 
 | 声明                                                                                                                                                             | 説明                                 |
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------- |
-| [<a href="/sql-statements/sql-statement-admin-cancel-ddl.md">`ADMIN CANCEL DDL JOBS`</a>](/sql-statements/sql-statement-admin-cancel-ddl.md)                   | 現在実行中の DDL ジョブをキャンセルします。           |
-| [<a href="/sql-statements/sql-statement-admin-checksum-table.md">`ADMIN CHECKSUM TABLE`</a>](/sql-statements/sql-statement-admin-checksum-table.md)            | テーブルのすべての行 + インデックスの CRC64 を計算します。 |
-| [<a href="/sql-statements/sql-statement-admin-check-table-index.md">`ADMIN CHECK [TABLE|INDEX]`</a>](/sql-statements/sql-statement-admin-check-table-index.md) | テーブルまたはインデックスの整合性をチェックします。         |
-| [<a href="/sql-statements/sql-statement-admin-show-ddl.md">`ADMIN SHOW DDL [JOBS|QUERIES]`</a>](/sql-statements/sql-statement-admin-show-ddl.md)               | 現在実行中または最近完了した DDL ジョブの詳細を表示します。   |
+| [`ADMIN CANCEL DDL JOBS`](/sql-statements/sql-statement-admin-cancel-ddl.md)                   | 現在実行中の DDL ジョブをキャンセルします。           |
+| [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)            | テーブルのすべての行 + インデックスの CRC64 を計算します。 |
+| [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) | テーブルまたはインデックスの整合性をチェックします。         |
+| [`ADMIN SHOW DDL [JOBS|QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)               | 現在実行中または最近完了した DDL ジョブの詳細を表示します。   |
 
 </CustomContent>
 
@@ -30,11 +30,11 @@ summary: An overview of the usage of ADMIN for the TiDB database.
 
 | 声明                                                                                                                                                             | 説明                                      |
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------- |
-| [<a href="/sql-statements/sql-statement-admin-cancel-ddl.md">`ADMIN CANCEL DDL JOBS`</a>](/sql-statements/sql-statement-admin-cancel-ddl.md)                   | 現在実行中の DDL ジョブをキャンセルします。                |
-| [<a href="/sql-statements/sql-statement-admin-checksum-table.md">`ADMIN CHECKSUM TABLE`</a>](/sql-statements/sql-statement-admin-checksum-table.md)            | テーブルのすべての行 + インデックスの CRC64 を計算します。      |
-| [<a href="/sql-statements/sql-statement-admin-check-table-index.md">`ADMIN CHECK [TABLE|INDEX]`</a>](/sql-statements/sql-statement-admin-check-table-index.md) | テーブルまたはインデックスの整合性をチェックします。              |
-| [<a href="/sql-statements/sql-statement-admin-show-ddl.md">`ADMIN SHOW DDL [JOBS|QUERIES]`</a>](/sql-statements/sql-statement-admin-show-ddl.md)               | 現在実行中または最近完了した DDL ジョブの詳細を表示します。        |
-| [<a href="/sql-statements/sql-statement-admin-show-telemetry.md">`ADMIN SHOW TELEMETRY`</a>](/sql-statements/sql-statement-admin-show-telemetry.md)            | テレメトリ機能の一部として PingCAP にレポートされる情報を表示します。 |
+| [`ADMIN CANCEL DDL JOBS`](/sql-statements/sql-statement-admin-cancel-ddl.md)                   | 現在実行中の DDL ジョブをキャンセルします。                |
+| [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)            | テーブルのすべての行 + インデックスの CRC64 を計算します。      |
+| [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) | テーブルまたはインデックスの整合性をチェックします。              |
+| [`ADMIN SHOW DDL [JOBS|QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)               | 現在実行中または最近完了した DDL ジョブの詳細を表示します。        |
+| [`ADMIN SHOW TELEMETRY`](/sql-statements/sql-statement-admin-show-telemetry.md)            | テレメトリ機能の一部として PingCAP にレポートされる情報を表示します。 |
 
 </CustomContent>
 
@@ -128,7 +128,7 @@ ADMIN REPAIR TABLE tbl_name CREATE TABLE STATEMENT;
 
 <CustomContent platform="tidb">
 
-ここでの「信頼できない」とは、元のテーブルのメタデータが`CREATE TABLE STATEMENT`操作でカバーできることを手動で確認する必要があることを意味します。この`REPAIR`ステートメントを使用するには、 [<a href="/tidb-configuration-file.md#repair-mode">`repair-mode`</a>](/tidb-configuration-file.md#repair-mode)構成項目を有効にし、修復するテーブルが[<a href="/tidb-configuration-file.md#repair-table-list">`repair-table-list`</a>](/tidb-configuration-file.md#repair-table-list)にリストされていることを確認します。
+ここでの「信頼できない」とは、元のテーブルのメタデータが`CREATE TABLE STATEMENT`操作でカバーできることを手動で確認する必要があることを意味します。この`REPAIR`ステートメントを使用するには、 [`repair-table-list`](/tidb-configuration-file.md#repair-table-list)にリストされていることを確認します。
 
 </CustomContent>
 
@@ -148,7 +148,7 @@ ADMIN SHOW SLOW TOP [INTERNAL | ALL] N;
 
 <CustomContent platform="tidb">
 
-詳細は[<a href="/identify-slow-queries.md#admin-show-slow-command">管理者は遅いステートメントを表示します</a>](/identify-slow-queries.md#admin-show-slow-command)を参照してください。
+詳細は[管理者は遅いステートメントを表示します](/identify-slow-queries.md#admin-show-slow-command)を参照してください。
 
 </CustomContent>
 

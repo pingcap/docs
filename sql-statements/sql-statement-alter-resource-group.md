@@ -9,7 +9,7 @@ summary: Learn the usage of ALTER RESOURCE GROUP in TiDB.
 
 > **ノート：**
 >
-> この機能は[<a href="/tidb-cloud/select-cluster-tier.md#serverless-tier-beta">Serverless Tierクラスター</a>](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)では使用できません。
+> この機能は[Serverless Tierクラスター](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)では使用できません。
 
 </CustomContent>
 
@@ -43,7 +43,7 @@ ResourceGroupPriorityOption ::=
 
 ```
 
-TiDB は次の`DirectResourceGroupOption`サポートします。ここで[<a href="/tidb-resource-control.md#what-is-request-unit-ru">リクエストユニット (RU)</a>](/tidb-resource-control.md#what-is-request-unit-ru) 、CPU、IO、およびその他のシステム リソースに対する TiDB の統合抽象化ユニットです。
+TiDB は次の`DirectResourceGroupOption`サポートします。ここで[リクエストユニット (RU)](/tidb-resource-control.md#what-is-request-unit-ru) 、CPU、IO、およびその他のシステム リソースに対する TiDB の統合抽象化ユニットです。
 
 | オプション        | 説明                                                                                     | 例                                                                  |
 | ------------ | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
@@ -53,7 +53,7 @@ TiDB は次の`DirectResourceGroupOption`サポートします。ここで[<a hr
 
 > **ノート：**
 >
-> `ALTER RESOURCE GROUP`ステートメントは、グローバル変数[<a href="/system-variables.md#tidb_enable_resource_control-new-in-v660">`tidb_enable_resource_control`</a>](/system-variables.md#tidb_enable_resource_control-new-in-v660) `ON`に設定されている場合にのみ実行できます。
+> `ALTER RESOURCE GROUP`ステートメントは、グローバル変数[`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660) `ON`に設定されている場合にのみ実行できます。
 
 ## 例 {#examples}
 
@@ -112,10 +112,10 @@ SELECT * FROM information_schema.resource_groups WHERE NAME ='rg1';
 
 ## MySQLの互換性 {#mysql-compatibility}
 
-MySQL は[<a href="https://dev.mysql.com/doc/refman/8.0/en/alter-resource-group.html">リソースグループの変更</a>](https://dev.mysql.com/doc/refman/8.0/en/alter-resource-group.html)もサポートします。ただし、受け入れられるパラメータが TiDB とは異なるため、互換性はありません。
+MySQL は[リソースグループの変更](https://dev.mysql.com/doc/refman/8.0/en/alter-resource-group.html)もサポートします。ただし、受け入れられるパラメータが TiDB とは異なるため、互換性はありません。
 
 ## こちらも参照 {#see-also}
 
--   [<a href="/sql-statements/sql-statement-drop-resource-group.md">リソースグループを削除</a>](/sql-statements/sql-statement-drop-resource-group.md)
--   [<a href="/sql-statements/sql-statement-create-resource-group.md">リソースグループの作成</a>](/sql-statements/sql-statement-create-resource-group.md)
--   [<a href="/tidb-resource-control.md#what-is-request-unit-ru">リクエストユニット (RU)</a>](/tidb-resource-control.md#what-is-request-unit-ru)
+-   [リソースグループを削除](/sql-statements/sql-statement-drop-resource-group.md)
+-   [リソースグループの作成](/sql-statements/sql-statement-create-resource-group.md)
+-   [リクエストユニット (RU)](/tidb-resource-control.md#what-is-request-unit-ru)

@@ -7,7 +7,7 @@ summary: Learn how to recover tables using the `FLASHBACK TABLE` statement.
 
 `FLASHBACK TABLE`構文は TiDB 4.0 以降に導入されました。 `FLASHBACK TABLE`ステートメントを使用すると、ガベージ コレクション (GC) の存続期間内に`DROP`または`TRUNCATE`操作によって削除されたテーブルとデータを復元できます。
 
-システム変数[<a href="/system-variables.md#tidb_gc_life_time-new-in-v50">`tidb_gc_life_time`</a>](/system-variables.md#tidb_gc_life_time-new-in-v50) (デフォルト: `10m0s` ) は、以前のバージョンの行の保持時間を定義します。ガベージコレクションが実行された現在の`safePoint`の場所は、次のクエリで取得できます。
+システム変数[`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) (デフォルト: `10m0s` ) は、以前のバージョンの行の保持時間を定義します。ガベージコレクションが実行された現在の`safePoint`の場所は、次のクエリで取得できます。
 
 {{< copyable "" >}}
 
@@ -83,7 +83,7 @@ TiDB Binlog を有効にして`FLASHBACK TABLE`ステートメントを使用す
 
 テーブルを削除する場合、TiDB はテーブルのメタデータのみを削除し、削除するテーブル データ (行データおよびインデックス データ) を`mysql.gc_delete_range`のテーブルに書き込みます。 TiDB バックグラウンドの GC ワーカーは、GC の有効期間を超えたキーを`mysql.gc_delete_range`テーブルから定期的に削除します。
 
-したがって、テーブルを回復するには、GC ワーカーがテーブル データを削除する前に、テーブルのメタデータを回復し、テーブル`mysql.gc_delete_range`内の対応する行レコードを削除するだけで済みます。 TiDB のスナップショット読み取りを使用して、テーブルのメタデータを回復できます。スナップショットリードの詳細については、 [<a href="/read-historical-data.md">履歴データの読み取り</a>](/read-historical-data.md)を参照してください。
+したがって、テーブルを回復するには、GC ワーカーがテーブル データを削除する前に、テーブルのメタデータを回復し、テーブル`mysql.gc_delete_range`内の対応する行レコードを削除するだけで済みます。 TiDB のスナップショット読み取りを使用して、テーブルのメタデータを回復できます。スナップショットリードの詳細については、 [履歴データの読み取り](/read-historical-data.md)を参照してください。
 
 `FLASHBACK TABLE t TO t1`の作業工程は以下の通りです。
 

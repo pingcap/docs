@@ -36,7 +36,7 @@ summary: Learn about the blocklist to control the optimization rules and the beh
 
 > **ノート：**
 >
-> 以下のすべての操作には、データベースの`super privilege`権限が必要です。各最適化ルールには名前があります。たとえば、列枝刈りの名前は`column_prune`です。すべての最適化ルールの名前は、表[<a href="#important-optimization-rules">重要な最適化ルール</a>](#important-optimization-rules)の 2 番目の列にあります。
+> 以下のすべての操作には、データベースの`super privilege`権限が必要です。各最適化ルールには名前があります。たとえば、列枝刈りの名前は`column_prune`です。すべての最適化ルールの名前は、表[重要な最適化ルール](#important-optimization-rules)の 2 番目の列にあります。
 
 -   一部のルールを無効にしたい場合は、その名前を`mysql.opt_rule_blacklist`テーブルに書き込みます。例えば：
 
@@ -78,7 +78,7 @@ summary: Learn about the blocklist to control the optimization rules and the beh
 
 ### プッシュダウンがサポートされている式 {#expressions-that-are-supported-to-be-pushed-down}
 
-プッシュダウンがサポートされている式の詳細については、 [<a href="/functions-and-operators/expressions-pushed-down.md#supported-expressions-for-pushdown-to-tikv">TiKV へのプッシュダウンでサポートされる式</a>](/functions-and-operators/expressions-pushed-down.md#supported-expressions-for-pushdown-to-tikv)を参照してください。
+プッシュダウンがサポートされている式の詳細については、 [TiKV へのプッシュダウンでサポートされる式](/functions-and-operators/expressions-pushed-down.md#supported-expressions-for-pushdown-to-tikv)を参照してください。
 
 ### 特定の式のプッシュダウンを無効にする {#disable-the-pushdown-of-specific-expressions}
 
@@ -140,7 +140,7 @@ DESC mysql.expr_pushdown_blacklist;
 
 次の例では、 `<`と`>`演算子がブロックリストに追加され、 `>`演算子がブロックリストから削除されます。
 
-ブロックリストが有効かどうかを判断するには、 `EXPLAIN`の結果を観察します ( [<a href="/explain-overview.md">TiDB クエリ実行計画の概要</a>](/explain-overview.md)を参照)。
+ブロックリストが有効かどうかを判断するには、 `EXPLAIN`の結果を観察します ( [TiDB クエリ実行計画の概要](/explain-overview.md)を参照)。
 
 1.  次の SQL ステートメントの`WHERE`句の述語`a < 2`と`a > 2` TiKV にプッシュダウンできます。
 

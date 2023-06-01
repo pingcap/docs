@@ -18,7 +18,7 @@ TiDB Cloudは、ユーザー アクセスの詳細 (実行された SQL ステ�
 ## 前提条件 {#prerequisites}
 
 -   TiDB CloudDedicated Tierクラスターを使用しています。監査ログは、 TiDB CloudServerless Tierクラスターでは使用できません。
--   あなたは、 TiDB Cloudの組織の監査管理者です。そうしないと、 TiDB Cloudコンソールに監査関連のオプションが表示されません。詳細については、 [<a href="/tidb-cloud/manage-user-access.md#manage-role-access">役割のアクセスを管理する</a>](/tidb-cloud/manage-user-access.md#manage-role-access)を参照してください。
+-   あなたは、 TiDB Cloudの組織の監査管理者です。そうしないと、 TiDB Cloudコンソールに監査関連のオプションが表示されません。詳細については、 [役割のアクセスを管理する](/tidb-cloud/manage-user-access.md#manage-role-access)を参照してください。
 
 ## AWS または GCP の監査ログを有効にする {#enable-audit-logging-for-aws-or-gcp}
 
@@ -32,7 +32,7 @@ AWS の監査ログを有効にするには、次の手順を実行します。
 
 TiDB Cloud が監査ログを書き込む宛先として、企業所有の AWS アカウントの Amazon S3 バケットを指定します。
 
-詳細については、AWS ユーザーガイドの[<a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html">バケットの作成</a>](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html)を参照してください。
+詳細については、AWS ユーザーガイドの[バケットの作成](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html)を参照してください。
 
 #### ステップ 2. Amazon S3 アクセスを構成する {#step-2-configure-amazon-s3-access}
 
@@ -85,7 +85,7 @@ TiDB Cloudコンソールで、 TiDB Cloudアカウント ID と外部 ID 値を
 
 2.  **[バケットリージョン]**ドロップダウン リストで、バケットが配置されている AWS リージョンを選択します。
 
-3.  **[ロール ARN]**フィールドに、 [<a href="#step-2-configure-amazon-s3-access">ステップ 2. Amazon S3 アクセスを構成する</a>](#step-2-configure-amazon-s3-access)でコピーしたロール ARN 値を入力します。
+3.  **[ロール ARN]**フィールドに、 [ステップ 2. Amazon S3 アクセスを構成する](#step-2-configure-amazon-s3-access)でコピーしたロール ARN 値を入力します。
 
 4.  **[接続のテスト]**をクリックして、 TiDB Cloudがバケットにアクセスしてバケットに書き込むことができるかどうかを確認します。
 
@@ -108,7 +108,7 @@ GCP の監査ログを有効にするには、次の手順を実行します。
 
 TiDB Cloud が監査ログを書き込む宛先として、企業所有の GCP アカウント内の Google Cloud Storage (GCS) バケットを指定します。
 
-詳細については、Google Cloud Storage ドキュメントの[<a href="https://cloud.google.com/storage/docs/creating-buckets">storageバケットの作成</a>](https://cloud.google.com/storage/docs/creating-buckets)を参照してください。
+詳細については、Google Cloud Storage ドキュメントの[storageバケットの作成](https://cloud.google.com/storage/docs/creating-buckets)を参照してください。
 
 #### ステップ 2. GCS アクセスを構成する {#step-2-configure-gcs-access}
 
@@ -190,7 +190,7 @@ TiDB Cloud監査ログは、クラスター ID、ポッド ID、およびログ�
 
 > **ノート：**
 >
-> ログ ファイルのサイズが 10 MiB に達するたびに、ログ ファイルはクラウドstorageバケットにプッシュされます。したがって、監査ログが無効になった後は、サイズが 10 MiB 未満のログ ファイルはクラウドstorageバケットに自動的にプッシュされません。この状況でログ ファイルを取得するには、 [<a href="/tidb-cloud/tidb-cloud-support.md">PingCAPのサポート</a>](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
+> ログ ファイルのサイズが 10 MiB に達するたびに、ログ ファイルはクラウドstorageバケットにプッシュされます。したがって、監査ログが無効になった後は、サイズが 10 MiB 未満のログ ファイルはクラウドstorageバケットに自動的にプッシュされません。この状況でログ ファイルを取得するには、 [PingCAPのサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
 ## 監査ログフィールド {#audit-log-fields}
 

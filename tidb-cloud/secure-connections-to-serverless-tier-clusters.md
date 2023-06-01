@@ -17,13 +17,13 @@ TiDBServerless TierはTLS 接続のみを許可し、非 TLS 接続を拒否し�
 
 TiDBServerless Tierは、 TLS 1.2 および TLS 1.3 をサポートします。
 
-TLS 1.0 および TLS 1.1 は、セキュリティ上の理由によりサポートされていません。背景情報については、IETF [<a href="https://datatracker.ietf.org/doc/rfc8996/">TLS 1.0 と TLS 1.1 の廃止</a>](https://datatracker.ietf.org/doc/rfc8996/)を参照してください。
+TLS 1.0 および TLS 1.1 は、セキュリティ上の理由によりサポートされていません。背景情報については、IETF [TLS 1.0 と TLS 1.1 の廃止](https://datatracker.ietf.org/doc/rfc8996/)を参照してください。
 
 ## どのような証明書が必要ですか? {#what-certificates-do-i-need}
 
-TiDBServerless Tierは、クライアントと TiDBServerless Tierクラスター間の TLS 接続の認証局 (CA) として[<a href="https://letsencrypt.org/">暗号化しましょう</a>](https://letsencrypt.org/)の証明書を使用します。通常、Let&#39;s Encrypt のルート証明書 ( [<a href="https://letsencrypt.org/certs/isrgrootx1.pem.txt">ISRG ルート X1</a>](https://letsencrypt.org/certs/isrgrootx1.pem.txt) ) はシステムのルート CA ストアに存在します。クライアントがJavaや Go などのシステムのルート CA ストアをデフォルトで使用する場合、CA ルートのパスを指定せずに TiDBServerless Tierクラスターに安全に簡単に接続できます。
+TiDBServerless Tierは、クライアントと TiDBServerless Tierクラスター間の TLS 接続の認証局 (CA) として[ISRG ルート X1](https://letsencrypt.org/certs/isrgrootx1.pem.txt) ) はシステムのルート CA ストアに存在します。クライアントがJavaや Go などのシステムのルート CA ストアをデフォルトで使用する場合、CA ルートのパスを指定せずに TiDBServerless Tierクラスターに安全に簡単に接続できます。
 
-ただし、一部のドライバーと ORM はシステム ルート CA ストアを使用しません。このような場合は、ドライバーまたは ORM の CA ルート パスをシステムのルート CA ストアに構成する必要があります。たとえば、macOS 上の Python で TiDBServerless Tierクラスターに[<a href="https://github.com/PyMySQL/mysqlclient">mysqlクライアント</a>](https://github.com/PyMySQL/mysqlclient)を使用して接続する場合、引数`ssl`に`ca: /etc/ssl/cert.pem`設定する必要があります。
+ただし、一部のドライバーと ORM はシステム ルート CA ストアを使用しません。このような場合は、ドライバーまたは ORM の CA ルート パスをシステムのルート CA ストアに構成する必要があります。たとえば、macOS 上の Python で TiDBServerless Tierクラスターに[mysqlクライアント](https://github.com/PyMySQL/mysqlclient)を使用して接続する場合、引数`ssl`に`ca: /etc/ssl/cert.pem`設定する必要があります。
 
 > **ノート：**
 >
@@ -31,13 +31,13 @@ TiDBServerless Tierは、クライアントと TiDBServerless Tierクラスタ�
 >
 > ただし、TiDBServerless Tierでは、すべての一般的なシステムで提供されている、一般的に利用可能な CA ルート証明書を常に使用することが保証されます。
 >
-> TiDBServerless Tierクラスターの CA 証明書が本当に必要な場合は、将来 CA を変更する場合に備えて、単一の CA 証明書の代わりに[<a href="https://curl.se/docs/caextract.html">Mozilla CA 証明書バンドル</a>](https://curl.se/docs/caextract.html)をダウンロードすることをお勧めします。
+> TiDBServerless Tierクラスターの CA 証明書が本当に必要な場合は、将来 CA を変更する場合に備えて、単一の CA 証明書の代わりに[Mozilla CA 証明書バンドル](https://curl.se/docs/caextract.html)をダウンロードすることをお勧めします。
 >
-> DBeaver など、内部に複数の証明書を含む証明書ファイルを受け入れない GUI クライアントを使用している場合は、 [<a href="https://letsencrypt.org/certs/isrgrootx1.pem.txt">ISRG ルート X1</a>](https://letsencrypt.org/certs/isrgrootx1.pem.txt)証明書をダウンロードする必要があります。
+> DBeaver など、内部に複数の証明書を含む証明書ファイルを受け入れない GUI クライアントを使用している場合は、 [ISRG ルート X1](https://letsencrypt.org/certs/isrgrootx1.pem.txt)証明書をダウンロードする必要があります。
 
 ## TLS 接続で TiDBServerless Tierクラスターに接続するにはどうすればよいですか? {#how-do-i-connect-to-a-tidb-serverless-tier-cluster-in-tls-connection}
 
-TiDB Cloud、 **[接続]**ダイアログにいくつかの接続例が表示されます。 [<a href="/tidb-cloud/connect-via-standard-connection.md">標準接続で接続する</a>](/tidb-cloud/connect-via-standard-connection.md)の手順に従って、TiDBServerless Tierクラスターに接続できます。
+TiDB Cloud、 **[接続]**ダイアログにいくつかの接続例が表示されます。 [標準接続で接続する](/tidb-cloud/connect-via-standard-connection.md)の手順に従って、TiDBServerless Tierクラスターに接続できます。
 
 一般に、TLS を有効にし、サーバーを認証するための CA ルート パスを提供することは、中間者攻撃を防ぐための良い方法です。クライアントが異なれば、TLS 接続における操作も異なります。 TLS を有効にし、クライアントの実際の使用状況に応じてサーバーを検証します。
 
@@ -59,7 +59,7 @@ mysql --connect-timeout 15 -u <username> -h <host> -P 4000 --ssl-mode=VERIFY_IDE
 
 <div label="MyCLI client">
 
-[<a href="https://www.mycli.net/">MyCLI</a>](https://www.mycli.net/) TLS 関連パラメータを使用するときに TLS を自動的に有効にします。 TiDBServerless Tierクラスターに接続する場合は、 `ssl-ca`と`ssl-verify-server-cert`を設定する必要があります。
+[MyCLI](https://www.mycli.net/) TLS 関連パラメータを使用するときに TLS を自動的に有効にします。 TiDBServerless Tierクラスターに接続する場合は、 `ssl-ca`と`ssl-verify-server-cert`を設定する必要があります。
 
 ```shell
 mycli -u <username> -h <host> -P 4000 -D test --ssl-ca=<CA_root_path> --ssl-verify-server-cert
@@ -72,7 +72,7 @@ mycli -u <username> -h <host> -P 4000 -D test --ssl-ca=<CA_root_path> --ssl-veri
 
 <div label="Java">
 
-ここでは例として[<a href="https://dev.mysql.com/doc/connector-j/8.0/en/">MySQLコネクタ/J</a>](https://dev.mysql.com/doc/connector-j/8.0/en/)の TLS 接続構成が使用されています。
+ここでは例として[MySQLコネクタ/J](https://dev.mysql.com/doc/connector-j/8.0/en/)の TLS 接続構成が使用されています。
 
 ```
 jdbc:mysql://<host>:4000/test?user=<username>&password=<your_password>&sslMode=VERIFY_IDENTITY&enabledTLSProtocols=TLSv1.2,TLSv1.3
@@ -85,7 +85,7 @@ jdbc:mysql://<host>:4000/test?user=<username>&password=<your_password>&sslMode=V
 
 <div label="Python">
 
-ここでは例として[<a href="https://pypi.org/project/mysqlclient/">mysqlクライアント</a>](https://pypi.org/project/mysqlclient/)の TLS 接続構成が使用されています。
+ここでは例として[mysqlクライアント](https://pypi.org/project/mysqlclient/)の TLS 接続構成が使用されています。
 
 ```
 host="<host>", user="<username>", password="<your_password>", port=4000, database="test", ssl_mode="VERIFY_IDENTITY", ssl={"ca": "<CA_root_path>"}
@@ -98,7 +98,7 @@ host="<host>", user="<username>", password="<your_password>", port=4000, databas
 
 <div label="Go">
 
-ここでは例として[<a href="https://github.com/go-sql-driver/mysql">Go-MySQL-ドライバー</a>](https://github.com/go-sql-driver/mysql)の TLS 接続構成が使用されています。
+ここでは例として[Go-MySQL-ドライバー](https://github.com/go-sql-driver/mysql)の TLS 接続構成が使用されています。
 
 ```
 mysql.RegisterTLSConfig("tidb", &tls.Config{
@@ -118,7 +118,7 @@ db, err := sql.Open("mysql", "<usename>:<your_password>@tcp(<host>:4000)/test?tl
 
 <div label="Node.js">
 
-ここでは例として[<a href="https://www.npmjs.com/package/mysql2">MySQL2</a>](https://www.npmjs.com/package/mysql2)の TLS 接続構成が使用されています。
+ここでは例として[MySQL2](https://www.npmjs.com/package/mysql2)の TLS 接続構成が使用されています。
 
 ```
 host: '<host>', port: 4000,user: '<username>', password: '<your_password>', database: 'test', ssl: {minVersion: 'TLSv1.2', rejectUnauthorized: true}
@@ -166,9 +166,9 @@ host: '<host>', port: 4000,user: '<username>', password: '<your_password>', data
 
 **ウィンドウズ**
 
-Windows は、CA ルートへの特定のパスを提供しません。代わりに、 [<a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/install/local-machine-and-current-user-certificate-stores">レジストリ</a>](https://learn.microsoft.com/en-us/windows-hardware/drivers/install/local-machine-and-current-user-certificate-stores)使用して証明書を保存します。このため、Windows で CA ルート パスを指定するには、次の手順を実行します。
+Windows は、CA ルートへの特定のパスを提供しません。代わりに、 [レジストリ](https://learn.microsoft.com/en-us/windows-hardware/drivers/install/local-machine-and-current-user-certificate-stores)使用して証明書を保存します。このため、Windows で CA ルート パスを指定するには、次の手順を実行します。
 
-1.  [<a href="https://curl.se/docs/caextract.html">Mozilla CA 証明書バンドル</a>](https://curl.se/docs/caextract.html)ダウンロードし、 `<path_to_mozilla_ca_cert_bundle>`などの任意のパスに保存します。
+1.  [Mozilla CA 証明書バンドル](https://curl.se/docs/caextract.html)ダウンロードし、 `<path_to_mozilla_ca_cert_bundle>`などの任意のパスに保存します。
 2.  Serverless Tierクラスターに接続する場合は、CA ルート パスとしてパス ( `<path_to_mozilla_ca_cert_bundle>` ) を使用します。
 
 ## TiDBServerless Tierはクライアントの ID を検証できますか? {#can-tidb-serverless-tier-verify-the-client-s-identity}

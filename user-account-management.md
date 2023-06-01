@@ -236,4 +236,4 @@ TiDB はパスワードを`mysql.user`システム データベースに保存�
 FLUSH PRIVILEGES;
 ```
 
-詳細は[<a href="/privilege-management.md">権限管理</a>](/privilege-management.md)を参照してください。
+詳細は[権限管理](/privilege-management.md)を参照してください。

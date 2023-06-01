@@ -9,7 +9,7 @@ summary: Learn how to build a simple CRUD application with TiDB and Go-MySQL-Dri
 
 # TiDB と Go-MySQL-Driver を使用してシンプルな CRUD アプリを構築する {#build-a-simple-crud-app-with-tidb-and-go-mysql-driver}
 
-このドキュメントでは、TiDB と[<a href="https://github.com/go-sql-driver/mysql">Go-MySQL-ドライバー</a>](https://github.com/go-sql-driver/mysql)を使用して単純な CRUD アプリケーションを構築する方法について説明します。
+このドキュメントでは、TiDB と[Go-MySQL-ドライバー](https://github.com/go-sql-driver/mysql)を使用して単純な CRUD アプリケーションを構築する方法について説明します。
 
 > **ノート：**
 >
@@ -23,17 +23,17 @@ TiDB クラスターの起動方法を紹介します。
 
 **TiDB CloudServerless Tierクラスターを使用する**
 
-詳細な手順については、 [<a href="/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster">Serverless Tierクラスターの作成</a>](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
+詳細な手順については、 [Serverless Tierクラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
 
 **ローカルクラスターを使用する**
 
-詳細な手順については、 [<a href="/quick-start-with-tidb.md#deploy-a-local-test-cluster">ローカルテストクラスターをデプロイ</a>](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[<a href="/production-deployment-using-tiup.md">TiUPを使用した TiDBクラスタのデプロイ</a>](/production-deployment-using-tiup.md)を参照してください。
+詳細な手順については、 [TiUPを使用した TiDBクラスタのデプロイ](/production-deployment-using-tiup.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[<a href="/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster">Serverless Tierクラスターの作成</a>](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
+[Serverless Tierクラスターの作成](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
 
 </CustomContent>
 
@@ -178,7 +178,7 @@ func openDB(driverName, dataSourceName string, runnable func(db *sql.DB)) {
 }
 ```
 
-TiDB トランザクションを適応させるには、次のコードに従ってツールキット[<a href="https://github.com/pingcap-inc/tidb-example-golang/tree/main/util">ユーティリティ</a>](https://github.com/pingcap-inc/tidb-example-golang/tree/main/util)を作成します。
+TiDB トランザクションを適応させるには、次のコードに従ってツールキット[ユーティリティ](https://github.com/pingcap-inc/tidb-example-golang/tree/main/util)を作成します。
 
 ```go
 package util
@@ -554,4 +554,4 @@ go build -o bin/sql-driver-example
 
 ## ステップ 4. 期待される出力 {#step-4-expected-output}
 
-[<a href="https://github.com/pingcap-inc/tidb-example-golang/blob/main/Expected-Output.md#sqldriver">go-sql-driver/mysql の予想される出力</a>](https://github.com/pingcap-inc/tidb-example-golang/blob/main/Expected-Output.md#sqldriver)
+[go-sql-driver/mysql の予想される出力](https://github.com/pingcap-inc/tidb-example-golang/blob/main/Expected-Output.md#sqldriver)
