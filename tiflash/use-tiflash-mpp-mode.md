@@ -175,3 +175,18 @@ mysql> explain SELECT count(*) FROM test.employees;
 +------------------------------+----------+--------------+-----------------+---------------------------------------------------------+
 5 rows in set (0,00 sec)
 ```
+
+## Known Issues of MPP
+
+In the current version, TiFlash uses the `start_ts` of a query as the unique key of the query. In most cases, the `start_ts` of each query can uniquely identify a query, but in the following cases, different queries have the same `start_ts`:
+
+- All queries in the same transaction have the same `start_ts`.
+- When you use [`tidb_snapshot`](/system-variables.md#tidb_snapshot) to specify reading data at a specific historical time point, the same time point is manually specified.
+- When [Stale Read](/stale-read.md) is enabled, the same time point is manually specified.
+
+When `start_ts` cannot uniquely represent the MPP query, if TiFlash detects that different queries have the same `start_ts` at a given time, TiFlash might report an error. Typical error cases are as follows:
+
+- When multiple queries with the same `start_ts` are sent to TiFlash at the same time, you might encounter the error `task has been registered`.
+- When multiple simple queries with `LIMIT` are executed continuously in the same transaction, after the `LIMIT` condition is met, TiDB sends a cancel request to TiFlash to cancel the query. This request also uses `start_ts` to identify the query to be canceled. If there are other queries with the same `start_ts` in TiFlash, other queries might be canceled by mistake. For example, the problem occurred in [this issue](https://github.com/pingcap/tidb/issues/43426).
+
+This issue is fixed in TiDB v6.6.0. It is recommended to use the [latest LTS version](https://docs.pingcap.com/tidb/stable).
