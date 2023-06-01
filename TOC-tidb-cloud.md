@@ -139,6 +139,7 @@
   - [Manage Data App](/tidb-cloud/data-service-manage-data-app.md)
   - [Manage Endpoint](/tidb-cloud/data-service-manage-endpoint.md)
   - [API Key](/tidb-cloud/data-service-api-key.md)
+  - [Deploy Automatically with GitHub](tidb-cloud/data-service-manage-github-integration.md#deploy-automatically-with-github)
   - [Response and Status Code](/tidb-cloud/data-service-response-and-status-code.md)
 - Stream Data
   - [Changefeed Overview](/tidb-cloud/changefeed-overview.md)
