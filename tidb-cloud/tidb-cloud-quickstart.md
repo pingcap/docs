@@ -11,6 +11,8 @@ aliases: ['/tidbcloud/beta/tidb-cloud-quickstart']
 
 This tutorial guides you through an easy way to get started with your TiDB Cloud.
 
+In addition, you can have a try of TiDB on [TiDB Playground](http://play.tidbcloud.com/).
+
 ## Step 1. Create a TiDB cluster
 
 TiDB Cloud [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) (Beta) is the best way to get started with TiDB Cloud. To create a free Serverless Tier cluster, take the following steps:
