@@ -3,19 +3,19 @@ title: SHOW CREATE RESOURCE GROUP
 summary: Learn the usage of SHOW CREATE RESOURCE GROUP in TiDB.
 ---
 
-# SHOW CREATE RESOURCE GROUP
+# 表示 リソースグループの作成 {#show-create-resource-group}
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **ノート：**
 >
-> This feature is not available on [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta).
+> この機能は[<a href="/tidb-cloud/select-cluster-tier.md#serverless-tier-beta">Serverless Tierクラスター</a>](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)では使用できません。
 
 </CustomContent>
 
-You can use the `SHOW CREATE RESOURCE GROUP` statement to view the current definition of a resource group.
+`SHOW CREATE RESOURCE GROUP`ステートメントを使用すると、リソース グループの現在の定義を表示できます。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 ShowCreateResourceGroupStmt ::=
@@ -25,16 +25,16 @@ ResourceGroupName ::=
     Identifier
 ```
 
-## Examples
+## 例 {#examples}
 
-Create a resource group `rg1`.
+リソース グループを作成します`rg1` 。
 
 ```sql
 CREATE RESOURCE GROUP rg1 RU_PER_SEC=100;
 Query OK, 0 rows affected (0.10 sec)
 ```
 
-View the definition of `rg1`.
+`rg1`の定義をビュー。
 
 ```sql
 SHOW CREATE RESOURCE GROUP rg1;
@@ -47,13 +47,13 @@ SHOW CREATE RESOURCE GROUP rg1;
 1 row in set (0.01 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension for MySQL.
+このステートメントは、MySQL の TiDB 拡張機能です。
 
-## See also
+## こちらも参照 {#see-also}
 
-* [TiDB RESOURCE CONTROL](/tidb-resource-control.md)
-* [CREATE RESOURCE GROUP](/sql-statements/sql-statement-alter-resource-group.md)
-* [ALTER RESOURCE GROUP](/sql-statements/sql-statement-alter-resource-group.md)
-* [DROP RESOURCE GROUP](/sql-statements/sql-statement-drop-resource-group.md)
+-   [<a href="/tidb-resource-control.md">TiDB リソース制御</a>](/tidb-resource-control.md)
+-   [<a href="/sql-statements/sql-statement-alter-resource-group.md">リソースグループの作成</a>](/sql-statements/sql-statement-alter-resource-group.md)
+-   [<a href="/sql-statements/sql-statement-alter-resource-group.md">リソースグループの変更</a>](/sql-statements/sql-statement-alter-resource-group.md)
+-   [<a href="/sql-statements/sql-statement-drop-resource-group.md">リソースグループを削除</a>](/sql-statements/sql-statement-drop-resource-group.md)

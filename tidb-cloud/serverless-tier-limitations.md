@@ -3,54 +3,54 @@ title: Serverless Tier Limitations
 summary: Learn about the limitations of TiDB Cloud Serverless Tier.
 ---
 
-# Serverless Tier Limitations
+# Serverless Tierの制限 {#serverless-tier-limitations}
 
 <!-- markdownlint-disable MD026 -->
 
-This document describes the limitations of Serverless Tier.
+このドキュメントでは、Serverless Tierの制限について説明します。
 
-We are constantly filling in the feature gaps between Serverless Tier and Dedicated Tier. If you require these features or capabilities in the gap, use [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) or [contact us](https://www.pingcap.com/contact-us/?from=en) for a feature request.
+私たちは、Serverless TierとDedicated Tierの間の機能のギャップを常に埋めています。これらの機能またはギャップ内の機能が必要な場合は、機能リクエストに[<a href="/tidb-cloud/select-cluster-tier.md#dedicated-tier">Dedicated Tier</a>](/tidb-cloud/select-cluster-tier.md#dedicated-tier)または[<a href="https://www.pingcap.com/contact-us/?from=en">お問い合わせ</a>](https://www.pingcap.com/contact-us/?from=en)を使用してください。
 
-## General limitations
+## 一般的な制限事項 {#general-limitations}
 
-- For each TiDB Cloud account, you can create a maximum of five complimentary Serverless Tier clusters during the beta phase.
-- Each Serverless Tier cluster has the following limitations:
-    - The storage size is limited to 5 GiB (logical size) of OLTP storage and 5 GiB (logical size) of OLAP storage.
-    - The compute resource is limited to 1 vCPU and 1 GiB RAM.
-    - **Note**: In the coming months, we intend to offer a usage-based billing plan for additional resources and higher performance, while still keeping offering the free starter plan. In the coming releases, the limitations of the free Serverless Tier might be changed.
+-   TiDB Cloudアカウントごとに、ベータ段階で最大 5 つの無料のServerless Tierクラスターを作成できます。
+-   各Serverless Tierクラスターには次の制限があります。
+    -   storageサイズは、OLTPstorageの場合は 5 GiB (論理サイズ)、OLAPstorageの場合は 5 GiB (論理サイズ) に制限されます。
+    -   コンピューティング リソースは 1 vCPU と 1 GiB RAM に制限されます。
+    -   **注**: 今後数か月間、無料のスターター プランの提供を継続しながら、追加のリソースとより高いパフォーマンスを目的とした従量制の料金プランを提供する予定です。今後のリリースでは、無料のServerless Tierの制限が変更される可能性があります。
 
-## SQL
+## SQL {#sql}
 
-- [Time to live (TTL)](/time-to-live.md) is not available for Serverless Tier clusters currently.
-- The [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md) syntax is not applicable to TiDB Cloud [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters.
+-   現在、Serverless Tierクラスターでは[<a href="/time-to-live.md">生存時間 (TTL)</a>](/time-to-live.md)を使用できません。
+-   [<a href="/sql-statements/sql-statement-flashback-to-timestamp.md">`FLASHBACK CLUSTER TO TIMESTAMP`</a>](/sql-statements/sql-statement-flashback-to-timestamp.md)構文はTiDB Cloud [<a href="/tidb-cloud/select-cluster-tier.md#serverless-tier-beta">Serverless Tier</a>](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)クラスターには適用されません。
 
-## System tables
+## システムテーブル {#system-tables}
 
-- Tables `CLUSTER_SLOW_QUERY`, `SLOW_QUERY`, `CLUSTER_STATEMENTS_SUMMARY`, `CLUSTER_STATEMENTS_SUMMARY_HISTORY`, `STATEMENTS_SUMMARY`, `STATEMENTS_SUMMARY_HISTORY` are not available for Serverless Tier clusters.
+-   テーブル`CLUSTER_SLOW_QUERY` 、 `SLOW_QUERY` 、 `CLUSTER_STATEMENTS_SUMMARY` 、 `CLUSTER_STATEMENTS_SUMMARY_HISTORY` 、 `STATEMENTS_SUMMARY` 、 `STATEMENTS_SUMMARY_HISTORY`は、Serverless Tierクラスターでは使用できません。
 
-## Transaction
+## トランザクション {#transaction}
 
-- The total size of a single transaction is set to no more than 10 MB on Serverless Tier during the beta phase.
+-   単一トランザクションの合計サイズは、ベータ段階ではServerless Tierで 10 MB 以下に設定されます。
 
-## Connection
+## 繋がり {#connection}
 
-- Only [Standard Connection](/tidb-cloud/connect-via-standard-connection.md) can be used. You cannot use [Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections.md) or [VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md) to connect to Serverless Tier clusters. 
-- No "IP Access List" support.
+-   [<a href="/tidb-cloud/connect-via-standard-connection.md">標準接続</a>](/tidb-cloud/connect-via-standard-connection.md)だけ使用できます。 [<a href="/tidb-cloud/set-up-private-endpoint-connections.md">プライベートエンドポイント</a>](/tidb-cloud/set-up-private-endpoint-connections.md)または[<a href="/tidb-cloud/set-up-vpc-peering-connections.md">VPC ピアリング</a>](/tidb-cloud/set-up-vpc-peering-connections.md)使用してServerless Tierクラスターに接続することはできません。
+-   「IP アクセス リスト」はサポートされません。
 
-## Backup and Restore
+## バックアップと復元 {#backup-and-restore}
 
-- [Backup and Restore](/tidb-cloud/backup-and-restore.md) are not supported for Serverless Tier currently.
+-   現在、 [<a href="/tidb-cloud/backup-and-restore.md">バックアップと復元</a>](/tidb-cloud/backup-and-restore.md)はServerless Tierではサポートされていません。
 
-## Monitoring
+## モニタリング {#monitoring}
 
-- [Built-in Monitoring](/tidb-cloud/built-in-monitoring.md) is currently not available for Serverless Tier.
-- [Third-party Monitoring integrations](/tidb-cloud/third-party-monitoring-integrations.md) are currently not available for Serverless Tier.
+-   [<a href="/tidb-cloud/built-in-monitoring.md">内蔵モニタリング</a>](/tidb-cloud/built-in-monitoring.md)は現在、Serverless Tierでは使用できません。
+-   現在、Serverless Tierでは[<a href="/tidb-cloud/third-party-monitoring-integrations.md">サードパーティの監視統合</a>](/tidb-cloud/third-party-monitoring-integrations.md)を使用できません。
 
-## Diagnosis
+## 診断 {#diagnosis}
 
-- [SQL Diagnosis](/tidb-cloud/tune-performance.md) is currently not available for Serverless Tier.
+-   [<a href="/tidb-cloud/tune-performance.md">SQL診断</a>](/tidb-cloud/tune-performance.md)は現在、Serverless Tierでは使用できません。
 
-## Stream data
+## ストリームデータ {#stream-data}
 
-* [Changefeed](/tidb-cloud/changefeed-overview.md) is not supported for Serverless Tier currently.
-* [Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md) is not supported for Serverless Tier currently.
+-   現在、 [<a href="/tidb-cloud/changefeed-overview.md">チェンジフィード</a>](/tidb-cloud/changefeed-overview.md)はServerless Tierではサポートされていません。
+-   現在、 [<a href="/tidb-cloud/migrate-from-mysql-using-data-migration.md">データ移行</a>](/tidb-cloud/migrate-from-mysql-using-data-migration.md)はServerless Tierではサポートされていません。

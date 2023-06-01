@@ -2,31 +2,31 @@
 title: TiDB 1.0.3 Release Notes
 ---
 
-# TiDB 1.0.3 Release Notes
+# TiDB 1.0.3 リリースノート {#tidb-1-0-3-release-notes}
 
-On November 28, 2017, TiDB 1.0.3 is released with the following updates:
+2017 年 11 月 28 日に、次の更新を含む TiDB 1.0.3 がリリースされました。
 
-## TiDB
+## TiDB {#tidb}
 
-- [Optimize the performance in transaction conflicts scenario](https://github.com/pingcap/tidb/pull/5051)
-- [Add the `TokenLimit` option in the config file](https://github.com/pingcap/tidb/pull/5107)
-- [Output the default database in slow query logs](https://github.com/pingcap/tidb/pull/5107)
-- [Remove the DDL statement from query duration metrics](https://github.com/pingcap/tidb/pull/5107)
-- [Optimize the query cost estimation](https://github.com/pingcap/tidb/pull/5140)
-- [Fix the index prefix issue when creating tables](https://github.com/pingcap/tidb/pull/5149)
-- [Support pushing down the expressions for the Float type to TiKV](https://github.com/pingcap/tidb/pull/5153)
-- [Fix the issue that it is slow to add index for tables with discrete integer primary index](https://github.com/pingcap/tidb/pull/5155)
-- [Reduce the unnecessary statistics updates](https://github.com/pingcap/tidb/pull/5164)
-- [Fix a potential issue during the transaction retry](https://github.com/pingcap/tidb/pull/5219)
+-   [<a href="https://github.com/pingcap/tidb/pull/5051">トランザクション競合シナリオのパフォーマンスを最適化する</a>](https://github.com/pingcap/tidb/pull/5051)
+-   [<a href="https://github.com/pingcap/tidb/pull/5107">構成ファイルに`TokenLimit`オプションを追加します。</a>](https://github.com/pingcap/tidb/pull/5107)
+-   [<a href="https://github.com/pingcap/tidb/pull/5107">デフォルトのデータベースをスロークエリログに出力します。</a>](https://github.com/pingcap/tidb/pull/5107)
+-   [<a href="https://github.com/pingcap/tidb/pull/5107">クエリ期間メトリクスから DDL ステートメントを削除する</a>](https://github.com/pingcap/tidb/pull/5107)
+-   [<a href="https://github.com/pingcap/tidb/pull/5140">クエリのコスト見積もりを最適化する</a>](https://github.com/pingcap/tidb/pull/5140)
+-   [<a href="https://github.com/pingcap/tidb/pull/5149">テーブル作成時のインデックスプレフィックスの問題を修正</a>](https://github.com/pingcap/tidb/pull/5149)
+-   [<a href="https://github.com/pingcap/tidb/pull/5153">Float 型の式を TiKV にプッシュダウンするサポート</a>](https://github.com/pingcap/tidb/pull/5153)
+-   [<a href="https://github.com/pingcap/tidb/pull/5155">離散整数のプライマリ インデックスを持つテーブルのインデックスの追加が遅いという問題を修正</a>](https://github.com/pingcap/tidb/pull/5155)
+-   [<a href="https://github.com/pingcap/tidb/pull/5164">不必要な統計更新を削減する</a>](https://github.com/pingcap/tidb/pull/5164)
+-   [<a href="https://github.com/pingcap/tidb/pull/5219">トランザクションの再試行中の潜在的な問題を修正する</a>](https://github.com/pingcap/tidb/pull/5219)
 
-## PD
+## PD {#pd}
 
-- Support adding more types of schedulers using API
+-   APIを使用してより多くの種類のスケジューラの追加をサポート
 
-## TiKV
+## TiKV {#tikv}
 
-- Fix the deadlock issue with the PD client
-- Fix the issue that the wrong leader value is prompted for `NotLeader`
-- Fix the issue that the chunk size is too large in the coprocessor
+-   PDクライアントのデッドロック問題を修正
+-   間違ったリーダー値`NotLeader`が表示される問題を修正
+-   コプロセッサのチャンクサイズが大きすぎる問題を修正
 
-To upgrade from 1.0.2 to 1.0.3, follow the rolling upgrade order of PD -> TiKV -> TiDB.
+1.0.2 から 1.0.3 にアップグレードするには、PD -&gt; TiKV -&gt; TiDB のローリング アップグレードの順序に従います。

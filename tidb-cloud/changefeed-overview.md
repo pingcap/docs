@@ -2,64 +2,66 @@
 title: Changefeed
 ---
 
-# Changefeed
+# チェンジフィード {#changefeed}
 
-TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data services. Currently, TiDB Cloud supports streaming data to Apache Kafka and MySQL.
+TiDB Cloudチェンジフィードは、 TiDB Cloudから他のデータ サービスにデータをストリーミングするのに役立ちます。現在、 TiDB Cloud は、 Apache Kafka および MySQL へのストリーミング データをサポートしています。
 
-> **Note:**
+> **ノート：**
 >
-> To use the changefeed feature, make sure that your TiDB cluster version is v6.4.0 or later and the TiKV node size is at least 8 vCPU and 16 GiB.
+> チェンジフィード機能を使用するには、TiDB クラスターのバージョンが v6.4.0 以降であり、TiKV ノードのサイズが少なくとも 8 vCPU および 16 GiB であることを確認してください。
 >
-> Currently, TiDB Cloud only allows up to 10 changefeeds per cluster.
+> 現在、 TiDB Cloudクラスターごとに最大 10 個の変更フィードのみが許可されます。
 >
-> For [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta), the changefeed feature is unavailable.
+> [<a href="/tidb-cloud/select-cluster-tier.md#serverless-tier-beta">Serverless Tierクラスター</a>](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)の場合、チェンジフィード機能は使用できません。
 
-To access the changefeed feature, navigate to the cluster overview page of your TiDB cluster, and then click **Changefeed** in the left navigation pane. The changefeed list is displayed.
+チェンジフィード機能にアクセスするには、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**[チェンジフィード]**をクリックします。チェンジフィード一覧が表示されます。
 
-In the changefeed list, you can:
+変更フィード リストでは、次のことができます。
 
-- View the information of the created changefeed, including changefeed's id, checkpoint, and status.
-- Operate the changefeed, including creating, pausing, resuming, editing, and deleting the changefeed.
+-   変更フィードの ID、チェックポイント、ステータスなど、作成された変更フィードの情報をビュー。
+-   変更フィードの作成、一時停止、再開、編集、削除など、変更フィードを操作します。
 
-## Create a changefeed
+## 変更フィードを作成する {#create-a-changefeed}
 
-To create a changefeed, refer to the tutorials:
+チェンジフィードを作成するには、次のチュートリアルを参照してください。
 
-- [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md) (Beta)
-- [Sink to MySQL](/tidb-cloud/changefeed-sink-to-mysql.md)
+-   [<a href="/tidb-cloud/changefeed-sink-to-apache-kafka.md">Apache Kafka にシンクする</a>](/tidb-cloud/changefeed-sink-to-apache-kafka.md) (ベータ版)
+-   [<a href="/tidb-cloud/changefeed-sink-to-mysql.md">MySQL にシンクする</a>](/tidb-cloud/changefeed-sink-to-mysql.md)
 
-## Delete a changefeed
+## 変更フィードを削除する {#delete-a-changefeed}
 
-1. Navigate to the cluster overview page of the target TiDB cluster, and then click **Changefeed** in the left navigation pane.
-2. Locate the corresponding changefeed you want to delete, and click **...** > **Delete** in the **Action** column.
+1.  ターゲット TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**[Changefeed]**をクリックします。
+2.  削除する対応する変更フィードを見つけて、 **[アクション]**列の**[...]** &gt; **[削除]**をクリックします。
 
-## Pause or resume a changefeed
+## チェンジフィードを一時停止または再開する {#pause-or-resume-a-changefeed}
 
-1. Navigate to the cluster overview page of the target TiDB cluster, and then click **Changefeed** in the left navigation pane.
-2. Locate the corresponding changefeed you want to pause or resume, and click **...** > **Pause/Resume** in the **Action** column.
+1.  ターゲット TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**[Changefeed]**をクリックします。
+2.  一時停止または再開する対応する変更フィードを見つけて、 **[アクション]**列の**[...]** &gt; **[一時停止/再開]**をクリックします。
 
-## Edit a changefeed
+## 変更フィードを編集する {#edit-a-changefeed}
 
-> **Note:**
+> **ノート：**
 >
-> TiDB Cloud currently only allows editing changefeeds in the paused status.
+> TiDB Cloud現在、一時停止ステータスでのみ変更フィードの編集が可能です。
 
-1. Navigate to the cluster overview page of the target TiDB cluster, and then click **Changefeed** in the left navigation pane.
-2. Locate the changefeed you want to pause, and click **...** > **Pause** in the **Action** column.
-3. When the changefeed status changes to `Paused`, click **...** > **Edit** to edit the corresponding changefeed.
+1.  ターゲット TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**[Changefeed]**をクリックします。
 
-    TiDB Cloud populates the changefeed configuration by default. You can modify the following configurations:
+2.  一時停止する変更フィードを見つけて、 **[アクション]**列の**[...]** &gt; **[一時停止]**をクリックします。
 
-    - MySQL sink: **MySQL Connection** and **Table Filter**.
-    - Kafka sink: all configurations.
+3.  チェンジフィードのステータスが`Paused`に変わったら、 **[...]** &gt; **[編集] を**クリックして、対応するチェンジフィードを編集します。
 
-4. After editing the configuration, click **...** > **Resume** to resume the corresponding changefeed.
+    TiDB Cloud は、デフォルトで変更フィード構成を設定します。次の構成を変更できます。
 
-## Query TiCDC RCUs
+    -   MySQL シンク: **MySQL 接続**と**テーブル フィルター**。
+    -   Kafka シンク: すべての構成。
 
-1. Navigate to the cluster overview page of the target TiDB cluster, and then click **Changefeed** in the left navigation pane.
-2. You can see the current TiCDC Replication Capacity Units (RCUs) in the upper-left corner of the page.
+4.  構成を編集した後、 **[...]** &gt; **[再開]**をクリックして、対応する変更フィードを再開します。
 
-## Changefeed billing
+## TiCDC RCU のクエリ {#query-ticdc-rcus}
 
-To learn the billing for changefeeds in TiDB Cloud, see [Changefeed billing](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md).
+1.  ターゲット TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**[Changefeed]**をクリックします。
+2.  ページの左上隅に現在の TiCDC レプリケーション キャパシティ ユニット (RCU) が表示されます。
+
+## 変更フィードの請求 {#changefeed-billing}
+
+TiDB Cloudでの変更フィードの請求については、 [<a href="/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md">変更フィードの請求</a>](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md)を参照してください。

@@ -3,61 +3,61 @@ title: Bidirectional Replication
 summary: Learn how to use bidirectional replication of TiCDC.
 ---
 
-# Bidirectional Replication
+# 双方向レプリケーション {#bidirectional-replication}
 
-Starting from v6.5.0, TiCDC supports bi-directional replication among two TiDB clusters. Based on this feature, you can create a multi-active TiDB solution using TiCDC.
+v6.5.0 以降、TiCDC は 2 つの TiDB クラスター間の双方向レプリケーションをサポートします。この機能に基づいて、TiCDC を使用してマルチアクティブ TiDB ソリューションを作成できます。
 
-This section describes how to use bi-directional replication taking two TiDB clusters as an example.
+このセクションでは、2 つの TiDB クラスターを例として、双方向レプリケーションの使用方法について説明します。
 
-## Deploy bi-directional replication
+## 双方向レプリケーションをデプロイ {#deploy-bi-directional-replication}
 
-TiCDC only replicates incremental data changes that occur after a specified timestamp to the downstream cluster. Before starting the bi-directional replication, you need to take the following steps:
+TiCDC は、指定されたタイムスタンプの後に発生する増分データ変更のみをダウンストリーム クラスターにレプリケートします。双方向レプリケーションを開始する前に、次の手順を実行する必要があります。
 
-1. (Optional) According to your needs, import the data of the two TiDB clusters into each other using the data export tool [Dumpling](/dumpling-overview.md) and data import tool [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md).
+1.  (オプション) 必要に応じて、データ エクスポート ツール[<a href="/dumpling-overview.md">Dumpling</a>](/dumpling-overview.md)とデータ インポート ツール[<a href="/tidb-lightning/tidb-lightning-overview.md">TiDB Lightning</a>](/tidb-lightning/tidb-lightning-overview.md)を使用して、2 つの TiDB クラスターのデータを相互にインポートします。
 
-2. Deploy two TiCDC clusters between the two TiDB clusters. The cluster topology is as follows. The arrows in the diagram indicate the directions of data flow.
+2.  2 つの TiDB クラスターの間に 2 つの TiCDC クラスターをデプロイ。クラスタのトポロジは以下のとおりです。図中の矢印はデータの流れの方向を示しています。
 
     ![TiCDC bidirectional replication](/media/ticdc/ticdc-bidirectional-replication.png)
 
-3. Specify the starting time point of data replication for the upstream and downstream clusters.
+3.  上流クラスターと下流クラスターのデータ複製の開始時点を指定します。
 
-    1. Check the time point of the upstream and downstream clusters. In the case of two TiDB clusters, make sure that data in the two clusters are consistent at certain time points. For example, the data of TiDB A at `ts=1` and the data of TiDB B at `ts=2` are consistent.
+    1.  上流クラスターと下流クラスターの時点を確認します。 2 つの TiDB クラスターの場合は、2 つのクラスター内のデータが特定の時点で一貫していることを確認してください。たとえば、 `ts=1`の TiDB A のデータと`ts=2`の TiDB B のデータは一致します。
 
-    2. When you create the changefeed, set the `--start-ts` of the changefeed for the upstream cluster to the corresponding `tso`. That is, if the upstream cluster is TiDB A, set `--start-ts=1`; if the upstream cluster is TiDB B, set `--start-ts=2`.
+    2.  変更フィードを作成するときは、上流クラスターの変更フィードの`--start-ts` 、対応する`tso`に設定します。つまり、上流クラスターが TiDB A の場合は`--start-ts=1`を設定します。上流クラスターが TiDB B の場合は、 `--start-ts=2`を設定します。
 
-4. In the configuration file specified by the `--config` parameter, add the following configuration:
+4.  `--config`パラメータで指定された構成ファイルに、次の構成を追加します。
 
     ```toml
     # Whether to enable the bi-directional replication mode
     bdr-mode = true
     ```
 
-5. (Optional) If you need to track the data source, set a unique data source ID for each cluster using the [`tidb_source_id`](/system-variables.md#tidb_source_id-new-in-v650) system variable.
+5.  (オプション) データ ソースを追跡する必要がある場合は、 [<a href="/system-variables.md#tidb_source_id-new-in-v650">`tidb_source_id`</a>](/system-variables.md#tidb_source_id-new-in-v650)システム変数を使用して各クラスターに一意のデータ ソース ID を設定します。
 
-After the configuration takes effect, the clusters can perform bi-directional replication.
+構成が有効になると、クラスターは双方向レプリケーションを実行できるようになります。
 
-## Execute DDL
+## DDLの実行 {#execute-ddl}
 
-Bi-directional replication does not support replicating DDL statements.
+双方向レプリケーションでは、DDL ステートメントのレプリケーションはサポートされていません。
 
-If you need to execute DDL statements, take the following steps:
+DDL ステートメントを実行する必要がある場合は、次の手順を実行します。
 
-1. Pause the write operations in the tables that need to execute DDL in all clusters. If the DDL statement is adding a non-unique index, skip this step.
-2. After the write operations of the corresponding tables in all clusters have been replicated to other clusters, manually execute all DDL statements in each TiDB cluster.
-3. After the DDL statements are executed, resume the write operations.
+1.  すべてのクラスターで DDL を実行する必要があるテーブルの書き込み操作を一時停止します。 DDL ステートメントが一意でないインデックスを追加している場合は、この手順をスキップしてください。
+2.  すべてのクラスター内の対応するテーブルの書き込み操作が他のクラスターにレプリケートされた後、各 TiDB クラスター内のすべての DDL ステートメントを手動で実行します。
+3.  DDL ステートメントが実行された後、書き込み操作を再開します。
 
-Note that a DDL statement that adds non-unique index does not break bi-directional replication, so you do not need to pause the write operations in the corresponding table.
+一意でないインデックスを追加する DDL ステートメントは双方向レプリケーションを中断しないため、対応するテーブルでの書き込み操作を一時停止する必要がないことに注意してください。
 
-## Stop bi-directional replication
+## 双方向レプリケーションを停止する {#stop-bi-directional-replication}
 
-After the application has stopped writing data, you can insert a special record into each cluster. By checking the two special records, you can make sure that data in two clusters are consistent.
+アプリケーションがデータの書き込みを停止した後、各クラスターに特別なレコードを挿入できます。 2 つの特別なレコードをチェックすることで、2 つのクラスター内のデータが一貫していることを確認できます。
 
-After the check is completed, you can stop the changefeed to stop bi-directional replication.
+チェックが完了したら、変更フィードを停止して双方向レプリケーションを停止できます。
 
-## Limitations
+## 制限事項 {#limitations}
 
-- For the limitations of DDL, see [Execute DDL](#execute-ddl).
+-   DDL の制限については、 [<a href="#execute-ddl">DDLの実行</a>](#execute-ddl)を参照してください。
 
-- Bi-directional replication clusters cannot detect write conflicts, which might cause undefined behaviors. Therefore, you must ensure that there are no write conflicts from the application side.
+-   双方向レプリケーション クラスターは書き込み競合を検出できず、未定義の動作が発生する可能性があります。したがって、アプリケーション側から書き込み競合がないことを確認する必要があります。
 
-- Bi-directional replication supports more than two clusters, but does not support multiple clusters in cascading mode, that is, a cyclic replication like TiDB A -> TiDB B -> TiDB C -> TiDB A. In such a topology, if one cluster fails, the whole data replication will be affected. Therefore, to enable bi-directional replication among multiple clusters, you need to connect each cluster with every other clusters, for example, `TiDB A <-> TiDB B`, `TiDB B <-> TiDB C`, `TiDB C <-> TiDB A`.
+-   双方向レプリケーションは 3 つ以上のクラスターをサポートしますが、カスケード モードでの複数のクラスター、つまり、TiDB A -&gt; TiDB B -&gt; TiDB C -&gt; TiDB A のような循環レプリケーションはサポートしません。このようなトポロジでは、1 つのクラスターが失敗すると、データ レプリケーション全体が影響を受けます。したがって、複数のクラスター間で双方向レプリケーションを有効にするには、各クラスターを他のすべてのクラスター (たとえば、 `TiDB A <-> TiDB B` 、 `TiDB B <-> TiDB C` 、 `TiDB C <-> TiDB A`に接続する必要があります。

@@ -3,19 +3,19 @@ title: ALTER RESOURCE GROUP
 summary: Learn the usage of ALTER RESOURCE GROUP in TiDB.
 ---
 
-# ALTER RESOURCE GROUP
+# リソースグループの変更 {#alter-resource-group}
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **ノート：**
 >
-> This feature is not available on [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta).
+> この機能は[<a href="/tidb-cloud/select-cluster-tier.md#serverless-tier-beta">Serverless Tierクラスター</a>](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)では使用できません。
 
 </CustomContent>
 
-The `ALTER RESOURCE GROUP` statement is used to modify a resource group in a database.
+`ALTER RESOURCE GROUP`ステートメントは、データベース内のリソース グループを変更するために使用されます。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 AlterResourceGroupStmt ::=
@@ -43,21 +43,21 @@ ResourceGroupPriorityOption ::=
 
 ```
 
-TiDB supports the following `DirectResourceGroupOption`, where [Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru) is a unified abstraction unit in TiDB for CPU, IO, and other system resources.
+TiDB は次の`DirectResourceGroupOption`サポートします。ここで[<a href="/tidb-resource-control.md#what-is-request-unit-ru">リクエストユニット (RU)</a>](/tidb-resource-control.md#what-is-request-unit-ru) 、CPU、IO、およびその他のシステム リソースに対する TiDB の統合抽象化ユニットです。
 
-| Option     | Description                         | Example                |
-|---------------|-------------------------------------|------------------------|
-| `RU_PER_SEC` | Rate of RU backfilling per second | `RU_PER_SEC = 500` indicates that this resource group is backfilled with 500 RUs per second |
-| `PRIORITY`    | The absolute priority of tasks to be processed on TiKV  | `PRIORITY = HIGH` indicates that the priority is high. If not specified, the default value is `MEDIUM`. |
-| `BURSTABLE`   | If the `BURSTABLE` attribute is set, TiDB allows the corresponding resource group to use the available system resources when the quota is exceeded. |
+| オプション        | 説明                                                                                     | 例                                                                  |
+| ------------ | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| `RU_PER_SEC` | 1 秒あたりの RU バックフィルの速度                                                                   | `RU_PER_SEC = 500` 、このリソース グループが 1 秒あたり 500 RU でバックフィルされていることを示します |
+| `PRIORITY`   | TiKV 上で処理されるタスクの絶対的な優先度                                                                | `PRIORITY = HIGH`優先度が高いことを示します。指定しない場合、デフォルト値は`MEDIUM`です。          |
+| `BURSTABLE`  | `BURSTABLE`属性が設定されている場合、TiDB は、クォータを超過したときに、対応するリソース グループが利用可能なシステム リソースを使用することを許可します。 |                                                                    |
 
-> **Note:**
+> **ノート：**
 >
-> The `ALTER RESOURCE GROUP` statement can only be executed when the global variable [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660) is set to `ON`.
+> `ALTER RESOURCE GROUP`ステートメントは、グローバル変数[<a href="/system-variables.md#tidb_enable_resource_control-new-in-v660">`tidb_enable_resource_control`</a>](/system-variables.md#tidb_enable_resource_control-new-in-v660) `ON`に設定されている場合にのみ実行できます。
 
-## Examples
+## 例 {#examples}
 
-Create a resource group named `rg1` and modify its properties.
+`rg1`という名前のリソース グループを作成し、そのプロパティを変更します。
 
 ```sql
 DROP RESOURCE GROUP IF EXISTS rg1;
@@ -110,12 +110,12 @@ SELECT * FROM information_schema.resource_groups WHERE NAME ='rg1';
 1 rows in set (1.30 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-MySQL also supports [ALTER RESOURCE GROUP](https://dev.mysql.com/doc/refman/8.0/en/alter-resource-group.html). However, the acceptable parameters are different from that of TiDB so that they are not compatible.
+MySQL は[<a href="https://dev.mysql.com/doc/refman/8.0/en/alter-resource-group.html">リソースグループの変更</a>](https://dev.mysql.com/doc/refman/8.0/en/alter-resource-group.html)もサポートします。ただし、受け入れられるパラメータが TiDB とは異なるため、互換性はありません。
 
-## See also
+## こちらも参照 {#see-also}
 
-* [DROP RESOURCE GROUP](/sql-statements/sql-statement-drop-resource-group.md)
-* [CREATE RESOURCE GROUP](/sql-statements/sql-statement-create-resource-group.md)
-* [Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru)
+-   [<a href="/sql-statements/sql-statement-drop-resource-group.md">リソースグループを削除</a>](/sql-statements/sql-statement-drop-resource-group.md)
+-   [<a href="/sql-statements/sql-statement-create-resource-group.md">リソースグループの作成</a>](/sql-statements/sql-statement-create-resource-group.md)
+-   [<a href="/tidb-resource-control.md#what-is-request-unit-ru">リクエストユニット (RU)</a>](/tidb-resource-control.md#what-is-request-unit-ru)

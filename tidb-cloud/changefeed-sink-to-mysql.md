@@ -3,66 +3,67 @@ title: Sink to MySQL
 Summary: Learn how to create a changefeed to stream data from TiDB Cloud to MySQL.
 ---
 
-# Sink to MySQL
+# MySQL にシンクする {#sink-to-mysql}
 
-This document describes how to stream data from TiDB Cloud to MySQL using the **Sink to MySQL** changefeed.
+このドキュメントでは、 **Sink to MySQL**変更フィードを使用してTiDB Cloudから MySQL にデータをストリーミングする方法について説明します。
 
-> **Note:**
+> **ノート：**
 >
-> To use the Changefeed feature, make sure that your TiDB cluster version is v6.4.0 or later and the TiKV node size is at least 8 vCPU and 16 GiB.
+> Changefeed 機能を使用するには、TiDB クラスターのバージョンが v6.4.0 以降であり、TiKV ノードのサイズが少なくとも 8 vCPU および 16 GiB であることを確認してください。
 >
-> Currently, TiDB Cloud only allows up to 10 changefeeds per cluster.
+> 現在、 TiDB Cloudクラスターごとに最大 10 個の変更フィードのみが許可されます。
 >
-> For [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta), the changefeed feature is unavailable.
+> [<a href="/tidb-cloud/select-cluster-tier.md#serverless-tier-beta">Serverless Tierクラスター</a>](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)の場合、チェンジフィード機能は使用できません。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-### Network
+### 通信網 {#network}
 
-Make sure that your TiDB Cluster can connect to the MySQL service.
+TiDBクラスタが MySQL サービスに接続できることを確認してください。
 
-If your MySQL service is in an AWS VPC that has no public internet access, take the following steps:
+MySQL サービスがパブリック インターネット アクセスのない AWS VPC 内にある場合は、次の手順を実行します。
 
-1. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of the MySQL service and your TiDB cluster.
-2. Modify the inbound rules of the security group that the MySQL service is associated with. 
+1.  MySQL サービスの VPC と TiDB クラスターの間は[<a href="/tidb-cloud/set-up-vpc-peering-connections.md">VPC ピアリング接続をセットアップする</a>](/tidb-cloud/set-up-vpc-peering-connections.md) 。
 
-    You must add [the CIDR of the region where your TiDB Cloud cluster is located](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr) to the inbound rules. Doing so allows the traffic to flow from your TiDB Cluster to the MySQL instance.
+2.  MySQL サービスが関連付けられているセキュリティ グループの受信ルールを変更します。
 
-3. If the MySQL URL contains a hostname, you need to allow TiDB Cloud to be able to resolve the DNS hostname of the MySQL service. 
+    受信ルールに[<a href="/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr">TiDB Cloudクラスターが配置されているリージョンの CIDR</a>](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr)を追加する必要があります。これにより、トラフィックが TiDBクラスタから MySQL インスタンスに流れるようになります。
 
-    1. Follow the steps in [Enable DNS resolution for a VPC peering connection](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html#vpc-peering-dns).
-    2. Enable the **Accepter DNS resolution** option.
+3.  MySQL URL にホスト名が含まれている場合は、 TiDB Cloud がMySQL サービスの DNS ホスト名を解決できるようにする必要があります。
 
-If your MySQL service is in a GCP VPC that has no public internet access, take the following steps:
+    1.  [<a href="https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html#vpc-peering-dns">VPC ピアリング接続の DNS 解決を有効にする</a>](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html#vpc-peering-dns)の手順に従います。
+    2.  **アクセプター DNS 解決**オプションを有効にします。
 
-1. If your MySQL service is Google Cloud SQL, you must expose a MySQL endpoint in the associated VPC of the Google Cloud SQL instance. You may need to use the [**Cloud SQL Auth proxy**](https://cloud.google.com/sql/docs/mysql/sql-proxy) which is developed by Google.
-2. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of the MySQL service and your TiDB cluster. 
-3. Modify the ingress firewall rules of the VPC where MySQL is located.
+MySQL サービスがパブリック インターネット アクセスを持たない GCP VPC 内にある場合は、次の手順を実行します。
 
-    You must add [the CIDR of the region where your TiDB Cloud cluster is located](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr) to the ingress firewall rules. Doing so allows the traffic to flow from your TiDB Cluster to the MySQL endpoint. 
+1.  MySQL サービスが Google Cloud SQL の場合は、Google Cloud SQL インスタンスの関連する VPC で MySQL エンドポイントを公開する必要があります。 Google が開発した[<a href="https://cloud.google.com/sql/docs/mysql/sql-proxy">**Cloud SQL 認証プロキシ**</a>](https://cloud.google.com/sql/docs/mysql/sql-proxy)を使用する必要がある場合があります。
+2.  MySQL サービスの VPC と TiDB クラスターの間は[<a href="/tidb-cloud/set-up-vpc-peering-connections.md">VPC ピアリング接続をセットアップする</a>](/tidb-cloud/set-up-vpc-peering-connections.md) 。
+3.  MySQL が配置されている VPC のイングレス ファイアウォール ルールを変更します。
 
-### Full load data
+    受信ファイアウォール ルールに[<a href="/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr">TiDB Cloudクラスターが配置されているリージョンの CIDR</a>](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr)を追加する必要があります。これにより、トラフィックが TiDBクラスタから MySQL エンドポイントに流れるようになります。
 
-The **Sink to MySQL** connector can only sink incremental data from your TiDB cluster to MySQL after a certain timestamp. If you already have data in your TiDB cluster, you must export and load the full load data of your TiDB cluster into MySQL before enabling **Sink to MySQL**:
+### フルロードデータ {#full-load-data}
 
-1. Extend the [tidb_gc_life_time](https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50) to be longer than the total time of the following two operations, so that historical data during the time is not garbage collected by TiDB.
+**Sink to MySQL**コネクタは、特定のタイムスタンプ後に TiDB クラスターから MySQL に増分データのみをシンクできます。 TiDB クラスターに既にデータがある場合は、 **Sink to MySQL**を有効にする前に、TiDB クラスターの全ロード データを MySQL にエクスポートしてロードする必要があります。
 
-    - The time to export and import the full load data
-    - The time to create **Sink to MySQL**
+1.  [<a href="https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50">tidb_gc_life_time</a>](https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50)次の 2 つの操作の合計時間よりも長くして、その間の履歴データが TiDB によってガベージ コレクションされないようにします。
 
-    For example:
+    -   全負荷データのエクスポートとインポートにかかる時間
+    -   **Sink to MySQL を**作成する時期が来ました
 
-    {{< copyable "sql" >}}
+    例えば：
+
+    {{< copyable "" >}}
 
     ```sql
     SET GLOBAL tidb_gc_life_time = '720h';
     ```
 
-2. Use [Dumpling](/dumpling-overview.md) to export data from your TiDB cluster, then use community tools such as [mydumper/myloader](https://centminmod.com/mydumper.html) to load data to the MySQL service.
+2.  [<a href="/dumpling-overview.md">Dumpling</a>](/dumpling-overview.md)を使用して TiDB クラスターからデータをエクスポートし、 [<a href="https://centminmod.com/mydumper.html">マイダンパー/マイローダー</a>](https://centminmod.com/mydumper.html)などのコミュニティ ツールを使用してデータを MySQL サービスにロードします。
 
-3. From the [exported files of Dumpling](/dumpling-overview.md#format-of-exported-files), get the start position of MySQL sink from the metadata file:
+3.  [<a href="/dumpling-overview.md#format-of-exported-files">Dumplingのエクスポートされたファイル</a>](/dumpling-overview.md#format-of-exported-files)から、メタデータ ファイルから MySQL シンクの開始位置を取得します。
 
-    The following is a part of an example metadata file. The `Pos` of `SHOW MASTER STATUS` is the TSO of the full load data, which is also the start position of MySQL sink.
+    以下は、メタデータ ファイルの例の一部です。 `SHOW MASTER STATUS`の`Pos`全ロード データの TSO であり、MySQL シンクの開始位置でもあります。
 
     ```
     Started dump at: 2020-11-10 10:40:19
@@ -70,54 +71,54 @@ The **Sink to MySQL** connector can only sink incremental data from your TiDB cl
             Log: tidb-binlog
             Pos: 420747102018863124
     Finished dump at: 2020-11-10 10:40:20
-    ``` 
+    ```
 
-## Create a MySQL sink
+## MySQL シンクを作成する {#create-a-mysql-sink}
 
-After completing the prerequisites, you can sink your data to MySQL.
+前提条件を完了したら、データを MySQL にシンクできます。
 
-1. Navigate to the cluster overview page of the target TiDB cluster, and then click **Changefeed** in the left navigation pane.
+1.  ターゲット TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**[Changefeed]**をクリックします。
 
-2. Click **Create Changefeed**, and select **MySQL** as **Target Type**.
+2.  **[Create Changefeed]**をクリックし、 **[Target Type]**として**[MySQL]**を選択します。
 
-3. Fill in the MySQL endpoints, user name, and password in **MySQL Connection**.
+3.  MySQL エンドポイント、ユーザー名、およびパスワードを**MySQL Connection**に入力します。
 
-4. Click **Next** to test whether TiDB can connect to MySQL successfully:
+4.  **[次へ]**をクリックして、TiDB が MySQL に正常に接続できるかどうかをテストします。
 
-    - If yes, you are directed to the next step of configuration.
-    - If not, a connectivity error is displayed, and you need to handle the error. After the error is resolved, click **Next** again.
+    -   「はい」の場合、次の構成ステップに進みます。
+    -   そうでない場合は、接続エラーが表示されるため、エラーを処理する必要があります。エラーが解決したら、もう一度**「次へ」**をクリックします。
 
-5. Customize **Table Filter** to filter the tables that you want to replicate. For the rule syntax, refer to [table filter rules](/table-filter.md).
+5.  **テーブル フィルターを**カスタマイズして、複製するテーブルをフィルターします。ルールの構文については、 [<a href="/table-filter.md">テーブルフィルタールール</a>](/table-filter.md)を参照してください。
 
-    - **Add filter rules**: you can set filter rules in this column. By default, there is a rule `*. *`, which stands for replicating all tables. When you add a new rule, TiDB Cloud queries all the tables in TiDB and displays only the tables that match the rules in the box on the right.
-    - **Tables to be replicated**: this column shows the tables to be replicated. But it does not show the new tables to be replicated in the future or the schemas to be fully replicated.
-    - **Tables without valid keys**: this column shows tables without unique and primary keys. For these tables, because no unique identifier can be used by the downstream system to handle duplicate events, their data might be inconsistent during replication. To avoid such issues, it is recommended that you add unique keys or primary keys to these tables before the replication, or set filter rules to filter out these tables. For example, you can filter out the table `test.tbl1` using "!test.tbl1".
+    -   **フィルター ルールの追加**: この列でフィルター ルールを設定できます。デフォルトでは、すべてのテーブルを複製することを表すルール`*. *`があります。新しいルールを追加すると、 TiDB CloudはTiDB 内のすべてのテーブルをクエリし、ルールに一致するテーブルのみを右側のボックスに表示します。
+    -   **複製されるテーブル**: この列には、複製されるテーブルが表示されます。ただし、今後複製される新しいテーブルや完全に複製されるスキーマは表示されません。
+    -   **有効なキーのないテーブル**: この列には、一意キーと主キーのないテーブルが表示されます。これらのテーブルでは、ダウンストリーム システムが重複イベントを処理するために一意の識別子を使用できないため、レプリケーション中にデータが不整合になる可能性があります。このような問題を回避するには、レプリケーションの前にこれらのテーブルに一意キーまたは主キーを追加するか、これらのテーブルをフィルターで除外するフィルター ルールを設定することをお勧めします。たとえば、「!test.tbl1」を使用してテーブル`test.tbl1`を除外できます。
 
-6. In **Start Position**, configure the starting position for your MySQL sink.
+6.  **[開始位置]**で、MySQL シンクの開始位置を構成します。
 
-    - If you have performed [full load data](#full-load-data) using Dumpling, select **Start replication from a specific TSO** and fill in the TSO that you get from Dumpling exported metadata files.
-    - If you do not have any data in the upstream TiDB cluster, select **Start replication from now on**.
-    - Otherwise, you can customize the start time point by choosing **Start replication from a specific time**.
+    -   Dumplingを使用して[<a href="#full-load-data">フルロードデータ</a>](#full-load-data)実行した場合は、 **[特定の TSO からレプリケーションを開始する]**を選択し、 Dumpling のエクスポートされたメタデータ ファイルから取得した TSO を入力します。
+    -   上流の TiDB クラスターにデータがない場合は、 **「今からレプリケーションを開始する」**を選択します。
+    -   それ以外の場合は、 **[Start replication from specific time]**を選択して開始時点をカスタマイズできます。
 
-7. Click **Next** to review the Changefeed configuration.
+7.  **「次へ」**をクリックして、Changefeed 構成を確認します。
 
-    If you confirm all configurations are correct, check the compliance of cross-region replication, and click **Create**.
-    
-    If you want to modify some configurations, click **Previous** to go back to the previous configuration page.
+    すべての構成が正しいことを確認したら、リージョン間のレプリケーションのコンプライアンスをチェックし、 **「作成」**をクリックします。
 
-8. The sink starts soon, and you can see the status of the sink changes from "**Creating**" to "**Running**".
+    一部の構成を変更する場合は、 **「前へ」**をクリックして前の構成ページに戻ります。
 
-    Click the **Sink to MySQL** card, and you can see the Changfeed running status in a pop-up window, including checkpoint, replication latency, and other metrics.
+8.  すぐにシンクが起動し、シンクのステータスが「**作成中**」から「**実行中**」に変化することがわかります。
 
-9. If you have performed [full load data](#full-load-data) using Dumpling, you need to restore the GC time to its original value (the default value is `10m`) after the sink is created:
+    **「Sink to MySQL」**カードをクリックすると、チェックポイント、レプリケーションレイテンシー、その他のメトリクスを含む、Changfeed の実行ステータスがポップアップ ウィンドウに表示されます。
 
-{{< copyable "sql" >}}
+9.  Dumplingを使用して[<a href="#full-load-data">フルロードデータ</a>](#full-load-data)を実行した場合は、シンクの作成後に GC 時間を元の値 (デフォルト値は`10m` ) に戻す必要があります。
+
+{{< copyable "" >}}
 
 ```sql
 SET GLOBAL tidb_gc_life_time = '10m';
 ```
 
-## Restrictions
+## 制限 {#restrictions}
 
-- For each TiDB Cloud cluster, you can create up to 10 changefeeds.
-- Because TiDB Cloud uses TiCDC to establish changefeeds, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#restrictions).
+-   TiDB Cloudクラスターごとに、最大 10 個の変更フィードを作成できます。
+-   TiDB Cloud はTiCDC を使用して変更フィードを確立するため、同じ[<a href="https://docs.pingcap.com/tidb/stable/ticdc-overview#restrictions">TiCDC としての制限</a>](https://docs.pingcap.com/tidb/stable/ticdc-overview#restrictions)を持ちます。

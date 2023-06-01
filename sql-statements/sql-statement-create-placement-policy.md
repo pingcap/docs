@@ -3,11 +3,11 @@ title: CREATE PLACEMENT POLICY
 summary: The usage of CREATE PLACEMENT POLICY in TiDB.
 ---
 
-# CREATE PLACEMENT POLICY
+# 配置ポリシーの作成 {#create-placement-policy}
 
-`CREATE PLACEMENT POLICY` is used to create a named placement policy that can later be assigned to tables, partitions, or database schemas.
+`CREATE PLACEMENT POLICY` 、後でテーブル、パーティション、またはデータベース スキーマに割り当てることができる名前付き配置ポリシーを作成するために使用されます。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 CreatePolicyStmt ::=
@@ -42,15 +42,15 @@ AdvancedPlacementOption ::=
 |   "LEARNER_CONSTRAINTS" EqOpt stringLit
 ```
 
-## Examples
+## 例 {#examples}
 
-> **Note:**
+> **ノート：**
 >
-> To know which regions are available in your cluster, see [`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md).
+> クラスター内で使用可能なリージョンを確認するには、 [<a href="/sql-statements/sql-statement-show-placement-labels.md">`SHOW PLACEMENT LABELS`</a>](/sql-statements/sql-statement-show-placement-labels.md)を参照してください。
 >
-> If you do not see any available regions, your TiKV installation might not have labels set correctly.
+> 利用可能なリージョンが表示されない場合は、TiKV インストールにラベルが正しく設定されていない可能性があります。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE PLACEMENT POLICY p1 PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1" FOLLOWERS=4;
@@ -71,13 +71,13 @@ Query OK, 0 rows affected (0.10 sec)
 1 row in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL 構文に対する TiDB 拡張機能です。
 
-## See also
+## こちらも参照 {#see-also}
 
-* [Placement Rules in SQL](/placement-rules-in-sql.md)
-* [SHOW PLACEMENT](/sql-statements/sql-statement-show-placement.md)
-* [ALTER PLACEMENT POLICY](/sql-statements/sql-statement-alter-placement-policy.md)
-* [DROP PLACEMENT POLICY](/sql-statements/sql-statement-drop-placement-policy.md)
+-   [<a href="/placement-rules-in-sql.md">SQL の配置ルール</a>](/placement-rules-in-sql.md)
+-   [<a href="/sql-statements/sql-statement-show-placement.md">配置を表示</a>](/sql-statements/sql-statement-show-placement.md)
+-   [<a href="/sql-statements/sql-statement-alter-placement-policy.md">配置ポリシーの変更</a>](/sql-statements/sql-statement-alter-placement-policy.md)
+-   [<a href="/sql-statements/sql-statement-drop-placement-policy.md">ドロップ配置ポリシー</a>](/sql-statements/sql-statement-drop-placement-policy.md)

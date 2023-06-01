@@ -3,17 +3,17 @@ title: SET PASSWORD | TiDB SQL Statement Reference
 summary: An overview of the usage of SET PASSWORD for the TiDB database.
 ---
 
-# SET PASSWORD
+# パスワードを設定してください {#set-password}
 
-This statement changes the user password for a user account in the TiDB system database.
+このステートメントは、TiDB システム データベース内のユーザー アカウントのユーザー パスワードを変更します。
 
-## Synopsis
+## あらすじ {#synopsis}
 
-**SetStmt:**
+**セットステート:**
 
 ![SetStmt](/media/sqlgram/SetStmt.png)
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> SET PASSWORD='test'; -- change my password
@@ -53,16 +53,16 @@ mysql> SHOW CREATE USER 'newuser';
 1 row in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
+このステートメントは、MySQL と完全な互換性があると理解されています。 GitHub では互換性の違いは[<a href="https://github.com/pingcap/tidb/issues/new/choose">問題を通じて報告されました</a>](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
 
-## See also
+## こちらも参照 {#see-also}
 
-* [CREATE USER](/sql-statements/sql-statement-create-user.md)
+-   [<a href="/sql-statements/sql-statement-create-user.md">ユーザーを作成</a>](/sql-statements/sql-statement-create-user.md)
 
 <CustomContent platform="tidb">
 
-* [Privilege Management](/privilege-management.md)
+-   [<a href="/privilege-management.md">権限管理</a>](/privilege-management.md)
 
 </CustomContent>

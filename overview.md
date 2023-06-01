@@ -3,7 +3,7 @@ title: TiDB Introduction
 summary: Learn about the key features and usage scenarios of TiDB.
 ---
 
-# TiDB Introduction
+# TiDB の紹介 {#tidb-introduction}
 
 <!-- Localization note for TiDB:
 
@@ -13,55 +13,55 @@ summary: Learn about the key features and usage scenarios of TiDB.
 
 -->
 
-[TiDB](https://github.com/pingcap/tidb) (/’taɪdiːbi:/, "Ti" stands for Titanium) is an open-source distributed SQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. It is MySQL compatible and features horizontal scalability, strong consistency, and high availability. The goal of TiDB is to provide users with a one-stop database solution that covers OLTP (Online Transactional Processing), OLAP (Online Analytical Processing), and HTAP services. TiDB is suitable for various use cases that require high availability and strong consistency with large-scale data.
+[<a href="https://github.com/pingcap/tidb">TiDB</a>](https://github.com/pingcap/tidb) (/&#39;taɪdiːbi:/、「Ti」は Titanium の略) は、ハイブリッド トランザクションおよび分析処理 (HTAP) ワークロードをサポートするオープンソースの分散 SQL データベースです。 MySQL と互換性があり、水平スケーラビリティ、強力な一貫性、高可用性を備えています。 TiDB の目標は、OLTP (オンライン トランザクション処理)、OLAP (オンライン分析処理)、および HTAP サービスをカバーするワンストップ データベース ソリューションをユーザーに提供することです。 TiDB は、高可用性と大規模データの強力な一貫性を必要とするさまざまなユースケースに適しています。
 
-The following video introduces key features of TiDB.
+次のビデオでは、TiDB の主要な機能を紹介します。
 
-<iframe width="600" height="450" src="https://www.youtube.com/embed/aWBNNPm21zg?enablejsapi=1" title="Why TiDB?" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="600" height="450" src="https://www.youtube.com/embed/aWBNNPm21zg?enablejsapi=1" title="TiDB を選ぶ理由" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-## Key features
+## 主な特徴 {#key-features}
 
-- **Horizontally scaling out or scaling in easily**
+-   **水平方向のスケールアウトまたはスケールインが簡単に行えます**
 
-    The TiDB architecture design of separating computing from storage enables you to separately scale out or scale in the computing or storage capacity online as needed. The scaling process is transparent to application operations and maintenance staff.
+    コンピューティングとstorageを分離する TiDBアーキテクチャ設計により、必要に応じてオンラインでコンピューティングまたはstorageの容量を個別にスケールアウトまたはスケールインできます。スケーリング プロセスは、アプリケーションの運用スタッフやメンテナンス スタッフにとって透過的です。
 
-- **Financial-grade high availability**
+-   **金融グレードの高可用性**
 
-    The data is stored in multiple replicas. Data replicas obtain the transaction log using the Multi-Raft protocol. A transaction can be committed only when data has been successfully written into the majority of replicas. This can guarantee strong consistency, and availability when a minority of replicas go down. To meet the requirements of different disaster tolerance levels, you can configure the geographic location and number of replicas as needed.
+    データは複数のレプリカに保存されます。データ レプリカは、Multi-Raft プロトコルを使用してトランザクション ログを取得します。トランザクションは、大部分のレプリカにデータが正常に書き込まれた場合にのみコミットできます。これにより、強力な一貫性と、少数のレプリカがダウンした場合の可用性が保証されます。さまざまな耐災害性レベルの要件を満たすために、必要に応じて地理的な場所とレプリカの数を構成できます。
 
-- **Real-time HTAP**
+-   **リアルタイムHTAP**
 
-    TiDB provides two storage engines: [TiKV](/tikv-overview.md), a row-based storage engine, and [TiFlash](/tiflash/tiflash-overview.md), a columnar storage engine. TiFlash uses the Multi-Raft Learner protocol to replicate data from TiKV in real time, ensuring that the data between the TiKV row-based storage engine and the TiFlash columnar storage engine are consistent. TiKV and TiFlash can be deployed on different machines as needed to solve the problem of HTAP resource isolation.
+    TiDB は 2 つのstorageエンジンを提供します[<a href="/tikv-overview.md">TiKV</a>](/tikv-overview.md)は行ベースのstorageエンジン、 [<a href="/tiflash/tiflash-overview.md">TiFlash</a>](/tiflash/tiflash-overview.md)は列指向のstorageエンジンです。 TiFlash は、 Multi-Raft Learnerプロトコルを使用して TiKV からリアルタイムでデータを複製し、TiKV 行ベースのstorageエンジンとTiFlash の列型storageエンジン間のデータの一貫性を確保します。 TiKV とTiFlash は、 HTAP リソース分離の問題を解決するために、必要に応じて別のマシンにデプロイできます。
 
-- **Cloud-native distributed database**
+-   **クラウドネイティブな分散データベース**
 
-    TiDB is a distributed database designed for the cloud, providing flexible scalability, reliability and security on the cloud platform. Users can elastically scale TiDB to meet the requirements of their changing workloads. In TiDB, each piece of data has 3 replicas at least, which can be scheduled in different cloud availability zones to tolerate the outage of a whole data center. [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/tidb-operator-overview) helps manage TiDB on Kubernetes and automates tasks related to operating the TiDB cluster, which makes TiDB easier to deploy on any cloud that provides managed Kubernetes. [TiDB Cloud](https://pingcap.com/tidb-cloud/), the fully-managed TiDB service, is the easiest, most economical, and most resilient way to unlock the full power of [TiDB in the cloud](https://docs.pingcap.com/tidbcloud/), allowing you to deploy and run TiDB clusters with just a few clicks.
+    TiDB はクラウド用に設計された分散データベースであり、クラウド プラットフォーム上で柔軟な拡張性、信頼性、セキュリティを提供します。ユーザーは、変化するワークロードの要件に合わせて TiDB を柔軟に拡張できます。 TiDB では、各データには少なくとも 3 つのレプリカがあり、データセンター全体の停止に耐えられるように、異なるクラウド アベイラビリティ ゾーンにスケジュールできます。 [<a href="https://docs.pingcap.com/tidb-in-kubernetes/stable/tidb-operator-overview">TiDB Operator</a>](https://docs.pingcap.com/tidb-in-kubernetes/stable/tidb-operator-overview) 、Kubernetes 上で TiDB を管理し、TiDB クラスターの操作に関連するタスクを自動化するのに役立ちます。これにより、マネージド Kubernetes を提供するクラウドへの TiDB のデプロイが容易になります。フルマネージド TiDB サービスで[<a href="https://pingcap.com/tidb-cloud/">TiDB Cloud</a>](https://pingcap.com/tidb-cloud/)は、 [<a href="https://docs.pingcap.com/tidbcloud/">クラウド上の TiDB</a>](https://docs.pingcap.com/tidbcloud/)の機能を最大限に活用するための最も簡単、最も経済的、かつ回復力に優れた方法であり、数回クリックするだけで TiDB クラスターを展開して実行できます。
 
-- **Compatible with the MySQL 5.7 protocol and MySQL ecosystem**
+-   **MySQL 5.7プロトコルおよび MySQL エコシステムとの互換性**
 
-    TiDB is compatible with the MySQL 5.7 protocol, common features of MySQL, and the MySQL ecosystem. To migrate your applications to TiDB, you do not need to change a single line of code in many cases or only need to modify a small amount of code. In addition, TiDB provides a series of [data migration tools](/ecosystem-tool-user-guide.md) to help easily migrate application data into TiDB.
+    TiDB は、MySQL 5.7プロトコル、MySQL の共通機能、および MySQL エコシステムと互換性があります。アプリケーションを TiDB に移行する場合、多くの場合、コードを 1 行も変更する必要はありません。または、少量のコードを変更するだけで済みます。さらに、TiDB は、アプリケーション データを TiDB に簡単に移行するのに役立つ一連の[<a href="/ecosystem-tool-user-guide.md">データ移行ツール</a>](/ecosystem-tool-user-guide.md)を提供します。
 
-## Use cases
+## ユースケース {#use-cases}
 
-- **Financial industry scenarios with high requirements for data consistency, reliability, availability, scalability, and disaster tolerance**
+-   **データの一貫性、信頼性、可用性、拡張性、耐災害性に対する高い要件を伴う金融業界のシナリオ**
 
-    As we all know, the financial industry has high requirements for data consistency, reliability, availability, scalability, and disaster tolerance. The traditional solution is to provide services in two data centers in the same city, and provide data disaster recovery but no services in a third data center located in another city. This solution has the disadvantages of low resource utilization, high maintenance cost, and the fact that RTO (Recovery Time Objective) and RPO (Recovery Point Objective) cannot meet expectations. TiDB uses multiple replicas and the Multi-Raft protocol to schedule data to different data centers, racks, and machines. When some machines fail, the system can automatically switch to ensure that the system RTO ≦ 30 seconds and RPO = 0.
+    周知のとおり、金融業界にはデータの一貫性、信頼性、可用性、拡張性、耐災害性に対する高い要件があります。従来のソリューションは、同じ都市にある 2 つのデータ センターでサービスを提供し、別の都市にある 3 番目のデータ センターではデータ ディザスタ リカバリを提供しますが、サービスは提供しません。このソリューションには、リソース使用率が低い、メンテナンス コストが高い、RTO (目標復旧時間) と RPO (目標復旧時点) が期待に応えられないという欠点があります。 TiDB は、複数のレプリカと Multi-Raft プロトコルを使用して、さまざまなデータ センター、ラック、マシンにデータをスケジュールします。一部のマシンに障害が発生した場合、システムは自動的に切り替わり、システム RTO ≦ 30 秒および RPO = 0 が保証されます。
 
-- **Massive data and high concurrency scenarios with high requirements for storage capacity, scalability, and concurrency**
+-   **storage容量、スケーラビリティ、同時実行性に対する高い要件を伴う、大量のデータと高い同時実行性のシナリオ**
 
-    As applications grow rapidly, the data surges. Traditional standalone databases cannot meet the data capacity requirements. The solution is to use sharding middleware or a distributed SQL database (like TiDB), and the latter is more cost-effective. TiDB adopts a separate computing and storage architecture, which enables you to scale out or scale in the computing or storage capacity separately. The computing layer supports a maximum of 512 nodes, each node supports a maximum of 1,000 concurrencies, and the maximum cluster capacity is at the PB (petabytes) level.
+    アプリケーションが急速に成長するにつれて、データも急増します。従来のスタンドアロン データベースでは、データ容量の要件を満たすことができません。解決策は、シャーディング ミドルウェアまたは分散 SQL データベース (TiDB など) を使用することであり、後者の方がコスト効率が高くなります。 TiDB は、個別のコンピューティングおよびstorageアーキテクチャを採用しており、コンピューティングまたはstorageの容量を個別にスケールアウトまたはスケールインできます。コンピューティングレイヤーは最大 512 ノードをサポートし、各ノードは最大 1,000 の同時実行をサポートし、最大クラスター容量は PB (ペタバイト) レベルです。
 
-- **Real-time HTAP scenarios**
+-   **リアルタイム HTAP シナリオ**
 
-    With the fast growth of 5G, Internet of Things, and artificial intelligence, the data generated by a company keeps increasing tremendously, reaching a scale of hundreds of TB (terabytes) or even the PB level. The traditional solution is to process online transactional applications using an OLTP database and use an ETL (Extract, Transform, Load) tool to replicate the data into an OLAP database for data analysis. This solution has multiple disadvantages such as high storage costs and poor real-time performance. TiDB introduces the TiFlash columnar storage engine in v4.0, which combines with the TiKV row-based storage engine to build TiDB as a true HTAP database. With a small amount of extra storage cost, you can handle both online transactional processing and real-time data analysis in the same system, which greatly saves the cost.
+    5G、モノのインターネット、人工知能の急速な成長に伴い、企業が生成するデータは大幅に増加し続けており、その規模は数百 TB (テラバイト)、あるいは PB レベルに達することもあります。従来のソリューションは、OLTP データベースを使用してオンライン トランザクション アプリケーションを処理し、ETL (抽出、変換、ロード) ツールを使用してデータを OLAP データベースに複製してデータ分析を行うことでした。このソリューションには、storageコストの高さやリアルタイム パフォーマンスの低下など、複数の欠点があります。 TiDB は、v4.0 でTiFlash列型storageエンジンを導入し、TiKV 行ベースのstorageエンジンと組み合わせて、真の HTAP データベースとして TiDB を構築します。少量の追加storageコストで、オンライン トランザクション処理とリアルタイム データ分析の両方を同じシステムで処理できるため、コストが大幅に節約されます。
 
-- **Data aggregation and secondary processing scenarios**
+-   **データ集約と二次処理のシナリオ**
 
-    The application data of most companies are scattered in different systems. As the application grows, the decision-making leaders need to understand the business status of the entire company to make decisions in time. In this case, the company needs to aggregate the scattered data into the same system and execute secondary processing to generate a T+0 or T+1 report. The traditional solution is to use ETL and Hadoop, but the Hadoop system is complicated, with high operations and maintenance cost and storage cost. Compared with Hadoop, TiDB is much simpler. You can replicate data into TiDB using ETL tools or data migration tools provided by TiDB. Reports can be directly generated using SQL statements.
+    ほとんどの企業のアプリケーション データは、さまざまなシステムに分散しています。アプリケーションが成長するにつれて、意思決定リーダーは会社全体のビジネス状況を理解し、適切なタイミングで意思決定を行う必要があります。この場合、企業は分散したデータを同一システムに集約し、二次処理を実行してT+0レポートまたはT+1レポートを生成する必要があります。従来のソリューションは ETL と Hadoop を使用することですが、Hadoop システムは複雑であり、運用と保守のコストとstorageのコストが高くなります。 Hadoop と比較すると、TiDB ははるかにシンプルです。 TiDB が提供する ETL ツールまたはデータ移行ツールを使用して、データを TiDB にレプリケートできます。 SQL ステートメントを使用してレポートを直接生成できます。
 
-## See also
+## こちらも参照 {#see-also}
 
-- [TiDB Architecture](/tidb-architecture.md)
-- [TiDB Storage](/tidb-storage.md)
-- [TiDB Computing](/tidb-computing.md)
-- [TiDB Scheduling](/tidb-scheduling.md)
+-   [<a href="/tidb-architecture.md">TiDBアーキテクチャ</a>](/tidb-architecture.md)
+-   [<a href="/tidb-storage.md">TiDBストレージ</a>](/tidb-storage.md)
+-   [<a href="/tidb-computing.md">TiDB コンピューティング</a>](/tidb-computing.md)
+-   [<a href="/tidb-scheduling.md">TiDB スケジューリング</a>](/tidb-scheduling.md)

@@ -4,47 +4,48 @@ summary: Learn how to build a simple CRUD application with TiDB and mysqlclient.
 ---
 
 <!-- markdownlint-disable MD024 -->
+
 <!-- markdownlint-disable MD029 -->
 
-# Build a Simple CRUD App with TiDB and mysqlclient
+# TiDB と mysqlclient を使用してシンプルな CRUD アプリを構築する {#build-a-simple-crud-app-with-tidb-and-mysqlclient}
 
-[mysqlclient](https://pypi.org/project/mysqlclient/) is a popular open-source driver for Python.
+[<a href="https://pypi.org/project/mysqlclient/">mysqlクライアント</a>](https://pypi.org/project/mysqlclient/)は、Python 用の人気のあるオープンソース ドライバーです。
 
-This document describes how to use TiDB and mysqlclient to build a simple CRUD application.
+このドキュメントでは、TiDB と mysqlclient を使用して単純な CRUD アプリケーションを構築する方法について説明します。
 
-> **Note:**
+> **ノート：**
 >
-> It is recommended to use Python 3.10 or a later Python version.
+> Python 3.10 以降の Python バージョンを使用することをお勧めします。
 
-## Step 1. Launch your TiDB cluster
+## ステップ 1. TiDB クラスターを起動する {#step-1-launch-your-tidb-cluster}
 
 <CustomContent platform="tidb">
 
-The following introduces how to start a TiDB cluster.
+TiDB クラスターの起動方法を紹介します。
 
-**Use a TiDB Cloud Serverless Tier cluster**
+**TiDB CloudServerless Tierクラスターを使用する**
 
-For detailed steps, see [Create a Serverless Tier cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster).
+詳細な手順については、 [<a href="/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster">Serverless Tierクラスターの作成</a>](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
 
-**Use a local cluster**
+**ローカルクラスターを使用する**
 
-For detailed steps, see [Deploy a local test cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a TiDB cluster using TiUP](/production-deployment-using-tiup.md).
+詳細な手順については、 [<a href="/quick-start-with-tidb.md#deploy-a-local-test-cluster">ローカルテストクラスターをデプロイ</a>](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[<a href="/production-deployment-using-tiup.md">TiUPを使用して TiDB クラスターをデプロイ</a>](/production-deployment-using-tiup.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-See [Create a Serverless Tier cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster).
+[<a href="/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster">Serverless Tierクラスターの作成</a>](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
 
 </CustomContent>
 
-## Step 2. Get the code
+## ステップ 2. コードを取得する {#step-2-get-the-code}
 
 ```shell
 git clone https://github.com/pingcap-inc/tidb-example-python.git
 ```
 
-The following uses mysqlclient 2.1.1 as an example. Drivers for Python are more convenient to use than other languages, but they do not shield the underlying implementation and require manual management of transactions. If there are not a lot of scenarios where SQL is required, it is recommended to use ORM, which can help reduce the coupling of your program.
+以下では例として mysqlclient 2.1.1 を使用します。 Python のドライバーは他の言語よりも使いやすいですが、基礎となる実装を保護せず、トランザクションを手動で管理する必要があります。 SQL が必要なシナリオがそれほど多くない場合は、プログラムの結合を減らすのに役立つ ORM を使用することをお勧めします。
 
 ```python
 import uuid
@@ -197,17 +198,17 @@ simple_example()
 trade_example()
 ```
 
-The driver has a lower level of encapsulation than ORM, so there are a lot of SQL statements in the program. Unlike ORM, there is no data object in drivers, so the `Player` queried by the driver is represented as a tuple.
+ドライバーのカプセル化レベルは ORM よりも低いため、プログラム内に多数の SQL ステートメントが含まれます。 ORM とは異なり、ドライバーにはデータ オブジェクトがないため、ドライバーによってクエリされる`Player`はタプルとして表されます。
 
-For more information about how to use mysqlclient, refer to [mysqlclient documentation](https://mysqlclient.readthedocs.io/).
+mysqlclient の使用方法の詳細については、 [<a href="https://mysqlclient.readthedocs.io/">mysqlクライアントのドキュメント</a>](https://mysqlclient.readthedocs.io/)を参照してください。
 
-## Step 3. Run the code
+## ステップ 3. コードを実行する {#step-3-run-the-code}
 
-The following content introduces how to run the code step by step.
+次のコンテンツでは、コードを実行する方法をステップごとに紹介します。
 
-### Step 3.1 Initialize table
+### ステップ 3.1 テーブルの初期化 {#step-3-1-initialize-table}
 
-Before running the code, you need to initialize the table manually. If you are using a local TiDB cluster, you can run the following command:
+コードを実行する前に、テーブルを手動で初期化する必要があります。ローカル TiDB クラスターを使用している場合は、次のコマンドを実行できます。
 
 <SimpleTab groupId="cli">
 
@@ -229,13 +230,13 @@ mycli --host 127.0.0.1 --port 4000 -u root --no-warn < player_init.sql
 
 </SimpleTab>
 
-If you are not using a local cluster, or have not installed a MySQL client, connect to your cluster using your preferred method (such as Navicat, DBeaver, or other GUI tools) and run the SQL statements in the `player_init.sql` file.
+ローカル クラスターを使用していない場合、または MySQL クライアントをインストールしていない場合は、好みの方法 (Navicat、DBeaver、またはその他の GUI ツールなど) を使用してクラスターに接続し、 `player_init.sql`ファイル内の SQL ステートメントを実行します。
 
-### Step 3.2 Modify parameters for TiDB Cloud
+### ステップ 3.2 TiDB Cloudのパラメータを変更する {#step-3-2-modify-parameters-for-tidb-cloud}
 
-If you are using a TiDB Cloud Serverless Tier cluster, you need to provide your CA root path and replace `<ca_path>` in the following examples with your CA path. To get the CA root path on your system, refer to [Where is the CA root path on my system?](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-tier-clusters#where-is-the-ca-root-path-on-my-system).
+TiDB CloudServerless Tierクラスターを使用している場合は、CA ルート パスを指定し、次の例の`<ca_path>`を CA パスに置き換える必要があります。システム上の CA ルート パスを取得するには、 [<a href="https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-tier-clusters#where-is-the-ca-root-path-on-my-system">私のシステム上の CA ルート パスはどこにありますか?</a>](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-tier-clusters#where-is-the-ca-root-path-on-my-system)を参照してください。
 
-If you are using a TiDB Cloud Serverless Tier cluster, change the `get_connection` function in `mysqlclient_example.py`:
+TiDB CloudServerless Tierクラスターを使用している場合は、 `mysqlclient_example.py`の`get_connection`関数を変更します。
 
 ```python
 def get_connection(autocommit: bool = True) -> MySQLdb.Connection:
@@ -249,13 +250,13 @@ def get_connection(autocommit: bool = True) -> MySQLdb.Connection:
     )
 ```
 
-Suppose that the password you set is `123456`, and the connection parameters you get from the cluster details page are the following:
+設定したパスワードが`123456`で、クラスターの詳細ページから取得した接続パラメーターが次であるとします。
 
-- Endpoint: `xxx.tidbcloud.com`
-- Port: `4000`
-- User: `2aEp24QWEDLqRFs.root`
+-   エンドポイント: `xxx.tidbcloud.com`
+-   ポート: `4000`
+-   ユーザー: `2aEp24QWEDLqRFs.root`
 
-In this case, you can modify the `get_connection` as follows:
+この場合、 `get_connection`を次のように変更できます。
 
 ```python
 def get_connection(autocommit: bool = True) -> MySQLdb.Connection:
@@ -273,20 +274,20 @@ def get_connection(autocommit: bool = True) -> MySQLdb.Connection:
     )
 ```
 
-### Step 3.3 Run the code
+### ステップ 3.3 コードを実行する {#step-3-3-run-the-code}
 
-Before running the code, use the following command to install dependencies:
+コードを実行する前に、次のコマンドを使用して依存関係をインストールします。
 
 ```bash
 pip3 install -r requirement.txt
 ```
 
-If you need to run the script multiple times, follow the [Table initialization](#step-31-initialize-table) section to initialize the table again before each run.
+スクリプトを複数回実行する必要がある場合は、各実行前に[<a href="#step-31-initialize-table">テーブルの初期化</a>](#step-31-initialize-table)セクションに従ってテーブルを再度初期化します。
 
 ```bash
 python3 mysqlclient_example.py
 ```
 
-## Step 4. Expected output
+## ステップ 4. 期待される出力 {#step-4-expected-output}
 
-[mysqlclient Expected Output](https://github.com/pingcap-inc/tidb-example-python/blob/main/Expected-Output.md#mysqlclient)
+[<a href="https://github.com/pingcap-inc/tidb-example-python/blob/main/Expected-Output.md#mysqlclient">mysqlclient 予想される出力</a>](https://github.com/pingcap-inc/tidb-example-python/blob/main/Expected-Output.md#mysqlclient)

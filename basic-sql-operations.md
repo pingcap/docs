@@ -3,99 +3,99 @@ title: Explore SQL with TiDB
 summary: Learn about the basic SQL statements for the TiDB database.
 ---
 
-# Explore SQL with TiDB
+# TiDB で SQL を探索する {#explore-sql-with-tidb}
 
-TiDB is compatible with MySQL, you can use MySQL statements directly in most of the cases. For unsupported features, see [Compatibility with MySQL](/mysql-compatibility.md#unsupported-features).
+TiDB は MySQL と互換性があり、ほとんどの場合、MySQL ステートメントを直接使用できます。サポートされていない機能については、 [<a href="/mysql-compatibility.md#unsupported-features">MySQLとの互換性</a>](/mysql-compatibility.md#unsupported-features)を参照してください。
 
 <CustomContent platform="tidb">
 
-To experiment with SQL and test out TiDB compatibility with MySQL queries, you can [run TiDB directly in your web browser without installing it](https://tour.tidb.io/). You can also first deploy a TiDB cluster and then run SQL statements in it.
+SQL を実験し、MySQL クエリと TiDB の互換性をテストするには、 [<a href="https://tour.tidb.io/">TiDB をインストールせずに Web ブラウザで直接実行します</a>](https://tour.tidb.io/)ことができます。最初に TiDB クラスターをデプロイしてから、その中で SQL ステートメントを実行することもできます。
 
 </CustomContent>
 
-This page walks you through the basic TiDB SQL statements such as DDL, DML and CRUD operations. For a complete list of TiDB statements, see [TiDB SQL Syntax Diagram](https://pingcap.github.io/sqlgram/).
+このページでは、DDL、DML、CRUD 操作などの基本的なTiDB SQLステートメントについて説明します。 TiDB ステートメントの完全なリストについては、 [<a href="https://pingcap.github.io/sqlgram/">TiDB SQL構文図</a>](https://pingcap.github.io/sqlgram/)を参照してください。
 
-## Category
+## カテゴリー {#category}
 
-SQL is divided into the following 4 types according to their functions:
+SQLは関数に応じて以下の4種類に分類されます。
 
-- DDL (Data Definition Language): It is used to define database objects, including databases, tables, views, and indexes.
+-   DDL (データ定義言語): データベース、テーブル、ビュー、インデックスなどのデータベース オブジェクトを定義するために使用されます。
 
-- DML (Data Manipulation Language): It is used to manipulate application related records.
+-   DML (データ操作言語): アプリケーション関連のレコードを操作するために使用されます。
 
-- DQL (Data Query Language): It is used to query the records after conditional filtering.
+-   DQL (データクエリ言語): 条件付きフィルタリング後にレコードをクエリするために使用されます。
 
-- DCL (Data Control Language): It is used to define access privileges and security levels.
+-   DCL (データ制御言語): アクセス権限とセキュリティ レベルを定義するために使用されます。
 
-Common DDL features are creating, modifying, and deleting objects (such as tables and indexes). The corresponding commands are `CREATE`, `ALTER`, and `DROP`.
+一般的な DDL 機能は、オブジェクト (テーブルやインデックスなど) の作成、変更、削除です。対応するコマンドは`CREATE` 、 `ALTER` 、および`DROP`です。
 
-## Show, create and drop a database
+## データベースの表示、作成、削除 {#show-create-and-drop-a-database}
 
-A database in TiDB can be considered as a collection of objects such as tables and indexes.
+TiDB のデータベースは、テーブルやインデックスなどのオブジェクトのコレクションと考えることができます。
 
-To show the list of databases, use the `SHOW DATABASES` statement:
+データベースのリストを表示するには、 `SHOW DATABASES`ステートメントを使用します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SHOW DATABASES;
 ```
 
-To use the database named `mysql`, use the following statement:
+`mysql`という名前のデータベースを使用するには、次のステートメントを使用します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 USE mysql;
 ```
 
-To show all the tables in a database, use the `SHOW TABLES` statement:
+データベース内のすべてのテーブルを表示するには、 `SHOW TABLES`ステートメントを使用します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SHOW TABLES FROM mysql;
 ```
 
-To create a database, use the `CREATE DATABASE` statement:
+データベースを作成するには、 `CREATE DATABASE`ステートメントを使用します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE DATABASE db_name [options];
 ```
 
-To create a database named `samp_db`, use the following statement:
+`samp_db`という名前のデータベースを作成するには、次のステートメントを使用します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE DATABASE IF NOT EXISTS samp_db;
 ```
 
-Add `IF NOT EXISTS` to prevent an error if the database exists.
+データベースが存在する場合にエラーを防ぐには、 `IF NOT EXISTS`を追加します。
 
-To delete a database, use the `DROP DATABASE` statement:
+データベースを削除するには、 `DROP DATABASE`ステートメントを使用します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 DROP DATABASE samp_db;
 ```
 
-## Create, show, and drop a table
+## テーブルの作成、表示、削除 {#create-show-and-drop-a-table}
 
-To create a table, use the `CREATE TABLE` statement:
+テーブルを作成するには、 `CREATE TABLE`ステートメントを使用します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE table_name column_name data_type constraint;
 ```
 
-For example, to create a table named `person` which includes fields such as number, name, and birthday, use the following statement:
+たとえば、番号、名前、誕生日などのフィールドを含む`person`という名前のテーブルを作成するには、次のステートメントを使用します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE person (
@@ -105,137 +105,137 @@ CREATE TABLE person (
     );
 ```
 
-To view the statement that creates the table (DDL), use the `SHOW CREATE` statement:
+テーブル (DDL) を作成するステートメントを表示するには、 `SHOW CREATE`ステートメントを使用します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SHOW CREATE table person;
 ```
 
-To delete a table, use the `DROP TABLE` statement:
+テーブルを削除するには、 `DROP TABLE`ステートメントを使用します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 DROP TABLE person;
 ```
 
-## Create, show, and drop an index
+## インデックスの作成、表示、削除 {#create-show-and-drop-an-index}
 
-Indexes are used to speed up queries on indexed columns. To create an index for the column whose value is not unique, use the `CREATE INDEX` statement:
+インデックスは、インデックス付き列に対するクエリを高速化するために使用されます。値が一意ではない列のインデックスを作成するには、 `CREATE INDEX`ステートメントを使用します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE INDEX person_id ON person (id);
 ```
 
-Or use the `ALTER TABLE` statement:
+または、 `ALTER TABLE`ステートメントを使用します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 ALTER TABLE person ADD INDEX person_id (id);
 ```
 
-To create a unique index for the column whose value is unique, use the `CREATE UNIQUE INDEX` statement:
+値が一意である列の一意のインデックスを作成するには、 `CREATE UNIQUE INDEX`ステートメントを使用します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE UNIQUE INDEX person_unique_id ON person (id);
 ```
 
-Or use the `ALTER TABLE` statement:
+または、 `ALTER TABLE`ステートメントを使用します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 ALTER TABLE person ADD UNIQUE person_unique_id (id);
 ```
 
-To show all the indexes in a table, use the `SHOW INDEX` statement:
+テーブル内のすべてのインデックスを表示するには、 `SHOW INDEX`ステートメントを使用します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SHOW INDEX FROM person;
 ```
 
-To delete an index, use the `DROP INDEX` or `ALTER TABLE` statement. `DROP INDEX` can be nested in `ALTER TABLE`:
+インデックスを削除するには、 `DROP INDEX`または`ALTER TABLE`ステートメントを使用します。 `DROP INDEX` `ALTER TABLE`にネストできます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 DROP INDEX person_id ON person;
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 ALTER TABLE person DROP INDEX person_unique_id;
 ```
 
-> **Note:**
-> 
-> DDL operations are not transactions. You don't need to run a `COMMIT` statement when executing DDL operations.
+> **ノート：**
+>
+> DDL 操作はトランザクションではありません。 DDL 操作を実行するときに`COMMIT`ステートメントを実行する必要はありません。
 
-## Insert, update, and delete data
+## データの挿入、更新、削除 {#insert-update-and-delete-data}
 
-Common DML features are adding, modifying, and deleting table records. The corresponding commands are `INSERT`, `UPDATE`, and `DELETE`.
+一般的な DML 機能は、テーブル レコードの追加、変更、削除です。対応するコマンドは`INSERT` 、 `UPDATE` 、および`DELETE`です。
 
-To insert data into a table, use the `INSERT` statement:
+テーブルにデータを挿入するには、 `INSERT`ステートメントを使用します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 INSERT INTO person VALUES(1,'tom','20170912');
 ```
 
-To insert a record containing data of some fields into a table, use the `INSERT` statement:
+いくつかのフィールドのデータを含むレコードをテーブルに挿入するには、 `INSERT`ステートメントを使用します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 INSERT INTO person(id,name) VALUES('2','bob');
 ```
 
-To update some fields of a record in a table, use the `UPDATE` statement:
+テーブル内のレコードの一部のフィールドを更新するには、 `UPDATE`ステートメントを使用します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 UPDATE person SET birthday='20180808' WHERE id=2;
 ```
 
-To delete the data in a table, use the `DELETE` statement:
+テーブル内のデータを削除するには、 `DELETE`ステートメントを使用します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 DELETE FROM person WHERE id=2;
 ```
 
-> **Note:**
-> 
-> The `UPDATE` and `DELETE` statements without the `WHERE` clause as a filter operate on the entire table.
+> **ノート：**
+>
+> `WHERE`句をフィルタとして使用しない`UPDATE`および`DELETE`ステートメントは、テーブル全体に作用します。
 
-## Query data
+## クエリデータ {#query-data}
 
-DQL is used to retrieve the desired data rows from a table or multiple tables.
+DQL は、1 つまたは複数のテーブルから目的のデータ行を取得するために使用されます。
 
-To view the data in a table, use the `SELECT` statement:
+テーブル内のデータを表示するには、 `SELECT`ステートメントを使用します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT * FROM person;
 ```
 
-To query a specific column, add the column name after the `SELECT` keyword:
+特定の列をクエリするには、 `SELECT`キーワードの後に列名を追加します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT name FROM person;
@@ -250,45 +250,45 @@ SELECT name FROM person;
 1 rows in set (0.00 sec)
 ```
 
-Use the `WHERE` clause to filter all records that match the conditions and then return the result:
+`WHERE`句を使用して、条件に一致するすべてのレコードをフィルターし、結果を返します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT * FROM person where id<5;
 ```
 
-## Create, authorize, and delete a user
+## ユーザーの作成、認可、削除 {#create-authorize-and-delete-a-user}
 
-DCL are usually used to create or delete users, and manage user privileges.
+DCL は通常、ユーザーの作成または削除、およびユーザー権限の管理に使用されます。
 
-To create a user, use the `CREATE USER` statement. The following example creates a user named `tiuser` with the password `123456`:
+ユーザーを作成するには、 `CREATE USER`ステートメントを使用します。次の例では、 `tiuser`という名前のユーザーとパスワード`123456`を作成します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE USER 'tiuser'@'localhost' IDENTIFIED BY '123456';
 ```
 
-To grant `tiuser` the privilege to retrieve the tables in the `samp_db` database:
+`samp_db`データベース内のテーブルを取得する権限を`tiuser`付与するには、次のようにします。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 GRANT SELECT ON samp_db.* TO 'tiuser'@'localhost';
 ```
 
-To check the privileges of `tiuser`:
+`tiuser`の権限を確認するには:
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SHOW GRANTS for tiuser@localhost;
 ```
 
-To delete `tiuser`:
+`tiuser`を削除するには:
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 DROP USER 'tiuser'@'localhost';

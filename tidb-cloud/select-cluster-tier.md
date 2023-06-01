@@ -3,64 +3,64 @@ title: Select Your Cluster Tier
 summary: Learn how to select your cluster tier on TiDB Cloud.
 ---
 
-# Select Your Cluster Tier
+# Cluster Tierを選択してください {#select-your-cluster-tier}
 
-The cluster tier determines the throughput and performance of your cluster.
+クラスター層によって、クラスターのスループットとパフォーマンスが決まります。
 
-TiDB Cloud provides the following two options of cluster tiers. Before creating a cluster, you need to consider which option suits your need better.
+TiDB Cloud、次の 2 つのクラスター層のオプションが提供されます。クラスターを作成する前に、どちらのオプションがニーズに適しているかを検討する必要があります。
 
-- [Serverless Tier](#serverless-tier-beta)
-- [Dedicated Tier](#dedicated-tier)
+-   [<a href="#serverless-tier-beta">Serverless Tier</a>](#serverless-tier-beta)
+-   [<a href="#dedicated-tier">Dedicated Tier</a>](#dedicated-tier)
 
-## Serverless Tier (Beta)
+## Serverless Tier(ベータ版) {#serverless-tier-beta}
 
-The TiDB Cloud Serverless Tier (previously called Developer Tier) is a fully managed service of TiDB. It's still in beta and should not be used in production. However, you can use Serverless Tier clusters for non-production workloads such as prototype applications, hackathons, academic courses, or to provide a temporary data service for your datasets.
+TiDB CloudServerless Tier(以前はDeveloper Tierと呼ばれていました) は、TiDB のフルマネージド サービスです。これはまだベータ版であるため、本番では使用しないでください。ただし、Serverless Tierクラスターは、プロトタイプ アプリケーション、ハッカソン、学術コースなどの非運用ワークロードに使用したり、データセットに一時的なデータ サービスを提供したりするために使用できます。
 
-For each TiDB Cloud account, you can create a maximum of five complimentary Serverless Tier clusters to use during the beta phase.
+TiDB Cloudアカウントごとに、ベータ段階で使用する無料のServerless Tierクラスターを最大 5 つ作成できます。
 
-### User name prefix
+### ユーザー名のプレフィックス {#user-name-prefix}
 
 <!--Important: Do not update the section name "User name prefix" because this section is referenced by TiDB backend error messages.-->
 
-For each Serverless Tier cluster, TiDB Cloud generates a unique prefix to distinguish it from other clusters.
+TiDB Cloudは、Serverless Tierクラスターごとに、他のクラスターと区別するための一意のプレフィックスを生成します。
 
-Whenever you use or set a database user name, you must include the prefix in the user name. For example, assume that the prefix of your cluster is `3pTAoNNegb47Uc8`.
+データベース ユーザー名を使用または設定するときは、ユーザー名に接頭辞を含める必要があります。たとえば、クラスターのプレフィックスが`3pTAoNNegb47Uc8`であると仮定します。
 
-- To connect to your cluster:
+-   クラスターに接続するには:
 
     ```shell
     mysql -u '3pTAoNNegb47Uc8.root' -h <host> -P 4000 -D test --ssl-mode=VERIFY_IDENTITY --ssl-ca=<CA_root_path> -p
     ```
 
-    > **Note:**
+    > **ノート：**
     >
-    > Serverless Tier requires TLS connection. To find the CA root path on your system, see [CA root path lists](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md#where-is-the-ca-root-path-on-my-system).
+    > Serverless TierにはTLS接続が必要です。システム上の CA ルート パスを見つけるには、 [<a href="/tidb-cloud/secure-connections-to-serverless-tier-clusters.md#where-is-the-ca-root-path-on-my-system">CA ルート パス リスト</a>](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md#where-is-the-ca-root-path-on-my-system)を参照してください。
 
-- To create a database user:
+-   データベース ユーザーを作成するには:
 
     ```sql
     CREATE USER '3pTAoNNegb47Uc8.jeffrey';
     ```
 
-To get the prefix for your cluster, take the following steps:
+クラスターのプレフィックスを取得するには、次の手順を実行します。
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page.
-2. Click the name of your target cluster to go to its overview page, and then click **Connect** in the upper-right corner. A connection dialog is displayed.
-3. In the dialog, get the prefix from the connection string.
+1.  [<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページに移動します。
+2.  ターゲット クラスターの名前をクリックして概要ページに移動し、右上隅の**[接続]**をクリックします。接続ダイアログが表示されます。
+3.  ダイアログで、接続文字列からプレフィックスを取得します。
 
-### Serverless Tier special terms and conditions
+### Serverless Tierの特別利用規約 {#serverless-tier-special-terms-and-conditions}
 
-- Serverless Tier is currently in beta and does not have uptime SLA guarantee during beta phase. If you use Serverless Tier beta to store a commercial or production dataset, any potential risk associated with the use should be taken on your own, and PingCAP shall not be liable for any damage.
-- Some of TiDB Cloud features are partially supported or not supported on Serverless Tier. See [Serverless Tier Limitations](/tidb-cloud/serverless-tier-limitations.md) for details.
+-   Serverless Tierは現在ベータ版であり、ベータ段階中の稼働時間 SLA 保証はありません。商用または本番データセットを保存するためにServerless Tierベータ版を使用する場合、その使用に関連する潜在的なリスクはすべて自分で負う必要があり、PingCAP は損害に対して責任を負いません。
+-   TiDB Cloud機能の一部は、Serverless Tierで部分的にサポートされているか、サポートされていません。詳細については[<a href="/tidb-cloud/serverless-tier-limitations.md">Serverless Tierの制限</a>](/tidb-cloud/serverless-tier-limitations.md)を参照してください。
 
-## Dedicated Tier
+## Dedicated Tier {#dedicated-tier}
 
-The TiDB Cloud Dedicated Tier is dedicated for production use with the benefits of cross-zone high availability, horizontal scaling, and [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing).
+TiDB CloudDedicated Tierは、クロスゾーンの高可用性、水平スケーリング、および[<a href="https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing">HTAP</a>](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)利点を備えた本番稼働専用です。
 
-For Dedicated Tier clusters, you can customize the cluster size of TiDB, TiKV, and TiFlash easily according to your business need. For each TiKV node and TiFlash node, the data on the node is replicated and distributed in different availability zones for [high availability](/tidb-cloud/high-availability-with-multi-az.md).
+Dedicated Tierクラスターの場合、ビジネス ニーズに応じて TiDB、TiKV、およびTiFlashのクラスター サイズを簡単にカスタマイズできます。 TiKV ノードとTiFlashノードごとに、ノード上のデータが複製され、 [<a href="/tidb-cloud/high-availability-with-multi-az.md">高可用性</a>](/tidb-cloud/high-availability-with-multi-az.md)アベイラビリティ ゾーンに分散されます。
 
-To create a Dedicated Tier cluster, you need to [add a payment method](/tidb-cloud/tidb-cloud-billing.md#payment-method) or [apply for a Proof of Concept (PoC) trial](/tidb-cloud/tidb-cloud-poc.md).
+Dedicated Tierクラスターを作成するには、 [<a href="/tidb-cloud/tidb-cloud-billing.md#payment-method">支払い方法を追加する</a>](/tidb-cloud/tidb-cloud-billing.md#payment-method)または[<a href="/tidb-cloud/tidb-cloud-poc.md">概念実証 (PoC) トライアルに申し込む</a>](/tidb-cloud/tidb-cloud-poc.md)を行う必要があります。
 
-> **Note:**
+> **ノート：**
 >
-> You cannot decrease the node storage after your cluster is created.
+> クラスターの作成後にノードstorageを減らすことはできません。

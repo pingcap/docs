@@ -3,71 +3,71 @@ title: Connect via Standard Connection
 summary: Learn how to connect to your TiDB Cloud cluster via standard connection.
 ---
 
-# Connect via Standard Connection
+# 標準接続で接続する {#connect-via-standard-connection}
 
-This document describes how to connect to your TiDB Cloud cluster via standard connection. The standard connection exposes a public endpoint with traffic filters, so you can connect to your TiDB cluster via a SQL client from your laptop.
+このドキュメントでは、標準接続を介してTiDB Cloudクラスターに接続する方法について説明します。標準接続では、トラフィック フィルターを備えたパブリック エンドポイントが公開されるため、ラップトップから SQL クライアント経由で TiDB クラスターに接続できます。
 
-The standard connection is available to both Serverless Tier and Dedicated Tier.
+標準接続は、Serverless TierとDedicated Tierの両方で使用できます。
 
-## Serverless Tier
+## Serverless Tier {#serverless-tier}
 
-To connect to a Serverless Tier cluster via standard connection, perform the following steps:
+標準接続経由でServerless Tierクラスターに接続するには、次の手順を実行します。
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
+1.  [<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして、その概要ページに移動します。
 
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+2.  右上隅にある**「接続」**をクリックします。接続ダイアログが表示されます。
 
-3. In the dialog, select your preferred connection method and operating system to get the corresponding connection string.
+3.  ダイアログで、希望の接続方法とオペレーティング システムを選択して、対応する接続文字列を取得します。
 
-4. If you have not set a password yet, click **Create password** to generate a random password. The generated password will not show again, so save your password in a secure location.
+4.  パスワードをまだ設定していない場合は、 **「パスワードの作成」**をクリックしてランダムなパスワードを生成します。生成されたパスワードは再度表示されないため、パスワードを安全な場所に保存してください。
 
-5. Connect to your cluster with the connection string.
+5.  接続文字列を使用してクラスターに接続します。
 
-    > **Note:**
+    > **ノート：**
     >
-    > - When you connect to a Serverless Tier cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
-    > - Serverless Tier clusters only support TLS connection. For more information, see [Secure Connections to Serverless Tier Clusters](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md).
+    > -   Serverless Tierクラスターに接続するときは、ユーザー名にクラスターのプレフィックスを含め、名前を引用符で囲む必要があります。詳細については、 [<a href="/tidb-cloud/select-cluster-tier.md#user-name-prefix">ユーザー名のプレフィックス</a>](/tidb-cloud/select-cluster-tier.md#user-name-prefix)を参照してください。
+    > -   Serverless Tierクラスターは TLS 接続のみをサポートします。詳細については、 [<a href="/tidb-cloud/secure-connections-to-serverless-tier-clusters.md">Serverless Tierクラスターへのセキュリティ接続</a>](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md)を参照してください。
 
-## Dedicated Tier
+## Dedicated Tier {#dedicated-tier}
 
-To connect to a Dedicated Tier cluster via standard connection, perform the following steps:
+標準接続経由でDedicated Tierクラスターに接続するには、次の手順を実行します。
 
-1. Open the overview page of the target cluster.
+1.  ターゲットクラスターの概要ページを開きます。
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+    1.  [<a href="https://tidbcloud.com/">TiDB Cloudコンソール</a>](https://tidbcloud.com/)にログインし、プロジェクトの[<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページに移動します。
 
-        > **Tip:**
+        > **ヒント：**
         >
-        > If you have multiple projects, you can switch to the target project in the left navigation pane of the **Clusters** page.
+        > 複数のプロジェクトがある場合は、 **「クラスター」**ページの左側のナビゲーション・ペインでターゲット・プロジェクトに切り替えることができます。
 
-    2. Click the name of your target cluster to go to its overview page.
+    2.  ターゲット クラスターの名前をクリックして、その概要ページに移動します。
 
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
+2.  右上隅にある**「接続」**をクリックします。接続ダイアログが表示されます。
 
-3. Create a traffic filter for the cluster. Traffic filter is a list of IPs and CIDR addresses that are allowed to access TiDB Cloud via a SQL client.
+3.  クラスターのトラフィック フィルターを作成します。トラフィック フィルターは、SQL クライアント経由でTiDB Cloudへのアクセスを許可される IP および CIDR アドレスのリストです。
 
-    If the traffic filter is already set, skip the following sub-steps. If the traffic filter is empty, take the following sub-steps to add one.
+    トラフィック フィルターがすでに設定されている場合は、次のサブステップをスキップしてください。トラフィック フィルターが空の場合は、次のサブ手順を実行してトラフィック フィルターを追加します。
 
-    1. Click one of the buttons to add some rules quickly.
+    1.  いずれかのボタンをクリックして、ルールをすばやく追加します。
 
-        - **Add My Current IP Address**
-        - **Allow Access from Anywhere**
+        -   **現在の IP アドレスを追加**
+        -   **どこからでもアクセスを許可する**
 
-    2. Provide an optional description for the newly added IP address or CIDR range.
+    2.  新しく追加された IP アドレスまたは CIDR 範囲の説明をオプションで入力します。
 
-    3. Click **Create Filter** to confirm the changes.
+    3.  **「フィルターの作成」**をクリックして変更を確認します。
 
-4. Under **Step 2: Download TiDB cluster CA** in the dialog, click **Download TiDB cluster CA** for TLS connection to TiDB clusters. The TiDB cluster CA supports TLS 1.2 version by default.
+4.  ダイアログの**「ステップ 2: TiDB クラスター CA をダウンロードする」で**、TiDB クラスターへの TLS 接続用の**TiDB クラスター CA をダウンロードするを**クリックします。 TiDB クラスター CA は、デフォルトで TLS 1.2 バージョンをサポートします。
 
-    > **Note:**
+    > **ノート：**
     >
-    > - The TiDB cluster CA is only available for Dedicated Tier clusters.
-    > - Currently, TiDB Cloud only provides the connection strings and sample code for these connection methods: MySQL, MyCLI, JDBC, Python, Go, and Node.js.
+    > -   TiDB クラスター CA は、Dedicated Tierクラスターでのみ使用できます。
+    > -   現在、 TiDB Cloud は、MySQL、MyCLI、JDBC、Python、Go、Node.js の接続方法の接続文字列とサンプル コードのみを提供しています。
 
-5. Under **Step 3: Connect with a SQL client** in the dialog, click the tab of your preferred connection method, and then refer to the connection string and sample code on the tab to connect to your cluster.
+5.  ダイアログの**「ステップ 3: SQL クライアントに接続する」**で、希望する接続方法のタブをクリックし、タブ上の接続文字列とサンプル コードを参照してクラスターに接続します。
 
-    Note that you need to use the path of the downloaded CA file as the argument of the `--ssl-ca` option in the connection string.
+    ダウンロードした CA ファイルのパスを、接続文字列の`--ssl-ca`オプションの引数として使用する必要があることに注意してください。
 
-## What's next
+## 次は何ですか {#what-s-next}
 
-After you have successfully connected to your TiDB cluster, you can [explore SQL statements with TiDB](/basic-sql-operations.md).
+TiDB クラスターに正常に接続したら、 [<a href="/basic-sql-operations.md">TiDB で SQL ステートメントを探索する</a>](/basic-sql-operations.md)を行うことができます。

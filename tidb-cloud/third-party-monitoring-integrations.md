@@ -3,38 +3,38 @@ title: Third-Party Monitoring Integrations
 summary: Learn how to use third-party monitoring integrations.
 ---
 
-# Third-Party Monitoring Integrations
+# サードパーティの監視統合 {#third-party-monitoring-integrations}
 
-You can integrate TiDB Cloud with third-party monitoring services to receive TiDB Cloud alerts and view the performance metrics of your TiDB cluster using the monitoring services.
+TiDB Cloudをサードパーティの監視サービスと統合して、 TiDB Cloudアラートを受信し、監視サービスを使用して TiDB クラスターのパフォーマンス メトリクスを表示できます。
 
-> **Note:**
+> **ノート：**
 >
-> For [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta), third-party monitoring integrations are not supported.
+> [<a href="/tidb-cloud/select-cluster-tier.md#serverless-tier-beta">Serverless Tierクラスター</a>](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)の場合、サードパーティの監視統合はサポートされていません。
 
-## Required access
+## 必要なアクセス {#required-access}
 
-To edit third-party integration settings, you must have the `Owner` access to your organization or `Member` access to the target project.
+サードパーティ統合設定を編集するには、組織への`Owner`アクセス権、またはターゲット プロジェクトへの`Member`アクセス権が必要です。
 
-## View or modify third-party integrations
+## サードパーティ統合をビューまたは変更する {#view-or-modify-third-party-integrations}
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
-2. In the left navigation pane of the [**Clusters**](https://tidbcloud.com/console/clusters) page, do one of the following:
+1.  [<a href="https://tidbcloud.com">TiDB Cloudコンソール</a>](https://tidbcloud.com)にログインします。
+2.  [<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページの左側のナビゲーション ウィンドウで、次のいずれかを実行します。
 
-    - If you have multiple projects, switch to the target project, and then click **Admin** > **Integrations**.
-    - If you only have one project, click **Admin** > **Integrations**.
+    -   複数のプロジェクトがある場合は、ターゲット プロジェクトに切り替えて、 **[管理]** &gt; **[統合]**をクリックします。
+    -   プロジェクトが 1 つだけの場合は、 **[管理]** &gt; **[統合]**をクリックします。
 
-The available third-party integrations are displayed.
+利用可能なサードパーティ統合が表示されます。
 
-## Available integrations
+## 利用可能な統合 {#available-integrations}
 
-### Datadog integration
+### Datadog の統合 {#datadog-integration}
 
-With the Datadog integration, you can configure TiDB Cloud to send metric data about your TiDB clusters to [Datadog](https://www.datadoghq.com/) and view these metrics in your Datadog dashboards.
+Datadog の統合を使用すると、TiDB クラスターに関するメトリクス データを[<a href="https://www.datadoghq.com/">データドッグ</a>](https://www.datadoghq.com/)に送信し、これらのメトリクスを Datadog ダッシュボードに表示するようにTiDB Cloudを構成できます。
 
-For the detailed integration steps and a list of metrics that Datadog tracks, refer to [Integrate TiDB Cloud with Datadog](/tidb-cloud/monitor-datadog-integration.md).
+詳細な統合手順と Datadog が追跡するメトリクスのリストについては、 [<a href="/tidb-cloud/monitor-datadog-integration.md">TiDB Cloudと Datadog を統合する</a>](/tidb-cloud/monitor-datadog-integration.md)を参照してください。
 
-### Prometheus and Grafana integration
+### プロメテウスとグラファナの統合 {#prometheus-and-grafana-integration}
 
-With the Prometheus and Grafana integration, you can get a scrape_config file for Prometheus from TiDB Cloud and use the content from the file to configure Prometheus. You can view these metrics in your Grafana dashboards.
+Prometheus と Grafana の統合により、 TiDB Cloudから Prometheus のscrape_config ファイルを取得し、そのファイルの内容を使用して Prometheus を構成できます。これらのメトリクスは、Grafana ダッシュボードで表示できます。
 
-For the detailed integration steps and a list of metrics that Prometheus tracks, see [Integrate TiDB Cloud with Prometheus and Grafana](/tidb-cloud/monitor-prometheus-and-grafana-integration.md).
+詳細な統合手順と Prometheus が追跡するメトリクスのリストについては、 [<a href="/tidb-cloud/monitor-prometheus-and-grafana-integration.md">TiDB CloudをPrometheus および Grafana と統合する</a>](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)を参照してください。

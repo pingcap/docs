@@ -3,23 +3,23 @@ title: SHOW CREATE SEQUENCE
 summary: An overview of the usage of SHOW CREATE SEQUENCE for the TiDB database.
 ---
 
-# SHOW CREATE SEQUENCE
+# シーケンスの作成を表示 {#show-create-sequence}
 
-The `SHOW CREATE SEQUENCE` shows the detailed information of a sequence, which is similar to `SHOW CREATE TABLE`.
+`SHOW CREATE SEQUENCE` `SHOW CREATE TABLE`と同様にシーケンスの詳細情報を示します。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 **ShowCreateSequenceStmt:**
 
 ![ShowCreateSequenceStmt](/media/sqlgram/ShowCreateSequenceStmt.png)
 
-**TableName:**
+**テーブル名:**
 
 ![TableName](/media/sqlgram/TableName.png)
 
-## Examples
+## 例 {#examples}
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE SEQUENCE seq;
@@ -29,7 +29,7 @@ CREATE SEQUENCE seq;
 Query OK, 0 rows affected (0.03 sec)
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SHOW CREATE SEQUENCE seq;
@@ -44,11 +44,11 @@ SHOW CREATE SEQUENCE seq;
 1 row in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension. The implementation is modeled on sequences available in MariaDB.
+このステートメントは TiDB 拡張機能です。この実装は、MariaDB で利用可能なシーケンスに基づいてモデル化されています。
 
-## See also
+## こちらも参照 {#see-also}
 
-* [CREATE SEQUENCE](/sql-statements/sql-statement-create-sequence.md)
-* [DROP SEQUENCE](/sql-statements/sql-statement-drop-sequence.md)
+-   [<a href="/sql-statements/sql-statement-create-sequence.md">シーケンスの作成</a>](/sql-statements/sql-statement-create-sequence.md)
+-   [<a href="/sql-statements/sql-statement-drop-sequence.md">ドロップシーケンス</a>](/sql-statements/sql-statement-drop-sequence.md)

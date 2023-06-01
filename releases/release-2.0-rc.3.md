@@ -2,57 +2,57 @@
 title: TiDB 2.0 RC3 Release Notes
 ---
 
-# TiDB 2.0 RC3 Release Notes
+# TiDB 2.0 RC3 リリースノート {#tidb-2-0-rc3-release-notes}
 
-On March 23, 2018, TiDB 2.0 RC3 is released. This release has great improvement in MySQL compatibility, SQL optimization and stability.
+2018 年 3 月 23 日に、TiDB 2.0 RC3 がリリースされました。このリリースでは、MySQL の互換性、SQL の最適化、安定性が大幅に向上しています。
 
-## TiDB
+## TiDB {#tidb}
 
-- Fix the wrong result issue of `MAX/MIN` in some scenarios
-- Fix the issue that the result of `Sort Merge Join` does not show in order of Join Key in some scenarios
-- Fix the error of comparison between `uint` and `int` in boundary conditions
-- Optimize checks on length and precision of the floating point type, to improve compatibility with MySQL
-- Improve the parsing error log of time type and add more error information
-- Improve memory control and add statistics about `IndexLookupExecutor` memory
-- Optimize the execution speed of `ADD INDEX` to greatly increase the speed in some scenarios
-- Use the Stream Aggregation operator when the `GROUP BY` substatement is empty, to increase the speed
-- Support closing the `Join Reorder` optimization in the optimizer using `STRAIGHT_JOIN`
-- Output more detailed status information of DDL jobs in `ADMIN SHOW DDL JOBS`
-- Support querying the original statements of currently running DDL jobs using `ADMIN SHOW DDL JOB QUERIES`
-- Support recovering the index data using `ADMIN RECOVER INDEX` for disaster recovery
-- Attach a lower priority to the `ADD INDEX` operation to reduce the impact on online business
-- Support aggregation functions with JSON type parameters, such as `SUM/AVG`
-- Support modifying the `lower_case_table_names` system variable in the configuration file, to support the OGG data replication tool
-- Improve compatibility with the Navicat management tool
-- Support using implicit RowID in CRUD operations
+-   一部のシナリオで間違った結果が`MAX/MIN`になる問題を修正
+-   一部のシナリオで`Sort Merge Join`の結果がJoin Keyの順に表示されない問題を修正
+-   境界条件の`uint`と`int`の比較エラーを修正
+-   MySQL との互換性を向上させるために、浮動小数点型の長さと精度のチェックを最適化します。
+-   時刻型の解析エラーログを改善し、エラー情報を追加しました。
+-   メモリ制御を改善し、 `IndexLookupExecutor`メモリに関する統計を追加します。
+-   `ADD INDEX`の実行速度を最適化し、一部のシナリオで速度を大幅に向上させます。
+-   `GROUP BY`サブステートメントが空の場合は、速度を上げるために Stream 集計演算子を使用します。
+-   `STRAIGHT_JOIN`を使用してオプティマイザーで`Join Reorder`最適化を閉じることをサポートします。
+-   DDLジョブのより詳細なステータス情報を`ADMIN SHOW DDL JOBS`で出力する
+-   `ADMIN SHOW DDL JOB QUERIES`を使用した、現在実行中の DDL ジョブの元のステートメントのクエリのサポート
+-   ディザスタリカバリのために`ADMIN RECOVER INDEX`を使用したインデックスデータのリカバリをサポート
+-   オンライン ビジネスへの影響を軽減するために、 `ADD INDEX`操作の優先順位を低くします。
+-   `SUM/AVG`などの JSON タイプのパラメータを使用した集計関数のサポート
+-   OGG データ レプリケーション ツールをサポートするため、構成ファイル内の`lower_case_table_names`システム変数の変更をサポートします。
+-   Navicat 管理ツールとの互換性の向上
+-   CRUD 操作での暗黙的な RowID の使用のサポート
 
-## PD
+## PD {#pd}
 
-- Support Region Merge, to merge empty Regions or small Regions after deleting data
-- Ignore the nodes that have a lot of pending peers during adding replicas, to improve the speed of restoring replicas or making nodes offline
-- Fix the frequent scheduling issue caused by a large number of empty Regions
-- Optimize the scheduling speed of leader balance in scenarios of unbalanced resources within different labels
-- Add more statistics about abnormal Regions
+-   リージョンのマージをサポートし、データを削除した後に空のリージョンまたは小さなリージョンをマージします。
+-   レプリカの追加中に保留中のピアが多数あるノードを無視して、レプリカの復元またはノードのオフライン化の速度を向上させます。
+-   多数の空のリージョンによって引き起こされる頻繁なスケジュールの問題を修正します。
+-   異なるラベル内でリソースのバランスが取れていないシナリオで、リーダーのバランスのスケジューリング速度を最適化します。
+-   異常な領域に関する統計をさらに追加します
 
-## TiKV
+## TiKV {#tikv}
 
-- Support Region Merge
-- Inform PD immediately once the Raft snapshot process is completed, to speed up balancing
-- Add the Raw DeleteRange API
-- Add the GetMetric API
-- Reduce the I/O fluctuation caused by RocksDB sync files
-- Optimize the space reclaiming mechanism after deleting data
-- Improve the data recovery tool `tikv-ctl`
-- Fix the issue that it is slow to make nodes down caused by snapshot
-- Support streaming in Coprocessor
-- Support Readpool and increase the `raw_get/get/batch_get` by 30%
-- Support configuring the request timeout of Coprocessor
-- Support streaming aggregation in Coprocessor
-- Carry time information in Region heartbeats
-- Limit the space usage of snapshot files to avoid consuming too much disk space
-- Record and report the Regions that cannot elect a leader for a long time
-- Speed up garbage cleaning when starting the server
-- Update the size information about the corresponding Region according to compaction events
-- Limit the size of `scan lock` to avoid request timeout
-- Use `DeleteRange` to speed up Region deletion
-- Support modifying RocksDB parameters online
+-   リージョンのマージをサポート
+-   Raftスナップショット プロセスが完了したら、バランシングを迅速化するために直ちに PD に通知します。
+-   生の DeleteRange API を追加する
+-   GetMetric API を追加する
+-   RocksDB 同期ファイルによって引き起こされる I/O 変動を軽減する
+-   データ削除後のスペース再利用メカニズムを最適化する
+-   データ回復ツールの改善`tikv-ctl`
+-   スナップショットによるノードダウンが遅い問題を修正
+-   コプロセッサーでのストリーミングのサポート
+-   Readpool をサポートし、 `raw_get/get/batch_get`を 30% 増加します
+-   コプロセッサーのリクエストタイムアウトの設定をサポート
+-   コプロセッサーでのストリーミング集約のサポート
+-   リージョンハートビートの伝送時間情報
+-   ディスクスペースの過剰な消費を避けるために、スナップショットファイルのスペース使用量を制限します。
+-   長期間リーダーを選出できない地域を記録して報告する
+-   サーバー起動時のガベージクリーニングを高速化します。
+-   圧縮イベントに応じて、対応するリージョンのサイズ情報を更新します
+-   リクエストのタイムアウトを避けるためにサイズを`scan lock`に制限します
+-   リージョンの削除を高速化するには`DeleteRange`使用します
+-   RocksDB パラメータのオンライン変更をサポート

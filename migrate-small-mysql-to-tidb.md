@@ -3,22 +3,22 @@ title: Migrate MySQL of Small Datasets to TiDB
 summary: Learn how to migrate MySQL of small datasets to TiDB.
 ---
 
-# Migrate MySQL of Small Datasets to TiDB
+# 小規模なデータセットの MySQL を TiDB に移行する {#migrate-mysql-of-small-datasets-to-tidb}
 
-This document describes how to use TiDB Data Migration (DM) to migrate MySQL of small datasets to TiDB in the full migration mode and incremental replication mode. "Small datasets" in this document mean data size less than 1 TiB.
+このドキュメントでは、TiDB Data Migration (DM) を使用して、小規模データセットの MySQL を完全移行モードおよび増分レプリケーション モードで TiDB に移行する方法について説明します。このドキュメントの「小さいデータセット」とは、1 TiB 未満のデータ サイズを意味します。
 
-The migration speed varies from 30 GB/h to 50 GB/h, depending on multiple factors such as the number of indexes in the table schema, hardware, and network environment. <!--The migration process using DM is shown in the figure below.-->
+移行速度は、テーブル スキーマ内のインデックスの数、ハードウェア、ネットワーク環境などの複数の要因に応じて、30 GB/h から 50 GB/h まで変化します。<!--The migration process using DM is shown in the figure below.-->
 
 <!--/media/dm/migrate-with-dm.png-->
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-- [Deploy a DM Cluster Using TiUP](/dm/deploy-a-dm-cluster-using-tiup.md)
-- [Grant the required privileges for the source database and the target database of DM](/dm/dm-worker-intro.md)
+-   [<a href="/dm/deploy-a-dm-cluster-using-tiup.md">TiUPを使用した DMクラスタのデプロイ</a>](/dm/deploy-a-dm-cluster-using-tiup.md)
+-   [<a href="/dm/dm-worker-intro.md">DMのソース・データベースとターゲット・データベースに必要な権限を付与します。</a>](/dm/dm-worker-intro.md)
 
-## Step 1. Create the data source
+## ステップ 1. データソースを作成する {#step-1-create-the-data-source}
 
-First, create the `source1.yaml` file as follows:
+まず、次のように`source1.yaml`ファイルを作成します。
 
 {{< copyable "" >}}
 
@@ -36,24 +36,24 @@ from:
   port: 3306
 ```
 
-Then, load the data source configuration to the DM cluster using `tiup dmctl` by running the following command:
+次に、次のコマンドを実行して、 `tiup dmctl`を使用してデータ ソース構成を DM クラスターにロードします。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 tiup dmctl --master-addr ${advertise-addr} operate-source create source1.yaml
 ```
 
-The parameters used in the command above are described as follows:
+上記のコマンドで使用されるパラメータは次のように説明されます。
 
-|Parameter      |Description|
-|  :-        |    :-           |
-|`--master-addr`  |`{advertise-addr}` of any DM-master node in the cluster where `dmctl` is to connect. For example, 172.16.10.71:8261.
-|`operate-source create`|Load the data source to the DM cluster.|
+| パラメータ                   | 説明                                                                             |
+| :---------------------- | :----------------------------------------------------------------------------- |
+| `--master-addr`         | `dmctl`が接続するクラスター内の任意の DM マスター ノードの`{advertise-addr}` 。たとえば、172.16.10.71:8261。 |
+| `operate-source create` | データ ソースを DM クラスターにロードします。                                                      |
 
-## Step 2. Create the migration task
+## ステップ 2. 移行タスクを作成する {#step-2-create-the-migration-task}
 
-Create the `task1.yaml` file as follows:
+次のように`task1.yaml`ファイルを作成します。
 
 {{< copyable "" >}}
 
@@ -89,60 +89,60 @@ block-allow-list:
 
 ```
 
-The above is the minimum task configuration to perform the migration. For more configuration items regarding the task, refer to [DM task complete configuration file introduction](/dm/task-configuration-file-full.md).
+上記は、移行を実行するための最小限のタスク構成です。タスクに関するその他の設定項目については、 [<a href="/dm/task-configuration-file-full.md">DM タスクの完全な構成ファイルの紹介</a>](/dm/task-configuration-file-full.md)を参照してください。
 
-## Step 3. Start the migration task
+## ステップ 3. 移行タスクを開始する {#step-3-start-the-migration-task}
 
-To avoid errors, before starting the migration task, it is recommended to use the `check-task` command to check whether the configuration meets the requirements of DM configuration.
+エラーを回避するために、移行タスクを開始する前に、 `check-task`コマンドを使用して、構成が DM 構成の要件を満たしているかどうかを確認することをお勧めします。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 tiup dmctl --master-addr ${advertise-addr} check-task task.yaml
 ```
 
-Start the migration task by running the following command with `tiup dmctl`.
+次のコマンドを`tiup dmctl`で実行して、移行タスクを開始します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 tiup dmctl --master-addr ${advertise-addr} start-task task.yaml
 ```
 
-The parameters used in the command above are described as follows:
+上記のコマンドで使用されるパラメータは次のように説明されます。
 
-|Parameter|Description|
-|     -    |     -     |
-|`--master-addr`| `{advertise-addr}` of any DM-master node in the cluster where `dmctl` is to connect. For example: 172.16.10.71:8261. |
-|`start-task`| Start the migration task |
+| パラメータ           | 説明                                                                           |
+| --------------- | ---------------------------------------------------------------------------- |
+| `--master-addr` | `dmctl`が接続するクラスター内の任意の DM マスター ノードの`{advertise-addr}` 。例: 172.16.10.71:8261。 |
+| `start-task`    | 移行タスクを開始する                                                                   |
 
-If the task fails to start, after changing the configuration according to the returned result, you can run the `start-task task.yaml` command to restart the task. If you encounter problems, refer to [Handle Errors](/dm/dm-error-handling.md) and [FAQ](/dm/dm-faq.md).
+タスクの開始に失敗した場合は、返された結果に従って構成を変更した後、 `start-task task.yaml`コマンドを実行してタスクを再起動できます。問題が発生した場合は、 [<a href="/dm/dm-error-handling.md">エラーの処理</a>](/dm/dm-error-handling.md)と[<a href="/dm/dm-faq.md">FAQ</a>](/dm/dm-faq.md)を参照してください。
 
-## Step 4: Check the migration task status
+## ステップ 4: 移行タスクのステータスを確認する {#step-4-check-the-migration-task-status}
 
-To learn whether the DM cluster has an ongoing migration task, the task status and some other information, run the `query-status` command using `tiup dmctl`:
+DM クラスターに進行中の移行タスクがあるかどうか、タスクのステータス、その他の情報を確認するには、 `tiup dmctl`使用して`query-status`コマンドを実行します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 tiup dmctl --master-addr ${advertise-addr} query-status ${task-name}
 ```
 
-For a detailed interpretation of the results, refer to [Query Status](/dm/dm-query-status.md).
+結果の詳細な解釈については、 [<a href="/dm/dm-query-status.md">クエリステータス</a>](/dm/dm-query-status.md)を参照してください。
 
-## Step 5. Monitor the task and view logs （optional)
+## ステップ 5. タスクを監視し、ログを表示する（オプション） {#step-5-monitor-the-task-and-view-logs-optional}
 
-To view the historical status of the migration task and other internal metrics, take the following steps.
+移行タスクの履歴ステータスとその他の内部メトリックを表示するには、次の手順を実行します。
 
-If you have deployed Prometheus, Alertmanager, and Grafana when deploying DM using TiUP, you can access Grafana using the IP address and port specified during the deployment. You can then select the DM dashboard to view DM-related monitoring metrics.
+TiUPを使用して DM をデプロイするときに Prometheus、Alertmanager、および Grafana をデプロイしている場合は、デプロイ中に指定された IP アドレスとポートを使用して Grafana にアクセスできます。次に、DM ダッシュボードを選択して、DM 関連の監視メトリックを表示できます。
 
-- The log directory of DM-master: specified by the DM-master process parameter `--log-file`. If you have deployd DM using TiUP, the log directory is `/dm-deploy/dm-master-8261/log/` by default.
-- The log directory of DM-worker: specified by the DM-worker process parameter `--log-file`. If you have deployd DM using TiUP, the log directory is `/dm-deploy/dm-worker-8262/log/` by default.
+-   DM マスターのログ ディレクトリ: DM マスター プロセス パラメーター`--log-file`によって指定されます。 TiUP を使用して DM をデプロイした場合、ログ ディレクトリはデフォルトで`/dm-deploy/dm-master-8261/log/`です。
+-   DM-worker のログ ディレクトリ: DM-worker プロセス パラメータ`--log-file`によって指定されます。 TiUP を使用して DM をデプロイした場合、ログ ディレクトリはデフォルトで`/dm-deploy/dm-worker-8262/log/`です。
 
-## What's next
+## 次は何ですか {#what-s-next}
 
-- [Pause the migration task](/dm/dm-pause-task.md)
-- [Resume the migration task](/dm/dm-resume-task.md)
-- [Stop the migration task](/dm/dm-stop-task.md)
-- [Export and import the cluster data source and task configuration](/dm/dm-export-import-config.md)
-- [Handle failed DDL statements](/dm/handle-failed-ddl-statements.md)
+-   [<a href="/dm/dm-pause-task.md">移行タスクを一時停止する</a>](/dm/dm-pause-task.md)
+-   [<a href="/dm/dm-resume-task.md">移行タスクを再開する</a>](/dm/dm-resume-task.md)
+-   [<a href="/dm/dm-stop-task.md">移行タスクを停止する</a>](/dm/dm-stop-task.md)
+-   [<a href="/dm/dm-export-import-config.md">クラスターデータソースとタスク構成のエクスポートとインポート</a>](/dm/dm-export-import-config.md)
+-   [<a href="/dm/handle-failed-ddl-statements.md">失敗した DDL ステートメントを処理する</a>](/dm/handle-failed-ddl-statements.md)

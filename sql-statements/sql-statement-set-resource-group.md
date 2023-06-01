@@ -3,19 +3,19 @@ title: SET RESOURCE GROUP
 summary: An overview of the usage of SET RESOURCE GROUP in the TiDB database.
 ---
 
-# SET RESOURCE GROUP
+# リソースグループの設定 {#set-resource-group}
 
-`SET RESOURCE GROUP` is used to set the resource group for the current session.
+`SET RESOURCE GROUP`は、現在のセッションのリソース グループを設定するために使用されます。
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **ノート：**
 >
-> This feature is not available on [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta).
+> この機能は[<a href="/tidb-cloud/select-cluster-tier.md#serverless-tier-beta">Serverless Tierクラスター</a>](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)では使用できません。
 
 </CustomContent>
 
-## Synopsis
+## あらすじ {#synopsis}
 
 **SetResourceGroupStmt:**
 
@@ -27,9 +27,9 @@ ResourceGroupName ::=
    Identifier
 ```
 
-## Examples
+## 例 {#examples}
 
-Create a user `user1`, create two resource groups `rg1` and `rg2`, and bind the user `user1` to the resource group `rg1`.
+ユーザー`user1`を作成し、2 つのリソース グループ`rg1`と`rg2`を作成し、ユーザー`user1`をリソース グループ`rg1`にバインドします。
 
 ```sql
 CREATE USER 'user1';
@@ -37,7 +37,7 @@ CREATE RESOURCE GROUP 'rg1' RU_PER_SEC = 1000;
 ALTER USER 'user1' RESOURCE GROUP `rg1`;
 ```
 
-Use `user1` to log in and view the resource group bound to the current user.
+`user1`を使用してログインし、現在のユーザーにバインドされているリソース グループを表示します。
 
 ```sql
 SELECT CURRENT_RESOURCE_GROUP();
@@ -52,7 +52,7 @@ SELECT CURRENT_RESOURCE_GROUP();
 1 row in set (0.00 sec)
 ```
 
-Execute `SET RESOURCE GROUP` to set the resource group for the current session to `rg2`.
+`SET RESOURCE GROUP`を実行して、現在のセッションのリソース グループを`rg2`に設定します。
 
 ```sql
 SET RESOURCE GROUP `rg2`;
@@ -68,7 +68,7 @@ SELECT CURRENT_RESOURCE_GROUP();
 1 row in set (0.00 sec)
 ```
 
-Execute `SET RESOURCE GROUP` to specify the current session to use the default resource group.
+`SET RESOURCE GROUP`を実行して、デフォルトのリソース グループを使用する現在のセッションを指定します。
 
 ```sql
 SET RESOURCE GROUP ``;
@@ -84,13 +84,13 @@ SELECT CURRENT_RESOURCE_GROUP();
 1 row in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-MySQL also supports [SET RESOURCE GROUP](https://dev.mysql.com/doc/refman/8.0/en/set-resource-group.html). But the accepted parameters are different from that of TiDB. They are not compatible.
+MySQL は[<a href="https://dev.mysql.com/doc/refman/8.0/en/set-resource-group.html">リソースグループの設定</a>](https://dev.mysql.com/doc/refman/8.0/en/set-resource-group.html)もサポートします。ただし、受け入れられるパラメータは TiDB とは異なります。互換性がありません。
 
-## See also
+## こちらも参照 {#see-also}
 
-* [CREATE RESOURCE GROUP](/sql-statements/sql-statement-create-resource-group.md)
-* [DROP RESOURCE GROUP](/sql-statements/sql-statement-drop-resource-group.md)
-* [ALTER RESOURCE GROUP](/sql-statements/sql-statement-alter-resource-group.md)
-* [Resource Control](/tidb-resource-control.md)
+-   [<a href="/sql-statements/sql-statement-create-resource-group.md">リソースグループの作成</a>](/sql-statements/sql-statement-create-resource-group.md)
+-   [<a href="/sql-statements/sql-statement-drop-resource-group.md">リソースグループを削除</a>](/sql-statements/sql-statement-drop-resource-group.md)
+-   [<a href="/sql-statements/sql-statement-alter-resource-group.md">リソースグループの変更</a>](/sql-statements/sql-statement-alter-resource-group.md)
+-   [<a href="/tidb-resource-control.md">リソース制御</a>](/tidb-resource-control.md)

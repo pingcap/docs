@@ -5,32 +5,32 @@ summary: Learn about how to insert data.
 
 <!-- markdownlint-disable MD029 -->
 
-# Insert Data
+# データの挿入 {#insert-data}
 
-This document describes how to insert data into TiDB by using the SQL language with different programming languages.
+このドキュメントでは、SQL 言語とさまざまなプログラミング言語を使用して TiDB にデータを挿入する方法について説明します。
 
-## Before you start
+## 始める前に {#before-you-start}
 
-Before reading this document, you need to prepare the following:
+このドキュメントを読む前に、以下を準備する必要があります。
 
-- [Build a TiDB Cluster in TiDB Cloud (Serverless Tier)](/develop/dev-guide-build-cluster-in-cloud.md).
-- Read [Schema Design Overview](/develop/dev-guide-schema-design-overview.md), [Create a Database](/develop/dev-guide-create-database.md), [Create a Table](/develop/dev-guide-create-table.md), and [Create Secondary Indexes](/develop/dev-guide-create-secondary-indexes.md)
+-   [<a href="/develop/dev-guide-build-cluster-in-cloud.md">TiDB Cloud(Serverless Tier) で TiDBクラスタを構築する</a>](/develop/dev-guide-build-cluster-in-cloud.md) 。
+-   [<a href="/develop/dev-guide-schema-design-overview.md">スキーマ設計の概要</a>](/develop/dev-guide-schema-design-overview.md) 、 [<a href="/develop/dev-guide-create-database.md">データベースを作成する</a>](/develop/dev-guide-create-database.md) 、 [<a href="/develop/dev-guide-create-table.md">テーブルを作成する</a>](/develop/dev-guide-create-table.md) 、および[<a href="/develop/dev-guide-create-secondary-indexes.md">セカンダリインデックスの作成</a>](/develop/dev-guide-create-secondary-indexes.md)を読み取ります
 
-## Insert rows
+## 行の挿入 {#insert-rows}
 
-There are two ways to insert multiple rows of data. For example, if you need to insert **3** players' data.
+複数行のデータを挿入するには 2 つの方法があります。たとえば、 **3**人のプレイヤーのデータを挿入する必要がある場合です。
 
-- A **multi-line insertion statement**:
+-   **複数行の挿入ステートメント**:
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     INSERT INTO `player` (`id`, `coins`, `goods`) VALUES (1, 1000, 1), (2, 230, 2), (3, 300, 5);
     ```
 
-- Multiple **single-line insertion statements**:
+-   複数の**単一行挿入ステートメント**:
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     INSERT INTO `player` (`id`, `coins`, `goods`) VALUES (1, 1000, 1);
@@ -38,7 +38,7 @@ There are two ways to insert multiple rows of data. For example, if you need to 
     INSERT INTO `player` (`id`, `coins`, `goods`) VALUES (3, 300, 5);
     ```
 
-Generally the `multi-line insertion statement` runs faster than the multiple `single-line insertion statements`.
+一般に、 `multi-line insertion statement`倍数の`single-line insertion statements`よりも高速に実行されます。
 
 <SimpleTab>
 <div label="SQL">
@@ -48,7 +48,7 @@ CREATE TABLE `player` (`id` INT, `coins` INT, `goods` INT);
 INSERT INTO `player` (`id`, `coins`, `goods`) VALUES (1, 1000, 1), (2, 230, 2);
 ```
 
-For more information on how to use this SQL, see [Connecting to a TiDB Cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-2-connect-to-a-cluster) and follow the steps to enter the SQL statement after connecting to a TiDB cluster using a client.
+この SQL の使用方法の詳細については、 [<a href="/develop/dev-guide-build-cluster-in-cloud.md#step-2-connect-to-a-cluster">TiDBクラスタへの接続</a>](/develop/dev-guide-build-cluster-in-cloud.md#step-2-connect-to-a-cluster)を参照し、クライアントを使用して TiDB クラスターに接続した後、手順に従って SQL ステートメントを入力します。
 
 </div>
 
@@ -80,18 +80,18 @@ try (Connection connection = ds.getConnection()) {
 }
 ```
 
-Due to the default MySQL JDBC Driver settings, you need to change some parameters to get better bulk insert performance.
+デフォルトの MySQL JDBCDriver設定により、一括挿入のパフォーマンスを向上させるには、いくつかのパラメーターを変更する必要があります。
 
-|            Parameter            |                 Means                  |   Recommended Scenario   | Recommended Configuration|
-| :------------------------: | :-----------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------: |
-|    `useServerPrepStmts`    |    Whether to use the server side to enable prepared statements    |  When you need to use a prepared statement more than once                                                             |          `true`          |
-|      `cachePrepStmts`      |       Whether the client caches prepared statements        |                                                           `useServerPrepStmts=true` 时                                                            |          `true`          |
-|  `prepStmtCacheSqlLimit`   |  Maximum size of a prepared statement (256 characters by default)  | When the prepared statement is greater than 256 characters | Configured according to the actual size of the prepared statement |
-|    `prepStmtCacheSize`     | Maximum number of prepared statement caches (25 by default) | When the number of prepared statements is greater than 25  | Configured according to the actual number of prepared statements |
-| `rewriteBatchedStatements` |          Whether to rewrite **Batched** statements          | When batch operations are required |          `true`          |
-|    `allowMultiQueries`     |             Start batch operations              | Because a [client bug](https://bugs.mysql.com/bug.php?id=96623) requires this to be set when `rewriteBatchedStatements = true` and `useServerPrepStmts = true` |          `true`          |
+|            パラメータ           |                  意味                 |                                                                                           推奨シナリオ                                                                                           |        推奨されるコンフィグレーション        |
+| :------------------------: | :---------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------: |
+|    `useServerPrepStmts`    |   サーバー側を使用してプリペアドステートメントを有効にするかどうか  |                                                                                 プリペアドステートメントを複数回使用する必要がある場合                                                                                |             `true`            |
+|      `cachePrepStmts`      |   クライアントが準備されたステートメントをキャッシュするかどうか   |                                                                                 `useServerPrepStmts=true`時                                                                                 |             `true`            |
+|   `prepStmtCacheSqlLimit`  | プリペアドステートメントの最大サイズ (デフォルトでは 256 文字) |                                                                                 プリペアドステートメントが 256 文字を超える場合                                                                                 | プリペアドステートメントの実際のサイズに応じて構成されます |
+|     `prepStmtCacheSize`    |  プリペアドステートメントキャッシュの最大数 (デフォルトでは 25) |                                                                                  準備されたステートメントの数が 25 を超える場合                                                                                 |   実際の準備済みステートメントの数に応じて構成されます  |
+| `rewriteBatchedStatements` |     **Batched**ステートメントを書き換えるかどうか    |                                                                                         バッチ操作が必要な場合                                                                                        |             `true`            |
+|     `allowMultiQueries`    |              バッチ操作を開始する             | `rewriteBatchedStatements = true`と`useServerPrepStmts = true`の場合、 [<a href="https://bugs.mysql.com/bug.php?id=96623">クライアントのバグ</a>](https://bugs.mysql.com/bug.php?id=96623)これを設定する必要があるため |             `true`            |
 
-MySQL JDBC Driver also provides an integrated configuration: `useConfigs`. When it is configured with `maxPerformance`, it is equivalent to configuring a set of configurations. Taking `mysql:mysql-connector-java:8.0.28` as an example, `useConfigs=maxPerformance` contains:
+MySQL JDBC Driver は、 `useConfigs`統合構成も提供します。 `maxPerformance`で構成すると、一連の構成を構成することと同じになります。 `mysql:mysql-connector-java:8.0.28`例にとると、 `useConfigs=maxPerformance`には次のものが含まれます。
 
 ```properties
 cachePrepStmts=true
@@ -105,19 +105,19 @@ connectionAttributes=none
 useInformationSchema=true
 ```
 
-You can check `mysql-connector-java-{version}.jar!/com/mysql/cj/configurations/maxPerformance.properties` to get the configurations contained in `useConfigs=maxPerformance` for the corresponding version of MySQL JDBC Driver.
+`mysql-connector-java-{version}.jar!/com/mysql/cj/configurations/maxPerformance.properties`をチェックすると、MySQL JDBC Driverの対応するバージョンの`useConfigs=maxPerformance`に含まれる構成を取得できます。
 
-The following is a typical scenario of JDBC connection string configurations. In this example, Host: `127.0.0.1`, Port: `4000`, User name: `root`, Password: null, Default database: `test`:
+以下は、JDBC 接続文字列構成の一般的なシナリオです。この例では、ホスト: `127.0.0.1` 、ポート: `4000` 、ユーザー名: `root` 、パスワード: null、デフォルトのデータベース: `test` :
 
 ```
 jdbc:mysql://127.0.0.1:4000/test?user=root&useConfigs=maxPerformance&useServerPrepStmts=true&prepStmtCacheSqlLimit=2048&prepStmtCacheSize=256&rewriteBatchedStatements=true&allowMultiQueries=true
 ```
 
-For complete examples in Java, see:
+Javaの完全な例については、以下を参照してください。
 
-- [Build a simple CRUD app with TiDB and JDBC](/develop/dev-guide-sample-application-java-jdbc.md#step-2-get-the-code)
-- [Build a simple CRUD app with TiDB and Hibernate](/develop/dev-guide-sample-application-java-hibernate.md#step-2-get-the-code)
-- [Build the TiDB app using Spring Boot](/develop/dev-guide-sample-application-java-spring-boot.md)
+-   [<a href="/develop/dev-guide-sample-application-java-jdbc.md#step-2-get-the-code">TiDB と JDBC を使用してシンプルな CRUD アプリを構築する</a>](/develop/dev-guide-sample-application-java-jdbc.md#step-2-get-the-code)
+-   [<a href="/develop/dev-guide-sample-application-java-hibernate.md#step-2-get-the-code">TiDB と Hibernate を使用してシンプルな CRUD アプリを構築する</a>](/develop/dev-guide-sample-application-java-hibernate.md#step-2-get-the-code)
+-   [<a href="/develop/dev-guide-sample-application-java-spring-boot.md">Spring Boot を使用して TiDB アプリを構築する</a>](/develop/dev-guide-sample-application-java-spring-boot.md)
 
 </div>
 
@@ -189,10 +189,10 @@ func buildBulkInsertSQL(amount int) string {
 }
 ```
 
-For complete examples in Golang, see:
+Golangの完全な例については、以下を参照してください。
 
-- [Use Go-MySQL-Driver to build a simple CRUD app with TiDB and Golang](/develop/dev-guide-sample-application-golang-sql-driver.md#step-2-get-the-code)
-- [Use GORM to build a simple CRUD app with TiDB and Golang](/develop/dev-guide-sample-application-golang-gorm.md#step-2-get-the-code)
+-   [<a href="/develop/dev-guide-sample-application-golang-sql-driver.md#step-2-get-the-code">Go-MySQL-Driver を使用して TiDB とGolangでシンプルな CRUD アプリを構築する</a>](/develop/dev-guide-sample-application-golang-sql-driver.md#step-2-get-the-code)
+-   [<a href="/develop/dev-guide-sample-application-golang-gorm.md#step-2-get-the-code">GORM を使用して TiDB とGolangでシンプルな CRUD アプリを構築する</a>](/develop/dev-guide-sample-application-golang-gorm.md#step-2-get-the-code)
 
 </div>
 
@@ -216,89 +216,89 @@ with get_connection(autocommit=True) as connection:
             cur.executemany("INSERT INTO player (id, coins, goods) VALUES (%s, %s, %s)", player_list[idx:idx + 114])
 ```
 
-For complete examples in Python, see:
+Python の完全な例については、以下を参照してください。
 
-- [Use PyMySQL to build a simple CRUD app with TiDB and Python](/develop/dev-guide-sample-application-python-pymysql.md#step-2-get-the-code)
-- [Use mysqlclient to build a simple CRUD app with TiDB and Python](/develop/dev-guide-sample-application-python-mysqlclient.md#step-2-get-the-code)
-- [Use MySQL Connector/Python to build a simple CRUD app with TiDB and Python](/develop/dev-guide-sample-application-python-mysql-connector.md#step-2-get-the-code)
-- [Use SQLAlchemy to build a simple CRUD app with TiDB and Python](/develop/dev-guide-sample-application-python-sqlalchemy.md#step-2-get-the-code)
-- [Use peewee to build a simple CRUD app with TiDB and Python](/develop/dev-guide-sample-application-python-peewee.md#step-2-get-the-code)
+-   [<a href="/develop/dev-guide-sample-application-python-pymysql.md#step-2-get-the-code">PyMySQL を使用して TiDB と Python でシンプルな CRUD アプリを構築する</a>](/develop/dev-guide-sample-application-python-pymysql.md#step-2-get-the-code)
+-   [<a href="/develop/dev-guide-sample-application-python-mysqlclient.md#step-2-get-the-code">mysqlclient を使用して TiDB と Python で単純な CRUD アプリを構築する</a>](/develop/dev-guide-sample-application-python-mysqlclient.md#step-2-get-the-code)
+-   [<a href="/develop/dev-guide-sample-application-python-mysql-connector.md#step-2-get-the-code">MySQL コネクタ/Python を使用して、TiDB と Python でシンプルな CRUD アプリを構築する</a>](/develop/dev-guide-sample-application-python-mysql-connector.md#step-2-get-the-code)
+-   [<a href="/develop/dev-guide-sample-application-python-sqlalchemy.md#step-2-get-the-code">SQLAlchemy を使用して TiDB と Python でシンプルな CRUD アプリを構築する</a>](/develop/dev-guide-sample-application-python-sqlalchemy.md#step-2-get-the-code)
+-   [<a href="/develop/dev-guide-sample-application-python-peewee.md#step-2-get-the-code">peewee を使用して TiDB と Python でシンプルな CRUD アプリを構築する</a>](/develop/dev-guide-sample-application-python-peewee.md#step-2-get-the-code)
 
 </div>
 
 </SimpleTab>
 
-## Bulk-Insert
+## 一括挿入 {#bulk-insert}
 
-If you need to quickly import a large amount of data into a TiDB cluster, it is recommended that you use a range of tools provided by **PingCAP** for data migration. Using the `INSERT` statement is not the best way, because it is not efficient and requires to handle exceptions and other issues on your own.
+大量のデータを TiDB クラスターに迅速にインポートする必要がある場合は、 **PingCAP**が提供するデータ移行用のさまざまなツールを使用することをお勧めします。 `INSERT`ステートメントの使用は、効率的ではなく、例外やその他の問題を自分で処理する必要があるため、最良の方法ではありません。
 
-The following are the recommended tools for bulk-insert:
+一括挿入に推奨されるツールは次のとおりです。
 
-- Data export: [Dumpling](/dumpling-overview.md). You can export MySQL or TiDB data to local or Amazon S3.
+-   データのエクスポート: [<a href="/dumpling-overview.md">Dumpling</a>](/dumpling-overview.md) . MySQL または TiDB データをローカルまたは Amazon S3 にエクスポートできます。
 
 <CustomContent platform="tidb">
 
-- Data import: [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md). You can import **Dumpling** exported data, a **CSV** file, or [Migrate Data from Amazon Aurora to TiDB](/migrate-aurora-to-tidb.md). It also supports reading data from a local disk or Amazon S3 cloud disk.
-- Data replication: [TiDB Data Migration](/dm/dm-overview.md). You can replicate MySQL, MariaDB, and Amazon Aurora databases to TiDB. It also supports merging and migrating the sharded instances and tables from the source databases.
-- Data backup and restore: [Backup & Restore (BR)](/br/backup-and-restore-overview.md). Compared to **Dumpling**, **BR** is more suitable for **_big data_** scenario.
+-   データインポート: [<a href="/tidb-lightning/tidb-lightning-overview.md">TiDB Lightning</a>](/tidb-lightning/tidb-lightning-overview.md) . **Dumpling の**エクスポート データ、 **CSV**ファイル、または[<a href="/migrate-aurora-to-tidb.md">Amazon Auroraから TiDB へのデータの移行</a>](/migrate-aurora-to-tidb.md)をインポートできます。ローカル ディスクまたは Amazon S3 クラウド ディスクからのデータの読み取りもサポートします。
+-   データ複製: [<a href="/dm/dm-overview.md">TiDB データ移行</a>](/dm/dm-overview.md) 。 MySQL、MariaDB、Amazon Auroraデータベースを TiDB にレプリケートできます。また、ソース データベースからのシャード化されたインスタンスとテーブルのマージと移行もサポートします。
+-   データのバックアップと復元: [<a href="/br/backup-and-restore-overview.md">バックアップと復元 (BR)</a>](/br/backup-and-restore-overview.md) . **Dumpling**と比較して、 **BR は*****ビッグデータの***シナリオにより適しています。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- Data import: [Data Import Task](/tidb-cloud/import-sample-data.md) page in the TiDB Cloud console. You can import **Dumpling** exported data, a **CSV** file, or [Migrate Data from Amazon Aurora to TiDB](/tidb-cloud/migrate-from-aurora-bulk-import.md). It also supports reading data from a local disk, Amazon S3 cloud disk, or GCS cloud disk.
-- Data replication: [TiDB Data Migration](https://docs.pingcap.com/tidb/stable/dm-overview). You can replicate MySQL, MariaDB, and Amazon Aurora databases to TiDB. It also supports merging and migrating the sharded instances and tables from the source databases.
-- Data backup and restore: [Backup](/tidb-cloud/backup-and-restore.md) page in the TiDB Cloud console. Compared to **Dumpling**, backup and restore is more suitable for **_big data_** scenario.
+-   データのインポート: TiDB Cloudコンソールの[<a href="/tidb-cloud/import-sample-data.md">データインポートタスク</a>](/tidb-cloud/import-sample-data.md)ページ。 **Dumpling の**エクスポート データ、 **CSV**ファイル、または[<a href="/tidb-cloud/migrate-from-aurora-bulk-import.md">Amazon Auroraから TiDB へのデータの移行</a>](/tidb-cloud/migrate-from-aurora-bulk-import.md)をインポートできます。ローカル ディスク、Amazon S3 クラウド ディスク、または GCS クラウド ディスクからのデータの読み取りもサポートしています。
+-   データ複製: [<a href="https://docs.pingcap.com/tidb/stable/dm-overview">TiDB データ移行</a>](https://docs.pingcap.com/tidb/stable/dm-overview) 。 MySQL、MariaDB、Amazon Auroraデータベースを TiDB にレプリケートできます。また、ソース データベースからのシャード化されたインスタンスとテーブルのマージと移行もサポートします。
+-   データのバックアップと復元: TiDB Cloudコンソールの[<a href="/tidb-cloud/backup-and-restore.md">バックアップ</a>](/tidb-cloud/backup-and-restore.md)ページ。 **Dumpling**と比較して、バックアップと復元は***ビッグ データの***シナリオにより適しています。
 
 </CustomContent>
 
-## Avoid hotspots
+## ホットスポットを避ける {#avoid-hotspots}
 
-When designing a table, you need to consider if there is a large number of insert operations. If so, you need to avoid hotspots during table design. See the [Select primary key](/develop/dev-guide-create-table.md#select-primary-key) section and follow the [Rules when selecting primary key](/develop/dev-guide-create-table.md#guidelines-to-follow-when-selecting-primary-key).
+テーブルを設計するときは、多数の挿入操作があるかどうかを考慮する必要があります。その場合、テーブルの設計中にホットスポットを回避する必要があります。 [<a href="/develop/dev-guide-create-table.md#select-primary-key">主キーを選択</a>](/develop/dev-guide-create-table.md#select-primary-key)セクションを参照し、 [<a href="/develop/dev-guide-create-table.md#guidelines-to-follow-when-selecting-primary-key">主キーを選択する際のルール</a>](/develop/dev-guide-create-table.md#guidelines-to-follow-when-selecting-primary-key)に従ってください。
 
 <CustomContent platform="tidb">
 
-For more information on how to handle hotspot issues, see [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md).
+ホットスポットの問題の処理方法の詳細については、 [<a href="/troubleshoot-hot-spot-issues.md">ホットスポットの問題のトラブルシューティング</a>](/troubleshoot-hot-spot-issues.md)を参照してください。
 
 </CustomContent>
 
-## Insert data to a table with the `AUTO_RANDOM` primary key
+## <code>AUTO_RANDOM</code>主キーを使用してテーブルにデータを挿入する {#insert-data-to-a-table-with-the-code-auto-random-code-primary-key}
 
-If the primary key of the table you insert has the `AUTO_RANDOM` attribute, then by default the primary key cannot be specified. For example, in the [`bookshop`](/develop/dev-guide-bookshop-schema-design.md) database, you can see that the `id` field of the [`users` table](/develop/dev-guide-bookshop-schema-design.md#users-table) contains the `AUTO_RANDOM` attribute.
+挿入するテーブルの主キーに`AUTO_RANDOM`属性がある場合、デフォルトでは主キーを指定できません。たとえば、データベース[<a href="/develop/dev-guide-bookshop-schema-design.md">`bookshop`</a>](/develop/dev-guide-bookshop-schema-design.md)では、 [<a href="/develop/dev-guide-bookshop-schema-design.md#users-table">`users`テーブル</a>](/develop/dev-guide-bookshop-schema-design.md#users-table)の`id`フィールドに`AUTO_RANDOM`属性が含まれていることがわかります。
 
-In this case, you **cannot** use SQL like the following to insert:
+この場合、次のような SQL を使用して挿入する**ことはできません**。
 
 ```sql
 INSERT INTO `bookshop`.`users` (`id`, `balance`, `nickname`) VALUES (1, 0.00, 'nicky');
 ```
 
-An error will occur:
+エラーが発生します:
 
 ```
 ERROR 8216 (HY000): Invalid auto random: Explicit insertion on auto_random column is disabled. Try to set @@allow_auto_random_explicit_insert = true.
 ```
 
-It is not recommended to manually specify the `AUTO_RANDOM` column during insertion time.
+挿入時に`AUTO_RANDOM`列を手動で指定することはお勧めできません。
 
-There are two solutions to handle this error:
+このエラーを処理するには 2 つの解決策があります。
 
-- (Recommended) Remove this column from the insert statement and use the `AUTO_RANDOM` value that TiDB initialized for you. This fits the semantics of `AUTO_RANDOM`.
+-   (推奨) この列を挿入ステートメントから削除し、TiDB が初期化した値`AUTO_RANDOM`を使用します。これは`AUTO_RANDOM`のセマンティクスに適合します。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     INSERT INTO `bookshop`.`users` (`balance`, `nickname`) VALUES (0.00, 'nicky');
     ```
 
-- If you are sure that you **_must_** specify this column, then you can use the [`SET` statement](https://docs.pingcap.com/zh/tidb/stable/sql-statement-set-variable) to allow the column of `AUTO_RANDOM` to be specified during insertion time by changing the user variable.
+-   この列を指定する***必要がある***ことが確実な場合は、ユーザー変数を変更することで、 [<a href="https://docs.pingcap.com/zh/tidb/stable/sql-statement-set-variable">`SET`ステートメント</a>](https://docs.pingcap.com/zh/tidb/stable/sql-statement-set-variable)使用して挿入時に`AUTO_RANDOM`の列を指定できるようにすることができます。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     SET @@allow_auto_random_explicit_insert = true;
     INSERT INTO `bookshop`.`users` (`id`, `balance`, `nickname`) VALUES (1, 0.00, 'nicky');
     ```
 
-## Use HTAP
+## HTAP を使用する {#use-htap}
 
-In TiDB, HTAP capabilities save you from performing additional operations when inserting data. There is no additional insertion logic. TiDB automatically guarantees data consistency. All you need to do is [turn on column-oriented replica synchronization](/develop/dev-guide-create-table.md#use-htap-capabilities) after creating the table, and use the column-oriented replica to speed up your queries directly.
+TiDB では、HTAP 機能により、データの挿入時に追加の操作を実行する必要がなくなります。追加の挿入ロジックはありません。 TiDB はデータの一貫性を自動的に保証します。テーブルを作成した後、列指向レプリカを使用してクエリ[<a href="/develop/dev-guide-create-table.md#use-htap-capabilities">列指向のレプリカ同期を有効にする</a>](/develop/dev-guide-create-table.md#use-htap-capabilities)直接高速化するだけです。

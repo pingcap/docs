@@ -3,17 +3,17 @@ title: DO | TiDB SQL Statement Reference
 summary: An overview of the usage of DO for the TiDB database.
 ---
 
-# DO
+# する {#do}
 
-`DO` executes the expressions but does not return any results. In most cases, `DO` is equivalent to `SELECT expr, ...` that does not return a result.
+`DO`式を実行しますが、結果は返しません。ほとんどの場合、 `DO`結果を返さない`SELECT expr, ...`と同等です。
 
-> **Note:**
+> **ノート：**
 >
-> `DO` only executes expressions. It cannot be used in all cases where `SELECT` can be used. For example, `DO id FROM t1` is invalid because it references a table.
+> `DO`は式のみを実行します。 `SELECT`使える全ての場合に使えるわけではありません。たとえば、 `DO id FROM t1`はテーブルを参照しているため無効です。
 
-In MySQL, a common use case is to execute stored procedure or trigger. Since TiDB does not provide stored procedure or trigger, this function has a limited use.
+MySQL では、ストアド プロシージャまたはトリガーを実行することが一般的な使用例です。 TiDB はストアド プロシージャやトリガーを提供していないため、この機能の使用は限定されています。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 DoStmt   ::= 'DO' ExpressionList
@@ -27,9 +27,9 @@ Expression ::=
 |   PredicateExpr ( IsOrNotOp 'NULL' | CompareOp ( ( singleAtIdentifier assignmentEq )? PredicateExpr | AnyOrAll SubSelect ) )* ( IsOrNotOp ( trueKwd | falseKwd | 'UNKNOWN' ) )?
 ```
 
-## Examples
+## 例 {#examples}
 
-This SELECT statement pauses, but also produces a result set.
+この SELECT ステートメントは一時停止しますが、結果セットも生成します。
 
 ```sql
 mysql> SELECT SLEEP(5);
@@ -41,7 +41,7 @@ mysql> SELECT SLEEP(5);
 1 row in set (5.00 sec)
 ```
 
-DO, on the other hand, pauses without producing a result set.
+一方、DO は結果セットを生成せずに一時停止します。
 
 ```sql
 mysql> DO SLEEP(5);
@@ -51,10 +51,10 @@ mysql> DO SLEEP(1), SLEEP(1.5);
 Query OK, 0 rows affected (2.50 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
+このステートメントは、MySQL と完全な互換性があると理解されています。 GitHub では互換性の違いは[<a href="https://github.com/pingcap/tidb/issues/new/choose">問題を通じて報告されました</a>](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
 
-## See also
+## こちらも参照 {#see-also}
 
-* [SELECT](/sql-statements/sql-statement-select.md)
+-   [<a href="/sql-statements/sql-statement-select.md">選択する</a>](/sql-statements/sql-statement-select.md)

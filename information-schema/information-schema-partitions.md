@@ -3,16 +3,16 @@ title: PARTITIONS
 summary: Learn the `PARTITIONS` INFORMATION_SCHEMA table.
 ---
 
-# PARTITIONS
+# パーティション {#partitions}
 
-The `PARTITIONS` table provides information about partitioned tables.
+`PARTITIONS`テーブルは、パーティション化されたテーブルに関する情報を提供します。
 
 ```sql
 USE INFORMATION_SCHEMA;
 DESC partitions;
 ```
 
-The output is as follows:
+出力は次のとおりです。
 
 ```sql
 +-------------------------------+--------------+------+------+---------+-------+
@@ -54,7 +54,7 @@ CREATE TABLE test.t1 (id INT NOT NULL PRIMARY KEY) PARTITION BY HASH (id) PARTIT
 SELECT * FROM PARTITIONS WHERE table_schema='test' AND table_name='t1'\G
 ```
 
-The output is as follows:
+出力は次のとおりです。
 
 ```sql
 *************************** 1. row ***************************

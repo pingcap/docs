@@ -3,122 +3,122 @@ title: TiDB Backend Task Distributed Execution Framework
 summary: Learn the use cases, limitations, usage, and implementation principles of the TiDB backend task distributed execution framework.
 ---
 
-# TiDB Backend Task Distributed Execution Framework
+# TiDB バックエンド タスク分散実行フレームワーク {#tidb-backend-task-distributed-execution-framework}
 
-> **Warning:**
+> **警告：**
 >
-> This feature is an experimental feature. It is not recommended to use it in production environments.
+> この機能は実験的機能です。本番環境での使用はお勧めできません。
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **ノート：**
 >
-> Currently, this feature is only applicable to Dedicated Tier clusters. You cannot use it on Serverless Tier clusters.
+> 現在、この機能はDedicated Tierクラスターにのみ適用されます。Serverless Tierクラスターでは使用できません。
 
 </CustomContent>
 
-TiDB adopts a computing-storage separation architecture with excellent scalability and elasticity. Starting from v7.1.0, TiDB introduces a backend task distributed execution framework to further leverage the resource advantages of the distributed architecture. The goal of this framework is to implement unified scheduling and distributed execution of all backend tasks, and to provide unified resource management capabilities for both overall and individual backend tasks, which better meets users' expectations for resource usage.
+TiDB は、優れた拡張性と弾力性を備えたコンピューティングとストレージの分離アーキテクチャを採用しています。 TiDB v7.1.0 以降、分散アーキテクチャのリソースの利点をさらに活用するために、バックエンド タスクの分散実行フレームワークが導入されています。このフレームワークの目標は、すべてのバックエンド タスクの統合スケジューリングと分散実行を実装し、全体と個別のバックエンド タスクの両方に統合リソース管理機能を提供して、リソース使用量に対するユーザーの期待をより適切に満たすことです。
 
-This document describes the use cases, limitations, usage, and implementation principles of the TiDB backend task distributed execution framework.
+このドキュメントでは、TiDB バックエンド タスク分散実行フレームワークのユース ケース、制限事項、使用法、実装原則について説明します。
 
-> **Note:**
+> **ノート：**
 >
-> This framework does not support the distributed execution of SQL queries.
+> このフレームワークは、SQL クエリの分散実行をサポートしていません。
 
-## Use cases and limitations
+## 使用例と制限事項 {#use-cases-and-limitations}
 
-In a database management system, in addition to the core transactional processing (TP) and analytical processing (AP) workloads, there are other important tasks, such as DDL operations, Load Data, TTL, Analyze, and Backup/Restore, which are called **backend tasks**. These backend tasks need to process a large amount of data in database objects (tables), so they typically have the following characteristics:
+データベース管理システムには、コアのトランザクション処理 (TP) および分析処理 (AP) ワークロードに加えて、DDL 操作、データのロード、TTL、分析、バックアップ/復元などの他の重要なタスクがあります。**バックエンドタスク**。これらのバックエンド タスクはデータベース オブジェクト (テーブル) 内の大量のデータを処理する必要があるため、通常は次のような特性があります。
 
-- Need to process all data in a schema or a database object (table).
-- Might need to be executed periodically, but at a low frequency.
-- If the resources are not properly controlled, they are prone to affect TP and AP tasks, lowering the database service quality.
+-   スキーマまたはデータベース オブジェクト (テーブル) 内のすべてのデータを処理する必要があります。
+-   定期的に実行する必要がある場合がありますが、頻度は低くなります。
+-   リソースが適切に制御されていない場合、TP および AP タスクに影響を及ぼし、データベース サービスの品質が低下する可能性があります。
 
-Enabling the TiDB backend task distributed execution framework can solve the above problems and has the following three advantages:
+TiDB バックエンド タスク分散実行フレームワークを有効にすると、上記の問題を解決でき、次の 3 つの利点があります。
 
-- The framework provides unified capabilities for high scalability, high availability, and high performance.
-- The framework supports distributed execution of backend tasks, which can flexibly schedule the available computing resources of the entire TiDB cluster, thereby better utilizing the computing resources in a TiDB cluster.
-- The framework provides unified resource usage and management capabilities for both overall and individual backend tasks.
+-   このフレームワークは、高スケーラビリティ、高可用性、および高パフォーマンスのための統合機能を提供します。
+-   このフレームワークはバックエンド タスクの分散実行をサポートしており、TiDB クラスター全体の利用可能なコンピューティング リソースを柔軟にスケジュールできるため、TiDB クラスター内のコンピューティング リソースをより有効に活用できます。
+-   このフレームワークは、バックエンド タスク全体と個別の両方に対して、統合されたリソースの使用と管理機能を提供します。
 
-Currently, the TiDB backend task distributed execution framework only supports the distributed execution of `ADD INDEX` statements, that is, the DDL statements for creating indexes. For example, the following SQL statements are supported:
+現在、TiDB バックエンド タスク分散実行フレームワークは、 `ADD INDEX`ステートメント、つまりインデックスを作成するための DDL ステートメントの分散実行のみをサポートしています。たとえば、次の SQL ステートメントがサポートされています。
 
 ```sql
 ALTER TABLE t1 ADD INDEX idx1(c1);
 CREATE INDEX idx1 ON table t1(c1);
 ```
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-Before using the distributed framework, you need to enable the [Fast Online DDL](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) mode.
+分散フレームワークを使用する前に、 [<a href="/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630">高速オンライン DDL</a>](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)モードを有効にする必要があります。
 
 <CustomContent platform="tidb">
 
-1. Adjust the following system variables related to Fast Online DDL:
+1.  Fast Online DDL に関連する次のシステム変数を調整します。
 
-    * [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630): used to enable Fast Online DDL mode. It is enabled by default starting from TiDB v6.5.0.
-    * [`tidb_ddl_disk_quota`](/system-variables.md#tidb_ddl_disk_quota-new-in-v630): used to control the maximum quota of local disks that can be used in Fast Online DDL mode.
+    -   [<a href="/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630">`tidb_ddl_enable_fast_reorg`</a>](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) : Fast Online DDL モードを有効にするために使用されます。 TiDB v6.5.0 以降、デフォルトで有効になっています。
+    -   [<a href="/system-variables.md#tidb_ddl_disk_quota-new-in-v630">`tidb_ddl_disk_quota`</a>](/system-variables.md#tidb_ddl_disk_quota-new-in-v630) : Fast Online DDL モードで使用できるローカル ディスクの最大クォータを制御するために使用されます。
 
-2. Adjust the following configuration item related to Fast Online DDL:
+2.  Fast Online DDL に関連する次の構成項目を調整します。
 
-    * [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630): specifies the local disk path that can be used in Fast Online DDL mode.
+    -   [<a href="/tidb-configuration-file.md#temp-dir-new-in-v630">`temp-dir`</a>](/tidb-configuration-file.md#temp-dir-new-in-v630) : Fast Online DDL モードで使用できるローカル ディスク パスを指定します。
 
-> **Note:**
+> **ノート：**
 >
-> Before you upgrade TiDB to v6.5.0 or later, it is recommended that you check whether the [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630) path of TiDB is correctly mounted to an SSD disk. This path is a TiDB configuration item, which takes effect after TiDB is restarted. Therefore, setting this configuration item in advance before upgrading can avoid another restart.
+> TiDB を v6.5.0 以降にアップグレードする前に、TiDB の[<a href="/tidb-configuration-file.md#temp-dir-new-in-v630">`temp-dir`</a>](/tidb-configuration-file.md#temp-dir-new-in-v630)パスが SSD ディスクに正しくマウントされているかどうかを確認することをお勧めします。このパスは TiDB 構成アイテムであり、TiDB の再起動後に有効になります。したがって、アップグレード前にこの構成項目を事前に設定しておくと、再度の再起動を回避できます。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-Adjust the following system variables related to Fast Online DDL:
+Fast Online DDL に関連する次のシステム変数を調整します。
 
-* [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630): used to enable Fast Online DDL mode. It is enabled by default starting from TiDB v6.5.0.
-* [`tidb_ddl_disk_quota`](/system-variables.md#tidb_ddl_disk_quota-new-in-v630): used to control the maximum quota of local disks that can be used in Fast Online DDL mode.
+-   [<a href="/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630">`tidb_ddl_enable_fast_reorg`</a>](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) : Fast Online DDL モードを有効にするために使用されます。 TiDB v6.5.0 以降、デフォルトで有効になっています。
+-   [<a href="/system-variables.md#tidb_ddl_disk_quota-new-in-v630">`tidb_ddl_disk_quota`</a>](/system-variables.md#tidb_ddl_disk_quota-new-in-v630) : Fast Online DDL モードで使用できるローカル ディスクの最大クォータを制御するために使用されます。
 
 </CustomContent>
 
-## Usage
+## 使用法 {#usage}
 
-1. To enable the distributed framework, set the value of [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710) to `ON`:
+1.  分散フレームワークを有効にするには、値[<a href="/system-variables.md#tidb_enable_dist_task-new-in-v710">`tidb_enable_dist_task`</a>](/system-variables.md#tidb_enable_dist_task-new-in-v710)から`ON`を設定します。
 
     ```sql
     SET GLOBAL tidb_enable_dist_task = ON;
     ```
 
-    When backend tasks are running, the DDL statements supported by the framework are executed in a distributed manner.
+    バックエンド タスクの実行中、フレームワークによってサポートされる DDL ステートメントは分散方式で実行されます。
 
-2. Adjust the following system variables that might affect the distributed execution of DDL tasks according to your needs:
+2.  必要に応じて、DDL タスクの分散実行に影響を与える可能性がある次のシステム変数を調整します。
 
-    * [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt): use the default value `4`. The recommended maximum value is `16`.
-    * [`tidb_ddl_reorg_priority`](/system-variables.md#tidb_ddl_reorg_priority)
-    * [`tidb_ddl_error_count_limit`](/system-variables.md#tidb_ddl_error_count_limit)
-    * [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size): use the default value. The recommended maximum value is `1024`.
+    -   [<a href="/system-variables.md#tidb_ddl_reorg_worker_cnt">`tidb_ddl_reorg_worker_cnt`</a>](/system-variables.md#tidb_ddl_reorg_worker_cnt) : デフォルト値`4`を使用します。推奨される最大値は`16`です。
+    -   [<a href="/system-variables.md#tidb_ddl_reorg_priority">`tidb_ddl_reorg_priority`</a>](/system-variables.md#tidb_ddl_reorg_priority)
+    -   [<a href="/system-variables.md#tidb_ddl_error_count_limit">`tidb_ddl_error_count_limit`</a>](/system-variables.md#tidb_ddl_error_count_limit)
+    -   [<a href="/system-variables.md#tidb_ddl_reorg_batch_size">`tidb_ddl_reorg_batch_size`</a>](/system-variables.md#tidb_ddl_reorg_batch_size) : デフォルト値を使用します。推奨される最大値は`1024`です。
 
-> **Tip:**
+> **ヒント：**
 >
-> For distributed execution of `ADD INDEX` statements, you only need to set `tidb_ddl_reorg_worker_cnt`.
+> `ADD INDEX`ステートメントの分散実行の場合、 `tidb_ddl_reorg_worker_cnt`を設定するだけで済みます。
 
-## Implementation principles
+## 実装原則 {#implementation-principles}
 
-The architecture of the TiDB backend task distributed execution framework is as follows:
+TiDB バックエンド タスク分散実行フレームワークのアーキテクチャは次のとおりです。
 
 ![Architecture of the TiDB backend task distributed execution framework](/media/dist-task/dist-task-architect.jpg)
 
-As shown in the preceding diagram, the execution of backend tasks in the distributed framework is mainly handled by the following modules:
+上の図に示すように、分散フレームワークにおけるバックエンド タスクの実行は、主に次のモジュールによって処理されます。
 
-- Dispatcher: generates the distributed execution plan for each task, manages the execution process, converts the task status, and collects and feeds back the runtime task information.
-- Scheduler: replicates the execution of distributed tasks among TiDB nodes to improve the efficiency of backend task execution.
-- Subtask Executor: the actual executor of distributed subtasks. In addition, the Subtask Executor returns the execution status of subtasks to the Scheduler, and the Scheduler updates the execution status of subtasks in a unified manner.
-- Resource pool: provides the basis for quantifying resource usage and management by pooling computing resources of the above modules.
+-   ディスパッチャー: 各タスクの分散実行計画を生成し、実行プロセスを管理し、タスクのステータスを変換し、実行時タスク情報を収集してフィードバックします。
+-   スケジューラ: TiDB ノード間で分散タスクの実行を複製し、バックエンド タスクの実行効率を向上させます。
+-   サブタスク実行者: 分散サブタスクの実際の実行者。また、Subtask Executorはサブタスクの実行状況をSchedulerに返し、Schedulerはサブタスクの実行状況を一元的に更新します。
+-   リソース プール: 上記のモジュールのコンピューティング リソースをプールすることで、リソースの使用量と管理を定量化するための基礎を提供します。
 
-## See also
+## こちらも参照 {#see-also}
 
 <CustomContent platform="tidb">
 
-* [Execution Principles and Best Practices of DDL Statements](/ddl-introduction.md)
+-   [<a href="/ddl-introduction.md">DDL ステートメントの実行原則とベスト プラクティス</a>](/ddl-introduction.md)
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
-* [Execution Principles and Best Practices of DDL Statements](https://docs.pingcap.com/tidb/stable/ddl-introduction)
+-   [<a href="https://docs.pingcap.com/tidb/stable/ddl-introduction">DDL ステートメントの実行原則とベスト プラクティス</a>](https://docs.pingcap.com/tidb/stable/ddl-introduction)
 
 </CustomContent>

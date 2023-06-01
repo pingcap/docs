@@ -3,79 +3,79 @@ title: Slow Queries Page of TiDB Dashboard
 summary: Learn the Slow Queries page of TiDB Dashboard.
 ---
 
-# Slow Queries Page of TiDB Dashboard
+# TiDB ダッシュボードの「遅いクエリ」ページ {#slow-queries-page-of-tidb-dashboard}
 
-On the Slow Queries page of TiDB Dashboard, you can search and view all slow queries in the cluster.
+TiDB ダッシュボードの「スロー クエリ」ページでは、クラスター内のすべてのスロー クエリを検索して表示できます。
 
-By default, SQL queries with an execution time of more than 300 milliseconds are considered as slow queries. These queries are recorded in the [slow query logs](/identify-slow-queries.md) and can be searched via TiDB Dashboard. You can adjust the threshold of slow queries through the [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold) session variable or the [`slow-threshold`](/tidb-configuration-file.md#slow-threshold) TiDB parameter.
+デフォルトでは、実行時間が 300 ミリ秒を超える SQL クエリは低速クエリとみなされます。これらのクエリは[<a href="/identify-slow-queries.md">遅いクエリログ</a>](/identify-slow-queries.md)に記録され、TiDB ダッシュボード経由で検索できます。低速クエリのしきい値は、 [<a href="/system-variables.md#tidb_slow_log_threshold">`tidb_slow_log_threshold`</a>](/system-variables.md#tidb_slow_log_threshold)セッション変数または[<a href="/tidb-configuration-file.md#slow-threshold">`slow-threshold`</a>](/tidb-configuration-file.md#slow-threshold) TiDB パラメータを通じて調整できます。
 
-> **Note:**
+> **ノート：**
 >
-> If the slow query log is disabled, this feature will be unavailable. The slow query log is enabled by default, and you can enable or disable it through the system variable [`tidb_enable_slow_log`](/system-variables.md#tidb_enable_slow_log).
+> スロークエリログが無効になっている場合、この機能は使用できません。スロー クエリ ログはデフォルトで有効になっており、システム変数[<a href="/system-variables.md#tidb_enable_slow_log">`tidb_enable_slow_log`</a>](/system-variables.md#tidb_enable_slow_log)を使用して有効または無効にできます。
 
-## Access the page
+## ページにアクセスする {#access-the-page}
 
-You can use one of the following two methods to access the slow query page:
+次の 2 つの方法のいずれかを使用して、低速クエリ ページにアクセスできます。
 
-* After logging in to TiDB Dashboard, click **Slow Queries** in the left navigation menu.
+-   TiDB ダッシュボードにログインした後、左側のナビゲーション メニューで**[Slow Queries]**をクリックします。
 
-* Visit <http://127.0.0.1:2379/dashboard/#/slow_query> in your browser. Replace `127.0.0.1:2379` with the actual PD address and port.
+-   ブラウザで[<a href="http://127.0.0.1:2379/dashboard/#/slow_query">http://127.0.0.1:2379/dashboard/#/slow_query</a>](http://127.0.0.1:2379/dashboard/#/slow_query)にアクセスしてください。 `127.0.0.1:2379`実際の PD アドレスとポートに置き換えます。
 
-All data displayed on the slow query page comes from TiDB slow query system tables and slow query logs. See [slow query logs](/identify-slow-queries.md) for details.
+スロー クエリ ページに表示されるすべてのデータは、TiDB スロー クエリ システム テーブルおよびスロー クエリ ログから取得されます。詳細については[<a href="/identify-slow-queries.md">遅いクエリログ</a>](/identify-slow-queries.md)を参照してください。
 
-### Change filters
+### フィルターを変更する {#change-filters}
 
-You can filter slow queries based on the time range, the related database, SQL keywords, SQL types, the number of slow queries to be displayed. In the image below, 100 slow queries over the recent 30 minutes are displayed by default.
+時間範囲、関連データベース、SQL キーワード、SQL タイプ、表示する低速クエリの数に基づいて低速クエリをフィルタリングできます。以下の画像では、最近 30 分間の 100 件の低速クエリがデフォルトで表示されています。
 
 ![Modify list filters](/media/dashboard/dashboard-slow-queries-list1-v620.png)
 
-### Display more columns
+### さらに多くの列を表示する {#display-more-columns}
 
-Click **Columns** on the page and you can choose to see more columns. You can move your mouse to the **(i)** icon at the right side of a column name to view the description of this column:
+ページ上の**[列]**をクリックすると、さらに列を表示することを選択できます。列名の右側にある**(i)**アイコンにマウスを移動すると、この列の説明が表示されます。
 
 ![Show more columns](/media/dashboard/dashboard-slow-queries-list2-v620.png)
 
-### Sort by column
+### 列ごとに並べ替える {#sort-by-column}
 
-By default, the list is sorted by **Finish Time** in the descending order. Click column headings to sort by the column or switch the sorting order:
+デフォルトでは、リストは**終了時間の**降順に並べ替えられます。列見出しをクリックして列で並べ替えるか、並べ替え順序を切り替えます。
 
 ![Modify sorting basis](/media/dashboard/dashboard-slow-queries-list3-v620.png)
 
-## View execution details
+## 実行の詳細をビュー {#view-execution-details}
 
-Click any item in the list to display detailed execution information of the slow query, including:
+リスト内の任意の項目をクリックすると、次のような遅いクエリの詳細な実行情報が表示されます。
 
-- Query: The text of the SQL statement (area 1 in the following figure)
-- Plan: The execution plan of the slow query (area 2 in the following figure)
-- Other sorted SQL execution information (area 3 in the following figure)
+-   クエリ: SQL ステートメントのテキスト (次の図の領域 1)
+-   プラン: 低速クエリの実行プラン (次の図の領域 2)
+-   その他のソート済みSQL実行情報（下図の領域3）
 
 ![View execution details](/media/dashboard/dashboard-slow-queries-detail1-v620.png)
 
-### SQL
+### SQL {#sql}
 
-Click the **Expand** button to view the detailed information of an item. Click the **Copy** button to copy the detailed information to the clipboard.
+**「展開」**ボタンをクリックすると、項目の詳細情報が表示されます。 **「コピー」**ボタンをクリックすると、詳細情報がクリップボードにコピーされます。
 
-### Execution plans
+### 実行計画 {#execution-plans}
 
-On TiDB Dashboard, you can view execution plans in two ways: Graph and text. Visual execution plans allow you to learn each operator of a statement and detailed information more intuitively. See [Understand the Query Execution Plan](/explain-overview.md) to learn how to read a execution plan.
+TiDB ダッシュボードでは、グラフとテキストの 2 つの方法で実行計画を表示できます。視覚的な実行計画により、ステートメントの各演算子と詳細情報をより直感的に学ぶことができます。実行計画の見方については、 [<a href="/explain-overview.md">クエリ実行計画を理解する</a>](/explain-overview.md)を参照してください。
 
-#### Visual execution plans
+#### 視覚的な実行計画 {#visual-execution-plans}
 
-The following figure shows a visual execution plan.
+次の図は、視覚的な実行計画を示しています。
 
 ![Visual execution plan](/media/dashboard/dashboard-visual-plan-2.png)
 
-- The graph shows the execution from left to right, and from top to bottom.
-- Upper nodes are parent operators and lower nodes are child operators.
-- The color of the title bar indicates the component where the operator is executed: yellow stands for TiDB, blue stands for TiKV, and pink stands for TiFlash.
-- The title bar shows the operator name and the text shown below is the basic information of the operator. 
+-   グラフは、左から右、上から下の順に実行を示します。
+-   上位ノードは親演算子、下位ノードは子演算子です。
+-   タイトル バーの色は、オペレーターが実行されるコンポーネントを示します。黄色は TiDB を表し、青は TiKV を表し、ピンクはTiFlashを表します。
+-   タイトルバーにはオペレーター名が表示され、その下のテキストはオペレーターの基本情報です。
 
-Click the node area, and the detailed operator information is displayed on the right sidebar.
+ノードエリアをクリックすると、右側のサイドバーにオペレータの詳細情報が表示されます。
 
 ![Visual execution plan - sidebar](/media/dashboard/dashboard-visual-plan-popup.png)
 
-### SQL execution details
+### SQL実行の詳細 {#sql-execution-details}
 
-Click the corresponding tab titles to switch information of SQL executions.
+該当するタブのタイトルをクリックすると、SQL実行の情報が切り替わります。
 
 ![Show different execution information](/media/dashboard/dashboard-slow-queries-detail2-v620.png)

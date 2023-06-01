@@ -2,84 +2,86 @@
 title: TiUP DM
 ---
 
-# TiUP DM
+# TiUP DM {#tiup-dm}
 
-Similar to [TiUP Cluster](/tiup/tiup-component-cluster.md) which is used to manage TiDB clusters, TiUP DM is used to manage DM clusters. You can use the TiUP DM component to perform daily operations and maintenance tasks of DM clusters, including deploying, starting, stopping, destroying, elastic scaling, upgrading DM clusters, and managing the configuration parameters of DM clusters.
+TiDB クラスターの管理に使用される[<a href="/tiup/tiup-component-cluster.md">TiUPクラスタ</a>](/tiup/tiup-component-cluster.md)と同様に、 TiUP DM はDM クラスターの管理に使用されます。 TiUP DMコンポーネントを使用すると、DM クラスターの展開、開始、停止、破棄、エラスティック スケーリング、DM クラスターのアップグレード、DM クラスターの構成パラメーターの管理など、DM クラスターの日常的な操作およびメンテナンス タスクを実行できます。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup dm [command] [flags]
 ```
 
-`[command]` is used to pass the name of the command. See the [Command list](#command-list) for supported commands.
+`[command]`はコマンドの名前を渡すために使用されます。サポートされているコマンドについては、 [<a href="#command-list">コマンド一覧</a>](#command-list)を参照してください。
 
-## Options
+## オプション {#options}
 
-### --ssh
+### --ssh {#ssh}
 
-- Specifies the SSH client to connect to the remote end (the machine where the TiDB service is deployed) for the command execution.
-- Data type: `STRING`
-- Support values:
+-   コマンドを実行するためにリモート エンド (TiDB サービスがデプロイされているマシン) に接続する SSH クライアントを指定します。
 
-    - `builtin`: Uses the built-in easyssh client of tiup-cluster as the SSH client.
-    - `system`: Uses the default SSH client of the current operating system.
-    - `none`: No SSH client is used. The deployment is only for the current machine.
+-   データ型: `STRING`
 
-- If this option is not specified in the command, `builtin` is used as the default value.
+-   サポート値:
 
-### --ssh-timeout
+    -   `builtin` : tiup-clusterの組み込み easyssh クライアントを SSH クライアントとして使用します。
+    -   `system` : 現在のオペレーティング システムのデフォルトの SSH クライアントを使用します。
+    -   `none` : SSH クライアントは使用されません。デプロイメントは現在のマシンのみに対して行われます。
 
-- Specifies the SSH connection timeout in seconds.
-- Data type: `UINT`
-- If this option is not specified in the command, the default timeout is `5` seconds.
+-   コマンド内でこのオプションが指定されていない場合、デフォルト値として`builtin`が使用されます。
 
-### --wait-timeout
+### --ssh-タイムアウト {#ssh-timeout}
 
-- Specifies the maximum waiting time (in seconds) for each step in the operation process. The operation process consists of many steps, such as specifying systemctl to start or stop services, and waiting for ports to be online or offline. Each step may take several seconds. If the execution time of a step exceeds the specified timeout, the step exits with an error.
-- Data type: `UINT`
-- If this option is not specified in the command, the maximum waiting time for each steps is `120` seconds.
+-   SSH 接続のタイムアウトを秒単位で指定します。
+-   データ型: `UINT`
+-   このオプションがコマンドで指定されていない場合、デフォルトのタイムアウトは`5`秒です。
 
-### -y, --yes
+### --待機タイムアウト {#wait-timeout}
 
-- Skips the secondary confirmation of all risky operations. It is not recommended to use this option unless you use a script to call TiUP.
-- Data type: `BOOLEAN`
-- This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
+-   操作プロセスの各ステップの最大待機時間を秒単位で指定します。操作プロセスは、systemctl を指定してサービスを開始または停止したり、ポートがオンラインまたはオフラインになるのを待機したりするなど、多くのステップで構成されます。各ステップには数秒かかる場合があります。ステップの実行時間が指定されたタイムアウトを超えると、ステップはエラーで終了します。
+-   データ型: `UINT`
+-   コマンドでこのオプションを指定しない場合、各ステップの最大待ち時間は`120`秒です。
 
-### -v, --version
+### -y、--はい {#y-yes}
 
-- Prints the current version of TiUP DM.
-- Data type:`BOOLEAN`
-- This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
+-   すべての危険な操作の二次確認をスキップします。スクリプトを使用してTiUP を呼び出す場合を除き、このオプションを使用することはお勧めできません。
+-   データ型: `BOOLEAN`
+-   このオプションは、値`false`を指定するとデフォルトで無効になります。このオプションを有効にするには、このオプションをコマンドに追加し、値`true`渡すか、値を渡しません。
 
-### -h, --help
+### -v、--バージョン {#v-version}
 
-- Prints help information about the specified command.
-- Data type: `BOOLEAN`
-- This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
+-   TiUP DMの現在のバージョンを出力します。
+-   データ型: `BOOLEAN`
+-   このオプションは、値`false`を指定するとデフォルトで無効になります。このオプションを有効にするには、このオプションをコマンドに追加し、値`true`渡すか、値を渡しません。
 
-## Command list
+### -h, --help {#h-help}
 
-- [import](/tiup/tiup-component-dm-import.md): Imports a DM v1.0 cluster deployed by DM-Ansible.
-- [template](/tiup/tiup-component-dm-template.md): Outputs the topology template.
-- [deploy](/tiup/tiup-component-dm-deploy.md): Deploys a cluster based on a specified topology.
-- [list](/tiup/tiup-component-dm-list.md): Queries the list of deployed clusters.
-- [display](/tiup/tiup-component-dm-display.md): Displays the status of a specified cluster.
-- [start](/tiup/tiup-component-dm-start.md): Starts a specified cluster.
-- [stop](/tiup/tiup-component-dm-stop.md): Stops a specified cluster.
-- [restart](/tiup/tiup-component-dm-restart.md): Restarts a specified cluster.
-- [scale-in](/tiup/tiup-component-dm-scale-in.md): Scales in a specified cluster.
-- [scale-out](/tiup/tiup-component-dm-scale-out.md): Scales out a specified cluster.
-- [upgrade](/tiup/tiup-component-dm-upgrade.md): Upgrades a specified cluster.
-- [prune](/tiup/tiup-component-dm-prune.md): Cleans up instances in the Tombstone status for a specified cluster.
-- [edit-config](/tiup/tiup-component-dm-edit-config.md): Modifies the configuration of a specified cluster.
-- [reload](/tiup/tiup-component-dm-reload.md): Reloads the configuration of a specified cluster.
-- [patch](/tiup/tiup-component-dm-patch.md): Replaces a specified service in a deployed cluster.
-- [destroy](/tiup/tiup-component-dm-destroy.md): Destroys a specified cluster.
-- [audit](/tiup/tiup-component-dm-audit.md): Queries the operation audit log of a specified cluster.
-- [replay](/tiup/tiup-component-dm-replay.md): Replays the specified commands
-- [enable](/tiup/tiup-component-dm-enable.md): Enables the auto-enabling of the cluster service after a machine is restarted.
-- [disable](/tiup/tiup-component-dm-disable.md): Disables the auto-enabling of the cluster service after a machine is restarted.
-- [help](/tiup/tiup-component-dm-help.md): Prints help information.
+-   指定されたコマンドに関するヘルプ情報を出力します。
+-   データ型: `BOOLEAN`
+-   このオプションは、値`false`を指定するとデフォルトで無効になります。このオプションを有効にするには、このオプションをコマンドに追加し、値`true`渡すか、値を渡しません。
 
-[<< Back to the previous page - TiUP Reference component list](/tiup/tiup-reference.md#component-list)
+## コマンド一覧 {#command-list}
+
+-   [<a href="/tiup/tiup-component-dm-import.md">輸入</a>](/tiup/tiup-component-dm-import.md) : DM-Ansible によってデプロイされた DM v1.0 クラスターをインポートします。
+-   [<a href="/tiup/tiup-component-dm-template.md">レンプレート</a>](/tiup/tiup-component-dm-template.md) : トポロジテンプレートを出力します。
+-   [<a href="/tiup/tiup-component-dm-deploy.md">配備</a>](/tiup/tiup-component-dm-deploy.md) : 指定されたトポロジに基づいてクラスターをデプロイします。
+-   [<a href="/tiup/tiup-component-dm-list.md">リスト</a>](/tiup/tiup-component-dm-list.md) : デプロイされたクラスターのリストを照会します。
+-   [<a href="/tiup/tiup-component-dm-display.md">画面</a>](/tiup/tiup-component-dm-display.md) : 指定したクラスターの状態を表示します。
+-   [<a href="/tiup/tiup-component-dm-start.md">始める</a>](/tiup/tiup-component-dm-start.md) : 指定されたクラスターを開始します。
+-   [<a href="/tiup/tiup-component-dm-stop.md">ストップ</a>](/tiup/tiup-component-dm-stop.md) : 指定されたクラスターを停止します。
+-   [<a href="/tiup/tiup-component-dm-restart.md">再起動</a>](/tiup/tiup-component-dm-restart.md) : 指定されたクラスターを再起動します。
+-   [<a href="/tiup/tiup-component-dm-scale-in.md">スケールイン</a>](/tiup/tiup-component-dm-scale-in.md) : 指定されたクラスター内でスケールします。
+-   [<a href="/tiup/tiup-component-dm-scale-out.md">規格外</a>](/tiup/tiup-component-dm-scale-out.md) : 指定されたクラスターをスケールアウトします。
+-   [<a href="/tiup/tiup-component-dm-upgrade.md">アップグレード</a>](/tiup/tiup-component-dm-upgrade.md) : 指定されたクラスターをアップグレードします。
+-   [<a href="/tiup/tiup-component-dm-prune.md">プルーン</a>](/tiup/tiup-component-dm-prune.md) : 指定されたクラスターの廃棄状態のインスタンスをクリーンアップします。
+-   [<a href="/tiup/tiup-component-dm-edit-config.md">編集構成</a>](/tiup/tiup-component-dm-edit-config.md) : 指定されたクラスターの構成を変更します。
+-   [<a href="/tiup/tiup-component-dm-reload.md">リロード</a>](/tiup/tiup-component-dm-reload.md) : 指定されたクラスターの構成を再ロードします。
+-   [<a href="/tiup/tiup-component-dm-patch.md">パッチ</a>](/tiup/tiup-component-dm-patch.md) : デプロイされたクラスター内の指定されたサービスを置き換えます。
+-   [<a href="/tiup/tiup-component-dm-destroy.md">破壊</a>](/tiup/tiup-component-dm-destroy.md) : 指定されたクラスターを破棄します。
+-   [<a href="/tiup/tiup-component-dm-audit.md">監査</a>](/tiup/tiup-component-dm-audit.md) : 指定したクラスターの操作監査ログを照会します。
+-   [<a href="/tiup/tiup-component-dm-replay.md">リプレイ</a>](/tiup/tiup-component-dm-replay.md) : 指定されたコマンドを再生します
+-   [<a href="/tiup/tiup-component-dm-enable.md">有効</a>](/tiup/tiup-component-dm-enable.md) : マシンの再起動後のクラスター サービスの自動有効化を有効にします。
+-   [<a href="/tiup/tiup-component-dm-disable.md">無効にする</a>](/tiup/tiup-component-dm-disable.md) : マシンの再起動後のクラスター サービスの自動有効化を無効にします。
+-   [<a href="/tiup/tiup-component-dm-help.md">ヘルプ</a>](/tiup/tiup-component-dm-help.md) : ヘルプ情報を出力します。
+
+[<a href="/tiup/tiup-reference.md#component-list">&lt;&lt; 前のページに戻る - TiUPリファレンスコンポーネントリスト</a>](/tiup/tiup-reference.md#component-list)

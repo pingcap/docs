@@ -3,42 +3,42 @@ title: SQL or Transaction Issues
 summary: Learn how to troubleshoot SQL or transaction issues that might occur during application development.
 ---
 
-# SQL or Transaction Issues
+# SQL またはトランザクションの問題 {#sql-or-transaction-issues}
 
-This document introduces problems that may occur during application development and related documents.
+このドキュメントでは、アプリケーション開発中に発生する可能性のある問題と関連ドキュメントを紹介します。
 
-## Troubleshoot SQL query problems
+## SQL クエリの問題のトラブルシューティング {#troubleshoot-sql-query-problems}
 
-If you want to improve SQL query performance, follow the instructions in [SQL Performance Tuning](/develop/dev-guide-optimize-sql-overview.md) to solve performance problems such as full table scans and missing indexes.
+SQL クエリのパフォーマンスを向上させたい場合は、 [<a href="/develop/dev-guide-optimize-sql-overview.md">SQL性能チューニング</a>](/develop/dev-guide-optimize-sql-overview.md)の手順に従って、テーブル全体のスキャンやインデックスの欠落などのパフォーマンスの問題を解決します。
 
 <CustomContent platform="tidb">
 
-If you still have performance issues, see the following documents:
+それでもパフォーマンスの問題が解決しない場合は、次のドキュメントを参照してください。
 
-- [Analyze Slow Queries](/analyze-slow-queries.md)
-- [Identify Expensive Queries Using Top SQL](/dashboard/top-sql.md)
+-   [<a href="/analyze-slow-queries.md">遅いクエリを分析する</a>](/analyze-slow-queries.md)
+-   [<a href="/dashboard/top-sql.md">Top SQLを使用して負荷の高いクエリを特定する</a>](/dashboard/top-sql.md)
 
-If you have questions about SQL operations, see [SQL FAQs](/faq/sql-faq.md).
+SQL 操作に関する質問がある場合は、 [<a href="/faq/sql-faq.md">SQL FAQ</a>](/faq/sql-faq.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-If you have questions about SQL operations, see [SQL FAQs](https://docs.pingcap.com/tidb/stable/sql-faq).
+SQL 操作に関する質問がある場合は、 [<a href="https://docs.pingcap.com/tidb/stable/sql-faq">SQL FAQ</a>](https://docs.pingcap.com/tidb/stable/sql-faq)を参照してください。
 
 </CustomContent>
 
-## Troubleshoot transaction issues
+## トランザクションの問題のトラブルシューティング {#troubleshoot-transaction-issues}
 
-See [Handle transaction errors](/develop/dev-guide-transaction-troubleshoot.md).
+[<a href="/develop/dev-guide-transaction-troubleshoot.md">トランザクションエラーを処理する</a>](/develop/dev-guide-transaction-troubleshoot.md)を参照してください。
 
-## See also
+## こちらも参照 {#see-also}
 
-- [Unsupported features](/mysql-compatibility.md#unsupported-features)
+-   [<a href="/mysql-compatibility.md#unsupported-features">サポートされていない機能</a>](/mysql-compatibility.md#unsupported-features)
 
 <CustomContent platform="tidb">
 
-- [Cluster Management FAQs](/faq/manage-cluster-faq.md)
-- [TiDB FAQs](/faq/tidb-faq.md)
+-   [<a href="/faq/manage-cluster-faq.md">クラスタ管理に関するよくある質問</a>](/faq/manage-cluster-faq.md)
+-   [<a href="/faq/tidb-faq.md">TiDB よくある質問</a>](/faq/tidb-faq.md)
 
 </CustomContent>

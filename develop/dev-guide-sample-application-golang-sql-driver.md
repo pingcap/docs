@@ -4,51 +4,52 @@ summary: Learn how to build a simple CRUD application with TiDB and Go-MySQL-Dri
 ---
 
 <!-- markdownlint-disable MD024 -->
+
 <!-- markdownlint-disable MD029 -->
 
-# Build a Simple CRUD App with TiDB and Go-MySQL-Driver
+# TiDB と Go-MySQL-Driver を使用してシンプルな CRUD アプリを構築する {#build-a-simple-crud-app-with-tidb-and-go-mysql-driver}
 
-This document describes how to use TiDB and [Go-MySQL-Driver](https://github.com/go-sql-driver/mysql) to build a simple CRUD application.
+このドキュメントでは、TiDB と[<a href="https://github.com/go-sql-driver/mysql">Go-MySQL-ドライバー</a>](https://github.com/go-sql-driver/mysql)を使用して単純な CRUD アプリケーションを構築する方法について説明します。
 
-> **Note:**
+> **ノート：**
 >
-> It is recommended to use Golang 1.16 or a later version.
+> Golang 1.16 以降のバージョンを使用することをお勧めします。
 
-## Step 1. Launch your TiDB cluster
+## ステップ 1. TiDB クラスターを起動する {#step-1-launch-your-tidb-cluster}
 
 <CustomContent platform="tidb">
 
-The following introduces how to start a TiDB cluster.
+TiDB クラスターの起動方法を紹介します。
 
-**Use a TiDB Cloud Serverless Tier cluster**
+**TiDB CloudServerless Tierクラスターを使用する**
 
-For detailed steps, see [Create a Serverless Tier cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster).
+詳細な手順については、 [<a href="/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster">Serverless Tierクラスターの作成</a>](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
 
-**Use a local cluster**
+**ローカルクラスターを使用する**
 
-For detailed steps, see [Deploy a local test cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md).
+詳細な手順については、 [<a href="/quick-start-with-tidb.md#deploy-a-local-test-cluster">ローカルテストクラスターをデプロイ</a>](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[<a href="/production-deployment-using-tiup.md">TiUPを使用した TiDBクラスタのデプロイ</a>](/production-deployment-using-tiup.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-See [Create a Serverless Tier cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster).
+[<a href="/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster">Serverless Tierクラスターの作成</a>](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
 
 </CustomContent>
 
-## Step 2. Get the code
+## ステップ 2. コードを取得する {#step-2-get-the-code}
 
 ```shell
 git clone https://github.com/pingcap-inc/tidb-example-golang.git
 ```
 
-Change to the `sqldriver` directory:
+`sqldriver`ディレクトリに移動します。
 
 ```shell
 cd sqldriver
 ```
 
-The structure of this directory is as follows:
+このディレクトリの構造は次のとおりです。
 
 ```
 .
@@ -62,7 +63,7 @@ The structure of this directory is as follows:
 └── sqldriver.go
 ```
 
-You can find initialization statements for the table creation in `dbinit.sql`:
+テーブル作成の初期化ステートメントは`dbinit.sql`にあります。
 
 ```sql
 USE test;
@@ -76,7 +77,7 @@ CREATE TABLE player (
 );
 ```
 
-`sqldriver.go` is the main body of the `sqldriver`. TiDB is highly compatible with the MySQL protocol, so you need to initialize a MySQL source instance `db, err := sql.Open("mysql", dsn)` to connect to TiDB. Then, you can use `dao.go` to read, edit, add, and delete data.
+`sqldriver.go`は`sqldriver`の本体です。 TiDB は MySQL プロトコルと高い互換性があるため、TiDB に接続するには MySQL ソース インスタンス`db, err := sql.Open("mysql", dsn)`を初期化する必要があります。次に、 `dao.go`を使用して、データの読み取り、編集、追加、削除を行うことができます。
 
 ```go
 package main
@@ -177,7 +178,7 @@ func openDB(driverName, dataSourceName string, runnable func(db *sql.DB)) {
 }
 ```
 
-To adapt TiDB transactions, write a toolkit [util](https://github.com/pingcap-inc/tidb-example-golang/tree/main/util) according to the following code:
+TiDB トランザクションを適応させるには、次のコードに従ってツールキット[<a href="https://github.com/pingcap-inc/tidb-example-golang/tree/main/util">ユーティリティ</a>](https://github.com/pingcap-inc/tidb-example-golang/tree/main/util)を作成します。
 
 ```go
 package util
@@ -229,7 +230,7 @@ func (tx *TiDBSqlTx) Rollback() error {
 }
 ```
 
-`dao.go` defines a set of data manipulation methods to provide the ability to write data. This is also the core part of this example.
+`dao.go`データを書き込む機能を提供する一連のデータ操作メソッドを定義します。これはこの例の核心部分でもあります。
 
 ```go
 package main
@@ -461,7 +462,7 @@ func randomPlayers(amount int) []Player {
 }
 ```
 
-`sql.go` defines SQL statements as constants:
+`sql.go` SQL ステートメントを定数として定義します。
 
 ```go
 package main
@@ -476,51 +477,51 @@ const (
 )
 ```
 
-## Step 3. Run the code
+## ステップ 3. コードを実行する {#step-3-run-the-code}
 
-The following content introduces how to run the code step by step.
+次のコンテンツでは、コードを実行する方法をステップごとに紹介します。
 
-### Step 3.1 Table initialization
+### ステップ 3.1 テーブルの初期化 {#step-3-1-table-initialization}
 
 <CustomContent platform="tidb">
 
-When using go-sql-driver/mysql, you need to initialize the database tables manually. If you are using a local cluster, and MySQL client has been installed locally, you can run it directly in the `sqldriver` directory:
+go-sql-driver/mysql を使用する場合は、データベース テーブルを手動で初期化する必要があります。ローカル クラスターを使用していて、MySQL クライアントがローカルにインストールされている場合は、 `sqldriver`ディレクトリで直接実行できます。
 
 ```shell
 make mysql
 ```
 
-Or you can execute the following command:
+または、次のコマンドを実行することもできます。
 
 ```shell
 mysql --host 127.0.0.1 --port 4000 -u root<sql/dbinit.sql
 ```
 
-If you are using a non-local cluster or MySQL client has not been installed, connect to your cluster and run the statement in the `sql/dbinit.sql` file.
+非ローカル クラスターを使用している場合、または MySQL クライアントがインストールされていない場合は、クラスターに接続し、 `sql/dbinit.sql`ファイル内のステートメントを実行します。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-When using go-sql-driver/mysql, you need to connect to your cluster and run the statement in the `sql/dbinit.sql` file to initialize the database tables manually.
+go-sql-driver/mysql を使用する場合は、クラスターに接続し、 `sql/dbinit.sql`ファイル内のステートメントを実行してデータベース テーブルを手動で初期化する必要があります。
 
 </CustomContent>
 
-### Step 3.2 Modify parameters for TiDB Cloud
+### ステップ 3.2 TiDB Cloudのパラメータを変更する {#step-3-2-modify-parameters-for-tidb-cloud}
 
-If you are using a TiDB Cloud Serverless Tier cluster, modify the value of the `dsn` in `sqldriver.go`:
+TiDB CloudServerless Tierクラスターを使用している場合は、 `dsn` in `sqldriver.go`の値を変更します。
 
 ```go
 dsn := "root:@tcp(127.0.0.1:4000)/test?charset=utf8mb4"
 ```
 
-Suppose that the password you set is `123456`, and the connection parameters you get from the cluster details page are the following:
+設定したパスワードが`123456`で、クラスターの詳細ページから取得した接続パラメーターが次であるとします。
 
-- Endpoint: `xxx.tidbcloud.com`
-- Port: `4000`
-- User: `2aEp24QWEDLqRFs.root`
+-   エンドポイント: `xxx.tidbcloud.com`
+-   ポート: `4000`
+-   ユーザー: `2aEp24QWEDLqRFs.root`
 
-In this case, you can modify the `mysql.RegisterTLSConfig` and `dsn` as follows:
+この場合、 `mysql.RegisterTLSConfig`と`dsn`次のように変更できます。
 
 ```go
 mysql.RegisterTLSConfig("register-tidb-tls", &tls.Config {
@@ -531,9 +532,9 @@ mysql.RegisterTLSConfig("register-tidb-tls", &tls.Config {
 dsn := "2aEp24QWEDLqRFs.root:123456@tcp(xxx.tidbcloud.com:4000)/test?charset=utf8mb4&tls=register-tidb-tls"
 ```
 
-### Step 3.3 Run
+### ステップ 3.3 実行 {#step-3-3-run}
 
-To run the code, you can run `make mysql`, `make build` and `make run` respectively:
+コードを実行するには、 `make mysql` 、 `make build` 、 `make run`をそれぞれ実行します。
 
 ```shell
 make mysql # this command executes `mysql --host 127.0.0.1 --port 4000 -u root<sql/dbinit.sql`
@@ -541,7 +542,7 @@ make build # this command executes `go build -o bin/sql-driver-example`
 make run # this command executes `./bin/sql-driver-example`
 ```
 
-Or you can use the native commands:
+または、ネイティブ コマンドを使用することもできます。
 
 ```shell
 mysql --host 127.0.0.1 --port 4000 -u root<sql/dbinit.sql
@@ -549,8 +550,8 @@ go build -o bin/sql-driver-example
 ./bin/sql-driver-example
 ```
 
-Or run the `make all` command directly, which is a combination of `make mysql`, `make build` and `make run`.
+または、 `make mysql` 、 `make build` 、 `make run`を組み合わせた`make all`コマンドを直接実行します。
 
-## Step 4. Expected output
+## ステップ 4. 期待される出力 {#step-4-expected-output}
 
-[go-sql-driver/mysql Expected Output](https://github.com/pingcap-inc/tidb-example-golang/blob/main/Expected-Output.md#sqldriver)
+[<a href="https://github.com/pingcap-inc/tidb-example-golang/blob/main/Expected-Output.md#sqldriver">go-sql-driver/mysql の予想される出力</a>](https://github.com/pingcap-inc/tidb-example-golang/blob/main/Expected-Output.md#sqldriver)

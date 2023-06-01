@@ -3,17 +3,17 @@ title: SHOW PRIVILEGES | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW PRIVILEGES for the TiDB database.
 ---
 
-# SHOW PRIVILEGES
+# 特権を表示 {#show-privileges}
 
-This statement shows a list of assignable privileges in TiDB. It is a static list, and does not reflect the privileges of the current user.
+このステートメントは、TiDB で割り当て可能な権限のリストを示します。これは静的なリストであり、現在のユーザーの権限は反映されません。
 
-## Synopsis
+## あらすじ {#synopsis}
 
-**ShowStmt:**
+**表示手順:**
 
 ![ShowStmt](/media/sqlgram/ShowStmt.png)
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> show privileges;
@@ -73,11 +73,11 @@ mysql> show privileges;
 49 rows in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
+このステートメントは、MySQL と完全な互換性があると理解されています。 GitHub では互換性の違いは[<a href="https://github.com/pingcap/tidb/issues/new/choose">問題を通じて報告されました</a>](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
 
-## See also
+## こちらも参照 {#see-also}
 
-* [SHOW GRANTS](/sql-statements/sql-statement-show-grants.md)
-* [`GRANT <privileges>`](/sql-statements/sql-statement-grant-privileges.md)
+-   [<a href="/sql-statements/sql-statement-show-grants.md">助成金を表示する</a>](/sql-statements/sql-statement-show-grants.md)
+-   [<a href="/sql-statements/sql-statement-grant-privileges.md">`GRANT &#x3C;privileges>`</a>](/sql-statements/sql-statement-grant-privileges.md)

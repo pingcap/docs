@@ -3,11 +3,11 @@ title: DROP STATS
 summary: An overview of the usage of DROP STATS for the TiDB database.
 ---
 
-# DROP STATS
+# 統計を削除 {#drop-stats}
 
-The `DROP STATS` statement is used to delete the statistics of the selected table from the selected database.
+`DROP STATS`ステートメントは、選択したデータベースから選択したテーブルの統計を削除するために使用されます。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 DropStatsStmt ::=
@@ -20,9 +20,9 @@ TableName ::=
     Identifier ('.' Identifier)?
 ```
 
-## Examples
+## 例 {#examples}
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE t(a INT);
@@ -32,7 +32,7 @@ CREATE TABLE t(a INT);
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SHOW STATS_META WHERE db_name='test' and table_name='t';
@@ -47,7 +47,7 @@ SHOW STATS_META WHERE db_name='test' and table_name='t';
 1 row in set (0.00 sec)
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 DROP STATS t;
@@ -57,7 +57,7 @@ DROP STATS t;
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SHOW STATS_META WHERE db_name='test' and table_name='t';
@@ -67,10 +67,10 @@ SHOW STATS_META WHERE db_name='test' and table_name='t';
 Empty set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL 構文に対する TiDB 拡張機能です。
 
-## See also
+## こちらも参照 {#see-also}
 
-* [Introduction to Statistics](/statistics.md)
+-   [<a href="/statistics.md">統計入門</a>](/statistics.md)

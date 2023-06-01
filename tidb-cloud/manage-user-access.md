@@ -3,226 +3,226 @@ title: Identity Access Management
 summary: Learn how to manage identity access in TiDB Cloud.
 ---
 
-# Identity Access Management
+# ID アクセス管理 {#identity-access-management}
 
-This document describes how to manage access to organizations, projects, roles, and user profiles in TiDB Cloud.
+このドキュメントでは、 TiDB Cloudで組織、プロジェクト、ロール、およびユーザー プロファイルへのアクセスを管理する方法について説明します。
 
-Before accessing TiDB cloud, [create a TiDB cloud account](https://tidbcloud.com/free-trial). You can either sign up with email and password so that you can [manage your password using TiDB Cloud](/tidb-cloud/tidb-cloud-password-authentication.md), or choose your Google Workspace or GitHub account for single sign-on (SSO) to TiDB Cloud.
+TiDB クラウドにアクセスする前に、 [<a href="https://tidbcloud.com/free-trial">TiDB クラウド アカウントを作成する</a>](https://tidbcloud.com/free-trial) . [<a href="/tidb-cloud/tidb-cloud-password-authentication.md">TiDB Cloudを使用してパスワードを管理する</a>](/tidb-cloud/tidb-cloud-password-authentication.md)できるように電子メールとパスワードでサインアップするか、 TiDB Cloudへのシングル サインオン (SSO) 用に Google Workspace または GitHub アカウントを選択することができます。
 
-## Organizations and projects
+## 組織とプロジェクト {#organizations-and-projects}
 
-TiDB Cloud provides a hierarchical structure based on organizations and projects to facilitate the management of your TiDB cluster. An organization in TiDB Cloud can contain multiple projects and organization members, and a project can contain multiple clusters and project members.
+TiDB Cloud は、組織とプロジェクトに基づいた階層構造を提供し、TiDB クラスターの管理を容易にします。 TiDB Cloudの組織には複数のプロジェクトと組織メンバーを含めることができ、プロジェクトには複数のクラスターとプロジェクト メンバーを含めることができます。
 
-To access a cluster in a project under an organization, a user must be a member of both the organization and the project. Organization owners can invite users to join the project to create and manage clusters in the project.
+組織内のプロジェクト内のクラスターにアクセスするには、ユーザーは組織とプロジェクトの両方のメンバーである必要があります。組織の所有者は、プロジェクトにクラスターを作成および管理するためにユーザーをプロジェクトに招待できます。
 
-Under this structure:
+この構造では次のようになります。
 
-- Billing occurs at the organization level, while retaining visibility of usage in each project and cluster.
+-   請求は組織レベルで行われ、各プロジェクトおよびクラスターでの使用量の可視性は維持されます。
 
-- You can view all members in your organization.
+-   組織内のすべてのメンバーを表示できます。
 
-- You can also view all members in your project.
+-   プロジェクト内のすべてのメンバーを表示することもできます。
 
-## Manage organization access
+## 組織のアクセスを管理する {#manage-organization-access}
 
-### View organizations
+### 組織をビュー {#view-organizations}
 
-To check which organizations you belong to, take the following steps:
+自分が所属している組織を確認するには、次の手順を実行します。
 
-1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
-2. Click **Organization Settings**. You can view your organization on the page that is displayed.
+1.  クリック<mdsvgicon name="icon-top-organization">TiDB Cloudコンソールの右上隅に**ある組織**。</mdsvgicon>
+2.  **[組織の設定]**をクリックします。表示されたページで組織を確認できます。
 
-### Switch between organizations
+### 組織間の切り替え {#switch-between-organizations}
 
-If you are a member of multiple organizations, you can switch your account between organizations.
+複数の組織のメンバーである場合は、組織間でアカウントを切り替えることができます。
 
-To switch between organizations, take the following steps:
+組織間を切り替えるには、次の手順を実行します。
 
-1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
-2. Select **Switch Organization** in the drop-down menu, and click the organization you want to switch to.
+1.  クリック<mdsvgicon name="icon-top-organization">TiDB Cloudコンソールの右上隅に**ある組織**。</mdsvgicon>
+2.  ドロップダウン メニューで**[組織の切り替え]**を選択し、切り替え先の組織をクリックします。
 
-### Set the time zone for your organization
+### 組織のタイムゾーンを設定する {#set-the-time-zone-for-your-organization}
 
-If you are the organization owner, you can modify the system display time according to your time zone.
+組織の所有者の場合は、タイムゾーンに応じてシステムの表示時間を変更できます。
 
-To change the local timezone setting, take the following steps:
+ローカル タイムゾーン設定を変更するには、次の手順を実行します。
 
-1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
+1.  クリック<mdsvgicon name="icon-top-organization">TiDB Cloudコンソールの右上隅にある**組織**。</mdsvgicon>
 
-2. Click **Organization Settings**. The organization settings page is displayed.
+2.  **[組織の設定]**をクリックします。組織設定ページが表示されます。
 
-3. Click the **Time Zone** tab.
+3.  **「タイムゾーン」**タブをクリックします。
 
-4. Click the drop-down list and select your time zone.
+4.  ドロップダウン リストをクリックしてタイムゾーンを選択します。
 
-5. Click **Confirm**.
+5.  **「確認」**をクリックします。
 
-### Invite an organization member
+### 組織メンバーを招待する {#invite-an-organization-member}
 
-If you are the owner of an organization, you can invite organization members.
+組織の所有者は、組織のメンバーを招待できます。
 
-To invite a member to an organization, take the following steps:
+メンバーを組織に招待するには、次の手順を実行します。
 
-1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
+1.  クリック<mdsvgicon name="icon-top-organization">TiDB Cloudコンソールの右上隅に**ある組織**。</mdsvgicon>
 
-2. Click **Organization Settings**. The organization settings page is displayed.
+2.  **[組織の設定]**をクリックします。組織設定ページが表示されます。
 
-3. Click the  **User Management** tab, and then select **By All Users**.
+3.  **[ユーザー管理]**タブをクリックし、 **[すべてのユーザー] を**選択します。
 
-4. Click **Invite**.
+4.  **「招待」**をクリックします。
 
-5. Enter the email address of the user to be invited, select a role for the user, and then choose a project for the user.
+5.  招待するユーザーの電子メール アドレスを入力し、ユーザーの役割を選択してから、ユーザーのプロジェクトを選択します。
 
-    > **Tip:**
+    > **ヒント：**
     >
-    > If you want to invite multiple members at one time, you can enter multiple email addresses.
+    > 一度に複数のメンバーを招待する場合は、複数の電子メール アドレスを入力できます。
 
-6. Click **Confirm**. Then the new user is successfully added into the user list. At the same time, an email is sent to the invited email address with a verification link.
+6.  **「確認」**をクリックします。その後、新しいユーザーがユーザー リストに正常に追加されます。同時に、招待された電子メール アドレスに確認リンクが記載された電子メールが送信されます。
 
-7. After receiving this email, the user needs to click the link in the email to verify the identity, and a new page shows.
+7.  この電子メールを受信した後、ユーザーは電子メール内のリンクをクリックして本人確認を行う必要があり、新しいページが表示されます。
 
-8. If the invited email address has not been signed up for a TiDB Cloud account, the user is directed to the sign-up page to create an account. If the email address has been signed up for a TiDB Cloud account, the user is directed to the sign-in page, and after sign-in, the account joins the organization automatically.
+8.  招待された電子メール アドレスがTiDB Cloudアカウントにサインアップしていない場合、ユーザーはアカウントを作成するためのサインアップ ページに移動します。電子メール アドレスがTiDB Cloudアカウントにサインアップされている場合、ユーザーはサインイン ページに誘導され、サインイン後、アカウントは自動的に組織に参加します。
 
-> **Note:**
+> **ノート：**
 >
-> The verification link in the email expires in 24 hours. If the user you want to invite does not receive the email, click **Resend**.
+> 電子メール内の確認リンクの有効期限は 24 時間です。招待したいユーザーが電子メールを受信しない場合は、 **[再送信]**をクリックします。
 
-### Remove an organization member
+### 組織メンバーを削除する {#remove-an-organization-member}
 
-If you are the owner of an organization, you can remove organization members.
+組織の所有者である場合は、組織のメンバーを削除できます。
 
-To remove a member from an organization, take the following steps:
+組織からメンバーを削除するには、次の手順を実行します。
 
-> **Note:**
+> **ノート：**
 >
-> If a member is removed from an organization, the member is removed from the belonged projects either.
+> 組織からメンバーが削除されると、所属するプロジェクトからもメンバーが削除されます。
 
-1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
+1.  クリック<mdsvgicon name="icon-top-organization">TiDB Cloudコンソールの右上隅に**ある組織**。</mdsvgicon>
 
-2. Click **Organization Settings**. The organization settings page is displayed.
+2.  **[組織の設定]**をクリックします。組織設定ページが表示されます。
 
-3. Click the **User Management** tab, and then select **By All Users**.
+3.  **[ユーザー管理]**タブをクリックし、 **[すべてのユーザー] を**選択します。
 
-4. Click **Delete** in the user row that you want to delete.
+4.  削除するユーザー行の**「削除」**をクリックします。
 
-## Manage project access
+## プロジェクトへのアクセスを管理する {#manage-project-access}
 
-### View projects
+### プロジェクトをビュー {#view-projects}
 
-To check which project you belong to, take the following steps:
+自分がどのプロジェクトに属しているかを確認するには、次の手順を実行します。
 
-1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
+1.  クリック<mdsvgicon name="icon-top-organization">TiDB Cloudコンソールの右上隅に**ある組織**。</mdsvgicon>
 
-2. Click **Organization Settings**. The **Projects** tab is displayed by default.
+2.  **[組織の設定]**をクリックします。デフォルトでは、 **「プロジェクト」**タブが表示されます。
 
-### Create a project
+### プロジェクトを作成する {#create-a-project}
 
-> **Note:**
+> **ノート：**
 >
-> For free trial users, you cannot create a new project.
+> 無料トライアルユーザーの場合、新しいプロジェクトを作成することはできません。
 
-To create a new project, take the following steps:
+新しいプロジェクトを作成するには、次の手順を実行します。
 
-1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
+1.  クリック<mdsvgicon name="icon-top-organization">TiDB Cloudコンソールの右上隅に**ある組織**。</mdsvgicon>
 
-2. Click **Organization Settings**. The **Projects** tab is displayed by default.
+2.  **[組織の設定]**をクリックします。デフォルトでは、 **「プロジェクト」**タブが表示されます。
 
-3. Click **Create New Project**.
+3.  **「新規プロジェクトの作成」**をクリックします。
 
-4. Enter your project name.
+4.  プロジェクト名を入力します。
 
-5. Click **Confirm**.
+5.  **「確認」**をクリックします。
 
-### Rename a project
+### プロジェクトの名前を変更する {#rename-a-project}
 
-To rename a project, take the following steps:
+プロジェクトの名前を変更するには、次の手順を実行します。
 
-1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
+1.  クリック<mdsvgicon name="icon-top-organization">TiDB Cloudコンソールの右上隅に**ある組織**。</mdsvgicon>
 
-2. Click **Organization Settings**. The **Projects** tab is displayed by default.
+2.  **[組織の設定]**をクリックします。デフォルトでは、 **「プロジェクト」**タブが表示されます。
 
-3. In the row of your project to be renamed, click **Rename**.
+3.  名前を変更するプロジェクトの行で、 **「名前の変更」**をクリックします。
 
-4. Enter a new project name.
+4.  新しいプロジェクト名を入力します。
 
-5. Click **Confirm**.
+5.  **「確認」**をクリックします。
 
-### Invite a project member
+### プロジェクトメンバーを招待する {#invite-a-project-member}
 
-If you are the owner of an organization, you can invite project members.
+組織の所有者は、プロジェクト メンバーを招待できます。
 
-To invite a member to a project, take the following steps:
+メンバーをプロジェクトに招待するには、次の手順を実行します。
 
-1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
+1.  クリック<mdsvgicon name="icon-top-organization">TiDB Cloudコンソールの右上隅にある**組織**。</mdsvgicon>
 
-2. Click **Organization Settings**. The organization settings page is displayed.
+2.  **[組織の設定]**をクリックします。組織設定ページが表示されます。
 
-3. Click the **User Management** tab, and then select **By Project**.
+3.  **[ユーザー管理]**タブをクリックし、 **[プロジェクト別]**を選択します。
 
-4. Click **Invite**.
+4.  **「招待」**をクリックします。
 
-5. Enter the email address of the user to be invited, select a role for the user, and then choose a project for the user.
+5.  招待するユーザーの電子メール アドレスを入力し、ユーザーの役割を選択してから、ユーザーのプロジェクトを選択します。
 
-    > **Tip:**
+    > **ヒント：**
     >
-    > If you want to invite multiple members at one time, you can enter multiple email addresses.
+    > 一度に複数のメンバーを招待する場合は、複数の電子メール アドレスを入力できます。
 
-6. Click **Confirm**. Then the new user is successfully added into the user list. At the same time, an email is sent to the invited email address with a verification link.
+6.  **「確認」**をクリックします。その後、新しいユーザーがユーザー リストに正常に追加されます。同時に、招待された電子メール アドレスに確認リンクが記載された電子メールが送信されます。
 
-7. After receiving this email, the user needs to click the link in the email to verify the identity, and a new page shows.
+7.  この電子メールを受信した後、ユーザーは電子メール内のリンクをクリックして本人確認を行う必要があり、新しいページが表示されます。
 
-8. On the new page, the user needs to view and agree with our license, and then click **Submit** to create the account in TiDB Cloud. After that, the user is redirected to the login page.
+8.  新しいページで、ユーザーはライセンスを表示して同意し、 **[送信]**をクリックしてTiDB Cloudにアカウントを作成する必要があります。その後、ユーザーはログイン ページにリダイレクトされます。
 
-> **Note:**
+> **ノート：**
 >
-> The verification link in the email will expire in 24 hours. If your user doesn't receive the email, click **Resend**.
+> 電子メール内の確認リンクは 24 時間で期限切れになります。ユーザーが電子メールを受信しない場合は、 **[再送信]**をクリックします。
 
-### Remove a project member
+### プロジェクトメンバーを削除する {#remove-a-project-member}
 
-If you are the owner of an organization, you can remove project members.
+組織の所有者である場合は、プロジェクト メンバーを削除できます。
 
-To remove a member from a project, take the following steps:
+プロジェクトからメンバーを削除するには、次の手順を実行します。
 
-1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
+1.  クリック<mdsvgicon name="icon-top-organization">TiDB Cloudコンソールの右上隅にある**組織**。</mdsvgicon>
 
-2. Click **Organization Settings**. The organization settings page is displayed.
+2.  **[組織の設定]**をクリックします。組織設定ページが表示されます。
 
-3. Click the **User Management** tab, and then select the **By Project**.
+3.  **「ユーザー管理」**タブをクリックし、 **「プロジェクト別」**を選択します。
 
-4. Click **Delete** in the user row that you want to delete.
+4.  削除するユーザー行の**「削除」**をクリックします。
 
-## Manage role access
+## 役割のアクセスを管理する {#manage-role-access}
 
-If you are the owner of an organization, you can take the following steps to configure roles for your organization members:
+組織の所有者である場合は、次の手順を実行して、組織メンバーの役割を構成できます。
 
-1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
+1.  クリック<mdsvgicon name="icon-top-organization">TiDB Cloudコンソールの右上隅にある**組織**。</mdsvgicon>
 
-2. Click **Organization Settings**. The organization settings page is displayed.
+2.  **[組織の設定]**をクリックします。組織設定ページが表示されます。
 
-3. Click the **User Management** tab, and then select **By All Users**.
+3.  **[ユーザー管理]**タブをクリックし、 **[すべてのユーザー] を**選択します。
 
-4. Click the role of the target member, and then modify the role.
+4.  対象のメンバーのロールをクリックし、ロールを変更します。
 
-There are four roles in an organization. The permissions of each role are as follows:
+組織には4つの役割があります。各ロールの権限は次のとおりです。
 
-|  Permission                                                                           | Owner | Member | Billing Admin | Audit Admin |
-|---------------------------------------------------------------------------------------|-------|--------|---------------|-------------|
-| Invite members to or remove members from an organization     | ✅     | ❌      | ❌             | ❌           |
-| Set roles for an organization member                                                  | ✅     | ❌      | ❌             | ❌           |
-| Create and rename projects                                                            | ✅     | ❌      | ❌             | ❌           |
-| Invite members to or remove members from a project          | ✅     | ❌      | ❌             | ❌           |
-| Edit time zone                                                                        | ✅     | ❌      | ❌             | ❌           |
-| View bills and edit payment information                                               | ✅     | ❌      | ✅             | ❌           |
-| View and configure audit logging                                                      | ❌     | ❌      | ❌             | ✅           |
-| Obtain project instance management permissions                                             | ✅     | ✅      | ✅             | ✅           |
-| Manage an API key                                                                     | ✅     | ❌      | ❌             | ❌           |
+| 許可                                     | オーナー | メンバー | 請求管理者 | 監査管理者 |
+| -------------------------------------- | ---- | ---- | ----- | ----- |
+| メンバーを組織に招待したり、組織からメンバーを削除したりする         | ✅    | ❌    | ❌     | ❌     |
+| 組織メンバーの役割を設定する                         | ✅    | ❌    | ❌     | ❌     |
+| プロジェクトの作成と名前変更                         | ✅    | ❌    | ❌     | ❌     |
+| プロジェクトにメンバーを招待したり、プロジェクトからメンバーを削除したりする | ✅    | ❌    | ❌     | ❌     |
+| タイムゾーンを編集する                            | ✅    | ❌    | ❌     | ❌     |
+| 請求書のビューと支払い情報の編集                       | ✅    | ❌    | ✅     | ❌     |
+| 監査ログのビューと構成                            | ❌    | ❌    | ❌     | ✅     |
+| プロジェクトインスタンス管理権限を取得する                  | ✅    | ✅    | ✅     | ✅     |
+| APIキーを管理する                             | ✅    | ❌    | ❌     | ❌     |
 
-## Manage user profiles
+## ユーザープロファイルを管理する {#manage-user-profiles}
 
-In TiDB Cloud, you can easily manage your profile, including your first name, last name, and phone number.
+TiDB Cloudでは、姓、名、電話番号などのプロフィールを簡単に管理できます。
 
-1. Click <MDSvgIcon name="icon-top-account-settings" /> **Account** in the upper-right corner of the TiDB Cloud console.
+1.  クリック<mdsvgicon name="icon-top-account-settings">TiDB Cloudコンソールの右上隅に**あるアカウント**。</mdsvgicon>
 
-2. Click **Account Settings**. The **Profile** tab is displayed by default.
+2.  **[アカウント設定]**をクリックします。 **[プロファイル]**タブはデフォルトで表示されます。
 
-3. Update the profile information, and then click **Save**.
+3.  プロファイル情報を更新し、 **「保存」**をクリックします。

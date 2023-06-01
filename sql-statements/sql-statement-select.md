@@ -3,33 +3,33 @@ title: SELECT | TiDB SQL Statement Reference
 summary: An overview of the usage of SELECT for the TiDB database.
 ---
 
-# SELECT
+# 選択する {#select}
 
-The `SELECT` statement is used to read data from TiDB.
+`SELECT`ステートメントは、TiDB からデータを読み取るために使用されます。
 
-## Synopsis
+## あらすじ {#synopsis}
 
-**SelectStmt:**
+**選択Stmt:**
 
 ![SelectStmt](/media/sqlgram/SelectStmt.png)
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **ノート：**
 >
-> The `SELECT ... INTO OUTFILE` statement is not supported by TiDB Cloud.
+> `SELECT ... INTO OUTFILE`ステートメントはTiDB Cloudではサポートされていません。
 
 </CustomContent>
 
-**FromDual:**
+**デュアルから:**
 
 ![FromDual](/media/sqlgram/FromDual.png)
 
-**SelectStmtOpts:**
+**StmtOpts を選択:**
 
 ![SelectStmtOpts](/media/sqlgram/SelectStmtOpts.png)
 
-**SelectStmtFieldList:**
+**選択StmtFieldList:**
 
 ![SelectStmtFieldList](/media/sqlgram/SelectStmtFieldList.png)
 
@@ -43,27 +43,27 @@ AsOfClause ::=
     'AS' 'OF' 'TIMESTAMP' Expression
 ```
 
-**WhereClauseOptional:**
+**WhereClauseオプション:**
 
 ![WhereClauseOptional](/media/sqlgram/WhereClauseOptional.png)
 
-**SelectStmtGroup:**
+**選択StmtGroup:**
 
 ![SelectStmtGroup](/media/sqlgram/SelectStmtGroup.png)
 
-**HavingClause:**
+**所有条項:**
 
 ![HavingClause](/media/sqlgram/HavingClause.png)
 
-**OrderByOptional:**
+**OrderByオプション:**
 
 ![OrderByOptional](/media/sqlgram/OrderByOptional.png)
 
-**SelectStmtLimit:**
+**選択StmtLimit:**
 
 ![SelectStmtLimit](/media/sqlgram/SelectStmtLimit.png)
 
-**FirstOrNext:**
+**最初または次:**
 
 ![FirstOrNext](/media/sqlgram/FirstOrNext.png)
 
@@ -71,11 +71,11 @@ AsOfClause ::=
 
 ![FetchFirstOpt](/media/sqlgram/FetchFirstOpt.png)
 
-**RowOrRows:**
+**行または行:**
 
 ![RowOrRows](/media/sqlgram/RowOrRows.png)
 
-**SelectLockOpt:**
+**ロックオプションを選択:**
 
 ```ebnf+diagram
 SelectLockOpt ::= 
@@ -86,40 +86,40 @@ TableList ::=
     TableName ( ',' TableName )*
 ```
 
-**WindowClauseOptional**
+**WindowClauseオプション**
 
 ![WindowClauseOptional](/media/sqlgram/WindowClauseOptional.png)
 
-**TableSampleOpt**
+**テーブルサンプルオプション**
 
 ```ebnf+diagram
 TableSampleOpt ::=
     'TABLESAMPLE' 'REGIONS()'
 ```
 
-## Description of the syntax elements
+## 構文要素の説明 {#description-of-the-syntax-elements}
 
-|Syntax Element|Description|
-|:--------------------- | :-------------------------------------------------- |
-|`TableOptimizerHints`| This is the hint to control the behavior of TiDB's optimizer. For more information, refer to [Optimizer Hints](/optimizer-hints.md). |
-|`ALL`, `DISTINCT`, `DISTINCTROW` | The `ALL`, `DISTINCT`/`DISTINCTROW` modifiers specify whether duplicate rows should be returned. ALL (the default) specifies that all matching rows should be returned.|
-|`HIGH_PRIORITY` | `HIGH_PRIORITY` gives the current statement higher priority than other statements. |
-|`SQL_CALC_FOUND_ROWS`| TiDB does not support this feature, and will return an error unless [`tidb_enable_noop_functions=1`](/system-variables.md#tidb_enable_noop_functions-new-in-v40) is set. |
-|`SQL_CACHE`, `SQL_NO_CACHE` | `SQL_CACHE` and `SQL_NO_CACHE` are used to control whether to cache the request results to the `BlockCache` of TiKV (RocksDB). For a one-time query on a large amount of data, such as the `count(*)` query, it is recommended to fill in `SQL_NO_CACHE` to avoid flushing the hot user data in `BlockCache`. |
-|`STRAIGHT_JOIN`| `STRAIGHT_JOIN` forces the optimizer to do a union query in the order of the tables used in the `FROM` clause. When the optimizer chooses a join order that is not good, you can use this syntax to speed up the execution of the query. |
-|`select_expr` | Each `select_expr` indicates a column to retrieve. including the column names and expressions. `\*` represents all the columns.|
-|`FROM table_references` | The `FROM table_references` clause indicates the table (such as `select * from t;`), or tables (such as `select * from t1 join t2;`) or even 0 tables (such as `select 1+1 from dual;` which is equivalent to `select 1+1;`) from which to retrieve rows.|
-|`WHERE where_condition` | The `WHERE` clause, if given, indicates the condition or conditions that rows must satisfy to be selected. The result contains only the data that meets the condition(s).|
-|`GROUP BY` | The `GROUP BY` statement is used to group the result-set.|
-|`HAVING where_condition` | The `HAVING` clause and the `WHERE` clause are both used to filter the results. The `HAVING` clause filters the results of `GROUP BY`, while the `WHERE` clause filter the results before aggregation. |
-|`ORDER BY` | The `ORDER BY` clause is used to sort the data in ascending or descending order, based on columns, expressions or items in the `select_expr` list.|
-|`LIMIT` | The `LIMIT` clause can be used to constrain the number of rows. `LIMIT` takes one or two numeric arguments. With one argument, the argument specifies the maximum number of rows to return, the first row to return is the first row of the table by default; with two arguments, the first argument specifies the offset of the first row to return, and the second specifies the maximum number of rows to return. TiDB also supports the `FETCH FIRST/NEXT n ROW/ROWS ONLY` syntax, which has the same effect as `LIMIT n`. You can omit `n` in this syntax and its effect is the same as `LIMIT 1`. |
-|`Window window_definition`| This is the syntax for window function, which is usually used to do some analytical computation. For more information, refer to [Window Function](/functions-and-operators/window-functions.md). |
-| `FOR UPDATE`  | The `SELECT FOR UPDATE` clause locks all the data in the result sets to detect concurrent updates from other transactions. Data that match the query conditions but do not exist in the result sets are not read-locked, such as the row data written by other transactions after the current transaction is started. TiDB uses the [Optimistic Transaction Model](/optimistic-transaction.md). The transaction conflicts are not detected in the statement execution phase. Therefore, the current transaction does not block other transactions from executing `UPDATE`, `DELETE` or `SELECT FOR UPDATE` like other databases such as PostgreSQL. In the committing phase, the rows read by `SELECT FOR UPDATE` are committed in two phases, which means they can also join the conflict detection. If write conflicts occur, the commit fails for all transactions that include the `SELECT FOR UPDATE` clause. If no conflict is detected, the commit succeeds. And a new version is generated for the locked rows, so that write conflicts can be detected when other uncommitted transactions are being committed later. When using pessimistic transaction mode, the behavior is basically the same as other databases. Refer to [Difference with MySQL InnoDB](/pessimistic-transaction.md#difference-with-mysql-innodb) to see the details. TiDB supports the `NOWAIT` modifier for `FOR UPDATE`. See [TiDB Pessimistic Transaction Mode](/pessimistic-transaction.md) for details. |
-|`LOCK IN SHARE MODE` | To guarantee compatibility, TiDB parses these three modifiers, but will ignore them. |
-| `TABLESAMPLE` | To get a sample of rows from the table. |
+| 構文要素                           | 説明                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| :----------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `TableOptimizerHints`          | これは、TiDB のオプティマイザーの動作を制御するためのヒントです。詳細については、 [<a href="/optimizer-hints.md">オプティマイザーのヒント</a>](/optimizer-hints.md)を参照してください。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| `ALL` `DISTINCT` `DISTINCTROW` | `ALL` 、 `DISTINCT` / `DISTINCTROW`修飾子は、重複した行を返すかどうかを指定します。 ALL (デフォルト) は、一致するすべての行が返されることを指定します。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `HIGH_PRIORITY`                | `HIGH_PRIORITY`指定すると、現在のステートメントに他のステートメントよりも高い優先順位が与えられます。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `SQL_CALC_FOUND_ROWS`          | TiDB はこの機能をサポートしていないため、 [<a href="/system-variables.md#tidb_enable_noop_functions-new-in-v40">`tidb_enable_noop_functions=1`</a>](/system-variables.md#tidb_enable_noop_functions-new-in-v40)が設定されていない場合はエラーを返します。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `SQL_CACHE` `SQL_NO_CACHE`     | `SQL_CACHE`と`SQL_NO_CACHE` 、リクエスト結果を TiKV (RocksDB) の`BlockCache`にキャッシュするかどうかを制御するために使用されます。 `count(*)`クエリなどの大量のデータに対する 1 回限りのクエリの場合は、 `BlockCache`のホット ユーザー データがフラッシュされるのを避けるために`SQL_NO_CACHE`を入力することをお勧めします。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| `STRAIGHT_JOIN`                | `STRAIGHT_JOIN`を指定すると、オプティマイザは`FROM`句で使用されるテーブルの順序でユニオン クエリを実行します。オプティマイザが不適切な結合順序を選択した場合、この構文を使用してクエリの実行を高速化できます。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `select_expr`                  | 各`select_expr`は取得する列を示します。列名や式も含まれます。 `\*`すべての列を表します。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| `FROM table_references`        | `FROM table_references`句は、行を取得するテーブル ( `select * from t;`など)、またはテーブル ( `select * from t1 join t2;`など)、または 0 テーブル ( `select 1+1;`と同等の`select 1+1 from dual;`など) を示します。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| `WHERE where_condition`        | `WHERE`句を指定した場合、行が選択されるために満たさなければならない条件を示します。結果には、条件を満たすデータのみが含まれます。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| `GROUP BY`                     | `GROUP BY`ステートメントは、結果セットをグループ化するために使用されます。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `HAVING where_condition`       | `HAVING`句と`WHERE`句はどちらも結果をフィルタリングするために使用されます。 `HAVING`句は`GROUP BY`の結果をフィルタリングし、 `WHERE`句は集計の前に結果をフィルタリングします。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `ORDER BY`                     | `ORDER BY`句は、 `select_expr`リスト内の列、式、または項目に基づいてデータを昇順または降順に並べ替えるのに使用されます。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `LIMIT`                        | `LIMIT`句を使用して行数を制限できます。 `LIMIT` 1 つまたは 2 つの数値引数を取ります。引数が 1 つある場合、その引数は返す行の最大数を指定します。デフォルトでは、最初に返される行はテーブルの最初の行になります。 2 つの引数を使用する場合、最初の引数は返す最初の行のオフセットを指定し、2 番目の引数は返す行の最大数を指定します。 TiDB は`FETCH FIRST/NEXT n ROW/ROWS ONLY`構文もサポートしており、これは`LIMIT n`と同じ効果があります。この構文では`n`を省略でき、その効果は`LIMIT 1`と同じです。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| `Window window_definition`     | これはウィンドウ関数の構文であり、通常は分析計算を行うために使用されます。詳細については、 [<a href="/functions-and-operators/window-functions.md">窓関数</a>](/functions-and-operators/window-functions.md)を参照してください。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `FOR UPDATE`                   | `SELECT FOR UPDATE`句は、結果セット内のすべてのデータをロックして、他のトランザクションからの同時更新を検出します。現在のトランザクションの開始後に他のトランザクションによって書き込まれた行データなど、クエリ条件には一致するが結果セットに存在しないデータは読み取りロックされません。 TiDB は[<a href="/optimistic-transaction.md">楽観的なトランザクションモデル</a>](/optimistic-transaction.md)を使用します。トランザクションの競合はステートメントの実行フェーズでは検出されません。したがって、PostgreSQL などの他のデータベースのように、現在のトランザクションは他のトランザクションの実行をブロックしません`UPDATE` 、 `DELETE` 、または`SELECT FOR UPDATE` 。コミット フェーズでは、 `SELECT FOR UPDATE`によって読み取られた行は 2 つのフェーズでコミットされます。これは、これらの行も競合検出に参加できることを意味します。書き込み競合が発生した場合、 `SELECT FOR UPDATE`句を含むすべてのトランザクションのコミットは失敗します。競合が検出されなかった場合、コミットは成功します。また、ロックされた行に対して新しいバージョンが生成されるため、コミットされていない他のトランザクションが後でコミットされるときに書き込み競合を検出できます。悲観的トランザクション モードを使用する場合、動作は基本的に他のデータベースと同じです。詳細は[<a href="/pessimistic-transaction.md#difference-with-mysql-innodb">MySQL InnoDBとの違い</a>](/pessimistic-transaction.md#difference-with-mysql-innodb)を参照してください。 TiDB は、 `FOR UPDATE`の`NOWAIT`修飾子をサポートしています。詳細は[<a href="/pessimistic-transaction.md">TiDB ペシミスティックトランザクションモード</a>](/pessimistic-transaction.md)参照してください。 |
+| `LOCK IN SHARE MODE`           | 互換性を保証するために、TiDB はこれら 3 つの修飾子を解析しますが、無視します。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| `TABLESAMPLE`                  | テーブルから行のサンプルを取得します。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, c1 INT NOT NULL);
@@ -160,18 +160,18 @@ mysql> SELECT AVG(s_quantity), COUNT(s_quantity) FROM stock;
 1 row in set (0.52 sec)
 ```
 
-The above example uses data generated with `tiup bench tpcc prepare`. The first query shows the use of `TABLESAMPLE`.
+上の例では、 `tiup bench tpcc prepare`で生成されたデータを使用しています。最初のクエリは`TABLESAMPLE`の使用を示しています。
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-- The syntax `SELECT ... INTO @variable` is not supported.
-- The syntax `SELECT ... GROUP BY ... WITH ROLLUP` is not supported.
-- The syntax `SELECT .. GROUP BY expr` does not imply `GROUP BY expr ORDER BY expr` as it does in MySQL 5.7. TiDB instead matches the behavior of MySQL 8.0 and does not imply a default order.
-- The syntax `SELECT ... TABLESAMPLE ...` is a TiDB extension and not supported by MySQL.
+-   構文`SELECT ... INTO @variable`はサポートされていません。
+-   構文`SELECT ... GROUP BY ... WITH ROLLUP`はサポートされていません。
+-   MySQL 5.7のように、構文`SELECT .. GROUP BY expr` `GROUP BY expr ORDER BY expr`を意味しません。 TiDB は MySQL 8.0 の動作に一致し、デフォルトの順序を意味しません。
+-   構文`SELECT ... TABLESAMPLE ...`は TiDB 拡張機能であり、MySQL ではサポートされていません。
 
-## See also
+## こちらも参照 {#see-also}
 
-* [INSERT](/sql-statements/sql-statement-insert.md)
-* [DELETE](/sql-statements/sql-statement-delete.md)
-* [UPDATE](/sql-statements/sql-statement-update.md)
-* [REPLACE](/sql-statements/sql-statement-replace.md)
+-   [<a href="/sql-statements/sql-statement-insert.md">入れる</a>](/sql-statements/sql-statement-insert.md)
+-   [<a href="/sql-statements/sql-statement-delete.md">消去</a>](/sql-statements/sql-statement-delete.md)
+-   [<a href="/sql-statements/sql-statement-update.md">アップデート</a>](/sql-statements/sql-statement-update.md)
+-   [<a href="/sql-statements/sql-statement-replace.md">交換</a>](/sql-statements/sql-statement-replace.md)

@@ -2,21 +2,21 @@
 title: TiDB 1.0.1 Release Notes
 ---
 
-# TiDB 1.0.1 Release Notes
+# TiDB 1.0.1 リリースノート {#tidb-1-0-1-release-notes}
 
-On November 1, 2017, TiDB 1.0.1 is released with the following updates:
+2017 年 11 月 1 日に、次の更新を含む TiDB 1.0.1 がリリースされました。
 
-## TiDB
+## TiDB {#tidb}
 
-- Support canceling DDL Job.
-- Optimize the `IN` expression.
-- Correct the result type of the `Show` statement.
-- Support log slow query into a separate log file.
-- Fix bugs.
+-   DDL ジョブのキャンセルをサポートします。
+-   `IN`式を最適化します。
+-   `Show`ステートメントの結果の型を修正してください。
+-   遅いクエリの別のログ ファイルへのログ記録をサポートします。
+-   バグを修正します。
 
-## TiKV
+## TiKV {#tikv}
 
-- Support flow control with write bytes.
-- Reduce Raft allocation.
-- Increase coprocessor stack size to 10MB.
-- Remove the useless log from the coprocessor.
+-   書き込みバイトによるフロー制御をサポートします。
+-   Raft の割り当てを減らします。
+-   コプロセッサのスタック サイズを 10MB に増やします。
+-   不要なログをコプロセッサから削除します。

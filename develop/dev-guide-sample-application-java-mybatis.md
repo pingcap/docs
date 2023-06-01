@@ -4,55 +4,56 @@ summary: Learn how to build a simple CRUD application with TiDB and Mybatis.
 ---
 
 <!-- markdownlint-disable MD024 -->
+
 <!-- markdownlint-disable MD029 -->
 
-# Build a Simple CRUD App with TiDB and Mybatis
+# TiDB と Mybatis を使用してシンプルな CRUD アプリを構築する {#build-a-simple-crud-app-with-tidb-and-mybatis}
 
-This document describes how to use TiDB and Mybatis to build a simple CRUD application.
+このドキュメントでは、TiDB と Mybatis を使用して単純な CRUD アプリケーションを構築する方法について説明します。
 
-> **Note:**
+> **ノート：**
 >
-> It is recommended to use Java 8 or a later Java version.
+> Java 8 以降のJavaバージョンを使用することをお勧めします。
 
-## Step 1. Launch your TiDB cluster
+## ステップ 1. TiDB クラスターを起動する {#step-1-launch-your-tidb-cluster}
 
 <CustomContent platform="tidb">
 
-The following introduces how to start a TiDB cluster.
+TiDB クラスターの起動方法を紹介します。
 
-**Use a TiDB Cloud Serverless Tier cluster**
+**TiDB CloudServerless Tierクラスターを使用する**
 
-For detailed steps, see [Create a Serverless Tier cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster).
+詳細な手順については、 [<a href="/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster">Serverless Tierクラスターの作成</a>](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
 
-**Use a local cluster**
+**ローカルクラスターを使用する**
 
-For detailed steps, see [Deploy a local test cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md).
+詳細な手順については、 [<a href="/quick-start-with-tidb.md#deploy-a-local-test-cluster">ローカルテストクラスターをデプロイ</a>](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[<a href="/production-deployment-using-tiup.md">TiUPを使用した TiDBクラスタのデプロイ</a>](/production-deployment-using-tiup.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-See [Create a Serverless Tier cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster).
+[<a href="/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster">Serverless Tierクラスターの作成</a>](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
 
 </CustomContent>
 
-## Step 2. Get the code
+## ステップ 2. コードを取得する {#step-2-get-the-code}
 
 ```shell
 git clone https://github.com/pingcap-inc/tidb-example-java.git
 ```
 
-Compared with [Mybatis](https://mybatis.org/mybatis-3/index.html), the JDBC implementation might be not a best practice, because you need to write error handling logic manually and cannot reuse code easily, which makes your code slightly redundant.
+[<a href="https://mybatis.org/mybatis-3/index.html">マイバティス</a>](https://mybatis.org/mybatis-3/index.html)と比較すると、JDBC 実装はベスト プラクティスではない可能性があります。これは、エラー処理ロジックを手動で記述する必要があり、コードを簡単に再利用できないため、コードが若干冗長になるためです。
 
-Mybatis is a popular open-source Java class persistence framework. The following uses [MyBatis Generator](https://mybatis.org/generator/quickstart.html) as a Maven plugin to generate the persistence layer code.
+Mybatis は、人気のあるオープンソースのJavaクラス永続フレームワークです。以下では[<a href="https://mybatis.org/generator/quickstart.html">MyBatis ジェネレーター</a>](https://mybatis.org/generator/quickstart.html) Maven プラグインとして使用して永続化レイヤーコードを生成します。
 
-Change to the `plain-java-mybatis` directory:
+`plain-java-mybatis`ディレクトリに移動します。
 
 ```shell
 cd plain-java-mybatis
 ```
 
-The structure of this directory is as follows:
+このディレクトリの構造は次のとおりです。
 
 ```
 .
@@ -80,13 +81,13 @@ The structure of this directory is as follows:
             └── mybatis-generator.xml
 ```
 
-The automatically generated files are:
+自動生成されるファイルは次のとおりです。
 
-- `src/main/java/com/pingcap/model/Player.java`: The `Player` entity class.
-- `src/main/java/com/pingcap/model/PlayerMapper.java`: The interface of `PlayerMapper`.
-- `src/main/resources/mapper/PlayerMapper.xml`: The XML mapping of `Player`. Mybatis uses this configuration to automatically generate the implementation class of the `PlayerMapper` interface.
+-   `src/main/java/com/pingcap/model/Player.java` : `Player`エンティティ クラス。
+-   `src/main/java/com/pingcap/model/PlayerMapper.java` : `PlayerMapper`のインターフェース。
+-   `src/main/resources/mapper/PlayerMapper.xml` : `Player`の XML マッピング。 Mybatis はこの構成を使用して、 `PlayerMapper`インターフェースの実装クラスを自動的に生成します。
 
-The strategy for generating these files is written in `mybatis-generator.xml`, which is the configuration file for [Mybatis Generator](https://mybatis.org/generator/quickstart.html). There are comments in the following configuration file to describe how to use it.
+これらのファイルを生成するための戦略は、 [<a href="https://mybatis.org/generator/quickstart.html">マイバティスジェネレーター</a>](https://mybatis.org/generator/quickstart.html)の構成ファイルである`mybatis-generator.xml`に書かれています。次の設定ファイルには、その使用方法を説明するコメントがあります。
 
 ```xml
 <!DOCTYPE generatorConfiguration PUBLIC
@@ -170,7 +171,7 @@ The strategy for generating these files is written in `mybatis-generator.xml`, w
 </generatorConfiguration>
 ```
 
-`mybatis-generator.xml` is included in `pom.xml` as the configuration of `mybatis-generator-maven-plugin`.
+`mybatis-generator-maven-plugin`の構成として、 `pom.xml`には`mybatis-generator.xml`が含まれる。
 
 ```xml
 <plugin>
@@ -194,13 +195,13 @@ The strategy for generating these files is written in `mybatis-generator.xml`, w
 </plugin>
 ```
 
-Once included in the Maven plugin, you can delete the old generated files and make new ones using `mvn mybatis-generate`. Or you can use `make gen` to delete the old file and generate a new one at the same time.
+Maven プラグインに組み込むと、古い生成ファイルを削除し、 `mvn mybatis-generate`を使用して新しいファイルを作成できます。または、 `make gen`使用して古いファイルを削除し、同時に新しいファイルを生成することもできます。
 
-> **Note:**
+> **ノート：**
 >
-> The property `configuration.overwrite` in `mybatis-generator.xml` only ensures that the generated Java code files are overwritten. But the XML mapping files are still written as appended. Therefore, it is recommended to delete the old file before Mybaits Generator generating a new one.
+> プロパティ`configuration.overwrite` `mybatis-generator.xml` 、生成されたJavaコード ファイルが上書きされることを保証するだけです。ただし、XML マッピング ファイルは追加されたまま書き込まれます。したがって、Mybaits Generator が新しいファイルを生成する前に、古いファイルを削除することをお勧めします。
 
-`Player.java` is a data entity class file generated using Mybatis Generator, which is a mapping of database tables in the application. Each property of the `Player` class corresponds to a field in the `player` table.
+`Player.java`は、Mybatis Generator を使用して生成されたデータ エンティティ クラス ファイルであり、アプリケーション内のデータベース テーブルのマッピングです。 `Player`クラスの各プロパティは、 `player`テーブルのフィールドに対応します。
 
 ```java
 package com.pingcap.model;
@@ -248,7 +249,7 @@ public class Player {
 }
 ```
 
-`PlayerMapper.java` is a mapping interface file generated using Mybatis Generator. This file only defines the interface, and the implementation classes of interface are automatically generated using XML or annotations.
+`PlayerMapper.java`は、Mybatis Generator を使用して生成されたマッピング インターフェイス ファイルです。このファイルはインターフェースのみを定義しており、インターフェースの実装クラスはXMLやアノテーションを利用して自動生成されます。
 
 ```java
 package com.pingcap.model;
@@ -270,7 +271,7 @@ public interface PlayerMapper {
 }
 ```
 
-`PlayerMapper.xml` is a mapping XML file generated using Mybatis Generator. Mybatis uses this to automatically generate the implementation class of the `PlayerMapper` interface.
+`PlayerMapper.xml`は、Mybatis Generator を使用して生成されたマッピング XML ファイルです。 Mybatis はこれを使用して`PlayerMapper`インターフェースの実装クラスを自動生成します。
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -348,7 +349,7 @@ public interface PlayerMapper {
 </mapper>
 ```
 
-Since Mybatis Generator needs to generate the source code from the table definition, the table needs to be created first. To create the table, you can use `dbinit.sql`.
+Mybatis Generator はテーブル定義からソースコードを生成する必要があるため、最初にテーブルを作成する必要があります。テーブルを作成するには、 `dbinit.sql`を使用できます。
 
 ```sql
 USE test;
@@ -362,9 +363,9 @@ CREATE TABLE player (
 );
 ```
 
-Split the interface `PlayerMapperEx` additionally to extend from `PlayerMapper` and write a matching `PlayerMapperEx.xml` file. Avoid changing `PlayerMapper.java` and `PlayerMapper.xml` directly. This is to avoid overwrite by Mybatis Generator.
+インターフェイス`PlayerMapperEx`さらに分割して`PlayerMapper`を拡張し、一致する`PlayerMapperEx.xml`ファイルを書き込みます。 `PlayerMapper.java`と`PlayerMapper.xml`を直接変更することは避けてください。これは、Mybatis Generator による上書きを避けるためです。
 
-Define the added interface in `PlayerMapperEx.java`:
+`PlayerMapperEx.java`で追加したインターフェースを定義します。
 
 ```java
 package com.pingcap.model;
@@ -380,7 +381,7 @@ public interface PlayerMapperEx extends PlayerMapper {
 }
 ```
 
-Define the mapping rules in `PlayerMapperEx.xml`:
+`PlayerMapperEx.xml`でマッピング ルールを定義します。
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -419,7 +420,7 @@ Define the mapping rules in `PlayerMapperEx.xml`:
 </mapper>
 ```
 
-`PlayerDAO.java` is a class used to manage data, in which `DAO` means [Data Access Object](https://en.wikipedia.org/wiki/Data_access_object). The class defines a set of data manipulation methods for writing data. In it, Mybatis encapsulates a large number of operations such as object mapping and CRUD of basic objects, which greatly simplifies the code.
+`PlayerDAO.java`はデータを管理するために使用されるクラスで、 `DAO` [<a href="https://en.wikipedia.org/wiki/Data_access_object">データアクセスオブジェクト</a>](https://en.wikipedia.org/wiki/Data_access_object)を意味します。このクラスは、データを書き込むための一連のデータ操作メソッドを定義します。 Mybatis はその中で、オブジェクト マッピングや基本オブジェクトの CRUD などの多数の操作をカプセル化し、コードを大幅に簡素化します。
 
 ```java
 package com.pingcap.dao;
@@ -535,7 +536,7 @@ public class PlayerDAO {
 }
 ```
 
-`MybatisExample` is the main class of the `plain-java-mybatis` sample application. It defines the entry functions:
+`MybatisExample`は`plain-java-mybatis`サンプル アプリケーションのメイン クラスです。エントリ関数を定義します。
 
 ```java
 package com.pingcap;
@@ -607,29 +608,29 @@ public class MybatisExample {
 }
 ```
 
-## Step 3. Run the code
+## ステップ 3. コードを実行する {#step-3-run-the-code}
 
-The following content introduces how to run the code step by step.
+次のコンテンツでは、コードを実行する方法をステップごとに紹介します。
 
-### Step 3.1 Table initialization
+### ステップ 3.1 テーブルの初期化 {#step-3-1-table-initialization}
 
-When using Mybatis, you need to initialize the database tables manually. If you are using a local cluster, and MySQL client has been installed locally, you can run it directly in the `plain-java-mybatis` directory:
+Mybatis を使用する場合、データベース テーブルを手動で初期化する必要があります。ローカル クラスターを使用していて、MySQL クライアントがローカルにインストールされている場合は、 `plain-java-mybatis`ディレクトリで直接実行できます。
 
 ```shell
 make prepare
 ```
 
-Or you can execute the following command:
+または、次のコマンドを実行することもできます。
 
 ```shell
 mysql --host 127.0.0.1 --port 4000 -u root < src/main/resources/dbinit.sql
 ```
 
-If you are using a non-local cluster or MySQL client has not been installed, connect to your cluster and run the statement in the `src/main/resources/dbinit.sql` file.
+非ローカル クラスターを使用している場合、または MySQL クライアントがインストールされていない場合は、クラスターに接続し、 `src/main/resources/dbinit.sql`ファイル内のステートメントを実行します。
 
-### Step 3.2 Modify parameters for TiDB Cloud
+### ステップ 3.2 TiDB Cloudのパラメータを変更する {#step-3-2-modify-parameters-for-tidb-cloud}
 
-If you are using a TiDB Cloud Serverless Tier cluster, modify the `dataSource.url`, `dataSource.username`, `dataSource.password` in `mybatis-config.xml`.
+TiDB CloudServerless Tierクラスターを使用している場合は、 `mybatis-config.xml`の`dataSource.url` 、 `dataSource.username` 、 `dataSource.password`を変更します。
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -672,13 +673,13 @@ If you are using a TiDB Cloud Serverless Tier cluster, modify the `dataSource.ur
 </configuration>
 ```
 
-Suppose that the password you set is `123456`, and the connection parameters you get from the cluster details page are the following:
+設定したパスワードが`123456`で、クラスターの詳細ページから取得した接続パラメーターが次であるとします。
 
-- Endpoint: `xxx.tidbcloud.com`
-- Port: `4000`
-- User: `2aEp24QWEDLqRFs.root`
+-   エンドポイント: `xxx.tidbcloud.com`
+-   ポート: `4000`
+-   ユーザー: `2aEp24QWEDLqRFs.root`
 
-In this case, you can modify the parameters in `dataSource` node as follows:
+この場合、 `dataSource`ノードのパラメータを次のように変更できます。
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -700,9 +701,9 @@ In this case, you can modify the parameters in `dataSource` node as follows:
 </configuration>
 ```
 
-### Step 3.3 Run
+### ステップ 3.3 実行 {#step-3-3-run}
 
-To run the code, you can run `make prepare`, `make gen`, `make build` and `make run` respectively:
+コードを実行するには、 `make prepare` 、 `make gen` 、 `make build` 、 `make run`をそれぞれ実行します。
 
 ```shell
 make prepare
@@ -721,7 +722,7 @@ make build # this command executes `mvn clean package`
 make run # this command executes `java -jar target/plain-java-mybatis-0.0.1-jar-with-dependencies.jar`
 ```
 
-Or you can use the native commands:
+または、ネイティブ コマンドを使用することもできます。
 
 ```shell
 mysql --host 127.0.0.1 --port 4000 -u root < src/main/resources/dbinit.sql
@@ -734,8 +735,8 @@ mvn clean package
 java -jar target/plain-java-mybatis-0.0.1-jar-with-dependencies.jar
 ```
 
-Or run the `make` command directly, which is a combination of `make prepare`, `make gen`, `make build` and `make run`.
+または`make prepare` 、 `make gen` 、 `make build`および`make run`を組み合わせた`make`コマンドを直接実行します。
 
-## Step 4. Expected output
+## ステップ 4. 期待される出力 {#step-4-expected-output}
 
-[Mybatis Expected Output](https://github.com/pingcap-inc/tidb-example-java/blob/main/Expected-Output.md#plain-java-mybatis)
+[<a href="https://github.com/pingcap-inc/tidb-example-java/blob/main/Expected-Output.md#plain-java-mybatis">Mybatis の期待される出力</a>](https://github.com/pingcap-inc/tidb-example-java/blob/main/Expected-Output.md#plain-java-mybatis)

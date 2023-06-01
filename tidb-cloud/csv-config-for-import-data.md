@@ -3,108 +3,108 @@ title: CSV Configurations for Importing Data
 summary: Learn how to use CSV configurations for the Import Data service on TiDB Cloud.
 ---
 
-# CSV Configurations for Importing Data
+# データをインポートするための CSV 構成 {#csv-configurations-for-importing-data}
 
-This document introduces CSV configurations for the Import Data service on TiDB Cloud.
+このドキュメントでは、 TiDB Cloud上のデータのインポート サービスの CSV 構成を紹介します。
 
-The following is the CSV Configuration window when you use the Import Data service on TiDB Cloud to import CSV files. For more information, see [Import CSV Files from Amazon S3 or GCS into TiDB Cloud](/tidb-cloud/import-csv-files.md).
+以下は、 TiDB Cloud上のデータインポートサービスを使用して CSV ファイルをインポートするときの CSVコンフィグレーションウィンドウです。詳細については、 [<a href="/tidb-cloud/import-csv-files.md">Amazon S3 または GCS からTiDB Cloudに CSV ファイルをインポート</a>](/tidb-cloud/import-csv-files.md)を参照してください。
 
 ![CSV Configurations](/media/tidb-cloud/import-data-csv-config.png)
 
-## Separator
+## セパレータ {#separator}
 
-- Definition: defines the field separator. It can be one or multiple characters, but must not be empty.
+-   定義: フィールド区切り文字を定義します。 1 つまたは複数の文字を指定できますが、空であってはなりません。
 
-- Common values:
+-   一般的な値:
 
-    * `,` for CSV (comma-separated values). As shown in the above screenshot, "1", "Michael", and "male" represent three fields.
-    * `"\t"` for TSV (tab-separated values).
+    -   CSV (カンマ区切り値) の場合は`,` 。上のスクリーンショットに示されているように、「1」、「Michael」、および「male」は 3 つのフィールドを表します。
+    -   TSV の場合は`"\t"` (タブ区切り値)。
 
-- Default: `,`
+-   デフォルト: `,`
 
-## Header
+## ヘッダ {#header}
 
-- Definition: whether *all* CSV files contain a header row. If **Header** is `True`, the first row is used as the column names. If **Header** is `False`, the first row is treated as an ordinary data row.
+-   定義:*すべての*CSV ファイルにヘッダー行が含まれているかどうか。 **Header**が`True`の場合、最初の行が列名として使用されます。 **Header**が`False`の場合、最初の行は通常のデータ行として扱われます。
 
-- Default: `True`
+-   デフォルト: `True`
 
-## Delimiter
+## デリミタ {#delimiter}
 
-- Definition: defines the delimiter used for quoting. If **Delimiter** is empty, all fields are unquoted.
+-   定義: 引用符で使用する区切り文字を定義します。 **Delimiter**が空の場合、すべてのフィールドは引用符で囲まれません。
 
-- Common values:
+-   一般的な値:
 
-    * `'"'` quotes fields with double-quote. As shown in the above screenshot, `"Michael","male"` represents two fields. Note that there must be a `,` between the two fields. If the data is `"Michael""male"` (without `,`), the import task will fail to parse. If the data is `"Michael,male"` (with only one double-quote), it is parsed as one field.
-    * `''` disables quoting.
+    -   `'"'`フィールドを二重引用符で囲みます。上のスクリーンショットに示されているように、 `"Michael","male"` 2 つのフィールドを表します。 2 つのフィールドの間には`,`が必要であることに注意してください。データが`"Michael""male"` ( `,`を除く) の場合、インポート タスクは解析に失敗します。データが`"Michael,male"` (二重引用符が 1 つだけある) の場合、1 つのフィールドとして解析されます。
+    -   `''`引用を無効にします。
 
-- Default: `"`
+-   デフォルト: `"`
 
-## Backslash-escape
+## バックスラッシュとエスケープ {#backslash-escape}
 
-- Definition: whether to parse backslash inside fields as escape characters. If **Backslash-escape** is `True`, the following sequences are recognized and converted:
+-   定義: フィールド内のバックスラッシュをエスケープ文字として解析するかどうか。 **Backslash-escape**が`True`の場合、次のシーケンスが認識されて変換されます。
 
-    | Sequence | Converted to             |
-    |----------|--------------------------|
-    | `\0`     | Null character (`U+0000`)  |
-    | `\b`     | Backspace (`U+0008`)       |
-    | `\n`     | Line feed (`U+000A`)       |
-    | `\r`     | Carriage return (`U+000D`) |
-    | `\t`     | Tab (`U+0009`)             |
-    | `\Z`     | Windows EOF (`U+001A`)     |
+    | シーケンス | に変換                      |
+    | ----- | ------------------------ |
+    | `\0`  | ヌル文字 ( `U+0000` )        |
+    | `\b`  | バックスペース ( `U+0008` )     |
+    | `\n`  | 改行 ( `U+000A` )          |
+    | `\r`  | キャリッジリターン ( `U+000D` )   |
+    | `\t`  | タブ ( `U+0009` )          |
+    | `\Z`  | Windows EOF ( `U+001A` ) |
 
-    In all other cases (for example, `\"`), the backslash is stripped, leaving the next character (`"`) in the field. The character left has no special roles (for example, delimiters) and is just an ordinary character. Quoting does not affect whether backslash is parsed as an escape character.
+    他のすべての場合 (たとえば、 `\"` )、バックスラッシュは取り除かれ、次の文字 ( `"` ) がフィールドに残ります。左側の文字には特別な役割 (デリミタなど) はなく、単なる通常の文字です。引用符は、バックスラッシュがエスケープ文字として解析されるかどうかには影響しません。
 
-    Take the fields in the screenshot as an example.
+    スクリーンショットのフィールドを例に挙げます。
 
-    - If the value is `True`, `"nick name is \"Mike\""` will be parsed as `nick name is "Mike"` and written to the target table.
-    - If the value is `False`, it will be parsed as three fields: `"nick name is \"` , `Mike\`, and `""`. But it cannot be parsed correctly because the fields are not separated from each other.
+    -   値が`True`の場合、 `"nick name is \"Mike\""` `nick name is "Mike"`として解析され、ターゲット テーブルに書き込まれます。
+    -   値が`False`の場合、値は`"nick name is \"` 、 `Mike\` 、および`""`の 3 つのフィールドとして解析されます。ただし、フィールドが互いに分離されていないため、正しく解析できません。
 
-    For standard CSV files, if there are double-quoted characters in a field to be recorded, you need to use two double-quotes for escaping. In this case, using `Backslash-escape = True` will result in a parsing error, while using `Backslash-escape = False` will correctly parse. A typical scenario is when the imported field contains JSON content. A standard CSV JSON field is normally stored as follows:
+    標準の CSV ファイルの場合、記録するフィールドに二重引用符で囲まれた文字がある場合は、二重引用符を 2 つ使用してエスケープする必要があります。この場合、 `Backslash-escape = True`を使用すると解析エラーが発生しますが、 `Backslash-escape = False`使用すると正しく解析されます。一般的なシナリオは、インポートされたフィールドに JSON コンテンツが含まれている場合です。標準の CSV JSON フィールドは通常、次のように保存されます。
 
     `"{""key1"":""val1"", ""key2"": ""val2""}"`
 
-    In this case, you can set `Backslash-escape = False` and the field will be correctly escaped to the database as follows:
+    この場合、 `Backslash-escape = False`設定すると、次のようにフィールドがデータベースに正しくエスケープされます。
 
     `{"key1": "val1", "key2": "val2"}`
 
-    If the content of the CSV source file is saved as JSON in the following way, then consider setting `Backslash-escape = True` as follows. But this is not the standard format for CSV.
+    以下のようにCSVソースファイルの内容をJSONとして保存する場合は、以下のように設定`Backslash-escape = True`を検討してください。ただし、これは CSV の標準形式ではありません。
 
     `"{\"key1\": \"val1\", \"key2\":\"val2\" }"`
 
-- Default: `True`
+-   デフォルト: `True`
 
-## Not-null and Null
+## 非ヌルとヌル {#not-null-and-null}
 
-> **Note:**
+> **ノート：**
 >
-> You cannot configure the **Not-null** and **Null** settings when [importing local files](/tidb-cloud/tidb-cloud-import-local-files.md) to TiDB Cloud.
+> TiDB Cloudに[<a href="/tidb-cloud/tidb-cloud-import-local-files.md">ローカルファイルのインポート</a>](/tidb-cloud/tidb-cloud-import-local-files.md)場合、 **Not-null**および**Null**設定を構成することはできません。
 
-- Definition: the **Not-null** setting controls whether all fields are non-nullable. If **Not-null** is `False`, the string specified by **Null** is transformed to the SQL NULL instead of a specific value.
+-   定義: **Not-null**設定は、すべてのフィールドが null 値を許容できないかどうかを制御します。 **Not-null**が`False`の場合、 **Null**で指定された文字列は、特定の値ではなく SQL NULL に変換されます。
 
-- Quoting does not affect whether a field is null.
+-   引用符は、フィールドが null かどうかには影響しません。
 
-    For example, in the following CSV file:
+    たとえば、次の CSV ファイルでは:
 
     ```csv
     column_A,column_B,column_C
     \N,"\N",
     ```
 
-    In the default settings (`Not-null = False; Null = '\N'`), the columns `column_A` and `column_B` are both converted to NULL after being imported to TiDB. The column `column_C` is an empty string `''` but not NULL.
+    デフォルト設定 ( `Not-null = False; Null = '\N'` ) では、列`column_A`と列`column_B`は両方とも TiDB にインポートされた後に NULL に変換されます。列`column_C`は空の文字列`''`ですが、NULL ではありません。
 
-- Default: Not-null=False, Null=\\N
+-   デフォルト: Not-null=False、Null=\N
 
-## Trim-last-separator
+## 最後の区切り文字をトリミング {#trim-last-separator}
 
-- Definition: whether to treat `Separator` as the line terminator and trim all trailing separators.
+-   定義: `Separator`行末記号として扱い、末尾の区切り記号をすべてトリミングするかどうか。
 
-    For example, in the following CSV file:
+    たとえば、次の CSV ファイルでは:
 
     ```csv
     A,,B,,
     ```
 
-    - When `Trim-last-separator = False`, this is interpreted as a row of 5 fields `('A', '', 'B', '', '')`.
-    - When `Trim-last-separator = True`, this is interpreted as a row of 3 fields `('A', '', 'B')`.
+    -   `Trim-last-separator = False`の場合、これは 5 つのフィールドの行として解釈されます`('A', '', 'B', '', '')` 。
+    -   `Trim-last-separator = True`の場合、これは 3 つのフィールドの行として解釈されます`('A', '', 'B')` 。
 
-- Default: `False`
+-   デフォルト: `False`

@@ -3,19 +3,19 @@ title: CREATE RESOURCE GROUP
 summary: Learn the usage of CREATE RESOURCE GROUP in TiDB.
 ---
 
-# CREATE RESOURCE GROUP
+# リソースグループの作成 {#create-resource-group}
 
 <CustomContent platform="tidb-cloud">
 
-> **Note:**
+> **ノート：**
 >
-> This feature is not available on [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta).
+> この機能は[<a href="/tidb-cloud/select-cluster-tier.md#serverless-tier-beta">Serverless Tierクラスター</a>](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)では使用できません。
 
 </CustomContent>
 
-You can use the `CREATE RESOURCE GROUP` statement to create a resource group.
+`CREATE RESOURCE GROUP`ステートメントを使用してリソース グループを作成できます。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 CreateResourceGroupStmt ::=
@@ -42,24 +42,23 @@ ResourceGroupPriorityOption ::=
 |   HIGH
 ```
 
-The resource group name parameter (`ResourceGroupName`) must be globally unique.
+リソース グループ名パラメーター ( `ResourceGroupName` ) はグローバルに一意である必要があります。
 
-TiDB supports the following `DirectResourceGroupOption`, where [Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru) is a unified abstraction unit in TiDB for CPU, IO, and other system resources.
+TiDB は次の`DirectResourceGroupOption`サポートします。ここで[<a href="/tidb-resource-control.md#what-is-request-unit-ru">リクエストユニット(RU)</a>](/tidb-resource-control.md#what-is-request-unit-ru) 、CPU、IO、およびその他のシステム リソースに対する TiDB の統合抽象化ユニットです。
 
-| Option     | Description                         | Example                |
-|---------------|-------------------------------------|------------------------|
-| `RU_PER_SEC`  | Rate of RU backfilling per second   | `RU_PER_SEC = 500` indicates that this resource group is backfilled with 500 RUs per second    |
-| `PRIORITY`    | The absolute priority of tasks to be processed on TiKV  | `PRIORITY = HIGH` indicates that the priority is high. If not specified, the default value is `MEDIUM`. |
-| `BURSTABLE`   | If the `BURSTABLE` attribute is set, TiDB allows the corresponding resource group to use the available system resources when the quota is exceeded. |
+| オプション        | 説明                                                                                     | 例                                                                  |
+| ------------ | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| `RU_PER_SEC` | 1 秒あたりの RU バックフィルの速度                                                                   | `RU_PER_SEC = 500` 、このリソース グループが 1 秒あたり 500 RU でバックフィルされていることを示します |
+| `PRIORITY`   | TiKV 上で処理されるタスクの絶対的な優先度                                                                | `PRIORITY = HIGH`優先度が高いことを示します。指定しない場合、デフォルト値は`MEDIUM`です。          |
+| `BURSTABLE`  | `BURSTABLE`属性が設定されている場合、TiDB は、クォータを超過したときに、対応するリソース グループが利用可能なシステム リソースを使用することを許可します。 |                                                                    |
 
-> **Note:**
+> **ノート：**
 >
-> - The `CREATE RESOURCE GROUP` statement can only be executed when the global variable [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660) is set to `ON`.
-> TiDB automatically creates a `default` resource group during cluster initialization. For this resource group, the default value of `RU_PER_SEC` is `UNLIMITED` (equivalent to the maximum value of the `INT` type, that is, `2147483647`) and it is in `BURSTABLE` mode. All requests that are not bound to any resource group are automatically bound to this `default` resource group. When you create a new configuration for another resource group, it is recommended to modify the `default` resource group configuration as needed.
+> -   `CREATE RESOURCE GROUP`ステートメントは、グローバル変数[<a href="/system-variables.md#tidb_enable_resource_control-new-in-v660">`tidb_enable_resource_control`</a>](/system-variables.md#tidb_enable_resource_control-new-in-v660) `ON`に設定されている場合にのみ実行できます。 TiDB は、クラスターの初期化中に`default`リソース グループを自動的に作成します。このリソース グループのデフォルト値`RU_PER_SEC`は`UNLIMITED` ( `INT`タイプの最大値、つまり`2147483647`に相当) であり、 `BURSTABLE`モードです。どのリソース グループにもバインドされていないすべてのリクエストは、この`default`リソース グループに自動的にバインドされます。別のリソース グループの新しい構成を作成する場合は、必要に応じて`default`リソース グループの構成を変更することをお勧めします。
 
-## Examples
+## 例 {#examples}
 
-Create two resource groups `rg1` and `rg2`.
+2 つのリソース グループ`rg1`と`rg2`を作成します。
 
 ```sql
 DROP RESOURCE GROUP IF EXISTS rg1;
@@ -103,13 +102,13 @@ SELECT * FROM information_schema.resource_groups WHERE NAME ='rg1' or NAME = 'rg
 2 rows in set (1.30 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-MySQL also supports [CREATE RESOURCE GROUP](https://dev.mysql.com/doc/refman/8.0/en/create-resource-group.html). However, the acceptable parameters are different from that of TiDB so that they are not compatible.
+MySQL は[<a href="https://dev.mysql.com/doc/refman/8.0/en/create-resource-group.html">リソースグループの作成</a>](https://dev.mysql.com/doc/refman/8.0/en/create-resource-group.html)もサポートします。ただし、受け入れられるパラメータが TiDB とは異なるため、互換性はありません。
 
-## See also
+## こちらも参照 {#see-also}
 
-* [DROP RESOURCE GROUP](/sql-statements/sql-statement-drop-resource-group.md)
-* [ALTER RESOURCE GROUP](/sql-statements/sql-statement-alter-resource-group.md)
-* [ALTER USER RESOURCE GROUP](/sql-statements/sql-statement-alter-user.md#modify-the-resource-group-bound-to-the-user)
-* [Request Unit (RU)](/tidb-resource-control.md#what-is-request-unit-ru)
+-   [<a href="/sql-statements/sql-statement-drop-resource-group.md">リソースグループを削除</a>](/sql-statements/sql-statement-drop-resource-group.md)
+-   [<a href="/sql-statements/sql-statement-alter-resource-group.md">リソースグループの変更</a>](/sql-statements/sql-statement-alter-resource-group.md)
+-   [<a href="/sql-statements/sql-statement-alter-user.md#modify-the-resource-group-bound-to-the-user">ユーザーリソースグループの変更</a>](/sql-statements/sql-statement-alter-user.md#modify-the-resource-group-bound-to-the-user)
+-   [<a href="/tidb-resource-control.md#what-is-request-unit-ru">リクエストユニット(RU)</a>](/tidb-resource-control.md#what-is-request-unit-ru)

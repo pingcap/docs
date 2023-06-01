@@ -3,30 +3,31 @@ title: TiFlash Spill to Disk
 summary: Learn how TiFlash spills data to disk and how to customize the spill behavior.
 ---
 
-# TiFlash Spill to Disk
+# TiFlash のディスクへの流出 {#tiflash-spill-to-disk}
 
-This document introduces how TiFlash spills data to disk during computation.
+このドキュメントでは、 TiFlash が計算中にデータをディスクに書き込む方法を紹介します。
 
-Starting from v7.0.0, TiFlash supports spilling intermediate data to disk to relieve memory pressure. The following operators are supported:
+v7.0.0 以降、 TiFlash はメモリ負荷を軽減するために中間データのディスクへのスピルをサポートします。次の演算子がサポートされています。
 
-* Hash Join operators with equi-join conditions
-* Hash Aggregation operators with `GROUP BY` keys
-* TopN operators, and Sort operators in Window functions
+-   等結合条件を持つハッシュ結合演算子
+-   `GROUP BY`キーを持つハッシュ集計演算子
+-   ウィンドウ関数の TopN 演算子と並べ替え演算子
 
-## Trigger the spilling
+## 流出を引き起こす {#trigger-the-spilling}
 
-TiDB provides the following system variables to control the threshold of spilling for each operator. When the memory usage of an operator exceeds the threshold, TiFlash triggers the spilling for the operator.
+TiDB は、各オペレーターのスピルのしきい値を制御する次のシステム変数を提供します。オペレーターのメモリ使用量がしきい値を超えると、 TiFlash はオペレーターのスピルをトリガーします。
 
-* [`tidb_max_bytes_before_tiflash_external_group_by`](/system-variables.md#tidb_max_bytes_before_tiflash_external_group_by-new-in-v700)
-* [`tidb_max_bytes_before_tiflash_external_join`](/system-variables.md#tidb_max_bytes_before_tiflash_external_join-new-in-v700)
-* [`tidb_max_bytes_before_tiflash_external_sort`](/system-variables.md#tidb_max_bytes_before_tiflash_external_sort-new-in-v700)
+-   [<a href="/system-variables.md#tidb_max_bytes_before_tiflash_external_group_by-new-in-v700">`tidb_max_bytes_before_tiflash_external_group_by`</a>](/system-variables.md#tidb_max_bytes_before_tiflash_external_group_by-new-in-v700)
+-   [<a href="/system-variables.md#tidb_max_bytes_before_tiflash_external_join-new-in-v700">`tidb_max_bytes_before_tiflash_external_join`</a>](/system-variables.md#tidb_max_bytes_before_tiflash_external_join-new-in-v700)
+-   [<a href="/system-variables.md#tidb_max_bytes_before_tiflash_external_sort-new-in-v700">`tidb_max_bytes_before_tiflash_external_sort`</a>](/system-variables.md#tidb_max_bytes_before_tiflash_external_sort-new-in-v700)
 
-## Example
+## 例 {#example}
 
-This example constructs a SQL statement that consumes a lot of memory to demonstrate the spilling of the Hash Aggregation operator.
+この例では、ハッシュ集計演算子の流出を示すために、大量のメモリを消費する SQL ステートメントを構築します。
 
-1. Prepare the environment. Create a TiFlash cluster with 2 nodes and import the TPCH-100 data.
-2. Execute the following statements. These statements do not limit the memory usage of the Hash Aggregation operator with `GROUP BY` keys.
+1.  環境を準備します。 2 つのノードでTiFlashクラスターを作成し、TPCH-100 データをインポートします。
+
+2.  次のステートメントを実行します。これらのステートメントは、 `GROUP BY`キーによるハッシュ集計演算子のメモリ使用量を制限しません。
 
     ```sql
     SET tidb_max_bytes_before_tiflash_external_group_by = 0;
@@ -42,13 +43,13 @@ This example constructs a SQL statement that consumes a lot of memory to demonst
     HAVING SUM(l_quantity) > 314;
     ```
 
-3. From the log of TiFlash, you can see that the query needs to consume 29.55 GiB of memory on a single TiFlash node:
+3.  TiFlashのログから、クエリは単一のTiFlashノードで 29.55 GiB のメモリを消費する必要があることがわかります。
 
     ```
     [DEBUG] [MemoryTracker.cpp:69] ["Peak memory usage (total): 29.55 GiB."] [source=MemoryTracker] [thread_id=468]
     ```
 
-4. Execute the following statement. This statement limits the memory usage of the Hash Aggregation operator with `GROUP BY` keys to 10737418240 (10 GiB).
+4.  次のステートメントを実行します。このステートメントは、キーが`GROUP BY`ハッシュ集計演算子のメモリ使用量を 10737418240 (10 GiB) に制限します。
 
     ```sql
     SET tidb_max_bytes_before_tiflash_external_group_by = 10737418240;
@@ -64,15 +65,15 @@ This example constructs a SQL statement that consumes a lot of memory to demonst
     HAVING SUM(l_quantity) > 314;
     ```
 
-5. From the log of TiFlash, you can see that by configuring `tidb_max_bytes_before_tiflash_external_group_by`, TiFlash triggers the spilling of intermediate results, significantly reducing the memory used by the query.
+5.  TiFlashのログから、 `tidb_max_bytes_before_tiflash_external_group_by`を設定すると、 TiFlash が中間結果の流出をトリガーし、クエリで使用されるメモリが大幅に削減されることがわかります。
 
     ```
     [DEBUG] [MemoryTracker.cpp:69] ["Peak memory usage (total): 12.80 GiB."] [source=MemoryTracker] [thread_id=110]
     ```
 
-## Notes
+## ノート {#notes}
 
-* When the Hash Aggregation operator does not have a `GROUP BY` key, it does not support spilling. Even if the Hash Aggregation operator contains a distinct aggregation function, it does not support spilling.
-* Currently, the threshold is calculated for each operator. If a query contains two Hash Aggregation operators, and the threshold is set to 10 GiB, then the two Hash Aggregation operators will only spill data when their respective memory usage exceeds 10 GiB.
-* Currently, the Hash Aggregation operators and TopN/Sort operators use the merge aggregation and merge sort algorithm during the restore phase. Therefore, these two operators only trigger a single round of spill. If the memory demand is very high and the memory usage during the restore phase still exceeds the threshold, the spill will not be triggered again.
-* Currently, the Hash Join operator uses the partition-based spill strategy. If the memory usage during the restore phase still exceeds the threshold, the spill will be triggered again. However, to control the scale of the spill, the number of rounds of spill is limited to three. If the memory usage during the restore phase still exceeds the threshold after the third round of spill, the spill will not be triggered again.
+-   ハッシュ集計演算子に`GROUP BY`キーがない場合、スピルはサポートされません。ハッシュ集計演算子に個別の集約関数が含まれている場合でも、スピルはサポートされません。
+-   現在、閾値は演算子ごとに計算されています。クエリに 2 つのハッシュ集計演算子が含まれており、しきい値が 10 GiB に設定されている場合、2 つのハッシュ集計演算子は、それぞれのメモリ使用量が 10 GiB を超えた場合にのみデータを流出させます。
+-   現在、ハッシュ集計演算子と TopN/Sort 演算子は、復元フェーズ中にマージ集約アルゴリズムとマージ ソート アルゴリズムを使用します。したがって、これら 2 つの演算子は 1 ラウンドのスピルをトリガーするだけです。メモリ需要が非常に高く、復元フェーズ中のメモリ使用量が依然としてしきい値を超えている場合、スピルは再度トリガーされません。
+-   現在、ハッシュ結合演算子はパーティションベースのスピル戦略を使用しています。復元フェーズ中のメモリ使用量が依然としてしきい値を超えている場合、スピルは再びトリガーされます。ただし、流出規模を抑えるため、流出回数は３回までに制限されている。復元フェーズ中のメモリ使用量が 3 回目のスピル後もしきい値を超えている場合、スピルは再びトリガーされません。

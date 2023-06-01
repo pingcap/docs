@@ -3,30 +3,30 @@ title: Information Functions
 summary: Learn about the information functions.
 ---
 
-# Information Functions
+# 情報機能 {#information-functions}
 
-TiDB supports most of the [information functions](https://dev.mysql.com/doc/refman/5.7/en/information-functions.html) available in MySQL 5.7.
+TiDB は、 MySQL 5.7で利用可能なほとんどの[<a href="https://dev.mysql.com/doc/refman/5.7/en/information-functions.html">情報関数</a>](https://dev.mysql.com/doc/refman/5.7/en/information-functions.html)をサポートします。
 
-## Supported functions
+## サポートされている関数 {#supported-functions}
 
-| Name | Description |
-|:-----|:------------|
-| [`BENCHMARK()`](https://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_benchmark) | Execute an expression in a loop |
-| [`CONNECTION_ID()`](https://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_connection-id) | Return the connection ID (thread ID) for the connection  |
-| `CURRENT_RESOURCE_GROUP()`  | Return the name of the resource group that the current session is bound to |
-| [`CURRENT_USER()`, `CURRENT_USER`](https://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_current-user) | Return the authenticated user name and host name |
-| [`DATABASE()`](https://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_database) | Return the default (current) database name  |
-| [`FOUND_ROWS()`](https://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_found-rows) | For a `SELECT` with a `LIMIT` clause, the number of the rows that are returned if there is no `LIMIT` clause |
-| [`LAST_INSERT_ID()`](https://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_last-insert-id) | Return the value of the `AUTOINCREMENT` column for the last `INSERT`   |
-| [`ROW_COUNT()`](https://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_row-count) | The number of rows affected |
-| [`SCHEMA()`](https://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_schema) | Synonym for `DATABASE()`  |
-| [`SESSION_USER()`](https://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_session-user) | Synonym for `USER()`    |
-| [`SYSTEM_USER()`](https://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_system-user) | Synonym for `USER()`   |
-| [`USER()`](https://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_user) | Return the user name and host name provided by the client    |
-| [`VERSION()`](https://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_version) | Return a string that indicates the MySQL server version   |
+| 名前                                                                                                                                                                                                                                   | 説明                                            |
+| :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------- |
+| [<a href="https://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_benchmark">`BENCHMARK()`</a>](https://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_benchmark)                           | ループ内で式を実行する                                   |
+| [<a href="https://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_connection-id">`CONNECTION_ID()`</a>](https://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_connection-id)               | 接続の接続 ID (スレッド ID) を返します。                     |
+| `CURRENT_RESOURCE_GROUP()`                                                                                                                                                                                                           | 現在のセッションがバインドされているリソース グループの名前を返します。          |
+| [<a href="https://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_current-user">`CURRENT_USER()` 、 `CURRENT_USER`</a>](https://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_current-user) | 認証されたユーザー名とホスト名を返します。                         |
+| [<a href="https://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_database">`DATABASE()`</a>](https://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_database)                              | デフォルト (現在の) データベース名を返します。                     |
+| [<a href="https://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_found-rows">`FOUND_ROWS()`</a>](https://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_found-rows)                        | `SELECT`に`LIMIT`句がある場合、 `LIMIT`句がない場合に返される行の数 |
+| [<a href="https://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_last-insert-id">`LAST_INSERT_ID()`</a>](https://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_last-insert-id)            | 最後の`INSERT`の列の`AUTOINCREMENT`列の値を返します。        |
+| [<a href="https://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_row-count">`ROW_COUNT()`</a>](https://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_row-count)                           | 影響を受ける行の数                                     |
+| [<a href="https://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_schema">`SCHEMA()`</a>](https://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_schema)                                    | `DATABASE()`の同義語                              |
+| [<a href="https://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_session-user">`SESSION_USER()`</a>](https://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_session-user)                  | `USER()`の同義語                                  |
+| [<a href="https://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_system-user">`SYSTEM_USER()`</a>](https://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_system-user)                     | `USER()`の同義語                                  |
+| [<a href="https://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_user">`USER()`</a>](https://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_user)                                          | クライアントから提供されたユーザー名とホスト名を返します。                 |
+| [<a href="https://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_version">`VERSION()`</a>](https://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_version)                                 | MySQLサーバーのバージョンを示す文字列を返します。                   |
 
-## Unsupported functions
+## サポートされていない関数 {#unsupported-functions}
 
-* `CHARSET()`
-* `COERCIBILITY()`
-* `COLLATION()`
+-   `CHARSET()`
+-   `COERCIBILITY()`
+-   `COLLATION()`

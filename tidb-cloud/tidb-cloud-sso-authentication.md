@@ -3,46 +3,46 @@ title: SSO Authentication
 summary: Learn how to log in to the TiDB Cloud console via your Google account or GitHub account.
 ---
 
-# SSO Authentication
+# SSO認証 {#sso-authentication}
 
-This document describes how to log in to the [TiDB Cloud console](https://tidbcloud.com/) via Single Sign-on (SSO) authentication, which is quick and convenient.
+このドキュメントでは、簡単で便利なシングル サインオン (SSO) 認証を介して[<a href="https://tidbcloud.com/">TiDB Cloudコンソール</a>](https://tidbcloud.com/)にログインする方法について説明します。
 
-TiDB Cloud supports SSO authentication for Google and GitHub accounts. If you log in to TiDB Cloud via SSO authentication, because your ID and credentials are stored on the third-party Google and GitHub platforms, you will not be able to modify your account password and enable multi-factor authentication (MFA) using the TiDB console. 
+TiDB Cloud は、 Google および GitHub アカウントの SSO 認証をサポートしています。 SSO 認証経由でTiDB Cloudにログインする場合、ID と資格情報はサードパーティの Google および GitHub プラットフォームに保存されるため、アカウントのパスワードを変更したり、TiDB を使用して多要素認証 (MFA) を有効にしたりすることはできません。コンソール。
 
-> **Note:**
+> **ノート：**
 >
-> If you want to log into TiDB Cloud through username and password, see [Password Authentication](/tidb-cloud/tidb-cloud-password-authentication.md).
+> ユーザー名とパスワードを使用してTiDB Cloudにログインする場合は、 [<a href="/tidb-cloud/tidb-cloud-password-authentication.md">パスワード認証</a>](/tidb-cloud/tidb-cloud-password-authentication.md)を参照してください。
 
-## Sign in with Google SSO 
+## Google SSO でサインインする {#sign-in-with-google-sso}
 
-To sign in with your Google account, take the following steps:
+Google アカウントでサインインするには、次の手順を実行します。
 
-1. Go to the TiDB Cloud [login](https://tidbcloud.com/) page.
+1.  TiDB Cloud[<a href="https://tidbcloud.com/">ログイン</a>](https://tidbcloud.com/)ページに移動します。
 
-2. Click **Sign in with Google**. You will be directed to the Google login page.
+2.  **[Google でサインイン]**をクリックします。 Google ログインページに移動します。
 
-3. Follow the on-screen instructions to enter your Google username and password. 
+3.  画面上の指示に従って、Google のユーザー名とパスワードを入力します。
 
-    If the login is successful, you will be directed to the TiDB Cloud console.
+    ログインが成功すると、 TiDB Cloudコンソールに移動します。
 
-    > **Note:**
+    > **ノート：**
     >
-    > - If this is the first time you sign in with Google, you will be asked whether to accept TiDB Cloud terms. After you read and agree with the terms, you will see the TiDB Cloud welcome page and then be directed to the TiDB Cloud console.
-   > - If you have enabled 2-Step Verification (also called two-factor authentication) for your Google account, you will also need to provide the verification code after entering your username and password.
+    > -   初めて Google にサインインする場合は、 TiDB Cloud の規約に同意するかどうかを尋ねられます。規約を読んで同意すると、 TiDB Cloudのようこそページが表示され、 TiDB Cloudコンソールに移動します。
+    > -   Google アカウントの 2 段階認証プロセス (2 要素認証とも呼ばれます) を有効にしている場合は、ユーザー名とパスワードを入力した後、確認コードも入力する必要があります。
 
-## Sign in with GitHub SSO
+## GitHub SSO でサインインする {#sign-in-with-github-sso}
 
-To sign in with your GitHub account, take the following steps:
+GitHub アカウントでサインインするには、次の手順を実行します。
 
-1. Go to the TiDB Cloud [login](https://tidbcloud.com/) page.
+1.  TiDB Cloud[<a href="https://tidbcloud.com/">ログイン</a>](https://tidbcloud.com/)ページに移動します。
 
-2. Click **Sign in with GitHub**. You will be directed to the GitHub login page.
+2.  **「GitHub でサインイン」を**クリックします。 GitHub のログイン ページに移動します。
 
-3. Follow the on-screen instructions to enter your GitHub username and password.
+3.  画面上の指示に従って、GitHub のユーザー名とパスワードを入力します。
 
-    If the login is successful, you will be directed to the TiDB Cloud console.
- 
-     > **Note:**
-     >
-     > - If this is the first time you sign in with GitHub, you will be asked whether to accept TiDB Cloud terms. After you read and agree with the terms, you will see the TiDB Cloud welcome page and then be directed to the TiDB Cloud console.
-     > - If you have configured two-factor authentication for your GitHub account, you will also need to provide the verification code after entering your username and password.
+    ログインが成功すると、 TiDB Cloudコンソールに移動します。
+
+    > **ノート：**
+    >
+    > -   初めて GitHub にサインインする場合は、 TiDB Cloud の規約に同意するかどうかを尋ねられます。規約を読んで同意すると、 TiDB Cloudのようこそページが表示され、 TiDB Cloudコンソールに移動します。
+    > -   GitHub アカウントに 2 要素認証を構成している場合は、ユーザー名とパスワードを入力した後に確認コードも入力する必要があります。

@@ -3,11 +3,11 @@ title: CREATE ROLE | TiDB SQL Statement Reference
 summary: An overview of the usage of CREATE ROLE for the TiDB database.
 ---
 
-# CREATE ROLE
+# ロールの作成 {#create-role}
 
-This statement creates a new role, which can be assigned to users as part of role-based access control.
+このステートメントは新しいロールを作成し、ロールベースのアクセス制御の一環としてユーザーに割り当てることができます。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 CreateRoleStmt ::=
@@ -20,15 +20,15 @@ RoleSpec ::=
     Rolename
 ```
 
-## Examples
+## 例 {#examples}
 
-Connect to TiDB as the `root` user:
+`root`ユーザーとして TiDB に接続します。
 
 ```shell
 mysql -h 127.0.0.1 -P 4000 -u root
 ```
 
-Create a new role `analyticsteam` and a new user `jennifer`:
+新しいロール`analyticsteam`と新しいユーザー`jennifer`を作成します。
 
 ```sql
 CREATE ROLE analyticsteam;
@@ -44,13 +44,13 @@ GRANT analyticsteam TO jennifer;
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-Connect to TiDB as the `jennifer` user:
+`jennifer`ユーザーとして TiDB に接続します。
 
 ```shell
 mysql -h 127.0.0.1 -P 4000 -u jennifer
 ```
 
-Note that by default `jennifer` needs to execute `SET ROLE analyticsteam` in order to be able to use the privileges associated with the `analyticsteam` role:
+デフォルトでは、 `analyticsteam`ロールに関連付けられた権限を使用できるようにするには、 `jennifer` `SET ROLE analyticsteam`実行する必要があることに注意してください。
 
 ```sql
 SHOW GRANTS;
@@ -86,26 +86,26 @@ SHOW TABLES IN test;
 1 row in set (0.00 sec)
 ```
 
-Connect to TiDB as the `root` user:
+`root`ユーザーとして TiDB に接続します。
 
 ```shell
 mysql -h 127.0.0.1 -P 4000 -u root
 ```
 
-The statement `SET DEFAULT ROLE` can be used to associate the role `analyticsteam` to `jennifer`:
+ステートメント`SET DEFAULT ROLE`使用して、ロール`analyticsteam`を`jennifer`に関連付けることができます。
 
 ```sql
 SET DEFAULT ROLE analyticsteam TO jennifer;
 Query OK, 0 rows affected (0.02 sec)
 ```
 
-Connect to TiDB as the `jennifer` user:
+`jennifer`ユーザーとして TiDB に接続します。
 
 ```shell
 mysql -h 127.0.0.1 -P 4000 -u jennifer
 ```
 
-After this, the user `jennifer` has the privileges associated with the role `analyticsteam` and `jennifer` does not have to execute the statement `SET ROLE`:
+この後、ユーザー`jennifer`はロール`analyticsteam`に関連付けられた権限を持ち、ユーザー`jennifer`はステートメント`SET ROLE`を実行する必要がなくなります。
 
 ```sql
 SHOW GRANTS;
@@ -127,20 +127,20 @@ SHOW TABLES IN test;
 1 row in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-This statement is understood to be fully compatible with roles, which are a feature of MySQL 8.0. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
+このステートメントは、MySQL 8.0 の機能であるロールと完全な互換性があると理解されています。 GitHub では互換性の違いは[<a href="https://github.com/pingcap/tidb/issues/new/choose">問題を通じて報告されました</a>](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
 
-## See also
+## こちらも参照 {#see-also}
 
-* [`DROP ROLE`](/sql-statements/sql-statement-drop-role.md)
-* [`GRANT <role>`](/sql-statements/sql-statement-grant-role.md)
-* [`REVOKE <role>`](/sql-statements/sql-statement-revoke-role.md)
-* [`SET ROLE`](/sql-statements/sql-statement-set-role.md)
-* [`SET DEFAULT ROLE`](/sql-statements/sql-statement-set-default-role.md)
+-   [<a href="/sql-statements/sql-statement-drop-role.md">`DROP ROLE`</a>](/sql-statements/sql-statement-drop-role.md)
+-   [<a href="/sql-statements/sql-statement-grant-role.md">`GRANT &#x3C;role>`</a>](/sql-statements/sql-statement-grant-role.md)
+-   [<a href="/sql-statements/sql-statement-revoke-role.md">`REVOKE &#x3C;role>`</a>](/sql-statements/sql-statement-revoke-role.md)
+-   [<a href="/sql-statements/sql-statement-set-role.md">`SET ROLE`</a>](/sql-statements/sql-statement-set-role.md)
+-   [<a href="/sql-statements/sql-statement-set-default-role.md">`SET DEFAULT ROLE`</a>](/sql-statements/sql-statement-set-default-role.md)
 
 <CustomContent platform="tidb">
 
-* [Role-Based Access Control](/role-based-access-control.md)
+-   [<a href="/role-based-access-control.md">役割ベースのアクセス制御</a>](/role-based-access-control.md)
 
 </CustomContent>

@@ -3,68 +3,68 @@ title: Import Local Files to TiDB Cloud
 summary: Learn how to import local files to TiDB Cloud.
 ---
 
-# Import Local Files to TiDB Cloud
+# ローカル ファイルをTiDB Cloudにインポートする {#import-local-files-to-tidb-cloud}
 
-You can import local files to TiDB Cloud directly. It only takes a few clicks to complete the task configuration, and then your local CSV data will be quickly imported to your TiDB cluster. Using this method, you do not need to provide the cloud storage bucket path and Role ARN. The whole importing process is quick and smooth.
+ローカル ファイルをTiDB Cloudに直接インポートできます。数回クリックするだけでタスク構成が完了し、ローカル CSV データが TiDB クラスターにすぐにインポートされます。この方法を使用すると、クラウドstorageバケット パスとロール ARN を指定する必要がありません。インポートプロセス全体は迅速かつスムーズです。
 
-Currently, this method supports importing one CSV file for one task into either an existing table or a new table.
+現在、この方法では、1 つのタスクに対して 1 つの CSV ファイルを既存のテーブルまたは新しいテーブルにインポートすることがサポートされています。
 
-## Limitations
+## 制限事項 {#limitations}
 
-- Currently, TiDB Cloud only supports importing a local file in CSV format within 50 MiB for one task.
-- Importing local files is supported only for Serverless Tier clusters, not for Dedicated Tier clusters.
-- You cannot run more than one import task at the same time.
-- If you import a CSV file into an existing table in TiDB Cloud, make sure that the first line of the CSV file contains the column names, and the order of the columns in the CSV file must be the same as that in the target table.
+-   現在、 TiDB Cloudは、1 つのタスクに対して 50 MiB 以内の CSV 形式でのローカル ファイルのインポートのみをサポートしています。
+-   ローカル ファイルのインポートは、Serverless Tierクラスターでのみサポートされており、Dedicated Tierクラスターではサポートされていません。
+-   複数のインポート タスクを同時に実行することはできません。
+-   CSV ファイルをTiDB Cloudの既存のテーブルにインポートする場合は、CSV ファイルの最初の行に列名が含まれていることを確認し、CSV ファイル内の列の順序がターゲット テーブル内の順序と同じである必要があります。
 
-## Import local files
+## ローカルファイルをインポートする {#import-local-files}
 
-1. Open the **Import** page for your target cluster.
+1.  ターゲットクラスターの**インポート**ページを開きます。
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+    1.  [<a href="https://tidbcloud.com/">TiDB Cloudコンソール</a>](https://tidbcloud.com/)にログインし、プロジェクトの[<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページに移動します。
 
-        > **Tip:**
+        > **ヒント：**
         >
-        > If you have multiple projects, you can switch to the target project in the left navigation pane of the **Clusters** page.
+        > 複数のプロジェクトがある場合は、 **「クラスター」**ページの左側のナビゲーション・ペインでターゲット・プロジェクトに切り替えることができます。
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
+    2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[インポート]**をクリックします。
 
-2. On the **Import** page, you can directly drag and drop your local file to the upload area, or click the upload area to select and upload the target local file. Note that you can upload only one CSV file of less than 50 MiB for one task.
+2.  [**インポート]**ページでは、ローカル ファイルをアップロード領域に直接ドラッグ アンド ドロップするか、アップロード領域をクリックして対象のローカル ファイルを選択してアップロードできます。 1 つのタスクに対してアップロードできるのは、50 MiB 未満の CSV ファイル 1 つだけであることに注意してください。
 
-3. In the **Target** area, select the target database and the target table, or enter a name directly to create a new database or a new table. The name must start with letters (a-z and A-Z) or numbers (0-9), and can contain letters (a-z and A-Z), numbers (0-9), and the underscore (_) character. Click **Next**.
+3.  **[ターゲット]**領域で、ターゲット データベースとターゲット テーブルを選択するか、名前を直接入力して新しいデータベースまたは新しいテーブルを作成します。名前は文字 (a から z と AZ) または数字 (0 から 9) で始まる必要があり、文字 (a から z と AZ)、数字 (0 から 9)、およびアンダースコア (_) 文字を含めることができます。 **「次へ」**をクリックします。
 
-4. Check the table.
+4.  表を確認してください。
 
-    You can see a list of configurable table columns. Each line shows the table column name inferred by TiDB Cloud, the table column type inferred, and the previewed data from the CSV file.
+    構成可能なテーブル列のリストが表示されます。各行には、 TiDB Cloudによって推定されたテーブル列名、推定されたテーブル列タイプ、および CSV ファイルからプレビューされたデータが表示されます。
 
-    - If you import data into an existing table in TiDB Cloud, the column list is extracted from the table definition, and the previewed data is mapped to the corresponding columns by column names.
+    -   TiDB Cloudの既存のテーブルにデータをインポートする場合、テーブル定義から列リストが抽出され、プレビューされたデータが列名によって対応する列にマッピングされます。
 
-    - If you want to create a new table, the column list is extracted from the CSV file, and the column type is inferred by TiDB Cloud. For example, if the previewed data is all integers, the inferred column type will be **int** (integer).
+    -   新しいテーブルを作成する場合は、CSV ファイルから列リストが抽出され、 TiDB Cloudによって列タイプが推測されます。たとえば、プレビューされたデータがすべて整数の場合、推論される列の型は**int** (整数) になります。
 
-5. Configure the column names and data types.
+5.  列名とデータ型を設定します。
 
-    If the first row in the CSV file records the column names, make sure that **Use the first row as column name** is selected, which is selected by default.
+    CSV ファイルの最初の行に列名が記録されている場合は、 **[最初の行を列名として使用する]**が選択されていることを確認してください。これはデフォルトで選択されています。
 
-    If the CSV file does not have a row for the column names, do not select **Use the first row as column name**. In this case:
+    CSV ファイルに列名の行がない場合は、 **「最初の行を列名として使用」**を選択しないでください。この場合：
 
-    - If the target table already exists, the columns in the CSV file will be imported into the target table in order. Extra columns will be truncated and missing columns will be filled with default values. You can also select the **Ignore the first row** option to ignore the first row and start importing from the second row.
+    -   対象テーブルがすでに存在する場合、CSV ファイル内の列が順番に対象テーブルにインポートされます。余分な列は切り捨てられ、欠落している列にはデフォルト値が埋められます。 **「最初の行を無視」**オプションを選択して、最初の行を無視し、2 行目からインポートを開始することもできます。
 
-    - If you need TiDB Cloud to create the target table, input the name for each column. The column name must start with letters (a-z and A-Z) or numbers (0-9), and can contain letters (a-z and A-Z), numbers (0-9), and the underscore (_) character. You can also change the data type if needed.
+    -   ターゲット テーブルを作成するためにTiDB Cloudが必要な場合は、各列の名前を入力します。列名は文字 (a から z と AZ) または数字 (0 から 9) で始まる必要があり、文字 (a から z と AZ)、数字 (0 から 9)、およびアンダースコア (_) 文字を含めることができます。必要に応じてデータ型を変更することもできます。
 
-6. For a new target table, you can set the primary key. You can select a column as the primary key, or select multiple columns to create a composite primary key. The composite primary key will be formed in the order in which you select the column names.
+6.  新しいターゲット テーブルの場合、主キーを設定できます。列を主キーとして選択することも、複数の列を選択して複合主キーを作成することもできます。複合主キーは、列名を選択した順序で形成されます。
 
-    > **Note:**
+    > **ノート：**
     >
-    > - The primary key of the table is a clustered index and cannot be deleted after creation.
-    > - Ensure that the data corresponding to the primary key field is unique and not empty. Otherwise, the import task will result in data inconsistency.
+    > -   テーブルの主キーはクラスター化インデックスであり、作成後に削除することはできません。
+    > -   主キー フィールドに対応するデータが一意であり、空でないことを確認してください。そうしないと、インポート タスクでデータの不整合が発生します。
 
-7. Edit the CSV configuration if needed.
+7.  必要に応じて CSV 構成を編集します。
 
-   You can also click **Edit CSV configuration** to configure Backslash Escape, Separator, and Delimiter for more fine-grained control. For more information about the CSV configuration, see [CSV Configurations for Importing Data](/tidb-cloud/csv-config-for-import-data.md).
+    また、 **[CSV 構成の編集]**をクリックして、バックスラッシュ エスケープ、区切り記号、および区切り記号を構成して、よりきめ細かい制御を行うこともできます。 CSV 構成の詳細については、 [<a href="/tidb-cloud/csv-config-for-import-data.md">データをインポートするための CSV 構成</a>](/tidb-cloud/csv-config-for-import-data.md)を参照してください。
 
-8. Click **Start Import**.
+8.  **[インポートの開始]**をクリックします。
 
-    You can view the import progress on the **Import Task Detail** page. If there are warnings or failed tasks, you can check to view the details and solve them.
+    インポートの進行状況は**、「インポート タスクの詳細」**ページで確認できます。警告や失敗したタスクがある場合は、詳細を確認して解決することができます。
 
-9. After the import task is completed, you can click **Explore your data by Chat2Query** to query your imported data. For more information about how to use Chat2Qury, see [Explore Your Data with AI-Powered Chat2Query](/tidb-cloud/explore-data-with-chat2query.md).
+9.  インポート タスクが完了したら、 **[Chat2Query でデータを探索]**をクリックして、インポートされたデータをクエリできます。 Chat2Qury の使用方法の詳細については、 [<a href="/tidb-cloud/explore-data-with-chat2query.md">AI を活用した Chat2Query でデータを探索する</a>](/tidb-cloud/explore-data-with-chat2query.md)を参照してください。
 
-10. On the **Import** page, you can click **View** in the **Action** column to check the import task detail.
+10. **[インポート]**ページで、 **[アクション]**列の**[ビュー]**をクリックして、インポート タスクの詳細を確認できます。

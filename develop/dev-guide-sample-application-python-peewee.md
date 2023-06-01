@@ -4,47 +4,48 @@ summary: Learn how to build a simple CRUD application with TiDB and peewee.
 ---
 
 <!-- markdownlint-disable MD024 -->
+
 <!-- markdownlint-disable MD029 -->
 
-# Build a Simple CRUD App with TiDB and peewee
+# TiDB と peewee を使用してシンプルな CRUD アプリを構築する {#build-a-simple-crud-app-with-tidb-and-peewee}
 
-[peewee](http://docs.peewee-orm.com/en/latest/) is a popular open-source ORM library for Python.
+[<a href="http://docs.peewee-orm.com/en/latest/">ピーピー</a>](http://docs.peewee-orm.com/en/latest/)は、Python 用の人気のあるオープンソース ORM ライブラリです。
 
-This document describes how to use TiDB and peewee to build a simple CRUD application.
+このドキュメントでは、TiDB と peewee を使用して単純な CRUD アプリケーションを構築する方法について説明します。
 
-> **Note:**
+> **ノート：**
 >
-> It is recommended to use Python 3.10 or a later Python version.
+> Python 3.10 以降の Python バージョンを使用することをお勧めします。
 
-## Step 1. Launch your TiDB cluster
+## ステップ 1. TiDB クラスターを起動する {#step-1-launch-your-tidb-cluster}
 
 <CustomContent platform="tidb">
 
-The following introduces how to start a TiDB cluster.
+TiDB クラスターの起動方法を紹介します。
 
-**Use a TiDB Cloud Serverless Tier cluster**
+**TiDB CloudServerless Tierクラスターを使用する**
 
-For detailed steps, see [Create a Serverless Tier cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster).
+詳細な手順については、 [<a href="/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster">Serverless Tierクラスターの作成</a>](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
 
-**Use a local cluster**
+**ローカルクラスターを使用する**
 
-For detailed steps, see [Deploy a local test cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a TiDB cluster using TiUP](/production-deployment-using-tiup.md).
+詳細な手順については、 [<a href="/quick-start-with-tidb.md#deploy-a-local-test-cluster">ローカルテストクラスターをデプロイ</a>](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[<a href="/production-deployment-using-tiup.md">TiUPを使用して TiDB クラスターをデプロイ</a>](/production-deployment-using-tiup.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-See [Create a Serverless Tier cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster).
+[<a href="/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster">Serverless Tierクラスターの作成</a>](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
 
 </CustomContent>
 
-## Step 2. Get the code
+## ステップ 2. コードを取得する {#step-2-get-the-code}
 
 ```shell
 git clone https://github.com/pingcap-inc/tidb-example-python.git
 ```
 
-The following uses peewee 3.15.4 as an example.
+以下では例として peewee 3.15.4 を使用します。
 
 ```python
 import os
@@ -166,19 +167,19 @@ simple_example()
 trade_example()
 ```
 
-Compared with using drivers directly, peewee provides an abstraction for the specific details of different databases when you create a database connection. In addition, peewee encapsulates some operations such as session management and CRUD of basic objects, which greatly simplifies the code.
+ドライバーを直接使用する場合と比較して、peewee は、データベース接続を作成するときにさまざまなデータベースの特定の詳細を抽象化します。さらに、peewee はセッション管理や基本オブジェクトの CRUD などの一部の操作をカプセル化するため、コードが大幅に簡素化されます。
 
-The `Player` class is a mapping of a table to attributes in the application. Each attribute of `Player` corresponds to a field in the `player` table. To provide SQLAlchemy with more information, the attribute is defined as `id = Column(String(36), primary_key=True)` to indicate the field type and its additional attributes. For example, `id = Column(String(36), primary_key=True)` indicates that the `id` attribute is `String` type, the corresponding field in database is `VARCHAR` type, the length is `36`, and it is a primary key.
+`Player`のクラスは、アプリケーション内のテーブルの属性へのマッピングです。 `Player`の各属性は、 `player`テーブルのフィールドに対応します。 SQLAlchemy に詳細情報を提供するために、フィールド タイプとその追加属性を示す属性は`id = Column(String(36), primary_key=True)`として定義されています。たとえば、 `id = Column(String(36), primary_key=True)` 、 `id`属性が`String`タイプ、データベース内の対応するフィールドが`VARCHAR`タイプ、長さが`36`で、主キーであることを示します。
 
-For more information about how to use peewee, refer to [peewee documentation](http://docs.peewee-orm.com/en/latest/).
+peeweee の使用方法の詳細については、 [<a href="http://docs.peewee-orm.com/en/latest/">ピーウィーのドキュメント</a>](http://docs.peewee-orm.com/en/latest/)を参照してください。
 
-## Step 3. Run the code
+## ステップ 3. コードを実行する {#step-3-run-the-code}
 
-The following content introduces how to run the code step by step.
+次のコンテンツでは、コードを実行する方法をステップごとに紹介します。
 
-### Step 3.1 Initialize table
+### ステップ 3.1 テーブルの初期化 {#step-3-1-initialize-table}
 
-Before running the code, you need to initialize the table manually. If you are using a local TiDB cluster, you can run the following command:
+コードを実行する前に、テーブルを手動で初期化する必要があります。ローカル TiDB クラスターを使用している場合は、次のコマンドを実行できます。
 
 <SimpleTab groupId="cli">
 
@@ -200,56 +201,56 @@ mycli --host 127.0.0.1 --port 4000 -u root --no-warn < player_init.sql
 
 </SimpleTab>
 
-If you are not using a local cluster, or have not installed a MySQL client, connect to your cluster using your preferred method (such as Navicat, DBeaver, or other GUI tools) and run the SQL statements in the `player_init.sql` file.
+ローカル クラスターを使用していない場合、または MySQL クライアントをインストールしていない場合は、好みの方法 (Navicat、DBeaver、またはその他の GUI ツールなど) を使用してクラスターに接続し、 `player_init.sql`ファイル内の SQL ステートメントを実行します。
 
-### Step 3.2 Modify parameters for TiDB Cloud
+### ステップ 3.2 TiDB Cloudのパラメータを変更する {#step-3-2-modify-parameters-for-tidb-cloud}
 
-If you are using a TiDB Cloud Serverless Tier cluster, you need to provide your CA root path and replace `<ca_path>` in the following examples with your CA path. To get the CA root path on your system, refer to [Where is the CA root path on my system?](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-tier-clusters#where-is-the-ca-root-path-on-my-system).
+TiDB CloudServerless Tierクラスターを使用している場合は、CA ルート パスを指定し、次の例の`<ca_path>`を CA パスに置き換える必要があります。システム上の CA ルート パスを取得するには、 [<a href="https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-tier-clusters#where-is-the-ca-root-path-on-my-system">私のシステム上の CA ルート パスはどこにありますか?</a>](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-tier-clusters#where-is-the-ca-root-path-on-my-system)を参照してください。
 
-If you are using a TiDB Cloud Serverless Tier cluster, modify the parameters of the `connect` function in `peewee_example.py`:
+TiDB CloudServerless Tierクラスターを使用している場合は、 `peewee_example.py`の`connect`関数のパラメーターを変更します。
 
 ```python
 db = connect('mysql://root:@127.0.0.1:4000/test')
 ```
 
-Suppose that the password you set is `123456`, and the connection parameters you get from the cluster details page are the following:
+設定したパスワードが`123456`で、クラスターの詳細ページから取得した接続パラメーターが次であるとします。
 
-- Endpoint: `xxx.tidbcloud.com`
-- Port: `4000`
-- User: `2aEp24QWEDLqRFs.root`
+-   エンドポイント: `xxx.tidbcloud.com`
+-   ポート: `4000`
+-   ユーザー: `2aEp24QWEDLqRFs.root`
 
-In this case, you can modify the `connect` as follows:
+この場合、 `connect`を次のように変更できます。
 
-- When peewee uses PyMySQL as the driver:
+-   peewee がドライバーとして PyMySQL を使用する場合:
 
     ```python
     db = connect('mysql://2aEp24QWEDLqRFs.root:123456@xxx.tidbcloud.com:4000/test', 
         ssl_verify_cert=True, ssl_ca="<ca_path>")
     ```
 
-- When peewee uses mysqlclient as the driver:
+-   peewee が mysqlclient をドライバーとして使用する場合:
 
     ```python
     db = connect('mysql://2aEp24QWEDLqRFs.root:123456@xxx.tidbcloud.com:4000/test',
         ssl_mode="VERIFY_IDENTITY", ssl={"ca": "<ca_path>"})
     ```
 
-Because peewee will pass parameters to the driver, you need to pay attention to the usage type of the driver when using peewee.
+peewee はドライバーにパラメーターを渡すため、peewee を使用する場合はドライバーの使用タイプに注意する必要があります。
 
-### Step 3.3 Run the code
+### ステップ 3.3 コードを実行する {#step-3-3-run-the-code}
 
-Before running the code, use the following command to install dependencies:
+コードを実行する前に、次のコマンドを使用して依存関係をインストールします。
 
 ```bash
 pip3 install -r requirement.txt
 ```
 
-If you need to run the script multiple times, follow the [Table initialization](#step-31-initialize-table) section to initialize the table again before each run.
+スクリプトを複数回実行する必要がある場合は、各実行前に[<a href="#step-31-initialize-table">テーブルの初期化</a>](#step-31-initialize-table)セクションに従ってテーブルを再度初期化します。
 
 ```bash
 python3 peewee_example.py
 ```
 
-## Step 4. Expected output
+## ステップ 4. 期待される出力 {#step-4-expected-output}
 
-[peewee Expected Output](https://github.com/pingcap-inc/tidb-example-python/blob/main/Expected-Output.md#peewee)
+[<a href="https://github.com/pingcap-inc/tidb-example-python/blob/main/Expected-Output.md#peewee">期待される出力</a>](https://github.com/pingcap-inc/tidb-example-python/blob/main/Expected-Output.md#peewee)

@@ -3,15 +3,15 @@ title: SHOW STATS_HEALTHY
 summary: An overview of the usage of SHOW STATS_HEALTHY for TiDB database.
 ---
 
-# SHOW STATS_HEALTHY
+# 統計_健康を表示 {#show-stats-healthy}
 
-The `SHOW STATS_HEALTHY` statement shows an estimation of how accurate statistics are believed to be. Tables with a low percentage health may generate sub-optimal query execution plans.
+`SHOW STATS_HEALTHY`ステートメントは、統計がどの程度正確であると考えられるかの推定を示します。健全性の割合が低いテーブルでは、最適ではないクエリ実行プランが生成される可能性があります。
 
-The health of a table can be improved by running the `ANALYZE` table command. `ANALYZE` runs automatically when the health drops below the [`tidb_auto_analyze_ratio`](/system-variables.md#tidb_auto_analyze_ratio) threshold.
+`ANALYZE` table コマンドを実行すると、テーブルの健全性を改善できます。 `ANALYZE`ヘルスが[<a href="/system-variables.md#tidb_auto_analyze_ratio">`tidb_auto_analyze_ratio`</a>](/system-variables.md#tidb_auto_analyze_ratio)しきい値を下回ると自動的に実行されます。
 
-## Synopsis
+## あらすじ {#synopsis}
 
-**ShowStmt**
+**ショースタンド**
 
 ![ShowStmt](/media/sqlgram/ShowStmt.png)
 
@@ -23,11 +23,11 @@ The health of a table can be improved by running the `ANALYZE` table command. `A
 
 ![ShowLikeOrWhereOpt](/media/sqlgram/ShowLikeOrWhereOpt.png)
 
-## Examples
+## 例 {#examples}
 
-Load example data and run `ANALYZE`:
+サンプルデータをロードして`ANALYZE`を実行します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE t1 (
@@ -60,9 +60,9 @@ mysql> SHOW STATS_HEALTHY;
 1 row in set (0.00 sec)
 ```
 
-Perform a bulk update deleting approximately 30% of the records. Check the health of the statistics:
+一括更新を実行して、レコードの約 30% を削除します。統計の健全性を確認します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 DELETE FROM t1 WHERE id BETWEEN 101010 AND 201010; # delete about 30% of records
@@ -79,11 +79,11 @@ mysql> SHOW STATS_HEALTHY;
 1 row in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL 構文に対する TiDB 拡張機能です。
 
-## See also
+## こちらも参照 {#see-also}
 
-* [ANALYZE](/sql-statements/sql-statement-analyze-table.md)
-* [Introduction to Statistics](/statistics.md)
+-   [<a href="/sql-statements/sql-statement-analyze-table.md">分析する</a>](/sql-statements/sql-statement-analyze-table.md)
+-   [<a href="/statistics.md">統計入門</a>](/statistics.md)

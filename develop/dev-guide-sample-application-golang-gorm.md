@@ -4,51 +4,52 @@ summary: Learn how to build a simple CRUD application with TiDB and GORM.
 ---
 
 <!-- markdownlint-disable MD024 -->
+
 <!-- markdownlint-disable MD029 -->
 
-# Build a Simple CRUD App with TiDB and GORM
+# TiDB と GORM を使用してシンプルな CRUD アプリを構築する {#build-a-simple-crud-app-with-tidb-and-gorm}
 
-[GORM](https://gorm.io/) is a popular open-source ORM library for Golang.
+[<a href="https://gorm.io/">ゴーム</a>](https://gorm.io/)は、 Golang用の人気のあるオープンソース ORM ライブラリです。
 
-This document describes how to use TiDB and GORM to build a simple CRUD application.
+このドキュメントでは、TiDB と GORM を使用して単純な CRUD アプリケーションを構築する方法について説明します。
 
-> **Note:**
+> **ノート：**
 >
-> It is recommended to use Golang 1.16 or a later version.
+> Golang 1.16 以降のバージョンを使用することをお勧めします。
 
-## Step 1. Launch your TiDB cluster
+## ステップ 1. TiDB クラスターを起動する {#step-1-launch-your-tidb-cluster}
 
 <CustomContent platform="tidb">
 
-The following introduces how to start a TiDB cluster.
+TiDB クラスターの起動方法を紹介します。
 
-**Use a TiDB Cloud Serverless Tier cluster**
+**TiDB CloudServerless Tierクラスターを使用する**
 
-For detailed steps, see [Create a Serverless Tier cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster).
+詳細な手順については、 [<a href="/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster">Serverless Tierクラスターの作成</a>](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
 
-**Use a local cluster**
+**ローカルクラスターを使用する**
 
-For detailed steps, see [Deploy a local test cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md).
+詳細な手順については、 [<a href="/quick-start-with-tidb.md#deploy-a-local-test-cluster">ローカルテストクラスターをデプロイ</a>](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[<a href="/production-deployment-using-tiup.md">TiUPを使用した TiDBクラスタのデプロイ</a>](/production-deployment-using-tiup.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-See [Create a Serverless Tier cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster).
+[<a href="/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster">Serverless Tierクラスターの作成</a>](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
 
 </CustomContent>
 
-## Step 2. Get the code
+## ステップ 2. コードを取得する {#step-2-get-the-code}
 
 ```shell
 git clone https://github.com/pingcap-inc/tidb-example-golang.git
 ```
 
-Compared with GORM, the go-sql-driver/mysql implementation might be not a best practice, because you need to write error handling logic, close `*sql.Rows` manually and cannot reuse code easily, which makes your code slightly redundant.
+GORM と比較すると、go-sql-driver/mysql 実装はベスト プラクティスではない可能性があります。エラー処理ロジックを作成し、手動で`*sql.Rows`を閉じる必要があり、コードを簡単に再利用できないため、コードが若干冗長になります。
 
-The following instructions take `v1.23.5` as an example.
+次の手順では`v1.23.5`を例として説明します。
 
-To adapt TiDB transactions, write a toolkit [util](https://github.com/pingcap-inc/tidb-example-golang/tree/main/util) according to the following code:
+TiDB トランザクションを適応させるには、次のコードに従ってツールキット[<a href="https://github.com/pingcap-inc/tidb-example-golang/tree/main/util">ユーティリティ</a>](https://github.com/pingcap-inc/tidb-example-golang/tree/main/util)を作成します。
 
 ```go
 package util
@@ -100,13 +101,13 @@ func (tx *TiDBSqlTx) Rollback() error {
 }
 ```
 
-Change to the `gorm` directory:
+`gorm`ディレクトリに移動します。
 
 ```shell
 cd gorm
 ```
 
-The structure of this directory is as follows:
+このディレクトリの構造は次のとおりです。
 
 ```
 .
@@ -116,9 +117,9 @@ The structure of this directory is as follows:
 └── gorm.go
 ```
 
-`gorm.go` is the main body of the `gorm`. Compared with go-sql-driver/mysql, GORM avoids differences in database creation between different databases. It also implements a lot of operations, such as AutoMigrate and CRUD of objects, which greatly simplifies the code.
+`gorm.go`は`gorm`の本体です。 go-sql-driver/mysql と比較して、GORM は異なるデータベース間でのデータベース作成の差異を回避します。また、AutoMigrate やオブジェクトの CRUD などの多くの操作も実装されており、コードが大幅に簡素化されます。
 
-`Player` is a data entity struct that is a mapping for tables. Each property of a `Player` corresponds to a field in the `player` table. Compared with go-sql-driver/mysql, `Player` in GORM adds struct tags to indicate mapping relationships for more information, such as `gorm:"primaryKey;type:VARCHAR(36);column:id"`.
+`Player`は、テーブルのマッピングであるデータ エンティティ構造体です。 `Player`の各プロパティは、 `player`テーブルのフィールドに対応します。 go-sql-driver/mysql と比較すると、 GORM の`Player`では、詳細情報のマッピング関係を示す struct タグが追加されています ( `gorm:"primaryKey;type:VARCHAR(36);column:id"`など)。
 
 ```go
 
@@ -274,25 +275,25 @@ func buyGoods(db *gorm.DB, sellID, buyID string, amount, price int) error {
 }
 ```
 
-## Step 3. Run the code
+## ステップ 3. コードを実行する {#step-3-run-the-code}
 
-The following content introduces how to run the code step by step.
+次のコンテンツでは、コードを実行する方法をステップごとに紹介します。
 
-### Step 3.1 Modify parameters for TiDB Cloud
+### ステップ 3.1 TiDB Cloudのパラメータを変更する {#step-3-1-modify-parameters-for-tidb-cloud}
 
-If you are using a TiDB Cloud Serverless Tier cluster, modify the value of the `dsn` in `gorm.go`:
+TiDB CloudServerless Tierクラスターを使用している場合は、 `dsn` in `gorm.go`の値を変更します。
 
 ```go
 dsn := "root:@tcp(127.0.0.1:4000)/test?charset=utf8mb4"
 ```
 
-Suppose that the password you set is `123456`, and the connection parameters you get from the cluster details page are the following:
+設定したパスワードが`123456`で、クラスターの詳細ページから取得した接続パラメーターが次であるとします。
 
-- Endpoint: `xxx.tidbcloud.com`
-- Port: `4000`
-- User: `2aEp24QWEDLqRFs.root`
+-   エンドポイント: `xxx.tidbcloud.com`
+-   ポート: `4000`
+-   ユーザー: `2aEp24QWEDLqRFs.root`
 
-In this case, you can modify the `mysql.RegisterTLSConfig` and `dsn` as follows:
+この場合、 `mysql.RegisterTLSConfig`と`dsn`次のように変更できます。
 
 ```go
 mysql.RegisterTLSConfig("register-tidb-tls", &tls.Config {
@@ -303,24 +304,24 @@ mysql.RegisterTLSConfig("register-tidb-tls", &tls.Config {
 dsn := "2aEp24QWEDLqRFs.root:123456@tcp(xxx.tidbcloud.com:4000)/test?charset=utf8mb4&tls=register-tidb-tls"
 ```
 
-### Step 3.2 Run the code
+### ステップ 3.2 コードを実行する {#step-3-2-run-the-code}
 
-To run the code, you can run `make build` and `make run` respectively:
+コードを実行するには、 `make build`と`make run`をそれぞれ実行します。
 
 ```shell
 make build # this command executes `go build -o bin/gorm-example`
 make run # this command executes `./bin/gorm-example`
 ```
 
-Or you can use the native commands:
+または、ネイティブ コマンドを使用することもできます。
 
 ```shell
 go build -o bin/gorm-example
 ./bin/gorm-example
 ```
 
-Or run the `make` command directly, which is a combination of `make build` and `make run`.
+または、 `make build`と`make run`を組み合わせた`make`コマンドを直接実行します。
 
-## Step 4. Expected output
+## ステップ 4. 期待される出力 {#step-4-expected-output}
 
-[GORM Expected Output](https://github.com/pingcap-inc/tidb-example-golang/blob/main/Expected-Output.md#gorm)
+[<a href="https://github.com/pingcap-inc/tidb-example-golang/blob/main/Expected-Output.md#gorm">GORM の期待される出力</a>](https://github.com/pingcap-inc/tidb-example-golang/blob/main/Expected-Output.md#gorm)

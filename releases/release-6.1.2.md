@@ -2,95 +2,95 @@
 title: TiDB 6.1.2 Release Notes
 ---
 
-# TiDB 6.1.2 Release Notes
+# TiDB 6.1.2 リリースノート {#tidb-6-1-2-release-notes}
 
-Release date: October 24, 2022
+発売日：2022年10月24日
 
-TiDB version: 6.1.2
+TiDB バージョン: 6.1.2
 
-Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-tidb) | [Production deployment](https://docs.pingcap.com/tidb/v6.1/production-deployment-using-tiup) | [Installation packages](https://www.pingcap.com/download/?version=v6.1.2#version-list)
+クイックアクセス: [<a href="https://docs.pingcap.com/tidb/v6.1/quick-start-with-tidb">クイックスタート</a>](https://docs.pingcap.com/tidb/v6.1/quick-start-with-tidb) | [<a href="https://docs.pingcap.com/tidb/v6.1/production-deployment-using-tiup">本番展開</a>](https://docs.pingcap.com/tidb/v6.1/production-deployment-using-tiup) | [<a href="https://www.pingcap.com/download/?version=v6.1.2#version-list">インストールパッケージ</a>](https://www.pingcap.com/download/?version=v6.1.2#version-list)
 
-## Improvements
+## 改善点 {#improvements}
 
-+ TiDB
+-   TiDB
 
-    - Allow setting placement rules and TiFlash replicas at the same time in one table [#37171](https://github.com/pingcap/tidb/issues/37171) @[lcwangchao](https://github.com/lcwangchao)
+    -   1 つのテーブルで配置ルールとTiFlashレプリカを同時に設定できるようにします[<a href="https://github.com/pingcap/tidb/issues/37171">#37171</a>](https://github.com/pingcap/tidb/issues/37171) @ [<a href="https://github.com/lcwangchao">ルクワンチャオ</a>](https://github.com/lcwangchao)
 
-+ TiKV
+-   TiKV
 
-    - Support configuring the `unreachable_backoff` item to avoid Raftstore broadcasting too many messages after one peer becomes unreachable [#13054](https://github.com/tikv/tikv/issues/13054) @[5kbpers](https://github.com/5kbpers)
-    - Support configuring the RocksDB write stall settings to a value smaller than the flow control threshold [#13467](https://github.com/tikv/tikv/issues/13467) @[tabokie](https://github.com/tabokie)
+    -   1 つのピアが到達不能になった後にRaftstore が大量のメッセージをブロードキャストすることを避けるための`unreachable_backoff`項目の設定をサポート[<a href="https://github.com/tikv/tikv/issues/13054">#13054</a>](https://github.com/tikv/tikv/issues/13054) @ [<a href="https://github.com/5kbpers">5kbps</a>](https://github.com/5kbpers)
+    -   RocksDB 書き込み停止設定をフロー制御しきい値[<a href="https://github.com/tikv/tikv/issues/13467">#13467</a>](https://github.com/tikv/tikv/issues/13467) @ [<a href="https://github.com/tabokie">タボキー</a>](https://github.com/tabokie)よりも小さい値に構成することをサポート
 
-+ Tools
+-   ツール
 
-    + TiDB Lightning
+    -   TiDB Lightning
 
-        - Add retryable errors during checksum to improve robustness [#37690](https://github.com/pingcap/tidb/issues/37690) @[D3Hunter](https://github.com/D3Hunter)
+        -   チェックサム中に再試行可能なエラーを追加して堅牢性を向上[<a href="https://github.com/pingcap/tidb/issues/37690">#37690</a>](https://github.com/pingcap/tidb/issues/37690) @ [<a href="https://github.com/D3Hunter">D3ハンター</a>](https://github.com/D3Hunter)
 
-    + TiCDC
+    -   TiCDC
 
-        - Enhance the performance of the region worker by handling resolved TS in a batch [#7078](https://github.com/pingcap/tiflow/issues/7078) @[sdojjy](https://github.com/sdojjy)
+        -   解決された TS をバッチ[<a href="https://github.com/pingcap/tiflow/issues/7078">#7078</a>](https://github.com/pingcap/tiflow/issues/7078) @ [<a href="https://github.com/sdojjy">スドジ</a>](https://github.com/sdojjy)で処理することで、リージョン ワーカーのパフォーマンスを向上させます。
 
-## Bug fixes
+## バグの修正 {#bug-fixes}
 
-+ TiDB
+-   TiDB
 
-    - Fix the issue that database-level privileges are incorrectly cleaned up [#38363](https://github.com/pingcap/tidb/issues/38363) @[dveeden](https://github.com/dveeden)
-    - Fix the incorrect output of `SHOW CREATE PLACEMENT POLICY` [#37526](https://github.com/pingcap/tidb/issues/37526) @[xhebox](https://github.com/xhebox)
-    - Fix the issue that when one PD node goes down, the query of `information_schema.TIKV_REGION_STATUS` fails due to not retrying other PD nodes [#35708](https://github.com/pingcap/tidb/issues/35708) @[tangenta](https://github.com/tangenta)
-    - Fix the issue that the `UNION` operator might return unexpected empty result [#36903](https://github.com/pingcap/tidb/issues/36903) @[tiancaiamao](https://github.com/tiancaiamao)
-    - Fix the wrong result that occurs when enabling dynamic mode in partitioned tables for TiFlash [#37254](https://github.com/pingcap/tidb/issues/37254) @[wshwsh12](https://github.com/wshwsh12)
-    - Fix the issue that the Region cache is not cleaned up in time when the Region is merged [#37141](https://github.com/pingcap/tidb/issues/37141) @[sticnarf](https://github.com/sticnarf)
-    - Fix the issue that the KV client sends unnecessary ping messages [#36861](https://github.com/pingcap/tidb/issues/36861) @[jackysp](https://github.com/jackysp)
-    - Fix the issue that the `EXPLAIN ANALYZE` statement with DML executors might return result before the transaction commit finishes [#37373](https://github.com/pingcap/tidb/issues/37373) @[cfzjywxk](https://github.com/cfzjywxk)
-    - Fix the issue that `GROUP CONCAT` with `ORDER BY` might fail when the `ORDER BY` clause contains a correlated subquery [#18216](https://github.com/pingcap/tidb/issues/18216) @[winoros](https://github.com/winoros)
-    - Fix the issue that `Can't find column` is reported if an `UPDATE` statement contains common table expressions (CTE) [#35758](https://github.com/pingcap/tidb/issues/35758) @[AilinKid](https://github.com/AilinKid)
-    - Fix the issue that the `EXECUTE` might throw an unexpected error in specific scenarios [#37187](https://github.com/pingcap/tidb/issues/37187) @[Reminiscent](https://github.com/Reminiscent)
+    -   データベースレベルの権限が誤ってクリーンアップされる問題を修正[<a href="https://github.com/pingcap/tidb/issues/38363">#38363</a>](https://github.com/pingcap/tidb/issues/38363) @ [<a href="https://github.com/dveeden">ドヴィーデン</a>](https://github.com/dveeden)
+    -   `SHOW CREATE PLACEMENT POLICY` [<a href="https://github.com/pingcap/tidb/issues/37526">#37526</a>](https://github.com/pingcap/tidb/issues/37526) @ [<a href="https://github.com/xhebox">ゼボックス</a>](https://github.com/xhebox)の誤った出力を修正
+    -   1 つの PD ノードがダウンすると、他の PD ノード[<a href="https://github.com/pingcap/tidb/issues/35708">#35708</a>](https://github.com/pingcap/tidb/issues/35708) @ [<a href="https://github.com/tangenta">タンジェンタ</a>](https://github.com/tangenta)が再試行されないために`information_schema.TIKV_REGION_STATUS`のクエリが失敗する問題を修正します。
+    -   `UNION`演算子が予期しない空の結果[<a href="https://github.com/pingcap/tidb/issues/36903">#36903</a>](https://github.com/pingcap/tidb/issues/36903) @ [<a href="https://github.com/tiancaiamao">ティエンチャイアマオ</a>](https://github.com/tiancaiamao)を返す可能性がある問題を修正します。
+    -   TiFlash [<a href="https://github.com/pingcap/tidb/issues/37254">#37254</a>](https://github.com/pingcap/tidb/issues/37254) @ [<a href="https://github.com/wshwsh12">wshwsh12</a>](https://github.com/wshwsh12)のパーティション化されたテーブルで動的モードを有効にしたときに発生する間違った結果を修正しました。
+    -   リージョンが[<a href="https://github.com/pingcap/tidb/issues/37141">#37141</a>](https://github.com/pingcap/tidb/issues/37141) @ [<a href="https://github.com/sticnarf">スティックナーフ</a>](https://github.com/sticnarf)でマージされるときに、リージョンキャッシュが時間内にクリーンアップされない問題を修正します。
+    -   KV クライアントが不要な ping メッセージを送信する問題を修正[<a href="https://github.com/pingcap/tidb/issues/36861">#36861</a>](https://github.com/pingcap/tidb/issues/36861) @ [<a href="https://github.com/jackysp">ジャッキースプ</a>](https://github.com/jackysp)
+    -   DML エグゼキュータを使用した`EXPLAIN ANALYZE`ステートメントが、トランザクションのコミットが完了する前に結果を返す可能性がある問題を修正します[<a href="https://github.com/pingcap/tidb/issues/37373">#37373</a>](https://github.com/pingcap/tidb/issues/37373) @ [<a href="https://github.com/cfzjywxk">cfzjywxk</a>](https://github.com/cfzjywxk)
+    -   `ORDER BY`句に相関サブクエリ[<a href="https://github.com/pingcap/tidb/issues/18216">#18216</a>](https://github.com/pingcap/tidb/issues/18216) @ [<a href="https://github.com/winoros">ウィノロス</a>](https://github.com/winoros)が含まれている場合、 `GROUP CONCAT` with `ORDER BY`が失敗する可能性がある問題を修正します。
+    -   `UPDATE`ステートメントに共通テーブル式 (CTE) [<a href="https://github.com/pingcap/tidb/issues/35758">#35758</a>](https://github.com/pingcap/tidb/issues/35758) @ [<a href="https://github.com/AilinKid">アイリンキッド</a>](https://github.com/AilinKid)が含まれる場合に`Can't find column`が報告される問題を修正
+    -   特定のシナリオ[<a href="https://github.com/pingcap/tidb/issues/37187">#37187</a>](https://github.com/pingcap/tidb/issues/37187) @ [<a href="https://github.com/Reminiscent">懐かしい</a>](https://github.com/Reminiscent)で`EXECUTE`予期しないエラーをスローする可能性がある問題を修正します。
 
-+ TiKV
+-   TiKV
 
-    - Fix the issue that the snapshot data might be incomplete caused by batch snapshot across Regions [#13553](https://github.com/tikv/tikv/issues/13553) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
-    - Fix the issue of QPS drop when flow control is enabled and `level0_slowdown_trigger` is set explicitly [#11424](https://github.com/tikv/tikv/issues/11424) @[Connor1996](https://github.com/Connor1996)
-    - Fix the issue that causes permission denied error when TiKV gets an error from the web identity provider and fails back to the default provider [#13122](https://github.com/tikv/tikv/issues/13122) @[3pointer](https://github.com/3pointer)
-    - Fix the issue that the TiKV service is unavailable for several minutes when a TiKV instance is in an isolated network environment [#12966](https://github.com/tikv/tikv/issues/12966) @[cosven](https://github.com/cosven)
+    -   リージョン[<a href="https://github.com/tikv/tikv/issues/13553">#13553</a>](https://github.com/tikv/tikv/issues/13553) @ [<a href="https://github.com/SpadeA-Tang">SpadeA-Tang</a>](https://github.com/SpadeA-Tang)にわたるバッチ スナップショットが原因でスナップショット データが不完全になる可能性がある問題を修正
+    -   フロー制御が有効で、 `level0_slowdown_trigger`が明示的に[<a href="https://github.com/tikv/tikv/issues/11424">#11424</a>](https://github.com/tikv/tikv/issues/11424) @ [<a href="https://github.com/Connor1996">コナー1996</a>](https://github.com/Connor1996)に設定されている場合の QPS ドロップの問題を修正
+    -   TiKV が Web ID プロバイダーからエラーを取得し、デフォルトのプロバイダー[<a href="https://github.com/tikv/tikv/issues/13122">#13122</a>](https://github.com/tikv/tikv/issues/13122) @ [<a href="https://github.com/3pointer">3ポインター</a>](https://github.com/3pointer)にフェイルバックすると、アクセス許可拒否エラーが発生する問題を修正します。
+    -   TiKV インスタンスが隔離されたネットワーク環境[<a href="https://github.com/tikv/tikv/issues/12966">#12966</a>](https://github.com/tikv/tikv/issues/12966) @ [<a href="https://github.com/cosven">コスベン</a>](https://github.com/cosven)にある場合、TiKV サービスが数分間利用できなくなる問題を修正します。
 
-+ PD
+-   PD
 
-    - Fix the issue that the statistics of the Region tree might be inaccurate [#5318](https://github.com/tikv/pd/issues/5318) @[rleungx](https://github.com/rleungx)
-    - Fix the issue that the TiFlash learner replica might not be created [#5401](https://github.com/tikv/pd/issues/5401) @[HunDunDM](https://github.com/HunDunDM)
-    - Fix the issue that PD cannot correctly handle dashboard proxy requests [#5321](https://github.com/tikv/pd/issues/5321) @[HunDunDM](https://github.com/HunDunDM)
-    - Fix the issue that unhealthy Region might cause PD panic [#5491](https://github.com/tikv/pd/issues/5491) @[nolouch](https://github.com/nolouch)
+    -   リージョンツリーの統計が不正確になる可能性がある問題を修正[<a href="https://github.com/tikv/pd/issues/5318">#5318</a>](https://github.com/tikv/pd/issues/5318) @ [<a href="https://github.com/rleungx">ルルンクス</a>](https://github.com/rleungx)
+    -   TiFlash学習者のレプリカが作成されないことがある問題を修正[<a href="https://github.com/tikv/pd/issues/5401">#5401</a>](https://github.com/tikv/pd/issues/5401) @ [<a href="https://github.com/HunDunDM">フンドゥンDM</a>](https://github.com/HunDunDM)
+    -   PD がダッシュボード プロキシ リクエスト[<a href="https://github.com/tikv/pd/issues/5321">#5321</a>](https://github.com/tikv/pd/issues/5321) @ [<a href="https://github.com/HunDunDM">フンドゥンDM</a>](https://github.com/HunDunDM)を正しく処理できない問題を修正
+    -   異常なリージョンにより PDpanic[<a href="https://github.com/tikv/pd/issues/5491">#5491</a>](https://github.com/tikv/pd/issues/5491) @ [<a href="https://github.com/nolouch">ノールーシュ</a>](https://github.com/nolouch)が発生する可能性がある問題を修正
 
-+ TiFlash
+-   TiFlash
 
-    - Fix the issue that I/O Limiter might incorrectly throttle the I/O throughput of query requests after bulk writes, which reduces the query performance [#5801](https://github.com/pingcap/tiflash/issues/5801) @[JinheLin](https://github.com/JinheLin)
-    - Fix the issue that a window function might cause TiFlash to crash when the query is canceled [#5814](https://github.com/pingcap/tiflash/issues/5814) @[SeaRise](https://github.com/SeaRise)
-    - Fix the panic that occurs after creating the primary index with a column containing the `NULL` value [#5859](https://github.com/pingcap/tiflash/issues/5859) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    -   I/O リミッターが一括書き込み後にクエリ リクエストの I/O スループットを誤って調整し、クエリのパフォーマンスが低下する可能性がある問題を修正します[<a href="https://github.com/pingcap/tiflash/issues/5801">#5801</a>](https://github.com/pingcap/tiflash/issues/5801) @ [<a href="https://github.com/JinheLin">ジンヘリン</a>](https://github.com/JinheLin)
+    -   クエリがキャンセルされたときにウィンドウ関数によってTiFlashがクラッシュする可能性がある問題を修正[<a href="https://github.com/pingcap/tiflash/issues/5814">#5814</a>](https://github.com/pingcap/tiflash/issues/5814) @ [<a href="https://github.com/SeaRise">シーライズ</a>](https://github.com/SeaRise)
+    -   `NULL`値[<a href="https://github.com/pingcap/tiflash/issues/5859">#5859</a>](https://github.com/pingcap/tiflash/issues/5859) @ [<a href="https://github.com/JaySon-Huang">ジェイ・ソン・ファン</a>](https://github.com/JaySon-Huang)を含む列でプライマリ インデックスを作成した後に発生するpanicを修正します。
 
-+ Tools
+-   ツール
 
-    + TiDB Lightning
+    -   TiDB Lightning
 
-        - Fix panic of TiDB Lightning caused by invalid metric counters [#37338](https://github.com/pingcap/tidb/issues/37338) @[D3Hunter](https://github.com/D3Hunter)
+        -   無効なメトリック カウンター[<a href="https://github.com/pingcap/tidb/issues/37338">#37338</a>](https://github.com/pingcap/tidb/issues/37338) @ [<a href="https://github.com/D3Hunter">D3ハンター</a>](https://github.com/D3Hunter)によって引き起こされるTiDB Lightningのpanicを修正
 
-    + TiDB Data Migration (DM)
+    -   TiDB データ移行 (DM)
 
-        - Fix the issue that upstream table structure information is lost when DM tasks enter the sync unit and are interrupted [#7159](https://github.com/pingcap/tiflow/issues/7159) @[lance6716](https://github.com/lance6716)
-        - Fix large transaction errors by splitting SQL statements when saving checkpoints [#5010](https://github.com/pingcap/tiflow/issues/5010) @[lance6716](https://github.com/lance6716)
-        - Fix the issue that DM precheck requires the `SELECT` privilege on `INFORMATION_SCHEMA` [#7317](https://github.com/pingcap/tiflow/issues/7317) @[lance6716](https://github.com/lance6716)
-        - Fix the issue that DM-worker triggers a deadlock error after running DM tasks with fast/full validators [#7241](https://github.com/pingcap/tiflow/issues/7241) @[buchuitoudegou](https://github.com/buchuitoudegou)
-        - Fix the issue that DM reports the `Specified key was too long` error [#5315](https://github.com/pingcap/tiflow/issues/5315) @[lance6716](https://github.com/lance6716)
-        - Fix the issue that latin1 data might be corrupted during replication [#7028](https://github.com/pingcap/tiflow/issues/7028) @[lance6716](https://github.com/lance6716)
+        -   DM タスクが同期ユニットに入って中断されると、上流のテーブル構造情報が失われる問題を修正します[<a href="https://github.com/pingcap/tiflow/issues/7159">#7159</a>](https://github.com/pingcap/tiflow/issues/7159) @ [<a href="https://github.com/lance6716">ランス6716</a>](https://github.com/lance6716)
+        -   チェックポイント[<a href="https://github.com/pingcap/tiflow/issues/5010">#5010</a>](https://github.com/pingcap/tiflow/issues/5010) @ [<a href="https://github.com/lance6716">ランス6716</a>](https://github.com/lance6716)を保存するときに SQL ステートメントを分割することで、大規模なトランザクション エラーを修正しました。
+        -   DM 事前チェックに`INFORMATION_SCHEMA` [<a href="https://github.com/pingcap/tiflow/issues/7317">#7317</a>](https://github.com/pingcap/tiflow/issues/7317) @ [<a href="https://github.com/lance6716">ランス6716</a>](https://github.com/lance6716)の`SELECT`権限が必要になる問題を修正
+        -   高速/完全バリデータ[<a href="https://github.com/pingcap/tiflow/issues/7241">#7241</a>](https://github.com/pingcap/tiflow/issues/7241) @ [<a href="https://github.com/buchuitoudegou">ブチュイトデゴウ</a>](https://github.com/buchuitoudegou)で DM タスクを実行した後、DM ワーカーがデッドロック エラーを引き起こす問題を修正
+        -   DM が`Specified key was too long`エラー[<a href="https://github.com/pingcap/tiflow/issues/5315">#5315</a>](https://github.com/pingcap/tiflow/issues/5315) @ [<a href="https://github.com/lance6716">ランス6716</a>](https://github.com/lance6716)を報告する問題を修正
+        -   レプリケーション[<a href="https://github.com/pingcap/tiflow/issues/7028">#7028</a>](https://github.com/pingcap/tiflow/issues/7028) @ [<a href="https://github.com/lance6716">ランス6716</a>](https://github.com/lance6716)中に latin1 データが破損する可能性がある問題を修正
 
-    + TiCDC
+    -   TiCDC
 
-        - Fix the issue that the cdc server might panic if it receives an HTTP request before the cdc server fully starts [#6838](https://github.com/pingcap/tiflow/issues/6838) @[asddongmen](https://github.com/asddongmen)
-        - Fix the log flooding issue during upgrade [#7235](https://github.com/pingcap/tiflow/issues/7235) @[hi-rustin](https://github.com/hi-rustin)
-        - Fix the issue that changefeed's redo log files might be deleted by mistake [#6413](https://github.com/pingcap/tiflow/issues/6413) @[hi-rustin](https://github.com/hi-rustin)
-        - Fix the issue that TiCDC might become unavailable when too many operations in an etcd transaction are committed [#7131](https://github.com/pingcap/tiflow/issues/7131) @[hi-rustin](https://github.com/hi-rustin)
-        - Fix the issue that data inconsistency might occur when non-reentrant DDL statements in redo logs are executed twice [#6927](https://github.com/pingcap/tiflow/issues/6927) @[hicqu](https://github.com/hicqu)
+        -   CDCサーバーが完全に起動する前に HTTP リクエストを受信すると、CDCサーバーがpanic可能性がある問題を修正します[<a href="https://github.com/pingcap/tiflow/issues/6838">#6838</a>](https://github.com/pingcap/tiflow/issues/6838) @ [<a href="https://github.com/asddongmen">東門</a>](https://github.com/asddongmen)
+        -   アップグレード[<a href="https://github.com/pingcap/tiflow/issues/7235">#7235</a>](https://github.com/pingcap/tiflow/issues/7235) @ [<a href="https://github.com/hi-rustin">こんにちはラスティン</a>](https://github.com/hi-rustin)中のログフラッディング問題を修正
+        -   ChangeFeed の REDO ログ ファイルが誤って削除される可能性がある問題を修正[<a href="https://github.com/pingcap/tiflow/issues/6413">#6413</a>](https://github.com/pingcap/tiflow/issues/6413) @ [<a href="https://github.com/hi-rustin">こんにちはラスティン</a>](https://github.com/hi-rustin)
+        -   etcd トランザクションでコミットされる操作が多すぎると TiCDC が使用できなくなる可能性がある問題を修正[<a href="https://github.com/pingcap/tiflow/issues/7131">#7131</a>](https://github.com/pingcap/tiflow/issues/7131) @ [<a href="https://github.com/hi-rustin">こんにちはラスティン</a>](https://github.com/hi-rustin)
+        -   REDO ログ内の非再入可能 DDL ステートメントが 2 回実行されるとデータの不整合が発生する可能性がある問題を修正[<a href="https://github.com/pingcap/tiflow/issues/6927">#6927</a>](https://github.com/pingcap/tiflow/issues/6927) @ [<a href="https://github.com/hicqu">ひっくり返る</a>](https://github.com/hicqu)
 
-    + Backup & Restore (BR)
+    -   バックアップと復元 (BR)
 
-        - Fix the issue that the regions are not balanced because the concurrency is set too large during the restoration [#37549](https://github.com/pingcap/tidb/issues/37549) @[3pointer](https://github.com/3pointer)
-        - Fix the issue that might lead to backup and restoration failure if special characters exist in the authorization key of external storage [#37469](https://github.com/pingcap/tidb/issues/37469) @[MoCuishle28](https://github.com/MoCuishle28)
+        -   復元中に同時実行数の設定が大きすぎるため、リージョンのバランスが取れない問題を修正[<a href="https://github.com/pingcap/tidb/issues/37549">#37549</a>](https://github.com/pingcap/tidb/issues/37549) @ [<a href="https://github.com/3pointer">3ポインター</a>](https://github.com/3pointer)
+        -   外部storage[<a href="https://github.com/pingcap/tidb/issues/37469">#37469</a>](https://github.com/pingcap/tidb/issues/37469) @ [<a href="https://github.com/MoCuishle28">モクイシュル28</a>](https://github.com/MoCuishle28)の認証キーに特殊文字が存在する場合、バックアップと復元が失敗する可能性がある問題を修正

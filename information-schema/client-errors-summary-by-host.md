@@ -3,33 +3,33 @@ title: CLIENT_ERRORS_SUMMARY_BY_HOST
 summary: Learn about the `CLIENT_ERRORS_SUMMARY_BY_HOST` INFORMATION_SCHEMA table.
 ---
 
-# CLIENT_ERRORS_SUMMARY_BY_HOST
+# CLIENT_ERRORS_SUMMARY_BY_HOST {#client-errors-summary-by-host}
 
-The table `CLIENT_ERRORS_SUMMARY_BY_HOST` provides a summary of SQL errors and warnings that have been returned to clients that connect to a TiDB server. These include:
+表`CLIENT_ERRORS_SUMMARY_BY_HOST`は、TiDBサーバーに接続するクライアントに返される SQL エラーと警告の概要を示しています。これらには次のものが含まれます。
 
-* Malformed SQL statements.
-* Division by zero errors.
-* The attempt to insert out-of-range or duplicate key values.
-* Permission errors.
-* A table that does not exist.
+-   不正な形式の SQL ステートメント。
+-   ゼロ除算エラー。
+-   範囲外または重複したキー値を挿入しようとしました。
+-   許可エラー。
+-   存在しないテーブル。
 
-These errors are returned to the client via the MySQL server protocol, where applications are expected to take appropriate action. The `INFORMATION_SCHEMA.CLIENT_ERRORS_SUMMARY_BY_HOST` table provides a useful method to inspect errors in the scenario where applications are not correctly handling (or logging) errors returned by the TiDB server.
+これらのエラーは MySQLサーバープロトコル経由でクライアントに返され、アプリケーションは適切なアクションを実行することが期待されます。表`INFORMATION_SCHEMA.CLIENT_ERRORS_SUMMARY_BY_HOST`は、アプリケーションが TiDBサーバーから返されたエラーを正しく処理 (またはログ記録) していないシナリオでエラーを検査する便利な方法を提供します。
 
-Because `CLIENT_ERRORS_SUMMARY_BY_HOST` summarizes the errors on a per-remote-host basis, it can be useful to diagnose scenarios where one application server is generating more errors than other servers. Possible scenarios include:
+`CLIENT_ERRORS_SUMMARY_BY_HOST`リモート ホストごとにエラーを要約するため、あるアプリケーションサーバーが他のサーバーよりも多くのエラーを生成しているシナリオを診断するのに役立ちます。考えられるシナリオは次のとおりです。
 
-* An outdated MySQL client library.
-* An outdated application (possibly this server was missed when rolling out a new deployment).
-* Incorrect usage of the "host" portion of user permissions.
-* Unreliable network connectivity generating more timeouts or disconnected connections.
+-   古い MySQL クライアント ライブラリ。
+-   古いアプリケーション (新しい展開をロールアウトするときにこのサーバーが見つからなかった可能性があります)。
+-   ユーザー権限の「ホスト」部分の誤った使用。
+-   ネットワーク接続の信頼性が低いため、タイムアウトや接続の切断が増加します。
 
-The summarized counts can be reset using the statement `FLUSH CLIENT_ERRORS_SUMMARY`. The summary is local to each TiDB server and is only retained in memory. Summaries will be lost if the TiDB server restarts.
+要約されたカウントは、ステートメント`FLUSH CLIENT_ERRORS_SUMMARY`を使用してリセットできます。概要は各 TiDBサーバーに対してローカルであり、メモリ内にのみ保持されます。 TiDBサーバーが再起動すると、サマリーは失われます。
 
 ```sql
 USE INFORMATION_SCHEMA;
 DESC CLIENT_ERRORS_SUMMARY_BY_HOST;
 ```
 
-The output is as follows:
+出力は次のとおりです。
 
 ```sql
 +---------------+---------------+------+------+---------+-------+
@@ -46,17 +46,17 @@ The output is as follows:
 7 rows in set (0.00 sec)
 ```
 
-Field description:
+フィールドの説明:
 
-* `HOST`: The remote host of the client.
-* `ERROR_NUMBER`: The MySQL-compatible error number that was returned.
-* `ERROR_MESSAGE`: The error message which matches the error number (in prepared statement form).
-* `ERROR_COUNT`: The number of times this error was returned to the client host.
-* `WARNING_COUNT`: The number of times this warning was returned to the client host.
-* `FIRST_SEEN`: The first time this error (or warning) was seen from the client host.
-* `LAST_SEEN`: The most recent time this error (or warning) was seen from the client host.
+-   `HOST` : クライアントのリモートホスト。
+-   `ERROR_NUMBER` : 返された MySQL 互換のエラー番号。
+-   `ERROR_MESSAGE` : エラー番号と一致するエラー メッセージ (プリペアドステートメント形式)。
+-   `ERROR_COUNT` : このエラーがクライアント ホストに返された回数。
+-   `WARNING_COUNT` : この警告がクライアント ホストに返された回数。
+-   `FIRST_SEEN` : このエラー (または警告) がクライアント ホストから初めて確認されたとき。
+-   `LAST_SEEN` : このエラー (または警告) がクライアント ホストから最後に確認された時刻。
 
-The following example shows a warning being generated when the client connects to a local TiDB server. The summary is reset after executing `FLUSH CLIENT_ERRORS_SUMMARY`:
+次の例は、クライアントがローカル TiDBサーバーに接続するときに生成される警告を示しています。 `FLUSH CLIENT_ERRORS_SUMMARY`を実行するとサマリーがリセットされます。
 
 ```sql
 SELECT 0/0;
@@ -65,7 +65,7 @@ FLUSH CLIENT_ERRORS_SUMMARY;
 SELECT * FROM CLIENT_ERRORS_SUMMARY_BY_HOST;
 ```
 
-The output is as follows:
+出力は次のとおりです。
 
 ```sql
 +-----+

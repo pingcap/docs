@@ -3,150 +3,151 @@ title: Import or Migrate from Amazon S3 or GCS to TiDB Cloud
 summary: Learn how to import or migrate data from Amazon Simple Storage Service (Amazon S3) or Google Cloud Storage (GCS) to TiDB Cloud.
 ---
 
-# Import or Migrate from Amazon S3 or GCS to TiDB Cloud
+# Amazon S3 または GCS からTiDB Cloudへのインポートまたは移行 {#import-or-migrate-from-amazon-s3-or-gcs-to-tidb-cloud}
 
-This document describes how to use Amazon Simple Storage Service (Amazon S3) or Google Cloud Storage (GCS) as a staging area for importing or migrating data into TiDB Cloud.
+このドキュメントでは、Amazon Simple Storage Service (Amazon S3) または Google Cloud Storage (GCS) をTiDB Cloudにデータをインポートまたは移行するためのステージング領域として使用する方法について説明します。
 
-> **Note:**
+> **ノート：**
 >
-> If your upstream database is Amazon Aurora MySQL, instead of referring to this document, follow instructions in [Migrate from Amazon Aurora MySQL to TiDB Cloud in Bulk](/tidb-cloud/migrate-from-aurora-bulk-import.md).
+> アップストリーム データベースが Amazon Aurora MySQL の場合は、このドキュメントを参照する代わりに、 [<a href="/tidb-cloud/migrate-from-aurora-bulk-import.md">Amazon Aurora MySQL からTiDB Cloudへ一括移行</a>](/tidb-cloud/migrate-from-aurora-bulk-import.md)の手順に従ってください。
 
-## Import or migrate from Amazon S3 to TiDB Cloud
+## Amazon S3 からTiDB Cloudへのインポートまたは移行 {#import-or-migrate-from-amazon-s3-to-tidb-cloud}
 
-If your organization is using TiDB Cloud as a service on AWS, you can use Amazon S3 as a staging area for importing or migrating data into TiDB Cloud.
+組織が AWS のサービスとしてTiDB Cloudを使用している場合は、 TiDB Cloudにデータをインポートまたは移行するためのステージング領域として Amazon S3 を使用できます。
 
-### Prerequisites
+### 前提条件 {#prerequisites}
 
-Before migrating data from Amazon S3 to TiDB Cloud, ensure you have administrator access to your corporate-owned AWS account.
+データを Amazon S3 からTiDB Cloudに移行する前に、企業所有の AWS アカウントへの管理者アクセス権があることを確認してください。
 
-### Step 1. Create an Amazon S3 bucket and prepare source data files
+### ステップ 1. Amazon S3 バケットを作成し、ソースデータファイルを準備する {#step-1-create-an-amazon-s3-bucket-and-prepare-source-data-files}
 
-1. Create an Amazon S3 bucket in your corporate-owned AWS account.
+1.  企業所有の AWS アカウントに Amazon S3 バケットを作成します。
 
-    For more information, see [Creating a bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html) in the AWS User Guide.
+    詳細については、AWS ユーザーガイドの[<a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html">バケットの作成</a>](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html)を参照してください。
 
-    > **Note:**
+    > **ノート：**
     >
-    > To minimize egress charges and latency, create your Amazon S3 bucket and TiDB Cloud database cluster in the same region.
+    > 下り料金とレイテンシーを最小限に抑えるには、Amazon S3 バケットとTiDB Cloudデータベース クラスターを同じリージョンに作成します。
 
-2. If you are migrating data from an upstream database, you need to export the source data first.
+2.  アップストリーム データベースからデータを移行する場合は、最初にソース データをエクスポートする必要があります。
 
-    For more information, see [Migrate Data from MySQL-Compatible Databases](/tidb-cloud/migrate-data-into-tidb.md).
+    詳細については、 [<a href="/tidb-cloud/migrate-data-into-tidb.md">MySQL 互換データベースからのデータの移行</a>](/tidb-cloud/migrate-data-into-tidb.md)を参照してください。
 
-3. If your source data is in local files, you can upload the files to the Amazon S3 bucket using either the Amazon S3 console or the AWS CLI.
+3.  ソースデータがローカル ファイルにある場合は、Amazon S3 コンソールまたは AWS CLI を使用してファイルを Amazon S3 バケットにアップロードできます。
 
-    - To upload files using the Amazon S3 console, see [Uploading objects](https://docs.aws.amazon.com/AmazonS3/latest/userguide/upload-objects.html) in the AWS User Guide.
-    - To upload files using the AWS CLI, use the following command:
+    -   Amazon S3 コンソールを使用してファイルをアップロードするには、AWS ユーザーガイドの[<a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/upload-objects.html">オブジェクトのアップロード</a>](https://docs.aws.amazon.com/AmazonS3/latest/userguide/upload-objects.html)を参照してください。
+    -   AWS CLI を使用してファイルをアップロードするには、次のコマンドを使用します。
 
         ```shell
         aws s3 sync <Local path> <Amazon S3 bucket URI>
         ```
 
-        For example:
+        例えば：
 
         ```shell
         aws s3 sync ./tidbcloud-samples-us-west-2/ s3://tidb-cloud-source-data
         ```
 
-> **Note:**
+> **ノート：**
 >
-> - Ensure that your source data can be copied to a file format supported by TiDB Cloud. The supported formats include CSV, Dumpling, and Aurora Backup Snapshot. If your source files are in the CSV format, you need to follow [the naming convention supported by TiDB](https://docs.pingcap.com/tidb/stable/migrate-from-csv-using-tidb-lightning#file-name).
-> - Where possible and applicable, it is recommended that you split a large source file into smaller files of maximum size 256 MB. It allows TiDB Cloud to read files in parallel across threads, thereby resulting in potentially enhanced import performance.
+> -   ソース データがTiDB Cloudでサポートされているファイル形式にコピーできることを確認してください。サポートされている形式には、CSV、 Dumpling、 Aurora Backup Snapshot が含まれます。ソース ファイルが CSV 形式の場合は、 [<a href="https://docs.pingcap.com/tidb/stable/migrate-from-csv-using-tidb-lightning#file-name">TiDB がサポートする命名規則</a>](https://docs.pingcap.com/tidb/stable/migrate-from-csv-using-tidb-lightning#file-name)に従う必要があります。
+> -   可能かつ該当する場合は、大きなソース ファイルを最大サイズ 256 MB の小さなファイルに分割することをお勧めします。これにより、 TiDB Cloudはスレッド間で並行してファイルを読み取ることができるため、インポートのパフォーマンスが向上する可能性があります。
 
-### Step 2. Configure Amazon S3 access
+### ステップ 2. Amazon S3 アクセスを構成する {#step-2-configure-amazon-s3-access}
 
-To allow TiDB Cloud to access the source data in your Amazon S3 bucket, you need to configure the bucket access for TiDB Cloud and get the Role-ARN. Once the configuration is done for one TiDB cluster in a project, all TiDB clusters in that project can use the same Role-ARN to access your Amazon S3 bucket.
+TiDB Cloud がAmazon S3 バケット内のソース データにアクセスできるようにするには、 TiDB Cloudのバケット アクセスを設定し、Role-ARN を取得する必要があります。プロジェクト内の 1 つの TiDB クラスターの設定が完了すると、そのプロジェクト内のすべての TiDB クラスターが同じロール ARN を使用して Amazon S3 バケットにアクセスできるようになります。
 
-For detailed steps, see [Configure Amazon S3 access](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access).
+詳細な手順については、 [<a href="/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access">Amazon S3 アクセスを構成する</a>](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access)を参照してください。
 
-### Step 3. Import data into TiDB Cloud
+### ステップ 3. データをTiDB Cloudにインポートする {#step-3-import-data-into-tidb-cloud}
 
-1. Open the **Import** page for your target cluster.
+1.  ターゲットクラスターの**インポート**ページを開きます。
 
-    1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+    1.  [<a href="https://tidbcloud.com/">TiDB Cloudコンソール</a>](https://tidbcloud.com/)にログインし、プロジェクトの[<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページに移動します。
 
-        > **Tip:**
+        > **ヒント：**
         >
-        > If you have multiple projects, you can switch to the target project in the left navigation pane of the **Clusters** page.
+        > 複数のプロジェクトがある場合は、 **「クラスター」**ページの左側のナビゲーション・ペインでターゲット・プロジェクトに切り替えることができます。
 
-    2. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
+    2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[インポート]**をクリックします。
 
-2. On the **Import** page, click **Import Data** in the upper-right corner, select **From S3**, and then fill in the following parameters:
+2.  **[インポート]**ページで、右上隅にある**[データのインポート]**をクリックし、 **[S3 から] を**選択して、次のパラメーターを入力します。
 
-    - **Data format**: choose the format of your data.
-    - **Bucket URI**: fill in the bucket URI of your source data.
-    - **Role ARN**: enter the Role-ARN you obtained in [Step 2](#step-2-configure-amazon-s3-access).
+    -   **データ形式**: データの形式を選択します。
+    -   **バケット URI** : ソース データのバケット URI を入力します。
+    -   **ロール ARN** : [<a href="#step-2-configure-amazon-s3-access">ステップ2</a>](#step-2-configure-amazon-s3-access)で取得したロール ARN を入力します。
 
-    If the region of the bucket is different from your cluster, confirm the compliance of cross region. Click **Next**.
+    バケットのリージョンがクラスターと異なる場合は、クロスリージョンのコンプライアンスを確認してください。 **「次へ」**をクリックします。
 
-    TiDB Cloud starts validating whether it can access your data in the specified bucket URI. After validation, TiDB Cloud tries to scan all the files in the data source using the default file naming pattern, and returns a scan summary result on the left side of the next page. If you get the `AccessDenied` error, see [Troubleshoot Access Denied Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-access-denied-error.md).
+    TiDB Cloudは、指定されたバケット URI 内のデータにアクセスできるかどうかの検証を開始します。検証後、 TiDB Cloudはデフォルトのファイル命名パターンを使用してデータ ソース内のすべてのファイルのスキャンを試行し、次のページの左側にスキャンの概要結果を返します。 `AccessDenied`エラーが発生した場合は、 [<a href="/tidb-cloud/troubleshoot-import-access-denied-error.md">S3 からのデータインポート中のアクセス拒否エラーのトラブルシューティング</a>](/tidb-cloud/troubleshoot-import-access-denied-error.md)を参照してください。
 
-3. Modify the file patterns and add the table filter rules if needed.
+3.  必要に応じて、ファイル パターンを変更し、テーブル フィルター ルールを追加します。
 
-4. Click **Next**.
+4.  **「次へ」**をクリックします。
 
-5. On the **Preview** page, confirm the data to be imported and then click **Start Import**.
+5.  **[プレビュー]**ページで、インポートするデータを確認し、 **[インポートの開始]**をクリックします。
 
-After the data is imported, if you want to remove the Amazon S3 access of TiDB Cloud, simply delete the policy that you added in [Step 2. Configure Amazon S3 access](#step-2-configure-amazon-s3-access).
+データのインポート後、 TiDB Cloudの Amazon S3 アクセスを削除する場合は、 [<a href="#step-2-configure-amazon-s3-access">ステップ 2. Amazon S3 アクセスを構成する</a>](#step-2-configure-amazon-s3-access)で追加したポリシーを削除するだけです。
 
-## Import or migrate from GCS to TiDB Cloud
+## GCS からTiDB Cloudへのインポートまたは移行 {#import-or-migrate-from-gcs-to-tidb-cloud}
 
-If your organization is using TiDB Cloud as a service on Google Cloud Platform (GCP), you can use Google Cloud Storage (GCS) as a staging area for importing or migrating data into TiDB Cloud.
+組織が Google Cloud Platform (GCP) 上のサービスとしてTiDB Cloudを使用している場合は、 TiDB Cloudにデータをインポートまたは移行するためのステージング領域として Google Cloud Storage (GCS) を使用できます。
 
-### Prerequisites
+### 前提条件 {#prerequisites}
 
-Before migrating data from GCS to TiDB Cloud, ensure the following:
+データを GCS からTiDB Cloudに移行する前に、次のことを確認してください。
 
-- You have administrator access to your corporate-owned GCP account.
-- You have administrator access to the TiDB Cloud Management Portal.
+-   企業所有の GCP アカウントへの管理者アクセス権を持っています。
+-   TiDB Cloud管理ポータルへの管理者アクセス権を持っています。
 
-### Step 1. Create a GCS bucket and prepare source data files
+### ステップ 1. GCS バケットを作成し、ソース データ ファイルを準備する {#step-1-create-a-gcs-bucket-and-prepare-source-data-files}
 
-1. Create a GCS bucket in your corporate-owned GCP account.
+1.  企業所有の GCP アカウントに GCS バケットを作成します。
 
-    For more information, see [Creating storage buckets](https://cloud.google.com/storage/docs/creating-buckets) in the Google Cloud Storage documentation.
+    詳細については、Google Cloud Storage ドキュメントの[<a href="https://cloud.google.com/storage/docs/creating-buckets">storageバケットの作成</a>](https://cloud.google.com/storage/docs/creating-buckets)を参照してください。
 
-2. If you are migrating data from an upstream database, you need to export the source data first.
+2.  アップストリーム データベースからデータを移行する場合は、最初にソース データをエクスポートする必要があります。
 
-    For more information, see [Install TiUP](/tidb-cloud/migrate-data-into-tidb.md#step-1-install-tiup) and [Export data from MySQL compatible databases](/tidb-cloud/migrate-data-into-tidb.md#step-2-export-data-from-mysql-compatible-databases).
+    詳細については、 [<a href="/tidb-cloud/migrate-data-into-tidb.md#step-1-install-tiup">TiUPをインストールする</a>](/tidb-cloud/migrate-data-into-tidb.md#step-1-install-tiup)および[<a href="/tidb-cloud/migrate-data-into-tidb.md#step-2-export-data-from-mysql-compatible-databases">MySQL互換データベースからデータをエクスポート</a>](/tidb-cloud/migrate-data-into-tidb.md#step-2-export-data-from-mysql-compatible-databases)を参照してください。
 
-> **Note:**
+> **ノート：**
 >
-> - Ensure that your source data can be copied to a file format supported by TiDB Cloud. The supported formats include CSV, Dumpling, and Aurora Backup Snapshot. If your source files are in the CSV format, you need to follow [the naming convention supported by TiDB](https://docs.pingcap.com/tidb/stable/migrate-from-csv-using-tidb-lightning#file-name).
-> - Where possible and applicable, it is recommended that you split a large source file into smaller files of maximum size 256 MB because it can allow TiDB Cloud to read files in parallel across threads, which provides you faster importing performance.
+> -   ソース データがTiDB Cloudでサポートされているファイル形式にコピーできることを確認してください。サポートされている形式には、CSV、 Dumpling、 Aurora Backup Snapshot が含まれます。ソース ファイルが CSV 形式の場合は、 [<a href="https://docs.pingcap.com/tidb/stable/migrate-from-csv-using-tidb-lightning#file-name">TiDB がサポートする命名規則</a>](https://docs.pingcap.com/tidb/stable/migrate-from-csv-using-tidb-lightning#file-name)に従う必要があります。
+> -   可能かつ該当する場合は、大きなソース ファイルを最大サイズ 256 MB の小さなファイルに分割することをお勧めします。これにより、 TiDB Cloudがスレッド間で並行してファイルを読み取ることができ、インポートのパフォーマンスが向上します。
 
-### Step 2. Configure GCS access
+### ステップ 2. GCS アクセスを構成する {#step-2-configure-gcs-access}
 
-To allow TiDB cloud to access the source data in your GCS bucket, you need to configure the GCS access for each TiDB Cloud as a service on the GCP project and GCS bucket pair. Once the configuration is done for one cluster in a project, all database clusters in that project can access the GCS bucket.
+TiDB クラウドが GCS バケット内のソース データにアクセスできるようにするには、GCP プロジェクトと GCS バケットのペア上のサービスとして、各TiDB Cloudの GCS アクセスを構成する必要があります。プロジェクト内の 1 つのクラスターの構成が完了すると、そのプロジェクト内のすべてのデータベース クラスターが GCS バケットにアクセスできるようになります。
 
-For detailed steps, see [Configure GCS access](/tidb-cloud/config-s3-and-gcs-access.md#configure-gcs-access).
+詳細な手順については、 [<a href="/tidb-cloud/config-s3-and-gcs-access.md#configure-gcs-access">GCS アクセスを構成する</a>](/tidb-cloud/config-s3-and-gcs-access.md#configure-gcs-access)を参照してください。
 
-### Step 3. Copy source data files to GCS and import data into TiDB Cloud
+### ステップ 3. ソース データ ファイルを GCS にコピーし、データをTiDB Cloudにインポートする {#step-3-copy-source-data-files-to-gcs-and-import-data-into-tidb-cloud}
 
-1. To copy your source data files to your GCS bucket, you can upload the data to the GCS bucket using either Google Cloud console or gsutil.
+1.  ソース データ ファイルを GCS バケットにコピーするには、Google Cloud コンソールまたは gsutil を使用してデータを GCS バケットにアップロードします。
 
-    - To upload data using Google Cloud console, see [Creating storage buckets](https://cloud.google.com/storage/docs/creating-buckets) in Google Cloud Storage documentation.
-    - To upload data using gsutil, use the following command:
+    -   Google Cloud コンソールを使用してデータをアップロードするには、Google Cloud Storage ドキュメントの[<a href="https://cloud.google.com/storage/docs/creating-buckets">storageバケットの作成</a>](https://cloud.google.com/storage/docs/creating-buckets)を参照してください。
+    -   gsutil を使用してデータをアップロードするには、次のコマンドを使用します。
 
         ```shell
         gsutil rsync -r <Local path> <GCS URI>
         ```
 
-        For example:
+        例えば：
 
         ```shell
         gsutil rsync -r ./tidbcloud-samples-us-west-2/ gs://target-url-in-gcs
         ```
 
-2. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+2.  [<a href="https://tidbcloud.com/">TiDB Cloudコンソール</a>](https://tidbcloud.com/)にログインし、プロジェクトの[<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページに移動します。
 
-    > **Tip:**
+    > **ヒント：**
     >
-    > If you have multiple projects, you can switch to the target project in the left navigation pane of the **Clusters** page.
+    > 複数のプロジェクトがある場合は、 **「クラスター」**ページの左側のナビゲーション・ペインでターゲット・プロジェクトに切り替えることができます。
 
-3. Click the name of your target cluster to go to its overview page, and then click **Import** in the left navigation pane.
-4. On the **Import** page, click **Import Data** in the upper-right corner, and then fill in the importing related information.
+3.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[インポート]**をクリックします。
 
-> **Note:**
+4.  **[インポート]**ページで、右上隅の**[データのインポート]**をクリックし、インポート関連情報を入力します。
+
+> **ノート：**
 >
-> To minimize egress charges and latency, locate your GCS bucket and TiDB Cloud database cluster in the same region.
+> 下り料金とレイテンシーを最小限に抑えるには、GCS バケットとTiDB Cloudデータベース クラスターを同じリージョンに配置します。

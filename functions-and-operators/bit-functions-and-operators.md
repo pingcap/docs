@@ -3,18 +3,18 @@ title: Bit Functions and Operators
 summary: Learn about the bit functions and operators.
 ---
 
-# Bit Functions and Operators
+# ビット関数と演算子 {#bit-functions-and-operators}
 
-TiDB supports all of the [bit functions and operators](https://dev.mysql.com/doc/refman/5.7/en/bit-functions.html) available in MySQL 5.7.
+TiDB は、 MySQL 5.7で利用可能な[<a href="https://dev.mysql.com/doc/refman/5.7/en/bit-functions.html">ビット関数と演算子</a>](https://dev.mysql.com/doc/refman/5.7/en/bit-functions.html)をサポートします。
 
-**Bit functions and operators:**
+**ビット関数と演算子:**
 
-| Name | Description |
-| :------| :------------- |
-| [`BIT_COUNT()`](https://dev.mysql.com/doc/refman/5.7/en/bit-functions.html#function_bit-count) | Return the number of bits that are set as 1 |
-| [&](https://dev.mysql.com/doc/refman/5.7/en/bit-functions.html#operator_bitwise-and) | Bitwise AND |
-| [~](https://dev.mysql.com/doc/refman/5.7/en/bit-functions.html#operator_bitwise-invert) | Bitwise inversion |
-| [\|](https://dev.mysql.com/doc/refman/5.7/en/bit-functions.html#operator_bitwise-or) | Bitwise OR |
-| [^](https://dev.mysql.com/doc/refman/5.7/en/bit-functions.html#operator_bitwise-xor) | Bitwise XOR |
-| [<<](https://dev.mysql.com/doc/refman/5.7/en/bit-functions.html#operator_left-shift) | Left shift |
-| [>>](https://dev.mysql.com/doc/refman/5.7/en/bit-functions.html#operator_right-shift) | Right shift |
+| 名前                                                                                                                                                                                         | 説明                  |
+| :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------ |
+| [<a href="https://dev.mysql.com/doc/refman/5.7/en/bit-functions.html#function_bit-count">`BIT_COUNT()`</a>](https://dev.mysql.com/doc/refman/5.7/en/bit-functions.html#function_bit-count) | 1に設定されているビット数を返します。 |
+| [<a href="https://dev.mysql.com/doc/refman/5.7/en/bit-functions.html#operator_bitwise-and">&amp;</a>](https://dev.mysql.com/doc/refman/5.7/en/bit-functions.html#operator_bitwise-and)     | ビットごとの AND          |
+| [<a href="https://dev.mysql.com/doc/refman/5.7/en/bit-functions.html#operator_bitwise-invert">～</a>](https://dev.mysql.com/doc/refman/5.7/en/bit-functions.html#operator_bitwise-invert)   | ビットごとの反転            |
+| [<a href="https://dev.mysql.com/doc/refman/5.7/en/bit-functions.html#operator_bitwise-or">|</a>](https://dev.mysql.com/doc/refman/5.7/en/bit-functions.html#operator_bitwise-or)           | ビットごとの OR           |
+| [<a href="https://dev.mysql.com/doc/refman/5.7/en/bit-functions.html#operator_bitwise-xor">^</a>](https://dev.mysql.com/doc/refman/5.7/en/bit-functions.html#operator_bitwise-xor)         | ビットごとの XOR          |
+| [<a href="https://dev.mysql.com/doc/refman/5.7/en/bit-functions.html#operator_left-shift">&lt;&lt;</a>](https://dev.mysql.com/doc/refman/5.7/en/bit-functions.html#operator_left-shift)    | 左方移動                |
+| [<a href="https://dev.mysql.com/doc/refman/5.7/en/bit-functions.html#operator_right-shift">&gt;&gt;</a>](https://dev.mysql.com/doc/refman/5.7/en/bit-functions.html#operator_right-shift)  | 右シフト                |

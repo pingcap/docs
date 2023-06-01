@@ -3,11 +3,11 @@ title: PREPARE | TiDB SQL Statement Reference
 summary: An overview of the usage of PREPARE for the TiDB database.
 ---
 
-# PREPARE
+# 準備 {#prepare}
 
-The `PREPARE` statement provides an SQL interface to server-side prepared statements.
+`PREPARE`ステートメントは、サーバー側のプリペアド ステートメントへの SQL インターフェイスを提供します。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 PreparedStmt ::=
@@ -18,7 +18,7 @@ PrepareSQL ::=
 |   UserVariable
 ```
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> PREPARE mystmt FROM 'SELECT ? as num FROM DUAL';
@@ -39,11 +39,11 @@ mysql> DEALLOCATE PREPARE mystmt;
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
+このステートメントは、MySQL と完全な互換性があると理解されています。 GitHub では互換性の違いは[<a href="https://github.com/pingcap/tidb/issues/new/choose">問題を通じて報告されました</a>](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
 
-## See also
+## こちらも参照 {#see-also}
 
-* [EXECUTE](/sql-statements/sql-statement-execute.md)
-* [DEALLOCATE](/sql-statements/sql-statement-deallocate.md)
+-   [<a href="/sql-statements/sql-statement-execute.md">実行する</a>](/sql-statements/sql-statement-execute.md)
+-   [<a href="/sql-statements/sql-statement-deallocate.md">割り当てを解除する</a>](/sql-statements/sql-statement-deallocate.md)

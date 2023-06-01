@@ -6,99 +6,99 @@ aliases: ['/tidb/v7.1/dev-guide-sample-application-spring-boot']
 
 <!-- markdownlint-disable MD029 -->
 
-# Build a TiDB App Using Spring Boot
+# Spring Boot を使用して TiDB アプリを構築する {#build-a-tidb-app-using-spring-boot}
 
-This tutorial shows you how to build a [Spring Boot](https://spring.io/projects/spring-boot) web application using TiDB. The [Spring Data JPA](https://spring.io/projects/spring-data-jpa) module is used as the framework for data access capabilities. You can download the code for this sample application from [GitHub](https://github.com/pingcap-inc/tidb-example-java).
+このチュートリアルでは、TiDB を使用して[<a href="https://spring.io/projects/spring-boot">スプリングブーツ</a>](https://spring.io/projects/spring-boot) Web アプリケーションを構築する方法を示します。 [<a href="https://spring.io/projects/spring-data-jpa">Spring Data JPA</a>](https://spring.io/projects/spring-data-jpa)モジュールは、データ アクセス機能のフレームワークとして使用されます。このサンプル アプリケーションのコードは[<a href="https://github.com/pingcap-inc/tidb-example-java">GitHub</a>](https://github.com/pingcap-inc/tidb-example-java)からダウンロードできます。
 
-This is a sample application for building a RESTful API, which shows a generic **Spring Boot** backend service using **TiDB** as the database. The following process was designed to recreate a real-world scenario:
+これは、RESTful API を構築するためのサンプル アプリケーションであり、 **TiDB**をデータベースとして使用する汎用**Spring Boot**バックエンド サービスを示しています。次のプロセスは、現実世界のシナリオを再現するために設計されました。
 
-This is an example of a game where each player has two attributes: `coins` and `goods`. Each player is uniquely identified by an `id` field. Players can trade freely if they have sufficient coins and goods.
+これは、各プレイヤーが`coins`と`goods` 2 つの属性を持つゲームの例です。各プレーヤーは`id`フィールドによって一意に識別されます。十分なコインと商品があれば、プレイヤーは自由に取引できます。
 
-You can build your own application based on this example.
+この例に基づいて独自のアプリケーションを構築できます。
 
-## Step 1: Launch your TiDB cluster
+## ステップ 1: TiDB クラスターを起動する {#step-1-launch-your-tidb-cluster}
 
 <CustomContent platform="tidb">
 
-The following introduces how to start a TiDB cluster.
+TiDB クラスターの起動方法を紹介します。
 
-**Use a TiDB Cloud Serverless Tier cluster**
+**TiDB CloudServerless Tierクラスターを使用する**
 
-For detailed steps, see [Create a Serverless Tier cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster).
+詳細な手順については、 [<a href="/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster">Serverless Tierクラスターの作成</a>](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
 
-**Use a local cluster**
+**ローカルクラスターを使用する**
 
-For detailed steps, see [Deploy a local test cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md).
+詳細な手順については、 [<a href="/quick-start-with-tidb.md#deploy-a-local-test-cluster">ローカルテストクラスターをデプロイ</a>](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[<a href="/production-deployment-using-tiup.md">TiUPを使用した TiDBクラスタのデプロイ</a>](/production-deployment-using-tiup.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-See [Create a Serverless Tier cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster).
+[<a href="/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster">Serverless Tierクラスターの作成</a>](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
 
 </CustomContent>
 
-## Step 2: Install JDK
+## ステップ 2: JDK をインストールする {#step-2-install-jdk}
 
-Download and install the **Java Development Kit** (JDK) on your computer. It is a necessary tool for Java development. **Spring Boot** supports JDK for Java 8 and later versions. However, due to the **Hibernate** version, it is recommended that you use JDK for Java 11 and later versions.
+**Java Development Kit** (JDK) をコンピュータにダウンロードしてインストールします。 Java開発には必須のツールです。 **Spring Boot は、** Java 8 以降のバージョンの JDK をサポートします。ただし、 **Hibernate**バージョンのため、 Java 11 以降のバージョンの JDK を使用することをお勧めします。
 
-Both **Oracle JDK** and **OpenJDK** are supported. You can choose at your own discretion. This tutorial uses JDK 17 from **OpenJDK**.
+**Oracle JDK**と**OpenJDK の**両方がサポートされています。ご自身の判断で選択していただけます。このチュートリアルでは、 **OpenJDK**の JDK 17 を使用します。
 
-## Step 3: Install Maven
+## ステップ 3: Maven をインストールする {#step-3-install-maven}
 
-This sample application uses **Apache Maven** to manage the application's dependencies. Spring supports Maven 3.3 and later versions. As dependency management software, the latest stable version of **Maven** is recommended.
+このサンプル アプリケーションは、 **Apache Maven**を使用してアプリケーションの依存関係を管理します。 Spring は Maven 3.3 以降のバージョンをサポートしています。依存関係管理ソフトウェアとして、 **Maven**の最新の安定バージョンを推奨します。
 
-To install **Maven** from the command line.
+コマンドラインから**Maven**をインストールするには。
 
-- macOS:
+-   マックOS：
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```shell
     brew install maven
     ```
 
-- Debian-based Linux distributions (such as Ubuntu):
+-   Debian ベースの Linux ディストリビューション (Ubuntu など):
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```shell
     apt-get install maven
     ```
 
-- Red Hat-based Linux distributions (such as Fedora, CentOS):
+-   Red Hat ベースの Linux ディストリビューション (Fedora、CentOS など):
 
-    - dnf:
+    -   DNF:
 
-        {{< copyable "shell-regular" >}}
+        {{< copyable "" >}}
 
         ```shell
         dnf install maven
         ```
 
-    - yum:
+    -   うーん：
 
-        {{< copyable "shell-regular" >}}
+        {{< copyable "" >}}
 
         ```shell
         yum install maven
         ```
 
-For other installation methods, refer to the [Maven official documentation](https://maven.apache.org/install.html).
+その他のインストール方法については、 [<a href="https://maven.apache.org/install.html">Mavenの公式ドキュメント</a>](https://maven.apache.org/install.html)を参照してください。
 
-## Step 4: Get the application code
+## ステップ 4: アプリケーション コードを取得する {#step-4-get-the-application-code}
 
-Download or clone the [sample code repository](https://github.com/pingcap-inc/tidb-example-java) and navigate to the `spring-jpa-hibernate` directory.
+[<a href="https://github.com/pingcap-inc/tidb-example-java">サンプルコードリポジトリ</a>](https://github.com/pingcap-inc/tidb-example-java)ダウンロードまたはクローンし、 `spring-jpa-hibernate`ディレクトリに移動します。
 
-## Step 5: Run the application
+## ステップ 5: アプリケーションを実行する {#step-5-run-the-application}
 
-In this step, the application code is compiled and run, which produces a web application. Hibernate creates a `player_jpa` table within the `test` database. If you make requests using the application's RESTful API, these requests run [database transactions](/develop/dev-guide-transaction-overview.md) on the TiDB cluster.
+このステップでは、アプリケーション コードがコンパイルされて実行され、Web アプリケーションが生成されます。 Hibernate は`test`データベース内に`player_jpa`テーブルを作成します。アプリケーションの RESTful API を使用してリクエストを行う場合、これらのリクエストは TiDB クラスター上で実行さ[<a href="/develop/dev-guide-transaction-overview.md">データベーストランザクション</a>](/develop/dev-guide-transaction-overview.md)ます。
 
-If you want to learn more about the code of this application, refer to [Implementation details](#implementation-details).
+このアプリケーションのコードについて詳しく知りたい場合は、 [<a href="#implementation-details">実装の詳細</a>](#implementation-details)を参照してください。
 
-### Step 5.1 Change parameters
+### ステップ5.1 パラメータの変更 {#step-5-1-change-parameters}
 
-If you are using a TiDB Cloud Serverless Tier cluster, change the `spring.datasource.url`, `spring.datasource.username`, `spring.datasource.password` parameters in the `application.yml` (located in `src/main/resources`).
+TiDB CloudServerless Tierクラスターを使用している場合は、 `application.yml` ( `src/main/resources`にあります) の`spring.datasource.url` 、 `spring.datasource.username` 、 `spring.datasource.password`パラメーターを変更します。
 
 ```yaml
 spring:
@@ -114,13 +114,13 @@ spring:
       ddl-auto: create-drop
 ```
 
-Suppose that the password you set is `123456`, and the connection parameters you get from the cluster details page are the following:
+設定したパスワードが`123456`で、クラスターの詳細ページから取得した接続パラメーターが次であるとします。
 
-- Endpoint: `xxx.tidbcloud.com`
-- Port: `4000`
-- User: `2aEp24QWEDLqRFs.root`
+-   エンドポイント: `xxx.tidbcloud.com`
+-   ポート: `4000`
+-   ユーザー: `2aEp24QWEDLqRFs.root`
 
-Accordingly, the parameters must be set as folows:
+したがって、パラメータは次のように設定する必要があります。
 
 ```yaml
 spring:
@@ -136,43 +136,43 @@ spring:
       ddl-auto: create-drop
 ```
 
-### Step 5.2 Run
+### ステップ5.2 実行 {#step-5-2-run}
 
-Open a terminal session and make sure you are in the `spring-jpa-hibernate` directory. If you are not already in this directory, navigate to the directory with the following command:
+ターミナル セッションを開き、 `spring-jpa-hibernate`ディレクトリにいることを確認します。まだこのディレクトリにいない場合は、次のコマンドを使用してディレクトリに移動します。
 
 ```shell
 cd <path>/tidb-example-java/spring-jpa-hibernate
 ```
 
-#### Build and run with Make (recommended)
+#### Make を使用してビルドして実行する (推奨) {#build-and-run-with-make-recommended}
 
 ```shell
 make
 ```
 
-#### Build and run manually
+#### 手動でビルドして実行する {#build-and-run-manually}
 
-If you prefer to build manually, follow these steps:
+手動でビルドする場合は、次の手順に従います。
 
-1. Clear cache and package:
+1.  キャッシュとパッケージをクリアします。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```shell
     mvn clean package
     ```
 
-2. Run applications with JAR files:
+2.  JAR ファイルを使用してアプリケーションを実行します。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```shell
     java -jar target/spring-jpa-hibernate-0.0.1.jar
     ```
 
-### Step 5.3 Output
+### ステップ5.3 出力 {#step-5-3-output}
 
-The final part of the output should look like the following:
+出力の最後の部分は次のようになります。
 
 ```
   .   ____          _            __ _ _
@@ -210,85 +210,85 @@ Hibernate: create table player_jpa (id bigint not null, coins integer, goods int
 2023-01-05T14:06:55.714+08:00  INFO 22005 --- [           main] com.pingcap.App                          : Started App in 1.432 seconds (process running for 1.654)
 ```
 
-The output log indicates the application behavior during startup. In this example, the application starts a **Servlet** using [Tomcat](https://tomcat.apache.org/), uses Hibernate as the ORM, uses [HikariCP](https://github.com/brettwooldridge/HikariCP) as the database connection pool implementation, and uses `org.hibernate.dialect.TiDBDialect` as the database dialect. After startup, Hibernate deletes and re-creates the `player_jpa` table and the `player_jpa_id_seq` sequence. At the end of startup, the application listens on port `8080` to provide HTTP services to the outside.
+出力ログには、起動時のアプリケーションの動作が示されます。この例では、アプリケーションは[<a href="https://tomcat.apache.org/">トムキャット</a>](https://tomcat.apache.org/)使用して**サーブレット**を開始し、ORM として Hibernate を使用し、データベース接続プールの実装として[<a href="https://github.com/brettwooldridge/HikariCP">HikariCP</a>](https://github.com/brettwooldridge/HikariCP)を使用し、データベースダイアレクトとして`org.hibernate.dialect.TiDBDialect`を使用します。起動後、Hibernate は`player_jpa`テーブルと`player_jpa_id_seq`シーケンスを削除して再作成します。起動の最後に、アプリケーションはポート`8080`をリッスンして、外部に HTTP サービスを提供します。
 
-If you want to learn more about the code of this application, refer to [implementation details](#implementation-details).
+このアプリケーションのコードについて詳しく知りたい場合は、 [<a href="#implementation-details">実装の詳細</a>](#implementation-details)を参照してください。
 
-## Step 6: HTTP requests
+## ステップ 6: HTTP リクエスト {#step-6-http-requests}
 
-After the service is up and running, you can send the HTTP requests to the backend application. <http://localhost:8080> is the base URL that provides services. This tutorial uses a series of HTTP requests to show how to use the service.
+サービスが起動して実行されたら、HTTP リクエストをバックエンド アプリケーションに送信できます。 [<a href="http://localhost:8080">http://ローカルホスト:8080</a>](http://localhost:8080)はサービスを提供するベース URL です。このチュートリアルでは、一連の HTTP リクエストを使用して、サービスの使用方法を示します。
 
-### Step 6.1 Use Postman requests (recommended)
+### ステップ 6.1 Postman リクエストを使用する (推奨) {#step-6-1-use-postman-requests-recommended}
 
-You can download this [configuration file](https://raw.githubusercontent.com/pingcap-inc/tidb-example-java/main/spring-jpa-hibernate/Player.postman_collection.json) locally and import it into [Postman](https://www.postman.com/) as shown here:
+次に示すように、この[<a href="https://raw.githubusercontent.com/pingcap-inc/tidb-example-java/main/spring-jpa-hibernate/Player.postman_collection.json">設定ファイル</a>](https://raw.githubusercontent.com/pingcap-inc/tidb-example-java/main/spring-jpa-hibernate/Player.postman_collection.json)ローカルにダウンロードして[<a href="https://www.postman.com/">郵便屋さん</a>](https://www.postman.com/)にインポートできます。
 
 ![import the collection into Postman](/media/develop/IMG_20220402-003303222.png)
 
-#### Create players
+#### プレーヤーを作成する {#create-players}
 
-Click on the **Create** tab and the **Send** button to send a POST request to `http://localhost:8080/player/`. The return value is the number of players added, which is expected to be 1.
+**「作成」**タブと**「送信」**ボタンをクリックして、POST リクエストを`http://localhost:8080/player/`に送信します。戻り値は追加されたプレーヤーの数であり、1 であることが予想されます。
 
 ![Postman-Create a player](/media/develop/IMG_20220402-003350731.png)
 
-#### Get player information by ID
+#### IDでプレイヤー情報を取得 {#get-player-information-by-id}
 
-Click on the **GetByID** tab and the **Send** button to send a GET request to `http://localhost:8080/player/1`. The return value is the information of the player with ID `1`.
+**「GetByID」**タブと**「送信」**ボタンをクリックして、GET リクエストを`http://localhost:8080/player/1`に送信します。戻り値はID `1`のプレイヤーの情報です。
 
 ![Postman-GetByID](/media/develop/IMG_20220402-003416079.png)
 
-#### Get player information in bulk by limit
+#### 選手情報を制限ごとに一括取得 {#get-player-information-in-bulk-by-limit}
 
-Click on the **GetByLimit** tab and the **Send** button to send a GET request to `http://localhost:8080/player/limit/3`. The return value is a list of information for up to 3 players.
+**「GetByLimit」**タブと**「送信」**ボタンをクリックして、GET リクエストを`http://localhost:8080/player/limit/3`に送信します。戻り値は最大 3 人のプレイヤーの情報のリストです。
 
 ![Postman-GetByLimit](/media/develop/IMG_20220402-003505846.png)
 
-#### Get player information by page
+#### ページごとにプレイヤー情報を取得する {#get-player-information-by-page}
 
-Click on the **GetByPage** tab and the **Send** button to send a GET request to `http://localhost:8080/player/page?index=0&size=2`. The return value is the page with index `0`, with `2` players per page. The return value also contains the paging information such as offset, totalPages, and sort.
+**「GetByPage」**タブと**「送信」**ボタンをクリックして、GET リクエストを`http://localhost:8080/player/page?index=0&size=2`に送信します。戻り値はインデックス`0`のページで、ページごとに`2`人のプレーヤーが含まれます。戻り値には、offset、totalPages、sort などのページング情報も含まれます。
 
 ![Postman-GetByPage](/media/develop/IMG_20220402-003528474.png)
 
-#### Count players
+#### プレイヤーを数える {#count-players}
 
-Click the **Count** tab and the **Send** button to send a GET request to `http://localhost:8080/player/count`. The return value is the number of players.
+**「Count」**タブと**「Send」**ボタンをクリックして、GET リクエストを`http://localhost:8080/player/count`に送信します。戻り値はプレイヤー数です。
 
 ![Postman-Count](/media/develop/IMG_20220402-003549966.png)
 
-#### Player trading
+#### プレイヤーのトレード {#player-trading}
 
-Click on the **Trade** tab and the **Send** button to send a PUT request to `http://localhost:8080/player/trade`. The request parameters are the seller's ID `sellID`, the buyer's ID `buyID`, the number of goods purchased `amount`, the number of coins consumed for the purchase `price`.
+**「Trade」**タブと**「Send」**ボタンをクリックして PUT リクエストを`http://localhost:8080/player/trade`に送信します。リクエストパラメータは、売り手`sellID` 、買い手`buyID` 、購入商品数`amount` 、購入で消費したコイン数`price`である。
 
-The return value is whether the transaction is successful or not. When there are insufficient goods for the seller, insufficient coins for the buyer, or a database error, the [database transaction](/develop/dev-guide-transaction-overview.md) guarantees that the trade is not successful and no player's coins or goods are lost.
+戻り値はトランザクションが成功したかどうかです。売り手の商品が不足している場合、買い手のコインが不足している場合、またはデータベース エラーがある場合、取引は成功せず、プレイヤーのコインや商品が失われ[<a href="/develop/dev-guide-transaction-overview.md">データベーストランザクション</a>](/develop/dev-guide-transaction-overview.md)ことが保証されます。
 
 ![Postman-Trade](/media/develop/IMG_20220402-003659102.png)
 
-### Step 6.2 Using curl requests
+### ステップ 6.2 CURL リクエストの使用 {#step-6-2-using-curl-requests}
 
-You can also use curl to make requests directly.
+また、curl を使用してリクエストを直接行うこともできます。
 
-#### Create players
+#### プレーヤーを作成する {#create-players}
 
-To create players, you can send a **POST** request to the `/player` endpoint. For example:
+プレーヤーを作成するには、 **POST**リクエストを`/player`エンドポイントに送信します。例えば：
 
 ```shell
 curl --location --request POST 'http://localhost:8080/player/' --header 'Content-Type: application/json' --data-raw '[{"coins":100,"goods":20}]'
 ```
 
-The request uses JSON as the payload. The example above indicates creating a player with 100 `coins` and 20 `goods`. The return value is the number of players created.
+リクエストはペイロードとして JSON を使用します。上の例は、100 `coins`と 20 `goods`を持つプレーヤーを作成することを示しています。戻り値は作成したプレイヤーの数です。
 
 ```json
 1
 ```
 
-#### Get player information by ID
+#### IDでプレイヤー情報を取得 {#get-player-information-by-id}
 
-To get the player information, you can send a **GET** request to the `/player` endpoint. You need to specify the `id` of the player in the path parameter as follows: `/player/{id}`. The following example shows how to get the information of a player with `id` 1:
+プレーヤー情報を取得するには、 **GET**リクエストを`/player`エンドポイントに送信します。 `/player/{id}`のように、パス パラメーターでプレーヤーの`id`指定する必要があります。次の例は、 `id` 1 のプレーヤーの情報を取得する方法を示しています。
 
 ```shell
 curl --location --request GET 'http://localhost:8080/player/1'
 ```
 
-The return value is the player's information:
+戻り値はプレーヤーの情報です。
 
 ```json
 {
@@ -298,15 +298,15 @@ The return value is the player's information:
 }
 ```
 
-#### Get player information in bulk by limit
+#### 選手情報を制限ごとに一括取得 {#get-player-information-in-bulk-by-limit}
 
-To get the player information in bulk, you can send a **GET** request to the `/player/limit` endpoint. You need to specify the total number of players in the path parameter as follows: `/player/limit/{limit}`. The following example shows how to get the information of up to 3 players:
+プレーヤー情報を一括で取得するには、 **GET**リクエストを`/player/limit`エンドポイントに送信します。 `/player/limit/{limit}`のように、パス パラメーターでプレーヤーの総数を指定する必要があります。次の例は、最大 3 人のプレーヤーの情報を取得する方法を示しています。
 
 ```shell
 curl --location --request GET 'http://localhost:8080/player/limit/3'
 ```
 
-The return value is a list of player information:
+戻り値はプレーヤー情報のリストです。
 
 ```json
 [
@@ -328,15 +328,15 @@ The return value is a list of player information:
 ]
 ```
 
-#### Get player information by page
+#### ページごとにプレイヤー情報を取得する {#get-player-information-by-page}
 
-To get paginated player information, you can send a **GET** request to the `/player/page` endpoint. To specify additional parameters, you need to use the URL parameter. The following example shows how to get the information from a page whose `index` is 0, where each page has a maximum `size` of 2 players.
+ページ分割されたプレーヤー情報を取得するには、 **GET**リクエストを`/player/page`エンドポイントに送信します。追加のパラメータを指定するには、URL パラメータを使用する必要があります。次の例は、 `index`が 0 であるページから情報を取得する方法を示しています。各ページには最大`size`人のプレーヤーがいます。
 
 ```shell
 curl --location --request GET 'http://localhost:8080/player/page?index=0&size=2'
 ```
 
-The return value is the page with `index` 0, where 2 players are listed per page. In addition, the return value contains pagination information such as offset, total pages, and whether the results are sorted.
+戻り値は`index` 0 のページで、ページごとに 2 人のプレーヤーがリストされます。さらに、戻り値には、オフセット、合計ページ、結果がソートされているかどうかなどのページネーション情報が含まれます。
 
 ```json
 {
@@ -380,23 +380,23 @@ The return value is the page with `index` 0, where 2 players are listed per page
 }
 ```
 
-#### Count players
+#### プレイヤーを数える {#count-players}
 
-To get the number of players, you can send a **GET** request to the `/player/count` endpoint:
+プレーヤーの数を取得するには、 **GET**リクエストを`/player/count`エンドポイントに送信します。
 
 ```shell
 curl --location --request GET 'http://localhost:8080/player/count'
 ```
 
-The return value is the number of players:
+戻り値はプレーヤーの数です。
 
 ```json
 4
 ```
 
-#### Player trading
+#### プレイヤーのトレード {#player-trading}
 
-To initiate a transaction between players, you can send a **PUT** request to the `/player/trade` endpoint. For example:
+プレーヤー間でトランザクションを開始するには、 **PUT**リクエストを`/player/trade`エンドポイントに送信します。例えば：
 
 ```shell
 curl --location --request PUT 'http://localhost:8080/player/trade' \
@@ -407,26 +407,26 @@ curl --location --request PUT 'http://localhost:8080/player/trade' \
   --data-urlencode 'price=100'
 ```
 
-The request uses **Form Data** as the payload. The example request indicates that the seller's ID (`sellID`) is 1, the buyer's ID (`buyID`) is 2, the number of goods purchased (`amount`) is 10, and the number of coins consumed for purchase (`price`) is 100.
+リクエストは**フォーム データを**ペイロードとして使用します。このリクエストの例では、販売者の ID ( `sellID` ) が 1、購入者の ID ( `buyID` ) が 2、購入された商品の数 ( `amount` ) が 10、購入に消費されたコインの数 ( `price` ) が 100 であることを示しています。
 
-The return value is whether the transaction is successful or not. When there are insufficient goods for the seller, insufficient coins for the buyer, or a database error, the [database transaction](/develop/dev-guide-transaction-overview.md) guarantees that the trade is not successful and no player's coins or goods are lost.
+戻り値はトランザクションが成功したかどうかです。売り手の商品が不足している場合、買い手のコインが不足している場合、またはデータベース エラーがある場合、取引は成功せず、プレイヤーのコインや商品が失われ[<a href="/develop/dev-guide-transaction-overview.md">データベーストランザクション</a>](/develop/dev-guide-transaction-overview.md)ことが保証されます。
 
 ```json
 true
 ```
 
-### Step 6.3 Requests with Shell script
+### ステップ 6.3 シェルスクリプトによるリクエスト {#step-6-3-requests-with-shell-script}
 
-You can download [this shell script](https://github.com/pingcap-inc/tidb-example-java/blob/main/spring-jpa-hibernate/request.sh) for testing purposes. The script performs the following operations:
+テスト目的で[<a href="https://github.com/pingcap-inc/tidb-example-java/blob/main/spring-jpa-hibernate/request.sh">このシェルスクリプト</a>](https://github.com/pingcap-inc/tidb-example-java/blob/main/spring-jpa-hibernate/request.sh)をダウンロードできます。スクリプトは次の操作を実行します。
 
-1. Create 10 players in a loop.
-2. Get the information of players with the `id` of 1.
-3. Get a list of up to 3 players.
-4. Get a page of players with the `index` of 0 and the `size` of 2.
-5. Get the total number of players.
-6. Perform a transaction, where the player with the `id` of 1 is the seller and the player with the `id` of 2 is the buyer, and 10 `goods` are purchased at the cost of 100 `coins`.
+1.  ループ内に 10 人のプレイヤーを作成します。
+2.  `id` of 1で選手の情報を取得します。
+3.  最大 3 人のプレイヤーのリストを取得します。
+4.  `index` of 0 と`size` of 2 を持つプレーヤーのページを取得します。
+5.  プレイヤーの総数を取得します。
+6.  取引を実行します。この場合、 `id` /1 のプレイヤーが売り手、 `id` /2 のプレイヤーが買い手となり、10 `goods`が 100 `coins`のコストで購入されます。
 
-You can run this script with `make request` or `./request.sh`. The result should look like this:
+このスクリプトは`make request`または`./request.sh`で実行できます。結果は次のようになります。
 
 ```shell
 cheese@CheesedeMacBook-Pro spring-jpa-hibernate % make request
@@ -450,13 +450,13 @@ trade by two players:
 false
 ```
 
-## Implementation details
+## 実装の詳細 {#implementation-details}
 
-This subsection describes the components in the sample application project.
+このサブセクションでは、サンプル アプリケーション プロジェクトのコンポーネントについて説明します。
 
-### Overview
+### 概要 {#overview}
 
-The catalog tree for this example project is shown below (some incomprehensible parts are removed):
+このサンプル プロジェクトのカタログ ツリーを以下に示します (いくつかの理解できない部分は削除されています)。
 
 ```
 .
@@ -480,20 +480,20 @@ The catalog tree for this example project is shown below (some incomprehensible 
             └── application.yml
 ```
 
-- `pom.xml` declares the project's Maven configuration, such as dependencies and packaging.
-- `application.yml` declares the project's user configuration, such as database address, password, and database dialect used.
-- `App.java` is the entry point of the project.
-- `controller` is the package that exposes the HTTP interface to the outside.
-- `service` is the package that implements the interface and logic of the project.
-- `dao` is the package that implements the connection to the database and the persistence of the data.
+-   `pom.xml`依存関係やパッケージ化などのプロジェクトの Maven 構成を宣言します。
+-   `application.yml`データベース アドレス、パスワード、使用されるデータベース言語など、プロジェクトのユーザー構成を宣言します。
+-   `App.java`はプロジェクトのエントリ ポイントです。
+-   `controller`はHTTPインターフェースを外部に公開するパッケージです。
+-   `service`は、プロジェクトのインターフェイスとロジックを実装するパッケージです。
+-   `dao`は、データベースへの接続とデータの永続化を実装するパッケージです。
 
-### Configuration
+### コンフィグレーション {#configuration}
 
-This part briefly describes the Maven configuration in the `pom.xml` file and the user configuration in the `application.yml` file.
+このパートでは、 `pom.xml`ファイルの Maven 構成と`application.yml`ファイルのユーザー構成について簡単に説明します。
 
-#### Maven configuration
+#### Maven 構成 {#maven-configuration}
 
-The `pom.xml` file is a Maven configuration file that declares the project's Maven dependencies, packaging methods, and packaging information. You can replicate the process of generating this configuration file by [creating a blank application with the same dependency](#create-a-blank-application-with-the-same-dependency-optional), or copying it directly to your project.
+`pom.xml`のファイルは、プロジェクトの Maven 依存関係、パッケージ化メソッド、およびパッケージ化情報を宣言する Maven 構成ファイルです。この構成ファイルを生成するプロセスを[<a href="#create-a-blank-application-with-the-same-dependency-optional">同じ依存関係を持つ空のアプリケーションを作成する</a>](#create-a-blank-application-with-the-same-dependency-optional)で複製することも、プロジェクトに直接コピーすることもできます。
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -554,9 +554,9 @@ The `pom.xml` file is a Maven configuration file that declares the project's Mav
 </project>
 ```
 
-#### User configuration
+#### ユーザー設定 {#user-configuration}
 
-The `application.yml` configuration file declares the user configuration, such as database address, password, and the database dialect used.
+`application.yml`構成ファイルは、データベース アドレス、パスワード、使用されるデータベース言語などのユーザー構成を宣言します。
 
 ```yaml
 spring:
@@ -572,19 +572,19 @@ spring:
       ddl-auto: create-drop
 ```
 
-The configuration is written in [YAML](https://yaml.org/). The fields are described as follows:
+構成は[<a href="https://yaml.org/">YAML</a>](https://yaml.org/)に書かれています。フィールドは次のように説明されます。
 
-- `spring.datasource.url` : URL of the database connection.
-- `spring.datasource.username` : the database username.
-- `spring.datasource.password` : the database password. Empty. You need to comment out or delete this field.
-- `spring.datasource.driver-class-name` : the database driver. Because TiDB is compatible with MySQL, use a mysql-connector-java driver class `com.mysql.cj.jdbc`.
-- `jpa.show-sql` : when this field is set to `true`, the SQL statements run by JPA are printed.
-- `jpa.database-platform` : the selected database dialect. Because the application connects to TiDB, choose **TiDB dialect**. Note that this dialect is only available in Hibernate `6.0.0.Beta2` and later versions, so choose the applicable dependency version.
-- `jpa.hibernate.ddl-auto` : `create-drop` creates the table at the beginning of the program and deletes the table on exit. Do not set this option in a production environment. Because this is a sample application, this option is set to minimize the impact on the database data.
+-   `spring.datasource.url` : データベース接続の URL。
+-   `spring.datasource.username` : データベースのユーザー名。
+-   `spring.datasource.password` : データベースのパスワード。空。このフィールドをコメントアウトするか削除する必要があります。
+-   `spring.datasource.driver-class-name` : データベースドライバー。 TiDB は MySQL と互換性があるため、 mysql-connector-java ドライバー クラス`com.mysql.cj.jdbc`を使用します。
+-   `jpa.show-sql` : このフィールドが`true`に設定されている場合、JPA によって実行される SQL ステートメントが出力されます。
+-   `jpa.database-platform` : 選択されたデータベース言語。アプリケーションは TiDB に接続するため、 **TiDB 方言**を選択します。このダイアレクトは Hibernate `6.0.0.Beta2`以降のバージョンでのみ使用できるため、該当する依存関係のバージョンを選択してください。
+-   `jpa.hibernate.ddl-auto` : `create-drop`はプログラムの開始時にテーブルを作成し、終了時にテーブルを削除します。本番環境ではこのオプションを設定しないでください。これはサンプル アプリケーションであるため、このオプションはデータベース データへの影響を最小限に抑えるように設定されています。
 
-### Entry point
+### エントリーポイント {#entry-point}
 
-The `App.java` file is the entry point:
+`App.java`ファイルがエントリ ポイントです。
 
 ```java
 package com.pingcap;
@@ -603,15 +603,15 @@ public class App {
 }
 ```
 
-The entry class starts with the standard configuration annotation [`@SpringBootApplication`](https://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/autoconfigure/SpringBootApplication.html) for Spring Boot applications. For more information, see [Using the `@SpringBootApplication` Annotation](https://docs.spring.io/spring-boot/docs/current/reference/html/using-spring-boot.html#using-boot-using-springbootapplication-annotation) in the Spring Boot official documentation. Then, the program uses the `ApplicationPidFileWriter` to write a PID (process identification number) file called `spring-jpa-hibernate.pid` during application startup. The PID file can be used to close this application from an external source.
+エントリ クラスは、Spring Boot アプリケーションの標準構成アノテーション[<a href="https://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/autoconfigure/SpringBootApplication.html">`@SpringBootApplication`</a>](https://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/autoconfigure/SpringBootApplication.html)で始まります。詳細については、Spring Boot 公式ドキュメントの[<a href="https://docs.spring.io/spring-boot/docs/current/reference/html/using-spring-boot.html#using-boot-using-springbootapplication-annotation">`@SpringBootApplication`アノテーションの使用</a>](https://docs.spring.io/spring-boot/docs/current/reference/html/using-spring-boot.html#using-boot-using-springbootapplication-annotation)を参照してください。次に、プログラムはアプリケーションの起動時に`ApplicationPidFileWriter`を使用して`spring-jpa-hibernate.pid`という PID (プロセス識別番号) ファイルを書き込みます。 PID ファイルを使用して、外部ソースからこのアプリケーションを閉じることができます。
 
-### Data access object
+### データアクセスオブジェクト {#data-access-object}
 
-The `dao` (Data Access Object) package implements the persistence of data objects.
+`dao` (データ アクセス オブジェクト) パッケージは、データ オブジェクトの永続性を実装します。
 
-#### Entity objects
+#### エンティティオブジェクト {#entity-objects}
 
-The `PlayerBean.java` file is an entity object, which corresponds to a table in the database:
+`PlayerBean.java`ファイルはエンティティ オブジェクトであり、データベース内のテーブルに対応します。
 
 ```java
 package com.pingcap.dao;
@@ -671,18 +671,18 @@ public class PlayerBean {
 }
 ```
 
-The entity class has several annotations that give Hibernate additional information to bind the entity class to the table.
+エンティティ クラスには、エンティティ クラスをテーブルにバインドするための追加情報を Hibernate に提供するいくつかのアノテーションがあります。
 
-- `@Entity` declares that `PlayerBean` is an entity class.
-- `@Table` relates this entity class to the `player_jpa` table using the annotation attribute `name`.
-- `@Id` declares that this property is related to the primary key column of the table.
-- `@GeneratedValue` indicates that the value of this column is generated automatically and should not be set manually. The attribute `generator` is used to specify the name of the generator as `player_id`.
-- `@SequenceGenerator` declares a generator that uses [sequence](/sql-statements/sql-statement-create-sequence.md), and uses the annotation attribute `name` to declare the name of the generator as `player_id` (consistent with the name specified in `@GeneratedValue`). The annotation attribute `sequenceName` is used to specify the name of the sequence in the database. Finally, the annotation attribute `allocationSize` is used to declare the sequence's step size to be 1.
-- `@Column` declares each private attribute as a column of the `player_jpa` table, and uses the annotation attribute `name` to determine the name of the column corresponding to the attribute.
+-   `@Entity` `PlayerBean`エンティティ クラスであることを宣言します。
+-   `@Table`アノテーション属性`name`を使用して、このエンティティ クラスを`player_jpa`テーブルに関連付けます。
+-   `@Id` 、このプロパティがテーブルの主キー列に関連していることを宣言します。
+-   `@GeneratedValue` 、この列の値が自動的に生成され、手動で設定しないことを示します。属性`generator`ジェネレーターの名前を`player_id`として指定するために使用されます。
+-   `@SequenceGenerator` [<a href="/sql-statements/sql-statement-create-sequence.md">順序</a>](/sql-statements/sql-statement-create-sequence.md)を使用するジェネレータを宣言し、アノテーション属性`name`を使用してジェネレータの名前を`player_id`として宣言します ( `@GeneratedValue`で指定された名前と一致します)。注釈属性`sequenceName` 、データベース内の配列の名前を指定するために使用されます。最後に、アノテーション属性`allocationSize`使用して、シーケンスのステップ サイズが 1 であると宣言します。
+-   `@Column` 、各プライベート属性をテーブル`player_jpa`の列として宣言し、注釈属性`name`を使用して属性に対応する列の名前を決定します。
 
-#### Repository
+#### リポジトリ {#repository}
 
-To abstract the database layer, Spring applications use the [`Repository`](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories) interface, or a sub-interface of the `Repository`. This interface maps to a database object, such as a table. JPA implements some pre-built methods, such as [`INSERT`](/sql-statements/sql-statement-insert.md), or [`SELECT`](/sql-statements/sql-statement-select.md) using the primay key.
+データベースレイヤーを抽象化するために、Spring アプリケーションは[<a href="https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories">`Repository`</a>](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories)インターフェイス、または`Repository`のサブインターフェイスを使用します。このインターフェイスは、テーブルなどのデータベース オブジェクトにマップされます。 JPA は、主キーを使用して[<a href="/sql-statements/sql-statement-insert.md">`INSERT`</a>](/sql-statements/sql-statement-insert.md)や[<a href="/sql-statements/sql-statement-select.md">`SELECT`</a>](/sql-statements/sql-statement-select.md)などのいくつかの事前構築メソッドを実装します。
 
 ```java
 package com.pingcap.dao;
@@ -728,28 +728,28 @@ public interface PlayerRepository extends JpaRepository<PlayerBean, Long> {
 }
 ```
 
-The `PlayerRepository` interface extends the `JpaRepository` interface used by Spring for JPA data access. The `@Query` annotation is used to tell Hibernate how to implement queries in this interface. Two query syntaxes are used:
+`PlayerRepository`インターフェイスは、Spring が JPA データ アクセスに使用する`JpaRepository`インターフェイスを拡張します。 `@Query`アノテーションは、このインターフェイスでクエリを実装する方法を Hibernate に指示するために使用されます。次の 2 つのクエリ構文が使用されます。
 
-* In the `getPlayersByPage` interface, [Hibernate Query Language](https://docs.jboss.org/hibernate/orm/6.0/userguide/html_single/Hibernate_User_Guide.html#hql) (HQL) is used.
-* In the `getPlayersByLimit` interface, native SQL is used. When the interface uses the native SQL syntax, the `@Query` annotation parameter `nativeQuery` must be set to `true`.
+-   `getPlayersByPage`インターフェイスでは[<a href="https://docs.jboss.org/hibernate/orm/6.0/userguide/html_single/Hibernate_User_Guide.html#hql">Hibernate クエリ言語</a>](https://docs.jboss.org/hibernate/orm/6.0/userguide/html_single/Hibernate_User_Guide.html#hql) (HQL) が使用されます。
+-   `getPlayersByLimit`インターフェイスでは、ネイティブ SQL が使用されます。インターフェイスがネイティブ SQL 構文を使用する場合、 `@Query`注釈パラメータ`nativeQuery` `true`に設定する必要があります。
 
-In the SQL for the `getPlayersByLimit` annotation, `:limit` is called a [named parameter](https://docs.jboss.org/hibernate/orm/6.0/userguide/html_single/Hibernate_User_Guide.html#jpql-query-parameters) in Hibernate. Hibernate automatically finds and splices the parameter by name within the interface where the annotation resides. You can also use `@Param` to specify a name different from the parameter for injection.
+`getPlayersByLimit`アノテーションの SQL では、Hibernate では`:limit` [<a href="https://docs.jboss.org/hibernate/orm/6.0/userguide/html_single/Hibernate_User_Guide.html#jpql-query-parameters">名前付きパラメータ</a>](https://docs.jboss.org/hibernate/orm/6.0/userguide/html_single/Hibernate_User_Guide.html#jpql-query-parameters)と呼ばれます。 Hibernate は、アノテーションが存在するインターフェース内で名前によってパラメーターを自動的に検索し、結合します。 `@Param`使用して、インジェクションのパラメータとは異なる名前を指定することもできます。
 
-In `getPlayerAndLock`, an annotation [`@Lock`](https://docs.spring.io/spring-data/jpa/docs/current/api/org/springframework/data/jpa/repository/Lock.html) is used to declare that pessimistic locking is applied. For details on other locking methods, see [Entity Locking](https://openjpa.apache.org/builds/2.2.2/apache-openjpa/docs/jpa_overview_em_locking.html). The `@Lock` annotation must be used with `HQL`; otherwise, an error occurs. If you want to use SQL directly for locking, you can use the annotation from the comment:
+`getPlayerAndLock`では、アノテーション[<a href="https://docs.spring.io/spring-data/jpa/docs/current/api/org/springframework/data/jpa/repository/Lock.html">`@Lock`</a>](https://docs.spring.io/spring-data/jpa/docs/current/api/org/springframework/data/jpa/repository/Lock.html)を使用して、悲観的ロックが適用されることを宣言します。その他のロック方法については、 [<a href="https://openjpa.apache.org/builds/2.2.2/apache-openjpa/docs/jpa_overview_em_locking.html">エンティティのロック</a>](https://openjpa.apache.org/builds/2.2.2/apache-openjpa/docs/jpa_overview_em_locking.html)を参照してください。 `@Lock`アノテーションは`HQL`と一緒に使用する必要があります。そうしないとエラーが発生します。ロックに SQL を直接使用したい場合は、コメントの注釈を使用できます。
 
 ```java
 @Query(value = "SELECT * FROM player_jpa WHERE id = :id FOR UPDATE", nativeQuery = true)
 ```
 
-The SQL statement above uses `FOR UPDATE` to add locks directly. You can also dive deeper into the principles with the TiDB [`SELECT` statement](/sql-statements/sql-statement-select.md).
+上記の SQL ステートメントでは、 `FOR UPDATE`を使用してロックを直接追加します。 TiDB [<a href="/sql-statements/sql-statement-select.md">`SELECT`ステートメント</a>](/sql-statements/sql-statement-select.md)の原理をさらに詳しく調べることもできます。
 
-### Logic implementation
+### ロジックの実装 {#logic-implementation}
 
-The logic implementation layer is the `service` package, which contains the interfaces and logic implemented by the project.
+ロジック実装レイヤーは`service`パッケージで、プロジェクトによって実装されるインターフェイスとロジックが含まれます。
 
-#### Interface
+#### インターフェース {#interface}
 
-The `PlayerService.java` file defines the logical interface and implements the interface rather than writing a class directly. This is to keep the example as close to actual use as possible and to reflect the [open-closed principle](https://en.wikipedia.org/wiki/Open%E2%80%93closed_principle) of the design. You may omit this interface and inject the implementation class directly in the dependency class, but this approach is not recommended.
+`PlayerService.java`ファイルは、クラスを直接記述するのではなく、論理インターフェイスを定義し、インターフェイスを実装します。これは、サンプルを可能な限り実際の使用に近づけ、設計の[<a href="https://en.wikipedia.org/wiki/Open%E2%80%93closed_principle">開閉原理</a>](https://en.wikipedia.org/wiki/Open%E2%80%93closed_principle)を反映するためです。このインターフェイスを省略して、実装クラスを依存関係クラスに直接挿入することもできますが、このアプローチはお勧めできません。
 
 ```java
 package com.pingcap.service;
@@ -811,9 +811,9 @@ public interface PlayerService {
 }
 ```
 
-#### Implementation (Important)
+#### 実装（重要） {#implementation-important}
 
-The `PlayerService.java` file implements the `PlayerService` interface, which contains all the data processing logic.
+`PlayerService.java`ファイルは、すべてのデータ処理ロジックを含む`PlayerService`インターフェイスを実装します。
 
 ```java
 package com.pingcap.service.impl;
@@ -889,23 +889,23 @@ public class PlayerServiceImpl implements PlayerService {
 }
 ```
 
-The `@Service` annotation is used to declare that the lifecycle of this object is managed by `Spring`.
+`@Service`アノテーションは、このオブジェクトのライフサイクルが`Spring`によって管理されることを宣言するために使用されます。
 
-The `PlayerServiceImpl` implementation class also has a [`@Transactional`](https://docs.spring.io/spring-framework/docs/current/reference/html/data-access.html#transaction-declarative-annotations) annotation in addition to the `@Service` annotation. When transaction management is enabled in the application (which can be turned on using [`@EnableTransactionManagement`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/transaction/annotation/EnableTransactionManagement.html), but is turned on by default by `Spring Boot`. You don not need to manually configure it.), `Spring` automatically wraps all objects with the `@Transactional` annotation in a proxy and uses this proxy for object invocation processing.
+`PlayerServiceImpl`実装クラスには、 `@Service`アノテーションに加えて[<a href="https://docs.spring.io/spring-framework/docs/current/reference/html/data-access.html#transaction-declarative-annotations">`@Transactional`</a>](https://docs.spring.io/spring-framework/docs/current/reference/html/data-access.html#transaction-declarative-annotations)アノテーションもあります。アプリケーションでトランザクション管理が有効になっている場合 (これは[<a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/transaction/annotation/EnableTransactionManagement.html">`@EnableTransactionManagement`</a>](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/transaction/annotation/EnableTransactionManagement.html)使用して有効にできますが、デフォルトでは`Spring Boot`で有効になります。手動で構成する必要はありません。)、 `Spring`プロキシ内の`@Transactional`アノテーションを持つすべてのオブジェクトを自動的にラップし、オブジェクト呼び出し処理にこのプロキシを使用します。
 
-You can simply assume that when the agent calls a function inside an object with the `@Transactional` annotation:
+エージェントが`@Transactional`アノテーションを持つオブジェクト内の関数を呼び出すと、次のように単純に想定できます。
 
-- At the top of the function, it starts the transaction with `transaction.begin()`.
-- When the function returns, it calls `transaction.commit()` to commit the transaction.
-- When any runtime error occurs, the agent calls `transaction.rollback()` to roll back.
+-   関数の先頭で、 `transaction.begin()`でトランザクションを開始します。
+-   関数が戻ると、 `transaction.commit()`を呼び出してトランザクションをコミットします。
+-   実行時エラーが発生すると、エージェントは`transaction.rollback()`を呼び出してロールバックします。
 
-You can refer to [Database Transactions](/develop/dev-guide-transaction-overview.md) for more information on transactions, or read [Understanding the Spring Framework's Declarative Transaction Implementation](https://docs.spring.io/spring-framework/docs/current/reference/html/data-access.html#tx-decl-explained) on the `Spring` website.
+取引に関する詳細については[<a href="/develop/dev-guide-transaction-overview.md">データベーストランザクション</a>](/develop/dev-guide-transaction-overview.md)を参照するか、 `Spring` Web サイトの[<a href="https://docs.spring.io/spring-framework/docs/current/reference/html/data-access.html#tx-decl-explained">Spring Framework の宣言型トランザクション実装を理解する</a>](https://docs.spring.io/spring-framework/docs/current/reference/html/data-access.html#tx-decl-explained)を参照してください。
 
-In all implementation classes, the `buyGoods` function is requires attention. When the function encounters an illogical operation, it throws an exception and directs Hibernate to perform a transaction rollback to prevent incorrect data.
+すべての実装クラスで、 `buyGoods`関数に注意が必要です。関数が非論理的な操作に遭遇すると、例外をスローし、不正なデータを防ぐために Hibernate にトランザクションのロールバックを実行するよう指示します。
 
-### External HTTP Interface
+### 外部HTTPインターフェース {#external-http-interface}
 
-The `controller` package exposes the HTTP interface to the outside world and allows access to the service via the [REST API](https://www.redhat.com/en/topics/api/what-is-a-rest-api#).
+`controller`パッケージは HTTP インターフェイスを外部に公開し、 [<a href="https://www.redhat.com/en/topics/api/what-is-a-rest-api#">REST API</a>](https://www.redhat.com/en/topics/api/what-is-a-rest-api#)を介してサービスにアクセスできるようにします。
 
 ```java
 package com.pingcap.controller;
@@ -963,62 +963,62 @@ public class PlayerController {
 }
 ```
 
-`PlayerController` uses annotations as many as possible to demonstrate features. In real projects, keep the style consistent while following the rules of your company or team. The annotations in `PlayerController` are explained as follows:
+`PlayerController`機能を説明するために可能な限り多くの注釈を使用します。実際のプロジェクトでは、会社やチームのルールに従いながら、スタイルの一貫性を保ちます。 `PlayerController`の注釈は次のように説明されます。
 
-- [`@RestController`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/RestController.html) declares `PlayerController` as a [Web Controller](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) and serializes the return value as `JSON` output.
-- [`@RequestMapping`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/RequestMapping.html) maps the URL endpoint to `/player`, that is, this `Web Controller` only listens for requests sent to the `/player` URL.
-- `@Autowired` means `Spring` container can autowire relationships between collaborating beans. The declaration requires a `PlayerService` object, which is an interface and does not specify which implementation class to use. This is assembled by Spring. For the rules of this assembly, see [The IoC container](https://docs.spring.io/spring-framework/docs/3.2.x/spring-framework-reference/html/beans.html) on Spring's official website.
-- [`@PostMapping`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/PostMapping.html) declares that this function responds to a [POST](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request in HTTP.
-    - `@RequestBody` declares that the entire HTTP payload is parsed into the `playerList` parameter.
-    - `@NonNull` declares that the parameter must not be null; otherwise, it returns an error.
-- [`@GetMapping`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/GetMapping.html) declares that this function responds to a [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) request in HTTP.
-    - [`@PathVariable`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/PathVariable.html) shows that the annotation has placeholders like `{id}` and `{limit_size}`, which are bound to the variable annotated by `@PathVariable`. Such binding is based on the annotation attribute `name`. If the annotation attribute `name` is not specified, it is the same as the variable name. The variable name can be omitted, that is, `@PathVariable(name="limit_size")` can be written as `@PathVariable("limit_size")`.
-- [`@PutMapping`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/PutMapping.html) declares that this function responds to a [PUT](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PUT) request in HTTP.
-- [`@RequestParam`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/RequestParam.html) declares that this function parses URL parameters, form parameters, and other parameters in the request and binds them to the annotated variables.
+-   [<a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/RestController.html">`@RestController`</a>](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/RestController.html) `PlayerController` [<a href="https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller">ウェブコントローラー</a>](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller)として宣言し、戻り値を`JSON`出力としてシリアル化します。
+-   [<a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/RequestMapping.html">`@RequestMapping`</a>](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/RequestMapping.html) URL エンドポイントを`/player`にマップします。つまり、この`Web Controller` `/player` URL に送信されたリクエストのみをリッスンします。
+-   `@Autowired` 、 `Spring`コンテナが連携 Bean 間の関係を自動配線できることを意味します。宣言には`PlayerService`オブジェクトが必要ですが、これはインターフェイスであり、使用する実装クラスは指定しません。これは Spring によって組み立てられます。この集会のルールについては、Spring の公式 Web サイトの[<a href="https://docs.spring.io/spring-framework/docs/3.2.x/spring-framework-reference/html/beans.html">IoCコンテナ</a>](https://docs.spring.io/spring-framework/docs/3.2.x/spring-framework-reference/html/beans.html)を参照してください。
+-   [<a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/PostMapping.html">`@PostMapping`</a>](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/PostMapping.html) 、この関数が HTTP の[<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST">役職</a>](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST)リクエストに応答することを宣言します。
+    -   `@RequestBody` 、HTTP ペイロード全体が`playerList`パラメータに解析されることを宣言します。
+    -   `@NonNull`パラメータが null であってはいけないことを宣言します。それ以外の場合は、エラーが返されます。
+-   [<a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/GetMapping.html">`@GetMapping`</a>](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/GetMapping.html) 、この関数が HTTP の[<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET">得る</a>](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET)リクエストに応答することを宣言します。
+    -   [<a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/PathVariable.html">`@PathVariable`</a>](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/PathVariable.html) 、注釈に`{id}`や`{limit_size}`のようなプレースホルダがあり、これらは`@PathVariable`で注釈が付けられた変数にバインドされていることを示します。このようなバインディングは、アノテーション属性`name`に基づいています。注釈属性`name`が指定されていない場合は、変数名と同じになります。変数名は省略できます。つまり、 `@PathVariable(name="limit_size")` `@PathVariable("limit_size")`と書くことができます。
+-   [<a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/PutMapping.html">`@PutMapping`</a>](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/PutMapping.html) 、この関数が HTTP の[<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PUT">置く</a>](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PUT)リクエストに応答することを宣言します。
+-   [<a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/RequestParam.html">`@RequestParam`</a>](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/RequestParam.html)は、この関数がリクエスト内の URL パラメーター、フォーム パラメーター、およびその他のパラメーターを解析し、それらをアノテーション付き変数にバインドすることを宣言します。
 
-## Create a blank application with the same dependency (optional)
+## 同じ依存関係を持つ空のアプリケーションを作成します (オプション) {#create-a-blank-application-with-the-same-dependency-optional}
 
-This application is built using [Spring Initializr](https://start.spring.io/). You can quickly get a blank application with the same dependencies as this sample application by clicking on the following options and changing a few configuration items:
+このアプリケーションは[<a href="https://start.spring.io/">スプリング初期化</a>](https://start.spring.io/)を使用して構築されています。次のオプションをクリックしていくつかの構成項目を変更すると、このサンプル アプリケーションと同じ依存関係を持つ空のアプリケーションをすぐに取得できます。
 
-**Project**
+**計画**
 
-- Maven Project
+-   Maven プロジェクト
 
-**Language**
+**言語**
 
-- Java
+-   Java
 
-**Spring Boot**
+**スプリングブーツ**
 
-- Latest stable version
+-   最新の安定バージョン
 
-**Project Metadata**
+**プロジェクトのメタデータ**
 
-- Group: com.pingcap
-- Artifact: spring-jpa-hibernate
-- Name: spring-jpa-hibernate
-- Package name: com.pingcap
-- Packaging: Jar
-- Java: 17
+-   グループ: com.pingcap
+-   アーティファクト: spring-jpa-hibernate
+-   名前: spring-jpa-hibernate
+-   パッケージ名: com.pingcap
+-   包装: 瓶
+-   Java：17
 
-**Dependencies**
+**依存関係**
 
-- Spring Web
-- Spring Data JPA
-- MySQL Driver
+-   スプリングウェブ
+-   Spring Data JPA
+-   MySQLDriver
 
-The complete configuration is as follows:
+完全な構成は次のとおりです。
 
 ![Spring Initializr Configuration](/media/develop/develop-spring-initializr-configuration.png)
 
-> **Note:**
+> **ノート：**
 >
-> Although SQL is relatively standardized, each database vendor uses a subset and superset of ANSI SQL defined syntax. This is referred to as the database's dialect. Hibernate handles variations across these dialects through its `org.hibernate.dialect.Dialect` class and the various subclasses for each database vendor.
+> SQL は比較的標準化されていますが、各データベース ベンダーは ANSI SQL で定義された構文のサブセットとスーパーセットを使用しています。これはデータベースの方言と呼ばれます。 Hibernate は、その`org.hibernate.dialect.Dialect`クラスと各データベース ベンダーのさまざまなサブクラスを通じて、これらの方言間のバリエーションを処理します。
 >
-> In most cases, Hibernate will be able to determine the proper Dialect to use by asking some questions of the JDBC Connection during bootstrap. For information on Hibernate's ability to determine the proper Dialect to use (and your ability to influence that resolution), see [Dialect resolution](https://docs.jboss.org/hibernate/orm/6.0/userguide/html_single/Hibernate_User_Guide.html#portability-dialectresolver).
+> ほとんどの場合、Hibernate はブートストラップ中に JDBC 接続にいくつかの質問をすることで、使用する適切な方言を決定できます。使用する適切な方言を決定する Hibernate の機能 (およびその解決に影響を与えるユーザーの機能) については、 [<a href="https://docs.jboss.org/hibernate/orm/6.0/userguide/html_single/Hibernate_User_Guide.html#portability-dialectresolver">方言の解決</a>](https://docs.jboss.org/hibernate/orm/6.0/userguide/html_single/Hibernate_User_Guide.html#portability-dialectresolver)を参照してください。
 >
-> If for some reason it is not able to determine the proper one or you want to use a custom Dialect, you will need to set the `hibernate.dialect` setting.
+> 何らかの理由で適切な方言を決定できない場合、またはカスタムの方言を使用したい場合は、 `hibernate.dialect`設定を設定する必要があります。
 >
-> _—— Excerpt from the Hibernate official documentation: [Database Dialect](https://docs.jboss.org/hibernate/orm/6.0/userguide/html_single/Hibernate_User_Guide.html#database-dialect)_
+> *—— Hibernate 公式ドキュメントからの抜粋: <a href="https://docs.jboss.org/hibernate/orm/6.0/userguide/html_single/Hibernate_User_Guide.html#database-dialect">Database Dialect</a>*
 
-After the configuration, you can get a blank **Spring Boot** application with the same dependencies as the sample application.
+構成後、サンプル アプリケーションと同じ依存関係を持つ空の**Spring Boot**アプリケーションを取得できます。

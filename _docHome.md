@@ -5,37 +5,37 @@ hide_commit: true
 hide_leftNav: true
 ---
 
-<DocHomeContainer title="PingCAP Documentation" subTitle="Explore the how-to guides and references you need to use TiDB Cloud and TiDB, migrate data, and build your applications on the database.">
+<DocHomeContainer title="PingCAP ドキュメント" subTitle="Explore the how-to guides and references you need to use TiDB Cloud and TiDB, migrate data, and build your applications on the database.">
 
 <DocHomeSection label="TiDB Cloud" anchor="tidb-cloud" id="tidb-cloud">
 
-TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings everything great about TiDB to your cloud, and lets you focus on your applications, not the complexities of your database.
+TiDB Cloud は、フルマネージドの Database-as-a-Service (DBaaS) で、TiDB のすべての優れた機能をクラウドに提供し、データベースの複雑さではなくアプリケーションに集中できるようにします。
 
 <DocHomeCardContainer>
 
 <DocHomeCard href="https://docs.pingcap.com/tidbcloud" icon="doc2" label="TiDB Cloud Docs">
 
-See the documentation of TiDB Cloud
+TiDB Cloudのドキュメントを参照してください。
 
 </DocHomeCard>
 
 <DocHomeCard href="https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart" icon="cloud5" label="Get Started with TiDB Cloud">
 
-Guides you through an easy way to get started with TiDB Cloud
+TiDB Cloudを始めるための簡単な方法をガイドします。
 
 </DocHomeCard>
 
 <DocHomeCard href="https://docs.pingcap.com/tidbcloud/tidb-cloud-poc" icon="cloud3" label="Perform a PoC with TiDB Cloud">
 
-Helps you quickly complete a Proof of Concept (PoC) of TiDB Cloud
+TiDB Cloudの概念実証 (PoC) を迅速に完了するのに役立ちます
 
 </DocHomeCard>
 
 </DocHomeCardContainer>
 
-Get the power of a cloud-native, distributed SQL database built for real-time analytics in a fully-managed service.
+フルマネージド サービスでのリアルタイム分析用に構築されたクラウドネイティブの分散 SQL データベースの機能を活用します。
 
-<a href="https://tidbcloud.com/free-trial" class="button" target="_blank" referrerpolicy="no-referrer-when-downgrade">Try Free</a>
+<a href="https://tidbcloud.com/free-trial" class="button" target="_blank" referrerpolicy="no-referrer-when-downgrade">無料でお試しください</a>
 
 </DocHomeSection>
 
@@ -49,33 +49,33 @@ Get the power of a cloud-native, distributed SQL database built for real-time an
 
 -->
 
-TiDB is an open-source distributed SQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. It is MySQL compatible and features horizontal scalability, strong consistency, and high availability. You can deploy TiDB on premises or in the cloud.
+TiDB は、ハイブリッド トランザクションおよび分析処理 (HTAP) ワークロードをサポートするオープンソースの分散 SQL データベースです。 MySQL と互換性があり、水平スケーラビリティ、強力な一貫性、高可用性を備えています。 TiDB はオンプレミスまたはクラウドにデプロイできます。
 
 <DocHomeCardContainer>
 
 <DocHomeCard href="https://docs.pingcap.com/tidb/stable" icon="doc1" label="TiDB Docs">
 
-See the documentation of TiDB
+TiDB のドキュメントを参照してください。
 
 </DocHomeCard>
 
 <DocHomeCard href="https://docs.pingcap.com/tidb/stable/quick-start-with-tidb" icon="doc5" label="Get Started with TiDB">
 
-Walks you through the quickest way to get started with TiDB
+TiDB を使い始める最も簡単な方法を説明します。
 
 </DocHomeCard>
 
 <DocHomeCard href="https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup" icon="cloud7" label="Deploy a Local TiDB Cluster">
 
-Learn how to deploy TiDB locally in production
+TiDB を本番環境でローカルにデプロイする方法を学ぶ
 
 </DocHomeCard>
 
 </DocHomeCardContainer>
 
-The open-source TiDB platform is released under the Apache 2.0 license, and supported by the community.
+オープンソースの TiDB プラットフォームは、Apache 2.0 ライセンスに基づいてリリースされ、コミュニティによってサポートされています。
 
-<a href="https://en.pingcap.com/download/" class="button" target="_blank" referrerpolicy="no-referrer-when-downgrade">Download</a>
+<a href="https://en.pingcap.com/download/" class="button" target="_blank" referrerpolicy="no-referrer-when-downgrade">ダウンロード</a>
 
 </DocHomeSection>
 
@@ -85,13 +85,13 @@ The open-source TiDB platform is released under the Apache 2.0 license, and supp
 
 <DocHomeCard href="https://docs.pingcap.com/tidb/stable/dev-guide-overview" icon="doc8" label="Developer Guide">
 
-Documentation for TiDB application developers
+TiDB アプリケーション開発者向けのドキュメント
 
 </DocHomeCard>
 
 <DocHomeCard href="https://docs.pingcap.com/tidbcloud/dev-guide-overview" icon="cloud-dev" label="Developer Guide">
 
-Documentation for TiDB Cloud application developers
+TiDB Cloudアプリケーション開発者向けのドキュメント
 
 </DocHomeCard>
 
@@ -105,49 +105,49 @@ Documentation for TiDB Cloud application developers
 
 <DocHomeCard href="https://en.pingcap.com/education/" icon="cloud1" label="PingCAP Education">
 
-Learn TiDB and TiDB Cloud through well-designed online courses and instructor-led training
+よく設計されたオンライン コースとインストラクター主導のトレーニングを通じて TiDB とTiDB Cloudを学びます
 
 </DocHomeCard>
 
 <DocHomeCard href="https://en.pingcap.com/community/" icon="doc9" label="Community">
 
-Join us on Slack or become a contributor
+Slack に参加するか、寄稿者になりましょう
 
 </DocHomeCard>
 
 <DocHomeCard href="https://en.pingcap.com/blog/" icon="doc10" label="Blog Posts">
 
-Learn great articles about TiDB and TiDB Cloud
+TiDB とTiDB Cloudに関する優れた記事をご覧ください
 
 </DocHomeCard>
 
 <DocHomeCard href="https://en.pingcap.com/videos/" icon="doc11" label="Videos">
 
-See a compilation of short videos describing TiDB and a variety of use cases
+TiDB とさまざまな使用例を説明する短いビデオの編集をご覧ください。
 
 </DocHomeCard>
 
 <DocHomeCard href="https://en.pingcap.com/event/" icon="events" label="Events">
 
-Learn events about PingCAP and the community
+PingCAP とコミュニティに関するイベントを学ぶ
 
 </DocHomeCard>
 
 <DocHomeCard href="https://en.pingcap.com/ebook-whitepaper/" icon="papers" label="eBooks & Papers">
 
-Download eBooks and papers
+電子書籍と論文をダウンロードする
 
 </DocHomeCard>
 
 <DocHomeCard href="https://ossinsight.io/" icon="ossinsight" label="OSS Insight">
 
-A powerful insight tool that analyzes in depth any GitHub repository, powered by TiDB Cloud
+TiDB Cloudを利用してあらゆる GitHub リポジトリを詳細に分析する強力な洞察ツール
 
 </DocHomeCard>
 
 <DocHomeCard href="https://github.com/pingcap/docs/blob/master/CONTRIBUTING.md" icon="contributor" label="Contribute">
 
-Let’s work together to make the documentation better!
+ドキュメントをより良いものにするために一緒に働きましょう!
 
 </DocHomeCard>
 

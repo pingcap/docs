@@ -3,90 +3,94 @@ title: TiCDC Overview
 summary: Learn what TiCDC is, what features TiCDC provides, and how to install and deploy TiCDC.
 ---
 
-# TiCDC Overview
+# TiCDC の概要 {#ticdc-overview}
 
-[TiCDC](https://github.com/pingcap/tiflow/tree/master/cdc) is a tool used for replicating incremental data of TiDB. Specifically, TiCDC pulls TiKV change logs, sorts captured data, and exports row-based incremental data to downstream databases.
+[<a href="https://github.com/pingcap/tiflow/tree/master/cdc">TiCDC</a>](https://github.com/pingcap/tiflow/tree/master/cdc)は、TiDB の増分データをレプリケートするために使用されるツールです。具体的には、TiCDC は TiKV 変更ログを取得し、キャプチャしたデータを並べ替えて、行ベースの増分データをダウンストリーム データベースにエクスポートします。
 
-## Usage scenarios
+## 使用シナリオ {#usage-scenarios}
 
-- Provides data high availability and disaster recovery solutions for multiple TiDB clusters, ensuring eventual data consistency between primary and secondary clusters in case of disaster.
-- Replicates real-time data changes to homogeneous systems so as to provide data sources for various scenarios such as monitoring, caching, global indexing, data analysis, and primary-secondary replication between heterogeneous databases.
+-   複数の TiDB クラスターにデータの高可用性と災害復旧ソリューションを提供し、災害発生時にプライマリ クラスターとセカンダリ クラスター間の最終的なデータ整合性を確保します。
+-   リアルタイムのデータ変更を同種システムにレプリケートし、モニタリング、キャッシュ、グローバル インデックス作成、データ分析、異種データベース間のプライマリとセカンダリのレプリケーションなどのさまざまなシナリオにデータ ソースを提供します。
 
-## Major features
+## 主な特長 {#major-features}
 
-### Key capabilities
+### 主な機能 {#key-capabilities}
 
-- Replicate incremental data from one TiDB cluster to another TiDB cluster with second-level RPO and minute-level RTO.
-- Replicate data bidirectionally between TiDB clusters, based on which you can create a multi-active TiDB solution using TiCDC.
-- Replicate incremental data from a TiDB cluster to a MySQL database (or other MySQL-compatible databases) with low latency.
-- Replicate incremental data from a TiDB cluster to a Kafka cluster. The recommended data format includes [Canal-JSON](/ticdc/ticdc-canal-json.md) and [Avro](/ticdc/ticdc-avro-protocol.md).
-- Replicate tables with the ability to filter databases, tables, DMLs, and DDLs.
-- Be highly available with no single point of failure. Supports dynamically adding and deleting TiCDC nodes.
-- Support cluster management through [Open API](/ticdc/ticdc-open-api.md), including querying task status, dynamically modifying task configuration, and creating or deleting tasks.
+-   第 2 レベルの RPO と分レベルの RTO を使用して、ある TiDB クラスターから別の TiDB クラスターに増分データをレプリケートします。
+-   TiDB クラスター間でデータを双方向にレプリケートし、これに基づいて、TiCDC を使用してマルチアクティブ TiDB ソリューションを作成できます。
+-   TiDB クラスターから MySQL データベース (または他の MySQL 互換データベース) に低レイテンシーで増分データをレプリケートします。
+-   TiDB クラスターから Kafka クラスターに増分データをレプリケートします。推奨するデータ形式には[<a href="/ticdc/ticdc-canal-json.md">カナル-JSON</a>](/ticdc/ticdc-canal-json.md)と[<a href="/ticdc/ticdc-avro-protocol.md">アブロ</a>](/ticdc/ticdc-avro-protocol.md)があります。
+-   データベース、テーブル、DML、および DDL をフィルタリングする機能を備えたテーブルをレプリケートします。
+-   単一障害点がなく可用性が高くなります。 TiCDC ノードの動的追加と削除をサポートします。
+-   タスク ステータスのクエリ、タスク構成の動的変更、タスクの作成または削除など、 [<a href="/ticdc/ticdc-open-api.md">オープンAPI</a>](/ticdc/ticdc-open-api.md)を通じてクラスター管理をサポートします。
 
-### Replication order
+### レプリケーションの順序 {#replication-order}
 
-- For all DDL or DML statements, TiCDC outputs them **at least once**.
-- When the TiKV or TiCDC cluster encounters a failure, TiCDC might send the same DDL/DML statement repeatedly. For duplicated DDL/DML statements:
+-   すべての DDL または DML ステートメントについて、TiCDC はそれらを**少なくとも 1 回**出力します。
+-   TiKV または TiCDC クラスターで障害が発生すると、TiCDC は同じ DDL/DML ステートメントを繰り返し送信する可能性があります。重複した DDL/DML ステートメントの場合:
 
-    - MySQL sink can execute DDL statements repeatedly. For DDL statements that can be executed repeatedly in the downstream, such as `truncate table`, the statement is executed successfully. For those that cannot be executed repeatedly, such as `create table`, the execution fails, and TiCDC ignores the error and continues the replication.
-    - Kafka sink
-        - Kafka sink provides different strategies for data distribution. You can distribute data to different Kafka partitions based on the table, primary key, or timestamp. This ensures that the updated data of a row is sent to the same partition in order.
-        - All these distribution strategies send Resolved TS messages to all topics and partitions periodically. This indicates that all messages earlier than the Resolved TS have been sent to the topics and partitions. The Kafka consumer can use the Resolved TS to sort the messages received.
-        - Kafka sink sends duplicated messages sometimes, but these duplicated messages do not affect the constraints of `Resolved Ts`. For example, if a changefeed is paused and then resumed, Kafka sink might send  `msg1`, `msg2`, `msg3`, `msg2`, and `msg3` in order. You can filter the duplicated messages from Kafka consumers.
+    -   MySQL シンクは DDL ステートメントを繰り返し実行できます。 `truncate table`など、ダウンストリームで繰り返し実行できる DDL ステートメントの場合、ステートメントは正常に実行されます。 `create table`など、繰り返し実行できないものについては、実行は失敗し、TiCDC はエラーを無視してレプリケーションを続行します。
+    -   カフカシンク
+        -   Kafka シンクは、データ分散のためのさまざまな戦略を提供します。テーブル、主キー、またはタイムスタンプに基づいて、データをさまざまな Kafka パーティションに分散できます。これにより、行の更新されたデータが同じパーティションに順番に送信されることが保証されます。
+        -   これらすべての配布戦略は、解決された TS メッセージをすべてのトピックとパーティションに定期的に送信します。これは、解決された TS より前のすべてのメッセージがトピックとパーティションに送信されたことを示します。 Kafka コンシューマは、解決された TS を使用して、受信したメッセージを並べ替えることができます。
+        -   Kafka シンクは重複したメッセージを送信することがありますが、これらの重複したメッセージは`Resolved Ts`の制約には影響しません。たとえば、チェンジフィードが一時停止されてから再開される場合、Kafka シンクは`msg1` 、 `msg2` 、 `msg3` 、 `msg2` 、および`msg3`順番に送信する可能性があります。 Kafka コンシューマからの重複メッセージをフィルタリングできます。
 
-### Replication consistency
+### レプリケーションの一貫性 {#replication-consistency}
 
-- MySQL sink
+-   MySQLシンク
 
-    - TiCDC enables redo log to ensure eventual consistency of data replication.
-    - TiCDC **ensures** that the order of single-row updates is consistent with that in the upstream.
-    - TiCDC does **not ensure** that the execution order of downstream transactions is the same as that of upstream transactions.
+    -   TiCDC は REDO ログを有効にして、データ レプリケーションの最終的な整合性を確保します。
 
-    > **Note:**
+    -   TiCDC は、単一行の更新の順序がアップストリームの順序と一貫していることを**保証します**。
+
+    -   TiCDC は、ダウンストリーム トランザクションの実行順序がアップストリーム トランザクションの実行順序と同じであることを**保証しません**。
+
+    > **ノート：**
     >
-    > Since v6.2, you can use the sink uri parameter [`transaction-atomicity`](/ticdc/ticdc-sink-to-mysql.md#configure-sink-uri-for-mysql-or-tidb) to control whether to split single-table transactions. Splitting single-table transactions can greatly reduce the latency and memory consumption of replicating large transactions.
+    > v6.2 以降、シンク URI パラメーター[<a href="/ticdc/ticdc-sink-to-mysql.md#configure-sink-uri-for-mysql-or-tidb">`transaction-atomicity`</a>](/ticdc/ticdc-sink-to-mysql.md#configure-sink-uri-for-mysql-or-tidb)を使用して、単一テーブルのトランザクションを分割するかどうかを制御できます。単一テーブルのトランザクションを分割すると、大規模なトランザクションをレプリケートする際のレイテンシーとメモリ消費量を大幅に削減できます。
 
-## TiCDC architecture
+## TiCDCアーキテクチャ {#ticdc-architecture}
 
-As an incremental data replication tool for TiDB, TiCDC is highly available through PD's etcd. The replication process is as follows:
+TiDB の増分データ レプリケーション ツールとして、TiCDC は PD の etcd を通じて高可用性を備えています。レプリケーションのプロセスは次のとおりです。
 
-1. Multiple TiCDC processes pull data changes from TiKV nodes.
-2. Data changes pulled from TiKV are sorted and merged internally.
-3. Data changes are replicated to multiple downstream systems through multiple replication tasks (changefeeds).
+1.  複数の TiCDC プロセスが TiKV ノードからデータ変更をプルします。
+2.  TiKV から取得されたデータ変更は内部でソートおよびマージされます。
+3.  データ変更は、複数のレプリケーション タスク (変更フィード) を通じて複数のダウンストリーム システムにレプリケートされます。
 
-The architecture of TiCDC is shown in the following figure:
+TiCDC のアーキテクチャを次の図に示します。
 
 ![TiCDC architecture](/media/ticdc/cdc-architecture.png)
 
-The components in the preceding architecture diagram are described as follows:
+前述のアーキテクチャ図のコンポーネントは次のように説明されています。
 
-- TiKV Server: TiKV nodes in a TiDB cluster. When data changes, TiKV nodes send the changes as change logs (KV change logs) to TiCDC nodes. If TiCDC nodes find the change logs not continuous, they will actively request the TiKV nodes to provide change logs.
-- TiCDC: TiCDC nodes where the TiCDC processes run. Each node runs a TiCDC process. Each process pulls data changes from one or more tables in TiKV nodes, and replicates the changes to the downstream system through the sink component.
-- PD: The scheduling module in a TiDB cluster. This module is in charge of scheduling cluster data and usually consists of three PD nodes. PD provides high availability through the etcd cluster. In the etcd cluster, TiCDC stores its metadata, such as node status information and changefeed configurations.
+-   TiKV サーバー: TiDB クラスター内の TiKV ノード。データが変更されると、TiKV ノードは変更を変更ログ (KV 変更ログ) として TiCDC ノードに送信します。 TiCDC ノードは、変更ログが連続していないと判断した場合、TiKV ノードに変更ログを提供するよう積極的に要求します。
+-   TiCDC: TiCDC プロセスが実行される TiCDC ノード。各ノードは TiCDC プロセスを実行します。各プロセスは、TiKV ノード内の 1 つ以上のテーブルからデータ変更を取得し、シンクコンポーネントを介してダウンストリーム システムに変更を複製します。
+-   PD: TiDB クラスター内のスケジューリング モジュール。このモジュールはクラスター データのスケジューリングを担当し、通常は 3 つの PD ノードで構成されます。 PD は、etcd クラスターを通じて高可用性を提供します。 etcd クラスターでは、TiCDC はノードのステータス情報や変更フィード構成などのメタデータを保存します。
 
-As shown in the preceding architecture diagram, TiCDC supports replicating data to TiDB, MySQL, and Kafka databases.
+前述のアーキテクチャ図に示されているように、TiCDC は、TiDB、MySQL、および Kafka データベースへのデータのレプリケーションをサポートしています。
 
-## Best practices
+## ベストプラクティス {#best-practices}
 
-- When you use TiCDC to replicate data between two TiDB clusters and the network latency between the clusters is higher than 100 ms, it is recommended that you deploy TiCDC in the region (IDC) where the downstream TiDB cluster is located.
-- TiCDC only replicates the table that has at least one **valid index**. A **valid index** is defined as follows:
+-   TiCDC を使用して 2 つの TiDB クラスター間でデータをレプリケートし、クラスター間のネットワークレイテンシーが100 ミリ秒を超える場合は、ダウンストリーム TiDB クラスターが配置されているリージョン (IDC) に TiCDC をデプロイすることをお勧めします。
 
-    - A primary key (`PRIMARY KEY`) is a valid index.
-    - A unique index (`UNIQUE INDEX`) is valid if every column of the index is explicitly defined as non-nullable (`NOT NULL`) and the index does not have the virtual generated column (`VIRTUAL GENERATED COLUMNS`).
+-   TiCDC は、少なくとも 1 つの**有効なインデックスを**持つテーブルのみを複製します。**有効なインデックスは**次のように定義されます。
 
-- To use TiCDC in disaster recovery scenarios, you need to configure [redo log](/ticdc/ticdc-sink-to-mysql.md#eventually-consistent-replication-in-disaster-scenarios).
-- When you replicate a wide table with a large single row (greater than 1K), it is recommended that you configure [`per-table-memory-quota`](/ticdc/ticdc-server-config.md) so that `per-table-memory-quota` = `ticdcTotalMemory`/(`tableCount` * 2). `ticdcTotalMemory` is the memory of a TiCDC node, and `tableCount` is the number of target tables that a TiCDC node replicates.
+    -   主キー ( `PRIMARY KEY` ) は有効なインデックスです。
+    -   一意のインデックス ( `UNIQUE INDEX` ) は、インデックスのすべての列が null 非許容として明示的に定義され ( `NOT NULL` )、インデックスに仮想生成列 ( `VIRTUAL GENERATED COLUMNS` ) がない場合に有効です。
 
-> **Note:**
+-   災害復旧シナリオで TiCDC を使用するには、 [<a href="/ticdc/ticdc-sink-to-mysql.md#eventually-consistent-replication-in-disaster-scenarios">やり直しログ</a>](/ticdc/ticdc-sink-to-mysql.md#eventually-consistent-replication-in-disaster-scenarios)を構成する必要があります。
+
+-   大きな単一行 (1K を超える) を含む幅の広いテーブルをレプリケートする場合は、 `per-table-memory-quota` = `ticdcTotalMemory` /( `tableCount` * 2) となるように[<a href="/ticdc/ticdc-server-config.md">`per-table-memory-quota`</a>](/ticdc/ticdc-server-config.md)を構成することをお勧めします。 `ticdcTotalMemory`は TiCDC ノードのメモリ、 `tableCount`は TiCDC ノードが複製するターゲット テーブルの数です。
+
+> **ノート：**
 >
-> Since v4.0.8, TiCDC supports replicating tables **without a valid index** by modifying the task configuration. However, this compromises the guarantee of data consistency to some extent. For more details, see [Replicate tables without a valid index](/ticdc/ticdc-manage-changefeed.md#replicate-tables-without-a-valid-index).
+> v4.0.8 以降、TiCDC はタスク構成を変更することで、**有効なインデックスのない**テーブルの複製をサポートします。ただし、これによりデータの一貫性の保証がある程度損なわれます。詳細については、 [<a href="/ticdc/ticdc-manage-changefeed.md#replicate-tables-without-a-valid-index">有効なインデックスのないテーブルをレプリケートする</a>](/ticdc/ticdc-manage-changefeed.md#replicate-tables-without-a-valid-index)を参照してください。
 
-### Unsupported scenarios
+### サポートされていないシナリオ {#unsupported-scenarios}
 
-Currently, the following scenarios are not supported:
+現在、次のシナリオはサポートされていません。
 
-- The TiKV cluster that uses RawKV alone.
-- The [DDL operation `CREATE SEQUENCE`](/sql-statements/sql-statement-create-sequence.md) and the [SEQUENCE function](/sql-statements/sql-statement-create-sequence.md#sequence-function) in TiDB. When the upstream TiDB uses `SEQUENCE`, TiCDC ignores `SEQUENCE` DDL operations/functions performed upstream. However, DML operations using `SEQUENCE` functions can be correctly replicated.
+-   RawKV のみを使用する TiKV クラスター。
+-   TiDB の[<a href="/sql-statements/sql-statement-create-sequence.md">DDL 操作`CREATE SEQUENCE`</a>](/sql-statements/sql-statement-create-sequence.md)と[<a href="/sql-statements/sql-statement-create-sequence.md#sequence-function">シーケンス機能</a>](/sql-statements/sql-statement-create-sequence.md#sequence-function) 。アップストリームの TiDB が`SEQUENCE`使用する場合、TiCDC はアップストリームで実行された`SEQUENCE` DDL 操作/関数を無視します。ただし、 `SEQUENCE`関数を使用する DML 操作は正しく複製できます。
 
-TiCDC only provides partial support for scenarios of large transactions in the upstream. For details, refer to [Does TiCDC support replicating large transactions? Is there any risk?](/ticdc/ticdc-faq.md#does-ticdc-support-replicating-large-transactions-is-there-any-risk).
+TiCDC は、アップストリームでの大規模なトランザクションのシナリオに対して部分的なサポートのみを提供します。詳細は[<a href="/ticdc/ticdc-faq.md#does-ticdc-support-replicating-large-transactions-is-there-any-risk">TiCDC は大規模なトランザクションのレプリケーションをサポートしていますか?リスクはありますか?</a>](/ticdc/ticdc-faq.md#does-ticdc-support-replicating-large-transactions-is-there-any-risk)を参照してください。

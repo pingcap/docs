@@ -3,66 +3,66 @@ title: TiDB Cloud Release Notes in 2023
 summary: Learn about the release notes of TiDB Cloud in 2023.
 ---
 
-# TiDB Cloud Release Notes in 2023
+# 2023 年のTiDB Cloudリリース ノート {#tidb-cloud-release-notes-in-2023}
 
-This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2023.
+このページには 2023 年[<a href="https://www.pingcap.com/tidb-cloud/">TiDB Cloud</a>](https://www.pingcap.com/tidb-cloud/)のリリースノートが記載されています。
 
-## January 10, 2023
+## 2023 年 1 月 10 日 {#january-10-2023}
 
-**General changes**
+**一般的な変更点**
 
-- Optimize the feature of importing data from local CSV files to TiDB to improve the user experience for [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters.
+-   ローカル CSV ファイルから TiDB にデータをインポートする機能を最適化し、 [<a href="/tidb-cloud/select-cluster-tier.md#serverless-tier-beta">Serverless Tier</a>](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)クラスターのユーザー エクスペリエンスを向上させます。
 
-    - To upload a CSV file, now you can simply drag and drop it to the upload area on the **Import** page.
-    - When creating an import task, if your target database or table does not exist, you can enter a name to let TiDB Cloud create it for you automatically. For the target table to be created, you can specify a primary key or select multiple fields to form a composite primary key.
-    - After the import is completed, you can explore your data with [AI-powered Chat2Query](/tidb-cloud/explore-data-with-chat2query.md) by clicking **Explore your data by Chat2Query** or clicking the target table name in the task list.
+    -   CSV ファイルをアップロードするには、**インポート**ページのアップロード領域にドラッグ アンド ドロップするだけで済みます。
+    -   インポート タスクを作成するときに、ターゲット データベースまたはテーブルが存在しない場合は、名前を入力すると、 TiDB Cloudによって自動的に作成されます。作成するターゲット テーブルでは、主キーを指定するか、複数のフィールドを選択して複合主キーを形成できます。
+    -   インポートが完了したら、 **「Chat2Query でデータを探索」**をクリックするか、タスク リストでターゲット テーブル名をクリックすると、 [<a href="/tidb-cloud/explore-data-with-chat2query.md">AI を活用した Chat2Query</a>](/tidb-cloud/explore-data-with-chat2query.md)でデータを探索できます。
 
-  For more information, see [Import local files to TiDB Cloud](/tidb-cloud/tidb-cloud-import-local-files.md).
+    詳細については、 [<a href="/tidb-cloud/tidb-cloud-import-local-files.md">ローカル ファイルをTiDB Cloudにインポートする</a>](/tidb-cloud/tidb-cloud-import-local-files.md)を参照してください。
 
-**Console changes**
+**コンソールの変更**
 
-- Add the **Get Support** option for each cluster to simplify the process of requesting support for a specific cluster.
+-   各クラスターに**[Get Support]**オプションを追加して、特定のクラスターのサポートをリクエストするプロセスを簡素化します。
 
-    You can request support for a cluster in either of the following ways:
+    次のいずれかの方法でクラスターのサポートをリクエストできます。
 
-    - On the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, click **...** in the row of your cluster and select **Get Support**.
-    - On your cluster overview page, click **...** in the upper-right corner and select **Get Support**.
+    -   プロジェクトの[<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページで、クラスターの行にある**[...]**をクリックし、 **[Get Support]**を選択します。
+    -   クラスターの概要ページで、右上隅にある**[...]**をクリックし、 **[サポートを受ける]**を選択します。
 
-## January 5, 2023
+## 2023 年 1 月 5 日 {#january-5-2023}
 
-**Console changes**
+**コンソールの変更**
 
-- Rename SQL Editor (beta) to Chat2Query (beta) for [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters and support generating SQL queries using AI.
+-   [<a href="/tidb-cloud/select-cluster-tier.md#serverless-tier-beta">Serverless Tier</a>](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)クラスターの SQL Editor (ベータ) の名前を Chat2Query (ベータ) に変更し、AI を使用した SQL クエリの生成をサポートします。
 
-  In Chat2Query, you can either let AI generate SQL queries automatically or write SQL queries manually, and run SQL queries against databases without a terminal.
+    Chat2Query では、AI に SQL クエリを自動的に生成させることも、SQL クエリを手動で作成して、ターミナルを使用せずにデータベースに対して SQL クエリを実行することもできます。
 
-  To access Chat2Query, go to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project, click your cluster name, and then click **Chat2Query** in the left navigation pane.
+    Chat2Query にアクセスするには、プロジェクトの[<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページに移動し、クラスター名をクリックして、左側のナビゲーション ウィンドウで**[Chat2Query]**をクリックします。
 
-## January 4, 2023
+## 2023 年 1 月 4 日 {#january-4-2023}
 
-**General changes**
+**一般的な変更点**
 
-- Support scaling up TiDB, TiKV, and TiFlash nodes by increasing the **Node Size(vCPU + RAM)** for TiDB Dedicated Tier clusters hosted on AWS and created after December 31, 2022.
+-   AWS でホストされ、2022 年 12 月 31 日以降に作成された TiDBDedicated Tierクラスターの**ノード サイズ (vCPU + RAM) を**増やすことで、TiDB、TiKV、およびTiFlashノードのスケールアップをサポートします。
 
-    You can increase the node size [using the TiDB Cloud console](/tidb-cloud/scale-tidb-cluster.md#increase-node-size) or [using the TiDB Cloud API (beta)](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster).
+    ノード サイズを[<a href="/tidb-cloud/scale-tidb-cluster.md#increase-node-size">TiDB Cloudコンソールの使用</a>](/tidb-cloud/scale-tidb-cluster.md#increase-node-size)または[<a href="https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster">TiDB CloudAPI (ベータ版) を使用する</a>](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster)に増やすことができます。
 
-- Extend the metrics retention period on the [**Monitoring**](/tidb-cloud/built-in-monitoring.md) page to two days.
+-   [<a href="/tidb-cloud/built-in-monitoring.md">**モニタリング**</a>](/tidb-cloud/built-in-monitoring.md)ページのメトリクスの保持期間を 2 日に延長します。
 
-    Now you have access to metrics data of the last two days, giving you more flexibility and visibility into your cluster performance and trends.
+    過去 2 日間のメトリクス データにアクセスできるようになり、クラスターのパフォーマンスと傾向をより柔軟に把握できるようになりました。
 
-    This improvement comes at no additional cost and can be accessed on the **Diagnosis** tab of the [**Monitoring**](/tidb-cloud/built-in-monitoring.md) page for your cluster. This will help you identify and troubleshoot performance issues and monitor the overall health of your cluster more effectively.
+    この改善には追加コストはかからず、クラスターの[<a href="/tidb-cloud/built-in-monitoring.md">**モニタリング**</a>](/tidb-cloud/built-in-monitoring.md)ページの**[診断]**タブからアクセスできます。これは、パフォーマンスの問題を特定してトラブルシューティングし、クラスター全体の状態をより効果的に監視するのに役立ちます。
 
-- Support customizing Grafana dashboard JSON for Prometheus integration.
+-   Prometheus 統合のための Grafana ダッシュボード JSON のカスタマイズをサポートします。
 
-    If you have [integrated TiDB Cloud with Prometheus](/tidb-cloud/monitor-prometheus-and-grafana-integration.md), you can now import a pre-built Grafana dashboard to monitor TiDB Cloud clusters and customize the dashboard to your needs. This feature enables easy and fast monitoring of your TiDB Cloud clusters and helps you identify any performance issues quickly.
+    [<a href="/tidb-cloud/monitor-prometheus-and-grafana-integration.md">TiDB Cloudと Prometheus を統合</a>](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)お持ちの場合は、事前に構築された Grafana ダッシュボードをインポートしてTiDB Cloudクラスターを監視し、ニーズに合わせてダッシュボードをカスタマイズできるようになりました。この機能により、 TiDB Cloudクラスターの簡単かつ迅速なモニタリングが可能になり、パフォーマンスの問題を迅速に特定するのに役立ちます。
 
-    For more information, see [Use Grafana GUI dashboards to visualize the metrics](/tidb-cloud/monitor-prometheus-and-grafana-integration.md#step-3-use-grafana-gui-dashboards-to-visualize-the-metrics).
+    詳細については、 [<a href="/tidb-cloud/monitor-prometheus-and-grafana-integration.md#step-3-use-grafana-gui-dashboards-to-visualize-the-metrics">Grafana GUI ダッシュボードを使用してメトリクスを視覚化する</a>](/tidb-cloud/monitor-prometheus-and-grafana-integration.md#step-3-use-grafana-gui-dashboards-to-visualize-the-metrics)を参照してください。
 
-- Upgrade the default TiDB version of all [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters from [v6.3.0](https://docs.pingcap.com/tidb/v6.3/release-6.3.0) to [v6.4.0](https://docs.pingcap.com/tidb/v6.4/release-6.4.0). The cold start issue after upgrading the default TiDB version of Serverless Tier clusters to v6.4.0 has been resolved.
+-   すべての[<a href="/tidb-cloud/select-cluster-tier.md#serverless-tier-beta">Serverless Tier</a>](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)クラスターのデフォルトの TiDB バージョンを[<a href="https://docs.pingcap.com/tidb/v6.3/release-6.3.0">v6.3.0</a>](https://docs.pingcap.com/tidb/v6.3/release-6.3.0)から[<a href="https://docs.pingcap.com/tidb/v6.4/release-6.4.0">v6.4.0</a>](https://docs.pingcap.com/tidb/v6.4/release-6.4.0)にアップグレードします。Serverless Tierクラスターのデフォルトの TiDB バージョンを v6.4.0 にアップグレードした後のコールド スタートの問題は解決されました。
 
-**Console changes**
+**コンソールの変更**
 
-- Simplify the display of the [**Clusters**](https://tidbcloud.com/console/clusters) page and the cluster overview page.
+-   [<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページとクラスター概要ページの表示を簡素化します。
 
-    - You can click the cluster name on the [**Clusters**](https://tidbcloud.com/console/clusters) page to enter the cluster overview page and start operating the cluster.
-    - Remove the **Connection** and **Import** panes from the cluster overview page. You can click **Connect** in the upper-right corner to get the connection information and click **Import** in the left navigation pane to import data.
+    -   [<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページのクラスター名をクリックすると、クラスターの概要ページに移動し、クラスターの操作を開始できます。
+    -   クラスターの概要ページから**[接続] ペイン**と**[インポート]**ペインを削除します。右上隅の**「接続」**をクリックして接続情報を取得し、左側のナビゲーション・ペインで**「インポート」**をクリックしてデータをインポートできます。

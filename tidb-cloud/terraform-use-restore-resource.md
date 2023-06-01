@@ -3,28 +3,28 @@ title: Use Restore Resource
 summary: Learn how to use restore resource.
 ---
 
-# Use Restore Resource
+# 復元リソースの使用 {#use-restore-resource}
 
-You can learn how to create a restore task with the `tidbcloud_restore` resource in this document. The restore task will create a restored cluster according to your backup. 
+このドキュメントでは、 `tidbcloud_restore`リソースを使用して復元タスクを作成する方法を学習できます。復元タスクは、バックアップに従って復元されたクラスターを作成します。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-- [Get TiDB Cloud Terraform Provider](/tidb-cloud/terraform-get-tidbcloud-provider.md).
-- The backup and restore feature is unavailable for Serverless Tier clusters. To use restore resources, make sure that you have created a Dedicated Tier cluster.
+-   [<a href="/tidb-cloud/terraform-get-tidbcloud-provider.md">TiDB Cloud Terraform プロバイダーを入手する</a>](/tidb-cloud/terraform-get-tidbcloud-provider.md) 。
+-   バックアップおよび復元機能は、Serverless Tierクラスターでは使用できません。復元リソースを使用するには、Dedicated Tierクラスターを作成していることを確認してください。
 
-## Create a restore task with the restore resource
+## 復元リソースを使用して復元タスクを作成する {#create-a-restore-task-with-the-restore-resource}
 
-After creating a backup of a cluster, you can restore the cluster by creating a restore task with the `tidbcloud_restore` resource.
+クラスターのバックアップを作成した後、 `tidbcloud_restore`リソースを使用して復元タスクを作成することでクラスターを復元できます。
 
-> **Note:**
+> **ノート：**
 >
-> You can only restore data from a smaller node size to the same or larger node size.
+> より小さいノード サイズから同じまたはより大きいノード サイズにのみデータを復元できます。
 
-1. Create a directory for the restore and enter it.
+1.  復元用のディレクトリを作成して入力します。
 
-2. Create a `restore.tf` file.
+2.  `restore.tf`ファイルを作成します。
 
-    For example:
+    例えば：
 
     ```
     terraform {
@@ -35,12 +35,12 @@ After creating a backup of a cluster, you can restore the cluster by creating a 
        }
      }
      required_version = ">= 1.0.0"
-   }
+    }
 
-   provider "tidbcloud" {
+    provider "tidbcloud" {
      public_key = "fake_public_key"
      private_key = "fake_private_key"
-   }
+    }
     resource "tidbcloud_restore" "example_restore" {
       project_id = tidbcloud_cluster.example_cluster.project_id
       backup_id  = tidbcloud_backup.example_backup.id
@@ -68,7 +68,7 @@ After creating a backup of a cluster, you can restore the cluster by creating a 
     }
     ```
 
-3. Run the `terraform apply` command and type `yes` for confirmation:
+3.  `terraform apply`コマンドを実行し、確認のために`yes`を入力します。
 
     ```
     $ terraform apply
@@ -131,7 +131,7 @@ After creating a backup of a cluster, you can restore the cluster by creating a 
     Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
     ```
 
-4. Use the `terraform state show tidbcloud_restore.${resource-name}` command to check the status of the restore task:
+4.  `terraform state show tidbcloud_restore.${resource-name}`コマンドを使用して、復元タスクのステータスを確認します。
 
     ```
     $ terraform state show tidbcloud_restore.example_restore
@@ -173,14 +173,14 @@ After creating a backup of a cluster, you can restore the cluster by creating a 
     }
     ```
 
-    You can see the restore task's status is `PENDING` and the cluster's status is `INITIALIZING`.
+    復元タスクのステータスが`PENDING` 、クラスターのステータスが`INITIALIZING`であることがわかります。
 
-5. Wait for some minutes. Then use `terraform refersh` to update the status.
+5.  数分間待ちます。次に、 `terraform refersh`使用してステータスを更新します。
 
-6. After the cluster status changes to `AVAILABLE`, the restore task will be `RUNNING` and turn to `SUCCESS` at last.
+6.  クラスターのステータスが`AVAILABLE`に変化した後、復元タスクは`RUNNING`なり、最終的に`SUCCESS`になります。
 
-Note that the restored cluster is not managed by Terraform. You can manage the restored cluster by [importing it](/tidb-cloud/terraform-use-cluster-resource.md#import-a-cluster).
+復元されたクラスターは Terraform によって管理されないことに注意してください。復元されたクラスターは[<a href="/tidb-cloud/terraform-use-cluster-resource.md#import-a-cluster">それをインポートする</a>](/tidb-cloud/terraform-use-cluster-resource.md#import-a-cluster)で管理できます。
 
-## Delete a restore task
+## 復元タスクを削除する {#delete-a-restore-task}
 
-Restore tasks cannot be deleted.
+復元タスクは削除できません。

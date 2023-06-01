@@ -3,27 +3,28 @@ title: Configure Cluster Security Settings
 summary: Learn how to configure the root password and allowed IP addresses to connect to your cluster.
 ---
 
-# Configure Cluster Security Settings
+# クラスタのSecurity設定を構成する {#configure-cluster-security-settings}
 
-For Dedicated Tier clusters, you can configure the root password and allowed IP addresses to connect to your cluster.
+Dedicated Tierクラスターの場合、root パスワードとクラスターへの接続を許可する IP アドレスを構成できます。
 
-> **Note:**
+> **ノート：**
 >
-> For Serverless Tier clusters, this document is inapplicable and you can refer to [Secure Connections to Serverless Tier Clusters](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md) instead.
+> Serverless Tierクラスターの場合、このドキュメントは適用されないため、代わりに[<a href="/tidb-cloud/secure-connections-to-serverless-tier-clusters.md">Serverless Tierクラスターへのセキュリティ接続</a>](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md)を参照してください。
 
-1. In the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
+1.  TiDB Cloudコンソールで、プロジェクトの[<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページに移動します。
 
-    > **Tip:**
+    > **ヒント：**
     >
-    > If you have multiple projects, you can switch to the target project in the left navigation pane of the **Clusters** page.
+    > 複数のプロジェクトがある場合は、 **「クラスター」**ページの左側のナビゲーション・ペインでターゲット・プロジェクトに切り替えることができます。
 
-2. In the row of your target cluster, click **...** and select **Security Settings**.
-3. In the **Security Settings** dialog, configure the root password and allowed IP addresses.
+2.  ターゲット クラスターの行で**[...]**をクリックし、 **[Security設定]**を選択します。
 
-    To allow your cluster to be accessible by any IP addresses, click **Allow Access from Anywhere**.
+3.  **「Security設定」**ダイアログで、root パスワードと許可される IP アドレスを構成します。
 
-4. Click **Apply**.
+    クラスターに任意の IP アドレスからアクセスできるようにするには、 **「どこからでもアクセスを許可」**をクリックします。
 
-> **Tip:**
+4.  **「適用」**をクリックします。
+
+> **ヒント：**
 >
-> If you are viewing the overview page of your cluster, you can click the **...** in the upper-right corner of the page, select **Security Settings**, and configure these settings, too.
+> クラスターの概要ページを表示している場合は、ページの右上隅にある [ **...]**をクリックし、 **[Security設定]**を選択して、これらの設定も構成できます。

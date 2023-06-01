@@ -3,45 +3,45 @@ title: Export Data from TiDB
 summary: This page has instructions for exporting data from your TiDB cluster in TiDB Cloud.
 ---
 
-# Export Data from TiDB
+# TiDB からデータをエクスポート {#export-data-from-tidb}
 
-This page describes how to export data from your cluster in TiDB Cloud.
+このページでは、 TiDB Cloudのクラスターからデータをエクスポートする方法について説明します。
 
-TiDB does not lock in your data. Sometimes you still want to be able to migrate data from TiDB to other data platforms. Because TiDB is highly compatible with MySQL, any export tool suitable for MySQL can also be used for TiDB.
+TiDB はデータをロックインしません。 TiDB から他のデータ プラットフォームにデータを移行できるようにしたい場合があります。 TiDB は MySQL と高い互換性があるため、MySQL に適したエクスポート ツールはすべて TiDB にも使用できます。
 
-You can use the tool [Dumpling](/dumpling-overview.md) for data export.
+データのエクスポートにはツール[<a href="/dumpling-overview.md">Dumpling</a>](/dumpling-overview.md)を使用できます。
 
-1. Download and install TiUP:
+1.  TiUPをダウンロードしてインストールします。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```shell
     curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
     ```
 
-2. Declare the global environment variable:
+2.  グローバル環境変数を宣言します。
 
-    > **Note:**
+    > **ノート：**
     >
-    > After the installation, TiUP displays the absolute path of the corresponding `profile` file. You need to modify `.bash_profile` in following command to the path of your `profile` file.
+    > インストール後、 TiUP は対応する`profile`ファイルの絶対パスを表示します。次のコマンドの`.bash_profile` `profile`ファイルのパスに変更する必要があります。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```shell
     source .bash_profile
     ```
 
-3. Install Dumpling.
+3.  Dumplingをインストールします。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```shell
     tiup install dumpling:v6.5.0
     ```
 
-4. Export your data using Dumpling from TiDB.
+4.  TiDB からDumpling を使用してデータをエクスポートします。
 
-    You can get the following connection parameters `${tidb_endpoint}`, `${port}`, and `${user}` from the connection string in the [**Connect**](/tidb-cloud/connect-via-standard-connection.md) dialog.
+    [<a href="/tidb-cloud/connect-via-standard-connection.md">**接続**</a>](/tidb-cloud/connect-via-standard-connection.md)ダイアログの接続文字列から、次の接続パラメータ`${tidb_endpoint}` 、 `${port}` 、および`${user}`を取得できます。
 
     <SimpleTab>
 
@@ -52,33 +52,33 @@ You can use the tool [Dumpling](/dumpling-overview.md) for data export.
     ```
 
     </div>
-    <div label="Dedicated Tier">
+     <div label="Dedicated Tier">
 
     ```shell
     tiup dumpling:v6.5.0 -h ${tidb_endpoint} -P ${port} -u ${user} -p ${password} -F 67108864MiB -t 4 -o ${export_dir} --filetype sql
     ```
 
     </div>
-    </SimpleTab>
+     </SimpleTab>
 
-    Options are described as follows:
+    オプションは次のように説明されます。
 
-    - `-h`: The TiDB cluster endpoint.
-    - `-P`: The TiDB cluster port.
-    - `-u`: The TiDB cluster user.
-    - `-p`: The TiDB cluster password.
-    - `-F`: The maximum size of a single file.
-    - `--ca`: The CA root path. Refer to [Secure Connections to Serverless Tier Clusters](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md#where-is-the-ca-root-path-on-my-system).
-    - `-o`: The export directory.
-    - `--filetype`: The exported file type. The default value is `sql`. You can choose from `sql` and `csv`.
+    -   `-h` : TiDB クラスターのエンドポイント。
+    -   `-P` : TiDB クラスターのポート。
+    -   `-u` : TiDB クラスターのユーザー。
+    -   `-p` : TiDB クラスターのパスワード。
+    -   `-F` : 1 つのファイルの最大サイズ。
+    -   `--ca` : CA ルート パス。 [<a href="/tidb-cloud/secure-connections-to-serverless-tier-clusters.md#where-is-the-ca-root-path-on-my-system">Serverless Tierクラスターへのセキュリティ接続</a>](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md#where-is-the-ca-root-path-on-my-system)を参照してください。
+    -   `-o` : エクスポートディレクトリ。
+    -   `--filetype` : エクスポートされたファイルの種類。デフォルト値は`sql`です。 `sql`と`csv`からお選びいただけます。
 
-    For more information about Dumpling options, see [Dumpling option list](/dumpling-overview.md#option-list-of-dumpling).
+    Dumplingオプションの詳細については、 [<a href="/dumpling-overview.md#option-list-of-dumpling">Dumplingオプション一覧</a>](/dumpling-overview.md#option-list-of-dumpling)を参照してください。
 
-    The minimum permissions required are as follows:
+    最低限必要な権限は次のとおりです。
 
-    - `SELECT`
-    - `RELOAD`
-    - `LOCK TABLES`
-    - `REPLICATION CLIENT`
+    -   `SELECT`
+    -   `RELOAD`
+    -   `LOCK TABLES`
+    -   `REPLICATION CLIENT`
 
-After exporting data using Dumpling, you can import the data to MySQL compatible databases by using [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview).
+Dumplingを使用してデータをエクスポートした後、 [<a href="https://docs.pingcap.com/tidb/stable/tidb-lightning-overview">TiDB Lightning</a>](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview)を使用してデータを MySQL 互換データベースにインポートできます。

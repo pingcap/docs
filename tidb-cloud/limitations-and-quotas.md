@@ -3,29 +3,29 @@ title: Limitations and Quotas in TiDB Cloud
 summary: Learn the limitations and quotas in TiDB Cloud.
 ---
 
-# Limitations and Quotas in TiDB Cloud
+# TiDB Cloudの制限とクォータ {#limitations-and-quotas-in-tidb-cloud}
 
-TiDB Cloud limits how many of each kind of component you can create, and the common usage limitations of TiDB. In addition, there are some organization-level quotas to limit the amount of resources created by users to prevent from creating more resources than you actually need. These tables outline limits and quotas.
+TiDB Cloud、作成できる各種類のコンポーネントの数と、TiDB の一般的な使用制限が制限されています。さらに、実際に必要以上のリソースが作成されないように、ユーザーが作成するリソースの量を制限する組織レベルのクォータがいくつかあります。これらの表は、制限とクォータの概要を示しています。
 
-> **Note:**
+> **ノート：**
 >
-> If any of these limits or quotas present a problem for your organization, please contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+> これらの制限またはクォータのいずれかが組織に問題を引き起こす場合は、 [<a href="/tidb-cloud/tidb-cloud-support.md">TiDB Cloudのサポート</a>](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
-## Cluster Limits
+## クラスタの制限 {#cluster-limits}
 
-| Component | Limit |
-|:-|:-|
-| Number of data replicas | 3 |
-| Number of Availability Zones for a cross-zone deployment | 3 |
+| 成分                      | 限界 |
+| :---------------------- | :- |
+| データレプリカの数               | 3  |
+| クロスゾーン展開のアベイラビリティーゾーンの数 | 3  |
 
-> **Note:**
+> **ノート：**
 >
-> If you want to learn more about common usage limitations of TiDB, please refer to [TiDB Limitations](https://docs.pingcap.com/tidb/stable/tidb-limitations).
+> TiDB の一般的な使用上の制限について詳しく知りたい場合は、 [<a href="https://docs.pingcap.com/tidb/stable/tidb-limitations">TiDB の制限事項</a>](https://docs.pingcap.com/tidb/stable/tidb-limitations)を参照してください。
 
-## Cluster Quotas
+## クラスタのクォータ {#cluster-quotas}
 
-| Component | Quota (default) |
-|:-|:-|
-| Maximum number of total TiDB nodes for all clusters in your organization | 10 |
-| Maximum number of total TiKV nodes for all clusters in your organization | 15 |
-| Maximum number of total TiFlash nodes for all clusters in your organization | 5 |
+| 成分                             | クォータ (デフォルト) |
+| :----------------------------- | :----------- |
+| 組織内のすべてのクラスターの合計 TiDB ノードの最大数  | 10           |
+| 組織内のすべてのクラスターの合計 TiKV ノードの最大数  | 15           |
+| 組織内のすべてのクラスターの合計TiFlashノードの最大数 | 5            |

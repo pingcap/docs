@@ -3,37 +3,37 @@ title: Changefeed Billing
 summary: Learn about billing for changefeeds in TiDB Cloud.
 ---
 
-# Changefeed Billing
+# 変更フィード請求 {#changefeed-billing}
 
-TiDB Cloud measures the capacity of changefeeds in TiCDC Replication Capacity Units (RCUs). When you create the first changefeed for a cluster, TiDB Cloud automatically sets up TiCDC RCUs for you, and you will be charged for these TiCDC RCUs. All changefeeds that are created in a single cluster share the same TiCDC RCUs.
+TiDB Cloud は、変更フィードの容量を TiCDC レプリケーション キャパシティ ユニット (RCU) で測定します。クラスターの最初の変更フィードを作成すると、 TiDB Cloudによって自動的に TiCDC RCU がセットアップされ、これらの TiCDC RCU に対して料金が発生します。単一クラスター内に作成されたすべての変更フィードは、同じ TiCDC RCU を共有します。
 
-## Number of TiCDC RCUs
+## TiCDC RCU の数 {#number-of-ticdc-rcus}
 
-For each TiDB cluster, the number of TiCDC RCUs is set up by TiDB Cloud according to the total vCPU count of all TiKV nodes in your cluster as follows:
+TiDB クラスターごとに、TiCDC RCU の数は、クラスター内のすべての TiKV ノードの合計 vCPU 数に応じてTiDB Cloudによって次のように設定されます。
 
-| Total vCPUs of all TiKV nodes | Number of RCUs |
-|------------------------------|----------------|
-| < 48                         | 16             |
-| >= 48, and < 120             | 24             |
-| >= 120, and <= 168           | 32             |
-| > 168                        | 40             |
+| すべての TiKV ノードの vCPU の合計                     | RCUの数 |
+| ------------------------------------------- | ----- |
+| &lt; 48                                     | 16    |
+| <blockquote>= 48、かつ &lt; 120</blockquote>   | 24    |
+| <blockquote>= 120、かつ &lt;= 168</blockquote> | 32    |
+| <blockquote>168</blockquote>                | 40    |
 
-## Price
+## 価格 {#price}
 
-The following table lists the price of TiDB Cloud for each TiCDC RCUs:
+次の表に、各 TiCDC RCU のTiDB Cloudの価格を示します。
 
-| Cloud provider | Region                      | RCU price ($/hr) |
-|----------------|-----------------------------|------------------|
-| AWS            | Oregon (us-west-2)          |          $0.1307 |
-| AWS            | N. Virginia (us-east-1)     |          $0.1307 |
-| AWS            | Mumbai (ap-south-1)         |          $0.1393 |
-| AWS            | Singapore (ap-southeast-1)  |          $0.1623 |
-| AWS            | Tokyo (ap-northeast-1)      |          $0.1669 |
-| AWS            | Frankfurt (eu-central-1)    |          $0.1564 |
-| GCP            | Oregon (us-west1)           |          $0.1452 |
-| GCP            | N. Virginia (us-east4)      |          $0.1626 |
-| GCP            | Iowa (us-central1)          |          $0.1452 |
-| GCP            | Singapore (asia-southeast1) |          $0.1746 |
-| GCP            | Taiwan (asia-east1)         |          $0.1628 |
-| GCP            | Tokyo (asia-northeast1)     |          $0.1868 |
-| GCP            | Osaka (asia-northeast2)     |          $0.1868 |
+| クラウドプロバイダー | リージョン                   | RCU 価格 ($/時間) |
+| ---------- | ----------------------- | ------------- |
+| AWS        | オレゴン州 (us-west-2)       | $0.1307       |
+| AWS        | バージニア北部 (us-east-1)     | $0.1307       |
+| AWS        | ムンバイ (ap-south-1)       | $0.1393       |
+| AWS        | シンガポール (ap-southeast-1) | $0.1623       |
+| AWS        | 東京 (ap-northeast-1)     | $0.1669       |
+| AWS        | フランクフルト (EU-central-1)  | $0.1564       |
+| GCP        | オレゴン州 (us-west1)        | $0.1452       |
+| GCP        | バージニア北部 (us-east4)      | $0.1626       |
+| GCP        | アイオワ州 (us-central1)     | $0.1452       |
+| GCP        | シンガポール (アジア南東1)         | $0.1746       |
+| GCP        | 台湾 (アジア東1)              | $0.1628       |
+| GCP        | 東京 (アジア北東1)             | $0.1868       |
+| GCP        | 大阪（アジア東北2）              | $0.1868       |

@@ -3,46 +3,46 @@ title: Integrate TiDB Cloud with Netlify
 summary: Learn how to connect your TiDB Cloud clusters to Netlify projects.
 ---
 
-# Integrate TiDB Cloud with Netlify
+# TiDB Cloudと Netlify を統合する {#integrate-tidb-cloud-with-netlify}
 
-[Netlify](https://netlify.com/) is an all-in-one platform for automating modern web projects. It replaces your hosting infrastructure, continuous integration, and deployment pipeline with a single workflow and integrates dynamic functionality like serverless functions, user authentication, and form handling as your projects grow.
+[<a href="https://netlify.com/">ネットリファイ</a>](https://netlify.com/)は、最新の Web プロジェクトを自動化するためのオールインワン プラットフォームです。ホスティング インフラストラクチャ、継続的インテグレーション、デプロイ パイプラインを単一のワークフローに置き換え、プロジェクトの成長に合わせてサーバーレス関数、ユーザー認証、フォーム処理などの動的な機能を統合します。
 
-This guide describes how to connect your TiDB Cloud clusters to Netlify projects.
+このガイドでは、 TiDB Cloudクラスターを Netlify プロジェクトに接続する方法について説明します。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-Before connecting, make sure the following prerequisites are met.
+接続する前に、次の前提条件が満たされていることを確認してください。
 
-### A Netlify account and a deployed site
+### Netlify アカウントとデプロイされたサイト {#a-netlify-account-and-a-deployed-site}
 
-You are expected to have an account and a site in Netlify. If you do not have any, refer to the following links to create one:
+Netlify にアカウントとサイトが必要です。何も持っていない場合は、次のリンクを参照して作成してください。
 
-* [Sign up a new account](https://app.netlify.com/signup).
-* [Add a site](https://docs.netlify.com/welcome/add-new-site/) in Netlify. If you do not have an application to deploy, you can use the [TiDB Cloud Starter Template](https://github.com/tidbcloud/nextjs-prisma-example) to have a try.
+-   [<a href="https://app.netlify.com/signup">新しいアカウントにサインアップする</a>](https://app.netlify.com/signup) 。
+-   Netlifyでは[<a href="https://docs.netlify.com/welcome/add-new-site/">サイトを追加する</a>](https://docs.netlify.com/welcome/add-new-site/) 。導入するアプリケーションがない場合は、 [<a href="https://github.com/tidbcloud/nextjs-prisma-example">TiDB Cloudスターター テンプレート</a>](https://github.com/tidbcloud/nextjs-prisma-example)を使用して試してみてください。
 
-### A TiDB Cloud account and a TiDB cluster
+### TiDB Cloudアカウントと TiDB クラスター {#a-tidb-cloud-account-and-a-tidb-cluster}
 
-You are expected to have an account and a cluster in TiDB Cloud. If you do not have any, refer to [Create a TiDB cluster](/tidb-cloud/create-tidb-cluster.md).
+TiDB Cloudにアカウントとクラスターが必要です。お持ちでない場合は[<a href="/tidb-cloud/create-tidb-cluster.md">TiDB クラスターを作成する</a>](/tidb-cloud/create-tidb-cluster.md)を参照してください。
 
-One TiDB Cloud cluster can connect to multiple Netlify sites.
+1 つのTiDB Cloudクラスターは複数の Netlify サイトに接続できます。
 
-### All IP addresses allowed for traffic filter in TiDB Cloud
+### TiDB Cloudのトラフィック フィルターに許可されるすべての IP アドレス {#all-ip-addresses-allowed-for-traffic-filter-in-tidb-cloud}
 
-For Dedicated Tier clusters, make sure that the traffic filter of the cluster allows all IP addresses (set to `0.0.0.0/0`) for connection, this is because Netlify deployments use dynamic IP addresses.
+Dedicated Tierクラスターの場合は、クラスターのトラフィック フィルターですべての IP アドレス ( `0.0.0.0/0`に設定) の接続が許可されていることを確認してください。これは、Netlify デプロイメントが動的 IP アドレスを使用するためです。
 
-Serverless Tier clusters allow all IP addresses for connection by default, so you do not need to configure any traffic filter.
+Serverless Tierクラスターでは、デフォルトですべての IP アドレスの接続が許可されるため、トラフィック フィルターを構成する必要はありません。
 
-## Connect via manually setting environment variables
+## 環境変数を手動で設定して接続する {#connect-via-manually-setting-environment-variables}
 
-1. Follow the steps in [Connect to a TiDB Cloud cluster via standard connection](/tidb-cloud/connect-via-standard-connection.md) to set a password and get the connection information of your TiDB cluster.
+1.  [<a href="/tidb-cloud/connect-via-standard-connection.md">標準接続経由でTiDB Cloudクラスターに接続する</a>](/tidb-cloud/connect-via-standard-connection.md)の手順に従ってパスワードを設定し、TiDB クラスターの接続情報を取得します。
 
-    > **Note:**
+    > **ノート：**
     >
-    > For Dedicated Tier clusters, make sure that you have also set the **Allow Access from Anywhere** traffic filter in this step.
+    > Dedicated Tierクラスターの場合は、この手順で**「どこからでもアクセスを許可」**トラフィック フィルターも設定していることを確認してください。
 
-2. Go to your **Netlify dashboard** > **Netlify project** > **Site settings** > **Environment Variables**, and then [update variables](https://docs.netlify.com/environment-variables/get-started/#update-variables-with-the-netlify-ui) according to the connection information of your TiDB cluster.
+2.  **Netlify ダッシュボード**&gt; **Netlify プロジェクト**&gt;**サイト設定**&gt;**環境変数**に移動し、TiDB クラスターの接続情報に従って[<a href="https://docs.netlify.com/environment-variables/get-started/#update-variables-with-the-netlify-ui">変数を更新する</a>](https://docs.netlify.com/environment-variables/get-started/#update-variables-with-the-netlify-ui)に移動します。
 
-    Here we use a Prisma application as an example. The following is a datasource setting in the Prisma schema file for a TiDB Cloud Serverless Tier cluster:
+    ここでは例として Prisma アプリケーションを使用します。以下は、 TiDB CloudServerless Tierクラスターの Prisma スキーマ ファイル内のデータソース設定です。
 
     ```
     datasource db {
@@ -51,13 +51,13 @@ Serverless Tier clusters allow all IP addresses for connection by default, so yo
     }
     ```
 
-    In Netlify, you can declare the environment variables as follows.
+    Netlify では、次のように環境変数を宣言できます。
 
-    - **Key** = DATABASE_URL
-    - **Values** = `mysql://<User>:<Password>@<Endpoint>:<Port>/<Database>?sslaccept=strict`
+    -   **キー**= DATABASE_URL
+    -   **値**= `mysql://<User>:<Password>@<Endpoint>:<Port>/<Database>?sslaccept=strict`
 
-    You can get the information of `<User>`, `<Password>`, `<Endpoint>`, `<Port>`, and `<Database>` in the TiDB Cloud console.
+    TiDB Cloudコンソールで`<User>` 、 `<Password>` 、 `<Endpoint>` 、 `<Port>` 、および`<Database>`の情報を取得できます。
 
 ![Set an environment variable in Netlify](/media/tidb-cloud/integration-netlify-environment-variables.jpg)
 
-After re-deploying the site, you can use this new environment variable to connect to your TiDB Cloud cluster.
+サイトを再デプロイした後、この新しい環境変数を使用してTiDB Cloudクラスターに接続できます。

@@ -3,85 +3,85 @@ title: Monitor a TiDB Cluster
 summary: Learn how to monitor your TiDB cluster.
 ---
 
-# Monitor a TiDB Cluster
+# TiDBクラスタを監視する {#monitor-a-tidb-cluster}
 
-This document describes how to monitor a TiDB cluster on TiDB Cloud.
+このドキュメントでは、 TiDB Cloudで TiDB クラスターを監視する方法について説明します。
 
-## Cluster status and node status
+## クラスタステータスとノードステータス {#cluster-status-and-node-status}
 
-You can see the current status of each running cluster on the cluster page.
+実行中の各クラスターの現在のステータスは、クラスター ページで確認できます。
 
-### Cluster status
+### クラスタのステータス {#cluster-status}
 
-| Cluster status | Description |
-|:--|:--|
-| **AVAILABLE** | The cluster is healthy and available. |
-| **CREATING** | The cluster is being created. The cluster is inaccessible while it is being created. |
-| **IMPORTING** | Importing data into the cluster. |
-| **MODIFYING** | The cluster is being modified. |
-| **UNAVAILABLE** | The cluster has failed and TiDB cannot recover it. |
-| **PAUSED** | The cluster is paused. |
-| **RESUMING** | The cluster is resuming from a pause. |
-| **RESTORING** | The cluster is currently being restored from a backup. |
+| クラスタのステータス | 説明                                        |
+| :--------- | :---------------------------------------- |
+| **利用可能**   | クラスターは正常で、使用可能です。                         |
+| **作成**     | クラスターが作成されています。クラスターの作成中はクラスターにアクセスできません。 |
+| **輸入中**    | クラスターへのデータのインポート。                         |
+| **変更中**    | クラスターは変更中です。                              |
+| **利用不可**   | クラスターに障害が発生し、TiDB はクラスターを回復できません。         |
+| **一時停止中**  | クラスターは一時停止されています。                         |
+| **再開中**    | クラスターは一時停止から再開中です。                        |
+| **復元中**    | クラスターは現在バックアップから復元中です。                    |
 
-### TiDB node status
+### TiDB ノードのステータス {#tidb-node-status}
 
-> **Note:**
+> **ノート：**
 >
-> The TiDB node status is only available for Dedicated Tier clusters.
+> TiDB ノードのステータスは、Dedicated Tierクラスターでのみ使用できます。
 
-| TiDB node status | Description |
-|:--|:--|
-| **Available** | The TiDB node is healthy and available. |
-| **Creating** | The TiDB node is being created. |
-| **Unavailable** | The TiDB node is not available. |
-| **Deleting** | The TiDB node is being deleted. |
+| TiDB ノードのステータス | 説明                     |
+| :------------- | :--------------------- |
+| **利用可能**       | TiDB ノードは正常であり、使用可能です。 |
+| **作成**         | TiDB ノードが作成されています。     |
+| **利用不可**       | TiDB ノードは使用できません。      |
+| **削除中**        | TiDB ノードは削除中です。        |
 
-### TiKV node status
+### TiKV ノードのステータス {#tikv-node-status}
 
-> **Note:**
+> **ノート：**
 >
-> The TiKV node status is only available for Dedicated Tier clusters.
+> TiKV ノードのステータスは、Dedicated Tierクラスターでのみ使用できます。
 
-| TiKV node status | Description |
-|:--|:--|
-| **Available** | The TiKV node is healthy and available. |
-| **Creating** | The TiKV node is being created. |
-| **Unavailable** | The TiKV node is not available. |
-| **Deleting** | The TiKV node is being deleted. |
+| TiKV ノードのステータス | 説明                     |
+| :------------- | :--------------------- |
+| **利用可能**       | TiKV ノードは正常であり、使用可能です。 |
+| **作成**         | TiKV ノードが作成されています。     |
+| **利用不可**       | TiKV ノードは使用できません。      |
+| **削除中**        | TiKV ノードは削除中です。        |
 
-## Monitoring metrics
+## モニタリング指標 {#monitoring-metrics}
 
-In TiDB Cloud, you can view the commonly used metrics of a cluster from the following pages:
+TiDB Cloudでは、次のページからクラスターの一般的に使用されるメトリックを表示できます。
 
-- Cluster overview page
-- Cluster monitoring page
+-   クラスタの概要ページ
+-   クラスタ監視ページ
 
-### Metrics on the cluster overview page
+### クラスターの概要ページのメトリック {#metrics-on-the-cluster-overview-page}
 
-The cluster overview page provides general metrics of a cluster, including total QPS, query duration, active connections, TiDB CPU, TiKV CPU, TiFlash CPU, TiDB memory, TiKV memory, TiFlash memory, TiKV used storage size, and TiFlash used storage size.
+クラスターの概要ページには、合計 QPS、クエリ期間、アクティブな接続、TiDB CPU、TiKV CPU、 TiFlash CPU、TiDBメモリ、TiKV メモリ、 TiFlashメモリ、 TiKV 使用storageサイズ、 TiFlash使用storageサイズなど、クラスタの一般的なメトリクスが表示されます。
 
-> **Note:**
+> **ノート：**
 >
-> Some of these metrics might be available only for Dedicated Tier clusters.
+> これらのメトリクスの一部は、Dedicated Tierクラスターでのみ使用できる場合があります。
 
-To view metrics on the cluster overview page, take the following steps:
+クラスターの概要ページでメトリックを表示するには、次の手順を実行します。
 
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page.
+1.  [<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページに移動します。
 
-2. Choose the target project and click the name of a cluster to go to its cluster overview page.
+2.  ターゲット プロジェクトを選択し、クラスターの名前をクリックしてクラスターの概要ページに移動します。
 
-### Metrics on the cluster monitoring page
+### クラスター監視ページのメトリック {#metrics-on-the-cluster-monitoring-page}
 
-The cluster monitoring page provides a full set of standard metrics of a cluster. By viewing these metrics, you can easily identify performance issues and determine whether your current database deployment meets your requirements.
+クラスター監視ページには、クラスターの標準メトリックの完全なセットが提供されます。これらのメトリクスを表示することで、パフォーマンスの問題を簡単に特定し、現在のデータベース展開が要件を満たしているかどうかを判断できます。
 
-> **Note:**
+> **ノート：**
 >
-> Currently, the cluster monitoring page is unavailable for [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta).
+> 現在、クラスター監視ページは[<a href="/tidb-cloud/select-cluster-tier.md#serverless-tier-beta">Serverless Tierクラスター</a>](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)では利用できません。
 
-To view metrics on the cluster monitoring page, take the following steps:
+クラスター監視ページでメトリックを表示するには、次の手順を実行します。
 
-1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page of the target project, click the name of the target cluster. The cluster overview page is displayed.
-2. Click **Monitoring** in the left navigation pane.
+1.  対象プロジェクトの[<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページで、対象クラスタ名をクリックします。クラスターの概要ページが表示されます。
+2.  左側のナビゲーション ペインで**[監視]**をクリックします。
 
-For more information, see [Built-in Monitoring](/tidb-cloud/built-in-monitoring.md).
+詳細については、 [<a href="/tidb-cloud/built-in-monitoring.md">内蔵モニタリング</a>](/tidb-cloud/built-in-monitoring.md)を参照してください。

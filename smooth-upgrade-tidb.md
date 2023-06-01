@@ -3,54 +3,54 @@ title: TiDB Smooth Upgrade
 summary: This document introduces the smooth upgrade feature of TiDB, which supports upgrading TiDB clusters without manually canceling DDL operations.
 ---
 
-# TiDB Smooth Upgrade
+# TiDB のスムーズなアップグレード {#tidb-smooth-upgrade}
 
-> **Warning:**
+> **警告：**
 >
-> Smooth upgrade is still an experimental feature.
+> スムーズ アップグレードはまだ実験的機能です。
 
-This document introduces the smooth upgrade feature of TiDB, which supports upgrading TiDB clusters without manually canceling DDL operations.
+このドキュメントでは、DDL 操作を手動でキャンセルせずに TiDB クラスターのアップグレードをサポートする TiDB のスムーズ アップグレード機能を紹介します。
 
-Starting from v7.1.0, when you upgrade TiDB to a later version, TiDB supports smooth upgrade. This feature removes the limitations during the upgrade process and provides a more user-friendly upgrade experience. This feature is enabled by default and cannot be disabled.
+v7.1.0 以降、TiDB を新しいバージョンにアップグレードする場合、TiDB はスムーズなアップグレードをサポートします。この機能により、アップグレード プロセス中の制限がなくなり、よりユーザー フレンドリーなアップグレード エクスペリエンスが提供されます。この機能はデフォルトで有効になっており、無効にすることはできません。
 
-## Feature introduction
+## 機能紹介 {#feature-introduction}
 
-Before the smooth upgrade feature is introduced, there are the following limitations on DDL operations during the upgrade process (see the *Warning* content in [Upgrade TiDB Using TiUP](/upgrade-tidb-using-tiup.md#upgrade-tidb-using-tiup)):
+スムーズ アップグレード機能が導入される前は、アップグレード プロセス中の DDL 操作に次の制限があります ( [<a href="/upgrade-tidb-using-tiup.md#upgrade-tidb-using-tiup">TiUPを使用して TiDB をアップグレードする</a>](/upgrade-tidb-using-tiup.md#upgrade-tidb-using-tiup)の*警告*内容を参照)。
 
-- Running DDL operations during the upgrade process might cause undefined behavior in TiDB.
-- Upgrading TiDB during the DDL operations might cause undefined behavior in TiDB.
+-   アップグレード プロセス中に DDL 操作を実行すると、TiDB で未定義の動作が発生する可能性があります。
+-   DDL 操作中に TiDB をアップグレードすると、TiDB で未定義の動作が発生する可能性があります。
 
-After the smooth upgrade feature is introduced, the upgrade process is no longer subject to the preceding limitations.
+スムーズ アップグレード機能が導入された後、アップグレード プロセスは前述の制限の影響を受けなくなります。
 
-During the upgrade process, TiDB automatically performs the following operations without user intervention:
+アップグレード プロセス中に、TiDB はユーザーの介入なしで次の操作を自動的に実行します。
 
-1. Pause user DDL operations.
-2. Perform system DDL operations for the upgrade.
-3. Resume the paused user DDL operations.
-4. Complete the upgrade.
+1.  ユーザーの DDL 操作を一時停止します。
+2.  アップグレードのためのシステム DDL 操作を実行します。
+3.  一時停止したユーザー DDL 操作を再開します。
+4.  アップグレードを完了します。
 
-The resumed DDL jobs are still executed in the order before the upgrade.
+再開された DDL ジョブは、引き続きアップグレード前の順序で実行されます。
 
-## Limitations
+## 制限事項 {#limitations}
 
-When using the smooth upgrade feature, note the following limitations.
+スムーズ アップグレード機能を使用する場合は、次の制限事項に注意してください。
 
-### Limitations on user operations
+### ユーザー操作の制限 {#limitations-on-user-operations}
 
-* Before the upgrade, if there is a canceling DDL job in the cluster, that is, an ongoing DDL job is being canceled by a user, because the job in the canceling state cannot be paused, TiDB will retry canceling the job. If the retry fails, an error is reported and the upgrade is exited.
+-   アップグレード前に、クラスター内にキャンセル中の DDL ジョブがある場合、つまり、進行中の DDL ジョブがユーザーによってキャンセルされている場合、キャンセル状態のジョブは一時停止できないため、TiDB はジョブのキャンセルを再試行します。再試行が失敗した場合は、エラーが報告され、アップグレードは終了します。
 
-* In scenarios of using TiUP to upgrade TiDB, because TiUP upgrade has a timeout period, if the cluster has a large number of DDL jobs (more than 300) waiting in queues before the upgrade, the upgrade might fail.
+-   TiUPを使用して TiDB をアップグレードするシナリオでは、 TiUP のアップグレードにはタイムアウト期間があるため、アップグレード前にクラスターのキューで待機している多数の DDL ジョブ (300 を超える) がある場合、アップグレードが失敗する可能性があります。
 
-* During the upgrade, the following operations are not allowed:
+-   アップグレード中は、次の操作は許可されません。
 
-    * Run DDL operations on system tables (`mysql.*`, `information_schema.*`, `performance_schema.*`, and `metrics_schema.*`).
-    * Manually cancel DDL jobs: `ADMIN CANCEL DDL JOBS job_id [, job_id] ...;`.
-    * Import data.
+    -   システム テーブル ( `mysql.*` 、 `information_schema.*` 、 `performance_schema.*` 、および`metrics_schema.*` ) に対して DDL 操作を実行します。
+    -   DDL ジョブを手動でキャンセルします。 `ADMIN CANCEL DDL JOBS job_id [, job_id] ...;` .
+    -   データをインポートします。
 
-### Limitations on tools
+### ツールの制限 {#limitations-on-tools}
 
-* During the upgrade, use of the following tools is not supported:
+-   アップグレード中は、次のツールの使用はサポートされません。
 
-    * BR: BR might replicate the paused DDL jobs to TiDB. The paused DDL jobs cannot be automatically resumed, which might cause the DDL jobs to be stuck later.
+    -   BR: BR は、一時停止された DDL ジョブを TiDB に複製する可能性があります。一時停止された DDL ジョブは自動的に再開できないため、DDL ジョブが後で停止する可能性があります。
 
-    * DM and TiCDC: If you use DM or TiCDC to import SQL statements to TiDB during the upgrade process, and if one of the SQL statements contains DDL operations, the import operation is blocked and undefined errors might occur.
+    -   DM および TiCDC: アップグレード プロセス中に DM または TiCDC を使用して SQL ステートメントを TiDB にインポートする場合、および SQL ステートメントの 1 つに DDL 操作が含まれている場合、インポート操作がブロックされ、未定義のエラーが発生する可能性があります。

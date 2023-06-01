@@ -3,16 +3,16 @@ title: USER_PRIVILEGES
 summary: Learn the `USER_PRIVILEGES` information_schema table.
 ---
 
-# USER_PRIVILEGES
+# USER_PRIVILEGES {#user-privileges}
 
-The `USER_PRIVILEGES` table provides information about global privileges. This information comes from the `mysql.user` system table:
+表`USER_PRIVILEGES`は、グローバル権限に関する情報を示します。この情報は`mysql.user`システム テーブルから取得されます。
 
 ```sql
 USE INFORMATION_SCHEMA;
 DESC USER_PRIVILEGES;
 ```
 
-The output is as follows:
+出力は次のとおりです。
 
 ```sql
 +----------------+--------------+------+------+---------+-------+
@@ -26,13 +26,13 @@ The output is as follows:
 4 rows in set (0.00 sec)
 ```
 
-View the information in the `USER_PRIVILEGES` table:
+`USER_PRIVILEGES`の表の情報をビュー。
 
 ```sql
 SELECT * FROM USER_PRIVILEGES;
 ```
 
-The output is as follows:
+出力は次のとおりです。
 
 <CustomContent platform="tidb">
 
@@ -120,9 +120,9 @@ The output is as follows:
 
 </CustomContent>
 
-Fields in the `USER_PRIVILEGES` table are described as follows:
+`USER_PRIVILEGES`テーブルのフィールドは次のように説明されています。
 
-* `GRANTEE`: The name of the granted user, which is in the format of `'user_name'@'host_name'`.
-* `TABLE_CATALOG`: The name of the catalog to which the table belongs. This value is always `def`.
-* `PRIVILEGE_TYPE`: The privilege type to be granted. Only one privilege type is shown in each row.
-* `IS_GRANTABLE`: If you have the `GRANT OPTION` privilege, the value is `YES`; otherwise, the value is `NO`.
+-   `GRANTEE` : 許可されたユーザーの名前。形式は`'user_name'@'host_name'`です。
+-   `TABLE_CATALOG` : テーブルが属するカタログの名前。この値は常に`def`です。
+-   `PRIVILEGE_TYPE` : 付与される権限のタイプ。各行には 1 つの権限タイプのみが表示されます。
+-   `IS_GRANTABLE` : `GRANT OPTION`権限がある場合、値は`YES`です。それ以外の場合、値は`NO`です。

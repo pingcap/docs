@@ -3,120 +3,120 @@ title: Console Audit Logging
 summary: Learn about the log auditing feature for the TiDB Cloud console.
 ---
 
-# Console Audit Logging
+# コンソール監査ログ {#console-audit-logging}
 
-TiDB Cloud provides the audit logging feature for TiDB Cloud console operations, which records the history of user access details (such as user login to the Console and cluster creation operations).
+TiDB Cloud は、 TiDB Cloudコンソール操作の監査ログ機能を提供します。これにより、ユーザー アクセスの詳細 (コンソールへのユーザー ログインやクラスター作成操作など) の履歴が記録されます。
 
-> **Note:**
+> **ノート：**
 >
-> Currently, the **audit logging** feature is experimental. The output is subject to change.
+> 現在、**監査ログ**機能は実験的です。出力は変更される可能性があります。
 
-## Limitations
+## 制限事項 {#limitations}
 
-Currently, the console audit logging feature has the following limitations:
+現在、コンソール監査ログ機能には次の制限があります。
 
-- Console audit logging is enabled by default and cannot be disabled by users.
-- You cannot specify the audit filtering rules for the feature.
-- You can access the audit logs only with the help of PingCAP support.
+-   コンソール監査ログはデフォルトで有効になっており、ユーザーが無効にすることはできません。
+-   この機能の監査フィルタリング ルールを指定することはできません。
+-   監査ログにアクセスするには、PingCAP サポートを利用する必要があります。
 
-## Audit event types
+## 監査イベントの種類 {#audit-event-types}
 
-All user operations in the TiDB Cloud console are recorded in the audit logs as events. Audit logs cover the following event types:
+TiDB Cloudコンソールでのすべてのユーザー操作は、監査ログにイベントとして記録されます。監査ログには次のイベント タイプが含まれます。
 
-| Audit event type | Description |
-|---|---|
-| AuditEventSignIn | Sign in |
-| AuditEventSignOut | Sign out |
-| AuditEventUpdateUserProfile | Update user's first name and last name |
-| AuditEventUpdateMFA | Enable or disable MFA |
-| AuditEventCreateProject | Create a new project |
-| AuditEventUpdateProject | Update the project name |
-| AuditEventDeleteProject | Delete a project |
-| AuditEventInviteUserIntoProject | Invite a user into a project |
-| AuditEventDeleteProjectUser | Delete a project user |
-| AuditEventUpdateOrg | Update organization name and time zone |
-| AuditEventCreateIntegration | Create an integration |
-| AuditEventDeleteIntegration | Delete an integration |
-| AuditEventListOrgUsers | List users in organization |
-| AuditEventListProjectUsers | List users in a project |
-| AuditEventAddNewPaymentMethod | Add a new credit card |
-| AuditEventUpdatePaymentMethod | Update credit card information |
-| AuditEventDeletePaymentMethod | Delete a credit card |
-| AuditEventCreateAWSVpcPeering | Create an AWS VPC Peering |
-| AuditEventCreateGCPVpcPeering | Create a GCP VPC Peering | 
-| AuditEventListAWSVpcPeering | List all AWS VPC Peerings in a project |
-| AuditEventListGCPVpcPeering | List all GCP VPC Peerings in a project |
-| AuditEventDeleteAWSVpcPeering | Delete an AWS VPC Peering |
-| AuditEventDeleteGCPVpcPeering | Delete a GCP VPC Peering |
-| AuditEventGetProjectTrafficFilter | Get traffic filter list of a project |
-| AuditEventUpdateProjectTrafficFilter | Update traffic filter list of a project |
-| AuditEventGetTrafficFilter | Get traffic filter list of a cluster |
-| AuditEventUpdateTrafficFilter | Update traffic filter list of a cluster |
-| AuditEventCreateProjectCIDR | Create a new project CIDR |
-| AuditEventGetProjectCIDR | List the CIDR of a region |
-| AuditEventGetProjectRegionCIDR | List all CIDRs in a project |
-| AuditEventDeleteBackupInRecycleBin | Delete backups of deleted clusters in recycle bin |
-| AuditEventChangeClusterRootPassword | Reset the root password of a cluster |
-| AuditEventCreateImportTask | Create an import task |
-| AuditEventCancleImportTask | Cancel an import task |
-| AuditEventExitImportTask | Exit an import task |
-| AuditEventCreateCluster | Create a cluster |
-| AuditEventDeleteCluster | Delete a cluster |
-| AuditEventScaleCluster | Scale a cluster |
-| AuditEventCreateBackup | Make a backup |
-| AuditEventDeleteBackup | Delete a backup |
-| AuditEventRestoreBackup | Restore from a backup |
-| AuditEventUpdateAuditLogStatus | Enable or disable database audit logging |
-| AuditEventCreateAuditLogAccessRecord | Add database audit log filter conditions |
-| AuditEventDeleteAuditLogAccessRecord | Delete database audit log filter conditions |
-| AuditEventUpdateUserRole | Modify user roles |
+| 監査イベントの種類                            | 説明                                |
+| ------------------------------------ | --------------------------------- |
+| 監査イベントサインイン                          | ログイン                              |
+| 監査イベントサインアウト                         | サインアウト                            |
+| 監査イベント更新ユーザープロファイル                   | ユーザーの姓名を更新します                     |
+| 監査イベント更新MFA                          | MFA を有効または無効にする                   |
+| 監査イベント作成プロジェクト                       | 新しいプロジェクトを作成する                    |
+| 監査イベント更新プロジェクト                       | プロジェクト名を更新します                     |
+| 監査イベント削除プロジェクト                       | プロジェクトを削除する                       |
+| 監査イベントユーザーをプロジェクトに招待                 | ユーザーをプロジェクトに招待する                  |
+| 監査イベント削除プロジェクトユーザー                   | プロジェクトユーザーを削除する                   |
+| 監査イベント更新組織                           | 組織名とタイムゾーンを更新する                   |
+| 監査イベント作成統合                           | 統合を作成する                           |
+| 監査イベント削除統合                           | 統合を削除する                           |
+| AuditEventListOrgUsers               | 組織内のユーザーをリストする                    |
+| 監査イベントリストプロジェクトユーザー                  | プロジェクト内のユーザーをリストする                |
+| AuditEventAddNewPaymentMethod        | 新しいクレジット カードを追加する                 |
+| AuditEventUpdatePaymentMethod        | クレジットカード情報を更新する                   |
+| AuditEventDeletePaymentMethod        | クレジットカードを削除する                     |
+| 監査イベント作成AWSVpcピアリング                  | AWS VPC ピアリングを作成する                |
+| AuditEventCreateGCPVpcPeering        | GCP VPC ピアリングの作成                  |
+| 監査イベントリストAWSVpcピアリング                 | プロジェクト内のすべての AWS VPC ピアリングを一覧表示する |
+| AuditEventListGCPVpcPeering          | プロジェクト内のすべての GCP VPC ピアリングを一覧表示する |
+| 監査イベント削除AWSVpcピアリング                  | AWS VPC ピアリングを削除する                |
+| AuditEventDeleteGCPVpcPeering        | GCP VPC ピアリングを削除する                |
+| AuditEventGetProjectTrafficFilter    | プロジェクトのトラフィックフィルターリストを取得する        |
+| AuditEventUpdateProjectTrafficFilter | プロジェクトのトラフィック フィルター リストを更新する      |
+| AuditEventGetTrafficFilter           | クラスターのトラフィックフィルターリストを取得する         |
+| AuditEventUpdateTrafficFilter        | クラスターのトラフィックフィルターリストを更新する         |
+| 監査イベント作成プロジェクトCIDR                   | 新しいプロジェクトCIDRを作成する                |
+| AuditEventGetProjectCIDR             | リージョンの CIDR をリストする                |
+| AuditEventGetProjectRegionCIDR       | プロジェクト内のすべての CIDR をリストする          |
+| AuditEventDeleteBackupInRecycleBin   | 削除されたクラスターのバックアップをごみ箱に削除します       |
+| AuditEventChangeClusterRootPassword  | クラスターの root パスワードをリセットする          |
+| 監査イベント作成インポートタスク                     | インポートタスクを作成する                     |
+| 監査イベントキャンセルインポートタスク                  | インポートタスクをキャンセルする                  |
+| 監査イベント終了インポートタスク                     | インポートタスクを終了する                     |
+| 監査イベント作成クラスター                        | クラスターを作成する                        |
+| 監査イベント削除クラスター                        | クラスターを削除する                        |
+| 監査イベントスケールクラスター                      | クラスターをスケールする                      |
+| 監査イベント作成バックアップ                       | バックアップを作成する                       |
+| 監査イベント削除バックアップ                       | バックアップを削除する                       |
+| 監査イベント復元バックアップ                       | バックアップから復元する                      |
+| AuditEventUpdateAuditLogStatus       | データベース監査ログを有効または無効にする             |
+| 監査イベント作成監査ログアクセスレコード                 | データベース監査ログのフィルタ条件を追加する            |
+| 監査イベント削除監査ログアクセスレコード                 | データベース監査ログフィルタ条件の削除               |
+| AuditEventUpdateUserRole             | ユーザーの役割を変更する                      |
 
-## Audit log storage policy
+## 監査ログstorageポリシー {#audit-log-storage-policy}
 
-- The audit log information is stored in AWS ES.
-- The storage time is 90 days, after which the audit logs will be automatically cleaned up.
+-   監査ログ情報は AWS ES に保存されます。
+-   storage期間は 90 日間で、その後、監査ログは自動的にクリーンアップされます。
 
-## View audit logs
+## 監査ログをビュー {#view-audit-logs}
 
-The console audit logs are temporarily accessible only to internal personnel of TiDB Cloud. If you need to view the logs, contact [PingCAP support team](/tidb-cloud/tidb-cloud-support.md).
+コンソール監査ログには、 TiDB Cloudの内部担当者のみが一時的にアクセスできます。ログを表示する必要がある場合は、 [<a href="/tidb-cloud/tidb-cloud-support.md">PingCAP サポート チーム</a>](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
-## Audit log fields
+## 監査ログフィールド {#audit-log-fields}
 
-The fields in audit logs include basic fields and extended fields.
+監査ログのフィールドには、基本フィールドと拡張フィールドが含まれます。
 
-The basic fields are as follows:
+基本的なフィールドは次のとおりです。
 
-| Field name | Data type | Description |
-|---|---|---|
-| timestamp | timestamp | Time of event |
-| auditEventType | string | Event type |
-| userID | uint64 | User ID |
-| clientIP | string | Client IP |
-| isSuccess | bool | Event result |
+| フィールド名    | データ・タイプ | 説明       |
+| --------- | ------- | -------- |
+| タイムスタンプ   | タイムスタンプ | イベントの時間  |
+| 監査イベントタイプ | 弦       | イベントタイプ  |
+| ユーザーID    | uint64  | ユーザーID   |
+| クライアントIP  | 弦       | クライアントIP |
+| 成功です      | ブール     | イベント結果   |
 
-Extended fields supplement the description information of events based on different event types to ensure the integrity and availability of audit information
+拡張フィールドは、さまざまなイベント タイプに基づいてイベントの説明情報を補足し、監査情報の整合性と可用性を確保します。
 
-> **Note:**
+> **ノート：**
 >
-> For scenarios where the basic fields cannot clearly describe the event, the following table shows the extended field information of these event types. Events not in the table have no extension fields.
+> 基本フィールドではイベントを明確に説明できないシナリオのために、次の表にこれらのイベント タイプの拡張フィールド情報を示します。テーブルにないイベントには拡張フィールドがありません。
 
-| Audit event type | Extended fields | Data type for extended fields | Description for extended fields |
-|---|---|---|---|
-| AuditEventUpdateMFA | enableMFA | bool |Enable or disable MFA |
-| AuditEventCreateProject | projectName | string | Project name |
-| AuditEventUpdateProject | oldProjectName <br/> newProjectName | string <br/> string | Old Project name <br/> New project name |
-| AuditEventDeleteProject | projectName | string | Project name |
-| AuditEventInviteUserIntoProject | email <br/> Role | string <br/> string | Email <br/> Role name |
-| AuditEventDeleteProjectUser | email <br/> Role | string <br/> string | Email <br/> Role name |
-| AuditEventUpdateOrg | orgName <br/> timeZone | string <br/> uint| Organization name <br/> Time zone |
-| AuditEventCreateIntegration | integrationType | string | Integration type |
-| AuditEventDeleteIntegration | integrationType | string | Integration type |
-| AuditEventAddNewPaymentMethod | cardNumber | string | Payment card number (information desensitized) |
-| AuditEventUpdatePaymentMethod | cardNumber | string | Payment card number (information desensitized) <br/> (Currently not getting full field information) |
-| AuditEventDeletePaymentMethod |  |  | (Currently not getting full field information) |
-| AuditEventCreateCluster | clusterName | string | Cluster name |
-| AuditEventDeleteCluster | clusterName | string | Cluster name |
-| AuditEventCreateBackup | backupName | string | Backup name |
-| AuditEventRestoreBackup | clusterName | string | Cluster name |
-| AuditEventUpdateAuditLogStatus | enableAuditLog | bool | Enable or disable database audit logging |
-| AuditEventUpdateUserRole | oldRole <br/> newRole | string <br/> string | Old role name <br/> New role name |
+| 監査イベントの種類                      | 拡張フィールド                  | 拡張フィールドのデータ型 | 拡張フィールドの説明                                             |
+| ------------------------------ | ------------------------ | ------------ | ------------------------------------------------------ |
+| 監査イベント更新MFA                    | MFA を有効にする               | ブール          | MFA を有効または無効にする                                        |
+| 監査イベント作成プロジェクト                 | プロジェクト名                  | 弦            | プロジェクト名                                                |
+| 監査イベント更新プロジェクト                 | 古いプロジェクト名<br/>新しいプロジェクト名 | 弦<br/>弦      | 旧プロジェクト名<br/>新しいプロジェクト名                                |
+| 監査イベント削除プロジェクト                 | プロジェクト名                  | 弦            | プロジェクト名                                                |
+| 監査イベントユーザーをプロジェクトに招待           | Eメール<br/>役割              | 弦<br/>弦      | Eメール<br/>役割名                                           |
+| 監査イベント削除プロジェクトユーザー             | Eメール<br/>役割              | 弦<br/>弦      | Eメール<br/>役割名                                           |
+| 監査イベント更新組織                     | 組織名<br/>タイムゾーン           | 弦<br/>単位     | 組織名<br/>タイムゾーン                                         |
+| 監査イベント作成統合                     | 統合タイプ                    | 弦            | 一体型                                                    |
+| 監査イベント削除統合                     | 統合タイプ                    | 弦            | 一体型                                                    |
+| AuditEventAddNewPaymentMethod  | カード番号                    | 弦            | 支払いカード番号 (情報は機密化されていません)                               |
+| AuditEventUpdatePaymentMethod  | カード番号                    | 弦            | 支払いカード番号 (情報は機密化されていません)<br/> (現在、完全なフィールド情報を取得していません) |
+| AuditEventDeletePaymentMethod  |                          |              | (現在、完全なフィールド情報を取得していません)                               |
+| 監査イベント作成クラスター                  | クラスタ名                    | 弦            | クラスタ名                                                  |
+| 監査イベント削除クラスター                  | クラスタ名                    | 弦            | クラスタ名                                                  |
+| 監査イベント作成バックアップ                 | バックアップ名                  | 弦            | バックアップ名                                                |
+| 監査イベント復元バックアップ                 | クラスタ名                    | 弦            | クラスタ名                                                  |
+| AuditEventUpdateAuditLogStatus | 監査ログを有効にする               | ブール          | データベース監査ログを有効または無効にする                                  |
+| AuditEventUpdateUserRole       | 古い役割<br/>新しい役割           | 弦<br/>弦      | 古い役割名<br/>新しいロール名                                      |
