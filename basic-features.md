@@ -8,6 +8,8 @@ aliases: ['/docs/dev/basic-features/','/tidb/dev/experimental-features-4.0/']
 
 This document lists the features supported in different TiDB versions, including [Long-Term Support (LTS)](/releases/versioning.md#long-term-support-releases) versions and [Development Milestone Release (DMR)](/releases/versioning.md#development-milestone-releases) versions after the latest LTS version.
 
+You can have a try of TiDB on [TiDB Playground](http://play.tidbcloud.com/).
+
 > **Note:**
 >
 > PingCAP does not provide patch releases for DMR versions. Any bugs will be fixed in future releases. For general purposes, it is recommended to use the [latest LTS version](https://docs.pingcap.com/tidb/stable).
