@@ -8,7 +8,7 @@ aliases: ['/docs/v3.0/','/tidb/v3.0/adopters','/docs/v3.0/adopters/']
 
 [TiDB](https://github.com/pingcap/tidb) ("Ti" stands for Titanium) is an open-source NewSQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. It is MySQL compatible and features horizontal scalability, strong consistency, and high availability.
 
-TiDB can be deployed on-premise or in-cloud. The following deployment options are officially supported by PingCAP:
+TiDB can be deployed in either self-hosted or cloud environments. The following deployment options are officially supported by PingCAP:
 
 - [Ansible Deployment](/online-deployment-using-ansible.md): This guide describes how to deploy TiDB using TiDB Ansible. It is strongly recommended for production deployment.
 - [Ansible Offline Deployment](/offline-deployment-using-ansible.md): If your environment has no access to the internet, you can follow this guide to see how to deploy a TiDB cluster offline using TiDB Ansible.
