@@ -18,7 +18,7 @@ TTL is designed to help users clean up unnecessary data periodically and in a ti
 > **Warning:**
 >
 > This is an experimental feature. It is not recommended that you use it in a production environment.
-> TTL is not available for [TiDB Cloud Serverless Tier](https://docs.pingcap.com/tidbcloud/select-cluster-tier#serverless-tier-beta).
+> TTL is not available for [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless-beta).
 
 ## Syntax
 
@@ -240,11 +240,6 @@ Currently, the TTL feature has the following limitations:
 * The TTL attribute cannot be set on temporary tables, including local temporary tables and global temporary tables.
 * A table with the TTL attribute does not support being referenced by other tables as the primary table in a foreign key constraint.
 * It is not guaranteed that all expired data is deleted immediately. The time when expired data is deleted depends on the scheduling interval and scheduling window of the background cleanup job.
-<<<<<<< HEAD
-=======
-* For tables that use [clustered indexes](/clustered-indexes.md), if the primary key is neither an integer nor a binary string type, the TTL job cannot be split into multiple tasks. This will cause the TTL job to be executed sequentially on a single TiDB node. If the table contains a large amount of data, the execution of the TTL job might become slow.
-* TTL is not available for [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless-beta).
->>>>>>> 76416ca7e (tidb: rename products (#13692))
 
 ## FAQs
 

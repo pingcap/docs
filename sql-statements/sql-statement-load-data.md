@@ -7,26 +7,6 @@ summary: An overview of the usage of LOAD DATA for the TiDB database.
 
 The `LOAD DATA` statement batch loads data into a TiDB table.
 
-<<<<<<< HEAD
-=======
-In TiDB v7.0.0, the `LOAD DATA` SQL statement supports the following features:
-
-- Support importing data from S3 and GCS
-- Add a new parameter `FIELDS DEFINED NULL BY`
-
-> **Warning:**
->
-> The new parameter `FIELDS DEFINED NULL BY` and support for importing data from S3 and GCS in v7.0.0 are experimental. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-
-<CustomContent platform="tidb-cloud">
-
-> **Note:**
->
-> This feature is only available on [TiDB Serverless clusters](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless-beta).
-
-</CustomContent>
-
->>>>>>> 76416ca7e (tidb: rename products (#13692))
 ## Synopsis
 
 ```ebnf+diagram

@@ -764,12 +764,11 @@ When using go-sql-driver/mysql, you need to connect to your cluster and run the 
 
 ### Step 3.2 Modify parameters for TiDB Cloud
 
-<<<<<<< HEAD:develop/dev-guide-sample-application-golang.md
 <SimpleTab groupId="language">
 
 <div label="Using GORM (Recommended)" value="gorm">
 
-If you are using a TiDB Cloud Serverless Tier cluster, modify the value of the `dsn` in `gorm.go`:
+If you are using a TiDB Serverless cluster, modify the value of the `dsn` in `gorm.go`:
 
 ```go
 dsn := "root:@tcp(127.0.0.1:4000)/test?charset=utf8mb4"
@@ -796,10 +795,7 @@ dsn := "2aEp24QWEDLqRFs.root:123456@tcp(xxx.tidbcloud.com:4000)/test?charset=utf
 
 <div label="Using go-sql-driver/mysql" value="sqldriver">
 
-If you are using a TiDB Cloud Serverless Tier cluster, modify the value of the `dsn` in `sqldriver.go`:
-=======
 If you are using a TiDB Serverless cluster, modify the value of the `dsn` in `sqldriver.go`:
->>>>>>> 76416ca7e (tidb: rename products (#13692)):develop/dev-guide-sample-application-golang-sql-driver.md
 
 ```go
 dsn := "root:@tcp(127.0.0.1:4000)/test?charset=utf8mb4"
