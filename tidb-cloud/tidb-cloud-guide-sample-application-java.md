@@ -294,7 +294,7 @@ public interface PlayerMapper {
     id, coins, goods
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from player
     where id = #{id,jdbcType=VARCHAR}
@@ -405,7 +405,7 @@ Define the mapping rules in `PlayerMapperEx.xml`:
   </sql>
 
   <select id="selectByPrimaryKeyWithLock" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from player
     where `id` = #{id,jdbcType=VARCHAR}
