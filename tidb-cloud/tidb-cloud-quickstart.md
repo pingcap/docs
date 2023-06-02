@@ -11,7 +11,7 @@ aliases: ['/tidbcloud/beta/tidb-cloud-quickstart']
 
 This tutorial guides you through an easy way to get started with your TiDB Cloud.
 
-In addition, you can have a try of TiDB on [TiDB Playground](http://play.tidbcloud.com/).
+In addition, you can have a try of TiDB features on [TiDB Playground](http://play.tidbcloud.com/).
 
 ## Step 1. Create a TiDB cluster
 
