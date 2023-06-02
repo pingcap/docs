@@ -658,7 +658,6 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Type: Integer
-<<<<<<< HEAD
 
 <CustomContent platform="tidb">
 
@@ -672,9 +671,6 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 </CustomContent>
 
-=======
-- Default value: `2` for TiDB Self-Hosted and `1` for TiDB Cloud
->>>>>>> 8eee4b162 (tidb: rename products (#13692) (#13763))
 - Range: `[1, 2]`
 - Controls how TiDB collects statistics.
 
@@ -919,85 +915,6 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Default value: `0`
 - This variable is read-only. It is used to obtain the timestamp of the current transaction.
 
-<<<<<<< HEAD
-=======
-### tidb_ddl_disk_quota <span class="version-mark">New in v6.3.0</span>
-
-<CustomContent platform="tidb-cloud">
-
-> **Note:**
->
-> This TiDB variable is not applicable to TiDB Cloud. Do not change the default value of this variable for TiDB Cloud.
-
-</CustomContent>
-
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `107374182400` (100 GiB)
-- Range: `[107374182400, 1125899906842624]` ([100 GiB, 1 PiB])
-- Unit: Bytes
-- This variable only takes effect when [`tidb_ddl_enable_fast_reorg`](#tidb_ddl_enable_fast_reorg-new-in-v630) is enabled. It sets the usage limit of local storage during backfilling when creating an index.
-
-### tidb_ddl_enable_fast_reorg <span class="version-mark">New in v6.3.0</span>
-
-<CustomContent platform="tidb-cloud">
-
-> **Note:**
->
-> To improve the speed for index creation using this variable, make sure that your TiDB cluster is hosted on AWS and your TiDB node size is at least 8 vCPU. For [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless-beta) clusters, this feature is unavailable.
-
-</CustomContent>
-
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `ON`
-- This variable controls whether to enable the acceleration of `ADD INDEX` and `CREATE INDEX` to improve the speed of backfilling for index creation. Setting this variable value to `ON` can bring performance improvement for index creation on tables with a large amount of data.
-- To verify whether a completed `ADD INDEX` operation is accelerated, you can execute the [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md#admin-show-ddl-jobs) statement to see whether `ingest` is displayed in the `JOB_TYPE` column.
-
-<CustomContent platform="tidb">
-
-> **Warning:**
->
-> Currently, this feature is not fully compatible with adding a unique index. When adding a unique index, it is recommended to disable the index acceleration feature (set `tidb_ddl_enable_fast_reorg` to `OFF`).
->
-> When [PITR (Point-in-time recovery)](/br/backup-and-restore-overview.md) is disabled, the speed of adding indexes is expected to be about 10 times that in v6.1.0. However, there is no performance improvement when both PITR and index acceleration are enabled. To optimize performance, it is recommended that you disable PITR, add indexes in a quick way, then enable PITR and perform a full backup. Otherwise, the following behaviors might occur:
->
-> - When PITR starts working first, the index adding job automatically falls back to the legacy mode by default, even if the configuration is set to `ON`. The index is added slowly.
-> - When the index adding job starts first, it prevents the log backup job of PITR from starting by throwing an error, which does not affect the index adding job in progress. After the index adding job is completed, you need to restart the log backup job and perform a full backup manually.
-> - When a log backup job of PITR and an index adding job start at the same time, no error is prompted because the two jobs are unable to detect each other. PITR does not back up the newly added index. After the index adding job is completed, you still need to restart the log backup job and perform a full backup manually.
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-> **Warning:**
->
-> Currently, this feature is not fully compatible with [altering multiple columns or indexes in a single `ALTER TABLE` statement](/sql-statements/sql-statement-alter-table.md). When adding a unique index with the index acceleration, you need to avoid altering other columns or indexes in the same statement.
->
-> When [PITR (Point-in-time recovery)](/tidb-cloud/backup-and-restore.md) is disabled, the speed of adding indexes is expected to be about 10 times that in v6.1.0. However, there is no performance improvement when both PITR and index acceleration are enabled. To optimize performance, it is recommended that you disable PITR, add indexes in a quick way, then enable PITR and perform a full backup. Otherwise, the following expected behaviors might occur:
->
-> - When PITR starts working first, the index adding job automatically falls back to the legacy mode by default, even if the configuration is set to `ON`. The index is added slowly.
-> - When the index adding job starts first, it prevents the log backup job of PITR from starting by throwing an error, which does not affect the index adding job in progress. After the index adding job is completed, you need to restart the log backup job and perform a full backup manually.
-> - When a log backup job of PITR and an index adding job start at the same time, no error is prompted because the two jobs are unable to detect each other. PITR does not back up the newly added index. After the index adding job is completed, you still need to restart the log backup job and perform a full backup manually.
-
-</CustomContent>
-
-### tidb_ddl_distribute_reorg <span class="version-mark">New in v6.6.0</span>
-
-> **Warning:**
->
-> - This feature is still in the experimental stage. It is not recommended to enable this feature in production environments.
-> - When this feature is enabled, TiDB only performs simple retries when an exception occurs during the DDL reorg phase. There is currently no retry method that is compatible with DDL operations. That is, you cannot control the number of retries using [`tidb_ddl_error_count_limit`](#tidb_ddl_error_count_limit).
-
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Default value: `OFF`
-- This variable is used to control whether to enable distributed execution of the DDL reorg phase to improve the speed of this phase. Currently, this variable is only valid for the `ADD INDEX` statement. Enabling this variable improves the performance of large tables. Distributed DDL execution can control the CPU usage of DDL through dynamic DDL resource management to prevent DDL from affecting the online application.
-- To verify whether a completed `ADD INDEX` operation is accelerated by this feature, you can check whether a corresponding task is in the `mysql.tidb_background_subtask_history` table.
-
->>>>>>> 8eee4b162 (tidb: rename products (#13692) (#13763))
 ### tidb_ddl_error_count_limit
 
 - Scope: GLOBAL

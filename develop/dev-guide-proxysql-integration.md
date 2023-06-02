@@ -39,7 +39,7 @@ The most obvious way to deploy ProxySQL with TiDB is to add ProxySQL as a standa
 
 This section describes how to integrate TiDB with ProxySQL in a development environment. To get started with the ProxySQL integration, you can choose either of the following options depending on your TiDB cluster type after you have all the [prerequisites](#prerequisite) in place.
 
-- Option 1: [Integrate TiDB Cloud Serverless Tier with ProxySQL](#option-1-integrate-tidb-cloud-serverless-tier-with-proxysql)
+- Option 1: [Integrate TiDB Serverless with ProxySQL](#option-1-integrate-tidb-cloud-serverless-tier-with-proxysql)
 - Option 2: [Integrate TiDB (self-hosted) with ProxySQL](#option-2-integrate-tidb-self-hosted-with-proxysql)
 
 ### Prerequisites
@@ -117,23 +117,15 @@ systemctl start docker
 
 </SimpleTab>
 
-### Option 1: Integrate TiDB Cloud Serverless Tier with ProxySQL
+### Option 1: Integrate TiDB Serverless with ProxySQL
 
 For this integration, you will be using the [ProxySQL Docker image](https://hub.docker.com/r/proxysql/proxysql) along with a TiDB Serverless cluster. The following steps will set up ProxySQL on port `16033`, so make sure this port is available.
 
 #### Step 1. Create a TiDB Serverless cluster
 
-<<<<<<< HEAD
-1. [Create a free TiDB Serverless Tier cluster](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-tidb-cluster).
+1. [Create a free TiDB Serverless cluster](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-tidb-cluster).
 2. Follow the steps in [Connect via Standard Connection](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection#serverless-tier) to get the connection string and set a password for your cluster.
 3. In the connection string, locate your cluster endpoint after `-h`, your user name after `-u`, and your cluster port after `-P`.
-=======
-1. [Create a free TiDB Serverless cluster](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-tidb-cluster). Remember the root password that you set for your cluster.
-2. Get your cluster hostname, port, and username for later use.
-
-    1. On the [Clusters](https://tidbcloud.com/console/clusters) page, click your cluster name to go to the cluster overview page.
-    2. On the cluster overview page, locate the **Connection** pane, and then copy the `Endpoint`, `Port`, and `User` fields, where the `Endpoint` is your cluster hostname.
->>>>>>> 8eee4b162 (tidb: rename products (#13692) (#13763))
 
 #### Step 2. Generate ProxySQL configuration files
 

@@ -18,40 +18,7 @@ Each TiKV node has a path in which the backup files generated in the backup oper
 
 ![br-arch](/media/br-arch.png)
 
-<<<<<<< HEAD
 For detailed information about the BR design, see [BR Design Principles](/br/backup-and-restore-design.md).
-=======
-- PITR only supports restoring data to **an empty cluster**.
-- PITR only supports cluster-level restore and does not support database-level or table-level restore.
-- PITR does not support restoring the data of user tables or privilege tables from system tables.
-- BR does not support running multiple backup tasks on a cluster **at the same time**.
-- When a PITR is running, you cannot run a log backup task or use TiCDC to replicate data to a downstream cluster.
-
-### Some tips
-
-Snapshot backup:
-
-- It is recommended that you perform the backup operation during off-peak hours to minimize the impact on applications.
-- It is recommended that you execute multiple backup or restore tasks one by one. Running multiple backup tasks in parallel leads to low performance. Worse still, a lack of collaboration between multiple tasks might result in task failures and affect cluster performance.
-
-Snapshot restore:
-
-- BR uses resources of the target cluster as much as possible. Therefore, it is recommended that you restore data to a new cluster or an offline cluster. Avoid restoring data to a production cluster. Otherwise, your application will be affected inevitably.
-
-Backup storage and network configuration:
-
-- It is recommended that you store backup data to a storage system that is compatible with Amazon S3, GCS, or Azure Blob Storage.
-- You need to ensure that BR, TiKV, and the backup storage system have enough network bandwidth, and that the backup storage system can provide sufficient read and write performance (IOPS). Otherwise, they might become a performance bottleneck during backup and restore.
-
-## Use backup and restore
-
-The way to use BR varies with the deployment method of TiDB. This document introduces how to use the br command-line tool to back up and restore TiDB cluster data in a self-hosted deployment.
-
-For information about how to use this feature in other deployment scenarios, see the following documents:
-
-- [Back Up and Restore TiDB Deployed on TiDB Cloud](https://docs.pingcap.com/tidbcloud/backup-and-restore): It is recommended that you create TiDB clusters on [TiDB Cloud](https://www.pingcap.com/tidb-cloud/?from=en). TiDB Cloud offers fully managed databases to let you focus on your applications.
-- [Back Up and Restore Data Using TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/backup-restore-overview): If you deploy a TiDB cluster using TiDB Operator on Kubernetes, it is recommended to back up and restore data using Kubernetes CustomResourceDefinition (CRD).
->>>>>>> 8eee4b162 (tidb: rename products (#13692) (#13763))
 
 ## BR features
 

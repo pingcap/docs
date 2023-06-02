@@ -29,18 +29,12 @@ This document walks you through the quickest way to get started with TiDB Cloud.
 
     The [**Clusters**](https://tidbcloud.com/console/clusters) list page is displayed by default.
 
-<<<<<<< HEAD
-3. For new sign-up users, TiDB Cloud creates a default Serverless Tier cluster `Cluster0` for you automatically. You can either use this default cluster for the subsequent steps or create a new Serverless Tier cluster on your own.
+3. For new sign-up users, TiDB Cloud creates a default TiDB Serverless cluster `Cluster0` for you automatically. You can either use this default cluster for the subsequent steps or create a new TiDB Serverless cluster on your own.
 
-    To create a new Serverless Tier cluster on your own, take the following operations:
-=======
-4. On the **Create Cluster** page, **Serverless** is selected by default. Update the default cluster name if necessary, and then select the region where you want to create your cluster.
-
-5. Click **Create** to create a TiDB Serverless cluster.
->>>>>>> 8eee4b162 (tidb: rename products (#13692) (#13763))
+    To create a new TiDB Serverless cluster on your own, take the following operations:
 
     1. Click **Create Cluster**.
-    2. On the **Create Cluster** page, **Serverless Tier** is selected by default. Update the default cluster name if necessary, select a target region of your cluster, and then click **Create**. Your Serverless Tier cluster will be created in approximately 30 seconds.
+    2. On the **Create Cluster** page, **Serverless** is selected by default. Update the default cluster name if necessary, select a target region of your cluster, and then click **Create**. Your TiDB Serverless cluster will be created in approximately 30 seconds.
 
 4. Click the target cluster name to go to its overview page, and then click **Connect** in the upper-right corner. A connection dialog box is displayed.
 
