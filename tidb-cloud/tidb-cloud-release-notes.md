@@ -12,13 +12,13 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
-- In our pursuit to simplify and clarify, we've updated our product names:
+- In our pursuit to simplify and clarify, we have updated the names of our products:
 
-    - "TiDB Cloud Serverless Tier" is renamed to "TiDB Serverless".
-    - "TiDB Cloud Dedicated Tier" is renamed to "TiDB Dedicated".
-    - "TiDB On-Premises" is renamed to "TiDB Self-Hosted".
+    - "TiDB Cloud Serverless Tier" is now called "TiDB Serverless".
+    - "TiDB Cloud Dedicated Tier" is now called "TiDB Dedicated".
+    - "TiDB On-Premises" is now called "TiDB Self-Hosted".
 
-    Enjoy the same great performance under these refreshed names. Your experience, our priority.
+    Enjoy the same great performance under these refreshed names. Your experience is our priority.
 
 ## May 30, 2023
 
