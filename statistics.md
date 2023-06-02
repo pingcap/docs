@@ -11,7 +11,12 @@ TiDB uses statistics to decide [which index to choose](/choose-index.md). The `t
 
 In versions earlier than v5.1.0, the default value of this variable is `1`. In v5.3.0 and later versions, the default value of this variable is `2`. If your cluster is upgraded from a version earlier than v5.3.0 to v5.3.0 or later, the default value of `tidb_analyze_version` does not change.
 
+<<<<<<< HEAD
 </CustomContent>
+=======
+- For TiDB Self-Hosted, the default value of this variable is `1` before v5.1.0. In v5.3.0 and later versions, the default value of this variable is `2`. If your cluster is upgraded from a version earlier than v5.3.0 to v5.3.0 or later, the default value of `tidb_analyze_version` does not change.
+- For TiDB Cloud, the default value of this variable is `1`.
+>>>>>>> 76416ca7e (tidb: rename products (#13692))
 
 <CustomContent platform="tidb-cloud">
 

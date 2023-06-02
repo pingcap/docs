@@ -658,6 +658,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Type: Integer
+<<<<<<< HEAD
 
 <CustomContent platform="tidb">
 
@@ -671,6 +672,9 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 </CustomContent>
 
+=======
+- Default value: `2` for TiDB Self-Hosted and `1` for TiDB Cloud
+>>>>>>> 76416ca7e (tidb: rename products (#13692))
 - Range: `[1, 2]`
 - Controls how TiDB collects statistics.
 
@@ -915,6 +919,80 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Default value: `0`
 - This variable is read-only. It is used to obtain the timestamp of the current transaction.
 
+<<<<<<< HEAD
+=======
+### tidb_ddl_disk_quota <span class="version-mark">New in v6.3.0</span>
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> This TiDB variable is not applicable to TiDB Cloud. Do not change the default value of this variable for TiDB Cloud.
+
+</CustomContent>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: Integer
+- Default value: `107374182400` (100 GiB)
+- Range: `[107374182400, 1125899906842624]` ([100 GiB, 1 PiB])
+- Unit: Bytes
+- This variable only takes effect when [`tidb_ddl_enable_fast_reorg`](#tidb_ddl_enable_fast_reorg-new-in-v630) is enabled. It sets the usage limit of local storage during backfilling when creating an index.
+
+### tidb_ddl_enable_fast_reorg <span class="version-mark">New in v6.3.0</span>
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> To improve the speed for index creation using this variable, make sure that your TiDB cluster is hosted on AWS and your TiDB node size is at least 8 vCPU. For [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless-beta) clusters, this feature is unavailable.
+
+</CustomContent>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `ON`
+- This variable controls whether to enable the acceleration of `ADD INDEX` and `CREATE INDEX` to improve the speed of backfilling for index creation. Setting this variable value to `ON` can bring performance improvement for index creation on tables with a large amount of data.
+- Starting from v7.1.0, the index acceleration operation supports checkpoints. Even if the TiDB owner node is restarted or changed due to failures, TiDB can still recover progress from checkpoints that are automatically updated on a regular basis.
+- To verify whether a completed `ADD INDEX` operation is accelerated, you can execute the [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md#admin-show-ddl-jobs) statement to see whether `ingest` is displayed in the `JOB_TYPE` column.
+
+<CustomContent platform="tidb">
+
+> **Warning:**
+>
+> Currently, PITR recovery handles the indexes created by index acceleration during the log backup with extra processing to achieve compatibility. For details, see [Why is the acceleration of adding indexes feature incompatible with PITR?](/faq/backup-and-restore-faq.md#why-is-the-acceleration-of-adding-indexes-feature-incompatible-with-pitr).
+
+> **Note:**
+>
+> Before you upgrade TiDB to v6.5.0 or later, it is recommended that you check whether the [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630) path of TiDB is correctly mounted to an SSD disk. This path is a TiDB configuration item, which takes effect after TiDB is restarted. Therefore, setting this configuration item before upgrading can avoid another restart.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+> **Warning:**
+>
+> Currently, this feature is not fully compatible with [altering multiple columns or indexes in a single `ALTER TABLE` statement](/sql-statements/sql-statement-alter-table.md). When adding a unique index with the index acceleration, you need to avoid altering other columns or indexes in the same statement.
+>
+> Currently, PITR recovery handles the indexes created by index acceleration during the log backup with extra processing to achieve compatibility. For details, see [Why is the acceleration of adding indexes feature incompatible with PITR?](https://docs.pingcap.com/tidb/v7.0/backup-and-restore-faq#why-is-the-acceleration-of-adding-indexes-feature-incompatible-with-pitr).
+
+</CustomContent>
+
+### tidb_enable_dist_task <span class="version-mark">New in v7.1.0</span>
+
+> **Warning:**
+>
+> This feature is still in the experimental stage. It is not recommended to enable this feature in production environments.
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Default value: `OFF`
+- This variable is used to control whether to enable the [TiDB backend task distributed execution framework](/tidb-distributed-execution-framework.md). After the framework is enabled, backend tasks such as DDL and import will be distributedly executed and completed by multiple TiDB nodes in the cluster.
+- In TiDB v7.1.0, the framework supports distributedly executing only the `ADD INDEX` statement for partitioned tables.
+- This variable is renamed from `tidb_ddl_distribute_reorg`.
+
+>>>>>>> 76416ca7e (tidb: rename products (#13692))
 ### tidb_ddl_error_count_limit
 
 - Scope: GLOBAL
