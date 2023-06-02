@@ -20,7 +20,7 @@ This document describes the common usage limitations of TiDB, including the maxi
 
 ## Limitations on the total number of databases, tables, views, and connections
 
-| Identifier type  | Maximum number  |
+| Type  | Maximum number  |
 |:----------|:----------|
 | Databases | unlimited |
 | Tables    | unlimited |
