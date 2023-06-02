@@ -18,7 +18,7 @@ TTL is designed to help users clean up unnecessary data periodically and in a ti
 > **Warning:**
 >
 > This is an experimental feature. It is not recommended that you use it in a production environment.
-> TTL is not available for [TiDB Cloud Serverless Tier](https://docs.pingcap.com/tidbcloud/select-cluster-tier#serverless-tier-beta).
+> TTL is not available for [TiDB Serverless](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless-beta).
 
 ## Syntax
 
@@ -162,7 +162,7 @@ The preceding statement allows TTL jobs to be scheduled only between 1:00 and 5:
 
 > **Note:**
 >
-> This section is only applicable to on-premises TiDB. Currently, TiDB Cloud does not provide TTL metrics.
+> This section is only applicable to TiDB Self-Hosted. Currently, TiDB Cloud does not provide TTL metrics.
 
 </CustomContent>
 
