@@ -8,6 +8,18 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2023.
 
+## June 2, 2023
+
+**General changes**
+
+- In our pursuit to simplify and clarify, we have updated the names of our products:
+
+    - "TiDB Cloud Serverless Tier" is now called "TiDB Serverless".
+    - "TiDB Cloud Dedicated Tier" is now called "TiDB Dedicated".
+    - "TiDB On-Premises" is now called "TiDB Self-Hosted".
+
+    Enjoy the same great performance under these refreshed names. Your experience is our priority.
+
 ## May 30, 2023
 
 **General changes**
