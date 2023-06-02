@@ -34,7 +34,7 @@ In addition, TiDB does not support the MySQL replication protocol, but provides 
 
 </CustomContent>
 
-You can have a try of TiDB features on [TiDB Playground](http://play.tidbcloud.com/).
+You can try out TiDB features on [TiDB Playground](http://play.tidbcloud.com/).
 
 ## Unsupported features
 
