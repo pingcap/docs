@@ -109,8 +109,6 @@ Learn TiDB Playground
 
 </DocHomeCard>
 
-<DocHomeCardContainer>
-
 <DocHomeCard href="https://en.pingcap.com/education/" icon="cloud1" label="PingCAP Education">
 
 Learn TiDB and TiDB Cloud through well-designed online courses and instructor-led training
