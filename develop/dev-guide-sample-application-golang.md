@@ -768,7 +768,7 @@ When using go-sql-driver/mysql, you need to connect to your cluster and run the 
 
 <div label="Using GORM (Recommended)" value="gorm">
 
-If you are using a TiDB Cloud Serverless Tier cluster, modify the value of the `dsn` in `gorm.go`:
+If you are using a TiDB Serverless cluster, modify the value of the `dsn` in `gorm.go`:
 
 ```go
 dsn := "root:@tcp(127.0.0.1:4000)/test?charset=utf8mb4"
