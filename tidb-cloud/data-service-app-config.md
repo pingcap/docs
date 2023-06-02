@@ -37,13 +37,13 @@ The following is an example configuration of `cluster.json`.
 ```json
 [
   {
-    "cluster_id": <cluster ID>
+    "cluster_id": ${CLUSTER_ID}
   },
   {
-    "cluster_id": <cluster ID>
+    "cluster_id": ${CLUSTER_ID}
   },
   {
-    "cluster_id": <cluster ID>
+    "cluster_id":${CLUSTER_ID}
   }
 ]
 ```
@@ -51,7 +51,7 @@ The following is an example configuration of `cluster.json`.
 
 | Field  | Type  | Description  |
 |---------|---------|---------|
-| `<cluster ID>`     |    Number     |    The ID of the cluster. You can get it from the browser URL of your TiDB cluster.|
+| `${CLUSTER_ID}`     |    Number     | The ID of the cluster. You can get it from the URL of your TiDB cluster. For example, if your cluster URL is https://tidbcloud.com/console/clusters/1379111944646164111/overview, the cluster ID is `1379111944646164111`. |
 
 ## dataapp_config.json
 
