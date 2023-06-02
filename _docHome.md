@@ -105,7 +105,7 @@ Documentation for TiDB Cloud application developers
 
 <DocHomeCard href="http://play.tidbcloud.com" icon="playground" label="TiDB Playground">
 
-One-stop and interactive experience of TiDB's capabilities without registration
+One-stop and interactive experience of TiDB's capabilities WITHOUT registration
 
 </DocHomeCard>
 
