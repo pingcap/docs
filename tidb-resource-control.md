@@ -78,7 +78,7 @@ The resource control feature introduces two new global variables.
 
 <CustomContent platform="tidb-cloud">
 
-* TiKV: For TiDB Self-Hosted, you can use the `resource-control.enabled` parameter to control whether to use request scheduling based on resource group quotas. For TiDB Cloud, the value of the `resource-control.enabled` parameter is  `false` by default and does not support dynamic modification. If you need to enable it for TiDB Cloud Dedicated Tier clusters, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+* TiKV: For TiDB Self-Hosted, you can use the `resource-control.enabled` parameter to control whether to use request scheduling based on resource group quotas. For TiDB Cloud, the value of the `resource-control.enabled` parameter is  `false` by default and does not support dynamic modification. If you need to enable it for TiDB Dedicated clusters, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 </CustomContent>
 
@@ -122,7 +122,7 @@ Set the TiKV [`resource-control.enabled`](/tikv-configuration-file.md#resource-c
 
 <CustomContent platform="tidb-cloud">
 
-For TiDB Self-Hosted, set the TiKV `resource-control.enabled` parameter to `true`. For TiDB Cloud, the value of the `resource-control.enabled` parameter is  `false` by default and does not support dynamic modification. If you need to enable it for TiDB Cloud Dedicated Tier clusters, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+For TiDB Self-Hosted, set the TiKV `resource-control.enabled` parameter to `true`. For TiDB Cloud, the value of the `resource-control.enabled` parameter is  `false` by default and does not support dynamic modification. If you need to enable it for TiDB Dedicated clusters, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 </CustomContent>
 
