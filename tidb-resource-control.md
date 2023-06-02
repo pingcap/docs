@@ -13,7 +13,7 @@ summary: Learn how to use the resource control feature to control and schedule a
 
 > **Note:**
 >
-> This feature is not available on [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta).
+> This feature is not available on [TiDB Serverless clusters](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless-beta).
 
 </CustomContent>
 
@@ -78,7 +78,11 @@ The resource control feature introduces two new global variables.
 
 <CustomContent platform="tidb-cloud">
 
+<<<<<<< HEAD
 * TiKV: For on-premises TiDB, you can use the `resource-control.enabled` parameter to control whether to use request scheduling based on resource group quotas. For TiDB Cloud, the value of the `resource-control.enabled` parameter is  `false` by default and does not support dynamic modification. If you need to enable it for TiDB Cloud Dedicated Tier clusters, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+=======
+* TiKV: For TiDB Self-Hosted, you can use the `resource-control.enabled` parameter to control whether to use request scheduling based on resource group quotas. For TiDB Cloud, the value of the `resource-control.enabled` parameter is `true` by default and does not support dynamic modification.
+>>>>>>> 76416ca7e (tidb: rename products (#13692))
 
 </CustomContent>
 
@@ -156,6 +160,60 @@ After you complete the above operations of creating resource groups and binding 
 
 If there are too many requests that result in insufficient resources for the resource group, the client's requests will wait. If the wait time is too long, the requests will report an error.
 
+<<<<<<< HEAD
+=======
+> **Note:**
+>
+> - When you bind a user to a resource group by using `CREATE USER` or `ALTER USER`, it will not take effect for the user's existing sessions, but only for the user's new sessions.
+> - TiDB automatically creates a `default` resource group during cluster initialization. For this resource group, the default value of `RU_PER_SEC` is `UNLIMITED` (equivalent to the maximum value of the `INT` type, that is, `2147483647`) and it is in `BURSTABLE` mode. Statements that are not bound to a resource group are automatically bound to this resource group. This resource group does not support deletion, but you can modify the configuration of its RU.
+
+#### Bind the current session to a resource group
+
+By binding a session to a resource group, the resource usage of the corresponding session is limited by the specified usage (RU).
+
+The following example binds the current session to the resource group `rg1`.
+
+```sql
+SET RESOURCE GROUP rg1;
+```
+
+#### Bind the current statement to a resource group
+
+By adding the [`RESOURCE_GROUP(resource_group_name)`](/optimizer-hints.md#resource_groupresource_group_name) hint to a SQL statement, you can specify the resource group to which the statement is bound. This hint supports `SELECT`, `INSERT`, `UPDATE`, and `DELETE` statements.
+
+The following example binds the current statement to the resource group `rg1`.
+
+```sql
+SELECT /*+ RESOURCE_GROUP(rg1) */ * FROM t limit 10;
+```
+
+## Disable resource control
+
+<CustomContent platform="tidb">
+
+1. Execute the following statement to disable the resource control feature.
+
+    ```sql
+    SET GLOBAL tidb_enable_resource_control = 'OFF';
+    ```
+
+2. Set the TiKV parameter [`resource-control.enabled`](/tikv-configuration-file.md#resource-control) to `false` to disable scheduling based on the RU of the resource group.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+1. Execute the following statement to disable the resource control feature.
+
+    ```sql
+    SET GLOBAL tidb_enable_resource_control = 'OFF';
+    ```
+
+2. For TiDB Self-Hosted, you can use the `resource-control.enabled` parameter to control whether to use request scheduling based on resource group quotas. For TiDB Cloud, the value of the `resource-control.enabled` parameter is `true` by default and does not support dynamic modification. If you need to disable it for TiDB Dedicated clusters, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+
+</CustomContent>
+
+>>>>>>> 76416ca7e (tidb: rename products (#13692))
 ## Monitoring metrics and charts
 
 <CustomContent platform="tidb">
@@ -170,7 +228,7 @@ TiKV also records the request QPS from different resource groups. For more detai
 
 > **Note:**
 >
-> This section is only applicable to on-premises TiDB. Currently, TiDB Cloud does not provide resource control metrics.
+> This section is only applicable to TiDB Self-Hosted. Currently, TiDB Cloud does not provide resource control metrics.
 
 TiDB regularly collects runtime information about resource control and provides visual charts of the metrics in Grafana's **TiDB** > **Resource Control** dashboard.
 
