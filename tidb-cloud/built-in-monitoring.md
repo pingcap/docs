@@ -22,12 +22,12 @@ To view the metrics on the Metrics page, take the following steps:
 
 ## Metrics retention policy
 
-- For Dedicated Tier clusters, the metrics data is kept for 7 days.
-- For Serverless Tier clusters, the metrics data is kept for 3 days.
+- For TiDB Dedicated clusters, the metrics data is kept for 7 days.
+- For TiDB Serverless clusters, the metrics data is kept for 3 days.
 
-## Metrics for Dedicated Tier clusters
+## Metrics for TiDB Dedicated clusters
 
-The following sections illustrate the metrics on the Metrics page for Dedicated Tier clusters.
+The following sections illustrate the metrics on the Metrics page for TiDB Dedicated clusters.
 
 ### Overview
 
@@ -81,12 +81,12 @@ The following sections illustrate the metrics on the Metrics page for Dedicated 
 | TiFlash IO MBps | node-write, node-read | The total bytes of read and write in each TiFlash node. |
 | TiFlash Storage Usage | node | The storage usage statistics of each TiFlash node. |
 
-## Metrics for Serverless Tier clusters
+## Metrics for TiDB Serverless clusters
 
-The Metrics page provides two tabs for metrics of Serverless Tier clusters:
+The Metrics page provides two tabs for metrics of TiDB Serverless clusters:
 
-- Cluster Status: displays the cluster-level main metrics. 
-- Database Status: displays the database-level main metrics. 
+- Cluster Status: displays the cluster-level main metrics.
+- Database Status: displays the database-level main metrics.
 
 ### Cluster Status
 
@@ -97,11 +97,11 @@ The following table illustrates the cluster-level main metrics under the **Clust
 | Request Units | RU per second | The Request Unit (RU) is a unit of measurement used to track the resource consumption of a query or transaction. In addition to queries that you run, Request Units can be consumed by background activities, so when the QPS is 0, the Request Units per second might not be zero. |
 | Used Storage Size | Row-based storage, Columnar storage | The size of the row store and the size of the column store. |
 | Query Per Second | All, {SQL type} | The number of SQL statements executed per second, which are collected by SQL types, such as `SELECT`, `INSERT`, and `UPDATE`. |
-| Average Query Duration | All, {SQL type} | The duration from receiving a request from the client to the Serverless Tier cluster until the cluster executes the request and returns the result to the client. |
+| Average Query Duration | All, {SQL type} | The duration from receiving a request from the client to the TiDB Serverless cluster until the cluster executes the request and returns the result to the client. |
 | Failed Query | All | The number of SQL statement execution errors per second. |
 | Transaction Per Second | All | The number of transactions executed per second. |
 | Average Transaction Duration | All | The average execution duration of transactions. |
-| Total Connection | All | The number of connections to the Serverless Tier cluster. |
+| Total Connection | All | The number of connections to the TiDB Serverless cluster. |
 
 ### Database Status
 

@@ -45,7 +45,7 @@ Backup storage and network configuration:
 
 ## Use backup and restore
 
-The way to use BR varies with the deployment method of TiDB. This document introduces how to use the br command-line tool to back up and restore TiDB cluster data in an on-premise deployment.
+The way to use BR varies with the deployment method of TiDB. This document introduces how to use the br command-line tool to back up and restore TiDB cluster data in a self-hosted deployment.
 
 For information about how to use this feature in other deployment scenarios, see the following documents:
 

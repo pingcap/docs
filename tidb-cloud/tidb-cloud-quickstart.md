@@ -12,7 +12,7 @@ This tutorial guides you through an easy way to get started with your TiDB Cloud
 
 ## Step 1. Create a TiDB cluster
 
-TiDB Cloud [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) (Beta) is the best way to get started with TiDB Cloud. To create a Serverless Tier cluster, take the following steps:
+[TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta) (Beta) is the best way to get started with TiDB Cloud. To create a TiDB Serverless cluster, take the following steps:
 
 1. If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/free-trial) to sign up for an account.
 
@@ -22,13 +22,13 @@ TiDB Cloud [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-
 
     The [**Clusters**](https://tidbcloud.com/console/clusters) page is displayed by default.
 
-3. For new sign-up users, TiDB Cloud creates a default Serverless Tier cluster `Cluster0` for you automatically.
+3. For new sign-up users, TiDB Cloud creates a default TiDB Serverless cluster `Cluster0` for you automatically.
 
     - To try out TiDB Cloud features instantly with this default cluster, go to [Step 2. Try AI-powered Chat2Query (beta)](#step-2-try-ai-powered-chat2query-beta).
-    - To try creating a new Serverless Tier cluster on your own, take the following operations:
+    - To try creating a new TiDB Serverless cluster on your own, take the following operations:
 
         1. Click **Create Cluster**.
-        2. On the **Create Cluster** page, **Serverless** is selected by default. Select a target region of your cluster, update the default cluster name if necessary, and then click **Create**. Your Serverless Tier cluster will be created in approximately 30 seconds.
+        2. On the **Create Cluster** page, **Serverless** is selected by default. Select a target region of your cluster, update the default cluster name if necessary, and then click **Create**. Your TiDB Serverless cluster will be created in approximately 30 seconds.
 
 ## Step 2. Try AI-powered Chat2Query (beta)
 
@@ -90,4 +90,4 @@ TiDB Cloud offers interactive tutorials with crafted sample datasets to help you
 - For how to connect to your cluster via different methods, see [Connect to a TiDB cluster](/tidb-cloud/connect-to-tidb-cluster.md).
 - For more information about how to use Chat2Query to explore your data, see [Chat2Query](/tidb-cloud/explore-data-with-chat2query.md).
 - For TiDB SQL usage, see [Explore SQL with TiDB](/basic-sql-operations.md).
-- For production use with the benefits of cross-zone high availability, horizontal scaling, and [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing), see [Create a TiDB cluster](/tidb-cloud/create-tidb-cluster.md) to create a Dedicated Tier cluster.
+- For production use with the benefits of cross-zone high availability, horizontal scaling, and [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing), see [Create a TiDB cluster](/tidb-cloud/create-tidb-cluster.md) to create a TiDB Dedicated cluster.

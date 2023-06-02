@@ -10,14 +10,14 @@ This document describes how to back up and restore your TiDB cluster data on TiD
 
 ## Limitations
 
-### Dedicated Tier
+### TiDB Dedicated
 
 - TiDB Cloud does not support restoring tables in the `mysql` schema, including user permissions and system variables.
 - If you turn on and off PITR (Point-in-time Recovery) multiple times, you can only choose a time point within the recoverable range after the most recent PITR is enabled. The earlier recoverable range is not accessible.
 
-### Serverless Tier
+### TiDB Serverless
 
-- It is important to note that Serverless Tier clusters only support in-place restoring from backups. When a restore is performed, tables in the `mysql` schema are also impacted. Hence, any changes made to user credentials and permissions or system variables will be rolled back to the state when the backup was taken.
+- It is important to note that TiDB Serverless clusters only support in-place restoring from backups. When a restore is performed, tables in the `mysql` schema are also impacted. Hence, any changes made to user credentials and permissions or system variables will be rolled back to the state when the backup was taken.
 - Manual backup is not yet supported.
 - PITR (Point-in-time Recovery) is not yet supported.
 - The cluster will be unavailable during the restore process, and existing connections will be terminated. You can establish new connections once the restore is complete.
@@ -25,17 +25,17 @@ This document describes how to back up and restore your TiDB cluster data on TiD
 
 ## Backup
 
-You can back up data for both [Serverless Tier](#serverless-tier) and [Dedicated Tier](#dedicated-tier).
+You can back up data for both [TiDB Serverless](#tidb-serverless) and [TiDB Dedicated](#tidb-dedicated).
 
-### Serverless Tier
+### TiDB Serverless
 
-Automatic backups are scheduled for your Serverless Tier clusters according to the backup setting, which can reduce your loss in extreme disaster situations.
+Automatic backups are scheduled for your TiDB Serverless clusters according to the backup setting, which can reduce your loss in extreme disaster situations.
 
 #### Automatic backup
 
-By the automatic backup, you can back up the Serverless Tier cluster data every day at the backup time you have set. To set the backup time, perform the following steps:
+By the automatic backup, you can back up the TiDB Serverless cluster data every day at the backup time you have set. To set the backup time, perform the following steps:
 
-1. Navigate to the **Backup** page of a Serverless Tier cluster.
+1. Navigate to the **Backup** page of a TiDB Serverless cluster.
 
 2. Click **Backup Settings**. This will open the **Backup Settings** window, where you can configure the automatic backup settings according to your requirements.
 
@@ -57,17 +57,17 @@ To delete an existing backup file, perform the following steps:
 
 2. Click **Delete** for the backup file that you want to delete.
 
-### Dedicated Tier
+### TiDB Dedicated
 
-TiDB Cloud Dedicated Tier supports automatic backup and manual backup.
+TiDB Dedicated supports automatic backup and manual backup.
 
-Automatic backups are scheduled for your Dedicated Tier clusters according to the backup setting, which can reduce your loss in extreme disaster situations. You can also pick a backup snapshot and restore it into a new TiDB cluster at any time.
+Automatic backups are scheduled for your TiDB Dedicated clusters according to the backup setting, which can reduce your loss in extreme disaster situations. You can also pick a backup snapshot and restore it into a new TiDB cluster at any time.
 
 #### Automatic backup
 
-By the automatic backup, you can back up the Dedicated Tier cluster data every day at the backup time you have set. To set the backup time, perform the following steps:
+By the automatic backup, you can back up the TiDB Dedicated cluster data every day at the backup time you have set. To set the backup time, perform the following steps:
 
-1. Navigate to the **Backup** page of a Dedicated Tier cluster.
+1. Navigate to the **Backup** page of a TiDB Dedicated cluster.
 
 2. Click **Backup Settings**. The setting window displays.
 
@@ -151,9 +151,9 @@ To delete a running backup job, it is similar as [**Delete backup files**](#dele
 
 ## Restore
 
-### Serverless Tier
+### TiDB Serverless
 
-TiDB Cloud Serverless Tier only supports in-place restoration. To restore your Serverless Tier cluster from a backup, follow these steps:
+TiDB Serverless only supports in-place restoration. To restore your TiDB Serverless cluster from a backup, follow these steps:
 
 1. Navigate to the **Backup** page of a cluster.
 
@@ -164,9 +164,9 @@ TiDB Cloud Serverless Tier only supports in-place restoration. To restore your S
 
    After initiating the restore process, the cluster status changes to **Restoring**. The cluster will be unavailable during the restore process and existing connections will be terminated. Once the restore process completes successfully, you can access the cluster as usual.
 
-### Dedicated Tier
+### TiDB Dedicated
 
-TiDB Cloud Dedicated Tier provides two types of data restoration:
+TiDB Dedicated provides two types of data restoration:
 
 - Restore backup data to a new cluster
 - Restore a deleted cluster from the recycle bin
