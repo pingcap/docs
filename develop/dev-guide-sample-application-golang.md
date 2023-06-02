@@ -20,9 +20,9 @@ This document describes how to use TiDB and Golang to build a simple CRUD applic
 
 The following introduces how to start a TiDB cluster.
 
-**Use a TiDB Cloud Serverless Tier cluster**
+**Use a TiDB Serverless cluster**
 
-For detailed steps, see [Create a Serverless Tier cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster).
+For detailed steps, see [Create a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-serverless-cluster).
 
 **Use a local cluster**
 
@@ -32,7 +32,7 @@ For detailed steps, see [Deploy a local test cluster](/quick-start-with-tidb.md#
 
 <CustomContent platform="tidb-cloud">
 
-See [Create a Serverless Tier cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster).
+See [Create a TiDB Serverless cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-serverless-cluster).
 
 </CustomContent>
 
@@ -768,7 +768,7 @@ When using go-sql-driver/mysql, you need to connect to your cluster and run the 
 
 <div label="Using GORM (Recommended)" value="gorm">
 
-If you are using a TiDB Cloud Serverless Tier cluster, modify the value of the `dsn` in `gorm.go`:
+If you are using a TiDB Serverless cluster, modify the value of the `dsn` in `gorm.go`:
 
 ```go
 dsn := "root:@tcp(127.0.0.1:4000)/test?charset=utf8mb4"
@@ -795,7 +795,7 @@ dsn := "2aEp24QWEDLqRFs.root:123456@tcp(xxx.tidbcloud.com:4000)/test?charset=utf
 
 <div label="Using go-sql-driver/mysql" value="sqldriver">
 
-If you are using a TiDB Cloud Serverless Tier cluster, modify the value of the `dsn` in `sqldriver.go`:
+If you are using a TiDB Serverless cluster, modify the value of the `dsn` in `sqldriver.go`:
 
 ```go
 dsn := "root:@tcp(127.0.0.1:4000)/test?charset=utf8mb4"
