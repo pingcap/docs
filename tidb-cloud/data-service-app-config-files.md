@@ -1,6 +1,6 @@
 ---
 title: Data App Configuration Files
-summary: This document describes the configuration files of Data Service in TiDB Cloud.
+summary: This document describes the configuration files of Data App in TiDB Cloud.
 ---
 
 # Data App Configuration Files
@@ -24,7 +24,7 @@ If you have [connected your Data App to GitHub](/tidb-cloud/data-service-manage-
 
 ## Data source configuration
 
-The data source of a Data App comes from the linked TiDB clusters of this App. You can find the data source in `cluster.json`.
+The data source of a Data App comes from linked TiDB clusters of this App. You can find the data source in `cluster.json`.
 
 ```
 ├── <Your Data App directory>
@@ -45,22 +45,22 @@ For each Data App, you can link to one or multiple TiDB Serverless clusters. The
 ]
 ```
 
-The description of each field is as follows:
+The description of the field is as follows:
 
 | Field   | Type    | Description  |
 |---------|---------|--------------|
-| `cluster_id` | Integer | The ID of your TiDB Serverless cluster. You can get it from the URL of your TiDB cluster. For example, if your cluster URL is `https://tidbcloud.com/console/clusters/1379111944646164111/overview`, your cluster ID is `1379111944646164111`. |
+| `cluster_id` | Integer | The ID of your TiDB Serverless cluster. You can get it from the URL of your cluster. For example, if your cluster URL is `https://tidbcloud.com/console/clusters/1379111944646164111/overview`, your cluster ID is `1379111944646164111`. |
 
 ## Data App configuration
 
-The properties of a Data App contains the App ID, name, and type. You can find the properties in the `cluster.json` file.
+The properties of a Data App contains the App ID, name, and type. You can find the properties in the `dataapp_config.json` file.
 
 ```
 ├── <Your Data App directory>
 │   ├── dataapp_config.json
 ```
 
-The following is an example configuration of `cluster.json`.
+The following is an example configuration of `dataapp_config.json`.
 
 ```json
 {
@@ -74,7 +74,7 @@ The description of each field is as follows:
 
 | Field      | Type   | Description        |
 |------------|--------|--------------------|
-| `app_id`   | string | The Data App ID. Do not change this field unless your `cluster.json` file is copied from another Data App and actual ID of your current Data App. |
+| `app_id`   | string | The Data App ID. Do not change this field unless your `dataapp_config.json` file is copied from another Data App and you want to update it to the ID of your current Data App. |
 | `app_name` | string | The Data App name. |
 | `app_type` | string | The Data App type, which can only be `dataapi`. |
 
@@ -170,7 +170,7 @@ The SQL file of an endpoint specifies the SQL statements to query data through t
 
 The name of a SQL file is in the `<method>-<endpoint-name>.sql` format, where `<method>` and `<endpoint-name>` must match the endpoint configuration in [`http_endpoints/config.json`](#endpoint-configuration).
 
-The following is an example SQL file.
+In the SQL file, you can write statements such as table join queries, complex queries, and aggregate functions. The following is an example SQL file.
 
 ```sql
 /* Getting Started:
@@ -189,9 +189,11 @@ WHERE
 
 ```
 
-- In the beginning of a SQL file, you need to specify the database in the SQL statements. For example, `USE database_name;`.
-- In the SQL file, you can write statements such as table join queries, complex queries, and aggregate functions.
-- To define a parameter of the endpoint, you can insert it as a variable placeholder like `${variable-name}` in the SQL statement. In the preceding example, `${country}` is used as an parameter of the endpoint. With this parameter, you can specify a desired country to query in your endpoint curl command. Make sure that the parameter name in the SQL file match the parameter name configured in `http_endpoints/config.json`.
+When writing a SQL file, pay attention to the following:
+
+- In the beginning of the SQL file, you need to specify the database in the SQL statements. For example, `USE database_name;`.
+
+- To define a parameter of the endpoint, you can insert it as a variable placeholder like `${variable-name}` to the SQL statement. In the preceding example, `${country}` is used as an parameter of the endpoint. With this parameter, you can specify a desired country to query in your endpoint curl command. Make sure that the parameter name in the SQL file match the parameter name configured in `http_endpoints/config.json`.
 
 > **Note:**
 >
