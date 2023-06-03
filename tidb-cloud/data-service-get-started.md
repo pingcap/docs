@@ -38,13 +38,13 @@ A Data App is a group of endpoints that you can use to access data for a specifi
     > **Note:**
     >
     > - The directory must start with a slash. For example, `/mydata`. If the directory you specified does not exist in the target repository and branch, it will be created automatically.
-    > - The combination of repository, branch, and directory represents the path of the configuration files, which must be unique among Data Apps. If the path already contains files of existing Data Apps, you need to specify a new path instead.
+    > - The combination of repository, branch, and directory identifies the path of the configuration files, which must be unique among Data Apps. If your specified path is already used by another Data App, you need to specify a new path instead. Otherwise, the endpoints configured in the TiDB Cloud console for the current Data App will overwrite the files in your specified path.
 
 5. Click **Create Data App**. The [**Data Service**](https://tidbcloud.com/console/data-service) details page is displayed.
 
-6. If you have connected your Data App to GitHub, check your selected directory on GitHub. Otherwise, skip this step.
+6. If you have configured to connect your Data App to GitHub, check whether your Data App configuration files](/tidb-cloud/data-service-app-config-files.md) have been committed to your specified GitHub directory by `tidb-cloud-data-service`. If yes, it indicates that your Data App is connected to GitHub successfully.
 
-    If the configuration files of the Data App have been committed by `tidb-cloud-data-service`, it indicates that your Data App is connected to GitHub successfully. For your Data App, **Automatic Deployment** and **Review Changes** are enabled automatically so you can easily synchronize changes between TiDB Cloud console and GitHub. For more information, see [Deploy Automatically with GitHub](/tidb-cloud/data-service-manage-github-integration.md).
+    For your new Data App, **Review draft** and **Automatic deployment** are enabled by default so you can easily synchronize changes between TiDB Cloud console and GitHub and review changes before the deployment. For more information about the GitHub integration , see [Deploy your Data App changes with GitHub automatically](/tidb-cloud/data-service-manage-github-integration.md).
 
 ## Step 2. Develop an endpoint
 

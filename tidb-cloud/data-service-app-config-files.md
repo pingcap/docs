@@ -24,7 +24,7 @@ If you have [connected your Data App to GitHub](/tidb-cloud/data-service-manage-
 
 ## Data source configuration
 
-The data source of a Data App comes from the linked TiDB clusters of this App. You can configure the data source in `cluster.json`.
+The data source of a Data App comes from the linked TiDB clusters of this App. You can find the data source in `cluster.json`.
 
 ```
 ├── <Your Data App directory>
@@ -32,7 +32,7 @@ The data source of a Data App comes from the linked TiDB clusters of this App. Y
 │   │   └── cluster.json
 ```
 
-For each Data App, you can link to one or multiple TiDB clusters. The following is an example configuration of `cluster.json`.
+For each Data App, you can link to one or multiple TiDB Serverless clusters. The following is an example configuration of `cluster.json`.
 
 ```json
 [
@@ -49,11 +49,11 @@ The description of each field is as follows:
 
 | Field   | Type    | Description  |
 |---------|---------|--------------|
-| `cluster_id` | Integer | The ID of your TiDB cluster. You can get it from the URL of your TiDB cluster. For example, if your cluster URL is `https://tidbcloud.com/console/clusters/1379111944646164111/overview`, your cluster ID is `1379111944646164111`. |
+| `cluster_id` | Integer | The ID of your TiDB Serverless cluster. You can get it from the URL of your TiDB cluster. For example, if your cluster URL is `https://tidbcloud.com/console/clusters/1379111944646164111/overview`, your cluster ID is `1379111944646164111`. |
 
 ## Data App configuration
 
-The basic information of a Data App contains the App ID, name, and type. You can configure the basic information in the `cluster.json` file.
+The properties of a Data App contains the App ID, name, and type. You can find the properties in the `cluster.json` file.
 
 ```
 ├── <Your Data App directory>
@@ -94,11 +94,9 @@ In your Data App directory, you can find endpoint configurations in `http_endpoi
 
 ### Endpoint configuration
 
-In `http_endpoints/config.json`, you can configure the
+For each Data App, there can be one or multiple endpoints. You can find the configurations of all endpoints for a Data App in `http_endpoints/config.json`.
 
-For each Data App, you can define one or multiple endpoints.
-
-The following is an example endpoint configuration of a Data App. In this example, you can see that there are two endpoints for this Data.
+The following is an example configuration. In this example, you can see that there are two endpoints for this Data App.
 
 ```json
 [
@@ -154,7 +152,7 @@ The description of each field is as follows:
 | `description` | String | The endpoint description (optional).          |
 | `method`      | String | The HTTP method of the endpoint. You can use `GET` to query data or use `POST` to insert data. |
 | `endpoint`    | String | The unique path of the endpoint in the Data App. Only letters, numbers, underscores (`_`), and slashes (`/`) are allowed in the path, which must start with a slash (`/`). For example, `/my_endpoint/get_id`. The length of the path must be less than 64 characters.|
-| `cluster_id`  | String | The ID of the target TiDB cluster for your endpoint. You can get it from the URL of your TiDB cluster. For example, if your cluster URL is `https://tidbcloud.com/console/clusters/1379111944646164111/overview`, the cluster ID is `1379111944646164111`. |
+| `cluster_id`  | String | The ID of the TiDB cluster for your endpoint. You can get it from the URL of your TiDB cluster. For example, if your cluster URL is `https://tidbcloud.com/console/clusters/1379111944646164111/overview`, the cluster ID is `1379111944646164111`. |
 | `params` | Array | The parameters used in the endpoint. By defining parameters, you can dynamically replace the parameter value in your queries through the endpoint. In `params`, you can define one or multiple parameters. For each parameter, you need to define its `name`, `type`, `required`, and `default` fields. If your endpoint does not need any parameter. You can leave `params` empty such as `"params": []`. |
 | `params.name` | string | The name of the parameter. The name can only include letters, digits, and underscores (`_`) and must start with a letter or an underscore (`_`).          |
 | `params.type` | string | The data type of the parameter. Supported values are `string`, `number`, and `boolean`. When using a `string` type parameter, you do not need to add quotation marks (`'` or `"`). For example, `foo` is valid for the `STRING` type and is processed as `"foo"`, whereas `"foo"` is processed as `"\"foo\""`.|
