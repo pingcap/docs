@@ -32,6 +32,7 @@ If you do not enable that during the app creation, you can still enable it as fo
     > **Note:**
     >
     > - The directory must start with a slash. For example, `/mydata`. If the directory you specified does not exist in the target repository and branch, it will be created automatically.
+    > - The repository will include linked cluster IDs and SQL files for endpoints. If the information is sensitive, it is recommended to use a private repository for the connection.
     > - The combination of repository, branch, and directory represents the path of the configuration files, which must be unique among Data Apps. If the path already contains files of existing Data Apps, you need to specify a new path instead.
     > - If the files in your specified directory are copied from another Data App's GitHub directory, the `app_id` in your `datapp_config.json` file is not the actual ID of the current Data App, so the endpoints configured in the TiDB Cloud Console will overwrite the files in your specified directory. If you want to import endpoints from an existing GitHub directory, see [Import configurations of an existing Data App](#import-configurations-of-an-existing-data-app).
 
@@ -62,12 +63,12 @@ After you connect a Data App to GitHub, you can configure whether to enable **Au
     - **Automatic Deployment**
 
         - When it is enabled, the changes made in your specified GitHub directory can be automatically deployed in TiDB Cloud, and you can find the corresponding deployment and commit information in the Data App deployment history.
-        - When it is disabled, the changes made in your specified GitHub directory will NOT deployed in TiDB Cloud, which means that the Data App status are not affected by your changes in GitHub.
+        - When it is disabled, the changes made in your specified GitHub directory will NOT deployed in TiDB Cloud, which means that the Data App are not affected by your changes in GitHub.
 
     - **Review Changes**
 
-        - When it is enabled, you can review the Data App configuration changes you made in the TiDB Cloud console before the deployment. Based on the review, you can either deploy or discard the changes.
-        - When it is disabled, the Data App configuration changes you made in the TiDB Cloud console are deployed directly.
+        - When it is enabled, you can review the Data App changes you made in the TiDB Cloud console before the deployment. Based on the review, you can either deploy or discard the changes.
+        - When it is disabled, the Data App changes you made in the TiDB Cloud console are deployed directly.
 
     > **Note:**
     >
