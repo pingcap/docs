@@ -92,7 +92,7 @@ In your Data App directory, you can find endpoint configurations in `http_endpoi
 │   │       └── <method>-<endpoint-name3>.sql
 ```
 
-### Endpoint information configuration
+### Endpoint configuration
 
 In `http_endpoints/config.json`, you can configure the
 
@@ -159,27 +159,18 @@ The description of each field is as follows:
 | `params.name` | string | The name of the parameter. The name can only include letters, digits, and underscores (`_`) and must start with a letter or an underscore (`_`).          |
 | `params.type` | string | The data type of the parameter. Supported values are `string`, `number`, and `boolean`. When using a `string` type parameter, you do not need to add quotation marks (`'` or `"`). For example, `foo` is valid for the `STRING` type and is processed as `"foo"`, whereas `"foo"` is processed as `"\"foo\""`.|
 | `params.required` | Integer | Specifies whether the parameter is required in the request. Supported values are `0` (not required) and `1` (required).  The default value is `0`.  |
-| `params.default` | String | The default value of the parameter. Make sure that the value match the type of parameter. Otherwise, the endpoint returns an error. If you do not set a test value for a parameter in the TiDB Cloud console, the default value is used when testing the endpoint. |
+| `params.default` | String | The default value of the parameter. Make sure that the value match the type of parameter. Otherwise, the endpoint returns an error. |
 | `timeout`     | Integer | The timeout for the endpoint in milliseconds, which is `5000` by default. You can set it to an integer from `1` to `30000`.  |
 | `row_limit`   | Integer  | The maximum number of rows that the endpoint returns, which is `50` by default. You can set it to an integer from `1` to `2000`.          |
-| `sql_file`    | string | The directory of the SQL file for the endpoint. For example, `"sql/GET-v1.sql"`. Make sure that the SQL file do exist in the directory. |
+| `sql_file`    | string | The SQL file directory for the endpoint. For example, `"sql/GET-v1.sql"`. Make sure that the SQL file do exist in the directory. |
 | `type`        | string | The type of the endpoint, which can only be `"sql_endpoint"`.          |
 | `return_type` | string | The response format of the endpoint, which can only be `"json"`.             |
 
 ### SQL file configuration
 
-You can modify SQL statements of your endpoints in the `http_endpoints/sql/` directory. For each endpoint, there should be a corresponding SQL file.
+The SQL file of an endpoint specifies the SQL statements to query data through the endpoint. You can find the endpoint SQL files in the `http_endpoints/sql/` directory. For each endpoint, there should be a corresponding SQL file.
 
-The name of a SQL file is in the `<method>-<endpoint-name>.sql` format, where `<method>` and `<endpoint-name>` must match the endpoint configuration in `http_endpoints/config.json`.
-
-In the SQL files, you can write statements such as table join queries, complex queries, and aggregate functions. In the beginning of the SQL file, you need to first specify the database in the SQL statements. For example, `USE database_name;`.
-
-To define a parameter of the endpoint, you can insert it as a variable placeholder like `${ID}` in the SQL statement. For example, `SELECT * FROM table_name WHERE id = ${ID}`. Make sure that the parameter name in the SQL file match the parameter name configured in `http_endpoints/config.json`.
-
-> **Note:**
->
-> - The parameter name is case-sensitive.
-> - The parameter cannot be a table name or column name.
+The name of a SQL file is in the `<method>-<endpoint-name>.sql` format, where `<method>` and `<endpoint-name>` must match the endpoint configuration in [`http_endpoints/config.json`](#endpoint-configuration).
 
 The following is an example SQL file.
 
@@ -190,6 +181,21 @@ Type "--your question" + Enter to try out AI-generated SQL queries in the TiDB C
 Declare a parameter like "Where id = ${arg}".
 */
 USE sample_data;
-SELECT repo_name FROM sample_data.github_events WHERE event_year=${event_year} LIMIT 9;
+SELECT
+  rank,
+  company_name,
+FROM
+  global_fortune_500_2018_2022
+WHERE
+  country = ${country};
 
 ```
+
+- In the beginning of a SQL file, you need to specify the database in the SQL statements. For example, `USE database_name;`.
+- In the SQL file, you can write statements such as table join queries, complex queries, and aggregate functions.
+- To define a parameter of the endpoint, you can insert it as a variable placeholder like `${variable-name}` in the SQL statement. In the preceding example, `${country}` is used as an parameter of the endpoint. With this parameter, you can specify a desired country to query in your endpoint curl command. Make sure that the parameter name in the SQL file match the parameter name configured in `http_endpoints/config.json`.
+
+> **Note:**
+>
+> - The parameter name is case-sensitive.
+> - The parameter cannot be a table name or column name.
