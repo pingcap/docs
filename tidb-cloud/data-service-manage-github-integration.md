@@ -20,18 +20,18 @@ Before you connect a Data App to GitHub, make sure that you have the following:
 
 ## Step 1. Connect your Data App to GitHub
 
-You can connect your Data App to GitHub when you create the App. For more information, see [Create a Data App](/tidb-cloud/data-service-manage-data-app.md)
+You can connect your Data App to GitHub when you create the App. For more information, see [Create a Data App](/tidb-cloud/data-service-manage-data-app.md).
 
 If you did not enable the GitHub connection during the app creation, you can still enable it as follows:
 
 1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
 2. In the left pane, click the name of your target Data App to view its details.
-3. In the **Connect to GitHub** area, click **Connect**. A dialog box for connection settings is displayed.
+3. On the **Settings** tab, click **Connect** in the **Connect to GitHub** area. A dialog box for connection settings is displayed.
 4. In the dialog box, perform the following steps:
 
     1. Click **Install on GitHub**, and then follow the on-screen instructions to install **TiDB Cloud Data Service** as an application on your target repository.
     2. Click **Authorize** to authorize access to the application on GitHub.
-    3. Specify the target repository, branch, and directory where you want to save the configuration files of your Data App.
+    3. Specify the target repository, branch, and directory where you want to store the configuration files of your Data App.
 
         > **Note:**
         >
@@ -44,11 +44,15 @@ If you did not enable the GitHub connection during the app creation, you can sti
         - When it is enabled, the changes made in your specified GitHub directory can be automatically deployed in TiDB Cloud, and you can find the corresponding deployment and commit information in the Data App deployment history.
         - When it is disabled, the changes made in your specified GitHub directory will NOT deployed in TiDB Cloud, which means that the Data App are not affected by your changes in GitHub.
 
-5. Click **Connect**.
+5. Click **Confirm Connect**.
 
-## Step 2. Verify the GitHub connection
+## Step 2. Synchronize Data App configurations to GitHub
 
-Check whether your Data App configuration files have been committed to your specified GitHub directory by `tidb-cloud-data-service`. If yes, it indicates that your Data App is connected to GitHub successfully.
+If GitHub connection is enabled when you [create a Data App](/tidb-cloud/data-service-manage-data-app.md), TiDB Cloud pushes the configuration files of this Data App to GitHub immediately after the App creation.
+
+If GitHub connection for your Data App is enabled after the App creation, you need to perform a deployment operation to synchronize the Data App configurations to GitHub. For example, you can click **Deployment** tab, and then re-deploy a deployment for this Data App.
+
+After the deployment operation, check your specified GitHub directory. You will find that the Data App configuration files have been committed to the directory by `tidb-cloud-data-service`, which means that your Data App is connected to GitHub successfully.
 
 | File directory  | Descriptions  |
 | ---------|---------|
@@ -57,9 +61,9 @@ Check whether your Data App configuration files have been committed to your spec
 | `http_endpoints/sql/method-<endpoint name>.sql`     | If SQL statements have been written for your endpoints, the `http_endpoints/sql` directory contains the SQL files of the endpoints.      |
 | `datapp_config.json`  |  This file contains the `app_id`, `app_name`, `app_type` of the Data APP. |
 
-## Step 3. Deploy your Data App changes with GitHub automatically
+## Step 3. Modify your Data App
 
-If automatic deployment is disabled, you can [modify your Data App](/tidb-cloud/data-service-manage-data-app.md#modify-a-data-app) only in the TiDB Cloud console. The changes made in the console will be pushed to your specified GitHub directory immediately.
+If automatic deployment is disabled, you can modify your Data App only in the TiDB Cloud console.
 
 If automatic deployment is enabled, you can modify your Data App either on GitHub or in the TiDB Cloud console.
 
@@ -67,29 +71,33 @@ If automatic deployment is enabled, you can modify your Data App either on GitHu
 >
 > If you have modified your Data App on GitHub and TiDB Cloud console at the same time, to resolve conflicts, you can choose either discard the changes made in the console or let the console changes to overwrite the GitHub changes.
 
-- Option 1: Modify your Data App by updating files on GitHub.
+### Option 1: Modify your Data App by updating files on GitHub
 
-    | File path  | Notes for the updates  |
-    | ---------|---------|
-    | `data_source/cluster.json`     |  When updating this file, make sure that the linked clusters are Serverless clusters and you have access to the clusters. You can get the ID of a cluster from the cluster URL. For example, if the cluster URL is `https://tidbcloud.com/console/clusters/1379661944646164631/overview`, the cluster ID is `1379661944646164631`.|
-    | `http_endpoints/config.json`     | When modifying the endpoints, make sure that you follow the rules described in [HTTP endpoint configuration](/tidb-cloud/data-service-app-config-files.md#http-endpoint-configuration). |
-    | `http_endpoints/sql/method-<endpoint name>.sql`     | To add or remove the SQL files in `http_endpoints/sql` directory, you need to update the corresponding endpoint configurations as well.    |
-    | `datapp_config.json`  |  **DO NOT** modify this file using GitHub. Otherwise, the deployment triggered by this modification will fail.       |
+| File path  | Notes for the updates  |
+| ---------|---------|
+| `data_source/cluster.json`     |  When updating this file, make sure that the linked clusters are Serverless clusters and you have access to the clusters. You can get the ID of a cluster from the cluster URL. For example, if the cluster URL is `https://tidbcloud.com/console/clusters/1379661944646164631/overview`, the cluster ID is `1379661944646164631`.|
+| `http_endpoints/config.json`     | When modifying the endpoints, make sure that you follow the rules described in [HTTP endpoint configuration](/tidb-cloud/data-service-app-config-files.md#http-endpoint-configuration). |
+| `http_endpoints/sql/method-<endpoint name>.sql`     | To add or remove the SQL files in `http_endpoints/sql` directory, you need to update the corresponding endpoint configurations as well.    |
+| `datapp_config.json`  |  **DO NOT** modify this file using GitHub. Otherwise, the deployment triggered by this modification will fail.       |
 
-    For more information about the field configuration in these files, see [Data App configuration files](/tidb-cloud/data-service-app-config-files.md).
+For more information about the field configuration in these files, see [Data App configuration files](/tidb-cloud/data-service-app-config-files.md).
 
-    After the file changes are committed, TiDB Cloud will automatically deploy the Data App with the latest changes. You can view the deployment status and commit information in the deployment history.
+After the file changes are committed, TiDB Cloud will automatically deploy the Data App with the latest changes. You can view the deployment status and commit information in the deployment history.
 
-- Option 2: [Modify your Data App in the TiDB Cloud console](/tidb-cloud/data-service-manage-data-app.md). For example, you can rename the Data APP, modify endpoints, and modify linked clusters.
+### Option 2: [Modify your Data App in the TiDB Cloud console](/tidb-cloud/data-service-manage-data-app.md)
 
-    After modifying your Data App in the TiDB Cloud console, you can review and deploy the changes as follows:
+After modifying your Data App in the TiDB Cloud console (such as modifying endpoints), you can review and deploy the changes to GitHub as follows:
 
-    1. Click **Review draft** in the upper-right corner. A dialog is displayed for you to review the changes you made.
-    2. If you find anything that needs to be updated in the dialog, you can close this dialog and make further changes, or you can click **Discard Draft** to revert the current changes and make new changes.
-    3. (Optional) Type a message for the deployment.
-    4. Click **Deploy and Push to GitHub**. The deployment status will be displayed in the top banner.
+1. Click **Review Draft & Deploy** in the upper-right corner. A dialog is displayed for you to review the changes you made.
+2. Depending on your review, do one of the following:
 
-    If you prefer to skip the review process and push the Data App changes in the TiDB Cloud console to GitHub directly, you can disable **Review draft** as instructed in [Configure Data App deployment](/tidb-cloud/data-service-manage-data-app.md#manage-deployments).
+    - If you still want to make further changes based on the current draft, close this dialog and make the changes.
+    - If you want to revert the current changes to the last deployment, click **Discard Changes**. Then, click **Discard Changes** in the displayed dialog for confirmation.
+    - If the current changes look fine, write a change description (optional), and then click **Deploy and Push to GitHub**. The deployment status will be displayed in the top banner.
+
+> **Note:**
+>
+> If automatic deployment is disabled and you prefer to skip the review process, you can disable **Review draft** as instructed in [Configure Data App deployment](/tidb-cloud/data-service-manage-data-app.md#manage-deployments). After **Review draft** is disabled, the Data App changes made in the TiDB Cloud console are pushed to GitHub immediately.
 
 ## Import configurations of an existing Data App
 
@@ -123,7 +131,7 @@ If you want to edit the GitHub connection for your Data App (such as switching t
     - When it is enabled, the changes made in your specified GitHub directory can be automatically deployed in TiDB Cloud, and you can find the corresponding deployment and commit information in the Data App deployment history.
     - When it is disabled, the changes made in your specified GitHub directory will NOT deployed in TiDB Cloud, which means that the Data App are not affected by your changes in GitHub.
 
-6. Click **Confirm**.
+6. Click **Confirm Connect**.
 
 ## Remove Github connection
 
@@ -131,4 +139,7 @@ If you no longer want to connect your Data App to GitHub, take the following ste
 
 1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
 2. In the left pane, click the name of your target Data App to view its details.
-3. In the **Connect to GitHub** area, click **Unlink**.
+3. On the **Settings** tab, click **Disconnect** in the **Connect to GitHub** area.
+4. Click **Unlink** to confirm the unlinking.
+
+After the unlinking operation, your Data App configuration files will remain in your GitHub directory but will not be synchronized by `tidb-cloud-data-service` anymore.

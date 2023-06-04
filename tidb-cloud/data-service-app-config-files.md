@@ -5,7 +5,7 @@ summary: This document describes the configuration files of Data App in TiDB Clo
 
 # Data App Configuration Files
 
-This document describes the configuration files of Data App in TiDB Cloud.
+This document describes the configuration files of [Data App](/tidb-cloud/tidb-cloud-glossary.md#data-app) in TiDB Cloud.
 
 If you have [connected your Data App to GitHub](/tidb-cloud/data-service-manage-github-integration.md), you can find the configuration files of your Data App in your specified directory on GitHub as follows:
 
@@ -24,7 +24,7 @@ If you have [connected your Data App to GitHub](/tidb-cloud/data-service-manage-
 
 ## Data source configuration
 
-The data source of a Data App comes from linked TiDB clusters of this App. You can find the data source in `cluster.json`.
+The data source of a Data App comes from its linked TiDB clusters. You can find the data source configuration in `data_sources/cluster.json`.
 
 ```
 ├── <Your Data App directory>
@@ -32,7 +32,9 @@ The data source of a Data App comes from linked TiDB clusters of this App. You c
 │   │   └── cluster.json
 ```
 
-For each Data App, you can link to one or multiple TiDB Serverless clusters. The following is an example configuration of `cluster.json`.
+For each Data App, you can link to one or multiple TiDB Serverless clusters.
+
+The following is an example configuration of `cluster.json`. In this example, there are linked clusters for this Data App.
 
 ```json
 [
@@ -45,7 +47,7 @@ For each Data App, you can link to one or multiple TiDB Serverless clusters. The
 ]
 ```
 
-The description of the field is as follows:
+The field description is as follows:
 
 | Field   | Type    | Description  |
 |---------|---------|--------------|
@@ -53,7 +55,7 @@ The description of the field is as follows:
 
 ## Data App configuration
 
-The properties of a Data App contains the App ID, name, and type. You can find the properties in the `dataapp_config.json` file.
+The properties of a Data App contain the App ID, name, and type. You can find the properties in the `dataapp_config.json` file.
 
 ```
 ├── <Your Data App directory>
@@ -96,34 +98,34 @@ In your Data App directory, you can find endpoint configurations in `http_endpoi
 
 For each Data App, there can be one or multiple endpoints. You can find the configurations of all endpoints for a Data App in `http_endpoints/config.json`.
 
-The following is an example configuration. In this example, you can see that there are two endpoints for this Data App.
+The following is an example configuration of `config.json`. In this example, there are two endpoints for this Data App.
 
 ```json
 [
   {
-    "name": "<Endpoint name>",
-    "description": "<Endpoint description>",
-    "method": "<HTTP method>",
-    "endpoint": "<Endpoint path>",
+    "name": "<Endpoint name1>",
+    "description": "<Endpoint description1>",
+    "method": "<HTTP method1>",
+    "endpoint": "<Endpoint path1>",
     "data_source": {
-      "cluster_id": <Endpoint ID>
+      "cluster_id": <Cluster ID>
     },
     "params": [],
     "settings": {
       "timeout": <Endpoint Timeout>,
       "row_limit": <Maximum rows>
     },
-    "sql_file": "<SQL file directory>",
+    "sql_file": "<SQL file directory1>",
     "type": "sql_endpoint",
     "return_type": "json"
   },
   {
-    "name": "<Endpoint name>",
-    "description": "<Endpoint description>",
-    "method": "<HTTP method>",
-    "endpoint": "<Endpoint path>",
+    "name": "<Endpoint name2>",
+    "description": "<Endpoint description2>",
+    "method": "<HTTP method2>",
+    "endpoint": "<Endpoint path2>",
     "data_source": {
-      "cluster_id": <Endpoint ID>
+      "cluster_id": <Cluster ID>
     },
     "params": [
       {
@@ -137,7 +139,7 @@ The following is an example configuration. In this example, you can see that the
       "timeout": <Endpoint Timeout>,
       "row_limit": <Maximum rows>
     },
-    "sql_file": "<SQL file directory>",
+    "sql_file": "<SQL file directory2>",
     "type": "sql_endpoint",
     "return_type": "json"
   }
@@ -153,22 +155,22 @@ The description of each field is as follows:
 | `method`      | String | The HTTP method of the endpoint. You can use `GET` to query data or use `POST` to insert data. |
 | `endpoint`    | String | The unique path of the endpoint in the Data App. Only letters, numbers, underscores (`_`), and slashes (`/`) are allowed in the path, which must start with a slash (`/`). For example, `/my_endpoint/get_id`. The length of the path must be less than 64 characters.|
 | `cluster_id`  | String | The ID of the TiDB cluster for your endpoint. You can get it from the URL of your TiDB cluster. For example, if your cluster URL is `https://tidbcloud.com/console/clusters/1379111944646164111/overview`, the cluster ID is `1379111944646164111`. |
-| `params` | Array | The parameters used in the endpoint. By defining parameters, you can dynamically replace the parameter value in your queries through the endpoint. In `params`, you can define one or multiple parameters. For each parameter, you need to define its `name`, `type`, `required`, and `default` fields. If your endpoint does not need any parameter. You can leave `params` empty such as `"params": []`. |
-| `params.name` | string | The name of the parameter. The name can only include letters, digits, and underscores (`_`) and must start with a letter or an underscore (`_`).          |
-| `params.type` | string | The data type of the parameter. Supported values are `string`, `number`, and `boolean`. When using a `string` type parameter, you do not need to add quotation marks (`'` or `"`). For example, `foo` is valid for the `STRING` type and is processed as `"foo"`, whereas `"foo"` is processed as `"\"foo\""`.|
+| `params` | Array | The parameters used in the endpoint. By defining parameters, you can dynamically replace the parameter value in your queries through the endpoint. In `params`, you can define one or multiple parameters. For each parameter, you need to define its `name`, `type`, `required`, and `default` fields. If your endpoint does not need any parameters. You can leave `params` empty such as `"params": []`. |
+| `params.name` | String | The name of the parameter. The name can only include letters, digits, and underscores (`_`) and must start with a letter or an underscore (`_`).          |
+| `params.type` | String | The data type of the parameter. Supported values are `string`, `number`, and `boolean`. When using a `string` type parameter, you do not need to add quotation marks (`'` or `"`). For example, `foo` is valid for the `STRING` type and is processed as `"foo"`, whereas `"foo"` is processed as `"\"foo\""`.|
 | `params.required` | Integer | Specifies whether the parameter is required in the request. Supported values are `0` (not required) and `1` (required).  The default value is `0`.  |
-| `params.default` | String | The default value of the parameter. Make sure that the value match the type of parameter. Otherwise, the endpoint returns an error. |
+| `params.default` | String | The default value of the parameter. Make sure that the value matches the type of parameter you specified. Otherwise, the endpoint returns an error. |
 | `timeout`     | Integer | The timeout for the endpoint in milliseconds, which is `5000` by default. You can set it to an integer from `1` to `30000`.  |
 | `row_limit`   | Integer  | The maximum number of rows that the endpoint returns, which is `50` by default. You can set it to an integer from `1` to `2000`.          |
-| `sql_file`    | string | The SQL file directory for the endpoint. For example, `"sql/GET-v1.sql"`. Make sure that the SQL file do exist in the directory. |
-| `type`        | string | The type of the endpoint, which can only be `"sql_endpoint"`.          |
-| `return_type` | string | The response format of the endpoint, which can only be `"json"`.             |
+| `sql_file`    | String | The SQL file directory for the endpoint. For example, `"sql/GET-v1.sql"`. |
+| `type`        | String | The type of the endpoint, which can only be `"sql_endpoint"`.          |
+| `return_type` | String | The response format of the endpoint, which can only be `"json"`.             |
 
 ### SQL file configuration
 
-The SQL file of an endpoint specifies the SQL statements to query data through the endpoint. You can find the endpoint SQL files in the `http_endpoints/sql/` directory. For each endpoint, there should be a corresponding SQL file.
+The SQL file of an endpoint specifies the SQL statements to query data through the endpoint. You can find the endpoint SQL files of a Data App in the `http_endpoints/sql/` directory. For each endpoint, there should be a corresponding SQL file.
 
-The name of a SQL file is in the `<method>-<endpoint-name>.sql` format, where `<method>` and `<endpoint-name>` must match the endpoint configuration in [`http_endpoints/config.json`](#endpoint-configuration).
+The name of a SQL file is in the `<method>-<endpoint-name>.sql` format, where `<method>` and `<endpoint-name>` must match the `method` and `name` configuration in [`http_endpoints/config.json`](#endpoint-configuration).
 
 In the SQL file, you can write statements such as table join queries, complex queries, and aggregate functions. The following is an example SQL file.
 
@@ -191,11 +193,14 @@ WHERE
 
 When writing a SQL file, pay attention to the following:
 
-- In the beginning of the SQL file, you need to specify the database in the SQL statements. For example, `USE database_name;`.
+- At the beginning of the SQL file, you need to specify the database in the SQL statements. For example, `USE database_name;`.
 
-- To define a parameter of the endpoint, you can insert it as a variable placeholder like `${variable-name}` to the SQL statement. In the preceding example, `${country}` is used as an parameter of the endpoint. With this parameter, you can specify a desired country to query in your endpoint curl command. Make sure that the parameter name in the SQL file match the parameter name configured in `http_endpoints/config.json`.
+- To define a parameter of the endpoint, you can insert it as a variable placeholder like `${variable-name}` to the SQL statement.
 
-> **Note:**
->
-> - The parameter name is case-sensitive.
-> - The parameter cannot be a table name or column name.
+    In the preceding example, `${country}` is used as a parameter of the endpoint. With this parameter, you can specify a desired country to query in your endpoint curl command.
+
+    > **Note:**
+    >
+    > - The parameter name is case-sensitive.
+    > - The parameter cannot be a table name or column name.
+    > - The parameter name in the SQL file match the parameter name configured in [`http_endpoints/config.json`](#endpoint-configuration).

@@ -173,7 +173,6 @@ To deploy an endpoint, perform the following steps:
 
     On the right pane of the endpoint details page, you can click the **Deployments** tab to view the deployed history.
 
-
 ## Call an endpoint
 
 To call an endpoint, you can send an HTTPS request to either an undeployed draft version or a deployed online version of the endpoint.
