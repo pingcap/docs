@@ -25,6 +25,7 @@ To create a changefeed, refer to the tutorials:
 - [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md) (Beta)
 - [Sink to MySQL](/tidb-cloud/changefeed-sink-to-mysql.md)
 - [Sink to TiDB Cloud](/tidb-cloud/changefeed-sink-to-tidb-cloud.md)
+- [Sink to Cloud Storage](/tidb-cloud/changefeed-sink-to-tidb-cloud.md)
 
 ## Query Changefeed RCUs
 
