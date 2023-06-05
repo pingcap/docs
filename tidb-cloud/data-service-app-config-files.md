@@ -5,7 +5,7 @@ summary: This document describes the configuration files of Data App in TiDB Clo
 
 # Data App Configuration Files
 
-This document describes the configuration files of [Data App](/tidb-cloud/tidb-cloud-glossary.md#data-app) in TiDB Cloud.
+This document describes the configuration files of a [Data App](/tidb-cloud/tidb-cloud-glossary.md#data-app) in TiDB Cloud.
 
 If you have [connected your Data App to GitHub](/tidb-cloud/data-service-manage-github-connection.md), you can find the configuration files of your Data App in your specified directory on GitHub as follows:
 
@@ -34,15 +34,15 @@ The data source of a Data App comes from its linked TiDB clusters. You can find 
 
 For each Data App, you can link to one or multiple TiDB Serverless clusters.
 
-The following is an example configuration of `cluster.json`. In this example, there are linked clusters for this Data App.
+The following is an example configuration of `cluster.json`. In this example, there are two linked clusters for this Data App.
 
 ```json
 [
   {
-    "cluster_id": <Cluster ID>
+    "cluster_id": <Cluster ID1>
   },
   {
-    "cluster_id": <Cluster ID>
+    "cluster_id": <Cluster ID2>
   }
 ]
 ```
@@ -51,7 +51,7 @@ The field description is as follows:
 
 | Field   | Type    | Description  |
 |---------|---------|--------------|
-| `cluster_id` | Integer | The ID of your TiDB Serverless cluster. You can get it from the URL of your cluster. For example, if your cluster URL is `https://tidbcloud.com/console/clusters/1379111944646164111/overview`, your cluster ID is `1379111944646164111`. |
+| `cluster_id` | Integer | The ID of your TiDB Serverless cluster. You can get it from the URL of your cluster. For example, if your cluster URL is `https://tidbcloud.com/console/clusters/1234567891234567890/overview`, your cluster ID is `1234567891234567890`. |
 
 ## Data App configuration
 
@@ -76,9 +76,9 @@ The description of each field is as follows:
 
 | Field      | Type   | Description        |
 |------------|--------|--------------------|
-| `app_id`   | string | The Data App ID. Do not change this field unless your `dataapp_config.json` file is copied from another Data App and you want to update it to the ID of your current Data App. Otherwise, the deployment triggered by this modification will fail. |
-| `app_name` | string | The Data App name. |
-| `app_type` | string | The Data App type, which can only be `dataapi`. |
+| `app_id`   | String | The Data App ID. Do not change this field unless your `dataapp_config.json` file is copied from another Data App and you want to update it to the ID of your current Data App. Otherwise, the deployment triggered by this modification will fail. |
+| `app_name` | String | The Data App name. |
+| `app_type` | String | The Data App type, which can only be `"dataapi"`. |
 
 ## HTTP endpoint configuration
 
@@ -108,11 +108,11 @@ The following is an example configuration of `config.json`. In this example, the
     "method": "<HTTP method1>",
     "endpoint": "<Endpoint path1>",
     "data_source": {
-      "cluster_id": <Cluster ID>
+      "cluster_id": <Cluster ID1>
     },
     "params": [],
     "settings": {
-      "timeout": <Endpoint Timeout>,
+      "timeout": <Endpoint timeout>,
       "row_limit": <Maximum rows>
     },
     "sql_file": "<SQL file directory1>",
@@ -125,7 +125,7 @@ The following is an example configuration of `config.json`. In this example, the
     "method": "<HTTP method2>",
     "endpoint": "<Endpoint path2>",
     "data_source": {
-      "cluster_id": <Cluster ID>
+      "cluster_id": <Cluster ID2>
     },
     "params": [
       {
@@ -136,7 +136,7 @@ The following is an example configuration of `config.json`. In this example, the
       }
     ],
     "settings": {
-      "timeout": <Endpoint Timeout>,
+      "timeout": <Endpoint timeout>,
       "row_limit": <Maximum rows>
     },
     "sql_file": "<SQL file directory2>",
@@ -151,13 +151,13 @@ The description of each field is as follows:
 | Field         | Type   | Description |
 |---------------|--------|-------------|
 | `name`        | String | The endpoint name.            |
-| `description` | String | The endpoint description (optional).          |
+| `description` | String | (Optional) The endpoint description.          |
 | `method`      | String | The HTTP method of the endpoint. You can use `GET` to query data or use `POST` to insert data. |
 | `endpoint`    | String | The unique path of the endpoint in the Data App. Only letters, numbers, underscores (`_`), and slashes (`/`) are allowed in the path, which must start with a slash (`/`). For example, `/my_endpoint/get_id`. The length of the path must be less than 64 characters.|
-| `cluster_id`  | String | The ID of the TiDB cluster for your endpoint. You can get it from the URL of your TiDB cluster. For example, if your cluster URL is `https://tidbcloud.com/console/clusters/1379111944646164111/overview`, the cluster ID is `1379111944646164111`. |
+| `cluster_id`  | String | The ID of the TiDB cluster for your endpoint. You can get it from the URL of your TiDB cluster. For example, if your cluster URL is `https://tidbcloud.com/console/clusters/1234567891234567890/overview`, the cluster ID is `1234567891234567890`. |
 | `params` | Array | The parameters used in the endpoint. By defining parameters, you can dynamically replace the parameter value in your queries through the endpoint. In `params`, you can define one or multiple parameters. For each parameter, you need to define its `name`, `type`, `required`, and `default` fields. If your endpoint does not need any parameters. You can leave `params` empty such as `"params": []`. |
 | `params.name` | String | The name of the parameter. The name can only include letters, digits, and underscores (`_`) and must start with a letter or an underscore (`_`).          |
-| `params.type` | String | The data type of the parameter. Supported values are `string`, `number`, and `boolean`. When using a `string` type parameter, you do not need to add quotation marks (`'` or `"`). For example, `foo` is valid for the `STRING` type and is processed as `"foo"`, whereas `"foo"` is processed as `"\"foo\""`.|
+| `params.type` | String | The data type of the parameter. Supported values are `string`, `number`, and `boolean`. When using a `string` type parameter, you do not need to add quotation marks (`'` or `"`). For example, `foo` is valid for the `string` type and is processed as `"foo"`, whereas `"foo"` is processed as `"\"foo\""`.|
 | `params.required` | Integer | Specifies whether the parameter is required in the request. Supported values are `0` (not required) and `1` (required).  The default value is `0`.  |
 | `params.default` | String | The default value of the parameter. Make sure that the value matches the type of parameter you specified. Otherwise, the endpoint returns an error. |
 | `timeout`     | Integer | The timeout for the endpoint in milliseconds, which is `5000` by default. You can set it to an integer from `1` to `30000`.  |
@@ -188,7 +188,6 @@ FROM
   global_fortune_500_2018_2022
 WHERE
   country = ${country};
-
 ```
 
 When writing a SQL file, pay attention to the following:
