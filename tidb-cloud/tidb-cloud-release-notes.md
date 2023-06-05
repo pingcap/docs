@@ -14,16 +14,16 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     By [connecting your Data App to GitHub](/tidb-cloud/data-service-manage-github-connection.md), you can manage all configurations of the Data App as [code files](/tidb-cloud/data-service-app-config-files.md) on Github, which integrates TiDB Cloud Data Service seamlessly with your system architecture and DevOps process.
 
-    With this feature, you can easily accomplish the following tasks, which improves the CI/CD experience of building Data Apps:
+    With this feature, you can easily accomplish the following tasks, which improves the CI/CD experience of developing Data Apps:
 
-    - Automatically deploy Data App changes with GitHub
-    - Configure CI/CD pipelines of your Data App changes on GitHub with version control
-    - Disconnect from a connected GitHub repository
+    - Automatically deploy Data App changes with GitHub.
+    - Configure CI/CD pipelines of your Data App changes on GitHub with version control.
+    - Disconnect from a connected GitHub repository.
     - Review endpoint changes before the deployment.
     - View deployment history and take necessary actions in the event of a failure.
     - Re-deploy a commit to roll back to an earlier deployment.
 
-    For more information, see [Deploy Data App Automatically with GitHub](/tidb-cloud/data-service-manage-github-connection.md).
+  For more information, see [Deploy Data App automatically with GitHub](/tidb-cloud/data-service-manage-github-connection.md).
 
 ## June 2, 2023
 
