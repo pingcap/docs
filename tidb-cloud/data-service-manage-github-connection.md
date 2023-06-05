@@ -5,13 +5,13 @@ summary: Learn how to deploy your Data App automatically with GitHub.
 
 # Deploy Data App Automatically with GitHub
 
-TiDB Cloud provides a Configuration as Code (CaC) approach to represent your whole Data App configuration as code using the JSON syntax.
+TiDB Cloud provides a Configuration as Code (CaC) approach to represent your entire Data App configurations as code using the JSON syntax.
 
 By connecting your Data App to GitHub, TiDB Cloud can use the CaC approach and push your Data App configurations as [configuration files](/tidb-cloud/data-service-app-config-files.md) to your preferred GitHub repository and branch.
 
 If automatic deployment is enabled for your GitHub connection, you can also modify your Data App by updating its configuration files on GitHub. After you commit the configuration file changes to GitHub, the new configurations will be deployed in TiDB Cloud automatically.
 
-In this document, you will learn how to deploy your Data App automatically with GitHub and how to manage the GitHub connection.
+This document introduces how to deploy your Data App automatically with GitHub and how to manage the GitHub connection.
 
 ## Before you begin
 
@@ -22,13 +22,13 @@ Before you connect a Data App to GitHub, make sure that you have the following:
 
 > **Note:**
 >
-> The GitHub repository is used to store [Data App configuration files](/tidb-cloud/data-service-app-config-files.md) after you connect a Data App to it. If the information (such as cluster ID and endpoint URL) in the configuration files is sensitive, make sure to use a private repository instead of a public one.
+> The GitHub repository is used to store [Data App configuration files](/tidb-cloud/data-service-app-config-files.md) after you connect a Data App to it. If the information (such as the cluster ID and endpoint URL) in the configuration files is sensitive, make sure to use a private repository instead of a public one.
 
 ## Step 1. Connect your Data App to GitHub
 
 You can connect your Data App to GitHub when you create the App. For more information, see [Create a Data App](/tidb-cloud/data-service-manage-data-app.md).
 
-If you did not enable the GitHub connection during the app creation, you can still enable it as follows:
+If you did not enable the GitHub connection during the App creation, you can still enable it as follows:
 
 1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
 2. In the left pane, click the name of your target Data App to view its details.
@@ -41,7 +41,7 @@ If you did not enable the GitHub connection during the app creation, you can sti
 
         > **Note:**
         >
-        > - The directory must start with a slash. For example, `/mydata`. If the directory you specified does not exist in the target repository and branch, it will be created automatically.
+        > - The directory must start with a slash (`/`). For example, `/mydata`. If the directory you specified does not exist in the target repository and branch, it will be created automatically.
         > - The combination of repository, branch, and directory identifies the path of the configuration files, which must be unique among Data Apps. If your specified path is already used by another Data App, you need to specify a new path instead. Otherwise, the endpoints configured in the TiDB Cloud console for the current Data App will overwrite the files in your specified path.
         > - If your specified path contains configuration files copied from another Data App and you want to import these files to the current Data App, see [Import configurations of an existing Data App](#import-configurations-of-an-existing-data-app).
 
@@ -58,7 +58,7 @@ If GitHub connection is enabled when you [create a Data App](/tidb-cloud/data-se
 
 If GitHub connection for your Data App is enabled after the App creation, you need to perform a deployment operation to synchronize the Data App configurations to GitHub. For example, you can click the **Deployments** tab, and then re-deploy a deployment for this Data App.
 
-After the deployment operation, check your specified GitHub directory. You will find that the Data App configuration files have been committed to the directory by `tidb-cloud-data-service`, which means that your Data App is connected to GitHub successfully.
+After the deployment operation, check your specified GitHub directory. You will find that the Data App configuration files have been committed to the directory by `tidb-cloud-data-service`, which means that your Data App is connected to GitHub successfully. The directory structure is as follows:
 
 ```
 ├── <Your Data App directory on GitHub>
@@ -91,9 +91,9 @@ When updating the configuration files, pay attention to the following:
 
 | File directory  | Notes |
 | ---------|---------|
-| `data_source/cluster.json`     | When updating this file, make sure that the linked clusters are Serverless clusters and that you have access to the clusters. You can get the ID of a cluster from the cluster URL. For example, if the cluster URL is `https://tidbcloud.com/console/clusters/1379661944646164631/overview`, the cluster ID is `1379661944646164631`. |
+| `data_source/cluster.json`     | When updating this file, make sure that the linked clusters are TiDB Serverless clusters and that you have access to the clusters. You can get the cluster ID from the cluster URL. For example, if the cluster URL is `https://tidbcloud.com/console/clusters/1234567891234567890/overview`, the cluster ID is `1234567891234567890`. |
 | `http_endpoints/config.json`     | When modifying the endpoints, make sure that you follow the rules described in [HTTP endpoint configuration](/tidb-cloud/data-service-app-config-files.md#http-endpoint-configuration).   |
-| `http_endpoints/sql/method-<endpoint path>.sql`| To add or remove the SQL files in the `http_endpoints/sql` directory, you need to update the corresponding endpoint configurations as well. |
+| `http_endpoints/sql/method-<endpoint-path>.sql`| To add or remove SQL files in the `http_endpoints/sql` directory, you need to update the corresponding endpoint configurations as well. |
 | `datapp_config.json` | Do not change the `app_id` field in this file unless your `dataapp_config.json` file is copied from another Data App and you want to update it to the ID of your current Data App. Otherwise, the deployment triggered by this modification will fail. |
 
 For more information about the field configuration in these files, see [Data App configuration files](/tidb-cloud/data-service-app-config-files.md).
@@ -138,7 +138,7 @@ If you want to edit the GitHub connection for your Data App (such as switching t
 
     > **Note:**
     >
-    > - The directory must start with a slash. For example, `/mydata`. If the directory you specified does not exist in the target repository and branch, it will be created automatically.
+    > - The directory must start with a slash (`/`). For example, `/mydata`. If the directory you specified does not exist in the target repository and branch, it will be created automatically.
     > - The combination of repository, branch, and directory identifies the path of the configuration files, which must be unique among Data Apps. If your specified path is already used by another Data App, you need to specify a new path instead. Otherwise, the endpoints configured in the TiDB Cloud console for the current Data App will overwrite the files in your specified path.
     > - If your specified path contains configuration files copied from another Data App and you want to import these files to the current Data App, see [Import configurations of an existing Data App](#import-configurations-of-an-existing-data-app).
 

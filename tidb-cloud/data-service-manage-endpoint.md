@@ -36,7 +36,7 @@ For each endpoint, you can write SQL statements to execute on a TiDB cluster, de
 
 > **Note:**
 >
-> If you have connected your Data App to GitHub with automatic deployment enabled, you can also update the endpoint configurations using GitHub. The changes you made in GitHub will be deployed in TiDB Cloud automatically. For more information, see [Deploy Automatically with GitHub](/tidb-cloud/data-service-manage-github-connection.md).
+> If you have connected your Data App to GitHub with automatic deployment enabled, you can also update the endpoint configurations using GitHub. Any changes you made in GitHub will be deployed in TiDB Cloud automatically. For more information, see [Deploy automatically with GitHub](/tidb-cloud/data-service-manage-github-connection.md).
 
 ### Configure properties
 
@@ -161,7 +161,7 @@ After testing the endpoint, you can see the response as JSON at the bottom of th
 
 > **Note:**
 >
-> If you have connected your Data App to GitHub with automatic deployment enabled, the Data App changes you made in GitHub will be deployed in TiDB Cloud automatically. For more information, see [Deploy Automatically with GitHub](/tidb-cloud/data-service-manage-github-connection.md).
+> If you have connected your Data App to GitHub with automatic deployment enabled, any Data App changes you made in GitHub will be deployed in TiDB Cloud automatically. For more information, see [Deploy automatically with GitHub](/tidb-cloud/data-service-manage-github-connection.md).
 
 To deploy an endpoint, perform the following steps:
 
