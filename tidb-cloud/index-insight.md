@@ -73,22 +73,18 @@ To implement the recommended indexes, follow these steps:
 3. Use appropriate database management tools to create the recommended indexes on the relevant tables.
 4. Monitor the performance after implementing the indexes to assess the improvements.
 
-## Best Practices
+## Best practices
 
-Consider the following best practices when using the Index Insight feature:
+This section introduces some best practices for using the Index Insight feature.
 
-### Regularly Trigger Index Insight
+### Regularly trigger Index Insight
 
-To keep your indexes optimized, it is recommended to trigger the Index Insight capability periodically or whenever there are significant changes to your queries or database schema.
+To maintain optimized indexes, it is recommended to trigger the Index Insight feature periodically or whenever substantial changes occur in your queries or database schema.
 
-### Analyze Impact Before Implementing Indexes
+### Analyze impact before implementing indexes
 
 Before implementing the recommended indexes, analyze the potential impact on query execution plans, disk space, and any trade-offs involved. Prioritize implementing indexes that provide the most significant performance improvements.
 
-### Monitor Performance
+### Monitor performance
 
-Continuously monitor query performance after implementing the recommended indexes to validate the improvements and make further adjustments if necessary.
-
-## Conclusion
-
-By leveraging the Index Insight feature in TiDB Cloud, you can optimize query performance and enhance overall application efficiency. Follow the steps outlined in this user guide to enable the feature, review index recommendations, and implement them effectively. Regularly utilizing the Index Insight feature will help you maintain optimal query performance in your TiDB Cloud environment.
+Regularly monitor query performance after implementing the recommended indexes. This helps you confirm the improvements and make further adjustments if necessary.
