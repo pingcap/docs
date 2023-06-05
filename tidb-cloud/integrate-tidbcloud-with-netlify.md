@@ -28,9 +28,9 @@ One TiDB Cloud cluster can connect to multiple Netlify sites.
 
 ### All IP addresses allowed for traffic filter in TiDB Cloud
 
-For Dedicated Tier clusters, make sure that the traffic filter of the cluster allows all IP addresses (set to `0.0.0.0/0`) for connection. This is because Netlify deployments use dynamic IP addresses.
+For TiDB Dedicated clusters, make sure that the traffic filter of the cluster allows all IP addresses (set to `0.0.0.0/0`) for connection. This is because Netlify deployments use dynamic IP addresses.
 
-Serverless Tier clusters allow all IP addresses for connection by default, so you do not need to configure any traffic filter.
+TiDB Serverless clusters allow all IP addresses for connection by default, so you do not need to configure any traffic filter.
 
 ## Step 1. Get the example project and the connection string
 
@@ -49,9 +49,9 @@ To help you get started quickly, TiDB Cloud provides a fullstack example app in 
 
 ### Get the TiDB Cloud connection string
 
-For a Serverless Tier cluster, you can get the connection string either from [TiDB Cloud CLI](/tidb-cloud/cli-reference.md) or from [TiDB Cloud console](https://tidbcloud.com/). 
+For a TiDB Serverless cluster, you can get the connection string either from [TiDB Cloud CLI](/tidb-cloud/cli-reference.md) or from [TiDB Cloud console](https://tidbcloud.com/).
 
-For a Dedicated Tier cluster, you can get the connection string only from the TiDB Cloud console.
+For a TiDB Dedicated cluster, you can get the connection string only from the TiDB Cloud console.
 
 <SimpleTab>
 <div label="TiDB Cloud CLI">

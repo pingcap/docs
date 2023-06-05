@@ -15,7 +15,7 @@ TiDB Cloud provides [Slow Query](#slow-query), [Statement Analysis](#statement-a
 
 > **Note:**
 >
-> Currently, **Key Visualizer** is unavailable for [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta).
+> Currently, **Key Visualizer** is unavailable for [TiDB Serverless clusters](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta).
 
 ## Slow Query
 
@@ -59,7 +59,7 @@ For more information, see [Statement Execution Details in TiDB Dashboard](https:
 
 > **Note:**
 >
-> Key Visualizer is only available for [Dedicated Tier clusters](/tidb-cloud/select-cluster-tier.md#dedicated-tier).
+> Key Visualizer is only available for [TiDB Dedicated clusters](/tidb-cloud/select-cluster-tier.md#tidb-dedicated).
 
 To view the key analytics, perform the following steps:
 

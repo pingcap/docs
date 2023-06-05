@@ -29,7 +29,7 @@ To disable console audit logging, take the following steps:
 
 ## View console audit logs
 
-You can only view the console audit logs of your organization. 
+You can only view the console audit logs of your organization.
 
 > **Note:**
 >
@@ -37,8 +37,8 @@ You can only view the console audit logs of your organization.
 > - If it has been more than 90 days since console audit logging was disabled, you cannot see any logs.
 
 1. In the upper-right corner of the [TiDB Cloud console](https://tidbcloud.com/), click <MDSvgIcon name="icon-top-organization" /> **Organization** > **Console Audit Logging**.
-2. To get a specific part of audit logs, you can filter the event type, operation status, and time range. 
-3. (Optional) To filter more fields, click **Advanced filter**, add more filters, and then click **Apply**. 
+2. To get a specific part of audit logs, you can filter the event type, operation status, and time range.
+3. (Optional) To filter more fields, click **Advanced filter**, add more filters, and then click **Apply**.
 4. Click the row of a log to view its detailed information in the right pane.
 
 ## Export console audit logs
@@ -47,7 +47,7 @@ To export the console audit logs of your organization, take the following step:
 
 1. In the upper-right corner of the [TiDB Cloud console](https://tidbcloud.com/), click <MDSvgIcon name="icon-top-organization" /> **Organization** > **Console Audit Logging**.
 2. (Optional) If you need to export a specific part of console audit logs, you can filter through various conditions. Otherwise, skip this step.
-3. Click **Export** and select the desired export format in JSON or CSV. 
+3. Click **Export** and select the desired export format in JSON or CSV.
 
 ## Console audit log storage policy
 
@@ -64,7 +64,7 @@ The console audit logs record various user activities on the TiDB Cloud console 
 
 > **Note:**
 >
-> Currently, most event types on the TiDB Cloud console can be audited, and you can find them in the following table. For the remaining event types that are not covered yet, TiDB Cloud will continuously work on including them as well. 
+> Currently, most event types on the TiDB Cloud console can be audited, and you can find them in the following table. For the remaining event types that are not covered yet, TiDB Cloud will continuously work on including them as well.
 
 | Console audit event type | Description |
 |---|---|
@@ -147,7 +147,7 @@ The console audit logs record various user activities on the TiDB Cloud console 
 | BindSupportPlan | Bind a support plan |
 | CancelSupportPlan | Cancel a support plan |
 | UpdateOrganizationName | Update the organization name |
-| SetSpendLimit | Edit the spend limit of a Serverless Tier cluster |
+| SetSpendLimit | Edit the spend limit of a TiDB Serverless cluster |
 | UpdateMaintenanceWindow    | Modify maintenance window start time              |
 | DeferMaintenanceTask       | Defer a maintenance task                          |
 

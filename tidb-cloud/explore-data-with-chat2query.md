@@ -13,7 +13,7 @@ TiDB Cloud also provides the Chat2Query API, which is a RESTful interface. For m
 
 > **Note:**
 >
-> Chat2Query is only available for [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters.
+> Chat2Query is only available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta) clusters.
 
 ## Use cases
 

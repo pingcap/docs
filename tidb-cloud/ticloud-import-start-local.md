@@ -5,7 +5,7 @@ summary: The reference of `ticloud import start local`.
 
 # ticloud import start local
 
-Import a local file to a TiDB Cloud [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) cluster:
+Import a local file to a [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta) cluster:
 
 ```shell
 ticloud import start local <file-path> [flags]

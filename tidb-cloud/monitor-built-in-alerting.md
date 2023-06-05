@@ -11,7 +11,7 @@ This document describes how to do these operations and provides the TiDB Cloud b
 
 > **Note:**
 >
-> Currently, the alert feature is only available for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters.
+> Currently, the alert feature is only available for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters.
 
 ## View alerts
 
@@ -25,16 +25,16 @@ In TiDB Cloud, you can view both active and closed alerts on the Alerts page.
 
 2. Click the name of the target cluster. The cluster overview page is displayed.
 3. Click **Alerts** in the left navigation pane.
-4. The **Alerts** page displays the active alerts by default. You can view the information of each active alert such as the alert name, trigger time, and duration. 
+4. The **Alerts** page displays the active alerts by default. You can view the information of each active alert such as the alert name, trigger time, and duration.
 5. If you also want to view the closed alerts, just click the **Status** drop-down list and select **Closed** or **All**.
 
 ## Edit alert rules
 
 In TiDB Cloud, you can edit the alert rules by disabling or enabling the alerts or updating the alert threshold.
 
-1. On the **Alerts** page, click **Edit Rules**. 
+1. On the **Alerts** page, click **Edit Rules**.
 2. Disable or enable alert rules as needed.
-3. Click **Edit** to update the threshold of an alert rule. 
+3. Click **Edit** to update the threshold of an alert rule.
 
     > **Tip:**
     >
@@ -44,12 +44,12 @@ In TiDB Cloud, you can edit the alert rules by disabling or enabling the alerts 
 
 To get alert notification emails of clusters in your project, take the following steps:
 
-1. On the **Alerts** page , click **Subscribe Alerts**. 
-2. Enter your email address, and then click **Subscribe**. 
+1. On the **Alerts** page , click **Subscribe Alerts**.
+2. Enter your email address, and then click **Subscribe**.
 
     > **Tip:**
     >
-    > The alert subscription is for all alerts in the current project. If you have multiple clusters in the project, you just need to subscribe once. 
+    > The alert subscription is for all alerts in the current project. If you have multiple clusters in the project, you just need to subscribe once.
 
 Alternatively, you can also add the subscription from the **Alert Subscription** page as follows:
 

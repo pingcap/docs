@@ -17,26 +17,26 @@ This tutorial guides you through signing up and creating a TiDB cluster.
 
 2. [Log in](https://tidbcloud.com/) to your TiDB Cloud account.
 
-## Step 2. Select a cluster tier
+## Step 2. Select a cluster option
 
-TiDB Cloud provides the following two cluster tier options. Before creating a TiDB cluster, consider which option suits your need better:
+TiDB Cloud provides the following two options. Before creating a TiDB cluster, consider which option suits your need better:
 
-- Serverless Tier (Beta)
+- TiDB Serverless (Beta)
 
-    The TiDB Cloud Serverless Tier is a fully managed service of TiDB. It is still in the beta phase and cannot be used in production. However, you can use Serverless Tier clusters for non-production workloads such as prototype applications, hackathons, academic courses, or to provide a temporary data service for your datasets.
+    TiDB Serverless is a fully managed service of TiDB. It is still in the beta phase and cannot be used in production. However, you can use TiDB Serverless clusters for non-production workloads such as prototype applications, hackathons, academic courses, or to provide a temporary data service for your datasets.
 
-- Dedicated Tier
+- TiDB Dedicated
 
-    The TiDB Cloud Dedicated Tier is dedicated for production use with the benefits of cross-zone high availability, horizontal scaling, and [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing).
+    TiDB Dedicated is dedicated for production use with the benefits of cross-zone high availability, horizontal scaling, and [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing).
 
-For more information about the two options, see [Select Your Cluster Tier](/tidb-cloud/select-cluster-tier.md).
+For more information about the two options, see [Select Your Cluster Option](/tidb-cloud/select-cluster-tier.md).
 
 ## Step 3. Use your default project or create a new project
 
 If you are an organization owner, once you log in to TiDB Cloud, you have a default project. For more information about projects, see [Organizations and projects](/tidb-cloud/manage-user-access.md#organizations-and-projects).
 
 - For free trial users, you can rename the default project if needed.
-- For Dedicated Tier users, you can either rename the default project or create a new project if needed.
+- For TiDB Dedicated users, you can either rename the default project or create a new project if needed.
 
 1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
 
@@ -64,9 +64,9 @@ If you are a project member, you can access only the specific projects to which 
 ## Step 4. Create a TiDB cluster
 
 <SimpleTab>
-<div label="Serverless Tier">
+<div label="TiDB Serverless">
 
-To create a Serverless Tier cluster, take the following steps:
+To create a TiDB Serverless cluster, take the following steps:
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page.
 
@@ -74,19 +74,19 @@ To create a Serverless Tier cluster, take the following steps:
 
 3. On the **Create Cluster** page, **Serverless** is selected by default.
 
-4. The cloud provider of Serverless Tier is AWS. You can select an AWS region where you want to host your cluster.
+4. The cloud provider of TiDB Serverless is AWS. You can select an AWS region where you want to host your cluster.
 
 5. (Optional) Change the spend limit if you plan to use more storage and compute resources than the [free quota](/tidb-cloud/select-cluster-tier.md#usage-quota). If you have not added a payment method, you need to add a credit card after editing the limit.
 
     > **Note:**
     >
-    > For each organization in TiDB Cloud, you can create a maximum of five Serverless Tier clusters by default. To create more Serverless Tier clusters, you need to add a credit card and set a [spend limit](/tidb-cloud/tidb-cloud-glossary.md#spend-limit) for the usage.
+    > For each organization in TiDB Cloud, you can create a maximum of five TiDB Serverless clusters by default. To create more TiDB Serverless clusters, you need to add a credit card and set a [spend limit](/tidb-cloud/tidb-cloud-glossary.md#spend-limit) for the usage.
 
 6. Update the default cluster name if necessary, and then click **Create**.
 
     The cluster creation process starts and your TiDB Cloud cluster will be created in approximately 30 seconds.
 
-7. After the cluster is created, follow the instructions in [Connect via Standard Connection](/tidb-cloud/connect-via-standard-connection.md#serverless-tier) to create a password for your cluster.
+7. After the cluster is created, follow the instructions in [Connect via Standard Connection](/tidb-cloud/connect-via-standard-connection.md#tidb-serverless) to create a password for your cluster.
 
     > **Note:**
     >
@@ -94,9 +94,9 @@ To create a Serverless Tier cluster, take the following steps:
 
 </div>
 
-<div label="Dedicated Tier">
+<div label="TiDB Dedicated">
 
-To create a Dedicated Tier cluster, take the following steps:
+To create a TiDB Dedicated cluster, take the following steps:
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
 

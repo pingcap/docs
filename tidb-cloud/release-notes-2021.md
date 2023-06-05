@@ -40,7 +40,7 @@ Bug fixes:
 
 ## November 8, 2021
 
-* Launch [Developer Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta), which offers you a one-year free trial of TiDB Cloud
+* Launch [Developer Tier](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta), which offers you a one-year free trial of TiDB Cloud
 
     Each Developer Tier cluster is a full-featured TiDB cluster and comes with the following:
 

@@ -13,7 +13,7 @@ ticloud connect [flags]
 
 > **Note:**
 >
-> - If you are prompted about whether to use the default user, you can choose `Y` to use the default root user or choose `n` to specify another user. For [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters, the name of the default root user has a [prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix) such as `3pTAoNNegb47Uc8`.
+> - If you are prompted about whether to use the default user, you can choose `Y` to use the default root user or choose `n` to specify another user. For [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta) clusters, the name of the default root user has a [prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix) such as `3pTAoNNegb47Uc8`.
 > - The connection forces the [ANSI SQL mode](https://dev.mysql.com/doc/refman/8.0/en/sql-mode.html#sqlmode_ansi) for the session. To exit the session, enter `\q`.
 
 ## Examples
