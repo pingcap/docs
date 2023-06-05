@@ -8,6 +8,25 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2023.
 
+## June 5, 2023
+
+- Support connecting your [Data App](/tidb-cloud/tidb-cloud-glossary.md#data-app) to GitHub.
+
+    TiDB Cloud provides a Configuration as Code (CaC) approach to represent your whole Data App configuration as code using the JSON syntax.
+
+    By connecting your Data App to GitHub, TiDB Cloud can use the CaC approach and push your Data App configurations as [configuration files](/tidb-cloud/data-service-app-config-files.md) to your preferred GitHub repository and branch.
+
+    With this feature, you can complete the following tasks easily, which improves the CI/CD experience of building Data Apps:
+
+    - Automatically deploy Data App changes with GitHub
+    - Configure CI/CD pipelines of your Data App changes on GitHub with version control
+    - Disconnect from a connected GitHub repository
+    - Review endpoint changes before the deployment.
+    - View deployment history and take necessary actions in the event of a failure.
+    - Re-deploy a commit to roll back to an earlier deployment.
+
+    For more information, see [Deploy Data App Automatically with GitHub](/tidb-cloud/data-service-manage-github-connection.md)
+
 ## June 2, 2023
 
 **General changes**
