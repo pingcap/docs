@@ -59,6 +59,7 @@ If you encounter problems when connecting to TiDB using the tools listed in this
          </td>
          <td><a href="/tidb/dev/dev-guide-sample-application-java-jdbc">Build a Simple CRUD App with TiDB and JDBC</a></td>
       </tr>
+   </tbody>
 </table>
 
 ## ORM
