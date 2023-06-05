@@ -108,12 +108,12 @@ After [modifying your Data App endpoints](/tidb-cloud/data-service-manage-endpoi
 2. Depending on your review, do one of the following:
 
     - If you still want to make further changes based on the current draft, close this dialog and make the changes.
-    - If you want to revert the current changes to the last deployment, click **Discard Changes**. Then, click **Discard Changes** in the displayed dialog for confirmation.
+    - If you want to revert the current changes to the last deployment, click **Discard Draft**.
     - If the current changes look fine, write a change description (optional), and then click **Deploy and Push to GitHub**. The deployment status will be displayed in the top banner.
 
 > **Note:**
 >
-> If automatic deployment is disabled and you prefer to skip the review process, you can disable **Review draft** as instructed in [Configure Data App deployment](/tidb-cloud/data-service-manage-data-app.md#manage-deployments). After **Review draft** is disabled, the endpoint changes made in the TiDB Cloud console are pushed to GitHub immediately.
+> If automatic deployment is disabled and you prefer to skip the review process, you can disable **Review Draft** as instructed in [Configure Data App deployment](/tidb-cloud/data-service-manage-data-app.md#manage-deployments). After **Review Draft** is disabled, the endpoint changes made in the TiDB Cloud console are pushed to GitHub immediately.
 
 ## Import configurations of an existing Data App
 
