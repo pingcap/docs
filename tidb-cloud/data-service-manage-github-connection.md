@@ -48,7 +48,7 @@ If you did not enable the GitHub connection during the App creation, you can sti
     4. To allow Data App changes made in either TiDB Cloud console or GitHub are synchronized with each other, enable **Configure Auto Sync & Deployment**.
 
         - When it is enabled, the changes made in your specified GitHub directory can be automatically deployed in TiDB Cloud, and the changes made in the TiDB Cloud console can be pushed to GitHub as well. You can find the corresponding deployment and commit information in the Data App deployment history.
-        - When it is disabled, the changes made in your specified GitHub directory will **NOT** be deployed in TiDB Cloud, and the changes made in in the TiDB Cloud console will **NOT** be pushed to GitHub either.
+        - When it is disabled, the changes made in your specified GitHub directory will **NOT** be deployed in TiDB Cloud, and the changes made in the TiDB Cloud console will **NOT** be pushed to GitHub either.
 
 5. Click **Confirm Connect**.
 
@@ -119,7 +119,7 @@ To import configurations of an existing Data App to a new Data App, take the fol
 1. Copy configuration files of the existing Data App to a new branch or directory on GitHub.
 2. On the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project, [create a new Data App](/tidb-cloud/data-service-manage-data-app.md#create-a-data-app) without connecting to GitHub.
 3. [Connect your new Data App to GitHub](#step-1-connect-your-data-app-to-github) with **Auto Sync & Deployment** enabled. When you specify the target repository, branch, and directory for your new Data App, use your new path with the copied configuration files.
-4. Get the ID and name of your new Data App. You can click the name of your new Data App in the left pane and get the ID and name in the **Data App Properties** area of the right pane.
+4. Get the ID and name of your new Data App. You can click the name of your new Data App in the left pane and get the App ID and name in the **Data App Properties** area of the right pane.
 5. In your new path on GitHub, update the `app_id` and `app_name` in the `datapp_config.json` file to the ID and name you get, and then push the changes.
 
 After the file changes are pushed to GitHub, TiDB Cloud will automatically deploy your new Data App with the latest changes. You can view the deployment status and commit information in the deployment history.
@@ -142,7 +142,7 @@ If you want to edit the GitHub connection for your Data App (such as switching t
 5. To allow Data App changes made in either TiDB Cloud console or GitHub are synchronized with each other, enable **Configure Auto Sync & Deployment**.
 
     - When it is enabled, the changes made in your specified GitHub directory can be automatically deployed in TiDB Cloud, and the changes made in the TiDB Cloud console can be pushed to GitHub as well. You can find the corresponding deployment and commit information in the Data App deployment history.
-    - When it is disabled, the changes made in your specified GitHub directory will **NOT** be deployed in TiDB Cloud, and the changes made in in the TiDB Cloud console will **NOT** be pushed to GitHub either.
+    - When it is disabled, the changes made in your specified GitHub directory will **NOT** be deployed in TiDB Cloud, and the changes made in the TiDB Cloud console will **NOT** be pushed to GitHub either.
 
 6. Click **Confirm Connect**.
 
