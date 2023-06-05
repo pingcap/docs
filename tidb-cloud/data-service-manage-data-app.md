@@ -15,7 +15,7 @@ To create a Data App for your project, perform the following steps:
 
 1. On the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project, click <MDSvgIcon name="icon-create-data-app" /> **Create DataApp** in the left pane.
 2. Enter a name for the Data App, and select clusters that you want the Data App to access.
-3. (Optional) To automatically deploy endpoints of the Data App to your preferred GitHub repository and branch, enable **Connect your Data App to GitHub**, and then do the following:
+3. (Optional) To automatically deploy endpoints of the Data App to your preferred GitHub repository and branch, enable **Connect to GitHub**, and then do the following:
 
     1. Click **Install on GitHub**, and then follow the on-screen instructions to install **TiDB Cloud Data Service** as an application on your target repository.
     2. Click **Authorize** to authorize access to the application on GitHub.
