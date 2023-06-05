@@ -17,9 +17,9 @@ If you have [connected your Data App to GitHub](/tidb-cloud/data-service-manage-
 │   ├── http_endpoints
 │   │   ├── config.json
 │   │   └── sql
-│   │       ├── <method>-<endpoint-name1>.sql
-│   │       ├── <method>-<endpoint-name2>.sql
-│   │       └── <method>-<endpoint-name3>.sql
+│   │       ├── <method>-<endpoint-path1>.sql
+│   │       ├── <method>-<endpoint-path2>.sql
+│   │       └── <method>-<endpoint-path3>.sql
 ```
 
 ## Data source configuration
@@ -76,7 +76,7 @@ The description of each field is as follows:
 
 | Field      | Type   | Description        |
 |------------|--------|--------------------|
-| `app_id`   | string | The Data App ID. Do not change this field unless your `dataapp_config.json` file is copied from another Data App and you want to update it to the ID of your current Data App. |
+| `app_id`   | string | The Data App ID. Do not change this field unless your `dataapp_config.json` file is copied from another Data App and you want to update it to the ID of your current Data App. Otherwise, the deployment triggered by this modification will fail. |
 | `app_name` | string | The Data App name. |
 | `app_type` | string | The Data App type, which can only be `dataapi`. |
 
@@ -89,9 +89,9 @@ In your Data App directory, you can find endpoint configurations in `http_endpoi
 │   ├── http_endpoints
 │   │   ├── config.json
 │   │   └── sql
-│   │       ├── <method>-<endpoint-name1>.sql
-│   │       ├── <method>-<endpoint-name2>.sql
-│   │       └── <method>-<endpoint-name3>.sql
+│   │       ├── <method>-<endpoint-path1>.sql
+│   │       ├── <method>-<endpoint-path2>.sql
+│   │       └── <method>-<endpoint-path3>.sql
 ```
 
 ### Endpoint configuration
@@ -170,7 +170,7 @@ The description of each field is as follows:
 
 The SQL file of an endpoint specifies the SQL statements to query data through the endpoint. You can find the endpoint SQL files of a Data App in the `http_endpoints/sql/` directory. For each endpoint, there should be a corresponding SQL file.
 
-The name of a SQL file is in the `<method>-<endpoint-name>.sql` format, where `<method>` and `<endpoint-name>` must match the `method` and `name` configuration in [`http_endpoints/config.json`](#endpoint-configuration).
+The name of a SQL file is in the `<method>-<endpoint-path>.sql` format, where `<method>` and `<endpoint-path>` must match the `method` and `endpoint` configuration in [`http_endpoints/config.json`](#endpoint-configuration).
 
 In the SQL file, you can write statements such as table join queries, complex queries, and aggregate functions. The following is an example SQL file.
 
