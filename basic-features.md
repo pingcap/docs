@@ -8,7 +8,7 @@ aliases: ['/docs/dev/basic-features/','/tidb/dev/experimental-features-4.0/']
 
 This document lists the features supported in different TiDB versions, including [Long-Term Support (LTS)](/releases/versioning.md#long-term-support-releases) versions and [Development Milestone Release (DMR)](/releases/versioning.md#development-milestone-releases) versions after the latest LTS version.
 
-You can try out TiDB features on [TiDB Playground](http://play.tidbcloud.com/).
+You can try out TiDB features on [TiDB Playground](http://play.tidbcloud.com/?utm_source=docs&utm_medium=tidb_features).
 
 > **Note:**
 >
