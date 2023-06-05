@@ -12,11 +12,11 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - Support connecting your [Data App](/tidb-cloud/tidb-cloud-glossary.md#data-app) to GitHub.
 
-    TiDB Cloud provides a Configuration as Code (CaC) approach to represent your whole Data App configuration as code using the JSON syntax.
+    TiDB Cloud provides a Configuration as Code (CaC) approach to represent your entire Data App configuration as code using the JSON syntax.
 
     By connecting your Data App to GitHub, TiDB Cloud can use the CaC approach and push your Data App configurations as [configuration files](/tidb-cloud/data-service-app-config-files.md) to your preferred GitHub repository and branch.
 
-    With this feature, you can complete the following tasks easily, which improves the CI/CD experience of building Data Apps:
+    With this feature, you can easily accomplish the following tasks, which improves the CI/CD experience of building Data Apps:
 
     - Automatically deploy Data App changes with GitHub
     - Configure CI/CD pipelines of your Data App changes on GitHub with version control
