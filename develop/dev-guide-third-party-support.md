@@ -148,4 +148,4 @@ If you encounter problems when connecting to TiDB using the tools listed in this
 
 | GUI | Latest tested version | Support level | Tutorial |
 | - | - | - | - |
-| [DBeaver](https://dbeaver.io/) | 22.1.0 | Full | N/A |
+| [DBeaver](https://dbeaver.io/) | 23.0.1 | Full | N/A |
