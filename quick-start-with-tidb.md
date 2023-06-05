@@ -11,11 +11,13 @@ This guide walks you through the quickest way to get started with TiDB. For non-
 - [Deploy a local test cluster](#deploy-a-local-test-cluster) (for macOS and Linux)
 - [Simulate production deployment on a single machine](#simulate-production-deployment-on-a-single-machine) (for Linux only)
 
+In addition, you can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=tidb_quick_start).
+
 > **Note:**
 >
 > The deployment method provided in this guide is **ONLY FOR** quick start, **NOT FOR** production.
 >
-> - To deploy an on-premises production cluster, see [production installation guide](/production-deployment-using-tiup.md).
+> - To deploy a self-hosted production cluster, see [production installation guide](/production-deployment-using-tiup.md).
 > - To deploy TiDB on Kubernetes, see [Get Started with TiDB on Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/get-started).
 > - To manage TiDB in the cloud, see [TiDB Cloud Quick Start](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart).
 
