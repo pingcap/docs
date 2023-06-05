@@ -25,7 +25,7 @@ To create a Data App for your project, perform the following steps:
         >
         > - The directory must start with a slash (`/`). For example, `/mydata`. If the directory you specified does not exist in the target repository and branch, it will be created automatically.
         > - The combination of repository, branch, and directory identifies the path of the configuration files, which must be unique among Data Apps. If your specified path is already used by another Data App, you need to specify a new path instead. Otherwise, the endpoints configured in the TiDB Cloud console for the current Data App will overwrite the files in your specified path.
-        > - If your specified path contains configuration files copied from another Data App and you want to import these files to the current Data App, see [Import configurations of an existing Data App](#import-configurations-of-an-existing-data-app).
+        > - If your specified path contains configuration files copied from another Data App and you want to import these files to the current Data App, see [Import configurations of an existing Data App](/tidb-cloud/data-service-manage-github-connection.md#import-configurations-of-an-existing-data-app).
 
 4. Click **Create Data App**.
 
@@ -90,7 +90,7 @@ To manage deployments, perform the following steps:
 
     - **Auto Sync & Deployment**
 
-        - This option can be enabled only when your Data App is connected to GitHub. For more information, see [Deploy automatically with GitHub](/tidb-cloud/data-service-manage-github-connection.md#deploy-automatically-with-github).
+        - This option can be enabled only when your Data App is connected to GitHub. For more information, see [Deploy automatically with GitHub](/tidb-cloud/data-service-manage-github-connection.md).
         - When it is enabled, the changes made in your specified GitHub directory can be automatically deployed in TiDB Cloud, and the changes made in the TiDB Cloud console can be pushed to GitHub as well. You can find the corresponding deployment and commit information in the Data App deployment history.
         - When it is disabled, the changes made in your specified GitHub directory will **NOT** be deployed in TiDB Cloud, and the changes made in the TiDB Cloud console will **NOT** be pushed to GitHub either.
 

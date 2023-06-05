@@ -266,7 +266,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     On the Data App details page, now you can link clusters to your Data App and specify the role for each API key. The role controls whether the API key can read or write data to the linked clusters and can be set to `ReadOnly` or `ReadAndWrite`. This feature provides cluster-level and permission-level access control for Data Apps, giving you more flexibility to control the access scope according to your business needs.
 
-    For more information, see [Manage linked clusters](/tidb-cloud/data-service-manage-data-app.md#manage-linked-clusters) and [Manage API keys](/tidb-cloud/data-service-api-key.md).
+    For more information, see [Manage linked clusters](/tidb-cloud/data-service-manage-data-app.md#manage-linked-data-sources) and [Manage API keys](/tidb-cloud/data-service-api-key.md).
 
 ## March 28, 2023
 
