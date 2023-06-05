@@ -10,6 +10,8 @@ category: quick start
 
 This tutorial guides you through an easy way to get started with your TiDB Cloud. You can also navigate to the [**Getting Started**](https://tidbcloud.com/console/getting-started) page in the TiDB Cloud console to follow the tutorials step by step.
 
+In addition, you can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=tidb_cloud_quick_start).
+
 ## Step 1. Create a TiDB cluster
 
 [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta) (Beta) is the best way to get started with TiDB Cloud. To create a TiDB Serverless cluster, take the following steps:
