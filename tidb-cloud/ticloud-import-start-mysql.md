@@ -5,8 +5,7 @@ summary: The reference of `ticloud import start mysql`.
 
 # ticloud import start mysql
 
-Import one table from a MySQL compatible database to a [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta) cluster,
-the target table name is the same as the source table name:
+Import one table from a MySQL compatible database to a [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta) cluster, the target table name is the same as the source table name:
 
 ```shell
 ticloud import start mysql [flags]
@@ -25,7 +24,6 @@ ticloud import start mysql
 ```
 
 Start an import task in non-interactive mode(using root user):
-
 
 ```shell
 ticloud import start mysql --project-id <project-id> --cluster-id <cluster-id> --source-host <source-host> --source-port <source-port> --source-user <source-user> --source-password <source-password> --source-database <source-database> --source-table <source-table> --target-database <target-database> --password <password>
