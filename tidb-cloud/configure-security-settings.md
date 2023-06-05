@@ -5,11 +5,11 @@ summary: Learn how to configure the root password and allowed IP addresses to co
 
 # Configure Cluster Security Settings
 
-For Dedicated Tier clusters, you can configure the root password and allowed IP addresses to connect to your cluster.
+For TiDB Dedicated clusters, you can configure the root password and allowed IP addresses to connect to your cluster.
 
 > **Note:**
 >
-> For Serverless Tier clusters, this document is inapplicable and you can refer to [TLS Connection to Serverless Tier](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md) instead.
+> For TiDB Serverless clusters, this document is inapplicable and you can refer to [TLS Connection to TiDB Serverless](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md) instead.
 
 1. In the TiDB Cloud console, navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
 
