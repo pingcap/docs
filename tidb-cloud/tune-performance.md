@@ -75,22 +75,11 @@ For more information, see [Key Visualizer](https://docs.pingcap.com/tidb/stable/
 
 ## Index Insight (Beta)
 
+
+The Index Insight feature in TiDB Cloud provides powerful capabilities to optimize query performance by offering index recommendations for slow queries that are not utilizing indexes effectively.
+
 > **Note:**
 >
-> Index Insight is only available for [Dedicated Tier clusters](/tidb-cloud/select-cluster-tier.md#dedicated-tier).
+> Index Insight is currently in beta and this feature is only available for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters.
 
-To obtain the index recommendations, perform the following steps:
-
-1. Navigate to the **Diagnosis** page of a cluster.
-
-2. Click the **Index Insight (Beta)** tab.
-
-![Index Insight](/media/tidb-cloud/Index-Insight.png)
-
-3. Create a new SQL user dedicated to utilizing the Index Insight feature.
-
-4. Configure the necessary permissions and access for the dedicated SQL user.
-
-5. Manually trigger the Index Insight capability to receive index recommendations for slow queries without proper index usage.
-
-For more information, see [Index Insight](/tidb-cloud/index-insight).
+For more information, see [Index Insight](/tidb-cloud/index-insight.md).

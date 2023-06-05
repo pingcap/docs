@@ -1,90 +1,77 @@
 ---
-title: Index Insight
-summary: Learn how to obtain the index recommendations for your slow queries.
+title: Index Insight (Beta)
+summary: Learn how to use the Index Insight feature in TiDB Cloud and obtain index recommendations for your slow queries.
 ---
 
-# Index Insight
+# Index Insight (Beta)
 
-## Introduction
-
-The Index Insight feature in TiDB Cloud provides powerful capabilities to optimize query performance by offering index recommendations for slow queries that are not utilizing indexes effectively. This user guide will walk you through the steps to enable and utilize the Index Insight feature effectively.
+The Index Insight (beta) feature in TiDB Cloud provides powerful capabilities to optimize query performance by offering index recommendations for slow queries that are not using indexes effectively. This document walks you through the steps to enable and utilize the Index Insight feature effectively.
 
 > **Note:**
 >
-> Index Insight is currently available as a Beta version, offering this feature for free to all users.
-> This feature is only available for [Dedicated Tier clusters](/tidb-cloud/select-cluster-tier.md#dedicated-tier).
+> Index Insight is currently in beta and this feature is only available for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters.
 
-## Value to Users:
+## Introduction
 
-The Index Insight feature in TiDB Cloud brings several significant benefits to users:
+The Index Insight feature provides you with the following benefits:
 
-- Enhanced Query Performance: By identifying and recommending appropriate indexes for slow queries, users can significantly improve query execution time, leading to faster response times and a better user experience.
+- Enhanced query performance: By identifying and suggesting appropriate indexes for slow queries, you can significantly enhance query execution speed, resulting in quicker response times and a better user experience.
+- Cost efficiency: Optimized query performance reduces the need for extra computing resources, enabling you to achieve more with existing infrastructure and potentially leading to operational cost savings.
+- Simplified optimization process: Index Insight simplifies the process of identifying and implementing index improvements, eliminating the need for manual analysis and guesswork. You can get accurate recommendations using this feature, which saves time and effort.
+- Improved application efficiency: By optimizing database performance, applications running on TiDB Cloud can handle larger workloads and serve more concurrent users, which enables businesses to scale operations effectively.
 
-- Cost Savings: Optimized query performance reduces the need for additional computing resources, allowing users to achieve more with their existing infrastructure and potentially saving on operational costs.
+## Usage
 
-- Simplified Optimization Process: Index Insight simplifies the process of identifying and implementing index improvements, eliminating the need for manual analysis and guesswork. Users can rely on the feature to provide accurate recommendations, saving time and effort.
+This section introduces how to enable the Index Insight feature and obtain index recommendations for your slow queries.
 
-- Improved Application Efficiency: By optimizing database performance, applications running on TiDB Cloud can handle larger workloads and serve more concurrent users, enabling businesses to scale their operations effectively.
+### Before you begin
 
-## Enabling Index Insight
+Before enabling the Index Insight feature, make sure that you have created a TiDB Dedicated cluster. If you do not have one, follow the steps in [Create a cluster](/tidb-cloud/create-tidb-cluster.md) to create one.
 
-To enable the Index Insight feature in TiDB Cloud, follow these steps:
+### Step 1: Enable Index Insight
 
-### Create a Dedicated SQL User
+1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the cluster overview page of your TiDB Dedicated cluster, and then click **Diagnosis** in the left navigation pane.
 
-Create a new SQL user dedicated to utilizing the Index Insight feature. This dedicated user will be used to trigger the capability and receive index recommendations. Ensure the user has the necessary permissions and access to query the relevant tables.
+2. Click the **Index Insight BETA** tab. The Index Insight overview page is displayed.
 
-Index insight requires read access to database information_schema and mysql. You can create a new SQL user on your SQL client to activate this feature. Please replace your user name and password in the 'yourusername' and 'yourpassword' field.
+3. To use the Index Insight feature, you need to create a dedicated SQL user, which is used to trigger the feature and receive index recommendations. The following SQL statements create a new SQL user with required privileges, including read privilege for `information_schema` and `mysql`. Replace `'index_insight_user'` and `'your_password'` with your values.
 
-CREATE user 'yourusername'@'%' IDENTIFIED by 'yourpassword';
-GRANT SELECT ON information_schema.* TO 'yourusername'@'%';
-GRANT SELECT ON mysql.* TO 'yourusername'@'%';
-GRANT PROCESS, REFERENCES ON *.* TO 'yourusername'@'%';
-FLUSH PRIVILEGES;
+    ```sql
+    CREATE user 'index_insight_user'@'%' IDENTIFIED by 'your_password';
+    GRANT SELECT ON information_schema.* TO 'index_insight_user'@'%';
+    GRANT SELECT ON mysql.* TO 'index_insight_user'@'%';
+    GRANT PROCESS, REFERENCES ON *.* TO 'index_insight_user'@'%';
+    FLUSH PRIVILEGES;
+    ```
 
-### Activate the feature
+    > **Note:**
+    >
+    > To connect to your TiDB Dedicated cluster, see [Connect to a TiDB cluster](/tidb-cloud/connect-to-tidb-cluster.md).
 
-Enter the SQL user created specifically for Index Insight in the designated input field. Click on the "Activate" button to initiate the activation process.
+4. Enter the username and password of the SQL user created in the preceding step. Then, click **Activate** to initiate the activation process.
 
-Note: Ensure that the SQL user you enter has the necessary permissions and access to query the relevant tables. If you haven't created a dedicated SQL user for Index Insight yet, please refer to the user documentation for instructions on creating one.
+### Step 2: Manually trigger Index Insight
 
-### Trigger insight manually
+To obtain index recommendations for your slow queries, you can manually trigger the Index Insight feature by clicking **Check Up** in the upper-right corner of the Index Insight overview page.
 
-To manually trigger the index recommendation capability and obtain index suggestions, you should locate the "Check Up" button and click on it.
+Then, the feature begins scanning your slow queries from the past three hours. After the scan finishes, it provides a list of index recommendations based on its analysis.
 
-After you triggered this insight, the functionality will initiate a scan of slow queries from the past 3 hours. Once the scan is complete, index recommendations will be provided based on the analysis.
+### Step 3: View index recommendations
 
-### Check the insight detail
+To view the details of a specific index recommendation, click the insight from the list. The **Index Insight Detail** page is displayed.
 
-To view specific index commands and access detailed information about related slow queries, you need to click a insight on the list and enter the insight detail page.
+On this page, you can find the recommended indexes, related slow queries, execution plans, and relevant metrics. This information helps you better understand the performance issues and evaluate the potential impact of implementing the recommended indexes.
 
-On the insight detail page, you will find the index commands corresponding to the recommended indexes. 
+### Step 4: Implement index recommendations
 
-You can copy the index command(s) provided, open your TiDB instance or database management tool, and execute the copied index command(s) to create the recommended index(es) on the relevant table(s).
-
-Please note that executing the index command(s) may require appropriate permissions and access. Ensure that you have the necessary privileges to create indexes on the desired table(s).
-
-Additionally, on the Index Insight Detail Page, you can access detailed information about the slow queries associated with the index recommendations. This information may include the query text, execution plan, and other relevant metrics. Analyzing this information can help you better understand the performance issues and evaluate the impact of implementing the recommended indexes.
-
-## Utilizing Index Recommendations
-
-Once the Index Insight feature has provided index recommendations, follow these guidelines to utilize them effectively:
-
-### Review Index Recommendations
-
-Review the index recommendations generated by the Index Insight. Each recommendation includes details such as the query, tables involved, and the suggested index. Evaluate the recommendations based on their potential impact on query performance.
-
-### Implementing Indexes
+Before implementing the recommended indexes, you need to first review and evaluate the recommendations from the **Index Insight Detail** page.
 
 To implement the recommended indexes, follow these steps:
 
-- Evaluate the impact of the proposed index on existing queries and workload.
-
-- Consider the storage requirements and potential trade-offs associated with the index implementation.
-
-- Use appropriate database management tools to create the recommended indexes on the relevant tables.
-
-- Monitor the performance after implementing the indexes to assess the improvements.
+1. Evaluate the impact of the proposed index on existing queries and workload.
+2. Consider the storage requirements and potential trade-offs associated with the index implementation.
+3. Use appropriate database management tools to create the recommended indexes on the relevant tables.
+4. Monitor the performance after implementing the indexes to assess the improvements.
 
 ## Best Practices
 
