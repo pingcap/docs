@@ -15,7 +15,7 @@ TiDB Cloud provides [Slow Query](#slow-query), [Statement Analysis](#statement-a
 
 > **Note:**
 >
-> Currently, **Key Visualizer** is unavailable for [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta).
+> Currently, **Key Visualizer** is unavailable for [TiDB Serverless clusters](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta).
 
 ## Slow Query
 
@@ -23,7 +23,7 @@ By default, SQL queries that take more than 300 milliseconds are considered as s
 
 To view slow queries in a cluster, perform the following steps:
 
-1. Navigate to the **SQL Diagnosis** page of a cluster.
+1. Navigate to the **Diagnosis** page of a cluster.
 
 2. Click the **Slow Query** tab.
 
@@ -41,7 +41,7 @@ For more information, see [Slow Queries in TiDB Dashboard](https://docs.pingcap.
 
 To use the statement analysis, perform the following steps:
 
-1. Navigate to the **SQL Diagnosis** page of a cluster.
+1. Navigate to the **Diagnosis** page of a cluster.
 
 2. Click the **SQL Statement** tab.
 
@@ -59,11 +59,11 @@ For more information, see [Statement Execution Details in TiDB Dashboard](https:
 
 > **Note:**
 >
-> Key Visualizer is only available for [Dedicated Tier clusters](/tidb-cloud/select-cluster-tier.md#dedicated-tier).
+> Key Visualizer is only available for [TiDB Dedicated clusters](/tidb-cloud/select-cluster-tier.md#tidb-dedicated).
 
 To view the key analytics, perform the following steps:
 
-1. Navigate to the **SQL Diagnosis** page of a cluster.
+1. Navigate to the **Diagnosis** page of a cluster.
 
 2. Click the **Key Visualizer** tab.
 

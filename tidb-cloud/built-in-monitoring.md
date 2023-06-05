@@ -1,15 +1,15 @@
 ---
-title: TiDB Cloud Built-in Monitoring
-summary: Learn how to view TiDB Cloud built-in monitoring metrics and understand the meanings of these metrics.
+title: TiDB Cloud Built-in Metrics
+summary: Learn how to view TiDB Cloud built-in metrics and understand the meanings of these metrics.
 ---
 
-# TiDB Cloud Built-in Monitoring
+# TiDB Cloud Built-in Metrics
 
-TiDB Cloud collects and displays a full set of standard metrics of your cluster on the Monitoring page. By viewing these metrics, you can easily identify performance issues and determine whether your current database deployment meets your requirements.
+TiDB Cloud collects and displays a full set of standard metrics of your cluster on the Metrics page. By viewing these metrics, you can easily identify performance issues and determine whether your current database deployment meets your requirements.
 
-## View the Monitoring page
+## View the Metrics page
 
-To view the metrics on the Monitoring page, take the following steps:
+To view the metrics on the Metrics page, take the following steps:
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
 
@@ -18,16 +18,16 @@ To view the metrics on the Monitoring page, take the following steps:
     > If you have multiple projects, you can view the project list and switch to another project from the ☰ hover menu in the upper-left corner.
 
 2. Click the name of the target cluster. The cluster overview page is displayed.
-3. Click **Monitoring** in the left navigation pane.
+3. Click **Metrics** in the left navigation pane.
 
 ## Metrics retention policy
 
-- For Dedicated Tier clusters, the monitoring data is kept for 7 days.
-- For Serverless Tier clusters, the monitoring data is kept for 3 days.
+- For TiDB Dedicated clusters, the metrics data is kept for 7 days.
+- For TiDB Serverless clusters, the metrics data is kept for 3 days.
 
-## Monitoring metrics for Dedicated Tier clusters
+## Metrics for TiDB Dedicated clusters
 
-The following sections illustrate the metrics on the Monitoring page for Dedicated Tier clusters.
+The following sections illustrate the metrics on the Metrics page for TiDB Dedicated clusters.
 
 ### Overview
 
@@ -81,12 +81,12 @@ The following sections illustrate the metrics on the Monitoring page for Dedicat
 | TiFlash IO MBps | node-write, node-read | The total bytes of read and write in each TiFlash node. |
 | TiFlash Storage Usage | node | The storage usage statistics of each TiFlash node. |
 
-## Monitoring metrics for Serverless Tier clusters
+## Metrics for TiDB Serverless clusters
 
-The Monitoring page provides two tabs for metrics of Serverless Tier clusters:
+The Metrics page provides two tabs for metrics of TiDB Serverless clusters:
 
-- Cluster Status: displays the cluster-level main metrics. 
-- Database Status: displays the database-level main metrics. 
+- Cluster Status: displays the cluster-level main metrics.
+- Database Status: displays the database-level main metrics.
 
 ### Cluster Status
 
@@ -97,11 +97,11 @@ The following table illustrates the cluster-level main metrics under the **Clust
 | Request Units | RU per second | The Request Unit (RU) is a unit of measurement used to track the resource consumption of a query or transaction. In addition to queries that you run, Request Units can be consumed by background activities, so when the QPS is 0, the Request Units per second might not be zero. |
 | Used Storage Size | Row-based storage, Columnar storage | The size of the row store and the size of the column store. |
 | Query Per Second | All, {SQL type} | The number of SQL statements executed per second, which are collected by SQL types, such as `SELECT`, `INSERT`, and `UPDATE`. |
-| Average Query Duration | All, {SQL type} | The duration from receiving a request from the client to the Serverless Tier cluster until the cluster executes the request and returns the result to the client. |
+| Average Query Duration | All, {SQL type} | The duration from receiving a request from the client to the TiDB Serverless cluster until the cluster executes the request and returns the result to the client. |
 | Failed Query | All | The number of SQL statement execution errors per second. |
 | Transaction Per Second | All | The number of transactions executed per second. |
 | Average Transaction Duration | All | The average execution duration of transactions. |
-| Total Connection | All | The number of connections to the Serverless Tier cluster. |
+| Total Connection | All | The number of connections to the TiDB Serverless cluster. |
 
 ### Database Status
 
@@ -126,6 +126,6 @@ If all these reasons are excluded, you can contact the [PingCAP support team](/t
 
 **2. Why might metrics be discontinuous in rare cases?**
 
-In some rare cases, metrics might be lost, such as when the monitoring system experiences high pressure.
+In some rare cases, metrics might be lost, such as when the metrics system experiences high pressure.
 
 If you encounter this problem, you can contact [PingCAP Support](/tidb-cloud/tidb-cloud-support.md) for troubleshooting.
