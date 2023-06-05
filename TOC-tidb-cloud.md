@@ -141,7 +141,7 @@
   - [Manage Endpoint](/tidb-cloud/data-service-manage-endpoint.md)
   - [API Key](/tidb-cloud/data-service-api-key.md)
   - [Deploy Automatically with GitHub](/tidb-cloud/data-service-manage-github-connection.md)
-  - [Data App Configuration Files](/tidb-cloud/data-service-app-config.md#data-app-configuration-files)
+  - [Data App Configuration Files](tidb-cloud/data-service-app-config-files.md)
   - [Response and Status Code](/tidb-cloud/data-service-response-and-status-code.md)
 - Stream Data
   - [Changefeed Overview](/tidb-cloud/changefeed-overview.md)
