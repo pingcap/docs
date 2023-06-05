@@ -77,10 +77,10 @@ For more information, see [Key Visualizer](https://docs.pingcap.com/tidb/stable/
 
 ## Index Insight (Beta)
 
-The Index Insight feature in TiDB Cloud provides powerful capabilities to optimize query performance by offering index recommendations for slow queries that are not utilizing indexes effectively.
+The Index Insight feature in TiDB Cloud provides powerful capabilities to optimize query performance by offering recommended indexes for slow queries that are not utilizing indexes effectively.
 
 > **Note:**
 >
-> Index Insight is currently in beta and this feature is only available for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters.
+> Index Insight is currently in beta and only available for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters.
 
 For more information, see [Index Insight](/tidb-cloud/index-insight.md).
