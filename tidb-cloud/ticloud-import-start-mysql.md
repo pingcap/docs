@@ -23,7 +23,7 @@ Start an import task in interactive mode:
 ticloud import start mysql
 ```
 
-Start an import task in non-interactive mode(using the default user '<token>.root'):
+Start an import task in non-interactive mode(using the default user `<token>.root`):
 
 ```shell
 ticloud import start mysql --project-id <project-id> --cluster-id <cluster-id> --source-host <source-host> --source-port <source-port> --source-user <source-user> --source-password <source-password> --source-database <source-database> --source-table <source-table> --target-database <target-database> --target-password <target-password>
