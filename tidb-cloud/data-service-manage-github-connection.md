@@ -56,7 +56,7 @@ If you did not enable the GitHub connection during the app creation, you can sti
 
 If GitHub connection is enabled when you [create a Data App](/tidb-cloud/data-service-manage-data-app.md), TiDB Cloud pushes the configuration files of this Data App to GitHub immediately after the App creation.
 
-If GitHub connection for your Data App is enabled after the App creation, you need to perform a deployment operation to synchronize the Data App configurations to GitHub. For example, you can click the **Deployment** tab, and then re-deploy a deployment for this Data App.
+If GitHub connection for your Data App is enabled after the App creation, you need to perform a deployment operation to synchronize the Data App configurations to GitHub. For example, you can click the **Deployments** tab, and then re-deploy a deployment for this Data App.
 
 After the deployment operation, check your specified GitHub directory. You will find that the Data App configuration files have been committed to the directory by `tidb-cloud-data-service`, which means that your Data App is connected to GitHub successfully.
 
