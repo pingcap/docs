@@ -530,6 +530,7 @@
       - start
         - [local](/tidb-cloud/ticloud-import-start-local.md)
         - [s3](/tidb-cloud/ticloud-import-start-s3.md)
+        - [mysql](/tidb-cloud/ticloud-import-start-mysql.md)
     - project
       - [list](/tidb-cloud/ticloud-project-list.md)
     - [update](/tidb-cloud/ticloud-update.md)

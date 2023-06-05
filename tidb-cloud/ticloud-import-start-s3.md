@@ -39,25 +39,25 @@ ticloud import start s3 --project-id <project-id> --cluster-id <cluster-id> --aw
 
 In non-interactive mode, you need to manually enter the required flags. In interactive mode, you can just follow CLI prompts to fill them in.
 
-| Flag                    | Description                                              | Required | Note                             |
-|-------------------------|----------------------------------------------------------|----------|-----------------------------------|
-| --aws-role-arn string   | AWS S3 IAM Role ARN                                      | Yes      | Only works in non-interactive mode. |
-| -c, --cluster-id string | Cluster ID                                               | Yes      | Only works in non-interactive mode. |
-| --data-format string    | Data format. Valid values are `CSV`, `SqlFile`, `Parquet`, or `AuroraSnapshot`. | Yes      | Only works in non-interactive mode. |
-| -h, --help              | Help information for this command                                | No       | Works in both non-interactive and interactive modes. |
-| -p, --project-id string | Project ID                                               | Yes      | Only works in non-interactive mode. |
-| --source-url string     | The S3 path where the source data files are stored         | Yes      | Only works in non-interactive mode. |
+| Flag                    | Description                                                                               | Required | Note                                                                      |
+|-------------------------|-------------------------------------------------------------------------------------------|----------|---------------------------------------------------------------------------|
+| --aws-role-arn string   | AWS S3 IAM Role ARN                                                                       | Yes      | Only works in non-interactive mode.                                       |
+| --backslash-escape      | Parses backslashes inside fields as escape characters (`true` by default) for CSV files   | No       | Only works in non-interactive mode when `--data-format CSV` is specified. |
+| -c, --cluster-id string | Cluster ID                                                                                | Yes      | Only works in non-interactive mode.                                       |
+| --data-format string    | Data format. Valid values are `CSV`, `SqlFile`, `Parquet`, or `AuroraSnapshot`.           | Yes      | Only works in non-interactive mode.                                       |
+| --delimiter string      | Specifies the delimiter used for quoting (`"` by default) for CSV files                   | No       | Only works in non-interactive mode when `--data-format CSV` is specified. |
+| -h, --help              | Help information for this command                                                         | No       | Works in both non-interactive and interactive modes.                      |
+| -p, --project-id string | Project ID                                                                                | Yes      | Only works in non-interactive mode.                                       |
+| --separator string      | Specifies the field separator of CSV files (`,` by default)                               | No       | Only works in non-interactive mode when `--data-format CSV` is specified. |
+| --source-url string     | The S3 path where the source data files are stored                                        | Yes      | Only works in non-interactive mode.                                       |
+| --trim-last-separator   | Treats separators as the line terminators and trims all trailing separators for CSV files | No       | Only works in non-interactive mode when `--data-format CSV` is specified. |
 
 ## Inherited flags
 
-| Flag                  | Description                                                                                    | Required | Note                                                                                                             |
-|-----------------------|------------------------------------------------------------------------------------------------|----------|-------------------------------------------------------------------------------------------------------------------|
-| --backslash-escape    | Parses backslashes inside fields as escape characters (`true` by default) for CSV files | No       | Only works in non-interactive mode when `--data-format CSV` is specified.                                                         |
-| --delimiter string    | Specifies the delimiter used for quoting (`"` by default) for CSV files                                     | No       | Only works in non-interactive mode when `--data-format CSV` is specified.                                                         |
-| --no-color            | Disables color in output                                                                           | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components. |
-| -P, --profile string  | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command      | No       | Works in both non-interactive and interactive modes.                                                               |
-| --separator string    | Specifies the field separator of CSV files (`,` by default)                                                  | No       | Only works in non-interactive mode when `--data-format CSV` is specified.                                                         |
-| --trim-last-separator | Treats separators as the line terminators and trims all trailing separators for CSV files | No       | Only works in non-interactive mode when `--data-format CSV` is specified.                                                |
+| Flag                 | Description                                                                                         | Required | Note                                                                                                             |
+|----------------------|-----------------------------------------------------------------------------------------------------|----------|------------------------------------------------------------------------------------------------------------------|
+| --no-color           | Disables color in output                                                                            | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components. |
+| -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command | No       | Works in both non-interactive and interactive modes.                                                             |
 
 ## Feedback
 
