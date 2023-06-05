@@ -39,30 +39,6 @@ If you encounter problems when connecting to TiDB using the tools listed in this
    </thead>
    <tbody>
       <tr>
-         <td>C</td>
-         <td><a href="https://dev.mysql.com/doc/c-api/8.0/en/c-api-introduction.html" target="_blank" referrerpolicy="no-referrer-when-downgrade">libmysqlclient</a></td>
-         <td>8.0</td>
-         <td>Compatible</td>
-         <td>N/A</td>
-         <td>N/A</td>
-      </tr>
-      <tr>
-         <td>C#(.Net)</td>
-         <td><a href="https://downloads.mysql.com/archives/c-net/" target="_blank" referrerpolicy="no-referrer-when-downgrade">MySQL Connector/NET</a></td>
-         <td>8.0</td>
-         <td>Compatible</td>
-         <td>N/A</td>
-         <td>N/A</td>
-      </tr>
-      <tr>
-         <td>ODBC</td>
-         <td><a href="https://downloads.mysql.com/archives/c-odbc/" target="_blank" referrerpolicy="no-referrer-when-downgrade">MySQL Connector/ODBC</a></td>
-         <td>8.0</td>
-         <td>Compatible</td>
-         <td>N/A</td>
-         <td>N/A</td>
-      </tr>
-      <tr>
          <td>Go</td>
          <td><a href="https://github.com/go-sql-driver/mysql" target="_blank" referrerpolicy="no-referrer-when-downgrade">Go-MySQL-Driver</a></td>
          <td>v1.6.0</td>
@@ -83,45 +59,6 @@ If you encounter problems when connecting to TiDB using the tools listed in this
          </td>
          <td><a href="/tidb/dev/dev-guide-sample-application-java-jdbc">Build a Simple CRUD App with TiDB and JDBC</a></td>
       </tr>
-      <tr>
-         <td>JavaScript</td>
-         <td><a href="https://github.com/mysqljs/mysql" target="_blank" referrerpolicy="no-referrer-when-downgrade">mysql</a></td>
-         <td>v2.18.1</td>
-         <td>Compatible</td>
-         <td>N/A</td>
-         <td>N/A</td>
-      </tr>
-      <tr>
-         <td>PHP</td>
-         <td><a href="https://dev.mysql.com/downloads/connector/php-mysqlnd/" target="_blank" referrerpolicy="no-referrer-when-downgrade">mysqlnd</a></td>
-         <td>PHP 5.4+</td>
-         <td>Compatible</td>
-         <td>N/A</td>
-         <td>N/A</td>
-      </tr>
-      <tr>
-         <td rowspan="3">Python</td>
-         <td><a href="https://dev.mysql.com/doc/connector-python/en/" target="_blank" referrerpolicy="no-referrer-when-downgrade">MySQL Connector/Python</a></td>
-         <td>8.0</td>
-         <td>Compatible</td>
-         <td>N/A</td>
-         <td><a href="/tidb/dev/dev-guide-sample-application-python-mysql-connector">Build a Simple CRUD App with TiDB and MySQL Connector/Python</a></td>
-      </tr>
-      <tr>
-         <td><a href="https://mysqlclient.readthedocs.io/" target="_blank" referrerpolicy="no-referrer-when-downgrade">mysqlclient</a></td>
-         <td>2.1.1</td>
-         <td>Compatible</td>
-         <td>N/A</td>
-         <td><a href="/tidb/dev/dev-guide-sample-application-python-mysqlclien">Build a Simple CRUD App with TiDB and mysqlclient</a></td>
-      </tr>
-      <tr>
-         <td><a href="https://pypi.org/project/PyMySQL/" target="_blank" referrerpolicy="no-referrer-when-downgrade">PyMySQL</a></td>
-         <td>1.0.2</td>
-         <td>Compatible</td>
-         <td>N/A</td>
-         <td><a href="/tidb/dev/dev-guide-sample-application-python-pymysql">Build a Simple CRUD App with TiDB and PyMySQL</a></td>
-      </tr>
-   </tbody>
 </table>
 
 ## ORM
@@ -168,13 +105,6 @@ If you encounter problems when connecting to TiDB using the tools listed in this
          <td>N/A</td>
       </tr>
       <tr>
-         <td><a href="https://github.com/ent/ent" target="_blank" referrerpolicy="no-referrer-when-downgrade">ent</a></td>
-         <td>v0.11.0</td>
-         <td>Compatible</td>
-         <td>N/A</td>
-         <td>N/A</td>
-      </tr>
-      <tr>
          <td rowspan="4">Java</td>
          <td><a href="https://hibernate.org/orm/" target="_blank" referrerpolicy="no-referrer-when-downgrade">Hibernate</a></td>
          <td>6.1.0.Final</td>
@@ -211,65 +141,6 @@ If you encounter problems when connecting to TiDB using the tools listed in this
          <td>N/A</td>
          <td>N/A</td>
       </tr>
-      <tr>
-         <td rowspan="4">JavaScript / TypeScript</td>
-         <td><a href="https://www.npmjs.com/package/sequelize" target="_blank" referrerpolicy="no-referrer-when-downgrade">sequelize</a></td>
-         <td>v6.20.1</td>
-         <td>Compatible</td>
-         <td>N/A</td>
-         <td>N/A</td>
-      </tr>
-      <tr>
-         <td><a href="https://knexjs.org/" target="_blank" referrerpolicy="no-referrer-when-downgrade">Knex.js</a></td>
-         <td>v1.0.7</td>
-         <td>Compatible</td>
-         <td>N/A</td>
-         <td>N/A</td>
-      </tr>
-      <tr>
-         <td><a href="https://www.prisma.io/" target="_blank" referrerpolicy="no-referrer-when-downgrade">Prisma Client</a></td>
-         <td>3.15.1</td>
-         <td>Compatible</td>
-         <td>N/A</td>
-         <td>N/A</td>
-      </tr>
-      <tr>
-         <td><a href="https://www.npmjs.com/package/typeorm" target="_blank" referrerpolicy="no-referrer-when-downgrade">TypeORM</a></td>
-         <td>v0.3.6</td>
-         <td>Compatible</td>
-         <td>N/A</td>
-         <td>N/A</td>
-      </tr>
-      <tr>
-         <td>PHP</td>
-         <td><a href="https://laravel.com/" target="_blank" referrerpolicy="no-referrer-when-downgrade">laravel</a></td>
-         <td>v9.1.10</td>
-         <td>Compatible</td>
-         <td><a href="https://github.com/colopl/laravel-tidb" target="_blank" referrerpolicy="no-referrer-when-downgrade">laravel-tidb</a></td>
-         <td>N/A</td>
-      </tr>
-      <tr>
-         <td rowspan="4">Python</td>
-         <td><a href="https://pypi.org/project/Django/" target="_blank" referrerpolicy="no-referrer-when-downgrade">Django</a></td>
-         <td>v4.0.5</td>
-         <td>Compatible</td>
-         <td><a href="https://github.com/pingcap/django-tidb" target="_blank" referrerpolicy="no-referrer-when-downgrade">django-tidb</a></td>
-         <td>N/A</td>
-      </tr>
-      <tr>
-         <td><a href="https://github.com/coleifer/peewee/" target="_blank" referrerpolicy="no-referrer-when-downgrade">peewee</a></td>
-         <td>v3.14.10</td>
-         <td>Compatible</td>
-         <td>N/A</td>
-         <td><a href="/tidb/dev/dev-guide-sample-application-python-peewee">Build a Simple CRUD App with TiDB and peewee</a></td>
-      </tr>
-      <tr>
-         <td><a href="https://www.sqlalchemy.org/" target="_blank" referrerpolicy="no-referrer-when-downgrade">SQLAlchemy</a></td>
-         <td>v1.4.37</td>
-         <td>Compatible</td>
-         <td>N/A</td>
-         <td><a href="/tidb/dev/dev-guide-sample-application-python-sqlalchemy">Build a Simple CRUD App with TiDB and SQLAlchemy</a></td>
-      </tr>
    </tbody>
 </table>
 
@@ -277,42 +148,4 @@ If you encounter problems when connecting to TiDB using the tools listed in this
 
 | GUI | Latest tested version | Support level | Tutorial |
 | - | - | - | - |
-| [DBeaver](https://dbeaver.io/) | 22.1.0 | Compatible | N/A |
-| [Navicat for MySQL](https://www.navicat.com/) | 16.0.14 | Compatible | N/A |
-| [MySQL Workbench](https://www.mysql.com/products/workbench/) | 8.0 | Compatible | N/A |
-
-<table>
-   <thead>
-      <tr>
-         <th>IDE</th>
-         <th>Plugin</th>
-         <th>Support level</th>
-         <th>Tutorial</th>
-      </tr>
-   </thead>
-   <tbody>
-      <tr>
-         <td><a href="https://www.jetbrains.com/datagrip/" target="_blank" referrerpolicy="no-referrer-when-downgrade">DataGrip</a></td>
-         <td>N/A</td>
-         <td>Compatible</td>
-         <td>N/A</td>
-      </tr>
-      <tr>
-         <td><a href="https://www.jetbrains.com/idea/" target="_blank" referrerpolicy="no-referrer-when-downgrade">IntelliJ IDEA</a></td>
-         <td>N/A</td>
-         <td>Compatible</td>
-         <td>N/A</td>
-      </tr>
-      <tr>
-         <td rowspan="2"><a href="https://code.visualstudio.com/" target="_blank" referrerpolicy="no-referrer-when-downgrade">Visual Studio Code</a></td>
-         <td><a href="https://marketplace.visualstudio.com/items?itemName=dragonly.ticode" target="_blank" referrerpolicy="no-referrer-when-downgrade">TiDE</a></td>
-         <td>Compatible</td>
-         <td>N/A</td>
-      </tr>
-      <tr>
-         <td><a href="https://marketplace.visualstudio.com/items?itemName=formulahendry.vscode-mysql" target="_blank" referrerpolicy="no-referrer-when-downgrade">MySQL</a></td>
-         <td>Compatible</td>
-         <td>N/A</td>
-      </tr>
-   </tbody>
-</table>
+| [DBeaver](https://dbeaver.io/) | 22.1.0 | Full | N/A |
