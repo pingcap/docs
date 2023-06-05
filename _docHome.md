@@ -103,7 +103,7 @@ Documentation for TiDB Cloud application developers
 
 <DocHomeCardContainer>
 
-<DocHomeCard href="https://play.tidbcloud.com/?utm_source=docs&utm_medium=home_more_resource" icon="playground" label="TiDB Playground">
+<DocHomeCard href="https://play.tidbcloud.com/?utm_source=docs&utm_medium=home_more_resources" icon="playground" label="TiDB Playground">
 
 One-stop and interactive experience of TiDB's capabilities WITHOUT registration
 
