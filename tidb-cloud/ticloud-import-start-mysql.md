@@ -43,7 +43,7 @@ ticloud import start mysql --project-id <project-id> --cluster-id <cluster-id> -
 
 > **Note:**
 >
-> Mysql 8.0 uses `utf8mb4_0900_ai_ci` as the default collation, which is not supported by TiDB. You can alter the source table collation, or manually create tht target table.
+> Mysql 8.0 uses `utf8mb4_0900_ai_ci` as the default collation, which is not supported by TiDB. You can alter the source table collation, or manually create the target table.
 
 ## Flags
 
