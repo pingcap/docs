@@ -156,6 +156,6 @@ If you no longer want to connect your Data App to GitHub, take the following ste
 1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
 2. In the left pane, click the name of your target Data App to view its details.
 3. On the **Settings** tab, click **Disconnect** in the **Connect to GitHub** area.
-4. Click **Unlink** to confirm the unlinking.
+4. Click **Disconnect** to confirm the disconnection.
 
-After the unlinking operation, your Data App configuration files will remain in your GitHub directory but will not be synchronized by `tidb-cloud-data-service` anymore.
+After the disconnection operation, your Data App configuration files will remain in your GitHub directory but will not be synchronized by `tidb-cloud-data-service` anymore.
