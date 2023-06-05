@@ -15,7 +15,7 @@ The whole migration has two processes:
 
 ## Prerequisites
 
-- [Install Dumpling and TiDB Lightning](/migration-tools.md). If you want to create the corresponding tables manually on the target side, don't install Dumpling.
+- [Install Dumpling and TiDB Lightning](/migration-tools.md). If you want to create the corresponding tables manually on the target side, do not install Dumpling.
 - [Get the target database privileges required for TiDB Lightning](/tidb-lightning/tidb-lightning-faq.md#what-are-the-privilege-requirements-for-the-target-database).
 
 ## Import full data to TiDB
@@ -52,7 +52,7 @@ After the two steps above, make sure you have the following information ready:
 
 Because the snapshot file from Amazon Aurora does not contain the DDL statements, you need to export the schema using Dumpling and create the schema in the target database using TiDB Lightning. If you want to manually create the schema, you can skip this step.
 
-Pass the SecretKey and AccessKey of the account that has access to this Amazon S3 backend storage into the TiDB Lightning node as environment variables. TiDB Lightning also supports reading credential files from `~/.aws/credentials`. This method eliminates the need to pass in the corresponding SecretKey and AccessKey again for all tasks on that TiDB Lightning node.
+Pass the SecretKey and AccessKey of the account that has access to this Amazon S3 storage path into the TiDB Lightning node as environment variables. TiDB Lightning also supports reading credential files from `~/.aws/credentials`. This method eliminates the need to pass in the corresponding SecretKey and AccessKey again for all tasks on that TiDB Lightning node.
 
 Export the schema using Dumpling by running the following command. The command includes the `--filter` parameter to only export the desired table schema:
 
@@ -113,8 +113,6 @@ sorted-kv-dir = "/mnt/ssd/sorted-kv-dir"
 default-file-rules=true
 
 [mydumper]
-# The path that stores the snapshot file exported from Amazon Aurora.
-data-source-dir = "${s3_path}"  # e.g.: s3://my-bucket/sql-backup
 
 [[mydumper.files]]
 # The expression that parses the parquet file.
@@ -128,7 +126,7 @@ If you need to enable TLS in the TiDB cluster, refer to [TiDB Lightning Configur
 
 ### Step 4. Import full data to TiDB
 
-1. Pass the SecretKey and AccessKey of the account that has access to this Amazon S3 backend storage into the TiDB Lightning node as environment variables. TiDB Lightning also supports reading credential files from `~/.aws/credentials`. When running `tidb-lightning`, if you start the program directly from the command line, it might exit due to the `SIGHUP` signal. It is recommended to use a tool such as `nohup` or `screen`. Refer to the following steps 2 and 3 for details.
+1. Pass the SecretKey and AccessKey of the account that has access to this Amazon S3 storage path into the TiDB Lightning node as environment variables. TiDB Lightning also supports reading credential files from `~/.aws/credentials`. When running `tidb-lightning`, if you start the task directly from the command line, it might exit due to the `SIGHUP` signal. It is recommended to use a tool such as `nohup` or `screen`. Refer to the following steps 2 and 3 for details.
 
 2. Use TiDB Lightning to create tables in the downstream TiDB. Skip this step if you have manually created the tables in the target database in advance.
 
@@ -140,12 +138,12 @@ If you need to enable TLS in the TiDB cluster, refer to [TiDB Lightning Configur
 
     For more information about URI configuration parameters, such as specifying an ARN of the AWS IAM role to access S3 data, see [S3 URI Configuration Parameters](/tidb-lightning/tidb-lightning-data-source.md#import-data-from-amazon-s3).
 
-3. Use TiDB Lightning to import data from Amazon Aurora Snapshot to TiDB.
+3. Use TiDB Lightning to import data from an Amazon Aurora snapshot to TiDB.
 
     ```shell
     export AWS_ACCESS_KEY_ID=${access_key}
     export AWS_SECRET_ACCESS_KEY=${secret_key}
-    nohup tiup tidb-lightning -config tidb-lightning.toml > nohup.out 2>&1 &
+    nohup tiup tidb-lightning -config tidb-lightning.toml -d 's3://my-bucket/sql-backup' > nohup.out 2>&1 &
     ```
 
 4. After the import starts, you can check the progress of the import by either of the following methods:
