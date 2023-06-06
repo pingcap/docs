@@ -124,8 +124,18 @@ The "no sufficient privileges" system message typically indicates that the user 
 
 If you have gone through the above steps and are still unable to resolve the issue, it's recommended to seek assistance from the support for further troubleshooting and guidance.
 
-### Why am I getting the 'internal error'  
+### Why am I getting the 'operations may be too frequent' during using index insight?
 
+The "operations may be too frequent" message typically indicates that you have exceeded the rate limit or usage limits imposed by the Index Insight system. To troubleshoot and resolve the "operations may be too frequent" issue, consider the following steps:
 
+- Slow down operations: If you receive this message, it's an indication that you need to reduce the frequency of your operations on Index Insight.
+- Contact support: It's recommended to seek assistance from the support team. Provide them with the specific details of the error message, the actions you were performing when the error occurred, and any other relevant information. The support team will have access to system logs and can provide further troubleshooting and guidance tailored to your situation.
+
+### Why am I getting the 'internal error' during using index insight?
+
+The "internal error" message typically indicates that an unexpected error or issue has occurred within the Index Insight system. This error message is generic and doesn't provide specific details about the underlying cause. To troubleshoot and resolve the "internal error" issue, consider the following steps:
+
+- Retry the action: First, try refreshing the page or performing the action again. Sometimes, the error may be temporary and can be resolved by retrying.
+- Contact support: It's recommended to seek assistance from the support team. Provide them with the specific details of the error message, the actions you were performing when the error occurred, and any other relevant information. The support team will have access to system logs and can provide further troubleshooting and guidance tailored to your situation.
 
 ### 操作过于频繁在 activate 和 deactivate
