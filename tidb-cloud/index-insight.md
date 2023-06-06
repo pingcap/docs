@@ -97,7 +97,7 @@ This section lists some frequently asked questions about the Index Insight featu
 
 To deactivate the Index Insight feature, perform the following steps:
 
-1. In the upper-right corner of the **Index Insight overview** page, click **Settings**. The Index Insight settings page is displayed.
+1. In the upper-right corner of the **Index Insight overview** page, click **Settings**. The **Index Insight settings** page is displayed.
 2. Click **Deactivate**. A confirmation dialog box is displayed.
 3. Click **OK** to confirm the deactivation.
 
