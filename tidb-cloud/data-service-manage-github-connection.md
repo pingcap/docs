@@ -122,7 +122,11 @@ To import configurations of an existing Data App to a new Data App, take the fol
 4. Get the ID and name of your new Data App. You can click the name of your new Data App in the left pane and get the App ID and name in the **Data App Properties** area of the right pane.
 5. In your new path on GitHub, update the `app_id` and `app_name` in the `datapp_config.json` file to the ID and name you get, and then push the changes.
 
-After the file changes are pushed to GitHub, TiDB Cloud will automatically deploy your new Data App with the latest changes. You can view the deployment status and commit information in the deployment history.
+    After the file changes are pushed to GitHub, TiDB Cloud will automatically deploy your new Data App with the latest changes.
+
+6. To view the imported configurations from GitHub, refresh the webpage of the TiDB Cloud console.
+
+    You can also view the deployment status and commit information in the deployment history.
 
 ## Edit GitHub connection
 
