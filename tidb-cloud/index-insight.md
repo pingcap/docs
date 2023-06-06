@@ -44,8 +44,6 @@ Before enabling the Index Insight feature, make sure that you have created a TiD
     FLUSH PRIVILEGES;
     ```
 
-![Activate Feature]()
-
     > **Note:**
     >
     > To connect to your TiDB Dedicated cluster, see [Connect to a TiDB cluster](/tidb-cloud/connect-to-tidb-cluster.md).
@@ -56,19 +54,13 @@ Before enabling the Index Insight feature, make sure that you have created a TiD
 
 To obtain index recommendations for your slow queries, you can manually trigger the Index Insight feature by clicking **Check Up** in the upper-right corner of the **Index Insight overview** page.
 
-![Manually Trigger]()
-
 Then, the feature begins scanning your slow queries from the past three hours. After the scan finishes, it provides a list of index recommendations based on its analysis.
-
-![Results list]()
 
 ### Step 3: View index recommendations
 
 To view the details of a specific index recommendation, click the insight from the list. The **Index Insight Detail** page is displayed.
 
 On this page, you can find the index recommendations, related slow queries, execution plans, and relevant metrics. This information helps you better understand the performance issues and evaluate the potential impact of implementing the index recommendations.
-
-![Insight Details]()
 
 ### Step 4: Implement index recommendations
 
