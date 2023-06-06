@@ -93,7 +93,7 @@ Regularly monitor query performance after implementing the index recommendations
 
 ### How to delete user after deactivate index insight?
 
-Once index insight is deactivated, you can proceed to delete the SQL user. You can use the DROP USER statement. For example: `DROP USER 'username'@'host';`. Replace 'username' with the name of the user you want to delete and 'host' with the specific host associated with the user. If the user is associated with multiple hosts, you may need to execute the DROP USER statement for each host separately.
+Once index insight is deactivated, you can proceed to delete the SQL user. You can use the DROP USER statement. For example: `DROP USER 'username';`. Replace 'username' with the name of the user you want to delete.
 
 ### Why am I getting the 'invalid user or password' system message when I try to activate or perform a check-up on index insight?
 
