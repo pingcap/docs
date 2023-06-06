@@ -8,6 +8,21 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2023.
 
+## June 6, 2023
+
+- Introduce [Index Insight (beta)](/tidb-cloud/index-insight.md) for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters, which optimizes query performance by providing index recommendations for slow queries.
+
+    With Index Insight, you can improve the overall application performance and the efficiency of your database operations in the following ways:
+
+    - Enhanced query performance: Index Insight identifies slow queries and suggests appropriate indexes for them, thereby speeding up query execution, reducing response time, and improving user experience.
+    - Cost efficiency: By using Index Insight to optimize query performance, the need for extra computing resources is reduced, enabling you to use existing infrastructure more effectively. This can potentially lead to operational cost savings.
+    - Simplified optimization process: Index Insight simplifies the identification and implementation of index improvements, eliminating the need for manual analysis and guesswork. As a result, you can save time and effort with accurate index recommendations.
+    - Improved application efficiency: By using Index Insight to optimize database performance, applications running on TiDB Cloud can handle larger workloads and serve more users concurrently, which makes scaling operations of applications more efficient.
+
+  To use Index Insight, navigate to the **Diagnosis** page of your TiDB Dedicated cluster and click the **Index Insight BETA** tab.
+
+    For more information, see [Use Index Insight (beta)](/tidb-cloud/index-insight.md).
+
 ## June 5, 2023
 
 - Support connecting your [Data App](/tidb-cloud/tidb-cloud-glossary.md#data-app) to GitHub.

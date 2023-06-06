@@ -1,6 +1,6 @@
 ---
 title: Index Insight (Beta)
-summary: Learn how to use the Index Insight feature in TiDB Cloud and obtain index recommendations for your slow queries.
+summary: Learn how to use the Index Insight feature in TiDB Cloud and obtain index recommendations for slow queries.
 ---
 
 # Index Insight (Beta)
@@ -15,14 +15,14 @@ The Index Insight (beta) feature in TiDB Cloud provides powerful capabilities to
 
 The Index Insight feature provides you with the following benefits:
 
-- Enhanced query performance: By identifying and suggesting appropriate indexes for slow queries, you can significantly enhance query execution speed, resulting in quicker response times and a better user experience.
-- Cost efficiency: Optimized query performance reduces the need for extra computing resources, enabling you to achieve more with existing infrastructure and potentially leading to operational cost savings.
-- Simplified optimization process: Index Insight simplifies the process of identifying and implementing index improvements, eliminating the need for manual analysis and guesswork. You can get accurate recommendations using this feature, which saves time and effort.
-- Improved application efficiency: By optimizing database performance, applications running on TiDB Cloud can handle larger workloads and serve more users concurrently, which enables businesses to scale operations effectively.
+- Enhanced query performance: Index Insight identifies slow queries and suggests appropriate indexes for them, thereby speeding up query execution, reducing response time, and improving user experience.
+- Cost efficiency: By using Index Insight to optimize query performance, the need for extra computing resources is reduced, enabling you to use existing infrastructure more effectively. This can potentially lead to operational cost savings.
+- Simplified optimization process: Index Insight simplifies the identification and implementation of index improvements, eliminating the need for manual analysis and guesswork. As a result, you can save time and effort with accurate index recommendations.
+- Improved application efficiency: By using Index Insight to optimize database performance, applications running on TiDB Cloud can handle larger workloads and serve more users concurrently, which makes scaling operations of applications more efficient.
 
 ## Usage
 
-This section introduces how to enable the Index Insight feature and obtain recommended indexes for your slow queries.
+This section introduces how to enable the Index Insight feature and obtain recommended indexes for slow queries.
 
 ### Before you begin
 
@@ -34,10 +34,10 @@ Before enabling the Index Insight feature, make sure that you have created a TiD
 
 2. Click the **Index Insight BETA** tab. The **Index Insight overview** page is displayed.
 
-3. To use the Index Insight feature, you need to create a dedicated SQL user, which is used to trigger the feature and receive index recommendations. The following SQL statements create a new SQL user with required privileges, including read privilege for `information_schema` and `mysql`. Replace `'index_insight_user'` and `'your_password'` with your values.
+3. To use the Index Insight feature, you need to create a dedicated SQL user, which is used to trigger the feature and receive index recommendations. The following SQL statements create a new SQL user with required privileges, including read privilege for `information_schema` and `mysql`, and `PROCESS` and `REFERENCES` privileges for all databases. Replace `'index_insight_user'` and `'random_password'` with your values.
 
     ```sql
-    CREATE user 'index_insight_user'@'%' IDENTIFIED by 'your_password';
+    CREATE user 'index_insight_user'@'%' IDENTIFIED by 'random_password';
     GRANT SELECT ON information_schema.* TO 'index_insight_user'@'%';
     GRANT SELECT ON mysql.* TO 'index_insight_user'@'%';
     GRANT PROCESS, REFERENCES ON *.* TO 'index_insight_user'@'%';
@@ -52,19 +52,19 @@ Before enabling the Index Insight feature, make sure that you have created a TiD
 
 ### Step 2: Manually trigger Index Insight
 
-To obtain index recommendations for your slow queries, you can manually trigger the Index Insight feature by clicking **Check Up** in the upper-right corner of the **Index Insight overview** page.
+To obtain index recommendations for slow queries, you can manually trigger the Index Insight feature by clicking **Check Up** in the upper-right corner of the **Index Insight overview** page.
 
-Then, the feature begins scanning your slow queries from the past three hours. After the scan finishes, it provides a list of index recommendations based on its analysis.
+Then, the feature begins scanning slow queries from the past three hours. After the scan finishes, it provides a list of index recommendations based on its analysis.
 
 ### Step 3: View index recommendations
 
-To view the details of a specific index recommendation, click the insight from the list. The **Index Insight Detail** page is displayed.
+To view the details of a specific index recommendation, click the insight from the list. The **Index Insight Details** page is displayed.
 
 On this page, you can find the index recommendations, related slow queries, execution plans, and relevant metrics. This information helps you better understand the performance issues and evaluate the potential impact of implementing the index recommendations.
 
 ### Step 4: Implement index recommendations
 
-Before implementing the index recommendations, you need to first review and evaluate the recommendations from the **Index Insight Detail** page.
+Before implementing the index recommendations, you need to first review and evaluate the recommendations from the **Index Insight Details** page.
 
 To implement the index recommendations, follow these steps:
 
@@ -91,41 +91,80 @@ Regularly monitor query performance after implementing the index recommendations
 
 ## FAQ
 
-### How to delete user after deactivate index insight?
+This section lists some frequently asked questions about the Index Insight feature.
 
-Once index insight is deactivated, you can proceed to delete the SQL user. You can use the DROP USER statement. For example: `DROP USER 'username';`. Replace 'username' with the name of the user you want to delete.
+### How to deactivate Index Insight?
 
-### Why am I getting the 'invalid user or password' system message when I try to activate or perform a check-up on index insight?
+To deactivate the Index Insight feature, perform the following steps:
 
-The "invalid user or password" system message typically indicates that the credentials you provided for authentication are incorrect or not recognized by the system. This issue can occur for various reasons, such as: incorrect username or password, expired or locked account.
+1. In the upper-right corner of the **Index Insight overview** page, click **Settings**. The Index Insight settings page is displayed.
+2. Click **Deactivate**. A confirmation dialog box is displayed.
+3. Click **OK** to confirm the deactivation.
 
-To troubleshoot and resolve the "invalid user or password" prompt, consider the following steps:
+    After you deactivate the Index Insight feature, all index recommendations are removed from the **Index Insight overview** page. However, the SQL user created for the feature is not deleted. You can delete the SQL user manually.
 
-- Verify your credentials: Double-check that you are using the correct username and password combination. Pay attention to any case sensitivity requirements.
-- Confirm account status: Ensure that your user account is active and not expired or locked. Contact the system administrator or the relevant support channel to confirm your account status.
-- Create a new SQL user: If none of the above steps work, you can try creating a new SQL user.
+### How to delete the SQL user after deactivating Index Insight?
 
-If you have gone through the above steps and are still unable to resolve the issue, it's recommended to seek assistance from the support for further troubleshooting and guidance.
+After you deactivate the Index Insight feature, you can execute the `DROP USER` statement to delete the SQL user created for the feature. The following is an example. Replace `'username'` with your value.
 
-### Why am I getting the 'no sufficient privileges' system message when I try to activate or perform a check-up on index insight?
+```sql
+DROP USER 'username';
+```
 
-The "no sufficient privileges" system message typically indicates that the user account you are using does not have the necessary permissions or privileges to perform the requested action on Index Insight. To troubleshoot and resolve the "no sufficient privileges" issue, consider the following steps:
+### Why does the `invalid user or password` message show up during activation or check-up?
 
-- Check your user privileges: Verify if your user account has been granted the necessary privileges for activating or performing check-ups on Index Insight.
-- Create a new SQL user: If none of the above steps work, you can try creating a new SQL user.
+The `invalid user or password` message typically prompts when the system cannot authenticate the credentials you provided. This issue might occur due to various reasons, such as incorrect username or password, or an expired or locked user account.
 
-If you have gone through the above steps and are still unable to resolve the issue, it's recommended to seek assistance from the support for further troubleshooting and guidance.
+To resolve this issue, perform the following steps:
 
-### Why am I getting the 'operations may be too frequent' during using index insight?
+1. Verify your credentials: Make sure that the username and password you provided are correct. Pay attention to case sensitivity.
+2. Check account status: Make sure that your user account is in active status and not expired or locked. You can confirm this by contacting the system administrator or the relevant support channel.
+3. Create a new SQL user: If this issue is not resolved by the preceding steps, you can create a new SQL user using the following statements. Replace `'index_insight_user'` and `'random_password'` with your values.
 
-The "operations may be too frequent" message typically indicates that you have exceeded the rate limit or usage limits imposed by the Index Insight system. To troubleshoot and resolve the "operations may be too frequent" issue, consider the following steps:
+    ```sql
+    CREATE user 'index_insight_user'@'%' IDENTIFIED by 'random_password';
+    GRANT SELECT ON information_schema.* TO 'index_insight_user'@'%';
+    GRANT SELECT ON mysql.* TO 'index_insight_user'@'%';
+    GRANT PROCESS, REFERENCES ON *.* TO 'index_insight_user'@'%';
+    FLUSH PRIVILEGES;
+    ```
 
-- Slow down operations: If you receive this message, it's an indication that you need to reduce the frequency of your operations on Index Insight.
-- Contact support: It's recommended to seek assistance from the support team. Provide them with the specific details of the error message, the actions you were performing when the error occurred, and any other relevant information. The support team will have access to system logs and can provide further troubleshooting and guidance tailored to your situation.
+If you are still facing the issue after following the preceding steps, it is recommended to contact [PingCAP support team](/tidb-cloud/tidb-cloud-support.md).
 
-### Why am I getting the 'internal error' during using index insight?
+### Why does the `no sufficient privileges` message show up during activation or check-up?
 
-The "internal error" message typically indicates that an unexpected error or issue has occurred within the Index Insight system. This error message is generic and doesn't provide specific details about the underlying cause. To troubleshoot and resolve the "internal error" issue, consider the following steps:
+The `no sufficient privileges` message typically prompts when the SQL user you provided lacks the required privileges to request index recommendations from Index Insight.
 
-- Retry the action: First, try refreshing the page or performing the action again. Sometimes, the error may be temporary and can be resolved by retrying.
-- Contact support: It's recommended to seek assistance from the support team. Provide them with the specific details of the error message, the actions you were performing when the error occurred, and any other relevant information. The support team will have access to system logs and can provide further troubleshooting and guidance tailored to your situation.
+To resolve this issue, perform the following steps:
+
+1. Check the user privileges: Confirm if your user account has been granted the required privileges, including read privilege for `information_schema` and `mysql`, and `PROCESS` and `REFERENCES` privileges for all databases.
+
+2. Create a new SQL user: If this issue is not resolved by the preceding steps, you can create a new SQL user using the following statements. Replace `'index_insight_user'` and `'random_password'` with your values.
+
+    ```sql
+    CREATE user 'index_insight_user'@'%' IDENTIFIED by 'random_password';
+    GRANT SELECT ON information_schema.* TO 'index_insight_user'@'%';
+    GRANT SELECT ON mysql.* TO 'index_insight_user'@'%';
+    GRANT PROCESS, REFERENCES ON *.* TO 'index_insight_user'@'%';
+    FLUSH PRIVILEGES;
+    ```
+
+If you are still facing the issue after following the preceding steps, it is recommended to contact [PingCAP support team](/tidb-cloud/tidb-cloud-support.md).
+
+### Why does the `operations may be too frequent` message show up during using Index Insight?
+
+The `operations may be too frequent` message typically prompts when you have exceeded the rate or usage limit set by Index Insight.
+
+To resolve this issue, perform the following steps:
+
+1. Slow down operations: If you receive this message, you need to decrease your operation frequency on Index Insight.
+2. Contact support: If the issue persists, contact [PingCAP support team](/tidb-cloud/tidb-cloud-support.md) and provide details of the error message, your actions, and any other relevant information.
+
+### Why does the `internal error` message show up during using Index Insight?
+
+The `internal error` message typically prompts when the system encounters an unexpected error or issue. This error message is general and does not provide details about the underlying cause.
+
+To resolve this issue, perform the following steps:
+
+1. Retry the operation: Refresh the page or try the operation again. The error might be temporary and can be resolved by a simple retry.
+2. Contact support: If the issue persists, contact [PingCAP support team](/tidb-cloud/tidb-cloud-support.md) and provide details of the error message, your actions, and any other relevant information.
