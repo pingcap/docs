@@ -103,23 +103,26 @@ Regularly monitor query performance after implementing the index recommendations
 
 Once index insight is deactivated, you can proceed to delete the SQL user. You can use the DROP USER statement. For example: `DROP USER 'username'@'host';`. Replace 'username' with the name of the user you want to delete and 'host' with the specific host associated with the user. If the user is associated with multiple hosts, you may need to execute the DROP USER statement for each host separately.
 
-### Why am I getting the 'invalid user or password' system message when I try to activate or perform a check-up?
+### Why am I getting the 'invalid user or password' system message when I try to activate or perform a check-up on index insight?
 
-The "invalid user or password" system prompt typically indicates that the credentials you provided for authentication are incorrect or not recognized by the system. This issue can occur for various reasons, including:
-
-- Incorrect username or password: Double-check that you are entering the correct username and password combination. Ensure that there are no typos or case sensitivity issues.
-- Expired or locked account: If your user account has an expiration date or is locked due to multiple failed login attempts, you may encounter authentication issues. Contact the system administrator or the appropriate support channel to verify the status of your account and address any lockouts or expired credentials.
+The "invalid user or password" system message typically indicates that the credentials you provided for authentication are incorrect or not recognized by the system. This issue can occur for various reasons, such as: incorrect username or password, expired or locked account.
 
 To troubleshoot and resolve the "invalid user or password" prompt, consider the following steps:
 
 - Verify your credentials: Double-check that you are using the correct username and password combination. Pay attention to any case sensitivity requirements.
 - Confirm account status: Ensure that your user account is active and not expired or locked. Contact the system administrator or the relevant support channel to confirm your account status.
-- create a new SQL user: 
+- Create a new SQL user: If none of the above steps work, you can try creating a new SQL user.
 
 If you have gone through the above steps and are still unable to resolve the issue, it's recommended to seek assistance from the support for further troubleshooting and guidance.
 
-### Why am I getting the 'no sufficient privileges' system message when I try to activate or perform a check-up?
+### Why am I getting the 'no sufficient privileges' system message when I try to activate or perform a check-up on index insight?
 
+The "no sufficient privileges" system message typically indicates that the user account you are using does not have the necessary permissions or privileges to perform the requested action on Index Insight. To troubleshoot and resolve the "no sufficient privileges" issue, consider the following steps:
+
+- Check your user privileges: Verify if your user account has been granted the necessary privileges for activating or performing check-ups on Index Insight.
+- Create a new SQL user: If none of the above steps work, you can try creating a new SQL user.
+
+If you have gone through the above steps and are still unable to resolve the issue, it's recommended to seek assistance from the support for further troubleshooting and guidance.
 
 ### Why am I getting the 'internal error'  
 
