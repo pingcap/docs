@@ -62,10 +62,10 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 | --source-password string | The password of the source MySQL instance                                  | Yes      | Only works in non-interactive mode.                  |
 | --source-port int        | The port of the source MySQL instance                                      | Yes      | Only works in non-interactive mode.                  |
 | --source-table string    | The source table name in the source MySQL database                         | Yes      | Only works in non-interactive mode.                  |
-| --source-user string     | The user to log in to the source MySQL instance                            | Yes      | Only works in non-interactive mode.                  |
+| --source-user string     | The user to login to the source MySQL instance                            | Yes      | Only works in non-interactive mode.                  |
 | --target-database string | The target database name in TiDB Serverless cluster                        | Yes      | Only works in non-interactive mode.                  |
 | --target-password string | The password of the target TiDB Serverless cluster                         | Yes      | Only works in non-interactive mode.                  |
-| --target-user string     | The user to log in to the target TiDB Serverless cluster                   | No       | Only works in non-interactive mode.                  |
+| --target-user string     | The user to login to the target TiDB Serverless cluster                   | No       | Only works in non-interactive mode.                  |
 
 ## Inherited flags
 
