@@ -9,8 +9,6 @@ Public cloud infrastructure has become an increasingly popular choice for deploy
 
 This document aims to cover various essential topics, such as using dedicated disks for Raft-Engine, overcoming IO throughput limitations, optimizing costs for cross-AZ traffic, mitigating GCP live migration events, and fine-tuning the PD server in large clusters. By adhering to these best practices, your TiDB deployment on the public cloud can achieve optimized performance, cost efficiency, reliability, and scalability.
 
-# Improve the TiKV write performance and stability
-
 ## Use a dedicated disk for Raft Engine
 
 The [Raft Engine](/glossary.md#raft-engine) in TiKV plays a critical role similar to that of a write-ahead log (WAL) in traditional databases. To achieve optimal performance and stability, it is crucial to allocate a dedicated disk for the Raft Engine when you deploy TiDB on a public cloud. The following `iostat` shows the IO characteristics on a TiKV node with a write-heavy workload.
@@ -126,54 +124,56 @@ server_configs:
     server.grpc-compression-type: gzip
 ```
 
-To reduce network traffic caused by the data shuffle of the TiFlash MPP tasks, it's recommended to deploy multiple TiFlash instance at the same availability zones (AZs).
-Since v6.6.0, [Compression exchange](https://docs.pingcap.com/tidb/v6.6/explain-mpp#mpp-version-and-exchange-data-compression) is enabled by default to reduce the network traffic caused by MPP data shuffle.
+To reduce network traffic caused by the data shuffle of TiFlash MPP tasks, it is recommended to deploy multiple TiFlash instances in the same availability zones (AZs). Starting from v6.6.0, [compression exchange](/explain-mpp.md#mpp-version-and-exchange-data-compression) is enabled by default, which reduces the network traffic caused by MPP data shuffle.
 
 
-# Mitigation of Live Migration Maintenance Events on Google Cloud
+## Mitigate live migration maintenance events on Google Cloud
 
-Google Cloud's [Live Migration feature](https://cloud.google.com/compute/docs/instances/live-migration-process) enables VMs to be seamlessly migrated between hosts without causing downtime. However, these migration events are not rarely occured and can have an huge impact on the performance of VMs, including those running in a TiDB Cluster. During the event, the impacted VMs will performan much slower and impact the query proccsing response time in TiDB Cluster.
+Google Cloud's [Live Migration feature](https://cloud.google.com/compute/docs/instances/live-migration-process) enables VMs to be seamlessly migrated between hosts without causing downtime. However, these migration events, although infrequent, can significantly impact the performance of VMs, including those running in a TiDB cluster. During such events, affected VMs might experience reduced performance, leading to longer query processing times in the TiDB cluster.
 
-To mitigate the performance penalty from GCP's live migration event, TiDB provide a [watching script](https://github.com/PingCAP-QE/tidb-google-maintenance) based on the Google's own metadata [example](https://github.com/GoogleCloudPlatform/python-docs-samples/blob/master/compute/metadata/main.py). The scripts are deployed on TiDB, TiKV, and PD nodes, to detect maintenance events. During maintenance events, below appropriate actions can be taken:
-- TiDB: Put the TiDB offline by cordon the TiDB node and delete the TiDB pod (the node pool of TiDB instance MUST be set to auto-scale, and be set to TiDB dedicated. Other pods running on the node would be interrupted when the node is cordon. The cordon node is expected to be reclaimed by auto-scaler)
-- TiKV: Ecivt leaders on TiKV store during maintenance.
-- PD: Resign leader if the current PD instance is the PD leader
+To mitigate the performance impact of live migration events on Google Cloud, TiDB provides a [watching script](https://github.com/PingCAP-QE/tidb-google-maintenance) based on Google's metadata [example](https://github.com/GoogleCloudPlatform/python-docs-samples/blob/master/compute/metadata/main.py). This script is deployed on TiDB, TiKV, and PD nodes to detect maintenance events. When a maintenance event is detected, appropriate actions can be taken as follows:
+- TiDB: Takes the TiDB node offline by cordoning it and deleting the TiDB pod. This assumes that the node pool of the TiDB instance is set to auto-scale and dedicated to TiDB. Other pods running on the node might experience interruptions, and the cordoned node is expected to be reclaimed by the auto-scaler.
+- TiKV: Ecivts leaders on the affected TiKV store during maintenance.
+- PD: Resigns a leader if the current PD instance is the PD leader
 
-It is worth emphasizing that this watching script is specifically tailored for TiDB Clusters deployed using the [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/dev/tidb-operator-overview), which offers enhanced management functionalities for TiDB in Kubernetes environments.
+It is important to note that this watching script is specifically designed for TiDB clusters deployed using the [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/dev/tidb-operator-overview), which offers enhanced management functionalities for TiDB in Kubernetes environments.
 
-The purpose of the watching script is to detect maintenance events initiated by Google Cloud. When such events are detected, appropriate actions can be taken to minimize disruption and optimize the cluster's behavior. It's important to note that this watching script is specifically designed for TiDB Clusters deployed using the TiDB Operator, which provides additional management capabilities for TiDB in Kubernetes environments.
+The purpose of the watching script is to detect maintenance events initiated by Google Cloud. When such events are detected, appropriate actions can be taken to minimize disruption and optimize the cluster's behavior.
 
-By utilizing the watching script and taking necessary actions during maintenance events, TiDB clusters can better handle GCP's live migration events and ensure smoother operations with minimal impact on query processing and response times.
+By utilizing the watching script and taking necessary actions during maintenance events, TiDB clusters can better handle live migration events on Google Cloud and ensure smoother operations with minimal impact on query processing and response times.
 
-# PD Tuning with large deployment cluster
+## PD tuning for large deployment cluster
 
-In a TiDB Cluster, the architecture relies on a single active PD (Placement Driver) server to handle crucial tasks such as serving the TSO (Timestamp Oracle) and other requests. However, this single point of active architecture can potentially limit the scalability of TiDB clusters.
+In a TiDB cluster, a single active Placement Driver (PD) server is used to handle crucial tasks such as serving the TSO (Timestamp Oracle) and processing requests. However, relying on a single active PD server can limit the scalability of TiDB clusters.
 
-## Sympotoms of PD limiration
-The example showcases a large cluster deployment consisting of three PD servers, each equipped with 56 CPUs. In the below graphs, it is observed that when the query per second (QPS) exceeds 1 million and the TSO (Timestamp Oracle) requests per second surpass 162,000, the CPU utilization reaches approximately 4,600%. This high CPU utilization indicates that the PD leader is experiencing significant load and is running out of available CPU resources.
+### Symptoms of PD limitation
+The following diagrams show the sympotoms of a large cluster deployment consisting of three PD servers, each equipped with 56 CPUs. From these diagrams, it is observed that when the query per second (QPS) exceeds 1 million and the TSO (Timestamp Oracle) requests per second surpass 162,000, the CPU utilization reaches approximately 4,600%. This high CPU utilization indicates that the PD leader is experiencing a significant load and is running out of available CPU resources.
 
 ![pd-server-cpu](/media/performance/public-cloud-best-practice/baseline_cpu.png)
 ![pd-server-metrics](/media/performance/public-cloud-best-practice/baseline_metrics.png)
 
-## PD Tuning
+### Tune PD performance
 
-To address the high CPU utilization issue in the PD server, the following tuning adjustments can be made to the PD configuration:
+To address the high CPU utilization issue in the PD server, you can make the following tuning adjustments:
 
-### PD Configuration
-`tso-update-physical-interval`: This parameter controls the interval at which the PD server updates the physical TSO batch. By reducing the value, the PD server can allocate TSO batches more frequently, reducing the waiting time for the next allocation.
+#### Adjust PD configuration
+
+`tso-update-physical-interval`: This parameter controls the interval at which the PD server updates the physical TSO batch. By reducing the interval, the PD server can allocate TSO batches more frequently, thereby reducing the waiting time for the next allocation.
 ```
 tso-update-physical-interval = "10ms" # default: 50ms
 ```
 
-### TiDB Global Variable
-In addition to the PD configuration, adjusting a TiDB global variable can further optimize the TSO client's behavior. Enable the TSO client batch wait feature by setting `tidb_tso_client_batch_max_wait_time` to a non-zero value.
+#### Adjust a TiDB global variable
+
+In addition to the PD configuration, enabling the TSO client batch wait feature can further optimize the TSO client's behavior. To enable this feature, you can set the global variable [`tidb_tso_client_batch_max_wait_time`](/system-variables.md#tidb_tso_client_batch_max_wait_time-new-in-v530) to a non-zero value.
 
 ```
 set global tidb_tso_client_batch_max_wait_time = 2; # default: 0
 ```
 
-### TiKV Configuration
-To reduce the number of regions and alleviate the heartbeat overhead on the system, it is recommended to increase the region size in the TiKV configuration from 96MB to 256MB.
+#### Adjust TiKV configuration
+
+To reduce the number of Regions and alleviate the heartbeat overhead on the system, it is recommended to increase the Region size in the TiKV configuration from `96MB` to `256MB`.
 
 ```
 [coprocessor]
@@ -182,11 +182,11 @@ To reduce the number of regions and alleviate the heartbeat overhead on the syst
 
 ## After Tuning
 
-Following the implementation of these tuning changes, the effects are observed in the graphs below:
+After the tunning, the following effects can be observed:
 
 - The TSO requests per second have decreased to 64,800.
-- The CPU utilization has reduced significantly from approximately 4,600% to 1,400%.
-- The P999 value of "PD server TSO handle time" has decreased from 2ms to 0.5ms.
+- The CPU utilization has significantly reduced from approximately 4,600% to 1,400%.
+- The P999 value of `PD server TSO handle time` has decreased from 2ms to 0.5ms.
 
 These improvements indicate that the tuning adjustments have successfully reduced the CPU utilization of the PD server while maintaining stable TSO handling performance.
 
@@ -195,6 +195,14 @@ These improvements indicate that the tuning adjustments have successfully reduce
 
 
 # Conclusion
-By adhering to these best practices, TiDB deployments on the public cloud can achieve exceptional performance, cost efficiency, reliability and scability. The selection of the right dedicated disk type and size ensures optimal storage performance for Raft-Engine. Tuning TiKV's compaction settings improves resource utilization and reduces IO throughput. Minimizing cross-AZ read traffic helps optimize costs. Leveraging notification and taking proper actions mitigates performance impact during maintenance events. Tuning PD server addresses scalability bottleneck on a single active PD server.
+By following these best practices, TiDB deployments on public cloud platforms can achieve exceptional performance, cost efficiency, reliability, and scalability. 
 
-In conclusion, Whether you are deploying TiDB on AWS, GCP, Azure, or any other public cloud provider, these best practices provide a solid foundation for success. 
+The key practices include the following:
+
+- Select the appropriate dedicated disk type and size for optimal storage performance with Raft-Engine, 
+- Tune TiKV's compaction settings to improve resource utilization and reduce IO throughput, 
+- Minimize cross-AZ read traffic to optimize costs, 
+- Mitigate performance impact during maintenance events by leveraging notifications and taking appropriate actions
+- Tuning the PD server to address scalability bottlenecks.
+
+In summary, whether you are deploying TiDB on AWS, GCP, Azure, or any other public cloud provider, these best practices serve as a solid foundation for success.
