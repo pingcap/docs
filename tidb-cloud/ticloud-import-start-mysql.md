@@ -5,7 +5,7 @@ summary: The reference of `ticloud import start mysql`.
 
 # ticloud import start mysql
 
-Import one table from a MySQL compatible database to a [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta) cluster, the target table name is the same as the source table name:
+Import a table from a MySQL-compatible database to a [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta) cluster:
 
 ```shell
 ticloud import start mysql [flags]
@@ -13,7 +13,9 @@ ticloud import start mysql [flags]
 
 > **Note:**
 >
-> It depends on 'mysql' command-line tool, please make sure you have installed it and add to path.
+> - Before running this command, make sure that you have installed a `mysql` command-line tool first.
+> - If the target table already exists in the target database, to use this command for table import, make sure that the target table name is the same as the source table name and add the `skip-create-table` flag to the command. 
+> - If the target table does not exist in the target database, executing this command will automatically create a target table with the same name as the source table in the target database.
 
 ## Examples
 
@@ -23,19 +25,19 @@ Start an import task in interactive mode:
 ticloud import start mysql
 ```
 
-Start an import task in non-interactive mode(using the default user `<token>.root`):
+Start an import task in non-interactive mode (using the TiDB Serverless cluster default user `<username-prefix>.root`):
 
 ```shell
 ticloud import start mysql --project-id <project-id> --cluster-id <cluster-id> --source-host <source-host> --source-port <source-port> --source-user <source-user> --source-password <source-password> --source-database <source-database> --source-table <source-table> --target-database <target-database> --target-password <target-password>
 ```
 
-Start an import task with a specific user:
+Start an import task in non-interactive mode (using a specific user):
 
 ```shell
 ticloud import start mysql --project-id <project-id> --cluster-id <cluster-id> --source-host <source-host> --source-port <source-port> --source-user <source-user> --source-password <source-password> --source-database <source-database> --source-table <source-table> --target-database <target-database> --target-password <target-password> --target-user <target-user>
 ```
 
-Start an import task skipping create table:
+Start an import task that skips creating the target table if it already exists in the target database:
 
 ```shell
 ticloud import start mysql --project-id <project-id> --cluster-id <cluster-id> --source-host <source-host> --source-port <source-port> --source-user <source-user> --source-password <source-password> --source-database <source-database> --source-table <source-table> --target-database <target-database> --target-password <target-password> --skip-create-table
@@ -43,7 +45,7 @@ ticloud import start mysql --project-id <project-id> --cluster-id <cluster-id> -
 
 > **Note:**
 >
-> Mysql 8.0 uses `utf8mb4_0900_ai_ci` as the default collation, which is not supported by TiDB. You can alter the source table collation, or manually create the target table.
+> MySQL 8.0 uses `utf8mb4_0900_ai_ci` as the default collation, which is currently not supported by TiDB. If your source table uses the `utf8mb4_0900_ai_ci` collation, before the import, you need to either alter the source table collation to a [supported collation of TiDB](/character-set-and-collation.md#character-sets-and-collations-supported-by-tidb) or manually create the target table in TiDB.
 
 ## Flags
 
@@ -54,17 +56,16 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 | -c, --cluster-id string  | Cluster ID                                    | Yes      | Only works in non-interactive mode.                  |
 | -h, --help               | Help information for this command             | No       | Works in both non-interactive and interactive modes. |
 | -p, --project-id string  | Project ID                                    | Yes      | Only works in non-interactive mode.                  |
-| --skip-create-table      | Skip create table                             | No       | Only works in non-interactive mode.                  |
-| --source-database string | The database of the source MySQL              | Yes      | Only works in non-interactive mode.                  |
-| --source-host string     | The host of the source MySQL                  | Yes      | Only works in non-interactive mode.                  |
-| --source-password string | The password of the source MySQL              | Yes      | Only works in non-interactive mode.                  |
-| --source-port int        | The port of the source MySQL                  | Yes      | Only works in non-interactive mode.                  |
-| --source-table string    | The table of the source MySQL                 | Yes      | Only works in non-interactive mode.                  |
-| --source-user string     | The user of the source MySQL                  | Yes      | Only works in non-interactive mode.                  |
-| --target-database string | Target database to import data to             | Yes      | Only works in non-interactive mode.                  |
-| --target-password string | The password of the target serverless cluster | Yes      | Only works in non-interactive mode.                  |
-| --target-table string    | Target table to import data to                | Yes      | Only works in non-interactive mode.                  |
-| --target-user string     | The user of the target serverless cluster     | No       | Only works in non-interactive mode.                  |
+| --skip-create-table      | Skip creating the target table if it already exists in the target database                            | No       | Only works in non-interactive mode.                  |
+| --source-database string | The name of the source MySQL database             | Yes      | Only works in non-interactive mode.                  |
+| --source-host string     | The host of the source MySQL database                  | Yes      | Only works in non-interactive mode.                  |
+| --source-password string | The password of the source MySQL database              | Yes      | Only works in non-interactive mode.                  |
+| --source-port int        | The port of the source MySQL database                  | Yes      | Only works in non-interactive mode.                  |
+| --source-table string    | The source table name in the source MySQL database                 | Yes      | Only works in non-interactive mode.                  |
+| --source-user string     | The user to log in to the source MySQL database                  | Yes      | Only works in non-interactive mode.                  |
+| --target-database string | The target database name in TiDB            | Yes      | Only works in non-interactive mode.                  |
+| --target-password string | The password of the target TiDB Serverless cluster | Yes      | Only works in non-interactive mode.                  |
+| --target-user string     | The user to log in to the target TiDB Serverless cluster     | No       | Only works in non-interactive mode.                  |
 
 ## Inherited flags
 
