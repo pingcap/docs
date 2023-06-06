@@ -13,7 +13,7 @@ ticloud import start mysql [flags]
 
 > **Note:**
 >
-> - Before running this command, make sure that you have installed a `mysql` command-line tool first.
+> - Before running this command, make sure that you have installed the `mysql` command-line tool first.
 > - If the target table already exists in the target database, to use this command for table import, make sure that the target table name is the same as the source table name and add the `skip-create-table` flag to the command. 
 > - If the target table does not exist in the target database, executing this command will automatically create a target table with the same name as the source table in the target database.
 
@@ -51,21 +51,21 @@ ticloud import start mysql --project-id <project-id> --cluster-id <cluster-id> -
 
 In non-interactive mode, you need to manually enter the required flags. In interactive mode, you can just follow CLI prompts to fill them in.
 
-| Flag                     | Description                                   | Required | Note                                                 |
-|--------------------------|-----------------------------------------------|----------|------------------------------------------------------|
-| -c, --cluster-id string  | Cluster ID                                    | Yes      | Only works in non-interactive mode.                  |
-| -h, --help               | Help information for this command             | No       | Works in both non-interactive and interactive modes. |
-| -p, --project-id string  | Project ID                                    | Yes      | Only works in non-interactive mode.                  |
-| --skip-create-table      | Skip creating the target table if it already exists in the target database                            | No       | Only works in non-interactive mode.                  |
-| --source-database string | The name of the source MySQL database             | Yes      | Only works in non-interactive mode.                  |
-| --source-host string     | The host of the source MySQL database                  | Yes      | Only works in non-interactive mode.                  |
-| --source-password string | The password of the source MySQL database              | Yes      | Only works in non-interactive mode.                  |
-| --source-port int        | The port of the source MySQL database                  | Yes      | Only works in non-interactive mode.                  |
-| --source-table string    | The source table name in the source MySQL database                 | Yes      | Only works in non-interactive mode.                  |
-| --source-user string     | The user to log in to the source MySQL database                  | Yes      | Only works in non-interactive mode.                  |
-| --target-database string | The target database name in TiDB            | Yes      | Only works in non-interactive mode.                  |
-| --target-password string | The password of the target TiDB Serverless cluster | Yes      | Only works in non-interactive mode.                  |
-| --target-user string     | The user to log in to the target TiDB Serverless cluster     | No       | Only works in non-interactive mode.                  |
+| Flag                     | Description                                                                | Required | Note                                                 |
+|--------------------------|----------------------------------------------------------------------------|----------|------------------------------------------------------|
+| -c, --cluster-id string  | Cluster ID                                                                 | Yes      | Only works in non-interactive mode.                  |
+| -h, --help               | Help information for this command                                          | No       | Works in both non-interactive and interactive modes. |
+| -p, --project-id string  | Project ID                                                                 | Yes      | Only works in non-interactive mode.                  |
+| --skip-create-table      | Skip creating the target table if it already exists in the target database | No       | Only works in non-interactive mode.                  |
+| --source-database string | The name of the source MySQL database                                      | Yes      | Only works in non-interactive mode.                  |
+| --source-host string     | The host of the source MySQL instance                                      | Yes      | Only works in non-interactive mode.                  |
+| --source-password string | The password of the source MySQL instance                                  | Yes      | Only works in non-interactive mode.                  |
+| --source-port int        | The port of the source MySQL instance                                      | Yes      | Only works in non-interactive mode.                  |
+| --source-table string    | The source table name in the source MySQL database                         | Yes      | Only works in non-interactive mode.                  |
+| --source-user string     | The user to log in to the source MySQL instance                            | Yes      | Only works in non-interactive mode.                  |
+| --target-database string | The target database name in TiDB Serverless cluster                        | Yes      | Only works in non-interactive mode.                  |
+| --target-password string | The password of the target TiDB Serverless cluster                         | Yes      | Only works in non-interactive mode.                  |
+| --target-user string     | The user to log in to the target TiDB Serverless cluster                   | No       | Only works in non-interactive mode.                  |
 
 ## Inherited flags
 
