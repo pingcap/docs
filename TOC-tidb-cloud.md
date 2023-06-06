@@ -267,6 +267,7 @@
   - [TiDB Limitations](/tidb-limitations.md)
   - Benchmarks
     - [TPC-C Performance Test Report](/tidb-cloud/v7.1.0-performance-benchmarking-with-tpcc.md)
+    - [Sysbench Performance Test Report](/tidb-cloud/v7.1.0-performance-benchmarking-with-sysbench.md)
   - SQL
     - [Explore SQL with TiDB](/basic-sql-operations.md)
     - SQL Language Structure and Syntax
