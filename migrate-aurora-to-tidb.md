@@ -76,14 +76,20 @@ port = ${port}                # e.g.: 4000
 user = "${user_name}          # e.g.: "root"
 password = "${password}"      # e.g.: "rootroot"
 status-port = ${status-port}  # Obtains the table schema information from TiDB status port, e.g.: 10080
-pd-addr = "${ip}:${port}"     # The cluster PD address, e.g.: 172.16.31.3:2379. TiDB Lightning obtains some information from PD. When backend = "local", you must specify status-port and pd-addr correctly. Otherwise, the import will be abnormal.
+pd-addr = "${ip}:${port}"     # The cluster PD address, e.g.: 172.16.31.3:2379. TiDB Lightning obtains some information from PD. 
+                              # When backend = "local", you must specify status-port and pd-addr correctly. Otherwise, the import will be abnormal.
 
 [tikv-importer]
-# "local": Physical Import Mode. The default backend. The local backend is recommended to import large volumes of data (1 TiB or more). During the import, the target TiDB cluster cannot provide any service.
-# "tidb": Logical Import Mode. The "tidb" backend is recommended to import data less than 1 TiB. During the import, the target TiDB cluster can provide service normally.
+# "local": Physical Import Mode. The default backend. The local backend is recommended to import large volumes of data (1 TiB or more). 
+# During the import, the target TiDB cluster cannot provide any service.
+# "tidb": Logical Import Mode. The "tidb" backend is recommended to import data less than 1 TiB. 
+# During the import, the target TiDB cluster can provide service normally.
 backend = "local"
 
-# Set the temporary storage directory for the sorted Key-Value files. The directory must be empty, and the storage space must be greater than the size of the dataset to be imported. For better import performance, it is recommended to use a directory different from `data-source-dir` and use flash storage, which can use I/O exclusively.
+# Set the temporary storage directory for the sorted Key-Value files. 
+# The directory must be empty, and the storage space must be greater than the size of the dataset to be imported. 
+# For better import performance, it is recommended to use a directory different from `data-source-dir` and use flash storage, 
+# which can use I/O exclusively.
 sorted-kv-dir = "/mnt/ssd/sorted-kv-dir"
 
 [mydump]
