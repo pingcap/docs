@@ -3,14 +3,17 @@ title: Best Practice On Public Cloud
 summary: This document introduces the best practice for TiDB to deploy on public cloud
 ---
 
-# Introduction
+# Best Practice On Public Cloud
 
-Public cloud infrastructure has gained significant popularity as a preferred choice for deploying and managing TiDB. However, deploying TiDB on the cloud requires careful consideration of several factors, such as performance tuning, cost optimization, reliability and scability. This document will cover various topics such as dedicated disk for Raft-Engine, IO throughput limitation, cost optimization for cross-AZ traffic, mitigation of GCP live migration event and PD server tuning on a large cluster. By following these best practices, you can ensure that your TiDB deployment on public cloud is optimized for performance, cost, reliability and scability.
+Public cloud infrastructure has become an increasingly popular choice for deploying and managing TiDB. However, deploying TiDB on the cloud requires careful consideration of several critical factors, including performance tuning, cost optimization, reliability, and scalability. 
 
-# Improve the TiKV Write Performance and Stability
+This document aims to cover various essential topics, such as using dedicated disks for Raft-Engine, overcoming IO throughput limitations, optimizing costs for cross-AZ traffic, mitigating GCP live migration events, and fine-tuning the PD server in large clusters. By adhering to these best practices, your TiDB deployment on the public cloud can achieve optimized performance, cost efficiency, reliability, and scalability.
 
-## Dedicated Disk for Raft-Engine
-As with traditional databases, the Raft-Engine in TiKV plays a critical role similar to that of a write-ahead log (WAL). When deploying TiDB on a public cloud, it is important to ensure that the Raft engine has a dedicated disk to achieve optimal performance and stability. Below `iostat` shows the IO character on a TiKV node with write heavy workload.
+# Improve the TiKV write performance and stability
+
+## Use a dedicated disk for Raft Engine
+
+The [Raft Engine](/glossary.md#raft-engine) in TiKV plays a critical role similar to that of a write-ahead log (WAL) in traditional databases. To achieve optimal performance and stability, it is crucial to allocate a dedicated disk for the Raft Engine when you deploy TiDB on a public cloud. The following `iostat` shows the IO characteristics on a TiKV node with a write-heavy workload.
 
 ```
 Device            r/s     rkB/s       w/s     wkB/s      f/s  aqu-sz  %util
@@ -18,57 +21,68 @@ sdb           1649.00 209030.67   1293.33 304644.00    13.33    5.09  48.37
 sdd           1033.00   4132.00   1141.33  31685.33   571.00    0.94 100.00
 ```
 
-Device sdb is for KV RocksDB; sdd is to restore Raft-Engine log. There is much higher `f/s` for sdd, `f/s` means the number of flush requests completed per second for the device. For Raft-Engine, when one write in a batch is marked synchronous, the batch leader will call fdatasync() after writing. This way, buffered data is guaranteed to be flushed out onto the storage. By deploying a dedicated volume for Raft-Engine, TiKV is able to reduce the the average queue length of the requests and make sure the write latency is optimal and stable.
+The device `sdb` is used for KV RocksDB, while `sdd` is used to restore Raft Engine logs. Note that `sdd` has a significantly higher `f/s` value, which represents the number of flush requests completed per second for the device. In Raft Engine, when a write in a batch is marked synchronous, the batch leader will call `fdatasync()` after writing, guaranteeing that buffered data is flushed to the storage. By using a dedicated volume for Raft Engine, TiKV reduces the average queue length of requests, thereby ensuring optimal and stable write latency.
 
-Different cloud providers offer different types of disks with varying performance characteristics, such as IOPS and MBPS. Therefore, it is important to choose the appropriate disk type and size based on the workload and the cloud provider being used.
+Different cloud providers offer various disk types with different performance characteristics, such as IOPS and MBPS. Therefore, it is important to choose an appropriate cloud provider, disk type, and disk size based on your workload.
 
-### Chose proper disk for Raft-Engine on different public cloud
+### Choose appropriate disks for Raft Engine on public clouds
 
-This section covers best practices for choosing proper disks for Raft-Engine on different public clouds. Depending on performance requirements, two types of recommended disks are available on different public clouds.
+This section outlines best practices for choosing appropriate disks for Raft-Engine on different public clouds. Depending on performance requirements, two types of recommended disks are available.
 
-#### Middle Range Disk
-For middle-range disks, the following recommendations are suggested for different public clouds:
+#### Middle-range disk
 
-- On AWS, it is recommended to use [gp3](https://aws.amazon.com/ebs/general-purpose/) volumes. These volumes offer free 3000 IOPS and 125 MB/s throughput, regardless of the volume size allocated. This is usually sufficient for the Raft-Engine.
+The following are recommended middle-range disks for different public clouds:
 
-- On GCP, it is recommended to use [pd-ssd](https://cloud.google.com/compute/docs/disks#disk-types/) volumes. The IOPS and MBPS are dependent on the disk size allocated. To meet the performance requirement, it's recommended to allocate 200GB space for Raft-Engine. Although, Raft-Engine doesn't need this large space, it can provide the necessary performance.
+- On AWS, it is recommended to use [gp3](https://aws.amazon.com/ebs/general-purpose/) volumes. These volumes offer a free allocation of 3000 IOPS and 125 MB/s throughput, irrespective of the volume size. This is usually sufficient for the Raft Engine.
 
-- On Azure, it is recommended to use  [Premium SSD v2](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#premium-ssd-v2) volumes. Similar to AWS, it provides free 3000 IOPS and 125 MB/s throughput regardless of volume size allocated, which is usually sufficient for Raft-Engine.
+- On GCP, it is recommended to use [pd-ssd](https://cloud.google.com/compute/docs/disks#disk-types/) volumes. The IOPS and MBPS vary depending on the allocated disk size. To meet performance requirements, it is recommended to allocate 200 GB for Raft-Engine. Although Raft Engine does not require such a large space, it ensures optimal performance.
 
-#### High End Disk
-If even lower latency is required for Raft-Engine, high-end disks are available. Here are the recommendations for different public clouds:
+- On Azure, it is recommended to use  [Premium SSD v2](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#premium-ssd-v2) volumes. Similar to AWS, they provide a free allocation of 3000 IOPS and 125 MB/s throughput, regardless of the volume size, which is generally adequate for Raft Engine.
 
-- On AWS, it is recommended to use [io2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volume-types.html) volumes. Disk size and IOPS can be provisioned according to the requirement.
+#### High-end disk
 
-- On GCP, [pd-extreme](https://cloud.google.com/compute/docs/disks#disk-types/) is recommended. Disk size, IOPS and MBPS can be provisioned, but it's only available on 64c+ instances.
+If you expect an even lower latency for Raft Engine, consider using high-end disks. The following are recommended high-end disks for different public clouds:
 
-- On Azure, [Ultra disk](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#ultra-disks) is recommended. Disk size, IOPS, and MBPS can be provisioned according to the requirement.
+- On AWS, [io2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volume-types.html) is recommended. Disk size and IOPS can be provisioned according to your specific requirements.
 
-### Example 1, Run a social network workload on AWS
-With 20GB [gp3](https://aws.amazon.com/ebs/general-purpose/) dedicated Raft-Engine disk, for a write intensive social network application workload, qps increases by 17.5%, avg latency of insert statement decreases by 18.7%, p99 latency of insert statement decreases by 45.6%, and the estimated cost is increased by only 0.4%. AWS provide 3000 IOPS and 125 MBPS/s for a 20GB [gp3](https://aws.amazon.com/ebs/general-purpose/) volume.
+- On GCP, [pd-extreme](https://cloud.google.com/compute/docs/disks#disk-types/) is recommended. Disk size, IOPS, and MBPS can be provisioned, but it is only available on 64c+ instances.
 
-| Item | shared Raft-Engine disk|dedicated Raft-Engine disk| diff(%) |
+- On Azure, [ultra disk](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#ultra-disks) is recommended. Disk size, IOPS, and MBPS can be provisioned according to your specific requirements.
+
+### Example 1: Run a social network workload on AWS
+
+AWS offers 3000 IOPS and 125 MBPS/s for a 20GB [gp3](https://aws.amazon.com/ebs/general-purpose/) volume.
+
+By using a dedicated 20GB [gp3](https://aws.amazon.com/ebs/general-purpose/) Raft Engine disk on AWS for a write-intensive social network application workload, the following improvements are observed but the estimated cost only increases by 0.4%:
+
+- a 17.5% increase in QPS (queries per second)
+- an 18.7% decrease in average latency for insert statements
+- a 45.6% decrease in p99 latency for insert statements.
+
+
+| Metric | Shared Raft Engine disk | Dedicated Raft Engine disk | Difference (%) |
 | ------------- | ------------- |------------- |------------- |
 | QPS (K/s)| 8.0 | 9.4 | 17.5| 
 | AVG Insert Latency (ms)| 11.3 | 9.2 | -18.7 |
 | P99 Insert Latency (ms)| 29.4 | 16.0 | -45.6|
 
-### Example 2, Run TPC-C/SYSBench workload on AZure
-By using a 32G Ultra disk for Raft-Engine on Azure:
+### Example 2: Run TPC-C/SYSBench workload on Azure
 
-- For sysbench oltp_read_write,  QPS increases by 17.8%, avg latency decreases by 15.6%.
-- For TPC-C, QPS increased by 27.6%, avg latency decreases by 23.1%
+By using a dedicated 32GB ultra disk for Raft Engine on Azure, the following improvements are observed:
 
-| Item | Workload | shared Raft-Engine disk|dedicated Raft-Engine disk| diff(%) |
+- Sysbench `oltp_read_write` workload: a 17.8% increase in QPS and a 15.6% decrease in average latency.
+- TPC-C workload: a 27.6% increase in QPS and a 23.1% decrease in average latency.
+
+| Metric | Workload | Shared Raft Engine disk | Dedicated Raft Engine disk | Difference (%) |
 | ------------- | ------------- | ------------- |------------- |------------- |
-| QPS (K/s) | Sysbench - oltp_read_write | 60.7 | 71.5 | 17.8| 
+| QPS (K/s) | Sysbench `oltp_read_write` | 60.7 | 71.5 | 17.8| 
 | QPS (K/s) | TPC-C | 23.9 | 30.5 | 27.6| 
-| AVG Latency (ms)| Sysbench - oltp_read_write |  4.5 | 3.8 | -15.6 |
+| AVG Latency (ms)| Sysbench `oltp_read_write` |  4.5 | 3.8 | -15.6 |
 | AVG Latency (ms)| TPC-C |  3.9 | 3.0 | -23.1 |
 
-### Example 3, how to attach a dedicated pd-ssd disk on Google Cloud for Raft-Engine on TiKV manifest
+### Example 3: Attach a dedicated pd-ssd disk on Google Cloud for Raft Engine on TiKV manifest
 
-Here is a example for a cluster deployed by TiDB Operator on Google Cloud, attach an additional disk with 512GB [pd-ssd](https://cloud.google.com/compute/docs/disks#disk-types/) volumne, and change the `raft-engine.dir` to store Raft-Engine logs to this specific disk.
+The following TiKV configuration example shows how to attach an additional 512GB [pd-ssd](https://cloud.google.com/compute/docs/disks#disk-types/) disk to a cluster on Google Cloud deployed by TiDB Operator, with `raft-engine.dir` configured to store Raft Engine logs to this specific disk.
 
 ```
 tikv:
@@ -87,20 +101,24 @@ tikv:
 ```
 
 
-## Reduce Compaction IO Flow In KV RocksDB
-As the storage engine of TiKV, [RocksDB](https://rocksdb.org/) is used to store user data. The write amplification for RocksDB can be high and the workload may be bottlenecked on disk throughput. This is not uncommon because the provisioned IO throughput on cloud ebs is usually limited due to cost reason. Under this situation, the total number of compaction pending bytes will grow over time and flow control is triggered, indicating that TiKV doesn't have enough disk bandwith to keep up with the foreground write flow. In this case, to mitigate the bottleneck of disk throughput, increasing the compression level for the RocksDB and reducing the disk throughput can help improve performance. For example, below config increase all the compression level of the default column family to zstd.
+## Reduce compaction IO flow in KV RocksDB
+
+As the storage engine of TiKV, [RocksDB](https://rocksdb.org/) is used to store user data. However, because the provisioned IO throughput on cloud EBS is usually limited due to cost considerations, RocksDB might exhibit high write amplification, and the disk throughput might become the bottleneck for the workload. As a result, the total number of pending compaction bytes grows over time and triggers flow control, which indicates that TiKV lacks sufficient disk bandwidth to keep up with the foreground write flow. 
+
+To alleviate the bottleneck caused by limited disk throughput, you can improve performance by increasing the compression level for RocksDB and reducing the disk throughput. For example, you can refer to the following example to increase all the compression levels of the default column family to `zstd`.
 
 ```
 [rocksdb.defaultcf]
 compression-per-level = ["zstd", "zstd", "zstd", "zstd", "zstd", "zstd", "zstd"]
 ```
 
-# Cost Optimization for Cross-AZ
+## Optimize cost for cross-AZ network traffic
+
 Deploying TiDB across multiple availability zones (AZs) can lead to increased costs due to cross-AZ data transfer fees. To optimize costs, it is important to reduce cross-AZ network traffic.
 
-One way to reduce cross-AZ read traffic is to use the [Follower Read feature](https://docs.pingcap.com/tidb/dev/follower-read), which allows TiDB prefers to select a replica in the same availability zone. This feature can be enabled setting tidb_replica_read variable to `closest-replicas` or `closest-adaptive`. 
+To reduce cross-AZ read traffic, you can enable the [Follower Read feature](/follower-read.md), which allows TiDB to prioritize selecting replicas in the same availability zone. To enable this feature, set the `tidb_replica_read` variable to `closest-replicas` or `closest-adaptive`. 
 
-To reduce cross-AZ write traffic For TiKV instance, gRPC compression feature can be enabled to compress data before transmitting it across the network. Below is the configuration example to enable gzip grp compression for TiKV.
+To reduce cross-AZ write traffic in TiKV instances, you can enable the gRPC compression feature, which compresses data before transmitting it over the network. The following configuration example shows how to enable gzip gRPC compression for TiKV.
 
 ```
 server_configs:
