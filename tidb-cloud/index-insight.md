@@ -44,6 +44,8 @@ Before enabling the Index Insight feature, make sure that you have created a TiD
     FLUSH PRIVILEGES;
     ```
 
+![Activate Feature]()
+
     > **Note:**
     >
     > To connect to your TiDB Dedicated cluster, see [Connect to a TiDB cluster](/tidb-cloud/connect-to-tidb-cluster.md).
@@ -54,13 +56,19 @@ Before enabling the Index Insight feature, make sure that you have created a TiD
 
 To obtain index recommendations for your slow queries, you can manually trigger the Index Insight feature by clicking **Check Up** in the upper-right corner of the **Index Insight overview** page.
 
+![Manually Trigger]()
+
 Then, the feature begins scanning your slow queries from the past three hours. After the scan finishes, it provides a list of index recommendations based on its analysis.
+
+![Results list]()
 
 ### Step 3: View index recommendations
 
 To view the details of a specific index recommendation, click the insight from the list. The **Index Insight Detail** page is displayed.
 
 On this page, you can find the index recommendations, related slow queries, execution plans, and relevant metrics. This information helps you better understand the performance issues and evaluate the potential impact of implementing the index recommendations.
+
+![Insight Details]()
 
 ### Step 4: Implement index recommendations
 
@@ -88,3 +96,33 @@ Before implementing the index recommendations, analyze the potential impact on q
 ### Monitor performance
 
 Regularly monitor query performance after implementing the index recommendations. This helps you confirm the improvements and make further adjustments if necessary.
+
+## FAQ
+
+### How to delete user after deactivate index insight?
+
+Once index insight is deactivated, you can proceed to delete the SQL user. You can use the DROP USER statement. For example: `DROP USER 'username'@'host';`. Replace 'username' with the name of the user you want to delete and 'host' with the specific host associated with the user. If the user is associated with multiple hosts, you may need to execute the DROP USER statement for each host separately.
+
+### Why am I getting the 'invalid user or password' system message when I try to activate or perform a check-up?
+
+The "invalid user or password" system prompt typically indicates that the credentials you provided for authentication are incorrect or not recognized by the system. This issue can occur for various reasons, including:
+
+- Incorrect username or password: Double-check that you are entering the correct username and password combination. Ensure that there are no typos or case sensitivity issues.
+- Expired or locked account: If your user account has an expiration date or is locked due to multiple failed login attempts, you may encounter authentication issues. Contact the system administrator or the appropriate support channel to verify the status of your account and address any lockouts or expired credentials.
+
+To troubleshoot and resolve the "invalid user or password" prompt, consider the following steps:
+
+- Verify your credentials: Double-check that you are using the correct username and password combination. Pay attention to any case sensitivity requirements.
+- Confirm account status: Ensure that your user account is active and not expired or locked. Contact the system administrator or the relevant support channel to confirm your account status.
+- create a new SQL user: 
+
+If you have gone through the above steps and are still unable to resolve the issue, it's recommended to seek assistance from the support for further troubleshooting and guidance.
+
+### Why am I getting the 'no sufficient privileges' system message when I try to activate or perform a check-up?
+
+
+### Why am I getting the 'internal error'  
+
+
+
+### 操作过于频繁在 activate 和 deactivate
