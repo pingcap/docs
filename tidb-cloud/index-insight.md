@@ -137,5 +137,3 @@ The "internal error" message typically indicates that an unexpected error or iss
 
 - Retry the action: First, try refreshing the page or performing the action again. Sometimes, the error may be temporary and can be resolved by retrying.
 - Contact support: It's recommended to seek assistance from the support team. Provide them with the specific details of the error message, the actions you were performing when the error occurred, and any other relevant information. The support team will have access to system logs and can provide further troubleshooting and guidance tailored to your situation.
-
-### 操作过于频繁在 activate 和 deactivate
