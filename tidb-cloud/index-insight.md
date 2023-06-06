@@ -79,7 +79,7 @@ This section introduces some best practices for using the Index Insight feature.
 
 ### Regularly trigger Index Insight
 
-To maintain optimized indexes, it is recommended to trigger the Index Insight feature periodically or whenever substantial changes occur in your queries or database schema.
+To maintain optimized indexes, it is recommended to trigger the Index Insight feature periodically, such as every day, or whenever substantial changes occur in your queries or database schema.
 
 ### Analyze impact before implementing indexes
 
