@@ -26,71 +26,71 @@ This section describes how to use TiDB Lightning to import full data from an Ama
 
 This section describes how to export the schema file from Amazon Aurora and import it to TiDB. If you have manually created the schema in the target database, you can skip this step.
 
-1. Export the schema file from Amazon Aurora
+#### 1.1 Export the schema file from Amazon Aurora
 
-    Because the snapshot file from Amazon Aurora does not contain the DDL statements, you need to export the schema using Dumpling and create the schema in the target database using TiDB Lightning.
+Because the snapshot file from Amazon Aurora does not contain the DDL statements, you need to export the schema using Dumpling and create the schema in the target database using TiDB Lightning.
 
-    Pass the SecretKey and AccessKey of the account that has access to this Amazon S3 storage path into the TiDB Lightning node as environment variables. TiDB Lightning also supports reading credential files from `~/.aws/credentials`. This method eliminates the need to pass in the corresponding SecretKey and AccessKey again for all tasks on that TiDB Lightning node.
+Pass the SecretKey and AccessKey of the account that has access to this Amazon S3 storage path into the TiDB Lightning node as environment variables. TiDB Lightning also supports reading credential files from `~/.aws/credentials`. This method eliminates the need to pass in the corresponding SecretKey and AccessKey again for all tasks on that TiDB Lightning node.
 
-    Export the schema using Dumpling by running the following command. The command includes the `--filter` parameter to only export the desired table schema. For more parameters, refer to [Dumpling overview](/dumpling-overview.md).
+Export the schema using Dumpling by running the following command. The command includes the `--filter` parameter to only export the desired table schema. For more parameters, refer to [Dumpling overview](/dumpling-overview.md).
 
-    ```shell
-    export AWS_ACCESS_KEY_ID=${access_key}
-    export AWS_SECRET_ACCESS_KEY=${secret_key}
-    tiup dumpling --host ${host} --port 3306 --user root --password ${password} --filter 'my_db1.table[12]' --no-data --output 's3://my-bucket/schema-backup' --filter "mydb.*"
-    ```
+```shell
+export AWS_ACCESS_KEY_ID=${access_key}
+export AWS_SECRET_ACCESS_KEY=${secret_key}
+tiup dumpling --host ${host} --port 3306 --user root --password ${password} --filter 'my_db1.table[12]' --no-data --output 's3://my-bucket/schema-backup' --filter "mydb.*"
+```
 
-    Record the URI of the schema exported in the above command, such as 's3://my-bucket/schema-backup', which will be used when importing the schema file later.
+Record the URI of the schema exported in the above command, such as 's3://my-bucket/schema-backup', which will be used when importing the schema file later.
 
-2. Create the TiDB Lightning configuration file for the schema file
+#### 1.2 Create the TiDB Lightning configuration file for the schema file
 
-    Create the `tidb-lightning-schema.toml` configuration file for the schema file as follows:
+Create the `tidb-lightning-schema.toml` configuration file for the schema file as follows:
 
-    ```shell
-    vim tidb-lightning-schema.toml
-    ```
+```shell
+vim tidb-lightning-schema.toml
+```
 
-    ```toml
-    [tidb]
+```toml
+[tidb]
 
-    0# The target TiDB cluster information.
-    host = ${host}                # e.g.: 172.16.32.1
-    port = ${port}                # e.g.: 4000
-    user = "${user_name}          # e.g.: "root"
-    password = "${password}"      # e.g.: "rootroot"
-    status-port = ${status-port}  # Obtains the table schema information from TiDB status port, e.g.: 10080
-    pd-addr = "${ip}:${port}"     # The cluster PD address, e.g.: 172.16.31.3:2379. TiDB Lightning obtains some information from PD.
-                                  # When backend = "local", you must specify status-port and pd-addr correctly. Otherwise, the import will be abnormal.
+0# The target TiDB cluster information.
+host = ${host}                # e.g.: 172.16.32.1
+port = ${port}                # e.g.: 4000
+user = "${user_name}          # e.g.: "root"
+password = "${password}"      # e.g.: "rootroot"
+status-port = ${status-port}  # Obtains the table schema information from TiDB status port, e.g.: 10080
+pd-addr = "${ip}:${port}"     # The cluster PD address, e.g.: 172.16.31.3:2379. TiDB Lightning obtains some information from PD.
+                              # When backend = "local", you must specify status-port and pd-addr correctly. Otherwise, the import will be abnormal.
 
-    [tikv-importer]
-    # "local": Physical Import Mode. The default backend. The local backend is recommended to import large volumes of data (1 TiB or more).
-    #          During the import, the target TiDB cluster cannot provide any service.
-    # "tidb": Logical Import Mode. The "tidb" backend is recommended to import data less than 1 TiB.
-    #         During the import, the target TiDB cluster can provide service normally.
-    backend = "local"
+[tikv-importer]
+# "local": Physical Import Mode. The default backend. The local backend is recommended to import large volumes of data (1 TiB or more).
+#          During the import, the target TiDB cluster cannot provide any service.
+# "tidb": Logical Import Mode. The "tidb" backend is recommended to import data less than 1 TiB.
+#         During the import, the target TiDB cluster can provide service normally.
+backend = "local"
 
-    # Set the temporary storage directory for the sorted Key-Value files.
-    # The directory must be empty, and the storage space must be greater than the size of the dataset to be imported.
-    # For better import performance, it is recommended to use a directory different from `data-source-dir` and use flash storage,
-    # which can use I/O exclusively.
-    sorted-kv-dir = "/mnt/ssd/sorted-kv-dir"
+# Set the temporary storage directory for the sorted Key-Value files.
+# The directory must be empty, and the storage space must be greater than the size of the dataset to be imported.
+# For better import performance, it is recommended to use a directory different from `data-source-dir` and use flash storage,
+# which can use I/O exclusively.
+sorted-kv-dir = "/mnt/ssd/sorted-kv-dir"
 
-    [mydumper]
-    # The directory of the schema file exported from Amazon Aurora
-    data-source-dir = "${s3_path}"  # eg: s3://my-bucket/schema-backup
-    ```
+[mydumper]
+# The directory of the schema file exported from Amazon Aurora
+data-source-dir = "${s3_path}"  # eg: s3://my-bucket/schema-backup
+```
 
-    If you need to enable TLS in the TiDB cluster, refer to [TiDB Lightning Configuration](/tidb-lightning/tidb-lightning-configuration.md).
+If you need to enable TLS in the TiDB cluster, refer to [TiDB Lightning Configuration](/tidb-lightning/tidb-lightning-configuration.md).
 
-3. Import the schema file to TiDB
+#### 1.3 Import the schema file to TiDB
 
-    Use TiDB Lightning to create tables in the downstream TiDB. Skip this step if you have manually created the tables in the target database in advance.
+Use TiDB Lightning to create tables in the downstream TiDB. Skip this step if you have manually created the tables in the target database in advance.
 
-    ```shell
-    export AWS_ACCESS_KEY_ID=${access_key}
-    export AWS_SECRET_ACCESS_KEY=${secret_key}
-    tiup tidb-lightning -config tidb-lightning-schema.toml > nohup.out 2>&1 &
-    ```
+```shell
+export AWS_ACCESS_KEY_ID=${access_key}
+export AWS_SECRET_ACCESS_KEY=${secret_key}
+tiup tidb-lightning -config tidb-lightning-schema.toml > nohup.out 2>&1 &
+```
 
 ### Step 2. Export and import an Amazon Aurora snapshot to Amazon S3
 
@@ -175,7 +175,7 @@ If you need to enable TLS in the TiDB cluster, refer to [TiDB Lightning Configur
 
 You can pass the SecretKey and AccessKey of the account that has access to this Amazon S3 storage path into the TiDB Lightning node as environment variables. TiDB Lightning also supports reading credential files from `~/.aws/credentials`.
 
-1. Use TiDB Lightning to import data from an Amazon Aurora snapshot to TiDB. 
+1. Use TiDB Lightning to import data from an Amazon Aurora snapshot to TiDB.
 
     ```shell
     export AWS_ACCESS_KEY_ID=${access_key}
