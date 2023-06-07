@@ -8,6 +8,8 @@ aliases: ['/tidb/v6.5/experimental-features','/tidb/stable/experimental-features
 
 このドキュメントでは、最新の LTS バージョン以降の[長期サポート (LTS)](/releases/versioning.md#long-term-support-releases)バージョンと[開発マイルストーン リリース (DMR)](/releases/versioning.md#development-milestone-releases)バージョンを含む、さまざまな TiDB バージョンでサポートされている機能を一覧表示します。
 
+[TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=tidb_features)で TiDB の機能を試すことができます。
+
 > **ノート：**
 >
 > PingCAP は、DMR バージョンのパッチ リリースを提供しません。バグは今後のリリースで修正される予定です。一般的な目的では、 [最新のLTSバージョン](https://docs.pingcap.com/tidb/stable)を使用することをお勧めします。

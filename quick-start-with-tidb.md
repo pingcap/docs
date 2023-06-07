@@ -10,6 +10,8 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
 -   [ローカル テスト クラスターをデプロイ](#deploy-a-local-test-cluster) (macOS および Linux の場合)
 -   [1 台のマシンで本番のデプロイをシミュレートする](#simulate-production-deployment-on-a-single-machine) (Linux のみ)
 
+さらに、[TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=tidb_quick_start)で TiDB の機能を試すことができます。
+
 > **ノート：**
 >
 > このガイドで提供されているデプロイ方法は、本番**用ではなく**、クイック スタート<strong>専用</strong>です。

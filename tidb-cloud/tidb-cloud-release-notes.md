@@ -1,6 +1,6 @@
 ---
-title: TiDB Cloud Release Notes in 2023
-summary: Learn about the release notes of TiDB Cloud in 2023.
+title: TiDB Cloud リリースノート | ドキュメント | PingCAP株式会社
+summary: TiDB Cloudの最新情報はリリースノートをご覧ください。このページでは2023年に公開されたリリースノートをまとめています。
 aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 ---
 

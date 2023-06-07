@@ -13,7 +13,7 @@ SQL を試して、TiDB と MySQL クエリとの互換性をテストするに�
 
 </CustomContent>
 
-このページでは、DDL、DML、CRUD 操作などの基本的なTiDB SQLステートメントについて説明します。 TiDB ステートメントの完全なリストについては、 [TiDB SQL構文図](https://pingcap.github.io/sqlgram/)を参照してください。
+SQL を実験し、MySQL クエリと TiDB の互換性をテストするには、[TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=basic-sql-operations) ことができます。最初に TiDB クラスターをデプロイしてから、その中で SQL ステートメントを実行することもできます。
 
 ## カテゴリー {#category}
 
