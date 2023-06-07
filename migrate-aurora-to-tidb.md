@@ -40,7 +40,7 @@ This section describes how to export the schema file from Amazon Aurora and impo
     tiup dumpling --host ${host} --port 3306 --user root --password ${password} --filter 'my_db1.table[12]' --no-data --output 's3://my-bucket/schema-backup' --filter "mydb.*"
     ```
 
-    Record the URI of the schema exported in the above command, such as 's3://my-bucket/schema-backup', which will be used when importing data later.
+    Record the URI of the schema exported in the above command, such as 's3://my-bucket/schema-backup', which will be used when importing the schema file later.
 
 2. Create the TiDB Lightning configuration file for the schema file
 
@@ -175,7 +175,7 @@ If you need to enable TLS in the TiDB cluster, refer to [TiDB Lightning Configur
 
 You can pass the SecretKey and AccessKey of the account that has access to this Amazon S3 storage path into the TiDB Lightning node as environment variables. TiDB Lightning also supports reading credential files from `~/.aws/credentials`.
 
-1. Use TiDB Lightning to import data from an Amazon Aurora snapshot to TiDB. When running `tidb-lightning`, if you start the task directly from the command line, it might exit due to the `SIGHUP` signal. It is recommended to use a tool such as `nohup` or `screen`. Refer to the following steps 2 and 3 for details.
+1. Use TiDB Lightning to import data from an Amazon Aurora snapshot to TiDB. 
 
     ```shell
     export AWS_ACCESS_KEY_ID=${access_key}
