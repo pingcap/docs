@@ -103,6 +103,12 @@ TiDB Cloudアプリケーション開発者向けのドキュメント
 
 <DocHomeCardContainer>
 
+<DocHomeCard href="https://play.tidbcloud.com/?utm_source=docs&utm_medium=home_more_resources" icon="playground" label="TiDB Playground">
+
+登録なしで、PlaygroundのTiDBの機能をワンストップでインタラクティブに体験
+
+</DocHomeCard>
+
 <DocHomeCard href="https://en.pingcap.com/education/" icon="cloud1" label="PingCAP Education">
 
 適切に設計されたオンライン コースとインストラクター主導のトレーニングを通じて、TiDB とTiDB Cloudを学習します。

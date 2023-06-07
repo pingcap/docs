@@ -1,6 +1,6 @@
 ---
-title: TiDB Cloud Release Notes in 2023
-summary: Learn about the release notes of TiDB Cloud in 2023.
+title: TiDB Cloud リリースノート | ドキュメント | PingCAP株式会社
+summary: TiDB Cloudの最新情報はリリースノートをご覧ください。このページでは2023年に公開されたリリースノートをまとめています。
 aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 ---
 
@@ -23,7 +23,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     詳細については、 [<a href="/tidb-cloud/index-insight.md">Index Insight を使用する (ベータ版)</a>](/tidb-cloud/index-insight.md)を参照してください。
 
--   登録やインストールを行わずに TiDB の全機能を体験できる対話型プラットフォーム[<a href="https://play.tidbcloud.com/?utm_source=docs&#x26;utm_medium=tidb_cloud_release_notes">TiDB プレイグラウンド</a>](https://play.tidbcloud.com/?utm_source=docs&#x26;utm_medium=tidb_cloud_release_notes)を紹介します。
+-   登録やインストールなしでTiDBの全機能を体験できるインタラクティブなプラットフォーム、[TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&#x26;utm_medium=tidb_cloud_release_notes) を紹介します。
 
     TiDB Playground は、スケーラビリティ、MySQL 互換性、リアルタイム分析などの TiDB の機能を探索するためのワンストップ ショップ エクスペリエンスを提供するように設計された対話型プラットフォームです。
 
