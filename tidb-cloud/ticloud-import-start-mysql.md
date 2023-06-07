@@ -15,7 +15,7 @@ ticloud import start mysql [flags]
 >
 > - Before running this command, make sure that you have installed the `mysql` command-line tool first.
 > - If the target table already exists in the target database, to use this command for table import, make sure that the target table name is the same as the source table name and add the `skip-create-table` flag to the command. 
-> - If the target table does not exist in the target database, executing this command will automatically create a target table with the same name as the source table in the target database.
+> - If the target table does not exist in the target database, executing this command automatically creates a target table with the same name as the source table in the target database.
 
 ## Examples
 
