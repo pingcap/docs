@@ -42,6 +42,26 @@ For macOS or Linux, you can install `ticloud` using any of the following methods
 
     To set up `ticloud` in GitHub Action, use [`setup-tidbcloud-cli`](https://github.com/tidbcloud/setup-tidbcloud-cli).
 
+The MySQL command-line client can be installed via your package manager.
+
+- Debian-based distributions:
+
+    ```shell
+    sudo apt-get install mysql-client
+    ```
+
+- RPM-based distributions:
+
+    ```shell
+    sudo yum install mysql
+    ```
+  
+- macOS:
+
+  ```shell
+  brew install mysql-client
+  ```
+
 </div>
 
 <div label="Windows">
@@ -55,6 +75,8 @@ For Windows, you can install `ticloud` using either of the following methods:
 - Install in GitHub Actions
 
     To set up `ticloud` in GitHub Actions, use [`setup-tidbcloud-cli`](https://github.com/tidbcloud/setup-tidbcloud-cli).
+
+The MySQL command-line client is available in the [Windows MySQL Installer](https://dev.mysql.com/doc/refman/8.0/en/windows-installation.html). To launch `ticloud connect` in Windows, you need to have the `mysql.exe` executable's directory in your shell's PATH.
 
 </div>
 </SimpleTab>
