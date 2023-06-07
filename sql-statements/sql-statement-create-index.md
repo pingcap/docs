@@ -1,6 +1,6 @@
 ---
-title: CREATE INDEX | TiDB SQL Statement Reference
-summary: An overview of the usage of CREATE INDEX for the TiDB database.
+title: インデックスの作成 | SQLステートメント | TiDB | ドキュメント | PingCAP株式会社
+summary: TiDBにおけるインデックス作成の概要について紹介します。
 ---
 
 # インデックスの作成 {#create-index}
