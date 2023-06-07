@@ -9,7 +9,7 @@ TiDB は MySQL と互換性があり、ほとんどの場合、MySQL ステー�
 
 <CustomContent platform="tidb">
 
-SQL を実験し、MySQL クエリと TiDB の互換性をテストするには、 [TiDB をインストールせずに Web ブラウザで直接実行します](https://tour.tidb.io/)ことができます。最初に TiDB クラスターをデプロイしてから、その中で SQL ステートメントを実行することもできます。
+SQL を実験し、MySQL クエリと TiDB の互換性をテストするには、[TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=basic-sql-operations) ことができます。最初に TiDB クラスターをデプロイしてから、その中で SQL ステートメントを実行することもできます。
 
 </CustomContent>
 

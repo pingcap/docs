@@ -10,6 +10,8 @@ category: quick start
 
 このチュートリアルでは、 TiDB Cloudを使い始める簡単な方法を説明します。
 
+さらに、[TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=tidb_quick_start)で TiDB の機能を試すことができます。
+
 ## ステップ 1. TiDB クラスターを作成する {#step-1-create-a-tidb-cluster}
 
 TiDB Cloud [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) (ベータ) は、 TiDB Cloudを開始するための最良の方法です。無料のServerless Tierクラスターを作成するには、次の手順を実行します。
