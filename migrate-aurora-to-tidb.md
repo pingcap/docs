@@ -80,6 +80,8 @@ This section describes how to export the schema file from Amazon Aurora and impo
     default-file-rules=true
 
     [mydumper]
+    # The directory of the schema file exported from Amazon Aurora
+    data-source-dir = "${s3_path}"  # eg: s3://my-bucket/schema-backup
 
     [[mydumper.files]]
     # The expression that parses the parquet file.
