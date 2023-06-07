@@ -22,15 +22,11 @@ TiDB Cloud CLI はコマンド ライン インターフェイスであり、数
 | 集まる    | 作成、削除、説明、リスト、接続情報               | クラスターの管理                                                                                                                                                                                        |
 | 完了     | バッシュ、フィッシュ、パワーシェル、zsh           | 指定されたシェルの完了スクリプトを生成します                                                                                                                                                                          |
 | 構成     | 作成、削除、説明、編集、リスト、設定、使用           | ユーザープロファイルを構成する                                                                                                                                                                                 |
-| 接続     | <ul>
-<li></li>
-</ul>            | TiDB クラスターに接続する                                                                                                                                                                                 |
+| 接続     | - | TiDB クラスターに接続する                                                                                                                                                                                 |
 | ヘルプ    | クラスター、完了、構成、ヘルプ、インポート、プロジェクト、更新 | 任意のコマンドのヘルプをビュー                                                                                                                                                                                 |
 | 輸入     | キャンセル、説明、リスト、開始                 | [<a href="/tidb-cloud/tidb-cloud-migration-overview.md#import-data-from-files-to-tidb-cloud">輸入</a>](/tidb-cloud/tidb-cloud-migration-overview.md#import-data-from-files-to-tidb-cloud)タスクを管理する |
 | 計画     | リスト                             | プロジェクトを管理する                                                                                                                                                                                     |
-| アップデート | <ul>
-<li></li>
-</ul>            | CLIを最新バージョンに更新します                                                                                                                                                                               |
+| アップデート | - | CLIを最新バージョンに更新します                                                                                                                                                                               |
 
 ## コマンドモード {#command-modes}
 
