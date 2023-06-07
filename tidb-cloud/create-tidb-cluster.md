@@ -1,44 +1,27 @@
 ---
-title: Create a TiDB Cluster
-summary: Learn how to create your TiDB cluster.
+title: Create a TiDB Dedicated Cluster
+summary: Learn how to create your TiDB Dedicated cluster.
 ---
 
 # Create a TiDB Cluster
 
-This tutorial guides you through signing up and creating a TiDB cluster.
+This tutorial guides you through signing up and creating a TiDB Dedicated cluster.
 
-## Step 1. Create a TiDB Cloud account
+## Before you begin
 
-1. If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/signup) to sign up for an account.
+If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/signup) to sign up for an account.
 
-    - You can either sign up with email and password so that you can manage your password using TiDB Cloud, or sign up with your Google, GitHub, or Microsoft account.
-    - For AWS Marketplace users, you can also sign up through AWS Marketplace. To do that, search for `TiDB Cloud` in [AWS Marketplace](https://aws.amazon.com/marketplace), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
-    - For Google Cloud Marketplace users, you can also sign up through Google Cloud Marketplace. To do that, search for `TiDB Cloud` in [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
+- You can either sign up with email and password so that you can manage your password using TiDB Cloud, or sign up with your Google, GitHub, or Microsoft account.
+- For AWS Marketplace users, you can also sign up through AWS Marketplace. To do that, search for `TiDB Cloud` in [AWS Marketplace](https://aws.amazon.com/marketplace), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
+- For Google Cloud Marketplace users, you can also sign up through Google Cloud Marketplace. To do that, search for `TiDB Cloud` in [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
 
-2. [Log in](https://tidbcloud.com/) to your TiDB Cloud account.
+## (Optional) Step 1. Use your default project or create a new project
 
-## Step 2. Select a cluster option
+Once you log in to the [TiDB Cloud console](https://tidbcloud.com/), you have a default [project](/tidb-cloud/tidb-cloud-glossary.md#project). When there is only one project in your organization, your cluster will be created in that project. For more information about projects, see [Organizations and projects](/tidb-cloud/manage-user-access.md#organizations-and-projects).
 
-TiDB Cloud provides the following two options. Before creating a TiDB cluster, consider which option suits your need better:
+If you are an organization owner, you can rename the default project or create a new project for the cluster according to your need as follows:
 
-- TiDB Serverless (Beta)
-
-    TiDB Serverless is a fully managed service of TiDB. It is still in the beta phase and cannot be used in production. However, you can use TiDB Serverless clusters for non-production workloads such as prototype applications, hackathons, academic courses, or to provide a temporary data service for your datasets.
-
-- TiDB Dedicated
-
-    TiDB Dedicated is dedicated for production use with the benefits of cross-zone high availability, horizontal scaling, and [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing).
-
-For more information about the two options, see [Select Your Cluster Option](/tidb-cloud/select-cluster-tier.md).
-
-## Step 3. Use your default project or create a new project
-
-If you are an organization owner, once you log in to TiDB Cloud, you have a default project. For more information about projects, see [Organizations and projects](/tidb-cloud/manage-user-access.md#organizations-and-projects).
-
-- For free trial users, you can rename the default project if needed.
-- For TiDB Dedicated users, you can either rename the default project or create a new project if needed.
-
-1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/), and then click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner.
 
 2. Click **Organization Settings**.
 
@@ -51,56 +34,13 @@ If you are an organization owner, once you log in to TiDB Cloud, you have a defa
 
 4. To return to the cluster page, click the TiDB Cloud logo in the upper-left corner of the window.
 
-If you are a project member, you can access only the specific projects to which your organization owner invited you, and you cannot create new projects. To check which project you belong to, take the following steps:
-
-1. Click <MDSvgIcon name="icon-top-organization" /> **Organization** in the upper-right corner of the TiDB Cloud console.
-
-2. Click **Organization Settings**.
-
-    The **Projects** tab is displayed by default.
-
-3. To return to the cluster page, click the TiDB Cloud logo in the upper-left corner of the window.
-
-## Step 4. Create a TiDB cluster
-
-<SimpleTab>
-<div label="TiDB Serverless">
-
-To create a TiDB Serverless cluster, take the following steps:
-
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page.
-
-2. Click **Create Cluster**.
-
-3. On the **Create Cluster** page, **Serverless** is selected by default.
-
-4. The cloud provider of TiDB Serverless is AWS. You can select an AWS region where you want to host your cluster.
-
-5. (Optional) Change the spend limit if you plan to use more storage and compute resources than the [free quota](/tidb-cloud/select-cluster-tier.md#usage-quota). If you have not added a payment method, you need to add a credit card after editing the limit.
-
-    > **Note:**
-    >
-    > For each organization in TiDB Cloud, you can create a maximum of five TiDB Serverless clusters by default. To create more TiDB Serverless clusters, you need to add a credit card and set a [spend limit](/tidb-cloud/tidb-cloud-glossary.md#spend-limit) for the usage.
-
-6. Update the default cluster name if necessary, and then click **Create**.
-
-    The cluster creation process starts and your TiDB Cloud cluster will be created in approximately 30 seconds.
-
-7. After the cluster is created, follow the instructions in [Connect via Standard Connection](/tidb-cloud/connect-via-standard-connection.md#tidb-serverless) to create a password for your cluster.
-
-    > **Note:**
-    >
-    > If you do not set a password, you cannot connect to the cluster.
-
-</div>
-
-<div label="TiDB Dedicated">
+## Step 2. Create a TiDB Dedicated cluster
 
 To create a TiDB Dedicated cluster, take the following steps:
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
 
-    > **Tip:**
+    > **Note:**
     >
     > If you have multiple projects, you can view the project list and switch to another project from the ☰ hover menu in the upper-left corner.
 
@@ -135,9 +75,10 @@ To create a TiDB Dedicated cluster, take the following steps:
 
     Your TiDB Cloud cluster will be created in approximately 20 to 30 minutes.
 
-7. In the upper-right corner of your cluster overview page, click **...** and select **Security Settings**.
+## Step 3. Configure secure settings
 
-8. Set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
+After your cluster is created, take the following steps to configure the security settings:
 
-</div>
-</SimpleTab>
+1. In the upper-right corner of your cluster overview page, click **...** and select **Security Settings**.
+
+2. Set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.

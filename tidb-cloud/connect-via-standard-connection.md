@@ -1,40 +1,13 @@
 ---
-title: Connect via Standard Connection
+title: Connect to TiDB Dedicated via Standard Connection
 summary: Learn how to connect to your TiDB Cloud cluster via standard connection.
 ---
 
-# Connect via Standard Connection
+# Connect to TiDB Dedicated via Standard Connection
 
-This document describes how to connect to your TiDB Cloud cluster via standard connection. The standard connection exposes a public endpoint with traffic filters, so you can connect to your TiDB cluster via a SQL client from your laptop.
+This document describes how to connect to your TiDB Dedicated cluster via standard connection. The standard connection exposes a public endpoint with traffic filters, so you can connect to your TiDB Dedicated cluster via a SQL client from your laptop.
 
-The standard connection is available to both TiDB Serverless and TiDB Dedicated.
-
-## TiDB Serverless
-
-To connect to a TiDB Serverless cluster via standard connection, perform the following steps:
-
-1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.
-
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
-
-3. In the dialog, keep the default setting of the endpoint type as `Public`, and select your preferred connection method and operating system to get the corresponding connection string.
-
-    > **Note:**
-    >
-    > - Keeping the endpoint type as `Public` means the connection is via standard TLS connection. For more information, see [TLS Connection to TiDB Serverless](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md).
-    > - If you choose **Private** in the **Endpoint Type** drop-down list, it means that the connection is via private endpoint. For more information, see [Connect via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections.md#tidb-serverless).
-
-4. If you have not set a password yet, click **Create password** to generate a random password. The generated password will not show again, so save your password in a secure location.
-
-5. Connect to your cluster with the connection string.
-
-    > **Note:**
-    >
-    > When you connect to a TiDB Serverless cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
-
-## TiDB Dedicated
-
-To connect to a TiDB Dedicated cluster via standard connection, perform the following steps:
+To connect to a TiDB Dedicated cluster via standard connection, take the following steps:
 
 1. Open the overview page of the target cluster.
 

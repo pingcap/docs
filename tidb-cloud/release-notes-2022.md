@@ -92,7 +92,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
     - Introduce the left navigation bar to maximize screen usage efficiency.
     - Adopt a flatter navigation hierarchy.
 
-- Improve the [**Connect**](/tidb-cloud/connect-to-tidb-cluster.md) experience for Serverless Tier users.
+- Improve the [**Connect**](/tidb-cloud/connect-to-tidb-cluster-serverless.md) experience for Serverless Tier users.
 
     Now developers can connect to SQL editor or with their preferred tools in just a few clicks without context switching.
 
