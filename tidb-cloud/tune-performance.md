@@ -35,8 +35,6 @@ To view slow queries in a cluster, perform the following steps:
 
 The results are displayed in the form of a table, and you can sort the results by different columns.
 
-![Slow Queries](/media/tidb-cloud/slow-queries.png)
-
 For more information, see [Slow Queries in TiDB Dashboard](https://docs.pingcap.com/tidb/stable/dashboard-slow-query).
 
 ## Statement Analysis
@@ -53,8 +51,6 @@ To use the statement analysis, perform the following steps:
 
 The results are displayed in the form of a table, and you can sort the results by different columns.
 
-![Statement Analysis](/media/tidb-cloud/statement-analysis.png)
-
 For more information, see [Statement Execution Details in TiDB Dashboard](https://docs.pingcap.com/tidb/stable/dashboard-statement-details).
 
 ## Key Visualizer
@@ -68,8 +64,6 @@ To view the key analytics, perform the following steps:
 1. Navigate to the **Diagnosis** page of a cluster.
 
 2. Click the **Key Visualizer** tab.
-
-![Key Visualizer](/media/tidb-cloud/key-visualizer.png)
 
 On the **Key Visualizer** page, a large heat map shows changes on access traffic over time. The average values ​​along each axis of the heat map are shown below and on the right side. The left side is the table name, index name and other information.
 
