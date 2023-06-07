@@ -166,18 +166,9 @@ backend = "local"
 # which can use I/O exclusively.
 sorted-kv-dir = "/mnt/ssd/sorted-kv-dir"
 
-[mydump]
-# Parse the schema file exported by Dumpling
-default-file-rules=true
-
 [mydumper]
-
-[[mydumper.files]]
-# The expression that parses the parquet file.
-pattern = '(?i)^(?:[^/]*/)*([a-z0-9_]+)\.([a-z0-9_]+)/(?:[^/]*/)*(?:[a-z0-9\-_.]+\.(parquet))$'
-schema = '$1'
-table = '$2'
-type = '$3'
+# The directory of the snapshot file exported from Amazon Aurora
+data-source-dir = "${s3_path}"  # eg: s3://my-bucket/sql-backup
 ```
 
 If you need to enable TLS in the TiDB cluster, refer to [TiDB Lightning Configuration](/tidb-lightning/tidb-lightning-configuration.md).
