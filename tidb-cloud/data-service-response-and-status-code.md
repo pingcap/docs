@@ -3,22 +3,22 @@ title: Response and HTTP Status Codes of Data Service
 summary: This document describes the response and HTTP status codes of Data Service in TiDB Cloud.
 ---
 
-# Data Service の応答コードと HTTP ステータス コード {#response-and-http-status-codes-of-data-service}
+# データサービスのレスポンスコードとHTTPステータスコード {#response-and-http-status-codes-of-data-service}
 
-[データサービス](/tidb-cloud/data-service-overview.md)で定義された API エンドポイントを呼び出すと、Data Service は HTTP 応答を返します。この応答の構造とステータス コードの意味を理解することは、Data Service エンドポイントによって返されるデータを解釈するために不可欠です。
+[<a href="/tidb-cloud/data-service-overview.md">データサービス</a>](/tidb-cloud/data-service-overview.md)で定義された API エンドポイントを呼び出すと、Data Service は HTTP 応答を返します。 Data Service エンドポイントから返されたデータを解釈するには、この応答の構造とステータス コードの意味を理解することが不可欠です。
 
-このドキュメントでは、 TiDB Cloudの Data Service の応答コードとステータス コードについて説明します。
+このドキュメントでは、 TiDB Cloudのデータ サービスの応答コードとステータス コードについて説明します。
 
 ## 応答 {#response}
 
-Data Service は、JSON 本文を含む HTTP 応答を返します。応答本文には、次のフィールドが含まれます。
+Data Service は、JSON 本文を含む HTTP 応答を返します。応答本文には次のフィールドが含まれます。
 
--   `type` :*文字列*。このエンドポイントのタイプ。値は`"sql_endpoint"`または`"chat2data_endpoint"`です。異なるエンドポイントは、異なるタイプの応答を返します。
--   `data` :*オブジェクト*。次の 3 つの部分を含む実行結果。
+-   `type` :*文字列*。このエンドポイントのタイプ。値は`"sql_endpoint"`または`"chat2data_endpoint"`である可能性があります。エンドポイントが異なれば、返される応答の種類も異なります。
+-   `data` :*オブジェクト*。実行結果には次の 3 つの部分が含まれます。
 
     -   `columns` :*配列*。返されたフィールドのスキーマ情報。
     -   `rows` :*配列*。返される結果は`key:value`形式です。
-    -   `result` :*オブジェクト*。成功/失敗ステータス、実行時間、返された行数、ユーザー構成など、SQL ステートメントの実行関連情報。
+    -   `result` :*オブジェクト*。 SQL ステートメントの実行関連情報 (成功/失敗ステータス、実行時間、返された行数、ユーザー構成など)。
 
 応答の例は次のとおりです。
 
@@ -106,11 +106,11 @@ Data Service は、JSON 本文を含む HTTP 応答を返します。応答本�
 </div>
 </SimpleTab>
 
-## ステータス コード {#status-code}
+## ステータスコード {#status-code}
 
 ### 200 {#200}
 
-HTTP ステータス コードが`200`で、 `data.result.code`フィールドにも`200`表示される場合、SQL ステートメントが正常に実行されたことを示します。そうしないと、 TiDB Cloud はエンドポイントで定義された SQL ステートメントの実行に失敗します。詳細については、 `code`と`message`フィールドを確認できます。
+HTTP ステータス コードが`200`で、 `data.result.code`フィールドにも`200`表示されている場合は、SQL ステートメントが正常に実行されたことを示します。そうしないと、 TiDB Cloud はエンドポイントで定義された SQL ステートメントの実行に失敗します。詳細については、 `code`フィールドと`message`フィールドを確認してください。
 
 応答の例は次のとおりです。
 
@@ -214,7 +214,7 @@ HTTP ステータス コードが`200`で、 `data.result.code`フィールド�
 
 ### 405 {#405}
 
-このステータス コードは、リクエストが許可されていないメソッドを使用したことを示します。 Data Service は`GET`と`POST`のみをサポートすることに注意してください。
+このステータス コードは、リクエストで許可されていないメソッドが使用されたことを示します。 Data Service は`GET`と`POST`のみをサポートすることに注意してください。
 
 応答の例は次のとおりです。
 
@@ -240,7 +240,7 @@ HTTP ステータス コードが`200`で、 `data.result.code`フィールド�
 
 ### 408 {#408}
 
-このステータス コードは、リクエストがエンドポイントのタイムアウト期間を超えたことを示します。エンドポイントのタイムアウトを変更するには、 [プロパティの構成](/tidb-cloud/data-service-manage-endpoint.md#configure-properties)を参照してください。
+このステータス コードは、リクエストがエンドポイントのタイムアウト期間を超えたことを示します。エンドポイントのタイムアウトを変更するには、 [<a href="/tidb-cloud/data-service-manage-endpoint.md#configure-properties">プロパティの構成</a>](/tidb-cloud/data-service-manage-endpoint.md#configure-properties)を参照してください。
 
 応答の例は次のとおりです。
 
@@ -266,7 +266,7 @@ HTTP ステータス コードが`200`で、 `data.result.code`フィールド�
 
 ### 429 {#429}
 
-このステータス コードは、リクエストが API キーのレート制限を超えていることを示します。より多くのクォータについては、サポート チームに[リクエストを提出する](https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519)を送信できます。
+このステータス コードは、リクエストが API キーのレート制限を超えていることを示します。さらに割り当てが必要な場合は、サポート チームにお[<a href="https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519">リクエストを送信する</a>](https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519)ください。
 
 応答の例は次のとおりです。
 
@@ -322,7 +322,7 @@ HTTP ステータス コードが`200`で、 `data.result.code`フィールド�
 
 ### 500 {#500}
 
-このステータス コードは、リクエストが内部エラーに遭遇したことを示します。このエラーにはさまざまな原因が考えられます。
+このステータス コードは、リクエストで内部エラーが発生したことを示します。このエラーにはさまざまな原因が考えられます。
 
 考えられる原因の 1 つは、認証サーバーに接続できないために認証に失敗したことです。
 
@@ -348,7 +348,7 @@ HTTP ステータス コードが`200`で、 `data.result.code`フィールド�
 }
 ```
 
-これは、 TiDB Cloudクラスターに接続できないことにも関連している可能性があります。トラブルシューティングについては、 `message`を参照する必要があります。
+これは、 TiDB Cloudクラスターに接続できないことにも関係している可能性があります。トラブルシューティングについては`message`を参照する必要があります。
 
 ```json
 {

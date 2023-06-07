@@ -3,32 +3,32 @@ title: Use Import Resource
 summary: Learn how to manage the import task using the import resource.
 ---
 
-# インポート リソースを使用 {#use-import-resource}
+# インポートリソースを使用する {#use-import-resource}
 
-このドキュメントの`tidbcloud_import`リソースを使用して、 TiDB Cloudクラスターにデータをインポートする方法を学習できます。
+このドキュメントの`tidbcloud_import`リソースを使用してTiDB Cloudクラスターにデータをインポートする方法を学習できます。
 
-`tidbcloud_import`リソースの機能は次のとおりです。
+`tidbcloud_import`リソースの特徴は次のとおりです。
 
--   Serverless TierおよびDedicated Tierクラスターのインポート タスクを作成します。
+-   TiDB サーバーレス クラスターおよび TiDB 専用クラスターのインポート タスクを作成します。
 -   ローカル ディスクまたは Amazon S3 バケットからデータをインポートします。
--   進行中のインポート タスクをキャンセルします。
+-   進行中のインポートタスクをキャンセルします。
 
 ## 前提条件 {#prerequisites}
 
--   [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) .
--   [Serverless TierまたはDedicated Tierクラスターを作成する](/tidb-cloud/create-tidb-cluster.md) .
+-   [<a href="/tidb-cloud/terraform-get-tidbcloud-provider.md">TiDB Cloud Terraform プロバイダーを入手する</a>](/tidb-cloud/terraform-get-tidbcloud-provider.md) 。
+-   [<a href="/tidb-cloud/create-tidb-cluster.md">TiDB サーバーレス クラスターまたは TiDB 専用クラスターを作成する</a>](/tidb-cloud/create-tidb-cluster.md) 。
 
-## インポート タスクを作成して実行する {#create-and-run-an-import-task}
+## インポートタスクを作成して実行する {#create-and-run-an-import-task}
 
 インポート リソースを使用して、ローカル インポート タスクまたは Amazon S3 インポート タスクのいずれかを管理できます。
 
-### ローカル インポート タスクを作成して実行する {#create-and-run-a-local-import-task}
+### ローカルインポートタスクを作成して実行する {#create-and-run-a-local-import-task}
 
 > **ノート：**
 >
-> ローカル ファイルのインポートは、専用Serverless TierDedicated Tierクラスターでのみサポートされます。
+> ローカル ファイルのインポートは、TiDB サーバーレス クラスターでのみサポートされており、TiDB 専用クラスターではサポートされていません。
 
-1.  インポート用の CSV ファイルを作成します。例えば：
+1.  インポート用のCSVファイルを作成します。例えば：
 
     ```
     id;name;age
@@ -68,9 +68,9 @@ summary: Learn how to manage the import task using the import resource.
     }
     ```
 
-    ファイル内のリソース値 (プロジェクト ID、クラスター ID、CSV パスなど) を独自のものに置き換えます。 `csv_format`の詳細は[構成ページ](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/import#nested-schema-for-csv_format)で確認できます。
+    ファイル内のリソース値 (プロジェクト ID、クラスター ID、CSV パスなど) を独自の値に置き換えます。そしてその[<a href="https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/import#nested-schema-for-csv_format">設定ページ</a>](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/import#nested-schema-for-csv_format) `csv_format`の詳細。
 
-3.  `terraform apply`コマンドを実行してインポート タスクを作成し、 `yes`入力して作成を確認し、インポートを開始します。
+3.  `terraform apply`コマンドを実行してインポート タスクを作成し、 `yes`を入力して作成を確認し、インポートを開始します。
 
     ```
     $ terraform apply
@@ -87,7 +87,7 @@ summary: Learn how to manage the import task using the import resource.
     tidbcloud_import.example_local: Creation complete after 6s [id=781074]
     ```
 
-4.  `terraform state show tidbcloud_import.${resource-name}`を使用して、インポート タスクのステータスを確認します。
+4.  インポート タスクのステータスを確認するには、 `terraform state show tidbcloud_import.${resource-name}`を使用します。
 
     ```
     $ terraform state show tidbcloud_import.example_local
@@ -128,7 +128,7 @@ summary: Learn how to manage the import task using the import resource.
     }
     ```
 
-5.  `terraform refresh`を使用して、数分後にステータスを更新します。
+5.  数分後にステータスを更新するには、 `terraform refresh`を使用します。
 
     ```
     $ terraform refresh && terraform state show tidbcloud_import.example_local
@@ -170,9 +170,9 @@ summary: Learn how to manage the import task using the import resource.
     }
     ```
 
-    ステータスが`COMPLETED`になると、インポート タスクが完了したことを示します。
+    ステータスが`COMPLETED`に変わると、インポート タスクが完了したことを示します。
 
-6.  インポートされたデータを MySQL CLI で確認します。
+6.  MySQL CLI でインポートされたデータを確認します。
 
     ```
     mysql> SELECT * FROM test.import_test;
@@ -189,7 +189,7 @@ summary: Learn how to manage the import task using the import resource.
 
 > **ノート：**
 >
-> TiDB Cloud がAmazon S3 バケット内のファイルにアクセスできるようにするには、最初に[Amazon S3 アクセスを構成する](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access)を行う必要があります。
+> TiDB Cloud がAmazon S3 バケット内のファイルにアクセスできるようにするには、まず[<a href="/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access">Amazon S3 アクセスを設定する</a>](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access)を行う必要があります。
 
 1.  `import`ディレクトリを作成し、その中に`main.tf`を作成します。例えば：
 
@@ -226,7 +226,7 @@ summary: Learn how to manage the import task using the import resource.
     }
     ```
 
-2.  `terraform apply`コマンドを実行してインポート タスクを作成し、 `yes`入力して作成を確認し、インポートを開始します。
+2.  `terraform apply`コマンドを実行してインポート タスクを作成し、 `yes`を入力して作成を確認し、インポートを開始します。
 
     ```
     $ terraform apply
@@ -247,15 +247,15 @@ summary: Learn how to manage the import task using the import resource.
 
 3.  `terraform refresh`と`terraform state show tidbcloud_import.${resource-name}`を使用して、インポート タスクのステータスを更新および確認します。
 
-## インポート タスクを更新する {#update-an-import-task}
+## インポートタスクを更新する {#update-an-import-task}
 
-インポート タスクを更新できません。
+インポートタスクは更新できません。
 
-## インポート タスクを削除する {#delete-an-import-task}
+## インポートタスクを削除する {#delete-an-import-task}
 
-Terraform の場合、インポート タスクを削除すると、対応するインポート リソースがキャンセルされます。
+Terraform の場合、インポート タスクの削除は、対応するインポート リソースをキャンセルすることを意味します。
 
-`COMPLETED`インポート タスクをキャンセルすることはできません。それ以外の場合は、次の例のように`Delete Error`が返されます。
+`COMPLETED`インポート タスクはキャンセルできません。それ以外の場合は、次の例のように`Delete Error`が返されます。
 
 ```
 $ terraform destroy
@@ -271,13 +271,13 @@ Do you really want to destroy all resources?
 tidbcloud_import.example_local: Destroying... [id=781074]
 ╷
 │ Error: Delete Error
-│ 
+│
 │ Unable to call CancelImport, got error: [DELETE /api/internal/projects/{project_id}/clusters/{cluster_id}/imports/{id}][500] CancelImport default  &{Code:59900104 Details:[] Message:failed to cancel
 │ import}
 ╵
 ```
 
-ステータスが`IMPORTING`のインポート タスクをキャンセルできます。例えば：
+ステータスが`IMPORTING`のインポートタスクはキャンセルできます。例えば：
 
 ```
 $ terraform destroy
@@ -289,13 +289,13 @@ Do you really want to destroy all resources?
   There is no undo. Only 'yes' will be accepted to confirm.
 
   Enter a value: yes
-  
+
 tidbcloud_import.example_local: Destroying... [id=781074]
 tidbcloud_import.example_local: Destruction complete after 0s
 
-Destroy complete! Resources: 1 destroyed.  
+Destroy complete! Resources: 1 destroyed.
 ```
 
 ## 構成 {#configurations}
 
-インポート リソースで使用可能なすべての構成を取得するには、 [構成ドキュメント](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/import)を参照してください。
+インポート リソースで使用可能なすべての構成を取得するには、 [<a href="https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/import">設定ドキュメント</a>](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/import)を参照してください。

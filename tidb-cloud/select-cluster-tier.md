@@ -4,41 +4,41 @@ summary: Learn how to select your cluster tier on TiDB Cloud.
 aliases: ['/tidbcloud/developer-tier-cluster']
 ---
 
-# Cluster Tierを選択する {#select-your-cluster-tier}
+# Cluster Tierを選択してください {#select-your-cluster-tier}
 
 クラスター層によって、クラスターのスループットとパフォーマンスが決まります。
 
-TiDB Cloud は、クラスター層の次の 2 つのオプションを提供します。クラスターを作成する前に、どのオプションがニーズに適しているかを検討する必要があります。
+TiDB Cloud、次の 2 つのクラスター層のオプションが提供されます。クラスターを作成する前に、どちらのオプションがニーズに適しているかを検討する必要があります。
 
--   [Serverless Tier](#serverless-tier-beta)
--   [Dedicated Tier](#dedicated-tier)
+-   [<a href="#tidb-serverless-beta">TiDB サーバーレス</a>](#tidb-serverless-beta)
+-   [<a href="#tidb-dedicated">TiDB専用</a>](#tidb-dedicated)
 
-## Serverless Tier(ベータ) {#serverless-tier-beta}
+## TiDB サーバーレス (ベータ版) {#tidb-serverless-beta}
 
-TiDB Cloud Serverless Tier (以前はDeveloper Tierと呼ばれていた) は、TiDB のフル マネージド サービスです。これはまだベータ版であり、本番では使用しないでください。ただし、Serverless Tierクラスターは、プロトタイプ アプリケーション、ハッカソン、アカデミック コースなどの非運用ワークロードに使用したり、データセットに一時的なデータ サービスを提供したりするために使用できます。
+TiDB Serverless (以前はDeveloper Tierと呼ばれていました) は、TiDB のフルマネージド サービスです。これはまだベータ版であるため、本番では使用しないでください。ただし、TiDB サーバーレス クラスターは、プロトタイプ アプリケーション、ハッカソン、学術コースなどの非運用ワークロードに使用したり、データセットに一時的なデータ サービスを提供したりするために使用できます。
 
-### 利用枠 {#usage-quota}
+### 使用量割り当て {#usage-quota}
 
-TiDB Cloudの組織ごとに、デフォルトで最大 5 つのServerless Tierクラスターを作成できます。さらにServerless Tierクラスターを作成するには、クレジット カードを追加し、使用量を[使用制限](/tidb-cloud/tidb-cloud-glossary.md#spend-limit)に設定する必要があります。
+TiDB Cloudの組織ごとに、デフォルトで最大 5 つの TiDB サーバーレス クラスターを作成できます。さらに TiDB サーバーレス クラスターを作成するには、クレジット カードを追加し、使用量を[<a href="/tidb-cloud/tidb-cloud-glossary.md#spend-limit">支出制限</a>](/tidb-cloud/tidb-cloud-glossary.md#spend-limit)に設定する必要があります。
 
-組織内の最初の 5 つのServerless Tierクラスターについて、 TiDB Cloud は、次のようにそれぞれに無料の使用量割り当てを提供します。
+組織内の最初の 5 つの TiDB サーバーレス クラスターに対して、 TiDB Cloud は各クラスターに次のように無料の使用量クォータを提供します。
 
 -   行storage: 5 GiB
--   [リクエスト ユニット (RU)](/tidb-cloud/tidb-cloud-glossary.md#request-unit) : 1 か月あたり 5,000 万 RU
+-   [<a href="/tidb-cloud/tidb-cloud-glossary.md#request-unit">リクエストユニット (RU)</a>](/tidb-cloud/tidb-cloud-glossary.md#request-unit) : 月あたり 5,000 万 RU
 
-リクエスト ユニット (RU) は、データベースへの 1 回のリクエストで消費されるリソースの量を表すために使用される測定単位です。要求によって消費される RU の量は、操作の種類や、取得または変更されるデータの量など、さまざまな要因によって異なります。
+リクエスト ユニット (RU) は、データベースへの 1 回のリクエストによって消費されるリソースの量を表すために使用される測定単位です。要求によって消費される RU の量は、操作の種類や取得または変更されるデータの量などのさまざまな要因によって異なります。
 
-クラスターの無料クォータに達すると、このクラスターでの読み取りおよび書き込み操作は、 [クォータを増やす](/tidb-cloud/manage-serverless-spend-limit.md#update-spend-limit)または新しい月の開始時に使用量がリセットされるまで調整されます。たとえば、クラスターのstorageが 5 GiB を超えると、1 つのトランザクションの最大サイズ制限が 10 MiB から 1 MiB に減少します。
+クラスターの無料クォータに達すると、このクラスターでの読み取りおよび書き込み操作は、新しい月の初めに使用量が[<a href="/tidb-cloud/manage-serverless-spend-limit.md#update-spend-limit">割り当てを増やす</a>](/tidb-cloud/manage-serverless-spend-limit.md#update-spend-limit)されるまでスロットルされます。たとえば、クラスターのstorageが 5 GiB を超えると、単一トランザクションの最大サイズ制限が 10 MiB から 1 MiB に減ります。
 
-さまざまなリソース (読み取り、書き込み、SQL CPU、およびネットワーク エグレスを含む) の RU 消費、料金の詳細、調整された情報について詳しくは、 [TiDB CloudServerless Tierの料金詳細](https://www.pingcap.com/tidb-cloud-serverless-pricing-details)を参照してください。
+さまざまなリソース (読み取り、書き込み、SQL CPU、ネットワーク下りなど) の RU 消費量、料金の詳細、および調整された情報の詳細については、 [<a href="https://www.pingcap.com/tidb-cloud-serverless-pricing-details">TiDB サーバーレスの料金詳細</a>](https://www.pingcap.com/tidb-cloud-serverless-pricing-details)を参照してください。
 
 ### ユーザー名のプレフィックス {#user-name-prefix}
 
 <!--Important: Do not update the section name "User name prefix" because this section is referenced by TiDB backend error messages.-->
 
-Serverless Tierクラスターごとに、 TiDB Cloud は一意のプレフィックスを生成して、他のクラスターと区別します。
+TiDB サーバーレス クラスターごとに、 TiDB Cloudは他のクラスターと区別するための一意のプレフィックスを生成します。
 
-データベース ユーザー名を使用または設定するときは常に、ユーザー名にプレフィックスを含める必要があります。たとえば、クラスターのプレフィックスが`3pTAoNNegb47Uc8`であるとします。
+データベース ユーザー名を使用または設定するときは、ユーザー名に接頭辞を含める必要があります。たとえば、クラスターのプレフィックスが`3pTAoNNegb47Uc8`であると仮定します。
 
 -   クラスターに接続するには:
 
@@ -48,7 +48,7 @@ Serverless Tierクラスターごとに、 TiDB Cloud は一意のプレフィ�
 
     > **ノート：**
     >
-    > Serverless TierにはTLS 接続が必要です。システムの CA ルート パスを見つけるには、 [ルート証明書のデフォルト パス](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md#root-certificate-default-path)を参照してください。
+    > TiDB サーバーレスには TLS 接続が必要です。システム上の CA ルート パスを見つけるには、 [<a href="/tidb-cloud/secure-connections-to-serverless-tier-clusters.md#root-certificate-default-path">ルート証明書のデフォルトのパス</a>](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md#root-certificate-default-path)を参照してください。
 
 -   データベース ユーザーを作成するには:
 
@@ -58,22 +58,22 @@ Serverless Tierクラスターごとに、 TiDB Cloud は一意のプレフィ�
 
 クラスターのプレフィックスを取得するには、次の手順を実行します。
 
-1.  [**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
-2.  ターゲット クラスターの名前をクリックして概要ページに移動し、右上隅にある**[接続]**をクリックします。接続ダイアログが表示されます。
+1.  [<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページに移動します。
+2.  ターゲット クラスターの名前をクリックして概要ページに移動し、右上隅の**[接続]**をクリックします。接続ダイアログが表示されます。
 3.  ダイアログで、接続文字列からプレフィックスを取得します。
 
-### Serverless Tierの特別利用規約 {#serverless-tier-special-terms-and-conditions}
+### TiDB サーバーレス特別利用規約 {#tidb-serverless-special-terms-and-conditions}
 
--   Serverless Tierは現在ベータ版であり、ベータ フェーズ中のアップタイム SLA 保証はありません。 Serverless Tierベータ版を使用して商用または本番データセットを保存する場合、使用に伴う潜在的なリスクはご自身で負う必要があり、PingCAP はいかなる損害についても責任を負わないものとします。
--   一部のTiDB Cloud機能は、Serverless Tierで部分的にサポートされているか、サポートされていません。詳細は[Serverless Tierの制限](/tidb-cloud/serverless-tier-limitations.md)を参照してください。
+-   TiDB サーバーレスは現在ベータ版であり、ベータ段階中の稼働時間 SLA 保証はありません。 TiDB サーバーレス ベータ版を使用して商用または本番データセットを保存する場合、その使用に関連する潜在的なリスクはお客様ご自身で負う必要があり、PingCAP は損害に対して責任を負いません。
+-   TiDB Cloud機能の一部は、TiDB サーバーレスで部分的にサポートされているか、サポートされていません。詳細については[<a href="/tidb-cloud/serverless-tier-limitations.md">TiDB サーバーレスの制限事項</a>](/tidb-cloud/serverless-tier-limitations.md)を参照してください。
 
-## Dedicated Tier {#dedicated-tier}
+## TiDB専用 {#tidb-dedicated}
 
-TiDB Cloud Dedicated Tier は、クロスゾーンの高可用性、水平スケーリング、および[HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)利点を備えた、本番使用専用です。
+TiDB D dedicated は、クロスゾーンの高可用性、水平スケーリング、および[<a href="https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing">HTAP</a>](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)利点を備えた本番環境向けです。
 
-Dedicated Tierクラスターの場合、ビジネス ニーズに応じて、TiDB、TiKV、およびTiFlashのクラスター サイズを簡単にカスタマイズできます。 TiKV ノードとTiFlashノードごとに、ノード上のデータが複製され、 [高可用性](/tidb-cloud/high-availability-with-multi-az.md)アベイラビリティ ゾーンに分散されます。
+TiDB 専用クラスターの場合、ビジネス ニーズに応じて TiDB、TiKV、およびTiFlashのクラスター サイズを簡単にカスタマイズできます。 TiKV ノードとTiFlashノードごとに、ノード上のデータが複製され、 [<a href="/tidb-cloud/high-availability-with-multi-az.md">高可用性</a>](/tidb-cloud/high-availability-with-multi-az.md)アベイラビリティ ゾーンに分散されます。
 
-Dedicated Tierクラスターを作成するには、 [支払い方法を追加する](/tidb-cloud/tidb-cloud-billing.md#payment-method)または[概念実証 (PoC) トライアルに申し込む](/tidb-cloud/tidb-cloud-poc.md)が必要です。
+TiDB 専用クラスターを作成するには、 [<a href="/tidb-cloud/tidb-cloud-billing.md#payment-method">支払い方法を追加する</a>](/tidb-cloud/tidb-cloud-billing.md#payment-method)または[<a href="/tidb-cloud/tidb-cloud-poc.md">概念実証 (PoC) トライアルに申し込む</a>](/tidb-cloud/tidb-cloud-poc.md)を行う必要があります。
 
 > **ノート：**
 >

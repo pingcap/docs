@@ -3,26 +3,26 @@ title: Use Restore Resource
 summary: Learn how to use restore resource.
 ---
 
-# 復元リソースを使用 {#use-restore-resource}
+# 復元リソースの使用 {#use-restore-resource}
 
-このドキュメントの`tidbcloud_restore`リソースを使用して、復元タスクを管理する方法を学習できます。
+このドキュメントの`tidbcloud_restore`リソースを使用して復元タスクを管理する方法を学習できます。
 
-`tidbcloud_restore`リソースの機能は次のとおりです。
+`tidbcloud_restore`リソースの特徴は次のとおりです。
 
--   バックアップに従ってDedicated Tierクラスターの復元タスクを作成します。
+-   バックアップに従って、TiDB 専用クラスターの復元タスクを作成します。
 
 ## 前提条件 {#prerequisites}
 
--   [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) .
--   バックアップと復元の機能は、Serverless Tierクラスターでは使用できません。復元リソースを使用するには、 Dedicated Tierクラスターを作成済みであることを確認してください。
+-   [<a href="/tidb-cloud/terraform-get-tidbcloud-provider.md">TiDB Cloud Terraform プロバイダーを入手する</a>](/tidb-cloud/terraform-get-tidbcloud-provider.md) 。
+-   バックアップおよび復元機能は、TiDB サーバーレス クラスターでは使用できません。復元リソースを使用するには、TiDB 専用クラスターを作成していることを確認してください。
 
 ## 復元タスクを作成する {#create-a-restore-task}
 
-クラスターのバックアップを作成した後、 `tidbcloud_restore`リソースで復元タスクを作成することにより、クラスターを復元できます。
+クラスターのバックアップを作成した後、 `tidbcloud_restore`リソースを使用して復元タスクを作成することでクラスターを復元できます。
 
 > **ノート：**
 >
-> 小さいノード サイズから同じまたは大きいノード サイズにのみデータを復元できます。
+> より小さいノード サイズから同じまたはより大きいノード サイズにのみデータを復元できます。
 
 1.  復元用のディレクトリを作成して入力します。
 
@@ -175,13 +175,13 @@ summary: Learn how to use restore resource.
     }
     ```
 
-    復元タスクのステータスが`PENDING`で、クラスターのステータスが`INITIALIZING`であることがわかります。
+    復元タスクのステータスが`PENDING` 、クラスターのステータスが`INITIALIZING`であることがわかります。
 
-5.  数分待ちます。次に、 `terraform refersh`使用してステータスを更新します。
+5.  数分間待ちます。次に、 `terraform refersh`使用してステータスを更新します。
 
-6.  クラスターのステータスが`AVAILABLE`に変わった後、復元タスクは`RUNNING`なり、最後に`SUCCESS`になります。
+6.  クラスターのステータスが`AVAILABLE`に変化した後、復元タスクは`RUNNING`なり、最終的に`SUCCESS`になります。
 
-復元されたクラスターは Terraform によって管理されないことに注意してください。復元されたクラスターを[それをインポートする](/tidb-cloud/terraform-use-cluster-resource.md#import-a-cluster)で管理できます。
+復元されたクラスターは Terraform によって管理されないことに注意してください。復元されたクラスターは[<a href="/tidb-cloud/terraform-use-cluster-resource.md#import-a-cluster">それをインポートする</a>](/tidb-cloud/terraform-use-cluster-resource.md#import-a-cluster)で管理できます。
 
 ## 復元タスクを更新する {#update-a-restore-task}
 

@@ -5,105 +5,105 @@ summary: Learn how to use TiDB Cloud Chat2Query API to generate and execute SQL 
 
 # Chat2Query API を使ってみる {#get-started-with-chat2query-api}
 
-TiDB Cloud は、命令を提供することで AI を使用して SQL ステートメントを生成および実行できる RESTful インターフェイスである Chat2Query API を提供します。次に、API がクエリ結果を返します。
+TiDB Cloud は、指示を提供することで AI を使用して SQL ステートメントを生成および実行できる RESTful インターフェイスである Chat2Query API を提供します。その後、API はクエリ結果を返します。
 
-Chat2Query API は HTTPS 経由でのみアクセスできるため、ネットワーク経由で送信されるすべてのデータは TLS を使用して暗号化されます。
+Chat2Query API には HTTPS 経由でのみアクセスできるため、ネットワーク上で送信されるすべてのデータは TLS を使用して暗号化されます。
 
 > **ノート：**
 >
-> Chat2Query API は[Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)クラスターでのみ使用できます。
+> Chat2Query API は[<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB サーバーレス</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)クラスターでのみ使用できます。
 
 ## あなたが始める前に {#before-you-begin}
 
-Chat2Query API を使用する前に、 [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta)クラスターを作成し、 [AI による SQL クエリの生成](/tidb-cloud/explore-data-with-chat2query.md)有効にしていることを確認してください。 Serverless Tierクラスターがない場合は、 [クラスターを作成する](/tidb-cloud/create-tidb-cluster.md)の手順に従って作成します。
+Chat2Query API を使用する前に、 [<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB サーバーレス</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)クラスターを作成し、 [<a href="/tidb-cloud/explore-data-with-chat2query.md">SQLクエリを生成するAI</a>](/tidb-cloud/explore-data-with-chat2query.md)有効にしていることを確認してください。 TiDB サーバーレス クラスターがない場合は、 [<a href="/tidb-cloud/create-tidb-cluster.md">クラスターを作成する</a>](/tidb-cloud/create-tidb-cluster.md)の手順に従って作成します。
 
-## ステップ 1.Chat2Query API を有効にする {#step-1-enable-the-chat2query-api}
+## ステップ 1. Chat2Query API を有効にする {#step-1-enable-the-chat2query-api}
 
 Chat2Query API を有効にするには、次の手順を実行します。
 
-1.  プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
+1.  プロジェクトの[<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページに移動します。
 
     > **ヒント：**
     >
-    > 複数のプロジェクトがある場合は、プロジェクト リストを表示し、左上隅の ☰ ホバー メニューから別のプロジェクトに切り替えることができます。
+    > 複数のプロジェクトがある場合は、プロジェクト リストを表示し、左上隅にある ☰ ホバー メニューから別のプロジェクトに切り替えることができます。
 
-2.  クラスター名をクリックし、左側のナビゲーション ペインで**[Chat2Query]**をクリックします。
+2.  クラスター名をクリックし、左側のナビゲーション ウィンドウで**[Chat2Query]**をクリックします。
 
-3.  Chat2Query の右上隅にある**[...]**をクリックし、 <strong>[設定]</strong>を選択します。
+3.  Chat2Query の右上隅で**[...]**をクリックし、 **[設定]**を選択します。
 
 4.  **DataAPI を**有効にすると、Chat2Query データ アプリが作成されます。
 
     > **ノート：**
     >
-    > 1 つのServerless Tierクラスターで DataAPI を有効にすると、同じプロジェクト内のすべてのServerless Tierクラスターで Chat2Query API を使用できるようになります。
+    > 1 つの TiDB サーバーレス クラスターで DataAPI を有効にすると、同じプロジェクト内のすべての TiDB サーバーレス クラスターで Chat2Query API を使用できるようになります。
 
-5.  メッセージ内の**Data Service**リンクをクリックして、Chat2Query API にアクセスします。
+5.  メッセージ内の**「Data Service」**リンクをクリックして、Chat2Query API にアクセスします。
 
-    **Chat2Query システム**[データ アプリ](/tidb-cloud/tidb-cloud-glossary.md#data-app)とその<strong>Chat2Data</strong> [終点](/tidb-cloud/tidb-cloud-glossary.md#endpoint)左側のペインに表示されていることがわかります。
+    **Chat2Query System** [<a href="/tidb-cloud/tidb-cloud-glossary.md#data-app">データアプリ</a>](/tidb-cloud/tidb-cloud-glossary.md#data-app)とその**Chat2Data** [<a href="/tidb-cloud/tidb-cloud-glossary.md#endpoint">終点</a>](/tidb-cloud/tidb-cloud-glossary.md#endpoint)左側のペインに表示されていることがわかります。
 
 ## ステップ 2. API キーを作成する {#step-2-create-an-api-key}
 
 エンドポイントを呼び出す前に、API キーを作成する必要があります。 Chat2Query データ アプリの API キーを作成するには、次の手順を実行します。
 
-1.  [**データサービス**](https://tidbcloud.com/console/data-service)の左側のペインで、 **Chat2Query システム**の名前をクリックして詳細を表示します。
+1.  [<a href="https://tidbcloud.com/console/data-service">**データサービス**</a>](https://tidbcloud.com/console/data-service)の左側のペインで、 **Chat2Query システム**の名前をクリックして詳細を表示します。
 
-2.  **[API キー]**領域で、 <strong>[API キーの作成]</strong>をクリックします。
+2.  **「API キー」**領域で、 **「API キーの作成」を**クリックします。
 
 3.  **[API キーの作成]**ダイアログ ボックスで、説明を入力し、API キーのロールを選択します。
 
-    ロールは、API キーが Data App にリンクされたクラスターにデータを読み書きできるかどうかを制御するために使用されます。 `ReadOnly`または`ReadAndWrite`役割を選択できます。
+    このロールは、API キーがデータ アプリにリンクされたクラスターに対してデータの読み取りまたは書き込みを行えるかどうかを制御するために使用されます。 `ReadOnly`または`ReadAndWrite`役割を選択できます。
 
-    -   `ReadOnly` : API キーが`SELECT` 、 `SHOW` 、 `USE` 、 `DESC` 、および`EXPLAIN`ステートメントなどのデータを読み取ることのみを許可します。
-    -   `ReadAndWrite` : API キーによるデータの読み取りと書き込みを許可します。この API キーを使用して、DML ステートメントや DDL ステートメントなど、すべての SQL ステートメントを実行できます。
+    -   `ReadOnly` : API キーは`SELECT` 、 `SHOW` 、 `USE` 、 `DESC` 、 `EXPLAIN`ステートメントなどのデータの読み取りのみを許可します。
+    -   `ReadAndWrite` : API キーによるデータの読み取りと書き込みを許可します。この API キーを使用して、DML ステートメントや DDL ステートメントなどのすべての SQL ステートメントを実行できます。
 
-4.  **[次へ]**をクリックします。公開鍵と秘密鍵が表示されます。
+4.  **「次へ」**をクリックします。公開鍵と秘密鍵が表示されます。
 
-    秘密鍵をコピーして安全な場所に保存したことを確認してください。このページを離れると、完全な秘密鍵を再度取得することはできなくなります。
+    秘密キーをコピーして安全な場所に保存したことを確認してください。このページを離れると、完全な秘密キーを再度取得することはできなくなります。
 
-5.  **[完了]**をクリックします。
+5.  **「完了」**をクリックします。
 
 ## ステップ 3. Chat2Data エンドポイントを呼び出す {#step-3-call-the-chat2data-endpoint}
 
-[**データサービス**](https://tidbcloud.com/console/data-service)ページの左側のペインで、 **Chat2Query** &gt; <strong>/chat2data</strong>をクリックして、エンドポイントの詳細を表示します。 Chat2Data の<strong>プロパティが</strong>表示されます。
+[<a href="https://tidbcloud.com/console/data-service">**データサービス**</a>](https://tidbcloud.com/console/data-service)ページの左側のペインで、 **[Chat2Query]** &gt; **[/chat2data]**をクリックしてエンドポイントの詳細を表示します。 Chat2Data の**プロパティが**表示されます。
 
--   **Endpoint Path** : (読み取り専用) `/chat2data`である Chat2Data エンドポイントのパス。
+-   **エンドポイント パス**: (読み取り専用) Chat2Data エンドポイントのパス`/chat2data` 。
 
--   **エンドポイント URL** : (読み取り専用) エンドポイントの呼び出しに使用される Chat2Data エンドポイントの URL。たとえば、 `https://data.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/chat2data`です。
+-   **エンドポイント URL** : (読み取り専用) Chat2Data エンドポイントの URL。エンドポイントを呼び出すために使用されます。たとえば、 `https://<region>.data.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/chat2data` 。
 
--   **Request Method** : (読み取り専用) Chat2Data エンドポイントの HTTP メソッド。これは`POST`です。
+-   **Request Method** : (読み取り専用) Chat2Data エンドポイントの HTTP メソッド`POST` 。
 
 -   **Timeout(ms)** : Chat2Data エンドポイントのタイムアウト。
 
     -   デフォルト値: `30000`
-    -   最大値: `60000`
+    -   最大値： `60000`
     -   最小値: `1`
     -   単位：ミリ秒
 
 -   **Max Rows** : Chat2Data エンドポイントが返す最大行数。
 
     -   デフォルト値: `50`
-    -   最大値: `2000`
+    -   最大値： `2000`
     -   最小値: `1`
 
-TiDB Cloud は、エンドポイントを呼び出すのに役立つコード例を生成します。サンプルを取得してコードを実行するには、次の手順を実行します。
+TiDB Cloudは、エンドポイントの呼び出しに役立つコード サンプルを生成します。例を取得してコードを実行するには、次の手順を実行します。
 
-1.  現在の**Chat2Data**ページで、 <strong>[エンドポイント URL]</strong>の右側にある<strong>[コード例]</strong>をクリックします。 <strong>[コード例]</strong>ダイアログ ボックスが表示されます。
+1.  現在の**Chat2Data**ページで、 **[エンドポイント URL]**の右側にある**[コード例]**をクリックします。 **[コード例]**ダイアログ ボックスが表示されます。
 2.  ダイアログ ボックスで、エンドポイントの呼び出しに使用するクラスターとデータベースを選択し、コード例をコピーします。
 3.  コード例をアプリケーションに貼り付けて実行します。
 
     -   `<Public Key>`と`<Private Key>`プレースホルダーを API キーに置き換えます。
-    -   `<your instruction>`プレースホルダーを、AI が生成して SQL ステートメントを実行する命令に置き換えます。
-    -   `<your table name, optional>`プレースホルダーをクエリするテーブル名に置き換えます。テーブル名を指定しない場合、AI はデータベース内のすべてのテーブルを照会します。
+    -   `<your instruction>`プレースホルダーを、AI に SQL ステートメントを生成して実行させる命令に置き換えます。
+    -   `<your table name, optional>`プレースホルダーを、クエリするテーブル名に置き換えます。テーブル名を指定しない場合、AI はデータベース内のすべてのテーブルをクエリします。
 
 > **ノート：**
 >
-> 各 Chat2Query データ アプリには、1 日あたり 100 リクエストのレート制限があります。レート制限を超えると、API は`429`エラーを返します。さらに割り当てが必要な場合は、サポート チームに[リクエストを提出する](https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519)してください。
+> 各 Chat2Query データ アプリには、1 日あたり 100 リクエストのレート制限があります。レート制限を超えると、API は`429`エラーを返します。さらに割り当てが必要な場合は、サポート チームに[<a href="https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519">リクエストを送信する</a>](https://support.pingcap.com/hc/en-us/requests/new?ticket_form_id=7800003722519)お問い合わせください。
 
-次のコード例は、 `sample_data.github_events`テーブルから最も人気のある GitHub リポジトリを見つけるために使用されます。
+次のコード例は、 `sample_data.github_events`テーブルから最も人気のある GitHub リポジトリを検索するために使用されます。
 
 ```bash
 curl --digest --user '<Public Key>:<Private Key>' \
-  --request POST 'https://data.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/chat2data' \
+  --request POST 'https://<region>.data.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/chat2data' \
   --header 'content-type: application/json' \
   --data-raw '{
       "cluster_id": "12345678912345678960",
@@ -113,11 +113,11 @@ curl --digest --user '<Public Key>:<Private Key>' \
       }'
 ```
 
-前の例では、要求本文は次のプロパティを持つ JSON オブジェクトです。
+前述の例では、リクエスト本文は次のプロパティを持つ JSON オブジェクトです。
 
 -   `cluster_id` :*文字列*。 TiDB クラスターの一意の識別子。
 -   `database` :*文字列*。データベースの名前。
--   `tables` :*配列*。 (オプション) 照会するテーブル名のリスト。
+-   `tables` :*配列*。 (オプション) クエリ対象のテーブル名のリスト。
 -   `instruction` :*文字列*。必要なクエリを説明する自然言語命令。
 
 応答は次のとおりです。
@@ -159,7 +159,7 @@ curl --digest --user '<Public Key>:<Private Key>' \
     }
 ```
 
-API 呼び出しが成功しない場合は、 `200`以外のステータス コードが返されます。以下は、 `500`ステータス コードの例です。
+API 呼び出しが成功しなかった場合は、 `200`以外のステータス コードが返されます。以下は`500`ステータス コードの例です。
 
 ```json
 {
@@ -183,5 +183,5 @@ API 呼び出しが成功しない場合は、 `200`以外のステータス コ
 
 ## もっと詳しく知る {#learn-more}
 
--   [API キーを管理する](/tidb-cloud/data-service-api-key.md)
--   [データ サービスの応答コードとステータス コード](/tidb-cloud/data-service-response-and-status-code.md)
+-   [<a href="/tidb-cloud/data-service-api-key.md">APIキーを管理する</a>](/tidb-cloud/data-service-api-key.md)
+-   [<a href="/tidb-cloud/data-service-response-and-status-code.md">データサービスのレスポンスコードとステータスコード</a>](/tidb-cloud/data-service-response-and-status-code.md)

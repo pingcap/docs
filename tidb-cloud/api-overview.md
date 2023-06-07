@@ -7,20 +7,20 @@ summary: Learn about what is TiDB Cloud API, its features, and how to use API to
 
 > **ノート：**
 >
-> [TiDB CloudAPI](https://docs.pingcap.com/tidbcloud/api/v1beta)はベータ版です。
+> [<a href="https://docs.pingcap.com/tidbcloud/api/v1beta">TiDB CloudAPI</a>](https://docs.pingcap.com/tidbcloud/api/v1beta)はベータ版です。
 
-TiDB Cloud API は、 TiDB Cloud内の管理オブジェクトを管理するためのプログラムによるアクセスを提供する[REST インターフェイス](https://en.wikipedia.org/wiki/Representational_state_transfer)です。この API を通じて、プロジェクト、クラスター、バックアップ、復元、インポートなどのリソースを自動的かつ効率的に管理できます。
+TiDB CloudAPI は、 TiDB Cloud内の管理オブジェクトを管理するためのプログラムによるアクセスを提供する[<a href="https://en.wikipedia.org/wiki/Representational_state_transfer">RESTインターフェース</a>](https://en.wikipedia.org/wiki/Representational_state_transfer)です。この API を通じて、プロジェクト、クラスター、バックアップ、リストア、インポートなどのリソースを自動的かつ効率的に管理できます。
 
 API には次の機能があります。
 
 -   **JSON エンティティ。**すべてのエンティティは JSON で表現されます。
--   **HTTPS のみ。** HTTPS 経由でのみ API にアクセスできるため、ネットワーク経由で送信されるすべてのデータは TLS で暗号化されます。
--   **キーベースのアクセスとダイジェスト認証。** TiDB Cloud API にアクセスする前に、API キーを生成する必要があります。すべてのリクエストは[HTTP ダイジェスト認証](https://en.wikipedia.org/wiki/Digest_access_authentication)によって認証され、API キーがネットワーク経由で送信されないようにします。
+-   **HTTPS のみ。** API には HTTPS 経由でのみアクセスできるため、ネットワーク経由で送信されるすべてのデータは TLS で暗号化されます。
+-   **キーベースのアクセスとダイジェスト認証。** TiDB Cloud API にアクセスする前に、API キーを生成する必要があります。すべてのリクエストは[<a href="https://en.wikipedia.org/wiki/Digest_access_authentication">HTTPダイジェスト認証</a>](https://en.wikipedia.org/wiki/Digest_access_authentication)を通じて認証され、API キーがネットワーク経由で送信されることはありません。
 
-TiDB Cloud API の使用を開始するには、 [TiDB CloudAPI ドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta)の次のリソースを参照してください。
+TiDB Cloud API の使用を開始するには、 [<a href="https://docs.pingcap.com/tidbcloud/api/v1beta">TiDB CloudAPI ドキュメント</a>](https://docs.pingcap.com/tidbcloud/api/v1beta)の次のリソースを参照してください。
 
--   [始めましょう](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Get-Started)
--   [認証](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication)
--   [レート制限](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Rate-Limiting)
--   [API の完全なリファレンス](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Project)
--   [変更ログ](https://docs.pingcap.com/tidbcloud/api/v1beta#section/API-Changelog)
+-   [<a href="https://docs.pingcap.com/tidbcloud/api/v1beta#section/Get-Started">始めましょう</a>](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Get-Started)
+-   [<a href="https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication">認証</a>](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication)
+-   [<a href="https://docs.pingcap.com/tidbcloud/api/v1beta#section/Rate-Limiting">レート制限</a>](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Rate-Limiting)
+-   [<a href="https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Project">API の完全なリファレンス</a>](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Project)
+-   [<a href="https://docs.pingcap.com/tidbcloud/api/v1beta#section/API-Changelog">変更履歴</a>](https://docs.pingcap.com/tidbcloud/api/v1beta#section/API-Changelog)

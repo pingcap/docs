@@ -3,32 +3,32 @@ title: Integrate TiDB Cloud with dbt
 summary: Learn the use cases of dbt in TiDB Cloud.
 ---
 
-# TiDB Cloudを dbt と統合する {#integrate-tidb-cloud-with-dbt}
+# TiDB Cloudと dbt を統合する {#integrate-tidb-cloud-with-dbt}
 
-[データ構築ツール (dbt)](https://www.getdbt.com/)は、分析エンジニアが SQL ステートメントを使用してウェアハウス内のデータを変換するのに役立つ、人気のあるオープンソースのデータ変換ツールです。 [dbt-tidb](https://github.com/pingcap/dbt-tidb)プラグインを使用すると、 TiDB Cloudを使用する分析エンジニアは、フォームを直接作成し、SQL を介してデータを照合することができます。テーブルやビューの作成プロセスについて考える必要はありません。
+[<a href="https://www.getdbt.com/">データ構築ツール（dbt）</a>](https://www.getdbt.com/)は、分析エンジニアが SQL ステートメントを使用してウェアハウス内のデータを変換するのに役立つ、人気のあるオープンソース データ変換ツールです。 [<a href="https://github.com/pingcap/dbt-tidb">dbt-tidb</a>](https://github.com/pingcap/dbt-tidb)プラグインを使用すると、 TiDB Cloudを使用する分析エンジニアは、テーブルやビューの作成プロセスを考慮することなく、SQL を介してフォームを直接作成し、データを照合することができます。
 
-このドキュメントでは、dbt プロジェクトを例に、 TiDB Cloudで dbt を使用する方法を紹介します。
+このドキュメントでは、dbt プロジェクトを例として、 TiDB Cloudで dbt を使用する方法を紹介します。
 
 ## ステップ 1: dbt と dbt-tidb をインストールする {#step-1-install-dbt-and-dbt-tidb}
 
-コマンドを 1 つだけ使用して、dbt と dbt-tidb をインストールできます。次のコマンドでは、dbt-tidb をインストールすると、依存関係として dbt がインストールされます。
+dbt と dbt-tidb は、1 つのコマンドだけを使用してインストールできます。次のコマンドでは、dbt-tidb のインストール時に dbt が依存関係としてインストールされます。
 
 ```shell
 pip install dbt-tidb
 ```
 
-dbt を個別にインストールすることもできます。 dbt ドキュメントの[インストール方法](https://docs.getdbt.com/docs/get-started/installation)参照してください。
+dbt を個別にインストールすることもできます。 DBT ドキュメントの[<a href="https://docs.getdbt.com/docs/get-started/installation">DBTのインストール方法</a>](https://docs.getdbt.com/docs/get-started/installation)参照してください。
 
 ## ステップ 2: デモ プロジェクトを作成する {#step-2-create-a-demo-project}
 
-dbt 機能を試すには、dbt-lab が提供するデモ プロジェクト[ジャッフルショップ](https://github.com/dbt-labs/jaffle_shop)を使用できます。 GitHub からプロジェクトを直接複製できます。
+dbt 関数を試すには、 dbt-lab が提供するデモ プロジェクト[<a href="https://github.com/dbt-labs/jaffle_shop">ジャッフルショップ</a>](https://github.com/dbt-labs/jaffle_shop)を使用できます。 GitHub から直接プロジェクトのクローンを作成できます。
 
 ```shell
 git clone https://github.com/dbt-labs/jaffle_shop && \
 cd jaffle_shop
 ```
 
-`jaffle_shop`ディレクトリ内のすべてのファイルは、次のように構成されています。
+`jaffle_shop`ディレクトリ内のすべてのファイルは次のような構造になっています。
 
 ```shell
 .
@@ -57,11 +57,11 @@ cd jaffle_shop
 
 このディレクトリ内:
 
--   `dbt_project.yml`は、プロジェクト名とデータベース構成ファイル情報を保持する dbt プロジェクト構成ファイルです。
+-   `dbt_project.yml`は dbt プロジェクト構成ファイルで、プロジェクト名とデータベース構成ファイル情報が保持されます。
 
--   `models`ディレクトリには、プロジェクトの SQL モデルとテーブル スキーマが含まれています。データ アナリストがこのセクションを作成することに注意してください。モデルの詳細については、 [SQL モデル](https://docs.getdbt.com/docs/build/sql-models)を参照してください。
+-   `models`ディレクトリには、プロジェクトの SQL モデルとテーブル スキーマが含まれています。このセクションはデータ アナリストが執筆していることに注意してください。モデルの詳細については、 [<a href="https://docs.getdbt.com/docs/build/sql-models">SQLモデル</a>](https://docs.getdbt.com/docs/build/sql-models)を参照してください。
 
--   `seeds`ディレクトリには、データベース エクスポート ツールによってダンプされた CSV ファイルが格納されます。たとえば、 Dumplingを使用して CSV ファイルに[TiDB Cloudデータをエクスポートする](https://docs.pingcap.com/tidbcloud/export-data-from-tidb-cloud)できます。 `jaffle_shop`プロジェクトでは、これらの CSV ファイルを処理対象の生データとして使用します。
+-   `seeds`ディレクトリには、データベース エクスポート ツールによってダンプされた CSV ファイルが保存されます。たとえば、 Dumplingを使用して CSV ファイルに[<a href="https://docs.pingcap.com/tidbcloud/export-data-from-tidb-cloud">TiDB Cloudデータをエクスポートする</a>](https://docs.pingcap.com/tidbcloud/export-data-from-tidb-cloud)できます。 `jaffle_shop`プロジェクトでは、これらの CSV ファイルが処理対象の生データとして使用されます。
 
 ## ステップ 3: プロジェクトを構成する {#step-3-configure-the-project}
 
@@ -69,7 +69,7 @@ cd jaffle_shop
 
 1.  グローバル構成を完了します。
 
-    [プロファイル フィールドの説明](#description-of-profile-fields)を参照して、デフォルトのグローバル プロファイル`~/.dbt/profiles.yml`を編集し、 TiDB Cloudとの接続を構成できます。
+    [<a href="#description-of-profile-fields">プロフィールフィールドの説明</a>](#description-of-profile-fields)を参照し、デフォルトのグローバル プロファイル`~/.dbt/profiles.yml`を編集して、 TiDB Cloudとの接続を構成できます。
 
     ```shell
     sudo vi ~/.dbt/profiles.yml
@@ -90,11 +90,11 @@ cd jaffle_shop
            password: "your_password"                                   # The password to use for authenticating to the TiDB Cloud clusters
     ```
 
-    TiDB Cloudコンソールの[**接続**](/tidb-cloud/connect-via-standard-connection.md)ダイアログから`server` 、 `port` 、および`username`の値を取得できます。
+    TiDB Cloudコンソールの[<a href="/tidb-cloud/connect-via-standard-connection.md">**接続**</a>](/tidb-cloud/connect-via-standard-connection.md)ダイアログから`server` 、 `port` 、および`username`の値を取得できます。
 
-2.  プロジェクト構成を完了します。
+2.  プロジェクトの構成を完了します。
 
-    jaffle_shop プロジェクト ディレクトリで、プロジェクト構成ファイル`dbt_project.yml`を編集し、 `profile`フィールドを`jaffle_shop_tidb`に変更します。この構成により、プロジェクトは`~/.dbt/profiles.yml`ファイルで指定されたデータベースからクエリを実行できます。
+    jaffle_shop プロジェクト ディレクトリで、プロジェクト構成ファイル`dbt_project.yml`を編集し、 `profile`フィールドを`jaffle_shop_tidb`に変更します。この構成により、プロジェクトは`~/.dbt/profiles.yml`ファイルで指定されているようにデータベースからクエリを実行できるようになります。
 
     ```shell
     vi dbt_project.yml
@@ -139,21 +139,21 @@ cd jaffle_shop
     dbt debug
     ```
 
-## ステップ 4: (オプション) CSV ファイルを読み込む {#step-4-optional-load-csv-files}
+## ステップ 4: (オプション) CSV ファイルをロードする {#step-4-optional-load-csv-files}
 
 > **ノート：**
 >
-> この手順はオプションです。処理対象のデータが既にターゲット データベースにある場合は、この手順を省略できます。
+> このステップはオプションです。処理対象のデータがターゲット データベースにすでに存在する場合は、この手順をスキップできます。
 
-プロジェクトの作成と構成が正常に完了したので、CSV データをロードし、CSV をターゲット データベースのテーブルとして実体化します。
+プロジェクトの作成と構成が正常に完了したので、次は CSV データをロードし、その CSV をターゲット データベース内のテーブルとして実体化します。
 
-1.  CSV データをロードし、CSV をターゲット データベースのテーブルとしてマテリアライズします。
+1.  CSV データをロードし、CSV をターゲット データベース内のテーブルとして実体化します。
 
     ```shell
     dbt seed
     ```
 
-    次に出力例を示します。
+    以下は出力例です。
 
     ```shell
     Running with dbt=1.0.1
@@ -170,11 +170,11 @@ cd jaffle_shop
     3 of 3 OK loaded seed file analytics.raw_payments............................... [INSERT 113 in 0.24s]
     ```
 
-    結果からわかるように、シード ファイルが開始され、3 つのテーブル ( `analytics.raw_customers` 、 `analytics.raw_orders` 、および`analytics.raw_payments` ) に読み込まれました。
+    結果からわかるように、シード ファイルが開始され、3 つのテーブル ( `analytics.raw_customers` 、 `analytics.raw_orders` 、および`analytics.raw_payments` ) にロードされました。
 
 2.  TiDB Cloudで結果を確認します。
 
-    `show databases`コマンドは、dbt が作成した新しい`analytics`データベースを一覧表示します。 `show tables`コマンドは、作成したテーブルに対応する`analytics`データベースに 3 つのテーブルがあることを示します。
+    `show databases`コマンドは、dbt が作成した`analytics`データベースをリストします。 `show tables`コマンドは、作成したテーブルに対応するテーブルが`analytics`データベースに 3 つあることを示します。
 
     ```sql
     mysql> SHOW DATABASES;
@@ -222,15 +222,15 @@ cd jaffle_shop
 
 ## ステップ 5: データを変換する {#step-5-transform-data}
 
-これで、構成されたプロジェクトを実行してデータ変換を完了する準備が整いました。
+これで、構成されたプロジェクトを実行し、データ変換を完了する準備が整いました。
 
-1.  dbt プロジェクトを実行して、データ変換を完了します。
+1.  dbt プロジェクトを実行してデータ変換を完了します。
 
     ```shell
     dbt run
     ```
 
-    次に出力例を示します。
+    以下は出力例です。
 
     ```shell
     Running with dbt=1.0.1
@@ -295,13 +295,13 @@ cd jaffle_shop
     10 rows in set (0.00 sec)
     ```
 
-    出力は、さらに 5 つのテーブルまたはビューが追加され、テーブルまたはビューのデータが変換されたことを示しています。この例では、customer テーブルのデータの一部のみが示されています。
+    出力には、さらに 5 つのテーブルまたはビューが追加され、テーブルまたはビューのデータが変換されたことが示されています。この例では、customer テーブルのデータの一部のみが示されています。
 
 ## ステップ 6: ドキュメントを生成する {#step-6-generate-the-document}
 
-dbt を使用すると、プロジェクトの全体構造を表示し、すべてのテーブルとビューを説明するビジュアル ドキュメントを生成できます。
+dbt を使用すると、プロジェクトの全体的な構造を表示し、すべてのテーブルとビューを説明するビジュアル ドキュメントを生成できます。
 
-ビジュアル ドキュメントを生成するには、次の手順を実行します。
+ビジュアルドキュメントを生成するには、次の手順を実行します。
 
 1.  ドキュメントを生成します。
 
@@ -315,30 +315,30 @@ dbt を使用すると、プロジェクトの全体構造を表示し、すべ�
     dbt docs serve
     ```
 
-3.  ブラウザからドキュメントにアクセスするには、 [http://localhost:8080](http://localhost:8080)に進みます。
+3.  ブラウザからドキュメントにアクセスするには、 [<a href="http://localhost:8080">http://ローカルホスト:8080</a>](http://localhost:8080)に進みます。
 
-## プロファイル フィールドの説明 {#description-of-profile-fields}
+## プロフィールフィールドの説明 {#description-of-profile-fields}
 
-| オプション      | 説明                                    | 必要？   | 例                                                 |
-| ---------- | ------------------------------------- | ----- | ------------------------------------------------- |
-| `type`     | 使用する特定のアダプター                          | 必要    | `tidb`                                            |
-| `server`   | 接続先のTiDB Cloudクラスターのエンドポイント           | 必要    | `gateway01.ap-southeast-1.prod.aws.tidbcloud.com` |
-| `port`     | 使用するポート                               | 必要    | `4000`                                            |
-| `schema`   | データを正規化するスキーマ (データベース)                | 必要    | `analytics`                                       |
-| `username` | TiDB Cloudクラスターへの接続に使用するユーザー名         | 必要    | `xxxxxxxxxxx.root`                                |
-| `password` | TiDB Cloudクラスターへの認証に使用するパスワード         | 必要    | `"your_password"`                                 |
-| `retries`  | TiDB Cloudクラスターへの接続の再試行回数 (デフォルトでは 1) | オプション | `2`                                               |
+| オプション      | 説明                                      | 必要？   | 例                                                 |
+| ---------- | --------------------------------------- | ----- | ------------------------------------------------- |
+| `type`     | 使用する特定のアダプター                            | 必要    | `tidb`                                            |
+| `server`   | 接続先のTiDB Cloudクラスターのエンドポイント             | 必要    | `gateway01.ap-southeast-1.prod.aws.tidbcloud.com` |
+| `port`     | 使用するポート                                 | 必要    | `4000`                                            |
+| `schema`   | データを正規化するためのスキーマ (データベース)               | 必要    | `analytics`                                       |
+| `username` | TiDB Cloudクラスターへの接続に使用するユーザー名           | 必要    | `xxxxxxxxxxx.root`                                |
+| `password` | TiDB Cloudクラスターへの認証に使用するパスワード           | 必要    | `"your_password"`                                 |
+| `retries`  | TiDB Cloudクラスターへの接続の再試行回数 (デフォルトでは 1 回) | オプション | `2`                                               |
 
-## 対応関数 {#supported-functions}
+## サポートされている関数 {#supported-functions}
 
-次の関数をdbt-tidb で直接使用できます。それらの使用方法については、 [dbt-util](https://github.com/dbt-labs/dbt-utils)を参照してください。
+次の関数をdbt-tidb で直接使用できます。使用方法については、 [<a href="https://github.com/dbt-labs/dbt-utils">dbt-util</a>](https://github.com/dbt-labs/dbt-utils)を参照してください。
 
 次の関数がサポートされています。
 
 -   `bool_or`
 -   `cast_bool_to_text`
 -   `dateadd`
--   `datediff` . `datediff`は dbt-util とは少し異なることに注意してください。切り上げではなく切り捨てです。
+-   `datediff` 。 `datediff`は dbt-util とは少し異なることに注意してください。切り上げではなく切り下げます。
 -   `date_trunc`
 -   `hash`
 -   `safe_cast`

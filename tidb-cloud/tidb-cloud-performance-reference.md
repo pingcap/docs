@@ -5,13 +5,13 @@ summary: Learn TiDB Cloud performance test results.
 
 # TiDB Cloudパフォーマンス リファレンス {#tidb-cloud-performance-reference}
 
-このドキュメントでは、さまざまな TiDB クラスター スケールのパフォーマンス テスト結果を[シスベンチ](https://github.com/akopytov/sysbench)提供[クラスターサイズを決定する](/tidb-cloud/size-your-cluster.md)ます。
+このドキュメントでは、 [<a href="https://github.com/akopytov/sysbench">システムベンチ</a>](https://github.com/akopytov/sysbench)な TiDB クラスター スケールのパフォーマンス テスト結果を提供します[<a href="/tidb-cloud/size-your-cluster.md">クラスターのサイズを決定する</a>](/tidb-cloud/size-your-cluster.md)を行う際の参考として使用できます。
 
 > **ノート：**
 >
 > テストは TiDB v6.1.1 で実行され、テスト結果は P95レイテンシーが105 ミリ秒未満であるという条件に基づいています。
 
-このドキュメントでは、トランザクション モデル`Read Only` 、 `Read Write` 、および`Write Only` 、読み取りワークロード、混合ワークロード、および書き込みワークロードを表します。
+このドキュメントでは、トランザクション モデル`Read Only` 、および`Write Only` `Read Write`読み取りワークロード、混合ワークロード、および書き込みワークロードを表します。
 
 ## 2 vCPU のパフォーマンス {#2-vcpu-performance}
 

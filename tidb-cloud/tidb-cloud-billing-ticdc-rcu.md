@@ -4,28 +4,28 @@ summary: Learn about billing for changefeeds in TiDB Cloud.
 aliases: ['/tidbcloud/tidb-cloud-billing-tcu']
 ---
 
-# チェンジフィード請求 {#changefeed-billing}
+# 変更フィード請求 {#changefeed-billing}
 
-TiDB Cloud は、 TiCDC Replication Capacity Units (RCU) で[チェンジフィード](/tidb-cloud/changefeed-overview.md)の容量を測定します。クラスターの[チェンジフィードを作成する](/tidb-cloud/changefeed-overview.md#create-a-changefeed)は、適切な仕様を選択できます。 RCU が高いほど、レプリケーションのパフォーマンスが向上します。これらの TiCDC changefeed RCU に対して課金されます。
+TiDB Cloudは、 TiCDC レプリケーション キャパシティ ユニット (RCU) で[<a href="/tidb-cloud/changefeed-overview.md">変更フィード</a>](/tidb-cloud/changefeed-overview.md)のキャパシティを測定します。クラスタの[<a href="/tidb-cloud/changefeed-overview.md#create-a-changefeed">変更フィードを作成する</a>](/tidb-cloud/changefeed-overview.md#create-a-changefeed)は、適切な仕様を選択できます。 RCU が高いほど、レプリケーションのパフォーマンスが向上します。これらの TiCDC 変更フィード RCU に対して料金が発生します。
 
 ## TiCDC RCU の数 {#number-of-ticdc-rcus}
 
-次の表に、changefeeds の仕様と対応するレプリケーション パフォーマンスを示します。
+次の表に、変更フィードの仕様と対応するレプリケーション パフォーマンスを示します。
 
-| 仕様      | 最大のレプリケーション パフォーマンス |
-| ------- | ------------------- |
-| 2つのRCU  | 5,000 行/秒           |
-| 4つのRCU  | 10,000 行/秒          |
-| 8つのRCU  | 20,000 行/秒          |
-| 16個のRCU | 40,000 行/秒          |
-| 24個のRCU | 60,000 行/秒          |
-| RCU 32台 | 80,000 行/秒          |
-| 40RCU   | 100,000 行/秒         |
+| 仕様     | 最大のレプリケーションパフォーマンス |
+| ------ | ------------------ |
+| 2 RCU  | 5,000行/秒           |
+| 4 RCU  | 10,000行/秒          |
+| 8 RCU  | 20,000行/秒          |
+| 16 RCU | 40,000行/秒          |
+| 24 RCU | 60,000行/秒          |
+| 32 RCU | 80,000行/秒          |
+| 40 RCU | 100,000行/秒         |
 
 > **ノート：**
 >
-> 上記のパフォーマンス データは参考用であり、シナリオによって異なる場合があります。
+> 上記のパフォーマンス データは参照のみを目的としており、シナリオによって異なる場合があります。
 
 ## 価格 {#price}
 
-サポートされているリージョンと各 TiCDC RCU のTiDB Cloudの価格については、 [変更フィードのコスト](https://www.pingcap.com/tidb-cloud-pricing-details/#changefeed-cost)を参照してください。
+各 TiCDC RCU のサポートされるリージョンとTiDB Cloudの価格については、 [<a href="https://www.pingcap.com/tidb-cloud-pricing-details/#changefeed-cost">変更フィードのコスト</a>](https://www.pingcap.com/tidb-cloud-pricing-details/#changefeed-cost)を参照してください。

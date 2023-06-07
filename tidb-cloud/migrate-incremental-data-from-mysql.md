@@ -5,19 +5,19 @@ summary: Learn how to migrate incremental data from MySQL-compatible databases t
 
 # MySQL 互換データベースからの増分データの移行 {#migrate-incremental-data-from-mysql-compatible-databases}
 
-このドキュメントでは、MySQL 互換データベースからTiDB Cloudに増分データを移行する方法について説明します。
+このドキュメントでは、増分データを MySQL 互換データベースからTiDB Cloudに移行する方法について説明します。
 
 ## あなたが始める前に {#before-you-begin}
 
-増分データ移行を実行する前に、MySQL 互換データベースからTiDB Cloudへの完全なデータ移行を完了しておく必要があります。詳細については、 [MySQL 互換データベースからデータを移行する](/tidb-cloud/migrate-data-into-tidb.md)を参照してください。
+増分データ移行を実行する前に、MySQL 互換データベースからTiDB Cloudへの完全なデータ移行を完了しておく必要があります。詳細については、 [<a href="/tidb-cloud/migrate-data-into-tidb.md">MySQL 互換データベースからのデータの移行</a>](/tidb-cloud/migrate-data-into-tidb.md)を参照してください。
 
-## ステップ 1.DM クラスターをデプロイ {#step-1-deploy-a-dm-cluster}
+## ステップ 1. DM クラスターをデプロイ {#step-1-deploy-a-dm-cluster}
 
-TiDB Cloudコンソールは、増分データ移行機能をまだ提供していません。 TiDB Cloudへの増分移行を実行するには、手動で[TiDB データ移行](https://docs.pingcap.com/tidb/stable/dm-overview) (DM) をデプロイする必要があります。インストール手順については、 [TiUPを使用して DMクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/deploy-a-dm-cluster-using-tiup)を参照してください。
+TiDB Cloudコンソールには、増分データ移行機能がまだ提供されていません。 TiDB Cloudへの増分移行を実行するには、 [<a href="https://docs.pingcap.com/tidb/stable/dm-overview">TiDB データ移行</a>](https://docs.pingcap.com/tidb/stable/dm-overview) (DM) を手動でデプロイする必要があります。インストール手順については、 [<a href="https://docs.pingcap.com/tidb/stable/deploy-a-dm-cluster-using-tiup">TiUPを使用した DMクラスタのデプロイ</a>](https://docs.pingcap.com/tidb/stable/deploy-a-dm-cluster-using-tiup)を参照してください。
 
-## 手順 2. データ ソース構成ファイルを作成する {#step-2-create-a-data-source-configuration-file}
+## ステップ 2. データソース構成ファイルを作成する {#step-2-create-a-data-source-configuration-file}
 
-まず、データ ソース構成ファイルを作成する必要があります。データ ソースは、データの移行元の MySQL インスタンスです。以下は、データ ソース構成ファイルの作成例です。ファイル内の MySQL IP アドレス、ポート、ユーザー名、およびパスワードの値を独自の値に置き換える必要があります。
+最初にデータ ソース構成ファイルを作成する必要があります。データ ソースは、データの移行元の MySQL インスタンスです。データソース設定ファイルの作成例を以下に示します。ファイル内の MySQL IP アドレス、ポート、ユーザー名、およびパスワードの値を独自の値に置き換える必要があります。
 
 ```shell
 # Encrypt MySQL password
@@ -43,20 +43,20 @@ from:
   port: 3307
 ```
 
-次のコマンドを実行して、 `tiup dmctl`を使用してデータ ソース構成を DM クラスターに読み込みます。
+次のコマンドを実行して、 `tiup dmctl`を使用してデータ ソース構成を DM クラスターにロードします。
 
 ```shell
 [root@localhost ~]# tiup dmctl --master-addr ${advertise-addr} operate-source create dm-source1.yaml
 ```
 
-上記のコマンドで使用されるパラメーターは、次のとおりです。
+上記のコマンドで使用されるパラメータは次のように説明されます。
 
 | パラメータ                   | 説明                                                                           |
 | ----------------------- | ---------------------------------------------------------------------------- |
 | `--master-addr`         | `dmctl`が接続されるクラスター内の任意の DM マスター ノードの`{advertise-addr}` 。例: 172.16.7.140:9261 |
-| `operate-source create` | データ ソースを DM クラスターに読み込みます。                                                    |
+| `operate-source create` | データ ソースを DM クラスターにロードします。                                                    |
 
-次に出力例を示します。
+以下は出力例です。
 
 ```
 tiup is checking updates for component dmctl ...
@@ -75,11 +75,11 @@ Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /roo
 }
 ```
 
-## ステップ 3.移行タスクを作成する {#step-3-create-a-migration-task}
+## ステップ 3. 移行タスクを作成する {#step-3-create-a-migration-task}
 
-移行用の`dm-task1.yaml`ファイルを作成します。増分移行モードとデータ ソースの開始点をファイルに構成します。
+移行用のファイルを`dm-task1.yaml`作成します。ファイル内の増分移行モードとデータ ソースの開始点を構成します。
 
-[Dumpling](/dumpling-overview.md)によってエクスポートされたメタデータ ファイルで開始点を見つけることができます。例えば：
+[<a href="/dumpling-overview.md">Dumpling</a>](/dumpling-overview.md)によってエクスポートされたメタデータ ファイルで開始点を見つけることができます。例えば：
 
 ```toml
 # Get the contents of the metadata in the file exported by Dumpling
@@ -149,15 +149,15 @@ filters:
 ignore-checking-items: ["table_schema"]
 ```
 
-詳細なタスク構成については、 [DM タスク構成](https://docs.pingcap.com/tidb/stable/task-configuration-file-full)を参照してください。
+タスク構成の詳細については、 [<a href="https://docs.pingcap.com/tidb/stable/task-configuration-file-full">DM タスクの構成</a>](https://docs.pingcap.com/tidb/stable/task-configuration-file-full)を参照してください。
 
-データ移行タスクをスムーズに実行するために、DM はタスクの開始時に事前チェックを自動的にトリガーし、チェック結果を返します。 DM は、事前チェックに合格した後にのみ移行を開始します。事前チェックを手動でトリガーするには、次の`check-task`コマンドを実行します。
+データ移行タスクをスムーズに実行するために、DM はタスクの開始時に事前チェックを自動的にトリガーし、チェック結果を返します。 DM は、事前チェックに合格した後にのみ移行を開始します。事前チェックを手動でトリガーするには、 `check-task`コマンドを実行します。
 
 ```shell
 [root@localhost ~]# tiup dmctl --master-addr ${advertise-addr} check-task dm-task1.yaml
 ```
 
-次に出力例を示します。
+以下は出力例です。
 
 ```
 tiup is checking updates for component dmctl ...
@@ -170,20 +170,20 @@ Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /roo
 
 ## ステップ 4. 移行タスクを開始する {#step-4-start-the-migration-task}
 
-次のコマンドを実行して、移行タスクを開始します。
+次のコマンドを実行して移行タスクを開始します。
 
 ```shell
 [root@localhost ~]# tiup dmctl --master-addr ${advertise-addr} start-task dm-task1.yaml
 ```
 
-上記のコマンドで使用されるパラメーターは、次のとおりです。
+上記のコマンドで使用されるパラメータは次のように説明されます。
 
 | パラメータ           | 説明                                                                           |
 | --------------- | ---------------------------------------------------------------------------- |
 | `--master-addr` | `dmctl`が接続されるクラスター内の任意の DM マスター ノードの`{advertise-addr}` 。例: 172.16.7.140:9261 |
 | `start-task`    | 移行タスクを開始します。                                                                 |
 
-次に出力例を示します。
+以下は出力例です。
 
 ```
 tiup is checking updates for component dmctl ...
@@ -203,9 +203,9 @@ Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /roo
 }
 ```
 
-タスクの開始に失敗した場合は、プロンプト メッセージを確認し、構成を修正します。その後、上記のコマンドを再実行してタスクを開始できます。
+タスクの開始に失敗した場合は、プロンプト メッセージを確認して構成を修正します。その後、上記のコマンドを再実行してタスクを開始できます。
 
-問題が発生した場合は、 [DM エラー処理](https://docs.pingcap.com/tidb/stable/dm-error-handling)および[DMFAQ](https://docs.pingcap.com/tidb/stable/dm-faq)を参照してください。
+何か問題が発生した場合は、 [<a href="https://docs.pingcap.com/tidb/stable/dm-error-handling">DMエラー処理</a>](https://docs.pingcap.com/tidb/stable/dm-error-handling)と[<a href="https://docs.pingcap.com/tidb/stable/dm-faq">DMに関するFAQ</a>](https://docs.pingcap.com/tidb/stable/dm-faq)を参照してください。
 
 ## ステップ 5. 移行タスクのステータスを確認する {#step-5-check-the-migration-task-status}
 
@@ -215,7 +215,7 @@ DM クラスターに進行中の移行タスクがあるかどうかを確認�
 [root@localhost ~]# tiup dmctl --master-addr ${advertise-addr} query-status ${task-name}
 ```
 
-次に出力例を示します。
+以下は出力例です。
 
 ```
 tiup is checking updates for component dmctl ...
@@ -264,4 +264,4 @@ Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /roo
 }
 ```
 
-結果の詳細な解釈については、 [クエリのステータス](https://docs.pingcap.com/tidb/stable/dm-query-status)を参照してください。
+結果の詳細な解釈については、 [<a href="https://docs.pingcap.com/tidb/stable/dm-query-status">クエリステータス</a>](https://docs.pingcap.com/tidb/stable/dm-query-status)を参照してください。

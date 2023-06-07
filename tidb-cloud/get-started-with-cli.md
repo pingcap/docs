@@ -5,42 +5,42 @@ summary: Learn how to manage TiDB Cloud resources through the TiDB Cloud CLI.
 
 # TiDB CloudCLI クイック スタート {#tidb-cloud-cli-quick-start}
 
-TiDB Cloud は、数行のコマンドを使用して端末からTiDB Cloudと対話するためのコマンドライン インターフェイス (CLI) [`ticloud`](https://github.com/tidbcloud/tidbcloud-cli)を提供します。たとえば、 `ticloud`を使用して次の操作を簡単に実行できます。
+TiDB Cloud は、数行のコマンドを使用してターミナルからTiDB Cloudと対話できるコマンドライン インターフェイス (CLI) [<a href="https://github.com/tidbcloud/tidbcloud-cli">`ticloud`</a>](https://github.com/tidbcloud/tidbcloud-cli)を提供します。たとえば、 `ticloud`を使用すると、次の操作を簡単に実行できます。
 
--   クラスターを作成、削除、および一覧表示します。
+-   クラスターを作成、削除、リストします。
 -   Amazon S3 またはローカル ファイルからクラスターにデータをインポートします。
 
 ## あなたが始める前に {#before-you-begin}
 
--   TiDB Cloudアカウントを持っている。お持ちでない場合は、 [無料トライアルにサインアップする](https://tidbcloud.com/free-trial) .
--   [TiDB CloudAPI キーを作成する](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management) .
+-   TiDB Cloudアカウントを持っていること。お持ちでない場合は、 [<a href="https://tidbcloud.com/free-trial">無料トライアルにサインアップする</a>](https://tidbcloud.com/free-trial) 。
+-   [<a href="https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management">TiDB CloudAPI キーを作成する</a>](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management) 。
 
 ## インストール {#installation}
 
 <SimpleTab>
 <div label="macOS/Linux">
 
-macOS または Linux の場合、次のいずれかの方法を使用して`ticloud`をインストールできます。
+macOS または Linux の場合は、次のいずれかの方法を使用して`ticloud`をインストールできます。
 
--   スクリプトによるインストール (推奨)
+-   スクリプト経由でインストールする (推奨)
 
     ```shell
     curl https://raw.githubusercontent.com/tidbcloud/tidbcloud-cli/main/install.sh | sh
     ```
 
--   [TiUP](https://tiup.io/)経由でインストール
+-   [<a href="https://tiup.io/">TiUP</a>](https://tiup.io/)経由でインストールする
 
     ```shell
     tiup install cloud
     ```
 
--   手動でインストール
+-   手動でインストールする
 
-    コンパイル済みのバイナリを[リリース](https://github.com/tidbcloud/tidbcloud-cli/releases/latest)ページからダウンロードし、インストール先の場所にコピーします。
+    [<a href="https://github.com/tidbcloud/tidbcloud-cli/releases/latest">リリース</a>](https://github.com/tidbcloud/tidbcloud-cli/releases/latest)ページからコンパイル済みのバイナリをダウンロードし、インストールする場所にコピーします。
 
--   GitHub アクションにインストール
+-   GitHub アクションにインストールする
 
-    GitHub Action で`ticloud`を設定するには、 [`setup-tidbcloud-cli`](https://github.com/tidbcloud/setup-tidbcloud-cli)を使用します。
+    GitHub Action で`ticloud`を設定するには、 [<a href="https://github.com/tidbcloud/setup-tidbcloud-cli">`setup-tidbcloud-cli`</a>](https://github.com/tidbcloud/setup-tidbcloud-cli)を使用します。
 
 </div>
 
@@ -48,13 +48,13 @@ macOS または Linux の場合、次のいずれかの方法を使用して`tic
 
 Windows の場合、次のいずれかの方法を使用して`ticloud`をインストールできます。
 
--   手動でインストール
+-   手動でインストールする
 
-    コンパイル済みのバイナリを[リリース](https://github.com/tidbcloud/tidbcloud-cli/releases/latest)ページからダウンロードし、インストール先の場所にコピーします。
+    [<a href="https://github.com/tidbcloud/tidbcloud-cli/releases/latest">リリース</a>](https://github.com/tidbcloud/tidbcloud-cli/releases/latest)ページからコンパイル済みのバイナリをダウンロードし、インストールする目的の場所にコピーします。
 
--   GitHub アクションにインストール
+-   GitHub アクションにインストールする
 
-    GitHub Actions で`ticloud`設定するには、 [`setup-tidbcloud-cli`](https://github.com/tidbcloud/setup-tidbcloud-cli)を使用します。
+    GitHub Actions で`ticloud`設定するには、 [<a href="https://github.com/tidbcloud/setup-tidbcloud-cli">`setup-tidbcloud-cli`</a>](https://github.com/tidbcloud/setup-tidbcloud-cli)を使用します。
 
 </div>
 </SimpleTab>
@@ -79,9 +79,9 @@ ticloud version
 ticloud update
 ```
 
-### TiUPを介してTiDB Cloud CLI を使用する {#use-the-tidb-cloud-cli-through-tiup}
+### TiUPを通じてTiDB Cloud CLI を使用する {#use-the-tidb-cloud-cli-through-tiup}
 
-TiDB Cloud CLI は、コンポーネント名が`cloud`の[TiUP](https://tiup.io/)からも利用できます。
+TiDB Cloud CLI は、コンポーネント名`cloud`を使用して[<a href="https://tiup.io/">TiUP</a>](https://tiup.io/)からも使用できます。
 
 使用可能なすべてのコマンドをビュー。
 
@@ -95,7 +95,7 @@ tiup cloud --help
 tiup cloud cluster create
 ```
 
-TiUPによる最新バージョンへの更新:
+TiUPによって最新バージョンに更新します。
 
 ```shell
 tiup update cloud
@@ -103,11 +103,11 @@ tiup update cloud
 
 ## クイックスタート {#quick-start}
 
-TiDB Cloud [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) (ベータ) は、 TiDB Cloudを使い始めるための最良の方法です。このセクションでは、 TiDB Cloud CLI を使用してServerless Tierクラスターを作成する方法を学習します。
+[<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB サーバーレス</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta) (ベータ) は、 TiDB Cloudを開始するための最良の方法です。このセクションでは、 TiDB Cloud CLI を使用して TiDB サーバーレス クラスターを作成する方法を学習します。
 
-### ユーザー プロファイルを作成する {#create-a-user-profile}
+### ユーザープロファイルを作成する {#create-a-user-profile}
 
-クラスターを作成する前に、 TiDB Cloud API キーを使用してユーザー プロファイルを作成する必要があります。
+クラスターを作成する前に、 TiDB CloudAPI キーを使用してユーザー プロファイルを作成する必要があります。
 
 ```shell
 ticloud config create
@@ -115,11 +115,11 @@ ticloud config create
 
 > **警告：**
 >
-> プロファイル名に`.`を含めて**はなりません**。
+> プロファイル名に`.`を含める**ことはできません**。
 
-### Serverless Tierクラスターを作成する {#create-a-serverless-tier-cluster}
+### TiDB サーバーレスクラスターを作成する {#create-a-tidb-serverless-cluster}
 
-Serverless Tierクラスターを作成するには、次のコマンドを入力し、CLI プロンプトに従って必要な情報を入力し、パスワードを設定します。
+TiDB サーバーレス クラスターを作成するには、次のコマンドを入力し、CLI プロンプトに従って必要な情報を入力し、パスワードを設定します。
 
 ```shell
 ticloud cluster create
@@ -133,12 +133,12 @@ ticloud cluster create
 ticloud cluster connect
 ```
 
-デフォルトのユーザーを使用するかどうかを尋ねられたら、 `Y`を選択し、クラスターの作成時に設定したパスワードを入力します。
+デフォルトのユーザーを使用するかどうかを尋ねるプロンプトが表示されたら、 `Y`を選択し、クラスターの作成時に設定したパスワードを入力します。
 
 ## 次は何ですか {#what-s-next}
 
-[CLI リファレンス](/tidb-cloud/cli-reference.md)をチェックして、 TiDB Cloud CLI のその他の機能を調べてください。
+TiDB Cloud CLI の機能をさらに詳しく調べるには、 [<a href="/tidb-cloud/cli-reference.md">CLI リファレンス</a>](/tidb-cloud/cli-reference.md)を確認してください。
 
 ## フィードバック {#feedback}
 
-TiDB Cloud CLI について質問や提案がある場合は、気軽に[問題](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)を作成してください。また、あらゆる貢献を歓迎します。
+TiDB Cloud CLI に関して質問や提案がある場合は、お気軽に[<a href="https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose">問題</a>](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)を作成してください。また、貢献も歓迎します。

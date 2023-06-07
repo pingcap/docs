@@ -3,25 +3,25 @@ title: Migrate from MySQL-Compatible Databases
 summary: Learn how to migrate data from MySQL-compatible databases to TiDB Cloud using the Dumpling and TiDB Lightning tools.
 ---
 
-# MySQL 互換データベースからデータを移行する {#migrate-data-from-mysql-compatible-databases}
+# MySQL 互換データベースからのデータの移行 {#migrate-data-from-mysql-compatible-databases}
 
 > **ノート：**
 >
-> データ移行機能を使用して、MySQL 互換データベースを移行することをお勧めします。 [データ移行を使用して MySQL 互換データベースをTiDB Cloudに移行する](/tidb-cloud/migrate-from-mysql-using-data-migration.md)を参照してください。
+> MySQL 互換データベースを移行するには、データ移行機能を使用することをお勧めします。 [<a href="/tidb-cloud/migrate-from-mysql-using-data-migration.md">データ移行を使用して MySQL 互換データベースをTiDB Cloudに移行する</a>](/tidb-cloud/migrate-from-mysql-using-data-migration.md)を参照してください。
 
-TiDB は MySQL との互換性が高いです。データが自己ホスト型の MySQL インスタンスからのものであろうと、パブリック クラウドによって提供される RDS サービスからのものであろうと、MySQL 互換データベースから TiDB にデータをスムーズに移行できます。
+TiDB は MySQL と高い互換性があります。データがセルフホスト型 MySQL インスタンスからのものであっても、パブリック クラウドによって提供される RDS サービスからのものであっても、MySQL 互換データベースから TiDB にスムーズにデータを移行できます。
 
-このドキュメントでは、 [Dumpling](/dumpling-overview.md)を使用して MySQL 互換データベースからデータをエクスポートする方法と、 [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview)論理インポート モードを使用してデータをTiDB Cloudにインポートする方法について説明します。
+このドキュメントでは[<a href="/dumpling-overview.md">Dumpling</a>](/dumpling-overview.md)使用して MySQL 互換データベースからデータをエクスポートし、 [<a href="https://docs.pingcap.com/tidb/stable/tidb-lightning-overview">TiDB Lightning</a>](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview)論理インポート モードを使用してデータをTiDB Cloudにインポートする方法について説明します。
 
 > **ノート：**
 >
-> アップストリーム データベースが Amazon Aurora MySQL の場合は、このドキュメントを参照する代わりに、 [Amazon Aurora MySQL からTiDB Cloudに一括移行する](/tidb-cloud/migrate-from-aurora-bulk-import.md)の手順に従ってください。
+> アップストリーム データベースが Amazon Aurora MySQL の場合は、このドキュメントを参照する代わりに、 [<a href="/tidb-cloud/migrate-from-aurora-bulk-import.md">Amazon Aurora MySQL からTiDB Cloudへ一括移行</a>](/tidb-cloud/migrate-from-aurora-bulk-import.md)の手順に従ってください。
 
 ## 前提条件 {#prerequisites}
 
-MySQL 互換データベースから TiDB にデータを移行する前に、サポートされているTiDB Cloudの照合順序が要件を満たしていることを確認してください。
+MySQL 互換データベースから TiDB にデータを移行する前に、 TiDB Cloudでサポートされている照合順序が要件を満たしていることを確認してください。
 
-デフォルトでは、 TiDB Cloud は次の CI 照合をサポートしています。
+デフォルトでは、 TiDB Cloud は次の CI 照合順序をサポートします。
 
 -   ascii_bin
 -   バイナリ
@@ -35,7 +35,7 @@ MySQL 互換データベースから TiDB にデータを移行する前に、�
 
 ## ステップ 1. TiUPをインストールする {#step-1-install-tiup}
 
-TiUPは TiDB エコシステムのパッケージ マネージャーであり、たった 1 行のコマンドで任意の TiDB クラスターコンポーネントを実行するのに役立ちます。このドキュメントでは、 TiUP を使用してDumplingとTiDB Lightningをインストールして実行します。
+TiUPは TiDB エコシステムのパッケージ マネージャーであり、たった 1 行のコマンドであらゆる TiDB クラスターコンポーネントを実行できるようにします。このドキュメントでは、 TiUP は、 DumplingおよびTiDB Lightningのインストールと実行を支援するために使用されます。
 
 1.  TiUPをダウンロードしてインストールします。
 
@@ -59,7 +59,7 @@ TiUPは TiDB エコシステムのパッケージ マネージャーであり、
 
 ## ステップ 2. MySQL 互換データベースからデータをエクスポートする {#step-2-export-data-from-mysql-compatible-databases}
 
-`mysqldump`または`mydumper`を使用するなど、いくつかの方法で MySQL からデータをダンプできます。より高いパフォーマンスと、PingCAP によって作成されたオープン ソース ツールの 1 つである TiDB との互換性のために、 [Dumpling](/dumpling-overview.md)を使用することをお勧めします。
+MySQL からデータをダンプするには、 `mysqldump`や`mydumper`などのいくつかの方法を使用できます。より高いパフォーマンスと、PingCAP によって作成されたオープン ソース ツールの 1 つである TiDB との互換性を確保するには、 [<a href="/dumpling-overview.md">Dumpling</a>](/dumpling-overview.md)を使用することをお勧めします。
 
 1.  Dumplingをインストールします。
 
@@ -71,7 +71,7 @@ TiUPは TiDB エコシステムのパッケージ マネージャーであり、
 
 2.  Dumplingを使用して MySQL データベースをエクスポートします。
 
-    -   データを Amazon S3 クラウドstorageにエクスポートするには、 [データを Amazon S3 クラウドstorageにエクスポートする](/dumpling-overview.md#export-data-to-amazon-s3-cloud-storage)を参照してください。
+    -   データを Amazon S3 クラウドstorageにエクスポートするには、 [<a href="/dumpling-overview.md#export-data-to-amazon-s3-cloud-storage">データを Amazon S3 クラウドstorageにエクスポートする</a>](/dumpling-overview.md#export-data-to-amazon-s3-cloud-storage)を参照してください。
     -   データをローカル データ ファイルにエクスポートするには、次のコマンドを使用します。
 
         {{< copyable "" >}}
@@ -80,7 +80,7 @@ TiUPは TiDB エコシステムのパッケージ マネージャーであり、
         tiup dumpling -h <mysql-host> -P 3306 -u <user> -F 64MiB -t 8 -o /path/to/export/dir
         ```
 
-        指定した一部のデータベースのみをエクスポートする場合は、 `-B`を使用して、データベース名のコンマ区切りリストを指定します。
+        指定した一部のデータベースのみをエクスポートする場合は、 `-B`を使用してデータベース名のカンマ区切りリストを指定します。
 
         最低限必要な権限は次のとおりです。
 
@@ -91,28 +91,28 @@ TiUPは TiDB エコシステムのパッケージ マネージャーであり、
 
 ## ステップ 3. データをTiDB Cloudにインポートする {#step-3-import-data-to-tidb-cloud}
 
-ソース データの場所とサイズによって、インポート方法が異なります。
+ソース データの場所とサイズに応じて、インポート方法は異なります。
 
 -   ソース データが Amazon S3 クラウドstorageにある場合は、次の手順を実行します。
 
-    1.  Amazon S3 アクセスを構成して、TiDB クラウドが Amazon S3 バケット内のソース データにアクセスできるようにします。詳細については、 [Amazon S3 アクセスを構成する](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access)を参照してください。
+    1.  Amazon S3 アクセスを設定して、TiDB クラウドが Amazon S3 バケット内のソース データにアクセスできるようにします。詳細については、 [<a href="/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access">Amazon S3 アクセスを設定する</a>](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access)を参照してください。
 
-    2.  [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/console/clusters)ページに移動します。
+    2.  [<a href="https://tidbcloud.com/">TiDB Cloudコンソール</a>](https://tidbcloud.com/)にログインし、プロジェクトの[<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページに移動します。
 
         > **ヒント：**
         >
-        > 複数のプロジェクトがある場合は、プロジェクト リストを表示し、左上隅の ☰ ホバー メニューから別のプロジェクトに切り替えることができます。
+        > 複数のプロジェクトがある場合は、プロジェクト リストを表示し、左上隅にある ☰ ホバー メニューから別のプロジェクトに切り替えることができます。
 
     3.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[インポート]**をクリックします。
 
-    4.  **[インポート]**ページで、右上隅の<strong>[データのインポート]</strong>をクリックし、 <strong>[S3 から]</strong>を選択して、インポート関連の情報を入力します。
+    4.  **[インポート]**ページで、右上隅にある**[データのインポート]**をクリックし、 **[S3 から]**を選択して、インポート関連情報を入力します。
 
 -   ソース データがローカル ファイルにある場合は、次のいずれかを実行します。
 
-    -   データが 1 TB を超える場合は、Amazon S3 または GCS をステージング領域として使用して、データをTiDB Cloudにインポートまたは移行することをお勧めします。詳細については、 [Amazon S3 または GCS からTiDB Cloudへのインポートまたは移行](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md)を参照してください。
-    -   データが 1 TB 未満の場合は、このドキュメントの次の手順に従って、 TiDB Lightningの論理インポート モードを使用できます。
+    -   データが 1 TB を超える場合は、データをTiDB Cloudにインポートまたは移行するためのステージング領域として Amazon S3 または GCS を使用することをお勧めします。詳細については、 [<a href="/tidb-cloud/migrate-from-amazon-s3-or-gcs.md">Amazon S3 または GCS からTiDB Cloudにインポートまたは移行する</a>](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md)を参照してください。
+    -   データが 1 TB 未満の場合は、本書の次の手順に従ってTiDB Lightningの論理インポート モードを使用できます。
 
-次の手順は、 TiDB Lightningの論理インポート モードを使用してローカル データをTiDB Cloudにインポートする方法を示しています。
+次の手順では、 TiDB Lightningの論理インポート モードを使用してローカル データをTiDB Cloudにインポートする方法を示します。
 
 1.  TiDB Lightningをインストールします。
 
@@ -122,7 +122,7 @@ TiUPは TiDB エコシステムのパッケージ マネージャーであり、
     tiup install tidb-lightning
     ```
 
-2.  TiDB Lightning構成ファイルを作成し、インポート情報を構成します。
+2.  TiDB Lightning設定ファイルを作成し、インポート情報を設定します。
 
     1.  TiDB Lightning構成ファイルを作成します。
 
@@ -166,9 +166,9 @@ TiUPは TiDB エコシステムのパッケージ マネージャーであり、
         no-schema = false
         ```
 
-        ターゲット TiDB クラスターで TLS を構成する場合、またはさらに構成を行う場合は、 [TiDB Lightningコンフィグレーション](https://docs.pingcap.com/tidb/stable/tidb-lightning-configuration)を参照してください。
+        ターゲット TiDB クラスターで TLS を構成する場合、またはさらに多くの構成を実行する場合は、 [<a href="https://docs.pingcap.com/tidb/stable/tidb-lightning-configuration">TiDB Lightningコンフィグレーション</a>](https://docs.pingcap.com/tidb/stable/tidb-lightning-configuration)を参照してください。
 
-3.  TiDB Lightningを使用して TiDB にデータをインポートします。
+3.  TiDB Lightningを使用してデータを TiDB にインポートします。
 
     {{< copyable "" >}}
 
@@ -176,11 +176,11 @@ TiUPは TiDB エコシステムのパッケージ マネージャーであり、
     nohup tiup tidb-lightning -config tidb-lightning.toml > nohup.out &
     ```
 
-    インポート タスクが開始されたら、次のいずれかの方法でインポートの進行状況を表示できます。
+    インポートタスクが開始された後、次のいずれかの方法でインポートの進行状況を確認できます。
 
-    -   コマンド ラインを使用して進行状況を取得するには、ログにキーワード`progress` `grep`します。これは、デフォルトで 5 分ごとに更新されます。
-    -   TiDB モニタリング フレームワークを使用してさらにモニタリング メトリックを取得するには、 [TiDB Lightningモニタリング](https://docs.pingcap.com/tidb/stable/monitor-tidb-lightning)を参照してください。
+    -   コマンド ラインを使用して進行状況を取得するには、 `grep`ログにキーワード`progress`入力します。ログはデフォルトで 5 分ごとに更新されます。
+    -   TiDB モニタリング フレームワークを使用してさらに多くのモニタリング メトリクスを取得するには、 [<a href="https://docs.pingcap.com/tidb/stable/monitor-tidb-lightning">TiDB Lightning監視</a>](https://docs.pingcap.com/tidb/stable/monitor-tidb-lightning)を参照してください。
 
-## こちらもご覧ください {#see-also}
+## こちらも参照 {#see-also}
 
--   [MySQL 互換データベースからの増分データの移行](/tidb-cloud/migrate-incremental-data-from-mysql.md)
+-   [<a href="/tidb-cloud/migrate-incremental-data-from-mysql.md">MySQL 互換データベースからの増分データの移行</a>](/tidb-cloud/migrate-incremental-data-from-mysql.md)

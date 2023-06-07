@@ -5,42 +5,46 @@ summary: Learn how to connect to your TiDB cluster via different methods.
 
 # TiDBクラスタに接続する {#connect-to-your-tidb-cluster}
 
-TiDB クラスターがTiDB Cloudに作成されたら、TiDB クラスターに接続できます。 Serverless TierクラスターまたはDedicated Tierクラスターのどちらを使用しているかに応じて、次のように使用可能な接続方法を見つけることができます。
+TiDB クラスターがTiDB Cloud上に作成されたら、TiDB クラスターに接続できます。 TiDB サーバーレス クラスターと TiDB 専用クラスターのどちらを使用しているかに応じて、使用可能な接続方法は次のようになります。
 
-## Serverless Tier {#serverless-tier}
+## TiDB サーバーレス {#tidb-serverless}
 
-Serverless Tierクラスターの場合、標準接続またはTiDB Cloudコンソールの Chat2Query (ベータ) を介してクラスターに接続できます。
+TiDB サーバーレス クラスターの場合、次のいずれかの方法でクラスターに接続できます。
 
--   [標準接続で接続](/tidb-cloud/connect-via-standard-connection.md#serverless-tier)
+-   [<a href="/tidb-cloud/set-up-private-endpoint-connections.md">プライベートエンドポイント経由で接続する</a>](/tidb-cloud/set-up-private-endpoint-connections.md) (推奨)
 
-    標準接続は、トラフィック フィルターを使用してパブリック エンドポイントを公開するため、ラップトップから SQL クライアント経由で TiDB クラスターに接続できます。
+    プライベート エンドポイント接続は、VPC 内の SQL クライアントが AWS PrivateLink 経由でサービスに安全にアクセスできるようにするプライベート エンドポイントを提供します。これにより、簡素化されたネットワーク管理でデータベース サービスへの安全性の高い一方向のアクセスが実現します。
 
-    Serverless Tierのみ[TLS 接続をサポート](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md) 。アプリケーションから TiDB クラスターへのデータ転送のセキュリティを確保します。
+-   [<a href="/tidb-cloud/connect-via-standard-connection.md#tidb-serverless">標準接続で接続する</a>](/tidb-cloud/connect-via-standard-connection.md#tidb-serverless)
 
--   [Chat2Query (ベータ版) 経由で接続する](/tidb-cloud/explore-data-with-chat2query.md)
+    標準接続では、トラフィック フィルターを備えたパブリック エンドポイントが公開されるため、ラップトップから SQL クライアント経由で TiDB クラスターに接続できます。
 
-    TiDB Cloud は人工知能 (AI) を利用しています。 [TiDB Cloudコンソール](https://tidbcloud.com/)の AI 搭載 SQL エディターである Chat2Query (ベータ版) を使用して、データの価値を最大化できます。
+    TiDB サーバーレスは[<a href="/tidb-cloud/secure-connections-to-serverless-tier-clusters.md">TLS接続</a>](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md)をサポートしており、アプリケーションから TiDB クラスターへのデータ送信のセキュリティを確保します。
 
-    Chat2Query では、単に`--`を入力してから命令を入力し、AI に SQL クエリを自動的に生成させるか、SQL クエリを手動で記述してから、ターミナルを使用せずにデータベースに対して SQL クエリを実行することができます。クエリ結果をテーブルで直感的に検索し、クエリ ログを簡単に確認できます。
+-   [<a href="/tidb-cloud/explore-data-with-chat2query.md">Chat2Query 経由で接続する (ベータ版)</a>](/tidb-cloud/explore-data-with-chat2query.md)
 
-## Dedicated Tier {#dedicated-tier}
+    TiDB Cloud は人工知能 (AI) を活用しています。 [<a href="https://tidbcloud.com/">TiDB Cloudコンソール</a>](https://tidbcloud.com/)の AI を活用した SQL エディターである Chat2Query (ベータ版) を使用すると、データの価値を最大化できます。
 
-Dedicated Tierクラスターの場合、次のいずれかの方法でクラスターに接続できます。
+    Chat2Query では、 `--`を入力してから AI に SQL クエリを自動的に生成させる指示を入力するか、SQL クエリを手動で作成して、ターミナルを使用せずにデータベースに対して SQL クエリを実行することができます。クエリ結果をテーブルで直感的に見つけたり、クエリログを簡単に確認したりできます。
 
--   [標準接続で接続](/tidb-cloud/connect-via-standard-connection.md#dedicated-tier)
+## TiDB専用 {#tidb-dedicated}
 
-    標準接続は、トラフィック フィルターを使用してパブリック エンドポイントを公開するため、ラップトップから SQL クライアント経由で TiDB クラスターに接続できます。 TLS を使用して TiDB クラスターに接続できます。これにより、アプリケーションから TiDB クラスターへのデータ転送のセキュリティが保証されます。
+TiDB 専用クラスターの場合、次のいずれかの方法でクラスターに接続できます。
 
--   [プライベート エンドポイント経由で接続する](/tidb-cloud/set-up-private-endpoint-connections.md) (推奨)
+-   [<a href="/tidb-cloud/connect-via-standard-connection.md#tidb-dedicated">標準接続で接続する</a>](/tidb-cloud/connect-via-standard-connection.md#tidb-dedicated)
 
-    プライベート エンドポイント接続は、VPC 内の SQL クライアントが AWS PrivateLink を介してサービスに安全にアクセスできるようにするプライベート エンドポイントを提供します。これにより、ネットワーク管理が簡素化されたデータベース サービスへの高度に安全な一方向アクセスが提供されます。
+    標準接続では、トラフィック フィルターを備えたパブリック エンドポイントが公開されるため、ラップトップから SQL クライアント経由で TiDB クラスターに接続できます。 TLS を使用して TiDB クラスターに接続できます。これにより、アプリケーションから TiDB クラスターへのデータ送信のセキュリティが確保されます。
 
--   [VPC ピアリング経由で接続する](/tidb-cloud/set-up-vpc-peering-connections.md)
+-   [<a href="/tidb-cloud/set-up-private-endpoint-connections.md">プライベートエンドポイント経由で接続する</a>](/tidb-cloud/set-up-private-endpoint-connections.md) (推奨)
 
-    レイテンシーを下げてセキュリティを強化したい場合は、VPC ピアリングをセットアップし、クラウド アカウントの対応するクラウド プロバイダーの VM インスタンスを使用して、プライベート エンドポイント経由で接続します。
+    プライベート エンドポイント接続は、VPC 内の SQL クライアントが AWS PrivateLink 経由でサービスに安全にアクセスできるようにするプライベート エンドポイントを提供します。これにより、簡素化されたネットワーク管理でデータベース サービスへの安全性の高い一方向のアクセスが実現します。
 
--   [SQL シェル経由で接続](/tidb-cloud/connect-via-sql-shell.md) : TiDB SQLを試して、TiDB と MySQL との互換性をすばやくテストするか、ユーザー権限を管理します。
+-   [<a href="/tidb-cloud/set-up-vpc-peering-connections.md">VPC ピアリング経由で接続する</a>](/tidb-cloud/set-up-vpc-peering-connections.md)
+
+    レイテンシーを短縮し、セキュリティを強化したい場合は、VPC ピアリングを設定し、クラウド アカウント内の対応するクラウド プロバイダー上の VM インスタンスを使用してプライベート エンドポイント経由で接続します。
+
+-   [<a href="/tidb-cloud/connect-via-sql-shell.md">SQL シェル経由で接続する</a>](/tidb-cloud/connect-via-sql-shell.md) : TiDB SQLを試して、TiDB と MySQL の互換性をすぐにテストするか、ユーザー権限を管理します。
 
 ## 次は何ですか {#what-s-next}
 
-TiDB クラスターに正常に接続したら、 [TiDB で SQL ステートメントを調べる](/basic-sql-operations.md)ことができます。
+TiDB クラスターに正常に接続したら、 [<a href="/basic-sql-operations.md">TiDB で SQL ステートメントを探索する</a>](/basic-sql-operations.md)を行うことができます。
