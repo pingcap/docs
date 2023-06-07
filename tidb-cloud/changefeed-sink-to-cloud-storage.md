@@ -10,7 +10,7 @@ This document describes how to stream data from a TiDB Dedicated cluster to clou
 
 > ## Limitations
 > 
-> - To use the Changefeed feature, please ensure that your TiDB cluster is running version v6.5.0 or a later version.
+> - To use the Changefeed feature, please ensure that your TiDB cluster is running version v7.1.0 or a later version.
 > - Each dedicated cluster supports the creation of up to 5 changefeeds.
 > - As TiDB Cloud utilizes TiCDC for establishing changefeeds, it inherits the > identical [limitations of TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios).
 > - Replicating data without a primary key or a non-null unique key constraint poses the risk of data redundancy, especially in certain retry scenarios where statements like INSERT and REPLACE are not reentrant.
