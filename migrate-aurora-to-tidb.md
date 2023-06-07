@@ -42,7 +42,7 @@ This section describes how to export the schema file from Amazon Aurora and impo
 
     Record the URI of the schema exported in the above command, such as 's3://my-bucket/schema-backup', which will be used when importing data later.
 
-2. Create the TiDB Lightning configuration file
+2. Create the TiDB Lightning configuration file for the schema file
 
     Create the `tidb-lightning-schema.toml` configuration file for the schema file as follows:
 
@@ -59,19 +59,19 @@ This section describes how to export the schema file from Amazon Aurora and impo
     user = "${user_name}          # e.g.: "root"
     password = "${password}"      # e.g.: "rootroot"
     status-port = ${status-port}  # Obtains the table schema information from TiDB status port, e.g.: 10080
-    pd-addr = "${ip}:${port}"     # The cluster PD address, e.g.: 172.16.31.3:2379. TiDB Lightning obtains some information from PD. 
+    pd-addr = "${ip}:${port}"     # The cluster PD address, e.g.: 172.16.31.3:2379. TiDB Lightning obtains some information from PD.
                                   # When backend = "local", you must specify status-port and pd-addr correctly. Otherwise, the import will be abnormal.
 
     [tikv-importer]
-    # "local": Physical Import Mode. The default backend. The local backend is recommended to import large volumes of data (1 TiB or more). 
+    # "local": Physical Import Mode. The default backend. The local backend is recommended to import large volumes of data (1 TiB or more).
     # During the import, the target TiDB cluster cannot provide any service.
-    # "tidb": Logical Import Mode. The "tidb" backend is recommended to import data less than 1 TiB. 
+    # "tidb": Logical Import Mode. The "tidb" backend is recommended to import data less than 1 TiB.
     # During the import, the target TiDB cluster can provide service normally.
     backend = "local"
 
-    # Set the temporary storage directory for the sorted Key-Value files. 
-    # The directory must be empty, and the storage space must be greater than the size of the dataset to be imported. 
-    # For better import performance, it is recommended to use a directory different from `data-source-dir` and use flash storage, 
+    # Set the temporary storage directory for the sorted Key-Value files.
+    # The directory must be empty, and the storage space must be greater than the size of the dataset to be imported.
+    # For better import performance, it is recommended to use a directory different from `data-source-dir` and use flash storage,
     # which can use I/O exclusively.
     sorted-kv-dir = "/mnt/ssd/sorted-kv-dir"
 
@@ -131,7 +131,7 @@ After the two steps above, make sure you have the following information ready:
 - The Amazon Aurora binlog name and position at the time of the snapshot creation.
 - The S3 path where the snapshot is stored, and the SecretKey and AccessKey with access to the S3 path.
 
-### Step 3. Create the TiDB Lightning configuration file
+### Step 3. Create the TiDB Lightning configuration file for the data file
 
 Create the `tidb-lightning-data.toml` configuration file as follows:
 
@@ -176,9 +176,9 @@ If you need to enable TLS in the TiDB cluster, refer to [TiDB Lightning Configur
 
 ### Step 4. Import full data to TiDB
 
-1. Pass the SecretKey and AccessKey of the account that has access to this Amazon S3 storage path into the TiDB Lightning node as environment variables. TiDB Lightning also supports reading credential files from `~/.aws/credentials`. When running `tidb-lightning`, if you start the task directly from the command line, it might exit due to the `SIGHUP` signal. It is recommended to use a tool such as `nohup` or `screen`. Refer to the following steps 2 and 3 for details.
+You can pass the SecretKey and AccessKey of the account that has access to this Amazon S3 storage path into the TiDB Lightning node as environment variables. TiDB Lightning also supports reading credential files from `~/.aws/credentials`.
 
-2. Use TiDB Lightning to import data from an Amazon Aurora snapshot to TiDB.
+1. Use TiDB Lightning to import data from an Amazon Aurora snapshot to TiDB. When running `tidb-lightning`, if you start the task directly from the command line, it might exit due to the `SIGHUP` signal. It is recommended to use a tool such as `nohup` or `screen`. Refer to the following steps 2 and 3 for details.
 
     ```shell
     export AWS_ACCESS_KEY_ID=${access_key}
@@ -186,13 +186,13 @@ If you need to enable TLS in the TiDB cluster, refer to [TiDB Lightning Configur
     nohup tiup tidb-lightning -config tidb-lightning-data.toml -d 's3://my-bucket/sql-backup' > nohup.out 2>&1 &
     ```
 
-3. After the import starts, you can check the progress of the import by either of the following methods:
+2. After the import starts, you can check the progress of the import by either of the following methods:
 
     - `grep` the keyword `progress` in the log. The progress is updated every 5 minutes by default.
     - Check progress in [the monitoring dashboard](/tidb-lightning/monitor-tidb-lightning.md).
     - Check progress in [the TiDB Lightning web interface](/tidb-lightning/tidb-lightning-web-interface.md).
 
-4. After TiDB Lightning completes the import, it exits automatically. Check whether `tidb-lightning.log` contains `the whole procedure completed` in the last lines. If yes, the import is successful. If no, the import encounters an error. Address the error as instructed in the error message.
+3. After TiDB Lightning completes the import, it exits automatically. Check whether `tidb-lightning.log` contains `the whole procedure completed` in the last lines. If yes, the import is successful. If no, the import encounters an error. Address the error as instructed in the error message.
 
 > **Note:**
 >
