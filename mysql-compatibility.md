@@ -34,6 +34,8 @@ TiDB は、 MySQL 5.7プロトコル、およびMySQL 5.7の共通機能およ�
 
 </CustomContent>
 
+[TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=mysql_compatibility)で TiDB の機能を試すことができます。
+
 ## サポートされていない機能 {#unsupported-features}
 
 -   ストアド プロシージャと関数

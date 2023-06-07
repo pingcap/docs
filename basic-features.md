@@ -7,6 +7,8 @@ summary: Learn about the feature overview of TiDB.
 
 このドキュメントには、最新の LTS バージョン以降の[開発マイルストーン リリース (DMR)](/releases/versioning.md#development-milestone-releases)バージョンを含む、さまざまな TiDB バージョンでサポートされている機能がリストされています。
 
+[TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=tidb_features)で TiDB の機能を試すことができます。
+
 > **ノート：**
 >
 > PingCAP は、DMR バージョンのパッチ リリースを提供しません。バグは将来のリリースで修正される予定です。一般的な目的では、 [最新のLTSバージョン](https://docs.pingcap.com/tidb/stable)を使用することをお勧めします。
