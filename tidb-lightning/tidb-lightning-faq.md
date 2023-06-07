@@ -86,7 +86,7 @@ To disallow importing invalid data, you need to change the `sql-mode` setting to
 ```toml
 ...
 [tidb]
-sql-mode = ""
+sql-mode = "STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION"
 ...
 ```
 
