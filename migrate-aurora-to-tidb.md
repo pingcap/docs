@@ -30,9 +30,9 @@ This section describes how to export the schema file from Amazon Aurora and impo
 
 Because the snapshot file from Amazon Aurora does not contain the DDL statements, you need to export the schema using Dumpling and create the schema in the target database using TiDB Lightning.
 
-Pass the secret key and access key of the account that has access to this Amazon S3 storage path into the TiDB Lightning node as environment variables. TiDB Lightning also supports reading credential files from `~/.aws/credentials`. This method eliminates the need to pass in the corresponding secret key and access key again for all tasks on that TiDB Lightning node.
+You can pass the secret access key and access key of the account that has access to this Amazon S3 storage path into the TiDB Lightning node as environment variables. TiDB Lightning also supports reading credential files from `~/.aws/credentials`. This method eliminates the need to provide the secret access key and access key again for all tasks on that TiDB Lightning node.
 
-Export the schema using Dumpling by running the following command. The command includes the `--filter` parameter to only export the desired table schema. For more parameters, refer to [Dumpling overview](/dumpling-overview.md).
+Export the schema using Dumpling by running the following command. The command includes the `--filter` parameter to only export the desired table schema. For more information about the parameters, see [Dumpling overview](/dumpling-overview.md).
 
 ```shell
 export AWS_ACCESS_KEY_ID=${access_key}
@@ -84,7 +84,7 @@ If you need to enable TLS in the TiDB cluster, refer to [TiDB Lightning Configur
 
 #### 1.3 Import the schema file to TiDB
 
-Use TiDB Lightning to create tables in the downstream TiDB. Skip this step if you have manually created the tables in the target database in advance.
+Use TiDB Lightning to import the schema file to the downstream TiDB. If you launch the program directly in the command line, the process might exit unexpectedly after receiving a SIGHUP signal. In this case, it is recommended to run the program using a nohup or screen tool. 
 
 ```shell
 export AWS_ACCESS_KEY_ID=${access_key}
@@ -122,7 +122,7 @@ After you obtain the binlog position, export the snapshot within 5 minutes. Othe
 After the two steps above, make sure you have the following information ready:
 
 - The Amazon Aurora binlog name and position at the time of the snapshot creation.
-- The S3 path where the snapshot is stored, and the secret key and access key with access to the S3 path.
+- The S3 path where the snapshot is stored, and the secret access key and access key with access to the S3 path.
 
 #### 2.2 Create the TiDB Lightning configuration file for the data file
 
