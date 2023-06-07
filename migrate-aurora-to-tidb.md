@@ -30,7 +30,7 @@ This section describes how to export the schema file from Amazon Aurora and impo
 
 Because the snapshot file from Amazon Aurora does not contain the DDL statements, you need to export the schema using Dumpling and create the schema in the target database using TiDB Lightning.
 
-Pass the SecretKey and AccessKey of the account that has access to this Amazon S3 storage path into the TiDB Lightning node as environment variables. TiDB Lightning also supports reading credential files from `~/.aws/credentials`. This method eliminates the need to pass in the corresponding SecretKey and AccessKey again for all tasks on that TiDB Lightning node.
+Pass the secret key and access key of the account that has access to this Amazon S3 storage path into the TiDB Lightning node as environment variables. TiDB Lightning also supports reading credential files from `~/.aws/credentials`. This method eliminates the need to pass in the corresponding secret key and access key again for all tasks on that TiDB Lightning node.
 
 Export the schema using Dumpling by running the following command. The command includes the `--filter` parameter to only export the desired table schema. For more parameters, refer to [Dumpling overview](/dumpling-overview.md).
 
@@ -122,7 +122,7 @@ After you obtain the binlog position, export the snapshot within 5 minutes. Othe
 After the two steps above, make sure you have the following information ready:
 
 - The Amazon Aurora binlog name and position at the time of the snapshot creation.
-- The S3 path where the snapshot is stored, and the SecretKey and AccessKey with access to the S3 path.
+- The S3 path where the snapshot is stored, and the secret key and access key with access to the S3 path.
 
 #### 2.2 Create the TiDB Lightning configuration file for the data file
 
@@ -172,8 +172,6 @@ type = '$3'
 If you need to enable TLS in the TiDB cluster, refer to [TiDB Lightning Configuration](/tidb-lightning/tidb-lightning-configuration.md).
 
 #### 2.3 Import full data to TiDB
-
-You can pass the SecretKey and AccessKey of the account that has access to this Amazon S3 storage path into the TiDB Lightning node as environment variables. TiDB Lightning also supports reading credential files from `~/.aws/credentials`.
 
 1. Use TiDB Lightning to import data from an Amazon Aurora snapshot to TiDB.
 
