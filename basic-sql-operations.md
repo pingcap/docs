@@ -13,6 +13,12 @@ To experiment with SQL and test out TiDB compatibility with MySQL queries, you c
 
 </CustomContent>
 
+<CustomContent platform="tidb-cloud">
+
+To experiment with SQL and test out TiDB compatibility with MySQL queries, you can try [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=basic-sql-operations). You can also first [deploy a TiDB Cloud cluster](/tidb-cloud/tidb-cloud-quickstart.md) and then run SQL statements in it.
+
+</CustomContent>
+
 This page walks you through the basic TiDB SQL statements such as DDL, DML and CRUD operations. For a complete list of TiDB statements, see [TiDB SQL Syntax Diagram](https://pingcap.github.io/sqlgram/).
 
 ## Category
