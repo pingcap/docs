@@ -9,7 +9,7 @@ TiDB Cloudの Index Insight (ベータ) 機能は、インデックスを効果�
 
 > **ノート：**
 >
-> Index Insight は現在ベータ版であり、 [<a href="/tidb-cloud/select-cluster-tier.md#tidb-dedicated">TiDB専用</a>](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターでのみ使用できます。
+> Index Insight は現在ベータ版であり、 [<a href="/tidb-cloud/select-cluster-tier.md#tidb-dedicated">TiDB Dedicated</a>](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターでのみ使用できます。
 
 ## 序章 {#introduction}
 
@@ -26,11 +26,11 @@ Index Insight 機能には次の利点があります。
 
 ### あなたが始める前に {#before-you-begin}
 
-Index Insight 機能を有効にする前に、TiDB 専用クラスターを作成していることを確認してください。お持ちでない場合は、 [<a href="/tidb-cloud/create-tidb-cluster.md">クラスターを作成する</a>](/tidb-cloud/create-tidb-cluster.md)の手順に従って作成してください。
+Index Insight 機能を有効にする前に、TiDB Dedicatedクラスターを作成していることを確認してください。お持ちでない場合は、 [<a href="/tidb-cloud/create-tidb-cluster.md">クラスターを作成する</a>](/tidb-cloud/create-tidb-cluster.md)の手順に従って作成してください。
 
 ### ステップ 1: Index Insight を有効にする {#step-1-enable-index-insight}
 
-1.  [<a href="https://tidbcloud.com">TiDB Cloudコンソール</a>](https://tidbcloud.com)で、TiDB 専用クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**[診断]**をクリックします。
+1.  [<a href="https://tidbcloud.com">TiDB Cloudコンソール</a>](https://tidbcloud.com)で、TiDB Dedicatedクラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**[診断]**をクリックします。
 
 2.  **「Index Insight BETA」**タブをクリックします。 **Index Insight の概要**ページが表示されます。
 
@@ -46,7 +46,7 @@ Index Insight 機能を有効にする前に、TiDB 専用クラスターを作�
 
     > **ノート：**
     >
-    > TiDB 専用クラスターに接続するには、 [<a href="/tidb-cloud/connect-to-tidb-cluster.md">TiDB クラスターに接続する</a>](/tidb-cloud/connect-to-tidb-cluster.md)を参照してください。
+    > TiDB Dedicatedクラスターに接続するには、 [<a href="/tidb-cloud/connect-to-tidb-cluster.md">TiDB クラスターに接続する</a>](/tidb-cloud/connect-to-tidb-cluster.md)を参照してください。
 
 4.  前の手順で作成した SQL ユーザーのユーザー名とパスワードを入力します。次に、 **「アクティブ化」**をクリックしてアクティブ化プロセスを開始します。
 

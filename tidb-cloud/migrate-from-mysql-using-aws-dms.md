@@ -11,7 +11,7 @@ AWS DMS は、リレーショナル データベース、データ ウェアハ�
 
 このドキュメントでは、Amazon RDS を例として使用し、AWS DMS を使用してTiDB Cloudにデータを移行する方法を示します。この手順は、セルフホスト型 MySQL データベースまたは Amazon AuroraからTiDB Cloudへのデータの移行にも適用されます。
 
-この例では、データ ソースは Amazon RDS で、データの宛先はTiDB Cloudの TiDB 専用クラスターです。アップストリーム データベースとダウンストリーム データベースは両方とも同じリージョンにあります。
+この例では、データ ソースは Amazon RDS で、データの宛先はTiDB Cloudの TiDB Dedicatedクラスターです。アップストリーム データベースとダウンストリーム データベースは両方とも同じリージョンにあります。
 
 ## 前提条件 {#prerequisites}
 
@@ -187,4 +187,4 @@ AWS DMS はレプリケーションをサポートしていません`DROP TABLE`
 
 -   Aurora MySQL や Amazon Relational Database Service (RDS) などの MySQL 互換データベースからTiDB Cloudに移行する場合は、 [<a href="/tidb-cloud/migrate-from-mysql-using-data-migration.md">TiDB Cloudでのデータ移行</a>](/tidb-cloud/migrate-from-mysql-using-data-migration.md)を使用することをお勧めします。
 
--   AWS DMS を使用して Amazon RDS for Oracle から TiDB サーバーレスに移行する場合は、 [<a href="/tidb-cloud/migrate-from-oracle-using-aws-dms.md">AWS DMS を使用して Amazon RDS for Oracle から TiDB サーバーレスに移行する</a>](/tidb-cloud/migrate-from-oracle-using-aws-dms.md)を参照してください。
+-   AWS DMS を使用して Amazon RDS for Oracle から TiDB Serverlessに移行する場合は、 [<a href="/tidb-cloud/migrate-from-oracle-using-aws-dms.md">AWS DMS を使用して Amazon RDS for Oracle から TiDB Serverlessに移行する</a>](/tidb-cloud/migrate-from-oracle-using-aws-dms.md)を参照してください。

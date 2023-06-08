@@ -31,11 +31,11 @@ AWS PrivateLink を利用したエンドポイント接続は安全かつプラ�
 
 ## AWS でプライベート エンドポイントをセットアップする {#set-up-a-private-endpoint-with-aws}
 
-このセクションでは、AWS PrivateLink を使用して TiDB サーバーレス クラスターおよび TiDB 専用クラスター用のプライベート エンドポイントをセットアップする方法について説明します。
+このセクションでは、AWS PrivateLink を使用して TiDB Serverless クラスターおよび TiDB Dedicatedクラスター用のプライベート エンドポイントをセットアップする方法について説明します。
 
-### TiDB サーバーレス {#tidb-serverless}
+### TiDB Serverless {#tidb-serverless}
 
-プライベート エンドポイント経由で TiDB サーバーレス クラスターに接続するには、次の手順に従います。
+プライベート エンドポイント経由で TiDB Serverless クラスターに接続するには、次の手順に従います。
 
 1.  [<a href="#step-1-choose-a-tidb-cluster">TiDB クラスターを選択する</a>](#step-1-choose-a-tidb-cluster)
 2.  [<a href="#step-2-create-an-aws-interface-endpoint">AWSインターフェースエンドポイントを作成する</a>](#step-2-create-an-aws-interface-endpoint)
@@ -43,14 +43,14 @@ AWS PrivateLink を利用したエンドポイント接続は安全かつプラ�
 
 #### ステップ 1. TiDB クラスターを選択する {#step-1-choose-a-tidb-cluster}
 
-1.  [<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページで、ターゲット TiDB サーバーレス クラスターの名前をクリックして、その概要ページに移動します。
+1.  [<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページで、ターゲット TiDB Serverless クラスターの名前をクリックして、その概要ページに移動します。
 2.  右上隅にある**「接続」**をクリックします。接続ダイアログが表示されます。
 3.  **[エンドポイント タイプ]**ドロップダウン リストで、 **[プライベート]**を選択します。
 4.  **サービス名**、**アベイラビリティーゾーン ID** 、および**リージョンID**をメモします。
 
     > **ノート：**
     >
-    > AWS リージョンごとにプライベート エンドポイントを 1 つ作成するだけで済み、同じリージョンにあるすべての TiDB サーバーレス クラスターで共有できます。
+    > AWS リージョンごとにプライベート エンドポイントを 1 つ作成するだけで済み、同じリージョンにあるすべての TiDB Serverless クラスターで共有できます。
 
 #### ステップ 2. AWS インターフェースエンドポイントを作成する {#step-2-create-an-aws-interface-endpoint}
 
@@ -122,9 +122,9 @@ aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${region_id} --serv
 >
 > VPC エンドポイントの作成時にエラー`private-dns-enabled cannot be set because there is already a conflicting DNS domain for gatewayXX-privatelink.XX.prod.aws.tidbcloud.com in the VPC vpc-XXXXX`が発生した場合、プライベート エンドポイントがすでに作成されていることが原因であり、新しいエンドポイントを作成する必要はありません。
 
-### TiDB専用 {#tidb-dedicated}
+### TiDB Dedicated {#tidb-dedicated}
 
-プライベート エンドポイント経由で TiDB 専用クラスターに接続するには、 [<a href="#prerequisites">前提条件</a>](#prerequisites)を完了し、次の手順に従います。
+プライベート エンドポイント経由で TiDB Dedicatedクラスターに接続するには、 [<a href="#prerequisites">前提条件</a>](#prerequisites)を完了し、次の手順に従います。
 
 1.  [<a href="#step-1-choose-a-tidb-cluster">TiDB クラスターを選択する</a>](#step-1-choose-a-tidb-cluster)
 2.  [<a href="#step-2-check-the-service-endpoint-region">サービスエンドポイントのリージョンを確認する</a>](#step-2-check-the-service-endpoint-region)
@@ -150,7 +150,7 @@ aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${region_id} --serv
 
 #### ステップ 1. TiDB クラスターを選択する {#step-1-choose-a-tidb-cluster}
 
-1.  ドロップダウン リストをクリックして、利用可能な TiDB 専用クラスターを選択します。
+1.  ドロップダウン リストをクリックして、利用可能な TiDB Dedicatedクラスターを選択します。
 2.  **「次へ」**をクリックします。
 
 #### ステップ 2. サービスエンドポイントリージョンを確認する {#step-2-check-the-service-endpoint-region}
@@ -165,7 +165,7 @@ aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${region_id} --serv
 
 > **ノート：**
 >
-> 2023 年 3 月 28 日以降に作成された各 TiDB 専用クラスターでは、対応するエンドポイント サービスがクラスター作成後 3 ～ 4 分で自動的に作成されます。
+> 2023 年 3 月 28 日以降に作成された各 TiDB Dedicatedクラスターでは、対応するエンドポイント サービスがクラスター作成後 3 ～ 4 分で自動的に作成されます。
 
 `Endpoint Service Ready`メッセージが表示された場合は、後で使用できるように、コンソールの下部領域にあるコマンドからエンドポイント サービス名をメモしておきます。それ以外の場合は、 TiDB Cloud がクラスターのエンドポイント サービスを作成するまで 3 ～ 4 分待ちます。
 

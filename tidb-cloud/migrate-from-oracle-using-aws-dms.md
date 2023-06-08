@@ -5,7 +5,7 @@ summary: Learn how to migrate data from Amazon RDS for Oracle into TiDB Serverle
 
 # AWS DMS を使用して Amazon RDS for Oracle からTiDB Cloudに移行する {#migrate-from-amazon-rds-for-oracle-to-tidb-cloud-using-aws-dms}
 
-このドキュメントでは、AWS Database Migration Service (AWS DMS) を使用して Amazon RDS for Oracle から[<a href="https://tidbcloud.com/console/clusters/create-cluster">TiDB サーバーレス</a>](https://tidbcloud.com/console/clusters/create-cluster)にデータを移行する方法のステップバイステップの例について説明します。
+このドキュメントでは、AWS Database Migration Service (AWS DMS) を使用して Amazon RDS for Oracle から[<a href="https://tidbcloud.com/console/clusters/create-cluster">TiDB Serverless</a>](https://tidbcloud.com/console/clusters/create-cluster)にデータを移行する方法のステップバイステップの例について説明します。
 
 TiDB Cloudと AWS DMS の詳細について興味がある場合は、以下を参照してください。
 
@@ -24,7 +24,7 @@ PostgreSQL、Oracle、SQL Server などの異種データベースからTiDB Clo
 大まかに言うと、次の手順に従います。
 
 1.  ソース Amazon RDS for Oracle をセットアップします。
-2.  ターゲットを設定します[<a href="https://tidbcloud.com/console/clusters/create-cluster">TiDB サーバーレス</a>](https://tidbcloud.com/console/clusters/create-cluster) 。
+2.  ターゲットを設定します[<a href="https://tidbcloud.com/console/clusters/create-cluster">TiDB Serverless</a>](https://tidbcloud.com/console/clusters/create-cluster) 。
 3.  AWS DMS を使用してデータ移行 (フルロード) を設定します。
 
 次の図は、高レベルのアーキテクチャを示しています。
@@ -69,11 +69,11 @@ SQL スクリプトの実行が終了したら、Oracle のデータを確認し
 
 ![Oracle RDS Data](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-3.png)
 
-## ステップ 4. TiDB サーバーレスクラスターを作成する {#step-4-create-a-tidb-serverless-cluster}
+## ステップ 4. TiDB Serverlessクラスターを作成する {#step-4-create-a-tidb-serverless-cluster}
 
 1.  [<a href="https://tidbcloud.com/console/clusters">TiDB Cloudコンソール</a>](https://tidbcloud.com/console/clusters)にログインします。
 
-2.  [<a href="/tidb-cloud/tidb-cloud-quickstart.md">TiDB サーバーレスクラスターを作成する</a>](/tidb-cloud/tidb-cloud-quickstart.md) 。
+2.  [<a href="/tidb-cloud/tidb-cloud-quickstart.md">TiDB Serverlessクラスターを作成する</a>](/tidb-cloud/tidb-cloud-quickstart.md) 。
 
 3.  [<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページで、ターゲット クラスター名をクリックして、その概要ページに移動します。
 
@@ -133,7 +133,7 @@ AWS Schema Conversion Tool を使用してスキーマを移行する場合は�
 
 ## ステップ 9. ダウンストリーム TiDB クラスター内のデータを確認する {#step-9-check-data-in-the-downstream-tidb-cluster}
 
-[<a href="https://tidbcloud.com/console/clusters/create-cluster">TiDB サーバーレスクラスター</a>](https://tidbcloud.com/console/clusters/create-cluster)に接続して`admin.github_event`テーブルデータを確認します。次のスクリーンショットに示すように、DMS はテーブル`github_events`と 10,000 行のデータを正常に移行しました。
+[<a href="https://tidbcloud.com/console/clusters/create-cluster">TiDB Serverlessクラスター</a>](https://tidbcloud.com/console/clusters/create-cluster)に接続して`admin.github_event`テーブルデータを確認します。次のスクリーンショットに示すように、DMS はテーブル`github_events`と 10,000 行のデータを正常に移行しました。
 
 ![Check Data In TiDB](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-14.png)
 

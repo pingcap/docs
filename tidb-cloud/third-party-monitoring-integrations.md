@@ -23,7 +23,7 @@ TiDB Cloudをサードパーティのメトリクス サービスと統合して
 
 ## 制限 {#limitation}
 
--   [<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB サーバーレス</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)クラスターの場合、サードパーティのメトリック統合はサポートされていません。
+-   [<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB Serverlessless</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)クラスターの場合、サードパーティのメトリック統合はサポートされていません。
 
 -   クラスターのステータスが**CREATING** 、 **RESTORING** 、 **PAused** 、または**RESUMING**の場合、サードパーティのメトリック統合は使用できません。
 

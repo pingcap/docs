@@ -5,11 +5,11 @@ summary: Learn how to configure the root password and allowed IP addresses to co
 
 # クラスタのSecurity設定を構成する {#configure-cluster-security-settings}
 
-TiDB 専用クラスターの場合、root パスワードとクラスターへの接続を許可する IP アドレスを構成できます。
+TiDB Dedicatedクラスターの場合、root パスワードとクラスターへの接続を許可する IP アドレスを構成できます。
 
 > **ノート：**
 >
-> TiDB サーバーレス クラスターの場合、このドキュメントは適用されないため、代わりに[<a href="/tidb-cloud/secure-connections-to-serverless-tier-clusters.md">TiDB サーバーレスへの TLS 接続</a>](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md)を参照してください。
+> TiDB Serverless クラスターの場合、このドキュメントは適用されないため、代わりに[<a href="/tidb-cloud/secure-connections-to-serverless-tier-clusters.md">TiDB Serverlessへの TLS 接続</a>](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md)を参照してください。
 
 1.  TiDB Cloudコンソールで、プロジェクトの[<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページに移動します。
 

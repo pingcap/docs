@@ -103,7 +103,7 @@ tiup update cloud
 
 ## クイックスタート {#quick-start}
 
-[<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB サーバーレス</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta) (ベータ) は、 TiDB Cloudを開始するための最良の方法です。このセクションでは、 TiDB Cloud CLI を使用して TiDB サーバーレス クラスターを作成する方法を学習します。
+[<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB Serverless</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta) (ベータ) は、 TiDB Cloudを開始するための最良の方法です。このセクションでは、 TiDB Cloud CLI を使用して TiDB Serverless クラスターを作成する方法を学習します。
 
 ### ユーザープロファイルを作成する {#create-a-user-profile}
 
@@ -117,9 +117,9 @@ ticloud config create
 >
 > プロファイル名に`.`を含める**ことはできません**。
 
-### TiDB サーバーレスクラスターを作成する {#create-a-tidb-serverless-cluster}
+### TiDB Serverlessクラスターを作成する {#create-a-tidb-serverless-cluster}
 
-TiDB サーバーレス クラスターを作成するには、次のコマンドを入力し、CLI プロンプトに従って必要な情報を入力し、パスワードを設定します。
+TiDB Serverless クラスターを作成するには、次のコマンドを入力し、CLI プロンプトに従って必要な情報を入力し、パスワードを設定します。
 
 ```shell
 ticloud cluster create

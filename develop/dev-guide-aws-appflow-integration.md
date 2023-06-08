@@ -250,5 +250,5 @@ test> SELECT * FROM sf_account;
 
 -   何か問題が発生した場合は、AWS マネジメント コンソールの[クラウドウォッチ](https://console.aws.amazon.com/cloudwatch/home)ページに移動してログを取得できます。
 -   このドキュメントの手順は[Amazon AppFlow カスタム コネクタ SDK を使用してカスタム コネクタを構築する](https://aws.amazon.com/blogs/compute/building-custom-connectors-using-the-amazon-appflow-custom-connector-sdk/)に基づいています。
--   [TiDB CloudServerless Tier](https://docs.pingcap.com/tidbcloud/select-cluster-tier#serverless-tier-beta)本番環境**ではありません**。
+-   [TiDB Cloud Serverless Tier](https://docs.pingcap.com/tidbcloud/select-cluster-tier#serverless-tier-beta)本番環境**ではありません**。
 -   長すぎるのを防ぐために、このドキュメントの例では`Insert`戦略のみを示していますが、 `Update`および`Upsert`戦略もテストされており、使用できます。

@@ -13,7 +13,7 @@ TiDB Cloudでは、常に動作していないクラスターを簡単に一時�
 
 > **ノート：**
 >
-> [<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB サーバーレスクラスター</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)を一時停止することはできません。
+> [<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB Serverlessクラスター</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)を一時停止することはできません。
 
 ## 制限事項 {#limitations}
 

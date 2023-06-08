@@ -13,7 +13,7 @@ ticloud connect [flags]
 
 > **ノート：**
 >
-> -   デフォルトのユーザーを使用するかどうかを尋ねられた場合は、 `Y`を選択してデフォルトの root ユーザーを使用するか、 `n`選択して別のユーザーを指定できます。 [<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB サーバーレス</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)クラスターの場合、デフォルトの root ユーザーの名前には`3pTAoNNegb47Uc8`などの[<a href="/tidb-cloud/select-cluster-tier.md#user-name-prefix">接頭語</a>](/tidb-cloud/select-cluster-tier.md#user-name-prefix)が含まれます。
+> -   デフォルトのユーザーを使用するかどうかを尋ねられた場合は、 `Y`を選択してデフォルトの root ユーザーを使用するか、 `n`選択して別のユーザーを指定できます。 [<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB Serverlessless</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)クラスターの場合、デフォルトの root ユーザーの名前には`3pTAoNNegb47Uc8`などの[<a href="/tidb-cloud/select-cluster-tier.md#user-name-prefix">接頭語</a>](/tidb-cloud/select-cluster-tier.md#user-name-prefix)が含まれます。
 > -   接続ではセッションに対して[<a href="https://dev.mysql.com/doc/refman/8.0/en/sql-mode.html#sqlmode_ansi">ANSI SQL モード</a>](https://dev.mysql.com/doc/refman/8.0/en/sql-mode.html#sqlmode_ansi)強制されます。セッションを終了するには、 `\q`を入力します。
 
 ## 例 {#examples}

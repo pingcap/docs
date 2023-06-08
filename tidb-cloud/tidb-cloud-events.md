@@ -11,7 +11,7 @@ TiDB Cloudは、クラスター レベルで履歴イベントを記録します
 
 > **ノート：**
 >
-> 現在、イベント ページは[<a href="/tidb-cloud/select-cluster-tier.md#tidb-dedicated">TiDB専用</a>](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターでのみ使用できます。
+> 現在、イベント ページは[<a href="/tidb-cloud/select-cluster-tier.md#tidb-dedicated">TiDB Dedicated</a>](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターでのみ使用できます。
 
 ## イベントページをビュー {#view-the-events-page}
 
@@ -62,4 +62,4 @@ TiDB Cloudは、次のタイプのクラスター イベントをログに記録
 
 ## イベント保持ポリシー {#event-retention-policy}
 
-TiDB 専用クラスターの場合、イベント データは 7 日間保存されます。
+TiDB Dedicatedクラスターの場合、イベント データは 7 日間保存されます。

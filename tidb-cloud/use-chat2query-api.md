@@ -11,11 +11,11 @@ Chat2Query API には HTTPS 経由でのみアクセスできるため、ネッ�
 
 > **ノート：**
 >
-> Chat2Query API は[<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB サーバーレス</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)クラスターでのみ使用できます。
+> Chat2Query API は[<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB Serverless</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)クラスターでのみ使用できます。
 
 ## あなたが始める前に {#before-you-begin}
 
-Chat2Query API を使用する前に、 [<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB サーバーレス</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)クラスターを作成し、 [<a href="/tidb-cloud/explore-data-with-chat2query.md">SQLクエリを生成するAI</a>](/tidb-cloud/explore-data-with-chat2query.md)有効にしていることを確認してください。 TiDB サーバーレス クラスターがない場合は、 [<a href="/tidb-cloud/create-tidb-cluster.md">クラスターを作成する</a>](/tidb-cloud/create-tidb-cluster.md)の手順に従って作成します。
+Chat2Query API を使用する前に、 [<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB Serverless</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)クラスターを作成し、 [<a href="/tidb-cloud/explore-data-with-chat2query.md">SQLクエリを生成するAI</a>](/tidb-cloud/explore-data-with-chat2query.md)有効にしていることを確認してください。 TiDB Serverless クラスターがない場合は、 [<a href="/tidb-cloud/create-tidb-cluster.md">クラスターを作成する</a>](/tidb-cloud/create-tidb-cluster.md)の手順に従って作成します。
 
 ## ステップ 1. Chat2Query API を有効にする {#step-1-enable-the-chat2query-api}
 
@@ -35,7 +35,7 @@ Chat2Query API を有効にするには、次の手順を実行します。
 
     > **ノート：**
     >
-    > 1 つの TiDB サーバーレス クラスターで DataAPI を有効にすると、同じプロジェクト内のすべての TiDB サーバーレス クラスターで Chat2Query API を使用できるようになります。
+    > 1 つの TiDB Serverless クラスターで DataAPI を有効にすると、同じプロジェクト内のすべての TiDB Serverless クラスターで Chat2Query API を使用できるようになります。
 
 5.  メッセージ内の**「Data Service」**リンクをクリックして、Chat2Query API にアクセスします。
 

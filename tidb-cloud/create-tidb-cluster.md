@@ -21,11 +21,11 @@ summary: Learn how to create your TiDB cluster.
 
 TiDB Cloud、次の 2 つのオプションが提供されます。 TiDB クラスターを作成する前に、どのオプションがニーズに適しているかを検討してください。
 
--   TiDB サーバーレス (ベータ版)
+-   TiDB Serverless (ベータ版)
 
-    TiDB Serverless は、TiDB のフルマネージド サービスです。これはまだベータ段階にあるため、本番では使用できません。ただし、TiDB サーバーレス クラスターは、プロトタイプ アプリケーション、ハッカソン、学術コースなどの非運用ワークロードに使用したり、データセットに一時的なデータ サービスを提供したりするために使用できます。
+    TiDB Serverless は、TiDB のフルマネージド サービスです。これはまだベータ段階にあるため、本番では使用できません。ただし、TiDB Serverless クラスターは、プロトタイプ アプリケーション、ハッカソン、学術コースなどの非運用ワークロードに使用したり、データセットに一時的なデータ サービスを提供したりするために使用できます。
 
--   TiDB専用
+-   TiDB Dedicated
 
     TiDB D dedicated は、クロスゾーンの高可用性、水平スケーリング、および[<a href="https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing">HTAP</a>](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)の利点を備えた本番稼働専用です。
 
@@ -66,7 +66,7 @@ TiDB Cloud、次の 2 つのオプションが提供されます。 TiDB クラ�
 <SimpleTab>
 <div label="TiDB Serverless">
 
-TiDB サーバーレス クラスターを作成するには、次の手順を実行します。
+TiDB Serverless クラスターを作成するには、次の手順を実行します。
 
 1.  [<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページに移動します。
 
@@ -80,7 +80,7 @@ TiDB サーバーレス クラスターを作成するには、次の手順を�
 
     > **ノート：**
     >
-    > TiDB Cloudの組織ごとに、デフォルトで最大 5 つの TiDB サーバーレス クラスターを作成できます。さらに TiDB サーバーレス クラスターを作成するには、クレジット カードを追加し、使用量を[<a href="/tidb-cloud/tidb-cloud-glossary.md#spend-limit">支出制限</a>](/tidb-cloud/tidb-cloud-glossary.md#spend-limit)に設定する必要があります。
+    > TiDB Cloudの組織ごとに、デフォルトで最大 5 つの TiDB Serverless クラスターを作成できます。さらに TiDB Serverless クラスターを作成するには、クレジット カードを追加し、使用量を[<a href="/tidb-cloud/tidb-cloud-glossary.md#spend-limit">支出制限</a>](/tidb-cloud/tidb-cloud-glossary.md#spend-limit)に設定する必要があります。
 
 6.  必要に応じてデフォルトのクラスター名を更新し、 **「作成」**をクリックします。
 
@@ -96,7 +96,7 @@ TiDB サーバーレス クラスターを作成するには、次の手順を�
 
 <div label="TiDB Dedicated">
 
-TiDB 専用クラスターを作成するには、次の手順を実行します。
+TiDB Dedicatedクラスターを作成するには、次の手順を実行します。
 
 1.  プロジェクトの[<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページに移動します。
 

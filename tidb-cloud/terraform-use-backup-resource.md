@@ -9,13 +9,13 @@ summary: Learn how to create a backup of a TiDB Cloud cluster using the backup r
 
 `tidbcloud_backup`リソースの特徴は次のとおりです。
 
--   TiDB 専用クラスターのバックアップを作成します。
--   TiDB 専用クラスターのバックアップを削除します。
+-   TiDB Dedicatedクラスターのバックアップを作成します。
+-   TiDB Dedicatedクラスターのバックアップを削除します。
 
 ## 前提条件 {#prerequisites}
 
 -   [<a href="/tidb-cloud/terraform-get-tidbcloud-provider.md">TiDB Cloud Terraform プロバイダーを入手する</a>](/tidb-cloud/terraform-get-tidbcloud-provider.md) 。
--   バックアップおよび復元機能は、TiDB サーバーレス クラスターでは使用できません。バックアップ リソースを使用するには、TiDB 専用クラスターを作成していることを確認してください。
+-   バックアップおよび復元機能は、TiDB Serverless クラスターでは使用できません。バックアップ リソースを使用するには、TiDB Dedicatedクラスターを作成していることを確認してください。
 
 ## バックアップ リソースを使用してバックアップを作成する {#create-a-backup-with-the-backup-resource}
 

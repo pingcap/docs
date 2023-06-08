@@ -5,7 +5,7 @@ summary: Learn about how to use Customer-Managed Encryption Key (CMEK) in TiDB C
 
 # 顧客管理の暗号化キーを使用した保存時の暗号化 {#encryption-at-rest-using-customer-managed-encryption-keys}
 
-顧客管理の暗号化キー (CMEK) を使用すると、お客様が完全に管理する暗号化キーを使用して、TiDB 専用クラスター内の静的データを保護できます。このキーは CMEK キーとして知られています。
+顧客管理の暗号化キー (CMEK) を使用すると、お客様が完全に管理する暗号化キーを使用して、TiDB Dedicatedクラスター内の静的データを保護できます。このキーは CMEK キーとして知られています。
 
 プロジェクトで CMEK を有効にすると、このプロジェクト内で作成されたすべてのクラスターは、この CMEK キーを使用して静的データを暗号化し、これらのクラスターによって生成されるバックアップ データも同じキーを使用して暗号化されます。 CMEK を有効にしない場合、 TiDB Cloud はエスクロー キーを使用して、クラスター内の保存中のすべてのデータを暗号化します。
 
@@ -17,7 +17,7 @@ summary: Learn about how to use Customer-Managed Encryption Key (CMEK) in TiDB C
 
 -   現在、 TiDB Cloudは、CMEK を提供するための AWS KMS の使用のみをサポートしています。
 -   CMEK を使用するには、プロジェクトの作成時に CMEK を有効にし、クラスターを作成する前に CMEK 関連の構成を完了する必要があります。既存のプロジェクトに対して CMEK を有効にすることはできません。
--   現在、CMEK 対応プロジェクトでは、AWS でホストされるクラスターを[<a href="/tidb-cloud/select-cluster-tier.md#tidb-dedicated">TiDB専用</a>](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)だけ作成できます。 GCP でホストされる TiDB 専用クラスターおよび[<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB サーバーレス</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)クラスターはサポートされていません。
+-   現在、CMEK 対応プロジェクトでは、AWS でホストされるクラスターを[<a href="/tidb-cloud/select-cluster-tier.md#tidb-dedicated">TiDB Dedicatededicated</a>](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)だけ作成できます。 GCP でホストされる TiDB Dedicatedクラスターおよび[<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB Serverless</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)クラスターはサポートされていません。
 -   現在、特定のプロジェクトでは、1 つの AWS リージョンに対してのみ CMEK を有効にすることができます。構成後は、同じプロジェクト内の他のリージョンにクラスターを作成することはできません。
 
 ## CMEKを有効にする {#enable-cmek}
@@ -99,7 +99,7 @@ summary: Learn about how to use Customer-Managed Encryption Key (CMEK) in TiDB C
 
 ### ステップ 3. クラスターを作成する {#step-3-create-a-cluster}
 
-ステップ 1 で作成したプロジェクトの下に、AWS でホストされる TiDB 専用クラスターを作成します。クラスターが配置されているリージョンがステップ 2 のリージョンと同じであることを確認します。
+ステップ 1 で作成したプロジェクトの下に、AWS でホストされる TiDB Dedicatedクラスターを作成します。クラスターが配置されているリージョンがステップ 2 のリージョンと同じであることを確認します。
 
 > **ノート：**
 >

@@ -17,7 +17,7 @@ TiDB Cloud は[<a href="https://prometheus.io/">プロメテウス</a>](https://
 
 ## 制限 {#limitation}
 
--   [<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB サーバーレス</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)クラスターでは Prometheus と Grafana の統合を使用できません。
+-   [<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB Serverless</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)クラスターでは Prometheus と Grafana の統合を使用できません。
 
 -   Prometheus と Grafana の統合は、クラスターのステータスが**CREATING** 、 **RESTORING** 、 **PAused** 、または**RESUMING**の場合は使用できません。
 

@@ -13,7 +13,7 @@ summary: Learn how to configure maintenance window for your cluster.
 
 > **ノート：**
 >
-> メンテナンスウィンドウ機能は[<a href="/tidb-cloud/select-cluster-tier.md#tidb-dedicated">TiDB 専用クラスター</a>](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)でのみ使用できます。
+> メンテナンスウィンドウ機能は[<a href="/tidb-cloud/select-cluster-tier.md#tidb-dedicated">TiDB Dedicatedクラスター</a>](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)でのみ使用できます。
 
 ## メンテナンス期間中に許可される操作と禁止される操作 {#allowed-and-disallowed-operations-during-a-maintenance-window}
 

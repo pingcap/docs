@@ -29,7 +29,7 @@ summary: Learn how to monitor your TiDB cluster.
 
 > **ノート：**
 >
-> TiDB ノードのステータスは、TiDB 専用クラスターでのみ使用できます。
+> TiDB ノードのステータスは、TiDB Dedicatedクラスターでのみ使用できます。
 
 | TiDB ノードのステータス | 説明                     |
 | :------------- | :--------------------- |
@@ -42,7 +42,7 @@ summary: Learn how to monitor your TiDB cluster.
 
 > **ノート：**
 >
-> TiKV ノードのステータスは、TiDB 専用クラスターでのみ使用できます。
+> TiKV ノードのステータスは、TiDB Dedicatedクラスターでのみ使用できます。
 
 | TiKV ノードのステータス | 説明                     |
 | :------------- | :--------------------- |
@@ -64,7 +64,7 @@ TiDB Cloudでは、次のページからクラスターの一般的に使用さ�
 
 > **ノート：**
 >
-> これらのメトリックの一部は、TiDB 専用クラスターでのみ使用できる場合があります。
+> これらのメトリックの一部は、TiDB Dedicatedクラスターでのみ使用できる場合があります。
 
 クラスターの概要ページでメトリックを表示するには、次の手順を実行します。
 
@@ -78,7 +78,7 @@ TiDB Cloudでは、次のページからクラスターの一般的に使用さ�
 
 > **ノート：**
 >
-> 現在、クラスター監視ページは[<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB サーバーレスクラスター</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)では利用できません。
+> 現在、クラスター監視ページは[<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB Serverlessクラスター</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)では利用できません。
 
 クラスター監視ページでメトリックを表示するには、次の手順を実行します。
 

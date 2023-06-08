@@ -5,7 +5,7 @@ summary: The reference of `ticloud import start local`.
 
 # ticloud インポートをローカルで開始 {#ticloud-import-start-local}
 
-ローカル ファイルを[<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB サーバーレス</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)クラスターにインポートします。
+ローカル ファイルを[<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB Serverless</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)クラスターにインポートします。
 
 ```shell
 ticloud import start local <file-path> [flags]

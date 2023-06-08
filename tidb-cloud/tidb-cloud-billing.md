@@ -7,12 +7,12 @@ summary: Learn about TiDB Cloud billing.
 
 > **ノート：**
 >
-> [<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB サーバーレスクラスター</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta) 2023 年 5 月 31 日まで無料で、100% 割引になります。それ以降は[<a href="/tidb-cloud/select-cluster-tier.md#usage-quota">無料割り当て</a>](/tidb-cloud/select-cluster-tier.md#usage-quota)目以降のご利用は有料となります。
+> [<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB Serverlessクラスター</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta) 2023 年 5 月 31 日まで無料で、100% 割引になります。それ以降は[<a href="/tidb-cloud/select-cluster-tier.md#usage-quota">無料割り当て</a>](/tidb-cloud/select-cluster-tier.md#usage-quota)目以降のご利用は有料となります。
 
 TiDB Cloud は、消費したリソースに応じて料金が発生します。価格の詳細については、次のページを参照してください。
 
--   [<a href="https://www.pingcap.com/tidb-cloud-serverless-pricing-details">TiDB サーバーレスの料金詳細</a>](https://www.pingcap.com/tidb-cloud-serverless-pricing-details)
--   [<a href="https://en.pingcap.com/tidb-cloud-pricing-details/">TiDB 専用の料金詳細</a>](https://en.pingcap.com/tidb-cloud-pricing-details/)
+-   [<a href="https://www.pingcap.com/tidb-cloud-serverless-pricing-details">TiDB Serverlessの料金詳細</a>](https://www.pingcap.com/tidb-cloud-serverless-pricing-details)
+-   [<a href="https://en.pingcap.com/tidb-cloud-pricing-details/">TiDB Dedicatedの料金詳細</a>](https://en.pingcap.com/tidb-cloud-pricing-details/)
 
 ## 請求書 {#invoices}
 

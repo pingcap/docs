@@ -3,9 +3,9 @@ title: Migrate from TiDB Self-Hosted to TiDB Cloud
 summary: Learn how to migrate data from TiDB Self-Hosted to TiDB Cloud.
 ---
 
-# TiDB セルフホストからTiDB Cloudへの移行 {#migrate-from-tidb-self-hosted-to-tidb-cloud}
+# TiDB Self-HostedからTiDB Cloudへの移行 {#migrate-from-tidb-self-hosted-to-tidb-cloud}
 
-このドキュメントでは、 Dumplingと TiCDC を介して TiDB セルフホスト クラスターからTiDB Cloud(AWS) にデータを移行する方法について説明します。
+このドキュメントでは、 Dumplingと TiCDC を介して TiDB Self-Hosted クラスターからTiDB Cloud(AWS) にデータを移行する方法について説明します。
 
 全体的な手順は次のとおりです。
 
@@ -35,7 +35,7 @@ S3 バケットとTiDB Cloudクラスターを同じリージョンに配置す�
 
 ### Dumpling {#dumpling}
 
-[<a href="https://docs.pingcap.com/tidb/dev/dumpling-overview">Dumpling</a>](https://docs.pingcap.com/tidb/dev/dumpling-overview)は、TiDB または MySQL から SQL または CSV ファイルにデータをエクスポートするツールです。 Dumplingを使用して、TiDB セルフホストから完全なデータをエクスポートできます。
+[<a href="https://docs.pingcap.com/tidb/dev/dumpling-overview">Dumpling</a>](https://docs.pingcap.com/tidb/dev/dumpling-overview)は、TiDB または MySQL から SQL または CSV ファイルにデータをエクスポートするツールです。 Dumplingを使用して、TiDB Self-Hostedから完全なデータをエクスポートできます。
 
 Dumplingをデプロイする前に、次の点に注意してください。
 
@@ -102,18 +102,18 @@ tiup update --self && tiup update dumpling
 
 ## 全データを移行する {#migrate-full-data}
 
-TiDB セルフホスト クラスターからTiDB Cloudにデータを移行するには、次のように完全なデータ移行を実行します。
+TiDB Self-Hosted クラスターからTiDB Cloudにデータを移行するには、次のように完全なデータ移行を実行します。
 
-1.  TiDB セルフホストクラスターから Amazon S3 にデータを移行します。
+1.  TiDB Self-Hostedクラスターから Amazon S3 にデータを移行します。
 2.  Amazon S3 からTiDB Cloudにデータを移行します。
 
-### TiDB セルフホストクラスターから Amazon S3 にデータを移行する {#migrate-data-from-the-tidb-self-hosted-cluster-to-amazon-s3}
+### TiDB Self-Hostedクラスターから Amazon S3 にデータを移行する {#migrate-data-from-the-tidb-self-hosted-cluster-to-amazon-s3}
 
-Dumplingを使用して、TiDB セルフホストクラスターから Amazon S3 にデータを移行する必要があります。
+Dumplingを使用して、TiDB Self-Hostedクラスターから Amazon S3 にデータを移行する必要があります。
 
 TiDB クラスターがローカル IDC にある場合、またはDumplingサーバーと Amazon S3 間のネットワークが接続されていない場合は、最初にファイルをローカルstorageにエクスポートし、後で Amazon S3 にアップロードできます。
 
-#### ステップ 1. 上流の TiDB セルフホスト クラスターの GC メカニズムを一時的に無効にします。 {#step-1-disable-the-gc-mechanism-of-the-upstream-tidb-self-hosted-cluster-temporarily}
+#### ステップ 1. 上流の TiDB Self-Hosted クラスターの GC メカニズムを一時的に無効にします。 {#step-1-disable-the-gc-mechanism-of-the-upstream-tidb-self-hosted-cluster-temporarily}
 
 増分移行中に新しく書き込まれたデータが失われないようにするには、移行を開始する前に上流クラスターのガベージコレクション(GC) メカニズムを無効にして、システムが履歴データをクリーンアップしないようにする必要があります。
 
@@ -199,7 +199,7 @@ Dumplingを使用して上流の TiDB クラスターから Amazon S3 にデー�
 
 ### Amazon S3 からTiDB Cloudにデータを移行する {#migrate-data-from-amazon-s3-to-tidb-cloud}
 
-TiDB セルフホストクラスターから Amazon S3 にデータをエクスポートした後、データをTiDB Cloudに移行する必要があります。
+TiDB Self-Hostedクラスターから Amazon S3 にデータをエクスポートした後、データをTiDB Cloudに移行する必要があります。
 
 1.  TiDB Cloudコンソールでクラスターのアカウント ID と外部 ID を取得します。詳細については、 [<a href="/tidb-cloud/tidb-cloud-auditing.md#step-2-configure-amazon-s3-access">ステップ 2. Amazon S3 アクセスを構成する</a>](/tidb-cloud/tidb-cloud-auditing.md#step-2-configure-amazon-s3-access)を参照してください。
 

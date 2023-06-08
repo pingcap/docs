@@ -488,7 +488,7 @@ summary: Learn about the release notes of TiDB Cloud in 2022.
 
 ## 2022 年 6 月 28 日 {#june-28-2022}
 
--   TiDB CloudDedicated Tierを[<a href="https://docs.pingcap.com/tidb/stable/release-5.4.1">TiDB v5.4.1</a>](https://docs.pingcap.com/tidb/stable/release-5.4.1)から[<a href="https://docs.pingcap.com/tidb/stable/release-6.1.0">TiDB v6.1.0</a>](https://docs.pingcap.com/tidb/stable/release-6.1.0)にアップグレードします。
+-   TiDB Cloud Dedicated Tierを[<a href="https://docs.pingcap.com/tidb/stable/release-5.4.1">TiDB v5.4.1</a>](https://docs.pingcap.com/tidb/stable/release-5.4.1)から[<a href="https://docs.pingcap.com/tidb/stable/release-6.1.0">TiDB v6.1.0</a>](https://docs.pingcap.com/tidb/stable/release-6.1.0)にアップグレードします。
 
 ## 2022 年 6 月 23 日 {#june-23-2022}
 

@@ -17,7 +17,7 @@ TTL は、ユーザーがオンラインの読み取りおよび書き込みワ�
 
 > **警告：**
 >
-> これは実験的機能です。本番環境で使用することはお勧めしません。 [TiDB CloudServerless Tier](https://docs.pingcap.com/tidbcloud/select-cluster-tier#serverless-tier-beta)は TTL を使用できません。
+> これは実験的機能です。本番環境で使用することはお勧めしません。 [TiDB Cloud Serverless Tier](https://docs.pingcap.com/tidbcloud/select-cluster-tier#serverless-tier-beta)は TTL を使用できません。
 
 ## 構文 {#syntax}
 

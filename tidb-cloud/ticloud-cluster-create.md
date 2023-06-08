@@ -13,7 +13,7 @@ ticloud cluster create [flags]
 
 > **ノート：**
 >
-> 現在、前述のコマンドを使用して作成できるクラスターは[<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB サーバーレス</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)だけです。
+> 現在、前述のコマンドを使用して作成できるクラスターは[<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB Serverless</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)だけです。
 
 ## 例 {#examples}
 

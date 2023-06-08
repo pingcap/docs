@@ -10,7 +10,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 ## 2023 年 6 月 6 日 {#june-6-2023}
 
--   [<a href="/tidb-cloud/index-insight.md">インデックスインサイト（ベータ版）</a>](/tidb-cloud/index-insight.md) for [<a href="/tidb-cloud/select-cluster-tier.md#tidb-dedicated">TiDB専用</a>](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターを導入します。これは、遅いクエリに対してインデックスの推奨を提供することでクエリのパフォーマンスを最適化します。
+-   [<a href="/tidb-cloud/index-insight.md">インデックスインサイト（ベータ版）</a>](/tidb-cloud/index-insight.md) for [<a href="/tidb-cloud/select-cluster-tier.md#tidb-dedicated">TiDB Dedicated</a>](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターを導入します。これは、遅いクエリに対してインデックスの推奨を提供することでクエリのパフォーマンスを最適化します。
 
     Index Insight を使用すると、次の方法でアプリケーション全体のパフォーマンスとデータベース操作の効率を向上させることができます。
 
@@ -19,7 +19,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
     -   簡素化された最適化プロセス: Index Insight は、インデックスの改善点の特定と実装を簡素化し、手動による分析や推測の必要性を排除します。その結果、正確なインデックス推奨により時間と労力を節約できます。
     -   アプリケーション効率の向上: Index Insight を使用してデータベースのパフォーマンスを最適化することで、 TiDB Cloud上で実行されるアプリケーションはより大きなワークロードを処理し、より多くのユーザーに同時にサービスを提供できるため、アプリケーションのスケーリング操作がより効率的になります。
 
-    Index Insight を使用するには、TiDB 専用クラスターの**[診断]**ページに移動し、 **[Index Insight BETA]**タブをクリックします。
+    Index Insight を使用するには、TiDB Dedicatedクラスターの**[診断]**ページに移動し、 **[Index Insight BETA]**タブをクリックします。
 
     詳細については、 [<a href="/tidb-cloud/index-insight.md">Index Insight を使用する (ベータ版)</a>](/tidb-cloud/index-insight.md)を参照してください。
 
@@ -54,9 +54,9 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   簡素化と明確化を追求するため、製品名を更新しました。
 
-    -   「TiDB CloudServerless Tier」は「TiDB サーバーレス」と呼ばれるようになりました。
-    -   「TiDB CloudDedicated Tier」は「TiDB 専用」と呼ばれるようになりました。
-    -   「TiDB オンプレミス」は「TiDB セルフホスト」と呼ばれるようになりました。
+    - 「TiDB Cloud Serverless Tier」は「TiDB Serverless」と呼ばれるようになりました。
+    - 「TiDB Cloud Dedicated Tier」は「TiDB Dedicated」と呼ばれるようになりました。
+    - 「TiDB On-Premises」は「TiDB Self-Hosted」と呼ばれるようになりました。
 
     新しくなった名前で、これまでと同じ素晴らしいパフォーマンスをお楽しみください。私たちはあなたの経験を最優先に考えています。
 
@@ -160,7 +160,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     クラスターの**概要**ページの**[今月の使用量]**領域で簡単に[<a href="/tidb-cloud/manage-serverless-spend-limit.md#manage-spend-limit-for-tidb-serverless-clusters">クラスターの使用状況を監視するか、使用量クォータを増やします</a>](/tidb-cloud/manage-serverless-spend-limit.md#manage-spend-limit-for-tidb-serverless-clusters)できます。クラスターの無料クォータに達すると、クォータを増やすか、新しい月の初めに使用量がリセットされるまで、このクラスターでの読み取りおよび書き込み操作は抑制されます。
 
-    さまざまなリソース (読み取り、書き込み、SQL CPU、ネットワーク下りなど) の RU 消費量、料金の詳細、および調整された情報の詳細については、 [<a href="https://www.pingcap.com/tidb-cloud-serverless-pricing-details">TiDB CloudServerless Tierの料金詳細</a>](https://www.pingcap.com/tidb-cloud-serverless-pricing-details)を参照してください。
+    さまざまなリソース (読み取り、書き込み、SQL CPU、ネットワーク下りなど) の RU 消費量、料金の詳細、および調整された情報の詳細については、 [<a href="https://www.pingcap.com/tidb-cloud-serverless-pricing-details">TiDB Cloud Serverless Tierの料金詳細</a>](https://www.pingcap.com/tidb-cloud-serverless-pricing-details)を参照してください。
 
 -   TiDB Cloud [<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">Serverless Tier</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)クラスターのバックアップと復元をサポートします。
 
@@ -551,7 +551,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 **一般的な変更点**
 
--   AWS でホストされ、2022 年 12 月 31 日以降に作成された TiDB 専用クラスターの**ノード サイズ (vCPU + RAM)**を増やすことで、TiDB、TiKV、およびTiFlashノードのスケールアップをサポートします。
+-   AWS でホストされ、2022 年 12 月 31 日以降に作成された TiDB Dedicatedクラスターの**ノード サイズ (vCPU + RAM)**を増やすことで、TiDB、TiKV、およびTiFlashノードのスケールアップをサポートします。
 
     ノード サイズを[<a href="/tidb-cloud/scale-tidb-cluster.md#change-node-size">TiDB Cloudコンソールの使用</a>](/tidb-cloud/scale-tidb-cluster.md#change-node-size)または[<a href="https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster">TiDB CloudAPI (ベータ版) を使用する</a>](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster)に増やすことができます。
 

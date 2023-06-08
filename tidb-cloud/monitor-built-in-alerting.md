@@ -11,7 +11,7 @@ TiDB Cloudでは、アラートの表示、アラート ルールの編集、ア
 
 > **ノート：**
 >
-> 現在、アラート機能は[<a href="/tidb-cloud/select-cluster-tier.md#tidb-dedicated">TiDB専用</a>](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターでのみ使用できます。
+> 現在、アラート機能は[<a href="/tidb-cloud/select-cluster-tier.md#tidb-dedicated">TiDB Dedicated</a>](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターでのみ使用できます。
 
 ## アラートをビュー {#view-alerts}
 
