@@ -30,8 +30,6 @@ This section describes how to export the schema file from Amazon Aurora and impo
 
 Because the snapshot file from Amazon Aurora does not contain the DDL statements, you need to export the schema using Dumpling and create the schema in the target database using TiDB Lightning.
 
-To get access to Amazon S3, you can pass the secret access key and access key of the account that has access to this Amazon S3 storage path into the Dumpling or TiDB Lightning node as environment variables. Dumpling and TiDB Lightning also support reading credential files from `~/.aws/credentials`. This method eliminates the need to provide the secret access key and access key again for all tasks on that Dumpling or TiDB Lightning node.
-
 Export the schema using Dumpling by running the following command. The command includes the `--filter` parameter to only export the desired table schema. For more information about the parameters, see [Dumpling overview](/dumpling-overview.md).
 
 ```shell
@@ -41,6 +39,8 @@ tiup dumpling --host ${host} --port 3306 --user root --password ${password} --fi
 ```
 
 Record the URI of the schema exported in the above command, such as 's3://my-bucket/schema-backup', which will be used when importing the schema file later.
+
+To get access to Amazon S3, you can pass the secret access key and access key of the account that has access to this Amazon S3 storage path into the Dumpling or TiDB Lightning node as environment variables. Dumpling and TiDB Lightning also support reading credential files from `~/.aws/credentials`. This method eliminates the need to provide the secret access key and access key again for all tasks on that Dumpling or TiDB Lightning node.
 
 #### 1.2 Create the TiDB Lightning configuration file for the schema file
 
