@@ -160,11 +160,6 @@ enable-partition-separator = false
 # The default value is false.
 # enable-kafka-sink-v2 = false
 
-# Specifies whether to only output the updated columns.
-# Note: This configuration item only applies to the MQ downstream using the open-protocol and canal-json.
-# The default value is false.
-# only-output-updated-columns = false
-
 # Since v6.5.0, TiCDC supports saving data changes to storage services in CSV format. Ignore the following configurations if you replicate data to MQ or MySQL sinks.
 # [sink.csv]
 # The character used to separate fields in the CSV file. The value must be an ASCII character and defaults to `,`.
