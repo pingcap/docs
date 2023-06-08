@@ -5054,3 +5054,18 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Type: Boolean
 - Default value: `ON`
 - This variable controls whether to use the high precision mode when computing the window functions.
+
+### tidb_tiflash_node_selection_policy
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Enumeration
+- Default value: "all_nodes"
+- Value options: "all_nodes", "priority_local_zone_nodes", "only_local_zone_nodes"
+- This variable is used to set the policy of TiFlash node selection when the query needs the TiFlash engine.
+  - "all_nodes" means using all the available nodes to do analytic computing, regardless of local zone or other zones.
+  - "priority_local_zone_nodes" means using the nodes in the same zone as the entry TiDB. If not all the tiflash data can be accessed, the query will involve the tiflash nodes from other zones.
+  - "only_local_zone_nodes" means using only the nodes in the same zone as the entry TiDB. If not all the tiflash data can be accessed, the query will report an error.
+- Corner cases
+  - If TiDB nodes do not set zone attributes and the policy of TiFlash node selection is not all_nodes, the policy of TiFlash node selection will be ignored, all the tiflash nodes will be used in the tiflash query. And there will be a warning message: The variable tidb_tiflash_node_selection_policy is ignored.
+  - If TiFlash nodes do not set zone attributes, these nodes will be treated as nodes not in any zone. 
