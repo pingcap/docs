@@ -93,7 +93,7 @@ This section describes how to export an Amazon Aurora snapshot to Amazon S3 and 
 1. Get the name and location of the Amazon Aurora binlog for subsequent incremental migration. In Amazon Aurora, run the `SHOW MASTER STATUS` command and record the current binlog position:
 
     ```sql
-    mysql> SHOW MASTER STATUS;
+    SHOW MASTER STATUS;
     ```
 
     The output is similar to the following. Record the binlog name and position for later use.
