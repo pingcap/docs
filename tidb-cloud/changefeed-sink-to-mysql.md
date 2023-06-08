@@ -13,7 +13,7 @@ Summary: Learn how to create a changefeed to stream data from TiDB Cloud to MySQ
 >
 > 現在、 TiDB Cloudクラスターごとに最大 5 つの変更フィードのみが許可されます。
 >
-> [<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB Serverlesslessクラスター</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)の場合、チェンジフィード機能は使用できません。
+> [<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB Serverlessクラスター</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)の場合、チェンジフィード機能は使用できません。
 
 ## 制限 {#restrictions}
 

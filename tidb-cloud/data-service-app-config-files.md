@@ -32,7 +32,7 @@ summary: This document describes the configuration files of Data App in TiDB Clo
 │   │   └── cluster.json
 ```
 
-データ アプリごとに、1 つまたは複数の TiDB Serverlessless クラスターにリンクできます。
+データ アプリごとに、1 つまたは複数の TiDB Serverless クラスターにリンクできます。
 
 以下は`cluster.json`の構成例です。この例では、このデータ アプリには 2 つのリンクされたクラスターがあります。
 
@@ -51,7 +51,7 @@ summary: This document describes the configuration files of Data App in TiDB Clo
 
 | 分野           | タイプ | 説明                                                                                                                                                                    |
 | ------------ | --- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `cluster_id` | 整数  | TiDB Serverlessless クラスターの ID。クラスターの URL から取得できます。たとえば、クラスター URL が`https://tidbcloud.com/console/clusters/1234567891234567890/overview`の場合、クラスター ID は`1234567891234567890`です。 |
+| `cluster_id` | 整数  | TiDB Serverless クラスターの ID。クラスターの URL から取得できます。たとえば、クラスター URL が`https://tidbcloud.com/console/clusters/1234567891234567890/overview`の場合、クラスター ID は`1234567891234567890`です。 |
 
 ## データアプリの構成 {#data-app-configuration}
 

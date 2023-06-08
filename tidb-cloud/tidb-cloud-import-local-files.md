@@ -12,7 +12,7 @@ summary: Learn how to import local files to TiDB Cloud.
 ## 制限事項 {#limitations}
 
 -   現在、 TiDB Cloudは、1 つのタスクに対して 50 MiB 以内の CSV 形式でのローカル ファイルのインポートのみをサポートしています。
--   ローカル ファイルのインポートは、TiDB Serverlessless クラスターでのみサポートされており、TiDB Dedicatedクラスターではサポートされていません。
+-   ローカル ファイルのインポートは、TiDB Serverless クラスターでのみサポートされており、TiDB Dedicatedクラスターではサポートされていません。
 -   複数のインポート タスクを同時に実行することはできません。
 -   CSV ファイルをTiDB Cloudの既存のテーブルにインポートする場合は、CSV ファイルの最初の行に列名が含まれていることを確認し、CSV ファイル内の列の順序がターゲット テーブル内の順序と同じである必要があります。
 

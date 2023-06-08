@@ -5,7 +5,7 @@ Summary: Learn how to create a changefeed to stream data from a TiDB Dedicated c
 
 # TiDB Cloudへのシンク {#sink-to-tidb-cloud}
 
-このドキュメントでは、TiDB Dedicatedクラスターから TiDB Serverlessless クラスターにデータをストリーミングする方法について説明します。
+このドキュメントでは、TiDB Dedicatedクラスターから TiDB Serverless クラスターにデータをストリーミングする方法について説明します。
 
 > **ノート：**
 >
@@ -26,15 +26,15 @@ Summary: Learn how to create a changefeed to stream data from a TiDB Dedicated c
     -   AWS シンガポール (ap-southeast-1)
     -   AWS 東京 (ap-northeast-1)
 
--   ソース TiDB Dedicatedクラスターと宛先 TiDB Serverlessless クラスターは、同じプロジェクトおよび同じリージョン内に存在する必要があります。
+-   ソース TiDB Dedicatedクラスターと宛先 TiDB Serverless クラスターは、同じプロジェクトおよび同じリージョン内に存在する必要があります。
 
--   **TiDB Cloudへのシンク**機能は、プライベート エンドポイント経由のネットワーク接続のみをサポートします。 TiDB Dedicatedクラスターから TiDB Serverlessless クラスターにデータをストリーミングするためのチェンジフィードを作成すると、 TiDB Cloudは2 つのクラスター間のプライベート エンドポイント接続を自動的にセットアップします。
+-   **TiDB Cloudへのシンク**機能は、プライベート エンドポイント経由のネットワーク接続のみをサポートします。 TiDB Dedicatedクラスターから TiDB Serverless クラスターにデータをストリーミングするためのチェンジフィードを作成すると、 TiDB Cloudは2 つのクラスター間のプライベート エンドポイント接続を自動的にセットアップします。
 
 ## 前提条件 {#prerequisites}
 
-**Sink to TiDB Cloud**コネクタは、特定の[<a href="https://docs.pingcap.com/tidb/stable/glossary#tso">TSO</a>](https://docs.pingcap.com/tidb/stable/glossary#tso)以降のみ、TiDB Dedicatedクラスターから TiDB Serverlessless クラスターに増分データをシンクできます。
+**Sink to TiDB Cloud**コネクタは、特定の[<a href="https://docs.pingcap.com/tidb/stable/glossary#tso">TSO</a>](https://docs.pingcap.com/tidb/stable/glossary#tso)以降のみ、TiDB Dedicatedクラスターから TiDB Serverless クラスターに増分データをシンクできます。
 
-チェンジフィードを作成する前に、ソース TiDB Dedicatedクラスターから既存のデータをエクスポートし、そのデータを宛先 TiDB Serverlessless クラスターにロードする必要があります。
+チェンジフィードを作成する前に、ソース TiDB Dedicatedクラスターから既存のデータをエクスポートし、そのデータを宛先 TiDB Serverless クラスターにロードする必要があります。
 
 1.  [<a href="https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50">tidb_gc_life_time</a>](https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50)次の 2 つの操作の合計時間よりも長くして、その間の履歴データが TiDB によってガベージ コレクションされないようにします。
 
@@ -47,7 +47,7 @@ Summary: Learn how to create a changefeed to stream data from a TiDB Dedicated c
     SET GLOBAL tidb_gc_life_time = '720h';
     ```
 
-2.  [<a href="/tidb-cloud/export-data-from-tidb-cloud.md">データのエクスポート</a>](/tidb-cloud/export-data-from-tidb-cloud.md)を TiDB Dedicatedクラスターからロードし、 [<a href="https://centminmod.com/mydumper.html">マイダンパー/マイローダー</a>](https://centminmod.com/mydumper.html)などのコミュニティ ツールを使用して宛先 TiDB Serverlessless クラスターにデータをロードします。
+2.  [<a href="/tidb-cloud/export-data-from-tidb-cloud.md">データのエクスポート</a>](/tidb-cloud/export-data-from-tidb-cloud.md)を TiDB Dedicatedクラスターからロードし、 [<a href="https://centminmod.com/mydumper.html">マイダンパー/マイローダー</a>](https://centminmod.com/mydumper.html)などのコミュニティ ツールを使用して宛先 TiDB Serverless クラスターにデータをロードします。
 
 3.  [<a href="/dumpling-overview.md#format-of-exported-files">Dumplingのエクスポートされたファイル</a>](/dumpling-overview.md#format-of-exported-files)から、メタデータ ファイルからTiDB Cloudシンクの開始位置を取得します。
 
@@ -63,13 +63,13 @@ Summary: Learn how to create a changefeed to stream data from a TiDB Dedicated c
 
 ## TiDB Cloudシンクを作成する {#create-a-tidb-cloud-sink}
 
-前提条件を完了したら、データを宛先 TiDB Serverlessless クラスターにシンクできます。
+前提条件を完了したら、データを宛先 TiDB Serverless クラスターにシンクできます。
 
 1.  ターゲット TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**[Changefeed]**をクリックします。
 
 2.  **[Create Changefeed]**をクリックし、宛先として**TiDB Cloud**を選択します。
 
-3.  **[TiDB Cloud接続]**領域で、宛先 TiDB Serverlessless クラスターを選択し、宛先クラスターのユーザー名とパスワードを入力します。
+3.  **[TiDB Cloud接続]**領域で、宛先 TiDB Serverless クラスターを選択し、宛先クラスターのユーザー名とパスワードを入力します。
 
 4.  **「次へ」**をクリックして 2 つの TiDB クラスター間の接続を確立し、変更フィードがそれらを正常に接続できるかどうかをテストします。
 

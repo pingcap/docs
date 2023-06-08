@@ -12,7 +12,7 @@ TiDB Cloudチェンジフィードは、 TiDB Cloudから他のデータ サー�
 >
 > 現在、 TiDB Cloudクラスターごとに最大 10 個の変更フィードのみが許可されます。
 >
-> [<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB Serverlesslessクラスター</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)の場合、チェンジフィード機能は使用できません。
+> [<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB Serverlessクラスター</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)の場合、チェンジフィード機能は使用できません。
 
 チェンジフィード機能にアクセスするには、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーション ペインで**[チェンジフィード]**をクリックします。チェンジフィードページが表示されます。
 

@@ -7,11 +7,11 @@ summary: Learn how to connect to your TiDB Cloud cluster via standard connection
 
 このドキュメントでは、標準接続を介してTiDB Cloudクラスターに接続する方法について説明します。標準接続では、トラフィック フィルターを備えたパブリック エンドポイントが公開されるため、ラップトップから SQL クライアント経由で TiDB クラスターに接続できます。
 
-標準接続は、TiDB Serverlesslessと TiDB Dedicatedの両方で使用できます。
+標準接続は、TiDB Serverlessと TiDB Dedicatedの両方で使用できます。
 
-## TiDB Serverlessless {#tidb-serverless}
+## TiDB Serverless {#tidb-serverless}
 
-標準接続経由で TiDB Serverlessless クラスターに接続するには、次の手順を実行します。
+標準接続経由で TiDB Serverless クラスターに接続するには、次の手順を実行します。
 
 1.  [<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして、その概要ページに移動します。
 
@@ -21,7 +21,7 @@ summary: Learn how to connect to your TiDB Cloud cluster via standard connection
 
     > **ノート：**
     >
-    > -   エンドポイント タイプを`Public`のままにすると、接続が標準の TLS 接続を介して行われることを意味します。詳細については、 [<a href="/tidb-cloud/secure-connections-to-serverless-tier-clusters.md">TiDB Serverlesslessへの TLS 接続</a>](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md)を参照してください。
+    > -   エンドポイント タイプを`Public`のままにすると、接続が標準の TLS 接続を介して行われることを意味します。詳細については、 [<a href="/tidb-cloud/secure-connections-to-serverless-tier-clusters.md">TiDB Serverlessへの TLS 接続</a>](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md)を参照してください。
     > -   **[エンドポイント タイプ]**ドロップダウン リストで**[プライベート]**を選択した場合、接続がプライベート エンドポイント経由であることを意味します。詳細については、 [<a href="/tidb-cloud/set-up-private-endpoint-connections.md#tidb-serverless">プライベートエンドポイント経由で接続する</a>](/tidb-cloud/set-up-private-endpoint-connections.md#tidb-serverless)を参照してください。
 
 4.  パスワードをまだ設定していない場合は、 **「パスワードの作成」**をクリックしてランダムなパスワードを生成します。生成されたパスワードは再度表示されないため、パスワードを安全な場所に保存してください。
@@ -30,7 +30,7 @@ summary: Learn how to connect to your TiDB Cloud cluster via standard connection
 
     > **ノート：**
     >
-    > TiDB Serverlessless クラスターに接続するときは、ユーザー名にクラスターのプレフィックスを含め、名前を引用符で囲む必要があります。詳細については、 [<a href="/tidb-cloud/select-cluster-tier.md#user-name-prefix">ユーザー名のプレフィックス</a>](/tidb-cloud/select-cluster-tier.md#user-name-prefix)を参照してください。
+    > TiDB Serverless クラスターに接続するときは、ユーザー名にクラスターのプレフィックスを含め、名前を引用符で囲む必要があります。詳細については、 [<a href="/tidb-cloud/select-cluster-tier.md#user-name-prefix">ユーザー名のプレフィックス</a>](/tidb-cloud/select-cluster-tier.md#user-name-prefix)を参照してください。
 
 ## TiDB Dedicated {#tidb-dedicated}
 
