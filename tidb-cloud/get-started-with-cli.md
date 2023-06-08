@@ -76,7 +76,7 @@ For Windows, you can install `ticloud` using either of the following methods:
 
     To set up `ticloud` in GitHub Actions, use [`setup-tidbcloud-cli`](https://github.com/tidbcloud/setup-tidbcloud-cli).
 
-Install the MySQL command-line client if you do not have it. You can refer to the instructions in [Windows MySQL Installer](https://dev.mysql.com/doc/refman/8.0/en/windows-installation.html) for the installation. To launch `ticloud connect` in Windows, you need to have the `mysql.exe` executable's directory in your shell's PATH.
+Install the MySQL command-line client if you do not have it. You can refer to the instructions in [MySQL Installer for Windows](https://dev.mysql.com/doc/refman/8.0/en/mysql-installer.html) for the installation. To launch `ticloud connect` on Windows, you need to have the directory containing `mysql.exe` in the PATH environment variable.
 
 </div>
 </SimpleTab>

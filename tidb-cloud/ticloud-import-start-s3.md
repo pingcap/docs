@@ -39,25 +39,25 @@ ticloud import start s3 --project-id <project-id> --cluster-id <cluster-id> --aw
 
 In non-interactive mode, you need to manually enter the required flags. In interactive mode, you can just follow CLI prompts to fill them in.
 
-| Flag                    | Description                                                                                                    | Required | Note                                                                      |
-|-------------------------|----------------------------------------------------------------------------------------------------------------|----------|---------------------------------------------------------------------------|
-| --aws-role-arn string   | AWS S3 IAM Role ARN                                                                                            | Yes      | Only works in non-interactive mode.                                       |
-| --backslash-escape      | Parses backslashes inside fields as escape characters for CSV files (`true` by default)                        | No       | Only works in non-interactive mode when `--data-format CSV` is specified. |
-| -c, --cluster-id string | Cluster ID                                                                                                     | Yes      | Only works in non-interactive mode.                                       |
-| --data-format string    | Data format. Valid values are `CSV`, `SqlFile`, `Parquet`, or `AuroraSnapshot`.                                | Yes      | Only works in non-interactive mode.                                       |
-| --delimiter string      | The delimiter used for quoting for CSV files  (`"` by default)                                                 | No       | Only works in non-interactive mode when `--data-format CSV` is specified. |
-| -h, --help              | Help information for this command                                                                              | No       | Works in both non-interactive and interactive modes.                      |
-| -p, --project-id string | Project ID                                                                                                     | Yes      | Only works in non-interactive mode.                                       |
-| --separator string      | The field separator for CSV files (`,` by default)                                                             | No       | Only works in non-interactive mode when `--data-format CSV` is specified. |
-| --source-url string     | The S3 path where the source data files are stored                                                             | Yes      | Only works in non-interactive mode.                                       |
-| --trim-last-separator   | Treats separators as the line terminators and trims all trailing separators for CSV files (`false` by default) | No       | Only works in non-interactive mode when `--data-format CSV` is specified. |
+| Flag | Description | Required | Note |
+|---|---|---|---|
+| --aws-role-arn string | The specific AWS role ARN that needs to be assumed to access the Amazon S3 data source. | Yes | Only works in non-interactive mode. |
+| --backslash-escape | Whether to parse backslashes inside fields as escape characters for CSV files. The default value is `true`. | No | Only works in non-interactive mode when `--data-format CSV` is specified. |
+| -c, --cluster-id string | Specifies the cluster ID. | Yes | Only works in non-interactive mode. |
+| --data-format string | Specifies the data format. Valid values are `CSV`, `SqlFile`, `Parquet`, or `AuroraSnapshot`.  | Yes | Only works in non-interactive mode. |
+| --delimiter string | Specifies the delimiter used for quoting for CSV files. The default value is `"`. | No | Only works in non-interactive mode when `--data-format CSV` is specified. |
+| -h, --help | Displays help information for this command. | No | Works in both non-interactive and interactive modes. |
+| -p, --project-id string | Specifies the project ID. | Yes | Only works in non-interactive mode. |
+| --separator string | Specifies the field separator for CSV files. The default value is `,`. | No | Only works in non-interactive mode when `--data-format CSV` is specified. |
+| --source-url string | The S3 path where the source data files are stored. | Yes | Only works in non-interactive mode. |
+| --trim-last-separator | Whether to treat separators as line terminators and trim all trailing separators for CSV files. The default value is `false`. | No | Only works in non-interactive mode when `--data-format CSV` is specified. |
 
 ## Inherited flags
 
-| Flag                 | Description                                                                                         | Required | Note                                                                                                             |
-|----------------------|-----------------------------------------------------------------------------------------------------|----------|------------------------------------------------------------------------------------------------------------------|
-| --no-color           | Disables color in output                                                                            | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components. |
-| -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command | No       | Works in both non-interactive and interactive modes.                                                             |
+| Flag | Description | Required | Note |
+|---|---|---|---|
+| --no-color | Disables color in output | No | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components. |
+| -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command. | No | Works in both non-interactive and interactive modes. |
 
 ## Feedback
 
