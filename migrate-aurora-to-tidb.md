@@ -89,12 +89,12 @@ Use TiDB Lightning to import the schema file to the downstream TiDB. If you laun
 ```shell
 export AWS_ACCESS_KEY_ID=${access_key}
 export AWS_SECRET_ACCESS_KEY=${secret_key}
-tiup tidb-lightning -config tidb-lightning-schema.toml > nohup.out 2>&1 &
+nohup tiup tidb-lightning -config tidb-lightning-schema.toml > nohup.out 2>&1 &
 ```
 
 ### Step 2. Export and import an Amazon Aurora snapshot to Amazon S3
 
-This section describes how to export an Amazon Aurora snapshot to Amazon S3.
+This section describes how to export an Amazon Aurora snapshot to Amazon S3 and import it into TiDB by TiDB Lightning.
 
 #### 2.1 Export an Amazon Aurora snapshot to Amazon S3
 
@@ -126,7 +126,7 @@ After the two steps above, make sure you have the following information ready:
 
 #### 2.2 Create the TiDB Lightning configuration file for the data file
 
-Create the `tidb-lightning-data.toml` configuration file as follows. Note that the name of the configuration file here must be different from the name of the configuration file for the schema file.
+Create the `tidb-lightning-data.toml` configuration file as follows. Note that the name of the configuration file here must be different from the name of the configuration file for importing the schema file.
 
 ```shell
 vim tidb-lightning-data.toml
