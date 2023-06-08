@@ -29,7 +29,7 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
     TiDB Playground を使用すると、複雑な構成を必要とせず、制御された環境で TiDB の機能をリアルタイムで試すことができるため、TiDB の機能を理解するのに最適です。
 
-    TiDB Playground の使用を開始するには、 [<a href="https://play.tidbcloud.com/?utm_source=docs&#x26;utm_medium=tidb_cloud_release_notes">**TiDB プレイグラウンド**</a>](https://play.tidbcloud.com/?utm_source=docs&#x26;utm_medium=tidb_cloud_release_notes)ページに移動し、探索したい機能を選択して、探索を開始します。
+    TiDB Playground の使用を開始するには、[<a href="https://play.tidbcloud.com/?utm_source=docs&#x26;utm_medium=tidb_cloud_release_notes">**TiDB Playground**</a>](https://play.tidbcloud.com/?utm_source=docs&#x26;utm_medium=tidb_cloud_release_notes) ページに移動し、探索したい機能を選択して、探索を開始します。
 
 ## 2023 年 6 月 5 日 {#june-5-2023}
 
