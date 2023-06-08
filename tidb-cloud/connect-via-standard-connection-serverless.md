@@ -18,7 +18,7 @@ To connect to a TiDB Serverless cluster via public endpoint, take the following 
     > **Note:**
     >
     > - Keeping the endpoint type as `Public` means the connection is via standard TLS connection. For more information, see [TLS Connection to TiDB Serverless](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md).
-    > - If you choose **Private** in the **Endpoint Type** drop-down list, it means that the connection is via private endpoint. For more information, see [Connect via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections.md#tidb-serverless).
+    > - If you choose **Private** in the **Endpoint Type** drop-down list, it means that the connection is via private endpoint. For more information, see [Connect to TiDB Serverless via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md).
 
 4. If you have not set a password yet, click **Create password** to generate a random password. The generated password will not show again, so save your password in a secure location.
 
