@@ -53,7 +53,7 @@ TiDB はデータをロックインしません。 TiDB から他のデータ �
 
     > **ノート：**
     >
-    > TiDB サーバーレス クラスター データをエクスポートするには、 Dumpling のバージョンが少なくとも v6.5.0 であることを確認する必要があります。 Dumpling のバージョンが v6.5.0 の場合は、コマンドで`--ca=${ca_path}`を設定する必要もあります。システム上の CA ルート パスを見つけるには、 [<a href="/tidb-cloud/secure-connections-to-serverless-tier-clusters.md#root-certificate-default-path">TiDB サーバーレスへの TLS 接続</a>](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md#root-certificate-default-path)を参照してください。
+    > TiDB Serverless クラスタ データをエクスポートするには、 Dumpling のバージョンが少なくとも v6.5.0 であることを確認する必要があります。 Dumpling のバージョンが v6.5.0 の場合は、コマンドで`--ca=${ca_path}`を設定する必要もあります。システム上の CA ルート パスを見つけるには、 [<a href="/tidb-cloud/secure-connections-to-serverless-tier-clusters.md#root-certificate-default-path">TiDB Serverlessへの TLS 接続</a>](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md#root-certificate-default-path)を参照してください。
 
     </div>
      <div label="TiDB Dedicated">
@@ -74,7 +74,7 @@ TiDB はデータをロックインしません。 TiDB から他のデータ �
     -   `-F` : 1 つのファイルの最大サイズ。
     -   `-o` : エクスポートディレクトリ。
     -   `--filetype` : エクスポートされたファイルの種類。デフォルト値は`sql`です。 `sql`と`csv`からお選びいただけます。
-    -   `--consistency` : データの一貫性。デフォルト値は`auto`です。 TiDB サーバーレスの場合は、これを`none`に設定する必要があります。
+    -   `--consistency` : データの一貫性。デフォルト値は`auto`です。 TiDB Serverlessの場合は、これを`none`に設定する必要があります。
 
     Dumplingオプションの詳細については、 [<a href="/dumpling-overview.md#option-list-of-dumpling">Dumplingオプション一覧</a>](/dumpling-overview.md#option-list-of-dumpling)を参照してください。
 

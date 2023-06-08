@@ -9,7 +9,7 @@ TiDB Cloud は、カスタム API エンドポイントを使用して HTTPS リ
 
 > **ノート：**
 >
-> データ サービスは[<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB サーバーレス</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)クラスターでのみ使用できます。
+> データ サービスは[<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB Serverless</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)クラスターでのみ使用できます。
 
 Data Service のエンドポイントは、SQL ステートメントを実行するようにカスタマイズできる Web API です。 `WHERE`句で使用される値など、SQL ステートメントのパラメータを指定できます。クライアントがエンドポイントを呼び出し、リクエスト URL 内のパラメータの値を指定すると、エンドポイントは指定されたパラメータを使用して対応する SQL ステートメントを実行し、結果を HTTP 応答の一部として返します。
 
@@ -17,7 +17,7 @@ Data Service のエンドポイントは、SQL ステートメントを実行す
 
 > **ヒント：**
 >
-> TiDB Cloud は、 TiDB サーバーレス クラスター用の Chat2Query API を提供します。有効にすると、 TiDB Cloud は**Chat2Query**と呼ばれるシステム データ アプリと Data Service に Chat2Data エンドポイントを自動的に作成します。このエンドポイントを呼び出して、AI に指示を提供して SQL ステートメントを生成および実行させることができます。
+> TiDB Cloud は、 TiDB Serverless クラスタ用の Chat2Query API を提供します。有効にすると、 TiDB Cloud は**Chat2Query**と呼ばれるシステム データ アプリと Data Service に Chat2Data エンドポイントを自動的に作成します。このエンドポイントを呼び出して、AI に指示を提供して SQL ステートメントを生成および実行させることができます。
 >
 > 詳細については、 [<a href="/tidb-cloud/use-chat2query-api.md">Chat2Query API を使ってみる</a>](/tidb-cloud/use-chat2query-api.md)を参照してください。
 

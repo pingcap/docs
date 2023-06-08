@@ -7,7 +7,7 @@ summary: Learn how to connect to TiDB Cloud via VPC peering.
 
 > **ノート：**
 >
-> VPC ピアリング接続は、TiDB 専用クラスターでのみ使用できます。 VPC ピアリングを使用して[<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB サーバーレスクラスター</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)に接続することはできません。
+> VPC ピアリング接続は、TiDB Dedicatedクラスターでのみ使用できます。 VPC ピアリングを使用して[<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB Serverlessクラスタ</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)に接続することはできません。
 
 VPC ピアリング経由でアプリケーションをTiDB Cloudに接続するには、 TiDB Cloudで[<a href="/tidb-cloud/tidb-cloud-glossary.md#vpc-peering">VPC ピアリング</a>](/tidb-cloud/tidb-cloud-glossary.md#vpc-peering)をセットアップする必要があります。このドキュメントでは、VPC ピアリング接続[<a href="#set-up-vpc-peering-on-aws">AWS上で</a>](#set-up-vpc-peering-on-aws)および[<a href="#set-up-vpc-peering-on-gcp">GCP 上で</a>](#set-up-vpc-peering-on-gcp)を設定し、VPC ピアリングを介してTiDB Cloudに接続する方法について説明します。
 

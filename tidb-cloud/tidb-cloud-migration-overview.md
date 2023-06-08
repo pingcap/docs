@@ -26,9 +26,9 @@ MySQL 互換データベースからデータを移行する場合、完全な�
 
     アプリケーションがデータstorageに MySQL シャードを使用している場合、これらのシャードを 1 つのテーブルとしてTiDB Cloudに移行できます。詳細については、 [<a href="/tidb-cloud/migrate-sql-shards.md">大規模なデータセットの MySQL シャードをTiDB Cloudに移行およびマージ</a>](/tidb-cloud/migrate-sql-shards.md)を参照してください。
 
--   TiDB セルフホスト型からの移行
+-   TiDB Self-Hosted型からの移行
 
-    Dumplingと TiCDC を通じて、TiDB セルフホスト クラスターからTiDB Cloud(AWS) にデータを移行できます。詳細については、 [<a href="/tidb-cloud/migrate-from-op-tidb.md">TiDB セルフホストからTiDB Cloudへの移行</a>](/tidb-cloud/migrate-from-op-tidb.md)を参照してください。
+    Dumplingと TiCDC を通じて、TiDB Self-Hosted クラスターからTiDB Cloud(AWS) にデータを移行できます。詳細については、 [<a href="/tidb-cloud/migrate-from-op-tidb.md">TiDB Self-HostedからTiDB Cloudへの移行</a>](/tidb-cloud/migrate-from-op-tidb.md)を参照してください。
 
 ## ファイルからTiDB Cloudにデータをインポート {#import-data-from-files-to-tidb-cloud}
 

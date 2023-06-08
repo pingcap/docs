@@ -10,7 +10,7 @@ summary: Learn how to import Apache Parquet files from Amazon S3 or GCS into TiD
 > **ノート：**
 >
 > -   TiDB Cloud は、空のテーブルへの Parquet ファイルのインポートのみをサポートします。すでにデータが含まれている既存のテーブルにデータをインポートするには、このドキュメントに従ってTiDB Cloudを使用して一時的な空のテーブルにデータをインポートし、その後`INSERT SELECT`ステートメントを使用してデータをターゲットの既存のテーブルにコピーします。
-> -   TiDB 専用クラスターにチェンジフィードがある場合、現在のデータインポート機能は[<a href="https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode">物理インポートモード</a>](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode)を使用するため、データをクラスターにインポートできません ([**データのインポート]**ボタンが無効になります)。このモードでは、インポートされたデータは変更ログを生成しないため、変更フィードはインポートされたデータを検出できません。
+> -   TiDB Dedicatedクラスターにチェンジフィードがある場合、現在のデータインポート機能は[<a href="https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode">物理インポートモード</a>](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode)を使用するため、データをクラスターにインポートできません ([**データのインポート]**ボタンが無効になります)。このモードでは、インポートされたデータは変更ログを生成しないため、変更フィードはインポートされたデータを検出できません。
 
 ## ステップ 1. Parquet ファイルを準備する {#step-1-prepare-the-parquet-files}
 
@@ -106,8 +106,8 @@ Parquet ファイルをTiDB Cloudにインポートするには、次の手順�
     2.  ターゲット クラスターの名前をクリックして概要ページに移動し、左側のナビゲーション ペインで**[インポート]**をクリックします。
 
 2.  **インポート**ページで:
-    -   TiDB 専用クラスターの場合は、右上隅にある**「データのインポート」**をクリックします。
-    -   TiDB サーバーレス クラスターの場合は、アップロード領域の上にある**[S3 からデータをインポート]**リンクをクリックします。
+    -   TiDB Dedicatedクラスターの場合は、右上隅にある**「データのインポート」**をクリックします。
+    -   TiDB Serverless クラスタの場合は、アップロード領域の上にある**[S3 からデータをインポート]**リンクをクリックします。
 
 3.  ソース Parquet ファイルについて次の情報を指定します。
 

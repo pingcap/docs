@@ -17,7 +17,7 @@ TiDB クラスターに関するメトリック データを[<a href="https://ww
 
 ## 制限 {#limitation}
 
--   [<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB サーバーレス</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)クラスターでは Datadog 統合を使用できません。
+-   [<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB Serverless</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)クラスターでは Datadog 統合を使用できません。
 
 -   クラスターのステータスが**CREATING** 、 **RESTORING** 、 **PAUSED** 、または**RESUMING**の場合、Datadog 統合は使用できません。
 

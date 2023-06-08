@@ -3,9 +3,9 @@ title: TiDB Dedicated Limitations and Quotas
 summary: Learn the limitations and quotas in TiDB Cloud.
 ---
 
-# TiDB 専用の制限と割り当て {#tidb-dedicated-limitations-and-quotas}
+# TiDB Dedicatedの制限と割り当て {#tidb-dedicated-limitations-and-quotas}
 
-TiDB Cloud、 [<a href="/tidb-cloud/select-cluster-tier.md#tidb-dedicated">TiDB専用</a>](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスター内に作成できる各種類のコンポーネントの数と、TiDB の一般的な使用制限が制限されています。さらに、実際に必要以上のリソースが作成されないように、ユーザーが作成するリソースの量を制限する組織レベルのクォータがいくつかあります。これらの表は、制限とクォータの概要を示しています。
+TiDB Cloud、 [<a href="/tidb-cloud/select-cluster-tier.md#tidb-dedicated">TiDB Dedicated</a>](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスター内に作成できる各種類のコンポーネントの数と、TiDB の一般的な使用制限が制限されています。さらに、実際に必要以上のリソースが作成されないように、ユーザーが作成するリソースの量を制限する組織レベルのクォータがいくつかあります。これらの表は、制限とクォータの概要を示しています。
 
 > **ノート：**
 >

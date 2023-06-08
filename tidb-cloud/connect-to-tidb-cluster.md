@@ -5,11 +5,11 @@ summary: Learn how to connect to your TiDB cluster via different methods.
 
 # TiDBクラスタに接続する {#connect-to-your-tidb-cluster}
 
-TiDB クラスターがTiDB Cloud上に作成されたら、TiDB クラスターに接続できます。 TiDB サーバーレス クラスターと TiDB 専用クラスターのどちらを使用しているかに応じて、使用可能な接続方法は次のようになります。
+TiDB クラスターがTiDB Cloud上に作成されたら、TiDB クラスターに接続できます。 TiDB Serverless クラスタと TiDB Dedicatedクラスターのどちらを使用しているかに応じて、使用可能な接続方法は次のようになります。
 
-## TiDB サーバーレス {#tidb-serverless}
+## TiDB Serverless {#tidb-serverless}
 
-TiDB サーバーレス クラスターの場合、次のいずれかの方法でクラスターに接続できます。
+TiDB Serverless クラスタの場合、次のいずれかの方法でクラスターに接続できます。
 
 -   [<a href="/tidb-cloud/set-up-private-endpoint-connections.md">プライベートエンドポイント経由で接続する</a>](/tidb-cloud/set-up-private-endpoint-connections.md) (推奨)
 
@@ -19,7 +19,7 @@ TiDB サーバーレス クラスターの場合、次のいずれかの方法�
 
     標準接続では、トラフィック フィルターを備えたパブリック エンドポイントが公開されるため、ラップトップから SQL クライアント経由で TiDB クラスターに接続できます。
 
-    TiDB サーバーレスは[<a href="/tidb-cloud/secure-connections-to-serverless-tier-clusters.md">TLS接続</a>](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md)をサポートしており、アプリケーションから TiDB クラスターへのデータ送信のセキュリティを確保します。
+    TiDB Serverlessは[<a href="/tidb-cloud/secure-connections-to-serverless-tier-clusters.md">TLS接続</a>](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md)をサポートしており、アプリケーションから TiDB クラスターへのデータ送信のセキュリティを確保します。
 
 -   [<a href="/tidb-cloud/explore-data-with-chat2query.md">Chat2Query 経由で接続する (ベータ版)</a>](/tidb-cloud/explore-data-with-chat2query.md)
 
@@ -27,9 +27,9 @@ TiDB サーバーレス クラスターの場合、次のいずれかの方法�
 
     Chat2Query では、 `--`を入力してから AI に SQL クエリを自動的に生成させる指示を入力するか、SQL クエリを手動で作成して、ターミナルを使用せずにデータベースに対して SQL クエリを実行することができます。クエリ結果をテーブルで直感的に見つけたり、クエリログを簡単に確認したりできます。
 
-## TiDB専用 {#tidb-dedicated}
+## TiDB Dedicated {#tidb-dedicated}
 
-TiDB 専用クラスターの場合、次のいずれかの方法でクラスターに接続できます。
+TiDB Dedicatedクラスターの場合、次のいずれかの方法でクラスターに接続できます。
 
 -   [<a href="/tidb-cloud/connect-via-standard-connection.md#tidb-dedicated">標準接続で接続する</a>](/tidb-cloud/connect-via-standard-connection.md#tidb-dedicated)
 

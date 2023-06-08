@@ -17,7 +17,7 @@ TiDB Cloud は、パフォーマンスを分析するために[<a href="#slow-qu
 
 > **ノート：**
 >
-> 現在、 **Key Visualizer**と**Index Insight (ベータ版)**は[<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB サーバーレス</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)のクラスターでは使用できません。
+> 現在、 **Key Visualizer**と**Index Insight (ベータ版)**は[<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB Serverless</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)のクラスターでは使用できません。
 
 ## 遅いクエリ {#slow-query}
 
@@ -57,7 +57,7 @@ TiDB Cloud は、パフォーマンスを分析するために[<a href="#slow-qu
 
 > **ノート：**
 >
-> Key Visualizer は[<a href="/tidb-cloud/select-cluster-tier.md#tidb-dedicated">TiDB専用</a>](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターでのみ使用できます。
+> Key Visualizer は[<a href="/tidb-cloud/select-cluster-tier.md#tidb-dedicated">TiDB Dedicated</a>](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターでのみ使用できます。
 
 主要な分析を表示するには、次の手順を実行します。
 
@@ -75,6 +75,6 @@ TiDB Cloudの Index Insight 機能は、インデックスを効果的に利用�
 
 > **ノート：**
 >
-> Index Insight は現在ベータ版であり、 [<a href="/tidb-cloud/select-cluster-tier.md#tidb-dedicated">TiDB専用</a>](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターでのみ使用できます。
+> Index Insight は現在ベータ版であり、 [<a href="/tidb-cloud/select-cluster-tier.md#tidb-dedicated">TiDB Dedicated</a>](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターでのみ使用できます。
 
 詳細については、 [<a href="/tidb-cloud/index-insight.md">インデックスの洞察</a>](/tidb-cloud/index-insight.md)を参照してください。

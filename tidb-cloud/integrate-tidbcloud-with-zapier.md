@@ -27,7 +27,7 @@ Zapier で[<a href="https://zapier.com/apps/tidb-cloud/integrations">TiDB Cloud�
 
 -   回答[<a href="https://zapier.com/app/login">ザピアアカウント</a>](https://zapier.com/app/login) ．
 -   回答[<a href="https://github.com/login">GitHub アカウント</a>](https://github.com/login) ．
--   A [<a href="https://tidbcloud.com/signup">TiDB Cloudアカウント</a>](https://tidbcloud.com/signup)と TiDBTiDB Cloud上の TiDB サーバーレス クラスター。詳細については、 [<a href="https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-tidb-cluster">TiDB Cloudクイック スタート</a>](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-tidb-cluster)を参照してください。
+-   A [<a href="https://tidbcloud.com/signup">TiDB Cloudアカウント</a>](https://tidbcloud.com/signup)と TiDBTiDB Cloud上の TiDB Serverless クラスタ。詳細については、 [<a href="https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-tidb-cluster">TiDB Cloudクイック スタート</a>](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-tidb-cluster)を参照してください。
 
 ### ステップ 1: テンプレートを取得する {#step-1-get-the-template}
 
@@ -160,16 +160,16 @@ Zapier で[<a href="https://zapier.com/apps/tidb-cloud/integrations">TiDB Cloud�
 
 | アクション           | 説明                                              | リソース                          |
 | --------------- | ----------------------------------------------- | ----------------------------- |
-| クラスタの検索         | 既存の TiDB サーバーレス クラスターまたは TiDB 専用クラスターを検索します。    | なし                            |
-| クラスタの作成         | 新しいクラスターを作成します。 TiDB サーバーレス クラスターの作成のみをサポートします。 | なし                            |
-| データベースの検索       | 既存のデータベースを検索します。                                | TiDB サーバーレスクラスター              |
-| データベースの作成       | 新しいデータベースを作成します。                                | TiDB サーバーレスクラスター              |
-| テーブルの検索         | 既存のテーブルを検索します。                                  | TiDB サーバーレス クラスターとデータベース      |
-| テーブルの作成         | 新しいテーブルを作成します。                                  | TiDB サーバーレス クラスターとデータベース      |
-| 行の作成            | 新しい行を作成します。                                     | TiDB サーバーレス クラスター、データベース、テーブル |
-| 行を更新            | 既存の行を更新します。                                     | TiDB サーバーレス クラスター、データベース、テーブル |
-| 行の検索            | ルックアップ列を介してテーブル内の行を検索します。                       | TiDB サーバーレス クラスター、データベース、テーブル |
-| 行の検索 (カスタム クエリ) | 指定したカスタム クエリを介してテーブル内の行を検索します。                  | TiDB サーバーレス クラスター、データベース、テーブル |
+| クラスタの検索         | 既存の TiDB Serverless クラスタまたは TiDB Dedicatedクラスターを検索します。    | なし                            |
+| クラスタの作成         | 新しいクラスターを作成します。 TiDB Serverless クラスタの作成のみをサポートします。 | なし                            |
+| データベースの検索       | 既存のデータベースを検索します。                                | TiDB Serverlessクラスタ              |
+| データベースの作成       | 新しいデータベースを作成します。                                | TiDB Serverlessクラスタ              |
+| テーブルの検索         | 既存のテーブルを検索します。                                  | TiDB Serverless クラスタとデータベース      |
+| テーブルの作成         | 新しいテーブルを作成します。                                  | TiDB Serverless クラスタとデータベース      |
+| 行の作成            | 新しい行を作成します。                                     | TiDB Serverless クラスタ、データベース、テーブル |
+| 行を更新            | 既存の行を更新します。                                     | TiDB Serverless クラスタ、データベース、テーブル |
+| 行の検索            | ルックアップ列を介してテーブル内の行を検索します。                       | TiDB Serverless クラスタ、データベース、テーブル |
+| 行の検索 (カスタム クエリ) | 指定したカスタム クエリを介してテーブル内の行を検索します。                  | TiDB Serverless クラスタ、データベース、テーブル |
 
 ## TiDB Cloudアプリ テンプレート {#tidb-cloud-app-templates}
 

@@ -9,14 +9,14 @@ summary: Learn how to manage the import task using the import resource.
 
 `tidbcloud_import`リソースの特徴は次のとおりです。
 
--   TiDB サーバーレス クラスターおよび TiDB 専用クラスターのインポート タスクを作成します。
+-   TiDB Serverless クラスタおよび TiDB Dedicatedクラスターのインポート タスクを作成します。
 -   ローカル ディスクまたは Amazon S3 バケットからデータをインポートします。
 -   進行中のインポートタスクをキャンセルします。
 
 ## 前提条件 {#prerequisites}
 
 -   [<a href="/tidb-cloud/terraform-get-tidbcloud-provider.md">TiDB Cloud Terraform プロバイダーを入手する</a>](/tidb-cloud/terraform-get-tidbcloud-provider.md) 。
--   [<a href="/tidb-cloud/create-tidb-cluster.md">TiDB サーバーレス クラスターまたは TiDB 専用クラスターを作成する</a>](/tidb-cloud/create-tidb-cluster.md) 。
+-   [<a href="/tidb-cloud/create-tidb-cluster.md">TiDB Serverless クラスタまたは TiDB Dedicatedクラスターを作成する</a>](/tidb-cloud/create-tidb-cluster.md) 。
 
 ## インポートタスクを作成して実行する {#create-and-run-an-import-task}
 
@@ -26,7 +26,7 @@ summary: Learn how to manage the import task using the import resource.
 
 > **ノート：**
 >
-> ローカル ファイルのインポートは、TiDB サーバーレス クラスターでのみサポートされており、TiDB 専用クラスターではサポートされていません。
+> ローカル ファイルのインポートは、TiDB Serverless クラスタでのみサポートされており、TiDB Dedicatedクラスターではサポートされていません。
 
 1.  インポート用のCSVファイルを作成します。例えば：
 

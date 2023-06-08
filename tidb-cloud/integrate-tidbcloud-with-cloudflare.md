@@ -21,7 +21,7 @@ summary: Learn how deploy Cloudflare Workers with TiDB Cloud.
 
 この記事の手順を試す前に、次のものを準備する必要があります。
 
--   TiDB CloudアカウントとTiDB Cloud上の TiDB サーバーレス クラスター。詳細については、 [<a href="/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster">TiDB Cloudクイック スタート</a>](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster)を参照してください。
+-   TiDB CloudアカウントとTiDB Cloud上の TiDB Serverless クラスタ。詳細については、 [<a href="/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster">TiDB Cloudクイック スタート</a>](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster)を参照してください。
 -   回答[<a href="https://dash.cloudflare.com/login">Cloudflare ワーカーアカウント</a>](https://dash.cloudflare.com/login) ．
 -   回答[<a href="https://cloud.prisma.io/">Prisma データ プラットフォーム アカウント</a>](https://cloud.prisma.io/) ．
 -   回答[<a href="https://github.com/login">GitHub アカウント</a>](https://github.com/login) ．

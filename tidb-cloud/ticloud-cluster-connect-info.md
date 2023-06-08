@@ -13,7 +13,7 @@ ticloud cluster connect-info [flags]
 
 > **ノート：**
 >
-> 現在、このコマンドは[<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB サーバーレス</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)クラスターの接続文字列の取得のみをサポートしています。
+> 現在、このコマンドは[<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB Serverless</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)クラスターの接続文字列の取得のみをサポートしています。
 
 ## 例 {#examples}
 

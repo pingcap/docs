@@ -39,9 +39,9 @@ TiDB Cloudにアカウントとクラスターが必要です。お持ちでな�
 
 ### TiDB Cloudのトラフィック フィルターに許可されるすべての IP アドレス {#all-ip-addresses-allowed-for-traffic-filter-in-tidb-cloud}
 
-TiDB 専用クラスターの場合は、クラスターのトラフィック フィルターですべての IP アドレス ( `0.0.0.0/0`に設定) の接続が許可されていることを確認してください。これは、Vercel デプロイメントでは[<a href="https://vercel.com/guides/how-to-allowlist-deployment-ip-address">動的IPアドレス</a>](https://vercel.com/guides/how-to-allowlist-deployment-ip-address)使用されるためです。 TiDB Cloud Vercel 統合を使用する場合、 TiDB Cloud は統合ワークフローのクラスターにトラフィック フィルター`0.0.0.0/0`自動的に追加します (存在しない場合)。
+TiDB Dedicatedクラスターの場合は、クラスターのトラフィック フィルターですべての IP アドレス ( `0.0.0.0/0`に設定) の接続が許可されていることを確認してください。これは、Vercel デプロイメントでは[<a href="https://vercel.com/guides/how-to-allowlist-deployment-ip-address">動的IPアドレス</a>](https://vercel.com/guides/how-to-allowlist-deployment-ip-address)使用されるためです。 TiDB Cloud Vercel 統合を使用する場合、 TiDB Cloud は統合ワークフローのクラスターにトラフィック フィルター`0.0.0.0/0`自動的に追加します (存在しない場合)。
 
-TiDB サーバーレス クラスターでは、デフォルトですべての IP アドレスの接続が許可されるため、トラフィック フィルターを構成する必要はありません。
+TiDB Serverless クラスタでは、デフォルトですべての IP アドレスの接続が許可されるため、トラフィック フィルターを構成する必要はありません。
 
 ## TiDB Cloud Vercel 統合経由で接続する {#connect-via-the-tidb-cloud-vercel-integration}
 
@@ -74,7 +74,7 @@ TIDB_USER
 TIDB_PASSWORD
 ```
 
-TiDB 専用クラスターの場合、ルート CA は次の変数に設定されます。
+TiDB Dedicatedクラスターの場合、ルート CA は次の変数に設定されます。
 
 ```
 TIDB_SSL_CA
@@ -92,13 +92,13 @@ DATABASE_URL
 
     > **ノート：**
     >
-    > TiDB 専用クラスターの場合は、このステップで**「どこからでもアクセスを許可」**トラフィック フィルターを設定していることを確認してください。
+    > TiDB Dedicatedクラスターの場合は、このステップで**「どこからでもアクセスを許可」**トラフィック フィルターを設定していることを確認してください。
 
 2.  Vercel ダッシュボード &gt; Vercel プロジェクト &gt;**設定**&gt;**環境変数**に移動し、TiDB クラスターの接続情報に従って[<a href="https://vercel.com/docs/concepts/projects/environment-variables#declare-an-environment-variable">各環境変数の値を宣言する</a>](https://vercel.com/docs/concepts/projects/environment-variables#declare-an-environment-variable)に移動します。
 
 ![Vercel Environment Variables](/media/tidb-cloud/integration-vercel-environment-variables.png)
 
-ここでは例として Prisma アプリケーションを使用します。以下は、TiDB サーバーレス クラスターの Prisma スキーマ ファイル内のデータソース設定です。
+ここでは例として Prisma アプリケーションを使用します。以下は、TiDB Serverless クラスタの Prisma スキーマ ファイル内のデータソース設定です。
 
 ```
 datasource db {

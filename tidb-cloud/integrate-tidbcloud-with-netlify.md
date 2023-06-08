@@ -28,9 +28,9 @@ TiDB Cloudにアカウントとクラスターが必要です。お持ちでな�
 
 ### TiDB Cloudのトラフィック フィルターに許可されるすべての IP アドレス {#all-ip-addresses-allowed-for-traffic-filter-in-tidb-cloud}
 
-TiDB 専用クラスターの場合、クラスターのトラフィック フィルターですべての IP アドレス ( `0.0.0.0/0`に設定) の接続が許可されていることを確認してください。これは、Netlify デプロイメントでは動的 IP アドレスが使用されるためです。
+TiDB Dedicatedクラスターの場合、クラスターのトラフィック フィルターですべての IP アドレス ( `0.0.0.0/0`に設定) の接続が許可されていることを確認してください。これは、Netlify デプロイメントでは動的 IP アドレスが使用されるためです。
 
-TiDB サーバーレス クラスターでは、デフォルトですべての IP アドレスの接続が許可されるため、トラフィック フィルターを構成する必要はありません。
+TiDB Serverless クラスタでは、デフォルトですべての IP アドレスの接続が許可されるため、トラフィック フィルターを構成する必要はありません。
 
 ## ステップ 1. サンプル プロジェクトと接続文字列を取得する {#step-1-get-the-example-project-and-the-connection-string}
 
@@ -49,9 +49,9 @@ TiDB サーバーレス クラスターでは、デフォルトですべての I
 
 ### TiDB Cloud接続文字列を取得する {#get-the-tidb-cloud-connection-string}
 
-TiDB サーバーレス クラスターの場合、接続文字列は[<a href="/tidb-cloud/cli-reference.md">TiDB CloudCLI</a>](/tidb-cloud/cli-reference.md)または[<a href="https://tidbcloud.com/">TiDB Cloudコンソール</a>](https://tidbcloud.com/)から取得できます。
+TiDB Serverless クラスタの場合、接続文字列は[<a href="/tidb-cloud/cli-reference.md">TiDB CloudCLI</a>](/tidb-cloud/cli-reference.md)または[<a href="https://tidbcloud.com/">TiDB Cloudコンソール</a>](https://tidbcloud.com/)から取得できます。
 
-TiDB 専用クラスターの場合、接続文字列はTiDB Cloudコンソールからのみ取得できます。
+TiDB Dedicatedクラスターの場合、接続文字列はTiDB Cloudコンソールからのみ取得できます。
 
 <SimpleTab>
 <div label="TiDB Cloud CLI">

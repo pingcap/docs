@@ -13,7 +13,7 @@ TiDB Cloud は、 RESTful インターフェイスである Chat2Query API も�
 
 > **ノート：**
 >
-> Chat2Query は[<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB サーバーレス</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)クラスターでのみ使用できます。
+> Chat2Query は[<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB Serverless</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)クラスターでのみ使用できます。
 
 ## ユースケース {#use-cases}
 

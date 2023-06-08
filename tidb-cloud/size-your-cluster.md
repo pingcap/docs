@@ -5,11 +5,11 @@ summary: Learn how to determine the size of your TiDB Cloud cluster.
 
 # TiDB サイズを決定する {#determine-your-tidb-size}
 
-このドキュメントでは、TiDB 専用クラスターのサイズを決定する方法について説明します。
+このドキュメントでは、TiDB Dedicatedクラスターのサイズを決定する方法について説明します。
 
 > **ノート：**
 >
-> [<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB サーバーレス</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)クラスターのサイズは変更できません。
+> [<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB Serverless</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)クラスターのサイズは変更できません。
 
 ## サイズ TiDB {#size-tidb}
 

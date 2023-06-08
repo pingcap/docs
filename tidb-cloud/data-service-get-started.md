@@ -9,7 +9,7 @@ summary: Learn how to use TiDB Cloud Data Service to access your data with HTTPS
 
 > **ヒント：**
 >
-> TiDB Cloud は、 TiDB サーバーレス クラスター用の Chat2Query API を提供します。有効にすると、 TiDB Cloud は**Chat2Query**と呼ばれるシステム データ アプリと Data Service に Chat2Data エンドポイントを自動的に作成します。このエンドポイントを呼び出して、AI に指示を提供して SQL ステートメントを生成および実行させることができます。
+> TiDB Cloud は、 TiDB Serverless クラスタ用の Chat2Query API を提供します。有効にすると、 TiDB Cloud は**Chat2Query**と呼ばれるシステム データ アプリと Data Service に Chat2Data エンドポイントを自動的に作成します。このエンドポイントを呼び出して、AI に指示を提供して SQL ステートメントを生成および実行させることができます。
 >
 > 詳細については、 [<a href="/tidb-cloud/use-chat2query-api.md">Chat2Query API を使ってみる</a>](/tidb-cloud/use-chat2query-api.md)を参照してください。
 
@@ -17,7 +17,7 @@ summary: Learn how to use TiDB Cloud Data Service to access your data with HTTPS
 
 ## あなたが始める前に {#before-you-begin}
 
-データ アプリを作成する前に、 [<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB サーバーレス</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)クラスターを作成していることを確認してください。お持ちでない場合は、 [<a href="/tidb-cloud/create-tidb-cluster.md">クラスターを作成する</a>](/tidb-cloud/create-tidb-cluster.md)の手順に従って作成してください。
+データ アプリを作成する前に、 [<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB Serverless</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)クラスターを作成していることを確認してください。お持ちでない場合は、 [<a href="/tidb-cloud/create-tidb-cluster.md">クラスターを作成する</a>](/tidb-cloud/create-tidb-cluster.md)の手順に従って作成してください。
 
 ## ステップ 1. データ アプリを作成する {#step-1-create-a-data-app}
 

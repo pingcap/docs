@@ -29,7 +29,7 @@ TiDB CloudはAI を活用しています。 [<a href="https://tidbcloud.com/">Ti
 
 Chat2Query では、 `--`入力してから AI に SQL クエリを自動的に生成させる指示を入力するか、SQL クエリを手動で作成して、ターミナルを使用せずにデータベースに対して SQL クエリを実行することができます。クエリ結果をテーブルで直感的に見つけたり、クエリログを簡単に確認したりできます。詳細については、 [<a href="/tidb-cloud/explore-data-with-chat2query.md">Chat2Query (ベータ版)</a>](/tidb-cloud/explore-data-with-chat2query.md)を参照してください。
 
-さらに、 TiDB Cloud は、TiDB サーバーレス クラスター用の Chat2Query API を提供します。有効にすると、 TiDB Cloud は**Chat2Query**と呼ばれるシステム データ アプリと Data Service に Chat2Data エンドポイントを自動的に作成します。このエンドポイントを呼び出して、AI に指示を提供して SQL ステートメントを生成および実行させることができます。詳細については、 [<a href="/tidb-cloud/use-chat2query-api.md">Chat2Query API を使ってみる</a>](/tidb-cloud/use-chat2query-api.md)を参照してください。
+さらに、 TiDB Cloud は、TiDB Serverless クラスタ用の Chat2Query API を提供します。有効にすると、 TiDB Cloud は**Chat2Query**と呼ばれるシステム データ アプリと Data Service に Chat2Data エンドポイントを自動的に作成します。このエンドポイントを呼び出して、AI に指示を提供して SQL ステートメントを生成および実行させることができます。詳細については、 [<a href="/tidb-cloud/use-chat2query-api.md">Chat2Query API を使ってみる</a>](/tidb-cloud/use-chat2query-api.md)を参照してください。
 
 ### クレジット {#credit}
 
@@ -119,13 +119,13 @@ Data Service のエンドポイントは、SQL ステートメントを実行す
 
 ### リクエストユニット {#request-unit}
 
-リクエスト ユニット (RU) は、データベースへの 1 回のリクエストによって消費されるリソースの量を表すために使用される測定単位です。要求によって消費される RU の量は、操作の種類や取得または変更されるデータの量などのさまざまな要因によって異なります。詳細については、 [<a href="https://www.pingcap.com/tidb-cloud-serverless-pricing-details">TiDB サーバーレスの料金詳細</a>](https://www.pingcap.com/tidb-cloud-serverless-pricing-details)を参照してください。
+リクエスト ユニット (RU) は、データベースへの 1 回のリクエストによって消費されるリソースの量を表すために使用される測定単位です。要求によって消費される RU の量は、操作の種類や取得または変更されるデータの量などのさまざまな要因によって異なります。詳細については、 [<a href="https://www.pingcap.com/tidb-cloud-serverless-pricing-details">TiDB Serverlessの料金詳細</a>](https://www.pingcap.com/tidb-cloud-serverless-pricing-details)を参照してください。
 
 ## S {#s}
 
 ### 使用制限 {#spend-limit}
 
-支出制限とは、1 か月に特定のワークロードに費やすことができる最大金額を指します。これは、TiDB サーバーレス クラスターの予算を設定できるコスト管理メカニズムです。クラスターの使用制限が 0 より大きい場合、クラスターは有料クラスターとみなされます。また、有料クラスターは、条件を満たしていれば無料クォータを持つことができます。無料クォータを持つ有料クラスターは、最初に無料クォータを消費します。
+支出制限とは、1 か月に特定のワークロードに費やすことができる最大金額を指します。これは、TiDB Serverless クラスタの予算を設定できるコスト管理メカニズムです。クラスターの使用制限が 0 より大きい場合、クラスターは有料クラスターとみなされます。また、有料クラスターは、条件を満たしていれば無料クォータを持つことができます。無料クォータを持つ有料クラスターは、最初に無料クォータを消費します。
 
 ## T {#t}
 
