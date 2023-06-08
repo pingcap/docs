@@ -11,7 +11,7 @@ summary: Learn how to manage spend limit for your TiDB Serverless clusters.
 
 支出制限とは、1 か月に特定のワークロードに費やすことができる最大金額を指します。これは、TiDB Serverless クラスタの予算を設定できるコスト管理メカニズムです。
 
-TiDB Cloudの組織ごとに、デフォルトで最大 5 つの TiDB Serverless クラスタを作成できます。さらにTiDB Serverlessrverless クラスターを作成するには、クレジット カードを追加し、使用量の制限を設定する必要があります。ただし、さらに作成する前に以前のクラスターの一部を削除した場合でも、クレジット カードがなくても新しいクラスターを作成できます。
+TiDB Cloudの組織ごとに、デフォルトで最大 5 つの TiDB Serverless クラスタを作成できます。さらにTiDB Serverless クラスターを作成するには、クレジット カードを追加し、使用量の制限を設定する必要があります。ただし、さらに作成する前に以前のクラスターの一部を削除した場合でも、クレジット カードがなくても新しいクラスターを作成できます。
 
 ## 使用量割り当て {#usage-quota}
 

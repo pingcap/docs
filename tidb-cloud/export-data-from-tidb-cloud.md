@@ -53,7 +53,7 @@ TiDB はデータをロックインしません。 TiDB から他のデータ �
 
     > **ノート：**
     >
-    > TiDB Serverless クラスタ データをエクスポートするには、 Dumpling のバージョンが少なくとも v6.5.0 であることを確認する必要があります。 Dumpling のバージョンが v6.5.0 の場合は、コマンドで`--ca=${ca_path}`を設定する必要もあります。システム上の CA ルート パスを見つけるには、 [<a href="/tidb-cloud/secure-connections-to-serverless-tier-clusters.md#root-certificate-default-paTiDB Serverlessrverlessへの TLS 接続</a>](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md#root-certificate-default-path)を参照してください。
+    > TiDB Serverless クラスタ データをエクスポートするには、 Dumpling のバージョンが少なくとも v6.5.0 であることを確認する必要があります。 Dumpling のバージョンが v6.5.0 の場合は、コマンドで`--ca=${ca_path}`を設定する必要もあります。システム上の CA ルート パスを見つけるには、 [<a href="/tidb-cloud/secure-connections-to-serverless-tier-clusters.md#root-certificate-default-path">TiDB Serverlessへの TLS 接続</a>](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md#root-certificate-default-path)を参照してください。
 
     </div>
      <div label="TiDB Dedicated">
