@@ -20,8 +20,6 @@ The whole migration has two processes:
 
 ## Import full data to TiDB
 
-This section describes how to use TiDB Lightning to import full data from an Amazon Aurora snapshot to TiDB.
-
 ### Step 1. Export and import the schema file
 
 This section describes how to export the schema file from Amazon Aurora and import it to TiDB. If you have manually created the schema in the target database, you can skip this step.
@@ -58,8 +56,9 @@ status-port = ${status-port}  # The TiDB status port. Usually the port is 10080.
 pd-addr = "${ip}:${port}"     # The cluster PD address. Usually the port is 2379.
 
 [tikv-importer]
-# "local": . Use the default Physical Import Mode ("local" backend).
+# "local": Use the default Physical Import Mode (the "local" backend).
 # During the import, the target TiDB cluster cannot provide any service.
+# For more information about import modes, see https://docs.pingcap.com/tidb/stable/tidb-lightning-overview
 backend = "local"
 
 # Set the temporary storage directory for the sorted Key-Value files.
@@ -126,10 +125,9 @@ status-port = ${status-port}  # The TiDB status port. Usually the port is 10080.
 pd-addr = "${ip}:${port}"     # The cluster PD address. Usually the port is 2379.
 
 [tikv-importer]
-# "local": Physical Import Mode. The default backend. The local backend is recommended to import large volumes of data (1 TiB or more).
-#          During the import, the target TiDB cluster cannot provide any service.
-# "tidb": Logical Import Mode. The "tidb" backend is recommended to import data less than 1 TiB.
-#         During the import, the target TiDB cluster can provide service normally.
+# "local": Use the default Physical Import Mode (the "local" backend).
+# During the import, the target TiDB cluster cannot provide any service.
+# For more information about import modes, see https://docs.pingcap.com/tidb/stable/tidb-lightning-overview
 backend = "local"
 
 # Set the temporary storage directory for the sorted Key-Value files.
