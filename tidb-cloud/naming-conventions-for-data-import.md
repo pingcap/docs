@@ -70,7 +70,7 @@ For example, the target database and table of all the following files are `impor
 
 When you import Parquet files, name the data files as follows:
 
-- `${db_name}.${table_name}${suffix}.parquet` (`${suffix}` is optional)
+- `${db_name}.${table_name}${suffix}.parquet` (`${suffix}` is optional) 
 
 For example:
 
