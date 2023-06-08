@@ -87,7 +87,7 @@ PoC 用の TiDB Dedicatedクラスターを作成するには、次の手順を�
 
 次に、テーブルやインデックスを含むデータベース スキーマを TiDB クラスターにロードできます。
 
-PoC クレジットの量には限りがあるため、クレジットの価値を最大化するには、 TiDB Cloudでの互換性テストと予備分析用に[<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB Serverlessクラスター</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)を作成することをお勧めします。
+PoC クレジットの量には限りがあるため、クレジットの価値を最大化するには、 TiDB Cloudでの互換性テストと予備分析用に[<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB Serverlessクラスタ</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)を作成することをお勧めします。
 
 TiDB Cloud はMySQL 5.7と高い互換性があります。データが MySQL と互換性がある場合、または MySQL と互換性があるように調整できる場合は、データを TiDB に直接インポートできます。
 

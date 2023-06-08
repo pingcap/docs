@@ -5,11 +5,11 @@ summary: Learn how to connect to your TiDB cluster via different methods.
 
 # TiDBクラスタに接続する {#connect-to-your-tidb-cluster}
 
-TiDB クラスターがTiDB Cloud上に作成されたら、TiDB クラスターに接続できます。 TiDB Serverless クラスターと TiDB Dedicatedクラスターのどちらを使用しているかに応じて、使用可能な接続方法は次のようになります。
+TiDB クラスターがTiDB Cloud上に作成されたら、TiDB クラスターに接続できます。 TiDB Serverless クラスタと TiDB Dedicatedクラスターのどちらを使用しているかに応じて、使用可能な接続方法は次のようになります。
 
 ## TiDB Serverless {#tidb-serverless}
 
-TiDB Serverless クラスターの場合、次のいずれかの方法でクラスターに接続できます。
+TiDB Serverless クラスタの場合、次のいずれかの方法でクラスターに接続できます。
 
 -   [<a href="/tidb-cloud/set-up-private-endpoint-connections.md">プライベートエンドポイント経由で接続する</a>](/tidb-cloud/set-up-private-endpoint-connections.md) (推奨)
 

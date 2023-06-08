@@ -15,13 +15,13 @@ TiDB Cloud、次の 2 つのクラスター層のオプションが提供され�
 
 ## TiDB Serverless (ベータ版) {#tidb-serverless-beta}
 
-TiDB Serverless (以前はDeveloper Tierと呼ばれていました) は、TiDB のフルマネージド サービスです。これはまだベータ版であるため、本番では使用しないでください。ただし、TiDB Serverless クラスターは、プロトタイプ アプリケーション、ハッカソン、学術コースなどの非運用ワークロードに使用したり、データセットに一時的なデータ サービスを提供したりするために使用できます。
+TiDB Serverless (以前はDeveloper Tierと呼ばれていました) は、TiDB のフルマネージド サービスです。これはまだベータ版であるため、本番では使用しないでください。ただし、TiDB Serverless クラスタは、プロトタイプ アプリケーション、ハッカソン、学術コースなどの非運用ワークロードに使用したり、データセットに一時的なデータ サービスを提供したりするために使用できます。
 
 ### 使用量割り当て {#usage-quota}
 
-TiDB Cloudの組織ごとに、デフォルトで最大 5 つの TiDB Serverless クラスターを作成できます。さらに TiDB Serverless クラスターを作成するには、クレジット カードを追加し、使用量を[<a href="/tidb-cloud/tidb-cloud-glossary.md#spend-limit">支出制限</a>](/tidb-cloud/tidb-cloud-glossary.md#spend-limit)に設定する必要があります。
+TiDB Cloudの組織ごとに、デフォルトで最大 5 つの TiDB Serverless クラスタを作成できます。さらに TiDB Serverless クラスタを作成するには、クレジット カードを追加し、使用量を[<a href="/tidb-cloud/tidb-cloud-glossary.md#spend-limit">支出制限</a>](/tidb-cloud/tidb-cloud-glossary.md#spend-limit)に設定する必要があります。
 
-組織内の最初の 5 つの TiDB Serverless クラスターに対して、 TiDB Cloud は各クラスターに次のように無料の使用量クォータを提供します。
+組織内の最初の 5 つの TiDB Serverless クラスタに対して、 TiDB Cloud は各クラスターに次のように無料の使用量クォータを提供します。
 
 -   行storage: 5 GiB
 -   [<a href="/tidb-cloud/tidb-cloud-glossary.md#request-unit">リクエストユニット (RU)</a>](/tidb-cloud/tidb-cloud-glossary.md#request-unit) : 月あたり 5,000 万 RU
@@ -36,7 +36,7 @@ TiDB Cloudの組織ごとに、デフォルトで最大 5 つの TiDB Serverless
 
 <!--Important: Do not update the section name "User name prefix" because this section is referenced by TiDB backend error messages.-->
 
-TiDB Serverless クラスターごとに、 TiDB Cloudは他のクラスターと区別するための一意のプレフィックスを生成します。
+TiDB Serverless クラスタごとに、 TiDB Cloudは他のクラスターと区別するための一意のプレフィックスを生成します。
 
 データベース ユーザー名を使用または設定するときは、ユーザー名に接頭辞を含める必要があります。たとえば、クラスターのプレフィックスが`3pTAoNNegb47Uc8`であると仮定します。
 

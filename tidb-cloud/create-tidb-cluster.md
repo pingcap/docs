@@ -23,7 +23,7 @@ TiDB Cloud、次の 2 つのオプションが提供されます。 TiDB クラ�
 
 -   TiDB Serverless (ベータ版)
 
-    TiDB Serverless は、TiDB のフルマネージド サービスです。これはまだベータ段階にあるため、本番では使用できません。ただし、TiDB Serverless クラスターは、プロトタイプ アプリケーション、ハッカソン、学術コースなどの非運用ワークロードに使用したり、データセットに一時的なデータ サービスを提供したりするために使用できます。
+    TiDB Serverless は、TiDB のフルマネージド サービスです。これはまだベータ段階にあるため、本番では使用できません。ただし、TiDB Serverless クラスタは、プロトタイプ アプリケーション、ハッカソン、学術コースなどの非運用ワークロードに使用したり、データセットに一時的なデータ サービスを提供したりするために使用できます。
 
 -   TiDB Dedicated
 
@@ -66,7 +66,7 @@ TiDB Cloud、次の 2 つのオプションが提供されます。 TiDB クラ�
 <SimpleTab>
 <div label="TiDB Serverless">
 
-TiDB Serverless クラスターを作成するには、次の手順を実行します。
+TiDB Serverless クラスタを作成するには、次の手順を実行します。
 
 1.  [<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページに移動します。
 
@@ -80,7 +80,7 @@ TiDB Serverless クラスターを作成するには、次の手順を実行し�
 
     > **ノート：**
     >
-    > TiDB Cloudの組織ごとに、デフォルトで最大 5 つの TiDB Serverless クラスターを作成できます。さらに TiDB Serverless クラスターを作成するには、クレジット カードを追加し、使用量を[<a href="/tidb-cloud/tidb-cloud-glossary.md#spend-limit">支出制限</a>](/tidb-cloud/tidb-cloud-glossary.md#spend-limit)に設定する必要があります。
+    > TiDB Cloudの組織ごとに、デフォルトで最大 5 つの TiDB Serverless クラスタを作成できます。さらに TiDB Serverless クラスタを作成するには、クレジット カードを追加し、使用量を[<a href="/tidb-cloud/tidb-cloud-glossary.md#spend-limit">支出制限</a>](/tidb-cloud/tidb-cloud-glossary.md#spend-limit)に設定する必要があります。
 
 6.  必要に応じてデフォルトのクラスター名を更新し、 **「作成」**をクリックします。
 

@@ -14,7 +14,7 @@ category: quick start
 
 ## ステップ 1. TiDB クラスターを作成する {#step-1-create-a-tidb-cluster}
 
-[<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB Serverless</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta) (ベータ) は、 TiDB Cloudを開始するための最良の方法です。 TiDB Serverless クラスターを作成するには、次の手順を実行します。
+[<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB Serverless</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta) (ベータ) は、 TiDB Cloudを開始するための最良の方法です。 TiDB Serverless クラスタを作成するには、次の手順を実行します。
 
 1.  TiDB Cloudアカウントをお持ちでない場合は、 [<a href="https://tidbcloud.com/free-trial">ここ</a>](https://tidbcloud.com/free-trial)をクリックしてアカウントにサインアップしてください。
 
@@ -24,13 +24,13 @@ category: quick start
 
     デフォルトでは[<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページが表示されます。
 
-3.  新規サインアップ ユーザーの場合、 TiDB Cloud はデフォルトの TiDB Serverless クラスター`Cluster0`を自動的に作成します。
+3.  新規サインアップ ユーザーの場合、 TiDB Cloud はデフォルトの TiDB Serverless クラスタ`Cluster0`を自動的に作成します。
 
     -   このデフォルトのクラスターを使用してTiDB Cloud機能をすぐに試すには、 [<a href="#step-2-try-ai-powered-chat2query-beta">ステップ 2. AI を活用した Chat2Query (ベータ版) を試す</a>](#step-2-try-ai-powered-chat2query-beta)に進みます。
-    -   新しい TiDB Serverless クラスターを独自に作成してみるには、次の操作を実行します。
+    -   新しい TiDB Serverless クラスタを独自に作成してみるには、次の操作を実行します。
 
         1.  **「クラスタの作成」**をクリックします。
-        2.  **「クラスタの作成」**ページでは、デフォルトで**サーバーレス**が選択されています。クラスターのターゲット リージョンを選択し、必要に応じてデフォルトのクラスター名を更新して、 **[作成]**をクリックします。 TiDB Serverless クラスターは約 30 秒で作成されます。
+        2.  **「クラスタの作成」**ページでは、デフォルトで**サーバーレス**が選択されています。クラスターのターゲット リージョンを選択し、必要に応じてデフォルトのクラスター名を更新して、 **[作成]**をクリックします。 TiDB Serverless クラスタは約 30 秒で作成されます。
 
 ## ステップ 2. AI を活用した Chat2Query (ベータ版) を試す {#step-2-try-ai-powered-chat2query-beta}
 
@@ -84,7 +84,7 @@ TiDB Cloud は、 TiDB Cloud をすぐに使い始めるのに役立つ、作成
 
 1.  **「？」**をクリックします。コンソールの右下隅にある をクリックし、 **[対話型チュートリアル]**をクリックします。
 2.  チュートリアル リストで、開始するチュートリアル カードを選択します。たとえば、 **Steam ゲーム統計**。
-3.  チュートリアルに使用する TiDB Serverless クラスターを選択し、 **[データセットのインポート]**をクリックします。インポート プロセスには約 1 分かかる場合があります。
+3.  チュートリアルに使用する TiDB Serverless クラスタを選択し、 **[データセットのインポート]**をクリックします。インポート プロセスには約 1 分かかる場合があります。
 4.  サンプル データがインポートされたら、画面上の指示に従ってチュートリアルを完了します。
 
 ## 次は何ですか {#what-s-next}

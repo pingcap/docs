@@ -23,9 +23,9 @@ summary: Learn how to build a simple CRUD application with TiDB and Java.
 
 TiDB クラスターの起動方法を紹介します。
 
-**TiDB Serverless クラスターを使用する**
+**TiDB Serverless クラスタを使用する**
 
-詳細な手順については、 [<a href="/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster">TiDB Serverlessクラスターを作成する</a>](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
+詳細な手順については、 [<a href="/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster">TiDB Serverlessクラスタを作成する</a>](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster)を参照してください。
 
 **ローカルクラスターを使用する**
 
@@ -35,7 +35,7 @@ TiDB クラスターの起動方法を紹介します。
 
 <CustomContent platform="tidb-cloud">
 
-[<a href="/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-serverless-cluster">TiDB Serverlessクラスターを作成する</a>](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-serverless-cluster)を参照してください。
+[<a href="/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-serverless-cluster">TiDB Serverlessクラスタを作成する</a>](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-serverless-cluster)を参照してください。
 
 </CustomContent>
 
@@ -1449,7 +1449,7 @@ JDBC を使用する場合は、クラスターに接続し、 `src/main/resourc
 
 <div label="Using Mybatis (Recommended)" value="mybatis">
 
-TiDB Serverless クラスターを使用している場合は、 `mybatis-config.xml`の`dataSource.url` 、 `dataSource.username` 、 `dataSource.password`を変更します。
+TiDB Serverless クラスタを使用している場合は、 `mybatis-config.xml`の`dataSource.url` 、 `dataSource.username` 、 `dataSource.password`を変更します。
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -1524,7 +1524,7 @@ TiDB Serverless クラスターを使用している場合は、 `mybatis-config
 
 <div label="Using Hibernate (Recommended)" value="hibernate">
 
-TiDB Serverless クラスターを使用している場合は、 `hibernate.cfg.xml`の`hibernate.connection.url` 、 `hibernate.connection.username` 、 `hibernate.connection.password`を変更します。
+TiDB Serverless クラスタを使用している場合は、 `hibernate.cfg.xml`の`hibernate.connection.url` 、 `hibernate.connection.username` 、 `hibernate.connection.password`を変更します。
 
 ```xml
 <?xml version='1.0' encoding='utf-8'?>
@@ -1590,7 +1590,7 @@ TiDB Serverless クラスターを使用している場合は、 `hibernate.cfg.
 
 <div label="Using JDBC" value="jdbc">
 
-TiDB Serverless クラスターを使用している場合は、 `JDBCExample.java`でホスト、ポート、ユーザー、およびパスワードのパラメーターを変更します。
+TiDB Serverless クラスタを使用している場合は、 `JDBCExample.java`でホスト、ポート、ユーザー、およびパスワードのパラメーターを変更します。
 
 ```java
 mysqlDataSource.setServerName("localhost");

@@ -7,7 +7,7 @@ summary: Learn how to scale your TiDB Cloud cluster.
 
 > **ノート：**
 >
-> -   [<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB Serverlessクラスター</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)をスケールすることはできません。
+> -   [<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB Serverlessクラスタ</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)をスケールすることはできません。
 > -   クラスターが**MODIFYING**ステータスにある場合、クラスターに対して新しいスケーリング操作を実行することはできません。
 
 TiDB クラスターは次の次元でスケールできます。

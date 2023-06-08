@@ -25,7 +25,7 @@ summary: Learn how to import sample data into TiDB Cloud via UI.
     **インポート**ページで:
 
     -   TiDB Dedicatedクラスターの場合は、右上隅にある**「データのインポート」**をクリックします。
-    -   TiDB Serverless クラスターの場合は、アップロード領域の上にある**[S3 からデータをインポート]**リンクをクリックします。
+    -   TiDB Serverless クラスタの場合は、アップロード領域の上にある**[S3 からデータをインポート]**リンクをクリックします。
 
     次のパラメータを入力します。
 

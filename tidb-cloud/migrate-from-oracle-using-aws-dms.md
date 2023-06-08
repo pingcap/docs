@@ -69,11 +69,11 @@ SQL スクリプトの実行が終了したら、Oracle のデータを確認し
 
 ![Oracle RDS Data](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-3.png)
 
-## ステップ 4. TiDB Serverlessクラスターを作成する {#step-4-create-a-tidb-serverless-cluster}
+## ステップ 4. TiDB Serverlessクラスタを作成する {#step-4-create-a-tidb-serverless-cluster}
 
 1.  [<a href="https://tidbcloud.com/console/clusters">TiDB Cloudコンソール</a>](https://tidbcloud.com/console/clusters)にログインします。
 
-2.  [<a href="/tidb-cloud/tidb-cloud-quickstart.md">TiDB Serverlessクラスターを作成する</a>](/tidb-cloud/tidb-cloud-quickstart.md) 。
+2.  [<a href="/tidb-cloud/tidb-cloud-quickstart.md">TiDB Serverlessクラスタを作成する</a>](/tidb-cloud/tidb-cloud-quickstart.md) 。
 
 3.  [<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページで、ターゲット クラスター名をクリックして、その概要ページに移動します。
 
@@ -133,7 +133,7 @@ AWS Schema Conversion Tool を使用してスキーマを移行する場合は�
 
 ## ステップ 9. ダウンストリーム TiDB クラスター内のデータを確認する {#step-9-check-data-in-the-downstream-tidb-cluster}
 
-[<a href="https://tidbcloud.com/console/clusters/create-cluster">TiDB Serverlessクラスター</a>](https://tidbcloud.com/console/clusters/create-cluster)に接続して`admin.github_event`テーブルデータを確認します。次のスクリーンショットに示すように、DMS はテーブル`github_events`と 10,000 行のデータを正常に移行しました。
+[<a href="https://tidbcloud.com/console/clusters/create-cluster">TiDB Serverlessクラスタ</a>](https://tidbcloud.com/console/clusters/create-cluster)に接続して`admin.github_event`テーブルデータを確認します。次のスクリーンショットに示すように、DMS はテーブル`github_events`と 10,000 行のデータを正常に移行しました。
 
 ![Check Data In TiDB](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-14.png)
 

@@ -17,7 +17,7 @@ TiDB クラスターのメトリック データを[<a href="https://newrelic.co
 
 ## 制限 {#limitation}
 
-[<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB Serverlessクラスター</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)では New Relic 統合を使用できません。
+[<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB Serverlessクラスタ</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)では New Relic 統合を使用できません。
 
 ## ステップ {#steps}
 

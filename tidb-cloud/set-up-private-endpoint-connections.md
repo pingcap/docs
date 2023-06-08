@@ -31,11 +31,11 @@ AWS PrivateLink を利用したエンドポイント接続は安全かつプラ�
 
 ## AWS でプライベート エンドポイントをセットアップする {#set-up-a-private-endpoint-with-aws}
 
-このセクションでは、AWS PrivateLink を使用して TiDB Serverless クラスターおよび TiDB Dedicatedクラスター用のプライベート エンドポイントをセットアップする方法について説明します。
+このセクションでは、AWS PrivateLink を使用して TiDB Serverless クラスタおよび TiDB Dedicatedクラスター用のプライベート エンドポイントをセットアップする方法について説明します。
 
 ### TiDB Serverless {#tidb-serverless}
 
-プライベート エンドポイント経由で TiDB Serverless クラスターに接続するには、次の手順に従います。
+プライベート エンドポイント経由で TiDB Serverless クラスタに接続するには、次の手順に従います。
 
 1.  [<a href="#step-1-choose-a-tidb-cluster">TiDB クラスターを選択する</a>](#step-1-choose-a-tidb-cluster)
 2.  [<a href="#step-2-create-an-aws-interface-endpoint">AWSインターフェースエンドポイントを作成する</a>](#step-2-create-an-aws-interface-endpoint)
@@ -43,14 +43,14 @@ AWS PrivateLink を利用したエンドポイント接続は安全かつプラ�
 
 #### ステップ 1. TiDB クラスターを選択する {#step-1-choose-a-tidb-cluster}
 
-1.  [<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページで、ターゲット TiDB Serverless クラスターの名前をクリックして、その概要ページに移動します。
+1.  [<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページで、ターゲット TiDB Serverless クラスタの名前をクリックして、その概要ページに移動します。
 2.  右上隅にある**「接続」**をクリックします。接続ダイアログが表示されます。
 3.  **[エンドポイント タイプ]**ドロップダウン リストで、 **[プライベート]**を選択します。
 4.  **サービス名**、**アベイラビリティーゾーン ID** 、および**リージョンID**をメモします。
 
     > **ノート：**
     >
-    > AWS リージョンごとにプライベート エンドポイントを 1 つ作成するだけで済み、同じリージョンにあるすべての TiDB Serverless クラスターで共有できます。
+    > AWS リージョンごとにプライベート エンドポイントを 1 つ作成するだけで済み、同じリージョンにあるすべての TiDB Serverless クラスタで共有できます。
 
 #### ステップ 2. AWS インターフェースエンドポイントを作成する {#step-2-create-an-aws-interface-endpoint}
 

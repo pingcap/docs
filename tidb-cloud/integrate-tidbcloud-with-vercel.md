@@ -41,7 +41,7 @@ TiDB Cloudにアカウントとクラスターが必要です。お持ちでな�
 
 TiDB Dedicatedクラスターの場合は、クラスターのトラフィック フィルターですべての IP アドレス ( `0.0.0.0/0`に設定) の接続が許可されていることを確認してください。これは、Vercel デプロイメントでは[<a href="https://vercel.com/guides/how-to-allowlist-deployment-ip-address">動的IPアドレス</a>](https://vercel.com/guides/how-to-allowlist-deployment-ip-address)使用されるためです。 TiDB Cloud Vercel 統合を使用する場合、 TiDB Cloud は統合ワークフローのクラスターにトラフィック フィルター`0.0.0.0/0`自動的に追加します (存在しない場合)。
 
-TiDB Serverless クラスターでは、デフォルトですべての IP アドレスの接続が許可されるため、トラフィック フィルターを構成する必要はありません。
+TiDB Serverless クラスタでは、デフォルトですべての IP アドレスの接続が許可されるため、トラフィック フィルターを構成する必要はありません。
 
 ## TiDB Cloud Vercel 統合経由で接続する {#connect-via-the-tidb-cloud-vercel-integration}
 
@@ -98,7 +98,7 @@ DATABASE_URL
 
 ![Vercel Environment Variables](/media/tidb-cloud/integration-vercel-environment-variables.png)
 
-ここでは例として Prisma アプリケーションを使用します。以下は、TiDB Serverless クラスターの Prisma スキーマ ファイル内のデータソース設定です。
+ここでは例として Prisma アプリケーションを使用します。以下は、TiDB Serverless クラスタの Prisma スキーマ ファイル内のデータソース設定です。
 
 ```
 datasource db {

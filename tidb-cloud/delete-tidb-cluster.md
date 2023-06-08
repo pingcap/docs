@@ -25,7 +25,7 @@ summary: Learn how to delete a TiDB cluster.
 
     > **ノート：**
     >
-    > [<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB Serverlessクラスター</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)の場合、バックアップおよび復元機能は使用できません。 [<a href="https://docs.pingcap.com/tidb/stable/dumpling-overview">Dumpling</a>](https://docs.pingcap.com/tidb/stable/dumpling-overview)使用して、データをバックアップとしてエクスポートできます。
+    > [<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB Serverlessクラスタ</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)の場合、バックアップおよび復元機能は使用できません。 [<a href="https://docs.pingcap.com/tidb/stable/dumpling-overview">Dumpling</a>](https://docs.pingcap.com/tidb/stable/dumpling-overview)使用して、データをバックアップとしてエクスポートできます。
 
 5.  **「結果を理解しました」をクリックします。このクラスターを削除します**。
 

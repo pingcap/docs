@@ -11,7 +11,7 @@ summary: Learn how to connect to your TiDB Cloud cluster via standard connection
 
 ## TiDB Serverless {#tidb-serverless}
 
-標準接続経由で TiDB Serverless クラスターに接続するには、次の手順を実行します。
+標準接続経由で TiDB Serverless クラスタに接続するには、次の手順を実行します。
 
 1.  [<a href="https://tidbcloud.com/console/clusters">**クラスター**</a>](https://tidbcloud.com/console/clusters)ページに移動し、ターゲット クラスターの名前をクリックして、その概要ページに移動します。
 
@@ -30,7 +30,7 @@ summary: Learn how to connect to your TiDB Cloud cluster via standard connection
 
     > **ノート：**
     >
-    > TiDB Serverless クラスターに接続するときは、ユーザー名にクラスターのプレフィックスを含め、名前を引用符で囲む必要があります。詳細については、 [<a href="/tidb-cloud/select-cluster-tier.md#user-name-prefix">ユーザー名のプレフィックス</a>](/tidb-cloud/select-cluster-tier.md#user-name-prefix)を参照してください。
+    > TiDB Serverless クラスタに接続するときは、ユーザー名にクラスターのプレフィックスを含め、名前を引用符で囲む必要があります。詳細については、 [<a href="/tidb-cloud/select-cluster-tier.md#user-name-prefix">ユーザー名のプレフィックス</a>](/tidb-cloud/select-cluster-tier.md#user-name-prefix)を参照してください。
 
 ## TiDB Dedicated {#tidb-dedicated}
 

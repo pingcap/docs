@@ -78,7 +78,7 @@ TiDB Cloudでは、次のページからクラスターの一般的に使用さ�
 
 > **ノート：**
 >
-> 現在、クラスター監視ページは[<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB Serverlessクラスター</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)では利用できません。
+> 現在、クラスター監視ページは[<a href="/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta">TiDB Serverlessクラスタ</a>](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta)では利用できません。
 
 クラスター監視ページでメトリックを表示するには、次の手順を実行します。
 

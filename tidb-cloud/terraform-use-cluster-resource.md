@@ -11,9 +11,9 @@ summary: Learn how to use the cluster resource to create and modify a TiDB Cloud
 
 `tidbcloud_cluster`リソースの特徴は次のとおりです。
 
--   TiDB Serverless クラスターと TiDB Dedicatedクラスターを作成します。
+-   TiDB Serverless クラスタと TiDB Dedicatedクラスターを作成します。
 -   TiDB Dedicatedクラスターを変更します。
--   TiDB Serverless クラスターと TiDB Dedicatedクラスターを削除します。
+-   TiDB Serverless クラスタと TiDB Dedicatedクラスターを削除します。
 
 ## 前提条件 {#prerequisites}
 
