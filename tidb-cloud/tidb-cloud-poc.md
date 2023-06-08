@@ -67,7 +67,7 @@ PoC 用の TiDB Dedicatedクラスターを作成するには、次の手順を�
 
     フォームを送信すると、 TiDB Cloudサポート チームが申請を審査し、連絡し、申請が承認されたらアカウントにクレジットを転送します。 PingCAP サポート エンジニアに連絡して、PoC 手順を支援して、PoC ができるだけスムーズに実行されるようにすることもできます。
 
-2.  PoC 用に[<a href="/tidb-cloud/select-cluster-tier.md#tidb-dedicated">TiDB Dedicatededicated</a>](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターを作成するには、 [<a href="/tidb-cloud/tidb-cloud-quickstart.md">クイックスタート</a>](/tidb-cloud/tidb-cloud-quickstart.md)を参照してください。
+2.  PoC 用に[<a href="/tidb-cloud/select-cluster-tier.md#tidb-dedicated">TiDB Dedicated</a>](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターを作成するには、 [<a href="/tidb-cloud/tidb-cloud-quickstart.md">クイックスタート</a>](/tidb-cloud/tidb-cloud-quickstart.md)を参照してください。
 
 クラスターを作成する前に、クラスターのサイジングについてキャパシティ プランニングを行うことをお勧めします。 TiDB、TiKV、またはTiFlashノードの推定数から開始し、パフォーマンス要件を満たすために後でクラスターをスケールアウトできます。詳細については、次のドキュメントを参照するか、サポート チームにお問い合わせください。
 
@@ -181,7 +181,7 @@ SQL ステートメントの場合は、データ ソースの TiDB との互換
 
 実際のワークロードを使用してTiDB Cloudをテストし、テスト結果を取得すると、PoC の全サイクルが完了しました。これらの結果は、 TiDB Cloud が期待を満たしているかどうかを判断するのに役立ちます。その一方で、 TiDB Cloudを使用するためのベスト プラクティスを蓄積してきました。
 
-TiDB Cloudが提供する他のノードstorageサイズでの展開など、新しい展開やテストのために TiDB TiDB Cloudを大規模に試したい場合は、 [<a href="/tidb-cloud/select-cluster-tier.md#tidb-dedicated">TiDB Dedicatededicated</a>](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターを作成してTiDB Cloudへのフル アクセスを取得します。
+TiDB Cloudが提供する他のノードstorageサイズでの展開など、新しい展開やテストのために TiDB TiDB Cloudを大規模に試したい場合は、 [<a href="/tidb-cloud/select-cluster-tier.md#tidb-dedicated">TiDB Dedicated</a>](/tidb-cloud/select-cluster-tier.md#tidb-dedicated)クラスターを作成してTiDB Cloudへのフル アクセスを取得します。
 
 クレジットが残り少なくなり、PoC を続行したい場合は、 [<a href="/tidb-cloud/tidb-cloud-support.md">TiDB Cloudのサポート</a>](/tidb-cloud/tidb-cloud-support.md)に連絡して相談してください。
 
