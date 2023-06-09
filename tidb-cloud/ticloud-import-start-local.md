@@ -56,7 +56,7 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 
 | Flag | Description | Required | Note |
 |---|---|---|---|
-| --no-color | Disables color in output | No | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components. |
+| --no-color | Disables color in output. | No | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components. |
 | -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command. | No | Works in both non-interactive and interactive modes. |
 
 ## Feedback

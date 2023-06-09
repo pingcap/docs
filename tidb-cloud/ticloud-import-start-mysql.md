@@ -55,7 +55,7 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 |---|---|---|---|
 | -c, --cluster-id string | Specifies the cluster ID. | Yes | Only works in non-interactive mode. |
 | -h, --help | Displays help information for this command. | No | Works in both non-interactive and interactive modes. |
-| -p, --project-id string | Specifies the project ID | Yes | Only works in non-interactive mode. |
+| -p, --project-id string | Specifies the project ID. | Yes | Only works in non-interactive mode. |
 | --skip-create-table | Skips creating the target table if it already exists in the target database. | No | Only works in non-interactive mode. |
 | --source-database string | The name of the source MySQL database. | Yes | Only works in non-interactive mode. |
 | --source-host string | The host of the source MySQL instance. | Yes | Only works in non-interactive mode. |

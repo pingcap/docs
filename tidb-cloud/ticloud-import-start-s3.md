@@ -44,7 +44,7 @@ In non-interactive mode, you need to manually enter the required flags. In inter
 | --aws-role-arn string | The specific AWS role ARN that needs to be assumed to access the Amazon S3 data source. | Yes | Only works in non-interactive mode. |
 | --backslash-escape | Whether to parse backslashes inside fields as escape characters for CSV files. The default value is `true`. | No | Only works in non-interactive mode when `--data-format CSV` is specified. |
 | -c, --cluster-id string | Specifies the cluster ID. | Yes | Only works in non-interactive mode. |
-| --data-format string | Specifies the data format. Valid values are `CSV`, `SqlFile`, `Parquet`, or `AuroraSnapshot`.  | Yes | Only works in non-interactive mode. |
+| --data-format string | Specifies the data format. Valid values are `CSV`, `SqlFile`, `Parquet`, or `AuroraSnapshot`. | Yes | Only works in non-interactive mode. |
 | --delimiter string | Specifies the delimiter used for quoting for CSV files. The default value is `"`. | No | Only works in non-interactive mode when `--data-format CSV` is specified. |
 | -h, --help | Displays help information for this command. | No | Works in both non-interactive and interactive modes. |
 | -p, --project-id string | Specifies the project ID. | Yes | Only works in non-interactive mode. |
