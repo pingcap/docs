@@ -4582,21 +4582,6 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Unit: Seconds
 - This variable is used to control the lease time of [cached tables](/cached-tables.md) with a default value of `3`. The value of this variable affects the modification to cached tables. After a modification is made to cached tables, the longest waiting time might be `tidb_table_cache_lease` seconds. If the table is read-only or can accept a high write latency, you can increase the value of this variable to increase the valid time for caching tables and to reduce the frequency of lease renewal.
 
-### tidb_tiflash_node_selection_policy
-
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Enumeration
-- Default value: "all_nodes"
-- Value options: "all_nodes", "priority_local_zone_nodes", "only_local_zone_nodes"
-- This variable is used to set the policy of TiFlash node selection when the query needs the TiFlash engine.
-  - "all_nodes" means using all the available nodes to do analytic computing, regardless of local zone or other zones.
-  - "priority_local_zone_nodes" means using the nodes in the same zone as the entry TiDB. If not all the tiflash data can be accessed, the query will involve the tiflash nodes from other zones.
-  - "only_local_zone_nodes" means using only the nodes in the same zone as the entry TiDB. If not all the tiflash data can be accessed, the query will report an error.
-- Corner cases
-  - If TiDB nodes do not set zone attributes and the policy of TiFlash node selection is not all_nodes, the policy of TiFlash node selection will be ignored, all the tiflash nodes will be used in the tiflash query. And there will be a warning message: The variable tidb_tiflash_node_selection_policy is ignored.
-  - If TiFlash nodes do not set zone attributes, these nodes will be treated as nodes not in any zone. 
-
 ### tidb_tmp_table_max_size <span class="version-mark">New in v5.3.0</span>
 
 - Scope: SESSION | GLOBAL
@@ -4889,6 +4874,21 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
     * 0: the Fine Grained Shuffle feature is enabled. If [`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610) is set to a valid value (greater than 0), then `tiflash_fine_grained_shuffle_stream_count` is set to the value of [`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610). Otherwise, it is set to 8. The actual concurrency level of the window function on TiFlash is: min(`tiflash_fine_grained_shuffle_stream_count`, the number of physical threads on TiFlash nodes).
     * Integer greater than 0: the Fine Grained Shuffle feature is enabled. The window function pushed down to TiFlash is executed in multiple threads. The concurrency level is: min(`tiflash_fine_grained_shuffle_stream_count`, the number of physical threads on TiFlash nodes).
 - Theoretically, the performance of the window function increases linearly with this value. However, if the value exceeds the actual number of physical threads, it instead leads to performance degradation.
+
+### tiflash_replica_read
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Enumeration
+- Default value: "all_replicas"
+- Value options: "all_replicas", "closest_adaptive", "closest_replicas"
+- This variable is used to set the policy of TiFlash node selection when the query needs the TiFlash engine.
+  - "all_replicas" means using all the available nodes to do analytic computing, regardless of local zone or other zones.
+  - "closest_adaptive" means using the nodes in the same zone as the entry TiDB. If not all the tiflash data can be accessed, the query will involve the tiflash nodes from other zones.
+  - "closest_replicas" means using only the nodes in the same zone as the entry TiDB. If not all the tiflash data can be accessed, the query will report an error.
+- Corner cases
+  - If TiDB nodes do not set zone attributes and the policy of TiFlash node selection is not "all_replicas", the policy of TiFlash node selection will be ignored, all the tiflash nodes will be used in the tiflash query. And there will be a warning message: The variable tidb_tiflash_node_selection_policy is ignored.
+  - If TiFlash nodes do not set zone attributes, these nodes will be treated as nodes not in any zone. 
 
 ### time_zone
 
