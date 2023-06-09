@@ -41,7 +41,7 @@ You can use your TiDB Serverless cluster for non-production workloads such as pr
 
 ### I created a Developer Tier cluster before TiDB Serverless was available. Can I still use my cluster?
 
-Yes, your Developer Tier cluster will be automatically migrated to the TiDB Serverless cluster soon. Your ability to use your cluster should not be affected, and you will have the same improved TiDB Serverless user experiences.
+Yes, your Developer Tier cluster has automatically migrated to the TiDB Serverless cluster, providing you with an improved user experience without any disruptions to your prior usage.
 
 ## Security FAQs
 
