@@ -4582,6 +4582,21 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Unit: Seconds
 - This variable is used to control the lease time of [cached tables](/cached-tables.md) with a default value of `3`. The value of this variable affects the modification to cached tables. After a modification is made to cached tables, the longest waiting time might be `tidb_table_cache_lease` seconds. If the table is read-only or can accept a high write latency, you can increase the value of this variable to increase the valid time for caching tables and to reduce the frequency of lease renewal.
 
+### tidb_tiflash_node_selection_policy
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Enumeration
+- Default value: "all_nodes"
+- Value options: "all_nodes", "priority_local_zone_nodes", "only_local_zone_nodes"
+- This variable is used to set the policy of TiFlash node selection when the query needs the TiFlash engine.
+  - "all_nodes" means using all the available nodes to do analytic computing, regardless of local zone or other zones.
+  - "priority_local_zone_nodes" means using the nodes in the same zone as the entry TiDB. If not all the tiflash data can be accessed, the query will involve the tiflash nodes from other zones.
+  - "only_local_zone_nodes" means using only the nodes in the same zone as the entry TiDB. If not all the tiflash data can be accessed, the query will report an error.
+- Corner cases
+  - If TiDB nodes do not set zone attributes and the policy of TiFlash node selection is not all_nodes, the policy of TiFlash node selection will be ignored, all the tiflash nodes will be used in the tiflash query. And there will be a warning message: The variable tidb_tiflash_node_selection_policy is ignored.
+  - If TiFlash nodes do not set zone attributes, these nodes will be treated as nodes not in any zone. 
+
 ### tidb_tmp_table_max_size <span class="version-mark">New in v5.3.0</span>
 
 - Scope: SESSION | GLOBAL
@@ -5054,18 +5069,3 @@ Internally, the TiDB parser transforms the `SET TRANSACTION ISOLATION LEVEL [REA
 - Type: Boolean
 - Default value: `ON`
 - This variable controls whether to use the high precision mode when computing the window functions.
-
-### tidb_tiflash_node_selection_policy
-
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Enumeration
-- Default value: "all_nodes"
-- Value options: "all_nodes", "priority_local_zone_nodes", "only_local_zone_nodes"
-- This variable is used to set the policy of TiFlash node selection when the query needs the TiFlash engine.
-  - "all_nodes" means using all the available nodes to do analytic computing, regardless of local zone or other zones.
-  - "priority_local_zone_nodes" means using the nodes in the same zone as the entry TiDB. If not all the tiflash data can be accessed, the query will involve the tiflash nodes from other zones.
-  - "only_local_zone_nodes" means using only the nodes in the same zone as the entry TiDB. If not all the tiflash data can be accessed, the query will report an error.
-- Corner cases
-  - If TiDB nodes do not set zone attributes and the policy of TiFlash node selection is not all_nodes, the policy of TiFlash node selection will be ignored, all the tiflash nodes will be used in the tiflash query. And there will be a warning message: The variable tidb_tiflash_node_selection_policy is ignored.
-  - If TiFlash nodes do not set zone attributes, these nodes will be treated as nodes not in any zone. 
