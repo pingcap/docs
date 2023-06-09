@@ -7,7 +7,7 @@ summary: Learn how to connect to your TiDB Dedicated cluster via different metho
 
 After your TiDB Dedicated cluster is created on TiDB Cloud, you can connect to it via one of the following methods:
 
-- [Connect via standard connection](/tidb-cloud/connect-via-standard-connection.md#tidb-dedicated)
+- [Connect via standard connection](/tidb-cloud/connect-via-standard-connection.md)
 
     The standard connection exposes a public endpoint with traffic filters, so you can connect to your TiDB cluster via a SQL client from your laptop. You can connect to your TiDB clusters using TLS, which ensures the security of data transmission from your applications to TiDB clusters.
 
