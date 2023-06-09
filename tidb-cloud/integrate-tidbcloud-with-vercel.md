@@ -31,7 +31,7 @@ One Vercel project can only connect to one TiDB Cloud cluster. To change the int
 
 ### A TiDB Cloud account and a TiDB cluster
 
-You are expected to have an account and a cluster in TiDB Cloud. If you do not have any, refer to the following docs to create one:
+You are expected to have an account and a cluster in TiDB Cloud. If you do not have any, refer to the following to create one:
 
 - [Create a TiDB Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
 - [Create a TiDB Dedicated cluster](/tidb-cloud/create-tidb-cluster.md)

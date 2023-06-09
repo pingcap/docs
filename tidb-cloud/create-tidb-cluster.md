@@ -40,7 +40,7 @@ To create a TiDB Dedicated cluster, take the following steps:
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page of your project.
 
-    > **Note:**
+    > **Tip:**
     >
     > If you have multiple projects, you can view the project list and switch to another project from the ☰ hover menu in the upper-left corner.
 
@@ -82,3 +82,7 @@ After your cluster is created, take the following steps to configure the securit
 1. In the upper-right corner of your cluster overview page, click **...** and select **Security Settings**.
 
 2. Set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
+
+## What's next
+
+After your cluster is created on TiDB Cloud, you can connect to it via the methods provided in [Connect to Your TiDB Dedicated Cluster](/tidb-cloud/connect-via-standard-connection-serverless.md).

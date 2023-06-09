@@ -1,6 +1,6 @@
 ---
 title: Connect to TiDB Dedicated via VPC Peering
-summary: Learn how to connect to TiDB Cloud via VPC peering.
+summary: Learn how to connect to TiDB Dedicated via VPC peering.
 ---
 
 # Connect to TiDB Dedicated via VPC Peering
