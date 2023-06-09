@@ -39,7 +39,7 @@ To create a TiDB Serverless cluster, take the following steps:
 
 ## What's next
 
-After your cluster is created, follow the instructions in [Connect via Standard Connection](/tidb-cloud/connect-via-standard-connection-serverless.md) to create a password for your cluster.
+After your cluster is created, follow the instructions in [Connect to TiDB Serverless via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md) to create a password for your cluster.
 
 > **Note:**
 >
