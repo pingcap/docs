@@ -522,6 +522,36 @@ success!
 > - The argument of the `-p` option specifies the PD endpoints without the `http` prefix. Specifying the PD endpoints is to query whether the specified `region_id` is validated or not.
 > - You need to run this command for all stores where specified Regions' peers are located.
 
+### Flashback
+
+TiDB v6.4.0 introduces the [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md) syntax, You can use it to restore the entire cluster to a specific point in time. For ease of use off TiDB, tikv-ctl provides the `flashback` command. This command supports Flashback operations at the TiKV level.
+
+> **Note:**
+>
+> - Before executing the `flashback` command, you need to pass `. /pd-ctl config set halt-scheduling true` command [stop PD scheduling] (pd-control.md#config-show--set-option-value--placement-rules) before executing the `flashback` command.
+> - This command writes the old data of a specific point in time with the latest timestamp, and will not delete the current data. So before using this feature, you need to ensure that there is enough storage space for the old data and the current data.
+> - This command only supports local mode. It prints `flashback all stores success!` when successfully run.
+
+The following example restores the entire cluster's data to the 430315739761082369 time point:
+
+```shell
+tikv-ctl --pd 127.0.0.1:2379 flashback -v 430315739761082369
+```
+
+The output is as follows:
+
+```
+flashback all stores success!
+```
+
+The meaning of each option in the above command is as follows:
+
+- `--pd` is used to specify the access address of the PD.
+- `-v` is used to specify the point in time of the Flashback target.
+- By default, this command will Flashback the entire cluster. If you need to flashback specified Regions or key range, you can:
+    - Use the `-r` option to specify the Regions, Multiple Regions are separated by `,`.
+    - Use `--start` and `--end` to specify all Regions within a key range (no range limit by default, Hex format).
+
 ### Ldb Command
 
 The `ldb` command line tool offers multiple data access and database administration commands. Some examples are listed below. For more information, refer to the help message displayed when running `tikv-ctl ldb` or check the documents from RocksDB.
