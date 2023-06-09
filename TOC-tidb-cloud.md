@@ -222,7 +222,7 @@
   - Network Access Control
     - TiDB Serverless
       - [Connect via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
-      - [TLS Connections to TiDB Serverless](/tidb-cloud/secure-connections-to-serverless-tier-clusters-serverless.md)
+      - [TLS Connections to TiDB Serverless](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md)
     - TiDB Dedicated
       - [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md)
       - [Connect via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections.md)
