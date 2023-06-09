@@ -1,7 +1,7 @@
 ---
 title: Optimizer Fix Controls
 summary: Learn about the Optimizer Fix Controls and how to use tidb_opt_fix_control to control TiDB optimizer in a more fine-grained way
-aliases: ['/docs-cn/dev/optimizer-fix-controls/']
+aliases: ['/docs/dev/optimizer-fix-controls/']
 ---
 
 # Optimizer Fix Controls
