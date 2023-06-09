@@ -425,7 +425,6 @@ In the current version, TiFlash uses the `start_ts` of a query as the unique key
 
 - All queries in the same transaction have the same `start_ts`.
 - When you use [`tidb_snapshot`](/system-variables.md#tidb_snapshot) to read data at a specific historical time point, the same time point is manually specified.
-- When [Stale Read](/stale-read.md) is enabled, the same time point is manually specified.
 
 When `start_ts` cannot uniquely represent the MPP query, if TiFlash detects that different queries have the same `start_ts` at a given time, TiFlash might report an error. Typical error cases are as follows:
 
