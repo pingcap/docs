@@ -4887,7 +4887,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
   - "closest_adaptive" means using the nodes in the same zone as the entry TiDB. If not all the tiflash data can be accessed, the query will involve the tiflash nodes from other zones.
   - "closest_replicas" means using only the nodes in the same zone as the entry TiDB. If not all the tiflash data can be accessed, the query will report an error.
 - Corner cases
-  - If TiDB nodes do not set zone attributes and the policy of TiFlash node selection is not "all_replicas", the policy of TiFlash node selection will be ignored, all the tiflash nodes will be used in the tiflash query. And there will be a warning message: The variable tidb_tiflash_node_selection_policy is ignored.
+  - If TiDB nodes do not set zone attributes and the policy of TiFlash node selection is not "all_replicas", the policy of TiFlash node selection will be ignored, all the tiflash nodes will be used in the tiflash query. And there will be a warning message: The variable tiflash_replica_read is ignored.
   - If TiFlash nodes do not set zone attributes, these nodes will be treated as nodes not in any zone. 
 
 ### time_zone
