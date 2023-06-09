@@ -10,6 +10,8 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 ## June 6, 2023
 
+**General changes**
+
 - Introduce [Index Insight (beta)](/tidb-cloud/index-insight.md) for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters, which optimizes query performance by providing index recommendations for slow queries.
 
     With Index Insight, you can improve the overall application performance and efficiency of your database operations in the following ways:
@@ -32,6 +34,8 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
     To get started with TiDB Playground, go to the [**TiDB Playground**](https://play.tidbcloud.com/?utm_source=docs&utm_medium=tidb_cloud_release_notes) page, select a feature you want to explore, and begin your exploration.
 
 ## June 5, 2023
+
+**General changes**
 
 - Support connecting your [Data App](/tidb-cloud/tidb-cloud-glossary.md#data-app) to GitHub.
 
