@@ -22,13 +22,13 @@ The whole migration has two processes:
 
 ### Step 1. Export and import the schema file
 
-This section describes how to export the schema file from Amazon Aurora and import it to TiDB. If you have manually created the schema in the target database, you can skip this step.
+This section describes how to export the schema file from Amazon Aurora and import it to TiDB. If you have manually created the table in the target database, you can skip this step.
 
 #### 1.1 Export the schema file from Amazon Aurora
 
 Because the snapshot file from Amazon Aurora does not contain the DDL statements, you need to export the schema using Dumpling and create the schema in the target database using TiDB Lightning.
 
-Export the schema using Dumpling by running the following command. The command includes the `--filter` parameter to only export the desired table schema. For more information about the parameters, see [Dumpling overview](/dumpling-overview.md).
+Export the schema using Dumpling by running the following command. The command includes the `--filter` parameter to only export the desired table schema. For more information about the parameters, see [Option list of Dumpling](/dumpling-overview.md#option-list-of-dumpling).
 
 ```shell
 export AWS_ACCESS_KEY_ID=${access_key}
@@ -42,7 +42,7 @@ To get access to Amazon S3, you can pass the secret access key and access key of
 
 #### 1.2 Create the TiDB Lightning configuration file for the schema file
 
-Create a new `tidb-lightning-schema.toml` file, copy the following contents into the file, and replace the corresponding contents.
+Create a new `tidb-lightning-schema.toml` file, copy the following content into the file, and replace the corresponding content.
 
 ```toml
 [tidb]
@@ -68,7 +68,7 @@ backend = "local"
 sorted-kv-dir = "/mnt/ssd/sorted-kv-dir"
 
 [mydumper]
-# The directory of the schema file exported from Amazon Aurora
+# Set the directory of the schema file exported from Amazon Aurora
 data-source-dir = "s3://my-bucket/schema-backup"
 ```
 
@@ -111,7 +111,7 @@ This section describes how to export an Amazon Aurora snapshot to Amazon S3 and 
 
 #### 2.2 Create the TiDB Lightning configuration file for the data file
 
-Create a new `tidb-lightning-data.toml` configuration file, copy the following contents into the file, and replace the corresponding contents.
+Create a new `tidb-lightning-data.toml` configuration file, copy the following content into the file, and replace the corresponding content.
 
 ```toml
 [tidb]
@@ -137,7 +137,7 @@ backend = "local"
 sorted-kv-dir = "/mnt/ssd/sorted-kv-dir"
 
 [mydumper]
-# The directory of the snapshot file exported from Amazon Aurora
+# Set the directory of the snapshot file exported from Amazon Aurora
 data-source-dir = "${s3_path}"  # eg: s3://my-bucket/sql-backup
 
 [[mydumper.files]]
