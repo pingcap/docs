@@ -94,7 +94,7 @@ Before TiFlash replicas are added, each TiKV instance performs a full table scan
    ```sql
    SET CONFIG tikv `server.snap-max-write-bytes-per-sec` = '300MiB';
    ```
-   
+
    After adjusting the preceding configurations, you cannot observe the acceleration for now, as the replication speed is still restricted by the PD limit globally.
 
 2. Use [PD Control](https://docs.pingcap.com/tidb/stable/pd-control) to progressively ease the new replica speed limit.
@@ -418,6 +418,20 @@ TiFlash provides the following two global/session variables to control whether t
 
 - [`tidb_broadcast_join_threshold_size`](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50): The unit of the value is bytes. If the table size (in the unit of bytes) is less than the value of the variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used.
 - [`tidb_broadcast_join_threshold_count`](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50): The unit of the value is rows. If the objects of the join operation belong to a subquery, the optimizer cannot estimate the size of the subquery result set, so the size is determined by the number of rows in the result set. If the estimated number of rows in the subquery is less than the value of this variable, the Broadcast Hash Join algorithm is used. Otherwise, the Shuffled Hash Join algorithm is used.
+
+### Known issues of MPP
+
+In the current version, TiFlash uses the `start_ts` of a query as the unique key of the query. In most cases, the `start_ts` of each query can uniquely identify a query, but in the following cases, different queries have the same `start_ts`:
+
+- All queries in the same transaction have the same `start_ts`.
+- When you use [`tidb_snapshot`](/system-variables.md#tidb_snapshot) to read data at a specific historical time point, the same time point is manually specified.
+
+When `start_ts` cannot uniquely represent the MPP query, if TiFlash detects that different queries have the same `start_ts` at a given time, TiFlash might report an error. Typical error cases are as follows:
+
+- When multiple queries with the same `start_ts` are sent to TiFlash at the same time, you might encounter the `task has been registered` error.
+- When multiple simple queries with `LIMIT` are executed continuously in the same transaction, once the `LIMIT` condition is met, TiDB sends a cancel request to TiFlash to cancel the query. This request also uses `start_ts` to identify the query to be canceled. If there are other queries with the same `start_ts` in TiFlash, these queries might be canceled by mistake. An example of this issue can be found in [#43426](https://github.com/pingcap/tidb/issues/43426).
+
+This issue is fixed in TiDB v6.6.0. It is recommended to use the [latest LTS version](https://docs.pingcap.com/tidb/stable).
 
 ## Notes
 
