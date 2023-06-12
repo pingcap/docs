@@ -4,13 +4,13 @@ title: Changefeed
 
 # Changefeed
 
-TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data services. Currently, TiDB Cloud supports streaming data to Apache Kafka, MySQL, and TiDB Cloud.
+TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data services. Currently, TiDB Cloud supports streaming data to Apache Kafka, MySQL, TiDB Cloud and Cloud Storage.
 
 > **Note:**
 >
 > To use the changefeed feature, make sure that your TiDB cluster version is v6.4.0 or later.
 >
-> Currently, TiDB Cloud only allows up to 10 changefeeds per cluster.
+> Currently, TiDB Cloud only allows up to 5 changefeeds per cluster.
 >
 > For [TiDB Serverless clusters](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta), the changefeed feature is unavailable.
 
