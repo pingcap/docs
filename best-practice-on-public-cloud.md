@@ -25,7 +25,7 @@ Different cloud providers offer various disk types with different performance ch
 
 ### Choose appropriate disks for Raft Engine on public clouds
 
-This section outlines best practices for choosing appropriate disks for Raft-Engine on different public clouds. Depending on performance requirements, two types of recommended disks are available.
+This section outlines best practices for choosing appropriate disks for Raft Engine on different public clouds. Depending on performance requirements, two types of recommended disks are available.
 
 #### Middle-range disk
 
@@ -33,7 +33,7 @@ The following are recommended middle-range disks for different public clouds:
 
 - On AWS, [gp3](https://aws.amazon.com/ebs/general-purpose/) is recommended. The gp3 volume offers a free allocation of 3000 IOPS and 125 MB/s throughput, regardless of the volume size, which is usually sufficient for the Raft Engine.
 
-- On GCP, [pd-ssd](https://cloud.google.com/compute/docs/disks#disk-types/) is recommended. The IOPS and MBPS vary depending on the allocated disk size. To meet performance requirements, it is recommended to allocate 200 GB for Raft-Engine. Although Raft Engine does not require such a large space, it ensures optimal performance.
+- On GCP, [pd-ssd](https://cloud.google.com/compute/docs/disks#disk-types/) is recommended. The IOPS and MBPS vary depending on the allocated disk size. To meet performance requirements, it is recommended to allocate 200 GB for Raft Engine. Although Raft Engine does not require such a large space, it ensures optimal performance.
 
 - On Azure, [Premium SSD v2](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#premium-ssd-v2) is recommended. Similar to AWS gp3, Premium SSD v2 provides a free allocation of 3000 IOPS and 125 MB/s throughput, regardless of the volume size, which is usually sufficient for Raft Engine.
 
