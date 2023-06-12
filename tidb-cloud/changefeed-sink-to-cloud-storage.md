@@ -25,7 +25,7 @@ This document describes how to create a changefeed to stream data from TiDB Clou
 
 2. Click **Create Changefeed**, and select **Amazon S3** as the destination.
 
-3. Fill in the fields in the **S3 Endpoint** area: `S3 URI`, `Access Key ID` and  `Secret Access Key`.
+3. Fill in the fields in the **S3 Endpoint** area: `S3 URI`, `Access Key ID`, and `Secret Access Key`.
 
     ![create changefeed to sink to s3](/media/tidb-cloud/changefeed/sink-to-s3-01-create-changefeed.jpg)
 
