@@ -142,7 +142,7 @@ The purpose of the watching script is to detect maintenance events initiated by 
 
 By utilizing the watching script and taking necessary actions during maintenance events, TiDB clusters can better handle live migration events on Google Cloud and ensure smoother operations with minimal impact on query processing and response times.
 
-## PD tuning for large deployment cluster
+## PD tuning for a large-scale, high queries per second (QPS) TiDB cluster.
 
 In a TiDB cluster, a single active Placement Driver (PD) server is used to handle crucial tasks such as serving the TSO (Timestamp Oracle) and processing requests. However, relying on a single active PD server can limit the scalability of TiDB clusters.
 
