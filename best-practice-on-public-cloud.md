@@ -193,17 +193,3 @@ These improvements indicate that the tuning adjustments have successfully reduce
 
 ![pd-server-cpu](/media/performance/public-cloud-best-practice/after_tuning_cpu.png)
 ![pd-server-metrics](/media/performance/public-cloud-best-practice/after_tuning_metrics.png)
-
-
-# Conclusion
-By following these best practices, TiDB deployments on public cloud platforms can achieve exceptional performance, cost efficiency, reliability, and scalability. 
-
-The key practices in this document include the following:
-
-- Select an appropriate dedicated disk type and size for optimal storage performance with Raft Engine
-- Tune TiKV's compaction settings to improve resource utilization and reduce IO throughput
-- Minimize cross-AZ read traffic to optimize costs
-- Mitigate performance impact during maintenance events by leveraging notifications and taking appropriate actions
-- Tuning the PD server to address scalability bottlenecks
-
-In summary, whether you are deploying TiDB on AWS, GCP, Azure, or any other public cloud provider, these best practices serve as a solid foundation for success.
