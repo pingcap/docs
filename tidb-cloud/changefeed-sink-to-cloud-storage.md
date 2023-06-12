@@ -29,7 +29,7 @@ This document describes how to create a changefeed to stream data from TiDB Clou
 
     ![create changefeed to sink to s3](/media/tidb-cloud/changefeed/sink-to-s3-01-create-changefeed.jpg)
 
-4. Click **Next** to establish the connection from the dedicated TiDB cluster to Amazaon S3, then test and verify if the connection is successful.
+4. Click **Next** to establish the connection from the TiDB Dedicated cluster to Amazaon S3. TiDB Cloud will automatically test and verify if the connection is successful.
 
     - If yes, you are directed to the next step of configuration.
     - If not, a connectivity error is displayed, and you need to handle the error. After the error is resolved, click **Next** again.
