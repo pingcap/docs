@@ -22,7 +22,7 @@ To view the metrics on the Metrics page, take the following steps:
 
 ## Metrics retention policy
 
-- For TiDB Dedicated clusters and Serverless clusters, the metrics data is kept for 7 days.
+For TiDB Dedicated clusters and TiDB Serverless clusters, the metrics data is kept for 7 days.
 
 ## Metrics for TiDB Dedicated clusters
 
