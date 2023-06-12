@@ -49,8 +49,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
     + TiCDC
 
         <!--tw:hfxsd-->
-        - Optimize the way TiCDC handles DDLs so that DDLs do not block the use of other unrelated DML Events, and reduce memory usage [#8106](https://github.com/pingcap/tiflow/issues/8106) [asddongmen](https://github.com/asddongmen)
-        - Optimize the Decoder interface and add a new method `AddKeyValue` [#8861](https://github.com/pingcap/tiflow/issues/8861) [3AceShowHand](https://github.com/3AceShowHand)
+        - Optimize the way TiCDC handles DDLs so that DDLs do not block the use of other unrelated DML Events, and reduce memory usage [#8106](https://github.com/pingcap/tiflow/issues/8106) @[asddongmen](https://github.com/asddongmen)
+        - Optimize the Decoder interface and add a new method `AddKeyValue` [#8861](https://github.com/pingcap/tiflow/issues/8861) @[3AceShowHand](https://github.com/3AceShowHand)
         - Optimize the directory structure when DDL events occur in the scenario of replicating data to object storage [#8890](https://github.com/pingcap/tiflow/issues/8890) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - Support replicating data to the Kafka-on-Pulsar downstream [#8892](https://github.com/pingcap/tiflow/issues/8892) @[hi-rustin](https://github.com/hi-rustin)
 
@@ -137,9 +137,9 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
     + TiCDC
 
         <!--tw:hfxsd-->
-        - Fix an OOM issue that might occur when there are as many as 50,000 tables [#7872](https://github.com/pingcap/tiflow/issues/7872) [sdojjy](https://github.com/sdojjy)
-        - Fix the issue that TiCDC gets stuck when an OOM occurs in upstream TiDB [#8561](https://github.com/pingcap/tiflow/issues/8561) [overvenus](https://github.com/overvenus)
-        - Fix the issue that TiCDC gets stuck when PD fails such as network isolation or PD Owner node reboot [#8808](https://github.com/pingcap/tiflow/issues/8808) [#8812](https://github.com/pingcap/tiflow/issues/8812) [#8877](https://github.com/pingcap/tiflow/issues/8877) [asddongmen](https://github.com/asddongmen)
+        - Fix an OOM issue that might occur when there are as many as 50,000 tables [#7872](https://github.com/pingcap/tiflow/issues/7872) @[sdojjy](https://github.com/sdojjy)
+        - Fix the issue that TiCDC gets stuck when an OOM occurs in upstream TiDB [#8561](https://github.com/pingcap/tiflow/issues/8561) @[overvenus](https://github.com/overvenus)
+        - Fix the issue that TiCDC gets stuck when PD fails such as network isolation or PD Owner node reboot [#8808](https://github.com/pingcap/tiflow/issues/8808) [#8812](https://github.com/pingcap/tiflow/issues/8812) [#8877](https://github.com/pingcap/tiflow/issues/8877) @[asddongmen](https://github.com/asddongmen)
         - Fix the issue of TiCDC time zone setting [#8798](https://github.com/pingcap/tiflow/issues/8798) @[hi-rustin](https://github.com/hi-rustin)
         - Fix the issue that checkpoint lag increases when one of the upstream TiKV nodes crashes [#8858](https://github.com/pingcap/tiflow/issues/8858) @[hicqu](https://github.com/hicqu)
 
