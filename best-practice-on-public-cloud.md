@@ -5,7 +5,7 @@ summary: This document introduces the best practice for TiDB to deploy on public
 
 # TiDB Best Practices on Public Cloud
 
-Public cloud infrastructure has become an increasingly popular choice for deploying and managing TiDB. However, deploying TiDB on public cloud requires careful consideration of several critical factors, including performance tuning, cost optimization, reliability, and scalability. 
+Public cloud infrastructure has become an increasingly popular choice for deploying and managing TiDB. However, deploying TiDB on public cloud requires careful consideration of several critical factors, including performance tuning, cost optimization, reliability, and scalability.
 
 This document covers various essential best practices for deploying TiDB on public cloud, such as using a dedicated disk for Raft Engine, reducing compaction IO flow in KV RocksDB, optimizing costs for cross-AZ traffic, mitigating GCP live migration events, and fine-tuning the PD server in large clusters. By adhering to these best practices, your TiDB deployment on public cloud can achieve optimized performance, cost efficiency, reliability, and scalability.
 
@@ -60,7 +60,7 @@ By using a dedicated 20GB [gp3](https://aws.amazon.com/ebs/general-purpose/) Raf
 
 | Metric | Shared Raft Engine disk | Dedicated Raft Engine disk | Difference (%) |
 | ------------- | ------------- |------------- |------------- |
-| QPS (K/s)| 8.0 | 9.4 | 17.5| 
+| QPS (K/s)| 8.0 | 9.4 | 17.5|
 | AVG Insert Latency (ms)| 11.3 | 9.2 | -18.7 |
 | P99 Insert Latency (ms)| 29.4 | 16.0 | -45.6|
 
@@ -73,8 +73,8 @@ By using a dedicated 32GB [ultra disk](https://learn.microsoft.com/en-us/azure/v
 
 | Metric | Workload | Shared Raft Engine disk | Dedicated Raft Engine disk | Difference (%) |
 | ------------- | ------------- | ------------- |------------- |------------- |
-| QPS (K/s) | Sysbench `oltp_read_write` | 60.7 | 71.5 | 17.8| 
-| QPS (K/s) | TPC-C | 23.9 | 30.5 | 27.6| 
+| QPS (K/s) | Sysbench `oltp_read_write` | 60.7 | 71.5 | 17.8|
+| QPS (K/s) | TPC-C | 23.9 | 30.5 | 27.6|
 | AVG Latency (ms)| Sysbench `oltp_read_write` |  4.5 | 3.8 | -15.6 |
 | AVG Latency (ms)| TPC-C |  3.9 | 3.0 | -23.1 |
 
@@ -98,10 +98,9 @@ tikv:
       storageSize: 512Gi
 ```
 
-
 ## Reduce compaction IO flow in KV RocksDB
 
-As the storage engine of TiKV, [RocksDB](https://rocksdb.org/) is used to store user data. Because the provisioned IO throughput on cloud EBS is usually limited due to cost considerations, RocksDB might exhibit high write amplification, and the disk throughput might become the bottleneck for the workload. As a result, the total number of pending compaction bytes grows over time and triggers flow control, which indicates that TiKV lacks sufficient disk bandwidth to keep up with the foreground write flow. 
+As the storage engine of TiKV, [RocksDB](https://rocksdb.org/) is used to store user data. Because the provisioned IO throughput on cloud EBS is usually limited due to cost considerations, RocksDB might exhibit high write amplification, and the disk throughput might become the bottleneck for the workload. As a result, the total number of pending compaction bytes grows over time and triggers flow control, which indicates that TiKV lacks sufficient disk bandwidth to keep up with the foreground write flow.
 
 To alleviate the bottleneck caused by limited disk throughput, you can improve performance by increasing the compression level for RocksDB and reducing the disk throughput. For example, you can refer to the following example to increase all the compression levels of the default column family to `zstd`.
 
@@ -114,7 +113,7 @@ compression-per-level = ["zstd", "zstd", "zstd", "zstd", "zstd", "zstd", "zstd"]
 
 Deploying TiDB across multiple availability zones (AZs) can lead to increased costs due to cross-AZ data transfer fees. To optimize costs, it is important to reduce cross-AZ network traffic.
 
-To reduce cross-AZ read traffic, you can enable the [Follower Read feature](/follower-read.md), which allows TiDB to prioritize selecting replicas in the same availability zone. To enable this feature, set the [`tidb_replica_read`](/system-variables.md#tidb_replica_read-new-in-v40) variable to `closest-replicas` or `closest-adaptive`. 
+To reduce cross-AZ read traffic, you can enable the [Follower Read feature](/follower-read.md), which allows TiDB to prioritize selecting replicas in the same availability zone. To enable this feature, set the [`tidb_replica_read`](/system-variables.md#tidb_replica_read-new-in-v40) variable to `closest-replicas` or `closest-adaptive`.
 
 To reduce cross-AZ write traffic in TiKV instances, you can enable the gRPC compression feature, which compresses data before transmitting it over the network. The following configuration example shows how to enable gzip gRPC compression for TiKV.
 
@@ -126,7 +125,6 @@ server_configs:
 
 To reduce network traffic caused by the data shuffle of TiFlash MPP tasks, it is recommended to deploy multiple TiFlash instances in the same availability zones (AZs). Starting from v6.6.0, [compression exchange](/explain-mpp.md#mpp-version-and-exchange-data-compression) is enabled by default, which reduces the network traffic caused by MPP data shuffle.
 
-
 ## Mitigate live migration maintenance events on Google Cloud
 
 The [Live Migration feature](https://cloud.google.com/compute/docs/instances/live-migration-process) of Google Cloud enables VMs to be seamlessly migrated between hosts without causing downtime. However, these migration events, although infrequent, can significantly impact the performance of VMs, including those running in a TiDB cluster. During such events, affected VMs might experience reduced performance, leading to longer query processing times in the TiDB cluster.
@@ -134,7 +132,7 @@ The [Live Migration feature](https://cloud.google.com/compute/docs/instances/liv
 To detect live migration events initiated by Google Cloud and mitigate the performance impact of these events, TiDB provides a [watching script](https://github.com/PingCAP-QE/tidb-google-maintenance) based on Google's metadata [example](https://github.com/GoogleCloudPlatform/python-docs-samples/blob/master/compute/metadata/main.py). You can deploy this script on TiDB, TiKV, and PD nodes to detect maintenance events. When a maintenance event is detected, appropriate actions can be taken automatically as follows to minimize disruption and optimize the cluster behavior:
 
 - TiDB: Takes the TiDB node offline by cordoning it and deleting the TiDB pod. This assumes that the node pool of the TiDB instance is set to auto-scale and dedicated to TiDB. Other pods running on the node might experience interruptions, and the cordoned node is expected to be reclaimed by the auto-scaler.
-- TiKV: Ecivts leaders on the affected TiKV store during maintenance.
+- TiKV: Evicts leaders on the affected TiKV store during maintenance.
 - PD: Resigns a leader if the current PD instance is the PD leader.
 
 It is important to note that this watching script is specifically designed for TiDB clusters deployed using the [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/dev/tidb-operator-overview), which offers enhanced management functionalities for TiDB in Kubernetes environments.
@@ -145,8 +143,8 @@ By utilizing the watching script and taking necessary actions during maintenance
 
 In a TiDB cluster, a single active Placement Driver (PD) server is used to handle crucial tasks such as serving the TSO (Timestamp Oracle) and processing requests. However, relying on a single active PD server can limit the scalability of TiDB clusters.
 
-
 ### Symptoms of PD limitation
+
 The following diagrams show the symptoms of a large-scale TiDB cluster consisting of three PD servers, each equipped with 56 CPUs. From these diagrams, it is observed that when the query per second (QPS) exceeds 1 million and the TSO (Timestamp Oracle) requests per second exceed 162,000, the CPU utilization reaches approximately 4,600%. This high CPU utilization indicates that the PD leader is experiencing a significant load and is running out of available CPU resources.
 
 ![pd-server-cpu](/media/performance/public-cloud-best-practice/baseline_cpu.png)
