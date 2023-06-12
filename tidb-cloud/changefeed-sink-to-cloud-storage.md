@@ -61,7 +61,7 @@ This document describes how to create a changefeed to stream data from TiDB Clou
     - **Delimiter**: Specify the character used to separate values in the CSV file. The comma (`,`) is the most commonly used delimiter.
     - **Quote**: Specify the character used to enclose values that contain the delimiter character or special characters. Typically, double quotes (`"`) are used as the quote character.
     - **Null/Empty Values**: Specify how null or empty values are represented in the CSV file. This is important for proper handling and interpretation of the data.
-    - **Include Commit Ts**
+    - **Include Commit Ts**: Whether to include [`commit-ts`](https://docs.pingcap.com/tidb/stable/ticdc-sink-to-cloud-storage#replicate-change-data-to-storage-services) in the CSV row. 
 
     </div>
     <div label="Configure Canal-JSON Format">
@@ -71,7 +71,7 @@ This document describes how to create a changefeed to stream data from TiDB Clou
     ![the data format of Canal-JSON](/media/tidb-cloud/changefeed/sink-to-s3-02-data-format-canal-json.jpg)
 
     - **Date Separator**: To rotate data based on the year, month, and day, or choose not to rotate at all.
-    - **Enable TiDB Extension**
+    - **Enable TiDB Extension**: When protocol is set to canal-json and enable-tidb-extension is set to true, TiCDC sends [WATERMARK events](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#watermark-event) and adds the [TiDB extension field](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#tidb-extension-field) to Canal-JSON messages.
 
     </div>
     </SimpleTab>
