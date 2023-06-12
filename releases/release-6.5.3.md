@@ -54,8 +54,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
         - Optimize the directory structure when DDL events occur in the scenario of replicating data to object storage [#8890](https://github.com/pingcap/tiflow/issues/8890) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - Support replicating data to the Kafka-on-Pulsar downstream [#8892](https://github.com/pingcap/tiflow/issues/8892) @[hi-rustin](https://github.com/hi-rustin)
        <! --tw:qiancai-->
-	    - Support using the OAUTH  protocol for validation in the scenarios of data replication to Kafka [#8865](https://github.com/pingcap/tiflow/issues/8865) @[hi-rustin](https://github.com/hi-rustin)
-	    - Optimize the handling of the `UPDATE` statement during data replication using the Avro or CSV protocol, by splitting `UPDATE` into `DELETE` and `INSERT`  statements, which enables you to get the old value before the change from the `DELETE` statement [#9086](https://github.com/pingcap) /tiflow/issues/9086) @[3AceShowHand](https://github.com/3AceShowHand)
+	- Support using the OAUTH  protocol for validation in the scenarios of data replication to Kafka [#8865](https://github.com/pingcap/tiflow/issues/8865) @[hi-rustin](https://github.com/hi-rustin)
+	- Optimize the handling of the `UPDATE` statement during data replication using the Avro or CSV protocol, by splitting `UPDATE` into `DELETE` and `INSERT`  statements, which enables you to get the old value before the change from the `DELETE` statement [#9086](https://github.com/pingcap) /tiflow/issues/9086) @[3AceShowHand](https://github.com/3AceShowHand)
 
     + TiDB Data Migration (DM)
 
