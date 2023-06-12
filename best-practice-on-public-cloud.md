@@ -158,7 +158,7 @@ To address the high CPU utilization issue in the PD server, you can make the fol
 
 #### Adjust PD configuration
 
-[`tso-update-physical-interval`](/pd-configuration-file#tso-update-physical-interval): This parameter controls the interval at which the PD server updates the physical TSO batch. By reducing the interval, the PD server can allocate TSO batches more frequently, thereby reducing the waiting time for the next allocation.
+[`tso-update-physical-interval`](/pd-configuration-file.md#tso-update-physical-interval): This parameter controls the interval at which the PD server updates the physical TSO batch. By reducing the interval, the PD server can allocate TSO batches more frequently, thereby reducing the waiting time for the next allocation.
 
 ```
 tso-update-physical-interval = "10ms" # default: 50ms
