@@ -6,7 +6,7 @@ aliases: ['/docs/dev/mysql-compatibility/','/docs/dev/reference/mysql-compatibil
 
 # MySQL Compatibility
 
-TiDB is highly compatible with the MySQL 5.7 protocol and the common features and syntax of MySQL 5.7. The ecosystem tools for MySQL 5.7 (PHPMyAdmin, Navicat, MySQL Workbench, mysqldump, and Mydumper/myloader) and the MySQL client can be used for TiDB.
+TiDB is highly compatible with the MySQL protocol and the common features and syntax of MySQL 5.7 and MySQL 8.0. The ecosystem tools for MySQL (PHPMyAdmin, Navicat, MySQL Workbench, mysqldump, and Mydumper/myloader) and the MySQL client can be used for TiDB.
 
 However, some features of MySQL are not supported. This could be because there is now a better way to solve the problem (such as XML functions superseded by JSON), or a lack of current demand versus effort required (such as stored procedures and functions). Some features might also be difficult to implement as a distributed system.
 
@@ -60,6 +60,9 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 + `HANDLER` statement
 + `CREATE TABLESPACE` statement
 + "Session Tracker: Add GTIDs context to the OK packet"
+* Descending Index [#2519](https://github.com/pingcap/tidb/issues/2519)
+* `SKIP LOCKED` syntax [#18207](https://github.com/pingcap/tidb/issues/18207)
+* Lateral derived tables [#40328](https://github.com/pingcap/tidb/issues/40328)
 
 ## Features that are different from MySQL
 
