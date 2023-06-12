@@ -101,7 +101,7 @@ tikv:
 
 ## Reduce compaction IO flow in KV RocksDB
 
-As the storage engine of TiKV, [RocksDB](https://rocksdb.org/) is used to store user data. However, because the provisioned IO throughput on cloud EBS is usually limited due to cost considerations, RocksDB might exhibit high write amplification, and the disk throughput might become the bottleneck for the workload. As a result, the total number of pending compaction bytes grows over time and triggers flow control, which indicates that TiKV lacks sufficient disk bandwidth to keep up with the foreground write flow. 
+As the storage engine of TiKV, [RocksDB](https://rocksdb.org/) is used to store user data. Because the provisioned IO throughput on cloud EBS is usually limited due to cost considerations, RocksDB might exhibit high write amplification, and the disk throughput might become the bottleneck for the workload. As a result, the total number of pending compaction bytes grows over time and triggers flow control, which indicates that TiKV lacks sufficient disk bandwidth to keep up with the foreground write flow. 
 
 To alleviate the bottleneck caused by limited disk throughput, you can improve performance by increasing the compression level for RocksDB and reducing the disk throughput. For example, you can refer to the following example to increase all the compression levels of the default column family to `zstd`.
 
@@ -135,7 +135,7 @@ To detect live migration events initiated by Google Cloud and mitigate the perfo
 
 - TiDB: Takes the TiDB node offline by cordoning it and deleting the TiDB pod. This assumes that the node pool of the TiDB instance is set to auto-scale and dedicated to TiDB. Other pods running on the node might experience interruptions, and the cordoned node is expected to be reclaimed by the auto-scaler.
 - TiKV: Ecivts leaders on the affected TiKV store during maintenance.
-- PD: Resigns a leader if the current PD instance is the PD leader
+- PD: Resigns a leader if the current PD instance is the PD leader.
 
 It is important to note that this watching script is specifically designed for TiDB clusters deployed using the [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/dev/tidb-operator-overview), which offers enhanced management functionalities for TiDB in Kubernetes environments.
 
