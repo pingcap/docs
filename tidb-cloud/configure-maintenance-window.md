@@ -42,7 +42,7 @@ To avoid potential disruptions, it is important to be aware of the maintenance s
 
 For every maintenance window, TiDB Cloud sends four email notifications to all project members at the following time points:
 
-- Two weeks before a maintenance window starts (excluding urgent maintenance)
+- Two weeks before a maintenance window starts (excluding urgent maintenance tasks)
 - 72 hours before a maintenance window starts
 - The time when a maintenance window is started
 - The time when a maintenance window is completed
