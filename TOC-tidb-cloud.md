@@ -96,7 +96,7 @@
       - [Connect via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md)
       - [Connect via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
     - [Manage Spend Limit](/tidb-cloud/manage-serverless-spend-limit.md)
-    - [Back up and Restore Data for TiDB Serverless](/tidb-cloud/backup-and-restore-serverless.md)
+    - [Back Up and Restore TiDB Serverless Data](/tidb-cloud/backup-and-restore-serverless.md)
   - Manage TiDB Dedicated Clusters
     - [Create a TiDB Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md)
     - Connect to Your TiDB Dedicated Cluster
@@ -106,7 +106,7 @@
       - [Connect via VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md)
       - [Connect via SQL Shell](/tidb-cloud/connect-via-sql-shell.md)
     - [Scale a TiDB Dedicated Cluster](/tidb-cloud/scale-tidb-cluster.md)
-    - [Back up and Restore Data for TiDB Dedicated](/tidb-cloud/backup-and-restore.md)
+    - [Back Up and Restore TiDB Dedicated Data](/tidb-cloud/backup-and-restore.md)
     - [Pause or Resume a TiDB Dedicated Cluster](/tidb-cloud/pause-or-resume-tidb-cluster.md)
     - [Configure Maintenance Window](/tidb-cloud/configure-maintenance-window.md)
   - Use an HTAP Cluster with TiFlash

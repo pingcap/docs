@@ -21,8 +21,8 @@ You can delete a cluster at any time by performing the following steps:
 
     If you want to restore the cluster sometime in the future, make sure that you have a backup of the cluster. Otherwise, you cannot restore it anymore. For more information about how to back up a cluster, see one of the following:
 
-    - [Back up and Restore Data for TiDB Serverless](/tidb-cloud/backup-and-restore-serverless.md)
-    - [Back up and Restore Data for TiDB Dedicated](/tidb-cloud/backup-and-restore.md)
+    - [Back Up and Restore TiDB Serverless Data](/tidb-cloud/backup-and-restore-serverless.md)
+    - [Back Up and Restore TiDB Dedicated Data](/tidb-cloud/backup-and-restore.md)
 
 5. Click **I understand the consequences. Delete this cluster**.
 
