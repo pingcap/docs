@@ -3383,7 +3383,7 @@ mysql> desc select count(distinct a) from test.t;
 - Default value: `""`
 - This variable is used to control some internal behaviors of the optimizer.
 - The optimizer's behavior might vary depending on user scenarios or SQL statements. This variable provides a more fine-grained control over the optimizer and helps to prevent performance regression after upgrading caused by behavior changes in the optimizer.
-- Reference [Optimizer Fix Controls](/optimizer-fix-controls.md) for a more detailed introduction.
+- For a more detailed introduction, see [Optimizer Fix Controls](/optimizer-fix-controls.md).
 
 ### tidb_opt_force_inline_cte <span class="version-mark">New in v6.3.0</span>
 

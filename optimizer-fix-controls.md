@@ -1,27 +1,26 @@
 ---
 title: Optimizer Fix Controls
-summary: Learn about the Optimizer Fix Controls and how to use tidb_opt_fix_control to control TiDB optimizer in a more fine-grained way
-aliases: ['/docs/dev/optimizer-fix-controls/']
+summary: Learn about the Optimizer Fix Controls feature and how to use `tidb_opt_fix_control` to control the TiDB optimizer in a more fine-grained way.
 ---
 
 # Optimizer Fix Controls
 
-The TiDB optimizer has lots of details in its behavior. As TiDB evolves, these details are changing. Usually, these changes are improvements of the optimizer. But sometimes, they would possibly cause unexpected results like execution plan regression:
+The TiDB optimizer has lots of details in its behavior. As TiDB evolves, these details are changing. Usually, these changes are improvements of the optimizer. But sometimes, they would possibly cause unexpected results, such as:
 
 - For some implementation details, different behaviors are more suitable to different scenarios.
-- Sometimes, the relationship between changes in the behavior details and their consequences is very complicated. Even if it's an improvement in a certain behavior, it might cause execution plan regression as a whole.
+- Sometimes, the relationship between changes in the behavior details and their consequences is very complicated. Even if it is an improvement in a certain behavior, it might cause execution plan regression as a whole.
 
-So we provided the [`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v710) system variable to control the behavior of the optimizer in a more fine-grained way.
+Starting from v7.1.0, TiDB provides the [`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v710) system variable to control the behavior of the optimizer in a more fine-grained way.
 
-A Fix is usually denoted by a number, which usually corresponds to a GitHub Issue, in which there will be descriptions for the technical details. For example, Fix `44262` corresponds to [Issue 44262](https://github.com/pingcap/tidb/issues/44262).
+A fix is denoted by a number that corresponds to a GitHub Issue. The GitHub issue contains the technical details. For example, Fix `44262` corresponds to [Issue 44262](https://github.com/pingcap/tidb/issues/44262).
 
-This variable supports multiple Fixes, separated by commas (`,`). The format is `"<#issue1>:<value1>,<#issue2>:<value2>,...,<#issueN>:<valueN>"`, where `<#issueN>` is the Fix number. For example:
+This variable supports multiple fixes, separated by commas (`,`). The format is `"<#issue1>:<value1>,<#issue2>:<value2>,...,<#issueN>:<valueN>"`, where `<#issueN>` is the fix number. For example:
 
 ```sql
 SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 ```
 
-## Optimizer Fix Controls Reference
+## Optimizer Fix Controls reference
 
 ### [`44262`](https://github.com/pingcap/tidb/issues/44262) <span class="version-mark">New in v7.1.1</span>
 
@@ -33,4 +32,4 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 
 - Default value: `OFF`
 - Possible values: `ON`, `OFF`
-- For filters like `c = 10 and (a = 'xx' or (a = 'kk' and b = 1)`, whether to try to build more complete scan ranges for `IndexRangeScan`.
+- For filters such as `c = 10 and (a = 'xx' or (a = 'kk' and b = 1))`, this variable controls whether to try to build more comprehensive scan ranges for `IndexRangeScan`.
