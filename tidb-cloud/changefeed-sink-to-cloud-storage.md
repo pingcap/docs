@@ -5,7 +5,7 @@ Summary: Learn how to create a changefeed to stream data from a TiDB Dedicated c
 
 # Sink to Cloud Storage
 
-This document describes how to create a changefeed to stream data from TiDB Cloud to cloud storage, such as Amazon S3.
+This document describes how to create a changefeed to stream data from TiDB Cloud to cloud storage. Currently, only Amazon S3 is supported.
 
 > **Note:**
 >
