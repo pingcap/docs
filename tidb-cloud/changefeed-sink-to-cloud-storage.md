@@ -60,7 +60,7 @@ This document describes how to create a changefeed to stream data from TiDB Clou
     - **Date Separator**: To rotate data based on the year, month, and day, or choose not to rotate at all.
     - **Delimiter**: Specify the character used to separate values in the CSV file. The comma (`,`) is the most commonly used delimiter.
     - **Quote**: Specify the character used to enclose values that contain the delimiter character or special characters. Typically, double quotes (`"`) are used as the quote character.
-    - **Null/Empty Values**: Specify how null or empty values are represented in the CSV file. This can be important for proper handling and interpretation of the data.
+    - **Null/Empty Values**: Specify how null or empty values are represented in the CSV file. This is important for proper handling and interpretation of the data.
     - **Include Commit Ts**
 
     </div>
