@@ -167,7 +167,7 @@ In TiDB, all supported DDL changes can be performed online. However, there are s
 
     For more details on partitioning, see [Partitioning](/partitioned-table.md).
 
-### Analyzing Tables
+### Analyzing tables
 
 In TiDB, [Statistics Collection](/statistics.md#manual-collection) differs from MySQL in that it completely rebuilds the statistics for a table, making it a more resource-intensive operation that takes longer to complete. In contrast, MySQL/InnoDB performs a relatively lightweight and short-lived operation.
 
