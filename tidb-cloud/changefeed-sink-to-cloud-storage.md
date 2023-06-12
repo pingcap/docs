@@ -1,6 +1,6 @@
 ---
 title: Sink to Cloud Storage
-Summary: Learn how to create a changefeed to stream data from a TiDB Dedicated cluster to cloud storage, such as Amazon S3 etc.
+Summary: Learn how to create a changefeed to stream data from a TiDB Dedicated cluster to cloud storage, such as Amazon S3.
 ---
 
 # Sink to Cloud Storage
