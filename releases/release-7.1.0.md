@@ -363,6 +363,7 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
 | TiCDC | [`insecure-skip-verify`](/ticdc/ticdc-sink-to-kafka.md) | Newly added | Controls whether the authentication algorithm is set when TLS is enabled in the scenario of replicating data to Kafka. |
 | TiCDC | [`integrity.corruption-handle-level`](/ticdc/ticdc-changefeed-config.md#cli-and-configuration-parameters-of-ticdc-changefeeds) | Newly added | Specifies the log level of the Changefeed when the checksum validation for single-row data fails. The default value is `"warn"`. Value options are `"warn"` and `"error"`. |
 | TiCDC | [`integrity.integrity-check-level`](/ticdc/ticdc-changefeed-config.md#cli-and-configuration-parameters-of-ticdc-changefeeds) | Newly added | Controls whether to enable the checksum validation for single-row data. The default value is `"none"`, which means to disable the feature. |
+| TiCDC | [`sink.only-output-updated-columns`](/ticdc/ticdc-changefeed-config.md#cli-and-configuration-parameters-of-ticdc-changefeeds) | Newly added | Controls whether to only output the updated columns. The default value is `false`. |
 | TiCDC | [`sink.enable-partition-separator`](/ticdc/ticdc-changefeed-config.md#cli-and-configuration-parameters-of-ticdc-changefeeds) | Modified | Changes the default value from `false` to `true` after further tests, meaning that partitions in a table are stored in separate directories by default. It is recommended that you keep the value as `true` to avoid the potential issue of data loss during replication of partitioned tables to storage services. |
 
 ## Improvements
@@ -533,7 +534,7 @@ Compared with the previous LTS 6.5.0, 7.1.0 not only includes new features, impr
 
 ## Performance test
 
-To learn about the performance of TiDB v7.1.0, you can refer to the [TPC-C performance test report](https://docs.pingcap.com/tidbcloud/v7.1.0-performance-benchmarking-with-tpcc) of the TiDB Dedicated cluster.
+To learn about the performance of TiDB v7.1.0, you can refer to the [TPC-C performance test report](https://docs.pingcap.com/tidbcloud/v7.1.0-performance-benchmarking-with-tpcc) and [Sysbench performance test report](https://docs.pingcap.com/tidbcloud/v7.1.0-performance-benchmarking-with-sysbench) of the TiDB Dedicated cluster.
 
 ## Contributors
 
