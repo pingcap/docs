@@ -470,7 +470,13 @@ The `ANALYZE` configuration persistence feature is disabled by default. To enabl
 
 You can use this feature to record the persistence configurations specified in the `ANALYZE` statement when executing the statement manually. Once recorded, the next time TiDB automatically updates statistics or you manually collect statistics without specifying these configuration, TiDB will collect statistics according to the recorded configurations.
 
-When you manually execute the `ANALYZE` statement multiple times with persistence configurations specified, TiDB overwrites the previously recorded persistent configuration using the new configurations specified by the latest `ANALYZE` statement.
+You can use the following SQL to query the configuration used by auto-analyze that is persisted on a certain table.
+
+```sql
+select sample_num, sample_rate, buckets, topn, column_choice, column_ids from mysql.analyze_options opt join information_schema.tables tbl on opt.table_id = tbl.tidb_table_id where tbl.table_schema = '{db_name}' and tbl.table_name = '{table_name}';
+```
+
+TiDB will overwrite the previously recorded persistent configuration using the new configurations specified by the latest `ANALYZE` statement. For instance, if you run "analyze table t with 200 topn;", it will set the 200 topn values in `ANALYZE` statement. Then, executing "analyze table t with 0.1 samplerate;" will set both 200 topn values and a sampling rate of 0.1 for auto `ANALYZE` statement, like "analyze table t with 200 topn, 0.1 samplerate;".
 
 #### Disable ANALYZE configuration persistence
 
