@@ -1,17 +1,17 @@
 ---
-title: Best Practice On Public Cloud
+title: TiDB Best Practice On Public Cloud
 summary: This document introduces the best practice for TiDB to deploy on public cloud
 ---
 
-# Best Practice On Public Cloud
+# TiDB Best Practice On Public Cloud
 
-Public cloud infrastructure has become an increasingly popular choice for deploying and managing TiDB. However, deploying TiDB on the cloud requires careful consideration of several critical factors, including performance tuning, cost optimization, reliability, and scalability. 
+Public cloud infrastructure has become an increasingly popular choice for deploying and managing TiDB. However, deploying TiDB on public cloud requires careful consideration of several critical factors, including performance tuning, cost optimization, reliability, and scalability. 
 
-This document aims to cover various essential topics, such as using dedicated disks for Raft-Engine, overcoming IO throughput limitations, optimizing costs for cross-AZ traffic, mitigating GCP live migration events, and fine-tuning the PD server in large clusters. By adhering to these best practices, your TiDB deployment on the public cloud can achieve optimized performance, cost efficiency, reliability, and scalability.
+This document covers various essential best practices for deploying TiDB on public cloud, such as using a dedicated disk for Raft Engine, reducing compaction IO flow in KV RocksDB, optimizing costs for cross-AZ traffic, mitigating GCP live migration events, and fine-tuning the PD server in large clusters. By adhering to these best practices, your TiDB deployment on public cloud can achieve optimized performance, cost efficiency, reliability, and scalability.
 
 ## Use a dedicated disk for Raft Engine
 
-The [Raft Engine](/glossary.md#raft-engine) in TiKV plays a critical role similar to that of a write-ahead log (WAL) in traditional databases. To achieve optimal performance and stability, it is crucial to allocate a dedicated disk for the Raft Engine when you deploy TiDB on a public cloud. The following `iostat` shows the IO characteristics on a TiKV node with a write-heavy workload.
+The [Raft Engine](/glossary.md#raft-engine) in TiKV plays a critical role similar to that of a write-ahead log (WAL) in traditional databases. To achieve optimal performance and stability, it is crucial to allocate a dedicated disk for the Raft Engine when you deploy TiDB on public cloud. The following `iostat` shows the IO characteristics on a TiKV node with a write-heavy workload.
 
 ```
 Device            r/s     rkB/s       w/s     wkB/s      f/s  aqu-sz  %util
@@ -19,7 +19,7 @@ sdb           1649.00 209030.67   1293.33 304644.00    13.33    5.09  48.37
 sdd           1033.00   4132.00   1141.33  31685.33   571.00    0.94 100.00
 ```
 
-The device `sdb` is used for KV RocksDB, while `sdd` is used to restore Raft Engine logs. Note that `sdd` has a significantly higher `f/s` value, which represents the number of flush requests completed per second for the device. In Raft Engine, when a write in a batch is marked synchronous, the batch leader will call `fdatasync()` after writing, guaranteeing that buffered data is flushed to the storage. By using a dedicated volume for Raft Engine, TiKV reduces the average queue length of requests, thereby ensuring optimal and stable write latency.
+The device `sdb` is used for KV RocksDB, while `sdd` is used to restore Raft Engine logs. Note that `sdd` has a significantly higher `f/s` value, which represents the number of flush requests completed per second for the device. In Raft Engine, when a write in a batch is marked synchronous, the batch leader will call `fdatasync()` after writing, guaranteeing that buffered data is flushed to the storage. By using a dedicated disk for Raft Engine, TiKV reduces the average queue length of requests, thereby ensuring optimal and stable write latency.
 
 Different cloud providers offer various disk types with different performance characteristics, such as IOPS and MBPS. Therefore, it is important to choose an appropriate cloud provider, disk type, and disk size based on your workload.
 
@@ -31,11 +31,11 @@ This section outlines best practices for choosing appropriate disks for Raft-Eng
 
 The following are recommended middle-range disks for different public clouds:
 
-- On AWS, it is recommended to use [gp3](https://aws.amazon.com/ebs/general-purpose/) volumes. These volumes offer a free allocation of 3000 IOPS and 125 MB/s throughput, irrespective of the volume size. This is usually sufficient for the Raft Engine.
+- On AWS, [gp3](https://aws.amazon.com/ebs/general-purpose/) is recommended. The gp3 volume offers a free allocation of 3000 IOPS and 125 MB/s throughput, regardless of the volume size, which is usually sufficient for the Raft Engine.
 
-- On GCP, it is recommended to use [pd-ssd](https://cloud.google.com/compute/docs/disks#disk-types/) volumes. The IOPS and MBPS vary depending on the allocated disk size. To meet performance requirements, it is recommended to allocate 200 GB for Raft-Engine. Although Raft Engine does not require such a large space, it ensures optimal performance.
+- On GCP, [pd-ssd](https://cloud.google.com/compute/docs/disks#disk-types/) is recommended. The IOPS and MBPS vary depending on the allocated disk size. To meet performance requirements, it is recommended to allocate 200 GB for Raft-Engine. Although Raft Engine does not require such a large space, it ensures optimal performance.
 
-- On Azure, it is recommended to use  [Premium SSD v2](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#premium-ssd-v2) volumes. Similar to AWS, they provide a free allocation of 3000 IOPS and 125 MB/s throughput, regardless of the volume size, which is generally adequate for Raft Engine.
+- On Azure, [Premium SSD v2](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#premium-ssd-v2) is recommended. Similar to AWS gp3, Premium SSD v2 provides a free allocation of 3000 IOPS and 125 MB/s throughput, regardless of the volume size, which is usually sufficient for Raft Engine.
 
 #### High-end disk
 
@@ -66,7 +66,7 @@ By using a dedicated 20GB [gp3](https://aws.amazon.com/ebs/general-purpose/) Raf
 
 ### Example 2: Run TPC-C/SYSBench workload on Azure
 
-By using a dedicated 32GB ultra disk for Raft Engine on Azure, the following improvements are observed:
+By using a dedicated 32GB [ultra disk](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#ultra-disks) for Raft Engine on Azure, the following improvements are observed:
 
 - Sysbench `oltp_read_write` workload: a 17.8% increase in QPS and a 15.6% decrease in average latency.
 - TPC-C workload: a 27.6% increase in QPS and a 23.1% decrease in average latency.
@@ -80,7 +80,7 @@ By using a dedicated 32GB ultra disk for Raft Engine on Azure, the following imp
 
 ### Example 3: Attach a dedicated pd-ssd disk on Google Cloud for Raft Engine on TiKV manifest
 
-The following TiKV configuration example shows how to attach an additional 512GB [pd-ssd](https://cloud.google.com/compute/docs/disks#disk-types/) disk to a cluster on Google Cloud deployed by TiDB Operator, with `raft-engine.dir` configured to store Raft Engine logs to this specific disk.
+The following TiKV configuration example shows how to attach an additional 512GB [pd-ssd](https://cloud.google.com/compute/docs/disks#disk-types/) disk to a cluster on Google Cloud deployed by [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable), with `raft-engine.dir` configured to store Raft Engine logs to this specific disk.
 
 ```
 tikv:
@@ -114,7 +114,7 @@ compression-per-level = ["zstd", "zstd", "zstd", "zstd", "zstd", "zstd", "zstd"]
 
 Deploying TiDB across multiple availability zones (AZs) can lead to increased costs due to cross-AZ data transfer fees. To optimize costs, it is important to reduce cross-AZ network traffic.
 
-To reduce cross-AZ read traffic, you can enable the [Follower Read feature](/follower-read.md), which allows TiDB to prioritize selecting replicas in the same availability zone. To enable this feature, set the `tidb_replica_read` variable to `closest-replicas` or `closest-adaptive`. 
+To reduce cross-AZ read traffic, you can enable the [Follower Read feature](/follower-read.md), which allows TiDB to prioritize selecting replicas in the same availability zone. To enable this feature, set the [`tidb_replica_read`](/system-variables.md#tidb_replica_read-new-in-v40) variable to `closest-replicas` or `closest-adaptive`. 
 
 To reduce cross-AZ write traffic in TiKV instances, you can enable the gRPC compression feature, which compresses data before transmitting it over the network. The following configuration example shows how to enable gzip gRPC compression for TiKV.
 
@@ -129,16 +129,15 @@ To reduce network traffic caused by the data shuffle of TiFlash MPP tasks, it is
 
 ## Mitigate live migration maintenance events on Google Cloud
 
-Google Cloud's [Live Migration feature](https://cloud.google.com/compute/docs/instances/live-migration-process) enables VMs to be seamlessly migrated between hosts without causing downtime. However, these migration events, although infrequent, can significantly impact the performance of VMs, including those running in a TiDB cluster. During such events, affected VMs might experience reduced performance, leading to longer query processing times in the TiDB cluster.
+The [Live Migration feature](https://cloud.google.com/compute/docs/instances/live-migration-process) of Google Cloud enables VMs to be seamlessly migrated between hosts without causing downtime. However, these migration events, although infrequent, can significantly impact the performance of VMs, including those running in a TiDB cluster. During such events, affected VMs might experience reduced performance, leading to longer query processing times in the TiDB cluster.
 
-To mitigate the performance impact of live migration events on Google Cloud, TiDB provides a [watching script](https://github.com/PingCAP-QE/tidb-google-maintenance) based on Google's metadata [example](https://github.com/GoogleCloudPlatform/python-docs-samples/blob/master/compute/metadata/main.py). This script is deployed on TiDB, TiKV, and PD nodes to detect maintenance events. When a maintenance event is detected, appropriate actions can be taken as follows:
+To detect live migration events initiated by Google Cloud and mitigate the performance impact of these events, TiDB provides a [watching script](https://github.com/PingCAP-QE/tidb-google-maintenance) based on Google's metadata [example](https://github.com/GoogleCloudPlatform/python-docs-samples/blob/master/compute/metadata/main.py). You can deploy this script on TiDB, TiKV, and PD nodes to detect maintenance events. When a maintenance event is detected, appropriate actions can be taken automatically as follows to minimize disruption and optimize the cluster behavior:
+
 - TiDB: Takes the TiDB node offline by cordoning it and deleting the TiDB pod. This assumes that the node pool of the TiDB instance is set to auto-scale and dedicated to TiDB. Other pods running on the node might experience interruptions, and the cordoned node is expected to be reclaimed by the auto-scaler.
 - TiKV: Ecivts leaders on the affected TiKV store during maintenance.
 - PD: Resigns a leader if the current PD instance is the PD leader
 
 It is important to note that this watching script is specifically designed for TiDB clusters deployed using the [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/dev/tidb-operator-overview), which offers enhanced management functionalities for TiDB in Kubernetes environments.
-
-The purpose of the watching script is to detect maintenance events initiated by Google Cloud. When such events are detected, appropriate actions can be taken to minimize disruption and optimize the cluster's behavior.
 
 By utilizing the watching script and taking necessary actions during maintenance events, TiDB clusters can better handle live migration events on Google Cloud and ensure smoother operations with minimal impact on query processing and response times.
 
@@ -148,7 +147,7 @@ In a TiDB cluster, a single active Placement Driver (PD) server is used to handl
 
 
 ### Symptoms of PD limitation
-The following diagrams show the sympotoms of a large cluster deployment consisting of three PD servers, each equipped with 56 CPUs. From these diagrams, it is observed that when the query per second (QPS) exceeds 1 million and the TSO (Timestamp Oracle) requests per second surpass 162,000, the CPU utilization reaches approximately 4,600%. This high CPU utilization indicates that the PD leader is experiencing a significant load and is running out of available CPU resources.
+The following diagrams show the symptoms of a large-scale TiDB cluster consisting of three PD servers, each equipped with 56 CPUs. From these diagrams, it is observed that when the query per second (QPS) exceeds 1 million and the TSO (Timestamp Oracle) requests per second exceed 162,000, the CPU utilization reaches approximately 4,600%. This high CPU utilization indicates that the PD leader is experiencing a significant load and is running out of available CPU resources.
 
 ![pd-server-cpu](/media/performance/public-cloud-best-practice/baseline_cpu.png)
 ![pd-server-metrics](/media/performance/public-cloud-best-practice/baseline_metrics.png)
@@ -159,7 +158,8 @@ To address the high CPU utilization issue in the PD server, you can make the fol
 
 #### Adjust PD configuration
 
-`tso-update-physical-interval`: This parameter controls the interval at which the PD server updates the physical TSO batch. By reducing the interval, the PD server can allocate TSO batches more frequently, thereby reducing the waiting time for the next allocation.
+[`tso-update-physical-interval`](/pd-configuration-file#tso-update-physical-interval): This parameter controls the interval at which the PD server updates the physical TSO batch. By reducing the interval, the PD server can allocate TSO batches more frequently, thereby reducing the waiting time for the next allocation.
+
 ```
 tso-update-physical-interval = "10ms" # default: 50ms
 ```
@@ -185,9 +185,9 @@ To reduce the number of Regions and alleviate the heartbeat overhead on the syst
 
 After the tunning, the following effects can be observed:
 
-- The TSO requests per second have decreased to 64,800.
-- The CPU utilization has significantly reduced from approximately 4,600% to 1,400%.
-- The P999 value of `PD server TSO handle time` has decreased from 2ms to 0.5ms.
+- The TSO requests per second are decreased to 64,800.
+- The CPU utilization is significantly reduced from approximately 4,600% to 1,400%.
+- The P999 value of `PD server TSO handle time` is decreased from 2ms to 0.5ms.
 
 These improvements indicate that the tuning adjustments have successfully reduced the CPU utilization of the PD server while maintaining stable TSO handling performance.
 
@@ -198,12 +198,12 @@ These improvements indicate that the tuning adjustments have successfully reduce
 # Conclusion
 By following these best practices, TiDB deployments on public cloud platforms can achieve exceptional performance, cost efficiency, reliability, and scalability. 
 
-The key practices include the following:
+The key practices in this document include the following:
 
-- Select the appropriate dedicated disk type and size for optimal storage performance with Raft-Engine, 
-- Tune TiKV's compaction settings to improve resource utilization and reduce IO throughput, 
-- Minimize cross-AZ read traffic to optimize costs, 
+- Select an appropriate dedicated disk type and size for optimal storage performance with Raft Engine
+- Tune TiKV's compaction settings to improve resource utilization and reduce IO throughput
+- Minimize cross-AZ read traffic to optimize costs
 - Mitigate performance impact during maintenance events by leveraging notifications and taking appropriate actions
-- Tuning the PD server to address scalability bottlenecks.
+- Tuning the PD server to address scalability bottlenecks
 
 In summary, whether you are deploying TiDB on AWS, GCP, Azure, or any other public cloud provider, these best practices serve as a solid foundation for success.
