@@ -238,7 +238,7 @@ To replicate the data changes based on binlog from a specified position in the u
 
 ### Before you begin
 
-The TiDB Cloud console does not provide any feature about incremental data replication yet. You need to deploy TiDB DM to migrate incremental data. For detailed steps, see [Deploy a DM Cluster Using TiUP](https://docs.pingcap.com/tidb/stable/deploy-a-dm-cluster-using-tiup).
+You need to deploy TiDB DM to migrate incremental data. For detailed steps, see [Deploy a DM Cluster Using TiUP](https://docs.pingcap.com/tidb/stable/deploy-a-dm-cluster-using-tiup).
 
 ### Step 1. Add the data source
 
