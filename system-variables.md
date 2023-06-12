@@ -4882,13 +4882,13 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Type: Enumeration
 - Default value: "all_replicas"
 - Value options: "all_replicas", "closest_adaptive", "closest_replicas"
-- This variable is used to set the policy of TiFlash node selection when the query needs the TiFlash engine.
-  - "all_replicas" means using all the available nodes to do analytic computing, regardless of local zone or other zones.
-  - "closest_adaptive" means using the nodes in the same zone as the entry TiDB. If not all the tiflash data can be accessed, the query will involve the tiflash nodes from other zones.
-  - "closest_replicas" means using only the nodes in the same zone as the entry TiDB. If not all the tiflash data can be accessed, the query will report an error.
-- Corner cases
-  - If TiDB nodes do not set zone attributes and the policy of TiFlash node selection is not "all_replicas", the policy of TiFlash node selection will be ignored, all the tiflash nodes will be used in the tiflash query. And there will be a warning message: The variable tiflash_replica_read is ignored.
-  - If TiFlash nodes do not set zone attributes, these nodes will be treated as nodes not in any zone. 
+- This variable is used to set the strategy for selecting TiFlash replicas when a query requires the TiFlash engine.
+  - "all_replicas" means using all available TiFlash replicas for analytical computing.
+  - "closest_adaptive" means preferring to use TiFlash replicas in the same zone as the entry TiDB for analytical computing. If not all TiFlash data can be accessed, the query will involve TiFlash replicas from different zones along with their corresponding TiFlash nodes.
+  - "closest_replicas" means using only TiFlash replicas in the same zone as the entry TiDB. If not all TiFlash data can be accessed, the query will result in an error.
+- Special cases
+  - If TiDB nodes do not have zone attributes set and the tiflash_replica_read policy is not "all_replicas", the tiflash_replica_read policy will be ignored, and all TiFlash replicas will be used in the TiFlash query. A warning message will be displayed: "The variable tiflash_replica_read is ignored."
+  - If TiFlash nodes do not have zone attributes set, they will be treated as nodes not belonging to any zone.
 
 ### time_zone
 
