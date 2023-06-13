@@ -168,13 +168,13 @@ Configuration items related to pd-server
 ### `min-resolved-ts-persistence-interval` <span class="version-mark">New in v6.0.0</span>
 
 + Determines the interval at which the minimum resolved timestamp is persistent to the PD. If this value is set to `0`, it means that the persistence is disabled.
-+ Default value: `"0s"` before v6.3.0 and `"1s"` in v6.3.0 and later, which is the smallest positive value.
++ Default value: Before v6.3.0, the default value is `"0s"`. Starting from v6.3.0, the default value is `"1s"`, which is the smallest positive value.
 + Minimum value: `0`
 + Unit: second
 
 > **Note:**
 >
-> For clusters upgraded from v6.0.0~v6.2.0, the default value of `min-resolved-ts-persistence-interval` will not change after the upgrade, which means that it will remain `"0s"`. To enable this feature, you need to manually change the value of this configuration item.
+> For clusters upgraded from v6.0.0~v6.2.0, the default value of `min-resolved-ts-persistence-interval` does not change, which means that it will remain `"0s"`. To enable this feature, you need to manually change the value of this configuration item.
 
 ## security
 
