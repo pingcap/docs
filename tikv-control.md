@@ -533,7 +533,7 @@ TiDB v6.4.0 introduces the [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sq
 
 #### Prerequisites
 
-Before running the `flashback` command, you need to [stop PD scheduling](pd-control.md#config-show--set-option-value--placement-rules) using the `pd-ctl config set halt-scheduling true` command.
+Before running the `flashback` command, you need to [stop PD scheduling](/pd-control.md#config-show--set-option-value--placement-rules) using the `pd-ctl config set halt-scheduling true` command.
 
 #### Usage
 
