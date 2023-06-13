@@ -8,7 +8,7 @@ summary: Learn about the Optimizer Fix Controls feature and how to use `tidb_opt
 The TiDB optimizer has lots of details in its behavior. As TiDB evolves, these details are changing. Usually, these changes are improvements of the optimizer. But sometimes, they might cause unexpected results, such as:
 
 - For some implementation details, some behaviors are more suitable for certain scenarios. Changes that bring improvements for some scenarios might cause regressions for others.
-- Sometimes, the relationship between changes in the behavior details and their consequences is very complicated. Even if it is an improvement in a certain behavior, it might cause execution plan regression as a whole.
+- Sometimes, the relationship between changes in the behavior details and their consequences is very complicated. An improvement in a certain behavior might cause execution plan regression as a whole.
 
 ## Introduction to `tidb_opt_fix_control`
 
