@@ -7,7 +7,7 @@ summary: Learn how to configure maintenance window for your cluster.
 
 A maintenance window is a designated timeframe during which planned maintenance activities, such as operating system updates, security patches, and infrastructure upgrades, are performed automatically to ensure the reliability, security, and performance of the TiDB Cloud service.
 
-During a maintenance window, the maintenance is executed on TiDB clusters one by one so the overall impact is minimal. Although there might be temporary connection disruptions or QPS fluctuations, the clusters remain available, and the existing data import, backup, restore, migration, and replication tasks can still run normally.
+During a maintenance window, the maintenance is executed on TiDB Dedicated clusters one by one so the overall impact is minimal. Although there might be temporary connection disruptions or QPS fluctuations, the clusters remain available, and the existing data import, backup, restore, migration, and replication tasks can still run normally.
 
 By configuring the maintenance window, you can easily schedule and manage maintenance activities to minimize the maintenance impact. For example, you can set the start time of the maintenance window to avoid peak hours of your application workloads.
 

@@ -21,7 +21,7 @@ This document describes how to back up and restore your TiDB Dedicated cluster d
 
 TiDB Dedicated supports automatic backup and manual backup.
 
-Automatic backups are scheduled for your TiDB Dedicated clusters according to the backup setting, which can reduce your loss in extreme disaster situations. You can also pick a backup snapshot and restore it into a new TiDB cluster at any time.
+Automatic backups are scheduled for your TiDB Dedicated clusters according to the backup setting, which can reduce your loss in extreme disaster situations. You can also pick a backup snapshot and restore it into a new TiDB Dedicated cluster at any time.
 
 ### Automatic backup
 
@@ -49,7 +49,7 @@ By the automatic backup, you can back up the TiDB Dedicated cluster data every d
         - Resolve cases of data write errors by restoring point-in-time that is before the error event.
         - Audit the historical data of the business.
 
-        If you have one of the preceding needs and want to use the PITR feature, make sure that your TiDB cluster version is at least v6.4.0 and the TiKV node size is at least 8 vCPU and 16 GiB.
+        If you have one of the preceding needs and want to use the PITR feature, make sure that your TiDB Dedicated cluster version is at least v6.4.0 and the TiKV node size is at least 8 vCPU and 16 GiB.
 
     - In **Backup Storage Region**, select the regions where you want to store your backup data.
 
@@ -77,7 +77,7 @@ Currently, you cannot select an arbitrary remote region for backup data storage.
 
 Manual backups are user-initiated backups that enable you to back up your data to a known state as needed, and then restore to that state at any time.
 
-To apply a manual backup to your TiDB cluster, perform the following steps:
+To apply a manual backup to your TiDB Dedicated cluster, perform the following steps:
 
 1. Navigate to the **Backup** tab of a cluster.
 
@@ -118,7 +118,7 @@ TiDB Dedicated provides two types of data restoration:
 
 ### Restore data to a new cluster
 
-To restore your TiDB cluster data from a backup to a new cluster, take the following steps:
+To restore your TiDB Dedicated cluster data from a backup to a new cluster, take the following steps:
 
 1. Navigate to the **Backup** tab of a cluster.
 

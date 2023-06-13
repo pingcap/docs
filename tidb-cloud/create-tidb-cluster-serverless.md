@@ -1,6 +1,6 @@
 ---
 title: Create a TiDB Serverless Cluster
-summary: Learn how to create your TiDB cluster.
+summary: Learn how to create your TiDB Serverless cluster.
 ---
 
 # Create a TiDB Serverless Cluster
