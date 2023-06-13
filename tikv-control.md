@@ -528,29 +528,49 @@ TiDB v6.4.0 introduces the [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sq
 
 > **Note:**
 >
-> - Before executing the `flashback` command, you need to pass `. /pd-ctl config set halt-scheduling true` command [stop PD scheduling] (pd-control.md#config-show--set-option-value--placement-rules) before executing the `flashback` command.
-> - This command writes the old data of a specific point in time with the latest timestamp, and will not delete the current data. So before using this feature, you need to ensure that there is enough storage space for the old data and the current data.
+> - The `flashback` command writes the old data of a specific point in time with the latest timestamp, and will not delete the current data. So before using this feature, you need to ensure that there is enough storage space for the old data and the current data.
 > - This command only supports local mode. It prints `flashback all stores success!` when successfully run.
 
-The following example restores the entire cluster's data to the 430315739761082369 time point:
+#### Prerequisites
+
+Before executing the `flashback` command, you need to configure the cluster via `pd-ctl config set halt-scheduling true` command [stop PD scheduling](pd-control.md#config-show--set-option-value--placement-rules).
+
+#### Usage
+
+```shell
+tikv-ctl --pd <pd_address:port> flashback -v <target_timestamp>
+```
+
+Use the `--pd` option to specify the access address of the PD. Use the `-v` option to specify the point in time of the Flashback.
+
+By default, this command will Flashback the entire cluster. If you need to flashback specified Regions or key range, you can use the following options:
+
+- Use the `-r` option to specify the Regions, with multiple Regions separated by `,`.
+- Use `--start` and `--end` to specify all Regions within a key range (no range limit by default, Hex format).
+
+When the command runs successfully, it will print `flashback all stores success!`. You can also view the execution progress via the [Raft admin > Peer in Flashback State](/grafana-tikv-dashboard.md#raft-admin) monitor entry.
+
+#### Example
+
+The following example flashback the entire cluster data to the point in time `430315739761082369`:
 
 ```shell
 tikv-ctl --pd 127.0.0.1:2379 flashback -v 430315739761082369
 ```
 
-The output is as follows:
+When you need to flashback the data of the Region with IDs `100` and `102` to the point in time `430315739761082369`, use the following command:
 
+```shell
+tikv-ctl --pd 127.0.0.1:2379 flashback -v 430315739761082369 -r 100,102
 ```
-flashback all stores success!
+
+When you need to flashback the key range data to time point `430315739761082369`, use the following command:
+
+```shell
+tikv-ctl --pd 127.0.0.1:2379 flashback -v 430315739761082369 --start 7480000000000000FF0800000000000000F8 --end 7480000000000000FF0C000000000000000000F8
 ```
 
 The meaning of each option in the above command is as follows:
-
-- `--pd` is used to specify the access address of the PD.
-- `-v` is used to specify the point in time of the Flashback target.
-- By default, this command will Flashback the entire cluster. If you need to flashback specified Regions or key range, you can:
-    - Use the `-r` option to specify the Regions, Multiple Regions are separated by `,`.
-    - Use `--start` and `--end` to specify all Regions within a key range (no range limit by default, Hex format).
 
 ### Ldb Command
 
