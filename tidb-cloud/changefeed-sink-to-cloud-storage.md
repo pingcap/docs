@@ -48,12 +48,12 @@ This document describes how to create a changefeed to stream data from TiDB Clou
     - Start replication from a specific [TSO](https://docs.pingcap.com/tidb/stable/glossary#tso)
     - Start replication from a specific time
 
-7. In the **Data Format** area, select either the `CSV` or `Canal-JSON` format.
+7. In the **Data Format** area, select either the **CSV** or **Canal-JSON** format.
 
     <SimpleTab>
-    <div label="Configure CSV Format">
+    <div label="Configure CSV format">
 
-    To configure the `CSV` format, fill in the following fields:
+    To configure the **CSV** format, fill in the following fields:
 
     ![the data format of CSV](/media/tidb-cloud/changefeed/sink-to-s3-02-data-format-csv-conf.jpg)
 
@@ -61,17 +61,17 @@ This document describes how to create a changefeed to stream data from TiDB Clou
     - **Delimiter**: Specify the character used to separate values in the CSV file. The comma (`,`) is the most commonly used delimiter.
     - **Quote**: Specify the character used to enclose values that contain the delimiter character or special characters. Typically, double quotes (`"`) are used as the quote character.
     - **Null/Empty Values**: Specify how null or empty values are represented in the CSV file. This is important for proper handling and interpretation of the data.
-    - **Include Commit Ts**: Whether to include [`commit-ts`](https://docs.pingcap.com/tidb/stable/ticdc-sink-to-cloud-storage#replicate-change-data-to-storage-services) in the CSV row. 
+    - **Include Commit Ts**: Control whether to include [`commit-ts`](https://docs.pingcap.com/tidb/stable/ticdc-sink-to-cloud-storage#replicate-change-data-to-storage-services) in the CSV row. 
 
     </div>
-    <div label="Configure Canal-JSON Format">
+    <div label="Configure Canal-JSON format">
 
     Canal-JSON is a plain JSON text format. To configure it, fill in the following fields:
 
     ![the data format of Canal-JSON](/media/tidb-cloud/changefeed/sink-to-s3-02-data-format-canal-json.jpg)
 
     - **Date Separator**: To rotate data based on the year, month, and day, or choose not to rotate at all.
-    - **Enable TiDB Extension**: When protocol is set to canal-json and enable-tidb-extension is set to true, TiCDC sends [WATERMARK events](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#watermark-event) and adds the [TiDB extension field](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#tidb-extension-field) to Canal-JSON messages.
+    - **Enable TiDB Extension**: When you enable this option, TiDB Cloud changefeed sends [WATERMARK events](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#watermark-event) and adds the [TiDB extension field](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#tidb-extension-field) to Canal-JSON messages.
 
     </div>
     </SimpleTab>
