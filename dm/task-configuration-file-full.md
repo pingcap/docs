@@ -238,7 +238,7 @@ mysql-instances:
 
 ## Configuration order
 
-From the sample configuration file, you can see that the configuration file is divided into a total of two parts: `global configuration` and `instance configuration`, where the `global configuration` is further divided into `basic configuration` and `feature configuration set`. The configuration order is as follows:
+From the sample configuration file, you can see that the configuration file contains two parts: `Global configuration` and `Instance configuration`, where the `Global configuration` contains `Basic configuration` and `Feature configuration set`. The configuration order is as follows:
 
 1. Edit the [global configuration](#global-configuration).
 2. Edit the [instance configuration](#instance-configuration) based on the global configuration.
