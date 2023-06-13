@@ -552,23 +552,23 @@ When the command runs successfully, it will print `flashback all stores success!
 
 #### Example
 
-The following example flashback the entire cluster data to the point in time `430315739761082369`:
+- The following example flashback the entire cluster data to the point in time `430315739761082369`:
 
-```shell
-tikv-ctl --pd 127.0.0.1:2379 flashback -v 430315739761082369
-```
+    ```shell
+    tikv-ctl --pd 127.0.0.1:2379 flashback -v 430315739761082369
+    ```
 
-When you need to flashback the data of the Region with IDs `100` and `102` to the point in time `430315739761082369`, use the following command:
+- When you need to flashback the data of the Region with IDs `100` and `102` to the point in time `430315739761082369`, use the following command:
 
-```shell
-tikv-ctl --pd 127.0.0.1:2379 flashback -v 430315739761082369 -r 100,102
-```
+    ```shell
+    tikv-ctl --pd 127.0.0.1:2379 flashback -v 430315739761082369 -r 100,102
+    ```
 
-When you need to flashback the key range data to time point `430315739761082369`, use the following command:
+- When you need to flashback the key range data to time point `430315739761082369`, use the following command:
 
-```shell
-tikv-ctl --pd 127.0.0.1:2379 flashback -v 430315739761082369 --start 7480000000000000FF0800000000000000F8 --end 7480000000000000FF0C000000000000000000F8
-```
+    ```shell
+    tikv-ctl --pd 127.0.0.1:2379 flashback -v 430315739761082369 --start 7480000000000000FF0800000000000000F8 --end 7480000000000000FF0C000000000000000000F8
+    ```
 
 The meaning of each option in the above command is as follows:
 
