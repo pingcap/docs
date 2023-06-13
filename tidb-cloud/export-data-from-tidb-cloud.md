@@ -41,11 +41,11 @@ You can use the tool [Dumpling](/dumpling-overview.md) for data export.
 
 4. Export your data using Dumpling from TiDB.
 
-    You can get the following connection parameters `${tidb_endpoint}`, `${port}`, and `${user}` from the connection string in the [**Connect**](/tidb-cloud/connect-via-standard-connection.md) dialog.
-
     <SimpleTab>
 
     <div label="TiDB Serverless">
+
+    You can get the following connection parameters `${tidb_endpoint}`, `${port}`, and `${user}` from the connection string in the [**Connect**](/tidb-cloud/connect-via-standard-connection-serverless.md) dialog.
 
     ```shell
     tiup dumpling -h ${tidb_endpoint} -P 4000 -u ${user} -p ${password} -F 67108864MiB -t 4 -o ${export_dir} --filetype sql --consistency none
@@ -57,6 +57,8 @@ You can use the tool [Dumpling](/dumpling-overview.md) for data export.
 
     </div>
     <div label="TiDB Dedicated">
+
+    You can get the following connection parameters `${tidb_endpoint}`, `${port}`, and `${user}` from the connection string in the [**Connect**](/tidb-cloud/connect-via-standard-connection.md) dialog.
 
     ```shell
     tiup dumpling:v6.5.2 -h ${tidb_endpoint} -P ${port} -u ${user} -p ${password} -F 67108864MiB -t 4 -o ${export_dir} --filetype sql
