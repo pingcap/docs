@@ -2389,6 +2389,24 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
     - Slow logs are printed after the statement is executed.
     - Expensive query logs print the statements that are being executed, with execution time exceeding the threshold value, and their related information.
 
+### tidb_expensive_txn_time_threshold
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> This TiDB variable is not applicable to TiDB Cloud.
+
+</CustomContent>
+
+- Scope: GLOBAL
+- Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
+- Type: Integer
+- Default value: `600`
+- Range: `[60, 2147483647]`
+- Unit: Seconds
+- This variable is used to set the threshold value that determines whether to print expensive txn logs. Expensive txn logs print the related information of transactions that have not been committed or rollback and the duration of the transaction exceeds the threshold value.
+
 ### tidb_force_priority
 
 <CustomContent platform="tidb-cloud">
