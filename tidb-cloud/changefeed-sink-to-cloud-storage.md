@@ -9,7 +9,7 @@ This document describes how to create a changefeed to stream data from TiDB Clou
 
 > **Note:**
 >
-> To stream data to cloud storage, make sure that your TiDB cluster version is v7.1.0 or later. If you want to upgrade cluster to v7.1.0 or higher, [contact PingCAP](https://docs.pingcap.com/tidbcloud/tidb-cloud-support) for support.
+> To stream data to cloud storage, make sure that your TiDB cluster version is v7.1.0 or later. To upgrade your TiDB Dedicated cluster to v7.1.0 or later, [contact TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 >
 > For [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta) clusters, the changefeed feature is unavailable.
 
@@ -29,10 +29,10 @@ This document describes how to create a changefeed to stream data from TiDB Clou
 
     ![create changefeed to sink to s3](/media/tidb-cloud/changefeed/sink-to-s3-01-create-changefeed.jpg)
 
-4. Click **Next** to establish the connection from the TiDB Dedicated cluster to Amazaon S3. TiDB Cloud will automatically test and verify if the connection is successful.
+4. Click **Next** to establish the connection from the TiDB Dedicated cluster to Amazon S3. TiDB Cloud will automatically test and verify if the connection is successful.
 
     - If yes, you are directed to the next step of configuration.
-    - If not, a connectivity error is displayed, and you need to handle the error. After the error is resolved, click **Next** again.
+    - If not, a connectivity error is displayed, and you need to handle the error. After the error is resolved, click **Next** to retry the connection.
 
 5. Customize **Table Filter** to filter the tables that you want to replicate. For the rule syntax, refer to [table filter rules](https://docs.pingcap.com/tidb/stable/ticdc-filter#changefeed-log-filters).
 
@@ -40,7 +40,7 @@ This document describes how to create a changefeed to stream data from TiDB Clou
 
     - **Filter Rules**: you can set filter rules in this column. By default, there is a rule `*.*`, which stands for replicating all tables. When you add a new rule, TiDB Cloud queries all the tables in TiDB and displays only the tables that match the rules in the box on the right.
     - **Tables with valid keys**: this column displays the tables that have valid keys, including primary keys or unique indexes.
-    - **Tables without valid keys**: This column shows tables that lack primary keys or unique keys. These tables present a challenge during replication because the absence of a unique identifier can result in inconsistent data when handling duplicate events downstream. To ensure data consistency, it is recommended to add unique keys or primary keys to these tables before initiating the replication. Alternatively, you can employ filter rules to exclude these tables. For example, you can exclude the table `test.tbl1` by using the rule `"!test.tbl1"`.
+    - **Tables without valid keys**: this column shows tables that lack primary keys or unique keys. These tables present a challenge during replication because the absence of a unique identifier can result in inconsistent data when handling duplicate events downstream. To ensure data consistency, it is recommended to add unique keys or primary keys to these tables before initiating the replication. Alternatively, you can employ filter rules to exclude these tables. For example, you can exclude the table `test.tbl1` by using the rule `"!test.tbl1"`.
 
 6. In the **Start Replication Position** area, select one of the following replication positions:
 
@@ -71,7 +71,7 @@ This document describes how to create a changefeed to stream data from TiDB Clou
     ![the data format of Canal-JSON](/media/tidb-cloud/changefeed/sink-to-s3-02-data-format-canal-json.jpg)
 
     - **Date Separator**: To rotate data based on the year, month, and day, or choose not to rotate at all.
-    - **Enable TiDB Extension**: When you enable this option, TiDB Cloud changefeed sends [WATERMARK events](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#watermark-event) and adds the [TiDB extension field](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#tidb-extension-field) to Canal-JSON messages.
+    - **Enable TiDB Extension**: When you enable this option, TiCDC sends [WATERMARK events](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#watermark-event) and adds the [TiDB extension field](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#tidb-extension-field) to Canal-JSON messages.
 
     </div>
     </SimpleTab>
@@ -89,4 +89,4 @@ This document describes how to create a changefeed to stream data from TiDB Clou
 
 10. The sink will start shortly, and you will observe the status of the sink changing from **Creating** to **Running**.
 
-11. Click on the name of the changefeed, and you will be able to view additional details about the changefeed. This includes information such as the checkpoint status, replication latency, and other relevant metrics associated with the changefeed.
+11. Click the name of the changefeed to go to its details page. On this page, you can view more information about the changefeed, including the checkpoint status, replication latency, and other relevant metrics.
