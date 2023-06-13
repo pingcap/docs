@@ -31,7 +31,10 @@ One Vercel project can only connect to one TiDB Cloud cluster. To change the int
 
 ### A TiDB Cloud account and a TiDB cluster
 
-You are expected to have an account and a cluster in TiDB Cloud. If you do not have any, refer to [Create a TiDB cluster](/tidb-cloud/create-tidb-cluster.md).
+You are expected to have an account and a cluster in TiDB Cloud. If you do not have any, refer to the following to create one:
+
+- [Create a TiDB Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
+- [Create a TiDB Dedicated cluster](/tidb-cloud/create-tidb-cluster.md)
 
 To [integrate with Vercel via the TiDB Cloud Vercel Integration](#connect-via-the-tidb-cloud-vercel-integration), you are expected to have the "Owner" access to your organization or the "Member" access to the target project in TiDB Cloud. For more information, see [Manage role access](/tidb-cloud/manage-user-access.md#manage-role-access).
 
@@ -88,7 +91,9 @@ DATABASE_URL
 
 ## Connect via manually setting environment variables
 
-1. Follow the steps in [Connect to a TiDB Cloud cluster via standard connection](/tidb-cloud/connect-via-standard-connection.md) to get the connection information of your TiDB cluster.
+1. Get the connection information of your TiDB cluster.
+
+    You can get the connection information from the connection dialog of your cluster. To open the dialog, click the ☰ hover menu in the upper-left corner of the [TiDB Cloud console](https://tidbcloud.com/), click the name of your target cluster to go to its overview page, and then click **Connect** in the upper-right corner.
 
     > **Note:**
     >

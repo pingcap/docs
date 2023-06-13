@@ -26,7 +26,7 @@ This section introduces how to enable the Index Insight feature and obtain recom
 
 ### Before you begin
 
-Before enabling the Index Insight feature, make sure that you have created a TiDB Dedicated cluster. If you do not have one, follow the steps in [Create a cluster](/tidb-cloud/create-tidb-cluster.md) to create one.
+Before enabling the Index Insight feature, make sure that you have created a TiDB Dedicated cluster. If you do not have one, follow the steps in [Create a TiDB Dedicated cluster](/tidb-cloud/create-tidb-cluster.md) to create one.
 
 ### Step 1: Enable Index Insight
 
@@ -46,7 +46,7 @@ Before enabling the Index Insight feature, make sure that you have created a TiD
 
     > **Note:**
     >
-    > To connect to your TiDB Dedicated cluster, see [Connect to a TiDB cluster](/tidb-cloud/connect-to-tidb-cluster.md).
+    > To connect to your TiDB Dedicated cluster, see [Connect to a TiDB Dedicated cluster](/tidb-cloud/connect-to-tidb-cluster.md).
 
 4. Enter the username and password of the SQL user created in the preceding step. Then, click **Activate** to initiate the activation process.
 

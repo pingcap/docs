@@ -11,7 +11,7 @@ This document describes how to manage your endpoints in a Data App in the TiDB C
 
 ## Before you begin
 
-Before you manage an endpoint, make sure that you have created a cluster and a Data App. For more information, see [Create a TiDB cluster](/tidb-cloud/create-tidb-cluster.md) and [Create a Data App](/tidb-cloud/data-service-manage-data-app.md#create-a-data-app).
+Before you manage an endpoint, make sure that you have created a cluster and a Data App. For more information, see [Create a TiDB Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) and [Create a Data App](/tidb-cloud/data-service-manage-data-app.md#create-a-data-app).
 
 Before you call an endpoint, make sure that you have created an API key in the Data App. For more information, see [Create an API key](/tidb-cloud/data-service-api-key.md#create-an-api-key).
 
