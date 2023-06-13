@@ -113,8 +113,8 @@ To understand the key metrics displayed on the TiDB dashboard, check the followi
 - KV Request OPS: the execution times of a KV request, displayed according to TiKV
 - KV Request Duration 99 by store: the execution time of a KV request, displayed according to TiKV
 - KV Request Duration 99 by type: the execution time of a KV request, displayed according to the request type
-- Stale Read OPS: the count of Stale Read per second, show as `hit` and `miss`
-- Stale Read Traffic: the traffic produced by Stale Read, show as `hit` and `miss`
+- Stale Read OPS: the number of Stale Read executed per second, which is divided into `hit` and `miss` categories
+- Stale Read Traffic: the traffic produced by Stale Read, which is divided into `hit` and `miss` categories
 
 ### PD Client
 
