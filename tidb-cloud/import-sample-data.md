@@ -32,8 +32,8 @@ This document describes how to import the sample data into TiDB Cloud via the UI
     - **Data format**: select **SQL File**. TiDB Cloud supports importing compressed files in the following formats: `.gzip`, `.gz`, `.zstd`, `.zst` and `.snappy`. If you want to import compressed SQL files, name the files in the `${db_name}.${table_name}.${suffix}.sql.${compress}` format, in which `${suffix}` is optional and can be any integer such as '000001'. For example, if you want to import the `trips.000001.sql.gz` file to the `bikeshare.trips` table, you can rename the file as `bikeshare.trips.000001.sql.gz`. Note that you only need to compress the data files, not the database or table schema files.
     - **Bucket URI**: enter the sample data URI `s3://tidbcloud-sample-data/data-ingestion/`
     - **Bucket Access**: for the sample data, you can only use a Role ARN to access its bucket. For your own data, you can use either an AWS access key or a Role ARN to access your bucket.
-        - **AWS Access Keys**: Skip this option for the sample data.
-        - **Role ARN**: enter `arn:aws:iam::801626783489:role/import-sample-access`
+        - **AWS Access Keys**: skip this option for the sample data.
+        - **AWS Role ARN**: enter `arn:aws:iam::801626783489:role/import-sample-access`
 
     If the region of the bucket is different from your cluster, confirm the compliance of cross region. Click **Next**.
 
@@ -51,9 +51,7 @@ This document describes how to import the sample data into TiDB Cloud via the UI
     </div>
     </SimpleTab>
 
-3. Add the table filter rules if needed. For the sample data, you can safely skip this step and click **Next**.
-
-4. On the **Preview** page, confirm the data to be imported and then click **Start Import**.
+3. Add the table filter rules if needed. For the sample data, you can safely skip this step and click **Start Import**.
 
 The data import process will take 5 to 10 minutes. When the data import progress shows **Finished**, you have successfully imported the sample data and the database schema to your database in TiDB Cloud.
 
