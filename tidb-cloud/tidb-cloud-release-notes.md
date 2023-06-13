@@ -8,6 +8,32 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2023.
 
+## June 13, 2023
+
+**General changes**
+
+- Support using Changefeeds to stream data to Amazon S3.
+
+    This enables seamless integration between TiDB Cloud and Amazon S3. It allows real-time data capture and replication from [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters to Amazon S3, ensuring that downstream applications and analytics have access to up-to-date data.
+
+    For more information, see [Sink to cloud storage](/tidb-cloud/changefeed-sink-to-cloud-storage.md).
+
+- Increase the maximum node storage of 16 vCPU TiKV for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters from 4 TiB to 6 TiB.
+
+    This enhancement increases the data storage capacity of your TiDB Dedicated cluster, improves workload scaling efficiency, and accommodates growing data requirements.
+
+    For more information, see [Size your cluster](/tidb-cloud/size-your-cluster.md).
+
+- Extend the [monitoring metrics retention period](/tidb-cloud/built-in-monitoring.md#metrics-retention-policy) for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta) clusters from 3 days to 7 days.
+
+    By extending the metrics retention period, now you have access to more historical data. This helps you identify trends and patterns of the cluster for better decision-making and faster troubleshooting.
+
+**Console changes**
+
+- Release a new native web infrastructure for the **Key Visualizer** page of [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters.
+
+    With the new infrastructure, you can easily navigate through the **Key Visualizer** page and access the necessary information in a more intuitive and efficient manner. The new infrastructure also resolves many problems on UX, making the SQL diagnosis process more user-friendly.
+
 ## June 6, 2023
 
 **General changes**
@@ -27,7 +53,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - Introduce [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=tidb_cloud_release_notes), an interactive platform for experiencing the full capabilities of TiDB, without registration or installation.
 
-    TiDB Playground is an interactive platform designed to provide a one-stop-shop experience for exploring the capabilities of TiDB, such as scalability, MySQL compatibility, and real-time analytics. 
+    TiDB Playground is an interactive platform designed to provide a one-stop-shop experience for exploring the capabilities of TiDB, such as scalability, MySQL compatibility, and real-time analytics.
 
     With TiDB Playground, you can try out TiDB features in a controlled environment free from complex configurations in real-time, making it ideal to understand the features in TiDB.
 
