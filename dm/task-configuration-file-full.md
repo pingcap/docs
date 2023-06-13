@@ -17,7 +17,7 @@ The following is the task configuration file template which allows you to perfor
 ```yaml
 ---
 
-# ----------- Global setting -----------
+# ----------- Global configuration -----------
 ## ********* Basic configuration *********
 name: test                      # The name of the task. Should be globally unique.
 task-mode: all                  # The task mode. Can be set to `full`(only migrates full data)/`incremental`(replicates binlogs synchronously)/`all` (replicates both full data and incremental binlogs).
