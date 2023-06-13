@@ -5,6 +5,12 @@ summary: Learn how to connect to your TiDB Serverless cluster via different meth
 
 # Connect to Your TiDB Serverless Cluster
 
+This document introduces the methods to connect to your TiDB Serverless cluster.
+
+> **Tip:**
+>
+> To learn how to connect to a TiDB Dedicated cluster, see [Connect to Your TiDB Dedicated Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
+
 After your TiDB Serverless cluster is created on TiDB Cloud, you can connect to it via one of the following methods:
 
 - [Connect via private endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) (recommended)

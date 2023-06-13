@@ -8,6 +8,10 @@ aliases: ['/tidbcloud/restore-deleted-tidb-cluster']
 
 This document describes how to back up and restore your TiDB Serverless cluster data on TiDB Cloud.
 
+> **Tip:**
+>
+> To learn how to back up and restore TiDB Dedicated cluster data, see [Back Up and Restore TiDB Dedicated Data](/tidb-cloud/backup-and-restore.md).
+
 ## Limitations
 
 - It is important to note that TiDB Serverless clusters only support in-place restoring from backups. When a restore is performed, tables in the `mysql` schema are also impacted. Hence, any changes made to user credentials and permissions or system variables will be rolled back to the state when the backup was taken.

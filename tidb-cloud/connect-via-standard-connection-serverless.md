@@ -7,6 +7,10 @@ summary: Learn how to connect to your TiDB Serverless cluster via public endpoin
 
 This document describes how to connect to your TiDB Serverless cluster via public endpoint. With the public endpoint, you can connect to your TiDB Serverless cluster via a SQL client from your laptop.
 
+> **Tip:**
+>
+> To learn how to connect to a TiDB Dedicated cluster via public endpoint, see [Connect to TiDB Dedicated via Standard Connection](/tidb-cloud/connect-via-standard-connection.md).
+
 To connect to a TiDB Serverless cluster via public endpoint, take the following steps:
 
 1. Navigate to the [**Clusters**](https://tidbcloud.com/console/clusters) page, and then click the name of your target cluster to go to its overview page.

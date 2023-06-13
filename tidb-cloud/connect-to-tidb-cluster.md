@@ -5,6 +5,12 @@ summary: Learn how to connect to your TiDB Dedicated cluster via different metho
 
 # Connect to Your TiDB Dedicated Cluster
 
+This document introduces the methods to connect to your TiDB Dedicated cluster.
+
+> **Tip:**
+>
+> To learn how to connect to a TiDB Serverless cluster, see [Connect to Your TiDB Serverless Cluster](/tidb-cloud/connect-to-tidb-cluster-serverless.md).
+
 After your TiDB Dedicated cluster is created on TiDB Cloud, you can connect to it via one of the following methods:
 
 - [Connect via standard connection](/tidb-cloud/connect-via-standard-connection.md)

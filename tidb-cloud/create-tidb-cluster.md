@@ -3,9 +3,13 @@ title: Create a TiDB Dedicated Cluster
 summary: Learn how to create your TiDB Dedicated cluster.
 ---
 
-# Create a TiDB Cluster
+# Create a TiDB Dedicated Cluster
 
 This tutorial guides you through signing up and creating a TiDB Dedicated cluster.
+
+> **Tip:**
+>
+> To learn how to create a TiDB Serverless cluster, see [Create a TiDB Serverless Cluster](/tidb-cloud/create-tidb-cluster-serverless.md).
 
 ## Before you begin
 
