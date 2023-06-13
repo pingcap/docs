@@ -524,16 +524,16 @@ success!
 
 ### Flashback
 
-TiDB v6.4.0 introduces the [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md) syntax, You can use it to restore the entire cluster to a specific point in time. For ease of use off TiDB, tikv-ctl provides the `flashback` command since v6.5.3. This command supports Flashback operations at the TiKV level.
+TiDB v6.4.0 introduces the [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md) syntax. You can use it to restore a cluster to a specific point in time. To facilitate usage without TiDB, starting from v6.5.3, tikv-ctl provides the `flashback` command. This command supports Flashback operations at the TiKV level.
 
 > **Note:**
 >
 > - The `flashback` command writes the old data of a specific point in time with the latest timestamp, and will not delete the current data. So before using this feature, you need to ensure that there is enough storage space for the old data and the current data.
-> - This command only supports local mode. It prints `flashback all stores success!` when successfully run.
+> - This command only supports local mode.
 
 #### Prerequisites
 
-Before executing the `flashback` command, you need to configure the cluster via `pd-ctl config set halt-scheduling true` command [stop PD scheduling](pd-control.md#config-show--set-option-value--placement-rules).
+Before running the `flashback` command, you need to [stop PD scheduling](pd-control.md#config-show--set-option-value--placement-rules) using the `pd-ctl config set halt-scheduling true` command.
 
 #### Usage
 
@@ -541,36 +541,34 @@ Before executing the `flashback` command, you need to configure the cluster via 
 tikv-ctl --pd <pd_address:port> flashback -v <target_timestamp>
 ```
 
-Use the `--pd` option to specify the access address of the PD. Use the `-v` option to specify the point in time of the Flashback.
+Use the `--pd` option to specify the access address of the PD. Use the `-v` option to specify the target timestamp for the Flashback.
 
 By default, this command will Flashback the entire cluster. If you need to flashback specified Regions or key range, you can use the following options:
 
-- Use the `-r` option to specify the Regions, with multiple Regions separated by `,`.
-- Use `--start` and `--end` to specify all Regions within a key range (no range limit by default, Hex format).
+- Use the `-r` option to specify the Regions. Multiple Regions are separated by commas (`,`).
+- Use `--start` and `--end` to specify all Regions within a key range (default: no range limit, in Hex format).
 
-When the command runs successfully, it will print `flashback all stores success!`. You can also view the execution progress via the [Raft admin > Peer in Flashback State](/grafana-tikv-dashboard.md#raft-admin) monitor entry.
+When the command runs successfully, it will print `flashback all stores success!`. You can also view the execution progress via the [Raft admin > Peer in Flashback State](/grafana-tikv-dashboard.md#raft-admin) statistic.
 
-#### Example
+#### Examples
 
-- The following example flashback the entire cluster data to the point in time `430315739761082369`:
+- To flashback the entire cluster data to the timestamp `430315739761082369`:
 
     ```shell
     tikv-ctl --pd 127.0.0.1:2379 flashback -v 430315739761082369
     ```
 
-- When you need to flashback the data of the Region with IDs `100` and `102` to the point in time `430315739761082369`, use the following command:
+- To flashback the data of Regions with IDs `100` and `102` to the timestamp `430315739761082369`, use the following command:
 
     ```shell
     tikv-ctl --pd 127.0.0.1:2379 flashback -v 430315739761082369 -r 100,102
     ```
 
-- When you need to flashback the key range data to time point `430315739761082369`, use the following command:
+- To flashback the data within a key range to the timestamp `430315739761082369`, use the following command:
 
     ```shell
     tikv-ctl --pd 127.0.0.1:2379 flashback -v 430315739761082369 --start 7480000000000000FF0800000000000000F8 --end 7480000000000000FF0C000000000000000000F8
     ```
-
-The meaning of each option in the above command is as follows:
 
 ### Ldb Command
 
