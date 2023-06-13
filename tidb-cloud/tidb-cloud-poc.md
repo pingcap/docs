@@ -58,7 +58,7 @@ You might also be interested in using [TiFlash](https://docs.pingcap.com/tidb/st
 
 ## Step 3. Sign up and create a TiDB Dedicated cluster for the PoC
 
-To create a TiDB Dedicated cluster for the PoC, take the following steps:
+To create a [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) cluster for the PoC, take the following steps:
 
 1. Fill in the PoC application form by doing one of the following:
 
@@ -67,16 +67,16 @@ To create a TiDB Dedicated cluster for the PoC, take the following steps:
 
     Once you submit the form, the TiDB Cloud Support team will review your application, contact you, and transfer credits to your account once the application is approved. You can also contact a PingCAP support engineer to assist with your PoC procedures to ensure the PoC runs as smoothly as possible.
 
-2. Refer to [Quick Start](/tidb-cloud/tidb-cloud-quickstart.md) to create a [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) cluster for the PoC.
+2. Refer to [Create a TiDB Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md) to create a TiDB Dedicated cluster for the PoC.
 
 Capacity planning is recommended for cluster sizing before you create a cluster. You can start with estimated numbers of TiDB, TiKV, or TiFlash nodes, and scale out the cluster later to meet performance requirements. You can find more details in the following documents or consult our support team.
 
 - For more information about estimation practice, see [Size Your TiDB](/tidb-cloud/size-your-cluster.md).
-- For configurations of the TiDB Dedicated cluster, see [Create a TiDB Cluster](/tidb-cloud/create-tidb-cluster.md). Configure the cluster size for TiDB, TiKV, and TiFlash (optional) respectively.
+- For configurations of the TiDB Dedicated cluster, see [Create a TiDB Dedicated Cluster](/tidb-cloud/create-tidb-cluster.md). Configure the cluster size for TiDB, TiKV, and TiFlash (optional) respectively.
 - For how to plan and optimize your PoC credits consumption effectively, see [FAQ](#faq) in this document.
 - For more information about scaling, see [Scale Your TiDB Cluster](/tidb-cloud/scale-tidb-cluster.md).
 
-Once a dedicated PoC cluster is created, you are ready to load data and perform a series of tests. For how to connect to a TiDB cluster, see [Connect to Your TiDB Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
+Once a dedicated PoC cluster is created, you are ready to load data and perform a series of tests. For how to connect to a TiDB cluster, see [Connect to Your TiDB Dedicated Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
 
 For a newly created cluster, note the following configurations:
 

@@ -46,13 +46,15 @@ Conveniently, the steps are the same for setting TiDB as the source and the dest
 
 1. Click **Sources** or **Destinations** in the sidebar and choose TiDB type to create a new TiDB connector.
 
-2. Fill in the following parameters. See [Connect via standard connection](/tidb-cloud/connect-via-standard-connection.md) to get the connection information from the connection string.
+2. Fill in the following parameters.
 
     - Host: The endpoint of your TiDB Cloud cluster
     - Port: The port of the database
     - Database: The database that you want to sync the data
     - Username: The username to access the database
     - Password: The password of the username
+
+    You can get the parameter values from the connection dialog of your cluster. To open the dialog, click the ☰ hover menu in the upper-left corner of the [TiDB Cloud console](https://tidbcloud.com/), click the name of your target cluster to go to its overview page, and then click **Connect** in the upper-right corner.
 
 3. Enable **SSL Connection**, and set TLS protocols to **TLSv1.2** or **TLSv1.3** in **JDBC URL Params**.
 

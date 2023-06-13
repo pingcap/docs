@@ -70,14 +70,12 @@ For example, the target database and table of all the following files are `impor
 
 When you import Parquet files, name the data files as follows:
 
-- `${db_name}.${table_name}${suffix}.parquet{.snappy|.gz|.lzo}` (`${suffix}` and `{.snappy|.gz|.lzo}` are optional)
+`${db_name}.${table_name}${suffix}.parquet` (`${suffix}` is optional)
 
 For example:
 
 - `import_db.test_table.parquet`
 - `import_db.test_table.01.parquet`
-- `import_db.test_table.parquet.gz`
-- `import_db.test_table.01.parquet.gz`
 
 ### Aurora Snapshot
 

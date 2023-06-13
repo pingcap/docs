@@ -22,7 +22,10 @@ You are expected to have a Netlify account and CLI. If you do not have any, refe
 
 ### A TiDB Cloud account and a TiDB cluster
 
-You are expected to have an account and a cluster in TiDB Cloud. If you do not have any, refer to [Create a TiDB cluster](/tidb-cloud/create-tidb-cluster.md).
+You are expected to have an account and a cluster in TiDB Cloud. If you do not have any, refer to the following to create one:
+
+- [Create a TiDB Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
+- [Create a TiDB Dedicated cluster](/tidb-cloud/create-tidb-cluster.md)
 
 One TiDB Cloud cluster can connect to multiple Netlify sites.
 
@@ -96,7 +99,7 @@ For a TiDB Dedicated cluster, you can get the connection string only from the Ti
 </div>
 <div label="TiDB Cloud console">
 
-1. Navigate to the [TiDB Cloud console](https://tidbcloud.com/), and get the following connection parameters from the connection string in the [**Connect**](/tidb-cloud/connect-via-standard-connection.md) dialog.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), click the ☰ hover menu in the upper-left corner, click the name of your target cluster to go to its overview page, and then click **Connect** in the upper-right corner. In the displayed dialog, you can get the following connection parameters from the connection string.
 
     - `${host}`
     - `${port}`
