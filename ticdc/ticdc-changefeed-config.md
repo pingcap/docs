@@ -198,4 +198,20 @@ use-file-backend = false
 integrity-check-level = "none"
 # Specifies the log level of the Changefeed when the checksum validation for single-row data fails. The default value is "warn". Value options are "warn" and "error".
 corruption-handle-level = "warn"
+# The following configuration only takes effect when the downstream is Kafka.
+[sink.kafka-config]
+# Kafka SASL authentication mechanism. The default value of this parameter is null, indicating that SASL authentication is not used.
+sasl-mechanism = "OAUTHBEARER"
+# The client-id in the Kafka SASL OAUTHBEARER authentication mechanism. The default value is empty. This parameter is required when using this authentication mechanism.
+sasl-oauth-client-id = "producer-kafka"
+# The client-secret in the Kafka SASL OAUTHBEARER authentication mechanism. The default value is empty. This parameter is required when using this authentication mechanism.
+sasl-oauth-client-secret = "cHJvZHVjZXIta2Fma2E="
+# The token URL in the Kafka SASL OAUTHBEARER authentication mechanism to obtain the token. The default value is empty. This parameter is required when using this authentication mechanism.
+sasl-oauth-token-url = "http://127.0.0.1:4444/oauth2/token"
+# The scope in the Kafka SASL OAUTHBEARER authentication mechanism. The default value is empty. This parameter is optional when using this authentication mechanism.
+sasl-oauth-scopes = ["producer.kafka", "consumer.kafka"]
+# The grant type in the Kafka SASL OAUTHBEARER authentication mechanism. The default value is `client_credentials`. This parameter is optional when using this authentication mechanism.
+sasl-oauth-grant-type = "client_credentials"
+# The audience in the Kafka SASL OAUTHBEARER authentication mechanism. The default value is empty. This parameter is optional when using this authentication mechanism.
+sasl-oauth-audience = "kafka"
 ```
