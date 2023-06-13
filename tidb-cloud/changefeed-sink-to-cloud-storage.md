@@ -61,7 +61,7 @@ This document describes how to create a changefeed to stream data from TiDB Clou
     - **Delimiter**: Specify the character used to separate values in the CSV file. The comma (`,`) is the most commonly used delimiter.
     - **Quote**: Specify the character used to enclose values that contain the delimiter character or special characters. Typically, double quotes (`"`) are used as the quote character.
     - **Null/Empty Values**: Specify how null or empty values are represented in the CSV file. This is important for proper handling and interpretation of the data.
-    - **Include Commit Ts**: Control whether to include [`commit-ts`](https://docs.pingcap.com/tidb/stable/ticdc-sink-to-cloud-storage#replicate-change-data-to-storage-services) in the CSV row. 
+    - **Include Commit Ts**: Control whether to include [`commit-ts`](https://docs.pingcap.com/tidb/stable/ticdc-sink-to-cloud-storage#replicate-change-data-to-storage-services) in the CSV row.
 
     </div>
     <div label="Configure Canal-JSON format">
@@ -78,7 +78,7 @@ This document describes how to create a changefeed to stream data from TiDB Clou
 
 8. Click **Next** to configure your changefeed specification.
 
-    - In the **Changefeed Specification** area, specify the number of replication capacity units (RCUs) to be used by the changefeed.
+    - In the **Changefeed Specification** area, specify the number of Replication Capacity Units (RCUs) to be used by the changefeed.
     - In the **Changefeed Name** area, specify a name for the changefeed.
 
 9. Click **Next** to review the changefeed configuration.
