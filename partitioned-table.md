@@ -404,7 +404,7 @@ test> select * from t;
 3 rows in set (0.01 sec)
 ```
 
-New in v7.1 is the support of a DEFAULT list partition, which acts as a 'catch-all' partition, where all rows that does not match the defined sets of values will be placed.
+Starting from v7.2.0, you can add a default list partition to a List partitioned table. The default list partition acts as a catch-all partition, where rows that do not match the defined value sets can be placed.
 
 Enable this feature with `set tidb_enable_default_list_partition = ON`, it is OFF by default, since it is not supported by MySQL.
 
