@@ -155,7 +155,7 @@ addr = "172.16.31.10:8287"
 #  - remove: records all duplicate records in the target table to the lightning_task_info database, like the 'record' algorithm.
 #    But it removes all duplicate records from the target table to ensure a consistent state in the target TiDB.
 # duplicate-resolution = 'none'
-# The maximum number of KVs in one request when sending data to TiKV in physical import mode.
+# The maximum number of KV pairs in one request when sending data to TiKV in physical import mode.
 # Starting from v7.2.0, this parameter is deprecated and no longer takes effect after it is set.
 # If you want to adjust the amount of data sent to TiKV in one request, use the `send-kv-size` parameter instead.
 # send-kv-pairs = 3200
