@@ -57,7 +57,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.5/quick-start-with-
         - Support using the OAuth protocol for validation when replicating data to Kafka [#8865](https://github.com/pingcap/tiflow/issues/8865) @[hi-rustin](https://github.com/hi-rustin)
         - Optimize the way TiCDC handles the `UPDATE` statement during data replication using the Avro or CSV protocol, by splitting `UPDATE` into `DELETE` and `INSERT` statements, so that you can get the old value from the `DELETE` statement [#9086](https://github.com/pingcap/tiflow/issues/9086) @[3AceShowHand](https://github.com/3AceShowHand)
         - (dup: release-7.1.0.md > Improvements> Tools> TiCDC)- Add a configuration item `insecure-skip-verify` to control whether to set the authentication algorithm in the scenario of enabling TLS [#8867](https://github.com/pingcap/tiflow/issues/8867) @[hi-rustin](https://github.com/hi-rustin)
-        - (dup: release-7.1.0.md > # Reliability)- TiCDC optimizes DDL replication operations to mitigate the impact of DDL operations on downstream latency [#8686](https://github.com/pingcap/tiflow/issues/8686) @[hi-rustin](https://github.com/hi-rustin)
+        - (dup: release-7.1.0.md > # Reliability)- Optimize DDL replication operations to mitigate the impact of DDL operations on downstream latency [#8686](https://github.com/pingcap/tiflow/issues/8686) @[hi-rustin](https://github.com/hi-rustin)
         - (dup: release-7.1.0.md > Improvements> Tools> TiCDC)- Optimize the method of setting GC TLS for the upstream when the TiCDC replication task fails [#8403](https://github.com/pingcap/tiflow/issues/8403) @[charleszheng44](https://github.com/charleszheng44)
 
     + TiDB Data Migration (DM)
