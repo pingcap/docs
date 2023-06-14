@@ -427,7 +427,7 @@ INSERT INTO t VALUES (7, 7);
 Query OK, 1 row affected (0.01 sec)
 ```
 
-One can also use it when creating the table:
+You can also add a default partition when creating a List partitioned table. For example:
 
 ```sql
 CREATE TABLE employees (
