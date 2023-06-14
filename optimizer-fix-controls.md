@@ -5,9 +5,9 @@ summary: Learn about the Optimizer Fix Controls feature and how to use `tidb_opt
 
 # Optimizer Fix Controls
 
-The TiDB optimizer has lots of details in its behavior. As TiDB evolves, these details are changing. Usually, these changes are improvements of the optimizer. But sometimes, they might cause unexpected results, such as:
+As the product evolves iteratively, the behavior of the TiDB optimizer changes, which in turn generates more reasonable execution plans. However, in some specific scenarios, the new behavior may lead to unintended results. For example:
 
-- For some implementation details, some behaviors are more suitable for certain scenarios. Changes that bring improvements for some scenarios might cause regressions for others.
+- The effect of some behaviors relies on a specific scenario. Changes that bring improvements for some scenarios might cause regressions for others.
 - Sometimes, the relationship between changes in the behavior details and their consequences is very complicated. An improvement in a certain behavior might cause execution plan regression as a whole.
 
 Therefore, TiDB provides the Optimizer Fix Controls feature that allows you to control the details of TiDB optimizer behaviors by setting a series of fixes. This document describes the Optimizer Fix Controls feature and how to use them, and lists all the fixes that TiDB currently supports.
