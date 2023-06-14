@@ -1,9 +1,15 @@
 ---
-title: Connect via Private Endpoint
+title: Connect to TiDB Dedicated via Private Endpoint
 summary: Learn how to connect to your TiDB Cloud cluster via private endpoint.
 ---
 
-# Connect via Private Endpoint
+# Connect to TiDB Dedicated via Private Endpoint
+
+This document describes how to connect to your TiDB Dedicated cluster via private endpoint.
+
+> **Tip:**
+>
+> To learn how to connect to a TiDB Serverless cluster via private endpoint, see [Connect to TiDB Serverless via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md).
 
 TiDB Cloud supports highly secure and one-way access to the TiDB Cloud service hosted in an AWS VPC via the [AWS PrivateLink](https://aws.amazon.com/privatelink/?privatelink-blogs.sort-by=item.additionalFields.createdDate&privatelink-blogs.sort-order=desc), as if the service were in your own VPC. A private endpoint is exposed in your VPC and you can create a connection to the TiDB Cloud service via the endpoint with permission.
 
@@ -31,93 +37,6 @@ In most scenarios, you are recommended to use private endpoint connection over V
 
 ## Set up a private endpoint with AWS
 
-This section describes how to set up a private endpoint with AWS PrivateLink for a TiDB Serverless cluster and a TiDB Dedicated cluster.
-
-### TiDB Serverless
-
-To connect to your TiDB Serverless cluster via a private endpoint, follow these steps:
-
-1. [Choose a TiDB cluster](#step-1-choose-a-tidb-cluster)
-2. [Create an AWS interface endpoint](#step-2-create-an-aws-interface-endpoint)
-3. [Connect to your TiDB cluster](#step-3-connect-to-your-tidb-cluster)
-
-#### Step 1. Choose a TiDB cluster
-
-1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click the name of your target TiDB Serverless cluster to go to its overview page.
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
-3. In the **Endpoint Type** drop-down list, select **Private**.
-4. Take a note of **Service Name**, **Availability Zone ID**, and **Region ID**.
-
-    > **Note:**
-    >
-    >  You only need to create one private endpoint per AWS region, which can be shared by all TiDB Serverless clusters located in the same region.
-
-#### Step 2. Create an AWS interface endpoint
-
-<SimpleTab>
-<div label="Use AWS Console">
-
-To use the AWS Management Console to create a VPC interface endpoint, perform the following steps:
-
-1. Sign in to the [AWS Management Console](https://aws.amazon.com/console/) and open the Amazon VPC console at <https://console.aws.amazon.com/vpc/>.
-2. Click **Endpoints** in the navigation pane, and then click **Create Endpoint** in the upper-right corner.
-
-    The **Create endpoint** page is displayed.
-
-    ![Verify endpoint service](/media/tidb-cloud/private-endpoint/create-endpoint-2.png)
-
-3. Select **Other endpoint services**.
-4. Enter the service name that you found in [step 1](#step-1-choose-a-tidb-cluster).
-5. Click **Verify service**.
-6. Select your VPC in the drop-down list. Expand **Additional settings** and select the **Enable DNS name** checkbox.
-7. In the **Subnets** area, select the availability zone where your TiDB cluster is located, and select the Subnet ID.
-8. Select your security group properly in the **Security groups** area.
-
-    > **Note:**
-    >
-    >  Make sure the selected security group allows inbound access from your EC2 instances on port 4000.
-
-9. Click **Create endpoint**.
-
-</div>
-<div label="Use AWS CLI">
-
-To use the AWS CLI to create a VPC interface endpoint, perform the following steps:
-
-1. To get the **VPC ID** and **Subnet ID**, navigate to your AWS Management Console, and locate them in the relevant sections. Make sure that you fill in the **Availability Zone ID** that you found in [step 1](#step-1-choose-a-tidb-cluster).
-2. Copy the command provided below, replace the relevant arguments with the information you obtained, and then execute it in your terminal.
-
-```bash
-aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${region_id} --service-name ${service_name} --vpc-endpoint-type Interface --subnet-ids ${your_subnet_id}
-```
-
-> **Tip:**
->
-> Before running the command, you need to have AWS CLI installed and configured. See [AWS CLI configuration basics](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html) for details.
-
-</div>
-</SimpleTab>
-
-Then you can connect to the endpoint service with the private DNS name.
-
-#### Step 3: Connect to your TiDB cluster
-
-After you have created the interface endpoint, go back to the TiDB Cloud console and take the following steps:
-
-1. On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click the name of your target cluster to go to its overview page.
-2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
-3. In the **Endpoint Type** drop-down list, select **Private**.
-4. In the **Connect With** drop-down list, select your preferred connection method. The corresponding connection string is displayed at the bottom of the dialog.
-5. Connect to your cluster with the connection string.
-
-> **Tip:**
->
-> If you cannot connect to the cluster, the reason might be that the security group of your VPC endpoint in AWS is not properly set. See [this FAQ](#troubleshooting) for solutions.
->
-> When creating a VPC endpoint, if you encounter an error `private-dns-enabled cannot be set because there is already a conflicting DNS domain for gatewayXX-privatelink.XX.prod.aws.tidbcloud.com in the VPC vpc-XXXXX`, it is due to that a private endpoint has already been created, and creating a new one is unnecessary.
-
-### TiDB Dedicated
-
 To connect to your TiDB Dedicated cluster via a private endpoint, complete the [prerequisites](#prerequisites) and follow these steps:
 
 1. [Choose a TiDB cluster](#step-1-choose-a-tidb-cluster)
@@ -129,7 +48,7 @@ To connect to your TiDB Dedicated cluster via a private endpoint, complete the [
 
 If you have multiple clusters, you need to repeat these steps for each cluster that you want to connect to using AWS PrivateLink.
 
-#### Prerequisites
+### Prerequisites
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
 2. In the left navigation pane of the [**Clusters**](https://tidbcloud.com/console/clusters) page, do one of the following:
@@ -140,12 +59,12 @@ If you have multiple clusters, you need to repeat these steps for each cluster t
 3. Click the **Private Endpoint** tab.
 4. Click **Add** in the upper-right corner.
 
-#### Step 1. Choose a TiDB cluster
+### Step 1. Choose a TiDB cluster
 
 1. Click the drop-down list and choose an available TiDB Dedicated cluster.
 2. Click **Next**.
 
-#### Step 2. Check the service endpoint region
+### Step 2. Check the service endpoint region
 
 Your service endpoint region is selected by default. Have a quick check and click **Next**.
 
@@ -153,7 +72,7 @@ Your service endpoint region is selected by default. Have a quick check and clic
 >
 > The default region is where your cluster is located. Do not change it. Cross-region private endpoint is currently not supported.
 
-#### Step 3. Create an AWS interface endpoint
+### Step 3. Create an AWS interface endpoint
 
 > **Note:**
 >
@@ -216,13 +135,13 @@ To use the AWS CLI to create a VPC interface endpoint, perform the following ste
 </div>
 </SimpleTab>
 
-#### Step 4. Accept the endpoint connection
+### Step 4. Accept the endpoint connection
 
 1. Go back to the TiDB Cloud console.
 2. Fill in the box with your VPC endpoint ID on the **Create Private Endpoint** page.
 3. Click **Next**.
 
-#### Step 5. Enable private DNS
+### Step 5. Enable private DNS
 
 Enable private DNS in AWS. You can either use the AWS Management Console or the AWS CLI.
 
@@ -254,7 +173,7 @@ Click **Create** in the TiDB Cloud console to finalize the creation of the priva
 
 Then you can connect to the endpoint service.
 
-#### Step 6: Connect to your TiDB cluster
+### Step 6: Connect to your TiDB cluster
 
 After you have enabled the private DNS, go back to the TiDB Cloud console and take the following steps:
 
@@ -267,7 +186,7 @@ After you have enabled the private DNS, go back to the TiDB Cloud console and ta
 >
 > If you cannot connect to the cluster, the reason might be that the security group of your VPC endpoint in AWS is not properly set. See [this FAQ](#troubleshooting) for solutions.
 
-#### Private endpoint status reference
+### Private endpoint status reference
 
 When you use private endpoint connections, the statuses of private endpoints or private endpoint services are displayed on the [**Private Endpoint** page](#prerequisites).
 

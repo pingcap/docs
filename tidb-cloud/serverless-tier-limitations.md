@@ -29,7 +29,7 @@ We are constantly filling in the feature gaps between TiDB Serverless and TiDB D
 
 ### Connection
 
-- Only [Standard Connection](/tidb-cloud/connect-via-standard-connection.md) and [Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections.md) can be used. You cannot use [VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md) to connect to TiDB Serverless clusters. 
+- Only [Standard Connection](/tidb-cloud/connect-via-standard-connection-serverless.md) and [Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) can be used. You cannot use [VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md) to connect to TiDB Serverless clusters. 
 - No "IP Access List" support.
 
 ### Monitoring
@@ -66,6 +66,6 @@ Once the free quota of a cluster is reached, the read and write operations on th
 
 To learn more about the RU consumption of different resources (including read, write, SQL CPU, and network egress), the pricing details, and the throttled information, see [TiDB Serverless Pricing Details](https://www.pingcap.com/tidb-cloud-serverless-pricing-details).
 
-If you want to create a TiDB Serverless cluster with an additional quota, you can edit the spend limit on the cluster creation page. For more information, see [Create a TiDB cluster](/tidb-cloud/create-tidb-cluster.md#step-4-create-a-tidb-cluster).
+If you want to create a TiDB Serverless cluster with an additional quota, you can edit the spend limit on the cluster creation page. For more information, see [Create a TiDB Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md).
 
 After creating a TiDB Serverless, you can still check and edit the spend limit on your cluster overview page. For more information, see [Manage Spend Limit for TiDB Serverless Clusters](/tidb-cloud/manage-serverless-spend-limit.md).

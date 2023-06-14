@@ -37,7 +37,7 @@ Before querying data, make sure that you have completed the following steps:
 
 <CustomContent platform="tidb-cloud">
 
-3. [Connect to TiDB](/tidb-cloud/connect-to-tidb-cluster.md).
+3. [Connect to TiDB](/tidb-cloud/connect-to-tidb-cluster-serverless.md).
 
 </CustomContent>
 
