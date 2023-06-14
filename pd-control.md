@@ -332,6 +332,8 @@ Usage:
 
 - `store-limit-mode` is used to control the mode of limiting the store speed. The optional modes are `auto` and `manual`. In `auto` mode, the stores are automatically balanced according to the load (experimental).
 
+- `halt-scheduling` is used to halt scheduling. When you set it to `true`, PD will halt scheduling and ignore other scheduling configurations. Introduced in v6.5.3.
+
 - PD rounds the lowest digits of the flow number, which reduces the update of statistics caused by the changes of the Region flow information. This configuration item is used to specify the number of lowest digits to round for the Region flow information. For example, the flow `100512` will be rounded to `101000` because the default value is `3`. This configuration replaces `trace-region-flow`.
 
 - For example, set the value of `flow-round-by-digit` to `4`:

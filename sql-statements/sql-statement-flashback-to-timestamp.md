@@ -100,7 +100,16 @@ mysql> FLASHBACK CLUSTER TO TIMESTAMP '2022-10-09 16:40:51';
 ERROR 1105 (HY000): Detected schema change due to another DDL job during [2022-10-09 16:40:51 +0800 CST, now), can't do flashback
 ```
 
+<CustomContent platform="tidb">
+
+The `FLASHBACK` execution progress can be viewed via the [Raft admin > Peer in Flashback State](/grafana-tikv-dashboard.md#raft-admin) metrics and the log. The following log is an example:
+
+</CustomContent>
+<CustomContent platform="tidb-cloud">
+
 Through the log, you can obtain the execution progress of `FLASHBACK`. The following is an example:
+
+</CustomContent>
 
 ```
 [2022/10/09 17:25:59.316 +08:00] [INFO] [cluster.go:463] ["flashback cluster stats"] ["complete regions"=9] ["total regions"=10] []
