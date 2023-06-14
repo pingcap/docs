@@ -527,6 +527,12 @@
       - [describe](/tidb-cloud/ticloud-cluster-describe.md)
       - [list](/tidb-cloud/ticloud-cluster-list.md)
       - [connect-info](/tidb-cloud/ticloud-cluster-connect-info.md)
+    - branch
+      - [create](/tidb-cloud/ticloud-branch-create.md)
+      - [delete](/tidb-cloud/ticloud-branch-delete.md)
+      - [describe](/tidb-cloud/ticloud-branch-describe.md)
+      - [list](/tidb-cloud/ticloud-branch-list.md)
+      - [connect-info](/tidb-cloud/ticloud-branch-connect-info.md)
     - config
       - [create](/tidb-cloud/ticloud-config-create.md)
       - [delete](/tidb-cloud/ticloud-config-delete.md)
