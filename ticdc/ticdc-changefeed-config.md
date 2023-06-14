@@ -198,6 +198,7 @@ use-file-backend = false
 integrity-check-level = "none"
 # Specifies the log level of the Changefeed when the checksum validation for single-row data fails. The default value is "warn". Value options are "warn" and "error".
 corruption-handle-level = "warn"
+
 [sink.kafka-config]
 # The following configuration items only take effect when the downstream is Kafka.
 # The mechanism of Kafka SASL authentication. The default value is empty, indicating that SASL authentication is not used.
