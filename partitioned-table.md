@@ -309,7 +309,7 @@ ALTER TABLE table_name LAST PARTITION LESS THAN (<expression>)
 
 ### List partitioning
 
-Before creating a List partitioned table, you need to set the value of the session variable `tidb_enable_list_partition` to the default value `ON`.
+Before creating a List partitioned table, make sure that the session variable `tidb_enable_list_partition` is set to its default value `ON`.
 
 {{< copyable "sql" >}}
 
