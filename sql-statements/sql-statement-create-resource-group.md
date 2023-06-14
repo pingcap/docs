@@ -9,7 +9,7 @@ summary: Learn the usage of CREATE RESOURCE GROUP in TiDB.
 
 > **Note:**
 >
-> This feature is not available on [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta).
+> This feature is not available on [TiDB Serverless clusters](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless-beta).
 
 </CustomContent>
 
@@ -18,25 +18,25 @@ You can use the `CREATE RESOURCE GROUP` statement to create a resource group.
 ## Synopsis
 
 ```ebnf+diagram
-CreateResourceGroupStmt:
+CreateResourceGroupStmt ::=
    "CREATE" "RESOURCE" "GROUP" IfNotExists ResourceGroupName ResourceGroupOptionList
 
 IfNotExists ::=
     ('IF' 'NOT' 'EXISTS')?
 
-ResourceGroupName:
+ResourceGroupName ::=
    Identifier
 
-ResourceGroupOptionList:
+ResourceGroupOptionList ::=
     DirectResourceGroupOption
 |   ResourceGroupOptionList DirectResourceGroupOption
 |   ResourceGroupOptionList ',' DirectResourceGroupOption
 
-DirectResourceGroupOption:
+DirectResourceGroupOption ::=
     "RU_PER_SEC" EqOpt stringLit
 |   "PRIORITY" EqOpt ResourceGroupPriorityOption
 |   "BURSTABLE"
-ResourceGroupPriorityOption:
+ResourceGroupPriorityOption ::=
     LOW
 |   MEDIUM
 |   HIGH

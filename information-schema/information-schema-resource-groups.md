@@ -5,15 +5,11 @@ summary: Learn the `RESOURCE_GROUPS` information_schema table.
 
 # RESOURCE_GROUPS
 
-> **Warning:**
->
-> This feature is experimental and its form and usage might change in subsequent versions.
-
 <CustomContent platform="tidb-cloud">
 
 > **Note:**
 >
-> This feature is not available on [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta).
+> This feature is not available on [TiDB Serverless clusters](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-serverless-beta).
 
 </CustomContent>
 

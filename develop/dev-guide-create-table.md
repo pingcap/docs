@@ -11,7 +11,7 @@ This document introduces how to create tables using the SQL statement and the re
 
 Before reading this document, make sure that the following tasks are completed:
 
-- [Build a TiDB Cluster in TiDB Cloud (Serverless Tier)](/develop/dev-guide-build-cluster-in-cloud.md).
+- [Build a TiDB Serverless Cluster](/develop/dev-guide-build-cluster-in-cloud.md).
 - Read [Schema Design Overview](/develop/dev-guide-schema-design-overview.md).
 - [Create a Database](/develop/dev-guide-create-database.md).
 
@@ -57,7 +57,7 @@ Column definitions typically take the following form.
 
 - `{column_name}`: The column name.
 - `{data_type}`: The column [data type](/data-type-overview.md).
-- `{column_qualification}`: Column qualifications, such as **column-level constraints** or [generated column (experimental feature)](/generated-columns.md) clauses.
+- `{column_qualification}`: Column qualifications, such as **column-level constraints** or [generated column](/generated-columns.md) clauses.
 
 You can add some columns to the `users` table, such as the unique identifier `id`, `balance` and `nickname`.
 
@@ -102,7 +102,7 @@ A [primary key](/constraints.md#primary-key) is a column or a set of columns in 
 
 > **Note:**
 >
-> The default definition of **primary key** in TiDB is different from that in [InnoDB](https://mariadb.com/kb/en/innodb/)(the common storage engine of MySQL). 
+> The default definition of **primary key** in TiDB is different from that in [InnoDB](https://dev.mysql.com/doc/refman/8.0/en/innodb-storage-engine.html)(the common storage engine of MySQL).
 >
 > - In **InnoDB**: A **primary key** is unique, not null, and **index clustered**.
 >
@@ -290,7 +290,7 @@ ALTER TABLE `bookshop`.`ratings` SET TIFLASH REPLICA 1;
 
 > **Note:**
 >
-> If your cluster does not contain **TiFlash** nodes, this SQL statement will report an error: `1105 - the tiflash replica count: 1 should be less than the total tiflash server count: 0`. You can use [Build a TiDB Cluster in TiDB Cloud (Serverless Tier)](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-serverless-tier-cluster) to create a Serverless Tier cluster that includes **TiFlash**.
+> If your cluster does not contain **TiFlash** nodes, this SQL statement will report an error: `1105 - the tiflash replica count: 1 should be less than the total tiflash server count: 0`. You can use [Build a TiDB Serverless Cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-tidb-serverless-cluster) to create a TiDB Serverless cluster that includes **TiFlash**.
 
 Then you can go on to perform the following query:
 
