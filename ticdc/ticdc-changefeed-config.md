@@ -199,8 +199,8 @@ integrity-check-level = "none"
 # Specifies the log level of the Changefeed when the checksum validation for single-row data fails. The default value is "warn". Value options are "warn" and "error".
 corruption-handle-level = "warn"
 
-[sink.kafka-config]
 # The following configuration items only take effect when the downstream is Kafka.
+[sink.kafka-config]
 # The mechanism of Kafka SASL authentication. The default value is empty, indicating that SASL authentication is not used.
 sasl-mechanism = "OAUTHBEARER"
 # The client-id in the Kafka SASL OAUTHBEARER authentication. The default value is empty. This parameter is required when using OAUTHBEARER authentication.
