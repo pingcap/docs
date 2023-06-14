@@ -812,3 +812,111 @@ Example:
 ```sql
 SELECT /*+ RESOURCE_GROUP(rg1) */ * FROM t limit 10;
 ```
+
+## Common Issues that Hints can not take effect
+
+### Hints can not take effect because MySQL Client eliminates Hints automatically
+
+MySQL command-line clients earlier than 5.7.7 strip optimizer hints by default. If you want to use the `Hint` syntax in these earlier versions, add the `--comments` option when starting the client. For example: `mysql -h 127.0.0.1 -P 4000 -uroot --comments`.
+
+### Hints can not take effect because the database name is not specified
+
+If the database name is not specified when creating the connection, hints may not take oeffect. For example:
+
+Use `mysql -h127.0.0.1 -P4000 -uroot` to connect to the TiDB without using `-D` to specify the database name. And then execute SQLs below: 
+
+```sql
+SELECT /*+ use_index(t, a) */ a FROM test.t;
+SHOW WARNINGS;
+```
+
+The hint `use_index(t, a)` can not take effect since TiDB don't know table `t`'s database name.
+
+```sql
++---------+------+----------------------------------------------------------------------+
+| Level   | Code | Message                                                              |
++---------+------+----------------------------------------------------------------------+
+| Warning | 1815 | use_index(.t, a) is inapplicable, check whether the table(.t) exists |
++---------+------+----------------------------------------------------------------------+
+1 row in set (0.00 sec)
+```
+
+### Hints can not take effect because the database name is not specified correctly in cross-table queries
+
+For cross-table queries, you need to specify database names explicitly, otherwise hints may not take effect. For example:
+
+```sql
+USE test1;
+CREATE TABLE t1(a INT, KEY(a));
+USE test2;
+CREATE TABLE t2(a INT, KEY(a));
+SELECT /*+ use_index(t1, a) */ * FROM test1.t1, t2;
+SHOW WARNINGS;
+```
+
+Since `t1` is not in the current database `test2`, `use_index(t1, a)` can not take effect. In this case, you need to specify the database name explicitly `use_index(test1.t1, a)`.
+
+```sql
++---------+------+----------------------------------------------------------------------------------+
+| Level   | Code | Message                                                                          |
++---------+------+----------------------------------------------------------------------------------+
+| Warning | 1815 | use_index(test2.t1, a) is inapplicable, check whether the table(test2.t1) exists |
++---------+------+----------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+```
+
+### Hints can not take effect because of wrong places
+
+If hints are not placed behind the specified key words, they can not take effect. For example:
+
+```sql
+SELECT * /*+ use_index(t, a) */ FROM t;
+SHOW WARNINGS;
+```
+
+Warning 信息如下：
+
+```sql
++---------+------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Level   | Code | Message                                                                                                                                                                                                                 |
++---------+------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Warning | 1064 | You have an error in your SQL syntax; check the manual that corresponds to your TiDB version for the right syntax to use [parser:8066]Optimizer hint can only be followed by certain keywords like SELECT, INSERT, etc. |
++---------+------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.01 sec)
+```
+
+In this case, the hint should be placed behind the `SELECT` key word. See [Hint Syntax](#syntax) for more details.
+
+### INL_JOIN hint can not take effect because of collation
+
+If two tables' join keys have different collation, `IndexJoin` can not be used, and in this case `INL_JOIN` can not take effect. For example:
+
+```sql
+mysql> create table t1 (k varchar(8), key(k)) collate=utf8mb4_general_ci;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> create table t2 (k varchar(8), key(k)) collate=utf8mb4_bin;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> explain select /*+ tidb_inlj(t1) */ * from t1, t2 where t1.k=t2.k;
++-----------------------------+----------+-----------+----------------------+----------------------------------------------+
+| id                          | estRows  | task      | access object        | operator info                                |
++-----------------------------+----------+-----------+----------------------+----------------------------------------------+
+| HashJoin_19                 | 12487.50 | root      |                      | inner join, equal:[eq(test.t1.k, test.t2.k)] |
+| ├─IndexReader_24(Build)     | 9990.00  | root      |                      | index:IndexFullScan_23                       |
+| │ └─IndexFullScan_23        | 9990.00  | cop[tikv] | table:t2, index:k(k) | keep order:false, stats:pseudo               |
+| └─IndexReader_22(Probe)     | 9990.00  | root      |                      | index:IndexFullScan_21                       |
+|   └─IndexFullScan_21        | 9990.00  | cop[tikv] | table:t1, index:k(k) | keep order:false, stats:pseudo               |
++-----------------------------+----------+-----------+----------------------+----------------------------------------------+
+5 rows in set, 1 warning (0.00 sec)
+
+mysql> show warnings;
++---------+------+----------------------------------------------------------------------------+
+| Level   | Code | Message                                                                    |
++---------+------+----------------------------------------------------------------------------+
+| Warning | 1815 | Optimizer Hint /*+ INL_JOIN(t1) */ or /*+ TIDB_INLJ(t1) */ is inapplicable |
++---------+------+----------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+```
+
+`t1.k` and `t2.k` above have different collation(`utf8mb4_general_ci` and `utf8mb4_bin`), `INL_JOIN`(or `TIDB_INLJ`) hint can not take effect.
