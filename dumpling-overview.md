@@ -198,17 +198,7 @@ When you back up data using Dumpling, explicitly specify the `--s3.region` param
 {{< copyable "shell-regular" >}}
 
 ```shell
-<<<<<<< HEAD
-./dumpling \
-  -u root \
-  -P 4000 \
-  -h 127.0.0.1 \
-  -r 200000 \
-  -o "s3://${Bucket}/${Folder}" \
-  --s3.region "${region}"
-=======
-./dumpling -u root -P 4000 -h 127.0.0.1 -r 200000 -o "s3://${Bucket}/${Folder}"
->>>>>>> af3e53f0c (update dumpling code example format (#8999))
+./dumpling -u root -P 4000 -h 127.0.0.1 -r 200000 -o "s3://${Bucket}/${Folder}" --s3.region "${region}"
 ```
 
 ### Filter the exported data
@@ -219,18 +209,8 @@ By default, Dumpling exports all databases except system databases (including `m
 
 {{< copyable "shell-regular" >}}
 
-<<<<<<< HEAD
-```bash
-./dumpling \
-  -u root \
-  -P 4000 \
-  -h 127.0.0.1 \
-  -o /tmp/test \
-  --where "id < 100"
-=======
 ```shell
 ./dumpling -u root -P 4000 -h 127.0.0.1 -o /tmp/test --where "id < 100"
->>>>>>> af3e53f0c (update dumpling code example format (#8999))
 ```
 
 The above command exports the data that matches `id < 100` from each table. Note that you cannot use the `--where` parameter together with `--sql`.
