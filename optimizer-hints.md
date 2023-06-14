@@ -8,37 +8,9 @@ aliases: ['/docs/dev/optimizer-hints/','/docs/dev/reference/performance/optimize
 
 TiDB supports optimizer hints, which are based on the comment-like syntax introduced in MySQL 5.7. For example, one of the common syntaxes is `/*+ HINT_NAME([t1_name [, t2_name] ...]) */`. Use of optimizer hints is recommended in cases where the TiDB optimizer selects a less optimal query plan.
 
-> **Note:**
->
-> MySQL command-line clients earlier than 5.7.7 strip optimizer hints by default. If you want to use the `Hint` syntax in these earlier versions, add the `--comments` option when starting the client. For example: `mysql -h 127.0.0.1 -P 4000 -uroot --comments`.
+If you meet some cases that hints can not take effect, please see [common issues that hints can not take effect](#common-issues-that-hints-can-not-take-effect).
 
 ## Syntax
-
-> **Note:**
->
-> If the table you want to hint is not in the database specified by `USE DATABASE`, you need to specify the database name explicitly. For example:
->
-> ```sql
-> tidb> SELECT /*+ HASH_JOIN(t2, t) */ * FROM t, test2.t2;
-> Empty set, 1 warning (0.00 sec)
->
-> tidb> SHOW WARNINGS;
-> +---------+------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
-> | Level   | Code | Message                                                                                                                                               |
-> +---------+------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
-> | Warning | 1815 | There are no matching table names for (t2) in optimizer hint /*+ HASH_JOIN(t2, t) */ or /*+ TIDB_HJ(t2, t) */. Maybe you can use the table alias name |
-> +---------+------+-------------------------------------------------------------------------------------------------------------------------------------------------------+
-> 1 row in set (0.00 sec)
->
-> tidb> SELECT /*+ HASH_JOIN(test2.t2, t) */ * FROM t, test2.t2;
-> Empty set (0.00 sec)
->
-> tidb> SELECT /*+ READ_FROM_STORAGE(TIFLASH[test1.t1,test2.t2]) */ t1.a FROM test1.t t1, test2.t t2 WHERE t1.a = t2.a;
-> Empty set (0.00 sec)
->
-> ```
->
-> The examples in this document are all tables in the same database. If the tables you use are not in the same database, refer to the instructions to explicitly specify the database name.
 
 Optimizer hints are case insensitive and specified within `/*+ ... */` comments following the `SELECT`, `UPDATE` or `DELETE` keyword in a SQL statement. Optimizer hints are not currently supported for `INSERT` statements.
 
