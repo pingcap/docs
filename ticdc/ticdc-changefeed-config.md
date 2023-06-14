@@ -130,10 +130,16 @@ write-key-threshold = 0
 # ]
 
 # The protocol configuration item specifies the protocol format of the messages sent to the downstream.
-# When the downstream is Kafka, the protocol can only be canal-json or avro.
+# When the downstream is Kafka, the protocol can only be canal-json, avro or open-protocol.
 # When the downstream is a storage service, the protocol can only be canal-json or csv.
 # Note: This configuration item only takes effect if the downstream is Kafka or a storage service.
 # protocol = "canal-json"
+
+# Starting from v7.2.0, the delete-only-output-handle-key-columns parameter is used to specify the output content of the Delete event, and it is only valid for the canal-json and open-protocol protocols.
+# The default value is false, which means outputting the contents of all columns. When set to true, only the contents of primary key columns or unique index columns # are output.
+# The Avro protocol is not controlled by this parameter and always outputs only the contents of primary key columns or unique index columns.
+# The CSV protocol is not controlled by this parameter and always outputs the contents of all columns.
+delete-only-output-handle-key-columns = false
 
 # The following three configuration items are only used when you replicate data to storage sinks and can be ignored when replicating data to MQ or MySQL sinks.
 # Row terminator, used for separating two data change events. The default value is an empty string, which means "\r\n" is used.
