@@ -420,7 +420,9 @@ or
 ALTER TABLE t ADD PARTITION (PARTITION pDef VALUES IN (DEFAULT));
 ```
 
-Which then will allow values that does not match the column value set by any partition to go into the Default partition.
+In this way, any newly inserted values that do not match the value sets by any partitions automatically go into the default partition.
+
+```
 INSERT INTO t VALUES (7, 7);
 Query OK, 1 row affected (0.01 sec)
 ```
