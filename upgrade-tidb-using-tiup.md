@@ -53,6 +53,7 @@ This following provides compatibility changes you need to know when you upgrade 
 - TiDB v6.5.0 [compatibility changes](/releases/release-6.5.0.md#compatibility-changes) and [deprecated features](/releases/release-6.5.0.md#deprecated-feature)
 - TiDB v6.5.1 [compatibility changes](/releases/release-6.5.1.md#compatibility-changes)
 - TiDB v6.5.2 [compatibility changes](/releases/release-6.5.2.md#compatibility-changes)
+- TiDB v6.5.3 [release notes](/releases/release-6.5.3.md)
 
 ### Step 2: Upgrade TiUP or TiUP offline mirror
 
