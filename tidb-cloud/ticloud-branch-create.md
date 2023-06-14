@@ -33,18 +33,18 @@ ticloud branch create --cluster-id <cluster-id> --branch-name <branch-name>
 
 In non-interactive mode, you need to manually enter the required flags. In interactive mode, you can just follow CLI prompts to fill them in.
 
-| Flag                    | Description                                                 | Required | Note                             |
-|-------------------------|-------------------------------------------------------------|----------|-----------------------------------|
-| -c, --cluster-id string | The Id of the cluster, in which the branch will be created  | Yes      | Only works in non-interactive mode. |
-| --branch-name string    | Name of the branch to be created                            | Yes      | Only works in non-interactive mode. |
-| -h, --help              | Get help information for this command                       | No       | Works in both non-interactive and interactive modes  |
+| Flag                    | Description                                                | Required | Note                                                |
+|-------------------------|------------------------------------------------------------|----------|-----------------------------------------------------|
+| -c, --cluster-id string | The ID of the cluster, in which the branch will be created | Yes      | Only works in non-interactive mode.                 |
+| --branch-name string    | Name of the branch to be created                           | Yes      | Only works in non-interactive mode.                 |
+| -h, --help              | Get help information for this command                      | No       | Works in both non-interactive and interactive modes |
 
 ## Inherited flags
 
-| Flag                 | Description                                                                               | Required | Note                                                                                                                    |
-|----------------------|-------------------------------------------------------------------------------------------|----------|--------------------------------------------------------------------------------------------------------------------------|
-| --no-color           | Disables color in output.                                                                  | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components. |
-| -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Works in both non-interactive and interactive modes.                                                                      |
+| Flag                 | Description                                                                                          | Required | Note                                                                                                               |
+|----------------------|------------------------------------------------------------------------------------------------------|----------|--------------------------------------------------------------------------------------------------------------------|
+| --no-color           | Disables color in output.                                                                            | No       | Only works in non-interactive mode. In interactive mode, disabling color might not work with some UI components.   |
+| -P, --profile string | Specifies the active [user profile](/tidb-cloud/cli-reference.md#user-profile) used in this command. | No       | Works in both non-interactive and interactive modes.                                                               |
 
 ## Feedback
 
