@@ -406,7 +406,7 @@ test> select * from t;
 
 Starting from v7.2.0, you can add a default list partition to a List partitioned table. The default list partition acts as a catch-all partition, where rows that do not match the defined value sets can be placed.
 
-Enable this feature with `set tidb_enable_default_list_partition = ON`, it is OFF by default, since it is not supported by MySQL.
+Before using the default list partition feature, you need to set the `tidb_enable_default_list_partition` system variable to `ON`, which is `OFF` by default because it is not supported in MySQL.
 
 Then, you can add a default partition to an existing table. For example:
 
