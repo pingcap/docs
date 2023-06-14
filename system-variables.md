@@ -4071,7 +4071,7 @@ SHOW WARNINGS;
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
-- Default value: Before v7.2.0, the default value is `OFF`. Starting form v7.2.0, the default value is `ON`.
+- Default value: Before v7.2.0, the default value is `OFF`. Starting from v7.2.0, the default value is `ON`.
 - Specifies whether to remove `ORDER BY` clause in a subquery.
 
 ### tidb_replica_read <span class="version-mark">New in v4.0</span>
