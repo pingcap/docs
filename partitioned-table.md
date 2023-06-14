@@ -408,7 +408,7 @@ Starting from v7.2.0, you can add a default list partition to a List partitioned
 
 Enable this feature with `set tidb_enable_default_list_partition = ON`, it is OFF by default, since it is not supported by MySQL.
 
-Then add a default partition like:
+Then, you can add a default partition to an existing table. For example:
 
 ```sql
 ALTER TABLE t ADD PARTITION (PARTITION pDef DEFAULT);
