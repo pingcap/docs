@@ -102,7 +102,6 @@ tikv_servers:
 tiflash_servers:
   - host: 10.0.1.11
     # ssh_port: 22
-    # tcp_port: 9000
     # flash_service_port: 3930
     # flash_proxy_port: 20170
     # flash_proxy_status_port: 20292

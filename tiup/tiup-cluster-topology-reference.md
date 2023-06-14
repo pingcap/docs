@@ -323,8 +323,6 @@ tikv_servers:
 
 - `ssh_port`: Specifies the SSH port to connect to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
 
-- `tcp_port`: The port of the TiFlash TCP service. The default value is `9000`.
-
 - `flash_service_port`: The port via which TiFlash provides services. TiDB reads data from TiFlash via this port. The default value is `3930`.
 
 - `metrics_port`: TiFlash's status port, which is used to output metric data. The default value is `8234`.
@@ -356,8 +354,6 @@ tikv_servers:
 After the deployment, for the fields above, you can only add directories to `data_dir`; for the fields below, you cannot modified these fields:
 
 - `host`
-- `tcp_port`
-- `http_port`
 - `flash_service_port`
 - `flash_proxy_port`
 - `flash_proxy_status_port`
