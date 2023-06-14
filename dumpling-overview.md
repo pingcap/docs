@@ -79,15 +79,7 @@ Dumpling exports data to SQL files by default. You can also export data to SQL f
 {{< copyable "shell-regular" >}}
 
 ```shell
-dumpling \
-  -u root \
-  -P 4000 \
-  -h 127.0.0.1 \
-  --filetype sql \
-  -t 8 \
-  -o /tmp/test \
-  -r 200000 \
-  -F 256MiB
+dumpling -u root -P 4000 -h 127.0.0.1 --filetype sql -t 8 -o /tmp/test -r 200000 -F 256MiB
 ```
 
 In the command above:
@@ -111,15 +103,7 @@ When you export data to CSV files, you can use `--sql <SQL>` to filter the recor
 {{< copyable "shell-regular" >}}
 
 ```shell
-./dumpling \
-  -u root \
-  -P 4000 \
-  -h 127.0.0.1 \
-  -o /tmp/test \
-  --filetype csv \
-  --sql 'select * from `test`.`sbtest1` where id < 100' \
-  -F 100MiB \
-  --output-filename-template 'test.sbtest1.{{.Index}}'
+./dumpling -u root -P 4000 -h 127.0.0.1 -o /tmp/test --filetype csv --sql 'select * from `test`.`sbtest1` where id < 100' -F 100MiB --output-filename-template 'test.sbtest1.{{.Index}}'
 ```
 
 In the command above:
@@ -214,6 +198,7 @@ When you back up data using Dumpling, explicitly specify the `--s3.region` param
 {{< copyable "shell-regular" >}}
 
 ```shell
+<<<<<<< HEAD
 ./dumpling \
   -u root \
   -P 4000 \
@@ -221,6 +206,9 @@ When you back up data using Dumpling, explicitly specify the `--s3.region` param
   -r 200000 \
   -o "s3://${Bucket}/${Folder}" \
   --s3.region "${region}"
+=======
+./dumpling -u root -P 4000 -h 127.0.0.1 -r 200000 -o "s3://${Bucket}/${Folder}"
+>>>>>>> af3e53f0c (update dumpling code example format (#8999))
 ```
 
 ### Filter the exported data
@@ -231,6 +219,7 @@ By default, Dumpling exports all databases except system databases (including `m
 
 {{< copyable "shell-regular" >}}
 
+<<<<<<< HEAD
 ```bash
 ./dumpling \
   -u root \
@@ -238,6 +227,10 @@ By default, Dumpling exports all databases except system databases (including `m
   -h 127.0.0.1 \
   -o /tmp/test \
   --where "id < 100"
+=======
+```shell
+./dumpling -u root -P 4000 -h 127.0.0.1 -o /tmp/test --where "id < 100"
+>>>>>>> af3e53f0c (update dumpling code example format (#8999))
 ```
 
 The above command exports the data that matches `id < 100` from each table. Note that you cannot use the `--where` parameter together with `--sql`.
@@ -249,14 +242,7 @@ Dumpling can filter specific databases or tables by specifying the table filter 
 {{< copyable "shell-regular" >}}
 
 ```shell
-./dumpling \
-  -u root \
-  -P 4000 \
-  -h 127.0.0.1 \
-  -o /tmp/test \
-  -r 200000 \
-  --filter "employees.*" \
-  --filter "*.WorkOrder"
+./dumpling -u root -P 4000 -h 127.0.0.1 -o /tmp/test -r 200000 --filter "employees.*" --filter "*.WorkOrder"
 ```
 
 The above command exports all the tables in the `employees` database and the `WorkOrder` tables in all databases.
