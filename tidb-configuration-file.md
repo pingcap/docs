@@ -11,6 +11,10 @@ aliases: ['/docs/dev/tidb-configuration-file/','/docs/dev/reference/configuratio
 
 The TiDB configuration file supports more options than command-line parameters. You can download the default configuration file [`config.toml.example`](https://github.com/pingcap/tidb/blob/master/config/config.toml.example) and rename it to `config.toml`. This document describes only the options that are not involved in [command line options](/command-line-flags-for-tidb-configuration.md).
 
+> **Tip:**
+>
+> If you need to adjust the value of a configuration item, refer to [Modify the configuration](/maintain-tidb-using-tiup.md#modify-the-configuration).
+
 ### `split-table`
 
 - Determines whether to create a separate Region for each table.
@@ -44,7 +48,6 @@ The TiDB configuration file supports more options than command-line parameters. 
 
 + File system location used by TiDB to store temporary data. If a feature requires local storage in TiDB nodes, TiDB stores the corresponding temporary data in this location.
 + When creating an index, if [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) is enabled, data that needs to be backfilled for a newly created index will be at first stored in the TiDB local temporary directory, and then imported into TiKV in batches, thus accelerating the index creation.
-+ When using physical import mode in [`LOAD DATA`](/sql-statements/sql-statement-load-data.md), the sorted data is first stored in the TiDB local temporary storage path and then imported to TiKV in batches.
 + Default value: `"/tmp/tidb"`
 
 ### `oom-use-tmp-storage`
@@ -80,8 +83,12 @@ The TiDB configuration file supports more options than command-line parameters. 
 
 + Determines whether to set the `KILL` statement to be MySQL compatible.
 + Default value: `false`
-+ The behavior of `KILL xxx` in TiDB differs from the behavior in MySQL. TiDB requires the `TIDB` keyword, namely, `KILL TIDB xxx`. If `compatible-kill-query` is set to `true`, the `TIDB` keyword is not needed.
-+ This distinction is important because the default behavior of the MySQL command-line client, when the user hits <kbd>Ctrl</kbd>+<kbd>C</kbd>, is to create a new connection to the backend and execute the `KILL` statement in that new connection. If a load balancer or proxy has sent the new connection to a different TiDB server instance than the original session, the wrong session could be terminated, which could cause interruption to applications using the cluster. Enable `compatible-kill-query` only if you are certain that the connection you refer to in your `KILL` statement is on the same server to which you send the `KILL` statement.
++ `compatible-kill-query` takes effect only when [`enable-global-kill`](#enable-global-kill-new-in-v610) is set to `false`.
++ When [`enable-global-kill`](#enable-global-kill-new-in-v610) is `false`, `compatible-kill-query` controls whether you need to append the `TIDB` keyword when killing a query.
+    - When `compatible-kill-query` is `false`, the behavior of `KILL xxx` in TiDB is different from that in MySQL. To kill a query in TiDB, you need to append the `TIDB` keyword, such as `KILL TIDB xxx`.
+    - When `compatible-kill-query` is `true`, to kill a query in TiDB, there is no need to append the `TIDB` keyword. It is **STRONGLY NOT RECOMMENDED** to set `compatible-kill-query` to `true` in your configuration file UNLESS you are certain that clients will be always connected to the same TiDB instance. This is because pressing <kbd>Control</kbd>+<kbd>C</kbd> in the default MySQL client opens a new connection in which `KILL` is executed. If there is a proxy between the client and the TiDB cluster, the new connection might be routed to a different TiDB instance, which possibly kills a different session by mistake.
++ When [`enable-global-kill`](#enable-global-kill-new-in-v610) is `true`, `KILL xxx` and `KILL TIDB xxx` have the same effect, but using <kbd>Control</kbd>+<kbd>C</kbd> to kill a query is not supported.
++ For more information about the `KILL` statement, see [KILL [TIDB]](/sql-statements/sql-statement-kill.md).
 
 ### `check-mb4-value-in-utf8`
 
@@ -108,7 +115,7 @@ The TiDB configuration file supports more options than command-line parameters. 
 
 + Modifies the version string returned by TiDB in the following situations:
     - When the built-in `VERSION()` function is used.
-    - When TiDB establishes the initial connection to the client and returns the initial handshake packet with version string of the server. For details, see [MySQL Initial Handshake Packet](https://dev.mysql.com/doc/internals/en/connection-phase-packets.html#packet-Protocol::Handshake).
+    - When TiDB establishes the initial connection to the client and returns the initial handshake packet with version string of the server. For details, see [MySQL Initial Handshake Packet](https://dev.mysql.com/doc/dev/mysql-server/latest/page_protocol_connection_phase.html#sect_protocol_connection_phase_initial_handshake).
 + Default value: ""
 + By default, the format of the TiDB version string is `5.7.${mysql_latest_minor_version}-TiDB-${tidb_version}`.
 
@@ -282,6 +289,13 @@ Configuration items related to log.
 - Outputs the threshold value of the number of rows for the `expensive` operation.
 - Default value: `10000`
 - When the number of query rows (including the intermediate results based on statistics) is larger than this value, it is an `expensive` operation and outputs log with the `[EXPENSIVE_QUERY]` prefix.
+
+### `timeout` <span class="version-mark">New in v7.1.0</span>
+
+- Sets the timeout for log-writing operations in TiDB. In case of a disk failure that prevents logs from being written, this configuration item can trigger the TiDB process to panic instead of hang.
+- Default value: `0`, indicating no timeout is set.
+- Unit: second
+- In some user scenarios, TiDB logs might be stored on hot-pluggable or network-attached disks, which might become permanently unavailable. In these cases, TiDB cannot recover automatically from such disaster and the log-writing operations will be permanently blocked. Although the TiDB process might seem to be running, it does not respond to any requests. This configuration item is designed to handle such situations.
 
 ## log.file
 
@@ -564,7 +578,7 @@ Configuration items related to performance.
 
 + Controls whether to wait for statistics initialization to finish before providing services during TiDB startup.
 + Default value: false
-+ When the value of `force-init-stats` is `true`, TiDB needs to wait until statistics initialization is finished before providing services upon startup. If there are a large number of tables and partitions, setting `force-init-stats` to `true` might prolong the time it takes for TiDB to start providing services. 
++ When the value of `force-init-stats` is `true`, TiDB needs to wait until statistics initialization is finished before providing services upon startup. If there are a large number of tables and partitions, setting `force-init-stats` to `true` might prolong the time it takes for TiDB to start providing services.
 + When the value of `force-init-stats` is `false`, TiDB can still provide services before statistics initialization is finished, but the optimizer uses pseudo statistics to make decisions, which might result in suboptimal execution plans.
 
 ## opentracing
