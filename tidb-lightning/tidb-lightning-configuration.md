@@ -158,7 +158,7 @@ addr = "172.16.31.10:8287"
 # The maximum number of KV pairs in one request when sending data to TiKV in physical import mode.
 # Starting from v7.2.0, this parameter is deprecated and no longer takes effect after it is set.
 # If you want to adjust the amount of data sent to TiKV in one request, use the `send-kv-size` parameter instead.
-# send-kv-pairs = 3200
+# send-kv-pairs = 32768
 # The maximum size of one request when sending data to TiKV in physical import mode.
 # The default value is "16K". It is not recommended to adjust this parameter.
 # This parameter is introduced in v7.2.0.
