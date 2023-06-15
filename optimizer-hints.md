@@ -896,7 +896,7 @@ SHOW WARNINGS;
 1 row in set (0.00 sec)
 ```
 
-### `INL_JOIN` Hint does not take effect because of join order
+### `INL_JOIN` hint does not take effect because of join order
 
 The meaning of `INL_JOIN(t1, t2)` or `TIDB_INLJ(t1, t2)` is to use `IndexJoin` for `t1` and `t2` individually, instead of using an `IndexJoin` to join them together directly. For example:
 
