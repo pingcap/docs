@@ -8,7 +8,7 @@ aliases: ['/docs/dev/optimizer-hints/','/docs/dev/reference/performance/optimize
 
 TiDB supports optimizer hints, which are based on the comment-like syntax introduced in MySQL 5.7. For example, one of the common syntaxes is `/*+ HINT_NAME([t1_name [, t2_name] ...]) */`. Use of optimizer hints is recommended in cases where the TiDB optimizer selects a less optimal query plan.
 
-If you meet some cases that hints can not take effect, please see [common issues that hints can not take effect](#common-issues-that-hints-can-not-take-effect).
+If you encounter a situation where hints do not take effect, see [Troubleshoot common issues that hints do not take effect](#troubleshoot-common-issues-that-hints-do-not-take-effect).
 
 ## Syntax
 
