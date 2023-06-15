@@ -77,7 +77,7 @@ This section describes the URI format of the storage services:
     - `account-name`: Specifies the account name of the storage.
     - `account-key`: Specifies the access key.
     - `sas-token`: Specifies the shared access signature.
-    - `access-tier`: Specifies the access tier of the uploaded objects, for example, `Hot`, `Cool`, or `Archive`. The default value is the container's default access tier.
+    - `access-tier`: Specifies the access tier of the uploaded objects, for example, `Hot`, `Cool`, or `Archive`. The default value is the default access tier of the storage account.
 
 </div>
 </SimpleTab>
@@ -188,7 +188,7 @@ You can configure the account used to access GCS by specifying the access key. I
 
 - Method 1: Specify the shared access signature
 
-    If you specify `account-name` and `sas-token` in the URI, the authentication is performed using the specified account name and sas token. Please notice that the sas token contains the `&` character, you need encode it as `%26` before add into the URI. You can also directly encodes the entire sas token.
+    If you specify `account-name` and `sas-token` in the URI, the authentication is performed using the specified account name and shared access signature (SAS) token. Note that the SAS token contains the `&` character, you need to encode it as `%26` before appending it to the URI. You can also directly encode the entire `sas-token` using percent-encoding.
 
 - Method 2: Specify the access key
 
