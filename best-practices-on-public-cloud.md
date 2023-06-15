@@ -64,7 +64,7 @@ By using a dedicated 20 GB [gp3](https://aws.amazon.com/ebs/general-purpose/) Ra
 | AVG Insert Latency (ms)| 11.3 | 9.2 | -18.7 |
 | P99 Insert Latency (ms)| 29.4 | 16.0 | -45.6|
 
-### Example 2: Run TPC-C/SYSBench workload on Azure
+### Example 2: Run TPC-C/Sysbench workload on Azure
 
 By using a dedicated 32 GB [ultra disk](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#ultra-disks) for Raft Engine on Azure, the following improvements are observed:
 
