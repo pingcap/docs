@@ -896,9 +896,9 @@ SHOW WARNINGS;
 1 row in set (0.00 sec)
 ```
 
-### `INL_JOIN` Hint does not take effect because of join order
+### `INL_JOIN` hint does not take effect because of join order
 
-The meaning of `INL_JOIN(t1, t2)` or `TIDB_INLJ(t1, t2)` is to use `IndexJoin` for `t1` and `t2` individually, instead of using an `IndexJoin` to join them together directly. For example:
+The [`INL_JOIN(t1, t2)`](#inl_joint1_name--tl_name-) or `TIDB_INLJ(t1, t2)` hint uses the `IndexJoin` operator when joining `t1` and `t2` with other tables, instead of using an `IndexJoin` operator to directly join them together. For example:
 
 ```sql
 mysql> explain select /*+ tidb_inlj(t1, t3) */ * from t1, t2, t3 where t1.id=t2.id and t2.id=t3.id and t1.id=t3.id;
@@ -916,9 +916,9 @@ mysql> explain select /*+ tidb_inlj(t1, t3) */ * from t1, t2, t3 where t1.id=t2.
 +---------------------------------+----------+-----------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 ```
 
-In the case above, `t1` and `t3` are not joined togather by an `IndexJoin` directly.
+In the preceding example, `t1` and `t3` are not directly joined together by an `IndexJoin`.
 
-If you want to use an `IndexJoin` to join `t1` and `t3` directly, use `LEADING(t1, t3)` Hint first to specify the join order, and then use `INL_JOIN` to specify the join algorithm. For example:
+To perform a direct `IndexJoin` between `t1` and `t3`, you can first use [`LEADING(t1, t3)` hint](#leadingt1_name--tl_name-) to specify the join order of `t1` and `t3`, and then use the `INL_JOIN` hint to specify the join algorithm. For example:
 
 ```sql
 mysql> explain select /*+ leading(t1, t3), tidb_inlj(t3) */ * from t1, t2, t3 where t1.id=t2.id and t2.id=t3.id and t1.id=t3.id;
