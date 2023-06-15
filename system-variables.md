@@ -962,7 +962,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Default value: "json"
-- Controls which columns types whose statistics would not be collected when executing the ANALYZE command.
+- This variable controls which types of columns are skipped for statistics collection when executing the `ANALYZE` command to collect statistics.
 
 ### tidb_auto_analyze_end_time
 
