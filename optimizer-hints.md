@@ -791,18 +791,18 @@ SELECT /*+ RESOURCE_GROUP(rg1) */ * FROM t limit 10;
 
 MySQL command-line clients earlier than 5.7.7 strip optimizer hints by default. If you want to use the Hint syntax in these earlier versions, add the `--comments` option when starting the client. For example: `mysql -h 127.0.0.1 -P 4000 -uroot --comments`.
 
-### Hints can not take effect because the database name is not specified
+### Hints do not take effect becauseT the database name is not specified
 
-If the database name is not specified when creating the connection, hints may not take oeffect. For example:
+If you do not specify the database name when creating a connection, hints might not take effect. For example:
 
-Use `mysql -h127.0.0.1 -P4000 -uroot` to connect to the TiDB without using `-D` to specify the database name. And then execute SQLs below: 
+When you connect to TiDB using `mysql -h127.0.0.1 -P4000 -uroot` command without the `-D` option. Then, execute the following SQL statements: 
 
 ```sql
 SELECT /*+ use_index(t, a) */ a FROM test.t;
 SHOW WARNINGS;
 ```
 
-The hint `use_index(t, a)` can not take effect since TiDB don't know table `t`'s database name.
+Because TiDB cannot identify the database for table `t`, the `use_index(t, a)` hint does not take effect.
 
 ```sql
 +---------+------+----------------------------------------------------------------------+
