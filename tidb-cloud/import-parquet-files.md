@@ -136,7 +136,7 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 
     If the number is zero, it means no data files matched the value you entered in the **Source file name** field. In this case, check whether there are any typos in the **Source file name** field and try again.
 
-7. After the import task is completed, you can click **Query Data** on the **Import** page to query your imported data. For more information about how to use Chat2Qury, see [Explore Your Data with AI-Powered Chat2Query](/tidb-cloud/explore-data-with-chat2query.md).
+7. After the import task is completed, you can click **Chat2Qury** in the left navigation pane to query your imported data. For more information about how to use Chat2Qury, see [Explore Your Data with AI-Powered Chat2Query](/tidb-cloud/explore-data-with-chat2query.md).
 
 When you run an import task, if any unsupported or invalid conversions are detected, TiDB Cloud terminates the import job automatically and reports an importing error.
 
