@@ -123,7 +123,7 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
     - **Source file URIs and names**: enter the source file URI and name, for example, `s3://sampledate/ingest/TableName.01.csv`.
 
-5. Click **Next**. If you see a warning message, resolve this by providing the correct source file, renaming the existing one according to [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md), or using **Advanced Settings** to make changes. After that, click **Ignore warning and preview**.
+5. Click **Preview**. If you see a warning message, resolve this by providing the correct source file, renaming the existing one according to [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md), or using **Advanced Settings** to make changes. After resolving these issues, you need to import the data again.
 
 6. On the **Preview** page, you can have a preview of the data. If the previewed data is not what you expect, click the **Click here to edit csv configuration** link to update the CSV-specific configurations, including separator, delimiter, header, `backslash escape`, and `trim last separator`. For more information, see [CSV Configurations for Importing Data](/tidb-cloud/csv-config-for-import-data.md).
 
