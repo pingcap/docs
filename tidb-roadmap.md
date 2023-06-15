@@ -203,36 +203,26 @@ In the course of development, this roadmap is subject to change based on user ne
       <td>
         <ul>
           <li>
-            <b>JWT authentication</b>
-            <br/><i>Provide secure standard for authentication</i>
+            <b>Key management via Azure Key Vault</b>
+            <br/><i>Static encryption managed by Azure Key Vault</i>
           </li>
           <br />
           <li>
-            <b>LDAP integration</b>
-            <br/><i>Third-party authentication via LDAP</i>
+            <b>Column-level access control</b>
+            <br/><i>Grant and restrict access to specific columns</i>
           </li>
-          <br/>
+          </br>
           <li>
-            <b>Audit log enhancement</b>
-            <br/><i>More flexible and granular audit logging</i>
+            <b>Database-level encryption</b>
+            </br><i>At-rest encryption configured at database level</i>
           </li>
         </ul>
       </td>
       <td>
         <ul>
           <li>
-            <b>Column-level access control</b>
-            <br/><i>Grant and restrict access to specific columns</i>
-          </li>
-          <br />
-          <li>
-            <b>Key management via Azure Key Vault</b>
-            <br/><i>Static encryption managed by Azure Key Vault</i>
-          </li>
-          </br>
-          <li>
-            <b>Database-level encryption</b>
-            </br><i>At-rest encryption configured at database level</i>
+            <b>IAM authentication for AWS</b>
+            </br><i>TiDB as AWS third-party arn for AWS IAM access</i>
           </li>
           </br>
           <li>
