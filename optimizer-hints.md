@@ -837,16 +837,16 @@ In the preceding statement, `t1` is not in the current `test2` database, the `us
 1 row in set (0.00 sec)
 ```
 
-### Hints can not take effect because of wrong places
+### Hints do not take effect because they are placed wrong places
 
-If hints are not placed behind the specified key words, they can not take effect. For example:
+Hints cannot take effect if they are not placed directly after the specific keywords. For example:
 
 ```sql
 SELECT * /*+ use_index(t, a) */ FROM t;
 SHOW WARNINGS;
 ```
 
-Warning 信息如下：
+The warning is as follows:
 
 ```sql
 +---------+------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -857,7 +857,7 @@ Warning 信息如下：
 1 row in set (0.01 sec)
 ```
 
-In this case, the hint should be placed behind the `SELECT` key word. See [Hint Syntax](#syntax) for more details.
+In this case, you need to place the hint directly after the `SELECT` keyword. For more details, see the [Syntax](#syntax) section.
 
 ### INL_JOIN hint does not take effect due to collation mismatch
 
