@@ -898,7 +898,7 @@ SHOW WARNINGS;
 
 ### `INL_JOIN` hint does not take effect because of join order
 
-The meaning of `INL_JOIN(t1, t2)` or `TIDB_INLJ(t1, t2)` is to use `IndexJoin` for `t1` and `t2` individually, instead of using an `IndexJoin` to join them together directly. For example:
+The [`INL_JOIN(t1, t2)`](#inl_joint1_name--tl_name-) or `TIDB_INLJ(t1, t2)` hint uses the `IndexJoin` operator when joining `t1` and `t2` with other tables, instead of using an `IndexJoin` operator to directly join them together. For example:
 
 ```sql
 mysql> explain select /*+ tidb_inlj(t1, t3) */ * from t1, t2, t3 where t1.id=t2.id and t2.id=t3.id and t1.id=t3.id;
