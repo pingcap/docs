@@ -1,17 +1,17 @@
 ---
 title: TiDB Best Practices on Public Cloud
-summary: This document introduces the best practice for TiDB to deploy on public cloud
+summary: Learn about the best practices for deploying TiDB on public cloud.
 ---
 
 # TiDB Best Practices on Public Cloud
 
 Public cloud infrastructure has become an increasingly popular choice for deploying and managing TiDB. However, deploying TiDB on public cloud requires careful consideration of several critical factors, including performance tuning, cost optimization, reliability, and scalability.
 
-This document covers various essential best practices for deploying TiDB on public cloud, such as using a dedicated disk for Raft Engine, reducing compaction IO flow in KV RocksDB, optimizing costs for cross-AZ traffic, mitigating GCP live migration events, and fine-tuning the PD server in large clusters. By adhering to these best practices, your TiDB deployment on public cloud can achieve optimized performance, cost efficiency, reliability, and scalability.
+This document covers various essential best practices for deploying TiDB on public cloud, such as using a dedicated disk for Raft Engine, reducing compaction I/O flow in KV RocksDB, optimizing costs for cross-AZ traffic, mitigating Google Cloud live migration events, and fine-tuning the PD server in large clusters. By following these best practices, you can maximize the performance, cost efficiency, reliability, and scalability of your TiDB deployment on public cloud.
 
 ## Use a dedicated disk for Raft Engine
 
-The [Raft Engine](/glossary.md#raft-engine) in TiKV plays a critical role similar to that of a write-ahead log (WAL) in traditional databases. To achieve optimal performance and stability, it is crucial to allocate a dedicated disk for the Raft Engine when you deploy TiDB on public cloud. The following `iostat` shows the IO characteristics on a TiKV node with a write-heavy workload.
+The [Raft Engine](/glossary.md#raft-engine) in TiKV plays a critical role similar to that of a write-ahead log (WAL) in traditional databases. To achieve optimal performance and stability, it is crucial to allocate a dedicated disk for the Raft Engine when you deploy TiDB on public cloud. The following `iostat` shows the I/O characteristics on a TiKV node with a write-heavy workload.
 
 ```
 Device            r/s     rkB/s       w/s     wkB/s      f/s  aqu-sz  %util
@@ -33,7 +33,7 @@ The following are recommended middle-range disks for different public clouds:
 
 - On AWS, [gp3](https://aws.amazon.com/ebs/general-purpose/) is recommended. The gp3 volume offers a free allocation of 3000 IOPS and 125 MB/s throughput, regardless of the volume size, which is usually sufficient for the Raft Engine.
 
-- On GCP, [pd-ssd](https://cloud.google.com/compute/docs/disks#disk-types/) is recommended. The IOPS and MBPS vary depending on the allocated disk size. To meet performance requirements, it is recommended to allocate 200 GB for Raft Engine. Although Raft Engine does not require such a large space, it ensures optimal performance.
+- On Google Cloud, [pd-ssd](https://cloud.google.com/compute/docs/disks#disk-types/) is recommended. The IOPS and MBPS vary depending on the allocated disk size. To meet performance requirements, it is recommended to allocate 200 GB for Raft Engine. Although Raft Engine does not require such a large space, it ensures optimal performance.
 
 - On Azure, [Premium SSD v2](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#premium-ssd-v2) is recommended. Similar to AWS gp3, Premium SSD v2 provides a free allocation of 3000 IOPS and 125 MB/s throughput, regardless of the volume size, which is usually sufficient for Raft Engine.
 
@@ -43,15 +43,15 @@ If you expect an even lower latency for Raft Engine, consider using high-end dis
 
 - On AWS, [io2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volume-types.html) is recommended. Disk size and IOPS can be provisioned according to your specific requirements.
 
-- On GCP, [pd-extreme](https://cloud.google.com/compute/docs/disks#disk-types/) is recommended. Disk size, IOPS, and MBPS can be provisioned, but it is only available on 64c+ instances.
+- On Google Cloud, [pd-extreme](https://cloud.google.com/compute/docs/disks#disk-types/) is recommended. Disk size, IOPS, and MBPS can be provisioned, but it is only available on instances with more than 64 CPU cores.
 
 - On Azure, [ultra disk](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#ultra-disks) is recommended. Disk size, IOPS, and MBPS can be provisioned according to your specific requirements.
 
 ### Example 1: Run a social network workload on AWS
 
-AWS offers 3000 IOPS and 125 MBPS/s for a 20GB [gp3](https://aws.amazon.com/ebs/general-purpose/) volume.
+AWS offers 3000 IOPS and 125 MBPS/s for a 20 GB [gp3](https://aws.amazon.com/ebs/general-purpose/) volume.
 
-By using a dedicated 20GB [gp3](https://aws.amazon.com/ebs/general-purpose/) Raft Engine disk on AWS for a write-intensive social network application workload, the following improvements are observed but the estimated cost only increases by 0.4%:
+By using a dedicated 20 GB [gp3](https://aws.amazon.com/ebs/general-purpose/) Raft Engine disk on AWS for a write-intensive social network application workload, the following improvements are observed but the estimated cost only increases by 0.4%:
 
 - a 17.5% increase in QPS (queries per second)
 - an 18.7% decrease in average latency for insert statements
@@ -66,7 +66,7 @@ By using a dedicated 20GB [gp3](https://aws.amazon.com/ebs/general-purpose/) Raf
 
 ### Example 2: Run TPC-C/SYSBench workload on Azure
 
-By using a dedicated 32GB [ultra disk](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#ultra-disks) for Raft Engine on Azure, the following improvements are observed:
+By using a dedicated 32 GB [ultra disk](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#ultra-disks) for Raft Engine on Azure, the following improvements are observed:
 
 - Sysbench `oltp_read_write` workload: a 17.8% increase in QPS and a 15.6% decrease in average latency.
 - TPC-C workload: a 27.6% increase in QPS and a 23.1% decrease in average latency.
@@ -80,7 +80,7 @@ By using a dedicated 32GB [ultra disk](https://learn.microsoft.com/en-us/azure/v
 
 ### Example 3: Attach a dedicated pd-ssd disk on Google Cloud for Raft Engine on TiKV manifest
 
-The following TiKV configuration example shows how to attach an additional 512GB [pd-ssd](https://cloud.google.com/compute/docs/disks#disk-types/) disk to a cluster on Google Cloud deployed by [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable), with `raft-engine.dir` configured to store Raft Engine logs to this specific disk.
+The following TiKV configuration example shows how to attach an additional 512 GB [pd-ssd](https://cloud.google.com/compute/docs/disks#disk-types/) disk to a cluster on Google Cloud deployed by [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable), with `raft-engine.dir` configured to store Raft Engine logs to this specific disk.
 
 ```
 tikv:
@@ -98,7 +98,7 @@ tikv:
       storageSize: 512Gi
 ```
 
-## Reduce compaction IO flow in KV RocksDB
+## Reduce compaction I/O flow in KV RocksDB
 
 As the storage engine of TiKV, [RocksDB](https://rocksdb.org/) is used to store user data. Because the provisioned IO throughput on cloud EBS is usually limited due to cost considerations, RocksDB might exhibit high write amplification, and the disk throughput might become the bottleneck for the workload. As a result, the total number of pending compaction bytes grows over time and triggers flow control, which indicates that TiKV lacks sufficient disk bandwidth to keep up with the foreground write flow.
 
@@ -135,11 +135,11 @@ To detect live migration events initiated by Google Cloud and mitigate the perfo
 - TiKV: Evicts leaders on the affected TiKV store during maintenance.
 - PD: Resigns a leader if the current PD instance is the PD leader.
 
-It is important to note that this watching script is specifically designed for TiDB clusters deployed using the [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/dev/tidb-operator-overview), which offers enhanced management functionalities for TiDB in Kubernetes environments.
+It is important to note that this watching script is specifically designed for TiDB clusters deployed using [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/dev/tidb-operator-overview), which offers enhanced management functionalities for TiDB in Kubernetes environments.
 
 By utilizing the watching script and taking necessary actions during maintenance events, TiDB clusters can better handle live migration events on Google Cloud and ensure smoother operations with minimal impact on query processing and response times.
 
-## PD tuning for a large-scale TiDB cluster with high QPS
+## Tune PD for a large-scale TiDB cluster with high QPS
 
 In a TiDB cluster, a single active Placement Driver (PD) server is used to handle crucial tasks such as serving the TSO (Timestamp Oracle) and processing requests. However, relying on a single active PD server can limit the scalability of TiDB clusters.
 
@@ -179,7 +179,7 @@ To reduce the number of Regions and alleviate the heartbeat overhead on the syst
   region-split-size = "256MB"
 ```
 
-## After Tuning
+## After tuning
 
 After the tunning, the following effects can be observed:
 
