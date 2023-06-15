@@ -468,11 +468,23 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 * Error Number: 8252
 
-    The complete error message is as follows: 
-    
+    The complete error message is as follows:
+
     `ERROR 8252 (HY000) : Exceeded resource group quota limitation`
 
     This error is returned when the attempted consumption exceeds the resource group limit. This error is usually caused by a single transaction that is too large or too many concurrent transactions. You need to adjust the transaction size or reduce the number of concurrent clients.
+
+* Error Number: 8260
+
+    DDL operations cannot be paused by `admin pause`.
+
+* Error Number: 8261
+
+    DDL operations cannot be resumed by `admin resume`.
+
+* Error Number: 8262
+
+    DDL is paused by `admin pause` and cannot be paused again.
 
 * Error Number: 9001
 
