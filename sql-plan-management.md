@@ -186,7 +186,7 @@ The original SQL statement and the bound statement must have the same text after
 
 To make the execution plan of a SQL statement fixed to a historical execution plan, you can use `plan_digest` to bind that historical execution plan to the SQL statement, which is more convenient than binding it according to a SQL statement.
 
-Currently, this feature has the following limitations:
+When using this feature, note the following:
 
 - The feature generates hints according to historical execution plans and uses the generated hints for binding. Because historical execution plans are stored in [Statement Summary Tables](/statement-summary-tables.md), before using this feature, you need to enable the [`tidb_enable_stmt_summary`](/system-variables.md#tidb_enable_stmt_summary-new-in-v304) system variable first.
 - Currently, this feature can not supports TiFlash queries, Join queries with 3 or more tables.
