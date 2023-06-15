@@ -859,18 +859,19 @@ Warning 信息如下：
 
 In this case, the hint should be placed behind the `SELECT` key word. See [Hint Syntax](#syntax) for more details.
 
-### INL_JOIN hint can not take effect because of collation
+### INL_JOIN hint does not take effect due to collation mismatch
 
-If two tables' join keys have different collation, `IndexJoin` can not be used, and in this case `INL_JOIN` can not take effect. For example:
+When the collation of the join key differs between two tables, the `IndexJoin cannot be utilized to execute the query. In this case, the `INL_JOIN` hint cannot take effect. For example:
 
 ```sql
-mysql> create table t1 (k varchar(8), key(k)) collate=utf8mb4_general_ci;
-Query OK, 0 rows affected (0.01 sec)
+CREATE TABLE t1 (k varchar(8), key(k)) COLLATE=utf8mb4_general_ci;
+CREATE TABLE t2 (k varchar(8), key(k)) COLLATE=utf8mb4_bin;
+EXPLAIN SELECT /*+ tidb_inlj(t1) */ * FROM t1, t2 WHERE t1.k=t2.k;
+```
 
-mysql> create table t2 (k varchar(8), key(k)) collate=utf8mb4_bin;
-Query OK, 0 rows affected (0.01 sec)
+The execution plans are as follows:
 
-mysql> explain select /*+ tidb_inlj(t1) */ * from t1, t2 where t1.k=t2.k;
+```sql
 +-----------------------------+----------+-----------+----------------------+----------------------------------------------+
 | id                          | estRows  | task      | access object        | operator info                                |
 +-----------------------------+----------+-----------+----------------------+----------------------------------------------+
@@ -881,8 +882,12 @@ mysql> explain select /*+ tidb_inlj(t1) */ * from t1, t2 where t1.k=t2.k;
 |   └─IndexFullScan_21        | 9990.00  | cop[tikv] | table:t1, index:k(k) | keep order:false, stats:pseudo               |
 +-----------------------------+----------+-----------+----------------------+----------------------------------------------+
 5 rows in set, 1 warning (0.00 sec)
+```
 
-mysql> show warnings;
+In the preceding statements, the collations of `t1.k` and `t2.k` are different (`utf8mb4_general_ci` and `utf8mb4_bin` respectively), which makes the `INL_JOIN` or `TIDB_INLJ` hint cannot take effect.
+
+```sql
+SHOW WARNINGS;
 +---------+------+----------------------------------------------------------------------------+
 | Level   | Code | Message                                                                    |
 +---------+------+----------------------------------------------------------------------------+
@@ -890,5 +895,3 @@ mysql> show warnings;
 +---------+------+----------------------------------------------------------------------------+
 1 row in set (0.00 sec)
 ```
-
-`t1.k` and `t2.k` above have different collation(`utf8mb4_general_ci` and `utf8mb4_bin`), `INL_JOIN`(or `TIDB_INLJ`) hint can not take effect.
