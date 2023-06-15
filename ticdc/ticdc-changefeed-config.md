@@ -130,7 +130,7 @@ write-key-threshold = 0
 # ]
 
 # The protocol configuration item specifies the protocol format of the messages sent to the downstream.
-# When the downstream is Kafka, the protocol can only be canal-json, avro or open-protocol.
+# When the downstream is Kafka, the protocol can only be canal-json, avro, or open-protocol.
 # When the downstream is a storage service, the protocol can only be canal-json or csv.
 # Note: This configuration item only takes effect if the downstream is Kafka or a storage service.
 # protocol = "canal-json"
