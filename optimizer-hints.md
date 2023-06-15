@@ -916,7 +916,7 @@ mysql> explain select /*+ tidb_inlj(t1, t3) */ * from t1, t2, t3 where t1.id=t2.
 +---------------------------------+----------+-----------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 ```
 
-In the case above, `t1` and `t3` are not joined togather by an `IndexJoin` directly.
+In the preceding example, `t1` and `t3` are not directly joined together by an `IndexJoin`.
 
 If you want to use an `IndexJoin` to join `t1` and `t3` directly, use `LEADING(t1, t3)` Hint first to specify the join order, and then use `INL_JOIN` to specify the join algorithm. For example:
 
