@@ -137,8 +137,8 @@ write-key-threshold = 0
 
 # Starting from v7.2.0, the delete-only-output-handle-key-columns parameter specifies the output of Delete events. This parameter is valid only for canal-json and open-protocol protocols.
 # The default value is false, which means outputting all columns. When you set it to true, only the primary key columns or unique index columns are output.
-# The Avro protocol is not controlled by this parameter and always outputs only the contents of primary key columns or unique index columns.
-# The CSV protocol is not controlled by this parameter and always outputs the contents of all columns.
+# The Avro protocol is not controlled by this parameter and always outputs only the primary key columns or unique index columns.
+# The CSV protocol is not controlled by this parameter and always outputs all columns.
 delete-only-output-handle-key-columns = false
 
 # The following three configuration items are only used when you replicate data to storage sinks and can be ignored when replicating data to MQ or MySQL sinks.
