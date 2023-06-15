@@ -2389,7 +2389,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
     - Slow logs are printed after the statement is executed.
     - Expensive query logs print the statements that are being executed, with execution time exceeding the threshold value, and their related information.
 
-### tidb_expensive_txn_time_threshold
+### tidb_expensive_txn_time_threshold <span class="version-mark">New in v7.2.0</span>
 
 <CustomContent platform="tidb-cloud">
 
