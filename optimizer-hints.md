@@ -785,7 +785,7 @@ Example:
 SELECT /*+ RESOURCE_GROUP(rg1) */ * FROM t limit 10;
 ```
 
-## Common Issues that Hints can not take effect
+## Troubleshoot common issues that hints do not take effect
 
 ### Hints can not take effect because MySQL Client eliminates Hints automatically
 
