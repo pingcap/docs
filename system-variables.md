@@ -2405,7 +2405,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Default value: `600`
 - Range: `[60, 2147483647]`
 - Unit: Seconds
-- This variable is used to set the threshold value that determines whether to print expensive txn logs. Expensive txn logs print the related information of transactions that have not been committed or rollback and the duration of the transaction exceeds the threshold value.
+- This variable sets the threshold for logging expensive transactions. An expensive transaction is one that is neither committed nor rolled back, and the duration of the transaction exceeds this threshold.
 
 ### tidb_force_priority
 
