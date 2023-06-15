@@ -135,7 +135,7 @@ write-key-threshold = 0
 # Note: This configuration item only takes effect if the downstream is Kafka or a storage service.
 # protocol = "canal-json"
 
-# Starting from v7.2.0, the delete-only-output-handle-key-columns parameter is used to specify the output content of the Delete event, and it is only valid for the canal-json and open-protocol protocols.
+# Starting from v7.2.0, the delete-only-output-handle-key-columns parameter specifies the output of Delete events. This parameter is valid only for canal-json and open-protocol protocols.
 # The default value is false, which means outputting the contents of all columns. When set to true, only the contents of primary key columns or unique index columns # are output.
 # The Avro protocol is not controlled by this parameter and always outputs only the contents of primary key columns or unique index columns.
 # The CSV protocol is not controlled by this parameter and always outputs the contents of all columns.
