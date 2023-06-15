@@ -2181,6 +2181,24 @@ Query OK, 0 rows affected (0.09 sec)
 
 </CustomContent>
 
+### tidb_enable_tiflash_pipeline_model <span class="version-mark">New in v7.2.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `OFF`
+- This variable controls whether to enable the new [Pipeline Execution Model](/tiflash/tiflash-pipeline-model.md) in TiFlash.
+- When this variable is set to `OFF` to disable the pipeline model, the query pushed down to TiFlash will be executed using the original stream model.
+- When this variable is set to `ON` to enable the pipeline model, the query pushed down to TiFlash will be executed using the new pipeline model.
+
+> **Note:**
+>
+> - The pipeline model is currently an experimental feature and is not recommended to use in production environments.
+> - The pipeline model does not support the following features. When the following features are enabled, even if `tidb_enable_tiflash_pipeline_model` is set to `ON`, the query pushed down to TiFlash will still be executed using the original stream model.
+>
+>     - [Join operator spill to disk](#tidb_max_bytes_before_tiflash_external_join-new-in-v700)
+>     - [TiFlash Disaggregated Storage and Compute Architecture and S3 Support](/tiflash/tiflash-disaggregated-and-s3.md)
+
 ### tidb_enable_tiflash_read_for_write_stmt <span class="version-mark">New in v6.3.0</span>
 
 - Scope: SESSION | GLOBAL
