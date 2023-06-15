@@ -201,23 +201,63 @@ In the course of development, this roadmap is subject to change based on user ne
         <br /><i>Enhance data safety and privacy</i>
       </td>
       <td>
-      </td>
-      <td>
         <ul>
           <li>
-            <b>Column-level/row-level access control</b>
-            <br />
+            <b>JWT authentication</b>
+            <br/><i>Provide secure standard for authentication</i>
           </li>
           <br />
           <li>
-            <b>Database-level encryption</b>
+            <b>LDAP integration</b>
+            <br/><i>Third-party authentication via LDAP</i>
+          </li>
+          <br/>
+          <li>
+            <b>Audit log enhancement</b>
+            <br/><i>More flexible and granular audit logging</i>
           </li>
         </ul>
       </td>
       <td>
         <ul>
           <li>
-            <b>Database X.509 authentication</b>
+            <b>Column-level access control</b>
+            <br/><i>Grant and restrict access to specific columns</i>
+          </li>
+          <br />
+          <li>
+            <b>Key management via Azure Key Vault</b>
+            <br/><i>Static encryption managed by Azure Key Vault</i>
+          </li>
+          </br>
+          <li>
+            <b>Database-level encryption</b>
+            </br><i>At-rest encryption configured at database level</i>
+          </li>
+          </br>
+          <li>
+            <b>Unified TLS CA/Key rotation policy</b>
+            </br><i>Unified certificate management mechanism for all TiDB components</i>
+          </li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>
+            <b>Label-based access control</b>
+            </br><i>Access permissions granted by configured labels</i>
+          </li>
+          </br>
+          <li>
+            <b>Enhanced client-side encryption</b>
+          </li>
+          </br>
+          <li>
+            <b>Enhanced data masking</b>
+          </li>
+          </br>
+          <li>
+            <b>Enhanced data lifecycle management</b>
           </li>
         </ul>
       </td>
