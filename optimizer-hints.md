@@ -813,9 +813,9 @@ The hint `use_index(t, a)` can not take effect since TiDB don't know table `t`'s
 1 row in set (0.00 sec)
 ```
 
-### Hints can not take effect because the database name is not specified correctly in cross-table queries
+### Hints do not take effect because the database name is not explicitly specified in cross-table queries
 
-For cross-table queries, you need to specify database names explicitly, otherwise hints may not take effect. For example:
+When executing cross-table queries, you need to explicitly specify database names. Otherwise, hints might not take effect. For example:
 
 ```sql
 USE test1;
@@ -826,7 +826,7 @@ SELECT /*+ use_index(t1, a) */ * FROM test1.t1, t2;
 SHOW WARNINGS;
 ```
 
-Since `t1` is not in the current database `test2`, `use_index(t1, a)` can not take effect. In this case, you need to specify the database name explicitly `use_index(test1.t1, a)`.
+In the preceding statement, `t1` is not in the current `test2` database, the `use_index(t1, a)` hint cannot take effect. In this case, you need to specify the database name explicitly as `use_index(test1.t1, a)`.
 
 ```sql
 +---------+------+----------------------------------------------------------------------------------+
