@@ -153,6 +153,7 @@ addr = "172.16.31.10:8287"
 #            in the `lightning_task_info.conflict_error_v1` table in the target TiDB. 
 #            You can manually insert the correct records into the target table based on your business requirements. 
 #            Note that the target TiKV must be v5.2.0 or later versions; otherwise it falls back to 'none'.
+# The default value is 'none'.
 # duplicate-resolution = 'none'
 # The number of KV pairs sent in one request in the physical import mode.
 # send-kv-pairs = 32768
