@@ -614,7 +614,7 @@
     - [Spill to Disk](/tiflash/tiflash-spill-disk.md)
     - [Data Validation](/tiflash/tiflash-data-validation.md)
     - [Compatibility](/tiflash/tiflash-compatibility.md)
-    - [Pipeline model](/tiflash/tiflash-pipeline-model.md)
+    - [Pipeline Model](/tiflash/tiflash-pipeline-model.md)
   - [System Variables](/system-variables.md)
   - Configuration File Parameters
     - [tidb-server](/tidb-configuration-file.md)
