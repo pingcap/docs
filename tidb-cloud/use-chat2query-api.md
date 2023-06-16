@@ -11,7 +11,8 @@ Chat2Query API can only be accessed through HTTPS, ensuring that all data transm
 
 > **Note:**
 >
-> Chat2Query API is only available for [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters.
+> Chat2Query API is only available for [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters. If you want to use on TiDB Dedicated, please contact [support](/tidb-cloud/tidb-cloud-support.md).
+
 
 ## Before you begin
 
