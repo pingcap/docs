@@ -11,11 +11,11 @@ Chat2Query API can only be accessed through HTTPS, ensuring that all data transm
 
 > **Note:**
 >
-> Chat2Query API is only available for [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) clusters.
+> Chat2Query API is only available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta) clusters.
 
 ## Before you begin
 
-Before using the Chat2Query API, make sure that you have created a [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) cluster and enabled [AI to generate SQL queries](/tidb-cloud/explore-data-with-chat2query.md). If you do not have a Serverless Tier cluster, follow the steps in [Create a cluster](/tidb-cloud/create-tidb-cluster.md) to create one.
+Before using the Chat2Query API, make sure that you have created a [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta) cluster and enabled [AI to generate SQL queries](/tidb-cloud/explore-data-with-chat2query.md). If you do not have a TiDB Serverless cluster, follow the steps in [Create a TiDB Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create one.
 
 ## Step 1. Enable the Chat2Query API
 
@@ -33,7 +33,7 @@ To enable the Chat2Query API, perform the following steps:
 
     > **Note:**
     >
-    > After DataAPI is enabled for one Serverless Tier cluster, all Serverless Tier clusters in the same project can use the Chat2Query API.
+    > After DataAPI is enabled for one TiDB Serverless cluster, all TiDB Serverless clusters in the same project can use the Chat2Query API.
 
 5. Click the **Data Service** link in the message to access the Chat2Query API.
 
@@ -64,7 +64,7 @@ In the left pane of the [**Data Service**](https://tidbcloud.com/console/data-se
 
 - **Endpoint Path**: (read-only) the path of the Chat2Data endpoint, which is `/chat2data`.
 
-- **Endpoint URL**: (read-only) the URL of the Chat2Data endpoint, which is used to call the endpoint. For example, `https://data.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/chat2data`.
+- **Endpoint URL**: (read-only) the URL of the Chat2Data endpoint, which is used to call the endpoint. For example, `https://<region>.data.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/chat2data`.
 
 - **Request Method**: (read-only) the HTTP method of the Chat2Data endpoint, which is `POST`.
 
@@ -99,7 +99,7 @@ The following code example is used to find the most popular GitHub repository fr
 
 ```bash
 curl --digest --user '<Public Key>:<Private Key>' \
-  --request POST 'https://data.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/chat2data' \
+  --request POST 'https://<region>.data.tidbcloud.com/api/v1beta/app/chat2query-<ID>/endpoint/chat2data' \
   --header 'content-type: application/json' \
   --data-raw '{
       "cluster_id": "12345678912345678960",

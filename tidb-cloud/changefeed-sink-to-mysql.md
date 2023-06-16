@@ -9,15 +9,13 @@ This document describes how to stream data from TiDB Cloud to MySQL using the **
 
 > **Note:**
 >
-> To use the changefeed feature, make sure that your TiDB cluster version is v6.4.0 or later and the TiKV node size is at least 8 vCPU and 16 GiB.
->
-> Currently, TiDB Cloud only allows up to 5 changefeeds per cluster.
->
-> For [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta), the changefeed feature is unavailable.
+> - To use the changefeed feature, make sure that your TiDB Dedicated cluster version is v6.4.0 or later and the TiKV node size is at least 8 vCPU and 16 GiB.
+> - Currently, TiDB Cloud only allows up to 5 changefeeds per cluster.
+> - For [TiDB Serverless clusters](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta), the changefeed feature is unavailable.
 
 ## Restrictions
 
-- For each TiDB Cloud cluster, you can create up to 5 changefeeds. 
+- For each TiDB Cloud cluster, you can create up to 5 changefeeds.
 - Because TiDB Cloud uses TiCDC to establish changefeeds, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios).
 - If the table to be replicated does not have a primary key or a non-null unique index, the absence of a unique constraint during replication could result in duplicated data being inserted downstream in some retry scenarios.
 
@@ -36,11 +34,11 @@ Make sure that your TiDB Cluster can connect to the MySQL service.
 If your MySQL service is in an AWS VPC that has no public internet access, take the following steps:
 
 1. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of the MySQL service and your TiDB cluster.
-2. Modify the inbound rules of the security group that the MySQL service is associated with. 
+2. Modify the inbound rules of the security group that the MySQL service is associated with.
 
     You must add [the CIDR of the region where your TiDB Cloud cluster is located](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr) to the inbound rules. Doing so allows the traffic to flow from your TiDB Cluster to the MySQL instance.
 
-3. If the MySQL URL contains a hostname, you need to allow TiDB Cloud to be able to resolve the DNS hostname of the MySQL service. 
+3. If the MySQL URL contains a hostname, you need to allow TiDB Cloud to be able to resolve the DNS hostname of the MySQL service.
 
     1. Follow the steps in [Enable DNS resolution for a VPC peering connection](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html#vpc-peering-dns).
     2. Enable the **Accepter DNS resolution** option.
@@ -48,10 +46,10 @@ If your MySQL service is in an AWS VPC that has no public internet access, take 
 If your MySQL service is in a GCP VPC that has no public internet access, take the following steps:
 
 1. If your MySQL service is Google Cloud SQL, you must expose a MySQL endpoint in the associated VPC of the Google Cloud SQL instance. You may need to use the [**Cloud SQL Auth proxy**](https://cloud.google.com/sql/docs/mysql/sql-proxy) which is developed by Google.
-2. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of the MySQL service and your TiDB cluster. 
+2. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of the MySQL service and your TiDB cluster.
 3. Modify the ingress firewall rules of the VPC where MySQL is located.
 
-    You must add [the CIDR of the region where your TiDB Cloud cluster is located](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr) to the ingress firewall rules. Doing so allows the traffic to flow from your TiDB Cluster to the MySQL endpoint. 
+    You must add [the CIDR of the region where your TiDB Cloud cluster is located](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr) to the ingress firewall rules. Doing so allows the traffic to flow from your TiDB Cluster to the MySQL endpoint.
 
 ### Load existing data (optional)
 
@@ -84,7 +82,7 @@ To load the existing data:
             Log: tidb-binlog
             Pos: 420747102018863124
     Finished dump at: 2020-11-10 10:40:20
-    ``` 
+    ```
 
 ### Create target tables in MySQL
 

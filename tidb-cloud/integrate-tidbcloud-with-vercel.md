@@ -31,7 +31,10 @@ One Vercel project can only connect to one TiDB Cloud cluster. To change the int
 
 ### A TiDB Cloud account and a TiDB cluster
 
-You are expected to have an account and a cluster in TiDB Cloud. If you do not have any, refer to [Create a TiDB cluster](/tidb-cloud/create-tidb-cluster.md).
+You are expected to have an account and a cluster in TiDB Cloud. If you do not have any, refer to the following to create one:
+
+- [Create a TiDB Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
+- [Create a TiDB Dedicated cluster](/tidb-cloud/create-tidb-cluster.md)
 
 To [integrate with Vercel via the TiDB Cloud Vercel Integration](#connect-via-the-tidb-cloud-vercel-integration), you are expected to have the "Owner" access to your organization or the "Member" access to the target project in TiDB Cloud. For more information, see [Manage role access](/tidb-cloud/manage-user-access.md#manage-role-access).
 
@@ -39,9 +42,9 @@ One TiDB Cloud cluster can connect to multiple Vercel projects.
 
 ### All IP addresses allowed for traffic filter in TiDB Cloud
 
-For Dedicated Tier clusters, make sure that the traffic filter of the cluster allows all IP addresses (set to `0.0.0.0/0`) for connection, this is because Vercel deployments use [dynamic IP addresses](https://vercel.com/guides/how-to-allowlist-deployment-ip-address). If you use the TiDB Cloud Vercel integration, TiDB Cloud automatically adds a `0.0.0.0/0` traffic filter to your cluster in the integration workflow if there is none.
+For TiDB Dedicated clusters, make sure that the traffic filter of the cluster allows all IP addresses (set to `0.0.0.0/0`) for connection, this is because Vercel deployments use [dynamic IP addresses](https://vercel.com/guides/how-to-allowlist-deployment-ip-address). If you use the TiDB Cloud Vercel integration, TiDB Cloud automatically adds a `0.0.0.0/0` traffic filter to your cluster in the integration workflow if there is none.
 
-Serverless Tier clusters allow all IP addresses for connection by default, so you do not need to configure any traffic filter.
+TiDB Serverless clusters allow all IP addresses for connection by default, so you do not need to configure any traffic filter.
 
 ## Connect via the TiDB Cloud Vercel integration
 
@@ -74,7 +77,7 @@ TIDB_USER
 TIDB_PASSWORD
 ```
 
-For Dedicated Tier clusters, the root CA is set in this variable:
+For TiDB Dedicated clusters, the root CA is set in this variable:
 
 ```
 TIDB_SSL_CA
@@ -88,17 +91,19 @@ DATABASE_URL
 
 ## Connect via manually setting environment variables
 
-1. Follow the steps in [Connect to a TiDB Cloud cluster via standard connection](/tidb-cloud/connect-via-standard-connection.md) to get the connection information of your TiDB cluster.
+1. Get the connection information of your TiDB cluster.
+
+    You can get the connection information from the connection dialog of your cluster. To open the dialog, click the ☰ hover menu in the upper-left corner of the [TiDB Cloud console](https://tidbcloud.com/), click the name of your target cluster to go to its overview page, and then click **Connect** in the upper-right corner.
 
     > **Note:**
     >
-    > For Dedicated Tier clusters, make sure that you have set the **Allow Access from Anywhere** traffic filter in this step.
+    > For TiDB Dedicated clusters, make sure that you have set the **Allow Access from Anywhere** traffic filter in this step.
 
 2. Go to your Vercel dashboard > Vercel project > **Settings** > **Environment Variables**, and then [declare each environment variable value](https://vercel.com/docs/concepts/projects/environment-variables#declare-an-environment-variable) according to the connection information of your TiDB cluster.
 
   ![Vercel Environment Variables](/media/tidb-cloud/integration-vercel-environment-variables.png)
 
-Here we use a Prisma application as an example. The following is a datasource setting in the Prisma schema file for a TiDB Cloud Serverless Tier cluster:
+Here we use a Prisma application as an example. The following is a datasource setting in the Prisma schema file for a TiDB Serverless cluster:
 
 ```
 datasource db {

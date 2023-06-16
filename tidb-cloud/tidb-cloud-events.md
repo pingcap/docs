@@ -1,6 +1,6 @@
 ---
 title: TiDB Cloud Cluster Events
-summary: Learn how to view the events for TiDB Cloud clusters using the Events page. 
+summary: Learn how to view the events for TiDB Cloud clusters using the Events page.
 ---
 
 # TiDB Cloud Cluster Events
@@ -11,7 +11,7 @@ This document describes how to view the events for TiDB Cloud clusters using the
 
 > **Note:**
 >
-> Currently, the Events page is only available for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters.
+> Currently, the Events page is only available for [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters.
 
 ## View the Events page
 
@@ -30,12 +30,22 @@ To view the events on the Events page, take the following steps:
 
 TiDB Cloud logs the following types of cluster events:
 
-| Event Type| Description |  Available since |
-|:--- |:--- |:--- |
-| CreateCluster |  Events recorded for cluster creation actions.  |  2023-03-22   |
-| PauseCluster |   Events recorded for cluster pause actions. |  2023-03-22   |
-| ResumeCluster |   Events recorded for cluster resume actions. |  2023-03-22   |
-| ModifyClusterSize |   Events recorded for modifying cluster size actions. |  2023-03-22   |
+| Event Type| Description |
+|:--- |:--- |
+| CreateCluster |  Create a cluster |  
+| PauseCluster |   Pause a cluster |  
+| ResumeCluster |   Resume a cluster | 
+| ModifyClusterSize |   Modify cluster size | 
+| BackupCluster |   Back up a cluster |  
+| RestoreFromCluster |   Restore a cluster |  
+| CreateChangefeed |   Create a changefeed |  
+| PauseChangefeed |   Pause a changefeed | 
+| ResumeChangefeed |   Resume a changefeed | 
+| DeleteChangefeed |   Delete a changefeed |  
+| EditChangefeed |  Edit a changefeed |  
+| ScaleChangefeed |   Scale the specification of a changefeed |  
+| FailedChangefeed |   Changefeed failures |  
+| ImportData |   Import data to a cluster |  
 
 For each event, the following information is logged:
 
@@ -47,8 +57,8 @@ For each event, the following information is logged:
 
 > **Note:**
 >
-> Cluster events started before 2023-03-22 are not visible on the Events page. 
+> Cluster events started before 2023-03-22 are not visible on the Events page.
 
 ## Event retention policy
 
-For Dedicated Tier clusters, the event data is kept for 7 days.
+For TiDB Dedicated clusters, the event data is kept for 7 days.

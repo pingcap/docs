@@ -1,73 +1,33 @@
 ---
-title: Back Up and Restore TiDB Cluster Data
-summary: Learn how to back up and restore your TiDB Cloud cluster.
+title: Back Up and Restore TiDB Dedicated Data
+summary: Learn how to back up and restore your TiDB Dedicated cluster.
 aliases: ['/tidbcloud/restore-deleted-tidb-cluster']
 ---
 
-# Back Up and Restore TiDB Cluster Data
+# Back Up and Restore TiDB Dedicated Data
 
-This document describes how to back up and restore your TiDB cluster data on TiDB Cloud.
+This document describes how to back up and restore your TiDB Dedicated cluster data on TiDB Cloud.
+
+> **Tip:**
+>
+> To learn how to back up and restore TiDB Serverless cluster data, see [Back Up and Restore TiDB Serverless Data](/tidb-cloud/backup-and-restore-serverless.md).
 
 ## Limitations
 
-### Dedicated Tier
-
-- TiDB Cloud does not support restoring tables in the `mysql` schema, including user permissions and system variables. You can use [Dumpling and Lightning](https://docs.pingcap.com/tidb/stable/backup-and-restore-using-dumpling-lightning) to manually back up and restore these data.
+- TiDB Cloud does not support restoring tables in the `mysql` schema, including user permissions and system variables.
 - If you turn on and off PITR (Point-in-time Recovery) multiple times, you can only choose a time point within the recoverable range after the most recent PITR is enabled. The earlier recoverable range is not accessible.
-
-### Serverless Tier
-
-- It is important to note that Serverless Tier clusters only support in-place restoring from backups. When a restore is performed, tables in the `mysql` schema are also impacted. Hence, any changes made to user credentials and permissions or system variables will be rolled back to the state when the backup was taken.
-- Manual backup is not yet supported.
-- PITR (Point-in-time Recovery) is not yet supported.
-- The cluster will be unavailable during the restore process, and existing connections will be terminated. You can establish new connections once the restore is complete.
-- If any TiFlash replica is enabled, the replica will be unavailable for a while after the restore because data needs to be rebuilt in TiFlash.
 
 ## Backup
 
-You can back up data for both [Serverless Tier](#serverless-tier) and [Dedicated Tier](#dedicated-tier).
+TiDB Dedicated supports automatic backup and manual backup.
 
-### Serverless Tier
+Automatic backups are scheduled for your TiDB Dedicated clusters according to the backup setting, which can reduce your loss in extreme disaster situations. You can also pick a backup snapshot and restore it into a new TiDB Dedicated cluster at any time.
 
-Automatic backups are scheduled for your Serverless Tier clusters according to the backup setting, which can reduce your loss in extreme disaster situations.
+### Automatic backup
 
-#### Automatic backup
+By the automatic backup, you can back up the TiDB Dedicated cluster data every day at the backup time you have set. To set the backup time, perform the following steps:
 
-By the automatic backup, you can back up the Serverless Tier cluster data every day at the backup time you have set. To set the backup time, perform the following steps:
-
-1. Navigate to the **Backup** page of a Serverless Tier cluster.
-
-2. Click **Backup Settings**. This will open the **Backup Settings** window, where you can configure the automatic backup settings according to your requirements.
-
-    - In **Backup Time**, schedule a start time for the daily cluster backup.
-
-        If you do not specify a preferred backup time, TiDB Cloud assigns a default backup time, which is 2:00 AM in the time zone of the region where the cluster is located.
-
-    - In **Backup Retention**, configure the minimum backup data retention period.
-
-        The backup retention period must be set within a range of 7 to 90 days.
-
-3. Click **Confirm**.
-
-#### Delete backup files
-
-To delete an existing backup file, perform the following steps:
-
-1. Navigate to the **Backup** tab of a cluster.
-
-2. Click **Delete** for the backup file that you want to delete.
-
-### Dedicated Tier
-
-TiDB Cloud Dedicated Tier supports automatic backup and manual backup.
-
-Automatic backups are scheduled for your Dedicated Tier clusters according to the backup setting, which can reduce your loss in extreme disaster situations. You can also pick a backup snapshot and restore it into a new TiDB cluster at any time.
-
-#### Automatic backup
-
-By the automatic backup, you can back up the Dedicated Tier cluster data every day at the backup time you have set. To set the backup time, perform the following steps:
-
-1. Navigate to the **Backup** page of a Dedicated Tier cluster.
+1. Navigate to the **Backup** page of a TiDB Dedicated cluster.
 
 2. Click **Backup Settings**. The setting window displays.
 
@@ -89,7 +49,7 @@ By the automatic backup, you can back up the Dedicated Tier cluster data every d
         - Resolve cases of data write errors by restoring point-in-time that is before the error event.
         - Audit the historical data of the business.
 
-        If you have one of the preceding needs and want to use the PITR feature, make sure that your TiDB cluster version is at least v6.4.0 and the TiKV node size is at least 8 vCPU and 16 GiB.
+        If you have one of the preceding needs and want to use the PITR feature, make sure that your TiDB Dedicated cluster version is at least v6.4.0 and the TiKV node size is at least 8 vCPU and 16 GiB.
 
     - In **Backup Storage Region**, select the regions where you want to store your backup data.
 
@@ -101,7 +61,7 @@ By the automatic backup, you can back up the Dedicated Tier cluster data every d
 
 5. Click **Confirm**.
 
-#### Backup storage region support
+### Backup storage region support
 
 Currently, you cannot select an arbitrary remote region for backup data storage. The regions already supported are as follows:
 
@@ -113,11 +73,11 @@ Currently, you cannot select an arbitrary remote region for backup data storage.
 >
 > If you select multiple backup storage regions, you will be charged for multiple backup storage and inter-region backup data replication out from the cluster region to each destination region. The cost is on a per-region basis and varies with the backup regions selected. For more information, see [Data Backup Cost](https://www.pingcap.com/tidb-cloud-pricing-details/#backup-storage-cost).
 
-#### Manual backup
+### Manual backup
 
 Manual backups are user-initiated backups that enable you to back up your data to a known state as needed, and then restore to that state at any time.
 
-To apply a manual backup to your TiDB cluster, perform the following steps:
+To apply a manual backup to your TiDB Dedicated cluster, perform the following steps:
 
 1. Navigate to the **Backup** tab of a cluster.
 
@@ -127,7 +87,7 @@ To apply a manual backup to your TiDB cluster, perform the following steps:
 
 4. Click **Confirm**. Then your cluster data is backed up.
 
-#### Delete backup files
+### Delete backup files
 
 To delete an existing backup file, perform the following steps:
 
@@ -135,7 +95,7 @@ To delete an existing backup file, perform the following steps:
 
 2. Click **Delete** for the backup file that you want to delete.
 
-#### Delete a running backup job
+### Delete a running backup job
 
 To delete a running backup job, it is similar as [**Delete backup files**](#delete-backup-files).
 
@@ -143,7 +103,7 @@ To delete a running backup job, it is similar as [**Delete backup files**](#dele
 
 2. Click **Delete** for the backup file that is in the **Pending** or **Running** state.
 
-#### Best practices for backup
+### Best practices for backup
 
 - It is recommended that you perform backup operations at cluster idle time to minimize the impact on business.
 - Do not run the manual backup while importing data, or during cluster scaling.
@@ -151,29 +111,14 @@ To delete a running backup job, it is similar as [**Delete backup files**](#dele
 
 ## Restore
 
-### Serverless Tier
-
-TiDB Cloud Serverless Tier only supports in-place restoration. To restore your Serverless Tier cluster from a backup, follow these steps:
-
-1. Navigate to the **Backup** page of a cluster.
-
-2. Click **Restore**. This will open the **Restore** window.
-
-    1. Choose a backup from the **Backup Time** drop-down list.
-    2. Click **Confirm** to begin the restoration process.
-
-   After initiating the restore process, the cluster status changes to **Restoring**. The cluster will be unavailable during the restore process and existing connections will be terminated. Once the restore process completes successfully, you can access the cluster as usual.
-
-### Dedicated Tier
-
-TiDB Cloud Dedicated Tier provides two types of data restoration:
+TiDB Dedicated provides two types of data restoration:
 
 - Restore backup data to a new cluster
 - Restore a deleted cluster from the recycle bin
 
-#### Restore data to a new cluster
+### Restore data to a new cluster
 
-To restore your TiDB cluster data from a backup to a new cluster, take the following steps:
+To restore your TiDB Dedicated cluster data from a backup to a new cluster, take the following steps:
 
 1. Navigate to the **Backup** tab of a cluster.
 
@@ -215,7 +160,7 @@ To restore your TiDB cluster data from a backup to a new cluster, take the follo
 
 7. In the **Security Settings** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
 
-#### Restore a deleted cluster
+### Restore a deleted cluster
 
 To restore a deleted cluster from recycle bin, take the following steps:
 

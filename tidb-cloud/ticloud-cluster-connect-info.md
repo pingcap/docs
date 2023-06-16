@@ -11,6 +11,10 @@ Get the connection string of a cluster:
 ticloud cluster connect-info [flags]
 ```
 
+> **Note:**
+>
+> Currently, this command only supports getting the connection string of a [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta) cluster.
+
 ## Examples
 
 Get the connection string of a cluster in interactive mode:

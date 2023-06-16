@@ -11,6 +11,10 @@ The TiKV configuration file supports more options than command-line parameters. 
 
 This document only describes the parameters that are not included in command-line parameters. For more details, see [command-line parameter](/command-line-flags-for-tikv-configuration.md).
 
+> **Tip:**
+>
+> If you need to adjust the value of a configuration item, refer to [Modify the configuration](/maintain-tidb-using-tiup.md#modify-the-configuration).
+
 ## Global configuration
 
 ### `abort-on-panic`
@@ -1479,6 +1483,18 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 + The maximum SST file size when the compaction guard is enabled. The configuration prevents SST files from being too large when the compaction guard is enabled. This configuration overrides `target-file-size-base` for the same column family.
 + Default value: `"128MB"`
 + Unit: KB|MB|GB
+
+### `format-version` <span class="version-mark">New in v6.2.0</span>
+
++ The format version of SST files. This configuration item only affects newly written tables. For existing tables, the version information is read from the footer.
++ Optional values:
+    - `0`: Can be read by all TiKV versions. The default checksum type is CRC32 and this version does not support changing the checksum type.
+    - `1`: Can be read by all TiKV versions. Supports non-default checksum types like xxHash. RocksDB only writes data when the checksum type is not CRC32. (version `0` is automatically upgraded)
+    - `2`: Can be read by all TiKV versions. Changes the encoding of compressed blocks using LZ4, BZip2 and Zlib compression.
+    - `3`: Can be read by TiKV v2.1 and later versions. Changes the encoding of the keys in index blocks.
+    - `4`: Can be read by TiKV v3.0 and later versions. Changes the encoding of the values in index blocks.
+    - `5`: Can be read by TiKV v6.1 and later versions. Full and partitioned filters use a faster and more accurate Bloom filter implementation with a different schema.
++ Default value: `2`
 
 ## rocksdb.defaultcf.titan
 

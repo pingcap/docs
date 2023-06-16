@@ -62,14 +62,14 @@ The TiDB Cloud roadmap brings you what's coming in the near future, so you can s
   </tr>
   <tr>
     <td>Optimize Playground.</td>
-    <td>Improve interactivity combined with Chat2Query, and guide users to finish the tutorial.</td>
+    <td>Deliver context-driven tutorials to facilitate a deeper understanding of TiDB and TiDB Cloud for our users.</td>
   </tr>
 </tbody>
 </table>
 
 ## TiDB kernel
 
-For the roadmap of TiDB kernel, refer to [TiDB Roadmap](https://github.com/pingcap/tidb/blob/master/roadmap.md#tidb-kernel).
+For the roadmap of TiDB kernel, refer to [TiDB Roadmap](https://docs.pingcap.com/tidb/dev/tidb-roadmap).
 
 ## Diagnosis and maintenance
 

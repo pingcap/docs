@@ -21,7 +21,7 @@ The audit logging feature is disabled by default. To audit a cluster, you need t
 
 ## Prerequisites
 
-- You are using a TiDB Cloud Dedicated Tier cluster. Audit logging is not available for TiDB Cloud Serverless Tier clusters.
+- You are using a TiDB Dedicated cluster. Audit logging is not available for TiDB Serverless clusters.
 - You are the audit administrator of your organization in TiDB Cloud. Otherwise, you cannot see the audit-related options in the TiDB Cloud console. For more information, see [Manage role access](/tidb-cloud/manage-user-access.md#manage-role-access).
 
 ## Enable audit logging for AWS or GCP
@@ -209,7 +209,7 @@ For each database event record in audit logs, TiDB provides the following fields
 | 6 | EVENT_CLASS | VARCHAR | 15 | Event type     |
 | 7 | EVENT_SUBCLASS     | VARCHAR | 15 | Event subtype |
 | 8 | STATUS_CODE | INTEGER |  | Response status of the statement   |
-| 9 | COST_TIME | INTEGER |  | Time consumed by the statement    |
+| 9 | COST_TIME | FLOAT |  | Time consumed by the statement    |
 | 10 | HOST | VARCHAR | 16 | Server IP    |
 | 11 | CLIENT_IP         | VARCHAR | 16 | Client IP   |
 | 12 | USER | VARCHAR | 17 | Login username    |

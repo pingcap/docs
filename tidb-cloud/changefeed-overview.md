@@ -1,18 +1,17 @@
 ---
 title: Changefeed
+summary: TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data services.
 ---
 
 # Changefeed
 
-TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data services. Currently, TiDB Cloud supports streaming data to Apache Kafka, MySQL, and TiDB Cloud.
+TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data services. Currently, TiDB Cloud supports streaming data to Apache Kafka, MySQL, TiDB Cloud and cloud storage.
 
 > **Note:**
 >
-> To use the changefeed feature, make sure that your TiDB cluster version is v6.4.0 or later and the TiKV node size is at least 8 vCPU and 16 GiB.
->
-> Currently, TiDB Cloud only allows up to 10 changefeeds per cluster.
->
-> For [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta), the changefeed feature is unavailable.
+> - To use the changefeed feature, make sure that your TiDB Dedicated cluster version is v6.4.0 or later.
+> - Currently, TiDB Cloud only allows up to 5 changefeeds per cluster.
+> - For [TiDB Serverless clusters](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta), the changefeed feature is unavailable.
 
 To access the changefeed feature, navigate to the cluster overview page of your TiDB cluster, and then click **Changefeed** in the left navigation pane. The changefeed page is displayed.
 
@@ -25,8 +24,9 @@ To create a changefeed, refer to the tutorials:
 - [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md) (Beta)
 - [Sink to MySQL](/tidb-cloud/changefeed-sink-to-mysql.md)
 - [Sink to TiDB Cloud](/tidb-cloud/changefeed-sink-to-tidb-cloud.md)
+- [Sink to cloud storage](/tidb-cloud/changefeed-sink-to-cloud-storage.md)
 
-## Query TiCDC RCUs
+## Query Changefeed RCUs
 
 1. Navigate to the cluster overview page of the target TiDB cluster, and then click **Changefeed** in the left navigation pane.
 2. Locate the corresponding changefeed you want to query, and click **...** > **View** in the **Action** column.
@@ -81,9 +81,9 @@ To learn the billing for changefeeds in TiDB Cloud, see [Changefeed billing](/ti
 
 ## Changefeed states
 
-The state of a replication task represents the running state of the replication task. During the running process, replication tasks might fail with errors, be manually paused, resumed, or reach the specified `TargetTs`. These behaviors can lead to changes of the replication task state. 
+The state of a replication task represents the running state of the replication task. During the running process, replication tasks might fail with errors, be manually paused, resumed, or reach the specified `TargetTs`. These behaviors can lead to changes of the replication task state.
 
-The states are described as follows: 
+The states are described as follows:
 
 - `CREATING`: the replication task is being created.
 - `RUNNING`: the replication task runs normally and the checkpoint-ts proceeds normally.

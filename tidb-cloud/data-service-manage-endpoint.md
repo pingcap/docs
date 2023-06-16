@@ -11,7 +11,7 @@ This document describes how to manage your endpoints in a Data App in the TiDB C
 
 ## Before you begin
 
-Before you manage an endpoint, make sure that you have created a cluster and a Data App. For more information, see [Create a TiDB cluster](/tidb-cloud/create-tidb-cluster.md) and [Create a Data App](/tidb-cloud/data-service-manage-data-app.md#create-a-data-app).
+Before you manage an endpoint, make sure that you have created a cluster and a Data App. For more information, see [Create a TiDB Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) and [Create a Data App](/tidb-cloud/data-service-manage-data-app.md#create-a-data-app).
 
 Before you call an endpoint, make sure that you have created an API key in the Data App. For more information, see [Create an API key](/tidb-cloud/data-service-api-key.md#create-an-api-key).
 
@@ -20,7 +20,7 @@ Before you call an endpoint, make sure that you have created an API key in the D
 To create an endpoint, perform the following steps:
 
 1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
-2. In the left pane, click the name of your target Data App and click **...** > **Create Endpoint**. You can update the default name if necessary.
+2. In the left pane, locate your target Data App and click **+** **Create Endpoint** to the right of the App name. You can update the default name if necessary.
 
     > **Tip:**
     >
@@ -34,6 +34,10 @@ You can also create an endpoint from a SQL file in Chat2Query (beta). For more d
 
 For each endpoint, you can write SQL statements to execute on a TiDB cluster, define parameters for the SQL statements, or manage the name and version.
 
+> **Note:**
+>
+> If you have connected your Data App to GitHub with **Auto Sync & Deployment** enabled, you can also update the endpoint configurations using GitHub. Any changes you made in GitHub will be deployed in TiDB Cloud automatically. For more information, see [Deploy automatically with GitHub](/tidb-cloud/data-service-manage-github-connection.md).
+
 ### Configure properties
 
 On the right pane of the endpoint details page, you can click the **Properties** tab to view and manage the following properties of the endpoint:
@@ -41,10 +45,10 @@ On the right pane of the endpoint details page, you can click the **Properties**
 - **Endpoint Path**: the unique path of the endpoint that users use to access it.
 
     - The path must be unique within a Data App.
-    - Only letters, numbers, underscores (`_`), and slashes (`/`) are allowed in the path, which must start with a slash (`/`). For example, `/my_endpoint/get_id`.
+    - Only letters, numbers, underscores (`_`), and slashes (`/`) are allowed in the path, which must start with a slash (`/`) and end with a letter, number, or underscore (`_`). For example, `/my_endpoint/get_id`.
     - The length of the path must be less than 64 characters.
 
-- **Endpoint URL**: (read-only) the URL is automatically generated based on the service URL of the Data App and the path of the endpoint. For example, if the path of the endpoint is `/my_endpoint/get_id`, the endpoint URL is `https://data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id`.
+- **Endpoint URL**: (read-only) the URL is automatically generated based on the region where the corresponding cluster is located, the service URL of the Data App, and the path of the endpoint. For example, if the path of the endpoint is `/my_endpoint/get_id`, the endpoint URL is `https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id`.
 
 - **Request Method**: the HTTP method of the endpoint. The following methods are supported:
 
@@ -74,7 +78,7 @@ On the SQL editor of the endpoint details page, you can write and run the SQL st
 
     > **Note:**
     >
-    > Only clusters that are linked to the Data App are displayed in the drop-down list. To manage the linked clusters, see [Manage linked clusters](/tidb-cloud/data-service-manage-data-app.md#manage-linked-clusters).
+    > Only clusters that are linked to the Data App are displayed in the drop-down list. To manage the linked clusters, see [Manage linked clusters](/tidb-cloud/data-service-manage-data-app.md#manage-linked-data-sources).
 
     On the upper part of the SQL editor, select a cluster on which you want to execute SQL statements from the drop-down list. Then, you can view all databases of this cluster in the **Schema** tab on the right pane.
 
@@ -155,13 +159,17 @@ After testing the endpoint, you can see the response as JSON at the bottom of th
 
 ## Deploy an endpoint
 
+> **Note:**
+>
+> If you have connected your Data App to GitHub with **Auto Sync & Deployment** enabled, any Data App changes you made in GitHub will be deployed in TiDB Cloud automatically. For more information, see [Deploy automatically with GitHub](/tidb-cloud/data-service-manage-github-connection.md).
+
 To deploy an endpoint, perform the following steps:
 
 1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
 2. In the left pane, click the name of your target Data App to view its endpoints.
 3. Locate the endpoint you want to deploy, click the endpoint name to view its details, and then click **Deploy** in the upper-right corner.
-
-4. Click **Deploy** to confirm the deployment. You will get the **Endpoint has been deployed** prompt if the endpoint is successfully deployed.
+4. If **Review Draft** is enabled for your Data App, a dialog is displayed for you to review the changes you made. You can choose whether to discard the changes based on the review.
+5. Click **Deploy** to confirm the deployment. You will get the **Endpoint has been deployed** prompt if the endpoint is successfully deployed.
 
     On the right pane of the endpoint details page, you can click the **Deployments** tab to view the deployed history.
 
@@ -202,7 +210,7 @@ TiDB Cloud generates code examples to help you call an endpoint. To get the code
 
     ```bash
     curl --digest --user '<Public Key>:<Private Key>' \
-      --request GET 'https://data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/<Endpoint Path>' \
+      --request GET 'https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/<Endpoint Path>' \
       --header 'endpoint-type: draft'
     ```
 
@@ -216,11 +224,16 @@ TiDB Cloud generates code examples to help you call an endpoint. To get the code
 
     ```bash
     curl --digest --user '<Public Key>:<Private Key>' \
-      --request GET 'https://data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/<Endpoint Path>'
+      --request GET 'https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/<Endpoint Path>'
     ```
 
     </div>
     </SimpleTab>
+
+    > **Note:**
+    >
+    > - By requesting the regional domain `<region>.data.tidbcloud.com`, you can directly access the endpoint in the region where the TiDB cluster is located.
+    > - Alternatively, you can also request the global domain `data.tidbcloud.com` without specifying a region. In this way, TiDB Cloud will internally redirect the request to the target region, but this might result in additional latency. If you choose this way, make sure to add the `--location-trusted` option to your curl command when calling an endpoint.
 
 5. Paste the code example in your application and run it.
 
@@ -233,13 +246,16 @@ After calling an endpoint, you can see the response in JSON format. For more inf
 
 ## Undeploy an endpoint
 
+> **Note:**
+>
+> If you have [connected your Data App to GitHub](/tidb-cloud/data-service-manage-github-connection.md) with **Auto Sync & Deployment** enabled, undeploying an endpoint of this Data App will also delete the configuration of this endpoint on GitHub.
+
 To undeploy an endpoint, perform the following steps:
 
 1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
 2. In the left pane, click the name of your target Data App to view its endpoints.
-3. Click the name of the endpoint you want to undeploy to view its details.
-4. On the right pane of the endpoint details page, click the **Deployments** tab. The deployed version page is displayed.
-5. Locate the current online version and click **Undeploy**. The version status will be changed to **Offline**.
+3. Locate the endpoint you want to undeploy, click **...** > **Undeploy**.
+4. Click **Undeploy** to confirm the undeployment.
 
 ## Delete an endpoint
 
@@ -251,10 +267,5 @@ To delete an endpoint, perform the following steps:
 
 1. Navigate to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
 2. In the left pane, click the name of your target Data App to view its endpoints.
-3. Locate the endpoint you want to delete and click **...** > **Delete**. The **Confirm deletion of endpoint** dialog box is displayed.
-
-    > **Tip:**
-    >
-    > Alternatively, you can also click the endpoint name to view its details and click **...** > **Delete** in the upper-right corner.
-
+3. Click the name of the endpoint you want to delete, and then click **...** > **Delete** in the upper-right corner.
 4. Click **Delete** to confirm the deletion.

@@ -11,9 +11,9 @@ In addition, you will also learn how to get the necessary information with the `
 
 The features of the `tidbcloud_cluster` resource include the following:
 
-- Create Serverless Tier and Dedicated Tier clusters.
-- Modify Dedicated Tier clusters.
-- Delete Serverless Tier and Dedicated Tier clusters.
+- Create TiDB Serverless and TiDB Dedicated clusters.
+- Modify TiDB Dedicated clusters.
+- Delete TiDB Serverless and TiDB Dedicated clusters.
 
 ## Prerequisites
 
@@ -69,7 +69,7 @@ To view the information of all available projects, you can use the `tidbcloud_pr
 
    ```
    $ terraform apply --auto-approve
-  
+
    Changes to Outputs:
      + projects = [
          + {
@@ -151,7 +151,7 @@ To get the cluster specification information, you can use the `tidbcloud_cluster
 
     <details>
       <summary>Cluster specification</summary>
-   
+
     ```
     {
         "cloud_provider" = "AWS"
@@ -289,7 +289,7 @@ In the results:
 
 You can create a cluster using the `tidbcloud_cluster` resource.
 
-The following example shows how to create a Dedicated Tier cluster.
+The following example shows how to create a TiDB Dedicated cluster.
 
 1. Create a directory for the cluster and enter it.
 
@@ -343,7 +343,7 @@ The following example shows how to create a Dedicated Tier cluster.
 
     ```shell
     $ terraform apply
-    
+
     Terraform will perform the following actions:
 
       # tidbcloud_cluster.example_cluster will be created
@@ -487,9 +487,9 @@ The following example shows how to create a Dedicated Tier cluster.
 
 When the status is `AVAILABLE`, it indicates that your TiDB cluster is created and ready for use.
 
-## Modify a Dedicated Tier cluster
+## Modify a TiDB Dedicated cluster
 
-For a Dedicated Tier cluster, you can use Terraform to manage cluster resources as follows:
+For a TiDB Dedicated cluster, you can use Terraform to manage cluster resources as follows:
 
 - Add a TiFlash component to the cluster.
 - Scale the cluster.
@@ -845,7 +845,7 @@ You can pause a cluster when its status is `AVAILABLE` or resume a cluster when 
 
 6. Wait for a moment, then use the `terraform refersh` command to update the state. The status will be changed to `AVAILABLE` finally.
 
-Now, you have created and managed a Dedicated Tier cluster with Terraform. Next, you can try creating a backup of the cluster by our [backup resource](/tidb-cloud/terraform-use-backup-resource.md).
+Now, you have created and managed a TiDB Dedicated cluster with Terraform. Next, you can try creating a backup of the cluster by our [backup resource](/tidb-cloud/terraform-use-backup-resource.md).
 
 ## Import a cluster
 
@@ -971,7 +971,7 @@ For example, you can import a cluster that is not created by Terraform or import
     Apply complete! Resources: 0 added, 0 changed, 0 destroyed.
     ```
 
-Now you can use Terraform to manage the cluster. 
+Now you can use Terraform to manage the cluster.
 
 ## Delete a cluster
 

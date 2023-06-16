@@ -5,11 +5,11 @@ summary: Learn how to determine the size of your TiDB Cloud cluster.
 
 # Determine Your TiDB Size
 
-This document describes how to determine the size of a Dedicated Tier cluster.
+This document describes how to determine the size of a TiDB Dedicated cluster.
 
 > **Note:**
 >
-> You cannot change the size of a [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) cluster.
+> You cannot change the size of a [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta) cluster.
 
 ## Size TiDB
 
@@ -158,7 +158,7 @@ For example, your overall expected performance is 110,000 QPS under a mixed work
 
 As 7 is less than 8, the performance deviation coefficient of 7 nodes is 0. The estimated TiKV performance is `7 * 17,800 * (1 - 0) = 124,600`, which can meet your expected performance of 110,000 QPS.
 
-Therefore, 7 TiKV nodes (8 vCPU, 32 GiB) are recommended for you according to your expected performance. 
+Therefore, 7 TiKV nodes (8 vCPU, 32 GiB) are recommended for you according to your expected performance.
 
 Next, you can compare the TiKV node number calculated according to data volume with the number calculated according to your expected performance, and take the larger one as a recommended number of your TiKV nodes.
 
@@ -168,10 +168,10 @@ The supported node storage of different TiKV node sizes is as follows:
 
 | Node size | Min node storage | Max node storage | Default node storage |
 |:---------:|:----------------:|:----------------:|:--------------------:|
-| 2 vCPU    | 200 GiB          | 500 GiB          | 200 GiB              |
-| 4 vCPU    | 200 GiB          | 2048 GiB         | 500 GiB              |
-| 8 vCPU    | 200 GiB          | 4096 GiB         | 500 GiB              |
-| 16 vCPU   | 200 GiB          | 4096 GiB         | 500 GiB              |
+| 2 vCPU    | 200 GiB          |     500 GiB      | 200 GiB              |
+| 4 vCPU    | 200 GiB          |     2048 GiB     | 500 GiB              |
+| 8 vCPU    | 200 GiB          |     4096 GiB     | 500 GiB              |
+| 16 vCPU   | 200 GiB          |     6144 GiB     | 500 GiB              |
 
 > **Note:**
 >

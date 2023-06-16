@@ -10,9 +10,11 @@ category: quick start
 
 This tutorial guides you through an easy way to get started with your TiDB Cloud. You can also navigate to the [**Getting Started**](https://tidbcloud.com/console/getting-started) page in the TiDB Cloud console to follow the tutorials step by step.
 
+In addition, you can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=tidb_cloud_quick_start).
+
 ## Step 1. Create a TiDB cluster
 
-TiDB Cloud [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) (Beta) is the best way to get started with TiDB Cloud. To create a Serverless Tier cluster, take the following steps:
+[TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta) (Beta) is the best way to get started with TiDB Cloud. To create a TiDB Serverless cluster, take the following steps:
 
 1. If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/free-trial) to sign up for an account.
 
@@ -22,13 +24,13 @@ TiDB Cloud [Serverless Tier](/tidb-cloud/select-cluster-tier.md#serverless-tier-
 
     The [**Clusters**](https://tidbcloud.com/console/clusters) page is displayed by default.
 
-3. For new sign-up users, TiDB Cloud creates a default Serverless Tier cluster `Cluster0` for you automatically.
+3. For new sign-up users, TiDB Cloud creates a default TiDB Serverless cluster `Cluster0` for you automatically.
 
     - To try out TiDB Cloud features instantly with this default cluster, go to [Step 2. Try AI-powered Chat2Query (beta)](#step-2-try-ai-powered-chat2query-beta).
-    - To try creating a new Serverless Tier cluster on your own, take the following operations:
+    - To try creating a new TiDB Serverless cluster on your own, take the following operations:
 
         1. Click **Create Cluster**.
-        2. On the **Create Cluster** page, **Serverless** is selected by default. Select a target region of your cluster, update the default cluster name if necessary, and then click **Create**. Your Serverless Tier cluster will be created in approximately 30 seconds.
+        2. On the **Create Cluster** page, **Serverless** is selected by default. Select a target region of your cluster, update the default cluster name if necessary, and then click **Create**. Your TiDB Serverless cluster will be created in approximately 30 seconds.
 
 ## Step 2. Try AI-powered Chat2Query (beta)
 
@@ -76,37 +78,18 @@ In Chat2Query, you can either simply type `--` followed by your instructions to 
 
 After running the queries, you can see the query logs and results immediately at the bottom of the page.
 
-## Step 3. Try Playground
+## Step 3. Try interactive tutorials
 
-After your TiDB Cloud cluster is created, you can also quickly start experimenting with TiDB using the pre-loaded sample data in TiDB Cloud Playground.
+TiDB Cloud offers interactive tutorials with crafted sample datasets to help you get started with TiDB Cloud quickly. You can try the tutorials to learn how to use TiDB Cloud to run high-performance data analytics.
 
-On the [**Clusters**](https://tidbcloud.com/console/clusters) page, click the name of your newly created cluster to go to its overview page, and then click **Playground** in the left navigation pane.
-
-## Step 4. Load sample data
-
-After trying **Plaground**, you can load sample data to your TiDB Cloud cluster. We provide Capital Bikeshare sample data for you to easily import data and run sample queries.
-
-1. On your cluster overview page, click **Import** in the left navigation pane.
-
-2. On the **Import** page, click **Import Data** in the upper-right corner, and then select **From S3**.
-
-3. Fill in the import parameters:
-
-    - **Data format**: select **SQL File**
-    - **Bucket URI**: `s3://tidbcloud-sample-data/data-ingestion/`
-    - **Role ARN**: `arn:aws:iam::801626783489:role/import-sample-access`
-
-    If the region of the bucket is different from your cluster, confirm the compliance of cross region. Click **Next**.
-
-4. Add the table filter rules if needed. For the sample data, you can skip this step. Click **Next**.
-
-5. On the **Preview** page, confirm the data to be imported and then click **Start Import**.
-
-The data import process will take several minutes. When the data import progress shows **Finished**, you have successfully imported the sample data and the database schema to your database in TiDB Cloud.
+1. Click **?** in the lower-right corner of the console and click **Interactive Tutorials**.
+2. In the tutorials list, select a tutorial card to start. For example, **Steam Game Stats**.
+3. Select a TiDB Serverless cluster that you want to use for the tutorial, and click **Import Dataset**. The import process might take approximately one minute.
+4. After the sample data is imported, follow the on-screen instructions to complete the tutorial.
 
 ## What's next
 
-- For how to connect to your cluster via different methods, see [Connect to a TiDB cluster](/tidb-cloud/connect-to-tidb-cluster.md).
+- For how to connect to your cluster via different methods, see [Connect to a TiDB Serverless cluster](/tidb-cloud/connect-to-tidb-cluster-serverless.md).
 - For more information about how to use Chat2Query to explore your data, see [Chat2Query](/tidb-cloud/explore-data-with-chat2query.md).
 - For TiDB SQL usage, see [Explore SQL with TiDB](/basic-sql-operations.md).
-- For production use with the benefits of cross-zone high availability, horizontal scaling, and [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing), see [Create a TiDB cluster](/tidb-cloud/create-tidb-cluster.md) to create a Dedicated Tier cluster.
+- For production use with the benefits of cross-zone high availability, horizontal scaling, and [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing), see [Create a TiDB Dedicated cluster](/tidb-cloud/create-tidb-cluster.md).

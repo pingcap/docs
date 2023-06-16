@@ -7,12 +7,12 @@ summary: Learn about TiDB Cloud billing.
 
 > **Note:**
 >
-> [Serverless Tier clusters](/tidb-cloud/select-cluster-tier.md#serverless-tier-beta) are free until May 30, 2023, with a 100% discount off. After that, usage beyond the [free quota](/tidb-cloud/select-cluster-tier.md#usage-quota) will be charged.
+> [TiDB Serverless clusters](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta) are free until May 31, 2023, with a 100% discount off. After that, usage beyond the [free quota](/tidb-cloud/select-cluster-tier.md#usage-quota) will be charged.
 
 TiDB Cloud charges according to the resources that you consume. You can visit the following pages to get more information about the pricing.
 
-- [TiDB Cloud Serverless Tier Pricing Details](https://www.pingcap.com/tidb-cloud-serverless-pricing-details)
-- [TiDB Cloud Dedicated Tier Pricing Details](https://en.pingcap.com/tidb-cloud-pricing-details/)
+- [TiDB Serverless Pricing Details](https://www.pingcap.com/tidb-cloud-serverless-pricing-details)
+- [TiDB Dedicated Pricing Details](https://en.pingcap.com/tidb-cloud-pricing-details/)
 
 ## Invoices
 
@@ -214,7 +214,10 @@ To learn more about contracts, feel free to [contact our sales](https://www.ping
 
 If you are the owner or billing administrator of your organization, you can link your TiDB Cloud account to an AWS billing account or Google Cloud billing account. Otherwise, skip this section.
 
-If you are new to TiDB Cloud and do not have a TiDB Cloud account, you can sign up for a TiDB Cloud account through [AWS Marketplace](https://aws.amazon.com/marketplace) or [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), and pay for the usage via the AWS or GCP billing account. For more details, refer to [Create a TiDB Cloud account](/tidb-cloud/create-tidb-cluster.md#step-1-create-a-tidb-cloud-account).
+If you are new to TiDB Cloud and do not have a TiDB Cloud account, you can sign up for a TiDB Cloud account through [AWS Marketplace](https://aws.amazon.com/marketplace) or [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), and pay for the usage via the AWS or GCP billing account.
+
+- To sign up through AWS Marketplace, search for `TiDB Cloud` in [AWS Marketplace](https://aws.amazon.com/marketplace), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
+- To sign up through Google Cloud Marketplace, search for `TiDB Cloud` in [Google Cloud Marketplace](https://console.cloud.google.com/marketplace), subscribe to TiDB Cloud, and then follow the onscreen instructions to set up your TiDB Cloud account.
 
 If you already have a TiDB Cloud account and you want to pay for the usage via your AWS or GCP billing account, you can link your TiDB Cloud account to your AWS or GCP billing account.
 

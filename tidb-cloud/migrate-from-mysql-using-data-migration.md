@@ -5,13 +5,15 @@ summary: Learn how to migrate data from MySQL-compatible databases hosted in Ama
 
 # Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration
 
-This document describes how to migrate data from a MySQL-compatible database on a cloud provider (Amazon Aurora MySQL, Amazon Relational Database Service (RDS), or Google Cloud SQL for MySQL) or on-premises to TiDB Cloud using the Data Migration feature of the TiDB Cloud console.
+This document describes how to migrate data from a MySQL-compatible database on a cloud provider (Amazon Aurora MySQL, Amazon Relational Database Service (RDS), or Google Cloud SQL for MySQL) or self-hosted source database to TiDB Cloud using the Data Migration feature of the TiDB Cloud console.
 
-This feature helps you migrate your source databases' existing data and ongoing changes to TiDB Cloud (either in the same region or cross regions) directly in one go. 
+This feature helps you migrate your source databases' existing data and ongoing changes to TiDB Cloud (either in the same region or cross regions) directly in one go.
+
+If you want to migrate incremental data only, see [Migrate Incremental Data from MySQL-Compatible Databases to TiDB Cloud Using Data Migration](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md).
 
 ## Limitations
 
-- The Data Migration feature is available only for **Dedicated Tier** clusters.
+- The Data Migration feature is available only for **TiDB Dedicated** clusters.
 
 - The Data Migration feature is only available to clusters in the projects that are created in the following regions after November 9, 2022. If your **project** was created before the date or if your cluster is in another region, this feature is not available to your cluster and the **Data Migration** tab will not be displayed on the cluster overview page in the TiDB Cloud console.
 
@@ -37,7 +39,7 @@ This feature helps you migrate your source databases' existing data and ongoing 
 
 - When you delete a cluster in TiDB Cloud, all migration jobs in that cluster are automatically deleted and not recoverable.
 
-- During incremental replication (migrating ongoing changes to your cluster), if the migration job recovers from an abrupt error, it might open the safe mode for 60 seconds. During the safe mode, `INSERT` statements are replicated as `REPLACE`, `UPDATE` statements as `DELETE` and `REPLACE`, and then these transactions are replicated to the downstream cluster to make sure that all the data during the abrupt error has been migrated smoothly to the downstream cluster. In this scenario, for upstream tables without primary keys or not-null unique indexes, some data might be duplicated in the downstream cluster because the data might be inserted repeatedly to the downstream.
+- During incremental replication (migrating ongoing changes to your cluster), if the migration job recovers from an abrupt error, it might open the safe mode for 60 seconds. During the safe mode, `INSERT` statements are migrated as `REPLACE`, `UPDATE` statements as `DELETE` and `REPLACE`, and then these transactions are migrated to the downstream cluster to make sure that all the data during the abrupt error has been migrated smoothly to the downstream cluster. In this scenario, for upstream tables without primary keys or not-null unique indexes, some data might be duplicated in the downstream cluster because the data might be inserted repeatedly to the downstream.
 
 - When you use Data Migration, it is recommended to keep the size of your dataset smaller than 1 TiB. If the dataset size is larger than 1 TiB, the existing data migration will take a long time due to limited specifications.
 
@@ -102,11 +104,11 @@ To quickly test a migration job, you can use the `root` account of the TiDB Clou
 
 ### Set up network connection
 
-Before creating a migration job, set up the network connection according to your connection methods. See [Connect to Your TiDB Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
+Before creating a migration job, set up the network connection according to your connection methods. See [Connect to Your TiDB Dedicated Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
 
 - If you use public IP (this is, standard connection) for network connection, make sure that the upstream database can be connected through the public network.
 
-- If you use AWS PrivateLink, set it up according to [Set Up Private Endpoint Connections](/tidb-cloud/set-up-private-endpoint-connections.md).
+- If you use AWS PrivateLink, set it up according to [Connect to TiDB Dedicated via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections.md).
 
 - If you use AWS VPC Peering or GCP VPC Network Peering, see the following instructions to configure the network.
 
@@ -139,7 +141,7 @@ If your MySQL service is in an GCP VPC, take the following steps:
 
 3. Modify the ingress firewall rules of the VPC where MySQL is located.
 
-    You must add [the CIDR of the region where your TiDB Cloud cluster is located](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr) to the ingress firewall rules. This allows the traffic to flow from your TiDB cluster to the MySQL endpoint. 
+    You must add [the CIDR of the region where your TiDB Cloud cluster is located](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-project-cidr) to the ingress firewall rules. This allows the traffic to flow from your TiDB cluster to the MySQL endpoint.
 
 </details>
 
@@ -192,38 +194,49 @@ On the **Create Migration Job** page, configure the source and target connection
     - If you use Public IP or VPC Peering, you need to add the Data Migration service's IP addresses to the IP Access List of your source database and firewall (if any).
     - If you use AWS Private Link, you are prompted to accept the endpoint request. Go to the [AWS VPC console](https://us-west-2.console.aws.amazon.com/vpc/home), and click **Endpoint services** to accept the endpoint request.
 
-## Step 3: Choose the objects to be migrated
+## Step 3: Choose migration job type
 
-1. Choose existing data migration, incremental data migration, or both by choosing the checkboxes.
+In the **Choose the objects to be migrated** step, you can choose existing data migration, incremental data migration, or both.
 
-    > **Tip:**
-    >
-    > - To migrate data to TiDB Cloud once and for all, choose both **Existing data migration** and **Incremental data migration**, which ensures data consistency between the source and target databases.
-    > - To migrate only the existing data of the source database to TiDB Cloud, only choose the **Existing data migration** checkbox.
+### Migrate existing data and incremental data
 
-2. On the **Choose Objects to Migrate** page, select the objects to be migrated. You can click **All** to select all objects, or click **Customize** and then click the checkbox next to the object name to select the object.
+To migrate data to TiDB Cloud once and for all, choose both **Existing data migration** and **Incremental data migration**, which ensures data consistency between the source and target databases.
 
-    - If you click **All**, the migration job will migrate the existing data from the whole source database instance to TiDB Cloud and replicate ongoing changes after the full migration. Note that it happens only if you have selected the **Existing data migration** and **Incremental data migration** checkboxes in the previous step.
+### Migrate only existing data
+
+To migrate only existing data of the source database to TiDB Cloud, choose **Existing data migration**.
+
+### Migrate only incremental data
+
+To migrate only the incremental data of the source database to TiDB Cloud, choose **Incremental data migration**. In this case, the migration job does not migrate the existing data of the source database to TiDB Cloud, but only migrates the ongoing changes of the source database that are explicitly specified by the migration job.
+
+For detailed instructions about incremental data migration, see [Migrate Only Incremental Data from MySQL-Compatible Databases to TiDB Cloud Using Data Migration](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md).
+
+## Step 4: Choose the objects to be migrated
+
+1. On the **Choose Objects to Migrate** page, select the objects to be migrated. You can click **All** to select all objects, or click **Customize** and then click the checkbox next to the object name to select the object.
+
+    - If you click **All**, the migration job will migrate the existing data from the whole source database instance to TiDB Cloud and migrate ongoing changes after the full migration. Note that it happens only if you have selected the **Existing data migration** and **Incremental data migration** checkboxes in the previous step.
 
         <img src="https://download.pingcap.com/images/docs/tidb-cloud/migration-job-select-all.png" width="60%" />
 
-    - If you click **Customize** and select some databases, the migration job will migrate the existing data and replicate ongoing changes of the selected databases to TiDB Cloud. Note that it happens only if you have selected the **Existing data migration** and **Incremental data migration** checkboxes in the previous step.
+    - If you click **Customize** and select some databases, the migration job will migrate the existing data and migrate ongoing changes of the selected databases to TiDB Cloud. Note that it happens only if you have selected the **Existing data migration** and **Incremental data migration** checkboxes in the previous step.
 
         <img src="https://download.pingcap.com/images/docs/tidb-cloud/migration-job-select-db.png" width="60%" />
 
-    - If you click **Customize** and select some tables under a dataset name, the migration job only will migrate the existing data and replicate ongoing changes of the selected tables. Tables created afterwards in the same database will not be migrated.
+    - If you click **Customize** and select some tables under a dataset name, the migration job only will migrate the existing data and migrate ongoing changes of the selected tables. Tables created afterwards in the same database will not be migrated.
 
         <img src="https://download.pingcap.com/images/docs/tidb-cloud/migration-job-select-tables.png" width="60%" />
 
     <!--
-    - If you click **Customize** and select some databases, and then select some tables in the **Selected Objects** area to move them back to the **Source Database** area, (for example the `username` table in the following screenshots), then the tables will be treated as in a blocklist. The migration job will migrate the existing data but filter out the excluded tables (such as the `username` table in the screenshots), and will replicate ongoing changes of the selected databases to TiDB Cloud except the filtered-out tables.
+    - If you click **Customize** and select some databases, and then select some tables in the **Selected Objects** area to move them back to the **Source Database** area, (for example the `username` table in the following screenshots), then the tables will be treated as in a blocklist. The migration job will migrate the existing data but filter out the excluded tables (such as the `username` table in the screenshots), and will migrate ongoing changes of the selected databases to TiDB Cloud except the filtered-out tables.
         ![Select Databases and Deselect Some Tables](/media/tidb-cloud/migration-job-select-db-blacklist1.png)
         ![Select Databases and Deselect Some Tables](/media/tidb-cloud/migration-job-select-db-blacklist2.png)
     -->
 
-3. Click **Next**.
+2. Click **Next**.
 
-## Step 4: Precheck
+## Step 5: Precheck
 
 On the **Precheck** page, you can view the precheck results. If the precheck fails, you need to operate according to **Failed** or **Warning** details, and then click **Check again** to recheck.
 
@@ -235,13 +248,13 @@ For more information about precheck items, see [Migration Task Precheck](https:/
 
 If all check items show **Pass**, click **Next**.
 
-## Step 5: Choose a spec and start migration
+## Step 6: Choose a spec and start migration
 
 On the **Choose a Spec and Start Migration** page, select an appropriate migration specification according to your performance requirements. For more information about the specifications, see [Specifications for Data Migration](/tidb-cloud/tidb-cloud-billing-dm.md#specifications-for-data-migration).
 
 After selecting the spec, click **Create Job and Start** to start the migration.
 
-## Step 6: View the migration progress
+## Step 7: View the migration progress
 
 After the migration job is created, you can view the migration progress on the **Migration Job Details** page. The migration progress is displayed in the **Stage and Status** area.
 
@@ -269,7 +282,7 @@ When scaling a migration job specification, note the following:
 - You can only scale a migration job specification when the job is in the **Running** or **Paused** status.
 - TiDB Cloud does not support scaling a migration job specification during the existing data export stage.
 - Scaling a migration job specification will restart the job. If a source table of the job does not have a primary key, duplicate data might be inserted.
-- During scaling, do not purge the binary log of the source database or increase `expire_logs_days` of the upstream database temporarily. Otherwise, the job might fail because it cannot get the continuous binary log position. 
+- During scaling, do not purge the binary log of the source database or increase `expire_logs_days` of the upstream database temporarily. Otherwise, the job might fail because it cannot get the continuous binary log position.
 
 ### Scaling procedure
 
