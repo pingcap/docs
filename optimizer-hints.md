@@ -795,7 +795,7 @@ MySQL command-line clients earlier than 5.7.7 strip optimizer hints by default. 
 
 If you do not specify the database name when creating a connection, hints might not take effect. For example:
 
-When you connect to TiDB using `mysql -h127.0.0.1 -P4000 -uroot` command without the `-D` option. Then, execute the following SQL statements: 
+When you connect to TiDB using `mysql -h127.0.0.1 -P4000 -uroot` command without the `-D` option. Then, execute the following SQL statements:
 
 ```sql
 SELECT /*+ use_index(t, a) */ a FROM test.t;
@@ -826,7 +826,7 @@ SELECT /*+ use_index(t1, a) */ * FROM test1.t1, t2;
 SHOW WARNINGS;
 ```
 
-In the preceding statement, `t1` is not in the current `test2` database, the `use_index(t1, a)` hint cannot take effect. In this case, you need to specify the database name explicitly as `use_index(test1.t1, a)`.
+In the preceding statement, `t1` is not in the current `test2` database, the `use_index(t1, a)` hint cannot take effect.
 
 ```sql
 +---------+------+----------------------------------------------------------------------------------+
@@ -836,6 +836,8 @@ In the preceding statement, `t1` is not in the current `test2` database, the `us
 +---------+------+----------------------------------------------------------------------------------+
 1 row in set (0.00 sec)
 ```
+
+In this case, you need to specify the database name explicitly as `use_index(test1.t1, a)`.
 
 ### Hints do not take effect because they are placed wrong places
 
@@ -859,9 +861,9 @@ The warning is as follows:
 
 In this case, you need to place the hint directly after the `SELECT` keyword. For more details, see the [Syntax](#syntax) section.
 
-### INL_JOIN hint does not take effect due to collation mismatch
+### INL_JOIN hint does not take effect due to collation incompatibility
 
-When the collation of the join key differs between two tables, the `IndexJoin cannot be utilized to execute the query. In this case, the `INL_JOIN` hint cannot take effect. For example:
+When the collation of the join key is incompatible between two tables, the `IndexJoin` operator cannot be utilized to execute the query. In this case, the [`INL_JOIN` hint](#inl_joint1_name--tl_name-) does not take effect. For example:
 
 ```sql
 CREATE TABLE t1 (k varchar(8), key(k)) COLLATE=utf8mb4_general_ci;
@@ -884,7 +886,7 @@ The execution plans are as follows:
 5 rows in set, 1 warning (0.00 sec)
 ```
 
-In the preceding statements, the collations of `t1.k` and `t2.k` are different (`utf8mb4_general_ci` and `utf8mb4_bin` respectively), which makes the `INL_JOIN` or `TIDB_INLJ` hint cannot take effect.
+In the preceding statements, the collations of `t1.k` and `t2.k` are incompatible (`utf8mb4_general_ci` and `utf8mb4_bin` respectively), which makes the `INL_JOIN` or `TIDB_INLJ` hint cannot take effect.
 
 ```sql
 SHOW WARNINGS;
@@ -898,10 +900,10 @@ SHOW WARNINGS;
 
 ### `INL_JOIN` hint does not take effect because of join order
 
-The [`INL_JOIN(t1, t2)`](#inl_joint1_name--tl_name-) or `TIDB_INLJ(t1, t2)` hint uses the `IndexJoin` operator when joining `t1` and `t2` with other tables, instead of using an `IndexJoin` operator to directly join them together. For example:
+The [`INL_JOIN(t1, t2)`](#inl_joint1_name--tl_name-) or `TIDB_INLJ(t1, t2)` hint semantically instructs `t1` and `t2` to act as inner tables in an `IndexJoin` operator with other tables, rather than directly joining them using an `IndexJoin`operator. For example:
 
 ```sql
-mysql> explain select /*+ tidb_inlj(t1, t3) */ * from t1, t2, t3 where t1.id=t2.id and t2.id=t3.id and t1.id=t3.id;
+EXPLAIN SELECT /*+ inl_join(t1, t3) */ * FROM t1, t2, t3 WHERE t1.id = t2.id AND t2.id = t3.id AND t1.id = t3.id;
 +---------------------------------+----------+-----------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | id                              | estRows  | task      | access object | operator info                                                                                                                                                           |
 +---------------------------------+----------+-----------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -921,7 +923,7 @@ In the preceding example, `t1` and `t3` are not directly joined together by an `
 To perform a direct `IndexJoin` between `t1` and `t3`, you can first use [`LEADING(t1, t3)` hint](#leadingt1_name--tl_name-) to specify the join order of `t1` and `t3`, and then use the `INL_JOIN` hint to specify the join algorithm. For example:
 
 ```sql
-mysql> explain select /*+ leading(t1, t3), tidb_inlj(t3) */ * from t1, t2, t3 where t1.id=t2.id and t2.id=t3.id and t1.id=t3.id;
+EXPLAIN SELECT /*+ leading(t1, t3), inl_join(t3) */ * FROM t1, t2, t3 WHERE t1.id = t2.id AND t2.id = t3.id AND t1.id = t3.id;
 +---------------------------------+----------+-----------+---------------+---------------------------------------------------------------------------------------------------------------------+
 | id                              | estRows  | task      | access object | operator info                                                                                                       |
 +---------------------------------+----------+-----------+---------------+---------------------------------------------------------------------------------------------------------------------+
