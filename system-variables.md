@@ -2405,7 +2405,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Default value: `600`
 - Range: `[60, 2147483647]`
 - Unit: Seconds
-- This variable sets the threshold for logging expensive transactions. An expensive transaction is one that is neither committed nor rolled back, and the duration of the transaction exceeds this threshold.
+- This variable controls the threshold for logging expensive transactions, which is 600 seconds by default. When the duration of a transaction exceeds the threshold, and the transaction is neither committed nor rolled back, it is considered an expensive transaction and will be logged.
 
 ### tidb_force_priority
 
