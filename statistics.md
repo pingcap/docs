@@ -270,6 +270,8 @@ SHOW COLUMN_STATS_USAGE WHERE db_name = 'test' AND table_name = 't' AND last_ana
 3 rows in set (0.00 sec)
 ```
 
+Starting from TiDB v7.2.0, TiDB introduces the system variable [`tidb_analyze_skip_column_types`](/system-variables.md#tidb_analyze_skip_column_types-new-in-v720), indicating which types of columns are skipped for statistics collection when executing the `ANALYZE` command to collect statistics. The variable is only applicable for `tidb_analyze_version = 2`.
+
 ##### Collect statistics on indexes
 
 To collect statistics on all indexes in `IndexNameList` in `TableName`, use the following syntax:
