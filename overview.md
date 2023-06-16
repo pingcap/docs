@@ -24,7 +24,7 @@ The following video introduces key features of TiDB.
 
 - **Easy horizontal scaling**
 
-    The TiDB architecture design separates computing from storage, allowing you to scale out or scale in the computing or storage capacity online as needed. The scaling process is transparent to application operations and maintenance staff.
+    The TiDB architecture design separates computing from storage, letting you scale out or scale in the computing or storage capacity online as needed. The scaling process is transparent to application operations and maintenance staff.
 
 - **Financial-grade high availability**
 
@@ -32,7 +32,7 @@ The following video introduces key features of TiDB.
 
 - **Real-time HTAP**
 
-    TiDB provides two storage engines: [TiKV](/tikv-overview.md), a row-based storage engine, and [TiFlash](/tiflash/tiflash-overview.md), a columnar storage engine. TiFlash uses the Multi-Raft Learner protocol to replicate data from TiKV in real-time, ensuring consistent data between the TiKV row-based storage engine and the TiFlash columnar storage engine. TiKV and TiFlash can be deployed on different machines as needed to solve the problem of HTAP resource isolation.
+    TiDB provides two storage engines: [TiKV](/tikv-overview.md), a row-based storage engine, and [TiFlash](/tiflash/tiflash-overview.md), a columnar storage engine. TiFlash uses the Multi-Raft Learner protocol to replicate data from TiKV in real time, ensuring consistent data between the TiKV row-based storage engine and the TiFlash columnar storage engine. TiKV and TiFlash can be deployed on different machines as needed to solve the problem of HTAP resource isolation.
 
 - **Cloud-native distributed database**
 

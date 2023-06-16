@@ -14,7 +14,7 @@ However, some features of MySQL are not supported in TiDB. This could be because
 
 It's important to note that TiDB does not support the MySQL replication protocol. Instead, specific tools are provided to replicate data with MySQL:
 
-- Replicate data from MySQL: [TiDB Data Migration (DM)](/dm/dm-overview.md) is a tool that supports full data migration and incremental data replication from MySQL/MariaDB into TiDB.
+- Replicate data from MySQL: [TiDB Data Migration (DM)](/dm/dm-overview.md) is a tool that supports full data migration and incremental data replication from MySQL or MariaDB into TiDB.
 - Replicate data to MySQL: [TiCDC](/ticdc/ticdc-overview.md) is a tool for replicating the incremental data of TiDB by pulling TiKV change logs. TiCDC uses the [MySQL sink](/ticdc/ticdc-overview.md#replication-consistency) to replicate the incremental data of TiDB to MySQL.
 
 </CustomContent>
@@ -137,7 +137,7 @@ To check performance metrics in TiDB Cloud, you can either check the cluster ove
 
 The output format, content, and privilege settings of Query Execution Plan (`EXPLAIN`/`EXPLAIN FOR`) in TiDB differ significantly from those in MySQL.
 
-In TiDB, the MySQL system variable `optimizer_switch` is read-only and has no effect on query plans. Although optimizer hints can be used in a similar syntax to MySQL, the available hints and their implementation may differ.
+In TiDB, the MySQL system variable `optimizer_switch` is read-only and has no effect on query plans. Although optimizer hints can be used in similar syntax to MySQL, the available hints and their implementation might differ.
 
 For more information, refer to [Understand the Query Execution Plan](/explain-overview.md).
 
@@ -175,7 +175,7 @@ For more information, refer to [`ANALYZE TABLE`](/sql-statements/sql-statement-a
 
 ### Limitations of `SELECT` syntax
 
-TiDB does not support the following SELECT syntax:
+TiDB does not support the following `SELECT` syntax:
 
 - `SELECT ... INTO @variable`
 - `SELECT ... GROUP BY ... WITH ROLLUP`
@@ -255,7 +255,7 @@ TiDB has default differences when compared with MySQL 5.7 and MySQL 8.0:
 TiDB supports named timezones with the following considerations:
 
 + TiDB uses all the timezone rules presently installed in the system for calculation, typically the `tzdata` package. This makes it possible to use all timezone names without needing to import timezone table data. Importing timezone table data will not change the calculation rules.
-+ Currently, MySQL uses the local timezone by default, then relies on the current timezone rules built into the system (for instance, when daylight savings time begins) for calculation. Without [importing timezone table data](https://dev.mysql.com/doc/refman/5.7/en/time-zone-support.html#time-zone-installation), MySQL cannot specify the timezone by name.
++ Currently, MySQL uses the local timezone by default, then relies on the current timezone rules built into the system (for example, when daylight savings time begins) for calculation. Without [importing timezone table data](https://dev.mysql.com/doc/refman/5.7/en/time-zone-support.html#time-zone-installation), MySQL cannot specify the timezone by name.
 
 ### Type system differences
 
