@@ -16,12 +16,10 @@ This guide describes how to connect your TiDB Cloud clusters to Vercel projects 
 * [Connect via the TiDB Cloud Vercel integration](#connect-via-the-tidb-cloud-vercel-integration)
 * [Connect via manually configuring environment variables](#connect-via-manually-setting-environment-variables)
 
-## Choosing a connection method
+For both of the preceding methods, TiDB Cloud provides the following options for programmatically connecting to your database:
 
-TiDB Cloud provides several options for programmatically connecting to your database:
-
-- Direct connection: Connect your TiDB Cloud cluster to your Vercel project directly using MySQL's standard connection system.
-- [Data App](/tidb-cloud/data-service-manage-data-app.md): Access data of TiDB Cloud cluster through a group of HTTP endpoints.
+- Direct connection: connect your TiDB Cloud cluster to your Vercel project directly using MySQL's standard connection system.
+- [Data App](/tidb-cloud/data-service-manage-data-app.md): access data of your TiDB Cloud cluster through a group of HTTP endpoints.
 
 ## Prerequisites
 
@@ -45,7 +43,7 @@ You are expected to have an account and a cluster in TiDB Cloud. If you do not h
 
 > **Note:**
 >
-> Currently, integration supports create TiDB serverless cluster. You can create during the integration process.
+> The TiDB Cloud Vercel integration supports creating TiDB Serverless clusters. You can create one during the integration process.
 
 To [integrate with Vercel via the TiDB Cloud Vercel Integration](#connect-via-the-tidb-cloud-vercel-integration), you are expected to have the "Owner" access to your organization or the "Member" access to the target project in TiDB Cloud. For more information, see [Manage role access](/tidb-cloud/manage-user-access.md#manage-role-access).
 
@@ -68,9 +66,9 @@ TiDB Serverless clusters allow all IP addresses for connection by default, so yo
 
 1. [Create a Data App](/tidb-cloud/data-service-manage-data-app.md#create-a-data-app) on the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
 2. [Link the Data App](/tidb-cloud/data-service-manage-data-app.md#manage-linked-data-sources) to the target TiDB Cloud cluster.
-3. [Manage endpoints](/tidb-cloud/data-service-manage-endpoint.md) that you can customize to execute SQL statements.
+3. [Manage endpoints](/tidb-cloud/data-service-manage-endpoint.md) so that you can customize them to execute SQL statements.
 
-One Vercel project can only connect to one TiDB Cloud Data App. To change the integration, you need to first disconnect the current app and then connect to a new app.
+One Vercel project can only connect to one TiDB Cloud Data App. To change the Data App for your Vercel project, you need to first disconnect the current App and then connect to a new App.
 
 </div>
 </SimpleTab>
@@ -88,16 +86,20 @@ The detailed steps are as follows:
 2. Select the scope of your integration in the drop-down list and click **Continue**.
 3. Select the Vercel projects to which the integration will be added and click **Continue**.
 4. Confirm the required permissions for integration and click **Add Integration**. Then you are directed to an integration page of the TiDB Cloud console.
-5. Select the target Vercel projects and click **Next**. 
-6. Select the target TiDB Cloud Organization and TiDB Cloud Project.
-7. Select the Connection Type **Cluster**. 
-8. Select the target TiDB Cloud cluster. If you do not have any, drop down and click **+ Create Cluster** to create one.
-9. Select the framework your Vercel projects using. If the framework isn't listed, select **General**. Different frameworks determine different environment variables.
-10. Click **Add Integration and Return to Vercel**.
-![Vercel Integration Page](/media/tidb-cloud/vercel/integration-link-cluster-page.png)
-11. Back to your Vercel dashboard, go to your Vercel project, click **Settings** > **Environment Variables**, and confirm that the environment variables have been automatically added.
+5. On the integration page, do the following:
 
-    If the variables have been added, the connection is completed.
+    1. Select your target Vercel projects and click **Next**. 
+    2. Select your target TiDB Cloud organization and project.
+    3. Select **Cluster** as your connection type.
+    4. Select your target TiDB Cloud cluster. If the **Cluster** drop-down list is empty or you want to select a new TiDB Serverless cluster, click **+ Create Cluster** in the list to create one.
+    5. Select the framework that your Vercel projects are using. If the target framework is not listed, select **General**. Different frameworks determine different environment variables.
+    6. Click **Add Integration and Return to Vercel**.
+
+![Vercel Integration Page](/media/tidb-cloud/vercel/integration-link-cluster-page.png)
+
+6. Get back to your Vercel dashboard, go to your Vercel project, click **Settings** > **Environment Variables**, and confirm that the environment variables for your target TiDB cluster have been automatically added.
+
+    If the variables have been added, the integration is completed.
 
 After you have completed the integration setup and successfully connected a TiDB Cloud cluster to your Vercel projects, the information necessary for the connection is automatically set in the projects' environment variables.
 
@@ -130,17 +132,19 @@ DATABASE_URL
 2. Select the scope of your integration in the drop-down list and click **Continue**.
 3. Select the Vercel projects to which the integration will be added and click **Continue**.
 4. Confirm the required permissions for integration and click **Add Integration**. Then you are directed to an integration page of the TiDB Cloud console.
-5. Select the target Vercel projects and click **Next**.
-6. Select the target TiDB Cloud Organization and TiDB Cloud Project.
-7. Select the Connection Type **Data App**.
-8. Select the target TiDB Cloud Data App. 
-9. Click **Add Integration and Return to Vercel**.
+5. On the integration page, do the following:
+
+    1. Select your target Vercel projects and click **Next**. 
+    2. Select your target TiDB Cloud organization and project.
+    3. Select **Data App** as your connection type.
+    4. Select your target TiDB Data App. 
+    6. Click **Add Integration and Return to Vercel**.
+
 ![Vercel Integration Page](/media/tidb-cloud/vercel/integration-link-data-app-page.png)
-10. Back to your Vercel dashboard, go to your Vercel project, click **Settings** > **Environment Variables**, and confirm that the environment variables have been automatically added.
 
-   If the variables have been added, the connection is completed.
+6. Get back to your Vercel dashboard, go to your Vercel project, click **Settings** > **Environment Variables**, and check whether the environment variables for your target Data App have been automatically added.
 
-After you have completed the integration setup and successfully connected a TiDB Cloud Data App to your Vercel projects, the information necessary for the connection is automatically set in the projects' environment variables.
+   If the following variables have been added, the integration is completed.
 
 ```shell
 DATA_APP_BASE_URL
@@ -187,7 +191,7 @@ You can get the information of `<User>`, `<Password>`, `<Endpoint>`, `<Port>`, a
 </div>
 <div label="Data App">
 
-1. Follow the steps in [Manage a Data APP](/tidb-cloud/data-service-manage-data-app.md) to create a data app and endpoints.
+1. Follow the steps in [Manage a Data APP](/tidb-cloud/data-service-manage-data-app.md) and [Manage an Endpoint](/tidb-cloud/data-service-manage-endpoint.md) to create a Data App and its endpoints.
 
 2. Go to your Vercel dashboard > Vercel project > **Settings** > **Environment Variables**, and then [declare each environment variable value](https://vercel.com/docs/concepts/projects/environment-variables#declare-an-environment-variable) according to the connection information of your Data App.
 
@@ -202,7 +206,7 @@ In Vercel, you can declare the environment variables as follows.
 - **Key** = `DATA_APP_PRIVATE_KEY`
 - **Value** = `<DATA_APP_PRIVATE_KEY>`
 
-You can get the information of `<DATA_APP_BASE_URL>`, `<DATA_APP_PUBLIC_KEY>`, `<DATA_APP_PRIVATE_KEY>` in the TiDB Cloud **Data Service** panel.
+You can get the information of `<DATA_APP_BASE_URL>`, `<DATA_APP_PUBLIC_KEY>`, `<DATA_APP_PRIVATE_KEY>` from your [Data Service](https://tidbcloud.com/console/data-service) page of the TiDB Cloud console.
 
 </div>
 </SimpleTab>
