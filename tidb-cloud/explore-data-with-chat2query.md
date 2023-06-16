@@ -11,7 +11,7 @@ In Chat2Query, you can either simply type `--` followed by your instructions to 
 
 > **Note:**
 >
-> Chat2Query is only available for TiDB clusters that are v6.5.0 or later and are hosted on AWS.
+> Chat2Query is only available for TiDB Serverless clusters that are v6.5.0 or later and are hosted on AWS.  If you want to use Chat2Query on TiDB Dedicated, please contact [support](/tidb-cloud/tidb-cloud-support.md).
 
 ## Use cases
 
