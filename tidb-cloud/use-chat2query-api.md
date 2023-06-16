@@ -11,11 +11,11 @@ Chat2Query API can only be accessed through HTTPS, ensuring that all data transm
 
 > **Note:**
 >
-> Chat2Query API is only available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta) clusters.
+> Chat2Query API is available for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta) clusters. To use the Chat2Query API on [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) clusters, contact [TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md).
 
 ## Before you begin
 
-Before using the Chat2Query API, make sure that you have created a [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta) cluster and enabled [AI to generate SQL queries](/tidb-cloud/explore-data-with-chat2query.md). If you do not have a TiDB Serverless cluster, follow the steps in [Create a TiDB Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) to create one.
+Before using the Chat2Query API, make sure that you have created a [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta) or [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) cluster and enabled [AI to generate SQL queries](/tidb-cloud/explore-data-with-chat2query.md). If you do not have a TiDB cluster, follow the steps in [Create a TiDB Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md) or [Create a TiDB Dedicated cluster](/tidb-cloud/create-tidb-cluster.md) to create one.
 
 ## Step 1. Enable the Chat2Query API
 
@@ -33,7 +33,7 @@ To enable the Chat2Query API, perform the following steps:
 
     > **Note:**
     >
-    > After DataAPI is enabled for one TiDB Serverless cluster, all TiDB Serverless clusters in the same project can use the Chat2Query API.
+    > After DataAPI is enabled for one TiDB cluster, all TiDB clusters in the same project can use the Chat2Query API.
 
 5. Click the **Data Service** link in the message to access the Chat2Query API.
 

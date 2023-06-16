@@ -32,7 +32,7 @@ The data source of a Data App comes from its linked TiDB clusters. You can find 
 │   │   └── cluster.json
 ```
 
-For each Data App, you can link to one or multiple TiDB Serverless clusters.
+For each Data App, you can link to one or multiple TiDB clusters.
 
 The following is an example configuration of `cluster.json`. In this example, there are two linked clusters for this Data App.
 
@@ -51,7 +51,7 @@ The field description is as follows:
 
 | Field   | Type    | Description  |
 |---------|---------|--------------|
-| `cluster_id` | Integer | The ID of your TiDB Serverless cluster. You can get it from the URL of your cluster. For example, if your cluster URL is `https://tidbcloud.com/console/clusters/1234567891234567890/overview`, your cluster ID is `1234567891234567890`. |
+| `cluster_id` | Integer | The ID of your TiDB cluster. You can get it from the URL of your cluster. For example, if your cluster URL is `https://tidbcloud.com/console/clusters/1234567891234567890/overview`, your cluster ID is `1234567891234567890`. |
 
 ## Data App configuration
 
