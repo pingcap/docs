@@ -148,7 +148,9 @@ addr = "172.16.31.10:8287"
 # The following resolution algorithms are supported:
 #  - none: does not detect duplicate records, which has the best performance of the three algorithms.
 #    But if there are duplicate records in the data source, it might lead to inconsistent data in the target TiDB.
-#  - remove: if there are primary key or unique key conflicts between the inserting data A and the existing data B in the target table, A and B will be removed from the target table and recorded in the `lightning_task_info.conflict_error_v1` table in the target TiDB. 
+#  - remove: if there are primary key or unique key conflicts between the inserting data A and the existing data B 
+#    in the target table, A and B will be removed from the target table and recorded
+#    in the `lightning_task_info.conflict_error_v1` table in the target TiDB. 
 #    You can manually insert the correct records into the target table based on your business requirements. 
 #    Note that the target TiKV must be v5.2.0 or later versions; otherwise it falls back to 'none'.
 # duplicate-resolution = 'none'
