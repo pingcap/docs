@@ -40,15 +40,15 @@ You are expected to have an account and a cluster in TiDB Cloud. If you do not h
 
 - [Create a TiDB Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
 
-> **Note:**
->
-> The TiDB Cloud Vercel integration supports creating TiDB Serverless clusters. You can create one during the integration process.
+    > **Note:**
+    >
+    > The TiDB Cloud Vercel integration supports creating TiDB Serverless clusters. You can also create one later during the integration process.
 
 - [Create a TiDB Dedicated cluster](/tidb-cloud/create-tidb-cluster.md)
 
-> **Note:**
->
-> For TiDB Dedicated clusters, make sure that the traffic filter of the cluster allows all IP addresses (set to `0.0.0.0/0`) for connection, this is because Vercel deployments use [dynamic IP addresses](https://vercel.com/guides/how-to-allowlist-deployment-ip-address). If you use the TiDB Cloud Vercel integration, TiDB Cloud automatically adds a `0.0.0.0/0` traffic filter to your cluster in the integration workflow if there is none.
+    > **Note:**
+    >
+    > For TiDB Dedicated clusters, make sure that the traffic filter of the cluster allows all IP addresses (set to `0.0.0.0/0`) for connection, this is because Vercel deployments use [dynamic IP addresses](https://vercel.com/guides/how-to-allowlist-deployment-ip-address). If you use the TiDB Cloud Vercel integration, TiDB Cloud automatically adds a `0.0.0.0/0` traffic filter to your cluster in the integration workflow if there is none.
 
 To [integrate with Vercel via the TiDB Cloud Vercel Integration](#connect-via-the-tidb-cloud-vercel-integration), you are expected to have the "Owner" access to your organization or the "Member" access to the target project in TiDB Cloud. For more information, see [Manage role access](/tidb-cloud/manage-user-access.md#manage-role-access).
 
@@ -56,11 +56,12 @@ One TiDB Cloud cluster can connect to multiple Vercel projects.
 
 ### A Data App and endpoints
 
-If you want to connect to your TiDB Cloud cluster via a Data App, you are expected to have a Data App and endpoints in TiDB Cloud. If you do not have any, refer to the following to create one:
+If you want to connect to your TiDB Cloud cluster via a [Data App](/tidb-cloud/data-service-manage-data-app.md), you are expected to have the target Data App and endpoints in TiDB Cloud in advance. If you do not have any, refer to the following to create one:
 
-1. [Create a Data App](/tidb-cloud/data-service-manage-data-app.md#create-a-data-app) on the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
-2. [Link the Data App](/tidb-cloud/data-service-manage-data-app.md#manage-linked-data-sources) to the target TiDB Cloud cluster.
-3. [Manage endpoints](/tidb-cloud/data-service-manage-endpoint.md) so that you can customize them to execute SQL statements.
+1. In the [TiDB Cloud console](https://tidbcloud.com), go to the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
+2. [Create a Data App](/tidb-cloud/data-service-manage-data-app.md#create-a-data-app) for your project.
+3. [Link the Data App](/tidb-cloud/data-service-manage-data-app.md#manage-linked-data-sources) to the target TiDB Cloud cluster.
+4. [Manage endpoints](/tidb-cloud/data-service-manage-endpoint.md) so that you can customize them to execute SQL statements.
 
 One Vercel project can only connect to one TiDB Cloud Data App. To change the Data App for your Vercel project, you need to first disconnect the current App and then connect to a new App.
 
@@ -79,7 +80,7 @@ The detailed steps are as follows:
 4. Confirm the required permissions for integration and click **Add Integration**. Then you are directed to an integration page of the TiDB Cloud console.
 5. On the integration page, do the following:
 
-    1. Select your target Vercel projects and click **Next**. 
+    1. Select your target Vercel projects and click **Next**.
     2. Select your target TiDB Cloud organization and project.
     3. Select **Cluster** as your connection type.
     4. Select your target TiDB Cloud cluster. If the **Cluster** drop-down list is empty or you want to select a new TiDB Serverless cluster, click **+ Create Cluster** in the list to create one.
@@ -88,32 +89,30 @@ The detailed steps are as follows:
 
 ![Vercel Integration Page](/media/tidb-cloud/vercel/integration-link-cluster-page.png)
 
-6. Get back to your Vercel dashboard, go to your Vercel project, click **Settings** > **Environment Variables**, and confirm that the environment variables for your target TiDB cluster have been automatically added.
+6. Get back to your Vercel dashboard, go to your Vercel project, click **Settings** > **Environment Variables**, and check whether the environment variables for your target TiDB cluster have been automatically added.
 
-    If the variables have been added, the integration is completed.
+    If the following variables have been added, the integration is completed.
 
-After you have completed the integration setup and successfully connected a TiDB Cloud cluster to your Vercel projects, the information necessary for the connection is automatically set in the projects' environment variables.
+    **General**
 
-**General**
+    ```shell
+    TIDB_HOST
+    TIDB_PORT
+    TIDB_USER
+    TIDB_PASSWORD
+    ```
 
-```shell
-TIDB_HOST
-TIDB_PORT
-TIDB_USER
-TIDB_PASSWORD
-```
+    For TiDB Dedicated clusters, the root CA is set in this variable:
 
-For TiDB Dedicated clusters, the root CA is set in this variable:
+    ```
+    TIDB_SSL_CA
+    ```
 
-```
-TIDB_SSL_CA
-```
+    **Prisma**
 
-**Prisma**
-
-```
-DATABASE_URL
-```
+    ```
+    DATABASE_URL
+    ```
 
 </div>
 
@@ -125,10 +124,10 @@ DATABASE_URL
 4. Confirm the required permissions for integration and click **Add Integration**. Then you are directed to an integration page of the TiDB Cloud console.
 5. On the integration page, do the following:
 
-    1. Select your target Vercel projects and click **Next**. 
+    1. Select your target Vercel projects and click **Next**.
     2. Select your target TiDB Cloud organization and project.
     3. Select **Data App** as your connection type.
-    4. Select your target TiDB Data App. 
+    4. Select your target TiDB Data App.
     6. Click **Add Integration and Return to Vercel**.
 
 ![Vercel Integration Page](/media/tidb-cloud/vercel/integration-link-data-app-page.png)
@@ -137,11 +136,11 @@ DATABASE_URL
 
    If the following variables have been added, the integration is completed.
 
-```shell
-DATA_APP_BASE_URL
-DATA_APP_PUBLIC_KEY
-DATA_APP_PRIVATE_KEY
-```
+    ```shell
+    DATA_APP_BASE_URL
+    DATA_APP_PUBLIC_KEY
+    DATA_APP_PRIVATE_KEY
+    ```
 
 </div>
 </SimpleTab>
@@ -154,7 +153,7 @@ DATA_APP_PRIVATE_KEY
 1. Get the connection information of your TiDB cluster.
 
    You can get the connection information from the connection dialog of your cluster. To open the dialog, click the ☰ hover menu in the upper-left corner of the [TiDB Cloud console](https://tidbcloud.com/), click the name of your target cluster to go to its overview page, and then click **Connect** in the upper-right corner.
-   
+
     > **Note:**
     >
     > For TiDB Dedicated clusters, make sure that you have set the **Allow Access from Anywhere** traffic filter in this step.
@@ -182,7 +181,7 @@ You can get the information of `<User>`, `<Password>`, `<Endpoint>`, `<Port>`, a
 </div>
 <div label="Data App">
 
-1. Follow the steps in [Manage a Data APP](/tidb-cloud/data-service-manage-data-app.md) and [Manage an Endpoint](/tidb-cloud/data-service-manage-endpoint.md) to create a Data App and its endpoints.
+1. Follow the steps in [Manage a Data APP](/tidb-cloud/data-service-manage-data-app.md) and [Manage an Endpoint](/tidb-cloud/data-service-manage-endpoint.md) to create a Data App and its endpoints if you have not done that.
 
 2. Go to your Vercel dashboard > Vercel project > **Settings** > **Environment Variables**, and then [declare each environment variable value](https://vercel.com/docs/concepts/projects/environment-variables#declare-an-environment-variable) according to the connection information of your Data App.
 
