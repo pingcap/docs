@@ -39,39 +39,30 @@ One Vercel project can only connect to one TiDB Cloud cluster. To change the int
 You are expected to have an account and a cluster in TiDB Cloud. If you do not have any, refer to the following to create one:
 
 - [Create a TiDB Serverless cluster](/tidb-cloud/create-tidb-cluster-serverless.md)
-- [Create a TiDB Dedicated cluster](/tidb-cloud/create-tidb-cluster.md)
 
 > **Note:**
 >
 > The TiDB Cloud Vercel integration supports creating TiDB Serverless clusters. You can create one during the integration process.
 
+- [Create a TiDB Dedicated cluster](/tidb-cloud/create-tidb-cluster.md)
+
+> **Note:**
+>
+> For TiDB Dedicated clusters, make sure that the traffic filter of the cluster allows all IP addresses (set to `0.0.0.0/0`) for connection, this is because Vercel deployments use [dynamic IP addresses](https://vercel.com/guides/how-to-allowlist-deployment-ip-address). If you use the TiDB Cloud Vercel integration, TiDB Cloud automatically adds a `0.0.0.0/0` traffic filter to your cluster in the integration workflow if there is none.
+
 To [integrate with Vercel via the TiDB Cloud Vercel Integration](#connect-via-the-tidb-cloud-vercel-integration), you are expected to have the "Owner" access to your organization or the "Member" access to the target project in TiDB Cloud. For more information, see [Manage role access](/tidb-cloud/manage-user-access.md#manage-role-access).
 
 One TiDB Cloud cluster can connect to multiple Vercel projects.
 
-<SimpleTab>
-<div label="Direct connection">
-
-### All IP addresses allowed for traffic filter in TiDB Cloud
-
-For TiDB Dedicated clusters, make sure that the traffic filter of the cluster allows all IP addresses (set to `0.0.0.0/0`) for connection, this is because Vercel deployments use [dynamic IP addresses](https://vercel.com/guides/how-to-allowlist-deployment-ip-address). If you use the TiDB Cloud Vercel integration, TiDB Cloud automatically adds a `0.0.0.0/0` traffic filter to your cluster in the integration workflow if there is none.
-
-TiDB Serverless clusters allow all IP addresses for connection by default, so you do not need to configure any traffic filter.
-
-</div>
-
-<div label="Data App">
-
 ### A Data App and endpoints
+
+If you want to connect to your TiDB Cloud cluster via a Data App, you are expected to have a Data App and endpoints in TiDB Cloud. If you do not have any, refer to the following to create one:
 
 1. [Create a Data App](/tidb-cloud/data-service-manage-data-app.md#create-a-data-app) on the [**Data Service**](https://tidbcloud.com/console/data-service) page of your project.
 2. [Link the Data App](/tidb-cloud/data-service-manage-data-app.md#manage-linked-data-sources) to the target TiDB Cloud cluster.
 3. [Manage endpoints](/tidb-cloud/data-service-manage-endpoint.md) so that you can customize them to execute SQL statements.
 
 One Vercel project can only connect to one TiDB Cloud Data App. To change the Data App for your Vercel project, you need to first disconnect the current App and then connect to a new App.
-
-</div>
-</SimpleTab>
 
 ## Connect via the TiDB Cloud Vercel integration
 
