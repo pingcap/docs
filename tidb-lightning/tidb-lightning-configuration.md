@@ -146,7 +146,7 @@ addr = "172.16.31.10:8287"
 
 # Whether to detect and resolve duplicate records (unique key conflict) in the physical import mode.
 # The following resolution algorithms are supported:
-#  - none: does not detect duplicate records, which has the best performance of the three algorithms.
+#  - none: does not detect duplicate records, which has the best performance of the two algorithms.
 #          But if there are duplicate records in the data source, it might lead to inconsistent data in the target TiDB.
 #  - remove: if there are primary key or unique key conflicts between the inserting data A and B, 
 #            A and B will be removed from the target table and recorded
