@@ -83,7 +83,7 @@ In TiDB, you can add a `CHECK` constraint to a table using either the [`CREATE T
     ALTER TABLE t ADD CONSTRAINT CHECK (1 < c);
     ```
 
-When adding or enabling a `CHECK` constraint, TiDB validates the existing data in the table. If any data violates the constraint, the adding `CHECK` constraint operation will fail and return an error.
+When adding or enabling a `CHECK` constraint, TiDB validates the existing data in the table. If any data violates the constraint, the operation of adding `CHECK` constraint will fail and return an error.
 
 When adding a `CHECK` constraint, you can either specify a constraint name or leave the name unspecified. If no constraint name is specified, TiDB automatically generates a constraint name in the `<tableName>_chk_<1, 2, 3...>` format.
 
