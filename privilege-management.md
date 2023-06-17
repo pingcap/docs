@@ -271,6 +271,10 @@ mysql> SELECT * FROM INFORMATION_SCHEMA.USER_PRIVILEGES WHERE grantee = "'root'@
 
 Requires the `SUPER` or `BACKUP_ADMIN` privilege.
 
+### CANCEL IMPORT JOB
+
+Requires the `SUPER` privilege to cancel jobs owned by other users. Otherwise, only jobs created by the current user can be canceled.
+
 ### CREATE DATABASE
 
 Requires the `CREATE` privilege for the database.
@@ -304,6 +308,10 @@ Requires the `INDEX` privilege for the table.
 ### DROP TABLES
 
 Requires the `DROP` privilege for the table.
+
+### IMPORT INTO
+
+Requires the `SELECT`, `UPDATE`, `INSERT`, `DELETE`, and `ALTER` privileges for the target table. To import files stored locally in TiDB, the `FILE` privilege is also required.
 
 ### LOAD DATA
 
