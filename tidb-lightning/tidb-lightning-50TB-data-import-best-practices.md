@@ -101,7 +101,7 @@ Conflicts might occur during data validation. The error message is "checksum mis
 
 1. In the source data, check for conflicts primary key or unique key and resolve the conflicts before reimporting. In most cases, this is the most common cause.
 2. Check if the table primary key or unique key definition is reasonable. If not, modify the table definition and reimport.
-3. Enable [conflict detection](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#conflict-detection.).
+3. Enable [conflict detection](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#conflict-detection).
 
 This feature assumes that there is a small number (less than 10%) of unexpected conflicting data in the source data and requires TiDB Lightning to detect and resolve the conflicts.
 
@@ -126,7 +126,7 @@ Follow the steps outlined in the source file preparation process mentioned above
 
 ### Plan cluster topology
 
-Prepare TiDB Lightning based on 5 TB to 10 TB of source data per instance. Deploy one TiDB Lightning instance on each node. The specifications of the nodes can be based on the [Environment of TiDB Lightning instance](/tidb-lightning/tidb-lightning-physical-import-mode#environment-requirements.md).
+Prepare TiDB Lightning based on 5 TB to 10 TB of source data per instance. Deploy one TiDB Lightning instance on each node. The specifications of the nodes can be based on the [Environment of TiDB Lightning instance](/tidb-lightning/tidb-lightning-physical-import-mode.md#environment-requirements).
 
 ### Change configuration parameters
 
@@ -142,4 +142,4 @@ If during the import process, PD Scatter Region latency exceeds 30 minutes, cons
 
 ### Disable execution plan
 
-In the case of a large single table (for example, with over 1 billion rows and more than 50 columns), it is recommended to turn off the analyze operation (`analyze="off"`) during the import process and manually execute the [ANALYZE TABLE](/sql-statements//sql-statement-analyze-table#analyze.md) statement after the import is completed.
+In the case of a large single table (for example, with over 1 billion rows and more than 50 columns), it is recommended to turn off the analyze operation (`analyze="off"`) during the import process and manually execute the [ANALYZE TABLE](/sql-statements//sql-statement-analyze-table.md#analyze) statement after the import is completed.
