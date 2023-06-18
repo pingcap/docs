@@ -38,7 +38,7 @@ When you import data, there are some key factors that can affect import performa
 - Table definitions:
 
     - The number and size of secondary indexes per table can affect import speed. More indexes result in slower imports and more space consumption after import.
-    - Index data size = Number of indexes * Index size * Number of rows.
+    - Index data size = Number of indexes \* Index size \* Number of rows.
 
 - Compression ratio:
 
