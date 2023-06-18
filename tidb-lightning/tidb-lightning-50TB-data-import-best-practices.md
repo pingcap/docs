@@ -5,7 +5,7 @@ summary: Based on the experience of importing large single tables in the past, t
 
 # Best Practices for Importing 50 TB Data
 
-TiDB Lightning ([Physical Import Mode](/tidb-lightning/tidb-lightning-physical-import-mode.md)) is a comprehensive and efficient data import tool used for importing data into empty tables and initializing empty clusters, and uses files as the data source. TiDB Lightning provides two running modes: Single Instance and [Parallel Import](/tidb-lightning/tidb-lightning-distributed-import.md). You can import source files of different sizes.
+TiDB Lightning ([Physical Import Mode](/tidb-lightning/tidb-lightning-physical-import-mode.md)) is a comprehensive and efficient data import tool used for importing data into empty tables and initializing empty clusters, and uses files as the data source. TiDB Lightning provides two running modes: a single instance and [parallel import](/tidb-lightning/tidb-lightning-distributed-import.md). You can import source files of different sizes.
 
 - If the data scale of the source files is within 10 TB, it is recommended to use a single instance of TiDB Lightning for the import.
 - If the data scale of the source files exceeds 10 TB, it is recommended to use multiple instances of TiDB Lightning for [Parallel Import](/tidb-lightning/tidb-lightning-distributed-import.md).
