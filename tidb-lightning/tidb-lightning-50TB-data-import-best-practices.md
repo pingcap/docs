@@ -48,7 +48,7 @@ When you import data, there are some key factors that can affect import performa
 
     - `region-concurrency`: The concurrency of TiDB Lightning main logical processing.
     - `send-kv-pairs`: The number of Key-Value pairs sent by TiDB Lightning to TiKV in a single request.
-    - `disk-quota`:The disk quota used by TiDB Lightning local temp files when using Physical Import Mode
+    - `disk-quota`: The disk quota used by TiDB Lightning local temp files when using Physical Import Mode
     - `GOMEMLIMIT`: TiDB Lightning is implemented in the Go language. Configure GOMEMLIMIT properly.
 
 - Data validation:
@@ -122,7 +122,7 @@ This section focuses on the best practices for importing large single tables. Th
 
 ### Prepare source files
 
-Follow the steps outlined in the source file preparation process mentioned above. For a large single table, if global ordering is not achievable but ordering within each file based on the primary key is possible, and the file is a standard CSV file, it is recommended to generate a large single file with each around 20 GB. Then, enable strict-format. This approach reduces overlap between TiDB Lightning instances and allows TiDB Lightning to split the file before the import, resulting in optimal import speed.
+Follow the steps outlined in the [source file preparation](#prepare-source-files). For a large single table, if global ordering is not achievable but ordering within each file based on the primary key is possible, and the file is a standard CSV file, it is recommended to generate a large single file with each around 20 GB. Then, enable strict-format. This approach reduces overlap between TiDB Lightning instances and allows TiDB Lightning to split the file before the import, resulting in optimal import speed.
 
 ### Plan cluster topology
 
