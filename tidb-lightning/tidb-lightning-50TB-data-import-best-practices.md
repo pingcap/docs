@@ -5,10 +5,10 @@ summary: Based on the experience of importing large single tables in the past, t
 
 # Best Practices for Importing 50 TB Data
 
-TiDB Lightning ([Physical Import Mode](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode)) is a comprehensive and efficient data import tool used for importing data into empty tables and initializing empty clusters, and uses files as the data source. TiDB Lightning provides two running modes: Single Instance and [Parallel Import](https://docs.pingcap.com/tidb/stable/tidb-lightning-distributed-import). You can import source files of different sizes.
+TiDB Lightning ([Physical Import Mode](/tidb-lightning/tidb-lightning-physical-import-mode.md)) is a comprehensive and efficient data import tool used for importing data into empty tables and initializing empty clusters, and uses files as the data source. TiDB Lightning provides two running modes: Single Instance and [Parallel Import](/tidb-lightning/tidb-lightning-distributed-import.md). You can import source files of different sizes.
 
 - If the data scale of the source files is within 10 TB, it is recommended to use a single instance of TiDB Lightning for the import.
-- If the data scale of the source files exceeds 10 TB, it is recommended to use multiple instances of TiDB Lightning for [Parallel Import](https://docs.pingcap.com/tidb/stable/tidb-lightning-distributed-import).
+- If the data scale of the source files exceeds 10 TB, it is recommended to use multiple instances of TiDB Lightning for [Parallel Import](/tidb-lightning/tidb-lightning-distributed-import.md).
 - If the source file data scale is exceptionally large ( larger than 50 TB), in addition to parallel importing, you need to make certain preparations and optimizations based on the characteristics of the source data, table definitions, and parameter configurations to achieve better and faster completion of large-scale data import.
 
 This article introduces some key factors and steps that affect TiDB Lightning data import. We have successfully imported large single table data over 50 TB into both the internal environment and customer site, and have accumulated these best practices based on these real application scenarios. These best practices can help you import large datasets successfully.
@@ -53,11 +53,11 @@ When you import data, there are some key factors that can affect import performa
 
 - Data validation:
 
-    After data and index import is completed, an [`admin checksum`](https://docs.pingcap.com/tidb/dev/sql-statement-admin-checksum-table) is performed on each table, comparing it with the local checksum value of TiDB Lightning. When there are many tables or individual tables have a large number of rows, the checksum phase can take a long time.
+    After data and index import is completed, an [`admin checksum`](/sql-statements/sql-statement-admin-checksum-table.md) is performed on each table, comparing it with the local checksum value of TiDB Lightning. When there are many tables or individual tables have a large number of rows, the checksum phase can take a long time.
 
 - Execution plan:
 
-    After the checksum is successfully completed, an [analyze table](https://docs.pingcap.com/tidb/dev/sql-statement-analyze-table) operation is performed on each table to generate the optimal execution plan. The [analyze table](https://docs.pingcap.com/tidb/dev/sql-statement-analyze-table) operation can be time-consuming when dealing with a large number of tables or individual tables with a significant amount of data.
+    After the checksum is successfully completed, an [analyze table](/sql-statements/sql-statement-analyze-table.md) operation is performed on each table to generate the optimal execution plan. The [analyze table](/sql-statements/sql-statement-analyze-table.md) operation can be time-consuming when dealing with a large number of tables or individual tables with a significant amount of data.
 
 - Relevant issues:
 
@@ -66,7 +66,7 @@ When you import data, there are some key factors that can affect import performa
     The following issues have been resolved in versions v6.5.3, v7.1, and later versions:
 
     - [Issue-14745](https://github.com/tikv/tikv/issues/14745): After the import is completed, a large number of temporary files are left in the TiKV import directory.
-    - [Issue-6426](https://github.com/tikv/pd/issues/6426): The PD [range scheduling](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode-usage#scope-of-pausing-scheduling-during-import) interface might fail to scatter regions, resulting in timeout issues. Before v6.2.0, global scheduling is disabled by default, which can avoid triggering this problem.
+    - [Issue-6426](https://github.com/tikv/pd/issues/6426): The PD [range scheduling](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#scope-of-pausing-scheduling-during-import) interface might fail to scatter regions, resulting in timeout issues. Before v6.2.0, global scheduling is disabled by default, which can avoid triggering this problem.
     - [Issue-43079](https://github.com/pingcap/tidb/pull/43079): TiDB Lightning fails to refresh the Region Peers information during retry for NotLeader errors.
     - [Issue-43291](https://github.com/pingcap/tidb/issues/43291): TiDB Lightning does not retry in cases where temporary files are not found (the "No such file or directory" error).
 
@@ -75,7 +75,7 @@ When you import data, there are some key factors that can affect import performa
 - When generating files, within a single file, it is preferable to sort them by the primary key. If the table definition does not have a primary key, you can add an auto-increment primary key. In this case, the order of the file content does not matter.
 - When multiple TiDB Lightning instances are partitioning the source files, it is advisable to minimize primary key overlap. If the generated files are globally ordered, they can be distributed into different TiDB Lightning instances based on ranges to achieve optimal import performance.
 - Control each file to be less than 96 MB in size during file generation.
-- If a file is exceptionally large and exceeds 256 MB, enable [strict-format](https://docs.pingcap.com/tidb/stable/migrate-from-csv-files-to-tidb#step-4-tune-the-import-performance-optional).
+- If a file is exceptionally large and exceeds 256 MB, enable [strict-format](/migrate-from-csv-files-to-tidb.md#step-4-tune-the-import-performance-optional).
 
 ## Estimate storage space
 
@@ -93,7 +93,7 @@ Note that it is recommended to reserve 20% of storage space, as background tasks
 - `GOMEMLIMIT`: TiDB Lightning is implemented in the Go language. Setting GOMEMLIMIT to 80% of the instance memory to reduce the probability of OOM caused by the Go GC mechanism.
 - `disk-quota`: It is advisable to ensure that the sorting directory space of TiDB Lightning is larger than the size of the data source. Otherwise, disk-quota can be set to 80% of the sorting directory space of TiDB Lightning. In this case, TiDB Lightning will sort and write data in batches based on the disk-quota, but the import performance will be lower than complete sorting.
 
-For more information about TiDB Lightning parameters, see [TiDB Lightning configuration parameters](https://docs.pingcap.com/tidb/stable/tidb-lightning-configuration).
+For more information about TiDB Lightning parameters, see [TiDB Lightning configuration parameters](/tidb-lightning/tidb-lightning-configuration.md).
 
 ## Resolve the "checksum mismatch" error
 
@@ -101,13 +101,13 @@ Conflicts might occur during data validation. The error message is "checksum mis
 
 1. In the source data, check for conflicts primary key or unique key and resolve the conflicts before reimporting. In most cases, this is the most common cause.
 2. Check if the table primary key or unique key definition is reasonable. If not, modify the table definition and reimport.
-3. Enable [conflict detection](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode-usage#conflict-detection).
+3. Enable [conflict detection](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#conflict-detection.).
 
 This feature assumes that there is a small number (less than 10%) of unexpected conflicting data in the source data and requires TiDB Lightning to detect and resolve the conflicts.
 
 ## Enable checkpoint
 
-For importing a large volume of data, it is essential to refer to the [Lightning Checkpoints](https://docs.pingcap.com/tidb/stable/tidb-lightning-checkpoints) documentation and enable checkpoints. It is recommended to prioritize using MySQL as the driver to avoid losing the checkpoint information if TiDB Lightning is running in a container environment where the container exits and deletes the checkpoint information.
+For importing a large volume of data, it is essential to refer to the [Lightning Checkpoints](/tidb-lightning/tidb-lightning-checkpoints.md) documentation and enable checkpoints. It is recommended to prioritize using MySQL as the driver to avoid losing the checkpoint information if TiDB Lightning is running in a container environment where the container exits and deletes the checkpoint information.
 
 If you encounter insufficient space in downstream TiKV during import, you can manually kill all TiDB Lightning instances (without using the -9 option). After scaling up the capacity, you can resume the import based on the checkpoint information.
 
@@ -126,7 +126,7 @@ Follow the steps outlined in the source file preparation process mentioned above
 
 ### Plan cluster topology
 
-Prepare TiDB Lightning based on 5 TB to 10 TB of source data per instance. Deploy one TiDB Lightning instance on each node. The specifications of the nodes can be based on the [Environment of TiDB Lightning instance](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode#environment-requirements).
+Prepare TiDB Lightning based on 5 TB to 10 TB of source data per instance. Deploy one TiDB Lightning instance on each node. The specifications of the nodes can be based on the [Environment of TiDB Lightning instance](/tidb-lightning/tidb-lightning-physical-import-mode#environment-requirements.md).
 
 ### Change configuration parameters
 
@@ -142,4 +142,4 @@ If during the import process, PD Scatter Region latency exceeds 30 minutes, cons
 
 ### Disable execution plan
 
-In the case of a large single table (for example, with over 1 billion rows and more than 50 columns), it is recommended to turn off the analyze operation (`analyze="off"`) during the import process and manually execute the [ANALYZE TABLE](https://docs.pingcap.com/zh/tidb/stable/sql-statement-analyze-table#analyze) statement after the import is completed.
+In the case of a large single table (for example, with over 1 billion rows and more than 50 columns), it is recommended to turn off the analyze operation (`analyze="off"`) during the import process and manually execute the [ANALYZE TABLE](/sql-statements//sql-statement-analyze-table#analyze.md) statement after the import is completed.
