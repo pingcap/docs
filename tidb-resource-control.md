@@ -192,6 +192,115 @@ The following example binds the current statement to the resource group `rg1`.
 SELECT /*+ RESOURCE_GROUP(rg1) */ * FROM t limit 10;
 ```
 
+### Manage queries that consume more resources than expected (Runaway Queries)
+
+> **Warning:**
+>
+> Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
+A runaway query is a query that takes longer to execute or consumes more resources than expected. Starting from TiDB v7.2.0, the resource control feature introduces the management of runaway queries. You can set conditions for a resource group to identify runaway queries and automatically take corresponding actions to prevent runaway queries from exhausting all cluster resources and affecting other normal queries.
+
+You can manage runaway queries for a resource group by configuring the `QUERY_LIMIT` field in [`CREATE RESOURCE GROUP`](/sql-statements/sql-statement-create-resource-group.md) or [`ALTER RESOURCE GROUP`](/sql-statements/sql-statement-alter-resource-group.md).
+
+#### `QUERY_LIMIT` parameters
+
+Supported condition settings:
+
+- `EXEC_ELAPSED`: Identified as a runaway query when the query execution time exceeds this limit.
+
+Supported operations:
+
+- `DRYRUN`: No action is taken. This is mainly used to observe whether the condition settings are reasonable.
+- `COOLDOWN`: The execution priority of the query is lowered to the lowest level. The query continues to execute with the lowest priority and does not occupy resources of other operations.
+- `KILL`: The identified query is automatically terminated and reports an error `Query execution was interrupted, identified as runaway query`.
+
+To avoid too many concurrent runaway queries that exhaust system resources before being identified by conditions, the resource control feature introduces a quick identification and immunity mechanism. By using the `WATCH` clause, when a query is identified as a runaway query, the current TiDB instance directly marks the matching queries as runaway queries in the next period of time (defined by `DURATION`), instead of waiting for them to be identified by conditions, and executes the corresponding operations. The `KILL` operation reports an error `Quarantined and interrupted because of being in runaway watch list`.
+
+There are two ways to match for rapid identification:
+
+- `EXACT` indicates that only SQL statements with exactly the same text are quickly identified.
+- `SIMILAR` indicates that the literal values are ignored and all SQL statements with the same pattern are matched by Plan Digest.
+
+The format of `QUERY_LIMIT` is as follows:
+
+| Parameter          | Description            | Note                                  |
+|---------------|--------------|--------------------------------------|
+| `EXEC_ELAPSED`  | When the query execution time exceeds this value, it is recognized as runaway query | EXEC_ELAPSED =`60s` means the query is considered a runaway query if it takes more than 60 seconds to execute. |
+| `ACTION`    | Action taken when a runaway query is identified | The optional values are `DRYRUN`, `COOLDOWN`, and `KILL`. |
+| `WATCH`   | Quickly match the identified runaway query. If the same or similar query is encountered again within a certain period of time and the corresponding action is performed directly. | Optional. For example,`WATCH=SIMILAR DURATION '60s'` and `WATCH=EXACT DURATION '1m'`. |
+
+#### Examples
+
+1. Create a resource group `rg1` with a quota of 500 RUs per second, and define a runaway query as one that exceeds 60s, and lower the priority of the runaway auery.
+
+    ```sql
+    CREATE RESOURCE GROUP IF NOT EXISTS rg1 RU_PER_SEC = 500 QUERY_LIMIT=(EXEC_ELAPSED='60s', ACTION=COOLDOWN);
+    ```
+
+2. Change the `rg1` resource group to terminate the runaway queries directly, and mark the queries with the same pattern as runaway aueries directly in the next 10 minutes.
+
+    ```sql
+    ALTER RESOURCE GROUP rg1 QUERY_LIMIT=(EXEC_ELAPSED='60s', ACTION=KILL, WATCH=SIMILAR DURATION='10m');
+    ```
+
+3. Change the `rg1` resource group to cancel the runaway query check.
+
+    ```sql
+    ALTER RESOURCE GROUP rg1 QUERY_LIMIT=NULL;
+    ```
+
+#### Observability
+
+TiDB collects runtime information about TTL regularly and provides visual charts of the metrics in the Grafana dashboard. You can view the data in the **TiDB** > **TTL** dashboard. For more details, see [TiDB Important Monitoring Metrics](/grafana-tidb-dashboard.md#ttl).
+
+You can get more information about runaway queries from the following system tables:
+
++ The `mysql.tidb_runaway_queries` table contains the history of all runaway queries identified in the past certain period of time. Take one of the rows as an example:
+
+    ```sql
+    MySQL [(none)]> SELECT * FROM tidb_runaway_queries LIMIT 1\G;
+    *************************** 1. row ***************************
+    resource_group_name: rg1
+                   time: 2023-06-16 17:40:22
+             match_type: identify
+                 action: kill
+           original_sql: select * from sbtest.sbtest1
+            plan_digest: 5b7d445c5756a16f910192ad449c02348656a5e9d2aa61615e6049afbc4a82e
+            tidb_server: 127.0.0.1:4000
+    ```
+
+    In which:
+
+    - `match_type` is the source of the runaway query.
+    - `identify` means that it matches the condition of the runaway query.
+    - `watch` means that it is put into the watch list.
+
++ The `mysql.tidb_runaway_quarantined_watch` table contains the watch rule records for runaway queries. Take two of these rows as examples:
+
+    ```sql
+    MySQL [(none)]> SELECT * FROM tidb_runaway_quarantined_watch LIMIT 2\G;
+    *************************** 1. row ***************************
+    resource_group_name: rg1
+             start_time: 2023-06-16 17:40:22
+               end_time: 2023-06-16 18:10:22
+                  watch: similar
+             watch_text: 5b7d445c5756a16f910192ad449c02348656a5e9d2aa61615e6049afbc4a82e
+            tidb_server: 127.0.0.1:4000
+    *************************** 2. row ***************************
+    resource_group_name: rg1
+             start_time: 2023-06-16 17:42:35
+               end_time: 2023-06-16 18:12:35
+                  watch: exact
+             watch_text: select * from sbtest.sbtest1
+            tidb_server: 127.0.0.1:4000
+    ```
+
+    In which:
+
+    - `start_time` and `end_time` indicate the time range during which the watch list is valid.
+    - The value `similar` in the `watch` column indicates that it is matched by Plan Digest. At this time, the `watch_text` column displays the Plan Digest.
+    - The value `exact` in the `watch` column indicates that it is matched by SQL text. At this time, the `watch_text` column displays the SQL text.
+
 ## Disable resource control
 
 <CustomContent platform="tidb">

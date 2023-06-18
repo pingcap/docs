@@ -56,9 +56,14 @@ Currently, the `help_topic` is NULL.
 
 ## TTL related system tables
 
-* `mysql.tidb_ttl_table_status` the previously executed TTL job and ongoing TTL job for all TTL tables
-* `mysql.tidb_ttl_task` the current ongoing TTL subtasks
-* `mysql.tidb_ttl_job_history` the execution history of TTL tasks in the last 90 days
+* `tidb_ttl_table_status`: the previously executed TTL job and ongoing TTL job for all TTL tables
+* `tidb_ttl_task`: the current ongoing TTL subtasks
+* `tidb_ttl_job_history`: the execution history of TTL tasks in the last 90 days
+
+## Runaway queries related system tables
+
+* `tidb_runaway_queries`: history of all identified runaway queries over a certain period of time
+* `tidb_runaway_quarantined_watch`: Quarantined watch rules for runaway queries now in effect
 
 ## Miscellaneous system tables
 

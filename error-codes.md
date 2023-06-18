@@ -480,7 +480,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 * Error Number: 8254
 
-    The query stops because it meets the immunity condition of a runaway query. See [Runaway Queries](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries).
+    The query stops because it meets the quarantined watch condition of a runaway query. See [Runaway Queries](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries).
 
 * Error Number: 9001
 
