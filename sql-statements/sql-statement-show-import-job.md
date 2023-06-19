@@ -5,7 +5,7 @@ summary: An overview of the usage of SHOW IMPORT in TiDB.
 
 # SHOW IMPORT
 
-The `SHOW IMPORT` statement is used to show the IMPORT tasks that have been created in TiDB. This statement can only show tasks created by the current user.
+The `SHOW IMPORT` statement is used to show the IMPORT jobs created in TiDB. This statement can only show jobs created by the current user.
 
 ## Required privileges
 
@@ -29,8 +29,8 @@ The output fields of the `SHOW IMPORT` statement are described as follows:
 | Job_ID           | The ID of the task                  |
 | Data_Source      | Information about the data source                  |
 | Target_Table     | The name of the target table                     |
-| Phase            | The current phase of the task, including `importing`, `validating`, and `add-index` |
-| Status           | The current status of the task, including `pending` (means created but not started yet), `running`, `canceled`, `failed`, and `finished` |
+| Phase            | The current phase of the job, including `importing`, `validating`, and `add-index` |
+| Status           | The current status of the job, including `pending` (means created but not started yet), `running`, `canceled`, `failed`, and `finished` |
 | Source_File_Size | The size of the source file  |
 | Imported_Rows | The number of data rows that have been read and written to the target table  |
 | Result_Message   | If the import fails, this field returns the error message. Otherwise, it is empty.|
