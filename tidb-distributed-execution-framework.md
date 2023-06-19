@@ -48,7 +48,7 @@ Currently, the TiDB backend task distributed execution framework supports the di
     CREATE INDEX idx1 ON table t1(c1);
     ```
 
-- `IMPORT INTO` is used to import data in formats such as `CSV`, `SQL`, `PARQUET` into an empty table. For more information, see [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md).
+- `IMPORT INTO` is used to import data in formats such as `CSV`, `SQL`, and `PARQUET` into an empty table. For more information, see [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md).
 
 ## Prerequisites
 

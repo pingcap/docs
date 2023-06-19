@@ -5,7 +5,7 @@ summary: An overview of the usage of IMPORT INTO in TiDB.
 
 # IMPORT INTO
 
-The `IMPORT INTO` statement is used to import data in formats such as `CSV`, `SQL`, `PARQUET` into an empty table in TiDB via the [Physical Import Mode](/tidb-lightning/tidb-lightning-physical-import-mode.md) of TiDB Lightning.
+The `IMPORT INTO` statement is used to import data in formats such as `CSV`, `SQL`, and `PARQUET` into an empty table in TiDB via the [Physical Import Mode](/tidb-lightning/tidb-lightning-physical-import-mode.md) of TiDB Lightning.
 
 > **Warning:**
 >
