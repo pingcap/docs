@@ -7,7 +7,7 @@ summary: Learn how to connect your TiDB Cloud clusters to Vercel projects.
 
 # Integrate TiDB Cloud with Vercel
 
-[Vercel](https://vercel.com/) is the platform for frontend developers, providing the speed and reliability innovators need to create at the moment of inspiration.
+[Vercel](https://vercel.com/) is a platform for frontend developers, providing the speed and reliability innovators need to create at the moment of inspiration.
 
 Using TiDB Cloud with Vercel enables you to build new frontend applications faster with a MySQL-compatible relational model and grow your app with confidence with a platform built for resilience, scale, and the highest levels of data privacy and security.
 
@@ -48,7 +48,7 @@ You are expected to have an account and a cluster in TiDB Cloud. If you do not h
 
     > **Note:**
     >
-    > For TiDB Dedicated clusters, make sure that the traffic filter of the cluster allows all IP addresses (set to `0.0.0.0/0`) for connection, this is because Vercel deployments use [dynamic IP addresses](https://vercel.com/guides/how-to-allowlist-deployment-ip-address). If you use the TiDB Cloud Vercel integration, TiDB Cloud automatically adds a `0.0.0.0/0` traffic filter to your cluster in the integration workflow if there is none.
+    > For TiDB Dedicated clusters, make sure that the traffic filter of the cluster allows all IP addresses (set to `0.0.0.0/0`) for connection, because Vercel deployments use [dynamic IP addresses](https://vercel.com/guides/how-to-allowlist-deployment-ip-address). If you use the TiDB Cloud Vercel integration, TiDB Cloud automatically adds a `0.0.0.0/0` traffic filter to your cluster in the integration workflow if there is none.
 
 To [integrate with Vercel via the TiDB Cloud Vercel Integration](#connect-via-the-tidb-cloud-vercel-integration), you are expected to have the "Owner" access to your organization or the "Member" access to the target project in TiDB Cloud. For more information, see [Manage role access](/tidb-cloud/manage-user-access.md#manage-role-access).
 
@@ -134,7 +134,7 @@ The detailed steps are as follows:
 
 6. Get back to your Vercel dashboard, go to your Vercel project, click **Settings** > **Environment Variables**, and check whether the environment variables for your target Data App have been automatically added.
 
-   If the following variables have been added, the integration is completed.
+    If the following variables have been added, the integration is completed.
 
     ```shell
     DATA_APP_BASE_URL
@@ -152,7 +152,7 @@ The detailed steps are as follows:
 
 1. Get the connection information of your TiDB cluster.
 
-   You can get the connection information from the connection dialog of your cluster. To open the dialog, click the ☰ hover menu in the upper-left corner of the [TiDB Cloud console](https://tidbcloud.com/), click the name of your target cluster to go to its overview page, and then click **Connect** in the upper-right corner.
+    You can get the connection information from the connection dialog of your cluster. To open the dialog, click the ☰ hover menu in the upper-left corner of the [TiDB Cloud console](https://tidbcloud.com/), click the name of your target cluster to go to its overview page, and then click **Connect** in the upper-right corner.
 
     > **Note:**
     >
@@ -160,7 +160,7 @@ The detailed steps are as follows:
 
 2. Go to your Vercel dashboard > Vercel project > **Settings** > **Environment Variables**, and then [declare each environment variable value](https://vercel.com/docs/concepts/projects/environment-variables#declare-an-environment-variable) according to the connection information of your TiDB cluster.
 
-  ![Vercel Environment Variables](/media/tidb-cloud/vercel/integration-vercel-environment-variables.png)
+    ![Vercel Environment Variables](/media/tidb-cloud/vercel/integration-vercel-environment-variables.png)
 
 Here we use a Prisma application as an example. The following is a datasource setting in the Prisma schema file for a TiDB Serverless cluster:
 
@@ -171,7 +171,7 @@ datasource db {
 }
 ```
 
-In Vercel, you can declare the environment variables as follows.
+In Vercel, you can declare the environment variables as follows:
 
 - **Key** = `DATABASE_URL`
 - **Value** = `mysql://<User>:<Password>@<Endpoint>:<Port>/<Database>?sslaccept=strict`
@@ -185,18 +185,18 @@ You can get the information of `<User>`, `<Password>`, `<Endpoint>`, `<Port>`, a
 
 2. Go to your Vercel dashboard > Vercel project > **Settings** > **Environment Variables**, and then [declare each environment variable value](https://vercel.com/docs/concepts/projects/environment-variables#declare-an-environment-variable) according to the connection information of your Data App.
 
-![Vercel Environment Variables](/media/tidb-cloud/vercel/integration-vercel-environment-variables.png)
+    ![Vercel Environment Variables](/media/tidb-cloud/vercel/integration-vercel-environment-variables.png)
 
-In Vercel, you can declare the environment variables as follows.
+    In Vercel, you can declare the environment variables as follows.
 
-- **Key** = `DATA_APP_BASE_URL`
-- **Value** = `<DATA_APP_BASE_URL>`
-- **Key** = `DATA_APP_PUBLIC_KEY`
-- **Value** = `<DATA_APP_PUBLIC_KEY>`
-- **Key** = `DATA_APP_PRIVATE_KEY`
-- **Value** = `<DATA_APP_PRIVATE_KEY>`
+    - **Key** = `DATA_APP_BASE_URL`
+    - **Value** = `<DATA_APP_BASE_URL>`
+    - **Key** = `DATA_APP_PUBLIC_KEY`
+    - **Value** = `<DATA_APP_PUBLIC_KEY>`
+    - **Key** = `DATA_APP_PRIVATE_KEY`
+    - **Value** = `<DATA_APP_PRIVATE_KEY>`
 
-You can get the information of `<DATA_APP_BASE_URL>`, `<DATA_APP_PUBLIC_KEY>`, `<DATA_APP_PRIVATE_KEY>` from your [Data Service](https://tidbcloud.com/console/data-service) page of the TiDB Cloud console.
+    You can get the information of `<DATA_APP_BASE_URL>`, `<DATA_APP_PUBLIC_KEY>`, `<DATA_APP_PRIVATE_KEY>` from your [Data Service](https://tidbcloud.com/console/data-service) page of the TiDB Cloud console.
 
 </div>
 </SimpleTab>
@@ -210,6 +210,6 @@ If you have installed [TiDB Cloud Vercel integration](https://vercel.com/integra
 3. Click **Configure**.
 4. Click **Add Link** or **Remove** to add or remove connections.
 
-![Vercel Integration Configuration Page](/media/tidb-cloud/vercel/integration-vercel-configuration-page.png)
+    ![Vercel Integration Configuration Page](/media/tidb-cloud/vercel/integration-vercel-configuration-page.png)
 
-When you remove a connection, environment variables set by the integration workflow are removed from the Vercel project either. The traffic filter and the data of the TiDB Cloud cluster are not affected.
+    When you remove a connection, environment variables set by the integration workflow are removed from the Vercel project either. The traffic filter and the data of the TiDB Cloud cluster are not affected.
