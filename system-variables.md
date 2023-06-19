@@ -1356,8 +1356,8 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Persists to cluster: Yes
 - Default value: `OFF`
 - This variable is used to control whether to enable the [TiDB backend task distributed execution framework](/tidb-distributed-execution-framework.md). After the framework is enabled, backend tasks such as DDL and import will be distributedly executed and completed by multiple TiDB nodes in the cluster.
-- Starting from TiDB v7.1.0, the framework supports distributedly executing the `ADD INDEX` statement for partitioned tables.
-- Starting from TiDB v7.2.0, the framework supports distributedly executing the `IMPORT INTO` statement for import jobs.
+- Starting from TiDB v7.1.0, the framework supports distributedly executing the [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) statement for partitioned tables.
+- Starting from TiDB v7.2.0, the framework supports distributedly executing the [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md) statement for import jobs.
 - This variable is renamed from `tidb_ddl_distribute_reorg`.
 
 ### tidb_ddl_error_count_limit

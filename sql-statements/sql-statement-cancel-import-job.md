@@ -9,7 +9,7 @@ The `CANCEL IMPORT` statement is used to cancel a data import job created in TiD
 
 ## Required privileges
 
-To cancel a data import job, you need to be the creator of the job or have the `SUPER` privilege.
+To cancel a data import job, you need to be the creator of the import job or have the `SUPER` privilege.
 
 ## Synopsis
 
@@ -20,9 +20,13 @@ CancelImportJobsStmt ::=
 
 ## Example
 
+To cancel an import job with the ID as `1`, execute the following statement:
+
 ```sql
 CANCEL IMPORT JOB 1;
 ```
+
+The output is as follows:
 
 ```
 Query OK, 0 rows affected (0.01 sec)
@@ -34,5 +38,5 @@ This statement is a TiDB extension to MySQL syntax.
 
 ## See also
 
-* [IMPORT INTO](/sql-statements/sql-statement-import-into.md)
-* [SHOW IMPORT JOB](/sql-statements/sql-statement-show-import-job.md)
+* [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)
+* [`SHOW IMPORT JOB`](/sql-statements/sql-statement-show-import-job.md)
