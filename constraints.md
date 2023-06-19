@@ -87,7 +87,7 @@ When adding or enabling a `CHECK` constraint, TiDB validates the existing data i
 
 When adding a `CHECK` constraint, you can either specify a constraint name or leave the name unspecified. If no constraint name is specified, TiDB automatically generates a constraint name in the `<tableName>_chk_<1, 2, 3...>` format.
 
-### Viewing `CHECK` constraints
+### View `CHECK` constraints
 
 You can view the constraint information in a table using the [`SHOW CREATE TABLE`](/sql-statements/sql-statement-show-create-table.md) statement. For example:
 
