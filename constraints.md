@@ -69,7 +69,7 @@ Syntax explanation:
 
 ### Add `CHECK` constraints
 
-In TiDB, you can add a `CHECK` constraint to a table using either the [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md) or the [`ALTER TABLE`](/sql-statements/sql-statement-modify- column.md) statement.
+In TiDB, you can add a `CHECK` constraint to a table using either the [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md) or the [`ALTER TABLE`](/sql-statements/sql-statement-modify-column.md) statement.
 
 - Example of adding a `CHECK` constraint using the `CREATE TABLE` statement:
 
@@ -83,7 +83,7 @@ In TiDB, you can add a `CHECK` constraint to a table using either the [`CREATE T
     ALTER TABLE t ADD CONSTRAINT CHECK (1 < c);
     ```
 
-When adding or enabling a `CHECK` constraint, TiDB validates the existing data in the table. If any data violates the constraint, the operation of adding `CHECK` constraint will fail and return an error.
+When adding or enabling a `CHECK` constraint, TiDB validates the existing data in the table. If any data violates the constraint, the operation of adding the `CHECK` constraint will fail and return an error.
 
 When adding a `CHECK` constraint, you can either specify a constraint name or leave the name unspecified. If no constraint name is specified, TiDB automatically generates a constraint name in the `<tableName>_chk_<1, 2, 3...>` format.
 
