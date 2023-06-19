@@ -786,15 +786,15 @@ SELECT /*+ RESOURCE_GROUP(rg1) */ * FROM t limit 10;
 
 ## Troubleshoot common issues that hints do not take effect
 
-### Hints do not take effect because MySQL command-line client strips hints
+### Hints do not take effect because your MySQL command-line client strips hints
 
 MySQL command-line clients earlier than 5.7.7 strip optimizer hints by default. If you want to use the Hint syntax in these earlier versions, add the `--comments` option when starting the client. For example: `mysql -h 127.0.0.1 -P 4000 -uroot --comments`.
 
-### Hints do not take effect becauseT the database name is not specified
+### Hints do not take effect because the database name is not specified
 
 If you do not specify the database name when creating a connection, hints might not take effect. For example:
 
-When you connect to TiDB using `mysql -h127.0.0.1 -P4000 -uroot` command without the `-D` option. Then, execute the following SQL statements:
+When connecting to TiDB, you use the `mysql -h127.0.0.1 -P4000 -uroot` command without the `-D` option, and then execute the following SQL statements:
 
 ```sql
 SELECT /*+ use_index(t, a) */ a FROM test.t;
@@ -825,7 +825,7 @@ SELECT /*+ use_index(t1, a) */ * FROM test1.t1, t2;
 SHOW WARNINGS;
 ```
 
-In the preceding statement, `t1` is not in the current `test2` database, the `use_index(t1, a)` hint cannot take effect.
+In the preceding statements, because table `t1` is not in the current `test2` database, the `use_index(t1, a)` hint does not take effect.
 
 ```sql
 +---------+------+----------------------------------------------------------------------------------+
@@ -836,9 +836,9 @@ In the preceding statement, `t1` is not in the current `test2` database, the `us
 1 row in set (0.00 sec)
 ```
 
-In this case, you need to specify the database name explicitly as `use_index(test1.t1, a)`.
+In this case, you need to specify the database name explicitly by using `use_index(test1.t1, a)` instead of `use_index(t1, a)`.
 
-### Hints do not take effect because they are placed wrong places
+### Hints do not take effect because they are placed in wrong locations
 
 Hints cannot take effect if they are not placed directly after the specific keywords. For example:
 
@@ -870,7 +870,7 @@ CREATE TABLE t2 (k varchar(8), key(k)) COLLATE=utf8mb4_bin;
 EXPLAIN SELECT /*+ tidb_inlj(t1) */ * FROM t1, t2 WHERE t1.k=t2.k;
 ```
 
-The execution plans are as follows:
+The execution plan is as follows:
 
 ```sql
 +-----------------------------+----------+-----------+----------------------+----------------------------------------------+
@@ -885,7 +885,7 @@ The execution plans are as follows:
 5 rows in set, 1 warning (0.00 sec)
 ```
 
-In the preceding statements, the collations of `t1.k` and `t2.k` are incompatible (`utf8mb4_general_ci` and `utf8mb4_bin` respectively), which makes the `INL_JOIN` or `TIDB_INLJ` hint cannot take effect.
+In the preceding statements, the collations of `t1.k` and `t2.k` are incompatible (`utf8mb4_general_ci` and `utf8mb4_bin` respectively), which prevents the `INL_JOIN` or `TIDB_INLJ` hint from taking effect.
 
 ```sql
 SHOW WARNINGS;
