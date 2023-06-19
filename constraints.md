@@ -52,7 +52,7 @@ Query OK, 1 row affected (0.03 sec)
 
 ## CHECK
 
-A `CHECK` constraint is used to restrict the values of a field in a table to meet your specified conditions. When the `CHECK` constraint is added to a table, TiDB checks whether the constraint is satisfied during the insertion or update of data into the table. If the constraint is not met, an error is returned.
+A `CHECK` constraint is used to restrict the values of a field in a table to meet your specified conditions. When the `CHECK` constraint is added to a table, TiDB checks whether the constraint is satisfied during the insertion or updates of data into the table. If the constraint is not met, an error is returned.
 
 The syntax for the `CHECK` constraint in TiDB is the same as that in MySQL:
 
