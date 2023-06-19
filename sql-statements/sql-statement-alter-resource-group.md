@@ -107,7 +107,7 @@ SELECT * FROM information_schema.resource_groups WHERE NAME ='rg1';
 +------+------------+----------+-----------+-------------+
 | NAME | RU_PER_SEC | PRIORITY | BURSTABLE | QUERY_LIMIT |
 +------+------------+----------+-----------+-------------+
-| rg1  |       100  | MEDIUM   | YES       | NULL        |
+| rg1  | 100        | MEDIUM   | YES       | NULL        |
 +------+------------+----------+-----------+-------------+
 1 rows in set (1.30 sec)
 ```
@@ -131,7 +131,7 @@ SELECT * FROM information_schema.resource_groups WHERE NAME ='rg1';
 +------+------------+----------+-----------+----------------------------------------------------+
 | NAME | RU_PER_SEC | PRIORITY | BURSTABLE | QUERY_LIMIT                                        |
 +------+------------+----------+-----------+----------------------------------------------------+
-| rg1  |       200  | LOW      | YES       | EXEC_ELAPSED=1s, ACTION=COOLDOWN, WATCH=EXACT[30s] |
+| rg1  | 200        | LOW      | YES       | EXEC_ELAPSED=1s, ACTION=COOLDOWN, WATCH=EXACT[30s] |
 +------+------------+----------+-----------+----------------------------------------------------+
 1 rows in set (1.30 sec)
 ```
