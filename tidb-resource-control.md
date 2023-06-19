@@ -196,7 +196,7 @@ SELECT /*+ RESOURCE_GROUP(rg1) */ * FROM t limit 10;
 
 > **Warning:**
 >
-> Statements summary persistence is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> This feature is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
 A runaway query is a query that takes longer to execute or consumes more resources than expected. Starting from TiDB v7.2.0, the resource control feature introduces the management of runaway queries. You can set conditions for a resource group to identify runaway queries and automatically take corresponding actions to prevent runaway queries from exhausting all cluster resources and affecting other normal queries.
 
