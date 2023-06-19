@@ -253,7 +253,7 @@ The parameters of `QUERY_LIMIT` are as follows:
 
 <CustomContent platform="tidb">
 
-TiDB collects runtime information about TTL regularly and provides visual charts of the metrics in the Grafana dashboard. You can view the data in the **TiDB** > **TTL** dashboard. For more details, see [TiDB Important Monitoring Metrics](/grafana-tidb-dashboard.md#ttl).
+TiDB collects runtime information about TTL regularly and provides visual charts of the metrics in the Grafana dashboard. You can view the data from **TiDB** > **TTL**. For more details, see [TiDB Important Monitoring Metrics](/grafana-tidb-dashboard.md#ttl).
 
 </CustomContent>
 
