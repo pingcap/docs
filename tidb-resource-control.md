@@ -204,15 +204,15 @@ You can manage runaway queries for a resource group by configuring the `QUERY_LI
 
 #### `QUERY_LIMIT` parameters
 
-Supported condition settings:
+Supported condition setting:
 
-- `EXEC_ELAPSED`: Identified as a runaway query when the query execution time exceeds this limit.
+- `EXEC_ELAPSED`: a query is identified as a runaway query when the query execution time exceeds this limit.
 
 Supported operations:
 
-- `DRYRUN`: No action is taken. This is mainly used to observe whether the condition settings are reasonable.
-- `COOLDOWN`: The execution priority of the query is lowered to the lowest level. The query continues to execute with the lowest priority and does not occupy resources of other operations.
-- `KILL`: The identified query is automatically terminated and reports an error `Query execution was interrupted, identified as runaway query`.
+- `DRYRUN`: no action is taken. This is mainly used to observe whether the condition setting is reasonable.
+- `COOLDOWN`: the execution priority of the query is lowered to the lowest level. The query continues to execute with the lowest priority and does not occupy resources of other operations.
+- `KILL`: the identified query is automatically terminated and reports an error `Query execution was interrupted, identified as runaway query`.
 
 To avoid too many concurrent runaway queries that exhaust system resources before being identified by conditions, the resource control feature introduces a quick identification and immunity mechanism. By using the `WATCH` clause, when a query is identified as a runaway query, the current TiDB instance directly marks the matching queries as runaway queries in the next period of time (defined by `DURATION`), instead of waiting for them to be identified by conditions, and executes the corresponding operations. The `KILL` operation reports an error `Quarantined and interrupted because of being in runaway watch list`.
 
@@ -225,7 +225,7 @@ The format of `QUERY_LIMIT` is as follows:
 
 | Parameter          | Description            | Note                                  |
 |---------------|--------------|--------------------------------------|
-| `EXEC_ELAPSED`  | When the query execution time exceeds this value, it is recognized as runaway query | EXEC_ELAPSED =`60s` means the query is considered a runaway query if it takes more than 60 seconds to execute. |
+| `EXEC_ELAPSED`  | When the query execution time exceeds this value, it is identified as a runaway query | EXEC_ELAPSED =`60s` means the query is identified as a runaway query if it takes more than 60 seconds to execute. |
 | `ACTION`    | Action taken when a runaway query is identified | The optional values are `DRYRUN`, `COOLDOWN`, and `KILL`. |
 | `WATCH`   | Quickly match the identified runaway query. If the same or similar query is encountered again within a certain period of time and the corresponding action is performed directly. | Optional. For example,`WATCH=SIMILAR DURATION '60s'` and `WATCH=EXACT DURATION '1m'`. |
 
@@ -237,7 +237,7 @@ The format of `QUERY_LIMIT` is as follows:
     CREATE RESOURCE GROUP IF NOT EXISTS rg1 RU_PER_SEC = 500 QUERY_LIMIT=(EXEC_ELAPSED='60s', ACTION=COOLDOWN);
     ```
 
-2. Change the `rg1` resource group to terminate the runaway queries directly, and mark the queries with the same pattern as runaway aueries directly in the next 10 minutes.
+2. Change the `rg1` resource group to terminate the runaway queries directly, and mark the queries with the same pattern as runaway queries directly in the next 10 minutes.
 
     ```sql
     ALTER RESOURCE GROUP rg1 QUERY_LIMIT=(EXEC_ELAPSED='60s', ACTION=KILL, WATCH=SIMILAR DURATION='10m');
