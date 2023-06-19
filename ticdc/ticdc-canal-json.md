@@ -277,7 +277,7 @@ TiCDC encodes [binary types](/data-type-string.md##binary-type) in the Canal-JSO
 
 ### Example of the encoding
 
-To illustrate, the following 16 bytes `[5 7 10 15 36 50 43 99 120 60 38 255 254 45 55 70]` stored in a `VARBINARY` would be encoded in a Canal-JSON `Update` Event as:
+To illustrate, the following 16 bytes `[5 7 10 15 36 50 43 99 120 60 38 255 254 45 55 70]` stored in a `VARBINARY` called `c_varbinary` would be encoded in a Canal-JSON `Update` Event as:
 
 ```json
 {
@@ -285,7 +285,7 @@ To illustrate, the following 16 bytes `[5 7 10 15 36 50 43 99 120 60 38 255 254 
     "data": [
         {
             ...
-            "c_varbinary": "9223372036854775807"
+            "c_varbinary": "\u0005\u0007\n\u000f$2+cx\u003c\u0026ÿþ-7F"
         }
     ]
     ...
