@@ -122,7 +122,7 @@ server_configs:
     server.grpc-compression-type: gzip
 ```
 
-To reduce network traffic caused by the data shuffle of TiFlash MPP tasks, it is recommended to deploy multiple TiFlash instances in the same availability zones (AZs). Starting from v6.6.0, [compression exchange](/explain-mpp.md#mpp-version-and-exchange-data-compression) is enabled by default, which reduces the network traffic caused by MPP data shuffle.
+To reduce network traffic caused by the data shuffle of TiFlash MPP tasks, it is recommended to deploy multiple TiFlash instances in the same availability zones (AZs). 
 
 ## Mitigate live migration maintenance events on Google Cloud
 
