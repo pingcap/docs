@@ -957,7 +957,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 </CustomContent>
 
-### `tidb_analyze_skip_column_types` <span class="version-mark">New in v7.2.0</span>
+### tidb_analyze_skip_column_types <span class="version-mark">New in v7.2.0</span>
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
@@ -966,7 +966,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - This variable controls which types of columns are skipped for statistics collection when executing the `ANALYZE` command to collect statistics. The variable is only applicable for `tidb_analyze_version = 2`. When using the syntax of `analyze table t columns c1, ..., cn`, if the type of a specified column is included in `tidb_analyze_skip_column_types`, the statistics of this column will not be collected.
 
 ```
-mysql> show create table t;
+mysql> SHOW CREATE TABLE t;
 +-------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Table | Create Table                                                                                                                                                                                                             |
 +-------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -980,7 +980,7 @@ mysql> show create table t;
 +-------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 1 row in set (0.00 sec)
 
-mysql> select @@tidb_analyze_skip_column_types;
+mysql> SELECT @@tidb_analyze_skip_column_types;
 +----------------------------------+
 | @@tidb_analyze_skip_column_types |
 +----------------------------------+
@@ -988,10 +988,10 @@ mysql> select @@tidb_analyze_skip_column_types;
 +----------------------------------+
 1 row in set (0.00 sec)
 
-mysql> analyze table t;
+mysql> ANALYZE TABLE t;
 Query OK, 0 rows affected, 1 warning (0.05 sec)
 
-mysql> select job_info from mysql.analyze_jobs order by end_time desc limit 1;
+mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 +---------------------------------------------------------------------+
 | job_info                                                            |
 +---------------------------------------------------------------------+
@@ -999,10 +999,10 @@ mysql> select job_info from mysql.analyze_jobs order by end_time desc limit 1;
 +---------------------------------------------------------------------+
 1 row in set (0.00 sec)
 
-mysql> analyze table t columns a, c;
+mysql> ANALYZE TABLE t COLUMNS a, c;
 Query OK, 0 rows affected, 1 warning (0.04 sec)
 
-mysql> select job_info from mysql.analyze_jobs order by end_time desc limit 1;
+mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 +------------------------------------------------------------------+
 | job_info                                                         |
 +------------------------------------------------------------------+
