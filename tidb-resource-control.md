@@ -251,7 +251,17 @@ The format of `QUERY_LIMIT` is as follows:
 
 #### Observability
 
+<CustomContent platform="tidb">
+
 TiDB collects runtime information about TTL regularly and provides visual charts of the metrics in the Grafana dashboard. You can view the data in the **TiDB** > **TTL** dashboard. For more details, see [TiDB Important Monitoring Metrics](/grafana-tidb-dashboard.md#ttl).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+TiDB collects runtime information about TTL regularly and provides visual charts of the metrics in the Grafana dashboard.
+
+</CustomContent>
 
 You can get more information about runaway queries from the following system tables:
 
@@ -270,7 +280,7 @@ You can get more information about runaway queries from the following system tab
     ```
 
     In which `match_type` is the source of the runaway query. The value can one of the following:
-  
+
     - `identify` means that it matches the condition of the runaway query.
     - `watch` means that it is put into the watch list.
 
