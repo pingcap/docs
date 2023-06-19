@@ -34,9 +34,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
 
     当表的 schema 变动时，TiFlash 需要及时和 TiKV 同步表的 schema 信息。在 v7.2.0 版本之前，TiFlash 访问表数据时，如果检测到某张表的 schema 变动时，会同步所有表的 schema 信息。即使一张表没有 TiFlash 副本，TiFlash 也会同步该表的 schema 信息。当数据库中有大量表时，读取一张表的数据需要同步所有表的 schema 信息，schema 同步的时延非常高。在 v7.2.0 版本中，TiFlash 优化 schema 同步机制，只同步包含 TiFlash 副本的表的 schema 信息，并且当检测到某张表的 schema 变动时，只同步该表的 schema 信息，降低 TiFlash 同步 schema 的时延。该优化自动生效，不需要任何设定调整。
 
-* 提升统计信息收集的性能 [#44725](https://github.com/pingcap/tidb/issues/44725) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes) **tw@hfxsd** <!--1352-->
+* Improve the performance of statistical information collection [#44725](https://github.com/pingcap/tidb/issues/44725) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes) **tw@hfxsd** <!--1352-->
 
-    v7.2.0 优化了统计信息的收集策略，会选择跳过一部分重复的信息，以及对优化器价值不高的信息，提升统计信息收集的整体速度达 30% 。 这个提升有利于 TiDB 对数据库对象的统计信息进行更及时的更新，使得生成的执行计划更准确， 从而达到提升数据库整体性能的目的。
+    TiDB v7.2.0 optimizes the statistics collection strategy, skipping some of the duplicate information and information that is of little value to the optimizer. The overall speed of statistics collection has been improved by 30%. This improvement allows TiDB to update the statistics of the database in a more timely manner, making the generated execution plans more accurate, thus improving the overall database performance.
+    
+    For more information, see [documentation](/system-variables.md#tidb_analyze_skip_column_types-new-in-v720).
 
 * 提升表和索引一致性检查的性能 [#43693](https://github.com/pingcap/tidb/issues/43693) @[wjhuang2016](https://github.com/wjhuang2016) **tw@qiancai** <!--1436-->
 
@@ -46,21 +48,31 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
 
 ### Reliability
 
-* 自动管理资源超出预期的查询 (实验特性) [#43691](https://github.com/pingcap/tidb/issues/43691) @[Connor1996](https://github.com/Connor1996) @[CabinfeverB](https://github.com/CabinfeverB) @[glorv](https://github.com/glorv) @[HuSharp](https://github.com/HuSharp) @[nolouch](https://github.com/nolouch) **tw@hfxsd** <!--1411-->
+* Automatically manage queries that consume more resources than expected (experimental) [#43691](https://github.com/pingcap/tidb/issues/43691) @[Connor1996](https://github.com/Connor1996) @[CabinfeverB](https://github.com/CabinfeverB) @[glorv](https://github.com/glorv) @[HuSharp](https://github.com/HuSharp) @[nolouch](https://github.com/nolouch) **tw@hfxsd** <!--1411-->
 
-    突发的 SQL 性能问题引发数据库整体性能下降，是数据库稳定性最常见的挑战。 造成 SQL 性能问题的原因有很多， 有可能是未经充分测试的新 SQL，数据量剧烈变化，执行计划突变等等，这些问题很难从源头上完全规避。 TiDB 在 v7.2.0 加入了对资源超出预期的查询的管理能力，在上述问题发生时，能够快速降低影响范围。
-
-    用户可以针对某个资源组 (Resource Group) 设置查询的最长执行时间。 当查询的执行时间超过设置时， 自动降低查询的优先级或者取消查询。  用户还可以设置在一段时间内通过文本立即匹配已经识别出的查询， 从而避免问题查询的并发度太高时，在识别阶段就造成大量消耗的情况。
-
-    对资源超出预期查询的自动管理， 为用户提供了有效的手段，快速应对突发的查询性能问题，降低问题对数据库整体性能的影响，从而提升数据库的稳定性。
-
-    更多信息，请参考[用户文档](/tidb-resource-control.md###管理Runaway查询)。
+    The most common challenge to database stability is the degradation of overall database performance caused by abrupt SQL performance problems. There are many causes for SQL performance issues, such as new SQL statements that have not been fully tested, drastic changes in data volume, and abrupt changes in execution plans. These issues are difficult to completely avoid at the root. TiDB v7.2.0 provides the ability to manage queries that consume more resources than expected. This feature can quickly reduce the scope of impact when a performance issue occurs.
+    
+    You can set the maximum execution time of a query for a resource group. When the execution time of a query exceeds the setting, the query is automatically deprioritized or cancelled. You can also set a period of time to immediately match identified queries by text, thus avoiding a situation where the concurrency of the problematic queries is so high that it consumes more resources than expected during the identification phase.
+    
+    Automatic management of queries that consume more resources than expected provides you with an effective means to quickly respond to unexpected query performance problems. This feature can reduce the impact of the problem on overall database performance, thereby improving database stability.
+    
+    For more information, see [documentation](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries).
 
 * Enhance the capability of creating a binding according to a historical execution plan [#39199](https://github.com/pingcap/tidb/issues/39199) @[qw4990](https://github.com/qw4990) **tw@Oreoxmt** <!--1349-->
 
     TiDB v7.2.0 enhances the capability of creating a binding according to a historical execution plan. This feature improves the parsing and binding process for complex statements and supports new hints including [`AGG_TO_COP()`](/optimizer-hints.md#agg_to_cop), [`LIMIT_TO_COP()`](/optimizer-hints.md#limit_to_cop), [`ORDER_INDEX`](/optimizer-hints.md#order_indext1_name-idx1_name--idx2_name), and [`NO_ORDER_INDEX()`](/optimizer-hints.md#no_order_indext1_name-idx1_name--idx2_name). With this capability, SQL bindings created from historical execution plans provide more stable fixes for execution plans.
 
     For more information, see [documentation](/sql-plan-management.md).
+
+* The Optimizer Fix Controls mechanism provides fine-grained control over optimizer behaviors [#43169](https://github.com/pingcap/tidb/issues/43169) @[time-and-fate](https://github.com/time-and-fate) **tw@hfxsd**
+
+    To generate more reasonable execution plans, the behavior of the TiDB optimizer evolves over product iterations. However, in some particular scenarios, the changes might lead to performance regression. TiDB v7.2.0 introduces Optimizer Fix Controls to let you control some of the fine-grained behaviors of the optimizer. You can roll back or control some new changes.
+    
+    Each controllable behavior is described by a GitHub issue corresponding to the fix number. All controllable behaviors are listed in [Optimizer Fix Controls](/optimizer-fix-controls.md). You can set a target value for one or more behaviors by setting the [`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v710) system variable to achieve behavior control. 
+    
+    The Optimizer Fix Controls mechanism helps you control the TiDB optimizer at a granular level. It provides a new means of fixing performance issues caused by the upgrade process and improves the stability of TiDB. 
+    
+    For more information, see [documentation](/optimizer-fix-controls.md).
 
 ### SQL
 
@@ -119,7 +131,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
 | 变量名  | 修改类型（包括新增/修改/删除）    | 描述 |
 |--------|------------------------------|------|
 | [`tidb_remove_orderby_in_subquery`](/system-variables.md#tidb_remove_orderby_in_subquery-new-in-v610) | Modified | Changes the default value from `OFF` to `ON` after further tests, meaning that the optimizer removes the `ORDER BY` clause in a subquery. |
- |
+|  [`tidb_analyze_skip_column_types`](/system-variables.md#tidb_analyze_skip_column_types-new-in-v720)      | Newly added |  This variable controls which types of columns are skipped for statistics collection when executing the `ANALYZE` command to collect statistics. The variable is only applicable for [`tidb_analyze_version = 2`](#tidb_analyze_version-new-in-v510). When using the syntax of `ANALYZE TABLE t COLUMNS c1, ..., cn`, if the type of a specified column is included in `tidb_analyze_skip_column_types`, the statistics of this column will not be collected.   |
 | [`tidb_expensive_txn_time_threshold`](/system-variables.md#tidb_expensive_txn_time_threshold-new-in-v720) | Newly added | Controls the threshold for logging expensive transactions, which is 600 seconds by default. When the duration of a transaction exceeds the threshold, and the transaction is neither committed nor rolled back, it is considered an expensive transaction and will be logged. |
 |        |                              |      |
 | [`tidb_enable_tiflash_pipeline_model`](/system-variables.md#tidb_enable_tiflash_pipeline_model-new-in-v720) | Newly added | This variable is used to control whether to enable the new execution model of TiFlash, the [pipeline model](/tiflash/tiflash-pipeline-model.md). The default value is `OFF`, which means the pipeline model is disabled. |
@@ -132,8 +144,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
 |          |          |          |          |
 | TiKV | [<code>rocksdb.\[defaultcf\|writecf\|lockcf\].optimize-filters-for-memory</code>](/tikv-configuration-file.md#optimize-filters-for-memory-new-in-v710) | Newly added | Controls whether to generate Bloom/Ribbon filters that minimize memory internal fragmentation. |
 | TiKV | [<code>rocksdb.\[defaultcf\|writecf\|lockcf\].ribbon-filter-above-level</code>](/tikv-configuration-file.md#ribbon-filter-above-level-new-in-v710) | Newly added | Controls whether to use Ribbon filters for levels greater than or equal to this value and use non-block-based bloom filters for levels less than this value. |
-| TiDB Lightning | `send-kv-pairs` | 废弃 | 从 7.2 版本开始 TiDB Lightning 配置文件的参数 "send-kv-pairs" 不再生效，由新的参数 "send-kv-size" 代替。该新参数用于指定 KV 键值对的大小阈值，单位为 KiB 或 MiB，默认值为 "16 KiB"。当 KV 键值对的大小达到设定的阈值时，它们将立即发送到 TiKV，避免在导入大宽表等一些场景因为 Lightning 节点内存积累键值对过多导致 OOM 的问题。**tw@hfxsd** <!--1420--> |
-| TiDB Lightning | `send-kv-size` | 新增 | 从 7.2 版本开始在 Lightning 配置文件 "[tikv-importer]" 这个 Session 中引入 `send-kv-size` 参数，用于设置发单次送到 TiKV 的 KV pairs 的大小。当 KV 键值对的大小达到设定的阈值时，它们将被 Lightning 立即发送到 TiKV，避免在导入大宽表的时候 Lightning 节点因为内存积累键值对过多导致 OOM 的问题。通过调整 "send-kv-size" 参数，你可以在内存使用和导入速度之间找到平衡，提高导入过程的稳定性和效率。**tw@hfxsd** <!--1420-->|
+| TiDB Lightning | `send-kv-pairs` | Deprecated | Starting from v7.2.0, the parameter `send-kv-pairs` is deprecated. You can use [`send-kv-size`](/tidb-lightning/tidb-lightning-configuration.md) to control the maximum size of one request when sending data to TiKV in physical import mode.  **tw@hfxsd** <!--1420--> |
+| TiDB Lightning | [`send-kv-size`](/tidb-lightning/tidb-lightning-configuration.md) | Newly added | Specify the maximum size of one request when sending data to TiKV in physical import mode. When the size of KV key-value pairs reaches the specified threshold, they will be immediately sent to TiKV by TiDB Lightning to avoid the OOM problem caused by TiDB Lightning nodes accumulating too many key-value pairs in memory when importing large wide tables. By adjusting this parameter, you can find a balance between memory usage and import speed, improving the stability and efficiency of the import process. **tw@hfxsd** <!--1420-->|
 | Data Migration | [`strict-optimistic-shard-mode`](/dm/feature-shard-merge-optimistic.md) | Newly added | This configuration item is used to be compatible with the DDL shard merge behavior in TiDB Data Migration v2.0. You can enable this configuration item in optimistic mode. After this is enabled, the replication task will be interrupted when it encounters a Type 2 DDL statement. In scenarios where there are dependencies between DDL changes in multiple tables, a timely interruption can be made. You need to manually process the DDL statements of each table before resuming the replication task to ensure data consistency between the upstream and the downstream. **tw@ran-huang** <!--1414-->|
 ｜ TiCDC ｜ [`sink.protocol`](/ticdc/ticdc-changefeed-config.md) ｜ Modified ｜ Introduces a new value option `"open-protocol"` when the downstream is Kafka. Specifies the protocol format used for encoding messages. ｜
 ｜ TiCDC ｜ [`sink.delete-only-output-handle-key-columns`](/ticdc/ticdc-changefeed-config.md) ｜ Newly added ｜ Specifies the output of DELETE events. This parameter is valid only for canal-json and open-protocol protocols. The default value is `false`, which means outputting all columns. When you set it to true, only primary key columns or unique index columns are output. ｜
