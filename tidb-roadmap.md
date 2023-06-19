@@ -5,7 +5,7 @@ summary: Learn about what's coming in the future for TiDB.
 
 # TiDB Roadmap
 
-This roadmap provides a look into the proposed future. This will be continually updated as we release long-term stable (LTS) versions. The purpose is to provide visibility into what is coming, so that you can more closely follow the progress, learn about the key milestones on the way, and give feedback as the development work goes on. 
+This roadmap provides a look into the proposed future. This will be continually updated as we release long-term stable (LTS) versions. The purpose is to provide visibility into what is coming, so that you can more closely follow the progress, learn about the key milestones on the way, and give feedback as the development work goes on.
 
 In the course of development, this roadmap is subject to change based on user needs and feedback. As expected, as the columns move right, the items under them are less committed. If you have a feature request or want to prioritize a feature, please file an issue on [GitHub](https://github.com/pingcap/tidb/issues).
 
@@ -85,9 +85,7 @@ In the course of development, this roadmap is subject to change based on user ne
         <ul>
           <li>
             <b>Multi-tenancy</b>
-            <br /><i
-              >Resource isolation on top of resource control</i
-            >
+            <br /><i>Resource isolation on top of resource control</i>
           </li>
           <br />
         </ul>
@@ -204,17 +202,17 @@ In the course of development, this roadmap is subject to change based on user ne
         <ul>
           <li>
             <b>Key management via Azure Key Vault</b>
-            <br/><i>Static encryption managed by Azure Key Vault</i>
+            <br /><i>Static encryption managed by Azure Key Vault</i>
           </li>
           <br />
           <li>
             <b>Column-level access control</b>
-            <br/><i>Grant and restrict access to specific columns</i>
+            <br /><i>Grant and restrict access to specific columns</i>
           </li>
-          </br>
+          <br />
           <li>
             <b>Database-level encryption</b>
-            </br><i>At-rest encryption configured at database level</i>
+            <br /><i>At-rest encryption configured at database level</i>
           </li>
         </ul>
       </td>
@@ -222,12 +220,12 @@ In the course of development, this roadmap is subject to change based on user ne
         <ul>
           <li>
             <b>IAM authentication for AWS</b>
-            </br><i>TiDB as AWS third-party arn for AWS IAM access</i>
+            <br /><i>TiDB as AWS third-party arn for AWS IAM access</i>
           </li>
-          </br>
+          <br />
           <li>
             <b>Unified TLS CA/Key rotation policy</b>
-            </br><i>Unified certificate management mechanism for all TiDB components</i>
+            <br /><i>Unified certificate management mechanism for all TiDB components</i>
           </li>
         </ul>
       </td>
@@ -235,17 +233,17 @@ In the course of development, this roadmap is subject to change based on user ne
         <ul>
           <li>
             <b>Label-based access control</b>
-            </br><i>Access permissions granted by configured labels</i>
+            <br /><i>Access permissions granted by configured labels</i>
           </li>
-          </br>
+          <br />
           <li>
             <b>Enhanced client-side encryption</b>
           </li>
-          </br>
+          <br />
           <li>
             <b>Enhanced data masking</b>
           </li>
-          </br>
+          <br />
           <li>
             <b>Enhanced data lifecycle management</b>
           </li>
@@ -262,20 +260,20 @@ These are non-exhaustive plans and are subject to change. Features might differ 
 You might have been waiting on some items from the last version. The following lists some previously delivered features. For more details, refer to the [v7.1.0 release notes](/releases/release-7.1.0.md).
 
 - Foundation of multi-tenancy framework: resource control quotas and scheduling for resource groups
-- TiCDC sink to S3 and Azure object store (GA)
+- TiCDC supports object storage sink, including Amazon S3 and Azure Blob Storage (GA)
 - Fastest online `ADD INDEX` (GA)
 - TiFlash late materialization (GA)
-- TiFlash spill-to-disk (GA)
+- TiFlash supports spill to disk (GA)
 - SQL-based data import (GA)
-- LDAP integration (GA)
-- SQL audit logging enhancement (GA) (Enteprise-only)
+- LDAP authentication
+- SQL audit log enhancement (Enterprise-only)
 - Partitioned Raft KV storage engine (experimental)
 - General session-level plan cache (experimental)
 - TiCDC distributed per table with Kafka downstream (experimental)
 
 ## Recently shipped
 
-- [TiDB 7.1.0 Release Notes](https://docs.pingcap.com/tidb/dev/release-7.1.0)
+- [TiDB 7.1.0 Release Notes](https://docs.pingcap.com/tidb/v7.1/release-7.1.0)
 - [TiDB 7.0.0 Release Notes](https://docs.pingcap.com/tidb/v7.0/release-7.0.0)
 - [TiDB 6.6.0 Release Notes](https://docs.pingcap.com/tidb/v6.6/release-6.6.0)
 - [TiDB 6.5.0 Release Notes](https://docs.pingcap.com/tidb/v6.5/release-6.5.0)
