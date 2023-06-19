@@ -221,7 +221,7 @@ There are two methods for `WATCH` to match for rapid identification:
 - `EXACT` indicates that only SQL statements with exactly the same text are quickly identified.
 - `SIMILAR` indicates that the literal values are ignored and all SQL statements with the same pattern are matched by Plan Digest.
 
-The format of `QUERY_LIMIT` is as follows:
+The parameters of `QUERY_LIMIT` are as follows:
 
 | Parameter          | Description            | Note                                  |
 |---------------|--------------|--------------------------------------|
