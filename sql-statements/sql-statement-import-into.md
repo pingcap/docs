@@ -15,7 +15,7 @@ The `IMPORT INTO` statement is used to import data in formats such as `CSV`, `SQ
 
 - For data files stored in S3 or GCS, `IMPORT INTO` supports running in the [TiDB Backend Task Distributed Execution Framework](/tidb-distributed-execution-framework.md).
 
-    - When this framework is enabled ([tidb_enable_dist_task](/system-variables.md#tidb_enable_dist_task-new-in-v710) is `ON`), `IMPORT INTO` distributes subtasks to different TiDB nodes for execution, thereby improving the import efficiency.
+    - When this framework is enabled ([tidb_enable_dist_task](/system-variables.md#tidb_enable_dist_task-new-in-v710) is `ON`), `IMPORT INTO` distributes subtasks to different TiDB nodes for execution to improve the import efficiency.
     - When this framework is disabled, `IMPORT INTO` only supports running on the TiDB node where the current user is connected.
 
 - For data files stored locally in TiDB, `IMPORT INTO` only supports running on the TiDB node where the current user is connected. Therefore, the data files need to be placed on the TiDB node where the current user is connected.
@@ -28,7 +28,7 @@ The `IMPORT INTO` statement is used to import data in formats such as `CSV`, `SQ
 - `IMPORT INTO` does not support working simultaneously with features such as TiCDC data replication or Point-in-Time Recovery (PITR).
 - Only one `IMPORT INTO` task can run on a cluster at a time. Although `IMPORT INTO` performs a precheck for running tasks, it is not a hard limit. Starting multiple tasks might work when multiple clients execute `IMPORT INTO` simultaneously, but you need to avoid that.
 - Avoid performing DDL and DML operations on the target table during the data import process, because it might cause import failures or data inconsistencies. It is also not recommended to perform read operations during the import process, as the data being read might be inconsistent. Perform read and write operations only after the import is completed.
-- The import process consumes system resources significantly. To get better performance, it is recommended to use TiDB nodes with at least 32 cores and 64 GiB of memory. TiDB writes sorted data to the TiDB [temporary directory](/tidb-configuration-file.md#temp-dir) during import, so it is recommended to configure high-performance storage media such as flash memory. For more information, see [Physical Import Mode Limitations](/tidb-lightning/tidb-lightning-physical-import-mode.md#requirements-and-restrictions).
+- The import process consumes system resources significantly. To get better performance, it is recommended to use TiDB nodes with at least 32 cores and 64 GiB of memory. TiDB writes sorted data to the TiDB [temporary directory](/tidb-configuration-file.md#temp-dir) during import, so it is recommended to configure high-performance storage media such as flash memory. For more information, see [Physical Import Mode limitations](/tidb-lightning/tidb-lightning-physical-import-mode.md#requirements-and-restrictions).
 - The TiDB [temporary directory](/tidb-configuration-file.md#temp-dir) is expected to have at least 90 GiB of available space.
 
 ## Prerequisites for import
@@ -37,7 +37,7 @@ Before using `IMPORT INTO` to import data, make sure the following requirements 
 
 - The target table to be imported is already created in TiDB and it is empty.
 - The target cluster has sufficient space to store the data to be imported.
-- Ensure that the [temporary directory](/tidb-configuration-file.md#temp-dir) of the TiDB node connected to the current session has at least 90 GiB of disk space available. If [tidb_enable_dist_task](/system-variables.md#tidb_enable_dist_task) is enabled, ensure that the temporary directory of each TiDB node in the cluster has sufficient disk space.
+- Ensure that the [temporary directory](/tidb-configuration-file.md#temp-dir) of the TiDB node connected to the current session has at least 90 GiB of disk space available. If [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task) is enabled, ensure that the temporary directory of each TiDB node in the cluster has sufficient disk space.
 
 ## Required privileges
 
@@ -123,16 +123,10 @@ The supported options are described as follows:
 | SKIP_ROWS=<number> | CSV | Specifies the number of rows to skip. The default value is `0`. You can use this option to skip the header in a CSV file. This option applies to all files matched by `fileLocation`. |
 | DISK_QUOTA='<string>' | All formats | Specifies the disk space threshold that can be used during data sorting. The default value is 80% of the disk space in the TiDB [temporary directory](/tidb-configuration-file.md#temp-dir). If the total disk size cannot be obtained, the default value is 50 GiB. When specifying `DISK_QUOTA` explicitly, make sure that the value does not exceed 80% of the disk space in the TiDB temporary directory. |
 | DISABLE_TIKV_IMPORT_MODE | All formats | Specifies whether to disable switching TiKV to import mode during the import process. By default, switching TiKV to import mode is not disabled. If there are ongoing read-write operations in the cluster, you can enable this option to avoid impact from the import process. |
-| THREAD=<number> | All formats | Specifies the concurrency level for import. When the data file format is CSV or SQL, the default value is 50% of the CPU cores, with a minimum value of 1. You can explicitly specify this option to control the resource usage, but make sure that the value does not exceed the number of CPU cores. |
-| MAX_WRITE_SPEED='<string>' | All formats | Controls the write speed to a single TiKV node. By default, there is no speed limit. For example, you can specify this option as `1MiB` to limit the write speed to `1MiB/s`. |
+| THREAD=<number> | All formats | Specifies the concurrency for import. When the data file format is CSV or SQL, the default value is 50% of the CPU cores, with a minimum value of 1. You can explicitly specify this option to control the resource usage, but make sure that the value does not exceed the number of CPU cores. |
+| MAX_WRITE_SPEED='<string>' | All formats | Controls the write speed to a TiKV node. By default, there is no speed limit. For example, you can specify this option as `1MiB` to limit the write speed to 1 MiB/s. |
 | CHECKSUM_TABLE='<string>' | All formats | Configures whether to perform a checksum check on the target table after the import to validate the import integrity. The supported values include `"required"` (default), `"optional"`, and `"off"`. `"required"` means performing a checksum check after the import. If the checksum check fails, TiDB will return an error and the import will exit. `"optional"` means performing a checksum check after the import. If an error occurs, TiDB will return a warning and ignore the error. `"off"` means not performing a checksum check after the import. |
 | DETACHED | All Formats | Controls whether to execute `IMPORT INTO` asynchronously. When this option is enabled, executing `IMPORT INTO` will immediately return the `Job_ID` of the import task, and the task will be executed asynchronously in the backend. |
-
-## 输出内容
-
-当 `IMPORT INTO` 导入完成，或者开启了 `DETACHED` 模式时，`IMPORT INTO` 会返回当前任务的信息。以下为一些示例，字段的含义描述请参考 [`SHOW IMPORT JOB(s)`](/sql-statements/sql-statement-show-import-job.md)。
-
-当 `IMPORT INTO` 导入完成时输出：
 
 ## Output
 
