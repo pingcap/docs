@@ -210,7 +210,7 @@ Supported condition setting:
 
 Supported operations:
 
-- `DRYRUN`: no action is taken. This is mainly used to observe whether the condition setting is reasonable.
+- `DRYRUN`: no action is taken for the executed query. Only record the identified runaway queries. This is mainly used to observe whether the condition setting is reasonable.
 - `COOLDOWN`: the execution priority of the query is lowered to the lowest level. The query continues to execute with the lowest priority and does not occupy resources of other operations.
 - `KILL`: the identified query is automatically terminated and reports an error `Query execution was interrupted, identified as runaway query`.
 
