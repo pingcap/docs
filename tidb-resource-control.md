@@ -227,7 +227,7 @@ The format of `QUERY_LIMIT` is as follows:
 |---------------|--------------|--------------------------------------|
 | `EXEC_ELAPSED`  | When the query execution time exceeds this value, it is identified as a runaway query | EXEC_ELAPSED =`60s` means the query is identified as a runaway query if it takes more than 60 seconds to execute. |
 | `ACTION`    | Action taken when a runaway query is identified | The optional values are `DRYRUN`, `COOLDOWN`, and `KILL`. |
-| `WATCH`   | Quickly match the identified runaway query. If the same or similar query is encountered again within a certain period of time and the corresponding action is performed directly. | Optional. For example,`WATCH=SIMILAR DURATION '60s'` and `WATCH=EXACT DURATION '1m'`. |
+| `WATCH`   | Quickly match the identified runaway query. If the same or similar query is encountered again within a certain period of time and the corresponding action is performed directly. | Optional. For example, `WATCH=SIMILAR DURATION '60s'` and `WATCH=EXACT DURATION '1m'`. |
 
 #### Examples
 
