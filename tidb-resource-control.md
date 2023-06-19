@@ -258,7 +258,7 @@ You can get more information about runaway queries from the following system tab
 + The `mysql.tidb_runaway_queries` table contains the history of all runaway queries identified in the past certain period of time. Take one of the rows as an example:
 
     ```sql
-    MySQL [(none)]> SELECT * FROM tidb_runaway_queries LIMIT 1\G;
+    MySQL [(none)]> SELECT * FROM mysql.tidb_runaway_queries LIMIT 1\G;
     *************************** 1. row ***************************
     resource_group_name: rg1
                    time: 2023-06-16 17:40:22
@@ -269,16 +269,15 @@ You can get more information about runaway queries from the following system tab
             tidb_server: 127.0.0.1:4000
     ```
 
-    In which:
-
-    - `match_type` is the source of the runaway query.
+    In which `match_type` is the source of the runaway query. The value can one of the following:
+  
     - `identify` means that it matches the condition of the runaway query.
     - `watch` means that it is put into the watch list.
 
 + The `mysql.tidb_runaway_quarantined_watch` table contains the watch rule records for runaway queries. Take two of these rows as examples:
 
     ```sql
-    MySQL [(none)]> SELECT * FROM tidb_runaway_quarantined_watch LIMIT 2\G;
+    MySQL [(none)]> SELECT * FROM mysql.tidb_runaway_quarantined_watch LIMIT 2\G;
     *************************** 1. row ***************************
     resource_group_name: rg1
              start_time: 2023-06-16 17:40:22
@@ -298,8 +297,9 @@ You can get more information about runaway queries from the following system tab
     In which:
 
     - `start_time` and `end_time` indicate the time range during which the watch list is valid.
-    - The value `similar` in the `watch` column indicates that it is matched by Plan Digest. At this time, the `watch_text` column displays the Plan Digest.
-    - The value `exact` in the `watch` column indicates that it is matched by SQL text. At this time, the `watch_text` column displays the SQL text.
+    - `watch` means that it is put into the watch list. The value can be one of the following:
+        - `similar` indicates that it is matched by Plan Digest. At this time, the `watch_text` column displays the Plan Digest.
+        - `exact` indicates that it is matched by SQL text. At this time, the `watch_text` column displays the SQL text.
 
 ## Disable resource control
 
