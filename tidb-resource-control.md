@@ -216,7 +216,7 @@ Supported operations:
 
 To avoid too many concurrent runaway queries that exhaust system resources before being identified by conditions, the resource control feature introduces a quick identification and immunity mechanism. By using the `WATCH` clause, when a query is identified as a runaway query, the current TiDB instance directly marks the matching queries as runaway queries in the next period of time (defined by `DURATION`), instead of waiting for them to be identified by conditions, and executes the corresponding operations. The `KILL` operation reports an error `Quarantined and interrupted because of being in runaway watch list`.
 
-There are two ways to match for rapid identification:
+There are two methods for `WATCH` to match for rapid identification:
 
 - `EXACT` indicates that only SQL statements with exactly the same text are quickly identified.
 - `SIMILAR` indicates that the literal values are ignored and all SQL statements with the same pattern are matched by Plan Digest.
