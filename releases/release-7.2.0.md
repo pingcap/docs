@@ -56,11 +56,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
 
     更多信息，请参考[用户文档](/tidb-resource-control.md###管理Runaway查询)。
 
-* 增强对历史执行计划的绑定能力 [#39199](https://github.com/pingcap/tidb/issues/39199) @[qw4990](https://github.com/qw4990) **tw@Oreoxmt** <!--1349-->
+* Enhance the capability of creating a binding according to a historical execution plan [#39199](https://github.com/pingcap/tidb/issues/39199) @[qw4990](https://github.com/qw4990) **tw@Oreoxmt** <!--1349-->
 
-    新版本的 TiDB 对历史执行计划绑定的能力做了进一步增强。 一方面加强了对复杂语句的解析和绑定， 另一方面， 也加入了对新 Hint 的支持，包括 [`AGG_TO_COP()`](/optimizer-hints.md#agg_to_cop)、[`LIMIT_TO_COP()`](/optimizer-hints.md#limit_to_cop)、[`ORDERED_INDEX`](/optimizer-hints.md#order_indext1_name-idx1_name--idx2_name)、[`NO_ORDERED_INDEX()`](/optimizer-hints.md#no_order_indext1_name-idx1_name--idx2_name)。 借助这个能力， 从历史执行计划中创建的 [SQL Binding](/sql-plan-management.md#执行计划绑定-sql-binding) 能够更加稳定的固定住执行计划。
+    TiDB v7.2.0 enhances the capability of creating a binding according to a historical execution plan. This feature improves the parsing and binding process for complex statements and supports new hints including [`AGG_TO_COP()`](/optimizer-hints.md#agg_to_cop), [`LIMIT_TO_COP()`](/optimizer-hints.md#limit_to_cop), [`ORDER_INDEX`](/optimizer-hints.md#order_indext1_name-idx1_name--idx2_name), and [`NO_ORDER_INDEX()`](/optimizer-hints.md#no_order_indext1_name-idx1_name--idx2_name). With this capability, SQL bindings created from historical execution plans provide more stable fixes for execution plans.
 
-    更多信息，请参考[用户文档](/sql-plan-management.md#执行计划绑定-sql-binding)。
+    For more information, see [documentation](/sql-plan-management.md).
 
 ### SQL
 
