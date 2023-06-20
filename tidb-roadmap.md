@@ -45,12 +45,12 @@ In the course of development, this roadmap is subject to change based on user ne
         <ul>
           <li>
             <b>Performance optimization framework for all applicable background tasks, like DDL, TTL, and cluster analysis</b><br />
-            <i>This distributes the workload of these operations throughout the cluster, resulting in accelerated performance and reduced resource utilization on individual nodes. This framework already applies to the <code>ADD INDEX</code> operation</i>
+            <i>This distributes the workload of these operations throughout the cluster, leading to accelerated performance and reduced resource utilization on individual nodes. This framework already applies to the <code>ADD INDEX</code> operation</i>
           </li>
           <br />
           <li>
             <b>GA of disaggregated storage and compute architecture and S3 shared storage in TiFlash</b><br />
-            <i>Enables more cost-effective and elastic HTAP</i>
+            <i>Enable more cost-effective and elastic HTAP</i>
           </li>
           <br />
           <br />
@@ -220,7 +220,7 @@ In the course of development, this roadmap is subject to change based on user ne
         <ul>
           <li>
             <b>IAM authentication for AWS</b>
-            <br /><i>TiDB as AWS third-party arn for AWS IAM access</i>
+            <br /><i>TiDB as AWS third-party ARN for AWS IAM access</i>
           </li>
           <br />
           <li>
