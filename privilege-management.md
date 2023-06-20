@@ -272,7 +272,7 @@ Requires the `SUPER` or `BACKUP_ADMIN` privilege.
 
 ### CANCEL IMPORT JOB
 
-Requires the `SUPER` privilege to cancel jobs owned by other users. Otherwise, only jobs created by the current user can be canceled.
+Requires the `SUPER` privilege to cancel jobs created by other users. Otherwise, only jobs created by the current user can be canceled.
 
 ### CREATE DATABASE
 
