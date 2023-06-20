@@ -3,7 +3,7 @@ title: ticloud branch list
 summary: The reference of `ticloud branch list`.
 ---
 
-# ticloud cluster list
+# ticloud branch list
 
 List all branches in a cluster:
 
