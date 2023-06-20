@@ -56,7 +56,7 @@ When you import data, there are some key factors that can affect import performa
 
 - Data validation
 
-    After data and index import is completed, an [`admin checksum`](/sql-statements/sql-statement-admin-checksum-table.md) is performed on each table, comparing it with the local checksum value of TiDB Lightning. When there are many tables, or an individual table has a large number of rows, the checksum phase can take a long time.
+    After data and index import is completed, an [`ADMIN CHECKSUM`](/sql-statements/sql-statement-admin-checksum-table.md) is performed on each table, comparing it with the local checksum value of TiDB Lightning. When there are many tables, or an individual table has a large number of rows, the checksum phase can take a long time.
 
 - Execution plan
 
