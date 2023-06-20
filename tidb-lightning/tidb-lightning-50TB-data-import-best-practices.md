@@ -143,3 +143,7 @@ If during the import process, PD Scatter Region latency exceeds 30 minutes, cons
 ### Disable execution plan
 
 In the case of a large single table (for example, with over 1 billion rows and more than 50 columns), it is recommended to turn off the analyze operation (`analyze="off"`) during the import process and manually execute the [ANALYZE TABLE](/sql-statements//sql-statement-analyze-table.md#analyze) statement after the import is completed.
+
+## Troubleshooting
+
+If you encounter problems while using TiDB Lightning, see [Troubleshoot TiDB Lightning](/tidb-lightning/troubleshoot-tidb-lightning.md).
