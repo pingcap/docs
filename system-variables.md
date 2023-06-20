@@ -1697,7 +1697,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Scope: SESSION | GLOBAL
 - Persist to the cluster: Yes
 - Type: Boolean
-- Default value: `ON
+- Default value: `ON`
 - This variable is used to control whether to use a checksum-based approach to quickly check the consistency of data and indexes in a table. The default value `ON` means this feature is enabled by default.
 - When this variable is enabled, TiDB can execute the [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) statement in a faster way.
 
