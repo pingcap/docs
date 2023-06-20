@@ -19,7 +19,7 @@ This TiDB statement is not applicable to TiDB Cloud.
 
 `IMPORT INTO` supports importing data from files stored in Amazon S3, GCS, and the TiDB local storage.
 
-- For data files stored in Amazon S3 or GCS, `IMPORT INTO` supports running in the [TiDB Backend Task Distributed Execution Framework](/tidb-distributed-execution-framework.md).
+- For data files stored in Amazon S3 or GCS, `IMPORT INTO` supports running in the [TiDB backend task distributed execution framework](/tidb-distributed-execution-framework.md).
 
     - When this framework is enabled ([tidb_enable_dist_task](/system-variables.md#tidb_enable_dist_task-new-in-v710) is `ON`), `IMPORT INTO` distributes subtasks to different TiDB nodes for execution to improve the import efficiency.
     - When this framework is disabled, `IMPORT INTO` only supports running on the TiDB node where the current user is connected.
@@ -30,12 +30,12 @@ This TiDB statement is not applicable to TiDB Cloud.
 
 - `IMPORT INTO` only supports importing data into existing empty tables in the database.
 - `IMPORT INTO` does not support transactions or rollback. Executing `IMPORT INTO` within an explicit transaction (`BEGIN`/`END`) will return an error.
-- The execution of `IMPORT INTO` blocks the current connection until the import is completed. To execute it asynchronously, you can add the `DETACHED` option.
-- `IMPORT INTO` does not support working simultaneously with features such as TiCDC data replication or [Point-in-Time Recovery (PITR)](/br/br-log-architecture.md)).
+- The execution of `IMPORT INTO` blocks the current connection until the import is completed. To execute the statement asynchronously, you can add the `DETACHED` option.
+- `IMPORT INTO` does not support working simultaneously with features such as TiCDC data replication or [Point-in-Time Recovery (PITR)](/br/br-log-architecture.md).
 - Only one `IMPORT INTO` task can run on a cluster at a time. Although `IMPORT INTO` performs a precheck for running tasks, it is not a hard limit. Starting multiple tasks might work when multiple clients execute `IMPORT INTO` simultaneously, but you need to avoid that.
 - Avoid performing DDL and DML operations on the target table during the data import process, because it might cause import failures or data inconsistencies. It is also **NOT** recommended to perform read operations during the import process, as the data being read might be inconsistent. Perform read and write operations only after the import is completed.
-- The import process consumes system resources significantly. To get better performance, it is recommended to use TiDB nodes with at least 32 cores and 64 GiB of memory. TiDB writes sorted data to the TiDB [temporary directory](/tidb-configuration-file.md#temp-dir) during import, so it is recommended to configure high-performance storage media such as flash memory. For more information, see [Physical Import Mode limitations](/tidb-lightning/tidb-lightning-physical-import-mode.md#requirements-and-restrictions).
-- The TiDB [temporary directory](/tidb-configuration-file.md#temp-dir) is expected to have at least 90 GiB of available space.
+- The import process consumes system resources significantly. To get better performance, it is recommended to use TiDB nodes with at least 32 cores and 64 GiB of memory. TiDB writes sorted data to the TiDB [temporary directory](/tidb-configuration-file.md#temp-dir-new-in-v630) during import, so it is recommended to configure high-performance storage media such as flash memory. For more information, see [Physical Import Mode limitations](/tidb-lightning/tidb-lightning-physical-import-mode.md#requirements-and-restrictions).
+- The TiDB [temporary directory](/tidb-configuration-file.md#temp-dir-new-in-v630) is expected to have at least 90 GiB of available space.
 
 ## Prerequisites for import
 
@@ -43,7 +43,7 @@ Before using `IMPORT INTO` to import data, make sure the following requirements 
 
 - The target table to be imported is already created in TiDB and it is empty.
 - The target cluster has sufficient space to store the data to be imported.
-- The [temporary directory](/tidb-configuration-file.md#temp-dir) of the TiDB node connected to the current session has at least 90 GiB of disk space available. If [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task) is enabled, also make sure that the temporary directory of each TiDB node in the cluster has sufficient disk space.
+- The [temporary directory](/tidb-configuration-file.md#temp-dir-new-in-v630) of the TiDB node connected to the current session has at least 90 GiB of available space. If [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task) is enabled, also make sure that the temporary directory of each TiDB node in the cluster has sufficient disk space.
 
 ## Required privileges
 
@@ -87,14 +87,14 @@ It specifies how each field in the data file corresponds to the columns in the t
 
 It specifies how the values of target columns are calculated. In the right side of the `SET` expression, you can reference the variables specified in `ColumnNameOrUserVarList`.
 
-In the left side of the `SET` expression, you can only reference a column name that is not included in `ColumnNameOrUserVarList`. If the target column name already exists in `ColumnNameOrUserVarList`, the SET expression is invalid.
+In the left side of the `SET` expression, you can only reference a column name that is not included in `ColumnNameOrUserVarList`. If the target column name already exists in `ColumnNameOrUserVarList`, the `SET` expression is invalid.
 
 ### fileLocation
 
 It specifies the storage location of the data file, which can be an Amazon S3 or GCS URI path, or a TiDB local file path.
 
 - Amazon S3 or GCS URI path: for URI configuration details, see [External storage](/br/backup-and-restore-storages.md#uri-format).
-- TiDB local file path: it must be an absolute path, and the file suffix must be `.csv`, `.sql`, or `.parquet`. Make sure that the files corresponding to this path are stored on the TiDB node connected by the current user, and the user has the `FILE` privilege.
+- TiDB local file path: it must be an absolute path, and the file extension must be `.csv`, `.sql`, or `.parquet`. Make sure that the files corresponding to this path are stored on the TiDB node connected by the current user, and the user has the `FILE` privilege.
 
 > **Note:**
 >
@@ -127,7 +127,7 @@ The supported options are described as follows:
 | FIELDS_DEFINED_NULL_BY='<string>' | CSV | Specifies the value that represents `NULL` in the fields. The default value is `\N`. |
 | LINES_TERMINATED_BY='<string>' | CSV | Specifies the line terminator. By default, `IMPORT INTO` automatically identifies `\n`, `\r`, or `\r\n` as line terminators. If the line terminator is one of these three, you do not need to explicitly specify this option. |
 | SKIP_ROWS=<number> | CSV | Specifies the number of rows to skip. The default value is `0`. You can use this option to skip the header in a CSV file. This option applies to all files matched by `fileLocation`. |
-| DISK_QUOTA='<string>' | All formats | Specifies the disk space threshold that can be used during data sorting. The default value is 80% of the disk space in the TiDB [temporary directory](/tidb-configuration-file.md#temp-dir). If the total disk size cannot be obtained, the default value is 50 GiB. When specifying `DISK_QUOTA` explicitly, make sure that the value does not exceed 80% of the disk space in the TiDB temporary directory. |
+| DISK_QUOTA='<string>' | All formats | Specifies the disk space threshold that can be used during data sorting. The default value is 80% of the disk space in the TiDB [temporary directory](/tidb-configuration-file.md#temp-dir-new-in-v630). If the total disk size cannot be obtained, the default value is 50 GiB. When specifying `DISK_QUOTA` explicitly, make sure that the value does not exceed 80% of the disk space in the TiDB temporary directory. |
 | DISABLE_TIKV_IMPORT_MODE | All formats | Specifies whether to disable switching TiKV to import mode during the import process. By default, switching TiKV to import mode is not disabled. If there are ongoing read-write operations in the cluster, you can enable this option to avoid impact from the import process. |
 | THREAD=<number> | All formats | Specifies the concurrency for import. When the data file format is CSV or SQL, the default value is 50% of the CPU cores, with a minimum value of 1. You can explicitly specify this option to control the resource usage, but make sure that the value does not exceed the number of CPU cores. |
 | MAX_WRITE_SPEED='<string>' | All formats | Controls the write speed to a TiKV node. By default, there is no speed limit. For example, you can specify this option as `1MiB` to limit the write speed to 1 MiB/s. |

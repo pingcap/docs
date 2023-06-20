@@ -363,7 +363,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 * Error Number: 8156
 
-    The provided file path cannot be empty. You need to set a correct path before the import.
+    The provided path cannot be empty. You need to set a correct path before the import.
 
 * Error Number: 8157
 
@@ -371,11 +371,11 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 * Error Number: 8158
 
-    The provided file path is invalid. Refer to the specific error message for actions. For Amazon S3 or GCS path settings, see [External storage](/br/backup-and-restore-storages.md#uri-format).
+    The provided path is invalid. Refer to the specific error message for actions. For Amazon S3 or GCS path settings, see [External storage](/br/backup-and-restore-storages.md#uri-format).
 
 * Error Number: 8159
 
-    TiDB cannot access the provided  Amazon S3 or GCS path. Make sure that the specified S3 or GCS bucket exists and that you have provided the correct Access Key and Secret Access Key for TiDB to access the corresponding bucket.
+    TiDB cannot access the provided Amazon S3 or GCS path. Make sure that the specified S3 or GCS bucket exists and that you have provided the correct Access Key and Secret Access Key for TiDB to access the corresponding bucket.
 
 * Error Number: 8160
 
@@ -387,11 +387,11 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 * Error Number: 8163
 
-    The provided option is unknown. For supported options, see [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md#option-description).
+    The provided option is unknown. For supported options, see [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md#parameter-description).
 
 * Error Number: 8164
 
-    The provided option value is invalid. For valid values, see [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md#option-description).
+    The provided option value is invalid. For valid values, see [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md#parameter-description).
 
 * Error Number: 8165
 
@@ -399,7 +399,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 * Error Number: 8166
 
-    Certain options can only be used in specific conditions. Refer to the specific error message for actions. For supported options, see [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md#option-description).
+    Certain options can only be used in specific conditions. Refer to the specific error message for actions. For supported options, see [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md#parameter-description).
 
 * Error Number: 8170
 
