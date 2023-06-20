@@ -43,7 +43,7 @@ The output fields of the `SHOW IMPORT` statement are described as follows:
 | Create_Time      | The time when the task is created                 |
 | Start_Time       | The time when the task is started                     |
 | End_Time         | The time when the task is ended            |
-| Created_By       | The database username that creates the task          |
+| Created_By       | The name of the database user who creates the task         |
 
 ## Example
 
