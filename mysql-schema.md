@@ -63,7 +63,7 @@ Currently, the `help_topic` is NULL.
 ## Runaway queries related system tables
 
 * `tidb_runaway_queries`: the history records of all identified runaway queries over a certain period of time
-* `tidb_runaway_quarantined_watch`: the in effect and outdated quarantined watch rules for runaway queries
+* `tidb_runaway_quarantined_watch`: most recently active quarantined watch rules for runaway queries (contains currently valid rules, and possibly also contains recently expired rules)
 
 ## Miscellaneous system tables
 
