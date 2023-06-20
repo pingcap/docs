@@ -1692,7 +1692,8 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 > **Note:**
 >
-> This function does not work for [multi-valued indexes](/sql-statements/sql-statement-create-index.md#multi-valued indexes) and prefixed indexes.
+> This variable does not work for [multi-valued indexes](/sql-statements/sql-statement-create-index.md#multi-valued indexes) and prefixed indexes.
+
 - Scope: SESSION | GLOBAL
 - Whether to persist to the cluster: Yes
 - Type: Boolean
