@@ -23,11 +23,11 @@ Before creating a Data App, make sure that you have created a [TiDB Serverless](
 
 A Data App is a group of endpoints that you can use to access data for a specific application. To create a Data App, perform the following steps:
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
+1. In the [TiDB Cloud console](https://tidbcloud.com), click <MDSvgIcon name="icon-left-data-service" /> **Data Service** in the left navigation pane.
 
-2. In the left navigation pane, click <MDSvgIcon name="icon-left-data-service" /> **Data Service**.
+2. On the **Data Service** page, click **Create Data App**.
 
-3. On the **Get started by creating your first data application** page, enter a name and select clusters that you want the Data App to access.
+3. In the **Create Data App** dialog, enter a name and select clusters that you want the Data App to access.
 
 4. (Optional) To automatically deploy endpoints of the Data App to your preferred GitHub repository and branch, enable **Connect to GitHub**, and then do the following:
 
