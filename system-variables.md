@@ -1688,7 +1688,8 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - This variable is used to set whether to enable the statistics `Fast Analyze` feature.
 - If the statistics `Fast Analyze` feature is enabled, TiDB randomly samples about 10,000 rows of data as statistics. When the data is distributed unevenly or the data size is small, the statistics accuracy is low. This might lead to a non-optimal execution plan, for example, selecting a wrong index. If the execution time of the regular `Analyze` statement is acceptable, it is recommended to disable the `Fast Analyze` feature.
 
-### `tidb_enable_fast_table_check` <span class="version-mark">Introduced from v7.2.0 version</span>
+### tidb_enable_fast_table_check <span class="version-mark">New in v7.2.0</span>
+
 > **Note:**
 >
 > This function does not work for [multi-valued indexes](/sql-statements/sql-statement-create-index.md#multi-valued indexes) and prefixed indexes.
