@@ -1,6 +1,6 @@
 ---
 title: Best Practices for Importing 50 TB Data
-summary: Based on the experience of importing large single tables in the past, this article summarizes a best practice, hoping to help the import of large data volumes and large single tables.
+summary: Based on the experience of importing large single tables in the past, this article summarizes best practices, hoping to help you sucessfully import large data volumes and large single tables.
 ---
 
 # Best Practices for Importing 50 TB Data
@@ -15,55 +15,58 @@ This article introduces some key factors and steps that affect TiDB Lightning da
 
 The following sections in this article apply to both importing multiple tables and importing large single tables:
 
-- Key factors
-- Prepare source files
-- Estimate storage space
-- Change configuration parameters
-- Resolve the "checksum mismatch" issue
-- Enable checkpoint
+- [Key factors](#key-factors)
+- [Prepare source files](#prepare-source-files)
+- [Estimate storage space](#estimate-storage-space)
+- [Change configuration parameters](#change-configuration-parameters)
+- [Resolve the "checksum mismatch" error](#resolve-the-checksum-mismatch-error)
+- [Enable checkpoint](#enable-checkpoint)
+- [Troubleshooting](#troubleshooting)
 
 Due to the special nature of importing large single tables, best practices are described separately in the following section:
 
-- Best practices for importing a large single table
+- [Best practices for importing a large single table](#best-practices-for-importing-a-large-single-table)
 
 ## Key factors
 
 When you import data, there are some key factors that can affect import performance and might even cause import to fail. Some common critical factors are as follows:
 
-- Source files:
+- Source files
 
     - Whether the data within a single file is sorted by the primary key. Sorted data can achieve optimal import performance.
     - Whether there is overlap in the content of source files across TiDB Lightning instances. The smaller the overlap, the better the import performance.
 
-- Table definitions:
+- Table definitions
 
     - The number and size of secondary indexes per table can affect import speed. Fewer indexes result in faster imports and less space consumption after import.
     - Index data size = Number of indexes \* Index size \* Number of rows.
 
-- Compression ratio:
+- Compression ratio
 
-  Data imported into a TiDB cluster is stored in a compressed format. The compression ratio can not be calculated in advance. It can only be determined after the data is actually imported into the TiKV cluster. You can first import a portion of the data (for example, 10%) to obtain the corresponding compression ratio of the cluster, and then use it to estimate the compression ratio of the entire data import.
+  Data imported into a TiDB cluster is stored in a compressed format. The compression ratio can not be calculated in advance. It can only be determined after the data is actually imported into the TiKV cluster.
 
-- Configuration parameters:
+  As a best practice, you can first import a small portion of the data (for example, 10%) to obtain the corresponding compression ratio of the cluster, and then use it to estimate the compression ratio of the entire data import.
+
+- Configuration parameters
 
     - `region-concurrency`: The concurrency of TiDB Lightning main logical processing.
-    - `send-kv-pairs`: The number of Key-Value pairs sent by TiDB Lightning to TiKV in a single request. 
-    - `disk-quota`: The disk quota used by TiDB Lightning local temp files when using Physical Import Mode
-    - `GOMEMLIMIT`: TiDB Lightning is implemented in the Go language. Configure GOMEMLIMIT properly.
+    - `send-kv-pairs`: The number of Key-Value pairs sent by TiDB Lightning to TiKV in a single request.
+    - `disk-quota`: The disk quota used by TiDB Lightning local temp files when using Physical Import Mode.
+    - `GOMEMLIMIT`: TiDB Lightning is implemented in the Go language. Configure `GOMEMLIMIT` properly.
 
-- Data validation:
+- Data validation
 
-    After data and index import is completed, an [`admin checksum`](/sql-statements/sql-statement-admin-checksum-table.md) is performed on each table, comparing it with the local checksum value of TiDB Lightning. When there are many tables or individual tables have a large number of rows, the checksum phase can take a long time.
+    After data and index import is completed, an [`admin checksum`](/sql-statements/sql-statement-admin-checksum-table.md) is performed on each table, comparing it with the local checksum value of TiDB Lightning. When there are many tables, or an individual table has a large number of rows, the checksum phase can take a long time.
 
-- Execution plan:
+- Execution plan
 
-    After the checksum is successfully completed, an [analyze table](/sql-statements/sql-statement-analyze-table.md) operation is performed on each table to generate the optimal execution plan. The [analyze table](/sql-statements/sql-statement-analyze-table.md) operation can be time-consuming when dealing with a large number of tables or individual tables with a significant amount of data.
+    After the checksum is successfully completed, an [ANALYZE TABLE](/sql-statements/sql-statement-analyze-table.md) operation is performed on each table to generate the optimal execution plan. The [ANALYZE TABLE](/sql-statements/sql-statement-analyze-table.md) operation can be time-consuming when dealing with a large number of tables or an individual table with a significant amount of data.
 
-- Relevant issues:
+- Relevant issues
 
     During the actual process of importing 50 TB of data, certain issues might occur that are only exposed when dealing with a massive number of source files and large-scale clusters. When choosing a product version, it is recommended to check whether the corresponding issues have been fixed.
 
-    The following issues have been resolved in versions v6.5.3, v7.1.0, and later versions:
+    The following issues have been resolved in v6.5.3, v7.1.0, and later versions:
 
     - [Issue-14745](https://github.com/tikv/tikv/issues/14745): After the import is completed, a large number of temporary files are left in the TiKV import directory.
     - [Issue-6426](https://github.com/tikv/pd/issues/6426): The PD [range scheduling](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#scope-of-pausing-scheduling-during-import) interface might fail to scatter regions, resulting in timeout issues. Before v6.2.0, global scheduling is disabled by default, which can avoid triggering this problem.
@@ -72,8 +75,8 @@ When you import data, there are some key factors that can affect import performa
 
 ## Prepare source files
 
-- When generating files, within a single file, it is preferable to sort them by the primary key. If the table definition does not have a primary key, you can add an auto-increment primary key. In this case, the order of the file content does not matter.
-- When multiple TiDB Lightning instances are partitioning the source files, it is advisable to minimize primary key overlap. If the generated files are globally ordered, they can be distributed into different TiDB Lightning instances based on ranges to achieve optimal import performance.
+- When generating source files, within a single file, it is preferable to sort them by the primary key. If the table definition does not have a primary key, you can add an auto-increment primary key. In this case, the order of the file content does not matter.
+- When multiple TiDB Lightning instances are partitioning the source files, it is advisable to minimize overlap of primary keys. If the generated files are globally sorted, they can be distributed into different TiDB Lightning instances based on ranges to achieve optimal import performance.
 - Control each file to be less than 96 MB in size during file generation.
 - If a file is exceptionally large and exceeds 256 MB, enable [strict-format](/migrate-from-csv-files-to-tidb.md#step-4-tune-the-import-performance-optional).
 
@@ -81,25 +84,25 @@ When you import data, there are some key factors that can affect import performa
 
 Currently, there are two effective methods for space estimation:
 
-- Assuming the total data size is A, the total index size is B, the replication factor is 3, and the compression ratio is α (typically around 2.5), the overall occupied space can be calculated as: (A+B)*3/α. This method is primarily used for estimating without performing any data import, to plan the cluster topology.
-- Import only 10% of the data and multiply the actual occupied space by 10 to estimate the final space usage for that batch of data. This method is more accurate, especially when importing a large amount of data.
+- Assuming the total data size is **A**, the total index size is **B**, the replication factor is **3**, and the compression ratio is **α** (typically around 2.5), the overall occupied space can be calculated as: **(A+B)*3/α**. This method is primarily used for estimating without performing any data import, to plan the cluster topology.
+- Import only 10% of the data and multiply the actual occupied space by 10 to estimate the final space usage for that batch of data. This method is more accurate, especially when you import a large amount of data.
 
-Note that it is recommended to reserve 20% of storage space, as background tasks such as compaction and snapshot replication also consume a portion of the storage space.
+Note that it is recommended to reserve 20% of storage space, because background tasks such as compaction and snapshot replication also consume a portion of the storage space.
 
 ## Change configuration parameters
 
 - `region-concurrency`: The concurrency of TiDB Lightning main logical processing. During parallel importing, it is recommended to set it to 75% of the CPU cores to prevent resource overload and potential OOM issues.
 - `send-kv-pairs`: The number of Key-Value pairs sent by TiDB Lightning to TiKV in a single request. It is recommended to adjust this value based on the formula send-kv-pairs * row-size < 1 MB. Starting from v7.2.0, this parameter is replaced by `send-kv-size`, and no additional setting is required.
-- `GOMEMLIMIT`: TiDB Lightning is implemented in the Go language. Setting GOMEMLIMIT to 80% of the instance memory to reduce the probability of OOM caused by the Go GC mechanism.
+- `GOMEMLIMIT`: TiDB Lightning is implemented in the Go language. Setting `GOMEMLIMIT` to 80% of the instance memory to reduce the probability of OOM caused by the Go GC mechanism.
 - `disk-quota`: It is advisable to ensure that the sorting directory space of TiDB Lightning is larger than the size of the data source. Otherwise, `disk-quota` can be set to 80% of the sorting directory space of TiDB Lightning. In this case, TiDB Lightning will sort and write data in batches based on the `disk-quota`, but the import performance will be lower than complete sorting.
 
 For more information about TiDB Lightning parameters, see [TiDB Lightning configuration parameters](/tidb-lightning/tidb-lightning-configuration.md).
 
 ## Resolve the "checksum mismatch" error
 
-Conflicts might occur during data validation. The error message is "checksum mismatch". To resolve this issue, take the following approaches:
+Conflicts might occur during data validation. The error message is "checksum mismatch". To resolve this issue, take the following steps:
 
-1. In the source data, check for conflicts primary key or unique key and resolve the conflicts before reimporting. In most cases, this is the most common cause.
+1. In the source data, check for conflicted primary keys or unique keys and resolve the conflicts before reimporting. In most cases, this is the most common cause.
 2. Check if the table primary key or unique key definition is reasonable. If not, modify the table definition and reimport.
 3. Enable [conflict detection](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#conflict-detection).
 
@@ -107,22 +110,22 @@ This feature assumes that there is a small number (less than 10%) of unexpected 
 
 ## Enable checkpoint
 
-For importing a large volume of data, it is essential to refer to the [Lightning Checkpoints](/tidb-lightning/tidb-lightning-checkpoints.md) documentation and enable checkpoints. It is recommended to prioritize using MySQL as the driver to avoid losing the checkpoint information if TiDB Lightning is running in a container environment where the container exits and deletes the checkpoint information.
+For importing a large volume of data, it is essential to refer to the [Lightning Checkpoints](/tidb-lightning/tidb-lightning-checkpoints.md) documentation and enable checkpoints. It is recommended to prioritize using MySQL as the driver to avoid losing the checkpoint information if TiDB Lightning is running in a container environment and the container might exit and delete the checkpoint information.
 
-If you encounter insufficient space in downstream TiKV during import, you can manually kill all TiDB Lightning instances (without using the -9 option). After scaling up the capacity, you can resume the import based on the checkpoint information.
+If you encounter insufficient space in downstream TiKV during import, you can manually run the `kill` command (without the `-9` option) all TiDB Lightning instances. After scaling up the capacity, you can resume the import based on the checkpoint information.
 
 ## Best practices for importing a large single table
 
 Importing multiple tables can increase the time required for checksum and analyze operations, sometimes exceeding the time required for data import itself. However, in general, it is not necessary to adjust the configuration. If there are one or more large tables among the multiple tables, it is recommended to separate the source files of these large tables and import them separately.
 
-This section focuses on the best practices for importing large single tables. There is no strict definition for a large single table, but it is generally considered to meet one of the following conditions:
+This section focuses on the best practices for importing large single tables. There is no strict definition for a large single table, but it is generally considered to meet one of the following criteria:
 
 - The table size exceeds 10 TB.
 - The number of rows exceeds 1 billion and the number of columns exceeds 50 in a wide table.
 
 ### Prepare source files
 
-Follow the steps outlined in the [source file preparation](#prepare-source-files). For a large single table, if global ordering is not achievable but ordering within each file based on the primary key is possible, and the file is a standard CSV file, it is recommended to generate a large single file with each around 20 GB. Then, enable strict-format. This approach reduces overlap between TiDB Lightning instances and allows TiDB Lightning to split the file before the import, resulting in optimal import speed.
+Follow the steps outlined in the [Prepare source files](#prepare-source-files). For a large single table, if global sorting is not achievable but sorting within each file based on the primary key is possible, and the file is a standard CSV file, it is recommended to generate a large single file with each around 20 GB. Then, enable `strict-format`. This approach reduces overlap between TiDB Lightning instances and allows TiDB Lightning to split the file before import, resulting in optimal import speed.
 
 ### Plan cluster topology
 
@@ -138,7 +141,7 @@ If during the import process, PD Scatter Region latency exceeds 30 minutes, cons
 
 - Check if the TiKV cluster encounters any IO bottlenecks.
 - Increase TiKV `raftstore.apply-pool-size` from the default value of `2` to `4` or `8`.
-- Reduce TiDB Lightning `region-split-concurrency` to half the number of CPU cores, with a minimum value of 1.
+- Reduce TiDB Lightning `region-split-concurrency` to half the number of CPU cores, with a minimum value of `1`.
 
 ### Disable execution plan
 
