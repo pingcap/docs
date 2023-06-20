@@ -198,7 +198,7 @@ SELECT /*+ RESOURCE_GROUP(rg1) */ * FROM t limit 10;
 >
 > This feature is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
 
-A runaway query is a query that takes longer to execute or consumes more resources than expected. Starting from TiDB v7.2.0, the resource control feature introduces the management of runaway queries. You can set conditions for a resource group to identify runaway queries and automatically take actions to prevent them from exhausting resources and affecting normal queries.
+A runaway query is a query that takes excessive time or resources than expected. Starting from TiDB v7.2.0, the resource control feature introduces the management of runaway queries. You can set criteria for a resource group to identify runaway queries and automatically take actions to prevent them from exhausting resources and affecting other queries.
 
 You can manage runaway queries for a resource group by configuring the `QUERY_LIMIT` field in [`CREATE RESOURCE GROUP`](/sql-statements/sql-statement-create-resource-group.md) or [`ALTER RESOURCE GROUP`](/sql-statements/sql-statement-alter-resource-group.md).
 
@@ -210,16 +210,16 @@ Supported condition setting (`ACTION`):
 
 Supported operations:
 
-- `DRYRUN`: no action is taken for the executed query. Only record the identified runaway queries. This is mainly used to observe whether the condition setting is reasonable.
+- `DRYRUN`: no action is taken. The records are appended for the runaway queries. This is mainly used to observe whether the condition setting is reasonable.
 - `COOLDOWN`: the execution priority of the query is lowered to the lowest level. The query continues to execute with the lowest priority and does not occupy resources of other operations.
 - `KILL`: the identified query is automatically terminated and reports an error `Query execution was interrupted, identified as runaway query`.
 
-To avoid too many concurrent runaway queries that exhaust system resources before being identified by conditions, the resource control feature introduces an immunity mechanism for quick identification. By using the `WATCH` clause, when a query is identified as a runaway query, the current TiDB instance directly marks the matching queries as runaway queries in the next period of time (defined by `DURATION`), instead of waiting for them to be identified by conditions, and executes the corresponding operations. The `KILL` operation reports an error `Quarantined and interrupted because of being in runaway watch list`.
+To avoid too many concurrent runaway queries that exhaust system resources before being identified by conditions, the resource control feature introduces an immunity mechanism for quick identification. By using the `WATCH` clause, when a query is identified as a runaway query, the current TiDB instance marks the matching queries as runaway queries immediately in the next period of time (defined by `DURATION`), and takes the corresponding actions, instead of waiting for them to be identified by conditions. The `KILL` operation reports an error `Quarantined and interrupted because of being in runaway watch list`.
 
 There are two methods for `WATCH` to match for rapid identification:
 
 - `EXACT` indicates that only SQL statements with exactly the same SQL are quickly identified.
-- `SIMILAR` indicates that the literal values are ignored and all SQL statements with the same pattern are matched by Plan Digest.
+- `SIMILAR` indicates all SQL statements with the same pattern are matched by Plan Digest despite literal values.
 
 The parameters of `QUERY_LIMIT` are as follows:
 
@@ -227,7 +227,7 @@ The parameters of `QUERY_LIMIT` are as follows:
 |---------------|--------------|--------------------------------------|
 | `EXEC_ELAPSED`  | When the query execution time exceeds this value, it is identified as a runaway query | EXEC_ELAPSED =`60s` means the query is identified as a runaway query if it takes more than 60 seconds to execute. |
 | `ACTION`    | Action taken when a runaway query is identified | The optional values are `DRYRUN`, `COOLDOWN`, and `KILL`. |
-| `WATCH`   | Quickly match the identified runaway query. If the same or similar query is encountered again within a certain period of time and the corresponding action is performed directly. | Optional. For example, `WATCH=SIMILAR DURATION '60s'` and `WATCH=EXACT DURATION '1m'`. |
+| `WATCH`   | Quickly match the identified runaway query. If the same or similar query is encountered again within a certain period of time and the corresponding action is performed immediately. | Optional. For example, `WATCH=SIMILAR DURATION '60s'` and `WATCH=EXACT DURATION '1m'`. |
 
 #### Examples
 
@@ -237,7 +237,7 @@ The parameters of `QUERY_LIMIT` are as follows:
     CREATE RESOURCE GROUP IF NOT EXISTS rg1 RU_PER_SEC = 500 QUERY_LIMIT=(EXEC_ELAPSED='60s', ACTION=COOLDOWN);
     ```
 
-2. Change the `rg1` resource group to terminate the runaway queries directly, and mark the queries with the same pattern as runaway queries directly in the next 10 minutes.
+2. Change the `rg1` resource group to terminate the runaway queries, and mark the queries with the same pattern as runaway queries immediately in the next 10 minutes.
 
     ```sql
     ALTER RESOURCE GROUP rg1 QUERY_LIMIT=(EXEC_ELAPSED='60s', ACTION=KILL, WATCH=SIMILAR DURATION='10m');
@@ -251,17 +251,6 @@ The parameters of `QUERY_LIMIT` are as follows:
 
 #### Observability
 
-<CustomContent platform="tidb">
-
-TiDB collects runtime information about TTL regularly and provides visual charts of the metrics in the Grafana dashboard. You can view the data from **TiDB** > **TTL**. For more details, see [TiDB Important Monitoring Metrics](/grafana-tidb-dashboard.md#ttl).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-TiDB collects runtime information about TTL regularly and provides visual charts of the metrics in the Grafana dashboard.
-
-</CustomContent>
 
 You can get more information about runaway queries from the following system tables:
 
