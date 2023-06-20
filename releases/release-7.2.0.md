@@ -60,7 +60,12 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
 
 * Enhance the capability of creating a binding according to a historical execution plan [#39199](https://github.com/pingcap/tidb/issues/39199) @[qw4990](https://github.com/qw4990) **tw@Oreoxmt** <!--1349-->
 
-    TiDB v7.2.0 enhances the capability of creating a binding according to a historical execution plan. This feature improves the parsing and binding process for complex statements and supports new hints including [`AGG_TO_COP()`](/optimizer-hints.md#agg_to_cop), [`LIMIT_TO_COP()`](/optimizer-hints.md#limit_to_cop), [`ORDER_INDEX`](/optimizer-hints.md#order_indext1_name-idx1_name--idx2_name), and [`NO_ORDER_INDEX()`](/optimizer-hints.md#no_order_indext1_name-idx1_name--idx2_name). With this capability, SQL bindings created from historical execution plans provide more stable fixes for execution plans.
+    TiDB v7.2.0 enhances the capability of [creating a binding according to a historical execution plan](/sql-plan-management.md#create-a-binding-according-to-a-historical-execution-plan). This feature improves the parsing and binding process for complex statements, making the bindings more stable, and supports the following new hints:
+
+    - [`AGG_TO_COP()`](/optimizer-hints.md#agg_to_cop)
+    - [`LIMIT_TO_COP()`](/optimizer-hints.md#limit_to_cop)
+    - [`ORDER_INDEX`](/optimizer-hints.md#order_indext1_name-idx1_name--idx2_name)
+    - [`NO_ORDER_INDEX()`](/optimizer-hints.md#no_order_indext1_name-idx1_name--idx2_name).
 
     For more information, see [documentation](/sql-plan-management.md).
 
