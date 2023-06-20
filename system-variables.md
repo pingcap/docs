@@ -1695,7 +1695,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 > This variable does not work for [multi-valued indexes](/sql-statements/sql-statement-create-index.md#multi-valued indexes) and prefixed indexes.
 
 - Scope: SESSION | GLOBAL
-- Persist to the cluster: Yes
+- Persists to the cluster: Yes
 - Type: Boolean
 - Default value: `ON`
 - This variable is used to control whether to use a checksum-based approach to quickly check the consistency of data and indexes in a table. The default value `ON` means this feature is enabled by default.
