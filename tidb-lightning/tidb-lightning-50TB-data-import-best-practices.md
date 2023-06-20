@@ -1,6 +1,6 @@
 ---
 title: Best Practices for Importing 50 TB Data
-summary: Based on the experience of importing large single tables in the past, this article summarizes a best practice, hoping to help the import of large data volumes and large single tables
+summary: Based on the experience of importing large single tables in the past, this article summarizes a best practice, hoping to help the import of large data volumes and large single tables.
 ---
 
 # Best Practices for Importing 50 TB Data
@@ -37,7 +37,7 @@ When you import data, there are some key factors that can affect import performa
 
 - Table definitions:
 
-    - The number and size of secondary indexes per table can affect import speed. More indexes result in slower imports and more space consumption after import.
+    - The number and size of secondary indexes per table can affect import speed. Fewer indexes result in faster imports and less space consumption after import.
     - Index data size = Number of indexes \* Index size \* Number of rows.
 
 - Compression ratio:
@@ -47,7 +47,7 @@ When you import data, there are some key factors that can affect import performa
 - Configuration parameters:
 
     - `region-concurrency`: The concurrency of TiDB Lightning main logical processing.
-    - `send-kv-pairs`: The number of Key-Value pairs sent by TiDB Lightning to TiKV in a single request.
+    - `send-kv-pairs`: The number of Key-Value pairs sent by TiDB Lightning to TiKV in a single request. 
     - `disk-quota`: The disk quota used by TiDB Lightning local temp files when using Physical Import Mode
     - `GOMEMLIMIT`: TiDB Lightning is implemented in the Go language. Configure GOMEMLIMIT properly.
 
@@ -63,7 +63,7 @@ When you import data, there are some key factors that can affect import performa
 
     During the actual process of importing 50 TB of data, certain issues might occur that are only exposed when dealing with a massive number of source files and large-scale clusters. When choosing a product version, it is recommended to check whether the corresponding issues have been fixed.
 
-    The following issues have been resolved in versions v6.5.3, v7.1, and later versions:
+    The following issues have been resolved in versions v6.5.3, v7.1.0, and later versions:
 
     - [Issue-14745](https://github.com/tikv/tikv/issues/14745): After the import is completed, a large number of temporary files are left in the TiKV import directory.
     - [Issue-6426](https://github.com/tikv/pd/issues/6426): The PD [range scheduling](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#scope-of-pausing-scheduling-during-import) interface might fail to scatter regions, resulting in timeout issues. Before v6.2.0, global scheduling is disabled by default, which can avoid triggering this problem.
@@ -89,9 +89,9 @@ Note that it is recommended to reserve 20% of storage space, as background tasks
 ## Change configuration parameters
 
 - `region-concurrency`: The concurrency of TiDB Lightning main logical processing. During parallel importing, it is recommended to set it to 75% of the CPU cores to prevent resource overload and potential OOM issues.
-- `send-kv-pairs`: The number of Key-Value pairs sent by TiDB Lightning to TiKV in a single request. It is recommended to adjust this value based on the formula send-kv-pairs * row-size < 1 MB (In version 7.2, this parameter is replaced by `send-kv-size`, and no additional setting is required).
+- `send-kv-pairs`: The number of Key-Value pairs sent by TiDB Lightning to TiKV in a single request. It is recommended to adjust this value based on the formula send-kv-pairs * row-size < 1 MB. Starting from v7.2.0, this parameter is replaced by `send-kv-size`, and no additional setting is required.
 - `GOMEMLIMIT`: TiDB Lightning is implemented in the Go language. Setting GOMEMLIMIT to 80% of the instance memory to reduce the probability of OOM caused by the Go GC mechanism.
-- `disk-quota`: It is advisable to ensure that the sorting directory space of TiDB Lightning is larger than the size of the data source. Otherwise, disk-quota can be set to 80% of the sorting directory space of TiDB Lightning. In this case, TiDB Lightning will sort and write data in batches based on the disk-quota, but the import performance will be lower than complete sorting.
+- `disk-quota`: It is advisable to ensure that the sorting directory space of TiDB Lightning is larger than the size of the data source. Otherwise, `disk-quota` can be set to 80% of the sorting directory space of TiDB Lightning. In this case, TiDB Lightning will sort and write data in batches based on the `disk-quota`, but the import performance will be lower than complete sorting.
 
 For more information about TiDB Lightning parameters, see [TiDB Lightning configuration parameters](/tidb-lightning/tidb-lightning-configuration.md).
 
@@ -131,13 +131,13 @@ Prepare TiDB Lightning based on 5 TB to 10 TB of source data per instance. Deplo
 ### Change configuration parameters
 
 - Set `region-concurrency` to 75% of the number of cores of the TiDB Lightning instance.
-- Set `send-kv-pairs` to 3200.
+- Set `send-kv-pairs` to `3200`. This method applies to TiDB v7.1.0 and earlier versions. Starting from v7.2.0, this parameter is replaced by `send-kv-size`, and no additional setting is required.
 - Adjust `GOMEMLIMIT` to 80% of the memory on the node where the instance is located.
 
 If during the import process, PD Scatter Region latency exceeds 30 minutes, consider the following optimizations:
 
 - Check if the TiKV cluster encounters any IO bottlenecks.
-- Increase TiKV `raftstore.apply-pool-size` from the default value of 2 to 4 or 8.
+- Increase TiKV `raftstore.apply-pool-size` from the default value of `2` to `4` or `8`.
 - Reduce TiDB Lightning `region-split-concurrency` to half the number of CPU cores, with a minimum value of 1.
 
 ### Disable execution plan
