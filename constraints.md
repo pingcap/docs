@@ -52,7 +52,7 @@ Query OK, 1 row affected (0.03 sec)
 
 ## CHECK
 
-A `CHECK` constraint is used to restrict the values of a field in a table to meet your specified conditions. When the `CHECK` constraint is added to a table, TiDB checks whether the constraint is satisfied during the insertion or updates of data into the table. If the constraint is not met, an error is returned.
+A `CHECK` constraint restricts the values of a column in a table to meet your specified conditions. When the `CHECK` constraint is added to a table, TiDB checks whether the constraint is satisfied during the insertion or updates of data into the table. If the constraint is not met, an error is returned.
 
 The syntax for the `CHECK` constraint in TiDB is the same as that in MySQL:
 
@@ -83,7 +83,7 @@ In TiDB, you can add a `CHECK` constraint to a table using either the [`CREATE T
     ALTER TABLE t ADD CONSTRAINT CHECK (1 < c);
     ```
 
-When adding or enabling a `CHECK` constraint, TiDB validates the existing data in the table. If any data violates the constraint, the operation of adding the `CHECK` constraint will fail and return an error.
+When adding or enabling a `CHECK` constraint, TiDB checks the existing data in the table. If any data violates the constraint, the operation of adding the `CHECK` constraint will fail and return an error.
 
 When adding a `CHECK` constraint, you can either specify a constraint name or leave the name unspecified. If no constraint name is specified, TiDB automatically generates a constraint name in the `<tableName>_chk_<1, 2, 3...>` format.
 
@@ -120,8 +120,8 @@ ALTER TABLE t DROP CONSTRAINT t_chk_1;
 
 When [adding a `CHECK` constraint](#add-check-constraints) to a table, you can specify whether TiDB needs to implement the constraint check during data insertion or updates.
 
-- If `NOT ENFORCED` is specified, TiDB does not validate the constraint conditions during data insertion or updates.
-- If `NOT ENFORCED` is not specified or `ENFORCED` is specified, TiDB validates the constraint conditions during data insertion or updates.
+- If `NOT ENFORCED` is specified, TiDB does not check the constraint conditions during data insertion or updates.
+- If `NOT ENFORCED` is not specified or `ENFORCED` is specified, TiDB checks the constraint conditions during data insertion or updates.
 
 In addition to specifying `[NOT] ENFORCED` when adding the constraint, you can also enable or disable a `CHECK` constraint using the `ALTER TABLE` statement. For example:
 
