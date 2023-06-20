@@ -15,7 +15,7 @@ This TiDB statement is not applicable to TiDB Cloud.
 
 ## Required privileges
 
-- `SHOW IMPORT JOBS`: if a user has the `SUPER` privilege, this statement shows all import jobs in TiDB. Otherwise, the statement only shows jobs created by the current user.
+- `SHOW IMPORT JOBS`: if a user has the `SUPER` privilege, this statement shows all import jobs in TiDB. Otherwise, this statement only shows jobs created by the current user.
 - `SHOW IMPORT JOB <job-id>`: only the creator of an import job or users with the `SUPER` privilege can use this statement to view a specific job.
 
 ## Synopsis
