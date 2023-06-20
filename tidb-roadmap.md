@@ -264,7 +264,6 @@ You might have been waiting on some items from the last version. The following l
 - Fastest online `ADD INDEX` (GA)
 - TiFlash late materialization (GA)
 - TiFlash supports spill to disk (GA)
-- SQL-based data import (GA)
 - LDAP authentication
 - SQL audit log enhancement (Enterprise-only)
 - Partitioned Raft KV storage engine (experimental)
