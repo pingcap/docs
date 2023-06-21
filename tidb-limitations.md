@@ -62,17 +62,7 @@ You can adjust the size limit via the [`txn-entry-size-limit`](/tidb-configurati
 
 </CustomContent>
 
-<<<<<<< HEAD
-## Limitation on a single column
-
-| Type       | Upper limit   |
-|:----------|:----------|
-| Size       | 6 MB       |
-
 ## Limitations on string types
-=======
-## Limitations on data types
->>>>>>> 5bdc60885 (*: remove the limit on single column data size (#13949))
 
 | Type       | Upper limit   |
 |:----------|:----------|
