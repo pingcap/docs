@@ -46,7 +46,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
 
     The [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) statement is used to check the consistency between data in a table and its corresponding indexes. In v7.2.0, TiDB optimizes the method for checking data consistency and improves the execution efficiency of [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) greatly. In scenarios with large amounts of data, this optimization can provide a performance boost of hundreds of times.
 
-    The optimization is enabled by default ([`tidb_enable_fast_table_check`](/system-variables.md#tidb_enable_fast_table_check-new-in-v720) is `ON` by default) to greatly reduce the time required for data consistency checks in large-scale table and enhance operational efficiency.
+    The optimization is enabled by default ([`tidb_enable_fast_table_check`](/system-variables.md#tidb_enable_fast_table_check-new-in-v720) is `ON` by default) to greatly reduce the time required for data consistency checks in large-scale tables and enhance operational efficiency.
 
     For more information, see [documentation](/system-variables.md#tidb_enable_fast_table_check-new-in-v720).
 
@@ -89,7 +89,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
 
     Starting from v7.2.0, you can use `CHECK` constraints to restrict the values of one or more columns in a table to meet your specified conditions. When a `CHECK` constraint is added to a table, TiDB checks whether the constraint is satisfied before inserting or updating data in the table. Only the data that satisfies the constraint can be written.
 
-    For more information, please refer to the [user documentation](/constraints.md#check-constraints).
+    For more information, see [documentation](/constraints.md#check-constraints).
 
 ### DB operations
 
@@ -116,13 +116,13 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.1/quick-start-with-
 
     For data files stored in Amazon S3 or GCS, when the [Backend task distributed execution framework](/tidb-distributed-execution-framework.md) is enabled, `IMPORT INTO` also supports splitting the data import task into multiple sub-tasks and scheduling them to multiple TiDB nodes for parallel import, which further enhances import performance.
 
-    For more information, see the [documentation](sql-statements/sql-statement-import-into.md).
+    For more information, see [documentation](sql-statements/sql-statement-import-into.md).
 
 * TiDB Lightning supports importing source files with the Latin-1 character set into TiDB [#44434](https://github.com/pingcap/tidb/issues/44434) @[lance6716](https://github.com/lance6716) **tw@qiancai** <!--1432-->
 
     With this feature, you can directly import source files with the Latin-1 character set into TiDB via TiDB Lightning. Before v7.2.0, importing such files requires your additional preprocessing or conversion. Starting from v7.2.0, you only need to specify `character-set = "latin1"` when configuring the TiDB Lightning import task. Then, TiDB Lightning will automatically handle the character set conversion during the import process to ensure data integrity and accuracy.
 
-    For more information, see the [documentation](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task).
+    For more information, see [documentation](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task).
 
 ## Compatibility changes
 
