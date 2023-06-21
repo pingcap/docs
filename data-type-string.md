@@ -53,7 +53,7 @@ TINYTEXT [CHARACTER SET charset_name] [COLLATE collation_name]
 
 ### `MEDIUMTEXT` type
 
-The `MEDIUMTEXT` type is similar to the [`TEXT` type](#text-type). The difference is that the maximum column length of `MEDIUMTEXT` is 16,777,215. But due to the [Limitation on a single column in TiDB](/tidb-limitations.md#limitation-on-a-single-column), the maximum storage size of a single column in TiDB is 6 MiB by default and can be increased to 120 MiB by changing the configuration.
+The `MEDIUMTEXT` type is similar to the [`TEXT` type](#text-type). The difference is that the maximum column length of `MEDIUMTEXT` is 16,777,215. But due to the limitation of [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50), the maximum storage size of a single row in TiDB is 6 MiB by default and can be increased to 120 MiB by changing the configuration.
 
 ```sql
 MEDIUMTEXT [CHARACTER SET charset_name] [COLLATE collation_name]
@@ -61,7 +61,7 @@ MEDIUMTEXT [CHARACTER SET charset_name] [COLLATE collation_name]
 
 ### `LONGTEXT` type
 
-The `LONGTEXT` type is similar to the [`TEXT` type](#text-type). The difference is that the maximum column length of `LONGTEXT` is 4,294,967,295. But due to the [Limitation on a single column in TiDB](/tidb-limitations.md#limitation-on-a-single-column), the maximum storage size of a single column in TiDB is 6 MiB by default and can be increased to 120 MiB by changing the configuration.
+The `LONGTEXT` type is similar to the [`TEXT` type](#text-type). The difference is that the maximum column length of `LONGTEXT` is 4,294,967,295. But due to the limitation of [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50), the maximum storage size of a single row in TiDB is 6 MiB by default and can be increased to 120 MiB by changing the configuration.
 
 ```sql
 LONGTEXT [CHARACTER SET charset_name] [COLLATE collation_name]
@@ -101,7 +101,7 @@ TINYBLOB
 
 ### `MEDIUMBLOB` type
 
-The `MEDIUMBLOB` type is similar to the [`BLOB` type](#blob-type). The difference is that the maximum column length of `MEDIUMBLOB` is 16,777,215. But due to the [Limitation on a single column in TiDB](/tidb-limitations.md#limitation-on-a-single-column), the maximum storage size of a single column in TiDB is 6 MiB by default and can be increased to 120 MiB by changing the configuration.
+The `MEDIUMBLOB` type is similar to the [`BLOB` type](#blob-type). The difference is that the maximum column length of `MEDIUMBLOB` is 16,777,215. But due to the limitation of [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50), the maximum storage size of a single row in TiDB is 6 MiB by default and can be increased to 120 MiB by changing the configuration.
 
 ```sql
 MEDIUMBLOB
@@ -109,7 +109,7 @@ MEDIUMBLOB
 
 ### `LONGBLOB` type
 
-The `LONGBLOB` type is similar to the [`BLOB` type](#blob-type). The difference is that the maximum column length of `LONGBLOB` is 4,294,967,295. But due to the [Limitation on a single column in TiDB](/tidb-limitations.md#limitation-on-a-single-column), the maximum storage size of a single column in TiDB is 6 MiB by default and can be increased to 120 MiB by changing the configuration.
+The `LONGBLOB` type is similar to the [`BLOB` type](#blob-type). The difference is that the maximum column length of `LONGBLOB` is 4,294,967,295. But due to the limitation of [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50), the maximum storage size of a single row in TiDB is 6 MiB by default and can be increased to 120 MiB by changing the configuration.
 
 ```sql
 LONGBLOB
