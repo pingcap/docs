@@ -77,8 +77,8 @@ When you import data, there are some key factors that can affect import performa
 
 - When generating source files, within a single file, it is preferable to sort them by the primary key. If the table definition does not have a primary key, you can add an auto-increment primary key. In this case, the order of the file content does not matter.
 - When assigning source files to multiple TiDB Lightning instances, try to avoid the situation where there are overlapping primary keys or non-null unique indexes between multiple source files. If the generated files are globally sorted, they can be distributed into different TiDB Lightning instances based on ranges to achieve optimal import performance.
-- Control each file to be less than 96 MB in size during file generation.
-- If a file is exceptionally large and exceeds 256 MB, enable [strict-format](/migrate-from-csv-files-to-tidb.md#step-4-tune-the-import-performance-optional).
+- Control each file to be less than 96 MiB in size during file generation.
+- If a file is exceptionally large and exceeds 256 MiB, enable [strict-format](/migrate-from-csv-files-to-tidb.md#step-4-tune-the-import-performance-optional).
 
 ## Estimate storage space
 
@@ -145,7 +145,9 @@ If during the import process, PD Scatter Region latency exceeds 30 minutes, cons
 
 ### Disable execution plan
 
-In the case of a large single table (for example, with over 1 billion rows and more than 50 columns), it is recommended to disable the analyze operation (`analyze="off"`) during the import process, and manually execute the [ANALYZE TABLE](/sql-statements//sql-statement-analyze-table.md#analyze) statement after the import is completed.
+In the case of a large single table (for example, with over 1 billion rows and more than 50 columns), it is recommended to disable the `analyze` operation (`analyze="off"`) during the import process, and manually execute the [ANALYZE TABLE](/sql-statements//sql-statement-analyze-table.md#analyze) statement after the import is completed.
+
+For more information about the configuration of `analyze`, see [TiDB Lightning (Task)](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task).
 
 ## Troubleshooting
 
