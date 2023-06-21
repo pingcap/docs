@@ -267,10 +267,10 @@ You can get more information about runaway queries from the following system tab
             tidb_server: 127.0.0.1:4000
     ```
 
-    In which `match_type` indicates how the runaway query is identified. The value can one of the following:
+    In which `match_type` indicates how the runaway query is identified. The value can be one of the following:
 
     - `identify` means that it matches the condition of the runaway query.
-    - `watch` means that it matches the watch rules and is put into the watch list.
+    - `watch` means that it matches the watch rule in the watch list.
 
 + The `mysql.tidb_runaway_quarantined_watch` table contains the watch rule records for runaway queries. Take two of these rows as examples:
 
