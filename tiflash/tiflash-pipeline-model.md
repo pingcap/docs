@@ -93,7 +93,7 @@ The architecture of the pipeline model is as follows:
 
 As shown in the preceding figure, the pipeline model consists of two main components: the pipeline query executor and the task scheduler.
 
-- Pipeline query executor
+- The pipeline query executor
 
     The pipeline query executor converts the query request sent from the TiDB node into a pipeline dag.
 
