@@ -254,7 +254,7 @@ The parameters of `QUERY_LIMIT` are as follows:
 
 You can get more information about runaway queries from the following system tables:
 
-+ The `mysql.tidb_runaway_queries` table contains the history of all runaway queries identified in the past certain period of time. Take one of the rows as an example:
++ The `mysql.tidb_runaway_queries` table contains the history records of all runaway queries identified in the past 7 days. Take one of the rows as an example:
 
     ```sql
     MySQL [(none)]> SELECT * FROM mysql.tidb_runaway_queries LIMIT 1\G;
