@@ -34,7 +34,7 @@ When you import data, there are some key factors that can affect import performa
 - Source files
 
     - Whether the data within a single file is sorted by the primary key. Sorted data can achieve optimal import performance.
-    - Whether there are overlapping primary keys or non-null unique indexes between source files imported by multiple TiDB Lightning instances. The smaller the overlap, the better the import performance.
+    - Whether there are overlapping primary keys or non-null unique indexes between source files imported by multiple TiDB Lightning instances. The smaller the overlap is, the better the import performance.
 
 - Table definitions
 
@@ -102,7 +102,7 @@ For more information about TiDB Lightning parameters, see [TiDB Lightning config
 
 Conflicts might occur during data validation. The error message is "checksum mismatch". To resolve this issue, take the following steps:
 
-1. In the source data, check for conflicted primary keys or unique keys and resolve the conflicts before reimporting. In most cases, this is the most common cause.
+1. In the source data, check for conflicted primary keys or unique keys, and resolve the conflicts before reimporting. In most cases, this is the most common cause.
 2. Check if the table primary key or unique key definition is reasonable. If not, modify the table definition and reimport.
 3. Enable [conflict detection](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#conflict-detection).
 
@@ -110,13 +110,13 @@ This feature assumes that there is a small number (less than 10%) of unexpected 
 
 ## Enable checkpoint
 
-For importing a large volume of data, it is essential to refer to the [Lightning Checkpoints](/tidb-lightning/tidb-lightning-checkpoints.md) documentation and enable checkpoints. It is recommended to prioritize using MySQL as the driver to avoid losing the checkpoint information if TiDB Lightning is running in a container environment and the container might exit and delete the checkpoint information.
+For importing a large volume of data, it is essential to refer to the [Lightning Checkpoints](/tidb-lightning/tidb-lightning-checkpoints.md) documentation and enable checkpoints. It is recommended to prioritize using MySQL as the driver to avoid losing the checkpoint information if TiDB Lightning is running in a container environment where the container might exit and delete the checkpoint information.
 
 If you encounter insufficient space in downstream TiKV during import, you can manually run the `kill` command (without the `-9` option) all TiDB Lightning instances. After scaling up the capacity, you can resume the import based on the checkpoint information.
 
 ## Best practices for importing a large single table
 
-Importing multiple tables can increase the time required for checksum and analyze operations, sometimes exceeding the time required for data import itself. However, in general, it is not necessary to adjust the configuration. If there are one or more large tables among the multiple tables, it is recommended to separate the source files of these large tables and import them separately.
+Importing multiple tables can increase the time required for checksum and analyze operations, sometimes exceeding the time required for data import itself. However, it is generally not necessary to adjust the configuration. If there are one or more large tables among the multiple tables, it is recommended to separate the source files of these large tables and import them separately.
 
 This section focuses on the best practices for importing large single tables. There is no strict definition for a large single table, but it is generally considered to meet one of the following criteria:
 
@@ -125,11 +125,11 @@ This section focuses on the best practices for importing large single tables. Th
 
 ### Prepare source files
 
-Follow the steps outlined in the [Prepare source files](#prepare-source-files). For a large single table, if global sorting is not achievable but sorting within each file based on the primary key is possible, and the file is a standard CSV file, it is recommended to generate a large single file with each around 20 GB. Then, enable `strict-format`. This approach reduces the overlap of primary and unique keys in the imported files between TiDB Lightning instances, and TiDB Lightning instances can split the large files before importing to achieve optimal import performance.
+Follow the steps outlined in the [Prepare source files](#prepare-source-files). For a large single table, if global sorting is not achievable but sorting within each file based on the primary key is possible, and the file is a standard CSV file, it is recommended to generate large single files with each around 20 GiB. Then, enable `strict-format`. This approach reduces the overlap of primary and unique keys in the imported files between TiDB Lightning instances, and TiDB Lightning instances can split the large files before importing to achieve optimal import performance.
 
 ### Plan cluster topology
 
-Prepare TiDB Lightning based on 5 TiB to 10 TiB of source data per instance. Deploy one TiDB Lightning instance on each node. The specifications of the nodes can be based on the [Environment of TiDB Lightning instance](/tidb-lightning/tidb-lightning-physical-import-mode.md#environment-requirements).
+Prepare TiDB Lightning instances to make each instance process 5 TiB to 10 TiB of source data. Deploy one TiDB Lightning instance on each node. The specifications of the nodes can be based on the [Environment of TiDB Lightning instance](/tidb-lightning/tidb-lightning-physical-import-mode.md#environment-requirements).
 
 ### Change configuration parameters
 
@@ -145,7 +145,7 @@ If during the import process, PD Scatter Region latency exceeds 30 minutes, cons
 
 ### Disable execution plan
 
-In the case of a large single table (for example, with over 1 billion rows and more than 50 columns), it is recommended to turn off the analyze operation (`analyze="off"`) during the import process and manually execute the [ANALYZE TABLE](/sql-statements//sql-statement-analyze-table.md#analyze) statement after the import is completed.
+In the case of a large single table (for example, with over 1 billion rows and more than 50 columns), it is recommended to disable the analyze operation (`analyze="off"`) during the import process, and manually execute the [ANALYZE TABLE](/sql-statements//sql-statement-analyze-table.md#analyze) statement after the import is completed.
 
 ## Troubleshooting
 
