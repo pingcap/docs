@@ -62,16 +62,7 @@ MEDIUMTEXT [CHARACTER SET charset_name] [COLLATE collation_name]
 
 ### `LONGTEXT` type
 
-<CustomContent platform="tidb">
-
-The `LONGTEXT` type is similar to the [`TEXT` type](#text-type). The difference is that the maximum column length of `LONGTEXT` is 4,294,967,295. But due to the limitation of [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50), the maximum storage size of a single row in TiDB is 6 MiB by default and can be increased to 120 MiB by changing the configuration.
-
-</CustomContent>
-<CustomContent platform="tidb-cloud">
-
-The `LONGTEXT` type is similar to the [`TEXT` type](#text-type). The difference is that the maximum column length of `LONGTEXT` is 4,294,967,295. But due to the limitation of [`txn-entry-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-entry-size-limit-new-in-v50), the maximum storage size of a single row in TiDB is 6 MiB by default and can be increased to 120 MiB by changing the configuration.
-
-</CustomContent>
+The `LONGTEXT` type is similar to the [`TEXT` type](#text-type). The difference is that the maximum column length of `LONGTEXT` is 4,294,967,295. But due to the [Limitation on a single row in TiDB](/tidb-limitations.md#limitation-on-a-single-row), the maximum storage size of a single row in TiDB is 6 MB.
 
 ```sql
 LONGTEXT [CHARACTER SET charset_name] [COLLATE collation_name]
@@ -119,16 +110,7 @@ MEDIUMBLOB
 
 ### `LONGBLOB` type
 
-<CustomContent platform="tidb">
-
-The `LONGBLOB` type is similar to the [`BLOB` type](#blob-type). The difference is that the maximum column length of `LONGBLOB` is 4,294,967,295. But due to the limitation of [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50), the maximum storage size of a single row in TiDB is 6 MiB by default and can be increased to 120 MiB by changing the configuration.
-
-</CustomContent>
-<CustomContent platform="tidb-cloud">
-
-The `LONGBLOB` type is similar to the [`BLOB` type](#blob-type). The difference is that the maximum column length of `LONGBLOB` is 4,294,967,295. But due to the limitation of [`txn-entry-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-entry-size-limit-new-in-v50), the maximum storage size of a single row in TiDB is 6 MiB by default and can be increased to 120 MiB by changing the configuration.
-
-</CustomContent>
+The `LONGTEXT` type is similar to the [`TEXT` type](#text-type). The difference is that the maximum column length of `LONGTEXT` is 4,294,967,295. But due to the [Limitation on a single row in TiDB](/tidb-limitations.md#limitation-on-a-single-row), the maximum storage size of a single row in TiDB is 6 MB.
 
 ```sql
 LONGBLOB
