@@ -1,17 +1,17 @@
 ---
-title: Best Practices for Importing 50 TB Data
+title: Best Practices for Importing 50 TiB Data
 summary: Based on the experience of importing large single tables in the past, this article summarizes best practices, hoping to help you sucessfully import large data volumes and large single tables.
 ---
 
-# Best Practices for Importing 50 TB Data
+# Best Practices for Importing 50 TiB Data
 
 TiDB Lightning ([Physical Import Mode](/tidb-lightning/tidb-lightning-physical-import-mode.md)) is a comprehensive and efficient data import tool used for importing data into empty tables and initializing empty clusters, and uses files as the data source. TiDB Lightning provides two running modes: a single instance and [parallel import](/tidb-lightning/tidb-lightning-distributed-import.md). You can import source files of different sizes.
 
-- If the data scale of the source files is within 10 TB, it is recommended to use a single instance of TiDB Lightning for the import.
-- If the data scale of the source files exceeds 10 TB, it is recommended to use multiple instances of TiDB Lightning for [Parallel Import](/tidb-lightning/tidb-lightning-distributed-import.md).
-- If the source file data scale is exceptionally large ( larger than 50 TB), in addition to parallel importing, you need to make certain preparations and optimizations based on the characteristics of the source data, table definitions, and parameter configurations to achieve better and faster completion of large-scale data import.
+- If the data scale of the source files is within 10 TiB, it is recommended to use a single instance of TiDB Lightning for the import.
+- If the data scale of the source files exceeds 10 TiB, it is recommended to use multiple instances of TiDB Lightning for [Parallel Import](/tidb-lightning/tidb-lightning-distributed-import.md).
+- If the source file data scale is exceptionally large ( larger than 50 TiB), in addition to parallel importing, you need to make certain preparations and optimizations based on the characteristics of the source data, table definitions, and parameter configurations to achieve better and faster completion of large-scale data import.
 
-This article introduces some key factors and steps that affect TiDB Lightning data import. We have successfully imported large single table data over 50 TB into both the internal environment and customer site, and have accumulated these best practices based on these real application scenarios. These best practices can help you import large datasets successfully.
+This article introduces some key factors and steps that affect TiDB Lightning data import. We have successfully imported large single table data over 50 TiB into both the internal environment and customer site, and have accumulated these best practices based on these real application scenarios. These best practices can help you import large datasets successfully.
 
 The following sections in this article apply to both importing multiple tables and importing large single tables:
 
@@ -34,7 +34,7 @@ When you import data, there are some key factors that can affect import performa
 - Source files
 
     - Whether the data within a single file is sorted by the primary key. Sorted data can achieve optimal import performance.
-    - Whether there is overlap in the content of source files across TiDB Lightning instances. The smaller the overlap, the better the import performance.
+    - Whether there are overlapping primary keys or non-null unique indexes between source files imported by multiple TiDB Lightning instances. The smaller the overlap, the better the import performance.
 
 - Table definitions
 
@@ -64,7 +64,7 @@ When you import data, there are some key factors that can affect import performa
 
 - Relevant issues
 
-    During the actual process of importing 50 TB of data, certain issues might occur that are only exposed when dealing with a massive number of source files and large-scale clusters. When choosing a product version, it is recommended to check whether the corresponding issues have been fixed.
+    During the actual process of importing 50 TiB of data, certain issues might occur that are only exposed when dealing with a massive number of source files and large-scale clusters. When choosing a product version, it is recommended to check whether the corresponding issues have been fixed.
 
     The following issues have been resolved in v6.5.3, v7.1.0, and later versions:
 
@@ -76,7 +76,7 @@ When you import data, there are some key factors that can affect import performa
 ## Prepare source files
 
 - When generating source files, within a single file, it is preferable to sort them by the primary key. If the table definition does not have a primary key, you can add an auto-increment primary key. In this case, the order of the file content does not matter.
-- When multiple TiDB Lightning instances are partitioning the source files, it is advisable to minimize overlap of primary keys. If the generated files are globally sorted, they can be distributed into different TiDB Lightning instances based on ranges to achieve optimal import performance.
+- When assigning source files to multiple TiDB Lightning instances, try to avoid the situation where there are overlapping primary keys or non-null unique indexes between multiple source files. If the generated files are globally sorted, they can be distributed into different TiDB Lightning instances based on ranges to achieve optimal import performance.
 - Control each file to be less than 96 MB in size during file generation.
 - If a file is exceptionally large and exceeds 256 MB, enable [strict-format](/migrate-from-csv-files-to-tidb.md#step-4-tune-the-import-performance-optional).
 
@@ -120,16 +120,16 @@ Importing multiple tables can increase the time required for checksum and analyz
 
 This section focuses on the best practices for importing large single tables. There is no strict definition for a large single table, but it is generally considered to meet one of the following criteria:
 
-- The table size exceeds 10 TB.
+- The table size exceeds 10 TiB.
 - The number of rows exceeds 1 billion and the number of columns exceeds 50 in a wide table.
 
 ### Prepare source files
 
-Follow the steps outlined in the [Prepare source files](#prepare-source-files). For a large single table, if global sorting is not achievable but sorting within each file based on the primary key is possible, and the file is a standard CSV file, it is recommended to generate a large single file with each around 20 GB. Then, enable `strict-format`. This approach reduces overlap between TiDB Lightning instances and allows TiDB Lightning to split the file before import, resulting in optimal import speed.
+Follow the steps outlined in the [Prepare source files](#prepare-source-files). For a large single table, if global sorting is not achievable but sorting within each file based on the primary key is possible, and the file is a standard CSV file, it is recommended to generate a large single file with each around 20 GB. Then, enable `strict-format`. This approach reduces the overlap of primary and unique keys in the imported files between TiDB Lightning instances, and TiDB Lightning instances can split the large files before importing to achieve optimal import performance.
 
 ### Plan cluster topology
 
-Prepare TiDB Lightning based on 5 TB to 10 TB of source data per instance. Deploy one TiDB Lightning instance on each node. The specifications of the nodes can be based on the [Environment of TiDB Lightning instance](/tidb-lightning/tidb-lightning-physical-import-mode.md#environment-requirements).
+Prepare TiDB Lightning based on 5 TiB to 10 TiB of source data per instance. Deploy one TiDB Lightning instance on each node. The specifications of the nodes can be based on the [Environment of TiDB Lightning instance](/tidb-lightning/tidb-lightning-physical-import-mode.md#environment-requirements).
 
 ### Change configuration parameters
 
