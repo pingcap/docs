@@ -313,4 +313,15 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.2/quick-start-with-
 
 We would like to thank the following contributors from the TiDB community:
 
-- [贡献者 GitHub ID](链接)
+- [asjdf](https://github.com/asjdf)
+- [blacktear23](https://github.com/blacktear23)
+- [Cavan-xu](https://github.com/Cavan-xu)
+- [darraes](https://github.com/darraes)
+- [demoManito](https://github.com/demoManito)
+- [dhysum](https://github.com/dhysum)
+- [HappyUncle](https://github.com/HappyUncle)
+- [jiyfhust](https://github.com/jiyfhust)
+- [L-maple](https://github.com/L-maple)
+- [nyurik](https://github.com/nyurik)
+- [SeigeC](https://github.com/SeigeC)
+- [tangjingyu97](https://github.com/tangjingyu97)
