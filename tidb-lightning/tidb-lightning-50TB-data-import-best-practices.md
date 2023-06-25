@@ -7,8 +7,8 @@ summary: Based on the experience of importing large single tables in the past, t
 
 TiDB Lightning ([Physical Import Mode](/tidb-lightning/tidb-lightning-physical-import-mode.md)) is a comprehensive and efficient data import tool used for importing data into empty tables and initializing empty clusters, and uses files as the data source. TiDB Lightning provides two running modes: a single instance and [parallel import](/tidb-lightning/tidb-lightning-distributed-import.md). You can import source files of different sizes.
 
-- If the data scale of the source files is within 10 TiB, it is recommended to use a single instance of TiDB Lightning for the import.
-- If the data scale of the source files exceeds 10 TiB, it is recommended to use multiple instances of TiDB Lightning for [Parallel Import](/tidb-lightning/tidb-lightning-distributed-import.md).
+- If the data size of the source files is within 10 TiB, it is recommended to use a single instance of TiDB Lightning for the import.
+- If the data size of the source files exceeds 10 TiB, it is recommended to use multiple instances of TiDB Lightning for [Parallel Import](/tidb-lightning/tidb-lightning-distributed-import.md).
 - If the source file data scale is exceptionally large ( larger than 50 TiB), in addition to parallel importing, you need to make certain preparations and optimizations based on the characteristics of the source data, table definitions, and parameter configurations to achieve better and faster completion of large-scale data import.
 
 This article introduces some key factors and steps that affect TiDB Lightning data import. We have successfully imported large single table data over 50 TiB into both the internal environment and customer site, and have accumulated these best practices based on these real application scenarios. These best practices can help you import large datasets successfully.
@@ -104,9 +104,7 @@ Conflicts might occur during data validation. The error message is "checksum mis
 
 1. In the source data, check for conflicted primary keys or unique keys, and resolve the conflicts before reimporting. In most cases, this is the most common cause.
 2. Check if the table primary key or unique key definition is reasonable. If not, modify the table definition and reimport.
-3. Enable [conflict detection](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#conflict-detection).
-
-This feature assumes that there is a small number (less than 10%) of unexpected conflicting data in the source data and requires TiDB Lightning to detect and resolve the conflicts.
+3. Enable [conflict detection](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#conflict-detection). Perform this operation if after going through the above two steps of investigation, there is a small number (less than 10%) of unexpected conflicting data in the source data, and it requires TiDB Lightning to detect and resolve these conflicts.
 
 ## Enable checkpoint
 
