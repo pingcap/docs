@@ -9,6 +9,10 @@ summary: An overview of the usage of ADMIN PAUSE DDL for the TiDB database.
 
 You can use this statement to pause a DDL job that is committed but not yet completed executing. After the pause, the SQL statement that executes the DDL job does not return immediately, but looks like it is still running. If you try to pause a DDL job that has already been completed, you will see the `DDL Job:90 not found` error in the `RESULT` column, which indicates that the job has been removed from the DDL waiting queue.
 
+> **Warning:**
+>
+> This feature is an experimental feature. It is not recommended that you use it in the production environment. This feature might be changed or removed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+
 ## Synopsis
 
 ```ebnf+diagram
