@@ -205,7 +205,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.2/quick-start-with-
 
     + Backup & Restore (BR) <!--**tw@hfxsd**-->
 
-        - 为外部存储 Azure Blob Storage 提供 SAS (shared access signature) 的访问方式 [#44199](https://github.com/pingcap/tidb/issues/44199) @[Leavrth](https://github.com/Leavrth)
+        - Support access to Azure Blob Storage by shared access signature (SAS) [#44199](https://github.com/pingcap/tidb/issues/44199) @[Leavrth](https://github.com/Leavrth)
 
     + TiCDC <!--**tw@hfxsd**-->
 
