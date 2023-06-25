@@ -7,7 +7,7 @@ summary: An overview of the usage of ADMIN PAUSE DDL JOBS for the TiDB database.
 
 `ADMIN PAUSE DDL` allows you to pause a running DDL job. The `job_id` can be found by running [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md).
 
-You can use this statement to pause a DDL job that is committed but not yet completed executing. After the pause, the SQL statement that executes the DDL job does not return immediately, but looks like it is still running. If you try to pause a DDL job that has already been completed, you will see the `DDL Job:90 not found` error in the `RESULT` column, which indicates that the job has been removed from the DDL waiting queue.
+You can use this statement to pause a DDL job that is issued but not yet completed executing. After the pause, the SQL statement that executes the DDL job does not return immediately, but looks like it is still running. If you try to pause a DDL job that has already been completed, you will see the `DDL Job:90 not found` error in the `RESULT` column, which indicates that the job has been removed from the DDL waiting queue.
 
 > **Warning:**
 >
