@@ -216,7 +216,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.2/quick-start-with-
 
     + TiDB Data Migration (DM)
 
-        - Support MySQL 8.0 compressed binlogs [#6381](https://github.com/pingcap/tiflow/issues/6381) @[dveeden](https://github.com/dveeden)
+        - Support using MySQL 8.0 to compress binlogs [#6381](https://github.com/pingcap/tiflow/issues/6381) @[dveeden](https://github.com/dveeden)
 
     + TiDB Lightning
 
