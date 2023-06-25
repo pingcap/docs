@@ -571,7 +571,7 @@ Configuration items related to the I/O rate limiter.
 
 ### `retry-interval`
 
-+ The interval for retrying to initialize the PD connection
++ The interval for retrying the PD connection.
 + Default value: `"300ms"`
 
 ### `retry-log-every`
