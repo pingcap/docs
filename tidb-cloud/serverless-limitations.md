@@ -64,7 +64,6 @@ We are constantly filling in the feature gaps between TiDB Serverless and TiDB D
 - Total size of a single transaction is set to no more than XX MB
 - [Limited SQL features](/tidb-cloud/limited-sql-features.md) for more details about SQL limitations.
 
-
 ## Usage quota
 
 For each organization in TiDB Cloud, you can create a maximum of five TiDB Serverless clusters by default. To create more TiDB Serverless clusters, you need to add a credit card and set a [spend limit](/tidb-cloud/tidb-cloud-glossary.md#spend-limit) for the usage.
