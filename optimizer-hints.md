@@ -408,18 +408,6 @@ SELECT /*+ NTH_PLAN(3) */ count(*) from t where a > 5;
 > **Note:**
 >
 > `NTH_PLAN(N)` is mainly used for testing, and its compatibility is not guaranteed in later versions. Use this hint **with caution**.
-<<<<<<< HEAD
-=======
-
-### RESOURCE_GROUP(resource_group_name)
-
-`RESOURCE_GROUP(resource_group_name)` is used for [Resource Control](/tidb-resource-control.md) to isolate resources. This hint temporarily executes the current statement using the specified resource group. If the specified resource group does not exist, this hint will be ignored.
-
-Example:
-
-```sql
-SELECT /*+ RESOURCE_GROUP(rg1) */ * FROM t limit 10;
-```
 
 ## Troubleshoot common issues that hints do not take effect
 
@@ -575,4 +563,3 @@ EXPLAIN SELECT /*+ leading(t1, t3), inl_join(t3) */ * FROM t1, t2, t3 WHERE t1.i
 +---------------------------------+----------+-----------+---------------+---------------------------------------------------------------------------------------------------------------------+
 9 rows in set (0.01 sec)
 ```
->>>>>>> 04df3ac97 (planner: update the doc of SPM (#13883) (#13962))
