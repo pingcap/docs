@@ -102,6 +102,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Optimizer hints](/optimizer-hints.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [MPP execution engine](/explain-mpp.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | N |
 | [MPP execution engine - compression exchange](/explain-mpp.md#mpp-version-and-exchange-data-compression) | Y | Y | N | N | N | N | N | N | N | N |
+| [TiFlash Pipeline Model](/tiflash/tiflash-pipeline-model.md) | E | N | N | N | N | N | N | N | N | N |
 | [Index Merge](/explain-index-merge.md) | Y | Y | Y | Y | Y | E | E | E | E | E |
 | [Placement Rules in SQL](/placement-rules-in-sql.md) | Y | Y | Y | Y | E | E | N | N | N | N |
 | [Cascades Planner](/system-variables.md#tidb_enable_cascades_planner) | E | E | E | E | E | E | E | E | E | E |
@@ -125,6 +126,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Acceleration of `ADD INDEX` and `CREATE INDEX`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) | Y | Y | Y | N | N | N | N | N | N | N |
 | [Metadata lock](/metadata-lock.md) | Y | Y | Y | N | N | N | N | N | N | N |
 | [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md) | Y | Y | Y | N | N | N | N | N | N | N |
+| [Pause](/sql-statements/sql-statement-admin-pause-ddl.md)/[Resume](/sql-statements/sql-statement-admin-resume-ddl.md) DDL | E | N | N | N | N | N | N | N | N | N |
 
 ## Transactions
 
