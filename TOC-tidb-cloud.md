@@ -274,6 +274,7 @@
     - [Scheduling](/tidb-scheduling.md)
   - [Dedicated Tier Limitations and Quotas](/tidb-cloud/limitations-and-quotas.md)
   - [Serverless Tier Limitations](/tidb-cloud/serverless-tier-limitations.md)
+  - [Limited SQL features on TiDB Cloud](/tidb-cloud/limited-sql-features.md)
   - [TiDB Limitations](/tidb-limitations.md)
   - Benchmarks
     - [TPC-C Performance Test Report](/tidb-cloud/v7.1.0-performance-benchmarking-with-tpcc.md)

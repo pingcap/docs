@@ -1,0 +1,188 @@
+---
+title: Limited SQL features on TiDB Cloud
+summary: Learn about the limited SQL features on TiDB Cloud.
+---
+
+# Limited SQL features on TiDB Cloud
+
+TiDB Cloud works with almost all workloads that TiDB supports, but there are feature differences between TiDB Self-Hosted and TiDB Dedicated/Serverless. This document describes the limitations of SQL features on TiDB Cloud. We are constantly filling in the feature gaps between TiDB Self-Hosted and TiDB Dedicated/Serverless. If you require these features or capabilities in the gap, contact us for a feature request.
+
+## Statements
+
+### Placement and Range Management
+
+| Statement | TiDB Dedicated | TiDB Serverless |
+|:-|:-|:-|
+| ALTER PLACEMENT POLICY | Supported | TiDB Serverless does not support configuring data placement. |
+| CREATE PLACEMENT POLICY | Supported | TiDB Serverless does not support configuring data placement. |
+| DROP PLACEMENT POLICY | Supported | TiDB Serverless does not support configuring data placement. |
+| SHOW CREATE PLACEMENT POLICY | Supported | TiDB Serverless does not support configuring data placement. |
+| SHOW PLACEMENT | Supported | TiDB Serverless does not support configuring data placement. |
+| SHOW PLACEMENT FOR | Supported | TiDB Serverless does not support configuring data placement. |
+| SHOW PLACEMENT LABELS | Supported | TiDB Serverless does not support configuring data placement. |
+| SHOW TABLE REGIONS | Supported | TiDB Serverless does not support configuring data placement. |
+| SPLIT REGION | Supported | TiDB Serverless does not support configuring data placement. |
+
+### Resource Groups
+
+| Statement | TiDB Dedicated | TiDB Serverless |
+|:-|:-|:-|
+| ALTER RESOURCE GROUP | Supported | TiDB Serverless does not support configuring resource groups. |
+| CALIBRATE RESOURCE | Supported | TiDB Serverless does not support configuring resource groups. |
+| CREATE RESOURCE GROUP | Supported | TiDB Serverless does not support configuring resource groups. |
+| DROP RESOURCE GROUP | Supported | TiDB Serverless does not support configuring resource groups. |
+| SET RESOURCE GROUP | Supported | TiDB Serverless does not support configuring resource groups. |
+| SHOW CREATE RESOURCE GROUP | Supported | TiDB Serverless does not support configuring resource groups. |
+
+### Others
+
+| Statement | TiDB Dedicated | TiDB Serverless |
+|:-|:-|:-|
+| BACKUP | Supported | To perform Backup Restore and Point-in-Time Recovery (PiTR) operations on TiDB Serverless, please use the web console instead. |
+| SHOW BACKUPS | Supported | To perform Backup Restore and Point-in-Time Recovery (PiTR) operations on TiDB Serverless, please use the web console instead. |
+| RESTORE | Supported | To perform Backup Restore and Point-in-Time Recovery (PiTR) operations on TiDB Serverless, please use the web console instead. |
+| SHOW RESTORES | Supported | To perform Backup Restore and Point-in-Time Recovery (PiTR) operations on TiDB Serverless, please use the web console instead. |
+| ADMIN SHOW TELEMETRY | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| ALTER INSTANCE RELOAD TLS | Supported | TiDB Serverless automatically refreshes the TLS certificate. |
+| LOAD DATA INFILE | Only supports LOAD DATA LOCAL INFILE | Only supports LOAD DATA LOCAL INFILE |
+| CHANGE DRAINER | Drainer is not supported on TiDB Cloud | Drainer is not supported on TiDB Cloud. |
+| CHANGE PUMP | Pump is not supported on TiDB Cloud | Pump is not supported on TiDB Cloud. |
+| FLASHBACK CLUSTER TO TIMESTAMP | Supported | Not supported |
+| LOAD STATS | Supported | Not supported |
+| SHOW CONFIG | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| SHOW DRAINER STATUS | Drainer is not supported on TiDB Cloud | Drainer is not supported on TiDB Cloud. |
+| SHOW PLUGINS | Supported | Plugin is not supported on TiDB Serverless. |
+| SHOW PUMP STATUS | Pump is not supported on TiDB Cloud | Pump is not supported on TiDB Cloud. |
+| SHUTDOWN | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+
+## Functions and Operators
+
+| Function and operator | TiDB Dedicated | TiDB Serverless |
+|:-|:-|:-|
+| SLEEP | No Limitation | The [SLEEP() function](https://docs.pingcap.com/tidbcloud/miscellaneous-functions) has a limitation wherein it can only support a maximum sleep time of 300 seconds.|
+
+## System Tables
+
+| Database | Table | TiDB Dedicated | TiDB Serverless |
+|:-|:-|:-|:-|
+| information_schema | ATTRIBUTES | Supported | TiDB Serverless does not support configuring data placement. |
+| information_schema | CLUSTER_CONFIG | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| information_schema | CLUSTER_HARDWARE | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| information_schema | CLUSTER_INFO | Supported | TiDB Serverless does not support configuring data placement. |
+| information_schema | CLUSTER_LOAD | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| information_schema | CLUSTER_LOG | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| information_schema | CLUSTER_SLOW_QUERY | Supported | For tracking slow queries, please use the Slow Query feature available on the web console. |
+| information_schema | CLUSTER_STATEMENTS_SUMMARY | Supported | For comprehensive monitoring of all statements, please use the Statement Analysis feature on the web console. |
+| information_schema | CLUSTER_STATEMENTS_SUMMARY_EVICTED | Supported | For comprehensive monitoring of all statements, please use the Statement Analysis feature on the web console. |
+| information_schema | CLUSTER_STATEMENTS_SUMMARY_HISTORY | Supported | For comprehensive monitoring of all statements, please use the Statement Analysis feature on the web console. |
+| information_schema | CLUSTER_SYSTEMINFO | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| information_schema | INSPECTION_RESULT | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| information_schema | INSPECTION_RULES | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| information_schema | INSPECTION_SUMMARY | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| information_schema | METRICS_SUMMARY | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| information_schema | METRICS_SUMMARY_BY_LABEL | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| information_schema | METRICS_TABLES | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| information_schema | PLACEMENT_POLICIES | Supported | TiDB Serverless does not support configuring data placement. |
+| information_schema | RESOURCE_GROUPS | Supported | TiDB Serverless does not support configuring resource groups. |
+| information_schema | STATEMENTS_SUMMARY | Supported | For comprehensive monitoring of all statements, please use the Statement Analysis feature on the web console. |
+| information_schema | STATEMENTS_SUMMARY_EVICTED | Supported | For comprehensive monitoring of all statements, please use the Statement Analysis feature on the web console. |
+| information_schema | STATEMENTS_SUMMARY_HISTORY | Supported | For comprehensive monitoring of all statements, please use the Statement Analysis feature on the web console. |
+| information_schema | TIDB_HOT_REGIONS | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| information_schema | TIDB_HOT_REGIONS_HISTORY | Supported(Suspecious) | TiDB Serverless does not support configuring data placement. |
+| information_schema | TIDB_SERVERS_INFO | Supported | TiDB Serverless does not support configuring data placement. |
+| information_schema | TIFLASH_SEGMENTS | Supported | TiDB Serverless does not support configuring data placement. |
+| information_schema | TIFLASH_TABLES | Supported | TiDB Serverless does not support configuring data placement. |
+| information_schema | TIKV_REGION_PEERS | Supported | TiDB Serverless does not support configuring data placement. |
+| information_schema | TIKV_REGION_STATUS | Supported | TiDB Serverless does not support configuring data placement. |
+| information_schema | TIKV_STORE_STATUS | Supported | TiDB Serverless does not support configuring data placement. |
+| performance_schema | pd_profile_allocs | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| performance_schema | pd_profile_block | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| performance_schema | pd_profile_cpu | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| performance_schema | pd_profile_goroutines | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| performance_schema | pd_profile_memory | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| performance_schema | pd_profile_mutex | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| performance_schema | tidb_profile_allocs | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| performance_schema | tidb_profile_block | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| performance_schema | tidb_profile_cpu | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| performance_schema | tidb_profile_goroutines | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| performance_schema | tidb_profile_memory | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| performance_schema | tidb_profile_mutex | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| performance_schema | tikv_profile_cpu | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| mysql | expr_pushdown_blacklist | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| mysql | gc_delete_range | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| mysql | gc_delete_range_done | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| mysql | opt_rule_blacklist | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| mysql | tidb | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| mysql | tidb_ttl_job_history | Supported | Not supported |
+| mysql | tidb_ttl_table_status | Supported | Not supported |
+| mysql | tidb_ttl_task | Supported | Not supported |
+
+## System Variables
+
+| Variable | TiDB Dedicated | TiDB Serverless |
+|:-|:-|:-|
+| datadir | No limitation | TiDB Serverless does not support configuring data placement. |
+| plugin_dir | No limitation | Plugin is not supported on TiDB Serverless. |
+| plugin_load | No limitation | Plugin is not supported on TiDB Serverless. |
+| tidb_cdc_write_source | No limitation | Readonly on TiDB Serverless. |
+| tidb_config | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| tidb_ddl_flashback_concurrency | No limitation | Readonly on TiDB Serverless. |
+| tidb_enable_1pc | No limitation | Readonly on TiDB Serverless. |
+| tidb_enable_async_commit | No limitation | Readonly on TiDB Serverless. |
+| tidb_enable_ddl | No limitation | Readonly on TiDB Serverless. |
+| tidb_enable_gc_aware_memory_track | No limitation | Readonly on TiDB Serverless. |
+| tidb_enable_gogc_tuner | No limitation | Readonly on TiDB Serverless. |
+| tidb_enable_local_txn | No limitation | Readonly on TiDB Serverless. |
+| tidb_enable_resource_control | Supported | Readonly on TiDB Serverless. |
+| tidb_enable_slow_log | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| tidb_enable_stmt_summary | No limitation | Readonly on TiDB Serverless. |
+| tidb_enable_telemetry | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| tidb_enable_tso_follower_proxy | No limitation | Readonly on TiDB Serverless. |
+| tidb_force_priority | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| tidb_gc_concurrency | No limitation | Readonly on TiDB Serverless. |
+| tidb_gc_enable | No limitation | Readonly on TiDB Serverless. |
+| tidb_gc_life_time | No limitation | Readonly on TiDB Serverless. |
+| tidb_gc_max_wait_time | No limitation | Readonly on TiDB Serverless. |
+| tidb_gc_run_interval | No limitation | Readonly on TiDB Serverless. |
+| tidb_gc_scan_lock_mode | No limitation | Readonly on TiDB Serverless. |
+| tidb_general_log | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| tidb_generate_binary_plan | No limitation | Readonly on TiDB Serverless. |
+| tidb_gogc_tuner_threshold | No limitation | Readonly on TiDB Serverless. |
+| tidb_guarantee_linearizability | No limitation | Readonly on TiDB Serverless. |
+| tidb_isolation_read_engines | No limitation | Readonly on TiDB Serverless. |
+| tidb_log_file_max_days | No limitation | Readonly on TiDB Serverless. |
+| tidb_metric_query_range_duration | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| tidb_metric_query_step | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| tidb_placement_mode | No limitation | Readonly on TiDB Serverless. |
+| tidb_pprof_sql_cpu | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| tidb_scatter_region | No limitation | Readonly on TiDB Serverless. |
+| tidb_server_memory_limit | No limitation | Readonly on TiDB Serverless. |
+| tidb_server_memory_limit_gc_trigger | No limitation | Readonly on TiDB Serverless. |
+| tidb_server_memory_limit_sess_min_size | No limitation | Readonly on TiDB Serverless. |
+| tidb_simplified_metrics | No limitation | Readonly on TiDB Serverless. |
+| tidb_slow_query_file | This feature is unavailable in Security Enhanced Mode. | This feature is unavailable in Security Enhanced Mode. |
+| tidb_stats_load_sync_wait | No limitation | Readonly on TiDB Serverless. |
+| tidb_stmt_summary_enable_persistent | Supported | Readonly on TiDB Serverless. |
+| tidb_stmt_summary_filename | Supported | Readonly on TiDB Serverless. |
+| tidb_sysproc_scan_concurrency | No limitation | Readonly on TiDB Serverless. |
+| tidb_tso_client_batch_max_wait_time | No limitation | Readonly on TiDB Serverless. |
+| tidb_ttl_delete_batch_size | Supported | Readonly on TiDB Serverless. |
+| tidb_ttl_delete_rate_limit | Supported | Readonly on TiDB Serverless. |
+| tidb_ttl_delete_worker_count | Supported | Readonly on TiDB Serverless. |
+| tidb_ttl_job_enable | Supported | Readonly on TiDB Serverless. |
+| tidb_ttl_job_schedule_window_end_time | Supported | Readonly on TiDB Serverless. |
+| tidb_ttl_job_schedule_window_start_time | Supported | Readonly on TiDB Serverless. |
+| tidb_ttl_running_tasks | Supported | Readonly on TiDB Serverless. |
+| tidb_ttl_scan_batch_size | Supported | Readonly on TiDB Serverless. |
+| tidb_ttl_scan_worker_count | Supported | Readonly on TiDB Serverless. |
+| tidb_txn_mode | No limitation | Readonly on TiDB Serverless. |
+| tidb_wait_split_region_finish | No limitation | Readonly on TiDB Serverless. |
+| tidb_wait_split_region_timeout | No limitation | Readonly on TiDB Serverless. |
+| txn_scope | No limitation | Readonly on TiDB Serverless. |
+| validate_password.enable | No limitation | Always enabled. |
+| validate_password.length | No limitation | Can not be smaller than 8. |
+| validate_password.mixed_case_count | No limitation | Can not be smaller than 1. |
+| validate_password.number_count | No limitation | Can not be smaller than 1. |
+| validate_password.policy | No limitation | Can only be MEDIUM or STRONG. |
+| validate_password.special_char_count | No limitation | Can not be smaller than 1. |
+| wait_timeout | No limitation | Readonly on TiDB Serverless. |
