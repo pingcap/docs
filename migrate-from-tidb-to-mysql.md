@@ -108,7 +108,7 @@ After setting up the environment, you can use [Dumpling](/dumpling-overview.md) 
 
 3. Restore data.
 
-    Use MyLoader (an open-source tool) to import data to the downstream MySQL instance. For details about how to install and use MyLoader, see [MyDumpler/MyLoader](https://github.com/mydumper/mydumper). Note that you need to use MyLoader v0.10 or earlier versions. Higher versions cannot process the metadata file exported by Dumpling.
+    Use MyLoader (an open-source tool) to import data to the downstream MySQL instance. For details about how to install and use MyLoader, see [MyDumpler/MyLoader](https://github.com/mydumper/mydumper). Note that you need to use MyLoader v0.10 or earlier versions. Higher versions cannot process metadata files exported by Dumpling.
 
     Run the following command to import full data exported by Dumpling to MySQL:
 
