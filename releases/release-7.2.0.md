@@ -208,7 +208,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.2/quick-start-with-
         - Support access to Azure Blob Storage by shared access signature (SAS) [#44199](https://github.com/pingcap/tidb/issues/44199) @[Leavrth](https://github.com/Leavrth)
 
     + TiCDC <!--**tw@hfxsd**-->
-
         
         - Optimize the structure of the directory where data files are stored when a DDL occurs in the scenario of replication to an object storage service [#8891](https://github.com/pingcap/tiflow/issues/8891) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - Support the OAUTHBEARER authentication in the scenario of replication to Kafka [#8865](https://github.com/pingcap/tiflow/issues/8865) @[hi-rustin](https://github.com/hi-rustin)
