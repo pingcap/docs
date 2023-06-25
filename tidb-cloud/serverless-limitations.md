@@ -8,36 +8,26 @@ aliases: ['/tidbcloud/serverless-tier-limitations']
 
 <!-- markdownlint-disable MD026 -->
 
-This document describes the limitations of TiDB Serverless.
+TiDB Serverless works with almost all workloads that TiDB supports, but there are feature differences between TiDB Self-Hosted or TiDB Dedicated clusters and TiDB Serverless clusters. This document describes the limitations of TiDB Serverless. 
 
 We are constantly filling in the feature gaps between TiDB Serverless and TiDB Dedicated. If you require these features or capabilities in the gap, use [TiDB Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-dedicated) or [contact us](https://www.pingcap.com/contact-us/?from=en) for a feature request.
 
 ## Limitations
 
-### SQL
+### Audit Logs
 
-- [Time to live (TTL)](/time-to-live.md) is not available for TiDB Serverless clusters currently.
-- The [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md) syntax is not applicable to [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta) clusters.
-- The [`SLEEP()` function](/functions-and-operators/miscellaneous-functions.md) only supports a maximum sleep time of 300 seconds.
-
-### System tables
-
-- Tables `CLUSTER_SLOW_QUERY`, `SLOW_QUERY`, `CLUSTER_STATEMENTS_SUMMARY`, `CLUSTER_STATEMENTS_SUMMARY_HISTORY`, `STATEMENTS_SUMMARY`, `STATEMENTS_SUMMARY_HISTORY` are not available for TiDB Serverless clusters.
-
-### Transaction
-
-- The total size of a single transaction is set to no more than 10 MB on TiDB Serverless during the beta phase.
+- Database audit logging is currently unavailable.
+- Console audit logging is currently unavailable.
 
 ### Connection
 
-- Only [Standard Connection](/tidb-cloud/connect-via-standard-connection-serverless.md) and [Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) can be used. You cannot use [VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md) to connect to TiDB Serverless clusters.
+- Only [Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md) and [Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md) can be used. You cannot use [VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md) to connect to TiDB Serverless clusters. 
 - No "IP Access List" support.
 
-### Monitoring
+### Encryption
 
-- [Third-party Monitoring integrations](/tidb-cloud/third-party-monitoring-integrations.md) are currently not available for TiDB Serverless.
-- [Cluster Events](/tidb-cloud/tidb-cloud-events.md) are currently not available for TiDB Serverless.
-- [Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md) is currently not available for TiDB Serverless.
+- Data persisted in your TiDB Serverless cluster undergoes encryption utilizing the encryption tool provided by the cloud provider responsible for managing your cluster. However, TiDB Serverless does not provide additional optional measures for protecting data at-rest on disks beyond infrastructure-level encryption.
+- Using [customer-managed encryption keys (CMEK)](/tidb-cloud/tidb-cloud-encrypt-cmek.md) is currently unavailable.
 
 ### Diagnosis
 
@@ -50,7 +40,30 @@ We are constantly filling in the feature gaps between TiDB Serverless and TiDB D
 
 ### Maintenance window
 
-- [Maintenance window](/tidb-cloud/configure-maintenance-window.md) is unavailable for TiDB Serverless.
+- [Maintenance window](/tidb-cloud/configure-maintenance-window.md) is currently unavailable.
+
+### Monitoring and Diagnosis
+
+- [Third-party Monitoring integrations](/tidb-cloud/third-party-monitoring-integrations.md) are currently unavailable.
+- [Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md) is currently unavailable.
+- [Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer) is currently unavailable.
+
+### Self service upgrades
+
+- TiDB Serverless is a fully managed deployment of TiDB. Major and minor version upgrades of TiDB are handled by TiDB Cloud, therefore can not be initiated by users.
+
+### Stream data
+
+- [Changefeed](/tidb-cloud/changefeed-overview.md) is currently unavailable.
+- [Data Migration](/tidb-cloud/migrate-from-mysql-using-data-migration.md) is currently unavailable.
+
+### Others
+
+- [Time to live (TTL)](/time-to-live.md) is currently unavailable.
+- Transaction can not last longer than 30m
+- Total size of a single transaction is set to no more than XX MB
+- [Limited SQL features](/tidb-cloud/limited-sql-features.md) for more details about SQL limitations.
+
 
 ## Usage quota
 
