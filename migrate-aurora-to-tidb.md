@@ -28,7 +28,7 @@ This section describes how to export the schema file from Amazon Aurora and impo
 
 Because the snapshot file from Amazon Aurora does not contain the DDL statements, you need to export the schema using Dumpling and create the schema in the target database using TiDB Lightning.
 
-Export the schema using Dumpling by running the following command. The command includes the `--filter` parameter to only export the desired table schema. For more information about the parameters, see [Option list of Dumpling](/dumpling-overview.md#option-list-of-dumpling).
+Export the schema using Dumpling by running the following command. The command includes the `--filter` parameter to only export the desired table schema. For more information about the parameters, see the [Option list of Dumpling](/dumpling-overview.md#option-list-of-dumpling).
 
 ```shell
 export AWS_ACCESS_KEY_ID=${access_key}
@@ -65,7 +65,7 @@ backend = "local"
 # The directory must be empty, and the storage space must be greater than the size of the dataset to be imported.
 # For better import performance, it is recommended to use a directory different from `data-source-dir` and use flash storage,
 # which can use I/O exclusively.
-sorted-kv-dir = "/mnt/ssd/sorted-kv-dir"
+sorted-kv-dir = "${path}"
 
 [mydumper]
 # Set the directory of the schema file exported from Amazon Aurora
@@ -134,7 +134,7 @@ backend = "local"
 # The directory must be empty, and the storage space must be greater than the size of the dataset to be imported.
 # For better import performance, it is recommended to use a directory different from `data-source-dir` and use flash storage,
 # which can use I/O exclusively.
-sorted-kv-dir = "/mnt/ssd/sorted-kv-dir"
+sorted-kv-dir = "${path}"
 
 [mydumper]
 # Set the directory of the snapshot file exported from Amazon Aurora
