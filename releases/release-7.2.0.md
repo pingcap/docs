@@ -216,7 +216,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.2/quick-start-with-
 
     + TiDB Data Migration (DM)
 
-        - 支持 MySQL 8.0 压缩 binlog 的增量同步 [#6381](https://github.com/pingcap/tiflow/issues/6381) @[dveeden](https://github.com/dveeden)
+        - Support MySQL 8.0 compressed binlogs [#6381](https://github.com/pingcap/tiflow/issues/6381) @[dveeden](https://github.com/dveeden)
 
     + TiDB Lightning
 
@@ -271,18 +271,18 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.2/quick-start-with-
 
     + Backup & Restore (BR) <!--**tw@hfxsd**-->
 
-        - 修复了在一些情况下误报 checksum mismatch 的问题 [#44472](https://github.com/pingcap/tidb/issues/44472) @[Leavrth](https://github.com/Leavrth)
-        - 修复了在一些情况下误报 resolved lock timeout 的问题 [#43236](https://github.com/pingcap/tidb/issues/43236) @[YuJuncen](https://github.com/YuJuncen)
-        - 修复了在恢复统计信息的时候可能会 panic 的问题 [#44490](https://github.com/pingcap/tidb/issues/44490) @[tangenta](https://github.com/tangenta)
+        - Fix the issue that `checksum mismatch` is falsely reported in some cases [#44472](https://github.com/pingcap/tidb/issues/44472) @[Leavrth](https://github.com/Leavrth)
+        - Fix the issue that `resolved lock timeout` is falsely reported in some cases [#43236](https://github.com/pingcap/tidb/issues/43236) @[YuJuncen](https://github.com/YuJuncen)
+        - Fix the issue that TiDB might panic when restoring statistics information [#44490](https://github.com/pingcap/tidb/issues/44490) @[tangenta](https://github.com/tangenta)
 
     + TiCDC <!--**tw@hfxsd**-->
 
-        - 修复在某些特殊情况下 resolved ts 不能正常推进的问题 [#8963](https://github.com/pingcap/tiflow/issues/8963)
-        - 修复使用 Avro 或 csv 协议场景下 update  操作不能输出旧值的问题 [#9086](https://github.com/pingcap/tiflow/issues/9086)
-        - 修复同步到 Kafka 场景下，读取下游 meta 信息太频繁导致下游压力过大的问题 [#8959](https://github.com/pingcap/tiflow/issues/8959)
-        - 修复同步到 TiDB/MySQL场景下频繁设置下游 BDR 相关变量导致下游日志过多的问题 [#9180](https://github.com/pingcap/tiflow/issues/9180)
-        - 修复 PD 节点 crash 时导致 CDC节点重启的问题 [#8868](https://github.com/pingcap/tiflow/issues/8868)
-        - 修复 TiCDC 同步到 KOP 时不能正确建立链接的问题 [#8892](https://github.com/pingcap/tiflow/issues/8892)
+        - Fix the issue that Resolved TS does not advance properly in some cases [#8963](https://github.com/pingcap/tiflow/issues/8963) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        - Fix the issue that the `UPDATE` operation cannot output old values when the Avro or CSV protocol is used [#9086](https://github.com/pingcap/tiflow/issues/9086) @[3AceShowHand](https://github.com/3AceShowHand)
+        - Fix the issue of excessive downstream pressure caused by reading downstream metadata too frequently when replicating data to Kafka [#8959](https://github.com/pingcap/tiflow/issues/8959) @[hi-rustin](https://github.com/hi-rustin)
+        - Fix the issue of too many downstream logs caused by frequently setting the downstream BDR-related variables when replicating data to TiDB or MySQL [#9180](https://github.com/pingcap/tiflow/issues/9180) @[asddongmen](https://github.com/asddongmen)
+        - Fix the issue that the PD node crashing causes the TiCDC node to restart [#8868](https://github.com/pingcap/tiflow/issues/8868) @[asddongmen](https://github.com/asddongmen)
+        - Fix the issue that TiCDC cannot create a changefeed with a downstream KOP [#8892](https://github.com/pingcap/tiflow/issues/8892) @[hi-rustin](https://github.com/hi-rustin)
 
     + TiDB Data Migration (DM)
 
@@ -291,8 +291,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.2/quick-start-with-
 
     + TiDB Lightning
 
-        - 修复开启 expression index 且默认值是 uuid 导致 lightning panic 的问题 [#44516](https://github.com/pingcap/tidb/pull/44516)
-        - 修复划分数据文件时任务退出导致 lightning panic 的问题 [#43195](https://github.com/pingcap/tidb/issues/43195)
+        - Fix the TiDB Lightning panic issue when `experimental.allow-expression-index` is enabled and the default value is UUID [#44497](https://github.com/pingcap/tidb/issues/44497) @[lichunzhu](https://github.com/lichunzhu)
+        - Fix the TiDB Lightning panic issue when a task exits while dividing a data file [#43195](https://github.com/pingcap/tidb/issues/43195) @[lance6716](https://github.com/lance6716)
 
 ## Contributors
 
