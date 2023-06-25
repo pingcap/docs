@@ -204,11 +204,11 @@ You can manage runaway queries for a resource group by configuring the `QUERY_LI
 
 #### `QUERY_LIMIT` parameters
 
-Supported condition setting (`ACTION`):
+Supported condition setting:
 
 - `EXEC_ELAPSED`: a query is identified as a runaway query when the query execution time exceeds this limit.
 
-Supported operations:
+Supported operations (`ACTION`):
 
 - `DRYRUN`: no action is taken. The records are appended for the runaway queries. This is mainly used to observe whether the condition setting is reasonable.
 - `COOLDOWN`: the execution priority of the query is lowered to the lowest level. The query continues to execute with the lowest priority and does not occupy resources of other operations.
@@ -218,8 +218,8 @@ To avoid too many concurrent runaway queries that exhaust system resources befor
 
 There are two methods for `WATCH` to match for rapid identification:
 
-- `EXACT` indicates that only SQL statements with exactly the same SQL are quickly identified.
-- `SIMILAR` indicates all SQL statements with the same pattern are matched by Plan Digest despite literal values.
+- `EXACT` indicates that only SQL statements with exactly the same SQL text are quickly identified.
+- `SIMILAR` indicates all SQL statements with the same pattern are matched by Plan Digest, and the literal values are ignored.
 
 The parameters of `QUERY_LIMIT` are as follows:
 
@@ -227,7 +227,7 @@ The parameters of `QUERY_LIMIT` are as follows:
 |---------------|--------------|--------------------------------------|
 | `EXEC_ELAPSED`  | When the query execution time exceeds this value, it is identified as a runaway query | EXEC_ELAPSED =`60s` means the query is identified as a runaway query if it takes more than 60 seconds to execute. |
 | `ACTION`    | Action taken when a runaway query is identified | The optional values are `DRYRUN`, `COOLDOWN`, and `KILL`. |
-| `WATCH`   | Quickly match the identified runaway query. If the same or similar query is encountered again within a certain period of time and the corresponding action is performed immediately. | Optional. For example, `WATCH=SIMILAR DURATION '60s'` and `WATCH=EXACT DURATION '1m'`. |
+| `WATCH`   | Quickly match the identified runaway query. If the same or similar query is encountered again within a certain period of time, the corresponding action is performed immediately. | Optional. For example, `WATCH=SIMILAR DURATION '60s'` and `WATCH=EXACT DURATION '1m'`. |
 
 #### Examples
 
@@ -267,7 +267,7 @@ You can get more information about runaway queries from the following system tab
             tidb_server: 127.0.0.1:4000
     ```
 
-    In which `match_type` indicates how the runaway query is identified. The value can be one of the following:
+    In the preceding output,`match_type` indicates how the runaway query is identified. The value can be one of the following:
 
     - `identify` means that it matches the condition of the runaway query.
     - `watch` means that it matches the watch rule in the watch list.
@@ -292,10 +292,10 @@ You can get more information about runaway queries from the following system tab
             tidb_server: 127.0.0.1:4000
     ```
 
-    In which:
+    In the preceding output:
 
     - `start_time` and `end_time` indicate the time range during which the watch list is valid.
-    - `watch` means that it is put into the watch list. The value can be one of the following:
+    - `watch` means that the query matches the watch rule in the watch list. The value can be one of the following:
         - `similar` indicates that it is matched by Plan Digest. At this time, the `watch_text` column displays the Plan Digest.
         - `exact` indicates that it is matched by SQL text. At this time, the `watch_text` column displays the SQL text.
 

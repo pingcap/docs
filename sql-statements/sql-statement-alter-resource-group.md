@@ -73,7 +73,7 @@ TiDB supports the following `DirectResourceGroupOption`, where [Request Unit (RU
 | `RU_PER_SEC` | Rate of RU backfilling per second | `RU_PER_SEC = 500` indicates that this resource group is backfilled with 500 RUs per second |
 | `PRIORITY`    | The absolute priority of tasks to be processed on TiKV  | `PRIORITY = HIGH` indicates that the priority is high. If not specified, the default value is `MEDIUM`. |
 | `BURSTABLE`   | If the `BURSTABLE` attribute is set, TiDB allows the corresponding resource group to use the available system resources when the quota is exceeded. |
-| `QUERY_LIMIT` | When the query execution meets this condition, it is recognized as a runaway query and the corresponding action is executed. | `QUERY_LIMIT=(EXEC_ELAPSED='60s', ACTION=KILL, WATCH=EXACT DURATION='10m')` indicates that the query is identified as a runaway query when the execution time exceeds 60 seconds. The query is terminated. The SQL statement with the same SQL text is terminated immediately in the coming 10 minutes. `QUERY_LIMIT=()` or `QUERY_LIMIT=NULL` means that runaway control is not enabled. See [Runaway Queries](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries). ｜
+| `QUERY_LIMIT` | When the query execution meets this condition, the query is identified as a runaway query and the corresponding action is executed. | `QUERY_LIMIT=(EXEC_ELAPSED='60s', ACTION=KILL, WATCH=EXACT DURATION='10m')` indicates that the query is identified as a runaway query when the execution time exceeds 60 seconds. The query is terminated. All SQL statements with the same SQL text will be terminated immediately in the coming 10 minutes. `QUERY_LIMIT=()` or `QUERY_LIMIT=NULL` means that runaway control is not enabled. See [Runaway Queries](/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries). |
 
 > **Note:**
 >
@@ -115,7 +115,7 @@ SELECT * FROM information_schema.resource_groups WHERE NAME ='rg1';
 ```sql
 ALTER RESOURCE GROUP rg1
   RU_PER_SEC = 200
-  PRIORITY = LOW;
+  PRIORITY = LOW
   QUERY_LIMIT = (EXEC_ELAPSED='1s' ACTION=COOLDOWN WATCH=EXACT DURATION='30s');
 ```
 
