@@ -1,9 +1,9 @@
 ---
-title: ADMIN RESUME DDL
+title: ADMIN RESUME DDL JOBS
 summary: An overview of the usage of ADMIN RESUME DDL for the TiDB database.
 ---
 
-# ADMIN RESUME DDL
+# ADMIN RESUME DDL JOBS
 
 `ADMIN RESUME DDL` allows you to resume a paused DDL job. You can find the `job_id` by running [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md).
 

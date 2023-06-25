@@ -1,9 +1,9 @@
 ---
-title: ADMIN PAUSE DDL
-summary: An overview of the usage of ADMIN PAUSE DDL for the TiDB database.
+title: ADMIN PAUSE DDL JOBS
+summary: An overview of the usage of ADMIN PAUSE DDL JOBS for the TiDB database.
 ---
 
-# ADMIN PAUSE DDL
+# ADMIN PAUSE DDL JOBS
 
 `ADMIN PAUSE DDL` allows you to pause a running DDL job. The `job_id` can be found by running [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md).
 
