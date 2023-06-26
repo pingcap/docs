@@ -207,7 +207,6 @@ This is currently depended on by TiDB Serverless analytical capabilities.</td>
 + TiDB
 
     <!--tw@ran-huang-->
-
     - Optimize the logic of constructing index scan range so that it supports converting complex conditions into index scan range [#41572](https://github.com/pingcap/tidb/issues/41572) [#44389](https://github.com/pingcap/tidb/issues/44389) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
     - Add stale read-related monitoring metrics [#43325](https://github.com/pingcap/tidb/issues/43325) @[you06](https://github.com/you06)
     - When the retry leader of stale read encounters a lock, TiDB forcibly retry with the leader after resolving the lock, which avoids unnecessary overhead [#43659](https://github.com/pingcap/tidb/issues/43659) @[you06](https://github.com/you06)
