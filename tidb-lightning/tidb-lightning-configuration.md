@@ -146,14 +146,14 @@ addr = "172.16.31.10:8287"
 
 # Whether to detect and resolve duplicate records (unique key conflict) in the physical import mode.
 # The following resolution algorithms are supported:
-#  - record: After the data is written to the target table,
-#    add the duplicate records from the target table to the `lightning_task_info.conflict_error_v1` table in the target TiDB.
-#    Note that the required version of the target TiKV is no earlier than v5.2.0;
-#    otherwise it falls back to 'none'.
-#  - none: does not detect duplicate records, which has the best performance of the three algorithms.
-#    But if there are duplicate records in the data source, it might lead to inconsistent data in the target TiDB.
-#  - remove: records all duplicate records in the target table to the lightning_task_info database, like the 'record' algorithm.
-#    But it removes all duplicate records from the target table to ensure a consistent state in the target TiDB.
+#  - none: does not detect duplicate records, which has the best performance of the two algorithms.
+#          But if there are duplicate records in the data source, it might lead to inconsistent data in the target TiDB.
+#  - remove: if there are primary key or unique key conflicts between the inserting data A and B, 
+#            A and B will be removed from the target table and recorded
+#            in the `lightning_task_info.conflict_error_v1` table in the target TiDB. 
+#            You can manually insert the correct records into the target table based on your business requirements. 
+#            Note that the target TiKV must be v5.2.0 or later versions; otherwise it falls back to 'none'.
+# The default value is 'none'.
 # duplicate-resolution = 'none'
 # The number of KV pairs sent in one request in the physical import mode.
 # send-kv-pairs = 32768
@@ -250,6 +250,7 @@ data-source-dir = "/data/my_database"
 #             an error is reported
 #  - auto:    (default) automatically detects whether the schema is UTF-8 or
 #             GB-18030. An error is reported if the encoding is neither.
+#  - latin1:  the schema files use MySQL latin1 encoding, also known as Code Page 1252.
 #  - binary:  do not try to decode the schema files
 character-set = "auto"
 
@@ -259,6 +260,7 @@ character-set = "auto"
 # - utf8mb4: Indicates that the source data file uses UTF-8 encoding.
 # - GB18030: Indicates that the source data file uses the GB-18030 encoding.
 # - GBK: The source data file uses GBK encoding (GBK encoding is an extension of the GB-2312 character set, also known as Code Page 936).
+# - latin1: The source data file uses MySQL latin1 encoding, also known as Code Page 1252.
 # - binary: Indicates that Lightning does not convert the encoding (by default).
 # If left blank, the default value "binary" is used, that is to say, Lightning does not convert the encoding.
 # Note that Lightning does not predict about the character set of the source data file
