@@ -24,7 +24,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.2/quick-start-with-
 <tbody>
   <tr>
     <td rowspan="2">Scalability and Performance</td>
-    <td>Resource groups supports managing runaway queries (experimental)</td>
+    <td>Resource groups support managing runaway queries (experimental)</td>
     <td>Resource groups can manage queries that take longer time than expected by either deprioritizing or killing them. This feature enables you to set the maximum execution time for queries at the resource group level and specify the actions to be taken by TiDB when a query exceeds this limit, which offers you greater control over the impact of unexpectedly long-running queries on your cluster.
     </td>
   </tr>
