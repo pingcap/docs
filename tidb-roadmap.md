@@ -118,7 +118,7 @@ In the course of development, this roadmap is subject to change based on user ne
         <ul>
           <li>
             <b>Cascades framework for optimizer</b>
-            <br /><i>Improved framework for query optimization, and makes the optimizer more extensible and future-proof</i>
+            <br /><i>Improved framework for query optimization, and make the optimizer more extensible and future-proof</i>
           </li>
         </ul>
       </td>
