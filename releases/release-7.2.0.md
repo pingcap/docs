@@ -204,9 +204,10 @@ This is currently depended on by TiDB Serverless analytical capabilities.</td>
 
 ## Improvements
 
+<!--**tw@ran-huang**-->
+
 + TiDB
 
-    <!-- tw@ran-huang -->
     - Optimize the logic of constructing index scan range so that it supports converting complex conditions into index scan range [#41572](https://github.com/pingcap/tidb/issues/41572) [#44389](https://github.com/pingcap/tidb/issues/44389) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
     - Add stale read-related monitoring metrics [#43325](https://github.com/pingcap/tidb/issues/43325) @[you06](https://github.com/you06)
     - When the retry leader of stale read encounters a lock, TiDB forcibly retry with the leader after resolving the lock, which avoids unnecessary overhead [#43659](https://github.com/pingcap/tidb/issues/43659) @[you06](https://github.com/you06)
@@ -216,9 +217,9 @@ This is currently depended on by TiDB Serverless analytical capabilities.</td>
     - Recognize utf8 and utf8bm3 as the legacy three-byte character set encodings [#26226](https://github.com/pingcap/tidb/issues/26226) @[dveeden](https://github.com/dveeden)
     - Support using `:=` for assignment in `UPDATE` statements [#44751](https://github.com/pingcap/tidb/issues/44751) @[CbcWestwolf](https://github.com/CbcWestwolf)
 
-+ TiKV
+<!--**tw@Oreoxmt**-->
 
-    <!--**tw@Oreoxmt**-->
++ TiKV
 
     - Support configuring the retry interval of PD connections in scenarios such as request failures using `pd.retry-interval` [#14964](https://github.com/tikv/tikv/issues/14964) @[rleungx](https://github.com/rleungx)
     - Optimize the resource control scheduling algorithm by incorporating the global resource usage [#14604](https://github.com/tikv/tikv/issues/14604) @[Connor1996](https://github.com/Connor1996)
@@ -226,24 +227,24 @@ This is currently depended on by TiDB Serverless analytical capabilities.</td>
     - Add related metrics for `check_leader` requests [#14658](https://github.com/tikv/tikv/issues/14658) @[you06](https://github.com/you06)
     - Provide the detailed time information during TiKV handling write commands [#12362](https://github.com/tikv/tikv/issues/12362) @[cfzjywxk](https://github.com/cfzjywxk)
 
-+ PD
+<!--**tw@Oreoxmt**-->
 
-    <!--**tw@Oreoxmt**-->
++ PD
 
     - Use a separate gRPC connection for PD leader election to prevent the impact of other requests [#6403](https://github.com/tikv/pd/issues/6403) @[rleungx](https://github.com/rleungx)
     - Enable the bucket splitting by default to mitigate hotspot issues in multi-Region scenarios [#6433](https://github.com/tikv/pd/issues/6433) @[bufferflies](https://github.com/bufferflies)
+
+<!--**tw@hfxsd**-->
 
 + Tools
 
     + Backup & Restore (BR)
 
-        <!--**tw@hfxsd**-->
-
         - Support access to Azure Blob Storage by shared access signature (SAS) [#44199](https://github.com/pingcap/tidb/issues/44199) @[Leavrth](https://github.com/Leavrth)
 
-    + TiCDC
+    <!--**tw@hfxsd**-->
 
-        <!--**tw@hfxsd**-->
+    + TiCDC
 
         - Optimize the structure of the directory where data files are stored when a DDL occurs in the scenario of replication to an object storage service [#8891](https://github.com/pingcap/tiflow/issues/8891) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - Support the OAUTHBEARER authentication in the scenario of replication to Kafka [#8865](https://github.com/pingcap/tiflow/issues/8865) @[hi-rustin](https://github.com/hi-rustin)
@@ -253,9 +254,9 @@ This is currently depended on by TiDB Serverless analytical capabilities.</td>
 
         - Support using MySQL 8.0 to compress binlogs [#6381](https://github.com/pingcap/tiflow/issues/6381) @[dveeden](https://github.com/dveeden)
 
-    + TiDB Lightning
+    <!--**tw@ran-huang**-->
 
-        <!--**tw@ran-huang**-->
+    + TiDB Lightning
 
         - Optimize the retry mechanism during import to avoid errors caused by leader switching [#44478](https://github.com/pingcap/tidb/pull/44478)
         - Verify checksum throught SQL after import to improve stability of verification [#41941](https://github.com/pingcap/tidb/issues/41941)
@@ -263,9 +264,9 @@ This is currently depended on by TiDB Serverless analytical capabilities.</td>
 
 ## Bug fixes
 
-+ TiDB
+<!--**tw@ran-huang**-->
 
-    <!--**tw@ran-huang**-->
++ TiDB
 
     (dup)- Fix the issue that the query with CTE causes TiDB to hang [#43749](https://github.com/pingcap/tidb/issues/43749) [#36896](https://github.com/pingcap/tidb/issues/36896) @[guo-shaoge](https://github.com/guo-shaoge)
     (dup)- Fix the issue that the `min, max` query result is incorrect [#43805](https://github.com/pingcap/tidb/issues/43805) @[wshwsh12](https://github.com/wshwsh12)
@@ -288,40 +289,40 @@ This is currently depended on by TiDB Serverless analytical capabilities.</td>
     - Fix the issue that outer join reorder handles conditions incorrectly and causes the wrong results [#44314](https://github.com/pingcap/tidb/issues/44314) @[AilinKid](https://github.com/AilinKid)
     - Fix the issue that `PREPARE stmt FROM "ANALYZE TABLE xxx"` can be killed by `tidb_mem_quota_query` [#44320](https://github.com/pingcap/tidb/issues/44320) @[chrysan](https://github.com/chrysan)
 
-+ TiKV
+<!--**tw@Oreoxmt**-->
 
-    <!--**tw@Oreoxmt**-->
++ TiKV
 
     - Fix the issue that the transaction returns an incorrect value when TiKV handles stale pessimistic lock conflicts [#13298](https://github.com/tikv/tikv/issues/13298) @[cfzjywxk](https://github.com/cfzjywxk)
     - Fix the issue that in-memory pessimistic lock might cause flashback failure and data inconsistency [#13303](https://github.com/tikv/tikv/issues/13303) @[JmPotato](https://github.com/JmPotato)
     - Fix the issue that the fair lock might be incorrect when TiKV handles stale requests [#13298](https://github.com/tikv/tikv/issues/13298) @[cfzjywxk](https://github.com/cfzjywxk)
     - Fix the issue that autocommit and point get replica read might break linearizability [#14715](https://github.com/tikv/tikv/issues/14715) @[cfzjywxk](https://github.com/cfzjywxk)
 
-+ PD
+<!--**tw@Oreoxmt**-->
 
-    <!--**tw@Oreoxmt**-->
++ PD
 
     - Fix the issue that redundant replicas cannot be automatically repaired in some corner cases [#6573](https://github.com/tikv/pd/issues/6573) @[nolouch](https://github.com/nolouch)
 
-+ TiFlash
+<!--**tw@qiancai**-->
 
-    <!--**tw@qiancai**-->
++ TiFlash
 
     - Fix the issue that queries might consume more memory than needed when the data on the Join build side is very large and contains many small string type columns [#7416](https://github.com/pingcap/tiflash/issues/7416) @[yibin87](https://github.com/yibin87)
 
 + Tools
 
-    + Backup & Restore (BR)
+    <!--**tw@hfxsd**-->
 
-        <!--**tw@hfxsd**-->
+    + Backup & Restore (BR)
 
         - Fix the issue that `checksum mismatch` is falsely reported in some cases [#44472](https://github.com/pingcap/tidb/issues/44472) @[Leavrth](https://github.com/Leavrth)
         - Fix the issue that `resolved lock timeout` is falsely reported in some cases [#43236](https://github.com/pingcap/tidb/issues/43236) @[YuJuncen](https://github.com/YuJuncen)
         - Fix the issue that TiDB might panic when restoring statistics information [#44490](https://github.com/pingcap/tidb/issues/44490) @[tangenta](https://github.com/tangenta)
 
-    + TiCDC
+    <!--**tw@hfxsd**-->
 
-        <!--**tw@hfxsd**-->
+    + TiCDC
 
         - Fix the issue that Resolved TS does not advance properly in some cases [#8963](https://github.com/pingcap/tiflow/issues/8963) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - Fix the issue that the `UPDATE` operation cannot output old values when the Avro or CSV protocol is used [#9086](https://github.com/pingcap/tiflow/issues/9086) @[3AceShowHand](https://github.com/3AceShowHand)
