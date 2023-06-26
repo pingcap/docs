@@ -16,7 +16,6 @@ This document describes how to back up and restore your TiDB Serverless cluster 
 
 - It is important to note that TiDB Serverless clusters only support in-place restoring from backups. When a restore is performed, tables in the `mysql` schema are also impacted. Hence, any changes made to user credentials and permissions or system variables will be rolled back to the state when the backup was taken.
 - Manual backup is not yet supported.
-- PITR (Point-in-time Recovery) is not yet supported.
 - The cluster will be unavailable during the restore process, and existing connections will be terminated. You can establish new connections once the restore is complete.
 - If any TiFlash replica is enabled, the replica will be unavailable for a while after the restore because data needs to be rebuilt in TiFlash.
 
@@ -56,9 +55,33 @@ TiDB Serverless only supports in-place restoration. To restore your TiDB Serverl
 
 1. Navigate to the **Backup** page of a cluster.
 
-2. Click **Restore**. This will open the **Restore** window.
+2. Click **Restore**. The setting window displays.
 
-    1. Choose a backup from the **Backup Time** drop-down list.
-    2. Click **Confirm** to begin the restoration process.
+3. In **Restore Mode**, you can choose to restore from a specific backup or any point in time.
+
+    <SimpleTab>
+    <div label="Basic Snapshot Restore">
+
+    To restore from a selected backup snapshot, take the following steps:
+
+    1. Click **Basic Snapshot Restore**.
+    2. Select the backup snapshot you want to restore to.
+
+    </div>
+    <div label="Point-in-Time Restore">
+
+    > **Note:**
+    >
+    > The **Point-in-Time Restore** feature is currently in beta.
+
+    To restore from any point in time within the backup retention, take the following steps:
+
+    1. Click **Point-in-Time Restore**.
+    2. Select the date and time you want to restore to.
+
+    </div>
+    </SimpleTab>
+
+4. Click **Restore** to begin the restoration process.
 
    After initiating the restore process, the cluster status changes to **Restoring**. The cluster will be unavailable during the restore process and existing connections will be terminated. Once the restore process completes successfully, you can access the cluster as usual.
