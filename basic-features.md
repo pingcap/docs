@@ -56,6 +56,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Use buckets to improve scan concurrency](/tune-region-performance.md#use-bucket-to-increase-concurrency) | E | E | E | E | N | N | N | N | N | N |
 | [Invisible indexes](/sql-statements/sql-statement-add-index.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | N |
 | [Composite `PRIMARY KEY`](/constraints.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
+| [`CHECK` constraints](/constraints.md#check | Y | N | N | N | N | N | N | N | N | N |
 | [Unique indexes](/constraints.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Clustered index on integer `PRIMARY KEY`](/constraints.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Clustered index on composite or non-integer key](/constraints.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | N |
