@@ -33,12 +33,26 @@ ADMIN PAUSE DDL JOBS job_id [, job_id] ...;
 
 If the pause fails, the specific reason for the failure is displayed.
 
+<CustomContent platform="tidb">
+
 > **Note:**
 >
 > + This statement can pause a DDL job, but other operations and environment changes (such as machine restarts and cluster restarts) do not pause DDL jobs except for cluster upgrades.
 > + During the cluster upgrade, the ongoing DDL jobs are paused, and the DDL jobs initiated during the upgrade are also paused. After the upgrade, all paused DDL jobs will resume. The pause and resume operations during the upgrade are taken automatically. For details, see [TiDB Smooth Upgrade](/smooth-upgrade-tidb.md).
 > + This statement can pause multiple DDL jobs. You can use the [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md) statement to obtain the `job_id` of a DDL job.
 > + If the job to be paused has already been completed or is about to be completed, the pause operation will fail.
+
+</CustomContent>
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> + This statement can pause a DDL job, but other operations and environment changes (such as machine restarts and cluster restarts) do not pause DDL jobs except for cluster upgrades.
+> + During the cluster upgrade, the ongoing DDL jobs are paused, and the DDL jobs initiated during the upgrade are also paused. After the upgrade, all paused DDL jobs will resume. The pause and resume operations during the upgrade are taken automatically. For details, see [TiDB Smooth Upgrade](https://docs.pingcap.com/tidb/stable/smooth-upgrade-tidb).
+> + This statement can pause multiple DDL jobs. You can use the [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md) statement to obtain the `job_id` of a DDL job.
+> + If the job to be paused has already been completed or is about to be completed, the pause operation will fail.
+
+</CustomContent>
 
 ## MySQL compatibility
 
