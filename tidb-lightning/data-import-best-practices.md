@@ -1,6 +1,6 @@
 ---
 title: Best Practices for Importing 50 TiB Data
-summary: Based on the experience of importing large single tables in the past, this article summarizes best practices, hoping to help you successfully import large data volumes and large single tables.
+summary: Learn best practices for importing large volumes of data.
 ---
 
 # Best Practices for Importing 50 TiB Data
