@@ -172,6 +172,6 @@ SET GLOBAL tidb_gc_life_time="60m";
 
 To restore data from an older version, you can use one of the following methods:
 
-- For simple cases, use `SELECT` after setting the `tidb_snapshot` variable and copy-paste the output, or use `SELECT ... INTO LOCAL OUTFLE` and use `LOAD DATA` to import the data later on.
+- For simple cases, use `SELECT` after setting the `tidb_snapshot` variable and copy-paste the output, or use `SELECT ... INTO OUTFILE` and use `LOAD DATA` to import the data later on.
 
 - Use [Dumpling](/dumpling-overview.md#export-historical-data-snapshots-of-tidb) to export a historical snapshot. Dumpling performs well in exporting larger sets of data.
