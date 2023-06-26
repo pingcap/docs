@@ -63,6 +63,7 @@ We are constantly filling in the feature gaps between TiDB Serverless and TiDB D
 - Transaction can not last longer than 30m
 - Total size of a single transaction is set to no more than XX MB
 - [Limited SQL features](/tidb-cloud/limited-sql-features.md) for more details about SQL limitations.
+- Data branching is only available for clusters created after XXX
 
 ## Usage quota
 
