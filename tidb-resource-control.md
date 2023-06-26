@@ -214,7 +214,7 @@ Supported operations (`ACTION`):
 - `COOLDOWN`: the execution priority of the query is lowered to the lowest level. The query continues to execute with the lowest priority and does not occupy resources of other operations.
 - `KILL`: the identified query is automatically terminated and reports an error `Query execution was interrupted, identified as runaway query`.
 
-To avoid too many concurrent runaway queries that exhaust system resources before being identified by conditions, the resource control feature introduces an immunity mechanism for quick identification. By using the `WATCH` clause, when a query is identified as a runaway query, the current TiDB instance marks the matching queries as runaway queries immediately in the next period of time (defined by `DURATION`), and takes the corresponding actions, instead of waiting for them to be identified by conditions. The `KILL` operation reports an error `Quarantined and interrupted because of being in runaway watch list`.
+To avoid too many concurrent runaway queries that exhaust system resources before being identified by conditions, the resource control feature introduces a quick identification mechanism. By using the `WATCH` clause, when a query is identified as a runaway query, the current TiDB instance marks the matching queries as runaway queries immediately in the next period of time (defined by `DURATION`), and takes the corresponding actions, instead of waiting for them to be identified by conditions. The `KILL` operation reports an error `Quarantined and interrupted because of being in runaway watch list`.
 
 There are two methods for `WATCH` to match for rapid identification:
 
@@ -270,9 +270,9 @@ You can get more information about runaway queries from the following system tab
     In the preceding output,`match_type` indicates how the runaway query is identified. The value can be one of the following:
 
     - `identify` means that it matches the condition of the runaway query.
-    - `watch` means that it matches the watch rule in the watch list.
+    - `watch` means that it matches the quick identification rule in the watch list.
 
-+ The `mysql.tidb_runaway_quarantined_watch` table contains the watch rule records for runaway queries. Take two of these rows as examples:
++ The `mysql.tidb_runaway_quarantined_watch` table contains the quick identification rule records for runaway queries. Take two of these rows as examples:
 
     ```sql
     MySQL [(none)]> SELECT * FROM mysql.tidb_runaway_quarantined_watch LIMIT 2\G;
@@ -295,7 +295,7 @@ You can get more information about runaway queries from the following system tab
     In the preceding output:
 
     - `start_time` and `end_time` indicate the time range during which the watch list is valid.
-    - `watch` means that the query matches the watch rule in the watch list. The value can be one of the following:
+    - `watch` means that the query matches the quick identification rule in the watch list. The value can be one of the following:
         - `similar` indicates that it is matched by Plan Digest. At this time, the `watch_text` column displays the Plan Digest.
         - `exact` indicates that it is matched by SQL text. At this time, the `watch_text` column displays the SQL text.
 
