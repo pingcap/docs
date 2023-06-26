@@ -24,8 +24,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.2/quick-start-with-
 <tbody>
   <tr>
     <td rowspan="2">Scalability and Performance</td>
-    <td>Runaway queries managed by Resource Groups (experimental)</td>
-    <td>Query timeouts exist on a per-TiKV node basis but now Resoure Groups can manage queries by global parallel execution time and either deprioritize or kill them. Allowing operators to configure this timeout and what do with the queries at a Resource Group level, gives them much more control over the impact unexected large queries may have on the cluster.
+    <td>Resource groups supports managing runaway queries (experimental)</td>
+    <td>Resource groups can manage queries that execute longer time than expected by either deprioritizing or killing them. This feature enables you to set the maximum execution time for queries at the resource group level and specify the actions to be taken by TiDB when a query exceeds this limit, which offers you greater control over the impact of unexpectedly long-running queries on your cluster.
     </td>
   </tr>
   <tr>
@@ -35,13 +35,13 @@ This is currently depended on by TiDB Serverless analytical capabilities.</td>
   </tr>
   <tr>
     <td rowspan="1">SQL</td>
-    <td>Support new SQL statement, "IMPORT INTO", to enable import from the TiDB service, itself (experimental)</td>
-    <td>To simplify the deployment and maintenance of Lightning jobs, we are introducing the new SQL statement "IMPORT INTO" which integrates Lightning's phyiscal import capabilities, including remote import from S3, directly into TiDB..</td>
+    <td>Support a new SQL statement, `IMPORT INTO`, to enable data import using the TiDB service, itself (experimental)</td>
+   <td>To simplify the deployment and maintenance of TiDB Lightning, TiDB introduces a new SQL statement `IMPORT INTO`, which integrates physical import capabilities of TiDB Lightning, including remote import from Amazon S3 directly into TiDB.</td>
   </tr>
   <tr>
     <td rowspan="2">DB Operations and Observability</td>
-    <td>DDL supports pause/resume</td>
-    <td>Adding indexes can consume a lot of resources and affect online traffic. As homage to traditional schema change tools (i.e., pt-osc and gh-ost) TiDB now natively supports suspending any number of these background jobs at once, freeing up needed resources while avoiding have to cancel and restart the jobs.</td>
+    <td>DDL supports pause and resume operations (experimental)</td>
+    <td>DDL operations such as adding indexes can consume a lot of resources and affect online traffic. As homage to traditional schema change tools like pt-osc and gh-ost, TiDB now natively supports suspending multiple background jobs at once. This feature lets you conserve resources and minimize the impact on online traffic, without the need to cancel and restart the jobs.</td>
   </tr>
 </tbody>
 </table>
