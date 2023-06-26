@@ -31,7 +31,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.2/quick-start-with-
   <tr>
     <td>TiFlash support for pipeline execution model (experimental)</td>
     <td>TiFlash supports a pipeline execution model to optimize thread resource control.
-This is currently depended on by TiDB Serverless analytical capabilties.</td>
+This is currently depended on by TiDB Serverless analytical capabilities.</td>
   </tr>
   <tr>
     <td rowspan="1">SQL</td>
