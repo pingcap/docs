@@ -46,7 +46,7 @@ Some examples of Type 2 DDL statements are as follows:
 - Add a `NOT NULL` column without a default value: `ALTER TABLE table_name ADD COLUMN column_1 NOT NULL;`.
 - Rename an index: `ALTER TABLE table_name RENAME INDEX index_1 TO index_2;`.
 
-When the sharded tables execute the DDL statements above, if `strict-optimistic-shard-mode:true` is set, the task is be directly interrupted and an error is reported. If `strict-optimistic-shard-mode:false` is set or not specified, different execution order of the DDL statements in sharded tables will cause migration interruption. For example:
+When the sharded tables execute the DDL statements above, if `strict-optimistic-shard-mode: true` is set, the task is directly interrupted and an error is reported. If `strict-optimistic-shard-mode: false` is set or not specified, different execution order of the DDL statements in sharded tables will cause migration interruption. For example:
 
 - Shard 1 renames a column and then alters the column type:
     1. Rename a column: `ALTER TABLE table_name RENAME COLUMN column_1 TO column_2;`.
