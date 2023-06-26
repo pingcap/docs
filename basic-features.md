@@ -173,7 +173,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Control the memory quota for collecting statistics](/statistics.md#the-memory-quota-for-collecting-statistics) | E | E | E | E | N | N | N | N | N | N |
 | [Randomly sample about 10000 rows of data to quickly build statistics](/system-variables.md#tidb_enable_fast_analyze) | E | E | E | E | E | E | E | E | E | E |
 | [Lock statistics](/statistics.md#lock-statistics) | E | E | E | N | N | N | N | N | N | N |
-| [Lightweight statistics initialization](/statistics.md#load-statistics) | E | E | N | N | N | N | N | N | N | N |
+| [Lightweight statistics initialization](/statistics.md#load-statistics) | Y | E | N | N | N | N | N | N | N | N |
 
 ## Security
 
