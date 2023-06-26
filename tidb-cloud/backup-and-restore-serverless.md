@@ -70,6 +70,8 @@ TiDB Serverless only supports in-place restoration. To restore your TiDB Serverl
     </div>
     <div label="Point-in-Time Restore">
 
+    This feature lets you restore a cluster to a specific state from any time within the last 90 days.
+
     > **Note:**
     >
     > The **Point-in-Time Restore** feature is currently in beta.
