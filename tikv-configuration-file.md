@@ -1496,6 +1496,16 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
     - `5`: Can be read by TiKV v6.1 and later versions. Full and partitioned filters use a faster and more accurate Bloom filter implementation with a different schema.
 + Default value: `2`
 
+### `ttl` <span class="version-mark">New in v7.2.0</span>
++ SST files containing updates older than TTL will go through the compaction process. This usually happens in a cascading way so that those entries will be compacted to bottommost level/file.
++ Default value: "`30d`"
++ Unit: s(second)|h(hour)|d(day)
+
+### `periodic-compaction-seconds` <span class="version-mark">New in v7.2.0</span>
++ SST files older than this value will be picked up for compaction, and re-written to the same level as they were before.
++ Default value: "`30d`"
++ Unit: s(second)|h(hour)|d(day)
+
 ## rocksdb.defaultcf.titan
 
 Configuration items related to `rocksdb.defaultcf.titan`.
