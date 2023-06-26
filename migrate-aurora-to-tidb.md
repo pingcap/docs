@@ -16,6 +16,7 @@ The whole migration has two processes:
 ## Prerequisites
 
 - [Install Dumpling and TiDB Lightning](/migration-tools.md). If you want to create the corresponding tables manually on the target side, do not install Dumpling.
+- [Get the upstream database privileges required by Dumpling](/dumpling-overview.md#required-privileges).
 - [Get the target database privileges required for TiDB Lightning](/tidb-lightning/tidb-lightning-faq.md#what-are-the-privilege-requirements-for-the-target-database).
 
 ## Import full data to TiDB
