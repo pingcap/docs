@@ -25,11 +25,11 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.2/quick-start-with-
   <tr>
     <td rowspan="2">Scalability and Performance</td>
     <td>Resource groups supports managing runaway queries (experimental)</td>
-    <td>Resource groups can manage queries that execute longer time than expected by either deprioritizing or killing them. This feature enables you to set the maximum execution time for queries at the resource group level and specify the actions to be taken by TiDB when a query exceeds this limit, which offers you greater control over the impact of unexpectedly long-running queries on your cluster.
+    <td>Resource groups can manage queries that take longer time than expected by either deprioritizing or killing them. This feature enables you to set the maximum execution time for queries at the resource group level and specify the actions to be taken by TiDB when a query exceeds this limit, which offers you greater control over the impact of unexpectedly long-running queries on your cluster.
     </td>
   </tr>
   <tr>
-    <td>TiFlash support for pipeline execution model (experimental)</td>
+    <td>TiFlash supports the pipeline execution model (experimental)</td>
     <td>TiFlash supports a pipeline execution model to optimize thread resource control.
 This is currently depended on by TiDB Serverless analytical capabilities.</td>
   </tr>
