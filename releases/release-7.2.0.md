@@ -234,17 +234,13 @@ This is currently depended on by TiDB Serverless analytical capabilities.</td>
     - Use a separate gRPC connection for PD leader election to prevent the impact of other requests [#6403](https://github.com/tikv/pd/issues/6403) @[rleungx](https://github.com/rleungx)
     - Enable the bucket splitting by default to mitigate hotspot issues in multi-Region scenarios [#6433](https://github.com/tikv/pd/issues/6433) @[bufferflies](https://github.com/bufferflies)
 
-<!--**tw@hfxsd**-->
-
 + Tools
 
-    + Backup & Restore (BR)
+    + Backup & Restore (BR) <!--**tw@hfxsd**-->
 
         - Support access to Azure Blob Storage by shared access signature (SAS) [#44199](https://github.com/pingcap/tidb/issues/44199) @[Leavrth](https://github.com/Leavrth)
 
-    <!--**tw@hfxsd**-->
-
-    + TiCDC
+    + TiCDC <!--**tw@hfxsd**-->
 
         - Optimize the structure of the directory where data files are stored when a DDL occurs in the scenario of replication to an object storage service [#8891](https://github.com/pingcap/tiflow/issues/8891) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - Support the OAUTHBEARER authentication in the scenario of replication to Kafka [#8865](https://github.com/pingcap/tiflow/issues/8865) @[hi-rustin](https://github.com/hi-rustin)
@@ -254,9 +250,7 @@ This is currently depended on by TiDB Serverless analytical capabilities.</td>
 
         - Support using MySQL 8.0 to compress binlogs [#6381](https://github.com/pingcap/tiflow/issues/6381) @[dveeden](https://github.com/dveeden)
 
-    <!--**tw@ran-huang**-->
-
-    + TiDB Lightning
+    + TiDB Lightning <!--**tw@ran-huang**-->
 
         - Optimize the retry mechanism during import to avoid errors caused by leader switching [#44478](https://github.com/pingcap/tidb/pull/44478)
         - Verify checksum throught SQL after import to improve stability of verification [#41941](https://github.com/pingcap/tidb/issues/41941)
@@ -312,17 +306,13 @@ This is currently depended on by TiDB Serverless analytical capabilities.</td>
 
 + Tools
 
-    <!--**tw@hfxsd**-->
-
-    + Backup & Restore (BR)
+    + Backup & Restore (BR) <!--**tw@hfxsd**-->
 
         - Fix the issue that `checksum mismatch` is falsely reported in some cases [#44472](https://github.com/pingcap/tidb/issues/44472) @[Leavrth](https://github.com/Leavrth)
         - Fix the issue that `resolved lock timeout` is falsely reported in some cases [#43236](https://github.com/pingcap/tidb/issues/43236) @[YuJuncen](https://github.com/YuJuncen)
         - Fix the issue that TiDB might panic when restoring statistics information [#44490](https://github.com/pingcap/tidb/issues/44490) @[tangenta](https://github.com/tangenta)
 
-    <!--**tw@hfxsd**-->
-
-    + TiCDC
+    + TiCDC <!--**tw@hfxsd**-->
 
         - Fix the issue that Resolved TS does not advance properly in some cases [#8963](https://github.com/pingcap/tiflow/issues/8963) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - Fix the issue that the `UPDATE` operation cannot output old values when the Avro or CSV protocol is used [#9086](https://github.com/pingcap/tiflow/issues/9086) @[3AceShowHand](https://github.com/3AceShowHand)
