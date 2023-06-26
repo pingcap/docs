@@ -204,7 +204,9 @@ This is currently depended on by TiDB Serverless analytical capabilities.</td>
 
 ## Improvements
 
-+ TiDB <!--**tw@ran-huang**-->
++ TiDB
+
+    <!--**tw@ran-huang**-->
 
     - 优化构造索引扫描范围的逻辑，支持将一些复杂条件转化为索引扫描范围 [#41572](https://github.com/pingcap/tidb/issues/41572) [#44389](https://github.com/pingcap/tidb/issues/44389) @xuyifangreeneyes
     - 为 stale read 新增相关监控指标 [#43325](https://github.com/pingcap/tidb/issues/43325) @[you06](https://github.com/you06)
@@ -215,7 +217,9 @@ This is currently depended on by TiDB Serverless analytical capabilities.</td>
     - 支持将utf8和utf8mb3都识别为旧的三字节字符集编码。[#26226](https://github.com/pingcap/tidb/issues/26226) @[dveeden](https://github.com/dveeden)
     - 支持将 := 用于 update 语句中赋值。[#44751](https://github.com/pingcap/tidb/issues/44751) @[CbcWestwolf](https://github.com/CbcWestwolf)
 
-+ TiKV <!--**tw@Oreoxmt**-->
++ TiKV
+
+    <!--**tw@Oreoxmt**-->
 
     - Support configuring the retry interval of PD connections in scenarios such as request failures using `pd.retry-interval` [#14964](https://github.com/tikv/tikv/issues/14964) @[rleungx](https://github.com/rleungx)
     - Optimize the resource control scheduling algorithm by incorporating the global resource usage [#14604](https://github.com/tikv/tikv/issues/14604) @[Connor1996](https://github.com/Connor1996)
@@ -223,23 +227,25 @@ This is currently depended on by TiDB Serverless analytical capabilities.</td>
     - Add related metrics for `check_leader` requests [#14658](https://github.com/tikv/tikv/issues/14658) @[you06](https://github.com/you06)
     - Provide the detailed time information during TiKV handling write commands [#12362](https://github.com/tikv/tikv/issues/12362) @[cfzjywxk](https://github.com/cfzjywxk)
 
-+ PD <!--**tw@Oreoxmt**-->
++ PD
+
+    <!--**tw@Oreoxmt**-->
 
     - Use a separate gRPC connection for PD leader election to prevent the impact of other requests [#6403](https://github.com/tikv/pd/issues/6403) @[rleungx](https://github.com/rleungx)
     - Enable the bucket splitting by default to mitigate hotspot issues in multi-Region scenarios [#6433](https://github.com/tikv/pd/issues/6433) @[bufferflies](https://github.com/bufferflies)
 
-+ TiFlash
-
-    - note [#issue](链接) @[贡献者 GitHub ID](链接)
-
 + Tools
 
-    + Backup & Restore (BR) <!--**tw@hfxsd**-->
+    + Backup & Restore (BR)
+
+        <!--**tw@hfxsd**-->
 
         - Support access to Azure Blob Storage by shared access signature (SAS) [#44199](https://github.com/pingcap/tidb/issues/44199) @[Leavrth](https://github.com/Leavrth)
 
-    + TiCDC <!--**tw@hfxsd**-->
-        
+    + TiCDC
+
+        <!--**tw@hfxsd**-->
+
         - Optimize the structure of the directory where data files are stored when a DDL occurs in the scenario of replication to an object storage service [#8891](https://github.com/pingcap/tiflow/issues/8891) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - Support the OAUTHBEARER authentication in the scenario of replication to Kafka [#8865](https://github.com/pingcap/tiflow/issues/8865) @[hi-rustin](https://github.com/hi-rustin)
         - Add the option of outputting only the handle keys for the `DELETE` operation in the scenario of replication to Kafka [#9143](https://github.com/pingcap/tiflow/issues/9143) @[3AceShowHand](https://github.com/3AceShowHand)
@@ -249,6 +255,8 @@ This is currently depended on by TiDB Serverless analytical capabilities.</td>
         - Support using MySQL 8.0 to compress binlogs [#6381](https://github.com/pingcap/tiflow/issues/6381) @[dveeden](https://github.com/dveeden)
 
     + TiDB Lightning
+
+        <!--**tw@ran-huang**-->
 
         - 优化导入时遇到 leader 切换导致的错误的重试机制 [#44478](https://github.com/pingcap/tidb/pull/44478)
         - 导入完成后通过 SQL 的方式校验 checksum，提升检验的稳定性 [#41941](https://github.com/pingcap/tidb/issues/41941)
@@ -278,34 +286,44 @@ This is currently depended on by TiDB Serverless analytical capabilities.</td>
     - 修复了执行时间超过 `MAX_EXECUTION_TIME` 被 kill 的返回值和 MySQL 不一致的问题 [#43031](https://github.com/pingcap/tidb/issues/43031) @[dveeden](https://github.com/dveeden)
     - 修复了 Leading Hint 无法支持 query block alias 的问题 [#44645](https://github.com/pingcap/tidb/issues/44645)  @[qw4990](https://github.com/qw4990)
     - last_insert_id函数的返回类型从varchar变更为longlong，与MySQL相同，同时last_insert_id的最大上限也变更为MaxUint64。[#44574](https://github.com/pingcap/tidb/issues/44574)  @[Defined2014](https://github.com/Defined2014)
-    - 修复了 CTE 多次被非关联子查询引用的情况下，因过滤条件下推导致的结果错误 [#44051] (https://github.com/pingcap/tidb/issues/44051)  @[winoros](https://github.com/winoros)
-    - 修复了 outer join reorder 对 condition 的错误处理导致的结果正确性问题 [#44314] (https://github.com/pingcap/tidb/issues/44314)  @[AilinKid](https://github.com/AilinKid)
-    - 修复了 `prepare stmt from "analyze table xxx"` 会被 `tidb_mem_quota_query` kill 掉的问题 [#44320] (https://github.com/pingcap/tidb/issues/44320) @[chrysan](https://github.com/chrysan)
+    - 修复了 CTE 多次被非关联子查询引用的情况下，因过滤条件下推导致的结果错误 [#44051](https://github.com/pingcap/tidb/issues/44051)  @[winoros](https://github.com/winoros)
+    - 修复了 outer join reorder 对 condition 的错误处理导致的结果正确性问题 [#44314](https://github.com/pingcap/tidb/issues/44314)  @[AilinKid](https://github.com/AilinKid)
+    - 修复了 `prepare stmt from "analyze table xxx"` 会被 `tidb_mem_quota_query` kill 掉的问题 [#44320](https://github.com/pingcap/tidb/issues/44320) @[chrysan](https://github.com/chrysan)
 
-+ TiKV <!--**tw@Oreoxmt**-->
++ TiKV
+
+    <!--**tw@Oreoxmt**-->
 
     - Fix the issue that the transaction returns an incorrect value when TiKV handles stale pessimistic lock conflicts [#13298](https://github.com/tikv/tikv/issues/13298) @[cfzjywxk](https://github.com/cfzjywxk)
     - Fix the issue that in-memory pessimistic lock might cause flashback failure and data inconsistency [#13303](https://github.com/tikv/tikv/issues/13303) @[JmPotato](https://github.com/JmPotato)
     - Fix the issue that the fair lock might be incorrect when TiKV handles stale requests [#13298](https://github.com/tikv/tikv/issues/13298) @[cfzjywxk](https://github.com/cfzjywxk)
     - Fix the issue that autocommit and point get replica read might break linearizability [#14715](https://github.com/tikv/tikv/issues/14715) @[cfzjywxk](https://github.com/cfzjywxk)
 
-+ PD <!--**tw@Oreoxmt**-->
++ PD
+
+    <!--**tw@Oreoxmt**-->
 
     - Fix the issue that redundant replicas cannot be automatically repaired in some corner cases [#6573](https://github.com/tikv/pd/issues/6573) @[nolouch](https://github.com/nolouch)
 
-+ TiFlash <!--**tw@qiancai**-->
++ TiFlash
+
+    <!--**tw@qiancai**-->
 
     - 修复在 join 的 build 端数据量很大且含有大量短字符串时内存消耗过大的问题 [#7416](https://github.com/pingcap/tiflash/issues/7416) @[yibin87](https://github.com/yibin87)
 
 + Tools
 
-    + Backup & Restore (BR) <!--**tw@hfxsd**-->
+    + Backup & Restore (BR)
+
+        <!--**tw@hfxsd**-->
 
         - Fix the issue that `checksum mismatch` is falsely reported in some cases [#44472](https://github.com/pingcap/tidb/issues/44472) @[Leavrth](https://github.com/Leavrth)
         - Fix the issue that `resolved lock timeout` is falsely reported in some cases [#43236](https://github.com/pingcap/tidb/issues/43236) @[YuJuncen](https://github.com/YuJuncen)
         - Fix the issue that TiDB might panic when restoring statistics information [#44490](https://github.com/pingcap/tidb/issues/44490) @[tangenta](https://github.com/tangenta)
 
-    + TiCDC <!--**tw@hfxsd**-->
+    + TiCDC
+
+        <!--**tw@hfxsd**-->
 
         - Fix the issue that Resolved TS does not advance properly in some cases [#8963](https://github.com/pingcap/tiflow/issues/8963) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - Fix the issue that the `UPDATE` operation cannot output old values when the Avro or CSV protocol is used [#9086](https://github.com/pingcap/tiflow/issues/9086) @[3AceShowHand](https://github.com/3AceShowHand)
@@ -313,11 +331,6 @@ This is currently depended on by TiDB Serverless analytical capabilities.</td>
         - Fix the issue of too many downstream logs caused by frequently setting the downstream BDR-related variables when replicating data to TiDB or MySQL [#9180](https://github.com/pingcap/tiflow/issues/9180) @[asddongmen](https://github.com/asddongmen)
         - Fix the issue that the PD node crashing causes the TiCDC node to restart [#8868](https://github.com/pingcap/tiflow/issues/8868) @[asddongmen](https://github.com/asddongmen)
         - Fix the issue that TiCDC cannot create a changefeed with a downstream KOP [#8892](https://github.com/pingcap/tiflow/issues/8892) @[hi-rustin](https://github.com/hi-rustin)
-
-    + TiDB Data Migration (DM)
-
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
-        - note [#issue](链接) @[贡献者 GitHub ID](链接)
 
     + TiDB Lightning
 
