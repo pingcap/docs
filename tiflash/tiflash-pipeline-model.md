@@ -95,9 +95,9 @@ As shown in the preceding figure, the pipeline execution model consists of two m
 
 - The pipeline query executor
 
-    The pipeline query executor converts the query request sent from the TiDB node into a pipeline dag.
+    The pipeline query executor converts the query request sent from the TiDB node into a pipeline directed acyclic graph (DAG).
 
-    It will find the pipeline breaker operators in the query and split the query into several pipelines according to the pipeline breakers. Then, it assembles the pipelines into a directed acyclic graph (DAG) according to the dependency relationship between the pipelines.
+    It will find the pipeline breaker operators in the query and split the query into several pipelines according to the pipeline breakers. Then, it assembles the pipelines into a DAG according to the dependency relationship between the pipelines.
 
     A pipeline breaker is an operator that has a pause/blocking logic. This type of operator continuously receives data blocks from the upstream operator until all data blocks are received, and then return the processing result to the downstream operator. This type of operator breaks the data processing pipeline, so it is called a pipeline breaker. One of the pipeline breakers is the Aggregation operator, which writes all the data of the upstream operator into a hash table before calculating the data in the hash table and returning the result to the downstream operator.
 
