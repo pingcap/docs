@@ -40,7 +40,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.2/quick-start-with-
   <tr>
     <td rowspan="2">DB Operations and Observability</td>
     <td>DDL supports <a href="https://docs.pingcap.com/tidb/v7.2/ddl-introduction#ddl-related-commands">pause and resume operations</a> (experimental)</td>
-    <td>DDL operations such as adding indexes can consume a lot of resources and affect online traffic. As homage to traditional schema change tools like pt-osc and gh-ost, TiDB now natively supports suspending multiple background jobs at once. This feature lets you conserve resources and minimize the impact on online traffic, without the need to cancel and restart the jobs.</td>
+    <td>This new capability lets users temporarily suspend resource-intensive DDL operations, such as index creation, to conserve resources and minimize impact on online traffic. Seamlessly resume these operations when ready, without the need to cancel and restart. Enhance resource utilization, improve user experience, and streamline schema changes with DDL Pause and Resume.</td>
   </tr>
 </tbody>
 </table>
