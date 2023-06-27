@@ -21,21 +21,22 @@ This TiDB statement is not applicable to TiDB Cloud.
 
 - For data files stored in Amazon S3 or GCS, `IMPORT INTO` supports running in the [TiDB backend task distributed execution framework](/tidb-distributed-execution-framework.md).
 
-    - When this framework is enabled ([tidb_enable_dist_task](/system-variables.md#tidb_enable_dist_task-new-in-v710) is `ON`), `IMPORT INTO` distributes subtasks to different TiDB nodes for execution to improve the import efficiency.
+    - When this framework is enabled ([tidb_enable_dist_task](/system-variables.md#tidb_enable_dist_task-new-in-v710) is `ON`), `IMPORT INTO` splits a data import job into multiple sub-jobs and distributes these sub-jobs to different TiDB nodes for execution to improve the import efficiency.
     - When this framework is disabled, `IMPORT INTO` only supports running on the TiDB node where the current user is connected.
 
-- For data files stored locally in TiDB, `IMPORT INTO` only supports running on the TiDB node where the current user is connected. Therefore, the data files need to be placed on the TiDB node where the current user is connected.
+- For data files stored locally in TiDB, `IMPORT INTO` only supports running on the TiDB node where the current user is connected. Therefore, the data files need to be placed on the TiDB node where the current user is connected. If you access TiDB through a proxy or load balancer, you cannot import data files stored locally in TiDB.
 
 ## Restrictions
 
 - `IMPORT INTO` only supports importing data into existing empty tables in the database.
 - `IMPORT INTO` does not support transactions or rollback. Executing `IMPORT INTO` within an explicit transaction (`BEGIN`/`END`) will return an error.
 - The execution of `IMPORT INTO` blocks the current connection until the import is completed. To execute the statement asynchronously, you can add the `DETACHED` option.
-- `IMPORT INTO` does not support working simultaneously with features such as [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md), [acceleration of adding indexes](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630), data import using TiDB Lightning, data replication using TiCDC, or [Point-in-Time Recovery (PITR)](/br/br-log-architecture.md).
-- Only one `IMPORT INTO` task can run on a cluster at a time. Although `IMPORT INTO` performs a precheck for running tasks, it is not a hard limit. Starting multiple tasks might work when multiple clients execute `IMPORT INTO` simultaneously, but you need to avoid that.
-- During the data import process, do not perform DDL or DML operations on the target table, and do not execute [FLASHBACK DATABASE](/sql-statements/sql-statement-flashback-database.md) for the target database. These operations can lead to import failures or data inconsistencies. In addition, it is **NOT** recommended to perform read operations during the import process, as the data being read might be inconsistent. Perform read and write operations only after the import is completed.
+- `IMPORT INTO` does not support working simultaneously with features such as [Backup & Restore](/br/backup-and-restore-overview.md), [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-to-timestamp.md), [acceleration of adding indexes](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630), data import using TiDB Lightning, data replication using TiCDC, or [Point-in-Time Recovery (PITR)](/br/br-log-architecture.md).
+- Only one `IMPORT INTO` job can run on a cluster at a time. Although `IMPORT INTO` performs a precheck for running jobs, it is not a hard limit. Starting multiple import jobs might work when multiple clients execute `IMPORT INTO` simultaneously, but you need to avoid that because it might result in data inconsistency or import failures.
+- During the data import process, do not perform DDL or DML operations on the target table, and do not execute [`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md) for the target database. These operations can lead to import failures or data inconsistencies. In addition, it is **NOT** recommended to perform read operations during the import process, as the data being read might be inconsistent. Perform read and write operations only after the import is completed.
 - The import process consumes system resources significantly. To get better performance, it is recommended to use TiDB nodes with at least 32 cores and 64 GiB of memory. TiDB writes sorted data to the TiDB [temporary directory](/tidb-configuration-file.md#temp-dir-new-in-v630) during import, so it is recommended to configure high-performance storage media such as flash memory. For more information, see [Physical Import Mode limitations](/tidb-lightning/tidb-lightning-physical-import-mode.md#requirements-and-restrictions).
-- The TiDB [temporary directory](/tidb-configuration-file.md#temp-dir-new-in-v630) is expected to have at least 90 GiB of available space.
+- The TiDB [temporary directory](/tidb-configuration-file.md#temp-dir-new-in-v630) is expected to have at least 90 GiB of available space. It is recommended to allocate storage space that is equal to or greater than the volume of data to be imported.
+- One import job supports importing data into one target table only. To import data into multiple target tables, after the import for a target table is completed, you need to create a new job for the next target table.
 
 ## Prerequisites for import
 
@@ -126,13 +127,13 @@ The supported options are described as follows:
 | `FIELDS_ESCAPED_BY='<char>'` | CSV | Specifies the escape character for fields. The default escape character is `\`. |
 | `FIELDS_DEFINED_NULL_BY='<string>'` | CSV | Specifies the value that represents `NULL` in the fields. The default value is `\N`. |
 | `LINES_TERMINATED_BY='<string>'` | CSV | Specifies the line terminator. By default, `IMPORT INTO` automatically identifies `\n`, `\r`, or `\r\n` as line terminators. If the line terminator is one of these three, you do not need to explicitly specify this option. |
-| `SKIP_ROWS=<number>` | CSV | Specifies the number of rows to skip. The default value is `0`. You can use this option to skip the header in a CSV file. This option applies to all files matched by `fileLocation`. |
+| `SKIP_ROWS=<number>` | CSV | Specifies the number of rows to skip. The default value is `0`. You can use this option to skip the header in a CSV file. If you use a wildcard to specify the source files for import, this option applies to all source files that are matched by the wildcard in `fileLocation`. |
 | `DISK_QUOTA='<string>'` | All formats | Specifies the disk space threshold that can be used during data sorting. The default value is 80% of the disk space in the TiDB [temporary directory](/tidb-configuration-file.md#temp-dir-new-in-v630). If the total disk size cannot be obtained, the default value is 50 GiB. When specifying `DISK_QUOTA` explicitly, make sure that the value does not exceed 80% of the disk space in the TiDB temporary directory. |
 | `DISABLE_TIKV_IMPORT_MODE` | All formats | Specifies whether to disable switching TiKV to import mode during the import process. By default, switching TiKV to import mode is not disabled. If there are ongoing read-write operations in the cluster, you can enable this option to avoid impact from the import process. |
-| `THREAD=<number>` | All formats | Specifies the concurrency for import. When the data file format is CSV or SQL, the default value is 50% of the CPU cores, with a minimum value of 1. You can explicitly specify this option to control the resource usage, but make sure that the value does not exceed the number of CPU cores. |
+| `THREAD=<number>` | All formats | Specifies the concurrency for import. The default value is 50% of the CPU cores, with a minimum value of 1. You can explicitly specify this option to control the resource usage, but make sure that the value does not exceed the number of CPU cores. To import data into a new cluster without any data, it is recommended to increase this concurrency appropriately to improve import performance. If the target cluster is already used in a production environment, it is recommended to adjust this concurrency according to your application requirements. |
 | `MAX_WRITE_SPEED='<string>'` | All formats | Controls the write speed to a TiKV node. By default, there is no speed limit. For example, you can specify this option as `1MiB` to limit the write speed to 1 MiB/s. |
 | `CHECKSUM_TABLE='<string>'` | All formats | Configures whether to perform a checksum check on the target table after the import to validate the import integrity. The supported values include `"required"` (default), `"optional"`, and `"off"`. `"required"` means performing a checksum check after the import. If the checksum check fails, TiDB will return an error and the import will exit. `"optional"` means performing a checksum check after the import. If an error occurs, TiDB will return a warning and ignore the error. `"off"` means not performing a checksum check after the import. |
-| `DETACHED` | All Formats | Controls whether to execute `IMPORT INTO` asynchronously. When this option is enabled, executing `IMPORT INTO` will immediately return the `Job_ID` of the import job, and the job will be executed asynchronously in the backend. |
+| `DETACHED` | All Formats | Controls whether to execute `IMPORT INTO` asynchronously. When this option is enabled, executing `IMPORT INTO` immediately returns the information of the import job (such as the `Job_ID`), and the job is executed asynchronously in the backend. |
 
 ## Output
 
@@ -152,7 +153,7 @@ IMPORT INTO t FROM '/path/to/small.csv';
 When the `DETACHED` mode is enabled, executing the `IMPORT INTO` statement will immediately return the job information in the output. From the output, you can see that the status of the job is `pending`, which means waiting for execution.
 
 ```sql
-mysql> IMPORT INTO t FROM '/path/to/small.csv' WITH DETACHED;
+IMPORT INTO t FROM '/path/to/small.csv' WITH DETACHED;
 +--------+--------------------+--------------+----------+-------+---------+------------------+---------------+----------------+----------------------------+------------+----------+------------+
 | Job_ID | Data_Source        | Target_Table | Table_ID | Phase | Status  | Source_File_Size | Imported_Rows | Result_Message | Create_Time                | Start_Time | End_Time | Created_By |
 +--------+--------------------+--------------+----------+-------+---------+------------------+---------------+----------------+----------------------------+------------+----------+------------+
@@ -164,7 +165,7 @@ mysql> IMPORT INTO t FROM '/path/to/small.csv' WITH DETACHED;
 
 For an import job with the `DETACHED` mode enabled, you can use [`SHOW IMPORT`](/sql-statements/sql-statement-show-import-job.md) to view its current job progress.
 
-After an import job is started, you can cancel it using [`CANCEL IMPORT JOB`](/sql-statements/sql-statement-cancel-import-job.md).
+After an import job is started, you can cancel it using [`CANCEL IMPORT JOB <job-id>`](/sql-statements/sql-statement-cancel-import-job.md).
 
 ## Examples
 
@@ -206,9 +207,17 @@ IMPORT INTO t FROM '/path/to/file-*.csv'
 
 ### Import data files from Amazon S3 or GCS
 
-```sql
-IMPORT INTO t FROM 's3://bucket-name/test.csv?access-key=XXX&secret-access-key=XXX';
-```
+- Import data files from Amazon S3:
+
+    ```sql
+    IMPORT INTO t FROM 's3://bucket-name/test.csv?access-key=XXX&secret-access-key=XXX';
+    ```
+
+- Import data files from GCS:
+
+    ```sql
+    IMPORT INTO t FROM 'gs://bucket-name/test.csv';
+    ```
 
 For details about the URI path configuration for Amazon S3 or GCS, see [External storage](/br/backup-and-restore-storages.md#uri-format).
 
@@ -239,7 +248,7 @@ IMPORT INTO t FROM '/path/to/file.sql' FORMAT 'sql';
 To limit the write speed to a TiKV node to 10 MiB/s, execute the following SQL statement:
 
 ```sql
-IMPORT INTO t FROM 's3://bucket/path/to/file.parquet' FORMAT 'parquet' WITH MAX_WRITE_SPEED='10MiB';
+IMPORT INTO t FROM 's3://bucket/path/to/file.parquet?access-key=XXX&secret-access-key=XXX' FORMAT 'parquet' WITH MAX_WRITE_SPEED='10MiB';
 ```
 
 ## MySQL compatibility
