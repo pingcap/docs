@@ -76,7 +76,7 @@ In the course of development, this roadmap is subject to change based on user ne
           <li>
             <b>Resource control for background tasks</b><br />
             <i>
-              Control over how background tasks, such as imports, DDL, TTL, auto-analyze, and compactions, can affect foreground traffic.
+              Control over how background tasks, such as imports, DDL, TTL, auto-analyze, and compactions, can affect foreground traffic
             </i>
           </li>
         </ul>
