@@ -11,7 +11,7 @@ TiDB Lightning ([Physical Import Mode](/tidb-lightning/tidb-lightning-physical-i
 
 - If the data size of the source files is within 10 TiB, it is recommended to use a single instance of TiDB Lightning for the import.
 - If the data size of the source files exceeds 10 TiB, it is recommended to use multiple instances of TiDB Lightning for [Parallel Import](/tidb-lightning/tidb-lightning-distributed-import.md).
-- If the source file data scale is exceptionally large ( larger than 50 TiB), in addition to parallel importing, you need to make certain preparations and optimizations based on the characteristics of the source data, table definitions, and parameter configurations to achieve better and faster completion of large-scale data import.
+- If the source file data scale is exceptionally large (larger than 50 TiB), in addition to parallel importing, you need to make certain preparations and optimizations based on the characteristics of the source data, table definitions, and parameter configurations to achieve better and faster completion of large-scale data import.
 
 The following sections in this article apply to both importing multiple tables and importing large single tables:
 
@@ -43,7 +43,7 @@ When you import data, there are some key factors that can affect import performa
 
 - Compression ratio
 
-  Data imported into a TiDB cluster is stored in a compressed format. The compression ratio can not be calculated in advance. It can only be determined after the data is actually imported into the TiKV cluster.
+  Data imported into a TiDB cluster is stored in a compressed format. The compression ratio cannot be calculated in advance. It can only be determined after the data is actually imported into the TiKV cluster.
 
   As a best practice, you can first import a small portion of the data (for example, 10%) to obtain the corresponding compression ratio of the cluster, and then use it to estimate the compression ratio of the entire data import.
 
