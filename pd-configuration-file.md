@@ -131,7 +131,7 @@ Configuration items related to pd-server
 
 > **Note:**
 >
-> For clusters upgraded from v6.0.0~v6.2.0, the default value of `min-resolved-ts-persistence-interval` does not change, which means that it will remain `"0s"`. To enable this feature, you need to manually change the value of this configuration item.
+> For clusters upgraded from v6.0.0~v6.2.0, the default value of `min-resolved-ts-persistence-interval` does not change after the upgrade, which means that it will remain `"0s"`. To enable this feature, you need to manually change the value of this configuration item.
 
 ## security
 
