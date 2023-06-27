@@ -572,7 +572,7 @@ Configuration items related to the I/O rate limiter.
 
 ### `retry-interval`
 
-+ The interval for retrying to initialize the PD connection
++ The interval for retrying the PD connection.
 + Default value: `"300ms"`
 
 ### `retry-log-every`
@@ -988,10 +988,10 @@ Configuration items related to Raftstore.
 + Default value: `1MB`
 + Minimum value: `0`
 
-### `report-min-resolved-ts-interval`
+### `report-min-resolved-ts-interval` <span class="version-mark">New in v6.0.0</span>
 
-+ Determines the minimum interval at which the resolved timestamp is reported to the PD leader. If this value is set to `0`, it means that the reporting is disabled.
-+ Default value: `"1s"`, which is the smallest positive value
++ Determines the interval at which the minimum resolved timestamp is reported to the PD leader. If this value is set to `0`, it means that the reporting is disabled.
++ Default value: Before v6.3.0, the default value is `"0s"`. Starting from v6.3.0, the default value is `"1s"`, which is the smallest positive value.
 + Minimum value: `0`
 + Unit: second
 
@@ -1518,7 +1518,7 @@ Configuration items related to `rocksdb.defaultcf`, `rocksdb.writecf`, and `rock
 ### `compaction-guard-min-output-file-size`
 
 + The minimum SST file size when the compaction guard is enabled. This configuration prevents SST files from being too small when the compaction guard is enabled.
-+ Default value: `"8MB"`
++ Default value: Starting from v7.2.0, the default value is changed from `"8MB"` to `"1MB"`
 + Unit: KB|MB|GB
 
 ### `compaction-guard-max-output-file-size`

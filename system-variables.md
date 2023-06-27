@@ -957,6 +957,60 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 </CustomContent>
 
+### tidb_analyze_skip_column_types <span class="version-mark">New in v7.2.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Default value: "json,blob,mediumblob,longblob"
+- Possible values: "json,blob,mediumblob,longblob,text,mediumtext,longtext"
+- This variable controls which types of columns are skipped for statistics collection when executing the `ANALYZE` command to collect statistics. The variable is only applicable for `tidb_analyze_version = 2`. Even if you specify a column using `ANALYZE TABLE t COLUMNS c1, ... , cn`, no statistics will be collected for the specified column if its type is in `tidb_analyze_skip_column_types`.
+
+```
+mysql> SHOW CREATE TABLE t;
++-------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table | Create Table                                                                                                                                                                                                             |
++-------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| t     | CREATE TABLE `t` (
+  `a` int(11) DEFAULT NULL,
+  `b` varchar(10) DEFAULT NULL,
+  `c` json DEFAULT NULL,
+  `d` blob DEFAULT NULL,
+  `e` longblob DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin |
++-------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT @@tidb_analyze_skip_column_types;
++----------------------------------+
+| @@tidb_analyze_skip_column_types |
++----------------------------------+
+| json,blob,mediumblob,longblob    |
++----------------------------------+
+1 row in set (0.00 sec)
+
+mysql> ANALYZE TABLE t;
+Query OK, 0 rows affected, 1 warning (0.05 sec)
+
+mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
++---------------------------------------------------------------------+
+| job_info                                                            |
++---------------------------------------------------------------------+
+| analyze table columns a, b with 256 buckets, 500 topn, 1 samplerate |
++---------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> ANALYZE TABLE t COLUMNS a, c;
+Query OK, 0 rows affected, 1 warning (0.04 sec)
+
+mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
++------------------------------------------------------------------+
+| job_info                                                         |
++------------------------------------------------------------------+
+| analyze table columns a with 256 buckets, 500 topn, 1 samplerate |
++------------------------------------------------------------------+
+1 row in set (0.00 sec)
+```
+
 ### tidb_auto_analyze_end_time
 
 - Scope: GLOBAL
@@ -1687,6 +1741,19 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Default value: `OFF`
 - This variable is used to set whether to enable the statistics `Fast Analyze` feature.
 - If the statistics `Fast Analyze` feature is enabled, TiDB randomly samples about 10,000 rows of data as statistics. When the data is distributed unevenly or the data size is small, the statistics accuracy is low. This might lead to a non-optimal execution plan, for example, selecting a wrong index. If the execution time of the regular `Analyze` statement is acceptable, it is recommended to disable the `Fast Analyze` feature.
+
+### tidb_enable_fast_table_check <span class="version-mark">New in v7.2.0</span>
+
+> **Note:**
+>
+> This variable does not work for [multi-valued indexes](/sql-statements/sql-statement-create-index.md#multi-valued-index) and prefix indexes.
+
+- Scope: SESSION | GLOBAL
+- Persists to the cluster: Yes
+- Type: Boolean
+- Default value: `ON`
+- This variable is used to control whether to use a checksum-based approach to quickly check the integrity of data and indexes in a table. The default value `ON` means this feature is enabled by default.
+- When this variable is enabled, TiDB can execute the [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) statement in a faster way.
 
 ### tidb_enable_foreign_key <span class="version-mark">New in v6.3.0</span>
 
@@ -3437,13 +3504,29 @@ mysql> desc select count(distinct a) from test.t;
 
 ### tidb_opt_fix_control <span class="version-mark">New in v7.1.0</span>
 
+<CustomContent platform="tidb">
+
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Type: String
 - Default value: `""`
 - This variable is used to control some internal behaviors of the optimizer.
 - The optimizer's behavior might vary depending on user scenarios or SQL statements. This variable provides a more fine-grained control over the optimizer and helps to prevent performance regression after upgrading caused by behavior changes in the optimizer.
-- This variable supports multiple control items, separated by commas (`,`). The format is `"<#issue1>:<value1>,<#issue2>:<value2>,...,<#issueN>:<valueN>"`, where `<#issueN>` represents the control number, corresponding to the link `https://github.com/pingcap/tidb/issues/<#issue>` that describes the control item, and `<valueN>` is the target value set for the control item.
+- For a more detailed introduction, see [Optimizer Fix Controls](/optimizer-fix-controls.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: String
+- Default value: `""`
+- This variable is used to control some internal behaviors of the optimizer.
+- The optimizer's behavior might vary depending on user scenarios or SQL statements. This variable provides a more fine-grained control over the optimizer and helps to prevent performance regression after upgrading caused by behavior changes in the optimizer.
+- For a more detailed introduction, see [Optimizer Fix Controls](https://docs.pingcap.com/tidb/v7.2/optimizer-fix-controls).
+
+</CustomContent>
 
 ### tidb_opt_force_inline_cte <span class="version-mark">New in v6.3.0</span>
 
