@@ -135,6 +135,7 @@ ALTER TABLE t ALTER CONSTRAINT c1 NOT ENFORCED;
 ```
 
 ### MySQL Compatibility
+
 - It is not supported to add a `CHECK` constraint while adding a column in (for example, `ALTER TABLE t ADD COLUMN a CHECK(a > 0)`), otherwise only the column will be added successfully, and TiDB will ignore the `CHECK` constraint and will not report an error.
 - It is not supported to use `ALTER TABLE t CHANGE a b int CHECK(b > 0)` to add a `CHECK` constraint, and TiDB will report an error when using this statement.
 
