@@ -3506,14 +3506,13 @@ mysql> desc select count(distinct a) from test.t;
 
 > **警告：**
 >
-> Currently, letting the Common Table Expression(CTE) executed on the TiFlash MPP is still in development and its cost formula is still in ajustment. It's not recommended that you use it in production environments and you will need to open the variable [`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51) to avoid cases that the CTE can be executed in TiFlash MPP but is executed in TiDB actually.
+> The feature is still in development, don't change its default value.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
 - Default value: `OFF`
-- This variable controls whether the CTE can be executed on TiFlash MPP instead of on TiDB. The performance of the queries which contains CTE and are executed on TiFlash MPP will be increased significantly.
-- This variable only controls whether the non-recursive CTE can be executed on the TiFlash MPP or not. It cannot control the behavior of the recursive CTE.
+- This variable controls whether the non-recursive CTE can be executed on TiFlash MPP instead of on TiDB. The performance of the queries which contains CTE and are executed on TiFlash MPP will be increased significantly.
 
 ### tidb_opt_fix_control <span class="version-mark">New in v7.1.0</span>
 
