@@ -76,7 +76,7 @@ TiDB Serverless only supports in-place restoration. To restore your TiDB Serverl
     >
     > The **Point-in-Time Restore** feature is currently in beta.
 
-    To restore from any point in time within the backup retention, take the following steps:
+    To restore from a specific point in time, take the following steps:
 
     1. Click **Point-in-Time Restore**.
     2. Select the date and time you want to restore to.
