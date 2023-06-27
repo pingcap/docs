@@ -39,7 +39,6 @@ Currently, the `help_topic` is NULL.
 - `column_stats_usage`: the usage of column statistics
 - `schema_index_usage`: the usage of indexes
 - `analyze_jobs`: the ongoing statistics collection tasks and the history task records within the last 7 days
-- `load_data_jobs`: the ongoing or historical `LOAD DATA` jobs
 
 ## Execution plan-related system tables
 
@@ -57,9 +56,14 @@ Currently, the `help_topic` is NULL.
 
 ## TTL related system tables
 
-* `mysql.tidb_ttl_table_status` the previously executed TTL job and ongoing TTL job for all TTL tables
-* `mysql.tidb_ttl_task` the current ongoing TTL subtasks
-* `mysql.tidb_ttl_job_history` the execution history of TTL tasks in the last 90 days
+* `tidb_ttl_table_status`: the previously executed TTL job and ongoing TTL job for all TTL tables
+* `tidb_ttl_task`: the current ongoing TTL subtasks
+* `tidb_ttl_job_history`: the execution history of TTL tasks in the last 90 days
+
+## Runaway queries related system tables
+
+* `tidb_runaway_queries`: the history records of all identified runaway queries in the past 7 days
+* `tidb_runaway_quarantined_watch`: the most recently active quick identification rules for runaway queries (contains currently valid rules, and possibly also contains recently expired rules)
 
 ## Miscellaneous system tables
 

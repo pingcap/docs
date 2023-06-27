@@ -49,7 +49,7 @@ Get the power of a cloud-native, distributed SQL database built for real-time an
 
 -->
 
-TiDB is an open-source distributed SQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. It is MySQL compatible and features horizontal scalability, strong consistency, and high availability. You can deploy TiDB on premises or in the cloud.
+TiDB is an open-source distributed SQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. It is MySQL compatible and features horizontal scalability, strong consistency, and high availability. You can deploy TiDB in a self-hosted environment or in the cloud.
 
 <DocHomeCardContainer>
 
@@ -102,6 +102,12 @@ Documentation for TiDB Cloud application developers
 <DocHomeSection label="More resources" anchor="resources" id="resources">
 
 <DocHomeCardContainer>
+
+<DocHomeCard href="https://play.tidbcloud.com/?utm_source=docs&utm_medium=home_more_resources" icon="playground" label="TiDB Playground">
+
+One-stop and interactive experience of TiDB's capabilities WITHOUT registration
+
+</DocHomeCard>
 
 <DocHomeCard href="https://en.pingcap.com/education/" icon="cloud1" label="PingCAP Education">
 

@@ -34,6 +34,10 @@ You can adjust the PD scheduling parameters using [pd-ctl](/pd-control.md). Note
 
 This section introduces the configuration parameters of TiFlash.
 
+> **Tip:**
+>
+> If you need to adjust the value of a configuration item, refer to [Modify the configuration](/maintain-tidb-using-tiup.md#modify-the-configuration).
+
 ### Configure the `tiflash.toml` file
 
 ```toml
@@ -105,7 +109,7 @@ delta_index_cache_size = 0
     ## The total I/O bandwidth for disk reads and writes. The unit is bytes and the default value is 0, which means the I/O traffic is not limited by default.
     # max_bytes_per_sec = 0
     ## max_read_bytes_per_sec and max_write_bytes_per_sec have similar meanings to max_bytes_per_sec. max_read_bytes_per_sec means the total I/O bandwidth for disk reads, and max_write_bytes_per_sec means the total I/O bandwidth for disk writes.
-    ## These configuration items limit I/O bandwidth for disk reads and writes separately. You can use them for cloud storage that calculates the limit of I/O bandwidth for disk reads and writes separately, such as the Persistent Disk provided by Google Cloud Platform.
+    ## These configuration items limit I/O bandwidth for disk reads and writes separately. You can use them for cloud storage that calculates the limit of I/O bandwidth for disk reads and writes separately, such as the Persistent Disk provided by Google Cloud.
     ## When the value of max_bytes_per_sec is not 0, max_bytes_per_sec is prioritized.
     # max_read_bytes_per_sec = 0
     # max_write_bytes_per_sec = 0

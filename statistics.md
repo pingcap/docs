@@ -12,7 +12,7 @@ TiDB uses statistics to decide [which index to choose](/choose-index.md).
 
 The `tidb_analyze_version` variable controls the statistics collected by TiDB. Currently, two versions of statistics are supported: `tidb_analyze_version = 1` and `tidb_analyze_version = 2`.
 
-- For on-premises TiDB, the default value of this variable is `1` before v5.1.0. In v5.3.0 and later versions, the default value of this variable is `2`. If your cluster is upgraded from a version earlier than v5.3.0 to v5.3.0 or later, the default value of `tidb_analyze_version` does not change.
+- For TiDB Self-Hosted, the default value of this variable is `1` before v5.1.0. In v5.3.0 and later versions, the default value of this variable is `2`. If your cluster is upgraded from a version earlier than v5.3.0 to v5.3.0 or later, the default value of `tidb_analyze_version` does not change.
 - For TiDB Cloud, the default value of this variable is `1`.
 
 Compared to Version 1, Version 2 statistics avoids the potential inaccuracy caused by hash collision when the data volume is huge. It also maintains the estimate precision in most scenarios.
@@ -147,7 +147,8 @@ If a table has many columns, collecting statistics on all the columns can cause 
 
 > **Note:**
 >
-> Collecting statistics on some columns is only applicable for `tidb_analyze_version = 2`.
+> - Collecting statistics on some columns is only applicable for [`tidb_analyze_version = 2`](/system-variables.md#tidb_analyze_version-new-in-v510).
+> - Starting from TiDB v7.2.0, TiDB introduces the [`tidb_analyze_skip_column_types`](/system-variables.md#tidb_analyze_skip_column_types-new-in-v720) system variable, indicating which types of columns are skipped for statistics collection when executing the `ANALYZE` command to collect statistics. The system variable is only applicable for `tidb_analyze_version = 2`.
 
 - To collect statistics on specific columns, use the following syntax:
 
@@ -358,7 +359,19 @@ You can perform incremental collection using the following syntax.
 
 ### Automatic update
 
-For the `INSERT`, `DELETE`, or `UPDATE` statements, TiDB automatically updates the number of rows and updated rows. TiDB persists this information regularly and the update cycle is 20 * `stats-lease`. The default value of `stats-lease` is `3s`. If you specify the value as `0`, it does not update automatically.
+<CustomContent platform="tidb">
+
+For the `INSERT`, `DELETE`, or `UPDATE` statements, TiDB automatically updates the number of rows and modified rows. TiDB persists this information regularly and the update cycle is 20 * [`stats-lease`](/tidb-configuration-file.md#stats-lease). The default value of `stats-lease` is `3s`. If you specify the value as `0`, TiDB stops updating statistics automatically.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+For the `INSERT`, `DELETE`, or `UPDATE` statements, TiDB automatically updates the number of rows and modified rows. TiDB persists this information regularly and the update cycle is 20 * `stats-lease`. The default value of `stats-lease` is `3s`.
+
+</CustomContent>
+
+### Relevant system variables
 
 Three system variables related to automatic update of statistics are as follows:
 
@@ -375,6 +388,12 @@ To avoid the situation that modifying a small amount of data on a small table fr
 > **Note:**
 >
 > Currently, the automatic update does not record the configuration items input at manual `ANALYZE`. Therefore, when you use the `WITH` syntax to control the collecting behavior of `ANALYZE`, you need to manually set scheduled tasks to collect statistics.
+
+#### Disable automatic update
+
+If you find that automatic update of statistics consumes excessive resources and affects online application operations, you can disable it using the [`tidb_enable_auto_analyze`](/system-variables.md#tidb_enable_auto_analyze-new-in-v610) system variable.
+
+#### Terminate background `ANALYZE` tasks
 
 Since TiDB v6.0, TiDB supports using the `KILL` statement to terminate an `ANALYZE` task running in the background. If you find that an `ANALYZE` task running in the background consumes a lot of resources and affects your application, you can terminate the `ANALYZE` task by taking the following steps:
 
@@ -724,6 +743,8 @@ After enabling the synchronously loading statistics feature, you can further con
 - To control how TiDB behaves when the waiting time of SQL optimization reaches the timeout, modify the value of the [`tidb_stats_load_pseudo_timeout`](/system-variables.md#tidb_stats_load_pseudo_timeout-new-in-v540) system variable. The default value of this variable is `ON`, indicating that after the timeout, the SQL optimization process does not use any histogram, TopN, or CMSketch statistics on any columns. If this variable is set to `OFF`, after the timeout, SQL execution fails.
 - To specify the maximum number of columns that the synchronously loading statistics feature can process concurrently, modify the value of the [`stats-load-concurrency`](/tidb-configuration-file.md#stats-load-concurrency-new-in-v540) option in the TiDB configuration file. The default value is `5`.
 - To specify the maximum number of column requests that the synchronously loading statistics feature can cache, modify the value of the [`stats-load-queue-size`](/tidb-configuration-file.md#stats-load-queue-size-new-in-v540) option in the TiDB configuration file. The default value is `1000`.
+
+During TiDB startup, SQL statements executed before the initial statistics are fully loaded might have suboptimal execution plans, thus causing performance issues. To avoid such issues, TiDB v7.1.0 introduces the configuration parameter [`force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v710). With this option, you can control whether TiDB provides services only after statistics initialization has been finished during startup. This parameter is disabled by default.
 
 > **Warning:**
 >
