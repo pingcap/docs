@@ -25,7 +25,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.2/quick-start-with-
   <tr>
     <td rowspan="2">Scalability and Performance</td>
     <td>Resource groups support <a href="https://docs.pingcap.com/tidb/v7.2/tidb-resource-control#manage-queries-that-consume-more-resources-than-expected-runaway-queries"> managing runaway queries</a> (experimental)</td>
-    <td>Query timeout can now be managed with more granularity, allowing for different behaviors based on query classifications. Queries meeting your specified threshold can be deprioritized or killed.
+    <td>You can now manage query timeout with more granularity, allowing for different behaviors based on query classifications. Queries meeting your specified threshold can be deprioritized or terminated.
     </td>
   </tr>
   <tr>
