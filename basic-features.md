@@ -56,7 +56,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | [Use buckets to improve scan concurrency](/tune-region-performance.md#use-bucket-to-increase-concurrency) | E | E | E | E | N | N | N | N | N | N |
 | [Invisible indexes](/sql-statements/sql-statement-add-index.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | N |
 | [Composite `PRIMARY KEY`](/constraints.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [`CHECK` constraints](/constraints.md#check | Y | N | N | N | N | N | N | N | N | N |
+| [`CHECK` constraints](/constraints.md#check) | Y | N | N | N | N | N | N | N | N | N |
 | [Unique indexes](/constraints.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Clustered index on integer `PRIMARY KEY`](/constraints.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Clustered index on composite or non-integer key](/constraints.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | N |
@@ -198,7 +198,7 @@ You can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?u
 | Data import and export | 7.2 | 7.1 | 6.5 | 6.1 | 5.4 | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | [Fast import using TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
-| [Fast import using the `IMPORT INTO` statement](sql-statements/sql-statement-import-into.md) | Y | N | N | N | N | N | N | N | N | N |
+| [Fast import using the `IMPORT INTO` statement](sql-statements/sql-statement-import-into.md) | E | N | N | N | N | N | N | N | N | N |
 | mydumper logical dumper | Deprecated | Deprecated | Deprecated | Deprecated | Deprecated | Deprecated | Deprecated | Deprecated | Deprecated | Deprecated |
 | [Dumpling logical dumper](/dumpling-overview.md) | Y | Y | Y | Y | Y | Y | Y | Y | Y | Y |
 | [Transactional `LOAD DATA`](/sql-statements/sql-statement-load-data.md) [^5] | Y | Y | Y | Y | Y | Y | Y | Y | Y | N [^6] |
