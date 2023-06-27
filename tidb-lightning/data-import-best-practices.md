@@ -5,13 +5,13 @@ summary: Learn best practices for importing large volumes of data.
 
 # Best Practices for Importing 50 TiB Data
 
+This document provides best practices for importing large volumes of data into TiDB, including some key factors and steps that affect data import. We have successfully imported data of a large single table over 50 TiB into both the internal environment and customer's environment, and have accumulated best practices based on these real application scenarios, which can help you import data more smoothly and efficiently.
+
 TiDB Lightning ([Physical Import Mode](/tidb-lightning/tidb-lightning-physical-import-mode.md)) is a comprehensive and efficient data import tool used for importing data into empty tables and initializing empty clusters, and uses files as the data source. TiDB Lightning provides two running modes: a single instance and [parallel import](/tidb-lightning/tidb-lightning-distributed-import.md). You can import source files of different sizes.
 
 - If the data size of the source files is within 10 TiB, it is recommended to use a single instance of TiDB Lightning for the import.
 - If the data size of the source files exceeds 10 TiB, it is recommended to use multiple instances of TiDB Lightning for [Parallel Import](/tidb-lightning/tidb-lightning-distributed-import.md).
 - If the source file data scale is exceptionally large (larger than 50 TiB), in addition to parallel importing, you need to make certain preparations and optimizations based on the characteristics of the source data, table definitions, and parameter configurations to achieve better and faster completion of large-scale data import.
-
-This article introduces some key factors and steps that affect TiDB Lightning data import. We have successfully imported large single table data over 50 TiB into both the internal environment and customer site, and have accumulated these best practices based on these real application scenarios. These best practices can help you import large datasets successfully.
 
 The following sections in this article apply to both importing multiple tables and importing large single tables:
 
