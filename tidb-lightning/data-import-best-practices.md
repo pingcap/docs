@@ -93,8 +93,8 @@ Note that it is recommended to reserve 20% of storage space, because background 
 
 - `region-concurrency`: The concurrency of TiDB Lightning main logical processing. During parallel importing, it is recommended to set it to 75% of the CPU cores to prevent resource overload and potential OOM issues.
 - `send-kv-pairs`: The number of Key-Value pairs sent by TiDB Lightning to TiKV in a single request. It is recommended to adjust this value based on the formula send-kv-pairs * row-size < 1 MiB. Starting from v7.2.0, this parameter is replaced by `send-kv-size`, and no additional setting is required.
-- `GOMEMLIMIT`: TiDB Lightning is implemented in the Go language. Setting `GOMEMLIMIT` to 80% of the instance memory to reduce the probability of OOM caused by the Go GC mechanism.
 - `disk-quota`: It is advisable to ensure that the sorting directory space of TiDB Lightning is larger than the size of the data source. Otherwise, `disk-quota` can be set to 80% of the sorting directory space of TiDB Lightning. In this case, TiDB Lightning will sort and write data in batches based on the `disk-quota`, but the import performance will be lower than complete sorting.
+- `GOMEMLIMIT`: TiDB Lightning is implemented in the Go language. Setting `GOMEMLIMIT` to 80% of the instance memory to reduce the probability of OOM caused by the Go GC mechanism.
 
 For more information about TiDB Lightning parameters, see [TiDB Lightning configuration parameters](/tidb-lightning/tidb-lightning-configuration.md).
 
@@ -137,7 +137,7 @@ Prepare TiDB Lightning instances to make each instance process 5 TiB to 10 TiB o
 
 If during the import process, PD Scatter Region latency exceeds 30 minutes, consider the following optimizations:
 
-- Check if the TiKV cluster encounters any IO bottlenecks.
+- Check if the TiKV cluster encounters any I/O bottlenecks.
 - Increase TiKV `raftstore.apply-pool-size` from the default value of `2` to `4` or `8`.
 - Reduce TiDB Lightning `region-split-concurrency` to half the number of CPU cores, with a minimum value of `1`.
 
