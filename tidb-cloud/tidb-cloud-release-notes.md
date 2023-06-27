@@ -8,6 +8,16 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2023.
 
+## June 27, 2023
+
+**General changes**
+
+- Remove the pre-built sample dataset for newly created [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta) clusters.
+
+**Console changes**
+
+- Enhance the **Usage This Month** panel on the cluster overview page to provide a clearer view of your current resource usage.
+
 ## June 20, 2023
 
 **General changes**
