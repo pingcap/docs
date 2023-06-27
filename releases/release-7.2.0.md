@@ -24,23 +24,22 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.2/quick-start-with-
 <tbody>
   <tr>
     <td rowspan="2">Scalability and Performance</td>
-    <td>Resource groups support <a href="https://docs.pingcap.com/tidb/dev/tidb-resource-control.md#manage-queries-that-consume-more-resources-than-expected-runaway-queries"> managing runaway queries</a> (experimental)</td>
+    <td>Resource groups support <a href="https://docs.pingcap.com/tidb/v7.2/tidb-resource-control#manage-queries-that-consume-more-resources-than-expected-runaway-queries"> managing runaway queries</a> (experimental)</td>
     <td>Query timeout can now be managed with more granularity, such that different classifications of queries can have different behavior. Queries meeting the threshold can be configurably deprioritized or killed. In the future, this feature will allow for measuring queries by consumption in addition to wall clock time.
     </td>
   </tr>
   <tr>
-    <td>TiFlash supports the <a href="https://docs.pingcap.com/tidb/dev/system-variables.md#tidb_enable_tiflash_pipeline_model-new-in-v720">pipeline execution model</a> (experimental)</td>
-    <td>TiFlash supports a pipeline execution model to optimize thread resource control.
-This is currently depended on by TiDB Serverless analytical capabilities.</td>
+    <td>TiFlash supports the <a href="https://docs.pingcap.com/tidb/v7.2/tiflash-pipeline-model">pipeline execution model</a> (experimental)</td>
+    <td>TiFlash supports a pipeline execution model to optimize thread resource control.</td>
   </tr>
   <tr>
     <td rowspan="1">SQL</td>
-    <td>Support a new SQL statement, <a href="https://docs.pingcap.com/tidb/dev/sql-statements/sql-statement-import-into">IMPORT INTO</a>, to enable data import using the TiDB service, itself (experimental)</td>
+    <td>Support a new SQL statement, <a href="https://docs.pingcap.com/tidb/v7.2/sql-statement-import-into">IMPORT INTO</a>, to enable data import using the TiDB service, itself (experimental)</td>
    <td>To simplify the deployment and maintenance of TiDB Lightning, TiDB introduces a new SQL statement `IMPORT INTO`, which integrates physical import capabilities of TiDB Lightning, including remote import from Amazon S3 directly into TiDB.</td>
   </tr>
   <tr>
     <td rowspan="2">DB Operations and Observability</td>
-    <td>DDL supports <a href="https://docs.pingcap.com/tidb/dev/ddl-introduction.md#ddl-related-commands">pause and resume operations</a> (experimental)</td>
+    <td>DDL supports <a href="https://docs.pingcap.com/tidb/v7.2/ddl-introduction#ddl-related-commands">pause and resume operations</a> (experimental)</td>
     <td>DDL operations such as adding indexes can consume a lot of resources and affect online traffic. As homage to traditional schema change tools like pt-osc and gh-ost, TiDB now natively supports suspending multiple background jobs at once. This feature lets you conserve resources and minimize the impact on online traffic, without the need to cancel and restart the jobs.</td>
   </tr>
 </tbody>
