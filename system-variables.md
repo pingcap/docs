@@ -3502,6 +3502,19 @@ mysql> desc select count(distinct a) from test.t;
 - This variable is used to control whether to enable the [TiFlash late materialization](/tiflash/tiflash-late-materialization.md) feature. Note that TiFlash late materialization does not take effect in the [fast scan mode](/tiflash/use-fastscan.md).
 - When this variable is set to `OFF` to disable the TiFlash late materialization feature, to process a `SELECT` statement with filter conditions (`WHERE` clause), TiFlash scans all the data of the required columns before filtering. When this variable is set to `ON` to enable the TiFlash late materialization feature, TiFlash can first scan the column data related to the filter conditions that are pushed down to the TableScan operator, filter the rows that meet the conditions, and then scan the data of other columns of these rows for further calculations, thereby reducing IO scans and computations of data processing.
 
+### `tidb_opt_enable_mpp_shared_cte_execution <span class="version-mark">New in v7.2.0</span>
+
+> **警告：**
+>
+> Currently, it's experimental that let the Common Table Expression(CTE) executed on the TiFlash MPP and its cost formula is still in ajustment. It's not recommended that you use it in production environments and you will need to open the variable [`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51) to avoid cases that the CTE can be executed in TiFlash MPP but is executed in TiDB actually.
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `OFF`
+- This variable controls whether the CTE can be executed on TiFlash MPP instead of on TiDB. The performance of the queries which contains CTE and are executed on TiFlash MPP will be increased significantly.
+- This variable only controls whether the non-recursive CTE can be executed on the TiFlash MPP or not. It cannot control the behavior of the recursive CTE.
+
 ### tidb_opt_fix_control <span class="version-mark">New in v7.1.0</span>
 
 <CustomContent platform="tidb">
