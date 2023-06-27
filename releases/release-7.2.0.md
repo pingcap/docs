@@ -120,7 +120,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.2/quick-start-with-
 * Support the `CHECK` constraints [#41711](https://github.com/pingcap/tidb/issues/41711) @[fzzf678](https://github.com/fzzf678) **tw@qiancai** <!--1404-->
 
     Starting from v7.2.0, you can use `CHECK` constraints to restrict the values of one or more columns in a table to meet your specified conditions. When a `CHECK` constraint is added to a table, TiDB checks whether the constraint is satisfied before inserting or updating data in the table. Only the data that satisfies the constraint can be written.
- 
+
      This feature is disabled by default. You can set the [`tidb_enable_check_constraint`](/system-variables.md#tidb_enable_check_constraint-new-in-v720) system variable to `ON` to enable it.
 
     For more information, see [documentation](/constraints.md#check-constraints).
@@ -164,22 +164,16 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.2/quick-start-with-
 >
 > This section provides compatibility changes you need to know when you upgrade from v7.1.0 to the current version (v7.2.0). If you are upgrading from v7.0.0 or earlier versions to the current version, you might also need to check the compatibility changes introduced in intermediate versions.
 
-### Behavior changes
-
-<!-- 此小节包含 MySQL 兼容性变更-->
-
-* 兼容性 1
-
-* 兼容性 2
-
 ### System variables
 
 | Variable name | Change type | Description |
 |--------|------------------------------|------|
 | [`last_insert_id`](/system-variables.md#last_insert_id-new-in-v530) | Modified | Changes the maximum value of this variable from  `9223372036854775807` to `18446744073709551615` to be consistent with MySQL. |
+| [`tidb_enable_non_prepared_plan_cache`](/system-variables.md#tidb_enable_non_prepared_plan_cache) | Modified | Changes the default value from `OFF` to `ON` after further tests, meaning that non-prepared plan cache is enabled. |
 | [`tidb_remove_orderby_in_subquery`](/system-variables.md#tidb_remove_orderby_in_subquery-new-in-v610) | Modified | Changes the default value from `OFF` to `ON` after further tests, meaning that the optimizer removes the `ORDER BY` clause in a subquery. |
 |  [`tidb_analyze_skip_column_types`](/system-variables.md#tidb_analyze_skip_column_types-new-in-v720)      | Newly added |  This variable controls which types of columns are skipped for statistics collection when executing the `ANALYZE` command to collect statistics. The variable is only applicable for [`tidb_analyze_version = 2`](#tidb_analyze_version-new-in-v510). When using the syntax of `ANALYZE TABLE t COLUMNS c1, ..., cn`, if the type of a specified column is included in `tidb_analyze_skip_column_types`, the statistics of this column will not be collected.   |
-| [`tidb_enable_fast_table_check`](/system-variables.md#tidb_enable_fast_table_check-new-in-v720) | Newly added | Controls whether to use a checksum-based approach to quickly check the consistency of data and indexes in a table. The default value `ON` means this feature is enabled by default. |
+| [`tidb_enable_check_constraint`](/system-variables.md#tidb_enable_check_constraint-new-in-v720) | Newly added | Controls whether to enabled `CHECK` constraints. The default value is `OFF`, which means this feature is disabled. |
+| [`tidb_enable_fast_table_check`](/system-variables.md#tidb_enable_fast_table_check-new-in-v720) | Newly added | Controls whether to use a checksum-based approach to quickly check the consistency of data and indexes in a table. The default value is `ON`, which means this feature is enabled. |
 | [`tidb_enable_tiflash_pipeline_model`](/system-variables.md#tidb_enable_tiflash_pipeline_model-new-in-v720) | Newly added | This variable is used to control whether to enable the new execution model of TiFlash, the [pipeline model](/tiflash/tiflash-pipeline-model.md). The default value is `OFF`, which means the pipeline model is disabled. |
 | [`tidb_expensive_txn_time_threshold`](/system-variables.md#tidb_expensive_txn_time_threshold-new-in-v720) | Newly added | Controls the threshold for logging expensive transactions, which is 600 seconds by default. When the duration of a transaction exceeds the threshold, and the transaction is neither committed nor rolled back, it is considered an expensive transaction and will be logged. |
 
@@ -187,8 +181,8 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.2/quick-start-with-
 
 | Configuration file | Configuration parameter | Change type | Description |
 | -------- | -------- | -------- | -------- |
-| TiDB | [`force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v710) | Modified | Changes the default value from `false` to `true`, meaning that TiDB waits for statistics initialization to finish before providing services during TiDB startup. |
-| TiDB | [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710) | Modified | Changes the default value from `false` to `true`, meaning that TiDB uses lightweight statistics initialization during TiDB startup. |
+| TiDB | [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710) | Modified | Changes the default value from `false` to `true` after further tests, meaning that TiDB uses lightweight statistics initialization by default during TiDB startup to improve the initialization efficiency. |
+| TiDB | [`force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v710) | Modified | Changes the default value from `false` to `true` to align with [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710), meaning that TiDB waits for statistics initialization to finish before providing services during TiDB startup. |
 | TiKV | [<code>rocksdb.\[defaultcf\|writecf\|lockcf\].compaction-guard-min-output-file-size</code>](/tikv-configuration-file.md#compaction-guard-min-output-file-size) | Modified | Changes the default value from `"8MB"` to `"1MB"` to reduce the data volume of compaction tasks in RocksDB. |
 | TiKV | [<code>rocksdb.\[defaultcf\|writecf\|lockcf\].optimize-filters-for-memory</code>](/tikv-configuration-file.md#optimize-filters-for-memory-new-in-v710) | Newly added | Controls whether to generate Bloom/Ribbon filters that minimize memory internal fragmentation. |
 | TiKV | [<code>rocksdb.\[defaultcf\|writecf\|lockcf\].ribbon-filter-above-level</code>](/tikv-configuration-file.md#ribbon-filter-above-level-new-in-v710) | Newly added | Controls whether to use Ribbon filters for levels greater than or equal to this value and use non-block-based bloom filters for levels less than this value. |
@@ -198,10 +192,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.2/quick-start-with-
 | Data Migration | [`strict-optimistic-shard-mode`](/dm/feature-shard-merge-optimistic.md) | Newly added | This configuration item is used to be compatible with the DDL shard merge behavior in TiDB Data Migration v2.0. You can enable this configuration item in optimistic mode. After this is enabled, the replication task will be interrupted when it encounters a Type 2 DDL statement. In scenarios where there are dependencies between DDL changes in multiple tables, a timely interruption can be made. You need to manually process the DDL statements of each table before resuming the replication task to ensure data consistency between the upstream and the downstream. **tw@ran-huang** <!--1414-->|
 | TiCDC | [`sink.protocol`](/ticdc/ticdc-changefeed-config.md) | Modified | Introduces a new value option `"open-protocol"` when the downstream is Kafka. Specifies the protocol format used for encoding messages. |
 | TiCDC | [`sink.delete-only-output-handle-key-columns`](/ticdc/ticdc-changefeed-config.md) | Newly added | Specifies the output of DELETE events. This parameter is valid only for canal-json and open-protocol protocols. The default value is `false`, which means outputting all columns. When you set it to true, only primary key columns or unique index columns are output. |
-
-## 废弃功能
-
-- note [#issue](链接) @[贡献者 GitHub ID](链接)
 
 ## Improvements
 
