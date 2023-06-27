@@ -209,12 +209,12 @@ This is currently depended on by TiDB Serverless analytical capabilities.</td>
 + TiDB
 
     - Optimize the logic of constructing index scan range so that it supports converting complex conditions into index scan range [#41572](https://github.com/pingcap/tidb/issues/41572) [#44389](https://github.com/pingcap/tidb/issues/44389) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
-    - Add stale read-related monitoring metrics [#43325](https://github.com/pingcap/tidb/issues/43325) @[you06](https://github.com/you06)
-    - When the retry leader of stale read encounters a lock, TiDB forcibly retry with the leader after resolving the lock, which avoids unnecessary overhead [#43659](https://github.com/pingcap/tidb/issues/43659) @[you06](https://github.com/you06)
+    - Add new monitoring metrics `Stale Read OPS` and `Stale Read Traffic` [#43325](https://github.com/pingcap/tidb/issues/43325) @[you06](https://github.com/you06)
+    - When the retry leader of stale read encounters a lock, TiDB forcibly retries with the leader after resolving the lock, which avoids unnecessary overhead [#43659](https://github.com/pingcap/tidb/issues/43659) @[you06](https://github.com/you06)
     - Use estimated time to calculate stale read ts and reduce the overhead of stale read [#44215](https://github.com/pingcap/tidb/issues/44215) @[you06](https://github.com/you06)
-    - Add logs and system variables for long running transactions [#41471](https://github.com/pingcap/tidb/issues/41471) @[crazycs520](https://github.com/crazycs520)
-    - Support connecting to TiDB through MySQL compression protocol by adding the `--compress` option to the connection command, which improves the performance of data-intensive queries under low network quality and saves bandwidth costs [#22605](https://github.com/pingcap/tidb/issues/22605) @[dveeden](https://github.com/dveeden)
-    - Recognize utf8 and utf8bm3 as the legacy three-byte character set encodings [#26226](https://github.com/pingcap/tidb/issues/26226) @[dveeden](https://github.com/dveeden)
+    - Add logs and system variables for long-running transactions [#41471](https://github.com/pingcap/tidb/issues/41471) @[crazycs520](https://github.com/crazycs520)
+    - Support connecting to TiDB through MySQL compression protocols by adding the `--compress` option to the connection command, which improves the performance of data-intensive queries under low network quality and saves bandwidth costs [#22605](https://github.com/pingcap/tidb/issues/22605) @[dveeden](https://github.com/dveeden)
+    - Recognize `utf8` and `utf8bm3` as the legacy three-byte character set encodings [#26226](https://github.com/pingcap/tidb/issues/26226) @[dveeden](https://github.com/dveeden)
     - Support using `:=` for assignment in `UPDATE` statements [#44751](https://github.com/pingcap/tidb/issues/44751) @[CbcWestwolf](https://github.com/CbcWestwolf)
 
 <!--**tw@Oreoxmt**-->
@@ -252,9 +252,9 @@ This is currently depended on by TiDB Serverless analytical capabilities.</td>
 
     + TiDB Lightning <!--**tw@ran-huang**-->
 
-        - Optimize the retry mechanism during import to avoid errors caused by leader switching [#44478](https://github.com/pingcap/tidb/pull/44478)
-        - Verify checksum throught SQL after import to improve stability of verification [#41941](https://github.com/pingcap/tidb/issues/41941)
-        - Optimize TiDB Lightning's OOM issues when importing wide tables [43853](https://github.com/pingcap/tidb/issues/43853)
+        - Optimize the retry mechanism during import to avoid errors caused by leader switching [#44478](https://github.com/pingcap/tidb/pull/44478) @[lance6716](https://github.com/lance6716)
+        - Verify checksum throught SQL after import to improve stability of verification [#41941](https://github.com/pingcap/tidb/issues/41941) @[GMHDBJD](https://github.com/GMHDBJD)
+        - Optimize TiDB Lightning OOM issues when importing wide tables [43853](https://github.com/pingcap/tidb/issues/43853) @[D3Hunter](https://github.com/D3Hunter)
 
 ## Bug fixes
 
