@@ -3506,7 +3506,7 @@ mysql> desc select count(distinct a) from test.t;
 
 > **警告：**
 >
-> Currently, it's experimental that let the Common Table Expression(CTE) executed on the TiFlash MPP and its cost formula is still in ajustment. It's not recommended that you use it in production environments and you will need to open the variable [`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51) to avoid cases that the CTE can be executed in TiFlash MPP but is executed in TiDB actually.
+> Currently, letting the Common Table Expression(CTE) executed on the TiFlash MPP is still in development and its cost formula is still in ajustment. It's not recommended that you use it in production environments and you will need to open the variable [`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51) to avoid cases that the CTE can be executed in TiFlash MPP but is executed in TiDB actually.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
