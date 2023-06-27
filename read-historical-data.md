@@ -175,4 +175,3 @@ To restore data from an older version, you can use one of the following methods:
 - For simple cases, use [`SELECT`](/sql-statements/sql-statement-select.md) after setting the `tidb_snapshot` variable and copy-paste the output, or use `SELECT ... INTO OUTFILE` and then use `LOAD DATA` to import the data later on.
 
 - Use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview#export-historical-data-snapshots-of-tidb) to export a historical snapshot. Dumpling performs well in exporting larger sets of data. 
-
