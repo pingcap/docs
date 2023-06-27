@@ -155,7 +155,7 @@ addr = "172.16.31.10:8287"
 # The default value is 'none'.
 # duplicate-resolution = 'none'
 # The number of KV pairs sent in one request in the physical import mode.
-# send-kv-pairs = 32768
+# send-kv-pairs = 3200
 # Whether to enable compression when sending KV pairs to TiKV in the physical import mode.
 # Currently, only the Gzip compression algorithm is supported.
 # To use this algorithm, you can fill in either "gzip" or "gz" for this parameter.
