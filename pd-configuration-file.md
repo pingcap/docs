@@ -121,6 +121,7 @@ Configuration items related to pd-server
 + Default value: `"0s"`
 + Minimum value: `0`
 + Unit: second
+
 ## security
 
 Configuration items related to security
