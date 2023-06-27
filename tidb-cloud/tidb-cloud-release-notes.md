@@ -14,10 +14,6 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - Remove the pre-built sample dataset for newly created [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta) clusters.
 
-**Console changes**
-
-- Enhance the **Usage This Month** panel on the cluster overview page for [TiDB Serverless](/tidb-cloud/select-cluster-tier.md#tidb-serverless-beta) clusters to provide a clearer view of your current resource usage.
-
 ## June 20, 2023
 
 **General changes**
