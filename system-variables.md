@@ -4312,7 +4312,7 @@ SHOW WARNINGS;
 - Persists to cluster: Yes
 - Type: Enumeration
 - Default value: `OFF`
-- Value options: `OFF`，`LOCAL`
+- Value options: `OFF`, `LOCAL`
 
 ### tidb_runtime_filter_type <span class="version-mark">New in v7.2.0</span>
 
