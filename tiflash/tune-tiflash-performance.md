@@ -1,7 +1,6 @@
 ---
 title: Tune TiFlash Performance
-summary: Learn how to tune the performance of TiFlash by planning machine resources and tuning TiDB parameters.
-aliases: ['/docs/dev/tiflash/tune-tiflash-performance/','/docs/dev/reference/tiflash/tune-performance/']
+summary: Learn how to tune the performance of TiFlash by planning machine resources and tuning TiDB parameters.Empty
 ---
 
 # Tune TiFlash Performance

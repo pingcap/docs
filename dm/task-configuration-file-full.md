@@ -1,6 +1,5 @@
 ---
-title: DM Advanced Task Configuration File
-aliases: ['/docs/tidb-data-migration/dev/task-configuration-file-full/','/docs/tidb-data-migration/dev/dm-portal/']
+title: DM Advanced Task Configuration FileEmpty
 ---
 
 # DM Advanced Task Configuration File

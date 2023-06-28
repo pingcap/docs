@@ -1,7 +1,6 @@
 ---
 title: TiDB Data Migration Glossary
-summary: Learn the terms used in TiDB Data Migration.
-aliases: ['/docs/tidb-data-migration/dev/glossary/']
+summary: Learn the terms used in TiDB Data Migration.Empty
 ---
 
 # TiDB Data Migration Glossary

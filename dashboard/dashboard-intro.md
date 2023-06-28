@@ -1,7 +1,6 @@
 ---
 title: TiDB Dashboard Introduction
-summary: Introduce TiDB Dashboard.
-aliases: ['/docs/dev/dashboard/dashboard-intro/']
+summary: Introduce TiDB Dashboard.Empty
 ---
 
 # TiDB Dashboard Introduction

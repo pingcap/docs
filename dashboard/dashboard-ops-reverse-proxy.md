@@ -1,6 +1,5 @@
 ---
-title: Use TiDB Dashboard behind a Reverse Proxy
-aliases: ['/docs/dev/dashboard/dashboard-ops-reverse-proxy/']
+title: Use TiDB Dashboard behind a Reverse ProxyEmpty
 ---
 
 # Use TiDB Dashboard behind a Reverse Proxy

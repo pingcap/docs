@@ -1,7 +1,6 @@
 ---
 title: CLUSTER_LOG
-summary: Learn the `CLUSTER_LOG` information_schema table.
-aliases: ['/docs/dev/system-tables/system-table-cluster-log/','/docs/dev/reference/system-databases/cluster-log/','/tidb/dev/system-table-cluster-log/']
+summary: Learn the `CLUSTER_LOG` information_schema table.Empty
 ---
 
 # CLUSTER_LOG

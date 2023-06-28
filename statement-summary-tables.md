@@ -1,7 +1,6 @@
 ---
 title: Statement Summary Tables
-summary: Learn about Statement Summary Table in TiDB.
-aliases: ['/docs/dev/statement-summary-tables/','/docs/dev/reference/performance/statement-summary/']
+summary: Learn about Statement Summary Table in TiDB.Empty
 ---
 
 # Statement Summary Tables

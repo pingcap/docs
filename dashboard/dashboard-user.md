@@ -1,7 +1,6 @@
 ---
 title: TiDB Dashboard User Management
-summary: Learn how to create SQL users to access TiDB Dashboard.
-aliases: ['/docs/dev/dashboard/dashboard-user/']
+summary: Learn how to create SQL users to access TiDB Dashboard.Empty
 ---
 
 # TiDB Dashboard User Management

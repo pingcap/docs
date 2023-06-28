@@ -1,6 +1,5 @@
 ---
-title: Release Notes
-aliases: ['/docs/dev/releases/release-notes/','/docs/dev/releases/rn/']
+title: Release NotesEmpty
 ---
 
 # TiDB Release Notes

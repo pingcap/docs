@@ -1,7 +1,6 @@
 ---
 title: TiDB Dashboard Cluster Diagnostic Page
-summary: Learn how to use the cluster diagnostic page.
-aliases: ['/docs/dev/dashboard/dashboard-diagnostics-access/']
+summary: Learn how to use the cluster diagnostic page.Empty
 ---
 
 # TiDB Dashboard Cluster Diagnostics Page

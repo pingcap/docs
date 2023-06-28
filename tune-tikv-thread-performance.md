@@ -1,7 +1,6 @@
 ---
 title: Tune TiKV Thread Pool Performance
-summary: Learn how to tune TiKV thread pools for optimal performance.
-aliases: ['/docs/dev/tune-tikv-thread-performance/']
+summary: Learn how to tune TiKV thread pools for optimal performance.Empty
 ---
 
 # Tune TiKV Thread Pool Performance

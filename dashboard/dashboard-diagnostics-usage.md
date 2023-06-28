@@ -1,7 +1,6 @@
 ---
 title: Locate Problems Using Diagnostic Report of TiDB Dashboard
-summary: Learn how to locate problems using diagnostic report of TiDB Dashboard.
-aliases: ['/docs/dev/dashboard/dashboard-diagnostics-usage/']
+summary: Learn how to locate problems using diagnostic report of TiDB Dashboard.Empty
 ---
 
 # Locate Problems Using Diagnostic Report of TiDB Dashboard

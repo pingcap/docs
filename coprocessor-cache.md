@@ -1,7 +1,6 @@
 ---
 title: Coprocessor Cache
-summary: Learn the features of Coprocessor Cache.
-aliases: ['/docs/dev/coprocessor-cache/']
+summary: Learn the features of Coprocessor Cache.Empty
 ---
 
 # Coprocessor Cache

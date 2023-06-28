@@ -1,7 +1,6 @@
 ---
 title: Migration Task Precheck
-summary: Learn the precheck that DM performs before starting a migration task.
-aliases: ['/docs/tidb-data-migration/dev/precheck/']
+summary: Learn the precheck that DM performs before starting a migration task.Empty
 ---
 
 # Migration Task Precheck

@@ -1,7 +1,6 @@
 ---
 title: Troubleshoot TiCDC
-summary: Learn how to troubleshoot issues you might encounter when you use TiCDC.
-aliases: ['/docs/dev/ticdc/troubleshoot-ticdc/']
+summary: Learn how to troubleshoot issues you might encounter when you use TiCDC.Empty
 ---
 
 # Troubleshoot TiCDC

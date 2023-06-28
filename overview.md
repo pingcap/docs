@@ -1,7 +1,6 @@
 ---
 title: TiDB Introduction
-summary: Learn about the key features and usage scenarios of TiDB.
-aliases: ['/docs/dev/key-features/','/tidb/dev/key-features','/docs/dev/overview/']
+summary: Learn about the key features and usage scenarios of TiDB.Empty
 ---
 
 # TiDB Introduction

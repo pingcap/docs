@@ -1,7 +1,6 @@
 ---
 title: ALTER INDEX
-summary: An overview of the usage of ALTER INDEX for the TiDB database.
-aliases: ['/docs/dev/sql-statements/sql-statement-alter-index/']
+summary: An overview of the usage of ALTER INDEX for the TiDB database.Empty
 ---
 
 # ALTER INDEX

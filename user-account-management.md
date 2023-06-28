@@ -1,7 +1,6 @@
 ---
 title: TiDB User Account Management
-summary: Learn how to manage a TiDB user account.
-aliases: ['/docs/dev/user-account-management/','/docs/dev/reference/security/user-account-management/']
+summary: Learn how to manage a TiDB user account.Empty
 ---
 
 # TiDB User Account Management

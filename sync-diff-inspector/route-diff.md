@@ -1,7 +1,6 @@
 ---
 title: Data Check for Tables with Different Schema or Table Names
-summary: Learn the data check for different database names or table names.
-aliases: ['/docs/dev/sync-diff-inspector/route-diff/','/docs/dev/reference/tools/sync-diff-inspector/route-diff/']
+summary: Learn the data check for different database names or table names.Empty
 ---
 
 # Data Check for Tables with Different Schema or Table Names

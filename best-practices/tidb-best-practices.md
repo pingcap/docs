@@ -1,7 +1,6 @@
 ---
 title: TiDB Best Practices
-summary: Learn the best practices of using TiDB.
-aliases: ['/docs/dev/tidb-best-practices/']
+summary: Learn the best practices of using TiDB.Empty
 ---
 
 # TiDB Best Practices

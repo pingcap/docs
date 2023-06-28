@@ -1,7 +1,6 @@
 ---
 title: PLACEMENT_POLICIES
-summary: Learn the `PLACEMENT_POLICIES` information_schema table.
-aliases: ['/tidb/dev/information-schema-placement-rules']
+summary: Learn the `PLACEMENT_POLICIES` information_schema table.Empty
 ---
 
 # PLACEMENT_POLICIES

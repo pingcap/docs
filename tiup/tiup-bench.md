@@ -1,7 +1,6 @@
 ---
 title: Stress Test TiDB Using TiUP Bench Component
-summary: Learn how to stress test TiDB with TPC-C, TPC-H, CH, RawSQL, and YCSB workloads using TiUP.
-aliases: ['/docs/dev/tiup/tiup-bench/','/docs/dev/reference/tools/tiup/bench/']
+summary: Learn how to stress test TiDB with TPC-C, TPC-H, CH, RawSQL, and YCSB workloads using TiUP.Empty
 ---
 
 # Stress Test TiDB Using TiUP Bench Component

@@ -1,7 +1,6 @@
 ---
 title: SHOW PROFILES
-summary: An overview of the usage of SHOW PROFILES for the TiDB database.
-aliases: ['/docs/dev/sql-statements/sql-statement-show-profiles/']
+summary: An overview of the usage of SHOW PROFILES for the TiDB database.Empty
 ---
 
 # SHOW PROFILES

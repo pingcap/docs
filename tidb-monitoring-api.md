@@ -1,7 +1,6 @@
 ---
 title: TiDB Monitoring API
-summary: Learn the API of TiDB monitoring services.
-aliases: ['/docs/dev/tidb-monitoring-api/']
+summary: Learn the API of TiDB monitoring services.Empty
 ---
 
 # TiDB Monitoring API

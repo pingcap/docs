@@ -1,7 +1,6 @@
 ---
 title: Load Base Split
-summary: Learn the feature of Load Base Split.
-aliases: ['/docs/dev/configure-load-base-split/']
+summary: Learn the feature of Load Base Split.Empty
 ---
 
 # Load Base Split

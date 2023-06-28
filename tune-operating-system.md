@@ -1,7 +1,6 @@
 ---
 title: Tune Operating System Performance
-summary: Learn how to tune the parameters of the operating system.
-aliases: ['/docs/dev/tune-operating-system/']
+summary: Learn how to tune the parameters of the operating system.Empty
 ---
 
 # Tune Operating System Performance

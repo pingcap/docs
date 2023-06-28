@@ -1,7 +1,6 @@
 ---
 title: DM-master Configuration File
-summary: Learn the configuration file of DM-master.
-aliases: ['/docs/tidb-data-migration/dev/dm-master-configuration-file/']
+summary: Learn the configuration file of DM-master.Empty
 ---
 
 # DM-master Configuration File

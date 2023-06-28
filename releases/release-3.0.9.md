@@ -1,6 +1,5 @@
 ---
-title: TiDB 3.0.9 Release Notes
-aliases: ['/docs/dev/releases/release-3.0.9/','/docs/dev/releases/3.0.9/']
+title: TiDB 3.0.9 Release NotesEmpty
 ---
 
 # TiDB 3.0.9 Release Notes

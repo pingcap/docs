@@ -1,7 +1,6 @@
 ---
 title: Glossary
-summary: Glossaries about TiDB.
-aliases: ['/docs/dev/glossary/']
+summary: Glossaries about TiDB.Empty
 ---
 
 # Glossary
