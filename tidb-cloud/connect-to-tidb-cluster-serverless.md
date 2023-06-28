@@ -21,7 +21,7 @@ After your TiDB Serverless cluster is created on TiDB Cloud, you can connect to 
 
     The standard connection exposes a public endpoint with traffic filters, so you can connect to your TiDB cluster via a SQL client from your laptop.
 
-    TiDB Serverless supports [TLS connections](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md), which ensures the security of data transmission from your applications to TiDB clusters.
+    TiDB Serverless supports [TLS connections](/tidb-cloud/secure-connections-to-serverless-clusters.md), which ensures the security of data transmission from your applications to TiDB clusters.
 
 - [Connect via Chat2Query (beta)](/tidb-cloud/explore-data-with-chat2query.md)
 

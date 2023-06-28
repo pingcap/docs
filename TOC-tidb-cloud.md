@@ -16,7 +16,7 @@
 - Develop Applications
   - [Overview](/develop/dev-guide-overview.md)
   - Quick Start
-    - [Build a TiDB Cluster in TiDB Cloud (Serverless Tier)](/develop/dev-guide-build-cluster-in-cloud.md)
+    - [Build a TiDB Serverless Cluster in TiDB Cloud](/develop/dev-guide-build-cluster-in-cloud.md)
     - [CRUD SQL in TiDB](/develop/dev-guide-tidb-crud-sql.md)
   - Connect to TiDB Cloud
     - [Choose Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)
@@ -222,12 +222,12 @@
   - Network Access Control
     - TiDB Serverless
       - [Connect via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
-      - [TLS Connections to TiDB Serverless](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md)
+      - [TLS Connections to TiDB Serverless](/tidb-cloud/secure-connections-to-serverless-clusters.md)
     - TiDB Dedicated
       - [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md)
       - [Connect via Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections.md)
       - [Connect via VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md)
-      - [TLS Connections to TiDB Dedicated](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated-tier.md)
+      - [TLS Connections to TiDB Dedicated](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md)
   - Database Access Control
     - [Configure Cluster Security Settings](/tidb-cloud/configure-security-settings.md)
   - Audit Management
@@ -271,8 +271,8 @@
     - [Storage](/tidb-storage.md)
     - [Computing](/tidb-computing.md)
     - [Scheduling](/tidb-scheduling.md)
-  - [Dedicated Tier Limitations and Quotas](/tidb-cloud/limitations-and-quotas.md)
-  - [Serverless Tier Limitations](/tidb-cloud/serverless-tier-limitations.md)
+  - [TiDB Dedicated Limitations and Quotas](/tidb-cloud/limitations-and-quotas.md)
+  - [TiDB Serverless Limitations](/tidb-cloud/serverless-limitations.md)
   - [TiDB Limitations](/tidb-limitations.md)
   - Benchmarks
     - [TPC-C Performance Test Report](/tidb-cloud/v7.1.0-performance-benchmarking-with-tpcc.md)
@@ -552,7 +552,7 @@
   - [Glossary](/tidb-cloud/tidb-cloud-glossary.md)
 - FAQs
   - [TiDB Cloud FAQs](/tidb-cloud/tidb-cloud-faq.md)
-  - [Serverless Tier FAQs](/tidb-cloud/serverless-tier-faqs.md)
+  - [TiDB Serverless FAQs](/tidb-cloud/serverless-faqs.md)
 - Release Notes
   - [2023](/tidb-cloud/tidb-cloud-release-notes.md)
   - [2022](/tidb-cloud/release-notes-2022.md)

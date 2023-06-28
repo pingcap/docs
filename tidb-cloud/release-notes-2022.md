@@ -174,7 +174,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
     * A Serverless Tier cluster still contains fully functional HTAP ability as Dedicated Tier clusters.
     * Serverless Tier offers you faster cluster creation time and instantaneous cold start time. Compared with Developer Tier, the creation time reduces from minutes to seconds.
     * You do not need to worry about deployment topology. Serverless Tier will adjust automatically according to your requests.
-    * Serverless Tier [enforces TLS connection to clusters for the sake of security](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md).
+    * Serverless Tier [enforces TLS connection to clusters for the sake of security](/tidb-cloud/secure-connections-to-serverless-clusters.md).
     * Existing Developer Tier clusters will be automatically migrated to Serverless Tier in the coming months. Your ability to use your cluster should not be affected, and you will not be charged for the use of your Serverless Tier cluster in beta.
 
   Get started [here](/tidb-cloud/tidb-cloud-quickstart.md).
