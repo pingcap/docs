@@ -4304,7 +4304,6 @@ SHOW WARNINGS;
 
 ### tidb_runtime_filter_mode <span class="version-mark">New in v7.2.0</span>
 
-
 > **Warning:**
 >
 > The feature controlled by this variable is not fully functional in the current TiDB version. Do not change the default value.
