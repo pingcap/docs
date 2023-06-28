@@ -1,7 +1,6 @@
 ---
 title: TiDB Log Backup and PITR Command Manual
 summary: Learn about the commands of TiDB log backup and point-in-time recovery.
-aliases: ['/tidb/dev/br-log-command-line/']
 ---
 
 # TiDB Log Backup and PITR Command Manual
