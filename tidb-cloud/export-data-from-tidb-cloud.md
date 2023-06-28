@@ -53,7 +53,7 @@ You can use the tool [Dumpling](/dumpling-overview.md) for data export.
 
    > **Note:**
    >
-   > To export TiDB Serverless cluster data, you must ensure that the Dumpling version is at least v6.5.0. If your Dumpling version is v6.5.0, you also need to set `--ca=${ca_path}` in the command. To find the CA root path on your system, see [TLS Connections to TiDB Serverless](/tidb-cloud/secure-connections-to-serverless-tier-clusters.md#root-certificate-default-path).
+   > To export TiDB Serverless cluster data, you must ensure that the Dumpling version is at least v6.5.0. If your Dumpling version is v6.5.0, you also need to set `--ca=${ca_path}` in the command. To find the CA root path on your system, see [TLS Connections to TiDB Serverless](/tidb-cloud/secure-connections-to-serverless-clusters.md#root-certificate-default-path).
 
     </div>
     <div label="TiDB Dedicated">

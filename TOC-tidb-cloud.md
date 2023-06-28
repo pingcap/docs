@@ -16,7 +16,7 @@
 - Develop Applications
   - [Overview](/develop/dev-guide-overview.md)
   - Quick Start
-    - [Build a TiDB Serverless Cluster in TiDB Cloud)](/develop/dev-guide-build-cluster-in-cloud.md)
+    - [Build a TiDB Serverless Cluster in TiDB Cloud](/develop/dev-guide-build-cluster-in-cloud.md)
     - [CRUD SQL in TiDB](/develop/dev-guide-tidb-crud-sql.md)
   - Connect to TiDB Cloud
     - [Choose Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)
