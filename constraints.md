@@ -53,7 +53,7 @@ Query OK, 1 row affected (0.03 sec)
 
 > **Note:**
 >
-> The 'CHECK' constraint feature is disabled by default. To enable it, You need to set the [`tidb_enable_check_constraint`](/system-variables.md#tidb_enable_check_constraint-new-in-v720) variable to `ON`.
+> The 'CHECK' constraint feature is disabled by default. To enable it, you need to set the [`tidb_enable_check_constraint`](/system-variables.md#tidb_enable_check_constraint-new-in-v720) variable to `ON`.
 
 
 A `CHECK` constraint restricts the values of a column in a table to meet your specified conditions. When the `CHECK` constraint is added to a table, TiDB checks whether the constraint is satisfied during the insertion or updates of data into the table. If the constraint is not met, an error is returned.
