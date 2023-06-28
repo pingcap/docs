@@ -1,6 +1,7 @@
 ---
 title: Store Limit
-summary: Learn the feature of Store Limit.Empty
+summary: Learn the feature of Store Limit.
+aliases: ['/docs/dev/configure-store-limit/']
 ---
 
 # Store Limit

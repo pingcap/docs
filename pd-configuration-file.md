@@ -1,6 +1,7 @@
 ---
 title: PD Configuration File
-summary: Learn the PD configuration file.Empty
+summary: Learn the PD configuration file.
+aliases: ['/docs/dev/pd-configuration-file/','/docs/dev/reference/configuration/pd-server/configuration-file/']
 ---
 
 # PD Configuration File

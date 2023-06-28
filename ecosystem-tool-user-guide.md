@@ -1,6 +1,7 @@
 ---
 title: TiDB Tools Overview
-summary: Learn the tools and applicable scenarios.Empty
+summary: Learn the tools and applicable scenarios.
+aliases: ['/docs/dev/ecosystem-tool-user-guide/','/docs/dev/reference/tools/user-guide/','/docs/dev/how-to/migrate/from-mysql/','/docs/dev/how-to/migrate/incrementally-from-mysql/','/docs/dev/how-to/migrate/overview/']
 ---
 
 # TiDB Tools Overview

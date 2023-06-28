@@ -1,6 +1,7 @@
 ---
 title: Multiple Availability Zones in One Region Deployment
-summary: Learn the deployment solution to multiple availability zones in one region.Empty
+summary: Learn the deployment solution to multiple availability zones in one region.
+aliases: ['/docs/dev/how-to/deploy/geographic-redundancy/overview/','/docs/dev/geo-redundancy-deployment/','/tidb/dev/geo-redundancy-deployment']
 ---
 
 # Multiple Availability Zones in One Region Deployment

@@ -1,6 +1,7 @@
 ---
 title: Merge and Migrate Data from Sharded Tables
-summary: Learn how DM merges and migrates data from sharded tables.Empty
+summary: Learn how DM merges and migrates data from sharded tables.
+aliases: ['/docs/tidb-data-migration/dev/feature-shard-merge/']
 ---
 
 # Merge and Migrate Data from Sharded Tables

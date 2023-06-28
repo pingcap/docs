@@ -1,6 +1,7 @@
 ---
 title: TiDB Dashboard FAQs
-summary: Learn about the frequently asked questions (FAQs) and answers about TiDB Dashboard.Empty
+summary: Learn about the frequently asked questions (FAQs) and answers about TiDB Dashboard.
+aliases: ['/docs/dev/dashboard/dashboard-faq/']
 ---
 
 # TiDB Dashboard FAQs

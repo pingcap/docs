@@ -1,6 +1,7 @@
 ---
 title: Modify Configuration Dynamically
-summary: Learn how to dynamically modify the cluster configuration.Empty
+summary: Learn how to dynamically modify the cluster configuration.
+aliases: ['/docs/dev/dynamic-config/']
 ---
 
 # Modify Configuration Dynamically

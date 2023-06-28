@@ -1,6 +1,7 @@
 ---
 title: TiDB Lightning Data Sources
-summary: Learn all the data sources supported by TiDB Lightning.Empty
+summary: Learn all the data sources supported by TiDB Lightning.
+aliases: ['/docs/dev/tidb-lightning/migrate-from-csv-using-tidb-lightning/','/docs/dev/reference/tools/tidb-lightning/csv/','/tidb/dev/migrate-from-csv-using-tidb-lightning/']
 ---
 
 # TiDB Lightning Data Sources

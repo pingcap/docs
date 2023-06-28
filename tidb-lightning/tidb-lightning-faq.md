@@ -1,6 +1,7 @@
 ---
 title: TiDB Lightning FAQs
-summary: Learn about the frequently asked questions (FAQs) and answers about TiDB Lightning.Empty
+summary: Learn about the frequently asked questions (FAQs) and answers about TiDB Lightning.
+aliases: ['/docs/dev/tidb-lightning/tidb-lightning-faq/','/docs/dev/faq/tidb-lightning/']
 ---
 
 # TiDB Lightning FAQs

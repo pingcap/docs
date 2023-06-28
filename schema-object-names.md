@@ -1,6 +1,7 @@
 ---
 title: Schema Object Names
-summary: Learn about schema object names in TiDB SQL statements.Empty
+summary: Learn about schema object names in TiDB SQL statements.
+aliases: ['/docs/dev/schema-object-names/','/docs/dev/reference/sql/language-structure/schema-object-names/']
 ---
 
 # Schema Object Names

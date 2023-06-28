@@ -1,6 +1,7 @@
 ---
 title: Manage Changefeeds
-summary: Learn how to manage TiCDC changefeeds.Empty
+summary: Learn how to manage TiCDC changefeeds.
+aliases: ['/tidb/dev/manage-ticdc']
 ---
 
 # Manage Changefeeds

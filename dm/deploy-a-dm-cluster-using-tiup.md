@@ -1,6 +1,7 @@
 ---
 title: Deploy a DM Cluster Using TiUP
-summary: Learn how to deploy TiDB Data Migration using TiUP DM.Empty
+summary: Learn how to deploy TiDB Data Migration using TiUP DM.
+aliases: ['/docs/tidb-data-migration/dev/deploy-a-dm-cluster-using-ansible/','/docs/tools/dm/deployment/']
 ---
 
 # Deploy a DM Cluster Using TiUP

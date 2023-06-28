@@ -1,6 +1,7 @@
 ---
 title: Backup & Restore FAQs
-summary: Learn about Frequently Asked Questions (FAQs) and the solutions of backup and restore.Empty
+summary: Learn about Frequently Asked Questions (FAQs) and the solutions of backup and restore.
+aliases: ['/docs/dev/br/backup-and-restore-faq/','/tidb/dev/pitr-troubleshoot/','/tidb/dev/pitr-known-issues/']
 ---
 
 # Backup & Restore FAQs

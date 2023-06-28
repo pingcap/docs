@@ -1,6 +1,7 @@
 ---
 title: UPDATE | TiDB SQL Statement Reference
-summary: An overview of the usage of UPDATE for the TiDB database.Empty
+summary: An overview of the usage of UPDATE for the TiDB database.
+aliases: ['/docs/dev/sql-statements/sql-statement-update/','/docs/dev/reference/sql/statements/update/']
 ---
 
 # UPDATE

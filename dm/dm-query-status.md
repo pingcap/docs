@@ -1,6 +1,7 @@
 ---
 title: Query Task Status in TiDB Data Migration
-summary: Learn how to query the status of a data replication task.Empty
+summary: Learn how to query the status of a data replication task.
+aliases: ['/docs/tidb-data-migration/dev/query-status/']
 ---
 
 # Query Task Status in TiDB Data Migration

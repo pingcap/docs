@@ -1,6 +1,7 @@
 ---
 title: TiDB Features
-summary: Learn about the feature overview of TiDB.Empty
+summary: Learn about the feature overview of TiDB.
+aliases: ['/docs/dev/basic-features/','/tidb/dev/experimental-features-4.0/']
 ---
 
 # TiDB Features

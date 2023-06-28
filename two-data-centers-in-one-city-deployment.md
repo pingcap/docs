@@ -1,6 +1,7 @@
 ---
 title: Two Availability Zones in One Region Deployment
-summary: Learn the deployment solution of two availability zones in one region.Empty
+summary: Learn the deployment solution of two availability zones in one region.
+aliases: ['/tidb/dev/synchronous-replication']
 ---
 
 # Two Availability Zones in One Region Deployment
