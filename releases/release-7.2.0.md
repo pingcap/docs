@@ -40,7 +40,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.2/quick-start-with-
   <tr>
     <td rowspan="2">DB Operations and Observability</td>
     <td>DDL supports <a href="https://docs.pingcap.com/tidb/v7.2/ddl-introduction#ddl-related-commands">pause and resume operations</a> (experimental)</td>
-    <td>This new capability lets you temporarily suspend resource-intensive DDL operations, such as index creation, to conserve resources and minimize the impact on online traffic. Seamlessly resume these operations when ready, without the need to cancel and restart. Enhance resource utilization, improve user experience, and streamline schema changes with DDL pause and resume.</td>
+    <td>This new capability lets you temporarily suspend resource-intensive DDL operations, such as index creation, to conserve resources and minimize the impact on online traffic. You can seamlessly resume these operations when ready, without the need to cancel and restart. This feature enhances resource utilization, improves user experience, and streamlines schema changes.</td>
   </tr>
 </tbody>
 </table>
