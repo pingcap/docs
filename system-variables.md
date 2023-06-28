@@ -3503,15 +3503,15 @@ mysql> desc select count(distinct a) from test.t;
 
 ### `tidb_opt_enable_mpp_shared_cte_execution <span class="version-mark">New in v7.2.0</span>
 
-> **警告：**
+> **Warning:**
 >
-> The feature is still in development, don't change its default value.
+> The feature controlled by this variable is not fully functional in the current TiDB version. Do not change the default value.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
 - Default value: `OFF`
-- This variable controls whether the non-recursive CTE can be executed on TiFlash MPP instead of on TiDB. The performance of the queries which contains CTE and are executed on TiFlash MPP will be increased significantly.
+- This variable controls whether the non-recursive [common table expressions (CTE)](/sql-statements/sql-statement-with.md) can be executed on TiFlash MPP instead of on TiDB.
 
 ### tidb_opt_fix_control <span class="version-mark">New in v7.1.0</span>
 
