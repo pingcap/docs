@@ -64,7 +64,7 @@ Note that some DDL statements might cause table structure changes or data change
 
 If you need to execute DDL statements that are not in the preceding table, take the following steps:
 
-1. Pause the write operations in the tables that need to execute DDL in all clusters. If the DDL statement is adding a non-unique index, skip this step.
+1. Pause the write operations in the tables that need to execute DDL in all clusters.
 2. After the write operations of the corresponding tables in all clusters have been replicated to other clusters, manually execute all DDL statements in each TiDB cluster.
 3. After the DDL statements are executed, resume the write operations.
 
