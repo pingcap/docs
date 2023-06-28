@@ -115,6 +115,14 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.2/quick-start-with-
 
     For more information, see [documentation](/optimizer-fix-controls.md).
 
+* Lightweight statistics initialization becomes generally available (GA) [#42160](https://github.com/pingcap/tidb/issues/42160) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes) **tw@qiancai** <!--1464-->
+
+    Starting from v7.2.0, the lightweight statistics initialization feature becomes GA. Lightweight statistics initialization can significantly reduce the number of statistics that must be loaded during startup, thus improving the speed of loading statistics. This feature increases the stability of TiDB in complex runtime environments and reduces the impact on the overall service when TiDB nodes restart.
+
+    For newly created clusters of v7.2.0 or later versions, TiDB loads lightweight statistics by default during TiDB startup and will wait for the loading to finish before providing services. For clusters upgraded from earlier versions, you can set the TiDB configuration items [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710) and [`force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v710) to `true` to enable this feature.
+
+    For more information, see [documentation](/statistics.md##load-statistics).
+
 ### SQL
 
 * Support the `CHECK` constraints [#41711](https://github.com/pingcap/tidb/issues/41711) @[fzzf678](https://github.com/fzzf678) **tw@qiancai** <!--1404-->
