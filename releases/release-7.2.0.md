@@ -131,7 +131,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.2/quick-start-with-
 
      This feature is disabled by default. You can set the [`tidb_enable_check_constraint`](/system-variables.md#tidb_enable_check_constraint-new-in-v720) system variable to `ON` to enable it.
 
-    For more information, see [documentation](/constraints.md#check-constraints).
+    For more information, see [documentation](/constraints.md#check).
 
 ### DB operations
 
@@ -147,8 +147,6 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.2/quick-start-with-
     ```
 
     For more information, see [documentation](/ddl-introduction.md#ddl-related-commands).
-
-### Observability
 
 ### Data Migration
 
