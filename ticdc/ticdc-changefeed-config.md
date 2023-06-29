@@ -172,8 +172,13 @@ include-commit-ts = false
 
 # Specifies the replication consistency configurations for a changefeed when using the redo log. For more information, see https://docs.pingcap.com/tidb/stable/ticdc-sink-to-mysql#eventually-consistent-replication-in-disaster-scenarios. 
 # Note: The consistency-related configuration items only take effect when the downstream is a database and the redo log feature is enabled.
+<<<<<<< HEAD
 [sink.consistent]
 # The data consistency level. Available options are "none" and "eventual". "none" means that the redo log is disabled.  
+=======
+[consistent]
+# The data consistency level. Available options are "none" and "eventual". "none" means that the redo log is disabled.
+>>>>>>> fc8d8ca1f (fix cdc changefeed config (#14036))
 # The default value is "none".
 level = "none"
 # The max redo log size in MB.
