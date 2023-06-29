@@ -148,7 +148,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.2/quick-start-with-
 
     For more information, see [documentation](/ddl-introduction.md#ddl-related-commands).
 
-### Data Migration
+### Data migration
 
 * Introduce a new SQL statement `IMPORT INTO` to improve data import efficiency greatly (experimental) [#42930](https://github.com/pingcap/tidb/issues/42930) @[D3Hunter](https://github.com/D3Hunter)
 
