@@ -7,6 +7,10 @@ summary: Use TiDB Control to obtain TiDB status information for debugging.
 
 TiDB Control is a command-line tool of TiDB, usually used to obtain the status information of TiDB for debugging. This document introduces the features of TiDB Control and how to use these features.
 
+> **Note:**
+>
+> TiDB Control is for debugging purpose only, and may not be fully compatible with the capabilites introduced in future. It's not recommended to include this tool in applications or utilities. 
+
 ## Get TiDB Control
 
 You can get TiDB Control by installing it using TiUP or by compiling it from source code.
