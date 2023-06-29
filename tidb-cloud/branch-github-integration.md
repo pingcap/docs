@@ -1,27 +1,28 @@
 ---
 title: Branch GitHub Integration
-summary: Learn how use the Branch GitHub integration.
+summary: Learn how to use the Branch GitHub integration.
 ---
 
-# Branch GitHub Integration
+# Branching GitHub Integration (Beta)
 
-TiDB Cloud Branch provides a GitHub integration to connect a GitHub repository to your TiDB Cloud serverless cluster. After that, a GitHub App that manage TiDB Cloud branches will be installed in this repository.
+> **Note:**
+>
+> Branching GitHub integration is based on the TiDB Cloud branch. Make sure you have familiar with [TiDB Cloud branch](./branch-overview.md) before you read this tutorial.
 
-The following tutorial will show how to use the GitHub integration.
+You can integrate branching into your GitHub CI/CD pipeline using the Branching GitHub Integration. It allows you to connect a GitHub repository to your TiDB Cloud serverless cluster. Then a GitHub App that manages TiDB Cloud branches will work in this repository.
 
-## Before you start
+The following tutorial will show you:
 
-Before you start, make sure you:
+1. How to use the branching GitHub integration.
+2. How GitHub App works.
+3. How to build a branching-based CI workflow to test every pull request in a branch rather than the production cluster.
 
-- Familiar with [TiDB Cloud branches](./branch-overview.md)
-- Have a TiDB Cloud account and a serverless cluster
-- Have a GitHub account and a repository
 
-## Connect serverless cluster to GitHub repository
+## Use the branching GitHub integration
 
-You can connect a serverless cluster to a GitHub repository by the GitHub integration.
+The branching GitHub integration is used for connecting a serverless cluster to a GitHub repository. Here are the steps:
 
-1. Go to the branch page on the TiDB Cloud console, and click **Connect** button.
+1. Go to the branch list page on the TiDB Cloud console, and the click **Connect to GitHub** button.
     - If you have not logged in the GitHub, you will be asked to log in the GitHub account in a pop-up.
     - If it is the first time you use the integration, you will be asked to authorize the GitHub app in a pop-up.
 
@@ -53,7 +54,7 @@ picture
 
 ## GitHub App
 
-After you connect a TiDB Cloud serverless cluster to a GitHub repository. A [GitHub App](https://github.com/apps/tidb-cloud-branching) will work in this repository, trying to manage TiDB Cloud branch in every PR.
+After you connect a TiDB Cloud serverless cluster to a GitHub repository. A [GitHub App](https://github.com/apps/tidb-cloud-branching) will work in this repository, trying to manage the TiDB Cloud branch in every pull request.
 
 ### Open a PR
 
@@ -126,13 +127,15 @@ github:
        autoDestroy: true
 ```
 
-## Branching workflow
+## Branching CI workflow
 
-You can do a lot with GitHub integration. One of the best practices is building a branching workflow on GitHub, it will test your code with TiDB Cloud branch rather than the production cluster in every PR. See our live demo [here](https://github.com/shiyuhang0/tidbcloud-branch-gorm-example)
+One of the best practices of branches is building a branching CI workflow. So that you can test your code with the TiDB Cloud branch rather than the production cluster before merge the pull request. See our live demo [here](https://github.com/shiyuhang0/tidbcloud-branch-gorm-example).
 
-1. Connected a TiDB Cloud serverless cluster to a GitHub repository by the GitHub integration.
+Here are the main steps:
 
-2. Wait for the TiDB Cloud branch
+1. Connect a TiDB Cloud serverless cluster to a GitHub repository by the branching GitHub integration.
+
+2. Get branch connection information.
 
    Use [wait-for-tidbcloud-branch](https://github.com/tidbcloud/wait-for-tidbcloud-branch) action to wait for the ready of the TiDB Cloud branch and get the connection information in the GitHub action. Here is an example:
    
@@ -153,8 +156,11 @@ You can do a lot with GitHub integration. One of the best practices is building 
            echo "The password is ${{ steps.wait-for-branch.outputs.password }}"
    ```
 
-3. Accept the connection information
+3. Adjust your test code.
 
-   Adjust your code to accept the connection information from GitHub action. For example, accept the connection information by environment just like our live demo.
+   Adjust your test code to accept the connection information from GitHub action. For example, accept the connection information by the environment as our live demo does.
 
    
+## What's next
+
+You can also build your branching CI/CD workflow without our branching GitHub integration. For example, using GitHub action to custom CI/CD workflows by our [tidbcloud-cli](https://github.com/tidbcloud/setup-tidbcloud-cli).

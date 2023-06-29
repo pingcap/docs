@@ -1,32 +1,40 @@
 ---
 title: Manage TiDB Cloud Branch
-summary: Learn How to manage TiDB Cloud branch.
+summary: Learn How to manage the TiDB Cloud branch.
 ---
 
 # Manage TiDB Cloud Branch
 
-This document describes how to manage branch on TiDB Cloud console. You can also manage it by [TiDB Cloud CLI](./cli-reference.md).
+This document describes how to manage the TiDB Cloud branch on the console. You can also manage it by [TiDB Cloud CLI](./cli-reference.md).
 
 ## List branches
 
 To list branches for your cluster, perform the following steps:
 
-1. Click the cluster name in [cluster](https://tidbcloud.com/console/clusters) page to enter the cluster details page.
-
+1. Click the cluster name in the [cluster](https://tidbcloud.com/console/clusters) page to enter the cluster details page.
 2. Click the **Branch** to enter the branch list page.
 
 ## Create a branch
 
-1. Click the **Create** button in the branch list page.
+To create a branch, perform the following steps:
 
+1. Click the **Create Branch** button on the branch list page.
 2. Enter the branch name and click the **Create** button.
 
 ## Delete a branch
 
-1. Click the **Action** button in the branch list page.
+To delete a branch, perform the following steps:
 
-2. Click the **Delete** button to delete the branch.
+1. Click the **Action** button in the branch list page.
+2. Click the **Delete** to delete the branch.
 
 ## Get branch connection information
 
-Click the **Connect** button in the branch list page to get the connection information of the branch.
+To get branch connection information, perform the following steps:
+
+1. Click the **Connect** button in the branch list page.
+2. Click the **Create password** or **Reset password** to create or reset the password.
+
+## What's next
+
+- [Learn how integrate branching into your CI/CD pipeline](./branch-github-integration.md)
