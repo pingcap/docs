@@ -16,6 +16,7 @@ This TiDB statement is not applicable to TiDB Cloud.
 > **Warning:**
 >
 > Currently, this statement is experimental. It is not recommended to use it in production environments.
+> Known issue: When sorting the data to be imported locally, if the used disk space exceeds the configured disk-quota value or 80% of the local disk space, and data writing to TiKV starts, if the task is canceled or fails during execution, the background routine will continue running for a while before it truly exits. Refer to [#45048](https://github.com/pingcap/tidb/issues/45048) for more information.
 
 `IMPORT INTO` supports importing data from files stored in Amazon S3, GCS, and the TiDB local storage.
 
