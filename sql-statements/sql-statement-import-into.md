@@ -15,7 +15,7 @@ This TiDB statement is not applicable to TiDB Cloud.
 
 > **Warning:**
 >
-> Currently, this statement is experimental. It is not recommended to use it in production environments.
+> Currently, this statement is experimental. It is not recommended to use it in production environments. 
 
 `IMPORT INTO` supports importing data from files stored in Amazon S3, GCS, and the TiDB local storage.
 
