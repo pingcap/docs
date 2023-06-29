@@ -122,7 +122,7 @@
     - [Built-in Metrics](/tidb-cloud/built-in-monitoring.md)
     - [Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md)
     - [Cluster Events](/tidb-cloud/tidb-cloud-events.md)
-    - [Third-Party Metrics Integrations](/tidb-cloud/third-party-monitoring-integrations.md)
+    - [Third-Party Metrics Integrations (Beta)](/tidb-cloud/third-party-monitoring-integrations.md)
   - Tune Performance
     - [Overview](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
     - Analyze Performance
@@ -248,13 +248,13 @@
   - [Airbyte](/tidb-cloud/integrate-tidbcloud-with-airbyte.md)
   - [Amazon AppFlow](/develop/dev-guide-aws-appflow-integration.md)
   - [Cloudflare](/tidb-cloud/integrate-tidbcloud-with-cloudflare.md)
-  - [Datadog](/tidb-cloud/monitor-datadog-integration.md)
+  - [Datadog (Beta)](/tidb-cloud/monitor-datadog-integration.md)
   - [dbt](/tidb-cloud/integrate-tidbcloud-with-dbt.md)
   - [Gitpod](/develop/dev-guide-playground-gitpod.md)
   - [n8n](/tidb-cloud/integrate-tidbcloud-with-n8n.md)
   - [Netlify](/tidb-cloud/integrate-tidbcloud-with-netlify.md)
-  - [New Relic](/tidb-cloud/monitor-new-relic-integration.md)
-  - [Prometheus and Grafana](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)
+  - [New Relic (Beta)](/tidb-cloud/monitor-new-relic-integration.md)
+  - [Prometheus and Grafana (Beta)](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)
   - [ProxySQL](/develop/dev-guide-proxysql-integration.md)
   - Terraform
     - [Terraform Integration Overview](/tidb-cloud/terraform-tidbcloud-provider-overview.md)
