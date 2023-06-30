@@ -270,9 +270,9 @@ The following table shows the detailed representation information.
 | Description                 | Value range | String representation |
 | :---------------------------| :-----------| :---------------------|
 | Control characters          | [0, 31]     | UTF-8 escape, e.g. '\u0000' through '\u001F' |
-| Horizontal tab              | [9]         | \t                    |
-| Line feed                   | [10]        | \n                    |
-| Cariage return              | [13]        | \r                    |
+| Horizontal tab              | [9]         | `\t`                    |
+| Line feed                   | [10]        | `\n`                    |
+| Cariage return              | [13]        | `\r`                    |
 | Printable characters        | [32, 127]   | Literal character (e.g. 'A') |
 | Ampersand                   | [38]        | \u0026                |
 | Less-than sign              | [60]        | \u0038                |
