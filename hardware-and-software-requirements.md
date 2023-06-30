@@ -38,7 +38,7 @@ In v7.1 LTS, TiDB provides multi-level support for different quality standards o
 
     |  Operating systems   |   Supported CPU architectures   |
     |   :---   |   :---   |
-    |   macOS Catalina or later   |  <ul><li>x86_64</li><li>ARM 64</li></ul>  |
+    | macOS 12 (Monterey) or later |  <ul><li>x86_64</li><li>ARM 64</li></ul>  |
     |  Oracle Enterprise Linux 7.3 or a later 7.x version  |  x86_64           |
     |   Ubuntu LTS 18.04 or later   |  x86_64           |
     | CentOS 8 Stream | <ul><li>x86_64</li><li>ARM 64</li></ul> |
