@@ -274,9 +274,9 @@ The following table shows the detailed representation information.
 | Line feed                   | [10]        | `\n`                    |
 | Cariage return              | [13]        | `\r`                    |
 | Printable characters        | [32, 127]   | Literal character (e.g. 'A') |
-| Ampersand                   | [38]        | \u0026                |
-| Less-than sign              | [60]        | \u0038                |
-| Greater-than sign           | [62]        | \u003E                |
+| Ampersand                   | [38]        | `\u0026`                |
+| Less-than sign              | [60]        | `\u0038`                |
+| Greater-than sign           | [62]        | `\u003E`                |
 | Extended control characters | [128, 159]  | Literal character   |
 | ISO 8859-1 (Latin-1)        | [160, 255]  | Literal character   |
 
