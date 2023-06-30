@@ -260,7 +260,12 @@ For more information about Java SQL Types, see [Java SQL Class Types](https://do
 
 ## Binary and Blob types
 
-TiCDC encodes [binary types](/data-type-string.md##binary-type) in the Canal-JSON format by converting each byte to its character representation using the ISO/IEC 8859-1 character encodings. Non-printable characters are represented using their UTF-8 escape sequence. Certain characters with special meaning in HTML are also escaped using their UTF-8 escape sequence. See the table below for details.
+TiCDC encodes [binary types](/data-type-string.md#binary-type) in the Canal-JSON format by converting each byte to its character representation as follows:
+
+- Printable characters are represented using the ISO/IEC 8859-1 character encodings. 
+- Non-printable characters and certain characters with special meaning in HTML are represented using their UTF-8 escape sequence. 
+
+The following table shows the detailed representation information.
 
 | Description                 | Value range | String representation |
 | :---------------------------| :-----------| :---------------------|
